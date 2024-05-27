@@ -12,8 +12,6 @@ This document walks you through the following steps to set up the Observability 
 1. [Setting up Observability Pipelines](#set-up-observability-pipelines)
 1. [Connecting Splunk Forwarder to the Observability Pipelines Worker](#connect-splunk-forwarder-to-the-observability-pipelines-worker)
 
-{{< img src="observability_pipelines/use_cases/log_volume_control.png" alt="The log sources, processors, and destinations available for the split logs use case" width="100%" >}}
-
 ## Prerequisites
 
 {{% observability_pipelines/prerequisites/splunk_tcp %}}
