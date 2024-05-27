@@ -14,7 +14,7 @@ further_reading:
       text: 'Interoperability of OpenTelemetry API and Datadog instrumented traces'
 ---
 
-{{% otel-custom-instrumentation %}}
+{{% otel-custom-instrumentation-lang %}}
 
 ## Requirements and limitations
 
