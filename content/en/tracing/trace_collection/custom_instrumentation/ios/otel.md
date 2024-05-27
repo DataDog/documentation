@@ -1,5 +1,5 @@
 ---
-title: iOS and tvOS applications custom instrumentation using OpenTelemetry API
+title: iOS and tvOS Custom Instrumentation using OpenTelemetry API
 kind: documentation
 code_lang: swift
 type: multi-code-lang
