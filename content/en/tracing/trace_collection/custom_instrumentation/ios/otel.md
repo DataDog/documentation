@@ -18,8 +18,7 @@ further_reading:
 
 ## Requirements and limitations
 
-<!-- TODO: version needs to corrected after release -->
-- DatadogTrace for iOS and tvOS version 1.0.0+.
+- DatadogTrace for iOS and tvOS version 2.12.0+.
 
 
 ## Tracing iOS applications with OpenTelemetry
