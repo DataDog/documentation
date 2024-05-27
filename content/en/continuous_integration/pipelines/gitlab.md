@@ -264,7 +264,8 @@ The following GitLab versions support collecting job logs:
 
 <div class="alert alert-info"><strong>Note</strong>: Logs are billed separately from CI Visibility.</div>
 
-Job logs are collected in [Log Management][9] and are automatically correlated with the GitLab pipeline in CI Visibility. Log files larger than one GiB are truncated.
+Job logs are collected in [Log Management][9] and are automatically correlated with the GitLab pipeline in CI Visibility. Log files larger than one GiB are truncated. To make sure that GitLab Runners logs are indexed, you might need to set-up a specific [index](https://docs.datadoghq.com/logs/log_configuration/indexes) for the query `source:gitlab`.
+
 
 For more information about processing job logs collected from the GitLab integration, see the [Processors documentation][17].
 

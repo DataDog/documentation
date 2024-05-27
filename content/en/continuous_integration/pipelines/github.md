@@ -26,7 +26,7 @@ further_reading:
 
 [GitHub Actions][1] is an automation tool that allows you to build, test, and deploy your code in GitHub. Create workflows that automate every step of your development process, streamlining software updates and enhancing code quality with CI/CD features integrated into your repositories.
 
-Set up tracing in GitHub Actions to track the execution of your workflows, identify performance bottlenecks,  troubleshoot operational issues, and optimize your deployment processes. 
+Set up tracing in GitHub Actions to track the execution of your workflows, identify performance bottlenecks,  troubleshoot operational issues, and optimize your deployment processes.
 
 ### Compatibility
 
@@ -83,6 +83,7 @@ To enable logs, follow these steps:
 4. Alternatively, you can enable individual repositories by scrolling through the repository list and clicking the **Enable Job Logs Collection** toggle.
 
 Immediately after toggling logs collection, workflow job logs are forwarded to Datadog Logs. Note that logs are billed separately from CI Visibility. Log retention, exclusion, and indexes are configured in Logs Settings.
+To make sure that GitHub Actions Runners logs are indexed, you might need to set-up a specific [index](https://docs.datadoghq.com/logs/log_configuration/indexes) for the query `source:github`.
 
 Log files larger than 1GiB are truncated.
 
