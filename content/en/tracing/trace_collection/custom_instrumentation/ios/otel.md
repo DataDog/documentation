@@ -250,7 +250,7 @@ let tracer = OpenTelemetry
 {{% /tab %}}
 {{< /tabs >}}
 
-4. Instrument your code with the OpenTelemetry API.
+4. Instrument your code with the OpenTelemetry API:
 
 {{< tabs >}}
 {{% tab "Swift" %}}
