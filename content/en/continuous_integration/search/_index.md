@@ -55,7 +55,7 @@ The pipeline execution list shows all the times that pipeline (or its stages or 
 
 To see the unified pipeline trace, click on the `View unified trace` checkbox on the pipeline execution page.
 
-The unified trace shows in a single trace all pipeline traces generated due to the different partial retries of your pipeline. If the pipeline execution has no partial retries, the unified trace will show only the trace of a single pipeline execution.
+The unified trace shows in a single trace all pipeline traces generated due to the different partial retries of your pipeline. If the pipeline execution has no partial retries, the unified trace shows only the trace of a single pipeline execution.
 
 ### Explore connections to services, resources, and network events
 
