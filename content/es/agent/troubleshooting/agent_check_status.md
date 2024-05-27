@@ -1,11 +1,11 @@
 ---
 further_reading:
 - link: /agent/troubleshooting/debug_mode/
-  tag: Solucionar problemas del Agent
+  tag: Documentación
   text: Modo de depuración del Agent
 - link: /agent/troubleshooting/send_a_flare/
-  tag: Solucionar problemas del Agent
-  text: Enviar flare del Agent
+  tag: Documentación
+  text: Enviar un flare del Agent
 kind: documentación
 title: Estado del check del Agent
 ---
@@ -15,7 +15,7 @@ Si tienes problemas con un check del Agent específico, utiliza estos comandos d
 - [Linux](#linux)
 - [Windows](#windows)
 - [Systemd](#systemd)
-- [Leer más](#further-reading)
+- [Referencias adicionales](#further-reading)
 
 **Nota**: Sustituye el `<CHECK_NAME>` en los siguientes ejemplos por cualquier check del Agent. Por ejemplo: `activemq`, `ceph` o `elastic`. Consulta la [documentación sobre las integraciones][1] para confirmar el nombre del check del Agent.
 
@@ -45,7 +45,7 @@ sudo -u dd-agent datadog-agent check <CHECK_NAME> --check-rate
 sudo -u dd-agent dd-agent check <CHECK_NAME>
 ```
 
-Sustituye el `<CHECK_NAME>` por cualquier check del Agent. Por ejemplo: `activemq`, `ceph` o `elastic`. Consulta la [documentación sobre las integraciones][1] para confirmar el nombre del check del Agent.
+Sustituye el `<CHECK_NAME>` por cualquier check del Agent. Por ejemplo: `activemq`, `ceph` o `elastic`. Consulta la [documentación sobre las integraciones][4] para confirmar el nombre del check del Agent.
 
 Si quieres incluir métricas de frecuencia, añade `--check-rate` a tu comando. Por ejemplo, en el Agent v6.x, ejecuta:
 
