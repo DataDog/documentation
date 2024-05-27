@@ -288,7 +288,7 @@ span.setAttribute(key: "http.url", value: url)
 {{% /tab %}}
 {{< /tabs >}}
 
-7. (Optional) Attach an error to a span
+7. (Optional) Attach an error to a span:
 
 {{< tabs >}}
 {{% tab "Swift" %}}
