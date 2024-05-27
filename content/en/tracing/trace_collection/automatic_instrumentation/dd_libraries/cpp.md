@@ -36,30 +36,7 @@ Before you begin, make sure you have already [installed and configured the Agent
 
 ## Instrument your application
 
-{{< tabs >}}
-
-{{% tab "CMake" %}}
-To integrate the `dd-trace-cpp` library into your C++ project using CMake, follow these steps:
-````CMake
-include(FetchContent)
-
-FetchContent_Declare(
-  dd-trace-cpp
-  GIT_REPOSITORY https://github.com/DataDog/dd-trace-cpp
-  GIT_TAG        v0.2.0
-  GIT_SHALLOW    ON
-  GIT_PROGRESS   ON
-)
-
-FetchContent_MakeAvailable(dd-trace-cpp)
-
-# Add `tracer_example` target
-add_executable(tracer_example tracer_example.cpp)
-
-# Statically link against `dd-trace-cpp`
-# NOTE: To dynamically link against `dd-trace-cpp` use the `dd_trace_cpp_shared` target
-target_link_libraries(tracer_example dd_trace_cpp-static)
-````
+For the following we will use this application that does XYZ:
 Here's an example of how to use the `dd-trace-cpp` library in your C++ code to create spans and traces:
 ```cpp
 // tracer_example.cpp
@@ -96,6 +73,51 @@ int main() {
   return 0;
 }
 ```
+
+{{< tabs >}}
+
+{{% tab "CPM.cmake" %}}
+
+[CPM.cmake][1] is a cross-platform CMake script that adds dependency management capabilities to CMake.
+
+````CMake
+# In a CMakeLists.txt
+
+CPMAddPackage("gh:DataDog/dd-trace-cpp#0.2.1")
+
+# Add `tracer_example` target
+add_executable(tracer_example tracer_example.cpp)
+
+# Statically link against `dd-trace-cpp`
+# NOTE: To dynamically link against `dd-trace-cpp` use the `dd_trace::shared` target
+target_link_libraries(tracer_example dd_trace::static)
+````
+
+[1]: https://github.com/cpm-cmake/CPM.cmake
+{{% /tab %}}
+
+{{% tab "CMake" %}}
+To integrate the `dd-trace-cpp` library into your C++ project using CMake, follow these steps:
+````CMake
+include(FetchContent)
+
+FetchContent_Declare(
+  dd-trace-cpp
+  GIT_REPOSITORY https://github.com/DataDog/dd-trace-cpp
+  GIT_TAG        v0.2.0
+  GIT_SHALLOW    ON
+  GIT_PROGRESS   ON
+)
+
+FetchContent_MakeAvailable(dd-trace-cpp)
+
+# Add `tracer_example` target
+add_executable(tracer_example tracer_example.cpp)
+
+# Statically link against `dd-trace-cpp`
+# NOTE: To dynamically link against `dd-trace-cpp` use the `dd_trace_cpp_shared` target
+target_link_libraries(tracer_example dd_trace::static)
+````
 
 ```bash
 cmake -B build .
@@ -175,6 +197,11 @@ int main() {
   return 0;
 }
 ```
+
+### Static Linking
+TBD
+
+### Dynamic Linking
 
 Link against `libdd_trace_cpp.so`, making sure the shared library is in `LD_LIBRARY_PATH`.
 
