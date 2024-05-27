@@ -22,7 +22,7 @@ further_reading:
 - DatadogTrace for iOS and tvOS version 1.0.0+.
 
 
-## Tracing iOS Applications with OpenTelemetry
+## Tracing iOS applications with OpenTelemetry
 
 1. Declare the library as a dependency depending on your package manager:
 
