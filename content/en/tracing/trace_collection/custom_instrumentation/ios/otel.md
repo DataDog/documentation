@@ -298,7 +298,7 @@ span.status = .error(description: "Failed to decode response")
 {{% /tab %}}
 {{< /tabs >}}
 
-8. (Optional) Add span links to your span
+8. (Optional) Add span links to your span:
 
 {{< tabs >}}
 {{% tab "Swift" %}}
