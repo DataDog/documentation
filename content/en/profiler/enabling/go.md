@@ -77,7 +77,7 @@ To begin profiling applications:
 
 4. Optional: Enable the [timeline feature][7] (beta), see [prerequisites][8].
 
-5. Optional: Set up [Source Code Integration][9].
+5. Optional: Set up [Source Code Integration][9] to connect your profiling data with your Git repositories.
 
 6. After a minute or two, visualize your profiles in the [Datadog APM > Profiler page][10].
 

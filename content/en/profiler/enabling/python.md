@@ -76,7 +76,7 @@ To automatically profile your code, set the `DD_PROFILING_ENABLED` environment v
 
 See [Configuration](#configuration) for more advanced usage.
 
-Optionally set up [Source Code Integration][4].
+Optionally, set up [Source Code Integration][4] to connect your profiling data with your Git repositories.
 
 After a couple of minutes, visualize your profiles on the [Datadog APM > Profiler page][5].
 

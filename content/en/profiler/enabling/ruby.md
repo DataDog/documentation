@@ -112,7 +112,7 @@ end
     require 'datadog/profiling/preload'
     ```
 
-6. Optional: Set up [Source Code Integration][4].
+6. Optional: Set up [Source Code Integration][4] to connect your profiling data with your Git repositories.
 
 7. A minute or two after starting your Ruby application, your profiles will show up on the [Datadog APM > Profiler page][5].
 

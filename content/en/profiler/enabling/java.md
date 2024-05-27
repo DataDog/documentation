@@ -147,7 +147,7 @@ When the service binary is built, you can use environment variables to enable an
 
    **Note**: The `-javaagent` argument needs to be before `-jar`. This adds it as a JVM option rather than an application argument. For example, `java -javaagent:dd-java-agent.jar ... -jar my-service.jar -more-flags`. For more information, see the [Oracle documentation][6].
 
-4. Optional: Set up [Source Code Integration][7].
+4. Optional: Set up [Source Code Integration][7] to connect your profiling data with your Git repositories.
 
 5. After a minute or two, you can visualize your profiles on the [Datadog APM > Profiling page][8].
 
