@@ -21,16 +21,6 @@ further_reading:
 <!-- TODO: version needs to corrected after release -->
 - DatadogTrace for iOS and tvOS version 1.0.0+.
 
-The following OpenTelemetry Swift features are implemented in the Datadog library as noted:
-
-| Feature | Support notes |
-|-|-|
-| [Span attributes][2] | Supported |
-| [Span events][3] | Unsupported |
-| [Span exporters][5] | Unsupported |
-| [Span links][1] | Supported |
-| [Span processors][4] | Unsupported |
-| Context propagation | [W3C Trace Context and Datadog header formats][6] are enabled by default.  |
 
 ## Tracing iOS Applications with OpenTelemetry
 
