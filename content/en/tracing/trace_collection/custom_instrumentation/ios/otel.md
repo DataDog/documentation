@@ -29,7 +29,7 @@ further_reading:
 {{< tabs >}}
 {{% tab "CocoaPods" %}}
 
-You can use [CocoaPods][7] to install `dd-sdk-ios`:
+You can use [CocoaPods](https://cocoapods.org/) to install `dd-sdk-ios`:
 ```
 pod 'DatadogCore'
 pod 'DatadogTrace'
@@ -319,7 +319,6 @@ spanWithLinks.end()
 [4]: https://opentelemetry.io/docs/reference/specification/trace/sdk/#span-processor
 [5]: https://opentelemetry.io/docs/reference/specification/trace/sdk/#span-exporter
 [6]: https://docs.datadoghq.com/real_user_monitoring/platform/connect_rum_and_traces/?tab=browserrum#opentelemetry-support
-[7]: https://cocoapods.org/
 [8]: https://github.com/Carthage/Carthage
 [9]: https://docs.datadoghq.com/account_management/api-app-keys/#client-tokens
 [10]: https://docs.datadoghq.com/account_management/api-app-keys/#api-keys
