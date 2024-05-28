@@ -224,9 +224,9 @@ Custom attributes allow you to filter and group information about observed user 
 
 To set a custom global attribute, use `RUMMonitor.shared().addAttribute(forKey:value:)`.
 
-* To add an attribute, use `RUMMonitor.shared().addAttribute(forKey: "some key", value: "some value")`.
-* To update the value, use `RUMMonitor.shared().addAttribute(forKey: "some key", value: "some other value")`.
-* To remove the key, use `RUMMonitor.shared().removeAttribute(forKey: "some key")`.
+* To add an attribute, use `RUMMonitor.shared().addAttribute(forKey: "some_key", value: "some value")`.
+* To update the value, use `RUMMonitor.shared().addAttribute(forKey: "some_key", value: "some other value")`.
+* To remove the key, use `RUMMonitor.shared().removeAttribute(forKey: "some_key")`.
 
 ### Track user sessions
 
