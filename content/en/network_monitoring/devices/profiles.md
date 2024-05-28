@@ -12,6 +12,7 @@ further_reading:
   text: "Monitor SNMP with Datadog"
 ---
 
+
 ## Overview
 
 Network Device Monitoring uses profiles to tell the Datadog Agent the metrics and associated tags to collect. A profile is a collection of OIDs associated with a device.
