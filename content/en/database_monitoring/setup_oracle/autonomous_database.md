@@ -147,7 +147,7 @@ Database Monitoring supports custom queries for Oracle databases. See the [conf.
 
 <div class="alert alert-warning">Running custom queries may result in additional costs or fees assessed by Oracle.</div>
 
-[1]: /agent/basic_agent_usage#agent-overhead
+[1]: /database_monitoring/agent_integration_overhead/?tab=oracle
 [2]: /database_monitoring/data_collected/#sensitive-information
 [3]: /getting_started/tagging/unified_service_tagging
 [4]: /agent/configuration/agent-commands/#start-stop-and-restart-the-agent

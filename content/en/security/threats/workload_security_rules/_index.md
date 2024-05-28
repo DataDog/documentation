@@ -69,7 +69,7 @@ CSM Threats uses the following pipeline when evaluating events:
 
 The following diagram illustrates this pipeline:
 
-{{< img src="security/cws/threat_detection_pipeline.png" alt="CMS Threats detection pipeline" style="width:100%;" >}}
+{{< img src="security/cws/threat_detection_pipeline_2.png" alt="CMS Threats detection pipeline" style="width:100%;" >}}
 
 ### Saving resources by design
 
