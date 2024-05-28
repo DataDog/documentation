@@ -18,7 +18,7 @@ further_reading:
 
 The [Network Device Topology Map][2] provides an overview of your network's physical connections, so you can more easily identify issues in your devices and understand their upstream and downstream impacts.
 
-{{< img src="/network_device_monitoring/network_topology_map/network_topology_map_search_2.mp4" alt="The network device topology map, with vendor:cisco added to the search bar, and then the Filter nodes box filtered by nyc. A node is selected and the inspect option chosen, showing its connected nodes. One of the connected nodes is then selected, and the inspect option is selected again, displaying additional connected nodes" video="true" >}}
+{{< img src="/network_device_monitoring/network_topology_map/network_topology_map_search_3.mp4" alt="The network device topology map, with vendor:cisco added to the search bar, and then the Filter nodes box filtered by nyc. A node is selected and the inspect option chosen, showing its connected nodes. One of the connected nodes is then selected, and the inspect option is selected again, displaying additional connected nodes" video="true" >}}
 
 ## Setup
 
@@ -130,11 +130,11 @@ Choose **Inspect** to see the device's interface connections. Click on any of th
 
 Choose **View device details** to see information such as the device's IP address and tags, as well as data related to throughput, CPU, and memory.
 
-{{< img src="/network_device_monitoring/network_topology_map/network_topology_map_device_details_tab_2.png" alt="The View device details tab of an individual device" style="width:80%;" >}}
+{{< img src="/network_device_monitoring/network_topology_map/network_topology_map_device_details_tab_3.png" alt="The View device details tab of an individual device" style="width:80%;" >}}
 
-From this view, you can also view the device's connected interfaces in the **Interfaces** tab.
+From this view, you can also view the device's connected interfaces in the **Connected Interfaces** tab.
 
-{{< img src="/network_device_monitoring/network_topology_map/device-topology-panel.png" alt="The View device details tab of an individual device with the Interfaces tab selected" style="width:80%;" >}}
+{{< img src="/network_device_monitoring/network_topology_map/device-topology-panel_2.png" alt="The View device details tab of an individual device with the Interfaces tab selected" style="width:80%;" >}}
 
 ### View flow details
 
