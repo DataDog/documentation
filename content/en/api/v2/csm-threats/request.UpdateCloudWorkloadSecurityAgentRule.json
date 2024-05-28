@@ -5,6 +5,7 @@
       "enabled": true,
       "expression": "exec.file.name == \"sh\""
     },
-    "type": "agent_rule"
+    "type": "agent_rule",
+    "id": "3dd-0uc-h1s"
   }
 }
