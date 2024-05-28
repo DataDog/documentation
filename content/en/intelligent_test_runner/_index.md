@@ -64,7 +64,7 @@ Once you have set up your Datadog library for Intelligent Test Runner, configure
 
 ### Git executable
 
-For Intelligent Test Runner to work, [git][6] needs to be available in the host running tests.
+For Intelligent Test Runner to work, [Git][6] needs to be available in the host running tests.
 
 ### Excluded branches
 
