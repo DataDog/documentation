@@ -11,10 +11,6 @@ further_reading:
   text: "Monitor SNMP with Datadog"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Network Device Monitoring is not supported for this site.</div>
-{{< /site-region >}}
-
 <div class="alert alert-warning">The Network Device Topology Map for Datadog Network Device Monitoring is in public beta.</div>
 
 ## Overview

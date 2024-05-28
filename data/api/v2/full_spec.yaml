@@ -4126,6 +4126,11 @@ components:
           description: The SECL expression of the Agent rule.
           example: exec.file.name == \"sh\"
           type: string
+        filters:
+          description: The platforms the Agent rule is supported on.
+          items:
+            type: string
+          type: array
         name:
           description: The name of the Agent rule.
           example: my_agent_rule
@@ -22940,6 +22945,8 @@ components:
         authorizationCode:
           authorizationUrl: /oauth2/v1/authorize
           scopes:
+            apm_api_catalog_read: View API catalog and API definitions.
+            apm_api_catalog_write: Add, modify, and delete API catalog definitions.
             apm_read: Read and query APM and Trace Analytics.
             apm_service_catalog_read: View service catalog and service definitions.
             apm_service_catalog_write: Add, modify, and delete service catalog definitions
@@ -23012,6 +23019,9 @@ components:
             user_access_manage: Disable users, manage user roles, manage SAML-to-role
               mappings, and configure logs restriction queries.
             user_access_read: View users and their roles and settings.
+            workflows_read: View workflows.
+            workflows_run: Run workflows.
+            workflows_write: Create, edit, and delete workflows.
           tokenUrl: /oauth2/v1/token
       type: oauth2
     apiKeyAuth:
@@ -36279,6 +36289,11 @@ paths:
           $ref: '#/components/responses/SpansUnprocessableEntityResponse'
         '429':
           $ref: '#/components/responses/SpansTooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - apm_read
       summary: Get a list of spans
       tags:
       - Spans
@@ -36325,6 +36340,11 @@ paths:
           $ref: '#/components/responses/SpansUnprocessableEntityResponse'
         '429':
           $ref: '#/components/responses/SpansTooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - apm_read
       summary: Search spans
       tags:
       - Spans

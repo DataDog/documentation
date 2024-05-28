@@ -23,21 +23,3 @@ Pour obtenir les instructions de configuration, sélectionnez votre type d'hébe
 {{< partial name="dbm/dbm-setup-postgres" >}}
 
 <br>
-
-### Charge système de lʼintégration de lʼAgent
-
-Les tests de charge système de lʼintégration de lʼAgent ont été exécutés sur une instance `c5.xlarge` de machine Amazon EC2  (4 vCPU, 8 Go de RAM). La base de données utilisée pour les tests était une instance PostgreSQL 14.10 exécutée sur une instance `db.m5.large` Amazon RDS (2 vCPU, 8 Go de RAM). La base de données exécutait un workload TPC-C avec 20 entrepôts.
-
-| Paramètre                           | Intervalle de collecte |
-| --------------------------------- | ------------------- |
-| Vérifier lʼintervalle de collecte minimal     | 15 s                 |
-| Intervalle de collecte de métriques de requêtes | 10 s                 |
-| Intervalle de collecte dʼéchantillons de requêtes | 10 s                 |
-| Intervalle de collecte des paramètres      | 600 s                |
-| Intervalle de collecte de schéma        | 600 s                |
-
-* Version de lʼAgent testé : `7.50.2`
-* Processeur : ~1 % du processeur utilisé en moyenne
-* Mémoire : ~300 MiB de RAM utilisés (mémoire RSS)
-* Bande passante réseau : ~30 KB/s ▼ | 30 KB/s ▲
-* Charge système de la requête de lʼAgent sur la base de données : ~1 % du temps du processeur

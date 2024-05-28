@@ -1,5 +1,5 @@
 ---
-title: ICMP Tests
+title: ICMP Testing
 kind: documentation
 description: Monitor the availability of your hosts and diagnose network issues.
 aliases:

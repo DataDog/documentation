@@ -1,4 +1,8 @@
 ---
+algolia:
+  tags:
+  - anomaly
+  - graphique des anomalies
 aliases:
 - /fr/graphing/functions/algorithms/
 kind: documentation
@@ -20,7 +24,9 @@ La fonction `anomalies()` comprend deux paramètres :
 
 Voici une présentation vidéo de deux minutes à ce sujet :
 
-{{< vimeo 188833506 >}}
+{{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/188833506/rendition/1080p/file.mp4?loc=external&signature=96eacc46a18438ce0f45d5b57952cd924482f8f18e011ceb7b76b6ce1b4587a2" poster="/images/poster/algorithms.png" >}}
+
+**Saisonnalité** : Par défaut, les algorithmes `robust` et `agile` utilisent la [saisonnalité hebdomadaire][4], qui nécessite de recueillir des données historiques pendant trois semaines pour calculer la référence.
 
 Consultez la page [Monitor d'anomalie][1] pour en savoir plus.
 
@@ -40,7 +46,7 @@ La fonction `outliers()` comprend trois paramètres :
 
 Consultez la page [Monitor outlier][2] pour en savoir plus.
 
-## Prévision
+## Forecast
 
 | Fonction     | Description                | Exemple                                                                    |
 | :----        | :-------                   | :---------                                                                 |
@@ -66,6 +72,7 @@ La fonction `forecast()` comprend deux paramètres :
     {{< nextlink href="/dashboards/functions/timeshift" >}}Décalage temporel : modifiez la période d'un point de données de votre métrique. {{< /nextlink >}}
 {{< /whatsnext >}}
 
-[1]: /fr/monitors/create/types/anomaly/
-[2]: /fr/monitors/create/types/outlier/
-[3]: /fr/monitors/create/types/forecasts/#forecast-algorithms
+[1]: /fr/monitors/types/anomaly/
+[2]: /fr/monitors/types/outlier/
+[3]: /fr/monitors/types/forecasts/?tab=linear#algorithms
+[4]: /fr/monitors/types/anomaly/?s=anomaly%20algorithm#seasonality
