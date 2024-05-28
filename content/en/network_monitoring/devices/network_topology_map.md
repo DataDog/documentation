@@ -35,7 +35,7 @@ In the Network Topology Map, the following navigation options are available:
 
 ### View
 
-1. Under **View By**, select to visualize devices in groups according to tags: 
+1. In **View By**, use tags to select how you want to visualize devices: 
 
 {{< img src="/network_device_monitoring/network_topology_map/device-topology-grouped.png" alt="The navigation option, with view by devices and tags selected, highlighting view by location" style="width:80%;" >}}
 
@@ -55,7 +55,7 @@ In the Network Topology Map, the following navigation options are available:
    |----------|---------------------------|
    | Green   | Device is reachable.      |
    | Red   | Issue with device, such as unreachable through SNMP.  |
-   | Gray    | The device is monitored by NDM, however, no data has been received. For example, if the ping wasn't configured and you opted to `color by` **Ping State** in the Device Topology Map, the devices are displayed in gray. |
+   | Gray    | Device is monitored by NDM; however, no data has been received. For example, if the ping wasn't configured and you opted to `color by` **Ping State** in the Device Topology Map, the devices are displayed in gray. |
    | No color | Shadow devices that are not directly monitored by NDM, but are discoverable through LLDP/CDP from a connected device that NDM is monitoring. You can toggle on/off the [Hide _N_ unmonitored device section](#filter-devices) if you want these devices to be shown on the Device Topology Map.         |
 
    </div>
@@ -66,7 +66,7 @@ In the Network Topology Map, the following navigation options are available:
 
 {{< img src="/network_device_monitoring/network_topology_map/device_topology_filter_devices_hide.png" alt="The navigation option, with view filer option selected, toggling by hide unmonitored devices " style="width:80%;" >}}
 
-**Note:** The filter devices setting impacts what devices are shown on the Device Topology Map for _all_ queries you may make, such as if you filter by a device facet in the search bar. 
+**Note:** The **Filter Devices** setting impacts what devices are shown on the Device Topology Map for _all_ queries you might make. For example, if you filter by a device facet in the search bar. 
 
 Hide _N_ Unmonitored Devices - Turned OFF by default.
 : Toggling this on hides devices on the Device Topology Map that are not directly monitored by Network Device Monitoring, but still discovered by LLDP/CDP, and shown on the map from adjacent devices that are monitored by Network Device Monitoring.
