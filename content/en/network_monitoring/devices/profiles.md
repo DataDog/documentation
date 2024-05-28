@@ -44,7 +44,7 @@ metrics:
 
 
 
-In case you need different metrics for network devices that share the same sysobjectid. You can write profiles without any sysobjectid and force the Datadog Agent to use by configuring the `profile` option in the snmp configuration.
+If you need different metrics for network devices that share the same `sysobjectid`, you can write profiles without any `sysobjectid`, and configure the `profile` option in the SNMP configuration.
 
 ```yaml
 instances:
