@@ -5128,15 +5128,15 @@ menu:
       parent: rum_browser
       identifier: rum_browser_setup
       weight: 101
-    - name: Data Collected
-      url: real_user_monitoring/browser/data_collected/
-      parent: rum_browser
-      identifier: rum_data_collected
-      weight: 102
     - name: Advanced Configuration
       url: real_user_monitoring/browser/advanced_configuration/
       parent: rum_browser
       identifier: rum_advanced
+      weight: 102
+    - name: Data Collected
+      url: real_user_monitoring/browser/data_collected/
+      parent: rum_browser
+      identifier: rum_data_collected
       weight: 103
     - name: Monitoring Page Performance
       url: real_user_monitoring/browser/monitoring_page_performance/
