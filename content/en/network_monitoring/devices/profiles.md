@@ -24,7 +24,7 @@ By default, all profiles in the Agent configuration directory are loaded. To cus
 
 ### sysOID mapped devices
 
-Profiles allow Network Device Monitoring to reuse metric definitions across several device types or instances. Profiles define the metrics to collect as well as how to transform them into Datadog metrics. Each profile is expected to monitor a class of similar devices from the same vendor, they are automatically used by the Datadog Agent by comparing the sysObjectIds of the network device with the one(s) defined in the profile file.
+Profiles allow Network Device Monitoring to reuse metric definitions across several device types or instances. Profiles define which metrics to collect and how to transform them into Datadog metrics. Each profile is expected to monitor a class of similar devices from the same vendor. They are automatically used by the Datadog Agent by comparing the sysObjectIds of the network device with the ones defined in the profile file.
 
 The Datadog Agent is shipped with many out-of-the-box profiles in the `conf.d/snmp.d/default_profiles` directory. This directory is cleaned and reset upon Agent upgrades so do not put anything there. You can write your own custom profiles and extend existing ones by putting files in the `conf.d/snmp.d/profiles` directory
 
