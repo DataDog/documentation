@@ -11,7 +11,7 @@ further_reading:
 - link: "/integrations/guide/source-code-integration/"
   tag: "Documentation"
   text: "Learn about Source Code Integration"
-  - link: "/code_analysis/static_analysis"
+- link: "/code_analysis/static_analysis"
   tag: "Documentation"
   text: "Learn about Static Analysis"
 - link: "https://marketplace.visualstudio.com/items?itemName=Datadog.VisualStudio"
