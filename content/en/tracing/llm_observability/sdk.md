@@ -79,11 +79,11 @@ LLMObs.enable(
 <br />The name of your LLM application, service, or project, under which all traces and spans are grouped. This helps distinguish between different applications or experiments. See [Application naming guidelines](#application-naming-guidelines) for allowed characters and other constraints. To override this value for a given trace, see [Tracing multiple applications](#tracing-multiple-applications). If not provided, this will default to the value of `DD_LLMOBS_APP_NAME`.
 
 `integrations_enabled`
-: optional - _boolean_ 
+: optional - _boolean_ - **default**: `true`
 <br />Set to `true` to enable automatically tracing LLM calls using Datadog's supported [LLM integrations](#llm-integrations).
 
 `agentless_enabled`
-: optional - _boolean_ 
+: optional - _boolean_ - **default**: `false`
 <br />Only required if you are not using the Datadog Agent, in which case this should be set to `True`. This configures the `ddtrace` library to not send any data that requires the Datadog Agent. If not provided, this defaults to the value of `DD_LLMOBS_AGENTLESS_ENABLED`.
 
 `site`
