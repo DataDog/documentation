@@ -44,7 +44,6 @@ metrics:
 This example profile will be used on any network device where its sysobject id either **is** `1.3.6.1.4.1.232.9.4.10` or **starts with** `1.3.6.1.4.1.232.9.4.2.`.
 
 
-**Advanced**:
 In case you need different metrics for network devices that share the same sysobjectid. You can write profiles without any sysobjectid and force the Datadog Agent to use by configuring the `profile` option in the snmp configuration.
 
 ```yaml
