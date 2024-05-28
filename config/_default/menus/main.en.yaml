@@ -5188,11 +5188,6 @@ menu:
       parent: rum_browser
       identifier: rum_browser_error_tracking
       weight: 108
-    - name: Troubleshooting
-      url: real_user_monitoring/browser/troubleshooting/
-      parent: rum_browser
-      identifier: troubleshooting
-      weight: 109
     - name: Mobile and TV Monitoring
       url: real_user_monitoring/mobile_and_tv_monitoring/
       parent: rum
@@ -5233,16 +5228,11 @@ menu:
       parent: mobile_and_tv_monitoring
       identifier: rum_mobile_integrated_libraries
       weight: 207
-    - name: Troubleshooting
-      url: real_user_monitoring/mobile_and_tv_monitoring/troubleshooting/
-      parent: mobile_and_tv_monitoring
-      identifier: rum_mobile_troubleshooting
-      weight: 208
     - name: Supported Versions
       url: real_user_monitoring/mobile_and_tv_monitoring/supported_versions/
       parent: mobile_and_tv_monitoring
       identifier: rum_mobile_supported_versions
-      weight: 209
+      weight: 208
     - name: Product Analytics
       identifier: rum_product_analytics
       url: real_user_monitoring/product_analytics
