@@ -22,25 +22,48 @@ A given trace contains spans representing each choice made by an agent or each s
 
 Multiple spans combine to form a trace, and a *root span* is the first span in a trace.
 
-A trace can contain several kinds of spans. The *span kind* categorizes the type of work the span is performing. 
+A trace can contain several kinds of spans. The *span kind* categorizes the type of work the span is performing, and can give you more granular insights on your LLM application. 
 
-Only three span kinds can be the root span of a trace:
+Datadog’s LLM Observability product is designed to support observability for a variety of LLM applications, from simple to complex: 
 
-- **LLM span**: An individual LLM inference. LLM spans allow you to track inputs and outputs to your LLM calls; track tokens, error rates, and latencies for your LLM calls; and break down important metrics by models and model providers.
-- **Workflow span**: A grouping of LLM calls and their contextual operations, such as tool calls or preprocessing steps.
-- **Agent span**: A dynamic LLM workflow executed by an LLM agent.
+### LLM Inference Monitoring
 
-Different span kinds also have different parent-child relationships. For details, see [Span Kinds][4].
+The basic level of a LLM trace is a singular LLM span. Tracing individual LLM inferences unlocks basic LLM Observability features, allowing you to:
+1. Track inputs and outputs to your LLM calls
+2. Track token usage, error rates, and latencies for your LLM calls
+3. Break down important metrics by models and model providers
+
+The Python SDK provides some out-of-the-box integrations to automatically capture LLM calls to specific providers. See [Datadog's list of supported integrations][19] for more information. If you are using an LLM provider that is not supported, you will need to manually instrument your application.
+
+{{< img src="tracing/llm_observability/llm-observability-llm-span.png" alt="A singular LLM span" style="width:100%;" >}}
+
+### LLM Workflow Monitoring
+
+Your application likely includes many contextual operations around LLM calls that play a large role in your overall application performance, for instance tool calls to external APIs or preprocessing task steps.
+
+In addition to tracing individual LLM inferences, you can instrument your LLM application to trace and group together LLM calls and their contextual operations into workflows. This leads to a more complex trace with a workflow span as the root. This can unlock a more holistic view and more granular insights regarding your LLM application.
+
+{{< img src="tracing/llm_observability/llm-observability-workflow-trace.png" alt="A trace visualizing a more complex LLM workflow" style="width:100%;" >}}
+
+### LLM Agent Monitoring
+
+What if your LLM application has complex autonomous logic like planning and memory that can’t be captured by a static workflow? You are likely using an LLM Agent. LLM Agents may execute multiple different workflows depending on the user input. Agents often utilize LLMs as an internal brain to make decisions about what operation to complete.
+
+In addition to tracing LLM workflows, you can instrumemt your LLM application to trace and group together all workflows and contextual operations run by a single LLM agent as an agent trace.
+
+{{< img src="tracing/llm_observability/llm-observability-agent-trace.png" alt="A trace visualizing an LLM agent" style="width:100%;" >}}
 
 ## Instrument an LLM application
 
 <div class="alert alert-info">This guide uses the LLM Observability SDK for Python. If your application is not written in Python, you can complete the steps below with API requests instead of SDK function calls.</a></div>
 
+Datadog's LLM Observability Python SDK provides a degree of [auto-instrumentation to capture LLM calls for specific LLM providers][19]. However, in order to unlock more comprehensive visualization of your LLM application and unlock all of Datadog's LLM Observability features, you need to instrument your LLM application using the Python SDK.
+
 To trace an LLM application:
 
 1. [Install the LLM Observability SDK][1].
-1. Configure the SDK by providing [the required environment variables][5] in your application startup command.
-1. In your code, use the SDK to create spans representing your application's tasks.
+1. Configure the SDK by providing [the required environment variables][5] in your application startup command, or programmatically [in-code][20].
+1. In your code, use the SDK to create spans representing your application's operations.
     - See the span creation example below.
     - For additional examples and detailed usage, see the [Quickstart][10] and the [SDK documentation for tracing spans][11]. 
 1. [Annotate your spans][7] with input data, output data, metadata (such as `temperature`), metrics (such as `input_tokens`), and key-value tags (such as `version:1.0.0`).
@@ -68,6 +91,32 @@ def process_message():
     return
 {{< /code-block >}}
 
+
+### Span annotation example
+
+To annotate a span, use the LLM Observability SDK's `LLMObs.annotate()` method.
+
+The example below annotates the workflow span created in the above example:
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs import LLMObs
+from ddtrace.llmobs.decorators import workflow
+
+@workflow(name="process_message")
+def process_message():
+    ... # user application logic
+    LLMObs.annotate(
+        span=None,
+        input_data="<ARGUMENT>",
+        output_data="<OUTPUT>",
+        metadata={},
+        metrics={"prompt_tokens": 15, "completion_tokens": 24},
+        tags={},
+    )
+    return
+{{< /code-block >}}
+
+
 For more information on alternative tracing methods and tracing features, see the [SDK documentation][12].
 
 [1]: /tracing/llm_observability/sdk/#installation
@@ -88,3 +137,5 @@ For more information on alternative tracing methods and tracing features, see th
 [16]: /tracing/llm_observability/api/?tab=model#evaluations-api
 [17]: https://app.datadoghq.com/llm/clusters
 [18]: /tracing/llm_observability/submit_evaluations
+[19]: /tracing/llm_observability/sdk/#llm-integrations
+[19]: /tracing/llm_observability/sdk/#in-code-setup

@@ -70,7 +70,7 @@ LLMObs.enable(
   api_key="<YOUR_DATADOG_API_KEY>",
   site="<YOUR_DATADOG_SITE>",
   agentless_enabled=True,
-  integrations=["langchain", "openai"],
+  integrations_enabled=True,
 )
 {{< /code-block >}}
 
@@ -78,9 +78,9 @@ LLMObs.enable(
 : optional - _string_
 <br />The name of your LLM application, service, or project, under which all traces and spans are grouped. This helps distinguish between different applications or experiments. See [Application naming guidelines](#application-naming-guidelines) for allowed characters and other constraints. To override this value for a given trace, see [Tracing multiple applications](#tracing-multiple-applications). If not provided, this will default to the value of `DD_LLMOBS_APP_NAME`.
 
-`integrations`
-: optional - _list_ 
-<br />A list of integration names to enable automatically tracing LLM calls for (example: `["openai", "langchain"]`). See [LLM integrations](#llm-integrations) for more information about Datadog's supported LLM integrations. **Note**: if not provided, all supported LLM integrations are enabled by default. To disable all integrations, pass in an empty list `[]`.
+`integrations_enabled`
+: optional - _boolean_ 
+<br />Set to `true` to enable automatically tracing LLM calls using Datadog's supported [LLM integrations](#llm-integrations).
 
 `agentless_enabled`
 : optional - _boolean_ 
