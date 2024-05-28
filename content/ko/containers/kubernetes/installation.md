@@ -143,6 +143,9 @@ Datadog Operator를 사용하려면 다음의 전제 조건을 만족해야 합�
     apiKeyExistingSecret: datadog-secret
     appKeyExistingSecret: datadog-secret
     site: <DATADOG_SITE>
+   clusterAgent:
+    metricsProvider:
+     enabled: true
    ```
    `<DATADOG_SITE>`를 [Datadog 사이트][13]로 교체하세요. 귀하의 사이트는 {{< region-param key="dd_site" code="true" >}}입니다. (오른쪽에 올바른 사이트가 선택되었는지 확인합니다.)
 3. 다음 명령을 실행합니다:
@@ -202,7 +205,7 @@ helm delete my-datadog-operator
 
 {{% /tab %}}
 {{% tab "Helm" %}}
-`<RELEASE_NAME>` 디플로이먼트를 제거/삭제하려면: 
+`<RELEASE_NAME>` 디플로이먼트를 제거/삭제하려면:
 
 ```bash
 helm uninstall <RELEASE_NAME>

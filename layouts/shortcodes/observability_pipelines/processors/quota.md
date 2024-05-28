@@ -3,7 +3,7 @@ The quota processor measures the logging traffic for logs that match the filter 
 As an example, you can configure this processor to drop new logs or trigger an alert without dropping logs after the processor has received 10 million events from a certain service in the last 24 hours.
 
 To set up the quota processor:
-1. Enter a name for the processor.
+1. Enter a name for the quota processor. The pipeline uses the name to identify the quota across multiple Remote Configuration deployments of the Worker.
 1. Define a **filter query**. Only logs that match the specified [filter query](#filter-query-syntax) are counted towards the daily limit.
 1. In the **Unit for quota** dropdown menu, select if you want to measure the quota by the number of `Events` or by the `Volume` in bytes.
 1. Set the daily quota limit and select the unit of magnitude for your desired quota.

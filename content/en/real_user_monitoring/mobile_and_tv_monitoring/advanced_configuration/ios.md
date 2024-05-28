@@ -224,9 +224,9 @@ Custom attributes allow you to filter and group information about observed user 
 
 To set a custom global attribute, use `RUMMonitor.shared().addAttribute(forKey:value:)`.
 
-* To add an attribute, use `RUMMonitor.shared().addAttribute(forKey: "some key", value: "some value")`.
-* To update the value, use `RUMMonitor.shared().addAttribute(forKey: "some key", value: "some other value")`.
-* To remove the key, use `RUMMonitor.shared().removeAttribute(forKey: "some key")`.
+* To add an attribute, use `RUMMonitor.shared().addAttribute(forKey: "<KEY>", value: "<VALUE>")`.
+* To update the value, use `RUMMonitor.shared().addAttribute(forKey: "<KEY>", value: "<UPDATED_VALUE>")`.
+* To remove the key, use `RUMMonitor.shared().removeAttribute(forKey: "<KEY_TO_REMOVE>")`.
 
 ### Track user sessions
 
@@ -309,6 +309,9 @@ You can use the following properties in `RUM.Configuration` when enabling RUM:
 
 `vitalsUpdateFrequency`
 : Sets the preferred frequency of collecting mobile vitals. Available values include: `.frequent` (every 100ms), `.average` (every 500ms), `.rare` (every 1s), and `.never` (disable vitals monitoring).
+
+`appHangThreshold`
+: Sets the threshold for reporting app hangs. The minimum allowed value for this option is `0.1` seconds. To disable app hangs reporting, set this to `nil`. For more information, see [Add app hang reporting][10].
 
 ### Automatically track views
 
@@ -727,3 +730,4 @@ This means that even if users open your application while offline, no data is lo
 [6]: /real_user_monitoring/platform/connect_rum_and_traces?tab=browserrum
 [7]: /real_user_monitoring/ios/data_collected?tab=session#default-attributes
 [9]: https://github.com/DataDog/dd-sdk-ios/blob/56e972a6d3070279adbe01850f51cb8c0c929c52/DatadogObjc/Sources/RUM/RUM%2Bobjc.swift
+[10]: /real_user_monitoring/error_tracking/mobile/ios/#add-app-hang-reporting
