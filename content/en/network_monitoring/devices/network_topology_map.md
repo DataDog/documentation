@@ -48,7 +48,7 @@ In the Network Topology Map, the following navigation options are available:
 2. Under **Color By**, change how nodes on the Device Topology Map are colored based on:
 
 - **Device State**: Display nodes on the Device Topology Map by SNMP reachability.
-- **Ping State**: Display nodes on the Device Topology Map by Ping status. 
+- **Ping State**: Display nodes on the Device Topology Map by [Ping status][6]. 
 
 {{< img src="/network_device_monitoring/network_topology_map/device-topology-overview-intro.png" alt="The navigation option, with view by color selected, highlighting view by device state" style="width:80%;" >}}
 
@@ -75,7 +75,7 @@ In the Network Topology Map, the following navigation options are available:
 Hide _N_ Unmonitored Devices - Turned OFF by default.
 : Toggling this on hides devices on the Device Topology Map that are not directly monitored by Network Device Monitoring, but still discovered by LLDP/CDP, and shown on the map from adjacent devices that are monitored by Network Device Monitoring.
 
-Hide _N_ Unconnected Devices - Turned ON by default.
+Hide _N_ Unconnected Devices - Turned OFF by default.
 : Toggling this on hides any devices that have no link connections. Devices can be unconnected for reasons such as improper configuration, or the device does not support [LLDP/CDP](#troubleshooting).
 
 ### Icon legend 
@@ -171,7 +171,7 @@ There are no devices because NDM is not configured.
 
 ### Empty map/ no monitored devices
 
-- Ensure the "Hide _N_ Unconnected Devices toggle is off.
+- Ensure the "Hide _N_ Unconnected Devices" toggle is off.
 
 ### Missing devices/connections
 
@@ -231,3 +231,4 @@ The device resolution can fail if the device is not monitored with NDM, or the L
 [3]: /network_monitoring/devices/snmp_metrics/?tab=snmpv2#autodiscovery
 [4]: /network_monitoring/devices/profiles/
 [5]: /help
+[6]: /network_monitoring/devices/snmp_metrics/?tab=snmpv2#ping
