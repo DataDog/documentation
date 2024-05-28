@@ -1275,6 +1275,12 @@
     "request_description": "",
     "request_schema_description": "Create a new rule."
   },
+  "TestSecurityMonitoringRule": {
+    "description": "Test a rule.",
+    "summary": "Test a rule",
+    "request_description": "",
+    "request_schema_description": "Test the rule queries of a rule."
+  },
   "ValidateSecurityMonitoringRule": {
     "description": "Validate a detection rule.",
     "summary": "Validate a detection rule",
@@ -1294,6 +1300,12 @@
     "summary": "Update an existing rule",
     "request_description": "",
     "request_schema_description": "Update an existing rule."
+  },
+  "TestExistingSecurityMonitoringRule": {
+    "description": "Test an existing rule.",
+    "summary": "Test an existing rule",
+    "request_description": "",
+    "request_schema_description": "Test the rule queries of a rule."
   },
   "ListSecurityMonitoringSignals": {
     "description": "The list endpoint returns security signals that match a search query.\nBoth this endpoint and the POST endpoint can be used interchangeably when listing\nsecurity signals.",
