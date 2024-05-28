@@ -258,11 +258,11 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
 {{% /tab %}}
 {{% tab "Terraform" %}}
 
-The [lambda-datadog][1] Terraform module wraps the [aws_lambda_function][2] resource and automatically configures your Lambda function for Datadog Serverless Monitoring by:
+The [`lambda-datadog`][1] Terraform module wraps the [`aws_lambda_function`][2] resource and automatically configures your Lambda function for Datadog Serverless Monitoring by:
 
 - Adding the Datadog Lambda layers
 - Redirecting the Lambda handler
-- Enabling the collection of metrics, traces, and logs to Datadog
+- Enabling the collection and sending of metrics, traces, and logs to Datadog
 
 ```tf
 module "lambda-datadog" {
@@ -288,19 +288,19 @@ module "lambda-datadog" {
 
 2. Set the `aws_lambda_function` arguments:
 
-All of the arguments available in the `aws_lambda_function` resource are available in this Terraform module. Arguments defined as blocks in the `aws_lambda_function` resource are redefined as variables with their nested arguments.
+   All of the arguments available in the `aws_lambda_function` resource are available in this Terraform module. Arguments defined as blocks in the `aws_lambda_function` resource are redefined as variables with their nested arguments.
 
-For example, in `aws_lambda_function`, `environment` is defined as a block with a `variables` argument. In the `lambda-datadog` Terraform module, the value for the `environment_variables` is passed to the `environment.variables` argument in `aws_lambda_function`. See [inputs][3] for a complete list of variables in this module.
+   For example, in `aws_lambda_function`, `environment` is defined as a block with a `variables` argument. In the `lambda-datadog` Terraform module, the value for the `environment_variables` is passed to the `environment.variables` argument in `aws_lambda_function`. See [inputs][3] for a complete list of variables in this module.
 
 3. Fill in the environment variable placeholders:
 
-- Replace `<DATADOG_API_KEY_SECRET_ARN>` with the ARN of the AWS secret where your Datadog API key is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The secretsmanager:GetSecretValue permission is required. For quick testing, you can instead use apiKey and set the Datadog API key in plaintext.
-- Replace `<ENVIRONMENT>` with the Lambda function's environment
-- Replace `<SERVICE_NAME>` with the name of the Lambda function's service
-- Replace `<DATADOG_SITE>` with {{< region-param key="dd_site" code="true" >}}. Ensure the correct `DATADOG SITE` is selected on the right
-- Replace `<VERSION>` with the version number of the Lambda function
+   - Replace `<DATADOG_API_KEY_SECRET_ARN>` with the ARN of the AWS secret where your Datadog API key is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can instead use the environment variable `DD_API_KEY` and set your Datadog API key in plaintext.
+   - Replace `<ENVIRONMENT>` with the Lambda function's environment, such as `prod` or `staging`
+   - Replace `<SERVICE_NAME>` with the name of the Lambda function's service
+   - Replace `<DATADOG_SITE>` with {{< region-param key="dd_site" code="true" >}}. (Ensure the correct [Datadog site][4] is selected on this page).
+   - Replace `<VERSION>` with the version number of the Lambda function
 
-4. Select the versions of the Datadog Extension Lambda layer and Datadog Node Lambda layer to use. If left blank the latest layer versions will be used.
+4. Select the versions of the Datadog Extension Lambda layer and Datadog Node.js Lambda layer to use. Defaults to the latest layer versions.
 
 ```
   datadog_extension_layer_version = 57
@@ -310,6 +310,7 @@ For example, in `aws_lambda_function`, `environment` is defined as a block with 
 [1]: https://registry.terraform.io/modules/DataDog/lambda-datadog/aws/latest
 [2]: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambda_function
 [3]: https://github.com/DataDog/terraform-aws-lambda-datadog?tab=readme-ov-file#inputs
+[4]: /getting_started/site/
 {{% /tab %}}
 {{% tab "Custom" %}}
 
