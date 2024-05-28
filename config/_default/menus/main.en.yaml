@@ -3735,16 +3735,21 @@ menu:
       parent: tests
       identifier: tests_early_flake_detection
       weight: 10
+    - name: Flaky Test Retries
+      url: tests/flaky_test_retries
+      parent: tests
+      identifier: tests_flaky_test_retries
+      weight: 11
     - name: Guides
       url: tests/guides/
       parent: tests
       identifier: tests_guides
-      weight: 11
+      weight: 12
     - name: Troubleshooting
       url: tests/troubleshooting/
       parent: tests
       identifier: tests_troubleshooting
-      weight: 12
+      weight: 13
     - name: Intelligent Test Runner
       url: intelligent_test_runner/
       pre: intelligent-test-runner
