@@ -1,5 +1,5 @@
 ---
-title: Enabling CSM Enterprise on Linux
+title: Enabling Cloud Security Management on Linux
 kind: documentation
 code_lang: linux
 type: multi-code-lang

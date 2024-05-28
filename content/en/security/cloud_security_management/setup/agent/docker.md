@@ -1,12 +1,12 @@
 ---
-title: Enabling CSM Cloud Workload Security on Docker
+title: Enabling Cloud Security Management on Docker
 kind: documentation
 code_lang: docker
 type: multi-code-lang
 code_lang_weight: 65 # a number that represents relative weight. 
 ---
 
-Use the following instructions to enable [CSM Threats][1] on Docker. To learn more about the supported deployment types for each CSM feature, see [Setting Up Cloud Security Management][2].
+Use the following instructions to enable [CSM Misconfigurations][1] and [CSM Threats][2] on Docker. To learn more about the supported deployment types for each CSM feature, see [Setting Up Cloud Security Management][3].
 
 The following command starts the Runtime Security Agent and `system-probe` in a Docker environment:
 
@@ -32,6 +32,8 @@ docker run -d --name dd-agent \
   -v /:/host/root:ro \
   -v /sys/kernel/debug:/sys/kernel/debug \
   -v /etc/os-release:/etc/os-release \
+  -e DD_COMPLIANCE_CONFIG_ENABLED=true \
+  -e DD_COMPLIANCE_CONFIG_HOST_BENCHMARKS_ENABLED=true \
   -e DD_RUNTIME_SECURITY_CONFIG_ENABLED=true \
   -e DD_RUNTIME_SECURITY_CONFIG_REMOTE_CONFIGURATION_ENABLED=true \
   -e HOST_ROOT=/host/root \
@@ -40,5 +42,6 @@ docker run -d --name dd-agent \
 
 {{< /code-block >}}
 
-[1]: /security/threats
-[2]: /security/cloud_security_management/setup#supported-deployment-types-and-features
+[1]: /security/cloud_security_management/misconfigurations/
+[2]: /security/threats
+[3]: /security/cloud_security_management/setup#supported-deployment-types-and-features

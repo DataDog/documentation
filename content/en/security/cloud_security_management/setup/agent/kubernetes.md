@@ -1,5 +1,5 @@
 ---
-title: Enabling CSM Enterprise on Kubernetes
+title: Enabling Cloud Security Management on Kubernetes
 kind: documentation
 code_lang: kubernetes
 type: multi-code-lang
