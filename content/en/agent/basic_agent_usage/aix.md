@@ -12,7 +12,7 @@ further_reading:
   tag: "Blog"
   text: "Monitor AIX with the Datadog Unix Agent"
 algolia:
-  tags: ['uninstall']
+  tags: ['uninstall', 'uninstalling']
 ---
 
 <div class="alert alert-info">

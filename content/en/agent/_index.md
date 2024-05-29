@@ -31,7 +31,7 @@ cascade:
     path: /infrastructure/**/*
   algolia:
     tags: ['agent']
-    rank: 70
+    rank: 80
 ---
 
 <div class="alert alert-info">

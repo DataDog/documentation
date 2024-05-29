@@ -19,7 +19,7 @@ further_reading:
   tag: "Documentation"
   text: "Configure inbound ports"
 algolia:
-  tags: ['uninstall']
+  tags: ['uninstall', 'uninstalling']
 ---
 
 ## Overview
