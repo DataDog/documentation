@@ -41,6 +41,13 @@ Supported test frameworks:
 | Minitest | >= 5.0.0 |
 | Cucumber | >= 3.0 |
 
+Supported test runners:
+
+| Test runner | Version |
+|---|---|
+| Knapsack Pro | >= 7.2.0 |
+| ci-queue | >= 0.53.0 |
+
 ## Configuring reporting method
 
 To report test results to Datadog, you need to configure the `ddtrace` gem:
