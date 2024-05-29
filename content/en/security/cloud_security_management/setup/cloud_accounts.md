@@ -3,11 +3,6 @@ title: Enabling Cloud Security Management for Cloud Accounts
 kind: documentation
 ---
 
----
-title: Enabling CSM Enterprise for Cloud Accounts
-kind: documentation
----
-
 Use the following instructions to enable [CSM Misconfigurations][2] and [CSM Identity Risks][3] for your cloud accounts. To learn more about the supported deployment types for each CSM feature, see [Setting Up Cloud Security Management][9].
 
 ## Enable resource scanning
