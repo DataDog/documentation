@@ -19,20 +19,22 @@ further_reading:
   text: "Assign tags to all data emitted by a container"
 ---
 
-Datadog's Autodiscovery feature allows you to define configuration templates for Agent Checks on designated sets of containers. This page contains detailed example templates for the following scenarios:
+This page contains detailed example templates for configuring integrations in containerized environments in the following scenarios:
 
-- One Check for one set of containers
-- One Check for multiple sets of containers
-- Multiple Checks for one set of containers
-- Multiple Checks for multiple sets of containers
+- [Redis integration for all Redis containers](#redis-integration-for-all-redis-containers)
+- [Apache integration with HTTP Check for all Apache containers](#apache-integration-and-http-check-on-apache-containers)
 
-For more information about Autodiscovery, see [Getting Started with Containers: Autodiscovery][1].
+For more information about containers and integrations, see [Docker and Integrations][2] and [Kubernetes and Integrations][3].
 
-### One Check for one set of containers
+All examples make use of Datadog's Autodiscovery feature, which allows you to define configuration templates for Agent Checks on designated sets of containers. For more information about Autodiscovery, see [Getting Started with Containers: Autodiscovery][1].
 
-In this scenario, you deployed Redis on Kubernetes. You want to set up and configure the [Datadog-Redis integration][14], which does not require any additional installation steps. All of your Redis containers have the container name `redis`.
+## Redis integration for all Redis containers
 
-Reference [`redisdb.d/conf.yaml.example`][15] for parameters. If you were to configure this integration **on a host**, you might create a `conf.yaml` file that contains the following:
+In this example scenario, you have a containerized environment in which you want to set up and configure the [Datadog-Redis integration][5] for all containers that match the name `redis`. You may have one container named `redis` and another named `my-custom-redis`, and you want to configure the Redis integration for **both** containers.
+
+The Redis integration comes with [default auto-configuration][4], but you want to additionally specify a `password` parameter and configure log collection. 
+
+If you were to configure this integration **on a host**, you could reference [`redisdb.d/conf.yaml.example`][6] for parameters and create a `conf.yaml` file that contains the following:
 
 ```yaml
 init_config:
@@ -47,35 +49,16 @@ logs:
     service: redis_service
 ```
 
-- `<PASSWORD>` corresponds to the password to use for the connection.
+Here, `<PASSWORD>` corresponds to the password to use for the connection.
 
-The following Autodiscovery template applies this configuration to all containers named `redis`:
-
-```yaml
-ad_identifiers:
-  - redis
-init_config:
-instances:
-  - host: "%%host%%"
-    port: 6379
-    password: "%%env_REDIS_PASSWORD%%"
-logs:
-  - type: file
-    path: /var/log/redis_6379.log
-    source: redis
-    service: redis_service
-```
-
-This template makes use of [Autodiscovery template variables][16]:
-- `%%host%%` is dynamically populated with the container's IP.
-- `%%env_REDIS_PASSWORD%%` references an environment variable named `REDIS_PASSWORD` as seen by the Agent process.
-
-Then, to apply this template:
+To apply this configuration to your Redis containers: first, store your password as an environment variable named `REDIS_PASSWORD`; then: 
 
 {{< tabs >}}
-{{% tab "Pod annotations" %}}
+{{% tab "Kubernetes annotations" %}}
 
-**Autodiscovery Annotations v2** (for Datadog Agent v7.36+)
+In your pod manifest:
+
+**Autodiscovery annotations v2** (for Datadog Agent v7.36+)
 
 ```yaml
 apiVersion: v1
@@ -112,7 +95,7 @@ spec:
         - containerPort: 6379
 ```
 
-**Autodiscovery Annotations v1** 
+**Autodiscovery annotations v1** 
 
 ```yaml
 apiVersion: v1
@@ -148,10 +131,40 @@ spec:
 ```
 
 {{% /tab %}}
+{{% tab "Docker labels" %}}
 
+
+**Dockerfile - Autodiscovery Annotations v2** (for Datadog Agent v7.36+)**
+
+```dockerfile
+LABEL "com.datadoghq.ad.checks"='{"redisdb": {"instances": [{"host": "%%host%%","port":"6379","password":"%%env_REDIS_PASSWORD%%"}], "logs": [{"type": "file", "path": "/var/log/redis_6379.log", "source": "redis", "service": "redis_service"}]}}'
+```
+
+{{% /tab %}}
+{{% tab "Local file" %}}
+1. Create a `conf.d/redisdb.d/conf.yaml` file on your host:
+
+   ```yaml
+   ad_identifiers:
+     - redis
+   init config:
+   instances:
+     - host: "%%host%%"
+       port: "6379"
+       username: "datadog"
+       password: "%%env_REDIS_PASSWORD%%"
+   logs:
+     - type: "file"
+       path: "/var/log/redis.log"
+       source: "redis"
+       service: "redis_service"
+   ```
+
+2. Mount your host `conf.d/` folder to the containerized Agent's `conf.d` folder.
+{{% /tab %}}
 {{% tab "ConfigMap" %}}
 
-The following ConfigMap defines the integration template for `redis` containers:
+In a ConfigMap:
 
 ```yaml
 kind: ConfigMap
@@ -175,7 +188,7 @@ data:
         service: "redis_service"
 ```
 
-In the manifest, define the `volumeMounts` and `volumes`:
+Then, in your manifest, define the `volumeMounts` and `volumes`:
 
 ```yaml
 # [...]
@@ -209,9 +222,10 @@ etcdctl set /datadog/check_configs/redis/instances '[{"host": "%%host%%","port":
 
 Notice that each of the three values is a list. Autodiscovery assembles list items into the integration configurations based on shared list indexes. In this case, it composes the first (and only) check configuration from `check_names[0]`, `init_configs[0]` and `instances[0]`.
 
-Unlike auto-conf files, **key-value stores may use the short OR long image name as container identifiers**, for example, `redis` OR `redis:latest`.
 {{% /tab %}}
 {{% tab "Datadog Operator" %}}
+
+In `datadog-agent.yaml`:
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -225,6 +239,9 @@ spec:
     [...]
   override:
     nodeAgent:
+      env: 
+        - name: DD_IGNORE_AUTOCONF
+          value: redisdb
       extraConfd:
         configDataMap:
           redisdb.yaml: |-
@@ -238,11 +255,18 @@ spec:
 ```
 As a result, the Agent contains a `redisdb.yaml` file with the above configuration in the `conf.d` directory.
 
+**Note**: The Redis integration comes with [default auto-configuration][1], which takes precedence over configuration set in the Datadog Operator manifest. Because of this, the provided example manifest uses the `DD_IGNORE_AUTOCONF` variable to disable auto-configuration.
+
+[1]: /containers/guide/auto_conf
 {{% /tab %}}
 {{% tab "Helm" %}}
 
-The following configuration defines the integration template for Redis containers with a custom password parameter:
+In `datadog-values.yaml`:
+
 ```yaml
+datadog:
+  ignoreAutoConfig:
+    - redisdb
   confd:
     redisdb.yaml: |-
       ad_identifiers:
@@ -254,23 +278,45 @@ The following configuration defines the integration template for Redis container
           password: "%%env_REDIS_PASSWORD%%"
 ```
 As a result, the Agent contains a `redisdb.yaml` file with the above configuration in the `conf.d` directory.
+
+**Note**: The Redis integration comes with [default auto-configuration][1], which takes precedence over configuration set in Helm values. Because of this, the provided example uses `datadog.ignoreAutoConfig` to disable auto-configuration.
+
+[1]: /containers/guide/auto_conf
 {{% /tab %}}
 {{< /tabs >}}
 
-<div class="alert alert-info">
-<code>"%%env_&lt;ENV_VAR&gt;%%"</code> template variable logic is used to avoid storing the password in plaintext. This requires that a <code>REDIS_PASSWORD</code> environment variable passed to the Agent. See the <a href="/agent/faq/template_variables/">Autodiscovery Template Variables</a>.
-</div>
+All of these examples use [Autodiscovery template variables][7]:
+- `%%host%%` is dynamically populated with the container's IP.
+- `%%env_REDIS_PASSWORD%%` references an environment variable named `REDIS_PASSWORD` as seen by the Agent process.
 
-### One Check for multiple sets of containers
-### Multiple Checks for one set of containers
-### Datadog Apache and HTTP check integrations
+## Apache integration and HTTP Check on Apache containers
 
-Configurations below apply to an Apache container image with the `<CONTAINER_IDENTIFIER>`: `apache`. These templates are configured to collect metrics from the Apache container and set up a Datadog-HTTP check with instances for testing two endpoints.
+In this example scenario, you have a containerized environment in which you want to set up and configure the [Datadog-Apache integration][8] for all containers that match the name `apache`. You also want to set up an [HTTP Check][9] for testing two endpoints, `/website_1` and `/website_2`
 
-Check names are `apache` and `http_check`. To reference full configurations, see [Datadog-Apache integration][9] and [Datadog-HTTP check integration][10], respectively.
+The Apache integration comes with [default auto-configuration][4], but you want to add an additional configuration: you want to set the [collection interval][11] to 30 seconds.
+
+If you were to configure this integration **on a host**, you could reference the configuration options in [`apache.d/conf.yaml.example`][10] and [`http_check.d/conf.yaml.example`][12]. You would create two `conf.yaml` files:
+
+{{< code-block lang="yaml" filename="apache.d/conf.yaml" >}}
+init_config:
+instances:
+  - apache_status_url: http://%%host%%/server-status?auto
+    min_collection_interval: 30
+{{< /code-block >}}
+
+{{< code-block lang="yaml" filename="http_check.d/conf.yaml" >}}
+init_config:
+instances:
+  - name: my_website_1
+    url: http://%%host%%/website_1
+    timeout: 1
+  - name: my_website_2
+    url: http://%%host%%/website_2
+    timeout: 1
+{{< /code-block >}}
 
 {{< tabs >}}
-{{% tab "Pod annotations" %}}
+{{% tab "Kubernetes annotations" %}}
 
 **Autodiscovery Annotations v2** (for Datadog Agent v7.36+)
 
@@ -285,19 +331,20 @@ metadata:
         "apache": {
           "instances": [
             {
-              "apache_status_url": "http://%%host%%/server-status?auto"
+              "apache_status_url": "http://%%host%%/server-status?auto",
+              "min_collection_interval": 30
             }
           ]
         },
         "http_check": {
           "instances": [
             {
-              "name": "<WEBSITE_1>",
+              "name": "my_website_1",
               "url": "http://%%host%%/website_1",
               "timeout": 1
             },
             {
-              "name": "<WEBSITE_2>",
+              "name": "my_website_2",
               "url": "http://%%host%%/website_2",
               "timeout": 1
             }
@@ -309,9 +356,7 @@ metadata:
 spec:
   containers:
     - name: apache
-      image: httpd
-      ports:
-        - containerPort: 80
+  # (...)
 ```
 
 **Autodiscovery Annotations v1** 
@@ -328,17 +373,18 @@ metadata:
       [
         [
           {
-            "apache_status_url": "http://%%host%%/server-status?auto"
+            "apache_status_url": "http://%%host%%/server-status?auto",
+            "min_collection_interval": 30
           }
         ],
         [
           {
-            "name": "<WEBSITE_1>",
+            "name": "my_website_1",
             "url": "http://%%host%%/website_1",
             "timeout": 1
           },
           {
-            "name": "<WEBSITE_2>",
+            "name": "my_website_2",
             "url": "http://%%host%%/website_2",
             "timeout": 1
           }
@@ -349,36 +395,43 @@ metadata:
 spec:
   containers:
     - name: apache
-      image: httpd
-      ports:
-        - containerPort: 80
+  # (...)
 ```
 
 {{% /tab %}}
+{{% tab "Docker labels" %}}
 
-{{% tab "File" %}}
+**Dockerfile - Autodiscovery Annotations v1** 
+
+```dockerfile
+LABEL "com.datadoghq.ad.check_names"='["apache", "http_check"]'
+LABEL "com.datadoghq.ad.init_configs"='[{},{}]'
+LABEL "com.datadoghq.ad.instances"='[[{"apache_status_url": "http://%%host%%/server-status?auto", "min_collection_interval": 30}],[{"name":"my_website_1","url":"http://%%host%%/website_1","timeout":1},{"name":"my_website_2","url":"http://%%host%%/website_2","timeout":1}]]'
+```
+
+{{% /tab %}}
+{{% tab "Local file" %}}
 
 * Create the folders `conf.d/` and `conf.d/apache.d` on your host.
 * Add the custom auto-configuration below to `conf.d/apache.d/conf.yaml` on your host.
 
 ```yaml
 ad_identifiers:
-  - httpd
+  - apache
 
 init_config:
 
 instances:
   - apache_status_url: http://%%host%%/server-status?auto
+    min_collection_interval: 30
 ```
-
-**Note**: It looks like a minimal [Apache check configuration][1], but notice the `ad_identifiers` option. This required option lets you provide container identifiers. Autodiscovery applies this template to any containers on the same host that run an `httpd` image. See the dedicated [Autodiscovery Identifier][2] documentation to learn more.
 
 * Next, create the folder `conf.d/http_check.d` on your host.
 * Add the custom auto-configuration below to `conf.d/http_check.d/conf.yaml` on your host.
 
 ```yaml
 ad_identifiers:
-  - httpd
+  - apache
 
 init_config:
 
@@ -405,18 +458,19 @@ The following ConfigMap defines the integration template for the `apache` and `h
 kind: ConfigMap
 apiVersion: v1
 metadata:
-  name: httpd-config-map
+  name: apache-config-map
   namespace: default
 data:
   apache-config: |-
     ad_identifiers:
-      - httpd
+      - apache
     init_config:
     instances:
       - apache_status_url: http://%%host%%/server-status?auto
+        min_collection_interval: 30
   http-check-config: |-
     ad_identifiers:
-      - httpd
+      - apache
     init_config:
     instances:
       - name: "<WEBSITE_1>"
@@ -442,13 +496,13 @@ In the manifest, define the `volumeMounts` and `volumes`:
       # [...]
         - name: apache-auto-config
           configMap:
-            name: httpd-config-map
+            name: apache-config-map
             items:
               - key: apache-config
                 path: auto_conf.yaml
         - name: http-auto-config
           configMap:
-            name: httpd-config-map
+            name: apache-config-map
             items:
               - key: http-check-config
                 path: auto_conf.yaml
@@ -459,9 +513,9 @@ In the manifest, define the `volumeMounts` and `volumes`:
 {{% tab "Key-value store" %}}
 
 ```conf
-etcdctl set /datadog/check_configs/httpd/check_names '["apache", "http_check"]'
-etcdctl set /datadog/check_configs/httpd/init_configs '[{}, {}]'
-etcdctl set /datadog/check_configs/httpd/instances '[[{"apache_status_url": "http://%%host%%/server-status?auto"}],[{"name": "<WEBSITE_1>", "url": "http://%%host%%/website_1", timeout: 1},{"name": "<WEBSITE_2>", "url": "http://%%host%%/website_2", timeout: 1}]]'
+etcdctl set /datadog/check_configs/apache/check_names '["apache", "http_check"]'
+etcdctl set /datadog/check_configs/apache/init_configs '[{}, {}]'
+etcdctl set /datadog/check_configs/apache/instances '[[{"apache_status_url": "http://%%host%%/server-status?auto", "min_collection_interval": 30}],[{"name": "<WEBSITE_1>", "url": "http://%%host%%/website_1", timeout: 1},{"name": "<WEBSITE_2>", "url": "http://%%host%%/website_2", timeout: 1}]]'
 ```
 
 **Note**: The order of each list matters. The Agent can only generate the HTTP check configuration correctly if all parts of its configuration have the same index across the three lists.
@@ -481,6 +535,9 @@ spec:
     [...]
   override:
     nodeAgent:
+      env:
+        - name: DD_IGNORE_AUTOCONF
+          value: apache
       extraConfd:
         configDataMap:
           apache.yaml: |-
@@ -489,17 +546,72 @@ spec:
             init_config:
             instances:
               - apache_status_url: "http://%%host%%/server-status?auto"
+                min_collection_interval: 30
+          http_check.yaml: |-
+            ad_identifiers:
+              - apache
+            init_config:
+            instances:
+              - name: "my_website_1"
+                url: "http://%%host%%/website_1"
+                timeout: 1
+              - name: "my_website_2"
+                url: "http://%%host%%/website_2"
+                timeout: 1
 ```
-As a result, the Agent contains a `redisdb.yaml` file with the above configuration in the `conf.d` directory.
+
+**Note**: The Apache integration comes with [default auto-configuration][1], which takes precedence over configuration set in the Datadog Operator manifest. Because of this, the provided example manifest uses the `DD_IGNORE_AUTOCONF` variable to disable auto-configuration.
+
+[1]: /containers/guide/auto_conf
 
 {{% /tab %}}
-
 {{% tab "Helm" %}}
+In `datadog-values.yaml`:
 
+```yaml
+datadog:
+  ignoreAutoConfig:
+    - apache
+  confd:
+    apache.yaml: |-
+      ad_identifiers:
+        - apache
+      init_config:
+      instances:
+        - apache_status_url: "http://%%host%%/server-status?auto"
+          min_collection_interval: 30
+    http_check.yaml: |-
+      ad_identifiers:
+        - apache
+      init_config:
+      instances:
+        - name: "my_website_1"
+          url: "http://%%host%%/website_1"
+          timeout: 1
+        - name: "my_website_2"
+          url: "http://%%host%%/website_2"
+          timeout: 1
+```
+
+**Note**: The Apache integration comes with [default auto-configuration][1], which takes precedence over configuration set in Helm values. Because of this, the provided example uses `datadog.ignoreAutoConfig` to disable auto-configuration.
+
+[1]: /containers/guide/auto_conf
 
 {{% /tab %}}
 {{< /tabs >}}
 
-### Multiple Checks for multiple sets of containers
+All of these examples use [Autodiscovery template variables][7]:
+- `%%host%%` is dynamically populated with the container's IP.
 
 [1]: /getting_started/containers/autodiscovery
+[2]: /containers/docker/integrations
+[3]: /containers/kubernetes/integrations
+[4]: /containers/guide/auto_conf
+[5]: /integrations/redis
+[6]: https://github.com/DataDog/integrations-core/blob/master/redisdb/datadog_checks/redisdb/data/conf.yaml.example
+[7]: /containers/guide/template_variables/
+[8]: /integrations/apache
+[9]: /integrations/http_check/
+[10]: https://github.com/DataDog/integrations-core/blob/master/apache/datadog_checks/apache/data/conf.yaml.example
+[11]: /developers/write_agent_check/#collection-interval
+[12]: https://github.com/DataDog/integrations-core/blob/master/http_check/datadog_checks/http_check/data/conf.yaml.example

@@ -29,7 +29,7 @@ This page covers how to install and configure integrations for your Kubernetes i
 If you are using Docker or Amazon ECS, see [Docker and Integrations][1].
 
 <div class="alert alert-info">
-Some supported integrations don't work with Autodiscovery because they require either process tree data or filesystem access: <a href="/integrations/ceph">Ceph</a>, <a href="/integrations/varnish">Varnish</a>, <a href="/integrations/postfix">Postfix</a>, <a href="/integrations/cassandra/#agent-check-cassandra-nodetool">Cassandra Nodetool</a>, and <a href="/integrations/gunicorn">Gunicorn</a>.<br/><br/>
+Some Datadog integrations don't work with Autodiscovery because they require either process tree data or filesystem access: <a href="/integrations/ceph">Ceph</a>, <a href="/integrations/varnish">Varnish</a>, <a href="/integrations/postfix">Postfix</a>, <a href="/integrations/cassandra/#agent-check-cassandra-nodetool">Cassandra Nodetool</a>, and <a href="/integrations/gunicorn">Gunicorn</a>.<br/><br/>
 To monitor integrations that are not compatible with Autodiscovery, you can use a Prometheus exporter in the pod to expose an HTTP endpoint, and then use the <a href="/integrations/openmetrics/">OpenMetrics integration</a> (which supports Autodiscovery) to find the pod and query the endpoint. 
 </div>
 
@@ -42,7 +42,13 @@ To use an integration that is not packaged with the Datadog Agent, you must buil
 
 ## Configuration
 
-You can apply Autodiscovery templates by using Kubernetes annotations, local files, ConfigMaps, key-value stores, Datadog Operator, or Helm. 
+Some commonly-used integrations come with default configuration for Autodiscovery. See [Autodiscovery auto-configuration][20] for details, including a list of auto-configured integrations and their corresponding default configuration files. If your integration is in this list, and the default configuration is sufficient for your use case, no further action is required.
+
+Otherwise:
+
+1. Choose a configuration method (Kubernetes pod annotations, a local file, a ConfigMap, a key-value store, Datadog Operator manifest, Helm chart) that suits your use case.
+2. Reference the template format for your chosen method. Each format contains placeholders, such as `<CONTAINER_IDENTIFIER>`.
+3. [Supply values](#placeholder-values) for these placeholders.
 
 {{< tabs >}}
 {{% tab "Annotations" %}}
@@ -96,7 +102,7 @@ spec:
 If you define pods indirectly (with deployments, ReplicaSets, or ReplicationControllers) add pod annotations under `spec.template.metadata`.
 
 {{% /tab %}}
-{{% tab "File" %}}
+{{% tab "Local file" %}}
 
 You can store Autodiscovery templates as local files inside the mounted `/conf.d` directory. You must restart your Agent containers each time you change, add, or remove templates.
 
@@ -315,6 +321,8 @@ See [Cluster Checks][3] for more context.
 
 {{< /tabs >}}
 
+### Placeholder values
+
 Supply placeholder values as follows:
 
 `<INTEGRATION_NAME>`
@@ -336,32 +344,35 @@ You can also use custom identifiers. See [Custom Autodiscovery Identifiers][21].
 
 ### Auto-configuration
 
-The Datadog Agent automatically recognizes and configures integrations for some common technologies, including [CoreDNS][17], [etcd][18], the [Kubernetes API server][19], and others. For a complete list, see [Autodiscovery auto-configuration][20].
+The Datadog Agent automatically recognizes and supplies basic configuration for some common technologies. For a complete list, see [Autodiscovery auto-configuration][20].
 
 Configurations set with Kubernetes annotations take precedence over auto-configuration, but auto-configuration takes precedence over configurations set with Datadog Operator or Helm. To use Datadog Operator or Helm to configure an integration in the [Autodiscovery auto-configuration][20] list, you must [disable auto-configuration][22].
 
-## Example: Redis
+## Example: Postgres integration
 
-In this scenario, you deployed Redis on Kubernetes. You want to set up and configure the [Datadog-Redis integration][14], which does not require any additional installation steps. All of your Redis containers have container names that contain the string `redis`.
+In this example scenario, you deployed Postgres on Kubernetes. You want to set up and configure the [Datadog-Postgres integration][26]. All of your Postgres containers have container names that contain the string `postgres`.
 
-Reference [`redisdb.d/conf.yaml.example`][15] for parameters. If you were to configure this integration **on a host**, you could create a `conf.yaml` file that contains the following:
+First, reference the [Postgres integration documentation][26] for any additional setup steps. The Postgres integration requires that you create a read-only user named `datadog` and store the corresponding password as an environment variable named `PG_PASSWORD`.
+
+If you were to configure this integration **on a host**, you could reference [`postgresql.d/conf.yaml.example`][15] for parameters and create a `postgresql.d/conf.yaml` file that contains the following:
 
 ```yaml
 init_config:
 instances:
   - host: localhost
-    port: 6379
+    port: 5432
+    username: datadog
     password: <PASSWORD>
 logs:
   - type: file
-    path: /var/log/redis_6379.log
-    source: redis
-    service: redis_service
+    path: /var/log/postgres.log
+    source: postgresql
+    service: pg_service
 ```
 
-Here, `<PASSWORD>` corresponds to the password to use for the connection.
+Here, `<PASSWORD>` corresponds to the password for the `datadog` user you created.
 
-To apply this configuration to your Redis containers:
+To apply this configuration to your Postgres containers:
 
 {{< tabs >}}
 {{% tab "Annotations" %}}
@@ -374,35 +385,33 @@ In your pod manifest:
 apiVersion: v1
 kind: Pod
 metadata:
-  name: redis
+  name: postgres
   annotations:
-    ad.datadoghq.com/redis.checks: |
+    ad.datadoghq.com/postgres.checks: |
       {
-        "redisdb": {
+        "postgresql": {
           "instances": [
             {
               "host": "%%host%%",
-              "port":"6379",
-              "password":"%%env_REDIS_PASSWORD%%"
+              "port": "5432",
+              "username": "datadog",
+              "password":"%%env_PG_PASSWORD%%"
             }
           ]
         }
       }
-    ad.datadoghq.com/redis.logs: |
+    ad.datadoghq.com/postgres.logs: |
       [
         {
           "type": "file",
-          "path": "/var/log/redis_6379.log",
-          "source": "redis",
-          "service": "redis_service"
+          "path": "/var/log/postgres.log",
+          "source": "postgresql",
+          "service": "pg_service"
         }
       ]
 spec:
   containers:
-    - name: redis
-      image: redis:latest
-      ports:
-        - containerPort: 6379
+    - name: postgres
 ```
 
 **Autodiscovery annotations v1** 
@@ -411,37 +420,55 @@ spec:
 apiVersion: v1
 kind: Pod
 metadata:
-  name: redis
+  name: postgres
   annotations:
-    ad.datadoghq.com/redis.check_names: '["redisdb"]'
-    ad.datadoghq.com/redis.init_configs: '[{}]'
-    ad.datadoghq.com/redis.instances: |
+    ad.datadoghq.com/postgres.check_names: '["postgresql"]'
+    ad.datadoghq.com/postgres.init_configs: '[{}]'
+    ad.datadoghq.com/postgres.instances: |
       [
         {
           "host": "%%host%%",
-          "port":"6379",
-          "password":"%%env_REDIS_PASSWORD%%"
+          "port": "5432",
+          "username": "datadog",
+          "password":"%%env_PG_PASSWORD%%"
         }
       ]
-    ad.datadoghq.com/redis.logs: |
+    ad.datadoghq.com/postgres.logs: |
       [
         {
           "type": "file",
-          "path": "/var/log/redis_6379.log",
-          "source": "redis",
-          "service": "redis_service"
+          "path": "/var/log/postgres.log",
+          "source": "postgresql",
+          "service": "pg_service"
         }
       ]
 spec:
   containers:
-    - name: redis
-      image: redis:latest
-      ports:
-        - containerPort: 6379
+    - name: postgres
 ```
 
 {{% /tab %}}
+{{% tab "Local file" %}}
+1. Create a `conf.d/postgresql.d/conf.yaml` file on your host:
 
+   ```yaml
+   ad_identifiers:
+     - postgres
+   init config:
+   instances:
+     - host: "%%host%%"
+       port: "5432"
+       username: "datadog"
+       password: "%%env_PG_PASSWORD%%"
+   logs:
+     - type: "file"
+       path: "/var/log/postgres.log"
+       source: "postgresql"
+       service: "pg_service"
+   ```
+
+2. Mount your host `conf.d/` folder to the containerized Agent's `conf.d` folder.
+{{% /tab %}}
 {{% tab "ConfigMap" %}}
 
 In a ConfigMap:
@@ -450,22 +477,23 @@ In a ConfigMap:
 kind: ConfigMap
 apiVersion: v1
 metadata:
-  name: redisdb-config-map
+  name: postgresql-config-map
   namespace: default
 data:
-  redisdb-config: |-
+  postgresql-config: |-
     ad_identifiers:
-      - redis
+      - postgres
     init_config:
     instances:
       - host: "%%host%%"
-        port: "6379"
-        password: "%%env_REDIS_PASSWORD%%"
+        port: "5432"
+        username: "datadog"
+        password: "%%env_PG_PASSWORD%%"
     logs:
       - type: "file"
-        path: "/var/log/redis_6379.log"
-        source: "redis"
-        service: "redis_service"
+        path: "/var/log/postgres.log"
+        source: "postgresql"
+        service: "pg_service"
 ```
 
 Then, in your manifest, define the `volumeMounts` and `volumes`:
@@ -474,16 +502,16 @@ Then, in your manifest, define the `volumeMounts` and `volumes`:
 # [...]
         volumeMounts:
         # [...]
-          - name: redisdb-config-map
-            mountPath: /conf.d/redisdb.d
+          - name: postgresql-config-map
+            mountPath: /conf.d/postgresql.d
         # [...]
       volumes:
       # [...]
-        - name: redisdb-config-map
+        - name: postgresql-config-map
           configMap:
-            name: redisdb-config-map
+            name: postgresql-config-map
             items:
-              - key: redisdb-config
+              - key: postgresql-config
                 path: conf.yaml
 # [...]
 ```
@@ -491,13 +519,13 @@ Then, in your manifest, define the `volumeMounts` and `volumes`:
 {{% /tab %}}
 {{% tab "Key-value store" %}}
 
-The following etcd commands create a Redis integration template with a custom `password` parameter:
+The following etcd commands create a Postgres integration template with a custom `password` parameter:
 
 ```conf
-etcdctl mkdir /datadog/check_configs/redis
-etcdctl set /datadog/check_configs/redis/check_names '["redisdb"]'
-etcdctl set /datadog/check_configs/redis/init_configs '[{}]'
-etcdctl set /datadog/check_configs/redis/instances '[{"host": "%%host%%","port":"6379","password":"%%env_REDIS_PASSWORD%%"}]'
+etcdctl mkdir /datadog/check_configs/postgres
+etcdctl set /datadog/check_configs/postgres/check_names '["postgresql"]'
+etcdctl set /datadog/check_configs/postgres/init_configs '[{}]'
+etcdctl set /datadog/check_configs/postgres/instances '[{"host": "%%host%%","port":"5432","username":"datadog","password":"%%env_PG_PASSWORD%%"}]'
 ```
 
 Notice that each of the three values is a list. Autodiscovery assembles list items into the integration configurations based on shared list indexes. In this case, it composes the first (and only) check configuration from `check_names[0]`, `init_configs[0]` and `instances[0]`.
@@ -519,21 +547,19 @@ spec:
     [...]
   override:
     nodeAgent:
-      env: 
-        - name: DD_IGNORE_AUTOCONF
-          value: redisdb
       extraConfd:
         configDataMap:
-          redisdb.yaml: |-
+          postgresql.yaml: |-
             ad_identifiers:
-              - redis
+              - postgres
             init_config:
             instances:
               - host: "%%host%%"
-                port: 6379
-                password: "%%env_REDIS_PASSWORD%%"
+                port: 5432
+                username: "datadog"
+                password: "%%env_PG_PASSWORD%%"
 ```
-As a result, the Agent contains a `redisdb.yaml` file with the above configuration in the `conf.d` directory.
+As a result, the Agent contains a `postgresql.yaml` file with the above configuration in the `conf.d` directory.
 
 {{% /tab %}}
 {{% tab "Helm" %}}
@@ -542,25 +568,25 @@ In `datadog-values.yaml`:
 
 ```yaml
 datadog:
-  ignoreAutoConfig:
-    - redisdb
   confd:
-    redisdb.yaml: |-
+    postgresql.yaml: |-
       ad_identifiers:
-        - redis
+        - postgres
       init_config:
       instances:
         - host: "%%host%%"
-          port: 6379
-          password: "%%env_REDIS_PASSWORD%%"
+          port: 5432
+          username: "datadog"
+          password: "%%env_PG_PASSWORD%%"
 ```
-As a result, the Agent contains a `redisdb.yaml` file with the above configuration in the `conf.d` directory.
+As a result, the Agent contains a `postgresql.yaml` file with the above configuration in the `conf.d` directory.
+
 {{% /tab %}}
 {{< /tabs >}}
 
 These templates make use of [Autodiscovery template variables][16]:
 - `%%host%%` is dynamically populated with the container's IP.
-- `%%env_REDIS_PASSWORD%%` references an environment variable named `REDIS_PASSWORD` as seen by the Agent process.
+- `%%env_PG_PASSWORD%%` references an environment variable named `PG_PASSWORD` as seen by the Agent process.
 
 For more examples, including how to configure multiple checks for multiple sets of containers, see [Autodiscovery: Scenarios & Examples][24].
 
@@ -582,7 +608,7 @@ For more examples, including how to configure multiple checks for multiple sets 
 [12]: /getting_started/containers/autodiscovery
 [13]: /agent/guide/use-community-integrations/
 [14]: /integrations/redis
-[15]: https://github.com/DataDog/integrations-core/blob/master/redisdb/datadog_checks/redisdb/data/conf.yaml.example
+[15]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example
 [16]: /containers/guide/template_variables/
 [17]: /integrations/coredns
 [18]: /integrations/etcd/
@@ -592,3 +618,5 @@ For more examples, including how to configure multiple checks for multiple sets 
 [22]: /containers/guide/auto_conf/#disable-auto-configuration
 [23]: /containers/guide/autodiscovery-management
 [24]: /containers/guide/autodiscovery-examples
+[25]: /integrations/istio/
+[26]: /integrations/postgres
