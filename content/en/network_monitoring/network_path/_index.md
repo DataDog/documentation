@@ -3,38 +3,31 @@ title: Network Path
 kind: documentation
 description: Investigate network traffic paths 
 further_reading:
-- link: "https://www.datadoghq.com/blog/cloud-network-monitoring-datadog/"
-  tag: "Blog"
-  text: "Monitor cloud architecture and app dependencies with Datadog NPM"
-- link: "https://www.datadoghq.com/blog/network-performance-monitoring"
-  tag: "Blog"
-  text: "Network Performance Monitoring"
-  tag: "Blog"
-  text: "Monitor cloud endpoint health with cloud service autodetection"
+- link: "/network_monitoring/network_path/list_view"
+  tag: "Doc"
+  text: "Learn more about the List View in Network Path"
+- link: "/network_monitoring/network_path/list_view"
+  tag: "Doc"
+  text: "Learn more about the Path View in Network Path"
 ---
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Network Path for Datadog Network Performance Monitoring is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
 
-<div class="alert alert-warning">Network Path for Datadog Network Performance Monitoring is in private beta.</div>
+<div class="alert alert-warning">Network Path for Datadog Network Performance Monitoring is in private beta. Reach out to your Account Representative to sign up.</div>
 
 ## Overview
 
-Network Path shows the hops that traffic takes through the network to get from point A to point B. The value for customers is having the ability to pin-point where your network issues are originating from. (internal to network or ISP, etc). If things are being mis-routed etc. Each row represents a path from a source to a destination. 
-Source and destination facet panel.
+Network Path displays the path that traffic takes through the network, from one point to another. This provides network administrators with the capability to precisely identify the origin of network problems, whether they're internal or from an Internet Service Provider (ISP), or due to other issues such as mis-routing. Each row signifies a route from a source to a destination, as depicted in the `source` and `destination` facet panel.
+
+{{< img src="network_performance_monitoring/network_path/network_path_default_view.png" alt="The Network Path default view, sorting by Datacenter and Un-Grouped Destination" >}}
 
 ## How it works
 
-We run a traceroute at the host level, show me the hops a packet would take to reach "google.com". We then show the latency at each hop. Each host is running its own traceroute and the path visualizes the list. each host is running it's own path.
+At the host level, Datadog execute a `traceroute` to depict the hops a packet takes to reach its destination. Through the `traceroute`, Datadog collects hops as well as the latency at each hop. Every host runs its own `traceroute`, and the path is a visual representation of this list. 
+
 
 {{< img src="network_performance_monitoring/network_path/network_path.png" alt="Diagram of how Network path works" >}}
-
-### List view
-
-explain how search bar works, grouping by sources, static only toggle, what is a static path. Unreachable and Reachable at top. Build Multi-path Map.
-
-### Path view
-
-Path view page - click into a path goes into the path view page, legend, explain node status (color meaning) and edge color, thickness and stroke (solid/dash). Define all of those.
-Explain health bars (end to end latency, end to end packet loss) on that path. 
-Then explain the graphs
 
 
 ## Further Reading
