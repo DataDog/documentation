@@ -58,7 +58,7 @@ When Active Protection is enabled, and applies to a crypto mining rule that gene
 If Active Protection is enabled and available for an Agent crypto mining rule, you can see it by looking at the rule:
 
 1. In [Agent Configuration][2], select a crypto mining rule.
-2. In the crypto rule, if Active Protection is enabled and available, there is a **Protection** section.
+2. In the crypto mining rule, if Active Protection is enabled and available, there is a **Protection** section.
 
 ## Enable Active Protection
 
