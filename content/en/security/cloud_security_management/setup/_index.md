@@ -42,13 +42,10 @@ Select your infrastructure type for details on how to enable CSM Enterprise on t
 
 ## Next steps
 
-To get started setting up CSM, navigate to the [**Cloud Security Management Setup**][4] page in Datadog, which has detailed steps on how to configure CSM. For detailed setup instructions, see the [CSM Enterprise][1], [CSM Pro][2], [CSM Workload Security][3], and [CSM Agentless Scanning][12] setup docs.
+To get started setting up CSM, navigate to the [**Cloud Security Management Setup**][4] page in Datadog, which has detailed steps on how to configure CSM. For detailed setup instructions, see **X** and [CSM Agentless Scanning][12] setup docs.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/cloud_security_management/setup/csm_enterprise
-[2]: /security/cloud_security_management/setup/csm_pro
-[3]: /security/cloud_security_management/setup/csm_cloud_workload_security
 [12]: /security/cloud_security_management/setup/agentless_scanning

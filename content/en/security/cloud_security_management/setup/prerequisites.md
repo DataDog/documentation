@@ -7,28 +7,9 @@ kind: documentation
 
 - The **minimum** Datadog Agent version required for CSM is `7.46` or higher.
 
-### Supported deployment types and features
-
-The following table summarizes the CSM features available relative to each deployment type.
-
-<div class="alert alert-info">For more details, click each of the CSM feature headings to review additional requirements for that feature.</div>
-
-| Deployment type     | Agent Required (7.46+) | CSM Misconfigurations | [CSM Threats][8] | [CSM Vulnerabilities][9] | [CSM Identity Risks][10] | [CSM Agentless Scanning][11] |
-|---------------------|------------------------|-----------------------|------------------|--------------------------|--------------------------|------------------------------|
-| Docker              | {{< X >}}              | {{< X >}}             | {{< X >}}        |                          |                          |                              |
-| Kubernetes          | {{< X >}}              | {{< X >}}             | {{< X >}}        | {{< X >}}                |                          |                              |
-| Linux               | {{< X >}}              | {{< X >}}             | {{< X >}}        | {{< X >}}                |                          |                              |
-| Amazon ECS/EKS      | {{< X >}}              | {{< X >}}             | {{< X >}}        | {{< X >}}                |                          |                              |
-| AWS Account         |                        | {{< X >}}             |                  |                          | {{< X >}}                | beta                         |
-| Azure Account       |                        | {{< X >}}             |                  |                          | {{< X >}}                |                              |
-| GCP Account         |                        | {{< X >}}             |                  |                          |                          |                              |
-| Windows             | {{< X >}}              |                       | {{< X >}}        |                          |                          |                              |
-| AWS Fargate ECS/EKS | {{< X >}}              |                       | beta             |                          |                          |                              |
-| Terraform           |                        |                       |                  |                          |                          | beta                         |
-
 The following tables represent additional prerequisites relative to each CSM feature.
 
-### CSM Threats 
+## CSM Threats 
 
 CSM Threats supports the following Linux distributions:
 
@@ -48,7 +29,7 @@ CSM Threats supports the following Linux distributions:
 - For compatibility with a custom Kubernetes network plugin like Cilium or Calico, see the [Troubleshooting page][102].
 - Data collection is done using eBPF, so Datadog minimally requires platforms that have underlying Linux kernel versions of 4.15.0+ or have eBPF features backported.
 
-### CSM Vulnerabilities 
+## CSM Vulnerabilities 
 
 | Component         | Version/Requirement                         |
 |-------------------|---------------------------------------------|
@@ -77,7 +58,7 @@ Vulnerability scanning is supported for hosts and containers running the followi
 | Debian GNU/Linux         | 7, 8, 9, 10, 11, 12 (unstable/sid is not supported) | apt/dpkg         |
 | Ubuntu                   | All versions supported by Canonical                 | apt/dpkg         |
 
-### CSM Identity Risks 
+## CSM Identity Risks 
 
 <div class="alert alert-info"><strong>Note</strong>: CSM Identity Risks is available for AWS and Azure.</div>
 
@@ -88,10 +69,6 @@ To use CSM Identity Risks, you must [enable resource collection for AWS][105]. I
 - If you've [enabled CSM Misconfigurations for your AWS accounts][106], you already have cloud resource collection enabled.
 - Although not required, when you [enable CloudTrail logs forwarding][107], you get additional insights based on the actual usage (or non-usage) of resources in your infrastructure, for example, users and roles with significant gaps between provisioned and used permissions.
 </br>
-
-## Next steps
-
-To get started setting up CSM, navigate to the [**Cloud Security Management Setup**][4] page in Datadog, which has detailed steps on how to configure CSM. For detailed setup instructions, see the [CSM Enterprise][1], [CSM Pro][2], [CSM Workload Security][3], and [CSM Agentless Scanning][12] setup docs.
 
 ## Further Reading
 

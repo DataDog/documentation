@@ -14,7 +14,7 @@ Datadog Cloud Security Management on AWS Fargate includes built-in threat detect
 
 ## Prerequisites
 
-* [CSM Enterprise][4] or [CSM Workload Security][5] with the AWS integration configured
+* The Datadog AWS integration is installed and configured for your AWS accounts
 * Access to AWS Management Console
 * AWS Fargate ECS or EKS workloads
 
@@ -219,8 +219,6 @@ Use the appropriate command below to create a `security-agent` flare based on yo
 [1]: /security/threats/
 [2]: /security/cloud_security_management/setup#supported-deployment-types-and-features
 [3]: /security/default_rules/?category=cat-csm-threats
-[4]: /security/cloud_security_management/setup/csm_enterprise
-[5]: /security/cloud_security_management/setup/csm_cloud_workload_security
 [6]: https://aws.amazon.com/console
 [7]: /resources/json/datadog-agent-cws-ecs-fargate.json
 [8]: /integrations/faq/integration-setup-ecs-fargate/?tab=rediswebui
