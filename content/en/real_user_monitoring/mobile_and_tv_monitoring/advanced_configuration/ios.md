@@ -228,7 +228,7 @@ To set a custom global attribute, use `RUMMonitor.shared().addAttribute(forKey:v
 * To update the value, use `RUMMonitor.shared().addAttribute(forKey: "<KEY>", value: "<UPDATED_VALUE>")`.
 * To remove the key, use `RUMMonitor.shared().removeAttribute(forKey: "<KEY_TO_REMOVE>")`.
 
-**Note**: Do not use spaces or special characters for your key names, otherwise it will not be possible to create facets. For example, use `forKey: "store_id"` instead of `forKey: "Store ID"`.
+**Note**: You can't create facets on custom attributes if you use spaces or special characters in your key names. For example, use `forKey: "store_id"` instead of `forKey: "Store ID"`.
 
 ### Track user sessions
 
