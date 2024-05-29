@@ -314,25 +314,40 @@ require "ddtrace/auto_instrument" if ENV["DD_ENV"] == "ci"
 
 For the full list of available instrumentation methods, see the [`ddtrace` documentation][6]
 
-## Webmock
+## Webmock/VCR
 
-[Webmock][7]
-is a popular Ruby library that stubs HTTP requests when running tests.
-By default, it fails when used with datadog-ci because traces are being sent
+[Webmock][7] and [VCR][9]
+are popular Ruby libraries that stub HTTP requests when running tests.
+By default, they fails when used with datadog-ci because traces are being sent
 to Datadog with HTTP calls.
 
 To allow HTTP connections for Datadog backend, you need to configure
-Webmock accordingly.
+Webmock and VCR accordingly.
 
 ```ruby
-# when using Agentless mode (note: use the correct datadog site, for example, datadoghq.com, datadoghq.eu, etc.):
-WebMock.disable_net_connect!(:allow => "citestcycle-intake.datadoghq.com")
+# Webmock
+# when using Agentless mode:
+WebMock.disable_net_connect!(:allow => /datadoghq/)
 
 # when using Agent running locally:
 WebMock.disable_net_connect!(:allow_localhost => true)
 
 # or for more granular setting set your Agent URL, for example:
 WebMock.disable_net_connect!(:allow => "localhost:8126")
+
+# VCR
+VCR.configure do |config|
+  # ... your usual configuration here ...
+
+  # when using Agent
+  config.ignore_hosts "127.0.0.1", "localhost"
+
+  # when using Agentless mode
+  config.ignore_request do |request|
+    # ignore all requests to datadoghq hosts
+    request.uri =~ /datadoghq/
+  end
+end
 ```
 
 ## Collecting Git metadata
@@ -446,3 +461,4 @@ Datadog::CI.active_test_session&.finish
 [6]: /tracing/trace_collection/dd_libraries/ruby/#integration-instrumentation
 [7]: https://github.com/bblimke/webmock
 [8]: https://datadoghq.dev/datadog-ci-rb/Datadog/CI.html
+[9]: https://github.com/vcr/vcr
