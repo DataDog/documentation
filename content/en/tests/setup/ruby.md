@@ -162,6 +162,27 @@ For example:
 DD_ENV=ci bundle exec rake test
 ```
 
+<div class="alert alert-warning">
+<strong>Note:</strong> When using `minitest/autorun`, ensure that `datadog/ci` is required before `minitest/autorun`.
+</div>
+
+Example configuration with `minitest/autorun`:
+
+```ruby
+require 'datadog/ci'
+require 'minitest/autorun'
+
+if ENV["DD_ENV"] == "ci"
+  Datadog.configure do |c|
+    c.ci.enabled = true
+
+    c.service = 'my-ruby-app'
+
+    c.ci.instrument :minitest
+  end
+end
+```
+
 {{% /tab %}}
 
 {{% tab "Cucumber" %}}
@@ -170,13 +191,6 @@ The Cucumber integration traces executions of scenarios and steps when using the
 
 To activate your integration, add the following code to your application:
 
-<!-- TODO: Explicitly setting `c.tracing.enabled` overrides any existing value, including the environment
-variable `DD_TRACE_ENABLED`. This prevents production environments from being able to disable the tracer
-using `DD_TRACE_ENABLED`.
-This snippet should be adapted to work correctly with the production tracer configuration or
-instruct clients to only include this code in a CI environment.
-This affects all code snippets in this file.
--->
 ```ruby
 require 'cucumber'
 require 'datadog/ci'
