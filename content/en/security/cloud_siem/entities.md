@@ -36,6 +36,8 @@ The entity panels for the top 4 suspicious entities are also accessible from the
 Screenshot of relevant section of Cloud SIEM Overview page
 </div>
 
-## Risk scoring framework
+## Risk scoring calculation
 
-TODO
+An entity's risk score summarizes the entity's risk level over time. The risk score is calculated from the characteristics of the entity's associated signals, such as the severity level of the signal and how many times the signal has fired.
+
+Only out-of-the-box signals from the past 14 days are included in the risk score calculation.
