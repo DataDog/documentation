@@ -31,13 +31,14 @@ With the Datadog RUM Browser SDK, you can:
 
 ## Getting started
 
-To get started with the RUM Browser SDK, follow the steps to [create a JavaScript RUM application][].
+To get started with the RUM Browser SDK, follow the steps to [create a JavaScript RUM application][1].
 
-From here, you can modify the [data and context][] the RUM Browser SDK collects to support your specific needs. Learn how to override default settings in [Advanced Configuration][].
+From here, you can modify the [data and context][2] the RUM Browser SDK collects to support your specific needs. Learn how to override default settings in [Advanced Configuration][3].
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /real_user_monitoring/browser/setup/#setup
-[2]: /real_user_monitoring/browser/advanced_configuration/
+[2]: /real_user_monitoring/browser/data_collected/
+[3]: /real_user_monitoring/browser/advanced_configuration/
