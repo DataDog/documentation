@@ -89,23 +89,6 @@ To use CSM Identity Risks, you must [enable resource collection for AWS][105]. I
 - Although not required, when you [enable CloudTrail logs forwarding][107], you get additional insights based on the actual usage (or non-usage) of resources in your infrastructure, for example, users and roles with significant gaps between provisioned and used permissions.
 </br>
 
-## Scope of coverage
-
-The following table summarizes the scope of coverage available relative to each CSM feature.
-| Resources monitored                        | CSM Misconfigurations | CSM Threats | CSM Vulnerabilities  | CSM Identity Risks | CSM Agentless scanning |
-| ----------------------------------------| --------------------- | ----------- | -------------------- | ------------------- | ----------------------| 
-| Resources in AWS Account                | {{< X >}}             |             |                      |                     |  {{< X >}}
-| Resources in Azure Subscription         | {{< X >}}             |             |                      |                     | 
-| Resources in GCP Project                | {{< X >}}             |             |                      |                     |  
-| Kubernetes Cluster                      | {{< X >}}             | {{< X >}}   |                      |                     |  
-| Docker Host                             | {{< X >}}             |             |                      |                     |
-| Linux Host                              | {{< X >}}             | {{< X >}}   |    {{< X >}}         |                     |  {{< X >}}
-| Docker Container                        |                       | {{< X >}}   |                      |                     |
-| Container Image                         |                       |             |    {{< X >}}         |                     |  {{< X >}}
-| IAM in AWS Account                      |                       |             |                      |  {{< X >}}          |
-
-**Note**: CSM Misconfigurations additionally monitors common resources used in your cloud accounts that are running Windows and AWS Fargate, such as EC2 instances, RDS, S3, and ELB.
-
 ## Next steps
 
 To get started setting up CSM, navigate to the [**Cloud Security Management Setup**][4] page in Datadog, which has detailed steps on how to configure CSM. For detailed setup instructions, see the [CSM Enterprise][1], [CSM Pro][2], [CSM Workload Security][3], and [CSM Agentless Scanning][12] setup docs.
