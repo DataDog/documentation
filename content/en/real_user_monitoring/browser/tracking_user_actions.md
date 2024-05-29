@@ -105,11 +105,9 @@ For example:
 
 The Datadog Browser SDK uses different strategies to compute click action names:
 
-1. If the `data-dd-action-name` attribute or a custom attribute (as explained above) is explicitly set by the user on the clicked element, its value will be used as the action name.
+1. If the `data-dd-action-name` attribute or a custom attribute (as explained above) is explicitly set by the user on the clicked element (or one of its parents), its value will be used as the action name.
 
-2. If the attribute is not set, the SDK will check the closest parent element that has the attribute set. The value of the attribute on the parent element will be used as the action name.
-
-3. If no attribute is found on the clicked element or its parents, the action name will be determined based on the inner text of the element and its children. However, the inner text of children that have the `data-dd-action-name` attribute or a custom attribute set will be excluded from the action name.
+2. If no attribute is found on the clicked element and its parents, the SDK will then consider other attributes of the element and its **children**, such as `aria-label`, `name`, `placeholder`, etc. If these are also not found, the system will default to using the inner text. However, any children with a `data-dd-action-name` attribute or a custom attribute will be excluded from this process.
 
 ## Send custom actions
 
