@@ -14,7 +14,7 @@ further_reading:
 
 ## Overview
 
-Datadog Real User Monitoring (RUM) for browser monitoring enables you to visualize and analyze the real-time performance and user journeys of your application's individual users. Get insight into your application's front-end performance from the perspective of real users based on how they navigate your site through different web browsers, devices, operating systems, and networks.
+Datadog Real User Monitoring (RUM) provides deep insight into your application's frontend performance. Monitor real user data to optimize your web experience and provide exceptional user experiences. Correlate synthetic tests, backend metrics, traces, and logs in a single place to identify and troubleshoot performance issues across the stack.
 
 Datadog helps you understand the current level of user experience, identify areas for improvement, and measure the success of each change and/or deployment. Use this information to identify and resolve unexpected front-end issues before users are impacted to deliver the best experience.
 
