@@ -75,87 +75,74 @@ In addition to tests, Test Visibility provides visibility over the whole testing
 
 
 
-
-{{< ci-details title="Accurate time/durations results" >}}Microseconds resolution in test start time and duration.{{< /ci-details >}}
 |   .NET    | Java/JVM&#8209;based |       Javascript       |  Python   |   Ruby    |   Swift   |       JUnit Xml        |
 |:---------:|:--------------------:|:----------------------:|:---------:|:---------:|:---------:|:----------------------:|
+
+
+{{< ci-details title="Accurate time/durations results" >}}Microseconds resolution in test start time and duration.{{< /ci-details >}}
 | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}} | {{< X >}} |                        |
+|:---------:|:--------------------:|:----------------------:|:---------:|:---------:|:---------:|:----------------------:|
 
 
 {{< ci-details title="Distributed traces on integration tests" >}}Tests that make calls to external services instrumented with Datadog show the full distributed trace in their test details.{{< /ci-details >}}
-|   .NET    | Java/JVM&#8209;based |       Javascript       |  Python   |   Ruby    |   Swift   |       JUnit Xml        |
-|:---------:|:--------------------:|:----------------------:|:---------:|:---------:|:---------:|:----------------------:|
 | {{< X >}} |       {{< X >}}      |       {{< X >}}        |           | {{< X >}} | {{< X >}} |                        |
+|:---------:|:--------------------:|:----------------------:|:---------:|:---------:|:---------:|:----------------------:|
 
 {{< ci-details title="Agent-based reporting" >}}Ability to report test information through the Datadog Agent.{{< /ci-details >}}
-|   .NET    | Java/JVM&#8209;based |       Javascript       |  Python   |   Ruby    |   Swift   |       JUnit Xml        |
-|:---------:|:--------------------:|:----------------------:|:---------:|:---------:|:---------:|:----------------------:|
 | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}} | {{< X >}} |                        |
+|:---------:|:--------------------:|:----------------------:|:---------:|:---------:|:---------:|:----------------------:|
 
 {{< ci-details title="Agentless reporting" >}}Ability to report test information without the Datadog Agent.{{< /ci-details >}}
-|   .NET    | Java/JVM&#8209;based |       Javascript       |  Python   |   Ruby    |   Swift   |       JUnit Xml        |
-|:---------:|:--------------------:|:----------------------:|:---------:|:---------:|:---------:|:----------------------:|
 | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}} | {{< X >}} |       {{< X >}}        |
+|:---------:|:--------------------:|:----------------------:|:---------:|:---------:|:---------:|:----------------------:|
 
 {{< ci-details title="Test suite level visibility" >}}Visibility over the whole testing process, including session, module, suites, and tests.{{< /ci-details >}}
-|   .NET    | Java/JVM&#8209;based |       Javascript       |  Python   |   Ruby    |   Swift   |       JUnit Xml        |
-|:---------:|:--------------------:|:----------------------:|:---------:|:---------:|:---------:|:----------------------:|
 | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}} | {{< X >}} |       {{< X >}}        |
+|:---------:|:--------------------:|:----------------------:|:---------:|:---------:|:---------:|:----------------------:|
 
 {{< ci-details title="Manual API" >}}Ability to programmatically create CI Visibility events for test frameworks that are not supported by Datadog's automatic instrumentation.{{< /ci-details >}}
-|   .NET    | Java/JVM&#8209;based |       Javascript       |  Python   |   Ruby    |   Swift   |       JUnit Xml        |
-|:---------:|:--------------------:|:----------------------:|:---------:|:---------:|:---------:|:----------------------:|
 | {{< X >}} |       {{< X >}}      |       {{< X >}}        |           | {{< X >}} | {{< X >}} |                        |
+|:---------:|:--------------------:|:----------------------:|:---------:|:---------:|:---------:|:----------------------:|
 
 {{< ci-details title="Codeowner by test" >}}Automatic detection of the owner of a test file based on the CODEOWNERS file.{{< /ci-details >}}
-|   .NET    | Java/JVM&#8209;based |       Javascript       |  Python   |   Ruby    |   Swift   |       JUnit Xml        |
-|:---------:|:--------------------:|:----------------------:|:---------:|:---------:|:---------:|:----------------------:|
 | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} (partially)  |
+|:---------:|:--------------------:|:----------------------:|:---------:|:---------:|:---------:|:----------------------:|
 
 {{< ci-details title="Source code start/end" >}}Automatic report of the start and end lines of a test.{{< /ci-details >}}
-|   .NET    | Java/JVM&#8209;based |       Javascript       |  Python   |   Ruby    |   Swift   |       JUnit Xml        |
-|:---------:|:--------------------:|:----------------------:|:---------:|:---------:|:---------:|:----------------------:|
 | {{< X >}} |       {{< X >}}      | {{< X >}} (only start) | {{< X >}} | {{< X >}} (only start) | {{< X >}} | {{< X >}} (only start) |
+|:---------:|:--------------------:|:----------------------:|:---------:|:---------:|:---------:|:----------------------:|
 
 {{< ci-details title="CI and git info" >}}Automatic collection of git and CI environment metadata, such as CI provider, git commit SHA or pipeline URL.{{< /ci-details >}}
-|   .NET    | Java/JVM&#8209;based |       Javascript       |  Python   |   Ruby    |   Swift   |       JUnit Xml        |
-|:---------:|:--------------------:|:----------------------:|:---------:|:---------:|:---------:|:----------------------:|
 | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}} | {{< X >}} |       {{< X >}}        |
+|:---------:|:--------------------:|:----------------------:|:---------:|:---------:|:---------:|:----------------------:|
 
 {{< ci-details title="Git metadata upload" >}}Automatic upload of git tree information used for Intelligent Test Runner.{{< /ci-details >}}
-|   .NET    | Java/JVM&#8209;based |       Javascript       |  Python   |   Ruby    |   Swift   |       JUnit Xml        |
-|:---------:|:--------------------:|:----------------------:|:---------:|:---------:|:---------:|:----------------------:|
 | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} |           | {{< X >}} |       {{< X >}}        |
+|:---------:|:--------------------:|:----------------------:|:---------:|:---------:|:---------:|:----------------------:|
 
 {{< ci-details title="Intelligent Test Runner *" >}}Capability to enable Intelligent Test Runner, which intelligently skips tests based on code coverage and git metadata.{{< /ci-details >}}
-|   .NET    | Java/JVM&#8209;based |       Javascript       |  Python   |   Ruby    |   Swift   |       JUnit Xml        |
-|:---------:|:--------------------:|:----------------------:|:---------:|:---------:|:---------:|:----------------------:|
 | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} |  {{< X >}}     | {{< X >}} |                        |
+|:---------:|:--------------------:|:----------------------:|:---------:|:---------:|:---------:|:----------------------:|
 
 {{< ci-details title="Code coverage support" >}}Ability to report total code coverage metrics.{{< /ci-details >}}
-|   .NET    | Java/JVM&#8209;based |       Javascript       |  Python   |   Ruby    |   Swift   |       JUnit Xml        |
-|:---------:|:--------------------:|:----------------------:|:---------:|:---------:|:---------:|:----------------------:|
 | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}}       |           | {{< X >}} |   {{< X >}} (manual)   |
+|:---------:|:--------------------:|:----------------------:|:---------:|:---------:|:---------:|:----------------------:|
 
 {{< ci-details title="Benchmark tests support" >}}Automatic detection of performance statistics for benchmark tests.{{< /ci-details >}}
-|   .NET    | Java/JVM&#8209;based |       Javascript       |  Python   |   Ruby    |   Swift   |       JUnit Xml        |
-|:---------:|:--------------------:|:----------------------:|:---------:|:---------:|:---------:|:----------------------:|
 | {{< X >}} |                      |                        | {{< X >}} |           | {{< X >}} |                        |
+|:---------:|:--------------------:|:----------------------:|:---------:|:---------:|:---------:|:----------------------:|
 
 {{< ci-details title="Parameterized tests" >}}Automatic detection of parameterized tests.{{< /ci-details >}}
-|   .NET    | Java/JVM&#8209;based |       Javascript       |  Python   |   Ruby    |   Swift   |       JUnit Xml        |
-|:---------:|:--------------------:|:----------------------:|:---------:|:---------:|:---------:|:----------------------:|
 | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}} | {{< X >}} |                        |
+|:---------:|:--------------------:|:----------------------:|:---------:|:---------:|:---------:|:----------------------:|
 
 {{< ci-details title="Early flake detection *" >}}Automatically retry new tests to detect flakiness.{{< /ci-details >}}
-|   .NET    | Java/JVM&#8209;based |       Javascript       |  Python   |   Ruby    |   Swift   |       JUnit Xml        |
-|:---------:|:--------------------:|:----------------------:|:---------:|:---------:|:---------:|:----------------------:|
 | {{< X >}} |       {{< X >}}      |       {{< X >}}        |           |           |           |                        |
+|:---------:|:--------------------:|:----------------------:|:---------:|:---------:|:---------:|:----------------------:|
 
 {{< ci-details title="Selenium RUM integration" >}}Automatically link browser sessions to test cases when testing RUM-instrumented applications.{{< /ci-details >}}
-|   .NET    | Java/JVM&#8209;based |       Javascript       |  Python   |   Ruby    |   Swift   |       JUnit Xml        |
-|:---------:|:--------------------:|:----------------------:|:---------:|:---------:|:---------:|:----------------------:|
 | {{< X >}} |       {{< X >}}      |       {{< X >}}        |           |           |           |                        |
+|:---------:|:--------------------:|:----------------------:|:---------:|:---------:|:---------:|:----------------------:|
 
 
 \* The feature is opt-in, and needs to be enabled on the [**Test Service Settings** page][5].
