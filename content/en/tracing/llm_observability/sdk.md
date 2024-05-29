@@ -16,7 +16,7 @@ The LLM Observability SDK for Python enhances the observability of your Python-b
 
 You can install and configure tracing of various operations such as workflows, tasks, and API calls with function decorators or context managers. You can also annotate these traces with metadata for deeper insights into the performance and behavior of your applications, supporting multiple LLM services or models from the same environment.
 
-For usage examples you can run from a Jupyter notebook, see the [LLM Observability onboarding repository][10].
+For usage examples you can run from a Jupyter notebook, see the [LLM Observability Jupyter Notebooks repository][10].
 
 ## Setup
 

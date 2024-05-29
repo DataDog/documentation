@@ -13,7 +13,7 @@ Our quickstart docs make use of the LLM Observability SDK for Python. For detail
 
 ## Jupyter notebook quickstart
 
-To run existing examples from Jupyter notebooks, see the [LLM Observability onboarding repository][12] for instructions.
+To run examples from Jupyter notebooks, see the [LLM Observability Jupyter Notebooks repository][12].
 
 ## Command-line quickstart
 
