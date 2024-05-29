@@ -133,28 +133,6 @@ Datadog Agent と OpenTelemetry Collector Datadog エクスポーターは、デ
 
 `resource_attributes_as_tags` フラグを使用すると、すべてのリソースの属性をタグとして追加することができます。
 
-### ホスト名解決
-
-OpenTelemetry は、ホスト名に関する特定のセマンティック規則を定義しています。OTLP ペイロードが既知のホスト名属性を持つ場合、Datadog はこれらの規則に従い、その値をホスト名として使用しようとします。セマンティック規則は、以下の順序で考慮されます。
-
-1. 存在する場合に二重タグを避ける `host` 属性。
-1. `datadog.host.name`、Datadog 固有のホスト名規則
-1. クラウドプロバイダー固有の規則、`cloud.provider` セマンティック規則がベース
-1. Kubernetes 固有のセマンティック規約である `k8s.node.name` と `k8s.cluster.name`
-1. `host.id`、一意のホスト ID
-1. `host.name`、システムホスト名
-
-以下のホスト名は無効とみなされ、破棄されます。
-1. `0.0.0.0`
-1. `127.0.0.1`
-1. `localhost`
-1. `localhost.localdomain`
-1. `localhost6.localdomain6`
-1. `ip6-localhost`
-
-有効なホスト名が存在しない場合、Datadog はペイロードにシステムレベルのホスト名を割り当てます。
-リモートホストからデータを送信する場合、パイプラインに ['resource detection' プロセッサー][1]を追加することで、正確なホスト名解決を行うことができます。
-
 ### 例
 
 {{< tabs >}}
@@ -205,7 +183,7 @@ OpenTelemetry Histogram インスツルメントである `request.response_time
 
 また、`counters` モードを使用し、`send_aggregation_metrics` フラグを有効にし、ヒストグラムのバケットの境界を `[-inf, 2, inf]` とした場合、以下のメトリクスが報告されます。
 
-| メトリクス名                                 | 値  | タグ                                | Datadog アプリ内タイプ |
+| メトリクス名                                 | 値  | Lambda のトレースされた起動の 1 時間単位使用量の取得                                | Datadog アプリ内タイプ |
 | ------------------------------------------- | ------ | ------------------------------------| ------------------- |
 | `request.response_time.distribution.count`  | `8`    | 非該当                                 | COUNT               |
 | `request.response_time.distribution.sum`    | `15`   | 非該当                                 | COUNT               |
@@ -220,7 +198,7 @@ OpenTelemetry Histogram インスツルメントである `request.response_time
 
 レガシー OTLP Summary のメトリクス、`request.response_time.summary` をあるウェブサーバーから送信しているとします。ある収集期間において、ウェブサーバーは `[1,1,1,2,2,3,3]` という値でメトリクスを報告したとします。最小分位数、最大分位数、および中央値分位数が有効になっている場合、次のメトリクスが報告されます。
 
-| メトリクス名                                   | 値  | タグ                                | Datadog アプリ内タイプ |
+| メトリクス名                                   | 値  | Lambda のトレースされた起動の 1 時間単位使用量の取得                                | Datadog アプリ内タイプ |
 | --------------------------------------------- | ------ | ------------------------------------| ------------------- |
 | `request.response_time.distribution.count`    | `8`    | 非該当                                 | COUNT               |
 | `request.response_time.distribution.sum`      | `15`   | 非該当                                 | COUNT               |
@@ -237,6 +215,6 @@ OpenTelemetry Histogram インスツルメントである `request.response_time
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/resourcedetectionprocessor#resource-detection-processor
+[1]: /ja/opentelemetry/schema_semantics/hostname/
 [2]: https://opentelemetry.io/docs/reference/specification/metrics/data-model/#temporality
 [3]: /ja/opentelemetry/guide/otlp_delta_temporality/

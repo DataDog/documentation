@@ -34,7 +34,7 @@
     "accept_self_signed": false,
     "allow_insecure": true,
     "device_ids": [
-      "tablet"
+      "chrome.laptop_large"
     ],
     "disableCors": true,
     "follow_redirects": true,

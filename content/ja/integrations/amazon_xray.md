@@ -11,7 +11,7 @@ doc_link: https://docs.datadoghq.com/integrations/amazon_xray/
 draft: false
 git_integration_title: amazon_xray
 has_logo: true
-integration_id: amazon-xray
+integration_id: ''
 integration_title: AWS X-Ray
 integration_version: ''
 is_public: true
@@ -23,6 +23,7 @@ short_description: AWS サービス間で交わされるリクエストをトレ
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">Datadog AWS Lambda X-Ray インテグレーションは、商用 AWS アカウントでのみサポートされます。商用 Lambda アカウントがない場合、Datadog AWS Lambda X-Ray インテグレーションは Datadog for Government サイトではサポートされません。</div>
 
@@ -31,9 +32,9 @@ version: '1.0'
 
 AWS X-Ray を使用すると、開発者は AWS 製品を使用して構築された分散アプリケーションをトレースできます。このインテグレーションは、[サーバーレス][1]関数詳細ページで Lambda 関数のトレースを提供します。詳細については、[サーバーレス監視][2]を参照してください。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 最初に、[AWS インテグレーションを有効化][3]し、以下のアクセス許可が Datadog インテグレーションロールのポリシードキュメントに含まれていることを確認します。
 
@@ -62,7 +63,7 @@ Datadog は、Datadog APM クライアントが生成したスパンやメタデ
 1. Lambda 関数に[Datadog サーバーレスモニタリングをインストール][10]します。
 2. Lambda 関数で環境変数 `DD_MERGE_XRAY_TRACES` を `true` に設定します。
 
-## 収集データ
+## リアルユーザーモニタリング
 
 AWS X-Ray インテグレーションは、AWS からトレースデータを取得しますが、メトリクスやログは収集しません。
 

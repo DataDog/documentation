@@ -153,7 +153,7 @@ LD_LIBRARY_PATH=/usr/local/lib/ ./tracer_example
 2019-08-09 20:02:26 UTC | TRACE | INFO | (pkg/trace/info/stats.go:108 in LogStats) | [lang:cpp lang_version:201402 tracer_version:v1.0.1] -> traces received: 1, traces filtered: 0, traces amount: 363 bytes, events extracted: 0, events sampled: 0
 ```
 
-すると、Datadog の APM サービスページにサービスが次のように表示されます。
+その後、そのサービスは Datadog のサービスカタログに表示されます。
 
 {{< img src="tracing/guide/setting_up_APM_with_cpp/apm_services_page.png" alt="APM Services ページ" >}}
 

@@ -13,7 +13,7 @@ doc_link: https://docs.datadoghq.com/integrations/amazon_ops_works/
 draft: false
 git_integration_title: amazon_ops_works
 has_logo: true
-integration_id: amazon-opsworks
+integration_id: ''
 integration_title: AWS OpsWorks
 integration_version: ''
 is_public: true
@@ -25,15 +25,16 @@ short_description: AWS OpsWorks のリソース使用状況を追跡。
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 AWS OpsWorks は、あらゆる形式と規模のアプリケーションを簡単にデプロイして運用できるようにするアプリケーション管理サービスです。
 
 このインテグレーションを有効にすると、Datadog にすべての OpsWorks メトリクスを表示できます。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 
@@ -42,7 +43,7 @@ AWS OpsWorks は、あらゆる形式と規模のアプリケーションを簡�
 1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `OpsWorks` が有効になっていることを確認します。
 2. [Datadog - AWS OpsWork インテグレーション][3]をインストールします。
 
-### ログの収集
+### 収集データ
 
 #### ログの有効化
 
@@ -58,23 +59,23 @@ AWS OpsWorks から S3 バケットまたは CloudWatch のいずれかにログ
     - [S3 バケットに手動トリガーを追加][5]
     - [CloudWatch ロググループに手動トリガーを追加][6]
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "amazon_ops_works" >}}
 
 
 AWS から取得される各メトリクスには、ホスト名やセキュリティ グループなど、AWS コンソールに表示されるのと同じタグが割り当てられます。
 
-### イベント
+### ヘルプ
 
 AWS OpsWorks インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 
 AWS OpsWorks インテグレーションには、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 

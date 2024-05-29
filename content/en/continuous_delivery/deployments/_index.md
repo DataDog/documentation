@@ -24,14 +24,16 @@ CD Visibility is in private beta. To request access, complete the form.
 
 ## Overview
 
-[Deployment Visibility][1] provides a deployment-first view into your CD health by displaying important metrics and results from your deployments. 
+[Deployment Visibility][1] provides a deployment-first view into your CD health by displaying important metrics and results from your deployments.
 
 ## Setup
 
-{{< whatsnext desc="Select your CD provider to set up Deployment Visibility in Datadog:" >}}
-    {{< nextlink href="continuous_delivery/deployments/argocd" >}}ArgoCD{{< /nextlink >}}
+{{< whatsnext desc="Select your deployments provider to set up CD Visibility in Datadog:" >}}
+    {{< nextlink href="continuous_delivery/deployments/argocd" >}}Argo CD{{< /nextlink >}}
+    {{< nextlink href="continuous_delivery/deployments/ciproviders" >}}CI Providers (GitLab, Jenkins, CircleCI, and more){{< /nextlink >}}
 {{< /whatsnext >}}
-<div class="alert alert-warning">If your CD provider is not supported, <a href="https://docs.google.com/forms/d/e/1FAIpQLSeHpvshBu20v6qqMrAjMpUJrwYpRlaGai1mkAPsPU78hWZOKA/viewform?usp=sf_link">you can fill out this form to request support</a>.</div>
+
+<div class="alert alert-warning">If you are using a provider that is not supported, <a href="https://docs.google.com/forms/d/e/1FAIpQLSeHpvshBu20v6qqMrAjMpUJrwYpRlaGai1mkAPsPU78hWZOKA/viewform?usp=sf_link">fill out this form to request support</a>.</div>
 
 ## Use deployment data
 
@@ -40,6 +42,8 @@ When creating a [dashboard][2] or a [notebook][3], you can use deployment data i
 ## Share deployment data
 
 You can export your search query to a [saved view][6] by clicking the **Export** button.
+
+{{< img src="continuous_delivery/explorer/deployment_executions.png" alt="Deployment execution results appearing in the CD Visibility Explorer" width="100%" >}}
 
 ## Further reading
 

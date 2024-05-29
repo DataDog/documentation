@@ -8,7 +8,7 @@ doc_link: https://docs.datadoghq.com/integrations/amazon_network_firewall/
 draft: false
 git_integration_title: amazon_network_firewall
 has_logo: true
-integration_id: amazon-network-firewall
+integration_id: ''
 integration_title: AWS Network Firewall
 integration_version: ''
 is_public: true
@@ -20,15 +20,16 @@ short_description: AWS Network Firewall を監視します。
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 AWS Network Firewall は、VPC の境界でトラフィックを絞り込むことができるステートフルなサービスです。
 
 このインテグレーションを有効にすると、すべての AWS Network Firewall メトリクスを Datadog に表示できます。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 
@@ -38,7 +39,7 @@ AWS Network Firewall は、VPC の境界でトラフィックを絞り込むこ�
 
 2. [Datadog - AWS Network Firewall インテグレーション][3]をインストールします。
 
-### ログの収集
+### 収集データ
 
 #### ログの有効化
 
@@ -54,23 +55,23 @@ AWS Network Firewall から S3 バケットまたは CloudWatch のいずれか�
     - [S3 バケットに手動トリガーを追加][5]
     - [CloudWatch ロググループに手動トリガーを追加][6]
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "amazon_network_firewall" >}}
 
 
 AWS から取得される各メトリクスには、ホスト名やセキュリティ グループなど、AWS コンソールに表示されるのと同じタグが割り当てられます。
 
-### イベント
+### ヘルプ
 
 AWS Network Firewall インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 
 AWS Network Firewall インテグレーションには、サービスチェックは含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 

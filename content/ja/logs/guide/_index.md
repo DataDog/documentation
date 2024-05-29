@@ -15,13 +15,14 @@ title: ログガイド
     {{< nextlink href="logs/guide/getting-started-lwl" >}}Logging Without Limits™ ガイド{{< /nextlink >}}
     {{< nextlink href="logs/guide/correlate-logs-with-metrics" >}}ログとメトリクスの相関{{< /nextlink >}}
     {{< nextlink href="logs/guide/best-practices-for-log-management" >}}ログ管理のベストプラクティス{{< /nextlink >}}
+    {{< nextlink href="logs/guide/manage_logs_and_metrics_with_terraform" >}}Terraform によるログとメトリクスの管理{{< /nextlink >}}
 {{< /whatsnext >}}
 
 <br>
 
 {{< whatsnext desc="Log Collection" >}}
     {{< nextlink href="/agent/logs/advanced_log_collection" >}}高度なログ収集の構成{{< /nextlink >}}
-    {{< nextlink href="/logs/guide/send-aws-services-logs-with-the-datadog-kinesis-firehose-destination/" >}}Datadog Kinesis Firehose Destination を使用して AWS サービスログを送信する{{< /nextlink >}}
+    {{< nextlink href="/logs/guide/send-aws-services-logs-with-the-datadog-kinesis-firehose-destination/" >}}Datadog Amazon Data Firehose Destination を使用して AWS サービスログを送信する{{< /nextlink >}}
     {{< nextlink href="/logs/guide/sending-events-and-logs-to-datadog-with-amazon-eventbridge-api-destinations/" >}}Amazon EventBridge API Destination を使用して Datadog にイベントとログを送信する{{< /nextlink >}}
     {{< nextlink href="/logs/guide/forwarder/" >}}Datadog Lambda Forwarder を設定する{{< /nextlink >}}
     {{< nextlink href="/logs/guide/apigee" >}}Apigee ログを収集する{{< /nextlink >}}
@@ -40,7 +41,7 @@ title: ログガイド
     {{< nextlink href="/logs/guide/container-agent-to-tail-logs-from-host" >}}Container Agent を使用してホストからログを追跡する{{< /nextlink >}}
     {{< nextlink href="/logs/guide/mechanisms-ensure-logs-not-lost" >}}ログを失わないための仕組み{{< /nextlink >}}
     {{< nextlink href="/logs/guide/custom-log-file-with-heightened-read-permissions" >}}高度な読み取り権限を持つカスタムログファイルからログを送信する{{< /nextlink >}} 
-    {{< nextlink href="/logs/guide/aws-eks-fargate-logs-with-kinesis-data-firehose" >}}Kinesis Data Firehose で AWS EKS Fargate のログを送信する{{< /nextlink >}}
+    {{< nextlink href="/logs/guide/aws-eks-fargate-logs-with-kinesis-data-firehose" >}}Amazon Data Firehose で Amazon EKS Fargate のログを送信する{{< /nextlink >}}
 {{< /whatsnext >}}
 
 <br>

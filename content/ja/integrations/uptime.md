@@ -33,7 +33,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: uptime
-oauth: {}
 public_title: Uptime.com
 short_description: アップタイムとパフォーマンスの監視を容易に実行
 supported_os:

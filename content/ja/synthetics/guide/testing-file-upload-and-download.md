@@ -53,5 +53,5 @@ Datadog のブラウザテストおよび `Test a downloaded file` アサーシ�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/synthetics/browser_tests/actions/#upload
+[1]: /ja/synthetics/browser_tests/actions/#upload-file
 [2]: /ja/synthetics/browser_tests/actions/#assertion

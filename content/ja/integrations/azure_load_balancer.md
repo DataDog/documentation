@@ -22,33 +22,34 @@ short_description: Azure Load Balancer のキーメトリクスを追跡
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Azure Load Balancer は、インバウンドとアウトバウンドのどちらのシナリオもサポートし、低レイテンシーと高スループットを実現して、あらゆる TCP および UDP アプリケーションの数百万のフローにスケールアップできます。
 
 Datadog Azure インテグレーションを使用して、Azure Load Balancer からメトリクスを収集できます。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 [Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "azure_load_balancer" >}}
 
 
-### イベント
+### ヘルプ
 
 Azure Load Balancer インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 
 Azure Load Balancer インテグレーションには、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 

@@ -2,6 +2,7 @@
 title: static application security testing (SAST)
 synonyms:
   - static analysis
+  - code analysis
 core_product:
   - security
   - appsec

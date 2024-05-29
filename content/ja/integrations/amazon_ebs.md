@@ -3,7 +3,7 @@ aliases:
 - /ja/integrations/awsebs/
 categories:
 - cloud
-- data store
+- data stores
 - aws
 - log collection
 dependencies: []
@@ -12,7 +12,7 @@ doc_link: https://docs.datadoghq.com/integrations/amazon_ebs/
 draft: false
 git_integration_title: amazon_ebs
 has_logo: true
-integration_id: amazon-ebs
+integration_id: ''
 integration_title: Amazon Elastic Block Store
 integration_version: ''
 is_public: true
@@ -24,26 +24,27 @@ short_description: スナップショットの経過時間、IOPS、読み取り
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Amazon EBS は、AWS Cloud 内の Amazon EC2 インスタンスと共に使用される永続的ブロックストレージボリュームです。
 
 このインテグレーションを有効にすると、Datadog にすべての EBS メトリクスを表示できます。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 
 ### メトリクスの収集
 
 1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `EBS` が有効になっていることを確認します。
-2. [Datadog - AWS EBS インテグレーション][3]をインストールします。
+2. [Datadog - Amazon EBS インテグレーション][3]をインストールします。
 
 **注**: このインテグレーションは、監視対象の EC2 に接続された EBS ボリュームのメトリクスを収集します。すべての EBS メトリクスを収集するには、[AWS インテグレーションページ][2]で EC2 にチェックを入れ、[リソース収集を制限する][4]設定で EC2 を監視対象から除外していないことを確認します。
 
-### ログの収集
+### 収集データ
 
 #### ログの有効化
 
@@ -59,23 +60,23 @@ Amazon EBS から S3 バケットまたは CloudWatch のいずれかにログ�
     - [S3 バケットに手動トリガーを追加][6]
     - [CloudWatch ロググループに手動トリガーを追加][7]
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "amazon_ebs" >}}
 
 
 AWS から取得される各メトリクスには、ホスト名やセキュリティ グループなど、AWS コンソールに表示されるのと同じタグが割り当てられます。
 
-### イベント
+### ヘルプ
 
-AWS EBS インテグレーションには、イベントは含まれません。
+Amazon EBS インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 
-AWS EBS インテグレーションには、サービスのチェック機能は含まれません。
+Amazon EBS インテグレーションには、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
 

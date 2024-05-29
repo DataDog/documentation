@@ -1,4 +1,7 @@
 ---
+cascade:
+  algolia:
+    rank: 70
 further_reading:
 - link: /data_security/logs/
   tag: ドキュメント
@@ -12,10 +15,10 @@ further_reading:
 - link: /tracing/configure_data_security/
   tag: ドキュメント
   text: トレースのデータセキュリティ
-- link: /real_user_monitoring/browser/modifying_data_and_context/
+- link: /data_security/real_user_monitoring/
   tag: ドキュメント
   text: RUM のデータセキュリティ
-- link: /real_user_monitoring/session_replay/privacy_options
+- link: /real_user_monitoring/session_replay/browser/privacy_options
   tag: ドキュメント
   text: セッションリプレイのプライバシーオプション
 - link: /sensitive_data_scanner/
@@ -143,7 +146,7 @@ Continuous Integration のパイプラインとテスト
 [2]: https://www.datadoghq.com/legal/privacy/
 [3]: /ja/developers/dogstatsd/
 [4]: /ja/data_security/agent/
-[5]: /ja/agent/guide/secrets-management/
+[5]: /ja/agent/configuration/secrets-management/
 [6]: /ja/integrations/amazon_web_services/
 [7]: https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#delegate-using-roles
 [8]: /ja/integrations/azure/
@@ -159,8 +162,8 @@ Continuous Integration のパイプラインとテスト
 [18]: /ja/tracing/configure_data_security/
 [19]: /ja/serverless/distributed_tracing/collect_lambda_payloads#obfuscating-payload-contents
 [20]: /ja/data_security/synthetics/
-[21]: /ja/real_user_monitoring/browser/modifying_data_and_context/
-[22]: /ja/real_user_monitoring/session_replay/privacy_options
+[21]: /ja/real_user_monitoring/browser/advanced_configuration/
+[22]: /ja/real_user_monitoring/session_replay/browser/privacy_options
 [23]: /ja/database_monitoring/data_collected/#sensitive-information
 [24]: /ja/getting_started/tagging/
 [25]: /ja/tracing/glossary/

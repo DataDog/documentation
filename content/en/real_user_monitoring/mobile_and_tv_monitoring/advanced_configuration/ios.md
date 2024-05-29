@@ -8,11 +8,14 @@ aliases:
     - /real_user_monitoring/ios/advanced_configuration
 further_reading:
   - link: "https://github.com/DataDog/dd-sdk-ios"
-    tag: "Github"
+    tag: "Source Code"
     text: "Source code for dd-sdk-ios"
   - link: "/real_user_monitoring"
     tag: "Documentation"
     text: "RUM & Session Replay"
+  - link: "/real_user_monitoring/mobile_and_tv_monitoring/supported_versions/ios/"
+    tag: "Documentation"
+    text: "RUM iOS and tvOS monitoring supported versions"
 ---
 
 If you have not set up the RUM iOS SDK yet, follow the [in-app setup instructions][1] or refer to the [RUM iOS setup documentation][2].
@@ -137,7 +140,7 @@ let rum = RUMMonitor.shared()
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: When using `.startAction(type:name:)` and `.stopAction(type:name:)`, the action `type` must be the same. This is necessary for the RUM iOS SDK to match an action start with its completion. 
+**Note**: When using `.startAction(type:name:)` and `.stopAction(type:name:)`, the action `type` must be the same. This is necessary for the RUM iOS SDK to match an action start with its completion.
 
 Find more details and available options in the [`DDRUMMonitor` class][9].
 
@@ -221,9 +224,9 @@ Custom attributes allow you to filter and group information about observed user 
 
 To set a custom global attribute, use `RUMMonitor.shared().addAttribute(forKey:value:)`.
 
-* To add an attribute, use `RUMMonitor.shared().addAttribute(forKey: "some key", value: "some value")`.
-* To update the value, use `RUMMonitor.shared().addAttribute(forKey: "some key", value: "some other value")`.
-* To remove the key, use `RUMMonitor.shared().removeAttribute(forKey: "some key")`.
+* To add an attribute, use `RUMMonitor.shared().addAttribute(forKey: "<KEY>", value: "<VALUE>")`.
+* To update the value, use `RUMMonitor.shared().addAttribute(forKey: "<KEY>", value: "<UPDATED_VALUE>")`.
+* To remove the key, use `RUMMonitor.shared().removeAttribute(forKey: "<KEY_TO_REMOVE>")`.
 
 ### Track user sessions
 
@@ -306,6 +309,9 @@ You can use the following properties in `RUM.Configuration` when enabling RUM:
 
 `vitalsUpdateFrequency`
 : Sets the preferred frequency of collecting mobile vitals. Available values include: `.frequent` (every 100ms), `.average` (every 500ms), `.rare` (every 1s), and `.never` (disable vitals monitoring).
+
+`appHangThreshold`
+: Sets the threshold for reporting app hangs. The minimum allowed value for this option is `0.1` seconds. To disable app hangs reporting, set this to `nil`. For more information, see [Add app hang reporting][10].
 
 ### Automatically track views
 
@@ -487,7 +493,7 @@ let session = URLSession(
 
 This tracks all requests sent with the instrumented `session`. Requests matching the `example.com` domain are marked as "first party" and tracing information is sent to your backend to [connect the RUM resource with its Trace][1].
 
-[1]: https://docs.datadoghq.com/real_user_monitoring/connect_rum_and_traces?tab=browserrum
+[1]: https://docs.datadoghq.com/real_user_monitoring/platform/connect_rum_and_traces?tab=browserrum
 
 {{% /tab %}}
 {{% tab "Objective-C" %}}
@@ -528,7 +534,6 @@ If you don't want to track requests, you can disable URLSessionInstrumentation f
 
 {{< tabs >}}
 {{% tab "Swift" %}}
-```swift
 ```swift
 URLSessionInstrumentation.disable(delegateClass: SessionDelegate.self)
 ```
@@ -705,29 +710,6 @@ For example, if the current tracking consent is `.pending`:
 - If you change the value to `.granted`, the RUM iOS SDK sends all current and future data to Datadog;
 - If you change the value to `.notGranted`, the RUM iOS SDK wipes all current data and does not collect future data.
 
-## Sample RUM sessions
-
-To control the data your application sends to Datadog RUM, you can specify a sampling rate for RUM sessions while [initializing the RUM iOS SDK][1] as a percentage between 0 and 100.
-
-For example, to only keep 50% of sessions use:
-
-{{< tabs >}}
-{{% tab "Swift" %}}
-```swift
-let configuration = RUM.Configuration(
-    applicationID: "<rum application id>",
-    sessionSampleRate: 50
-)
-```
-{{% /tab %}}
-{{% tab "Objective-C" %}}
-```objective-c
-DDRUMConfiguration *configuration = [[DDRUMConfiguration alloc] initWithApplicationID:@"<rum application id>"];
-configuration.sessionSampleRate = 50;
-```
-{{% /tab %}}
-{{< /tabs >}}
-
 ## Sending data when device is offline
 
 RUM ensures availability of data when your user device is offline. In cases of low-network areas, or when the device battery is too low, all the RUM events are first stored on the local device in batches. They are sent as soon as the network is available, and the battery is high enough to ensure the RUM iOS SDK does not impact the end user's experience. If the network is not available while your application is in the foreground, or if an upload of data fails, the batch is kept until it can be sent successfully.
@@ -735,55 +717,6 @@ RUM ensures availability of data when your user device is offline. In cases of l
 This means that even if users open your application while offline, no data is lost.
 
 **Note**: The data on the disk is automatically discarded if it gets too old to ensure the RUM iOS SDK does not use too much disk space.
-
-## Configuring a custom proxy for Datadog data upload
-
-If your app is running on devices behind a custom proxy, you can inform the RUM iOS SDK's data uploader to ensure that all tracked data is uploaded with the relevant configuration.
-
-When initializing the iOS SDK, specify this in your proxy configuration.
-
-{{< tabs >}}
-{{% tab "Swift" %}}
-```swift
-import DatadogCore
-
-Datadog.initialize(
-  with: Datadog.Configuration(
-    clientToken: "<client token>",
-    env: "<environment>",
-    proxyConfiguration: [
-        kCFNetworkProxiesHTTPEnable: true,
-        kCFNetworkProxiesHTTPPort: 123,
-        kCFNetworkProxiesHTTPProxy: "www.example.com",
-        kCFProxyUsernameKey: "proxyuser",
-        kCFProxyPasswordKey: "proxypass"
-    ]
-  ),
-  trackingConsent: trackingConsent
-)
-```
-
-{{% /tab %}}
-{{% tab "Objective-C" %}}
-```objective-c
-@import DatadogObjc;
-
-DDConfiguration *configuration = [[DDConfiguration alloc] initWithClientToken:@"<client token>" env:@"<environment>"];
-configuration.proxyConfiguration = @{
-    (NSString *)kCFNetworkProxiesHTTPEnable: @YES,
-    (NSString *)kCFNetworkProxiesHTTPPort: @123,
-    (NSString *)kCFNetworkProxiesHTTPProxy: @"www.example.com",
-    (NSString *)kCFProxyUsernameKey: @"proxyuser",
-    (NSString *)kCFProxyPasswordKey: @"proxypass"
-}];
-
-[DDDatadog initializeWithConfiguration:configuration
-                       trackingConsent:trackingConsent];
-```
-{{% /tab %}}
-{{< /tabs >}}
-
-For more information, see the [URLSessionConfiguration.connectionProxyDictionary][8] documentation.
 
 ## Further Reading
 
@@ -794,7 +727,7 @@ For more information, see the [URLSessionConfiguration.connectionProxyDictionary
 [3]: /real_user_monitoring/ios/data_collected
 [4]: /real_user_monitoring/explorer/search/#setup-facets-and-measures
 [5]: /real_user_monitoring/ios/data_collected/?tab=error#error-attributes
-[6]: /real_user_monitoring/connect_rum_and_traces?tab=browserrum
+[6]: /real_user_monitoring/platform/connect_rum_and_traces?tab=browserrum
 [7]: /real_user_monitoring/ios/data_collected?tab=session#default-attributes
-[8]: https://developer.apple.com/documentation/foundation/urlsessionconfiguration/1411499-connectionproxydictionary
 [9]: https://github.com/DataDog/dd-sdk-ios/blob/56e972a6d3070279adbe01850f51cb8c0c929c52/DatadogObjc/Sources/RUM/RUM%2Bobjc.swift
+[10]: /real_user_monitoring/error_tracking/mobile/ios/#add-app-hang-reporting

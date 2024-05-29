@@ -36,7 +36,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: neoload
-oauth: {}
 public_title: NeoLoad
 short_description: Surveillez et analysez les résultats des tests de performance NeoLoad
 supported_os:

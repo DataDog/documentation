@@ -10,11 +10,14 @@ aliases:
     - /real_user_monitoring/reactnative/advanced_configuration/
 further_reading:
     - link: https://github.com/DataDog/dd-sdk-reactnative
-      tag: GitHub
+      tag: "Source Code"
       text: Source code for dd-sdk-reactnative
     - link: real_user_monitoring/reactnative/
       tag: Documentation
       text: Learn about React Native monitoring
+    - link: real_user_monitoring/guide/monitor-hybrid-react-native-applications
+      tag: Documentation
+      text: Monitor hybrid React Native applications
 ---
 
 ## Overview
@@ -207,7 +210,7 @@ Enables tracking of RUM event when no RUM View is active. By default, background
 `proxyConfig`
 : Optional<br/>
 **Type**: ProxyConfiguration<br/>
-Optional proxy configuration.
+Optional [proxy configuration][13].
 
 ## Manual instrumentation
 
@@ -422,9 +425,13 @@ const configuration = {
     versionSuffix: 'codepush.v3', // Optional: see overriding the reported version in the documentation. Default = undefined
     trackingConsent: TrackingConsent.GRANTED, // Optional: disable collection if user has not granted consent for tracking. Default = TrackingConsent.GRANTED
     nativeViewTracking: true, // Optional: enables tracking of native views. Default = false
-    proxyConfig: new ProxyConfig() // Optional: send requestst through a proxy. Default = undefined
+    proxyConfig: new ProxyConfig() // Optional: send requests through a proxy. Default = undefined
 };
 ```
+
+## Monitoring hybrid React Native applications
+
+See [Monitor hybrid React Native applications][16].
 
 ## Further reading
 
@@ -439,6 +446,8 @@ const configuration = {
 [7]: https://github.com/DataDog/dd-sdk-reactnative-examples/tree/main/rum-react-navigation-async
 [8]: /account_management/api-app-keys/#client-tokens
 [9]: /getting_started/site/
-[11]: /real_user_monitoring/frustration_signals/
-[12]: /real_user_monitoring/connect_rum_and_traces?tab=reactnativerum
+[11]: /real_user_monitoring/browser/frustration_signals/
+[12]: /real_user_monitoring/platform/connect_rum_and_traces?tab=reactnativerum
+[13]: /real_user_monitoring/guide/proxy-mobile-rum-data/
 [15]: /getting_started/tagging/#define-tags
+[16]: /real_user_monitoring/guide/monitor-hybrid-react-native-applications

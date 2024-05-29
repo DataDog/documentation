@@ -14,7 +14,7 @@ further_reading:
 ---
 
 <div class="alert alert-info">
-The Datadog Unix Agent is being developed for specific system architectures, and is not the same as the Windows, Linux and MacOS Agents.
+The Datadog UNIX Agent is being developed for specific system architectures, and is not the same as the Windows, Linux, and MacOS Agents.
 </div>
 
 This page outlines the installation and configuration of the Datadog UNIX Agent for AIX.
@@ -121,7 +121,7 @@ dogstatsd:                        # DogStatsD configuration options
 
 There are also facilities to run the Agent with the known Python supervisor. This might be your preferred way to manage the Agent daemon if you are familiar with the tool. There are entries for both the Agent and DogStatsD.
 
-## Uninstall
+## Uninstall the Agent
 
 To remove an installed Agent, run the following `installp` command:
 

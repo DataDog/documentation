@@ -5,16 +5,20 @@ assets:
   dashboards:
     Aerospike Overview: assets/dashboards/overview.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
       creates_events: false
     metrics:
-      check: aerospike.uptime
+      check:
+      - aerospike.uptime
+      - aerospike.namespace.memory_free_pct
       metadata_path: metadata.csv
       prefix: aerospike.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10067
     source_type_name: Aerospike
   logs:
     source: aerospike
@@ -24,7 +28,7 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- data store
+- data stores
 - log collection
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/aerospike/README.md
@@ -33,12 +37,11 @@ draft: false
 git_integration_title: aerospike
 integration_id: aerospike
 integration_title: Aerospike
-integration_version: 1.18.1
+integration_version: 2.2.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: aerospike
-oauth: {}
 public_title: Aerospike
 short_description: Aerospike データベースからクラスターやネームスペースの統計を収集
 supported_os:
@@ -47,7 +50,7 @@ tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Supported OS::Linux
-  - Category::データストア
+  - Category::Data Stores
   - Category::ログの収集
   configuration: README.md#Setup
   description: Aerospike データベースからクラスターやネームスペースの統計を収集
@@ -57,6 +60,7 @@ tile:
   title: Aerospike
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
@@ -66,25 +70,25 @@ Aerospike データベースからメトリクスをリアルタイムに取得�
 - Aerospike の状態を視覚化および監視できます。
 - Aerospike のフェイルオーバーとイベントの通知を受けることができます。
 
-## セットアップ
+## 計画と使用
 
 注: 現在の Aerospike インテグレーションは、Aerospike サーバー v4.9 以上のみで互換性があります。詳細は、Aerospike の [Python クライアントライブラリリリースノート][1]を参照してください。
 これ以前のバージョンの Aerospike サーバーを使用している場合は、Datadog Agent のバージョン 7.29.0 以下を使用して監視することができます。
 
-### インストール
+### インフラストラクチャーリスト
 
 Aerospike チェックは [Datadog Agent][2] パッケージに含まれています。
 サーバーに追加でインストールする必要はありません。
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
-#### ホスト
+#### メトリクスベース SLO
 
 ##### メトリクスの収集
-ホストで実行中の Agent に対してこのチェックを構成するには:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
 1. [Aerospike Prometheus Exporter][1] のインストールと構成を行います。詳細は [Aerospike のドキュメント][2]を参照してください。
 
@@ -94,7 +98,7 @@ Aerospike チェックは [Datadog Agent][2] パッケージに含まれてい�
 
 **注**: このチェックのバージョン 1.16.0+ では、メトリクスの収集に [OpenMetrics][5] を使用し、これには Python 3 が必要です。Python 3 の使用が不可能なホストの場合や、このチェックのレガシーバージョンを使用する場合は、[コンフィグ例][6]を参照してください。
 
-##### ログの収集
+##### 収集データ
 
 
 1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` でこれを有効にする必要があります。
@@ -123,7 +127,7 @@ Aerospike チェックは [Datadog Agent][2] パッケージに含まれてい�
 [5]: https://docs.datadoghq.com/ja/integrations/openmetrics/
 [6]: https://github.com/DataDog/integrations-core/blob/7.36.x/aerospike/datadog_checks/aerospike/data/conf.yaml.example
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "コンテナ化" %}}
 
 
 #### コンテナ化
@@ -134,11 +138,11 @@ Aerospike チェックは [Datadog Agent][2] パッケージに含まれてい�
 
 | パラメーター            | 値                                |
 | -------------------- | ------------------------------------ |
-| `<インテグレーション名>` | `aerospike`                          |
-| `<初期コンフィギュレーション>`      | 空白または `{}`                        |
-| `<インスタンスコンフィギュレーション>`  | `{"openmetrics_endpoint": "http://%%host%%:9145/metrics"}` |
+| `<INTEGRATION_NAME>` | `aerospike`                          |
+| `<INIT_CONFIG>`      | 空白または `{}`                        |
+| `<INSTANCE_CONFIG>`  | `{"openmetrics_endpoint": "http://%%host%%:9145/metrics"}` |
 
-##### ログの収集
+##### 収集データ
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -157,22 +161,22 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 [Agent の status サブコマンドを実行][3]し、Checks セクションの `aerospike` を探します。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "aerospike" >}}
 
 
-### サービスのチェック
+### ヘルプ
 
 **aerospike.can_connect**
 **aerospike.cluster_up**
 
-### イベント
+### ヘルプ
 
 Aerospike には、イベントは含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 

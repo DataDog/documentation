@@ -9,7 +9,7 @@ further_reading:
 
 ## Overview
 
-Saved views allow you to save the state of the [Synthetic Monitoring & Continuous Testing Explorer][2] and enable effective troubleshooting by providing you with access to scoped queries, relevant facets, visualization options, and the time range. 
+Saved views allow you to save the state of the [Synthetic Monitoring & Testing Results Explorer][2] and enable effective troubleshooting by providing you with access to scoped queries, relevant facets, visualization options, and the time range. 
 
 Saved views can keep track of your:
 
@@ -22,7 +22,7 @@ You can also use saved views to share common queries and configurations with you
 
 ## Saved views
 
-To access your saved views, expand **> Views** to the left in the [Synthetic Monitoring & Continuous Testing Explorer][1].
+To access your saved views, expand **> Views** to the left in the [Synthetic Monitoring & Testing Results Explorer][1].
 
 All saved views except for the [default view](#default-views) are shared across the organization, including custom saved views created by users. These are editable by anyone in your organization and display the user's avatar who created the view. Click **Save** to create a custom saved view from the current content in your Explorer.
 
@@ -38,11 +38,11 @@ You can:
 
 ## Default views
 
-You can set a saved view to be your default landing page in the [Synthetic Monitoring & Continuous Testing Explorer][2]. Default views are set per user and have no impact on your organization. 
+You can set a saved view to be your default landing page in the [Synthetic Monitoring & Testing Results Explorer][2]. Default views are set per user and have no impact on your organization. 
 
-{{< img src="continuous_testing/saved_view.png" alt="Saved Views in the Synthetic Monitoring & Continuous Testing Explorer" width="100%" >}}
+{{< img src="continuous_testing/saved_view.png" alt="Saved Views in the Synthetic Monitoring & Testing Results Explorer" width="100%" >}}
 
-Temporarily override your default saved view by completing an action in the UI or opening links in the Explorer that embeds a different configuration.
+Temporarily override your default saved view by completing an action in the UI or opening links in the Results Explorer that embeds a different configuration.
 
 In the default view entry in the **Views** panel, you can:
 

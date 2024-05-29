@@ -22,31 +22,32 @@ short_description: Azure Container Apps からメトリクスを取得します�
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Azure Container Apps を使用すると、サーバーレスコンテナを使用してモダンなアプリやマイクロサービスを構築およびデプロイすることができます。詳細については、Azure Container Apps の [Microsoft のドキュメント][1]を参照してください。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 [Microsoft Azure インテグレーション][2]をまだセットアップしていない場合は、最初にセットアップします。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "azure_container_apps" >}}
 
 
-### イベント
+### ヘルプ
 
 Azure Container Apps インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 
 Azure Container Apps インテグレーションには、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 

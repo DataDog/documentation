@@ -18,10 +18,6 @@ further_reading:
 
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
-{{< /site-region >}}
-
 Database Monitoring provides deep visibility into your Microsoft SQL Server databases by exposing query metrics, query samples, explain plans, database states, failovers, and events.
 
 Do the following steps to enable Database Monitoring with your database:
@@ -82,19 +78,21 @@ CREATE USER datadog FOR LOGIN datadog;
 
 It's recommended to install the agent directly on the SQL Server host as that enables the agent to collect a variety of system telemetry (CPU, memory, disk, network) in addition to SQL Server specific telemetry.
 
-**For AlwaysOn users**, the Agent must be installed on a separate server and connected to the cluster through the listener endpoint, as information about Availability Group (AG) secondary replicas is collected from the primary replica. Additionally, installing the Agent in this way helps keep it up and running in the event of a failover.
-
 {{< tabs >}}
 {{% tab "Windows Host" %}}
+{{% dbm-alwayson %}}
 {{% dbm-sqlserver-agent-setup-windows %}}
 {{% /tab %}}
 {{% tab "Linux Host" %}}
+{{% dbm-alwayson %}}
 {{% dbm-sqlserver-agent-setup-linux %}}
 {{% /tab %}}
 {{% tab "Docker" %}}
+{{% dbm-alwayson %}}
 {{% dbm-sqlserver-agent-setup-docker %}}
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
+{{% dbm-alwayson %}}
 {{% dbm-sqlserver-agent-setup-kubernetes %}}
 {{% /tab %}}
 {{< /tabs >}}

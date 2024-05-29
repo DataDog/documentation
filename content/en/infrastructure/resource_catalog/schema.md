@@ -22,5 +22,5 @@ CSM Misconfigurations is not available in the selected site.
 The following resource types are available within [Resource catalog][2] for filtering.
 See [custom rules in CSM Misconfigurations][1] for more information.
 
-[1]: /security/misconfigurations/custom_rules/
+[1]: /security/cloud_security_management/misconfigurations/custom_rules/
 [2]: /infrastructure/resource_catalog

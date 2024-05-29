@@ -11,19 +11,19 @@ description: Use OAuth to authenticate integrations.
 
 ## Overview
 
-OAuth enables users to authorize third-party integrations with access to specific scopes of users' Datadog data. This authorization allows integrations to push data into Datadog and pull data out from Datadog. For example, if a user authorizes an integration for read access to their Datadog monitors, the integration can directly read and extract their monitor data.
+OAuth enables Datadog customers to securely authorize third-party access to their Datadog organization. This authorization allows integrations to push data into Datadog or pull data out from Datadog without the need for customers to input API or app keys anywhere. For example, a user can consent to provide an on-call notification tool with read access to their Datadog organization's monitors.
 
 For more information on Datadog's OAuth implementation, see the [Datadog OAuth2 documentation][1].
 
-## Use OAuth in an integration
+## When to use OAuth in an integration
 
-OAuth allows Datadog customers to easily and securely authorize third-party platforms through a couple of clicks—without having to directly input API or app keys anywhere. You can use OAuth with existing integrations or configure OAuth as a part of developing new integrations.
-
-When building an integration with OAuth, you can select the exact scopes of data that your application needs access to, and the customer can grant access to the granular scopes that you've requested. While optional scopes are not supported, all scopes requested by an integration become accessible when a customer authorizes it.
+OAuth support is required for all partner-built SaaS integrations that directly submit data to, or query data from, Datadog's public [API endpoints][12]. OAuth does not apply to software deployed on-premises, or to Datadog Agent checks. 
 
 ## Build an integration with OAuth
 
-This section describes how to build a new integration with a tile on the [Marketplace][2] or [Integrations][3] page. If you're building upon an existing integration, or building a new integration and want to add it to an existing tile on either page, see [Adding OAuth to an existing offering](#Adding-oauth-to-an-existing-offering).
+When building an integration with OAuth, you should only select the scopes to which your application needs access. After a customer consents to authorize your integration, all listed scopes become available to your application through a token.
+
+You can include OAuth in a new integration (or add it to an existing integration) on the [Marketplace][2] or [Integrations][3] page by following the steps below. For existing integrations, note that there's no need to change your `app_uuid` in the `manifest.json`. 
 
 ### Create an app from a template
 
@@ -41,7 +41,7 @@ This section describes how to build a new integration with a tile on the [Market
 
 The client is the component of an application that enables users to authorize the application access to the customer's Datadog data. In order to gain access, the client requires the appropriate access token.
 
-1. Navigate to the **OAuth & Permissions** tab under **Features** and click **Create OAuth Client**.
+1. Navigate to the **OAuth & Permissions** tab under **Features** and click **New Confidential OAuth Client**.
 
    The OAuth clients you create for integrations are **confidential clients** that provide a client ID and client secret. The client you create in this step is a private version of the client, whose credentials you can use for testing. When a published version of this client is created, you will receive a new set of credentials. **These credentials are never shown again after you create the client, so be sure to store them in a secure location.**
 
@@ -111,11 +111,11 @@ As a part of your pull request, complete the following steps:
 
 To start the publishing process in the [Developer Platform][4]:
 
-1. Navigate to the **Publishing** tab under **General**. In Step 1 of the publishing flow, you receive your published client ID and secret. The OAuth implementation needs to be updated to include these client credentials. **Note:** Save your client ID and client secret in a secure location. This information is not shown again.
+1. Navigate to the **Publishing** tab under **General**. At the top of this tab, you receive your published client ID and secret. Your OAuth implementation needs to be updated to include these client credentials. **Note:** Save your client ID and client secret in a secure location. This information is not shown again.
 
-2. In Step 2, you can enter additional information about your integration and see the published `app_uuid` to use below.
+2. Under the Integration Publishing section, follow the steps to add your OAuth information to use below within your pull request. 
 
-3. When opening a pull request for a **new integration** in `integrations-extras` or `Marketplace`, use the `app_uuid` value from step 2 in the `app_uuid` field of the `manifest.json` file. If the `app_uuid` values do not align, your application does not publish correctly. If you have an **existing integration**, there is no need to update the `app_uuid`.
+3. When opening a pull request for a **new integration** in `integrations-extras` or `Marketplace`, copy the `app_uuid` value under the Integration Publishing section and paste this within your manifest.json file under the `app_uuid` field. 
 
 Once an OAuth client is submitted for publishing, the team is notified. When your pull request is approved by all required parties and is ready to be merged, at that point your OAuth client gets published as well. Your integration tile is then published to your sandbox account (_not_ for all customers), and your OAuth client can then be authorized by any Datadog organization (not only your Sandbox organization).
 
@@ -126,30 +126,6 @@ At this point, Datadog recommends doing final testing with your OAuth client to 
 You cannot edit a published OAuth client directly, so only go through the publishing flow when everything has been tested and is ready to go. To make updates to the OAuth client after it has been submitted for publishing, you need to go through the publishing flow again and re-submit. **The published client credentials do not appear again**.
 
 For more information about publishing your integration tile and creating your pull request, see the [Marketplace and Integrations documentation][7].
-
-## Add OAuth to an existing offering
-
-The process for adding an OAuth client to an existing integration is similar to what is outlined above, with some key differences.
-
-### If you have an existing integration that's not connected to a UI Extension
-
-Follow the [steps](#build-an-integration-with-oauth) above, and ensure that you open a pull request to add new uninstallation instructions to your integration tile.
-
-There's no need to change your `app_uuid` in the `manifest.json` file if you have an existing integration.
-
-### If you have an existing integration that's currently connected to a UI Extension (shares the same tile)
-
-Instead of creating an app, navigate to the app that includes your published UI Extension in the Developer Platform and follow the remaining [steps](#create-an-oauth-client).
-
-Once you've created your integration's OAuth client and are ready for publishing, click **Edit** on your app and navigate to the **Publishing** tab under **General**. Ensure that you also open a pull request to add new uninstallation instructions to your tile.
-
-**Note**: There's no need to change your `app_uuid` in the `manifest.json` file if you have an existing integration or UI Extension.
-
-### If you have a published UI Extension and want to add an integration to the same tile
-
-Instead of creating an app, navigate to the app that includes your published UI Extension in the Developer Platform and follow the remaining [steps](#create-an-oauth-client).
-
-Open a pull request to update your existing tile with additional information about your integration—including updates to the README, image folder, and more. Add a link to this pull request during the publishing process.
 
 ## Further Reading
 
@@ -169,3 +145,4 @@ Additional helpful documentation, links, and articles:
 [9]: https://app.datadoghq.com/organization-settings/oauth-applications
 [10]: https://app.datadoghq.com/organization-settings/api-keys
 [11]: https://www.datadoghq.com/blog/oauth/
+[12]: https://docs.datadoghq.com/api/latest/using-the-api/

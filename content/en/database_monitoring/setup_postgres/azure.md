@@ -8,10 +8,6 @@ further_reading:
   text: "Basic Postgres Integration"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
-{{< /site-region >}}
-
 Database Monitoring provides deep visibility into your Postgres databases by exposing query metrics, query samples, explain plans, database states, failovers, and events.
 
 The Agent collects telemetry directly from the database by logging in as a read-only user. Do the following setup to enable Database Monitoring with your Postgres database:
@@ -24,7 +20,7 @@ The Agent collects telemetry directly from the database by logging in as a read-
 ## Before you begin
 
 Supported PostgreSQL versions
-: 9.6, 10, 11, 12, 13, 14
+: 9.6, 10, 11, 12, 13, 14, 15
 
 Supported Azure PostgreSQL deployment types
 : PostgreSQL on Azure VMs, Single Server, Flexible Server
@@ -37,7 +33,7 @@ Performance impact
 Database Monitoring runs as an integration on top of the base Agent ([see benchmarks][1]).
 
 Proxies, load balancers, and connection poolers
-: The Agent must connect directly to the host being monitored. For self-hosted databases, `127.0.0.1` or the socket is preferred. The Agent should not connect to the database through a proxy, load balancer, or connection pooler such as `pgbouncer`. While this can be an anti-pattern for client applications, each Agent must have knowledge of the underlying hostname and should stick to a single host for its lifetime, even in cases of failover. If the Datadog Agent connects to different hosts while it is running, the values of metrics will be incorrect.
+: The Datadog Agent must connect directly to the host being monitored. For self-hosted databases, `127.0.0.1` or the socket is preferred. The Agent should not connect to the database through a proxy, load balancer, or connection pooler such as `pgbouncer`. If the Agent connects to different hosts while it is running (as in the case of failover, load balancing, and so on), the Agent calculates the difference in statistics between two hosts, producing inaccurate metrics.
 
 Data security considerations
 : See [Sensitive information][2] for information about what data the Agent collects from your databases and how to ensure it is secure.
@@ -93,7 +89,37 @@ CREATE USER datadog WITH password '<PASSWORD>';
 
 **Note:** Microsoft Entra ID managed identity authentication is also supported. Please see [the guide][12] on how to configure this for your Azure instance.
 
+
 {{< tabs >}}
+{{% tab "Postgres ≥ 16" %}}
+
+Create the following schema **in every database**:
+
+```SQL
+CREATE SCHEMA datadog;
+GRANT USAGE ON SCHEMA datadog TO datadog;
+GRANT USAGE ON SCHEMA public TO datadog;
+GRANT pg_read_all_settings TO datadog;
+GRANT pg_read_all_stats TO datadog;
+CREATE EXTENSION IF NOT EXISTS pg_stat_statements;
+```
+
+{{% /tab %}}
+
+{{% tab "Postgres 15" %}}
+
+Create the following schema **in every database**:
+
+```SQL
+CREATE SCHEMA datadog;
+GRANT USAGE ON SCHEMA datadog TO datadog;
+GRANT USAGE ON SCHEMA public TO datadog;
+GRANT pg_monitor TO datadog;
+CREATE EXTENSION IF NOT EXISTS pg_stat_statements;
+```
+
+{{% /tab %}}
+
 {{% tab "Postgres ≥ 10" %}}
 
 Create the following schema **in every database**:
@@ -443,6 +469,24 @@ To avoid exposing the `datadog` user's password in plain text, use the Agent's [
 
 To collect more comprehensive database metrics from Azure, install the [Azure PostgreSQL integration][10] (optional).
 
+## Known issues
+
+For Postgres 16 databases, the following error messages are written into the log file:
+
+```
+psycopg2.errors.InsufficientPrivilege: permission denied for function pg_ls_waldir
+2024-03-05 12:36:16 CET | CORE | ERROR | (pkg/collector/python/datadog_agent.go:129 in LogMessage) | - | (core.py:94) | Error querying wal_metrics: permission denied for function pg_ls_waldir
+2024-03-05 12:36:30 CET | CORE | ERROR | (pkg/collector/python/datadog_agent.go:129 in LogMessage) | postgres:cc861f821fbbc2ae | (postgres.py:239) | Unhandled exception while using database connection postgres
+Traceback (most recent call last):
+  File "/opt/datadog-agent/embedded/lib/python3.11/site-packages/datadog_checks/postgres/postgres.py", line 224, in db
+    yield self._db
+  File "/opt/datadog-agent/embedded/lib/python3.11/site-packages/datadog_checks/postgres/postgres.py", line 207, in execute_query_raw
+    cursor.execute(query)
+psycopg2.errors.InsufficientPrivilege: permission denied for function pg_ls_waldir
+```
+
+As a consequence, the Agent doesn't collect the following metrics for Postgres 16: `postgresql.wal_count`, `postgresql.wal_size` and `postgresql.wal_age`.
+
 ## Troubleshooting
 
 If you have installed and configured the integrations and Agent as described, and it is not working as expected, see [Troubleshooting][11]
@@ -452,7 +496,7 @@ If you have installed and configured the integrations and Agent as described, an
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /agent/basic_agent_usage#agent-overhead
+[1]: /database_monitoring/agent_integration_overhead/?tab=postgres
 [2]: /database_monitoring/data_collected/#sensitive-information
 [3]: https://www.postgresql.org/docs/current/config-setting.html
 [4]: https://docs.microsoft.com/en-us/azure/postgresql/howto-configure-server-parameters-using-portal

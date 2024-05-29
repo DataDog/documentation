@@ -34,7 +34,7 @@ RUM は、多くの規格や規制の枠組みに準拠するように構成す�
 デフォルトでは、規制や規格の枠組みへの準拠を支援するために、ユーザーデータを保護するいくつかのプライバシー制限が設けられています。
 
 ### ブラウザ RUM のクッキーの使用について
-ブラウザ RUM は、データを収集するためにエンドユーザーのブラウザで**ファーストパーティクッキー**が有効になっていることを必要とします。運営する法域で要求される場合は、RUM が初期化されてデータ収集を開始する前に、エンドユーザーがクッキーを受け入れる必要があるように、ページを構成する必要があります。
+ブラウザ RUM では、データを収集するために、エンドユーザーのブラウザでファーストパーティのクッキーが有効になっている必要があります。お客様が運営する司法管轄区によって要求される場合、お客様には、RUM が初期化される前にクッキーを収集する同意を受けるなど、これらの司法管轄区の法律に準拠するようにページを構成する責任があります。
 
 ### モバイル RUM の同意管理
 モバイル RUM の追跡は、ユーザーの同意がある場合のみ実行されます。エンドユーザーが RUM の追跡を承諾した場合、当社はそのユーザーのアクティビティとセッションの経験を追跡します。ユーザーが RUM の追跡を拒否した場合、当社はそのユーザーのアクティビティとセッションの経験を追跡しません。
@@ -124,11 +124,11 @@ IP データの収集を無効にすると、その変更はすぐに適用さ�
 
 [1]: /ja/real_user_monitoring/guide/enrich-and-control-rum-data/?tab=event#event-and-context-structure
 [2]: /ja/real_user_monitoring/ios/advanced_configuration/?tab=swift#modify-or-drop-rum-events
-[3]: /ja/real_user_monitoring/android/advanced_configuration/?tab=kotlin#modify-or-drop-rum-events
-[4]: /ja/real_user_monitoring/flutter/advanced_configuration/#modify-or-drop-rum-events
+[3]: /ja/real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/?tab=kotlin#modify-or-drop-rum-events
+[4]: /ja/real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/flutter/#modify-or-drop-rum-events
 [5]: /ja/real_user_monitoring/browser/tracking_user_actions/#declare-a-name-for-click-actions
-[6]: /ja/real_user_monitoring/browser/modifying_data_and_context/?tab=npm#user-session
-[7]: /ja/real_user_monitoring/browser/modifying_data_and_context/?tab=npm#user-session
+[6]: /ja/real_user_monitoring/browser/advanced_configuration/?tab=npm#user-session
+[7]: /ja/real_user_monitoring/browser/advanced_configuration/?tab=npm#user-session
 [8]: /ja/help/
 [9]: /ja/help/
 [10]: /ja/account_management/rbac/permissions/#real-user-monitoring

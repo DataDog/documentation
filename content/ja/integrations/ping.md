@@ -3,6 +3,7 @@ app_id: ping
 app_uuid: 841c9313-628f-4861-ad0b-2d12c37ee571
 assets:
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -12,6 +13,7 @@ assets:
       prefix: ネットワーク。
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10200
     source_type_name: Ping
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -33,7 +35,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: ping
-oauth: {}
 public_title: Ping
 short_description: リモートホストへの接続を監視
 supported_os:
@@ -56,6 +57,7 @@ tile:
   title: Ping
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -69,11 +71,11 @@ ICMP パケットの作成には raw ソケットが必要であるため、こ�
 
 **Windows をお使いの方への注意事項**: インストールされている Windows の言語が英語に設定されていない場合、このチェックが正しく行われないことがあります。
 
-## セットアップ
+## 計画と使用
 
 Ping チェックは [Datadog Agent][2] パッケージに含まれていないため、お客様自身でインストールする必要があります。
 
-### インストール
+### インフラストラクチャーリスト
 
 Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Ping チェックをホストにインストールします。Docker Agent または 上記バージョン以前の Agent でインストールする場合は、[コミュニティインテグレーションの使用][3]をご参照ください。
 
@@ -81,7 +83,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Ping チェッ
 
    ```shell
    # Linux
-   datadog-agent integration install -t datadog-ping==<INTEGRATION_VERSION>
+   sudo -u dd-agent -- datadog-agent integration install -t datadog-ping==<INTEGRATION_VERSION>
 
    # Windows
    agent.exe integration install -t datadog-ping==<INTEGRATION_VERSION>
@@ -93,7 +95,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Ping チェッ
 
 3. コアの[インテグレーション][4]と同様にインテグレーションを構成します。
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 1. ping のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `ping.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル ping.d/conf.yaml][5] を参照してください。
 
@@ -103,21 +105,21 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Ping チェッ
 
 [Agent の status サブコマンド][7]を実行し、Checks セクションで `ping` を探します。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "ping" >}}
 
 
-### イベント
+### ヘルプ
 
 Ping チェックには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 {{< get-service-checks-from-git "ping" >}}
 
 
-## トラブルシューティング
+## ヘルプ
 
 ### `SubprocessOutputEmptyError: get_subprocess_output expected output but had none` エラー
 Ping インテグレーションを実行中に、以下のようなエラーが表示されることがあります。
@@ -142,7 +144,7 @@ Ping インテグレーションは Agent にデフォルトで含まれてい�
 
 
 [1]: https://en.wikipedia.org/wiki/Ping_%28networking_utility%29
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/
 [4]: https://docs.datadoghq.com/ja/getting_started/integrations/
 [5]: https://github.com/DataDog/integrations-extras/blob/master/ping/datadog_checks/ping/data/conf.yaml.example

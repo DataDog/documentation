@@ -25,7 +25,6 @@ legal_terms:
   eula: assets/Composer End User License Agreement.pdf
 manifest_version: 2.0.0
 name: performetriks_composer
-oauth: {}
 pricing:
 - billing_type: flat_fee
   includes_assets: true

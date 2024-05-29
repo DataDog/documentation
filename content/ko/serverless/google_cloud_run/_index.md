@@ -2,304 +2,128 @@
 further_reading:
 - link: https://www.datadoghq.com/blog/collect-traces-logs-from-cloud-run-with-datadog/
   tag: 블로그
-  text: GCR 서비스에서 트레이스, 로그 및 커스텀 메트릭을 수집하세요.
-kind: 설명서
+  text: Cloud Run 서비스에서 트레이스, 로그, 커스텀 메트릭 수집
+kind: documentation
 title: Google Cloud Run
 ---
 
 ## 개요
 
-Google Cloud Run은 컨테이너 기반 애플리케이션을 구축하고 스케일링하기 위한 완전 관리형 서비스입니다. Datadog는 [Google Cloud 통합][1]을 통해 Cloud Run에 모니터링과 로그 수집을 제공합니다. 또한 Datadog는 현 공개 베타 버전에서 트레이스, 커스텀 메트릭과 직접 로그 수집을 지원하기 위해 특별 설계된 에이전트를 제공하여, Cloud Run 애플리케이션을 구동하기 위한 솔루션을 선보입니다.
-
-  <div class="alert alert-warning">이 기능은 공개 베타 버전입니다. <a href="https://forms.gle/HSiDGnTPvDvbzDAQA">피드백 양식</a>이나 표준 지원 채널을 통해 피드백을 제공할 수 있습니다. 베타 기간 동안에는 직접 비용 없이 Cloud Run 모니터링과 애플리케이션 성능 모니터링(APM) 트레이싱을 사용할 수 있습니다. 기존 APM 고객은 늘어난 스팬 수집과 볼륨 비용을 감당해야 할 수 있습니다. </div>
-
-## 시작하기
+Google Cloud Run은 컨테이너 기반 애플리케이션을 배포하고 확장하기 위한 완전 관리형 서버리스 플랫폼입니다. Datadog은 [Google Cloud 통합][1]을 통해 Cloud Run에 대한 모니터링 및 로그 수집을 제공합니다. Datadog은 또한 추적, 커스텀 메트릭, 직접 로그 수집을 지원하기 위해 특별히 제작된 Agent로 Cloud Run 애플리케이션을 계측하기 위한 솔루션을 제공합니다.
 
 ### 전제 조건
 
 [Datadog API 키][6]가 있고 [Datadog 트레이싱 라이브러리에서 지원되는][2] 프로그래밍 언어를 사용하고 있는지 확인하세요.
 
-### 1. 에이전트 설치
+## 애플리케이션의 계측
 
-Dockerfile 또는 빌드팩을 사용하여 에이전트를 설치할 수 있습니다. 빌드팩을 사용하는 경우 [트레이싱 라이브러리](#install-tracing-library)를 먼저 설치해야 합니다.
+[Dockerfile](#dockerfile) 또는 [buildpack](#buildpack)의 두 가지 방법 중 하나로 애플리케이션을 계측할 수 있습니다.
 
-#### Dockerfile을 사용해 에이전트 설치
+### Dockerfile
 
-{{< programming-lang-wrapper langs="go,python,nodejs,java,dotnet,ruby" >}}
-{{< programming-lang lang="go" >}}
+Datadog은 `serverless-init` 컨테이너 이미지의 새 릴리스를 Google의 gcr.io, AWS의 ECR 및 Docker Hub에 게시합니다.
 
+| dockerhub.io | gcr.io | public.ecr.aws |
+| ------------ | ------ | -------------- |
+| datadog/serverless-init | gcr.io/datadoghq/serverless-init | public.ecr.aws/datadog/serverless-init |
 
+이미지에는 시맨틱 버전 관리를 기반으로 태그가 지정되며, 새 버전마다 3개의 관련 태그가 지정됩니다:
 
-Dockerfile에 다음 줄을 추가하여 Datadog 에이전트를 사용해 애플리케이션을 계측할 수 있습니다. 기존 Dockerfile 설정에 따라 이러한 예를 조정해야 할 수 있습니다.
+* `1`, `1-alpine`: 이를 사용하여 변경 사항 중단 없이 최신 마이너 릴리스를 추적하세요
+* `1.x.x`, `1.x.x-alpine`: 정확한 버전의 라이브러리에 고정할 때 사용하세요.
+* `latest`, `latest-alpine`: 주요 변경 사항이 포함된 최신 버전 릴리스를 따를 때 사용하세요.
 
-```
-# copy the Datadog `serverless-init` into your Docker image
-COPY --from=datadog/serverless-init /datadog-init /app/datadog-init
+## `serverless-init` 작동 방식
 
-# change the entrypoint to wrap your application into the Datadog serverless-init process
-ENTRYPOINT ["/app/datadog-init"]
+`serverless-init` 애플리케이션은 프로세스를 래핑하고 이를 하위 프로세스로 실행합니다. 메트릭을 위한 DogStatsD 수신기와 추적을 위한 Trace Agent 수신기를 시작합니다. 애플리케이션의 stdout/stderr 스트림을 래핑하여 로그를 수집합니다. 부트스트래핑 후 serverless-init는 명령을 하위 프로세스로 실행합니다.
 
-# optionally add Datadog tags
-ENV DD_SERVICE=datadog-demo-run-go
-ENV DD_ENV=datadog-demo
-ENV DD_VERSION=1
+전체를 계측하려면 Docker 컨테이너 내에서 실행되는 첫 번째 명령으로 `datadog-init`를 호출하고 있는지 확인하세요. 이를 진입점으로 설정하거나 CMD의 첫 번째 인수로 설정하여 수행할 수 있습니다.
 
-# this env var is needed for trace propagation to work properly in Cloud Run.
-# ensure to set this variable for all Datadog-instrumented downstream services.
-ENV DD_TRACE_PROPAGATION_STYLE=datadog
+{{< programming-lang-wrapper langs="nodejs,python,java,go,dotnet,ruby,php" >}}
+{{< programming-lang lang="nodejs" >}}
 
-# execute your binary application wrapped in the entrypoint. Adapt this line to your needs
-CMD ["/path/to/your-go-binary"]
-```
+{{% svl-init-nodejs %}}
 
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 
-Dockerfile 파일에 다음 줄을 추가하여 Datadog 에이전트를 사용해 애플리케이션을 계측할 수 있습니다. 기존 Dockerfile 설정에 따라 이러한 예를 조정해야 할 수 있습니다.
-
-```
-# copy the Datadog `serverless-init` into your Docker image
-COPY --from=datadog/serverless-init /datadog-init /app/datadog-init
-
-# install the python tracing library here or in requirements.txt
-RUN pip install --no-cache-dir ddtrace==1.7.3
-
-# optionally add Datadog tags
-ENV DD_SERVICE=datadog-demo-run-python
-ENV DD_ENV=datadog-demo
-ENV DD_VERSION=1
-
-# this env var is needed for trace propagation to work properly in cloud run.
-# ensure to set this variable for all Datadog-instrumented downstream services.
-ENV DD_TRACE_PROPAGATION_STYLE=datadog
-
-# change the entrypoint to wrap your application into the Datadog serverless-init process
-ENTRYPOINT ["/app/datadog-init"]
-
-# execute your binary application wrapped in the entrypoint, launched by the Datadog trace library. Adapt this line to your needs
-CMD ["ddtrace-run", "python", "app.py"]
-```
-
-{{< /programming-lang >}}
-{{< programming-lang lang="nodejs" >}}
-
-Dockerfile 파일에 다음 줄을 추가하여 Datadog 에이전트를 사용해 애플리케이션을 계측할 수 있습니다. 기존 Dockerfile 설정에 따라 이러한 예를 조정해야 할 수 있습니다.
-
-```
-# copy the Datadog `serverless-init` into your Docker image
-COPY --from=datadog/serverless-init /datadog-init /app/datadog-init
-
-# install the Datadog js tracing library, either here or in package.json
-
-npm i dd-trace@2.2.0
-
-# enable the Datadog tracing library
-ENV NODE_OPTIONS="--require dd-trace/init"
-
-# optionally add Datadog tags
-ENV DD_SERVICE=datadog-demo-run-nodejs
-ENV DD_ENV=datadog-demo
-ENV DD_VERSION=1
-
-# this env var is needed for trace propagation to work properly in cloud run.
-# ensure to set this variable for all Datadog-instrumented downstream services.
-ENV DD_TRACE_PROPAGATION_STYLE=datadog
-
-# change the entrypoint to wrap your application into the Datadog serverless-init process
-ENTRYPOINT ["/app/datadog-init"]
-
-# execute your binary application wrapped in the entrypoint. Adapt this line to your needs
-CMD ["/nodejs/bin/node", "/path/to/your/app.js"]
-
-```
+{{% svl-init-python %}}
 
 {{< /programming-lang >}}
 {{< programming-lang lang="java" >}}
 
-Dockerfile 파일에 다음 줄을 추가하여 Datadog 에이전트를 사용해 애플리케이션을 계측할 수 있습니다. 기존 Dockerfile 설정에 따라 이러한 예를 조정해야 할 수 있습니다.
-
-```
-# copy the Datadog `serverless-init` into your Docker image
-COPY --from=datadog/serverless-init /datadog-init /app/datadog-init
-
-# optionally add Datadog tags
-ENV DD_SERVICE=datadog-demo-run-java
-ENV DD_ENV=datadog-demo
-ENV DD_VERSION=1
-
-# this env var is needed for trace propagation to work properly in cloud run.
-# ensure to set this variable for all Datadog-instrumented downstream services.
-ENV DD_TRACE_PROPAGATION_STYLE=datadog
-
-# change the entrypoint to wrap your application into the Datadog serverless-init process
-ENTRYPOINT ["/app/datadog-init"]
-
-# execute your binary application wrapped in the entrypoint. Adapt this line to your needs
-CMD ["./mvnw", "spring-boot:run"]
-
-```
+{{% svl-init-java %}}
 
 {{< /programming-lang >}}
-{{< programming-lang lang="dotnet" >}}
-
-Dockerfile 파일에 다음 줄을 추가하여 Datadog 에이전트를 사용해 애플리케이션을 계측할 수 있습니다. 기존 Dockerfile 설정에 따라 이러한 예를 조정해야 할 수 있습니다.
-
-```
-# copy the Datadog `serverless-init` into your Docker image
-COPY --from=datadog/serverless-init /datadog-init /app/datadog-init
-
-# optionally add Datadog tags
-ENV DD_SERVICE=datadog-demo-run-dotnet
-ENV DD_ENV=datadog-demo
-ENV DD_VERSION=1
-
-# this env var is needed for trace propagation to work properly in cloud run.
-# ensure to set this variable for all Datadog-instrumented downstream services.
-ENV DD_TRACE_PROPAGATION_STYLE=datadog
-
-# change the entrypoint to wrap your application into the Datadog serverless-init process
-ENTRYPOINT ["/app/datadog-init"]
-
-# execute your binary application wrapped in the entrypoint. Adapt this line to your needs
-CMD ["dotnet", "helloworld.dll"]
-
-```
-
-{{< /programming-lang >}}
-{{< programming-lang lang="ruby" >}}
-
-Dockerfile 파일에 다음 줄을 추가하여 Datadog 에이전트를 사용해 애플리케이션을 계측할 수 있습니다. 기존 Dockerfile 설정에 따라 이러한 예를 조정해야 할 수 있습니다.
-
-```
-# copy the Datadog `serverless-init` into your Docker image
-COPY --from=datadog/serverless-init /datadog-init /app/datadog-init
-
-# optionally add Datadog tags
-ENV DD_SERVICE=datadog-demo-run-ruby
-ENV DD_ENV=datadog-demo
-ENV DD_VERSION=1
-
-# this env var is needed for trace propagation to work properly in cloud run.
-# ensure to set this variable for all Datadog-instrumented downstream services.
-ENV DD_TRACE_PROPAGATION_STYLE=datadog
-
-# change the entrypoint to wrap your application into the Datadog serverless-init process
-ENTRYPOINT ["/app/datadog-init"]
-
-# execute your binary application wrapped in the entrypoint. Adapt this line to your needs
-CMD ["rails", "server", "-b", "0.0.0.0"] (adapt this line to your needs)
-
-```
-
-{{< /programming-lang >}}
-{{< /programming-lang-wrapper >}}
-
-#### 빌드팩을 사용해 에이전트 설치
-
-[`Pack Buildpacks`][3]은 Dockerfile을 사용할 필요없이 컨테이너를 패키징하는 편리한 방법을 제공합니다. 이 예에서는 Google Cloud 레지스트리와 Datadog 서버리스 빌드팩을 사용했습니다. 
-
-**참고**: 빌드팩을 실행하기 전 사용 언어의 [트레이싱 라이브러리를 설치](#install-tracing-library)합니다.
-
-다음 명령을 실행하여 애플리케이션을 빌드합니다.
-
-   ```shell
-   pack build --builder=gcr.io/buildpacks/builder \
-   --buildpack from=builder \
-   --buildpack datadog/serverless-buildpack:latest \
-   gcr.io/YOUR_PROJECT/YOUR_APP_NAME
-   ```
-
-**참고**: Alpine과는 호환되지 않습니다.
-
-### 2. 트레이싱 라이브러리 설치{#install-tracing-library}
-
-빌드팩을 사용하는 경우 [애플리케이션 설정](#3-configure-your-application)으로 건너뛸 수 있습니다.
-
-{{< programming-lang-wrapper langs="go,python,nodejs,java,dotnet,ruby" >}}
 {{< programming-lang lang="go" >}}
-[이 지침][2]을 따라 애플리케이션에 Go 트레이싱 라이브러리를 설치 및 설정하여 트레이스를 캡처하고 제출합니다. 
 
-
-[단순한 Go 애플리케이션을 위한 샘플 코드][1]
-
-
-[1]: https://github.com/DataDog/crpb/tree/main/go
-[2]: /ko/tracing/trace_collection/dd_libraries/go/?tab=containers#installation-and-getting-started
-
-{{< /programming-lang >}}
-{{< programming-lang lang="python" >}}
-
-[이 지침][2]을 따라 애플리케이션에서 Python 트레이싱 라이브러리를 설치 및 설정하여 트레이스를 캡처하고 제출합니다.
-
-[단순한 Python 애플리케이션을 위한 샘플 코드][1]
-
-[1]: https://github.com/DataDog/crpb/tree/main/python
-[2]: /ko/tracing/trace_collection/dd_libraries/python/?tab=containers#instrument-your-application
-
-{{< /programming-lang >}}
-{{< programming-lang lang="nodejs" >}}
-
-[이 지침][2]을 따라 애플리케이션에서 Node 트레이싱 라이브러리를 설치 및 설정하여 트레이스를 캡처하고 제출합니다.
-
-[단순한 Node.js 애플리케이션을 위한 샘플 코드][1]
-
-[1]: https://github.com/DataDog/crpb/tree/main/js
-[2]: /ko/tracing/trace_collection/dd_libraries/nodejs/?tab=containers#instrument-your-application
-
-{{< /programming-lang >}}
-{{< programming-lang lang="java" >}}
-
-[이 지침][2]을 따라 애플리케이션에서 Java 트레이싱 라이브러리를 설치 및 설정하여 트레이스를 캡처하고 제출합니다.
-
-[단순한 Java 애플리케이션을 위한 샘플 코드][1]
-
-[1]: https://github.com/DataDog/crpb/tree/main/java
-[2]: /ko/tracing/trace_collection/dd_libraries/java/?tab=containers#instrument-your-application
+{{% svl-init-go %}}
 
 {{< /programming-lang >}}
 {{< programming-lang lang="dotnet" >}}
 
-#### 
-
-[이 지침][2]을 따라 애플리케이션에서 [.NET Core 트레이싱 라이브러리][1] 및 [.NET Framework 트레이싱 라이브러리][2]를 설치하고 설정합니다.
-
-[1]: https://docs.datadoghq.com/ko/tracing/trace_collection/dd_libraries/dotnet-core?tab=containers#custom-instrumentation
-[2]: /ko/tracing/trace_collection/dd_libraries/dotnet-framework/?tab=containers#custom-instrumentation
+{{% svl-init-dotnet %}}
 
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
-[이 지침][2]을 따라 애플리케이션에서 Ruby 트레이싱 라이브러리를 설치 및 설정하여 트레이스를 캡처하고 제출합니다.
+{{% svl-init-ruby %}}
 
-[단순한 Ruby 애플리케이션을 위한 샘플 코드][1]
+{{< /programming-lang >}}
+{{< programming-lang lang="php" >}}
 
-[1]: https://github.com/DataDog/crpb/tree/main/ruby-on-rails
-[2]: /ko/tracing/trace_collection/dd_libraries/ruby/?tab=containers#instrument-your-application
+{{% svl-init-php %}}
 
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-### 3. 애플리케이션 설정
+### Buildpack
 
-컨테이너가 빌드되어 레지스트리에 푸시되면 마지막 단계는 Datadog 에이전트를 위한 필수 환경 변수를 설정하는 것입니다.
-- `DD_API_KEY`: Datadog API 키로 Datadog 계정에 데이터를 전송하는 데 사용됩니다. 개인정보보호와 안전을 위해 [Google Cloud Secret][10]으로 설정해야 합니다.
+[`Pack Buildpacks`][3]는 Dockerfile을 사용하지 않고 컨테이너를 패키징하는 편리한 방법을 제공합니다.
+
+먼저 트레이서를 수동으로 설치합니다.
+- [Node.JS][14]
+- [Python][13]
+- [Java][15]
+- [고(Go)][12]
+- [.NET][18]
+- [Ruby][16]
+- [PHP][17]
+
+이어서 다음 명령을 실행하여 애플리케이션을 구축합니다.
+
+```shell
+pack build --builder=gcr.io/buildpacks/builder \
+--buildpack from=builder \
+--buildpack datadog/serverless-buildpack:latest \
+gcr.io/YOUR_PROJECT/YOUR_APP_NAME
+```
+
+**참고**: Buildpack 계측은 Alpine 이미지와 호환되지 않습니다.
+
+## 애플리케이션 설정
+
+컨테이너가 만들어진 후 레지스트리에 푸시되면 마지막 단계는 Datadog 에이전트를 위한 필수 환경 변수를 설정하는 것입니다:
+- `DD_API_KEY`: Datadog API 키는 Datadog 계정으로 데이터를 보내는 데 사용됩니다. 개인 정보 보호 및 보안 이슈 방지를 위해 [Google Cloud Secret][11]으로 설정해야 합니다.
 - `DD_SITE`: Datadog 엔드포인트와 웹사이트입니다. 페이지 오른쪽에서 사이트를 선택합니다. 사이트는 {{< region-param key="dd_site" code="true" >}}입니다.
-- `DD_TRACE_ENABLED`: 트레이싱 활성화를 위해 `true`로 설정합니다.
+- `DD_TRACE_ENABLED`: 트레이싱 활성화를 위해 `true`로 설정합니다.
+- `DD_TRACE_PROPAGATION_STYLE`: 컨텍스트 전파 및 로그 추적 상관 관계를 사용하기 위해 `datadog`로 설정하세요.
 
 환경 변수와 기능에 대한 자세한 정보는 [추가 설정](#additional-configurations)을 참조하세요.
 
-이 명령은 서비스를 구축하고 외부 연결이 서비스에 도달하도록 허용합니다. `DD_API_KEY`를 환경 변수로 설정하고 서비스가 포트 80에 연결되도록 설정합니다.
+다음 명령은 서비스를 배포하고 외부 연결이 서비스에 도달하도록 허용합니다. `DD_API_KEY`를 환경 변수로 설정하고 서비스가 포트 8080을 수신하도록 설정합니다.
 
-```shell
+```
+shell
 gcloud run deploy APP_NAME --image=gcr.io/YOUR_PROJECT/APP_NAME \
-  --port=80 \
+  --port=8080 \
   --update-env-vars=DD_API_KEY=$DD_API_KEY \
   --update-env-vars=DD_TRACE_ENABLED=true \
   --update-env-vars=DD_SITE='datadoghq.com' \
-
+  --update-env-vars=DD_TRACE_PROPAGATION_STYLE='datadog' \
 ```
 
-### 3. 결과
+## 결과
 
 구축이 완료되면 메트릭과 트레이스는 Datadog로 전송됩니다. Datadog에서 **인프라스트럭처->서버리스**로 이동하여 서버리스 메트릭과 트레이스를 확인합니다.
 
@@ -311,107 +135,29 @@ gcloud run deploy APP_NAME --image=gcr.io/YOUR_PROJECT/APP_NAME \
 
 - **커스텀 메트릭**: [DogStatsd 클라이언트][4]를 사용해 커스텀 메트릭을 제출할 수 있습니다. Cloud Run 및 기타 서버리스 애플리케이션의 경우 [분포][9] 메트릭을 사용합니다. 분포는 `avg`, `sum`, `max`, `min`, `count` 집계를 기본적으로 제공합니다. 메트릭 요약 페이지에서 백분위수 집계(p50, p75, p90, p95, p99)를 활성화할 수 있습니다. 게이지 메트릭 유형에 대한 분포를 모니터링하려면 [시간 및 공간 집계][11] 모두에 대해 `avg`를 사용합니다. 개수 메트릭 유형에 대한 분포를 모니터링하려면 시간 및 공간 집계 모두에 `sum`을 사용합니다.
 
-- **트레이스 전파**: 분산된 트레이싱에 트레이싱 컨텍스트를 전파하려면 Cloud Run 앱 및 Datadog 계측 서비스 다운스트림에서 `DD_TRACE_PROPAGATION_STYLE` 환경 변수를 `'datadog'`로 설정합니다.
-
 ### 환경 변수
 
 | 변수 | 설명 |
 | -------- | ----------- |
 |`DD_API_KEY`| [Datadog API 키][7] - **필수**|
 | `DD_SITE` | [Datadog 사이트][5] - **필수** |
-| `DD_LOGS_ENABLED` | 참인 경우 로그(stdout 및 stderr)를 Datadog에 전송합니다. 기본값은 거짓입니다. |
+| `DD_LOGS_ENABLED` | true인 경우 로그 (stdout 및 stderr)를 Datadog에 전송합니다. 기본값은 false입니다. |
+| `DD_LOGS_INJECTION`| true인 경우 [Java][19], [Node][20], [.NET][21] 및 [PHP][22]에서 지원되는 로거에 대한 트레이스 데이터로 모든 로그를 보강합니다. [Python][23], [Go][24] 및 [Ruby][25]에 대한 추가 문서를 참조하세요. |
+| `DD_TRACE_SAMPLE_RATE`|  트레이스 수집 샘플링 속도 `0.0` 및 `1.0`을 제어합니다. |
 | `DD_SERVICE`      | [통합 서비스 태깅][6]을 참조하세요.                                  |
 | `DD_VERSION`      | [통합 서비스 태깅][6]을 참조하세요.                                  |
 | `DD_ENV`          | [통합 서비스 태깅][6]을 참조하세요.                                  |
 | `DD_SOURCE`       | [통합 서비스 태깅][6]을 참조하세요.                                  |
 | `DD_TAGS`         | [통합 서비스 태깅][6]을 참조하세요.                                  |
 
-### OpenTelemetry
+## 트러블슈팅
 
-이 단계를 따라 OpenTelemetry 데이터를 Datadog에 전송하세요.
-
-1. OpenTelemetry가 Datadog `serverless-init`에 스팬을 내보내도록 명령하세요.
-
-   ```js
-   // instrument.js
-
-   const { NodeTracerProvider } = require("@opentelemetry/sdk-trace-node");
-   const { OTLPTraceExporter } = require('@opentelemetry/exporter-trace-otlp-http');
-   const { Resource } = require('@opentelemetry/resources');
-   const { SemanticResourceAttributes } = require('@opentelemetry/semantic-conventions');
-   const { SimpleSpanProcessor } = require('@opentelemetry/sdk-trace-base');
-
-   const provider = new NodeTracerProvider({
-      resource: new Resource({
-          [ SemanticResourceAttributes.SERVICE_NAME ]: '<your-service-name>',
-      })
-   });
-
-   provider.addSpanProcessor(
-      new SimpleSpanProcessor(
-          new OTLPTraceExporter(
-              { url: 'http://localhost:4318/v1/traces' },
-          ),
-      ),
-   );
-   provider.register();
-   ```
-
-2. Express에 OpenTelemetry 계측을 추가하세요. `ddtrace`와 유사합니다.
-
-   ```js
-   // instrument.js
-
-   const { ExpressInstrumentation } = require('@opentelemetry/instrumentation-express');
-   const { HttpInstrumentation } = require('@opentelemetry/instrumentation-http');
-   const { registerInstrumentations } = require('@opentelemetry/instrumentation');
-
-   registerInstrumentations({
-      instrumentations: [
-          new HttpInstrumentation(),
-          new ExpressInstrumentation(),
-      ],
-   });
-
-   ```
-
-3. 런타임에 계측을 추가하세요. 예를 들어 Node.js의 경우 `NODE_OPTIONS`을 사용하세요.
-   ```
-   # Dockerfile
-
-   FROM node
-
-   WORKDIR /app
-   COPY package.json index.js instrument.js /app/
-   RUN npm i
-
-   ENV NODE_OPTIONS="--require ./instrument"
-
-   CMD npm run start
-   ```
-
-4. Datadog `serverless-init`를 추가합니다.
-   ```
-   # Dockerfile
-
-   COPY --from=datadog/serverless-init /datadog-init /app/datadog-init
-   ENTRYPOINT ["/app/datadog-init"]
-   ```
-5. Enable OpenTelemetry in the Datadog  `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT` 또는 `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_GRPC_ENDPOINT` 환경 변수를 사용해 Datadog `serverless-init`에서 OpenTelemetry를 활성화하세요.
-
-   ```
-   # Dockerfile
-
-   ENV DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT="localhost:4318"
-   ```
-
-## 문제 해결
-
-이 통합은 전체 SSL 구현 환경을 포함하는 런타임에 따라 달라집니다. Node에 대해 슬림 이미지를 사용하는 경우 Dockerfile에 다음 명령을 추가하여 인증서를 포함해야 할 수 있습니다.
+이 통합은 전체 SSL 구현이 있는 런타임에 따라 달라집니다. 슬림 이미지를 사용하는 경우 인증서를 포함하려면 Dockerfile에 다음 명령을 추가해야 할 수도 있습니다.
 
 ```
 RUN apt-get update && apt-get install -y ca-certificates
 ```
+
 
 ## 참고 자료
 
@@ -429,3 +175,17 @@ RUN apt-get update && apt-get install -y ca-certificates
 [9]: /ko/metrics/distributions/
 [10]: /ko/metrics/#time-and-space-aggregation
 [11]: https://cloud.google.com/run/docs/configuring/secrets
+[12]: /ko/tracing/trace_collection/library_config/go/
+[13]: /ko/tracing/trace_collection/dd_libraries/python/?tab=containers#instrument-your-application
+[14]: /ko/tracing/trace_collection/dd_libraries/nodejs/?tab=containers#instrument-your-application
+[15]: /ko/tracing/trace_collection/dd_libraries/java/?tab=containers#instrument-your-application
+[16]: /ko/tracing/trace_collection/dd_libraries/ruby/?tab=containers#instrument-your-application
+[17]: /ko/tracing/trace_collection/dd_libraries/php/?tab=containers#install-the-extension
+[18]: /ko/tracing/trace_collection/dd_libraries/dotnet-core/?tab=linux#custom-instrumentation
+[19]: /ko/tracing/other_telemetry/connect_logs_and_traces/java/?tab=log4j2
+[20]: /ko/tracing/other_telemetry/connect_logs_and_traces/nodejs
+[21]: /ko/tracing/other_telemetry/connect_logs_and_traces/dotnet?tab=serilog
+[22]: /ko/tracing/other_telemetry/connect_logs_and_traces/php
+[23]: /ko/tracing/other_telemetry/connect_logs_and_traces/python
+[24]: /ko/tracing/other_telemetry/connect_logs_and_traces/go
+[25]: /ko/tracing/other_telemetry/connect_logs_and_traces/ruby

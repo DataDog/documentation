@@ -9,7 +9,7 @@ type: multi-code-lang
 code_lang_weight: 80
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-android
-  tag: GitHub
+  tag: "Source Code"
   text: dd-sdk-android Source code
 - link: tracing/visualization/
   tag: Documentation
@@ -22,6 +22,9 @@ Send [traces][1] to Datadog from your Android applications with [Datadog's `dd-s
 * Create custom [spans][3] for operations in your application.
 * Add `context` and extra custom attributes to each span sent.
 * Optimized network usage with automatic bulk posts.
+
+<div class="alert alert-info"><strong>Note</strong>: Datadog charges for <strong>ingested and indexed</strong> spans sent from your Android applications, but does not charge for the underlying devices. Read more in the <a href="/account_management/billing/apm_tracing_profiler/">APM billing documentation</a>.</div>
+
 
 ## Setup
 
@@ -690,9 +693,10 @@ val okHttpClient = OkHttpClient.Builder()
 {{% /tab %}}
 {{% tab "Java" %}}
 ```java
-OkHttpClient okHttpClient =  new OkHttpClient.Builder() 
+final List<String> tracedHosts = Arrays.asList("example.com", "example.eu");
+final OkHttpClient okHttpClient = new OkHttpClient.Builder()
         .addInterceptor(
-                new DatadogInterceptor(Arrays.asList("example.com", "example.eu"), RateBasedSampler(20f))
+                new DatadogInterceptor(/** SDK instance name or null **/, tracedHosts, null, null, new RateBasedSampler(20f))
         )
         .build();
 ```
@@ -717,10 +721,14 @@ val okHttpClient =  OkHttpClient.Builder()
 {{% /tab %}}
 {{% tab "Java" %}}
 ```java
-final List<String> tracedHosts = Arrays.asList("example.com", "example.eu"); 
-final OkHttpClient okHttpClient =  new OkHttpClient.Builder()
-        .addInterceptor(new DatadogInterceptor(tracedHosts, RateBasedSampler(20f)))
-        .addNetworkInterceptor(new TracingInterceptor(tracedHosts, RateBasedSampler(20f)))
+final List<String> tracedHosts = Arrays.asList("example.com", "example.eu");
+final OkHttpClient okHttpClient = new OkHttpClient.Builder()
+        .addInterceptor(
+                new DatadogInterceptor(/** SDK instance name or null **/, tracedHosts, null, null, new RateBasedSampler(20f))
+        )
+        .addNetworkInterceptor(
+                new TracingInterceptor(/** SDK instance name or null **/, tracedHosts, null, new RateBasedSampler(20f))
+        )
         .build();
 ```
 {{% /tab %}}

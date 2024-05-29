@@ -1,0 +1,18 @@
+<details class="collapsible-section">
+  <summary class="collapsible-header" tabindex="0" role="button" aria-expanded="false" onkeydown="toggleCollapse(event)">
+    {{- $headingLevel := default "h3" (.Get "level") -}}
+    <div class="header-content">
+      <div class="header-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="icon-chevron-right">
+          <path fill="currentColor" d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+        </svg>
+      </div>
+      <div class="header-text">
+        {{ printf "<%s class='header-text-inner'>%s</%s>" $headingLevel (.Get "title") $headingLevel | safeHTML }}
+      </div>
+    </div>
+  </summary>
+  <div class="collapsible-content">
+    {{.Inner}}
+  </div>
+</details>

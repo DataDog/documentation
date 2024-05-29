@@ -1,7 +1,7 @@
 ---
 title: Agent
 kind: documentation
-description: Install & configure the Agent to collect data
+description: Install and configure the Agent to collect data
 further_reading:
 - link: "/logs/"
   tag: "Documentation"

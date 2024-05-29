@@ -6,6 +6,7 @@ assets:
     memcached: assets/dashboards/memcached_dashboard.json
     memcached_screenboard: assets/dashboards/memcached_screenboard.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -18,6 +19,7 @@ assets:
     - memcached
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 32
     source_type_name: Memcached
   logs:
     source: memcached
@@ -39,12 +41,11 @@ draft: false
 git_integration_title: mcache
 integration_id: memcached
 integration_title: Memcache
-integration_version: 3.3.1
+integration_version: 4.1.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: mcache
-oauth: {}
 public_title: Memcache
 short_description: メモリ使用量、ヒット数、ミス数、エビクション数、フィルパーセンテージなどを追跡する。
 supported_os:
@@ -66,19 +67,20 @@ tile:
   title: Memcache
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
 
 Agent の Memcache チェックを使用して、Memcache のメモリ使用量、ヒット数、ミス数、エビクション数、フィルパーセンテージなどを追跡します。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 Memcache チェックは [Datadog Agent][1] パッケージに含まれています。Memcache サーバーに追加でインストールする必要はありません。
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 ホストで実行されている Agent 用にこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[コンテナ化](#containerized)セクションを参照してください。
 
@@ -87,11 +89,11 @@ Memcache サーバーを起動する際に、バインディングプロトコ�
 #### メトリクスの収集
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
-#### ホスト
+#### メトリクスベース SLO
 
-ホストで実行中の Agent に対してこのチェックを構成するには:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
 1. [Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `mcache.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル mcache.d/conf.yaml][2] を参照してください。
 
@@ -120,7 +122,7 @@ Datadog APM は、Memcache と統合して分散システム全体のトレー�
 [4]: https://docs.datadoghq.com/ja/tracing/send_traces/
 [5]: https://docs.datadoghq.com/ja/tracing/setup/
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "コンテナ化" %}}
 
 #### コンテナ化
 
@@ -128,9 +130,9 @@ Datadog APM は、Memcache と統合して分散システム全体のトレー�
 
 | パラメーター            | 値                                 |
 | -------------------- | ------------------------------------- |
-| `<インテグレーション名>` | `mcache`                              |
-| `<初期コンフィギュレーション>`      | 空白または `{}`                         |
-| `<インスタンスコンフィギュレーション>`  | `{"url": "%%host%%","port": "11211"}` |
+| `<INTEGRATION_NAME>` | `mcache`                              |
+| `<INIT_CONFIG>`      | 空白または `{}`                         |
+| `<INSTANCE_CONFIG>`  | `{"url": "%%host%%","port": "11211"}` |
 
 ##### トレースの収集
 
@@ -148,7 +150,7 @@ Agent コンテナで必要な環境変数
 
 次に、[アプリケーションコンテナをインスツルメント][4]し、Agent コンテナの名前に `DD_AGENT_HOST` を設定します。
 
-#### ログの収集
+#### 収集データ
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -178,23 +180,23 @@ _Agent バージョン 6.0 以降で利用可能_
 
 [Agent の `status` サブコマンド][2]を実行し、Checks セクションで `mcache` を探します。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "mcache" >}}
 
 
 `mcache.d/conf.yaml` で `options.slabs: true` と設定している場合、チェックは `memcache.slabs.*` メトリクスのみを収集します。同様に、`options.items: true` と設定している場合、チェックは `memcache.items.*` メトリクスのみを収集します。
 
-### イベント
+### ヘルプ
 
 Mcache チェックには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 {{< get-service-checks-from-git "mcache" >}}
 
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 
@@ -205,7 +207,7 @@ Mcache チェックには、イベントは含まれません。
 - [Redis または Memcached を使用した ElastiCache のパフォーマンスメトリクスの監視][6]
 
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [3]: https://docs.datadoghq.com/ja/help/
 [4]: https://www.datadoghq.com/blog/speed-up-web-applications-memcached

@@ -14,21 +14,23 @@ type: multi-code-lang
 | -------------------------------- | ----------------------------|
 | Threat Detection | 2.23.0|
 | Threat Protection  | 2.26.0|
+| ブロックされたリクエストへの対応をカスタマイズする | 2.27.0 |
 | Vulnerability Management for Open Source Software (OSS) |  2.16.0  |
-| Vulnerability Management for Code-level (ベータ版)| 非公開ベータ版  |
+| Vulnerability Management for Code-level (ベータ版)| 2.42.0  |
+| ユーザーアクティビティイベントの自動追跡 | 2.32.0 |
 
-.NET でサポートされるすべての ASM 機能を得るためのトレーサーの最小バージョンは 2.26.0 です。
+.NET でサポートされるすべての ASM 機能を得るためのトレーサーの最小バージョンは 2.42.0 です。
 
-**注**: Threat Protection では、[リモート構成][3]を有効にする必要があり、これは記載のトレーサーの最小バージョンに含まれています。
+**注**: Threat Protection を使用するには、[リモート構成][3]を有効にする必要があり、これはリストされている最小トレーサーバージョンに含まれています。
 
 ### サポートされるデプロイメントタイプ
-|タイプ   | Threat Detection のサポート |  Vulnerability Management for OSS のサポート |
+|タイプ   | Threat Detection のサポート |  OSS の脆弱性管理のサポート |
 | ---   |   ---             |           ----        |
 | Docker | {{< X >}}  | {{< X >}} |
-| Kubernetes | {{< X >}}  | {{< X >}} | 
-| AWS ECS | {{< X >}}  | {{< X >}} |
+| トレーシング | {{< X >}}  | {{< X >}} |
+| Amazon ECS | {{< X >}}  | {{< X >}} |
 | AWS Fargate | {{< X >}}  | {{< X >}} |
-| AWS Lambda | {{< X >}} | | 
+| AWS Lambda | {{< X >}} | |
 | Azure App Service | {{< X >}}  | {{< X >}} |
 
 **注**: Azure App Service は **Web アプリケーションでのみ**サポートされています。ASM は Azure Functions をサポートしていません。
@@ -37,7 +39,7 @@ type: multi-code-lang
 
 ### サポートされている .NET バージョン
 
-| .NET Framework バージョン  | マイクロソフトサポート終了 | サポートレベル                       | パッケージバージョン             | 
+| .NET Framework バージョン  | マイクロソフトサポート終了 | サポートレベル                       | パッケージバージョン             |
 | ----------------------- | --------------------- | ----------------------------------- | --------------------------- |
 | 4.8                     |                       | GA   | 最新                      |
 | 4.7.2                   |                       | GA | 最新                      |
@@ -65,7 +67,7 @@ type: multi-code-lang
 - ご利用のフレームワークが下記に掲載されていない場合でも、**Vulnerability Management for Code-level** が危険な Cookie の脆弱性を検知します。
 
 
-| フレームワーク                  | Threat Detection のサポートの有無 | Threat Protection のサポートの有無 | Vulnerability Management for Code-level のサポートの有無 |
+| フレームワーク                  | Threat Detection のサポートの有無 | Threat Detection のサポートの有無 | Vulnerability Management for Code-level のサポートの有無 |
 | ----------------------- | --------------- | ---------------------------------------------- | ---------------------------------------------- |
 | ASP.NET MVC | {{< X >}}  |{{< X >}}  | {{< X >}} |
 | ASP.NET Web API 2 | {{< X >}} | {{< X >}} | {{< X >}}  |
@@ -90,6 +92,18 @@ type: multi-code-lang
 | SQL Server         | {{< X >}} |   {{< X >}}    |{{< X >}}    |
 | MySQL       | {{< X >}} |   {{< X >}}    |{{< X >}}    |
 | SQLite         | {{< X >}} |   {{< X >}}    |{{< X >}}    |
+
+### User Authentication Frameworks の互換性
+
+**User Authentication Frameworks へのインテグレーションは以下を提供します。**
+
+- ユーザー ID を含むユーザーログインイベント
+- ユーザーサインアップイベント (組み込みの SignInManager を使用するアプリ)
+- ユーザーログインイベントのアカウント乗っ取り検出モニタリング
+
+| フレームワーク         |
+|-------------------|
+| > .Net Core 2.1   |
 
 [1]: /ja/tracing/trace_collection/compatibility/dotnet-core/
 [2]: /ja/tracing/trace_collection/compatibility/dotnet-framework/

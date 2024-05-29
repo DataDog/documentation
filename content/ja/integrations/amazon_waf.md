@@ -12,7 +12,7 @@ doc_link: https://docs.datadoghq.com/integrations/amazon_waf/
 draft: false
 git_integration_title: amazon_waf
 has_logo: true
-integration_id: amazon-waf
+integration_id: ''
 integration_title: AWS WAF
 integration_version: ''
 is_public: true
@@ -24,15 +24,16 @@ short_description: 許可およびブロックされたリクエストを追跡�
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 AWS WAF は、一般的な Web エクスプロイトから Web アプリケーションを保護するために役立つ Web アプリケーションファイアウォールです。
 
 このインテグレーションを有効にすると、WAF メトリクスを Datadog に表示できます。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 
@@ -42,14 +43,14 @@ AWS WAF は、一般的な Web エクスプロイトから Web アプリケー�
 
 2. [Datadog - AWS WAF インテグレーション][3]をインストールします。
 
-### ログの収集
+### 収集データ
 
 #### 監査ログ
 
 Web Application Firewall 監査ログを有効にして、Web ACL で分析されたトラフィックに関する詳細情報を取得します。
 
-1. `aws-waf-logs-` で始まる名前で `Amazon Kinesis Data Firehose` を作成します。
-2. `Amazon Kinesis Data Firehose` の送信先として `Amazon S3` を選択し、プレフィックスとして `waf` を追加します。
+1. `aws-waf-logs-` から始まる名前で `Amazon Data Firehose` を作成します。
+2. `Amazon Data Firehose` の送信先で `Amazon S3` を選択し、`waf` をプレフィックスとして必ず追加してください。
 3. 必要な Web ACL を選択し、そのログを新しく作成した Firehose に送信します ([詳細な手順はこちら][4])。
 
 WAF ログが収集され、S3 バケットに送信されます。
@@ -64,9 +65,9 @@ WAF ログが収集され、S3 バケットに送信されます。
 
 **注**: Datadog Lambda Forwarder は、WAF ログのネストされたオブジェクトの配列を、使いやすいように自動的に `key:value` 形式に変換します。
 
-## 収集データ
+## Datadog Operator
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "amazon_waf" >}}
 
 
@@ -74,17 +75,17 @@ WAF ログが収集され、S3 バケットに送信されます。
 
 AWS から取得される各メトリクスには、ホスト名やセキュリティ グループなど、AWS コンソールに表示されるのと同じタグが割り当てられます。
 
-### イベント
+### ヘルプ
 
 AWS WAF インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 
 AWS WAF インテグレーションには、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
-ご不明な点は、[Datadog のサポートチーム][7]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][7]までお問い合わせください。
 
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/integrations/amazon-web-services

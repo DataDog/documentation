@@ -114,7 +114,7 @@ With the following configuration placeholder values:
 | `<NEW_METRIC_NAME>`                      | Transforms the `<METRIC_TO_FETCH>` metric key to `<NEW_METRIC_NAME>` in Datadog.                   |
 
 
-The `metrics` configuration is a list of metrics to retrieve as custom metrics. Include each metric to fetch and the desired metric name in Datadog as key value pairs, for example, `{"<METRIC_TO_FETCH>":"<NEW_METRIC_NAME>"}`. You can alternatively provide a list of metric names strings, interpreted as regular expressions, to bring the desired metrics with their current names. If you want **all** metrics, then use `".*"` rather than `"*"`.
+The `metrics` configuration is a list of metrics to retrieve as custom metrics. Include each metric to fetch and the desired metric name in Datadog as key value pairs, for example, `{"<METRIC_TO_FETCH>":"<NEW_METRIC_NAME>"}`. To prevent excess custom metrics charges, Datadog recommends limiting the scope to only include metrics that you need. You can alternatively provide a list of metric names strings, interpreted as regular expressions, to bring the desired metrics with their current names. If you want **all** metrics, then use `".*"` rather than `"*"`.
 
 **Note:** Regular expressions can potentially send a lot of custom metrics.
 
@@ -223,6 +223,8 @@ kubectl get services -o=jsonpath='{.items[?(@.metadata.annotations.prometheus\.i
 ```
 
 Once the Prometheus scrape feature is enabled, the Datadog Agent collects custom metrics from these resources. If you do not want to collect the custom metrics from these resources, you can remove this annotation or update the Autodiscovery rules as described in the [advanced configuration section](#advanced-configuration).
+
+**Note**: Enabling this feature without advanced configuration can cause a significant increase in custom metrics, which can lead to billing implications. See the [advanced configuration section](#advanced-configuration) to learn how to only collect metrics from a subset of containers/pods/services.
 
 #### Basic configuration
 

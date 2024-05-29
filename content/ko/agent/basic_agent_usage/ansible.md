@@ -426,7 +426,7 @@ Datadog 통합의 사용 가능한 버전을 보려면 [통합-코어 레포지�
       log_level: INFO
       apm_config:
         enabled: true
-      logs_enabled: true  # available with Agent v6 and v7
+      logs_enabled: true  # available with Agent v6 & v7
     datadog_checks:
       process:
         init_config:

@@ -1,0 +1,23 @@
+.product-availability {
+    strong, p {
+        font-size: 18px;
+    }
+    strong {
+        white-space: nowrap;
+    }
+    p {
+        margin-left: 4px;
+        .product-wrapper {
+            white-space: nowrap;
+            .product {
+                &:hover {
+                    color: $ddpurple;
+                }
+                i {
+                    position: relative;
+                    top: 1.5px;
+                }
+            }
+        }
+    }
+}

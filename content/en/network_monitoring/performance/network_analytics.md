@@ -21,7 +21,11 @@ further_reading:
       text: 'Collect your Network Data with the Datadog Agent.'
 ---
 
-{{< img src="network_performance_monitoring/network_analytics/main_page_npm2.png" alt="Main page" >}}
+## Overview
+
+The Network Analytics page provides insights into your overall network health and shows [recommended queries](#recommended-queries) at the top of the page. These recommended queries enable you to run common queries and see snapshots of relevant metrics, so that you can see changes in throughput, latency, DNS errors, and more. Clicking on a recommended query automatically populates the search bar, group bys, and summary graphs to provide you with relevant insights into your network.
+
+{{< img src="network_performance_monitoring/network_analytics/main_page_npm3.png" alt="Network Analytics landing page under Network Performance" >}}
 
 ## Queries
 
@@ -31,7 +35,7 @@ To refine your search to traffic between particular endpoints, aggregate and fil
 
 The following screenshot shows the default view, which aggregates the client and server by the `service` tag. Accordingly, each row in the table represents service-to-service aggregate connections when aggregated over a one hour time period.
 
-{{< img src="network_performance_monitoring/network_analytics/context_npm2.png" alt="context" style="width:80%;">}}
+{{< img src="network_performance_monitoring/network_analytics/context_npm2.png" alt="Query interface, with the inputs 'Search for', 'View clients as', and 'View servers as'" style="width:90%;">}}
 
 The next example shows all aggregate connections from IP addresses representing services in region `us-east-1` to availability zones:
 
@@ -323,7 +327,7 @@ The **Security** tab highlights potential network threats and findings detected 
 [4]: /network_monitoring/performance/guide/gcp_supported_services/
 [5]: /logs/explorer/saved_views/
 [6]: /security/threats/
-[7]: /security/misconfigurations/
+[7]: /security/cloud_security_management/misconfigurations/
 [8]: /security/detection_rules/
 [9]: /network_monitoring/performance/setup/#enhanced-resolution
 [10]: /network_monitoring/dns/#recommended-queries

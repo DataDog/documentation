@@ -5,7 +5,7 @@ description: Learn how to use CI Visibility and RUM to connect your Swift test r
 aliases:
 - /continuous_integration/guides/rum_swift_integration
 - /continuous_integration/integrate_tests/swift_tests
-- continuous_integration/tests/swift_tests
+- /continuous_integration/tests/swift_tests
 further_reading:
 - link: "/continuous_integration/tests"
   tag: "Documentation"
@@ -32,7 +32,7 @@ The CI Visibility - RUM integration is available for these versions of `dd-sdk-s
 
 ## Connect Swift tests and RUM
 
-If you link `dd-sdk-swift-testing` for your UI tests and the application being tested is instrumented using [Real User Monitoring][1], your test results and their generated RUM browser sessions and session replays are automatically linked. 
+If you link `dd-sdk-swift-testing` for your UI tests and the application being tested is instrumented using [Real User Monitoring][1], your test results and their generated RUM browser sessions and session replays are automatically linked.
 
 A **RUM Sessions** tab appears in the Test Visibility test detail side panel.
 

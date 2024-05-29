@@ -19,12 +19,12 @@ Agent は、読み取り専用のユーザーとしてログインすること�
 1. [データベースのパラメーターを構成する](#configure-postgres-settings)
 1. [Agent にデータベースへのアクセスを付与する](#grant-the-agent-access)
 1. [Agent をインストールする](#install-the-agent)
-1. [Azure PostgreSQL インテグレーションをインストールする](#install-the-rds-integration)
+1. [Azure PostgreSQL インテグレーションをインストールする](#install-the-azure-postgresql-integration)
 
 ## はじめに
 
 サポート対象の PostgreSQL バージョン
-: 9.6、10、11、12、13、14
+: 9.6、10、11、12、13、14、15
 
 サポート対象の Azure PostgreSQL のデプロイメントタイプ
 : Azure VM、Single Server、Flexible Server の PostgreSQL
@@ -37,7 +37,7 @@ Agent は、読み取り専用のユーザーとしてログインすること�
 データベースモニタリングは、ベースとなる Agent 上のインテグレーションとして動作します ([ベンチマークを参照][1]してください)。
 
 プロキシ、ロードバランサー、コネクションプーラー
-: Agent は、監視対象のホストに直接接続する必要があります。セルフホスト型のデータベースでは、`127.0.0.1` またはソケットを使用することをお勧めします。Agent をプロキシ、ロードバランサー、または `pgbouncer` などのコネクションプーラーを経由してデータベースに接続しないようご注意ください。クライアントアプリケーションのアンチパターンとなる可能性があります。また、各 Agent は基礎となるホスト名を把握し、フェイルオーバーの場合でも常に 1 つのホストのみを使用する必要があります。Datadog Agent が実行中に異なるホストに接続すると、メトリクス値の正確性が失われます。
+: Datadog Agent は、監視対象のホストに直接接続する必要があります。セルフホスト型のデータベースでは、`127.0.0.1` またはソケットを使用することをお勧めします。Agent をプロキシ、ロードバランサー、または `pgbouncer` などのコネクションプーラーを経由してデータベースに接続しないようご注意ください。フェイルオーバーや負荷分散などで Datadog Agent が実行中に異なるホストに接続すると、Agent は 2 つのホスト間の統計情報の差異を計算し、メトリクスの正確性が失われます。
 
 データセキュリティへの配慮
 : Agent がお客様のデータベースからどのようなデータを収集するか、またそのデータの安全性をどのように確保しているかについては、[機密情報][2]を参照してください。
@@ -51,7 +51,7 @@ Agent は、読み取り専用のユーザーとしてログインすること�
 
 | パラメーター | 値 | 説明 |
 | --- | --- | --- |
-| `track_activity_query_size` | `4096` | より大きなクエリを収集するために必要です。`pg_stat_activity` と `pg_stat_statements` の SQL テキストのサイズを拡大します。デフォルト値のままだと、`1024` 文字よりも長いクエリは収集されません。 |
+| `track_activity_query_size` | `4096` | より大きなクエリを収集するために必要です。`pg_stat_activity` の SQL テキストのサイズを拡大します。デフォルト値のままだと、`1024` 文字よりも長いクエリは収集されません。 |
 | `pg_stat_statements.track` | `ALL` | オプション。ストアドプロシージャや関数内のステートメントを追跡することができます。 |
 | `pg_stat_statements.max` | `10000` | オプション。`pg_stat_statements` で追跡する正規化されたクエリの数を増やします。この設定は、多くの異なるクライアントからさまざまな種類のクエリが送信される大容量のデータベースに推奨されます。 |
 | `pg_stat_statements.track_utility` | `off` | オプション。PREPARE や EXPLAIN のようなユーティリティコマンドを無効にします。この値を `off` にすると、SELECT、UPDATE、DELETE などのクエリのみが追跡されます。 |
@@ -63,7 +63,7 @@ Agent は、読み取り専用のユーザーとしてログインすること�
 | パラメーター | 値 | 説明 |
 | --- | --- | --- |
 | `azure.extensions` | `pg_stat_statements` | `postgresql.queries.*` メトリクスに対して必要です。[pg_stat_statements][5] 拡張機能を使用して、クエリメトリクスの収集を可能にします。 |
-| `track_activity_query_size` | `4096` | より大きなクエリを収集するために必要です。`pg_stat_activity` および `pg_stat_statements` の SQL テキストのサイズを拡大します。 デフォルト値のままだと、`1024` 文字よりも長いクエリは収集されません。 |
+| `track_activity_query_size` | `4096` | より大きなクエリを収集するために必要です。`pg_stat_activity` の SQL テキストのサイズを拡大します。 デフォルト値のままだと、`1024` 文字よりも長いクエリは収集されません。 |
 | `pg_stat_statements.track` | `ALL` | オプション。ストアドプロシージャや関数内のステートメントを追跡することができます。 |
 | `pg_stat_statements.max` | `10000` | オプション。`pg_stat_statements` で追跡する正規化されたクエリの数を増やします。この設定は、多くの異なるクライアントからさまざまな種類のクエリが送信される大容量のデータベースに推奨されます。 |
 | `pg_stat_statements.track_utility` | `off` | オプション。PREPARE や EXPLAIN のようなユーティリティコマンドを無効にします。この値を `off` にすると、SELECT、UPDATE、DELETE などのクエリのみが追跡されます。 |
@@ -75,7 +75,7 @@ Agent は、読み取り専用のユーザーとしてログインすること�
 
 ## Agent にアクセスを付与する
 
-Datadog Agent は、統計やクエリを収集するためにデータベースサーバーへの読み取り専用のアクセスを必要とします。
+Datadog Agent は統計情報やクエリを収集するために、データベースサーバーへの読み取り専用アクセス権を必要とします。
 
 Postgres がレプリケーションされている場合、以下の SQL コマンドはクラスター内の**プライマリ**データベースサーバー (ライター) で実行する必要があります。Agent が接続するデータベースサーバー上の PostgreSQL データベースを選択します。Agent は、どのデータベースに接続してもデータベースサーバー上のすべてのデータベースからテレメトリーを収集することができるため、デフォルトの `postgres` データベースを使用することをお勧めします。[そのデータベースに対して、固有のデータに対するカスタムクエリ]を Agent で実行する必要がある場合のみ別のデータベースを選択してください[5]。
 
@@ -91,9 +91,39 @@ Postgres がレプリケーションされている場合、以下の SQL コマ
 CREATE USER datadog WITH password '<PASSWORD>';
 ```
 
-**注:** Azure マネージド ID 認証もサポートされています。Azure インスタンスでのこれの構成方法については、[ガイド][12]を参照してください。
+**注:** Microsoft Entra ID マネージド ID 認証もサポートされています。Azure インスタンスでのこれの構成方法については、[ガイド][12]を参照してください。
+
 
 {{< tabs >}}
+{{% tab "Postgres ≥ 16" %}}
+
+**すべてのデータベース**に以下のスキーマを作成します。
+
+```SQL
+CREATE SCHEMA datadog;
+GRANT USAGE ON SCHEMA datadog TO datadog;
+GRANT USAGE ON SCHEMA public TO datadog;
+GRANT pg_read_all_settings TO datadog;
+GRANT pg_read_all_stats TO datadog;
+CREATE EXTENSION IF NOT EXISTS pg_stat_statements;
+```
+
+{{% /tab %}}
+
+{{% tab "Postgres 15" %}}
+
+**すべてのデータベース**に以下のスキーマを作成します。
+
+```SQL
+CREATE SCHEMA datadog;
+GRANT USAGE ON SCHEMA datadog TO datadog;
+GRANT USAGE ON SCHEMA public TO datadog;
+GRANT pg_monitor TO datadog;
+CREATE EXTENSION IF NOT EXISTS pg_stat_statements;
+```
+
+{{% /tab %}}
+
 {{% tab "Postgres ≥ 10" %}}
 
 **すべてのデータベース**に以下のスキーマを作成します。
@@ -443,7 +473,25 @@ Cluster Agent は自動的にこのコンフィギュレーションを登録し
 
 Azure からより包括的なデータベースメトリクスを収集するには、[Azure PostgreSQL インテグレーション][10]をインストールします (オプション)。
 
-## トラブルシューティング
+## 既知の問題
+
+Postgres 16 データベースの場合、次のエラーメッセージがログファイルに書き込まれます。
+
+```
+psycopg2.errors.InsufficientPrivilege: permission denied for function pg_ls_waldir
+2024-03-05 12:36:16 CET | CORE | ERROR | (pkg/collector/python/datadog_agent.go:129 in LogMessage) | - | (core.py:94) | Error querying wal_metrics: permission denied for function pg_ls_waldir
+2024-03-05 12:36:30 CET | CORE | ERROR | (pkg/collector/python/datadog_agent.go:129 in LogMessage) | postgres:cc861f821fbbc2ae | (postgres.py:239) | Unhandled exception while using database connection postgres
+Traceback (most recent call last):
+  File "/opt/datadog-agent/embedded/lib/python3.11/site-packages/datadog_checks/postgres/postgres.py", line 224, in db
+    yield self._db
+  File "/opt/datadog-agent/embedded/lib/python3.11/site-packages/datadog_checks/postgres/postgres.py", line 207, in execute_query_raw
+    cursor.execute(query)
+psycopg2.errors.InsufficientPrivilege: permission denied for function pg_ls_waldir
+```
+
+その結果、Postgres 16 では Agent は次のメトリクスを収集しません: `postgresql.wal_count`、`postgresql.wal_size`、`postgresql.wal_age`
+
+## ヘルプ
 
 インテグレーションと Agent を手順通りにインストール・設定しても期待通りに動作しない場合は、[トラブルシューティング][11]を参照してください。
 

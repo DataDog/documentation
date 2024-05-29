@@ -18,7 +18,7 @@ further_reading:
 
 _8 minutes to complete_
 
-{{< img src="tracing/guide/custom_span/custom_span_1.png" alt="Analytics View" style="width:90%;">}}
+{{< img src="tracing/guide/custom_span/custom_span_1_cropped.png" alt="Analytics View" style="width:90%;">}}
 
 <div class="alert alert-warning"><strong>Note</strong>: This page describes using OpenTracing to custom instrument applications. OpenTracing is deprecated. The concepts presented here still apply, but follow the <a href="/tracing/trace_collection/otel_instrumentation/">Custom Instrumentation with OpenTelemetry</a> instructions and examples for your language instead. </div>
 
@@ -32,7 +32,7 @@ Datadog instruments many frameworks out-of-the-box, such as web services, databa
 
 These examples walk through tracing the entire `BackupLedger.write` method to measure its execution time and status. `BackupLedger.write` is an action that saves the current state of a transaction ledger in memory before making a call to a payments database to post a new customer charge. This happens when the `charge` endpoint of the payments service is hit:
 
-{{< img src="tracing/guide/custom_span/custom_span_2.png" alt="Analytics View" style="width:90%;">}}
+{{< img src="tracing/guide/custom_span/custom_span_2_cropped.png" alt="Analytics View" style="width:90%;">}}
 
 The `http.request POST /charge/` span is taking a lot of time without having any direct child spans. This is a clue that this request requires further instrumentation to gain better insights into its behavior. Depending on the programming language you are using, you need to decorate your functions differently:
 {{< programming-lang-wrapper langs="java,python,ruby,go,nodejs,.NET,php" >}}
@@ -95,7 +95,7 @@ public class BackupLedger {
 }
 ```
 
-[1]: /tracing/guide/add_span_md_and_graph_it/
+[1]: /tracing/trace_collection/custom_instrumentation/otel_instrumentation/
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 
@@ -141,7 +141,7 @@ class BackupLedger:
         # [...]
 ```
 
-[1]: /tracing/guide/add_span_md_and_graph_it/
+[1]: /tracing/trace_collection/custom_instrumentation/otel_instrumentation/
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
@@ -171,7 +171,7 @@ class BackupLedger
 end
 ```
 
-[1]: /tracing/guide/add_span_md_and_graph_it/
+[1]: /tracing/trace_collection/custom_instrumentation/otel_instrumentation/
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
@@ -217,7 +217,7 @@ func (bl *BackupLedger) persistTransaction(ctx context.Context, transaction *Tra
 }
 ```
 
-[1]: /tracing/guide/add_span_md_and_graph_it/
+[1]: /tracing/trace_collection/custom_instrumentation/otel_instrumentation/
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
 
@@ -244,7 +244,7 @@ function write (transactions) {
 }
 ```
 
-[1]: /tracing/guide/add_span_md_and_graph_it/
+[1]: /tracing/trace_collection/custom_instrumentation/otel_instrumentation/
 {{< /programming-lang >}}
 {{< programming-lang lang=".NET" >}}
 
@@ -275,7 +275,7 @@ public void Write(List<Transaction> transactions)
 }
 ```
 
-[1]: /tracing/guide/add_span_md_and_graph_it/
+[1]: /tracing/trace_collection/custom_instrumentation/otel_instrumentation/
 {{< /programming-lang >}}
 {{< programming-lang lang="php" >}}
 
@@ -345,7 +345,7 @@ This example adds child spans to the `BackupLedger.write` span created above. Th
 ?>
 ```
 
-[1]: /tracing/guide/add_span_md_and_graph_it/
+[1]: /tracing/trace_collection/custom_instrumentation/otel_instrumentation/
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
@@ -361,7 +361,7 @@ The span summary table provides aggregate information about the spans that make 
 
 2. Scroll down to the **Traces list** and click into one of your traces.
 
-    {{< img src="tracing/guide/custom_span/custom_span_4.png" alt="Analytics View" style="width:90%;">}}
+    {{< img src="tracing/guide/custom_span/custom_span_4_cropped.png" alt="Analytics View" style="width:90%;">}}
 
 You've now successfully added custom spans to your codebase, making them available on the flame graph and in [App Analytics][3]. This is the first step towards taking full advantage of Datadog's tools. You can now [add custom tags to your spans][4] to make them even more powerful.
 
@@ -372,4 +372,4 @@ You've now successfully added custom spans to your codebase, making them availab
 [1]: https://app.datadoghq.com/services
 [2]: https://bojanv91.github.io/posts/2018/06/select-n-1-problem
 [3]: https://app.datadoghq.com/apm/traces?viz=timeseries
-[4]: /tracing/guide/add_span_md_and_graph_it/
+[4]: /tracing/trace_collection/custom_instrumentation/otel_instrumentation/

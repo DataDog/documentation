@@ -21,6 +21,10 @@ further_reading:
   text: "Assign tags to all data emitted by a container"
 ---
 
+{{< learning-center-callout header="Try Introduction to Monitoring Kubernetes in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/intro-to-monitoring-kubernetes">}}
+  Learn without cost on real cloud compute capacity and a Datadog trial account. Start these hands-on labs to get up to speed with the metrics, logs, and APM traces that are specific to Kubernetes.
+{{< /learning-center-callout >}}
+
 This page describes how to set up and configure [Application Performance Monitoring (APM)][10] for your Kubernetes application.
 
 {{< img src="tracing/visualization/troubleshooting_pipeline_kubernetes.png" alt="The APM troubleshooting pipeline: The tracer sends traces and metrics data from the application pod to the Agent pod, which sends it to the Datadog backend to be shown in the Datadog UI.">}}
@@ -54,7 +58,7 @@ spec:
     apm:
       enabled: true
       unixDomainSocketConfig:
-        path: /var/run/datadog/apm.sock # default
+        path: /var/run/datadog/apm.socket # default
 ```
 
 When APM is enabled, the default configuration creates a directory on the host and mounts it within the Agent. The Agent then creates and listens on a socket file `/var/run/datadog/apm/apm.socket`. The application pods can then similarly mount this volume and write to this same socket. You can modify the path and socket with the `features.apm.unixDomainSocketConfig.path` configuration value.

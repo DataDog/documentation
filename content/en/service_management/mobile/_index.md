@@ -15,12 +15,6 @@ further_reading:
   text: "Improve your on-call experience with Datadog mobile dashboard widgets"
 ---
 
-{{% site-region region="gov" %}}
-<div class="alert alert-warning">
-    The Datadog mobile app is not available for the {{< region-param key="dd_site_name" >}} site.
-</div>
-{{% /site-region %}}
-
 The Datadog Mobile app enables you to view alerts from Datadog on your mobile device. When receiving an alert via Slack, e-mail, Pagerduty or other pager apps, you'll be able to investigate issues by opening monitor graphs and dashboards on your mobile device.
 
 ## Installing
@@ -44,9 +38,10 @@ Optionally, you may also authenticate through a QR Code or manual entry, outline
 
 ##### QR code
 
-1. Start by logging in to your [Datadog account profile page][4] in a browser and click the **Link mobile device** button of the organization you want to log into. This pops up a QR code.
-    {{< img src="service_management/mobile/link-device.png" alt="Link mobile device" style="width:80%;">}}
-2. Use your default phone camera app to scan the QR code and then tap the suggested link to open the Datadog App. The org UDID is automatically inserted into the login screen.
+1. In a browser, navigate to your [Datadog account Personal Settings Organizations][4] page and click **Log in to Mobile App** for the organization you are currently logged into. This pops up a QR code.
+2. Use your default phone camera app to scan the QR code and then tap the suggested link to open the Datadog App. You will be automatically logged in.
+
+**Note**: If you click the **Log in to Mobile App** button of an organization you are not currently logged into, the org UUID is automatically inserted into the login screen. You still have to provide authentication using your standard method.
 
 ##### Manual entry
 
@@ -238,7 +233,7 @@ You can also specify a dashboard that opens by default when you tap on an SLOs w
 - Long press on your home screen.
 - Tap the "+" button on the top left corner of the screen.
 - Search for "Datadog" widgets.
-- Select your prefered size (small shows one SLO and medium shows one SLO along with a visualized timeframe of its health).
+- Select your preferred size (small shows one SLO and medium shows one SLO along with a visualized timeframe of its health).
 - Drag the widget to your desired, on-screen location.
 
 
@@ -337,7 +332,7 @@ View your [monitors][16] from your home screen with Datadog widgets. Tap any cel
 - Long press on the home screen.
 - Tap the "+" button on the top left corner of the screen.
 - Search for "Datadog" widgets.
-- Select your prefered size (small shows two monitor saved views, medium allows up to three monitor saved views, and large up to six monitor saved views).
+- Select your preferred size (small shows two monitor saved views, medium allows up to three monitor saved views, and large up to six monitor saved views).
 - Drag the widget to your desired, on-screen location.
 
 
@@ -433,7 +428,7 @@ Long-press the app icon to display a quick-action sheet of your top five [Freque
 
 ## Shortcuts and Siri suggestions
 
-**Android**: Create shortcut icons for your dashboards by touching and holding the Datadog app icon, then lift your finger. If the app has shorcuts, it displays a list. Touch and hold the desired shortcut, then drag and drop it to another location on your screen to create a unique shortcut icon.
+**Android**: Create shortcut icons for your dashboards by touching and holding the Datadog app icon, then lift your finger. If the app has shortcuts, it displays a list. Touch and hold the desired shortcut, then drag and drop it to another location on your screen to create a unique shortcut icon.
 
 **iOS**: Create Siri Shortcuts for Datadog dashboards and monitors through the Shortcuts App. For a shortcut to be available for creation, you must execute the desired action at least once in the app. For example, to create an "Open AWS Overview Dashboard" shortcut, open the AWS Overview Dashboard in your mobile app at least once.
 
@@ -475,7 +470,7 @@ For help with troubleshooting, [contact Datadog support][20]. You can also send 
 [1]: https://apps.apple.com/app/datadog/id1391380318
 [2]: https://play.google.com/store/apps/details?id=com.datadog.app
 [3]: /account_management/saml/#pagetitle
-[4]: https://app.datadoghq.com/account/profile
+[4]: https://app.datadoghq.com/personal-settings/organizations
 [5]: /account_management/saml/mobile-idp-login/
 [6]: /monitors/manage/#search
 [7]: https://app.datadoghq.com/monitors

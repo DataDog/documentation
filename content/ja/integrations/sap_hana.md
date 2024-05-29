@@ -5,6 +5,7 @@ assets:
   dashboards:
     SAP HANA Overview: assets/dashboards/overview.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -15,6 +16,7 @@ assets:
       prefix: sap_hana.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10076
     source_type_name: SAP HANA
 author:
   homepage: https://www.datadoghq.com
@@ -22,7 +24,7 @@ author:
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
-- data store
+- data stores
 - sap
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/sap_hana/README.md
@@ -31,12 +33,11 @@ draft: false
 git_integration_title: sap_hana
 integration_id: sap-hana
 integration_title: SAP HANA
-integration_version: 2.2.1
+integration_version: 3.2.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: sap_hana
-oauth: {}
 public_title: SAP HANA
 short_description: SAP HANA システムのメモリ、ネットワーク、ボリューム、およびその他のメトリクスを監視します。
 supported_os:
@@ -46,7 +47,7 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Category::Data Store
+  - Category::Data Stores
   - Category::SAP
   - Supported OS::Linux
   - Supported OS::Windows
@@ -59,15 +60,16 @@ tile:
   title: SAP HANA
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
 
 このチェックは、Datadog Agent を通じて [SAP HANA][1] 2.0, SPS 2 を監視します。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 SAP HANA チェックは、[Datadog Agent][2] のパッケージに含まれています。このインテグレーションを使用するには、[hdbcli][3] ライブラリを手動でインストールする必要があります。
 
@@ -146,7 +148,7 @@ HANA テナント、シングルテナント、システムデータベースの
    GRANT DD_MONITOR TO <USER>;
    ```
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 1. sap_hana のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `sap_hana.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル sap_hana.d/conf.yaml][5] を参照してください。
 
@@ -156,27 +158,27 @@ HANA テナント、シングルテナント、システムデータベースの
 
 [Agent の status サブコマンドを実行][7]し、Checks セクションの `sap_hana` を探します。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "sap_hana" >}}
 
 
-### イベント
+### ヘルプ
 
 SAP HANA には、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 {{< get-service-checks-from-git "sap_hana" >}}
 
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
 
 
 [1]: https://www.sap.com/products/hana.html
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://pypi.org/project/hdbcli/
 [4]: https://help.sap.com/viewer/0eec0d68141541d1b07893a39944924e/2.0.02/en-US/d12c86af7cb442d1b9f8520e2aba7758.html
 [5]: https://github.com/DataDog/integrations-core/blob/master/sap_hana/datadog_checks/sap_hana/data/conf.yaml.example

@@ -30,7 +30,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: snmp_juniper
-oauth: {}
 public_title: Juniper Networks
 short_description: Juniper のネットワークデバイスからメトリクスを収集します。
 supported_os:

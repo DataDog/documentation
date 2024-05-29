@@ -42,6 +42,8 @@ and each span is a dictionary with a `trace_id`, `span_id`, `resource` and so on
 
 ### Model
 
+<div class="alert alert-info">Datadog tracing libraries support both 64-bit and 128-bit trace IDs. Read <a href="/tracing/guide/span_and_trace_id_format/">Span and Trace ID formats to learn more.</a></div>
+
 | Field      | Type    | Description                           |
 |------------|---------|---------------------------------------|
 | `duration`   | int64   | The duration of the request in nanoseconds. |
@@ -56,7 +58,7 @@ and each span is a dictionary with a `trace_id`, `span_id`, `resource` and so on
 | `service`    | string  | The service you are tracing. The service name must not be longer than 100 characters. |
 | `span_id`    | int64   | The span integer (64-bit unsigned) ID. |
 | `start`      | int64   | The start time of the request in nanoseconds from the UNIX epoch. |
-| `trace_id`   | int64   | The unique integer (64-bit unsigned) ID of the trace containing this span. |
+| `trace_id`   | int64 or int128   | The unique integer (64-bit unsigned or 128-bit unsigned) ID of the trace containing this span. |
 | `type`       | enum    | The type of request. Allowed enum values: `web`, `db`, `cache`, `custom` |
 
 

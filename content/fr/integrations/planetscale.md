@@ -34,7 +34,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: planetscale
-oauth: {}
 public_title: PlanetScale
 short_description: Envoyez vos métriques PlanetScale à DataDog.
 supported_os: []

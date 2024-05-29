@@ -8,10 +8,6 @@ further_reading:
   text: "Basic Postgres Integration"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
-{{< /site-region >}}
-
 Database Monitoring provides deep visibility into your Postgres databases by exposing query metrics, query samples, explain plans, database states, failovers, and events.
 
 The Agent collects telemetry directly from the database by logging in as a read-only user. Do the following setup to enable Database Monitoring with your Postgres database:
@@ -24,7 +20,7 @@ The Agent collects telemetry directly from the database by logging in as a read-
 ## Before you begin
 
 Supported PostgreSQL versions
-: 9.6, 10, 11, 12, 13, 14
+: 9.6, 10, 11, 12, 13, 14, 15, 16
 
 Supported Agent versions
 : 7.36.1+
@@ -34,7 +30,7 @@ Performance impact
 Database Monitoring runs as an integration on top of the base Agent ([see benchmarks][1]).
 
 Proxies, load balancers, and connection poolers
-: The Agent must connect directly to the host being monitored. For self-hosted databases, `127.0.0.1` or the socket is preferred. The Agent should not connect to the database through a proxy, load balancer, connection pooler such as `pgbouncer`, or the **Aurora cluster endpoint**. While this can be an anti-pattern for client applications, each Agent must have knowledge of the underlying hostname and should stick to a single host for its lifetime, even in cases of failover. If the Datadog Agent connects to different hosts while it is running, the values of metrics will be incorrect.
+: The Datadog Agent must connect directly to the host being monitored. For self-hosted databases, `127.0.0.1` or the socket is preferred. The Agent should not connect to the database through a proxy, load balancer, connection pooler such as `pgbouncer`, or the **Aurora cluster endpoint**. If connected to the cluster endpoint, the Agent collects data from one random replica, and only provides visibility into that replica. If the Agent connects to different hosts while it is running (as in the case of failover, load balancing, and so on), the Agent calculates the difference in statistics between two hosts, producing inaccurate metrics.
 
 Data security considerations
 : See [Sensitive information][2] for information about what data the Agent collects from your databases and how to ensure it is secure.
@@ -220,9 +216,12 @@ To configure collecting Database Monitoring metrics for an Agent running on a ho
 
 2. [Restart the Agent][2].
 
+**The Datadog Agent supports [Autodiscovery][14] of all Aurora endpoints in a cluster.** 
+
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example
 [2]: /agent/configuration/agent-commands/#start-stop-and-restart-the-agent
+[14]: /database_monitoring/guide/aurora_autodiscovery/?tab=postgres
 {{% /tab %}}
 {{% tab "Docker" %}}
 
@@ -401,7 +400,8 @@ To avoid exposing the `datadog` user's password in plain text, use the Agent's [
 {{% dbm-postgres-agent-config-examples %}}
 ## Install the RDS Integration
 
-To collect more comprehensive database metrics from AWS, install the [RDS integration][11] (optional).
+To see infrastructure metrics from AWS, such as CPU, alongside the database telemetry directly in DBM, install the [RDS integration][11] (optional).
+
 
 ## Troubleshooting
 
@@ -412,7 +412,7 @@ If you have installed and configured the integrations and Agent as described and
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /agent/basic_agent_usage#agent-overhead
+[1]: /database_monitoring/agent_integration_overhead/?tab=postgres
 [2]: /database_monitoring/data_collected/#sensitive-information
 [3]: https://www.postgresql.org/docs/current/config-setting.html
 [4]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_WorkingWithParamGroups.html
@@ -425,3 +425,4 @@ If you have installed and configured the integrations and Agent as described and
 [11]: /integrations/amazon_rds
 [12]: /database_monitoring/troubleshooting/?tab=postgres
 [13]: /database_monitoring/guide/managed_authentication
+

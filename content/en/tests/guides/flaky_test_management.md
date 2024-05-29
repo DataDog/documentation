@@ -10,7 +10,7 @@ further_reading:
   text: "Learn about Test Visibility"
 - link: "https://www.datadoghq.com/knowledge-center/flaky-tests/"
   tag: "Knowledge Center"
-  text: "Flaky Tests Overview" 
+  text: "Flaky Tests Overview"
 ---
 
 {{< site-region region="gov" >}}
@@ -23,7 +23,7 @@ A [flaky test][1] is a test that exhibit both a passing and failing status acros
 
 Flaky tests introduce risk and unpredictability into your CI system and end product. When people have to remember which tests are flaky, they lose trust in their test results, and a tremendous amount of time and resources are wasted on pipeline retries.
 
-For each branch, the list shows the number of new flaky tests introduced by the commit, the number of flaky commits, total test time, and the branch's latest commit details. 
+For each branch, the list shows the number of new flaky tests introduced by the commit, the number of flaky commits, total test time, and the branch's latest commit details.
 
 Use the following information to help prioritize flaky tests:
 
@@ -39,6 +39,26 @@ Once you identify a flaky test you want to fix, click on the test to see links t
 
 If a flaky test has not failed in the past 30 days, it is automatically removed from the table. You can also manually remove a flaky test by clicking on the trash icon that appears when you hover over the test row. It is added again if it re-exhibits flaky behavior.
 
+### Flaky tests in the default branch
+
+The flaky test table for the default branch includes tests that have flaked in the default branch as well as any tests that have exhibited flakiness in a feature branch that was merged into the default branch.
+
+Flaky tests from merged feature branches are found by checking which tests have exhibited flakiness in the most recent 5,000 commits using the Git commit history. The Git commit history is collected by the [Test Visibility libraries][4] and uploaded along with the test results every time the testing phase of a particular commit is executed in your CI build.
+
+Limitations:
+* If you squash or reset and force push commits in your feature branch, flaky tests that have been detected in that branch are not shown in the default branch because the commit history has been altered.
+* If a flaky test is detected and subsequently fixed in the same feature branch, it still appears as a flaky test in the default branch, because the fix for the flaky test cannot be detected. However, [you can manually remove that flaky test from the flaky tests table][5].
+
+#### Flaky test metric
+
+For the default branches, a metric tracks the flaky tests over time. This metric is generated every 30 minutes and counts all the flaky tests in the default branch at that time.
+
+Find this metric under the graph **Total Flaky Tests** in the default branch view:
+
+{{< img src="continuous_integration/flaky_test_metric.png" alt="Flaky test metric" style="width:100%;">}}
+
+The metric is also available in the [CI Visibility - Tests dashboard][6].
+
 ### New flaky tests
 
 New flaky tests are tests that exhibit flaky behavior and didn't previously exist in the Flaky Tests table for the current branch or default branch of the repository.
@@ -49,7 +69,7 @@ New flaky tests are tests that exhibit flaky behavior and didn't previously exis
 
 1. Navigate to the [Test Runs][2] page.
 2. In the facets list on the left sidebar, expand the **New Flaky** facet in the **Test** section, and check `true`.
-All test runs that exhibited flakey behavior for the first time as per the definition above are displayed.
+All test runs that exhibited flaky behavior for the first time as per the definition above are displayed.
 
 #### Branches page
 
@@ -90,3 +110,6 @@ Failed test runs that were known to be flaky as per the definition above are dis
 [1]: /glossary/#flaky-test
 [2]: https://app.datadoghq.com/ci/test-runs
 [3]: https://app.datadoghq.com/ci/test-services?view=branches
+[4]: /tests/#use-ci-tests-data
+[5]: /tests/guides/flaky_test_management/#ignore-new-flaky-tests-detected-by-mistake
+[6]: https://app.datadoghq.com/dash/integration/ci_app_tests

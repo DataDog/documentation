@@ -10,10 +10,6 @@ further_reading:
 
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
-{{< /site-region >}}
-
 Database Monitoring provides deep visibility into your Microsoft SQL Server databases by exposing query metrics, query samples, explain plans, database states, failovers, and events.
 
 Complete the following steps to enable Database Monitoring with your database:
@@ -25,7 +21,7 @@ Complete the following steps to enable Database Monitoring with your database:
 ## Before you begin
 
 Supported SQL Server versions
-: 2012, 2014, 2016, 2017, 2019, 2022
+: 2014, 2016, 2017, 2019, 2022
 
 {{% dbm-sqlserver-before-you-begin %}}
 
@@ -99,11 +95,11 @@ The other two providers, `SQLOLEDB` and `SQLNCLI`, are considered deprecated by 
 
 #### ODBC
 
-The recommended ODBC driver is [Microsoft ODBC Driver][8]. Ensure the driver is installed on the host where the Agent is running.
+The recommended ODBC driver is [Microsoft ODBC Driver][8]. Starting with Agent 7.51, ODBC Driver 18 for SQL Server is included in the agent for Linux. For Windows, ensure the driver is installed on the host where the Agent is running.
 
 ```yaml
 connector: odbc
-driver: '{ODBC Driver 17 for SQL Server}'
+driver: '{ODBC Driver 18 for SQL Server}'
 ```
 
 Once all Agent configuration is complete, [restart the Datadog Agent][9].
@@ -181,7 +177,7 @@ Replace the values to match your account and environment. See the [sample conf f
 
 ```bash
 export DD_API_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-export DD_AGENT_VERSION=7.35.0
+export DD_AGENT_VERSION=7.51.0
 
 docker run -e "DD_API_KEY=${DD_API_KEY}" \
   -v /var/run/docker.sock:/var/run/docker.sock:ro \
@@ -192,7 +188,7 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
     "host": "<HOSTNAME>",
     "port": <SQL_PORT>,
     "connector": "odbc",
-    "driver": "FreeTDS",
+    "driver": "ODBC Driver 18 for SQL Server",
     "username": "datadog",
     "password": "<PASSWORD>",
     "tags": [
@@ -247,7 +243,7 @@ instances:
     username: datadog
     password: "<PASSWORD>"
     connector: "odbc"
-    driver: "FreeTDS"
+    driver: "ODBC Driver 18 for SQL Server"
     tags:  # Optional
       - "service:<CUSTOM_SERVICE>"
       - "env:<CUSTOM_ENV>"
@@ -271,7 +267,7 @@ instances:
     username: datadog
     password: '<PASSWORD>'
     connector: "odbc"
-    driver: "FreeTDS"
+    driver: "ODBC Driver 18 for SQL Server"
     tags:  # Optional
       - 'service:<CUSTOM_SERVICE>'
       - 'env:<CUSTOM_ENV>'
@@ -303,7 +299,7 @@ metadata:
           "username": "datadog",
           "password": "<PASSWORD>",
           "connector": "odbc",
-          "driver": "FreeTDS",
+          "driver": "ODBC Driver 18 for SQL Server",
           "tags": ["service:<CUSTOM_SERVICE>", "env:<CUSTOM_ENV>"],  # Optional
           "gcp": {
             "project_id": "<PROJECT_ID>",

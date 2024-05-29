@@ -13,7 +13,7 @@ further_reading:
   tag: Documentation
   text: RUM Flutter Advanced Configuration
 - link: https://github.com/DataDog/dd-sdk-flutter
-  tag: GitHub
+  tag: "Source Code"
   text: Source code for dd-sdk-flutter
 - link: real_user_monitoring/explorer/
   tag: Documentation
@@ -31,7 +31,7 @@ Datadog Real User Monitoring (RUM) enables you to visualize and analyze the real
 
 ### Specify application details in the UI
 
-1. In Datadog, navigate to [**UX Monitoring** > **Setup & Configurations** > **New Application**][1].
+1. In Datadog, navigate to [**Digital Experience** > **Add an Application**][1].
 2. Choose `Flutter` as the application type.
 3. Provide an application name to generate a unique Datadog application ID and client token.
 4. To disable automatic user data collection for either client IP or geolocation data, uncheck the boxes for those settings. For more information, see [RUM Flutter Data Collected][7].

@@ -6,6 +6,7 @@ assets:
     DBM Oracle Database Overview: assets/dashboards/dbm_oracle_database_overview.json
     oracle: assets/dashboards/oracle_overview.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -16,6 +17,7 @@ assets:
       prefix: oracle.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10000
     source_type_name: Oracle Database
 author:
   homepage: https://www.datadoghq.com
@@ -23,7 +25,7 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- data store
+- data stores
 - network
 - oracle
 dependencies:
@@ -33,12 +35,11 @@ draft: false
 git_integration_title: oracle
 integration_id: oracle
 integration_title: Oracle
-integration_version: 4.1.1
+integration_version: 5.2.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: oracle
-oauth: {}
 public_title: Oracle
 short_description: エンタープライズグリッドコンピューティング向け Oracle リレーショナルデータベースシステム
 supported_os:
@@ -48,7 +49,7 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Category::データストア
+  - Category::Data Stores
   - Category::ネットワーク
   - Category::Oracle
   - Supported OS::Linux
@@ -62,147 +63,308 @@ tile:
   title: Oracle
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ![Oracle ダッシュボード][1]
 
 ## 概要
 
-Oracle Database サーバーからメトリクスをリアルタイムに取得して、可用性とパフォーマンスを視覚化および監視できます。
+Oracle インテグレーションは、Oracle データベースの健全性とパフォーマンスに関するメトリクスをほぼリアルタイムで提供します。提供されるダッシュボードでこれらのメトリクスを可視化するとともに、モニターを作成して Oracle データベースの状態についてチームに警告を発することができます。
 
-## セットアップ
+[Database Monitoring][2] (DBM) を有効にすると、クエリのパフォーマンスとデータベースの健全性について詳細なインサイトを取得できます。標準のインテグレーション機能に加え、Datadog DBM では、クエリレベルのメトリクス、リアルタイムおよび過去のクエリスナップショット、待機イベントの分析情報、データベースの負荷、クエリ実行計画、ブロッキングを引き起こしているクエリについてのインサイトが提供されます。
 
-### インストール
+
+## 計画と使用
+
+### インフラストラクチャーリスト
 
 #### 前提条件
 
-Oracle インテグレーションを使用するには、ネイティブクライアント Oracle Instant Client を使用するか (追加のインストール手順は必要ありません)、Oracle JDBC ドライバーをダウンロードします (Linux のみ)。JDBC による Oracle インテグレーションを使用するには、Oracle JDBC ドライバーをダウンロードしてください。JDBC 方式を使用しない場合、最小の[サポートされるバージョン][2]は Oracle 12c です。
-ライセンスの制限により、JDBC ライブラリは Datadog Agent に含まれていませんが、Oracle から直接ダウンロードすることができます。
-
-*注*: v7.42.x から、Oracle インテグレーションは Python 3 のみをサポートします。
+Oracle インテグレーションを使用するためには、ネイティブクライアント (追加のインストール手順は不要)、または Oracle Instant Client のいずれかを使用できます。
 
 ##### Oracle Instant Client
 
+Instant Client を使用していない場合は、この手順をスキップしてください。
+
 {{< tabs >}}
+
 {{% tab "Linux" %}}
 ###### Linux
 
 1. [Linux 用の Oracle Instant Client のインストール][1]に従ってください。
 
-2. 以下を確認してください。
-    - *Instant Client Basic* パッケージと *SDK* パッケージの両方がインストールされます。Oracle の[ダウンロードページ][2]にあります。
+2. *Instant Client Basic* パッケージがインストールされていることを確認します。Oracle の[ダウンロードページ][2]を参照してください。
 
-      Instant Client ライブラリのインストール後に、ランタイムリンカがライブラリを見つけることができることを確認します。たとえば、`ldconfig` を使用します。
+   Instant Client ライブラリのインストール後に、ランタイムリンカがライブラリを見つけることができることを確認します。例:
 
-       ```shell
-       # Put the library location in an ld configuration file.
+      ```shell
+      # Put the library location in the /etc/datadog-agent/environment file.
 
-       sudo sh -c "echo /usr/lib/oracle/12.2/client64/lib > \
-           /etc/ld.so.conf.d/oracle-instantclient.conf"
+      echo "LD_LIBRARY_PATH=/u01/app/oracle/product/instantclient_19" \
+      >> /etc/datadog-agent/environment
+      ```
 
-       # Update the bindings.
-
-       sudo ldconfig
-       ```
-
-    - 両方のパッケージは、特定のマシン上のすべてのユーザーが使用できる単一のディレクトリ (たとえば、`/opt/oracle`) に解凍されます。
-       ```shell
-       mkdir -p /opt/oracle/ && cd /opt/oracle/
-       unzip /opt/oracle/instantclient-basic-linux.x64-12.1.0.2.0.zip
-       unzip /opt/oracle/instantclient-sdk-linux.x64-12.1.0.2.0.zip
-       ```
-
-[1]: https://docs.oracle.com/en/database/oracle/oracle-database/21/lacli/install-instant-client-using-zip.html
-[2]: https://www.oracle.com/technetwork/database/features/instant-client/index.htm
+[1]: https://docs.oracle.com/en/database/oracle/oracle-database/19/mxcli/installing-and-removing-oracle-database-client.html
+[2]: https://www.oracle.com/ch-de/database/technologies/instant-client/downloads.html
 {{% /tab %}}
+
 {{% tab "Windows" %}}
-###### Windows
+###### ログの収集
 
 1. [Oracle Windows インストールガイド][1]に従って、Oracle Instant Client を構成します。
 
 2. 以下を確認してください。
     - [Microsoft Visual Studio 2017 再頒布可能パッケージ][2]または適切なバージョンが Oracle Instant Client にインストールされます。
 
-    - Oracle の[ダウンロードページ][3]の *Instant Client Basic* パッケージと *SDK* パッケージの両方がインストールされます。
+    - Oracle の[ダウンロードページ][3]にある *Instant Client Basic* パッケージがインストールされ、指定されたマシン上のすべてのユーザーが使用できる (例: `C:\oracle\instantclient_19`)。
 
-    - 両方のパッケージは、特定のマシン上のすべてのユーザーが使用できる単一のディレクトリ (たとえば、`C:\oracle`) に抽出されます。
+    - 環境変数 `PATH` には、Instant Client のあるディレクトリ (例: `C:\oracle\instantclient_19`) が含まれている。
 
 
 [1]: https://www.oracle.com/database/technologies/instant-client/winx64-64-downloads.html#ic_winx64_inst
 [2]: https://support.microsoft.com/en-us/topic/the-latest-supported-visual-c-downloads-2647da03-1eea-4433-9aff-95f26a218cc0
-[3]: https://www.oracle.com/technetwork/database/features/instant-client/index.htm
+[3]: https://www.oracle.com/ch-de/database/technologies/instant-client/downloads.html
 {{% /tab %}}
 {{< /tabs >}}
-
-##### JDBC Driver
-
-*注*: この方法は Linux でのみ機能します。
-
-Java 8 以降は、JDBC Driver を使用するときに Agent が使用するライブラリの 1 つである JPype のシステムに必要です。
-
-インストールしたら、次の手順を実行します。
-
-1. [JDBC Driver JAR ファイルをダウンロード][3]します。
-2. ダウンロードしたファイルのパスを `$CLASSPATH` に追加するか、チェック構成ファイルの `jdbc_driver_path` の下に追加します ([サンプル oracle.yaml][4] を参照)。
 
 #### Datadog ユーザーの作成
 
 {{< tabs >}}
-{{% tab "スタンドアロン" %}}
-
-Oracle Database サーバーへの適切なアクセス権を持つ、読み取り専用の `datadog` ユーザーを作成します。`SYSDBA` や `SYSOPER` などの管理者ユーザーで Oracle Database に接続し、以下を実行します。
-
-```text
--- Oracle Script を有効にします。
-ALTER SESSION SET "_ORACLE_SCRIPT"=true;
-
--- Datadog ユーザーを作成します。パスワードのプレースホルダーは、安全なパスワードに置き換えてください。
-CREATE USER datadog IDENTIFIED BY <パスワード>;
-
--- Datadog ユーザーにアクセス権を付与します。
-GRANT CONNECT TO datadog;
-GRANT SELECT ON GV_$PROCESS TO datadog;
-GRANT SELECT ON gv_$sysmetric TO datadog;
-GRANT SELECT ON sys.dba_data_files TO datadog;
-GRANT SELECT ON sys.dba_tablespaces TO datadog;
-GRANT SELECT ON sys.dba_tablespace_usage_metrics TO datadog;
-```
-
-**注**: Oracle 11g を使用している場合、次の行を実行する必要はありません。
-
-```text
-ALTER SESSION SET "_ORACLE_SCRIPT"=true;
-```
-
-{{% /tab %}}
 {{% tab "マルチテナント" %}}
+##### マルチテナント
 
-##### Oracle 12c または 19c
+###### ユーザーの作成
 
-管理者としてルートデータベースにログインして、`datadog` ユーザーを作成し、アクセス許可を付与します。
+サーバーに接続するための読み取り専用ログインを作成し、必要な権限を付与します。
 
-```text
-alter session set container = cdb$root;
-CREATE USER c##datadog IDENTIFIED BY password CONTAINER=ALL;
-GRANT CREATE SESSION TO c##datadog CONTAINER=ALL;
-Grant select any dictionary to c##datadog container=all;
-GRANT SELECT ON GV_$PROCESS TO c##datadog CONTAINER=ALL;
-GRANT SELECT ON gv_$sysmetric TO c##datadog CONTAINER=ALL;
+```SQL
+CREATE USER c##datadog IDENTIFIED BY &password CONTAINER = ALL ;
+
+ALTER USER c##datadog SET CONTAINER_DATA=ALL CONTAINER=CURRENT;
+```
+
+###### 権限付与
+
+`sysdba` としてログオンし、以下の権限を付与します。
+
+```SQL
+grant create session to c##datadog ;
+grant select on v_$session to c##datadog ;
+grant select on v_$database to c##datadog ;
+grant select on v_$containers to c##datadog;
+grant select on v_$sqlstats to c##datadog ;
+grant select on v_$instance to c##datadog ;
+grant select on dba_feature_usage_statistics to c##datadog ;
+grant select on V_$SQL_PLAN_STATISTICS_ALL to c##datadog ;
+grant select on V_$PROCESS to c##datadog ;
+grant select on V_$SESSION to c##datadog ;
+grant select on V_$CON_SYSMETRIC to c##datadog ;
+grant select on CDB_TABLESPACE_USAGE_METRICS to c##datadog ;
+grant select on CDB_TABLESPACES to c##datadog ;
+grant select on V_$SQLCOMMAND to c##datadog ;
+grant select on V_$DATAFILE to c##datadog ;
+grant select on V_$SYSMETRIC to c##datadog ;
+grant select on V_$SGAINFO to c##datadog ;
+grant select on V_$PDBS to c##datadog ;
+grant select on CDB_SERVICES to c##datadog ;
+grant select on V_$OSSTAT to c##datadog ;
+grant select on V_$PARAMETER to c##datadog ;
+grant select on V_$SQLSTATS to c##datadog ;
+grant select on V_$CONTAINERS to c##datadog ;
+grant select on V_$SQL_PLAN_STATISTICS_ALL to c##datadog ;
+grant select on V_$SQL to c##datadog ;
+grant select on V_$PGASTAT to c##datadog ;
+grant select on v_$asm_diskgroup to c##datadog ;
+grant select on v_$rsrcmgrmetric to c##datadog ;
+grant select on v_$dataguard_config to c##datadog ;
+grant select on v_$dataguard_stats to c##datadog ;
+grant select on v_$transaction to c##datadog;
+grant select on v_$locked_object to c##datadog;
+grant select on dba_objects to c##datadog;
+grant select on cdb_data_files to c##datadog;
+grant select on dba_data_files to c##datadog;
+```
+
+プラグ可能データベース (PDB) 上で実行するカスタムクエリを構成した場合は、`C##DATADOG` ユーザーに `set container` 権限を付与する必要があります。
+
+```SQL
+connect / as sysdba
+alter session set container = your_pdb ;
+grant set container to c##datadog ;
 ```
 
 {{% /tab %}}
+
+{{% tab "Non-CDB" %}}
+##### Non-CDB
+
+###### ユーザーの作成
+
+サーバーに接続するための読み取り専用ログインを作成し、必要な権限を付与します。
+
+```SQL
+CREATE USER datadog IDENTIFIED BY &password ;
+```
+
+###### 権限付与
+
+`sysdba` としてログオンし、以下の権限を付与します。
+
+```SQL
+grant create session to datadog ;
+grant select on v_$session to datadog ;
+grant select on v_$database to datadog ;
+grant select on v_$containers to datadog;
+grant select on v_$sqlstats to datadog ;
+grant select on v_$instance to datadog ;
+grant select on dba_feature_usage_statistics to datadog ;
+grant select on V_$SQL_PLAN_STATISTICS_ALL to datadog ;
+grant select on V_$PROCESS to datadog ;
+grant select on V_$SESSION to datadog ;
+grant select on V_$CON_SYSMETRIC to datadog ;
+grant select on CDB_TABLESPACE_USAGE_METRICS to datadog ;
+grant select on CDB_TABLESPACES to datadog ;
+grant select on V_$SQLCOMMAND to datadog ;
+grant select on V_$DATAFILE to datadog ;
+grant select on V_$SYSMETRIC to datadog ;
+grant select on V_$SGAINFO to datadog ;
+grant select on V_$PDBS to datadog ;
+grant select on CDB_SERVICES to datadog ;
+grant select on V_$OSSTAT to datadog ;
+grant select on V_$PARAMETER to datadog ;
+grant select on V_$SQLSTATS to datadog ;
+grant select on V_$CONTAINERS to datadog ;
+grant select on V_$SQL_PLAN_STATISTICS_ALL to datadog ;
+grant select on V_$SQL to datadog ;
+grant select on V_$PGASTAT to datadog ;
+grant select on v_$asm_diskgroup to datadog ;
+grant select on v_$rsrcmgrmetric to datadog ;
+grant select on v_$dataguard_config to datadog ;
+grant select on v_$dataguard_stats to datadog ;
+grant select on v_$transaction to datadog;
+grant select on v_$locked_object to datadog;
+grant select on dba_objects to datadog;
+grant select on cdb_data_files to datadog;
+grant select on dba_data_files to datadog;
+```
+
+{{% /tab %}}
+
+{{% tab "RDS" %}}
+##### Splunk
+
+###### ユーザーの作成
+
+サーバーに接続するための読み取り専用ログインを作成し、必要な権限を付与します。
+
+```SQL
+CREATE USER datadog IDENTIFIED BY your_password ;
+```
+
+###### 権限付与
+
+```SQL
+grant create session to datadog ;
+exec rdsadmin.rdsadmin_util.grant_sys_object('V_$SESSION','DATADOG','SELECT',p_grant_option => false); 
+exec rdsadmin.rdsadmin_util.grant_sys_object('V_$DATABASE','DATADOG','SELECT',p_grant_option => false); 
+exec rdsadmin.rdsadmin_util.grant_sys_object('V_$CONTAINERS','DATADOG','SELECT',p_grant_option => false); 
+exec rdsadmin.rdsadmin_util.grant_sys_object('V_$SQLSTATS','DATADOG','SELECT',p_grant_option => false); 
+exec rdsadmin.rdsadmin_util.grant_sys_object('V_$SQL','DATADOG','SELECT',p_grant_option => false); 
+exec rdsadmin.rdsadmin_util.grant_sys_object('V_$INSTANCE','DATADOG','SELECT',p_grant_option => false); 
+exec rdsadmin.rdsadmin_util.grant_sys_object('V_$SQL_PLAN_STATISTICS_ALL','DATADOG','SELECT',p_grant_option => false); 
+exec rdsadmin.rdsadmin_util.grant_sys_object('DBA_FEATURE_USAGE_STATISTICS','DATADOG','SELECT',p_grant_option => false); 
+exec rdsadmin.rdsadmin_util.grant_sys_object('V_$PROCESS','DATADOG','SELECT',p_grant_option => false); 
+exec rdsadmin.rdsadmin_util.grant_sys_object('V_$SESSION','DATADOG','SELECT',p_grant_option => false); 
+exec rdsadmin.rdsadmin_util.grant_sys_object('V_$CON_SYSMETRIC','DATADOG','SELECT',p_grant_option => false); 
+exec rdsadmin.rdsadmin_util.grant_sys_object('CDB_TABLESPACE_USAGE_METRICS','DATADOG','SELECT',p_grant_option => false); 
+exec rdsadmin.rdsadmin_util.grant_sys_object('CDB_TABLESPACES','DATADOG','SELECT',p_grant_option => false); 
+exec rdsadmin.rdsadmin_util.grant_sys_object('V_$SQLCOMMAND','DATADOG','SELECT',p_grant_option => false);
+exec rdsadmin.rdsadmin_util.grant_sys_object('V_$DATAFILE','DATADOG','SELECT',p_grant_option => false);
+exec rdsadmin.rdsadmin_util.grant_sys_object('V_$SGAINFO','DATADOG','SELECT',p_grant_option => false);
+exec rdsadmin.rdsadmin_util.grant_sys_object('V_$SYSMETRIC','DATADOG','SELECT',p_grant_option => false);
+exec rdsadmin.rdsadmin_util.grant_sys_object('V_$PDBS','DATADOG','SELECT',p_grant_option => false);
+exec rdsadmin.rdsadmin_util.grant_sys_object('CDB_SERVICES','DATADOG','SELECT',p_grant_option => false);
+exec rdsadmin.rdsadmin_util.grant_sys_object('V_$OSSTAT','DATADOG','SELECT',p_grant_option => false);
+exec rdsadmin.rdsadmin_util.grant_sys_object('V_$PARAMETER','DATADOG','SELECT',p_grant_option => false);
+exec rdsadmin.rdsadmin_util.grant_sys_object('V_$SQLSTATS','DATADOG','SELECT',p_grant_option => false);
+exec rdsadmin.rdsadmin_util.grant_sys_object('V_$CONTAINERS','DATADOG','SELECT',p_grant_option => false);
+exec rdsadmin.rdsadmin_util.grant_sys_object('V_$SQL_PLAN_STATISTICS_ALL','DATADOG','SELECT',p_grant_option => false);
+exec rdsadmin.rdsadmin_util.grant_sys_object('V_$SQL','DATADOG','SELECT',p_grant_option => false);
+exec rdsadmin.rdsadmin_util.grant_sys_object('V_$PGASTAT','DATADOG','SELECT',p_grant_option => false);
+exec rdsadmin.rdsadmin_util.grant_sys_object('V_$ASM_DISKGROUP','DATADOG','SELECT',p_grant_option => false);
+exec rdsadmin.rdsadmin_util.grant_sys_object('V_$RSRCMGRMETRIC','DATADOG','SELECT',p_grant_option => false);
+exec rdsadmin.rdsadmin_util.grant_sys_object('V_$DATAGUARD_CONFIG','DATADOG','SELECT',p_grant_option => false);
+exec rdsadmin.rdsadmin_util.grant_sys_object('V_$DATAGUARD_STATS','DATADOG','SELECT',p_grant_option => false);
+exec rdsadmin.rdsadmin_util.grant_sys_object('V_$TRANSACTION','DATADOG','SELECT',p_grant_option => false);
+exec rdsadmin.rdsadmin_util.grant_sys_object('V_$LOCKED_OBJECT','DATADOG','SELECT',p_grant_option => false);
+exec rdsadmin.rdsadmin_util.grant_sys_object('DBA_OBJECTS','DATADOG','SELECT',p_grant_option => false);
+exec rdsadmin.rdsadmin_util.grant_sys_object('CDB_DATA_FILES','DATADOG','SELECT',p_grant_option => false);
+exec rdsadmin.rdsadmin_util.grant_sys_object('DBA_DATA_FILES','DATADOG','SELECT',p_grant_option => false);
+```
+
+{{% /tab %}}
+
+{{% tab "Oracle Autonomous Database" %}}
+##### Oracle Autonomous Database
+
+###### ユーザーの作成
+
+サーバーに接続するための読み取り専用ログインを作成し、必要な権限を付与します。
+
+```SQL
+CREATE USER datadog IDENTIFIED BY your_password ;
+```
+
+###### 権限付与
+
+```SQL
+grant create session to datadog ;
+grant select on v$session to datadog ;
+grant select on v$database to datadog ;
+grant select on v$containers to datadog;
+grant select on v$sqlstats to datadog ;
+grant select on v$instance to datadog ;
+grant select on dba_feature_usage_statistics to datadog ;
+grant select on V$SQL_PLAN_STATISTICS_ALL to datadog ;
+grant select on V$PROCESS to datadog ;
+grant select on V$SESSION to datadog ;
+grant select on V$CON_SYSMETRIC to datadog ;
+grant select on CDB_TABLESPACE_USAGE_METRICS to datadog ;
+grant select on CDB_TABLESPACES to datadog ;
+grant select on V$SQLCOMMAND to datadog ;
+grant select on V$DATAFILE to datadog ;
+grant select on V$SYSMETRIC to datadog ;
+grant select on V$SGAINFO to datadog ;
+grant select on V$PDBS to datadog ;
+grant select on CDB_SERVICES to datadog ;
+grant select on V$OSSTAT to datadog ;
+grant select on V$PARAMETER to datadog ;
+grant select on V$SQLSTATS to datadog ;
+grant select on V$CONTAINERS to datadog ;
+grant select on V$SQL_PLAN_STATISTICS_ALL to datadog ;
+grant select on V$SQL to datadog ;
+grant select on V$PGASTAT to datadog ;
+grant select on v$asm_diskgroup to datadog ;
+grant select on v$rsrcmgrmetric to datadog ;
+grant select on v$dataguard_config to datadog ;
+grant select on v$dataguard_stats to datadog ;
+grant select on v$transaction to datadog;
+grant select on v$locked_object to datadog;
+grant select on dba_objects to datadog;
+grant select on cdb_data_files to datadog;
+grant select on dba_data_files to datadog;
+```
+
+{{% /tab %}}
+
 {{< /tabs >}}
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
-{{< tabs >}}
-{{% tab "Host" %}}
+ホストで実行中の Agent に対してこのチェックを構成するには
 
-#### ホスト
-
-ホストで実行中の Agent に対してこのチェックを構成するには:
-
-1. [Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `oracle.d/conf.yaml` ファイルを編集します。`server` と `port` を更新し、監視するマスターを設定します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル oracle.d/conf.yaml][2] を参照してください。
+1. [Agent の構成ディレクトリ][3]の root にある `conf.d/` フォルダーの `oracle.d/conf.yaml` ファイルを編集します。`server` と `port` を更新し、監視するマスターを設定します。使用可能なすべての構成オプションの詳細については、[oracle.d/conf.yaml のサンプル][4]を参照してください。
 
    ```yaml
    init_config:
@@ -230,158 +392,53 @@ GRANT SELECT ON gv_$sysmetric TO c##datadog CONTAINER=ALL;
         password: <PASSWORD>
    ```
 
-2. [Agent を再起動します][3]。
+**注:** `7.50.1` (このバージョンを含む) から `7.53.0` (このバージョンを含まない) までの Agent リリースでは、構成サブディレクトリは `oracle-dbm.d` です。その他のすべての Agent リリースでは、構成ディレクトリは `oracle.d` です。
 
+Oracle Real Application Cluster (RAC) を使用する場合は、RAC ノードごとに Agent を構成する必要があります。Agent は `V$` ビューに問い合わせることで、各ノードから個別に情報を収集します。さらに、インターコネクトトラフィックの発生を避けるために、`GV$` ビューにはクエリしません。
 
-#### カスタムクエリのみ
-
-インスタンスのデフォルトのメトリクスチェックをスキップし、既存のメトリクス収集ユーザーでのみカスタムクエリを実行するには、値が `true` のタグ `only_custom_queries` を挿入します。これにより、Oracle インテグレーションの構成済みインスタンスがシステム、プロセス、およびテーブルスペースメトリクスの実行をスキップし、[Datadog ユーザー作成](#datadog-user-creation)セクションで説明されているアクセス許可なしでカスタムクエリを実行できます。この構成エントリが省略された場合、指定したユーザーには、カスタムクエリを実行するためのテーブルアクセス許可が必要です。
-
-```yaml
-init_config:
-
-instances:
-  ## @param server - string - required
-  ## The IP address or hostname of the Oracle Database Server.
-  #
-  - server: localhost:1521
-
-    ## @param service_name - string - required
-    ## The Oracle Database service name. To view the services available on your server,
-    ## run the following query:
-    ## `SELECT value FROM v$parameter WHERE name='service_names'`
-    #
-    service_name: "<SERVICE_NAME>"
-
-    ## @param user - string - required
-    ## The username for the user account.
-    #
-    user: <USER>
-
-    ## @param password - string - required
-    ## The password for the user account.
-    #
-    password: "<PASSWORD>"
-
-    ## @param only_custom_queries - string - optional
-    ## Set this parameter to any value if you want to only run custom
-    ## queries for this instance.
-    #
-    only_custom_queries: true
-```
+2. [Agent を再起動します][5]。
 
 #### TCPS による Oracle への接続
 
-1. TCPS (TCP with SSL) を使って Oracle に接続するには、`protocol` 構成オプションのコメントを解除して、`TCPS` を選択します。`server` オプションを更新して、監視する TCPS サーバーを設定します。
+TCPS (TCP with SSL) を使って Oracle に接続するには、`protocol` 構成オプションのコメントを解除して、`TCPS` を選択します。`server` オプションを更新して、監視する TCPS サーバーを設定します。
 
     ```yaml
     init_config:
 
     instances:
-      ## @param server - string - required
-      ## The IP address or hostname of the Oracle Database Server.
+      ## @param server - 文字列 - 必須
+      ## Oracle Database Server の IP アドレスまたはホスト名。
       #
       - server: localhost:1522
 
-        ## @param service_name - string - required
-        ## The Oracle Database service name. To view the services available on your server,
-        ## run the following query:
-        ## `SELECT value FROM v$parameter WHERE name='service_names'`
+        ## @param service_name - 文字列 - 必須
+        ## Oracle Database サービス名。サーバーで利用可能なサービスを表示するには、
+        ## 次のクエリを実行します。
         #
         service_name: "<SERVICE_NAME>"
 
-        ## @param user - string - required
-        ## The username for the user account.
+        ## @param username - 文字列 - 必須
+        ## ユーザーアカウントのユーザー名。
         #
-        user: <USER>
+        username: <USER>
 
-        ## @param password - string - required
-        ## The password for the user account.
+        ## @param password - 文字列 - 必須
+        ## ユーザーアカウントのパスワード。
         #
         password: "<PASSWORD>"
 
-        ## @param protocol - string - optional - default: TCP
-        ## The protocol to connect to the Oracle Database Server. Valid protocols include TCP and TCPS.
+        ## @param protocol - 文字列 - 任意 - デフォルト: TCP
+        ## Oracle Database Server に接続するためのプロトコル。有効なプロトコルには TCP と TCPS があります。
         ##
-        ## When connecting to Oracle Database via JDBC, `jdbc_truststore` and `jdbc_truststore_type` are required.
-        ## More information can be found from Oracle Database's whitepaper:
-        ##
-        ## https://www.oracle.com/technetwork/topics/wp-oracle-jdbc-thin-ssl-130128.pdf
         #
         protocol: TCPS
     ```
 
-2. Oracle Database で TCPS 接続を許可するために、`sqlnet.ora`、`listener.ora`、`tnsnames.ora` を更新します。
-
-##### JDBC を使用しない Oracle 経由の TCPS
-
-JDBC を使用していない場合、Datadog Agent がデータベースに接続できることを確認します。構成オプションに入力された情報を使って、`sqlplus` コマンドラインツールを使用します。
-
-```shell
-sqlplus <USER>/<PASSWORD>@(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCPS)(HOST=<HOST>)(PORT=<PORT>))(SERVICE_NAME=<SERVICE_NAME>)))
-```
-
-[Oracle Instant Client][4] による接続を使用する際は、アプリケーションによって使用されるクライアントライブラリの `network/admin` ディレクトリに 3 つのファイルを移動します。
-  * `tnsnames.ora`: アプリケーションの接続文字列で使用されるネットサービス名をデータベースサービスにマッピングします。
-  * `sqlnet.ora`: Oracle Network の設定を構成します。
-  * `cwallet.sso`: SSL または TLS 接続を有効にします。このファイルの安全性を確保するようにしてください。
-
-##### JDBC による TCPS
-
-JDBC を使用して Oracle Database に接続している場合は、`jdbc_truststore_path`、`jdbc_truststore_type`、および Truststore にパスワードがある場合は `jdbc_truststore_password` (オプション) も指定する必要があります。
-
-**注**: SSO のトラストストアはパスワードを必要としません。
-
-```yaml
-    # `instances:` セクションで
-    ...
-
-    ## @param jdbc_truststore_path - 文字列 - オプション
-    ## JDBC トラストストアのファイルパス。
-    #
-    jdbc_truststore_path: /path/to/truststore
-
-    ## @param jdbc_truststore_type - 文字列 - オプション
-    ## JDBC トラストストアのファイルタイプ。サポートされているトラストストアのタイプには、JKS、SSO、および PKCS12 があります。
-    #
-    jdbc_truststore_type: SSO
-
-    ## @param jdbc_truststore_password - 文字列 - オプション
-    ## JDBC で接続する際のトラストストアのパスワード。
-    #
-    # jdbc_truststore_password: <JDBC_TRUSTSTORE_PASSWORD>
-```
-
-TCPS on JDBC による Oracle Database への接続の詳細については、公式の [Oracle ホワイトペーパー][5]を参照してください。
-
-[1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
-[2]: https://github.com/DataDog/integrations-core/blob/master/oracle/datadog_checks/oracle/data/conf.yaml.example
-[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[4]: https://python-oracledb.readthedocs.io/en/latest/user_guide/connection_handling.html#install-the-wallet-and-network-configuration-files
-[5]: https://www.oracle.com/technetwork/topics/wp-oracle-jdbc-thin-ssl-130128.pdf
-{{% /tab %}}
-{{% tab "コンテナ化" %}}
-
-#### コンテナ化
-
-コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
-
-| パラメーター            | 値                                                                                                     |
-| -------------------- | --------------------------------------------------------------------------------------------------------- |
-| `<インテグレーション名>` | `oracle`                                                                                                  |
-| `<初期コンフィギュレーション>`      | 空白または `{}`                                                                                             |
-| `<インスタンスコンフィギュレーション>`  | `{"server": "%%host%%:1521", "service_name":"<SERVICE_NAME>", "username":"datadog", "password":"<PASSWORD>"}` |
-
-
-[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-{{% /tab %}}
-{{< /tabs >}}
-
 ### 検証
 
-[Agent の status サブコマンドを実行][5]し、Checks セクションで `oracle` を探します。
+[Agent の status サブコマンドを実行][6]し、Checks セクションで `oracle` を探します。
 
-## カスタムクエリ
+### カスタムクエリ
 
 カスタムクエリの指定もサポートされています。各クエリには、次の 2 つのパラメーターを含める必要があります。
 
@@ -421,70 +478,7 @@ self.count('oracle.custom_query.metric2', value, tags=['tester:oracle', 'tag1:va
 
 使用可能なすべてのコンフィギュレーションオプションの詳細については、[oracle.d/conf.yaml のサンプル][4]を参照してください。
 
-### 例
-
-データベースロックの識別に役立つクエリコンフィギュレーションを作成します。
-
-1. カスタムクエリを含めるには、`conf.d\oracle.d\conf.yaml` を変更します。`custom_queries` ブロックのコメントを解除し、必要なクエリと列を追加して、Agent を再起動します。
-
-```yaml
-  init_config:
-  instances:
-      - server: localhost:1521
-        service_name: orcl11g.us.oracle.com
-        user: datadog
-        password: xxxxxxx
-        jdbc_driver_path: /u01/app/oracle/product/11.2/dbhome_1/jdbc/lib/ojdbc6.jar
-        tags:
-          - db:oracle
-        custom_queries:
-          - query: |
-              select blocking_session, username, osuser, sid, serial# as serial, wait_class, seconds_in_wait
-              from v_$session
-              where blocking_session is not NULL order by blocking_session
-            columns:
-              - name: blocking_session
-                type: gauge
-              - name: username
-                type: tag
-              - name: osuser
-                type: tag
-              - name: sid
-                type: tag
-              - name: serial
-                type: tag
-              - name: wait_class
-                type: tag
-              - name: seconds_in_wait
-                type: tag
-```
-
-2. `v_$session` にアクセスするには、`DATADOG` にアクセス許可を付与し、アクセス許可をテストします。
-
-```text
-SQL> grant select on sys.v_$session to datadog;
-
-##アクセスを検証するために DD ユーザーと接続します。
-
-
-SQL> show user
-USER is "DATADOG"
-
-
-##ビューを表示するための同義語の作成
-SQL> create synonym datadog.v_$session for sys.v_$session;
-
-
-Synonym created.
-
-
-SQL> select blocking_session,username,osuser, sid, serial#, wait_class, seconds_in_wait from v_$session
-where blocking_session is not NULL order by blocking_session;
-```
-
-3. 構成が完了すると、`oracle.custom_query.locks` メトリクスに基づいて[モニター][6]を作成できます。
-
-## 収集データ
+## データ収集
 
 ### メトリクス
 {{< get-metrics-from-git "oracle" >}}
@@ -494,96 +488,19 @@ where blocking_session is not NULL order by blocking_session;
 
 Oracle Database チェックには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 {{< get-service-checks-from-git "oracle" >}}
 
 
 ## トラブルシューティング
 
-### 一般的な問題
-
-#### Oracle Native Client
-- `DPY-6000: cannot connect to database` のエラーが発生した場合
-  ```text
-  Failed to connect to Oracle DB, error: DPY-6000: cannot connect to database. Listener refused connection. (Similar to ORA-12660)
-  ```
- - Native Network Encryption または Checksumming が有効になっていないことを確認してください。有効になっている場合は、`use_instant_client: true` を設定して Instant Client 方式を使用する必要があります。
-
-Oracle Instant Client のセットアップについて、詳しくは [Oracle インテグレーションに関するドキュメント][7]を参照してください。
-
-#### Oracle Instant Client
-- Oracle Instant Client ファイルと SDK ファイルの両方が同じディレクトリにあることを確認します。
-ディレクトリの構造は次のようになります。
-  ```text
-  |___ BASIC_LITE_LICENSE
-  |___ BASIC_LITE_README
-  |___ adrci
-  |___ genezi
-  |___ libclntsh.so -> libclntsh.so.19.1
-  |___ libclntsh.so.10.1 -> libclntsh.so.19.1
-  |___ libclntsh.so.11.1 -> libclntsh.so.19.1
-  |___ libclntsh.so.12.1 -> libclntsh.so.19.1
-  |___ libclntsh.so.18.1 -> libclntsh.so.19.1
-  |___ libclntsh.so.19.1
-  |___ libclntshcore.so.19.1
-  |___ libipc1.so
-  |___ libmql1.so
-  |___ libnnz19.so
-  |___ libocci.so -> libocci.so.19.1
-  |___ libocci.so.10.1 -> libocci.so.19.1
-  |___ libocci.so.11.1 -> libocci.so.19.1
-  |___ libocci.so.12.1 -> libocci.so.19.1
-  |___ libocci.so.18.1 -> libocci.so.19.1
-  |___ libocci.so.19.1
-  |___ libociicus.so
-  |___ libocijdbc19.so
-  |___ liboramysql19.so
-  |___ listener.ora
-  |___ network
-  |   `___ admin
-  |       |___ README
-  |       |___ cwallet.sso
-  |       |___ sqlnet.ora
-  |       `___ tnsnames.ora
-  |___ ojdbc8.jar
-  |___ ucp.jar
-  |___ uidrvci
-  `___ xstreams.jar
-  ```
-
-#### JDBC Driver (Linux のみ)
-- `JVMNotFoundException` が発生した場合:
-
-    ```text
-    JVMNotFoundException("No JVM shared library file ({jpype._jvmfinder.JVMNotFoundException: No JVM shared library file (libjvm.so) found. Try setting up the JAVA_HOME environment variable properly.})"
-    ```
-
-    - `JAVA_HOME` 環境変数が設定され、正しいディレクトリを指していることを確認してください。
-    - 環境変数を `/etc/environment` に追加します:
-        ```text
-        JAVA_HOME=/path/to/java
-        ```
-    - 次に、Agent を再起動します。
-
-- このエラー `Unsupported major.minor version 52.0` が発生した場合は、古いバージョンの Java が実行されています。
-お使いの Java システムをアップデートするか、新しいバージョンをインストールし、上記の手順に従って `JAVA_HOME` 変数を
-新しいインストールに割り当てるかのにいずれかを行う必要があります。
-
-- Agent から次のコマンドを実行して、環境変数が正しく設定されていることを確認します。
-表示された出力が正しい値と一致することを確認してください。
-
-    ```shell script
-      sudo -u dd-agent -- /opt/datadog-agent/embedded/bin/python -c "import os; print(\"JAVA_HOME:{}\".format(os.environ.get(\"JAVA_HOME\")))"
-    ```
-
-ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][7]までお問い合わせください。
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/oracle/images/oracle_dashboard.png
-[2]: https://oracle.github.io/python-oracledb/
-[3]: https://www.oracle.com/technetwork/database/application-development/jdbc/downloads/index.html
+[2]: https://docs.datadoghq.com/ja/database_monitoring/
+[3]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [4]: https://github.com/DataDog/integrations-core/blob/master/oracle/datadog_checks/oracle/data/conf.yaml.example
-[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[6]: https://docs.datadoghq.com/ja/monitors/monitor_types/metric/?tab=threshold
-[7]: https://github.com/DataDog/integrations-core/tree/7.41.x/oracle#oracle-instant-client
-[8]: https://docs.datadoghq.com/ja/help/
+[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[7]: https://docs.datadoghq.com/ja/help/

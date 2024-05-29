@@ -15,9 +15,9 @@ title: 서버리스 에이전트 설정
 | `DD_KMS_API_KEY`               | KMS를 사용하는 Datadog API 키가 있는 환경 변수입니다. **1개**의 키 환경 변수가 필요합니다. [서버리스 CLI 환경 변수][7]를 참조하세요.                                                                        |
 | `DD_API_KEY_SECRET_ARN`        | 비밀 관리자 **One** 키 환경 변수를 사용하는 Datadog API 키가 있는 환경 변수가 필요합니다. [서버리스 CLI 환경 변수][7]를 참조하세요.                                                                           |
 | `DD_LOG_LEVEL`                 | [Datadog 에이전트 로그][8]의 레벨을 설정합니다.                                                                                                                                                                      |
-| `DD_SERVERLESS_FLUSH_STRATEGY` | Datadog 에이전트 플러시 전략입니다. 허용되는 값은 `end`또는 `periodically[,milliseconds]`입니다.                                                                                                                      |
+| `DD_SERVERLESS_FLUSH_STRATEGY` | Datadog 에이전트 플러싱(flushing) 전략입니다. 허용되는 값은 `end` 또는 `periodically[,milliseconds]`입니다. 예를 들어 `DD_SERVERLESS_FLUSH_STRATEGY=periodically,100`은 100ms마다 플러싱합니다.                                                                                                                  |
 | `DD_ENV`                       | 내보내는 모든 데이터에 대해 글로벌 태그 `env`태그를 설정합니다.                                                                                                                                                                |
-| `DD_TAGS`                      | 공백으로 구분된 호스트 태그입니다. 예: `simple-tag-0 tag-key-1:tag-value-1`                                                                                                                                  |
+| `DD_TAGS`                      | 공백으로 구분된 호스트 태그입니다. 예: `simple-tag-0 tag-key-1:tag-value-1`.                                                                                                                                  |
 | `DD_SITE`                      | 메트릭, 트레이스 및 로그에 대한 목적지 사이트입니다. Datadog 사이트를 `{{< region-param key="dd_site" >}}`으로 설정합니다. `datadoghq.com`에 대한 기본값입니다.                                                                   |
 | `DD_DD_URL`                    | 제출 메트릭에 대한 URL을 덮어쓰기 위한 추가적인 설정입니다.                                                                                                                                                        |
 | `DD_URL`                       | `DD_DD_URL`에 대한 별칭입니다. `DD_DD_URL`이(가) 이미 설정된 경우 무시합니다.                                                                                                                                                      |
@@ -71,11 +71,11 @@ title: 서버리스 에이전트 설정
 | `DD_PROXY_HTTPS`    | `https` 요청에 대해 프록시로 사용할 수 있는 HTTPS URL              |
 | `DD_PROXY_NO_PROXY` | 프록시를 사용하지 않아야 하며, 공백으로 구분된 URL 목록. |
 
-프록시 설정에 대한 자세한 정보는 [Agent v6 프록시 설명서][8]를 참조하세요.
+프록시 설정에 대한 자세한 정보는 [Agent v6 프록시 설명서][6]를 참조하세요.
 
 ### DogStatsD(커스텀 메트릭)
 
-[StatsD 프로토콜][9]을 사용해 커스텀 메트릭 전송:
+[StatsD 프로토콜][5]을 사용해 커스텀 메트릭 전송:
 
 | 환경 변수                                      | 설명                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 |---------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -110,7 +110,7 @@ title: 서버리스 에이전트 설정
 
 [5]: /ko/developers/dogstatsd/
 
-[6]: /ko/agent/proxy/#agent-v6
+[6]: /ko/agent/configuration/proxy/#agent-v6
 
 [7]: /ko/serverless/libraries_integrations/cli/#environment-variables
 

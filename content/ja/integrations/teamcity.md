@@ -43,12 +43,11 @@ draft: false
 git_integration_title: teamcity
 integration_id: teamcity
 integration_title: TeamCity
-integration_version: 3.1.0
+integration_version: 4.0.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: teamcity
-oauth: {}
 public_title: TeamCity
 short_description: ビルドを追跡し、各デプロイのパフォーマンス上の影響を調査。
 supported_os:
@@ -88,7 +87,11 @@ TeamCity チェックは [Datadog Agent][1] パッケージに含まれていま
 
 #### TeamCity の準備
 
-1. TeamCity を準備するには、[ゲストログインを有効にする][2]を参照してください。
+[ゲストログイン](#guest-login)を有効にするか、Basic HTTP 認証の[ユーザー資格情報](#user-credentials)を識別することができます。
+
+##### ゲストログイン
+
+1. [ゲストログインを有効にします][2]。
 
 2. プロジェクト単位の権限を Guest ユーザーに割り当てられるように、`Per-project permissions` を有効にします。[認可モードの変更][3]を参照してください。
 ![ゲストログインを有効にする][4]
@@ -102,12 +105,20 @@ TeamCity チェックは [Datadog Agent][1] パッケージに含まれていま
 ![ゲストユーザー設定][9]
 ![ロールの割り当て][10]
 
+##### ユーザー資格情報
+
+Basic HTTP 認証の場合
+- [Agent の構成ディレクトリ][11]の `conf.d/` フォルダ内の `teamcity.d/conf.yaml` ファイルに、識別された `username` と `password` を指定します。
+- `Access denied. Enable guest authentication or check user permissions.` (アクセスが拒否されました。ゲスト認証を有効にするか、ユーザー権限を確認してください。) というエラーが発生した場合は、ユーザーの権限が正しいことを確認してください。 
+  - プロジェクト単位および View Usage Statistics 権限が有効になっている。
+  - Agent Workload Statistics を収集する場合は、View Agent Details および View Agent Usage Statistics 権限も割り当てます。
+
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
 #### ホスト
 
-ホストで実行中の Agent に対してこのチェックを構成するには:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
 [Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `teamcity.d/conf.yaml` を編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル teamcity.d/conf.yaml][2] を参照してください。
 
@@ -246,7 +257,7 @@ Python バージョン 2 の場合、`build_configuration` オプションを使
 [7]: https://docs.datadoghq.com/ja/logs/log_configuration/pipelines/#integration-pipelines
 [8]: https://logging.apache.org/log4j/2.x/manual/layouts.html#Patterns
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "コンテナ化" %}}
 
 #### コンテナ化
 
@@ -254,9 +265,9 @@ Python バージョン 2 の場合、`build_configuration` オプションを使
 
 | パラメーター            | 値                                                                                             |
 | -------------------- | ------------------------------------------------------------------------------------------------- |
-| `<インテグレーション名>` | `teamcity`                                                                                        |
-| `<初期コンフィギュレーション>`      | 空白または `{}`                                                                                     |
-| `<インスタンスコンフィギュレーション>`  | `{"server": "%%host%%", "use_openmetrics": "true"}`                                               |
+| `<INTEGRATION_NAME>` | `teamcity`                                                                                        |
+| `<INIT_CONFIG>`      | 空白または `{}`                                                                                     |
+| `<INSTANCE_CONFIG>`  | `{"server": "%%host%%", "use_openmetrics": "true"}`                                               |
 
 ##### ログの収集
 
@@ -273,7 +284,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 ### 検証
 
-[Agent の `status` サブコマンドを実行][11]し、Checks セクションで `teamcity` を探します。
+[Agent の `status` サブコマンドを実行][12]し、Checks セクションで `teamcity` を探します。
 
 ## 収集データ
 
@@ -291,14 +302,14 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][12]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][13]までお問合せください。
 
 ## その他の参考資料
 
-- [TeamCity と Datadog を使用して、コード変更がパフォーマンスに与える影響を追跡する][13]
+- [TeamCity と Datadog を使用して、コード変更がパフォーマンスに与える影響を追跡します。][14]
 
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://www.jetbrains.com/help/teamcity/enabling-guest-login.html
 [3]: https://www.jetbrains.com/help/teamcity/managing-roles-and-permissions.html#Changing+Authorization+Mode
 [4]: https://raw.githubusercontent.com/DataDog/integrations-core/master/teamcity/images/authentication.jpg
@@ -308,6 +319,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 [8]: https://www.jetbrains.com/help/teamcity/creating-and-managing-users.html#Assigning+Roles+to+Users
 [9]: https://raw.githubusercontent.com/DataDog/integrations-core/master/teamcity/images/guest_user_settings.jpg
 [10]: https://raw.githubusercontent.com/DataDog/integrations-core/master/teamcity/images/assign_role.jpg
-[11]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[12]: https://docs.datadoghq.com/ja/help/
-[13]: https://www.datadoghq.com/blog/track-performance-impact-of-code-changes-with-teamcity-and-datadog
+[11]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
+[12]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[13]: https://docs.datadoghq.com/ja/help/
+[14]: https://www.datadoghq.com/blog/track-performance-impact-of-code-changes-with-teamcity-and-datadog

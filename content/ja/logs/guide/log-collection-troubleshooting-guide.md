@@ -79,7 +79,7 @@ Agent に正しい権限がない場合、[Agent のステータス][5]を確認
 - Access is denied. (アクセスが拒否されました。)
 - Could not find any file matching pattern `<path/to/filename>`, check that all its subdirectories are executable. (パターン `<path/to/filename>` に一致するファイルが見つかりませんでした。そのサブディレクトリがすべて実行可能かどうか確認してください。)
 
-エラーを修正するには、Datadog Agent ユーザーにログファイルおよびサブディレクトリへの読み取り、書き込み、実行権限を与えます。
+エラーを修正するには、Datadog Agent ユーザーにログファイルおよびサブディレクトリへの読み取りおよび実行権限を与えます。
 
 {{< tabs >}}
 {{% tab "Linux" %}}
@@ -240,7 +240,7 @@ Journald からログを収集する場合は、[Journald インテグレーシ�
 問題について記述されたエラーがログに含まれている場合があります。次のコマンドを実行して、このようなエラーをチェックします。
 
 ```shell
-sudo cat /var/log/datadog/agent.log | grep ERROR
+sudo grep -i error /var/log/datadog/agent.log
 ```
 
 ## Docker 環境
@@ -253,7 +253,15 @@ sudo cat /var/log/datadog/agent.log | grep ERROR
 
 ## 予期せぬログの欠落
 
-ログが [Datadog Live Tail][11] に表示されることをチェックします。Live Tail に表示される場合は、インデックス構成ページで、いずれかの[除外フィルター][12]がログと一致していないかどうかをチェックしてください。
+[Datadog Live Tail][11] にログが表示されるか確認します。
+
+Live Tail に表示される場合は、インデックス構成ページで、ログと一致する [除外フィルター][12]がないか確認してください。
+Live Tail に表示されない場合、タイムスタンプが 18 時間以上過去のものであれば、ドロップされた可能性があります。`datadog.estimated_usage.logs.drop_count` メトリクスで、どの `service` と `source` が影響を受けているかを確認できます。
+
+## ログの切り捨て
+
+1MB を超えるログは切り捨てられます。どの `service` と `source` が影響を受けているかは `datadog.estimated_usage.logs.truncated_count` と `datadog.estimated_usage.logs.truncated_bytes` メトリクスで確認できます。
+
 
 ## その他の参考資料
 
@@ -261,9 +269,9 @@ sudo cat /var/log/datadog/agent.log | grep ERROR
 
 [1]: /ja/logs/
 [2]: /ja/help/
-[3]: /ja/agent/guide/agent-commands/#restart-the-agent
+[3]: /ja/agent/configuration/agent-commands/#restart-the-agent
 [4]: /ja/agent/logs/log_transport?tab=https#enforce-a-specific-transport
-[5]: /ja/agent/guide/agent-commands/#agent-status-and-information
+[5]: /ja/agent/configuration/agent-commands/#agent-status-and-information
 [7]: /ja/integrations/journald/
 [8]: https://codebeautify.org/yaml-validator
 [9]: /ja/logs/guide/docker-logs-collection-troubleshooting-guide/

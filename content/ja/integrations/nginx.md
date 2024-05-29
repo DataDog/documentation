@@ -7,6 +7,7 @@ assets:
     NGINX-Metrics: assets/dashboards/NGINX-Metrics_dashboard.json
     NGINX-Overview: assets/dashboards/NGINX-Overview_dashboard.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -21,6 +22,7 @@ assets:
     - 'nginx: マスタープロセス'
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 31
     source_type_name: Nginx
   logs:
     source: nginx
@@ -49,12 +51,11 @@ draft: false
 git_integration_title: nginx
 integration_id: nginx
 integration_title: Nginx
-integration_version: 5.4.1
+integration_version: 6.3.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: nginx
-oauth: {}
 public_title: Nginx
 short_description: 接続およびリクエストのメトリクスを監視。NGINX Plus でさらに多くのメトリクスを取得できます。
 supported_os:
@@ -77,6 +78,7 @@ tile:
   title: Nginx
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ![NGINX のデフォルトのダッシュボード][1]
@@ -95,9 +97,9 @@ NGINX の商用版である NGINX Plus のユーザーの場合、Agent は、NG
 - キャッシュ (サイズ、ヒット数、ミス数など)
 - SSL (ハンドシェイクやハンドシェイクの失敗など)
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 NGINX チェックは、ローカルの NGINX ステータスエンドポイントからメトリクスを取得するため、`nginx` バイナリが NGINX ステータスモジュールと共にコンパイルされている必要があります。
 
@@ -122,7 +124,7 @@ http_stub_status_module
 #### NGINX の準備
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
 各 NGINX サーバーで、他の NGINX 構成ファイルが含まれているディレクトリ (`/etc/nginx/conf.d/` など) に `status.conf` ファイルを作成します。
 
@@ -197,7 +199,7 @@ data:
 [...]
   status.conf: |
     server {
-      listen 18080;
+      listen 81;
 
       location /nginx_status {
         stub_status on;
@@ -216,7 +218,7 @@ spec:
   containers:
     - name: nginx
       ports:
-        - containerPort: 18080
+        - containerPort: 81
       volumeMounts:
         - mountPath: /etc/nginx/conf.d/status.conf
           subPath: status.conf
@@ -232,14 +234,14 @@ spec:
 {{% /tab %}}
 {{< /tabs >}}
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
-#### ホスト
+#### メトリクスベース SLO
 
-ホストで実行中の Agent に対してこのチェックを構成するには:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
 ホストで実行されている Agent 用にこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[Docker](?tab=docker#docker)、[Kubernetes](?tab=kubernetes#kubernetes)、または [ECS](?tab=ecs#ecs) セクションを参照してください。
 
@@ -261,7 +263,7 @@ spec:
 
 3. [Agent を再起動][2]すると、Datadog への NGINX メトリクスの送信が開始されます。
 
-##### ログの収集
+##### 収集データ
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -324,7 +326,7 @@ LABEL "com.datadoghq.ad.instances"='[{"nginx_status_url": "http://%%host%%:81/ng
 
 **注**: このインスタンスは NGINX オープンソースでのみ機能します。NGINX Plus を使用している場合は、対応するインスタンス構成をインライン化します。
 
-#### ログの収集
+#### 収集データ
 
 
 Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Docker ログ収集][2]を参照してください。
@@ -341,7 +343,7 @@ LABEL "com.datadoghq.ad.logs"='[{"source":"nginx","service":"nginx"}]'
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-#### Kubernetes
+#### ガイド
 
 このチェックを、Kubernetes で実行している Agent に構成します。
 
@@ -394,7 +396,7 @@ metadata:
 
 **注**: このインスタンスは NGINX オープンソースでのみ機能します。NGINX Plus を使用している場合は、対応するインスタンス構成をインライン化します。
 
-#### ログの収集
+#### 収集データ
 
 
 Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][3]を参照してください。
@@ -446,7 +448,7 @@ metadata:
 
 **注**: このインスタンスは NGINX オープンソースでのみ機能します。NGINX Plus を使用している場合は、対応するインスタンス構成をインライン化します。
 
-##### ログの収集
+##### 収集データ
 
 
 Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[ECS ログ収集][2]を参照してください。
@@ -475,9 +477,9 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 [Agent の status サブコマンドを実行][5]し、Checks セクションで `nginx` を探します。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "nginx" >}}
 
 
@@ -500,20 +502,20 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 最後に、次のメトリクスには対応するメトリクスがありません。
 
-| メトリクス              | 説明                                                                               |
+| エラー予算アラート              | 説明                                                                               |
 | ------------------- | ----------------------------------------------------------------------------------------- |
 | `nginx.net.reading` | nginx がリクエストヘッダーを読み取っている現在の接続数。              |
 | `nginx.net.writing` | nginx がクライアントへの応答を書き込んでいる現在の接続数。 |
 
-### イベント
+### ヘルプ
 
 NGINX チェックには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 {{< get-service-checks-from-git "nginx" >}}
 
 
-## トラブルシューティング
+## ヘルプ
 
 - [あるはずのタイムスタンプがログに含まれないのはなぜですか？][6]
 

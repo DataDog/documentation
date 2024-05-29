@@ -12,7 +12,19 @@ further_reading:
 - link: "/security/detection_rules/"
   tag: "Documentation"
   text: "Explore security detection rules"
+products:
+- name: Cloud SIEM
+  url: /security/cloud_siem/
+  icon: siem
+- name: Cloud Security Management
+  url: /security/cloud_security_management/
+  icon: cloud-security-management
+- name: Application Security Management
+  url: /security/application_security/
+  icon: app-sec
 ---
+
+{{< product-availability >}}
 
 ## Overview
 
@@ -28,7 +40,7 @@ As you configure the rule, a preview of issues matching the notification rule co
 
 1. On the [**Notification Rules**][1] page, click **New Notification Rule**.
 2. Under **Source Types**, select the detection rule types you want to include in the notification rule.
-3. (Optional) For ASM, select the **Include Application level vulnerabilities** checkbox.
+3. (Optional) For ASM, select the ASM Vulnerability Management source type, _or_ leave the source type empty and select the **Include Application level vulnerabilities** checkbox.
 4. Under **Rule Criteria**, select one or more severity levels.
 5. Specify the tags and attributes that must be present in order for the notification rule to be triggered.
 6. Under **Notification Details**, specify the recipients you want to notify when the notification rule is triggered. You can notify individuals, teams, create Jira issues, and more. See [Notifications][2] for more information.

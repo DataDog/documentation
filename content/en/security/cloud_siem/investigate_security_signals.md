@@ -96,6 +96,8 @@ The query to see all threat intelligence matches in the Security Signals Explore
 
 {{< img src="security/security_monitoring/investigate_security_signals/threat_intel_results_categories.png" alt="The Signal Explorer showing a bar graph of signals broken down by the threat intel categories of residential proxy, corp_vpn, cryptomining, and malware" style="width:80%;" >}}
 
+See the [Threat Intelligence][10] documentation for more information on threat intelligence feeds.
+
 ### Search by network IP attributes
 
 When a suspicious activity is detected from your logs, determine whether the suspicious actor has interacted with your systems by searching for its network IP. Use the following query to search by IP attributes in the Log Explorer: `@network.ip.list:<IP address>`. The query searches IPs anywhere within the logs, including the tags, attributes, error, and message fields.
@@ -119,3 +121,4 @@ You can also launch this query directly from the signal panel:
 [7]: /service_management/incident_management/
 [8]: /service_management/workflows/trigger/#trigger-a-workflow-from-a-security-signal
 [9]: /security/cloud_security_management/workflows/
+[10]: /security/threat_intelligence

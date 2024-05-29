@@ -8,10 +8,6 @@ further_reading:
   text: "Basic Postgres Integration"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
-{{< /site-region >}}
-
 Database Monitoring provides deep visibility into your Postgres databases by exposing query metrics, query samples, explain plans, database states, failovers, and events.
 
 The Agent collects telemetry directly from the database by logging in as a read-only user. Do the following setup to enable Database Monitoring with your Postgres database:
@@ -34,7 +30,7 @@ Performance impact
 Database Monitoring runs as an integration on top of the base Agent ([see benchmarks][1]).
 
 Proxies, load balancers, and connection poolers
-: The Agent must connect directly to the host being monitored. For self-hosted databases, `127.0.0.1` or the socket is preferred. The Agent should not connect to the database through a proxy, load balancer, or connection pooler such as `pgbouncer`. While this can be an anti-pattern for client applications, each Agent must have knowledge of the underlying hostname and should stick to a single host for its lifetime, even in cases of failover. If the Datadog Agent connects to different hosts while it is running, the values of metrics will be incorrect.
+: The Datadog Agent must connect directly to the host being monitored. For self-hosted databases, `127.0.0.1` or the socket is preferred. The Agent should not connect to the database through a proxy, load balancer, or connection pooler such as `pgbouncer`. If the Agent connects to different hosts while it is running (as in the case of failover, load balancing, and so on), the Agent calculates the difference in statistics between two hosts, producing inaccurate metrics.
 
 Data security considerations
 : See [Sensitive information][2] for information about what data the Agent collects from your databases and how to ensure it is secure.
@@ -130,7 +126,7 @@ When it prompts for a password, use the password you entered when you created th
 
 ## Install the Agent
 
-To monitor Cloud SQL hosts, install the Datadog Agent in your infrastructure and configured to connect to each instance remotely. The Agent does not need to run on the database, it only needs to connect to it. For additional Agent installation methods not mentioned here, see the [Agent installation instructions][8].
+To monitor Cloud SQL hosts, install the Datadog Agent in your infrastructure and configure it to connect to each instance remotely. The Agent does not need to run on the database, it only needs to connect to it. For additional Agent installation methods not mentioned here, see the [Agent installation instructions][8].
 
 {{< tabs >}}
 {{% tab "Host" %}}
@@ -337,7 +333,7 @@ If you have installed and configured the integrations and Agent as described and
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/basic_agent_usage#agent-overhead
+[1]: /database_monitoring/agent_integration_overhead/?tab=postgres
 [2]: /database_monitoring/data_collected/#sensitive-information
 [3]: https://www.postgresql.org/docs/current/config-setting.html
 [4]: https://cloud.google.com/sql/docs/postgres/flags

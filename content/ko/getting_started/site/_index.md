@@ -4,9 +4,9 @@ algolia:
   - 사이트
   - Datadog 사이트
 further_reading:
-- link: https://learn.datadoghq.com/courses/dd-201
+- link: https://learn.datadoghq.com/courses/dashboards-slos
   tag: 학습 센터
-  text: 'Datadog 201: 파워 유저 되기'
+  text: 대시보드 및 SLO를 사용하여 비즈니스 크리티컬 인사이트 생성
 - link: /agent/configuration/dual-shipping/
   tag: 가이드
   text: 이중 배송
@@ -17,6 +17,18 @@ title: Datadog 사이트 시작하기
 ## 개요
 
 Datadog는 전 세계에서 다양한 사이트를 제공합니다. 각 사이트는 완전히 독립적으로 운영되며, 사이트별로 데이터를 공유할 수 없습니다. 각 사이트마다 혜택을 제공하거나(정부 보안 규제 등), 세계 어디든 원하는 위치에 저장할 수 있도록 지원합니다.
+
+## 공유 책임
+
+사용자 데이터를 안전하게 보존할 책임은 Datadog와 Datadog 제품을 활용하는 개발자가 공유합니다.
+
+Datadog는 다음에 대한 책임을 집니다.
+- 데이터가 Datadog 플랫폼에 전송되고 저장될 때 데이터를 안전하게 처리하는 신뢰할 수 있는 제품을 제공합니다.
+- 내부 정책에 따라 보안 문제를 식별합니다.
+
+개발자는 다음에 대한 책임을 집니다.
+- Datadog에서 제공한 대로 설정 값과 개인정보 보호 옵션을 활용합니다.
+- 환경 내에서 코드의 무결성을 보장합니다.
 
 ## Datadog 사이트 액세스
 
@@ -29,7 +41,7 @@ Datadog는 전 세계에서 다양한 사이트를 제공합니다. 각 사이�
 | US1     | `https://app.datadoghq.com` | `datadoghq.com`     | US       |
 | US3     | `https://us3.datadoghq.com` | `us3.datadoghq.com` | US       |
 | US5     | `https://us5.datadoghq.com` | `us5.datadoghq.com` | US       |
-| EU1     | `https://app.datadoghq.eu`  | `datadoghq.eu`      | EU       |
+| EU1     | `https://app.datadoghq.eu`  | `datadoghq.eu`      | 유럽연합(독일) |
 | US1-FED | `https://app.ddog-gov.com`  | `ddog-gov.com`      | US       |
 | AP1     | `https://ap1.datadoghq.com` | `ap1.datadoghq.com` | 일본 |
 
@@ -43,7 +55,7 @@ Datadog는 전 세계에서 다양한 사이트를 제공합니다. 각 사이�
 
 인스턴스의 보안 요구사항에 따라 Datadog 사이트가 서로 다른 기능을 지원할 수 있습니다. Datadog 설명서의 페이지 오른쪽에 있는 사이트 선택기 드롭다운 메뉴에서 Datadog 사이트를 선택해 정보를 볼 수 있습니다.
 
-{{< img src="getting_started/site/site-selector.png" alt="설명서 사이트 우측 메뉴 드롭다운에 있는 사이트 선택기" style="width:100%" >}}
+{{< img src="getting_started/site/site-selector-gs-with-tags.png" alt="설명서 사이트의 오른쪽에 있는 사이트 선택기 드롭다운 메뉴" style="width:100%" >}}
 
 예를 들어 정부 사이트용 Datadog 설명서를 보려면 **US1-FED**를 선택합니다.
 

@@ -1,23 +1,25 @@
 ---
-title: NXLog
-name: nxlog
-kind: インテグレーション
-description: NXLog を構成して、ホスト、コンテナ、サービスからログを収集
-short_description: NXLog を構成して、ホスト、コンテナ、サービスからログを収集
-categories:
-  - ログの収集
-doc_link: /integrations/nxlog/
 aliases:
-  - /ja/logs/log_collection/nxlog
+- /ja/logs/log_collection/nxlog
+categories:
+- ログの収集
+dependencies:
+- https://github.com/DataDog/documentation/blob/master/content/en/integrations/nxlog.md
+description: NXLog を構成して、ホスト、コンテナ、サービスからログを収集
+doc_link: /integrations/nxlog/
 has_logo: true
+integration_id: nxlog
 integration_title: nxlog
 is_public: true
-dependencies:
-  - 'https://github.com/DataDog/documentation/blob/master/content/en/integrations/nxlog.md'
+kind: インテグレーション
+name: nxlog
 public_title: Datadog-NXlog インテグレーション
+short_description: NXLog を構成して、ホスト、コンテナ、サービスからログを収集
 supported_os:
-  - windows
+- windows
+title: NXLog
 ---
+
 ## 概要
 
 NXLog を構成して、ホスト、コンテナ、サービスからログを収集
@@ -180,7 +182,7 @@ NXLog を構成して、ホスト、コンテナ、サービスからログを�
 
      上の `<DATADOG_API_KEY>` を忘れずに置き換えてください。
 
-2.  監視するファイルごとに NXLog 監視モジュールを有効にし、出力セクションの前に以下を追加します。
+2. 監視するファイルごとに NXLog 監視モジュールを有効にし、出力セクションの前に以下を追加します。
 
     ```conf
     ##Module to watch a file

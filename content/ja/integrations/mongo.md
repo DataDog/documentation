@@ -5,6 +5,7 @@ assets:
   dashboards:
     mongodb: assets/dashboards/overview.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -17,6 +18,7 @@ assets:
     - mongod
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 19
     source_type_name: MongoDB
   logs:
     source: mongodb
@@ -34,7 +36,7 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- data store
+- data stores
 - log collection
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/mongo/README.md
@@ -43,12 +45,11 @@ draft: false
 git_integration_title: mongo
 integration_id: mongodb
 integration_title: MongoDB
-integration_version: 6.0.1
+integration_version: 6.4.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: mongo
-oauth: {}
 public_title: MongoDB
 short_description: 読み取り/書き込みのパフォーマンス、最も使用されたレプリカ、収集メトリクスなどを追跡。
 supported_os:
@@ -61,7 +62,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::macOS
   - Supported OS::Windows
-  - Category::データストア
+  - Category::Data Stores
   - Category::ログの収集
   configuration: README.md#Setup
   description: 読み取り/書き込みのパフォーマンス、最も使用されたレプリカ、収集メトリクスなどを追跡。
@@ -71,6 +72,7 @@ tile:
   title: MongoDB
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ![MongoDB ダッシュボード][1]
@@ -86,13 +88,13 @@ MongoDB を Datadog に接続して、以下のことができます。
 
 **注**: このインテグレーションには MongoDB v3.0 以降が必要です。MongoDB Atlas と Datadog のインテグレーションは、M10 以降のクラスターでのみ使用できます。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 MongoDB チェックは [Datadog Agent][2] パッケージに含まれています。追加でインストールする必要はありません。
 
-### アーキテクチャ
+### Synthetic モニタリング
 
 ほとんどの低レベルのメトリクス (アップタイム、ストレージサイズなど) は、すべての mongod ノードで収集する必要があります。その他の高レベルのメトリクス (収集/インデックス統計など) は、一度だけ収集する必要があります。これらの理由により、Agent を構成する方法は、mongo クラスターのデプロイ方法によって異なります。
 
@@ -221,16 +223,16 @@ db.createUser({
 {{< /tabs >}}
 
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 ホストで実行されている Agent 用にこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[Docker](?tab=docker#docker)、[Kubernetes](?tab=kubernetes#kubernetes)、または [ECS](?tab=ecs#ecs) セクションを参照してください。
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
-#### ホスト
+#### メトリクスベース SLO
 
-ホストで実行中の Agent に対してこのチェックを構成するには:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
 ##### メトリクスの収集
 
@@ -281,7 +283,7 @@ Datadog APM は Mongo を統合して、分散システム全体のトレース�
 1. [Datadog でトレースの収集を有効にします][4]。
 2. [Mongo へのリクエストを作成するアプリケーションをインスツルメントします][5]。
 
-##### ログの収集
+##### 収集データ
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -327,7 +329,7 @@ LABEL "com.datadoghq.ad.init_configs"='[{}]'
 LABEL "com.datadoghq.ad.instances"='[{"hosts": ["%%host%%:%%port%%"], "username": "datadog", "password" : "<UNIQUEPASSWORD>", "database": "<DATABASE>"}]'
 ```
 
-##### ログの収集
+##### 収集データ
 
 Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Docker ログ収集][2]を参照してください。
 
@@ -362,7 +364,7 @@ Agent コンテナで必要な環境変数
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-#### Kubernetes
+#### ガイド
 
 このチェックを、Kubernetes で実行している Agent に構成します。
 
@@ -421,7 +423,7 @@ spec:
     - name: mongo
 ```
 
-##### ログの収集
+##### 収集データ
 
 Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][3]を参照してください。
 
@@ -490,7 +492,7 @@ Agent コンテナで必要な環境変数
 }
 ```
 
-##### ログの収集
+##### 収集データ
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -540,9 +542,9 @@ Agent コンテナで必要な環境変数
 
 [Agent の status サブコマンドを実行][3]し、Checks セクションで `mongo` を探します。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "mongo" >}}
 
 
@@ -568,18 +570,18 @@ Agent コンテナで必要な環境変数
 | mongodb.tcmalloc         | tcmalloc                                          |
 | mongodb.metrics.commands | metrics.commands                                  |
 
-### イベント
+### ヘルプ
 
 **レプリケーション状態の変化**:<br>
 このチェックは、Mongo ノードでレプリケーション状態が変化するたびにイベントを送信します。
 
-### サービスのチェック
+### ヘルプ
 {{< get-service-checks-from-git "mongo" >}}
 
 
-## トラブルシューティング
+## ヘルプ
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 
 ## その他の参考資料
 

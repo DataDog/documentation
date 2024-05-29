@@ -9,11 +9,6 @@ further_reading:
 
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
-{{< /site-region >}}
-
-
 Database Monitoring provides deep visibility into your MySQL databases by exposing query metrics, query samples, explain plans, connection data, system metrics, and telemetry for the InnoDB storage engine.
 
 The Agent collects telemetry directly from the database by logging in as a read-only user. Do the following setup to enable Database Monitoring with your MySQL database:
@@ -36,7 +31,7 @@ Performance impact
 Database Monitoring runs as an integration on top of the base Agent ([see benchmarks][1]).
 
 Proxies, load balancers, and connection poolers
-: The Agent must connect directly to the host being monitored, preferably through the instance endpoint. The Agent should not connect to the database through a proxy, load balancer, connection pooler, or the **Aurora cluster endpoint**. While this can be an anti-pattern for client applications, each Agent must have knowledge of the underlying hostname and should stick to a single host for its lifetime, even in cases of failover. If the Datadog Agent connects to different hosts while it is running, the values of metrics will be incorrect.
+: The Datadog Agent must connect directly to the host being monitored, preferably through the instance endpoint. The Agent should not connect to the database through a proxy, load balancer, connection pooler, or the **Aurora cluster endpoint**. If connected to the cluster endpoint, the Agent collects data from one random replica, and only provides visibility into that replica. If the Agent connects to different hosts while it is running (as in the case of failover, load balancing, and so on), the Agent calculates the difference in statistics between two hosts, producing inaccurate metrics.
 
 Data security considerations
 : See [Sensitive information][2] for information about what data the Agent collects from your databases and how to ensure it is secure.
@@ -44,7 +39,7 @@ Data security considerations
 
 ## Configure MySQL settings
 
-Configure the following in the [DB Parameter Group][3] and then **restart the server** for the settings to take effect:
+Configure the following in the [DB cluster parameter group][3] and then **restart the server** for the settings to take effect:
 
 {{< tabs >}}
 {{% tab "MySQL 5.6" %}}
@@ -186,7 +181,7 @@ instances:
     port: 3306
     username: datadog
     password: '<YOUR_CHOSEN_PASSWORD>' # from the CREATE USER step earlier
-        
+
     # After adding your project and instance, configure the Datadog AWS integration to pull additional cloud data such as CPU and Memory.
     aws:
       instance_endpoint: '<AWS_INSTANCE_ENDPOINT>'
@@ -198,10 +193,13 @@ instances:
 
 [Restart the Agent][3] to start sending MySQL metrics to Datadog.
 
+**The Datadog Agent supports [Autodiscovery][10] of all Aurora endpoints in a cluster.** 
+
 
 [1]: /agent/configuration/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/mysql/datadog_checks/mysql/data/conf.yaml.example
 [3]: /agent/configuration/agent-commands/#start-stop-and-restart-the-agent
+[10]: /database_monitoring/guide/aurora_autodiscovery/?tab=mysql
 {{% /tab %}}
 {{% tab "Docker" %}}
 
@@ -350,7 +348,7 @@ To avoid exposing the `datadog` user's password in plain text, use the Agent's [
 
 ## Install the RDS Integration
 
-To collect more comprehensive database metrics from AWS, install the [RDS integration][8] (optional).
+To see infrastructure metrics from AWS, such as CPU, alongside the database telemetry in DBM, install the [RDS integration][8] (optional).
 
 ## Troubleshooting
 
@@ -361,7 +359,7 @@ If you have installed and configured the integrations and Agent as described and
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /agent/basic_agent_usage#agent-overhead
+[1]: /database_monitoring/agent_integration_overhead/?tab=mysql
 [2]: /database_monitoring/data_collected/#sensitive-information
 [3]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_WorkingWithParamGroups.html
 [4]: https://dev.mysql.com/doc/refman/5.7/en/creating-accounts.html
@@ -370,3 +368,4 @@ If you have installed and configured the integrations and Agent as described and
 [7]: https://app.datadoghq.com/databases
 [8]: /integrations/amazon_rds
 [9]: /database_monitoring/troubleshooting/?tab=mysql
+

@@ -22,33 +22,34 @@ short_description: Azure Stream Analytics のキーメトリクスを追跡
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Azure Stream Analytics は、デバイスからの大量のデータストリーミングを調べることができるイベント処理エンジンです。
 
 Datadog Azure インテグレーションを使用して、Azure Stream Analytics からメトリクスを収集できます。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 [Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "azure_stream_analytics" >}}
 
 
-### イベント
+### ヘルプ
 
 Azure Stream Analytics インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 
 Azure Stream Analytics インテグレーションには、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 

@@ -41,7 +41,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: jfrog_platform
-oauth: {}
 public_title: JFrog Platform
 short_description: JFrog Artifactory と Xray のメトリクスおよびイベントを表示、分析します。
 supported_os:

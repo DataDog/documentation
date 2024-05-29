@@ -5,6 +5,7 @@ assets:
   dashboards:
     cisco_aci: assets/dashboards/cisco_aci_dashboard.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -15,6 +16,7 @@ assets:
       prefix: cisco_aci.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 210
     source_type_name: Cisco ACI
 author:
   homepage: https://www.datadoghq.com
@@ -30,12 +32,11 @@ draft: false
 git_integration_title: cisco_aci
 integration_id: cisco-aci
 integration_title: CiscoACI
-integration_version: 2.2.2
+integration_version: 2.7.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: cisco_aci
-oauth: {}
 public_title: CiscoACI
 short_description: Cisco ACI のパフォーマンスと使用状況を追跡。
 supported_os:
@@ -57,6 +58,7 @@ tile:
   title: CiscoACI
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
@@ -67,20 +69,20 @@ Cisco ACI インテグレーションを使用すると、以下のことが可�
 - ACI の容量を追跡できます。
 - スイッチおよびコントローラー自体を監視できます。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 Cisco ACI チェックは Agent にパッケージ化されているので、ネットワーク内のサーバーに [Agent をインストール][1]するだけです。
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
-#### ホスト
+#### メトリクスベース SLO
 
-ホストで実行中の Agent に対してこのチェックを構成するには:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
 1. [Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `cisco_aci.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル cisco_aci.d/conf.yaml][2] を参照してください。
 
@@ -121,7 +123,7 @@ Cisco ACI チェックは Agent にパッケージ化されているので、ネ
 [2]: https://github.com/DataDog/integrations-core/blob/master/cisco_aci/datadog_checks/cisco_aci/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "コンテナ化" %}}
 
 #### コンテナ化
 
@@ -129,9 +131,9 @@ Cisco ACI チェックは Agent にパッケージ化されているので、ネ
 
 | パラメーター            | 値                                                                  |
 | -------------------- | ---------------------------------------------------------------------- |
-| `<インテグレーション名>` | `cisco_aci`                                                            |
-| `<初期コンフィギュレーション>`      | 空白または `{}`                                                          |
-| `<インスタンスコンフィギュレーション>`  | `{"aci_url":"%%host%%", "username":"<ユーザー名>", "pwd": "<パスワード>"}` |
+| `<INTEGRATION_NAME>` | `cisco_aci`                                                            |
+| `<INIT_CONFIG>`      | 空白または `{}`                                                          |
+| `<INSTANCE_CONFIG>`  | `{"aci_url":"%%host%%", "username":"<ユーザー名>", "pwd": "<パスワード>"}` |
 
 [1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 {{% /tab %}}
@@ -141,21 +143,21 @@ Cisco ACI チェックは Agent にパッケージ化されているので、ネ
 
 [Agent の `status` サブコマンドを実行][2]し、Checks セクションで `cisco_aci` を探します。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "cisco_aci" >}}
 
 
-### イベント
+### ヘルプ
 
 Cisco ACI チェックはテナントの障害をイベントとして送信します。
 
-### サービスのチェック
+### ヘルプ
 {{< get-service-checks-from-git "cisco_aci" >}}
 
 
-## トラブルシューティング
+## ヘルプ
 
 ### `cisco_aci.tenant.*` メトリクスの欠落
 もし `cisco_aci.tenant.*` メトリクスがない場合は、`test/cisco_aci_query.py` スクリプトを実行して、テナントエンドポイントに手動でクエリを実行することが可能です。
@@ -185,6 +187,6 @@ Cisco ACI チェックはテナントの障害をイベントとして送信し�
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [3]: https://docs.datadoghq.com/ja/help/

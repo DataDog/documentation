@@ -39,10 +39,10 @@ further_reading:
     tag: "Blog"
     text: "Optimize your .NET application performance with the Datadog Continuous Profiler"
   - link: "https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples"
-    tag: "GitHub"
+    tag: "Source Code"
     text: "Examples of custom instrumentation"
   - link: "https://github.com/DataDog/dd-trace-dotnet"
-    tag: "GitHub"
+    tag: "Source Code"
     text: "Source code"
 ---
 
@@ -50,7 +50,7 @@ further_reading:
 
 ### Supported .NET Core runtimes
 
-The .NET Tracer supports instrumentation on .NET Core 2.1, 3.1, .NET 5, .NET 6, and .NET 7.
+The .NET Tracer supports instrumentation on .NET Core 2.1, .NET Core 3.1, .NET 5, .NET 6, .NET 7, and .NET 8.
 
 For a full list of Datadog's .NET Core library and processor architecture support (including legacy and maintenance versions), see [Compatibility Requirements][1].
 
@@ -61,7 +61,7 @@ For a full list of Datadog's .NET Core library and processor architecture suppor
 </div>
 
 <div class="alert alert-warning">
-  <strong>Note:</strong> Datadog's automatic instrumentation relies on the .NET CLR Profiling API. This API allows only one subscriber (for example, Datadog's .NET Tracer with Profiler enabled). To ensure maximum visibility, run only one APM solution in your application environment.
+  <strong>Note:</strong> Datadog's automatic instrumentation relies on the .NET CLR Profiling API. This API allows only one subscriber (for example, Datadog APM). To ensure maximum visibility, run only one APM solution in your application environment. 
 </div>
 
 <div class="alert alert-info">
@@ -359,6 +359,8 @@ export DD_RUNTIME_METRICS_ENABLED=true
 # Start your application
 dotnet example.dll
 ```
+
+<div class="alert alert-info"> If you are using Alpine Linux, set the <code>CORECLR_PROFILER_PATH</code> environment variable to a path for musl based distributions: <code>linux-musl-x64/</code>.</div>
 
 #### Linux Docker container
 

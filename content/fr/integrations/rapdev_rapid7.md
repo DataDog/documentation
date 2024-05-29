@@ -44,7 +44,6 @@ legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0
 name: rapdev_rapid7
-oauth: {}
 pricing:
 - billing_type: flat_fee
   includes_assets: true

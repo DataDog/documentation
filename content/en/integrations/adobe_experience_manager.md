@@ -10,7 +10,7 @@ categories:
     - log collection
 doc_link: /integrations/adobe_experience_manager/
 aliases:
-    - logs/log_collection/adobe_experience_manager
+    - /logs/log_collection/adobe_experience_manager
 has_logo: true
 integration_title: Adobe Experience Manager
 is_public: true

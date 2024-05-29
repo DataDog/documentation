@@ -20,6 +20,12 @@ gs:
 - image: platform_redhat.png
   link: https://app.datadoghq.com/account/settings/agent/latest?platform=centos
   name: redhat
+- image: platform_rockylinux.png
+  link: https://app.datadoghq.com/account/settings/agent/latest?platform=centos
+  name: rockylinux
+- image: platform_almalinux.png
+  link: https://app.datadoghq.com/account/settings/agent/latest?platform=centos
+  name: almalinux
 - image: platform_fedora.png
   link: https://app.datadoghq.com/account/settings/agent/latest?platform=fedora
   name: fedora
@@ -37,7 +43,7 @@ gs:
   name: docker
 - image: platform_kubernetes.png
   link: https://app.datadoghq.com/account/settings/agent/latest?platform=kubernetes
-  name: kubernetes
+  name: Kubernetes
 - image: platform_openshift.png
   link: https://app.datadoghq.com/account/settings/agent/latest?platform=openshift
   name: OpenShift
@@ -63,57 +69,91 @@ gs:
   link: https://app.datadoghq.com/account/settings/agent/latest?platform=source
   name: source
 platforms:
-- image: platform_aix.png
+- category: Linux
+  image: platform_aix.png
   link: agent/basic_agent_usage/aix/
   name: aix
-- image: platform_amazonlinux.png
+- category: Linux
+  image: platform_almalinux.png
+  link: agent/basic_agent_usage/centos/
+  name: almalinux
+- category: Linux
+  image: platform_amazonlinux.png
   link: agent/basic_agent_usage/amazonlinux/
   name: amazonlinux
-- image: platform_ansible.png
+- category: configuration_management
+  image: platform_ansible.png
   link: agent/basic_agent_usage/ansible/
   name: Ansible
-- image: platform_centos.png
+- category: Linux
+  image: platform_centos.png
   link: agent/basic_agent_usage/centos/
   name: centos
-- image: platform_chef.png
+- category: configuration_management
+  image: platform_chef.png
   link: agent/basic_agent_usage/chef/
   name: chef
-- image: platform_debian.png
+- category: Linux
+  image: platform_debian.png
   link: agent/basic_agent_usage/deb/
   name: deb
-- image: platform_docker.png
+- category: cloud_and_container
+  image: platform_docker.png
   link: agent/docker/
   name: docker
-- image: platform_fedora.png
+- category: Linux
+  image: platform_fedora.png
   link: agent/basic_agent_usage/fedora/
   name: fedora
-- image: platform_heroku.png
+- category: cloud_and_container
+  image: platform_heroku.png
   link: agent/basic_agent_usage/heroku/
   name: heroku
-- image: platform_kubernetes.png
+- category: cloud_and_container
+  image: platform_kubernetes.png
   link: agent/kubernetes/
   name: Kubernetes
-- image: platform_macosx.png
+- category: macOS
+  image: platform_macosx.png
   link: agent/basic_agent_usage/osx/
   name: osx
-- image: platform_puppet.png
+- category: Linux
+  image: platform_oracle.png
+  link: agent/basic_agent_usage/oracle/
+  name: Oracle
+- category: configuration_management
+  image: platform_puppet.png
   link: agent/basic_agent_usage/puppet/
   name: puppet
-- image: platform_redhat.png
+- category: Linux
+  image: platform_redhat.png
   link: agent/basic_agent_usage/redhat/
   name: redhat
-- image: platform_saltstack.png
+- category: Linux
+  image: platform_rockylinux.png
+  link: agent/basic_agent_usage/centos/
+  name: rockylinux
+- category: configuration_management
+  image: platform_saltstack.png
   link: agent/basic_agent_usage/saltstack/
   name: salt
-- image: platform_suse.png
+- category: Linux
+  image: platform_suse.png
   link: agent/basic_agent_usage/suse/
   name: suse
-- image: platform_ubuntu.png
+- category: Linux
+  image: platform_ubuntu.png
   link: agent/basic_agent_usage/ubuntu/
   name: ubuntu
-- image: platform_windows.png
+- category: ログの収集
+  image: platform_windows.png
   link: agent/basic_agent_usage/windows/
   name: windows
-- image: platform_fromsource.png
+- category: ログの収集
+  image: platform_sccm.png
+  link: agent/basic_agent_usage/sccm/
+  name: sccm
+- category: source
+  image: platform_fromsource.png
   link: agent/basic_agent_usage/source/
   name: source

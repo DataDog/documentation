@@ -86,6 +86,8 @@ Avant de commencer, vérifiez que vous disposez des ressources suivantes :
     * logs:DeleteLogGroup
     * logs:DescribeLogGroups
     * logs:PutRetentionPolicy
+    * oam:ListSinks
+    * oam:ListAttachedLinks
     * s3:CreateBucket
     * s3:DeleteBucket
     * s3:DeleteBucketPolicy

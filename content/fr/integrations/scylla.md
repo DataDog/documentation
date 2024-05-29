@@ -41,7 +41,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: scylla
-oauth: {}
 public_title: Scylla
 short_description: Surveillez la santé des clusters, leurs ressources, leurs latences,
   et bien plus encore.

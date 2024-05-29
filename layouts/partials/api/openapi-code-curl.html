@@ -1,0 +1,26 @@
+{{- define "partials/api/openapi-code-curl-get.html" -}}
+curl --location 'https://api.cloudcraft.co{{ .path }}'
+{{- end -}}
+
+{{- define "partials/api/openapi-code-curl-delete.html" -}}
+curl --location --request DELETE 'https://api.cloudcraft.co{{ .path }}'
+{{- end -}}
+
+{{- define "partials/api/openapi-code-curl-put.html" -}}
+curl --location --request PUT 'https://api.cloudcraft.co{{ .path }}' \
+--data '{
+    {{- .payload -}}
+}'
+{{- end -}}
+
+{{- define "partials/api/openapi-code-curl-post.html" -}}
+curl --location 'https://api.cloudcraft.co{{ .path }}' \
+--header 'Content-Type: application/json' \
+--data '{
+    {{- .payload -}}
+}'
+{{- end -}}
+
+{{- $p := printf "partials/api/openapi-code-curl-%s.html" .method -}}
+{{- $pr := partial $p (dict "payload" .payload "path" .path) }}
+{{- highlight (trim $pr "\n\r") "bash" -}}

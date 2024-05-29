@@ -33,7 +33,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: go-metro
-oauth: {}
 public_title: Go-Metro
 short_description: ホスト間の TCP RTT を受動的に計算
 supported_os:
@@ -51,6 +50,7 @@ tile:
   title: Go-Metro
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
@@ -59,11 +59,11 @@ TCP RTT チェックは、Agent が実行されているホストと Agent の�
 
 このチェックは、64 ビットの DEB および RPM Datadog Agent v5 パッケージにのみ付属しています。このチェックは Datadog Agent v6 では**使用できません**。
 
-## セットアップ
+## 計画と使用
 
 ホストで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照してこの手順を行ってください。
 
-### インストール
+### インフラストラクチャーリスト
 
 [go-metro][2] とも呼ばれる TCP RTT チェックは、Agent にパッケージ化されていますが、追加のシステムライブラリが必要です。このチェックは、発信パケットから対応する TCP 受信確認までの時間を計算するために、PCAP ライブラリで提供されているタイムスタンプを使用します。そのため、PCAP をインストールして構成する必要があります。
 
@@ -87,7 +87,7 @@ sudo yum install compat-libcap1
 sudo setcap cap_net_raw+ep /opt/datadog-agent/bin/go-metro
 ```
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 Agent の `conf.d` ディレクトリで、`go-metro.yaml` ファイルを編集します。利用可能なすべてのコンフィギュレーションのオプションについては、[サンプル go-metro.yaml][3] を参照してください。
 app.datadoghq.com と 192.168.0.22 について、TCP RTT 時間を示すファイルの例を以下に挙げます。
@@ -125,7 +125,7 @@ $ sudo setcap cap_net_raw+ep /opt/datadog-agent/bin/go-metro
 
 ディストリビューションによってパッケージ名が異なるため、上記の手順がうまくいかない場合は、`apt-cache search libcap` または `yum search libcap` を実行して、バイナリを提供するパッケージのショートリストを入手してください。サポートが必要な場合は、[Datadog サポート][4]に連絡してください。
 
-**注**: go-metro は独自のファイルにログを記録することにご注意ください。ログは `/var/log/datadog/go-metro.log` にあります。さらに、go-metro はスタンドアロンで機能するため、Agent の情報ページには表示されません。
+**注**: go-metro は専用のファイルにログを記録します。このファイルは `/var/log/datadog/go-metro.log` で見つけることができます。また、go-metro はスタンドアロンで実行されるため、Agent のステータス出力には表示されません。
 
 最後に、go-metro バイナリは、Datadog Agent の 64-ビット RPM と DEB 製品のみに同梱されているためパッケージ化されたバージョンでのみ使用できます。つまり、go-metro はソースインストールや 32-ビットパッケージでは利用できません。
 
@@ -152,21 +152,21 @@ TCP RTT チェックが開始している場合は、上のような go-metro �
 
 **これは受動チェックなので、yaml ファイルで指定されているホストにパケットがアクティブに送信されない限り、メトリクスは報告されません。**
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "go-metro" >}}
 
 
-### イベント
+### ヘルプ
 
 Go-metro チェックには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 
 Go-metro チェックには、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 

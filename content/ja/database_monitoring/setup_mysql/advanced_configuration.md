@@ -4,10 +4,6 @@ kind: documentation
 title: MySQL データベースモニタリングの高度なコンフィギュレーション
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">データベースモニタリングはこのサイトでサポートされていません。</div>
-{{< /site-region >}}
-
 ## `events_statements_summary_by_digest` の切り捨て
 
 一部のワークロードでは、`performance_schema` のテーブルのメンテナンスが必要です。クエリの統計情報は `performance_schema.events_statements_summary_by_digest` テーブルで集計されますが、行数に上限があります。この上限は、[`performance_schema_digests_size` システム変数][1]により指定されます。テーブルの行がいっぱいの場合、新しいクエリダイジェストは null スキーマおよび null クエリダイジェストで「その他」の行でまとめて追跡されるため、Agent はその行に含まれるクエリの違いを特定できなくなります。

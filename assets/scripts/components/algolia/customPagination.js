@@ -17,7 +17,10 @@ const renderPagination = (renderOptions) => {
         return;
     }
 
-    document.querySelector('#count').innerText = `${nbHits} results`;
+    const countDiv = document.querySelector('#count');
+    if (countDiv) {
+        countDiv.innerText = `${nbHits} results`;
+    }
 
     container.innerHTML = `
     <ul class="ais-Pagination-list">

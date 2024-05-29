@@ -36,7 +36,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: sap_hana
-oauth: {}
 public_title: SAP HANA
 short_description: Surveillez les métriques relatives à la mémoire, au réseau, aux
   volumes et à d'autres éléments de votre système SAP HANA.

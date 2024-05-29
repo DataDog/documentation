@@ -9,7 +9,7 @@ doc_link: https://docs.datadoghq.com/integrations/amazon_mediatailor/
 draft: false
 git_integration_title: amazon_mediatailor
 has_logo: true
-integration_id: amazon-mediatailor
+integration_id: ''
 integration_title: AWS Elemental MediaTailor
 integration_version: ''
 is_public: true
@@ -21,15 +21,16 @@ short_description: AWS Elemental MediaTailor のキーメトリクスを追跡�
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 AWS Elemental MediaTailor は、スケーラブルなサーバーサイド広告挿入を可能にするパーソナライゼーションおよびマネタイゼーションサービスです。
 
 このインテグレーションを有効にすると、Datadog にすべての Elemental MediaTailor メトリクスを表示できます。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 
@@ -38,7 +39,7 @@ AWS Elemental MediaTailor は、スケーラブルなサーバーサイド広告
 1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `MediaTailor` が有効になっていることを確認します。
 2. [Datadog - AWS Elemental MediaTailor インテグレーション][3]をインストールします。
 
-### ログの収集
+### 収集データ
 
 #### ログの有効化
 
@@ -54,21 +55,21 @@ AWS Elemental MediaTailor から S3 バケットまたは CloudWatch のいず�
     - [S3 バケットに手動トリガーを追加][5]
     - [CloudWatch ロググループに手動トリガーを追加][6]
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "amazon_mediatailor" >}}
 
 
-### イベント
+### ヘルプ
 
 AWS Elemental MediaTailor インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 
 AWS Elemental MediaTailor インテグレーションには、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 

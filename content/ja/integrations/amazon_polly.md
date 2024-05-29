@@ -6,12 +6,12 @@ categories:
 - aws
 - log collection
 dependencies: []
-description: AWS Polly のキーメトリクスを追跡。
+description: Amazon Polly のキーメトリクスを追跡します。
 doc_link: https://docs.datadoghq.com/integrations/amazon_polly/
 draft: false
 git_integration_title: amazon_polly
 has_logo: true
-integration_id: amazon-polly
+integration_id: ''
 integration_title: Amazon Polly
 integration_version: ''
 is_public: true
@@ -19,28 +19,29 @@ kind: インテグレーション
 manifest_version: '1.0'
 name: amazon_polly
 public_title: Datadog-Amazon Polly インテグレーション
-short_description: AWS Polly のキーメトリクスを追跡。
+short_description: Amazon Polly のキーメトリクスを追跡します。
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Amazon Polly は、文章をリアルな音声に変換するサービスです。
 
 このインテグレーションを有効にすると、Datadog にすべての Polly メトリクスを表示できます。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 
 ### メトリクスの収集
 
 1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `Polly` が有効になっていることを確認します。
-2. [Datadog - AWS Polly インテグレーション][3]をインストールします。
+2. [Datadog - Amazon Polly インテグレーション][3]をインストールします。
 
-### ログの収集
+### 収集データ
 
 #### ログの有効化
 
@@ -56,23 +57,23 @@ Amazon Polly から S3 バケットまたは CloudWatch のいずれかにログ
     - [S3 バケットに手動トリガーを追加][5]
     - [CloudWatch ロググループに手動トリガーを追加][6]
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "amazon_polly" >}}
 
 
 AWS から取得される各メトリクスには、ホスト名やセキュリティ グループなど、AWS コンソールに表示されるのと同じタグが割り当てられます。
 
-### イベント
+### ヘルプ
 
-AWS Polly インテグレーションには、イベントは含まれません。
+Amazon Polly インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 
-AWS Polly インテグレーションには、サービスのチェック機能は含まれません。
+Amazon Polly インテグレーションには、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 
