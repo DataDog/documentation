@@ -2,6 +2,10 @@
 title: Cloud SIEM Entities
 ---
 
+{{< callout url="https://google.com" header="Join the Beta!">}}
+Cloud SIEM Entities is in private beta.
+{{< /callout >}}
+
 <div style="border: 1px solid black; height: 400px; width: 100%; line-height: 400px; text-align: center; margin-bottom: 1em">
 Screenshot of Entities Explorer page
 </div>
