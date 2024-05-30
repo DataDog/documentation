@@ -1,7 +1,7 @@
 ---
 title: Continuous Integration Visibility Explorer
 kind: documentation
-description: Learn about the CI Visibility Explorer for test runs and pipeline executions.
+description: Learn how to search and filter your test runs or pipeline executions in the CI Visibility Explorer.
 further_reading:
   - link: "/continuous_integration/pipelines/"
     tag: "Documentation"
@@ -18,6 +18,8 @@ further_reading:
 
 The CI Visibility Explorer allows you to [search and filter](#search-and-filter), [visualize](#visualize), and [export](#export) test runs or pipeline executions at multiple levels using any tag.
 
+For more information about common facets that you can use as part of your search query in the CI Visibility Explorer, see [Test Run or Pipeline Execution Facets][3]. 
+
 {{< tabs >}}
 {{% tab "Test Runs" %}}
 
@@ -27,31 +29,45 @@ Navigate to [**Software Delivery** > **Test Visibility** > **Test Runs**][101] t
 
 The **Test** panel on the left lists default facets you can use to search for your tests.
 
-| Facet                       | Description                                                                                                                                                                                                                                                                                                                                                                                                               |
-|-----------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Test Status                 | The test status: `Passed` or `Failed`.                                                                                                                                                                                                                                                                                                                                                                                    |
-| Duration                    | Length of time for the test to complete.                                                                                                                                                                                                                                                                                                                                                                                  |
-| Test Service                | The test service instrumented with CI Visibility.                                                                                                                                                                                                                                                                                                                                                                         |
-| Test Name                   | The name of the test.                                                                                                                                                                                                                                                                                                                                                                                                     |
-| Test Suite                  | The name of the service.                                                                                                                                                                                                                                                                                                                                                                                                  |
-| Flaky                       | Whether or not a test is a flaky test: `true` or `false`, meaning that the test run has flaked in the commit.<br><br>Either this test run has failed and there was a previous test run for the same test and commit that passed, or this test run passed and there is a previous failure. This attribute is only present the first time a test is detected flaky in a commit.                                             |
-| Has Parameters              | Whether or not a test has parameters: `true` or `false`.                                                                                                                                                                                                                                                                                                                                                                  |
-| Known Flaky                 | Whether or not a test is known to be flaky: `true` or `false`. <br><br>The test run has flaked in the commit (according to the "Flaky" definition) and it was already present on the "Flaky test" table of either the branch of the test run or the default branch of the repository. This means that the test was detected as flaky in the past, and that this failure may not be the result of a change in this commit. |
-| Language                    | The language of the service.                                                                                                                                                                                                                                                                                                                                                                                              |
-| New Flaky                   | Whether or not this flaky test has occurred before: `true` or `false`. <br><br>The test run has flaked in the commit (according to the "Flaky" description) and didn't previously exist in the **Flaky Tests** table for the branch of the test run or default branch of the repository. This also means that the test has been added to the **Flaky Tests** table.                                                       |
-| Performance Regression      | Whether or not a test is a performance regression: `true` or `false`.                                                                                                                                                                                                                                                                                                                                                     |
-| Baseline Mean               | The mean duration of the same test in the default branch calculated over the last week of test runs.                                                                                                                                                                                                                                                                                                                      |
-| Baseline Standard Deviation | The standard deviation of the same test in the default branch calculated over the last week of test runs durations.                                                                                                                                                                                                                                                                                                       |
-| Absolute Change             | The absolute difference between the test duration and the baseline mean.                                                                                                                                                                                                                                                                                                                                                  |
-| Relative Change             | The relative difference between the test duration and the baseline mean.                                                                                                                                                                                                                                                                                                                                                  |
-| Standard Deviation Change   | The number of standard deviations above the baseline mean.                                                                                                                                                                                                                                                                                                                                                                |
-| Test Code Owners            | The team name of the service codeowners.                                                                                                                                                                                                                                                                                                                                                                                  |
-| Test Fingerprint            | The fingerprint of the test.                                                                                                                                                                                                                                                                                                                                                                                              |
-| Test Framework              | The framework of the test.                                                                                                                                                                                                                                                                                                                                                                                                |
-| Test Full Name              | The full name of the test.                                                                                                                                                                                                                                                                                                                                                                                                |
-| Test Module                 | The module of the test.                                                                                                                                                                                                                                                                                                                                                                                                   |
-| Test Traits                 | The traits of the test such as `category:flaky`.                                                                                                                                                                                                                                                                                                                                                                          |
-| Test Type                   | The type of the test such as `test`.                                                                                                                                                                                                                                                                                                                                                                                      |
+| Facet | Description |
+|---|---|
+| Test Status | The outcome of the test: `Passed`, `Failed`, or `Skipped`. |
+| Duration | Length of time for the test to complete. |
+| Test Service | The [test service][107] instrumented with CI Visibility. |
+| Test Full Name | Identifier for a test that includes the test name, test suite name, and configuration or parameter if present. |
+| Test Name | A concise name for a test case. Defined in the test itself. |
+| Test Suite | A [group of tests][108] exercising the same unit of code depending on your language and testing framework. |
+| Flaky | Exhibits both a passing and failing status across multiple test runs for the same commit. |
+| Has Parameters | Whether or not a test has parameters: `true` or `false`. |
+| Known Flaky | Whether or not a test is known to be flaky: `true` or `false`. <br><br>This test run failed and the test is identified as a flaky test in the current branch or the default branch. |
+| Language | The programming language of the library that generated the test. |
+| New Flaky | Whether or not this flaky test has occurred before: `true` or `false`. <br><br>The test run identifies the test as flaky in the commit. The test wasn't previously identified as a flaky test in the current branch or the default branch. |
+| Performance Regression | A test run is marked as a regression when its duration is both five times the mean and greater than the max duration for the same test in the default branch. |
+| Baseline Mean | For a test regression, indicates the mean duration of the same test in the default branch calculated over the last week of test runs. |
+| Baseline Standard Deviation | For a test regression, indicates the standard deviation of the same test in the default branch calculated over the last week of test runs durations. |
+| Absolute Change | For a test regression, indicates the absolute change of the test run duration compared to the baseline mean. |
+| Relative Change | For a test regression, Indicates the relative change of the test run duration compared to the baseline mean. |
+| Standard Deviation Change | Indicates if the test has been newly added. |
+| Test Code Owners | The name of the test's codeowners as inferred from the repository configuration. |
+| Test Fingerprint | The unique identifier for an individual test run. |
+| Test Framework | The underlying framework or set of tools used for creating and executing tests. |
+| Test Command | The command that was used to execute tests. |
+| Test Bundle | Equivalent to a test module. This is used by earlier Datadog testing library versions. |
+| Test Full Name | The full name of the test. |
+| Test Module | The module of the test, which varies depending on the language:<br><br>In .NET, a test module groups every test that is run under the same unit test project.<br>In Swift, a test module groups every test that is run for a given bundle.<br>In JavaScript, the test modules map one-to-one to test sessions.<br>In Java, a test module groups every test that is run by the same Maven Surefire, Failsafe, or Gradle Test task execution.<br>In Python, a test module groups every test that is run under the same `.py` file as part of a test suite, which is typically managed by a framework like `unittest` or `pytest`.<br>In Ruby, a test module groups every test that is run within the same test file, which is typically managed by a framework like `RSpec` or `Minitest`. |
+| Test Traits | The traits of the test such as `category:flaky`. |
+| Test Type | The type of the test such as `unit benchmark` or `browser`. |
+| RUM Active | Indicates if the test was run inside of an active [Real User Monitoring][109] web session. |
+| Is New | Indicates if the test has been newly added. |
+| Is Retry | Indicates if the test has been run as a result of a retry. |
+| Code Coverage Enabled | Indicates if the [Intelligent Test Runner][111] has enabled [code coverage][112] per test for the session. |
+| Skipped by ITR | Number of tests that were skipped during the session by the Intelligent Test Runner. |
+| Test Skipping Enabled | Whether the test session or module is allowed to be skipped by ITR. |
+| Test Skipping Type | The method or criteria used by the Intelligent Test Runner to determine which tests to skip. |
+| Test Skipped | The total count of tests that were not executed during the test session, which may include tests that were configured to skip, or were set as manual exclusions. |
+| Time Saved | The length of time saved for the session by Intelligent Test Runner usage. |
+| Early Flake Detection Enabled | Indicates if the test has been run using [Early Flake Detection][110]. |
+| Early Flake Detection Abort Reason | Indicates the Early Flake Detection abort reason for a test. |
 
 You can filter by test level: session, module, suite, and test run. Each test level represents a different level of aggregation of tests.
 
@@ -86,6 +102,12 @@ Test run data is available in [dashboards][102] and [notebooks][103], enabling b
 [104]: https://learn.microsoft.com/en-us/visualstudio/test/create-a-unit-test-project?view=vs-2022#to-create-a-unit-test-project
 [105]: https://github.com/realm/SwiftLint/blob/7738f0c0a5990201ca6556bdb2f13f8e67b5191d/Package.swift#L71
 [106]: https://github.com/DataDog/datadog-ci/blob/6de6ea3bbffa57d8576422535061ca35c759feb6/src/commands/junit/__tests__/upload.test.ts
+[107]: /glossary/?product=ci-cd#test-service
+[108]: /glossary/?product=ci-cd#test-suite 
+[109]: /real_user_monitoring/
+[110]: /tests/early_flake_detection/
+[111]: /intelligent_test_runner/
+[112]: /tests/code_coverage/
 
 {{% /tab %}}
 {{% tab "Pipeline Executions" %}}
@@ -96,18 +118,34 @@ Navigate to [**Software Delivery** > **CI Visibility** > **Executions**][101] to
 
 The **CI** panel on the left lists default facets you can use to search for your tests.
 
-| Facet           | Description                                                   |
-|-----------------|---------------------------------------------------------------|
-| CI Status       | The pipeline status: `Success` or `Failure`.                  |
-| Duration        | Length of time for the pipeline to execute.                   |
-| Pipeline ID     | The ID of the pipeline.                                       |
-| CI Provider     | The name of the CI provider.                                  |
-| Node Labels     | The labels of the node.                                       |
-| Node Name       | The name of the node.                                         |
-| Partial Retry   | Whether or not a partial retry is enabled: `true` or `false`. |
-| Pipeline Number | The number of the pipeline.                                   |
-| Pipeline URL    | The URL of the pipeline.                                      |
-| Queue time      | Length of time for the pipeline wait for the queue.           |
+| Facet | Description |
+|---|---|
+| CI Status | The status of the CI execution: `Success` , `Failure`, or `Canceled`. |
+| CI Instance | The instance name of the CI provider. |
+| Duration | Length of time for the pipeline to execute. |
+| Pipeline ID | The ID of the pipeline. |
+| CI Provider | The name of the CI provider. |
+| Node Labels | The labels of the node. |
+| Node Name | The name of the node. |
+| Partial Pipeline | Refers to CI pipeline executions that include retries, manual approvals, or other incomplete sequences. |
+| Partial Retry | Indicates whether the CI execution was a retry of a previous execution. |
+| Manually Triggered | Indicates whether the CI execution was manually triggered. |
+| Parameters | The user-defined parameters when a pipeline or job triggers. |
+| Pipeline Number | The number of the pipeline. |
+| Pipeline URL | The URL of the pipeline. |
+| Queue Time | The total duration a job or task spent waiting in the CI queue before execution. |
+| Deployment | The GitLab environment deployed with a CI pipeline. |
+| Deployment Action | The action taken within GitLab's deployed environment. |
+| Command Name | The user-defined identifier for a specific command within the CI pipeline. |
+| Command | The command line that was run to generate the custom pipeline span. |
+| Downstream Pipeline | Indicates if this pipeline is downstream of another pipeline. |
+| Upstream Pipeline ID | Identifier for the pipeline execution that precedes and triggers the current pipeline. |
+| Step Name | The name assigned to a specific step within a CI pipeline. |
+| Error Domain | The type of error for a CI execution such as a provider, user, or unknown. |
+| Run time | The total duration spent executing the CI pipeline. |
+| Wait time | The total time spent waiting for manual approval within a CI execution. |
+| Is Deployment | Indicates whether a job within the pipeline initiated a deployment. |
+| Contains Deployment | Indicates whether the pipeline includes any jobs that trigger a deployment. |
 
 ## Pipeline executions details and traces
 
@@ -118,7 +156,6 @@ Below are three graphs that visualize the durations of your most active pipeline
 {{< img src="ci/pipeline_explorer_trends.png" alt="Explorer view trend graphs for Duration, Errored, and Executions" style="width:100%;">}}
 
 Each pipeline execution is reported as a trace, which includes stage and job information. Access individual pipeline, stage, and job execution traces by clicking on an execution in the list (similar to clicking into a pipeline execution from the Pipeline Details view).
-
 
 CI pipeline data is available in [dashboards][102] and [notebooks][103], enabling build engineering teams to customize their communication about high-priority work and CI trends over time.
 
