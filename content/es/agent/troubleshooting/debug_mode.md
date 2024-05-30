@@ -4,10 +4,10 @@ aliases:
 - /es/agent/faq/agent-5-container-more-log
 further_reading:
 - link: /agent/troubleshooting/send_a_flare/
-  tag: Solucionar problemas del Agent
+  tag: Documentación
   text: Enviar flare del Agent
 - link: /agent/troubleshooting/agent_check_status/
-  tag: Solucionar problemas del Agent
+  tag: Documentación
   text: Consultar el estado de un check del Agent
 kind: documentación
 title: Modo de depuración
@@ -15,16 +15,16 @@ title: Modo de depuración
 
 ## Agent
 
-El Agent, por defecto, genera logs en el nivel `INFO`. Puedes definir el nivel donde se generan como `DEBUG`, para obtener más información de tus logs.
+El Agent, por defecto, genera logs en el nivel `INFO`. Se puede definir el nivel donde se generan como `DEBUG` para obtener más información de tus logs.
 
-**Nota**: El modo de depuración sólo es apto para realizar depuraciones. Datadog recomienda habilitar el modo `DEBUG` sólo durante un periodo de tiempo acotado, ya que aumenta el número de logs indexados. Cuando hayas terminado, restablece el nivel de logs a `INFO`.
+**Nota**: El modo de depuración solo es apto para realizar depuraciones. Datadog recomienda habilitar el modo `DEBUG` solo durante un periodo de tiempo acotado, ya que aumenta el número de logs indexados. Cuando hayas terminado, restablece el nivel de logs a `INFO`.
 
 Para activar el modo de depuración completa del Agent:
 
 {{< tabs >}}
 {{% tab "Agent v6 y v7" %}}
 
-1. Modifica tu archivo local `datadog.yaml`. Consulta el [archivo de configuración principal del Agent][1] para obtener información concreta en función de tu sistema operativo.
+1. Modifica el archivo local `datadog.yaml`. Consulta el [archivo de configuración principal del Agent][1] para obtener información concreta en función de tu sistema operativo.
 
 2. Sustituye `# log_level: INFO` por `log_level: DEBUG` (elimina `#` para quitar el comentario de la línea).
 
@@ -38,7 +38,7 @@ Para activar el modo de depuración completa del Agent:
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
-1. Modifica tu archivo local `datadog.conf`. Consulta el [archivo de configuración principal del Agent][1] para obtener información concreta en función de tu sistema operativo.
+1. Modifica el archivo local `datadog.conf`. Consulta el [archivo de configuración principal del Agent][1] para obtener información concreta en función de tu sistema operativo.
 
 2. Sustituye `# log_level: INFO` por `log_level: DEBUG` (elimina `#` para quitar la marca de comentario de la línea).
 
@@ -59,24 +59,24 @@ Para activar el modo de depuración completa del Agent:
 
 Para activar el modo de depuración en el Agent del contenedor, utiliza `DD_LOG_LEVEL=debug` al iniciar tu Agent.
 
-En el Agent v6.19/v7.19 y posteriores, define el nivel de logs del Agent en tiempo de ejecución con:
+En el Agent v6.19/v7.19 y posteriores, define el nivel de logs del Agent en tiempo de ejecución utilizando:
 
 ```shell
 agent config set log_level debug
 ```
 
-No se **puede** cambiar el nivel de logs del contenedor de Trace-Agent en tiempo de ejecución, algo que sí se puede hacer en el caso del contenedor del Agent. Después de establecer la variable `DD_LOG_LEVEL` en `debug`, sigue siendo necesario realizar una nueva implementación para el contenedor exclusivo de Trace-Agent .
+**No** se puede cambiar el nivel de logs del contenedor de Trace-Agent en tiempo de ejecución, algo que sí se puede hacer en el caso del contenedor del Agent. Después de establecer la variable `DD_LOG_LEVEL` en `debug`, sigue siendo necesario realizar una nueva implementación para el contenedor exclusivo de Trace-Agent .
 
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
-Cuando se ejecuta en un contenedor, el Agent no puede reiniciarse mediante `service datadog-agent restart` (o similar), ya que Docker elimina el contenedor. Utiliza el supervisor para reiniciar un Agent contenerizado:
+Cuando se ejecuta en un contenedor, el Agent no puede reiniciarse mediante `service datadog-agent restart` (o similar), ya que Docker elimina el contenedor. Utiliza el supervisor para reiniciar un Agent contenedorizado:
 
 ```text
 /opt/datadog-agent/bin/supervisorctl -c /etc/dd-agent/supervisor.conf restart all
 ```
 
-Los siguientes comandos activan la opción de generar logs de depuración, reinician el Agent, esperan 60 segundos y envían un flare, en ese orden:
+Los siguientes comandos activan la opción de generación de logs de depuración, reinician el Agent, esperan 60 segundos y después envían un flare, en ese orden:
 
 ```shell
 sed -i '/\[Main\]/a LOG_LEVEL=DEBUG' /etc/dd-agent/datadog.conf
