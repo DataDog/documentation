@@ -5534,6 +5534,26 @@ menu:
       parent: product_analytics
       identifier: pa_analytics
       weight: 5
+    - name: Group
+      url: product_analytics/analytics/group
+      parent: pa_analytics
+      identifier: pa_analytics_group
+      weight: 501
+    - name: Visualize
+      url: product_analytics/analytics/visualize
+      parent: pa_analytics
+      identifier: visualize
+      weight: 502
+    - name: Events
+      url: product_analytics/analytics/events
+      parent: pa_analytics
+      identifier: pa_analytics_events
+      weight: 503
+    - name: Export
+      url: product_analytics/analytics/export
+      parent: pa_analytics
+      identifier: pa_analytics_export
+      weight: 504
     - name: Account Management
       url: account_management/
       pre: cog-2
