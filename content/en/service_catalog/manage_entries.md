@@ -112,7 +112,7 @@ To use software templates in Datadog, create a git repository with the desired t
    - Deploy the new project files back to the repository
 2. **Navigate to App Builder**:
    - Create a new app for templating
-   - Create a form that collects the required parameters for your template
+   - Create a form that collects the required parameters for the template
    - Add a button that submits the form, triggers the workflow created in Step 1, and passes in the parameters for your template
    - Save & publish the app
 
