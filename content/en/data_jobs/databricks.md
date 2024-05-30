@@ -143,7 +143,7 @@ Optionally, you can also set other init script parameters and Datadog environmen
 
 1. set `DD_RUN_NAME` environment variable using `spark_env_vars` field for your one-time job run.
 
-   For Databricks Jobs submitted via the [one-time run API endpoint][8], set this variable to the same value as your request payload's `run_name`. This allows Data Jobs Monitoring to group your Jobs with the same `run_name` as one row in the Cluster table, showing aggregated infrastructure metrics across runs instead of one row per submitted run.
+   For Databricks Jobs submitted via the [one-time run API endpoint][8] (common when doing orchestration with tools outside of Databricks such as Airflow, Azure Data Factory), set this variable to the same value as your request payload's `run_name`. This allows Data Jobs Monitoring to aggregate your job runs and cluster utilization with the same `run_name` and show performance across time.
 
    Example one-time job run request body:
    ```json
