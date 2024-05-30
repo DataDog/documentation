@@ -17613,6 +17613,47 @@ components:
       - GEO_DATA
       - EVENT_COUNT
       - NONE
+    SecurityMonitoringRuleQueryPayload:
+      description: Payload to test a rule query with the expected result.
+      properties:
+        expectedResult:
+          description: Expected result of the test.
+          example: true
+          type: boolean
+        index:
+          description: Index of the query under test.
+          example: 0
+          format: int64
+          minimum: 0
+          type: integer
+        payload:
+          $ref: '#/components/schemas/SecurityMonitoringRuleQueryPayloadData'
+      type: object
+    SecurityMonitoringRuleQueryPayloadData:
+      additionalProperties: {}
+      description: Payload used to test the rule query.
+      properties:
+        ddsource:
+          description: Source of the payload.
+          example: nginx
+          type: string
+        ddtags:
+          description: Tags associated with your data.
+          example: env:staging,version:5.1
+          type: string
+        hostname:
+          description: The name of the originating host of the log.
+          example: i-012345678
+          type: string
+        message:
+          description: The message of the payload.
+          example: 2019-11-19T14:37:58,995 INFO [process.name][20081] Hello World
+          type: string
+        service:
+          description: The name of the application or service generating the data.
+          example: payment
+          type: string
+      type: object
     SecurityMonitoringRuleResponse:
       description: Create a new rule.
       oneOf:
@@ -17634,6 +17675,31 @@ components:
       - MEDIUM
       - HIGH
       - CRITICAL
+    SecurityMonitoringRuleTestRequest:
+      description: Test the rule queries of a rule.
+      properties:
+        rule:
+          $ref: '#/components/schemas/SecurityMonitoringRuleCreatePayload'
+        ruleQueryPayloads:
+          description: Data payloads used to test rules query with the expected result.
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringRuleQueryPayload'
+          type: array
+      type: object
+    SecurityMonitoringRuleTestResponse:
+      description: Result of the test of the rule queries.
+      properties:
+        results:
+          description: 'Assert results are returned in the same order as the rule
+            query payloads.
+
+            For each payload, it returns True if the result matched the expected result,
+
+            False otherwise.'
+          items:
+            type: boolean
+          type: array
+      type: object
     SecurityMonitoringRuleThirdPartyOptions:
       description: Options on third party rules.
       properties:
@@ -22945,6 +23011,8 @@ components:
         authorizationCode:
           authorizationUrl: /oauth2/v1/authorize
           scopes:
+            apm_api_catalog_read: View API catalog and API definitions.
+            apm_api_catalog_write: Add, modify, and delete API catalog definitions.
             apm_read: Read and query APM and Trace Analytics.
             apm_service_catalog_read: View service catalog and service definitions.
             apm_service_catalog_write: Add, modify, and delete service catalog definitions
@@ -23017,6 +23085,9 @@ components:
             user_access_manage: Disable users, manage user roles, manage SAML-to-role
               mappings, and configure logs restriction queries.
             user_access_read: View users and their roles and settings.
+            workflows_read: View workflows.
+            workflows_run: Run workflows.
+            workflows_write: Create, edit, and delete workflows.
           tokenUrl: /oauth2/v1/token
       type: oauth2
     apiKeyAuth:
@@ -23394,11 +23465,10 @@ paths:
       description: 'Create a new API from the [OpenAPI](https://spec.openapis.org/oas/latest.html)
         specification given.
 
-        It supports version `2.0`, `3.0` and `3.1` of the specification. A specific
-        extension section, `x-datadog`,
+        See the [API Catalog documentation](https://docs.datadoghq.com/api_catalog/add_metadata/)
+        for additional
 
-        let you specify the `teamHandle` for your team responsible for the API in
-        Datadog.
+        information about the possible metadata.
 
         It returns the created API ID.
 
@@ -26390,9 +26460,9 @@ paths:
       x-menu-order: 4
       x-undo:
         type: idempotent
-      x-unstable: '**Note**: This endpoint is in private beta.
+      x-unstable: '**Note**: This endpoint is in public beta.
 
-        If you want to request access, complete the [form](https://forms.gle/Eqq6uXfGjYxmqpjDA).'
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/dora/incident:
     post:
       description: 'Use this API endpoint to provide data about incidents for DORA
@@ -26443,9 +26513,9 @@ paths:
       x-menu-order: 4
       x-undo:
         type: idempotent
-      x-unstable: '**Note**: This endpoint is in private beta.
+      x-unstable: '**Note**: This endpoint is in public beta.
 
-        If you want to request access, complete the [form](https://forms.gle/Eqq6uXfGjYxmqpjDA).'
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/downtime:
     get:
       description: Get all scheduled downtimes.
@@ -34464,6 +34534,45 @@ paths:
         - name: rule_id
           source: id
         type: unsafe
+  /api/v2/security_monitoring/rules/test:
+    post:
+      description: Test a rule.
+      operationId: TestSecurityMonitoringRule
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SecurityMonitoringRuleTestRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityMonitoringRuleTestResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/ConcurrentModificationResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_rules_write
+      summary: Test a rule
+      tags:
+      - Security Monitoring
+      x-codegen-request-body-name: body
+      x-menu-order: 9
+      x-undo:
+        type: idempotent
   /api/v2/security_monitoring/rules/validation:
     post:
       description: Validate a detection rule.
@@ -34492,7 +34601,7 @@ paths:
       tags:
       - Security Monitoring
       x-codegen-request-body-name: body
-      x-menu-order: 8
+      x-menu-order: 10
       x-undo:
         type: idempotent
   /api/v2/security_monitoring/rules/{rule_id}:
@@ -34597,6 +34706,47 @@ paths:
       x-menu-order: 6
       x-undo:
         type: idempotent
+  /api/v2/security_monitoring/rules/{rule_id}/test:
+    post:
+      description: Test an existing rule.
+      operationId: TestExistingSecurityMonitoringRule
+      parameters:
+      - $ref: '#/components/parameters/SecurityMonitoringRuleID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SecurityMonitoringRuleTestRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityMonitoringRuleTestResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/ConcurrentModificationResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_rules_write
+      summary: Test an existing rule
+      tags:
+      - Security Monitoring
+      x-codegen-request-body-name: body
+      x-menu-order: 8
+      x-undo:
+        type: idempotent
   /api/v2/security_monitoring/signals:
     get:
       description: 'The list endpoint returns security signals that match a search
@@ -34675,7 +34825,7 @@ paths:
       summary: Get a quick list of security signals
       tags:
       - Security Monitoring
-      x-menu-order: 10
+      x-menu-order: 12
       x-pagination:
         cursorParam: page[cursor]
         cursorPath: meta.page.after
@@ -34719,7 +34869,7 @@ paths:
       tags:
       - Security Monitoring
       x-codegen-request-body-name: body
-      x-menu-order: 9
+      x-menu-order: 11
       x-pagination:
         cursorParam: body.page.cursor
         cursorPath: meta.page.after

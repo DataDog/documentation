@@ -179,6 +179,7 @@ The format of the annotations is the following, where `$TAG_NAME` and `$TAG_VALU
   "type": "DD_TAGS[$TAG_NAME]",
   "description": "$TAG_VALUE"
 }
+```
 
 ### Adding custom measures to tests
 
