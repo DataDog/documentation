@@ -97,7 +97,7 @@ extensions:
     customField2: customValue2
 {{< /code-block >}}
 
-## Automate Common Workflows
+## Automate common workflows
 [Workflow Automation][14] and [App Builder][24] allow you to automate end-to-end processes across your teams. They integrate with Datadog's Service Catalog to enable dynamic and self-service workflows.
 
 {< callout url="https://www.datadoghq.com/dg/datadog-app-builder/" btn_hidden="false" header="Join the Beta!">}}
