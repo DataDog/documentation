@@ -18,11 +18,11 @@ further_reading:
 
 ## Overview
 
-Notifications are a key component of monitors that keep your team informed of issues and support troubleshooting. When [creating your monitor][1], add to the **Notify your team** section.
+Notifications are a key component of monitors that keep your team informed of issues and support troubleshooting. When [creating your monitor][1], add to the **Configure notifications and automations** section.
 
-## Notify your team
+## Configure notifications and automations
 
-Use the **Notify your team** section to:
+Use the **Configure notifications and automations** section to:
 - Send notifications to your team through email, Slack, PagerDuty, and other integrations. 
 - Trigger a workflow or create a workflow from a monitor.
 - Add a case to your monitor.
@@ -145,7 +145,7 @@ If renotification is enabled, you are given the option to include an escalation 
 The escalation message can be added in the following ways:
 
 * In the `{{#is_renotify}}` block in the original notification message (recommended).
-* In the *Renotification message* field in the `Notify your team` section.
+* In the *Renotification message* field in the `Configure notifications and automations` section.
 * With the `escalation_message` attribute in the API.
 
 If you use the `{{#is_renotify}}` block, the original notification message is also included in the renotification, so:
