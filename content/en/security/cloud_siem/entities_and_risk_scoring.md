@@ -1,5 +1,5 @@
 ---
-title: Cloud SIEM Entities
+title: Cloud SIEM Entities and Risk Scoring
 ---
 
 {{< callout url="https://google.com" header="Join the Beta!">}}
@@ -16,7 +16,7 @@ Cloud SIEM Entities consolidates multiple data sources, such as threats and vuln
 
 With Cloud SIEM Entities, you can:
 
-- Explore entities, sorting and filtering them by attributes such as risk score or tag.
+- Explore entities, sorting and filtering them by attributes such as [risk score](#risk-scoring) or tag.
 - View all data relevant to an entity, such as signals, misconfigurations, and identity risks.
 - Triage relevant items in bulk.
 - Take mitigation steps such as adding a global suppression or creating a global case for an entity.
