@@ -1,11 +1,9 @@
 #!/usr/bin/env python3
 
 import argparse
-import sys
 import requests
 import json
 from os import getenv
-from collections import defaultdict
 
 
 def pull_rbac():
@@ -59,10 +57,15 @@ def pull_rbac():
             
 
         for permission in permissions_data:
+            synthetics_settings_url = 'https://docs.datadoghq.com/synthetics/platform/settings/?tab=specifyvalue#default-settings'
+            synthetics_settings_permissions = ['synthetics_default_settings_read', 'synthetics_default_settings_write']
             group_name = permission['attributes']['group_name']
             permission_name = permission['attributes']['name']
             permission_description = permission['attributes']['description']
             permission_role_name = ''
+
+            if permission_name in synthetics_settings_permissions:
+                permission['attributes']['description'] = f"<a href='{synthetics_settings_url}' target='_blank'>{permission_description}</a>"
 
             # lookup. get least permissive role for a permission
             for role in default_roles_hierarchy:
