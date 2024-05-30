@@ -3,6 +3,7 @@ title: RUM Browser Monitoring Setup
 kind: documentation
 aliases:
   - /real_user_monitoring/setup
+  - /real_user_monitoring/browser
 further_reading:
 - link: '/real_user_monitoring/explorer/'
   tag: 'Documentation'
@@ -2099,11 +2100,11 @@ window.DD_RUM && window.DD_RUM.getInternalContext() // { session_id: "xxxx", app
 [15]: /account_management/api-app-keys/#client-tokens
 [16]: /getting_started/site/
 [17]: /getting_started/tagging/#define-tags
-[18]: /real_user_monitoring/browser/setup/advanced_configuration/#user-tracking-consent
-[19]: /real_user_monitoring/browser/setup/advanced_configuration/?tab=npm#override-default-rum-view-names
-[20]: /real_user_monitoring/browser/setup/tracking_user_actions
+[18]: /real_user_monitoring/browser/advanced_configuration/#user-tracking-consent
+[19]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#override-default-rum-view-names
+[20]: /real_user_monitoring/browser/tracking_user_actions
 [21]: /real_user_monitoring/session_replay/privacy_options?tab=maskuserinput
-[22]: /real_user_monitoring/browser/setup/tracking_user_actions/#declare-a-name-for-click-actions
+[22]: /real_user_monitoring/browser/tracking_user_actions/#declare-a-name-for-click-actions
 [23]: /real_user_monitoring/session_replay/browser/#usage
 [24]: /real_user_monitoring/guide/proxy-rum-data/
 [25]: /real_user_monitoring/browser/advanced_configuration#contexts-life-cycle
