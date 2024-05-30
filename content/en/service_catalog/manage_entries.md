@@ -168,3 +168,5 @@ With [Service Catalog metadata schema 2.2][19], you can specify the type and lan
 [22]: https://forms.gle/zbLfnJYhD5Ab4Wr18
 [23]: /service_management/workflows/actions_catalog/
 [24]: /service_management/app_builder/
+[25]: https://www.cookiecutter.io/
+[26]: https://app.datadoghq.com/workflow
