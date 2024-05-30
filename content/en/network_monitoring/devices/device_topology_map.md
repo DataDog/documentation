@@ -1,7 +1,8 @@
 ---
-title: Network Device Topology Map
+title: Device Topology Map
 kind: documentation
-is_beta: true
+aliases:
+- /network_monitoring/devices/network_topology_map
 further_reading:
 - link: "https://www.datadoghq.com/blog/visualize-network-device-topology/"
   tag: "Blog"
