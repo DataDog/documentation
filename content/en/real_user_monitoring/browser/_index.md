@@ -46,7 +46,7 @@ Until Datadog starts receiving data, your application appears as `pending` on th
 ### Choose the right installation method
 
 SDK injection
-: This method installs RUM by configuring your server to inject the SDK. RUM SDK injection is in private beta. Complete the form on [this page][28] to request access.
+: This method installs RUM by configuring your server to inject the SDK. RUM SDK injection is in private beta. To use this feature, [request access to RUM SDK injection][28].
 
 npm (node package manager)
 : This method is recommended for modern web applications. The RUM Browser SDK is packaged with the rest of your front-end JavaScript code. It has no impact on page load performance. However, the SDK may miss errors, resources, and user actions triggered before the SDK is initialized. Datadog recommends using a matching version with the Browser Logs SDK.
