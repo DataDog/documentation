@@ -22,8 +22,9 @@ To create the monitor for available disk space:
      4. Under **Evaluation Details**, choose your desired evaluation interval.
 5. Under **Set alert conditions**, select **below** from the threshold options and enter `10` in **Alert threshold** field.
 6. In **Configure notifications & automations**, give your monitor a name, then specify the notification message. Include relevant details and a meaningful message template. For example:
-     ```
+
+     {{< code-block lang="java" filename="block.java" disable_copy="flase" collapsible="true" >}}
        {{#is_alert}}Warning: Free disk space is below 10% on {{host.name}}. Free space: {{system.disk.free}} bytes, Total space: {{system.disk.total}} bytes.{{/is_alert}}
-     ```
+     {{< /code-block >}}
 
 7. Click **Create** to save the monitor.
