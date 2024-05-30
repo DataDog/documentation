@@ -1,39 +1,102 @@
 ---
-title: Setting Up Cloud Security Management on AWS Fargate ECS and EKS
+title: AWS Fargate Configuration Guide for Datadog Security
 kind: documentation
-private: true
+disable_toc: false
+aliases:
+  - /security/cloud_security_management/setup/fargate
 ---
 
 <div class="alert alert-warning">Cloud Security Management on AWS Fargate is in beta.</div>
 
-Use the following instructions to enable [CSM Threats][1] for Amazon ECS and EKS on AWS Fargate. To learn more about the supported deployment types for each CSM feature, see [Setting Up Cloud Security Management][2].
+This guide walks you through configuring [Cloud Security Management (CSM)][3], [Application Security Management (ASM)][4], and [Cloud SIEM][5] on AWS Fargate.
 
-Datadog Cloud Security Management on AWS Fargate includes built-in threat detection for AWS Fargate process and file integrity monitoring (FIM) events as well as [100+ out-of-the-box rules][3].
+## Full stack coverage for AWS Fargate
 
-{{< img src="security/csm/csm_fargate_workflow2.png" alt="Diagram showing the workflow for Cloud Security Management on AWS Fargate" width="100%">}}
+Datadog Security provides multiple layers of visibility for AWS Fargate. Use the products in combination with one another to gain full stack coverage, as shown in the following tables:
 
-## Prerequisites
+### Fargate assets
 
-* [CSM Enterprise][4] or [CSM Workload Security][5] with the AWS integration configured
-* Access to AWS Management Console
-* AWS Fargate ECS or EKS workloads
+<table>
+    <thead>
+    <th>Asset</th>
+    <th>Observability</th>
+    <th>Vulnerabilities and Misconfiguration Remediation</th>
+    <th>Threat Detection and Response</th>
+    </thead>
+    <tr>
+    </tr>
+    <tr>
+        <td>Fargate Application</td>
+        <td>Application Performance Monitoring</td>
+        <td>Application Security Management</td>
+        <td>Application Security Management</td>
+    </tr>
+    <tr>
+        <td>Fargate Infrastructure</td>
+        <td>Infrastructure Monitoring</td>
+        <td>Not yet supported</td>
+        <td>CSM Threats</td>
+    </tr>
+</table>
+
+### Fargate-related resources
+
+<table>
+    <thead>
+    <th>Asset</th>
+    <th>Observability</th>
+    <th>Vulnerabilities and Misconfiguration Remediation</th>
+    <th>Threat Detection and Response</th>
+    </thead>
+    <tr>
+        <td>AWS IAM roles and policies</td>
+        <td>Log Management</td>
+        <td>Cloud Security Management</td>
+        <td>Cloud SIEM</td>
+    </tr>
+    <tr>
+        <td>AWS databases</td>
+        <td>Log Management</td>
+        <td>Cloud Security Management</td>
+        <td>Cloud SIEM</td>
+    </tr>
+    <tr>
+        <td>AWS S3 buckets</td>
+        <td>Log Management</td>
+        <td>Cloud Security Management</td>
+        <td>Cloud SIEM</td>
+    </tr>
+</table>
+
+## Cloud Security Management
+
+### Prerequisites
+
+- The Datadog AWS integration is installed and configured for your AWS accounts
+- Access to AWS Management Console
+- AWS Fargate ECS or EKS workloads
+
+<div class="alert alert-info">For additional performance and reliability insights, Datadog recommends enabling Infrastructure Monitoring with Cloud Security Management.</div>
 
 ### Images
 
-* cws-instrumentation: datadog/cws-instrumentation:latest
-* Datadog-agent: datadog/agent:latest
+* `cws-instrumentation-init`: `datadog/cws-instrumentation:latest`
+* `datadog-agent`: `datadog/agent:latest`
 
-## Installation
+### Installation
 
-### AWS Console
+{{< tabs >}}
+{{% tab "Amazon ECS" %}}
 
-1. Log in to the [AWS Management Console][6].
+#### AWS Console
+
+1. Sign in to [AWS Management Console][6].
 2. Navigate to the ECS section.
-3. On the left menu, click **Task Definitions**, then click **Create new Task Definition with JSON**, or choose an existing Fargate task definition.
-4. Use the JSON definition, or the [AWS CLI method](#aws-cli).
+3. On the left menu, select **Task Definitions**, and then select **Create new Task Definition with JSON**. Alternatively, choose an existing Fargate task definition.
+4. To create a new task definition, use the JSON definition, or the [AWS CLI method](#aws-cli).
 5. Click **Create** to create the task definition.
 
-### AWS CLI
+#### AWS CLI
 
 1. Download [datadog-agent-cws-ecs-fargate.json][7].
 {{< code-block lang="json" filename="datadog-agent-cws-ecs-fargate.json" collapsible="true" >}}
@@ -175,17 +238,27 @@ Datadog Cloud Security Management on AWS Fargate includes built-in threat detect
 aws ecs register-task-definition --cli-input-json file://<PATH_TO_FILE>/datadog-agent-ecs-fargate.json
 {{< /code-block >}}
 
-## EKS
+[6]: /integrations/eks_fargate/?tab=manual#aws-eks-fargate-rbac
+[7]: /resources/json/datadog-agent-cws-ecs-fargate.json
+[8]: /integrations/faq/integration-setup-ecs-fargate/?tab=rediswebui
 
-### AWS EKS Fargate RBAC
+{{% /tab %}}
 
-Use the following [Agent RBAC deployment instruction][12] before deploying the Agent as a sidecar.
+{{% tab "Amazon EKS" %}}
 
-### Running the Agent as a sidecar
+To collect data from your AWS Fargate pods, you must run the Agent as a sidecar of your application pod and set up Role-Based Access Control (RBAC) rules.
+
+<div class="alert alert-info">If the Agent is running as a sidecar, it can only communicate with containers on the same pod. Run an Agent for every pod you wish to monitor.</div>
+
+#### Set up RBAC rules
+
+Use the following [Agent RBAC deployment instruction][6] before deploying the Agent as a sidecar.
+
+#### Deploy the Agent as a sidecar
 
 The following manifest represents the minimum configuration required to deploy your application with the Datadog Agent as a sidecar with CSM Threats enabled:
 
-{{< code-block lang="yaml" collapsible="true" >}}
+```yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -249,13 +322,18 @@ spec:
        - name: cws-instrumentation-volume
      serviceAccountName: datadog-agent
      shareProcessNamespace: true
-{{< /code-block >}}
+```
 
-## Verify that the Agent is sending events to CSM
+[6]: /integrations/eks_fargate/?tab=manual#aws-eks-fargate-rbac
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Verify that the Agent is sending events to CSM
 
 When you enable CSM on AWS Fargate ECS or EKS, the Agent sends a log to Datadog to confirm that the default ruleset has been successfully deployed. To view the log, navigate to the [Logs][9] page in Datadog and search for `@agent.rule_id:ruleset_loaded`.
 
-Another method to verify that the Agent is sending events to CSM is to manually trigger an AWS Fargate security signal.
+<div class="alert alert-info">You can also verify the Agent is sending events to CSM by manually triggering an AWS Fargate security signal.</div>
 
 In the task definition, replace the "workload" container with the following:
 
@@ -273,24 +351,72 @@ In the task definition, replace the "workload" container with the following:
             ],
 {{< /code-block >}}
 
-## Next steps
-If you still have issues with the configuration, [contact Datadog support][10] for help and attach the `security-agent` flare to the ticket.
-Use the appropriate command below to create a `security-agent` flare based on your deployment:
+## Application Security Management
 
-| Platform    | Command                                                                                                               |
-|-------------|-----------------------------------------------------------------------------------------------------------------------|
-| ECS Fargate | Use the full command `aws ecs execute-command` shared in [ECS Fargate][11] and run `"security-agent flare <CASE_ID>"` |
-| EKS Fargate | `kubectl exec -it <POD> -c datadog-agent -- security-agent flare <CASE_ID>`                                           |
+### Prerequisites
 
-[1]: /security/threats/
-[2]: /security/cloud_security_management/setup#supported-deployment-types-and-features
-[3]: /security/default_rules/?category=cat-csm-threats
-[4]: /security/cloud_security_management/setup/csm_enterprise
-[5]: /security/cloud_security_management/setup/csm_cloud_workload_security
-[6]: https://aws.amazon.com/console
+- The Datadog Agent is installed and configured for your application's operating system or container, cloud, or virtual environment
+- Datadog APM is configured for your application or service
+
+<div class="alert alert-info"> For additional performance and reliability insights, Datadog recommends enabling Application Performance Monitoring with Application Security Management.</div>
+
+### Installation
+
+#### Threat Detection and Protection
+
+For step-by-step instructions, see the following articles:
+
+- [Java][10]
+- [.NET][11]
+- [Go][12]
+- [Ruby][13]
+- [Node.js][14]
+- [Python][15]
+
+#### Code Security
+
+For step-by-step instructions, see the following articles:
+
+- [Java][18]
+- [.NET][19]
+- [Node.js][20]
+
+## Cloud SIEM
+
+### Prerequisites
+
+- [Log ingestion][21] is configured to collect logs from your sources.
+
+### Installation
+
+For step-by-step instructions, see [AWS Configuration Guide for Cloud SIEM][17].
+
+#### Enable AWS CloudTrail logging
+
+{{% cloud-siem-aws-cloudtrail-enable %}}
+
+#### Send AWS CloudTrail logs to Datadog
+
+{{% cloud-siem-aws-cloudtrail-send-logs %}}
+
+[1]: /integrations/ecs_fargate/
+[2]: /integrations/eks_fargate/
+[3]: /security/cloud_security_management/
+[4]: /security/application_security/
+[5]: /security/cloud_siem/
+[6]: /integrations/eks_fargate/?tab=manual#aws-eks-fargate-rbac
 [7]: /resources/json/datadog-agent-cws-ecs-fargate.json
 [8]: /integrations/faq/integration-setup-ecs-fargate/?tab=rediswebui
 [9]: https://app.datadoghq.com/logs
-[10]: /help/
-[11]: /agent/troubleshooting/send_a_flare/?tab=agentv6v7#ecs-fargate
-[12]: /integrations/eks_fargate/?tab=manual#aws-eks-fargate-rbac
+[10]: /security/application_security/enabling/tracing_libraries/threat_detection/java?tab=awsfargate
+[11]: /security/application_security/enabling/tracing_libraries/threat_detection/go/?tab=amazonecs
+[12]: /security/application_security/enabling/tracing_libraries/threat_detection/dotnet?tab=awsfargate
+[13]: /security/application_security/enabling/tracing_libraries/threat_detection/ruby?tab=awsfargate
+[14]: /security/application_security/enabling/tracing_libraries/threat_detection/nodejs?tab=awsfargate
+[15]: /security/application_security/enabling/tracing_libraries/threat_detection/python?tab=awsfargate
+[16]: /security/application_security/enabling/compatibility/
+[17]: /security/cloud_siem/guide/aws-config-guide-for-cloud-siem/
+[18]: /security/application_security/enabling/tracing_libraries/code_security/java/
+[19]: /security/application_security/enabling/tracing_libraries/code_security/dotnet?tab=awsfargate
+[20]: /security/application_security/enabling/tracing_libraries/code_security/nodejs
+[21]: https://app.datadoghq.com/security/configuration/siem/setup

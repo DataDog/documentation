@@ -4,6 +4,7 @@ kind: documentation
 ---
 
 
+
 A common system metric to monitor is the available disk space on a given system or host. This guide helps you create a monitor that alerts you when free disk space for a host falls below 10% for any host reporting to Datadog.
 
 To create the monitor for available disk space:

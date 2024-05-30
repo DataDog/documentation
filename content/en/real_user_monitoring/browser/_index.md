@@ -20,6 +20,10 @@ The responsibility of keeping user data secure is shared between Datadog and dev
 
 ## Setup
 
+{{< callout url="https://www.datadoghq.com/dg/rum-sdk-injection-beta/" btn_hidden="false" header="Join the Beta!">}}
+RUM SDK Injection is in private beta. Complete the form to request access.
+{{< /callout >}}
+
 The RUM Browser SDK supports all modern desktop and mobile browsers including IE11. For more information, see the [Browser Support][2] table.
 
 To set up RUM Browser Monitoring, create a RUM application:
@@ -40,6 +44,9 @@ To set up RUM Browser Monitoring, create a RUM application:
 Until Datadog starts receiving data, your application appears as `pending` on the **RUM Applications** page.
 
 ### Choose the right installation method
+
+SDK injection
+: This method installs RUM by configuring your server to inject the SDK. RUM SDK injection is in private beta. To use this feature, [request access to RUM SDK injection][28].
 
 npm (node package manager)
 : This method is recommended for modern web applications. The RUM Browser SDK is packaged with the rest of your front-end JavaScript code. It has no impact on page load performance. However, the SDK may miss errors, resources, and user actions triggered before the SDK is initialized. Datadog recommends using a matching version with the Browser Logs SDK.
@@ -2113,3 +2120,4 @@ window.DD_RUM && window.DD_RUM.getInternalContext() // { session_id: "xxxx", app
 [25]: https://docs.datadoghq.com/real_user_monitoring/browser/advanced_configuration#contexts-life-cycle
 [26]: https://developer.mozilla.org/en-US/docs/Web/API/Event/isTrusted
 [27]: /real_user_monitoring/guide/monitor-electron-applications-using-browser-sdk
+[28]: https://www.datadoghq.com/dg/rum-sdk-injection-beta/
