@@ -4635,7 +4635,12 @@ menu:
       parent: csm
       identifier: vulnerabilities
       weight: 5
-    - name: Agentless  Scanning
+    - name: Hosts and Containers Compatibility
+      url: security/cloud_security_management/vulnerabilities/hosts_containers_compatibility
+      parent: vulnerabilities
+      identifier: vulnerabilities_hosts_containers_compatibility
+      weight: 101
+    - name: Agentless Scanning
       url: security/cloud_security_management/agentless_scanning
       parent: csm
       identifier: csm_agentless
