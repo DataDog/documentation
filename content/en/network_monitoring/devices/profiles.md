@@ -23,6 +23,16 @@ By default, all profiles in the Agent configuration directory are loaded. To cus
 
 **Note**: The generic profile is [generic-device.yaml][1], which supports routers, switches, etc.
 
+### Device profile onboarding
+
+<div class="alert alert-info">Device profile onboarding is in private beta. Please reach out to your Customer Service Representative to sign up.</div>
+
+1. Build your own profile by navigating to [Infrastructure > Network Devices > Configuration][6]. 
+2. Click on SNMP Profiles > **Create New Profile**.
+
+{{< img src="/network_device_monitoring/profiles/create_profile.png" alt="The Network Device profile creation page" style="width:100%;">}}
+
+
 ### sysOID mapped devices
 
 Profiles allow Network Device Monitoring to reuse metric definitions across several device types or instances. Profiles define which metrics to collect and how to transform them into Datadog metrics. Each profile is expected to monitor a class of similar devices from the same vendor. They are automatically used by the Datadog Agent by comparing the sysObjectIds of the network device with the ones defined in the profile file.
@@ -42,8 +52,6 @@ metrics:
       OID: 1.3.6.1.4.1.232.6.2.8.1.0
       name: cpqHeSysUtilLifeTime
 ```
-
-
 
 If you need different metrics for network devices that share the same `sysobjectid`, you can write profiles without any `sysobjectid`, and configure the `profile` option in the SNMP configuration.
 
@@ -96,3 +104,4 @@ See the [Profile Format Reference][5] for more information about profiles format
 [3]: https://github.com/DataDog/integrations-core/tree/master/snmp/datadog_checks/snmp/data/default_profiles
 [4]: https://github.com/DataDog/datadog-agent/blob/main/pkg/networkdevice/metadata/payload.go#L51-L76
 [5]: https://datadoghq.dev/integrations-core/tutorials/snmp/profile-format/
+[6]: https://app.datadoghq.com/devices/
