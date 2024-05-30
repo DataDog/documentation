@@ -169,11 +169,11 @@ For more information about proxy settings, see the [Agent v6 Proxy documentation
 
 Optional collection Agents are disabled by default for security or performance reasons. Use these environment variables to enable them:
 
-| Env Variable               | Description                                                                                                                                                                                                                                                      |
-|----------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `DD_APM_NON_LOCAL_TRAFFIC` | Allow non-local traffic when [tracing from other containers][16].       |
-| `DD_LOGS_ENABLED`          | Enable [log collection][17] with the Logs Agent.                                                                                                                                                                                                                 |
-| `DD_PROCESS_AGENT_ENABLED` | Enable [live process collection][18] with the Process Agent. The [live container view][19] is already enabled by default if the Docker socket is available. If set to `false`, the [live process collection][18] and the [live container view][19] are disabled. |
+| Env Variable                                   | Description                                                                                                                                                   |
+|------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `DD_APM_NON_LOCAL_TRAFFIC`                     | Allow non-local traffic when [tracing from other containers][16].                                                                                             |
+| `DD_LOGS_ENABLED`                              | Enable [log collection][17] with the Logs Agent.                                                                                                              |
+| `DD_PROCESS_CONFIG_PROCESS_COLLECTION_ENABLED` | Enable [live process collection][18] with the Process Agent. The [live container view][19] is already enabled by default if the Docker socket is available. |
 
 ### DogStatsD (custom metrics)
 
@@ -281,6 +281,10 @@ Returns `CRITICAL` if the Agent is unable to connect to Datadog, otherwise retur
 **datadog.agent.check_status**: <br>
 Returns `CRITICAL` if an Agent check is unable to send metrics to Datadog, otherwise returns `OK`.
 
+## Uninstall Single Step APM Instrumentation
+
+If you installed the Datadog Docker Agent with Single Step APM Instrumentation, and you want to uninstall the Agent, you need to [run additional commands][33] to uninstall APM Instrumentation.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -317,3 +321,4 @@ Returns `CRITICAL` if an Agent check is unable to send metrics to Datadog, other
 [30]: /agent/docker/data_collected/#metrics
 [31]: /integrations/network/#metrics
 [32]: /integrations/ntp/#metrics
+[33]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/?tab=docker#removing-apm-for-all-services-on-the-infrastructure
