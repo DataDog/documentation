@@ -45,11 +45,9 @@ Provide the following inputs:
 | `cpu_count`    | Set the number of CPUs used by the analyzer. Defaults to the number of CPUs available.                                     | No       |                 |
 | `subdirectory` | The subdirectory path the analysis should be limited to. The path is relative to the root directory of the repository.                  | No       |                 |
 
-<div class="alert alert-info">
-  Add a `--performance-statistics` flag to your static analysis command to get execution time statistics for analyzed files.
-</div>
+To obtain execution time statistics for analyzed files, add a `--performance-statistics` flag to your static analysis command.
 
-Select an analyzer for your architecture and OS:
+Select an analyzer for your architecture and OS from the following options:
 
 | Architecture | OS        | Name                                                    | Link                                                                                                                                          |
 |--------------|-----------|---------------------------------------------------------| ----------------------------------------------------------------------------------------------------------------------------------------------|
@@ -60,10 +58,6 @@ Select an analyzer for your architecture and OS:
 | `x86_64`     | `Windows` | `datadog-static-analyzer-x86_64-pc-windows-msvc.zip`    | [Download](https://github.com/DataDog/datadog-static-analyzer/releases/latest/download/datadog-static-analyzer-x86_64-pc-windows-msvc.zip)    |
 
 Add the following to your CI pipeline:
-
-<div class="alert alert-info">
-  The following example uses the x86_64 Linux version of Datadog's static analyzer. If you're using a different OS or architecture, you should select it from the table above and update the DATADOG_STATIC_ANALYZER_URL value below. You can view all releases on our <a href="https://github.com/DataDog/datadog-static-analyzer/releases">GitHub Releases</a> page.
-</div>
 
 ```bash
 # Set the Datadog site to send information to
@@ -86,7 +80,15 @@ mv /tmp/datadog-static-analyzer /usr/local/datadog-static-analyzer
 datadog-ci sarif upload /tmp/report.sarif --service <service> --env <env>
 ```
 
+<div class="alert alert-info">
+  This example uses the x86_64 Linux version of Datadog's static analyzer. If you're using a different OS or architecture, you should select it from the table above and update the <code>DATADOG_STATIC_ANALYZER_URL</code> value below. You can view all releases on the <a href="https://github.com/DataDog/datadog-static-analyzer/releases">GitHub Releases</a> page.
+</div>
+
 ## Diff-aware scanning
+
+<div class="alert alert-warning">
+  Diff-aware scanning for Static Analysis is in public beta.
+</div>
 
 Diff-aware scanning is a feature that enables Datadog Static Analysis to only scan the files modified by a commit in a feature branch. It accelerates scan time significantly by not having the analysis run on every file in the repository for every scan. To enable diff-aware scanning in your CI pipeline, follow these steps:
 
