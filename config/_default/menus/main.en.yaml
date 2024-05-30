@@ -2095,11 +2095,11 @@ menu:
       parent: case_management_projects
       identifier: case_management_view_and_manage
       weight: 101
-    - name: Create notifications and tickets 
+    - name: Create notifications and tickets
       url: service_management/case_management/create_notifications_and_third_party_tickets
       parent: case_management_projects
       identifier: case_management_create_notifications_and_third_party_tickets
-      weight: 102   
+      weight: 102
     - name: Settings
       url: service_management/case_management/settings
       parent: case_management_projects
@@ -2202,7 +2202,7 @@ menu:
       url: service_management/app_builder/connections/http_request/
       parent: app_builder_connections
       identifier: app_builder_http_request
-      weight: 201  
+      weight: 201
     - name: Build Apps
       url: service_management/app_builder/build/
       parent: app_builder
@@ -2217,12 +2217,12 @@ menu:
       url: service_management/app_builder/components/tables/
       parent: app_builder_components
       identifier: app_builder_tables
-      weight: 401  
+      weight: 401
     - name: JavaScript Expressions
       url: service_management/app_builder/expressions/
       parent: app_builder
       identifier: app_builder_expressions
-      weight: 5 
+      weight: 5
     - name: Embedded Apps
       url: service_management/app_builder/embedded_apps/
       parent: app_builder
@@ -3735,10 +3735,10 @@ menu:
       parent: tests
       identifier: tests_early_flake_detection
       weight: 10
-    - name: Flaky Test Retries
-      url: tests/flaky_test_retries
+    - name: Auto Test Retries
+      url: tests/auto_test_retries
       parent: tests
-      identifier: tests_flaky_test_retries
+      identifier: tests_auto_test_retries
       weight: 11
     - name: Guides
       url: tests/guides/
