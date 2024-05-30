@@ -4545,6 +4545,11 @@ menu:
       parent: csm
       identifier: cloud_workload_security
       weight: 2
+    - name: Supported Linux Distributions
+      url: security/threats/supported_linux_distributions
+      parent: cloud_workload_security
+      identifier: cws_workload_security_linux_distributions
+      weight: 200
     - name: Detection Rules
       url: security/threats/workload_security_rules
       parent: cloud_workload_security
