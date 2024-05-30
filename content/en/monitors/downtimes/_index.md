@@ -116,11 +116,11 @@ Use [recurrence rules][4] (RRULEs) to define downtimes schedules. Use the offici
 ## Notifications
 ### Add a message
 
-Enter a message to Configure notifications and automations about this downtime. The message field allows standard markdown formatting and Datadog's `@-notification` syntax. See the [Notifications page][7] for more information on formatting options.
+Enter a message to alert your team about this downtime. The message field allows standard markdown formatting and Datadog's `@-notification` syntax. See the [Notifications page][7] for more information on formatting options.
 
 ### Configure notifications and automations
 
-Configure notifications and automations by specifying team members or send the message to a service [integration][8]. Datadog sends notifications to the specified destinations whenever the downtime is scheduled, started, cancelled, or expired. These audit notifications allows your team to be aware of the Downtimes in your system.
+Configure notifications and automations by specifying team members or sending the message to a service [integration][8]. Datadog sends notifications to the specified destinations whenever the downtime is scheduled, started, cancelled, or expired. These audit notifications allows your team to be aware of the downtimes in your system.
 
 ### Disable first recovery notification
 

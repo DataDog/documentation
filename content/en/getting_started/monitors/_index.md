@@ -51,7 +51,7 @@ The main components of monitor configuration are:
 - **Define the metric**: What value are you monitoring to alert? The disk space in your system? The number of errors encountered for logins?
 - **Set the alert conditions**: When does an engineer need to be woken up? 
 - **Configure notifications and automations**: What information needs to be in the alert?
-- **Define permissions and audit notifications**: Who has access to these alerts and who should be notified if the alert is modified?
+- **Define permissions and audit notifications**: Who has access to these alerts, and who should be notified if the alert is modified?
 
 ### Choose the detection method
 
@@ -105,7 +105,7 @@ To add conditional messages based on alert vs. warning thresholds, see the avail
 
 #### Notify your services and your team members
 
-Send notifications to your team through Email, Slack, PagerDuty, and more. You can search for team members and connected accounts with the dropdown box. 
+Send notifications to your team through email, Slack, PagerDuty, and more. You can search for team members and connected accounts with the dropdown box. 
 
 {{< img src="getting_started/monitors/monitor_notification.png" alt="Add a monitor message and automations to your alert notification" style="width:100%;" >}}
 
