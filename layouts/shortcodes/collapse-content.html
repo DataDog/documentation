@@ -8,7 +8,7 @@
         </svg>
       </div>
       <div class="header-text">
-        {{ printf "<%s class='header-text-inner'>%s</%s>" $headingLevel (.Get "title") $headingLevel | safeHTML }}
+        {{ printf `<%s class="header-text-inner" id="%s">%s</%s>` $headingLevel (.Get "title" | urlize) (.Get "title") $headingLevel | safeHTML }}
       </div>
     </div>
   </summary>

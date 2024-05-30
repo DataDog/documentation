@@ -8,7 +8,7 @@
     {{ $prev_h_level := 3 }}
     {{ $level_nested := 0 }}
     {{ range $i, $header := $headers_html }}
-      {{ $heading_info := split (replaceRE `<h([2-3]).*?id=\"(.*)\".*?>(.*)<\/h[2-3]>` "$1,$2,$3" $header) "," }}
+      {{ $heading_info := split (replaceRE `<h([2-3])(?:\s+class="[^"]*")?.*?id="(.*?)".*?>(.*?)<\/h[2-3]>` "$1,$2,$3" $header) "," }}
 
       {{ $h_level := (index $heading_info 0) }}
       {{ $h_id := (index $heading_info 1) }}

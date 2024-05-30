@@ -1,0 +1,2 @@
+{{ $id := printf "%s-%d-%d" .Anchor .Level (index (shuffle (seq 0 100)) 0 )}}
+<h{{ .Level }} id="{{ $id | safeURL }}"><a href="#{{ $id | safeURL }}">{{ .Text | safeHTML }}</a></h{{ .Level }}>
