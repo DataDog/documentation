@@ -86,6 +86,10 @@ Additional cloud provider-specific attributes are also mapped.
 | `app.kubernetes.io/part-of` | `kube_app_part_of` |
 | `app.kubernetes.io/managed-by` | `kube_app_managed_by` |
 
+### HTTP
+
+{{% otel-sem-http-table %}}
+
 ## Metrics attribute mapping
 
 For metrics, by default, Datadog only maps the OpenTelemetry resource attributes listed in the previous sections to Datadog metric tags. To map all resource attributes to tags, enable the `metrics::resource_attributes_as_tags` setting:
