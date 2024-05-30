@@ -318,7 +318,7 @@ For the full list of available instrumentation methods, see the [`ddtrace` docum
 
 [Webmock][7] and [VCR][9]
 are popular Ruby libraries that stub HTTP requests when running tests.
-By default, they fails when used with datadog-ci because traces are being sent
+By default, they fail when used with datadog-ci because traces are being sent
 to Datadog with HTTP calls.
 
 To allow HTTP connections for Datadog backend, you need to configure
