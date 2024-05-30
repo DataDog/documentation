@@ -18,9 +18,9 @@ Cloud Security Management (CSM) delivers real-time threat detection and continuo
 
 ## Select features
 
-placeholder text.
+On the [Cloud Security Management page][5] in Datadog, 
 
-## Getting started
+## Enable CSM
 
 To enable CSM on your infrastructure, complete the following steps:
 
@@ -42,10 +42,18 @@ Select your infrastructure type for details on how to enable CSM Enterprise on t
 
 ## Next steps
 
-To get started setting up CSM, navigate to the [**Cloud Security Management Setup**][4] page in Datadog, which has detailed steps on how to configure CSM. For detailed setup instructions, see **X** and [CSM Agentless Scanning][12] setup docs.
+To get started setting up CSM, navigate to the [**Cloud Security Management Setup**][3] page in Datadog, which has detailed steps on how to configure CSM. For detailed setup instructions, see the following articles:
+
+- [Enabling Cloud Security Management on the Agent][1]
+- [Enabling Cloud Security Management for Cloud Accounts][2]
+- [Setting up CSM Agentless Scanning][4]
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[12]: /security/cloud_security_management/setup/agentless_scanning
+[1]: /security/cloud_security_management/setup/agent
+[2]: /security/cloud_security_management/setup/cloud_accounts
+[3]: https://app.datadoghq.com/security/configuration/csm/setup
+[4]: /security/cloud_security_management/setup/agentless_scanning
+[5]: https://app.datadoghq.com/security/csm

@@ -42,8 +42,8 @@ Enable AWS CloudTrail logging so that logs are sent to a S3 bucket.
 
 1. Click **Create trail** on the [CloudTrail dashboard][19].
 2. Enter a name for your trail.
-3. Create a new S3 bucket or use an existing S3 bucket to store the CloudTrail logs. 
-4. Create a new AWS KMS key or use an existing AWS KMS key. Click **Next**.
+3. Create an S3 bucket or use an existing S3 bucket to store the CloudTrail logs. 
+4. Create an AWS KMS key or use an existing AWS KMS key. Click **Next**.
 5. Leave the event type with the default management read and write events, or choose additional event types you want to send to Datadog. 
 6. Click **Next**.
 7. Review and click **Create trail**.
