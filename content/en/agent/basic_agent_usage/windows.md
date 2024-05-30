@@ -21,21 +21,19 @@ further_reading:
 - link: "/agent/configuration/network#configure-ports"
   tag: "Documentation"
   text: "Configure inbound ports"
+algolia:
+  tags: ['uninstall', 'uninstalling']
 ---
 
 ## Setup
 
-If you haven't installed the Datadog Agent yet, see below or the [in-app installation instructions][1]. See the Agent documentation for [supported OS versions][2].
-
-For installation and configuration to the Datadog EU site, use the `SITE=` parameter. See the configuration variables table below.
+If you haven't installed the Datadog Agent yet, see below or the [in-app installation instructions][1]. See the Agent Supported Platforms documentation for [supported OS versions][2].
 
 ### Installation
 
-Starting with **Agent v6.11.0**, the core and APM/trace components of the Windows Agent run under the `ddagentuser` account created at install time instead of the `LOCAL_SYSTEM` account. The Live Processes component, if enabled, runs under the `LOCAL_SYSTEM` account. Learn more about the [Datadog Windows Agent User][3].
+The core and APM/trace components of the Windows Agent run under the `ddagentuser` account, which is created at install time. The Live Processes component, if enabled, runs under the `LOCAL_SYSTEM` account. Learn more about the [Datadog Windows Agent User][3].
 
-If installing the Datadog Agent on a domain environment, see the [installation requirements for the Agent][4].
-
-**Note**: There are special considerations for [domain controllers][5].
+See installation requirements and special considerations for installing the Datadog Agent on a [domain environment][4], [with a group policy][5], and more. 
 
 {{< tabs >}}
 {{% tab "GUI" %}}
@@ -499,8 +497,8 @@ After configuration is complete, [restart the Agent][11].
 [1]: https://app.datadoghq.com/account/settings/agent/latest?platform=windows
 [2]: /agent/supported_platforms/?tab=windows
 [3]: /agent/faq/windows-agent-ddagent-user/
-[4]: /agent/faq/windows-agent-ddagent-user/#installation-in-a-domain-environment
-[5]: /agent/faq/windows-agent-ddagent-user/#domain-controllers
+[4]: /agent/guide/windows-agent-ddagent-user/#installation-in-a-domain-environment
+[5]: /agent/guide/windows-agent-ddagent-user/#installation-with-group-policy
 [6]: /agent/guide/datadog-agent-manager-windows/
 [7]: /integrations/wmi_check/
 [8]: https://app.datadoghq.com/monitors#create/integration

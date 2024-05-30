@@ -14,13 +14,13 @@ type: multi-code-lang
 code_lang_weight: 50
 further_reading:
 - link: "https://github.com/DataDog/dd-trace-cpp"
-  tag: "Github"
+  tag: "Source Code"
   text: Source code
 - link: "/tracing/glossary/"
   tag: "Documentation"
   text: "Explore your services, resources and traces"
 - link: "/tracing/"
-  tag: "Advanced Usage"
+  tag: "Documentation"
   text: "Advanced Usage"
 ---
 
@@ -60,7 +60,7 @@ add_executable(tracer_example tracer_example.cpp)
 # NOTE: To dynamically link against `dd-trace-cpp` use the `dd_trace_cpp_shared` target
 target_link_libraries(tracer_example dd_trace_cpp-static)
 ````
-Here's an example of how to use the dd-trace-cpp library in your C++ code to create spans and traces:
+Here's an example of how to use the `dd-trace-cpp` library in your C++ code to create spans and traces:
 ```cpp
 // tracer_example.cpp
 #include <datadog/span_config.h>
@@ -108,7 +108,7 @@ DATADOG TRACER CONFIGURATION - {"collector":{"config":{"event_scheduler":{"type"
 {{% /tab %}}
 
 {{% tab "Manual" %}}
-To manually download and install the dd-trace-cpp library, run the following bash script:
+To manually download and install the `dd-trace-cpp` library, run the following bash script:
 ```bash
 # Requires the "jq" command, which can be installed via
 # the package manager:

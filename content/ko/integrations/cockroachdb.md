@@ -41,7 +41,7 @@ integration_id: cockroachdb
 integration_title: CockroachDB
 integration_version: 3.3.0
 is_public: true
-kind: integration
+kind: 통합
 manifest_version: 2.0.0
 name: cockroachdb
 public_title: CockroachDB
@@ -60,6 +60,8 @@ tile:
   - 지원 OS::Linux
   - 지원 OS::Windows
   - 지원 OS::macOS
+  - Submitted Data Type::Metrics
+  - 제출한 데이터 유형::로그
   configuration: README.md#Setup
   description: CockroachDB 클러스터의 전반적인 서비스 상태 및 성능을 모니터링하세요.
   media: []
@@ -190,7 +192,7 @@ CockroachDB 점검은 이벤트를 포함하지 않습니다.
 
 ## 트러블슈팅
 
-도움이 필요하신가요? [Datadog 지원팀][6]에 문의하세요.
+도움이 필요하신가요? [Datadog 지원 팀][6]에 문의하세요.
 
 ## 참고 자료
 

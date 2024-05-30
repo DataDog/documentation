@@ -14,7 +14,7 @@ type: multi-code-lang
 code_lang_weight: 0
 further_reading:
     - link: 'https://github.com/DataDog/dd-trace-java'
-      tag: 'GitHub'
+      tag: "Source Code"
       text: 'Datadog Java APM source code'
     - link: 'tracing/glossary/'
       tag: 'Documentation'
@@ -74,7 +74,7 @@ To begin tracing your applications:
 | --------- | --------------------------------- | ------------ |
 | `DD_ENV`      | `dd.env`                  | Your application environment (`production`, `staging`, etc.) |
 | `DD_LOGS_INJECTION`   | `dd.logs.injection`     | Enable automatic MDC key injection for Datadog trace and span IDs. See [Advanced Usage][6] for details. <br><br>**Beta**: Starting in version 1.18.3, if [Agent Remote Configuration][16] is enabled where this service runs, you can set `DD_LOGS_INJECTION` in the [Service Catalog][17] UI. |
-| `DD_PROFILING_ENABLED`      | `dd.profiling.enabled`          | Enable the [Continous Profiler][5] |
+| `DD_PROFILING_ENABLED`      | `dd.profiling.enabled`          | Enable the [Continuous Profiler][5] |
 | `DD_SERVICE`   | `dd.service`     | The name of a set of processes that do the same job. Used for grouping stats for your application. |
 | `DD_TRACE_SAMPLE_RATE` | `dd.trace.sample.rate` |   Set a sampling rate at the root of the trace for all services. <br><br>**Beta**: Starting in version 1.18.3, if [Agent Remote Configuration][16] is enabled where this service runs, you can set `DD_TRACE_SAMPLE_RATE` in the [Service Catalog][17] UI.     |
 | `DD_TRACE_SAMPLING_RULES` | `dd.trace.sampling.rules` |   Set a sampling rate at the root of the trace for services that match the specified rule.    |

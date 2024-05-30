@@ -39,6 +39,31 @@ If you have not set up the Android SDK yet, follow the [in-app setup instruction
 
 For any given error, you can access the file path, line number, and a code snippet for each frame of the related stack trace.
 
+### Add ANR reporting
+
+An "Application Not Responding" ([ANR][6]) is an Android-specific type of error that gets triggered when the application is unresponsive for too long.
+
+ANRs are only reported through the RUM SDK (not through Logs).
+
+#### Report fatal ANRs
+Fatal ANRs result in crashes. The application reports them when it's unresponsive, leading to the Android OS displaying a popup dialog to the user, who chooses to force quit the app through the popup.
+
+{{< img src="real_user_monitoring/error_tracking/rum-anr-fatal.png" alt="A fatal crash report in Error Tracking." >}}
+
+- In the **Error Tracking** page, fatal ANRs are grouped based on their similarity, which can result into several **individual issues** being created
+- By default, Datadog catches fatal ANRs through the [ApplicationExitInfo API][7] (available since *[Android 30+][8]*), which can be read on the next app launch.
+- In *[Android 29][9] and below*, reporting on fatal ANRs is not possible.
+
+#### Report non-fatal ANRs
+Non-fatal ANRs may or may not have led to the application being terminated (crashing).
+
+{{< img src="real_user_monitoring/error_tracking/rum-anr-non-fatal.png" alt="A non-fatal crash report in Error Tracking." >}}
+
+- In the **Error Tracking** page, non-fatal ANRs are grouped under a **single** issue due to their level of noise
+- By default, the reporting of non-fatal ANRs on *Android 30+* is **disabled** because it would create too much noise over fatal ANRs. On *Android 29* and below, however, the reporting of non-fatal ANRs is **enabled** by default, as fatal ANRs cannot be reported on those versions.
+
+For any Android version, you can override the default setting for reporting non-fatal ANRs by setting `trackNonFatalAnrs` to `true` or `false` when initializing the RUM SDK.
+
 ## Get deobfuscated stack traces
 
 ### Upload your mapping file
@@ -74,9 +99,9 @@ For any given error, you can access the file path, line number, and a code snipp
 
 **Note**: If your project uses additional flavors, the plugin provides an upload task for each variant with obfuscation enabled. In this case, initialize the RUM Android SDK with a proper variant name (the necessary API is available in versions `1.8.0` and later).
 
+
 [1]: https://github.com/DataDog/dd-sdk-android-gradle-plugin
 [2]: https://app.datadoghq.com/organization-settings/api-keys
-
 {{% /tab %}}
 {{% tab "EU" %}}
 1. Add the [Android Gradle Plugin][1] to your Gradle project using the following code snippet.
@@ -105,9 +130,9 @@ For any given error, you can access the file path, line number, and a code snipp
 
 **Note**: If your project uses additional flavors, the plugin provides an upload task for each variant with obfuscation enabled. In this case, initialize the RUM Android SDK with a proper variant name (the necessary API is available in versions `1.8.0` and later).
 
+
 [1]: https://github.com/DataDog/dd-sdk-android-gradle-plugin
 [2]: https://app.datadoghq.com/organization-settings/api-keys
-
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -209,3 +234,7 @@ To test your implementation:
 [3]: /real_user_monitoring/mobile_and_tv_monitoring/setup/android#setup
 [4]: https://github.com/DataDog/dd-sdk-android/tree/develop/features/dd-sdk-android-rum
 [5]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/?tabs=kotlin#initialization-parameters
+[6]: https://developer.android.com/topic/performance/vitals/anr
+[7]: https://developer.android.com/reference/android/app/ApplicationExitInfo
+[8]: https://developer.android.com/tools/releases/platforms#11
+[9]: https://developer.android.com/tools/releases/platforms#10

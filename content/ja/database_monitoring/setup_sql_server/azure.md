@@ -11,10 +11,6 @@ kind: documentation
 title: Azure SQL Server のデータベースモニタリングの設定
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">データベースモニタリングはこのサイトでサポートされていません。</div>
-{{< /site-region >}}
-
 データベースモニタリングは、クエリメトリクス、クエリサンプル、実行計画、データベースの状態、フェイルオーバー、イベントを公開することで、Microsoft SQL Server データベースを詳細に可視化します。
 
 データベースでデータベースモニタリングを有効にするには、以下の手順を実行します。
@@ -129,8 +125,9 @@ GRANT VIEW ANY DEFINITION to datadog;
 Azure はホストへの直接アクセスを許可しないため、Datadog Agent は SQL Server ホストと通信可能な別のホストにインストールする必要があります。Agent のインストールと実行には、いくつかのオプションがあります。
 
 {{< tabs >}}
-{{% tab "Windows ホスト" %}}
-SQL Server テレメトリーの収集を開始するには、まず [Datadog Agent をインストール][1]します。
+{{% tab "Windows Host" %}}
+
+Oracle テレメトリーの収集を開始するには、まず [Datadog Agent をインストール][1]します。
 
 SQL Server Agent のコンフィギュレーションファイル `C:\ProgramData\Datadog\conf.d\sqlserver.d\conf.yaml` を作成します。使用可能なすべての構成オプションは、[サンプルコンフィギュレーションファイル][2]を参照してください。
 

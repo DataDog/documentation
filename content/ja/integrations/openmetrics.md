@@ -75,7 +75,7 @@ OpenMetrics チェックは、[Datadog Agent v6.6.0 以降][5]にパッケージ
 
 ### ブラウザトラブルシューティング
 
-[Agent の構成ディレクトリ][6]の root にある `openmetrics.d/conf.yaml` ファイルを編集します。利用可能なすべての構成オプションについては、[サンプル openmetrics.d/conf.yaml][7] を参照してください。これは、Datadog Agent バージョン 7.32.0 時点での最新の OpenMetrics チェック例です。以前にこのインテグレーションを実装していた場合は、[レガシー例][8]を参照してください。
+[Agent の構成ディレクトリ][6]の root にある `conf.d/openmetrics.d/conf.yaml` ファイルを編集します。利用可能なすべての構成オプションについては、[サンプル openmetrics.d/conf.yaml][7] を参照してください。これは、Datadog Agent バージョン 7.32.0 の時点での最新の OpenMetrics チェックの例です。以前にこのインテグレーションを実装していた場合は、[レガシー例][8]を参照してください。
 
 それぞれのインスタンスには、以下のパラメーターが必要です。
 
@@ -123,7 +123,7 @@ Datadog では、より正確な収集のために、特定のメトリクス名
 
 ```yaml
   metrics:
-    - "metric_without_type":
+    - "<NAME_OF_METRIC_WITHOUT_TYPE>":
         "type": "gauge"
 ```
 

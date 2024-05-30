@@ -13,10 +13,6 @@ further_reading:
   text: "Troubleshooting Database Monitoring"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Database Monitoring is not supported on {{< region-param key=dd_datacenter >}}.</div>
-{{< /site-region >}}
-
 The Database Monitoring AlwaysOn Clusters view enables you to detect data synchronization issues, understand availability group behavior, and identify cluster bottlenecks in SQL Server availability groups.
 
 To access the AlwaysOn Clusters view, navigate to the **APM** > **Database Monitoring** > **Databases** tab and select **AlwaysOn Clusters**.

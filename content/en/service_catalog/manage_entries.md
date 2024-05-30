@@ -6,7 +6,7 @@ further_reading:
   tag: "Documentation"
   text: "Adding metadata"
 - link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_definition_yaml"
-  tag: "Terraform"
+  tag: "External Site"
   text: "Create and manage service definitions with Terraform"
 - link: "/api/latest/service-definition/"
   tag: "API"
@@ -97,18 +97,34 @@ extensions:
     customField2: customValue2
 {{< /code-block >}}
 
-## Changing the service color
+## Manage service-related workflows
+[Workflow Automation][14] allows you to automate end-to-end processes across your teams. It integrates with Datadog's Service Catalog to enable dynamic and self-service workflows.
 
+### Find Service Catalog actions
+To explore the complete set of actions specifically related to Service Catalog, navigate to the [Datadog Action Catalog][23]. Filter for the actions you need:
+
+1. **Access the Action Catalog**: Look for the Action Catalog within your Datadog Workflow Automation environment.
+2. **Search Functionality**: Use the search bar to search for keywords like "Service Catalog" or more specific terms related to desired actions (for example, "get service dependencies").
+
+### Available Service Catalog Actions
+
+Below is a comprehensive list of actions available for Service Catalog in Datadog Workflow Automation. Note that this list may evolve as new actions are added. 
+
+- **Retrieve Service Information**
+  - "Get service definition" for a single service
+  - "List service definitions" to get all definitions from Datadog Service Catalog
+  - "Get service dependencies" to get a service's immediate upstream and downstream services
+- **Incident Triage**
+  - "Get service PagerDuty on call"
+  - When integrated with other actions, you can trigger workflows based on critical events (for example, execute runbooks). 
+
+## Changing the service color
 The service color is used in trace visualizations. Click the service type icon to change it.
 
 {{< img src="tracing/service_catalog/change_service_color.png" alt="Click the service icon to select a different icon color." style="width:80%;" >}}
 
-## Manage service-related workflows
-[Workflow Automation][14] allows you to automate end-to-end processes across your teams. It integrates with Datadog's Service Catalog to enable dynamic and self-service workflows.
-
-### Updating the service type and language
+## Updating the service type and language
 With [Service Catalog metadata schema 2.2][19], you can specify the type and language for user-defined services or overwrite the auto-detected type and language for instrumented services. Correctly label the service type and language to help other teams further understand what your services do and how to interact with them. 
-
 
 
 ## Further reading
@@ -130,3 +146,4 @@ With [Service Catalog metadata schema 2.2][19], you can specify the type and lan
 [20]: /service_catalog/service_definitions
 [21]: https://github.com/DataDog/schema/tree/main/service-catalog/v3
 [22]: https://forms.gle/zbLfnJYhD5Ab4Wr18
+[23]: https://docs.datadoghq.com/service_management/workflows/actions_catalog/

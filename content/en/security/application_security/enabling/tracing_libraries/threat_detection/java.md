@@ -13,7 +13,7 @@ further_reading:
   tag: "Documentation"
   text: "Adding user information to traces"
 - link: 'https://github.com/DataDog/dd-trace-java'
-  tag: 'GitHub'
+  tag: "Source Code"
   text: 'Java Datadog library source code'
 - link: "/security/default_rules/?category=cat-application-security"
   tag: "Documentation"
@@ -27,8 +27,6 @@ further_reading:
 You can monitor application security for Java apps running in Docker, Kubernetes, Amazon ECS, and AWS Fargate.
 
 {{% appsec-getstarted %}}
-
-{{% appsec-getstarted-with-rc %}}
 
 ## Enabling threat detection
 ### Get started

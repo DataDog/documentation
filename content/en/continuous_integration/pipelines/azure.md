@@ -25,7 +25,7 @@ Azure DevOps Server is not officially supported.
 
 ## Overview
 
-[Azure Pipelines][1] is a continuous integration and delivery service that supports any language, platform, or cloud. 
+[Azure Pipelines][1] is a continuous integration and delivery service that supports any language, platform, or cloud.
 
 Set up tracing on Azure Pipelines to gain real time insights into your CI/CD workflows, track pipeline performance, analyze inefficiencies, and manage your deployment operations.
 
@@ -99,6 +99,17 @@ Example for enabling the hooks in specified projects:
     projectName1 projectName2
 ```
 
+### Enable job log collection
+
+<div class="alert alert-info">Azure Log Collection is in private beta. To request access, fill out <a href="https://forms.gle/vXEQQcPLARdSDLd27">this form</a>.</div>
+
+Datadog supports log collection for your Azure DevOps pipelines. To enable it:
+
+1. Install a Datadog app registration on your Azure console. Follow the steps within the [Azure integration][14].
+
+2. Add the Datadog app registration to your Azure DevOps organization and to every project for which you want to enable Log Collection. You can do this by going to "Organization settings" in your DevOps console. You may select "Add to all projects" to configure all projects in bulk.
+
+
 ## Visualize pipeline data in Datadog
 
 The [**CI Pipeline List**][4] and [**Executions**][5] pages populate with data after the workflows finish.
@@ -121,3 +132,4 @@ The **CI Pipeline List** page shows data for only the default branch of each rep
 [11]: /glossary/#custom-measure
 [12]: https://raw.githubusercontent.com/DataDog/ci-visibility-azure-pipelines/main/service_hooks.py
 [13]: https://learn.microsoft.com/en-us/azure/devops/organizations/accounts/use-personal-access-tokens-to-authenticate?view=azure-devops&tabs=Windows#create-a-pat
+[14]: https://app.datadoghq.com/integrations/azure

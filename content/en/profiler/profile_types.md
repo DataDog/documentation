@@ -9,7 +9,7 @@ further_reading:
       tag: 'Documentation'
       text: 'Getting Started with Profiler'
     - link: 'https://www.datadoghq.com/blog/introducing-datadog-profiling/'
-      tags: 'Blog'
+      tag: 'Blog'
       text: 'Introducing always-on production profiling in Datadog'
 ---
 
