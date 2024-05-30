@@ -19,6 +19,10 @@ The responsibility of keeping user data secure is shared between Datadog and dev
 
 ## Setup
 
+{{< callout url="https://www.datadoghq.com/dg/rum-sdk-injection-beta/" btn_hidden="false" header="Join the Beta!">}}
+RUM SDK Injection is in private beta. Complete the form to request access.
+{{< /callout >}}
+
 To set up RUM Browser Monitoring, create a RUM application:
 
 1. In Datadog, navigate to the [**Digital Experience** > **Add an Application** page][3] and select the JavaScript (JS) application type.
@@ -37,6 +41,9 @@ To set up RUM Browser Monitoring, create a RUM application:
 Until Datadog starts receiving data, your application appears as `pending` on the **RUM Applications** page.
 
 ### Choose the right installation method
+
+SDK injection
+: This method installs RUM by configuring your server to inject the SDK. RUM SDK injection is in private beta. To use this feature, [request access to RUM SDK injection][28].
 
 npm (node package manager)
 : This method is recommended for modern web applications. The RUM Browser SDK is packaged with the rest of your front-end JavaScript code. It has no impact on page load performance. However, the SDK may miss errors, resources, and user actions triggered before the SDK is initialized. Datadog recommends using a matching version with the Browser Logs SDK.
