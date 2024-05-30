@@ -147,7 +147,7 @@ function loadInstantSearch(currentPageWasAsyncLoaded) {
             searchBox({
                 container: searchBoxContainer,
                 placeholder: 'Search documentation...',
-                autofocus: false,
+                autofocus: true,
                 showReset: false,
                 showSubmit: true,
                 templates: {
