@@ -124,7 +124,7 @@ Watchdog filters out minimally-used endpoints and services to reduce noise and a
 #### Required data history
 
 Watchdog requires data to establish a baseline of expected behavior. For metric anomalies, the minimum history is two weeks. 
-Watchdog starts finding anomalies after the minimum required history is available, and Watchdog improves as history grows. Six weeks of history generate the best performances.
+Watchdog starts finding anomalies after the minimum required history is available, and Watchdog improves as history grows. Best performances are obtained with six weeks of history.
 
 {{% /tab %}}
 {{% tab "Infrastructure" %}}
