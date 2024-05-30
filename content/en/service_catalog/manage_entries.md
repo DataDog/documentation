@@ -100,9 +100,9 @@ extensions:
 ## Automate common workflows
 Use [Workflow Automation][14] and [App Builder][24] to automate end-to-end processes. They integrate with Datadog's Service Catalog to enable dynamic and self-service workflows.
 
-{< callout url="https://www.datadoghq.com/dg/datadog-app-builder/" btn_hidden="false" header="Join the Beta!">}}
-Datadog App Builder is in private beta. Complete the form to request access.
-{{< /callout >}}
+{{< callout url="https://www.datadoghq.com/dg/datadog-app-builder/" d-toggle="modal" d_target="#signupModal" custom_class="sign-up-trigger">}}
+  Datadog App Builder is in private beta. Complete the form to request access.
+{{< /callout >}} 
 
 ### Create software template workflows using Cookiecutter
 To use software templates in Datadog, create a git repository with the desired template. Then, navigate to the [Workflow Automation][26] page to configure the template in Datadog. A common choice for templating is [Cookiecutter][25], an open source project for project templates and auto-generating new projects. 
