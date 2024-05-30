@@ -54,7 +54,7 @@ CSM is available in three packages: [CSM Enterprise][1], [CSM Pro][2], and [CSM 
 
 **Note**: You can enable features that aren't included in your package at any time by following the instructions on the [CSM Setup page][4].
 
-## Prerequsites
+## Prerequisites
 
 - The **minimum** Datadog Agent version required for CSM is `7.46` or higher.
 
