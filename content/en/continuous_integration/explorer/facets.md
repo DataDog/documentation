@@ -33,7 +33,6 @@ The [CI Visibility Explorer][4] includes the following out-of-the-box facets:
 | Job URL | Provider URL for a job execution. |
 | Stage Name | Name of the CI stage. |
 | Job Name | Name of the CI job. |
-| Pod Name | Kubernetes Pod Name. |
 | Kubernetes Namespace | The namespace in which the Kubernetes Pod is running. |
 | Kubernetes Pod Name | Name of the Kubernetes Pod. |
 | Image Tag | Kubernetes Container image tag. |
