@@ -246,9 +246,9 @@ With dd-trace-php 0.98.0+, you can specify a path to a log file for certain debu
 
 - **INI**: `datadog.trace.log_file`
 
-**Notes**: 
+**Notes**:
   - For details about where to set `DD_TRACE_LOG_FILE`, review [Configuring the PHP Tracing Library][2].
-  - If `DD_TRACE_LOG_FILE` is not specified, logs go to the default PHP error location (See **Option 2** for more details). 
+  - If `DD_TRACE_LOG_FILE` is not specified, logs go to the default PHP error location (See **Option 2** for more details).
 
 **Option 2:**
 
@@ -268,10 +268,9 @@ If you are configuring instead at the PHP level, use PHP's `error_log` ini param
 The release binary libraries are all compiled with debug symbols added to the optimized release. You can use GDB or LLDB to debug the library and to read core dumps. If you are building the library from source, pass the argument `-DCMAKE_BUILD_TYPE=RelWithDebInfo` to cmake to compile an optimized build with debug symbols.
 
 ```bash
-cd .build
-cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo ..
-make
-make install
+cmake -B .build -DCMAKE_BUILD_TYPE=RelWithDebInfo ..
+cmake --build .build -j
+cmake --install .build
 ```
 
 {{< /programming-lang >}}
@@ -453,7 +452,7 @@ YYYY-MM-DD HH:MM:SS.<integer> +00:00 [ERR] An error occurred while sending trace
 
 **Loading an integration:**
 
-Note: This log **does not** follow `DD_TRACE_LOG_FILE` (ini: `datadog.trace.log_file`) and is always routed to the ErrorLog directive. 
+Note: This log **does not** follow `DD_TRACE_LOG_FILE` (ini: `datadog.trace.log_file`) and is always routed to the ErrorLog directive.
 
 ```text
 [Mon MM  DD 19:56:23 YYYY] [YYYY-MM-DDT19:56:23+00:00] [ddtrace] [debug] - Loaded integration web

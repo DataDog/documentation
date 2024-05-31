@@ -1,5 +1,5 @@
 ---
-title: Flaky Test Retries
+title: Auto Test Retries
 kind: documentation
 description: Retry failing test cases to avoid failing the build because of flaky tests.
 further_reading:
@@ -16,13 +16,13 @@ further_reading:
 {{< /site-region >}}
 
 {{< callout url="#" btn_hidden="true" >}}
-Flaky Test Retries is in public beta.
+Auto Test Retries is in public beta.
 {{< /callout >}}
 
 ## Overview
 
-Test Visibility's Flaky Test Retries feature allows retrying flaky tests up to N times to avoid failing your build:
-a failing flaky test case is retried either until it passes successfully or until there are no more retry attempts left (in which case the build fails).
+Test Visibility's Auto Test Retries feature allows retrying failing tests up to N times to avoid failing your build due to flaky tests:
+a failing test case is retried either until it passes successfully or until there are no more retry attempts left (in which case the build fails).
 
 ## Setup
 
@@ -34,9 +34,9 @@ Ensure [Test Visibility][1] is configured for your test runs.
 
 ### Configuration
 
-After you have set up Test Visibility, you can configure Flaky Test Retries from the [Test Service Settings page][2].
+After you have set up Test Visibility, you can configure Auto Test Retries from the [Test Service Settings page][2].
 
-{{< img src="continuous_integration/flaky_test_retries_test_settings.png" alt="Flaky Test Retries in Test Service Settings." style="width:100%" >}}
+{{< img src="continuous_integration/auto_test_retries_test_settings.png" alt="Auto Test Retries in Test Service Settings." style="width:100%" >}}
 
 The default behavior of the feature is to retry any failing test case up to 5 times.
 This behavior can be fine-tuned with the following environment variables:
@@ -50,7 +50,7 @@ You can query the retried tests in the [Test Visibility Explorer][4]: they have 
 
 ## Troubleshooting
 
-If you suspect there are any issues with Flaky Test Retries, navigate to the [Test Service Settings page][2], look for your test service, and click **Configure**. Disable Flaky Test Retries by clicking on the toggle.
+If you suspect there are any issues with Auto Test Retries, navigate to the [Test Service Settings page][2], look for your test service, and click **Configure**. Disable Auto Test Retries by clicking on the toggle.
 
 ## Further Reading
 

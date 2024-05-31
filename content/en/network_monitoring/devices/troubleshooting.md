@@ -9,10 +9,6 @@ further_reading:
   text: "Monitor SNMP with Datadog"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Network Device Monitoring is not supported for this site.</div>
-{{< /site-region >}}
-
 ## Overview
 
 Use the information below for troubleshooting Datadog Network Device Monitoring. If you need additional help, contact [Datadog support][1].
