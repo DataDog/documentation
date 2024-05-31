@@ -82,7 +82,7 @@ LLMObs.enable(
 
 `integrations_enabled` - **default**: `true`
 : optional - _boolean_ 
-<br />A flag to enable automatically tracing LLM calls for Datadog's supported [LLM integrations](#llm-integrations). If not provided, this enables all supported LLM integrations by default. To avoid using the LLM integrations, set this value to `false`.
+<br />A flag to enable automatically tracing LLM calls for Datadog's supported [LLM integrations](#llm-integrations). If not provided, all supported LLM integrations are enabled by default. To avoid using the LLM integrations, set this value to `false`.
 
 `agentless_enabled`
 : optional - _boolean_ - **default**: `false`
@@ -604,22 +604,17 @@ def process_message():
 
 ### Distributed tracing
 
-The SDK supports tracing across distributed services or hosts.
+The SDK supports tracing across distributed services or hosts. Distributed tracing works by propagating span information across web requests.
 
-#### Automatic distributed tracing
-
-The `ddtrace` library provides some out-of-the-box integrations that support distributed tracing for popular [web framework][11] and [HTTP][12] libraries. If you are using any of these libraries, you must enable the corresponding integration with the `ddtrace.patch(<INTEGRATION_NAME>)` method. For example if you are using the `urllib3` and `fastAPI` libraries, you should add these to the top of your application's entrypoint file:
-
+The `ddtrace` library provides some out-of-the-box integrations that support distributed tracing for popular [web framework][11] and [HTTP][12] libraries. If your application makes requests using these supported libraries, you can enable distributed tracing by running:
 {{< code-block lang="python">}}
 from ddtrace import patch
-patch(urllib3=True, fastapi=True)
+patch(<INTEGRATION_NAME>=True)
 {{< /code-block >}}
 
-#### Manual distributed tracing
+If your application does not use any of these supported libraries, you can enable distributed tracing by manually propagating span information to and from HTTP headers. The SDK provides the helper methods `LLMObs.inject_distributed_headers()` and `LLMObs.activate_distributed_headers()` to inject and activate tracing contexts in request headers.
 
-If you are using libraries that are not supported by the `ddtrace` library's integrations, you need to manually propagate tracing contexts across distributed request headers. The SDK provides the helper methods `LLMObs.inject_distributed_headers()` and `LLMObs.activate_distributed_headers()` to inject and activate tracing contexts in request headers.
-
-##### Injecting distributed headers
+#### Injecting distributed headers
 
 The `LLMObs.inject_distributed_headers()` method takes a span and injects its context into the HTTP headers to be included in the request. This method accepts the following arguments:
 
@@ -629,9 +624,9 @@ The `LLMObs.inject_distributed_headers()` method takes a span and injects its co
 
 `span`
 : optional - _Span_ - **default**: `The current active span.`
-<br />The span to inject its context into the provided request headers. If not provided (as when using function decorators), this defaults to the current active span.
+<br />The span to inject its context into the provided request headers. Any spans  (including those with function decorators), this defaults to the current active span.
 
-##### Activating distributed headers
+#### Activating distributed headers
 
 The `LLMObs.activate_distributed_headers()` method takes HTTP headers and extracts tracing context attributes to activate in the new service.
 
@@ -644,7 +639,7 @@ This method accepts the following argument:
 <br />The HTTP headers to extract tracing context attributes.
 
 
-##### Example
+#### Example
 
 {{< code-block lang="python" filename="client.py" >}}
 from ddtrace.llmobs import LLMObs
