@@ -36,31 +36,9 @@ Before you begin, make sure you have already [installed and configured the Agent
 
 ## Instrument your application
 
-{{< tabs >}}
+Here is an example application that can be used for testing `dd-trace-cpp`.
+This application creates a tracer instance with the default settings and generates a trace with two spans, which is reported under the service name `my-service`.
 
-{{% tab "CMake" %}}
-To integrate the `dd-trace-cpp` library into your C++ project using CMake, follow these steps:
-````CMake
-include(FetchContent)
-
-FetchContent_Declare(
-  dd-trace-cpp
-  GIT_REPOSITORY https://github.com/DataDog/dd-trace-cpp
-  GIT_TAG        v0.2.0
-  GIT_SHALLOW    ON
-  GIT_PROGRESS   ON
-)
-
-FetchContent_MakeAvailable(dd-trace-cpp)
-
-# Add `tracer_example` target
-add_executable(tracer_example tracer_example.cpp)
-
-# Statically link against `dd-trace-cpp`
-# NOTE: To dynamically link against `dd-trace-cpp` use the `dd_trace_cpp_shared` target
-target_link_libraries(tracer_example dd_trace_cpp-static)
-````
-Here's an example of how to use the `dd-trace-cpp` library in your C++ code to create spans and traces:
 ```cpp
 // tracer_example.cpp
 #include <datadog/span_config.h>
@@ -97,6 +75,63 @@ int main() {
 }
 ```
 
+{{< tabs >}}
+
+{{% tab "CPM" %}}
+
+[CPM.cmake][1] is a cross-platform CMake script that adds dependency management capabilities to CMake.
+
+````CMake
+# In a CMakeLists.txt
+
+CPMAddPackage("gh:DataDog/dd-trace-cpp#0.2.1")
+
+# Add `tracer_example` target
+add_executable(tracer_example tracer_example.cpp)
+
+# Statically link against `dd-trace-cpp`
+# NOTE: To dynamically link against `dd-trace-cpp` use the `dd_trace::shared` target
+target_link_libraries(tracer_example dd_trace::static)
+````
+
+Build the example using the following commands:
+
+```bash
+cmake -B build .
+cmake --build build --target tracer_example -j
+
+./build/tracer_example
+DATADOG TRACER CONFIGURATION - {"collector":{"config":{"event_scheduler":{"type":"datadog::tracing::ThreadedEventScheduler" ... }}}
+```
+
+[1]: https://github.com/cpm-cmake/CPM.cmake
+{{% /tab %}}
+
+{{% tab "CMake" %}}
+To integrate the `dd-trace-cpp` library into your C++ project using CMake, follow these steps:
+````CMake
+include(FetchContent)
+
+FetchContent_Declare(
+  dd-trace-cpp
+  GIT_REPOSITORY https://github.com/DataDog/dd-trace-cpp
+  GIT_TAG        v0.2.0
+  GIT_SHALLOW    ON
+  GIT_PROGRESS   ON
+)
+
+FetchContent_MakeAvailable(dd-trace-cpp)
+
+# Add `tracer_example` target
+add_executable(tracer_example tracer_example.cpp)
+
+# Statically link against `dd-trace-cpp`
+# NOTE: To dynamically link against `dd-trace-cpp` use the `dd_trace_cpp_shared` target
+target_link_libraries(tracer_example dd_trace::static)
+````
+
+Build the example using the following commands:
+
 ```bash
 cmake -B build .
 cmake --build build --target tracer_example -j
@@ -108,6 +143,7 @@ DATADOG TRACER CONFIGURATION - {"collector":{"config":{"event_scheduler":{"type"
 {{% /tab %}}
 
 {{% tab "Manual" %}}
+
 To manually download and install the `dd-trace-cpp` library, run the following bash script:
 ```bash
 # Requires the "jq" command, which can be installed via
@@ -138,44 +174,11 @@ cmake -B build .
 cmake --build build -j
 cmake --install build
 ```
-After installing the `dd-trace-cpp` library, you can use it in your C++ code to create spans and traces. Here's an example:
-```cpp
-// tracer_example.cpp
-#include <datadog/span_config.h>
-#include <datadog/tracer.h>
-#include <datadog/tracer_config.h>
 
-#include <iostream>
-#include <string>
+By default, `cmake --install` places the shared library and public headers into the appropriate system directories (for example, `/usr/local/[...]`).
+To install them in a specific location, use `cmake --install build --prefix <INSTALL_DIR>` instead.
 
-namespace dd = datadog::tracing;
-
-int main() {
-  dd::TracerConfig config;
-  config.service = "my-service";
-
-  const auto validated_config = dd::finalize_config(config);
-  if (!validated_config) {
-    std::cerr << validated_config.error() << '\n';
-    return 1;
-  }
-
-  dd::Tracer tracer{*validated_config};
-  // Create some spans.
-  {
-    dd::SpanConfig options;
-    options.name = "A";
-    options.tags.emplace("tag", "123");
-    auto span_a = tracer.create_span(options);
-    auto span_b = span_a.create_child();
-    span_b.set_name("B");
-    span_b.set_tag("tag", "value");
-  }
-
-  return 0;
-}
-```
-
+### Dynamic Linking
 Link against `libdd_trace_cpp.so`, making sure the shared library is in `LD_LIBRARY_PATH`.
 
 ````bash

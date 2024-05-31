@@ -84,7 +84,7 @@ The following tables list the different NPM metrics you can create monitors on.
 Configure monitors to trigger if the query value crosses a threshold and customize advanced alert options for recovery thresholds and evaluations delays. For more information, see [Configure Monitors][5].
 
 ### Notifications
-For detailed instructions on the Notify your team section, see the [Notifications][6] page.
+For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][6] page.
 
 ## Common monitors
 You can start creating monitors on NPM with the following common monitors. These provide a good starting point to track your network and get alerted if your network is experiencing unusual traffic and potentially experiencing unexpected network behavior. 

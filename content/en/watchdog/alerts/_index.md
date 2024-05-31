@@ -111,6 +111,22 @@ Watchdog requires some data to establish a baseline of expected behavior. For me
 Watchdog starts finding anomalies after the minimum required history is available, and Watchdog improves as history grows. Best performances are obtained with six weeks of history.
 
 {{% /tab %}}
+{{% tab "USM" %}}
+
+Watchdog scans all services and resources to look for anomalies on the following metrics:
+
+  * Error rate
+  * Latency
+  * Hits (request rate)
+
+Watchdog filters out minimally-used endpoints and services to reduce noise and avoid anomalies on small amounts of traffic. Additionally, if an anomaly on hit rate is detected but has no impact on latency or error rate, the anomaly is ignored. 
+
+#### Required data history
+
+Watchdog requires data to establish a baseline of expected behavior. For metric anomalies, the minimum history is two weeks. 
+Watchdog starts finding anomalies after the minimum required history is available, and Watchdog improves as history grows. Best performances are obtained with six weeks of history.
+
+{{% /tab %}}
 {{% tab "Infrastructure" %}}
 
 Watchdog looks at infrastructure metrics from the following integrations:
