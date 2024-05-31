@@ -6,6 +6,7 @@
 | `http.response.status_code` | `http.status_code` | 
 | `http.request.body.size` | `http.request.content_length` |
 | `http.request.header.referrer` | `http.referrer` |
+| `http.request.header.<header-name>` | `http.request.headers.<header-name>` |
 | `http.request.method` | `http.method` |
 | `http.route` | `http.route` |
 | `network.protocol.version` | `http.version` |
