@@ -198,7 +198,7 @@ Datadog.initialize(
 {{< /tabs >}}
 {{< /site-region >}}
 
-To be compliant with the GDPR regulation, the SDK requires the `trackingConsent` value at initialization.
+To be GDPR compliant, the SDK requires the `trackingConsent` value at initialization.
 The `trackingConsent` can be one of the following values:
 
 - `.pending`: The SDK starts collecting and batching the data but does not send it to Datadog. The SDK waits for the new tracking consent value to decide what to do with the batched data.
