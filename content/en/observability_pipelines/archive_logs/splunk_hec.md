@@ -21,40 +21,39 @@ This document walks through the following steps:
 {{% observability_pipelines/prerequisites/splunk_hec %}}
 
 ## Configure Log Archives
+
 Select the cloud provider you are using to archive your logs.
 
-{{% collapse-content title="Amazon S3" level="h4" %}}
+{{% collapse-content title="Amazon S3" level="h2" %}}
+
 {{% observability_pipelines/configure_log_archive/instructions %}}
+
 {{< tabs >}}
 {{% tab "Docker" %}}
 
 {{% observability_pipelines/configure_log_archive/docker %}}
-{{% observability_pipelines/configure_log_archive/connect_s3_to_datadog_log_archives %}}
 
 {{% /tab %}}
 {{% tab "Amazon EKS" %}}
 
 {{% observability_pipelines/configure_log_archive/amazon_eks %}}
-{{% observability_pipelines/configure_log_archive/connect_s3_to_datadog_log_archives %}}
 
 {{% /tab %}}
 {{% tab "Linux (APT)" %}}
 
 {{% observability_pipelines/configure_log_archive/linux_apt %}}
-{{% observability_pipelines/configure_log_archive/connect_s3_to_datadog_log_archives %}}
 
 {{% /tab %}}
 {{% tab "Linux (RPM)" %}}
 
 {{% observability_pipelines/configure_log_archive/linux_rpm %}}
-{{% observability_pipelines/configure_log_archive/connect_s3_to_datadog_log_archives %}}
 
 {{% /tab %}}
 {{< /tabs >}}
+{{% observability_pipelines/configure_log_archive/connect_s3_to_datadog_log_archives %}}
 
 {{% /collapse-content %}}
-
-{{% collapse-content title="Google Cloud Storage" level="h4" %}}
+{{% collapse-content title="Google Cloud Storage" level="h2" %}}
 
 See the following [Log Archives][100001] steps to configure an archive in Google Cloud Storage:
 
@@ -88,8 +87,7 @@ See the following [Log Archives][100001] steps to configure an archive in Google
 [100004]: /logs/log_configuration/archives/#route-your-logs-to-a-bucket
 
 {{% /collapse-content %}}
-
-{{% collapse-content title="Azure Storage" level="h4" %}}
+{{% collapse-content title="Azure Storage" level="h2" %}}
 
 See the following [Log Archives][100001] steps to configure an archive in Azure Storage:
 
@@ -143,17 +141,17 @@ Enter the following information based on your selected logs destinations.
 
 Select the cloud provider you are using to archive your logs.
 
-{{% collapse-content title="Amazon S3" level="h4" %}}
+{{% collapse-content title="Amazon S3" level="h2" %}}
 
 {{% observability_pipelines/destination_settings/datadog_archives %}}
 
 {{% /collapse-content %}}
-{{% collapse-content title="Google Cloud Storage" level="h4" %}}
+{{% collapse-content title="Google Cloud Storage" level="h2" %}}
 
 TKTK
 
 {{% /collapse-content %}}
-{{% collapse-content title="Azure Storage" level="h4" %}}
+{{% collapse-content title="Azure Storage" level="h2" %}}
 
 TKTK
 
@@ -221,19 +219,19 @@ TKTK
 {{< tabs >}}
 {{% tab "Datadog Archives" %}}
 
-Select the cloud provider you are using to archive your logs.
+For the Datadog Archives destination, select the cloud provider you are using to archive your logs.
 
-{{% collapse-content title="Amazon S3" level="h4" %}}
+{{% collapse-content title="Amazon S3" level="h2" %}}
 
 {{% observability_pipelines/destination_env_vars/datadog_archives %}}
 
 {{% /collapse-content %}}
-{{% collapse-content title="Google Cloud Storage" level="h4" %}}
+{{% collapse-content title="Google Cloud Storage" level="h2" %}}
 
 TKTK
 
 {{% /collapse-content %}}
-{{% collapse-content title="Azure Storage" level="h4" %}}
+{{% collapse-content title="Azure Storage" level="h2" %}}
 
 TKTK
 
