@@ -305,7 +305,7 @@ To install the Datadog NGINX module, follow these instructions:
 Each release includes two tarballs per combination of NGINX version and CPU architecture.
 The main tarball contains a single file, `ngx_http_datadog_module.so`, which is the Datadog NGINX module. The second one is debug symbols, it is optional.
 
-For simplicity, the following script download only the module for the latest release:
+For simplicity, the following script downloads only the module for the latest release:
 
 ```bash
 get_latest_release() {
