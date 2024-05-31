@@ -21,14 +21,12 @@ The C++ Datadog Trace library is open source - view the [GitHub repository][1] f
 This library requires C++17 compiler to build.
 
 Supported platforms include:
-- `x86_64` and `arm64` Linux. 
+- `x86_64` and `arm64` Linux.
+- `x86_64` Windows.
 - `arm64` macOS.
-
-To request Windows support, [contact Datadog support][2].
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/dd-trace-cpp
-[2]: /help/
