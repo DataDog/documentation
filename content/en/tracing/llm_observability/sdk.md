@@ -624,7 +624,7 @@ The `LLMObs.inject_distributed_headers()` method takes a span and injects its co
 
 `span`
 : optional - _Span_ - **default**: `The current active span.`
-<br />The span to inject its context into the provided request headers. Any spans  (including those with function decorators), this defaults to the current active span.
+<br />The span to inject its context into the provided request headers. Any spans (including those with function decorators), this defaults to the current active span.
 
 #### Activating distributed headers
 
