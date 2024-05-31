@@ -46,23 +46,55 @@ To use SaaS Cost Integrations, you must configure [Cloud Cost Management][2] for
 
 Navigate to [**Infrastructure > Cloud Costs > Settings > Accounts**][8] and click **Configure** on a provider to collect cost data. 
 
-{{< img src="cloud_cost/saas_costs/accounts.png" alt="Add your account with Fastly, Snowflake, Confluent, MongoDB, Databricks, and OpenAI to collect cost data." style="width:100%" >}}
+{{< img src="cloud_cost/saas_costs/all_accounts.png" alt="Add your accounts with AWS, Azure, Google Cloud to collect cost data. You can also add your accounts for Fastly, Snowflake, Confluent Cloud, MongoDB, Databricks, OpenAI, and Twilio" style="width:100%" >}}
 
 {{< tabs >}}
-{{% tab "Fastly" %}}
+{{% tab "Databricks" %}}
 
-1. Create an API token with at least the `"global:read"` scope and `"Billing"` role on the [Personal API tokens][101] page in Fastly.
-2. Navigate to the [Fastly integration tile][102] in Datadog and click **Add Account**.
-3. Enter your Fastly account name and API token. 
-4. Click the checkbox for `Collect Billing Data`.
+<div class="alert alert-warning">The Databricks SaaS Cost integration is in private beta.</div>
+
+1. Navigate to the [Databricks integration tile][101] in Datadog and click **Add Account**.
+2. Enter a `System Tables SQL Warehouse ID` corresponding to your Databricks instance's warehouse to query for system table billing data.
+3. Under the **Resources** section, click the toggle for each account to enable `Databricks Cost Data Collection`.
+4. Click **Save**.
+
+{{< img src="cloud_cost/saas_costs/databricks_setup.png" alt="Integrate with Databricks to collect cost data." style="width:100%" >}}
+
+Your Databricks cost data for the past 15 months can be accessed in Cloud Cost Management after 24 hours.
+
+[101]: https://app.datadoghq.com/integrations/databricks
+
+{{% /tab %}}
+{{% tab "Confluent Cloud" %}}
+
+1. Create or acquire an API key with the organizational admin role in Confluent Cloud.
+2. Navigate to the [Confluent Cloud integration tile][101] in Datadog and click **Add Account**.
+3. Enter your Confluent Cloud account name, API key, API secret, and optionally, specify tags.
+4. Under the **Additional Options** section, click the toggle for `Collecting Billing Data`.
 5. Click **Save**.
 
-{{< img src="cloud_cost/saas_costs/fastly_setup.png" alt="Integrate with Fastly to collect cost data." style="width:100%" >}}
+{{< img src="cloud_cost/saas_costs/confluent_setup.png" alt="Integrate with Confluent to collect cost data." style="width:100%" >}}
 
-Your Fastly cost data for the past 15 months can be accessed in Cloud Cost Management after 24 hours.
+Your Confluent Cloud cost data for the past 15 months can be accessed in Cloud Cost Management after 24 hours.
 
-[101]: https://manage.fastly.com/account/personal/tokens
-[102]: https://app.datadoghq.com/integrations/fastly
+[101]: https://app.datadoghq.com/integrations/confluent-cloud
+
+{{% /tab %}}
+{{% tab "MongoDB" %}}
+
+<div class="alert alert-warning">The MongoDB SaaS Cost integration is in private beta.</div>
+
+1. [Create an API token][101] in MongoDB with `Organization Member` permissions, and add `Organization Read Only` permissions for cluster resource tags.
+2. Navigate to the [MongoDB Cost Management integration tile][102] in Datadog and click **Add New**.
+3. Enter your MongoDB account name, public key, private key, organizational ID, and optionally, specify tags.
+4. Click **Save**.
+
+{{< img src="cloud_cost/saas_costs/mongodb_setup.png" alt="Integrate with MongoDB to collect cost data." style="width:100%" >}}
+
+Your MongoDB cost data for the past 15 months can be accessed in Cloud Cost Management after 24 hours.
+
+[101]: https://www.mongodb.com/docs/cloud-manager/reference/user-roles/#organization-roles
+[102]: https://app.datadoghq.com/integrations/mongodb-cost-management
 
 {{% /tab %}}
 {{% tab "Snowflake" %}}
@@ -117,70 +149,6 @@ Your Snowflake cost data for the past 15 months can be accessed in Cloud Cost Ma
 [104]: https://docs.snowflake.com/en/user-guide/key-pair-auth#assign-the-public-key-to-a-snowflake-user
 
 {{% /tab %}}
-{{% tab "Confluent Cloud" %}}
-
-1. Create or acquire an API key with the organizational admin role in Confluent Cloud.
-2. Navigate to the [Confluent Cloud integration tile][101] in Datadog and click **Add Account**.
-3. Enter your Confluent Cloud account name, API key, API secret, and optionally, specify tags.
-4. Under the **Additional Options** section, click the toggle for `Collecting Billing Data`.
-5. Click **Save**.
-
-{{< img src="cloud_cost/saas_costs/confluent_setup.png" alt="Integrate with Confluent to collect cost data." style="width:100%" >}}
-
-Your Confluent Cloud cost data for the past 15 months can be accessed in Cloud Cost Management after 24 hours.
-
-[101]: https://app.datadoghq.com/integrations/confluent-cloud
-
-{{% /tab %}}
-{{% tab "Twilio" %}}
-
-<div class="alert alert-warning">The Twilio SaaS Cost integration is in private beta.</div>
-
-1. Navigate to the [Twilio integration tile][101] in Datadog and click **Add Account**.
-2. Under the **Resources** section, click the toggle for each account to enable `Twilio in Cloud Cost Management`.
-3. Enter an `Account SID` for your Twilio account.
-4. Click **Save**.
-
-{{< img src="cloud_cost/saas_costs/twilio_setup.png" alt="Integrate with Twilio to collect cost data." style="width:100%" >}}
-
-Your Twilio cost data for the past 15 months can be accessed in Cloud Cost Management after 24 hours.
-
-[101]: https://app.datadoghq.com/integrations/twilio
-
-{{% /tab %}}
-{{% tab "MongoDB" %}}
-
-<div class="alert alert-warning">The MongoDB SaaS Cost integration is in private beta.</div>
-
-1. [Create an API token][101] in MongoDB with `Organization Member` permissions, and add `Organization Read Only` permissions for cluster resource tags.
-2. Navigate to the [MongoDB Cost Management integration tile][102] in Datadog and click **Add New**.
-3. Enter your MongoDB account name, public key, private key, organizational ID, and optionally, specify tags.
-4. Click **Save**.
-
-{{< img src="cloud_cost/saas_costs/mongodb_setup.png" alt="Integrate with MongoDB to collect cost data." style="width:100%" >}}
-
-Your MongoDB cost data for the past 15 months can be accessed in Cloud Cost Management after 24 hours.
-
-[101]: https://www.mongodb.com/docs/cloud-manager/reference/user-roles/#organization-roles
-[102]: https://app.datadoghq.com/integrations/mongodb-cost-management
-
-{{% /tab %}}
-{{% tab "Databricks" %}}
-
-<div class="alert alert-warning">The Databricks SaaS Cost integration is in private beta.</div>
-
-1. Navigate to the [Databricks integration tile][101] in Datadog and click **Add Account**.
-2. Enter a `System Tables SQL Warehouse ID` corresponding to your Databricks instance's warehouse to query for system table billing data.
-3. Under the **Resources** section, click the toggle for each account to enable `Databricks Cost Data Collection`.
-4. Click **Save**.
-
-{{< img src="cloud_cost/saas_costs/databricks_setup.png" alt="Integrate with Databricks to collect cost data." style="width:100%" >}}
-
-Your Databricks cost data for the past 15 months can be accessed in Cloud Cost Management after 24 hours.
-
-[101]: https://app.datadoghq.com/integrations/databricks
-
-{{% /tab %}}
 {{% tab "OpenAI" %}}
 
 <div class="alert alert-warning">The OpenAI SaaS Cost integration is in private beta.</div>
@@ -197,6 +165,38 @@ Your OpenAI cost data for the past 15 months can be accessed in Cloud Cost Manag
 
 [101]: https://platform.openai.com/docs/quickstart/account-setup
 [102]: https://app.datadoghq.com/integrations/openai
+
+{{% /tab %}}
+{{% tab "Fastly" %}}
+
+1. Create an API token with at least the `"global:read"` scope and `"Billing"` role on the [Personal API tokens][101] page in Fastly.
+2. Navigate to the [Fastly integration tile][102] in Datadog and click **Add Account**.
+3. Enter your Fastly account name and API token. 
+4. Click the checkbox for `Collect Billing Data`.
+5. Click **Save**.
+
+{{< img src="cloud_cost/saas_costs/fastly_setup.png" alt="Integrate with Fastly to collect cost data." style="width:100%" >}}
+
+Your Fastly cost data for the past 15 months can be accessed in Cloud Cost Management after 24 hours.
+
+[101]: https://manage.fastly.com/account/personal/tokens
+[102]: https://app.datadoghq.com/integrations/fastly
+
+{{% /tab %}}
+{{% tab "Twilio" %}}
+
+<div class="alert alert-warning">The Twilio SaaS Cost integration is in private beta.</div>
+
+1. Navigate to the [Twilio integration tile][101] in Datadog and click **Add Account**.
+2. Under the **Resources** section, click the toggle for each account to enable `Twilio in Cloud Cost Management`.
+3. Enter an `Account SID` for your Twilio account.
+4. Click **Save**.
+
+{{< img src="cloud_cost/saas_costs/twilio_setup.png" alt="Integrate with Twilio to collect cost data." style="width:100%" >}}
+
+Your Twilio cost data for the past 15 months can be accessed in Cloud Cost Management after 24 hours.
+
+[101]: https://app.datadoghq.com/integrations/twilio
 
 {{% /tab %}}
 {{< /tabs >}}
