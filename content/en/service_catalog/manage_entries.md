@@ -108,7 +108,7 @@ Use [Workflow Automation][14] and [App Builder][24] to automate end-to-end proce
 To use software templates in Datadog, create a git repository with the desired template. Then, navigate to the [Workflow Automation][26] page to configure the template in Datadog. A common choice for templating is [Cookiecutter][25], an open source project for project templates and auto-generating new projects. 
 1. **Create a workflow with below steps**:
    - Download the template repository files from the git repository of your choice. For example, using the Github, Gitlab, or HTTP actions in worklow editor
-   - Generate the new project files from the template via Cookiecutter. This can be done by creating a lambda function to perform Cookiecutter and calling it via the Invoke Lambda Function action
+   - Generate the new project files from the template via Cookiecutter. This can be done by creating a lambda function to perform Cookiecutter and calling it via the 'Invoke Lambda Function' action
    - Upload the newly created project files back to the repository, again using the Github, Gitlab, or HTTP actions
    - Save the workflow
 2. **Create your templating app with App Builder**:
