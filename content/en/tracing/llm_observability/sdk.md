@@ -85,7 +85,7 @@ LLMObs.enable(
 <br />A flag to enable automatically tracing LLM calls for Datadog's supported [LLM integrations](#llm-integrations). If not provided, all supported LLM integrations will be enabled by default. To avoid using the LLM integrations, set this value to `false`.
 
 `agentless_enabled`
-: optional - _boolean_
+: optional - _boolean_ - **default**: `false`
 <br />Only required if you are not using the Datadog Agent, in which case this should be set to `True`. This configures the `ddtrace` library to not send any data that requires the Datadog Agent. If not provided, this defaults to the value of `DD_LLMOBS_AGENTLESS_ENABLED`.
 
 `site`
