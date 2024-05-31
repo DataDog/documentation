@@ -67,6 +67,8 @@ Your Databricks cost data for the past 15 months can be accessed in Cloud Cost M
 {{% /tab %}}
 {{% tab "Confluent Cloud" %}}
 
+<div class="alert alert-warning">The Confluent Cloud SaaS Cost integration is in public beta.</div>
+
 1. Create or acquire an API key with the organizational admin role in Confluent Cloud.
 2. Navigate to the [Confluent Cloud integration tile][101] in Datadog and click **Add Account**.
 3. Enter your Confluent Cloud account name, API key, API secret, and optionally, specify tags.
@@ -98,6 +100,8 @@ Your MongoDB cost data for the past 15 months can be accessed in Cloud Cost Mana
 
 {{% /tab %}}
 {{% tab "Snowflake" %}}
+
+<div class="alert alert-warning">The Snowflake SaaS Cost integration is in public beta.</div>
 
 1. Navigate to the [Snowflake integration tile][101] in Datadog and click **Add Snowflake Account**.
 2. Enter your Snowflake account URL, for example: `https://xyz12345.us-east-1.snowflakecomputing.com`.
@@ -168,6 +172,8 @@ Your OpenAI cost data for the past 15 months can be accessed in Cloud Cost Manag
 
 {{% /tab %}}
 {{% tab "Fastly" %}}
+
+<div class="alert alert-warning">The Fastly SaaS Cost integration is in public beta.</div>
 
 1. Create an API token with at least the `"global:read"` scope and `"Billing"` role on the [Personal API tokens][101] page in Fastly.
 2. Navigate to the [Fastly integration tile][102] in Datadog and click **Add Account**.
