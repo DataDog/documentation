@@ -135,7 +135,7 @@ To set up a monitor that alerts on your CI pipeline when the average duration in
 1. Select a common monitor type for CI pipelines to get started, for example: `Long Running Pipeline` to trigger alerts when a pipeline has been running for too long or `Failed Job` to trigger alerts for job failures, or customize your own search query. In this example, enter `@ci.pipeline.name:test_and_deploy_cart` and select the Avg of `Duration (@duration)`.
 1. In the `Evaluate the query over the` section, select **last 1 day**. 
 1. Set the alert conditions to trigger when the evaluated value is **above** the threshold, and specify values for the alert or warning thresholds, such as `Alert threshold > 300000000000`.
-1. In the `Notify your team` section, configure your monitor's notification settings.
+1. In the `Configure notifications and automations` section, configure your monitor's notification settings.
 1. Set permissions for the monitor.
 1. Click **Create**.
 

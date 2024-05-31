@@ -23,9 +23,9 @@ This topic explains how Cloud Security Management Threats (CSM Threats) actively
 
 ## Proactively block threats with Active Protection
 
-By default, all OOTB Agent threat detection rules are enabled and actively monitoring for threats.
+By default, all OOTB Agent crypto mining threat detection rules are enabled and actively monitoring for threats.
 
-[Active Protection][12] enables you to proactively block and terminate threats identified by the Datadog Agent threat detection rules.
+[Active Protection][12] enables you to proactively block and terminate crypto mining threats identified by the Datadog Agent threat detection rules.
 
 ## CSM Threats rules construction
 
@@ -69,7 +69,7 @@ CSM Threats uses the following pipeline when evaluating events:
 
 The following diagram illustrates this pipeline:
 
-{{< img src="security/cws/threat_detection_pipeline.png" alt="CMS Threats detection pipeline" style="width:100%;" >}}
+{{< img src="security/cws/threat_detection_pipeline_2.png" alt="CMS Threats detection pipeline" style="width:100%;" >}}
 
 ### Saving resources by design
 

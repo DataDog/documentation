@@ -96,7 +96,7 @@ $$\text"burn rate" = {7 \text"days" * 24 \text"hours" * 10% \text"error budget c
    * Datadog supports a maximum value of 48 hours for the long window. Your long window must be in the range of `1 hour <= long window <= 48 hours`.
    * The short window is then automatically calculated in the UI as `short window = 1/12 * long window`.
    * You can specify a different short window value using the [API or Terraform](#api-and-terraform), but it must always be less than the long window.
-5. Add [Notification information][4] into the **Say what's happening** and **Notify your team** sections.
+5. Add [Notification information][4] into the **Configure notifications and automations** section.
 6. Click the **Save and Exit** button on the SLO configuration page.
 
 ### Examples
