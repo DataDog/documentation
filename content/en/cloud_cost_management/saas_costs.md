@@ -155,7 +155,7 @@ Your Snowflake cost data for the past 15 months can be accessed in Cloud Cost Ma
 {{% /tab %}}
 {{% tab "OpenAI" %}}
 
-<div class="alert alert-warning">The OpenAI SaaS Cost integration is in private beta.</div>
+<div class="alert alert-warning">The OpenAI SaaS Cost integration is in public beta.</div>
 
 1. [Create an API key][101] in your account settings in OpenAI.
 2. Navigate to the [OpenAI integration tile][102] in Datadog and click **Add Account**.
