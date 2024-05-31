@@ -34,6 +34,8 @@ Unless otherwise stated, you can convert between system properties and environme
 
 ## Configuration options
 
+### Unified service tagging
+
 `dd.service`
 : **Environment Variable**: `DD_SERVICE`<br>
 **Default**: `unnamed-java-app`<br>
@@ -55,11 +57,28 @@ Your application environment (for example, production, staging). Available for v
 **Default**: `null`<br>
 Your application version (for example, 2.5, 202003181415, 1.3-alpha). Available for versions 0.48+.
 
-`dd.logs.injection`
-: **Environment Variable**: `DD_LOGS_INJECTION`<br>
-**Default**: `true`<br>
-Enabled automatic MDC key injection for Datadog trace and span IDs. See [Advanced Usage][2] for details.<br><br>
-**Beta**: Starting in version 1.18.3, if [Agent Remote Configuration][3] is enabled where this service runs, you can set `DD_LOGS_INJECTION` in the [Service Catalog][4] UI.
+### Errors
+
+`dd.http.client.tag.query-string`
+: **Environment Variable**: `DD_HTTP_CLIENT_TAG_QUERY_STRING`<br>
+**Default**: `false`<br>
+When set to `true` query string parameters and fragment get added to web client spans
+
+`dd.http.client.error.statuses`
+: **Environment Variable**: `DD_HTTP_CLIENT_ERROR_STATUSES`<br>
+**Default**: `400-499`<br>
+A range of errors can be accepted. By default 4xx errors are reported as errors for http clients. This configuration overrides that. Ex. `dd.http.client.error.statuses=400-403,405,410-499`
+
+`dd.http.server.error.statuses`
+: **Environment Variable**: `DD_HTTP_SERVER_ERROR_STATUSES`<br>
+**Default**: `500-599`<br>
+A range of errors can be accepted. By default 5xx status codes are reported as errors for http servers. This configuration overrides that. Ex. `dd.http.server.error.statuses=500,502-599`
+
+### Spans
+
+### Sampling
+
+### Traces
 
 `dd.trace.config`
 : **Environment Variable**: `DD_TRACE_CONFIG`<br>
@@ -76,11 +95,6 @@ Dynamically rename services via configuration. Useful for making databases have 
 : **Environment Variable**: `DD_WRITER_TYPE`<br>
 **Default**: `DDAgentWriter`<br>
 Default value sends traces to the Agent. Configuring with `LoggingWriter` instead writes traces out to the console.
-
-`dd.agent.host`
-: **Environment Variable**: `DD_AGENT_HOST`<br>
-**Default**: `localhost`<br>
-Hostname for where to send traces to. If using a containerized environment, configure this to be the host IP. See [Tracing Docker Applications][5] for more details.
 
 `dd.trace.agent.port`
 : **Environment Variable**: `DD_TRACE_AGENT_PORT`<br>
@@ -109,11 +123,6 @@ Timeout in seconds for network interactions with the Datadog Agent.
 Accepts a map of case-insensitive header keys to tag names and automatically applies matching header values as tags on traces. Also accepts entries without a specified tag name that are automatically mapped to tags of the form `http.request.headers.<header-name>` and `http.response.headers.<header-name>` respectively.<br><br>
 Prior to version 0.96.0 this setting only applied to request header tags. To change back to the old behavior, add the setting `-Ddd.trace.header.tags.legacy.parsing.enabled=true` or the environment variable `DD_TRACE_HEADER_TAGS_LEGACY_PARSING_ENABLED=true`.<br><br>
 **Beta**: Starting in version 1.18.3, if [Agent Remote Configuration][3] is enabled where this service runs, you can set `DD_TRACE_HEADER_TAGS` in the [Service Catalog][4] UI.
-
-`dd.trace.rate.limit`
-: **Environment Variable**: `DD_TRACE_RATE_LIMIT`<br>
-**Default**: `100`<br>
-Maximum number of spans to sample per second, per process, when `DD_TRACE_SAMPLING_RULES` or `DD_TRACE_SAMPLE_RATE` is set. Otherwise, the Datadog Agent controls rate limiting.
 
 `dd.trace.request_header.tags`
 : **Environment Variable**: `DD_TRACE_REQUEST_HEADER_TAGS`<br>
@@ -165,26 +174,6 @@ Set a number of partial spans to flush on. Useful to reduce memory overhead when
 **Example**: `aws.service`<br>
 Used to rename the service name associated with spans to be identified with the corresponding span tag
 
-`dd.trace.db.client.split-by-instance`
-: **Environment Variable**: `DD_TRACE_DB_CLIENT_SPLIT_BY_INSTANCE` <br>
-**Default**: `false`<br>
-When set to `true` db spans get assigned the instance name as the service name
-
-`dd.trace.db.client.split-by-host`
-: **Environment Variable**: `DD_TRACE_DB_CLIENT_SPLIT_BY_HOST` <br>
-**Default**: `false`<br>
-When set to `true` db spans get assigned the remote database hostname as the service name
-
-`dd.trace.elasticsearch.body.enabled`
-: **Environment Variable**: `DD_TRACE_ELASTICSEARCH_BODY_ENABLED` <br>
-**Default**: `false`<br>
-When set to `true`, the body is added to Elasticsearch and OpenSearch spans.
-
-`dd.trace.elasticsearch.params.enabled`
-: **Environment Variable**: `DD_TRACE_ELASTICSEARCH_PARAMS_ENABLED` <br>
-**Default**: `true`<br>
-When set to `true`, the query string parameters are added to Elasticsearch and OpenSearch spans.
-
 `dd.trace.health.metrics.enabled`
 : **Environment Variable**: `DD_TRACE_HEALTH_METRICS_ENABLED`<br>
 **Default**: `true`<br>
@@ -200,20 +189,53 @@ Statsd host to send health metrics to
 **Default**: Same as `dd.jmxfetch.statsd.port` <br>
 Statsd port to send health metrics to
 
-`dd.http.client.tag.query-string`
-: **Environment Variable**: `DD_HTTP_CLIENT_TAG_QUERY_STRING`<br>
+`dd.trace.obfuscation.query.string.regexp`
+: **Environment Variable**: `DD_TRACE_OBFUSCATION_QUERY_STRING_REGEXP`<br>
+**Default**: `null`<br>
+A regex to redact sensitive data from incoming requests' query string reported in the `http.url` tag (matches are replaced with <redacted>).
+
+`dd.trace.servlet.async-timeout.error`
+: **Environment Variable**: `DD_TRACE_SERVLET_ASYNC_TIMEOUT_ERROR` <br>
+**Default**: `true`<br>
+By default, long running asynchronous requests will be marked as an error, setting this value to false allows to mark all timeouts as successful requests.
+
+`dd.trace.startup.logs`
+: **Environment Variable**: `DD_TRACE_STARTUP_LOGS`<br>
+**Default**: `true`<br>
+When `false`, informational startup logging is disabled. Available for versions 0.64+.
+
+`dd.trace.servlet.principal.enabled`
+: **Environment Variable**: `DD_TRACE_SERVLET_PRINCIPAL_ENABLED`<br>
 **Default**: `false`<br>
-When set to `true` query string parameters and fragment get added to web client spans
+When `true`, user principal is collected. Available for versions 0.61+.
 
-`dd.http.client.error.statuses`
-: **Environment Variable**: `DD_HTTP_CLIENT_ERROR_STATUSES`<br>
-**Default**: `400-499`<br>
-A range of errors can be accepted. By default 4xx errors are reported as errors for http clients. This configuration overrides that. Ex. `dd.http.client.error.statuses=400-403,405,410-499`
+`dd.trace.propagation.style.inject`
+: **Environment Variable**: `DD_TRACE_PROPAGATION_STYLE_INJECT`<br>
+**Default**: `datadog,tracecontext`<br>
+A comma-separated list of header formats to include to propagate distributed traces between services.<br>
+Available since version 1.9.0
 
-`dd.http.server.error.statuses`
-: **Environment Variable**: `DD_HTTP_SERVER_ERROR_STATUSES`<br>
-**Default**: `500-599`<br>
-A range of errors can be accepted. By default 5xx status codes are reported as errors for http servers. This configuration overrides that. Ex. `dd.http.server.error.statuses=500,502-599`
+`dd.trace.propagation.style.extract`
+: **Environment Variable**: `DD_TRACE_PROPAGATION_STYLE_EXTRACT`<br>
+**Default**: `datadog,tracecontext`<br>
+A comma-separated list of header formats from which to attempt to extract distributed tracing propagation data. The first format found with complete and valid headers is used to define the trace to continue.<br>
+Available since version 1.9.0
+
+`dd.trace.propagation.style`
+: **Environment Variable**: `DD_TRACE_PROPAGATION_STYLE`<br>
+**Default**: `datadog,tracecontext`<br>
+A comma-separated list of header formats from which to attempt to inject and extract distributed tracing propagation data. The first format found with complete and valid headers is used to define the trace to continue. The more specific `dd.trace.propagation.style.inject` and `dd.trace.propagation.style.extract` configuration settings take priority when present.<br>
+Available since version 1.9.0
+
+`trace.propagation.extract.first`
+: **Environment Variable**: `DD_TRACE_PROPAGATION_EXTRACT_FIRST`<br>
+**Default**: `false`<br>
+When set to `true`, stop extracting trace context when a valid one is found.
+
+`dd.trace.rate.limit`
+: **Environment Variable**: `DD_TRACE_RATE_LIMIT`<br>
+**Default**: `100`<br>
+Maximum number of spans to sample per second, per process, when `DD_TRACE_SAMPLING_RULES` or `DD_TRACE_SAMPLE_RATE` is set. Otherwise, the Datadog Agent controls rate limiting.
 
 `dd.http.server.tag.query-string`
 : **Environment Variable**: `DD_HTTP_SERVER_TAG_QUERY_STRING`<br>
@@ -225,10 +247,85 @@ When set to `true` query string parameters and fragment get added to web server 
 **Default**: `true`<br>
 When set to `false` http framework routes are not used for resource names. _This can change resource names and derived metrics if changed._
 
+`dd.trace.128.bit.traceid.generation.enabled`
+: **Environment Variable**: `DD_TRACE_128_BIT_TRACEID_GENERATION_ENABLED`<br>
+**Default**: `true`<br>
+When `true`, the tracer generates 128 bit Trace IDs, and encodes Trace IDs as 32 lowercase hexadecimal characters with zero padding.
+
+`dd.trace.128.bit.traceid.logging.enabled`
+: **Environment Variable**: `DD_TRACE_128_BIT_TRACEID_LOGGING_ENABLED`<br>
+**Default**: `false`<br>
+When `true`, the tracer will inject 128 bit Trace IDs as 32 lowercase hexadecimal characters with zero padding, and 64 bit Trace IDs as decimal numbers. Otherwise, the tracer always injects Trace IDs as decimal numbers.
+
+`dd.trace.otel.enabled`
+: **Environment Variable**: `DD_TRACE_OTEL_ENABLED`<br>
+**Default**: `false`<br>
+When `true`, OpenTelemetry-based tracing for [custom][16] instrumentation is enabled.
+
+### Logs
+
+`dd.logs.injection`
+: **Environment Variable**: `DD_LOGS_INJECTION`<br>
+**Default**: `true`<br>
+Enabled automatic MDC key injection for Datadog trace and span IDs. See [Advanced Usage][2] for details.<br><br>
+**Beta**: Starting in version 1.18.3, if [Agent Remote Configuration][3] is enabled where this service runs, you can set `DD_LOGS_INJECTION` in the [Service Catalog][4] UI.
+
+### Database
+
+`dd.trace.db.client.split-by-instance`
+: **Environment Variable**: `DD_TRACE_DB_CLIENT_SPLIT_BY_INSTANCE` <br>
+**Default**: `false`<br>
+When set to `true` db spans get assigned the instance name as the service name
+
+`dd.trace.db.client.split-by-host`
+: **Environment Variable**: `DD_TRACE_DB_CLIENT_SPLIT_BY_HOST` <br>
+**Default**: `false`<br>
+When set to `true` db spans get assigned the remote database hostname as the service name
+
+### ASM
+
+### Agent
+
+`dd.agent.host`
+: **Environment Variable**: `DD_AGENT_HOST`<br>
+**Default**: `localhost`<br>
+Hostname for where to send traces to. If using a containerized environment, configure this to be the host IP. See [Tracing Docker Applications][5] for more details.
+
 `dd.trace.enabled`
 : **Environment Variable**: `DD_TRACE_ENABLED`<br>
 **Default**: `true`<br>
 When `false` tracing agent is disabled.
+
+`dd.instrumentation.telemetry.enabled`
+: **Environment Variable**: `DD_INSTRUMENTATION_TELEMETRY_ENABLED`<br>
+**Default**: `true`<br>
+When `true`, the tracer collects [telemetry data][8]. Available for versions 0.104+. Defaults to `true` for versions 0.115+.
+
+### Profiling
+
+### Integrations
+
+`dd.integration.opentracing.enabled`
+: **Environment Variable**: `DD_INTEGRATION_OPENTRACING_ENABLED`<br>
+**Default**: `true`<br>
+By default the tracing client detects if a GlobalTracer is being loaded and dynamically registers a tracer into it. By turning this to false, this removes any tracer dependency on OpenTracing.
+
+`dd.hystrix.tags.enabled`
+: **Environment Variable**: `DD_HYSTRIX_TAGS_ENABLED`<br>
+**Default**: `false`<br>
+By default the Hystrix group, command, and circuit state tags are not enabled. This property enables them.
+
+`dd.trace.elasticsearch.body.enabled`
+: **Environment Variable**: `DD_TRACE_ELASTICSEARCH_BODY_ENABLED` <br>
+**Default**: `false`<br>
+When set to `true`, the body is added to Elasticsearch and OpenSearch spans.
+
+`dd.trace.elasticsearch.params.enabled`
+: **Environment Variable**: `DD_TRACE_ELASTICSEARCH_PARAMS_ENABLED` <br>
+**Default**: `true`<br>
+When set to `true`, the query string parameters are added to Elasticsearch and OpenSearch spans.
+
+### JMX metrics
 
 `dd.jmxfetch.enabled`
 : **Environment Variable**: `DD_JMXFETCH_ENABLED`<br>
@@ -272,55 +369,6 @@ StatsD port to send JMX metrics to. If you are using Unix Domain Sockets, input 
 **Default**: `false`<br>
 JMX integration to enable (for example, Kafka or ActiveMQ).
 
-`dd.trace.obfuscation.query.string.regexp`
-: **Environment Variable**: `DD_TRACE_OBFUSCATION_QUERY_STRING_REGEXP`<br>
-**Default**: `null`<br>
-A regex to redact sensitive data from incoming requests' query string reported in the `http.url` tag (matches are replaced with <redacted>).
-
-`dd.integration.opentracing.enabled`
-: **Environment Variable**: `DD_INTEGRATION_OPENTRACING_ENABLED`<br>
-**Default**: `true`<br>
-By default the tracing client detects if a GlobalTracer is being loaded and dynamically registers a tracer into it. By turning this to false, this removes any tracer dependency on OpenTracing.
-
-`dd.hystrix.tags.enabled`
-: **Environment Variable**: `DD_HYSTRIX_TAGS_ENABLED`<br>
-**Default**: `false`<br>
-By default the Hystrix group, command, and circuit state tags are not enabled. This property enables them.
-
-`dd.trace.servlet.async-timeout.error`
-: **Environment Variable**: `DD_TRACE_SERVLET_ASYNC_TIMEOUT_ERROR` <br>
-**Default**: `true`<br>
-By default, long running asynchronous requests will be marked as an error, setting this value to false allows to mark all timeouts as successful requests.
-
-`dd.trace.startup.logs`
-: **Environment Variable**: `DD_TRACE_STARTUP_LOGS`<br>
-**Default**: `true`<br>
-When `false`, informational startup logging is disabled. Available for versions 0.64+.
-
-`dd.trace.servlet.principal.enabled`
-: **Environment Variable**: `DD_TRACE_SERVLET_PRINCIPAL_ENABLED`<br>
-**Default**: `false`<br>
-When `true`, user principal is collected. Available for versions 0.61+.
-
-`dd.instrumentation.telemetry.enabled`
-: **Environment Variable**: `DD_INSTRUMENTATION_TELEMETRY_ENABLED`<br>
-**Default**: `true`<br>
-When `true`, the tracer collects [telemetry data][8]. Available for versions 0.104+. Defaults to `true` for versions 0.115+.
-
-`dd.trace.128.bit.traceid.generation.enabled`
-: **Environment Variable**: `DD_TRACE_128_BIT_TRACEID_GENERATION_ENABLED`<br>
-**Default**: `true`<br>
-When `true`, the tracer generates 128 bit Trace IDs, and encodes Trace IDs as 32 lowercase hexadecimal characters with zero padding.
-
-`dd.trace.128.bit.traceid.logging.enabled`
-: **Environment Variable**: `DD_TRACE_128_BIT_TRACEID_LOGGING_ENABLED`<br>
-**Default**: `false`<br>
-When `true`, the tracer will inject 128 bit Trace IDs as 32 lowercase hexadecimal characters with zero padding, and 64 bit Trace IDs as decimal numbers. Otherwise, the tracer always injects Trace IDs as decimal numbers.
-
-`dd.trace.otel.enabled`
-: **Environment Variable**: `DD_TRACE_OTEL_ENABLED`<br>
-**Default**: `false`<br>
-When `true`, OpenTelemetry-based tracing for [custom][16] instrumentation is enabled.
 
 **Note**:
 
@@ -458,28 +506,7 @@ See the [Java integration documentation][14] to learn more about Java metrics co
 
 For information about valid values and using the following configuration options, see [Propagating Java Trace Context][15].
 
-`dd.trace.propagation.style.inject`
-: **Environment Variable**: `DD_TRACE_PROPAGATION_STYLE_INJECT`<br>
-**Default**: `datadog,tracecontext`<br>
-A comma-separated list of header formats to include to propagate distributed traces between services.<br>
-Available since version 1.9.0
 
-`dd.trace.propagation.style.extract`
-: **Environment Variable**: `DD_TRACE_PROPAGATION_STYLE_EXTRACT`<br>
-**Default**: `datadog,tracecontext`<br>
-A comma-separated list of header formats from which to attempt to extract distributed tracing propagation data. The first format found with complete and valid headers is used to define the trace to continue.<br>
-Available since version 1.9.0
-
-`dd.trace.propagation.style`
-: **Environment Variable**: `DD_TRACE_PROPAGATION_STYLE`<br>
-**Default**: `datadog,tracecontext`<br>
-A comma-separated list of header formats from which to attempt to inject and extract distributed tracing propagation data. The first format found with complete and valid headers is used to define the trace to continue. The more specific `dd.trace.propagation.style.inject` and `dd.trace.propagation.style.extract` configuration settings take priority when present.<br>
-Available since version 1.9.0
-
-`trace.propagation.extract.first`
-: **Environment Variable**: `DD_TRACE_PROPAGATION_EXTRACT_FIRST`<br>
-**Default**: `false`<br>
-When set to `true`, stop extracting trace context when a valid one is found.
 
 #### Deprecated extraction and injection settings
 
