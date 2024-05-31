@@ -20,7 +20,7 @@
           <td>
             <code>{{- .attributes.name -}}</code>
           </td>
-          <td>{{- .attributes.description -}}</td>
+          <td>{{- .attributes.description | safeHTML -}}</td>
           <td class="text-nowrap">
             {{- .role_name | default "None" -}}
           </td>
