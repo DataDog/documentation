@@ -24,6 +24,8 @@ SDK v2 offers a unified API layout and naming alignment between the iOS SDK, the
 
 SDK v2 enables the usage of [Mobile Session Replay][1] on Android and iOS applications.
 
+
+[1]: /real_user_monitoring/session_replay/mobile/
 {{% /tab %}}
 {{% tab "iOS" %}}
 
@@ -33,6 +35,8 @@ SDK v2 offers a unified API layout and naming alignment between the iOS SDK, the
 
 SDK v2 enables the usage of [Mobile Session Replay][1] on Android and iOS applications.
 
+
+[1]: /real_user_monitoring/session_replay/mobile/
 {{% /tab %}}
 {{% tab "React Native" %}}
 
@@ -73,7 +77,7 @@ A failure occurred while executing com.android.build.gradle.internal.tasks.Check
 Duplicate class kotlin.collections.jdk8.CollectionsJDK8Kt found in modules kotlin-stdlib-1.8.10 (org.jetbrains.kotlin:kotlin-stdlib:1.8.10) and kotlin-stdlib-jdk8-1.7.20 (org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.7.20)
 ```
 
-Add the following rules to your build script (more details in the relevant [Stack Overflow issue][2]):
+Add the following rules to your build script (more details in the relevant [Stack Overflow issue][1]):
 
 ```kotlin
 dependencies {
@@ -88,11 +92,11 @@ dependencies {
 }
 ```
 
-See the [Android sample application][3] for an example of how to set up the SDK.
+See the [Android sample application][2] for an example of how to set up the SDK.
 
-[2]: https://stackoverflow.com/a/75298544
-[3]: https://github.com/DataDog/dd-sdk-android/tree/develop/sample
 
+[1]: https://stackoverflow.com/a/75298544
+[2]: https://github.com/DataDog/dd-sdk-android/tree/develop/sample
 {{% /tab %}}
 {{% tab "iOS" %}}
 
@@ -330,7 +334,7 @@ Semantic Issue (Xcode): Duplicate interface definition for class 'DatadogSdkPlug
 /Users/exampleuser/Projects/test_app/build/ios/Debug-iphonesimulator/datadog_flutter_plugin/datadog_flutter_plugin.framework/Headers/DatadogSdkPlugin.h:6:0
 ```
 
-Try performing `flutter clean` && `flutter pub get` and rebuilding. This usually resolves the issue.
+Try performing `flutter clean && flutter pub get` and rebuilding. This usually resolves the issue.
 
 ### Duplicate classes (Android)
 
@@ -557,10 +561,10 @@ To improve granularity for the Datadog SDK libraries used, the `dd-sdk-android-k
 
 ### Session Replay
 
-For instructions on setting up Mobile Session Replay, see [Mobile Session Replay Setup and Configuration][4].
+For instructions on setting up Mobile Session Replay, see [Mobile Session Replay Setup and Configuration][1].
 
-[4]: /real_user_monitoring/session_replay/mobile/setup_and_configuration/?tab=android
 
+[1]: /real_user_monitoring/session_replay/mobile/setup_and_configuration/?tab=android
 {{% /tab %}}
 {{% tab "iOS" %}}
 
@@ -752,10 +756,10 @@ WebViewTracking.enable(webView: webView)
 
 ### Session Replay
 
-For instructions on setting up Mobile Session Replay, see [Mobile Session Replay Setup and Configuration][5].
+For instructions on setting up Mobile Session Replay, see [Mobile Session Replay Setup and Configuration][1].
 
-[5]: /real_user_monitoring/session_replay/mobile/setup_and_configuration/?tab=ios
 
+[1]: /real_user_monitoring/session_replay/mobile/setup_and_configuration/?tab=ios
 {{% /tab %}}
 {{% tab "React Native" %}}
 
@@ -812,7 +816,7 @@ Clients using Flutter Web should update to using the Datadog Browser SDK v5. Cha
 +  <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us1/v5/datadog-rum-slim.js"></script>
 ```
 
-**Note**: Datadog provides one CDN bundle per site. See the [Browser SDK README](https://github.com/DataDog/browser-sdk/#cdn-bundles) for a list of all site URLs.
+**Note**: Datadog provides one CDN bundle per site. See the [Browser SDK README][1] for a list of all site URLs.
 
 ## Logs product changes
 
@@ -854,9 +858,11 @@ The following APIs have changed:
 | `DdRum.stopResourceLoading` | `DdRum.stopResource` | |
 | `DdRum.stopResourceLoadingWithError` | `DdRum.stopResourceWithError` | |
 
-Additionally, event mappers no longer allow you to modify their view names. To rename a view, use a custom [`ViewInfoExtractor`](https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/ViewInfoExtractor.html) instead.
+Additionally, event mappers no longer allow you to modify their view names. To rename a view, use a custom [`ViewInfoExtractor`][2] instead.
 
 
+[1]: https://github.com/DataDog/browser-sdk/#cdn-bundles
+[2]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/ViewInfoExtractor.html
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -865,5 +871,3 @@ Additionally, event mappers no longer allow you to modify their view names. To r
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
-[1]: /real_user_monitoring/session_replay/mobile/

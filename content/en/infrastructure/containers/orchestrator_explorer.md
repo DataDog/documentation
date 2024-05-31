@@ -42,9 +42,9 @@ spec:
 {{% /tab %}}
 {{% tab "Helm" %}}
 
-If you are using the [official Helm chart][3], Orchestrator Explorer is enabled by default.
+If you are using the [official Helm chart][1], Orchestrator Explorer is enabled by default.
 
-For verification, ensure that the `orchestratorExplorer.enabled` parameter is set to `true` in your [`values.yaml`][4] file:
+For verification, ensure that the `orchestratorExplorer.enabled` parameter is set to `true` in your [`values.yaml`][2] file:
 
 ```yaml
 datadog:
@@ -57,13 +57,13 @@ datadog:
 
 Then, upgrade your Helm chart.
 
-[3]: https://github.com/DataDog/helm-charts
-[4]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
+[1]: https://github.com/DataDog/helm-charts
+[2]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
 {{% /tab %}}
 {{% tab "Manual" %}}
-For manual setup, see [Set up Orchestrator Explorer with DaemonSet][5].
+For manual setup, see [Set up Orchestrator Explorer with DaemonSet][1].
 
-[5]: /infrastructure/faq/set-up-orchestrator-explorer-daemonset
+[1]: /infrastructure/faq/set-up-orchestrator-explorer-daemonset
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -116,12 +116,12 @@ To prevent displaying a large number of irrelevant changes, updates affecting on
 
 The other tabs show more information for troubleshooting the selected resource:
 
-* [**Logs**][9]: View logs from your container or resource. Click on any log to view related logs in Logs Explorer.
-* [**APM**][11]: View traces from your container or resource, including the date, service, duration, method, and status code of a trace.
-* [**Metrics**][10]: View live metrics for your container or resource. You can view any graph full screen, share a snapshot of it, or export it from this tab.
+* [**Logs**][3]: View logs from your container or resource. Click on any log to view related logs in Logs Explorer.
+* [**APM**][4]: View traces from your container or resource, including the date, service, duration, method, and status code of a trace.
+* [**Metrics**][5]: View live metrics for your container or resource. You can view any graph full screen, share a snapshot of it, or export it from this tab.
 * **Processes**: View all processes running in the container of this resource.
 * **Network**: View a container or resource's network performance, including source, destination, sent and received volume, and throughput fields. Use the **Destination** field to search by tags like `DNS` or `ip_type`, or use the **Group by** filter in this view to group network data by tags, like `pod_name` or `service`.
-* [**Events**][12]: View all Kubernetes events for your resource.
+* [**Events**][6]: View all Kubernetes events for your resource.
 * **Monitors**: View monitors tagged, scoped, or grouped for this resource.
 
 For a detailed dashboard of this resource, click the View Dashboard in the top right corner of this panel.
@@ -130,9 +130,9 @@ For a detailed dashboard of this resource, click the View Dashboard in the top r
 
 ### Resource utilization
 
-_For the Resource Utilization page, see [Resource Utilization][13]_.
+_For the Resource Utilization page, see [Resource Utilization][7]_.
 
-Within the Kubernetes Explorer, tab you can explore a selection of resource utilization metrics.
+Within the Kubernetes Explorer tab, you can explore a selection of resource utilization metrics.
 
 {{< img src="infrastructure/livecontainers/orch_ex_resource_utilization.png" alt="Container Resource Utilization" style="width:80%;">}}
 
@@ -156,9 +156,9 @@ There are multiple types of terms available:
 
 | Type | Examples |
 |---|---|
-| **Tags**: Attached to resources by [the agent collecting them][20]. There are also additional tags that Datadog generates for Kubernetes resources. | `datacenter:staging`<br>`tag#datacenter:staging`<br>*(the `tag#` is optional)* |
-| **Labels**: Extracted from [a resource's metadata][25]. They are typically used to organize your cluster and target specific resources with selectors. | `label#chart_version:2.1.0` |
-| **Annotations**: Extracted from [a resource's metadata][26]. They are generally used to support tooling that aid in cluster management. | `annotation#checksum/configmap:a1bc23d4` |
+| **Tags**: Attached to resources by [the agent collecting them][8]. There are also additional tags that Datadog generates for Kubernetes resources. | `datacenter:staging`<br>`tag#datacenter:staging`<br>*(the `tag#` is optional)* |
+| **Labels**: Extracted from [a resource's metadata][9]. They are typically used to organize your cluster and target specific resources with selectors. | `label#chart_version:2.1.0` |
+| **Annotations**: Extracted from [a resource's metadata][10]. They are generally used to support tooling that aid in cluster management. | `annotation#checksum/configmap:a1bc23d4` |
 | **Metrics**: Added to workload resources (pods, deployments, etc.). You can find resources based on their utilization. To see what metrics are supported, see [Resource Utilization Filters](#resource-utilization-filters). | `metric#cpu_usage_pct_limits_avg15:>80%` |
 | **String matching**: Supported by some specific resource attributes, see below.<br>*Note: string matching does not use the key-value format, and you cannot specify the attribute to match on.* | `"10.132.6.23"` (IP)<br>`"9cb4b43f-8dc1-4a0e"` (UID)<br>`web-api-3` (Name) |
 
@@ -220,7 +220,7 @@ You can use `*` wildcards as part of a term to filter by partial matches, both f
 
 ### Extracted tags
 
-In addition to the tags you have [configured][20] within your Datadog agent, Datadog injects generated tags based on resource attributes that can help your searching and grouping needs. These tags are added to resources conditionally, when they are relevant.
+In addition to the tags you have [configured][8] within your Datadog agent, Datadog injects generated tags based on resource attributes that can help your searching and grouping needs. These tags are added to resources conditionally, when they are relevant.
 
 #### All resources
 
@@ -315,7 +315,7 @@ These metrics are calculated at the time of collection, based on the average val
 
 - `metric_name` is an available metric (see below)
 - `comparator` is a supported [comparator](#comparator)
-- and `numeric_value` is a floating poing value.
+- and `numeric_value` is a floating point value.
 
 For these workload resources, the following metric names are available:
 
@@ -346,16 +346,16 @@ Percents (`*_pct_*`) are stored as floats, where `0.0` is 0%, and `1.0` is 100%.
 ## Notes and known issues
 
 * Data is updated automatically in constant intervals. Update intervals may change during beta.
-* In clusters with 1000+ Deployments or ReplicaSets you may notice elevated CPU usage from the Cluster Agent. There is an option to disable container scrubbing in the Helm chart. See [the Helm Chart repo][15] for more details.
+* In clusters with 1000+ Deployments or ReplicaSets you may notice elevated CPU usage from the Cluster Agent. There is an option to disable container scrubbing in the Helm chart. See [the Helm Chart repo][11] for more details.
 
 [1]: https://app.datadoghq.com/orchestration/overview
 [2]: /infrastructure/containers/?tab=datadogoperator#setup
-[9]: /logs
-[10]: /metrics
-[11]: /tracing
-[12]: /events
-[13]: /infrastructure/containers/kubernetes_resource_utilization
-[15]: https://github.com/DataDog/helm-charts/tree/master/charts/datadog
-[20]: /getting_started/tagging/assigning_tags/?tab=containerizedenvironments
-[25]: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
-[26]: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/
+[3]: /logs
+[4]: /tracing
+[5]: /metrics
+[6]: /events
+[7]: /infrastructure/containers/kubernetes_resource_utilization
+[8]: /getting_started/tagging/assigning_tags/?tab=containerizedenvironments
+[9]: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
+[10]: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/
+[11]: https://github.com/DataDog/helm-charts/tree/master/charts/datadog
