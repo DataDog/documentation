@@ -17,25 +17,26 @@ LLM Observability supports the following span kinds:
 
 | Kind      | Represents   | Root span?   | Can have child spans? | Examples |
 |-----------|--------------|--------------|-------------|----|
-| [Agent](#agent-span)     | A series of choices made by a language model, often consisting of tool calls and calls to external knowledge bases. | Yes | Yes  | A chatbot that answers customer questions.
-| [Workflow](#workflow-span)  | A predetermined sequence of steps, often consisting of some combination of tool calls and data retrieval. | Yes | Yes | A service that takes a URL and returns a summary of the page, requiring a tool call to fetch the page, some text processing tasks, and an LLM summarization. |
-| [LLM](#llm-span)      | Individual LLM calls. | Yes | No | A call to a model, such as OpenAI GPT-4. |
-| [Tool](#tool-span)      | Function calls to external programs or services. | No | No | A call to a web search API or calculator. |
-| [Embedding](#embedding-span) | A call to an embedding model to create an embedding suitable for sending into a subsequent retrieval step. | No  | Yes | A call to text-embedding-ada-002. |
-| [Retrieval](#retrieval-span) | An array of documents returned from an external knowledge base. | No | No | A call to a vector database that returns an array of ranked documents. |
-| [Task](#task-span)      | A step in the chain that does not involve a call to an external service. | No | No | A data preprocessing step. |
+| [LLM](#llm-span)      | A call to an LLM. | Yes | No | A call to a model, such as OpenAI GPT-4. |
+| [Workflow](#workflow-span)  | Any predetermined sequence of operations which include LLM calls and any surrounding contextual operations. | Yes | Yes | A service that takes a URL and returns a summary of the page, requiring a tool call to fetch the page, some text processing tasks, and an LLM summarization. |
+| [Agent](#agent-span)     | A series of decisions and operations made by an autonomous agent, which usually consist of nested workflows, LLMs, tools, and task calls. | Yes | Yes  | A chatbot that answers customer questions.
+| [Tool](#tool-span)      | A call to external programs or services. | No | No | A call to a web search API or calculator. |
+| [Task](#task-span)      | A standalone step that does not involve a call to an external service. | No | No | A data preprocessing step. |
+| [Embedding](#embedding-span) | A call to a model or function that returns an embedding. | No  | Yes | A call to text-embedding-ada-002. |
+| [Retrieval](#retrieval-span) | A data retrieval operation from an external knowledge base. | No | No | A call to a vector database that returns an array of ranked documents. |
+
 
 For instructions on creating spans from your application, including code examples, see [Tracing spans][2] in the SDK documentation.
 
-## Agent span
+## LLM span
 
-Agent spans represent a dynamic sequence of operations where a large language model determines which operations to execute. For example, an agent span might represent a series of reasoning steps controlled by a [ReAct agent][1].
+An LLM span represents a call to an LLM where input and outputs are represented as text.
 
-Agent spans are frequently the root span for traces controlled by LLM reasoning engines.
+Occasionally, a trace contains a single LLM span, in which case the LLM span is the root of the trace.
 
 ### Child spans
 
-Agent spans may have multiple workflow spans as children. These represent child steps orchestrated by a reasoning engine.
+LLM spans do not have child spans, as they are leaf nodes representing a direct call to an LLM.
 
 ## Workflow span
 
@@ -47,15 +48,15 @@ Workflow spans are frequently the root span of a trace consisting of a standard 
 
 Workflow spans have child spans representing the sequence of steps in the workflow.
 
-## LLM span
+## Agent span
 
-An LLM span represents an invocation call to an LLM where input and outputs are represented as text.
+Agent spans represent a dynamic sequence of operations where a large language model determines and executes operations based on the inputs. For example, an agent span might represent a series of reasoning steps controlled by a [ReAct agent][1].
 
-Occasionally, a trace contains a single LLM span, in which case the LLM span is the root of the trace.
+Agent spans are frequently the root span for traces representing autonomous agents or reasoning agents
 
 ### Child spans
 
-LLM spans do not have child spans, as they are leaf nodes representing a direct call to an LLM.
+Agent spans may have multiple workflow spans as children. These represent child steps orchestrated by a reasoning engine.
 
 ## Tool span
 
@@ -64,6 +65,14 @@ Tool spans represent a standalone step in a workflow or agent that involves a ca
 ### Child spans
 
 Tool spans do not have child spans, as they are leaf nodes representing a tool execution.
+
+## Task span
+
+Task spans represent a standalone step in a workflow or agent that does not involve a call to an external service, such as a data sanitization step before a prompt is submitted to an LLM.
+
+### Child spans
+
+Task spans do not have child spans.
 
 ## Embedding span
 
@@ -82,14 +91,6 @@ When used alongside embedding spans, retrieval spans can provide visibility into
 ### Child spans
 
 Retrieval spans do not have child spans, as they represent a single retrieval step.
-
-## Task span
-
-Task spans represent a standalone step in a workflow or agent that does not involve a call to an external service, such as a data sanitization step before a prompt is submitted to an LLM.
-
-### Child spans
-
-Task spans do not have child spans.
 
 [1]: https://react-lm.github.io/
 [2]: /tracing/llm_observability/sdk/?tab=model#tracing-spans

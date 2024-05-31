@@ -22,9 +22,25 @@ A given trace contains spans representing each choice made by an agent or each s
 
 Multiple spans combine to form a trace, and a *root span* is the first span in a trace.
 
+### Span kinds
+
+Spans are categorized by their *span kind*, which defines the type of work the span is performing. This can give you more granular insights on what operations are being performed by your LLM application. LLM Observability currently supports the following span kinds:
+
+- LLM: A call to an LLM.
+- Workflow: Any predetermined sequence of operations which include LLM calls and any surrounding contextual operations such as tools, task, embeddings, or retrievals.
+- Agent: A series of decisions and operations made by an autonomous agent, which usually consist of nested workflows, LLMs, tools, and task calls.
+- Tool: A call to external programs or services, such as a web API or a database.
+- Task: Any standalone step in a workflow or agent that does not involve a call to an external service, such as data sanitization or preprocessing.
+- Embedding: A call to a model or function that returns an embedding.
+- Retrieval: A data retrieval operation from an external knowledge base, usually involving vector search or a similarity search.
+
+To learn more about each span kind, see the [Span kind][4] page.
+
+### Types of LLM traces
+
 Datadog’s LLM Observability product is designed to support observability for a variety of LLM applications, from simple to complex: 
 
-### LLM inference monitoring
+#### LLM inference monitoring
 
 The basic level of a LLM trace is a singular LLM span. Tracing individual LLM inferences unlocks basic LLM Observability features, allowing you to:
 1. Track inputs and outputs to your LLM calls
@@ -35,7 +51,7 @@ The Python SDK provides some out-of-the-box integrations to automatically captur
 
 {{< img src="tracing/llm_observability/llm-observability-llm-span.png" alt="A singular LLM span" style="width:100%;" >}}
 
-### LLM workflow monitoring
+#### LLM workflow monitoring
 
 Your application likely includes many contextual operations around LLM calls that play a large role in your overall application performance, for instance tool calls to external APIs or preprocessing task steps.
 
@@ -43,7 +59,7 @@ In addition to tracing individual LLM inferences, you can instrument your LLM ap
 
 {{< img src="tracing/llm_observability/llm-observability-workflow-trace.png" alt="A trace visualizing a more complex LLM workflow" style="width:100%;" >}}
 
-### LLM agent monitoring
+#### LLM agent monitoring
 
 What if your LLM application has complex autonomous logic like memory and decision making that can’t be captured by a static workflow? You are likely using an LLM Agent. LLM Agents may execute multiple different workflows depending on the user input. Agents often utilize LLMs as an internal brain to make decisions about what operation to complete.
 
@@ -51,9 +67,6 @@ In addition to tracing LLM workflows, you can instrument your LLM application to
 
 {{< img src="tracing/llm_observability/llm-observability-agent-trace.png" alt="A trace visualizing an LLM agent" style="width:100%;" >}}
 
-### Span kinds
-
-A trace can contain several kinds of spans. The *span kind* categorizes the type of work the span is performing, and can give you more granular insights on your LLM application.
 
 ## Instrument an LLM application
 
