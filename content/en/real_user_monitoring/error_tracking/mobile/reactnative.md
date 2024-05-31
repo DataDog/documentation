@@ -54,6 +54,10 @@ config.nativeCrashReportEnabled = true; // enable native crash reporting
 
 ## Get deobfuscated stack traces
 
+Mapping files are used to deobfuscate stack traces, which helps in debugging errors. Using a unique build ID that gets generated, Datadog automatically matches the correct stack traces with the corresponding mapping files. This ensures that regardless of when the mapping file was uploaded (either during pre-production or production builds), the correct information is available for efficient QA processes when reviewing crashes and errors reported in Datadog.
+
+For React Native applications, the matching of stack traces and sourcemaps relies on a combination of the `service`, `version`, `bundle_name`, and `platform` fields. Out of all sourcemaps that match with these fields, Datadog uses the one with the highest `build_number` value.
+
 In order to make your application's size smaller, its code is minified when it is built for release. To link errors to your actual code, you need to upload the following symbolication files:
 
 -   JavaScript source map for your iOS JavaScript bundle
