@@ -20,7 +20,7 @@ Saved views can keep track of your:
 - Search queries (such as flaky tests)
 - Column sort order
 - Live time range (such as the past hour or the past week)
-- Visualizations (such as a timeseries, toplist, table, or funnel graph)
+- Visualizations (such as a timeseries, toplist, table, or distribution graph)
 - Subset of facets
 
 You can also use saved views to share common queries and configurations with your teammates.
