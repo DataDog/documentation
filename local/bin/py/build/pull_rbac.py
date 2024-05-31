@@ -7,6 +7,7 @@ from os import getenv
 
 
 def pull_rbac():
+    print("Pulling latest permissions data")
     parser = argparse.ArgumentParser()
     parser.add_argument('apikey', default='')
     parser.add_argument('appkey', default='')
