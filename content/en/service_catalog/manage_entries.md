@@ -107,14 +107,21 @@ Use [Workflow Automation][14] and [App Builder][24] to automate end-to-end proce
 ### Create software template workflows using Cookiecutter
 To use software templates in Datadog, create a git repository with the desired template. Then, navigate to the [Workflow Automation][26] page to configure the template in Datadog. A common choice for templating is [Cookiecutter][25], an open source project for project templates and auto-generating new projects. 
 1. **Create a workflow with below steps**:
-   - Download the template repository files
-   - Generate the new project files from the template via Cookiecutter
-   - Deploy the new project files back to the repository
-2. **Navigate to App Builder**:
-   - Create a new app for templating
-   - Create a form that collects the required parameters for the template
+   - Download the template repository files from the git repository of your choice. For example, using the Github, Gitlab, or HTTP actions in worklow editor
+   - Generate the new project files from the template via Cookiecutter. This can be done by creating a lambda function to perform Cookiecutter and calling it via the Invoke Lambda Function action
+   - Upload the newly created project files back to the repository, again using the Github, Gitlab, or HTTP actions
+   - Save the workflow
+2. **Create your templating app with App Builder**:
+   - Navigate from Workflow Management to App Builder
+   - Create a new app with a relevant name and description
+   - Use the drag-and-drop editor to create a form that collects the required parameters for the template you are using
    - Add a button that submits the form, triggers the workflow created in Step 1, and passes in the parameters for the template
    - Save & publish the app
+   - Click 'View App' to view the app on a standalone page or 'Add to a Dashboard' to place the app into a dashboard
+3. **Run your new application & workflow**
+   - Fill out the newly created form
+   - Submit the button
+   - Track the success of the workflow templating process in Workflow Automation
 
   {{< img src="tracing/service_catalog/workflowtemplate.png" alt="Workflow for building software template automation" style="width:100%;" >}}
 
