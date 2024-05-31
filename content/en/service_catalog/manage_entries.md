@@ -100,7 +100,7 @@ extensions:
 ## Automate common workflows
 Use [Workflow Automation][14] and [App Builder][24] to automate end-to-end processes. They integrate with Datadog's Service Catalog to enable dynamic and self-service workflows.
 
-{{< callout url="https://www.datadoghq.com/dg/datadog-app-builder/" d-toggle="modal" d_target="#signupModal" custom_class="sign-up-trigger">}}
+{{< callout url="https://www.datadoghq.com/dg/datadog-app-builder" d-toggle="modal" d_target="#signupModal" custom_class="sign-up-trigger">}}
   Datadog App Builder is in private beta. Complete the form to request access.
 {{< /callout >}} 
 
@@ -123,9 +123,9 @@ To use software templates in Datadog, create a git repository with the desired t
    - Submit the button
    - Track the success of the workflow templating process in Workflow Automation
 
-  {{< img src="tracing/service_catalog/workflowtemplate.png" alt="Workflow for building software template automation" style="width:100%;" >}}
+  {{< img src="tracing/service_catalog/templating-workflow.png" alt="Workflow for building software template automation" style="width:100%;" >}}
 
-  {{< img src="tracing/service_catalog/template-application.png" alt="Application for managing software templates through App Builder" style="width:100%;" >}}
+  {{< img src="tracing/service_catalog/templating-app.png" alt="Application for managing software templates through App Builder" style="width:100%;" >}}
 
 ### Find Service Catalog actions
 To explore the complete set of actions specifically related to Service Catalog, navigate to the [Datadog Action Catalog][23]. Filter for the actions you need:
