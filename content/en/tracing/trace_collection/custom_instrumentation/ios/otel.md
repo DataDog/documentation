@@ -321,7 +321,7 @@ spanWithLinks.end()
 [5]: https://opentelemetry.io/docs/reference/specification/trace/sdk/#span-exporter
 [6]: /real_user_monitoring/platform/connect_rum_and_traces/?tab=browserrum#opentelemetry-support
 [9]: /account_management/api-app-keys/#client-tokens
-[10]: https://docs.datadoghq.com/account_management/api-app-keys/#api-keys
+[10]: /account_management/api-app-keys/#api-keys
 [11]: /account_management/api-app-keys/#client-tokens
 [12]: https://support.apple.com/en-gb/guide/security/sec15bfe098e/web
 [13]: https://opentelemetry.io/docs/concepts/signals/traces/
