@@ -209,7 +209,7 @@ To change the tracking consent value after the SDK is initialized, use the `Data
 
 The SDK changes its behavior according to the new value. For example, if the current tracking consent is `.pending`:
 
-- If changed to `.granted`, the SDK send all current and future data to Datadog;
+- If changed to `.granted`, the SDK sends all current and future data to Datadog;
 - If changed to `.notGranted`, the SDK wipes all current data and stops collecting any future data.
 
 Before data is uploaded to Datadog, it is stored in cleartext in the cache directory (`Library/Caches`) of your [application sandbox][12]. The cache directory cannot be read by any other app installed on the device.
