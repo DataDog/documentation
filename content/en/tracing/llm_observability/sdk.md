@@ -78,11 +78,11 @@ LLMObs.enable(
 
 `ml_app`
 : optional - _string_
-<br />The name of your LLM application, service, or project, under which all traces and spans are grouped. This helps distinguish between different applications or experiments. See [Application naming guidelines](#application-naming-guidelines) for allowed characters and other constraints. To override this value for a given trace, see [Tracing multiple applications](#tracing-multiple-applications). If not provided, this will default to the value of `DD_LLMOBS_APP_NAME`.
+<br />The name of your LLM application, service, or project, under which all traces and spans are grouped. This helps distinguish between different applications or experiments. See [Application naming guidelines](#application-naming-guidelines) for allowed characters and other constraints. To override this value for a given trace, see [Tracing multiple applications](#tracing-multiple-applications). If not provided, this defaults to the value of `DD_LLMOBS_APP_NAME`.
 
 `integrations_enabled` - **default**: `true`
 : optional - _boolean_ 
-<br />A flag to enable automatically tracing LLM calls for Datadog's supported [LLM integrations](#llm-integrations). If not provided, all supported LLM integrations will be enabled by default. To avoid using the LLM integrations, set this value to `false`.
+<br />A flag to enable automatically tracing LLM calls for Datadog's supported [LLM integrations](#llm-integrations). If not provided, this enables all supported LLM integrations by default. To avoid using the LLM integrations, set this value to `false`.
 
 `agentless_enabled`
 : optional - _boolean_ - **default**: `false`
@@ -266,7 +266,7 @@ To trace an embedding span, use the function decorator `LLMObs.embedding()`.
 
 `name`
 : optional - _string_
-<br/>The name of the operation. If not provided, `name` will be set to the name of the traced function.
+<br/>The name of the operation. If not provided, `name` is set to the name of the traced function.
 
 `model_provider`
 : optional - _string_ - **default**: `"custom"`
@@ -506,7 +506,7 @@ The `LLMObs.submit_evaluation()` method accepts the following arguments:
 
 `tags`
 : optional - _dictionary_
-<br />A dictionary of JSON serializable key-value pairs that users can add as tags regarding the evaluation. For more information about tags, see [Getting Started with Tags][9].
+<br />A dictionary of string key-value pairs that users can add as tags regarding the evaluation. For more information about tags, see [Getting Started with Tags][9].
 
 ### Example
 
@@ -608,7 +608,7 @@ The SDK supports tracing across distributed services or hosts.
 
 #### Automatic distributed tracing
 
-The `ddtrace` library provides some out-of-the-box integrations that support distributed tracing for popular [web framework][11] and [HTTP][12] libraries. If you are using any of these libraries, you must enable the corresponding integration via the `ddtrace.patch(<INTEGRATION_NAME>)` method. For example if you are using the `urllib3` and `fastAPI` libraries, you should add these to the top of your application's entrypoint file:
+The `ddtrace` library provides some out-of-the-box integrations that support distributed tracing for popular [web framework][11] and [HTTP][12] libraries. If you are using any of these libraries, you must enable the corresponding integration with the `ddtrace.patch(<INTEGRATION_NAME>)` method. For example if you are using the `urllib3` and `fastAPI` libraries, you should add these to the top of your application's entrypoint file:
 
 {{< code-block lang="python">}}
 from ddtrace import patch
@@ -617,7 +617,7 @@ patch(urllib3=True, fastapi=True)
 
 #### Manual distributed tracing
 
-If you are using libraries that are not supported by the `ddtrace` library's integrations, the SDK provides two helper methods `LLMObs.inject_distributed_headers()` and `LLMObs.activate_distributed_headers()` to manually inject and propagate tracing contexts in distributed request headers.
+If you are using libraries that are not supported by the `ddtrace` library's integrations, you need to manually propagate tracing contexts across distributed request headers. The SDK provides the helper methods `LLMObs.inject_distributed_headers()` and `LLMObs.activate_distributed_headers()` to inject and activate tracing contexts in request headers.
 
 ##### Injecting distributed headers
 
@@ -629,13 +629,13 @@ The `LLMObs.inject_distributed_headers()` method takes a span and injects its co
 
 `span`
 : optional - _Span_ - **default**: `The current active span.`
-<br />The span to inject its context into the provided request headers. If not provided (as when using function decorators), this will default to the current active span.
+<br />The span to inject its context into the provided request headers. If not provided (as when using function decorators), this defaults to the current active span.
 
 ##### Activating distributed headers
 
 The `LLMObs.activate_distributed_headers()` method takes HTTP headers and extracts tracing context attributes to activate in the new service.
 
-**Note**: You must call `LLMObs.activate_distributed_headers()` before starting any spans in your downstream service. Any spans started prior (including via fucntion decorators) will not be captured in the distributed trace.
+**Note**: You must call `LLMObs.activate_distributed_headers()` before starting any spans in your downstream service. Spans started prior (including function decorator spans) do not get captured in the distributed trace.
 
 This method accepts the following argument:
 
