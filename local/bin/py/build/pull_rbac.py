@@ -65,7 +65,7 @@ def pull_rbac():
             permission_role_name = ''
 
             if permission_name in synthetics_settings_permissions:
-                permission['attributes']['description'] = f"<a href='{synthetics_settings_url}' target='_blank'>{permission_description}</a>"
+                permission['attributes']['description_link'] = synthetics_settings_url
 
             # lookup. get least permissive role for a permission
             for role in default_roles_hierarchy:
