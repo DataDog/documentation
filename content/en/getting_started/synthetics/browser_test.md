@@ -112,7 +112,7 @@ It is important to finish your browser test with an **Assertion** to ensure your
 
 {{< img src="getting_started/synthetics/record-test.mp4" alt="Record test steps" video="true" >}}
 
-The example website regularly throws an error causing it to intentionally fail. If you include your email address in the **Notify your team** field, you receive an email notification when the test fails and recovers.
+The example website regularly throws an error causing it to intentionally fail. If you include your email address in the **Configure the monitor for this test** field, you receive an email notification when the test fails and recovers.
 
 ## Look at test results
 

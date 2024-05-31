@@ -40,7 +40,7 @@ A notification is sent by your test based on the [alerting conditions](#define-a
 
 For more information, see [Using Synthetic Test Monitors][103].
 
-[101]: /monitors/notify/?tab=is_alert#notify-your-team
+[101]: /monitors/notify/?tab=is_alert#configure-notifications-and-automations
 [102]: /monitors/notify/variables/?tab=is_alert#conditional-variables
 [103]: /synthetics/guide/synthetic-test-monitors/
 [104]: http://daringfireball.net/projects/markdown/syntax
