@@ -146,11 +146,12 @@ To set up a monitor to alert when the quota is reached:
     a. Leave the setting to trigger when the evaluated value is `above` the threshold for any `host`.  
     b. Enter `1` for the **Alert threshold**. This means that if the metric query is greater than 1, then the monitor alerts.
 See [Metric Monitors][6] for more information.
-1. In the **Notify your team** section:  
+1. In the **Configure notifications and automations** section:  
     a. Enter a name for your monitor.  
     b. Enter a notification message. See [Notifications][7] and [Variables][8] for more information on customizing your message.  
     c. Select who and which services the notifications are sent to.
-1. Optionally, you can set [renotifications][9], tags, teams, and a [priority][10] for your monitor. You can also define [permissions][11] and audit notifications.
+1. Optionally, you can set [renotifications][9], tags, teams, and a [priority][10] for your monitor. 
+1. In the **Define permissions and audit notifications** section, you can define [permissions][11] and audit notifications.
 1. Click **Create**.
 
 ## Route logs sent after the limit to `datadog_archives`

@@ -57,9 +57,9 @@ Source maps are limited to **500** MB each.
 [3]: /real_user_monitoring/browser/collecting_browser_errors/?tab=npm#error-sources
 [4]: https://app.datadoghq.com/rum/error-tracking
 [5]: https://app.datadoghq.com/rum/application/create
-[6]: /real_user_monitoring/browser/#setup
+[6]: /real_user_monitoring/browser/setup
 [7]: https://www.npmjs.com/package/@datadog/browser-rum
-[8]: /real_user_monitoring/browser/#initialization-parameters
+[8]: /real_user_monitoring/browser/setup/#initialization-parameters
 [9]: /real_user_monitoring/guide/upload-javascript-source-maps
 [10]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/sourcemaps#sourcemaps-command
 [11]: https://github.com

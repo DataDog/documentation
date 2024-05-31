@@ -38,7 +38,7 @@ Two types of alerts are available:
 
 ### Notifications
 
-For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][5] page.
+For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][5] page.
 
 In addition to the [standard template variables][6] available across all monitor types, SLO alerts also support the following variables: 
 
