@@ -604,9 +604,11 @@ def process_message():
 
 ### Distributed tracing
 
+The SDK supports tracing across distributed services or hosts.
+
 #### Automatic distributed tracing
 
-The SDK supports tracing across distributed services or hosts. The `ddtrace` library provides some out-of-the-box integrations that support distributed tracing for popular [web framework][11] and [HTTP][12] libraries. If you are using any of these libraries, you must enable the corresponding integration via the `ddtrace.patch(<INTEGRATION_NAME>)` method. For example if you are using the `urllib3` and `fastAPI` libraries, you should add these to the top of your application's entrypoint file:
+The `ddtrace` library provides some out-of-the-box integrations that support distributed tracing for popular [web framework][11] and [HTTP][12] libraries. If you are using any of these libraries, you must enable the corresponding integration via the `ddtrace.patch(<INTEGRATION_NAME>)` method. For example if you are using the `urllib3` and `fastAPI` libraries, you should add these to the top of your application's entrypoint file:
 
 {{< code-block lang="python">}}
 from ddtrace import patch
@@ -617,7 +619,7 @@ patch(urllib3=True, fastapi=True)
 
 If you are using libraries that are not supported by the `ddtrace` library's integrations, the SDK provides two helper methods `LLMObs.inject_distributed_headers()` and `LLMObs.activate_distributed_headers()` to manually inject and propagate tracing contexts in distributed request headers.
 
-#### Injecting distributed headers
+##### Injecting distributed headers
 
 The `LLMObs.inject_distributed_headers()` method takes a span and injects its context into the HTTP headers to be included in the request. This method accepts the following arguments:
 
@@ -629,7 +631,7 @@ The `LLMObs.inject_distributed_headers()` method takes a span and injects its co
 : optional - _Span_ - **default**: `The current active span.`
 <br />The span to inject its context into the provided request headers. If not provided (as when using function decorators), this will default to the current active span.
 
-#### Activating distributed headers
+##### Activating distributed headers
 
 The `LLMObs.activate_distributed_headers()` method takes HTTP headers and extracts tracing context attributes to activate in the new service.
 
@@ -674,4 +676,4 @@ def server_process_request(request):
 [9]: /getting_started/tagging/
 [10]: https://github.com/DataDog/llm-observability
 [11]: https://docs.datadoghq.com/tracing/trace_collection/compatibility/python/#integrations
-[11]: https://docs.datadoghq.com/tracing/trace_collection/compatibility/python/#library-compatibility
+[12]: https://docs.datadoghq.com/tracing/trace_collection/compatibility/python/#library-compatibility
