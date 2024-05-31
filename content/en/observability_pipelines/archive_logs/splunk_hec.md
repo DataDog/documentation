@@ -20,18 +20,54 @@ This document walks through the following steps:
 
 {{% observability_pipelines/prerequisites/splunk_hec %}}
 
-{{% observability_pipelines/configure_log_archive/instructions %}}
+## Configure Log Archives
+Select the cloud provider you are using to archive your logs.
 
+{{% collapse-content title="Amazon S3" level="h4" %}}
+{{% observability_pipelines/configure_log_archive/instructions %}}
 {{< tabs >}}
 {{% tab "Docker" %}}
 
 {{% observability_pipelines/configure_log_archive/docker %}}
-
+{{% observability_pipelines/configure_log_archive/connect_s3_to_datadog_log_archives %}}
 
 {{% /tab %}}
 {{% tab "Amazon EKS" %}}
 
 {{% observability_pipelines/configure_log_archive/amazon_eks %}}
+{{% observability_pipelines/configure_log_archive/connect_s3_to_datadog_log_archives %}}
+
+{{% /tab %}}
+{{% tab "Linux (APT)" %}}
+
+{{% observability_pipelines/configure_log_archive/linux_apt %}}
+{{% observability_pipelines/configure_log_archive/connect_s3_to_datadog_log_archives %}}
+
+{{% /tab %}}
+{{% tab "Linux (RPM)" %}}
+
+{{% observability_pipelines/configure_log_archive/linux_rpm %}}
+{{% observability_pipelines/configure_log_archive/connect_s3_to_datadog_log_archives %}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
+{{% /collapse-content %}}
+
+{{% collapse-content title="Google Cloud Storage" level="h4" %}}
+
+See the following [Log Archives][100001] steps to configure an archive in Google Cloud Storage:
+
+1. [Create a storage bucket][100002]
+1. [Set permissions][100003]
+    - TKTK Separate instructions for OP
+1. [Route your logs to a bucket][100004]
+    - **Note**: Add a query that filters out all logs going through log pipelines so that none of those logs go into this archive. For example, add the query `observability_pipelines_read_only_archive`, assuming no logs going through the pipeline have that tag added.
+
+{{< tabs >}}
+{{% tab "Docker" %}}
+
+{{% observability_pipelines/configure_log_archive/docker %}}
 
 {{% /tab %}}
 {{% tab "Linux (APT)" %}}
@@ -46,7 +82,47 @@ This document walks through the following steps:
 {{% /tab %}}
 {{< /tabs >}}
 
-{{% observability_pipelines/configure_log_archive/connect_s3_to_datadog_log_archives %}}
+[100001]: /logs/log_configuration/archives/
+[100002]: /logs/log_configuration/archives/#create-a-storage-bucket
+[100003]: /logs/log_configuration/archives/#set-permissions
+[100004]: /logs/log_configuration/archives/#route-your-logs-to-a-bucket
+
+{{% /collapse-content %}}
+
+{{% collapse-content title="Azure Storage" level="h4" %}}
+
+See the following [Log Archives][100001] steps to configure an archive in Azure Storage:
+
+1. [Create a storage bucket][100002]
+1. [Set permissions][100003]
+    - TKTK Separate instructions for OP
+1. [Route your logs to a bucket][100004]
+    - **Note**: Add a query that filters out all logs going through log pipelines so that none of those logs go into this archive. For example, add the query `observability_pipelines_read_only_archive`, assuming no logs going through the pipeline have that tag added.
+
+{{< tabs >}}
+{{% tab "Docker" %}}
+
+{{% observability_pipelines/configure_log_archive/docker %}}
+
+{{% /tab %}}
+{{% tab "Linux (APT)" %}}
+
+{{% observability_pipelines/configure_log_archive/linux_apt %}}
+
+{{% /tab %}}
+{{% tab "Linux (RPM)" %}}
+
+{{% observability_pipelines/configure_log_archive/linux_rpm %}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
+[100001]: /logs/log_configuration/archives/
+[100002]: /logs/log_configuration/archives/#create-a-storage-bucket
+[100003]: /logs/log_configuration/archives/#set-permissions
+[100004]: /logs/log_configuration/archives/#route-your-logs-to-a-bucket
+
+{{% /collapse-content %}}
 
 ## Set up Observability Pipelines
 
@@ -65,7 +141,23 @@ Enter the following information based on your selected logs destinations.
 {{< tabs >}}
 {{% tab "Datadog Archives" %}}
 
+Select the cloud provider you are using to archive your logs.
+
+{{% collapse-content title="Amazon S3" level="h4" %}}
+
 {{% observability_pipelines/destination_settings/datadog_archives %}}
+
+{{% /collapse-content %}}
+{{% collapse-content title="Google Cloud Storage" level="h4" %}}
+
+TKTK
+
+{{% /collapse-content %}}
+{{% collapse-content title="Azure Storage" level="h4" %}}
+
+TKTK
+
+{{% /collapse-content %}}
 
 {{% /tab %}}
 {{% tab "Datadog" %}}
@@ -125,10 +217,27 @@ Enter the following information based on your selected logs destinations.
 1. Select your platform in the **Choose your installation platform** dropdown menu.
 1. Enter the Splunk HEC address. This is the address and port where your applications are sending their logging data. The Observability Pipelines Worker listens to this address for incoming logs.
 1. Provide the environment variables for each of your selected destinations. See [prerequisites](#prerequisites) for more information.
+
 {{< tabs >}}
 {{% tab "Datadog Archives" %}}
 
+Select the cloud provider you are using to archive your logs.
+
+{{% collapse-content title="Amazon S3" level="h4" %}}
+
 {{% observability_pipelines/destination_env_vars/datadog_archives %}}
+
+{{% /collapse-content %}}
+{{% collapse-content title="Google Cloud Storage" level="h4" %}}
+
+TKTK
+
+{{% /collapse-content %}}
+{{% collapse-content title="Azure Storage" level="h4" %}}
+
+TKTK
+
+{{% /collapse-content %}}
 
 {{% /tab %}}
 {{% tab "Datadog" %}}
@@ -148,7 +257,7 @@ Enter the following information based on your selected logs destinations.
 {{% /tab %}}
 {{< /tabs >}}
 
-1. Follow the instructions for your environment to install the Worker.
+4. Follow the instructions for your environment to install the Worker.
 {{< tabs >}}
 {{% tab "Docker" %}}
 
