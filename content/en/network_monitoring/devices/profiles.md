@@ -21,17 +21,7 @@ Network Device Monitoring uses profiles to tell the Datadog Agent the metrics an
 
 By default, all profiles in the Agent configuration directory are loaded. To customize the specific profiles for collection, explicitly reference them by filename under `definition_file`, or provide an inline list under `definition`. Any of the Datadog profiles can be listed by name. Additional custom profiles can be referenced by the file path in the config, or placed in the configuration directory.
 
-**Note**: The generic profile is [generic-device.yaml][1], which supports routers, switches, etc.
-
-### Device profile onboarding
-
-<div class="alert alert-info">Device profile onboarding is in private beta. Please reach out to your Customer Service Representative to sign up.</div>
-
-1. Build your own profile by navigating to [Infrastructure > Network Devices > Configuration][6]. 
-2. Click on SNMP Profiles > **Create New Profile**.
-
-{{< img src="/network_device_monitoring/profiles/create_profile.png" alt="The Network Device profile creation page" style="width:100%;">}}
-
+**Note**: The generic profile is [generic-device.yaml][1], which supports routers, switches, and other devices.
 
 ### sysOID mapped devices
 

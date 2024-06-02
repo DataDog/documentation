@@ -15,6 +15,7 @@ further_reading:
 ---
 
 {{< whatsnext desc="General Guides:" >}}
+    {{< nextlink href="network_monitoring/devices/guide/device_profiles" >}}Getting Started with Device Profiles{{< /nextlink >}}
     {{< nextlink href="network_monitoring/devices/guide/tags-with-regex" >}}NDM Tags with Regex{{< /nextlink >}}
     {{< nextlink href="network_monitoring/devices/guide/cluster-agent" >}}NDM with the Cluster Agent{{< /nextlink >}}
     {{< nextlink href="network_monitoring/devices/guide/build-ndm-profile" >}}Build a NDM Profile{{< /nextlink >}}
