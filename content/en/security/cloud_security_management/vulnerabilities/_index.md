@@ -71,7 +71,13 @@ The [Vulnerabilities Explorer][1] also offers triaging options for detected vuln
 
 The following video provides an overview of how to enable and use CSM Vulnerabilities:
 
-{{< img src="security/csm/how-to-use-csm-vulnerabilities.mp4" alt="Video that provides an overview of how to install and use CSM Vulnerabilities" video=true >}}
+{{< youtube id=9A-WaQFSWo8 loading=lazy >}}
+
+<br>
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/security/csm/vm
 [2]: https://app.datadoghq.com/containers/images
@@ -80,8 +86,3 @@ The following video provides an overview of how to enable and use CSM Vulnerabil
 [5]: /security/application_security/software_composition_analysis/
 [6]: https://www.datadoghq.com/product/infrastructure-monitoring/
 [9]: https://www.cisa.gov/known-exploited-vulnerabilities-catalog
-
-
-## Further reading
-
-{{< partial name="whats-next/whats-next.html" >}}

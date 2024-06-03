@@ -94,6 +94,14 @@ Use the [Resource Catalog][12] to view specific misconfigurations and threats th
 
 Receive a weekly summary of Cloud Security Management activity over the past week, including important new security issues discovered in the last seven days. Subscriptions to the weekly digest report are managed on a per user basis. To [subscribe to the weekly digest report][11], you must have the `security_monitoring_signals_read` permission.
 
+## Video walkthrough
+
+The following video provides an overview of how to enable and use Cloud Security Management:
+
+{{< youtube id=fVcp2W7zqwg loading=lazy >}}
+
+<br>
+
 ## Next steps
 
 To get started with CSM, navigate to the [**Cloud Security Management Setup**][3] page in Datadog, which has detailed steps on how to set up and configure CSM. For more information, see [Setting Up Cloud Security Management][10].

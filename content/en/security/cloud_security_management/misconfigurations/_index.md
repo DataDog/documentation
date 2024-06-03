@@ -48,6 +48,14 @@ Investigate details using the [Misconfigurations Explorer][10]. View detailed in
 
 {{< img src="security/cspm/misconfigurations_explorer.png" alt="CSM Misconfigurations Explorer page" width="100%">}}
 
+## Video walkthrough
+
+The following video provides an overview of how to enable and use CSM Misconfigurations:
+
+{{< youtube id=L2E8D5q1rRY loading=lazy >}}
+
+<br>
+
 ## Get started
 
 {{< learning-center-callout header="Try Detect, Prioritize, and Remediate Cloud Security Risks with Datadog CSM in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/csm-misconfigurations">}}

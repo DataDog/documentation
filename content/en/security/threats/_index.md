@@ -56,6 +56,14 @@ Investigate and triage security signals in the [Signals Explorer][8]. View detai
 Datadog is introducing a new feature called Active Protection to address the crypto threats detected in your environment automatically. Active Protection is in private beta. Fill out the form to request access.
 {{< /callout >}}
 
+## Video walkthrough
+
+The following video provides an overview of how to enable and use CSM Threats:
+
+{{< youtube id=RPILU7A76Pc loading=lazy >}}
+
+<br>
+
 ## Get started
 
 {{< whatsnext >}}
