@@ -1,5 +1,5 @@
 ---
-title: Supported Deployment Types for Cloud Security Management
+title: Cloud Security Supported Deployment Types
 kind: documentation
 ---
 
@@ -19,6 +19,21 @@ The following table summarizes the CSM features available relative to each deplo
 | Windows             | {{< X >}}              |                       | {{< X >}}        |                          |                          |                              |
 | AWS Fargate ECS/EKS | {{< X >}}              |                       | beta             |                          |                          |                              |
 | Terraform           |                        |                       |                  |                          |                          | beta                         |
+
+The following table summarizes the scope of coverage available relative to each CSM feature.
+| Resources monitored                        | CSM Misconfigurations | CSM Threats | CSM Vulnerabilities  | CSM Identity Risks | CSM Agentless scanning |
+| ----------------------------------------| --------------------- | ----------- | -------------------- | ------------------- | ----------------------| 
+| Resources in AWS Account                | {{< X >}}             |             |                      |                     |  {{< X >}}
+| Resources in Azure Subscription         | {{< X >}}             |             |                      |                     | 
+| Resources in GCP Project                | {{< X >}}             |             |                      |                     |  
+| Kubernetes Cluster                      | {{< X >}}             | {{< X >}}   |                      |                     |  
+| Docker Host                             | {{< X >}}             |             |                      |                     |
+| Linux Host                              | {{< X >}}             | {{< X >}}   |    {{< X >}}         |                     |  {{< X >}}
+| Docker Container                        |                       | {{< X >}}   |                      |                     |
+| Container Image                         |                       |             |    {{< X >}}         |                     |  {{< X >}}
+| IAM in AWS Account                      |                       |             |                      |  {{< X >}}          |
+
+**Note**: CSM Misconfigurations additionally monitors common resources used in your cloud accounts that are running Windows and AWS Fargate, such as EC2 instances, RDS, S3, and ELB.
 
 [1]: /security/cloud_security_management/setup/#csm-threats
 [2]: /security/cloud_security_management/setup/#csm-vulnerabilities

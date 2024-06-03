@@ -4490,11 +4490,6 @@ menu:
       pre: cloud-security-management
       identifier: csm
       weight: 30000
-    - name: Scope of Coverage
-      url: security/cloud_security_management/scope_coverage
-      parent: csm
-      identifier: csm_scope_coverage
-      weight: 1
     - name: Setup
       url: security/cloud_security_management/setup
       parent: csm
