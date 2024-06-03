@@ -326,7 +326,7 @@ Evaluations require a `span_id` and `trace_id`.
 | Field   | Type         | Description                                         |
 |---------|--------------|-----------------------------------------------------|
 | metrics [*required*] | [[EvalMetric](#evalmetric)] | A list of evaluations each associated with a span. |
-| tags        | [[Tag](#tag)] | A list of tags to apply to the list of evaluation metrics.       |
+| tags        | [[Tag](#tag)] | A list of tags to apply to all the evaluations in the payload.       |
 
 #### EvalMetric
 
