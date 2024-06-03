@@ -948,6 +948,12 @@ menu:
       identifier: coscreen
       parent: essentials_heading
       weight: 90000
+    - name: CoTerm
+      url: coterm/
+      pre: coscreen
+      identifier: coterm
+      parent: essentials_heading
+      weight: 90000
     - name: Troubleshooting
       url: coscreen/troubleshooting
       identifier: coscreen_troubleshooting

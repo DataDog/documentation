@@ -146,6 +146,20 @@
               algolia:
                 subcategory: Marketplace Integrations
 
+      - repo_name: documentation-private
+        contents:
+
+        - action: pull-and-push-file
+          branch: main
+          globs:
+          - docs/coterm.md
+          options:
+            dest_path: '/coterm/'
+            file_name: '_index.md'
+            front_matters:
+              title: Record terminal sessions and processes with CoTerm
+              kind: documentation
+              dependencies: ["https://github.com/DataDog/documentation-private/blob/main/docs/coterm.md"]
 
       - repo_name: ansible-datadog
         contents:
