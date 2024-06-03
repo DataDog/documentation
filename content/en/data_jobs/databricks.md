@@ -139,11 +139,19 @@ Optionally, you can also set other init script parameters and Datadog environmen
 
 {{< /tabs >}}
 
-### Advanced settings (optional)
+## Validation
 
-1. set `DD_RUN_NAME` environment variable using `spark_env_vars` field for your one-time job run.
+In Datadog, view the [Data Jobs Monitoring][6] page to see a list of all your Databricks jobs.
 
-   For Databricks Jobs submitted via the [one-time run API endpoint][8] (common when doing orchestration with tools outside of Databricks such as Airflow, Azure Data Factory), set this variable to the same value as your request payload's `run_name`. This allows Data Jobs Monitoring to aggregate your job runs and cluster utilization with the same `run_name` and show performance across time.
+## Advanced Configuration
+
+1. Tag spans at runtime
+
+{{% djm-runtime-tagging %}}
+
+1. Aggregate cluster metrics from one-time job runs
+
+   For Databricks Jobs submitted via the [one-time run API endpoint][8] (common when doing orchestration with tools outside of Databricks such as Airflow, Azure Data Factory), set variable `DD_JOB_NAME` inside `spark_env_vars` field to the same value as your request payload's `run_name`. This allows Data Jobs Monitoring to aggregate your cluster utilization from the same job and show performance across time.
 
    Example one-time job run request body:
    ```json
@@ -164,21 +172,13 @@ Optionally, you can also set other init script parameters and Datadog environmen
                "spark_version": "13.3.x-scala2.12",
                "node_type_id": "i3.xlarge",
                "spark_env_vars": {
-                  "DD_RUN_NAME": "Example Job"
+                  "DD_JOB_NAME": "Example Job"
                }
             }
          }
       ]
    }
    ```
-
-## Validation
-
-In Datadog, view the [Data Jobs Monitoring][6] page to see a list of all your Databricks jobs.
-
-## Tag spans at runtime
-
-{{% djm-runtime-tagging %}}
 
 ## Further Reading
 
