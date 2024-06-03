@@ -11,13 +11,15 @@ further_reading:
   tag: "Documentation"
   text: "OpenTelemetry metric types"
 - link: "https://github.com/DataDog/opentelemetry-mapping-go/blob/main/pkg/otlp/attributes/attributes.go"
-  tag: "GitHub"
+  tag: "Source Code"
   text: "Implementation code for these mappings"
 ---
 
 OpenTelemetry makes use of a number of [semantic conventions][1] that specify names for different types of data. This page lists mappings for OpenTelemetry semantic conventions to Datadog's semantic conventions.
 
 ### Unified Service Tagging
+
+<div class="alert alert-warning">For OpenTelemetry applications, unified service tagging is supported for only metrics and traces, not logs.</div>
 
 | OpenTelemetry convention | Datadog convention |
 | --- | --- |

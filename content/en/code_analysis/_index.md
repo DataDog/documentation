@@ -100,11 +100,11 @@ For more information about Static Analysis rulesets, see [Static Analysis Rules]
     {{< nextlink href="code_analysis/software_composition_analysis/generic_ci_providers" >}}Software Composition Analysis and Generic CI Providers{{< /nextlink >}}
 {{< /whatsnext >}}
 
-</br>
-
 ## Set up the GitHub integration 
 
-You must configure a GitHub App using the [GitHub integration tile][7] and set up the [source code integration][8] to see the offending code snippets as part of the Static Analysis results in the Datadog UI.
+You must configure a GitHub App using the [GitHub integration tile][7] and set up the [source code integration][8] to see the offending code snippets as part of the Static Analysis results in Datadog.
+
+{{< img src="code_analysis/source_code_integration.png" alt="Link to GitHub from the Code Analysis view" style="width:100%;">}}
 
 ## Further Reading
 

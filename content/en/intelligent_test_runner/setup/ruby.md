@@ -24,7 +24,7 @@ Intelligent Test Runner is only supported in the following versions and testing 
   * JRuby is not supported.
 * `rspec >= 3.0.0`
 * `minitest >= 5.0.0`
-  * [Rails parallel testing][2] is not supported as of library version `1.0.0.beta3`.
+  * [Rails parallel testing][2] is not supported as of library version `1.0.0.beta6`.
 * `cucumber >= 3.0.0`
 
 ## Setup
@@ -43,17 +43,17 @@ Add to your Gemfile:
 
 ```ruby
 group :test do
-  gem 'datadog-ci', '~> 1.0.0.beta3'
+  gem 'datadog-ci', '~> 1.0.0.beta6'
 end
 ```
 
-If you use other datadog products, upgrade to `2.0.0.beta2` version of gem `datadog`:
+If you use other datadog products, upgrade to `2.0.0.rc1` version of gem `datadog`:
 
 ```ruby
-gem 'datadog', '~> 2.0.0.beta2'
+gem 'datadog', '~> 2.0.0.rc1'
 
 group :test do
-  gem 'datadog-ci', '~> 1.0.0.beta3'
+  gem 'datadog-ci', '~> 1.0.0.beta6'
 end
 ```
 

@@ -215,7 +215,7 @@ spec:
 {{% /tab %}}
 {{< /tabs >}}
 
-In some setups, DNS resolution for `spec.nodeName` inside Pods may not work in AKS. This has been reported on all AKS Windows nodes and when the cluster is setup in a Virtual Network using custom DNS on Linux nodes. In this case use the first AKS configuration provided. Remove any settings for the Kubelet host path (defaults to `status.hostIP`) and use `tlsVerify: false`. This setting is **required**.
+Using `spec.nodeName` keeps TLS verification. In some setups, DNS resolution for `spec.nodeName` inside Pods may not work in AKS. This has been reported on all AKS Windows nodes and when the cluster is setup in a Virtual Network using custom DNS on Linux nodes. In this case use the first AKS configuration provided: remove any settings for the Kubelet host path (defaults to `status.hostIP`) and use `tlsVerify: false`. This setting is **required**. Do NOT set the Kubelet host path and `tlsVerify: false` together.
 
 ## Google Kubernetes Engine (GKE) {#GKE}
 
@@ -250,12 +250,10 @@ datadog:
   appKey: <DATADOG_APP_KEY>
   clusterName: <CLUSTER_NAME>
 
-  # Enable the new `kubernetes_state_core` check.
-  kubeStateMetricsCore:
-    enabled: true
-  # Avoid deploying kube-state-metrics chart.
-  # The new `kubernetes_state_core` doesn't require to deploy the kube-state-metrics anymore.
-  kubeStateMetricsEnabled: false
+  # The site of the Datadog intake to send Agent data to (example: `us3.datadoghq.com`)
+  # Default value is `datadoghq.com' (the US1 site)
+  # Documentation: https://docs.datadoghq.com/getting_started/site/
+  site: <DATADOG_SITE>
 
 agents:
   containers:

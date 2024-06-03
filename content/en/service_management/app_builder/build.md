@@ -83,38 +83,6 @@ An event can set the state of a UI component, open or close a modal, trigger ano
 
 For example, the [GitHub PR summarizer][4] blueprint uses a **Summarize** button with an event that triggers on a click. The event uses the **Trigger Query** reaction which runs the `summarizePulls` query.
 
-#### Dynamic table values
-
-Similar to [post-query transformation](#post-query-transformation), the table UI component allows you to customize the data source for the table. You can use the **Data Source** field to dynamically fill table values and constrain which objects are pulled into the table as columns.
-
-For example, the [GitHub PR Summarizer][4] blueprint uses a series of GitHub queries to summarize a list of pull requests in a repository. The query uses the data source entry below to constrain the table to 6 columns: `title`,`Summary`,`updated_at`,`user`,`html_url`, and `state`. The highlighted code dynamically populates the user column for each pull request with the author's avatar and GitHub username.
-
-{{< highlight js "hl_lines=17" >}}
-${(() => {
-    const summaryById = Object.fromEntries(
-        summarizePulls.outputs.map(({id, summary}) => [id, summary])
-    );
-    return listPulls.outputs.map(result => {
-        const {title, updated_at, user, state, html_url} = result;
-        const updatedAt = new Date(result.updated_at);
-        let summary;
-        if (summarizePulls.isLoading) {
-            summary = 'Summarizing';
-        } else {
-            summary = summaryById[result.id] ?? 'N/A';
-        }
-        return {
-            title: `**${title}**`,
-            updated_at: updatedAt.toLocaleString(),
-            user: {label: user.login, src: user.avatar_url},
-            summary,
-            state, html_url};
-    })
-})()}
-{{< /highlight >}}
-
-In the table, the **User** column fills with an avatar and GitHub username for each PR author.
-
 ### Queries
 
 Queries populate your app with data from Datadog APIs or supported integrations. They take inputs from other queries or from UI components and return outputs for use in other queries or in UI components.

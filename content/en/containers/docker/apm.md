@@ -8,7 +8,7 @@ aliases:
     - /agent/docker/apm
 further_reading:
     - link: 'https://github.com/DataDog/datadog-agent/tree/main/pkg/trace'
-      tag: 'Github'
+      tag: "Source Code"
       text: Source code
     - link: '/integrations/amazon_ecs/#trace-collection'
       tag: 'Documentation'
@@ -117,7 +117,7 @@ Use the following environment variables to configure tracing for the Docker Agen
 
 `DD_APM_FILTER_TAGS_REQUIRE`       
 : optional - _object_
-<br/>Defines rules for tag-based trace filtering. To be sent to Datadog, traces must have these these tags. See [Ignoring Unwanted Resources in APM][5]. 
+<br/>Defines rules for tag-based trace filtering. To be sent to Datadog, traces must have these tags. See [Ignoring Unwanted Resources in APM][5]. 
 
 `DD_APM_FILTER_TAGS_REGEX_REQUIRE` 
 : optional - _object_

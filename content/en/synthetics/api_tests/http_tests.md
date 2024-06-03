@@ -1,5 +1,5 @@
 ---
-title: HTTP Tests
+title: HTTP Testing
 kind: documentation
 description: Simulate HTTP requests to monitor public and internal API endpoints.
 aliases:
@@ -182,6 +182,9 @@ The most common errors include the following:
 `DNS`
 : DNS entry not found for the test URL. Possible causes include misconfigured test URL or the wrong configuration of your DNS entries.
 
+`Error performing HTTP/2 request`
+: The request could not be performed. See the dedicated [error][16] page for more information.
+
 `INVALID_REQUEST` 
 : The configuration of the test is invalid (for example, a typo in the URL).
 
@@ -221,7 +224,7 @@ You can restrict access to an HTTP test based on the roles in your organization.
 [4]: https://restfulapi.net/json-jsonpath/
 [5]: https://www.w3schools.com/xml/xpath_syntax.asp
 [6]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
-[7]: /monitors/notify/#notify-your-team
+[7]: /monitors/notify/#configure-notifications-and-automations
 [8]: https://www.markdownguide.org/basic-syntax/
 [9]: /monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
 [10]: /synthetics/guide/synthetic-test-monitors
@@ -230,3 +233,4 @@ You can restrict access to an HTTP test based on the roles in your organization.
 [13]: /account_management/rbac/
 [14]: /account_management/rbac#custom-roles
 [15]: /account_management/rbac/#create-a-custom-role
+[16]: /synthetics/api_tests/errors/#http-errors

@@ -72,6 +72,12 @@ These options are available for the `datadog-ci trace` command:
 **Example**: `team:backend`<br/>
 **Note**: Tags specified using `--tags` and with the `DD_TAGS` environment variable are merged. If the same key appears in both `--tags` and `DD_TAGS`, the value in the environment variable `DD_TAGS` takes precedence.
 
+`--measures`
+: Key-value pairs in the form `key:value` to be attached to the custom command as numerical values (the `--measures` parameter can be specified multiple times).<br/>
+_(Requires datadog-ci >=v2.35.0)_ <br/>
+**Default**: (none)<br/>
+**Example**: `size:1024`<br/>
+
 `--no-fail`
 : Prevents datadog-ci from failing even if run in an unsupported CI provider. In this case, the command is run and nothing is reported to Datadog.<br/>
 **Default**: `false`

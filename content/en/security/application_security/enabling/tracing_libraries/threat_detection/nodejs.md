@@ -13,7 +13,7 @@ further_reading:
       tag: "Documentation"
       text: "Adding user information to traces"
     - link: 'https://github.com/DataDog/dd-trace-js'
-      tag: 'GitHub'
+      tag: "Source Code"
       text: 'Node.js Datadog library source code'
     - link: "/security/default_rules/?category=cat-application-security"
       tag: "Documentation"
@@ -26,8 +26,6 @@ further_reading:
 You can monitor application security for Node.js apps running in Docker, Kubernetes, Amazon ECS, and AWS Fargate.
 
 {{% appsec-getstarted %}}
-
-{{% appsec-getstarted-with-rc %}}
 
 ## Enabling threat detection
 ### Get started
