@@ -861,7 +861,7 @@ table,
         padding: 0.65rem;
         border-left: 1px solid $ddgray !important;
     }
-    thead tr:first-child td {
+    tr:first-child td {
         border: none;
     }
     & > tbody tr:nth-child(2n) {
