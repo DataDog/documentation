@@ -17,7 +17,7 @@ further_reading:
   text: "Discover Widgets for your Dashboard"
 ---
 
-### Overview
+## Overview
 
 Shared visualizations allow you to display metric, trace, and log visualizations outside of Datadog. Share visualizations to enhance decision-making and problem-solving processes with team members. 
 
