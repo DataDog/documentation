@@ -799,8 +799,8 @@ video {
 }
 
 @include media-breakpoint-up(xl) {
-    .table-wrapper {
-        overflow-x: unset;
+    table {
+        table-layout: fixed;
     }
 }
 
