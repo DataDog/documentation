@@ -144,7 +144,7 @@ For more information, see [Remote Configuration][5].
 
 `DD_REMOTE_CONFIG_POLL_INTERVAL_SECONDS`
 : **Since**: 0.2.0 <br>
-**Default**: `5` <br>
+**Default**: `5.0` <br>
 Sets how often, in seconds, the Datadog Agent is queried for Remote Configuration updates.
 
 `DD_TRACE_DELEGATE_SAMPLING`
