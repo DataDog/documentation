@@ -7,6 +7,7 @@ import linecache
 import re
 import shutil
 import sys
+import opengraph_py3
 from collections import defaultdict
 
 import yaml
@@ -905,6 +906,20 @@ class Integrations:
                 item["draft"] = not item.get("is_public", False)
                 item["integration_id"] = item.get("integration_id", integration_id)
                 item["integration_version"] = item.get("integration_version", integration_version)
+                # if tile.resources exists, add it to the front matter as further reading
+                further_reading = []
+                if item.get("tile", {}).get("resources"):
+                    description = 
+                    for resource in item.get("tile", {}).get("resources"):
+                        further_reading.append(
+                            {
+                                "link": resource.get("url"),
+                                "tag": resource.get("resource_type"),
+                                "text": resource.get("description"),
+                            }
+                        )
+                        if item.get("type") == "further_reading":
+                
                 # remove aliases that point to the page they're located on
                 # get the current slug from the doc_link
                 if item.get('name'):
