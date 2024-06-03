@@ -4545,6 +4545,11 @@ menu:
       parent: csm_setup
       identifier: csm_setup_agentless_scanning
       weight: 10015
+    - name: Agent Variables
+      url: security/cloud_security_management/setup/agent_variables
+      parent: csm_setup
+      identifier: csm_setup_agent_variables
+      weight: 10016
     - name: Agent
       url: security/cloud_security_management/setup/csm_cloud_workload_security/agent
       parent: csm_setup_cloud_workload_security
