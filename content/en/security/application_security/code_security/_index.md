@@ -52,7 +52,6 @@ The available code security vulnerability types include the following:
 - Weak hash
 - Weak randomness
 - X-Content-Type-Options header missing
-- X-XSS-Protection header disabled
 - XPath injection
 - XSS
 
