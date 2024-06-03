@@ -5554,6 +5554,11 @@ menu:
       parent: pa_analytics
       identifier: pa_analytics_export
       weight: 504
+    - name: Guides
+      url: product_analytics/guides/
+      parent: product_analytics
+      identifier: pa_guides
+      weight: 6
     - name: Account Management
       url: account_management/
       pre: cog-2
