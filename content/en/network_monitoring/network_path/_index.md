@@ -6,7 +6,7 @@ further_reading:
 - link: "/network_monitoring/network_path/list_view"
   tag: "Doc"
   text: "Learn more about the List View in Network Path"
-- link: "/network_monitoring/network_path/list_view"
+- link: "/network_monitoring/network_path/path_view"
   tag: "Doc"
   text: "Learn more about the Path View in Network Path"
 ---
@@ -14,18 +14,21 @@ further_reading:
 <div class="alert alert-warning">Network Path for Datadog Network Performance Monitoring is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-<div class="alert alert-warning">Network Path for Datadog Network Performance Monitoring is in private beta. Reach out to your Account Representative to sign up.</div>
+<div class="alert alert-warning">Network Path for Datadog Network Performance Monitoring is in private beta. Reach out to your Customer Service Manager to sign up.</div>
 
 ## Overview
 
-Network Path displays the path that traffic takes through the network, from one point to another. This provides network administrators with the capability to precisely identify the origin of network problems, whether they're internal or from an Internet Service Provider (ISP), or due to other issues such as mis-routing. Each row signifies a route from a source to a destination, as depicted in the `source` and `destination` facet panel.
+[Network Path][1] illustrates the route that network traffic follows from its origin to its destination. This provides network administrators with the capability to precisely identify the source of network problems, whether they're internal or from an Internet Service Provider (ISP), or due to other issues such as mis-routing. Each row signifies a route from a source to it's destination, as depicted in the `source` and `destination` facet panel.
 
 {{< img src="network_performance_monitoring/network_path/network_path_default_view.png" alt="The Network Path default view, sorting by Datacenter and Un-Grouped Destination" >}}
 
 ## How it works
 
-At the host level, Datadog execute a `traceroute` to depict the hops a packet takes to reach its destination. Through the `traceroute`, Datadog collects hops as well as the latency at each hop. Every host runs its own `traceroute`, and the path is a visual representation of this list. 
+Datadog performs a `traceroute` at the host level to illustrate the packet's journey and latency at each hop from a source to it's destination. Each host runs its own `traceroute`, and the path shown is a visual representation of this list. 
 
+**Note**: By default, Datadog executes a 'traceroute` on static paths every minute and on dynamic paths every five minutes.
+
+**Waiting on brand design**
 
 {{< img src="network_performance_monitoring/network_path/network_path.png" alt="Diagram of how Network path works" >}}
 
@@ -33,3 +36,5 @@ At the host level, Datadog execute a `traceroute` to depict the hops a packet ta
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://app.datadoghq.com/network/path
