@@ -156,7 +156,7 @@ When creating a [dashboard][6] or a [notebook][7], you can use CI test data in y
 
 ## Alert on test data
 
-When you evaluate failed or flaky tests, or the performance of a CI test on the [**Test Runs** page][3], click **Create Monitor** to create a [CI Test monitor][4].
+When you're evaluating failed or flaky tests, or the performance of a CI test, you can export your search query in the [Test Visibility Explorer][3] to a [CI Test monitor][4] by clicking the **Export** button.
 
 ## Further reading
 

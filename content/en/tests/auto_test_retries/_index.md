@@ -59,6 +59,6 @@ If you suspect there are any issues with Auto Test Retries, navigate to the [Tes
 [1]: /tests/setup/
 [2]: https://app.datadoghq.com/ci/settings/test-service
 [3]: /tests/guides/flaky_test_management/
-[4]: /continuous_integration/explorer?tab=testruns
+[4]: /tests/explorer/
 [5]: /tests/early_flake_detection
 
