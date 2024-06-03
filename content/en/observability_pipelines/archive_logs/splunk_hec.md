@@ -138,24 +138,19 @@ Enter the following information based on your selected logs destinations.
 
 {{< tabs >}}
 {{% tab "Datadog Archives" %}}
+{{% observability_pipelines/destination_settings/datadog_archives_note %}}
 
-Select the cloud provider you are using to archive your logs.
+Follow the instructions for the cloud provider you are using to archive your logs.
 
-{{% collapse-content title="Amazon S3" level="h2" %}}
+{{% observability_pipelines/destination_settings/datadog_archives_amazon_s3 %}}
 
-{{% observability_pipelines/destination_settings/datadog_archives %}}
-
-{{% /collapse-content %}}
-{{% collapse-content title="Google Cloud Storage" level="h2" %}}
+#### Google Cloud Storage
 
 TKTK
 
-{{% /collapse-content %}}
-{{% collapse-content title="Azure Storage" level="h2" %}}
+#### Azure Storage
 
 TKTK
-
-{{% /collapse-content %}}
 
 {{% /tab %}}
 {{% tab "Datadog" %}}
@@ -219,23 +214,17 @@ TKTK
 {{< tabs >}}
 {{% tab "Datadog Archives" %}}
 
-For the Datadog Archives destination, select the cloud provider you are using to archive your logs.
-
-{{% collapse-content title="Amazon S3" level="h2" %}}
+For the Datadog Archives destination, follow the instructions for the cloud provider you are using to archive your logs.
 
 {{% observability_pipelines/destination_env_vars/datadog_archives %}}
 
-{{% /collapse-content %}}
-{{% collapse-content title="Google Cloud Storage" level="h2" %}}
+#### Google Cloud Storage
 
 TKTK
 
-{{% /collapse-content %}}
-{{% collapse-content title="Azure Storage" level="h2" %}}
+#### Azure Storage
 
 TKTK
-
-{{% /collapse-content %}}
 
 {{% /tab %}}
 {{% tab "Datadog" %}}
