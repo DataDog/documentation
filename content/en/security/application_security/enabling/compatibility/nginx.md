@@ -21,13 +21,12 @@ specified tracer version:
 | Automatic user activity event tracking | not supported                |
 | API Security                           | not supported                |
 
-There are, however, [important limitations][1] as of version 1.2.0.
+Please review nginx version 1.2.0 [limitations][1].
 
 ## Nginx support
 
 The nginx module policy is to support nginx versions up to one year past their
-end-of-life. Only Linux is supported, and only the arm64 and amd64
-architectures.
+end-of-life. Only Linux and the arm64 and amd64 architectures are supported.
 
 <div class="alert alert-info">If you would like to see support added for any of
 the unsupported capabilities, let us know! Fill out <a

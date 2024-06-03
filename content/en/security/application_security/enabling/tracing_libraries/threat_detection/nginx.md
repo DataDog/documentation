@@ -1,5 +1,5 @@
 ---
-title: Enabling ASM for nginx
+title: Enabling ASM for Nginx
 kind: documentation
 code_lang: nginx
 type: multi-code-lang
@@ -20,15 +20,15 @@ further_reading:
       text: "Troubleshooting Application Security Management"
 ---
 
-The datadog nginx tracing module has experimental support for threat detection and blocking.
+The Datadog nginx tracing module has experimental support for threat detection and blocking.
 
 ## Enabling threat detection
 ### Get started
 
-1. Verify that your nginx build has been compiled with the flag
+1. Verify that your nginx build was compiled with the flag
    `--with-threads`. Most distributions ship with this flag enabled by default.
    To check if your nginx installation was built with thread support, run `nginx
-   -V` and check the "configure arguments" line. If you cannot find
+   -V` and check the `configure arguments` line. If you cannot find
    `--with-threads` in the output, you will need to rebuild nginx with this flag
    enabled. For more information on how to build nginx from sources, see the
    [nginx documentation][3].
@@ -40,7 +40,7 @@ The datadog nginx tracing module has experimental support for threat detection a
 
 3. **Enable ASM in the nginx configuration**.
    You need to:
-   * define or more thread pools with the [`thread_pool`][4] directive,
+   * define one or more thread pools with the [`thread_pool`][4] directive,
    * explicitly enable AppSec with [`datadog_appsec_enabled`][5], and
    * map requests to a thread pool or pools that you defined with the directive
      [`datadog_waf_thread_pool_name`][6].
@@ -64,15 +64,11 @@ The datadog nginx tracing module has experimental support for threat detection a
 
 ## Limitations
 
-As of version 1.2.0, the available functionality has important limitations.
-Specifically:
+As of version 1.2.0, the available functionality has the following important limitations:
 
 * The request body is not inspected, regardless of its content type.
-* There is no remote configuration for AppSec, which 1) excludes 1-click
-  activation (AppSec must be explicitly enabled or disabled in the nginx
-  configuration), 2) rules cannot be updated/enabled/disabled, and 3) prevents
-  blocking users by IP address, since the list cannot be transmitted to the
-  nginx module.
+
+- There is no remote configuration for AppSec. Consequently, AppSec excludes 1-click activation (AppSec must be explicitly enabled or disabled in the nginx configuration), rules cannot be updated/enabled/disabled, and blocking users by IP address is prevented, since the list cannot be transmitted to the nginx module.
 * It's not possible to block the request based on characteristics of the
   response, such as its status code, headers, or body.
 
