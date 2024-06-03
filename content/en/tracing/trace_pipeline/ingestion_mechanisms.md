@@ -78,9 +78,9 @@ The configuration can be set by environment variables or directly in the code:
 {{% tab "Java" %}}
 **Remote configuration**
 
-<div class="alert alert-info"><strong>Resource-based sampling rules are in Beta</strong>: Starting from version <a href="https://github.com/DataDog/dd-trace-java/releases/tag/v1.34.0">1.34.0</a>, for Java applications, set by-service and by-resource sampling rates from the <a href="/tracing/trace_pipeline/ingestion_controls">Ingestion Control Page</a> UI. Request access to the feature via this <a href="https://forms.gle/WCG57yTCG27BCBB67">link</a>.</div>
+<div class="alert alert-info"><strong>Resource-based sampling rules are in Beta</strong>: Starting from version <a href="https://github.com/DataDog/dd-trace-java/releases/tag/v1.34.0">1.34.0</a>, for Java applications, set by-service and by-resource sampling rates from the <a href="/tracing/trace_pipeline/ingestion_controls#configure-the-service-ingestion-rate">Ingestion Control Page</a> UI. Request access to the feature via this <a href="https://forms.gle/WCG57yTCG27BCBB67">link</a>.</div>
 
-Read more about how to remotely configure sampling rates by service and resource in the [ingestion control page documentation][1].
+Read more about how to remotely configure sampling rates by service and resource in this [article][1].
 
 **Note**: The remotely set configuration takes precedence over local configuration.
 
@@ -106,7 +106,7 @@ Configure a rate limit by setting the environment variable `DD_TRACE_RATE_LIMIT`
 
 Read more about sampling controls in the [Java tracing library documentation][2].
 
-[1]: /tracing/trace_pipelines/ingestion_controls#service-ingestion-summary
+[1]: /tracing/guide/resource_based_sampling
 [2]: /tracing/trace_collection/dd_libraries/java
 [3]: https://github.com/DataDog/dd-trace-java/releases/tag/v1.26.0
 {{% /tab %}}
@@ -147,9 +147,9 @@ Read more about sampling controls in the [Ruby tracing library documentation][1]
 {{% tab "Go" %}}
 **Remote configuration**
 
-<div class="alert alert-info"><strong>Resource-based sampling rules are in Beta</strong>: Starting from version <a href="https://github.com/DataDog/dd-trace-go/releases/tag/v1.63.1">1.63.1</a>, for Go applications, set by-service and by-resource sampling rates from the <a href="/tracing/trace_pipeline/ingestion_controls">Ingestion Control Page</a> UI. Request access to the feature via this <a href="https://forms.gle/WCG57yTCG27BCBB67">link</a>.</div>
+<div class="alert alert-info"><strong>Resource-based sampling rules are in Beta</strong>: Starting from version <a href="https://github.com/DataDog/dd-trace-go/releases/tag/v1.63.1">1.63.1</a>, for Go applications, set by-service and by-resource sampling rates from the <a href="/tracing/trace_pipeline/ingestion_controls#configure-the-service-ingestion-rate">Ingestion Control Page</a> UI. Request access to the feature via this <a href="https://forms.gle/WCG57yTCG27BCBB67">link</a>.</div>
 
-Read more about how to remotely configure sampling rates by service and resource in the [ingestion control page documentation][1].
+Read more about how to remotely configure sampling rates by service and resource in this [article][3].
 
 **Note**: The remotely set configuration takes precedence over local configuration.
 
@@ -171,6 +171,7 @@ Read more about sampling controls in the [Go tracing library documentation][1].
 
 [1]: /tracing/trace_collection/dd_libraries/go
 [2]: https://github.com/DataDog/dd-trace-go/releases/tag/v1.60.0
+[3]: /tracing/guide/resource_based_sampling
 {{% /tab %}}
 {{% tab "Node.js" %}}
 For Node.js applications, set a global sampling rate in the library using the `DD_TRACE_SAMPLE_RATE` environment variable.
