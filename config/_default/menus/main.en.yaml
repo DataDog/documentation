@@ -5555,7 +5555,7 @@ menu:
       identifier: pa_analytics_export
       weight: 504
     - name: Guides
-      url: product_analytics/guides/
+      url: product_analytics/guide/
       parent: product_analytics
       identifier: pa_guides
       weight: 6
