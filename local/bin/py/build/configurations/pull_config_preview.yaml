@@ -119,7 +119,7 @@
         contents:
 
         - action: integrations
-          branch: main
+          branch: nick/further_reading_conf_cloud
           globs:
           - "*/metadata.csv"
           - "*/manifest.json"
