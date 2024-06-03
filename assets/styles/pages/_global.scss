@@ -796,9 +796,11 @@ video {
 // Tables
 .table-wrapper {
     overflow-x: auto;
-    table {
-        table-layout: fixed;
+}
 
+@include media-breakpoint-up(xl) {
+    .table-wrapper {
+        overflow-x: unset;
     }
 }
 
@@ -859,7 +861,7 @@ table,
         padding: 0.65rem;
         border-left: 1px solid $ddgray !important;
     }
-    tr:first-child td {
+    thead tr:first-child td {
         border: none;
     }
     & > tbody tr:nth-child(2n) {
