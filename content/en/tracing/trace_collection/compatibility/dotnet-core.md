@@ -114,8 +114,9 @@ The .NET Tracer works on .NET Core 2.0, 2.1, 2.2, 3.0, and 3.1, and on .NET 5 an
 | JIT Compiler bug on Linux/x64                 | 2.0.x,</br>2.1.0-2.1.11,</br>2.2.0-2.2.5  | Upgrade .NET Core to the latest patch version, or follow steps in the linked issue | [DataDog/dd-trace-dotnet/issues/302][6] |
 | Resource lookup bug with a non `en-US` locale | 2.0.0                                     | Upgrade .NET Core to 2.0.3 or above                                    | [dotnet/runtime/issues/23938][7]        |
 | JIT Compiler bug causing crash on shutdown    | 2.0.0-2.2.x                               | Upgrade .NET Core to 3.1.0 or above | [dotnet/runtime/pull/11885][15]   |
-| JIT Compiler bug                              | 2.x, 3.x, 5.x, 6.x, 7.x, 8.0.0-8.0.5      | Upgrade .NET 8.0.6 or above    | [dotnet/runtime/pull/73760][16]   |
+| JIT Compiler bug                              | 2.x, 3.x, 5.x, 6.x, 7.x, 8.0.0-8.0.5      | Upgrade .NET to 8.0.6 or above    | [dotnet/runtime/pull/73760][16]   |
 | JIT Compiler bug                              | All versions of .NET                      | No current workaround    | [dotnet/runtime/issues/85777][17]   |
+| .NET runtime bug                              | 6.0.0-6.0.10                              | Upgrade .NET 6.0.11 or above    | [dotnet/runtime/pull/76431][18]   |
 
 ## Supported Datadog Agent versions
 
@@ -169,3 +170,4 @@ Version updates imply the following changes to runtime support:
 [15]: https://github.com/dotnet/runtime/pull/73760
 [16]: https://github.com/dotnet/runtime/issues/11885
 [17]: https://github.com/dotnet/runtime/issues/85777
+[18]: https://github.com/dotnet/runtime/pull/76431
