@@ -217,7 +217,7 @@ See the information for the data collected for the AWS, Azure, and Google Cloud 
 | Tag Name | Tag Description |
 |---|---|
 | aws_availability_zone | The Availability Zone that hosts the line item. |
-| aws_bill_entity | The AWS seller that your account is with. Transactions can either be an AWS Marketplace purchase ('AWS Marketplace') or a purchase of other AWS services (`AWS`). |
+| aws_bill_entity | The AWS seller that your account is with. Transactions can either be an AWS Marketplace purchase (`AWS Marketplace`) or a purchase of other AWS services (`AWS`). |
 | aws_bill_type | The type of bill that this report covers (such as `Purchase`). |
 | aws_cost_type | The type of charge covering the line item (such as `SavingsPlanCoveredUsage`). |
 | aws_discount_lease_term | The length of time that a Reserved instance is reserved for. |
