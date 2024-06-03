@@ -2,6 +2,7 @@
 title: Error Tracking Dynamic Sampling
 kind: documentation
 is_beta: true
+private: true
 description: Learn about how Dynamic Sampling in Error Tracking can make sure that your volume isn't consumed all at once.
 further_reading:
 - link: '/logs/manage_data_collection'
