@@ -74,10 +74,6 @@ A range of errors can be accepted. By default 4xx errors are reported as errors 
 **Default**: `500-599`<br>
 A range of errors can be accepted. By default 5xx status codes are reported as errors for http servers. This configuration overrides that. Ex. `dd.http.server.error.statuses=500,502-599`
 
-### Spans
-
-### Sampling
-
 ### Traces
 
 `dd.trace.config`
@@ -301,30 +297,6 @@ When `false` tracing agent is disabled.
 **Default**: `true`<br>
 When `true`, the tracer collects [telemetry data][8]. Available for versions 0.104+. Defaults to `true` for versions 0.115+.
 
-### Profiling
-
-### Integrations
-
-`dd.integration.opentracing.enabled`
-: **Environment Variable**: `DD_INTEGRATION_OPENTRACING_ENABLED`<br>
-**Default**: `true`<br>
-By default the tracing client detects if a GlobalTracer is being loaded and dynamically registers a tracer into it. By turning this to false, this removes any tracer dependency on OpenTracing.
-
-`dd.hystrix.tags.enabled`
-: **Environment Variable**: `DD_HYSTRIX_TAGS_ENABLED`<br>
-**Default**: `false`<br>
-By default the Hystrix group, command, and circuit state tags are not enabled. This property enables them.
-
-`dd.trace.elasticsearch.body.enabled`
-: **Environment Variable**: `DD_TRACE_ELASTICSEARCH_BODY_ENABLED` <br>
-**Default**: `false`<br>
-When set to `true`, the body is added to Elasticsearch and OpenSearch spans.
-
-`dd.trace.elasticsearch.params.enabled`
-: **Environment Variable**: `DD_TRACE_ELASTICSEARCH_PARAMS_ENABLED` <br>
-**Default**: `true`<br>
-When set to `true`, the query string parameters are added to Elasticsearch and OpenSearch spans.
-
 ### JMX metrics
 
 `dd.jmxfetch.enabled`
@@ -369,6 +341,29 @@ StatsD port to send JMX metrics to. If you are using Unix Domain Sockets, input 
 **Default**: `false`<br>
 JMX integration to enable (for example, Kafka or ActiveMQ).
 
+### Integrations
+
+See how to disable integrations in the [integrations][13] compatibility section.
+
+`dd.integration.opentracing.enabled`
+: **Environment Variable**: `DD_INTEGRATION_OPENTRACING_ENABLED`<br>
+**Default**: `true`<br>
+By default the tracing client detects if a GlobalTracer is being loaded and dynamically registers a tracer into it. By turning this to false, this removes any tracer dependency on OpenTracing.
+
+`dd.hystrix.tags.enabled`
+: **Environment Variable**: `DD_HYSTRIX_TAGS_ENABLED`<br>
+**Default**: `false`<br>
+By default the Hystrix group, command, and circuit state tags are not enabled. This property enables them.
+
+`dd.trace.elasticsearch.body.enabled`
+: **Environment Variable**: `DD_TRACE_ELASTICSEARCH_BODY_ENABLED` <br>
+**Default**: `false`<br>
+When set to `true`, the body is added to Elasticsearch and OpenSearch spans.
+
+`dd.trace.elasticsearch.params.enabled`
+: **Environment Variable**: `DD_TRACE_ELASTICSEARCH_PARAMS_ENABLED` <br>
+**Default**: `true`<br>
+When set to `true`, the query string parameters are added to Elasticsearch and OpenSearch spans.
 
 **Note**:
 
@@ -378,10 +373,6 @@ JMX integration to enable (for example, Kafka or ActiveMQ).
 
   - If you are running the Agent as a container, ensure that `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` [is set to `true`][10], and that port `8125` is open on the Agent container.
   - In Kubernetes, [bind the DogStatsD port to a host port][11]; in ECS, [set the appropriate flags in your task definition][12].
-
-### Integrations
-
-See how to disable integrations in the [integrations][13] compatibility section.
 
 ### Examples
 
