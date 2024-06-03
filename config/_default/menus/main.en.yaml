@@ -5515,19 +5515,19 @@ menu:
       identifier: pa_session_replay_browser
       weight: 402
     - name: Privacy Options
-      url: product_analytics/session_replay/privacy_options
+      url: product_analytics/session_replay/browser/privacy_options
       parent: pa_session_replay_browser
-      identifier: pa_session_replay_privacy_options
+      identifier: pa_session_replay_browser_privacy_options
       weight: 102
     - name: Developer Tools
-      url: product_analytics/session_replay/developer_tools
+      url: product_analytics/session_replay/browser/developer_tools
       parent: pa_session_replay_browser
-      identifier: pa_session_replay_developer_tools
+      identifier: pa_session_replay_browser_developer_tools
       weight: 103
     - name: Troubleshooting
-      url: product_analytics/session_replay/troubleshooting
+      url: product_analytics/session_replay/browser/troubleshooting
       parent: pa_session_replay_browser
-      identifier: pa_session_replay_troubleshooting
+      identifier: pa_session_replay_browser_troubleshooting
       weight: 104
     - name: Analytics
       url: product_analytics/analytics/
