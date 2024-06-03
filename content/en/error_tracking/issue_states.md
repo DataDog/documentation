@@ -8,11 +8,11 @@ kind: documentation
 All issues in Error Tracking have a status to help you triage and prioritize issues or dismiss noise. There are three statuses:
 
 - **FOR REVIEW**: Ongoing and in need of attention because the issue is new or it's a regression.
-- **REVIEWED**: Triaged and need to be fixed, either now or later. 
+- **REVIEWED**: Triaged and needs to be fixed, either now or later. 
 - **IGNORED**: Requiring no additional investigation or action.
 - **RESOLVED**: Fixed and no longer occurring.
 
-All issues start with an FOR REVIEW status. Error Tracking automatically updates the status in the cases described below, or you can [manually update the status](#updating-an-error-status). You can also [view the history](#issue-history) of a given error's state changes.
+All issues start with a FOR REVIEW status. Error Tracking automatically updates the status in the cases described below, or you can [manually update the status](#updating-an-error-status). You can also [view the history](#issue-history) of a given error's state changes.
 
 The diagram below shows how the Error Tracking states are updated automatically and manually:
 {{< img src="error_tracking/issue-states-diagram.png" alt="Error Tracking Issue States" style="width:75%;" >}}
@@ -30,8 +30,8 @@ Error Tracking automatically marks issues as **REVIEWED** if one of the followin
 
 Error Tracking automatically marks issues as **RESOLVED** that appear to be inactive or resolved due to a lack of recent error occurrences:
 
-- If the issue was last reported in a version that is more than 14 days old, and a newer version has been released but does not report the same error, Error Tracking auto-resolves the issue. Configure your services with version tags (see instructions for [APM][1], [RUM][2], and [Logs][3]) to ensure that automatic resolution accounts for versions of your services. 
-- If `version` tags are not set up, Error Tracking auto-resolves an issue if there have been no new errors reported for that issue within the last 14 days.
+- If the issue was last reported in a version that is more than 14 days old, and a newer version has been released but does not report the same error, Error Tracking automatically resolves the issue. Configure your services with version tags (see instructions for [APM][1], [RUM][2], and [Logs][3]) to ensure that automatic resolution accounts for versions of your services. 
+- If `version` tags are not set up, Error Tracking automatically resolves an issue if there have been no new errors reported for that issue within the last 14 days.
 
 ## Automatic re-opening through regression detection
 
