@@ -1279,13 +1279,13 @@
     "description": "Test a rule.",
     "summary": "Test a rule",
     "request_description": "",
-    "request_schema_description": "Test the rule queries of a rule."
+    "request_schema_description": "Test the rule queries of a rule (rule property is ignored when applied to an existing rule)"
   },
   "ValidateSecurityMonitoringRule": {
     "description": "Validate a detection rule.",
     "summary": "Validate a detection rule",
     "request_description": "",
-    "request_schema_description": "Create a new rule."
+    "request_schema_description": "Validate a rule."
   },
   "DeleteSecurityMonitoringRule": {
     "description": "Delete an existing rule. Default rules cannot be deleted.",
@@ -1305,7 +1305,7 @@
     "description": "Test an existing rule.",
     "summary": "Test an existing rule",
     "request_description": "",
-    "request_schema_description": "Test the rule queries of a rule."
+    "request_schema_description": "Test the rule queries of a rule (rule property is ignored when applied to an existing rule)"
   },
   "ListSecurityMonitoringSignals": {
     "description": "The list endpoint returns security signals that match a search query.\nBoth this endpoint and the POST endpoint can be used interchangeably when listing\nsecurity signals.",
