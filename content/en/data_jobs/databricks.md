@@ -155,6 +155,7 @@ In Datadog, view the [Data Jobs Monitoring][6] page to see a list of all your Da
    If you are submitting Databricks Jobs via the [one-time run API endpoint][8], each job run will have a unique job ID. This can make it difficult to group and analyze cluster metrics for jobs that use ephemeral clusters. To aggregate cluster utilization from the same job and provide performance insights over time, you must set the `DD_JOB_NAME` variable inside the `spark_env_vars` of every `new_cluster` to the same value as your request payload's `run_name`.
 
    Here's an example of a one-time job run request body:
+   
    {{< highlight json "hl_lines=2 18" >}}
    {
       "run_name": "Example Job",
@@ -179,7 +180,7 @@ In Datadog, view the [Data Jobs Monitoring][6] page to see a list of all your Da
          }
       ]
    }
-   {{< /highlight >}}
+   {{< / highlight >}}
 
 ## Further Reading
 
