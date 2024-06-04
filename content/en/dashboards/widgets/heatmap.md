@@ -7,7 +7,7 @@ aliases:
     - /graphing/widgets/heat_map/
     - /dashboards/widgets/heat_map/
 further_reading:
-- link: "/real_user_monitoring/product_analytics/heatmaps/"
+- link: "/product_analytics/heatmaps/"
   tag: "Documentation"
   text: "Learn more about heatmaps"
 - link: "/dashboards/graphing_json/"
