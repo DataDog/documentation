@@ -72,18 +72,6 @@ The service page features summary cards with highlights on your service health. 
 
 Our [Service Level Objectives (SLOs)][5] and [Incidents][6] summaries allow you to monitor the status of SLOs and ongoing incidents, so that you can keep performance goals top of mind. Click the cards to create a new SLO on the service or declare an incident. The [security signals][18] summary highlights how your services react to application threats.
 
-## Dependencies
-
-{{< callout url="https://docs.google.com/forms/d/1imGm-4SfOPjwAr6fwgMgQe88mp4Y-n_zV0K3DcNW4UA/edit" d_target="#signupModal" btn_hidden="true" btn_hidden="false" header="Opt in to the private beta!" >}}
-Inferred services and the new Service Page layout are in private beta. To request access, complete the form.
-{{< /callout >}}
-
-Use the Dependency Map to visualize service-to-service communication and gain insight into system components such as databases, queues, and third-party dependencies. You can group dependencies by type and filter by Requests, Latency, or Errors to identify slow or failing connections.
-
-For more information, see [New Service page and inferred services][20].
-
-{{< img src="tracing/services/service_page/dependencies.png" alt="The dependency section of the APM Service page" style="width:100%;">}}
-
 ## Out-of-the-box graphs
 
 Datadog provides [out-of-the-box graphs][8] for any given Service:
@@ -261,6 +249,5 @@ Visualize the cost associate with your service's infrastructure used in the Cost
 [17]: https://www.datadoghq.com/blog/log-patterns/
 [18]: /security/application_security/how-appsec-works/
 [19]: https://www.datadoghq.com/blog/datadog-watchdog-insights-log-management/
-[20]: /tracing/guide/inferred-service-opt-in/
 [21]: /database_monitoring/connect_dbm_and_apm/
 [22]: /cloud_cost_management/

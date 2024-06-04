@@ -38,7 +38,7 @@ You can choose to install the Agent globally, or on a specific Databricks cluste
 {{% tab "Global init (Recommended)" %}}
 
 1. In Databricks, click your display name (email address) in the upper right corner of the page.
-1. Select **Admin Settings** and click the **Compute** tab.
+1. Select **Settings** and click the **Compute** tab.
 1. In the **All purpose clusters** section, next to **Global init scripts**, click **Manage**.
 1. Click **Add**. Name your script. Then, in the **Script** field, copy and paste the following script, remembering to replace the placeholders with your parameter values. 
 

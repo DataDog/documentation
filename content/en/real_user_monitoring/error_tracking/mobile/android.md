@@ -66,6 +66,13 @@ For any Android version, you can override the default setting for reporting non-
 
 ## Get deobfuscated stack traces
 
+Mapping files are used to deobfuscate stack traces, which helps in debugging errors. Using a unique build ID that gets generated, Datadog automatically matches the correct stack traces with the corresponding mapping files. This ensures that regardless of when the mapping file was uploaded (either during pre-production or production builds), the correct information is available for efficient QA processes when reviewing crashes and errors reported in Datadog.
+
+Depending on the [Android Gradle plugin][1] version, the matching of stack traces and mapping files relies on different fields:
+
+- Version 1.13.0 uses the `build_id` field
+- Older versions use a combination of the `service`, `version`, and `variant` fields
+
 ### Upload your mapping file
 
 **Note**: Re-uploading a source map does not override the existing one if the version has not changed.

@@ -21,6 +21,10 @@ title: ユーザーモニタリングと保護
 
 [ユーザーのログインとアクティビティを追跡](#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces)し、すぐに使える検出ルールでアカウントの乗っ取りやビジネスロジックの乱用を検出し、最終的に攻撃者をブロックすることができます。
 
+<div class="alert alert-info">
+<strong>ユーザーアクティビティの自動検出:</strong> Datadog トレーシングライブラリは、ユーザーアクティビティイベントを自動的に検出してレポートしようとします。詳細については、<a href="/security/application_security/threats/add-user-info/?tab=set_user#disabling-automatic-user-activity-event-tracking">ユーザーアクティビティイベントの自動追跡を無効にする</a>を参照してください。
+</div>
+
 すぐに使える検出ルールとして、以下のようなカスタムユーザーアクティビティがあります。
 
 | 内蔵のイベント名   | 必要なメタデータ                                    | 関連ルール                                                                                                                                                                                                       |
@@ -74,7 +78,7 @@ Blocking
     .blockIfMatch();
 ```
 
-[1]: /ja/tracing/trace_collection/compatibility/java/#setup
+[1]: /ja/tracing/trace_collection/custom_instrumentation/opentracing/java#setup
 {{< /programming-lang >}}
 
 {{< programming-lang lang="dotnet" >}}
@@ -679,6 +683,50 @@ track_custom_event(tracer, event_name, metadata)
 
 {{< /programming-lang-wrapper >}}
 
+### コードを変更せずにビジネスロジック情報を追跡する
+
+サービスで ASM が有効になっており、[リモート構成][1]が有効になっている場合、カスタムのビジネスロジックタグと一致するリクエストにフラグを立てるカスタム WAF ルールを作成することができます。この場合、アプリケーションを変更する必要はなく、すべて Datadog から行うことができます。
+
+まず、[Custom WAF Rule ページ][2]に移動し、"Create New Rule" をクリックします。
+
+{{< img src="security/application_security/threats/custom-waf-rule-menu.png" alt="ASM ホームページから Protection、In-App WAF、Custom Rules の順にクリックして、Custom WAF Rule メニューにアクセス" style="width:100%;" >}}
+
+カスタム WAF ルールを定義するためのメニューが開きます。"Business Logic" カテゴリーを選択すると、イベントタイプ (例: `users.password_reset`) を構成できるようになります。次に、追跡したいサービスと特定のエンドポイントを選択します。また、ルール条件を使用して特定のパラメーターをターゲットにし、_インスツルメント_したいコードフローを特定することもできます。条件が一致すると、ライブラリがトレースにタグを付け、それを ASM に転送するフラグを立てます。条件が不要な場合は、すべてに一致する大まかな条件を設定することもできます。
+
+{{< img src="security/application_security/threats/custom-waf-rule-form.png" alt="Create New Rule ボタンをクリックした際に表示されるフォームのスクリーンショット" style="width:50%;" >}}
+
+ルールが保存されると、リモート構成が有効になっているサービスのインスタンスにデプロイされます。
+
+
+[1]: /ja/agent/remote_config?tab=configurationyamlfile#application-security-management-asm
+[2]: https://app.datadoghq.com/security/appsec/in-app-waf?config_by=custom-rules
+
+## ユーザーアクティビティイベントの自動追跡
+
+ASM を有効にすると、最近の Datadog トレーシングライブラリは、ユーザーアクティビティイベントの自動検出を試みます。
+
+自動検出できるイベントは以下の通りです。
+
+- `users.login.success`
+- `users.login.failure`
+- `users.signup`
+
+### ユーザーアクティビティイベント自動追跡モード
+
+ユーザーアクティビティの自動追跡には、<code>safe</code> モードと <code>extended</code> モードの 2 種類があります
+
+<code>safe</code> モードでは、トレースライブラリはイベントのメタデータに PII 情報を含めません。トレーサーライブラリはユーザー ID の収集を試みますが、ユーザー ID が有効な [GUID][10] である場合のみです
+
+<code>extended</code> モードでは、トレースライブラリはユーザー ID とユーザーのメールアドレスを収集しようとします。このモードでは、ユーザー ID のタイプが GUID であるかどうかをチェックしません。トレースライブラリは、イベントから抽出できる値であれば何でもレポートします。
+
+ユーザーイベント自動追跡モードを構成するには、環境変数 <code>DD_APPSEC_AUTOMATED_USER_EVENTS_TRACKING</code> を <code>safe</code> または <code>extended</code> に設定します。デフォルトでは、トレーサーライブラリは <code>safe</code> モードを使用します。
+
+**注**: トレースライブラリがユーザーイベントから情報を抽出できない場合があります。イベントは空のメタデータでレポートされます。そのような場合は、[SDK](#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces) を使用して、ユーザーイベントを手動でインスツルメンテーションすることをお勧めします。
+
+## ユーザーアクティビティイベントの自動追跡を無効にする
+
+これらのイベントの検出を無効にするには、環境変数 <code>DD_APPSEC_AUTOMATED_USER_EVENTS_TRACKING</code> を <code>disabled</code> に設定します。これは、Datadog Agent ではなく、Datadog トレーシングライブラリをホストするアプリケーションで設定する必要があります。
+
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -691,3 +739,4 @@ track_custom_event(tracer, event_name, metadata)
 [8]: /ja/security/default_rules/bl-account-deletion-ratelimit/
 [9]: /ja/security/default_rules/bl-password-reset/
 [10]: /ja/security/default_rules/bl-payment-failures/
+[11]: https://guid.one/guid

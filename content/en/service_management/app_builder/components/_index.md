@@ -690,7 +690,7 @@ Content
 **Value**: string or expression
 
 Content type
-: Determines how to render the text.<br>
+: Determines how to render the text. When **Markdown** is selected, the text component supports [basic Markdown syntax][8], including images that you host elsewhere.<br>
 **Provided values**: plain text, Markdown
 
 ### Appearance
@@ -777,3 +777,4 @@ To view this component in context, see the [Metrics Explorer & Monitors Builder]
 [5]: https://datadoghq.slack.com/
 [6]: /service_management/app_builder/components/tables/
 [7]: /service_management/app_builder/expressions
+[8]: https://www.markdownguide.org/basic-syntax/

@@ -37,6 +37,6 @@ For the *Measure* parameter, see the table below for more information on what ea
 
 
 
-[1]: /dashboards/scheduled_reports/
+[1]: /dashboards/sharing/scheduled_reports/
 [2]: /service_management/service_level_objectives/#slo-status-corrections
 [3]: /service_management/service_level_objectives/#configuration
