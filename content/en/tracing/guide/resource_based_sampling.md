@@ -55,13 +55,15 @@ To see configured sampling rates by resource, navigate to the Ingestion controls
 
 ## Remotely configure sampling rules for the service
 
-To configure sampling rates for the service, by resource name, click the `Manage Ingestion rate` button. If the remote configuration option is disabled, make sure that the listed [requirements](#compatibility-requirements) are all met.
+To configure sampling rates for the service by resource name: 
+1. Click **Manage Ingestion rate**. If the remote configuration option is disabled, make sure that the listed [requirements](#compatibility-requirements) are all met.
+   {{< img src="/tracing/guide/resource_based_sampling/sampling_configuration_modal.png" alt="Configuration Modal" style="width:100%;">}}
+1. Click **Add new rule** to set sampling rates for some resources. Sampling rules use glob pattern matching, so you can use wildcards (`*`) to match against multiple resources at the same time.
+1. Click **Apply** to save the configuration.
 
-{{< img src="/tracing/guide/resource_based_sampling/sampling_configuration_modal.png" alt="Configuration Modal" style="width:100%;">}}
+The configuration should take effect in less than a minute. You can observe the configuration changes from the [Live Search Explorer][9].
 
-From the modal, set sampling rates for some resources by clicking `Add new rule`. Sampling rules use glob pattern matching, so you can use wildcards (`*`) to match against multiple resources at the same time. Click `Apply` to save the configuration: a confirmation pop-over will appear. The configuration should take effect in less than a minute, which you can be observe from the [Live Search Explorer][9].
-
-From the Service Ingestion Summary, the resources for which the sampling rate remotely applied is  should show `Remote Configured` in the `Configuration` column.
+From the **Service Ingestion Summary**, resources for which the sampling rate are remotely applied should show as `Remote Configured` in the **Configuration** column.
 
 
 
