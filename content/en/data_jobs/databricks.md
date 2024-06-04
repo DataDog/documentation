@@ -123,7 +123,7 @@ Optionally, you can also set other init script parameters and Datadog environmen
 | Variable                 | Description                                                                                                                                                      | Default |
 |--------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|
 | DD_API_KEY               | Your [Datadog API key][1]                                                                                                                                        |         |
-| DD_SITE                  | Your [Datadog site][2]                                                                                                                                           |         |
+| DD_SITE                  | Your [Datadog site][2].                                                                                                                                           |         |
 | DATABRICKS_WORKSPACE     | Name of your Databricks Workspace. It should match the name provided in the [Datadog-Databricks integration step](#configure-the-datadog-databricks-integration). Make sure to enclose the name in double quotes if it contains whitespace. |         |
 | DRIVER_LOGS_ENABLED      | Collect spark driver logs in Datadog.                                                                                                                          | false   |
 | WORKER_LOGS_ENABLED      | Collect spark workers logs in Datadog.                                                                                                                         | false   | 
