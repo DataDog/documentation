@@ -85,6 +85,13 @@ You can find the NetFlow page on the [Network Devices page][5].
 This data is also available in Dashboards, Notebooks, and more for more precise queries and for correlating with other sources of data.
 {{< img src="network_device_monitoring/netflow/notebook.png" alt="Notebook" width="80%" >}}
 
+## Sampling rate
+
+Netflow sampling rate is taken into account in the computation of bytes and packets by default. This means that the displayed values for bytes and packets are computed with the sampling rate applied.
+Additionally, you can query for **Bytes (Adjusted) (@adjusted_bytes)** and **Packets (Adjusted) (@adjusted_packets)** in Dashboards and Notebooks to visualize them.
+
+**Note:** You can query for **Bytes (Sampled) (@bytes)** and **Packets (Sampled) (@packets)** in Dashboards and Notebooks to visualize the real data sent by your devices.
+
 ## Retention
 
 NetFlow data is retained for 30 days by default.
