@@ -43,7 +43,7 @@ With these three tags, you can:
 | Language         | Minimum Tracer Version |
 |--------------|------------|
 | .NET    |  1.17.0+       |
-| C++    |  1.1.4+       |
+| C++    |  0.1.0+       |
 | Go         |  1.24.0+       |
 | Java   |  0.50.0+      |
 | Node    |  0.20.3+       |
@@ -332,7 +332,7 @@ To form a single point of configuration for all telemetry emitted directly from 
 
 
 [1]: /real_user_monitoring/platform/connect_rum_and_traces/
-[2]: /real_user_monitoring/browser/#setup
+[2]: /real_user_monitoring/browser/setup
    {{% /tab %}}
 
    {{% tab "Synthetics" %}}

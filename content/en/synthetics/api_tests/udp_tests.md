@@ -1,5 +1,5 @@
 ---
-title: UDP Tests
+title: UDP Testing
 kind: documentation
 description: Simulate UDP connections on your hosts
 further_reading:
@@ -131,7 +131,7 @@ You can restrict access to a UDP test based on the roles in your organization. W
 [2]: /synthetics/cicd_integrations
 [3]: /synthetics/search/#search
 [4]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
-[5]: /monitors/notify/#notify-your-team
+[5]: /monitors/notify/#configure-notifications-and-automations
 [6]: https://www.markdownguide.org/basic-syntax/
 [7]: /synthetics/settings/#global-variables
 [8]: /synthetics/guide/synthetic-test-monitors

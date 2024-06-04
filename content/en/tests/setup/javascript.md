@@ -179,6 +179,7 @@ The format of the annotations is the following, where `$TAG_NAME` and `$TAG_VALU
   "type": "DD_TAGS[$TAG_NAME]",
   "description": "$TAG_VALUE"
 }
+```
 
 ### Adding custom measures to tests
 
@@ -471,7 +472,7 @@ If the browser application being tested is instrumented using [Browser Monitorin
 [4]: https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests#Support-file
 [5]: /tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags
 [6]: /tests/guides/add_custom_measures/?tab=javascripttypescript
-[7]: /real_user_monitoring/browser/#setup
+[7]: /real_user_monitoring/browser/setup
 [8]: /continuous_integration/guides/rum_integration/
 [9]: https://docs.cypress.io/guides/references/migration-guide#Migrating-to-Cypress-100
 [10]: https://docs.cypress.io/api/plugins/after-run-api
@@ -584,11 +585,6 @@ For more information about `service` and `env` reserved tags, see [Unified Servi
 ## Collecting Git metadata
 
 {{% ci-git-metadata %}}
-
-## Git metadata upload
-
-From `dd-trace>=3.15.0` and `dd-trace>=2.28.0`, CI Visibility automatically uploads git metadata information (commit history). This metadata contains file names but no file contents. If you want to opt out of this behavior, you can do so by setting `DD_CIVISIBILITY_GIT_UPLOAD_ENABLED` to `false`. However, this is not recommended, as features like Intelligent Test Runner and others do not work without it.
-
 
 ## Manual testing API
 
@@ -733,6 +729,9 @@ Jest's [test.concurrent][17] is not supported.
 ### Jest's `--forceExit`
 Jest's [--forceExit][21] option may cause data loss. Datadog tries to send data immediately after your tests finish, but shutting down the process abruptly can cause some requests to fail. Use `--forceExit` with caution.
 
+### Mocha's `--exit`
+Mocha's [--exit][22] option may cause data loss. Datadog tries to send data immediately after your tests finish, but shutting down the process abruptly can cause some requests to fail. Use `--exit` with caution.
+
 ## Best practices
 
 Follow these practices to take full advantage of the testing framework and CI Visibility.
@@ -797,3 +796,4 @@ When you use this approach, both the testing framework and CI Visibility can tel
 [19]: https://www.npmjs.com/package/mocha-each
 [20]: /getting_started/tagging/unified_service_tagging
 [21]: https://jestjs.io/docs/cli#--forceexit
+[22]: https://mochajs.org/#-exit

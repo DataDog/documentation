@@ -18,15 +18,15 @@ further_reading:
 
 The C++ Datadog Trace library is open source - view the [GitHub repository][1] for more information.
 
-This library requires C++14 to build, but if you use [dynamic loading][2], then OpenTracing requires [C++11 or later][3].
+This library requires C++17 compiler to build.
 
-Supported platforms include Linux and Mac. To request Windows support, [contact Datadog support][4].
+Supported platforms include:
+- `x86_64` and `arm64` Linux.
+- `x86_64` Windows.
+- `arm64` macOS.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://github.com/DataDog/dd-opentracing-cpp
-[2]: /tracing/setup/cpp/#dynamic-loading
-[3]: https://github.com/opentracing/opentracing-cpp/#cc98
-[4]: /help/
+[1]: https://github.com/DataDog/dd-trace-cpp

@@ -9,7 +9,7 @@ further_reading:
   tag: "Blog"
   text: "PHP monitoring with Datadog APM and distributed tracing"
 - link: "https://github.com/DataDog/dd-trace-php"
-  tag: "GitHub"
+  tag: "Source Code"
   text: "Source code"
 - link: "/tracing/trace_collection/trace_context_propagation/php/"
   tag: "Documentation"
@@ -32,7 +32,7 @@ INI settings can be configured globally, for example, in the `php.ini` file, or 
 
 ### Apache
 
-For Apache with php-fpm, use the `env` directory in your `www.conf` configuration file to configure the PHP tracer, for example:
+For Apache with php-fpm, use the `env` directive in your `www.conf` configuration file to configure the PHP tracer, for example:
 
 ```
 ; Example of passing the host environment variable SOME_ENV
@@ -608,7 +608,7 @@ Read [Trace Context Propagation][11] for information about configuring the PHP t
 
 [1]: /getting_started/tagging/unified_service_tagging/
 [2]: https://httpd.apache.org/docs/2.4/mod/mod_env.html#setenv
-[3]: /tracing/setup/nginx/#nginx-and-fastcgi
+[3]: /tracing/trace_collection/proxy_setup/?tab=nginx
 [4]: /profiler/enabling/php/
 [5]: https://github.com/mind04/mod-ruid2
 [6]: /tracing/trace_pipeline/ingestion_mechanisms/

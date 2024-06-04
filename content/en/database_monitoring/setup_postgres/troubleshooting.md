@@ -3,9 +3,6 @@ title: Troubleshooting DBM Setup for Postgres
 kind: documentation
 description: Troubleshoot Database Monitoring setup for Postgres
 ---
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
-{{< /site-region >}}
 
 This page details common issues with setting up and using Database Monitoring with Postgres, and how to resolve them. Datadog recommends staying on the latest stable Agent version and adhering to the latest [setup documentation][1], as it can change with Agent version releases.
 

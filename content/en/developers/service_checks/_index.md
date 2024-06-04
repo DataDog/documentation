@@ -38,11 +38,9 @@ Service checks can be visualized and used in 3 Datadog sections:
 
 ### Check summary
 
-Click **Monitors** > **Check Summary** to see the [Check Summary][1] page.
+The [Check Summary][1] page lists all checks reported across your infrastructure in the past day. Select a check to get insights on the status and tags associated with the check.
 
 {{< img src="developers/service_checks/check_summary.png" alt="Check summary" >}}
-
-This is a list of all your checks and their statuses, reporting across your infrastructure in the past day. Select a check to get insights on the number of distinct checks for each of its associated tags.
 
 ### Screenboards
 
@@ -63,8 +61,7 @@ In this form, you can:
 
 ## Service check monitor
 
-Even if you can't graph a service check over time as you would for metrics, you can still monitor it.
-Go to **Monitors** > **New Monitor** and select **Service Check**:
+Even if you can't graph a service check over time as you would for metrics, you can still monitor it with a [Service Check Monitor][3].
 
 {{< img src="developers/service_checks/service_check_monitor.png" alt="Check monitor" >}}
 
@@ -73,13 +70,13 @@ In this form, you can:
 - **Pick a service check**: Select the check status name to monitor.
 - **Pick monitor scope**: Select the context for your monitor (including/excluding tags).
 - **Set alert conditions**: Choose between a simple check alert or a cluster alert.
-- **Notify your team**: Choose who this monitor should notify.
-- **Say what's happening**: Edit the notifications sent (find more about [Datadog notifications][4]).
+- **Configure notifications and automations**: Choose who this monitor should notify and edit the notifications sent (find more about [Datadog notifications][4]).
+- **Define permissions and audit notifications**: Edit access permissions for your monitor and set audit notifications.
 
-For more information on creating a service check see [Service Check Monitor][5]
+For more information on creating a service check, see [Service Check Monitor][5].
 
 [1]: https://app.datadoghq.com/check/summary
 [2]: https://app.datadoghq.com/dashboard
-[3]: https://app.datadoghq.com/monitors#create/custom
+[3]: https://app.datadoghq.com/monitors/create/custom
 [4]: /monitors/notify/
 [5]: /monitors/types/service_check/

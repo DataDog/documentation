@@ -411,13 +411,20 @@ tracer.configure(settings={
 
 {{< programming-lang lang="nodeJS" >}}
 
-Configure a blocklist on the [Http][1] plugin. Take note of what the blocklist matches on from the API docs. For example, Http matches on URLs, so if the trace's `http.url` span tag is `http://<domain>/healthcheck`, write a rule that matches the `healthcheck` URL:
+Configure a blocklist on the [Http][1] plugin. Take note of what the blocklist matches on from the API docs. For example, incoming Http requests matches on URL paths, so if the trace's `http.url` span tag is `http://<domain>/healthcheck`, write a rule that matches the `healthcheck` URL:
 
 
 ```
 const tracer = require('dd-trace').init();
 tracer.use('http', {
-  blocklist: ["/healthcheck"]
+  // incoming http requests match on the path
+  server: {
+    blocklist: ['/healthcheck']
+  },
+  // outgoing http requests match on a full URL
+  client: {
+    blocklist: ['https://telemetry.example.org/api/v1/record']
+  }
 })
 
 //import http

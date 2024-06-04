@@ -411,6 +411,13 @@ components:
       required: true
       schema:
         type: string
+    ReportID:
+      description: The ID of the report job.
+      in: path
+      name: report_id
+      required: true
+      schema:
+        type: string
     ResourceID:
       description: 'Identifier, formatted as `type:id`. Supported types: `connection`,
         `dashboard`, `notebook`, `security-rule`, `slo`.'
@@ -1346,11 +1353,10 @@ components:
       - type
       type: object
     AuthNMappingCreateRelationships:
-      description: Relationship of AuthN Mapping create object to Role.
-      properties:
-        role:
-          $ref: '#/components/schemas/RelationshipToRole'
-      type: object
+      description: Relationship of AuthN Mapping create object to a Role or Team.
+      oneOf:
+      - $ref: '#/components/schemas/AuthNMappingRelationshipToRole'
+      - $ref: '#/components/schemas/AuthNMappingRelationshipToTeam'
     AuthNMappingCreateRequest:
       description: Request for creating an AuthN Mapping.
       properties:
@@ -1364,6 +1370,23 @@ components:
       oneOf:
       - $ref: '#/components/schemas/SAMLAssertionAttribute'
       - $ref: '#/components/schemas/Role'
+      - $ref: '#/components/schemas/AuthNMappingTeam'
+    AuthNMappingRelationshipToRole:
+      description: Relationship of AuthN Mapping to a Role.
+      properties:
+        role:
+          $ref: '#/components/schemas/RelationshipToRole'
+      required:
+      - role
+      type: object
+    AuthNMappingRelationshipToTeam:
+      description: Relationship of AuthN Mapping to a Team.
+      properties:
+        team:
+          $ref: '#/components/schemas/RelationshipToTeam'
+      required:
+      - team
+      type: object
     AuthNMappingRelationships:
       description: All relationships associated with AuthN Mapping.
       properties:
@@ -1371,6 +1394,8 @@ components:
           $ref: '#/components/schemas/RelationshipToRole'
         saml_assertion_attribute:
           $ref: '#/components/schemas/RelationshipToSAMLAssertionAttribute'
+        team:
+          $ref: '#/components/schemas/RelationshipToTeam'
       type: object
     AuthNMappingResponse:
       description: AuthN Mapping response from the API.
@@ -1382,6 +1407,60 @@ components:
           items:
             $ref: '#/components/schemas/AuthNMappingIncluded'
           type: array
+      type: object
+    AuthNMappingTeam:
+      description: Team.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/AuthNMappingTeamAttributes'
+        id:
+          description: The ID of the Team.
+          example: f9bb8444-af7f-11ec-ac2c-da7ad0900001
+          type: string
+        type:
+          $ref: '#/components/schemas/TeamType'
+      type: object
+    AuthNMappingTeamAttributes:
+      description: Team attributes.
+      properties:
+        avatar:
+          description: Unicode representation of the avatar for the team, limited
+            to a single grapheme
+          example: "\U0001F951"
+          nullable: true
+          type: string
+        banner:
+          description: Banner selection for the team
+          format: int64
+          nullable: true
+          type: integer
+        handle:
+          description: The team's identifier
+          example: example-team
+          maxLength: 195
+          type: string
+        link_count:
+          description: The number of links belonging to the team
+          format: int32
+          maximum: 2147483647
+          readOnly: true
+          type: integer
+        name:
+          description: The name of the team
+          example: Example Team
+          maxLength: 200
+          type: string
+        summary:
+          description: A brief summary of the team, derived from the `description`
+          maxLength: 120
+          nullable: true
+          type: string
+        user_count:
+          description: The number of users belonging to the team
+          format: int32
+          maximum: 2147483647
+          readOnly: true
+          type: integer
       type: object
     AuthNMappingUpdateAttributes:
       description: Key/Value pair of attributes used for update request.
@@ -1415,11 +1494,10 @@ components:
       - type
       type: object
     AuthNMappingUpdateRelationships:
-      description: Relationship of AuthN Mapping update object to Role.
-      properties:
-        role:
-          $ref: '#/components/schemas/RelationshipToRole'
-      type: object
+      description: Relationship of AuthN Mapping update object to a Role or Team.
+      oneOf:
+      - $ref: '#/components/schemas/AuthNMappingRelationshipToRole'
+      - $ref: '#/components/schemas/AuthNMappingRelationshipToTeam'
     AuthNMappingUpdateRequest:
       description: Request to update an AuthN Mapping.
       properties:
@@ -4048,6 +4126,11 @@ components:
           description: The SECL expression of the Agent rule.
           example: exec.file.name == \"sh\"
           type: string
+        filters:
+          description: The platforms the Agent rule is supported on.
+          items:
+            type: string
+          type: array
         name:
           description: The name of the Agent rule.
           example: my_agent_rule
@@ -11692,15 +11775,17 @@ components:
       - DESCENDING
     LogsStorageTier:
       default: indexes
-      description: Specifies storage type as indexes or online-archives
+      description: Specifies storage type as indexes, online-archives or flex
       enum:
       - indexes
       - online-archives
+      - flex
       example: indexes
       type: string
       x-enum-varnames:
       - INDEXES
       - ONLINE_ARCHIVES
+      - FLEX
     LogsWarning:
       description: A warning message indicating something that went wrong with the
         query
@@ -15703,6 +15788,22 @@ components:
       - id
       - type
       type: object
+    RelationshipToTeam:
+      description: Relationship to team.
+      properties:
+        data:
+          $ref: '#/components/schemas/RelationshipToTeamData'
+      type: object
+    RelationshipToTeamData:
+      description: Relationship to Team object.
+      properties:
+        id:
+          description: The unique identifier of the team.
+          example: f9bb8444-af7f-11ec-ac2c-da7ad0900001
+          type: string
+        type:
+          $ref: '#/components/schemas/TeamType'
+      type: object
     RelationshipToTeamLinkData:
       description: Relationship between a link and a team
       properties:
@@ -16184,6 +16285,7 @@ components:
       - spans-sampling-processor
       - spans-errors-sampling-processor
       - spans-appsec-sampling-processor
+      example: spans-sampling-processor
       type: string
       x-enum-varnames:
       - SPANS_SAMPLING_PROCESSOR
@@ -16285,11 +16387,17 @@ components:
       required:
       - data
       type: object
-    RetentionFilterResponse:
+    RetentionFilterCreateResponse:
       description: The retention filters definition.
       properties:
         data:
           $ref: '#/components/schemas/RetentionFilter'
+      type: object
+    RetentionFilterResponse:
+      description: The retention filters definition.
+      properties:
+        data:
+          $ref: '#/components/schemas/RetentionFilterAll'
       type: object
     RetentionFilterType:
       default: spans-sampling-processor
@@ -16300,11 +16408,42 @@ components:
       type: string
       x-enum-varnames:
       - SPANS_SAMPLING_PROCESSOR
+    RetentionFilterUpdateAttributes:
+      description: The object describing the configuration of the retention filter
+        to create/update.
+      properties:
+        enabled:
+          description: Enable/Disable the retention filter.
+          example: true
+          type: boolean
+        filter:
+          $ref: '#/components/schemas/SpansFilterCreate'
+        filter_type:
+          $ref: '#/components/schemas/RetentionFilterAllType'
+        name:
+          description: The name of the retention filter.
+          example: my retention filter
+          type: string
+        rate:
+          description: 'Sample rate to apply to spans going through this retention
+            filter,
+
+            a value of 1.0 keeps all spans matching the query.'
+          example: 1.0
+          format: double
+          type: number
+      required:
+      - name
+      - filter
+      - enabled
+      - filter_type
+      - rate
+      type: object
     RetentionFilterUpdateData:
       description: The body of the retention filter to be updated.
       properties:
         attributes:
-          $ref: '#/components/schemas/RetentionFilterCreateAttributes'
+          $ref: '#/components/schemas/RetentionFilterUpdateAttributes'
         id:
           description: The ID of the retention filter.
           example: retention-filter-id
@@ -16693,6 +16832,74 @@ components:
       type: string
       x-enum-varnames:
       - SAML_ASSERTION_ATTRIBUTES
+    SLOReportInterval:
+      description: The frequency at which report data is to be generated.
+      enum:
+      - weekly
+      - monthly
+      example: weekly
+      type: string
+      x-enum-varnames:
+      - WEEKLY
+      - MONTHLY
+    SLOReportPostResponse:
+      description: The SLO report response.
+      properties:
+        data:
+          $ref: '#/components/schemas/SLOReportPostResponseData'
+      type: object
+    SLOReportPostResponseData:
+      description: The data portion of the SLO report response.
+      properties:
+        id:
+          description: The ID of the report job.
+          example: dc8d92aa-e0af-11ee-af21-1feeaccaa3a3
+          type: string
+        type:
+          description: The type of ID.
+          example: report_id
+          type: string
+      type: object
+    SLOReportStatus:
+      description: The status of the SLO report job.
+      enum:
+      - in_progress
+      - completed
+      - completed_with_errors
+      - failed
+      example: completed
+      type: string
+      x-enum-varnames:
+      - IN_PROGRESS
+      - COMPLETED
+      - COMPLETED_WITH_ERRORS
+      - FAILED
+    SLOReportStatusGetResponse:
+      description: The SLO report status response.
+      properties:
+        data:
+          $ref: '#/components/schemas/SLOReportStatusGetResponseData'
+      type: object
+    SLOReportStatusGetResponseAttributes:
+      description: The attributes portion of the SLO report status response.
+      properties:
+        status:
+          $ref: '#/components/schemas/SLOReportStatus'
+      type: object
+    SLOReportStatusGetResponseData:
+      description: The data portion of the SLO report status response.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SLOReportStatusGetResponseAttributes'
+        id:
+          description: The ID of the report job.
+          example: dc8d92aa-e0af-11ee-af21-1feeaccaa3a3
+          type: string
+        type:
+          description: The type of ID.
+          example: report_id
+          type: string
+      type: object
     ScalarColumn:
       description: A single column in a scalar query response.
       oneOf:
@@ -17406,6 +17613,47 @@ components:
       - GEO_DATA
       - EVENT_COUNT
       - NONE
+    SecurityMonitoringRuleQueryPayload:
+      description: Payload to test a rule query with the expected result.
+      properties:
+        expectedResult:
+          description: Expected result of the test.
+          example: true
+          type: boolean
+        index:
+          description: Index of the query under test.
+          example: 0
+          format: int64
+          minimum: 0
+          type: integer
+        payload:
+          $ref: '#/components/schemas/SecurityMonitoringRuleQueryPayloadData'
+      type: object
+    SecurityMonitoringRuleQueryPayloadData:
+      additionalProperties: {}
+      description: Payload used to test the rule query.
+      properties:
+        ddsource:
+          description: Source of the payload.
+          example: nginx
+          type: string
+        ddtags:
+          description: Tags associated with your data.
+          example: env:staging,version:5.1
+          type: string
+        hostname:
+          description: The name of the originating host of the log.
+          example: i-012345678
+          type: string
+        message:
+          description: The message of the payload.
+          example: 2019-11-19T14:37:58,995 INFO [process.name][20081] Hello World
+          type: string
+        service:
+          description: The name of the application or service generating the data.
+          example: payment
+          type: string
+      type: object
     SecurityMonitoringRuleResponse:
       description: Create a new rule.
       oneOf:
@@ -17427,6 +17675,31 @@ components:
       - MEDIUM
       - HIGH
       - CRITICAL
+    SecurityMonitoringRuleTestRequest:
+      description: Test the rule queries of a rule.
+      properties:
+        rule:
+          $ref: '#/components/schemas/SecurityMonitoringRuleCreatePayload'
+        ruleQueryPayloads:
+          description: Data payloads used to test rules query with the expected result.
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringRuleQueryPayload'
+          type: array
+      type: object
+    SecurityMonitoringRuleTestResponse:
+      description: Result of the test of the rule queries.
+      properties:
+        results:
+          description: 'Assert results are returned in the same order as the rule
+            query payloads.
+
+            For each payload, it returns True if the result matched the expected result,
+
+            False otherwise.'
+          items:
+            type: boolean
+          type: array
+      type: object
     SecurityMonitoringRuleThirdPartyOptions:
       description: Options on third party rules.
       properties:
@@ -17489,7 +17762,8 @@ components:
           $ref: '#/components/schemas/CloudConfigurationRuleComplianceSignalOptions'
         filters:
           description: Additional queries to filter matched events before they are
-            processed.
+            processed. This field is deprecated for log detection, signal correlation,
+            and workload security rules.
           items:
             $ref: '#/components/schemas/SecurityMonitoringFilter'
           type: array
@@ -17737,7 +18011,8 @@ components:
           type: array
         filters:
           description: Additional queries to filter matched events before they are
-            processed.
+            processed. This field is deprecated for log detection, signal correlation,
+            and workload security rules.
           items:
             $ref: '#/components/schemas/SecurityMonitoringFilter'
           type: array
@@ -17839,7 +18114,8 @@ components:
           type: integer
         filters:
           description: Additional queries to filter matched events before they are
-            processed.
+            processed. This field is deprecated for log detection, signal correlation,
+            and workload security rules.
           items:
             $ref: '#/components/schemas/SecurityMonitoringFilter'
           type: array
@@ -18118,7 +18394,8 @@ components:
           type: array
         filters:
           description: Additional queries to filter matched events before they are
-            processed.
+            processed. This field is deprecated for log detection, signal correlation,
+            and workload security rules.
           items:
             $ref: '#/components/schemas/SecurityMonitoringFilter'
           type: array
@@ -18239,13 +18516,22 @@ components:
           description: User ID of the user who created the rule.
           format: int64
           type: integer
+        defaultTags:
+          description: Default Tags for default rules (included in tags)
+          example:
+          - security:attacks
+          items:
+            description: Default Tag.
+            type: string
+          type: array
         deprecationDate:
           description: When the rule will be deprecated, timestamp in milliseconds.
           format: int64
           type: integer
         filters:
           description: Additional queries to filter matched events before they are
-            processed.
+            processed. This field is deprecated for log detection, signal correlation,
+            and workload security rules.
           items:
             $ref: '#/components/schemas/SecurityMonitoringFilter'
           type: array
@@ -18321,6 +18607,13 @@ components:
           type: integer
         creator:
           $ref: '#/components/schemas/SecurityMonitoringUser'
+        data_exclusion_query:
+          description: An exclusion query on the input data of the security rules,
+            which could be logs, Agent events, or other types of data based on the
+            security rule. Events matching this query are ignored by any detection
+            rules referenced in the suppression rule.
+          example: source:cloudtrail account_id:12345
+          type: string
         description:
           description: A description for the suppression rule.
           example: This rule suppresses low-severity signals in staging environments.
@@ -18369,6 +18662,13 @@ components:
       description: Object containing the attributes of the suppression rule to be
         created.
       properties:
+        data_exclusion_query:
+          description: An exclusion query on the input data of the security rules,
+            which could be logs, Agent events, or other types of data based on the
+            security rule. Events matching this query are ignored by any detection
+            rules referenced in the suppression rule.
+          example: source:cloudtrail account_id:12345
+          type: string
         description:
           description: A description for the suppression rule.
           example: This rule suppresses low-severity signals in staging environments.
@@ -18394,15 +18694,14 @@ components:
           type: string
         suppression_query:
           description: The suppression query of the suppression rule. If a signal
-            matches this query, it is suppressed and is not triggered . Same syntax
-            as the queries to search signals in the signal explorer.
+            matches this query, it is suppressed and is not triggered. It uses the
+            same syntax as the queries to search signals in the Signals Explorer.
           example: env:staging status:low
           type: string
       required:
       - name
       - enabled
       - rule_query
-      - suppression_query
       type: object
     SecurityMonitoringSuppressionCreateData:
       description: Object for a single suppression rule.
@@ -18446,6 +18745,13 @@ components:
     SecurityMonitoringSuppressionUpdateAttributes:
       description: The suppression rule properties to be updated.
       properties:
+        data_exclusion_query:
+          description: An exclusion query on the input data of the security rules,
+            which could be logs, Agent events, or other types of data based on the
+            security rule. Events matching this query are ignored by any detection
+            rules referenced in the suppression rule.
+          example: source:cloudtrail account_id:12345
+          type: string
         description:
           description: A description for the suppression rule.
           example: This rule suppresses low-severity signals in staging environments.
@@ -20331,6 +20637,53 @@ components:
       - channel_id
       - channel_name
       - redirect_url
+      type: object
+    SloReportCreateRequest:
+      description: The SLO report request body.
+      properties:
+        data:
+          $ref: '#/components/schemas/SloReportCreateRequestData'
+      required:
+      - data
+      type: object
+    SloReportCreateRequestAttributes:
+      description: The attributes portion of the SLO report request.
+      properties:
+        from_ts:
+          description: The `from` timestamp for the report in epoch seconds.
+          example: 1690901870
+          format: int64
+          type: integer
+        interval:
+          $ref: '#/components/schemas/SLOReportInterval'
+        query:
+          description: The query string used to filter SLO results. Some examples
+            of queries include `service:<service-name>` and `slo-name`.
+          example: slo_type:metric
+          type: string
+        timezone:
+          description: The timezone used to determine the start and end of each interval.
+            For example, weekly intervals start at 12am on Sunday in the specified
+            timezone.
+          example: America/New_York
+          type: string
+        to_ts:
+          description: The `to` timestamp for the report in epoch seconds.
+          example: 1706803070
+          format: int64
+          type: integer
+      required:
+      - query
+      - from_ts
+      - to_ts
+      type: object
+    SloReportCreateRequestData:
+      description: The data portion of the SLO report request.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SloReportCreateRequestAttributes'
+      required:
+      - attributes
       type: object
     SortDirection:
       default: desc
@@ -22408,6 +22761,7 @@ components:
       description: Included resources related to the team membership
       oneOf:
       - $ref: '#/components/schemas/User'
+      - $ref: '#/components/schemas/Team'
     UserTeamPermission:
       description: A user's permissions for a given team
       properties:
@@ -22657,20 +23011,30 @@ components:
         authorizationCode:
           authorizationUrl: /oauth2/v1/authorize
           scopes:
+            apm_api_catalog_read: View API catalog and API definitions.
+            apm_api_catalog_write: Add, modify, and delete API catalog definitions.
+            apm_read: Read and query APM and Trace Analytics.
             apm_service_catalog_read: View service catalog and service definitions.
             apm_service_catalog_write: Add, modify, and delete service catalog definitions
               when those definitions are maintained by Datadog.
-            cases_read: Read all cases data.
-            cases_write: Create, update and delete cases data.
             ci_visibility_pipelines_write: Create CI Visibility pipeline spans using
               the API.
             ci_visibility_read: View CI Visibility.
+            cloud_cost_management_read: View Cloud Cost pages. This does not restrict
+              access to the cloud cost data source in dashboards and notebooks.
+            cloud_cost_management_write: Configure cloud cost accounts and global
+              customizations.
+            continuous_profiler_pgo_read: Read and query Continuous Profiler data
+              for Profile-Guided Optimization (PGO).
             create_webhooks: Create webhooks integrations.
             dashboards_public_share: Generate public and authenticated links to share
               dashboards or embeddable graphs externally.
             dashboards_read: View dashboards.
             dashboards_write: Create and change dashboards.
+            data_scanner_read: View Data Scanner configurations.
+            data_scanner_write: Edit Data Scanner configurations.
             events_read: Read Events data.
+            hosts_read: List hosts and their attributes.
             incident_notification_settings_write: Configure Incidents Notification
               settings.
             incident_read: View incidents in Datadog.
@@ -22678,10 +23042,15 @@ components:
             incident_write: Create, view, and manage incidents in Datadog.
             metrics_read: View custom metrics.
             monitors_downtime: Set downtimes to suppress alerts from any monitor in
-              an organization. Mute and unmute hosts. The ability to write monitors
+              an organization. Mute and unmute monitors. The ability to write monitors
               is not required to set downtimes.
             monitors_read: View monitors.
             monitors_write: Edit and delete individual monitors.
+            org_management: Edit org configurations, including authentication and
+              certain security preferences such as configuring SAML, renaming an org,
+              configuring allowed login methods, creating child orgs, subscribing
+              & unsubscribing from apps in the marketplace, and enabling & disabling
+              Remote Configuration for the entire organization.
             security_monitoring_filters_read: Read Security Filters.
             security_monitoring_filters_write: Create, edit, and delete Security Filters.
             security_monitoring_findings_read: View CSPM Findings.
@@ -22716,6 +23085,9 @@ components:
             user_access_manage: Disable users, manage user roles, manage SAML-to-role
               mappings, and configure logs restriction queries.
             user_access_read: View users and their roles and settings.
+            workflows_read: View workflows.
+            workflows_run: Run workflows.
+            workflows_write: Create, edit, and delete workflows.
           tokenUrl: /oauth2/v1/token
       type: oauth2
     apiKeyAuth:
@@ -23093,11 +23465,10 @@ paths:
       description: 'Create a new API from the [OpenAPI](https://spec.openapis.org/oas/latest.html)
         specification given.
 
-        It supports version `2.0`, `3.0` and `3.1` of the specification. A specific
-        extension section, `x-datadog`,
+        See the [API Catalog documentation](https://docs.datadoghq.com/api_catalog/add_metadata/)
+        for additional
 
-        let you specify the `teamHandle` for your team responsible for the API in
-        Datadog.
+        information about the possible metadata.
 
         It returns the created API ID.
 
@@ -23327,7 +23698,11 @@ paths:
     post:
       description: 'Create a retention filter to index spans in your organization.
 
-        Returns the retention filter definition when the request is successful.'
+        Returns the retention filter definition when the request is successful.
+
+
+        Default filters with types spans-errors-sampling-processor and spans-appsec-sampling-processor
+        cannot be created.'
       operationId: CreateApmRetentionFilter
       requestBody:
         content:
@@ -23341,7 +23716,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RetentionFilterResponse'
+                $ref: '#/components/schemas/RetentionFilterCreateResponse'
           description: OK
         '400':
           $ref: '#/components/responses/BadRequestResponse'
@@ -23402,7 +23777,11 @@ paths:
         type: idempotent
   /api/v2/apm/config/retention-filters/{filter_id}:
     delete:
-      description: Delete a specific retention filter from your organization.
+      description: 'Delete a specific retention filter from your organization.
+
+
+        Default filters with types spans-errors-sampling-processor and spans-appsec-sampling-processor
+        cannot be deleted.'
       operationId: DeleteApmRetentionFilter
       parameters:
       - $ref: '#/components/parameters/RetentionFilterIdParam'
@@ -23446,7 +23825,11 @@ paths:
       x-undo:
         type: safe
     put:
-      description: Update a retention filter from your organization.
+      description: 'Update a retention filter from your organization.
+
+
+        Default filters (filters with types spans-errors-sampling-processor and spans-appsec-sampling-processor)
+        cannot be renamed or removed.'
       operationId: UpdateApmRetentionFilter
       parameters:
       - $ref: '#/components/parameters/RetentionFilterIdParam'
@@ -23800,10 +24183,6 @@ paths:
           description: Authentication Error
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: List all AuthN Mappings
       tags:
       - AuthN Mappings
@@ -23847,11 +24226,6 @@ paths:
           description: Not Found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - user_access_manage
       summary: Create an AuthN Mapping
       tags:
       - AuthN Mappings
@@ -24016,7 +24390,7 @@ paths:
       operationId: SearchCases
       parameters:
       - $ref: '#/components/parameters/PageSize'
-      - $ref: '#/components/parameters/PageOffset'
+      - $ref: '#/components/parameters/PageNumber'
       - $ref: '#/components/parameters/CaseSortableFieldParameter'
       - description: Search query
         in: query
@@ -24049,18 +24423,13 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - cases_read
       summary: Search cases
       tags:
       - Case Management
       x-menu-order: 1
       x-pagination:
         limitParam: page[size]
-        pageOffsetParam: page[offset]
+        pageParam: page[number]
         resultsPath: data
       x-undo:
         type: safe
@@ -24091,11 +24460,6 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - cases_write
       summary: Create a case
       tags:
       - Case Management
@@ -24134,11 +24498,6 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - cases_read
       summary: Get all projects
       tags:
       - Case Management
@@ -24172,11 +24531,6 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - cases_write
       summary: Create a project
       tags:
       - Case Management
@@ -24206,11 +24560,6 @@ paths:
           description: API error response
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - cases_write
       summary: Remove a project
       tags:
       - Case Management
@@ -24239,11 +24588,6 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - cases_read
       summary: Get the details of a project
       tags:
       - Case Management
@@ -24273,11 +24617,6 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - cases_read
       summary: Get the details of a case
       tags:
       - Case Management
@@ -24314,11 +24653,6 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - cases_write
       summary: Archive case
       tags:
       - Case Management
@@ -24355,11 +24689,6 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - cases_write
       summary: Assign case
       tags:
       - Case Management
@@ -24396,11 +24725,6 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - cases_write
       summary: Update case priority
       tags:
       - Case Management
@@ -24437,11 +24761,6 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - cases_write
       summary: Update case status
       tags:
       - Case Management
@@ -24478,11 +24797,6 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - cases_write
       summary: Unarchive case
       tags:
       - Case Management
@@ -24519,11 +24833,6 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - cases_write
       summary: Unassign case
       tags:
       - Case Management
@@ -25127,6 +25436,11 @@ paths:
           description: Forbidden
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cloud_cost_management_read
       summary: List Cloud Cost Management AWS CUR configs
       tags:
       - Cloud Cost Management
@@ -25167,6 +25481,11 @@ paths:
           description: Forbidden
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cloud_cost_management_write
       summary: Create Cloud Cost Management AWS CUR config
       tags:
       - Cloud Cost Management
@@ -25200,6 +25519,11 @@ paths:
           description: Not Found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cloud_cost_management_write
       summary: Delete Cloud Cost Management AWS CUR config
       tags:
       - Cloud Cost Management
@@ -25236,6 +25560,11 @@ paths:
           description: Forbidden
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cloud_cost_management_write
       summary: Update Cloud Cost Management AWS CUR config
       tags:
       - Cloud Cost Management
@@ -25280,6 +25609,11 @@ paths:
           description: Forbidden
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cloud_cost_management_read
       summary: List related AWS accounts
       tags:
       - Cloud Cost Management
@@ -25309,6 +25643,11 @@ paths:
           description: Forbidden
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cloud_cost_management_read
       summary: List Cloud Cost Management Azure configs
       tags:
       - Cloud Cost Management
@@ -25349,6 +25688,11 @@ paths:
           description: Forbidden
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cloud_cost_management_write
       summary: Create Cloud Cost Management Azure configs
       tags:
       - Cloud Cost Management
@@ -25382,6 +25726,11 @@ paths:
           description: Not Found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cloud_cost_management_write
       summary: Delete Cloud Cost Management Azure config
       tags:
       - Cloud Cost Management
@@ -25424,6 +25773,11 @@ paths:
           description: Forbidden
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cloud_cost_management_write
       summary: Update Cloud Cost Management Azure config
       tags:
       - Cloud Cost Management
@@ -25453,6 +25807,11 @@ paths:
           description: Forbidden
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cloud_cost_management_read
       summary: Cloud Cost Enabled
       tags:
       - Cloud Cost Management
@@ -25518,7 +25877,8 @@ paths:
         end_month)\ncursor := response.metadata.pagination.next_record_id\nWHILE cursor
         != null BEGIN\n  sleep(5 seconds)  # Avoid running into rate limit\n  response
         := GetMonthlyCostAttribution(start_month, end_month, next_record_id=cursor)\n
-        \ cursor := response.metadata.pagination.next_record_id\nEND\n```"
+        \ cursor := response.metadata.pagination.next_record_id\nEND\n```\n\nThis
+        endpoint is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/)."
       operationId: GetMonthlyCostAttribution
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
@@ -26100,9 +26460,9 @@ paths:
       x-menu-order: 4
       x-undo:
         type: idempotent
-      x-unstable: '**Note**: This endpoint is in private beta.
+      x-unstable: '**Note**: This endpoint is in public beta.
 
-        If you want to request access, complete the [form](https://forms.gle/Eqq6uXfGjYxmqpjDA).'
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/dora/incident:
     post:
       description: 'Use this API endpoint to provide data about incidents for DORA
@@ -26153,9 +26513,9 @@ paths:
       x-menu-order: 4
       x-undo:
         type: idempotent
-      x-unstable: '**Note**: This endpoint is in private beta.
+      x-unstable: '**Note**: This endpoint is in public beta.
 
-        If you want to request access, complete the [form](https://forms.gle/Eqq6uXfGjYxmqpjDA).'
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/downtime:
     get:
       description: Get all scheduled downtimes.
@@ -26539,11 +26899,6 @@ paths:
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - events_read
       summary: Search events
       tags:
       - Events
@@ -28632,6 +28987,11 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - org_management
       summary: Get IP Allowlist
       tags:
       - IP Allowlist
@@ -28662,6 +29022,11 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - org_management
       summary: Update IP Allowlist
       tags:
       - IP Allowlist
@@ -28971,10 +29336,6 @@ paths:
           description: Forbidden
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: Get archive order
       tags:
       - Logs Archives
@@ -29053,10 +29414,6 @@ paths:
           description: Forbidden
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: Get all archives
       tags:
       - Logs Archives
@@ -29172,10 +29529,6 @@ paths:
           description: Not found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: Get an archive
       tags:
       - Logs Archives
@@ -29307,10 +29660,6 @@ paths:
           description: Not found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: List read roles for an archive
       tags:
       - Logs Archives
@@ -29536,10 +29885,6 @@ paths:
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: Get all log-based metrics
       tags:
       - Logs Metrics
@@ -29642,10 +29987,6 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: Get a log-based metric
       tags:
       - Logs Metrics
@@ -29711,10 +30052,6 @@ paths:
           description: Authentication error
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: List restriction queries
       tags:
       - Logs Restriction Queries
@@ -29754,11 +30091,6 @@ paths:
           description: Authentication error
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - user_access_manage
       summary: Create a restriction query
       tags:
       - Logs Restriction Queries
@@ -29800,10 +30132,6 @@ paths:
           description: Authentication error
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: Get restriction query for a given role
       tags:
       - Logs Restriction Queries
@@ -29840,10 +30168,6 @@ paths:
           description: Authentication error
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: Get all restriction queries for a given user
       tags:
       - Logs Restriction Queries
@@ -29882,11 +30206,6 @@ paths:
           description: Not found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - user_access_manage
       summary: Delete a restriction query
       tags:
       - Logs Restriction Queries
@@ -29930,10 +30249,6 @@ paths:
           description: Not found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: Get a restriction query
       tags:
       - Logs Restriction Queries
@@ -29982,11 +30297,6 @@ paths:
           description: Not found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - user_access_manage
       summary: Update a restriction query
       tags:
       - Logs Restriction Queries
@@ -30032,11 +30342,6 @@ paths:
           description: Not found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - user_access_manage
       summary: Revoke role from a restriction query
       tags:
       - Logs Restriction Queries
@@ -30081,10 +30386,6 @@ paths:
           description: Not found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: List roles for a restriction query
       tags:
       - Logs Restriction Queries
@@ -30129,11 +30430,6 @@ paths:
           description: Not found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - user_access_manage
       summary: Grant role to a restriction query
       tags:
       - Logs Restriction Queries
@@ -30594,11 +30890,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Too Many Requests
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - metrics_read
       summary: List active tags and aggregations
       tags:
       - Metrics
@@ -30787,10 +31078,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Too Many Requests
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: Tag Configuration Cardinality Estimator
       tags:
       - Metrics
@@ -31052,10 +31339,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Too Many Requests
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: List distinct metric volumes by metric name
       tags:
       - Metrics
@@ -31368,7 +31651,7 @@ paths:
       - Roles
       x-given:
         permission:
-          source: data[0]
+          source: data[4]
           step: there is a valid "permission" in the system
       x-menu-order: 1
       x-undo:
@@ -32035,7 +32318,7 @@ paths:
           $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Get all CSM Threats Agent rules
       tags:
-      - Cloud Workload Security
+      - CSM Threats
       x-menu-order: 3
       x-undo:
         type: safe
@@ -32067,7 +32350,7 @@ paths:
           $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Create a CSM Threats Agent rule
       tags:
-      - Cloud Workload Security
+      - CSM Threats
       x-codegen-request-body-name: body
       x-given:
         agent_rule:
@@ -32102,7 +32385,7 @@ paths:
           $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Delete a CSM Threats Agent rule
       tags:
-      - Cloud Workload Security
+      - CSM Threats
       x-menu-order: 6
       x-undo:
         type: idempotent
@@ -32127,7 +32410,7 @@ paths:
           $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Get a CSM Threats Agent rule
       tags:
-      - Cloud Workload Security
+      - CSM Threats
       x-menu-order: 2
       x-undo:
         type: safe
@@ -32164,7 +32447,7 @@ paths:
           $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Update a CSM Threats Agent rule
       tags:
-      - Cloud Workload Security
+      - CSM Threats
       x-codegen-request-body-name: body
       x-menu-order: 5
       x-undo:
@@ -32193,7 +32476,7 @@ paths:
           $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Get the latest CSM Threats policy
       tags:
-      - Cloud Workload Security
+      - CSM Threats
       x-menu-order: 1
       x-undo:
         type: safe
@@ -32256,11 +32539,11 @@ paths:
 
         Restriction policies can be applied to the following resources:
 
-        - Connections: `connection`
-
         - Dashboards: `dashboard`
 
         - Notebooks: `notebook`
+
+        - Powerpacks: `powerpack`
 
         - Security Rules: `security-rule`
 
@@ -32273,11 +32556,11 @@ paths:
 
         -------------------------|--------------------------
 
-        Connections              | `viewer`, `editor`, `resolver`
-
         Dashboards               | `viewer`, `editor`
 
         Notebooks                | `viewer`, `editor`
+
+        Powerpacks               | `viewer`, `editor`
 
         Security Rules           | `viewer`, `editor`
 
@@ -33626,7 +33909,7 @@ paths:
           $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Get the latest Cloud Workload Security policy
       tags:
-      - Cloud Workload Security
+      - CSM Threats
       x-menu-order: 1
       x-undo:
         type: safe
@@ -33647,7 +33930,7 @@ paths:
           $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Get all Cloud Workload Security Agent rules
       tags:
-      - Cloud Workload Security
+      - CSM Threats
       x-menu-order: 3
       x-undo:
         type: safe
@@ -33678,7 +33961,7 @@ paths:
           $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Create a Cloud Workload Security Agent rule
       tags:
-      - Cloud Workload Security
+      - CSM Threats
       x-codegen-request-body-name: body
       x-given:
         agent_rule:
@@ -33713,7 +33996,7 @@ paths:
           $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Delete a Cloud Workload Security Agent rule
       tags:
-      - Cloud Workload Security
+      - CSM Threats
       x-menu-order: 6
       x-undo:
         type: idempotent
@@ -33737,7 +34020,7 @@ paths:
           $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Get a Cloud Workload Security Agent rule
       tags:
-      - Cloud Workload Security
+      - CSM Threats
       x-menu-order: 2
       x-undo:
         type: safe
@@ -33774,7 +34057,7 @@ paths:
           $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Update a Cloud Workload Security Agent rule
       tags:
-      - Cloud Workload Security
+      - CSM Threats
       x-codegen-request-body-name: body
       x-menu-order: 5
       x-undo:
@@ -34251,6 +34534,45 @@ paths:
         - name: rule_id
           source: id
         type: unsafe
+  /api/v2/security_monitoring/rules/test:
+    post:
+      description: Test a rule.
+      operationId: TestSecurityMonitoringRule
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SecurityMonitoringRuleTestRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityMonitoringRuleTestResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/ConcurrentModificationResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_rules_write
+      summary: Test a rule
+      tags:
+      - Security Monitoring
+      x-codegen-request-body-name: body
+      x-menu-order: 9
+      x-undo:
+        type: idempotent
   /api/v2/security_monitoring/rules/validation:
     post:
       description: Validate a detection rule.
@@ -34279,7 +34601,7 @@ paths:
       tags:
       - Security Monitoring
       x-codegen-request-body-name: body
-      x-menu-order: 8
+      x-menu-order: 10
       x-undo:
         type: idempotent
   /api/v2/security_monitoring/rules/{rule_id}:
@@ -34342,7 +34664,10 @@ paths:
         must be included. For example, when modifying a query all queries must be
         included.
 
-        Default rules can only be updated to be enabled and to change notifications.'
+        Default rules can only be updated to be enabled, to change notifications,
+        or to update
+
+        the tags (default tags cannot be removed).'
       operationId: UpdateSecurityMonitoringRule
       parameters:
       - $ref: '#/components/parameters/SecurityMonitoringRuleID'
@@ -34379,6 +34704,47 @@ paths:
       - Security Monitoring
       x-codegen-request-body-name: body
       x-menu-order: 6
+      x-undo:
+        type: idempotent
+  /api/v2/security_monitoring/rules/{rule_id}/test:
+    post:
+      description: Test an existing rule.
+      operationId: TestExistingSecurityMonitoringRule
+      parameters:
+      - $ref: '#/components/parameters/SecurityMonitoringRuleID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SecurityMonitoringRuleTestRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityMonitoringRuleTestResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/ConcurrentModificationResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_rules_write
+      summary: Test an existing rule
+      tags:
+      - Security Monitoring
+      x-codegen-request-body-name: body
+      x-menu-order: 8
       x-undo:
         type: idempotent
   /api/v2/security_monitoring/signals:
@@ -34459,7 +34825,7 @@ paths:
       summary: Get a quick list of security signals
       tags:
       - Security Monitoring
-      x-menu-order: 10
+      x-menu-order: 12
       x-pagination:
         cursorParam: page[cursor]
         cursorPath: meta.page.after
@@ -34503,7 +34869,7 @@ paths:
       tags:
       - Security Monitoring
       x-codegen-request-body-name: body
-      x-menu-order: 9
+      x-menu-order: 11
       x-pagination:
         cursorParam: body.page.cursor
         cursorPath: meta.page.after
@@ -35792,6 +36158,167 @@ paths:
       x-undo:
         type: idempotent
       x-unstable: '**Note**: This endpoint is deprecated.'
+  /api/v2/slo/report:
+    post:
+      description: 'Create a job to generate an SLO report. The report job is processed
+        asynchronously and eventually results in a CSV report being available for
+        download.
+
+
+        Check the status of the job and download the CSV report using the returned
+        `report_id`.'
+      operationId: CreateSLOReportJob
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SloReportCreateRequest'
+        description: Create SLO report job request body.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SLOReportPostResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - slos_read
+      summary: Create a new SLO report
+      tags:
+      - Service Level Objectives
+      x-codegen-request-body-name: body
+      x-given:
+        report:
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"query\": \"slo_type:metric
+              \\\"SLO Reporting Test\\\"\",\n      \"interval\": \"monthly\",\n      \"from_ts\":
+              {{ timestamp(\"now - 21d\") }},\n      \"to_ts\":  {{ timestamp(\"now\")
+              }}\n    }\n  }\n}"
+          step: there is a valid "report" in the system
+      x-menu-order: 101
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This feature is in private beta. To request access, use
+        the request access form in the [Service Level Objectives](https://docs.datadoghq.com/service_management/service_level_objectives/#slo-csv-export)
+        docs.'
+  /api/v2/slo/report/{report_id}/download:
+    get:
+      description: 'Download an SLO report. This can only be performed after the report
+        job has completed.
+
+
+        Reports are not guaranteed to exist indefinitely. Datadog recommends that
+        you download the report as soon as it is available.'
+      operationId: GetSLOReport
+      parameters:
+      - $ref: '#/components/parameters/ReportID'
+      responses:
+        '200':
+          content:
+            text/csv:
+              schema:
+                type: string
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - slos_read
+      summary: Get SLO report
+      tags:
+      - Service Level Objectives
+      x-menu-order: 103
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This feature is in private beta. To request access, use
+        the request access form in the [Service Level Objectives](https://docs.datadoghq.com/service_management/service_level_objectives/#slo-csv-export)
+        docs.'
+  /api/v2/slo/report/{report_id}/status:
+    get:
+      description: Get the status of the SLO report job.
+      operationId: GetSLOReportJobStatus
+      parameters:
+      - $ref: '#/components/parameters/ReportID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SLOReportStatusGetResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - slos_read
+      summary: Get SLO report status
+      tags:
+      - Service Level Objectives
+      x-menu-order: 102
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This feature is in private beta. To request access, use
+        the request access form in the [Service Level Objectives](https://docs.datadoghq.com/service_management/service_level_objectives/#slo-csv-export)
+        docs.'
   /api/v2/spans/analytics/aggregate:
     post:
       description: 'The API endpoint to aggregate spans into buckets and compute metrics
@@ -35818,6 +36345,11 @@ paths:
           $ref: '#/components/responses/ForbiddenResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - apm_read
       summary: Aggregate spans
       tags:
       - Spans
@@ -35902,6 +36434,11 @@ paths:
           $ref: '#/components/responses/SpansUnprocessableEntityResponse'
         '429':
           $ref: '#/components/responses/SpansTooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - apm_read
       summary: Get a list of spans
       tags:
       - Spans
@@ -35948,6 +36485,11 @@ paths:
           $ref: '#/components/responses/SpansUnprocessableEntityResponse'
         '429':
           $ref: '#/components/responses/SpansTooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - apm_read
       summary: Search spans
       tags:
       - Spans
@@ -37097,7 +37639,10 @@ paths:
 
         [`/historical_cost`](https://docs.datadoghq.com/api/latest/usage-metering/#get-historical-cost-across-your-account)
 
-        instead.'
+        instead.
+
+
+        This endpoint is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/).'
       operationId: GetCostByOrg
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
@@ -37160,7 +37705,10 @@ paths:
 
         and is delayed by up to 72 hours from when it was incurred.
 
-        To access historical costs prior to this, use the `/historical_cost` endpoint.'
+        To access historical costs prior to this, use the `/historical_cost` endpoint.
+
+
+        This endpoint is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/).'
       operationId: GetEstimatedCostByOrg
       parameters:
       - description: String to specify whether cost is broken down at a parent-org
@@ -37248,7 +37796,10 @@ paths:
       description: 'Get historical cost across multi-org and single root-org accounts.
 
         Cost data for a given month becomes available no later than the 16th of the
-        following month.'
+        following month.
+
+
+        This endpoint is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/).'
       operationId: GetHistoricalCostByOrg
       parameters:
       - description: String to specify whether cost is broken down at a parent-org
@@ -37572,7 +38123,8 @@ paths:
         Projected cost data is only available for the current month and becomes available
         around the 12th of the month.
 
-        This endpoint requires the usage_read authorization scope.'
+
+        This endpoint is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/).'
       operationId: GetProjectedCost
       parameters:
       - description: String to specify whether cost is broken down at a parent-org
@@ -38180,10 +38732,6 @@ tags:
     Cloud Cost Management accounts for AWS and Azure. See the [Cloud Cost Management
     page](https://docs.datadoghq.com/cloud_cost_management/) for more information.
   name: Cloud Cost Management
-- description: Workload activity security rules for generating events using the Datadog
-    security Agent. See the [Setting up CSM Workload Security page](https://docs.datadoghq.com/security/cloud_security_management/setup/csm_workload_security/)
-    for more information.
-  name: Cloud Workload Security
 - description: Manage your Datadog Cloudflare integration directly through the Datadog
     API. See the [Cloudflare integration page](https://docs.datadoghq.com/integrations/cloudflare/)
     for more information.
@@ -38454,6 +39002,18 @@ tags:
   externalDocs:
     url: https://docs.datadoghq.com/tracing/service_catalog/
   name: Service Definition
+- description: '[Service Level Objectives](https://docs.datadoghq.com/monitors/service_level_objectives/#configuration)
+
+    (SLOs) are a key part of the site reliability engineering toolkit.
+
+    SLOs provide a framework for defining clear targets around application performance,
+
+    which ultimately help teams provide a consistent customer experience,
+
+    balance feature development with platform stability,
+
+    and improve communication with internal and external users.'
+  name: Service Level Objectives
 - description: 'API to create, update scorecard rules and outcomes. See [Service Scorecards](https://docs.datadoghq.com/service_catalog/scorecards)
     for more information.
 
@@ -38485,8 +39045,6 @@ tags:
     monthly usage across multiple facets of Datadog.
 
     This API is available to all Pro and Enterprise customers.
-
-    Usage is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/).
 
 
     **Note**: Usage data is delayed by up to 72 hours from when it was incurred.

@@ -18,7 +18,7 @@ title: データベースサービスの異常な p99 レイテンシーに関�
 
 _所要時間 3 分_
 
-{{< img src="tracing/guide/alert_anomalies_p99_database/alert_anomalies_full.mp4" video="true" alt="モニターの継続的なアラート設定" style="width:90%;">}}
+{{< img src="tracing/guide/alert_anomalies_p99_database/alert_anomalies_cropped.mp4" video="true" alt="進行中のアラートがあるモニター表示" style="width:90%;">}}
 
 Datadog では、ユーザー自身で継続的にサービスの健全性を監視する代わりに、APM を使用して健全性を追跡するようにモニターを設定できます。ここでは、異常検知モニターを使用します。[異常検知][1]とは、傾向や、季節的な曜日や時間帯のパターンを考慮しながら、メトリクスの挙動が過去のものとは異なる場合、これを認識できるアルゴリズム機能です。異常検知は、しきい値ベースのアラート設定では監視することが困難または不可能な強い傾向や反復パターンを持つメトリクスに適しています。
 
@@ -29,7 +29,7 @@ Datadog では、ユーザー自身で継続的にサービスの健全性を監
 
     [サービス][5]を選択すると、次のステップを設定できるようになり、新しいモニターの追跡対象となるメトリクスのパフォーマンスを示すグラフがページ上部に表示されます。 
 
-    {{< img src="tracing/guide/alert_anomalies_p99_database/alert_anomalies_2.png" alt="モニターの継続的なアラート設定" style="width:90%;">}}
+    {{< img src="tracing/guide/alert_anomalies_p99_database/alert_anomalies_2_cropped.png" alt="進行中のアラートがあるモニター表示" style="width:90%;">}}
 
 3. ***Anomaly Alert* を選択**し、*For* オプションに「p99 latency」を選択します。
 
@@ -54,7 +54,7 @@ Datadog では、ユーザー自身で継続的にサービスの健全性を監
 
 7. ***Edit* タブから *Status* タブに切り替えます**。
 
-    {{< img src="tracing/guide/alert_anomalies_p99_database/alert_anomalies_4.png" alt="モニターの継続的なアラート設定" style="width:90%;">}}
+    {{< img src="tracing/guide/alert_anomalies_p99_database/alert_anomalies_4_cropped.png" alt="進行中のアラートがあるモニター表示" style="width:90%;">}}
 
     このタブでは、モニターの現在の状況の確認やミュート設定、トリガーされたアラートの詳細調査をします。
 
@@ -62,11 +62,11 @@ Datadog では、ユーザー自身で継続的にサービスの健全性を監
 
     このウィンドウでは、サービスに設定された他のモニターや推奨設定の提案モニターに加え、**新しいモニターが表示されます**。
 
-    {{< img src="tracing/guide/alert_anomalies_p99_database/alert_anomalies_5.png" alt="モニターの継続的なアラート設定" style="width:90%;">}}
+    {{< img src="tracing/guide/alert_anomalies_p99_database/alert_anomalies_5_cropped.png" alt="進行中のアラートがあるモニター表示" style="width:90%;">}}
 
     モニターを作成するにつれ、追加するサービス、メトリクス、イベントと、これらに設定する複雑な条件がさらに出てきます。モニターはそれぞれ、サービスに接続されているため、サービス詳細画面および [Service Map][9] からアクセスできます。
 
-    {{< img src="tracing/guide/alert_anomalies_p99_database/alert_anomalies_6.png" alt="サービスマップ" style="width:90%;">}}
+    {{< img src="tracing/guide/alert_anomalies_p99_database/alert_anomalies_6_cropped.png" alt="サービスマップ" style="width:90%;">}}
 
     マップ上の各サービスの色分けは、緑色はすべてのモニターが正常、黄色は 2 つ以上のモニターで警告があるがアラートはなし、赤は 2 つ以上のモニターでアラートあり、灰色はモニター設定なし、という状態を示しています。
 

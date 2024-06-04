@@ -33,6 +33,8 @@ This guide also goes through how to monitor your log usage by:
 - [Alerting on indexed logs when the volume passes a specified threshold](#alert-when-an-indexed-log-volume-passes-a-specified-threshold)
 - [Setting up exclusion filters on high-volume logs](#set-up-exclusion-filters-on-high-volume-logs)
 
+If you want to transform your logs or redact sensitive data in your logs before they leave your environment, see how to [aggregate, process, and transform your log data with Observability Pipelines][29].
+
 ## Log account configuration
 
 ### Set up multiple indexes for log segmentation
@@ -152,9 +154,9 @@ To set up a monitor to alert when the daily quota is reached for an index:
 
 1. Navigate to [Monitors > New Monitor][13] and click **Event**.
 2. Enter: `source:datadog "daily quota reached"` in the **Define the search query** section.
-3. Add `datadog_index(datadog_index)` to the **group by** field. The `datadog_index(datadog_index)` tag is only available when an event has already been generated. 
+3. Add `datadog_index` to the **group by** field. It automatically updates to `datadog_index(datadog_index)`. The `datadog_index(datadog_index)` tag is only available when an event has already been generated. 
 4. In the **Set alert conditions** section, select `above or equal to` and enter `1` for the **Alert threshold**.
-5. Add a notification title and message in the **Notify your team** section.The **Multi Alert** button is automatically selected because the monitor is grouped by `datadog_index(datadog_index)`.
+5. Add a notification title and message in the **Configure notifications and automations** section. The **Multi Alert** button is automatically selected because the monitor is grouped by `datadog_index(datadog_index)`.
 6. Click **Save**.
 
 This is an example of what the notification looks like in Slack:
@@ -223,3 +225,4 @@ If you want to see user activities, such as who changed the retention of an inde
 [26]: /account_management/audit_trail/
 [27]: https://www.datadoghq.com/pricing/?product=audit-trail#audit-trail
 [28]: /monitors/configuration/?tab=thresholdalert#evaluation-window
+[29]: /observability_pipelines/

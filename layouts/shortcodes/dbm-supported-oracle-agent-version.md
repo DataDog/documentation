@@ -1,2 +1,2 @@
 Supported Agent version
-: 7.49.1+
+: 7.50.1+

@@ -9,13 +9,9 @@ further_reading:
 
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
-{{< /site-region >}}
-
 {{% dbm-oracle-definition %}}
 
-The Agent collects telemetry directly from the database by logging in as a read-only user. 
+The Agent collects telemetry directly from the database by logging in as a read-only user.
 
 ## Before you begin
 
@@ -98,7 +94,9 @@ For installation steps, see the [Agent installation instructions][8].
 
 Download the wallet zip file from the Oracle Cloud and unzip it.
 
-Create the Oracle Agent conf file `/etc/datadog-agent/conf.d/oracle-dbm.d/conf.yaml`. See the [sample conf file][2] for all available configuration options.
+Create the Oracle Agent conf file `/etc/datadog-agent/conf.d/oracle.d/conf.yaml`. See the [sample conf file][11] for all available configuration options.
+
+**Note:** The configuration subdirectory for the Agent releases below `7.53.0` is `oracle-dbm.d`.
 
 Set the `protocol` and `wallet` configuration parameters.
 
@@ -141,7 +139,7 @@ On the Integrations page in Datadog, install the [Oracle integration][9] for you
 
 ### Validate the setup
 
-[Run the Agent's status subcommand][5] and look for `oracle-dbm` under the **Checks** section. Navigate to the [DBM Oracle Database Overview][7] dashboard and [Databases][6] page in Datadog to get started.
+[Run the Agent's status subcommand][5] and look for `oracle` under the **Checks** section. Navigate to the [DBM Oracle Database Overview][7] dashboard and [Databases][6] page in Datadog to get started.
 
 ## Custom queries
 
@@ -149,7 +147,7 @@ Database Monitoring supports custom queries for Oracle databases. See the [conf.
 
 <div class="alert alert-warning">Running custom queries may result in additional costs or fees assessed by Oracle.</div>
 
-[1]: /agent/basic_agent_usage#agent-overhead
+[1]: /database_monitoring/agent_integration_overhead/?tab=oracle
 [2]: /database_monitoring/data_collected/#sensitive-information
 [3]: /getting_started/tagging/unified_service_tagging
 [4]: /agent/configuration/agent-commands/#start-stop-and-restart-the-agent
@@ -158,7 +156,7 @@ Database Monitoring supports custom queries for Oracle databases. See the [conf.
 [7]: https://app.datadoghq.com/dash/integration/30990/dbm-oracle-database-overview
 [8]: https://app.datadoghq.com/account/settings/agent/latest
 [9]: https://app.datadoghq.com/integrations/oracle
-[11]: https://github.com/DataDog/datadog-agent/blob/main/cmd/agent/dist/conf.d/oracle-dbm.d/conf.yaml.example
+[11]: https://github.com/DataDog/datadog-agent/blob/main/cmd/agent/dist/conf.d/oracle.d/conf.yaml.example
 [12]: /database_monitoring/architecture/
 
 ## Further reading

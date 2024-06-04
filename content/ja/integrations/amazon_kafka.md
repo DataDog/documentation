@@ -32,7 +32,7 @@ draft: false
 git_integration_title: amazon_kafka
 integration_id: amazon-kafka
 integration_title: Amazon MSK (Agent)
-integration_version: 4.6.0
+integration_version: 4.7.0
 is_public: true
 kind: integration
 manifest_version: 2.0.0

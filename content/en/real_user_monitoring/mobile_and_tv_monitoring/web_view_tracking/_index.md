@@ -8,7 +8,7 @@ aliases:
   - /real_user_monitoring/reactnative/web_view_tracking
 further_reading:
   - link: https://github.com/DataDog/dd-sdk-android
-    tag: Github
+    tag: "Source Code"
     text: Source code for dd-sdk-android
   - link: /real_user_monitoring
     tag: Documentation
@@ -25,7 +25,7 @@ You can perform the following:
 - Scope the root cause of latency to web pages or native components in mobile applications
 - Support users that have difficulty loading web pages on mobile devices
 
-**Note:** When Web View Tracking is enabled, Browser Session Replay will be disabled, no matter how the Browser SDK is configured.
+**Note:** When Web View Tracking is enabled, Browser Session Replay is disabled, no matter how the Browser SDK is configured.
 
 ## Setup
 
@@ -100,6 +100,8 @@ DatadogWebViewTracking.xcframework
      WebViewTracking.enable(webView, allowedHosts)
    ```
 
+`allowedHosts` matches the given hosts and their subdomain. No regular expression is allowed.
+
 [1]: https://search.maven.org/artifact/com.datadoghq/dd-sdk-android-rum
 [2]: /real_user_monitoring/android/?tab=kotlin#setup
 [3]: https://search.maven.org/artifact/com.datadoghq/dd-sdk-android-logs
@@ -122,6 +124,8 @@ To disable Web View Tracking:
 ```swift
 WebViewTracking.disable(webView: webView)
 ```
+
+`allowedHosts` matches the given hosts and their subdomain. No regular expression is allowed.
 
 {{% /tab %}}
 {{% tab "Flutter" %}}
@@ -149,6 +153,8 @@ webViewController = WebViewController()
 ```
 
 Note that `JavaScriptMode.unrestricted` is required for tracking to work on Android.
+`allowedHosts` matches the given hosts and their subdomain. No regular expression is allowed.
+
 
 [1]: https://pub.dev/packages/webview_flutter
 [2]: https://pub.dev/packages/datadog_webview_tracking
@@ -177,6 +183,8 @@ Note that `JavaScriptMode.unrestricted` is required for tracking to work on Andr
    />
    ```
 
+`allowedHosts` matches the given hosts and their subdomain. No regular expression is allowed.
+
 [1]: https://github.com/react-native-webview/react-native-webview/blob/master/docs/Getting-Started.md
 
 {{% /tab %}}
@@ -194,10 +202,15 @@ Click **Open View waterfall** to navigate from the session to a resource waterfa
 
 [1]: https://app.datadoghq.com/rum/explorer
 
+## Billing implications
+
+See [RUM & Session Replay Billing][4] for details on how webviews in mobile applications impact session recordings and billing.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/browser/#npm
+[1]: /real_user_monitoring/browser/setup/#npm
 [2]: /real_user_monitoring/ios/
 [3]: https://docs.datadoghq.com/logs/log_collection/ios
+[4]: /account_management/billing/rum/#how-do-webviews-in-mobile-applications-impact-session-recordings-and-billing

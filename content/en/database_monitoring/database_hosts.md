@@ -5,21 +5,18 @@ description: Explore and dig into your database host health and configuration
 
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
-{{< /site-region >}}
-
-{{< img src="database_monitoring/databases-list.png" alt="The Databases page in Datadog" style="width:90%;" >}}
+{{< img src="database_monitoring/databases-list-2.png" alt="The Databases page in Datadog" style="width:90%;" >}}
 
 On the [Databases page][1], you can assess the health and activity of your database hosts. Sort and filter the list to prioritize hosts with triggered alerts, high query volume, and other criteria. Click on any host in the list to open a details panel:
 
-{{< img src="database_monitoring/db-list-details-panel.png" alt="The details panel for a single database host on the Databases page" style="width:90%;" >}}
+{{< img src="database_monitoring/db-list-details-panel-cropped-2.png" alt="The details panel for a single database host on the Databases page" style="width:90%;" >}}
 
 In addition to a filterable graph of active connections for that host, the host details panel displays the following features.
 
 |                                                 | Postgres  | SQL Server | MySQL     | Oracle    |
 |-------------------------------------------------|-----------|------------|-----------|-----------|
 | [Top queries](#top-queries)                     | {{< X >}} | {{< X >}}  | {{< X >}} | {{< X >}} |
+| [Stored procedures](#stored-procedures)         |           | {{< X >}}  |           |           |
 | [Metrics](#metrics)                             | {{< X >}} | {{< X >}}  |           |           |
 | [Active connections](#active-connections)       | {{< X >}} | {{< X >}}  | {{< X >}} | {{< X >}} |
 | [Schema](#schema)                               | {{< X >}} |            |           |           |
@@ -43,6 +40,12 @@ Click on any query statement to open a details panel that includes:
 
 {{< img src="database_monitoring/db-list-query-details.png" alt="The details panel for an individual top query" style="width:90%;" >}}
 
+### Stored procedures
+
+Where supported, the **Top Queries** tab includes a **Stored Procedures** section that lists each stored procedure by name, along with its average duration, logical reads count, logical writes count, and more. Expand a stored procedure to view its individual SQL queries, and click on a query to view its details panel.
+
+{{< img src="database_monitoring/stored-procedures.png" alt="A list of stored procedures, with one expanded to show its SQL query" style="width:90%;" >}}
+
 ## Metrics
 
 <div class="alert alert-info">
@@ -57,11 +60,11 @@ On the **Metrics** tab of the host details panel, you can view and filter metric
 
 The **Active Connections** tab of the host details panel displays the live queries being executed on the host.
 
-{{< img src="database_monitoring/db-list-active-connections.png" alt="The Active Connections tab of the details panel for a single database host on the Databases page" style="width:90%;" >}}
+{{< img src="database_monitoring/db-list-active-connections-2.png" alt="The Active Connections tab of the details panel for a single database host on the Databases page" style="width:90%;" >}}
 
 Click on a query statement to open a panel that includes event attributes, related traces, and other relevant details.
 
-{{< img src="database_monitoring/db-list-active-connection-details.png" alt="Details panel for an individual active connection" style="width:90%;" >}}
+{{< img src="database_monitoring/db-list-active-connection-details-2.png" alt="Details panel for an individual active connection" style="width:90%;" >}}
 
 ## Schema
 

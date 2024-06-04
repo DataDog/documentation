@@ -11,6 +11,7 @@ assets:
     ProphetStor Federator.ai Cost Management - Node: assets/dashboards/cost-management-node-overview.json
     ProphetStor Federator.ai Kafka Overview: assets/dashboards/overview.json
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -20,10 +21,11 @@ assets:
       prefix: federatorai.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10104
     source_type_name: Federator.ai
   monitors:
-    Node CPU Load Prediction in Next 24 Hours is High: assets/recommended_monitors/federatorai_node_cpu_prediction.json
-    Node Memory Usage Prediction in Next 24 Hours is High: assets/recommended_monitors/federatorai_node_mem_prediction.json
+    Node CPU Load Prediction in Next 24 Hours is High: assets/monitors/federatorai_node_cpu_prediction.json
+    Node Memory Usage Prediction in Next 24 Hours is High: assets/monitors/federatorai_node_mem_prediction.json
 author:
   homepage: https://github.com/DataDog/integrations-extras
   name: ProphetStor
@@ -32,7 +34,8 @@ author:
 categories:
 - コンテナ
 - kubernetes
-- orchestration
+- ai/ml
+- オーケストレーション
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/federatorai/README.md
 display_on_public_website: true
@@ -54,6 +57,7 @@ tile:
   classifier_tags:
   - Category::Containers
   - Category::Kubernetes
+  - Category::AI/ML
   - Category::Orchestration
   - Supported OS::Linux
   configuration: README.md#Setup
@@ -64,22 +68,24 @@ tile:
   title: Federator.ai
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
 
 
-[ProphetStor Federator.ai][1] は、Kubernetes および VMware クラスター内の仮想マシン (VM) アプリケーションのリソース管理と最適化をサポートする AI ベースの企業向けソリューションです。
+[ProphetStor Federator.ai][1] は、Kubernetes と仮想マシン (VM) クラスターの計算リソース管理を強化するために設計された AI ベースのソリューションです。IT 運用の全体的な可観測性、特にマルチテナントの大規模言語モデル (LLM) のトレーニングを含むことで、ミッションクリティカルなアプリケーションのリソース、ネームスペース、ノード、クラスターを効率的に割り当て、最小限のリソース消費で KPI を効果的に達成できます。
 
 高度な機械学習アルゴリズムを使用して、アプリケーションのワークロードを予測します。Federator.ai の主な機能は次の通りです。
-* Kubernetes クラスター内のコンテナ化アプリケーション、 VMware クラスター内の VM、および Amazon Web Services (AWS) Elastic Compute Cloud (EC2) 向けの AI ベースのワークロード予測
+* Kubernetes クラスター内のコンテナ化されたアプリケーション、ならびに VMware クラスター、Amazon Web Services (AWS) Elastic Compute Cloud (EC2)、Azure Virtual Machine、Google Compute Engine 内の VM における AI ベースのワークロード予測
 * ワークロード予測、アプリケーション、Kubernetes などの関連するメトリクスに基づくリソースの提案
 * 一般的な Kubernetes アプリケーションのコントローラー / ネームスペース向け CPU / メモリーの自動プロビジョニング
 * Kubernetes アプリケーションコンテナ、Kafka Consumer Group、NGINX Ingress アップストリームサービスのオートスケーリング
 * Kubernetes クラスターと VM クラスターのワークロード予測に基づくマルチクラウドコスト分析と推奨
 * クラスター、Kubernetes アプリケーション、VM、Kubernetes ネームスペースの提案に基づく実際のコストと潜在的な節約
+* パフォーマンスの妥協なしに行えるマルチテナント LLM トレーニングの可観測性と実行可能なリソース最適化
 
-ProphetStor Federator.ai を統合することで、Kubernetes コンテナ、ネームスペース、クラスターノードのリソース使用量を追跡および予測し、コストのかかるオーバープロビジョニングやパフォーマンスに影響を与えるアンダープロビジョニングを防ぐための適切な提案を作成できます。Federator.ai はCI/CD パイプラインと簡単に統合でき、Kubernetes クラスターのデプロイ時にコンテナを継続的に最適化します。Federator.ai はアプリケーションのワークロード予測を利用して適切なタイミングでアプリケーションコンテナを自動スケーリングし、Kubernetes HPA または [Datadog Watermark Pod Autoscaling (WPA)][2] を介して適切な数のコンテナレプリカでパフォーマンスを最適化します。
+[ProphetStor Federator.ai][1] は、Datadog Agent と統合された API を通じて、LLM トレーニングを含むアプリケーションレベルのワークロードからクラスターレベルのリソース消費までのフルスタックの可観測性を提供します。このインテグレーションにより、リアルタイムモニタリングと予測分析の間のダイナミックなループが促進され、リソース管理を継続的に改善し、コストを最適化し、アプリケーションの効率的な運用を保証します。Kubernetes のコンテナ、ネームスペース、クラスターノードのリソース使用状況を容易に追跡・予測し、コストがかかる過剰プロビジョニングやパフォーマンスに影響を与える過小プロビジョニングを防ぐための正しい推奨を行うことができます。CI/CD パイプラインへの簡単なインテグレーションにより、Federator.ai は Kubernetes クラスターにデプロイされた際のコンテナの継続的な最適化を可能にします。アプリケーションワークロードの予測を使用して、Federator.ai は適切なタイミングでアプリケーションコンテナを自動的にスケーリングし、Kubernetes HPA や [Datadog Watermark Pod Autoscaling (WPA)][2] を介して、適切な数のコンテナレプリカでパフォーマンスを最適化します。
 
 Federator.ai について詳しくは、[ProphetStor Federator.ai 機能デモ][3]および [Datadog 向け ProphetStor Federator.ai][4]のビデオをご覧ください。
 
@@ -203,11 +209,11 @@ Federator.ai について詳しくは、[ProphetStor Federator.ai 機能デモ][
    - このグラフは、現在のクラスターのネームスペースの最高予測コスト（月次）を示しています。
 
 
-## セットアップ
+## 計画と使用
 
 * 以下の手順に従って、Federator.ai をダウンロードおよび設定してください。
 
-### インストール
+### インフラストラクチャーリスト
 
 1. OpenShift/Kubernetes クラスターにログインします
 2. 次のコマンドで OpenShift/Kubernetes 用の Federator.ai をインストールします
@@ -287,7 +293,7 @@ Federator.ai について詳しくは、[ProphetStor Federator.ai 機能デモ][
 4. Federator.ai GUI にログインします。URL とログイン資格情報は、ステップ 2 の出力で確認できます。
 
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 1. お使いのアカウントで Datadog にログインし、Datadog API を使用するための [API キーとアプリケーションキー][9]を取得します。
 
@@ -300,22 +306,22 @@ Federator.ai について詳しくは、[ProphetStor Federator.ai 機能デモ][
 3. 詳細については、[Federator.ai - インストールおよびコンフィギュレーションガイド][11]および[ユーザーガイド][12]を参照してください。
 
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "federatorai" >}}
 
 
 
-### サービスのチェック
+### ヘルプ
 
 Federator.ai には、サービスのチェック機能は含まれません。
 
-### イベント
+### ヘルプ
 
 Federator.ai には、イベントは含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Federator.ai - インストールおよびコンフィギュレーションガイド][11]をご覧いただくか、[Datadog サポート][14]までお問い合わせください。
 

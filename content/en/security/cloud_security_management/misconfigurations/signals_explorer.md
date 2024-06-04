@@ -12,11 +12,10 @@ further_reading:
 - link: "security/cspm/frameworks_and_benchmarks"
   tag: "Documentation"
   text: "Learn about supported frameworks and industry benchmarks"
+- link: "https://www.datadoghq.com/blog/datadog-csm-windows/"
+  tag: "Blog"
+  text: "Secure your Windows workloads with Datadog Cloud Security Management"
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Cloud Security Management Misconfigurations is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
 
 ## Overview
 
