@@ -95,10 +95,12 @@ AGGR aggrExpression
 : TODO
 
 `ROLLUP`
-: A clause that lets you specify the time aggregator.
+: A clause that lets you specify the time aggregator. Required if the aggregator is `sum`, `min`, `max`, `avg` or `count`. See the [`ROLLUP` documentation](#rollup).
 
 `BUCKET BY`
-: TODO
+: A clause on the `AGGR` statement that controls time aggregation. See the [`BUCKET BY` documentation](#bucket-by).
+
+`AGGR` statements can be nested to achieve multiple layers of aggregation. See [Multilayer aggregation](#multilayer-aggregation).
 
 ### Examples
 
@@ -113,6 +115,165 @@ The following query would return a table with the schema `[ timeseries, tag1, ta
 {{< code-block lang="sql" >}}
 AGGR sum("metric.name") GROUP BY tag1, tag2, tag3
 {{< /code-block >}}
+
+### ROLLUP
+
+`ROLLUP` is a clause on the `AGGR` statement that lets you specify the time aggregator. 
+
+For example:
+
+{{< code-block lang="sql" >}}
+AGGR sum("system.load.1") ROLLUP count(value);
+{{< /code-block >}}
+
+The supported time aggregators are 
+
+- `sum(value)`
+- `avg(value)`
+- `min(value)`
+- `max(value)` 
+- `count(value)`
+
+`ROLLUP` can only be specified against point metric tables (and is required if the aggregator is `sum`, `min`, `max`, `avg` or `count`). It does not work for distribution metrics, or multilayer aggregation against subqueries or local tables. It also cannot be specified if the space aggregator is a combination aggregator like total or rate. 
+
+For example, the following queries would **not** work:
+
+{{< code-block lang="sql" >}}
+❌ AGGR sum("percentile.metric") ROLLUP count(value);
+❌ AGGR p99("percentile.metric") ROLLUP count(value);
+❌ AGGR total("system.load.1") ROLLUP count(value);
+❌ AGGR sum(SELECT ... ) ROLLUP count(value);
+❌ WITH localTable AS ... AGGR sum(localTable) ROLLUP count(value);
+{{< /code-block >}}
+
+### INTERPOLATE
+
+`INTERPOLATE` is a clause on the `AGGR` statement that controls interpolation, filling in missing values between buckets. It is equivalent to the [`fill()` dashboard function][1].
+
+`INTERPOLATE` can only be used when a `ROLLUP` is explicitly specified. The options for `INTERPOLATE` are
+
+- `INTERPOLATE NULL`
+- `INTERPOLATE LINEAR <optional interval>`
+- `INTERPOLATE LAST <optional interval>`
+- `INTERPOLATE ZERO <optional interval>`
+
+For `LINEAR`, `LAST`, and `ZERO`, if no interval is specified, it defaults to 300s.
+
+### BUCKET BY
+`BUCKET BY` is a clause on the AGGR statement that controls time aggregation. If no `BUCKET BY` is stated, the query defaults to the implicit `INTERVAL` runtime parameter (see the [`SET/SHOW` sections]). `BUCKET BY DEFAULT` also defaults to this.
+
+#### BUCKET BY INTERVAL
+`BUCKET BY INTERVAL` allows users to specify an explicit interval string. Valid interval strings are of the format `"<INTEGER> <UNIT>"` (for example, `"10 minutes"`). 
+
+Valid time units are:
+
+- `seconds`, `second`, `sec`, `s`
+- `minutes`, `minute`, `min`, `m`
+- `hours`, `hour`, `hr`, `h`
+- `days`, `day`, `d`
+- `weeks`, `week`, `w`
+- `months`, `month` ([multilayer aggregation queries] only)
+- `years`, `year` ([multilayer aggregation queries] only)
+
+#### BUCKET BY ALL
+
+`BUCKET BY ALL` chooses an interval that aggregates the metric down to one point for the entire query timeframe. It can only be used on [multilayer aggregation queries].
+
+The resulting column type is a timeseries with just one point in it. To access the point, use [time series functions].
+
+With `BUCKET BY ALL`, the timestamp of the resulting point is the start of the timeframe, and not necessarily aligned with metrics timestamps. For example, while a query with a `BUCKET BY INTERVAL '1d'` with a time frame of `April 15, 3:24 - April 16 3:24` returns points with timestamps of the start of each day, `BUCKET BY ALL` returns one point with a timestamp of `April 15, 3:24`.
+
+### Multilayer aggregation
+
+With `SELECT`, you can use the output of one statement as the input of another by using the subquery in the outer query's FROM clause:
+
+{{< code-block lang="sql" >}}
+SELECT avg(subquery.col) FROM (SELECT … FROM table) subquery …
+{{< /code-block >}}
+
+To re-aggregate a result from AGGR, the subquery is placed inside the aggregation function call, because these functions take tables as input:
+
+{{< code-block lang="sql" >}}
+AGGR sum(
+  AGGR sum("metric.name")
+  BUCKET BY INTERVAL '1d'
+  GROUP BY tag1, tag2
+) 
+BUCKET BY INTERVAL '1w'
+GROUP BY tag2
+{{< /code-block >}}
+
+In SQL, subqueries are written in the FROM clause, and individual columns themselves are referenced in the outer query (for example, in aggregator functions).
+
+In multilayer aggregation, the subquery is directly referenced in the aggregator function call:
+
+{{< code-block lang="sql" >}}
+AGGR sum(SELECT timeseries, group1, group2 FROM (...)) ...
+{{< /code-block >}}
+
+For multi-layer aggregation to work, the inner query must return a table with the schema in the pattern of an AGGR statement: the first column must be a timeseries, and the remaining columns must be groups or tags.
+
+## UNION
+
+{{< code-block lang="text" >}}
+DQLExpr UNION [ ALL ] DQLExpr …
+[ ORDER BY expressions [ ASC | DESC ] ]
+[ LIMIT [ ALL | expression ]
+  [ OFFSET expression] ]
+{{< /code-block >}}
+
+`UNION` combines the results of two or more DQLExprs into a single output table.
+
+The `UNION` operator removes duplicate rows from the result. To retain duplicate rows, use `UNION ALL`:
+
+{{< code-block lang="sql" >}}
+SELECT host_key, CAST(service AS text) AS service, 'from resources' FROM host
+UNION ALL
+SELECT message, service AS text, 'from logs' FROM logs WHERE env='prod'
+ORDER BY service LIMIT 200 OFFSET 10;
+{{< /code-block >}}
+
+All subqueries in a `UNION` must have the same output schema. A query containing `UNION` query can only have one `ORDER BY` and `LIMIT` expression, both of which must come at the end. Because of this, `UNION` can be used to combine other DQLExpr types, but not another `UNION`.
+
+## INTERSECT
+
+TODO
+
+## EXCEPT
+
+TODO
+
+## WITH
+
+`WITH` provides a way to write auxiliary statements for use in a larger query.
+
+{{< code-block lang="sql" >}}
+WITH alias [ ( output, schema, column, names, … ) ] AS ( DQLExpr ) [, …] DQLExpr
+{{< /code-block >}}
+
+`WITH` statements, which are also often referred to as Common Table Expressions or CTEs, can be thought of as defining temporary tables that exist for one query. Each auxiliary statement in a `WITH` clause can be any DQLExpr, and the `WITH` clause itself is attached to a primary statement that can also be any non-`WITH` DQLExpr. Subsequent auxiliary statements may reference correlations aliased in previous auxiliary statements.
+
+DML statements like `INSERT`, `UPDATE`, and `DELETE` are not supported in `WITH`.
+
+Each aliased query may also specify its output schema and column names.
+
+## EXPLAIN
+
+<div class="alert alert-warning">The DDSQL implementation of <code>EXPLAIN</code> is experimental, and subject to change.
+</div>
+
+`EXPLAIN` shows the execution plan of a statement. This is useful for debugging queries, and analyzing their performance. Only DQL statements can be `EXPLAIN`ed.
+
+{{< code-block lang="sql" >}}
+EXPLAIN [ ANALYZE ] DQLExpr
+{{< /code-block >}}
+
+`EXPLAIN ANALYZE` executes the query, measures its performance, and returns the queries that were sent to external downstream sources. For example, a query `AGGR AVG('system.load.1')` would be translated to a metrics query `avg:system.load.1{*}`, which `EXPLAIN ANALYZE` would display for inspection.
+
+`EXPLAIN` and `EXPLAIN ANALYZE` are mostly intended for use by developers of DDSQL as diagnostic tools, but they can be useful for users who are running into unexpected behavior.
+
+
+
 
 
 
@@ -142,3 +303,5 @@ In SQL, `SELECT` is the only query verb, but DDSQL adds another: `AGGR`. Both ve
 The clauses `UNION`, `WITH`, and `EXPLAIN` work with both `SELECT` and `AGGR`.
 
 Statements that contain `UNION` and `WITH` (but not `EXPLAIN`) are themselves DQLEXPRs, meaning that they can be chained and nested.
+
+[1]: /dashboards/functions/interpolation/#fill
