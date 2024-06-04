@@ -120,11 +120,11 @@ See the following documentation to configure your CI/CD provider to run Static A
 - [Software Composition Analysis and GitHub Actions][104]
 - [Software Composition Analysis and Generic CI Providers][105]
 
-[101]: code_analysis/static_analysis/github_actions 
-[102]: code_analysis/static_analysis/circleci_orbs 
-[103]: code_analysis/static_analysis/generic_ci_providers 
-[104]: code_analysis/software_composition_analysis/github_actions 
-[105]: code_analysis/software_composition_analysis/generic_ci_providers 
+[101]: /code_analysis/static_analysis/github_actions 
+[102]: /code_analysis/static_analysis/circleci_orbs 
+[103]: /code_analysis/static_analysis/generic_ci_providers 
+[104]: /code_analysis/software_composition_analysis/github_actions 
+[105]: /code_analysis/software_composition_analysis/generic_ci_providers 
 [106]: /code_analysis/static_analysis
 [107]: /code_analysis/software_composition_analysis
 
