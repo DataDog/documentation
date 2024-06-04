@@ -50,7 +50,7 @@ yarn add expo-datadog @datadog/mobile-react-native
 
 To see RUM sessions populate in Datadog, you need to implement view tracking, which can be initialized manually or automatically.
 
-#### Manual initialization
+#### Manual tracking
 
 You can manually start and stop a view using the following `startView()` and `stopview()` methods.
 
@@ -70,7 +70,7 @@ DdRum.startView(
 DdRum.stopView('<view-key>', { 'custom.bar': 42 }, Date.now());
 ```
 
-#### Automatic initialization
+#### Automatic tracking
 
 Automatic view tracking is supported for the the following modules:
 
