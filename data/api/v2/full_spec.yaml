@@ -3982,6 +3982,68 @@ components:
       required:
       - complianceRuleOptions
       type: object
+    CloudConfigurationRulePayload:
+      description: The payload of a cloud configuration rule.
+      properties:
+        cases:
+          description: 'Description of generated findings and signals (severity and
+            channels to be notified in case of a signal). Must contain exactly one
+            item.
+
+            '
+          items:
+            $ref: '#/components/schemas/CloudConfigurationRuleCaseCreate'
+          type: array
+        complianceSignalOptions:
+          $ref: '#/components/schemas/CloudConfigurationRuleComplianceSignalOptions'
+        filters:
+          description: Additional queries to filter matched events before they are
+            processed.
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringFilter'
+          type: array
+        isEnabled:
+          description: Whether the rule is enabled.
+          example: true
+          type: boolean
+        message:
+          description: Message in markdown format for generated findings and signals.
+          example: '#Description
+
+            Explanation of the rule.
+
+
+            #Remediation
+
+            How to fix the security issue.
+
+            '
+          type: string
+        name:
+          description: The name of the rule.
+          example: My security monitoring rule.
+          type: string
+        options:
+          $ref: '#/components/schemas/CloudConfigurationRuleOptions'
+        tags:
+          description: Tags for generated findings and signals.
+          example:
+          - env:prod
+          - team:security
+          items:
+            description: Tag.
+            type: string
+          type: array
+        type:
+          $ref: '#/components/schemas/CloudConfigurationRuleType'
+      required:
+      - name
+      - isEnabled
+      - options
+      - complianceSignalOptions
+      - cases
+      - message
+      type: object
     CloudConfigurationRuleType:
       description: The rule type.
       enum:
@@ -17675,11 +17737,16 @@ components:
       - MEDIUM
       - HIGH
       - CRITICAL
+    SecurityMonitoringRuleTestPayload:
+      description: Test a rule.
+      oneOf:
+      - $ref: '#/components/schemas/SecurityMonitoringStandardRuleTestPayload'
     SecurityMonitoringRuleTestRequest:
-      description: Test the rule queries of a rule.
+      description: Test the rule queries of a rule (rule property is ignored when
+        applied to an existing rule)
       properties:
         rule:
-          $ref: '#/components/schemas/SecurityMonitoringRuleCreatePayload'
+          $ref: '#/components/schemas/SecurityMonitoringRuleTestPayload'
         ruleQueryPayloads:
           description: Data payloads used to test rules query with the expected result.
           items:
@@ -17750,6 +17817,13 @@ components:
       - WORKLOAD_SECURITY
       - CLOUD_CONFIGURATION
       - APPLICATION_SECURITY
+    SecurityMonitoringRuleTypeTest:
+      description: The rule type.
+      enum:
+      - log_detection
+      type: string
+      x-enum-varnames:
+      - LOG_DETECTION
     SecurityMonitoringRuleUpdatePayload:
       description: Update an existing rule.
       properties:
@@ -17795,8 +17869,8 @@ components:
             type: string
           type: array
         thirdPartyCases:
-          description: Cases for generating signals from third party rules. Only available
-            for third party rules.
+          description: Cases for generating signals from third-party rules. Only available
+            for third-party rules.
           example: []
           items:
             $ref: '#/components/schemas/SecurityMonitoringThirdPartyRuleCase'
@@ -17808,6 +17882,12 @@ components:
           maximum: 2147483647
           type: integer
       type: object
+    SecurityMonitoringRuleValidatePayload:
+      description: Validate a rule.
+      oneOf:
+      - $ref: '#/components/schemas/SecurityMonitoringStandardRulePayload'
+      - $ref: '#/components/schemas/SecurityMonitoringSignalRulePayload'
+      - $ref: '#/components/schemas/CloudConfigurationRulePayload'
     SecurityMonitoringSignal:
       description: Object description of a security signal.
       properties:
@@ -18002,6 +18082,66 @@ components:
       type: object
     SecurityMonitoringSignalRuleCreatePayload:
       description: Create a new signal correlation rule.
+      properties:
+        cases:
+          description: Cases for generating signals.
+          example: []
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringRuleCaseCreate'
+          type: array
+        filters:
+          description: Additional queries to filter matched events before they are
+            processed. This field is deprecated for log detection, signal correlation,
+            and workload security rules.
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringFilter'
+          type: array
+        hasExtendedTitle:
+          description: Whether the notifications include the triggering group-by values
+            in their title.
+          example: true
+          type: boolean
+        isEnabled:
+          description: Whether the rule is enabled.
+          example: true
+          type: boolean
+        message:
+          description: Message for generated signals.
+          example: ''
+          type: string
+        name:
+          description: The name of the rule.
+          example: My security monitoring rule.
+          type: string
+        options:
+          $ref: '#/components/schemas/SecurityMonitoringRuleOptions'
+        queries:
+          description: Queries for selecting signals which are part of the rule.
+          example: []
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringSignalRuleQuery'
+          type: array
+        tags:
+          description: Tags for generated signals.
+          example:
+          - env:prod
+          - team:security
+          items:
+            description: Tag.
+            type: string
+          type: array
+        type:
+          $ref: '#/components/schemas/SecurityMonitoringSignalRuleType'
+      required:
+      - name
+      - isEnabled
+      - queries
+      - options
+      - cases
+      - message
+      type: object
+    SecurityMonitoringSignalRulePayload:
+      description: The payload of a signal correlation rule.
       properties:
         cases:
           description: Cases for generating signals.
@@ -18434,8 +18574,75 @@ components:
             type: string
           type: array
         thirdPartyCases:
-          description: Cases for generating signals from third party rules. Only available
-            for third party rules.
+          description: Cases for generating signals from third-party rules. Only available
+            for third-party rules.
+          example: []
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringThirdPartyRuleCaseCreate'
+          type: array
+        type:
+          $ref: '#/components/schemas/SecurityMonitoringRuleTypeCreate'
+      required:
+      - name
+      - isEnabled
+      - queries
+      - options
+      - cases
+      - message
+      type: object
+    SecurityMonitoringStandardRulePayload:
+      description: The payload of a rule.
+      properties:
+        cases:
+          description: Cases for generating signals.
+          example: []
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringRuleCaseCreate'
+          type: array
+        filters:
+          description: Additional queries to filter matched events before they are
+            processed. This field is deprecated for log detection, signal correlation,
+            and workload security rules.
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringFilter'
+          type: array
+        hasExtendedTitle:
+          description: Whether the notifications include the triggering group-by values
+            in their title.
+          example: true
+          type: boolean
+        isEnabled:
+          description: Whether the rule is enabled.
+          example: true
+          type: boolean
+        message:
+          description: Message for generated signals.
+          example: ''
+          type: string
+        name:
+          description: The name of the rule.
+          example: My security monitoring rule.
+          type: string
+        options:
+          $ref: '#/components/schemas/SecurityMonitoringRuleOptions'
+        queries:
+          description: Queries for selecting logs which are part of the rule.
+          example: []
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringStandardRuleQuery'
+          type: array
+        tags:
+          description: Tags for generated signals.
+          example:
+          - env:prod
+          - team:security
+          items:
+            description: Tag.
+            type: string
+          type: array
+        thirdPartyCases:
+          description: Cases for generating signals from third-party rules. Only available
+            for third-party rules.
           example: []
           items:
             $ref: '#/components/schemas/SecurityMonitoringThirdPartyRuleCaseCreate'
@@ -18571,8 +18778,8 @@ components:
             type: string
           type: array
         thirdPartyCases:
-          description: Cases for generating signals from third party rules. Only available
-            for third party rules.
+          description: Cases for generating signals from third-party rules. Only available
+            for third-party rules.
           example: []
           items:
             $ref: '#/components/schemas/SecurityMonitoringThirdPartyRuleCase'
@@ -18587,6 +18794,73 @@ components:
           description: The version of the rule.
           format: int64
           type: integer
+    SecurityMonitoringStandardRuleTestPayload:
+      description: The payload of a rule to test
+      properties:
+        cases:
+          description: Cases for generating signals.
+          example: []
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringRuleCaseCreate'
+          type: array
+        filters:
+          description: Additional queries to filter matched events before they are
+            processed. This field is deprecated for log detection, signal correlation,
+            and workload security rules.
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringFilter'
+          type: array
+        hasExtendedTitle:
+          description: Whether the notifications include the triggering group-by values
+            in their title.
+          example: true
+          type: boolean
+        isEnabled:
+          description: Whether the rule is enabled.
+          example: true
+          type: boolean
+        message:
+          description: Message for generated signals.
+          example: ''
+          type: string
+        name:
+          description: The name of the rule.
+          example: My security monitoring rule.
+          type: string
+        options:
+          $ref: '#/components/schemas/SecurityMonitoringRuleOptions'
+        queries:
+          description: Queries for selecting logs which are part of the rule.
+          example: []
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringStandardRuleQuery'
+          type: array
+        tags:
+          description: Tags for generated signals.
+          example:
+          - env:prod
+          - team:security
+          items:
+            description: Tag.
+            type: string
+          type: array
+        thirdPartyCases:
+          description: Cases for generating signals from third-party rules. Only available
+            for third-party rules.
+          example: []
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringThirdPartyRuleCaseCreate'
+          type: array
+        type:
+          $ref: '#/components/schemas/SecurityMonitoringRuleTypeTest'
+      required:
+      - name
+      - isEnabled
+      - queries
+      - options
+      - cases
+      - message
+      type: object
     SecurityMonitoringSuppression:
       description: The suppression rule's properties.
       properties:
@@ -23465,11 +23739,10 @@ paths:
       description: 'Create a new API from the [OpenAPI](https://spec.openapis.org/oas/latest.html)
         specification given.
 
-        It supports version `2.0`, `3.0` and `3.1` of the specification. A specific
-        extension section, `x-datadog`,
+        See the [API Catalog documentation](https://docs.datadoghq.com/api_catalog/add_metadata/)
+        for additional
 
-        let you specify the `teamHandle` for your team responsible for the API in
-        Datadog.
+        information about the possible metadata.
 
         It returns the created API ID.
 
@@ -34582,7 +34855,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/SecurityMonitoringRuleCreatePayload'
+              $ref: '#/components/schemas/SecurityMonitoringRuleValidatePayload'
         required: true
       responses:
         '204':

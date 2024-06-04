@@ -2296,7 +2296,7 @@ components:
           description: 'POSIX timestamp of the event. Must be sent as an integer (that
             is no quotes).
 
-            Limited to events no older than 18 hours.'
+            Limited to events up to 18 hours in the past and two hours in the future.'
           format: int64
           type: integer
         device_name:
@@ -16302,6 +16302,10 @@ components:
           type: string
         name:
           description: Name of the file.
+          maxLength: 1500
+          type: string
+        originalFileName:
+          description: Original name of the file.
           maxLength: 1500
           type: string
         size:

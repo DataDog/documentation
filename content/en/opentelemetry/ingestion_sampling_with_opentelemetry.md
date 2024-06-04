@@ -87,25 +87,31 @@ See the [ingestion volume control guide][8] for information about the implicatio
 
 ### Probabilistic sampling
 
-When using Datadog Agent OTLP ingest, a probabilistic sampler is available starting with Agent v7.44.0. 
+When using Datadog Agent OTLP ingest, a probabilistic sampler is available starting with Agent 7.54.0. 
 
 #### Configuring
 
-To configure probabilistic sampling, either:
+To configure probabilistic sampling, do one of the following:
 
-- Set the `DD_OTLP_CONFIG_TRACES_PROBABILISTIC_SAMPLER_SAMPLING_PERCENTAGE` environment variable, or
+- Set `DD_APM_PROBABILISTIC_SAMPLER_ENABLED` to `true` and `DD_APM_PROBABILISTIC_SAMPLER_SAMPLING_PERCENTAGE` to the percentage of traces you'd like to sample (between `0` and `100`).
 - Add the following YAML to your Agent's configuration file:
 
   ```yaml
-  otlp_config:
+  apm_config:
     # ...
-    traces:
-      probabilistic_sampler:
+    probabilistic_sampler:
+        enabled: true
         sampling_percentage: 50 #In this example, 50% of traces are captured.
   ```
+
+If you use a mixed setup of Datadog tracing libraries and OTel SDKs, probabilistic sampling will apply to spans originating from both Datadog and OTel tracing libraries.
+
+<div class="alert alert-warning"><code>DD_OTLP_CONFIG_TRACES_PROBABILISTIC_SAMPLER_SAMPLING_PERCENTAGE</code> is deprecated and has been replaced by <code>DD_APM_PROBABILISTIC_SAMPLER_SAMPLING_PERCENTAGE</code>.</div>
+
 #### Considerations
 
-The probabilistic sampler ignores spans for which the sampling priority is set at the SDK level. Spans not captured by the probabilistic sampler may still be captured by the Datadog Agent's [error and rare samplers][12].
+- The probabilistic sampler will ignore the sampling priority of spans that are set at the tracing library level. As a result, probabilistic sampling is **incompatible with [head-based sampling][16]**. This means that head-based sampled traces might still be dropped by probabilistic sampling.
+- Spans not captured by the probabilistic sampler may still be captured by the Datadog Agent's [error and rare samplers][12].
 
 ## Monitoring ingested volumes in Datadog
 
@@ -132,4 +138,4 @@ If the ingestion volume is higher than expected, consider adjusting your samplin
 [13]: https://app.datadoghq.com/dash/integration/apm_estimated_usage
 [14]: /opentelemetry/guide/migration/
 [15]: /opentelemetry/interoperability/otlp_ingest_in_the_agent/?tab=host
-[16]: /opentelemetry/collector_exporter/
+[16]: tracing/trace_pipeline/ingestion_mechanisms#head-based-sampling

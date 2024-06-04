@@ -38,7 +38,7 @@
     "request_schema_description": "Object for API data in an `OpenAPI` format as a file."
   },
   "CreateOpenAPI": {
-    "description": "Create a new API from the [OpenAPI](https://spec.openapis.org/oas/latest.html) specification given.\nIt supports version `2.0`, `3.0` and `3.1` of the specification. A specific extension section, `x-datadog`,\nlet you specify the `teamHandle` for your team responsible for the API in Datadog.\nIt returns the created API ID.\n",
+    "description": "Create a new API from the [OpenAPI](https://spec.openapis.org/oas/latest.html) specification given.\nSee the [API Catalog documentation](https://docs.datadoghq.com/api_catalog/add_metadata/) for additional\ninformation about the possible metadata.\nIt returns the created API ID.\n",
     "summary": "Create a new API",
     "request_description": "",
     "request_schema_description": "Object for API data in an `OpenAPI` format as a file."
@@ -1279,13 +1279,13 @@
     "description": "Test a rule.",
     "summary": "Test a rule",
     "request_description": "",
-    "request_schema_description": "Test the rule queries of a rule."
+    "request_schema_description": "Test the rule queries of a rule (rule property is ignored when applied to an existing rule)"
   },
   "ValidateSecurityMonitoringRule": {
     "description": "Validate a detection rule.",
     "summary": "Validate a detection rule",
     "request_description": "",
-    "request_schema_description": "Create a new rule."
+    "request_schema_description": "Validate a rule."
   },
   "DeleteSecurityMonitoringRule": {
     "description": "Delete an existing rule. Default rules cannot be deleted.",
@@ -1305,7 +1305,7 @@
     "description": "Test an existing rule.",
     "summary": "Test an existing rule",
     "request_description": "",
-    "request_schema_description": "Test the rule queries of a rule."
+    "request_schema_description": "Test the rule queries of a rule (rule property is ignored when applied to an existing rule)"
   },
   "ListSecurityMonitoringSignals": {
     "description": "The list endpoint returns security signals that match a search query.\nBoth this endpoint and the POST endpoint can be used interchangeably when listing\nsecurity signals.",
