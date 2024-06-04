@@ -31,7 +31,7 @@ For the best results, it is recommended to set up a daily rate limit. If no dail
 
 ## Setup
 
-Dynamic Sampling is automatically enabled with Error Tracking and can be disabled in your settings
+Dynamic Sampling is automatically enabled with Error Tracking and can be disabled in your settings.
 
 ## Getting started
 
