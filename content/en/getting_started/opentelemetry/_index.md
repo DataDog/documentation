@@ -3,7 +3,7 @@ title: Getting Started with OpenTelemetry at Datadog
 kind: documentation
 further_reading:
 - link: 'https://opentelemetry.io/docs/'
-  tag: 'OpenTelemetry'
+  tag: 'External Site'
   text: 'OpenTelemetry Documentation'
 - link: '/opentelemetry'
   tag: 'Documentation'
