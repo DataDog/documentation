@@ -10,8 +10,8 @@ To set up the quota processor:
 1. Check the **Drop events** checkbox if you want to drop all events when your quota is met. Leave it unchecked if you plan to set up a [monitor][5001] that sends an alert when the quota is met.
 
 **Notes**:
-- If logs that match the quota filter come in after the daily quota has been met, and the **Drop events** option is selected, then anything above the quota is dropped and does not go to the next step in the pipeline.
-- If logs that match the quota filter come in after the daily quota has been met, and the **Drop events** option is not selected, then those logs go to the next step in the pipeline.
+- If logs that match the quota filter come in after the daily quota has been met and the **Drop events** option is selected, then anything above the quota is dropped and does not go to the next step in the pipeline.
+- If logs that match the quota filter come in after the daily quota has been met and the **Drop events** option is not selected, then those logs go to the next step in the pipeline.
 - Logs that match the quota filter and are within the daily quota, are counted towards the daily limit and go to the next step in the pipeline.
 - Logs that do not match the quota filter are not counted towards the daily limit and go to the next step of the pipeline.
 
