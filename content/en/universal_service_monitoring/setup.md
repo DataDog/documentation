@@ -27,6 +27,9 @@ Supported application-layer protocols
 : HTTP<br/>
 HTTPS (OpenSSL)
 
+Known limitations
+: Universal Service Monitoring requires the use of Datadog's `system-probe`, which is not supported on Google Kubernetes Engine (GKE) Autopilot.
+
 <div class="alert alert-info">
 Additional protocols and traffic encryption methods are supported in <a href="/universal_service_monitoring/additional_protocols/">private beta</a>. If you have feedback about what platforms and protocols you'd like to see supported, <a href="/help/">contact Support</a>.
 </div>
