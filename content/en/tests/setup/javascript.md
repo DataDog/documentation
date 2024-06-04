@@ -472,7 +472,7 @@ If the browser application being tested is instrumented using [Browser Monitorin
 [4]: https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests#Support-file
 [5]: /tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags
 [6]: /tests/guides/add_custom_measures/?tab=javascripttypescript
-[7]: /real_user_monitoring/browser/#setup
+[7]: /real_user_monitoring/browser/setup
 [8]: /continuous_integration/guides/rum_integration/
 [9]: https://docs.cypress.io/guides/references/migration-guide#Migrating-to-Cypress-100
 [10]: https://docs.cypress.io/api/plugins/after-run-api
