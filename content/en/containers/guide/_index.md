@@ -34,3 +34,7 @@ disable_toc: true
     {{< nextlink href="/containers/guide/datadogoperator_migration" >}}Migration to version 1.0 of the Datadog Operator{{< /nextlink >}}
     {{< nextlink href="/containers/guide/operator-eks-addon" >}}Installing the Datadog Agent on Amazon EKS with the Datadog Operator add-on{{< /nextlink >}}
 {{< /whatsnext >}}
+
+{{< whatsnext desc="AWS guides:" >}}
+    {{< nextlink href="/containers/guide/aws-batch-ecs-fargate" >}}AWS Batch with ECS Fargate and the Datadog Agent{{< /nextlink >}}
+{{< /whatsnext >}}
