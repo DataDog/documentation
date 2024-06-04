@@ -1,5 +1,5 @@
 ---
-title: LLM Observability SDK for Python
+title: LLM Observability Python SDK Reference
 ---
 
 {{% site-region region="gov" %}}
@@ -12,7 +12,7 @@ LLM Observability is not available in the US1-FED site.
 
 ## Overview
 
-The LLM Observability SDK for Python enhances the observability of your Python-based LLM applications. The SDK supports Python versions 3.7 and newer. For information about LLM Observability's integration support, see [LLM integrations](#llm-integrations).
+The LLM Observability SDK for Python enhances the observability of your Python-based LLM applications. The SDK supports Python versions 3.7 and newer. For information about LLM Observability's integration support, see the [Auto-instrumentation guide][13].
 
 You can install and configure tracing of various operations such as workflows, tasks, and API calls with function decorators or context managers. You can also annotate these traces with metadata for deeper insights into the performance and behavior of your applications, supporting multiple LLM services or models from the same environment.
 
@@ -82,7 +82,7 @@ LLMObs.enable(
 
 `integrations_enabled` - **default**: `true`
 : optional - _boolean_ 
-<br />A flag to enable automatically tracing LLM calls for Datadog's supported [LLM integrations](#llm-integrations). If not provided, all supported LLM integrations are enabled by default. To avoid using the LLM integrations, set this value to `false`.
+<br />A flag to enable automatically tracing LLM calls for Datadog's supported [LLM integrations][13]. If not provided, all supported LLM integrations are enabled by default. To avoid using the LLM integrations, set this value to `false`.
 
 `agentless_enabled`
 : optional - _boolean_ - **default**: `false`
@@ -187,7 +187,7 @@ def process_message():
 - AWS Bedrock (using [Boto3][2]/[Botocore][3])
 - LangChain LLM/Chat Models/Chains (using [LangChain][4])
 
-For more information about Datadog's LLM integrations, see [LLM integrations](#llm-integrations).
+For more information about Datadog's LLM integrations, see the [Auto-instrumentation guide][13].
 
 To trace an LLM span, use the function decorator `ddtrace.llmobs.decorators.llm()`.
 
@@ -528,16 +528,6 @@ def llm_call():
     return completion
 {{< /code-block >}}
 
-## LLM integrations
-
-The Python SDK includes out-of-the-box integrations to automatically trace and annotate the LLM calls for:
-
-- `openai` - OpenAI (using the [OpenAI Python SDK][1]): supports all versions
-- `bedrock` - AWS Bedrock Runtime (using [Boto3][2]/[Botocore][3]): supports all versions
-- `langchain` - LangChain LLM/Chat Models/Chains (using [LangChain][4]): supports all versions
-
-This means that you do not need to manually instrument your LLM calls with `LLMObs.llm()`, as the SDK captures them automatically.
-
 ## Advanced tracing
 
 ### Tracing spans using inline methods
@@ -672,3 +662,4 @@ def server_process_request(request):
 [10]: https://github.com/DataDog/llm-observability
 [11]: https://docs.datadoghq.com/tracing/trace_collection/compatibility/python/#integrations
 [12]: https://docs.datadoghq.com/tracing/trace_collection/compatibility/python/#library-compatibility
+[13]: /tracing/llm_observability/auto_instrumentation/

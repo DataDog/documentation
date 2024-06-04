@@ -1,5 +1,5 @@
 ---
-title: Span kinds
+title: Span Kinds
 kind: documentation
 ---
 
@@ -32,19 +32,15 @@ For instructions on creating spans from your application, including code example
 
 An LLM span represents a call to an LLM where input and outputs are represented as text.
 
-Occasionally, a trace contains a single LLM span, in which case the LLM span is the root of the trace.
+A trace can contain a single LLM span, in which case the trace represents an LLM inference operation.
 
-### Child spans
-
-LLM spans do not have child spans, as they are leaf nodes representing a direct call to an LLM.
+LLM spans typically do not have child spans, as they are standalone operations representing a direct call to an LLM.
 
 ## Workflow span
 
 Workflow spans represent any *static* sequence of operations. Use workflows to group together an LLM call with its supporting contextual operations.
 
 Workflow spans are frequently the root span of a trace consisting of a standard sequence. For example, a function might take an arXiv paper link and return a summary. This process might involve a tool call to fetch the paper, some text-processing tasks, and an LLM summarization.
-
-### Child spans
 
 Workflow spans have child spans representing the sequence of steps in the workflow.
 
@@ -54,33 +50,25 @@ Agent spans represent a dynamic sequence of operations where a large language mo
 
 Agent spans are frequently the root span for traces representing autonomous agents or reasoning agents
 
-### Child spans
-
-Agent spans may have multiple workflow spans as children. These represent child steps orchestrated by a reasoning engine.
+Agent spans may have any spans as children. These represent child steps orchestrated by a reasoning engine.
 
 ## Tool span
 
 Tool spans represent a standalone step in a workflow or agent that involves a call to an external program or service, such as a web API or database.
 
-### Child spans
-
-Tool spans do not have child spans, as they are leaf nodes representing a tool execution.
+Tool spans typically do not have child spans, as they are standalone operations representing a tool execution.
 
 ## Task span
 
 Task spans represent a standalone step in a workflow or agent that does not involve a call to an external service, such as a data sanitization step before a prompt is submitted to an LLM.
 
-### Child spans
-
-Task spans do not have child spans.
+Task spans do not have child spans, as they are standalone steps in the workflow or agent.
 
 ## Embedding span
 
 Embedding spans represent a standalone call to an embedding model or function to create an embedding, such as a call to OpenAI's embedding endpoint.
 
-### Child spans
-
-Embedding spans can have task spans as children, but often do not have children.
+Embedding spans can have task spans as children, but typically do not have children.
 
 ## Retrieval span
 
@@ -88,9 +76,7 @@ Retrieval spans represent a vector search operation involving a list of document
 
 When used alongside embedding spans, retrieval spans can provide visibility into retrieval augmented generation (RAG) operations.
 
-### Child spans
-
-Retrieval spans do not have child spans, as they represent a single retrieval step.
+Retrieval spans do not have child spans, as they represent a standalone retrieval step.
 
 [1]: https://react-lm.github.io/
 [2]: /tracing/llm_observability/sdk/?tab=model#tracing-spans
