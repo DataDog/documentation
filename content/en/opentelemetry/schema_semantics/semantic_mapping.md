@@ -19,8 +19,6 @@ OpenTelemetry makes use of a number of [semantic conventions][1] that specify na
 
 ### Unified Service Tagging
 
-<div class="alert alert-warning">For OpenTelemetry applications, unified service tagging is supported for only metrics and traces, not logs.</div>
-
 | OpenTelemetry convention | Datadog convention |
 | --- | --- |
 | `deployment.environment` | `env` |
