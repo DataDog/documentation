@@ -28,14 +28,20 @@
             "formulas": [
               {
                 "formula": "query1",
-                "limit": {
-                  "count": 500,
-                  "order": "desc"
-                },
                 "conditional_formats": [],
                 "cell_display_mode": "bar"
               }
             ],
+            "sort": {
+              "count": 500,
+              "order_by": [
+                {
+                  "type": "formula",
+                  "index": 0,
+                  "order": "desc"
+                }
+              ]
+            },
             "response_format": "scalar"
           }
         ],

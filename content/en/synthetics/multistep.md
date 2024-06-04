@@ -1,5 +1,5 @@
 ---
-title: Multistep API Tests
+title: Multistep API Testing
 kind: documentation
 description: Chain requests to monitor sophisticated transactions on your key services.
 further_reading:
@@ -184,7 +184,7 @@ You can restrict access to a multistep API test based on the roles in your organ
 [7]: https://restfulapi.net/json-jsonpath/
 [8]: https://www.w3schools.com/xml/xpath_syntax.asp
 [9]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
-[10]: /monitors/notify/?tab=is_alert#notify-your-team
+[10]: /monitors/notify/?tab=is_alert#configure-notifications-and-automations
 [11]: http://daringfireball.net/projects/markdown/syntax
 [12]: /monitors/notify/variables/?tab=is_alert#conditional-variables
 [13]: /synthetics/guide/synthetic-test-monitors

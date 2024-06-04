@@ -11,6 +11,9 @@ further_reading:
 - link: "/integrations/guide/source-code-integration/"
   tag: "Documentation"
   text: "Learn about Source Code Integration"
+- link: "/code_analysis/static_analysis"
+  tag: "Documentation"
+  text: "Learn about Static Analysis"
 - link: "https://marketplace.visualstudio.com/items?itemName=Datadog.VisualStudio"
   tag: "External Site"
   text: "Visual Studio Marketplace"  
@@ -50,6 +53,18 @@ Clicking the icon opens the **Log Explorer** with a query that matches the logge
 Navigate from Datadog to your source code with one click.
 
 {{< img src="/developers/ide_plugins/visual_studio/view-in-visual-studio.png" alt="A stack trace on the Datadog platform showing the View in Visual Studio button.">}}
+
+### Static Analysis
+
+The Datadog extension runs [Static Analysis][19] rules on the source files you have open in your Solution. The goal is to detect and fix problems such as maintainability issues, bugs, or security vulnerabilities in your code before you commit your changes.
+
+Static Analysis supports scanning for many programming languages. For a complete list, see [Static Analysis Rules][20]. For file types belonging to supported languages, rule violations are highlighted in the source code editor, and suggested fixes can be applied directly:
+
+{{< img src="/developers/ide_plugins/visual_studio/static-analysis-issue.png" alt="A static analysis rule violation." style="width:100%;" >}}
+
+When you start editing a source file supported by Static Analysis, the extension checks for `static-analysis.datadog.yml` at your source repository's root. The static analyzer runs automatically in the background.
+
+<div class="alert alert-info">The Static Analysis feature does not require a Datadog account, as source files are analyzed locally.</div>
 
 ## Getting started
 
@@ -93,3 +108,5 @@ Report a bug, request a new feature, or ask for help on the [Discussion Forum][1
 [16]: https://github.com/DataDog/datadog-for-visual-studio/issues
 [17]: https://marketplace.visualstudio.com/items?itemName=Datadog.VisualStudio
 [18]: /logs/explorer/
+[19]: /code_analysis/static_analysis/
+[20]: /code_analysis/static_analysis_rules/

@@ -36,7 +36,7 @@ Your crash reports appear in [**Error Tracking**][1].
 
 If you have not set up the iOS SDK yet, follow the [in-app setup instructions][2] or see the [iOS RUM setup documentation][3].
 
-### Add Crash Reporting 
+### Add crash reporting 
 
 To enable Crash Reporting, make sure to also enable [RUM][3] and, or [Logs][4]. Then, add the package according to your dependency manager and update your initialize snippet.  
 
@@ -100,11 +100,66 @@ Datadog.initialize(
 CrashReporting.enable()
 ```
 
+### Add app hang reporting
+
+App hangs are an iOS-specific type of error that happens when the application is unresponsive for too long.
+
+By default, app hangs reporting is **disabled**, but you can enable it and set your own threshold to monitor app hangs that last more than a specified duration by using the `appHangThreshold` initialization parameter. A customizable threshold allows you to find the right balance between fine-grained and noisy observability. See [Notes][5] for more guidance on what to set this value to.
+
+App hangs are reported through the RUM iOS SDK (not through [Logs][4]).
+
+When enabled, any main thread pause that is longer than the specified `appHangThreshold` is considered a "hang" in [**Error Tracking**][1]. There are two types of hangs:
+
+- **Fatal app hang**: How a hang gets reported if it never gets recovered and the app is terminated. Fatal app hangs are marked as a "Crash" in Error Tracking.
+
+  {{< img src="real_user_monitoring/error_tracking/ios-fatal-app-hang.png" alt="A fatal app hang in the Error Tracking page." style="width:60%;" >}}
+
+- **Non-fatal app hang**: How a hang gets reported if the app recovers from a relatively short hang and continues running. Non-fatal app hangs do not have a "Crash" mark on them in Error Tracking.
+
+  {{< img src="real_user_monitoring/error_tracking/ios-non-fatal-app-hang.png" alt="A non-fatal app hang in the Error Tracking page." style="width:60%;" >}}
+
+#### Enable app hang monitoring
+
+To enable app hang monitoring:
+
+1. Update the initialization snippet with the `appHangThreshold` parameter:
+
+   ```swift
+   RUM.enable(
+       with: RUM.Configuration(
+           applicationID: "<rum application id>",
+           appHangThreshold: 0.25
+       )
+   )
+   ```
+
+2. Set the `appHangThreshold` parameter to the minimal duration you want app hangs to be reported. For example, enter `0.25` to report hangs lasting at least 250 ms. See [Notes][5] for more guidance on what to set this value to.
+
+   Make sure you follow the steps below to get [deobfuscated stack traces][6].
+
+#### Notes
+
+- Apple only considers hangs lasting more than 250 ms in their hang rate metrics in Xcode Organizer. Datadog recommends starting with a similar value for the `appHangThreshold` (in other words, set it to `0.25`) and then lowering it or increasing it incrementally to find the right setup.
+
+- To filter out most of the noisy hangs, we recommend settling on an `appHangThreshold` between 2 and 3 seconds.
+
+- The minimum value the `appHangThreshold` option can be set to is `0.1` seconds (100 ms). However, setting the threshold to such small values may lead to an excessive reporting of hangs.
+
+- The SDK implements a secondary thread for monitoring app hangs. To reduce CPU utilization, it tracks hangs with a tolerance of 2.5%, which means some hangs that last close to the `appHangThreshold` may not be reported.
+
+#### Disable app hang monitoring
+
+To disable app hang monitoring, update the initialization snippet and set the `appHangThreshold` parameter to `nil`.
+
 ## Get deobfuscated stack traces
+
+Mapping files are used to deobfuscate stack traces, which helps in debugging errors. Using a unique build ID that gets generated, Datadog automatically matches the correct stack traces with the corresponding mapping files. This ensures that regardless of when the mapping file was uploaded (either during pre-production or production builds), the correct information is available for efficient QA processes when reviewing crashes and errors reported in Datadog.
+
+For iOS applications, the matching of stack traces and symbol files relies on their `uuid` field.
 
 ### Symbolicate crash reports
 
-Crash reports are collected in a raw format and mostly contain memory addresses. To map these addresses into legible symbol information, Datadog requires .dSYM files, which are generated in your application's build or distribution process.
+Crash reports are collected in a raw format and mostly contain memory addresses. To map these addresses into legible symbol information, Datadog requires .`dSYM` files, which are generated in your application's build or distribution process.
 
 ### Find your .dSYM file
 
@@ -114,7 +169,7 @@ Depending on your setup, you may need to download `.dSYM` files from App Store C
 
 | Bitcode Enabled | Description |
 |---|---|
-| Yes | `.dSYM` files are available after [App Store Connect][5] completes processing your application's build. |
+| Yes | `.dSYM` files are available after [App Store Connect][7] completes processing your application's build. |
 | No | Xcode exports `.dSYM` files to `$DWARF_DSYM_FOLDER_PATH` at the end of your application's build. Ensure that the `DEBUG_INFORMATION_FORMAT` build setting is set to **DWARF with dSYM File**. By default, Xcode projects only set `DEBUG_INFORMATION_FORMAT` to **DWARF with dSYM File** for the Release project configuration. |
 
 ### Upload your .dSYM file
@@ -127,7 +182,7 @@ Once your application crashes and you restart the application, the iOS SDK uploa
 
 ### Use Datadog CI to upload your .dSYM file
 
-You can use the command line tool [@datadog/datadog-ci][6] to upload your `.dSYM` file:
+You can use the command line tool [@datadog/datadog-ci][8] to upload your `.dSYM` file:
 
 ```sh
 export DATADOG_API_KEY="<API KEY>"
@@ -147,7 +202,7 @@ Alternatively, if you use Fastlane or GitHub Actions in your workflows, you can 
 
 The Fastlane plugin helps you upload `.dSYM` files to Datadog from your Fastlane configuration.
 
-1. Add [`fastlane-plugin-datadog`][7] to your project.
+1. Add [`fastlane-plugin-datadog`][9] to your project.
 
    ```sh
    fastlane add_plugin datadog
@@ -163,11 +218,11 @@ The Fastlane plugin helps you upload `.dSYM` files to Datadog from your Fastlane
    end
    ```
 
-For more information, see [`fastlane-plugin-datadog`][7].
+For more information, see [`fastlane-plugin-datadog`][9].
 
 ### Use GitHub Actions to upload your .dSYM file
 
-The [Datadog Upload dSYMs GitHub Action][8] allows you to upload your symbols in your GitHub Action jobs:
+The [Datadog Upload dSYMs GitHub Action][10] allows you to upload your symbols in your GitHub Action jobs:
 
 ```yml
 name: Upload dSYM Files
@@ -193,7 +248,7 @@ jobs:
             path/to/zip/dsyms.zip
 ```
 
-For more information, see [dSYMs commands][9].
+For more information, see [dSYMs commands][11].
 
 ## Limitations
 
@@ -213,7 +268,7 @@ To verify your iOS Crash Reporting and Error Tracking configuration, issue a cra
 
    ```swift
    func didTapButton() {
-   fatalError(“Crash the app”)
+   fatalError("Crash the app")
    }
    ```
 
@@ -229,8 +284,10 @@ To verify your iOS Crash Reporting and Error Tracking configuration, issue a cra
 [2]: https://app.datadoghq.com/rum/application/create
 [3]: /real_user_monitoring/ios
 [4]: /logs/log_collection/ios
-[5]: https://appstoreconnect.apple.com/
-[6]: https://www.npmjs.com/package/@datadog/datadog-ci
-[7]: https://github.com/DataDog/datadog-fastlane-plugin
-[8]: https://github.com/marketplace/actions/datadog-upload-dsyms
-[9]: https://github.com/DataDog/datadog-ci/blob/master/src/commands/dsyms/README.md
+[5]: /real_user_monitoring/error_tracking/mobile/ios/?tab=cocoapods#notes
+[6]: /real_user_monitoring/error_tracking/mobile/ios/?tab=cocoapods#get-deobfuscated-stack-traces
+[7]: https://appstoreconnect.apple.com/
+[8]: https://www.npmjs.com/package/@datadog/datadog-ci
+[9]: https://github.com/DataDog/datadog-fastlane-plugin
+[10]: https://github.com/marketplace/actions/datadog-upload-dsyms
+[11]: https://github.com/DataDog/datadog-ci/blob/master/src/commands/dsyms/README.md

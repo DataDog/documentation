@@ -11,6 +11,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-github-actions-ci-visibility/"
   tag: "Blog"
   text: "Monitor your GitHub Actions workflows with Datadog CI Visibility"
+- link: "/integrations/github/"
+  tag: "Documentation"
+  text: "Learn about the GitHub Integration"
 - link: "/integrations/guide/source-code-integration"
   tag: "Documentation"
   text: "Learn about the Source Code Integration"
@@ -145,20 +148,32 @@ From within a specific test run, click the **Actions** button and select **Creat
 For more information about configuring the Jira integration, see the [Case Management documentation][7].
 
 ## Open tests in GitHub and your IDE
+
 ### In-app entry points
+
 After detecting a failed and/or flaky test within Datadog, you have the option to open that test in GitHub or your IDE to fix it immediately.
 
 Under the **Error Message** section in the **Overview** tab of a test run, click the **View Code** button to view the relevant lines of code for that test within Visual Studio Code, IntelliJ, or GitHub.
 
-{{< img src="ci/IDE.png" alt="Open test in IDE" style="width:50%;">}}
+{{< img src="continuous_integration/error_message_code.png" alt="An inline code snippet with a button you can click to view the source code in GitHub or an IDE" style="width:100%;">}}
 
 The order of options in this dropdown changes depending on the language your test was written in:
 
 - IntelliJ is prioritized for Java-based tests
 - Visual Studio Code is prioritized for JavaScript and Python-based tests
 
+### Viewing source code in GitHub
+
+Optionally, you can set up the [GitHub integration][10] to open the source code for a failed or flaky test in GitHub.
+
+Under the **Source Code** section in the **Overview** tab of a test run, click the **View on GitHub** button to view the relevant lines of code for that test within GitHub.
+
+{{< img src="continuous_integration/source_code_integration.png" alt="An inline code snippet with a button you can click to view the source code in GitHub or an IDE" style="width:100%;">}}
+
 ### Installing IDE plugins
+
 IDE plugins and extensions are required to view your test in your IDE. 
+
 - If you do not have the VS Code extension installed, click **View in VS Code** to open the extension directly in VS Code for installation.
 - If you do not have the IntelliJ plugin installed, click **View in IntelliJ** to get the extension installation. Compatible Datadog versions can be found on the [Plugin Versions page][2].
 
@@ -175,3 +190,4 @@ IDE plugins and extensions are required to view your test in your IDE.
 [7]: /service_management/case_management/settings/#jira
 [8]: /service_management/case_management/view_and_manage#take-action
 [9]: https://app.datadoghq.com/cases
+[10]: /integrations/github/#link-a-repository-in-your-organization-or-personal-account

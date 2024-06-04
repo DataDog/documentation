@@ -8,7 +8,7 @@
 .collapsible-header {
     display: flex;
     align-items: center;
-    padding: 16px;
+    padding: 8px;
     cursor: pointer;
     outline: none;
     background-color: #ffffff00;
@@ -52,6 +52,7 @@
 }
 
 .header-text-inner {
+    font-size: 1.5rem;
     margin: 0;
     line-height: 1.5;
 }

@@ -98,7 +98,7 @@ You can manage the list of excluded branches on the [Test Service Settings page]
 
 ## Explore results in the Test Visibility Explorer
 
-You can using the following facets to query sessions that run Early Flake Detection and new tests in the [Test Visibility Explorer][8].
+You can use the following facets to query sessions that run Early Flake Detection and new tests in the [Test Visibility Explorer][8].
 
 * **Test Session**: Test sessions running Early Flake Detection have the `@test.early_flake.enabled` tag set to `true`.
 * **New Tests**: New tests have the `@test.is_new` tag set to `true`, and retries for this test have the `@test.is_retry` tag set to `true`.
@@ -129,5 +129,5 @@ If the Datadog library can't fetch the full list of known tests, the Datadog lib
 [5]: /quality_gates/setup
 [6]: /tests
 [7]: https://app.datadoghq.com/ci/settings/test-service
-[8]: /continuous_integration/explorer?tab=testruns
+[8]: /tests/explorer/
 [9]: /help/

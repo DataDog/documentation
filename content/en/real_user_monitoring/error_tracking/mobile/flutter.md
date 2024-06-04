@@ -73,6 +73,10 @@ If your application suffers a fatal crash, the Datadog Flutter SDK uploads a cra
 
 ## Get deobfuscated stack traces
 
+Mapping files are used to deobfuscate stack traces, which helps in debugging errors. Using a unique build ID that gets generated, Datadog automatically matches the correct stack traces with the corresponding mapping files. This ensures that regardless of when the mapping file was uploaded (either during pre-production or production builds), the correct information is available for efficient QA processes when reviewing crashes and errors reported in Datadog.
+
+For Flutter applications, the matching of stack traces and source maps relies on their `service`, `version`, `variant`, and `architecture` fields.
+
 ### Upload symbol files to Datadog
 
 Native iOS crash reports are collected in a raw format and mostly contain memory addresses. To map these addresses into legible symbol information, Datadog requires that you upload .dSYM files, which are generated in your application's build process.

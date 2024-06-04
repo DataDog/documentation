@@ -1,5 +1,5 @@
 ---
-title: API Tests
+title: API Testing
 kind: documentation
 description: Simulate requests on your public and internal services
 aliases:
@@ -47,7 +47,7 @@ API tests run from Datadog [managed locations][3] or [private locations][4], all
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /synthetics/api_tests/http_tests?tab=requestoptions#notify-your-team
+[1]: /synthetics/api_tests/http_tests?tab=requestoptions#configure-the-test-monitor
 [2]: /continuous_testing/cicd_integrations
 [3]: /synthetics/api_tests/http_tests/#select-locations
 [4]: /synthetics/private_locations
