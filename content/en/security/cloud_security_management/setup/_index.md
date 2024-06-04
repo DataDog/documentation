@@ -20,43 +20,47 @@ Cloud Security Management (CSM) delivers real-time threat detection and continuo
 
 - Datadog Agent version `7.46` or later.
 
-## Installation methods
+## Select CSM features
 
-text
+On the [Cloud Security Management Features][5] page in Datadog, select the features you want to enable.
 
-### Datadog app
+- Compliance Scanning
+- Threat Detection
+- Identity Risks (CIEM)
+- Host Vulnerability Mgmt.
+- Container Vulnerability Mgmt.
 
-text
+## Configure CSM features
 
-### Fleet Automation
+Next, go to the [Cloud Security Management Setup][3] page. On this page are instructions for configuring the features you selected.
 
-text
+To enable CSM on your infrastructure, follow the instructions on the [**Cloud Security Management Setup**][3] page.
 
-## Select features
+which has detailed steps on how to configure CSM. For detailed setup instructions, see the following articles:
 
-On the [Cloud Security Management page][5] in Datadog, 
-
-### Enable CSM
-
-To enable CSM on your infrastructure, complete the following steps:
-
-navigate to the [**Cloud Security Management Setup**][3] page in Datadog, which has detailed steps on how to configure CSM. For detailed setup instructions, see the following articles:
-
-#### Enable resource scanning for cloud accounts
+### Enable resource scanning for cloud accounts
 
 To enable resource scanning for your cloud accounts, you must first set up the integration and then enable CSM for each AWS account, Azure subscription, or Google Cloud project. For detailed instructions, see [Enable Cloud Security Management for Cloud Accounts][2].
 
-#### Set up CloudTrail logs forwarding
+### Set up CloudTrail logs forwarding
 
 Set up AWS CloudTrail logs forwarding to enable CSM Identity Risks and address over-permissive entitlements and risky IAM resources. For detailed instructions, see [Enable Cloud Security Management for Cloud Accounts][2].
 
-#### Enable CSM on the Agent
+### Enable CSM on the Agent
 
 Select your infrastructure type for details on how to enable [CSM Enterprise on the Agent][1].
 
 {{< partial name="csm/csm-agent-tiles.html" >}}
 
 <br>
+
+### Enable Agentless Scanning on serverless resources
+
+text.
+
+### Configure source code integrations
+
+text.
 
 [1]: /security/cloud_security_management/setup/agent
 [2]: /security/cloud_security_management/setup/cloud_accounts

@@ -4510,11 +4510,6 @@ menu:
       parent: csm_setup
       identifier: csm_setup_deployment_types
       weight: 100
-    - name: Prerequisites
-      url: security/cloud_security_management/setup/prerequisites
-      parent: csm_setup
-      identifier: csm_setup_prerequisites
-      weight: 101
     - name: Cloud Accounts
       url: security/cloud_security_management/setup/cloud_accounts
       parent: csm_setup
@@ -4530,11 +4525,16 @@ menu:
       parent: csm_setup
       identifier: csm_setup_agentless_scanning
       weight: 10015
+    - name: Source Code Integrations
+      url: security/cloud_security_management/setup/agentless_scanning
+      parent: csm_setup
+      identifier: csm_setup_agentless_scanning
+      weight: 10016
     - name: Agent Variables
       url: security/cloud_security_management/setup/agent_variables
       parent: csm_setup
       identifier: csm_setup_agent_variables
-      weight: 10016
+      weight: 10017
     - name: Threats
       url: security/threats/
       parent: csm
