@@ -121,4 +121,4 @@ For the remaining visualization options, click on the graph and click **View eve
 [6]: /notebooks
 [7]: /real_user_monitoring/explorer/export/
 [8]: /dashboards/widgets/list/
-[9]: /product_analytics/funnel_analysis
+[9]: /product_analytics/journeys/funnel_analysis

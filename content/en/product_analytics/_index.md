@@ -41,6 +41,6 @@ Explore [User Journeys][2] to see different visualizations of the user experienc
 
 [1]: /product_analytics/user_retention
 [2]: https://app.datadoghq.com/product-analytics/user-journey/sankey
-[3]: /product_analytics/funnel_analysis
+[3]: /product_analytics/journeys/funnel_analysis
 [4]: https://app.datadoghq.com/product-analytics/user-journey/conversion
 [5]: /product_analytics/heatmaps
