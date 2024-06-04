@@ -3,8 +3,8 @@ meta_title: Getting Started with Datadog
 meta_description: Datadog, the leading service for cloud-scale monitoring.
 disclaimer: "This page is not yet available in English, we are working on its translation. <br> May you have any questions or feedback about our current translation project, <a href=\"https://docs.datadoghq.com/fr/help/\">feel free to reach out to us!</a>"
 announcement_banner:
-  desktop_message: "Register for the State of DevSecOps Livestream on June 4th"
-  mobile_message: "Join the State of DevSecOps Livestream"
-  external_link: "https://www.datadoghq.com/event/state-of-devsecops-livestream/?utm_source=inbound&utm_medium=corpsite-display&utm_campaign=dg-security-na-docs-announcement-livewebinar-202406DevSecOpsLivestream"
+  desktop_message: "Read the 2024 State of DevSecOps Study!"
+  mobile_message: "Read the State of DevSecOps Study!"
+  external_link: "https://www.datadoghq.com/state-of-devsecops/?utm_source=inbound&utm_medium=corpsite-display&utm_campaign=dg-security-ww-docs-announcement-report-devsecops2024"
 exclude: []
 translate_status_banner: "This translation isn't up-to-date. For the latest English version, click here"
