@@ -108,7 +108,9 @@ spark-submit \
 
 In Datadog, view the [Data Jobs Monitoring][8] page to see a list of all your data processing jobs.
 
-## Tag spans at runtime
+## Advanced Configuration
+
+### Tag spans at runtime
 
 {{% djm-runtime-tagging %}}
 
