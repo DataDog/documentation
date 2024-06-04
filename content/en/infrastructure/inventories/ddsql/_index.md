@@ -3,4 +3,4 @@ title: DDSQL
 kind: documentation
 ---
 
-TODO
+This is the index page for the DDSQL docs.
