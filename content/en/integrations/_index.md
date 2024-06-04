@@ -111,10 +111,6 @@ cascade:
     path: /integrations/amazon_s3.md
   aliases:
     - /integrations/awss3
-- _target:
-    path: /integrations/snowflake_web.md
-  aliases:
-    - /integrations/snowflake/
 ---
 
 More than {{< translate key="integration_count" >}} built-in integrations. See across all your systems, apps, and services.
