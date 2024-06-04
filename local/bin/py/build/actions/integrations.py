@@ -801,7 +801,7 @@ class Integrations:
             collision_name = self.get_collision_alternate_name(file_name)
             print(f"{file_name} {collision_name}")
 
-# if we have merged integrations upstream in the source repo
+        # if we have merged integrations upstream in the source repo
         # there can be multiple instances of code we are trying to regex out which doesn't play nice
         # lets split the file and apply it in chunks to avoid these issues
         parts = result.split("## Data Collected")
