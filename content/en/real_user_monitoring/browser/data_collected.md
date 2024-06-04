@@ -47,7 +47,7 @@ The following diagram illustrates the RUM event hierarchy:
 
 ## Default attributes
 
-See a complete list of [Standard Attributes][1] for RUM Browser. Each event type the noted attributes attached by default, so you can use them regardless of the RUM event type being queried.
+See a complete list of [Standard Attributes][1] for RUM Browser. By default, the attributes are attached to each event type, so you can use them regardless of the RUM event type being queried.
 
 ## Event-specific metrics and attributes
 
