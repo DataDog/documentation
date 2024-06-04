@@ -65,12 +65,12 @@ if (window.DD_LOGS) {
     });
 
     // global context
-    window.DD_LOGS.addLoggerGlobalContext('host', window.location.host);
-    window.DD_LOGS.addLoggerGlobalContext('referrer', document.referrer);
-    window.DD_LOGS.addLoggerGlobalContext('lang', lang);
+    window.DD_LOGS.setGlobalContextProperty('host', window.location.host);
+    window.DD_LOGS.setGlobalContextProperty('referrer', document.referrer);
+    window.DD_LOGS.setGlobalContextProperty('lang', lang);
 
     if (branch) {
-        window.DD_LOGS.addLoggerGlobalContext('branch', branch);
+        window.DD_LOGS.setGlobalContextProperty('branch', branch);
     }
 
     // Locally log to console
