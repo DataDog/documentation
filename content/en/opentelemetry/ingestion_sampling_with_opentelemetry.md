@@ -87,7 +87,7 @@ See the [ingestion volume control guide][8] for information about the implicatio
 
 ### Probabilistic sampling
 
-When using Datadog Agent OTLP ingest, a probabilistic sampler is available starting with Agent v7.44.0. 
+When using Datadog Agent OTLP ingest, a probabilistic sampler is available starting with Agent 7.54.0. 
 
 #### Configuring
 
