@@ -242,8 +242,6 @@ environment:
   - OTEL_RESOURCE_ATTRIBUTES=deployment.environment=docker,host.name=otelcol-docker
 {{< /code-block >}}
 
-<div class="alert alert-warning">For OpenTelemetry applications, unified service tagging is supported for only metrics and traces, not logs.</div>
-
 ## Running the application
 
 To start generating and forwarding observability data to Datadog, you need to run the Calendar application with the OpenTelemetry SDK:
