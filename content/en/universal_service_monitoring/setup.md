@@ -35,7 +35,7 @@ Additional protocols and traffic encryption methods are supported in <a href="/u
 
 - If on Linux:
     - Your service is running in a container.
-    - **Beta:** For non-containerized services see the [instructions here](#non-containerized-services-on-linux).
+    - **Beta:** For non-containerized services see the [instructions here](#additional-configuration).
 - If on Windows IIS:
     - Your service is running on a virtual machine.
 - Datadog Agent is installed alongside your service. Installing a tracing library is _not_ required.
@@ -730,8 +730,11 @@ If you use load balancers with your services, enable additional cloud integratio
 
 {{< /tabs >}}
 
-### Non-containerized services on Linux
+## Additional configuration
 
+The following systems or services require additonal configuration due to limited or beta support:
+
+{{< collapse-content title="Non-containerized services on Linux" level="h4" >}}
 <div class="alert alert-info">
 Universal Service Monitoring is available in <strong>beta</strong> to monitor services running bare-metal on Linux virtual machines.
 </div>
@@ -759,10 +762,10 @@ DD_SYSTEM_PROBE_PROCESS_SERVICE_INFERENCE_ENABLED=true
 {{% /tab %}}
 
 {{< /tabs >}}
+{{< /collapse-content >}} 
 
-### Go TLS Monitoring
-
-<div class="alert alert-info">
+{{< collapse-content title="Go TLS Monitoring" level="h4" >}}
+<<div class="alert alert-info">
 Universal Service Monitoring is available in <strong>beta</strong> to monitor TLS encrypted traffic from services implemented in Golang.
 </div>
 
@@ -804,10 +807,10 @@ agents:
 {{% /tab %}}
 
 {{< /tabs >}}
+{{< /collapse-content >}} 
 
 
-### Istio Monitoring
-
+{{< collapse-content title="Istio Monitoring" level="h4" >}}
 <div class="alert alert-info">
 Universal Service Monitoring is available in <strong>beta</strong> to monitor services behind <a href="https://istio.io/latest/docs/tasks/security/authentication/mtls-migration/">Istio mTLS</a> and to capture encrypted HTTPs traffic.
 </div>
@@ -848,9 +851,10 @@ agents:
 {{% /tab %}}
 
 {{< /tabs >}}
+{{< /collapse-content >}} 
 
-### HTTP/2 monitoring
 
+{{< collapse-content title="Datadog Operator" level="h4" >}}
 Universal Service Monitoring can capture HTTP/2 and gRPC traffic.
 
 Requires Agent version 7.53 or greater.
@@ -885,6 +889,9 @@ agents:
 {{% /tab %}}
 
 {{< /tabs >}}
+{{< /collapse-content >}} 
+
+
 
 ## Path exclusion and replacement
 
