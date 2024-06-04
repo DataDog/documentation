@@ -26,13 +26,15 @@ For a list of supported services, see [Library Compatibility Requirements][5].
 
 Code Security uses an Interactive Application Security Testing (IAST) approach to find vulnerabilities within your application code. IAST uses instrumentation embedded in your code like application performance monitoring (APM). 
 
-Code Security also monitors your code’s interactions with other components of your stack, such as libraries and infrastructure. IAST enables Datadog to identify vulnerabilities using legitimate application traffic instead of relying on external tests that could require extra configuration or periodic scheduling. 
+Code Security also monitors your code’s interactions with other components of your stack, such as libraries and infrastructure. 
+
+IAST enables Datadog to identify vulnerabilities using legitimate application traffic instead of relying on external tests that could require extra configuration or periodic scheduling. 
 
 Code Security's runtime application monitoring provides an up-to-date view of your attack surface that enables you to quickly identify potential issues.
 
 ## Code-level vulnerabilities list
 
-The Code Security rules used to detect code vulnerabilities have the following language support. 
+The Code Security detection rules support the following languages. 
 
 | Severity | Detection Rule                        | Java  | .NET  | Node.js |
 | -------- | ------------------------------------- | ----- | ----- | ------- |
@@ -73,32 +75,32 @@ The Code Security rules used to detect code vulnerabilities have the following l
 
 ## Explore and manage code vulnerabilities
 
-The [Vulnerability Explorer][1] uses real-time threat data to help you quickly understand the vulnerabilities presenting an active danger to your system, ordered by severity.
+The [Vulnerability Explorer][1] uses real-time threat data to help you understand vulnerabilities endangering your system. Vulnerabilities are ordered by severity.
 
 {{< img src="/security/application_security/code_security/vulnerability_explorer_code_vulnerabilities.png" alt="Code Security in the Vulnerability Explorer" style="width:100%;" >}}
 
-To help you quickly triage, each vulnerability contains a brief description of the issue, including: 
+To triage vulnerabilities, each vulnerability contains a brief description of the issue, including: 
 
-- Services impacted.
+- Impacted services.
 - Vulnerability type.
-- When the problem was first detected.
+- First detection.
 - The exact file and line number where the vulnerability was found.
 
 {{< img src="/security/application_security/code_security/vulnerability-details.png" alt="Code Security vulnerability details" style="width:100%;" >}}
 
 Each vulnerability detail includes a risk score (see screenshot below) and a severity rating: critical, high, medium, or low. 
 
-The risk score is tailored to the specific runtime context, including factors such as where the vulnerability is deployed and whether the service is targeted by attacks currently. 
+The risk score is tailored to the specific runtime context, including factors such as where the vulnerability is deployed and whether the service is targeted by active attacks. 
 
 {{< img src="/security/application_security/code_security/vulnerability_prioritization.png" alt="Code Security vulnerability prioritization" style="width:100%;" >}}
 
 ## Remediation
 
-Datadog Code Security automatically provides the information teams need to understand exactly where a vulnerability is in an application, from the affected filename down to the exact method and line number.
+Datadog Code Security automatically provides the information teams need to identify where a vulnerability is in an application, from the affected filename down to the exact method and line number.
 
 {{< img src="/security/application_security/code_security/code_security_remediation.png" alt="Code Security vulnerability remediation" style="width:100%;" >}}
 
-When the [GitHub integration][7] is enabled, Code Security shows the first impacted version of a service, the commit that introduced the vulnerability, and a snippet of the vulnerable code. This information gives teams insight into where and when a vulnerability occurred and prioritize their work.
+When the [GitHub integration][7] is enabled, Code Security shows the first impacted version of a service, the commit that introduced the vulnerability, and a snippet of the vulnerable code. This information gives teams insight into where and when a vulnerability occurred and helps to prioritize their work.
 
 {{< img src="/security/application_security/code_security/vulnerability_code_snippet.png" alt="Code vulnerability snippet" style="width:100%;" >}}
 
@@ -112,7 +114,7 @@ Recommendations enable you to change the status of a vulnerability, assign it to
 
 ## Enabling code security vulnerability detection 
 
-To enable code security vulnerability detection capability, set the `DD_IAST_ENABLED` environment variable to `true` in your application configuration, and restart your service.
+To enable the code security vulnerability detection capability, set the `DD_IAST_ENABLED` environment variable to `true` in your application configuration, and restart your service.
 
 For detailed steps, see [Enabling code security vulnerability detection][2].
 
