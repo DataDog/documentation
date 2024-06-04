@@ -29,3 +29,8 @@ GuardDog is a CLI tool that allows to identify malicious PyPI and npm packages. 
 GuardDog can be used to scan local or remote PyPI and npm packages using any of the available [heuristics](https://github.com/datadog/guarddog?tab=readme-ov-file#heuristics).
 
 
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
