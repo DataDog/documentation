@@ -5,19 +5,32 @@ further_reading:
 - link: "/security/application_security/how-appsec-works/"
   tag: "Documentation"
   text: "How Application Security Management Works"
+- link: "https://www.datadoghq.com/blog/iast-datadog-code-security/"
+  tag: "Blog"
+  text: "Enhance application security in production with Datadog Code Security"
+- link: "https://www.datadoghq.com/blog/application-code-vulnerability-detection/"
+  tag: "Blog"
+  text: "Find vulnerabilities in your code with Datadog Code Security"
+- link: "https://www.datadoghq.com/blog/code-security-owasp-benchmark/"
+  tag: "Blog"
+  text: "Datadog Code Security achieves 100 percent accuracy in OWASP Benchmark by using an IAST approach"
 ---
 
 <div class="alert alert-info">Code security vulnerability detection is in beta. To use it for your service, follow the <a href="/security/application_security/enabling/">Setup instructions.</a></div>
 
 ## Overview
 
-Datadog Code Security performs vulnerability detection scans for code vulnerabilities in your ASM enabled services. Code security uses detection rules to identify code vulnerabilities.
+Datadog Code Security identifies code-level vulnerabilities in your services and provides actionable insights and recommended fixes. 
 
-You can see the detected code vulnerabilities in the [Vulnerability Explorer][1], sorted by service and code.
+For a list of supported services, see [Library Compatibility Requirements][5].
 
-{{< img src="/security/application_security/code_security/asm_code_vulnerabilities_2.png" alt="Software Composition Analysis (SCA) explorer page showing code security vulnerabilities." style="width:100%;" >}}
+Code Security uses an Interactive Application Security Testing (IAST) approach to find vulnerabilities within your application code. IAST uses instrumentation embedded in your code like application performance monitoring (APM). 
 
-## Supported code detection rules
+Code Security also monitors your code’s interactions with other components of your stack, such as libraries and infrastructure. IAST enables Datadog to identify vulnerabilities using legitimate application traffic instead of relying on external tests that could require extra configuration or periodic scheduling. 
+
+Code Security's runtime application monitoring provides an up-to-date view of your attack surface that enables you to quickly identify potential issues.
+
+## Code-level vulnerabilities list
 
 The Code Security rules used to detect code vulnerabilities have the following language support. 
 
@@ -56,91 +69,58 @@ The Code Security rules used to detect code vulnerabilities have the following l
 | Low      | Session Timeout                       | TRUE  | FALSE | FALSE   |
 | Low      | Session Rewriting                     | TRUE  | FALSE | FALSE   |
 
+**Note:** Python is in private beta. Fill out [this form][6] to request a beta.
+
+## Explore and manage code vulnerabilities
+
+The [Vulnerability Explorer][1] uses real-time threat data to help you quickly understand the vulnerabilities presenting an active danger to your system, ordered by severity.
+
+{{< img src="/security/application_security/code_security/vulnerability_explorer_code_vulnerabilities.png" alt="Code Security in the Vulnerability Explorer" style="width:100%;" >}}
+
+To help you quickly triage, each vulnerability contains a brief description of the issue, including: 
+
+- Services impacted.
+- Vulnerability type.
+- When the problem was first detected.
+- The exact file and line number where the vulnerability was found.
+
+{{< img src="/security/application_security/code_security/vulnerability-details.png" alt="Code Security vulnerability details" style="width:100%;" >}}
+
+Each vulnerability detail includes a risk score (see screenshot below) and a severity rating: critical, high, medium, or low. 
+
+The risk score is tailored to the specific runtime context, including factors such as where the vulnerability is deployed and whether the service is targeted by attacks currently. 
+
+{{< img src="/security/application_security/code_security/vulnerability_prioritization.png" alt="Code Security vulnerability prioritization" style="width:100%;" >}}
+
+## Remediation
+
+Datadog Code Security automatically provides the information teams need to understand exactly where a vulnerability is in an application, from the affected filename down to the exact method and line number.
+
+{{< img src="/security/application_security/code_security/code_security_remediation.png" alt="Code Security vulnerability remediation" style="width:100%;" >}}
+
+When the [GitHub integration][7] is enabled, Code Security shows the first impacted version of a service, the commit that introduced the vulnerability, and a snippet of the vulnerable code. This information gives teams insight into where and when a vulnerability occurred and prioritize their work.
+
+{{< img src="/security/application_security/code_security/vulnerability_code_snippet.png" alt="Code vulnerability snippet" style="width:100%;" >}}
+
+The [Vulnerability Explorer][1] offers remediation recommendations for detected vulnerabilities. 
+
+{{< img src="/security/application_security/code_security/remediation_recommendations.png" alt="Remediation recommendations" style="width:100%;" >}}
+
+Recommendations enable you to change the status of a vulnerability, assign it to a team member for review, and create a Jira issue for tracking.
+
+**Note:** To create Jira issues for vulnerabilities, you must configure the Jira integration, and have the `manage_integrations` permission. For detailed instructions, see the [Jira integration][3] documentation, as well as the [Role Based Access Control][4] documentation.
+
 ## Enabling code security vulnerability detection 
 
 To enable code security vulnerability detection capability, set the `DD_IAST_ENABLED` environment variable to `true` in your application configuration, and restart your service.
 
 For detailed steps, see [Enabling code security vulnerability detection][2].
 
-Datadog is able to indicate the filename and line number where the vulnerability is located, without scanning the source code.
-
-The available code security vulnerability types include the following:
-
-- Admin console active
-- Command Injection
-- Default HTML escape invalid
-- Directory listing leak
-- Hardcoded Password
-- Hardcoded secrets
-- Header injection
-- HSTS header missing
-- Insecure auth protocol
-- Insecure Cookie
-- Insecure JSP layout
-- LDAP injection
-- MongoDB injection
-- Cookie without HttpOnly flag
-- Cookie without SameSite flag
-- Path traversal
-- Reflection injection
-- Server Side Request Forgery (SSRF)
-- Session timeout
-- Session rewriting
-- SQL injection
-- Stack trace leak
-- Trust boundary violation
-- Unvalidated Redirect
-- Verb tampering
-- Weak cipher
-- Weak hash
-- Weak randomness
-- X-Content-Type-Options header missing
-- XPath injection
-- XSS
-
 ### Disabling code security vulnerability detection 
 
 To disable code security vulnerability detection capability, remove the `DD_IAST_ENABLED=true` environment variable from your application configuration, and restart your service.
 
 If you need additional help, contact [Datadog support][1].
-
-## Explore and manage code vulnerabilities
-
-**Code Vulnerabilities** in the [Vulnerability Explorer][1] shows a complete list of the code vulnerabilities detected by Datadog Code Security.
-
-Datadog Code Security leverages two techniques to analyze your services:
-
-- Static code analysis in your code repositories (static point of view)
-- Runtime analysis in your deployed services (runtime point of view)
-
-By combining both techniques, Code Security monitors code end-to-end, from the code repository commit (static point of view), to the applications running in production (runtime point of view).
-
-To switch to the code repository commit point of view, select **Static**. The static view shows vulnerabilities from the source code in your repositories.
-
-To switch to the real-time point of view for the applications already running, select **Runtime**. The runtime view is the live view of the services monitored by Datadog.
-
-You can also use the following panels to sort code vulnerabilites:
-
-- **High Risk Vulnerabilites**
-  - Query: `status:(Open OR "In progress") severity:(Critical OR High) exploit_available:true service_under_attack:true service_in_production:true`
-- **Overdue Vulnerabilites**
-  - Query: `status:(Open OR "In progress") severity:(Critical OR High) exposureTime:>30`
-- **Critical/High Unique Vulnerabilites**
-  - Query: `status:(Open OR "In progress") severity:(Critical OR High)`
-
-## Remediation
-
-The [Vulnerability Explorer][1] offers remediation recommendations for detected code vulnerabilities. Recommendations enable you to change the status of a vulnerability, assign it to a team member for review, and create a Jira issue for tracking. They also include a collection of links and references to websites or information sources to help you understand the context behind each code vulnerability.
-
-**Note:** To create Jira issues for vulnerabilities, you must configure the Jira integration, and have the `manage_integrations` permission. For detailed instructions, see the [Jira integration][3] documentation, as well as the [Role Based Access Control][4] documentation.
-
-## Configure Code Security
-
-To scan code vulnerabilities in your services, navigate to [Security -> Application Security -> Settings][12].
-
-In **Code Security**, follow the steps for your programming language.
-
-For detailed steps, see [Enabling code security vulnerability detection][2].
 
 ## Further Reading
 
@@ -150,3 +130,6 @@ For detailed steps, see [Enabling code security vulnerability detection][2].
 [2]: /security/application_security/enabling/tracing_libraries/code_security/java/
 [3]: /integrations/jira/
 [4]: /account_management/rbac/permissions/#integrations
+[5]: /security/application_security/enabling/compatibility/
+[6]: https://docs.google.com/forms/d/1wsgbd80eImvJSjXe5y5VCjAW0zzn5p3CoCLsOy0vqsk/
+[7]: /integrations/github/
