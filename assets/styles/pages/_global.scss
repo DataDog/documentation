@@ -798,6 +798,12 @@ video {
     overflow-x: auto;
 }
 
+@include media-breakpoint-up(xl) {
+    table {
+        table-layout: fixed;
+    }
+}
+
 table,
 .table {
     width: 100%;

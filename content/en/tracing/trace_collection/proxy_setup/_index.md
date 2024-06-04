@@ -298,16 +298,14 @@ Datadog APM supports NGINX in two configurations:
 Datadog provides an NGINX module for distributed tracing.
 
 ### Module installation
-There is one version of the Datadog NGINX module for each supported Docker
-image. Install the module by downloading the appropriate file from the
-[latest nginx-datadog GitHub release][1] and extracting it into NGINX's modules
-directory.
+To install the Datadog NGINX module, follow these instructions:
+1. Download the appropriate version from the [latest nginx-datadog GitHub release][1]
+2. Choose the tarball corresponding to the specific NGINX version and CPU architecture.
 
-For example, the module compatible with the Docker image
-[nginx:1.23.2-alpine][2] is included in each release as the file
-`nginx_1.23.2-alpine-amd64-ngx_http_datadog_module.so.tgz`. The module compatible with
-the Docker image [amazonlinux:2.0.20230119.1][3] is included in each release as the file
-`amazonlinux_2.0.20230119.1-amd64-ngx_http_datadog_module.so.tgz`.
+Each release includes two tarballs per combination of NGINX version and CPU architecture.
+The main tarball contains a single file, `ngx_http_datadog_module.so`, which is the Datadog NGINX module. The second one is debug symbols, it is optional.
+
+For simplicity, the following script downloads only the module for the latest release:
 
 ```bash
 get_latest_release() {
@@ -341,15 +339,14 @@ if [ -z "$ARCH" ]; then
     exit 1
 fi
 
-BASE_IMAGE=nginx:1.23.2-alpine
-BASE_IMAGE_WITHOUT_COLONS=$(echo "$BASE_IMAGE" | tr ':' '_')
+NGINX_VERSION="1.26.0"
 RELEASE_TAG=$(get_latest_release DataDog/nginx-datadog)
-tarball="$BASE_IMAGE_WITHOUT_COLONS-$ARCH-ngx_http_datadog_module.so.tgz"
-wget "https://github.com/DataDog/nginx-datadog/releases/download/$RELEASE_TAG/$tarball"
-tar -xzf "$tarball" -C /usr/lib/nginx/modules
-rm "$tarball"
-ls -l /usr/lib/nginx/modules/ngx_http_datadog_module.so
+TARBALL="ngx_http_datadog_module-${ARCH}-${NGINX_VERSION}.so.tgz"
+
+curl -Lo ${TARBALL} "https://github.com/DataDog/nginx-datadog/releases/download/${RELEASE_TAG}/${TARBALL}"
 ```
+
+Extract the `ngx_http_datadog_module.so` file from the downloaded tarball using `tar` and place it in the NGINX modules directory, typically locaated at `/usr/lib/nginx/modules`.
 
 ### NGINX configuration with Datadog module
 In the topmost section of the NGINX configuration, load the Datadog module.
