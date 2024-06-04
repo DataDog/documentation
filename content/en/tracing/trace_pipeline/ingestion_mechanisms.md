@@ -47,7 +47,7 @@ For instance, if service `A` has more traffic than service `B`, the Agent might 
 
 #### Remote configuration
 
-Sampling rate configuration in the Agent is configurable remotely if you are using Agent version [7.42.0][20] or higher. Get started with [Remote Configuration][23] and start setting this parameter from the [Ingestion Control page][5]. Remote Configuration allows you to change the parameter without having to restart the Agent. The remotely set configuration takes precedence over local configurations - environment variables and `datadog.yaml` setting.
+Sampling rate configuration in the Agent is configurable remotely if you are using Agent version [7.42.0][20] or higher. To get started, set up [Remote Configuration][23] and then configure the `ingestion_reason` parameter from the [Ingestion Control page][5]. Remote Configuration allows you to change the parameter without having to restart the Agent. Remotely set configuration takes precedence over local configurations, including environment variables and settings from `datadog.yaml`.
 
 #### Local configuration
 
@@ -80,9 +80,9 @@ The configuration can be set by environment variables or directly in the code:
 
 <div class="alert alert-info"><strong>Resource-based sampling rules are in Beta</strong>: Starting from version <a href="https://github.com/DataDog/dd-trace-java/releases/tag/v1.34.0">1.34.0</a>, for Java applications, set by-service and by-resource sampling rates from the <a href="/tracing/trace_pipeline/ingestion_controls#configure-the-service-ingestion-rate">Ingestion Control Page</a> UI. Request access to the feature via this <a href="https://forms.gle/WCG57yTCG27BCBB67">link</a>.</div>
 
-Read more about how to remotely configure sampling rates by service and resource in this [article][1].
+Read more about how to remotely configure sampling rates by service and resource in the [Resource-based sampling guide][1].
 
-**Note**: The remotely set configuration takes precedence over local configuration.
+**Note**: Remotely set configuration takes precedence over local configuration.
 
 **Local configuration**
 

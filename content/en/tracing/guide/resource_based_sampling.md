@@ -18,39 +18,17 @@ Remotely configured sampling rules are in Beta. To request access, complete the 
 
 ## Overview
 
-Remote configuration allows you to dynamically set this ingestion [sampling rates by service and resource name][7], from the Datadog UI, without having to redeploy your service.
+Remote configuration allows you to dynamically set ingestion [sampling rates by service and resource name][7], from the Datadog UI, without having to redeploy your service.
 
-## See sampling rates by resource in the Ingestion Control page
-
-To see configured sampling rates by resource, navigate to the Ingestion controls [Service Ingestion summary][1]. The table lists the applied sampling rate by resource of the service.
-
-{{< img src="/tracing/guide/resource_based_sampling/resource_sampling_rates.png" alt="Sampling rates table by resource" style="width:100%;">}}
-
-- The `Ingested bytes` column surfaces the ingested bytes from spans of the service and resource, while the `Downstream bytes` column surfaces the ingested bytes from spans where the sampling decision is made starting from that service and resource, including bytes from downstream services in the call chain.
-- The `Configuration` column surfaces the where the resource sampling rate is being applied from: 
-  - `Automatic` if the [default head-based sampling mechanism][8] from the Agent applies.
-  - `Local Configured` if a [sampling rule][7] was set locally in the tracing library.
-  - `Remote Configured` if a remote sampling rule was set from the Datadog UI. Read [more](#remotely-configure-sampling-rules-for-the-service) to learn how to configure sampling rules from the Ingestion Control page.
-
-## Remotely configure sampling rules for the service
-
-To configure sampling rates for the service, by resource name, click the `Manage Ingestion rate` button. If the remote configuration option is disabled, make sure that the listed [requirements](#compatibility-requirements) are all met.
-
-{{< img src="/tracing/guide/resource_based_sampling/sampling_configuration_modal.png" alt="Configuration Modal" style="width:100%;">}}
-
-From the modal, set sampling rates for some resources by clicking `Add new rule`. Sampling rules use glob pattern matching, so you can use wildcards (`*`) to match against multiple resources at the same time. Click `Apply` to save the configuration: a confirmation pop-over will appear. The configuration should take effect in less than a minute, which you can be observe from the [Live Search Explorer][9].
-
-From the Service Ingestion Summary, the resources for which the sampling rate remotely applied is  should show `Remote Configured` in the `Configuration` column.
-
-## Compatibility requirements
+## Requirements
 
 - Datadog Agent [7.41.1][2] or higher.
-- [Remote Configuration][3] is enabled for your Agent.
-- `APM Remote Configuration Write` [permissions][4]. Note: If you don’t have these permissions, ask your Datadog Admin to update your permissions from your Organization Settings.
+- [Remote Configuration][3]  enabled for your Agent.
+- `APM Remote Configuration Write` [permissions][4]. If you don’t have these permissions, ask your Datadog admin to update your permissions from your organization settings.
 
-#### Tracing library version
+### Tracing library version
 
-Find below the minimum tracing library version required for the feau
+Find below the minimum tracing library version required for the feature:
 
 Language  | Minimum version required
 ----------|--------------------------
@@ -62,6 +40,29 @@ Node.js   | _Coming soon_
 PHP       | _Coming soon_
 .NET      | _Coming soon_
 C++       | _Coming soon_
+
+## See sampling rates by resource in the Ingestion Control page
+
+To see configured sampling rates by resource, navigate to the Ingestion controls [Service Ingestion summary][1]. The table lists the applied sampling rate by resource of the service.
+
+{{< img src="/tracing/guide/resource_based_sampling/resource_sampling_rates.png" alt="Sampling rates table by resource" style="width:100%;">}}
+
+- The `Ingested bytes` column surfaces the ingested bytes from spans of the service and resource, while the `Downstream bytes` column surfaces the ingested bytes from spans where the sampling decision is made starting from that service and resource, including bytes from downstream services in the call chain.
+- The `Configuration` column surfaces where the resource sampling rate is being applied from: 
+  - `Automatic` if the [default head-based sampling mechanism][8] from the Agent applies.
+  - `Local Configured` if a [sampling rule][7] was set locally in the tracing library.
+  - `Remote Configured` if a remote sampling rule was set from the Datadog UI. To learn how to configure sampling rules from the Ingestion Control page, read the section on [remotely configuring sampling rules](#remotely-configure-sampling-rules-for-the-service).
+
+## Remotely configure sampling rules for the service
+
+To configure sampling rates for the service, by resource name, click the `Manage Ingestion rate` button. If the remote configuration option is disabled, make sure that the listed [requirements](#compatibility-requirements) are all met.
+
+{{< img src="/tracing/guide/resource_based_sampling/sampling_configuration_modal.png" alt="Configuration Modal" style="width:100%;">}}
+
+From the modal, set sampling rates for some resources by clicking `Add new rule`. Sampling rules use glob pattern matching, so you can use wildcards (`*`) to match against multiple resources at the same time. Click `Apply` to save the configuration: a confirmation pop-over will appear. The configuration should take effect in less than a minute, which you can be observe from the [Live Search Explorer][9].
+
+From the Service Ingestion Summary, the resources for which the sampling rate remotely applied is  should show `Remote Configured` in the `Configuration` column.
+
 
 
 ## Further reading
