@@ -145,11 +145,11 @@ In Datadog, view the [Data Jobs Monitoring][6] page to see a list of all your Da
 
 ## Advanced Configuration
 
-1. Tag spans at runtime
+### Tag spans at runtime
 
 {{% djm-runtime-tagging %}}
 
-1. Aggregate cluster metrics from one-time job runs
+### Aggregate cluster metrics from one-time job runs
 
    For Databricks Jobs submitted via the [one-time run API endpoint][8] (common when doing orchestration with tools outside of Databricks such as Airflow, Azure Data Factory), set variable `DD_JOB_NAME` inside `spark_env_vars` field to the same value as your request payload's `run_name`. This allows Data Jobs Monitoring to aggregate your cluster utilization from the same job and show performance across time.
 
