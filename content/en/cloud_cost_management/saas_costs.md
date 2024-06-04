@@ -40,6 +40,8 @@ If your provider is not supported, use [Custom Costs][1] to upload any cost data
 
 To use SaaS Cost Integrations, you must configure [Cloud Cost Management][2] for AWS, Azure, or Google Cloud. 
 
+See the respective documentation for your cloud provider:
+
 {{< partial name="cloud_cost/getting-started.html" >}}
 
 </br>
