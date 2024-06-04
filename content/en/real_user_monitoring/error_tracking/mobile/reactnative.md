@@ -85,6 +85,12 @@ project.ext.datadog = [
 
 Options for the `datadog-ci react-native xcode` command are available on the [command documentation page][12].
 
+#### Custom Release Version
+
+Use the `DATADOG_RELEASE_VERSION` environment variable to specify a different release version for your sourcemaps, starting from `@datadog/mobile-react-native@2.3.5` and `@datadog/datadog-ci@v2.37.0`.
+
+When the SDK is initialized with a version suffix, you must manually override the release version in order for the sourcemap and build versions to match.
+
 ## Limitations
 
 {{< site-region region="us,us3,us5,eu,gov" >}}
