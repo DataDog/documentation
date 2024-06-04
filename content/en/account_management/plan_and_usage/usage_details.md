@@ -87,13 +87,13 @@ Time selection contains options to view usage graphs at daily, weekly, monthly o
 
 {{< img src="account_management/billing/TimeGranularity.png" alt="Time intervals on usage graphs" style="width:100%; align:left" >}}
 
-## Billable On-demand Pills and Committed Lines
+## Billable on-demand pills and committed lines
 
 <div class="alert alert-warning">This feature is in beta. To request access and confirm your organization meets the feature criteria, contact your account representative or <a href="https://docs.datadoghq.com/help/">Customer Support</a>.</div>
 
-Billable on-demand pills highlight the portion of billable usage that is on-demand usage. The dashed `Committed` line shows commitments per product, without any allotments (such as Custom Metrics or Containers). 
+Billable on-demand pills highlight the portion of billable usage that is on-demand usage. The dashed `Committed` line shows commitments per product, without any allotments (such as Custom Metrics or Containers).
 
-{{< img src="static/images/account_management/plan_and_usage/MTD-billable-and-committed-lines.png" alt="Billable on-demand pills and committed usage lines on trends graphs." style="width:100%; align:left" >}}
+{{< img src="account_management/plan_and_usage/MTD-billable-and-committed-lines.png" alt="Billable on-demand pills and committed usage lines on trends graphs." style="width:100%; align:left" >}}
 
 
 ## Top custom metrics
@@ -133,21 +133,21 @@ This data can be downloaded as a CSV file.
 
 {{< img src="account_management/billing/usage-details-v3-03.png" alt="Logs Usage by Index" >}}
 
-## First-time Usage Notifications
+## First-time usage notifications
 
 <div class="alert alert-warning">This feature is in beta. To request access and confirm your organization meets the feature criteria, contact your account representative or <a href="https://docs.datadoghq.com/help/">Customer Support</a>.</div>
 
-This beta sends email notifications when there is first-time billable usage for a new product not included in your current contract. Emails are sent ~48 hours after the usage first occurs during a given month.
+The first-time usage notifications feature sends email notifications when there is first-time billable usage for a new product not included in your current contract. Emails are sent approximately 48 hours after the usage first occurs during a given month.
 
-After enablement, a new “Usage Notifications” tab is added to the parent organization's Plan and Usage page. On this tab, there is a list of all products covered by the functionality. Unchecking a box will stop notifications for that product for all users within the account; so if any first-time usage outside of your most recent active contract is detected, users will not receive a notification for any unchecked products. 
+After enabling the feature, a new **Usage Notifications** tab is added to the parent organization's **Plan and Usage** page. On this tab, there is a list of all products covered by the functionality. Unchecking a box stops notifications for that product for all users within the account. If any first-time usage outside of your most recent active contract is detected, users do not receive a notification for any unchecked products.
 
-{{< img src="static/images/account_management/plan_and_usage/usage-notifications.png" alt="First-time usage notifications page with a product list including checked and unchecked items" style="width:100%; align:left" >}}
+{{< img src="account_management/plan_and_usage/usage-notifications.png" alt="First-time usage notifications page with a product list including checked and unchecked items" style="width:100%; align:left" >}}
 
-Any user with Usage Notifications Read or Write permissions receives emails. For most organizations, this means any admins. 
-If your Datadog account is a multi-organization, parent organization users with permissions receive email notifications of usage in child organizations. These emails indicate which child organization generated the usage, and the product which usage was generated for. Child organization users with this permission receive emails for their organization only. 
+Any user with _Usage Notifications Read_ or _Write_ permissions receives emails. For most organizations, this means any admins.
 
-{{< img src="static/images/account_management/plan_and_usage/usage-notifications-email.png" alt="First-time usage notifications email with details on sample first-time usage" style="width:100%; align:left" >}}
+If your Datadog account is a multi-organization, parent organization users with permissions receive email notifications of usage in child organizations. These emails indicate which child organization generated the usage, and the product which usage was generated for. Child organization users with this permission receive emails for their organization only.
 
+{{< img src="account_management/plan_and_usage/usage-notifications-email.png" alt="First-time usage notifications email with details on sample first-time usage" style="width:100%; align:left" >}}
 
 ## Troubleshooting
 
