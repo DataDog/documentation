@@ -4,9 +4,15 @@ As an example, you can configure this processor to drop new logs or trigger an a
 
 To set up the quota processor:
 1. Enter a name for the quota processor. The pipeline uses the name to identify the quota across multiple Remote Configuration deployments of the Worker.
-1. Define a **filter query**. Only logs that match the specified [filter query](#filter-query-syntax) are counted towards the daily limit. No logs are filtered out, so all logs go through the processor that comes after this one.
+1. Define a **filter query**. Only logs that match the specified [filter query](#filter-query-syntax) are counted towards the daily limit.
 1. In the **Unit for quota** dropdown menu, select if you want to measure the quota by the number of `Events` or by the `Volume` in bytes.
 1. Set the daily quota limit and select the unit of magnitude for your desired quota.
 1. Check the **Drop events** checkbox if you want to drop all events when your quota is met. Leave it unchecked if you plan to set up a [monitor][5001] that sends an alert when the quota is met.
+
+**Notes**:
+- If logs that match the quota filter come in after the daily quota has been met, and the **Drop events** option is selected, then anything above the quota is dropped and does not go to the next step in the pipeline.
+- If logs that match the quota filter come in after the daily quota has been met, and the **Drop events** option is not selected, then those logs go to the next step in the pipeline.
+- Logs that match the quota filter and are within the daily quota, are counted towards the daily limit and go to the next step in the pipeline.
+- Logs that do not match the quota filter are not counted towards the daily limit and go to the next step of the pipeline.
 
 [5001]: /monitors/types/metric/?tab=threshold
