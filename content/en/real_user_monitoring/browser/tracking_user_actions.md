@@ -101,6 +101,14 @@ For example:
 
 `data-dd-action-name` is favored when both attributes are present on an element.
 
+### How action names are computed
+
+The Datadog Browser SDK uses different strategies to compute click action names:
+
+1. If the `data-dd-action-name` attribute or a custom attribute (as explained above) is explicitly set by the user on the clicked element (or one of its parents), its value is used as the action name.
+
+2. If `data-dd-action-name` attribute or its equivalent is not set, depending on the element type, the sdk uses other attributes such as `label`, `placeholder`, `aria-label` from the element or its parents to construct the action name. If none of these attributes is found, the sdk uses the inner text as name for the action.
+
 ## Send custom actions
 
 To extend the collection of user interactions, send your custom actions using the `addAction` API. These custom actions send information relative to an event that occurs during a user journey.

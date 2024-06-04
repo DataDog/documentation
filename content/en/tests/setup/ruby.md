@@ -41,6 +41,13 @@ Supported test frameworks:
 | Minitest | >= 5.0.0 |
 | Cucumber | >= 3.0 |
 
+Supported test runners:
+
+| Test runner | Version |
+|---|---|
+| Knapsack Pro | >= 7.2.0 |
+| ci-queue | >= 0.53.0 |
+
 ## Configuring reporting method
 
 To report test results to Datadog, you need to configure the `ddtrace` gem:
@@ -155,6 +162,27 @@ For example:
 DD_ENV=ci bundle exec rake test
 ```
 
+<div class="alert alert-warning">
+<strong>Note:</strong> When using `minitest/autorun`, ensure that `datadog/ci` is required before `minitest/autorun`.
+</div>
+
+Example configuration with `minitest/autorun`:
+
+```ruby
+require 'datadog/ci'
+require 'minitest/autorun'
+
+if ENV["DD_ENV"] == "ci"
+  Datadog.configure do |c|
+    c.ci.enabled = true
+
+    c.service = 'my-ruby-app'
+
+    c.ci.instrument :minitest
+  end
+end
+```
+
 {{% /tab %}}
 
 {{% tab "Cucumber" %}}
@@ -163,13 +191,6 @@ The Cucumber integration traces executions of scenarios and steps when using the
 
 To activate your integration, add the following code to your application:
 
-<!-- TODO: Explicitly setting `c.tracing.enabled` overrides any existing value, including the environment
-variable `DD_TRACE_ENABLED`. This prevents production environments from being able to disable the tracer
-using `DD_TRACE_ENABLED`.
-This snippet should be adapted to work correctly with the production tracer configuration or
-instruct clients to only include this code in a CI environment.
-This affects all code snippets in this file.
--->
 ```ruby
 require 'cucumber'
 require 'datadog/ci'
@@ -293,25 +314,40 @@ require "ddtrace/auto_instrument" if ENV["DD_ENV"] == "ci"
 
 For the full list of available instrumentation methods, see the [`ddtrace` documentation][6]
 
-## Webmock
+## Webmock/VCR
 
-[Webmock][7]
-is a popular Ruby library that stubs HTTP requests when running tests.
-By default, it fails when used with datadog-ci because traces are being sent
+[Webmock][7] and [VCR][9]
+are popular Ruby libraries that stub HTTP requests when running tests.
+By default, they fail when used with datadog-ci because traces are being sent
 to Datadog with HTTP calls.
 
 To allow HTTP connections for Datadog backend, you need to configure
-Webmock accordingly.
+Webmock and VCR accordingly.
 
 ```ruby
-# when using Agentless mode (note: use the correct datadog site, for example, datadoghq.com, datadoghq.eu, etc.):
-WebMock.disable_net_connect!(:allow => "citestcycle-intake.datadoghq.com")
+# Webmock
+# when using Agentless mode:
+WebMock.disable_net_connect!(:allow => /datadoghq/)
 
 # when using Agent running locally:
 WebMock.disable_net_connect!(:allow_localhost => true)
 
 # or for more granular setting set your Agent URL, for example:
 WebMock.disable_net_connect!(:allow => "localhost:8126")
+
+# VCR
+VCR.configure do |config|
+  # ... your usual configuration here ...
+
+  # when using Agent
+  config.ignore_hosts "127.0.0.1", "localhost"
+
+  # when using Agentless mode
+  config.ignore_request do |request|
+    # ignore all requests to datadoghq hosts
+    request.uri =~ /datadoghq/
+  end
+end
 ```
 
 ## Collecting Git metadata
@@ -425,3 +461,4 @@ Datadog::CI.active_test_session&.finish
 [6]: /tracing/trace_collection/dd_libraries/ruby/#integration-instrumentation
 [7]: https://github.com/bblimke/webmock
 [8]: https://datadoghq.dev/datadog-ci-rb/Datadog/CI.html
+[9]: https://github.com/vcr/vcr

@@ -258,140 +258,59 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
 {{% /tab %}}
 {{% tab "Terraform" %}}
 
-To use Terraform, [wrap your Lambda function handler][2] with the Datadog Lambda library. Set your function's handler to the Datadog handler function, `/opt/nodejs/node_modules/datadog-lambda-js/handler.handler`.
+The [`lambda-datadog`][1] Terraform module wraps the [`aws_lambda_function`][2] resource and automatically configures your Lambda function for Datadog Serverless Monitoring by:
 
-Use this format for your [Terraform resource][1]:
-```sh
-resource "aws_lambda_function" "lambda" {
-  "function_name" = ...
-  ...
+- Adding the Datadog Lambda layers
+- Redirecting the Lambda handler
+- Enabling the collection and sending of metrics, traces, and logs to Datadog
 
-  # Remember sure to choose the right layers based on your Lambda architecture and AWS regions
+```tf
+module "lambda-datadog" {
+  source  = "DataDog/lambda-datadog/aws"
+  version = "1.0.0"
 
-  layers = [
-    <DATADOG_TRACER_ARN>,
-    <DATADOG_EXTENSION_ARN>
-  ]
-
-  handler = "/opt/nodejs/node_modules/datadog-lambda-js/handler.handler"
-
-  environment {
-    variables = {
-      DD_SITE                     = <DATADOG_SITE>
-      DD_API_KEY_SECRET_ARN       = <API_KEY>
-      DD_LAMBDA_HANDLER           = <LAMBDA_HANDLER>
-    }
+  environment_variables = {
+    "DD_API_KEY_SECRET_ARN" : "<DATADOG_API_KEY_SECRET_ARN>"
+    "DD_ENV" : "<ENVIRONMENT>"
+    "DD_SERVICE" : "<SERVICE_NAME>"
+    "DD_SITE": "<DATADOG_SITE>"
+    "DD_VERSION" : "<VERSION>"
   }
+
+  datadog_extension_layer_version = 57
+  datadog_node_layer_version = 109
+
+  # aws_lambda_function arguments
 }
 ```
 
-Fill in variables accordingly:
+1. Replace the `aws_lambda_function` resource with the `lambda-datadog` Terraform module then specify the `source` and `version` of the module.
 
-1. Replace `<DATADOG_TRACER_ARN>` with the ARN of the appropriate Datadog tracer depending on your type of region:
+2. Set the `aws_lambda_function` arguments:
 
-    <table>
-        <tr>
-            <th>AWS REGIONS</th>
-            <th>LAYERS</th>
-        </tr>
-        <tr>
-            <td>Commercial</td>
-            <td>
-                <code>
-                arn:aws:lambda:&lt;AWS_REGION&gt;:464622532012:layer:Datadog-&lt;RUNTIME&gt;:{{< latest-lambda-layer-version layer="node" >}}
-                </code>
-            </td>
-        </tr>
-        <tr>
-            <td>GovCloud</td>
-            <td>
-                <code>
-                arn:aws-us-gov:lambda:&lt;AWS_REGION&gt;:002406178527:layer:Datadog-&lt;RUNTIME&gt;:{{< latest-lambda-layer-version layer="node" >}}
-                </code>
-                </td>
-        </tr>
-    </table>
+   All of the arguments available in the `aws_lambda_function` resource are available in this Terraform module. Arguments defined as blocks in the `aws_lambda_function` resource are redefined as variables with their nested arguments.
 
-   In the ARN, replace `<AWS_REGION>` with a valid AWS region, such as `us-east-1`. Replace `<RUNTIME>` with one of the following: {{< latest-lambda-layer-version layer="node-versions" >}}.
+   For example, in `aws_lambda_function`, `environment` is defined as a block with a `variables` argument. In the `lambda-datadog` Terraform module, the value for the `environment_variables` is passed to the `environment.variables` argument in `aws_lambda_function`. See [inputs][3] for a complete list of variables in this module.
 
-2. Replace `<DATADOG_EXTENSION_ARN>` with the ARN of the appropriate Datadog Lambda Extension for your region and architecture:
+3. Fill in the environment variable placeholders:
 
-    <table>
-        <tr>
-            <th>AWS REGIONS</th>
-            <th>ARCHITECTURE</th>
-            <th>LAYERS</th>
-        </tr>
-        <tr>
-            <td rowspan=2>Commercial</td>
-            <td>x86_64</td>
-            <td>
-                <code>
-                arn:aws:lambda:&lt;AWS_REGION&gt;:464622532012:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
-                </code>
-            </td>
-        <tr>
-            <td>arm64</td>
-            <td>
-                <code>
-                arn:aws:lambda:&lt;AWS_REGION&gt;:464622532012:layer:Datadog-Extension-ARM:{{< latest-lambda-layer-version layer="extension" >}}
-                </code>
-                </td>
-        </tr>
-        <tr>
-            <td rowspan=2>GovCloud</td>
-            <td>x86_64</td>
-            <td>
-                <code>
-                arn:aws-us-gov:lambda:&lt;AWS_REGION&gt;:002406178527:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
-                </code>
-                </td>
-        <tr>
-            <td>arm64</td>
-            <td>
-                <code>
-                arn:aws-us-gov:lambda:&lt;AWS_REGION&gt;:002406178527:layer:Datadog-Extension-ARM:{{< latest-lambda-layer-version layer="extension" >}}
-                </code>
-            </td>
-        </tr>
-    </table>
+   - Replace `<DATADOG_API_KEY_SECRET_ARN>` with the ARN of the AWS secret where your Datadog API key is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can instead use the environment variable `DD_API_KEY` and set your Datadog API key in plaintext.
+   - Replace `<ENVIRONMENT>` with the Lambda function's environment, such as `prod` or `staging`
+   - Replace `<SERVICE_NAME>` with the name of the Lambda function's service
+   - Replace `<DATADOG_SITE>` with {{< region-param key="dd_site" code="true" >}}. (Ensure the correct [Datadog site][4] is selected on this page).
+   - Replace `<VERSION>` with the version number of the Lambda function
 
-3. Replace `<DATADOG_SITE>` with {{< region-param key="dd_site" code="true" >}} (ensure the correct SITE is selected on the right).
+4. Select the versions of the Datadog Extension Lambda layer and Datadog Node.js Lambda layer to use. Defaults to the latest layer versions.
 
-4. Replace `<API_KEY>` with the ARN of the AWS secret where your Datadog API key is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, use `DD_API_KEY` instead of `DD_API_KEY_SECRET_ARN` and set the value to your Datadog API key in plaintext.
-
-5. Replace `<LAMBDA_HANDLER>` with your original handler. For example, `myfunc.handler`.
-
-#### Full example
-
-```sh
-resource "aws_lambda_function" "lambda" {
-  "function_name" = ...
-  ...
-
-  # Remember sure to choose the right layers based on your Lambda architecture and AWS regions
-
-  layers = [
-    "arn:aws:lambda:us-east-1:464622532012:layer:Datadog-{{< latest-lambda-layer-version layer="node-example-version" >}}:{{< latest-lambda-layer-version layer="node" >}}",
-    "arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}"
-  ]
-
-  handler = "/opt/nodejs/node_modules/datadog-lambda-js/handler.handler"
-
-  environment {
-    variables = {
-      DD_SITE                     = datadoghq.com
-      DD_API_KEY_SECRET_ARN       = "arn:aws..."
-      DD_LAMBDA_HANDLER           = "myfunc.handler"
-    }
-  }
-}
+```
+  datadog_extension_layer_version = 57
+  datadog_node_layer_version = 109
 ```
 
-- Set the environment variable DD_LAMBDA_HANDLER to your original handler, for example, `myfunc.handler`.
-
-[1]: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambda_function.html#lambda-layers
-[2]: /serverless/guide/handler_wrapper/
+[1]: https://registry.terraform.io/modules/DataDog/lambda-datadog/aws/latest
+[2]: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambda_function
+[3]: https://github.com/DataDog/terraform-aws-lambda-datadog?tab=readme-ov-file#inputs
+[4]: /getting_started/site/
 {{% /tab %}}
 {{% tab "Custom" %}}
 

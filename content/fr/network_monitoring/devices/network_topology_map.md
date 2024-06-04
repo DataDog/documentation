@@ -11,12 +11,6 @@ kind: documentation
 title: Carte de topologie des périphériques réseau
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">La solution Network Device Monitoring n'est pas prise en charge pour ce site.</div>
-{{< /site-region >}}
-
-<div class="alert alert-warning">La carte de topologie des périphériques réseau pour la solution Network Device Monitoring Datadog est disponible en version bêta publique.</div>
-
 ## Présentation
 
 La [carte de topologie des périphériques réseau][2] offre une vue d'ensemble des connexions physiques de votre réseau. Elle vous permet d'identifier plus facilement les problèmes concernant vos périphériques et de comprendre leurs impacts en amont comme en aval.
