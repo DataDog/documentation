@@ -73,18 +73,42 @@ For details about how to how to toggle and configure plugins, check out the [API
 
 | Module                  | Versions | Support Type    | Notes                                      |
 | ----------------------- | -------- | --------------- | ------------------------------------------ |
-| [connect][6]           | `>=2`    | Fully supported |                                            |
-| [express][7]           | `>=4`    | Fully supported | Supports Sails, Loopback, and [more][8]   |
-| [fastify][9]           | `>=1`    | Fully supported |                                            |
+| [connect][6]           | `>=2`    | Fully supported |                                             |
+| [express][7]           | `>=4`    | Fully supported | Supports Sails, Loopback, and [more][8]     |
+| [fastify][9]           | `>=1`    | Fully supported |                                             |
 | [graphql][10]           | `>=0.10` | Fully supported | Supports Apollo Server and express-graphql |
 | [gRPC][11]              | `>=1.13` | Fully supported |                                            |
 | [hapi][12]              | `>=2`    | Fully supported | Supports [@hapi/hapi] versions `>=17.9`    |
 | [koa][13]               | `>=2`    | Fully supported |                                            |
 | [microgateway-core][14] | `>=2.1`  | Fully supported | Core library for Apigee Edge. Support for the [edgemicro][15] CLI requires static patching using [@datadog/cli][16]. |
 | [moleculer][17]         | `>=0.14` | Fully supported |                                            |
-| [next][18]              | `>=9.5`  | Fully supported | CLI usage requires `NODE_OPTIONS='-r dd-trace/init'`. <br><br>The tracer supports the following Next.js features: <ul><li>Standalone (`output: 'standalone'`)</li><li>App Router</li><li>Middleware: Not traced, use tracer versions `4.18.0` and `3.39.0` or higher for best experience.</li></ul>|
+| [next][18]              | `>=9.5`  | Fully supported | See note on Complex framework usage.<br /><br />The tracer supports the following Next.js features: <ul><li>Standalone (`output: 'standalone'`)</li><li>App Router</li><li>Middleware: Not traced, use tracer versions `4.18.0` and `3.39.0` or higher for best experience.</li></ul> |
 | [paperplane][19]        | `>=2.3`  | Fully supported | Not supported in [serverless-mode][20]     |
 | [restify][21]           | `>=3`    | Fully supported |                                            |
+
+#### Complex framework usage
+
+Some modern complex Node.js frameworks, such as Next.js and Nest.js, provide their own entry-point into an application. Instead of running something like `node app.js` they instead recommend running something like `next start`. In this case the entry point changes from a local application file, `app.js`, to a file that ships in the framework package. In this case it doesn't matter how early in your application code you load the tracer. By the time your application code runs the framework has already loaded modules that should have already been instrumented by the tracer. A different approach needs to be taken to load the tracer before the framework loads.
+
+The tracer can be loaded before any framework code by modifying the command used to start the application. One way to do this is to prefix all commands you run with an environment variable:
+
+```sh
+NODE_OPTIONS='--require dd-trace/init' npm start
+```
+
+Another way to achieve this is to modify the `package.json` file if you typically start an application with npm or yarn run scripts:
+
+```plain
+    // existing command
+    "start": "next start",
+
+    // suggested command
+    "start": "node --require dd-trace/initialize ./node_modules/next start",
+    "start": "NODE_OPTIONS='--require dd-trace/initialize' ./node_modules/next start",
+```
+
+This example assumes you're using the Next.js framework but the same pattern applies to Nest.js and likely other frameworks as well. Feel free to adapt it for your situation. Either command should work however note that using `NODE_OPTIONS` should also apply to any child Node.js processes as well.
+
 
 ### Native module compatibility
 
