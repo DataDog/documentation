@@ -19,12 +19,12 @@ Dynamic Sampling for Error Tracking is in private beta.
 
 ## Overview
 
-Dynamic Sampling establishes a threshold based on your daily rate limit and historical volume. If a single issue reaches that threshold, events from the issue will be dropped to keep your daily limit from being consumed too quickly.
+Dynamic Sampling establishes a threshold based on your daily rate limit and historical volume. If a single issue reaches that threshold, events from the issue will be dropped to keep your costs under control and your daily limit from being consumed too quickly.
 
 
 ## Requirements
 
-A minimum daily rate limit of 12k events must be set for Dynamic Sampling to be active.
+For the best results, it is recommended to set up a daily rate limit. If no daily rate limit is set, Dynamic Sampling will only be based on the historical volume of events for your organization.
 
 {{< img src="error_tracking/dynamic-sampling-rate-limit.png" alt="Error Tracking Rate Limit" style="width:90%" >}}
 
@@ -35,7 +35,7 @@ Dynamic Sampling is automatically enabled with Error Tracking and can be disable
 
 ## Getting started
 
-Because Error Tracking bills based on the number of events, large increases in the events for a single issue can quickly consume your quota for the day. Dynamic Sampling mitigates this by establishing a threshold for the number of events sent per issues and drops them once that threshold is reached. 
+Because Error Tracking bills based on the number of events, large increases in the events for a single issue can quickly consume your quota for the day. Dynamic Sampling mitigates this by establishing a threshold for the number of events sent per issues and drops them once that threshold is reached.
 
 Dynamic Sampling will automatically deactivate once the error rate of your issue decreases below the given threshold.
 
