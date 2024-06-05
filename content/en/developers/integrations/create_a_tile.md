@@ -193,6 +193,7 @@ Once you have created a `README.md` file, add the following sections as H2s (`##
 
 When adding links to the `README.md` file, format them using [reference-style links][30]. For example, instead of embedding the URL directly in the text, write `see the [official Datadog documentation][1]` and define the link reference at the bottom of the file like `[1]: https://docs.datadoghq.com/`.
 
+For additional grammar and style advice, see also the [Datadog documentation contributors guidelines][31].
 ### Media carousel
 
 A media carousel of images and a video is displayed on each tile, allowing users to better understand the functionality and value of your offering through visual aids. To add a video to your tile, send a copy or a download link of your video to <a href="mailto:marketplace@datadoghq.com">marketplace@datadoghq.com</a>. The Marketplace team uploads the video and provides a `vimeo_link` that should be added to the `manifest.json` file.
@@ -329,3 +330,4 @@ Datadog offers GTM support for Marketplace listings only. To learn more about th
 [28]: https://docs.datadoghq.com/developers/integrations/marketplace_offering/
 [29]: https://github.com/
 [30]: https://www.markdownguide.org/basic-syntax/#reference-style-links
+[31]: https://github.com/DataDog/documentation/blob/master/CONTRIBUTING.md
