@@ -12,6 +12,10 @@ algolia:
   tags: ["scim", "identity provider", "IdP"]
 ---
 
+<div class="alert alert-info">
+SCIM is only available for the Enterprise plan.
+</div>
+
 ## Overview
 
 The System for Cross-domain Identity Management, or SCIM, is an open standard that allows for the automation of user provisioning. Using SCIM, you can automatically provision and deprovision users in your Datadog organization in sync with your organization's identity provider (IdP).
@@ -47,7 +51,7 @@ To avoid losing access to your data, Datadog strongly recommends that you create
 
 ## Email verification
 
-Creating a new user with SCIM triggers an email to the user. For first time access, you are required to log in through the the invite link shared by email. The link is active for 30 days. If it expires, go to the [user settings page][7] and select a user to resend an invite link.
+Creating a new user with SCIM triggers an email to the user. For first time access, you are required to log in through the the invite link shared by email. The link is active for 2 days. If it expires, go to the [user settings page][7] and select a user to resend an invite link.
 
 ## Further Reading
 

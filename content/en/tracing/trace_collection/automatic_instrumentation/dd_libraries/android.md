@@ -9,7 +9,7 @@ type: multi-code-lang
 code_lang_weight: 80
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-android
-  tag: GitHub
+  tag: "Source Code"
   text: dd-sdk-android Source code
 - link: tracing/visualization/
   tag: Documentation
@@ -693,9 +693,10 @@ val okHttpClient = OkHttpClient.Builder()
 {{% /tab %}}
 {{% tab "Java" %}}
 ```java
-OkHttpClient okHttpClient =  new OkHttpClient.Builder() 
+final List<String> tracedHosts = Arrays.asList("example.com", "example.eu");
+final OkHttpClient okHttpClient = new OkHttpClient.Builder()
         .addInterceptor(
-                new DatadogInterceptor(Arrays.asList("example.com", "example.eu"), RateBasedSampler(20f))
+                new DatadogInterceptor(/** SDK instance name or null **/, tracedHosts, null, null, new RateBasedSampler(20f))
         )
         .build();
 ```
@@ -720,10 +721,14 @@ val okHttpClient =  OkHttpClient.Builder()
 {{% /tab %}}
 {{% tab "Java" %}}
 ```java
-final List<String> tracedHosts = Arrays.asList("example.com", "example.eu"); 
-final OkHttpClient okHttpClient =  new OkHttpClient.Builder()
-        .addInterceptor(new DatadogInterceptor(tracedHosts, RateBasedSampler(20f)))
-        .addNetworkInterceptor(new TracingInterceptor(tracedHosts, RateBasedSampler(20f)))
+final List<String> tracedHosts = Arrays.asList("example.com", "example.eu");
+final OkHttpClient okHttpClient = new OkHttpClient.Builder()
+        .addInterceptor(
+                new DatadogInterceptor(/** SDK instance name or null **/, tracedHosts, null, null, new RateBasedSampler(20f))
+        )
+        .addNetworkInterceptor(
+                new TracingInterceptor(/** SDK instance name or null **/, tracedHosts, null, new RateBasedSampler(20f))
+        )
         .build();
 ```
 {{% /tab %}}

@@ -83,13 +83,13 @@ Datadog は、SageMaker のエンドポイントとジョブ向けにすぐに�
 
 [SageMaker エンドポイントダッシュボード][8]を使用すると、追加構成なしで SageMaker エンドポイントの健全性とパフォーマンスの監視をすぐに開始できます。エラー、予想以上のレイテンシー、またはトラフィックの急増が発生しているエンドポイントを特定します。CPU、GPU、メモリ、およびディスクの使用量メトリクスを使用して、インスタンスタイプとスケーリングポリシーの選択を見直し、修正します。
 
-{{< img src="integrations/amazon_sagemaker/sagemaker_endpoints.png" alt="すぐに使える SageMaker エンドポイントダッシュボード" style="width:80%;">}}
+{{< img src="integrations/amazon_sagemaker/sagemaker_endpoints_2.png" alt="すぐに使える SageMaker エンドポイントダッシュボード" style="width:80%;">}}
 
 ### SageMaker ジョブ
 
 [SageMaker ジョブダッシュボード][9]を使用すると、トレーニング、処理、または変換ジョブのリソース使用状況 (CPU、GPU、およびストレージのボトルネックの検出など) を把握できます。この情報を使用して、コンピュートインスタンスを最適化します。
 
-{{< img src="integrations/amazon_sagemaker/sagemaker_jobs.png" alt="すぐに使える SageMaker ジョブダッシュボード" style="width:80%;">}}
+{{< img src="integrations/amazon_sagemaker/sagemaker_jobs_2.png" alt="すぐに使える SageMaker ジョブダッシュボード" style="width:80%;">}}
 
 ## その他の参考資料
 

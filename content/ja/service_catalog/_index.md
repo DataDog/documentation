@@ -83,8 +83,8 @@ Datadog [サービスカタログ][1]は、オーナーシップのメタデー�
 ## はじめに
 
 {{< whatsnext desc="サービスカタログの提供内容をご確認ください。" >}}
-    {{< nextlink href="tracing/service_catalog/browsing/" >}}サービスカタログの閲覧{{< /nextlink >}}
-    {{< nextlink href="tracing/service_catalog/investigating" >}}サービスの調査{{< /nextlink >}}
+    {{< nextlink href="/service_catalog/navigating/" >}}サービスカタログの操作{{< /nextlink >}}
+    {{< nextlink href="/service_catalog/investigating" >}}サービスの調査{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## ロールベースアクセスおよび権限
@@ -124,15 +124,6 @@ Datadog [サービスカタログ][1]は、オーナーシップのメタデー�
 *  Web
 
 いくつかのインテグレーションは、タイプのエイリアスになります。例えば、Postgres、MySQL、Cassandraは "DB" というタイプに対応します。Redis と Memcache のインテグレーションは、"Cache" というタイプにマッピングされます。
-
-### サービスタイプと言語の更新
-[Service Catalog metadata schema 2.2][5] を利用することで、ユーザー定義サービスのタイプと言語を指定する、またはインスツルメント済みサービスで自動的に検出されたタイプと言語を上書きすることができます。サービスのタイプと言語に正しいラベルを付けることで、サービスが何を行い、どのようにそれらを操作するかを他のチームがさらに理解できるようになります。
-
-## サービスの色の変更
-
-サービスカラーはトレースの視覚化で使用されます。サービスタイプのアイコンをクリックして変更します。
-
-{{< img src="tracing/service_catalog/change_service_color.png" alt="サービスアイコンをクリックして、別のアイコンカラーを選択します。" style="width:80%;" >}}
 
 ## データ保持
 **サービスリスト**と**サービスページ**のサービスとリソースの統計、およびスパンのサマリーは、最大で 30 日間保持されます。APM トレースメトリクスをカスタムクエリするには、メトリクスエクスプローラーを使用してください。[APM のデータ保持の詳細はこちら][4]。

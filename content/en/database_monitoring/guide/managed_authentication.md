@@ -2,10 +2,6 @@
 title: Connecting with Managed Authentication
 kind: guide
 ---
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
-{{< /site-region >}}
-
 
 This guide assumes that you have configured [Database Monitoring][1].
 

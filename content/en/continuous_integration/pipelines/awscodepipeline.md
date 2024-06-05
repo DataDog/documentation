@@ -32,6 +32,7 @@ Set up tracing on AWS CodePipeline to collect data about pipeline executions, an
 | [Partial retries][14] | Partial pipelines | View partially retried pipeline executions. |
 | *[Running pipelines][15] | Running pipelines | View pipeline executions that are running. |
 | **Logs correlation | Logs correlation	| Correlate pipeline and job spans to logs and enable [job log correlation](#enable-log-correlation). |
+| [Approval wait time][17] | Approval wait time  | View the amount of time jobs and pipelines wait for manual approvals. |
 
 *AWS CodePipeline running pipelines don't have Git information until they have finished.\
 **AWS CodePipeline logs correlation is only available for AWS CodeBuild actions.
@@ -145,3 +146,4 @@ The **CI Pipeline List** page shows data for only the [default branch][13] of ea
 [14]: /glossary/#partial-retry
 [15]: /glossary/#running-pipeline
 [16]: /logs/guide/send-aws-services-logs-with-the-datadog-lambda-function
+[17]: /glossary/#approval-wait-time

@@ -25,6 +25,7 @@ further_reading:
 {{< nextlink href="/monitors/types/anomaly" >}}<strong>Anomaly</strong>: Detect anomalous behavior for a metric based on historical data.{{< /nextlink >}}
 {{< nextlink href="/monitors/types/apm" >}}<strong>APM</strong>: Monitor APM metrics or trace queries.{{< /nextlink >}}
 {{< nextlink href="/monitors/types/audit_trail" >}}<strong>Audit Trail</strong>: Alert when a specified type of audit log exceeds a user-defined threshold over a given period of time.{{< /nextlink >}}
+{{< nextlink href="/monitors/types/change-alert" >}}<strong>Change Alert</strong>: Alert when the absolute or relative value changes against a user-defined threshold over a given period of time.{{< /nextlink >}}
 {{< nextlink href="/monitors/types/ci" >}}<strong>CI</strong>: Monitor CI pipelines and tests data gathered by Datadog.{{< /nextlink >}}
 {{< nextlink href="/monitors/types/cloud_cost" >}}<strong>Cloud Cost</strong>: Monitor cost changes associated with cloud platforms.{{< /nextlink >}}
 {{< nextlink href="/monitors/types/composite" >}}<strong>Composite</strong>: Alert on an expression combining multiple monitors.{{< /nextlink >}}

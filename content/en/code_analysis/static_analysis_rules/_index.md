@@ -193,7 +193,7 @@ cascade:
       title: How to use this rule
       steps:
         - Create a static-analysis.datadog.yml with the content above at the root of your repository
-        - Use our free IDE integrations or add Code Analysis scans to your CI pipelines
+        - Use our free IDE Plugins or add Code Analysis scans to your CI pipelines
         - Get feedback on your code
       footer: For more information, please read the <a href="/code_analysis">Code Analysis documentation</a>
     bottom_boxes:

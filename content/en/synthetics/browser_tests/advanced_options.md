@@ -1,5 +1,5 @@
 ---
-title: Advanced Options for Browser Test Steps
+title: Advanced Options for Browser Testing Steps
 kind: documentation
 description: Configure advanced options for Browser Test Steps
 aliases:

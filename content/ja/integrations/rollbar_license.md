@@ -30,10 +30,10 @@ pricing:
   includes_assets: true
   metric: datadog.marketplace.rollbar.rollbar
   product_id: rollbar
-  short_description: 10 万件/月の例外をリアルタイムで追跡。
+  short_description: 月に 50 万件の例外をリアルタイムで追跡します。
   tag: event
   unit_label: 50 万イベント
-  unit_price: 100
+  unit_price: 350
 public_title: Rollbar
 short_description: リアルタイムでエラーをプロアクティブに発見します。
 supported_os:
@@ -75,6 +75,7 @@ tile:
   uninstallation: README.md#Uninstallation
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
 ## 概要
@@ -97,7 +98,7 @@ Datadog、GitHub、GitHub Enterprise Server、Atlassian、Google Cloud、Terrafo
 厳しい業界標準に完全準拠し、お客様を支援する機能を構築しています。
 
 
-## サポート
+## Agent
 
 ご質問・お問い合わせは、[こちら][4]までお気軽にどうぞ。
 

@@ -56,7 +56,7 @@ Datadog tracing libraries provide an implementation of the OpenTelemetry API for
 
 {{% /tab %}}
 
-{{% tab "OpenTracing" %}}
+{{% tab "OpenTracing (legacy)" %}}
 
 If [OpenTelemetry][1] or [`ddtrace`][2] custom instrumentation doesn't work for you, each of the supported languages also has support for sending [OpenTracing][3] data to Datadog. OpenTracing is archived and the project is unsupported. 
 

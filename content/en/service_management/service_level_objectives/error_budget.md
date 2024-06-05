@@ -31,10 +31,10 @@ For a description of key terminology around SLOs, including *error budgets*, see
 3. Select the **Error Budget** tab in **Step 1: Setting alerting conditions**.
 4. Set an alert to trigger when the percentage of the error budget consumed is above the `threshold`.
 over the past `target` number of days.
-4. Add [Notification information][5] into the **Say what's happening** and **Notify your team** sections.
-5. Click the **Save and Set Alert** button on the SLO configuration page.
+4. Add [Notification information][5] in the **Configure notifications and automations** section.
+5. Click the **Create & Set Alert** button on the SLO configuration page.
 
-{{< img src="service_management/service_level_objectives/save_set_alert.png" alt="Save SLO and set up an error budget alert">}}
+{{< img src="service_management/service_level_objectives/slo_create_set_alert.png" alt="Create SLO and set up an error budget alert" style="width:80%;">}}
 
 ### API and Terraform
 

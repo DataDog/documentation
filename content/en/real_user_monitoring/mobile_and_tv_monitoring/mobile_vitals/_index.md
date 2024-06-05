@@ -8,16 +8,16 @@ aliases:
 - /real_user_monitoring/reactnative/mobile_vitals
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-android
-  tag: Github
+  tag: "Source Code"
   text: Source code for dd-sdk-android
 - link: "https://github.com/DataDog/dd-sdk-ios"
-  tag: "Github"
+  tag: "Source Code"
   text: "Source code for dd-sdk-ios"
 - link: https://github.com/DataDog/dd-sdk-flutter
-  tag: GitHub
+  tag: "Source Code"
   text: Source code for dd-sdk-flutter
 - link: https://github.com/DataDog/dd-sdk-reactnative
-  tag: GitHub
+  tag: "Source Code"
   text: Source code for dd-sdk-reactnative
 - link: /real_user_monitoring
   tag: Documentation

@@ -11,7 +11,7 @@ kind: guide
 title: Pourquoi installer l'Agent Datadog sur mes instances cloud ?
 ---
 
-Si vous utilisez AWS, Azure, GCP ou un autre fournisseur de métriques cloud, l'installation de l'Agent Datadog sur vos instances vous permet de bénéficier de nombreux avantages, notamment ce qui suit :
+Si vous utilisez AWS, Azure, Google Cloud ou un autre fournisseur de métriques cloud, l'installation de l'Agent Datadog sur vos instances vous permet de bénéficier de nombreux avantages, notamment ce qui suit :
 
 * **Meilleure résolution** : les fournisseurs cloud analysent l'activité externe en échantillonnant des hosts toutes les 5 à 25 minutes. En outre, AWS fournit des métriques toutes les minutes par l'intermédiaire de son API. Puisque l'intégralité des métriques Datadog est stockée avec une résolution d'une seconde, ces métriques sont divisées par 60 lors du post-processing. L'Agent Datadog récupère toutes les 15 secondes des statistiques sur les performances, afin de comprendre précisément ce qu'observent les hosts.
 

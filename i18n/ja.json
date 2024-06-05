@@ -364,8 +364,11 @@
   "source" : {
     "other": "ソース"
   },
+  "legacy": {
+      "other": "レガシー"
+  },
   "try_this_rule" : {
-    "other": "TRY THIS RULE"
+    "other": "このルールを試す"
   },
   "available_for": {
     "other": "次で利用可能"

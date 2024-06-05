@@ -30,6 +30,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/incident-postmortem-process-best-practices/
   tag: ブログ
   text: インシデントの事後分析を作成するためのベストプラクティス
+- link: https://www.datadoghq.com/blog/how-datadog-manages-incidents/
+  tag: ブログ
+  text: Datadog でのインシデント管理方法
 kind: documentation
 title: Incident Management の概要
 ---
@@ -52,11 +55,11 @@ Datadog Incident Management は、メトリクス、トレース、またはロ�
 
 このガイドでは、[Datadog クリップボード][2]を使ってインシデントを宣言する方法を説明します。クリップボードを使うと、グラフ、モニター、ダッシュボード全体、または[ノートブック][3]など、さまざまなソースから情報を収集することができます。これにより、インシデントを宣言する際に可能な限り多くの情報を収集することができます。
 
-1. 画面左側の Datadog メニューで、**Dashboard** > **Dashboard lists** に進み、**System - Metrics** を選択します。
+1. Datadog で [**Dashboard List**][15] に移動し、**System - Metrics** を選択します。
 2. グラフのひとつにカーソルを合わせ、次のいずれかのコマンドを使用してクリップボードにコピーします。
     - **Ctrl**/**Cmd** + **C**
     - グラフ上で **Export** アイコンをクリックして **Copy** を選択します。
-3. 画面左側の Datadog メニューで **Monitors** > **Manage Monitors** を開き、**[Auto] Clock in sync with NTP** を選択します。
+3. 左側の Datadog メニューから [**Monitors** > **Monitors List**][16] に進み、**[Auto] Clock in sync with NTP** を選択します。
 4. **Ctrl**/**Cmd** + **Shift** + **K** でクリップボードを開きます。
 5. クリップボードの **Add current page** をクリックして、モニターをクリップボードに追加します。
 {{< img src="getting_started/incident_management/copy_to_clipboard.png" alt="クリップボードにコピー" responsive="true" style="width:100%;">}}
@@ -141,7 +144,7 @@ _Timeline_ には、インシデントのフィールドや情報の追加・変
     タスクの追加や変更はすべて _Timeline_ に記録されます。
     また、_Remediation_ セクションにインシデント発生後のタスクを追加して、それらを管理することもできます。
 
-#### 通知
+#### デフォルトの検出ルール
 
 **シナリオ:** 問題が軽減され、チームは状況を監視しています。インシデントのステータスは安定しています。
 
@@ -207,3 +210,5 @@ Incident Management をカスタマイズするには、[インシデント設�
 [12]: /ja/service_management/mobile/
 [13]: https://apps.apple.com/app/datadog/id1391380318
 [14]: https://play.google.com/store/apps/details?id=com.datadog.app
+[15]: https://app.datadoghq.com/dashboard/lists
+[16]: https://app.datadoghq.com/monitors/manage

@@ -102,7 +102,7 @@ img="dashboards/widgets/icons/run-workflow_light_small.svg">}} Run Workflow{{< /
     {{< nextlink href="/dashboards/widgets/slo" 
         img="dashboards/widgets/icons/slo-summary_light_large.png">}} サービスレベル目標 (SLO) サマリー{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/slo_list" 
-        img="dashboards/widgets/icons/slo-list_light_large.png">}} サービスレベル目標 (SLO) リスト{{< /nextlink >}}
+        img="dashboards/widgets/icons/slo-list_light_large.png">}} サービスレベル目標 (SLO){{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## 全画面

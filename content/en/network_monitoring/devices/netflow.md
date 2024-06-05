@@ -14,10 +14,6 @@ further_reading:
   text: "Monitor and diagnose network performance issues with SNMP Traps"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Network Device Monitoring is not supported for this site.</div>
-{{< /site-region >}}
-
 ## Overview
 
 Use NetFlow Monitoring in Datadog to visualize and monitor your flow records from your NetFlow-enabled devices.

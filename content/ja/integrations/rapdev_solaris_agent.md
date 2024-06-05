@@ -5,6 +5,7 @@ app_id: rapdev-solaris-agent
 app_uuid: a994f2cf-1f77-4e74-803d-fb833455e224
 assets:
   integration:
+    auto_install: false
     configuration: {}
     events:
       creates_events: false
@@ -14,6 +15,7 @@ assets:
       prefix: rapdev.solaris_agent.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10135
     source_type_name: RapDev Solaris Agent
 author:
   homepage: https://www.rapdev.io
@@ -55,6 +57,7 @@ tile:
   - Category::Marketplace
   - Category::Oracle
   - Offering::Integration
+  - Submitted Data Type::Metrics
   configuration: README.md#Setup
   description: sparc と i86pc の Solaris 10 および 11 のメトリクスを提供する Agent
   media:
@@ -73,6 +76,7 @@ tile:
   uninstallation: README.md#Uninstallation
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 ## 概要
 
@@ -82,7 +86,7 @@ Solaris Agent は、Datadog インフラストラクチャーリストをサポ�
 
 Solaris Agent は、ネイティブ Agent と同じ URL とポートを使用します。Solaris Agent は、コアインフラストラクチャーメトリクス、プロセスチェック、ログ追跡をサポートしています。インテグレーションまたはサービスチェックはサポートしていません。
 
-## サポート
+## Agent
 
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから RapDev.io にお問い合わせください。
 

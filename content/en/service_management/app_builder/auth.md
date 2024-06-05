@@ -102,8 +102,8 @@ To restrict access to the app, perform the following steps in the app canvas:
 
 <br>Do you have questions or feedback? Join the **#app-builder** channel on the [Datadog Community Slack][6].
 
-[1]: /service_management/workflows/actions_catalog/
-[2]: /service_management/workflows/connections/
+[1]: https://app.datadoghq.com/app-builder/action-catalog
+[2]: /service_management/app_builder/connections/
 [3]: /service_management/workflows/
 [4]: /account_management/rbac/
 [5]: https://app.datadoghq.com/app-builder/

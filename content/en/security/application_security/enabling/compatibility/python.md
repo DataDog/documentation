@@ -21,13 +21,13 @@ The following ASM capabilities are supported in the Python library, for the spec
 **Note**: Threat Protection requires enabling [Remote Configuration][2], which is included in the listed minimum tracer version.
 
 ### Supported deployment types
-|Type | Threat Detection support | Vulnerability Management for OSS support |
-| ---           |   ---             |           ----            |
-| Docker        | {{< X >}}         | {{< X >}}                 |
-| Kubernetes    | {{< X >}}         | {{< X >}}                 |
-| Amazon ECS    | {{< X >}}         | {{< X >}}                 |
-| AWS Fargate   | {{< X >}}         | {{< X >}}                 |
-| AWS Lambda    | {{< X >}}         |                           |
+| Type        | Threat Detection support | Software Composition Analysis |
+|-------------|--------------------------|-------------------------------|
+| Docker      | {{< X >}}                | {{< X >}}                     |
+| Kubernetes  | {{< X >}}                | {{< X >}}                     |
+| Amazon ECS  | {{< X >}}                | {{< X >}}                     |
+| AWS Fargate | {{< X >}}                | {{< X >}}                     |
+| AWS Lambda  | {{< X >}}                |                               |
 
 
 ## Language and framework compatibility

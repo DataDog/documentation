@@ -9,7 +9,7 @@ further_reading:
 - link: /logs/log_configuration/processors
   tag: Documentation
   text: ログの処理方法
-- link: https://www.datadoghq.com/blog/send-amazon-vpc-flow-logs-to-kinesis-firehose-and-datadog/
+- link: https://www.datadoghq.com/blog/send-amazon-vpc-flow-logs-to-data-firehose-and-datadog/
   tag: GitHub
   text: Amazon VPC フローログを Amazon Kinesis Data Firehose と Datadog に送信する
 kind: ドキュメント

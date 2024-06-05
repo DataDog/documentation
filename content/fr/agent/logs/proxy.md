@@ -83,7 +83,7 @@ Modifiez le fichier de configuration de l'Agent `datadog.yaml` et définissez `l
 
 ```
 logs_config:
-  use_tcp: true
+  force_use_tcp: true
   logs_dd_url: "<DOMAINE_SERVEUR_PROXY>:10514"
   logs_no_ssl: true
 ```
@@ -92,7 +92,7 @@ logs_config:
 
 HAProxy doit être installé sur un host connecté à Datadog. Utilisez le fichier de configuration suivant si vous ne l'avez pas déjà configuré.
 
-{{< site-region region="us" >}}
+{{% site-region region="us" %}}
 
 ```conf
 # Configuration de base
@@ -108,7 +108,7 @@ defaults
     option  redispatch
     timeout client 5s
     timeout server 5s
-    timeout connect 5
+    timeout connect 5s
 # Cela déclare un accès aux statistiques HAProxy sur le port 3833.
 # Vous n'avez pas besoin d'identifiants pour afficher cette page et vous pouvez
 # désactiver l'accès une fois la configuration terminée.
@@ -130,7 +130,7 @@ resolvers my-dns
     hold valid 10s
     hold obsolete 60s
 # Cela déclare l'endpoint auquel vos Agents se connectent pour
-# envoyer les logs (p.ex., la valeur de logs.config.logs_dd_url)
+# envoyer les logs (p. ex., la valeur de logs.config.logs_dd_url)
 frontend logs_frontend
     bind *:10514
     mode tcp
@@ -155,8 +155,8 @@ Si le téléchargement fonctionne, le fichier est stocké à l'emplacement suiva
 
 Une fois la configuration de HAProxy effectuée, vous pouvez recharger ou redémarrer le service. **Nous vous conseillons de configurer une tâche `cron` qui recharge HAProxy toutes les 10 minutes** (par exemple avec la commande `service haproxy reload`) pour forcer l'actualisation du cache DNS de HAProxy si `app.datadoghq.com` bascule vers une autre IP.
 
-{{< /site-region >}}
-{{< site-region region="eu" >}}
+{{% /site-region %}}
+{{% site-region region="eu" %}}
 
 ```conf
 # Configuration de base
@@ -212,7 +212,7 @@ backend datadog-logs
 Téléchargez le certificat avec la commande suivante :
 
 * `sudo apt-get install ca-certificates` (Debian, Ubuntu)
-* `yum install ca-certificates` (CentOS, Redhat) 
+* `yum install ca-certificates` (CentOS, Redhat)
 
 Si le téléchargement fonctionne, le fichier est stocké à l'emplacement suivant pour CentOS et Redhat : `/etc/ssl/certs/ca-bundle.crt`.
 
@@ -231,7 +231,7 @@ Modifiez le fichier de configuration de l'Agent `datadog.yaml` et définissez `l
 
 ```yaml
 logs_config:
-  use_tcp: true
+  force_use_tcp: true
   logs_dd_url: monServeurProxy.monDomaine:10514
 ```
 
@@ -241,7 +241,7 @@ logs_config:
 
 Dans cet exemple, le fichier `nginx.conf` peut être utilisé pour transmettre le trafic à Datadog en passant par un proxy. Avec cette configuration, le dernier bloc du serveur incorpore le protocole TLS pour garantir le chiffrement des logs internes en texte brut entre votre proxy et l'endpoint de l'API Datadog vers lequel les logs sont envoyés :
 
-{{< site-region region="us" >}}
+{{% site-region region="us" %}}
 
 ```conf
 user nginx;
@@ -261,8 +261,8 @@ stream {
 }
 ```
 
-{{< /site-region >}}
-{{< site-region region="eu" >}}
+{{% /site-region %}}
+{{% site-region region="eu" %}}
 
 ```conf
 user nginx;
@@ -282,7 +282,7 @@ stream {
 }
 ```
 
-{{< /site-region >}}
+{{% /site-region %}}
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -292,4 +292,4 @@ stream {
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/agent/logs/log_transport?tab=https
-[2]: /fr/agent/proxy/
+[2]: /fr/agent/configuration/proxy/

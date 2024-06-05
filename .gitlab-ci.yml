@@ -562,6 +562,40 @@ set_redirect_metadata_live:
     - in-isolation run_update_redirect_metadata
   interruptible: true
 
+run_notranslate_tag:schedule:
+  <<: *base_template
+  stage: post-deploy
+  cache: []
+  dependencies:
+    - build_live
+  timeout: 4h
+  script:
+    - python3 -m venv ./venv && source ./venv/bin/activate && pip install transifex-python
+    - export transifex_api_key="$(get_secret 'transifex_api_key')"
+    - source ./venv/bin/activate && python3 ./local/bin/py/add_notranslate_tag.py
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH && $CI_PIPELINE_SOURCE == "schedule"
+      when: always
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+      when: manual
+      allow_failure: true
+    - when: never
+
+# run_notranslate_tag:manual:
+#   <<: *base_template
+#   <<: *live_schedule_rules
+#   allow_failure: true
+#   stage: post-deploy
+#   timeout: 2h
+#   script:
+#     - export transifex_api_key="$(get_secret 'transifex_api_key')"
+#     - python3 ./local/bin/py/add_notranslate_tag.py
+#   rules:
+#     - if: $CI_COMMIT_TAG != null || $CI_COMMIT_BRANCH =~ "/pull/\/.*/"
+#       when: never
+#     - if: $CI_COMMIT_TAG == null
+#       when: manual
+
 ####################################
 #                                  #
 #      Failure Notifications       #

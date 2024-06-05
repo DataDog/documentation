@@ -8,9 +8,6 @@ further_reading:
     tag: 'Blog'
     text: 'Seamlessly correlate DBM and APM telemetry to understand end-to-end query performance'
 ---
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
-{{< /site-region >}}
 
 This guide assumes that you have configured [Database Monitoring][1] and are using [APM][2]. Connecting APM and DBM injects APM trace identifiers into DBM data collection, which allows for correlation of these two data sources. This enables product features showing database information in the APM product, and APM data in the DBM product.
 
@@ -243,7 +240,7 @@ Update your app dependencies to include [dd-trace-py>=1.9.0][1]:
 pip install "ddtrace>=1.9.0"
 ```
 
-Install [psycopg2][2] (**Note**: Connecting DBM and APM is not supported for MySQL clients):
+Install [psycopg2][2]:
 ```
 pip install psycopg2
 ```

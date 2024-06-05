@@ -5,6 +5,7 @@ assets:
   dashboards:
     Helm - Overview: assets/dashboards/overview.json
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: true
@@ -14,6 +15,7 @@ assets:
       prefix: helm.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10257
     source_type_name: Helm
   monitors:
     '[helm] Monitor Helm failed releases': assets/monitors/monitor_failed_releases.json
@@ -59,6 +61,7 @@ tile:
   title: Helm チェック
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
@@ -67,14 +70,14 @@ tile:
 
 Helm は複数のストレージバックエンドをサポートしています。v3 では、Helm のデフォルトは Kubernetes シークレットで、v2 では、Helm のデフォルトは ConfigMaps です。このチェックでは、両方のオプションに対応しています。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 Helm チェックは [Datadog Agent][1] パッケージに含まれています。
 サーバーに追加でインストールする必要はありません。
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 {{< tabs >}}
 {{% tab "Helm" %}}
@@ -89,7 +92,7 @@ Helm チェックは [Datadog Agent][1] パッケージに含まれています�
 {{% /tab %}}
 {{% tab "Operator" %}}
 
-これはクラスターのチェックです。このチェックを有効にするには、`DatadogAgent` のデプロイ構成でコンフィギュレーションファイル `helm.yaml` を Cluster Agent に渡します。
+これはクラスターのチェックです。このチェックを有効にするには、`DatadogAgent` のデプロイメント構成でコンフィギュレーションファイル `helm.yaml` を Cluster Agent に渡します。
 
 ```
 apiVersion: datadoghq.com/v2alpha1
@@ -109,7 +112,7 @@ spec:
             - collect_events: false
 ```
 
-このチェックでは、Helm が保存したリリースにアクセスするために、Cluster Agent ポッドが使用する Kubernetes サービスアカウントにバインドされた追加の権限が必要です。
+このチェックには、Helm に保存されたリリースにアクセスするために、Cluster Agent ポッドが使用する Kubernetes サービスアカウントにバインドされる追加の権限が必要です。
 
 ```
 apiVersion: rbac.authorization.k8s.io/v1
@@ -141,7 +144,7 @@ rules:
   - watch
 ```
 
-**注**: `ServiceAccount` のサブジェクトは `default` ネームスペースにインストールした例です。デプロイに合わせて `name` と `namespace` を調整してください。
+**注**: `ServiceAccount` のサブジェクトは `default` ネームスペースへのインストールを例に挙げています。デプロイメントに応じて `name` と `namespace` を調整してください。
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -150,13 +153,13 @@ rules:
 
 [Agent の status サブコマンドを実行][2]し、Checks セクションで `helm` を探します。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "helm" >}}
 
 
-### イベント
+### ヘルプ
 
 このチェックは、`collect_events` オプションが `true` に設定されているときにイベントを発行します。デフォルトは `false` です。
 
@@ -166,11 +169,11 @@ rules:
 - リリースがアップグレードされる (新しいリビジョン)。
 - 例えば、デプロイ済みから置き換え済みへのステータス変更があります。
 
-### サービスのチェック
+### ヘルプ
 {{< get-service-checks-from-git "helm" >}}
 
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 

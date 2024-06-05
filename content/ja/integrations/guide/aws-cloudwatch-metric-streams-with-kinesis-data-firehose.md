@@ -138,7 +138,7 @@ Metric Stream リソースが正常に作成されたことを確認したら、
 
 [AWS コンソール](?tab=awsconsole#installation)からストリーミングを設定した場合:
 1. 配信ストリームにリンクしている CloudWatch Metric Stream を削除します。
-2. ストリームの設定中に作成された S3 バケット、Firehose、ストリームに関連付けられた IAM ロールおよびその他のすべてのリソースを削除します。
+2. ストリームに関連付けられた S3 および Firehose IAM ロールを含め、ストリームのセットアップ中に作成されたすべてのリソースを削除します。
 
 リソースが削除されたら、Datadog が変更を認識するまで 5 分ほど待ちます。完了を確認するには、Datadog の [AWS インテグレーションページ][4]の **Metric Collection** タブを開き、指定した AWS アカウントの **CloudWatch Metric Streams** に無効にしたリージョンが表示されていないことを確認します。
 

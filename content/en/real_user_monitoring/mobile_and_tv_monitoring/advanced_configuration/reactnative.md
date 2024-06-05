@@ -10,11 +10,14 @@ aliases:
     - /real_user_monitoring/reactnative/advanced_configuration/
 further_reading:
     - link: https://github.com/DataDog/dd-sdk-reactnative
-      tag: GitHub
+      tag: "Source Code"
       text: Source code for dd-sdk-reactnative
     - link: real_user_monitoring/reactnative/
       tag: Documentation
       text: Learn about React Native monitoring
+    - link: real_user_monitoring/guide/monitor-hybrid-react-native-applications
+      tag: Documentation
+      text: Monitor hybrid React Native applications
 ---
 
 ## Overview
@@ -426,6 +429,10 @@ const configuration = {
 };
 ```
 
+## Monitoring hybrid React Native applications
+
+See [Monitor hybrid React Native applications][16].
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -443,3 +450,4 @@ const configuration = {
 [12]: /real_user_monitoring/platform/connect_rum_and_traces?tab=reactnativerum
 [13]: /real_user_monitoring/guide/proxy-mobile-rum-data/
 [15]: /getting_started/tagging/#define-tags
+[16]: /real_user_monitoring/guide/monitor-hybrid-react-native-applications

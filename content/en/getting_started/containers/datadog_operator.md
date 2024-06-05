@@ -6,10 +6,10 @@ further_reading:
     tag: 'documentation'
     text: 'Datadog Operator'
   - link: 'https://github.com/DataDog/datadog-operator/blob/main/docs/installation.md'
-    tag: 'GitHub'
+    tag: "Source Code"
     text: 'Datadog Operator: Advanced Installation'
   - link: 'https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md'
-    tag: 'GitHub'
+    tag: "Source Code"
     text: 'Datadog Operator: Configuration'
 ---
 
@@ -28,11 +28,13 @@ The [Datadog Operator][1] is an open source [Kubernetes Operator][2] that enable
   helm repo add datadog https://helm.datadoghq.com
   helm install my-datadog-operator datadog/datadog-operator
   ```
-2. Create a Kubernetes secret with your API and application keys:
+2. Create a Kubernetes secret with your API key:
   ```bash
-  kubectl create secret generic datadog-secret --from-literal api-key=<DATADOG_API_KEY> --from-literal app-key=<DATADOG_APP_KEY>
+  kubectl create secret generic datadog-secret --from-literal api-key=<DATADOG_API_KEY>
   ```
-  Replace `<DATADOG_API_KEY>` and `<DATADOG_APP_KEY>` with your [Datadog API and application keys][5].
+  Replace `<DATADOG_API_KEY>` with your [Datadog API key][5].
+
+  **Note**: add the application key for autoscaling using the external metrics server.
 
 3. Create a `datadog-agent.yaml` file with the spec of your `DatadogAgent` deployment configuration. The following sample configuration enables metrics, logs, and APM:
   ```yaml
@@ -46,9 +48,6 @@ The [Datadog Operator][1] is an open source [Kubernetes Operator][2] that enable
         apiSecret:
           secretName: datadog-secret
           keyName: api-key
-        appSecret:
-          secretName: datadog-secret
-          keyName: app-key
     features:
       apm:
         enabled: true
@@ -82,9 +81,6 @@ To enable this feature add `global.containerStrategy: single` to the `DatadogAge
         apiSecret:
           secretName: datadog-secret
           keyName: api-key
-        appSecret:
-          secretName: datadog-secret
-          keyName: app-key
     features:
       apm:
         enabled: true
@@ -130,6 +126,6 @@ helm delete my-datadog-operator
 [2]: https://kubernetes.io/docs/concepts/extend-kubernetes/operator/
 [3]: https://helm.sh/
 [4]: https://kubernetes.io/docs/tasks/tools/install-kubectl/
-[5]: https://app.datadoghq.com/account/settings#api
+[5]: https://app.datadoghq.com/organization-settings/api-keys
 [6]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md
 [7]: https://docs.datadoghq.com/data_security/agent/#running-as-an-unprivileged-user

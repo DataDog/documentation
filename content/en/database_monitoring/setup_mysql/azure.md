@@ -9,10 +9,6 @@ further_reading:
 
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
-{{< /site-region >}}
-
 Database Monitoring provides deep visibility into your MySQL databases by exposing query metrics, query samples, explain plans, connection data, system metrics, and telemetry for the InnoDB storage engine.
 
 The Agent collects telemetry directly from the database by logging in as a read-only user. Complete the following steps to enable Database Monitoring with your MySQL database:
@@ -322,7 +318,7 @@ If you have installed and configured the integrations and Agent as described, an
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/basic_agent_usage#agent-overhead
+[1]: /database_monitoring/agent_integration_overhead/?tab=mysql
 [2]: /database_monitoring/data_collected/#sensitive-information
 [3]: https://docs.microsoft.com/en-us/azure/mysql/howto-server-parameters
 [4]: https://dev.mysql.com/doc/refman/8.0/en/creating-accounts.html

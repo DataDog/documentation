@@ -13,7 +13,7 @@ further_reading:
       tag: "Documentation"
       text: "Adding user information to traces"
     - link: 'https://github.com/DataDog/dd-trace-rb'
-      tag: 'GitHub'
+      tag: "Source Code"
       text: 'Ruby Datadog library source code'
     - link: "/security/default_rules/?category=cat-application-security"
       tag: "Documentation"

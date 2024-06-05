@@ -1,39 +1,71 @@
 ---
-aliases: []
+app_id: oracle-cloud-infrastructure
+app_uuid: c2b4d38f-dd23-4ca2-8bc4-b70360868e8c
+assets:
+  integration:
+    auto_install: false
+    events:
+      creates_events: false
+    metrics:
+      check:
+      - oci.computeagent.cpu_utilization
+      metadata_path: metadata.csv
+      prefix: oci.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 310
+    source_type_name: Oracle Cloud Infrastructure
+author:
+  homepage: https://www.datadoghq.com
+  name: Ruby
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
 - cloud
 - ログの収集
 - ネットワーク
 - oracle
 dependencies: []
-description: カスタムログとサービスログを Oracle Cloud Infrastructure から Datadog に送信します。
-doc_link: https://docs.datadoghq.com/integrations/oracle_cloud_infrastructure/
+display_on_public_website: true
 draft: false
-further_reading: []
 git_integration_title: oracle_cloud_infrastructure
-has_logo: true
 integration_id: oracle-cloud-infrastructure
 integration_title: Oracle Cloud Infrastructure
 integration_version: ''
 is_public: true
 kind: インテグレーション
-manifest_version: '1.0'
+manifest_version: 2.0.0
 name: oracle_cloud_infrastructure
-public_title: Datadog-Oracle Cloud Infrastructure インテグレーション
-short_description: Oracle Cloud からログを収集、監視します。
-type: ''
-version: '1.0'
+public_title: Oracle Cloud Infrastructure
+short_description: Oracle Cloud Infrastructure (OCI) は、高性能コンピューティングとシンプルな移行を実現する IaaS
+  プラットフォームです。
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Cloud
+  - Category::Log Collection
+  - Category::Network
+  - Category::Oracle
+  configuration: README.md#Setup
+  description: Oracle Cloud Infrastructure (OCI) は、高性能コンピューティングとシンプルな移行を実現する IaaS
+    プラットフォームです。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Oracle Cloud Infrastructure
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
 ## 概要
 
 Oracle Cloud Infrastructure (OCI) は、エンタープライズ規模の企業で使用されるInfrastructure-as-a-Service (IaaS) および Platform-as-a-Service (PaaS) です。ホスティング、ストレージ、ネットワーキング、データベースなどのマネージドサービスの完全なスイートを備えています。
 
 Datadog インテグレーションにより、OCI ユーザーはすべてのログを Datadog に直接ストリーミングでき、そこで無期限に保存し、トラブルシューティングのために分析し、セキュリティとコンプライアンスの姿勢を監視できます。
 
-## セットアップ
+## 計画と使用
 
-### ログの収集
+### 収集データ
 
 次のいずれかのプロセスに従って、Oracle Cloud Infrastructure から Datadog にログを送信します。
 
@@ -41,8 +73,8 @@ Datadog インテグレーションにより、OCI ユーザーはすべての�
 {{% tab "サービスコネクタハブ" %}}
 
 1. OCI ログを構成します。
-3. OCI 関数を作成します。
-4. OCI サービスコネクタを設定します。
+2. OCI 関数を作成します。
+3. OCI サービスコネクタを設定します。
 
 以下の手順では、OCI ポータルを使用してインテグレーションを設定します。
 
@@ -52,7 +84,7 @@ Datadog インテグレーションにより、OCI ユーザーはすべての�
 2. コンパートメントを選択し、**Create Log Group** をクリックします。サイドパネルが開きます。
 3. 名前には `data_log_group` を入力し、オプションで説明とタグを入力します。
 4. **Create** をクリックして、新しいロググループを設定します。
-5. **Resources** の下にある **Logs** をクリックします。 
+5. **Resources** の下にある **Logs** をクリックします。
 6. 必要に応じて、**Create custom log** または **Enable service log** をクリックします。
 7. **Enable Log** をクリックして、新しい OCI ログを作成します。
 
@@ -81,6 +113,10 @@ OCI ログの詳細については、[リソースのログを有効にする][1
 
 OCI オブジェクトストレージの詳細については、[Oracle のサービスコネクタのブログ記事][6]を参照してください。
 
+## ヘルプ
+
+ご不明な点は、[Datadog のサポートチーム][7]までお問い合わせください。
+
 
 [1]: https://docs.cloud.oracle.com/en-us/iaas/Content/Logging/Concepts/service_logs.htm#enabling_logging
 [2]: https://docs.cloud.oracle.com/en-us/iaas/Content/Functions/Concepts/functionsoverview.htm
@@ -88,6 +124,7 @@ OCI オブジェクトストレージの詳細については、[Oracle のサ�
 [4]: https://github.com/DataDog/Oracle_Logs_Integration/blob/master/Service%20Connector%20%20Hub/func.yaml
 [5]: https://github.com/DataDog/Oracle_Logs_Integration/blob/master/Service%20Connector%20%20Hub/requirements.txt
 [6]: https://blogs.oracle.com/cloud-infrastructure/oracle-cloud-infrastructure-service-connector-hub-now-generally-available
+[7]: https://docs.datadoghq.com/ja/help/
 {{% /tab %}}
 {{% tab "オブジェクトストア" %}}
 
@@ -149,6 +186,7 @@ OCI オブジェクトストレージの詳細については、[データをオ
 8. **Create Rule** をクリックすると、ルールが作成され、ルールリストで利用できるようになります。
 
 OCI オブジェクトストレージの詳細については、[イベント入門][7]を参照してください。
+
 
 
 [1]: https://docs.cloud.oracle.com/en-us/iaas/Content/Logging/Concepts/service_logs.htm#enabling_logging

@@ -5,10 +5,10 @@ aliases:
   - /agent/faq/send-logs-and-configs-to-datadog-via-flare-command
 further_reading:
 - link: "/agent/troubleshooting/debug_mode/"
-  tag: "Agent Troubleshooting"
+  tag: "Documentation"
   text: "Agent Debug Mode"
 - link: "/agent/troubleshooting/agent_check_status/"
-  tag: "Agent Troubleshooting"
+  tag: "Documentation"
   text: "Get the Status of an Agent Check"
 algolia:
   tags: ['agent flare']

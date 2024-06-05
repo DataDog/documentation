@@ -786,7 +786,7 @@ spec:
 {{< /tabs >}}
 
 
-## Rancher Kubernetes Engine (\<v2.5) 上の Kubernetes {#RKEBefore2_5}
+## Rancher Kubernetes Engine (v2.5 より前) 上の Kubernetes {#RKEBefore2_5}
 
 ### API Server、Controller Manager、Scheduler
 

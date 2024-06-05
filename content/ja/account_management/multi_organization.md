@@ -14,42 +14,55 @@ further_reading:
 - link: /account_management/billing/usage_attribution
   tag: Documentation
   text: 使用属性のセットアップ
+- link: /account_management/org_settings/cross_org_visibility
+  tag: Documentation
+  text: Cross-Organization Visibility
 kind: documentation
 title: マルチオーガニゼーションアカウントの管理
 ---
 
-1 つの親オーガニゼーションアカウントから複数の子オーガニゼーションを管理できます。通常、これは、顧客どうしが互いのデータにアクセスできない、マネージドサービスプロバイダーによって使用されます。親オーガニゼーションや複数の子オーガニゼーションにユーザーを追加し、[ユーザーアカウント設定メニュー][1]で切り替えることができます。親オーガニゼーションは、個々の子オーガニゼーションの使用状況を表示できるため、そのトレンドを追跡できます。
+## 概要
+
+1 つの親組織アカウントから複数の子組織を管理することができます。これは通常、お互いのデータにアクセスできない顧客を持つマネージドサービスプロバイダーが使用します。
+
+複数組織アカウント機能は、デフォルトでは有効になりません。有効にするには、[Datadog のサポートチーム][1]にご連絡ください。
+
+## 機能
+
+親組織と複数の子組織にユーザーを追加することができます。ユーザーは、[ユーザーアカウント設定メニュー][2]から組織を切り替えることができます。
+
+親組織内の組織は、お互いのデータにアクセスできません。組織間のメトリクスクエリを有効にするには、[Cross-Organization Visibility][3] を参照してください。
+
+親組織は、個々の子組織の利用状況を見ることができるため、利用傾向を追跡することができます。
 
 アカウント設定 (許可リスト入りの IP アドレスなど) は、親オーガニゼーションから子オーガニゼーションへ継承されません。
-
-マルチオーガニゼーションアカウント機能は、デフォルトでは有効になりません。有効にするには、[Datadog のサポートチーム][2]にご連絡ください。
 
 ## 子オーガニゼーション
 
 ### 作成
 
-1. 機能を有効にしたら、[New Organization Page][3] を参照します。
+1. 機能を有効にしたら、[New Organization Page][4] を参照します。
 2. 作成する子オーガニゼーションの名前を入力します。**子オーガニゼーション名は最大 32 文字です。**
 3. オプションで、子組織に管理者ユーザーを招待することができます。
     - 1 つまたは複数のメールアドレスを入力します。
-    - 招待されたユーザーには、[Datadog Admin ロール][4]が割り当てられます。組織を作成後、
+    - 招待されたユーザーには、[Datadog Admin ロール][5]が割り当てられます。組織を作成後、
 組織の設定でさらにユーザーを招待することができます。
     - ユーザーがパスワードを持っていない場合、Datadog は、パスワードを設定し、新しい子組織に参加するためのリンクを持つ招待メールを送信します。
 4. **Create** をクリックします。
 
-新しい子オーガニゼーションは、親オーガニゼーションのプランを継承し、親オーガニゼーションの請求アカウントに追加されます。子オーガニゼーションの請求を更新する場合は、[営業担当者][5]にお問い合わせください。
+新しい子組織は、親組織のプランを継承し、親組織の請求アカウントに追加されます。子組織の請求を更新する場合は、[営業担当者][6]にお問い合わせください。
 
 ### 内容
 
-ベースラインのダッシュボードとモニターを使用して新しいサブオーガニゼーションをオンボードするには、[Datadog API][6] と Terraform などのツールをプログラムで使用します。『[Terraform を使用した Datadog の管理][7]』を参照してください。さらに、スクリプトを使用して、既存のダッシュボードと[モニター][8]をコードとしてバックアップできます。
+ベースラインのダッシュボードとモニターを使用して新しいサブ組織をオンボードするには、[Datadog API][7] と Terraform などのツールをプログラムで使用します。[Terraform を使用した Datadog の管理][8]を参照してください。さらに、スクリプトを使用して、既存のダッシュボードと[モニター][9]をコードとしてバックアップできます。
 
 ### カスタムサブドメイン
 
-カスタムサブドメイン機能は、デフォルトでは有効になりません。有効にするには、[Datadog のサポートチーム][2]にご連絡ください。
+カスタムサブドメイン機能は、デフォルトでは有効になりません。有効にするには、[Datadog のサポートチーム][1]にご連絡ください。
 
 複数のオーガニゼーションに属しているユーザーには、カスタムサブドメインを使用すると、アラートや通知のソースを特定するために便利です。そのようなユーザーをサブドメインに関連付けられているオーガニゼーションに即座に切り替えることもできます。
 
-たとえば、URL `https://app.datadoghq.com/event/event?id=1` がオーガニゼーション A のイベントに関連付けられています。オーガニゼーション A とオーガニゼーション B のメンバーであるユーザーが、オーガニゼーション B のコンテキストで Datadog を表示している場合、上の URL は `404 Not Found error` を返します。その場合は、[ユーザーアカウント設定メニュー][10]を使用してオーガニゼーション A に切り替えてから、URL に再度アクセスする必要があります。一方、カスタムサブドメインを使用し、`https://org-a.datadoghq.com/event/event?id=1` に移動すれば、自動的にユーザーのコンテキストがオーガニゼーション A に切り替わり、正しいページを表示することができます。
+たとえば、URL `https://app.datadoghq.com/event/event?id=1` が組織 A のイベントに関連付けられています。組織 A と組織 B のメンバーであるユーザーが、組織 B のコンテキストで Datadog を表示している場合、上の URL は `404 Not Found error` を返します。その場合は、[ユーザーアカウント設定メニュー][2]を使用して組織 A に切り替えてから、URL に再度アクセスする必要があります。一方、カスタムサブドメインを使用し、`https://org-a.datadoghq.com/event/event?id=1` に移動すれば、自動的にユーザーのコンテキストが組織 A に切り替わり、正しいページを表示することができます。
 
 **注**: カスタム Datadog サブドメインを持っている場合、Datadog ドキュメントからリンクを手動で（サブドメイン名を追加して）編集してください。たとえば、`https://**app**.datadoghq.com/account/settings` へリダイレクトするリンクは `https://**<custom_sub-domain_name>**.datadoghq.com/account/settings` となります。
 
@@ -61,7 +74,7 @@ SAML をマルチオーガニゼーションに構成するには
 
 1. 新しい組織を作成します。
 2. SAML ユーザーを招待します。
-3. SAML ユーザーとしてログインし、[SAML をセットアップ][9]します。
+3. SAML ユーザーとしてログインし、[SAML をセットアップ][10]します。
 
 ### SAML に厳しい親組織
 
@@ -73,7 +86,7 @@ SAML に厳しい親組織から作成された子組織に確実にログイン
 3. ユーザープロファイルを選択します。
 4. **Override Default Login Methods** トグルをオンに設定します。
 5. **Select user's login methods** の下で、**Password** のチェックボックスにチェックを入れます。
-6. アカウントにパスワードが設定されていることを確認します。パスワードの設定にお困りの場合は、[Datadog サポート][2]にお問い合わせください。
+6. アカウントにパスワードが設定されていることを確認します。パスワードの設定にお困りの場合は、[Datadog サポート][1]にお問い合わせください。
 
 上記の手順で、メールアドレスとパスワードの組み合わせで親アカウントにログインできるようになります。子組織を作成した後、メールアドレスとパスワードを使ってログインすることも可能です。
 
@@ -122,11 +135,11 @@ Overall Usage セクションには、すべてのオーガニゼーションの
 
 デフォルトのビューは "Billable" ビューで、最終的な請求に寄与する使用量が表示されます。このビューでは、トライアルオーガニゼーションなどの請求対象ではない子オーガニゼーションや、請求対象のより正確な要約を提供するその他の調整が削除されます。"All" ビューに切り替えると、親オーガニゼーションとすべての子オーガニゼーションの使用量を未調整かつ生の状態で確認することができます。どちらのビューも CSV ファイルとしてダウンロードできます。
 
-子組織の[使用量の詳細][10]を表示するには、子組織の名前をクリックします。
+子組織の[使用量の詳細][11]を表示するには、子組織の名前をクリックします。
 
 ## 使用属性
 
-親組織は、[Usage Attribution][11] ページで子組織の使用量を既存のタグキーによって確認できます。管理者が、左下にあるユーザー名にカーソルを置き、`Plan & Usage`--> `Usage Attribution` と移動して表示します。
+親組織は、[Usage Attribution][12] ページで子組織の使用量を既存のタグキーによって確認できます。管理者が、左下にあるユーザー名にカーソルを置き、`Plan & Usage`--> `Usage Attribution` と移動して表示します。
 
 親オーガニゼーションレベルで有効化されている場合、使用属性にはすべてのオーガニゼーションの使用量集計が表示されます。これは、子オーガニゼーションの使用量を特定のプロジェクトまたはチームの属性とするなど、グループ化する場合に便利です。
 
@@ -136,15 +149,9 @@ Overall Usage セクションには、すべてのオーガニゼーションの
 * UI および .tsv ダウンロードとして月間使用量にアクセス（タブ区切り値）
 * ほとんどの種類の日次使用量（.tsv ファイル）にアクセス
 
-{{< img src="account_management/billing/usage_attribution/Usage-Attribution-v2-Total-Usage.png" alt="Datadog で適用されたタグ" style="width:100%;" >}}
+{{< img src="account_management/billing/usage_attribution/Usage-Attribution-Monthly-Facets.png" alt="月次使用量属性レポート" style="width:100%;" >}}
 
 使用属性は、子オーガニゼーションレベルで有効にすることも可能です。このレベルで有効にした場合、タグはその子オーガニゼーションのみに適用され、その子オーガニゼーションでのみ表示されます。子オーガニゼーションレベルで適用されたタグはロールアップされず、親オーガニゼーションでは表示されません。
-
-注: 以下の使用タイプはこのツールではサポートされません。
-
-* インデックス化されたログイベント
-* 収集されたログ
-* インデックス化されたスパン (保持フィルターによる保持)
 
 使用属性は、Enterprise プランに含まれる高度な機能です。他のプランをご利用中の場合は、アカウント担当者または <a href="mailto:success@datadoghq.com">success@datadoghq.com</a> までお問い合わせください。
 
@@ -152,14 +159,15 @@ Overall Usage セクションには、すべてのオーガニゼーションの
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/account_management/#managing-your-organizations
-[2]: /ja/help/
-[3]: https://app.datadoghq.com/account/new_org
-[4]: /ja/account_management/rbac/permissions/#advanced-permissions
-[5]: mailto:success@datadoghq.com
-[6]: /ja/api/
-[7]: https://www.datadoghq.com/blog/managing-datadog-with-terraform
-[8]: /ja/monitors/manage/
-[9]: /ja/account_management/saml/
-[10]: /ja/account_management/plan_and_usage/usage_details/
-[11]: /ja/account_management/billing/usage_attribution/
+[1]: /ja/help/
+[2]: /ja/account_management/#managing-your-organizations
+[3]: /ja/account_management/org_settings/cross_org_visibility/
+[4]: https://app.datadoghq.com/account/new_org
+[5]: /ja/account_management/rbac/permissions/#advanced-permissions
+[6]: mailto:success@datadoghq.com
+[7]: /ja/api/
+[8]: https://www.datadoghq.com/blog/managing-datadog-with-terraform
+[9]: /ja/monitors/manage/
+[10]: /ja/account_management/saml/
+[11]: /ja/account_management/plan_and_usage/usage_details/
+[12]: /ja/account_management/billing/usage_attribution/

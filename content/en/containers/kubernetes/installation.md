@@ -10,10 +10,10 @@ further_reading:
       tag: 'Documentation'
       text: 'Further Configure the Datadog Agent on Kubernetes'
     - link: 'https://github.com/DataDog/helm-charts/blob/main/charts/datadog/README.md#all-configuration-options'
-      tag: 'GitHub'
+      tag: "Source Code"
       text: 'Datadog Helm chart - All configuration options'
     - link: 'https://github.com/DataDog/helm-charts/blob/main/charts/datadog/README.md#upgrading'
-      tag: 'GitHub'
+      tag: "Source Code"
       text: 'Upgrading Datadog Helm'
 ---
 

@@ -56,10 +56,9 @@ To begin profiling applications:
     ```ruby
     gem 'datadog', '~> 2.0'
     ```
+3. Install the gems with `bundle install`.
 
-2. Install the gems with `bundle install`.
-
-3. Enable the profiler:
+4. Enable the profiler:
 
    {{< tabs >}}
 {{% tab "Environment variables" %}}
@@ -88,7 +87,7 @@ end
 {{% /tab %}}
 {{< /tabs >}}
 
-4. Add the `ddprofrb exec` command to your Ruby application start command:
+5. Add the `ddprofrb exec` command to your Ruby application start command:
 
     ```shell
     bundle exec ddprofrb exec ruby myapp.rb
@@ -110,12 +109,13 @@ end
     require 'datadog/profiling/preload'
     ```
 
+6. Optional: Set up [Source Code Integration][4] to connect your profiling data with your Git repositories.
 
-4. A minute or two after starting your Ruby application, your profiles will show up on the [Datadog APM > Profiler page][4].
+7. A minute or two after starting your Ruby application, your profiles will show up on the [Datadog APM > Profiler page][5].
 
 ## Not sure what to do next?
 
-The [Getting Started with Profiler][5] guide takes a sample service with a performance problem and shows you how to use Continuous Profiler to understand and fix the problem.
+The [Getting Started with Profiler][6] guide takes a sample service with a performance problem and shows you how to use Continuous Profiler to understand and fix the problem.
 
 ## Further Reading
 
@@ -124,8 +124,9 @@ The [Getting Started with Profiler][5] guide takes a sample service with a perfo
 [1]: /tracing/trace_collection/
 [2]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
 [3]: https://app.datadoghq.com/account/settings/agent/6?platform=overview
-[4]: https://app.datadoghq.com/profiling
-[5]: /getting_started/profiler/
+[4]: /integrations/guide/source-code-integration/?tab=ruby
+[5]: https://app.datadoghq.com/profiling
+[6]: /getting_started/profiler/
 [12]: /profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
 [13]: /profiler/connect_traces_and_profiles/#break-down-code-performance-by-api-endpoints
 [14]: /profiler/enabling/supported_versions/

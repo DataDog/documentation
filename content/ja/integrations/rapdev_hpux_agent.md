@@ -5,6 +5,7 @@ app_id: rapdev-hpux-agent
 app_uuid: 5e611b0d-a099-4823-a4ba-e42b1012b3b5
 assets:
   integration:
+    auto_install: false
     configuration: {}
     events:
       creates_events: false
@@ -14,6 +15,7 @@ assets:
       prefix: rapdev.hpux_agent.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10185
     source_type_name: RapDev Solaris Agent
 author:
   homepage: https://www.rapdev.io
@@ -53,6 +55,7 @@ tile:
   classifier_tags:
   - Category::Marketplace
   - Offering::Integration
+  - Submitted Data Type::Metrics
   configuration: README.md#Setup
   description: hppa および itanium の HP-UX 11.31 メトリクスを提供するシステム Agent
   media:
@@ -71,6 +74,7 @@ tile:
   uninstallation: README.md#Uninstallation
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 ## 概要
 
@@ -80,7 +84,7 @@ HP-UX Agent は、Datadog インフラストラクチャーリストをサポー
 
 HP-UX Agent は、ネイティブ Agent と同じ URL とポートを使用します。HP-UX Agent は現在、コアインフラストラクチャーメトリクス、プロセスチェック、ログ追跡をサポートしています。カスタム Agent チェック、インテグレーション、またはサービスチェックはサポートしていません。
 
-## サポート
+## Agent
 
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから RapDev.io にお問い合わせください。
 

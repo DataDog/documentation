@@ -10,47 +10,45 @@ further_reading:
     - link: "https://app.datadoghq.com/release-notes?category=Software%20Delivery"
       tag: "Release Notes"
       text: "Check out the latest Software Delivery releases! (App login required)"
-    - link: "/monitors/types/ci/"
-      tag: "Documentation"
-      text: "Creating CI Test Monitors"
-    - link: "/continuous_integration/guides/find_flaky_tests/"
-      tag: "Documentation"
-      text: "Finding Flaky Tests"
-    - link: "/continuous_integration/guides/rum_integration/"
-      tag: "Documentation"
-      text: "Linking CI Visibility and RUM"
-    - link: "/continuous_integration/troubleshooting/"
-      tag: "Documentation"
-      text: "Troubleshooting CI Visibility"
+    - link: "https://www.datadoghq.com/blog/datadog-ci-visibility/"
+      tag: "Blog"
+      text: "Monitor your CI pipelines and tests with Datadog CI Visibility"
     - link: "https://www.datadoghq.com/blog/ci-test-visibility-with-rum/"
       tag: "Blog"
       text: "Troubleshoot end-to-end tests with CI Visibility and RUM"
+    - link: "/monitors/types/ci/"
+      tag: "Documentation"
+      text: "Learn about CI Test Monitors"
+    - link: "/tests/guides/flaky_test_management/"
+      tag: "Documentation"
+      text: "Learn about Flaky Test Management"
+    - link: "/tests/browser_tests/"
+      tag: "Documentation"
+      text: "Learn how to instrument your browser tests with RUM"
+    - link: "/tests/troubleshooting/"
+      tag: "Documentation"
+      text: "Learn how to troubleshoot Test Visibility"
 cascade:
     algolia:
         rank: 70
-        tags: ['ci test', 'ci tests', 'supported features']
+        tags: ['ci test', 'ci tests', 'test visibility', 'failed test', 'flaky test', 'supported features']
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
+<div class="alert alert-warning">Test Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
 ## Overview
 
-[Test Visibility][1] provides a test-first view into your CI health by displaying important metrics and results from your tests. It can help you investigate performance problems and test failures that concern you the most because you work on the related code, not because you maintain the pipelines they are run in.
+[Test Visibility][1] provides a test-first view into your CI health by displaying important metrics and results from your tests. It can help you investigate performance problems and test failures that are most relevant to your work, focusing on the code you are responsible for, rather than the pipelines which run your tests.
 
 ## Setup
 
-{{< whatsnext desc="Choose a language to set up Test Visibility in Datadog:" >}}
-    {{< nextlink href="tests/setup/dotnet" >}}.NET{{< /nextlink >}}
-    {{< nextlink href="tests/setup/java" >}}Java and other JVM-based languages{{< /nextlink >}}
-    {{< nextlink href="tests/setup/javascript" >}}JavaScript{{< /nextlink >}}
-    {{< nextlink href="tests/setup/python" >}}Python{{< /nextlink >}}
-    {{< nextlink href="tests/setup/ruby" >}}Ruby{{< /nextlink >}}
-    {{< nextlink href="tests/setup/swift" >}}Swift{{< /nextlink >}}
-    {{< nextlink href="tests/setup/junit_xml" >}}Uploading JUnit test report files to Datadog{{< /nextlink >}}
-    {{< nextlink href="tests/containers" >}}Tests running in containers{{< /nextlink >}}
-{{< /whatsnext >}}
+Select an option to configure Test Visibility in Datadog:
+
+{{< partial name="continuous_integration/ci-tests-setup.html" >}}
+
+</br>
 
 In addition to tests, Test Visibility provides visibility over the whole testing phase of your project.
 
@@ -67,14 +65,16 @@ In addition to tests, Test Visibility provides visibility over the whole testing
 | {{< ci-details title="Codeowner by test" >}}Automatic detection of the owner of a test file based on the CODEOWNERS file.{{< /ci-details >}}                                                                     | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} (partially)  |
 | {{< ci-details title="Source code start/end" >}}Automatic report of the start and end lines of a test.{{< /ci-details >}}                                                                                        | {{< X >}} |       {{< X >}}      | {{< X >}} (only start) | {{< X >}} | {{< X >}} (only start) | {{< X >}} | {{< X >}} (only start) |
 | {{< ci-details title="CI and git info" >}}Automatic collection of git and CI environment metadata, such as CI provider, git commit SHA or pipeline URL.{{< /ci-details >}}                                       | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}} | {{< X >}} |       {{< X >}}        |
-| {{< ci-details title="Git metadata upload" >}}Automatic upload of git tree information used for Intelligent Test Runner.{{< /ci-details >}}                                                                      | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} |           | {{< X >}} |       {{< X >}}        |
-| {{< ci-details title="Intelligent Test Runner *" >}}Capability to enable Intelligent Test Runner, which intelligently skips tests based on code coverage and git metadata.{{< /ci-details >}}                    | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} |           | {{< X >}} |                        |
+| {{< ci-details title="Git metadata upload" >}}Automatic upload of git tree information used for Intelligent Test Runner.{{< /ci-details >}}                                                                      | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}} | {{< X >}} |       {{< X >}}        |
+| {{< ci-details title="Intelligent Test Runner *" >}}Capability to enable Intelligent Test Runner, which intelligently skips tests based on code coverage and git metadata.{{< /ci-details >}}                    | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} |  {{< X >}}     | {{< X >}} |                        |
 | {{< ci-details title="Code coverage support" >}}Ability to report total code coverage metrics.{{< /ci-details >}}                                                                                                | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}}       |           | {{< X >}} |   {{< X >}} (manual)   |
 | {{< ci-details title="Benchmark tests support" >}}Automatic detection of performance statistics for benchmark tests.{{< /ci-details >}}                                                                          | {{< X >}} |                      |                        | {{< X >}} |           | {{< X >}} |                        |
 | {{< ci-details title="Parameterized tests" >}}Automatic detection of parameterized tests.{{< /ci-details >}}                                                                                                     | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}} | {{< X >}} |                        |
-| {{< ci-details title="Early flake detection *" >}}Automatically retry new tests to detect flakiness.{{< /ci-details >}}                                                                                   |           |       {{< X >}}      |       {{< X >}}        |           |           |           |                        |
+| {{< ci-details title="Early flake detection *" >}}Automatically retry new tests to detect flakiness.{{< /ci-details >}}                                                                                          | {{< X >}} |       {{< X >}}      |       {{< X >}}        |           |           |           |                        |
+| {{< ci-details title="Auto test retries *" >}}Automatically retry failed tests up to N times to avoid failing the build due to test flakiness.{{< /ci-details >}}                                               |           |       {{< X >}}      |                        |           |           |           |                        |
+| {{< ci-details title="Selenium RUM integration" >}}Automatically link browser sessions to test cases when testing RUM-instrumented applications.{{< /ci-details >}}                                              | {{< X >}} |       {{< X >}}      |       {{< X >}}        |           | {{< X >}} |           |                        |
 
-\* the feature is opt-in and needs to be enabled in the test service settings UI.
+\* The feature is opt-in, and needs to be enabled on the [**Test Service Settings** page][5].
 
 ## Default configurations
 
@@ -108,13 +108,12 @@ The following tags are automatically collected to identify test configurations, 
 
 ### Parameterized test configurations
 
-When you run parameterized tests, the library detects and reports information about the parameters used.
-Parameters are a part of test configuration, so the same test case executed with different parameters will be considered as two different tests in Test Visibility.
+When you run parameterized tests, the library detects and reports information about the parameters used. Parameters are a part of test configuration, so the same test case executed with different parameters is considered as two different tests in Test Visibility.
 
-If a test parameter is non-deterministic and has a different value every time a test is run, each test execution will be considered a new test in Test Visibility.
-As a consequence, some product features may not work correctly for such tests: history of executions, flakiness detection, Intelligent Test Runner, and others.
+If a test parameter is non-deterministic and has a different value every time a test is run, each test execution is considered a new test in Test Visibility. As a consequence, some product features may not work correctly for such tests: history of executions, flakiness detection, Intelligent Test Runner, and others.
 
 Some examples of non-deterministic test parameters are:
+
 - current date
 - a random value
 - a value that depends on the test execution environment (such as an absolute file path or the current username)
@@ -140,22 +139,24 @@ Note: Nested `test.configuration` tags, such as `test.configuration.cpu.memory`,
 
 In order to filter using these configurations tags, [you must create facets for these tags][2].
 
-## Use CI tests data
+## Enhance your developer workflow
 
-{{% ci-information-collected %}}
-
-### Integrations
-
-{{< whatsnext desc="Learn about the following integrations with Test Visibility:" >}}
+{{< whatsnext desc="Integrate Test Visibility with tools to report code coverage data, enhance browser tests with RUM, and access insights across platforms by streamlining issue identification and resolution in your development cycle." >}}
 {{< nextlink href="/tests/developer_workflows/" >}}Enhancing Developer Workflows with Datadog{{< /nextlink >}}
-{{< nextlink href="/tests/code_coverage" >}}Code Coverage{{< /nextlink >}}
+{{< nextlink href="/tests/code_coverage" >}}Learn about Code Coverage{{< /nextlink >}}
 {{< nextlink href="/tests/browser_tests" >}}Instrument Cypress Browser Tests with Browser RUM{{< /nextlink >}}
 {{< nextlink href="/tests/swift_tests" >}}Instrument Swift Tests with Browser RUM{{< /nextlink >}}
 {{< /whatsnext >}}
 
+## Use CI tests data
+
+{{% ci-information-collected %}}
+
+When creating a [dashboard][6] or a [notebook][7], you can use CI test data in your search query, which updates the visualization widget options. For more information, see the [Dashboards][8] and [Notebooks documentation][9].
+
 ## Alert on test data
 
-When you evaluate failed or flaky tests, or the performance of a CI test on the [**Test Runs** page][3], click **Create Monitor** to create a [CI Test monitor][4].
+When you're evaluating failed or flaky tests, or the performance of a CI test, you can export your search query in the [Test Visibility Explorer][3] to a [CI Test monitor][4] by clicking the **Export** button.
 
 ## Further reading
 
@@ -165,3 +166,8 @@ When you evaluate failed or flaky tests, or the performance of a CI test on the 
 [2]: /continuous_integration/explorer/facets/
 [3]: https://app.datadoghq.com/ci/test-runs
 [4]: /monitors/types/ci/
+[5]: https://app.datadoghq.com/ci/settings/test-service
+[6]: https://app.datadoghq.com/dashboard/lists
+[7]: https://app.datadoghq.com/notebook/list
+[8]: /dashboards
+[9]: /notebooks

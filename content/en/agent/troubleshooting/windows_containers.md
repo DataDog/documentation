@@ -9,7 +9,7 @@ further_reading:
   tag: "Documentation"
   text: Kubernetes Agent
 - link: "/agent/troubleshooting/"
-  tag: "Agent Troubleshooting"
+  tag: "Documentation"
   text: "Agent Troubleshooting"
 ---
 

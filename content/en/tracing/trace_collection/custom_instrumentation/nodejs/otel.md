@@ -17,27 +17,14 @@ further_reading:
       text: 'Interoperability of OpenTelemetry API and Datadog instrumented traces'
 ---
 
-{{% otel-custom-instrumentation %}}
+{{% otel-custom-instrumentation-lang %}}
 
 
-## Requirements and limitations
+## Setup
 
-<!-- TODO: version needs to corrected after release -->
-- Datadog Node.js tracing library `dd-trace` version 4.2.0+, 3.23.0+, or v2.36.0+.
+To configure OpenTelemetry to use the Datadog trace provider:
 
-The following OpenTelemetry features implemented in the Datadog library as noted:
-
-| Feature                               | Support notes                       |
-|---------------------------------------|--------------------------------------|
-| [OpenTelemetry Context propagation][1]         | [Datadog and W3C Trace Context header formats][9] are enabled by default. | 
-| [Span processors][2]                  | Unsupported                                          | 
-| [Span Exporters][3]                   | Unsupported                                            |
-| Trace/span [ID generators][4]         | ID generation is performed by the tracing library, with support for [128-bit trace IDs][12].   |
-
-
-## Configuring OpenTelemetry to use the Datadog tracing library
-
-1. Add your desired manual OpenTelemetry instrumentation to your Node.js code following the [OpenTelemetry Node.js Manual Instrumentation documentation][5]. **Important!** Where those instructions indicate that your code should call the OpenTelemetry SDK, call the Datadog tracing library instead.
+1. Add your desired manual OpenTelemetry instrumentation to your Node.js code following the [OpenTelemetry Node.js Manual Instrumentation documentation][1]. **Note**: Where those instructions indicate that your code should call the OpenTelemetry SDK, call the Datadog tracing library instead.
 
 2. Add the `dd-trace` module to your package.json:
 
@@ -66,22 +53,87 @@ The following OpenTelemetry features implemented in the Datadog library as noted
     provider.register()
     ```
 
-6. Run your application.
+6. Import the OpenTelemetry API and create an OpenTelemetry tracer instance:
 
-Datadog combines these OpenTelemetry spans with other Datadog APM spans into a single trace of your application. It supports [integration instrumentation][7] and [OpenTelemetry Automatic instrumentation][8] also.
+    ```js
+    const ot = require('@opentelemetry/api')
+    const otelTracer = ot.trace.getTracer(
+      'my-service'
+    )
+    ```
+
+7. Run your application.
+
+Datadog combines these OpenTelemetry spans with other Datadog APM spans into a single trace of your application. It also supports [integration instrumentation][2] and [OpenTelemetry automatic instrumentation][3].
+
+## Adding span tags
+
+Add custom attributes to your spans to provide additional context:
+
+{{< highlight js "hl_lines=6" >}}
+function processData(i, param1, param2) {
+  return tracer.startActiveSpan(`processData:${i}`, (span) => {
+    const result = someOperation(param1, param2);
+
+    // Add an attribute to the span
+    span.setAttribute('app.processedData', result.toString());
+    
+    span.end();
+    return result;
+    });
+}
+{{< /highlight >}}
+
+## Creating spans
+
+To create a new span and properly close it, use the `startActiveSpan` method:
+
+{{< highlight js "hl_lines=3 9" >}}
+function performTask(iterations, param1, param2) {
+  // Create a span. A span must be closed.
+  return tracer.startActiveSpan('performTask', (span) => {
+    const results = [];
+    for (let i = 0; i < iterations; i++) {
+      results.push(processData(i, param1, param2));
+    }
+    // Be sure to end the span!
+    span.end();
+    return results;
+  });
+}
+{{< /highlight >}}
+
+## Filtering requests
+
+In some cases, you may want to exclude certain requests from being instrumented, such as health checks or synthetic traffic. You can use the `blocklist` or `allowlist` option on the `http` plugin to ignore these requests.
+
+To exclude requests at the application level, add the following after initializing the tracer:
+
+```javascript
+// at the top of the entry point right after tracer.init()
+tracer.use('http', {
+  blocklist: ['/health', '/ping']
+})
+```
+
+You can also split the configuration between client and server if needed:
+
+```javascript
+tracer.use('http', {
+  server: {
+    blocklist: ['/ping']
+  }
+})
+```
+
+Additionally, you can exclude traces based on their resource name to prevent the Agent from sending them to Datadog. For more information on security and fine-tuning Agent configurations, read the [Security][4] or [Ignoring Unwanted Resources][5].
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://opentelemetry.io/docs/instrumentation/js/propagation/
-[2]: https://opentelemetry.io/docs/reference/specification/trace/sdk/#span-processor
-[3]: https://opentelemetry.io/docs/reference/specification/trace/sdk/#span-exporter
-[4]: https://opentelemetry.io/docs/reference/specification/trace/sdk/#id-generators
-[5]: https://opentelemetry.io/docs/instrumentation/js/instrumentation/
-[6]: /tracing/trace_collection/dd_libraries/nodejs/#additional-configuration
-[7]: /tracing/trace_collection/dd_libraries/nodejs#integration-instrumentation
-[8]: https://opentelemetry.io/docs/instrumentation/js/automatic/
-[9]: /tracing/trace_collection/trace_context_propagation/nodejs/
-[10]: /tracing/trace_collection/dd_libraries/nodejs/#custom-logging
-[12]: /opentelemetry/guide/otel_api_tracing_interoperability/
+[1]: https://opentelemetry.io/docs/instrumentation/js/instrumentation/
+[2]: /tracing/trace_collection/dd_libraries/nodejs#integration-instrumentation
+[3]: https://opentelemetry.io/docs/instrumentation/js/automatic/
+[4]: /tracing/security
+[5]: /tracing/guide/ignoring_apm_resources/

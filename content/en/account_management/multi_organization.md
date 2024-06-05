@@ -153,12 +153,6 @@ Functionalities include:
 
 Usage attribution can also be enabled at the child-organization level. When enabled at this level, the tags are only applied to that specific child-organization and can only be viewed in that child-organization. Tags applied at the child-organization level do not rollup and cannot be viewed in the parent-organization.
 
-Note: the following usage types are not supported in this tool:
-
-* Indexed Log Events
-* Ingested Logs
-* Indexed Spans (retained with retention filters)
-
 Usage Attribution is an advanced feature included in the Enterprise plan. For all other plans, contact your account representative or <a href="mailto:success@datadoghq.com">success@datadoghq.com</a>.
 
 ## Further Reading

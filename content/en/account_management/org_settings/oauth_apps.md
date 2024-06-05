@@ -21,7 +21,7 @@ Only users with the Datadog Admin role or the `org_authorized_apps_write` permis
 
 ### Enable
 
-Enabled OAuth applications allow users with necessary permissions to authorize access on their behalf. OAuth applications include the Datadog Mobile App and your custom [UI Extensions][4] that have [OAuth API Access][5]. 
+Enabled OAuth applications allow users with necessary permissions to authorize access on their behalf. OAuth applications include the Datadog Mobile App<!-- and your custom [UI Extensions][4] that have [OAuth API Access][5]-->. 
 
 ### Disable
 

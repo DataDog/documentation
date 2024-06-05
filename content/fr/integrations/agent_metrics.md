@@ -18,8 +18,7 @@ author:
   name: Datadog
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
-categories:
-- monitoring
+categories: []
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/agent_metrics/README.md
 display_on_public_website: true
@@ -44,7 +43,6 @@ tile:
   - Supported OS::Linux
   - Supported OS::macOS
   - Supported OS::Windows
-  - Category::Monitoring
   configuration: README.md#Setup
   description: agent_metrics description.
   media: []

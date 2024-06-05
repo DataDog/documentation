@@ -5,6 +5,7 @@ assets:
   dashboards:
     purefb_overview: assets/dashboards/purefb_overview.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -15,6 +16,7 @@ assets:
       prefix: purefb.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10269
     source_type_name: PureFB
 author:
   homepage: https://purestorage.com
@@ -22,7 +24,7 @@ author:
   sales_email: sales@purestorage.com
   support_email: pure-observability@purestorage.com
 categories:
-- data store
+- data stores
 - OS & システム
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/purefb/README.md
@@ -31,7 +33,7 @@ draft: false
 git_integration_title: purefb
 integration_id: purefb
 integration_title: Pure Storage FlashBlade
-integration_version: 1.0.2
+integration_version: 1.0.4
 is_public: true
 kind: integration
 manifest_version: 2.0.0
@@ -45,7 +47,7 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Category::Data Store
+  - Category::Data Stores
   - Category::OS & System
   - Offering::Integration
   - Supported OS::Linux
@@ -68,6 +70,7 @@ tile:
   title: Pure Storage FlashBlade
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -85,22 +88,22 @@ tile:
  - Python 3
  - Pure Storage FlashBlade OpenMetrics エクスポーターは、コンテナ環境でインストールされ、実行されます。インストール方法は、[Pure Storage GitHub リポジトリ][3]を参照してください。
 
-## セットアップ
+## 計画と使用
 
 ホストで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][4]のガイドを参照してこの手順を行ってください。
 
-### インストール
+### インフラストラクチャーリスト
 
 1. [Datadog Agent をダウンロードして起動][2]します。
 2. Pure FlashBlade インテグレーションを手動でインストールします。環境に応じた詳細は、[コミュニティインテグレーションを利用する][5]を参照してください。
 
 
-#### ホスト
+#### メトリクスベース SLO
 
-ホスト上で動作している Agent に対してこのチェックを構成するには、`datadog-agent integration install -t datadog-purefb==1.0.2` を実行します。
+ホスト上で動作している Agent に対してこのチェックを構成するには、`datadog-agent integration install -t datadog-purefb==1.0.4` を実行します。
 
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 1. FlashBlade に Read-Only ロールのユーザーを作成し、このユーザー用の API トークンを生成します。
 
@@ -149,7 +152,7 @@ instances:
 
 [Agent の status サブコマンドを実行][8]し、Checks セクションの `purefb` を探します。
 
-### トラブルシューティング
+### ヘルプ
 
 #### ダッシュボードにアレイが表示されない
 
@@ -177,28 +180,28 @@ min_collection_interval: 600
 ```
 
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "purefb" >}}
 
 
-### イベント
+### ヘルプ
 
 PureFB インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 
 このインテグレーションによって提供されるサービスチェックのリストについては、[service_checks.json][10] を参照してください。
 
-## サポート
+## Agent
 
 サポートまたは機能リクエストをご希望の場合は、以下の方法で Pure Storage にお問い合わせください。
 * メール: pure-observability@purestorage.com
 * Slack: [Pure Storage Code// Observability Channel][11]
 
 [1]: https://www.purestorage.com/products.html
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://github.com/PureStorage-OpenConnect/pure-fb-openmetrics-exporter
 [4]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 [5]: https://docs.datadoghq.com/ja/agent/guide/community-integrations-installation-with-docker-agent
