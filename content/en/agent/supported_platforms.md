@@ -233,8 +233,8 @@ A check mark ({{< X >}}) indicates support for all minor and patch versions.
   <tr>
     <td>2012/R2</td>
     <td></td>
-    <td><= 6.46.0</td>
-    <td><= 7.46.0</td>
+    <td><= 6.49.1</td>
+    <td><= 7.49.1</td>
     <td></td>
   </tr>
   <tr>
@@ -248,15 +248,15 @@ A check mark ({{< X >}}) indicates support for all minor and patch versions.
     <td rowspan=3>Windows</td>
     <td>7</td>
     <td><i class='icon-check-bold'></td>
-    <td></td>
-    <td></td>
+    <td><= 6.45.1</td>
+    <td><= 7.45.1</td>
     <td></td>
   </tr>
   <tr>
     <td>8.1</td>
     <td></td>
-    <td><= 6.46.0</td>
-    <td><= 7.46.0</td>
+    <td><= 6.49.1</td>
+    <td><= 7.49.1</td>
     <td></td>
   </tr>
   <tr>
