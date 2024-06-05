@@ -108,6 +108,7 @@ Open your Tomcat startup script file, for example `setenv.sh` on Linux, and add:
 ```text
 CATALINA_OPTS="$CATALINA_OPTS -javaagent:/path/to/dd-java-agent.jar"
 ```
+Hi, according to this support ticket, windows services doesn't use setenv.bat to update env variables.link: https://datadog.zendesk.com/agent/tickets/1600757
 
 Or on Windows, `setenv.bat`:
 
