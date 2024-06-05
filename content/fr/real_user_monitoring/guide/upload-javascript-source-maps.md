@@ -162,6 +162,10 @@ L'exemple suivant représente une stack trace minifiée :
 
 {{< img src="real_user_monitoring/error_tracking/unminified_stacktrace.png" alt="Stack trace non minifiée pour le suivi des erreurs" >}}
 
+## Documentation complète (EN)
+
+Une [documentation complète de la commande sourcemap](https://github.com/DataDog/datadog-ci/tree/457d25821e838db9067dbe376d0f34fb1a197869/src/commands/sourcemaps) en anglais est disponible sur Github.
+
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
