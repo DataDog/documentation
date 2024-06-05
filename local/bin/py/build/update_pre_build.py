@@ -48,6 +48,7 @@ class Build:
         self.apw_integrations = [
             'ably',
             'akamai_mpulse',
+            'active_directory',
             'avmconsulting_workday',
             'bottomline_mainframe',
             'nerdvision'
