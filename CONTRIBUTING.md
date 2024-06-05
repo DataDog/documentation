@@ -175,7 +175,7 @@ See the documentation wiki to learn more about [image partials][6].
 
 ### Links
 
-Format links using numbered [reference-style links][30], and use relative paths for other pages within the docs site. For example, instead of embedding the URL directly in the text, write `read the [Getting Started with Azure][1]` and define the link reference at the bottom of the file like `[1]: /getting_started/azure/`.
+Format links using numbered [reference-style links][8], and use relative paths for other pages within the docs site. For example, instead of embedding the URL directly in the text, write `read the [Getting Started with Azure][1]` and define the link reference at the bottom of the file like `[1]: /getting_started/azure/`.
 
 Avoid vague link text, let readers know where you're sending them. Any sentence containing a link should read just as well if it didn't have the link.
 - **Recommended**: To learn more about tagging, see the `[Guide to Tagging]`.
@@ -204,3 +204,4 @@ Use text formatting to clarify and enhance content.
 [5]: https://github.com/DataDog/documentation/wiki/Translations-Overview
 [6]: https://github.com/DataDog/documentation/wiki/Import-an-Image-or-a-mp4-video
 [7]: https://docs.datadoghq.com/
+[8]: https://www.markdownguide.org/basic-syntax/#reference-style-links
