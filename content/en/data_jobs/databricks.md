@@ -150,7 +150,7 @@ In Datadog, view the [Data Jobs Monitoring][6] page to see a list of all your Da
 {{% djm-runtime-tagging %}}
 
 ### Aggregate cluster metrics from one-time job runs
-   This configuration is only applicable when you install the Datadog Agent with global init and create a new cluster for each task run.
+   This configuration is applicable if you want cluster resource utilization data about your jobs and create a new job and cluster for each run via the [one-time run API endpoint][8] (common when using orchestration tools outside of Databricks such as Airflow or Azure Data Factory).
 
    If you are submitting Databricks Jobs via the [one-time run API endpoint][8] (common when using orchestration tools outside of Databricks such as Airflow or Azure Data Factory), each job run will have a unique job ID. This can make it difficult to group and analyze cluster metrics for jobs that use ephemeral clusters. To aggregate cluster utilization from the same job and provide performance insights over time, you must set the `DD_JOB_NAME` variable inside the `spark_env_vars` of every `new_cluster` to the same value as your request payload's `run_name`.
 
