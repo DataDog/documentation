@@ -114,15 +114,15 @@ Recommendations enable you to change the status of a vulnerability, assign it to
 
 **Note:** To create Jira issues for vulnerabilities, you must configure the Jira integration, and have the `manage_integrations` permission. For detailed instructions, see the [Jira integration][3] documentation, as well as the [Role Based Access Control][4] documentation.
 
-## Enabling code security vulnerability detection 
+## Enabling Code Security 
 
-To enable the code security vulnerability detection capability, set the `DD_IAST_ENABLED` environment variable to `true` in your application configuration, and restart your service.
+To enable Code Security, set the `DD_IAST_ENABLED` environment variable to `true` in your application configuration, and restart your service.
 
 For detailed steps, see [Enabling code security vulnerability detection][2].
 
-### Disabling code security vulnerability detection 
+### Disabling Code Security 
 
-To disable code security vulnerability detection capability, remove the `DD_IAST_ENABLED=true` environment variable from your application configuration, and restart your service.
+To disable Code Security, remove the `DD_IAST_ENABLED=true` environment variable from your application configuration, and restart your service.
 
 If you need additional help, contact [Datadog support][1].
 
