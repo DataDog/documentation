@@ -104,11 +104,13 @@ When the [GitHub integration][7] is enabled, Code Security shows the first impac
 
 {{< img src="/security/application_security/code_security/vulnerability_code_snippet.png" alt="Code vulnerability snippet" style="width:100%;" >}}
 
-The [Vulnerability Explorer][1] offers remediation recommendations for detected vulnerabilities. 
+Detailed remediation steps are provided for each detected vulnerability.
 
 {{< img src="/security/application_security/code_security/remediation_recommendations.png" alt="Remediation recommendations" style="width:100%;" >}}
 
 Recommendations enable you to change the status of a vulnerability, assign it to a team member for review, and create a Jira issue for tracking.
+
+{{< img src="/security/application_security/code_security/vulnerability_jira_ticket.png" alt="creating a Jira ticket from a vulnerability" style="width:100%;" >}}
 
 **Note:** To create Jira issues for vulnerabilities, you must configure the Jira integration, and have the `manage_integrations` permission. For detailed instructions, see the [Jira integration][3] documentation, as well as the [Role Based Access Control][4] documentation.
 
