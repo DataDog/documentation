@@ -10,7 +10,7 @@ further_reading:
   text: 'Visualize your Error Tracking data in the Explorer'
 - link: 'https://github.com/DataDog/datadog-ci/tree/457d25821e838db9067dbe376d0f34fb1a197869/src/commands/sourcemaps'
   tag: 'Source Code'
-  text: 'Complete Sourcemaps reference'
+  text: 'Sourcemaps command reference'
 ---
 
 ## Overview
