@@ -9,6 +9,9 @@ further_reading:
 - link: "/real_user_monitoring/explorer/search/"
   tag: "Documentation"
   text: "Explore your views within Datadog"
+- link: "/dashboards/functions/"
+  tag: "Documentation"
+  text: "Add a function to your query"
 - link: "https://www.datadoghq.com/blog/datadog-geomaps/"
   tag: "Blog"
   text: "Use geomaps to visualize your app data by location"
@@ -35,25 +38,21 @@ With Analytics visualizations, you can:
 
 In [Analytics][1], customize your display by adding facets and measures to your search query. 
 
-1. Select a [view type][2].
+1. Select a [view event type][2].
 
-   {{< img src="product_analytics/analytics/view_type_selection.png" alt="View type selection" style="width:50%;">}}
+   {{< img src="product_analytics/analytics/view_type_selection.png" alt="View type selection." style="width:50%;">}}
 
 2. Choose a measure to graph the unique count.
 
-    {{< img src="product_analytics/analytics/measure_selection.png" alt="measure selection" style="width:50%;">}}
+    {{< img src="product_analytics/analytics/measure_selection.png" alt="Choose a measure to graph the unique count." style="width:50%;">}}
 
-4. Use a facet to split your graph.
+4. Choose a field to group the measure by.
 
-    {{< img src="real_user_monitoring/explorer/analytics/break_down.png" alt="split by facet RUM Analytics" style="width:50%;">}}
+    {{< img src="product_analytics/analytics/group_breakdown.png" alt="Group the measure by specific fields." style="width:50%;">}}
 
 5. Choose the time interval for your graph. Changing the global timeframe changes the list of available timestep values.
 
-    {{< img src="real_user_monitoring/explorer/analytics/roll_up.png" alt="rollup" style="width:50%;">}}
-
-6. Choose to display either the **top** or **bottom** values according to the selected measure.
-
-    {{< img src="real_user_monitoring/explorer/analytics/top_bottom.png" alt="top bottom button" style="width:50%;">}}
+    {{< img src="product_analytics/analytics/time_interval.png" alt="Choose a time interval for your graph." style="width:50%;">}}
 
 ## Further Reading
 
