@@ -48,7 +48,7 @@ Datadog ingests your cloud cost data and transforms it into queryable metrics. I
 
 ## Data Collected
 
-Cloud Cost Management collects data for the AWS, Azure, and Google Cloud integrations, as well as shared data. The table provides insights into the specific tags associated with each integration.
+Cloud Cost Management collects tags for the AWS, Azure, and Google Cloud integrations. This table provides a non-exhaustive list of out-of-the-box tags associated with each integration.
 
 {{< tabs >}}
 {{% tab "AWS" %}}
