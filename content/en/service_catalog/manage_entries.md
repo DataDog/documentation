@@ -100,7 +100,7 @@ extensions:
 ## Automate common workflows
 Use [Workflow Automation][14] and [App Builder][24] to automate end-to-end processes. Integrate them with Datadog's Service Catalog to enable dynamic and self-service workflows.
 
-{{< callout url="https://forms.gle/6Er52qd3BCERhotg7" d-toggle="modal" d_target="#signupModal" custom_class="sign-up-trigger">}}
+{{< callout url="https://forms.gle/6Er52qd3BCERhotg7" d_target="#signupModal" btn_hidden="false">}}
   Software Templates are in private beta. Complete the form to request access.
 {{< /callout >}} 
 
