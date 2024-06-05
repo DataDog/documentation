@@ -31,20 +31,19 @@ if (window.DD_RUM) {
             env,
             service: 'docs',
             version: CI_COMMIT_SHORT_SHA,
-            trackInteractions: true,
             trackUserInteractions: true,
             trackFrustrations: true,
             enableExperimentalFeatures: ["clickmap"],
             sessionSampleRate: 100,
             sessionReplaySampleRate: 50,
-            allowedTracingOrigins: [window.location.origin],
+            allowedTracingUrls: [window.location.origin],
             internalAnalyticsSubdomain: IA_SUBDOMAIN
         });
 
         window.DD_RUM.startSessionReplayRecording();
 
         if (branch) {
-            window.DD_RUM.addRumGlobalContext('branch', branch);
+            window.DD_RUM.setGlobalContextProperty('branch', branch);
         }
 
         if (env === 'live') {
