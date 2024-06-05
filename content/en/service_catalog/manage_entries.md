@@ -118,6 +118,8 @@ To use software templates in Datadog, create a git repository with the desired t
    - Use GitHub, Gitlab, or HTTP [workflow actions][28] to upload the project files to the repository.
    - Save the workflow.
 
+  {{< img src="tracing/service_catalog/templating-workflow.png" alt="Workflow for building software template automation" style="width:100%;" >}}
+
 3. Create your templating app:
    - Navigate to **Service Mgmt** > **App Builder** and select **New App**.
    - Enter a name and description, and use the drag-and-drop editor to create a form that collects the required parameters for your template.
@@ -129,8 +131,6 @@ To use software templates in Datadog, create a git repository with the desired t
    - Click **View App** to view the app on a standalone page, or **Add to a Dashboard** to place the app in a dashboard.
    - Navigate to **Service Mgmt** > **App Builder**, and select your app. Fill out the template form, and click the submit button.
    - Track the success of the workflow templating process in [Workflow Automation][26].
-
-  {{< img src="tracing/service_catalog/templating-workflow.png" alt="Workflow for building software template automation" style="width:100%;" >}}
 
   {{< img src="tracing/service_catalog/templating-app.png" alt="Application for managing software templates through App Builder" style="width:100%;" >}}
 
