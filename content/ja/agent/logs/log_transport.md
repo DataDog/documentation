@@ -115,12 +115,12 @@ TCP 転送を実行するには、Agent の[メインコンフィギュレーシ
 ```yaml
 logs_enabled: true
 logs_config:
-  use_tcp: true
+  force_use_tcp: true
 ```
 環境変数を伴った形でログを送信するには、以下の構成を行ってください。
 
 * `DD_LOGS_ENABLED=true`
-* `DD_LOGS_CONFIG_USE_TCP=true`
+* `DD_LOGS_CONFIG_FORCE_USE_TCP=true`
 
 デフォルトでは、Datadog Agent は TLS で暗号化された TCP を介して、ログを Datadog に送信します。これを実施するには、外部へ送信できる通信 (Datadog US サイトではポート `10516`、Datadog EU サイトではポート `443`) が必要です 。
 
