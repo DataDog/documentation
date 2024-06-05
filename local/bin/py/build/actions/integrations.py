@@ -824,7 +824,10 @@ class Integrations:
                     0,
                 )
             new_parts.append(part)
-        result = "## Data Collected".join(new_parts)
+        if len(new_parts) == 1:
+            result = "".join(new_parts)
+        else:
+            result = "## Data Collected".join(new_parts)
 
         if not exist_already and no_integration_issue:
             out_name = self.content_integrations_dir + new_file_name
