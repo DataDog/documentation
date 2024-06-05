@@ -5,7 +5,7 @@ kind: documentation
 
 ## Overview
 
-All issues in Error Tracking have a status to help you triage and prioritize issues or dismiss noise. There are three statuses:
+All issues in Error Tracking have a status to help you triage and prioritize issues or dismiss noise. There are four statuses:
 
 - **FOR REVIEW**: Ongoing and in need of attention because the issue is new or it's a regression.
 - **REVIEWED**: Triaged and needs to be fixed, either now or later. 
