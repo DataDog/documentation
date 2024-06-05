@@ -33,7 +33,7 @@ Some Datadog integrations don't work with Autodiscovery because they require eit
 To monitor integrations that are not compatible with Autodiscovery, you can use a Prometheus exporter in the pod to expose an HTTP endpoint, and then use the <a href="/integrations/openmetrics/">OpenMetrics integration</a> (which supports Autodiscovery) to find the pod and query the endpoint. 
 </div>
 
-## Setup your integration
+## Set up your integration
 
 Some integrations require setup steps, such as creating an access token or granting read permission to the Datadog Agent. Follow the instructions in the **Setup** section of your integration's documentation.
 
@@ -46,7 +46,7 @@ Some commonly-used integrations come with default configuration for Autodiscover
 
 Otherwise:
 
-1. Choose a configuration method (Kubernetes pod annotations, a local file, a ConfigMap, a key-value store, Datadog Operator manifest, Helm chart) that suits your use case.
+1. Choose a configuration method (Kubernetes pod annotations, a local file, a ConfigMap, a key-value store, a Datadog Operator manifest, or a Helm chart) that suits your use case.
 2. Reference the template format for your chosen method. Each format contains placeholders, such as `<CONTAINER_IDENTIFIER>`.
 3. [Supply values](#placeholder-values) for these placeholders.
 

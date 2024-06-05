@@ -30,7 +30,7 @@ All examples make use of Datadog's Autodiscovery feature, which allows you to de
 
 ## Redis integration for all Redis containers
 
-In this example scenario, you have a containerized environment in which you want to set up and configure the [Datadog-Redis integration][5] for all containers that match the name `redis`. You may have one container named `redis` and another named `my-custom-redis`, and you want to configure the Redis integration for **both** containers.
+In this example scenario, you have a containerized environment in which you want to set up and configure the [Datadog-Redis integration][5] for all containers that match the name `redis`. You have one container named `redis` and another named `my-custom-redis`, and you want to configure the Redis integration for **both** containers.
 
 The Redis integration comes with [default auto-configuration][4], but you want to additionally specify a `password` parameter and configure log collection. 
 
@@ -607,11 +607,11 @@ All of these examples use [Autodiscovery template variables][7]:
 [2]: /containers/docker/integrations
 [3]: /containers/kubernetes/integrations
 [4]: /containers/guide/auto_conf
-[5]: /integrations/redis
+[5]: /integrations/redisdb
 [6]: https://github.com/DataDog/integrations-core/blob/master/redisdb/datadog_checks/redisdb/data/conf.yaml.example
 [7]: /containers/guide/template_variables/
 [8]: /integrations/apache
 [9]: /integrations/http_check/
 [10]: https://github.com/DataDog/integrations-core/blob/master/apache/datadog_checks/apache/data/conf.yaml.example
-[11]: /developers/write_agent_check/#collection-interval
+[11]: /developers/write_agent_check/#updating-the-collection-interval
 [12]: https://github.com/DataDog/integrations-core/blob/master/http_check/datadog_checks/http_check/data/conf.yaml.example
