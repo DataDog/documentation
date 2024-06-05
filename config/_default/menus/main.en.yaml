@@ -4660,7 +4660,7 @@ menu:
       parent: cspm_frameworks_benchmarks
       identifier: cspm_kspm
       weight: 103
-    - name: Explore Misconfigurations
+    - name: Investigate Misconfigurations
       url: /security/cloud_security_management/misconfigurations/findings
       parent: cspm
       identifier: cspm_findings_explorer
