@@ -105,33 +105,30 @@ Use [Workflow Automation][14] and [App Builder][24] to automate end-to-end proce
 {{< /callout >}} 
 
 ### Create software template workflows using Cookiecutter
-To use software templates in Datadog, create a git repository with the desired template. Then, navigate to the [Workflow Automation][26] page to configure the template in Datadog. A common choice for templating is [Cookiecutter][25], an open source project for project templates and auto-generating new projects. Check out [this gist](https://gist.github.com/enbashi/366c62ee8c5fc350d52ddabc867602d4#file-readme-md) for a quick-start guide or follow the steps below.
-1. **Create your templating workflow**:
-   - From the Workflow Automation page, click **New Workflow**
-   - Enter a name and any tags for the workflow
-   - Define the input parameters that you want to collect from users for your template
+To use software templates in Datadog, create a git repository with the desired template. Then, navigate to the [Workflow Automation][26] page to configure the template in Datadog. A common choice for templating is [Cookiecutter][25], an open source project for project templates and auto-generating new projects. Check out [this gist](https://gist.github.com/enbashi/366c62ee8c5fc350d52ddabc867602d4#file-readme-md) for a quick-start guide, or complete the following steps.
+
+1. [Create a workflow][27] for your template:
+   - From the [Workflow Automation][26] page, click **New Workflow**. 
+   - Enter a name, add relevant tags, and define the input parameters you want to collect from users.
   
-2. **Add and configure the templating workflow steps**:
-   - Download the template repository files from the git repository of your choice. You can use the Github, Gitlab, or HTTP actions in worklow editor to retrieve your template files
-   - Generate the new project files from the template via Cookiecutter
-   - One way to apply Cookiecutter is by creating a lambda function to perform Cookiecutter and calling the lambda function via the **Invoke Lambda Function**
-   - Upload the newly created project files back to the repository, again using the Github, Gitlab, or HTTP actions
-   - Save the workflow
+2. Configure the templating workflow:
+   - Use GitHub, Gitlab, or HTTP [workflow actions][28] to retrieve your template files.
+   - Use Cookiecutter to generate the project files from the template.
+     - Tip: Create and invoke an [AWS lambda function][29] to generate the project with Cookiecutter.
+   - Use GitHub, Gitlab, or HTTP [workflow actions][28] to upload the project files to the repository.
+   - Save the workflow.
 
-3. **Create your templating app**:
-   - Navigate from Workflow Management to App Builder and click **New App**
-   - Enter a relevant name and description for your app
-   - Use the drag-and-drop editor to create a form that collects the required parameters for the template you are using
-   - Create a **Query** using the **Trigger workflow** action that will call your templating workflow & pass in the relevant parameters
-   - Add a button that submits the form, triggers the workflow created in Step 1, and passes in the parameters for the template
-   - Save & publish the app
+3. Create your templating app:
+   - Navigate to **Service Mgmt** > **App Builder** and select **New App**.
+   - Enter a name and description, and use the drag-and-drop editor to create a form that collects the required parameters for your template.
+   - Select **New Query**, and use the **Trigger workflow** action to call your templating workflow and pass in the relevant parameters.
+   - Create a **Buttom** that submits the form, triggers your workflow, and passes in the parameters for the template.
+   - Save and publish the app.
 
-4. **Run your new application & workflow**
-   - Click **View App** to view the app on a standalone page or **Add to a Dashboard** to place the app into a dashboard
-   - Navigate to your newly created App
-   - Fill out the template form you setup
-   - Submit the button
-   - Track the success of the workflow templating process in Workflow Automation
+4. Run your application and workflow:
+   - Click **View App** to view the app on a standalone page, or **Add to a Dashboard** to place the app in a dashboard.
+   - Navigate to **Service Mgmt** > **App Builder**, and select your app. Fill out the template form, and click the submit button.
+   - Track the success of the workflow templating process in [Workflow Automation][26].
 
   {{< img src="tracing/service_catalog/templating-workflow.png" alt="Workflow for building software template automation" style="width:100%;" >}}
 
@@ -187,3 +184,6 @@ With [Service Catalog metadata schema 2.2][19], you can specify the type and lan
 [24]: /service_management/app_builder/
 [25]: https://www.cookiecutter.io/
 [26]: https://app.datadoghq.com/workflow
+[27]: /service_management/workflows/build/#create-a-custom-workflow
+[28]: /service_management/workflows/actions_catalog/
+[29]: /service_management/workflows/actions_catalog/aws_lambda_invoke_lambda/
