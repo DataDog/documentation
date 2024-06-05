@@ -191,7 +191,7 @@ Once you have created a `README.md` file, add the following sections as H2s (`##
 | Data Collected  | Specify the types of data collected by your integration (if applicable), including metrics, events, service checks, and logs. Metrics added to the `metadata.csv` file automatically appear in this tab. <br><br> If your offering does not provide any of this data, you do not need to add a Data Collected section. |
 | Support | Provide contact information that includes an email to your Support team, a link to your company's documentation or blog post, and additional help information in a bulleted list format. |
 
-When adding links to the `README.md` file, format them using [footnote-style references][30]. For example, instead of embedding the URL directly in the text, write `see the [official Datadog documentation][1]` and define the link reference at the bottom of the file like `[1]: https://docs.datadoghq.com/`.
+When adding links to the `README.md` file, format them using [reference-style links][30]. For example, instead of embedding the URL directly in the text, write `see the [official Datadog documentation][1]` and define the link reference at the bottom of the file like `[1]: https://docs.datadoghq.com/`.
 
 ### Media carousel
 
@@ -328,4 +328,4 @@ Datadog offers GTM support for Marketplace listings only. To learn more about th
 [27]: https://docs.datadoghq.com/developers/integrations/agent_integration/
 [28]: https://docs.datadoghq.com/developers/integrations/marketplace_offering/
 [29]: https://github.com/
-[30]: https://www.easybib.com/guides/citation-guides/chicago-turabian/footnotes/
+[30]: https://www.markdownguide.org/basic-syntax/#reference-style-links
