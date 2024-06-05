@@ -156,37 +156,19 @@ If you use the `{{#is_renotify}}` block, the original notification message is al
 Learn how to configure your monitors for those use cases in the [example section][13].
 
 
-## Define permissions and audit notifications
+## Audit notifications
 
-### Modifications
-
-An [event][14] is created anytime a monitor is created, modified, silenced, or deleted. Set the `Notify` option to notify team members, chat services, and the monitor creator of these events.
-
-### Permissions
-
-All users can read all monitors, regardless of the role they are associated with.
-
-By default, only users attached to roles with the [Monitors Write permission][15] can edit monitors. [Datadog Admin Role and Datadog Standard Role][16] have the Monitors Write permission by default. If your organization uses [Custom Roles][17], other custom roles may have the Monitors Write permission.
-
-You can further restrict your monitor by specifying a list of [roles][18] allowed to edit it. The monitor's creator can always edit the monitor.
-
-  {{< img src="monitors/notifications/monitor_rbac_restricted.jpg" alt="RBAC Restricted Monitor" style="width:90%;" >}}
-
-Editing includes any updates to the monitor configuration, deleting the monitor, and muting the monitor for any amount of time.
-
-**Note**: The limitations are applied both in the UI and API.
-
-For more information on setting up RBAC for Monitors and migrating monitors from the locked setting to using role restrictions, see [How to set up RBAC for Monitors][19].
+An audit [event][14] is created anytime a monitor is created, modified, silenced, or deleted. Under the **Define permissions and audit notifications** section, select **Notify** to alert team members, chat services, and the monitor creator of these events.
 
 ## Test notifications
 
-Test notifications are supported for the [monitor types][20]: host, metric, anomaly, outlier, forecast, logs, rum, apm, integration (check only), process (check only), network (check only), custom check, event, and composite.
+Test notifications are supported for the [monitor types][15]: host, metric, anomaly, outlier, forecast, logs, rum, apm, integration (check only), process (check only), network (check only), custom check, event, and composite.
 
 ### Run the test
 
 1. After defining your monitor, test the notifications with the **Test Notifications** button at the bottom right of the monitor page.
 
-2. From the test notifications pop-up, choose the monitor case to test. You can only test states that are available in the monitor's configuration for the thresholds specified in the alerting conditions. [Recovery thresholds][21] are an exception, as Datadog sends a recovery notification once the monitor either is no longer in alert, or it has no warn conditions.
+2. From the test notifications pop-up, choose the monitor case to test. You can only test states that are available in the monitor's configuration for the thresholds specified in the alerting conditions. [Recovery thresholds][16] are an exception, as Datadog sends a recovery notification once the monitor either is no longer in alert, or it has no warn conditions.
 
     {{< img src="monitors/notifications/test-notif-select.png" alt="Test the notifications for this monitor" style="width:70%;" >}}
 
@@ -225,10 +207,5 @@ Message variables auto-populate with a randomly selected group based on the scop
 [12]: /monitors/notify/variables/?tabs=is_alert#attribute-and-tag-variables
 [13]: /monitors/notify/variables/?tab=is_renotify#examples
 [14]: /events/
-[15]: /account_management/rbac/permissions/#monitors
-[16]: /account_management/rbac/?tab=datadogapplication#datadog-default-roles
-[17]: /account_management/rbac/?tab=datadogapplication#custom-roles
-[18]: /account_management/rbac/?tab=datadogapplication
-[19]: /monitors/guide/how-to-set-up-rbac-for-monitors/
-[20]: /monitors/types
-[21]: /monitors/guide/recovery-thresholds/
+[15]: /monitors/types
+[16]: /monitors/guide/recovery-thresholds/

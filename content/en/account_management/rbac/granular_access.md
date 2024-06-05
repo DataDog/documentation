@@ -15,7 +15,7 @@ Use the different principals to control access patterns in your organization and
 | Supported resources with granular access control | Team-based access | Role-based access | User / service account-based access |
 |--------------------------------------------------|-------------------|-------------------|-------------------------------------|
 | [Dashboards][2]                                  | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
-| [Monitors][3]                                    |                   | {{< X >}}         |                                     |
+| [Monitors][3]                                    | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Notebooks][4]                                   | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Powerpacks][8]                                  | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Security rules][5]                              | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
@@ -28,7 +28,7 @@ A user with the `user_access_manage` permission can elevate their access to any 
 
 [1]: /account_management/teams/
 [2]: /dashboards/configure/#permissions
-[3]: /monitors/notify/#permissions
+[3]: /monitors/configure/#permissions
 [4]: /notebooks/#limit-edit-access
 [5]: /security/detection_rules/#limit-edit-access
 [6]: /service_management/service_level_objectives/#permissions
