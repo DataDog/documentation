@@ -37,7 +37,7 @@ Supported test frameworks:
 
 | Test Framework | Version | Notes |
 |---|---|---|
-| Jest | >= 24.8.0 | Only `jsdom` (in the `jest-environment-jsdom` package) and `node` (in the `jest-environment-node` package) are supported as test environments. Custom environments like `@jest-runner/electron/environment` in `jest-electron-runner` are not supported.<br><br>Only [`jest-circus`][1] is supported as [`testRunner`][2].<br><br>Jest >= 28 is only supported from `dd-trace>=2.7.0`.<br><br>[`test.concurrent`](#jests-testconcurrent) is not supported. |
+| Jest | >= 24.8.0 | Only `jsdom` (in the `jest-environment-jsdom` package) and `node` (in the `jest-environment-node` package) are supported as test environments. Custom environments like `@jest-runner/electron/environment` in `jest-electron-runner` are not supported.<br><br>Only [`jest-circus`][1] is supported as [`testRunner`][2].<br><br>[`test.concurrent`](#jests-testconcurrent) is not supported. |
 | Mocha | >= 5.2.0 | Mocha >= 9.0.0 has [partial support](#known-limitations). |
 | Cucumber | >= 7.0.0 |
 | Cypress | >= 6.7.0 |
