@@ -19,12 +19,12 @@ title: Historial de versiones de notebooks
 El historial de versiones rastrea automáticamente los cambios realizados en tus notebooks y guarda las versiones anteriores para que puedas ver exactamente qué se cambió y quién lo hizo. Puedes ver las versiones anteriores, restaurar tu notebook a cualquier versión guardada o clonar una versión para crear una nueva notebook.
 
 ## Requisitos previos
-Por defecto, todos los notebooks tienen un periodo de retención del historial de versiones de 30 días. Para poder ver las versiones anteriores, debes realizar una modificación dentro de los últimos 30 días. 
+Por defecto, todos los notebooks tienen un periodo de conservación del historial de versiones de 30 días. Para poder ver las versiones anteriores, debes realizar una modificación dentro de los últimos 30 días. 
 
 Con [Audit Trail][1] activado, el historial de versiones se amplía de 30 a 90 días. Una vez activado Audit Trail, podrás ver todas las modificaciones realizadas durante los últimos 30 a 90 días en todas las versiones de notebooks existentes. 
 
 ## Ver versiones
-En un notebook, haz clic en el icono **Configure** (Configurar) y luego en **Version History** (Historial de versiones) para abrir el panel lateral del historial de versiones. Si no se realizaron modificaciones durante el periodo de retención, la opción para consultar el historial de versiones estará desactivada.
+En un notebook, haz clic en el icono **Configure** (Configurar) y luego en **Version History** (Historial de versiones) para abrir el panel lateral del historial de versiones. Si no se realizaron modificaciones durante el periodo de conservación, la opción para consultar el historial de versiones estará desactivada.
 
 {{< img src="/notebooks/guide/version_history/disabled_version_history.png" alt="Opción de consulta del historial de versiones de un notebook desactivada" style="width:100%;" >}}
 
@@ -46,12 +46,12 @@ Existen dos formas de restaurar tu notebook a una versión anterior.
 - En el panel lateral del historial de versiones, después de elegir la versión que quieres restaurar, haz clic en el menú con los tres puntos situado a la derecha del perfil de usuario y selecciona **Restore this version** (Restaurar esta versión).
 - Cuando se abre el panel lateral del historial de versiones, aparece un botón en la parte superior de la página para **Restore this version** (Restaurar esta versión).
 
-Al restaurar una versión, se actualiza el notebook a esa versión para todos los usuarios y se añade una nueva entrada al historial de versiones que muestra la restauración. Esto no sobrescribe el historial de tus cambios, por lo que todavía puedes previsualizar y restaurar cualquier versión dentro de tu periodo de retención. 
+Al restaurar una versión, se actualiza el notebook a esa versión para todos los usuarios y se añade una nueva entrada al historial de versiones que muestra la restauración. Esto no sobrescribe el historial de tus cambios, por lo que todavía puedes previsualizar y restaurar cualquier versión dentro de tu periodo de conservación. 
 
 ## Clonar una versión
 Si no quieres cambiar tu actual notebook pero te gustaría crear una copia de una versión anterior, puedes crear un clon a partir de cualquier versión de tu historial de versiones. En el panel lateral del historial de versiones, después de elegir la versión que quieres copiar, haz clic en el menú con los tres puntos situado a la derecha del perfil de usuario y selecciona **Clone** (Clonar).
 
-## Retención del historial de versiones
+## Conservación del historial de versiones
 
 |                          | Período de conservación    |
 | -----------------------  | ------- |
