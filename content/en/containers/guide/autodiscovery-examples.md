@@ -34,7 +34,7 @@ In this example scenario, you have a containerized environment in which you want
 
 The Redis integration comes with [default auto-configuration][4], but you want to additionally specify a `password` parameter and configure log collection. 
 
-If you were to configure this integration **on a host**, you could reference [`redisdb.d/conf.yaml.example`][6] for parameters and create a `conf.yaml` file that contains the following:
+Hypothetically, if you were to configure this integration **on a host**, you could reference [`redisdb.d/conf.yaml.example`][6] for parameters and create a `conf.yaml` file that contains the following:
 
 ```yaml
 init_config:
@@ -295,7 +295,7 @@ In this example scenario, you have a containerized environment in which you want
 
 The Apache integration comes with [default auto-configuration][4], but you want to add an additional configuration: you want to set the [collection interval][11] to 30 seconds.
 
-If you were to configure this integration **on a host**, you could reference the configuration options in [`apache.d/conf.yaml.example`][10] and [`http_check.d/conf.yaml.example`][12]. You would create two `conf.yaml` files:
+Hypothetically, if you were to configure this integration **on a host**, you could reference the configuration options in [`apache.d/conf.yaml.example`][10] and [`http_check.d/conf.yaml.example`][12]. You would create two `conf.yaml` files:
 
 {{< code-block lang="yaml" filename="apache.d/conf.yaml" >}}
 init_config:
@@ -447,8 +447,6 @@ instances:
 
 * Finally, mount the host `conf.d/` folder to the containerized Agent `conf.d/` folder.
 
-[1]: https://github.com/DataDog/integrations-core/blob/master/apache/datadog_checks/apache/data/conf.yaml.example
-[2]: /agent/guide/ad_identifiers/
 {{% /tab %}}
 {{% tab "ConfigMap" %}}
 
@@ -602,6 +600,10 @@ datadog:
 
 All of these examples use [Autodiscovery template variables][7]:
 - `%%host%%` is dynamically populated with the container's IP.
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /getting_started/containers/autodiscovery
 [2]: /containers/docker/integrations
