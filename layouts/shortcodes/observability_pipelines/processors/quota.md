@@ -10,7 +10,7 @@ To set up the quota processor:
 1. In the **Unit for quota** dropdown menu, select if you want to measure the quota by the number of `Events` or by the `Volume` in bytes.
 1. Set the daily quota limit and select the unit of magnitude for your desired quota.
 1. Check the **Drop events** checkbox if you want to drop all events when your quota is met. Leave it unchecked if you plan to set up a [monitor][5001] that sends an alert when the quota is met.
-    - If logs that match the quota filter are received after the daily quota has been met and the **Drop events** option is selected, then those logs are dropped. Only logs that did not match the filter query are sent to the next step in the pipeline.
+    - If logs that match the quota filter are received after the daily quota has been met and the **Drop events** option is selected, then those logs are dropped. In this case, only logs that did not match the filter query are sent to the next step in the pipeline.
     - If logs that match the quota filter are received after the daily quota has been met and the **Drop events** option is not selected, then those logs and the logs that did not match the filter query are sent to the next step in the pipeline.
 
 **Notes**:
