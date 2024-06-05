@@ -28,7 +28,7 @@ Name the key to describe its purpose, for example, 'Automation Key,' and assign 
 
 When you're done, click **Save key** to create a new API key. Make sure to write down the key in a secure location so you can use it later.
 
-If you have any questions or issues with creating an API key, [contact Cloudcraft's support team via the in-app beacon][5].
+If you have any questions or issues with creating an API key, [contact Cloudcraft's support team through the in-app beacon][5].
 
 [1]: /cloudcraft/api/
 [2]: /cloudcraft/account-management/roles-and-permissions/
