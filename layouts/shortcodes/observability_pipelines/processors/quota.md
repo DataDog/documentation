@@ -13,8 +13,4 @@ To set up the quota processor:
     - If logs that match the quota filter are received after the daily quota has been met and the **Drop events** option is selected, then those logs are dropped. In this case, only logs that did not match the filter query are sent to the next step in the pipeline.
     - If logs that match the quota filter are received after the daily quota has been met and the **Drop events** option is not selected, then those logs and the logs that did not match the filter query are sent to the next step in the pipeline.
 
-**Notes**:
-
-
-
 [5001]: /monitors/types/metric/?tab=threshold
