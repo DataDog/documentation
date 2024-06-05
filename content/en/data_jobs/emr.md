@@ -52,6 +52,10 @@ When you create a new EMR cluster in the [Amazon EMR console][4], add a bootstra
    SECRET_NAME=datadog/dd_api_key
    DD_API_KEY=$(aws secretsmanager get-secret-value --secret-id $SECRET_NAME | jq -r .SecretString | jq -r '.["dd_api_key"]')
 
+   # Optional parameters
+   # Uncomment the following line to allow adding init script logs when reporting a failure back to Datadog. A failure is reported when the init script fails to start the Datadog Agent successfully.
+   # export DD_DJM_ADD_LOGS_TO_FAILURE_REPORT=true
+
    # Download and run the latest init script
    DD_SITE=$DD_SITE DD_API_KEY=$DD_API_KEY bash -c "$(curl -L https://dd-data-jobs-monitoring-setup.s3.amazonaws.com/scripts/emr/emr_init_latest.sh)" || true
 
@@ -104,7 +108,9 @@ spark-submit \
 
 In Datadog, view the [Data Jobs Monitoring][8] page to see a list of all your data processing jobs.
 
-## Tag spans at runtime
+## Advanced Configuration
+
+### Tag spans at runtime
 
 {{% djm-runtime-tagging %}}
 
