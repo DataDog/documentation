@@ -48,7 +48,7 @@ You can choose to install the Agent globally, or on a specific Databricks cluste
    # Required parameters
    export DD_API_KEY=<YOUR API KEY>
    export DD_SITE=<YOUR DATADOG SITE>
-   export DATABRICKS_WORKSPACE=<YOUR WORKSPACE NAME> 
+   export DATABRICKS_WORKSPACE="<YOUR WORKSPACE NAME>"
 
    # Download and run the latest init script
    bash -c "$(curl -L https://dd-data-jobs-monitoring-setup.s3.amazonaws.com/scripts/databricks/databricks_init_latest.sh)" || true
@@ -67,7 +67,7 @@ Provide the values for the init script parameters at the beginning of the global
 ```bash
 export DD_API_KEY=<YOUR API KEY>
 export DD_SITE=<YOUR DATADOG SITE>
-export DATABRICKS_WORKSPACE=<YOUR WORKSPACE NAME>
+export DATABRICKS_WORKSPACE="<YOUR WORKSPACE NAME>"
 ```
 
 Optionally, you can also set other init script parameters and Datadog environment variables here, such as `DD_ENV` and `DD_SERVICE`. The script can be configured using the following parameters:
@@ -76,10 +76,10 @@ Optionally, you can also set other init script parameters and Datadog environmen
 |--------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|
 | DD_API_KEY               | Your [Datadog API key][1].                                                                                                                                        |         |
 | DD_SITE                  | Your [Datadog site][2].                                                                                                                                           |         |
-| DATABRICKS_WORKSPACE     | Name of your Databricks Workspace. It should match the name provided in the [Datadog-Databricks integration step](#configure-the-datadog-databricks-integration). Make sure to enclose the name in double quotes if it contains whitespace. |         |
+| DATABRICKS_WORKSPACE     | Name of your Databricks Workspace. It should match the name provided in the [Datadog-Databricks integration step](#configure-the-datadog-databricks-integration). Enclose the name in double quotes if it contains whitespace. |         |
 | DRIVER_LOGS_ENABLED      | Collect spark driver logs in Datadog.                                                                                                                          | false   |
 | WORKER_LOGS_ENABLED      | Collect spark workers logs in Datadog.                                                                                                                         | false   |
-| DD_DJM_ADD_LOGS_TO_FAILURE_REPORT      | Whether or not to include init script logs when reporting a failure back to Datadog. A failure is reported when the init script fails to start the Datadog Agent successfully. | false |
+| DD_DJM_ADD_LOGS_TO_FAILURE_REPORT      | Include init script logs for debugging when reporting a failure back to Datadog. | false |
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: /getting_started/site/
@@ -108,14 +108,14 @@ Optionally, you can also set other init script parameters and Datadog environmen
 
 1. In Databricks, on the cluster configuration page, click the **Advanced options** toggle.
 2. At the bottom of the page, go to the **Spark** tab.
-   {{< img src="data_jobs/databricks/configure-databricks-cluster-init-script.png" alt="Databricks UI, cluster configuration advanced options, Spark tab. A textbox titled 'Environment variables' contains values for DD_API_KEY and DD_SITE." style="width:100%;" >}}
+   {{< img src="data_jobs/databricks/configure-databricks-cluster-init-script-quoted.png" alt="Databricks UI, cluster configuration advanced options, Spark tab. A textbox titled 'Environment variables' contains values for DD_API_KEY and DD_SITE." style="width:100%;" >}}
 
    In the **Environment variables** textbox, provide the values for the init script parameters.
 
    ```text
    DD_API_KEY=<YOUR API KEY>
    DD_SITE=<YOUR DATADOG SITE>
-   DATABRICKS_WORKSPACE=<YOUR WORKSPACE NAME>
+   DATABRICKS_WORKSPACE="<YOUR WORKSPACE NAME>"
    ```
 
    Optionally, you can also set other init script parameters and Datadog environment variables here, such as `DD_ENV` and `DD_SERVICE`. The script can be configured using the following parameters:
@@ -124,10 +124,10 @@ Optionally, you can also set other init script parameters and Datadog environmen
 |--------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|
 | DD_API_KEY               | Your [Datadog API key][1].                                                                                                                                        |         |
 | DD_SITE                  | Your [Datadog site][2].                                                                                                                                           |         |
-| DATABRICKS_WORKSPACE     | Name of your Databricks Workspace. It should match the name provided in the [Datadog-Databricks integration step](#configure-the-datadog-databricks-integration). Make sure to enclose the name in double quotes if it contains whitespace. |         |
+| DATABRICKS_WORKSPACE     | Name of your Databricks Workspace. It should match the name provided in the [Datadog-Databricks integration step](#configure-the-datadog-databricks-integration). Enclose the name in double quotes if it contains whitespace. |         |
 | DRIVER_LOGS_ENABLED      | Collect spark driver logs in Datadog.                                                                                                                          | false   |
 | WORKER_LOGS_ENABLED      | Collect spark workers logs in Datadog.                                                                                                                         | false   | 
-| DD_DJM_ADD_LOGS_TO_FAILURE_REPORT      | Whether or not to include init script logs when reporting a failure back to Datadog. A failure is reported when the init script fails to start the Datadog Agent successfully. | false |
+| DD_DJM_ADD_LOGS_TO_FAILURE_REPORT      | Include init script logs for debugging when reporting a failure back to Datadog. | false |
 
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
@@ -180,7 +180,7 @@ In Datadog, view the [Data Jobs Monitoring][6] page to see a list of all your Da
          }
       ]
    }
-   {{< / highlight >}}
+   {{< /highlight >}}
 
 ## Further Reading
 
