@@ -32,7 +32,7 @@ algolia:
 
 ## Overview
 
-If a metric is not submitted from one of the [more than {{< translate key="integration_count" >}} Datadog integrations][1] it's considered a custom metric. Custom metrics help you track your application KPIs: number of visitors, average customer basket size, request latency, or performance distribution for a custom algorithm. Certain [standard integrations](#standard-integrations) can also potentially emit customer metrics. 
+If a metric is not submitted from one of the [more than {{< translate key="integration_count" >}} Datadog integrations][1] it's considered a custom metric. Custom metrics help you track your application KPIs: number of visitors, average customer basket size, request latency, or performance distribution for a custom algorithm. Certain [standard integrations](#standard-integrations) can also potentially emit custom metrics. 
 
 A custom metric is identified by **a unique combination of a metric's name and tag values (including the host tag)**. In general, any metric you send using [DogStatsD][3] or through a [custom Agent Check][4] is a custom metric.
 

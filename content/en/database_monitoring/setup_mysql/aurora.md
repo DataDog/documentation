@@ -39,7 +39,7 @@ Data security considerations
 
 ## Configure MySQL settings
 
-Configure the following in the [DB Parameter Group][3] and then **restart the server** for the settings to take effect:
+Configure the following in the [DB cluster parameter group][3] and then **restart the server** for the settings to take effect:
 
 {{< tabs >}}
 {{% tab "MySQL 5.6" %}}

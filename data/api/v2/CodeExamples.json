@@ -869,6 +869,13 @@
       "description": "Mute or unmute a batch of findings returns \"OK\" response"
     }
   ],
+  "TestSecurityMonitoringRule": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Test a rule returns \"OK\" response"
+    }
+  ],
   "UpdateSecurityMonitoringRule": [
     {
       "group": "security_monitoring",

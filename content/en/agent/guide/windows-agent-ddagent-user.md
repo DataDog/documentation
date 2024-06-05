@@ -13,6 +13,7 @@ By default, the Windows Agent uses the `ddagentuser` account created at install 
   * Necessary to access WMI information
   * Necessary to access Windows performance counter data
 * It becomes a member of the "Event Log Readers" group
+* It becomes a member of the "Performance Log Users" group (since 7.51)
 
 **Note**: The installer doesn't add the account it creates to the `Users` groups by default. In rare cases, you may encounter permission issues. If so, manually add the created user to the `Users` group.
 

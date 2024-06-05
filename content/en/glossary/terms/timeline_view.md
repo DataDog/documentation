@@ -1,7 +1,7 @@
 ---
 title: timeline view
 core_product:
-  - code profiling
+  - continuous profiler
 ---
 
 A <a href="/profiler/profile_visualizations/#timeline-view">timeline view</a> is the equivalent of a flame graph, with a distribution over time. 

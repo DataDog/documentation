@@ -9,6 +9,9 @@ further_reading:
 - link: "https://app.datadoghq.com/release-notes?category=Software%20Delivery"
   tag: "Release Notes"
   text: "Check out the latest Software Delivery releases! (App login required)"
+- link: "https://www.datadoghq.com/blog/dora-metrics-software-delivery/"
+  tag: "Blog"
+  text: "Best practices for using DORA metrics to improve software delivery"
 - link: "/continuous_delivery/deployments"
   tag: "Documentation"
   text: "Learn about Deployment Visibility"
@@ -24,9 +27,7 @@ further_reading:
 <div class="alert alert-warning">DORA Metrics is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
-{{< callout url="#" btn_hidden="true" header="Try the Beta!" >}}
-DORA Metrics is in public beta.
-{{< /callout >}}
+<div class="alert alert-warning">DORA Metrics is in public beta.</div>
 
 ## Overview
 

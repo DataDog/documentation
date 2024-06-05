@@ -152,7 +152,7 @@ See [privacy options specific to Session Replay][12].
 [14]: /real_user_monitoring/explorer/search/
 [15]: /real_user_monitoring/guide/proxy-rum-data/?tab=npm
 [16]: /real_user_monitoring/reactnative/advanced_configuration/#modify-or-drop-rum-events
-[17]: /real_user_monitoring/browser/#configuration
+[17]: /real_user_monitoring/browser/setup/#configuration
 [18]: /account_management/api-app-keys/#add-an-api-key-or-client-token
 [19]: /real_user_monitoring/guide/identify-bots-in-the-ui/#filter-out-bot-sessions-on-intake
 [20]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner/configuration

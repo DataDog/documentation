@@ -21,6 +21,8 @@ further_reading:
 - link: "/agent/configuration/network#configure-ports"
   tag: "Documentation"
   text: "Configure inbound ports"
+algolia:
+  tags: ['uninstall', 'uninstalling']
 ---
 
 ## Setup
@@ -495,8 +497,8 @@ After configuration is complete, [restart the Agent][11].
 [1]: https://app.datadoghq.com/account/settings/agent/latest?platform=windows
 [2]: /agent/supported_platforms/?tab=windows
 [3]: /agent/faq/windows-agent-ddagent-user/
-[4]: https://docs.datadoghq.com/agent/guide/windows-agent-ddagent-user/#installation-in-a-domain-environment
-[5]: https://docs.datadoghq.com/agent/guide/windows-agent-ddagent-user/#installation-with-group-policy
+[4]: /agent/guide/windows-agent-ddagent-user/#installation-in-a-domain-environment
+[5]: /agent/guide/windows-agent-ddagent-user/#installation-with-group-policy
 [6]: /agent/guide/datadog-agent-manager-windows/
 [7]: /integrations/wmi_check/
 [8]: https://app.datadoghq.com/monitors#create/integration

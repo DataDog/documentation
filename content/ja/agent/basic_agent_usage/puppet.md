@@ -208,7 +208,7 @@ Datadog Agent Network Performance Monitoring (NPM) 機能を有効にするに�
 
 ```conf
 class { 'datadog_agent::system_probe':
-    network_enabled => true, 
+    network_enabled => true,
 }
 ```
 
@@ -218,7 +218,7 @@ Datadog Agent Universal Service Monitoring (USM) を有効にするには、`dat
 
 ```conf
 class { 'datadog_agent::system_probe':
-    service_monitoring_enabled => true, 
+    service_monitoring_enabled => true,
 }
 ```
 
@@ -280,7 +280,7 @@ datadog_agent::tags:
 ```conf
 class { "datadog_agent":
   api_key            => "<YOUR_DD_API_KEY>",
-  facts_to_tags      => ["osfamily","networking.domain","my_custom_fact"],
+  facts_to_tags      => ["os.family","networking.domain","my_custom_fact"],
 }
 ```
 
