@@ -7,7 +7,7 @@ Some of these guidelines are enforced by [the Datadog docs implementation of the
 ## Language
 
 - Use the American English **en_US** dialect when writing documentation, code comments, [wiki entries][1], and more in the English language. This is the default language for all `*.md` files.  
-- Use the standard French **fr_FR** dialect when writing in the French language. This is the language in all `*.fr.md` files.
+- Don't contribute updates to the translated content (fr, ja, ko), as the content in github is not the managed source. If there is a mistake in the English, fix the English. If the mistake is only in the translated version, let us know and we will get it addressed in the source.
 
 ## General principles
 
