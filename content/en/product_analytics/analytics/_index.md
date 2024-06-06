@@ -22,7 +22,7 @@ further_reading:
 
 ## Overview
 
-The Analytics page extends the RUM Explorer page with views data aggregation for understanding how your product is being used. You can control:
+The Analytics page contains views data aggregation for understanding how your product is being used. You can control:
 
 * The event type (Sessions, Views, or Actions) to see views by.
 * The query that filters the set of views to analyze.
@@ -46,7 +46,7 @@ In [Analytics][1], customize your display by adding facets and measures to your 
 
     {{< img src="product_analytics/analytics/measure_selection.png" alt="Choose a measure to graph the unique count." style="width:50%;">}}
 
-4. Choose a field to group the measure by.
+4. Choose a field to [group][3] the measure by.
 
     {{< img src="product_analytics/analytics/group_breakdown.png" alt="Group the measure by specific fields." style="width:50%;">}}
 
@@ -60,3 +60,4 @@ In [Analytics][1], customize your display by adding facets and measures to your 
 
 [1]: https://app.datadoghq.com/rum/analytics
 [2]: /real_user_monitoring/guide/understanding-the-rum-event-hierarchy/
+[3]: /product_analytics/group/
