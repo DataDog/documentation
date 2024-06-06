@@ -116,7 +116,7 @@ Recommendations enable you to change the status of a vulnerability, assign it to
 
 ## Enabling Code Security 
 
-To enable Code Security, you can use [Single Step Instrumentation][8] or configure the [Datadog Tracing Library][9]. Detailed instructions for both methods can be found in the [Security -> Application Security -> Settings][10] section.
+To enable Code Security, you can use [Single Step Instrumentation][8] or configure the [Datadog Tracing Library][9]. Detailed instructions for both methods can be found in the [**Security > Application Security > Settings**][10] section.
 
 If you need additional help, contact [Datadog support][11].
 
