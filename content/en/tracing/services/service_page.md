@@ -34,7 +34,7 @@ Selecting a service on the Service Catalog leads you to the detailed service pag
 
 Consult on this page:
 
-* [Service health](#service-health)
+* [Service health](#service-health) (private beta)
 * [Service monitor states](#service-monitor)
 * [Watchdog Insights](#watchdog-insights)
 * [Summary cards](#summary-cards)
@@ -45,19 +45,30 @@ Consult on this page:
     *  [Deployments](#deployments), [Error Tracking](#error-tracking), [Traces](#traces), [Security](#security), and more
  
 ## Service health
- 
-PANEL HERE
-Opt in to the private beta!
-Service health is in private beta. To request access, complete the form.
-Request access [(button - link to google doc)](https://docs.google.com/forms/d/1KsC7DPKBJ3K0wP67fK50JhRRX-CseP4FUrFrOvCYbQM/edit)
 
-The Service Health panel automatically provides a real-time summary of service signals to help you understand if a service needs your attention. Service health pulls in many types of signals and surfaces the most critical alerts.
+{{< callout header="Opt in to the private beta!" url="https://docs.google.com/forms/d/1KsC7DPKBJ3K0wP67fK50JhRRX-CseP4FUrFrOvCYbQM/viewform?edit_requested=true" >}}
+  Service health is in private beta. To request access, complete the form.
+{{< /callout >}} 
 
-| Service health         | Monitors | Incidents| Watchdog Insights | Error Tracking Issues | 
-|--------------|------------|--------------|------------|--------------|
-| Critical state when at least one of these signals is active     | Non-muted alerting P1 monitor or monitor with a paging integration setup (PagerDuty or Opsgenie)   | Active Incident of any severity | Active Faulty Deploy, Ongoing APM Latency/Error Rate Alert | N/A | 
-| Warning state when at least one of these signals is active and not in a critical state   |  Non-muted alerting P2 monitor, Warning P1 monitor, or Warning monitor with a paging integration setup (PagerDuty or Opsgenie) | Stable Incident of any severity | Ongoing Log Anomaly Alert | New (within 48 hours) Issues For Review |
-| Healthy state when no signal from critical or warning state is active| N/A | N/A |N/A | N/A| 
+The **Service Health** panel automatically provides a real-time summary of service signals to help you understand if a service needs your attention.
+
+Service health factors in many types of signals, including monitors, incidents, watchdog insights, and error tracking issues, and surfaces the most critical alerts. Additionally, the panel provides links to associated incidents so you can take action, as necessary.
+
+{{< img src="/tracing/services/service_page/service-health.png" alt="Service Health panel on service page showing an active incident." style="width:100%;" >}}
+
+To access service health:
+
+1. Go to [APM > Service Catalog][23].
+2. Hover over a service and click **Full Page**.
+3. Select **Service Health**.
+
+The health of your service can have a *Healthy*, *Warning*, or *Alert* status. Statuses are determined based on the following conditions and signal types:
+
+|   Status    |                         Condition                          |                                                            Monitors                                                            |            Incidents            |                        Watchdog Insights                        |          Error Tracking Issues          |
+|:-----------:|:----------------------------------------------------------:|:------------------------------------------------------------------------------------------------------------------------------:|:-------------------------------:|:---------------------------------------------------------------:|:---------------------------------------:|
+|  **Alert**  |               At least one signal is active.               |               Non-muted alerting P1 monitor or monitor with a paging integration setup (PagerDuty or Opsgenie).                | Active incident of any severity | Active faulty deployment, ongoing APM latency/error rate alert. |                   --                    |
+| **Warning** | At least one signal is active and not in a critical state. | Non-muted alerting P2 monitor, warning P1 monitor, or warning monitor with a paging integration setup (PagerDuty or Opsgenie). | Stable incident of any severity |                   Ongoing log anomaly alert.                    | New (within 48 hours) issues for review |
+| **Healthy** |    No signal from critical or warning state is active.     |                                                               --                                                               |               --                |                               --                                |                   --                    |
 
 ## Service monitor
 
@@ -267,3 +278,4 @@ Visualize the cost associate with your service's infrastructure used in the Cost
 [19]: https://www.datadoghq.com/blog/datadog-watchdog-insights-log-management/
 [21]: /database_monitoring/connect_dbm_and_apm/
 [22]: /cloud_cost_management/
+[23]: https://app.datadoghq.com/services
