@@ -17,9 +17,13 @@ A Cloud SIEM security signal is created when Datadog detects a threat while anal
 
 You must have the `Security Signals Write` permission to modify a security signal, such as change the state and view signal action history in [Audit Trail][2]. See [Role Based Access Control][3] for more information about Datadog's default roles and granular role-based access control permissions available for Datadog Security in the Cloud Security.
 
-## View signals by status in the Signal Explorer
+## Signal explorer
 
-In the Signals Explorer, use the facet panel or search bar to group and filter your signals. For example, to view all signals with a `HIGH` or `CRITICAL` severity that are in the `open` or `under review` triage state, do one of the following: 
+In the Signals Explorer, use the facet panel or search bar to group and filter your signals. For example, you can view signals by [their severity](#view-signals-by-severity), [detection rules](#view-signals-by-detection-rules), and [MITRE ATT&CK](#view-signals-by-mitre-attck). After you have filtered your signals to your use case, create a [saved view][4] so that you can reload your query later.
+
+### View signals by severity
+
+To view all signals with specific severities, for example `HIGH` and `CRITICAL`, that are in the `open` or `under review` triage state, do one of the following:
 
 - In the facet panel's **Severity** section, select **Critical**, **High**, and **Medium**. In the **Signal State** section, make sure only **open** and **under_reviewed** are selected.
 - In the search bar, enter `status:(high OR critical OR medium) @workflow.triage.state:(open OR under_review)`.
@@ -28,13 +32,24 @@ To add the column **Signal State**, select the **Options** button in the top rig
 
 Use different visualizations to investigate the threat activity in your environment. For example, in the **Visualize by** field, you can group signals by:
 
-- Rules List to see the volume and alerting trends across the different detection rules.
-- Timeseries to view signal trends over time.
-- Pie chart to see the relative volume of each of the detection rules.
+- **Rules List** to see the volume and alerting trends across the different detection rules.
+- **Timeseries** to view signal trends over time.
+- **Top List** to see signals with the highest to lowest number of occurrences.
+- **Table** to see signals by the specified tag key (for example, `source`, `technique`, and so on).
+- **Pie Chart** to see the relative volume of each of the detection rules.
 
-{{< img src="security/security_monitoring/investigate_security_signals/signal_list.png" alt="The Signal Explorer showing signals categoraized by detection rules" style="width:80%;" >}}
+{{< img src="security/security_monitoring/investigate_security_signals/signal_list.png" alt="The Signal Explorer showing signals categorized by detection rules" style="width:100%;" >}}
 
-After you have filtered your signals to your use case, create a [saved view][4] so that you can reload your query later.
+### View signals by detection rules
+
+To view your signals based on detections rules, click **Rules List** in the **Visualize as** field under the search bar. Click on a rule to see the signals related to that rule. Click on a signal to see the signal details.
+
+### View signals by MITRE ATT&CK
+
+To view your signals by MITRE ATT&CK Tactic and Technique:
+1. Select **Table** in the **Visualize as** field under the search bar, and group by **Tactic**.
+1. Click the plus icon next to the first group `by` to add a second group `by`, and select **Technique** for it.
+1. In the table, click one of the tactics or techniques to see options to further drill down and filter the signals. For example, you can view signals related to the tactic and technique and search for or exclude specific tactics and techniques.
 
 ## Triage a signal or multiple signals
 
