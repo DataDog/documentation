@@ -60,9 +60,9 @@ Navigate to [**Infrastructure > Cloud Costs > Settings > Accounts**][8] and clic
 3. Under the **Resources** section, click the toggle for each account to enable `Databricks Cost Data Collection`.
 4. Click **Save**.
 
-{{< img src="cloud_cost/saas_costs/databricks_setup.png" alt="Integrate with Databricks to collect cost data." style="width:100%" >}}
+Your Databricks cost data for the past 15 months can be accessed in Cloud Cost Management after 24 hours. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
 
-Your Databricks cost data for the past 15 months can be accessed in Cloud Cost Management after 24 hours.
+{{< img src="cloud_cost/saas_costs/databricks_setup.png" alt="Integrate with Databricks to collect cost data." style="width:100%" >}}
 
 [101]: https://app.datadoghq.com/integrations/databricks
 
@@ -77,9 +77,9 @@ Your Databricks cost data for the past 15 months can be accessed in Cloud Cost M
 4. Under the **Additional Options** section, click the toggle for `Collecting Billing Data`.
 5. Click **Save**.
 
-{{< img src="cloud_cost/saas_costs/confluent_setup.png" alt="Integrate with Confluent to collect cost data." style="width:100%" >}}
+Your Confluent Cloud cost data for the past 15 months can be accessed in Cloud Cost Management after 24 hours. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
 
-Your Confluent Cloud cost data for the past 15 months can be accessed in Cloud Cost Management after 24 hours.
+{{< img src="cloud_cost/saas_costs/confluent_setup.png" alt="Integrate with Confluent to collect cost data." style="width:100%" >}}
 
 [101]: https://app.datadoghq.com/integrations/confluent-cloud
 
@@ -93,9 +93,9 @@ Your Confluent Cloud cost data for the past 15 months can be accessed in Cloud C
 3. Enter your MongoDB account name, public key, private key, organizational ID, and optionally, specify tags.
 4. Click **Save**.
 
-{{< img src="cloud_cost/saas_costs/mongodb_setup.png" alt="Integrate with MongoDB to collect cost data." style="width:100%" >}}
+Your MongoDB cost data for the past 15 months can be accessed in Cloud Cost Management after 24 hours. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
 
-Your MongoDB cost data for the past 15 months can be accessed in Cloud Cost Management after 24 hours.
+{{< img src="cloud_cost/saas_costs/mongodb_setup.png" alt="Integrate with MongoDB to collect cost data." style="width:100%" >}}
 
 [101]: https://www.mongodb.com/docs/cloud-manager/reference/user-roles/#organization-roles
 [102]: https://app.datadoghq.com/integrations/mongodb-cost-management
@@ -145,9 +145,9 @@ Your MongoDB cost data for the past 15 months can be accessed in Cloud Cost Mana
 
 5. Click **Save**.
 
-{{< img src="cloud_cost/saas_costs/snowflake_setup.png" alt="Integrate with Snowflake to collect cost data." style="width:100%" >}}
+Your Snowflake cost data for the past 15 months can be accessed in Cloud Cost Management after 24 hours. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
 
-Your Snowflake cost data for the past 15 months can be accessed in Cloud Cost Management after 24 hours.
+{{< img src="cloud_cost/saas_costs/snowflake_setup.png" alt="Integrate with Snowflake to collect cost data." style="width:100%" >}}
 
 [101]: https://app.datadoghq.com/integrations/snowflake-web
 [102]: https://docs.snowflake.com/en/user-guide/key-pair-auth#generate-the-private-key
@@ -165,9 +165,9 @@ Your Snowflake cost data for the past 15 months can be accessed in Cloud Cost Ma
 4. Under the **Resources** section, click the toggle for each account to enable `OpenAI Billing Usage Data Collection`.
 5. Click **Save**.
 
-{{< img src="cloud_cost/saas_costs/openai_setup.png" alt="Integrate with OpenAI to collect cost data." style="width:100%" >}}
+Your OpenAI cost data for the past 15 months can be accessed in Cloud Cost Management after 24 hours. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
 
-Your OpenAI cost data for the past 15 months can be accessed in Cloud Cost Management after 24 hours.
+{{< img src="cloud_cost/saas_costs/openai_setup.png" alt="Integrate with OpenAI to collect cost data." style="width:100%" >}}
 
 [101]: https://platform.openai.com/docs/quickstart/account-setup
 [102]: https://app.datadoghq.com/integrations/openai
@@ -183,9 +183,9 @@ Your OpenAI cost data for the past 15 months can be accessed in Cloud Cost Manag
 4. Click the checkbox for `Collect Billing Data`.
 5. Click **Save**.
 
-{{< img src="cloud_cost/saas_costs/fastly_setup.png" alt="Integrate with Fastly to collect cost data." style="width:100%" >}}
+Your Fastly cost data for the past 15 months can be accessed in Cloud Cost Management after 24 hours. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
 
-Your Fastly cost data for the past 15 months can be accessed in Cloud Cost Management after 24 hours.
+{{< img src="cloud_cost/saas_costs/fastly_setup.png" alt="Integrate with Fastly to collect cost data." style="width:100%" >}}
 
 [101]: https://manage.fastly.com/account/personal/tokens
 [102]: https://app.datadoghq.com/integrations/fastly
@@ -200,9 +200,9 @@ Your Fastly cost data for the past 15 months can be accessed in Cloud Cost Manag
 3. Enter an `Account SID` for your Twilio account.
 4. Click **Save**.
 
-{{< img src="cloud_cost/saas_costs/twilio_setup.png" alt="Integrate with Twilio to collect cost data." style="width:100%" >}}
+Your Twilio cost data for the past 15 months can be accessed in Cloud Cost Management after 24 hours. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
 
-Your Twilio cost data for the past 15 months can be accessed in Cloud Cost Management after 24 hours.
+{{< img src="cloud_cost/saas_costs/twilio_setup.png" alt="Integrate with Twilio to collect cost data." style="width:100%" >}}
 
 [101]: https://app.datadoghq.com/integrations/twilio
 
