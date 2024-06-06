@@ -22,6 +22,71 @@ menu:
       url: /api/latest/aws-integration/
       identifier: aws-integration
       generated: true
+    - name: AWS Integration - Patch account
+      url: '#aws-integration-patch-account'
+      identifier: aws-integration-aws-integration-patch-account
+      parent: aws-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - PatchAWSAccountv2
+        unstable:
+          - v2
+        order: 3
+    - name: AWS Integration - Get account
+      url: '#aws-integration-get-account'
+      identifier: aws-integration-aws-integration-get-account
+      parent: aws-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetAWSAccountv2
+        unstable:
+          - v2
+        order: 2
+    - name: AWS Integration - Delete account
+      url: '#aws-integration-delete-account'
+      identifier: aws-integration-aws-integration-delete-account
+      parent: aws-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteAWSAccountv2
+        unstable:
+          - v2
+        order: 4
+    - name: AWS Integration - Create account
+      url: '#aws-integration-create-account'
+      identifier: aws-integration-aws-integration-create-account
+      parent: aws-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateAWSAccountv2
+        unstable:
+          - v2
+        order: 1
+    - name: AWS Integration - Get all accounts
+      url: '#aws-integration-get-all-accounts'
+      identifier: aws-integration-aws-integration-get-all-accounts
+      parent: aws-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListAWSAccountsv2
+        unstable:
+          - v2
+        order: 5
     - name: Generate a new external ID
       url: '#generate-a-new-external-id'
       identifier: aws-integration-generate-a-new-external-id

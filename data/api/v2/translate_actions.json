@@ -497,6 +497,30 @@
     "request_description": "Incident todo payload.",
     "request_schema_description": "Patch request for an incident todo."
   },
+  "ListAWSAccountsv2": {
+    "description": "Get all AWS accounts",
+    "summary": "AWS Integration - Get all accounts"
+  },
+  "CreateAWSAccountv2": {
+    "description": "Create a new AWS account",
+    "summary": "AWS Integration - Create account",
+    "request_description": "",
+    "request_schema_description": "AWS Account creation request"
+  },
+  "DeleteAWSAccountv2": {
+    "description": "Delete an AWS account",
+    "summary": "AWS Integration - Delete account"
+  },
+  "GetAWSAccountv2": {
+    "description": "Get an AWS account",
+    "summary": "AWS Integration - Get account"
+  },
+  "PatchAWSAccountv2": {
+    "description": "Patch an AWS account",
+    "summary": "AWS Integration - Patch account",
+    "request_description": "",
+    "request_schema_description": "AWS Account patch request"
+  },
   "ListGCPSTSAccounts": {
     "description": "List all GCP STS-enabled service accounts configured in your Datadog account.",
     "summary": "List all GCP STS-enabled service accounts"

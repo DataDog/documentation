@@ -813,6 +813,303 @@ components:
       type: string
       x-enum-varnames:
       - API_KEYS
+    AWSAccount:
+      description: AWS Account object
+      properties:
+        attributes:
+          $ref: '#/components/schemas/AWSAccountAttributes'
+        id:
+          description: AWS Account ID
+          example: '123456789012'
+          type: string
+        type:
+          $ref: '#/components/schemas/AWSAccountType'
+      required:
+      - attributes
+      - id
+      - type
+      type: object
+    AWSAccountAttributes:
+      description: AWS Account attributes
+      properties:
+        account_tags:
+          description: Tags to apply to all metrics in the account
+          items:
+            type: string
+          type: array
+        auth_config:
+          $ref: '#/components/schemas/AWSAuthConfig'
+        aws_account_id:
+          description: AWS Account ID
+          example: '123456789012'
+          pattern: ^[0-9]{12}$
+          type: string
+        aws_regions:
+          $ref: '#/components/schemas/AWSRegionsList'
+        created_at:
+          description: Creation date of the account
+          readOnly: true
+          type: string
+        logs_config:
+          $ref: '#/components/schemas/AWSLogs'
+        metrics_config:
+          $ref: '#/components/schemas/AWSMetrics'
+        modified_at:
+          description: Last modification date of the account
+          readOnly: true
+          type: string
+        resources_config:
+          $ref: '#/components/schemas/AWSResources'
+        traces_config:
+          $ref: '#/components/schemas/AWSTraces'
+      required:
+      - aws_account_id
+      type: object
+    AWSAccountCreate:
+      description: AWS Account creation object
+      properties:
+        attributes:
+          $ref: '#/components/schemas/AWSAccountCreateAttributes'
+        type:
+          $ref: '#/components/schemas/AWSAccountType'
+      required:
+      - attributes
+      - type
+      type: object
+    AWSAccountCreateAttributes:
+      description: AWS Account attributes for creation
+      properties:
+        account_tags:
+          description: Tags to apply to all metrics in the account
+          items:
+            type: string
+          type: array
+        auth_config:
+          $ref: '#/components/schemas/AWSAuthConfig'
+        aws_account_id:
+          description: AWS Account ID
+          example: '123456789012'
+          pattern: ^[0-9]{12}$
+          type: string
+        aws_regions:
+          $ref: '#/components/schemas/AWSRegionsList'
+        logs_config:
+          $ref: '#/components/schemas/AWSLogs'
+        metrics_config:
+          $ref: '#/components/schemas/AWSMetrics'
+        resources_config:
+          $ref: '#/components/schemas/AWSResources'
+        traces_config:
+          $ref: '#/components/schemas/AWSTraces'
+      required:
+      - aws_account_id
+      type: object
+    AWSAccountCreateRequest:
+      description: AWS Account creation request
+      properties:
+        data:
+          $ref: '#/components/schemas/AWSAccountCreate'
+      required:
+      - data
+      type: object
+    AWSAccountPatch:
+      description: AWS Account patch object
+      properties:
+        attributes:
+          $ref: '#/components/schemas/AWSAccountPatchAttributes'
+        id:
+          description: AWS Account ID
+          type: string
+        type:
+          $ref: '#/components/schemas/AWSAccountType'
+      type: object
+    AWSAccountPatchAttributes:
+      description: AWS Account attributes for patching
+      properties:
+        account_tags:
+          description: Tags to apply to all metrics in the account
+          items:
+            type: string
+          type: array
+        auth_config:
+          $ref: '#/components/schemas/AWSAuthConfig'
+        aws_account_id:
+          description: AWS Account ID
+          example: '123456789012'
+          pattern: ^[0-9]{12}$
+          type: string
+        aws_account_name:
+          description: AWS Account name
+          readOnly: true
+          type: string
+        aws_regions:
+          $ref: '#/components/schemas/AWSRegionsList'
+        created_at:
+          description: Creation date of the account
+          readOnly: true
+          type: string
+        logs_config:
+          $ref: '#/components/schemas/AWSLogs'
+        metrics_config:
+          $ref: '#/components/schemas/AWSMetrics'
+        modified_at:
+          description: Last modification date of the account
+          readOnly: true
+          type: string
+        resources_config:
+          $ref: '#/components/schemas/AWSResources'
+        traces_config:
+          $ref: '#/components/schemas/AWSTraces'
+      type: object
+    AWSAccountPatchRequest:
+      description: AWS Account patch request
+      properties:
+        data:
+          $ref: '#/components/schemas/AWSAccountPatch'
+      type: object
+    AWSAccountResponse:
+      description: AWS Account response object
+      properties:
+        data:
+          $ref: '#/components/schemas/AWSAccount'
+      type: object
+    AWSAccountType:
+      default: aws_account
+      description: AWS Account type
+      enum:
+      - aws_account
+      example: aws_account
+      type: string
+      x-enum-varnames:
+      - AWS_ACCOUNT
+    AWSAccountsResponse:
+      description: AWS Accounts response object
+      properties:
+        data:
+          description: List of AWS Accounts
+          items:
+            $ref: '#/components/schemas/AWSAccount'
+          type: array
+      type: object
+    AWSAuthConfig:
+      description: AWS Authentication config
+      properties:
+        access_key_id:
+          description: AWS Access Key ID
+          maxLength: 128
+          minLength: 16
+          type: string
+        external_id:
+          description: AWS IAM External ID for associated role
+          pattern: ^[0-9a-f]{12}4[0-9a-f]{3}[89ab][0-9a-f]{15}$
+          type: string
+        role_name:
+          description: AWS IAM Role name
+          maxLength: 576
+          minLength: 1
+          pattern: ^(\/[\w\!\@\#\$\%\^\&\*\(\)\_\+\=\/\-]{1,511}\/)?([\w+=,.@-]{1,64})$
+          type: string
+        secret_access_key:
+          description: AWS Secret Access Key
+          minLength: 1
+          pattern: ^(?!\s*$).+
+          type: string
+          writeOnly: true
+      type: object
+    AWSLambdaForwarder:
+      description: AWS Lambda forwarder
+      properties:
+        lambdas:
+          description: List of Datadog Lambda Log Forwarder ARNs
+          items:
+            pattern: ^arn:aws(?:-cn|-us-gov)?:lambda:\S+:\d+:function:\S+$
+            type: string
+          type: array
+        sources:
+          description: List of AWS services that will send logs to the Datadog Lambda
+            Log Forwarder
+          items:
+            example: s3
+            type: string
+          type: array
+      type: object
+    AWSLogs:
+      description: AWS Logs config
+      properties:
+        lambda_forwarder:
+          $ref: '#/components/schemas/AWSLambdaForwarder'
+      type: object
+    AWSMetrics:
+      description: AWS Metrics config
+      properties:
+        automute_enabled:
+          description: Enable EC2 automute for AWS metrics
+          type: boolean
+        collect_cloudwatch_alarms:
+          description: Enable CloudWatch alarms collection
+          type: boolean
+        collect_custom_metrics:
+          description: Enable custom metrics collection
+          type: boolean
+        enabled:
+          description: Enable AWS metrics collection
+          type: boolean
+        namespace_filters:
+          $ref: '#/components/schemas/AWSNamespacesList'
+        tag_filters:
+          description: AWS Metrics tag filters list
+          items:
+            $ref: '#/components/schemas/AWSNamespaceTagFilter'
+          type: array
+      type: object
+    AWSNamespaceTagFilter:
+      description: AWS Metrics tag filters
+      properties:
+        namespace:
+          description: The AWS Namespace to apply the tag filters against
+          example: AWS/EC2
+          type: string
+        tags:
+          description: The tags to filter based on
+          items:
+            type: string
+          type: array
+      type: object
+    AWSNamespacesList:
+      description: AWS Metrics namespace filters
+      properties:
+        exclude_all:
+          description: Exclude all namespaces
+          type: boolean
+        exclude_only:
+          description: Exclude only these namespaces
+          items:
+            example: AWS/EC2
+            type: string
+          type: array
+        include_all:
+          description: Include all namespaces
+          type: boolean
+        include_only:
+          description: Include only these namespaces
+          items:
+            example: AWS/EC2
+            type: string
+          type: array
+      type: object
+    AWSRegionsList:
+      description: AWS Regions to collect data from
+      properties:
+        include_all:
+          description: Include all regions
+          type: boolean
+        include_only:
+          description: Include only these regions
+          items:
+            example: us-east-1
+            type: string
+          type: array
+      type: object
     AWSRelatedAccount:
       description: AWS related account.
       properties:
@@ -854,6 +1151,37 @@ components:
           description: An AWS related account.
           items:
             $ref: '#/components/schemas/AWSRelatedAccount'
+          type: array
+      type: object
+    AWSResources:
+      description: AWS Resources config
+      properties:
+        cloud_security_posture_management_collection:
+          description: Whether Datadog collects cloud security posture management
+            resources from your AWS account.
+          type: boolean
+        extended_collection:
+          description: Whether Datadog collects additional attributes and configuration
+            information about the resources in your AWS account. Required for `cspm_resource_collection`.
+          type: boolean
+      type: object
+    AWSTraces:
+      description: AWS Traces config
+      properties:
+        xray_services:
+          $ref: '#/components/schemas/AWSXRayServicesList'
+      type: object
+    AWSXRayServicesList:
+      description: AWS X-Ray services to collect traces from
+      properties:
+        include_all:
+          description: Include all services
+          type: boolean
+        include_only:
+          description: Include only these services
+          items:
+            example: AWS/AppSync
+            type: string
           type: array
       type: object
     ActiveBillingDimensionsAttributes:
@@ -27969,6 +28297,251 @@ paths:
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/integration/aws/accounts:
+    get:
+      description: Get all AWS accounts
+      operationId: ListAWSAccountsv2
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AWSAccountsResponse'
+          description: AWS Account object
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: AWS Integration - Get all accounts
+      tags:
+      - AWS Integration
+      x-dd-ownership:
+        notification_configuration:
+          manual_escalation_policy: '[AWS Integrations] Primary'
+          prod_high_urgency: '@pagerduty-aws-integrations-high-urgency @slack-aws-ints-ops'
+          prod_low_urgency: '@pagerduty-aws-integrations-low-urgency @slack-aws-ints-ops'
+          slack_support_channel: '#aws-integrations'
+          staging_high_urgency: '@pagerduty-aws-integrations-low-urgency @slack-aws-ints-ops'
+          staging_low_urgency: '@pagerduty-aws-integrations-low-urgency @slack-aws-ints-ops'
+        team: aws-integrations
+        team_escalation: '[AWS Integrations] Primary'
+      x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - INTEGRATIONS_READ
+      x-undo:
+        type: safe
+      x-unstable: '**Note: This endpoint is in public beta. If you have any feedback,
+
+        contact [Datadog support](https://docs.datadoghq.com/help/).**'
+    post:
+      description: Create a new AWS account
+      operationId: CreateAWSAccountv2
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AWSAccountCreateRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AWSAccountResponse'
+          description: AWS Account object
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: API error response.
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: AWS Integration - Create account
+      tags:
+      - AWS Integration
+      x-dd-ownership:
+        notification_configuration:
+          manual_escalation_policy: '[AWS Integrations] Primary'
+          prod_high_urgency: '@pagerduty-aws-integrations-high-urgency @slack-aws-ints-ops'
+          prod_low_urgency: '@pagerduty-aws-integrations-low-urgency @slack-aws-ints-ops'
+          slack_support_channel: '#aws-integrations'
+          staging_high_urgency: '@pagerduty-aws-integrations-low-urgency @slack-aws-ints-ops'
+          staging_low_urgency: '@pagerduty-aws-integrations-low-urgency @slack-aws-ints-ops'
+        team: aws-integrations
+        team_escalation: '[AWS Integrations] Primary'
+      x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - MANAGE_INTEGRATIONS
+      x-undo:
+        operationId: DeleteAWSAccountv2
+        parameters:
+        - name: aws_account_config_id
+          source: data.attributes.aws_account_id
+        type: unsafe
+      x-unstable: '**Note: This endpoint is in public beta. If you have any feedback,
+
+        contact [Datadog support](https://docs.datadoghq.com/help/).**'
+  /api/v2/integration/aws/accounts/{aws_account_config_id}:
+    delete:
+      description: Delete an AWS account
+      operationId: DeleteAWSAccountv2
+      parameters:
+      - description: None
+        in: path
+        name: aws_account_config_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: API error response.
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: AWS Integration - Delete account
+      tags:
+      - AWS Integration
+      x-dd-ownership:
+        notification_configuration:
+          manual_escalation_policy: '[AWS Integrations] Primary'
+          prod_high_urgency: '@pagerduty-aws-integrations-high-urgency @slack-aws-ints-ops'
+          prod_low_urgency: '@pagerduty-aws-integrations-low-urgency @slack-aws-ints-ops'
+          slack_support_channel: '#aws-integrations'
+          staging_high_urgency: '@pagerduty-aws-integrations-low-urgency @slack-aws-ints-ops'
+          staging_low_urgency: '@pagerduty-aws-integrations-low-urgency @slack-aws-ints-ops'
+        team: aws-integrations
+        team_escalation: '[AWS Integrations] Primary'
+      x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - MANAGE_INTEGRATIONS
+      x-undo:
+        type: idempotent
+      x-unstable: '**Note: This endpoint is in public beta. If you have any feedback,
+
+        contact [Datadog support](https://docs.datadoghq.com/help/).**'
+    get:
+      description: Get an AWS account
+      operationId: GetAWSAccountv2
+      parameters:
+      - description: None
+        in: path
+        name: aws_account_config_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AWSAccountResponse'
+          description: AWS Account object
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: API error response.
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: AWS Integration - Get account
+      tags:
+      - AWS Integration
+      x-dd-ownership:
+        notification_configuration:
+          manual_escalation_policy: '[AWS Integrations] Primary'
+          prod_high_urgency: '@pagerduty-aws-integrations-high-urgency @slack-aws-ints-ops'
+          prod_low_urgency: '@pagerduty-aws-integrations-low-urgency @slack-aws-ints-ops'
+          slack_support_channel: '#aws-integrations'
+          staging_high_urgency: '@pagerduty-aws-integrations-low-urgency @slack-aws-ints-ops'
+          staging_low_urgency: '@pagerduty-aws-integrations-low-urgency @slack-aws-ints-ops'
+        team: aws-integrations
+        team_escalation: '[AWS Integrations] Primary'
+      x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - INTEGRATIONS_READ
+      x-undo:
+        type: safe
+      x-unstable: '**Note: This endpoint is in public beta. If you have any feedback,
+
+        contact [Datadog support](https://docs.datadoghq.com/help/).**'
+    patch:
+      description: Patch an AWS account
+      operationId: PatchAWSAccountv2
+      parameters:
+      - description: None
+        in: path
+        name: aws_account_config_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AWSAccountPatchRequest'
+        required: true
+      responses:
+        '204':
+          description: No Content
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: API error response.
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: AWS Integration - Patch account
+      tags:
+      - AWS Integration
+      x-dd-ownership:
+        notification_configuration:
+          manual_escalation_policy: '[AWS Integrations] Primary'
+          prod_high_urgency: '@pagerduty-aws-integrations-high-urgency @slack-aws-ints-ops'
+          prod_low_urgency: '@pagerduty-aws-integrations-low-urgency @slack-aws-ints-ops'
+          slack_support_channel: '#aws-integrations'
+          staging_high_urgency: '@pagerduty-aws-integrations-low-urgency @slack-aws-ints-ops'
+          staging_low_urgency: '@pagerduty-aws-integrations-low-urgency @slack-aws-ints-ops'
+        team: aws-integrations
+        team_escalation: '[AWS Integrations] Primary'
+      x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - MANAGE_INTEGRATIONS
+      x-undo:
+        type: idempotent
+      x-unstable: '**Note: This endpoint is in public beta. If you have any feedback,
+
+        contact [Datadog support](https://docs.datadoghq.com/help/).**'
   /api/v2/integration/gcp/accounts:
     get:
       description: List all GCP STS-enabled service accounts configured in your Datadog
@@ -38977,6 +39550,11 @@ tags:
     description: Find out more at
     url: https://docs.datadoghq.com/tracing/trace_pipeline/trace_retention/
   name: APM Retention Filters
+- description: 'Configure your Datadog-AWS integration directly through the Datadog
+    API.
+
+    For more information, see the [AWS integration page](https://docs.datadoghq.com/integrations/amazon_web_services).'
+  name: AWS Integration
 - description: Search your Audit Logs events over HTTP.
   name: Audit
 - description: '[The AuthN Mappings API](https://docs.datadoghq.com/account_management/authn_mapping/?tab=example)
