@@ -62,7 +62,7 @@ Depending on the metric type you apply them to, the behavior differs:
 * Effect of `as_count()`:
   * Disable any [interpolation][1].
   * Sets the time aggregator to SUM.
-  * Multiplies the result post-aggregation by the sampling interval. For example, the following points submitted every second `[0.05, 0.05, 0.05, 0.05].as_count()` with a rollup interval of 20s would produce `[1,1,1,1]`.
+  * Multiplies the result post-aggregation by the sampling interval. For example, the following points submitted every second `[0.05, 0.05, 0.05, 0.05].as_count()` with a rollup interval of 20 seconds produces `[1,1,1,1]`.
 * Effect of `as_rate()`:
   * Disables any [interpolation][1].
   * Sets the time aggregator to `SUM`.
