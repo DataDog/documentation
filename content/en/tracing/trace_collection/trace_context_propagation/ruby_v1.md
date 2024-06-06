@@ -1,9 +1,6 @@
 ---
-title: Propagating Ruby Trace Context
+title: (Legacy) Propagating Ruby Trace Context
 kind: documentation
-code_lang: ruby
-type: multi-code-lang
-code_lang_weight: 20
 further_reading:
     - link: 'https://www.datadoghq.com/blog/monitor-otel-with-w3c-trace-context/'
       tag: 'Blog'
@@ -13,8 +10,7 @@ further_reading:
       text: 'Interoperability of OpenTelemetry API and Datadog instrumented traces'
 ---
 
-<div class="alert alert-info">This documentation is for <code>datadog</code> gem v2.x. If you are looking for <code>ddtrace</code> gem v1.x documentation, see the legacy <a href="/tracing/trace_collection/trace_context_propagation/ruby_v1">Propagating Ruby Trace Context
-</a> documentation.</div>
+<div class="alert alert-warning">This documentation is for <code>ddtrace</code> gem v1.x. If you are using the <code>datadog</code> gem v2.0 or later, see the latest <a href="/tracing/trace_collection/trace_context_propagation/ruby">Propagating Ruby Trace Context</a> documentation.</div>
 
 ### Headers extraction and injection
 
@@ -40,17 +36,19 @@ Extraction styles can be configured using:
 
 The value of the environment variable is a comma-separated list of header styles that are enabled for extraction. The default setting is `datadog,tracecontext`.
 
-The default extraction styles are, in order, `datadog` and `tracecontext`.
+If multiple extraction styles are enabled extraction attempt is done on the order those styles are configured and first successful extracted value is used.
+
+The default extraction styles are, in order, `datadog`, `b3multi`, `b3`, and `tracecontext`.
 
 You can also enable or disable the use of these formats in code by using `Datadog.configure`:
 
 ```ruby
 Datadog.configure do |c|
   # List of header formats that should be extracted
-  c.tracing.propagation_extract_style = [ 'tracecontext', 'datadog', 'b3' ]
+  c.tracing.distributed_tracing.propagation_extract_style = [ 'tracecontext', 'datadog', 'b3' ]
 
   # List of header formats that should be injected
-  c.tracing.propagation_inject_style = [ 'tracecontext', 'datadog' ]
+  c.tracing.distributed_tracing.propagation_inject_style = [ 'tracecontext', 'datadog' ]
 end
 ```
 
