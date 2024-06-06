@@ -147,7 +147,7 @@ function loadInstantSearch(currentPageWasAsyncLoaded) {
             searchBox({
                 container: searchBoxContainer,
                 placeholder: 'Search documentation...',
-                autofocus: true,
+                autofocus: false,
                 showReset: false,
                 showSubmit: true,
                 templates: {
@@ -179,15 +179,6 @@ function loadInstantSearch(currentPageWasAsyncLoaded) {
             const aisSearchBoxInput = document.querySelector('.ais-SearchBox-input');
             const aisSearchBoxSubmit = document.querySelector('.ais-SearchBox-submit');
             const searchPathname = `${basePathName}search`;
-
-            // dirty fix for android devices - keyboard disappearing after search input focused
-            aisSearchBoxInput.addEventListener('focus', () => {
-                window.removeEventListener('resize');
-
-                setTimeout(() => {
-                    window.addEventListener('resize')
-                }, 500)
-            })
 
             const handleSearchbarKeydown = (e) => {
                 if (e.code === 'Enter') {
@@ -276,6 +267,8 @@ function loadInstantSearch(currentPageWasAsyncLoaded) {
             const handleResizeDebounced = debounce(handleResize, 500, false);
 
             handleResizeDebounced();
+            
+            // Bugfix for disappearing android keyboard on search input focus/autoresizing
             if (!navigator.userAgent.toLowerCase().match(/android/i)) {
                 window.addEventListener('resize', handleResizeDebounced);
             } 
