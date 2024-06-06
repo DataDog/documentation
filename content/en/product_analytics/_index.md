@@ -31,7 +31,9 @@ Use [Retention Analysis][1] to measure how a group of users engage with specific
 
 ## Map user journeys
 
-Explore [User Journeys][2] to see different visualizations of the user experience when interacting with your application:
+[User journeys][2] allow you to measure and report on the impact of every feature change - from backend bottlenecks to user frustrations - so that they can be appropriately optimized. Identify the ideal path for feature adoption and user conversion.
+
+See different visualizations of the user experience when interacting with your application:
 
 - **[Funnel][3]**: Measure the conversion rate end-to-end of a given workflow.
 - **[Sankey][4]**: Explore aggregated workflows in a single visualization to aid in answering questions about user journeys.
@@ -39,7 +41,7 @@ Explore [User Journeys][2] to see different visualizations of the user experienc
 
 ## Visualize user interactions with heatmaps
 
-[Heatmaps][5] visualize the most interacted with elements on a page to see where hot spots of activity are, along with analyzing scroll depth to see how far users scrolled down a given page.
+[Heatmaps][5] visualize the most interacted with elements on a page to see where hot spots of activity are, along with analyzing scroll depth to see how far users scrolled down a given page. You can view every swipe, scroll, and click with a pixel-perfect reproduction of exactly what users went through on both browser and mobile applications to identify high-or low-performing content.
 
 [1]: /product_analytics/user_retention
 [2]: https://app.datadoghq.com/product-analytics/user-journey/sankey
