@@ -73,7 +73,7 @@ To install the Ruby test visibility library:
 
 {{< code-block lang="ruby" filename="Gemfile" >}}
 source '<https://rubygems.org>'
-gem 'datadog-ci', "~> 1.0", group: :test
+gem "datadog-ci", "~> 1.0", group: :test
 {{< /code-block >}}
 
 2. Install the gem by running `bundle install`
