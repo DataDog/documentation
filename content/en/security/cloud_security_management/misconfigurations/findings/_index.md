@@ -1,5 +1,5 @@
 ---
-title: Investigate Misconfigurations
+title: Explore Misconfigurations
 kind: documentation
 aliases:
   - /security_platform/findings
@@ -42,14 +42,6 @@ Select a misconfiguration to view the resources that have been evaluated by the 
 Group by **Resources** on the Security Findings Explorer and select a resource to see the full list of compliance rules that were evaluated against the resource, along with their statuses.
 
 {{< img src="security/cspm/findings/resource-rules-evaluated2.png" alt="Group and aggregate by resource in search" style="width:65%;">}}
-
-## Remediate misconfigurations using Terraform
-
-Use Terraform remediation to generate a pull request in Github with code changes that fix the underlying misconfiguration.
-
-1. On the Misconfigurations Explorer, select a misconfiguration.
-2. On the misconfiguration side panel, select **Remediation** > **Terraform**.
-3. Click **Open a Pull Request**.
 
 ## Further reading
 
