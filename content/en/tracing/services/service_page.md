@@ -34,7 +34,7 @@ Selecting a service on the Service Catalog leads you to the detailed service pag
 
 Consult on this page:
 
-* [Service Health](#service-health)
+* [Service health](#service-health)
 * [Service monitor states](#service-monitor)
 * [Watchdog Insights](#watchdog-insights)
 * [Summary cards](#summary-cards)
@@ -44,16 +44,16 @@ Consult on this page:
 * [Additional tabs](#additional-tabs)
     *  [Deployments](#deployments), [Error Tracking](#error-tracking), [Traces](#traces), [Security](#security), and more
  
-## Service Health
+## Service health
  
 PANEL HERE
 Opt in to the private beta!
-Service Health is in private beta. To request access, complete the form.
+Service health is in private beta. To request access, complete the form.
 Request access [(button - link to google doc)](https://docs.google.com/forms/d/1KsC7DPKBJ3K0wP67fK50JhRRX-CseP4FUrFrOvCYbQM/edit)
 
-The Service Health panel automatically summarizes the real-time signals of your service, enabling you to quickly understand if a service needs your attention and what you should investigate next. Service Health incorporates various signals that are currently alerting. 
+The Service Health panel automatically provides a real-time summary of service signals to help you understand if a service needs your attention. Service health pulls in many types of signals and surfaces the most critical alerts.
 
-| Service Health         | Monitors | Incidents| Watchdog Insights | Error Tracking Issues | 
+| Service health         | Monitors | Incidents| Watchdog Insights | Error Tracking Issues | 
 |--------------|------------|--------------|------------|--------------|
 | Critical state when at least one of these signals is active     | Non-muted alerting P1 monitor or monitor with a paging integration setup (PagerDuty or Opsgenie)   | Active Incident of any severity | Active Faulty Deploy, Ongoing APM Latency/Error Rate Alert | N/A | 
 | Warning state when at least one of these signals is active and not in a critical state   |  Non-muted alerting P2 monitor, Warning P1 monitor, or Warning monitor with a paging integration setup (PagerDuty or Opsgenie) | Stable Incident of any severity | Ongoing Log Anomaly Alert | New (within 48 hours) Issues For Review |
