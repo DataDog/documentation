@@ -16,7 +16,7 @@ further_reading:
   text: "Datadog Code Security achieves 100 percent accuracy in OWASP Benchmark by using an IAST approach"
 ---
 
-<div class="alert alert-info">Code security vulnerability detection is in beta. To use it for your service, follow the <a href="/security/application_security/enabling/">Setup instructions.</a></div>
+<div class="alert alert-info">Code Security is in beta. To use it for your service, follow the steps described in <a href="/security/application_security/code_security/#enabling-code-security">Enabling Code Security.</a></div>
 
 ## Overview
 
@@ -116,15 +116,9 @@ Recommendations enable you to change the status of a vulnerability, assign it to
 
 ## Enabling Code Security 
 
-To enable Code Security, set the `DD_IAST_ENABLED` environment variable to `true` in your application configuration, and restart your service.
+To enable Code Security, you can use [Single Step Instrumentation][8] or configure the [Datadog Tracing Library][9]. Detailed instructions for both methods can be found in the [Security -> Application Security -> Settings][10] section.
 
-For detailed steps, see [Enabling code security vulnerability detection][2].
-
-### Disabling Code Security 
-
-To disable Code Security, remove the `DD_IAST_ENABLED=true` environment variable from your application configuration, and restart your service.
-
-If you need additional help, contact [Datadog support][1].
+If you need additional help, contact [Datadog support][11].
 
 ## Further Reading
 
@@ -137,3 +131,7 @@ If you need additional help, contact [Datadog support][1].
 [5]: /security/application_security/enabling/compatibility/
 [6]: https://docs.google.com/forms/d/1wsgbd80eImvJSjXe5y5VCjAW0zzn5p3CoCLsOy0vqsk/
 [7]: /integrations/github/
+[8]: /security/application_security/enabling/single_step/code_security/?tab=linuxhostorvm
+[9]: /security/application_security/enabling/tracing_libraries/code_security/
+[10]: https://app.datadoghq.com/security/configuration/asm/setup
+[11]: https://www.datadoghq.com/support/
