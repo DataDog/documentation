@@ -251,6 +251,20 @@ spec:
           #(...)
 ```
 
+### Tolerate unready pods
+
+By default, `unready` pods are ignored when the Datadog Agent schedules checks. Therefore, metrics, service checks, and logs are not collected from these pods. To override this behavior, set the annotation `ad.datadoghq.com/tolerate-unready` to `"true"`. For example:
+
+```yaml
+apiVersion: v1
+kind: Pod
+# (...)
+metadata:
+  name: '<POD_NAME>'
+  annotations:
+    ad.datadoghq.com/tolerate-unready: "true"
+  ...
+```
 
 ## Further Reading
 
