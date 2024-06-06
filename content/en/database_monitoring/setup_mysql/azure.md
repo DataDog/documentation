@@ -220,21 +220,26 @@ Complete the following steps to install the [Datadog Cluster Agent][1] on your K
 2. Create a file, `datadog-values.yaml`:
     ```yaml
     datadog:
-      apiKeyExistingSecret: datadog-secret
+      apiKey: <DATADOG_API_KEY>
       site: <DATADOG_SITE>
 
-    cluster_check: true  # Make sure to include this flag
-    init_config:
-      instances:
-        - dbm: true
-          host: '<AZURE_INSTANCE_ENDPOINT>'
-          port: 3306
-          username: datadog
-          password: '<UNIQUE_PASSWORD>'
-          # After adding your project and instance, configure the Datadog Azure integration to pull additional cloud data such as CPU, Memory, etc.
-          azure:
-            deployment_type: '<DEPLOYMENT_TYPE>'
-            fully_qualified_domain_name: '<AZURE_INSTANCE_ENDPOINT>'
+    clusterAgent:
+      confd:
+        mysql.yaml: -|
+          cluster_check: true
+          init_config:
+          instances:
+            - dbm: true
+              host: '<AZURE_INSTANCE_ENDPOINT>'
+              port: 3306
+              username: datadog
+              password: '<UNIQUE_PASSWORD>'
+              azure:
+                deployment_type: '<DEPLOYMENT_TYPE>'
+                fully_qualified_domain_name: '<AZURE_INSTANCE_ENDPOINT>'
+
+    clusterChecksRunner:
+      enabled: true
     ```
 
     Replace `<DATADOG_SITE>` with your [Datadog site][2]. Your site is {{< region-param key="dd_site" code="true" >}}. (Ensure the correct SITE is selected on the right).
