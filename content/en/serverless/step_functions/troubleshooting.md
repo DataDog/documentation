@@ -33,7 +33,7 @@ If your organization has an existing all-encompassing index with a low limit, pl
 
 ## Lambda traces are not merging with Step Function traces
 - Verify that you can see both Lambda traces and Step Function traces in Datadog.
-- Verify that you are using Python layer v75+ or Node.js layer v94+.
+- Verify that you are using Python layer v95+ or Node.js layer v112+.
 - In your AWS console, open your Step Function and ensure that your state machine has `"Payload.$": "States.JsonMerge($$, $, false)"` on the Lambda steps.
 - Execute your Step Function once and verify that the `TaskScheduled` event log of the Lambda step has the payload containing data from the [Step Function context object][3].
 
