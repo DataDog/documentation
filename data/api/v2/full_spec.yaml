@@ -1397,6 +1397,15 @@ components:
         team:
           $ref: '#/components/schemas/RelationshipToTeam'
       type: object
+    AuthNMappingResourceType:
+      description: The type of resource being mapped to.
+      enum:
+      - role
+      - team
+      type: string
+      x-enum-varnames:
+      - ROLE
+      - TEAM
     AuthNMappingResponse:
       description: AuthN Mapping response from the API.
       properties:
@@ -24442,6 +24451,11 @@ paths:
         required: false
         schema:
           type: string
+      - description: Filter by mapping resource type. Defaults to "role" if not specified.
+        in: query
+        name: resource_type
+        schema:
+          $ref: '#/components/schemas/AuthNMappingResourceType'
       responses:
         '200':
           content:
