@@ -29,20 +29,24 @@ To trace an LLM application:
 1. [Install the LLM Observability SDK][5].
 2. Configure the SDK by providing [the required environment variables][6] in your application startup command, or programmatically [in-code][7].
     - Remember to configure your Datadog API key, Datadog site, and ML app name.
-3. [Create spans](#span-creation-examples) in your LLM application code to represent your application's operations.
+3. [Create spans](#creating-spans) in your LLM application code to represent your application's operations.
     - For additional examples and detailed usage, see the [Quickstart][8] and the [SDK documentation][9].
     - [Nest spans](#nesting-spans) to create more useful traces.
-4. [Annotate your spans](#span-annotation-example) with input data, output data, metadata (such as `temperature`), metrics (such as `prompt_tokens`), and key-value tags (such as `version:1.0.0`).
+4. [Annotate your spans](#annotating-spans) with input data, output data, metadata (such as `temperature`), metrics (such as `prompt_tokens`), and key-value tags (such as `version:1.0.0`).
 5. Run your LLM application. 
     - Use the `ddtrace-run` command if you used the command-line setup method, otherwise run your application as normal if you used the in-code setup method.
 6. Explore the resulting traces on the [LLM Observability traces page][10], and the resulting metrics on the out-of-the-box [LLM Observability dashboard][11].
 
-### Span creation examples
+### Creating spans
 
 To create a span, use the LLM Observability SDK's `ddtrace.llmobs.decorators.<SPAN_KIND>()` as a function decorator, replacing `<SPAN_KIND>` with the desired [span kind][4].
 
-The example below creates a workflow span:
+In addition, the LLM Observability SDK provides equivalent inline methods to [create and track spans][12]. Use `ddtrace.llmobs.LLMObs.<SPAN_KIND>()` as a context manager, replacing `<SPAN_KIND>` with the desired [span kind][4].
 
+The examples below create a workflow span.
+
+{{< tabs >}}
+{{% tab "Decorators"}}
 {{< code-block lang="python" >}}
 from ddtrace.llmobs.decorators import workflow
 
@@ -51,9 +55,9 @@ def process_message():
     ... # user application logic
     return
 {{< /code-block >}}
+{{% /tab %}}
 
-In addition to the above function decorators, the LLM Observability SDK provides equivalent in-line methods to [create and track spans][12]. Use `ddtrace.llmobs.LLMObs.<SPAN_KIND>()` as a context manager, replacing `<SPAN_KIND>` with the desired [span kind][4].
-
+{{% tab "Inline"}}
 {{< code-block lang="python" >}}
 from ddtrace.llmobs import LLMObs
 
@@ -62,13 +66,17 @@ def process_message():
         ... # user application logic
     return
 {{< /code-block >}}
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Nesting spans
 
 Starting a new span before the current span is finished will automatically trace a parent-child relationship between the two spans. The parent span represents the larger operation while the child span represents a smaller nested sub-operation within it.
 
-The example below creates a trace with two spans:
+The examples below create a trace with two spans.
 
+{{< tabs >}}
+{{% tab "Decorators"}}
 {{< code-block lang="python" >}}
 from ddtrace.llmobs.decorators import workflow
 
@@ -83,14 +91,29 @@ def perform_preprocessing():
     ... # user application logic
     return
 {{< /code-block >}}
+{{% /tab %}}
 
+{{% tab "Inline"}}
+{{< code-block lang="python" >}}
+from ddtrace.llmobs import LLMObs
 
-### Span annotation example
+def process_message():
+    with LLMObs.workflow(name="process_message") as workflow_span:
+        with LLMObs.task(name="perform_preprocessing") as task_span:
+            ... # user application logic
+    return
+{{< /code-block >}}
+{{% /tab %}}
+{{< /tabs >}}
+
+### Annotating spans
 
 To [annotate a span][13], use the LLM Observability SDK's `LLMObs.annotate()` method.
 
-The example below annotates the workflow span created in the above example:
+The examples below annotate the workflow span created in the [above example](#creating-spans):
 
+{{< tabs >}}
+{{% tab "Decorators"}}
 {{< code-block lang="python" >}}
 from ddtrace.llmobs import LLMObs
 from ddtrace.llmobs.decorators import workflow
@@ -107,7 +130,26 @@ def process_message():
     )
     return
 {{< /code-block >}}
+{{% /tab %}}
 
+{{% tab "Inline"}}
+{{< code-block lang="python" >}}
+from ddtrace.llmobs import LLMObs
+
+def process_message():
+    with LLMObs.workflow() as span:
+        ... # user application logic
+        LLMObs.annotate(
+            input_data="<ARGUMENT>",
+            output_data="<OUTPUT>",
+            metadata={},
+            metrics={"prompt_tokens": 15, "completion_tokens": 24},
+            tags={},
+        )
+    return
+{{< /code-block >}}
+{{% /tab %}}
+{{< /tabs >}}
 
 For more information on alternative tracing methods and tracing features, see the [SDK documentation][12].
 

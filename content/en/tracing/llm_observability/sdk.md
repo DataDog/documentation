@@ -121,73 +121,9 @@ The name can be up to 200 characters long and contain Unicode letters (which inc
 
 To trace a span, use `ddtrace.llmobs.decorators.<SPAN_KIND>()` as a function decorator (for example, `llmobs.decorators.task()` for a task span) for the function you'd like to trace. For a list of available span kinds, see the [Span Kinds documentation][8]. For more granular tracing of operations within functions, see [Tracing spans using inline methods](#tracing-spans-using-inline-methods).
 
-### Agent span
-
-To trace an agent span, use the function decorator `ddtrace.llmobs.decorators.agent()`.
-
-#### Arguments
-
-`name`
-: optional - _string_
-<br/>The name of the operation. If not provided, `name` defaults to the name of the traced function.
-
-`session_id`
-: optional - _string_
-<br/>The ID of the underlying user session. See [Tracking user sessions](#tracking-user-sessions) for more information.
-
-`ml_app`
-: optional - _string_
-<br/>The name of the ML application that the operation belongs to. See [Tracing multiple applications](#tracing-multiple-applications) for more information.
-
-#### Example
-
-{{< code-block lang="python" >}}
-from ddtrace.llmobs.decorators import agent
-
-@agent(name="react_agent")
-def run_agent():
-    ... # user application logic
-    return 
-{{< /code-block >}}
-
-### Workflow span
-
-To trace a workflow span, use the function decorator `ddtrace.llmobs.decorators.workflow()`.
-
-#### Arguments
-
-`name`
-: optional - _string_
-<br/>The name of the operation. If not provided, `name` defaults to the name of the traced function.
-
-`session_id`
-: optional - _string_
-<br/>The ID of the underlying user session. See [Tracking user sessions](#tracking-user-sessions) for more information.
-
-`ml_app`
-: optional - _string_
-<br/>The name of the ML application that the operation belongs to. See [Tracing multiple applications](#tracing-multiple-applications) for more information.
-
-#### Example
-
-{{< code-block lang="python" >}}
-from ddtrace.llmobs.decorators import workflow
-
-@workflow
-def process_message():
-    ... # user application logic
-    return 
-{{< /code-block >}}
-
 ### LLM span
 
-**Note**: If you are using one of the following LLM providers, you do not need to manually start a LLM span to trace these operations, as Datadog's existing integrations automatically trace and annotate the LLM calls:
-
-- OpenAI (using the [OpenAI Python SDK][1])
-- AWS Bedrock (using [Boto3][2]/[Botocore][3])
-- LangChain LLM/Chat Models/Chains (using [LangChain][4])
-
-For more information about Datadog's LLM integrations, see the [Auto-instrumentation guide][13].
+**Note**: If you are using any LLM providers or frameworks that are supported by [Datadog's LLM integrations][13], you do not need to manually start a LLM span to trace these operations.
 
 To trace an LLM span, use the function decorator `ddtrace.llmobs.decorators.llm()`.
 
@@ -223,6 +159,64 @@ def llm_call():
     return completion
 {{< /code-block >}}
 
+### Workflow span
+
+To trace a workflow span, use the function decorator `ddtrace.llmobs.decorators.workflow()`.
+
+#### Arguments
+
+`name`
+: optional - _string_
+<br/>The name of the operation. If not provided, `name` defaults to the name of the traced function.
+
+`session_id`
+: optional - _string_
+<br/>The ID of the underlying user session. See [Tracking user sessions](#tracking-user-sessions) for more information.
+
+`ml_app`
+: optional - _string_
+<br/>The name of the ML application that the operation belongs to. See [Tracing multiple applications](#tracing-multiple-applications) for more information.
+
+#### Example
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs.decorators import workflow
+
+@workflow
+def process_message():
+    ... # user application logic
+    return 
+{{< /code-block >}}
+
+### Agent span
+
+To trace an agent span, use the function decorator `ddtrace.llmobs.decorators.agent()`.
+
+#### Arguments
+
+`name`
+: optional - _string_
+<br/>The name of the operation. If not provided, `name` defaults to the name of the traced function.
+
+`session_id`
+: optional - _string_
+<br/>The ID of the underlying user session. See [Tracking user sessions](#tracking-user-sessions) for more information.
+
+`ml_app`
+: optional - _string_
+<br/>The name of the ML application that the operation belongs to. See [Tracing multiple applications](#tracing-multiple-applications) for more information.
+
+#### Example
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs.decorators import agent
+
+@agent(name="react_agent")
+def run_agent():
+    ... # user application logic
+    return 
+{{< /code-block >}}
+
 ### Tool span
 
 To trace a tool span, use the function decorator `ddtrace.llmobs.decorators.tool()`.
@@ -248,6 +242,35 @@ from ddtrace.llmobs.decorators import tool
 
 @tool(name="get_current_weather")
 def call_weather_api():
+    ... # user application logic
+    return 
+{{< /code-block >}}
+
+### Task span
+
+To trace a task span, use the function decorator `LLMObs.task()`.
+
+#### Arguments
+
+`name`
+: optional - _string_
+<br/>The name of the operation. If not provided, `name` defaults to the name of the traced function.
+
+`session_id`
+: optional - _string_
+<br/>The ID of the underlying user session. See [Tracking user sessions](#tracking-user-sessions) for more information.
+
+`ml_app`
+: optional - _string_
+<br/>The name of the ML application that the operation belongs to. See [Tracing multiple applications](#tracing-multiple-applications) for more information.
+
+#### Example
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs.decorators import task
+
+@task
+def sanitize_input():
     ... # user application logic
     return 
 {{< /code-block >}}
@@ -317,35 +340,6 @@ from ddtrace.llmobs.decorators import retrieval
 
 @retrieval(name="get_relevant_docs")
 def similarity_search():
-    ... # user application logic
-    return 
-{{< /code-block >}}
-
-### Task span
-
-To trace a task span, use the function decorator `LLMObs.task()`.
-
-#### Arguments
-
-`name`
-: optional - _string_
-<br/>The name of the operation. If not provided, `name` defaults to the name of the traced function.
-
-`session_id`
-: optional - _string_
-<br/>The ID of the underlying user session. See [Tracking user sessions](#tracking-user-sessions) for more information.
-
-`ml_app`
-: optional - _string_
-<br/>The name of the ML application that the operation belongs to. See [Tracing multiple applications](#tracing-multiple-applications) for more information.
-
-#### Example
-
-{{< code-block lang="python" >}}
-from ddtrace.llmobs.decorators import task
-
-@task
-def sanitize_input():
     ... # user application logic
     return 
 {{< /code-block >}}
