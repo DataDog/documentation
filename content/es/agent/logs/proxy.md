@@ -83,7 +83,7 @@ Edita el archivo de configuración del Agent `datadog.yaml` y define `logs_no_ss
 
 ```
 logs_config:
-  use_tcp: true
+  force_use_tcp: true
   logs_dd_url: "<PROXY_SERVER_DOMAIN>:10514"
   logs_no_ssl: true
 ```
@@ -209,10 +209,10 @@ backend datadog-logs
     server datadog agent-intake.logs.datadoghq.eu:443 ssl verify required ca-file /etc/ssl/certs/ca-bundle.crt check port 443
 ```
 
-Descarga el certificado con el siguiente comando: 
+Descarga el certificado con el siguiente comando:
 
 * `sudo apt-get install ca-certificates` (Debian, Ubuntu)
-* `yum install ca-certificates` (CentOS, RedHat) 
+* `yum install ca-certificates` (CentOS, RedHat)
 
 Si funciona correctamente, la localización del archivo será `/etc/ssl/certs/ca-bundle.crt` en el caso de CentOS y RedHat.
 
@@ -231,7 +231,7 @@ Edita el archivo de configuración `datadog.yaml` del Agent y define `logs_confi
 
 ```yaml
 logs_config:
-  use_tcp: true
+  force_use_tcp: true
   logs_dd_url: myProxyServer.myDomain:10514
 ```
 

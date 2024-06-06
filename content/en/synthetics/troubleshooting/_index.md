@@ -115,7 +115,7 @@ Automated browsers do not support emulating the CSS `pointer` media feature. Bro
 
 #### A resource is of a longer duration than the actual step duration
 
-Long-loading resources may span across multiple steps. Within a test result's step, Datadog returns all resources initiated during that specific step. However, we allow roughly 20 seconds for important network calls to finish. After this period, the synthetics worker proceeds to the subsequent step.
+Long-loading resources may span across multiple steps. Within a test result's step, Datadog returns all resources initiated during that specific step. However, Datadog allows roughly 20 seconds for important network calls to finish. After this period, the synthetics worker proceeds to the subsequent step. The worker uses a hierarchy of timeouts, allowing it to balance speed and reliability. Because of this, Datadog does not advise using step duration to measure the speed or slowness of a web application. The step duration reflects the balanced time the worker needs to deliver a reliable result.
 
 ## API and browser tests
 
@@ -237,5 +237,5 @@ Additionally, in Private Location versions `>v1.27`, Datadog depends on the use 
 [9]: /synthetics/settings/?tab=createfromhttptest#global-variables
 [10]: /synthetics/browser_tests/#use-global-variables
 [11]: https://ip-ranges.datadoghq.com/synthetics.json
-[12]: /synthetics/api_tests/?tab=httptest#notify-your-team
+[12]: /synthetics/api_tests/?tab=httptest#configure-the-test-monitor
 [13]: https://docs.docker.com/engine/security/seccomp/

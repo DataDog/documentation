@@ -8,7 +8,7 @@ aliases:
   - /guides/alerting/
   - /guides/monitors/the-conditions
   - /monitoring
-description: "Create monitors, notify your teams when it matters, and manage your monitors using the alerting platform"
+description: "Create monitors, configure notifications and automations, and manage your monitors using the alerting platform"
 further_reading:
   - link: "https://app.datadoghq.com/release-notes?category=Alerting"
     tag: "Release Notes"
@@ -39,7 +39,7 @@ cascade:
 
 Monitoring all of your infrastructure in one place wouldn't be complete without the ability to know when critical changes are occurring. Datadog gives you the ability to create monitors that actively check metrics, integration availability, network endpoints, and more.
 
-Configure monitors, notify your teams, and manage alerts at a glance on the Alerting platform.
+Configure monitors, configure notifications and automations, and manage alerts at a glance on the Alerting platform.
 
 **Note**: View and search for Monitors on your mobile device with the [Datadog Mobile App][1], available on the [Apple App Store][2] and [Google Play Store][3].
 
@@ -55,28 +55,31 @@ To create a monitor in Datadog:
 
 To create a monitor programmatically, see the [Datadog API][7] or [community maintained libraries][8].
 
-## Exporting and importing monitors
-To export a monitor:
-1. From the [**Manage Monitors**][9] page, click the monitor you want to export.
-1. You should see the Monitor Status page.
-1. Click the settings cog (top right) and select **Export** from the menu.
-
-To import a monitor:
-1. Navigate to [**Monitors** > **New Monitor**][4].
-1. Click [**Import from JSON**][10] at the top of the page.
-1. Add your JSON monitor definition and click **Save**.
-
-## Notify your teams
+## Configure notifications and automations
 
 {{< img src="/monitors/notify.png" alt="Notify when a monitor is alerting" style="width:90%;">}}
 
-[Monitor Notifications][11]: Set up notifications when creating monitors to keep your team informed of issues. Route the notifications to the correct people, leverage template variables to include details, and attach snapshots when sending the alerts by email or Slack. Create [downtimes][12] to mute alerts during application maintenance.
+Set up [Monitor Notifications][11] when creating monitors to keep your team informed of issues. Route the notifications to the correct people,  include [workflow automations][17], [cases][18], and [Datadog team handles][19], leverage template variables to include details, and attach snapshots when sending the alerts by email or Slack. Create [downtimes][12] to mute alerts during application maintenance.
 
 ## Manage monitors
 
 {{< img src="/monitors/manage.png" alt="Manage all monitors alerts" style="width:90%;">}}
 
-[Manage Monitors][13]: Edit, clone, delete, mute, and resolve monitors all in the same place. Focus on high priority alerts by using advanced faceted search. Explore monitor details and alerts over time in the Monitor Status page.
+[Manage Monitors][13] by editing, cloning, deleting, muting, and resolving monitors all in the same place. Focus on high priority alerts by using advanced faceted search. Explore monitor details and alerts over time on the [Monitors List page][9].
+
+## Export and import monitors
+
+To export a monitor:
+
+1. From the [**Manage Monitors**][9] page, click the monitor you want to export.
+1. You should see the Monitor Status page.
+1. Click the settings cog (top right) and select **Export** from the menu.
+
+To import a monitor:
+
+1. Navigate to [**Monitors** > **New Monitor**][4].
+1. Click [**Import from JSON**][10] at the top of the page.
+1. Add your JSON monitor definition and click **Save**.
 
 ## Control monitor tags with tag policies
 
@@ -119,3 +122,6 @@ To import a monitor:
 [14]: /monitors/settings/
 [15]: /service_management/mobile/?tab=ios#monitors
 [16]: /monitors/manage/search/#saved-view
+[17]: /monitors/notify/#workflows
+[18]: /monitors/notify/#notifications
+[19]: /monitors/notify/#teams
