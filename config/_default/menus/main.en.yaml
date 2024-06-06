@@ -5529,10 +5529,10 @@ menu:
       parent: pa_session_replay_browser
       identifier: pa_session_replay_browser_troubleshooting
       weight: 104
-    - name: Analytics
-      url: product_analytics/analytics/
+    - name: Analytics Explorer
+      url: product_analytics/analytics_explorer/
       parent: product_analytics
-      identifier: pa_analytics
+      identifier: pa_analytics_explorer
       weight: 5
     - name: Group
       url: product_analytics/analytics/group

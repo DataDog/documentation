@@ -15,7 +15,7 @@ Visualizations define the outcomes of the filters and aggregates displayed in th
 
 Visualize the evolution of a single measure (or a [facet][5] unique count of values) over a selected time frame, and optionally, split by an available [facet][5].
 
-{{< img src="product_analytics/analytics/visualize/analytics-timeseries-1.png" alt="Timeseries graph in Analytics" style="width:90%;" >}}
+{{< img src="product_analytics/analytics/visualize/analytics-timeseries-1.png" alt="Timeseries graph in the Analytics Explorer" style="width:90%;" >}}
 
 The timeseries graph depicts the evolution of the number of pageviews on the Shopist application over the past day for every view path.
 
@@ -28,7 +28,7 @@ You can choose additional display options such as:
 
 Visualize the top values from a facet based on your chosen measure.
 
-{{< img src="product_analytics/analytics/visualize/analytics-top-list-1.png" alt="Top list bar graph in the RUM Explorer" style="width:90%;" >}}
+{{< img src="product_analytics/analytics/visualize/analytics-top-list-1.png" alt="Top list bar graph in the Analytics Explorer" style="width:90%;" >}}
 
 The top list includes the top browsers used to visit the Shopist website over the last day.
 
@@ -43,13 +43,13 @@ Visualize the top values from up to three [facets][5] according to your chosen [
 
  The following Analytics table shows the **top 5 URL paths** for **two countries**, US and Japan, grouped by browser, over the last day:
 
-{{< img src="product_analytics/analytics/visualize/analytics-nested-table-1.png" alt="Nested table in Analytics" style="width:90%;">}}
+{{< img src="product_analytics/analytics/visualize/analytics-nested-table-1.png" alt="Nested table in the Analytics Explorer" style="width:90%;">}}
 
 ## Distributions
 
 You can display the distribution of measure attributes over the selected time frame to see the values fluctuate. 
 
-{{< img src="real_user_monitoring/explorer/visualize/distribution-2.png" alt="Distribution graph in the RUM Explorer" style="width:90%;">}}
+{{< img src="product_analytics/analytics/visualize/analytics-distribution.png" alt="Distribution graph in the Analytics Explorer" style="width:90%;">}}
 
 The distribution graph displays the distribution of the Largest Contentful Paint that measures the user experience of the Shopist landing page. 
 
@@ -58,20 +58,20 @@ A tree map helps you organize and show data as a percentage of a whole in a visu
 
 The following tree map shows the percentage breakdown by **View Name**.
 
-{{< img src="product_analytics/analytics/visualize/analytics-tree-maps.png" alt="Tree map in Analytics" style="width:90%;">}}
+{{< img src="product_analytics/analytics/visualize/analytics-tree-maps.png" alt="Tree map in the Analytics Explorer" style="width:90%;">}}
 
 ## Pie charts
 A pie chart helps you organize and show data as a percentage of a whole. It is useful when comparing the relationship between different dimensions such as services, users, hosts, countries, etc. within your log data.
 
 The following pie chart shows the percentage breakdown by **View Path**.
 
-{{< img src="product_analytics/analytics/visualize/analytics-pie-chart.png" alt="Pie chart in Analytics" style="width:90%;">}}
+{{< img src="product_analytics/analytics/visualize/analytics-pie-chart.png" alt="Pie chart in the Analytics Explorer" style="width:90%;">}}
 
 ## Geomaps
 
 Visualize a single [measure][5] (or a [facet][5] unique count of values) on the world map.
 
-{{< img src="product_analytics/analytics/visualize/analytics-geomaps.png" alt="Geographical map in Analytics" style="width:90%;">}}
+{{< img src="product_analytics/analytics/visualize/analytics-geomaps.png" alt="Geographical map in the Analytics Explorer" style="width:90%;">}}
 
 The Analytics geomap shows the 75th percentile of the **Largest Contentful Paint** over the past day.
 
@@ -79,7 +79,7 @@ The Analytics geomap shows the 75th percentile of the **Largest Contentful Paint
 
 Lists are paginated results of events and are ideal when individual results matter. You do not need prior knowledge of what defines a matching result to use lists.
 
-{{< img src="product_analytics/analytics/visualize/analytics-lists.mp4" alt="Lists in Analytics" video="true" style="width:70%;" >}}
+{{< img src="product_analytics/analytics/visualize/analytics-lists.mp4" alt="Lists in the Analytics Explorer" video="true" style="width:70%;" >}}
 
 The information you search for is displayed in columns. You can manage the following:
 

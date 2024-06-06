@@ -13,7 +13,7 @@ Sankey diagrams are in public beta.
 
 The Sankey diagram allows you to visualize all user journeys across your application to analyze the critical path.
 
-{{< img src="/product_analytics/sankey_diagrams/default-sankey.png" alt="The default Sankey diagram for an app" style="width:90%;" >}}
+{{< img src="/product_analytics/sankey_diagrams/sankey-overview.png" alt="The default Sankey diagram for an app" style="width:90%;" >}}
 
 Each node represents a view the user visited. The thickness of each node represents the count of user sessions on that page. A page with fewer visitors will have a thinner node in the diagram.
 
