@@ -2,8 +2,10 @@
 title: Search Test Runs
 kind: documentation
 description: Examine all of your test runs and troubleshoot failing test results.
+aliases:
+- /continuous_testing/explorer/search_runs/
 further_reading:
-- link: '/continuous_testing/explorer'
+- link: '/synthetics/explore/results_explorer'
   tag: 'Documentation'
   text: 'Learn about the Synthetic Monitoring & Testing Results Explorer'
 ---

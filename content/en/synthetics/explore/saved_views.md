@@ -1,8 +1,10 @@
 ---
 title: Saved Views
 kind: documentation
+aliases:
+- /synthetics/search/saved_views
 further_reading:
-- link: "/synthetics/search/"
+- link: "/synthetics/explore/"
   tag: "Documentation"
   text: "Learn how to search and manage your Synthetic tests"
 ---

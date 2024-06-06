@@ -4,8 +4,9 @@ kind: documentation
 description: Examine batches of executed CI jobs and troubleshoot failing test results.
 aliases:
   - /synthetics/explorer/search
+  - /continuous_testing/explorer/search/
 further_reading:
-- link: '/continuous_testing/explorer'
+- link: '/synthetics/explore/results_explorer'
   tag: 'Documentation'
   text: 'Learn about the Synthetic Monitoring & Testing Results Explorer'
 ---
