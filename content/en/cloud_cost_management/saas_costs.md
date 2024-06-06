@@ -209,6 +209,103 @@ Your Twilio cost data for the past 15 months can be accessed in Cloud Cost Manag
 {{% /tab %}}
 {{< /tabs >}}
 
+## Data Collected
+
+The following table contains a non-exhaustive list of out-of-the-box tags associated with each SaaS Cost integration.
+
+{{< tabs >}}
+{{% tab "Databricks" %}}
+
+| Tag Name | Tag Type | Tag Description |
+|---|---|---|
+| `record_id` | string | Unique ID for this record. |
+| `account_id` | string | ID of the account this report was generated for. |
+| `Workspace_id` | string | ID of the Workspace this usage was associated with. |
+| `cloud` | string | Cloud this usage is relevant for. Possible values are AWS, AZURE, and GCP. |
+| `custom_tags` | object | Custom tags applied to the usage, usually as key-value pairs for additional metadata or categorization. |
+| `usage_metadata` | object | Metadata related to the usage, which might include details like usage type, service category, or other relevant information. |
+
+{{% /tab %}}
+{{% tab "Confluent Cloud" %}}
+
+| Tag Name | Tag Type | Tag Description |
+|---|---|---|
+| `Resource_id` | string | The unique identifier of the Confluent resource. |
+| `Resource_name` | string | The name of the Confluent resource. |
+| `Environment_id` | string | The unique identifier for the environment. |
+| `Network_access_type` | string | Network access type for the cluster. Possible values are `INTERNET`, `TRANSIT_GATEWAY`, `PRIVATE_LINK`, and `PEERED_VPC`. |
+| `Product` | string | Product name. Possible values include `KAFKA`, `CONNECT`, `KSQL`, `AUDIT_LOG`, `STREAM_GOVERNANCE`, `CLUSTER_LINK`, `CUSTOM_CONNECT`, `FLINK`, `SUPPORT_CLOUD_BASIC`, `SUPPORT_CLOUD_DEVELOPER`, `SUPPORT_CLOUD_BUSINESS`, and `SUPPORT_CLOUD_PREMIER`. |
+
+{{% /tab %}}
+{{% tab "MongoDB" %}}
+
+| Tag Name | Tag Type | Tag Description |
+|---|---|---|
+| `Invoice_id` | string | The unique identifier of the invoice. |
+| `Status` | string | State of the payment. |
+| `Mongo_org_id` | string | MongoDB organization ID. |
+| `Cluster_name` | string | The name of the cluster that incurred the charge. |
+| `Group_id` | string | ID of the project with which the line item is associated. |
+| `Replica_set_name` | string | Name of the replica set with which the line item is associated. |
+| `Resource_tags` | object | Arbitrary tags on clusters set by users, usually as key-value pairs. |
+
+{{% /tab %}}
+{{% tab "Snowflake" %}}
+
+| Tag Name | Tag Type | Tag Description |
+|---|---|---|
+| `ORGANIZATION_NAME` | VARCHAR | Name of the organization. |
+| `CONTRACT_NUMBER` | VARCHAR | Snowflake contract number for the organization. |
+| `ACCOUNT_NAME` | VARCHAR | Name of the account where the usage was consumed. |
+| `ACCOUNT_LOCATOR` | VARCHAR | Locator for the account where the usage was consumed. |
+| `REGION` | VARCHAR | Name of the region where the account is located. |
+| `SERVICE_LEVEL` | VARCHAR | Service level (edition) of the Snowflake account (Standard, Enterprise, or Business Critical). |
+| `BALANCE_SOURCE` | VARCHAR | Source of the funds used to pay for the daily usage. The source can be one of the following:<br>- **capacity**: Usage paid with credits remaining on an organization’s capacity commitment.<br>- **rollover**: Usage paid with rollover credits. When an organization renews a capacity commitment, unused credits are added to the balance of the new contract as rollover credits.<br>- **free usage**: Usage covered by the free credits provided to the organization.<br>- **overage**: Usage that was paid at on-demand pricing, which occurs when an organization has exhausted its capacity, rollover, and free credits.<br>- **rebate**: Usage covered by the credits awarded to the organization when it shared data with another organization. |
+| `SERVICE_TYPE` | VARCHAR | Type of usage. Possible service types include:<br>- **automatic_clustering**: Refer to Automatic Clustering.<br>- **cloud_services**: Refer to Cloud service credit usage.<br>- **data_transfer**: Refer to Understanding data transfer cost.<br>- **logging**: Refer to Logging and Tracing Overview.<br>- **materialized_view**: Refer to Working with Materialized Views.<br>- **replication**: Refer to Introduction to replication and failover across multiple accounts.<br>- **query_acceleration**: Refer to Using the Query Acceleration Service.<br>- **search_optimization**: Refer to Search Optimization Service.<br>- **serverless_task**: Refer to Introduction to tasks.<br>- **snowpipe**: Refer to Snowpipe.<br>- **snowpipe_streaming**: Refer to Snowpipe Streaming.<br>- **storage**: Refer to Understanding storage cost.<br>- **warehouse_metering**: Refer to Virtual warehouse credit usage. Does not indicate usage of serverless or cloud services compute. |
+| `RATING_TYPE` | VARCHAR | Indicates how the usage in the record is rated, or priced. Possible values include:<br>- **compute**<br>- **data_transfer**<br>- **storage**<br>- **Other** |
+| `BILLING_TYPE` | VARCHAR | Indicates what is being charged or credited. Possible billing types include:<br>- **consumption**: Usage associated with compute credits, storage costs, and data transfer costs.<br>- **rebate**: Usage covered by the credits awarded to the organization when it shared data with another organization.<br>- **priority support**: Charges for priority support services. This charge is associated with a stipulation in a contract, not with an account.<br>- **vps_deployment_fee**: Charges for a Virtual Private Snowflake deployment.<br>- **support_credit**: Snowflake Support credited the account to reverse charges attributed to an issue in Snowflake. |
+
+{{% /tab %}}
+{{% tab "OpenAI" %}}
+
+| Tag Name | Tag Type | Tag Description |
+|---|---|---|
+| `organization_id` | string | The unique identifier of the organization. |
+| `project_id` | string, null | The unique identifier of the project (can be null). |
+| `project_name` | string | The name of the project. |
+| `organization_name` | string | The name of the organization. |
+
+{{% /tab %}}
+{{% tab "Fastly" %}}
+
+| Tag Name | Tag Type | Tag Description |
+|---|---|---|
+| `Service_no` | number | Internal service number. |
+| `Aria_invoice_id` | string | The ID for the invoice in Aria. |
+| `Rate_schedule_no` | number | The internal ID of the rate schedule. |
+| `Rate_schedule_tier_no` | number | The internal ID of the rate schedule tier. |
+| `Usage_type_no` | number | ID associated with the usage type. |
+| `Usage_type_cd` | string | Name of the usage type. |
+| `plan_no` | number | ID associated with the plan. |
+| `Plan_name` | string | Name of the plan. |
+| `Client_service_id` | string | Client-specific service identifier. |
+| `Service_name` | string | The name of the Fastly service. |
+
+{{% /tab %}}
+{{% tab "Twilio" %}}
+
+| Tag Name | Tag Type | Tag Description |
+|---|---|---|
+| `Account_sid` | string | Alphanumeric string identifying the Twilio account. |
+| `Category` | string | The category of usage. For more information, see [Usage Categories][101]. |
+| `Count_unit` | string | The units in which count is measured, such as calls for calls or messages for SMS. |
+| `Usage_unit` | string | The units in which usage is measured, such as minutes for calls or messages for SMS. |
+
+[101]: https://www.twilio.com/docs/usage/api/usage-record#usage-categories
+
+{{% /tab %}}
+{{< /tabs >}}
+
 For more information about visualizing your cost data using metrics, see the [Custom Costs documentation][9].
 
 ## Use SaaS Cost Integration data
