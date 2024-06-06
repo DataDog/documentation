@@ -83,7 +83,7 @@ Edit the `datadog.yaml` Agent configuration file and set `logs_no_ssl` to `true`
 
 ```
 logs_config:
-  use_tcp: true
+  force_use_tcp: true
   logs_dd_url: "<PROXY_SERVER_DOMAIN>:10514"
   logs_no_ssl: true
 ```
@@ -150,7 +150,7 @@ backend datadog-logs
 
 * `sudo apt-get install ca-certificates` (Debian, Ubuntu)
 * `yum install ca-certificates` (CentOS, Redhat)
-        
+
 If successful, the file will be located at `/etc/ssl/certs/ca-bundle.crt` for CentOS, Redhat.
 
 Once the HAProxy configuration is in place, you can reload it or restart HAProxy. **It is recommended to have a `cron` job that reloads HAProxy every 10 minutes** (for example, `service haproxy reload`) to force a refresh of HAProxy's DNS cache, in case `app.datadoghq.com` fails over to another IP.
@@ -209,11 +209,11 @@ backend datadog-logs
     server datadog agent-intake.logs.datadoghq.eu:443 ssl verify required ca-file /etc/ssl/certs/ca-bundle.crt check port 443
 ```
 
-Download the certificate with the following command: 
+Download the certificate with the following command:
 
 * `sudo apt-get install ca-certificates` (Debian, Ubuntu)
-* `yum install ca-certificates` (CentOS, Redhat) 
- 
+* `yum install ca-certificates` (CentOS, Redhat)
+
 If successful, the file will be located at `/etc/ssl/certs/ca-bundle.crt` for CentOS, Redhat.
 
 Once the HAProxy configuration is in place, you can reload it or restart HAProxy. **It is recommended to have a `cron` job that reloads HAProxy every 10 minutes** (for example, `service haproxy reload`) to force a refresh of HAProxy's DNS cache, in case `app.datadoghq.eu` fails over to another IP.
@@ -231,7 +231,7 @@ Edit the `datadog.yaml` Agent configuration file and set `logs_config.logs_dd_ur
 
 ```yaml
 logs_config:
-  use_tcp: true
+  force_use_tcp: true
   logs_dd_url: myProxyServer.myDomain:10514
 ```
 
