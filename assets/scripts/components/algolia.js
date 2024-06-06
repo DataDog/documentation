@@ -275,9 +275,10 @@ function loadInstantSearch(currentPageWasAsyncLoaded) {
 
             const handleResizeDebounced = debounce(handleResize, 500, false);
 
-            window.addEventListener('resize', handleResizeDebounced);
-
             handleResizeDebounced();
+            if (!navigator.userAgent.toLowerCase().match(/android/i)) {
+                window.addEventListener('resize', handleResizeDebounced);
+            } 
         }
     }
 }
