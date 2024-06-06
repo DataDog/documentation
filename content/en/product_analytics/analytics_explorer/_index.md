@@ -60,4 +60,4 @@ In [Analytics][1], customize your display by adding facets and measures to your 
 
 [1]: https://app.datadoghq.com/rum/analytics
 [2]: /real_user_monitoring/guide/understanding-the-rum-event-hierarchy/
-[3]: /product_analytics/group/
+[3]: /product_analytics/analytics_explorer/group/
