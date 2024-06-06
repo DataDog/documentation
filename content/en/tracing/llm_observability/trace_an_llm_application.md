@@ -28,8 +28,9 @@ To trace an LLM application:
 
 1. [Install the LLM Observability SDK][5].
 2. Configure the SDK by providing [the required environment variables][6] in your application startup command, or programmatically [in-code][7].
+    - Remember to configure your Datadog API key, Datadog site, and ML app name.
 3. [Create spans](#span-creation-examples) in your LLM application code to represent your application's operations.
-    - For additional examples and detailed usage, see the [Quickstart][8] and the [SDK documentation][9] for tracing spans. 
+    - For additional examples and detailed usage, see the [Quickstart][8] and the [SDK documentation][9].
     - [Nest spans](#nesting-spans) to create more useful traces.
 4. [Annotate your spans](#span-annotation-example) with input data, output data, metadata (such as `temperature`), metrics (such as `prompt_tokens`), and key-value tags (such as `version:1.0.0`).
 5. Run your LLM application. 

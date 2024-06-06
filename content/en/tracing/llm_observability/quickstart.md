@@ -59,8 +59,8 @@ completion = oai_client.chat.completions.create(
 Run the Python script with the following shell command, sending a trace of the OpenAI call to Datadog:
 
 {{< code-block lang="shell" >}}
-DD_LLMOBS_ENABLED=1 DD_LLMOBS_APP_NAME=onboarding-quickstart \ 
-DD_API_KEY=<YOUR_DATADOG_API_KEY> DD_SITE=<YOUR_DATADOG_SITE> \ 
+DD_LLMOBS_ENABLED=1 DD_LLMOBS_ML_APP=onboarding-quickstart \
+DD_API_KEY=<YOUR_DATADOG_API_KEY> DD_SITE=<YOUR_DATADOG_SITE> \
 DD_LLMOBS_AGENTLESS_ENABLED=1 ddtrace-run python quickstart.py
 {{< /code-block >}}
 
