@@ -4695,6 +4695,11 @@ menu:
       parent: csm
       identifier: csm_agentless
       weight: 6
+    - name: Compatibility Matrix
+      url: security/cloud_security_management/agentless_scanning/compatibility
+      parent: csm_agentless
+      identifier: csm_agentless_compatibility
+      weight: 101
     - name: OOTB Rules
       url: security/default_rules/#cat-cloud-security-management
       parent: csm
