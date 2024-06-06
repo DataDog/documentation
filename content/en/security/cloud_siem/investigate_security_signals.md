@@ -49,7 +49,7 @@ To view your signals based on detections rules, click **Rules List** in the **Vi
 To view your signals by MITRE ATT&CK Tactic and Technique:
 1. Select **Table** in the **Visualize as** field under the search bar, and group by **Tactic**.
 1. Click the plus icon next to the first group `by` to add a second group `by`, and select **Technique** for it.
-1. In the table, click one of the tactics or techniques to see options to further drill down and filter the signals. For example, you can view signals related to the tactic and technique and search for or exclude specific tactics and techniques.
+1. In the table, click one of the tactics or techniques to see options to further investigate and filter the signals. For example, you can view signals related to the tactic and technique and search for or exclude specific tactics and techniques.
 
 ## Triage a signal or multiple signals
 
