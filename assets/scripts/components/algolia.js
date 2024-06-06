@@ -180,6 +180,15 @@ function loadInstantSearch(currentPageWasAsyncLoaded) {
             const aisSearchBoxSubmit = document.querySelector('.ais-SearchBox-submit');
             const searchPathname = `${basePathName}search`;
 
+            // dirty fix for android devices - keyboard disappearing after search input focused
+            aisSearchBoxInput.addEventListener('focus', () => {
+                window.removeEventListener('resize');
+
+                setTimeout(() => {
+                    window.addEventListener('resize')
+                }, 500)
+            })
+
             const handleSearchbarKeydown = (e) => {
                 if (e.code === 'Enter') {
                     e.preventDefault();
