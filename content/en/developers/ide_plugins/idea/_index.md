@@ -33,7 +33,6 @@ The **Code Insights** view keeps you informed about:
 - Issues from [Error Tracking][6]
 - [Vulnerability][8] reports by Application Security Management
 - [Flaky tests][9] detected by CI Visibility
-- Profiling insights from [Watchdog Insights][10]
 
 The **Continuous Profiler** helps you to reduce latency and lower cloud costs by highlighting code lines that:
 - Consume the most CPU
@@ -227,7 +226,6 @@ You can give feedback in the [discussion forum][1], or send an e-mail to [team-i
 [7]: https://www.jetbrains.com/lp/toolbox/
 [8]: /security/application_security/vulnerability_management/
 [9]: /continuous_integration/guides/flaky_test_management/
-[10]: /watchdog/insights
 [11]: mailto:team-ide-integration@datadoghq.com
 [12]: /continuous_integration/explorer/?tab=testruns
 [13]: /static_analysis/?tab=githubactions

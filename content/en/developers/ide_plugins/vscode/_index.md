@@ -30,7 +30,6 @@ The **Code Insights** view keeps you informed about:
 - Issues from [Error Tracking][10]
 - [Vulnerability][11] reports by Application Security Management
 - [Flaky tests][12] detected by CI Visibility
-- Profiling insights from [Watchdog Insights][13]
 
 The **Synthetic Tests** feature allows you to:
 - Run Synthetic tests on your local environments
@@ -129,6 +128,5 @@ To share your feedback, email [team-ide-integration@datadoghq.com][9].
 [10]: /tracing/error_tracking/
 [11]: /security/application_security/vulnerability_management/
 [12]: /continuous_integration/guides/flaky_test_management/
-[13]: /watchdog/insights
 [14]: /continuous_integration/static_analysis/?tab=githubactions
 [15]: /continuous_integration/static_analysis/rules/
