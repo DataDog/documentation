@@ -30,6 +30,8 @@ On the [Cloud Security Management Features][5] page in Datadog, select the featu
 - Host Vulnerability Mgmt.
 - Container Vulnerability Mgmt.
 
+**PLACEHOLDER FOR SCREENSHOT**
+
 ## Configure CSM features
 
 Next, go to the [Cloud Security Management Setup][3] page. On this page are instructions for configuring the features you selected.
