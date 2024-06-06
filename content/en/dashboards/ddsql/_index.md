@@ -3,6 +3,10 @@ title: DDSQL
 kind: documentation
 ---
 
+{{< callout url="https://google.com">}}
+DDSQL is in private beta.
+{{< /callout >}}
+
 {{< img src="dashboards/ddsql/query-result.png" alt="The result of a SQL query shown on the DDSQL page in Datadog" style="width:100%;" >}}
 
 ## Overview

@@ -3,6 +3,10 @@ title: DDSQL Aggregation and AGGR Functions
 kind: documentation
 ---
 
+{{< callout url="https://google.com">}}
+DDSQL is in private beta.
+{{< /callout >}}
+
 ## Aggregation functions
 
 Aggregate functions compute a single result from a set of input values, usually used in conjunction with a GROUP BY statement.

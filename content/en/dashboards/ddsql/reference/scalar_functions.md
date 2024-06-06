@@ -3,6 +3,10 @@ title: DDSQL Scalar Functions
 kind: documentation
 ---
 
+{{< callout url="https://google.com">}}
+DDSQL is in private beta.
+{{< /callout >}}
+
 These functions return one value per row.
 
 ## String functions and operators

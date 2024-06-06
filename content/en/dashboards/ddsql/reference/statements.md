@@ -3,17 +3,9 @@ title: DDSQL Statements
 kind: documentation
 ---
 
-## Supported SQL syntax
-
-SQL is broken into five different categories of statements. The table below indicates which categories are supported by DDSQL.
-
-| Category                           | Examples                                         | Support                                        |
-|------------------------------------|--------------------------------------------------|------------------------------------------------|
-| DQL (Data Query Language)          | `SELECT`, `AGGR` (DDSQL alternative to `SELECT`) | Supported                                      |
-| DML (Data Modification Language)   | `INSERT`, `UPDATE`, `DELETE`                     | Limited: Data is not persisted across sessions |
-| DDL (Data Description Language)    | `CREATE`                                         | Limited: Data is not persisted across sessions |
-| DCL (Data Control Language)        | `GRANT`, `REVOKE`                                | Not supported                                  |
-| TCL (Transaction Control Language) | `BEGIN`, `END`, `ROLLBACK`                       | Not supported                                  |
+{{< callout url="https://google.com">}}
+DDSQL is in private beta.
+{{< /callout >}}
 
 ## SELECT
 

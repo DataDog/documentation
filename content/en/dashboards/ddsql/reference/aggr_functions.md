@@ -3,6 +3,10 @@ title: AGGR Functions in DDSQL
 kind: documentation
 ---
 
+{{< callout url="https://google.com">}}
+DDSQL is in private beta.
+{{< /callout >}}
+
 <div class="alert alert-warning">AGGR functions are experimental, and subject to change.</div>
 
 AGGR Functions are functions that can be used in the AGGR statement and executed by the metrics query system. AGGR Functions take 1 parameter, which can be either a string name of the metric being queried, or a subquery (for multi-layer aggregation).

@@ -3,6 +3,10 @@ title: DDSQL Window Functions
 kind: documentation
 ---
 
+{{< callout url="https://google.com">}}
+DDSQL is in private beta.
+{{< /callout >}}
+
 ## row_number
 | Name | Return type | Description |
 |------|-------------|-------------|

@@ -3,6 +3,10 @@ title: DDSQL Logical Operators
 kind: documentation
 ---
 
+{{< callout url="https://google.com">}}
+DDSQL is in private beta.
+{{< /callout >}}
+
 | Name    | Description             |
 |---------|-------------------------|
 | AND     | Boolean logic, a & b    |
