@@ -1,5 +1,5 @@
 ---
-title: Analytics
+title: Analytics Explorer
 kind: documentation
 description: ""
 aliases:
@@ -22,7 +22,7 @@ further_reading:
 
 ## Overview
 
-The Analytics page contains views data aggregation for understanding how your product is being used. You can control:
+The Analytics Explorer contains views data aggregation for understanding how your product is being used. You can control:
 
 * The event type (Sessions, Views, or Actions) to see views by.
 * The query that filters the set of views to analyze.
@@ -44,15 +44,15 @@ In [Analytics][1], customize your display by adding facets and measures to your 
 
 2. Choose a measure to graph the unique count.
 
-    {{< img src="product_analytics/analytics/measure_selection.png" alt="Choose a measure to graph the unique count." style="width:50%;">}}
+   {{< img src="product_analytics/analytics/measure_selection.png" alt="Choose a measure to graph the unique count." style="width:50%;">}}
 
 4. Choose a field to [group][3] the measure by.
 
-    {{< img src="product_analytics/analytics/group_breakdown.png" alt="Group the measure by specific fields." style="width:50%;">}}
+   {{< img src="product_analytics/analytics/group_breakdown.png" alt="Group the measure by specific fields." style="width:50%;">}}
 
 5. Choose the time interval for your graph. Changing the global timeframe changes the list of available timestep values.
 
-    {{< img src="product_analytics/analytics/time_interval.png" alt="Choose a time interval for your graph." style="width:50%;">}}
+   {{< img src="product_analytics/analytics/time_interval.png" alt="Choose a time interval for your graph." style="width:50%;">}}
 
 ## Further Reading
 
