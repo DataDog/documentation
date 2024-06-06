@@ -72,7 +72,7 @@ To install the Ruby test visibility library:
 1. Add the `datadog-ci` gem to your `Gemfile`:
 
 {{< code-block lang="ruby" filename="Gemfile" >}}
-source '<https://rubygems.org>'
+source "<https://rubygems.org>"
 gem "datadog-ci", "~> 1.0", group: :test
 {{< /code-block >}}
 
@@ -88,8 +88,8 @@ The RSpec integration traces all executions of example groups and examples when 
 To activate your integration, add this to the `spec_helper.rb` file:
 
 ```ruby
-require 'rspec'
-require 'datadog/ci'
+require "rspec"
+require "datadog/ci"
 
 # Only activates test instrumentation on CI
 if ENV["DD_ENV"] == "ci"
@@ -98,7 +98,7 @@ if ENV["DD_ENV"] == "ci"
     c.ci.enabled = true
 
     # The name of the service or library under test
-    c.service = 'my-ruby-app'
+    c.service = "my-ruby-app"
 
     # Enables the RSpec instrumentation
     c.ci.instrument :rspec
@@ -128,8 +128,8 @@ The Minitest integration traces all executions of tests when using the `minitest
 To activate your integration, add this to the `test_helper.rb` file:
 
 ```ruby
-require 'minitest'
-require 'datadog/ci'
+require "minitest"
+require "datadog/ci"
 
 # Only activates test instrumentation on CI
 if ENV["DD_ENV"] == "ci"
@@ -138,7 +138,7 @@ if ENV["DD_ENV"] == "ci"
     c.ci.enabled = true
 
     # The name of the service or library under test
-    c.service = 'my-ruby-app'
+    c.service = "my-ruby-app"
 
     c.ci.instrument :minitest
   end
@@ -165,14 +165,14 @@ DD_ENV=ci bundle exec rake test
 Example configuration with `minitest/autorun`:
 
 ```ruby
-require 'datadog/ci'
-require 'minitest/autorun'
+require "datadog/ci"
+require "minitest/autorun"
 
 if ENV["DD_ENV"] == "ci"
   Datadog.configure do |c|
     c.ci.enabled = true
 
-    c.service = 'my-ruby-app'
+    c.service = "my-ruby-app"
 
     c.ci.instrument :minitest
   end
@@ -188,8 +188,8 @@ The Cucumber integration traces executions of scenarios and steps when using the
 To activate your integration, add the following code to your application:
 
 ```ruby
-require 'cucumber'
-require 'datadog/ci'
+require "cucumber"
+require "datadog/ci"
 
 # Only activates test instrumentation on CI
 if ENV["DD_ENV"] == "ci"
@@ -198,7 +198,7 @@ if ENV["DD_ENV"] == "ci"
     c.ci.enabled = true
 
     # The name of the service or library under test
-    c.service = 'my-ruby-app'
+    c.service = "my-ruby-app"
 
     # Enables the Cucumber instrumentation
     c.ci.instrument :cucumber
@@ -226,10 +226,10 @@ DD_ENV=ci bundle exec rake cucumber
 You can add custom tags to your tests by using the current active test:
 
 ```ruby
-require 'datadog/ci'
+require "datadog/ci"
 
 # inside your test
-Datadog::CI.active_test&.set_tag('test_owner', 'my_team')
+Datadog::CI.active_test&.set_tag("test_owner", "my_team")
 # test continues normally
 # ...
 ```
@@ -241,10 +241,10 @@ To create filters or `group by` fields for these tags, you must first create fac
 Like tags, you can add custom measures to your tests by using the current active test:
 
 ```ruby
-require 'datadog/ci'
+require "datadog/ci"
 
 # inside your test
-Datadog::CI.active_test&.set_metric('memory_allocations', 16)
+Datadog::CI.active_test&.set_metric("memory_allocations", 16)
 # test continues normally
 # ...
 ```
