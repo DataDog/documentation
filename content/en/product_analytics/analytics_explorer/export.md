@@ -28,7 +28,7 @@ You can copy, export, or download your aggregated search query and visualization
 
 Click the **More** button on the right hand corner and select an option from the dropdown menu:
 
-- Copy your query as a cURL command to test it in the [RUM Explorer][2] and build custom reports using [Datadog APIs][3].
+- Copy your query as a cURL command to test it in the [Analytics Explorer][2] and build custom reports using [Datadog APIs][3].
 - Export your search results to a [monitor][4] that triggers alerts on predefined thresholds.
 - Export your search results to an [existing notebook][5] for reporting or consolidation purposes.
 - Download your search results as a CSV file for individual RUM events and specific aggregations. You can export up to 5,000 individual RUM events with lists and up to 500 aggregations for timeseries, top lists, and table graphs.
@@ -40,7 +40,7 @@ Options available for some visualization types are not supported in others. For 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/rum/explorer
+[1]: https://app.datadoghq.com/product-analytics/explorer
 [2]: /real_user_monitoring/explorer/
 [3]: https://docs.datadoghq.com/api/latest/rum/
 [4]: /monitors/types/real_user_monitoring/

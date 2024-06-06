@@ -21,7 +21,7 @@ Context about your users and their applications, including the OS, country, code
 
 To open the event side panel in the [Analytics Explorer][1], click on a table row in the **List** visualization type. Alternatively, click in the side panel list displayed after you click on **Show related events**. 
 
-The event side panel displays all the information relative to a RUM event. The waterfall displays related resources, errors, views, and actions, and visualizes your events that cause errors or experience excessive loading times in a timeline format (the view minimap). 
+The event side panel displays all the information relative to a Product Analytics event. The waterfall displays related resources, errors, views, and actions, and visualizes your events that cause errors or experience excessive loading times in a timeline format (the view minimap). 
 
 You can also drag and drop the time selectors in the waterfall to zoom into a time span and focus on the events of interest.
 
@@ -29,7 +29,7 @@ You can also drag and drop the time selectors in the waterfall to zoom into a ti
 
 ## Attributes
 
-RUM collects contextual information by default. You can also add additional context attributes with the [Global Context API][2].
+Product Analytics collects contextual information by default. You can also add additional context attributes with the [Global Context API][2].
 
 {{< img src="real_user_monitoring/explorer/events/attributes.png" alt="Attribute tab" width="80%" >}}
 
