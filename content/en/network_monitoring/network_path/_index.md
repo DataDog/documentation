@@ -14,7 +14,7 @@ further_reading:
 <div class="alert alert-warning">Network Path for Datadog Network Performance Monitoring is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-<div class="alert alert-warning">Network Path for Datadog Network Performance Monitoring is in private beta. Reach out to your Customer Service Manager to sign up.</div>
+<div class="alert alert-info">Network Path for Datadog Network Performance Monitoring is in private beta. Reach out to your Customer Service Manager to sign up.</div>
 
 ## Overview
 
@@ -24,13 +24,12 @@ further_reading:
 
 ## How it works
 
-Datadog performs a `traceroute` at the host level to illustrate the packet's journey and latency at each hop from a source to it's destination. Each host runs its own `traceroute`, and the path shown is a visual representation of this list. 
+Datadog performs a `traceroute` at the host level to illustrate the packet's journey and latency at each hop from a source to it's destination. Each host runs its own `traceroute`, and the path shown is a visual representation of this list. The following diagram depicts the typical flow of a network path from a source (Host) to it's destination.
 
-**Note**: By default, Datadog executes a 'traceroute` on static paths every minute and on dynamic paths every five minutes.
+**Note**: By default, Datadog executes a `traceroute` on static paths every minute and on dynamic paths every five minutes.
 
-**Waiting on brand design**
 
-{{< img src="network_performance_monitoring/network_path/network_path.png" alt="Diagram of how Network path works" >}}
+{{< img src="network_performance_monitoring/network_path/network_path_diagram.png" alt="Diagram of how Network path works" >}}
 
 
 ## Further Reading
