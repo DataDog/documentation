@@ -5535,23 +5535,23 @@ menu:
       identifier: pa_analytics_explorer
       weight: 5
     - name: Group
-      url: product_analytics/analytics/group
-      parent: pa_analytics
+      url: product_analytics/analytics_explorer/group
+      parent: pa_analytics_explorer
       identifier: pa_analytics_group
       weight: 501
     - name: Visualize
-      url: product_analytics/analytics/visualize
-      parent: pa_analytics
+      url: product_analytics/analytics_explorer/visualize
+      parent: pa_analytics_explorer
       identifier: visualize
       weight: 502
     - name: Events
-      url: product_analytics/analytics/events
-      parent: pa_analytics
+      url: product_analytics/analytics_explorer/events
+      parent: pa_analytics_explorer
       identifier: pa_analytics_events
       weight: 503
     - name: Export
-      url: product_analytics/analytics/export
-      parent: pa_analytics
+      url: product_analytics/analytics_explorer/export
+      parent: pa_analytics_explorer
       identifier: pa_analytics_export
       weight: 504
     - name: Guides
