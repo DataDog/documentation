@@ -41,7 +41,7 @@ self.monotonic_count(name, value, tags=None, hostname=None, device_name=None)
 
 ### `count()`
 
-This function submits the number of events that occurred during the check interval. It can be called multiple times during a check's execution, each sample being added to the value that is sent.
+This function submits the number of events that occurred during the check interval. It can be called multiple times during a check's execution, with each sample being added to the value that is sent.
 
 **Note**: Metrics submitted with this function are stored with a `COUNT` metric type in Datadog. Each value in the stored timeseries is a delta of the metric's value between samples (not time-normalized).
 
@@ -64,7 +64,7 @@ self.count(name, value, tags=None, hostname=None, device_name=None)
 
 ### `gauge()`
 
-This function submits the value of a metric at a given timestamp. If called multiple times during a check's execution for a metric only the last sample is used.
+This function submits the value of a metric at a given timestamp. If called multiple times during a check's execution for a metric, only the last sample is used.
 
 **Note**: Metrics submitted with this function are stored with a `GAUGE` metric type in Datadog.
 
@@ -87,7 +87,7 @@ self.gauge(name, value, tags=None, hostname=None, device_name=None)
 
 ### `rate()`
 
-This function submits the sampled raw value of your RATE metric. The Datadog Agent calculates the delta of that metric's value between two submission, and divides it by the submission interval to get the rate. This function should only be called once during a check, otherwise it throws away any value that is less than a previously submitted value.
+This function submits the sampled raw value of your RATE metric. The Datadog Agent calculates the delta of the metric's value between two submission and divides it by the submission interval to get the rate. This function should only be called once during a check; if it is called twice, any value that is less than a previously submitted value is thrown away.
 
 **Note**: Metrics submitted with this function are stored as a `GAUGE` metric type in Datadog. Each value in the stored timeseries is a time-normalized delta of the metric's value between samples.
 
@@ -113,7 +113,7 @@ self.rate(name, value, tags=None, hostname=None, device_name=None)
 
 This function submits the sample of a histogram metric that occurred during the check interval. It can be called multiple times during a check's execution. Each sample is added to the statistical distribution of the set of values for this metric.
 
-**Note**: All metric aggregation produced are stored as a `GAUGE` metric type in Datadog, except the `<METRIC_NAME>.count` that is stored as a `RATE` metric type in Datadog.
+**Note**: All histogram metric aggregations are stored as a `GAUGE` metric type in Datadog, except for `<METRIC_NAME>.count`, which is stored as a `RATE` metric type.
 
 Function template:
 
@@ -134,17 +134,17 @@ self.histogram(name, value, tags=None, hostname=None, device_name=None)
 
 ## Tutorial
 
-Follow the steps below to create a [custom Agent check][2] that sends all metric types periodically:
+Perform the following steps to create a [custom Agent check][2] that sends all metric types periodically.
 
 1. Create the directory `metrics_example.d/` in the `conf.d/` folder at the root of your [Agent's configuration directory][3].
 
-2. In `metrics_example.d/` folder, create an empty configuration file named `metrics_example.yaml` with the following content:
+2. In the `metrics_example.d/` folder, create an empty configuration file called `metrics_example.yaml` with the following content:
 
     ```yaml
     instances: [{}]
     ```
 
-3. Up one level from the `conf.d/` folder, go to the `checks.d/` folder. Create a custom check file named `metrics_example.py` with the content below:
+3. Up one level from the `conf.d/` folder, go to the `checks.d/` folder. Create a custom check file named `metrics_example.py` with the following content:
 
     ```python
     import random
@@ -201,7 +201,7 @@ Follow the steps below to create a [custom Agent check][2] that sends all metric
     ```
 
 4. [Restart the Agent][4].
-5. Validate your custom check is running correctly with the [Agent's status subcommand][5]. Look for `metrics_example` under the Checks section:
+5. Validate that your custom check is running correctly by using the [Agent's status subcommand][5]. Look for `metrics_example` under the Checks section:
 
     ```text
     =========
@@ -225,7 +225,7 @@ Follow the steps below to create a [custom Agent check][2] that sends all metric
         (...)
     ```
 
-6. Verify your metrics are reporting to Datadog on your [Metric Summary page][6].
+6. Verify that your metrics are reporting to Datadog on your [Metric Summary page][6].
 
 ## Further Reading
 
