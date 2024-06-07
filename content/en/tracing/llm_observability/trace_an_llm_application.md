@@ -46,7 +46,7 @@ In addition, the LLM Observability SDK provides equivalent inline methods to [cr
 The examples below create a workflow span.
 
 {{< tabs >}}
-{{% tab "Decorators"}}
+{{% tab "Decorators" %}}
 {{< code-block lang="python" >}}
 from ddtrace.llmobs.decorators import workflow
 
@@ -57,7 +57,7 @@ def process_message():
 {{< /code-block >}}
 {{% /tab %}}
 
-{{% tab "Inline"}}
+{{% tab "Inline" %}}
 {{< code-block lang="python" >}}
 from ddtrace.llmobs import LLMObs
 
@@ -76,7 +76,7 @@ Starting a new span before the current span is finished will automatically trace
 The examples below create a trace with two spans.
 
 {{< tabs >}}
-{{% tab "Decorators"}}
+{{% tab "Decorators" %}}
 {{< code-block lang="python" >}}
 from ddtrace.llmobs.decorators import workflow
 
@@ -93,7 +93,7 @@ def perform_preprocessing():
 {{< /code-block >}}
 {{% /tab %}}
 
-{{% tab "Inline"}}
+{{% tab "Inline" %}}
 {{< code-block lang="python" >}}
 from ddtrace.llmobs import LLMObs
 
@@ -113,7 +113,7 @@ To [annotate a span][13], use the LLM Observability SDK's `LLMObs.annotate()` me
 The examples below annotate the workflow span created in the [above example](#creating-spans):
 
 {{< tabs >}}
-{{% tab "Decorators"}}
+{{% tab "Decorators" %}}
 {{< code-block lang="python" >}}
 from ddtrace.llmobs import LLMObs
 from ddtrace.llmobs.decorators import workflow
@@ -132,7 +132,7 @@ def process_message():
 {{< /code-block >}}
 {{% /tab %}}
 
-{{% tab "Inline"}}
+{{% tab "Inline" %}}
 {{< code-block lang="python" >}}
 from ddtrace.llmobs import LLMObs
 
