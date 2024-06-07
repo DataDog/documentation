@@ -902,7 +902,6 @@ agents:
 {{< /tabs >}}
 {{< /collapse-content >}} 
 
-
 {{< collapse-content title="HTTP/2 monitoring" level="h4" >}}
 Universal Service Monitoring can capture HTTP/2 and gRPC traffic.
 
@@ -938,7 +937,62 @@ agents:
 {{% /tab %}}
 
 {{< /tabs >}}
-{{< /collapse-content >}} 
+{{< /collapse-content >}}
+
+{{< collapse-content title="Universal Kafka Monitoring (Private Beta)" level="h4" >}}
+
+<div class="alert alert-info">
+Universal Kafka Monitoring is available in <strong>Private beta</strong>.
+</div>
+
+<strong>Note</strong>:
+<br>
+<ul>
+  <li>Producers and consumers require Linux Kernel version 5.2 or later.
+  <li>Producers and consumers must be interfacing with Kafka <strong>without</strong> TLS.
+  <li>Datadog recommends Helm with Datadog chart version 2.26.2 or later. The chart version is defined in the <a href="https://github.com/DataDog/helm-charts/blob/main/charts/datadog/Chart.yaml">`chart.yaml`</a> file of the dd-agent. 
+  <li>Requires Agent version 7.53 or greater.
+</ul>
+
+{{< tabs >}}
+{{% tab "Configuration file" %}}
+
+Add the following configuration to the `system-probe.yaml`:
+
+```yaml
+service_monitoring_config:
+  enabled: true
+  enable_kafka_monitoring: true
+```
+
+{{% /tab %}}
+{{% tab "Environment variable" %}}
+
+```conf
+DD_SERVICE_MONITORING_CONFIG_ENABLE_KAFKA_MONITORING=true
+```
+{{% /tab %}}
+
+{{% tab "Helm" %}}
+
+```conf
+datadog:
+  ...
+  serviceMonitoring:
+    enabled: true
+
+agents:
+  ...
+  containers:
+    systemProbe:
+      env:
+        - name: DD_SERVICE_MONITORING_CONFIG_ENABLE_KAFKA_MONITORING
+          value: " true"
+```
+{{% /tab %}}
+
+{{< /tabs >}}
+{{< /collapse-content >}}
 
 
 ## Path exclusion and replacement
