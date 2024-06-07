@@ -18,7 +18,7 @@ further_reading:
 
 ## Requirements and limitations
 
-- You will have to download use the dd-sdk-android-trace and dd-sdk-android-trace-otel dependencies starting 
+- You need to download the dd-sdk-android-trace and dd-sdk-android-trace-otel dependencies starting 
 with 2.12.0+
 
 ## Setup
