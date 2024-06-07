@@ -79,7 +79,7 @@ ENV DD_APPSEC_SCA_ENABLED=true
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-Update your deployment configuration file for APM and add the ASM environment variable:
+Update your deployment configuration file for APM and add the SCA environment variable:
 
 ```yaml
 spec:
