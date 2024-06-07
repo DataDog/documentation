@@ -52,7 +52,7 @@ android {
 }
 ```
 
-**Note**: OpenTelemetry API uses `google.auto.value` package which is throwing errors in R8. In order to fix this issue, you need to add the following proguard rules file:
+**Note**: To fix `google.auto.value` errors in R8, add the following ProGuard rule:
 
 ```text
 -dontwarn com.google.**
