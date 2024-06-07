@@ -720,7 +720,7 @@ To enable [collecting logs from your jobs](#enable-job-log-collection), configur
 
 With this configuration, the Agent listens for logs on port `10518`.
 
-<div class="alert alert-info"><strong>Note</strong>: Logs are billed separately from CI Visibility. Log retention, exclusion, and indexes are configured in Logs Settings. Logs for Jenkins jobs can be identified by the `source:jenkins` tag.</div>
+<div class="alert alert-info"><strong>Note</strong>: Logs are billed separately from CI Visibility. Log retention, exclusion, and indexes are configured in Logs Settings. Logs for Jenkins jobs can be identified by the <code>source:jenkins</code> tag.</div>
 
 ### Correlate infrastructure metrics
 
