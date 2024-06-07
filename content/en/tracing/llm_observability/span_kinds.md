@@ -13,7 +13,7 @@ LLM Observability is not available in the US1-FED site.
 
 ## Overview
 
-LLM Observability supports the following span kinds:
+LLM Observability categorizes spans by their span kind, which defines the type of work the span is performing. This can give you more granular insights on what operations are being performed by your LLM application. LLM Observability currently supports the following span kinds:
 
 | Kind      | Represents   | Root span?   | Can have child spans? | Examples |
 |-----------|--------------|--------------|-------------|----|
