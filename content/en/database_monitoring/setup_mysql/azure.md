@@ -102,7 +102,7 @@ DELIMITER ;
 GRANT EXECUTE ON PROCEDURE <YOUR_SCHEMA>.explain_statement TO datadog@'%';
 ```
 
-## Install the Agent
+## Install and configure the Agent
 
 To monitor Azure hosts, install the Datadog Agent in your infrastructure and configure it to connect to each instance endpoint remotely. The Agent does not need to run on the database, it only needs to connect to it. For additional Agent installation methods not mentioned here, see the [Agent installation instructions][5].
 
@@ -207,22 +207,9 @@ Follow the instructions to [enable the cluster checks][2] if not already enabled
 
 Complete the following steps to install the [Datadog Cluster Agent][1] on your Kubernetes cluster. Replace the values to match your account and environment.
 
-1. Add the Datadog Helm repository from the command line:
-
-    ```shell
-    helm repo add datadog https://helm.datadoghq.com
-    helm repo update
-    kubectl create secret generic datadog-secret --from-literal api-key=<DATADOG_API_KEY>
-    ```
-
-    Replace `<DATADOG_API_KEY>` with your [Datadog API key][1].
-
-2. Create a file, `datadog-values.yaml`:
-    ```yaml
-    datadog:
-      apiKey: <DATADOG_API_KEY>
-      site: <DATADOG_SITE>
-
+1. Complete the [Datadog Agent installation instructions][3] for Helm.
+2. Update your YAML configuration file to include the following:
+    {{< code-block lang="yaml" filename="datadog-values.yaml" >}}
     clusterAgent:
       confd:
         mysql.yaml: -|
@@ -240,15 +227,13 @@ Complete the following steps to install the [Datadog Cluster Agent][1] on your K
 
     clusterChecksRunner:
       enabled: true
-    ```
-
-    Replace `<DATADOG_SITE>` with your [Datadog site][2]. Your site is {{< region-param key="dd_site" code="true" >}}. (Ensure the correct SITE is selected on the right).
+    {{< /code-block >}}
 
 3. Deploy the Agent with the above configuration file from the command line:
 
-    ```shell
+    {{< code-block lang="shell" >}}
     helm install datadog-agent -f datadog-values.yaml datadog/datadog
-    ```
+    {{< /code-block >}}
 
     <div class="alert alert-info">
     For Windows, append <code>--set targetSystem=windows</code> to the <code>helm install</code> command.
@@ -256,6 +241,7 @@ Complete the following steps to install the [Datadog Cluster Agent][1] on your K
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: /getting_started/site
+[3]: /containers/kubernetes/installation/?tab=helm#installation
 
 ### Configure with mounted files
 
