@@ -41,6 +41,8 @@ Datadog’s LLM Observability product is designed to support observability for a
 
 ### LLM Inference Monitoring
 
+A trace comprised of a single LLM span as the root.
+
 The basic level of a LLM trace is a singular LLM span. Tracing individual LLM inferences unlocks basic LLM Observability features, allowing you to:
 1. Track inputs and outputs to your LLM calls
 2. Track token usage, error rates, and latencies for your LLM calls
@@ -52,17 +54,21 @@ The SDK provides integrations to automatically capture LLM calls to specific pro
 
 ### LLM Workflow Monitoring
 
+A trace comprised of a root workflow span with nested LLM, task, tool, embedding, and retrieval spans.
+
 Your application likely includes operations that surround LLM calls which play a large role in your overall application performance, for instance tool calls to external APIs or preprocessing task steps.
 
-By tracing LLM, task, tool, and other spans together under workflow spans, you can unlock more granular insights and a more holistic view regarding your LLM application.
+By tracing LLM calls and contextual task or tool operations together under workflow spans, you can unlock more granular insights and a more holistic view regarding your LLM application.
 
 {{< img src="tracing/llm_observability/llm-observability-workflow-trace.png" alt="A trace visualizing a more complex LLM workflow" style="width:100%;" >}}
 
 ### LLM Agent Monitoring
 
+A trace comprised of a root agent span with nested LLM, task, tool, embedding, retrieval, and workflow spans.
+
 What if your LLM application has complex autonomous logic such as decision making that can’t be captured by a static workflow? You are likely using an LLM Agent. Agents may execute multiple different workflows depending on the user input.
 
-In addition to tracing LLM workflows, you can instrument your LLM application to trace and group together all workflows and contextual operations run by a single LLM agent as an agent trace.
+You can instrument your LLM application to trace and group together all workflows and contextual operations run by a single LLM agent as an agent trace.
 
 {{< img src="tracing/llm_observability/llm-observability-agent-trace.png" alt="A trace visualizing an LLM agent" style="width:100%;" >}}
 

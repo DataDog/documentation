@@ -30,7 +30,7 @@ LLMObs.enable(integrations_enabled=False, ...)
 patch(<INTEGRATION_NAME_IN_LOWERCASE>=True)
 {{< /code-block >}}
 
-**Note**: Use `Botocore` as the name of the [AWS Bedrock](#aws-bedrock) integration when manually enabling.
+**Note**: Use `botocore` as the name of the [AWS Bedrock](#aws-bedrock) integration when manually enabling.
 
 ## OpenAI
 
@@ -40,8 +40,8 @@ The OpenAI integration provides automatic tracing for the [OpenAI Python SDK's][
 
 The OpenAI integration instruments both synchronous and asynchronous versions of the following methods:
 
-- [Completion][2] (`OpenAI().completions.create()`, `AsyncOpenAI().completions.create()`)
-- [Chat completion][3] (`OpenAI().chat.completions.create()`, `AsyncOpenAI().chat.completions.create()`)
+- [Completions][2] (`OpenAI().completions.create()`, `AsyncOpenAI().completions.create()`)
+- [Chat completions][3] (`OpenAI().chat.completions.create()`, `AsyncOpenAI().chat.completions.create()`)
 
 ## LangChain
 
@@ -51,9 +51,9 @@ The LangChain integration provides automatic tracing for the [LangChain Python S
 
 The LangChain integration instruments both synchronous and asynchronous versions of the following methods:
 
-- LLM (`llm.invoke()`, `llm.batch()`)
-- Chat model (`chat_model.invoke()`, `chat_model.invoke()`)
-- Chain/LCEL/RunnableSequence (`chain.invoke()`, `chain.batch()`)
+- [LLMs][13] (`llm.invoke()`, `llm.batch()`)
+- [Chat models][14] (`chat_model.invoke()`, `chat_model.invoke()`)
+- [Chains/LCEL][15] (`chain.invoke()`, `chain.batch()`)
 
 **Note:** The LangChain integration does not yet support tracing streamed calls.
 
@@ -65,8 +65,10 @@ The AWS Bedrock integration provides automatic tracing for the AWS Bedrock Runti
 
 The AWS Bedrock integration instruments the following methods:
 
-- [`InvokeModel`][7]
-- [`InvokeModelWithResponseStream`][8]
+- [Chat messages][7] (`InvokeModel`)
+- [Streamed chat messages][8] (`InvokeModelWithResponseStream`)
+
+**Note:** The AWS Bedrock integration does not yet support tracing embedding calls.
 
 ## Anthropic
 
@@ -92,3 +94,6 @@ The Anthropic integration instruments both synchronous and asynchronous versions
 [10]: https://docs.anthropic.com/en/api/messages
 [11]: https://docs.anthropic.com/en/api/messages-streaming
 [12]: /tracing/llm_observability/sdk/#in-code-setup
+[13]: https://python.langchain.com/v0.2/docs/concepts/#llms
+[14]: https://python.langchain.com/v0.2/docs/concepts/#chat-models
+[15]: https://python.langchain.com/v0.2/docs/concepts/#runnable-interface
