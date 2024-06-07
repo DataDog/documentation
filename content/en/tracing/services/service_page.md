@@ -50,9 +50,9 @@ Consult on this page:
   Service health is in private beta. To request access, complete the form.
 {{< /callout >}} 
 
-The **Service Health** panel automatically provides a real-time summary of service signals to help you understand if a service needs your attention.
+The **Service Health** panel provides a real-time summary of service signals to help you understand if a service needs your attention.
 
-Service health factors in many types of signals, including monitors, incidents, watchdog insights, and error tracking issues, and surfaces the most critical alerts. Additionally, the panel provides links to associated incidents so you can take action, as necessary.
+Service health considers many types of signals (including monitors, incidents, Watchdog insights, and error tracking issues) and surfaces the most critical alerts. Additionally, the Service Health panel provides links to associated incidents, which helps you to take necessary actions.
 
 {{< img src="/tracing/services/service_page/service-health.png" alt="Service Health panel on service page showing an active incident." style="width:100%;" >}}
 
@@ -62,7 +62,7 @@ To access service health:
 2. Hover over a service and click **Full Page**.
 3. Select **Service Health**.
 
-The health of your service can have a *Ok*, *Warning*, or *Alert* status. Statuses are determined based on the following conditions and signal types:
+The health of your service can have an *Ok*, *Warning*, or *Alert* status. Statuses are determined based on the following conditions and signal types:
 
 |   Status    |                         Condition                          |                                                            Monitors                                                            |            Incidents            |                        Watchdog Insights                        |          Error Tracking Issues          |
 |:-----------:|:----------------------------------------------------------:|:------------------------------------------------------------------------------------------------------------------------------:|:-------------------------------:|:---------------------------------------------------------------:|:---------------------------------------:|
