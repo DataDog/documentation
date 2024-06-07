@@ -768,13 +768,16 @@ DD_SYSTEM_PROBE_PROCESS_SERVICE_INFERENCE_ENABLED=true
 {{< /collapse-content >}} 
 
 {{< collapse-content title="Go TLS Monitoring" level="h4" >}}
-<<div class="alert alert-info">
+<div class="alert alert-info">
 Universal Service Monitoring is available in <strong>beta</strong> to monitor TLS encrypted traffic from services implemented in Golang.
 </div>
 
-**Note**:
-* Go HTTPS servers can upgrade HTTP1.1 protocol to HTTP/2 which is supported in private beta. Reach to your account manager for further details
-* Requires Agent version 7.51 or greater.
+<strong>Note</strong>:
+<br>
+<ul>
+  <li>Go HTTPS servers can upgrade HTTP1.1 protocol to HTTP/2 which is supported in private beta. Reach to your account manager for further details
+  <li>Requires Agent version 7.51 or greater.
+</ul>
 
 {{< tabs >}}
 {{% tab "Configuration file" %}}
@@ -812,14 +815,13 @@ agents:
 {{< /tabs >}}
 {{< /collapse-content >}} 
 
-### NodeJS TLS Monitoring
+{{< collapse-content title="NodeJS TLS Monitoring" level="h4" >}}
 
 <div class="alert alert-info">
 Universal Service Monitoring is available in <strong>beta</strong> to monitor HTTP, HTTP/2, and gRPC requests from services implemented in NodeJS.
 </div>
 
-**Note**:
-* Requires Agent version 7.54 or greater.
+Requires Agent version 7.54 or greater.
 
 {{< tabs >}}
 {{% tab "Configuration file" %}}
@@ -855,6 +857,7 @@ agents:
 {{% /tab %}}
 
 {{< /tabs >}}
+{{< /collapse-content >}} 
 
 {{< collapse-content title="Istio Monitoring" level="h4" >}}
 <div class="alert alert-info">
@@ -900,7 +903,7 @@ agents:
 {{< /collapse-content >}} 
 
 
-{{< collapse-content title="Datadog Operator" level="h4" >}}
+{{< collapse-content title="HTTP/2 monitoring" level="h4" >}}
 Universal Service Monitoring can capture HTTP/2 and gRPC traffic.
 
 Requires Agent version 7.53 or greater.
@@ -936,7 +939,6 @@ agents:
 
 {{< /tabs >}}
 {{< /collapse-content >}} 
-
 
 
 ## Path exclusion and replacement
