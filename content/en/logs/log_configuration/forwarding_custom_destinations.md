@@ -30,7 +30,7 @@ Log Forwarding allows you to send logs from Datadog to custom destinations like 
 
 {{< img src="logs/log_configuration/forwarding/forwarding_page.png" alt="The Log Forwarding page, showing custom destinations highlighted. The list of destinations includes Splunk (filtered by service:logs-processing), HTTP Endpoint (filtered by source:okta OR source:paloalto), and Elasticsearch (filtered by team:acme env:prod)." >}}
 
-In the case a forwarding attempt fails — for example, if your destination is temporarily unavailable — Datadog will retry periodically for 2 hours, following an exponential backoff strategy. The first attempt is made following a 1 minute delay. For subsequent retries, the delay increases progressively to a maximum of 8-12 minutes (10 minutes with 20% variance).
+In the case a forwarding attempt fails (for example: if your destination temporarily becomes unavailable for any reason), Datadog retries periodically over the following 2 hours using an exponential backoff strategy. The first attempt is made following a 1 minute delay. For subsequent retries, the delay increases progressively to a maximum of 8-12 minutes (10 minutes with 20% variance).
 
 The following metrics report on logs that have been forwarded successfully, including logs that were sent successfully after retries, as well as logs that were dropped.
 
