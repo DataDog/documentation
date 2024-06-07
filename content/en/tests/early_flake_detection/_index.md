@@ -129,5 +129,5 @@ If the Datadog library can't fetch the full list of known tests, the Datadog lib
 [5]: /quality_gates/setup
 [6]: /tests
 [7]: https://app.datadoghq.com/ci/settings/test-service
-[8]: /continuous_integration/explorer?tab=testruns
+[8]: /tests/explorer/
 [9]: /help/

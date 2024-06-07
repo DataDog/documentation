@@ -248,6 +248,17 @@
               - /tracing/setup_overview/setup/ruby
               - /tracing/trace_collection/ruby
               - /tracing/trace_collection/dd_libraries/ruby/
+        - action: pull-and-push-file
+          branch: release
+          globs:
+          - 'docs/legacy/GettingStarted-v1.md'
+          options:
+            dest_path: '/tracing/trace_collection/automatic_instrumentation/dd_libraries/'
+            file_name: 'ruby_v1.md'
+            front_matters:
+              dependencies: ["https://github.com/DataDog/dd-trace-rb/blob/release/docs/legacy/GettingStarted-v1.md"]
+              title: (Legacy) Tracing Ruby Applications
+              kind: documentation
 
       - repo_name: datadog-serverless-functions
         contents:
@@ -605,3 +616,15 @@
                 - link: 'tracing/trace_collection/dd_libraries/ruby'
                   tag: 'Documentation'
                   text: 'Instrument Your Application'
+          - action: pull-and-push-file
+            branch: release
+            globs:
+            - 'docs/legacy/Compatibility-v1.md'
+            options:
+              dest_path: '/tracing/trace_collection/compatibility/'
+              file_name: 'ruby_v1.md'
+              front_matters:
+                dependencies: ["https://github.com/DataDog/dd-trace-rb/blob/release/docs/legacy/Compatibility-v1.md"]
+                title: (Legacy) Ruby Compatibility Requirements
+                kind: documentation
+          

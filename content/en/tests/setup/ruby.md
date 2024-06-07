@@ -50,12 +50,10 @@ Supported test runners:
 
 ## Configuring reporting method
 
-To report test results to Datadog, you need to configure the `ddtrace` gem:
+To report test results to Datadog, you need to configure the `datadog-ci` gem:
 
 {{< tabs >}}
 {{% tab "Cloud CI provider (Agentless)" %}}
-
-<div class="alert alert-info">Agentless mode is available in `ddtrace` gem versions >= 1.15.0</div>
 
 {{% ci-agentless %}}
 
@@ -67,20 +65,18 @@ To report test results to Datadog, you need to configure the `ddtrace` gem:
 {{% /tab %}}
 {{< /tabs >}}
 
-## Installing the Ruby tracer
+## Installing the Ruby test visibility library
 
-To install the Ruby tracer:
+To install the Ruby test visibility library:
 
-1. Add the `ddtrace` gem to your `Gemfile`:
+1. Add the `datadog-ci` gem to your `Gemfile`:
 
 {{< code-block lang="ruby" filename="Gemfile" >}}
-source '<https://rubygems.org>'
-gem 'ddtrace', "~> 1.0"
+source "<https://rubygems.org>"
+gem "datadog-ci", "~> 1.0", group: :test
 {{< /code-block >}}
 
 2. Install the gem by running `bundle install`
-
-See the [Ruby tracer installation docs][1] for more details.
 
 ## Instrumenting your tests
 
@@ -92,17 +88,17 @@ The RSpec integration traces all executions of example groups and examples when 
 To activate your integration, add this to the `spec_helper.rb` file:
 
 ```ruby
-require 'rspec'
-require 'datadog/ci'
+require "rspec"
+require "datadog/ci"
 
 # Only activates test instrumentation on CI
 if ENV["DD_ENV"] == "ci"
   Datadog.configure do |c|
-    # Configures the tracer to ensure results delivery
+    # enables test visibility
     c.ci.enabled = true
 
     # The name of the service or library under test
-    c.service = 'my-ruby-app'
+    c.service = "my-ruby-app"
 
     # Enables the RSpec instrumentation
     c.ci.instrument :rspec
@@ -132,17 +128,17 @@ The Minitest integration traces all executions of tests when using the `minitest
 To activate your integration, add this to the `test_helper.rb` file:
 
 ```ruby
-require 'minitest'
-require 'datadog/ci'
+require "minitest"
+require "datadog/ci"
 
 # Only activates test instrumentation on CI
 if ENV["DD_ENV"] == "ci"
   Datadog.configure do |c|
-    # Configures the tracer to ensure results delivery
+    # enables test visibility
     c.ci.enabled = true
 
     # The name of the service or library under test
-    c.service = 'my-ruby-app'
+    c.service = "my-ruby-app"
 
     c.ci.instrument :minitest
   end
@@ -169,14 +165,14 @@ DD_ENV=ci bundle exec rake test
 Example configuration with `minitest/autorun`:
 
 ```ruby
-require 'datadog/ci'
-require 'minitest/autorun'
+require "datadog/ci"
+require "minitest/autorun"
 
 if ENV["DD_ENV"] == "ci"
   Datadog.configure do |c|
     c.ci.enabled = true
 
-    c.service = 'my-ruby-app'
+    c.service = "my-ruby-app"
 
     c.ci.instrument :minitest
   end
@@ -192,17 +188,17 @@ The Cucumber integration traces executions of scenarios and steps when using the
 To activate your integration, add the following code to your application:
 
 ```ruby
-require 'cucumber'
-require 'datadog/ci'
+require "cucumber"
+require "datadog/ci"
 
 # Only activates test instrumentation on CI
 if ENV["DD_ENV"] == "ci"
   Datadog.configure do |c|
-    # Configures the tracer to ensure results delivery
+    # enables test visibility
     c.ci.enabled = true
 
     # The name of the service or library under test
-    c.service = 'my-ruby-app'
+    c.service = "my-ruby-app"
 
     # Enables the Cucumber instrumentation
     c.ci.instrument :cucumber
@@ -227,15 +223,13 @@ DD_ENV=ci bundle exec rake cucumber
 
 ### Adding custom tags to tests
 
-<div class="alert alert-info"><code>Datadog::CI</code> public API is available in <code>ddtrace</code> gem versions >= 1.17.0</div>
-
 You can add custom tags to your tests by using the current active test:
 
 ```ruby
-require 'datadog/ci'
+require "datadog/ci"
 
 # inside your test
-Datadog::CI.active_test&.set_tag('test_owner', 'my_team')
+Datadog::CI.active_test&.set_tag("test_owner", "my_team")
 # test continues normally
 # ...
 ```
@@ -244,15 +238,13 @@ To create filters or `group by` fields for these tags, you must first create fac
 
 ### Adding custom measures to tests
 
-<div class="alert alert-info">The <code>Datadog::CI</code> public API is available in <code>ddtrace</code> gem versions >= 1.17.0</div>
-
 Like tags, you can add custom measures to your tests by using the current active test:
 
 ```ruby
-require 'datadog/ci'
+require "datadog/ci"
 
 # inside your test
-Datadog::CI.active_test&.set_metric('memory_allocations', 16)
+Datadog::CI.active_test&.set_metric("memory_allocations", 16)
 # test continues normally
 # ...
 ```
@@ -261,7 +253,7 @@ For more information on custom measures, see the [Add Custom Measures Guide][3].
 
 ## Configuration settings
 
-The following is a list of the most important configuration settings that can be used with the tracer, either in code by using a `Datadog.configure` block, or using environment variables:
+The following is a list of the most important configuration settings that can be used with the test visibility library, either in code by using a `Datadog.configure` block, or using environment variables:
 
 `service`
 : Name of the service or library under test.<br/>
@@ -299,7 +291,7 @@ if ENV["DD_ENV"] == "ci"
     #  ... ci configs and instrumentation here ...
     c.tracing.instrument :redis
     c.tracing.instrument :pg
-    # ... any other instrumentations supported by ddtrace gem ...
+    # ... any other instrumentations supported by datadog gem ...
   end
 end
 ```
@@ -307,12 +299,12 @@ end
 Alternatively, you can enable automatic instrumentation in `test_helper/spec_helper`:
 
 ```ruby
-require "ddtrace/auto_instrument" if ENV["DD_ENV"] == "ci"
+require "datadog/auto_instrument" if ENV["DD_ENV"] == "ci"
 ```
 
 **Note**: In CI mode, these traces are submitted to CI Visibility, and they do **not** show up in Datadog APM.
 
-For the full list of available instrumentation methods, see the [`ddtrace` documentation][6]
+For the full list of available instrumentation methods, see the [tracing documentation][6]
 
 ## Webmock/VCR
 
@@ -401,7 +393,7 @@ Usually it corresponds to a method that contains testing logic.
 
 Create tests in a suite by calling `Datadog::CI#start_test` or `Datadog::CI.trace_test` and passing the name of the test and name of the test suite. Test suite name must be the same as name of the test suite started in previous step.
 
-Call `datadog.trace.api.civisibility.DDTest#end` when a test has finished execution.
+Call `Datadog::CI::Test#finish` when a test has finished execution.
 
 ### Code example
 
@@ -453,7 +445,6 @@ Datadog::CI.active_test_session&.finish
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/trace_collection/dd_libraries/ruby/#installation
 [2]: /tracing/trace_collection/custom_instrumentation/ruby?tab=locally#adding-tags
 [3]: /tests/guides/add_custom_measures/?tab=ruby
 [4]: /getting_started/tagging/unified_service_tagging
