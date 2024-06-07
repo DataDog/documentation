@@ -87,7 +87,7 @@ This data is also available in Dashboards, Notebooks, and more for more precise 
 
 ## Sampling rate
 
-Netflow sampling rate is taken into account in the computation of bytes and packets by default. This means that the displayed values for bytes and packets are computed with the sampling rate applied.
+NetFlow sampling rate is taken into account in the computation of bytes and packets by default. This means that the displayed values for bytes and packets are computed with the sampling rate applied.
 Additionally, you can query for **Bytes (Adjusted) (@adjusted_bytes)** and **Packets (Adjusted) (@adjusted_packets)** in Dashboards and Notebooks to visualize them.
 
 **Note:** You can query for **Bytes (Sampled) (@bytes)** and **Packets (Sampled) (@packets)** in Dashboards and Notebooks to visualize the real data sent by your devices.
