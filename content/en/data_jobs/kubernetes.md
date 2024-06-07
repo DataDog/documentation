@@ -200,7 +200,9 @@ aws emr-containers start-job-run \
 
 In Datadog, view the [Data Jobs Monitoring][5] page to see a list of all your data processing jobs.
 
-## Tag spans at runtime
+## Advanced Configuration
+
+### Tag spans at runtime
 
 {{% djm-runtime-tagging %}}
 

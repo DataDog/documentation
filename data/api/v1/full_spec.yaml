@@ -16085,7 +16085,6 @@ components:
 
             (in minutes).'
           format: int64
-          maximum: 1440
           minimum: 0
           type: integer
       type: object
@@ -16302,6 +16301,10 @@ components:
           type: string
         name:
           description: Name of the file.
+          maxLength: 1500
+          type: string
+        originalFileName:
+          description: Original name of the file.
           maxLength: 1500
           type: string
         size:
