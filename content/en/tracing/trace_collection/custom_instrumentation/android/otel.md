@@ -58,7 +58,7 @@ android {
 -dontwarn com.google.**
 ```
 
-2. Initialize Datadog SDK with your application context, tracking consent, and the [Datadog client token][4]. For security reasons, you must use a client token: you cannot use [Datadog API keys][5] to configure Datadog SDK as they would be exposed client-side in the Android application APK byte code. For more information about setting up a client token, see the [client token documentation][4]:
+2. Initialize Datadog SDK with your application context, tracking consent, and [Datadog client token][4]. For security reasons, you must use a client token, not [Datadog API keys][5], to configure Datadog SDK.
 
 
 {{< site-region region="us" >}}
