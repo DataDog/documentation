@@ -265,6 +265,117 @@ EXPLAIN [ ANALYZE ] DQLExpr
 `EXPLAIN` and `EXPLAIN ANALYZE` are mostly intended for use by developers of DDSQL as diagnostic tools, but they can be useful for users who are running into unexpected behavior.
 
 
+## CREATE
+
+DDSQL allows users to create temporary tables, insert into them, and query & reference them. These tables are not persisted across sessions.
+
+{{< code-block lang="sql" >}}
+CREATE TABLE name (
+  columnName columnType
+  [ PRIMARY KEY [ AUTOINCREMENT ] | NOT NULL | UNIQUE | DEFAULT expression ] … 
+)
+{{< /code-block >}}
+
+## INSERT
+
+DDSQL's `INSERT` statement follows the SQL standard. DDSQL only allows users to insert into temporary tables that are created with the `CREATE` statement, not downstream data sources.
+
+{{< code-block lang="sql" >}}
+INSERT INTO tableName [ (specific, columns, …) ] VALUES 
+  ( value1, value2, … ),
+  ( value1, value2, … ),
+  ...
+{{< /code-block >}}
+
+
+## SHOW
+
+When running queries, DDSQL references runtime parameters (environmental variables) that are not specified in the query statement itself, such as the default interval to use for metrics queries if no `BUCKET BY` is specified, or the start and end timestamp for a query. 
+
+To display the values of these variables, use the `SHOW` statement:
+
+{{< code-block lang="sql" >}}
+SHOW (ALL | parameter)
+{{< /code-block >}}
+
+`SHOW ALL` displays all available runtime parameters in the DDSQL system, and `SHOW <PARAMETER>` displays only the parameter specified.
+
+<div class="alert alert-warning">While the <code>SHOW</code> statement is a part of the SQL standard, the runtime parameter names themselves are experimental. Parameters may be renamed, retyped, or deprecated in the future.</div>
+
+## SET
+
+To modify a runtime parameter, use the `SET` statement.
+
+{{< code-block lang="sql" >}}
+SET variableName = expression
+{{< /code-block >}}
+
+## CASE
+
+The `CASE` expression is a generic conditional expression, similar to if/else statements in other programming languages. `CASE` comes in two forms, simple and searched.
+
+### Simple CASE statements
+
+Simple CASE statements are of the form:
+
+{{< code-block lang="sql" >}}
+CASE expression
+  WHEN value THEN result
+  [ WHEN … ]
+  [ ELSE result ]
+END
+{{< /code-block >}}
+
+The expression is computed, then compared to each of the value expressions in the `WHEN` clauses until one is found that is equal to it. If no match is found, the result of the `ELSE` clause, or `NULL` if `ELSE` is omitted, is returned.
+
+### Searched CASE statements
+
+Searched CASE statements are of the form:
+
+{{< code-block lang="sql" >}}
+CASE
+  WHEN condition THEN result
+  [ WHEN … ]
+  [ ELSE result ]
+END
+{{< /code-block >}}
+
+If a condition's result is true, the value of the `CASE` expression is the result that follows the condition, and the remainder of the `CASE` expression is not processed. If the condition's result is not true, any subsequent `WHEN` clauses are examined in the same manner. If no `WHEN` condition yields true, the value of the `CASE` expression is the result of the `ELSE` clause. If the `ELSE` clause is omitted and no condition is true, the result is `NULL`.
+
+
+## CAST
+
+`CAST` specifies a conversion from one data type to another.
+
+{{< code-block lang="sql" >}}
+CAST(expression AS type)
+{{< /code-block >}}
+
+Not all types are convertible in this way.
+
+DDSQL also supports Postgres casting syntax: `<EXPRESSION>::<TYPE>` (for example, `SELECT 1::text;`).
+
+<!-- TODO: Some of the sections below could probably be in a higher level overview, find an appropriate place for them as the draft shapes up. -->
+
+## Sessions
+
+DDSQL queries are executed within a session. The session provides the user with a writable DDSQL environment.
+
+{{< code-block lang="sql" >}}
+SELECT 1; SELECT 2;
+{{< /code-block >}}
+
+Some options, such as time frame, are exposed runtime parameters within the environment and may be modified with `SET` and read with `SHOW`. Modifications made by SQL statements (for example, DDL or DML statements) are visible by subsequent statements in a session, but do not outlive the session. You can think of a session as executing within a `BEGIN ... ROLLBACK`.
+
+The default schema in the session includes foreign table definitions that model different parts of the downstream data sources that DDSQL supports.
+
+## Schema on read
+
+"Schema on read" describes a strategy to apply a schema to data as it is read rather than when it is written. In DDSQL, it is used to enable SQL queries against unstructured data.
+
+If a table supports schema on read, references to nonexistent table columns are considered legal, and those references are mapped to the table in a way that is defined by the downstream. For many downstreams, these become tag references.
+
+If a column reference cannot be unambiguously mapped to a single table, it is considered an ambiguous reference. Because schema-on-read columns don't exist in the catalog, they can typically only be used without specifying the correlation if there is exactly one table in the `FROM` clause that supports schema on read.
 
 
 
