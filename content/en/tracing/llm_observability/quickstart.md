@@ -85,6 +85,6 @@ If your application consists of more elaborate prompting or complex chains or wo
 [7]: /account_management/api-app-keys/#add-an-api-key-or-client-token
 [8]: /tracing/llm_observability/api
 [9]: /tracing/llm_observability/sdk/#command-line-setup
-[10]: /tracing/llm_observability/sdk/#llm-integrations
+[10]: /tracing/llm_observability/auto-instrumentation
 [11]: /tracing/llm_observability/trace_an_llm_application
 [12]: https://github.com/DataDog/llm-observability
