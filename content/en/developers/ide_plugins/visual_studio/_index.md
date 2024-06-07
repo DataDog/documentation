@@ -30,7 +30,7 @@ The Datadog extension for Visual Studio helps you find and fix bugs, security is
 
 ### Code insights
 
-Stay informed about [Error Tracking][5] issues, [Security Vulnerabilities][6], and [Flaky Tests][10], and without leaving Visual Studio.
+Stay informed about [Error Tracking][5] issues, [Security Vulnerabilities][6], and [Flaky Tests][10] without leaving Visual Studio.
 
 {{< img src="/developers/ide_plugins/visual_studio/code-insights.png" alt="The Code Insights view" >}}
 
