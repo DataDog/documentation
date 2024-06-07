@@ -347,14 +347,6 @@ val tracerProvider = GlobalOpenTelemetry.get().getTracer(instrumentationName = "
 {{% /tab %}}
 {{% tab "Java" %}}
 ```java
-```
-{{% /tab %}}
-{{% tab "Java" %}}
-```java
-
-{{% /tab %}} 
-{{% tab "Java" %}}
-```java
 GlobalOpenTelemetry.set(new OpenTelemetry() {
     private final TracerProvider tracerProvider = new OtelTracerProvider.Builder()
             .setService(BuildConfig.APPLICATION_ID)
