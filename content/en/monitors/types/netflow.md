@@ -2,7 +2,7 @@
 title: NetFlow Monitor
 kind: Documentation
 further_reading:
-- link: "/network_monitoring/devices/netflow/"
+- link: "/network_monitoring/devices/netflow/#visualization"
   tag: "Documentation"
   text: "Learn more about NetFlow Monitoring"
 - link: "/monitors/notify/"
