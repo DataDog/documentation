@@ -16085,7 +16085,6 @@ components:
 
             (in minutes).'
           format: int64
-          maximum: 1440
           minimum: 0
           type: integer
       type: object
