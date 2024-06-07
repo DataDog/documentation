@@ -20,7 +20,7 @@ with 2.12.0+
 
 ## Setup
 
-1. Add Android Trace and Android Trace OpenTelemetry gradle dependencies [dd-sdk-android-trace][1] and the [dd-sdk-android-trace-otel][2] as a dependency in your **application module's** `build.gradle` file.
+1. Add [Android Trace][1] and [Android Trace OpenTelemetry][2] dependencies to your **application module's** `build.gradle` file:
 
 
 ```groovy
