@@ -33,13 +33,26 @@ further_reading:
 <div class="alert alert-warning">Application Security Management is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-Enable your application to [detect and protect against threats][1] targeting your production systems, and to [manage risks][2] in your code and its open source dependencies, using the Datadog library for your application language. You can detect vulnerabilities and threats for apps hosted on a server, Docker, Kubernetes, Amazon ECS, and (for supported languages) AWS Fargate.
+You can use Datadog Application Security Management products to: 
+
+- Enable your application to [detect and protect against threats][1] targeting your production systems. 
+- [Manage risks][2] in your code and its open source dependencies using the Datadog library for your application language. 
+- Detect vulnerabilities and threats for apps hosted on a server, Docker, Kubernetes, Amazon ECS, and (for supported languages) AWS Fargate.
 
 {{% appsec-getstarted %}}
 
 ## ASM enablement types
 
-There are two main approaches to enable ASM on your tracing libraries: single-step or with Datadog tracing libraries.
+Use the following approaches to enable ASM products.
+
+### ASM setup in the Datadog UI
+
+To set up ASM products in your browser:
+
+1. Go to [ASM Setup][5].
+2. Follow the instructions for each of the ASM products.
+
+Datadog also includes a [Getting Starting][6] guide to ASM products. Follow the guide to onboard with ASM.
 
 ### Single-step instrumentation
 
@@ -58,3 +71,5 @@ There are two main approaches to enable ASM on your tracing libraries: single-st
 [2]: /security/application_security/risk_management/
 [3]: /security/application_security/enabling/single_step
 [4]: /security/application_security/enabling/tracing_libraries
+[5]: https://app.datadoghq.com/security/configuration/asm/setup
+[6]: https://app.datadoghq.com/security/configuration/asm/onboarding

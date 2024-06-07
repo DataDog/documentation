@@ -4790,16 +4790,22 @@ menu:
       url: security/application_security/enabling/tracing_libraries/threat_detection/
       parent: appsec_enabling_tracing_libraries
       identifier: appsec_enabling_tracing_libraries_threats
-      weight: 2101
+      weight: 204
     - name: Code Security
       url: security/application_security/enabling/tracing_libraries/code_security/
       parent: appsec_enabling_tracing_libraries
       identifier: appsec_enabling_tracing_libraries_code
+      weight: 205
+    - name: Software Composition Analysis
+      url: security/application_security/enabling/tracing_libraries/sca/
+      parent: appsec_enabling_tracing_libraries
+      identifier: appsec_enabling_tracing_libraries_sca
+      weight: 206
     - name: Enabling ASM for Serverless
       url: security/application_security/enabling/serverless/
       parent: appsec_getting_started
       identifier: appsec_enabling_serverless
-      weight: 204
+      weight: 207
     - name: How It Works
       url: security/application_security/how-appsec-works/
       parent: application_security
