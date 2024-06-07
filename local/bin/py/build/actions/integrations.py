@@ -869,18 +869,13 @@ class Integrations:
     def retrieve_page_description(self, page_url):
         page = requests.get(page_url, timeout=1)
         page_content = bs(page.content, 'html.parser')
-        metas = page_content.find_all('meta')
-        page_description = ''
-        if metas:
-            for meta in metas:
-                if 'property' in meta.attrs and meta.attrs['property'] == 'og:description':
-                    page_description = fr"{meta.attrs['content']}"
-        if not page_description:
-            page_description = fr"{page_content.title.string}"
+        page_description = None
+        og_description = page_content.find('meta', property='og:title')
+        if og_description:
+            page_description = og_description.get('content', fr"{page_content.title.string}")
             page_description = page_description.replace(" | Datadog", "")
         
         return page_description
-    
     
     def add_integration_frontmatter(
         self, file_name, content, dependencies=[], integration_id="", integration_version="", manifest_json=None, extra_fm=None
@@ -925,16 +920,15 @@ class Integrations:
                 item["integration_version"] = item.get("integration_version", integration_version)
                 # if tile.resources exists, add it to the front matter as further reading
                 further_reading = []
-                if item.get("tile", {}).get("resources"):
-                    for resource in item.get("tile", {}).get("resources"):
-                        description = self.retrieve_page_description(resource.get("url"))
-                        if description:
-                            further_reading_link = {
-                                    "link": resource.get("url"),
-                                    "tag": resource.get("resource_type"),
-                                    "text": description
-                                }
-                            further_reading.append(further_reading_link)
+                for resource in item.get("tile", {}).get("resources", []):
+                    description = self.retrieve_page_description(resource.get("url"))
+                    if description:
+                        further_reading_link = {
+                                "link": resource.get("url"),
+                                "tag": resource.get("resource_type"),
+                                "text": description
+                            }
+                        further_reading.append(further_reading_link)
                 if further_reading:
                     item["further_reading"] = further_reading
                 # remove aliases that point to the page they're located on
