@@ -35,7 +35,7 @@ dependencies {
 
 ```
 
-**Note**: `OpenTelemetry` API dependency required in the `dd-sdk-android-trace-otel` module is using Java 9 features, if you target Android API level lower than 24, you will need to enable desugaring in your project. To enable desugaring, add the following lines to your `build.gradle` file:
+**Note**:  If you are targeting Android API level lower than 24, enable desugaring by adding the following lines to your `build.gradle` file:
 
 ```groovy
 android {
