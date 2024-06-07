@@ -28,7 +28,7 @@ title: Monitorización de planos de control de Kubernetes
 
 El objetivo de esta sección es documentar las especificidades y proporcionarte buenas configuraciones de base para la monitorización de planos de control de Kubernetes. Luego, podrás personalizar estas configuraciones para añadir cualquier característica de Datadog.
 
-Con las integraciones de Datadog para el [servidor de la API][1], [Etcd][2], el [Administrador de controladores][3], y el [Programador][4], puedes recopilar métricas clave de los cuatro componentes del plano de control de Kubernetes.
+Con las integraciones de Datadog para el [servidor de API][1], [Etcd][2], el [Administrador de controladores][3], y el [Programador][4], puedes recopilar métricas clave de los cuatro componentes del plano de control de Kubernetes.
 
 * [Kubernetes con Kubeadm](#Kubeadm)
 * [Kubernetes en Amazon EKS](#EKS)
@@ -324,7 +324,7 @@ scheduler:
 
 ## Kubernetes en Amazon EKS {#EKS}
 
-En el servicio Amazon Elastic Kubernetes (EKS), [las métricas del servidor de API están expuestas][5]. Esto permite al Datadog Agent obtener métricas del servidor de API utilizando checks de endpoint, como se describe en la [documentación de los checks de métricas del servidor de la API de Kubernetes][1]. Para configurar el check, añade las siguientes anotaciones al servicio `default/kubernetes`:
+En el servicio Amazon Elastic Kubernetes (EKS), [las métricas del servidor de API están expuestas][5]. Esto permite al Datadog Agent obtener métricas del servidor de API utilizando checks de endpoint, como se describe en la [documentación de los checks de métricas del servidor de API de Kubernetes][1]. Para configurar el check, añade las siguientes anotaciones al servicio `default/kubernetes`:
 
 ```yaml
 anotaciones:
@@ -794,7 +794,7 @@ Instala el Datadog Agent con la [tabla de monitorización rancher][10].
 
 Los componentes del plano de control se ejecutan en Docker fuera de Kubernetes. Dentro de Kubernetes, el servicio `kubernetes` en el espacio de nombres `default` se dirige a la(s) IP(s) del nodo del plano de control. Puedes confirmarlo ejecutando `$ kubectl describe endpoints kubernetes`.
 
-Puedes anotar este servicio con checks de endpoint (gestionados por Datadog Cluster Agent) para monitorizar la API de servidor, el administrador de controladores y el programador:
+Puedes anotar este servicio con checks de endpoint (gestionados por Datadog Cluster Agent) para monitorizar el servidor de API, el administrador de controladores y el programador:
 
 ```shell
 kubectl edit service kubernetes
