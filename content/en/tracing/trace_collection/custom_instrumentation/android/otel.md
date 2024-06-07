@@ -281,7 +281,7 @@ android {
    {{< /site-region >}}
 
    To be GDPR compliant, the SDK requires the tracking consent value at initialization.
-   The tracking consent can be one of the following values [See Tracking Consent][6].:
+   The tracking consent can be one of the following values [see Tracking Consent][6]:
    * `TrackingConsent.PENDING`: The SDK starts collecting and batching the data but does not send it to the data
      collection endpoint. The SDK waits for the new tracking consent value to decide what to do with the batched data.
    * `TrackingConsent.GRANTED`: The SDK starts collecting the data and sends it to the data collection endpoint.
