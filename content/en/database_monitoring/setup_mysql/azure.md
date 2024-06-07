@@ -15,7 +15,7 @@ The Agent collects telemetry directly from the database by logging in as a read-
 
 1. [Configure database parameters](#configure-mysql-settings)
 1. [Grant the Agent access to the database](#grant-the-agent-access)
-1. [Install the Agent](#install-the-agent)
+1. [Install and configure the Agent](#install-and-configure-the-agent)
 1. [Install the Azure MySQL integration](#install-the-azure-mysql-integration)
 
 ## Before you begin
