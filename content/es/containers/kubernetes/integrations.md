@@ -24,7 +24,7 @@ kind: documentación
 title: Kubernetes e integraciones
 ---
 
-Esta página cubre la instalación y la configuración de integraciones para tu infraestructura Kubernetes utilizando una característica de Datadog conocida como _Autodiscovery_. Esto te permite utilizar [variables][16] como `%%host%%` para rellenar dinámicamente tus parámetros de configuración. Para ver una explicación detallada de cómo funciona Autodiscovery, consulta [Empezando con contenedores: Autodiscovery][12]. Para ver las opciones avanzadas de Autodiscovery, como la exclusión de determinados contenedores de Autodiscovery o la tolerancia de pods no listos, consulta la [administración de Autodiscovery][23].
+Esta página cubre la instalación y la configuración de integraciones para tu infraestructura Kubernetes utilizando una característica de Datadog conocida como _Autodiscovery_. Esto te permite utilizar [variables][16] como `%%host%%` para rellenar dinámicamente tus parámetros de configuración. Para ver una explicación detallada de cómo funciona Autodiscovery, consulta [Empezando con contenedores: Autodiscovery][12]. Para ver las opciones avanzadas de Autodiscovery, como la exclusión de determinados contenedores de Autodiscovery o la tolerancia de pods no listos, consulta la [gestión de Autodiscovery][23].
 
 Si utilizas Docker o Amazon ECS, consulta [Docker e integraciones][1].
 
