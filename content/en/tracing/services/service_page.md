@@ -62,13 +62,13 @@ To access service health:
 2. Hover over a service and click **Full Page**.
 3. Select **Service Health**.
 
-The health of your service can have a *Healthy*, *Warning*, or *Alert* status. Statuses are determined based on the following conditions and signal types:
+The health of your service can have a *Ok*, *Warning*, or *Alert* status. Statuses are determined based on the following conditions and signal types:
 
 |   Status    |                         Condition                          |                                                            Monitors                                                            |            Incidents            |                        Watchdog Insights                        |          Error Tracking Issues          |
 |:-----------:|:----------------------------------------------------------:|:------------------------------------------------------------------------------------------------------------------------------:|:-------------------------------:|:---------------------------------------------------------------:|:---------------------------------------:|
 |  **Alert**  |               At least one signal is active.               |               Non-muted alerting P1 monitor or monitor with a paging integration setup (PagerDuty or Opsgenie).                | Active incident of any severity | Active faulty deployment, ongoing APM latency/error rate alert. |                   --                    |
 | **Warning** | At least one signal is active and not in a critical state. | Non-muted alerting P2 monitor, warning P1 monitor, or warning monitor with a paging integration setup (PagerDuty or Opsgenie). | Stable incident of any severity |                   Ongoing log anomaly alert.                    | New (within 48 hours) issues for review |
-| **Healthy** |    No signal from critical or warning state is active.     |                                                               --                                                               |               --                |                               --                                |                   --                    |
+| **Ok** |    No signal from critical or warning state is active.     |                                                               --                                                               |               --                |                               --                                |                   --                    |
 
 ## Service monitor
 
