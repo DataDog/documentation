@@ -16304,6 +16304,10 @@ components:
           description: Name of the file.
           maxLength: 1500
           type: string
+        originalFileName:
+          description: Original name of the file.
+          maxLength: 1500
+          type: string
         size:
           description: Size of the file.
           format: int64

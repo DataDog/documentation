@@ -105,7 +105,7 @@ Beta integrations are disabled by default but can be enabled individually:
 | Ratpack                 | 1.5+       | Fully Supported                                     | `ratpack`                                                |
 | Restlet HTTP Server     | 2.2 - 2.4  | Fully Supported                                     | `restlet-http`.                                          |
 | Spark Java              | 2.3+       | [Beta](#framework-integrations-disabled-by-default) | `sparkjava` (requires `jetty`)                           |
-| Spring Boot             | 1.5        | Fully Supported                                     | `spring-web` or `spring-webflux`                         |
+| Spring Boot             | 1.5+       | Fully Supported                                     | `spring-web` or `spring-webflux`                         |
 | Spring Web (MVC)        | 4.0+       | Fully Supported                                     | `spring-web`                                             |
 | Spring WebFlux          | 5.0+       | Fully Supported                                     | `spring-webflux`                                         |
 | Tomcat                  | 5.5+       | Fully Supported                                     | `tomcat`                                                 |

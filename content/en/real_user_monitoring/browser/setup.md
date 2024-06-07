@@ -3,7 +3,6 @@ title: RUM Browser Monitoring Setup
 kind: documentation
 aliases:
   - /real_user_monitoring/setup
-  - /real_user_monitoring/browser
 further_reading:
 - link: '/real_user_monitoring/explorer/'
   tag: 'Documentation'
@@ -2117,3 +2116,4 @@ window.DD_RUM && window.DD_RUM.getInternalContext() // { session_id: "xxxx", app
 [25]: /real_user_monitoring/browser/advanced_configuration#contexts-life-cycle
 [26]: https://developer.mozilla.org/en-US/docs/Web/API/Event/isTrusted
 [27]: /real_user_monitoring/guide/monitor-electron-applications-using-browser-sdk
+[28]: https://www.datadoghq.com/dg/rum-sdk-injection-beta/
