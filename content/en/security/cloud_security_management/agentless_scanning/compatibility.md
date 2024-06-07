@@ -3,9 +3,9 @@ title: CSM Agentless Scanning Compatibility Matrix
 kind: documentation
 ---
 
-## Operating systems
+## Linux distributions
 
-Agentless Scanning supports the following operating systems for hosts and containers:
+The following Linux distributions are supported for hosts and containers scans:
 
 | Operating System         | Supported Versions                                  | Package Managers | Security Advisories                                                                                       |
 |--------------------------|-----------------------------------------------------|------------------|-----------------------------------------------------------------------------------------------------------|
@@ -20,14 +20,14 @@ Agentless Scanning supports the following operating systems for hosts and contai
 | CBL-Mariner              | 1.0, 2.0                                            | dnf/yum/rpm      | [https://github.com/microsoft/CBL-MarinerVulnerabilityData/][9]                                           |
 | Amazon Linux             | 1, 2, 2023                                          | dnf/yum/rpm      | [https://alas.aws.amazon.com/][10]                                                                        |
 | openSUSE Leap            | 42, 15                                              | zypper/rpm       | [http://ftp.suse.com/pub/projects/security/cvrf/][11]                                                     |
-| SUSE Enterprise Linux    | 11, 12, 15                                          | zypper/rpm       | [http://ftp.suse.com/pub/projects/security/cvrf/][11]                                                     |
+| SUSE Linux Enterprise    | 11, 12, 15                                          | zypper/rpm       | [http://ftp.suse.com/pub/projects/security/cvrf/][11]                                                     |
 | Photon OS                | 1.0, 2.0, 3.0, 4.0                                  | tdnf/yum/rpm     | [https://packages.vmware.com/photon/photon_cve_metadata/][12]                                             |
 | Debian GNU/Linux         | 7, 8, 9, 10, 11, 12 (unstable/sid is not supported) | apt/dpkg         | [https://security-tracker.debian.org/tracker/][13] and [https://www.debian.org/security/oval/][14]        |
 | Ubuntu                   | All versions supported by Canonical                 | apt/dpkg         | [https://ubuntu.com/security/cve][15]                                                                     |
 
 ## Software Composition Analysis
 
-Agentless Scanning supports the following languages for Software Composition Analysis scans on containers and Lambda instances:
+The following languages are supported for Software Composition Analysis scans on containers and Lambda instances:
 
 | Language | Supported Package Manager | Supported Files                                                      |
 |----------|---------------------------|----------------------------------------------------------------------|
@@ -41,7 +41,7 @@ Agentless Scanning supports the following languages for Software Composition Ana
 
 ## Container runtimes
 
-Agentless Scanning supports the following container runtimes:
+The following container runtimes are supported:
 
 - containerd: v1.5.6 or later
 - Docker
