@@ -320,7 +320,7 @@ GlobalTracer.registerIfAbsent(tracer);
 {{% /tab %}}
 {{< /tabs >}}
 
-5. (Optional) - Set the partial flush threshold. You can optimize the workload of the SDK if you create a lot of spans in your application, or on the contrary very few of them. The library waits until the number of finished spans gets above the threshold to write them on disk. A value of `1` writes each span as soon as its finished.
+5. (Optional) - Set the partial flush threshold to optimize the SDK's workload based on the number of spans your application generates. The library waits until the number of finished spans exceeds the threshold before writing them to disk. Setting this value to `1` writes each span as soon as it finishes.
 
 {{< tabs >}} 
 {{% tab "Kotlin" %}}
