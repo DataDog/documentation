@@ -14,7 +14,7 @@ further_reading:
 - link: "/tracing/service_catalog/guides/upstream-downstream-dependencies"
   tag: "Guide"
   text: "See Upstream and Downstream Dependencies During an Active Incident"
-- link: "/dora/setup"
+- link: "/dora_metrics/setup"
   tag: "Guide"
   text: "Get started with DORA metrics"
 - link: "https://www.datadoghq.com/blog/manage-service-catalog-categories-with-service-definition-json-schema/"
