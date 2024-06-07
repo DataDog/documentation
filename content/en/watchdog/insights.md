@@ -24,7 +24,7 @@ Investigating an incident requires trial and error. Drawing from their experienc
 Throughout most of Datadog, Watchdog returns two types of insights:
 
 - **Anomalies**: All the pre-calculated [Watchdog alerts][11] matching the active search query that Watchdog found by scanning your organization's data. Access the full list in the [Watchdog Alert explorer][12].
-- **Outliers**: Dynamically calculated on the data matching the active query and the timeframe, outliers surface tags that appear too frequently in some event types (for example, errors) or drive some continuous metrics upwards (for example, latency).
+- **Outliers**: Tags that appear too frequently in some event types (for example, errors) or drive some continuous metrics upwards (for example, latency).  Outliers are dynamically calculated on the data matching the active query and the time frame.
 
 {{< img src="logs/explorer/watchdog_insights/insights-for-log-explorer.png" alt="The log explorer showing the Watchdog Insights banner with five log anomalies" style="width:100%;" >}}
 
