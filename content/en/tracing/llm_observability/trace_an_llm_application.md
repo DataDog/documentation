@@ -41,7 +41,7 @@ To trace an LLM application:
 
 To create a span, use the LLM Observability SDK's `ddtrace.llmobs.decorators.<SPAN_KIND>()` as a function decorator, replacing `<SPAN_KIND>` with the desired [span kind][4].
 
-In addition, the LLM Observability SDK provides equivalent inline methods to [create and track spans][12]. Use `ddtrace.llmobs.LLMObs.<SPAN_KIND>()` as a context manager, replacing `<SPAN_KIND>` with the desired [span kind][4].
+Alternatively, the LLM Observability SDK provides equivalent inline methods to [create and track spans][12]. Use `ddtrace.llmobs.LLMObs.<SPAN_KIND>()` as a context manager, replacing `<SPAN_KIND>` with the desired [span kind][4].
 
 The examples below create a workflow span.
 
@@ -140,6 +140,7 @@ def process_message():
     with LLMObs.workflow() as span:
         ... # user application logic
         LLMObs.annotate(
+            span=span,
             input_data="<ARGUMENT>",
             output_data="<OUTPUT>",
             metadata={},

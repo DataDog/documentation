@@ -38,7 +38,7 @@ The OpenAI integration provides automatic tracing for the [OpenAI Python SDK's][
 
 ### Traced Methods
 
-The OpenAI integration instruments both synchronous and asynchronous versions of the following methods:
+The OpenAI integration instruments the synchronous, asynchronous, and streamed versions of the following methods:
 
 - [Completions][2] (`OpenAI().completions.create()`, `AsyncOpenAI().completions.create()`)
 - [Chat completions][3] (`OpenAI().chat.completions.create()`, `AsyncOpenAI().chat.completions.create()`)
