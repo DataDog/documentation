@@ -48,8 +48,8 @@ For more information, see the [OkHttpClient Proxy and Authenticator][2] document
 {{% tab "iOS" %}}
 
 When initializing the iOS SDK, specify the following proxy configuration:
-{{< tabs >}}
-{{% tab "Swift" %}}
+
+#### Swift
 ```swift
 import DatadogCore
 
@@ -68,8 +68,8 @@ Datadog.initialize(
   trackingConsent: trackingConsent
 )
 ```
-{{% /tab %}}
-{{% tab "Objective-C" %}}
+
+#### Objective C
 ```objective-c
 @import DatadogObjc;
 
@@ -85,8 +85,6 @@ configuration.proxyConfiguration = @{
 [DDDatadog initializeWithConfiguration:configuration
                        trackingConsent:trackingConsent];
 ```
-{{% /tab %}}
-{{< /tabs >}}
 
 For more information, see the [URLSessionConfiguration.connectionProxyDictionary][3] documentation.
 
@@ -139,8 +137,8 @@ For more information, see the [OkHttpClient Proxy and Authenticator][2] document
 {{% /tab %}}
 {{% tab "iOS" %}}
 When initializing the iOS SDK, specify the following proxy configuration:
-{{< tabs >}}
-{{% tab "Swift" %}}
+
+#### Swift
 ```swift
 import DatadogCore
 
@@ -159,8 +157,8 @@ Datadog.initialize(
   trackingConsent: trackingConsent
 )
 ```
-{{% /tab %}}
-{{% tab "Objective-C" %}}
+
+#### Objective C
 ```objective-c
 @import DatadogObjc;
 
@@ -176,8 +174,6 @@ configuration.proxyConfiguration = @{
 [DDDatadog initializeWithConfiguration:configuration
                        trackingConsent:trackingConsent];
 ```
-{{% /tab %}}
-{{< /tabs >}}
 
 For more information, see the [URLSessionConfiguration.connectionProxyDictionary][3] documentation.
 
