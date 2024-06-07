@@ -34,9 +34,7 @@ To create an NPM monitor in Datadog, use the main navigation: [**Monitors** --> 
 
 As you define the search query, the top graph updates in real time.
 
-// To be replaced 
-
-{{< img src="monitors/monitor_types/network_performance/example_dns_failures.png" alt="Example configuration with auto-grouped client and server traffic, hidden N/A values, measured as the sum of DNS failures metric with a limit of 100" style="width:100%;" >}}
+{{< img src="monitors/monitor_types/netflow/monitor.png" alt="Example monitor configuration using NetFlow data" style="width:100%;" >}}
 
 1. Construct a search query using the same logic as the [NetFlow widgets][4] in your dashboards. 
 1. Select if you want to alert on bytes or packets for traffic.
@@ -46,9 +44,7 @@ As you define the search query, the top graph updates in real time.
 
 You can create NetFlow monitors using formulas and functions. This can be used, for example, to create monitors on the volume of traffic sent by source and device. 
 
-// To be replaced
-
-{{< img src="monitors/monitor_types/network_performance/npm_formulas_functions.png" alt="Example NPM monitor configuration showing percent of retransmits from a client to server" style="width:100%;" >}}
+{{< img src="monitors/monitor_types/netflow/formula.png" alt="Example monitor configuration using NetFlow data and a formula" style="width:100%;" >}}
 
 For more information, see the [Functions][5] documentation.
 

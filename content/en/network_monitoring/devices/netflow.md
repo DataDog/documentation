@@ -22,6 +22,8 @@ further_reading:
 
 Use NetFlow Monitoring in Datadog to visualize and monitor your flow records from your NetFlow-enabled devices.
 
+{{< img src="network_device_monitoring/netflow/home.png" alt="The NetFlow Monitoring page containing tabs for top sources, destinations, protocols, source ports, destination ports, and device trends" style="width:100%;" >}}
+
 ## Installation
 
 To use NetFlow Monitoring with Network Device Monitoring, ensure you are using the [Agent][1] version 7.45 or newer.
@@ -83,9 +85,9 @@ From the **Configuration** tab in NetFlow, click **Add Enrichment** to upload th
 
 ## Visualization
 
-You can access the data collected by NetFlow Monitoring on the [**Network Devices** page][5].
+You can access the data collected by NetFlow Monitoring on the [**NetFlow** page][5]. Hover over a flow from the list for additional information about hosts, pods, and containers, and access related network connections.
 
-{{< img src="network_device_monitoring/netflow/netflow_page.png" alt="NetFlow Page" width="100%" >}}
+{{< img src="network_device_monitoring/netflow/information.png" alt="Hover over a flow aggregated from a device emitting netflow to access related network connections" width="100%" >}}
 
 When creating a [NetFlow monitor][6], you should consider the following fields with respect to the source IP or destination IP from the perspective of the device. These fields provide insights into network traffic patterns and help with optimizing performance and security.
 
@@ -129,6 +131,8 @@ Represents characteristics of the network flow.
 | IP Protocol | Protocol used for communication (such as ICMP, TCP, or UDP). |
 | Next Hop IP | IP address of the next hop in the network path. |
 | TCP Flag | Union of all TCP flags observed over the life of the flow. |
+| Bytes | Total number of bytes transferred. |
+| Packets | Total number of packets transferred. |
 
 Use the out-of-the-box facets to start analyzing traffic patterns based on NetFlow destination and source IP addresses.
 
@@ -190,9 +194,11 @@ Use the out-of-the-box facets to start analyzing traffic patterns based on NetFl
 
 By monitoring these key fields in NetFlow events, organizations can gain visibility into their network infrastructure, optimize performance, and improve security posture.
 
-This data is also available in dashboards, notebooks, and more for more precise queries and for correlating with other sources of data.
+{{< img src="monitors/monitor_types/netflow/monitor.png" alt="Create a dashboard with NetFlow data" width="100%" >}}
 
-{{< img src="network_device_monitoring/netflow/notebook.png" alt="Notebook" width="80%" >}}
+This data is also available in dashboards, notebooks, and more for more precise queries and for correlating with other sources of data. When creating a dashboard with Netflow data, select **NetFlow** as the source in the **Graph your data** section.
+
+{{< img src="network_device_monitoring/netflow/dashboard.png" alt="Create a dashboard with NetFlow data" width="100%" >}}
 
 ## Retention
 
@@ -208,5 +214,5 @@ NetFlow data is retained for 30 days by default, with options for 15, 30, 60, an
 [2]: /network_monitoring/devices/snmp_metrics/
 [3]: /agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
 [4]: /agent/configuration/agent-commands/?tab=agentv6v7#start-stop-and-restart-the-agent
-[5]: https://app.datadoghq.com/infrastructure/devices?facets=&viewTab=netflow
+[5]: https://app.datadoghq.com/devices/netflow
 [6]: /monitors/types/netflow/
