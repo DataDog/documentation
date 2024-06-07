@@ -14,6 +14,9 @@ further_reading:
 - link: "/tracing/service_catalog/guides/upstream-downstream-dependencies"
   tag: "Guide"
   text: "See Upstream and Downstream Dependencies During an Active Incident"
+- link: "/dora/setup"
+  tag: "Guide"
+  text: "Get started with DORA metrics"
 - link: "https://www.datadoghq.com/blog/manage-service-catalog-categories-with-service-definition-json-schema/"
   tag: "Blog"
   text: "Manage Service Catalog entries with the Service Definition JSON Schema"
@@ -30,7 +33,7 @@ algolia:
   tags: ['service catalog']
 ---
 
-On the [Service Catalog page][1], see the list of services in your Datadog organization which are either detected from collected data or manually declared by someone [registering the service][2]. To find a particular service, search by its name. To narrow down to only explicitly declared entries, you can search by the **Service Origin** facet and filter by **user-defined**. 
+On the [Service Catalog page][1], see the list of services in your Datadog organization which are either detected from collected data or manually declared by someone [registering the service][2]. To find a particular service, search by its name. To narrow down to only explicitly declared entries, you can search by the **Service Origin** facet and filter by **user-defined**.
 
 ## Ownership view
 
@@ -48,6 +51,7 @@ The **Reliability** tab contains information about the stability of your service
 - Which services are reporting the most errors, and whether they are new issues.
 - Which services have ongoing incidents.
 - Which services have monitors that are triggered.
+- See Mean Time To Restore, Deployment Frequency and Change Failure Rate by integrating with [DORA Metrics][16].
 
 Click the Settings icon on the right hand corner to hide columns from the list.
 
@@ -55,12 +59,12 @@ Click the Settings icon on the right hand corner to hide columns from the list.
 
 ## Performance view
 
-The **Performance** tab provides several ways to view how your services are performing and what needs the most attention. 
+The **Performance** tab provides several ways to view how your services are performing and what needs the most attention.
 
-The environment dropdown works as a filter. For example, when you select `env:prod`, the list displays only services that have performance data (APM/USM telemetry) in `env:prod` during the last hour. When you select `env:*`, you can see all environments where a service emits telemetry at a glance, and expand to see detailed performance metrics per environment. 
-The second dropdown allows you to rescope any APM data you have in the Performance view to the [second primary tag][3] on APM [trace metrics][4]. This dropdown does not affect how many services you see in the list. RUM applications are not associated with specific environments (unlike APM or USM), and are only viewable when you select the `env*` option in the environment dropdown.  
+The environment dropdown works as a filter. For example, when you select `env:prod`, the list displays only services that have performance data (APM/USM telemetry) in `env:prod` during the last hour. When you select `env:*`, you can see all environments where a service emits telemetry at a glance, and expand to see detailed performance metrics per environment.
+The second dropdown allows you to rescope any APM data you have in the Performance view to the [second primary tag][3] on APM [trace metrics][4]. This dropdown does not affect how many services you see in the list. RUM applications are not associated with specific environments (unlike APM or USM), and are only viewable when you select the `env*` option in the environment dropdown.
 
-You can change the default environment in **APM > Setup & Configuration > Settings**. 
+You can change the default environment in **APM > Setup & Configuration > Settings**.
 
 {{< img src="tracing/service_catalog/svc-cat-perf-view.png" alt="Performance view filtered on env:* and scoped to cluster-name:*" style="width:100%;" >}}
 
@@ -95,13 +99,13 @@ Click the Settings icon on the right hand corner to hide metric columns from the
 The **Costs tab** provides several ways to understand the costs associated with your services.  Powered by [Cloud Cost Management][9], you can identify potential inefficiencies, saving opportunities, and change over time. Positioning costs data alongside metrics available in Service Catalog can improve visibility into how engineering changes affect overall cloud spend. Sort the table by clicking columns to reveal services that:
 
 - Have the highest amortized AWS costs in the last month
-- Show a significant change in the rate of cloud spending over time 
+- Show a significant change in the rate of cloud spending over time
 
-For more information on a service's cost changes, click on the service row to open a detailed side panel. To see this information on the Cloud Costs page, click the **View in Analytics** button. 
+For more information on a service's cost changes, click on the service row to open a detailed side panel. To see this information on the Cloud Costs page, click the **View in Analytics** button.
 
 {{< img src="tracing/service_catalog/svc-cat-costs-view.png" alt="Service Catalog Costs view showing several services and their associated cloud cost and monthly change details." style="width:100%;" >}}
 
-This information is only available for Cloud Cost Management customers who have configured the necessary [AWS Integration][10] and [Tag Pipelines][11]. 
+This information is only available for Cloud Cost Management customers who have configured the necessary [AWS Integration][10] and [Tag Pipelines][11].
 
 Click the Settings icon on the right hand corner to hide metric columns from the list.
 
@@ -111,6 +115,7 @@ The **Software Delivery tab** provides several ways to assess and improve the pr
 - View performance of the [CI pipelines][12] related to your services.
 - Find security and code quality issues from [Static Analysis][13].
 - Easily pivot from Service Catalog to troubleshoot pre-production slowdowns and failures.
+- See your Change Lead Time by integrating with [DORA Metrics][16].
 
 To access additional details describing your CI status and static analysis violations, click on a service and see the status of each pipeline and rule violation.
 
@@ -133,3 +138,4 @@ To access additional details describing your CI status and static analysis viola
 [12]: https://app.datadoghq.com/ci/pipelines
 [13]: https://app.datadoghq.com/ci/static-analysis
 [15]: /service_management/workflows/actions_catalog/
+[16]: /dora_metrics/setup
