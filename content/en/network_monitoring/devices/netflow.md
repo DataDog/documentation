@@ -87,6 +87,49 @@ You can access the data collected by NetFlow Monitoring on the [**Network Device
 
 {{< img src="network_device_monitoring/netflow/netflow_page.png" alt="NetFlow Page" width="100%" >}}
 
+When creating a [NetFlow monitor][6], you should consider the following fields with respect to the source IP or destination IP from the perspective of the device. These fields provide insights into network traffic patterns and help with optimizing performance and security.
+
+### Interface Information
+
+Represents details about the ingress and egress interfaces.
+
+| Field Name | Field Description |
+|---|---|
+| Egress Interface Alias | Alias of the egress interface. |
+| Egress Interface Index | Index of the egress interface. |
+| Egress Interface Name | Name of the egress interface. |
+| Ingress Interface Alias | Alias of the ingress interface. |
+| Ingress Interface Index | Index of the ingress interface. |
+| Ingress Interface Name | Name of the ingress interface. |
+
+### Device Information
+
+Represents details related to the device generating NetFlow records.
+
+| Field Name | Field Description |
+|---|---|
+| Device IP | IP address used to map to a device in NDM for enrichment purposes. |
+| Exporter IP | IP address from which NetFlow packets originate. |
+| Device Model | Model of the device. |
+| Device Name | Name of the device. |
+| Device Namespace | Namespace of the device. |
+| Device Vendor | Vendor of the device. |
+
+### Flow Details
+
+Represents characteristics of the network flow.
+
+| Field Name | Field Description |
+|---|---|
+| Direction | Indicates whether the flow is inbound or outbound. |
+| Start Time | Timestamp of the first network packet between the source and destination IP addresses. |
+| End Time | Timestamp of the last network packet between the source and destination IP addresses. |
+| Ether Type | Type of Ethernet frame encapsulation (IPv4 or IPv6). |
+| Flow Type | Type of NetFlow data format (IPFIX, sFlow5, NetFlow5, NetFlow9, or Unknown). |
+| IP Protocol | Protocol used for communication (such as ICMP, TCP, or UDP). |
+| Next Hop IP | IP address of the next hop in the network path. |
+| TCP Flag | Union of all TCP flags observed over the life of the flow. |
+
 Use the out-of-the-box facets to start analyzing traffic patterns based on NetFlow destination and source IP addresses.
 
 ### NetFlow Destination IP facets
@@ -144,58 +187,6 @@ Use the out-of-the-box facets to start analyzing traffic patterns based on NetFl
 | Source Subdivision ISO Code | The ISO code representing the subdivision (such as state or province) associated with the source IP. |
 | Source Subdivision Name | The name of the subdivision (such as state or province) associated with the source IP. |
 | Source Timezone | The timezone associated with the source IP. |
-
-When creating a [NetFlow monitor][6], you should consider the following fields with respect to the source IP or destination IP from the perspective of the device. These fields provide insights into network traffic patterns and help with optimizing performance and security.
-
-### Volume
-
-Indicates the total amount of data transferred between the source and destination IP addresses over a specific period of time. Monitoring volume helps identify high-traffic periods and potential bandwidth issues.
-
-| Field Name | Field Description |
-|:---:|:---:|
-| Bytes | Total number of bytes transferred. |
-| Packets | Total number of packets transferred. |
-
-### Device Information
-
-Represents details related to the device generating NetFlow records.
-
-| Field Name | Field Description |
-|---|---|
-| Device IP | IP address used to map to a device in NDM for enrichment purposes. |
-| Exporter IP | IP address from which NetFlow packets originate. |
-| Device Model | Model of the device. |
-| Device Name | Name of the device. |
-| Device Namespace | Namespace of the device. |
-| Device Vendor | Vendor of the device. |
-
-### Interface Information
-
-Represents details about the ingress and egress interfaces.
-
-| Field Name | Field Description |
-|---|---|
-| Egress Interface Alias | Alias of the egress interface. |
-| Egress Interface Index | Index of the egress interface. |
-| Egress Interface Name | Name of the egress interface. |
-| Ingress Interface Alias | Alias of the ingress interface. |
-| Ingress Interface Index | Index of the ingress interface. |
-| Ingress Interface Name | Name of the ingress interface. |
-
-### Flow Details
-
-Represents characteristics of the network flow.
-
-| Field Name | Field Description |
-|---|---|
-| Direction | Indicates whether the flow is inbound or outbound. |
-| Start Time | Timestamp of the first network packet between the source and destination IP addresses. |
-| End Time | Timestamp of the last network packet between the source and destination IP addresses. |
-| Ether Type | Type of Ethernet frame encapsulation (IPv4 or IPv6). |
-| Flow Type | Type of NetFlow data format (IPFIX, sFlow5, NetFlow5, NetFlow9, or Unknown). |
-| IP Protocol | Protocol used for communication (such as ICMP, TCP, or UDP). |
-| Next Hop IP | IP address of the next hop in the network path. |
-| TCP Flag | Union of all TCP flags observed over the life of the flow. |
 
 By monitoring these key fields in NetFlow events, organizations can gain visibility into their network infrastructure, optimize performance, and improve security posture.
 
