@@ -34,7 +34,7 @@ The following languages are supported for Software Composition Analysis scans on
 | Ruby     | bundler                   | Gemfile.lock, gemspec                                                |
 | C#       | nuget                     | packages.lock.json, packages.config, .deps.json, *packages.props     |
 | Go       | mod                       | Binaries built by Go, go.mod                                         |
-| JVM      | Gradle, Maven             | pom.xml, *gradle.lockfile, JAR/WAR/PAR/EAR (with pom.properties)     |
+| Java     | Gradle, Maven             | pom.xml, *gradle.lockfile, JAR/WAR/PAR/EAR (with pom.properties)     |
 | Node.js  | npm, pnpm, yarn           | package-lock.json, yarn.lock, pnpm-lock.yaml, package.json           |
 | PHP      | composer                  | composer.lock                                                        |
 | Python   | pip, poetry               | pipfile.lock, poetry.lock, egg package, wheel package, conda package |
@@ -63,3 +63,4 @@ The following container runtimes are supported:
 [13]: https://security-tracker.debian.org/tracker/
 [14]: https://www.debian.org/security/oval/
 [15]: https://ubuntu.com/security/cve
+[16]: 
