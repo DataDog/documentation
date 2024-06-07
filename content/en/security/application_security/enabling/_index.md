@@ -37,7 +37,7 @@ You can use Datadog Application Security Management products to:
 
 - Enable your application to [detect and protect against threats][1] targeting your production systems. 
 - [Manage risks][2] in your code and its open source dependencies using the Datadog library for your application language. 
-- Detect vulnerabilities and threats for apps hosted on a server, Docker, Kubernetes, Amazon ECS, and (for supported languages) AWS Fargate.
+- Detect vulnerabilities and threats for apps hosted on a server, Docker, Kubernetes, Amazon ECS, or (for supported languages) AWS Fargate.
 
 {{% appsec-getstarted %}}
 
