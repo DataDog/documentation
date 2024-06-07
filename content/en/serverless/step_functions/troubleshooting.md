@@ -35,7 +35,7 @@ If your organization has an existing all-encompassing index with a low limit, pl
 - Verify that you can see both Lambda traces and Step Function traces in Datadog.
 - Verify that you are using Python layer v75+ or Node.js layer v94+.
 - In your AWS console, open your Step Function and ensure that your state machine has `"Payload.$": "States.JsonMerge($$, $, false)"` on the Lambda steps.
-- Execute your Step Function once and verify that the `TaskScheduled` event log of the Lambda step has the payload containing data from the [Step Function context object][4]. If you do not have `TaskScheduled` event and only have `LambdaFunctionScheduled` event, please update the task in Step Functions definition to use the recommended Lambda integration by following the [AWS documentation][5].
+- Execute your Step Function once and verify that the `TaskScheduled` event log of the Lambda step has the payload containing data from the [Step Function context object][4]. If you do not have a `TaskScheduled` event and only have a `LambdaFunctionScheduled` event, update the task in Step Functions definition to use the recommended Lambda integration. See the [AWS documentation][5] for instructions on how to do this.
 
 ## I can see the `aws.stepfunctions` root span but I cannot see any step spans
 Please enable the `Include execution data` option on the state machine's logging. After enabling this option, log execution input, data passed between states, and execution output is logged. The Datadog backend uses the logs to construct these step spans for you.
