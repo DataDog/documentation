@@ -5,11 +5,11 @@ kind: guía
 title: Cambiar tu registro de contenedores
 ---
 
-Datadog publica imágenes de contenedor en gcr.io de Google, ECR de AWS y en Docker Hub:
+Datadog publica imágenes de contenedores en gcr.io de Google, ECR de AWS y en Docker Hub:
 
 {{% container-images-table %}}
 
-La extracción del registro GCR o ECR funciona igual (excepto para Notary) que la extracción de Docker Hub. Puedes utilizar el mismo comando (con diferentes parámetros) y obtener la misma imagen.
+La extracción desde el registro ECR o GCR funciona igual (excepto para Notary) que la extracción desde Docker Hub. Puedes utilizar el mismo comando (con diferentes parámetros) y obtener la misma imagen.
 
 **Nota**: ECR y GCR no son compatibles con Notary. Si verificas la firma de imágenes extraídas de Docker, esta característica no funcionará en GCR o en ECR.
 
