@@ -17,7 +17,7 @@ Los identificadores de contenedores Autodiscovery, o `ad_identifiers`, te permit
 
 Incluso si la configuración de Autodiscovery está definida dentro de un archivo de configuración personalizado, puedes utilizar las etiquetas (labels) estándar para etiquetar `env` , `service` y `version`. Consulta [Etiquetado unificado de servicios][1] para obtener más información sobre cómo configurar estas etiquetas en tus contenedores.
 
-**Nota**: Otros tipos de configuraciones, incluidas las bases de datos clave-valor, las etiquetas de Docker o las anotaciones en pods de Kubernetes utilizan un método diferente para hacer coincidir las plantillas de configuración de integraciones con sus contenedores correspondientes. Para estos tipos de configuraciones, la correspondencia entre una plantilla de configuración de integraciones y el contenedor se basa en el `<CONTAINER_IDENTIFIER>` incluido en las bases de datos clave-valor, en las etiquetas o en las anotaciones.
+**Nota**: Otros tipos de configuraciones, incluidas las bases de datos clave-valor, las etiquetas (labels) de Docker o las anotaciones en pods de Kubernetes utilizan un método diferente para hacer coincidir las plantillas de configuración de integraciones con sus contenedores correspondientes. Para estos tipos de configuraciones, la correspondencia entre una plantilla de configuración de integraciones y el contenedor se basa en el `<CONTAINER_IDENTIFIER>` incluido en las bases de datos clave-valor, en las etiquetas o en las anotaciones.
 
 ## Nombre de la imagen del contenedor
 
@@ -34,7 +34,7 @@ instances:
   <INSTANCES_CONFIG>
 ```
 
-**Ejemplo**: la siguiente plantilla de configuración Autodiscovery en Apache se aplica a una imagen de contenedor llamada `httpd`:
+**Ejemplo**: la siguiente plantilla de configuración de Autodiscovery en Apache se aplica a una imagen de contenedor llamada `httpd`:
 
 ```yaml
 ad_identifiers:
@@ -65,7 +65,7 @@ Esto coincide con **cualquier** imagen de contenedor en tu host que coincida con
 
 ## Identificadores de contenedores de Autodiscovery personalizados
 
-Para aplicar diferentes plantillas de configuración de Autodiscovery a contenedores que ejecutan la misma imagen, elige un valor personalizado para proporcionar como `<INTEGRATION_AUTODISCOVERY_IDENTIFIER>`. Luego, aplica una etiqueta de Docker o una anotación de Kubernetes a tu contenedor que contenga este valor personalizado.
+Para aplicar diferentes plantillas de configuración de Autodiscovery a contenedores que ejecutan la misma imagen, elige un valor personalizado para proporcionar como `<INTEGRATION_AUTODISCOVERY_IDENTIFIER>`. Luego, aplica una etiqueta (label) de Docker o una anotación de Kubernetes a tu contenedor que contenga este valor personalizado.
 
 **Ejemplo**: la siguiente plantilla de configuración de Autodiscovery en Apache designa una imagen de contenedor con el nombre personalizado `foo`:
 
@@ -80,16 +80,16 @@ logs:
   service: webapp
 ```
 
-Luego, aplica una etiqueta de Docker o una anotación de Kubernetes para identificar tu contenedor como `foo`:
+Luego, aplica una etiqueta (label) de Docker o una anotación de Kubernetes para identificar tu contenedor como `foo`:
 
 {{< tabs >}}
-{{% tab "Docker label" (Etiqueta de Docker) %}}
+{{% tab "Docker label" (Etiqueta (label) de Docker) %}}
 
 ```yaml
 LABEL com.datadoghq.ad.check.id="foo"
 ```
 
-**Nota**: La etiqueta `com.datadoghq.ad.check.id` tiene prioridad sobre el nombre de la imagen.
+**Nota**: La etiqueta (label) `com.datadoghq.ad.check.id` tiene prioridad sobre el nombre de la imagen.
 
 {{% /tab %}}
 {{% tab "Kubernetes annotation" (Anotación de Kubernetes) %}}
@@ -100,7 +100,7 @@ ad.datadoghq.com/<CONTAINER_IDENTIFIER>.check.id: <INTEGRATION_AUTODISCOVERY_IDE
 
 Sustituye el `<CONTAINER_IDENTIFIER>` por el nombre del contenedor dentro del pod.
 
-**Nota**: Compatible con el Datadog Agent v6.25 o posteriores y v7.25. La etiqueta `ad.datadoghq.com/<CONTAINER_IDENTIFIER>.check.id` tiene prioridad sobre el nombre de la imagen.
+**Nota**: Compatible con el Datadog Agent v6.25 o posteriores y v7.25. La etiqueta (label)`ad.datadoghq.com/<CONTAINER_IDENTIFIER>.check.id` tiene prioridad sobre el nombre de la imagen.
 {{% /tab %}}
 {{< /tabs >}}
 
