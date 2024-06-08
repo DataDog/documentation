@@ -5,7 +5,7 @@ kind: guía
 title: Sincroniza las imágenes de Datadog con un registro privado.
 ---
 
-Datadog publica imágenes de contenedores en múltiples registros de contenedores públicos. Aunque esto es conveniente para muchos usuarios, es posible que algunas organizaciones quieran utilizar un registro de contenedores privado. Esta guía te explica cómo sincronizar las imágenes de contenedores de Datadog con un registro privado.
+Datadog publica imágenes de contenedores en múltiples registros de contenedores públicos. Aunque esto resulta conveniente para muchos usuarios, es posible que algunas organizaciones prefieran utilizar un registro de contenedores privado. Esta guía te explica cómo sincronizar las imágenes de contenedores de Datadog con un registro privado.
 
 {{% container-images-table %}}
 
@@ -13,7 +13,7 @@ Datadog publica imágenes de contenedores en múltiples registros de contenedore
 
 ### Uso de Crane
 
-[Crane][1] es una herramienta creada por Google para gestionar imágenes y registros de contenedores, y puede utilizarse para sincronizar imágenes entre diferentes registros de contenedores. Para obtener más información sobre Crane, consulta la [documentación de Crane][2].
+[Crane][1] es una herramienta creada por Google para gestionar imágenes y registros de contenedores, que puede utilizarse para sincronizar imágenes entre diferentes registros de contenedores. Para obtener más información sobre Crane, consulta la [documentación de Crane][2].
 
 #### Instalar Crane
 
@@ -21,7 +21,7 @@ Para obtener instrucciones detalladas sobre cómo instalar Crane, consulta el [R
 
 #### Copiar una imagen a otro registro utilizando Crane
 
-Crane puede copiar imágenes entre distintos registros de contenedores conservando el compendio de la imagen.
+Crane puede copiar imágenes entre distintos registros de contenedores, conservando el compendio de la imagen.
 
 Esto significa que la copia retiene el mismo manifiesto y funciona con imágenes multi-plataforma.
 
