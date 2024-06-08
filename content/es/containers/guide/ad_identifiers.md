@@ -21,7 +21,7 @@ Incluso si la configuración de Autodiscovery está definida dentro de un archiv
 
 ## Nombre de la imagen del contenedor
 
-Para aplicar la siguiente plantilla de configuración de Autodiscovery a un determinado contenedor, utiliza el nombre abreviado de la imagen del contenedor como `<INTEGRATION_Autodiscovery_IDENTIFIER>`:
+Para aplicar la siguiente plantilla de configuración de Autodiscovery a un determinado contenedor, utiliza el nombre corto de la imagen del contenedor como `<INTEGRATION_Autodiscovery_IDENTIFIER>`:
 
 ```yaml
 ad_identifiers:
