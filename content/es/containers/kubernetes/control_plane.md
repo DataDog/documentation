@@ -448,7 +448,7 @@ El Datadog Cluster Agent programa los checks como checks de endpoints y los env�
 
 ### Administrador de controladores
 
-El administrador de controladores se ejecuta detrás del servicio `kube-controller-manager` en el espacio de nombres de `openshift-kube-controller-manager`. Anota este servicio con la configuración del check:
+El administrador de controladores se ejecuta detrás del servicio `kube-controller-manager`, en el espacio de nombres de `openshift-kube-controller-manager`. Anota este servicio con la configuración del check:
 
 
 ```shell
@@ -465,7 +465,7 @@ El Datadog Cluster Agent programa los checks como checks de endpoints y los env�
 
 ### Programador
 
-El programador se ejecuta detrás del servicio `scheduler` en el espacio de nombres de `openshift-kube-scheduler`. Anota este servicio con la configuración del check:
+El programador se ejecuta detrás del servicio `scheduler`, en el espacio de nombres de `openshift-kube-scheduler`. Anota este servicio con la configuración del check:
 
 
 ```shell
@@ -492,7 +492,7 @@ En OpenShift 3, todos los componentes del plano de control se pueden monitorizar
 
 ### Servidor de API
 
-El servidor de API se ejecuta detrás del servicio `kubernetes` en el espacio de nombres `default`. Anota este servicio con la configuración `kube_apiserver_metrics`:
+El servidor de API se ejecuta detrás del servicio `kubernetes`, en el espacio de nombres `default`. Anota este servicio con la configuración `kube_apiserver_metrics`:
 
 ```shell
 oc annotate service kubernetes -n default 'ad.datadoghq.com/endpoints.check_names=["kube_apiserver_metrics"]'
