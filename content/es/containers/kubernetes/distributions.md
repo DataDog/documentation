@@ -255,32 +255,32 @@ datadog:
   # Documentación: https://docs.datadoghq.com/getting_started/site/
   site: <DATADOG_SITE>
 
-agentes:
-  contenedores:
+agents:
+  containers:
     agent:
       # recursos para el contenedor del Agent
-      recursos:
-        solicitudes:
+      resources:
+        requests:
           cpu: 200m
-          memoria: 256Mi
+          memory: 256Mi
 
     traceAgent:
       # recursos para el contenedor del Trace Agent
-      recursos:
-        solicitudes:
+      resources:
+        requests:
           cpu: 100m
-          memoria: 200Mi
+          memory: 200Mi
 
     processAgent:
       # recursos para el contenedor del Process Agent container
-      recursos:
-        solicitudes:
+      resources:
+        requests:
           cpu: 100m
-          memoria: 200Mi
+          memory: 200Mi
 
   priorityClassCreate: true
 
-proveedores:
+providers:
   gke:
     autopilot: true
 ```
@@ -314,14 +314,14 @@ spec:
 {{% /tab %}}
 {{% tab "Helm" %}}
 ```yaml
-agentes:
+agents:
   #(...)
   # agents.tolerations -- Permitir al DaemonSet programar en nodos contaminados (requiere  Kubernetes v1.6 o anteriores)
-  tolerancias:
-  - efecto: NoSchedule
-    clave: cloud.google.com/gke-spot
-    operador: Equal
-    valor: "true"
+  tolerations:
+  - effect: NoSchedule
+    key: cloud.google.com/gke-spot
+    operator: Equal
+    value: "true"
 ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -354,24 +354,24 @@ datadog:
   # Si tienes la CA correcta, puedes cambiarla a true
   kubelet:
     tlsVerify: false
-agentes:
+agents:
   podSecurity:
     securityContextConstraints:
-      crear: true
-  tolerancias:
-  - efecto: NoSchedule
+      create: true
+  tolerations:
+  - effect: NoSchedule
     key: node-role.kubernetes.io/master
-    operador: Exists
-  - efecto: NoSchedule
-    clave: node-role.kubernetes.io/infra
-    operador: Exists
+    operator: Exists
+  - effect: NoSchedule
+    key: node-role.kubernetes.io/infra
+    operator: Exists
 clusterAgent:
   podSecurity:
     securityContextConstraints:
-      crear: true
+      create: true
 kube-state-metrics:
   securityContext:
-    habilitado: false
+    enabled: false
 ```
 
 {{% /tab %}}
