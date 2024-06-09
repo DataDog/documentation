@@ -139,7 +139,7 @@ El comando `status` del Agent debería mostrar la instancia del check ejecutánd
 
 ## Checks de endpoints
 
-Solucionar problemas en los checks de endpoints es similar a [solucionar problemas en los checks de clústeres](#cluster-checks). Las diferencias se producen en los Agents de nodo, donde los checks de endpoints programados aparecen junto a los checks de clústeres.
+Solucionar problemas de los checks de endpoints es similar a [solucionar problemas de los checks de clústeres](#cluster-checks). Las diferencias se producen en los Agents de nodo, donde los checks de endpoints programados aparecen junto a los checks de clústeres.
 
 **Nota**: Los checks de endpoints los programan los Agents que se ejecutan en el mismo nodo que el/los pod(s) que respalda el endpoint (o endpoints) del servicio. Si un endpoint no está respaldado por un pod, el Cluster Agent convierte el check en un check de clúster. Este check de clúster lo puede ejecutar cualquier Agent de nodo.
 
