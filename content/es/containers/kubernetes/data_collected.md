@@ -20,7 +20,7 @@ further_reading:
   text: Limita la recopilación de datos solo a un subconjunto de contenedores
 - link: /agent/kubernetes/tag/
   tag: Documentación
-  text: Asignar etiquetas a todos los datos emitidos por un contenedor
+  text: Asignar etiquetas (tags) a todos los datos emitidos por un contenedor
 kind: documentación
 title: Datos de Kubernetes recopilados
 ---
@@ -146,28 +146,28 @@ Para obtener más información, consulta la documentación de la integración de
 Para obtener más información, consulte la documentación de la integración de las [métricas de estado de Kubernetes Core][6].
 
 `kubernetes_state.cronjob.complete`
-: si el último trabajo del cronjob ha fallado o no. Etiquetas (tags):`kube_cronjob` `kube_namespace` (`env` `service` `version` de las etiquetas estándar).
+: si el último trabajo del cronjob ha fallado o no. Etiquetas:`kube_cronjob` `kube_namespace` (`env` `service` `version` de las etiquetas estándar).
 
 `kubernetes_state.cronjob.on_schedule_check`
-: alerta si la próxima programación del cronjob está en el pasado. Etiquetas (tags):`kube_cronjob` `kube_namespace` (`env` `service` `version` de las etiquetas estándar).
+: alerta si la próxima programación del cronjob está en el pasado. Etiquetas:`kube_cronjob` `kube_namespace` (`env` `service` `version` de las etiquetas estándar).
 
 `kubernetes_state.job.complete`
-: si el trabajo ha fallado o no. Etiquetas (tags):`kube_job` o `kube_cronjob` `kube_namespace` (`env` `service` `version` de las etiquetas estándar).
+: si el trabajo ha fallado o no. Etiquetas:`kube_job` o `kube_cronjob` `kube_namespace` (`env` `service` `version` de las etiquetas estándar).
 
 `kubernetes_state.node.ready`
-: si el nodo está listo. Etiquetas (tags):`node` `condition` `status`.
+: si el nodo está listo. Etiquetas:`node` `condition` `status`.
 
 `kubernetes_state.node.out_of_disk`
-: si el nodo no tiene más espacio en el disco. Etiquetas (tags):`node` `condition` `status`.
+: si el nodo no tiene más espacio en el disco. Etiquetas:`node` `condition` `status`.
 
 `kubernetes_state.node.disk_pressure`
-: si el nodo está bajo presión de disco. Etiquetas (tags):`node` `condition` `status`.
+: si el nodo está bajo presión de disco. Etiquetas:`node` `condition` `status`.
 
 `kubernetes_state.node.network_unavailable`
-: si la red de nodo red no está disponible. Etiquetas (tags):`node` `condition` `status`.
+: si la red de nodo red no está disponible. Etiquetas:`node` `condition` `status`.
 
 `kubernetes_state.node.memory_pressure`
-: si la red de nodo está bajo presión de memoria. Etiquetas (tags):`node` `condition` `status`.
+: si la red de nodo está bajo presión de memoria. Etiquetas:`node` `condition` `status`.
 
 ## Leer más
 
