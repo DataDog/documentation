@@ -71,7 +71,7 @@ tile:
 이 통합은 다음 컴포넌트에 대한 JMX 메트릭을 수집합니다.
 
 - Broker
-- 연결
+- Connect
 - Replicator
 - Schema Registry
 - ksqlDB Server
