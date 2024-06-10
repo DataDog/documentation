@@ -774,9 +774,9 @@ Universal Service Monitoring is available in <strong>beta</strong> to monitor TL
 
 <strong>Note</strong>:
 <br>
-<ul>
-  <li>Go HTTPS servers can upgrade HTTP1.1 protocol to HTTP/2 which is supported in private beta. Reach to your account manager for further details
-  <li>Requires Agent version 7.51 or greater.
+<ul role="list">
+  <li>Go HTTPS servers can upgrade HTTP1.1 protocol to HTTP/2 which is supported in private beta. Reach to your account manager for further details</li>
+  <li>Requires Agent version 7.51 or greater.</li>
 </ul>
 
 {{< tabs >}}
@@ -947,11 +947,11 @@ Universal Kafka Monitoring is available in <strong>Private beta</strong>.
 
 <strong>Note</strong>:
 <br>
-<ul>
-  <li>Producers and consumers require Linux Kernel version 5.2 or later.
-  <li>Producers and consumers must be interfacing with Kafka <strong>without</strong> TLS.
-  <li>Datadog recommends Helm with Datadog chart version 2.26.2 or later. The chart version is defined in the <a href="https://github.com/DataDog/helm-charts/blob/main/charts/datadog/Chart.yaml">`chart.yaml`</a> file of the dd-agent. 
-  <li>Requires Agent version 7.53 or greater.
+<ul role="list">
+  <li>Producers and consumers require Linux Kernel version 5.2 or later.</li>
+  <li>Producers and consumers must be interfacing with Kafka <strong>without</strong> TLS.</li>
+  <li>Datadog recommends Helm with Datadog chart version 2.26.2 or later. The chart version is defined in the <a href="https://github.com/DataDog/helm-charts/blob/main/charts/datadog/Chart.yaml">`chart.yaml`</a> file of the dd-agent.</li>
+  <li>Requires Agent version 7.53 or greater.</li>
 </ul>
 
 {{< tabs >}}
