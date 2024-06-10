@@ -105,7 +105,7 @@ To add scanning rules, perform the following steps.
 1. Click **Add Scanning Rule**. Alternatively, click the **Add** dropdown menu on the top right corner of the page and select **Add Scanning Rule**.
 1. Select whether you want to add a library rule or create a custom scanning rule.
 
-{{< collapse-content title="Add scanning rule from the library rules" level="h4" >}}
+{{< collapse-content title="Add scanning rule from the library rules" level="p" >}}
 
 The Scanning Rule Library contains predefined rules for detecting common patterns such as email addresses, credit card numbers, API keys, authorization tokens, and more.
 
@@ -117,7 +117,7 @@ The Scanning Rule Library contains predefined rules for detecting common pattern
 1. Click **Add Rules**.
 
 {{< /collapse-content >}} 
-{{< collapse-content title="Add a custom scanning rule" level="h4" >}}
+{{< collapse-content title="Add a custom scanning rule" level="p" >}}
 You can create custom scanning rules using regex patterns to scan for sensitive data.
 
 1. In the **Define match conditions** section, specify the regex pattern to use for matching against events in the **Define regex** field. Enter sample data in the **Regex tester** field to verify that your regex pattern is valid.   
