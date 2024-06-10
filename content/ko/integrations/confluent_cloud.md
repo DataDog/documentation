@@ -55,7 +55,7 @@ tile:
   media:
   - caption: Confluent Cloud 대시보드 개요
     image_url: images/confluent_dashboard.png
-    media_type: image
+    media_type: 이미지
   overview: README.md#Overview
   support: README.md#Support
   title: Confluent Cloud
