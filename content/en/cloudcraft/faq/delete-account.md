@@ -18,7 +18,7 @@ If you do not see the **Delete account** option, you may have had a paid account
 
 ## Delete a paid Cloudcraft account
 
-To delete a paid account, please [contact the Cloudcraft support team][2].
+To delete a paid account, [contact the Cloudcraft support team][2].
 
 [1]: https://submit-irm.trustarc.com/services/validation/46c4566b-b184-4fcc-9dc0-c7afffdd5890
 [2]: https://app.cloudcraft.co/support
