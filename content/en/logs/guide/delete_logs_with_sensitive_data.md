@@ -56,7 +56,7 @@ Only a Datadog Admin can request log deletion. If you are not an Admin, make sur
 If the options for changing your retention period, making logs un-queryable, and redacting sensitive data using Sensitive Data Scanner are not enough to ensure the security of your data, submit a request to [Datadog support][3] to delete the indexed logs with sensitive data. Your request must provide the following information:
 
 1. Confirmation that the logs with sensitive data are no longer being sent to Datadog.
-1. Whether this is a targeted deletion by time frame or an entire index deletion request.
+1. Whether this is a targeted deletion by time frame or an [entire index deletion](#deleting-an-entire-index) request.
 1. The exact organization name and the [site][4] (for example, US1) where the sensitive data was sent to.
 1. If the request is for targeted deletion by time frame, the exact time range, in Epoch or UTC format, of the logs that contained sensitive data.
 1. The name of the indexes where the sensitive data is in.
