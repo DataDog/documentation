@@ -104,7 +104,7 @@ Update your ECS task definition JSON file, by adding this in the environment sec
    {{< /tabs >}}
 
 4. Restart your service.
-5. To see Code Security in action, browse your service and code-level vulnerabilities will appear in the [Vulnerability Explorer][4]. The `SOURCE` column shows the Code value.
+5. To see Code Security in action, browse your service and find code-level vulnerabilities in the [Vulnerability Explorer][4]. The `SOURCE` column shows the Code value.
 
 {{< img src="/security/application_security/Code-Level-Vulnerability-Details.mp4" alt="Video showing Vulnerabilities tab, Code source, and inspecting the code vulnerability" video="true" >}}
 
