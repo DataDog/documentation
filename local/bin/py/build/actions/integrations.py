@@ -888,7 +888,7 @@ class Integrations:
                 ]
                 item = matches[0] if len(matches) > 0 else []
             if item:
-                item["kind"] = "integration"
+                item["custom_kind"] = "integration"
                 item["integration_title"] = (
                     item
                     .get("public_title", "")
