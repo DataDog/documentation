@@ -28,7 +28,7 @@ Use the steps below to run a simple Python script that generates an LLM Observab
 
 ### 1. Install the SDK
 
-Install the following `ddtrace` package hash and `openai` package:
+Install the following `ddtrace` and `openai` packages:
 
 {{< code-block lang="shell" >}}
 pip install ddtrace
