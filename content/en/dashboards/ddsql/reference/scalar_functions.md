@@ -29,7 +29,7 @@ These functions return one value per row.
 ### concat
 | Name | Return type | Description |
 |------|-------------|-------------|
-| concat(expr x, y, …) | text | Concatenate x, y, … |
+| concat(expr x, y, ...) | text | Concatenate x, y, ... |
 
 ### substr
 | Name | Return type | Description |
@@ -172,7 +172,7 @@ These functions return one value per row.
 ### coalesce
 | Name | Return type | Description |
 |------|-------------|-------------|
-| coalesce(expr x, y, …) | variable | Returns first non-null expression |
+| coalesce(expr x, y, ...) | variable | Returns first non-null expression |
 
 ### nullif
 | Name | Return type | Description |
@@ -184,7 +184,7 @@ These functions return one value per row.
 ### json_extract_path_text
 | Name | Return type | Description |
 |------|-------------|-------------|
-| json_extract_path_text(text json, text path…) | text | Extracts the JSON sub-object in text defined by the path, equivalent behaviour as the postgres function of the same name. In the default executor, this function only works on resources tables - it is not implemented for metrics, events, or local tables. Malamute/Bergamot contain an implementation for the function, which can be used for any source by setting the execution path. To extract nested fields/JSON in events tables, reference the entire path in double quotes as the column name. |
+| json_extract_path_text(text json, text path...) | text | Extracts the JSON sub-object in text defined by the path, equivalent behaviour as the postgres function of the same name. In the default executor, this function only works on resources tables - it is not implemented for metrics, events, or local tables. Malamute/Bergamot contain an implementation for the function, which can be used for any source by setting the execution path. To extract nested fields/JSON in events tables, reference the entire path in double quotes as the column name. |
 
 ## Timeseries and point functions
 

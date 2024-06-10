@@ -21,8 +21,42 @@ SQL is broken into five different categories of statements. The table below indi
 
 ## Usage details
 
-{{< whatsnext desc="Functions:" >}}
+{{< whatsnext desc="For usage details, see the relevant documentation:" >}}
+   {{< nextlink href="dashboards/ddsql/reference/statements" >}}Statements (such as `SELECT`){{< /nextlink >}}
+   {{< nextlink href="dashboards/ddsql/reference/data_types" >}}Data types{{< /nextlink >}}
+   {{< nextlink href="dashboards/ddsql/reference/expressions_and_operators" >}}Expressions and operators{{< /nextlink >}}
    {{< nextlink href="dashboards/ddsql/reference/scalar_functions" >}}Scalar functions (one computed value per row){{< /nextlink >}}
    {{< nextlink href="dashboards/ddsql/reference/aggregation_functions" >}}Aggregation functions (one computed value){{< /nextlink >}}
    {{< nextlink href="dashboards/ddsql/reference/window_functions" >}}Window functions{{< /nextlink >}}
+   {{< nextlink href="dashboards/ddsql/reference/tags" >}}Working with tags{{< /nextlink >}}
 {{< /whatsnext >}}
+
+## Sessions
+
+DDSQL queries are executed within a session. The session provides the user with a writable DDSQL environment.
+
+{{< code-block lang="sql" >}}
+SELECT 1; SELECT 2;
+{{< /code-block >}}
+
+Some options, such as time frame, are exposed runtime parameters within the environment and may be modified with `SET` and read with `SHOW`. Modifications made by SQL statements (for example, DDL or DML statements) are visible by subsequent statements in a session, but do not outlive the session. You can think of a session as executing within a `BEGIN ... ROLLBACK`.
+
+The default schema in the session includes foreign table definitions that model different parts of the downstream data sources that DDSQL supports.
+
+## Schema on read
+
+"Schema on read" describes a strategy to apply a schema to data as it is read rather than when it is written. In DDSQL, it is used to enable SQL queries against unstructured data.
+
+If a table supports schema on read, references to nonexistent table columns are considered legal, and those references are mapped to the table in a way that is defined by the downstream. For many downstreams, these become tag references.
+
+If a column reference cannot be unambiguously mapped to a single table, it is considered an ambiguous reference. Because schema-on-read columns don't exist in the catalog, they can typically only be used without specifying the correlation if there is exactly one table in the `FROM` clause that supports schema on read.
+
+## Aliases
+
+Aliases are substitute names for output expressions or `FROM` items. An alias is used for brevity or to eliminate ambiguity for self-joins (where the same table is scanned multiple times).
+
+{{< code-block lang="sql" >}}
+SELECT * FROM my_long_hosts_table_name as hosts
+{{< /code-block >}}
+
+When an alias is provided in a `FROM` item, it completely hides the actual name of the table or function. In the above example, the remainder of the DQLExpr must refer to `my_long_hosts_table_name` as `hosts`.

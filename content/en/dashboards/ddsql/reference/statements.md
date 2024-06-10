@@ -227,13 +227,7 @@ ORDER BY service LIMIT 200 OFFSET 10;
 
 All subqueries in a `UNION` must have the same output schema. A query containing `UNION` query can only have one `ORDER BY` and `LIMIT` expression, both of which must come at the end. Because of this, `UNION` can be used to combine other DQLExpr types, but not another `UNION`.
 
-## INTERSECT
-
-TODO
-
-## EXCEPT
-
-TODO
+<!-- QUERY: Any details on INTERSECT and EXCEPT? Omitting them for now since there's no information available for them in the draft. -->
 
 ## WITH
 
@@ -355,95 +349,6 @@ Not all types are convertible in this way.
 
 DDSQL also supports Postgres casting syntax: `<EXPRESSION>::<TYPE>` (for example, `SELECT 1::text;`).
 
-<!-- TODO: Some of the sections below could probably be in a higher level overview, find an appropriate place for them as the draft shapes up. -->
-
-## Sessions
-
-DDSQL queries are executed within a session. The session provides the user with a writable DDSQL environment.
-
-{{< code-block lang="sql" >}}
-SELECT 1; SELECT 2;
-{{< /code-block >}}
-
-Some options, such as time frame, are exposed runtime parameters within the environment and may be modified with `SET` and read with `SHOW`. Modifications made by SQL statements (for example, DDL or DML statements) are visible by subsequent statements in a session, but do not outlive the session. You can think of a session as executing within a `BEGIN ... ROLLBACK`.
-
-The default schema in the session includes foreign table definitions that model different parts of the downstream data sources that DDSQL supports.
-
-## Schema on read
-
-"Schema on read" describes a strategy to apply a schema to data as it is read rather than when it is written. In DDSQL, it is used to enable SQL queries against unstructured data.
-
-If a table supports schema on read, references to nonexistent table columns are considered legal, and those references are mapped to the table in a way that is defined by the downstream. For many downstreams, these become tag references.
-
-If a column reference cannot be unambiguously mapped to a single table, it is considered an ambiguous reference. Because schema-on-read columns don't exist in the catalog, they can typically only be used without specifying the correlation if there is exactly one table in the `FROM` clause that supports schema on read.
-
-## Tags
-
-Tags are a widespread mechanism to encode metadata about a particular record across several products at Datadog. Tags are key/value pairs for which a key may contain multiple values.  
-
-Equality comparisons with tags are treated as a "contains" comparison rather than requiring strict equality. `service='website'` is true if a record has a `service` tag with the value `website`, even if it has other service tags as well.
-
-As a consequence of this behavior, the `IN` operator with tags works as "overlaps". For example, `service IN ('webstore', 'webstore-analytics')` matches records that contain `service:webstore`, `service:webstore-analytics`, or both, even if other service tags are present (for example, `service:webstore,something-else` matches).
-
-To perform a strict comparison, cast the tag reference to a string, or compare it against a group literal in an outer query. For example, a query like
-
-{{< code-block lang="sql" >}}
-AGGR avg('system.load.1') WHERE team='logs' GROUP BY team
-{{< /code-block >}}
-
-May return the following result:
-
-| Timeseries | Team             |
-|------------|------------------|
-| [...]      | logs             |
-| [...]      | logs,team2       |
-| [...]      | logs,team3,team4 |
-| [...]      | logs,team2,team4 |
-
-To instead match only on `logs`, use this query:
-
-{{< code-block lang="sql" >}}
-SELECT * 
-FROM (AGGR avg('system.load.1') WHERE team='logs' GROUP BY team)
-WHERE team={'logs'}
-{{< /code-block >}}
-
-This stricter comparison returns only one result:
-
-| Timeseries | Team             |
-|------------|------------------|
-| [...]      | logs             |
-
-### Implicit tag references
-
-Schema-on-read references on tables that support tags are treated as tag lookups, and are called implicit tag references. For example, the `az` column does not exist on the `resources.host` table, but you may `SELECT az FROM resources.host`. DDSQL recognizes that the `resources.host` table supports schema on read, and `az` becomes an implicit tag reference. Its name in the projection is `az`, which may be used throughout the query.
-
-**Note**: For events downstreams, schema-on-read references also look up against attributes. See the [events Downstream section] for more information.
-
-### Explicit tag references
-
-Explicit tag references allow a user to specify that a column reference should refer to a tag even if a column with an identical name exists in the table schema. Explicit tag references allow some basic defense against schema updates that change the meaning of queries relying on the implicit fallback behavior.
-
-Explicit tag references are column references that are prepended with the `#` character. For the example, the `resources.host` table contains a `service` column, but the query can reference the `service` tag explicitly:
-
-{{< code-block lang="sql" >}}
-SELECT #service FROM resources.host
-{{< /code-block >}}
-
-The tag's name in the projection is `#service`, and it should be used throughout the query in that form, as `service` refers to the schema column.
-
-For tag references that require quoting, the `#` should appear outside of quotes (for example, `#"availability-zone"`). This is necessary to differentiate between explicit tag references and columns that start with a `#` character.
-
-## Aliases
-
-Aliases are substitute names for output expressions or `FROM` items. An alias is used for brevity or to eliminate ambiguity for self-joins (where the same table is scanned multiple times).
-
-{{< code-block lang="sql" >}}
-SELECT * FROM my_long_hosts_table_name as hosts
-{{< /code-block >}}
-
-When an alias is provided in a `FROM` item, it completely hides the actual name of the table or function. In the above example, the remainder of the DQLExpr must refer to `my_long_hosts_table_name` as `hosts`.
-
 ## Ordinals
 
 `GROUP BY` and `ORDER BY` clause expressions can be column names, arbitrary expressions formed from input columns, or the name or ordinal number of an output expression (a `SELECT` expression). Output expression ordinals are 1-indexed.
@@ -453,63 +358,6 @@ For example, the output of this query is ordered first by `ex1`, then `ex2`, and
 {{< code-block lang="java" filename="block.java" disable_copy="true" collapsible="true" >}}
 SELECT ex1, ex2, ex3 FROM table ORDER BY 3, 2, 1;
 {{< /code-block >}}
-
-
-## Data types
-
-DDSQL implements a simplified version of the SQL type system that is mostly descended from SQLite.
-
-### Base types
-
-| SQL Name   | Aliases                  | Description |
-|------------|--------------------------|-------------|
-| integer    | int                      | Storage is always int64. |
-| text       | varchar, json            | Storage is always unlimited-length UTF-8. |
-| real       | double                   | Storage is always IEEE-754 float64. |
-| timestamp  | timestamp without time zone | SQL standard datetime type. |
-| interval   |      | Encodes a span of time. Useful for setting the default interval environment variable with `SET`. |
-| group      | hstore, tag_column       | Sorted set of strings with tag-like "= is contains" semantics. |
-| point      |                          | An integer seconds-since-Unix-epoch/float value pair. |
-| timeseries |                          | A vector of points. |
-| boolean    |                          | `TRUE` or `FALSE` |
-| any        |                          | `ANY` is a composite, dynamic type. Values under a column with type `ANY` can be integers, real numbers, strings, or a mixture of all three. `ANY` applies to custom events attributes whose values can vary between individual events. |
-
-### Arrays
-
-DDSQL implements arrays: a list of elements that all have the same underlying type. DDSQL supports arrays of
-
-- integers
-- floats
-- text
-- booleans
-- timestamps
-- dates
-- intervals
-- points
-- timeseries
-
-DDSQL also supports casting timeseries to and from arrays of points, and casting groups to and from arrays of strings.
-
-Array types are specified with the `array<TYPE>` syntax. For example:
-- To cast a column, or an expression to an array of integers, write `CAST(<EXPRESSION> AS array<int>)`, or `(<EXPRESSION>)::array<int>`.
-- To declare an array literal with an explicit type (for example, text), write `array<text>['your', 'text', 'entries', 'go', 'here']`.
-
-### Literals
-
-The table below contains examples on how to declare literals for each type, for use in expressions like `SELECT <LITERAL>` or in comparisons like `WHERE timestamp > timestamp '1 hr ago'`.
-
-| Name       | Example |
-|------------|---------|
-| integer    | `1`, `4`, `23901239412`, `0x4B1D` |
-| text       | `'Hello, world'` |
-| real       | `1.0`, `1e30`, `314e-2`, `.25`, `5.` |
-| timestamp  | `timestamp <TIMESTAMP_STRING>'` (where `TIMESTAMP_STRING` is a string with a format that can be parsed into a timestamp, such as `'YYYY-MM-DD HH:MM:SS'` or `'YYYY-MM-DD'`, or a relative string like `1 day ago`, `1 week ago`, and so on) |
-| date       | `date <DATE_STRING>` (where `DATE_STRING` is a string that can be parsed into a date, or a relative string like `1 day ago`') |
-| interval   | `interval <INTERVAL_STRING>` (where `INTERVAL_STRING` is a string that can be parsed into an interval, such as `1 h`, `12 days`, and so on) |
-| group      | `{'hello', 'world', 5}` (nontext elements are cast to strings) |
-| array      | An array can be implicitly typed: `array<int>[1, 2, ...]`,  `array<double>[1, 2.2, 3.4, 6, 0]`. Or the type can be inferred from the value: `['once', 'upon', 'a', 'time']`, `[1, 2, 3]` |
-| point      | `point{1641419300, 1.0}` (integer timestamp in seconds-since-Unix-epoch) |
-| timeseries | `timeseries{{1641419300, 3}, {1641419400, 400}, {1641419500, 20.345}}` |
 
 <!-- QUERY: I didn't cover the JSON response format section, since it doesn't seem applicable here. -->
 

@@ -9,29 +9,29 @@ DDSQL is in private beta.
 
 <div class="alert alert-warning">AGGR functions are experimental, and subject to change.</div>
 
-AGGR Functions are functions that can be used in the AGGR statement and executed by the metrics query system. AGGR Functions take 1 parameter, which can be either a string name of the metric being queried, or a subquery (for multi-layer aggregation).
+`AGGR` functions are functions that can be used in the `AGGR` statement and executed by the metrics query system. `AGGR` functions take one parameter, which can be either a string name of the metric being queried, or a subquery (for [multi-layer aggregation]).
 
 TODO: Include information about rollup and interpolate options.
 
 ## avg
 | Name | Description |
 |------|-------------|
-| avg("metric" | DQLexpr …) | For direct metrics queries, this calculates the true average of all data points in each group & time bucket (sum/count). For multi-layer aggregation, this calculates the average of all underlying timeseries values in each time bucket. |
+| avg("metric" | DQLexpr ...) | For direct metrics queries, this calculates the true average of all data points in each group & time bucket (sum/count). For multi-layer aggregation, this calculates the average of all underlying timeseries values in each time bucket. |
 
 ## max
 | Name | Description |
 |------|-------------|
-| max("metric" | DQLexpr …) | Returns the space & time maximum for each bucket. |
+| max("metric" | DQLexpr ...) | Returns the space & time maximum for each bucket. |
 
 ## min
 | Name | Description |
 |------|-------------|
-| min("metric" | DQLexpr …) | Returns the space & time minimum for each bucket. |
+| min("metric" | DQLexpr ...) | Returns the space & time minimum for each bucket. |
 
 ## sum
 | Name | Description |
 |------|-------------|
-| sum("metric" | DQLexpr …) | Returns the sum of all values in each space/time bucket. |
+| sum("metric" | DQLexpr ...) | Returns the sum of all values in each space/time bucket. |
 
 ## gauge_sum
 | Name | Description |
@@ -41,7 +41,7 @@ TODO: Include information about rollup and interpolate options.
 ## count
 | Name | Description |
 |------|-------------|
-| count("metric" | DQLexpr …) | Counts the number of timeseries at each point in time - i.e. counts the number of timeseries in each time bucket, and sums them up across each group. |
+| count("metric" | DQLexpr ...) | Counts the number of timeseries at each point in time - i.e. counts the number of timeseries in each time bucket, and sums them up across each group. |
 
 ## context_count
 | Name | Description |

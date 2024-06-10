@@ -67,3 +67,13 @@ An expression can be used to specify the index. For example, to access the last 
 {{< code-block lang="sql" >}}
 SELECT column[array_length(column)] FROM ...
 {{< /code-block >}}
+
+## Logical operators
+
+| Name    | Description             |
+|---------|-------------------------|
+| AND     | Boolean logic, a & b    |
+| OR      | Boolean logic, a || b |
+| XOR     | Boolean logic, a ^ b    |
+| NOT     | Boolean logic, !a       |
+| IS NULL | Returns true for each row that is null |
