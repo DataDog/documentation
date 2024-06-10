@@ -79,7 +79,7 @@ For detailed instructions on the advanced alert options (auto resolve, new group
 
 ### Notifications
 
-For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][3] page.
+For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][3] page.
 
 ## Further Reading
 

@@ -2296,7 +2296,7 @@ components:
           description: 'POSIX timestamp of the event. Must be sent as an integer (that
             is no quotes).
 
-            Limited to events no older than 18 hours.'
+            Limited to events up to 18 hours in the past and two hours in the future.'
           format: int64
           type: integer
         device_name:
@@ -13921,9 +13921,45 @@ components:
         which property they apply, and upon which target.'
       oneOf:
       - $ref: '#/components/schemas/SyntheticsAssertionTarget'
+      - $ref: '#/components/schemas/SyntheticsAssertionBodyHashTarget'
       - $ref: '#/components/schemas/SyntheticsAssertionJSONPathTarget'
       - $ref: '#/components/schemas/SyntheticsAssertionJSONSchemaTarget'
       - $ref: '#/components/schemas/SyntheticsAssertionXPathTarget'
+    SyntheticsAssertionBodyHashOperator:
+      description: Assertion operator to apply.
+      enum:
+      - md5
+      - sha1
+      - sha256
+      example: md5
+      type: string
+      x-enum-varnames:
+      - MD5
+      - SHA1
+      - SHA256
+    SyntheticsAssertionBodyHashTarget:
+      description: An assertion which targets body hash.
+      properties:
+        operator:
+          $ref: '#/components/schemas/SyntheticsAssertionBodyHashOperator'
+        target:
+          description: Value used by the operator.
+          example: 123456
+        type:
+          $ref: '#/components/schemas/SyntheticsAssertionBodyHashType'
+      required:
+      - type
+      - operator
+      - target
+      type: object
+    SyntheticsAssertionBodyHashType:
+      description: Type of the assertion.
+      enum:
+      - bodyHash
+      example: bodyHash
+      type: string
+      x-enum-varnames:
+      - BODY_HASH
     SyntheticsAssertionJSONPathOperator:
       description: Assertion operator to apply.
       enum:
@@ -16085,7 +16121,6 @@ components:
 
             (in minutes).'
           format: int64
-          maximum: 1440
           minimum: 0
           type: integer
       type: object
@@ -16302,6 +16337,10 @@ components:
           type: string
         name:
           description: Name of the file.
+          maxLength: 1500
+          type: string
+        originalFileName:
+          description: Original name of the file.
           maxLength: 1500
           type: string
         size:
@@ -28093,22 +28132,20 @@ paths:
       description: Search and filter your monitor groups details.
       operationId: SearchMonitorGroups
       parameters:
-      - description: 'After entering a search query in your [Manage Monitor page][1]
+      - description: 'After entering a search query on the [Triggered Monitors page][1],
           use the query parameter value in the
 
-          URL of the page as value for this parameter. Consult the dedicated [manage
-          monitor documentation][2]
-
-          page to learn more.
+          URL of the page as a value for this parameter. For more information, see
+          the [Manage Monitors documentation][2].
 
 
           The query can contain any number of space-separated monitor attributes,
-          for instance `query="type:metric status:alert"`.
+          for instance: `query="type:metric group_status:alert"`.
 
 
-          [1]: https://app.datadoghq.com/monitors/manage
+          [1]: https://app.datadoghq.com/monitors/triggered
 
-          [2]: /monitors/manage/#find-the-monitors'
+          [2]: /monitors/manage/#triggered-monitors'
         in: query
         name: query
         required: false

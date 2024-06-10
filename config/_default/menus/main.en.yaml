@@ -2095,11 +2095,11 @@ menu:
       parent: case_management_projects
       identifier: case_management_view_and_manage
       weight: 101
-    - name: Create notifications and tickets 
+    - name: Create notifications and tickets
       url: service_management/case_management/create_notifications_and_third_party_tickets
       parent: case_management_projects
       identifier: case_management_create_notifications_and_third_party_tickets
-      weight: 102   
+      weight: 102
     - name: Settings
       url: service_management/case_management/settings
       parent: case_management_projects
@@ -2202,7 +2202,7 @@ menu:
       url: service_management/app_builder/connections/http_request/
       parent: app_builder_connections
       identifier: app_builder_http_request
-      weight: 201  
+      weight: 201
     - name: Build Apps
       url: service_management/app_builder/build/
       parent: app_builder
@@ -2217,12 +2217,12 @@ menu:
       url: service_management/app_builder/components/tables/
       parent: app_builder_components
       identifier: app_builder_tables
-      weight: 401  
+      weight: 401
     - name: JavaScript Expressions
       url: service_management/app_builder/expressions/
       parent: app_builder
       identifier: app_builder_expressions
-      weight: 5 
+      weight: 5
     - name: Embedded Apps
       url: service_management/app_builder/embedded_apps/
       parent: app_builder
@@ -2642,8 +2642,8 @@ menu:
       parent: ndm
       identifier: ndm_profiles
       weight: 304
-    - name: Network Device Topology Map
-      url: network_monitoring/devices/network_topology_map
+    - name: Device Topology Map
+      url: network_monitoring/devices/device_topology_map
       parent: ndm
       identifier: ndm_topology_map
       weight: 305
@@ -2708,6 +2708,11 @@ menu:
       parent: cloud_cost
       identifier: cloud_cost_recommendations
       weight: 8
+    - name: Cost Monitors
+      url: /cloud_cost_management/monitors
+      parent: cloud_cost
+      identifier: cloud_cost_monitors
+      weight: 9
     - name: APM
       url: tracing/
       pre: apm
@@ -2784,21 +2789,26 @@ menu:
       parent: custom_instrumentation
       identifier: custom_instrumentation_dotnet
       weight: 2028
+    - name: iOS
+      url: tracing/trace_collection/custom_instrumentation/ios
+      parent: custom_instrumentation
+      identifier: custom_instrumentation_ios
+      weight: 2029
     - name: Rust
       url: tracing/trace_collection/custom_instrumentation/rust
       parent: custom_instrumentation
       identifier: custom_instrumentation_rust
-      weight: 2029
+      weight: 2030
     - name: Swift
       url: tracing/trace_collection/custom_instrumentation/swift
       parent: custom_instrumentation
-      identifier: custom_instrumentation_ios
-      weight: 2030
+      identifier: custom_instrumentation_swift
+      weight: 2031
     - name: Elixir
       url: tracing/trace_collection/custom_instrumentation/elixir
       parent: custom_instrumentation
       identifier: custom_instrumentation_elixir
-      weight: 2031
+      weight: 2032
     - name: Library Compatibility
       url: tracing/trace_collection/compatibility/
       parent: tracing_trace_collection
@@ -3568,7 +3578,7 @@ menu:
       parent: ci_explorer
       identifier: ci_explorer_search_syntax
       weight: 301
-    - name: Search Test Runs or Pipeline Executions
+    - name: Search Pipeline Executions
       url: continuous_integration/explorer/facets/
       parent: ci_explorer
       identifier: ci_explorer_facets
@@ -3701,10 +3711,30 @@ menu:
       identifier: tests_search
       weight: 3
     - name: Explorer
-      url: continuous_integration/explorer
+      url: tests/explorer/
       parent: tests
       identifier: tests_explorer
       weight: 4
+    - name: Search Syntax
+      url: tests/explorer/search_syntax
+      parent: tests_explorer
+      identifier: tests_explorer_search_syntax
+      weight: 401
+    - name: Search Test Runs
+      url: tests/explorer/facets/
+      parent: tests_explorer
+      identifier: tests_explorer_facets
+      weight: 402
+    - name: Export
+      url: tests/explorer/export/
+      parent: tests_explorer
+      identifier: tests_explorer_export
+      weight: 403
+    - name: Saved Views
+      url: tests/explorer/saved_views/
+      parent: tests_explorer
+      identifier: tests_explorer_saved_views
+      weight: 404
     - name: Monitors
       url: monitors/types/ci/?tab=tests
       parent: tests
@@ -3735,10 +3765,10 @@ menu:
       parent: tests
       identifier: tests_early_flake_detection
       weight: 10
-    - name: Flaky Test Retries
-      url: tests/flaky_test_retries
+    - name: Auto Test Retries
+      url: tests/auto_test_retries
       parent: tests
-      identifier: tests_flaky_test_retries
+      identifier: tests_auto_test_retries
       weight: 11
     - name: Guides
       url: tests/guides/
@@ -3862,11 +3892,16 @@ menu:
       parent: code_analysis
       identifier: code_analysis_github_prs
       weight: 4
+    - name: IDE Plugins
+      url: code_analysis/ide_plugins
+      parent: code_analysis
+      identifier: code_analysis_ide_plugins
+      weight: 5
     - name: Troubleshooting
       url: code_analysis/troubleshooting
       parent: code_analysis
       identifier: code_analysis_troubleshooting
-      weight: 5
+      weight: 6
     - name: Quality Gates
       url: quality_gates/
       pre: ci
@@ -4454,36 +4489,41 @@ menu:
       parent: security_platform_heading
       identifier: cloud_siem
       weight: 20000
+    - name: Content Packs
+      url: security/cloud_siem/content_packs
+      parent: cloud_siem
+      identifier: cloud_siem_content_packs
+      weight: 1
     - name: Log Detection Rules
       url: security/cloud_siem/log_detection_rules
       parent: cloud_siem
       identifier: cloud_siem_log_detection_rules
-      weight: 1
+      weight: 2
     - name: Signal Correlation Rules
       url: security/cloud_siem/signal_correlation_rules
       parent: cloud_siem
       identifier: cloud_siem_signal_correlation_rules
-      weight: 2
+      weight: 3
     - name: OOTB Rules
       url: /security/default_rules/#cat-cloud-siem-log-detection
       parent: cloud_siem
       identifier: cloud_siem_default_rules
-      weight: 3
+      weight: 4
     - name: Security Signals
       url: /security/cloud_siem/investigate_security_signals
       parent: cloud_siem
       identifier: cloud_siem_investigate_security_signals
-      weight: 4
+      weight: 5
     - name: Investigator
       url: security/cloud_siem/investigator
       parent: cloud_siem
       identifier: cloud_siem_investigator
-      weight: 5
+      weight: 6
     - name: Guides
       url: security/cloud_siem/guide/
       parent: cloud_siem
       identifier: siem_guides
-      weight: 6
+      weight: 7
     - name: Cloud Security Management
       url: security/cloud_security_management
       parent: security_platform_heading
@@ -4535,6 +4575,11 @@ menu:
       parent: csm_setup
       identifier: csm_setup_agentless_scanning
       weight: 10015
+    - name: Agent Variables
+      url: security/cloud_security_management/setup/agent_variables
+      parent: csm_setup
+      identifier: csm_setup_agent_variables
+      weight: 10016
     - name: Agent
       url: security/cloud_security_management/setup/csm_cloud_workload_security/agent
       parent: csm_setup_cloud_workload_security
@@ -4545,6 +4590,11 @@ menu:
       parent: csm
       identifier: cloud_workload_security
       weight: 2
+    - name: Supported Linux Distributions
+      url: security/threats/supported_linux_distributions
+      parent: cloud_workload_security
+      identifier: cws_workload_security_linux_distributions
+      weight: 200
     - name: Detection Rules
       url: security/threats/workload_security_rules
       parent: cloud_workload_security
@@ -4635,7 +4685,12 @@ menu:
       parent: csm
       identifier: vulnerabilities
       weight: 5
-    - name: Agentless  Scanning
+    - name: Hosts and Containers Compatibility
+      url: security/cloud_security_management/vulnerabilities/hosts_containers_compatibility
+      parent: vulnerabilities
+      identifier: vulnerabilities_hosts_containers_compatibility
+      weight: 101
+    - name: Agentless Scanning
       url: security/cloud_security_management/agentless_scanning
       parent: csm
       identifier: csm_agentless
@@ -5148,51 +5203,56 @@ menu:
       parent: rum
       identifier: rum_browser
       weight: 1
-    - name: Data Collected
-      url: real_user_monitoring/browser/data_collected/
+    - name: Setup
+      url: real_user_monitoring/browser/setup/
       parent: rum_browser
-      identifier: rum_data_collected
+      identifier: rum_browser_setup
       weight: 101
     - name: Advanced Configuration
       url: real_user_monitoring/browser/advanced_configuration/
       parent: rum_browser
       identifier: rum_advanced
       weight: 102
+    - name: Data Collected
+      url: real_user_monitoring/browser/data_collected/
+      parent: rum_browser
+      identifier: rum_data_collected
+      weight: 103
     - name: Monitoring Page Performance
       url: real_user_monitoring/browser/monitoring_page_performance/
       parent: rum_browser
       identifier: page_performance
-      weight: 103
+      weight: 104
     - name: Monitoring Resource Performance
       url: real_user_monitoring/browser/monitoring_resource_performance/
       parent: rum_browser
       identifier: resource_performance
-      weight: 104
+      weight: 105
     - name: Collecting Browser Errors
       url: real_user_monitoring/browser/collecting_browser_errors/
       parent: rum_browser
       identifier: collect_errors
-      weight: 105
+      weight: 106
     - name: Tracking User Actions
       url: real_user_monitoring/browser/tracking_user_actions/
       parent: rum_browser
       identifier: track_actions
-      weight: 106
+      weight: 107
     - name: Frustration Signals
       url: real_user_monitoring/browser/frustration_signals/
       parent: rum_browser
       identifier: rum_frustration_signals
-      weight: 107
+      weight: 108
     - name: Error Tracking
       url: real_user_monitoring/error_tracking/browser/
       parent: rum_browser
       identifier: rum_browser_error_tracking
-      weight: 108
+      weight: 109
     - name: Troubleshooting
       url: real_user_monitoring/browser/troubleshooting/
       parent: rum_browser
       identifier: troubleshooting
-      weight: 109
+      weight: 110
     - name: Mobile and TV Monitoring
       url: real_user_monitoring/mobile_and_tv_monitoring/
       parent: rum

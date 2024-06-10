@@ -1,0 +1,5 @@
+<ul>
+{{ range (site.GetPage "agent/basic_agent_usage").Pages }}
+  <li><a href="{{ .RelPermalink }}">{{ replace .Title "Basic Agent Usage for" "" }}</a></li>
+{{ end }}
+</ul>

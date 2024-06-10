@@ -120,6 +120,35 @@ dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- VSTest.Console.exe {te
 
 All tests are automatically instrumented.
 
+### Compatibility with Microsoft.CodeCoverage nuget package
+
+Since `Microsoft.CodeCoverage` version `17.2.0` Microsoft introduced [dynamic instrumentation using the `.NET CLR Profiling API`][16] enabled by default only on Windows. Datadog's automatic instrumentation relies on the `.NET CLR Profiling API`. This API allows only one subscriber (for example, `dd-trace`). The use of CodeCoverage dynamic instrumentation breaks the automatic test instrumentation.
+
+The solution is to switch from dynamic instrumentation to [static instrumentation][17]. Modify your `.runsettings` file with the following configuration knobs:
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<RunSettings>
+    <DataCollectionRunSettings>
+        <DataCollectors>
+            <DataCollector friendlyName="Code Coverage">
+              <Configuration>
+                <CodeCoverage>
+                  <!-- Switching to static instrumentation (dynamic instrumentation collides with dd-trace instrumentation) -->
+                  <EnableStaticManagedInstrumentation>True</EnableStaticManagedInstrumentation>
+                  <EnableDynamicManagedInstrumentation>False</EnableDynamicManagedInstrumentation>
+                  <UseVerifiableInstrumentation>False</UseVerifiableInstrumentation>
+                  <EnableStaticNativeInstrumentation>True</EnableStaticNativeInstrumentation>
+                  <EnableDynamicNativeInstrumentation>False</EnableDynamicNativeInstrumentation>
+                  ...
+                </CodeCoverage>
+              </Configuration>
+            </DataCollector>
+        </DataCollectors>
+    </DataCollectionRunSettings>
+</RunSettings>
+```
+
 ## Configuration settings
 
 You can change the default configuration of the CLI by using command line arguments or environment variables. For a full list of configuration settings, run:
@@ -849,3 +878,5 @@ Always call `module.Close()` or `module.CloseAsync()` at the end so that all the
 [13]: /continuous_integration/tests/dotnet/#configuring-reporting-method
 [14]: https://www.nuget.org/packages/Datadog.Trace
 [15]: /tracing/trace_collection/custom_instrumentation/dotnet/
+[16]: https://github.com/microsoft/codecoverage/blob/main/docs/instrumentation.md
+[17]: https://github.com/microsoft/codecoverage/blob/main/samples/Calculator/scenarios/scenario07/README.md

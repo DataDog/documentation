@@ -250,12 +250,10 @@ datadog:
   appKey: <DATADOG_APP_KEY>
   clusterName: <CLUSTER_NAME>
 
-  # Enable the new `kubernetes_state_core` check.
-  kubeStateMetricsCore:
-    enabled: true
-  # Avoid deploying kube-state-metrics chart.
-  # The new `kubernetes_state_core` doesn't require to deploy the kube-state-metrics anymore.
-  kubeStateMetricsEnabled: false
+  # The site of the Datadog intake to send Agent data to (example: `us3.datadoghq.com`)
+  # Default value is `datadoghq.com' (the US1 site)
+  # Documentation: https://docs.datadoghq.com/getting_started/site/
+  site: <DATADOG_SITE>
 
 agents:
   containers:

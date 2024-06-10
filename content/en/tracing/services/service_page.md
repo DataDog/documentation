@@ -34,6 +34,7 @@ Selecting a service on the Service Catalog leads you to the detailed service pag
 
 Consult on this page:
 
+* [Service health](#service-health) (private beta)
 * [Service monitor states](#service-monitor)
 * [Watchdog Insights](#watchdog-insights)
 * [Summary cards](#summary-cards)
@@ -42,6 +43,32 @@ Consult on this page:
 * [Resources associated to this service][2]
 * [Additional tabs](#additional-tabs)
     *  [Deployments](#deployments), [Error Tracking](#error-tracking), [Traces](#traces), [Security](#security), and more
+ 
+## Service health
+
+{{< callout header="Opt in to the private beta!" url="https://docs.google.com/forms/d/1KsC7DPKBJ3K0wP67fK50JhRRX-CseP4FUrFrOvCYbQM/viewform?edit_requested=true" >}}
+  Service health is in private beta. To request access, complete the form.
+{{< /callout >}} 
+
+The **Service Health** panel provides a real-time summary of service signals to help you understand if a service needs your attention.
+
+Service health considers many types of signals (including monitors, incidents, Watchdog insights, and error tracking issues) and surfaces the most critical alerts. Additionally, the Service Health panel provides links to associated incidents, which helps you to take necessary actions.
+
+{{< img src="/tracing/services/service_page/service-health.png" alt="Service Health panel on service page showing an active incident." style="width:100%;" >}}
+
+To access service health:
+
+1. Go to [APM > Service Catalog][23].
+2. Hover over a service and click **Full Page**.
+3. Select **Service Health**.
+
+The Service Health panel displays the status of your service as *Ok*, *Warning*, or *Alert* if at least one of the following conditions is met:
+
+|   Status    |                         Condition                          |   
+|-------------|------------------------------------------------------------|
+|  **Alert**  | **Monitors**: <br>- A non-muted alerting P1 monitor is triggered.<br>- A monitor with a paging integration setup (PagerDuty or Opsgenie) is triggered.<br><br>**Incidents**: <br>- An incident of any severity is active.<br><br>**Watchdog Insights**: <br>- A faulty deployment is active.<br>- An ongoing APM latency/error rate alert is active.  |  
+| **Warning** | **Monitors**: <br>- A non-muted alerting P2 monitor is triggered.<br>- A warning P1 monitor is triggered.<br>- A warning monitor with a paging integration setup (PagerDuty or Opsgenie) is triggered.<br><br>**Incidents**: <br>- An incident of any severity is in a stable state.<br><br>**Watchdog Insights**: <br>- An ongoing log anomaly alert is active.<br><br>**Error Tracking Issues**: <br>- A new issue (within 48 hours) requires review. |                                                                                                                                                                                                   |
+|   **Ok**    |    No signal from critical or alert state is active.     |                                                                                                                                                                       ||
 
 ## Service monitor
 
@@ -251,3 +278,4 @@ Visualize the cost associate with your service's infrastructure used in the Cost
 [19]: https://www.datadoghq.com/blog/datadog-watchdog-insights-log-management/
 [21]: /database_monitoring/connect_dbm_and_apm/
 [22]: /cloud_cost_management/
+[23]: https://app.datadoghq.com/services
