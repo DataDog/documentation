@@ -15,6 +15,6 @@ When an account is deleted, Cloudcraft removes the account's data from its serve
 
 ## Delete a paid Cloudcraft account
 
-To delete a paid account, contact [the support team][1].
+To delete a paid account, [contact the Cloudcraft support team][1].
 
 [1]: https://app.cloudcraft.co/support
