@@ -10,161 +10,146 @@ further_reading:
   text: "Azure App Service Environment"
 ---
 
-<div class="alert alert-info">To instrument your Azure App Service containers with <code>serverless-init</code>, see <a href="/serverless/guide/azure_app_service_linux_serverless_init">Instrument Azure App Service - Linux Container with serverless-init</a>.</div>
-
 ## Overview
 
-This instrumentation method uses Azure's [Sidecar pattern][1] to monitor containerized Linux Azure App Service workloads.
+<div class="alert alert-info">To instrument your Azure App Service containers with a sidecar, see <a href="/serverless/guide/azure_app_services/azure_app_service_linux_sidecar">Instrument Azure App Service - Linux Container</a>.</div>
+
+This instrumentation method uses `serverless-init` and provides the following additional monitoring capabilities for containerized Linux Azure App Service workloads:
+
+- Fully distributed APM tracing using automatic instrumentation.
+- Customized APM service and trace views showing relevant Azure App Service metrics and metadata.
+- Support for manual APM instrumentation to customize spans.
+- `Trace_ID` injection into application logs.
+- Support for submitting custom metrics using [DogStatsD][1].
 
 ### Prerequisites
 
-- Your Azure App Service application is containerized
-- You are using a programming language [supported by a Datadog tracing library][2]
-- You have a [Datadog API key][3]
+Make sure you have a [Datadog API Key][6] and are using a programming language [supported by a Datadog tracing library][2].
 
 ## Instrument your application
 
-1. [Integrate the Datadog tracer](#integrate-the-datadog-tracer) into your containerized application
-1. [Create your Linux Web App](#create-your-linux-web-app)
-1. [Add Datadog environment variables](#add-datadog-environment-variables) as application settings
-1. [Add the Datadog sidecar](#add-the-datadog-sidecar)
+### Dockerfile
 
-### Integrate the Datadog tracer
+Datadog publishes new releases of the serverless-init container image to Google's gcr.io, AWS's ECR, and on Docker Hub:
 
-After your application is containerized, integrate the Datadog tracer by adding the following lines to the Dockerfile for your main application.
+| dockerhub.io | gcr.io | public.ecr.aws |
+| ---- | ---- | ---- |
+| datadog/serverless-init | gcr.io/datadoghq/serverless-init | public.ecr.aws/datadog/serverless-init |
 
-{{< programming-lang-wrapper langs="dotnet" >}}
+Images are tagged based on semantic versioning, with each new version receiving three relevant tags:
+
+* `1`, `1-alpine`: use these to track the latest minor releases, without breaking chagnes
+* `1.x.x`, `1.x.x-alpine`: use these to pin to a precise version of the library
+* `latest`, `latest-alpine`: use these to follow the latest version release, which may include breaking changes
+
+{{< programming-lang-wrapper langs="nodejs,python,java,go,dotnet,ruby,php" >}}
+{{< programming-lang lang="nodejs" >}}
+
+{{% svl-init-nodejs %}}
+
+{{< /programming-lang >}}
+{{< programming-lang lang="python" >}}
+
+{{% svl-init-python %}}
+
+{{< /programming-lang >}}
+{{< programming-lang lang="java" >}}
+
+{{% svl-init-java %}}
+
+{{< /programming-lang >}}
+{{< programming-lang lang="go" >}}
+
+{{% svl-init-go %}}
+
+{{< /programming-lang >}}
 {{< programming-lang lang="dotnet" >}}
 
-```dockerfile
-RUN mkdir -p /datadog/tracer
-RUN mkdir -p /home/LogFiles/dotnet
+{{% svl-init-dotnet %}}
 
-ADD https://github.com/DataDog/dd-trace-dotnet/releases/download/v2.51.0/datadog-dotnet-apm-2.49.0.tar.gz /datadog/tracer
-RUN cd /datadog/tracer && tar -zxf datadog-dotnet-apm-2.49.0.tar.gz
-```
+{{< /programming-lang >}}
+{{< programming-lang lang="ruby" >}}
 
-This installs and configures the Datadog tracer within your application container.
+{{% svl-init-ruby %}}
 
-#### Full example Dockerfile
+{{< /programming-lang >}}
+{{< programming-lang lang="php" >}}
 
-```dockerfile
-# Stage 1: Build the application
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
-WORKDIR /app
+{{% svl-init-php %}}
 
-# Copy the project file and restore dependencies
-COPY *.csproj ./
-RUN dotnet restore
-
-# Copy the remaining source code
-COPY . .
-
-# Build the application
-RUN dotnet publish -c Release -o out
-
-# Stage 2: Create a runtime image
-FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
-WORKDIR /app
-
-# Copy the build output from stage 1
-COPY --from=build /app/out ./
-
-# Datadog specific
-RUN mkdir -p /datadog/tracer
-RUN mkdir -p /home/LogFiles/dotnet
-
-ADD https://github.com/DataDog/dd-trace-dotnet/releases/download/v2.49.0/datadog-dotnet-apm-2.49.0.tar.gz /datadog/tracer
-RUN cd /datadog/tracer && tar -zxf datadog-dotnet-apm-2.49.0.tar.gz
-
-# Set the entry point for the application
-ENTRYPOINT ["dotnet", "<your dotnet app>.dll"]
-```
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-Then, build the image and push it to your preferred container registry.
+### 2. Configure your application
 
-### Create your Linux Web App
+Once the container is built and pushed to your registry, the last step is to set the required environment variables for the Datadog Agent:
+- `DD_API_KEY`: Datadog API key, used to send data to your Datadog account. It should be configured as a [Azure Secret][7] for privacy and safety issue.
+- `DD_SITE`: Datadog endpoint and website. Select your site on the right side of this page. Your site is: {{< region-param key="dd_site" code="true" >}}.
+- `DD_TRACE_ENABLED`: Set to `true` to enable tracing.
 
-1. In the Azure Portal, go to **App Services** and select **Create**.
-1. On the **Basics** tab, provide the required details.
-   - For **Publish**, select **Container**.
-   - For **Operating System**, select **Linux**.
-   Then, select **Next: Container >**.
-1. On the **Container** tab, provide the required details.
-   - For **Sidecar support**, select **Enabled**.
-   - For **Image Source**, select your chosen registry.
-   - Then, specify the **Registry**, **Image**, **Tag**, and **Port** for your container image.
-1. Select **Review + create**, then select **Create**.
+For more environment variables and their function, see [Additional Configurations](#additional-configurations).
 
-### Add Datadog environment variables
+### 3. Results
 
-In the Azure portal, select your app. In the left menu, select **Configuration** > **Application settings**. Then, add the following environment variables as application settings.
+Once the deployment is completed, your metrics and traces are sent to Datadog. In Datadog, navigate to **Infrastructure->Serverless** to see your serverless metrics and traces.
+
+## Deployment
+
+{{% aas-workflow-linux %}}
+
+## Additional configurations
+
+- **Advanced Tracing:** The Datadog Agent already provides some basic tracing for popular frameworks. Follow the [advanced tracing guide][2] for more information.
+
+- **Logs:** If you use the [Azure integration][1], your logs are already being collected. Alternatively, you can set the `DD_LOGS_ENABLED` environment variable to `true` to capture application logs through the serverless instrumentation directly.
+
+- **Custom Metrics:** You can submit custom metrics using a [DogStatsd client][3]. For monitoring Cloud Run and other serverless applications, use [distribution][8] metrics. Distributions provide `avg`, `sum`, `max`, `min`, and `count` aggregations by default. On the Metric Summary page, you can enable percentile aggregations (p50, p75, p90, p95, p99) and also manage tags. To monitor a distribution for a gauge metric type, use `avg` for both the [time and space aggregations][9]. To monitor a distribution for a count metric type, use `sum` for both the time and space aggregations.
+
+- **Trace Sampling:**  To manage the APM traced request sampling rate for serverless applications, set the DD_TRACE_SAMPLE_RATE environment variable on the function to a value between 0.000 (no tracing of Container App requests) and 1.000 (trace all Container App requests).
+
+Metrics are calculated based on 100% of the application’s traffic, and remain accurate regardless of any sampling configuration.
+
+### Environment Variables
+
+| Variable | Description |
+| -------- | ----------- |
+|`DD_API_KEY`| [Datadog API Key][6] - **Required**|
+| `DD_SITE` | [Datadog site][4] - **Required** |
+| `DD_LOGS_ENABLED` | When true, send logs (stdout and stderr) to Datadog. Defaults to false. |
+| `DD_LOGS_INJECTION`| When true, enrich all logs with trace data for supported loggers in [Java][10], [Node.js][11], [.NET][12], and [PHP][13]. See additional docs for [Python][14], [Go][15], and [Ruby][16]. |
+| `DD_TRACE_SAMPLE_RATE`|  Controls the trace ingestion sample rate `0.0` and `1.0`|
+| `DD_SERVICE`      | See [Unified Service Tagging][5].                                       |
+| `DD_VERSION`      | See [Unified Service Tagging][5].                                       |
+| `DD_ENV`          | See [Unified Service Tagging][5].                                       |
+| `DD_SOURCE`       | See [Unified Service Tagging][5].                                       |
+| `DD_TAGS`         | See [Unified Service Tagging][5].                                       |
+
+## Troubleshooting
+
+If you are not receiving traces or custom metric data as expected, enable **App Service logs** to receive debugging logs.
+
+{{< img src="serverless/azure_app_service/app-service-logs.png" style="width:100%;" >}}
+
+Share the content of the **Log stream** with [Datadog Support][14].
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 
-`DD_API_KEY` 
-: Your [Datadog API key][3]. <br/>
-**Required**. Alternatively, you can source your API key (and other sensitive information) from Azure Key Vault. See [Use Key Vault references as app settings in Azure App Service][4].
-
-`DD_SITE` 
-: {{< region-param key="dd_site" code="true" >}} <br/>
-**Required**. Corresponds to your [Datadog site][5].
-
-`DD_SERVICE` 
-: Supply a service name to be displayed in your Datadog [Service Catalog][6]. See [Unified Service Tagging][7]. 
-
-`DD_ENV` 
-: A name for your environment, such as `staging` or `prod`. See [Unified Service Tagging][7].
-
-`DD_SERVERLESS_LOG_PATH` 
-: `/home/Logfile/*.log` <br/>
-Corresponds to the path where you write your application logs. If you have changed this location, specify your custom location in this setting.
-
-`DD_DOTNET_TRACER_HOME` 
-: `/datadog/tracer`
-
-`DD_TRACE_LOG_DIRECTORY` 
-: `/home/Logfiles/dotnet`
-
-`CORECLR_ENABLE_PROFILING` 
-: `1`
-
-`CORECLR_PROFILER` 
-: `{846F5F1C-F9AE-4B07-969E-05C26BC060D8}`
-
-`CORECLR_PROFILER_PATH` 
-: `/datadog/tracer/Datadog.Trace.ClrProfiler.Native.so`
-
-<!-- some vars above need details, and also are they dotnet specific? -->
-
-### Add the Datadog sidecar
-
-1. In the Azure portal, select your app. In the left menu, select **Deployment Center**.
-1. Select **Add**. Under **Add container**, provide the following details:
-   - **Name**: `datadog`
-   - **Image source**: Docker Hub or other registries
-   - **Image type**: Public
-   - **Registry server URL**: sitecontainerssampleacr.azurecr.io
-   - **Image and tag**: datadog-dotnet:2.0
-   - **Port**: 8126
-   Then, select **Apply**.
-   <!-- let's make sure these are the right things in the UI -->
-
-<!-- https://learn.microsoft.com/en-us/azure/app-service/tutorial-custom-container-sidecar -->
-<!-- https://learn.microsoft.com/en-us/azure/app-service/tutorial-custom-container?source=recommendations&tabs=azure-portal&pivots=container-linux -->
-
-## Next steps
-
-After you finish instrumenting your application, go to the [Serverless > Azure][8] page in Datadog to see your observability data. Your application logs are available in the [Log Explorer][9], and your traces are available in the [Trace Explorer][10].
-
-[1]: https://azure.github.io/AppService/2024/04/04/Public-Preview-Sidecars-Webjobs.html
+[1]: /integrations/azure/#log-collection
 [2]: /tracing/trace_collection/library_config
-[3]: /account_management/api-app-keys/
-[4]: https://learn.microsoft.com/en-us/azure/app-service/app-service-key-vault-references
-[5]: /getting_started/site/
-[6]: https://app.datadoghq.com/services
-[7]: /getting_started/tagging/unified_service_tagging/
-[8]: https://app.datadoghq.com/functions?cloud=azure
-[9]: https://app.datadoghq.com/logs
-[10]: https://app.datadoghq.com/apm/traces
+[3]: /metrics/custom_metrics/dogstatsd_metrics_submission/
+[4]: /getting_started/site/
+[5]: /getting_started/tagging/unified_service_tagging/
+[6]: /account_management/api-app-keys/
+[7]: https://learn.microsoft.com/en-us/azure/container-apps/manage-secrets
+[8]: /metrics/distributions/
+[9]: /metrics/#time-and-space-aggregation
+[10]: /tracing/other_telemetry/connect_logs_and_traces/java/?tab=log4j2
+[11]: /tracing/other_telemetry/connect_logs_and_traces/nodejs
+[12]: /tracing/other_telemetry/connect_logs_and_traces/dotnet?tab=serilog
+[13]: /tracing/other_telemetry/connect_logs_and_traces/php
+[14]: /tracing/other_telemetry/connect_logs_and_traces/python
+[15]: /tracing/other_telemetry/connect_logs_and_traces/go
+[16]: /tracing/other_telemetry/connect_logs_and_traces/ruby
