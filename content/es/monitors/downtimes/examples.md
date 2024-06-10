@@ -20,7 +20,7 @@ Utiliza la [API de tiempo de inactividad][1] para gestionar el formato avanzado 
 Esta guía describe cómo configurar tiempos de inactividad para los siguientes casos de uso:
 
 * [Tiempo de inactividad durante el fin de semana](#downtime-over-the-weekend)
-* [Tiempo de inactividad fuera del horario comercial](#downtime-outside-of-business-hours)
+* [Tiempo de inactividad fuera del horario laboral](#downtime-outside-of-business-hours)
 * [Tiempo de inactividad en el enésimo día del mes](#recurring-downtime-on-the-nth-weekday-of-the-month)
 
 
@@ -105,13 +105,13 @@ Y luego, en el comando cURL, utiliza: `"start": '"${start}"'`.
 
 Abre la página [Gestionar tiempos de inactividad][1] y programa un nuevo tiempo de inactividad. Selecciona `recurring`:
 
-{{< img src="monitors/guide/downtimes_weekend.png" alt="Downtimes configuration using recurring schedule to mute alerts over the weekend" (Configuración de tiempos de inactividad utilizando cronogramas recurrentes para silenciar alertas durante el fin de semana) style="width:100%;" >}}
+{{< img src="monitors/guide/downtimes_weekend.png" alt="Downtimes configuration using recurring schedule to mute alerts over the weekend" (Configuración de tiempos de inactividad utilizando un cronograma recurrente para silenciar alertas durante el fin de semana) style="width:100%;" >}}
 
 [1]: https://app.datadoghq.com/monitors#downtime
 {{% /tab %}}
 {{< /tabs >}}
 
-### Tiempo de inactividad fuera del horario comercial
+### Tiempo de inactividad fuera del horario laboral
 
 Utilizando el mismo ejemplo, es posible que también quieras silenciar este servicio durante los días laborables, fuera del horario comercial.
 
@@ -176,7 +176,7 @@ También puedes añadir un `message` a tu tiempo de inactividad para que los dem
 
 Abre la página [Gestionar tiempos de inactividad][1] y programa un nuevo tiempo de inactividad. Selecciona `recurring`:
 
-{{< img src="monitors/guide/downtime_businesshour.png" alt="Downtimes configuration using recurring schedule to mute alerts outside of business hours" (Configuración de tiempos de inactividad utilizando cronogramas recurrentes para silenciar alertas fuera del horario laboral) style="width:100%;" >}}
+{{< img src="monitors/guide/downtime_businesshour.png" alt="Downtimes configuration using recurring schedule to mute alerts outside of business hours" (Configuración de tiempos de inactividad utilizando un cronograma recurrente para silenciar alertas fuera del horario laboral) style="width:100%;" >}}
 
 [1]: https://app.datadoghq.com/monitors#downtime
 {{% /tab %}}
@@ -251,7 +251,7 @@ También puedes añadir un `message` a tu tiempo de inactividad para que los dem
 
 Abre la página [Gestionar tiempos de inactividad][1] y añade un nuevo tiempo de inactividad. Selecciona `recurring`:
 
-{{< img src="monitors/guide/downtime_business_hour_weekend.png" alt="Downtimes configuration using recurring schedule to mute alerts over the outside of business hours and during the weekend" (Configuración de tiempos de inactividad utilizando cronogramas recurrentes para silenciar alertas fuera del horario laboral y durante el fin de semana) style="width:100%;" >}}
+{{< img src="monitors/guide/downtime_business_hour_weekend.png" alt="Downtimes configuration using recurring schedule to mute alerts over the outside of business hours and during the weekend" (Configuración de tiempos de inactividad utilizando un cronograma recurrente para silenciar alertas fuera del horario laboral y durante el fin de semana) style="width:100%;" >}}
 
 [1]: https://app.datadoghq.com/monitors#downtime
 {{% /tab %}}
@@ -330,7 +330,7 @@ Sustituye el valor del parámetro `<DATADOG_SITE>` por el del sitio de tu cuenta
 
 Abre la página [Gestionar tiempos de inactividad][1] y añade un nuevo tiempo de inactividad. Selecciona `recurring` y luego `Use RRULE`.
 
-{{< img src="monitors/downtimes/downtime_guide_rrule.png" alt="Downtimes configuration using recurring RRULE schedule to mute alerts on the 2nd Tuesday of every month" (Configuración de tiempos de inactividad utilizando un cronograma con RRULE para silenciar alertas el 2.° martes de cada mes) style="width:100%;">}}
+{{< img src="monitors/downtimes/downtime_guide_rrule.png" alt="Downtimes configuration using recurring RRULE schedule to mute alerts on the 2nd Tuesday of every month" (Configuración de tiempos de inactividad utilizando un cronograma recurrente con RRULE para silenciar alertas el 2.° martes de cada mes) style="width:100%;">}}
 
 [1]: https://app.datadoghq.com/monitors#downtime
 {{% /tab %}}
