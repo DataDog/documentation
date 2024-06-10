@@ -70,6 +70,7 @@ To set up a scanning group, perform the following steps.
 1. Enter a name and description for the group.
 1. Click the toggle buttons to enable Sensitive Data Scanner for the products you want (for example, logs, APM spans, RUM events, and Datadog events).
 1. Click **Create**.
+
 [1]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner/configuration
 {{% /tab %}}
 {{% tab "Through the Agent" %}}
@@ -82,6 +83,7 @@ To set up a scanning group, perform the following steps.
 1. Enter a name and description for the group.
 1. Click the toggle buttons to enable Sensitive Data Scanner for the products you want (for example, logs, APM spans, RUM events, and Datadog events).
 1. Click **Create**.
+
 [1]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner/configuration/agent
 {{% /tab %}}
 {{< /tabs >}}
@@ -98,7 +100,7 @@ To add scanning rules, perform the following steps.
 {{< tabs >}}
 {{% tab "Through the backend" %}}
 
-1. Navigate to the [Sensitive Data Scanner][6] configuration page.
+1. Navigate to the [Sensitive Data Scanner][1] configuration page.
 1. Click the scanning group where you want to add the scanning rules.
 1. Click **Add Scanning Rule**. Alternatively, click the **Add** dropdown menu on the top right corner of the page and select **Add Scanning Rule**.
 1. Select whether you want to add a library rule or create a custom scanning rule.
