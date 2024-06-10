@@ -220,36 +220,36 @@ The following table contains a non-exhaustive list of out-of-the-box tags associ
 
 | Tag Name | Tag Description |
 |---|---
-| `record_id` | string | Unique ID for this record. |
-| `account_id` | string | ID of the account this report was generated for. |
-| `workspace_id` | string | ID of the Workspace this usage was associated with. |
-| `cloud` | string | Cloud this usage is relevant for. Possible values are AWS, AZURE, and GCP. |
-| `custom_tags` | object | Custom tags applied to the usage, usually as key-value pairs for additional metadata or categorization. |
-| `usage_metadata` | object | Metadata related to the usage, which might include details like usage type, service category, or other relevant information. |
+| `record_id` | Unique ID for this record. |
+| `account_id` | ID of the account this report was generated for. |
+| `workspace_id` | ID of the Workspace this usage was associated with. |
+| `cloud` | Cloud this usage is relevant for. Possible values are AWS, AZURE, and GCP. |
+| `custom_tags` | Custom tags applied to the usage, usually as key-value pairs for additional metadata or categorization. |
+| `usage_metadata` | Metadata related to the usage, which might include details like usage type, service category, or other relevant information. |
 
 {{% /tab %}}
 {{% tab "Confluent Cloud" %}}
 
 | Tag Name | Tag Description |
 |---|---
-| `resource_id` | string | The unique identifier of the Confluent resource. |
-| `resource_name` | string | The name of the Confluent resource. |
-| `environment_id` | string | The unique identifier for the environment. |
-| `network_access_type` | string | Network access type for the cluster. Possible values are `INTERNET`, `TRANSIT_GATEWAY`, `PRIVATE_LINK`, and `PEERED_VPC`. |
-| `product` | string | Product name. Possible values include `KAFKA`, `CONNECT`, `KSQL`, `AUDIT_LOG`, `STREAM_GOVERNANCE`, `CLUSTER_LINK`, `CUSTOM_CONNECT`, `FLINK`, `SUPPORT_CLOUD_BASIC`, `SUPPORT_CLOUD_DEVELOPER`, `SUPPORT_CLOUD_BUSINESS`, and `SUPPORT_CLOUD_PREMIER`. |
+| `resource_id` | The unique identifier of the Confluent resource. |
+| `resource_name` | The name of the Confluent resource. |
+| `environment_id` | The unique identifier for the environment. |
+| `network_access_type` | Network access type for the cluster. Possible values are `INTERNET`, `TRANSIT_GATEWAY`, `PRIVATE_LINK`, and `PEERED_VPC`. |
+| `product` | Product name. Possible values include `KAFKA`, `CONNECT`, `KSQL`, `AUDIT_LOG`, `STREAM_GOVERNANCE`, `CLUSTER_LINK`, `CUSTOM_CONNECT`, `FLINK`, `SUPPORT_CLOUD_BASIC`, `SUPPORT_CLOUD_DEVELOPER`, `SUPPORT_CLOUD_BUSINESS`, and `SUPPORT_CLOUD_PREMIER`. |
 
 {{% /tab %}}
 {{% tab "MongoDB" %}}
 
 | Tag Name | Tag Description |
 |---|---|
-| `invoice_id` | string | The unique identifier of the invoice. |
-| `status` | string | State of the payment. |
-| `mongo_org_id` | string | MongoDB organization ID. |
-| `cluster_name` | string | The name of the cluster that incurred the charge. |
-| `group_id` | string | ID of the project with which the line item is associated. |
-| `replica_set_name` | string | Name of the replica set with which the line item is associated. |
-| `resource_tags` | object | Arbitrary tags on clusters set by users, usually as key-value pairs. |
+| `invoice_id` | The unique identifier of the invoice. |
+| `status` | State of the payment. |
+| `mongo_org_id` | MongoDB organization ID. |
+| `cluster_name` | The name of the cluster that incurred the charge. |
+| `group_id` | ID of the project with which the line item is associated. |
+| `replica_set_name` | Name of the replica set with which the line item is associated. |
+| `resource_tags` | Arbitrary tags on clusters set by users, usually as key-value pairs. |
 
 {{% /tab %}}
 {{% tab "Snowflake" %}}
