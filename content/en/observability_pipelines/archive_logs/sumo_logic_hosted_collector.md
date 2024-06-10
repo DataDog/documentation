@@ -20,6 +20,11 @@ This document walks you through the following steps:
 
 {{% observability_pipelines/prerequisites/sumo_logic %}}
 
+## Configure Log Archives
+
+Select the cloud provider you are using to archive your logs.
+
+{{% collapse-content title="Amazon S3" level="h2" %}}
 {{% observability_pipelines/configure_log_archive/instructions %}}
 
 {{< tabs >}}
@@ -48,6 +53,19 @@ This document walks you through the following steps:
 
 {{% observability_pipelines/configure_log_archive/connect_s3_to_datadog_log_archives %}}
 
+{{% /collapse-content %}}
+
+{{% collapse-content title="Google Cloud Storage" level="h2" %}}
+
+TKTK
+
+{{% /collapse-content %}}
+{{% collapse-content title="Azure Storage" level="h2" %}}
+
+TKTK
+
+{{% /collapse-content %}}
+
 ## Set up Observability Pipelines
 
 1. Navigate to [Observability Pipelines][1].
@@ -65,7 +83,19 @@ Enter the following information based on your selected logs destination.
 {{< tabs >}}
 {{% tab "Datadog Archives" %}}
 
-{{% observability_pipelines/destination_settings/datadog_archives %}}
+{{% observability_pipelines/destination_settings/datadog_archives_note %}}
+
+Follow the instructions for the cloud provider you are using to archive your logs.
+
+{{% observability_pipelines/destination_settings/datadog_archives_amazon_s3 %}}
+
+#### Google Cloud Storage
+
+TKTK
+
+#### Azure Storage
+
+TKTK
 
 {{% /tab %}}
 {{% tab "Datadog" %}}
@@ -133,7 +163,17 @@ Enter the following information based on your selected logs destination.
 {{< tabs >}}
 {{% tab "Datadog Archives" %}}
 
+For the Datadog Archives destination, follow the instructions for the cloud provider you are using to archive your logs.
+
 {{% observability_pipelines/destination_env_vars/datadog_archives %}}
+
+#### Google Cloud Storage
+
+TKTK
+
+#### Azure Storage
+
+TKTK
 
 {{% /tab %}}
 {{% tab "Datadog" %}}
