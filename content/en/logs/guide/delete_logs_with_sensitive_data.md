@@ -47,7 +47,7 @@ Do the following if you need to delete an entire index:
 
 Use [Sensitive Data Scanner][5] to limit the risk of storing sensitive data in Datadog. Sensitive Data Scanner is a stream-based, pattern matching service used to identify, tag, and optionally redact or hash sensitive data. Security and compliance teams can implement Sensitive Data Scanner to prevent sensitive data leaks and limit non-compliance risks.
 
-## Provide information for deletion request
+## Submit a request for log deletion
 
 <div class="alert alert-warning">
 Only a Datadog Admin can request log deletion. If you are not an Admin, make sure to include an Admin to confirm the deletion request.
