@@ -27,11 +27,11 @@ You can monitor application security for Java apps running in Docker, Kubernetes
 
 {{% appsec-getstarted %}}
 
-## Enabling code security vulnerability detection
+## Enabling Code Security
 
-If your service runs a [tracing library version that supports code security vulnerability detection][3], enable the capability by setting the `DD_IAST_ENABLED=true` environment variable and restarting your service.
+If your service runs a [tracing library version that supports code security][3], enable the capability by setting the `DD_IAST_ENABLED=true` environment variable and restarting your service.
 
-To detect code security vulnerabilities for your service:
+To detect code-level vulnerabilities in your service:
 
 1. [Update your Datadog Agent][6] to at least version 7.41.1.
 2. Update your tracing library to at least the minimum version needed to turn on code security vulnerability detection. For details, see [ASM capabilities support][3].
@@ -104,7 +104,7 @@ Update your ECS task definition JSON file, by adding this in the environment sec
    {{< /tabs >}}
 
 4. Restart your service.
-5. To see Software Composition Analysis for code security vulnerabilities in action, browse your service and the code security vulnerabilities appear in the [Vulnerability Explorer][4]. The `SOURCE` column shows the Code value.
+5. To see Code Security in action, browse your service and code-level vulnerabilities will appear in the [Vulnerability Explorer][4]. The `SOURCE` column shows the Code value.
 
 {{< img src="/security/application_security/Code-Level-Vulnerability-Details.mp4" alt="Video showing Vulnerabilities tab, Code source, and inspecting the code vulnerability" video="true" >}}
 
