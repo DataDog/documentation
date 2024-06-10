@@ -52,7 +52,7 @@ Use [Sensitive Data Scanner][5] to limit the risk of storing sensitive data in D
 ## Submit a request for log deletion
 
 <div class="alert alert-warning">
-Only a Datadog Admin can request log deletion. If you are not an Admin, make sure to include an Admin to confirm the deletion request.
+Only a Datadog Admin can request log deletion. If you are not an Admin, make sure to include an Admin on the request so they can confirm the deletion request.
 </div>
 
 If the options for changing your retention period, making logs un-queryable, and redacting sensitive data using Sensitive Data Scanner are not enough to ensure the security of your data, submit a request to [Datadog support][3] to delete the indexed logs with sensitive data. Your request must provide the following information:
