@@ -19,7 +19,6 @@ ignores:
   - "content/en/api/v1/**/*.md"
   - "content/en/api/v2/**/*.md"
   - "config/_default/menus/menus.en.yaml"
-  - "data/partials/platforms.yaml"
   - "**/*.fr.md"
   - "**/*.fr.yaml"
   - "**/*.fr.json"
