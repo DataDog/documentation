@@ -78,7 +78,7 @@ Click the **Visualize** tile to add a cell for visualizing your data as a table,
 Click the **transformation** tile to add a cell for filtering, aggregating, and extracting data.
 
 1. Click the **Transformation** tile.
-1.  Select the data source you want to transform  in the **Source dataset** drop down menu.
+1.  Select the data source you want to transform in the **Source dataset** drop down menu.
 1. Click **+** to add a **Filter**, **Parse**, or **Aggregate** function.
     - For **Filter**, add a filter query for the dataset.
     - For **Parse**, enter grok syntax to extract data into a separate column. In the **from** drop down menu, select the column the data is getting extracted from. See the [column extraction example](#column-extraction-example).
