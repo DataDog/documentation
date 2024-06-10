@@ -1277,11 +1277,6 @@ menu:
       url: dashboards/correlations/
       parent: dashboards
       weight: 6
-    - name: Scheduled Reports
-      url: dashboards/scheduled_reports/
-      parent: dashboards
-      weight: 7
-      identifier: dashboards_reporting
     - name: Template Variables
       url: dashboards/template_variables/
       parent: dashboards
@@ -1297,6 +1292,21 @@ menu:
       url: dashboards/sharing/
       parent: dashboards
       weight: 10
+    - name: Public Dashboards
+      identifier: dashboards_sharing_public_dashboards
+      url: dashboards/sharing/public_dashboards
+      parent: dashboards_sharing
+      weight: 1001
+    - name: Share Graphs
+      identifier: dashboards_sharing_graphs
+      url: dashboards/sharing/graphs
+      parent: dashboards_sharing
+      weight: 1002
+    - name: Scheduled Reports
+      identifier: dashboards_reporting
+      url: dashboards/sharing/scheduled_reports
+      parent: dashboards_sharing
+      weight: 1003
     - name: Guides
       url: dashboards/guide/
       parent: dashboards
@@ -2085,11 +2095,11 @@ menu:
       parent: case_management_projects
       identifier: case_management_view_and_manage
       weight: 101
-    - name: Create notifications and tickets 
+    - name: Create notifications and tickets
       url: service_management/case_management/create_notifications_and_third_party_tickets
       parent: case_management_projects
       identifier: case_management_create_notifications_and_third_party_tickets
-      weight: 102   
+      weight: 102
     - name: Settings
       url: service_management/case_management/settings
       parent: case_management_projects
@@ -2178,36 +2188,46 @@ menu:
       identifier: app_builder
       parent: service_management_heading
       weight: 70000
-    - name: Build Apps
-      url: service_management/app_builder/build/
-      parent: app_builder
-      identifier: app_builder_build
-      weight: 1
-    - name: HTTP Request
-      url: service_management/app_builder/http_request/
-      parent: app_builder_build
-      identifier: app_builder_http_request
-      weight: 101
     - name: Authentication
       url: service_management/app_builder/auth/
       parent: app_builder
       identifier: app_builder_access
-      weight: 2
+      weight: 1
     - name: Connections
       url: service_management/app_builder/connections/
       parent: app_builder
       identifier: app_builder_connections
-      weight: 3
-    - name: Embedded Apps
-      url: service_management/app_builder/embedded_apps/
+      weight: 2
+    - name: HTTP Request
+      url: service_management/app_builder/connections/http_request/
+      parent: app_builder_connections
+      identifier: app_builder_http_request
+      weight: 201
+    - name: Build Apps
+      url: service_management/app_builder/build/
       parent: app_builder
-      identifier: app_builder_embedded_apps
-      weight: 4
+      identifier: app_builder_build
+      weight: 3
     - name: Components
       url: service_management/app_builder/components/
       parent: app_builder
       identifier: app_builder_components
+      weight: 4
+    - name: Tables
+      url: service_management/app_builder/components/tables/
+      parent: app_builder_components
+      identifier: app_builder_tables
+      weight: 401
+    - name: JavaScript Expressions
+      url: service_management/app_builder/expressions/
+      parent: app_builder
+      identifier: app_builder_expressions
       weight: 5
+    - name: Embedded Apps
+      url: service_management/app_builder/embedded_apps/
+      parent: app_builder
+      identifier: app_builder_embedded_apps
+      weight: 6
     - name: Universal Service Monitoring
       url: universal_service_monitoring/
       pre: usm
@@ -2622,8 +2642,8 @@ menu:
       parent: ndm
       identifier: ndm_profiles
       weight: 304
-    - name: Network Device Topology Map
-      url: network_monitoring/devices/network_topology_map
+    - name: Device Topology Map
+      url: network_monitoring/devices/device_topology_map
       parent: ndm
       identifier: ndm_topology_map
       weight: 305
@@ -2688,6 +2708,11 @@ menu:
       parent: cloud_cost
       identifier: cloud_cost_recommendations
       weight: 8
+    - name: Cost Monitors
+      url: /cloud_cost_management/monitors
+      parent: cloud_cost
+      identifier: cloud_cost_monitors
+      weight: 9
     - name: APM
       url: tracing/
       pre: apm
@@ -2764,21 +2789,26 @@ menu:
       parent: custom_instrumentation
       identifier: custom_instrumentation_dotnet
       weight: 2028
+    - name: iOS
+      url: tracing/trace_collection/custom_instrumentation/ios
+      parent: custom_instrumentation
+      identifier: custom_instrumentation_ios
+      weight: 2029
     - name: Rust
       url: tracing/trace_collection/custom_instrumentation/rust
       parent: custom_instrumentation
       identifier: custom_instrumentation_rust
-      weight: 2029
+      weight: 2030
     - name: Swift
       url: tracing/trace_collection/custom_instrumentation/swift
       parent: custom_instrumentation
-      identifier: custom_instrumentation_ios
-      weight: 2030
+      identifier: custom_instrumentation_swift
+      weight: 2031
     - name: Elixir
       url: tracing/trace_collection/custom_instrumentation/elixir
       parent: custom_instrumentation
       identifier: custom_instrumentation_elixir
-      weight: 2031
+      weight: 2032
     - name: Library Compatibility
       url: tracing/trace_collection/compatibility/
       parent: tracing_trace_collection
@@ -2885,9 +2915,9 @@ menu:
       identifier: tracing_connect_rum
       weight: 503
     - name: Correlate Synthetics and Traces
-      url: /synthetics/apm/
+      url: /tracing/other_telemetry/synthetics/
       parent: tracing_other_telemetry
-      identifier: tracing_connect_sythetics
+      identifier: tracing_connect_synthetics
       weight: 504
     - name: Correlate Profiles and Traces
       url: /profiler/connect_traces_and_profiles/
@@ -3548,7 +3578,7 @@ menu:
       parent: ci_explorer
       identifier: ci_explorer_search_syntax
       weight: 301
-    - name: Search Test Runs or Pipeline Executions
+    - name: Search Pipeline Executions
       url: continuous_integration/explorer/facets/
       parent: ci_explorer
       identifier: ci_explorer_facets
@@ -3681,10 +3711,30 @@ menu:
       identifier: tests_search
       weight: 3
     - name: Explorer
-      url: continuous_integration/explorer
+      url: tests/explorer/
       parent: tests
       identifier: tests_explorer
       weight: 4
+    - name: Search Syntax
+      url: tests/explorer/search_syntax
+      parent: tests_explorer
+      identifier: tests_explorer_search_syntax
+      weight: 401
+    - name: Search Test Runs
+      url: tests/explorer/facets/
+      parent: tests_explorer
+      identifier: tests_explorer_facets
+      weight: 402
+    - name: Export
+      url: tests/explorer/export/
+      parent: tests_explorer
+      identifier: tests_explorer_export
+      weight: 403
+    - name: Saved Views
+      url: tests/explorer/saved_views/
+      parent: tests_explorer
+      identifier: tests_explorer_saved_views
+      weight: 404
     - name: Monitors
       url: monitors/types/ci/?tab=tests
       parent: tests
@@ -3715,16 +3765,21 @@ menu:
       parent: tests
       identifier: tests_early_flake_detection
       weight: 10
+    - name: Auto Test Retries
+      url: tests/auto_test_retries
+      parent: tests
+      identifier: tests_auto_test_retries
+      weight: 11
     - name: Guides
       url: tests/guides/
       parent: tests
       identifier: tests_guides
-      weight: 11
+      weight: 12
     - name: Troubleshooting
       url: tests/troubleshooting/
       parent: tests
       identifier: tests_troubleshooting
-      weight: 12
+      weight: 13
     - name: Intelligent Test Runner
       url: intelligent_test_runner/
       pre: intelligent-test-runner
@@ -3837,11 +3892,16 @@ menu:
       parent: code_analysis
       identifier: code_analysis_github_prs
       weight: 4
+    - name: IDE Plugins
+      url: code_analysis/ide_plugins
+      parent: code_analysis
+      identifier: code_analysis_ide_plugins
+      weight: 5
     - name: Troubleshooting
       url: code_analysis/troubleshooting
       parent: code_analysis
       identifier: code_analysis_troubleshooting
-      weight: 5
+      weight: 6
     - name: Quality Gates
       url: quality_gates/
       pre: ci
@@ -3878,6 +3938,11 @@ menu:
       parent: quality_gates_explorer
       identifier: quality_gates_explorer_saved_views
       weight: 303
+    - name: Guides
+      url: quality_gates/guide
+      parent: quality_gates
+      identifier: quality_gates_guide
+      weight: 4
     - name: DORA Metrics
       url: dora_metrics/
       pre: ci
@@ -3940,21 +4005,26 @@ menu:
       parent: observability_pipelines
       identifier: observability_pipelines_log_volume_control
       weight: 2
+    - name: Datadog Agent
+      url: observability_pipelines/log_volume_control/datadog_agent/
+      parent: observability_pipelines_log_volume_control
+      identifier: observability_pipelines_log_volume_control_datadog_agent
+      weight: 2001
     - name: Splunk HTTP Event Collector
       url: observability_pipelines/log_volume_control/splunk_hec/
       parent: observability_pipelines_log_volume_control
       identifier: observability_pipelines_log_volume_control_splunk_hec
-      weight: 2001
+      weight: 2002
     - name: Splunk Forwarders (TCP)
       url: observability_pipelines/log_volume_control/splunk_tcp/
       parent: observability_pipelines_log_volume_control
       identifier: observability_pipelines_log_volume_control_splunk_tcp
-      weight: 2002
+      weight: 2003
     - name: Sumo Logic Hosted Collector
       url: observability_pipelines/log_volume_control/sumo_logic_hosted_collector/
       parent: observability_pipelines_log_volume_control
       identifier: observability_pipelines_log_volume_control_sumo_logic_hosted_collector
-      weight: 2003
+      weight: 2004
     - name: Dual Ship Logs
       url: observability_pipelines/dual_ship_logs/
       parent: observability_pipelines
@@ -4408,42 +4478,52 @@ menu:
       parent: security_platform
       identifier: security_ato_protection
       weight: 7
+    - name: Guides
+      url: security/guide
+      parent: security_platform
+      identifier: security_guides
+      weight: 8
     - name: Cloud SIEM
       url: security/cloud_siem/
       pre: siem
       parent: security_platform_heading
       identifier: cloud_siem
       weight: 20000
+    - name: Content Packs
+      url: security/cloud_siem/content_packs
+      parent: cloud_siem
+      identifier: cloud_siem_content_packs
+      weight: 1
     - name: Log Detection Rules
       url: security/cloud_siem/log_detection_rules
       parent: cloud_siem
       identifier: cloud_siem_log_detection_rules
-      weight: 1
+      weight: 2
     - name: Signal Correlation Rules
       url: security/cloud_siem/signal_correlation_rules
       parent: cloud_siem
       identifier: cloud_siem_signal_correlation_rules
-      weight: 2
+      weight: 3
     - name: OOTB Rules
       url: /security/default_rules/#cat-cloud-siem-log-detection
       parent: cloud_siem
       identifier: cloud_siem_default_rules
-      weight: 3
+      weight: 4
     - name: Security Signals
       url: /security/cloud_siem/investigate_security_signals
       parent: cloud_siem
       identifier: cloud_siem_investigate_security_signals
-      weight: 4
+      weight: 5
     - name: Investigator
       url: security/cloud_siem/investigator
       parent: cloud_siem
       identifier: cloud_siem_investigator
-      weight: 5
+      weight: 6
     - name: Guides
       url: security/cloud_siem/guide/
       parent: cloud_siem
       identifier: siem_guides
-      weight: 6
+      weight: 7
     - name: Cloud Security Management
       url: security/cloud_security_management
       parent: security_platform_heading
@@ -4495,6 +4575,11 @@ menu:
       parent: csm_setup
       identifier: csm_setup_agentless_scanning
       weight: 10015
+    - name: Agent Variables
+      url: security/cloud_security_management/setup/agent_variables
+      parent: csm_setup
+      identifier: csm_setup_agent_variables
+      weight: 10016
     - name: Agent
       url: security/cloud_security_management/setup/csm_cloud_workload_security/agent
       parent: csm_setup_cloud_workload_security
@@ -4505,6 +4590,11 @@ menu:
       parent: csm
       identifier: cloud_workload_security
       weight: 2
+    - name: Supported Linux Distributions
+      url: security/threats/supported_linux_distributions
+      parent: cloud_workload_security
+      identifier: cws_workload_security_linux_distributions
+      weight: 200
     - name: Detection Rules
       url: security/threats/workload_security_rules
       parent: cloud_workload_security
@@ -4595,7 +4685,12 @@ menu:
       parent: csm
       identifier: vulnerabilities
       weight: 5
-    - name: Agentless  Scanning
+    - name: Hosts and Containers Compatibility
+      url: security/cloud_security_management/vulnerabilities/hosts_containers_compatibility
+      parent: vulnerabilities
+      identifier: vulnerabilities_hosts_containers_compatibility
+      weight: 101
+    - name: Agentless Scanning
       url: security/cloud_security_management/agentless_scanning
       parent: csm
       identifier: csm_agentless
@@ -4795,13 +4890,13 @@ menu:
       parent: application_security
       identifier: appsec_troubleshooting
       weight: 11
-    - name: Synthetic Monitoring
+    - name: Synthetic Testing and Monitoring
       url: synthetics/
       pre: synthetics
       identifier: synthetics
       parent: digital_experience_heading
       weight: 50000
-    - name: API Tests
+    - name: API Testing
       url: synthetics/api_tests/
       parent: synthetics
       weight: 1
@@ -4846,12 +4941,12 @@ menu:
       url: synthetics/api_tests/grpc_tests
       parent: api_tests
       weight: 108
-    - name: Multistep API Tests
+    - name: Multistep API Testing
       url: synthetics/multistep
       parent: synthetics
       identifier: synthetics_multistep
       weight: 2
-    - name: Browser Tests
+    - name: Browser Testing
       url: synthetics/browser_tests/
       parent: synthetics
       identifier: synthetics_browser_tests
@@ -4861,7 +4956,7 @@ menu:
       url: synthetics/browser_tests/actions
       parent: synthetics_browser_tests
       weight: 301
-    - name: Test Results
+    - name: Browser Testing Results
       identifier: synthetics_browser_tests_test_results
       url: synthetics/browser_tests/test_results
       parent: synthetics_browser_tests
@@ -4871,31 +4966,106 @@ menu:
       url: synthetics/browser_tests/advanced_options
       parent: synthetics_browser_tests
       weight: 303
-    - name: Authentication in Browser Tests
+    - name: Authentication in Browser Testing
       identifier: synthetics_browser_tests_authentication
       url: synthetics/browser_tests/app-that-requires-login
       parent: synthetics_browser_tests
       weight: 304
-    - name: Private Locations
-      url: synthetics/private_locations
+    - name: Mobile Application Testing
+      url: synthetics/mobile_app_testing/
       parent: synthetics
-      identifier: synthetics_private_location
+      identifier: synthetics_mobile_app_testing
       weight: 4
+    - name: Mobile App Testing
+      url: synthetics/mobile_app_testing/mobile_app_tests
+      parent: synthetics_mobile_app_testing
+      identifier: synthetics_mobile_app_testing_mobile_app_tests
+      weight: 401
+    - name: Testing Steps
+      url: synthetics/mobile_app_testing/mobile_app_tests/steps
+      parent: synthetics_mobile_app_testing
+      identifier: synthetics_mobile_app_testing_mobile_app_tests_steps
+      weight: 402
+    - name: Testing Results
+      url: synthetics/mobile_app_testing/mobile_app_tests/results
+      parent: synthetics_mobile_app_testing
+      identifier: synthetics_mobile_app_testing_mobile_app_tests_results
+      weight: 403
+    - name: Advanced Options for Steps
+      url: synthetics/mobile_app_testing/mobile_app_tests/advanced_options
+      parent: synthetics_mobile_app_testing
+      identifier: synthetics_mobile_app_testing_mobile_app_tests_advanced_options
+      weight: 404
+    - name: Settings
+      url: synthetics/mobile_app_testing/settings
+      parent: synthetics_mobile_app_testing
+      identifier: synthetics_mobile_app_testing_settings
+      weight: 405
+    - name: Platform
+      url: synthetics/platform/
+      parent: synthetics
+      identifier: synthetics_platform
+      weight: 5
+    - name: Dashboards
+      url: synthetics/platform/dashboards
+      parent: synthetics_platform
+      identifier: synthetics_platform_dashboards
+      weight: 501
+    - name: API Testing
+      url: synthetics/platform/dashboards/api_test
+      parent: synthetics_platform_dashboards
+      identifier: synthetics_platform_dashboards_api_test
+      weight: 5101
+    - name: Browser Testing
+      url: synthetics/platform/dashboards/browser_test
+      parent: synthetics_platform_dashboards
+      identifier: synthetics_platform_dashboards_browser_test
+      weight: 5102
+    - name: Test Summary
+      url: synthetics/platform/dashboards/test_summary
+      parent: synthetics_platform_dashboards
+      identifier: synthetics_platform_dashboards_test_summary
+      weight: 5103
+    - name: Metrics
+      url: synthetics/platform/metrics/
+      parent: synthetics_platform
+      identifier: synthetics_platform_metrics
+      weight: 502
+    - name: Test Coverage
+      url: synthetics/platform/test_coverage
+      parent: synthetics_platform
+      identifier: synthetics_platform_test_coverage
+      weight: 503
+    - name: Private Locations
+      url: synthetics/platform/private_locations
+      parent: synthetics_platform
+      identifier: synthetics_private_location
+      weight: 504
     - name: Configuration
-      url: synthetics/private_locations/configuration
+      url: synthetics/platform/private_locations/configuration
       parent: synthetics_private_location
       identifier: synthetics_private_location_configuration
-      weight: 401
+      weight: 5401
     - name: Dimensioning
-      url: synthetics/private_locations/dimensioning
+      url: synthetics/platform/private_locations/dimensioning
       parent: synthetics_private_location
       identifier: synthetics_private_location_dimensioning
-      weight: 402
+      weight: 5402
     - name: Monitoring
-      url: synthetics/private_locations/monitoring
+      url: synthetics/platform/private_locations/monitoring
       parent: synthetics_private_location
       identifier: synthetics_private_location_monitoring
-      weight: 403
+      weight: 5402
+    - name: Connect APM
+      url: synthetics/platform/apm/
+      parent: synthetics_platform
+      identifier: synthetics_platform_apm
+      weight: 505
+    - name: Settings
+      identifier: synthetics_settings
+      url: synthetics/platform/settings
+      parent: synthetics_platform
+      weight: 506
     - name: Search and Manage
       url: synthetics/search/
       parent: synthetics
@@ -4905,87 +5075,47 @@ menu:
       url: synthetics/search/saved_views
       parent: synthetics_search
       identifier: synthetics_search_saved_views
-      weight: 501
+      weight: 601
     - name: Results Explorer
       url: continuous_testing/explorer/
       parent: synthetics
       identifier: synthetics_results_explorer
-      weight: 6
+      weight: 7
     - name: Search Test Batches
       url: continuous_testing/explorer/search/
       parent: synthetics_results_explorer
       identifier: continuous_testing_results_explorer_search
-      weight: 601
+      weight: 701
     - name: Search Test Runs
       url: continuous_testing/explorer/search_runs/
       parent: synthetics_results_explorer
       identifier: continuous_testing_results_explorer_search_runs
-      weight: 602
+      weight: 702
     - name: Search Syntax
       url: continuous_testing/explorer/search_syntax/
       parent: synthetics_results_explorer
       identifier: continuous_testing_results_explorer_search_syntax
-      weight: 603
+      weight: 703
     - name: Saved Views
       url: continuous_testing/explorer/saved_views/
       parent: synthetics_results_explorer
       identifier: continuous_testing_results_explorer_saved_views
-      weight: 604
-    - name: Test Coverage
-      url: synthetics/test_coverage
-      parent: synthetics
-      identifier: synthetics_test_coverage
-      weight: 7
-    - name: Dashboards
-      url: synthetics/dashboards
-      parent: synthetics
-      identifier: synthetics_dashboards
-      weight: 8
-    - name: API Test
-      url: synthetics/dashboards/api_test
-      parent: synthetics_dashboards
-      identifier: synthetics_dashboards_api_test
-      weight: 801
-    - name: Browser Test
-      url: synthetics/dashboards/browser_test
-      parent: synthetics_dashboards
-      identifier: synthetics_dashboards_browser_test
-      weight: 802
-    - name: Test Summary
-      url: synthetics/dashboards/test_summary
-      parent: synthetics_dashboards
-      identifier: synthetics_dashboards_test_summary
-      weight: 803
-    - name: APM Integration
-      url: synthetics/apm/
-      parent: synthetics
-      identifier: synthetics_apm
-      weight: 9
-    - name: Settings
-      identifier: synthetics_settings
-      url: synthetics/settings/
-      parent: synthetics
-      weight: 10
-    - name: Metrics
-      identifier: synthetics_metrics
-      url: synthetics/metrics/
-      parent: synthetics
-      weight: 11
-    - name: Data Security
-      identifier: data_security_synthetics
-      url: data_security/synthetics/
-      parent: synthetics
-      weight: 12
+      weight: 704
     - name: Guides
       url: synthetics/guide/
       parent: synthetics
       identifier: synthetics_guides
-      weight: 13
+      weight: 8
     - name: Troubleshooting
       url: synthetics/troubleshooting/
       parent: synthetics
       identifier: synthetics_troubleshooting
-      weight: 14
+      weight: 9
+    - name: Data Security
+      identifier: data_security_synthetics
+      url: data_security/synthetics/
+      parent: synthetics
+      weight: 10
     - name: Continuous Testing
       url: continuous_testing/
       pre: continuous-testing
@@ -5062,37 +5192,6 @@ menu:
       parent: continuous_testing
       identifier: continuous_testing_troubleshooting
       weight: 6
-    - name: Mobile Application Testing
-      url: mobile_app_testing/
-      parent: digital_experience_heading
-      identifier: mobile_app_testing
-      pre: mobile
-      weight: 70000
-    - name: Mobile App Tests
-      url: /mobile_app_testing/mobile_app_tests
-      parent: mobile_app_testing
-      identifier: mobile_app_testing_mobile_app_tests
-      weight: 1
-    - name: Test Steps
-      url: /mobile_app_testing/mobile_app_tests/steps
-      parent: mobile_app_testing_mobile_app_tests
-      identifier: mobile_app_testing_mobile_app_tests_steps
-      weight: 101
-    - name: Test Results
-      url: /mobile_app_testing/mobile_app_tests/results
-      parent: mobile_app_testing_mobile_app_tests
-      identifier: mobile_app_testing_mobile_app_tests_results
-      weight: 102
-    - name: Advanced Options for Steps
-      url: /mobile_app_testing/mobile_app_tests/advanced_options
-      parent: mobile_app_testing_mobile_app_tests
-      identifier: mobile_app_testing_mobile_app_tests_advanced_options
-      weight: 103
-    - name: Settings
-      url: /mobile_app_testing/settings
-      parent: mobile_app_testing
-      identifier: mobile_app_testing_settings
-      weight: 2
     - name: Real User Monitoring
       url: real_user_monitoring/
       pre: rum
@@ -5104,51 +5203,56 @@ menu:
       parent: rum
       identifier: rum_browser
       weight: 1
-    - name: Data Collected
-      url: real_user_monitoring/browser/data_collected/
+    - name: Setup
+      url: real_user_monitoring/browser/setup/
       parent: rum_browser
-      identifier: rum_data_collected
+      identifier: rum_browser_setup
       weight: 101
     - name: Advanced Configuration
       url: real_user_monitoring/browser/advanced_configuration/
       parent: rum_browser
       identifier: rum_advanced
       weight: 102
+    - name: Data Collected
+      url: real_user_monitoring/browser/data_collected/
+      parent: rum_browser
+      identifier: rum_data_collected
+      weight: 103
     - name: Monitoring Page Performance
       url: real_user_monitoring/browser/monitoring_page_performance/
       parent: rum_browser
       identifier: page_performance
-      weight: 103
+      weight: 104
     - name: Monitoring Resource Performance
       url: real_user_monitoring/browser/monitoring_resource_performance/
       parent: rum_browser
       identifier: resource_performance
-      weight: 104
+      weight: 105
     - name: Collecting Browser Errors
       url: real_user_monitoring/browser/collecting_browser_errors/
       parent: rum_browser
       identifier: collect_errors
-      weight: 105
+      weight: 106
     - name: Tracking User Actions
       url: real_user_monitoring/browser/tracking_user_actions/
       parent: rum_browser
       identifier: track_actions
-      weight: 106
+      weight: 107
     - name: Frustration Signals
       url: real_user_monitoring/browser/frustration_signals/
       parent: rum_browser
       identifier: rum_frustration_signals
-      weight: 107
+      weight: 108
     - name: Error Tracking
       url: real_user_monitoring/error_tracking/browser/
       parent: rum_browser
       identifier: rum_browser_error_tracking
-      weight: 108
+      weight: 109
     - name: Troubleshooting
       url: real_user_monitoring/browser/troubleshooting/
       parent: rum_browser
       identifier: troubleshooting
-      weight: 109
+      weight: 110
     - name: Mobile and TV Monitoring
       url: real_user_monitoring/mobile_and_tv_monitoring/
       parent: rum
@@ -5334,36 +5438,41 @@ menu:
       parent: rum_explorer
       identifier: rum_explorer_search_syntax
       weight: 602
+    - name: Analytics
+      url: real_user_monitoring/explorer/analytics/
+      parent: rum_explorer
+      identifier: rum_explorer_analytics
+      weight: 603
     - name: Group
       url: real_user_monitoring/explorer/group/
       parent: rum_explorer
       identifier: rum_explorer_group
-      weight: 603
+      weight: 604
     - name: Visualize
       url: real_user_monitoring/explorer/visualize/
       parent: rum_explorer
       identifier: rum_explorer_visualize
-      weight: 604
+      weight: 605
     - name: Events
       url: real_user_monitoring/explorer/events/
       parent: rum_explorer
       identifier: rum_explorer_events
-      weight: 605
+      weight: 606
     - name: Export
       url: real_user_monitoring/explorer/export/
       parent: rum_explorer
       identifier: rum_explorer_export
-      weight: 606
+      weight: 607
     - name: Saved Views
       url: real_user_monitoring/explorer/saved_views/
       parent: rum_explorer
       identifier: rum_explorer_saved_views
-      weight: 607
+      weight: 608
     - name: Watchdog Insights for RUM
       url: real_user_monitoring/explorer/watchdog_insights/
       parent: rum_explorer
       identifier: rum_explorer_watchdog_insights
-      weight: 608
+      weight: 609
     - name: Feature Flag Tracking
       url: real_user_monitoring/feature_flag_tracking
       parent: rum

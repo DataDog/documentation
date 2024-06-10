@@ -13,9 +13,7 @@ further_reading:
 <div class="alert alert-warning">DORA Metrics is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
-{{< callout url="#" btn_hidden="true" header="Try the Beta!" >}}
-DORA Metrics is in public beta.
-{{< /callout >}}
+<div class="alert alert-warning">DORA Metrics is in public beta.</div>
 
 ## Overview
 
@@ -41,8 +39,8 @@ Each event type supports different data sources.
 {{< /whatsnext >}}
 
 ## Limitations
-
-Deployments or incidents of the same service cannot occur at the same second.
+- When you first select a data source option (such as APM Deployment Tracking or PagerDuty), DORA Metrics begins populating data from that point forward. If you switch from source A to source B, then back to source A, the historical data from source A is only available from the time it was first selected. 
+- Deployments or incidents of the same service cannot occur at the same second.
 
 ## Further Reading
 

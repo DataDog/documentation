@@ -1,5 +1,5 @@
 ---
-title: Browser Tests
+title: Browser Testing
 kind: documentation
 description: Simulate and monitor user journeys from specific locations.
 aliases:

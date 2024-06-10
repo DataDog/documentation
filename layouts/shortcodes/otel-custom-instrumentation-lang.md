@@ -1,5 +1,5 @@
 <div class="alert alert-info">
-If you are new to OpenTelemetry, start by reading <a href="/tracing/trace_collection/custom_instrumentation/otel_instrumentation/">Custom Instrumentation with the OpenTelemetry API</a> to understand how OpenTelemetry integrates with Datadog.
+Unsure when to use OpenTelemetry with Datadog? Start with <a href="/tracing/trace_collection/custom_instrumentation/otel_instrumentation/">Custom Instrumentation with the OpenTelemetry API</a> to learn more.
 </div>
 
 ## Overview

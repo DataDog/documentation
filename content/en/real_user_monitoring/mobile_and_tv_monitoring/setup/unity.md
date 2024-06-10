@@ -28,7 +28,7 @@ further_reading:
 ## Overview
 
 {{< beta-callout url="#" btn_hidden="true" >}}
-Unity Monitoring is in private beta. To request access, reach out to Datadog support.
+Unity Monitoring is in public beta.
 {{< /beta-callout >}}
 
 Datadog Real User Monitoring (RUM) enables you to visualize and analyze user journeys of your application's individual users.
@@ -62,7 +62,9 @@ You can control the data your application sends to Datadog RUM during instrument
 
 3. Configure your project to use [Gradle templates][6], and enable both `Custom Main Template` and `Custom Gradle Properties Template`.
 
-4. If you build and recieve `Duplicate class` errors (common in Unity 2022.x) add the following block in the `dependencies` block in your `mainTemplate.gradle`:
+4. In the iOS setting for External Dependency Manager (**Assets** > **External Dependency Manager** > **iOS Resolver** > **Settings**), disable the **Link frameworks statically** option and ensure that **Allow the same pod to be in multiple targets** is enabled.
+
+5. If you build and receive `Duplicate class` errors (common in Unity 2022.x), add the following block in the `dependencies` block in your `mainTemplate.gradle`:
 
    ```groovy
    constraints {

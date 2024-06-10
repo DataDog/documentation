@@ -28,6 +28,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/best-practices-for-monitoring-software-testing/"
     tag: "Blog"
     text: "Best practices for monitoring software testing in CI/CD"
+  - link: "https://www.datadoghq.com/blog/modernize-your-ci-cd-environment/"
+    tag: "Blog"
+    text: "Monitor your CI/CD modernizations with Datadog CI Pipeline Visibility"
 cascade:
     algolia:
         rank: 70
@@ -42,29 +45,31 @@ cascade:
 
 ## Overview
 
-Datadog Continuous Integration (CI) Visibility unifies information about CI test and pipeline results in addition to data about CI performance, trends, and reliability. CI Visibility brings CI metrics and data into Datadog dashboards and notebooks so you can communicate the health of your CI environment and focus your efforts in improving your team's ability to deliver quality code every time.
+Datadog Continuous Integration (CI) Visibility provides a unified view of pipeline results, performance, trends, and reliability across your CI environments. By integrating Datadog with your CI pipelines, you can create monitors, display data within [Datadog dashboards][1] and [notebooks][2], and create visualizations for your organization's CI health.
 
 {{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/664357090/rendition/1080p/file.mp4?loc=external&signature=5ef9bc02bd8fb18c07a4a41ea3ac08b72bd0ab0b5d914429da049120d1e9e9b7" poster="/images/poster/ci.png" >}}
 
-CI Visibility enables developers to identify the reasons behind a test or pipeline failure, monitor trends in test suite execution times, and see the effect that a given commit has on the pipeline. Further, it also provides build engineers with visibility into cross-organization CI health and trends in pipeline performance over time. 
+</br>
 
-## Improve test reliability and create traces
+CI Visibility helps developers understand the causes of pipeline disruptions and monitor trends in pipeline execution times. It also offers build engineers insights into cross-organization CI health and pipeline performance over time.
 
-CI Visibility helps you troubleshoot test failures and broken builds by connecting the most important development outages to the commits that caused them. You can instrument your tests and generate traces from your testing frameworks as they execute in CI. 
+## Improve pipeline reliability and create traces
+
+CI Visibility helps you troubleshoot pipeline failures and broken builds by connecting the most significant development outages to the commits that caused them. You can instrument your pipelines and trace them as they execute, enabling deeper insights into pipeline performance.
 
 ## Increase efficiency through seamless integrations
 
-Datadog integrates with the following CI providers to gather pipeline metrics which track the performance and results from the moment a commit enters the pipeline until it is ready to be deployed. Use the data aggregated over time to track trends in the performance of tests and builds, and identify what is most important to fix.
+Datadog integrates with a variety of CI providers to collect metrics that track the performance of your CI pipelines from commit to deployment. These metrics are used to identify performance trends and improvement opportunities.
 
 {{< partial name="continuous_integration/ci-pipelines-getting-started.html" >}}
 
 </br>
 
-You can use the `datadog-ci` CLI to [trace commands][8] in your pipelines, as well as the [custom tags and measures commands][9] to add user-defined text and numerical tags in your pipeline traces.
+You can use the `datadog-ci` CLI to [trace commands][8] and add [custom tags and measures][9], which allows you to add user-defined text and numerical tags in your pipeline traces.
 
 ## Ready to start?
 
-See [Pipeline Visibility][3] and [Test Visibility][4] for instructions on setting up CI Visibility with your CI providers, information about compatibility requirements, and steps for instrumenting and configuring data collection. Then, start exploring details about your test runs and pipeline executions in the [CI Visibility Explorer][7] and export your search query into a [CI Pipeline or Test Monitor][6].
+Visit [Pipeline Visibility][3] for instructions on setting up CI Visibility with your CI providers, including details on compatibility requirements and steps for configuring data collection. Then, start exploring details about your pipeline executions in the [CI Visibility Explorer][7] and export your search query into a [CI Pipeline Monitor][6].
 
 ## Further reading
 

@@ -18,7 +18,7 @@ further_reading:
   tag: ガイド
   text: クロスプロダクト相関で容易にトラブルシューティング。
 kind: documentation
-title: Node.js ログとトレースの接続
+title: Node.js ログとトレースの相関付け
 type: multi-code-lang
 ---
 

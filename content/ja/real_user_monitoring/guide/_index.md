@@ -48,6 +48,8 @@ title: リアルユーザーモニタリングおよびセッションリプレ�
     {{< nextlink href="real_user_monitoring/guide/mobile-sdk-upgrade" >}}RUM Mobile SDK のアップグレード{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/guide/mobile-sdk-multi-instance" >}}Mobile SDK の複数インスタンスの使用{{< /nextlink >}}
  {{< nextlink href="real_user_monitoring/guide/proxy-mobile-rum-data" >}}モバイル RUM データのプロキシ{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/initialize-your-native-sdk-before-react-native-starts" >}}React Native の起動前にネイティブ SDK を初期化する{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/monitor-hybrid-react-native-applications" >}}ハイブリッド React Native アプリケーションを監視する{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="セッションリプレイ" >}}

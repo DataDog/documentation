@@ -1,5 +1,5 @@
 ---
-title: GRPC Tests
+title: GRPC Testing
 kind: documentation
 description: Simulate gRPC requests to monitor public and internal API endpoints.
 further_reading:
@@ -218,7 +218,7 @@ You can restrict access to a browser test based on the roles in your organizatio
 [2]: /synthetics/private_locations
 [3]: /synthetics/cicd_testing
 [4]: /synthetics/search/#search
-[5]: /monitors/notify/#notify-your-team
+[5]: /monitors/notify/#configure-notifications-and-automations
 [6]: https://www.markdownguide.org/basic-syntax/
 [7]: /monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
 [8]: /synthetics/guide/synthetic-test-monitors

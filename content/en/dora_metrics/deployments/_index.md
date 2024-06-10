@@ -25,9 +25,7 @@ further_reading:
 <div class="alert alert-warning">DORA Metrics is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
-{{< callout url="#" btn_hidden="true" header="Try the Beta!" >}}
-DORA Metrics is in public beta.
-{{< /callout >}}
+<div class="alert alert-warning">DORA Metrics is in public beta.</div>
 
 ## Overview
 
@@ -139,6 +137,7 @@ DORA Metrics for the service `shopist` only consider the Git commits that includ
 
 - Change lead time stage breakdown metrics are only available for GitHub.
 - Change lead time is not available for the first deployment of a service that includes Git information.
+- If commits on a feature branch are squashed into a single commit prior to being merged into the default branch, the commit history for that pull request is not included in the change lead time calculation. The first commit included in the calculation is the newly created single commit. 
 
 ## Calculating change failure rate
 
