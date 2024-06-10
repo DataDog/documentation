@@ -14,7 +14,7 @@ During an incident investigation, you might need to run complex queries to analy
 - Correlating multiple data sources
 - Aggregating multiple levels of data
 - Joining data using SQL
-- Extracting data at query time
+- Extracting data or add a calculated field at query time
 
 You can also visualize your transformed datasets.
 
@@ -59,7 +59,7 @@ You can add a logs query or a reference table as a data source.
 
 ### Analysis cell
 
-1. Click the **Analysis** tile to add a cell and use SQL to query the data from any of the data sources. You can use natural language or SQL to query your data . An example using natural language: `join datasource_0 with datasource_1 on customer id`.
+1. Click the **Analysis** tile to add a cell and use SQL to query the data from any of the data sources. You can use natural language or SQL to query your data . An example using natural language: `select only timestamp, customer id, transaction id from the transaction logs`.
 1. If you are using SQL, click **Run** to run the SQL commands.
 1. Click the download icon to export the dataset as a CSV.
 
@@ -79,13 +79,10 @@ Click the **transformation** tile to add a cell for filtering, aggregating, and 
 
 1. Click the **Transformation** tile.
 1.  Select the data source you want to transform  in the **Source dataset** drop down menu.
-1. Enter a filter if you want to filter to a subset of the data.
-1. If you want to extract data:
-Click **Add Column Extraction**.
-Enter grok syntax to extract data into a separate column. In the **from** drop down menu, select the column the data is getting extracted from. See the [column extraction example](#column-extraction-example).
-1. If you want to aggregate your data:
-Click **Add Aggregation**.
-Select what you want to group the data by in the drop down menus.
+1. Click **+** to add a **Filter**, **Parse**, or **Aggregate** function.
+    - For **Filter**, add a filter query for the dataset.
+    - For **Parse**, enter grok syntax to extract data into a separate column. In the **from** drop down menu, select the column the data is getting extracted from. See the [column extraction example](#column-extraction-example).
+    - For **Aggregate**, select what you want to group the data by in the drop down menus.
 1. Click the download icon to export the dataset into a CSV.
 
 #### Column extraction example
