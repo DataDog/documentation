@@ -9,7 +9,7 @@ disable_toc: false
 {{< /callout >}}
 
 ## Overview
-During an incident investigation, you might need to run complex queries to analyze your logs. For example, you might need to combine attributes from multiple log sources or transform and manipulate log data. Use Logs Workspace to perform complex queries such as:
+During an incident investigation, you might need to run complex queries to analyze your logs, such as combining attributes from multiple log sources or transforming and manipulating log data. Use Logs Workspace for:
 
 - Correlating multiple data sources
 - Aggregating multiple levels of data
