@@ -11,7 +11,7 @@ guides:
   link: getting_started/application/
   link_text: Datadog の開始
   title: アプリで使用を開始
-heading: Welcome to Datadog Docs!
+heading: Datadog ドキュメントへようこそ！
 nav_sections:
 - nav_section:
   - name: プラットフォームサービス
@@ -46,7 +46,7 @@ nav_sections:
       title: Mobile Application
     - desc: 組織における破壊的インシデントの特定、分析、緩和
       icon: incidents
-      link: service_management/incident_management
+      link: service_management/incident_management/
       title: Incident Management
     - desc: アプリケーションとインフラストラクチャーの注目すべき変化やアラートを追跡
       icon: events
@@ -54,7 +54,7 @@ nav_sections:
       title: イベント
     - desc: 技術スタック全体のプロセスの自動化とオーケストレーション
       icon: workflows
-      link: workflows
+      link: workflows/
       title: Workflow Automation
 - nav_section:
   - name: 製品
@@ -105,7 +105,7 @@ nav_sections:
       title: Real User Monitoring
     - desc: モバイルアプリケーションにおけるユーザージャーニーとビジネストランザクションの監視
       icon: mobile
-      link: mobile_app_testing/
+      link: synthetics/mobile_app_testing/
       title: Mobile Application Testing
     - desc: CI/CD プロバイダーでコードレスインテグレーションとエンドツーエンドテストを実施する
       icon: continuous-testing
@@ -148,7 +148,7 @@ nav_sections:
       title: Account Management
     - desc: Datadog のデータ保護方法について
       icon: security-lock
-      link: data_security/
+      link: data_security
       title: Data Security
     - desc: Datadog プラットフォーム上での開発
       icon: dev-code
