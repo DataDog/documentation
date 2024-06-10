@@ -1,7 +1,7 @@
 ---
 integration_title: VMware Tanzu Application Service
 name: vmware_tanzu_application_service
-kind: integration
+custom_kind: integration 
 aliases:
     - /integrations/cloud_foundry/
     - /integrations/pivotal_platform/

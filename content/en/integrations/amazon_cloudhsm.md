@@ -9,7 +9,7 @@ dependencies:
     ['https://github.com/DataDog/documentation/blob/master/content/en/integrations/amazon_cloudhsm.md']
 integration_title: AWS CloudHSM
 is_public: true
-kind: integration
+custom_kind: integration 
 name: amazon_cloudhsm
 public_title: Datadog-AWS Cloudhsm Integration
 short_description: Gather your HSM audit logs in your Datadog organization.

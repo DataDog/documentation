@@ -8,7 +8,7 @@ dependencies: ["https://github.com/DataDog/documentation/blob/master/content/en/
 has_logo: true
 integration_title: Carbon Black
 is_public: true
-kind: integration
+custom_kind: integration 
 name: carbon_black
 public_title: Datadog-Carbon Black Integration
 short_description: Collect your Carbon Black Defense Logs

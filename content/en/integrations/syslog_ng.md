@@ -1,7 +1,7 @@
 ---
 title: Syslog-ng
 name: syslog_ng
-kind: integration
+custom_kind: integration 
 description: 'Configure Syslog-ng to gather logs from your host, containers, & services.'
 short_description: 'Configure Syslog-ng to gather logs from your host, containers, & services.'
 categories:
