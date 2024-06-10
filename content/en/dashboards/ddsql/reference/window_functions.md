@@ -7,6 +7,29 @@ kind: documentation
 DDSQL is in private beta.
 {{< /callout >}}
 
+{{< code-block lang="sql" >}}
+function_name ([expression [, expression ...]]) OVER (
+  [ PARTITION BY expression [, ...] ]
+  [ ORDER BY expression [ ASC | DESC ] [ NULLS { FIRST | LAST } ] [, ...] ]
+  [ <FRAME_CLAUSE> ]
+)
+  
+frame_clause :=
+    { RANGE | ROWS } frame_start
+  | { RANGE | ROWS } BETWEEN frame_start AND frame_end
+  
+frame_start/end :=
+    UNBOUNDED PRECEDING
+  | offset PRECEDING
+  | CURRENT ROW
+  | offset FOLLOWING
+  | UNBOUNDED FOLLOWING
+{{< /code-block >}}
+
+For details on how window functions work, see the [Postgres documentation for Window Function][1], which is what DDSQL aims to implement. Not all features are available yet.
+
+The functions below can be used in windows, along with the [aggregation functions][2].
+
 ## row_number
 | Name | Return type | Description |
 |------|-------------|-------------|
@@ -51,3 +74,6 @@ DDSQL is in private beta.
 | Name | Return type | Description |
 |------|-------------|-------------|
 | last_value(value T) | T | Returns value evaluated at the row that is the last row of the window frame. |
+
+[1]: https://www.postgresql.org/docs/current/sql-expressions.html#SYNTAX-WINDOW-FUNCTIONS
+[2]: dashboards/ddql/reference/aggregation_functions
