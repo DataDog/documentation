@@ -75,6 +75,7 @@ The Agent can attach Kubernetes environment information as "host tags".
   |---------------------|-------------|--------------------------------------------------------|----------------------------------------------------------------|
   | `kube_cluster_name` | Low         | `DD_CLUSTER_NAME` envvar or cloud provider integration | `DD_CLUSTER_NAME` envvar or cloud provider integration enabled |
   | `kube_node_role`    | Low         | Node label `node-role.kubernetes.io/<role>`            | Node label must exist                                          |
+  | `kube_node`         | Low         | `NodeName` field in a pod specifications               |                                                                |
 
 </div>
 
