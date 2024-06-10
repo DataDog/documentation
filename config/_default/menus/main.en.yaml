@@ -4555,16 +4555,21 @@ menu:
       parent: csm_setup
       identifier: csm_setup_agentless_scanning
       weight: 10015
-    - name: Source Code Integrations
-      url: security/cloud_security_management/setup/agentless_scanning
+    - name: Serverless
+      url: security/cloud_security_management/setup/serverless
       parent: csm_setup
-      identifier: csm_setup_agentless_scanning
+      identifier: csm_setup_serverless
       weight: 10016
+    - name: Source Code Integrations
+      url: security/cloud_security_management/setup/source_code_integrations
+      parent: csm_setup
+      identifier: csm_setup_source_code_integrations
+      weight: 10017
     - name: Agent Variables
       url: security/cloud_security_management/setup/agent_variables
       parent: csm_setup
       identifier: csm_setup_agent_variables
-      weight: 10017
+      weight: 10018
     - name: Threats
       url: security/threats/
       parent: csm

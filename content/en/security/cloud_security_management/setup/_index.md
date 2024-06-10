@@ -14,7 +14,7 @@ aliases:
   - /security/infrastructure_vulnerabilities/setup/
 ---
 
-Cloud Security Management (CSM) delivers real-time threat detection and continuous configuration audits across your entire cloud infrastructure, all in a unified view for seamless collaboration and faster remediation.
+This article provides step-by-step instructions for enabling [Cloud Security Management (CSM)][6].
 
 ## Prerequisites
 
@@ -22,50 +22,73 @@ Cloud Security Management (CSM) delivers real-time threat detection and continuo
 
 ## Select CSM features
 
-On the [Cloud Security Management Features][5] page in Datadog, select the features you want to enable.
+Datadog provides a guided workflow for enabling CSM. The first step is to select the features you want to enable. Start by clicking **Get Started with Cloud Security Management** on the Overview page to access the **Features** page. 
+
+Next, select the features you want to enable. After making your selections, click **Start Using Cloud Security Management** and confirm your choices.
 
 - Compliance Scanning
 - Threat Detection
 - Identity Risks (CIEM)
-- Host Vulnerability Mgmt.
-- Container Vulnerability Mgmt.
+- Host Vulnerability Management
+- Container Vulnerability Management
 
 **PLACEHOLDER FOR SCREENSHOT**
 
 ## Configure CSM features
 
-Next, go to the [Cloud Security Management Setup][3] page. On this page are instructions for configuring the features you selected.
+After confirming your selections, the [Setup][3] page is displayed. The page customizes the instructions to match the features you selected.
 
-To enable CSM on your infrastructure, follow the instructions on the [**Cloud Security Management Setup**][3] page.
+**PLACEHOLDER FOR SCREENSHOT**
 
-which has detailed steps on how to configure CSM. For detailed setup instructions, see the following articles:
+For detailed setup instructions, see the following articles:
 
-### Enable resource scanning for cloud accounts
+- [Enabling Cloud Security Management for Cloud Accounts][2]
+- [Enabling Cloud Security Management on the Agent][1]
+- [Enabling Cloud Security Management for Serverless][7]
+- [Enabling Source Code Integrations for IAC Remediation][8]
+- [Setting up CSM Agentless Scanning][4]
+
+### Cloud accounts
+
+**Available for**: Threat Detection &#124; Host Vulnerability Management 	&#124; Container Vulnerability Management
 
 To enable resource scanning for your cloud accounts, you must first set up the integration and then enable CSM for each AWS account, Azure subscription, or Google Cloud project. For detailed instructions, see [Enable Cloud Security Management for Cloud Accounts][2].
 
-### Set up CloudTrail logs forwarding
+### Hosts and containers
 
-Set up AWS CloudTrail logs forwarding to enable CSM Identity Risks and address over-permissive entitlements and risky IAM resources. For detailed instructions, see [Enable Cloud Security Management for Cloud Accounts][2].
+**Available for**: Compliance Scanning
 
-### Enable CSM on the Agent
-
-Select your infrastructure type for details on how to enable [CSM Enterprise on the Agent][1].
+Select your infrastructure type for detailed instructions on how to enable CSM on hosts and containers.
 
 {{< partial name="csm/csm-agent-tiles.html" >}}
 
 <br>
 
-### Enable Agentless Scanning on serverless resources
+### Serverless resources
 
-text.
+**Available for**: Compliance Scanning
 
-### Configure source code integrations
+For detailed instructions, see [Enabling Cloud Security Management on Serverless][7].
 
-text.
+### CloudTrail logs
+
+**Available for the following features**: Identity Risks (CIEM)
+
+**Applies to the following features**: Identity Risks (CIEM)
+
+Set up AWS CloudTrail logs forwarding to enable CSM Identity Risks and address over-permissive entitlements and risky IAM resources. For detailed instructions, see [Enable Cloud Security Management for Cloud Accounts][2].
+
+### Source code integrations
+
+**Available for**: Compliance Scanning
+
+For detailed instructions, see [Enabling Source Code Integrations for IAC Remediation][8].
 
 [1]: /security/cloud_security_management/setup/agent
 [2]: /security/cloud_security_management/setup/cloud_accounts
 [3]: https://app.datadoghq.com/security/configuration/csm/setup
 [4]: /security/cloud_security_management/setup/agentless_scanning
 [5]: https://app.datadoghq.com/security/csm
+[6]: /security/cloud_security_management/
+[7]: /security/cloud_security_management/setup/serverless
+[8]: /security/cloud_security_management/setup/source_code_integrations
