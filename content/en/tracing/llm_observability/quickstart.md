@@ -31,7 +31,7 @@ Use the steps below to run a simple Python script that generates an LLM Observab
 Install the following `ddtrace` package hash and `openai` package:
 
 {{< code-block lang="shell" >}}
-pip install git+https://github.com/DataDog/dd-trace-py.git@main
+pip install ddtrace
 pip install openai
 {{< /code-block >}}
 

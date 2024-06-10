@@ -14,7 +14,7 @@ LLM Observability is not available in the US1-FED site.
 
 Your application can submit data to LLM Observability in two ways: with LLM Observability's [Python SDK][1], or with the LLM Observability [API][2].
 
-Each request fulfilled by your application is represented as a trace on the [LLM Observability traces page][2] in Datadog. Before proceeding, please read the LLM Observability [Tracing concepts][3] guide.
+Each request fulfilled by your application is represented as a trace on the [LLM Observability traces page][2] in Datadog. Before proceeding, please read the LLM Observability [Core concepts][3] guide.
 
 {{< img src="tracing/llm_observability/llm-observability-overview.png" alt="An LLM Observability trace displaying each span of a request" style="width:100%;" >}}
 
@@ -39,9 +39,9 @@ To trace an LLM application:
 
 ### Creating spans
 
-To create a span, use the LLM Observability SDK's `ddtrace.llmobs.decorators.<SPAN_KIND>()` as a function decorator, replacing `<SPAN_KIND>` with the desired [span kind][4].
-
-Alternatively, the LLM Observability SDK provides equivalent inline methods to [create and track spans][12]. Use `ddtrace.llmobs.LLMObs.<SPAN_KIND>()` as a context manager, replacing `<SPAN_KIND>` with the desired [span kind][4].
+To create a span, the LLM Observability SDK provides two options:
+1. *Decorators*: Use `ddtrace.llmobs.decorators.<SPAN_KIND>()` as a decorator on the function you'd like to trace, replacing `<SPAN_KIND>` with the desired [span kind][4].
+2. *Inline*: Use `ddtrace.llmobs.LLMObs.<SPAN_KIND>()` as a context manager to [trace any inline code][12], replacing `<SPAN_KIND>` with the desired [span kind][4].
 
 The examples below create a workflow span.
 
@@ -78,7 +78,7 @@ The examples below create a trace with two spans.
 {{< tabs >}}
 {{% tab "Decorators" %}}
 {{< code-block lang="python" >}}
-from ddtrace.llmobs.decorators import workflow
+from ddtrace.llmobs.decorators import task, workflow
 
 @workflow
 def process_message():
@@ -108,7 +108,7 @@ def process_message():
 
 ### Annotating spans
 
-To [annotate a span][13], use the LLM Observability SDK's `LLMObs.annotate()` method.
+To [add extra information to a span][13] such as inputs, outputs, metadata, metrics, or tags, use the LLM Observability SDK's `LLMObs.annotate()` method.
 
 The examples below annotate the workflow span created in the [above example](#creating-spans):
 
@@ -166,7 +166,7 @@ Depending on the complexity of your LLM application, you can also:
 
 [1]: /tracing/llm_observability/sdk
 [2]: /tracing/llm_observability/api
-[3]: /tracing/llm_observability/tracing_concepts
+[3]: /tracing/llm_observability/core_concepts
 [4]: /tracing/llm_observability/auto_instrumentation
 [5]: /tracing/llm_observability/sdk/#installation
 [6]: /tracing/llm_observability/sdk/#command-line-setup
