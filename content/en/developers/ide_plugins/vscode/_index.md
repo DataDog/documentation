@@ -146,7 +146,7 @@ The Datadog extension runs [Static Analysis][14] rules on the source files you h
 
 ### Getting started
 
-When you start editing a source file, the extension checks for [static-analysis.datadog.yml][22] at your source repository’s root. It prompts you to create it if necessary.
+When you start editing a source file, the extension checks for [static-analysis.datadog.yml][22] at your source repository's root. It prompts you to create it if necessary.
 
 {{< img src="/developers/ide_plugins/vscode/static-analysis-onboard.png" alt="A banner for onboarding." style="width:100%;" >}}
 
