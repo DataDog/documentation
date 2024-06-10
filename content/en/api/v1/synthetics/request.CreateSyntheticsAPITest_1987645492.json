@@ -1,0 +1,118 @@
+{
+  "config": {
+    "assertions": [
+      {
+        "operator": "is",
+        "property": "{{ PROPERTY }}",
+        "target": "text/html",
+        "type": "header"
+      },
+      {
+        "operator": "lessThan",
+        "target": 2000,
+        "type": "responseTime",
+        "timingsScope": "withoutDNS"
+      },
+      {
+        "operator": "validatesJSONPath",
+        "target": {
+          "jsonPath": "topKey",
+          "operator": "isNot",
+          "targetValue": "0"
+        },
+        "type": "body"
+      },
+      {
+        "operator": "validatesJSONSchema",
+        "target": {
+          "metaSchema": "draft-07",
+          "jsonSchema": "{\"type\": \"object\", \"properties\":{\"slideshow\":{\"type\":\"object\"}}}"
+        },
+        "type": "body"
+      },
+      {
+        "operator": "validatesXPath",
+        "target": {
+          "xPath": "target-xpath",
+          "targetValue": "0",
+          "operator": "contains"
+        },
+        "type": "body"
+      },
+      {
+        "operator": "md5",
+        "target": "a",
+        "type": "bodyHash"
+      }
+    ],
+    "configVariables": [
+      {
+        "example": "content-type",
+        "name": "PROPERTY",
+        "pattern": "content-type",
+        "type": "text"
+      }
+    ],
+    "variablesFromScript": "dd.variable.set(\"FOO\", \"foo\")",
+    "request": {
+      "certificate": {
+        "cert": {
+          "content": "cert-content",
+          "filename": "cert-filename",
+          "updatedAt": "2020-10-16T09:23:24.857Z"
+        },
+        "key": {
+          "content": "key-content",
+          "filename": "key-filename",
+          "updatedAt": "2020-10-16T09:23:24.857Z"
+        }
+      },
+      "headers": {
+        "unique": "examplesynthetic"
+      },
+      "method": "GET",
+      "timeout": 10,
+      "url": "https://datadoghq.com",
+      "proxy": {
+        "url": "https://datadoghq.com",
+        "headers": {}
+      },
+      "basicAuth": {
+        "accessTokenUrl": "https://datadog-token.com",
+        "audience": "audience",
+        "clientId": "client-id",
+        "clientSecret": "client-secret",
+        "resource": "resource",
+        "scope": "yoyo",
+        "tokenApiAuthentication": "header",
+        "type": "oauth-client"
+      },
+      "persistCookies": true
+    }
+  },
+  "locations": [
+    "aws:us-east-2"
+  ],
+  "message": "BDD test payload: synthetics_api_http_test_payload.json",
+  "name": "Example-Synthetic",
+  "options": {
+    "accept_self_signed": false,
+    "allow_insecure": true,
+    "follow_redirects": true,
+    "min_failure_duration": 10,
+    "min_location_failed": 1,
+    "monitor_name": "Example-Synthetic",
+    "monitor_priority": 5,
+    "retry": {
+      "count": 3,
+      "interval": 10
+    },
+    "tick_every": 60,
+    "httpVersion": "http2"
+  },
+  "subtype": "http",
+  "tags": [
+    "testing:api"
+  ],
+  "type": "api"
+}

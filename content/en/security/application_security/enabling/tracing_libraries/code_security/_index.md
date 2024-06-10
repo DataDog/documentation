@@ -26,9 +26,9 @@ further_reading:
   text: "Secure serverless applications with Datadog ASM"
 ---
 
-<div class="alert alert-info">Code security vulnerability detection is in beta.</div>
+<div class="alert alert-info">Code Security is in beta.</div>
 
-Select your application language for details on how to enable ASM code security for your language and infrastructure types.
+Select your application language for details on how to enable Code Security for your language and infrastructure types.
 
 {{< partial name="security-platform/appsec-languages-code-security.html" >}}</br>
 

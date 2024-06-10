@@ -98,6 +98,11 @@ Enter the following information based on your selected logs destination.
 {{% observability_pipelines/processors/remap %}}
 
 {{% /tab %}}
+{{% tab "Sensitive Data Scanner" %}}
+
+{{% observability_pipelines/processors/sensitive_data_scanner %}}
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Install the Observability Pipelines Worker

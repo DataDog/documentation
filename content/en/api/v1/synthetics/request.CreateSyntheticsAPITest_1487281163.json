@@ -38,6 +38,11 @@
           "operator": "contains"
         },
         "type": "body"
+      },
+      {
+        "operator": "md5",
+        "target": "a",
+        "type": "bodyHash"
       }
     ],
     "configVariables": [
