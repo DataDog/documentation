@@ -36,7 +36,7 @@ The private action runner requires a Linux host with the following:
 
 ## Set up a private action runner
 
-From the [Private Action Runner][6] page, click **New Private Action Runner**. The installation steps differ depending on whether you want to install the runner for App Builder, Workflow Automation, or both App Builder and Workflow Automation.
+From the **Private Action Runner** page in [Workflow Automation][6] or [App Builder][7], click **New Private Action Runner**. The installation steps differ depending on whether you want to install the runner for App Builder, Workflow Automation, or both App Builder and Workflow Automation.
 
 {{% collapse-content title="Both App Builder and Workflow Automation" level="h4" %}}
 1. Enter a name for your runner.
@@ -133,16 +133,36 @@ When the status changes to **Ready to use**:
 Before you can use an action runner, you must pair it with one or more connections.
 
 To pair a runner to a connection:
-1. From the [Workflow Automation][7] or [App Builder][8] Connections page, click **New Connection**.
-1. Select the integration you want to connect with your private action runner. For a list of supported integrations, see [Overview](#overview).
+1. From the [Workflow Automation][8] or [App Builder][9] Connections page, click **New Connection**.
+1. Select the integration you want to connect with your private action runner. For a list of integrations that support private actions, see [Overview](#overview).
 1. Add a **Connection Name** and select the **Private Action Runner** from the drop-down list.
-1. Add the paths to any required Credential files. For more information, see [Handling Private Action Credentials][9].
+1. Add the paths to any required Credential files. For more information, see [Handling Private Action Credentials][10].
 
 ## Use a private action
 
+To use a private action in your [Workflow Automation][11] workflow or [App Builder][12] app:
 
+{{% collapse-content title="Workflow Automation" level="h4" %}}
+1. From the [Workflow Automation][11] page, create a workflow, or open an existing workflow. For information on creating or editing a workflow, see [Build Workflows][13].
+1. Click **Add Step** and search for the private action you want to add to your workflow. For a list of integrations that support private actions, see [Overview](#overview).
+1. Add a **Step name**.
+1. Select a **Connection** from the drop-down menu or click the plus (**+**) icon to add a new connection. Using a private action requires a private action runner paired with a connection. See [Connect a runner](#connect-a-runner) for more information.
+1. Complete any required fields and click **Save** to save your workflow.
+{{% /collapse-content %}}
 
-## View private runners
+{{% collapse-content title="App Builder" level="h4" %}}
+1. From the [App Builder][12] page, create an app, or open an existing app. For information on creating or editing an app, see [Build Apps][15].
+1. Click **New Query** and search for the private action you want to add to your workflow. For a list of integrations that support private actions, see [Overview](#overview).
+1. Select a **Connection** from the drop-down menu or click the plus (**+**) icon to add a new connection. Using a private action requires a private action runner paired with a connection. See [Connect a runner](#connect-a-runner) for more information.
+1. Complete any required fields and click **Save** to save your workflow.
+{{% /collapse-content %}}
+
+## Edit private runners
+
+From the **Private Action Runner** page, you can view all of your private runners together with the workflows or apps that use the runner. To edit the connection for a runner, click **View Details**. Click the trash can icon to delete a runner.
+
+- [Private Action Runner page - Workflow Automation][6]
+- [Private Action Runner page - App Builder][7]
 
 ## Further reading
 
@@ -154,6 +174,13 @@ To pair a runner to a connection:
 [4]: https://app.datadoghq.com/workflow/action-catalog#/com.datadoghq.ansible
 [5]: https://app.datadoghq.com/workflow/action-catalog#/com.datadoghq.http
 [6]: https://app.datadoghq.com/workflow/private-action-runners
-[7]: https://app.datadoghq.com/workflow/connections
-[8]: https://app.datadoghq.com/app-builder/connections
-[9]: /service_management/workflows/guide/private_action_credentials
+[7]: https://app.datadoghq.com/app-builder/private-action-runners
+[8]: https://app.datadoghq.com/workflow/connections
+[9]: https://app.datadoghq.com/app-builder/connections
+[10]: /service_management/workflows/guide/private_action_credentials
+[11]: https://app.datadoghq.com/workflow/
+[12]: https://app.datadoghq.com/app-builder/
+[13]: /service_management/workflows/build
+[14]: /service_management/app_builder/build
+[15]: /service_management/workflows/build/#build-a-workflow-with-the-workflow-builder
+
