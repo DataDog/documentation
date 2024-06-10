@@ -51,7 +51,7 @@ curl -X POST "https://api.<DATADOG_SITE>/api/v2/downtime" \
 
 También puedes añadir un `message` a tu tiempo de inactividad para que los demás conozcan la razón y el propósito del tiempo de inactividad que estás creando. Por ejemplo, `Muting all monitors in production environment over the weekend`.
 
-Sustituye el valor del parámetro `<Datadog_SITE>` por el de tu cuenta Datadog. Para ello, consulta la documentación de los [sitios Datadog][1]. Sustituye los parámetros `start` y `end` para que coincidan con el cronograma deseado. Por ejemplo
+Sustituye el valor del parámetro `<Datadog_SITE>` por el del sitio de tu cuenta Datadog. Para ello, consulta la documentación de los [sitios Datadog][1]. Sustituye los parámetros `start` y `end` para que coincidan con el cronograma deseado. Por ejemplo
 
 * `start=$(date +%s)`
 * `end=$(date -v+24H +%s)`
@@ -128,7 +128,7 @@ curl -X POST "https://api.<DATADOG_SITE>/api/v1/downtime" \
 -d '{"data":{"type":"downtime","attributes":{"monitor_identifier":{"monitor_tags":["*"]},"scope":"env:prod","display_timezone":"Europe/Berlin","message":"","mute_first_recovery_notification":false,"notify_end_types":["expired","canceled"],"notify_end_states":["alert","warn","no data"],"schedule":{"timezone":"Europe/Berlin","recurrences":[{"start":"2023-07-10T18:00","duration":"12h","rrule":"FREQ=DAILY;INTERVAL=1"}]}}},"_authentication_token":"b6c9ec89cdff687d29c0ee54923c52f57c9e102a"}'
 ```
 
-También puedes añadir un `message` a tu tiempo de inactividad para que los demás conozcan la razón y el propósito del tiempo de inactividad que estás creando. Sustituye el parámetro `<Datadog_SITE>` por el de tu cuenta Datadog. Para ello, consulta la documentación de los [sitios Datadog][1]. Sustituye los parámetros `start` y `end` para que coincidan con el cronograma deseado.
+También puedes añadir un `message` a tu tiempo de inactividad para que los demás conozcan la razón y el propósito del tiempo de inactividad que estás creando. Sustituye el parámetro `<Datadog_SITE>` por el del sitio de tu cuenta Datadog. Para ello, consulta la documentación de los [sitios Datadog][1]. Sustituye los parámetros `start` y `end` para que coincidan con el cronograma deseado.
 
 **Respuesta:**
 
@@ -176,7 +176,7 @@ También puedes añadir un `message` a tu tiempo de inactividad para que los dem
 
 Abre la página [Gestionar tiempos de inactividad][1] y programa un nuevo tiempo de inactividad. Selecciona `recurring`:
 
-{{< img src="monitors/guide/downtime_businesshour.png" alt="Downtimes configuration using recurring schedule to mute alerts outside of business hours" (Configuración de tiempos de inactividad utilizando cronogramas recurrentes para silenciar alertas fuera del horario comercial) style="width:100%;" >}}
+{{< img src="monitors/guide/downtime_businesshour.png" alt="Downtimes configuration using recurring schedule to mute alerts outside of business hours" (Configuración de tiempos de inactividad utilizando cronogramas recurrentes para silenciar alertas fuera del horario laboral) style="width:100%;" >}}
 
 [1]: https://app.datadoghq.com/monitors#downtime
 {{% /tab %}}
@@ -198,7 +198,7 @@ curl -X POST "https://api.<DATADOG_SITE>/api/v1/downtime" \
 -H "DD-APPLICATION-KEY: ${app_key}" \
 -d '{"data":{"type":"downtime","attributes":{"monitor_identifier":{"monitor_tags":["*"]},"scope":"env:prod","display_timezone":"Europe/Berlin","message":"","mute_first_recovery_notification":false,"notify_end_types":["expired","canceled"],"notify_end_states":["alert","warn","no data"],"schedule":{"timezone":"Europe/Berlin","recurrences":[{"start":"2023-07-09T18:00","duration":"12h","rrule":"FREQ=WEEKLY;INTERVAL=1;BYDAY=SU,MO,TU,WE,TH,FR"},{"start":"2023-07-09T00:00","duration":"24h","rrule":"FREQ=WEEKLY;INTERVAL=1;BYDAY=SA,SU"}]}}}'
 ```
-También puedes añadir un `message` a tu tiempo de inactividad para que los demás conozcan la razón y el propósito del tiempo de inactividad que estás creando. Sustituye el parámetro `<DATADOG_SITE>` por el de tu cuenta Datadog. Para ello, consulta la documentación de los [sitios Datadog][1]. Sustituye los parámetros `start` y `end` para que coincidan con el cronograma deseado.
+También puedes añadir un `message` a tu tiempo de inactividad para que los demás conozcan la razón y el propósito del tiempo de inactividad que estás creando. Sustituye el parámetro `<DATADOG_SITE>` por el del sitio de tu cuenta Datadog. Para ello, consulta la documentación de los [sitios Datadog][1]. Sustituye los parámetros `start` y `end` para que coincidan con el cronograma deseado.
 
 **Respuesta:**
 
