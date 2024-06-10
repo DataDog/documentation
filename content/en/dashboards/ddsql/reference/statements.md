@@ -14,13 +14,13 @@ DDSQL is in private beta.
 ### Syntax
 
 {{< code-block lang="text" >}}
-SELECT [ ALL | DISTINCT ] selectExpr, …
+SELECT [ ALL | DISTINCT ] selectExpr, ...
   [ FROM relSource EVENT_SEARCH 'some message' USE EVENT_INDEX 'index_name'
-[ JOIN_TYPE relSource ... [ ON condition | USING (column, … ) ] ] … ]
+[ JOIN_TYPE relSource ... [ ON condition | USING (column, ... ) ] ] ... ]
   [ WHERE condition ]
-[ GROUP BY [ ALL | DISTINCT ] expression, … ]
-[ HAVING condition, … ]
-[ ORDER BY expression, … [ ASC | DESC ] [ NULLS FIRST | NULLS LAST ] ]
+[ GROUP BY [ ALL | DISTINCT ] expression, ... ]
+[ HAVING condition, ... ]
+[ ORDER BY expression, ... [ ASC | DESC ] [ NULLS FIRST | NULLS LAST ] ]
 [ LIMIT [ ALL | expression ]
   [ OFFSET expression] ]
 {{< /code-block >}}
@@ -70,8 +70,8 @@ AGGR aggrExpression
 [ WHERE expression ]
 [ ROLLUP aggregator(value) ]
 [ BUCKET BY [ ALL | DEFAULT | INTERVAL 'interval' ] ]
-[ GROUP BY column1, column2, … ]
-[ HAVING expression, … ]
+[ GROUP BY column1, column2, ... ]
+[ HAVING expression, ... ]
 [ ORDER BY expression [ ASC | DESC ] ]
 [ LIMIT [ ALL | expression ]
   [ OFFSET expression] ]
@@ -180,7 +180,7 @@ With `BUCKET BY ALL`, the timestamp of the resulting point is the start of the t
 With `SELECT`, you can use the output of one statement as the input of another by using the subquery in the outer query's FROM clause:
 
 {{< code-block lang="sql" >}}
-SELECT avg(subquery.col) FROM (SELECT … FROM table) subquery …
+SELECT avg(subquery.col) FROM (SELECT ... FROM table) subquery ...
 {{< /code-block >}}
 
 To re-aggregate a result from AGGR, the subquery is placed inside the aggregation function call, because these functions take tables as input:
@@ -208,7 +208,7 @@ For multi-layer aggregation to work, the inner query must return a table with th
 ## UNION
 
 {{< code-block lang="text" >}}
-DQLExpr UNION [ ALL ] DQLExpr …
+DQLExpr UNION [ ALL ] DQLExpr ...
 [ ORDER BY expressions [ ASC | DESC ] ]
 [ LIMIT [ ALL | expression ]
   [ OFFSET expression] ]
@@ -240,7 +240,7 @@ TODO
 `WITH` provides a way to write auxiliary statements for use in a larger query.
 
 {{< code-block lang="sql" >}}
-WITH alias [ ( output, schema, column, names, … ) ] AS ( DQLExpr ) [, …] DQLExpr
+WITH alias [ ( output, schema, column, names, ... ) ] AS ( DQLExpr ) [, ...] DQLExpr
 {{< /code-block >}}
 
 `WITH` statements, which are also often referred to as Common Table Expressions or CTEs, can be thought of as defining temporary tables that exist for one query. Each auxiliary statement in a `WITH` clause can be any DQLExpr, and the `WITH` clause itself is attached to a primary statement that can also be any non-`WITH` DQLExpr. Subsequent auxiliary statements may reference correlations aliased in previous auxiliary statements.
@@ -272,7 +272,7 @@ DDSQL allows users to create temporary tables, insert into them, and query & ref
 {{< code-block lang="sql" >}}
 CREATE TABLE name (
   columnName columnType
-  [ PRIMARY KEY [ AUTOINCREMENT ] | NOT NULL | UNIQUE | DEFAULT expression ] … 
+  [ PRIMARY KEY [ AUTOINCREMENT ] | NOT NULL | UNIQUE | DEFAULT expression ] ... 
 )
 {{< /code-block >}}
 
@@ -281,9 +281,9 @@ CREATE TABLE name (
 DDSQL's `INSERT` statement follows the SQL standard. DDSQL only allows users to insert into temporary tables that are created with the `CREATE` statement, not downstream data sources.
 
 {{< code-block lang="sql" >}}
-INSERT INTO tableName [ (specific, columns, …) ] VALUES 
-  ( value1, value2, … ),
-  ( value1, value2, … ),
+INSERT INTO tableName [ (specific, columns, ...) ] VALUES 
+  ( value1, value2, ... ),
+  ( value1, value2, ... ),
   ...
 {{< /code-block >}}
 
@@ -321,7 +321,7 @@ Simple CASE statements are of the form:
 {{< code-block lang="sql" >}}
 CASE expression
   WHEN value THEN result
-  [ WHEN … ]
+  [ WHEN ... ]
   [ ELSE result ]
 END
 {{< /code-block >}}
@@ -335,7 +335,7 @@ Searched CASE statements are of the form:
 {{< code-block lang="sql" >}}
 CASE
   WHEN condition THEN result
-  [ WHEN … ]
+  [ WHEN ... ]
   [ ELSE result ]
 END
 {{< /code-block >}}
@@ -377,25 +377,205 @@ If a table supports schema on read, references to nonexistent table columns are 
 
 If a column reference cannot be unambiguously mapped to a single table, it is considered an ambiguous reference. Because schema-on-read columns don't exist in the catalog, they can typically only be used without specifying the correlation if there is exactly one table in the `FROM` clause that supports schema on read.
 
+## Tags
 
+Tags are a widespread mechanism to encode metadata about a particular record across several products at Datadog. Tags are key/value pairs for which a key may contain multiple values.  
 
+Equality comparisons with tags are treated as a "contains" comparison rather than requiring strict equality. `service='website'` is true if a record has a `service` tag with the value `website`, even if it has other service tags as well.
 
+As a consequence of this behavior, the `IN` operator with tags works as "overlaps". For example, `service IN ('webstore', 'webstore-analytics')` matches records that contain `service:webstore`, `service:webstore-analytics`, or both, even if other service tags are present (for example, `service:webstore,something-else` matches).
+
+To perform a strict comparison, cast the tag reference to a string, or compare it against a group literal in an outer query. For example, a query like
+
+{{< code-block lang="sql" >}}
+AGGR avg('system.load.1') WHERE team='logs' GROUP BY team
+{{< /code-block >}}
+
+May return the following result:
+
+| Timeseries | Team             |
+|------------|------------------|
+| [...]      | logs             |
+| [...]      | logs,team2       |
+| [...]      | logs,team3,team4 |
+| [...]      | logs,team2,team4 |
+
+To instead match only on `logs`, use this query:
+
+{{< code-block lang="sql" >}}
+SELECT * 
+FROM (AGGR avg('system.load.1') WHERE team='logs' GROUP BY team)
+WHERE team={'logs'}
+{{< /code-block >}}
+
+This stricter comparison returns only one result:
+
+| Timeseries | Team             |
+|------------|------------------|
+| [...]      | logs             |
+
+### Implicit tag references
+
+Schema-on-read references on tables that support tags are treated as tag lookups, and are called implicit tag references. For example, the `az` column does not exist on the `resources.host` table, but you may `SELECT az FROM resources.host`. DDSQL recognizes that the `resources.host` table supports schema on read, and `az` becomes an implicit tag reference. Its name in the projection is `az`, which may be used throughout the query.
+
+**Note**: For events downstreams, schema-on-read references also look up against attributes. See the [events Downstream section] for more information.
+
+### Explicit tag references
+
+Explicit tag references allow a user to specify that a column reference should refer to a tag even if a column with an identical name exists in the table schema. Explicit tag references allow some basic defense against schema updates that change the meaning of queries relying on the implicit fallback behavior.
+
+Explicit tag references are column references that are prepended with the `#` character. For the example, the `resources.host` table contains a `service` column, but the query can reference the `service` tag explicitly:
+
+{{< code-block lang="sql" >}}
+SELECT #service FROM resources.host
+{{< /code-block >}}
+
+The tag's name in the projection is `#service`, and it should be used throughout the query in that form, as `service` refers to the schema column.
+
+For tag references that require quoting, the `#` should appear outside of quotes (for example, `#"availability-zone"`). This is necessary to differentiate between explicit tag references and columns that start with a `#` character.
 
 ## Expressions
 
+*Value expressions* are the general expression language used to produce values for conditions, selectExprs, filters, and so on in clauses like `WHERE`, `ORDER BY`, and `GROUP BY`. The expression syntax of DDSQL is a superset of SQL expression syntax.
+
+### Arithmetic operators
+
+DDSQL supports standard binary and unary infix arithmetic notation from SQL and many other languages:
+
+| Operator | Description              | Example | Result |
+|----------|--------------------------|---------|--------|
+| +        | addition                 | 2 + 3   | 5      |
+| -        | subtraction              | 2 - 3   | -1     |
+| *        | multiplication           | 2 * 3   | 6      |
+| /        | division (nontruncating) | 5 / 2   | 2.5    |
 
 
+The standard order of operations applies. To control the order of operations, add parentheses: `(5 - 2) * 3`.
+
+### Comparison operators
+
+DDSQL implements the following comparison operators:
+
+| Operator | Description            | Example | Result |
+|----------|------------------------|---------|--------|
+| >        | greater than           | 2 > 3   | false  |
+| <        | less than              | 2 < 3   | true   |
+| >=       | greater than or equals | 3 >= 2  | true   |
+| <=       | less than or equals    | 3 <= 2  | false  |
+| =        | equals*                | 3 = 3   | true   |
+| !=, <>   | not equals             | 3 != 3  | false  |
+
+For tag references and tag groups, the equality operator (`=`) is treated as a "contains" comparison. See the [Tag References section] for more details.
+
+Additionally, DDSQL supports the following SQL keywords, which function as standard boolean operators:
+
+- `NOT`
+- `AND`
+- `OR`
+
+DDSQL also supports the following comparator keywords as they are defined in the SQL standard:
+- `IS NULL`
+- `IS NOT NULL`
+- `LIKE`
+- `NOT LIKE`
+- `IN and NOT IN`
+
+DDSQL supports the `BETWEEN` keyword such that `a BETWEEN x AND y` is equivalent to `a >= x AND a <= y` (see the Postgres documentation for `BETWEEN` for details).
+
+### Array operators
+
+Accessing specific elements in array-typed columns and expressions can be done with the index operator: `<EXPRESSION>[<INDEX>]`. Arrays in DDSQL are 1-indexed, following SQL standards, which means the first element in an array is accessed with `[1]`, not `[0]`.
+
+For example, to access the first element in an array:
+
+{{< code-block lang="sql" >}}
+SELECT column[1] FROM ...
+{{< /code-block >}}
+
+An expression can be used to specify the index. For example, to access the last element in an array:
+
+{{< code-block lang="sql" >}}
+SELECT column[array_length(column)] FROM ...
+{{< /code-block >}}
+
+## Aliases
+
+Aliases are substitute names for output expressions or `FROM` items. An alias is used for brevity or to eliminate ambiguity for self-joins (where the same table is scanned multiple times).
+
+{{< code-block lang="sql" >}}
+SELECT * FROM my_long_hosts_table_name as hosts
+{{< /code-block >}}
+
+When an alias is provided in a `FROM` item, it completely hides the actual name of the table or function. In the above example, the remainder of the DQLExpr must refer to `my_long_hosts_table_name` as `hosts`.
+
+## Ordinals
+
+`GROUP BY` and `ORDER BY` clause expressions can be column names, arbitrary expressions formed from input columns, or the name or ordinal number of an output expression (a `SELECT` expression). Output expression ordinals are 1-indexed.
+
+For example, the output of this query is ordered first by `ex1`, then `ex2`, and then `ex3`:
+
+{{< code-block lang="java" filename="block.java" disable_copy="true" collapsible="true" >}}
+SELECT ex1, ex2, ex3 FROM table ORDER BY 3, 2, 1;
+{{< /code-block >}}
 
 
+## Data types
 
+DDSQL implements a simplified version of the SQL type system that is mostly descended from SQLite.
 
+### Base types
 
+| SQL Name   | Aliases                  | Description |
+|------------|--------------------------|-------------|
+| integer    | int                      | Storage is always int64. |
+| text       | varchar, json            | Storage is always unlimited-length UTF-8. |
+| real       | double                   | Storage is always IEEE-754 float64. |
+| timestamp  | timestamp without time zone | SQL standard datetime type. |
+| interval   |      | Encodes a span of time. Useful for setting the default interval environment variable with `SET`. |
+| group      | hstore, tag_column       | Sorted set of strings with tag-like "= is contains" semantics. |
+| point      |                          | An integer seconds-since-Unix-epoch/float value pair. |
+| timeseries |                          | A vector of points. |
+| boolean    |                          | `TRUE` or `FALSE` |
+| any        |                          | `ANY` is a composite, dynamic type. Values under a column with type `ANY` can be integers, real numbers, strings, or a mixture of all three. `ANY` applies to custom events attributes whose values can vary between individual events. |
 
+### Arrays
 
+DDSQL implements arrays: a list of elements that all have the same underlying type. DDSQL supports arrays of
 
+- integers
+- floats
+- text
+- booleans
+- timestamps
+- dates
+- intervals
+- points
+- timeseries
 
+DDSQL also supports casting timeseries to and from arrays of points, and casting groups to and from arrays of strings.
 
+Array types are specified with the `array<TYPE>` syntax. For example:
+- To cast a column, or an expression to an array of integers, write `CAST(<EXPRESSION> AS array<int>)`, or `(<EXPRESSION>)::array<int>`.
+- To declare an array literal with an explicit type (for example, text), write `array<text>['your', 'text', 'entries', 'go', 'here']`.
 
+### Literals
+
+The table below contains examples on how to declare literals for each type, for use in expressions like `SELECT <LITERAL>` or in comparisons like `WHERE timestamp > timestamp '1 hr ago'`.
+
+| Name       | Example |
+|------------|---------|
+| integer    | `1`, `4`, `23901239412`, `0x4B1D` |
+| text       | `'Hello, world'` |
+| real       | `1.0`, `1e30`, `314e-2`, `.25`, `5.` |
+| timestamp  | `timestamp <TIMESTAMP_STRING>'` (where `TIMESTAMP_STRING` is a string with a format that can be parsed into a timestamp, such as `'YYYY-MM-DD HH:MM:SS'` or `'YYYY-MM-DD'`, or a relative string like `1 day ago`, `1 week ago`, and so on) |
+| date       | `date <DATE_STRING>` (where `DATE_STRING` is a string that can be parsed into a date, or a relative string like `1 day ago`') |
+| interval   | `interval <INTERVAL_STRING>` (where `INTERVAL_STRING` is a string that can be parsed into an interval, such as `1 h`, `12 days`, and so on) |
+| group      | `{'hello', 'world', 5}` (nontext elements are cast to strings) |
+| array      | An array can be implicitly typed: `array<int>[1, 2, ...]`,  `array<double>[1, 2.2, 3.4, 6, 0]`. Or the type can be inferred from the value: `['once', 'upon', 'a', 'time']`, `[1, 2, 3]` |
+| point      | `point{1641419300, 1.0}` (integer timestamp in seconds-since-Unix-epoch) |
+| timeseries | `timeseries{{1641419300, 3}, {1641419400, 400}, {1641419500, 20.345}}` |
+
+<!-- QUERY: I didn't cover the JSON response format section, since it doesn't seem applicable here. -->
 
 ## Differences between SQL and DDSQL
 
