@@ -39,7 +39,7 @@ It packs several features, including:
 
 - [**View in VS Code**](#view-in-vs-code) to directly go from your file references on the Datadog platform to your source files.
 
-- [**Logs Navigation**](#logs-navigation) to allow you to easily search for logs from your code.
+- [**Logs Navigation**](#logs-navigation) to allow you to search for logs from your code.
 
 - [**Code Delta**](#code-delta) to more accurately map observability data to your files in VS Code.
 
@@ -70,7 +70,10 @@ You can dismiss individual insights and set filters to view the categories of in
 
 ## Synthetic Tests
 
-The Datadog extension enables you to [run Synthetic HTTP tests and browser tests on local environments][1] directly in the IDE. You can identify and address potential issues resulting from code changes before they are deployed into production and impact your end users.
+The Datadog extension enables you to [run Synthetic HTTP tests and browser tests on local environments][1] directly in VS Code. You can identify and address potential issues resulting from code changes before they are deployed into production and impact your end users.
+
+<div class="alert alert-info">We only support <a href="https://docs.datadoghq.com/synthetics/api_tests/http_tests/?tab=requestoptions">HTTP API tests</a> and <a href=" https://docs.datadoghq.com/synthetics/browser_tests/?tab=requestoptions">Browser tests</a>.</div>
+
 
 {{< img src="developers/ide_plugins/vscode/vscode-extension-demo.png" alt="The Datadog Extension in VS Code" style="width:100%;" >}}
 
@@ -106,7 +109,7 @@ If you're using a supported logging library, the extension is able to show you c
 
 {{< img src="/developers/ide_plugins/vscode/logs_navigation.mp4" alt="Preview of Logs Navigation" style="width:100%" video=true >}}
 
-The currently supported logging libraries are:
+The supported logging libraries are:
 
 - JavaScript
   - [@datadog/browser-logs][16]
@@ -155,17 +158,17 @@ Once the configuration file is created, the static analyzer runs automatically i
 
 Please read this [End-User License Agreement][eula] carefully before downloading or using the Datadog Visual Studio Code Extension.
 
-## Data and Telemetry
+## Data and telemetry
 
 Datadog anonymously collects information about your usage of this IDE, including how you interact with it, whether errors occurred while using it, and what caused those errors, in accordance with the [Datadog Privacy Policy][datadog_privacy_policy] and Datadog's [VS Code extension EULA][eula].
 
 If you don't wish to send this data to [Datadog][datadog], you can opt out at any time in the extension settings: `Datadog > Telemetry > Setup > Enable Telemetry`.
 
-If you disable the [VS Code telemetry][vs_code_telemetry] the Datadog extension will respect this setting.
+<div class="alert alert-info">The Datadog extension also honors the [VS Code telemetry][vs_code_telemetry] telemetry setting.</a>
 
-## Help and Feedback
+## Help and feedback
 
-To share your feedback, email [team-ide-integration@datadoghq.com][feedback_email] or create an issue in our [public repository][public_repo].
+To share your feedback, email [team-ide-integration@datadoghq.com][feedback_email] or create an issue in the extension's [public repository][public_repo].
 
 Check out the [issues][known_issues] section to discover known issues.
 
