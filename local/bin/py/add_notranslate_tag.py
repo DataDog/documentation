@@ -16,8 +16,6 @@ string_collection_ids = [
     'o:datadog:p:documentation_loc:r:config__default_menus_main_en_yaml',
     'o:datadog:p:documentation_loc:r:config__default_menus_api_en_yaml',
     'o:datadog:p:documentation_loc:r:data_partials_home_yaml',
-    'o:datadog:p:documentation_loc:r:data_partials_platforms_yaml'
-    'o:datadog:p:documentation_loc:r:data_partials_questions_yaml'
     'o:datadog:p:documentation_loc:r:data_partials_requests_yaml'
 ]
 
