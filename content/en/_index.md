@@ -1,6 +1,6 @@
 ---
 title: Datadog Docs
-kind: documentation
+kind: home
 aliases:
   - /basic_agent_usage/
   - /guides/
