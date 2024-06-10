@@ -18,7 +18,7 @@ further_reading:
 
 With [Domain Allowlist][1], you can restrict the email domains that can receive notifications.
 
-When Domain Allowlist is enabled, only email domains in your allowlist can receive notifications. If you try to send a monitor notification to an email domain that is not in your allowlist, a warning appears. 
+When Domain Allowlist is enabled, only email domains in your allowlist can receive monitor notifications. If you try to send a monitor notification to an email domain that is not in your allowlist, a warning appears. 
 
 {{< img src="account_management/org_settings/domain_allowlist/verification.png" alt="Screenshot of monitor settings in the UI, the 'Notify your team' dialog. The notification mentions a Gmail address, but gmail.com is not in the allowlist. A warning appears, reading 'In message: The email domain @gmail.com is not part of the allowed domain list and will not receive this notification.'" >}}
 

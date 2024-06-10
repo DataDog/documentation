@@ -25,7 +25,7 @@ This document describes how to access and configure Domain Allowlist through the
 Return the Domain Allowlist and its enabled or disabled state.
 
 <span style="padding:3px" class="font-semibold text-api-get bg-bg-api-get">GET</span>
-https://{datadog_site}/domain_allowlist/api/v2/domain_allowlist?api_key={datadog_api_key}&application_key={datadog_application_key}
+https://{datadog_site}/api/v2/domain_allowlist?api_key={datadog_api_key}&application_key={datadog_application_key}
 
 ### Request
 
@@ -114,14 +114,14 @@ Too many requests
 Enable/disable Domain Allowlist and rewrite the entire allowlist with a given list of email domains.
 
 <span style="padding:3px" class="font-semibold text-api-get bg-bg-api-get">PATCH</span>
-https://{datadog_site}/domain_allowlist/api/v2/domain_allowlist?api_key={datadog_api_key}&application_key={datadog_application_key}
+https://{datadog_site}/api/v2/domain_allowlist?api_key={datadog_api_key}&application_key={datadog_application_key}
 
 ### Request
 
 #### Example
 
 ```bash
-curl -X PATCH "https://api.datad0g.com/api/v2/domain_allowlist" \
+curl -X PATCH "https://api.datadog.com/api/v2/domain_allowlist" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "DD-API-KEY: ${DD_API_KEY}" \
@@ -207,7 +207,7 @@ Too many requests
     "attributes": {
       "enabled": true,
       "domains": [
-        "@aol.com",
+        "@datadoghq.com",
         "@yahoo.com",
         "@gmail.com"
       ]
