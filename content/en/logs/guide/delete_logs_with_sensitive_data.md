@@ -53,16 +53,14 @@ Use [Sensitive Data Scanner][5] to limit the risk of storing sensitive data in D
 Only a Datadog Admin can request log deletion. If you are not an Admin, make sure to include an Admin to confirm the deletion request.
 </div>
 
-If the options for changing your retention period, making logs un-queryable, and redacting sensitive data using Sensitive Data Scanner are not enough to ensure the security of your data, submit a request to [Datadog support][3] to delete the indexed logs with sensitive data. You must provide the following information with your request:
+If the options for changing your retention period, making logs un-queryable, and redacting sensitive data using Sensitive Data Scanner are not enough to ensure the security of your data, submit a request to [Datadog support][3] to delete the indexed logs with sensitive data. Your request must provide the following information:
 
-If this is an indexed log data deletion request due to sensitive data in your logs and you still want to proceed with deleting those logs, you need to provide the following information to :
-
-1. Confirm that the logs with sensitive data are no longer being sent to Datadog.
-1. Confirm if this is a targeted deletion by time frame or an entire index deletion request.
-1. Provide the exact organization name and the [site][4] (for example, US1) where the sensitive data was sent to.
-1. Provide the exact time range in Epoch or UTC format of the logs that contained sensitive data.
-1. Provide the name of the indexes where the sensitive data is in.
-1. Confirm that you understand the following requirement:
+1. Confirmation that the logs with sensitive data are no longer being sent to Datadog.
+1. Whether this is a targeted deletion by time frame or an entire index deletion request.
+1. The exact organization name and the [site][4] (for example, US1) where the sensitive data was sent to.
+1. If the request is for targeted deletion by time frame, the exact time range, in Epoch or UTC format, of the logs that contained sensitive data.
+1. The name of the indexes where the sensitive data is in.
+1. Confirmation that you understand the following requirement:
 <div class="alert alert-danger">
 Datadog deletes logs by time buckets. This means logs cannot be deleted by a query scope or a precise time frame. Therefore, Datadog might have to delete a larger amount of data than your exposed logs. For example. if you need to delete all error logs from <code>service:x</code> that came in between 10:00am to 12:00pm from <code>index:main</code>, Datadog might have to delete all logs in that index from 1:00am to 5:00pm. Datadog support will work with you to ensure that only the necessary data is deleted.
 </div>
