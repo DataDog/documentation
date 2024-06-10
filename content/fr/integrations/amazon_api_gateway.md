@@ -123,18 +123,18 @@ Pour activer la journalisation API Gateway :
 
 Accédez ensuite à la [page Logs][6] pour commencer à explorer vos logs.
 
-## Real User Monitoring
+## Données collectées
 
-### Analyse d'entonnoirs
+### Métriques
 {{< get-metrics-from-git "amazon_api_gateway" >}}
 
 
 
-### Aide
+### Événements
 
 L'intégration Amazon APIP Gateway n'inclut aucun événement.
 
-### Aide
+### Checks de service
 
 L'intégration Amazon API Gateway n'inclut aucun check de service.
 
