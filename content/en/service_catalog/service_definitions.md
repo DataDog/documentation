@@ -191,7 +191,7 @@ Note: The entity reference only applies to an entity from the same YAML file.
 
 ##### Implicit Inheritance 
 Components (`kind:service`, `kind:datastore`, `kind:queue`, `kind:ui`) inherit all metadata from the application that it belongs to under the following conditions:
-- There’s only ONE application defined in the yaml
+- There is only one application defined in the YAML file.
 - The clause `inheritFrom:<entity_kind>:<name>` is absent in the YAML file.
 
 #### v3.0 API endpoints (alpha)
