@@ -223,7 +223,7 @@ $ eksctl utils associate-iam-oidc-provider \
 
 # Create a service account
 # Replace `<YOUR_IAM_AUTH_DB_POLICY_ARN>` with the ARN of the IAM policy from step 2
-# Replace `<YOUR_IAM_AUTH_SERVICE_ACCOUNT>` and `<YOUR_IAM_AUTH_SERVICE_ACCOUNT_NAMESPACE>` with the name and namespace of the service account.
+# Replace `<YOUR_IAM_AUTH_SERVICE_ACCOUNT>` and `<YOUR_IAM_AUTH_SERVICE_ACCOUNT_NAMESPACE>` with the name and namespace of the service account
 $ eksctl create iamserviceaccount \
   --cluster <YOUR_ESK_CLUSTER> \
   --name <YOUR_IAM_AUTH_SERVICE_ACCOUNT> \
