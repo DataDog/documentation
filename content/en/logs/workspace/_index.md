@@ -9,14 +9,14 @@ disable_toc: false
 {{< /callout >}}
 
 ## Overview
-During an incident investigation, you might need to run complex queries to analyze your logs, such as combining attributes from multiple log sources or transforming and manipulating log data. Use Logs Workspace for:
+During an incident investigation, you might need to run complex queries, such as combining attributes from multiple log sources or transforming log data, to analyze your logs. Use Logs Workspace to run queries to:
 
-- Correlating multiple data sources
-- Aggregating multiple levels of data
-- Joining data using SQL
-- Extracting data or add a calculated field at query time
+- Correlate multiple data sources
+- Aggregate multiple levels of data
+- Join data using SQL
+- Extract data or add a calculated field at query time
 
-You can also visualize your transformed datasets.
+You can also add visualizations for your transformed datasets.
 
 ## Create a workspace and add a data source
 
@@ -48,7 +48,7 @@ You can add a logs query or a reference table as a data source.
         1. Select **Reference table** in the **Data source** dropdown.
         1. Select the reference table you want to use.
     - To add a logs data source:
-    a. Enter a query. The reserved attributes of the filtered logs are added as columns.
+        1. Enter a query. The reserved attributes of the filtered logs are added as columns.
         1. Click **datasource_x** at the top of the cell to rename the data source.
         1. Click **Columns** to see the columns available. Click **as** for a column to add an alias.
         1. To add additional columns to the dataset:  
@@ -79,7 +79,7 @@ Click the **transformation** tile to add a cell for filtering, aggregating, and 
 
 1. Click the **Transformation** tile.
 1.  Select the data source you want to transform in the **Source dataset** drop down menu.
-1. Click **+** to add a **Filter**, **Parse**, or **Aggregate** function.
+1. Click the plus icon to add a **Filter**, **Parse**, or **Aggregate** function.
     - For **Filter**, add a filter query for the dataset.
     - For **Parse**, enter grok syntax to extract data into a separate column. In the **from** drop down menu, select the column the data is getting extracted from. See the [column extraction example](#column-extraction-example).
     - For **Aggregate**, select what you want to group the data by in the drop down menus.
@@ -87,7 +87,7 @@ Click the **transformation** tile to add a cell for filtering, aggregating, and 
 
 #### Column extraction example
 
-If you want to extract the customer ID from the message to a separate column in this example dataset:
+The following is an example dataset:
 
 | timestamp           | host             | message                            |
 | ------------------- | ---------------- | ---------------------------------- |
@@ -95,13 +95,13 @@ If you want to extract the customer ID from the message to a separate column in 
 | May 29 10:59:29.000 | shopist.internal | Submitted order for customer 38554 |
 | May 29 10:58:54.000 | shopist.internal | Submitted order for customer 32200 |
 
-Use the following grok syntax to extract the customer ID from the message column and add it to a new column called `customer_id`.
+Use the following grok syntax to extract the customer ID from the message and add it to a new column called `customer_id`:
 
 ```
 Submitted order for customer %{notSpace:customer_id}`
 ```
 
-This is the dataset in the transformation cell after the extraction:
+This is the resulting dataset in the transformation cell after the extraction:
 
 | timestamp           | host             | message                            | customer_id |
 | ------------------- | ---------------- | ---------------------------------- | ----------- |
@@ -133,11 +133,13 @@ This diagram shows the different transformation and analysis cells the data sour
 
 {{< img src="logs/workspace/flowchart.png" alt="A flowchart showing the steps that the data sources go through" style="width:60%;"  >}}
 
+### Example walkthrough
+
 The example starts off with two logs data sources:
 - `transaction_start_logs`
 - `transaction_execution_logs`
 
-The transform cell `parsed_executed_logs` uses the following grok parsing syntax to extract the transaction ID from the `message` column of the `transaction_execution_logs` dataset and adds the transaction ID to a new column called `customer_id`.
+The next cell in the workspace is the transform cell `parsed_executed_logs`. It uses the following grok parsing syntax to extract the transaction ID from the `message` column of the `transaction_execution_logs` dataset and adds the transaction ID to a new column called `customer_id`.
 
 ```
 transaction %{notSpace:transaction_id}
@@ -181,7 +183,7 @@ An example of the resulting `transaction_record` dataset:
 | May 29 10:58:54.000 | 47694       | cb23d1a7-c0cb  | 703.71       | OK     |
 | May 31 12:20:01.152 | 80207       | 2c75b835-4194  | 386.21       | ERROR  |
 
-The reference table `trading_platform_users` is added as a data source:
+Then the reference table `trading_platform_users` is added as a data source:
 
 | customer_name  | customer_id | account_status |
 | -------------- | ----------- | -------------- |
@@ -190,7 +192,7 @@ The reference table `trading_platform_users` is added as a data source:
 | Tanya Mejia    | 47694       | verified       |
 | Michael Kaiser | 80207       | fraudulent     |
 
-The analysis cell `transaction_record_with_names` runs the following SQL command to take the customer name and account status from `trading_platform_users` and appends it as columns and joins it with the `transaction_records` dataset:
+The analysis cell `transaction_record_with_names` runs the following SQL command to take the customer name and account status from `trading_platform_users`, appending it as columns, and then joins it with the `transaction_records` dataset:
 
 ```sql
 SELECT tr.timestamp, tr.customer_id, tpu.customer_name, tpu.account_status, tr.transaction_id, tr.dollar_value, tr.status
