@@ -6,7 +6,7 @@ further_reading:
 - link: "service_management/app_builder/connections"
   tag: "Documentation"
   text: "App Builder Connections"
-- link: "service_management/workflow/connections"
+- link: "service_management/workflows/connections"
   tag: "Documentation"
   text: "Workflow Connections"
 ---
@@ -33,6 +33,7 @@ The private action runner requires a Linux host with the following:
 - The host should be able to reach any internal services you want to call
 - Docker
 - The Docker Compose plugin (if you want to use Docker Compose).
+- App Builder connections require SSL termination.
 
 ## Set up a private action runner
 
