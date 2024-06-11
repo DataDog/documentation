@@ -49,6 +49,6 @@ title: Guías de monitores
 {{< whatsnext desc="Consultas:" >}}
     {{< nextlink href="/monitors/guide/custom_schedules" >}}Añadir cronogramas personalizados para personalizar las frecuencias de evaluación de los monitores{{< /nextlink >}}
     {{< nextlink href="monitors/guide/monitor-arithmetic-and-sparse-metrics" >}}Monitorizar métricas aritméticas y dispersas{{< /nextlink >}}
-    {{< nextlink href="monitors/guide/as-count-in-monitor-evaluations" >}}Evaluaciones as_count() de monitores{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/as-count-in-monitor-evaluations" >}}Evaluaciones as_count() en monitores{{< /nextlink >}}
     {{< nextlink href="monitors/guide/monitor_aggregators" >}}Agregadores de monitores{{< /nextlink >}}
 {{< /whatsnext >}}
