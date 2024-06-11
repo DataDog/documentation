@@ -203,7 +203,6 @@ To add scanning rules, perform the following steps.
 - Any rules that you add or update affect only data coming into Datadog after the rule was defined.
 - Sensitive Data Scanner does not affect any rules you define on the Datadog Agent directly.
 - After rules are added, ensure that the toggles for your scanning groups are enabled to begin scanning.
-- To turn off Sensitive Data Scanner entirely, set the toggle to **off** for each Scanning Group and Scanning Rule so that they are disabled.
 
 See [Investigate Sensitive Data Issues][8] for details on how to use the [Summary][9] page to triage your sensitive data issues.
 
@@ -250,6 +249,10 @@ This functionality is not available for Sensitive Data Scanner in the Agent.
 When Sensitive Data Scanner is enabled, an [out-of-the-box dashboard][13] summarizing sensitive data findings is automatically installed in your account. To access this dashboard, go to **Dashboards > Dashboards List** and search for "Sensitive Data Scanner Overview".
 
 {{<img src="sensitive_data_scanner/sdslight.png" alt="Sensitive Data Scanner Overview dashboard" style="width:70%;">}}
+
+## Disable Sensitive Data Scanner
+
+To turn off Sensitive Data Scanner entirely, set the toggle to **off** for each Scanning Group and Scanning Rule so that they are disabled.
 
 ## Further Reading
 
