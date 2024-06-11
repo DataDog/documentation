@@ -48,7 +48,7 @@ The basic level of a LLM trace is a single LLM span. Tracing individual LLM infe
 2. Track token usage, error rates, and latencies for your LLM calls
 3. Break down important metrics by models and model providers
 
-The SDK provides integrations to automatically capture LLM calls to specific providers. See [LLM integrations][2] for more information. If you are using an LLM provider that is not supported, you will need to manually instrument your application.
+The SDK provides integrations to automatically capture LLM calls to specific providers. See [Auto-instrumentation][2] for more information. If you are using an LLM provider that is not supported, you will need to manually instrument your application.
 
 {{< img src="tracing/llm_observability/llm-observability-llm-span.png" alt="A single LLM span" style="width:100%;" >}}
 
@@ -81,5 +81,5 @@ Datadog's LLM Observability associates evaluations with individual spans so that
 
 
 [1]: /tracing/llm_observability/span_kinds
-[2]: /tracing/llm_observability/sdk/#llm-integrations
-[3]: /tracing/llm_observability/submitting-evaluations
+[2]: /tracing/llm_observability/auto_instrumentation
+[3]: /tracing/llm_observability/submit_evaluations

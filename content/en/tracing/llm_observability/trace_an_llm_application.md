@@ -178,6 +178,5 @@ Depending on the complexity of your LLM application, you can also:
 [12]: /tracing/llm_observability/sdk/#tracing-spans-using-inline-methods
 [13]: /tracing/llm_observability/sdk/#annotating-a-span
 [14]: /tracing/llm_observability/sdk/#tracking-user-sessions
-[15]: /tracing/llm_observability/sdk/#persisting-a-span-across-contexts
-[16]: /tracing/llm_observability/sdk/#tracing-multiple-applications
-[17]: /tracing/llm_observability/submit_evaluations
+[15]: /tracing/llm_observability/sdk/#tracing-multiple-applications
+[16]: /tracing/llm_observability/submit_evaluations
