@@ -32,27 +32,48 @@ To use Sensitive Data Scanner, set up a scanning group to define what data to sc
 
 This document walks you through the following:
 
-- [The permissions required to view and set up Sensitive Data Scanner](#permissions).
-- [Setting up scanning for sensitive data](#set-up-scanning-for-sensitive-data).
-- [Using the out-of-the-box dashboard](#out-of-the-box-dashboard).
+- The permissions required to view and set up Sensitive Data Scanner.
+- Setting up scanning for sensitive data.
+- Using the out-of-the-box dashboard.
 
 **Note**: See [PCI DSS Compliance][1] for information on setting up a PCI-compliant Datadog organization.
 
 {{< img src="sensitive_data_scanner/sds_main_12_01_24.png" alt="The Sensitive Data Scanner page showing six out of the 12 active scanning groups" style="width:90%;">}}
 
-## Permissions
+## Set up Sensitive Data Scanner
 
-By default, users with the Datadog Admin role have access to view and set up scanning rules. To allow other users access, grant the `data_scanner_read` or `data_scanner_write` permissions under [Compliance][2] to a custom role. See [Access Control][3] for details on how to set up roles and permissions.
+There are two locations where you can redact your sensitive data:
+
+- In the Cloud:
+    - With **Sensitive Data Scanner in the Cloud**, you submit your logs in the Datadog backend. In this method, logs leave your premises before they are redacted. You can have multiple scanning groups per organization, and you can create custom scanning rules. You can also redact sensitive data in tags.
+- In your infrastructure:
+    - With **Sensitive Data Scanner through the Agent**, Datadog redacts your logs before submitting them to the Datadog backend, and unredacted logs never need to leave your premises. With this method, you are limited to one scanning group per organization, and you can use only predefined library rules.
+    - Another way to redact your sensitive data in your environment before shipping to your downstream destinations is using [Observability Pipelines][14].
+
+### Prerequisites
+
+{{< tabs >}}
+{{% tab "In the Cloud" %}}
+By default, users with the Datadog Admin role have access to view and set up scanning rules. To allow other users access, grant the `data_scanner_read` or `data_scanner_write` permissions under [Compliance][1] to a custom role. See [Access Control][2] for details on how to set up roles and permissions.
 
 {{< img src="sensitive_data_scanner/read_write_permissions.png" alt="The compliance permissions sections showing data scanner read and writer permissions" style="width:55%;">}}
 
-## Set up Sensitive Data Scanner
+[1]: /account_management/rbac/permissions/#compliance
+[2]: /account_management/rbac/
+{{% /tab %}}
+{{% tab "In the Agent" %}}
 
-There are two ways to set up Sensitive Data Scanner.
+1. Grant appropriate permissions. By default, users with the Datadog Admin role have access to view and set up scanning rules. To allow other users access, grant the `data_scanner_read` or `data_scanner_write` permissions under [Compliance][1] to a custom role. See [Access Control][2] for details on how to set up roles and permissions.
 
-With **Sensitive Data Scanner through the backend**, you submit your logs through the Datadog backend. In this method, logs leave your premises before they are redacted. If you want to redact your sensitive data in your environment before shipping to your downstream destinations, see how to [redact sensitive data with Observability Pipelines][14].
+    {{< img src="sensitive_data_scanner/read_write_permissions.png" alt="The compliance permissions sections showing data scanner read and writer permissions" style="width:55%;">}}
+2. Follow the steps to [enable remote configuration][3].
+3. Install the Datadog Agent v7.54 or newer.
 
-With **Sensitive Data Scanner through the Agent**, Datadog redacts your logs before submitting them to the Datadog backend, and unredacted logs never need to leave your premises.
+[1]: /account_management/rbac/permissions/#compliance
+[2]: /account_management/rbac/
+[3]: /agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Add a scanning group
 
@@ -63,7 +84,7 @@ For Terraform, see the [Datadog Sensitive Data Scanner group][5] resource.
 To set up a scanning group, perform the following steps.
 
 {{< tabs >}}
-{{% tab "Through the backend" %}}
+{{% tab "In the Cloud" %}}
 1. Navigate to the [Sensitive Data Scanner][1] configuration page.
 1. Click **Add scanning group**. Alternatively, click the **Add** dropdown menu on the top right corner of the page and select **Add Scanning Group**.
 1. Enter a query filter for the data you want to scan. At the top, click **APM Spans** to preview the filtered spans. Click **Logs** to see the filtered logs.
@@ -73,21 +94,21 @@ To set up a scanning group, perform the following steps.
 
 [1]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner/configuration
 {{% /tab %}}
-{{% tab "Through the Agent" %}}
+{{% tab "In the Agent" %}}
 
-<div class="alert alert-warning"><strong>Note</strong>: Sensitive Data Scanner through the Agent supports only one scanning group per organization.</div>
+<div class="alert alert-warning"><strong>Note</strong>: Sensitive Data Scanner in the Agent supports only one scanning group per organization.</div>
 
-1. Navigate to the [Sensitive Data Scanner through the Agent][1] configuration page.
+1. Navigate to the [Sensitive Data Scanner in the Agent][1] configuration page.
 1. Click **Add scanning group**. Alternatively, click the **Add** dropdown menu on the top right corner of the page and select **Add Scanning Group**.
-1. Enter a query filter for the data you want to scan. At the top, click **APM Spans** to preview the filtered spans. Click **Logs** to see the filtered logs.
+1. Enter a query filter for the data you want to scan. You can use only host-level tags for matching agents. At the bottom, the number of matching and eligible agents is displayed, including the total number of all agents that the tag matches.
 1. Enter a name and description for the group.
-1. Click the toggle buttons to enable Sensitive Data Scanner for the products you want (for example, logs, APM spans, RUM events, and Datadog events).
-1. Click **Create**.
+1. Click **Save**.
 
 [1]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner/configuration/agent
 {{% /tab %}}
 {{< /tabs >}}
 
+By default, a newly-created scanning group is disabled. To enable a scanning group, click the corresponding toggle on the right side.
 
 ### Add scanning rules
 
@@ -98,7 +119,7 @@ For Terraform, see the [Datadog Sensitive Data Scanner rule][7] resource.
 To add scanning rules, perform the following steps.
 
 {{< tabs >}}
-{{% tab "Through the backend" %}}
+{{% tab "In the Cloud" %}}
 
 1. Navigate to the [Sensitive Data Scanner][1] configuration page.
 1. Click the scanning group where you want to add the scanning rules.
@@ -138,11 +159,11 @@ You can create custom scanning rules using regex patterns to scan for sensitive 
 [1]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner/configuration
 {{< /collapse-content >}} 
 {{% /tab %}}
-{{% tab "Through the Agent" %}}
+{{% tab "In the Agent" %}}
 
-<div class="alert alert-warning"><strong>Note</strong>: Sensitive Data Scanner through the Agent supports only predefined scanning rules from Datadog's Scanning Rule Library. The total number of scanning rules is limited to 20.</div>
+<div class="alert alert-warning"><strong>Note</strong>: Sensitive Data Scanner in the Agent supports only predefined scanning rules from Datadog's Scanning Rule Library. The total number of scanning rules is limited to 20.</div>
 
-1. Navigate to the [Sensitive Data Scanner through the Agent][1] configuration page.
+1. Navigate to the [Sensitive Data Scanner in the Agent][1] configuration page.
 1. Click **Add Scanning Rule**. Alternatively, click the **Add** dropdown menu on the top right corner of the page and select **Add Scanning Rule**.
 1. In the **Add library rules to the scanning group** section, select the library rules you want to use. Use the **Filter library rules** input to search existing library rules. Next to the rule name you can find the list of predefined tags for each rule.
 1. In the **Define rule target and action** section, select the action that you want to take for the matched sensitive information. **Note**: Redaction, partial redaction, and hashing are all irreversible actions.
@@ -171,6 +192,8 @@ To control who can access logs containing sensitive data, use tags added by the 
 
 ### Redact sensitive data in tags
 
+{{< tabs >}}
+{{% tab "In the Cloud" %}}
 To redact sensitive data contained in tags, you must [remap][11] the tag to an attribute and then redact the attribute. Uncheck `Preserve source attribute` in the remapper processor so that the tag is not preserved during the remapping.
 
 To remap the tag to an attribute:
@@ -195,6 +218,11 @@ To redact the attribute:
 6. Select the action you want when there's a match.
 7. Optionally, add tags.
 8. Click **Add Rules**.
+{{% /tab %}}
+{{% tab "In the Agent" %}}
+This functionality is not available for Sensitive Data Scanner in the Agent.
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Out-of-the-box dashboard
 
