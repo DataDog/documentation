@@ -3770,16 +3770,21 @@ menu:
       parent: tests
       identifier: tests_auto_test_retries
       weight: 11
+    - name: Correlate Logs and Tests
+      url: tests/correlate_logs_and_tests
+      parent: tests
+      identifier: tests_correlate_logs_and_tests
+      weight: 12
     - name: Guides
       url: tests/guides/
       parent: tests
       identifier: tests_guides
-      weight: 12
+      weight: 13
     - name: Troubleshooting
       url: tests/troubleshooting/
       parent: tests
       identifier: tests_troubleshooting
-      weight: 13
+      weight: 14
     - name: Intelligent Test Runner
       url: intelligent_test_runner/
       pre: intelligent-test-runner
