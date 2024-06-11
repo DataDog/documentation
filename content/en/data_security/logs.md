@@ -37,7 +37,7 @@ As of version 6, the Agent can be configured to obfuscate specific patterns with
 
 ## HIPAA-enabled customers
 
-Datadog will sign a Business Associate Agreement (BAA) with customers that transmit protected health information (ePHI) via Datadog's [HIPAA eligible services][6].
+Datadog will sign a Business Associate Agreement (BAA) with customers that transmit protected health information (ePHI) through Datadog's [HIPAA-eligible services][6].
 
 These restrictions are imposed on customers who have signed Datadog's BAA:
 
