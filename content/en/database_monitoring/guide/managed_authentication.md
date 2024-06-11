@@ -148,7 +148,7 @@ GRANT rds_iam TO datadog;
 
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "EC2" %}}
 
 5. Create an IAM role and attach the IAM policy created in step 2 to the role.
 Replace `<YOUR_IAM_AUTH_DB_ROLE>` with the name of the IAM role and `<YOUR_IAM_AUTH_DB_POLICY_ARN>` with the ARN of the IAM policy.
