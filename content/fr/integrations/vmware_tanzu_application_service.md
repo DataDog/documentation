@@ -24,7 +24,7 @@ further_reading:
 integration_id: pivotal-platform
 integration_title: VMware Tanzu Application Service
 is_public: true
-kind: integration
+custom_kind: integration
 name: vmware_tanzu_application_service
 newhlevel: true
 public_title: Intégration Datadog/VMware Tanzu Application Service (Pivotal Cloud

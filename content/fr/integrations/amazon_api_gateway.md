@@ -38,7 +38,7 @@ integration_id: amazon-api-gateway
 integration_title: Amazon Api Gateway
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: amazon_api_gateway
 public_title: Intégration dʼAmazon Api Gateway
