@@ -31,7 +31,7 @@ integration_id: snmp-f5
 integration_title: F5 Networks
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: snmp_f5
 public_title: F5 Networks

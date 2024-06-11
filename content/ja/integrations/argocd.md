@@ -44,7 +44,7 @@ integration_id: argocd
 integration_title: Argo CD
 integration_version: 1.1.0
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: argocd
 public_title: Argo CD

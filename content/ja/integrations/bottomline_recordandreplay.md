@@ -34,7 +34,7 @@ integration_id: bottomline-recordandreplay
 integration_title: 'Bottomline の Record and Replay: Mainframe'
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: bottomline_recordandreplay
 public_title: 'Bottomline の Record and Replay: Mainframe'
