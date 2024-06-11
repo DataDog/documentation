@@ -48,6 +48,7 @@ To get started, see [Integrations](#integrations) and [use the API](#use-the-api
     {{< nextlink href="synthetics/cicd_integrations/github_actions" >}}GitHub Actions{{< /nextlink >}}
     {{< nextlink href="synthetics/cicd_integrations/gitlab" >}}GitLab{{< /nextlink >}}
     {{< nextlink href="synthetics/cicd_integrations/jenkins" >}}Jenkins{{< /nextlink >}}
+    {{< nextlink href="synthetics/cicd_integrations/bitrise_upload" >}}Bitrise{{< /nextlink >}}
     {{< nextlink href="synthetics/cicd_integrations/configuration" >}}NPM package{{< /nextlink >}}
 {{< /whatsnext >}}
 

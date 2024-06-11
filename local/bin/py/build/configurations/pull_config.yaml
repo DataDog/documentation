@@ -490,6 +490,34 @@
               aliases:
                 - /synthetics/cicd_integrations/circleci_orb
 
+      - repo_name: synthetics-test-automation-bitrise-step-upload-application
+        contents:
+        - action: pull-and-push-file
+          branch: main
+          globs:
+          - 'README.md'
+          options:
+            dest_path: '/continuous_testing/cicd_integrations/'
+            file_name: 'bitrise_upload.md'
+            front_matters:
+              dependencies: ["https://github.com/DataDog/synthetics-test-automation-bitrise-step-upload-application/blob/main/README.md"]
+              title: Continuous Testing and Bitrise
+              kind: documentation
+      
+      - repo_name: synthetics-test-automation-bitrise-step-run-tests
+        contents:
+        - action: pull-and-push-file
+          branch: main
+          globs:
+          - 'README.md'
+          options:
+            dest_path: '/continuous_testing/cicd_integrations/'
+            file_name: 'bitrise_run.md'
+            front_matters:
+              dependencies: ["https://github.com/DataDog/synthetics-test-automation-bitrise-step-run-tests/blob/main/README.md"]
+              title: Continuous Testing and Bitrise
+              kind: documentation
+
       - repo_name: datadog-cloudformation-resources
         contents:
         - action: pull-and-push-file
