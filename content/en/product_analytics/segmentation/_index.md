@@ -16,16 +16,16 @@ Segmentation is a feature in Product Analytics that allows you to analyze and un
 
 To create a new segment, navigate to **[Digital Experience Monitoring > Product Analytics > User Segments][1]** from the navigation. You have two sources you can choose from when building a new segment:
 
-- RUM data
+- Product Analytics data
 - External data (upload a Reference Table)
 
-{{< img src="product_analytics/segmentation/segmentation-1.png" alt="Create a user segment based on RUM or external data.">}}
+{{< img src="product_analytics/segmentation/segmentation-1.png" alt="Create a user segment based on Product Analytics or external data.">}}
 
-### Using RUM data
+### Using Product Analytics data
 
-To create a new segment using RUM data:
+To create a new segment using Product Analytics data:
 
-1. Choose the user attribute you want to connect your data with. In the below example, it is `usr.id`, but you can use any user attribute available, such as (`usr.email` or `usr.name`).
+1. Choose the user attribute you want to connect your data with. In the below example, it is `usr.id`, but you can use any user attribute available, such as `usr.email` or `usr.name`.
 
 2. Under the **Filter your segment** section, you can filter on any attribute collected by the SDK, or custom attributes you added to create a granular user segment.
 
@@ -41,15 +41,15 @@ To create a segment using external or third-party data:
 2. Make sure to properly connect the data type (for example, `usr.id`, `usr.name`, or `usr.email`) to the column name.
 3. For accuracy, ensure there is data in Product Analytics for users in the segment.
 
-## Use segments in the Analytics Explorer
+## Ways to leverage Segments across Product Analytics
 
-## Sankey
+### Sankey
 
 In the Sankey page, you can filter the data in the visualization to reflect a selected segment of users. This allows you to look at the experience and traffic patterns of a particular set of users in a given segment. The below example shows a Sankey diagram only for users in the "Premium users" segment.
 
 {{< img src="product_analytics/segmentation/segmentation-3.png" alt="Filter down the Sankey visualization to reflect a selected segment of users.">}}
 
-## Analytics Explorer
+### Analytics Explorer
 
 You can filter the data in the Analytics Explorer to reflect a selected set of users that are in a given segment. The example below shows a list of users in the "Premium users" segment who were active in the last month, organized by the number of sessions they had.
 
