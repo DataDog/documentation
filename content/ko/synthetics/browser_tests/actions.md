@@ -25,7 +25,7 @@ title: 브라우저 테스팅 단계
 
 페이지의 요소와 상호 작용하면 단계가 기록됩니다.
 
-{{< img src="synthetics/browser_tests/click_step.mp4" alt="Click type dropdown menu in the Click step type" video="true" width="60%" >}}
+{{< img src="synthetics/browser_tests/click_step.mp4" alt="단계 유형 클릭에서 유형 드롭다운 메뉴 클릭" video="true" width="60%" >}}
 
 단계를 클릭하고 실행 타임에서 브라우저 테스트를 수행할 클릭 유형을 선택합니다:
 
@@ -38,24 +38,24 @@ title: 브라우저 테스팅 단계
 
 Datadog은 `select` 드롭다운 메뉴에서 옵션을 선택하는 것과 같이 애플리케이션에서 수행하는 단계를 기록하며, 요약 내용이 단계로 표시됩니다.
 
-{{< img src="synthetics/browser_tests/input_text.mp4" alt="Browser Test Input Text Step" video="true" width="95%" >}}
+{{< img src="synthetics/browser_tests/input_text.mp4" alt="브라우저 테스트 입력 텍스트 단계" video="true" width="95%" >}}
 
 ### 옵션 선택
 
 Datadog은 `select` 드롭다운 메뉴에서 옵션을 선택하는 것과 같이 애플리케이션에서 수행하는 단계를 기록하며, 요약 내용은 왼쪽 코너에서 단계로 나타납니다.
 
-{{< img src="synthetics/browser_tests/select_options.png" alt="Select options step" style="width:70%;" >}}
+{{< img src="synthetics/browser_tests/select_options.png" alt="옵션 선택 단계" style="width:70%;" >}}
 
 ### 업로드 파일
 
-**Upload** 단계를 기록하려면, 다음 중 하나를 수행하세요:
+**업로드** 단계를 기록하려면, 다음 중 하나를 수행하세요:
 
 * 브라우저에서 데스크탑을 여세요
 * 기록할 iframe에 파일을 끌어다 놓으세요
 
 Datadog은 업로드와 같이 애플리케이션에서 수행하는 단계를 기록하고, 요약 내용은 왼쪽 코너에 단계로 나타납니다. 최대 10개의 파일을 업로드할 수 있으며 각각 5MB의 제한이 있습니다.
 
-{{< img src="synthetics/browser_tests/upload_file_step.png" alt="Create an upload file step" style="width:70%;" >}}
+{{< img src="synthetics/browser_tests/upload_file_step.png" alt="업로드 파일 생성 단계" style="width:70%;" >}}
 
 ## 수동으로 추가된 단계
 
@@ -132,9 +132,9 @@ Datadog은 더 나은 정확도를 위해 위에 나열된 두 가지 어설션�
 
 * `vars`(선택 사항): 브라우저 테스트의 [변수][2]를 포함하는 문자열입니다. 자바스크립트 스니펫에서 브라우저 테스트 변수를 참조하려면 `vars.<YOUR_VARIABLE>`를 사용하세요. 예를 들어, 브라우저 테스트에 `USERNAME` 변수가 포함된 경우 `vars.USERNAME`를 사용하여 자바스크립트 스니펫에서 호출합니다.
 
-* `element`  (선택 사항): 페이지의 요소 로케이터. 이를 설정하려면 **Select** 및 **Update** 대상 요소 버튼을 사용합니다. 선택한 요소는 Datadog 브라우저 테스트의 다중 배치 알고리즘을 자동으로 사용합니다.
+* `element`  (선택 사항): 페이지의 요소 로케이터. 이를 설정하려면 **선택** 및 **업데이트** 대상 요소 버튼을 사용합니다. 선택한 요소는 Datadog 브라우저 테스트의 다중 배치 알고리즘을 자동으로 사용합니다.
 
-{{< img src="synthetics/browser_tests/js_assertion.mp4" alt="Browser Test 자바스크립트 Assertion" video="true" width="100%" >}}
+{{< img src="synthetics/browser_tests/js_assertion.mp4" alt="브라우저 테스트 자바스크립트 어서션" video="true" width="100%" >}}
 
 자바스크립트 어설션은 활성 페이지의 컨텍스트에서 실행되므로, 이러한 단계에서는 활성 페이지에 정의된 모든 개체(예: 라이브러리, 내장 및 글로벌 변수)에 액세스할 수 있습니다. 외부 라이브러리를 로드하려면 promise를 사용하세요.
 
@@ -184,11 +184,11 @@ return jQuery().jquery.startsWith('3.5.1')
 
 이 내비게이션 단계를 만들어 브라우저 테스트가 특정 페이지로 이동하도록 합니다. **Enter link URL** 상자에서 URL 앞에 `http` 또는 `https`를 추가해야 합니다.
 
-### 특별 조치
+### 특별 작업
 
 [Datadog 브라우저 테스트 레코더 확장 프로그램][3]을 사용하여 사용자 여정과 관련된 대부분의 단계를 기록하고 모니터링할 수 있습니다. 그러나 확장 프로그램은 **커서 올리기(Hover)**, **키 누르기(Press Key)**, **스크롤(Scroll)** 및 **대기(Wait)**와 같은 일부 단계를 자동으로 기록하지 않습니다.
 
-**Special Actions**를 클릭하고 작업 유형을 선택하여 이 어설션 단계를 수동으로 생성합니다.
+**특별 작업**를 클릭하고 작업 유형을 선택하여 이 어설션 단계를 수동으로 생성합니다.
 
 #### 커서 올리기
 
@@ -206,11 +206,11 @@ return jQuery().jquery.startsWith('3.5.1')
 * 이스케이프
 * 백스페이스
 
-자동으로 기록되지 않는 키를 누르려면, **Value** 필드에 눌러야 하는 값을 지정합니다.
+자동으로 기록되지 않는 키를 누르려면, **값** 필드에 눌러야 하는 값을 지정합니다.
 
 `Alt`, `Control`, `Meta`, `Shift` 모디파이어를 선택하여 입력된 값에 추가합니다.
 
-{{< img src="synthetics/browser_tests/browser_test_press_key.png" alt="Press Key step in a browser test recording" style="width:50%;" >}}
+{{< img src="synthetics/browser_tests/browser_test_press_key.png" alt="브라우저 테스트 레코딩에서 키 누르기 단계" style="width:50%;" >}}
 
 #### 스크롤
 
@@ -228,15 +228,15 @@ return jQuery().jquery.startsWith('3.5.1')
 
 페이지 또는 페이지 요소를 로드하는 데 60초 이상 걸리는 경우, 단계의 [고급 옵션][2]에서 시간 제한을 사용자 지정하거나 최대값이 300초인 하드코딩된 대기 단계를 추가할 수 있습니다.
 
-{{< img src="synthetics/browser_tests/browser_test_wait_step.png" alt="Wait step in a browser test recording" style="width:50%;" >}}
+{{< img src="synthetics/browser_tests/browser_test_wait_step.png" alt="브라우저 테스트 레코딩에서 대기 단계" style="width:50%;" >}}
 
 이 추가 시간은 브라우저 테스트 기록의 **모든 실행**에 체계적으로 추가됩니다.
 
 ### 변수
 
-**Variables**를 클릭하고 드롭다운 메뉴에서 변수 생성 유형을 선택합니다.
+**변수**를 클릭하고 드롭다운 메뉴에서 변수 생성 유형을 선택합니다.
 
-{{< img src="synthetics/browser_tests/variables.png" alt="Browser Test Variables" style="width:60%;" >}}
+{{< img src="synthetics/browser_tests/variables.png" alt="브라우저 테스트 변수" style="width:60%;" >}}
 
 단계 내에서 변수를 사용하는 방법을 알아보려면 [변수 사용](#use-variables)을 참조하세요.
 
