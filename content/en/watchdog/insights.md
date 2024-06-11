@@ -44,6 +44,7 @@ The Watchdog Insights carousel sits near the top of the following product pages:
     - [Serverless Explorer][8]
     - [Kubernetes Explorer][9]
 - [Real User Monitoring (RUM) Explorer][10]
+- [Synthetic Monitoring & Testing Explorer][14]
 - [Error Tracking issue side panel][13]
 
 Expand the carousel for an overview. The highest priority insights (based on `Insight type`, `State`, `Status`, `Start time`, `Anomaly type`) appear on the left.
@@ -319,3 +320,4 @@ For Kubernetes Explorer, the Watchdog Insight carousel reflects [all the Kuberne
 [11]: /watchdog/#overview
 [12]: https://app.datadoghq.com/watchdog
 [13]: https://app.datadoghq.com/rum/error-tracking
+[14]: https://app.datadoghq.com/synthetics/explorer
