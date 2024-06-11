@@ -100,7 +100,7 @@ To set up a scanning group, perform the following steps.
 
 1. Navigate to the [Sensitive Data Scanner in the Agent][1] configuration page.
 1. Click **Add scanning group**. Alternatively, click the **Add** dropdown menu on the top right corner of the page and select **Add Scanning Group**.
-1. Enter a query filter for the data you want to scan. You can use only host-level tags for matching agents. At the bottom, the number of matching and eligible agents is displayed, including the total number of all agents that the tag matches.
+1. Enter a query filter for the data you want to scan. You can use only host-level tags for matching agents. At the bottom, the number of matching and eligible agents is displayed, including the total number out of all agents that the tag matches.
 1. Enter a name and description for the group.
 1. Click **Save**.
 
