@@ -57,12 +57,63 @@ Select the cloud provider you are using to archive your logs.
 
 {{% collapse-content title="Google Cloud Storage" level="h2" %}}
 
-TKTK
+{{% observability_pipelines/configure_log_archive/google_cloud_storage/instructions %}}
+
+{{< tabs >}}
+{{% tab "Docker" %}}
+
+{{% observability_pipelines/configure_log_archive/google_cloud_storage/docker %}}
+
+{{% /tab %}}
+{{% tab "Google GKE" %}}
+
+{{% observability_pipelines/configure_log_archive/google_cloud_storage/google_gke %}}
+
+{{% /tab %}}
+{{% tab "Linux (APT)" %}}
+
+{{% observability_pipelines/configure_log_archive/google_cloud_storage/linux_apt %}}
+
+{{% /tab %}}
+{{% tab "Linux (RPM)" %}}
+
+{{% observability_pipelines/configure_log_archive/google_cloud_storage/linux_rpm %}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
+{{% observability_pipelines/configure_log_archive/google_cloud_storage/connect_datadog_log_archives %}}
 
 {{% /collapse-content %}}
 {{% collapse-content title="Azure Storage" level="h2" %}}
 
-TKTK
+{{% observability_pipelines/configure_log_archive/azure_storage/instructions %}}
+
+{{< tabs >}}
+{{% tab "Docker" %}}
+
+{{% observability_pipelines/configure_log_archive/azure_storage/docker %}}
+
+{{% /tab %}}
+{{% tab "Azure AKS" %}}
+
+{{% observability_pipelines/configure_log_archive/azure_storage/azure_aks %}}
+
+{{% /tab %}}
+{{% tab "Linux (APT)" %}}
+
+{{% observability_pipelines/configure_log_archive/azure_storage/linux_apt %}}
+
+{{% /tab %}}
+{{% tab "Linux (RPM)" %}}
+
+{{% observability_pipelines/configure_log_archive/azure_storage/linux_rpm %}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
+{{% observability_pipelines/configure_log_archive/azure_storage/connect_datadog_log_archives %}}
+
 
 {{% /collapse-content %}}
 
@@ -89,13 +140,9 @@ Follow the instructions for the cloud provider you are using to archive your log
 
 {{% observability_pipelines/destination_settings/datadog_archives_amazon_s3 %}}
 
-#### Google Cloud Storage
+{{% observability_pipelines/destination_settings/datadog_archives_google_cloud_storage %}}
 
-TKTK
-
-#### Azure Storage
-
-TKTK
+{{% observability_pipelines/destination_settings/datadog_archives_azure_storage %}}
 
 {{% /tab %}}
 {{% tab "Datadog" %}}
@@ -165,13 +212,9 @@ TKTK
 
 {{% observability_pipelines/destination_env_vars/datadog_archives_amazon_s3 %}}
 
-#### Google Cloud Storage
+{{% observability_pipelines/destination_env_vars/datadog_archives_google_cloud_storage %}}
 
-TKTK
-
-#### Azure Storage
-
-TKTK
+{{% observability_pipelines/destination_env_vars/datadog_archives_azure_storage %}}
 
 {{% /tab %}}
 {{% tab "Datadog" %}}
