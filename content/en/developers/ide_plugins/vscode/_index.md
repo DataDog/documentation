@@ -200,5 +200,5 @@ Check out the [issues][27] section to discover known issues.
 [24]: https://www.datadoghq.com/legal/privacy/
 [25]: https://code.visualstudio.com/docs/getstarted/telemetry#_output-channel-for-telemetry-events
 [26]: https://github.com/DataDog/datadog-for-vscode
-[27]: https://github.com/DataDog/datadog-for-vscode/issues?q=is%3Aissue
+[27]: https://github.com/DataDog/datadog-for-vscode/issues?q=is%3Aissue+label%3A%22known+issue%22
 [28]: https://docs.datadoghq.com/logs/explorer/
