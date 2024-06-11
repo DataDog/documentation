@@ -49,7 +49,7 @@ It packs several features, including:
 
 - **A Datadog account**: The extension requires a Datadog account (except when using [Static Analysis][14] features). If you're new to Datadog, go to the [Datadog website][datadog] to learn more about Datadog's observability tools and sign up for a free trial.
 
-- **VS Code Git**: The extension works better when VS Code Git integration is enabled. You can make sure that the integration is enabled by looking into the `git.enabled` setting.
+- **VS Code Git**: The extension works better when VS Code Git integration is enabled. You can ensure that the integration is enabled by checking the `git.enabled` setting.
 
 ## Setup
 
