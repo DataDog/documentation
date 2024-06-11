@@ -86,9 +86,9 @@ Les monitors de live processes reposent sur une [période mobile][7] pour l'éva
 
 Pour obtenir des instructions détaillées concernant les options d'alerte avancées (résolution automatique, délai d'évaluation, etc.), consultez la documentation relative à la [configuration des monitors][5].
 
-### Section Notifications
+### Notifications
 
-Pour obtenir des instructions détaillées sur l'utilisation des sections **Say what's happening** et **Notify your team**, consultez la page [Notifications][6].
+Pour obtenir des instructions détaillées sur l'utilisation de la section **Configurer des notifications et des automatisations**, consultez la page [Notifications][6].
 
 ## Pour aller plus loin
 
