@@ -151,11 +151,10 @@ GRANT rds_iam TO datadog;
 {{% tab "EC2" %}}
 
 5. Create an IAM role and attach the IAM policy created in step 2 to the role.
-Replace `<YOUR_IAM_AUTH_DB_ROLE>` with the name of the IAM role and `<YOUR_IAM_AUTH_DB_POLICY_ARN>` with the ARN of the IAM policy.
-Attach the role to the EC2 instance where the Agent is running. For more information, see [IAM roles for Amazon EC2][1].
 
 ```bash
 # Create an IAM role for EC2 instance
+# Replace `<YOUR_IAM_AUTH_DB_ROLE>` with the name of the IAM role
 aws iam create-role --role-name <YOUR_IAM_AUTH_DB_ROLE> --assume-role-policy-document '{
   "Version": "2012-10-17",
   "Statement": [
@@ -170,8 +169,11 @@ aws iam create-role --role-name <YOUR_IAM_AUTH_DB_ROLE> --assume-role-policy-doc
 }'
 
 # Attach the IAM policy to the IAM role
+# Replace `<YOUR_IAM_AUTH_DB_POLICY_ARN>` with the ARN of the IAM policy from step 2
 aws iam attach-role-policy --role-name <YOUR_IAM_AUTH_DB_ROLE> --policy-arn <YOUR_IAM_AUTH_DB_POLICY_ARN>
 ```
+
+Attach the IAM role to the EC2 instance where the Agent is running. For more information, see [IAM roles for Amazon EC2][1].
 
 [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html
 
@@ -179,11 +181,10 @@ aws iam attach-role-policy --role-name <YOUR_IAM_AUTH_DB_ROLE> --policy-arn <YOU
 {{% tab "ECS Fargate" %}}
 
 5. Create an IAM role and attach the IAM policy created in step 2 to the role.
-Replace `<YOUR_IAM_AUTH_DB_ROLE>` with the name of the IAM role and `<YOUR_IAM_AUTH_DB_POLICY_ARN>` with the ARN of the IAM policy.
-In the ECS task definition, attach the IAM role to the task role where the Agent container is defined. For more information, see [IAM roles for Amazon ECS][1].
 
 ```bash
 # Create an IAM role for ECS task
+# Replace `<YOUR_IAM_AUTH_DB_ROLE>` with the name of the IAM role
 aws iam create-role --role-name <YOUR_IAM_AUTH_DB_ROLE> --assume-role-policy-document '{
   "Version": "2012-10-17",
   "Statement": [
@@ -198,8 +199,11 @@ aws iam create-role --role-name <YOUR_IAM_AUTH_DB_ROLE> --assume-role-policy-doc
 }'
 
 # Attach the IAM policy to the IAM role
+# Replace `<YOUR_IAM_AUTH_DB_POLICY_ARN>` with the ARN of the IAM policy from step 2
 aws iam attach-role-policy --role-name <YOUR_IAM_AUTH_DB_ROLE> --policy-arn <YOUR_IAM_AUTH_DB_POLICY_ARN>
 ```
+
+In the ECS task definition, attach the IAM role to the task role where the Agent container is defined. For more information, see [IAM roles for Amazon ECS][1].
 
 [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-iam-roles.html
 
@@ -207,19 +211,19 @@ aws iam attach-role-policy --role-name <YOUR_IAM_AUTH_DB_ROLE> --policy-arn <YOU
 {{% tab "EKS" %}}
 
 5. Create an IAM role and attach the IAM policy created in step 2 to the role.
-Replace `<YOUR_ESK_REGION>` and `<YOUR_ESK_CLUSTER>` with the region and name of your ESK cluster.
-Replace `<YOUR_IAM_AUTH_DB_POLICY_ARN>` with the ARN of the IAM policy.
-Replace `<YOUR_IAM_AUTH_SERVICE_ACCOUNT>` and `<YOUR_IAM_AUTH_SERVICE_ACCOUNT_NAMESPACE>` with the name and namespace of the service account.
 Map the IAM role to the Kubernetes service account where the Agent is running. For more information, see [IAM roles for Amazon EKS service account][1].
 
 ```bash
 # Create an IAM OIDC provider for your cluster
+# Replace `<YOUR_ESK_REGION>` and `<YOUR_ESK_CLUSTER>` with the region and name of your ESK cluster
 $ eksctl utils associate-iam-oidc-provider \
   --region=<YOUR_ESK_REGION> \
   --cluster=<YOUR_ESK_CLUSTER> \
   --approve
 
 # Create a service account
+# Replace `<YOUR_IAM_AUTH_DB_POLICY_ARN>` with the ARN of the IAM policy from step 2
+# Replace `<YOUR_IAM_AUTH_SERVICE_ACCOUNT>` and `<YOUR_IAM_AUTH_SERVICE_ACCOUNT_NAMESPACE>` with the name and namespace of the service account.
 $ eksctl create iamserviceaccount \
   --cluster <YOUR_ESK_CLUSTER> \
   --name <YOUR_IAM_AUTH_SERVICE_ACCOUNT> \
