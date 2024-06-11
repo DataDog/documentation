@@ -82,7 +82,7 @@
       contents:
 
       - action: integrations
-        branch: kisung/preview-changes-to-eks-fargatekisung/adding_eks_fargate_sidecar_injection_for_operator
+        branch: kisung/adding_eks_fargate_sidecar_injection_for_operator
         globs:
         - integration/*/*_metadata.csv
         - integration/*/manifest.json
