@@ -6238,7 +6238,7 @@ components:
           type: string
         finished_at:
           description: Unix timestamp in nanoseconds when the incident finished. It
-            should not be older than 3 hours.
+            should not be older than 1 hour.
           example: 1693491984000000000
           format: int64
           type: integer
