@@ -58,7 +58,7 @@ AWS supports IAM authentication to RDS and Aurora databases. In order to configu
 }
 ```
 
-For example, if you wanted to use the `datadog` user, you would use the following resource ARN:
+For example, if you want to use the `datadog` user, use the following resource ARN:
 
 ```json
 {
