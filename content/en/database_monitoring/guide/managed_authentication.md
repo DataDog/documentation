@@ -180,7 +180,7 @@ aws iam attach-role-policy --role-name <YOUR_IAM_AUTH_DB_ROLE> --policy-arn <YOU
 
 5. Create an IAM role and attach the IAM policy created in step 2 to the role.
 Replace `<YOUR_IAM_AUTH_DB_ROLE>` with the name of the IAM role and `<YOUR_IAM_AUTH_DB_POLICY_ARN>` with the ARN of the IAM policy.
-Attach the role to the ECS task role in task definition where the Agent is running. For more information, see [IAM roles for Amazon ECS][1].
+In the ECS task definition, attach the IAM role to the task role where the Agent container is defined. For more information, see [IAM roles for Amazon ECS][1].
 
 ```bash
 # Create an IAM role for ECS task
