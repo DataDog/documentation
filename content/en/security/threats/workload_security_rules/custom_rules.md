@@ -59,7 +59,7 @@ To use the simple rule creator:
    
    Here's an example of a new FIM rule, including the expressions generated for each rule.
 
-    {{< img src="/security/csm/csm_threats_simple_rule_creator.png" alt="Assisted rule creator example" style="width:100%;" >}}
+    {{< img src="/security/csm/csm_threats_simple_rule_creator2.png" alt="Assisted rule creator example" style="width:100%;" >}}
 
 6. Select **Create _N_ Rules**.
 7. In **Generate Rules**, select **Confirm**. The rules are generated.
