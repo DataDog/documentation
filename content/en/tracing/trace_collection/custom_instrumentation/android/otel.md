@@ -528,7 +528,7 @@ final Request:request = new Request.Builder()
 [2]: https://github.com/DataDog/dd-sdk-android/tree/develop/features/dd-sdk-android-trace-otel
 [3]: https://app.datadoghq.com/rum/application/create
 [4]: /account_management/api-app-keys/#client-tokens
-[5]: https://docs.datadoghq.com/account_management/api-app-keys/#api-keys
+[5]: /account_management/api-app-keys/#api-keys
 [6]: /real_user_monitoring/mobile_and_tv_monitoring/troubleshooting/#set-tracking-consent-gdpr-compliance
 [7]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/#initialization-parameters
 [8]: https://opentelemetry.io/docs/concepts/signals/traces/#span-links
