@@ -160,7 +160,7 @@ Please read this [End-User License Agreement][23] carefully before downloading o
 
 Datadog anonymously collects information about your usage of this IDE, including how you interact with it, whether errors occurred while using it, and what caused those errors, in accordance with the [Datadog Privacy Policy][24] and Datadog's [VS Code extension EULA][23].
 
-If you don't wish to send this data to [Datadog][2], you can opt out at any time in the extension settings: `Datadog > Telemetry > Setup > Enable Telemetry`.
+If you don't wish to send this data to [Datadog][2], you can opt out at any time in the VS Code extension settings: `Datadog > Telemetry > Setup > Enable Telemetry` and select `disabled`.
 
 <div class="alert alert-info">The Datadog extension also honors the <a href="https://code.visualstudio.com/docs/getstarted/telemetry#_output-channel-for-telemetry-events">VS Code telemetry</a> telemetry setting.</div>
 
