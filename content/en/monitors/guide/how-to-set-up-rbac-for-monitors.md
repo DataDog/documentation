@@ -8,7 +8,7 @@ further_reading:
 - link: "/api/latest/monitors/#create-a-monitor"
   tag: "Documentation"
   text: "Learn more about creating restricted monitors via API"
-- link: "/monitors/configure/#permissions"
+- link: "/monitors/configuration/#permissions"
   tag: "Documentation"
   text: "Learn more about creating restricted monitors via the UI"
 ---
@@ -36,7 +36,7 @@ For more information about default and custom roles, how to create custom roles,
 
 For more information, see [Monitors Permissions][1].
 
-[1]: /monitors/configure/#permissions
+[1]: /monitors/configuration/#permissions
 {{% /tab %}}
 
 {{% tab "API" %}}

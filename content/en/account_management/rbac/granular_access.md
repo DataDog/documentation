@@ -28,7 +28,7 @@ A user with the `user_access_manage` permission can elevate their access to any 
 
 [1]: /account_management/teams/
 [2]: /dashboards/configure/#permissions
-[3]: /monitors/configure/#permissions
+[3]: /monitors/configuration/#permissions
 [4]: /notebooks/#limit-edit-access
 [5]: /security/detection_rules/#limit-edit-access
 [6]: /service_management/service_level_objectives/#permissions

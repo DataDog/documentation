@@ -23,7 +23,7 @@ To start configuring the monitor, complete the following:
 * **Define the search query:** Construct a query to count events, measure metrics, group by one or several dimensions, and more.
 * **Set alert conditions:** Define alert and warning thresholds , evaluation time frames, and configure advanced alert options.
 * **Configure notifications and automations:** Write a custom notification title and message with variables. Choose how notifications are sent to your teams (email, Slack, or PagerDuty). Include workflow automations or cases in the alert notification.
-* **Define permissions and audit notifications:** Configure granular access controls and designate specific roles and user who can edit a monitor. Enable audit notifications to alert if a monitor is modified.
+* **Define permissions and audit notifications:** Configure granular access controls and designate specific roles and users who can edit a monitor. Enable audit notifications to alert if a monitor is modified.
 
 ## Define the search query
 
@@ -325,7 +325,7 @@ Use [granular access controls][16] to limit the roles that can edit a monitor:
 **Note:** To maintain your edit access to the monitor, the system requires you to include at least one role that you are a member of before saving. For more information about roles, see the [RBAC documentation][15].
 
 To restore general access to a monitor with restricted access, follow the steps below:
-1. While viewing a monitor, click the **More** dropdown menu
+1. While viewing a monitor, click the **More** dropdown menu.
 1. Select **Permissions**.
 1. Click **Restore Full Access**.
 1. Click **Save**.
