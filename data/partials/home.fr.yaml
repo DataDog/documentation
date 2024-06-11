@@ -14,7 +14,7 @@ guides:
   link: getting_started/application/
   link_text: Débuter avec Datadog
   title: Débuter avec Datadog
-heading: Bienvenue dans la documentation de Datadog !
+heading: Welcome to Datadog Docs!
 nav_sections:
 - nav_section:
   - name: Services de plateformes
