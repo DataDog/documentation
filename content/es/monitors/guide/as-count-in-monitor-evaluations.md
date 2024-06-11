@@ -7,7 +7,7 @@ title: Evaluaciones as_count() en monitores
 
 ## Información general
 
-Las consultas que utilizan modificadores **`as_count()`** y **`as_rate()`** se calculan de formas que pueden producir resultados diferentes en las evaluaciones de monitores. Los monitores que incluyen aritmética y al menos 1 modificador **`as_count()`** utilizan una ruta de evaluación independiente que cambia el orden en el que se realizan la aritmética y la agregación temporal.
+Las consultas que utilizan modificadores **`as_count()`** y **`as_rate()`** se calculan de formas que pueden producir resultados diferentes en las evaluaciones de monitores. Los monitores que incluyen la aritmética y al menos 1 modificador **`as_count()`** utilizan una ruta de evaluación independiente que cambia el orden en el que se realizan la aritmética y la agregación temporal.
 
 ## Ejemplo de tasa de error
 
@@ -60,13 +60,13 @@ Compara el resultado de la evaluación en función de la ruta:
 
 Fíjate que las dos evaluaciones anteriores son matemáticamente correctas. Elige el método que mejor se adapte a tus intenciones.
 
-Puede ser útil visualizar el **`classic_eval_path`** como:
+Puede ser útil visualizar la **`classic_eval_path`** como:
 
 ```text
 sum(last_5m):error/total
 ```
 
-Y el **`as_count_eval_path`** como:
+Y la **`as_count_eval_path`** como:
 
 ```text
 sum(last_5m):error
