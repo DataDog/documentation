@@ -25,7 +25,7 @@ This document describes how to access and configure Domain Allowlist through the
 Return the Domain Allowlist and its enabled or disabled state.
 
 <span style="padding:3px" class="font-semibold text-api-get bg-bg-api-get">GET</span>
-https://{datadog_site}/api/v2/domain_allowlist?api_key={datadog_api_key}&application_key={datadog_application_key}
+https://api.datadoghq.com/api/v2/domain_allowlist
 
 ### Request
 
@@ -114,7 +114,7 @@ Too many requests
 Enable/disable Domain Allowlist and rewrite the entire allowlist with a given list of email domains.
 
 <span style="padding:3px" class="font-semibold text-api-get bg-bg-api-get">PATCH</span>
-https://{datadog_site}/api/v2/domain_allowlist?api_key={datadog_api_key}&application_key={datadog_application_key}
+https://api.datadoghq.com/api/v2/domain_allowlist
 
 ### Request
 
