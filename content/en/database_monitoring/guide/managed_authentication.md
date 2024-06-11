@@ -37,7 +37,7 @@ AWS supports IAM authentication to RDS and Aurora databases. In order to configu
 
 
 1. Turn on IAM authentication on your [RDS][3] or [Aurora][4] instance.
-2. Create an IAM policy for DB authentication, replacing `<YOUR_IAM_AUTH_DB_USER>` with the local database user in the IAM policy document:
+2. Create an IAM policy for DB authentication. Replace `<YOUR_IAM_AUTH_DB_USER>` with the local database user in the IAM policy document:
 {{< tabs >}}
 {{% tab "RDS" %}}
 
