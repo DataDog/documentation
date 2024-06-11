@@ -242,6 +242,29 @@ In the full side panel, you can see a timeseries graph about the performance met
 [2]: /real_user_monitoring/browser/monitoring_page_performance/#event-timings-and-core-web-vitals
 [3]: /real_user_monitoring/browser/monitoring_page_performance/#monitoring-single-page-applications-spa
 {{% /tab %}}
+{{% tab "Synthetic Monitoring" %}}
+
+<div class="alert alert-warning">Error Outliers for Synthetic Monitoring is in public beta.</div>
+
+### Error outlier
+
+Error outliers in Synthetic Monitoring display anomalies like unexpected behavior or deviations from expected performance metrics. These anomalies provide insights into potential issues affecting the reliability and performance of your [Synthetic browser tests][101].
+
+Typical examples of error outliers include `Test Location:US-West`, `Browser:Chrome`, and `Page Load Time > 5 seconds`.
+
+In the banner card view, you can see:
+
+* The field name
+* The proportion of total errors and overall RUM events that the field contributes to
+* Related tags
+
+In the full side panel, you can see a timeseries graph about the total number of RUM errors with the field, along with impact pie charts and a list of RUM events that contain the field.
+
+// Add screenshot
+
+[101]: /synthetics/browser_tests
+
+{{% /tab %}}
 {{% tab "Serverless" %}}
 
 For serverless infrastructures, Watchdog surfaces the following insights:
