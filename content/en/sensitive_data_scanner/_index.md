@@ -214,11 +214,11 @@ To control who can access logs containing sensitive data, use tags added by the 
 
 {{< tabs >}}
 {{% tab "In the Cloud" %}}
-To redact sensitive data contained in tags, you must [remap][11] the tag to an attribute and then redact the attribute. Uncheck `Preserve source attribute` in the remapper processor so that the tag is not preserved during the remapping.
+To redact sensitive data contained in tags, you must [remap][2] the tag to an attribute and then redact the attribute. Uncheck `Preserve source attribute` in the remapper processor so that the tag is not preserved during the remapping.
 
 To remap the tag to an attribute:
 
-1. Navigate to your [log pipeline][12].
+1. Navigate to your [log pipeline][3].
 2. Click **Add Processor**.
 3. Select **Remapper** in the processor type dropdown menu.
 4. Name the processor.
@@ -230,7 +230,7 @@ To remap the tag to an attribute:
 
 To redact the attribute:
 
-1. Navigate to your [scanning group][6].
+1. Navigate to your [scanning group][1].
 2. Click **Add Scanning Rule**.
 3. Check the library rules you want to use.
 4. Select **Specific Attributes** for **Scan entire event or portion of it**.
@@ -238,6 +238,10 @@ To redact the attribute:
 6. Select the action you want when there's a match.
 7. Optionally, add tags.
 8. Click **Add Rules**.
+
+[1]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner/configuration
+[2]: /logs/log_configuration/processors/?tab=ui#remapper
+[3]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
 {{% tab "In the Agent" %}}
 This functionality is not available for Sensitive Data Scanner in the Agent.
