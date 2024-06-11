@@ -106,8 +106,7 @@ LLMObs.enable(
 
 #### Application naming guidelines
 
-Your application name (the value of `DD_LLMOBS_ML_APP`) must start with a letter. It may contain the characters listed below:
-
+Your application name (the value of `DD_LLMOBS_ML_APP`) must start with a letter and must be all *lowercase* unicode strings. It can also contain the characters listed below:
 - Alphanumerics
 - Underscores
 - Minuses
@@ -115,7 +114,7 @@ Your application name (the value of `DD_LLMOBS_ML_APP`) must start with a letter
 - Periods
 - Slashes
 
-The name can be up to 200 characters long and contain Unicode letters (which includes most character sets, including languages such as Japanese).
+The name can be up to 193 characters long and contain Unicode letters (which includes most character sets, including languages such as Japanese).
 
 ## Tracing spans
 
