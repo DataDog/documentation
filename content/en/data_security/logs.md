@@ -82,3 +82,4 @@ All log submission endpoints are encrypted. These legacy endpoints are still sup
 [3]: /agent/logs/advanced_log_collection/#filter-logs
 [4]: /agent/logs/advanced_log_collection/#scrub-sensitive-data-from-your-logs
 [5]: /logs/explorer/#share-views
+[6]: https://www.datadoghq.com/legal/hipaa-eligible-services/
