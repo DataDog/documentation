@@ -44,9 +44,9 @@ This document walks you through the following:
 
 There are two locations where you can redact your sensitive data:
 
-- In the Cloud:
+- In the cloud:
     - With **Sensitive Data Scanner in the Cloud**, you submit your logs in the Datadog backend. In this method, logs leave your premises before they are redacted. You can have multiple scanning groups per organization, and you can create custom scanning rules. You can also redact sensitive data in tags.
-- In your infrastructure:
+- In your environment:
     - With **Sensitive Data Scanner through the Agent**, Datadog redacts your logs before submitting them to the Datadog backend, and unredacted logs never need to leave your premises. With this method, you are limited to one scanning group per organization, and you can use only predefined library rules.
     - Another way to redact your sensitive data in your environment before shipping to your downstream destinations is using [Observability Pipelines][14].
 
