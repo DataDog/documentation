@@ -50,7 +50,7 @@ For an Ubuntu host:
 4. Restart the services on the host or VM.
 5. [Explore the performance observability of your services in Datadog][5].
 
-**Note:** To configure single-step for both Code Security and Threat Protection, add the environment variables `DD_IAST_ENABLED=true` _and_ `DD_APPSEC_ENABLED=true` to your one-line installation command; respectively.
+**Note:** To configure single-step for **both** Code Security and Threat Protection, add **both** the `DD_IAST_ENABLED=true` _and_ `DD_APPSEC_ENABLED=true` environment variables to your one-line installation command.
 
 ### Specifying tracing library versions {#lib-linux}
 
