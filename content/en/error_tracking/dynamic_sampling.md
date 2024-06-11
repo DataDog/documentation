@@ -29,11 +29,6 @@ For best results, set up a daily rate limit on the [Error Tracking Rate Limits p
 
 {{< img src="error_tracking/dynamic-sampling-rate-limit.png" alt="Error Tracking Rate Limit" style="width:90%" >}}
 
-## Disable Dynamic Sampling
-
-Dynamic Sampling can be disabled on the [Error Tracking Settings page][4].
-
-
 ## Monitor Dynamic Sampling
 
 A `Dynamic Sampling activated` event is generated when Dynamic Sampling is applied to an issue. See the [Event Management documentation][1] for details on viewing and using events.
