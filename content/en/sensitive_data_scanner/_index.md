@@ -22,10 +22,6 @@ further_reading:
       text: "Best practices for sensitive data management"
 ---
 
-{{< callout url="https://google.com" >}}
-  Sensitive Data Scanner in the Agent is currently in private beta. To request access, full out this form.
-{{< /callout >}} 
-
 ## Overview
 
 Sensitive data, such as credit card numbers, bank routing numbers, and API keys are often exposed unintentionally in application logs, APM spans, and RUM events, which can expose your organization to financial and privacy risks.
@@ -45,6 +41,10 @@ This document walks you through the following:
 {{< img src="sensitive_data_scanner/sds_main_12_01_24.png" alt="The Sensitive Data Scanner page showing six out of the 12 active scanning groups" style="width:90%;">}}
 
 ## Set up Sensitive Data Scanner
+<br>
+{{< callout url="https://google.com" >}}
+  Sensitive Data Scanner in the Agent is currently in private beta. To request access, full out this form.
+{{< /callout >}} 
 
 There are two locations where you can redact your sensitive data:
 
