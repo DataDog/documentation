@@ -1,630 +1,629 @@
----
 - config:
-    cache_enabled: true
+    cache_enabled: false
 
 - data:
-    - org_name: jenkinsci
+  - org_name: jenkinsci
 
-      repos:
-      - repo_name: datadog-plugin
+    repos:
+    - repo_name: datadog-plugin
 
-        contents:
+      contents:
 
-        - action: pull-and-push-file
-          branch: master
-          globs:
-          - README.md
-          options:
-            dest_path: '/integrations/'
-            file_name: 'jenkins.md'
-            front_matters:
-              dependencies: ["https://github.com/jenkinsci/datadog-plugin/blob/master/README.md"]
-              public_title: Datadog-Jenkins Integration
-              kind: integration
-              name: jenkins
-              is_public: true
-              integration_title: Jenkins
-              has_logo: true
-              git_integration_title: jenkins
-              description: "Automatically forward your Jenkins metrics, events, and service checks to Datadog."
-              short_description: "Automatically forward your Jenkins metrics, events, and service checks to Datadog."
-              categories:
-                - "configuration & deployment"
-              doc_link: https://docs.datadoghq.com/integrations/jenkins/
+      - action: pull-and-push-file
+        branch: master
+        globs:
+        - README.md
+        options:
+          dest_path: '/integrations/'
+          file_name: 'jenkins.md'
+          front_matters:
+            dependencies: ["https://github.com/jenkinsci/datadog-plugin/blob/master/README.md"]
+            public_title: Datadog-Jenkins Integration
+            kind: integration
+            name: jenkins
+            is_public: true
+            integration_title: Jenkins
+            has_logo: true
+            git_integration_title: jenkins
+            description: "Automatically forward your Jenkins metrics, events, and service checks to Datadog."
+            short_description: "Automatically forward your Jenkins metrics, events, and service checks to Datadog."
+            categories:
+            - "configuration & deployment"
+            doc_link: https://docs.datadoghq.com/integrations/jenkins/
 
-    - org_name: ansible-collections
+  - org_name: ansible-collections
 
-      repos:
-      - repo_name: datadog
-        contents:
+    repos:
+    - repo_name: datadog
+      contents:
 
-        - action: pull-and-push-file
-          branch: main
-          globs:
-          - README.md
-          options:
-            dest_path: '/agent/basic_agent_usage/'
-            file_name: 'ansible.md'
-            front_matters:
-              title: Ansible
-              kind: documentation
-              dependencies: ["https://github.com/ansible-collections/Datadog/blob/main/README.md"]
+      - action: pull-and-push-file
+        branch: main
+        globs:
+        - README.md
+        options:
+          dest_path: '/agent/basic_agent_usage/'
+          file_name: 'ansible.md'
+          front_matters:
+            title: Ansible
+            kind: documentation
+            dependencies: ["https://github.com/ansible-collections/Datadog/blob/main/README.md"]
 
-    - org_name: aws
+  - org_name: aws
 
-      repos:
-      - repo_name: aws-sdk-go
+    repos:
+    - repo_name: aws-sdk-go
 
-        contents:
+      contents:
 
-        - action: npm-integrations
-          branch: main
-          globs:
-          # https://github.com/aws/aws-sdk-go/blob/main/aws/endpoints/defaults.go
-          - aws/endpoints/defaults.go
+      - action: npm-integrations
+        branch: main
+        globs:
+        # https://github.com/aws/aws-sdk-go/blob/main/aws/endpoints/defaults.go
+        - aws/endpoints/defaults.go
 
-    - org_name: DataDog
+  - org_name: DataDog
 
-      repos:
-      - repo_name: dd-go
+    repos:
+    - repo_name: dd-go
 
-        contents:
+      contents:
 
-        - action: npm-integrations
-          branch: prod
-          globs:
-          # https://github.com/DataDog/dd-go/blob/prod/networks/model/domain/gcp_services.go
-          - networks/model/domain/gcp_services.go
-          # https://github.com/DataDog/dd-go/blob/prod/networks/model/domain/azure_services.go
-          - networks/model/domain/azure_services.go
+      - action: npm-integrations
+        branch: prod
+        globs:
+        # https://github.com/DataDog/dd-go/blob/prod/networks/model/domain/gcp_services.go
+        - networks/model/domain/gcp_services.go
+        # https://github.com/DataDog/dd-go/blob/prod/networks/model/domain/azure_services.go
+        - networks/model/domain/azure_services.go
 
-      - repo_name: dogweb
+    - repo_name: dogweb
 
-        contents:
+      contents:
 
-        - action: integrations
-          branch: prod
-          globs:
-          - integration/*/*_metadata.csv
-          - integration/*/manifest.json
-          - integration/*/service_checks.json
-          - integration/*/README.md
-          - integration/*/__init__.py
+      - action: integrations
+        branch: kisung/preview-changes-to-eks-fargate
+        globs:
+        - integration/*/*_metadata.csv
+        - integration/*/manifest.json
+        - integration/*/service_checks.json
+        - integration/*/README.md
+        - integration/*/__init__.py
 
-      - repo_name: integrations-core
-        contents:
+    - repo_name: integrations-core
+      contents:
 
-        - action: integrations
-          branch: master
-          globs:
-          - "*/metadata.csv"
-          - "*/manifest.json"
-          - "*/assets/service_checks.json"
-          - "*/README.md"
-          - "*/datadog_checks/*/__about__.py"
+      - action: integrations
+        branch: master
+        globs:
+        - "*/metadata.csv"
+        - "*/manifest.json"
+        - "*/assets/service_checks.json"
+        - "*/README.md"
+        - "*/datadog_checks/*/__about__.py"
 
-      - repo_name: integrations-extras
-        contents:
+    - repo_name: integrations-extras
+      contents:
 
-        - action: integrations
-          branch: master
-          globs:
-          - "*/metadata.csv"
-          - "*/manifest.json"
-          - "*/assets/service_checks.json"
-          - "*/README.md"
-          - "*/datadog_checks/*/__about__.py"
+      - action: integrations
+        branch: master
+        globs:
+        - "*/metadata.csv"
+        - "*/manifest.json"
+        - "*/assets/service_checks.json"
+        - "*/README.md"
+        - "*/datadog_checks/*/__about__.py"
 
-      - repo_name: integrations-internal-core
-        contents:
+    - repo_name: integrations-internal-core
+      contents:
 
-        - action: integrations
-          branch: main
-          globs:
-          - "*/metadata.csv"
-          - "*/manifest.json"
-          - "*/assets/service_checks.json"
-          - "*/README.md"
-          - "*/datadog_checks/*/__about__.py"
+      - action: integrations
+        branch: main
+        globs:
+        - "*/metadata.csv"
+        - "*/manifest.json"
+        - "*/assets/service_checks.json"
+        - "*/README.md"
+        - "*/datadog_checks/*/__about__.py"
 
-      - repo_name: marketplace
-        contents:
+    - repo_name: marketplace
+      contents:
 
-        - action: marketplace-integrations
-          branch: master
-          globs:
-          - "*/metadata.csv"
-          - "*/manifest.json"
-          - "*/assets/service_checks.json"
-          - "*/README.md"
-          - "*/images/*.png"
-          - "*/images/*.jpg"
-          - "*/images/*.jpeg"
-          - "*/images/*.svg"
-          options:
-            front_matters:
-              algolia:
-                subcategory: Marketplace Integrations
+      - action: marketplace-integrations
+        branch: master
+        globs:
+        - "*/metadata.csv"
+        - "*/manifest.json"
+        - "*/assets/service_checks.json"
+        - "*/README.md"
+        - "*/images/*.png"
+        - "*/images/*.jpg"
+        - "*/images/*.jpeg"
+        - "*/images/*.svg"
+        options:
+          front_matters:
+            algolia:
+              subcategory: Marketplace Integrations
 
 
-      - repo_name: ansible-datadog
-        contents:
+    - repo_name: ansible-datadog
+      contents:
 
-        - action: pull-and-push-file
-          branch: main
-          globs:
-          - README.md
-          options:
-            dest_path: '/agent/guide/'
-            file_name: 'ansible_standalone_role.md'
-            front_matters:
-              title: Set up Ansible Using a Standalone Datadog Role
-              kind: documentation
-              dependencies: ["https://github.com/DataDog/ansible-datadog/blob/main/README.md"]
+      - action: pull-and-push-file
+        branch: main
+        globs:
+        - README.md
+        options:
+          dest_path: '/agent/guide/'
+          file_name: 'ansible_standalone_role.md'
+          front_matters:
+            title: Set up Ansible Using a Standalone Datadog Role
+            kind: documentation
+            dependencies: ["https://github.com/DataDog/ansible-datadog/blob/main/README.md"]
 
-      - repo_name: chef-datadog
-        contents:
+    - repo_name: chef-datadog
+      contents:
 
-        - action: pull-and-push-file
-          branch: main
-          globs:
-          - README.md
-          options:
-            dest_path: '/agent/basic_agent_usage/'
-            file_name: 'chef.md'
-            front_matters:
-              title: Chef
-              kind: documentation
-              dependencies: ["https://github.com/DataDog/chef-datadog/blob/main/README.md"]
+      - action: pull-and-push-file
+        branch: main
+        globs:
+        - README.md
+        options:
+          dest_path: '/agent/basic_agent_usage/'
+          file_name: 'chef.md'
+          front_matters:
+            title: Chef
+            kind: documentation
+            dependencies: ["https://github.com/DataDog/chef-datadog/blob/main/README.md"]
 
-      - repo_name: heroku-buildpack-datadog
-        contents:
+    - repo_name: heroku-buildpack-datadog
+      contents:
 
-        - action: pull-and-push-file
-          branch: master
-          globs:
-          - README.md
-          options:
-            dest_path: '/agent/basic_agent_usage/'
-            file_name: 'heroku.md'
-            front_matters:
-              title: Datadog Heroku Buildpack
-              kind: documentation
-              dependencies: ["https://github.com/DataDog/heroku-buildpack-datadog/blob/master/README.md"]
-              aliases:
-              - /developers/faq/how-do-i-collect-metrics-from-heroku-with-datadog
+      - action: pull-and-push-file
+        branch: master
+        globs:
+        - README.md
+        options:
+          dest_path: '/agent/basic_agent_usage/'
+          file_name: 'heroku.md'
+          front_matters:
+            title: Datadog Heroku Buildpack
+            kind: documentation
+            dependencies: ["https://github.com/DataDog/heroku-buildpack-datadog/blob/master/README.md"]
+            aliases:
+            - /developers/faq/how-do-i-collect-metrics-from-heroku-with-datadog
 
-      - repo_name: puppet-datadog-agent
-        contents:
+    - repo_name: puppet-datadog-agent
+      contents:
 
-        - action: pull-and-push-file
-          branch: main
-          globs:
-          - README.md
-          options:
-            dest_path: '/agent/basic_agent_usage/'
-            file_name: 'puppet.md'
-            front_matters:
-              title: Puppet
-              kind: documentation
-              dependencies: ["https://github.com/DataDog/puppet-datadog-agent/blob/main/README.md"]
+      - action: pull-and-push-file
+        branch: main
+        globs:
+        - README.md
+        options:
+          dest_path: '/agent/basic_agent_usage/'
+          file_name: 'puppet.md'
+          front_matters:
+            title: Puppet
+            kind: documentation
+            dependencies: ["https://github.com/DataDog/puppet-datadog-agent/blob/main/README.md"]
 
-      - repo_name: datadog-formula
-        contents:
+    - repo_name: datadog-formula
+      contents:
 
-        - action: pull-and-push-file
-          branch: main
-          globs:
-          - README.md
-          options:
-            dest_path: '/agent/basic_agent_usage/'
-            file_name: 'saltstack.md'
-            front_matters:
-              title: SaltStack
-              kind: documentation
-              dependencies: ["https://github.com/DataDog/datadog-formula/blob/main/README.md"]
+      - action: pull-and-push-file
+        branch: main
+        globs:
+        - README.md
+        options:
+          dest_path: '/agent/basic_agent_usage/'
+          file_name: 'saltstack.md'
+          front_matters:
+            title: SaltStack
+            kind: documentation
+            dependencies: ["https://github.com/DataDog/datadog-formula/blob/main/README.md"]
 
-      - repo_name: dd-trace-rb
-        contents:
-        - action: pull-and-push-file
-          branch: release
-          globs:
-          - 'docs/GettingStarted.md'
-          options:
-            dest_path: '/tracing/trace_collection/automatic_instrumentation/dd_libraries/'
-            file_name: 'ruby.md'
-            front_matters:
-              dependencies: ["https://github.com/DataDog/dd-trace-rb/blob/release/docs/GettingStarted.md"]
-              title: Tracing Ruby Applications
-              kind: documentation
-              code_lang: ruby
-              type: multi-code-lang
-              code_lang_weight: 15
-              aliases:
-              - /tracing/ruby/
-              - /tracing/languages/ruby/
-              - /tracing/setup/ruby/
-              - /tracing/setup_overview/ruby/
-              - /agent/apm/ruby/
-              - /tracing/setup_overview/setup/ruby
-              - /tracing/trace_collection/ruby
-              - /tracing/trace_collection/dd_libraries/ruby/
-        - action: pull-and-push-file
-          branch: release
-          globs:
-          - 'docs/legacy/GettingStarted-v1.md'
-          options:
-            dest_path: '/tracing/trace_collection/automatic_instrumentation/dd_libraries/'
-            file_name: 'ruby_v1.md'
-            front_matters:
-              dependencies: ["https://github.com/DataDog/dd-trace-rb/blob/release/docs/legacy/GettingStarted-v1.md"]
-              title: (Legacy) Tracing Ruby Applications
-              kind: documentation
+    - repo_name: dd-trace-rb
+      contents:
+      - action: pull-and-push-file
+        branch: release
+        globs:
+        - 'docs/GettingStarted.md'
+        options:
+          dest_path: '/tracing/trace_collection/automatic_instrumentation/dd_libraries/'
+          file_name: 'ruby.md'
+          front_matters:
+            dependencies: ["https://github.com/DataDog/dd-trace-rb/blob/release/docs/GettingStarted.md"]
+            title: Tracing Ruby Applications
+            kind: documentation
+            code_lang: ruby
+            type: multi-code-lang
+            code_lang_weight: 15
+            aliases:
+            - /tracing/ruby/
+            - /tracing/languages/ruby/
+            - /tracing/setup/ruby/
+            - /tracing/setup_overview/ruby/
+            - /agent/apm/ruby/
+            - /tracing/setup_overview/setup/ruby
+            - /tracing/trace_collection/ruby
+            - /tracing/trace_collection/dd_libraries/ruby/
+      - action: pull-and-push-file
+        branch: release
+        globs:
+        - 'docs/legacy/GettingStarted-v1.md'
+        options:
+          dest_path: '/tracing/trace_collection/automatic_instrumentation/dd_libraries/'
+          file_name: 'ruby_v1.md'
+          front_matters:
+            dependencies: ["https://github.com/DataDog/dd-trace-rb/blob/release/docs/legacy/GettingStarted-v1.md"]
+            title: (Legacy) Tracing Ruby Applications
+            kind: documentation
 
-      - repo_name: datadog-serverless-functions
-        contents:
-        - action: pull-and-push-file
-          branch: master
-          globs:
-          - 'aws/logs_monitoring/README.md'
-          options:
-            dest_path: '/logs/guide/'
-            file_name: 'forwarder.md'
-            # front_matters:
-            #   dependencies: ["https://github.com/DataDog/datadog-serverless-functions/blob/master/aws/logs_monitoring/README.md"]
+    - repo_name: datadog-serverless-functions
+      contents:
+      - action: pull-and-push-file
+        branch: master
+        globs:
+        - 'aws/logs_monitoring/README.md'
+        options:
+          dest_path: '/logs/guide/'
+          file_name: 'forwarder.md'
+          # front_matters:
+          #   dependencies: ["https://github.com/DataDog/datadog-serverless-functions/blob/master/aws/logs_monitoring/README.md"]
 
-      - repo_name: serverless-plugin-datadog
-        contents:
-        - action: pull-and-push-file
-          branch: main
-          globs:
-          - 'README.md'
-          options:
-            dest_path: '/serverless/libraries_integrations/'
-            file_name: 'plugin.md'
-            front_matters:
-              dependencies: ["https://github.com/DataDog/serverless-plugin-datadog/blob/main/README.md"]
-              title: Datadog Serverless Framework Plugin
-              kind: documentation
-              aliases:
-              - /serverless/serverless_integrations/plugin
+    - repo_name: serverless-plugin-datadog
+      contents:
+      - action: pull-and-push-file
+        branch: main
+        globs:
+        - 'README.md'
+        options:
+          dest_path: '/serverless/libraries_integrations/'
+          file_name: 'plugin.md'
+          front_matters:
+            dependencies: ["https://github.com/DataDog/serverless-plugin-datadog/blob/main/README.md"]
+            title: Datadog Serverless Framework Plugin
+            kind: documentation
+            aliases:
+            - /serverless/serverless_integrations/plugin
 
-      - repo_name: datadog-cloudformation-macro
-        contents:
-        - action: pull-and-push-file
-          branch: main
-          globs:
-          - 'serverless/README.md'
-          options:
-            dest_path: '/serverless/libraries_integrations/'
-            file_name: 'macro.md'
-            front_matters:
-              dependencies: ["https://github.com/DataDog/datadog-cloudformation-macro/blob/main/serverless/README.md"]
-              title: Datadog Serverless Macro
-              kind: documentation
-              aliases:
-                - /serverless/serverless_integrations/macro/
+    - repo_name: datadog-cloudformation-macro
+      contents:
+      - action: pull-and-push-file
+        branch: main
+        globs:
+        - 'serverless/README.md'
+        options:
+          dest_path: '/serverless/libraries_integrations/'
+          file_name: 'macro.md'
+          front_matters:
+            dependencies: ["https://github.com/DataDog/datadog-cloudformation-macro/blob/main/serverless/README.md"]
+            title: Datadog Serverless Macro
+            kind: documentation
+            aliases:
+            - /serverless/serverless_integrations/macro/
 
-      - repo_name: datadog-ci
-        contents:
-        - action: pull-and-push-file
-          branch: master
-          globs:
-          - 'src/commands/lambda/README.md'
-          options:
-            dest_path: '/serverless/libraries_integrations/'
-            file_name: 'cli.md'
-            front_matters:
-              dependencies: ["https://github.com/DataDog/datadog-ci/blob/master/src/commands/lambda/README.md"]
-              title: Datadog Serverless CLI
-              kind: documentation
-              aliases:
-                - /serverless/datadog_lambda_library/
-                - /serverless/serverless_integrations/cli/
-        - action: pull-and-push-file
-          branch: master
-          globs:
-          - 'src/commands/synthetics/README.md'
-          options:
-            dest_path: '/continuous_testing/cicd_integrations/'
-            file_name: 'configuration.md'
-            front_matters:
-              dependencies: ["https://github.com/DataDog/datadog-ci/blob/master/src/commands/synthetics/README.md"]
-              title: Continuous Testing and CI/CD Configuration
-              kind: documentation
-              description: Configure Continuous Testing to run tests in your CI/CD pipelines.
-              aliases:
-                - /synthetics/cicd_integrations/configuration
-              further_reading:
-              - link: "https://www.datadoghq.com/blog/datadog-github-action-synthetics-ci-visibility/"
-                tag: "Blog"
-                text: "Use Datadog's GitHub Action to add continuous testing to workflows"
-              - link: "/continuous_testing/cicd_integrations"
-                tag: "Documentation"
-                text: "Learn about Continuous Testing and CI/CD"
-              - link: "/continuous_testing/explorer"
-                tag: "Documentation"
-                text: "Learn about the Synthetic Monitoring & Testing Results Explorer"
-              - link: "/continuous_testing/testing_tunnel"
-                tag: "Documentation"
-                text: "Learn about the Testing Tunnel"
+    - repo_name: datadog-ci
+      contents:
+      - action: pull-and-push-file
+        branch: master
+        globs:
+        - 'src/commands/lambda/README.md'
+        options:
+          dest_path: '/serverless/libraries_integrations/'
+          file_name: 'cli.md'
+          front_matters:
+            dependencies: ["https://github.com/DataDog/datadog-ci/blob/master/src/commands/lambda/README.md"]
+            title: Datadog Serverless CLI
+            kind: documentation
+            aliases:
+            - /serverless/datadog_lambda_library/
+            - /serverless/serverless_integrations/cli/
+      - action: pull-and-push-file
+        branch: master
+        globs:
+        - 'src/commands/synthetics/README.md'
+        options:
+          dest_path: '/continuous_testing/cicd_integrations/'
+          file_name: 'configuration.md'
+          front_matters:
+            dependencies: ["https://github.com/DataDog/datadog-ci/blob/master/src/commands/synthetics/README.md"]
+            title: Continuous Testing and CI/CD Configuration
+            kind: documentation
+            description: Configure Continuous Testing to run tests in your CI/CD pipelines.
+            aliases:
+            - /synthetics/cicd_integrations/configuration
+            further_reading:
+            - link: "https://www.datadoghq.com/blog/datadog-github-action-synthetics-ci-visibility/"
+              tag: "Blog"
+              text: "Use Datadog's GitHub Action to add continuous testing to workflows"
+            - link: "/continuous_testing/cicd_integrations"
+              tag: "Documentation"
+              text: "Learn about Continuous Testing and CI/CD"
+            - link: "/continuous_testing/explorer"
+              tag: "Documentation"
+              text: "Learn about the Synthetic Monitoring & Testing Results Explorer"
+            - link: "/continuous_testing/testing_tunnel"
+              tag: "Documentation"
+              text: "Learn about the Testing Tunnel"
 
-      - repo_name: datadog-static-analyzer-circleci-orb
-        contents:
-        - action: pull-and-push-file
-          branch: main
-          globs:
-          - 'README.md'
-          options:
-            dest_path: '/code_analysis/static_analysis/'
-            file_name: 'circleci_orbs.md'
-            front_matters:
-              dependencies: ["https://github.com/DataDog/datadog-static-analyzer-circleci-orb/blob/main/README.md"]
-              title: Static Analysis and CircleCI Orbs
-              kind: documentation
-              description: Use Datadog and CircleCI to run Static Analysis jobs in a CI pipeline.
-              aliases:
-              - /continuous_integration/static_analysis/circleci_orbs
-              - /static_analysis/circleci_orbs
+    - repo_name: datadog-static-analyzer-circleci-orb
+      contents:
+      - action: pull-and-push-file
+        branch: main
+        globs:
+        - 'README.md'
+        options:
+          dest_path: '/code_analysis/static_analysis/'
+          file_name: 'circleci_orbs.md'
+          front_matters:
+            dependencies: ["https://github.com/DataDog/datadog-static-analyzer-circleci-orb/blob/main/README.md"]
+            title: Static Analysis and CircleCI Orbs
+            kind: documentation
+            description: Use Datadog and CircleCI to run Static Analysis jobs in a CI pipeline.
+            aliases:
+            - /continuous_integration/static_analysis/circleci_orbs
+            - /static_analysis/circleci_orbs
 
-      - repo_name: datadog-static-analyzer-github-action
-        contents:
-        - action: pull-and-push-file
-          branch: main
-          globs:
-          - 'README.md'
-          options:
-            dest_path: '/code_analysis/static_analysis/'
-            file_name: 'github_actions.md'
-            front_matters:
-              dependencies: ["https://github.com/DataDog/datadog-static-analyzer-github-action/blob/main/README.md"]
-              title: Static Analysis and GitHub Actions
-              kind: documentation
-              description: Use Datadog and GitHub to run Static Analysis jobs in a CI pipeline.
-              aliases:
-              - /continuous_integration/static_analysis/github_actions
-              - /static_analysis/github_actions
+    - repo_name: datadog-static-analyzer-github-action
+      contents:
+      - action: pull-and-push-file
+        branch: main
+        globs:
+        - 'README.md'
+        options:
+          dest_path: '/code_analysis/static_analysis/'
+          file_name: 'github_actions.md'
+          front_matters:
+            dependencies: ["https://github.com/DataDog/datadog-static-analyzer-github-action/blob/main/README.md"]
+            title: Static Analysis and GitHub Actions
+            kind: documentation
+            description: Use Datadog and GitHub to run Static Analysis jobs in a CI pipeline.
+            aliases:
+            - /continuous_integration/static_analysis/github_actions
+            - /static_analysis/github_actions
 
-      - repo_name: datadog-sca-github-action
-        contents:
-        - action: pull-and-push-file
-          branch: main
-          globs:
-          - 'README.md'
-          options:
-            dest_path: '/code_analysis/software_composition_analysis/'
-            file_name: 'github_actions.md'
-            front_matters:
-              dependencies: ["https://github.com/DataDog/datadog-sca-github-action/blob/main/README.md"]
-              title: Software Composition Analysis and GitHub Actions
-              kind: documentation
-              description: Use Datadog and GitHub to run Software Composition Analysis jobs in a CI pipeline.
+    - repo_name: datadog-sca-github-action
+      contents:
+      - action: pull-and-push-file
+        branch: main
+        globs:
+        - 'README.md'
+        options:
+          dest_path: '/code_analysis/software_composition_analysis/'
+          file_name: 'github_actions.md'
+          front_matters:
+            dependencies: ["https://github.com/DataDog/datadog-sca-github-action/blob/main/README.md"]
+            title: Software Composition Analysis and GitHub Actions
+            kind: documentation
+            description: Use Datadog and GitHub to run Software Composition Analysis jobs in a CI pipeline.
 
-      - repo_name: datadog-static-analyzer-rule-docs
-        contents:
-        - action: pull-and-push-folder
-          branch: main
-          globs:
-          - rulesets/**/*.md
-          options:
-            dest_dir: '/code_analysis/static_analysis_rules/'
-            path_to_remove: 'rulesets/'
-            front_matters:
-              disable_edit: true
+    - repo_name: datadog-static-analyzer-rule-docs
+      contents:
+      - action: pull-and-push-folder
+        branch: main
+        globs:
+        - rulesets/**/*.md
+        options:
+          dest_dir: '/code_analysis/static_analysis_rules/'
+          path_to_remove: 'rulesets/'
+          front_matters:
+            disable_edit: true
 
-      - repo_name: datadog-cdk-constructs
-        contents:
-        - action: pull-and-push-file
-          branch: main
-          globs:
-          - 'README.md'
-          options:
-            dest_path: '/serverless/libraries_integrations/'
-            file_name: 'cdk.md'
-            front_matters:
-              dependencies: ["https://github.com/DataDog/datadog-cdk-constructs/blob/main/README.md"]
-              title: Datadog CDK Construct
-              kind: documentation
+    - repo_name: datadog-cdk-constructs
+      contents:
+      - action: pull-and-push-file
+        branch: main
+        globs:
+        - 'README.md'
+        options:
+          dest_path: '/serverless/libraries_integrations/'
+          file_name: 'cdk.md'
+          front_matters:
+            dependencies: ["https://github.com/DataDog/datadog-cdk-constructs/blob/main/README.md"]
+            title: Datadog CDK Construct
+            kind: documentation
 
-      - repo_name: datadog-lambda-extension
-        contents:
-        - action: pull-and-push-file
-          branch: main
-          globs:
-          - 'README.md'
-          options:
-            dest_path: '/serverless/libraries_integrations/'
-            file_name: 'extension.md'
-            front_matters:
-              dependencies: ["https://github.com/DataDog/datadog-lambda-extension/blob/main/README.md"]
-              title: Datadog Lambda Extension
-              kind: documentation
-              aliases:
-                - /serverless/datadog_lambda_library/extension
+    - repo_name: datadog-lambda-extension
+      contents:
+      - action: pull-and-push-file
+        branch: main
+        globs:
+        - 'README.md'
+        options:
+          dest_path: '/serverless/libraries_integrations/'
+          file_name: 'extension.md'
+          front_matters:
+            dependencies: ["https://github.com/DataDog/datadog-lambda-extension/blob/main/README.md"]
+            title: Datadog Lambda Extension
+            kind: documentation
+            aliases:
+            - /serverless/datadog_lambda_library/extension
 
-      - repo_name: datadog-ci-azure-devops
-        contents:
-        - action: pull-and-push-file
-          branch: main
-          globs:
-          - 'README.md'
-          options:
-            dest_path: '/continuous_testing/cicd_integrations/'
-            file_name: 'azure_devops_extension.md'
-            front_matters:
-              dependencies: ["https://github.com/DataDog/datadog-ci-azure-devops/blob/main/README.md"]
-              title: Continuous Testing and Datadog CI Azure DevOps Extension
-              kind: documentation
-              description: Use the Synthetics and Datadog CI extension to create tasks that you can use in a CI pipeline.
-              aliases:
-                - /synthetics/cicd_integrations/azure_devops_extension
+    - repo_name: datadog-ci-azure-devops
+      contents:
+      - action: pull-and-push-file
+        branch: main
+        globs:
+        - 'README.md'
+        options:
+          dest_path: '/continuous_testing/cicd_integrations/'
+          file_name: 'azure_devops_extension.md'
+          front_matters:
+            dependencies: ["https://github.com/DataDog/datadog-ci-azure-devops/blob/main/README.md"]
+            title: Continuous Testing and Datadog CI Azure DevOps Extension
+            kind: documentation
+            description: Use the Synthetics and Datadog CI extension to create tasks that you can use in a CI pipeline.
+            aliases:
+            - /synthetics/cicd_integrations/azure_devops_extension
 
-      - repo_name: synthetics-ci-github-action
-        contents:
-        - action: pull-and-push-file
-          branch: main
-          globs:
-          - 'README.md'
-          options:
-            dest_path: '/continuous_testing/cicd_integrations/'
-            file_name: 'github_actions.md'
-            front_matters:
-              dependencies: ["https://github.com/DataDog/synthetics-ci-github-action/blob/main/README.md"]
-              title: Continuous Testing and GitHub Actions
-              kind: documentation
-              aliases:
-                - /synthetics/cicd_integrations/github_actions
+    - repo_name: synthetics-ci-github-action
+      contents:
+      - action: pull-and-push-file
+        branch: main
+        globs:
+        - 'README.md'
+        options:
+          dest_path: '/continuous_testing/cicd_integrations/'
+          file_name: 'github_actions.md'
+          front_matters:
+            dependencies: ["https://github.com/DataDog/synthetics-ci-github-action/blob/main/README.md"]
+            title: Continuous Testing and GitHub Actions
+            kind: documentation
+            aliases:
+            - /synthetics/cicd_integrations/github_actions
 
-      - repo_name: synthetics-test-automation-circleci-orb
-        contents:
-        - action: pull-and-push-file
-          branch: main
-          globs:
-          - 'README.md'
-          options:
-            dest_path: '/continuous_testing/cicd_integrations/'
-            file_name: 'circleci_orb.md'
-            front_matters:
-              dependencies: ["https://github.com/DataDog/synthetics-test-automation-circleci-orb/blob/main/README.md"]
-              title: Continuous Testing and CircleCI Orb
-              kind: documentation
-              aliases:
-                - /synthetics/cicd_integrations/circleci_orb
+    - repo_name: synthetics-test-automation-circleci-orb
+      contents:
+      - action: pull-and-push-file
+        branch: main
+        globs:
+        - 'README.md'
+        options:
+          dest_path: '/continuous_testing/cicd_integrations/'
+          file_name: 'circleci_orb.md'
+          front_matters:
+            dependencies: ["https://github.com/DataDog/synthetics-test-automation-circleci-orb/blob/main/README.md"]
+            title: Continuous Testing and CircleCI Orb
+            kind: documentation
+            aliases:
+            - /synthetics/cicd_integrations/circleci_orb
 
-      - repo_name: datadog-cloudformation-resources
-        contents:
-        - action: pull-and-push-file
-          branch: master
-          globs:
-          - 'README.md'
-          options:
-            dest_path: '/integrations/guide/'
-            file_name: 'amazon_cloudformation.md'
-            front_matters:
-              dependencies: ["https://github.com/DataDog/datadog-cloudformation-resources/blob/master/README.md"]
-              title: Datadog-Amazon CloudFormation
-              kind: guide
-              aliases:
-                - /developers/amazon_cloudformation/
+    - repo_name: datadog-cloudformation-resources
+      contents:
+      - action: pull-and-push-file
+        branch: master
+        globs:
+        - 'README.md'
+        options:
+          dest_path: '/integrations/guide/'
+          file_name: 'amazon_cloudformation.md'
+          front_matters:
+            dependencies: ["https://github.com/DataDog/datadog-cloudformation-resources/blob/master/README.md"]
+            title: Datadog-Amazon CloudFormation
+            kind: guide
+            aliases:
+            - /developers/amazon_cloudformation/
 
-      - repo_name: security-monitoring
-        contents:
-        - action: security-rules
-          branch: main
-          globs:
-            - "workload-security/backend-rules/*.yaml"
-            - "workload-security/backend-rules/*.md"
-            - "cloud-siem/**/*.json"
-            - "cloud-siem/**/*.md"
-            - "posture-management/**/*.json"
-            - "posture-management/**/*.yaml"
-            - "posture-management/**/*.yml"
-            - "posture-management/**/*.md"
-            - "application-security/**/*.json"
-            - "application-security/**/*.md"
-          options:
-            dest_path: '/security/default_rules/'
+    - repo_name: security-monitoring
+      contents:
+      - action: security-rules
+        branch: main
+        globs:
+        - "workload-security/backend-rules/*.yaml"
+        - "workload-security/backend-rules/*.md"
+        - "cloud-siem/**/*.json"
+        - "cloud-siem/**/*.md"
+        - "posture-management/**/*.json"
+        - "posture-management/**/*.yaml"
+        - "posture-management/**/*.yml"
+        - "posture-management/**/*.md"
+        - "application-security/**/*.json"
+        - "application-security/**/*.md"
+        options:
+          dest_path: '/security/default_rules/'
 
-      - repo_name: infrastructure-resources
-        contents:
-        - action: pull-and-push-folder
-          branch: prod
-          globs:
-            - "generated/md/external/*.md"
-          options:
-            dest_dir: '/infrastructure/resource_catalog/'
-            path_to_remove: 'generated/md/external/'
-            front_matters:
-              disable_edit: true
+    - repo_name: infrastructure-resources
+      contents:
+      - action: pull-and-push-folder
+        branch: prod
+        globs:
+        - "generated/md/external/*.md"
+        options:
+          dest_dir: '/infrastructure/resource_catalog/'
+          path_to_remove: 'generated/md/external/'
+          front_matters:
+            disable_edit: true
 
-      - repo_name: apps
-        contents:
-        - action: pull-and-push-file
-          branch: master
-          globs:
-            - "docs/en/getting-started.md"
-          options:
-            dest_path: "/developers/faq/"
-            file_name: "ui_extensions.md"
-            front_matters:
-              dependencies: ["https://github.com/DataDog/apps/blob/master/docs/en/getting-started.md"]
-              aliases: ["/developers/datadog_apps/", "/developers/ui_extensions"]
-              private: true
+    - repo_name: apps
+      contents:
+      - action: pull-and-push-file
+        branch: master
+        globs:
+        - "docs/en/getting-started.md"
+        options:
+          dest_path: "/developers/faq/"
+          file_name: "ui_extensions.md"
+          front_matters:
+            dependencies: ["https://github.com/DataDog/apps/blob/master/docs/en/getting-started.md"]
+            aliases: ["/developers/datadog_apps/", "/developers/ui_extensions"]
+            private: true
 
-      - repo_name: datadog-agent
-        contents:
-        - action: pull-and-push-file
-          branch: main
-          globs:
-            - "pkg/config/config_template.yaml"
-          options:
-            file_name: 'agent_config.yaml'
-            output_content: false
-        - action: pull-and-push-folder
-          branch: main
-          globs:
-          - 'docs/cloud-workload-security/agent_expressions.md'
-          - 'docs/cloud-workload-security/backend.md'
-          options:
-            dest_dir: '/security/threats/'
-            path_to_remove: 'docs/cloud-workload-security/'
+    - repo_name: datadog-agent
+      contents:
+      - action: pull-and-push-file
+        branch: main
+        globs:
+        - "pkg/config/config_template.yaml"
+        options:
+          file_name: 'agent_config.yaml'
+          output_content: false
+      - action: pull-and-push-folder
+        branch: main
+        globs:
+        - 'docs/cloud-workload-security/agent_expressions.md'
+        - 'docs/cloud-workload-security/backend.md'
+        options:
+          dest_dir: '/security/threats/'
+          path_to_remove: 'docs/cloud-workload-security/'
 
-      - repo_name: dd-source
-        contents:
-        - action: workflows
-          branch: main
-          globs:
-            - "domains/workflow/actionplatform/apps/tools/manifest_generator/manifest.schema.json"
-            - "domains/workflow/actionplatform/apps/wf-actions-worker/src/runner/bundles/com.datadoghq.*/manifest.json"
-          options:
-            dest_path: '/service_management/workflows/actions_catalog/'
-            bundle_excludes:
-              - "com.datadoghq.test"
-              - "com.datadoghq.sample"
-              - "com.datadoghq.internal"
+    - repo_name: dd-source
+      contents:
+      - action: workflows
+        branch: main
+        globs:
+        - "domains/workflow/actionplatform/apps/tools/manifest_generator/manifest.schema.json"
+        - "domains/workflow/actionplatform/apps/wf-actions-worker/src/runner/bundles/com.datadoghq.*/manifest.json"
+        options:
+          dest_path: '/service_management/workflows/actions_catalog/'
+          bundle_excludes:
+          - "com.datadoghq.test"
+          - "com.datadoghq.sample"
+          - "com.datadoghq.internal"
 
-      - repo_name: web-ui
-        contents:
-          - action: pull-and-push-file
-            branch: prod
-            globs:
-              - "generated/md/external/semantic-color-documentation.md"
-            options:
-              base_path: ""
-              dest_path: "/layouts/shortcodes/"
-              file_name: "semantic-color.md"
+    - repo_name: web-ui
+      contents:
+      - action: pull-and-push-file
+        branch: prod
+        globs:
+        - "generated/md/external/semantic-color-documentation.md"
+        options:
+          base_path: ""
+          dest_path: "/layouts/shortcodes/"
+          file_name: "semantic-color.md"
 
-      - repo_name: dd-trace-rb
-        contents:
-          - action: pull-and-push-file
-            branch: release
-            globs:
-              - 'docs/Compatibility.md'
-            options:
-              dest_path: '/tracing/trace_collection/compatibility/'
-              file_name: 'ruby.md'
-              front_matters:
-                title: Ruby Compatibility Requirements
-                kind: documentation
-                aliases:
-                  - /tracing/compatibility_requirements/ruby
-                  - /tracing/setup_overview/compatibility_requirements/ruby
-                code_lang: ruby
-                type: multi-code-lang
-                code_lang_weight: 20
-                dependencies: ["https://github.com/DataDog/dd-trace-rb/blob/release/docs/Compatibility.md"]
-                further_reading:
-                    - link: 'tracing/trace_collection/dd_libraries/ruby'
-                      tag: 'Documentation'
-                      text: 'Instrument Your Application'
-          - action: pull-and-push-file
-            branch: release
-            globs:
-            - 'docs/legacy/Compatibility-v1.md'
-            options:
-              dest_path: '/tracing/trace_collection/compatibility/'
-              file_name: 'ruby_v1.md'
-              front_matters:
-                dependencies: ["https://github.com/DataDog/dd-trace-rb/blob/release/docs/legacy/Compatibility-v1.md"]
-                title: (Legacy) Ruby Compatibility Requirements
-                kind: documentation
+    - repo_name: dd-trace-rb
+      contents:
+      - action: pull-and-push-file
+        branch: release
+        globs:
+        - 'docs/Compatibility.md'
+        options:
+          dest_path: '/tracing/trace_collection/compatibility/'
+          file_name: 'ruby.md'
+          front_matters:
+            title: Ruby Compatibility Requirements
+            kind: documentation
+            aliases:
+            - /tracing/compatibility_requirements/ruby
+            - /tracing/setup_overview/compatibility_requirements/ruby
+            code_lang: ruby
+            type: multi-code-lang
+            code_lang_weight: 20
+            dependencies: ["https://github.com/DataDog/dd-trace-rb/blob/release/docs/Compatibility.md"]
+            further_reading:
+            - link: 'tracing/trace_collection/dd_libraries/ruby'
+              tag: 'Documentation'
+              text: 'Instrument Your Application'
+      - action: pull-and-push-file
+        branch: release
+        globs:
+        - 'docs/legacy/Compatibility-v1.md'
+        options:
+          dest_path: '/tracing/trace_collection/compatibility/'
+          file_name: 'ruby_v1.md'
+          front_matters:
+            dependencies: ["https://github.com/DataDog/dd-trace-rb/blob/release/docs/legacy/Compatibility-v1.md"]
+            title: (Legacy) Ruby Compatibility Requirements
+            kind: documentation
