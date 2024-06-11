@@ -81,14 +81,14 @@ By default, users with the Datadog Admin role have access to view and set up sca
 
 ### Add a scanning group
 
-A scanning group determines what data to scan. It consists of a query filter and a set of toggles to enable scanning for logs, APM, RUM, and events. See the [Log Search Syntax][4] documentation to learn more about query filters.
+{{< tabs >}}
+{{% tab "In the Cloud" %}}
+A scanning group determines what data to scan. It consists of a query filter and a set of toggles to enable scanning for logs, APM, RUM, and events. See the [Log Search Syntax][2] documentation to learn more about query filters.
 
-For Terraform, see the [Datadog Sensitive Data Scanner group][5] resource.
+For Terraform, see the [Datadog Sensitive Data Scanner group][3] resource.
 
 To set up a scanning group, perform the following steps.
 
-{{< tabs >}}
-{{% tab "In the Cloud" %}}
 1. Navigate to the [Sensitive Data Scanner][1] configuration page.
 1. Click **Add scanning group**. Alternatively, click the **Add** dropdown menu on the top right corner of the page and select **Add Scanning Group**.
 1. Enter a query filter for the data you want to scan. At the top, click **APM Spans** to preview the filtered spans. Click **Logs** to see the filtered logs.
@@ -97,10 +97,17 @@ To set up a scanning group, perform the following steps.
 1. Click **Create**.
 
 [1]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner/configuration
+[2]: /logs/explorer/search_syntax/
+[3]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/sensitive_data_scanner_group
 {{% /tab %}}
 {{% tab "In the Agent" %}}
-
 <div class="alert alert-warning"><strong>Note</strong>: Sensitive Data Scanner in the Agent supports only one scanning group per organization.</div>
+
+A scanning group determines what data to scan. It consists of a query filter and a set of toggles to enable scanning for logs. See the [Log Search Syntax][2] documentation to learn more about query filters.
+
+For Terraform, see the [Datadog Sensitive Data Scanner group][3] resource.
+
+To set up a scanning group, perform the following steps.
 
 1. Navigate to the [Sensitive Data Scanner in the Agent][1] configuration page.
 1. Click **Add scanning group**. Alternatively, click the **Add** dropdown menu on the top right corner of the page and select **Add Scanning Group**.
@@ -109,6 +116,8 @@ To set up a scanning group, perform the following steps.
 1. Click **Save**.
 
 [1]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner/configuration/agent
+[2]: /logs/explorer/search_syntax/
+[3]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/sensitive_data_scanner_group
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -116,14 +125,13 @@ By default, a newly-created scanning group is disabled. To enable a scanning gro
 
 ### Add scanning rules
 
-A scanning rule determines what sensitive information to match within the data defined by a scanning group. You can add predefined scanning rules from Datadog's Scanning Rule Library or create your own rules using regex patterns. The data is scanned at ingestion time during processing. For logs, this means the scan is done before indexing and other routing decisions.
-
-For Terraform, see the [Datadog Sensitive Data Scanner rule][7] resource.
-
-To add scanning rules, perform the following steps.
-
 {{< tabs >}}
 {{% tab "In the Cloud" %}}
+A scanning rule determines what sensitive information to match within the data defined by a scanning group. You can add predefined scanning rules from Datadog's Scanning Rule Library or create your own rules using regex patterns. The data is scanned at ingestion time during processing. For logs, this means the scan is done before indexing and other routing decisions.
+
+For Terraform, see the [Datadog Sensitive Data Scanner rule][2] resource.
+
+To add scanning rules, perform the following steps.
 
 1. Navigate to the [Sensitive Data Scanner][1] configuration page.
 1. Click the scanning group where you want to add the scanning rules.
@@ -161,9 +169,16 @@ You can create custom scanning rules using regex patterns to scan for sensitive 
 1. Click **Add Rule**.
 
 [1]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner/configuration
+[2]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/sensitive_data_scanner_rule
 {{< /collapse-content >}} 
 {{% /tab %}}
 {{% tab "In the Agent" %}}
+
+A scanning rule determines what sensitive information to match within the data defined by a scanning group. You can add predefined scanning rules from Datadog's Scanning Rule Librarys. The data is scanned at ingestion time during processing. For logs, this means the scan is done before indexing and other routing decisions.
+
+For Terraform, see the [Datadog Sensitive Data Scanner rule][2] resource.
+
+To add scanning rules, perform the following steps.
 
 <div class="alert alert-warning"><strong>Note</strong>: Sensitive Data Scanner in the Agent supports only predefined scanning rules from Datadog's Scanning Rule Library. The total number of scanning rules is limited to 20.</div>
 
@@ -178,6 +193,7 @@ You can create custom scanning rules using regex patterns to scan for sensitive 
 1. Click **Save**.
 
 [1]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner/configuration/agent
+[2]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/sensitive_data_scanner_rule
 {{% /tab %}}
 {{< /tabs >}}
 
