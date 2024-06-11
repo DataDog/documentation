@@ -37,7 +37,10 @@ AWS supports IAM authentication to RDS and Aurora databases. In order to configu
 
 
 1. Turn on IAM authentication on your [RDS][3] or [Aurora][4] instance.
-2. Create an IAM role, and then attach the following policy, replacing `<YOUR_IAM_ROLE>` with the IAM role information:
+2. Create an IAM policy for DB authentication, replacing `<YOUR_IAM_AUTH_DB_USER>` with the local database user in the IAM policy document:
+{{< tabs >}}
+{{% tab "RDS" %}}
+
 ```json
 {
    "Version": "2012-10-17",
@@ -48,7 +51,7 @@ AWS supports IAM authentication to RDS and Aurora databases. In order to configu
                "rds-db:connect"
            ],
            "Resource": [
-               "arn:aws:rds-db:REGION:ACCOUNT:dbuser:RESOURCE_ID/<YOUR_IAM_ROLE>"
+               "arn:aws:rds-db:REGION:ACCOUNT:dbuser:db-<RESOURCE_ID>/<YOUR_IAM_AUTH_DB_USER>"
            ]
        }
    ]
@@ -67,12 +70,52 @@ For example, if you wanted to use the `datadog` user, you would use the followin
                "rds-db:connect"
            ],
            "Resource": [
-               "arn:aws:rds-db:REGION:ACCOUNT:dbuser:RESOURCE_ID/datadog"
+               "arn:aws:rds-db:REGION:ACCOUNT:dbuser:db-<RESOURCE_ID>/datadog"
            ]
        }
    ]
 }
 ```
+{{% /tab %}}
+{{% tab "Aurora" %}}
+
+```json
+{
+   "Version": "2012-10-17",
+   "Statement": [
+       {
+           "Effect": "Allow",
+           "Action": [
+               "rds-db:connect"
+           ],
+           "Resource": [
+               "arn:aws:rds-db:REGION:ACCOUNT:dbuser:cluster-<RESOURCE_ID>/<YOUR_IAM_AUTH_DB_USER>"
+           ]
+       }
+   ]
+}
+```
+
+For example, if you wanted to use the `datadog` user, you would use the following resource ARN:
+
+```json
+{
+   "Version": "2012-10-17",
+   "Statement": [
+       {
+           "Effect": "Allow",
+           "Action": [
+               "rds-db:connect"
+           ],
+           "Resource": [
+               "arn:aws:rds-db:REGION:ACCOUNT:dbuser:cluster-<RESOURCE_ID>/datadog"
+           ]
+       }
+   ]
+}
+```
+{{% /tab %}}
+{{< /tabs >}}
 
 AWS also supports wildcards for specifying the resource, for example if you wanted to allow the `datadog` user to authenticate across all instances for an account add the following:
 
@@ -104,7 +147,82 @@ GRANT rds_iam TO datadog;
 4. Complete the Agent setup steps for your [RDS][6] or [Aurora][7] instance.
 
 
-5. [Attach the role][5] with each EC2 instance that is running the agent. Note, this can be done at EC2 launch time.
+{{< tabs >}}
+{{% tab "Host" %}}
+
+5. Create an IAM role and attach the IAM policy created in step 2 to the role.
+Replace `<YOUR_IAM_AUTH_DB_ROLE>` with the name of the IAM role and `<YOUR_IAM_AUTH_DB_POLICY_ARN>` with the ARN of the IAM policy.
+Attach the role to the EC2 instance where the Agent is running. For more information, see [IAM roles for Amazon EC2][5].
+
+```bash
+aws iam create-role --role-name <YOUR_IAM_AUTH_DB_ROLE> --assume-role-policy-document '{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "ec2.amazonaws.com"
+      },
+      "Action": "sts:AssumeRole"
+    }
+  ]
+}'
+
+aws iam attach-role-policy --role-name <YOUR_IAM_AUTH_DB_ROLE> --policy-arn <YOUR_IAM_AUTH_DB_POLICY_ARN>
+```
+
+{{% /tab %}}
+{{% tab "ECS Fargate" %}}
+
+5. Create an IAM role and attach the IAM policy created in step 2 to the role.
+Replace `<YOUR_IAM_AUTH_DB_ROLE>` with the name of the IAM role and `<YOUR_IAM_AUTH_DB_POLICY_ARN>` with the ARN of the IAM policy.
+Attach the role to the ECS task role in task definition where the Agent is running. For more information, see [IAM roles for Amazon ECS][6].
+
+```bash
+aws iam create-role --role-name <YOUR_IAM_AUTH_DB_ROLE> --assume-role-policy-document '{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "ecs-tasks.amazonaws.com"
+      },
+      "Action": "sts:AssumeRole"
+    }
+  ]
+}'
+
+aws iam attach-role-policy --role-name <YOUR_IAM_AUTH_DB_ROLE> --policy-arn <YOUR_IAM_AUTH_DB_POLICY_ARN>
+```
+
+{{% /tab %}}
+{{% tab "EKS" %}}
+
+5. Create an IAM role and attach the IAM policy created in step 2 to the role.
+Replace `<YOUR_ESK_REGION>` and `<YOUR_ESK_CLUSTER>` with the region and name of your ESK cluster.
+Replace `<YOUR_IAM_AUTH_DB_POLICY_ARN>` with the ARN of the IAM policy created in step 2.
+Replace `<YOUR_IAM_AUTH_SERVICE_ACCOUNT>` and `<YOUR_IAM_AUTH_SERVICE_ACCOUNT_NAMESPACE>` with the name and namespace of the service account.
+Map the IAM role to the Kubernetes service account where the Agent is running. For more information, see [IAM roles for Amazon EKS service account][7].
+
+```bash
+# Create an IAM OIDC provider for your cluster
+$ eksctl utils associate-iam-oidc-provider \
+  --region=<YOUR_ESK_REGION> \
+  --cluster=<YOUR_ESK_CLUSTER> \
+  --approve
+
+# Create a service account
+$ eksctl create iamserviceaccount \
+  --cluster <YOUR_ESK_CLUSTER> \
+  --name <YOUR_IAM_AUTH_SERVICE_ACCOUNT> \
+  --namespace <YOUR_IAM_AUTH_SERVICE_ACCOUNT_NAMESPACE> \
+  --attach-policy-arn <YOUR_IAM_AUTH_DB_POLICY_ARN> \
+  --override-existing-serviceaccounts \
+  --approve
+```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 
 6. Update your Postgres instance config with an `aws` block specifying the `region` of the RDS instance, and set `managed_authentication.enabled` to `true`:
@@ -277,18 +395,20 @@ instances:
 [3]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.Enabling.html
 [4]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.Enabling.html
 [5]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html
-[6]: /database_monitoring/setup_postgres/rds/#grant-the-agent-access
-[7]: /database_monitoring/setup_postgres/aurora/#grant-the-agent-access
-[8]: /database_monitoring
-[9]: https://learn.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/overview
-[10]: https://learn.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/overview#managed-identity-types
-[11]: https://learn.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/how-manage-user-assigned-managed-identities?pivots=identity-mi-methods-azp#create-a-user-assigned-managed-identity
-[12]: https://learn.microsoft.com/en-us/azure/postgresql/single-server/how-to-configure-sign-in-azure-ad-authentication
-[13]: https://learn.microsoft.com/en-us/azure/postgresql/flexible-server/how-to-configure-sign-in-azure-ad-authentication#authenticate-with-azure-ad
-[14]: /database_monitoring/setup_postgres/azure/#grant-the-agent-access
-[15]: https://learn.microsoft.com/en-us/azure/active-directory/fundamentals/whatis
-[16]: https://learn.microsoft.com/en-us/azure/azure-sql/database/authentication-aad-configure?view=azuresql&tabs=azure-powershell#provision-azure-ad-admin-sql-managed-instance
-[17]: /database_monitoring/setup_sql_server/azure/?tab=azuresqlmanagedinstance
-[18]: https://learn.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server?view=sql-server-ver16
-[19]: /database_monitoring/setup_sql_server/azure/?tab=azuresqldatabase
-[20]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.DBAccounts.html#UsingWithRDS.IAMDBAuth.DBAccounts.PostgreSQL
+[6]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-iam-roles.html
+[7]: https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html
+[8]: /database_monitoring/setup_postgres/rds/#grant-the-agent-access
+[9]: /database_monitoring/setup_postgres/aurora/#grant-the-agent-access
+[10]: /database_monitoring
+[11]: https://learn.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/overview
+[12]: https://learn.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/overview#managed-identity-types
+[13]: https://learn.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/how-manage-user-assigned-managed-identities?pivots=identity-mi-methods-azp#create-a-user-assigned-managed-identity
+[14]: https://learn.microsoft.com/en-us/azure/postgresql/single-server/how-to-configure-sign-in-azure-ad-authentication
+[15]: https://learn.microsoft.com/en-us/azure/postgresql/flexible-server/how-to-configure-sign-in-azure-ad-authentication#authenticate-with-azure-ad
+[16]: /database_monitoring/setup_postgres/azure/#grant-the-agent-access
+[17]: https://learn.microsoft.com/en-us/azure/active-directory/fundamentals/whatis
+[18]: https://learn.microsoft.com/en-us/azure/azure-sql/database/authentication-aad-configure?view=azuresql&tabs=azure-powershell#provision-azure-ad-admin-sql-managed-instance
+[19]: /database_monitoring/setup_sql_server/azure/?tab=azuresqlmanagedinstance
+[20]: https://learn.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server?view=sql-server-ver16
+[21]: /database_monitoring/setup_sql_server/azure/?tab=azuresqldatabase
+[22]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.DBAccounts.html#UsingWithRDS.IAMDBAuth.DBAccounts.PostgreSQL
