@@ -38,6 +38,7 @@ Set up tracing in GitLab to collect data on your pipeline executions, analyze pe
 | [Custom tags][15] [and measures at runtime][16] | Custom tags and measures at runtime | Configure [custom tags and measures][13] at runtime. |
 | [Parameters][17] | Parameters | Set custom `env` or `service` parameters when a pipeline is triggered. |
 | [Pipeline failure reasons][11] | Pipeline failure reasons | Identify pipeline failure reasons from [error messages][15]. |
+| [Approval wait time][23] | Approval wait time  | View the amount of time jobs and pipelines wait for manual approvals. |
 
 The following GitLab versions are supported:
 
@@ -327,3 +328,4 @@ The <a href="https://docs.gitlab.com/ee/administration/object_storage.html#amazo
 [20]: /glossary/#partial-retry
 [21]: /glossary/#manual-step
 [22]: /glossary/#queue-time
+[23]: /glossary/#approval-wait-time
