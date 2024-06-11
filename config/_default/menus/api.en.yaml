@@ -2160,7 +2160,7 @@ menu:
         operationids:
           - SearchSecurityMonitoringSignals
         unstable: []
-        order: 9
+        order: 11
     - name: Get a quick list of security signals
       url: '#get-a-quick-list-of-security-signals'
       identifier: security-monitoring-get-a-quick-list-of-security-signals
@@ -2172,7 +2172,19 @@ menu:
         operationids:
           - ListSecurityMonitoringSignals
         unstable: []
-        order: 10
+        order: 12
+    - name: Test an existing rule
+      url: '#test-an-existing-rule'
+      identifier: security-monitoring-test-an-existing-rule
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - TestExistingSecurityMonitoringRule
+        unstable: []
+        order: 8
     - name: Update an existing rule
       url: '#update-an-existing-rule'
       identifier: security-monitoring-update-an-existing-rule
@@ -2220,7 +2232,19 @@ menu:
         operationids:
           - ValidateSecurityMonitoringRule
         unstable: []
-        order: 8
+        order: 10
+    - name: Test a rule
+      url: '#test-a-rule'
+      identifier: security-monitoring-test-a-rule
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - TestSecurityMonitoringRule
+        unstable: []
+        order: 9
     - name: Create a detection rule
       url: '#create-a-detection-rule'
       identifier: security-monitoring-create-a-detection-rule

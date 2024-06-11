@@ -27,8 +27,6 @@ You can monitor application security for Node.js apps running in Docker, Kuberne
 
 {{% appsec-getstarted %}}
 
-{{% appsec-getstarted-with-rc %}}
-
 ## Enabling threat detection
 ### Get started
 
