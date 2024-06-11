@@ -189,7 +189,7 @@ Check out the [issues][27] section to discover known issues.
 [13]: /watchdog/insights
 [14]: /continuous_integration/static_analysis/?tab=githubactions
 [15]: /continuous_integration/static_analysis/rules/
-[16]: https://docs.datadoghq.com/logs/log_collection/javascript/
+[16]: /logs/log_collection/javascript/
 [17]: https://github.com/winstonjs/winston
 [18]: https://github.com/pinojs/pino
 [19]: https://github.com/trentm/node-bunyan
