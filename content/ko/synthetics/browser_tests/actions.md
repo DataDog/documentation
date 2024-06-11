@@ -5,10 +5,10 @@ further_reading:
   tag: 설명서
   text: 브라우저 테스트를 위한 고급 옵션에 대해 알아보기
 - link: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_global_variable
-  tag: 테라폼
+  tag: 외부 사이트
   text: Terraform으로 Synthetic 글로벌 변수 생성 및 관리
 kind: 설명서
-title: 브라우저 테스트 단계
+title: 브라우저 테스팅 단계
 ---
 
 ## 개요
@@ -202,7 +202,7 @@ return jQuery().jquery.startsWith('3.5.1')
 
 * Enter
 * 화살표 (상, 하, 좌, 우)
-* Tab (양식 외)
+* Tab (양식 외부)
 * Escape
 * Backspace
 
@@ -260,7 +260,7 @@ return jQuery().jquery.startsWith('3.5.1')
 : 테스트가 + 또는 - `n` 단위로 시작되는 UTC 타임스탬프에 해당하는 값으로 Datadog의 허용 단위 중 하나로 타임스탬프를 생성합니다.
 
 `{{ uuid }}`
-: 버전 4 UUID(Universally Unique Identifier)를 생성합니다.
+: 버전 4 범용 고유 식별자 (UUID)를 생성합니다.
 
 테스트 결과에서 로컬 변수 값을 명시하지 않으려면 **Hide and obfuscate variable value**를 선택합니다. 변수 문자열을 정의한 후 **Add Variable**를 클릭합니다.
 
@@ -268,8 +268,15 @@ return jQuery().jquery.startsWith('3.5.1')
 
 요소의 텍스트를 추출하여 `span` 또는 `div`과 같은 콘텐츠에서 변수를 생성합니다.
 
+#### 이메일 본문
 
-#### 자바스크립트(Javascript)
+다음 방법 중 하나([`regex`][13] 또는 [`Xpath`][12])를 사용해 이메일 본문에서 변수를 생성합니다.
+
+* [`Regex`][13]는 이메일의 일반 텍스트 본문에서 첫 번째 일치 패턴을 검색하고 반환합니다(예: `/*./`). 패턴을 발견할 수 없는 경우 HTML 본문을 검색합니다.
+
+* [`Xpath`][12]는 이메일이 HTML 본문을 포함할 때만 적용 가능합니다. 해당하는 위치의 콘텐츠를 반환합니다(예: `$`).
+
+#### JavaScript
 
 JavaScript 단계는 동기 및 비동기 코드를 모두 지원합니다. 브라우저 테스트는 페이지에 스크립트를 추가하여 외부 JavaScript를 로드하기 때문에, 웹사이트가 외부 JavaScript를 허용하는 경우에만 작동합니다.
 
@@ -285,7 +292,7 @@ JavaScript 함수는 다음 파라미터와 함께 제공되며 반환문이 필
 
 JavaScript 어설션은 활성 페이지의 컨텍스트에서 실행되므로, 이러한 단계에서는 활성 페이지에 정의된 모든 개체(예: 라이브러리, 내장 및 글로벌 변수)에 액세스할 수 있습니다. 외부 라이브러리를 로드하려면 promise를 사용하세요.
 
-예를 들면 다음과 같습니다.
+예시:
 
 ```javascript
 const script = document.createElement('script');
@@ -355,16 +362,16 @@ HTTP 요청을 정의하려면:
    * **Request headers**: HTTP 요청에 추가할 헤더를 정의합니다. 기본 헤더(예: `user-agent` 헤더)를 재정의할 수도 있습니다.
    * **Cookies**: HTTP 요청에 추가할 쿠키를 정의합니다. `<COOKIE_NAME1>=<COOKIE_VALUE1>; <COOKIE_NAME2>=<COOKIE_VALUE2>` 형식을 사용하여 여러 쿠키를 설정합니다.
 
-   {{< /tabs >}}
+   {{% /tab %}}
 
    {{% tab "인증" %}}
 
    * **Client certificate**: 클라이언트 인증서 및 연결된 프라이빗 키를 업로드하여 mTLS를 통해 인증합니다.
    * **HTTP Basic Auth**: HTTP 기본 인증 자격 증명을 추가합니다.
-   * **Digest Auth**: 다이제스트 인증 자격 증명을 추가합니다.
-   * *NTLM**: NTLM 인증 자격 증명을 추가합니다. NTLMv2와 NTLMv1을 모두 지원합니다.
+   * **Digest Auth**: Digest 인증 자격 증명을 추가합니다.
+   * **NTLM**: NTLM 인증 자격 증명을 추가합니다. NTLMv2와 NTLMv1을 모두 지원합니다.
 
-   {{< /tabs >}}
+   {{% /tab %}}
 
    {{% tab "쿼리 파라미터" %}}
 
@@ -375,7 +382,7 @@ HTTP 요청을 정의하려면:
    {{% tab "요청 본문" %}}
 
    * **Body type**: HTTP 요청에 추가하려는 요청 본문 유형(`text/plain`, `application/json`,`text/xml` ,`text/html` ,`application/x-www-form-urlencoded`, `GraphQL` 또는 `None`)을 선택합니다.
-   * **Request body**: HTTP 요청 본문의 콘텐츠를 추가합니다. 요청 본문의 최대 크기는 50KB로 제한됩니다.
+   * **Request body**: HTTP 요청 본문의 내용을 추가합니다. 요청 본문의 최대 크기는 50KB로 제한됩니다.
 
    {{< /tabs >}}
 
@@ -384,7 +391,7 @@ HTTP 요청을 정의하려면:
    * **Proxy URL**: HTTP 요청이 통과해야 하는 프록시의 URL을 지정합니다(`http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>`).
    * **Proxy Header**: 프록시에 대한 HTTP 요청에 포함할 헤더를 추가합니다.
 
-   {{< /tabs >}}
+   {{% /tab %}}
 
    {{% tab "프라이버시" %}}
 
@@ -399,26 +406,26 @@ HTTP 요청을 정의하려면:
 
 {{< img src="synthetics/browser_tests/http_request2.png" alt="Make HTTP Request" style="width:80%;" >}}
 
-#### 어설션 추가하기
+#### 어설션 추가
 
 어설션은 예상되는 테스트 결과를 정의합니다. **Test URL**을 클릭하면 `status code`, `response time`, `header`, `content-type`에 있는 기본 어설션이 테스트 응답을 기반으로 추가됩니다. 어설션은 브라우저 테스트에서 HTTP 단계에 대한 선택 사항입니다.
 
-| 유형          | 연산자                                                                                               | 값의 유형                                                      |
+| 유형          | 연산자                                                                                               | 값 유형                                                      |
 |---------------|--------------------------------------------------------------------------------------------------------|----------------------------------------------------------------|
-| 본문          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][11], [`xpath`][12] | _String_ <br> _[Regex][13]_ <br> _String_, _[Regex][13]_ |
+| 본문          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][11], [`xpath`][12] | _문자열_ <br> _[정규식][13]_ <br> _문자열_, _[정규식][13]_ |
 | 헤더        | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`                       | _문자열_ <br>_[정규식][13]_                                      |
 | 응답 시간 | `is less than`                                                                                         | _정수 (ms)_                                                  |
 | 상태 코드   | `is`, `is not`                                                                                         | _정수_                                                      |
 
 HTTP 요청은 다음 `content-encoding` 헤더를 사용하여 본문의 압축을 풀 수 있습니다: `br`, `deflate`, `gzip` 및 `identity`.
 
-- 테스트에 응답 본문에 대한 어설션이 포함되어 있지 않으면, 본문 페이로드가 삭제되고 Synthetics Worker가 설정한 제한 시간 내에서 요청에 대한 관련 응답 시간을 반환합니다.
+- 테스트에 응답 본문에 대한 어설션이 포함되어 있지 않으면 본문 페이로드가 삭제되고 Synthetics Worker가 설정한 제한 시간 내에서 요청에 대한 관련 응답 시간을 반환합니다.
 
-- 테스트가 응답 본문에 어설션을 포함하고 시간 제한에 도달하면, `Assertions on the body/response cannot be run beyond this limit` 오류가 나타납니다.
+- 테스트에 응답 본문에 대한 어설션이 포함되어 있고 제한 시간에 도달하면, `Assertions on the body/response cannot be run beyond this limit` 오류가 나타납니다.
 
 {{< img src="synthetics/browser_tests/assertions.png" alt="Define assertions for your browser test to succeed or fail on" style="width:80%;" >}}
 
-**New Assertion**을 클릭하거나 응답 미리보기를 직접 클릭하여 단계당 최대 20개의 어설션을 생성할 수 있습니다.
+**New Assertion**을 클릭하거나 응답 미리보기를 클릭하여 단계당 최대 20개의 어설션을 생성할 수 있습니다.
 
 #### 응답에서 변수 추출
 
