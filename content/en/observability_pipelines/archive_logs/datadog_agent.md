@@ -25,33 +25,33 @@ This document walks you through the following steps:
 Select the cloud provider you are using to archive your logs.
 
 {{% collapse-content title="Amazon S3" level="h2" %}}
-{{% observability_pipelines/configure_log_archive/instructions %}}
+
+{{% observability_pipelines/configure_log_archive/amazon_s3/instructions %}}
 
 {{< tabs >}}
 {{% tab "Docker" %}}
 
-{{% observability_pipelines/configure_log_archive/docker %}}
-
+{{% observability_pipelines/configure_log_archive/amazon_s3/docker %}}
 
 {{% /tab %}}
 {{% tab "Amazon EKS" %}}
 
-{{% observability_pipelines/configure_log_archive/amazon_eks %}}
+{{% observability_pipelines/configure_log_archive/amazon_s3/amazon_eks %}}
 
 {{% /tab %}}
 {{% tab "Linux (APT)" %}}
 
-{{% observability_pipelines/configure_log_archive/linux_apt %}}
+{{% observability_pipelines/configure_log_archive/amazon_s3/linux_apt %}}
 
 {{% /tab %}}
 {{% tab "Linux (RPM)" %}}
 
-{{% observability_pipelines/configure_log_archive/linux_rpm %}}
+{{% observability_pipelines/configure_log_archive/amazon_s3/linux_rpm %}}
 
 {{% /tab %}}
 {{< /tabs >}}
 
-{{% observability_pipelines/configure_log_archive/connect_s3_to_datadog_log_archives %}}
+{{% observability_pipelines/configure_log_archive/amazon_s3/connect_s3_to_datadog_log_archives %}}
 
 {{% /collapse-content %}}
 
@@ -162,7 +162,7 @@ TKTK
 {{< tabs >}}
 {{% tab "Datadog Archives" %}}
 
-{{% observability_pipelines/destination_env_vars/datadog_archives %}}
+{{% observability_pipelines/destination_env_vars/datadog_archives_amazon_s3 %}}
 
 #### Google Cloud Storage
 
