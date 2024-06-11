@@ -3,4 +3,4 @@ title: Enabling Cloud Security Management on Serverless
 kind: documentation
 ---
 
-ADD PARTIAL OF FARGATE CSM INSTRUCTIONS HERE
+{{< include-markdown "content/en/security/guide/aws_fargate_config_guide.md" >}}

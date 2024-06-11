@@ -22,7 +22,7 @@ This article provides step-by-step instructions for enabling [Cloud Security Man
 
 ## Select CSM features
 
-Datadog provides a guided workflow for enabling CSM. The first step is to select the features you want to enable. Start by clicking **Get Started with Cloud Security Management** on the Overview page to access the **Features** page. 
+Datadog provides a guided workflow for enabling CSM. The first step is to select the features you want to enable. Start by clicking **Get Started with Cloud Security Management** on the [Overview][9] page to access the **Features** page. 
 
 Next, select the features you want to enable. After making your selections, click **Start Using Cloud Security Management** and confirm your choices.
 
@@ -31,6 +31,14 @@ Next, select the features you want to enable. After making your selections, clic
 - Identity Risks (CIEM)
 - Host Vulnerability Management
 - Container Vulnerability Management
+
+| Feature                            | Enables on the Setup page                  |
+|------------------------------------|--------------------------------------------|
+| Compliance Scanning                | Cloud accounts, Source code integrations   |
+| Threat Detection                   | Hosts and containers, Serverless resources |
+| Identity Risks (CIEM)              | CloudTrail logs                            |
+| Host Vulnerability Management      | Hosts and containers                       |
+| Container Vulnerability Management | Hosts and containers                       |
 
 **PLACEHOLDER FOR SCREENSHOT**
 
@@ -44,19 +52,19 @@ For detailed setup instructions, see the following articles:
 
 - [Enabling Cloud Security Management for Cloud Accounts][2]
 - [Enabling Cloud Security Management on the Agent][1]
-- [Enabling Cloud Security Management for Serverless][7]
+- [AWS Fargate Configuration Guide for Datadog Security][7]
 - [Enabling Source Code Integrations for IAC Remediation][8]
 - [Setting up CSM Agentless Scanning][4]
 
 ### Cloud accounts
 
-**Available for**: Threat Detection &#124; Host Vulnerability Management 	&#124; Container Vulnerability Management
+**Available for**: Compliance Scanning
 
-To enable resource scanning for your cloud accounts, you must first set up the integration and then enable CSM for each AWS account, Azure subscription, or Google Cloud project. For detailed instructions, see [Enable Cloud Security Management for Cloud Accounts][2].
+To enable resource scanning for your cloud accounts, set up the AWS, Azure, or Google Cloud integration, and then enable CSM for each AWS account, Azure subscription, or Google Cloud project. For detailed instructions, see [Enabling Cloud Security Management for Cloud Accounts][2].
 
 ### Hosts and containers
 
-**Available for**: Compliance Scanning
+**Available for**: Threat Detection &#124; Host Vulnerability Management 	&#124; Container Vulnerability Management
 
 Select your infrastructure type for detailed instructions on how to enable CSM on hosts and containers.
 
@@ -66,15 +74,13 @@ Select your infrastructure type for detailed instructions on how to enable CSM o
 
 ### Serverless resources
 
-**Available for**: Compliance Scanning
+**Available for**: Threat Detection
 
-For detailed instructions, see [Enabling Cloud Security Management on Serverless][7].
+For detailed instructions, see [AWS Fargate Configuration Guide for Datadog Security][7].
 
 ### CloudTrail logs
 
-**Available for the following features**: Identity Risks (CIEM)
-
-**Applies to the following features**: Identity Risks (CIEM)
+**Available for**: Identity Risks (CIEM)
 
 Set up AWS CloudTrail logs forwarding to enable CSM Identity Risks and address over-permissive entitlements and risky IAM resources. For detailed instructions, see [Enable Cloud Security Management for Cloud Accounts][2].
 
@@ -82,7 +88,7 @@ Set up AWS CloudTrail logs forwarding to enable CSM Identity Risks and address o
 
 **Available for**: Compliance Scanning
 
-For detailed instructions, see [Enabling Source Code Integrations for IAC Remediation][8].
+Enable Infrastructure as Code (IaC) remediation for your Github repositories. For detailed instructions, see [Enabling Source Code Integrations for IAC Remediation][8].
 
 [1]: /security/cloud_security_management/setup/agent
 [2]: /security/cloud_security_management/setup/cloud_accounts
@@ -90,5 +96,6 @@ For detailed instructions, see [Enabling Source Code Integrations for IAC Remedi
 [4]: /security/cloud_security_management/setup/agentless_scanning
 [5]: https://app.datadoghq.com/security/csm
 [6]: /security/cloud_security_management/
-[7]: /security/cloud_security_management/setup/serverless
+[7]: /security/guide/aws_fargate_config_guide/?tab=amazonecs#cloud-security-management
 [8]: /security/cloud_security_management/setup/source_code_integrations
+[9]: https://app.datadoghq.com/security/getting-started

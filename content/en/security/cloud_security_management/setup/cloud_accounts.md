@@ -3,7 +3,7 @@ title: Enabling Cloud Security Management for Cloud Accounts
 kind: documentation
 ---
 
-Use the following instructions to enable [CSM Misconfigurations][2] and [CSM Identity Risks][3] for your cloud accounts. To learn more about the supported deployment types for each CSM feature, see [Setting Up Cloud Security Management][9].
+Use the following instructions to enable Compliance Scanning for Cloud Security Management (CSM). Compliance Scanning is required for [CSM Misconfigurations][2] and [CSM Identity Risks][3].
 
 ## Enable resource scanning
 
@@ -79,4 +79,3 @@ Set up a trigger on your Datadog Forwarder Lambda function to send CloudTrail lo
 [19]: https://console.aws.amazon.com/cloudtrail/home
 [20]: https://console.aws.amazon.com/lambda/home
 [21]: https://app.datadoghq.com/logs?query=service%3Acloudtrail
-[22]: /security/cloud_security_management/setup/csm_enterprise/cloud_accounts
