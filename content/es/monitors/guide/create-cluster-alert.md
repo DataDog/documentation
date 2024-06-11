@@ -26,11 +26,11 @@ En este ejemplo, quieres recibir una notificación cuando el 40 por ciento de lo
 
 {{< img src="monitors/faq/cluster-condition.png" alt="cluster-alert-condition" >}}
 
-* Luego, establece la condición para generar una alerta si el porcentaje de hosts que tienen esa condición alcanzan el 40 por ciento.
+* Luego, establece la condición para generar una alerta si el porcentaje de hosts que tienen esa condición alcanza el 40 por ciento.
 
 {{< img src="monitors/faq/cluster-trigger.png" alt="cluster-alert-trigger" >}}
 
-Este monitor rastrea el porcentaje de hosts que han mostrado un uso de CPU superior al 50 por ciento en los últimos diez minutos y genera un notificación si más del 40 por ciento de esos hosts cumplen la condición especificada.
+Este monitor rastrea el porcentaje de hosts que han tenido un uso de CPU superior al 50 por ciento durante los últimos diez minutos y genera un notificación si más del 40 por ciento de esos hosts cumplen la condición especificada.
 
 {{< img src="monitors/faq/cluster-status.png" alt="cluster-alert-status" >}}
 
