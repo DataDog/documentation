@@ -24,7 +24,7 @@ further_reading:
 
 The Datadog extension for Visual Studio Code (VS Code) integrates with Datadog to accelerate your development.
 
-{{< img src="/developers/ide_plugins/vscode/datadog-vscode.png" alt="The Datadog for VS Code extension" style="width:100%;" >}}
+{{< img src="/developers/ide_plugins/vscode/datadog-vscode-2.png" alt="The Datadog for VS Code extension" style="width:100%;" >}}
 
 The **Code Insights** view keeps you informed about:
 - Issues from [Error Tracking][10]
