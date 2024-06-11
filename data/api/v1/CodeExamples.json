@@ -763,6 +763,11 @@
     },
     {
       "group": "synthetics",
+      "suffix": "_1987645492",
+      "description": "Create an API HTTP test has bodyHash filled out"
+    },
+    {
+      "group": "synthetics",
       "suffix": "_1487281163",
       "description": "Create an API HTTP test returns \"OK - Returns the created test details.\" response"
     },
