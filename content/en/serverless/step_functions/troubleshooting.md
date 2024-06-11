@@ -21,7 +21,7 @@ In Datadog, go to [**Logs > Log Stream**][2]. Search for `source:stepfunction`. 
 If the Forwarder and state machine tags are set up correctly with the previous steps, the logs are tagged with `DD_TRACE_ENABLED:true`.
 
 #### Search historic logs
-To enable searching historic logs, add a temporary index to the forwarded logs. In Datadog, open the Logs [**Indexes**][4] tab. Click the **New Index** button in the upper right.
+To enable searching historic logs, add a temporary index to the forwarded logs. In Datadog, open the Logs [**Indexes**][3] tab. Click the **New Index** button in the upper right.
 
 Choose a name, set the index filter to `Source:stepfunction`, leave everything else with default values, and save.
 
@@ -35,7 +35,7 @@ If your organization has an existing all-encompassing index with a low limit, pl
 - Verify that you can see both Lambda traces and Step Function traces in Datadog.
 - Verify that you are using Python layer v95+ or Node.js layer v112+.
 - In your AWS console, open your Step Function and ensure that your state machine has `"Payload.$": "States.JsonMerge($$, $, false)"` on the Lambda steps.
-- Execute your Step Function once and verify that the `TaskScheduled` event log of the Lambda step has the payload containing data from the [Step Function context object][3].
+- Execute your Step Function once and verify that the `TaskScheduled` event log of the Lambda step has the payload containing data from the [Step Function context object][4]. If you do not have a `TaskScheduled` event and only have a `LambdaFunctionScheduled` event, update the task in Step Functions definition to use the recommended Lambda integration. See the [AWS documentation][5] for instructions on how to do this.
 
 ## I can see the `aws.stepfunctions` root span but I cannot see any step spans
 Please enable the `Include execution data` option on the state machine's logging. After enabling this option, log execution input, data passed between states, and execution output is logged. The Datadog backend uses the logs to construct these step spans for you.
@@ -60,6 +60,7 @@ If your Lambda has the `DD_TRACE_EXTRACTOR` environment variable set, its traces
 
 [1]: https://app.datadoghq.com/logs
 [2]: https://app.datadoghq.com/logs/livetail
-[3]: https://docs.aws.amazon.com/step-functions/latest/dg/input-output-contextobject.html
-[4]: https://app.datadoghq.com/logs/pipelines/indexes
+[3]: https://app.datadoghq.com/logs/pipelines/indexes
+[4]: https://docs.aws.amazon.com/step-functions/latest/dg/input-output-contextobject.html
+[5]: https://docs.aws.amazon.com/step-functions/latest/dg/connect-lambda.html
 [6]: /logs/log_configuration/indexes/
