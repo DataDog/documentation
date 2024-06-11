@@ -124,7 +124,7 @@ For example, override the following name with `<div data-dd-action-name="Address
 
 Additional use cases to override the default action name include masking sensitive data in the RUM Explorer and streamlining your analytics and search with custom naming conventions.
 ### Mask Action Names
-By default, if you wish to mask all action names, you can utilize the `enablePrivacyForActionName` function in conjunction with the `mask` privacy setting. This operation will automatically substitute all non-overridden action names with a placeholder termed `Masked Element`.
+By default, if you wish to mask all action names, you can utilize the `enablePrivacyForActionName` option in conjunction with the `mask` privacy setting. This operation will automatically substitute all non-overridden action names with a placeholder termed `Masked Element`.
 
 <div class="alert alert-info">
 
