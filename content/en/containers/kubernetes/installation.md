@@ -19,7 +19,7 @@ further_reading:
 
 ## Overview
 
-This page provides instructions on installing the Datadog Agent in a Kubernetes environment. 
+This page provides instructions on installing the Datadog Agent in a Kubernetes environment.
 
 For dedicated documentation and examples for major Kubernetes distributions including AWS Elastic Kubernetes Service (EKS), Azure Kubernetes Service (AKS), Google Kubernetes Engine (GKE), Red Hat OpenShift, Rancher, and Oracle Container Engine for Kubernetes (OKE), see [Kubernetes distributions][1].
 
@@ -264,7 +264,7 @@ For more information, see [Changing your container registry][17].
 {{% tab "Datadog Operator" %}}
 ```shell
 kubectl delete datadogagent datadog
-helm delete my-datadog-operator
+helm delete datadog-operator
 ```
 
 This command deletes all Kubernetes resources created by installing Datadog Operator and deploying the Datadog Agent.

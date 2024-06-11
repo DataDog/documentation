@@ -25,7 +25,7 @@ For usage examples you can run from a Jupyter notebook, see the [LLM Observabili
 1. The latest `ddtrace` package must be installed:
 
 {{< code-block lang="shell">}}
-pip install git+https://github.com/DataDog/dd-trace-py.git@main
+pip install ddtrace
 {{< /code-block >}}
 
 2. LLM Observability requires a Datadog API key (see [the instructions for creating an API key][7]).
@@ -38,7 +38,7 @@ Enable LLM Observability by running your application using the `ddtrace-run` com
 
 {{< code-block lang="shell">}}
 DD_SITE=<YOUR_DATADOG_SITE> DD_API_KEY=<YOUR_API_KEY> DD_LLMOBS_ENABLED=1 \
-DD_LLMOBS_APP_NAME=<YOUR_ML_APP_NAME> ddtrace-run <YOUR_APP_STARTUP_COMMAND>
+DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> ddtrace-run <YOUR_APP_STARTUP_COMMAND>
 {{< /code-block >}}
 
 `DD_API_KEY`
@@ -53,7 +53,7 @@ DD_LLMOBS_APP_NAME=<YOUR_ML_APP_NAME> ddtrace-run <YOUR_APP_STARTUP_COMMAND>
 : required - _integer or string_ 
 <br />Toggle to enable submitting data to LLM Observability. Should be set to `1` or `true`.
 
-`DD_LLMOBS_APP_NAME`
+`DD_LLMOBS_ML_APP`
 : required - _string_ 
 <br />The name of your LLM application, service, or project, under which all traces and spans are grouped. This helps distinguish between different applications or experiments. See [Application naming guidelines](#application-naming-guidelines) for allowed characters and other constraints. To override this value for a given root span, see [Tracing multiple applications](#tracing-multiple-applications).
 
@@ -78,7 +78,7 @@ LLMObs.enable(
 
 `ml_app`
 : optional - _string_
-<br />The name of your LLM application, service, or project, under which all traces and spans are grouped. This helps distinguish between different applications or experiments. See [Application naming guidelines](#application-naming-guidelines) for allowed characters and other constraints. To override this value for a given trace, see [Tracing multiple applications](#tracing-multiple-applications). If not provided, this defaults to the value of `DD_LLMOBS_APP_NAME`.
+<br />The name of your LLM application, service, or project, under which all traces and spans are grouped. This helps distinguish between different applications or experiments. See [Application naming guidelines](#application-naming-guidelines) for allowed characters and other constraints. To override this value for a given trace, see [Tracing multiple applications](#tracing-multiple-applications). If not provided, this defaults to the value of `DD_LLMOBS_ML_APP`.
 
 `integrations_enabled` - **default**: `true`
 : optional - _boolean_ 
@@ -106,7 +106,7 @@ LLMObs.enable(
 
 #### Application naming guidelines
 
-Your application name (the value of `DD_LLMOBS_APP_NAME`) must start with a letter. It may contain the characters listed below:
+Your application name (the value of `DD_LLMOBS_ML_APP`) must start with a letter. It may contain the characters listed below:
 
 - Alphanumerics
 - Underscores
@@ -588,14 +588,14 @@ def separate_task(workflow_span):
 
 The SDK supports tracking multiple LLM applications from the same service.
 
-You can configure an environment variable `DD_LLMOBS_APP_NAME` to the name of your LLM application, which all generated spans are grouped into by default.
+You can configure an environment variable `DD_LLMOBS_ML_APP` to the name of your LLM application, which all generated spans are grouped into by default.
 
 To override this configuration and use a different LLM application name for a given root span, pass the `ml_app` argument with the string name of the underlying LLM application when starting a root span for a new trace or a span in a new process.
 
 {{< code-block lang="python">}}
 from ddtrace.llmobs.decorators import workflow
 
-@workflow(name="process_message", ml_app="<NON_DEFAULT_LLM_APP_NAME>")
+@workflow(name="process_message", ml_app="<NON_DEFAULT_ML_APP_NAME>")
 def process_message():
     ... # user application logic
     return
