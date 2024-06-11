@@ -8,7 +8,7 @@
 .collapsible-header {
     display: flex;
     align-items: center;
-    padding: 16px;
+    padding: 8px;
     cursor: pointer;
     outline: none;
     background-color: #ffffff00;
@@ -22,6 +22,17 @@
 .collapsible-section[open] .collapsible-header {
     background-color: #632DA6;
     color: white;
+}
+
+.collapsible-section[open] .header-text-inner {
+    color: white;
+}
+
+.header-text-inner {
+    font-size: 1.5rem;
+    margin: 0;
+    line-height: 1.5;
+    font-weight: bold;
 }
 
 .header-content {
@@ -49,11 +60,6 @@
 .header-text {
     display: flex;
     align-items: center;
-}
-
-.header-text-inner {
-    margin: 0;
-    line-height: 1.5;
 }
 
 .collapsible-content {

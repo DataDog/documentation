@@ -2708,6 +2708,11 @@ menu:
       parent: cloud_cost
       identifier: cloud_cost_recommendations
       weight: 8
+    - name: Cost Monitors
+      url: /cloud_cost_management/monitors
+      parent: cloud_cost
+      identifier: cloud_cost_monitors
+      weight: 9
     - name: APM
       url: tracing/
       pre: apm
@@ -2784,21 +2789,26 @@ menu:
       parent: custom_instrumentation
       identifier: custom_instrumentation_dotnet
       weight: 2028
+    - name: iOS
+      url: tracing/trace_collection/custom_instrumentation/ios
+      parent: custom_instrumentation
+      identifier: custom_instrumentation_ios
+      weight: 2029
     - name: Rust
       url: tracing/trace_collection/custom_instrumentation/rust
       parent: custom_instrumentation
       identifier: custom_instrumentation_rust
-      weight: 2029
+      weight: 2030
     - name: Swift
       url: tracing/trace_collection/custom_instrumentation/swift
       parent: custom_instrumentation
-      identifier: custom_instrumentation_ios
-      weight: 2030
+      identifier: custom_instrumentation_swift
+      weight: 2031
     - name: Elixir
       url: tracing/trace_collection/custom_instrumentation/elixir
       parent: custom_instrumentation
       identifier: custom_instrumentation_elixir
-      weight: 2031
+      weight: 2032
     - name: Library Compatibility
       url: tracing/trace_collection/compatibility/
       parent: tracing_trace_collection
@@ -3568,7 +3578,7 @@ menu:
       parent: ci_explorer
       identifier: ci_explorer_search_syntax
       weight: 301
-    - name: Search Test Runs or Pipeline Executions
+    - name: Search Pipeline Executions
       url: continuous_integration/explorer/facets/
       parent: ci_explorer
       identifier: ci_explorer_facets
@@ -3701,10 +3711,30 @@ menu:
       identifier: tests_search
       weight: 3
     - name: Explorer
-      url: continuous_integration/explorer
+      url: tests/explorer/
       parent: tests
       identifier: tests_explorer
       weight: 4
+    - name: Search Syntax
+      url: tests/explorer/search_syntax
+      parent: tests_explorer
+      identifier: tests_explorer_search_syntax
+      weight: 401
+    - name: Search Test Runs
+      url: tests/explorer/facets/
+      parent: tests_explorer
+      identifier: tests_explorer_facets
+      weight: 402
+    - name: Export
+      url: tests/explorer/export/
+      parent: tests_explorer
+      identifier: tests_explorer_export
+      weight: 403
+    - name: Saved Views
+      url: tests/explorer/saved_views/
+      parent: tests_explorer
+      identifier: tests_explorer_saved_views
+      weight: 404
     - name: Monitors
       url: monitors/types/ci/?tab=tests
       parent: tests
@@ -4545,6 +4575,11 @@ menu:
       parent: csm_setup
       identifier: csm_setup_agentless_scanning
       weight: 10015
+    - name: Agent Variables
+      url: security/cloud_security_management/setup/agent_variables
+      parent: csm_setup
+      identifier: csm_setup_agent_variables
+      weight: 10016
     - name: Agent
       url: security/cloud_security_management/setup/csm_cloud_workload_security/agent
       parent: csm_setup_cloud_workload_security

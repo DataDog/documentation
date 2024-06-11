@@ -115,12 +115,12 @@ TCP 트랜스포트를 강제 사용하려면 Agent [주요 설정 파일][1](`d
 ```yaml
 logs_enabled: true
 logs_config:
-  use_tcp: true
+  force_use_tcp: true
 ```
 환경 변수와 로그를 보내려면 다음과 같이 설정하세요.
 
 * `DD_LOGS_ENABLED=true`
-* `DD_LOGS_CONFIG_USE_TCP=true`
+* `DD_LOGS_CONFIG_FORCE_USE_TCP=true`
 
 기본적으로 Datadog Agent에서 로그를 Datadog로 전송할 때는 TLS-암호화 TCP를 사용합니다. 이를 위해 아웃바운드 커뮤니케이션(Datadog 미국 사이트의 경우 포트 `10516`로, Datadog 유럽 사이트의 경우 포트 `443`로)이 필요합니다.
 

@@ -13921,9 +13921,45 @@ components:
         which property they apply, and upon which target.'
       oneOf:
       - $ref: '#/components/schemas/SyntheticsAssertionTarget'
+      - $ref: '#/components/schemas/SyntheticsAssertionBodyHashTarget'
       - $ref: '#/components/schemas/SyntheticsAssertionJSONPathTarget'
       - $ref: '#/components/schemas/SyntheticsAssertionJSONSchemaTarget'
       - $ref: '#/components/schemas/SyntheticsAssertionXPathTarget'
+    SyntheticsAssertionBodyHashOperator:
+      description: Assertion operator to apply.
+      enum:
+      - md5
+      - sha1
+      - sha256
+      example: md5
+      type: string
+      x-enum-varnames:
+      - MD5
+      - SHA1
+      - SHA256
+    SyntheticsAssertionBodyHashTarget:
+      description: An assertion which targets body hash.
+      properties:
+        operator:
+          $ref: '#/components/schemas/SyntheticsAssertionBodyHashOperator'
+        target:
+          description: Value used by the operator.
+          example: 123456
+        type:
+          $ref: '#/components/schemas/SyntheticsAssertionBodyHashType'
+      required:
+      - type
+      - operator
+      - target
+      type: object
+    SyntheticsAssertionBodyHashType:
+      description: Type of the assertion.
+      enum:
+      - bodyHash
+      example: bodyHash
+      type: string
+      x-enum-varnames:
+      - BODY_HASH
     SyntheticsAssertionJSONPathOperator:
       description: Assertion operator to apply.
       enum:
@@ -16085,7 +16121,6 @@ components:
 
             (in minutes).'
           format: int64
-          maximum: 1440
           minimum: 0
           type: integer
       type: object
@@ -16302,6 +16337,10 @@ components:
           type: string
         name:
           description: Name of the file.
+          maxLength: 1500
+          type: string
+        originalFileName:
+          description: Original name of the file.
           maxLength: 1500
           type: string
         size:
