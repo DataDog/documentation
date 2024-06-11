@@ -211,7 +211,6 @@ In the ECS task definition, attach the IAM role to the task role where the Agent
 {{% tab "EKS" %}}
 
 5. Create an IAM role and attach the IAM policy created in step 2 to the role.
-Map the IAM role to the Kubernetes service account where the Agent is running. For more information, see [IAM roles for Amazon EKS service account][1].
 
 ```bash
 # Create an IAM OIDC provider for your cluster
@@ -232,6 +231,8 @@ $ eksctl create iamserviceaccount \
   --override-existing-serviceaccounts \
   --approve
 ```
+
+Map the IAM role to the Kubernetes service account where the Agent is running. For more information, see [IAM roles for Amazon EKS service account][1].
 
 [1]: https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html
 
