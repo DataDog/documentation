@@ -34,7 +34,7 @@ further_reading:
 
 Dynamic instrumentation allows you to add instrumentation into your running production systems without any restarts and at any location in your application's code, including third-party libraries. You can add or modify telemetry for logs, metrics, spans, and corresponding tagging, from the Datadog UI. Dynamic Instrumentation has low overhead and has no side effects on your system.
 
-If you are interested in trying out the latest user experience improvements for Dynamic Instrumentation, consider opting into the [Symbol Database private beta][17].
+If you are interested in trying out the latest user experience improvements for Dynamic Instrumentation, consider opting into the [autocomplete and search public beta][17].
 
 ## Getting started
 
@@ -42,12 +42,13 @@ If you are interested in trying out the latest user experience improvements for 
 
 Dynamic Instrumentation requires the following:
 
-- [Datadog Agent][1] 7.44.0 or higher is installed alongside your service.
+- [Datadog Agent][1] 7.44.0 (recommended 7.45.0) or higher is installed alongside your service.
 - [Remote Configuration][2] is enabled in that Agent.
-- For Java applications, tracing library [`dd-trace-java`][3] 1.24.0 or higher.
+- For Java applications, tracing library [`dd-trace-java`][3] 1.24.0 (recommended 1.34.0) or higher.
 - For Python applications, tracing library [`dd-trace-py`][4] 2.2.0 or higher.
-- For .NET applications, tracing library [`dd-trace-dotnet`][5] 2.42.0 or higher.
+- For .NET applications, tracing library [`dd-trace-dotnet`][5] 2.42.0 (recommended 2.53.0) or higher.
 - [Unified Service Tagging][6] tags `service`, `env`, and `version` are applied to your deployment.
+- Optionally, [autocomplete and search (open beta)][17] is enabled.
 - Optionally, [Source Code Integration][7] is set up for your service.
 - The **Dynamic Instrumentation Read Configuration** (`debugger_read`) permission is required to access the Dynamic Instrumentation page
 - The **Dynamic Instrumentation Write Configuration** (`debugger_write`) permission is required to create or modify instrumentations.
@@ -98,7 +99,7 @@ All probe types require the same initial setup:
 1. Go to the [Dynamic Instrumentation page][12].
 1. Click **Create Probe** in the top right, or click the three-dot menu on a service and select **Add a probe for this service**.
 1. If they are not prefilled, choose service, runtime, environment, and version.
-1. In the source code, specify where to set the probe by selecting either a class and method or a source file and line. If you set up Source Code Integration for your service, autocomplete shows suggestions for the selecting a file, and displays the file's code so you can choose the line.
+1. In the source code, specify where to set the probe by selecting either a class and method or a source file and line. If you opted into the [autocomplete and search public beta][17] and you set up Source Code Integration for your service, autocomplete shows suggestions for the selecting a class / method, and displays the file's code so you can choose the line.
 
 See the individual probe types below for specific creation steps for each probe type.
 

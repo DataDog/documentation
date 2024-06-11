@@ -1,31 +1,28 @@
 ---
-title: Enable Symbol Database for Java
+title: Enable autocomplete and search for Java
 kind: Documentation
 is_beta: true
-private: true
+private: false
 code_lang: java
 type: multi-code-lang
 code_lang_weight: 10
 ---
 
-{{< beta-callout-private url="https://forms.gle/UG9EELAy8Li6z2jW8" >}}
-Interested in an improved user experience when creating Dynamic Instrumentation probes? Join the Symbol Database private beta here.
-{{< /beta-callout-private >}}
-
-[Symbol Database][6] is a feature of Dynamic Instrumentation in private beta.
+{{< beta-callout url="#" btn_hidden="true" >}}
+Autocomplete and search are in public beta.
+{{< /beta-callout >}}
 
 ## Requirements
 
 - [Dynamic Instrumentation][1] is enabled for your service.
-- Tracing library [`dd-trace-java`][6] 1.25.0 or higher is installed.
+- Tracing library [`dd-trace-java`][6] 1.34.0 or higher is installed.
 
 ## Installation
 
-To run your service with Dynamic Instrumentation enabled, and additionally enable Symbol Database uploads:
+Run your service with Dynamic Instrumentation enabled, and additionally enable autocomplete and search:
 
-1. Set the `-Ddd.symbol.database.upload.enabled` flag or the `DD_SYMBOL_DATABASE_UPLOAD_ENABLED` environment variable to `true`. 
-2. Set the `-Ddd.symbol.database.includes` flag or the `DD_SYMBOL_DATABASE_INCLUDES` environment variable to your package prefix (for example, `com.datadoghq`). The setting expects a comma-separated list, so you can add multiple prefixes. 
-3. Specify the `dd.service` and `dd.version` [Unified Service Tags][5].
+1. Set the `-Ddd.symbol.database.upload.enabled` flag or the `DD_SYMBOL_DATABASE_UPLOAD_ENABLED` environment variable to `true`.
+2. Specify the `dd.service` and `dd.version` [Unified Service Tags][5].
 
 {{< tabs >}}
 {{% tab "Command arguments" %}}
@@ -39,7 +36,6 @@ java \
     -Ddd.version=<YOUR_VERSION> \
     -Ddd.dynamic.instrumentation.enabled=true \
     -Ddd.symbol.database.upload.enabled=true \
-    -Ddd.symbol.database.includes=<YOUR_PACKAGE_PREFIX> \
     -jar <YOUR_SERVICE>.jar <YOUR_SERVICE_FLAGS>
 ```
 {{% /tab %}}
@@ -52,7 +48,6 @@ export DD_ENV=<YOUR_ENV>
 export DD_VERSION=<YOUR_VERSION>
 export DD_DYNAMIC_INSTRUMENTATION_ENABLED=true
 export DD_SYMBOL_DATABASE_UPLOAD_ENABLED=true
-export DD_SYMBOL_DATABASE_INCLUDES=<YOUR_PACKAGE_PREFIX>
 java \
     -javaagent:dd-java-agent.jar \
     -jar <YOUR_SERVICE>.jar <YOUR_SERVICE_FLAGS>
@@ -70,7 +65,26 @@ java \
    $ java -jar my-service.jar -javaagent:dd-java-agent.jar ...
    ```
 
-2. After starting your service with Symbol Database enabled, you can use Symbol Database's IDE-like features on the [APM > Dynamic Instrumentation page][4].
+3. After starting your service with Dynamic Instrumentation with autocomplete and search enabled, you can use Dynamic Instrumentation's IDE-like features on the [APM > Dynamic Instrumentation page][4].
+
+## Additional configuration
+
+### Third party detection
+
+If your code is accidentally recognized as third-party code or third-party code is accidentally recognized as user code, you can configure the third-party detection with these settings:
+
+```
+export DD_THIRD_PARTY_DETECTION_EXCLUDES=<LIST_OF_USER_CODE_PACKAGE_PREFIXES>
+export DD_THIRD_PARTY_DETECTION_INCLUDES=<LIST_OF_ADDITIONAL_THIRD_PARTY_PACKAGE_PREFIXES>
+```
+
+or:
+
+```
+  -Ddd.third.party.detection.excludes=<LIST_OF_USER_CODE_PACKAGE_PREFIXES> \
+  -Ddd.third.party.detection.includes=<LIST_OF_ADDITIONAL_THIRD_PARTY_PACKAGE_PREFIXES> \
+```
+
 
 [1]: /dynamic_instrumentation
 [2]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
