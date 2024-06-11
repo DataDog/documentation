@@ -47,7 +47,7 @@ It packs several features, including:
 
 ## Requirements
 
-- **A Datadog account**: The extension requires a Datadog account (except when using [Static Analysis][14] features). If you're new to Datadog, go to the [Datadog website][datadog] to learn more about Datadog's observability tools and sign up for a free trial.
+- **A Datadog account**: The extension requires a Datadog account (except when using [Static Analysis][14] features). If you're new to Datadog, go to the [Datadog website][2] to learn more about Datadog's observability tools and sign up for a free trial.
 
 - **VS Code Git**: The extension works better when VS Code Git integration is enabled. You can ensure that the integration is enabled by checking the `git.enabled` setting.
 
@@ -66,13 +66,13 @@ Code Insights include a detailed description for each issue, and links to:
 - The related source code location
 - The Datadog platform for additional information
 
-You can dismiss individual insights and set filters to view the categories of insights that you are most interested to see.
+You can dismiss individual Code Insights and set filters to view the ones you are most interested in.
 
 ## Synthetic Tests
 
 The Datadog extension enables you to [run Synthetic HTTP tests and browser tests on local environments][1] directly in VS Code. You can identify and address potential issues resulting from code changes before they are deployed into production and impact your end users.
 
-<div class="alert alert-info">We only support <a href="https://docs.datadoghq.com/synthetics/api_tests/http_tests/?tab=requestoptions">HTTP API tests</a> and <a href=" https://docs.datadoghq.com/synthetics/browser_tests/?tab=requestoptions">Browser tests</a>.</div>
+<div class="alert alert-info">We support <a href="https://docs.datadoghq.com/synthetics/api_tests/http_tests/?tab=requestoptions">HTTP API tests</a> and <a href=" https://docs.datadoghq.com/synthetics/browser_tests/?tab=requestoptions">Browser tests</a>.</div>
 
 
 {{< img src="developers/ide_plugins/vscode/vscode-extension-demo.png" alt="The Datadog Extension in VS Code" style="width:100%;" >}}
@@ -103,7 +103,7 @@ The **View in VS Code** feature provides a link from Datadog directly to your so
 
 ## Logs navigation
 
-You can navigate to the [Log Explorer][log_explorer] on the [Datadog platform][datadog] directly from your source code files.
+You can navigate to the [Log Explorer][28] on the [Datadog platform][2] directly from your source code files.
 
 If you're using a supported logging library, the extension is able to show you code lenses on the lines where it has detected log patterns that match the Datadog platform records:
 
@@ -123,8 +123,6 @@ The supported logging libraries are:
 Alternatively, you can select some text in your source code, right click on them, and look for the **Datadog > Search Logs With Selected Text** option.
 
 {{< img src="developers/ide_plugins/vscode/log_search.png" alt="Using the Datadog Logs explorer feature" style="width:100%;" >}}
-
-<div class="alert alert-info">All these features require you to sign in to <a href="https://www.datadoghq.com/">source code integration</a> Datadog.</div>
 
 ## Code Delta
 
@@ -156,35 +154,35 @@ Once the configuration file is created, the static analyzer runs automatically i
 
 ## License
 
-Please read this [End-User License Agreement][eula] carefully before downloading or using the Datadog Visual Studio Code Extension.
+Please read this [End-User License Agreement][23] carefully before downloading or using the Datadog Visual Studio Code Extension.
 
 ## Data and telemetry
 
-Datadog anonymously collects information about your usage of this IDE, including how you interact with it, whether errors occurred while using it, and what caused those errors, in accordance with the [Datadog Privacy Policy][datadog_privacy_policy] and Datadog's [VS Code extension EULA][eula].
+Datadog anonymously collects information about your usage of this IDE, including how you interact with it, whether errors occurred while using it, and what caused those errors, in accordance with the [Datadog Privacy Policy][24] and Datadog's [VS Code extension EULA][23].
 
-If you don't wish to send this data to [Datadog][datadog], you can opt out at any time in the extension settings: `Datadog > Telemetry > Setup > Enable Telemetry`.
+If you don't wish to send this data to [Datadog][2], you can opt out at any time in the extension settings: `Datadog > Telemetry > Setup > Enable Telemetry`.
 
-<div class="alert alert-info">The Datadog extension also honors the [VS Code telemetry][vs_code_telemetry] telemetry setting.</a>
+<div class="alert alert-info">The Datadog extension also honors the <a href="https://code.visualstudio.com/docs/getstarted/telemetry#_output-channel-for-telemetry-events">VS Code telemetry</a> telemetry setting.</div>
 
 ## Help and feedback
 
-To share your feedback, email [team-ide-integration@datadoghq.com][feedback_email] or create an issue in the extension's [public repository][public_repo].
+To share your feedback, email [team-ide-integration@datadoghq.com][9] or create an issue in the extension's [public repository][26].
 
-Check out the [issues][known_issues] section to discover known issues.
+Check out the [issues][27] section to discover known issues.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /continuous_testing/
-[datadog]: https://www.datadoghq.com/
+[2]: https://www.datadoghq.com/
 [3]: https://app.datadoghq.com/synthetics/create
 [4]: /getting_started/synthetics/api_test
 [5]: /getting_started/synthetics/browser_test
 [6]: https://marketplace.visualstudio.com/items?itemName=Datadog.datadog-vscode
 [7]: /account_management/rbac/?tab=datadogapplication#datadog-default-roles
 [8]: /account_management/rbac/?tab=datadogapplication#custom-roles
-[feedback_email]: mailto:team-ide-integration@datadoghq.com
+[9]: mailto:team-ide-integration@datadoghq.com
 [10]: /tracing/error_tracking/
 [11]: /security/application_security/vulnerability_management/
 [12]: /continuous_integration/guides/flaky_test_management/
@@ -198,8 +196,9 @@ Check out the [issues][known_issues] section to discover known issues.
 [20]: https://github.com/log4js-node/log4js-node
 [21]: https://docs.python.org/3/library/logging.html
 [22]: /continuous_integration/static_analysis/?tab=circleciorbs#setup
-[eula]: https://www.datadoghq.com/legal/eula/
-[datadog_privacy_policy]: https://www.datadoghq.com/legal/privacy/
-[vs_code_telemetry]: https://code.visualstudio.com/docs/getstarted/telemetry#_output-channel-for-telemetry-events
-[public_repo]: https://github.com/DataDog/datadog-for-vscode
-[known_issues]: https://github.com/DataDog/datadog-for-vscode/issues?q=is%3Aissue
+[23]: https://www.datadoghq.com/legal/eula/
+[24]: https://www.datadoghq.com/legal/privacy/
+[25]: https://code.visualstudio.com/docs/getstarted/telemetry#_output-channel-for-telemetry-events
+[26]: https://github.com/DataDog/datadog-for-vscode
+[27]: https://github.com/DataDog/datadog-for-vscode/issues?q=is%3Aissue
+[28]: https://docs.datadoghq.com/logs/explorer/
