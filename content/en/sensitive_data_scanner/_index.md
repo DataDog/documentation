@@ -180,8 +180,9 @@ You can create custom scanning rules using regex patterns to scan for sensitive 
 
 **Notes**:
 
-- Any rules that you add or update only affect data coming into Datadog after the rule was defined.
+- Any rules that you add or update affect only data coming into Datadog after the rule was defined.
 - Sensitive Data Scanner does not affect any rules you define on the Datadog Agent directly.
+- After rules are added, ensure that the toggles for your scanning groups are enabled to begin scanning.
 - To turn off Sensitive Data Scanner entirely, set the toggle to **off** for each Scanning Group and Scanning Rule so that they are disabled.
 
 See [Investigate Sensitive Data Issues][8] for details on how to use the [Summary][9] page to triage your sensitive data issues.
