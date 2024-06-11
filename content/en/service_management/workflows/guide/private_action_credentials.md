@@ -5,7 +5,7 @@ disable_toc: false
 ---
 
 {{< callout url="https://google.com" btn_hidden="false" header="Join the Beta!">}}
-Private Actions are in beta. Use this form to request request access today.
+Private Actions are in beta. Use this form to request access today.
 {{< /callout >}}
 
 ## Overview
