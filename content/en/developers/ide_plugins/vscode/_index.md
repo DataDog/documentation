@@ -120,7 +120,7 @@ The supported logging libraries are:
 - Python
   - [logging][21]
 
-Alternatively, you can select some text in your source code, right click, and look for the **Datadog > Search Logs With Selected Text** option.
+Alternatively, you can select some text in your source code, right click on them, and look for the **Datadog > Search Logs With Selected Text** option.
 
 {{< img src="developers/ide_plugins/vscode/log_search.png" alt="Using the Datadog Logs explorer feature" style="width:100%;" >}}
 
@@ -128,7 +128,7 @@ Alternatively, you can select some text in your source code, right click, and lo
 
 ## Code Delta
 
-Code Delta matches the line numbers included in Datadog telemetry to the line numbers of the files you are currently working in VS Code.
+Code Delta matches the line numbers included in Datadog telemetry to the line numbers of the files you are currently working on in VS Code.
 
 For example, all [View in VS Code](#view-in-vs-code) links on the Datadog platform encode runtime version info, and the extension uses that to compute the corresponding line of code in your editor, taking into account version changes.
 
