@@ -48,7 +48,7 @@ On the the Worker installation page:
 {{< tabs >}}
 {{% tab "Datadog Archives" %}}
 
-{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/datadog_archives %}}
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/datadog_archives_amazon_s3 %}}
 
 {{% /tab %}}
 {{% tab "Datadog" %}}
