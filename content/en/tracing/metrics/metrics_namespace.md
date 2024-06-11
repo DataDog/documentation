@@ -100,7 +100,7 @@ With the following definitions:
 
 ### Duration
 
-<div class="alert alert-warning">Datadog recommends <a href="/tracing/guide/ddsketch_trace_metrics/">tracing distribution metrics using DDSketch</a> instead.</div>
+<div class="alert alert-warning">Datadog recommends <a href="/tracing/guide/ddsketch_trace_metrics/">tracing distribution metrics using DDSketch</a>.</div>
 
 `trace.<SPAN_NAME>.duration`
 : **Prerequisite:** This metric exists for any APM service.<br>
@@ -112,7 +112,7 @@ This metric does not support percentile aggregations. Read the [Latency Distribu
 
 ### Duration by
 
-<div class="alert alert-warning">This method of using trace metrics is outdated. Instead, <a href="/tracing/guide/ddsketch_trace_metrics/">tracing distribution metrics using DDSketch</a> is recommended.</div>
+<div class="alert alert-warning">Datadog recommends <a href="/tracing/guide/ddsketch_trace_metrics/">tracing distribution metrics using DDSketch</a>.</div>
 
 `trace.<SPAN_NAME>.duration.by_http_status`
 : **Prerequisite:** This metric exists for HTTP/WEB APM services if http metadata exists.<br>

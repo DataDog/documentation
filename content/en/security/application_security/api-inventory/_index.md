@@ -7,8 +7,6 @@ further_reading:
   text: "Mitigate the primary risks to API security"
 ---
 
-<div class="alert alert-info">API Security Inventory is in beta.</div>
-
 ## Overview
 
 [API Security Inventory][7] monitors your API traffic to provide visibility into the security posture of your APIs, including:

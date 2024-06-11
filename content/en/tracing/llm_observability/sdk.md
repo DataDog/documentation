@@ -16,6 +16,8 @@ The LLM Observability SDK for Python enhances the observability of your Python-b
 
 You can install and configure tracing of various operations such as workflows, tasks, and API calls with function decorators or context managers. You can also annotate these traces with metadata for deeper insights into the performance and behavior of your applications, supporting multiple LLM services or models from the same environment.
 
+For usage examples you can run from a Jupyter notebook, see the [LLM Observability Jupyter Notebooks repository][10].
+
 ## Setup
 
 ### Prerequisites
@@ -23,7 +25,7 @@ You can install and configure tracing of various operations such as workflows, t
 1. The latest `ddtrace` package must be installed:
 
 {{< code-block lang="shell">}}
-pip install git+https://github.com/DataDog/dd-trace-py.git@main
+pip install ddtrace
 {{< /code-block >}}
 
 2. LLM Observability requires a Datadog API key (see [the instructions for creating an API key][7]).
@@ -36,7 +38,7 @@ Enable LLM Observability by running your application using the `ddtrace-run` com
 
 {{< code-block lang="shell">}}
 DD_SITE=<YOUR_DATADOG_SITE> DD_API_KEY=<YOUR_API_KEY> DD_LLMOBS_ENABLED=1 \
-DD_LLMOBS_APP_NAME=<YOUR_ML_APP_NAME> ddtrace-run <YOUR_APP_STARTUP_COMMAND>
+DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> ddtrace-run <YOUR_APP_STARTUP_COMMAND>
 {{< /code-block >}}
 
 `DD_API_KEY`
@@ -51,7 +53,7 @@ DD_LLMOBS_APP_NAME=<YOUR_ML_APP_NAME> ddtrace-run <YOUR_APP_STARTUP_COMMAND>
 : required - _integer or string_ 
 <br />Toggle to enable submitting data to LLM Observability. Should be set to `1` or `true`.
 
-`DD_LLMOBS_APP_NAME`
+`DD_LLMOBS_ML_APP`
 : required - _string_ 
 <br />The name of your LLM application, service, or project, under which all traces and spans are grouped. This helps distinguish between different applications or experiments. See [Application naming guidelines](#application-naming-guidelines) for allowed characters and other constraints. To override this value for a given root span, see [Tracing multiple applications](#tracing-multiple-applications).
 
@@ -70,20 +72,20 @@ LLMObs.enable(
   api_key="<YOUR_DATADOG_API_KEY>",
   site="<YOUR_DATADOG_SITE>",
   agentless_enabled=True,
-  integrations=["langchain", "openai"],
+  integrations_enabled=True,
 )
 {{< /code-block >}}
 
 `ml_app`
 : optional - _string_
-<br />The name of your LLM application, service, or project, under which all traces and spans are grouped. This helps distinguish between different applications or experiments. See [Application naming guidelines](#application-naming-guidelines) for allowed characters and other constraints. To override this value for a given trace, see [Tracing multiple applications](#tracing-multiple-applications). If not provided, this will default to the value of `DD_LLMOBS_APP_NAME`.
+<br />The name of your LLM application, service, or project, under which all traces and spans are grouped. This helps distinguish between different applications or experiments. See [Application naming guidelines](#application-naming-guidelines) for allowed characters and other constraints. To override this value for a given trace, see [Tracing multiple applications](#tracing-multiple-applications). If not provided, this defaults to the value of `DD_LLMOBS_ML_APP`.
 
-`integrations`
-: optional - _list_ 
-<br />A list of integration names to enable automatically tracing LLM calls for (example: `["openai", "langchain"]`). See [LLM integrations](#llm-integrations) for more information about Datadog's supported LLM integrations. **Note**: if not provided, all supported LLM integrations are enabled by default. To disable all integrations, pass in an empty list `[]`.
+`integrations_enabled` - **default**: `true`
+: optional - _boolean_ 
+<br />A flag to enable automatically tracing LLM calls for Datadog's supported [LLM integrations](#llm-integrations). If not provided, all supported LLM integrations are enabled by default. To avoid using the LLM integrations, set this value to `false`.
 
 `agentless_enabled`
-: optional - _boolean_ 
+: optional - _boolean_ - **default**: `false`
 <br />Only required if you are not using the Datadog Agent, in which case this should be set to `True`. This configures the `ddtrace` library to not send any data that requires the Datadog Agent. If not provided, this defaults to the value of `DD_LLMOBS_AGENTLESS_ENABLED`.
 
 `site`
@@ -104,7 +106,7 @@ LLMObs.enable(
 
 #### Application naming guidelines
 
-Your application name (the value of `DD_LLMOBS_APP_NAME`) must start with a letter. It may contain the characters listed below:
+Your application name (the value of `DD_LLMOBS_ML_APP`) must start with a letter. It may contain the characters listed below:
 
 - Alphanumerics
 - Underscores
@@ -264,7 +266,7 @@ To trace an embedding span, use the function decorator `LLMObs.embedding()`.
 
 `name`
 : optional - _string_
-<br/>The name of the operation. If not provided, `name` will be set to the name of the traced function.
+<br/>The name of the operation. If not provided, `name` is set to the name of the traced function.
 
 `model_provider`
 : optional - _string_ - **default**: `"custom"`
@@ -502,6 +504,10 @@ The `LLMObs.submit_evaluation()` method accepts the following arguments:
 : required - _string or numeric type_
 <br />The value of the evaluation. Must be a string (for categorical `metric_type`) or integer/float (for score `metric_type`).
 
+`tags`
+: optional - _dictionary_
+<br />A dictionary of string key-value pairs that users can add as tags regarding the evaluation. For more information about tags, see [Getting Started with Tags][9].
+
 ### Example
 
 {{< code-block lang="python" >}}
@@ -514,9 +520,10 @@ def llm_call():
     span_context = LLMObs.export_span(span=None)
     LLMObs.submit_evaluation(
         span_context,
-        label="sentiment",
+        label="harmfulness",
         metric_type="score",
         value=10,
+        tags={"evaluation_provider": "ragas"},
     )
     return completion
 {{< /code-block >}}
@@ -581,18 +588,79 @@ def separate_task(workflow_span):
 
 The SDK supports tracking multiple LLM applications from the same service.
 
-You can configure an environment variable `DD_LLMOBS_APP_NAME` to the name of your LLM application, which all generated spans are grouped into by default.
+You can configure an environment variable `DD_LLMOBS_ML_APP` to the name of your LLM application, which all generated spans are grouped into by default.
 
 To override this configuration and use a different LLM application name for a given root span, pass the `ml_app` argument with the string name of the underlying LLM application when starting a root span for a new trace or a span in a new process.
 
 {{< code-block lang="python">}}
 from ddtrace.llmobs.decorators import workflow
 
-@workflow(name="process_message", ml_app="<NON_DEFAULT_LLM_APP_NAME>")
+@workflow(name="process_message", ml_app="<NON_DEFAULT_ML_APP_NAME>")
 def process_message():
     ... # user application logic
     return
 {{< /code-block >}}
+
+
+### Distributed tracing
+
+The SDK supports tracing across distributed services or hosts. Distributed tracing works by propagating span information across web requests.
+
+The `ddtrace` library provides some out-of-the-box integrations that support distributed tracing for popular [web framework][11] and [HTTP][12] libraries. If your application makes requests using these supported libraries, you can enable distributed tracing by running:
+{{< code-block lang="python">}}
+from ddtrace import patch
+patch(<INTEGRATION_NAME>=True)
+{{< /code-block >}}
+
+If your application does not use any of these supported libraries, you can enable distributed tracing by manually propagating span information to and from HTTP headers. The SDK provides the helper methods `LLMObs.inject_distributed_headers()` and `LLMObs.activate_distributed_headers()` to inject and activate tracing contexts in request headers.
+
+#### Injecting distributed headers
+
+The `LLMObs.inject_distributed_headers()` method takes a span and injects its context into the HTTP headers to be included in the request. This method accepts the following arguments:
+
+`request_headers`
+: required - _dictionary_
+<br />The HTTP headers to extend with tracing context attributes.
+
+`span`
+: optional - _Span_ - **default**: `The current active span.`
+<br />The span to inject its context into the provided request headers. Any spans (including those with function decorators), this defaults to the current active span.
+
+#### Activating distributed headers
+
+The `LLMObs.activate_distributed_headers()` method takes HTTP headers and extracts tracing context attributes to activate in the new service.
+
+**Note**: You must call `LLMObs.activate_distributed_headers()` before starting any spans in your downstream service. Spans started prior (including function decorator spans) do not get captured in the distributed trace.
+
+This method accepts the following argument:
+
+`request_headers`
+: required - _dictionary_
+<br />The HTTP headers to extract tracing context attributes.
+
+
+#### Example
+
+{{< code-block lang="python" filename="client.py" >}}
+from ddtrace.llmobs import LLMObs
+from ddtrace.llmobs.decorators import workflow
+
+@workflow
+def client_send_request():
+    request_headers = {}
+    request_headers = LLMObs.inject_distributed_headers(request_headers)
+    send_request("<method>", request_headers)  # arbitrary HTTP call
+{{< /code-block >}}
+
+{{< code-block lang="python" filename="server.py" >}}
+from ddtrace.llmobs import LLMObs
+
+def server_process_request(request):
+    LLMObs.activate_distributed_headers(request.headers)
+    with LLMObs.task(name="process_request") as span:
+        pass  # arbitrary server work
+{{< /code-block >}}
+
 
 [1]: https://github.com/openai/openai-python
 [2]: https://boto3.amazonaws.com/v1/documentation/api/latest/index.html
@@ -601,3 +669,6 @@ def process_message():
 [7]: /account_management/api-app-keys/#add-an-api-key-or-client-token
 [8]: /tracing/llm_observability/span_kinds/
 [9]: /getting_started/tagging/
+[10]: https://github.com/DataDog/llm-observability
+[11]: https://docs.datadoghq.com/tracing/trace_collection/compatibility/python/#integrations
+[12]: https://docs.datadoghq.com/tracing/trace_collection/compatibility/python/#library-compatibility

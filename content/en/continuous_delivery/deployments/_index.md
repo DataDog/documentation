@@ -43,6 +43,8 @@ When creating a [dashboard][2] or a [notebook][3], you can use deployment data i
 
 You can export your search query to a [saved view][6] by clicking the **Export** button.
 
+{{< img src="continuous_delivery/explorer/deployment_executions.png" alt="Deployment execution results appearing in the CD Visibility Explorer" width="100%" >}}
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}

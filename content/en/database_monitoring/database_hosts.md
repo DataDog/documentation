@@ -16,6 +16,7 @@ In addition to a filterable graph of active connections for that host, the host 
 |                                                 | Postgres  | SQL Server | MySQL     | Oracle    |
 |-------------------------------------------------|-----------|------------|-----------|-----------|
 | [Top queries](#top-queries)                     | {{< X >}} | {{< X >}}  | {{< X >}} | {{< X >}} |
+| [Stored procedures](#stored-procedures)         |           | {{< X >}}  |           |           |
 | [Metrics](#metrics)                             | {{< X >}} | {{< X >}}  |           |           |
 | [Active connections](#active-connections)       | {{< X >}} | {{< X >}}  | {{< X >}} | {{< X >}} |
 | [Schema](#schema)                               | {{< X >}} |            |           |           |
@@ -38,6 +39,12 @@ Click on any query statement to open a details panel that includes:
 - calling services
 
 {{< img src="database_monitoring/db-list-query-details.png" alt="The details panel for an individual top query" style="width:90%;" >}}
+
+### Stored procedures
+
+Where supported, the **Top Queries** tab includes a **Stored Procedures** section that lists each stored procedure by name, along with its average duration, logical reads count, logical writes count, and more. Expand a stored procedure to view its individual SQL queries, and click on a query to view its details panel.
+
+{{< img src="database_monitoring/stored-procedures.png" alt="A list of stored procedures, with one expanded to show its SQL query" style="width:90%;" >}}
 
 ## Metrics
 

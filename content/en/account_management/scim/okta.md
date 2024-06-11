@@ -7,7 +7,17 @@ algolia:
 
 See the following instructions to synchronize your Datadog users with Okta using SCIM.
 
-For prerequisites, capabilities, and limitations, see [SCIM][1].
+For the capabilities and limitations of this feature, see [SCIM][1].
+
+## Prerequisites
+
+SCIM in Datadog is an advanced feature included in the Enterprise plan.
+
+This documentation assumes your organization manages user identities using an identity provider.
+
+Datadog strongly recommends that you use a service account application key when configuring SCIM to avoid any disruption in access. For further details, see [using a service account with SCIM][2].
+
+When using SAML and SCIM together, Datadog strongly recommends disabling SAML just-in-time (JIT) provisioning to avoid discrepancies in access. Manage user provisioning through SCIM only.
 
 ## Select the Datadog application in the Okta application gallery
 
@@ -25,8 +35,8 @@ For prerequisites, capabilities, and limitations, see [SCIM][1].
 2. Click **Configuration API integration**.
 3. Select **Enable API integration**.
 3. Complete the **Credentials** section as follows:
-    - **Base URL**: `https://app.datadoghq.com/api/v2/scim` **Note:** Use the appropriate subdomain for your site. To find your URL, see [Datadog sites][2].
-    - **API Token**: Use a valid Datadog application key. You can create an application key on [your organization settings page][3]. To maintain continuous access to your data, use a [service account][4] application key.
+    - **Base URL**: `https://{{< region-param key="dd_full_site" >}}/api/v2/scim` **Note:** Use the appropriate subdomain for your site. To find your URL, see [Datadog sites][3].
+    - **API Token**: Use a valid Datadog application key. You can create an application key on [your organization settings page][4]. To maintain continuous access to your data, use a [service account][5] application key.
 
 {{< img src="/account_management/scim/okta-admin-credentials.png" alt="Okta Admin Credentials configuration screen">}}
 
@@ -43,6 +53,7 @@ For prerequisites, capabilities, and limitations, see [SCIM][1].
 Group mapping is not supported.
 
 [1]: /account_management/scim/
-[2]: /getting_started/site
-[3]: https://app.datadoghq.com/organization-settings/application-keys
-[4]: /account_management/org_settings/service_accounts
+[2]: /account_management/scim/#using-a-service-account-with-scim
+[3]: /getting_started/site
+[4]: https://app.datadoghq.com/organization-settings/application-keys
+[5]: /account_management/org_settings/service_accounts

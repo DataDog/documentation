@@ -2296,7 +2296,7 @@ components:
           description: 'POSIX timestamp of the event. Must be sent as an integer (that
             is no quotes).
 
-            Limited to events no older than 18 hours.'
+            Limited to events up to 18 hours in the past and two hours in the future.'
           format: int64
           type: integer
         device_name:
@@ -3142,6 +3142,14 @@ components:
       type: string
       x-enum-varnames:
       - METRIC
+    FormulaType:
+      description: Set the sort type to formula.
+      enum:
+      - formula
+      example: formula
+      type: string
+      x-enum-varnames:
+      - FORMULA
     FreeTextWidgetDefinition:
       description: Free text is a widget that allows you to add headings to your screenboard.
         Commonly used to state the overall purpose of the dashboard. Only available
@@ -3510,6 +3518,8 @@ components:
           $ref: '#/components/schemas/LogQueryDefinition'
         security_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+        sort:
+          $ref: '#/components/schemas/WidgetSortBy'
       type: object
     GraphSnapshot:
       description: Object representing a graph snapshot.
@@ -3530,6 +3540,14 @@ components:
           example: https://app.datadoghq.com/s/f12345678/aaa-bbb-ccc
           type: string
       type: object
+    GroupType:
+      description: Set the sort type to group.
+      enum:
+      - group
+      example: group
+      type: string
+      x-enum-varnames:
+      - GROUP
     GroupWidgetDefinition:
       description: The groups widget allows you to keep similar graphs together on
         your timeboard. Each group has a custom header, can hold one to many graphs,
@@ -13903,9 +13921,45 @@ components:
         which property they apply, and upon which target.'
       oneOf:
       - $ref: '#/components/schemas/SyntheticsAssertionTarget'
+      - $ref: '#/components/schemas/SyntheticsAssertionBodyHashTarget'
       - $ref: '#/components/schemas/SyntheticsAssertionJSONPathTarget'
       - $ref: '#/components/schemas/SyntheticsAssertionJSONSchemaTarget'
       - $ref: '#/components/schemas/SyntheticsAssertionXPathTarget'
+    SyntheticsAssertionBodyHashOperator:
+      description: Assertion operator to apply.
+      enum:
+      - md5
+      - sha1
+      - sha256
+      example: md5
+      type: string
+      x-enum-varnames:
+      - MD5
+      - SHA1
+      - SHA256
+    SyntheticsAssertionBodyHashTarget:
+      description: An assertion which targets body hash.
+      properties:
+        operator:
+          $ref: '#/components/schemas/SyntheticsAssertionBodyHashOperator'
+        target:
+          description: Value used by the operator.
+          example: 123456
+        type:
+          $ref: '#/components/schemas/SyntheticsAssertionBodyHashType'
+      required:
+      - type
+      - operator
+      - target
+      type: object
+    SyntheticsAssertionBodyHashType:
+      description: Type of the assertion.
+      enum:
+      - bodyHash
+      example: bodyHash
+      type: string
+      x-enum-varnames:
+      - BODY_HASH
     SyntheticsAssertionJSONPathOperator:
       description: Assertion operator to apply.
       enum:
@@ -16067,7 +16121,6 @@ components:
 
             (in minutes).'
           format: int64
-          maximum: 1440
           minimum: 0
           type: integer
       type: object
@@ -16284,6 +16337,10 @@ components:
           type: string
         name:
           description: Name of the file.
+          maxLength: 1500
+          type: string
+        originalFileName:
+          description: Original name of the file.
           maxLength: 1500
           type: string
         size:
@@ -16621,6 +16678,8 @@ components:
           $ref: '#/components/schemas/LogQueryDefinition'
         security_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+        sort:
+          $ref: '#/components/schemas/WidgetSortBy'
       type: object
     TagToHosts:
       description: In this object, the key is the tag, the value is a list of host
@@ -16957,6 +17016,8 @@ components:
           $ref: '#/components/schemas/LogQueryDefinition'
         security_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+        sort:
+          $ref: '#/components/schemas/WidgetSortBy'
         style:
           $ref: '#/components/schemas/WidgetRequestStyle'
       type: object
@@ -21168,6 +21229,24 @@ components:
         order:
           $ref: '#/components/schemas/QuerySortOrder'
       type: object
+    WidgetFormulaSort:
+      description: The formula to sort the widget by.
+      properties:
+        index:
+          description: The index of the formula to sort by.
+          example: 0
+          format: int64
+          minimum: 0
+          type: integer
+        order:
+          $ref: '#/components/schemas/WidgetSort'
+        type:
+          $ref: '#/components/schemas/FormulaType'
+      required:
+      - type
+      - index
+      - order
+      type: object
     WidgetFormulaStyle:
       description: Styling options for widget formulas.
       properties:
@@ -21181,6 +21260,22 @@ components:
           example: 1
           format: int64
           type: integer
+      type: object
+    WidgetGroupSort:
+      description: The group to sort the widget by.
+      properties:
+        name:
+          description: The name of the group.
+          example: group_name
+          type: string
+        order:
+          $ref: '#/components/schemas/WidgetSort'
+        type:
+          $ref: '#/components/schemas/GroupType'
+      required:
+      - type
+      - name
+      - order
       type: object
     WidgetGrouping:
       description: The kind of grouping to use.
@@ -21557,6 +21652,25 @@ components:
       x-enum-varnames:
       - ASCENDING
       - DESCENDING
+    WidgetSortBy:
+      description: The controls for sorting the widget.
+      properties:
+        count:
+          description: The number of items to limit the widget to.
+          format: int64
+          minimum: 0
+          type: integer
+        order_by:
+          description: The array of items to sort the widget by in order.
+          items:
+            $ref: '#/components/schemas/WidgetSortOrderBy'
+          type: array
+      type: object
+    WidgetSortOrderBy:
+      description: The item to sort the widget by.
+      oneOf:
+      - $ref: '#/components/schemas/WidgetFormulaSort'
+      - $ref: '#/components/schemas/WidgetGroupSort'
     WidgetStyle:
       description: Widget style definition.
       properties:
@@ -21665,6 +21779,8 @@ components:
         authorizationCode:
           authorizationUrl: /oauth2/v1/authorize
           scopes:
+            apm_api_catalog_read: View API catalog and API definitions.
+            apm_api_catalog_write: Add, modify, and delete API catalog definitions.
             apm_read: Read and query APM and Trace Analytics.
             apm_service_catalog_read: View service catalog and service definitions.
             apm_service_catalog_write: Add, modify, and delete service catalog definitions
@@ -21737,6 +21853,9 @@ components:
             user_access_manage: Disable users, manage user roles, manage SAML-to-role
               mappings, and configure logs restriction queries.
             user_access_read: View users and their roles and settings.
+            workflows_read: View workflows.
+            workflows_run: Run workflows.
+            workflows_write: Create, edit, and delete workflows.
           tokenUrl: /oauth2/v1/token
       type: oauth2
     apiKeyAuth:
@@ -28013,22 +28132,20 @@ paths:
       description: Search and filter your monitor groups details.
       operationId: SearchMonitorGroups
       parameters:
-      - description: 'After entering a search query in your [Manage Monitor page][1]
+      - description: 'After entering a search query on the [Triggered Monitors page][1],
           use the query parameter value in the
 
-          URL of the page as value for this parameter. Consult the dedicated [manage
-          monitor documentation][2]
-
-          page to learn more.
+          URL of the page as a value for this parameter. For more information, see
+          the [Manage Monitors documentation][2].
 
 
           The query can contain any number of space-separated monitor attributes,
-          for instance `query="type:metric status:alert"`.
+          for instance: `query="type:metric group_status:alert"`.
 
 
-          [1]: https://app.datadoghq.com/monitors/manage
+          [1]: https://app.datadoghq.com/monitors/triggered
 
-          [2]: /monitors/manage/#find-the-monitors'
+          [2]: /monitors/manage/#triggered-monitors'
         in: query
         name: query
         required: false
