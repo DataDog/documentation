@@ -2270,7 +2270,7 @@ menu:
       parent: containers_docker
       identifier: containers_docker_tag
       weight: 103
-    - name: Autodiscovery
+    - name: Integrations
       url: containers/docker/integrations/
       parent: containers_docker
       identifier: containers_docker_integrations
@@ -2320,7 +2320,7 @@ menu:
       parent: containers_kubernetes
       identifier: containers_kubernetes_tag
       weight: 206
-    - name: Integrations & Autodiscovery
+    - name: Integrations
       url: containers/kubernetes/integrations/
       parent: containers_kubernetes
       identifier: containers_kubernetes_integrations
