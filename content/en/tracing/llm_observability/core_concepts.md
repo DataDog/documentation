@@ -56,7 +56,7 @@ The SDK provides integrations to automatically capture LLM calls to specific pro
 
 A trace comprised of a root workflow span with nested LLM, task, tool, embedding, and retrieval spans.
 
-Your application likely includes operations that surround LLM calls which play a large role in your overall application performance, for instance tool calls to external APIs or preprocessing task steps.
+Your application likely includes operations that surround LLM calls which play a large role in your overall application performance—for instance, tool calls to external APIs or preprocessing task steps.
 
 By tracing LLM calls and contextual task or tool operations together under workflow spans, you can unlock more granular insights and a more holistic view regarding your LLM application.
 
