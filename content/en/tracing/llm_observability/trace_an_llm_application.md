@@ -12,79 +12,177 @@ LLM Observability is not available in the US1-FED site.
 
 ## Overview
 
-Your application can submit data to LLM Observability in two ways: with Datadog's [Python SDK][12], or with the [LLM Observability API][13].
+Your application can submit data to LLM Observability in two ways: with LLM Observability's [Python SDK][1], or with the LLM Observability [API][2].
 
 Each request fulfilled by your application is represented as a trace on the [LLM Observability traces page][2] in Datadog:
 
 {{< img src="tracing/llm_observability/llm-observability-overview.png" alt="An LLM Observability trace displaying each span of a request" style="width:100%;" >}}
 
-A given trace contains spans representing each choice made by an agent or each step of a workflow. A *span* represents some unit of work that your application is performing. Spans have a start time, duration, name, tags, and attributes.
+If you're new to LLM Observability traces, read the [Core Concepts][3] before proceeding to decide which instrumentation options best suit your application.
 
-Multiple spans combine to form a trace, and a *root span* is the first span in a trace.
-
-A trace can contain several kinds of spans. The *span kind* categorizes the type of work the span is performing. 
-
-Only three span kinds can be the root span of a trace:
-
-- **LLM span**: An individual LLM inference. LLM spans allow you to track inputs and outputs to your LLM calls; track tokens, error rates, and latencies for your LLM calls; and break down important metrics by models and model providers.
-- **Workflow span**: A grouping of LLM calls and their contextual operations, such as tool calls or preprocessing steps.
-- **Agent span**: A dynamic LLM workflow executed by an LLM agent.
-
-Different span kinds also have different parent-child relationships. For details, see [Span Kinds][4].
-
-## Instrument an LLM application
+## Instrument your LLM application
 
 <div class="alert alert-info">This guide uses the LLM Observability SDK for Python. If your application is not written in Python, you can complete the steps below with API requests instead of SDK function calls.</a></div>
 
+Datadog provides [auto-instrumentation][4] to capture LLM calls for specific LLM provider libraries. However, manually instrumenting your LLM application using the Python SDK can unlock even more of Datadog's LLM Observability features.
+
 To trace an LLM application:
 
-1. [Install the LLM Observability SDK][1].
-1. Configure the SDK by providing [the required environment variables][5] in your application startup command.
-1. In your code, use the SDK to create spans representing your application's tasks.
-    - See the span creation example below.
-    - For additional examples and detailed usage, see the [Quickstart][10] and the [SDK documentation for tracing spans][11]. 
-1. [Annotate your spans][7] with input data, output data, metadata (such as `temperature`), metrics (such as `input_tokens`), and key-value tags (such as `version:1.0.0`).
-1. Explore the resulting traces on the [LLM Observability traces page][2], and the resulting metrics on the out-of-the-box [LLM Observability dashboard][14].
+1. [Install the LLM Observability SDK][5].
+2. Configure the SDK by providing [the required environment variables][6] in your application startup command, or programmatically [in-code][7].
+    - Remember to configure your Datadog API key, Datadog site, and ML app name.
+3. [Create spans](#creating-spans) in your LLM application code to represent your application's operations.
+    - Learn more about spans in the [Core Concepts][17] guide.
+    - For additional examples and detailed usage, see the [Quickstart][8] and the [SDK documentation][9].
+    - You can [nest spans](#nesting-spans) to create more useful traces.
+4. [Annotate your spans](#annotating-spans) with input data, output data, metadata (such as `temperature`), metrics (such as `prompt_tokens`), and key-value tags (such as `version:1.0.0`).
+5. Optionally, add [advanced tracing features](#advanced-tracing), such as user sessions.
+6. Run your LLM application. 
+    - If you used the command-line setup method, the command to run your application should use `ddtrace-run`, as described in [those instructions][6].
+    - If you used the in-code setup method, run your application as you normally would.
+7. Explore the resulting traces on the [LLM Observability traces page][10], and the resulting metrics on the out-of-the-box [LLM Observability dashboard][11].
 
-Optionally, you can also:
+### Creating spans
 
-- Associate multiple interactions with one user by specifying a `session_id`. See [Tracking user sessions][6] in the SDK documentation.
-- [Persist a span between contexts or scopes][8] by manually starting and stopping it.
-- [Override the name of the LLM application with a different name][9] when starting a root span, which can be useful for differentiating between services or running an experiment.
-- Submit feedback from the users of your LLM application (thumbs up/thumbs down, rating from 1 to 5, and so on) as custom [evaluations][18] via the [SDK][15] or the [API][16]. This allows you to visualize the feedback in your traces and also in the [cluster map view][17], where you can monitor any patterns in different topics of your LLM applications against these evaluations.
+To create a span, the LLM Observability SDK provides two options:
+1. *Decorators*: Use `ddtrace.llmobs.decorators.<SPAN_KIND>()` as a decorator on the function you'd like to trace, replacing `<SPAN_KIND>` with the desired [span kind][4].
+2. *Inline*: Use `ddtrace.llmobs.LLMObs.<SPAN_KIND>()` as a context manager to [trace any inline code][12], replacing `<SPAN_KIND>` with the desired [span kind][4].
 
-### Span creation example
+The examples below create a workflow span.
 
-To create a span, use the LLM Observability SDK's `llmobs.decorators.<SPAN_KIND>()` as a function decorator, replacing `<SPAN_KIND>` with the desired [span kind][4].
-
-The example below creates a workflow span:
-
+{{< tabs >}}
+{{% tab "Decorators" %}}
 {{< code-block lang="python" >}}
+from ddtrace.llmobs.decorators import workflow
+
+@workflow
+def process_message():
+    ... # user application logic
+    return
+{{< /code-block >}}
+{{% /tab %}}
+
+{{% tab "Inline" %}}
+{{< code-block lang="python" >}}
+from ddtrace.llmobs import LLMObs
+
+def process_message():
+    with LLMObs.workflow() as span:
+        ... # user application logic
+    return
+{{< /code-block >}}
+{{% /tab %}}
+{{< /tabs >}}
+
+### Nesting spans
+
+Starting a new span before the current span is finished automatically traces a parent-child relationship between the two spans. The parent span represents the larger operation, while the child span represents a smaller nested sub-operation within it.
+
+The examples below create a trace with two spans.
+
+{{< tabs >}}
+{{% tab "Decorators" %}}
+{{< code-block lang="python" >}}
+from ddtrace.llmobs.decorators import task, workflow
+
+@workflow
+def process_message():
+    perform_preprocessing()
+    ... # user application logic
+    return
+
+@task
+def perform_preprocessing():
+    ... # user application logic
+    return
+{{< /code-block >}}
+{{% /tab %}}
+
+{{% tab "Inline" %}}
+{{< code-block lang="python" >}}
+from ddtrace.llmobs import LLMObs
+
+def process_message():
+    with LLMObs.workflow(name="process_message") as workflow_span:
+        with LLMObs.task(name="perform_preprocessing") as task_span:
+            ... # user application logic
+    return
+{{< /code-block >}}
+{{% /tab %}}
+{{< /tabs >}}
+
+### Annotating spans
+
+To add extra information to a span such as inputs, outputs, metadata, metrics, or tags, use the LLM Observability SDK's [`LLMObs.annotate()`][13] method.
+
+The examples below annotate the workflow span created in the [above example](#creating-spans):
+
+{{< tabs >}}
+{{% tab "Decorators" %}}
+{{< code-block lang="python" >}}
+from ddtrace.llmobs import LLMObs
 from ddtrace.llmobs.decorators import workflow
 
 @workflow(name="process_message")
 def process_message():
     ... # user application logic
+    LLMObs.annotate(
+        input_data="<ARGUMENT>",
+        output_data="<OUTPUT>",
+        metadata={},
+        metrics={"prompt_tokens": 15, "completion_tokens": 24},
+        tags={},
+    )
     return
 {{< /code-block >}}
+{{% /tab %}}
+
+{{% tab "Inline" %}}
+{{< code-block lang="python" >}}
+from ddtrace.llmobs import LLMObs
+
+def process_message():
+    with LLMObs.workflow() as span:
+        ... # user application logic
+        LLMObs.annotate(
+            span=span,
+            input_data="<ARGUMENT>",
+            output_data="<OUTPUT>",
+            metadata={},
+            metrics={"prompt_tokens": 15, "completion_tokens": 24},
+            tags={},
+        )
+    return
+{{< /code-block >}}
+{{% /tab %}}
+{{< /tabs >}}
 
 For more information on alternative tracing methods and tracing features, see the [SDK documentation][12].
 
-[1]: /tracing/llm_observability/sdk/#installation
-[2]: https://app.datadoghq.com/llm/traces
-[3]: /account_management/api-app-keys/#add-an-api-key-or-client-token
-[4]: /tracing/llm_observability/span_kinds
-[5]: /tracing/llm_observability/sdk/#command-line-setup
-[6]: /tracing/llm_observability/sdk/#tracking-user-sessions
-[7]: /tracing/llm_observability/sdk/#annotating-a-span
-[8]: /tracing/llm_observability/sdk/#persisting-a-span-across-contexts
-[9]: /tracing/llm_observability/sdk/#tracing-multiple-applications
-[10]: /tracing/llm_observability/quickstart/
-[11]: /tracing/llm_observability/sdk/#tracing-spans
-[12]: /tracing/llm_observability/sdk
-[13]: /tracing/llm_observability/api
-[14]: https://app.datadoghq.com/dash/integration/llm_analytics
-[15]: /tracing/llm_observability/sdk/#evaluations
-[16]: /tracing/llm_observability/api/?tab=model#evaluations-api
-[17]: https://app.datadoghq.com/llm/clusters
-[18]: /tracing/llm_observability/submit_evaluations
+### Advanced tracing
+
+Depending on the complexity of your LLM application, you can also:
+
+- [Track user sessions][13] by specifying a `session_id`.
+- [Persist a span between contexts or scopes][14] by manually starting and stopping it.
+- [Track multiple LLM applications][15] when starting a new trace, which can be useful for differentiating between services or running multiple experiments.
+- [Submit custom evaluations][16] such as feedback from the users of your LLM application (for example, rating from 1 to 5) with the [SDK][1] or the [API][2]. 
+
+
+[1]: /tracing/llm_observability/sdk
+[2]: /tracing/llm_observability/api
+[3]: /tracing/llm_observability/core_concepts
+[4]: /tracing/llm_observability/auto_instrumentation
+[5]: /tracing/llm_observability/sdk/#installation
+[6]: /tracing/llm_observability/sdk/#command-line-setup
+[7]: /tracing/llm_observability/sdk/#in-code-setup
+[8]: /tracing/llm_observability/quickstart/
+[9]: /tracing/llm_observability/sdk/#tracing-spans
+[10]: https://app.datadoghq.com/llm/traces
+[11]: https://app.datadoghq.com/dash/integration/llm_analytics
+[12]: /tracing/llm_observability/sdk/#tracing-spans-using-inline-methods
+[13]: /tracing/llm_observability/sdk/#annotating-a-span
+[14]: /tracing/llm_observability/sdk/#tracking-user-sessions
+[15]: /tracing/llm_observability/sdk/#tracing-multiple-applications
+[16]: /tracing/llm_observability/submit_evaluations
+[17]: /tracing/llm_observability/core_concepts/#spans
