@@ -1,5 +1,5 @@
 ---
-title: Working with Tags in DDSQL
+title: Querying Tags in DDSQL
 kind: documentation
 ---
 

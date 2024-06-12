@@ -26,7 +26,7 @@ SQL is broken into five different categories of statements. The table below indi
    {{< nextlink href="dashboards/ddsql/reference/data_types" >}}Data types{{< /nextlink >}}
    {{< nextlink href="dashboards/ddsql/reference/expressions_and_operators" >}}Expressions and operators{{< /nextlink >}}
    {{< nextlink href="dashboards/ddsql/reference/scalar_functions" >}}Scalar functions (one computed value per row){{< /nextlink >}}
-   {{< nextlink href="dashboards/ddsql/reference/aggregation_functions" >}}Aggregation functions (one computed value){{< /nextlink >}}
+   {{< nextlink href="dashboards/ddsql/reference/aggregation_functions" >}}Aggregation functions (one computed value per query or group){{< /nextlink >}}
    {{< nextlink href="dashboards/ddsql/reference/window_functions" >}}Window functions{{< /nextlink >}}
    {{< nextlink href="dashboards/ddsql/reference/tags" >}}Working with tags{{< /nextlink >}}
 {{< /whatsnext >}}
