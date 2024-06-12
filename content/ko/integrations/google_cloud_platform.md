@@ -192,7 +192,7 @@ datadog:monitored,env:production,!env:staging,instance-type:c1.*
 3. 조직에 대한 Datadog 주체를 생성하지 않은 경우 **주체 생성** 버튼을 클릭합니다.
 4. Datadog 주체를 복사하여 다음 섹션을 위해 보관하세요.
    {{< img src="integrations/google_cloud_platform/principal-2.png" alt="'새 GCP 계정 추가' 흐름을 보여주는 Datadog 인터페이스. 첫 번째 단계인 'Google에 데이터독 주체 추가'에는 사용자가 Datadog 주체를 생성하고 클립보드에 복사할 수 있는 텍스트 상자가 있습니다. 두 번째 단계인 '<txprotected>서비스 계정 이메일 추가'에는 사용자가 섹션 3에서 작성할 수 있는 텍스트 상자가 있습니다." style="width:70%;">}}
-   [다음 섹션](#3-complete-the-integration-setup-in-datadog)을 위해 이 창을 계속 열어 두세요.
+   [다음 섹션](#3-datadog에서-통합-설정-완료)을 위해 이 창을 계속 열어 두세요.
 5. [Google 클라우드 콘솔][303]의 **서비스 계정** 메뉴에서 [첫 번째 섹션](#1-google-클라우드-서비스-계정-생성)에서 생성한 서비스 계정을 찾습니다.
 6. **권한** 탭 으로 이동하여 **액세스 권한 부여**를 클릭합니다.
    {{< img src="integrations/google_cloud_platform/grant-access.png" alt="Google 클라우드 콘솔 인터페이스, 서비스 계정 아래에 탭 권한이 표시됨." 스타일="width:70%;">}}
@@ -251,10 +251,10 @@ datadog:monitored,env:production,!env:staging,instance-type:c1.*
 
 Google 클라우드 데이터 플로우][42]와 [Datadog 템플릿][43]을 사용하여 로그를 Google 클라우드 서비스에서 Datadog로 전달합니다. 이 방법은 Datadog로 전달하기 전에 이벤트의 압축과 일괄 처리를 모두 제공합니다. 이 섹션의 지침을 따르세요.
 
-[1](#1-create-a-cloud-pubsub-topic-and-subscription). 로그 Pub/Sub [주제][44] 및 [풀 구독][45]을 생성하여 설정된 로그 싱크에서 로그를 수신합니다.  
-[2](#2-create-a-custom-dataflow-worker-service-account). 커스텀 데이터플로우 근로자 서비스 계정을 생성하여 데이터플로우 파이프라인 근로자에게 [최소 권한][46]을 제공합니다.  
-[3](#3-export-logs-from-google-cloud-pubsub-topic). [로그 싱크][47]를 생성하여 로그 를 Pub/Sub 주제에 게시합니다.  
-[4](#4-create-and-run-the-dataflow-job). [Datadog 템플릿][43]을 사용하여 데이터 흐름 작업을 생성해 로그를 Pub/Sub 구독에서 Datadog로 스트리밍합니다.
+[1](#1-cloud-pubsub-주제-및-구독-생성). 로그 Pub/Sub [주제][44] 및 [풀 구독][45]을 생성하여 설정된 로그 싱크에서 로그를 수신합니다.  
+[2](#2-커스텀-dataflow-작업자-서비스-계정-생성). 커스텀 데이터플로우 근로자 서비스 계정을 생성하여 데이터플로우 파이프라인 근로자에게 [최소 권한][46]을 제공합니다.  
+[3](#3-google-cloud-pubsub-주제에서-로그-내보내기). [로그 싱크][47]를 생성하여 로그 를 Pub/Sub 주제에 게시합니다.  
+[4](#4-dataflow-작업-생성-및-실행하기). [Datadog 템플릿][43]을 사용하여 데이터 흐름 작업을 생성해 로그를 Pub/Sub 구독에서 Datadog로 스트리밍합니다.
 
 싱크에서 생성한 로깅 필터를 통해 Datadog 으로 전송되는 로그를 완전히 제어할 수 있습니다. 로그 싱크에서 생성한 로깅 필터를 통해 로그로 전송할 수 있습니다. 필터 작성에 대한 자세한 내용은 Google의 [로깅 쿼리 언어 페이지][48]를 참조하세요.
 
