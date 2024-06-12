@@ -23,8 +23,8 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- 컨테이너
-- 쿠버네티스(Kubernetes)
+- containers
+- kubernetes
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/container/README.md
 display_on_public_website: true
@@ -34,13 +34,13 @@ integration_id: container
 integration_title: 컨테이너
 integration_version: ''
 is_public: true
-kind: 통합
+kind: integration
 manifest_version: 2.0.0
 name: container
 public_title: 컨테이너
 short_description: Datadog으로 컨테이너 메트릭 추적
 supported_os:
-- 리눅스
+- linux
 - windows
 tile:
   changelog: CHANGELOG.md
@@ -78,7 +78,7 @@ tile:
 
 `container` 검사를 수행하려면 자동 활성화를 위해 일부 폴더를 마운트해야 합니다. 이는 공식 Helm Chart, Datadog Operator에 의해 처리되며 Kubernetes, Docker, ECS 및 ECS Fargate에 대해 문서화된 설정으로 처리됩니다.
 
-### 설정
+### 구성
 
 `container` 검사에서는 특정 구성 설정을 노출하지 않습니다. 공통 필드를 사용자 정의하거나 `container` 검사를 강제로 활성화하려면 다음 단계를 따르세요.
 
