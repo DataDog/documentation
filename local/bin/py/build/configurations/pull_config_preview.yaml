@@ -82,7 +82,7 @@
       contents:
 
       - action: integrations
-        branch: kisung/adding_eks_fargate_sidecar_injection_for_operator
+        branch: master
         globs:
         - integration/*/*_metadata.csv
         - integration/*/manifest.json
@@ -94,7 +94,7 @@
       contents:
 
       - action: integrations
-        branch: master
+        branch: kisung/adding_eks_fargate_sidecar_injection_for_operator
         globs:
         - "*/metadata.csv"
         - "*/manifest.json"
