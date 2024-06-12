@@ -25,7 +25,7 @@ For usage examples you can run from a Jupyter notebook, see the [LLM Observabili
 1. The latest `ddtrace` package must be installed:
 
 {{< code-block lang="shell">}}
-pip install git+https://github.com/DataDog/dd-trace-py.git@main
+pip install ddtrace
 {{< /code-block >}}
 
 2. LLM Observability requires a Datadog API key (see [the instructions for creating an API key][7]).

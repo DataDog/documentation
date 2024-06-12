@@ -23,7 +23,7 @@ With LLM Observability, you can monitor, troubleshoot, and evaluate your LLM-pow
 
 Each request fulfilled by your application is represented as a trace on the [LLM Observability traces page][2] in Datadog. A trace can represent:
 - An individual LLM inference, including tokens, error information, and latency
-- A predetermined LLM workflow: a grouping of LLM calls and their contextual operations, such as tool calls or preprocessing steps
+- A predetermined LLM workflow, which is a grouping of LLM calls and their contextual operations, such as tool calls or preprocessing steps
 - A dynamic LLM workflow executed by an LLM agent
 
 Each trace contains spans representing each choice made by an agent or each step of a given workflow. A given trace can also include input and output, latency, privacy issues, errors, and more.
