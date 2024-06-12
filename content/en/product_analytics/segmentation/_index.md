@@ -41,15 +41,15 @@ To create a segment using external or third-party data:
 2. Make sure to properly connect the data type (for example, `usr.id`, `usr.name`, or `usr.email`) to the column name.
 3. For accuracy, ensure there is data in Product Analytics for users in the segment.
 
-## Ways to leverage Segments across Product Analytics
+## Leverage segments across Product Analytics
 
-### Sankey
+### In sankeys
 
 In the Sankey page, you can filter the data in the visualization to reflect a selected segment of users. This allows you to look at the experience and traffic patterns of a particular set of users in a given segment. The below example shows a Sankey diagram only for users in the "Premium users" segment.
 
 {{< img src="product_analytics/segmentation/segmentation-3.png" alt="Filter down the Sankey visualization to reflect a selected segment of users.">}}
 
-### Analytics Explorer
+### In Analytics Explorer
 
 You can filter the data in the Analytics Explorer to reflect a selected set of users that are in a given segment. The example below shows a list of users in the "Premium users" segment who were active in the last month, organized by the number of sessions they had.
 
