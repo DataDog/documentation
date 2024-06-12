@@ -37,7 +37,7 @@ name: consul_connect
 public_title: Consul Connect
 short_description: Consul Connect Envoy 사이드카 프록시를 모니터링하세요.
 supported_os:
-- 리눅스
+- linux
 - macos
 - windows
 tile:
@@ -70,7 +70,7 @@ tile:
 
 Consul Connect를 실행하는 서비스에 [Datadog Agent][4]를 설치하고 해당 환경에 맞는 [구성](#configuration) 지침을 따르세요.
 
-### 설정
+### 구성
 호스트에서 실행 중인 Agent에 대해 이 검사를 구성하려면 아래 지침을 따르세요. 컨테이너화된 환경의 경우 [Containerized](#containerized) 섹션을 참조하세요.
 
 {{< tabs >}}
@@ -95,7 +95,7 @@ Consul Connect를 실행하는 서비스에 [Datadog Agent][4]를 설치하고 �
 {{% /tab %}}
 {{% tab "컨테이너화" %}}
 
-#### 컨테이너화된 환경
+#### 컨테이너화
 
 [Envoy 컨테이너화 지침][1]에 따라 Envoy용 Datadog Agent를 구성합니다.
 
