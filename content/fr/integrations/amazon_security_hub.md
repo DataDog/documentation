@@ -13,7 +13,7 @@ integration_id: amazon-security-hub
 integration_title: "Amazon\_Security\_Hub"
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: amazon_security_hub
 public_title: "Intégration Datadog/Amazon\_Security\_Hub"
