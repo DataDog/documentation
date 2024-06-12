@@ -183,7 +183,7 @@ datadog:monitored,env:production,!env:staging,instance-type:c1.*
    * 브라우저
 6. **계속**을 클릭한 다음 **완료**를 클릭하여 서비스 계정 생성을 완료합니다.
 
-{{< img src="integrations/google_cloud_platform/create-서비스-계정.png" alt="Google Cloud 콘솔 인터페이스는 '서비스 계정 생성' 흐름을 보여주는 그림입니다. '이 서비스 계정에 프로젝트 액세스 권한 부여' 아래에 지침의 네 가지 역할이 추가됩니다." 스타일="width:70%;">}}
+{{< img src="integrations/google_cloud_platform/create-service-account.png" alt="Google Cloud 콘솔 인터페이스는 '서비스 계정 생성' 흐름을 보여주는 그림입니다. '이 서비스 계정에 프로젝트 액세스 권한 부여' 아래에 지침의 네 가지 역할이 추가됩니다." 스타일="width:70%;">}}
 
 #### 2. 서비스 계정에 Datadog 주체를 추가합니다.
 
