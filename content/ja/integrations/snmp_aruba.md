@@ -29,6 +29,7 @@ integration_id: snmp-aruba
 integration_title: Aruba
 integration_version: ''
 is_public: true
+kind: インテグレーション
 manifest_version: 2.0.0
 name: snmp_aruba
 public_title: Aruba

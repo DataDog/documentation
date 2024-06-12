@@ -34,6 +34,7 @@ integration_id: contrastsecurity
 integration_title: Contrast Security
 integration_version: ''
 is_public: true
+kind: インテグレーション
 manifest_version: 2.0.0
 name: contrastsecurity
 public_title: Contrast Security

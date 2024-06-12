@@ -7,6 +7,7 @@ further_reading:
 - link: https://www.datadoghq.com/container-report/
   tag: Datadog リサーチ
   text: Datadog による「コンテナの現状」年次レポート
+kind: documentation
 title: コンテナモニタリング
 ---
 

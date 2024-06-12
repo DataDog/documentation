@@ -31,6 +31,7 @@ integration_id: nextcloud
 integration_title: Nextcloud
 integration_version: 1.0.0
 is_public: true
+kind: インテグレーション
 manifest_version: 2.0.0
 name: nextcloud
 public_title: Nextcloud

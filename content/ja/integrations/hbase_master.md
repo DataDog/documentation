@@ -35,6 +35,7 @@ integration_id: hbase-master
 integration_title: Hbase Master
 integration_version: 1.1.1
 is_public: true
+kind: インテグレーション
 manifest_version: 2.0.0
 name: hbase_master
 public_title: Hbase Master

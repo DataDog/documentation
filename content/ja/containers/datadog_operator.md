@@ -12,6 +12,7 @@ further_reading:
 - link: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md
   tag: GitHub
   text: 'Datadog Operator: 構成'
+kind: documentation
 title: Datadog Operator
 ---
 

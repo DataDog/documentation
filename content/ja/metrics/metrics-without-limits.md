@@ -15,6 +15,7 @@ further_reading:
 - link: https://dtdg.co/fe
   tag: Foundation Enablement
   text: メトリクスの可能性を最大限に引き出すインタラクティブなセッションに参加できます
+kind: documentation
 title: Metrics without Limits™
 ---
 

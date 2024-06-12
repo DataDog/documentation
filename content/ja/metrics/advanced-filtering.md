@@ -16,6 +16,7 @@ further_reading:
 - link: /dashboards/functions/exclusion/
   tag: Documentation
   text: 除外関数
+kind: documentation
 title: 高度なフィルタリング
 ---
 

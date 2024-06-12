@@ -44,6 +44,7 @@ integration_id: glusterfs
 integration_title: Red Hat Gluster Storage
 integration_version: 1.7.0
 is_public: true
+kind: インテグレーション
 manifest_version: 2.0.0
 name: glusterfs
 public_title: Red Hat Gluster Storage

@@ -47,6 +47,7 @@ integration_id: etcd
 integration_title: etcd
 integration_version: 6.2.0
 is_public: true
+kind: インテグレーション
 manifest_version: 2.0.0
 name: etcd
 public_title: etcd

@@ -12,6 +12,7 @@ integration_id: victorops
 integration_title: VictorOps
 integration_version: ''
 is_public: true
+kind: インテグレーション
 manifest_version: '1.0'
 name: victorops
 public_title: Datadog-VictorOps インテグレーション

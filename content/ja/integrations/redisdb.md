@@ -46,6 +46,7 @@ integration_id: redis
 integration_title: Redis
 integration_version: 4.8.0
 is_public: true
+kind: インテグレーション
 manifest_version: 2.0.0
 name: redisdb
 public_title: Redis
@@ -238,6 +239,7 @@ Agent コンテナで必要な環境変数
 
 ```yaml
 apiVersion: v1
+kind: Pod
 metadata:
   name: redis
   annotations:
@@ -265,6 +267,7 @@ spec:
 
 ```yaml
 apiVersion: v1
+kind: Pod
 metadata:
   name: redis
   annotations:
@@ -305,6 +308,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 ```yaml
 apiVersion: v1
+kind: Pod
 metadata:
   name: redis
   annotations:

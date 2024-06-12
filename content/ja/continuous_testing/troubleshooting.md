@@ -9,6 +9,7 @@ further_reading:
 - link: https://www.datadoghq.com/blog/best-practices-datadog-continuous-testing/
   tag: GitHub
   text: Datadog を使った継続的テストのベストプラクティス
+kind: documentation
 title: Continuous Testing と CI/CD のトラブルシューティング
 ---
 

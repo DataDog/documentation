@@ -15,6 +15,7 @@ integration_id: azure-notificationhubs
 integration_title: Microsoft Azure Notification Hubs
 integration_version: ''
 is_public: true
+kind: インテグレーション
 manifest_version: '1.0'
 name: azure_notification_hubs
 public_title: Datadog-Microsoft Azure Notification Hubs インテグレーション

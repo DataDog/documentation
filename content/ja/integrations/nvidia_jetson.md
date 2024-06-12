@@ -33,6 +33,7 @@ integration_id: nvidia-jetson
 integration_title: Nvidia Jetson
 integration_version: ''
 is_public: true
+kind: インテグレーション
 manifest_version: 2.0.0
 name: nvidia_jetson
 public_title: Nvidia Jetson

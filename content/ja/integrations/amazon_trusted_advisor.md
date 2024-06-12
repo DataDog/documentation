@@ -19,6 +19,7 @@ integration_id: ''
 integration_title: AWS Trusted Advisor
 integration_version: ''
 is_public: true
+kind: インテグレーション
 manifest_version: '1.0'
 name: amazon_trusted_advisor
 public_title: Datadog-AWS Trusted Advisor インテグレーション

@@ -44,6 +44,7 @@ integration_id: ceph
 integration_title: Ceph
 integration_version: 2.10.0
 is_public: true
+kind: インテグレーション
 manifest_version: 2.0.0
 name: ceph
 public_title: Ceph

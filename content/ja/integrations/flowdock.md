@@ -12,6 +12,7 @@ integration_id: ''
 integration_title: Flowdock
 integration_version: ''
 is_public: true
+kind: インテグレーション
 manifest_version: '1.0'
 name: flowdock
 public_title: Datadog-Flowdock インテグレーション

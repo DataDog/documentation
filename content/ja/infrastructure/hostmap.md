@@ -10,6 +10,7 @@ further_reading:
 - link: /infrastructure/process/
   tag: グラフ
   text: システムのあらゆるレベルの事象の把握
+kind: documentation
 title: ホストとコンテナマップ
 ---
 

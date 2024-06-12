@@ -20,6 +20,7 @@ integration_id: cloudzero
 integration_title: CloudZero
 integration_version: ''
 is_public: true
+kind: インテグレーション
 manifest_version: 2.0.0
 name: cloudzero
 public_title: CloudZero

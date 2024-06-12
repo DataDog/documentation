@@ -30,6 +30,7 @@ further_reading:
 - link: https://www.datadoghq.com/blog/ruby-profiling-datadog-continuous-profiler/
   tag: ブログ
   text: Datadog Continuous Profiler で Ruby のコードパフォーマンスを分析
+kind: ドキュメント
 title: Continuous Profiler
 ---
 

@@ -33,6 +33,7 @@ integration_id: amazon-memorydb
 integration_title: Amazon MemoryDB
 integration_version: ''
 is_public: true
+kind: インテグレーション
 manifest_version: 2.0.0
 name: amazon_memorydb
 public_title: Amazon MemoryDB

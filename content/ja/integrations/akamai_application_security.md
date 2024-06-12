@@ -29,6 +29,7 @@ integration_id: akamai
 integration_title: Akamai Application Security
 integration_version: ''
 is_public: true
+kind: インテグレーション
 manifest_version: 2.0.0
 name: akamai_application_security
 public_title: Akamai Application Security

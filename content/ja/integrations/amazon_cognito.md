@@ -14,6 +14,7 @@ integration_id: ''
 integration_title: Amazon Cognito
 integration_version: ''
 is_public: true
+kind: インテグレーション
 manifest_version: '1.0'
 name: amazon_cognito
 public_title: Datadog-Amazon Cognito インテグレーション

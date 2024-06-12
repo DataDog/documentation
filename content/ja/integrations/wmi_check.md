@@ -26,6 +26,7 @@ integration_id: wmi
 integration_title: WMI チェック
 integration_version: 1.16.0
 is_public: true
+kind: インテグレーション
 manifest_version: 2.0.0
 name: wmi_check
 public_title: WMI チェック

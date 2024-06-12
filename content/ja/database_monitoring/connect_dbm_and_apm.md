@@ -5,6 +5,7 @@ further_reading:
 - link: https://www.datadoghq.com/blog/link-dbm-and-apm/
   tag: ブログ
   text: DBM と APM のテレメトリーをシームレスに相関させ、エンドツーエンドのクエリパフォーマンスを把握する
+kind: documentation
 title: Database Monitoring とトレースの相関付け
 ---
 

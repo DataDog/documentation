@@ -15,6 +15,7 @@ further_reading:
 - link: https://www.datadoghq.com/blog/sensitive-data-management-best-practices/
   tag: ブログ
   text: 機密データ管理のベストプラクティス
+kind: ドキュメント
 title: ヘルプ
 ---
 

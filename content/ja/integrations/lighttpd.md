@@ -40,6 +40,7 @@ integration_id: lighttpd
 integration_title: Lighttpd
 integration_version: 3.5.0
 is_public: true
+kind: インテグレーション
 manifest_version: 2.0.0
 name: lighttpd
 public_title: Lighttpd

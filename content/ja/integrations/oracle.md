@@ -37,6 +37,7 @@ integration_id: oracle
 integration_title: Oracle
 integration_version: 5.2.0
 is_public: true
+kind: インテグレーション
 manifest_version: 2.0.0
 name: oracle
 public_title: Oracle

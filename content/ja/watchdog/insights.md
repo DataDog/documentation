@@ -13,6 +13,7 @@ further_reading:
 - link: https://www.datadoghq.com/blog/watchdog-insights-apm/
   tag: ブログ
   text: Watchdog Insights for APM でエラーとレイテンシーのパターンを自動検出する
+kind: documentation
 title: Watchdog Insights
 ---
 

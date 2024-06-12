@@ -38,6 +38,7 @@ integration_id: Scylla
 integration_title: Scylla
 integration_version: 2.3.0
 is_public: true
+kind: インテグレーション
 manifest_version: 2.0.0
 name: Scylla
 public_title: Scylla

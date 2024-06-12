@@ -42,6 +42,7 @@ integration_id: marathon
 integration_title: Marathon
 integration_version: 2.3.0
 is_public: true
+kind: インテグレーション
 manifest_version: 2.0.0
 name: marathon
 public_title: Marathon

@@ -33,6 +33,7 @@ integration_id: aws-pricing
 integration_title: AWS Pricing
 integration_version: 1.0.0
 is_public: true
+kind: インテグレーション
 manifest_version: 2.0.0
 name: aws_pricing
 public_title: AWS Pricing

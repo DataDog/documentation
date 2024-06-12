@@ -3,6 +3,7 @@ further_reading:
 - link: /data_jobs
   tag: ドキュメント
   text: Data Jobs Monitoring
+kind: ドキュメント
 title: Amazon EMR で Spark の Data Jobs Monitoring を有効にする
 ---
 

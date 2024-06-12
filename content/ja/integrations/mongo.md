@@ -47,6 +47,7 @@ integration_id: mongodb
 integration_title: MongoDB
 integration_version: 6.4.0
 is_public: true
+kind: インテグレーション
 manifest_version: 2.0.0
 name: mongo
 public_title: MongoDB
@@ -375,6 +376,7 @@ Agent コンテナで必要な環境変数
 
 ```yaml
 apiVersion: v1
+kind: Pod
 metadata:
   name: mongo
   annotations:
@@ -398,6 +400,7 @@ spec:
 
 ```yaml
 apiVersion: v1
+kind: Pod
 metadata:
   name: mongo
   annotations:
@@ -430,6 +433,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 ```yaml
 apiVersion: v1
+kind: Pod
 metadata:
   name: mongo
   annotations:

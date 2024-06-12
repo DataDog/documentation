@@ -1,5 +1,6 @@
 ---
 description: 複数組織のアカウント設定における、Datadog プラットフォームの個々のクライアントおよび集計使用量の監視。
+kind: documentation
 private: true
 title: 請求と使用量報告
 ---

@@ -37,6 +37,7 @@ integration_id: openldap
 integration_title: OpenLDAP
 integration_version: 1.12.0
 is_public: true
+kind: インテグレーション
 manifest_version: 2.0.0
 name: openldap
 public_title: OpenLDAP

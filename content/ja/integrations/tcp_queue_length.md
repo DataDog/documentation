@@ -32,6 +32,7 @@ integration_id: tcp-queue-length
 integration_title: TCP Queue Length
 integration_version: ''
 is_public: true
+kind: インテグレーション
 manifest_version: 2.0.0
 name: tcp_queue_length
 public_title: TCP Queue Length
@@ -107,6 +108,7 @@ system_probe_config:
 DatadogAgent マニフェストで `features.tcpQueueLength.enabled` パラメーターを設定します。
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
 metadata:
   name: datadog
 spec:
@@ -118,6 +120,7 @@ spec:
 **注**: COS (Container Optimized OS) を使用する場合は、ノード Agent で `src` ボリュームをオーバーライドしてください。
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
 metadata:
   name: datadog
 spec:

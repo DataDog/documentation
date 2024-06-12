@@ -6,6 +6,7 @@ aliases:
 - /ja/account_management/faq/how-do-i-reset-my-application-keys/
 - /ja/agent/faq/how-do-i-reset-my-datadog-api-keys/
 - /ja/account_management/faq/api-app-key-management/
+kind: documentation
 title: API キーとアプリケーションキー
 ---
 

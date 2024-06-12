@@ -49,6 +49,7 @@ integration_id: apache
 integration_title: Apache
 integration_version: 4.5.0
 is_public: true
+kind: インテグレーション
 manifest_version: 2.0.0
 name: apache
 public_title: Apache
@@ -196,6 +197,7 @@ LABEL "com.datadoghq.ad.logs"='[{"source": "apache", "service": "<SERVICE_NAME>"
 
 ```yaml
 apiVersion: v1
+kind: Pod
 metadata:
   name: apache
   annotations:
@@ -216,6 +218,7 @@ spec:
 
 ```yaml
 apiVersion: v1
+kind: Pod
 metadata:
   name: apache
   annotations:
@@ -246,6 +249,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 ```yaml
 apiVersion: v1
+kind: Pod
 metadata:
   name: apache
   annotations:

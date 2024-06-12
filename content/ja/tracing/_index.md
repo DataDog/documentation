@@ -34,6 +34,7 @@ further_reading:
 - link: https://dtdg.co/fe
   tag: 基盤の活用
   text: APM の理解を深めるためのインタラクティブなセッションにご参加ください
+kind: documentation
 title: APM
 ---
 

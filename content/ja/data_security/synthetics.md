@@ -5,6 +5,7 @@ further_reading:
 - link: /data_security/
   tag: ドキュメント
   text: Datadog に送信されるデータの主要カテゴリを確認する
+kind: documentation
 title: Synthetic モニタリングのデータセキュリティ
 ---
 

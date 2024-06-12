@@ -4,6 +4,7 @@ further_reading:
 - link: agent/basic_agent_usage/
   tag: ドキュメント
   text: Agent の基本的な使い方
+kind: ドキュメント
 title: サポート対象のプラットフォーム
 ---
 

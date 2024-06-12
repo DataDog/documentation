@@ -12,6 +12,7 @@ further_reading:
 - link: /infrastructure/process/
   tag: ドキュメント
   text: ライブプロセスモニタリング
+kind: documentation
 title: インフラストラクチャーリスト
 ---
 

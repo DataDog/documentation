@@ -39,6 +39,7 @@ integration_id: rapdev-spacelift
 integration_title: Spacelift
 integration_version: ''
 is_public: true
+kind: インテグレーション
 legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0

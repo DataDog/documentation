@@ -105,6 +105,7 @@ Prometheus 形式のメトリクスが Argo CD クラスターで公開されて
 **アプリケーションコントローラー**:
 ```yaml
 apiVersion: v1
+kind: Pod
 # (...)
 metadata:
   name: '<POD_NAME>'
@@ -130,6 +131,7 @@ spec:
 **API サーバー**:
 ```yaml
 apiVersion: v1
+kind: Pod
 # (...)
 metadata:
   name: '<POD_NAME>'
@@ -155,6 +157,7 @@ spec:
 **リポジトリサーバー**:
 ```yaml
 apiVersion: v1
+kind: Pod
 # (...)
 metadata:
   name: '<POD_NAME>'

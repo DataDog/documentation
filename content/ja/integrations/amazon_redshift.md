@@ -16,6 +16,7 @@ integration_id: ''
 integration_title: Amazon Redshift
 integration_version: ''
 is_public: true
+kind: インテグレーション
 manifest_version: '1.0'
 name: amazon_redshift
 public_title: Datadog-Amazon Redshift インテグレーション

@@ -14,6 +14,7 @@ integration_id: azure-appserviceenvironment
 integration_title: Microsoft Azure App Service Environment
 integration_version: ''
 is_public: true
+kind: インテグレーション
 manifest_version: '1.0'
 name: azure_app_service_environment
 public_title: Datadog-Microsoft Azure App Service Environment インテグレーション

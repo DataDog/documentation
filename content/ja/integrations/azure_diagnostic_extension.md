@@ -12,6 +12,7 @@ integration_id: ''
 integration_title: Azure Diagnostic Extension
 integration_version: ''
 is_public: true
+kind: インテグレーション
 manifest_version: '1.0'
 name: azure_diagnostic_extension
 public_title: Datadog-Azure Diagnostic Extension インテグレーション

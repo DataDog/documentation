@@ -28,6 +28,7 @@ integration_id: pdh
 integration_title: PDH Check
 integration_version: 2.1.0
 is_public: true
+kind: インテグレーション
 manifest_version: 2.0.0
 name: pdh_check
 public_title: PDH Check

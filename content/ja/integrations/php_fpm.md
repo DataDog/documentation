@@ -46,6 +46,7 @@ integration_id: php-fpm
 integration_title: PHP FPM
 integration_version: 3.3.0
 is_public: true
+kind: インテグレーション
 manifest_version: 2.0.0
 name: php_fpm
 public_title: PHP FPM

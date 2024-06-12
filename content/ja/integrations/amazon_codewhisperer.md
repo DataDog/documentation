@@ -36,6 +36,7 @@ integration_id: amazon-codewhisperer
 integration_title: Amazon CodeWhisperer
 integration_version: ''
 is_public: true
+kind: インテグレーション
 manifest_version: 2.0.0
 name: amazon_codewhisperer
 public_title: Amazon CodeWhisperer

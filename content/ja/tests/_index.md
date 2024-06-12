@@ -26,6 +26,7 @@ further_reading:
 - link: https://www.datadoghq.com/blog/ci-test-visibility-with-rum/
   tag: ブログ
   text: CI Visibility と RUM を使ったエンドツーエンドのテストのトラブルシューティング
+kind: ドキュメント
 title: Datadog における Test Visibility
 ---
 

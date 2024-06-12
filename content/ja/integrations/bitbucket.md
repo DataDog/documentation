@@ -17,6 +17,7 @@ integration_id: bitbucket
 integration_title: Bitbucket
 integration_version: ''
 is_public: true
+kind: インテグレーション
 manifest_version: '1.0'
 name: bitbucket
 public_title: Datadog-Bitbucket インテグレーション

@@ -16,6 +16,7 @@ integration_id: azure-containerinstances
 integration_title: Microsoft Azure Container Instances
 integration_version: ''
 is_public: true
+kind: インテグレーション
 manifest_version: '1.0'
 name: azure_container_instances
 public_title: Datadog-Microsoft Azure Container Instances インテグレーション

@@ -1,5 +1,6 @@
 ---
 description: Datadog にデータを取り込む方法と、クライアントの環境で満たす必要のある前提条件。
+kind: documentation
 private: true
 title: データの取り込み
 ---

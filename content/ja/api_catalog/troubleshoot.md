@@ -4,6 +4,7 @@ further_reading:
   tag: ドキュメント
   text: Python
 is_beta: true
+kind: ドキュメント
 title: ヘルプ
 ---
 

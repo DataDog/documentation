@@ -12,6 +12,7 @@ integration_id: puppet
 integration_title: Puppet
 integration_version: ''
 is_public: true
+kind: インテグレーション
 manifest_version: '1.0'
 name: puppet
 public_title: Datadog-Puppet インテグレーション

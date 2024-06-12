@@ -44,6 +44,7 @@ integration_id: akeyless-gateway
 integration_title: Akeyless Gateway
 integration_version: ''
 is_public: true
+kind: インテグレーション
 manifest_version: 2.0.0
 name: akeyless_gateway
 public_title: Akeyless Gateway

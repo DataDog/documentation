@@ -48,6 +48,7 @@ integration_id: mysql
 integration_title: MySQL
 integration_version: 12.4.0
 is_public: true
+kind: インテグレーション
 manifest_version: 2.0.0
 name: mysql
 public_title: MySQL
@@ -352,6 +353,7 @@ LABEL "com.datadoghq.ad.logs"='[{"source":"mysql","service":"mysql"}]'
 
 ```yaml
 apiVersion: v1
+kind: Pod
 metadata:
   name: mysql
   annotations:
@@ -376,6 +378,7 @@ spec:
 
 ```yaml
 apiVersion: v1
+kind: Pod
 metadata:
   name: mysql
   annotations:
@@ -411,6 +414,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 ```yaml
 apiVersion: v1
+kind: Pod
 metadata:
   name: mysql
   annotations:

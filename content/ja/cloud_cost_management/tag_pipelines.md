@@ -3,6 +3,7 @@ further_reading:
 - link: /cloud_cost_management/
   tag: ドキュメント
   text: Cloud Cost Management
+kind: ドキュメント
 title: タグパイプライン
 ---
 

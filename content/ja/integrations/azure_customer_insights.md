@@ -14,6 +14,7 @@ integration_id: azure-customerinsights
 integration_title: Microsoft Azure Customer Insights
 integration_version: ''
 is_public: true
+kind: インテグレーション
 manifest_version: '1.0'
 name: azure_customer_insights
 public_title: Datadog-Microsoft Azure Customer Insights インテグレーション

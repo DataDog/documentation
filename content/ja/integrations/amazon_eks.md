@@ -33,6 +33,7 @@ integration_id: amazon-eks
 integration_title: Amazon EKS
 integration_version: ''
 is_public: true
+kind: インテグレーション
 manifest_version: 2.0.0
 name: amazon_eks
 public_title: Amazon EKS

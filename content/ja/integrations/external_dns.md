@@ -32,6 +32,7 @@ integration_id: external-dns
 integration_title: 外部 DNS
 integration_version: 3.2.0
 is_public: true
+kind: インテグレーション
 manifest_version: 2.0.0
 name: external_dns
 public_title: 外部 DNS
@@ -80,6 +81,7 @@ Kubernetes ワーカーノードごとに 1 つの Datadog Agent ポッドを使
 
 ```yaml
 apiVersion: v1
+kind: Pod
 metadata:
   annotations:
     ad.datadoghq.com/external-dns.check_names: '["external_dns"]'

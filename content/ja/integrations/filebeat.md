@@ -32,6 +32,7 @@ integration_id: filebeat
 integration_title: Filebeat
 integration_version: 1.3.0
 is_public: true
+kind: インテグレーション
 manifest_version: 2.0.0
 name: filebeat
 public_title: Filebeat

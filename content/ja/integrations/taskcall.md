@@ -23,6 +23,7 @@ integration_id: taskcall
 integration_title: TaskCall
 integration_version: ''
 is_public: true
+kind: インテグレーション
 manifest_version: 2.0.0
 name: taskcall
 public_title: TaskCall

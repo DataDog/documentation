@@ -21,6 +21,7 @@ further_reading:
 - link: https://www.datadoghq.com/blog/data-streams-monitoring-sqs/
   tag: ブログ
   text: Data Streams Monitoring による SQS の監視
+kind: documentation
 title: データストリーム モニタリング
 ---
 

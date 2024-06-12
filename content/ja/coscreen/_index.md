@@ -6,6 +6,7 @@ further_reading:
 - link: https://www.datadoghq.com/blog/collaborative-screen-sharing-with-datadog-coscreen/
   tag: GitHub
   text: Datadog CoScreen による共同画面共有の活用
+kind: documentation
 title: CoScreen
 ---
 

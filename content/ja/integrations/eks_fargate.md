@@ -32,6 +32,7 @@ integration_id: eks-fargate
 integration_title: Amazon EKS on AWS Fargate
 integration_version: 4.2.0
 is_public: true
+kind: インテグレーション
 manifest_version: 2.0.0
 name: eks_fargate
 public_title: Amazon EKS on AWS Fargate
@@ -117,6 +118,7 @@ AWS EKS Fargate で Agent をサイドカーとしてデプロイする場合は
 
 ```yaml
 apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
 metadata:
   name: datadog-agent
 rules:
@@ -142,6 +144,7 @@ rules:
       - get
 ---
 apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
 metadata:
   name: datadog-agent
 roleRef:
@@ -154,6 +157,7 @@ subjects:
     namespace: default
 ---
 apiVersion: v1
+kind: ServiceAccount
 metadata:
   name: datadog-agent
   namespace: default
@@ -345,6 +349,7 @@ Fargate 型のポッドからデータの収集を開始するには、Datadog A
 
 ```yaml
 apiVersion: apps/v1
+kind: Deployment
 metadata:
  name: "<APPLICATION_NAME>"
  namespace: default
@@ -467,6 +472,7 @@ EKS クラスターのパフォーマンスを把握するには、[Cluster Chec
 
 ```yaml
 apiVersion: apps/v1
+kind: Deployment
 metadata:
  name: "<APPLICATION_NAME>"
  namespace: default
@@ -526,6 +532,7 @@ spec:
 
 ```yaml
 apiVersion: apps/v1
+kind: Deployment
 metadata:
  name: "<APPLICATION_NAME>"
  namespace: default
@@ -621,6 +628,7 @@ Agent コンテナにコンテナポート `8126` をセットアップして、
 
 ```yaml
 apiVersion: apps/v1
+kind: Deployment
 metadata:
  name: "<APPLICATION_NAME>"
  namespace: default
@@ -690,6 +698,7 @@ Agent 6.19+/7.19+ の場合、[プロセス収集][26]を使用できます。�
 
 ```
 apiVersion: v1
+kind: Pod
 metadata:
   name: <名前>
 spec:

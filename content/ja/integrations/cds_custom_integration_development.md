@@ -21,6 +21,7 @@ integration_id: cds-custom-integration-development
 integration_title: Datadog 用のカスタム開発
 integration_version: ''
 is_public: true
+kind: インテグレーション
 manifest_version: 2.0.0
 name: cds_custom_integration_development
 pricing:

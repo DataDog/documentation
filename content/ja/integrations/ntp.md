@@ -29,6 +29,7 @@ integration_id: ntp
 integration_title: NTP
 integration_version: ''
 is_public: true
+kind: インテグレーション
 manifest_version: 2.0.0
 name: ntp
 public_title: NTP

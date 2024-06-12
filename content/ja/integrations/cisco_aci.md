@@ -34,6 +34,7 @@ integration_id: cisco-aci
 integration_title: CiscoACI
 integration_version: 2.7.0
 is_public: true
+kind: インテグレーション
 manifest_version: 2.0.0
 name: cisco_aci
 public_title: CiscoACI

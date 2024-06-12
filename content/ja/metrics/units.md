@@ -6,6 +6,7 @@ further_reading:
 - link: /dashboards/
   tag: ドキュメント
   text: データを可視化して詳細な情報を把握
+kind: documentation
 title: メトリクスのユニット
 ---
 

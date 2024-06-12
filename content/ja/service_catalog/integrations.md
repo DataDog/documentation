@@ -11,6 +11,7 @@ further_reading:
 - link: /integrations/pagerduty/
   tag: ドキュメント
   text: PagerDuty インテグレーションについて
+kind: ドキュメント
 title: サービスカタログとのインテグレーションを利用する
 ---
 

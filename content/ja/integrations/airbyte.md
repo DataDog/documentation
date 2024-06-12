@@ -42,6 +42,7 @@ integration_id: airbyte
 integration_title: Airbyte
 integration_version: ''
 is_public: true
+kind: インテグレーション
 manifest_version: 2.0.0
 name: airbyte
 public_title: Airbyte

@@ -12,6 +12,7 @@ integration_id: pivotal
 integration_title: Pivotal Tracker
 integration_version: ''
 is_public: true
+kind: インテグレーション
 manifest_version: '1.0'
 name: pivotal
 public_title: Datadog-Pivotal Tracker インテグレーション

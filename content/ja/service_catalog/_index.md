@@ -38,6 +38,7 @@ further_reading:
 - link: https://www.datadoghq.com/blog/service-ownership-best-practices-datadog/
   tag: ブログ
   text: Datadog サービスカタログを使ったエンドツーエンドのサービス所有権管理のベストプラクティス
+kind: ドキュメント
 title: Datadog サービスカタログ
 ---
 

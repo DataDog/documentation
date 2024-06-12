@@ -28,6 +28,7 @@ integration_id: journald
 integration_title: journald
 integration_version: 1.2.0
 is_public: true
+kind: インテグレーション
 manifest_version: 2.0.0
 name: journald
 public_title: journald

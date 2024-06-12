@@ -35,6 +35,7 @@ integration_id: nfsstat
 integration_title: Nfsstat
 integration_version: 1.13.0
 is_public: true
+kind: インテグレーション
 manifest_version: 2.0.0
 name: nfsstat
 public_title: Nfsstat

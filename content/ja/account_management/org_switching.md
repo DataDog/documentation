@@ -1,4 +1,5 @@
 ---
+kind: documentation
 title: オーガニゼーションの切り替え
 ---
 

@@ -20,6 +20,7 @@ further_reading:
 - link: /tracing/services/services_map/
   tag: ドキュメント
   text: サービスマップについて読む
+kind: documentation
 title: ユニバーサル サービス モニタリング
 ---
 

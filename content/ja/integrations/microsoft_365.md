@@ -16,6 +16,7 @@ integration_id: ''
 integration_title: Microsoft 365 のセキュリティと監査ログ
 integration_version: ''
 is_public: true
+kind: インテグレーション
 manifest_version: '1.0'
 name: microsoft_365
 public_title: Datadog-Microsoft 365 のセキュリティと監査ログ

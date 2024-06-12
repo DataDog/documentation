@@ -38,6 +38,7 @@ integration_id: proxysql
 integration_title: ProxySQL
 integration_version: 5.1.0
 is_public: true
+kind: インテグレーション
 manifest_version: 2.0.0
 name: proxysql
 public_title: ProxySQL

@@ -6,6 +6,7 @@ further_reading:
 - link: /account_management/users/
   tag: Documentation
   text: ユーザー管理
+kind: documentation
 title: オーガニゼーションの設定
 ---
 ## 概要

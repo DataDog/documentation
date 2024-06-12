@@ -15,6 +15,7 @@ integration_id: ''
 integration_title: Campfire
 integration_version: ''
 is_public: true
+kind: インテグレーション
 manifest_version: '1.0'
 name: campfire
 public_title: Datadog-Campfire インテグレーション

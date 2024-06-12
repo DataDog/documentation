@@ -6,6 +6,7 @@ further_reading:
 - link: /security/application_security/threats/threat-intelligence/
   tag: ドキュメント
   text: ASM Threat Intelligence
+kind: ドキュメント
 title: 高度な構成
 ---
 

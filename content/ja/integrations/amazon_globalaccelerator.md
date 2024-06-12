@@ -32,6 +32,7 @@ integration_id: amazon-globalaccelerator
 integration_title: Amazon Global Accelerator
 integration_version: ''
 is_public: true
+kind: インテグレーション
 manifest_version: 2.0.0
 name: amazon_globalaccelerator
 public_title: Amazon Global Accelerator

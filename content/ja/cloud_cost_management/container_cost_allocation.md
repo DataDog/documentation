@@ -4,6 +4,7 @@ further_reading:
 - link: https://docs.datadoghq.com/cloud_cost_management/?tab=aws#overview
   tag: Documentation
   text: クラウドコストマネジメント
+kind: documentation
 private: true
 title: コンテナのコストの割り当て
 ---

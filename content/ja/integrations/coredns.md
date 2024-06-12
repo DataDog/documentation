@@ -45,6 +45,7 @@ integration_id: coredns
 integration_title: CoreDNS
 integration_version: 3.2.1
 is_public: true
+kind: インテグレーション
 manifest_version: 2.0.0
 name: coredns
 public_title: CoreDNS
@@ -145,6 +146,7 @@ LABEL "com.datadoghq.ad.logs"='[{"source":"coredns","service":"<SERVICE_NAME>"}]
 
 ```yaml
 apiVersion: v1
+kind: Pod
 metadata:
   name: coredns
   annotations:
@@ -168,6 +170,7 @@ spec:
 
 ```yaml
 apiVersion: v1
+kind: Pod
 metadata:
   name: coredns
   annotations:
@@ -231,6 +234,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 ```yaml
 apiVersion: v1
+kind: Pod
 metadata:
   name: coredns
   annotations:

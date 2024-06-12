@@ -24,6 +24,7 @@ further_reading:
 - link: /sensitive_data_scanner/
   tag: ドキュメント
   text: センシティブ データ スキャナー
+kind: documentation
 title: データ関連リスクの低減
 ---
 

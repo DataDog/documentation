@@ -29,6 +29,7 @@ integration_id: oom-kill
 integration_title: OOM Killer
 integration_version: ''
 is_public: true
+kind: インテグレーション
 manifest_version: 2.0.0
 name: oom_kill
 public_title: OOM Killer
@@ -121,6 +122,7 @@ yum install -y kernel-devel-$(uname -r)
 DatadogAgent マニフェストで `features.oomKill.enabled` パラメーターを設定します。
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
 metadata:
   name: datadog
 spec:
@@ -132,6 +134,7 @@ spec:
 **注**: COS (Container Optimized OS) を使用する場合は、ノード Agent で `src` ボリュームをオーバーライドしてください。
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
 metadata:
   name: datadog
 spec:

@@ -34,6 +34,7 @@ further_reading:
 - link: https://dtdg.co/fe
   tag: Foundation Enablement
   text: Synthetic テスト能力を高めるためのインタラクティブなセッションに参加できます
+kind: documentation
 title: Synthetic の監視
 ---
 

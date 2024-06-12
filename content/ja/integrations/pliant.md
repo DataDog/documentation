@@ -35,6 +35,7 @@ integration_id: pliant
 integration_title: Pliant
 integration_version: ''
 is_public: true
+kind: インテグレーション
 manifest_version: 2.0.0
 name: pliant
 public_title: Pliant

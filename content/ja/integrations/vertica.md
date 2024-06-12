@@ -39,6 +39,7 @@ integration_id: vertica
 integration_title: Vertica
 integration_version: 4.5.0
 is_public: true
+kind: インテグレーション
 manifest_version: 2.0.0
 name: vertica
 public_title: Vertica

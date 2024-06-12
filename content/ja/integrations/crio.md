@@ -34,6 +34,7 @@ integration_id: cri-o
 integration_title: CRI-O
 integration_version: 2.6.0
 is_public: true
+kind: インテグレーション
 manifest_version: 2.0.0
 name: crio
 public_title: CRI-O

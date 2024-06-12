@@ -31,6 +31,7 @@ integration_id: bind9
 integration_title: bind9
 integration_version: 1.0.0
 is_public: true
+kind: インテグレーション
 manifest_version: 2.0.0
 name: bind9
 public_title: bind9

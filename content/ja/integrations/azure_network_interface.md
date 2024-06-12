@@ -15,6 +15,7 @@ integration_id: azure-networkinterface
 integration_title: Microsoft Azure Network Interface
 integration_version: ''
 is_public: true
+kind: インテグレーション
 manifest_version: '1.0'
 name: azure_network_interface
 public_title: Datadog-Microsoft Azure Network Interface インテグレーション

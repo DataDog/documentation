@@ -14,6 +14,7 @@ integration_id: azure-cognitiveservices
 integration_title: Microsoft Azure Cognitive Services
 integration_version: ''
 is_public: true
+kind: インテグレーション
 manifest_version: '1.0'
 name: azure_cognitive_services
 public_title: Datadog-Microsoft Azure Cognitive Services インテグレーション

@@ -42,6 +42,7 @@ integration_id: cilium
 integration_title: Cilium
 integration_version: 3.4.0
 is_public: true
+kind: インテグレーション
 manifest_version: 2.0.0
 name: cilium
 public_title: Cilium

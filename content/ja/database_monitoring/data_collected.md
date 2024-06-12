@@ -1,6 +1,7 @@
 ---
 description: データベースモニタリングで収集されるデータに関する情報。
 further_reading: null
+kind: documentation
 title: データベースモニタリングの収集データ
 ---
 

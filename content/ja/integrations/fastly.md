@@ -39,6 +39,7 @@ integration_id: fastly
 integration_title: Fastly
 integration_version: ''
 is_public: true
+kind: インテグレーション
 manifest_version: 2.0.0
 name: fastly
 public_title: Fastly

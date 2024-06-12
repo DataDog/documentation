@@ -7,6 +7,7 @@ further_reading:
 - link: /metrics/custom_metrics/dogstatsd_metrics_submission/
   tag: ドキュメント
   text: DogStatsD でのディストリビューションの使用
+kind: documentation
 title: ディストリビューション
 ---
 ## 概要

@@ -40,6 +40,7 @@ integration_id: cloudflare
 integration_title: Cloudflare
 integration_version: ''
 is_public: true
+kind: インテグレーション
 manifest_version: 2.0.0
 name: cloudflare
 public_title: Cloudflare

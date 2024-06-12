@@ -28,6 +28,7 @@ git_integration_title: Kubernetes
 integration_id: kubernetes
 integration_title: Kubernetes
 is_public: true
+kind: インテグレーション
 name: Kubernetes
 newhlevel: true
 public_title: Datadog-Kubernetes インテグレーション

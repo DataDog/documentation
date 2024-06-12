@@ -32,6 +32,7 @@ integration_id: azure-active-directory
 integration_title: Azure Active Directory
 integration_version: ''
 is_public: true
+kind: インテグレーション
 manifest_version: 2.0.0
 name: azure_active_directory
 public_title: Azure Active Directory

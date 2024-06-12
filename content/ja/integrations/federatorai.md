@@ -45,6 +45,7 @@ integration_id: federatorai
 integration_title: Federator.ai
 integration_version: ''
 is_public: true
+kind: インテグレーション
 manifest_version: 2.0.0
 name: federatorai
 public_title: Federator.ai

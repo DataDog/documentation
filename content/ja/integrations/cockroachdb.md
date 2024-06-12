@@ -41,6 +41,7 @@ integration_id: cockroachdb
 integration_title: CockroachDB
 integration_version: 3.3.0
 is_public: true
+kind: インテグレーション
 manifest_version: 2.0.0
 name: cockroachdb
 public_title: CockroachDB

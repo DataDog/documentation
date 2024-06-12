@@ -9,6 +9,7 @@ further_reading:
 - link: /continuous_integration/intelligent_test_runner
   tag: Documentation
   text: Intelligent Test Runner について
+kind: documentation
 title: CI Visibility のトラブルシューティング
 ---
 

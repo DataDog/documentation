@@ -17,6 +17,7 @@ further_reading:
 - link: /account_management/org_settings/cross_org_visibility
   tag: Documentation
   text: Cross-Organization Visibility
+kind: documentation
 title: マルチオーガニゼーションアカウントの管理
 ---
 

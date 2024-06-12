@@ -10,6 +10,7 @@ further_reading:
 - link: /database_monitoring/troubleshooting/
   tag: ドキュメント
   text: トラブルシューティング
+kind: documentation
 title: DBM セットアップアーキテクチャ
 ---
 {{< site-region region="gov" >}}

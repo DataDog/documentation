@@ -33,6 +33,7 @@ aliases:
 - /ja/videos/apm
 - /ja/videos/aws
 - /ja/videos/host-map
+kind: documentation
 title: Datadog ラーニングセンター
 ---
 

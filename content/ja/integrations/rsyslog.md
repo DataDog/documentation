@@ -11,6 +11,7 @@ has_logo: true
 integration_id: rsyslog
 integration_title: rsyslog
 is_public: true
+kind: インテグレーション
 name: rsyslog
 public_title: Datadog-Rsyslog インテグレーション
 short_description: Rsyslog を構成して、ホスト、コンテナ、サービスからログを収集

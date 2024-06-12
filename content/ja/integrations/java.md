@@ -33,6 +33,7 @@ integration_id: java
 integration_title: JMX
 integration_version: ''
 is_public: true
+kind: インテグレーション
 manifest_version: '1.0'
 name: java
 public_title: Datadog-JMX インテグレーション

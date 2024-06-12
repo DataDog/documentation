@@ -23,6 +23,7 @@ integration_id: splunk
 integration_title: Splunk
 integration_version: ''
 is_public: true
+kind: インテグレーション
 manifest_version: 2.0.0
 name: splunk
 public_title: Splunk

@@ -40,6 +40,7 @@ integration_id: twistlock
 integration_title: Prisma Cloud Compute Edition
 integration_version: 3.6.0
 is_public: true
+kind: インテグレーション
 manifest_version: 2.0.0
 name: twistlock
 public_title: Prisma Cloud Compute Edition
@@ -118,6 +119,7 @@ Kubernetes を使用している場合は、デプロイ前に twistlock_console
 
 ```yaml
 apiVersion: v1
+kind: ReplicationController
 metadata:
   name: twistlock-console
   namespace: twistlock

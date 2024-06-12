@@ -5,6 +5,7 @@ description: Stunnel プロキシからログを収集して Datadog に送信�
 has_logo: true
 integration_title: Stunnel
 is_public: true
+kind: インテグレーション
 name: Stunnel
 public_title: Datadog-Stunnel インテグレーション
 short_description: Stunnel プロキシからログを収集して Datadog に送信。

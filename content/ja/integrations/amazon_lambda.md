@@ -27,6 +27,7 @@ integration_id: amazon-lambda
 integration_title: AWS Lambda
 integration_version: ''
 is_public: true
+kind: インテグレーション
 manifest_version: '1.0'
 name: amazon_lambda
 public_title: Datadog-AWS Lambda インテグレーション

@@ -1,4 +1,5 @@
 ---
+kind: documentation
 title: Login Methods の構成
 ---
 

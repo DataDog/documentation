@@ -17,6 +17,7 @@ integration_id: ''
 integration_title: Amazon Route 53
 integration_version: ''
 is_public: true
+kind: インテグレーション
 manifest_version: '1.0'
 name: amazon_route53
 public_title: Datadog-Amazon Route 53 インテグレーション

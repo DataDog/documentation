@@ -28,6 +28,7 @@ integration_id: snmp-cisco
 integration_title: Cisco
 integration_version: ''
 is_public: true
+kind: インテグレーション
 manifest_version: 2.0.0
 name: snmp_cisco
 public_title: Cisco

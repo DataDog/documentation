@@ -43,6 +43,7 @@ integration_id: memcached
 integration_title: Memcache
 integration_version: 4.1.0
 is_public: true
+kind: インテグレーション
 manifest_version: 2.0.0
 name: mcache
 public_title: Memcache

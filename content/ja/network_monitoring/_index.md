@@ -20,6 +20,7 @@ further_reading:
 - link: https://www.datadoghq.com/blog/monitor-cilium-cni-with-datadog/
   tag: ブログ
   text: Datadog で Cilium が管理するインフラストラクチャーを監視する
+kind: documentation
 title: ネットワークモニタリング
 ---
 

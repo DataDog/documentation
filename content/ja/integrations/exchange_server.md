@@ -36,6 +36,7 @@ integration_id: exchange-server
 integration_title: Microsoft Exchange Server
 integration_version: 2.1.0
 is_public: true
+kind: インテグレーション
 manifest_version: 2.0.0
 name: exchange_server
 public_title: Microsoft Exchange Server

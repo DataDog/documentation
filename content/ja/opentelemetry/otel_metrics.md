@@ -8,6 +8,7 @@ further_reading:
 - link: https://www.datadoghq.com/blog/ingest-opentelemetry-traces-metrics-with-datadog-exporter/
   tag: GitHub
   text: OpenTelemetry コレクターから Datadog エクスポーター経由で Datadog にメトリクスとトレースを送信する
+kind: documentation
 title: OpenTelemetry から Datadog にメトリクスを送信する
 ---
 

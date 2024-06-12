@@ -30,6 +30,7 @@ further_reading:
 - link: https://www.datadoghq.com/blog/watchdog-live-processes/
   tag: ブログ
   text: ライブプロセス用 Watchdog Insights によるワークロードのパフォーマンス異常に対するトラブルシューティング
+kind: ドキュメント
 title: Datadog WatchdogTM
 ---
 ## 概要

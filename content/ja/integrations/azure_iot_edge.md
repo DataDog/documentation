@@ -44,6 +44,7 @@ integration_id: azure-iot-edge
 integration_title: Azure IoT Edge
 integration_version: 4.2.0
 is_public: true
+kind: インテグレーション
 manifest_version: 2.0.0
 name: azure_iot_edge
 public_title: Azure IoT Edge

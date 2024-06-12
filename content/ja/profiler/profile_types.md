@@ -9,6 +9,7 @@ further_reading:
 - link: https://www.datadoghq.com/blog/introducing-datadog-profiling/
   tags: ブログ
   text: Datadog に常時接続型の本番環境プロファイリングが登場
+kind: documentation
 title: プロファイルタイプ
 ---
 

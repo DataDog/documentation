@@ -53,6 +53,7 @@ integration_id: nginx
 integration_title: Nginx
 integration_version: 6.3.0
 is_public: true
+kind: インテグレーション
 manifest_version: 2.0.0
 name: nginx
 public_title: Nginx
@@ -191,6 +192,7 @@ sudo nginx -t && sudo nginx -s reload
 以下のスニペットを構成 ConfigMaps に追加し、別のポートでメトリクスエンドポイントを公開します。
 
 ```yaml
+kind: ConfigMap
 metadata:
   name: nginx-conf
 data:
@@ -353,6 +355,7 @@ LABEL "com.datadoghq.ad.logs"='[{"source":"nginx","service":"nginx"}]'
 
 ```yaml
 apiVersion: v1
+kind: Pod
 metadata:
   name: nginx
   annotations:
@@ -372,6 +375,7 @@ metadata:
 
 ```yaml
 apiVersion: v1
+kind: Pod
 metadata:
   name: nginx
   annotations:
@@ -403,6 +407,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 ```yaml
 apiVersion: v1
+kind: Pod
 metadata:
   name: nginx
   annotations:

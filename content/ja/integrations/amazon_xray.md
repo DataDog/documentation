@@ -15,6 +15,7 @@ integration_id: ''
 integration_title: AWS X-Ray
 integration_version: ''
 is_public: true
+kind: インテグレーション
 manifest_version: '1.0'
 name: amazon_xray
 public_title: Datadog-AWS X-Ray インテグレーション

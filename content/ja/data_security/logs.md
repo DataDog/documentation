@@ -11,6 +11,7 @@ further_reading:
 - link: https://www.datadoghq.com/blog/datadog-pci-compliance-log-management-apm/
   tag: ブログ
   text: Datadog から PCI に準拠したログ管理と APM を発表
+kind: documentation
 title: ログ管理のデータセキュリティ
 ---
 

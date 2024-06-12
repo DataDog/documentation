@@ -14,6 +14,7 @@ integration_id: google-cloud-ml
 integration_title: Google Machine Learning
 integration_version: ''
 is_public: true
+kind: インテグレーション
 manifest_version: '1.0'
 name: google_cloud_ml
 public_title: Datadog-Google Machine Learning インテグレーション

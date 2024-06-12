@@ -1,5 +1,6 @@
 ---
 title: コンテナマップ
+kind: documentation
 aliases:
   - /ja/graphing/infrastructure/containermap/
   - /ja/guides/hostmap

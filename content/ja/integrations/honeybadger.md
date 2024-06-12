@@ -26,6 +26,7 @@ integration_id: honeybadger
 integration_title: Honeybadger
 integration_version: ''
 is_public: true
+kind: インテグレーション
 manifest_version: 2.0.0
 name: honeybadger
 public_title: Honeybadger

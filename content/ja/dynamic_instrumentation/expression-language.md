@@ -1,4 +1,5 @@
 ---
+kind: documentation
 private: false
 title: ダイナミックインスツルメンテーション式言語
 ---

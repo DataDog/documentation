@@ -15,6 +15,7 @@ integration_id: capistrano
 integration_title: Capistrano
 integration_version: ''
 is_public: true
+kind: インテグレーション
 manifest_version: '1.0'
 name: capistrano
 public_title: Datadog-Capistrano インテグレーション

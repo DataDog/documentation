@@ -15,6 +15,7 @@ integration_id: ''
 integration_title: Amazon Simple Email Service (SES)
 integration_version: ''
 is_public: true
+kind: インテグレーション
 manifest_version: '1.0'
 name: amazon_ses
 public_title: Datadog-Amazon Simple Email Service (SES) インテグレーション

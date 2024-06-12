@@ -10,6 +10,7 @@ has_logo: true
 integration_id: sinatra
 integration_title: Sinatra
 is_public: true
+kind: インテグレーション
 name: Sinatra
 public_title: Datadog-Sinatra インテグレーション
 short_description: Sinatra アプリケーションログを収集

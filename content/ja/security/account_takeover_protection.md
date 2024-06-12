@@ -10,6 +10,7 @@ further_reading:
 - link: security/application_security/guide/
   tag: ドキュメント
   text: Application Security Management ガイド
+kind: ドキュメント
 title: Account Takeover Protection
 ---
 

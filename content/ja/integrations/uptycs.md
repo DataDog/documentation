@@ -33,6 +33,7 @@ integration_id: uptycs
 integration_title: Uptycs
 integration_version: ''
 is_public: true
+kind: インテグレーション
 manifest_version: 2.0.0
 name: uptycs
 public_title: Uptycs

@@ -3,6 +3,7 @@ further_reading:
 - link: /data_jobs
   tag: ドキュメント
   text: Data Jobs Monitoring
+kind: ドキュメント
 title: Databricks の Data Jobs Monitoring を有効にする
 ---
 

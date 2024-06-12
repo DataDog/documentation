@@ -14,6 +14,7 @@ integration_id: azure-apimanagement
 integration_title: Microsoft Azure API Management
 integration_version: ''
 is_public: true
+kind: インテグレーション
 manifest_version: '1.0'
 name: azure_api_management
 public_title: Datadog-Microsoft Azure API Management インテグレーション

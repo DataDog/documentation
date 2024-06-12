@@ -35,6 +35,7 @@ integration_id: amazon-billing
 integration_title: AWS Billing and Cost Management
 integration_version: ''
 is_public: true
+kind: インテグレーション
 manifest_version: 2.0.0
 name: amazon_billing
 public_title: AWS Billing and Cost Management

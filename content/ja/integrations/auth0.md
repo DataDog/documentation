@@ -33,6 +33,7 @@ integration_id: auth0
 integration_title: Auth0
 integration_version: ''
 is_public: true
+kind: インテグレーション
 manifest_version: 2.0.0
 name: auth0
 public_title: Auth0

@@ -17,6 +17,7 @@ further_reading:
 - link: https://dtdg.co/fe
   tag: Foundation Enablement
   text: インフラストラクチャーモニタリングをパワーアップさせるインタラクティブなセッションに参加できます
+kind: documentation
 title: インフラストラクチャー
 ---
 

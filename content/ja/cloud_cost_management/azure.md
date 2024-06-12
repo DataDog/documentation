@@ -9,6 +9,7 @@ further_reading:
 - link: /cloud_cost_management/google_cloud
   tag: ドキュメント
   text: Google Cloud の請求に関する洞察を得る
+kind: ドキュメント
 title: Azure
 ---
 
