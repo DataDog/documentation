@@ -14,7 +14,7 @@ integration_id: google-cloud-tpu
 integration_title: "Google\_Cloud\_TPU"
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: google_cloud_tpu
 public_title: "Intégration Datadog/Google\_Cloud\_TPU"
