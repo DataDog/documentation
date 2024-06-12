@@ -22,10 +22,11 @@ This document walks through the following steps:
 
 ## Configure Log Archives
 
-Select the cloud provider you are using to archive your logs.
+If you already have a Datadog Log Archive configured for Observability Pipelines, skip to [Set up Observability Pipelines](#set-up-observability-pipelines).
 
-{{% collapse-content title="Amazon S3" level="h2" %}}
+Select the cloud provider you are using to archive your logs. 
 
+{{% collapse-content title="Amazon S3" level="h4" %}}
 {{% observability_pipelines/configure_log_archive/amazon_s3/instructions %}}
 
 {{< tabs >}}
@@ -55,8 +56,7 @@ Select the cloud provider you are using to archive your logs.
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Google Cloud Storage" level="h2" %}}
-
+{{% collapse-content title="Google Cloud Storage" level="h4" %}}
 {{% observability_pipelines/configure_log_archive/google_cloud_storage/instructions %}}
 
 {{< tabs >}}
@@ -85,8 +85,7 @@ Select the cloud provider you are using to archive your logs.
 {{% observability_pipelines/configure_log_archive/google_cloud_storage/connect_datadog_log_archives %}}
 
 {{% /collapse-content %}}
-{{% collapse-content title="Azure Storage" level="h2" %}}
-
+{{% collapse-content title="Azure Storage" level="h4" %}}
 {{% observability_pipelines/configure_log_archive/azure_storage/instructions %}}
 
 {{< tabs >}}
