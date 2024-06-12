@@ -292,53 +292,44 @@ If you have a Kubernetes cluster, use the [Datadog Cluster Agent][1] for Databas
 
 Follow the instructions to [enable the cluster checks][2] if not already enabled in your Kubernetes cluster. You can declare the Postgres configuration either with static files mounted in the Cluster Agent container or using service annotations:
 
-### Command line with Helm
+### Helm
 
-Execute the following [Helm][3] command to install the [Datadog Cluster Agent][1] on your Kubernetes cluster. Replace the values to match your account and environment:
+Complete the following steps to install the [Datadog Cluster Agent][1] on your Kubernetes cluster. Replace the values to match your account and environment.
 
-```bash
-helm repo add datadog https://helm.datadoghq.com
-helm repo update
+1. Complete the [Datadog Agent installation instructions][3] for Helm.
+2. Update your YAML configuration file (`datadog-values.yaml` in the Cluster Agent installation instructions) to include the following:
+    ```yaml
+    clusterAgent:
+      confd:
+        postgres.yaml: -|
+          cluster_check: true
+          init_config:
+            instances:
+            - dbm: true
+              host: '<AWS_INSTANCE_ENDPOINT>'
+              port: 5432
+              username: datadog
+              password: '<PASSWORD>'
+              ## Required: For Postgres 9.6, uncomment these lines to use the functions created in the setup
+              # pg_stat_statements_view: datadog.pg_stat_statements()
+              # pg_stat_activity_view: datadog.pg_stat_activity()
 
-helm install <RELEASE_NAME> \
-  --set 'datadog.apiKey=<DATADOG_API_KEY>' \
-  --set 'clusterAgent.enabled=true' \
-  --set 'clusterChecksRunner.enabled=true' \
-  --set 'clusterAgent.confd.postgres\.yaml=cluster_check: true
-init_config:
-instances:
-  - dbm: true
-    host: <INSTANCE_ADDRESS>
-    port: 5432
-    username: datadog
-    password: "<UNIQUEPASSWORD>"' \
-  datadog/datadog
-```
+    clusterChecksRunner:
+      enabled: true
+    ```
 
-For Postgres 9.6, add the following settings to the instance config where host and port are specified:
+3. Deploy the Agent with the above configuration file from the command line:
+    ```shell
+    helm install datadog-agent -f datadog-values.yaml datadog/datadog
+    ```
 
-```yaml
-pg_stat_statements_view: datadog.pg_stat_statements()
-pg_stat_activity_view: datadog.pg_stat_activity()
-```
+<div class="alert alert-info">
+For Windows, append <code>--set targetSystem=windows</code> to the <code>helm install</code> command.
+</div>
 
-### Configure with mounted files
-
-To configure a cluster check with a mounted configuration file, mount the configuration file in the Cluster Agent container on the path: `/conf.d/postgres.yaml`:
-
-```yaml
-cluster_check: true  # Make sure to include this flag
-init_config:
-instances:
-  - dbm: true
-    host: '<AWS_INSTANCE_ENDPOINT>'
-    port: 5432
-    username: datadog
-    password: '<PASSWORD>'
-    ## Required: For Postgres 9.6, uncomment these lines to use the functions created in the setup
-    # pg_stat_statements_view: datadog.pg_stat_statements()
-    # pg_stat_activity_view: datadog.pg_stat_activity()
-```
+[1]: https://app.datadoghq.com/organization-settings/api-keys
+[2]: /getting_started/site
+[3]: /containers/kubernetes/installation/?tab=helm#installation
 
 ### Configure with Kubernetes service annotations
 

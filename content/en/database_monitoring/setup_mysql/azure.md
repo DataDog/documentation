@@ -208,36 +208,35 @@ Follow the instructions to [enable the cluster checks][2] if not already enabled
 Complete the following steps to install the [Datadog Cluster Agent][1] on your Kubernetes cluster. Replace the values to match your account and environment.
 
 1. Complete the [Datadog Agent installation instructions][3] for Helm.
-2. Update your YAML configuration file to include the following:
-    {{< code-block lang="yaml" filename="datadog-values.yaml" >}}
+2. Update your YAML configuration file (`datadog-values.yaml` in the Cluster Agent installation instructions) to include the following:
+    ```yaml
     clusterAgent:
       confd:
         mysql.yaml: -|
           cluster_check: true
           init_config:
-          instances:
-            - dbm: true
-              host: '<AZURE_INSTANCE_ENDPOINT>'
-              port: 3306
-              username: datadog
-              password: '<UNIQUE_PASSWORD>'
-              azure:
-                deployment_type: '<DEPLOYMENT_TYPE>'
-                fully_qualified_domain_name: '<AZURE_INSTANCE_ENDPOINT>'
+            instances:
+              - dbm: true
+                host: '<AZURE_INSTANCE_ENDPOINT>'
+                port: 3306
+                username: datadog
+                password: '<UNIQUE_PASSWORD>'
+                azure:
+                  deployment_type: '<DEPLOYMENT_TYPE>'
+                  fully_qualified_domain_name: '<AZURE_INSTANCE_ENDPOINT>'
 
     clusterChecksRunner:
       enabled: true
-    {{< /code-block >}}
+    ```
 
 3. Deploy the Agent with the above configuration file from the command line:
-
-    {{< code-block lang="shell" >}}
+    ```shell
     helm install datadog-agent -f datadog-values.yaml datadog/datadog
-    {{< /code-block >}}
+    ```
 
-    <div class="alert alert-info">
-    For Windows, append <code>--set targetSystem=windows</code> to the <code>helm install</code> command.
-    </div>
+<div class="alert alert-info">
+For Windows, append <code>--set targetSystem=windows</code> to the <code>helm install</code> command.
+</div>
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: /getting_started/site

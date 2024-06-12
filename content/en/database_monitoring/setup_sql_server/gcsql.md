@@ -223,35 +223,49 @@ If you have a Kubernetes cluster, use the [Datadog Cluster Agent][1] for Databas
 
 If cluster checks are not already enabled in your Kubernetes cluster, follow the instructions to [enable cluster checks][2]. You can configure the Cluster Agent either with static files mounted in the Cluster Agent container, or by using Kubernetes service annotations:
 
-### Command line with Helm
+### Helm
 
-Execute the following [Helm][3] command to install the [Datadog Cluster Agent][1] on your Kubernetes cluster. Replace the values to match your account and environment:
+Complete the following steps to install the [Datadog Cluster Agent][1] on your Kubernetes cluster. Replace the values to match your account and environment.
 
-```bash
-helm repo add datadog https://helm.datadoghq.com
-helm repo update
+1. Complete the [Datadog Agent installation instructions][3] for Helm.
+2. Update your YAML configuration file (`datadog-values.yaml` in the Cluster Agent installation instructions) to include the following:
+    ```yaml
+    clusterAgent:
+      confd:
+        sqlserver.yaml: -|
+          cluster_check: true
+          init_config:
+          instances:
+          - dbm: true
+            host: <HOSTNAME>
+            port: 1433
+            username: datadog
+            password: '<PASSWORD>'
+            connector: "odbc"
+            driver: "ODBC Driver 18 for SQL Server"
+            tags:  # Optional
+              - 'service:<CUSTOM_SERVICE>'
+              - 'env:<CUSTOM_ENV>'
+            gcp:
+              project_id: '<PROJECT_ID>'
+              instance_id: '<INSTANCE_ID>'
 
-helm install <RELEASE_NAME> \
-  --set 'datadog.apiKey=<DATADOG_API_KEY>' \
-  --set 'clusterAgent.enabled=true' \
-  --set 'clusterAgent.confd.sqlserver\.yaml=cluster_check: true
-init_config:
-instances:
-  - dbm: true
-    host: <HOSTNAME>
-    port: 1433
-    username: datadog
-    password: "<PASSWORD>"
-    connector: "odbc"
-    driver: "ODBC Driver 18 for SQL Server"
-    tags:  # Optional
-      - "service:<CUSTOM_SERVICE>"
-      - "env:<CUSTOM_ENV>"
-    gcp:
-      project_id: "<PROJECT_ID>"
-      instance_id: "<INSTANCE_ID>"' \
-  datadog/datadog
-```
+    clusterChecksRunner:
+      enabled: true
+    ```
+
+3. Deploy the Agent with the above configuration file from the command line:
+    ```shell
+    helm install datadog-agent -f datadog-values.yaml datadog/datadog
+    ```
+
+<div class="alert alert-info">
+For Windows, append <code>--set targetSystem=windows</code> to the <code>helm install</code> command.
+</div>
+
+[1]: https://app.datadoghq.com/organization-settings/api-keys
+[2]: /getting_started/site
+[3]: /containers/kubernetes/installation/?tab=helm#installation
 
 ### Configure with mounted files
 
