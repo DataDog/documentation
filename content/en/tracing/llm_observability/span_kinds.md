@@ -13,7 +13,9 @@ LLM Observability is not available in the US1-FED site.
 
 ## Overview
 
-LLM Observability categorizes spans by their span kind, which defines the type of work the span is performing. This can give you more granular insights on what operations are being performed by your LLM application. LLM Observability currently supports the following span kinds:
+LLM Observability categorizes spans by their *span kind*, which defines the type of work the span is performing. This can give you more granular insights on what operations are being performed by your LLM application.
+
+LLM Observability supports the following span kinds:
 
 | Kind      | Represents   | Root span?   | Can have child spans? | Examples |
 |-----------|--------------|--------------|-------------|----|
@@ -24,7 +26,6 @@ LLM Observability categorizes spans by their span kind, which defines the type o
 | [Task](#task-span)      | A standalone step that does not involve a call to an external service. | No | No | A data preprocessing step. |
 | [Embedding](#embedding-span) | A call to a model or function that returns an embedding. | No  | Yes | A call to text-embedding-ada-002. |
 | [Retrieval](#retrieval-span) | A data retrieval operation from an external knowledge base. | No | No | A call to a vector database that returns an array of ranked documents. |
-
 
 For instructions on creating spans from your application, including code examples, see [Tracing spans][2] in the SDK documentation.
 
@@ -38,7 +39,7 @@ LLM spans typically do not have child spans, as they are standalone operations r
 
 ## Workflow span
 
-Workflow spans represent any *static* sequence of operations. Use workflows to group together an LLM call with its supporting contextual tool/task/embedding/retrieval operations.
+Workflow spans represent any *static* sequence of operations. Use workflows to group together an LLM call with its supporting contextual operations, such as tool calls, data retrievals, and other tasks.
 
 Workflow spans are frequently the root span of a trace consisting of a standard sequence. For example, a function might take an arXiv paper link and return a summary. This process might involve a tool call to fetch the paper, some text-processing tasks, and an LLM summarization.
 
@@ -48,7 +49,7 @@ Workflow spans may have any spans as children, which represent child steps in th
 
 Agent spans represent a dynamic sequence of operations where a large language model determines and executes operations based on the inputs. For example, an agent span might represent a series of reasoning steps controlled by a [ReAct agent][1].
 
-Agent spans are frequently the root span for traces representing autonomous agents or reasoning agents
+Agent spans are frequently the root span for traces representing autonomous agents or reasoning agents.
 
 Agent spans may have any spans as children, which represent child steps orchestrated by a reasoning engine.
 
