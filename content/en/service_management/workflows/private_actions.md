@@ -128,7 +128,7 @@ Before you can use an action runner, you must pair it with one or more connectio
 To pair a runner to a connection:
 1. From the [Workflow Automation][8] or [App Builder][9] Connections page, click **New Connection**.
 1. Select the integration you want to connect with your private action runner. For a list of integrations that support private actions, see [Overview](#overview).
-1. Add a **Connection Name** and select the **Private Action Runner** from the drop-down list.
+1. Add a **Connection Name** and select the **Private Action Runner** from the dropdown.
 1. Add the paths to any required Credential files. For more information, see [Handling Private Action Credentials][10].
 
 ## Use a private action
@@ -139,14 +139,14 @@ To use a private action in your [Workflow Automation][11] workflow or [App Build
 1. From the [Workflow Automation][11] page, create a workflow, or open an existing workflow. For information on creating or editing a workflow, see [Build Workflows][13].
 1. Click **Add Step** and search for the private action you want to add to your workflow. For a list of integrations that support private actions, see [Overview](#overview).
 1. Enter a name for the step.
-1. Select a **Connection** from the drop-down menu or click the plus (**+**) icon to add a new connection. Using a private action requires a private action runner paired with a connection. See [Connect a runner](#connect-a-runner) for more information.
+1. Select a **Connection** from the dropdown or click the plus (**+**) icon to add a new connection. Using a private action requires a private action runner paired with a connection. See [Connect a runner](#connect-a-runner) for more information.
 1. Complete any required fields and click **Save** to save your workflow.
 {{% /collapse-content %}}
 
 {{% collapse-content title="App Builder" level="h4" %}}
 1. From the [App Builder][12] page, create an app, or open an existing app. For information on creating or editing an app, see [Build Apps][15].
 1. Click **New Query** and search for the private action you want to add to your workflow. For a list of integrations that support private actions, see [Overview](#overview).
-1. Select a **Connection** from the drop-down menu or click the plus (**+**) icon to add a new connection. Using a private action requires a private action runner paired with a connection. See [Connect a runner](#connect-a-runner) for more information.
+1. Select a **Connection** from the dropdown or click the plus (**+**) icon to add a new connection. Using a private action requires a private action runner paired with a connection. See [Connect a runner](#connect-a-runner) for more information.
 1. Complete any required fields and click **Save** to save your workflow.
 {{% /collapse-content %}}
 
