@@ -42,7 +42,7 @@ The OpenAI integration provides automatic tracing for the [OpenAI Python SDK's][
 
 ### Traced methods
 
-The OpenAI integration instruments the synchronous, asynchronous, and streamed versions of the following methods:
+The OpenAI integration instruments the following methods, including streamed calls:
 
 - [Completions][2]:
    - `OpenAI().completions.create()`
@@ -57,17 +57,15 @@ The LangChain integration provides automatic tracing for the [LangChain Python S
 
 ### Traced methods
 
-The LangChain integration instruments both synchronous and asynchronous versions of the following methods:
+The LangChain integration instruments the following methods:
 
 - [LLMs][13]: 
-  - `llm.invoke()`
-  - `llm.batch()`
+  - `llm.invoke()`, `llm.ainvoke()`
 - [Chat models][14] 
-  - `chat_model.invoke()`
-  - `chat_model.invoke()`
+  - `chat_model.invoke()`, `chat_model.ainvoke()`
 - [Chains/LCEL][15]
-  - `chain.invoke()`
-  - `chain.batch()`
+  - `chain.invoke()`, `chain.ainvoke()`
+  - `chain.batch()`, `chain.abatch()`
 
 **Note:** The LangChain integration does not yet support tracing streamed calls.
 
@@ -92,12 +90,12 @@ The Anthropic integration provides automatic tracing for the [Anthropic Python S
 
 ### Traced methods
 
-The Anthropic integration instruments both synchronous and asynchronous versions of the following methods:
+The Anthropic integration instruments the following methods:
 
-- [Chat messages][10]:
-  - `Anthropic().messages.create()`
+- [Chat messages][10] (including streamed calls):
+  - `Anthropic().messages.create()`, `AsyncAnthropic().messages.create()`
 - [Streamed chat messages][11]:
-  - `Anthropic().messages.stream()`
+  - `Anthropic().messages.stream()`, `AsyncAnthropic().messages.stream()`
 
 [1]: https://platform.openai.com/docs/api-reference/introduction
 [2]: https://platform.openai.com/docs/api-reference/completions
