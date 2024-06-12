@@ -91,9 +91,9 @@ You can access the data collected by NetFlow Monitoring on the [**NetFlow** page
 
 When creating a [NetFlow monitor][6], you should consider the following fields with respect to the source IP or destination IP from the perspective of the device. These fields provide insights into network traffic patterns and help with optimizing performance and security.
 
-### Interface Information
+### Interface information
 
-Represents details about the ingress and egress interfaces.
+The following fields represent details about the ingress and egress interfaces.
 
 | Field Name | Field Description |
 |---|---|
@@ -104,9 +104,9 @@ Represents details about the ingress and egress interfaces.
 | Ingress Interface Index | Index of the ingress interface. |
 | Ingress Interface Name | Name of the ingress interface. |
 
-### Device Information
+### Device information
 
-Represents details related to the device generating NetFlow records.
+The following fields represent details related to the device generating NetFlow records.
 
 | Field Name | Field Description |
 |---|---|
@@ -117,9 +117,9 @@ Represents details related to the device generating NetFlow records.
 | Device Namespace | Namespace of the device. |
 | Device Vendor | Vendor of the device. |
 
-### Flow Details
+### Flow details
 
-Represents characteristics of the network flow.
+The following fields represent characteristics of the network flow.
 
 | Field Name | Field Description |
 |---|---|
@@ -134,7 +134,7 @@ Represents characteristics of the network flow.
 | Bytes | Total number of bytes transferred. |
 | Packets | Total number of packets transferred. |
 
-Use the out-of-the-box facets to start analyzing traffic patterns based on NetFlow destination and source IP addresses.
+In addition to fields, you can also use out-of-the-box facets to start analyzing traffic patterns based on NetFlow destination and source IP addresses.
 
 ### NetFlow Destination IP facets
 
@@ -192,11 +192,11 @@ Use the out-of-the-box facets to start analyzing traffic patterns based on NetFl
 | Source Subdivision Name | The name of the subdivision (such as state or province) associated with the source IP. |
 | Source Timezone | The timezone associated with the source IP. |
 
-By monitoring these key fields in NetFlow events, organizations can gain visibility into their network infrastructure, optimize performance, and improve security posture.
+By monitoring these key fields and using facets to analyze NetFlow events, organizations can gain visibility into their network infrastructure, optimize performance, and improve security posture.
 
 {{< img src="monitors/monitor_types/netflow/monitor.png" alt="Create a dashboard with NetFlow data" width="100%" >}}
 
-This data is also available in dashboards, notebooks, and more for more precise queries and for correlating with other sources of data. When creating a dashboard with Netflow data, select **NetFlow** as the source in the **Graph your data** section.
+This data is also available in dashboards and notebooks, enabling precise queries and correlation with other data sources. When creating a dashboard with NetFlow data, select **NetFlow** as the source in the **Graph your data** section.
 
 {{< img src="network_device_monitoring/netflow/dashboard.png" alt="Create a dashboard with NetFlow data" width="100%" >}}
 

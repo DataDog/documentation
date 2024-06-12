@@ -22,13 +22,13 @@ The NetFlow monitor is in private beta. Reach out to your Datadog representative
 
 ## Overview
 
-Datadog [Network Device Monitoring][1] (NDM) provides visibility into your on-premises and virtual network devices, such as routers, switches, and firewalls. As a part of NDM, [NetFlow Monitoring][2] to examine, interpret, and analyze your network traffic flow data over time, and identify top contributors to network congestion. 
+Datadog [Network Device Monitoring][1] (NDM) provides visibility into your on-premises and virtual network devices, such as routers, switches, and firewalls. As a part of NDM, [NetFlow Monitoring][2] enables you to examine, interpret, and analyze your network traffic flow data over time, and identify top contributors to network congestion. 
 
-After enabling NetFlow Monitoring, you can create a NetFlow monitor to alert you when a flow metric such as a monitoring network throughput for a specific source or destination pair crosses a threshold that you have set.
+After enabling NetFlow Monitoring, you can create a NetFlow monitor to alert you when a flow metric (such as network throughput for a specific source or destination pair) crosses a threshold that you have set.
 
 ## Monitor creation
 
-To create an NPM monitor in Datadog, use the main navigation: [**Monitors** --> **New Monitor** --> **NetFlow**][3]. 
+To create a NetFlow monitor in Datadog, use the main navigation: [**Monitors** --> **New Monitor** --> **NetFlow**][3]. 
 
 ### Define the search query
 
@@ -50,11 +50,11 @@ For more information, see the [Functions][5] documentation.
 
 ### Set alert conditions
 
-Configure monitors to trigger if the query value crosses a threshold and customize advanced alert options for recovery thresholds and evaluations delays. For more information, see [Configure Monitors][6].
+Configure monitors to trigger if the query value crosses a threshold, and customize advanced alert options for recovery thresholds and evaluation delays. For more information, see [Configure Monitors][6].
 
 ### Notifications
 
-For detailed instructions on the **Say what's happening** and **Notify your team** section, see the [Notifications][7] page.
+For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][7] page.
 
 ## Monitor NetFlow events
 
