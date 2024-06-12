@@ -34,8 +34,8 @@ Con las integraciones de Datadog para el [servidor de API][1], [Etcd][2], el [Ad
 * [Kubernetes en Amazon EKS](#EKS)
 * [Kubernetes en OpenShift 4](#OpenShift4)
 * [Kubernetes en OpenShift 3](#OpenShift3)
-* [Kubernetes en Rancher Kubernetes Engine (v2.5 o posteriores)](#RKE)
-* [Kubernetes en Rancher Kubernetes Engine (v2.5 o anteriores)](#RKEBefore2_5)
+* [Kubernetes en Rancher Kubernetes Engine (v2.5 o posterior)](#RKE)
+* [Kubernetes en Rancher Kubernetes Engine (v2.5 o anterior)](#RKEBefore2_5)
 * [Kubernetes en servicios gestionados (AKS, GKE)](#ManagedServices)
 
 ## Kubernetes con Kubeadm {#Kubeadm}
@@ -48,7 +48,7 @@ La integración del servidor de API se configura automáticamente y el Datadog A
 
 ### Etcd
 
-Al proporcionar acceso de lectura a los certificados Etcd ubicados en el host, el check del Datadog Agent puede comunicarse con Etcd y empezar a recopilar métricas Etcd.
+Al proporcionar acceso de lectura a los certificados de Etcd ubicados en el host, el check del Datadog Agent puede comunicarse con Etcd y empezar a recopilar métricas de Etcd.
 
 {{< tabs >}}
 {{% tab "Helm" %}}
@@ -158,11 +158,11 @@ data:
 
 #### Puertos inseguros
 
-Si los puertos inseguros de tus instancias del administrador de controladores y el programador están habilitados, el Datadog Agent detecta las integraciones y comienza a recopilar métricas sin ninguna configuración adicional. 
+Si los puertos inseguros de tus instancias del administrador de controladores y del programador están habilitados, el Datadog Agent detecta las integraciones y comienza a recopilar métricas sin ninguna configuración adicional. 
 
 #### Puertos seguros
 
-Los puertos seguros permiten la autenticación y autorización para proteger los componentes de tu plano de control. Datadog Agent puede recopilar métricas del administrador de controladores y el programador dirigiéndose a sus puertos seguros.
+Los puertos seguros permiten la autenticación y autorización para proteger los componentes de tu plano de control. El Datadog Agent puede recopilar métricas del administrador de controladores y del programador dirigiéndose a sus puertos seguros.
 
 {{< tabs >}}
 {{% tab "Helm" %}}
@@ -308,8 +308,8 @@ data:
 
 **Notas:**
 
-- El campo `ssl_verify` de `kube_controller_manager` y la configuración de `kube_scheduler` deben establecerse en `false` cuando se utilizan certificados autofirmados.
-- Cuando se dirija a puertos seguros, la opción `bind-address` en la configuración de tu administrador de controladores y tu programador debe ser accesible por el Datadog Agent. Ejemplo:
+- El campo `ssl_verify` de `kube_controller_manager` y la configuración de `kube_scheduler` deben establecerse en `false` cuando se utilizan certificados auto-firmados.
+- Cuando se dirige a puertos seguros, la opción `bind-address` en la configuración de tu administrador de controladores y de tu programador debe ser accesible por el Datadog Agent. Por ejemplo:
 
 ```yaml
 apiVersion: kubeadm.k8s.io/v1beta2
@@ -324,7 +324,7 @@ scheduler:
 
 ## Kubernetes en Amazon EKS {#EKS}
 
-En el servicio Amazon Elastic Kubernetes (EKS), [las métricas del servidor de API están expuestas][5]. Esto permite al Datadog Agent obtener métricas del servidor de API utilizando checks de endpoint, como se describe en la [documentación de los checks de métricas del servidor de API de Kubernetes][1]. Para configurar el check, añade las siguientes anotaciones al servicio `default/kubernetes`:
+En el servicio Amazon Elastic Kubernetes (EKS), [las métricas del servidor de API están expuestas][5]. Esto permite al Datadog Agent obtener métricas del servidor de API utilizando checks de endpoints, como se describe en la [documentación de los checks de métricas del servidor de API de Kubernetes][1]. Para configurar el check, añade las siguientes anotaciones al servicio `default/kubernetes`:
 
 ```yaml
 anotaciones:
@@ -339,18 +339,18 @@ Otros componentes del plano de control no están expuestos en EKS y no se pueden
 
 ## Kubernetes en OpenShift 4 {#OpenShift4}
 
-En OpenShift 4, todos los componentes del plano de control se pueden monitorizar utilizando checks de endpoint.
+En OpenShift 4, todos los componentes del plano de control se pueden monitorizar utilizando checks de endpoints.
 
 ### Requisitos previos
 
-1. Habilitar el [Cluster Agent][6] de Datadog
-1. Activar los [checks de clúster][7]
-1. Habilitar los [checks de endpoint][8]
+1. Habilitar el Datadog [Cluster Agent][6]
+1. Habilitar los [checks de clústeres][7]
+1. Habilitar los [checks de endpoints][8]
 1. Asegúrate de que has iniciado sesión con permisos suficientes para editar servicios y crear secretos.
 
 ### Servidor de API
 
-El servidor de API se ejecuta detrás del servicio `kubernetes` en el espacio de nombres`default`. Anota este servicio con la configuración `kube_apiserver_metrics`:
+El servidor de API se ejecuta detrás del servicio `kubernetes` en el espacio de nombres `default`. Anota este servicio con la configuración `kube_apiserver_metrics`:
 
 ```shell
 oc annotate service kubernetes -n default 'ad.datadoghq.com/endpoints.check_names=["kube_apiserver_metrics"]'
@@ -360,7 +360,7 @@ oc annotate service kubernetes -n default 'ad.datadoghq.com/endpoints.resolve=ip
 
 ```
 
-La última anotación `ad.datadoghq.com/endpoints.resolve` es necesaria porque el servicio se encuentra delante de pods estáticos. El Datadog Cluster Agent programa los checks como checks de endpoint y los envía a ejecutadores de checks de clústeres. Los nodos en los que se están ejecutando se pueden identificar con:
+La última anotación `ad.datadoghq.com/endpoints.resolve` es necesaria porque el servicio se encuentra delante de pods estáticos. El Datadog Cluster Agent programa los checks como checks de endpoints y los envía a ejecutadores de checks de clústeres. Los nodos en los que se están ejecutando se pueden identificar con:
 
 ```shell
 oc exec -it <datadog cluster agent pod> -n <datadog ns> -- agent clusterchecks
@@ -369,7 +369,7 @@ oc exec -it <datadog cluster agent pod> -n <datadog ns> -- agent clusterchecks
 
 ### Etcd
 
-Los certificados son necesarios para comunicarse con el servicio Etcd, que se puede encontrar en el secreto `kube-etcd-client-certs` en el espacio de nombres`openshift-monitoring`. Para dar acceso al Datadog Agent a estos certificados, primero hay que copiarlos en el mismo espacio de nombres en el que se está ejecutando el Datadog Agent:
+Los certificados son necesarios para comunicarse con el servicio Etcd, que se puede encontrar en el secreto `kube-etcd-client-certs`, en el espacio de nombres de `openshift-monitoring`. Para brindar acceso al Datadog Agent a estos certificados, primero hay que copiarlos en el mismo espacio de nombres en el que se está ejecutando el Datadog Agent:
 
 ```shell
 oc get secret kube-etcd-client-certs -n openshift-monitoring -o yaml | sed 's/namespace: openshift-monitoring/namespace: <datadog agent namespace>/'  | oc create -f -
@@ -378,7 +378,7 @@ oc get secret kube-etcd-client-certs -n openshift-monitoring -o yaml | sed 's/na
 
 Estos certificados deben montarse en los pods del ejecutador de checks de clústeres añadiendo los volúmenes y los montajes de volúmenes como se indica a continuación.
 
-**Nota**: También se incluyen montajes para desactivar el archivo de auto-configuración del check Etcd empaquetado con el Agent.
+**Nota**: También se incluyen montajes para desactivar el archivo de auto-configuración del check de Etcd empaquetado con el Agent.
 
 
 {{< tabs >}}
@@ -443,12 +443,12 @@ oc annotate service etcd -n openshift-etcd 'ad.datadoghq.com/endpoints.resolve=i
 
 ```
 
-El Datadog Cluster Agent programa los checks como checks de endpoint y los envía a los ejecutadores de checks de clústeres.
+El Datadog Cluster Agent programa los checks como checks de endpoints y los envía a los ejecutadores de checks de clústeres.
 
 
 ### Administrador de controladores
 
-El administrador de controladores se ejecuta detrás del servicio `kube-controller-manager` en el espacio de nombres `openshift-kube-controller-manager`. Anota el servicio con la configuración del check 
+El administrador de controladores se ejecuta detrás del servicio `kube-controller-manager`, en el espacio de nombres de `openshift-kube-controller-manager`. Anota este servicio con la configuración del check:
 
 
 ```shell
@@ -459,13 +459,13 @@ oc annotate service kube-controller-manager -n openshift-kube-controller-manager
 
 ```
 
-El Datadog Cluster Agent programa los checks como checks de endpoint y los envía a los ejecutadores de checks de clústeres.
+El Datadog Cluster Agent programa los checks como checks de endpoints y los envía a los ejecutadores de checks de clústeres.
 
 
 
 ### Programador
 
-El programador se ejecuta detrás del servicio `scheduler` en el espacio de nombres`openshift-kube-scheduler`. Anota el servicio con la configuración del check:
+El programador se ejecuta detrás del servicio `scheduler`, en el espacio de nombres de `openshift-kube-scheduler`. Anota este servicio con la configuración del check:
 
 
 ```shell
@@ -476,23 +476,23 @@ oc annotate service scheduler -n openshift-kube-scheduler 'ad.datadoghq.com/endp
 
 ```
 
-El Datadog Cluster Agent programa los checks como checks de endpoint y los envía a los ejecutadores de checks de clústeres.
+El Datadog Cluster Agent programa los checks como checks de endpoints y los envía a los ejecutadores de checks de clústeres.
 
 
 ## Kubernetes en OpenShift 3 {#OpenShift3}
 
-En OpenShift 3, todos los componentes del plano de control se pueden monitorizar utilizando checks de endpoint.
+En OpenShift 3, todos los componentes del plano de control se pueden monitorizar utilizando checks de endpoints.
 
 ### Requisitos previos
 
-1. Habilitar el [Cluster Agent][6] de Datadog
+1. Habilitar el Datadog [Cluster Agent][6]
 1. Habilitar los [checks de clústeres][7]
-1. Habilitar los [checks de endpoint][8]
+1. Habilitar los [checks de endpoints][8]
 1. Asegúrate de que has iniciado sesión con permisos suficientes para crear y editar servicios.
 
 ### Servidor de API
 
-El servidor de API se ejecuta detrás del servicio `kubernetes` en el espacio de nombres`default`. Anota este servicio con la configuración `kube_apiserver_metrics`:
+El servidor de API se ejecuta detrás del servicio `kubernetes`, en el espacio de nombres `default`. Anota este servicio con la configuración `kube_apiserver_metrics`:
 
 ```shell
 oc annotate service kubernetes -n default 'ad.datadoghq.com/endpoints.check_names=["kube_apiserver_metrics"]'
@@ -502,7 +502,7 @@ oc annotate service kubernetes -n default 'ad.datadoghq.com/endpoints.resolve=ip
 
 ```
 
-La última anotación `ad.datadoghq.com/endpoints.resolve` es necesaria porque el servicio está delante de pods estáticos. El Datadog Cluster Agent programa los checks como checks de endpoint y los envía a los ejecutadores de checks de clústeres. Los nodos en los que se están ejecutando se pueden identificar con:
+La última anotación `ad.datadoghq.com/endpoints.resolve` es necesaria porque el servicio está delante de pods estáticos. El Datadog Cluster Agent programa los checks como checks de endpoints y los envía a los ejecutadores de checks de clústeres. Los nodos en los que se están ejecutando se pueden identificar con:
 
 ```shell
 oc exec -it <datadog cluster agent pod> -n <datadog ns> -- agent clusterchecks
@@ -511,9 +511,9 @@ oc exec -it <datadog cluster agent pod> -n <datadog ns> -- agent clusterchecks
 
 ### Etcd
 
-Los certificados son necesarios para comunicarse con los servicios Etcd, que se encuentran en el host. Estos certificados deben montarse en los pods del ejecutador de checks de clústeres añadiendo los volúmenes y montajes de volúmenes como se indica a continuación.
+Los certificados son necesarios para comunicarse con el servicio Etcd que se encuentra en el host. Estos certificados deben montarse en los pods del ejecutador de checks de clústeres añadiendo los volúmenes y montajes de volúmenes como se indica a continuación.
 
-**Nota**: También se incluyen montajes para desactivar el archivo de auto-configuración del check Etcd empaquetado con el Agent.
+**Nota**: También se incluyen montajes para desactivar el archivo de auto-configuración del check de Etcd empaquetado con el Agent.
 
 {{< tabs >}}
 {{% tab "Helm" %}}
@@ -583,19 +583,19 @@ oc annotate service etcd-copy -n openshift-etcd 'ad.datadoghq.com/endpoints.reso
 
 ```
 
-El Datadog Cluster Agent programa los checks como checks de endpoint y los envía a los ejecutadores de checks de clústeres.
+El Datadog Cluster Agent programa los checks como checks de endpoints y los envía a los ejecutadores de checks de clústeres.
 
 
 ### Administrador de controladores y programador
 
-El administrador de controladores y el programador se ejecutan detrás del mismo servicio, `kube-controllers`, en el espacio de nombres `kube-system`. Las ediciones directas del servicio no se conservan, así que haz una copia del servicio:
+El administrador de controladores y el programador se ejecutan detrás del mismo servicio, `kube-controllers`, en el espacio de nombres de `kube-system`. Las ediciones directas del servicio no se conservan, así que haz una copia del servicio:
 
 ```shell
 oc get service kube-controllers -n kube-system -o yaml | sed 's/name: kube-controllers/name: kube-controllers-copy/'  | oc create -f -
 
 ```
 
-Anota el servicio copiado con las configuraciones de check:
+Anota el servicio copiado con la configuración del check:
 
 ```shell
 oc annotate service kube-controllers-copy -n kube-system 'ad.datadoghq.com/endpoints.check_names=["kube_controller_manager", "kube_scheduler"]'
@@ -607,7 +607,7 @@ oc annotate service kube-controllers-copy -n kube-system 'ad.datadoghq.com/endpo
 
 ```
 
-El Datadog Cluster Agent programa los checks como checks de endpoint y los envía a los ejecutadores de checks de clústeres.
+El Datadog Cluster Agent programa los checks como checks de endpoints y los envía a los ejecutadores de checks de clústeres.
 
 
 
@@ -617,8 +617,8 @@ Rancher v2.5 se basa en [PushProx][9] para exponer endpoints de métricas del pl
 
 ### Requisitos previos
 
-1. Instala el Datadog Agent con la [tabla de monitorización rancher][10].
-2. Los daemonsets `pushprox` se despliegan con `rancher-monitoring` y se ejecutan en el espacio de nombres `cattle-monitoring-system`.
+1. Instala el Datadog Agent con la [tabla de monitorización Rancher][10].
+2. Los daemonsets `pushprox` se despliegan con `rancher-monitoring` y se ejecutan en el espacio de nombres de `cattle-monitoring-system`.
 
 ### Servidor de API
 
@@ -790,11 +790,11 @@ spec:
 
 ### Servidor de API, administrador de controladores y programador
 
-Instala el Datadog Agent con la [tabla de monitorización rancher][10].
+Instala el Datadog Agent con la [tabla de monitorización Rancher][10].
 
 Los componentes del plano de control se ejecutan en Docker fuera de Kubernetes. Dentro de Kubernetes, el servicio `kubernetes` en el espacio de nombres `default` se dirige a la(s) IP(s) del nodo del plano de control. Puedes confirmarlo ejecutando `$ kubectl describe endpoints kubernetes`.
 
-Puedes anotar este servicio con checks de endpoint (gestionados por Datadog Cluster Agent) para monitorizar el servidor de API, el administrador de controladores y el programador:
+Puedes anotar este servicio con checks de endpoints (gestionados por el Datadog Cluster Agent) para monitorizar el servidor de API, el administrador de controladores y el programador:
 
 ```shell
 kubectl edit service kubernetes
@@ -957,7 +957,7 @@ kubectl apply -f <filename>
 
 ## Kubernetes en servicios gestionados (AKS, GKE) {#ManagedServices}
 
-En otros sistemas gestionados como Azure Kubernetes Service (AKS) y Google Kubernetes Engine (GKE), el usuario no puede acceder a los componentes del plano de control. Como resultado, no es posible ejecutar los checks `kube_apiserver`, `kube_controller_manager`, `kube_scheduler` o `etcd` en estos entornos.
+En otros sistemas gestionados como Azure Kubernetes Service (AKS) y Google Kubernetes Engine (GKE), el usuario no puede acceder a los componentes del plano de control. Como resultado, no es posible ejecutar los checks de `kube_apiserver`, `kube_controller_manager`, `kube_scheduler` o `etcd` en estos entornos.
 
 
 [1]: https://docs.datadoghq.com/es/integrations/kube_apiserver_metrics/

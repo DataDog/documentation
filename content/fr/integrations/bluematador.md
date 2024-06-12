@@ -18,7 +18,7 @@ integration_id: blue-matador
 integration_title: Blue Matador
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: support@bluematador.com
 manifest_version: 1.0.0
 metric_prefix: bluematador.
