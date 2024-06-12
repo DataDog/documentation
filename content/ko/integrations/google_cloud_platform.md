@@ -193,7 +193,7 @@ datadog:monitored,env:production,!env:staging,instance-type:c1.*
 4. Datadog 주체를 복사하여 다음 섹션을 위해 보관하세요.
    {{< img src="integrations/google_cloud_platform/principal-2.png" alt="'새 GCP 계정 추가' 흐름을 보여주는 Datadog 인터페이스. 첫 번째 단계인 'Google에 데이터독 주체 추가'에는 사용자가 Datadog 주체를 생성하고 클립보드에 복사할 수 있는 텍스트 상자가 있습니다. 두 번째 단계인 '<txprotected>서비스 계정 이메일 추가'에는 사용자가 섹션 3에서 작성할 수 있는 텍스트 상자가 있습니다." style="width:70%;">}}
    [다음 섹션](#3-complete-the-integration-setup-in-datadog)을 위해 이 창을 계속 열어 두세요.
-5. [Google 클라우드 콘솔][303]의 **서비스 계정** 메뉴에서 [첫 번째 섹션]에서 생성한 서비스 계정(#1-create-your-google-cloud-service-account)을 찾습니다.
+5. [Google 클라우드 콘솔][303]의 **서비스 계정** 메뉴에서 [첫 번째 섹션](#1-google-클라우드-서비스-계정-생성)에서 생성한 서비스 계정을 찾습니다.
 6. **권한** 탭 으로 이동하여 **액세스 권한 부여**를 클릭합니다.
    {{< img src="integrations/google_cloud_platform/grant-access.png" alt="Google 클라우드 콘솔 인터페이스, 서비스 계정 아래에 탭 권한이 표시됨." 스타일="width:70%;">}}
 7. Datadog 주체를 **새 주체** 텍스트 상자에 붙여넣습니다.
@@ -206,7 +206,7 @@ datadog:monitored,env:production,!env:staging,instance-type:c1.*
 
 1. Google 클라우드 콘솔에서 **서비스 계정** > ** 세부정보** 탭으로 이동합니다. 여기에서 이 Google 서비스 계정과 연결된 이메일을 찾을 수 있습니다. `<sa-name>@<project-id>.iam.gserviceaccount.com`과 유사합니다.
 2. 이 이메일을 복사합니다.
-3. Datadog(이전 섹션에서 Datadog 주체를 복사한 위치)의 통합 설정 타일(#2-add-the-Datadog-principal-to-your-service-account)로 돌아갑니다.
+3. Datadog([이전 섹션](#2-서비스-계정에-datadog-주체를-추가합니다)에서 Datadog 주체를 복사한 위치)의 통합 설정 타일로 돌아갑니다.
 4. **서비스 계정 이메일 추가** 아래에 있는 상자에 이전에 복사한 이메일을 붙여넣습니다.
 5. **계정 확인 및 저장**을 클릭합니다.
 
