@@ -136,7 +136,7 @@ To enable tracing when running Tomcat with an environment setup script:
    ```
 If the previous step doesn't work, try adding the following instead:
 ```text
-set JAVA_OPTS=%JAVA_OPTS% -javaagent:\"c:\path\to\dd-java-agent.jar"
+set JAVA_OPTS=%JAVA_OPTS% -javaagent:"c:\path\to\dd-java-agent.jar"
 ```
 
 {{% /tab %}}
