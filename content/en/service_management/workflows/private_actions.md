@@ -17,23 +17,21 @@ Private Actions are in beta. Use this form to request access today.
 
 ## Overview
 
-Private actions allow your Datadog workflows and apps to interact with services hosted on your private network without opening a port in your firewall. Private actions make use of a private action runner which you install on a host in your network and pair with a Datadog Connection.
+Private actions allow your Datadog workflows and apps to interact with services hosted on your private network without opening a port in your firewall. To use private actions, you must install a private action runner on a host in your network and pair the runner with a Datadog Connection.
 
 The following integrations support private actions:
 - [Kubernetes][1]
 - [Postgres][2]
 - [Jenkins][3]
-- [Ansible][4]
+- [Temporal][4]
 - The [HTTP][5] action
 
 ## Prerequisites
 
-The private action runner requires a Linux host with the following:
+The private action runner requires a Linux host that is able to reach any internal services you want to call from an action or app. The host has the following requirements:
 - 2GB of RAM
-- The host should be able to reach any internal services you want to call
-- Docker
-- The Docker Compose plugin (if you want to use Docker Compose).
-- App Builder connections require SSL termination.
+- Docker (with Docker Compose if that is your preference)
+- App Builder connections require SSL termination
 
 ## Set up a private action runner
 
@@ -43,7 +41,7 @@ From the **Private Action Runner** page in [Workflow Automation][6] or [App Buil
 1. Enter a name for your runner.
 1. Click **Both**.
 1. Enter a runner hostname. App Builder calls your runner using this hostname over HTTPS. You must bring your own SSL termination and forward to port 9016 in the container.
-1. Create a directory on your host where the runner can store its configuration. For example, `./config`. You can also use this directory to [store any credentials][9] required by the runner's connection.
+1. Create a directory on your host where the runner can store its configuration. For example, `./config`. You can also use this directory to [store any credentials][10] required by the runner's connection.
 1. Deploy your runner with Docker or Docker Compose:
 
 {{< tabs >}}
@@ -63,19 +61,13 @@ From the **Private Action Runner** page in [Workflow Automation][6] or [App Buil
    You can safely ignore the error: `DATADOG TRACER DIAGNOSTIC - Agent Error: connect ECONNREFUSED`.
 {{% /tab %}}
 {{< /tabs >}}
-
-When the status changes to **Ready to use**:
-- To create a new connection for the runner, click **Link Runner to New Connection** and select an integration.
-- Click **View Runner** to see the runner on the **Private Action Runners** page.
-
-See [Connect a runner](#connect-a-runner) for more information on pairing your runner with a connection.
 {{% /collapse-content %}}
 
 {{% collapse-content title="App Builder" level="h4" %}}
 1. Enter a name for your runner.
 1. Click **App Builder**.
 1. Enter a runner hostname. App Builder calls your runner using this hostname over HTTPS. You must bring your own SSL termination and forward to port 9016 in the container.
-1. Create a directory on your host where the runner can store its configuration. For example, `./config`. You can also use this directory to [store any credentials][9] required by the runner's connection.
+1. Create a directory on your host where the runner can store its configuration. For example, `./config`. You can also use this directory to [store any credentials][10] required by the runner's connection.
 1. Deploy your runner with Docker or Docker Compose:
 {{< tabs >}}
 {{% tab "Docker" %}}
@@ -96,15 +88,12 @@ See [Connect a runner](#connect-a-runner) for more information on pairing your r
 {{% /tab %}}
 {{< /tabs >}}
 
-When the status changes to **Ready to use**:
-- To create a new connection for the runner, click **Link Runner to New Connection** and select an integration.
-- Click **View Runner** to see the runner on the **Private Action Runners** page.
 {{% /collapse-content %}}
 
 {{% collapse-content title="Workflow Automation" level="h4" %}}
 1. Enter a name for your runner.
 1. Click **Workflows**.
-1. Create a directory on your host where the runner can store its configuration. For example, `./config`. You can also use this directory to [store any credentials][9] required by the runner's connection.
+1. Create a directory on your host where the runner can store its configuration. For example, `./config`. You can also use this directory to [store any credentials][10] required by the runner's connection.
 1. Deploy your runner with Docker or Docker Compose:
 {{< tabs >}}
 {{% tab "Docker" %}}
@@ -124,10 +113,13 @@ When the status changes to **Ready to use**:
 {{% /tab %}}
 {{< /tabs >}}
 
-When the status changes to **Ready to use**:
+{{% /collapse-content %}}
+
+When you see the **Ready to use** status:
 - To create a new connection for the runner, click **Link Runner to New Connection** and select an integration.
 - Click **View Runner** to see the runner on the **Private Action Runners** page.
-{{% /collapse-content %}}
+
+See [Connect a runner](#connect-a-runner) for more information on pairing your runner with a connection.
 
 ## Connect a runner
 
@@ -146,7 +138,7 @@ To use a private action in your [Workflow Automation][11] workflow or [App Build
 {{% collapse-content title="Workflow Automation" level="h4" %}}
 1. From the [Workflow Automation][11] page, create a workflow, or open an existing workflow. For information on creating or editing a workflow, see [Build Workflows][13].
 1. Click **Add Step** and search for the private action you want to add to your workflow. For a list of integrations that support private actions, see [Overview](#overview).
-1. Add a **Step name**.
+1. Enter a name for the step.
 1. Select a **Connection** from the drop-down menu or click the plus (**+**) icon to add a new connection. Using a private action requires a private action runner paired with a connection. See [Connect a runner](#connect-a-runner) for more information.
 1. Complete any required fields and click **Save** to save your workflow.
 {{% /collapse-content %}}
@@ -160,10 +152,7 @@ To use a private action in your [Workflow Automation][11] workflow or [App Build
 
 ## Edit private runners
 
-From the **Private Action Runner** page, you can view all of your private runners together with the workflows or apps that use the runner. To edit the connection for a runner, click **View Details**. Click the trash can icon to delete a runner.
-
-- [Private Action Runner page - Workflow Automation][6]
-- [Private Action Runner page - App Builder][7]
+From the **Private Action Runner** page in [Workflow Automation][6] or [App Builder][7], you can view all of your private runners together with the workflows or apps that use the runner. To edit the connection for a runner, click **View Details**. Click the trash can icon to delete a runner.
 
 ## Further reading
 

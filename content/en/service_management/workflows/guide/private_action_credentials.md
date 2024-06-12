@@ -10,19 +10,21 @@ Private Actions are in beta. Use this form to request access today.
 
 ## Overview
 
-Private actions such as Jenkins and PostgreSQL require credentials to function.
-- Store your credentials in the configuration directory you created during setup.
-- Create a separate file for each credential and use the JSON structure in the examples below.
+Some private actions such as Jenkins and PostgreSQL require credentials to function.
+- Create a JSON file for the credential and use the JSON structure provided in [Credential files](#credential-files).
+- Store your credential files in the configuration directory you created during setup.
 - When you specify the path to the credential in your runner connection, use the path to the credential file on the container.
 
-{{< img src="service_management/private-runner-creds.png" alt="The path to the credential file is '/etc/dd-action-runner/creds/creds.pgpass'" style="width:100%;" >}}
+{{< img src="service_management/private-runner-creds.png" alt="The path to the credential file is '/etc/dd-action-runner/creds/creds.pgpass'" style="width:80%;" >}}
 
 ## Credential files
 
 {{< tabs >}}
 {{% tab "PostgreSQL" %}}
 
-The PostgreSQL connection requires A PostgreSQL Connection URI credential stored at `/etc/dd-action-runner/creds/creds.pgpass` on the action runner. This example uses the URI: `postgres://usr:password@example_host:5432/example_db`. For information on constructing a PostgreSQL connection URI, see [the official PostgreSQL documentation][101].
+The PostgreSQL connection requires a PostgreSQL Connection URI credential. 
+
+In the example below, the credential is stored at `/etc/dd-action-runner/creds/creds.pgpass` on the action runner. This example uses the URI: `postgres://usr:password@example_host:5432/example_db`. For information on constructing a PostgreSQL connection URI, see [the official PostgreSQL documentation][101].
 
 {{< code-block lang="json" filename="/etc/dd-action-runner/creds/creds.pgpass" disable_copy="false" collapsible="true" >}}
 {
@@ -50,24 +52,72 @@ You can include all credentials in a single file or store each credential in a s
 
 {{% collapse-content title="Single file example" level="p" %}}
 
+In this example, all three credentials are stored in a single file. Replace `USERNAME`, `TOKEN`, and `DOMAIN` with your username, token, and domain.
+
 {{< code-block lang="json" filename="/etc/dd-action-runner/creds/jenkins_creds.json" disable_copy="false" collapsible="true" >}}
 {
         "auth_type": "Token Auth",
         "credentials": [
                 {
-                        "username": "<username>",
-                        "token": "<token>",
-                        "domain": "<domain>"
+                        "username": "USERNAME",
+                        "token": "TOKEN",
+                        "domain": "DOMAIN"
                 }
         ]
 } 
 {{< /code-block >}}
 
-If you store the credentials in a single file, use the same path for ...
+Your Jenkins connection points to the same path for all credentials.
 
-example image
+{{< img src="service_management/single-file-creds.png" alt="All credential paths for the Jenkins connection point to '/etc/dd-action-runner/creds/jenkins_creds.json'" style="width:80%;" >}}
+
 {{% /collapse-content %}}
 {{% collapse-content title="Multiple file example" level="p" %}}
+In this example, each Jenkins credential is stored in a separate file.
+
+Replace `USERNAME` with your username.
+
+{{< code-block lang="json" filename="/etc/dd-action-runner/creds/jenkins_username.json" disable_copy="false" collapsible="true" >}}
+{
+        "auth_type": "Token Auth",
+        "credentials": [
+                {
+                        "username": "USERNAME"
+                }
+        ]
+} 
+{{< /code-block >}}
+
+Replace `TOKEN` with your token.
+
+{{< code-block lang="json" filename="/etc/dd-action-runner/creds/jenkins_token.json" disable_copy="false" collapsible="true" >}}
+{
+        "auth_type": "Token Auth",
+        "credentials": [
+                {
+                        "token": "TOKEN"
+                }
+        ]
+}
+{{< /code-block >}}
+
+Replace `DOMAIN` with your domain.
+
+{{< code-block lang="json" filename="/etc/dd-action-runner/creds/jenkins_domain.json" disable_copy="false" collapsible="true" >}}
+{
+        "auth_type": "Token Auth",
+        "credentials": [
+                {
+                        "domain": "DOMAIN"
+                }
+        ]
+}
+{{< /code-block >}}
+
+Your Jenkins connection points to path to each credential.
+
+{{< img src="service_management/multi-file-creds.png" alt="All credential paths for the Jenkins connection point to '/etc/dd-action-runner/creds/jenkins_creds.json'" style="width:80%;" >}}
+
 {{% /collapse-content %}}
 
 {{% /tab %}}
