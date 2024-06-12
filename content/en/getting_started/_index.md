@@ -1,5 +1,6 @@
 ---
 title: Getting Started
+kind: documentation
 disable_sidebar: true
 aliases:
     - /overview

@@ -1,5 +1,6 @@
 ---
 title: Data Jobs Monitoring for Spark on Kubernetes
+kind: documentation
 further_reading:
     - link: '/data_jobs'
       tag: 'Documentation'

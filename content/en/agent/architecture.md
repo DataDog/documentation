@@ -1,5 +1,6 @@
 ---
 title: Agent Architecture
+kind: Documentation
 disable_toc: false
 further_reading:
 - link: "/agent/supported_platforms/"

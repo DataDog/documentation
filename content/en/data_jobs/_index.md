@@ -1,5 +1,6 @@
 ---
 title: Data Jobs Monitoring
+kind: documentation
 further_reading:
     - link: '/data_streams'
       tag: 'Documentation'

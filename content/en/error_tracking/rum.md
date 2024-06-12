@@ -1,5 +1,6 @@
 ---
 title: Error Tracking for Web and Mobile Applications
+kind: documentation
 ---
 
 {{< whatsnext desc="To get started with Datadog Error Tracking for RUM, see the corresponding documentation:" >}}

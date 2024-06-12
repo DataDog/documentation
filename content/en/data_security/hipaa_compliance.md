@@ -1,5 +1,6 @@
 ---
 title: HIPAA Compliance
+kind: documentation
 disable_toc: false
 further_reading:
 - link: "https://www.datadoghq.com/blog/hipaa-compliant-log-management/"

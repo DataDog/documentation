@@ -1,5 +1,6 @@
 ---
 title: Update Existing Pipelines
+kind: documentation
 disable_toc: false
 ---
 

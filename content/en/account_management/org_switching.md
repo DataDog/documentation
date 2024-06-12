@@ -1,5 +1,6 @@
 ---
 title: Switching Between Organizations
+kind: documentation
 ---
 
 In cases where you belong to multiple Datadog organizations, the org switcher at the bottom left of the nav bar allows you to toggle between organizations. You can also view all organizations and switch between them by using the **Organizations** tab in **Personal Settings**.

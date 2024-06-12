@@ -1,5 +1,6 @@
 ---
 title: Error Tracking for Logs
+kind: documentation
 ---
 
 {{< whatsnext desc="To get started with Error Tracking for Logs, see the corresponding documentation for your framework:" >}}

@@ -1,5 +1,6 @@
 ---
 title: Investigate Slow Traces or Endpoints
+kind: Documentation
 further_reading:
     - link: 'tracing'
       tag: 'Documentation'

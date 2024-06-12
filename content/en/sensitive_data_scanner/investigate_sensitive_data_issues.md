@@ -1,5 +1,6 @@
 ---
 title: Investigate Sensitive Data Issues
+kind: documentation
 further_reading:
     - link: "/sensitive_data_scanner/"
       tag: "Documentation"

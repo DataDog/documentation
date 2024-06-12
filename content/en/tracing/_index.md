@@ -1,5 +1,6 @@
 ---
 title: APM
+kind: documentation
 description: Instrument your code to improve performance
 further_reading:
   - link: "https://app.datadoghq.com/release-notes?category=APM"

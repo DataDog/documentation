@@ -1,5 +1,6 @@
 ---
 title: Service Scorecards
+kind: documentation
 aliases:
   - /tracing/service_catalog/scorecards
 further_reading:

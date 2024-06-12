@@ -1,5 +1,6 @@
 ---
 title: Partners
+kind: documentation
 description: "Getting started with Datadog for Sales & Services Partners"
 private: true
 ---

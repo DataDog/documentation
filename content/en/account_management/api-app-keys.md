@@ -1,5 +1,6 @@
 ---
 title: API and Application Keys
+kind: documentation
 aliases:
     - /account_management/faq/how-do-i-reset-my-application-keys/
     - /agent/faq/how-do-i-reset-my-datadog-api-keys/

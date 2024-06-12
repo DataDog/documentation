@@ -1,5 +1,6 @@
 ---
 title: Multi-Factor Authentication (MFA)
+kind: documentation
 ---
 
 ## Overview

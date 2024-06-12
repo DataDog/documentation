@@ -1,5 +1,6 @@
 ---
 title: DORA Metrics
+kind: documentation
 description: Learn how to use DORA metrics to measure and improve your organization's software delivery processes.
 aliases:
 - /continuous_integration/dora_metrics

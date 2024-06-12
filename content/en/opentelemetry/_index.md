@@ -1,5 +1,6 @@
 ---
 title: OpenTelemetry in Datadog
+kind: Documentation
 aliases:
 - /tracing/setup_overview/open_standards/
 further_reading:

@@ -1,5 +1,6 @@
 ---
 title: Quality Gates
+kind: documentation
 description: Learn how to use Quality Gates to enable your team to control what code makes it to production.
 is_beta: true
 further_reading:

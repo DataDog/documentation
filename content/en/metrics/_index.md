@@ -1,5 +1,6 @@
 ---
 title: Metrics
+kind: documentation
 aliases:
   - /graphing/metrics/
   - /metrics/introduction/

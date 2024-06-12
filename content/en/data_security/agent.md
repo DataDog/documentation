@@ -1,5 +1,6 @@
 ---
 title: Agent Data Security
+kind: documentation
 description: "Datadog Agent Security measures"
 aliases:
     - /agent/security/

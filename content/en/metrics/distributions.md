@@ -1,5 +1,6 @@
 ---
 title: Distributions
+kind: documentation
 description: Compute global percentiles across your entire dataset.
 aliases:
   - /developers/faq/characteristics-of-datadog-histograms/

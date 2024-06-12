@@ -1,5 +1,6 @@
 ---
 title: Service Definitions and Supported Versions
+kind: documentation
 further_reading:
 - link: "/tracing/service_catalog/adding_metadata"
   tag: "Documentation"
@@ -50,6 +51,7 @@ Components within an application automatically inherit the application's metadat
 #### Example YAML for `kind:application`
 {{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
 apiVersion: v3
+kind: application
 metadata:
   name: myapp
   namespace: default
@@ -124,6 +126,7 @@ If a single component is part of multiple applications, you must specify that co
 For the postgres fleet (`managed-postgres`), specify a definition for `kind:application`:
 {{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
 apiVersion: v3
+kind: application
 spec:
   components:
     - datastore:orders-postgres
@@ -138,6 +141,7 @@ For the web application (`shopping-cart`), declare a separate definition for `ki
 {{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
 
 apiVersion: v3
+kind: application
 spec:
   lifecycle: production
   tier: critical
@@ -154,6 +158,7 @@ metadata:
       type: operator
 ---
 apiVersion: v3
+kind: datastore
 metadata:
   name: orders-postgres
   additionalOwners:
@@ -161,10 +166,12 @@ metadata:
       type: operator
 ---
 apiVersion: v3
+kind: service
 metadata:
   name: shopping-cart-api
 ---
 apiVersion: v3
+kind: service
 metadata:
   name: shopping-cart-processor
 ---
@@ -198,6 +205,7 @@ curl --location 'https://api.datadoghq.com/api/unstable/catalog/definition' \
 --header 'DD-APPLICATION-KEY: <APP_KEY>' \
 --data-raw '
 apiVersion: v3
+kind: application
 metadata:
   name: shopping-cart-app
   tags:
@@ -221,10 +229,12 @@ spec:
     - service:shopping-cart-checkout
 ---
 apiVersion: v3
+kind: service
 metadata:
   name: shopping-cart-processing
 ---
 apiVersion: v3
+kind: service
 metadata:
   name: shopping-cart-checkout
 '

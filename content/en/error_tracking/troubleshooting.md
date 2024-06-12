@@ -1,5 +1,6 @@
 ---
 title: Error Tracking Troubleshooting
+kind: documentation
 ---
 
 If you experience unexpected behavior with Error Tracking, the troubleshooting steps below can help you resolve the issue quickly. If you continue to have trouble, reach out to [Datadog support][1]. 

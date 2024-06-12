@@ -1,5 +1,6 @@
 ---
 title: Profile Types
+kind: documentation
 further_reading:
     - link: 'profiler/enabling'
       tag: 'Documentation'

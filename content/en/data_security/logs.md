@@ -1,5 +1,6 @@
 ---
 title: Log Management Data Security
+kind: documentation
 aliases:
     - /logs/security/
 further_reading:

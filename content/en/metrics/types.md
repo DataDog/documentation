@@ -1,5 +1,6 @@
 ---
 title: Metrics Types
+kind: documentation
 aliases:
     - /developers/metrics/counts/
     - /developers/metrics/distributions/

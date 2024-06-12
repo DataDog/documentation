@@ -1,5 +1,6 @@
 ---
 title: Continuous Testing
+kind: documentation
 description: Customize the number of Continuous Testing tests running in parallel in your CI/CD pipelines to increase your testing coverage.
 disable_sidebar: true
 further_reading:

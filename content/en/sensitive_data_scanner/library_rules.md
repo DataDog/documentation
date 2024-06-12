@@ -1,5 +1,6 @@
 ---
 title: Library Rules
+kind: documentation
 further_reading:
     - link: "/sensitive_data_scanner/"
       tag: "Documentation"

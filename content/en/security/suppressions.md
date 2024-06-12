@@ -1,5 +1,6 @@
 ---
 title: Suppressions
+kind: documentation
 disable_toc: false
 further_reading:
 - link: "security/detection_rules/"

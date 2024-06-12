@@ -1,5 +1,6 @@
 ---
 title: Real User Monitoring Data Security
+kind: documentation
 aliases:
     - /real_user_monitoring/security/
 further_reading:

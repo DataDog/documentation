@@ -1,5 +1,6 @@
 ---
 title: Supported Platforms
+kind: Documentation
 disable_toc: false
 further_reading:
 - link: "agent/basic_agent_usage/"

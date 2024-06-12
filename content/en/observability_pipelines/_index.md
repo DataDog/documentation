@@ -1,5 +1,6 @@
 ---
 title: Observability Pipelines
+kind: documentation
 disable_toc: false
 further_reading:
 - link: "/logs/log_collection/"

@@ -1,5 +1,6 @@
 ---
 title: Troubleshooting Data Streams Monitoring
+kind: documentation
 description: Troubleshoot Data Streams Monitoring
 ---
 

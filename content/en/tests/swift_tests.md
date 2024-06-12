@@ -1,5 +1,6 @@
 ---
 title: Instrumenting your Swift tests with RUM
+kind: documentation
 description: Learn how to use CI Visibility and RUM to connect your Swift test results with browser sessions and session replays.
 aliases:
 - /continuous_integration/guides/rum_swift_integration

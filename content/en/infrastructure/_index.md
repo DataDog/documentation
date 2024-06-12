@@ -1,5 +1,6 @@
 ---
 title: Infrastructure
+kind: documentation
 aliases:
   - /graphing/infrastructure/
 further_reading:

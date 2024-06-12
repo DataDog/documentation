@@ -1,5 +1,6 @@
 ---
 title: Managing Multiple-Organization Accounts
+kind: documentation
 aliases:
   - /guides/multiaccountorg
   - /account_management/mult_account

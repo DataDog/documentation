@@ -1,5 +1,6 @@
 ---
 title: Laying the groundwork
+kind: documentation
 description: "How to get started and which key decisions you should make at the very beginning."
 private: true
 ---

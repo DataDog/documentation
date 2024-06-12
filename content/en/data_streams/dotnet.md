@@ -1,5 +1,6 @@
 ---
 title: Setup Data Streams Monitoring for .NET
+kind: documentation
 ---
 
 {{< site-region region="ap1" >}}

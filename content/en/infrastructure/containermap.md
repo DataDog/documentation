@@ -1,5 +1,6 @@
 ---
 title: Container Map
+kind: documentation
 aliases:
   - /graphing/infrastructure/containermap/
   - /guides/hostmap

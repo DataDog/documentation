@@ -1,5 +1,6 @@
 ---
 title: Datadog Learning Center
+kind: documentation
 aliases:
   - /video-categories/
   - /video-categories/datadog-101/

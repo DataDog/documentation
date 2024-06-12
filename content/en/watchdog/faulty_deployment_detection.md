@@ -1,5 +1,6 @@
 ---
 title: Automatic Faulty Deployment Detection
+kind: documentation
 ---
 
 ## Overview

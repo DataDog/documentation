@@ -1,5 +1,6 @@
 ---
 title: Import Entries from Datadog Telemetries
+kind: documentation
 further_reading:
 - link: "/tracing/service_catalog/adding_metadata"
   tag: "Documentation"

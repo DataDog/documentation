@@ -1,5 +1,6 @@
 ---
 title: Bits AI
+kind: documentation
 disable_toc: false
 private: false
 is_beta: true

@@ -1,5 +1,6 @@
 ---
 title: Audit Datadog Security Events
+kind: documentation
 disable_toc: false
 further_reading:
 - link: "/account_management/audit_trail/"

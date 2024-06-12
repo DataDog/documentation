@@ -1,5 +1,6 @@
 ---
 title: Infrastructure List
+kind: documentation
 aliases:
   - /hostnames
   - /graphing/infrastructure/list/

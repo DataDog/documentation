@@ -1,5 +1,6 @@
 ---
 title: Dashboards
+kind: documentation
 aliases:
     - /guides/templating/
     - /graphing/dashboards/

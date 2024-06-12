@@ -1,5 +1,6 @@
 ---
 title: Datadog Service Catalog
+kind: documentation
 aliases:
   - /tracing/faq/service_catalog/
   - /tracing/services/services_list/

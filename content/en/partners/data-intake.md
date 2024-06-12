@@ -1,5 +1,6 @@
 ---
 title: Data intake
+kind: documentation
 description: "How data can be fed into Datadog and which prerequisites need to be met in your or your clients' environments."
 private: true
 ---

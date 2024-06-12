@@ -1,5 +1,6 @@
 ---
 title: Best Practices for Scaling Observability Pipelines
+kind: Documentation
 
 ---
 

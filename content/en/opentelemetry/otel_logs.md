@@ -1,5 +1,6 @@
 ---
 title: Send Logs from OpenTelemetry to Datadog
+kind: documentation
 aliases:
 - /logs/log_collection/opentelemetry/
 further_reading:

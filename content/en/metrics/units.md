@@ -1,5 +1,6 @@
 ---
 title: Metrics Units
+kind: documentation
 aliases:
 - /developers/metrics/metrics_units
 - /developers/metrics/units/

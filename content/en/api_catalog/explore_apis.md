@@ -1,5 +1,6 @@
 ---
 title: Exploring APIs
+kind: documentation
 is_beta: true
 further_reading:
 - link: "/tracing/service_catalog/"

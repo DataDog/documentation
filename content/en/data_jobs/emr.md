@@ -1,5 +1,6 @@
 ---
 title: Enable Data Jobs Monitoring for Spark on Amazon EMR
+kind: documentation
 further_reading:
     - link: '/data_jobs'
       tag: 'Documentation'

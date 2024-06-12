@@ -1,5 +1,6 @@
 ---
 title: Metrics without Limits™
+kind: documentation
 aliases:
   - /metrics/faq/metrics-without-limits/
   - /metrics/guide/metrics-without-limits-getting-started/

@@ -1,5 +1,6 @@
 ---
 title: Universal Service Monitoring
+kind: documentation
 aliases:
 - /tracing/universal_service_monitoring/
 further_reading:

@@ -1,5 +1,6 @@
 ---
 title: Intelligent Test Runner
+kind: documentation
 aliases:
 - /continuous_integration/intelligent_test_runner/
 further_reading:

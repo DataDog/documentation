@@ -1,5 +1,6 @@
 ---
 title: Regular Expression Syntax
+kind: documentation
 disable_toc: false
 further_reading:
     - link: "/sensitive_data_scanner/"

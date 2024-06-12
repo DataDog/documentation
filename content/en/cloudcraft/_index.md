@@ -1,5 +1,6 @@
 ---
 title: Cloudcraft
+kind: documentation
 further_reading:
     - link: 'https://www.datadoghq.com/blog/cloud-architecture-diagrams-cost-compliance-cloudcraft-datadog/'
       tag: 'blog'

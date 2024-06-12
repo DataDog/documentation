@@ -1,5 +1,6 @@
 ---
 title: Setup Data Streams Monitoring for Node.js
+kind: documentation
 further_reading:
     - link: '/integrations/kafka/'
       tag: 'Documentation'

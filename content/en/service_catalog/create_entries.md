@@ -1,5 +1,6 @@
 ---
 title: Create a New Entry
+kind: documentation
 aliases:
   - /tracing/service_catalog/setup
   - /service_catalog/setup

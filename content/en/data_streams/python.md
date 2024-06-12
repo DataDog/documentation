@@ -1,5 +1,6 @@
 ---
 title: Setup Data Streams Monitoring for Python
+kind: documentation
 further_reading:
     - link: '/integrations/kafka/'
       tag: 'Documentation'

@@ -1,5 +1,6 @@
 ---
 title: Database Monitoring Data Collected
+kind: documentation
 description: Information about the data that Database Monitoring collects.
 further_reading:
 

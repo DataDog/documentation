@@ -1,5 +1,6 @@
 ---
 title: Dynamic Instrumentation Sensitive Data Scrubbing
+kind: documentation
 further_reading:
 - link: "/dynamic_instrumentation/enabling/"
   tag: "Documentation"

@@ -1,5 +1,6 @@
 ---
 title: Network Monitoring
+kind: documentation
 disable_sidebar: true
 description: Explore Datadog Network Monitoring Products
 further_reading:
