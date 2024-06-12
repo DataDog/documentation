@@ -485,7 +485,7 @@ spanWithLinks.end();
 
 10. (Optional) Add local parent span to the span generated around the OkHttp request in RUM:
 
-You will first need to add the OpenTelemetry OkHttp extension module to your project dependencies:
+First, you need to add the OpenTelemetry OkHttp extension module to your project dependencies:
 
 ```groovy
 android {
