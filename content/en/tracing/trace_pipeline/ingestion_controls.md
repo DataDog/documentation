@@ -39,8 +39,6 @@ If the monthly usage is under `100%`, the projected ingested data fits in your [
 
 ## Managing ingestion for all services at the Agent level
 
-<div class="alert alert-info"><strong> Remote configuration for ingestion configuration in the Agent is in beta.</strong></div>
-
 Click **Remotely Configure Agent Ingestion** to manage ingestion sampling for your services globally. You can remotely configure Agent sampling parameters if you are using Agent version [7.42.0][13] or higher. Read [How Remote Configuration Works][14] for information about enabling remote configuration in your Agents.
 
 {{< img src="tracing/trace_indexing_and_ingestion/agent_level_configurations_modal.png" style="width:70%;" alt="Agent Level Configuration Modal" >}}
@@ -130,6 +128,8 @@ See the **Datadog Agent and tracing library versions** your service is using. Co
 **Note**: You need to upgrade the Agent to v6.34 or v7.34 for the version information to be reported.
 
 ### Configure the service ingestion rate
+
+<div class="alert alert-info"><strong>Remotely configured sampling rules are in Beta</strong>. Request access to the feature via this <a href="https://forms.gle/WCG57yTCG27BCBB67">link</a> to be able to dynamically set this configuration from the Datadog UI without having to redeploy your service. Follow the instructions in the <a href="/tracing/guide/resource_based_sampling">Resource-based sampling guide</a> to get started.</div>
 
 Click **Manage Ingestion Rate** to get instructions on how to configure your service ingestion rate.
 

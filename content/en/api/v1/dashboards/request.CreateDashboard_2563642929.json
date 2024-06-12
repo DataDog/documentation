@@ -1,0 +1,60 @@
+{
+  "title": "Example-Dashboard",
+  "description": "",
+  "widgets": [
+    {
+      "layout": {
+        "x": 0,
+        "y": 0,
+        "width": 47,
+        "height": 15
+      },
+      "definition": {
+        "title": "",
+        "title_size": "16",
+        "title_align": "left",
+        "time": {},
+        "style": {
+          "display": {
+            "type": "stacked",
+            "legend": "inline"
+          },
+          "scaling": "relative"
+        },
+        "type": "toplist",
+        "requests": [
+          {
+            "queries": [
+              {
+                "data_source": "metrics",
+                "name": "query1",
+                "query": "avg:system.cpu.user{*} by {service}",
+                "aggregator": "avg"
+              }
+            ],
+            "formulas": [
+              {
+                "formula": "query1"
+              }
+            ],
+            "sort": {
+              "count": 10,
+              "order_by": [
+                {
+                  "type": "group",
+                  "name": "service",
+                  "order": "asc"
+                }
+              ]
+            },
+            "response_format": "scalar"
+          }
+        ]
+      }
+    }
+  ],
+  "template_variables": [],
+  "layout_type": "free",
+  "is_read_only": false,
+  "notify_list": []
+}

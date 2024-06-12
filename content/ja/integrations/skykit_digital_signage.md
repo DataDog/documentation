@@ -20,7 +20,7 @@ integration_id: skykit-digital-signage-license
 integration_title: Skykit Digital Signage
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0

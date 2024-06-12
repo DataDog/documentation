@@ -26,7 +26,7 @@ integration_id: salesforce-commerce-cloud
 integration_title: Salesforce Commerce Cloud
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: salesforce_commerce_cloud
 public_title: Salesforce Commerce Cloud

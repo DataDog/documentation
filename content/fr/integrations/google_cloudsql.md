@@ -15,7 +15,7 @@ integration_id: google-cloudsql
 integration_title: Google Cloud SQL
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: google_cloudsql
 public_title: Intégration Datadog/Google Cloud SQL

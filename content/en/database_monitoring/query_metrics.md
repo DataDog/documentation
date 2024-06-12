@@ -36,7 +36,7 @@ The view shows 200 _top_ queries, that is the 200 queries with the most total ti
 
 ## Filtering and grouping
 
-Select your database source, Postgres or MySQL, from the **source** selector at the top, and specify search tags to filter the list of queries, and group by tags to organize the list.
+Select your database source (for example, Postgres) from the **source** selector at the top. Specify search tags to filter the list of queries (or list of [stored procedures][7], where available), and group by tags to organize the list.
 
 For example, it's often useful to group by host or cluster, to quickly see what infrastructure the queries are running on.
 
@@ -131,3 +131,4 @@ For quick access to dashboards that showcase database-related infrastructure and
 [4]: /database_monitoring/data_collected/#normalized-queries
 [5]: /database_monitoring/query_samples/#sample-details
 [6]: /database_monitoring/troubleshooting/#queries-are-missing-explain-plans
+[7]: /database_monitoring/database_hosts/#stored-procedures

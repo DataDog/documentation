@@ -15,7 +15,7 @@ git_integration_title: amazon_efs
 has_logo: true
 integration_title: Amazon Elastic File System
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: amazon_efs
 public_title: "Intégration Datadog/Amazon\_Elastic\_File\_System"

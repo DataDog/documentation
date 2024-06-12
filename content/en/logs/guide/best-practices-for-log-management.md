@@ -154,9 +154,9 @@ To set up a monitor to alert when the daily quota is reached for an index:
 
 1. Navigate to [Monitors > New Monitor][13] and click **Event**.
 2. Enter: `source:datadog "daily quota reached"` in the **Define the search query** section.
-3. Add `datadog_index(datadog_index)` to the **group by** field. The `datadog_index(datadog_index)` tag is only available when an event has already been generated. 
+3. Add `datadog_index` to the **group by** field. It automatically updates to `datadog_index(datadog_index)`. The `datadog_index(datadog_index)` tag is only available when an event has already been generated. 
 4. In the **Set alert conditions** section, select `above or equal to` and enter `1` for the **Alert threshold**.
-5. Add a notification title and message in the **Notify your team** section.The **Multi Alert** button is automatically selected because the monitor is grouped by `datadog_index(datadog_index)`.
+5. Add a notification title and message in the **Configure notifications and automations** section. The **Multi Alert** button is automatically selected because the monitor is grouped by `datadog_index(datadog_index)`.
 6. Click **Save**.
 
 This is an example of what the notification looks like in Slack:

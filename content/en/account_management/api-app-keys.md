@@ -51,6 +51,8 @@ To add a Datadog API key or client token:
 3. Enter a name for your key or token.
 4. Click **Create API key** or **Create Client Token**.
 
+{{< img src="account_management/api-key.png" alt="Navigate to the API Keys page for your organization in Datadog" style="width:80%;" >}}
+
 **Notes:**
 
 - Your org must have at least one API key and at most 50 API keys.
@@ -63,6 +65,8 @@ To remove a Datadog API key or client token, navigate to the list of keys or tok
 ## Add application keys
 
 To add a Datadog application key, navigate to **Organization Settings** > **Application Keys**. If you have the [permission][4] to create application keys, click **New Key**.
+
+{{< img src="account_management/app-key.png" alt="Navigate to the Application Keys page for your organization in Datadog" style="width:80%;" >}}
 
 **Notes:**
 

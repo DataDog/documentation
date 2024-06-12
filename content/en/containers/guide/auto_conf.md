@@ -6,19 +6,20 @@ aliases:
  - /agent/faq/auto_conf
  - /agent/guide/auto_conf
 further_reading:
-- link: "/agent/kubernetes/integrations/"
+- link: "/containers/kubernetes/integrations/"
   tag: "Documentation"
-  text: "Create and load an Autodiscovery Integration Template"
+  text: "Kubernetes and Integrations"
+- link: "/containers/docker/integrations/"
+  tag: "Documentation"
+  text: "Docker and Integrations"
 - link: "/agent/guide/autodiscovery-management/"
   tag: "Documentation"
-  text: "Manage which Container to include in the Agent Autodiscovery"
+  text: "Autodiscovery Management"
 algolia:
   tags: ['auto conf','ignore auto conf', 'autoconf','ignore autoconf']
 ---
 
-When the Agent runs as a container, it tries by default to Autodiscover other containers around it based on default Autodiscovery configuration files named `auto_conf.yaml`. You can find these files in the corresponding `conf.d/<INTEGRATION>.d/` folders for the following integrations:
-
-## Auto-Configuration files
+When the Agent runs as a container, [Autodiscovery][49] tries to discover other containers based on default configuration files named `auto_conf.yaml`. You can find these files in the corresponding `conf.d/<INTEGRATION>.d/` folders for the following integrations:
 
 | Integration                    | Auto-configuration file |
 | ------                         | --------                |
@@ -48,21 +49,43 @@ When the Agent runs as a container, it tries by default to Autodiscover other co
 
 The `auto_conf.yaml` configuration files cover all required parameters to set up a specific integration, with their corresponding [Autodiscovery Templates Variables][43] in place to take into account the containerized environment.
 
-## Customizing configuration
-The auto configuration logic only supports the default configuration for any integration above. If you want to customize your Datadog integration configuration, see the Integrations Templates documentation to learn how to configure your Agent Autodiscovery. Any configuration discovered through Kubernetes Annotations or Docker Labels for a given container takes precedence over the `auto_conf.yaml` file.
+## Override auto-configuration
+Each `auto_conf.yaml` file provides a default configuration. To override this, you can add a custom configuration in [Kubernetes annotations][50] or [Docker Labels][51].
 
-* [Using Key-Value Store][44]
-* [Using Kubernetes Annotations][45]
-* [Using Docker Labels][46]
+Kubernetes annotations and Docker Labels take precedence over `auto_conf.yaml` files, but `auto_conf.yaml` files take precedence over Autodiscovery configuration set in the Datadog Operator and Helm charts. To use Datadog Operator or Helm to configure Autodiscovery for an integration in the table on this page, you must [disable auto-configuration](#disable-auto-configuration).
 
-## Disabling auto-configuration
+## Disable auto-configuration
 
-To disable the Agent from using the `auto_conf.yaml` configuration, you can add the `DD_IGNORE_AUTOCONF` environment variable for the desired integration(s) to disable. The following examples would have the Agent ignore the [`redisdb.d/auto_conf.yaml`][38] and [`istio.d/auto_conf.yaml`][22] file and avoid automatically setting up these integrations.
+The following examples disable auto-configuration for the Redis and Istio integrations.
 
 {{< tabs >}}
+{{% tab "Datadog Operator" %}}
+
+In your `datadog-agent.yaml`, use `override.nodeAgent.env` to set the `DD_IGNORE_AUTOCONF` environment variable.
+
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    credentials:
+      apiKey: <DATADOG_API_KEY>
+
+  override:
+    nodeAgent:
+      env: 
+        name: DD_IGNORE_AUTOCONF
+        value: redisdb istio
+```
+
+Then, apply the new configuration.
+
+{{% /tab %}}
 {{% tab "Helm" %}}
 
-To disable auto configuration integration(s) with Helm, add `datadog.ignoreAutoconfig` to your `values.yaml`:
+Add `datadog.ignoreAutoconfig` to your `datadog-values.yaml`:
 
 ```yaml
 datadog:
@@ -70,6 +93,18 @@ datadog:
   ignoreAutoConfig:
     - redisdb
     - istio
+```
+{{% /tab %}}
+{{% tab "Operator" %}}
+
+To disable auto configuration integration(s) with the Operator, add the `DD_IGNORE_AUTOCONF` variable to your `datadog-agent.yaml` file:
+
+```yaml
+  override:
+    nodeAgent:
+      env:
+        - name: DD_IGNORE_AUTOCONF
+          value: "redisdb istio"
 ```
 {{% /tab %}}
 {{% tab "DaemonSet" %}}
@@ -133,3 +168,6 @@ DD_IGNORE_AUTOCONF="redisdb istio"
 [46]: /agent/docker/integrations/#configuration
 [47]: /integrations/rabbitmq/
 [48]: https://github.com/DataDog/integrations-core/blob/master/rabbitmq/datadog_checks/rabbitmq/data/auto_conf.yaml
+[49]: /getting_started/containers/autodiscovery
+[50]: /containers/kubernetes/integrations/?tab=annotations#configuration
+[51]: /containers/docker/integrations/

@@ -33,22 +33,22 @@ For more information, see [CSM Threats Detection Rules][7].
 
 You can create custom rules using these methods:
 
-- **Simple:** Use the **Simple rule creator** to create the custom Agent and detection rules together.
-  - For steps on using the **Simple rule creator**, see [Create the custom Agent and detection rules together](#create-the-custom-agent-and-detection-rules-together).
+- **Simple:** Use the **Assisted rule creator** to create the custom Agent and detection rules together.
+  - For steps on using the **Assisted rule creator**, see [Create the custom Agent and detection rules together](#create-the-custom-agent-and-detection-rules-together).
 - **Advanced:**  Create custom Agent and detection rules individually by defining their threat detection expressions. 
   - For steps on this method, see [Create a custom agent rule](#create-a-custom-agent-rule) and [Create a custom detection rule](#create-a-custom-detection-rule).
 
 ## Create the custom Agent and detection rules together
 
-The **Simple rule creator** option helps you create the Agent and dependent detection rules together, and ensures that the Agent rule is referenced in the detection rules. Using this tool is faster than the advanced method of creating the Agent and detection rules separately.
+The **Assisted rule creator** option helps you create the Agent and dependent detection rules together, and ensures that the Agent rule is referenced in the detection rules. Using this tool is faster than the advanced method of creating the Agent and detection rules separately.
 
 As you define the rules using this tool, the threat expressions generated for these rules are displayed in the tool.
 
 To use the simple rule creator:
 
-1. In [Agent Configuration][4] or [Threat Detection Rules][3], select **New Rule**, and then select **Simple rule creator**.
+1. In [Agent Configuration][4] or [Threat Detection Rules][3], select **New Rule**, and then select **Assisted rule creator**.
 2. Define the detection. To monitor your resource effectively, you have the following detection type options:
-   - To detect unauthorized changes to files, select **File integrity monitoring (FIM)**.
+   - To detect nonstandard and suspicious changes to files, select **File integrity monitoring (FIM)**.
    - To track and analyze system software processes for malicious behavior or policy violations, select **Process activity monitoring**.
    - Enter the file/process names or paths to monitor. 
 3. Specify more conditions. Enter any arguments to add to the threat rule expression. For example, the argument `foo` is added as `process.argv in ["foo"]`.
@@ -59,7 +59,7 @@ To use the simple rule creator:
    
    Here's an example of a new FIM rule, including the expressions generated for each rule.
 
-    {{< img src="/security/csm/csm_threats_simple_rule_creator.png" alt="Simple rule creator example" style="width:100%;" >}}
+    {{< img src="/security/csm/csm_threats_simple_rule_creator2.png" alt="Assisted rule creator example" style="width:100%;" >}}
 
 6. Select **Create _N_ Rules**.
 7. In **Generate Rules**, select **Confirm**. The rules are generated.
@@ -71,7 +71,7 @@ To use the simple rule creator:
 
 You can create an individual custom Agent rule, deploy it as a [new Agent policy](#deploy-the-policy-in-your-environment), and reference it in a [custom detection rule](#create-a-custom-detection-rule).
 
-1. On the [**Agent Configuration**][4] page, select **New Rule**, and then select **Advanced rule creation**.
+1. On the [**Agent Configuration**][4] page, select **New Rule**, and then select **Manual rule creator**.
 2. Add a name and description for the rule.
 3. In **Expression**, define the Agent expression using Datadog Security Language (SECL) syntax.
 
@@ -160,7 +160,7 @@ To apply the changes, restart the [Datadog Agent][1].
 
 After you upload the new default policy file to the Agent, navigate to the [**Threat Detection Rules**][3] page.
 
-1. On the [**Threat Detection Rules**][3] page, select **New Rule**, and then select **Advanced rule creation**.
+1. On the [**Threat Detection Rules**][3] page, select **New Rule**, and then select **Manual rule creator**.
 2. **Select a rule type:**
    1. In **Detection rule types**, select **Workload Security**. 
    2. Select a detection method such as **Threshold** or **New Value**.
