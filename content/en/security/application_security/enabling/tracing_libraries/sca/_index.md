@@ -1,5 +1,5 @@
 ---
-title: Enabling ASM for Software Composition Analysis using Datadog tracing libraries
+title: Enabling Software Composition Analysis using Datadog tracing libraries
 kind: documentation
 disable_toc: false
 further_reading:
@@ -17,13 +17,13 @@ further_reading:
   text: "Secure serverless applications with Datadog ASM"
 ---
 
-You can use Datadog Software Composition Analysis (SCA) to monitor the open source libraries in your apps for vulnerabilities.
+You can use Datadog Software Composition Analysis (SCA) to monitor the open source libraries in your apps.
 
 SCA is configured by setting the `-Ddd.appsec.sca.enabled` flag or the `DD_APPSEC_SCA_ENABLED` environment variable to `true` in supported languages.
 
 This topic explains how to set up SCA using a Java example.
 
-{{% appsec-getstarted %}}
+
 
 ## Example: enabling Software Composition Analysis in Java
 
