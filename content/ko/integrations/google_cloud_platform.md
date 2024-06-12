@@ -348,7 +348,7 @@ GCE 또는 GKE에서 실행되는 애플리케이션에서 로그를 수집하�
 
 4. 아래 **부수적인 파라미터**에서  `Include full Pub/Sub message in the payload`를 확인하세요.
 
-5. [1단계](#1-create-a-cloud-pubsub-topic-and-subscription)에서 언급된 대로 Datadog API 키 값을 사용하여 Secret Manager에서 비밀을 생성한 경우 **Google 클라우드 비밀 관리자 ID** 필드에서 해당 비밀 **리소스 이름**을 입력하세요.
+5. [1단계](#1-cloud-pubsub-주제-및-구독-생성)에서 언급된 대로 Datadog API 키 값을 사용하여 Secret Manager에서 비밀을 생성한 경우 **Google 클라우드 비밀 관리자 ID** 필드에서 해당 비밀 **리소스 이름**을 입력하세요.
 
 {{< img src="integrations/google_cloud_platform/dataflow_template_optional_parameters.png" alt="Datadog Dataflow 템플릿의 선택적 파라미터(Google Cloud Secret Manager ID 및 전달된 API 키의 소스 필드가 모두 강조 표시됨)." style="width:80%;">}}  
 
