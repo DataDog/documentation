@@ -12,7 +12,6 @@ integration_id: azure-service-bus
 integration_title: Microsoft Azure Service Bus
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: azure_service_bus
 public_title: Datadog-Microsoft Azure Service Bus インテグレーション

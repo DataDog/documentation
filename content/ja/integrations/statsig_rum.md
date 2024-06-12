@@ -22,7 +22,6 @@ integration_id: statsig-rum
 integration_title: Statsig - RUM
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: statsig_rum
 public_title: Statsig - RUM

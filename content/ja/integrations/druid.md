@@ -38,7 +38,6 @@ integration_id: druid
 integration_title: Druid
 integration_version: 2.5.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: druid
 public_title: Druid

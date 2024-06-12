@@ -29,7 +29,6 @@ integration_id: win32-event-log
 integration_title: Windows Event Log
 integration_version: 3.3.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: win32_event_log
 public_title: Windows Event Log

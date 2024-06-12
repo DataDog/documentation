@@ -17,7 +17,6 @@ integration_id: statuspage
 integration_title: Statuspage
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: statuspage
 public_title: Datadog-Statuspage インテグレーション

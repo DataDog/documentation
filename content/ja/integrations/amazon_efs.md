@@ -17,7 +17,6 @@ integration_id: ''
 integration_title: Amazon Elastic File System
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: amazon_efs
 public_title: Datadog-Amazon Elastic File System インテグレーション

@@ -36,7 +36,6 @@ integration_id: kube-controller-manager
 integration_title: Kubernetes Controller Manager
 integration_version: 5.1.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: kube_controller_manager
 public_title: Kubernetes Controller Manager

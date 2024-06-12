@@ -45,7 +45,6 @@ integration_id: varnish
 integration_title: Varnish
 integration_version: 1.14.4
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: varnish
 public_title: Varnish

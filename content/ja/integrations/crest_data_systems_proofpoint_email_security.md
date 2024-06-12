@@ -40,7 +40,6 @@ integration_id: crest-data-systems-proofpoint-email-security
 integration_title: Proofpoint Email Security
 integration_version: ''
 is_public: true
-kind: インテグレーション
 legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0

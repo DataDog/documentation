@@ -34,7 +34,6 @@ integration_id: rundeck
 integration_title: Rundeck
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: rundeck
 public_title: Rundeck

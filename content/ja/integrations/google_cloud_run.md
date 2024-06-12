@@ -22,7 +22,6 @@ integration_id: google-cloud-run
 integration_title: Google Cloud Run
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: google_cloud_run
 public_title: Datadog-Google Cloud Run インテグレーション

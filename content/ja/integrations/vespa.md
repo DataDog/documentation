@@ -31,7 +31,6 @@ integration_id: vespa
 integration_title: Vespa
 integration_version: 1.1.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: vespa
 public_title: Vespa

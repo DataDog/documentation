@@ -14,7 +14,6 @@ integration_id: ''
 integration_title: AWS VPN
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: amazon_vpn
 public_title: Datadog-AWS VPN インテグレーション

@@ -35,7 +35,6 @@ integration_id: tls
 integration_title: TLS
 integration_version: 2.16.1
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: tls
 public_title: TLS

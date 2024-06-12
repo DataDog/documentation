@@ -11,7 +11,6 @@ has_logo: true
 integration_id: nxlog
 integration_title: nxlog
 is_public: true
-kind: インテグレーション
 name: nxlog
 public_title: Datadog-NXlog インテグレーション
 short_description: NXLog を構成して、ホスト、コンテナ、サービスからログを収集

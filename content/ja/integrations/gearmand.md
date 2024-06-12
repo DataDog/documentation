@@ -41,7 +41,6 @@ integration_id: gearman
 integration_title: Gearman
 integration_version: 3.1.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: gearmand
 public_title: Gearman

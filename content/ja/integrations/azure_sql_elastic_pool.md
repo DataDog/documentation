@@ -14,7 +14,6 @@ integration_id: azure-sql-elastic-pool
 integration_title: Microsoft Azure SQL Elastic Pool
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: azure_sql_elastic_pool
 public_title: Datadog-Microsoft Azure SQL Elastic Pool インテグレーション

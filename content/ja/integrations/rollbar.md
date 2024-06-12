@@ -13,7 +13,6 @@ has_logo: true
 integration_id: rollbar
 integration_title: Rollbar
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: rollbar
 public_title: Datadog-Rollbar インテグレーション

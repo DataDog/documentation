@@ -96,7 +96,6 @@ Helm チェックは [Datadog Agent][1] パッケージに含まれています�
 
 ```
 apiVersion: datadoghq.com/v2alpha1
-kind: DatadogAgent
 metadata:
   name: datadog
 spec:
@@ -116,7 +115,6 @@ spec:
 
 ```
 apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRoleBinding
 metadata:
   name: datadog-helm-check
 roleRef:
@@ -129,7 +127,6 @@ subjects:
     namespace: default
 ---
 apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRole
 metadata:
   name: datadog-helm-check
 rules:

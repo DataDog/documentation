@@ -20,7 +20,6 @@ integration_id: webassembly-observe-sdk
 integration_title: WebAssembly Observe SDK
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: dylibso-webassembly
 public_title: WebAssembly Observe SDK

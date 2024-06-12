@@ -13,7 +13,6 @@ integration_id: ''
 integration_title: Amazon EventBridge
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: amazon_event_bridge
 public_title: Datadog-Amazon EventBridge インテグレーション

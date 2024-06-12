@@ -30,7 +30,6 @@ integration_id: split
 integration_title: Split
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: split
 public_title: Split

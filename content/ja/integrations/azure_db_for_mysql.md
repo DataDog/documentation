@@ -15,7 +15,6 @@ integration_id: azure-db-for-mysql
 integration_title: Microsoft Azure DB for MySQL
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: azure_db_for_mysql
 public_title: Datadog-Microsoft Azure DB for MySQL インテグレーション

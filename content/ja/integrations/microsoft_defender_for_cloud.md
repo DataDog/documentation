@@ -30,7 +30,6 @@ integration_id: microsoft-defender-for-cloud
 integration_title: Microsoft Defender for Cloud
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: microsoft_defender_for_cloud
 public_title: Microsoft Defender for Cloud

@@ -36,7 +36,6 @@ integration_id: riak-cs
 integration_title: Riak CS
 integration_version: 2.10.1
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: riakcs
 public_title: Riak CS

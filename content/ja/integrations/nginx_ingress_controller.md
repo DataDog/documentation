@@ -45,7 +45,6 @@ integration_id: nginx-ingress-controller
 integration_title: nginx-ingress-controller
 integration_version: 2.6.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: nginx_ingress_controller
 public_title: nginx-ingress-controller

@@ -30,7 +30,6 @@ integration_id: storm
 integration_title: Storm
 integration_version: 1.0.1
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: storm
 public_title: Storm

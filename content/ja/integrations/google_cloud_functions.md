@@ -13,7 +13,6 @@ integration_id: google-cloud-functions
 integration_title: Google Cloud Functions
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: google_cloud_functions
 public_title: Datadog-Google Cloud Functions インテグレーション

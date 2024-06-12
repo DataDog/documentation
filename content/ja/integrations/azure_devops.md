@@ -26,7 +26,6 @@ integration_id: azuredevops
 integration_title: Microsoft Azure DevOps
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: azure_devops
 public_title: Datadog-Microsoft Azure DevOps インテグレーション

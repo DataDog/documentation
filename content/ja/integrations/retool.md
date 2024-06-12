@@ -33,7 +33,6 @@ integration_id: retool
 integration_title: Retool
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: retool
 public_title: Retool

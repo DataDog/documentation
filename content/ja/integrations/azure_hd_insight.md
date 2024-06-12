@@ -14,7 +14,6 @@ integration_id: azure-hdinsight
 integration_title: Microsoft Azure HDInsight
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: azure_hd_insight
 public_title: Datadog-Microsoft Azure HDInsight インテグレーション

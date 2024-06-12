@@ -14,7 +14,6 @@ integration_id: azure-event-hub
 integration_title: Microsoft Azure Event Hub
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: azure_event_hub
 public_title: Datadog-Microsoft Azure Event Hub インテグレーション

@@ -34,7 +34,6 @@ integration_id: cri
 integration_title: CRI
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: cri
 public_title: CRI
@@ -80,7 +79,6 @@ CRI は [Datadog Agent][1] の中核となるチェックで、`datadog.yaml` �
 
 ```yaml
 apiVersion: extensions/v1beta1
-kind: DaemonSet
 metadata:
   name: datadog-agent
 spec:

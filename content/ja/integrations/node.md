@@ -22,7 +22,6 @@ integration_id: node
 integration_title: NodeJS
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: node
 public_title: Datadog-NodeJS インテグレーション

@@ -13,7 +13,6 @@ integration_id: ''
 integration_title: Microsoft Azure Data Explorer
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: azure_data_explorer
 public_title: Datadog-Microsoft Azure Data Explorer インテグレーション

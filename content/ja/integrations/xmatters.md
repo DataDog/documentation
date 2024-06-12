@@ -11,7 +11,6 @@ integration_id: xmatters
 integration_title: xMatters
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: xmatters
 public_title: Datadog-xMatters インテグレーション

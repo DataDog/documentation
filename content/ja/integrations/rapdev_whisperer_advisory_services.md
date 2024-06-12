@@ -21,7 +21,6 @@ integration_id: rapdev-whisperer-advisory-services
 integration_title: Whisperer Advisory Services
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: rapdev_whisperer_advisory_services
 pricing:

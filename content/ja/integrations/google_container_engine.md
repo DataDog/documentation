@@ -14,7 +14,6 @@ integration_id: google-container-engine
 integration_title: Google Container Engine
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: google_container_engine
 public_title: Datadog-Google Container Engine インテグレーション

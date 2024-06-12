@@ -14,7 +14,6 @@ integration_id: google-cloud-firebase
 integration_title: Google Cloud Firebase
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: google_cloud_firebase
 public_title: Datadog-Google Cloud Firebase インテグレーション

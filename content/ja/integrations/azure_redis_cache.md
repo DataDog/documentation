@@ -13,7 +13,6 @@ integration_id: azure-redis-cache
 integration_title: Microsoft Azure Redis Cache
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: azure_redis_cache
 public_title: Datadog-Microsoft Azure Redis Cache インテグレーション

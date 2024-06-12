@@ -45,7 +45,6 @@ integration_id: couchdb
 integration_title: CouchDB
 integration_version: 6.2.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: couch
 public_title: CouchDB

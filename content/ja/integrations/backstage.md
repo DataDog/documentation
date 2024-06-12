@@ -79,7 +79,6 @@ yarn add @roadiehq/backstage-plugin-datadog
 
 ```yaml
 apiVersion: backstage.io/v1alpha1
-kind: Component
 metadata:
   name: sample-service
   description: |

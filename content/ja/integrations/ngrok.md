@@ -30,7 +30,6 @@ integration_id: ngrok
 integration_title: ngrok
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: ngrok
 public_title: ngrok

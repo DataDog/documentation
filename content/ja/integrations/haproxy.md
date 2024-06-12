@@ -64,7 +64,6 @@ integration_id: haproxy
 integration_title: HAProxy
 integration_version: 5.2.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: haproxy
 public_title: HAProxy
@@ -192,7 +191,6 @@ HAProxy チェックは [Datadog Agent][5] パッケージに含まれていま�
 
 ```yaml
 apiVersion: apps/v1
-kind: Deployment
 metadata:
   name: haproxy
 spec:
@@ -359,7 +357,6 @@ LABEL "com.datadoghq.ad.logs"='[{"source":"haproxy","service":"<SERVICE_NAME>"}]
 
 ```yaml
 apiVersion: v1
-kind: Pod
 metadata:
   name: haproxy
   annotations:
@@ -380,7 +377,6 @@ spec:
 
 ```yaml
 apiVersion: v1
-kind: Pod
 metadata:
   name: haproxy
   annotations:
@@ -412,7 +408,6 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 ```yaml
 apiVersion: v1
-kind: Pod
 metadata:
   name: haproxy
   annotations:

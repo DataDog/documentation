@@ -14,7 +14,6 @@ integration_id: azure-usage-and-quotas
 integration_title: Microsoft Azure Usage and Quotas
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: azure_usage_and_quotas
 public_title: Datadog-Microsoft Azure Usage and Quotas インテグレーション

@@ -13,7 +13,6 @@ integration_id: ''
 integration_title: Sumo Logic
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: sumo_logic
 public_title: Datadog-Sumo Logic インテグレーション

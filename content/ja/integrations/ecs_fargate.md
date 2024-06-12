@@ -40,7 +40,6 @@ integration_id: aws-fargate
 integration_title: Amazon ECS on AWS Fargate
 integration_version: 4.3.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: ecs_fargate
 public_title: Amazon ECS on AWS Fargate

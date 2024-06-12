@@ -36,7 +36,6 @@ integration_id: tokumx
 integration_title: TokuMX
 integration_version: 3.2.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: tokumx
 public_title: TokuMX

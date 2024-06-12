@@ -38,7 +38,6 @@ integration_id: hivemq
 integration_title: HiveMQ
 integration_version: 1.8.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: hivemq
 public_title: HiveMQ

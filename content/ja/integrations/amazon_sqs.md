@@ -35,7 +35,6 @@ integration_id: amazon-sqs
 integration_title: Amazon SQS
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: amazon_sqs
 public_title: Amazon SQS

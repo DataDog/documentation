@@ -25,7 +25,6 @@ further_reading:
   tag: ブログ
   text: Datadog ダイナミックインスツルメンテーションを使用して、再デプロイせずにアプリケーションログを追加する
 is_beta: false
-kind: documentation
 private: false
 title: ダイナミックインスツルメンテーション
 ---

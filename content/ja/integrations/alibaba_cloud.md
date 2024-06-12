@@ -15,7 +15,6 @@ integration_id: alibaba-cloud
 integration_title: Alibaba Cloud
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: alibaba_cloud
 public_title: Datadog-Alibaba Cloud インテグレーション

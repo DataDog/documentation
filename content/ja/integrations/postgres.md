@@ -55,7 +55,6 @@ integration_id: postgres
 integration_title: Postgres
 integration_version: 18.2.1
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: postgres
 public_title: Postgres
@@ -383,7 +382,6 @@ Agent コンテナで必要な環境変数
 
 ```yaml
 apiVersion: v1
-kind: Pod
 metadata:
   name: postgres
   annotations:
@@ -407,7 +405,6 @@ spec:
 
 ```yaml
 apiVersion: v1
-kind: Pod
 metadata:
   name: postgres
   annotations:
@@ -441,7 +438,6 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 ```yaml
 apiVersion: v1
-kind: Pod
 metadata:
   name: postgres
   annotations:

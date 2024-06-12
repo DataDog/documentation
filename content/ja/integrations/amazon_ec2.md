@@ -17,7 +17,6 @@ integration_id: amazon-ec2
 integration_title: Amazon EC2
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 monitors:
   ec2_cpu_utilization: assets/monitors/ec2_cpu_utilization.json

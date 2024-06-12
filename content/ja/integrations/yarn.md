@@ -38,7 +38,6 @@ integration_id: yarn
 integration_title: Yarn
 integration_version: 4.3.2
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: yarn
 public_title: Yarn

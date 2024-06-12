@@ -14,7 +14,6 @@ integration_id: azure-logic-app
 integration_title: Microsoft Azure Logic App
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: azure_logic_app
 public_title: Datadog-Microsoft Azure Logic App インテグレーション

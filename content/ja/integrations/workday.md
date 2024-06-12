@@ -26,7 +26,6 @@ integration_id: workday
 integration_title: Workday ユーザーアクティビティログ
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: workday
 public_title: Workday ユーザーアクティビティログ

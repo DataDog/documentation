@@ -29,7 +29,6 @@ integration_id: amazon-rds
 integration_title: Amazon RDS
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 monitors:
   rds_cpu_utilization: assets/monitors/rds_cpu_utilization.json

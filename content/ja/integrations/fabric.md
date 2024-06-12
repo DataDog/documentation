@@ -11,7 +11,6 @@ integration_id: fabric
 integration_title: Fabric
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: fabric
 public_title: Datadog-Fabric インテグレーション

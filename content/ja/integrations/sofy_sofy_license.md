@@ -23,7 +23,6 @@ integration_id: sofy-sofy-license
 integration_title: Sofy
 integration_version: ''
 is_public: true
-kind: インテグレーション
 legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0

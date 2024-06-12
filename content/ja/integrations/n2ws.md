@@ -37,7 +37,6 @@ integration_id: n2ws
 integration_title: N2WS
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: n2ws
 public_title: N2WS

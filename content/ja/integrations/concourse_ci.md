@@ -31,7 +31,6 @@ integration_id: concourse-ci
 integration_title: Concourse-CI
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: concourse_ci
 public_title: Concourse-CI

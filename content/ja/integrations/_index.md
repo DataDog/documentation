@@ -119,7 +119,6 @@ cascade:
   - /integrations/awss3
 description: すべてのシステム、アプリケーション、およびサービスからデータを収集
 disable_sidebar: true
-kind: documentation
 title: インテグレーション
 ---
 

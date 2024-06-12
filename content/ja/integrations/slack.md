@@ -14,7 +14,6 @@ integration_id: ''
 integration_title: Slack
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: slack
 public_title: Datadog-Slack インテグレーション

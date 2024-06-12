@@ -33,7 +33,6 @@ integration_id: convox
 integration_title: Convox
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: convox
 public_title: Convox

@@ -32,7 +32,6 @@ integration_id: unbound
 integration_title: Unbound
 integration_version: 1.0.1
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: unbound
 public_title: Unbound

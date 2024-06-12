@@ -35,7 +35,6 @@ integration_id: github
 integration_title: GitHub
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: github
 public_title: GitHub インテグレーション

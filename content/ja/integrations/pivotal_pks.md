@@ -31,7 +31,6 @@ integration_id: pivotal-pks
 integration_title: Pivotal Container Service
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: pivotal_pks
 public_title: Pivotal Container Service

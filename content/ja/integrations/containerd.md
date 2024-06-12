@@ -32,7 +32,6 @@ integration_id: containerd
 integration_title: Containerd
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: containerd
 public_title: Containerd
@@ -83,7 +82,6 @@ Containerd は [Datadog Agent][1] の中核となるチェックです。Contain
 
 ```yaml
 apiVersion: extensions/v1beta1
-kind: DaemonSet
 metadata:
   name: datadog-agent
 spec:
@@ -119,7 +117,6 @@ spec:
 
 ```yaml
 apiVersion: extensions/v1beta1
-kind: DaemonSet
 metadata:
   name: datadog-agent
 spec:

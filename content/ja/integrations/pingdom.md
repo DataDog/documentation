@@ -11,7 +11,6 @@ integration_id: ''
 integration_title: Pingdom Legacy API (V2.1)
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: pingdom
 public_title: Datadog-Pingdom Legacy API (V2.1) インテグレーション

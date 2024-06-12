@@ -20,7 +20,6 @@ integration_id: python
 integration_title: Python
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: python
 public_title: Datadog-Python インテグレーション

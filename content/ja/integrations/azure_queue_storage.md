@@ -12,7 +12,6 @@ integration_id: azure-queue-storage
 integration_title: Microsoft Azure Queue Storage
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: azure_queue_storage
 public_title: Datadog-Microsoft Azure Queue Storage インテグレーション

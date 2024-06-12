@@ -30,7 +30,6 @@ integration_id: システム
 integration_title: Network
 integration_version: 3.3.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: ネットワーク
 public_title: Network

@@ -40,7 +40,6 @@ integration_id: solr
 integration_title: Solr
 integration_version: 1.12.1
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: solr
 public_title: Solr

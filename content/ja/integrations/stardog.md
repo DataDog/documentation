@@ -29,7 +29,6 @@ integration_id: stardog
 integration_title: Stardog
 integration_version: 2.0.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: stardog
 public_title: Stardog

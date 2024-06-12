@@ -12,7 +12,6 @@ integration_id: ''
 integration_title: AWS Network Firewall
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: amazon_network_firewall
 public_title: Datadog-AWS Network Firewall

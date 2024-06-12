@@ -19,7 +19,6 @@ integration_id: devcycle
 integration_title: DevCycle
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: devcycle
 public_title: DevCycle

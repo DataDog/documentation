@@ -37,7 +37,6 @@ integration_id: aspdotnet
 integration_title: ASP.NET
 integration_version: 2.1.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: aspdotnet
 public_title: ASP.NET

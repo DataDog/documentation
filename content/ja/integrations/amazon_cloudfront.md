@@ -17,7 +17,6 @@ integration_id: ''
 integration_title: Amazon CloudFront
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: amazon_cloudfront
 public_title: Datadog-Amazon CloudFront インテグレーション

@@ -39,7 +39,6 @@ integration_id: wayfinder
 integration_title: Wayfinder
 integration_version: 1.0.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: wayfinder
 public_title: Wayfinder
@@ -97,7 +96,6 @@ Datadog Agent が Wayfinder コンポーネントに接続できるようにす�
 
 ```yaml
 apiVersion: networking.k8s.io/v1
-kind: NetworkPolicy
 metadata:
   name: datadog-agent
   namespace: wayfinder

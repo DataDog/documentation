@@ -33,7 +33,6 @@ integration_id: squid
 integration_title: Squid
 integration_version: 2.3.1
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: squid
 public_title: Squid

@@ -1,6 +1,5 @@
 ---
 description: Azure App Services の Datadog サポート
-kind: faq
 title: Azure App Services のサポート
 ---
 

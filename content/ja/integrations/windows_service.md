@@ -28,7 +28,6 @@ integration_id: windows-service
 integration_title: Windows Services
 integration_version: 4.8.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: windows_service
 public_title: Windows Services

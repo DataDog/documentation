@@ -27,7 +27,6 @@ integration_id: snmp-juniper
 integration_title: Juniper Networks
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: snmp_juniper
 public_title: Juniper Networks

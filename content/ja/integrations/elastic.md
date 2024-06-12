@@ -50,7 +50,6 @@ integration_id: elasticsearch
 integration_title: ElasticSearch
 integration_version: 6.3.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: elastic
 public_title: ElasticSearch
@@ -352,7 +351,6 @@ Agent コンテナで必要な環境変数
 
 ```yaml
 apiVersion: v1
-kind: Pod
 metadata:
   name: elasticsearch
   annotations:
@@ -373,7 +371,6 @@ spec:
 
 ```yaml
 apiVersion: v1
-kind: Pod
 metadata:
   name: elasticsearch
   annotations:
@@ -404,7 +401,6 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 ```yaml
 apiVersion: v1
-kind: Pod
 metadata:
   name: elasticsearch
   annotations:

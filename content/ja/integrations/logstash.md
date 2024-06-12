@@ -32,7 +32,6 @@ integration_id: logstash
 integration_title: Logstash
 integration_version: 1.1.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: logstash
 public_title: Logstash

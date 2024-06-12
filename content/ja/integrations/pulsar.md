@@ -37,7 +37,6 @@ integration_id: pulsar
 integration_title: Pulsar
 integration_version: 2.2.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: pulsar
 public_title: Pulsar
