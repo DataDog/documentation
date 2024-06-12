@@ -498,7 +498,7 @@ dependencies {
 }
 ```
 
-Then once we create an `OkHttp` `Request` we could easilly attach a parent span to the request:
+After you create an `OkHttp` `Request`, you can attach a parent span to the request:
 
 {{< tabs >}}
 {{% tab "Kotlin" %}}
