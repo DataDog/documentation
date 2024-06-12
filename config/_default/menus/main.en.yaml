@@ -2724,7 +2724,7 @@ menu:
       identifier: cloud_cost_recommendations
       weight: 8
     - name: Cost Monitors
-      url: /monitors/types/cloud_cost/
+      url: /cloud_cost_management/monitors
       parent: cloud_cost
       identifier: cloud_cost_monitors
       weight: 9

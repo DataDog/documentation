@@ -15,7 +15,7 @@ integration_id: azure-keyvault
 integration_title: Microsoft Azure Key Vault
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: azure_key_vault
 public_title: Intégration Datadog/Microsoft Azure Key Vault

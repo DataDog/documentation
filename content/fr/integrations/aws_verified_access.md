@@ -18,7 +18,7 @@ integration_id: amazon-verified-access
 integration_title: AWS Verified Access
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: aws_verified_access
 public_title: Intégration Datadog/AWS Verified Access

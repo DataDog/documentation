@@ -15,7 +15,7 @@ integration_id: amazon-sqs
 integration_title: Amazon 심플 큐 서비스 (SQS)
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 monitors:
   sqs_message_processing_time: assets/monitors/sqs_message_processing_time.json

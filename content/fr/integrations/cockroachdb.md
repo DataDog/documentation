@@ -23,7 +23,7 @@ guid: d66151ed-2e98-4037-ad89-bf4400e45f34
 integration_id: cockroachdb
 integration_title: CockroachDB
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: cockroachdb.
