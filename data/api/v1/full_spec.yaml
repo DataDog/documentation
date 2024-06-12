@@ -12165,6 +12165,7 @@ components:
           - env:prod
           - app:core
           items:
+            description: List of all_tags.
             type: string
           type: array
         created_at:
@@ -12189,6 +12190,7 @@ components:
         env_tags:
           description: Tags with the `env` tag key.
           items:
+            description: List of env_tags.
             type: string
           type: array
         groups:
@@ -12237,6 +12239,7 @@ components:
         service_tags:
           description: Tags with the `service` tag key.
           items:
+            description: List of service_tags.
             type: string
           type: array
         slo_type:
@@ -12246,6 +12249,7 @@ components:
         team_tags:
           description: Tags with the `team` tag key.
           items:
+            description: List of team_tags.
             type: string
           type: array
         thresholds:
@@ -13449,6 +13453,7 @@ components:
           example:
           - env
           items:
+            description: List of tag_values.
             minLength: 1
             type: string
           type: array
