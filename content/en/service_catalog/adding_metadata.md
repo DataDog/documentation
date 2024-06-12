@@ -1,6 +1,5 @@
 ---
 title: Adding Metadata
-kind: documentation
 further_reading:
 - link: "/tracing/service_catalog/"
   tag: "Documentation"
@@ -60,7 +59,6 @@ With the `datadog` field in v3.0 schema, you can specify custom filters for logs
 
 {{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
 apiVersion: v3
-kind: application
 metadata:
   name: myapp
   displayName: My App
@@ -131,7 +129,6 @@ datadog:
 
 {{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
 apiVersion: v3
-kind: service
 metadata:
   name: shopping-cart
   displayName: Shopping Cart

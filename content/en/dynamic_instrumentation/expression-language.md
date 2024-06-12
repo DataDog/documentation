@@ -1,6 +1,5 @@
 ---
 title: Dynamic Instrumentation Expression Language
-kind: documentation
 private: false
 ---
 

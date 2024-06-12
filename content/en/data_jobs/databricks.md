@@ -1,6 +1,5 @@
 ---
 title: Enable Data Jobs Monitoring for Databricks
-kind: documentation
 further_reading:
     - link: '/data_jobs'
       tag: 'Documentation'

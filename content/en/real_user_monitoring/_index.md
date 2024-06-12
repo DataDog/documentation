@@ -1,6 +1,5 @@
 ---
 title: RUM & Session Replay
-kind: documentation
 description: "Visualize, observe, and analyze the performance of your front-end applications as seen by your users."
 disable_sidebar: true
 aliases:

@@ -1,6 +1,5 @@
 ---
 title: Profile Visualizations
-kind: documentation
 aliases:
     - /tracing/profiling/search_profiles/
     - /tracing/profiler/search_profiles/

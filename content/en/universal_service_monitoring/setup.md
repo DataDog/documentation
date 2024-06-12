@@ -1,6 +1,5 @@
 ---
 title: Setting up Universal Service Monitoring
-kind: Documentation
 further_reading:
 - link: "/universal_service_monitoring/"
   tag: "Documentation"
