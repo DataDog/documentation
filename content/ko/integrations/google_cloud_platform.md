@@ -33,7 +33,7 @@ integration_id: google-cloud-platform
 integration_title: Google Cloud Platform
 integration_version: ''
 is_public: true
-custom_kind: integration
+kind: integration
 manifest_version: '1.0'
 name: google_cloud_platform
 public_title: Datadog-Google Cloud Platform Integration
@@ -109,7 +109,7 @@ Datadog의 Google Cloud 통합을 설정하여 Google Cloud 서비스에서 메�
 
 {{< site-region region="gov" >}}
 
-{{< region-param key="dd_site_name" >}} } 사이트의 Datadog 구글 클라우드 통합은 서비스 계정을 사용하여 구글 클라우드와 Datadog 간 API 연결을 생성합니다. 아래 지침에 따라 서비스 계정을 만들고 Datadog에 서비스 계정 자격 증명을 제공하여 사용자를 대신하여 API 호출을 시작하세요.
+{{< region-param key="dd_site_name" >}} 사이트의 Datadog 구글 클라우드 통합은 서비스 계정을 사용하여 구글 클라우드와 Datadog 간 API 연결을 생성합니다. 아래 지침에 따라 서비스 계정을 만들고 Datadog에 서비스 계정 자격 증명을 제공하여 사용자를 대신하여 API 호출을 시작하세요.
 
 [서비스 계정 사칭][209]은 {{< region-param key="dd_site_name" >}} 사이트에서 사용할 수 없습니다.
 
@@ -165,7 +165,7 @@ datadog:monitored,env:production,!env:staging,instance-type:c1.*
 
 {{< /site-region >}}
 
-{< site-region region="us,us3,us5,eu,ap1" >}}
+{{< site-region region="us,us3,us5,eu,ap1" >}}
 [서비스 계정 사칭][301] 및 자동 프로젝트 검색을 사용하여 Datadog 을 [Google 클라우드][302]와 통합할 수 있습니다.
 
 이 방법을 사용하면 관련 프로젝트에 IAM 역할을 할당하여 서비스 계정에 표시되는 모든 프로젝트를 모니터링할 수 있습니다. 이러한 역할을 프로젝트에 개별적으로 할당하거나 조직 또는 폴더 수준에서 이러한 역할을 할당하여 Datadog가 프로젝트 그룹을 모니터링하도록 설정할 수 있습니다. 이러한 방식으로 역할을 할당하면 Datadog가 향후 그룹에 추가될 수 있는 새 프로젝트를 포함해 지정된 범위의 모든 프로젝트를 자동으로 검색하고 모니터링할 수 있습니다.
