@@ -17,7 +17,7 @@ integration_id: azure-cosmosdb
 integration_title: Microsoft Azure Cosmos DB
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: azure_cosmosdb
 public_title: Intégration Datadog/Microsoft Azure Cosmos DB

@@ -14,7 +14,7 @@ git_integration_title: amazon_polly
 has_logo: true
 integration_title: Amazon Polly
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: amazon_polly
 public_title: "Intégration Datadog/Amazon\_Polly"

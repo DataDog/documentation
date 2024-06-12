@@ -24,7 +24,7 @@ further_reading:
 integration_id: pivotal-platform
 integration_title: VMware Tanzu Application Service
 is_public: true
-kind: 통합
+custom_kind: 통합
 name: vmware_tanzu_application_service
 newhlevel: true
 public_title: Datadog-VMware Tanzu Application Service (Pivotal Cloud Foundry) 통합
