@@ -2187,6 +2187,11 @@ menu:
       parent: workflows
       identifier: workflows_actions_catalog
       weight: 8
+    - name: Guides
+      url: service_management/workflows/guide/
+      parent: workflows
+      identifier: workflows_guides
+      weight: 8
     - name: App Builder
       url: service_management/app_builder/
       pre: app-builder
