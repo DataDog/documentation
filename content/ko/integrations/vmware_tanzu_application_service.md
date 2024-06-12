@@ -24,7 +24,7 @@ further_reading:
 integration_id: pivotal-platform
 integration_title: VMware Tanzu Application Service
 is_public: true
-kind: integration
+kind: 통합
 name: vmware_tanzu_application_service
 newhlevel: true
 public_title: Datadog-VMware Tanzu Application Service (Pivotal Cloud Foundry) 통합
@@ -117,7 +117,7 @@ cf set-env app01 LOGS_CONFIG '[{"type":"tcp","port":"10514","source":"java","ser
 
 {{< img src="integrations/cloud_foundry/logs_misconfigured_proxy.png" alt="Datadog 이벤트와 타이틀 로그 엔드포인트가 도달할 수 없음 - 로그 수집 시작 안 됨 및 TCP 연결을 설정할 수 없음이라는 메시지" >}}
 
-### 태그 할당
+### 태그
 
 애플리케이션에 커스텀 태그를 추가하려면 `manifest.yml` 파일 또는 CF CLI 명령을 통해 `DD_TAGS` 환경 변수를 설정하세요.
 
@@ -141,9 +141,9 @@ cf restage <YOUR_APP>
 
 [VMware Tanzu 설치 및 설정][13] 가이드를 사용해 Tanzu Ops Manager를 통한 통합을 설치하세요. 수동 설정 단계는 수동 설정 가이드의 [VMware Tanzu Application Service 클러스터 모니터링][14] 섹션을 읽으세요.
 
-## 커뮤니티 오피스 아워
+## 수집된 데이터
 
-### 모바일 바이탈
+### 메트릭
 
 다음 메트릭은 Datadog Firehose Nozzle에서 전송되었으며 접두어로 `cloudfoundry.nozzle`이 사용되었습니다. Datadog 에이전트는 기본적으로 Director 런타임 설정, [시스템][15], [네트워크][16], [디스크][17] 및 [NTP][18] 메트릭에서 설정한 모든 에이전트 검사에서 메트릭을 전송합니다.
 
