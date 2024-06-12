@@ -10,7 +10,7 @@ git_integration_title: jenkins
 has_logo: true
 integration_title: Jenkins
 is_public: true
-kind: integration
+custom_kind: integration
 name: jenkins
 public_title: Intégration Datadog/Jenkins
 short_description: Transmettez automatiquement vos métriques, événements et checks

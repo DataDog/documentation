@@ -19,7 +19,7 @@ integration_id: prometheus
 integration_title: Prometheus (ancienne version)
 integration_version: 3.3.1
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 name: prometheus
