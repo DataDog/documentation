@@ -45,7 +45,7 @@ The deletion begins 2 hours after you confirm the request.
 To validate a deletion, check the [Deletion History][5] tab, where you can see the status of deletions. You can also search deletions in [Audit Trail][6] using the string `@asset.name:"Data Deletion"`.
 
 **Notes**:
-- Deletions start 2 hours after confirmation, and matches that arrive during this period are included in deletion. In some cases, records arriving after the job has started might not be deleted because the deletion has already processed the time window that record occurred in.
+- Deletions start 2 hours after confirmation, and matching records that arrive during this period are included in deletion. In some cases, records arriving after the job has started might not be deleted because the deletion has already processed the time window that record occurred in.
 - When deleting a record, data derived from that record is not deleted (for example, Metrics generated from Logs).
 
 ### Stop deletions
