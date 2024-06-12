@@ -15,8 +15,7 @@ During an incident investigation, you might need to run complex queries, such as
 - Aggregate multiple levels of data
 - Join data using SQL
 - Extract data or add a calculated field at query time
-
-You can also add visualizations for your transformed datasets.
+- Add visualizations for your transformed datasets.
 
 ## Create a workspace and add a data source
 
@@ -31,13 +30,18 @@ On the [Logs Workspaces][1] page:
 In the [Log Explorer][2]:
 
 1. Enter a query.
-1. Click **More** and select **Open in Workspace**.
+1. Click **More**, next to *Download as CSV*, and select **Open in Workspace**.
 1. The workspace adds the log query to a data source cell. By default, the columns in Log Explorer are added to the data source cell.
 
 ## Analyze, transform, and visualize your logs
-You can add the following cells to include additional data sources such as reference tables, use SQL to join data, and also transform, correlate, and visualize the data. Cells that depend on other cells are automatically updated when one of the cells it depends on is changed.
+You can add the following cells to:
+- Include additional data sources such as reference tables
+- Use SQL to join data
+- Transform, correlate, and visualize the data 
 
-Click the dataset on the left side of the page to go directly to that cell.
+Cells that depend on other cells are automatically updated when one of the cells it depends on is changed.
+
+At the bottom of your workspace, click any of the cell tiles to add it to your workspace. After adding a cell, you can click the dataset on the left side of your workspace page to go directly to that cell.
 
 ### Data source cell
 
@@ -64,25 +68,25 @@ You can add a logs query or a reference table as a data source.
 1. Click the download icon to export the dataset as a CSV.
 
 ### Visualization cell
-Click the **Visualize** tile to add a cell for visualizing your data as a table, top list, treemap, sunburst, or a scatterplot.
+Add the **Visualization** cell to display your data as a table, top list, treemap, pie chart, or a scatterplot.
 
-1. Click the **Visualize** tile.
-1. Select the data source you want to visualize in the **Source dataset** drop down menu.
-1. Select your visualization method in the **Visualize as** drop down menu,
+1. Click the **Visualization** tile.
+1. Select the data source you want to visualize in the **Source dataset** dropdown menu.
+1. Select your visualization method in the **Visualize as** dropdown menu.
 1. Enter a filter if you want to filter to a subset of the data. For example, `status:error`. If you are using an analysis cell as your data source, you can also filter the data in SQL first.
 1. If you want to group your data, click **Add Aggregation** and select the information you want to group by.
 1. Click the download button to export the data as a CSV.
 
 ### Transformation cell
 
-Click the **transformation** tile to add a cell for filtering, aggregating, and extracting data.
+Click the **Transformation** tile to add a cell for filtering, aggregating, and extracting data.
 
 1. Click the **Transformation** tile.
-1.  Select the data source you want to transform in the **Source dataset** drop down menu.
+1. Select the data source you want to transform in the **Source dataset** dropdown menu.
 1. Click the plus icon to add a **Filter**, **Parse**, or **Aggregate** function.
     - For **Filter**, add a filter query for the dataset.
-    - For **Parse**, enter grok syntax to extract data into a separate column. In the **from** drop down menu, select the column the data is getting extracted from. See the [column extraction example](#column-extraction-example).
-    - For **Aggregate**, select what you want to group the data by in the drop down menus.
+    - For **Parse**, enter grok syntax to extract data into a separate column. In the **from** dropdown menu, select the column the data is getting extracted from. See the [column extraction example](#column-extraction-example).
+    - For **Aggregate**, select what you want to group the data by in the dropdown menus.
 1. Click the download icon to export the dataset into a CSV.
 
 #### Column extraction example
