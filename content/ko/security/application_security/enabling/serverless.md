@@ -17,7 +17,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/datadog-security-google-cloud/
   tag: 블로그
   text: Datadog 보안이 Google Cloud 기능의 규정을 준수하고 위협으로부터 보호하도록 확장됨
-kind: 설명서
 title: 서버리스에서 ASM 활성화
 ---
 

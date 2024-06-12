@@ -1,6 +1,5 @@
 ---
 title: Fine-tuning CSM Threats Security Signals
-kind: guide
 aliases:
   - /security_platform/cloud_workload_security/guide/tuning-rules/
   - /security_platform/cloud_security_management/guide/tuning-rules/
