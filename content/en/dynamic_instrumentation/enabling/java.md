@@ -19,11 +19,11 @@ Dynamic Instrumentation is a feature of supporting Datadog tracing libraries. If
 ## Requirements
 
 - The Datadog Dynamic Instrumentation library is supported in JDK version 8 and above.
-- Optionally, [autocomplete and search (open beta)][7] is enabled.
+- Recommended, [autocomplete and search (open beta)][7] is enabled.
 
 ## Installation
 
-1. Install or upgrade your Agent to version [7.44.0 (recommended 7.45.0)][2] or higher.
+1. Install or upgrade your Agent to version [7.45.0][2] or higher.
 2. If you don't already have APM enabled, in your Agent configuration, set the `DD_APM_ENABLED` environment variable to `true` and listening to the port `8126/TCP`.
 
 3. Download `dd-java-agent.jar`:
@@ -45,7 +45,7 @@ Dynamic Instrumentation is a feature of supporting Datadog tracing libraries. If
 {{% /tab %}}
 {{< /tabs >}}
 
-   **Note**: Dynamic Instrumentation is available in the `dd-java-agent.jar` library in versions 1.24.0 (recommended 1.34.0) and later.
+   **Note**: Dynamic Instrumentation is available in the `dd-java-agent.jar` library in versions 1.34.0 and later.
 
 3. Run your service with Dynamic Instrumentation enabled by setting `-Ddd.dynamic.instrumentation.enabled` flag or `DD_DYNAMIC_INSTRUMENTATION_ENABLED` environment variable to `true`. Specify `dd.service`, `dd.env`, and `dd.version` Unified Service Tags so you can filter and group your probes and target active clients across these dimensions.
    {{< tabs >}}
