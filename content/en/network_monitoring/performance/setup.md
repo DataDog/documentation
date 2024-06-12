@@ -99,7 +99,7 @@ Given this tool's focus and strength is in analyzing traffic _between_ network e
 
 To enable network performance monitoring with the Datadog Agent, use the following configurations:
 
-1. **If you are using an agent older than v6.14+**, enable [live process collection][1] first, otherwise skip this step.
+1. **If you are using an agent older than v6.14+**, enable [Live Processes][1] first, otherwise skip this step.
 
 2. Copy the system-probe example configuration:
 
