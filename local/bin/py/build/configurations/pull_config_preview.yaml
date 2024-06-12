@@ -82,7 +82,7 @@
       contents:
 
       - action: integrations
-        branch: master
+        branch: prod
         globs:
         - integration/*/*_metadata.csv
         - integration/*/manifest.json
