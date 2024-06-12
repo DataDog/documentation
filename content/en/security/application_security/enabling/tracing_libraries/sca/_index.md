@@ -19,7 +19,15 @@ further_reading:
 
 You can use Datadog Software Composition Analysis (SCA) to monitor the open source libraries in your apps.
 
-SCA is configured by setting the `-Ddd.appsec.sca.enabled` flag or the `DD_APPSEC_SCA_ENABLED` environment variable to `true` in supported languages.
+SCA is configured by setting the `-Ddd.appsec.sca.enabled` flag or the `DD_APPSEC_SCA_ENABLED` environment variable to `true` in supported languages:
+
+- Java
+- .NET
+- Go
+- Ruby
+- PHP
+- Node.js
+- Python
 
 This topic explains how to set up SCA using a Java example.
 
