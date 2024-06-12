@@ -24,7 +24,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/monitor-1password-datadog-cloud-siem/
   tag: Blog
   text: Surveiller 1Password avec la solution Cloud SIEM de Datadog
-kind: documentation
 title: Cloud SIEM
 ---
 ## Présentation

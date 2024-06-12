@@ -13,7 +13,6 @@ further_reading:
 - link: /security/application_security/enabling/
   tag: ドキュメント
   text: Application Security Management を有効にする
-kind: documentation
 title: Datadog における Application Security Management の仕組み
 ---
 

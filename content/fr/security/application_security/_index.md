@@ -41,7 +41,6 @@ further_reading:
   tag: Blog
   text: Modélisation des menaces avec la solution Application Security Management
     de Datadog
-kind: documentation
 title: Application Security Management
 ---
 
