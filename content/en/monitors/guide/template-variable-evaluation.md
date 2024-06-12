@@ -53,11 +53,16 @@ Handle that should receive notification if time is between 2PM and 5PM
 
 ## Functions
 
-The value of a numerical template variable can be used as the input for evaluation functions to change the formatting of the template variable or perform a mathematical operation on the value. The syntax uses the following format. **Note**: The expressions must be wrapped in quotation marks (`"`).
+The value of a template variable can be used as the input for evaluation functions to change the formatting of the template variable or perform a mathematical operation on the value (if applicable). The syntax uses the following format. **Note**: The expressions must be wrapped in quotation marks (`"`).
 
 ```text
 {{eval "function(TEMPLATE_VARIABLE_NAME)"}}
 ```
+
+
+{{< tabs >}}
+{{% tab "Numeric variable" %}}
+
 
 The following functions change how the value of a numerical template variable is formatted:
 
@@ -112,5 +117,25 @@ If `{{value}}` is evaluating to a large number of bytes or bits, use the `humani
 
 {{eval "humanize_bits(value)"}}
 ```
+
+{{% /tab %}}
+
+
+{{% tab "String variable" %}}
+
+The following functions can be used to perform certain operations on strings variables:
+
+| Function            | Description|
+|---------------------|--------------------------------------------------------------------------------------------------------------------------------------------|
+| upper(var) | Returns a string converted to uppercase letters|
+| lower(var)  | Returns a string converted to lowercase letters|
+| substring(var, start, end)            | Extracts characters from a string, between two specified indices (start, end).<br>For example: substring("Test Notification", 2) = "st Notification"|
+
+
+{{% /tab %}}
+
+{{< /tabs >}}
+
+
 
 [1]: /logs/explorer/
