@@ -32,7 +32,7 @@ AWS Lambda에 ASM을 구성하는 데에는 다음 요소가 포함됩니다.
 2. [Datadog CLI](https://docs.datadoghq.com/serverless/serverless_integrations/cli), [AWS CDK](https://github.com/DataDog/datadog-cdk-constructs), [Datadog Serverless Framework 플러그인][6]을 사용하거나 Datadog 추적 레이어를 수동으로 사용해 ASM 계측을 설정합니다.
 3. 애플리케이션에서 보안 신호를 트리거해 Datadog에서 결과 정보를 표시하는 것을 확인합니다.
 
-### 필수 구성 요소
+### 사전 필수 요건
 
 - [Serverless APM Tracing][apm-lambda-tracing-setup]은 Lambda 함수에 설치되어 Datadog로 트레이스를 바로 전송합니다.
   X-Ray 추적만으로는 ASM에 충분치 않기 때문에 APM Tracing을 활성화해야 합니다.

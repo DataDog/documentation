@@ -21785,6 +21785,8 @@ components:
             apm_service_catalog_read: View service catalog and service definitions.
             apm_service_catalog_write: Add, modify, and delete service catalog definitions
               when those definitions are maintained by Datadog.
+            cases_read: View Cases.
+            cases_write: Create and update cases.
             ci_visibility_pipelines_write: Create CI Visibility pipeline spans using
               the API.
             ci_visibility_read: View CI Visibility.
