@@ -159,7 +159,7 @@ Choose what to display in your resources list:
 
 {{< img src="tracing/visualization/service/resource_columns.png" alt="Resource columns" style="width:40%;">}}
 
-## Additional Sections
+## Additional sections
 
 ### Deployments
 A service configured with version tags will show versions in the Deployment tab. The version section shows all versions of the service that were active during the selected time interval, with active versions at the top.
