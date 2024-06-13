@@ -34,29 +34,31 @@ Daily Datadog costs in Cloud Cost Management are in private beta. To request acc
 
 You can enable daily Datadog costs in [Cloud Cost Management][1], giving you visibility into daily Datadog spending across dashboards, notebooks, [cost monitors][2], and Cloud Cost Analytics, along with your additional cloud provider and [SaaS costs][3] for your entire organization. 
 
-## Explore your Datadog cost data
-
-<div class="alert alert-info">Costs outside of <a href="https://app.datadoghq.com/billing/usage">Plan and Usage</a> are based on usage only and do not include historical credits and adjustments.</div>
-
-Datadog cost data is available in dashboards and notebooks under the **Cloud Costs** data source.
-
-## Use Datadog cost data attributes
-
-You can use out-of-the-box tags to break down and allocate your costs. Use the following tags to filter and group your Datadog cost data.
-
-| Tag Name | Tag Description |
-|---|---|
-| organization | The name of the sub-organization (only needed for multi-organizations). |
-| dimension_name / dimension_id | `dimension_name` is the name of the individual product being billed (for example, `Indexed Logs (15 Day Retention)`). </br></br> `dimension_id` is the snake case version of the product name which is optimized for programmatic use and easier search (for example, `logs_indexed_15day`). |
-| datadog_product / product_name | `datadog_product` is the high-level grouping name for Datadog products (for example, `indexed_logs`). </br></br> `product_name` is the snake case version of the product grouping name which is optimized for programmatic use and easier search (for example, `indexed_logs`). |
-| `<tag key configured in Usage Attribution>` | You can add up to three tag keys that are configured in [Usage Attribution][8] with the associated values (for example, `team` or `service`). |
-| cost_type | The type of charge covered by this item (for example, committed or on-demand). |
-
 ## Permissions
 
 <div class="alert alert-danger">Only existing Cloud Cost Management customers within the parent organization can access daily Datadog costs outside of <a href="https://app.datadoghq.com/billing/usage">Plan and Usage</a>.</div>
 
 [Datadog costs][4] are available for users with [Datadog Admin][5] permissions or custom [Billing Read (`billing_read`) and Usage Read (`usage_read`)][6] permissions on the [**Usage & Cost** page][7].
+
+## Visualize costs
+
+<div class="alert alert-info">Costs outside of <a href="https://app.datadoghq.com/billing/usage">Plan and Usage</a> are based on usage only and do not include historical credits and adjustments.</div>
+
+{{< img src="cloud_cost/datadog_costs/dashboard.png" alt="Datadog costs as an option for the Cloud Cost data source in a dashboard" style="width:100%;" >}}
+
+Datadog cost data is available in dashboards and notebooks under the **Cloud Costs** data source.
+
+## Break down costs
+
+You can use out-of-the-box tags to break down and allocate your costs. Use the following tags to filter and group your Datadog cost data.
+
+| Tag Name | Tag Description |
+|---|---|
+| organization | The name of the master or sub-organization. |
+| dimension_name / dimension_id | `dimension_name` is the name of the individual product being billed (for example, `Indexed Logs (15 Day Retention)`). </br></br> `dimension_id` is the snake case version of the product name which is optimized for programmatic use and easier search (for example, `logs_indexed_15day`). |
+| datadog_product / product_name | `datadog_product` is the high-level grouping name for Datadog products (for example, `indexed_logs`). </br></br> `product_name` is the snake case version of the product grouping name which is optimized for programmatic use and easier search (for example, `indexed_logs`). |
+| `<Usage Attribution tags>` | You can add up to three tag keys that are configured in [Usage Attribution][8] with the associated values (for example, `team` or `service`). |
+| cost_type | The type of charge covered by this item (for example, committed or on-demand). |
 
 ## Further reading
 
