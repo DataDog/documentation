@@ -431,22 +431,344 @@ components:
     AWSNamespace:
       description: The namespace associated with the tag filter entry.
       enum:
-      - elb
+      - api_gateway
       - application_elb
-      - sqs
-      - rds
+      - apprunner
+      - appstream
+      - appsync
+      - athena
+      - auto_scaling
+      - backup
+      - bedrock
+      - billing
+      - budgeting
+      - certificatemanager
+      - cloudfront
+      - cloudhsm
+      - cloudsearch
+      - cloudwatch_events
+      - cloudwatch_logs
+      - codebuild
+      - codewhisperer
+      - cognito
+      - collect_custom_metrics
+      - config
+      - connect
+      - crawl_alarms
       - custom
-      - network_elb
+      - directconnect
+      - dms
+      - documentdb
+      - dynamodb
+      - dynamodbaccelerator
+      - ebs
+      - ec2
+      - ec2api
+      - ec2spot
+      - ecr
+      - ecs
+      - efs
+      - elasticache
+      - elasticbeanstalk
+      - elasticinference
+      - elastictranscoder
+      - elb
+      - emr
+      - es
+      - firehose
+      - fsx
+      - gamelift
+      - globalaccelerator
+      - glue
+      - inspector
+      - iot
+      - keyspaces
+      - kinesis
+      - kinesis_analytics
+      - kms
       - lambda
+      - lex
+      - mediaconnect
+      - mediaconvert
+      - medialive
+      - mediapackage
+      - mediastore
+      - mediatailor
+      - memorydb
+      - ml
+      - mq
+      - msk
+      - mwaa
+      - nat_gateway
+      - neptune
+      - network_elb
+      - networkfirewall
+      - networkmonitor
+      - opensearchserverless
+      - opsworks
+      - polly
+      - privatelinkendpoints
+      - privatelinkservices
+      - rds
+      - rdsproxy
+      - redshift
+      - rekognition
+      - route53
+      - route53resolver
+      - s3
+      - s3storagelens
+      - sagemaker
+      - sagemakerendpoints
+      - sagemakerlabelingjobs
+      - sagemakermodelbuildingpipeline
+      - sagemakerprocessingjobs
+      - sagemakertrainingjobs
+      - sagemakertransformjobs
+      - sagemakerworkteam
+      - service_quotas
+      - ses
+      - shield
+      - sns
+      - sqs
+      - step_functions
+      - storage_gateway
+      - swf
+      - textract
+      - transitgateway
+      - translate
+      - trusted_advisor
+      - usage
+      - vpn
+      - waf
+      - wafv2
+      - workspaces
+      - xray
       type: string
       x-enum-varnames:
-      - ELB
+      - API_GATEWAY
       - APPLICATION_ELB
-      - SQS
-      - RDS
+      - APPRUNNER
+      - APPSTREAM
+      - APPSYNC
+      - ATHENA
+      - AUTO_SCALING
+      - BACKUP
+      - BEDROCK
+      - BILLING
+      - BUDGETING
+      - CERTIFICATEMANAGER
+      - CLOUDFRONT
+      - CLOUDHSM
+      - CLOUDSEARCH
+      - CLOUDWATCH_EVENTS
+      - CLOUDWATCH_LOGS
+      - CODEBUILD
+      - CODEWHISPERER
+      - COGNITO
+      - COLLECT_CUSTOM_METRICS
+      - CONFIG
+      - CONNECT
+      - CRAWL_ALARMS
       - CUSTOM
-      - NETWORK_ELB
+      - DIRECTCONNECT
+      - DMS
+      - DOCUMENTDB
+      - DYNAMODB
+      - DYNAMODBACCELERATOR
+      - EBS
+      - EC2
+      - EC2API
+      - EC2SPOT
+      - ECR
+      - ECS
+      - EFS
+      - ELASTICACHE
+      - ELASTICBEANSTALK
+      - ELASTICINFERENCE
+      - ELASTICTRANSCODER
+      - ELB
+      - EMR
+      - ES
+      - FIREHOSE
+      - FSX
+      - GAMELIFT
+      - GLOBALACCELERATOR
+      - GLUE
+      - INSPECTOR
+      - IOT
+      - KEYSPACES
+      - KINESIS
+      - KINESIS_ANALYTICS
+      - KMS
       - LAMBDA
+      - LEX
+      - MEDIACONNECT
+      - MEDIACONVERT
+      - MEDIALIVE
+      - MEDIAPACKAGE
+      - MEDIASTORE
+      - MEDIATAILOR
+      - MEMORYDB
+      - ML
+      - MQ
+      - MSK
+      - MWAA
+      - NAT_GATEWAY
+      - NEPTUNE
+      - NETWORK_ELB
+      - NETWORKFIREWALL
+      - NETWORKMONITOR
+      - OPENSEARCHSERVERLESS
+      - OPSWORKS
+      - POLLY
+      - PRIVATELINKENDPOINTS
+      - PRIVATELINKSERVICES
+      - RDS
+      - RDSPROXY
+      - REDSHIFT
+      - REKOGNITION
+      - ROUTE53
+      - ROUTE53RESOLVER
+      - S3
+      - S3STORAGELENS
+      - SAGEMAKER
+      - SAGEMAKERENDPOINTS
+      - SAGEMAKERLABELINGJOBS
+      - SAGEMAKERMODELBUILDINGPIPELINE
+      - SAGEMAKERPROCESSINGJOBS
+      - SAGEMAKERTRAININGJOBS
+      - SAGEMAKERTRANSFORMJOBS
+      - SAGEMAKERWORKTEAM
+      - SERVICE_QUOTAS
+      - SES
+      - SHIELD
+      - SNS
+      - SQS
+      - STEP_FUNCTIONS
+      - STORAGE_GATEWAY
+      - SWF
+      - TEXTRACT
+      - TRANSITGATEWAY
+      - TRANSLATE
+      - TRUSTED_ADVISOR
+      - USAGE
+      - VPN
+      - WAF
+      - WAFV2
+      - WORKSPACES
+      - XRAY
+      x-extensible-enum:
+      - API_GATEWAY
+      - APPLICATION_ELB
+      - APPRUNNER
+      - APPSTREAM
+      - APPSYNC
+      - ATHENA
+      - AUTO_SCALING
+      - BACKUP
+      - BEDROCK
+      - BILLING
+      - BUDGETING
+      - CERTIFICATEMANAGER
+      - CLOUDFRONT
+      - CLOUDHSM
+      - CLOUDSEARCH
+      - CLOUDWATCH_EVENTS
+      - CLOUDWATCH_LOGS
+      - CODEBUILD
+      - CODEWHISPERER
+      - COGNITO
+      - COLLECT_CUSTOM_METRICS
+      - CONFIG
+      - CONNECT
+      - CRAWL_ALARMS
+      - DIRECTCONNECT
+      - DMS
+      - DOCUMENTDB
+      - DYNAMODB
+      - DYNAMODBACCELERATOR
+      - EBS
+      - EC2
+      - EC2API
+      - EC2SPOT
+      - ECR
+      - ECS
+      - EFS
+      - ELASTICACHE
+      - ELASTICBEANSTALK
+      - ELASTICINFERENCE
+      - ELASTICTRANSCODER
+      - ELB
+      - EMR
+      - ES
+      - FIREHOSE
+      - FSX
+      - GAMELIFT
+      - GLOBALACCELERATOR
+      - GLUE
+      - INSPECTOR
+      - IOT
+      - KEYSPACES
+      - KINESIS
+      - KINESIS_ANALYTICS
+      - KMS
+      - LAMBDA
+      - LEX
+      - MEDIACONNECT
+      - MEDIACONVERT
+      - MEDIALIVE
+      - MEDIAPACKAGE
+      - MEDIASTORE
+      - MEDIATAILOR
+      - MEMORYDB
+      - ML
+      - MQ
+      - MSK
+      - MWAA
+      - NAT_GATEWAY
+      - NEPTUNE
+      - NETWORK_ELB
+      - NETWORKFIREWALL
+      - NETWORKMONITOR
+      - OPENSEARCHSERVERLESS
+      - OPSWORKS
+      - POLLY
+      - PRIVATELINKENDPOINTS
+      - PRIVATELINKSERVICES
+      - RDS
+      - RDSPROXY
+      - REDSHIFT
+      - REKOGNITION
+      - ROUTE53
+      - ROUTE53RESOLVER
+      - S3
+      - S3STORAGELENS
+      - SAGEMAKER
+      - SAGEMAKERENDPOINTS
+      - SAGEMAKERLABELINGJOBS
+      - SAGEMAKERMODELBUILDINGPIPELINE
+      - SAGEMAKERPROCESSINGJOBS
+      - SAGEMAKERTRAININGJOBS
+      - SAGEMAKERTRANSFORMJOBS
+      - SAGEMAKERWORKTEAM
+      - SERVICE_QUOTAS
+      - SES
+      - SHIELD
+      - SNS
+      - SQS
+      - STEP_FUNCTIONS
+      - STORAGE_GATEWAY
+      - SWF
+      - TEXTRACT
+      - TRANSITGATEWAY
+      - TRANSLATE
+      - TRUSTED_ADVISOR
+      - USAGE
+      - VPN
+      - WAF
+      - WAFV2
+      - WORKSPACES
+      - XRAY
     AWSTagFilter:
       description: A tag filter.
       properties:
@@ -25129,18 +25451,25 @@ paths:
       x-undo:
         type: safe
     post:
-      description: Set an AWS tag filter.
+      description: Set an AWS tag filter for a specific AWS account and namespace.
+        Before setting a tag filter, ensure that you have queried the available AWS
+        namespaces by using `api_instance.list_available_aws_namespaces()`.
       operationId: CreateAWSTagFilter
       requestBody:
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/AWSTagFilterCreateRequest'
-        description: 'Set an AWS tag filter using an `aws_account_identifier`, `namespace`,
-          and filtering string.
+        description: 'Set an AWS tag filter by providing the following parameters:
 
-          Namespace options are `application_elb`, `elb`, `lambda`, `network_elb`,
-          `rds`, `sqs`, and `custom`.'
+
+          - `account_id`: The identifier for your AWS account.
+
+          - `namespace`: The namespace to filter. Query the available namespaces using
+          `api_instance.list_available_aws_namespaces()` to determine the appropriate
+          options.
+
+          - `tag_filter_str`: The filtering criteria as a string.'
         required: true
       responses:
         '200':
