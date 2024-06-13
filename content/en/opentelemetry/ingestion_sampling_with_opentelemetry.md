@@ -44,7 +44,7 @@ Choose this method if you prefer a simpler setup without the need for a separate
 
 ## Reducing ingestion volume
 
-With OpenTelemetry, you can configure sampling both in the OpenTelemetry libraries and in the OpenTelemetry Collector: 
+With OpenTelemetry, you can configure sampling both in the OpenTelemetry libraries and in the OpenTelemetry Collector:
 
 - **Head-based sampling** in the OpenTelemetry SDKs
 - **Tail-based sampling** in the OpenTelemetry Collector
@@ -87,7 +87,7 @@ See the [ingestion volume control guide][8] for information about the implicatio
 
 ### Probabilistic sampling
 
-When using Datadog Agent OTLP ingest, a probabilistic sampler is available starting with Agent 7.54.0. 
+When using Datadog Agent OTLP ingest, a probabilistic sampler is available starting with Agent 7.54.0.
 
 #### Configuring
 
@@ -102,9 +102,13 @@ To configure probabilistic sampling, do one of the following:
     probabilistic_sampler:
         enabled: true
         sampling_percentage: 50 #In this example, 50% of traces are captured.
+        hash_seed: 22 #A seed used for the hash algorithm. This must match other agents and OTel
   ```
 
-If you use a mixed setup of Datadog tracing libraries and OTel SDKs, probabilistic sampling will apply to spans originating from both Datadog and OTel tracing libraries.
+**If you use a mixed setup of Datadog tracing libraries and OTel SDKs**:
+
+- Probabilistic sampling will apply to spans originating from both Datadog and OTel tracing libraries.
+- Set the same seed between Datadog agent (`DD_APM_PROBABILISTIC_SAMPLER_HASH_SEED`) and OTel collector (`hash_seed`) to ensure consistent sampling
 
 <div class="alert alert-warning"><code>DD_OTLP_CONFIG_TRACES_PROBABILISTIC_SAMPLER_SAMPLING_PERCENTAGE</code> is deprecated and has been replaced by <code>DD_APM_PROBABILISTIC_SAMPLER_SAMPLING_PERCENTAGE</code>.</div>
 
