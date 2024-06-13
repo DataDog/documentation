@@ -47,7 +47,7 @@ Daily Datadog costs gives you visibility into daily Datadog spending across dash
 
 {{< img src="cloud_cost/datadog_costs/dashboard.png" alt="Datadog costs as an option for the Cloud Cost data source in a dashboard" style="width:100%;" >}}
 
-Datadog cost data is available in dashboards and notebooks under the **Cloud Costs** data source.
+Datadog cost data is available in dashboards and notebooks under the **Cloud Costs** data source. You can create dashboards to monitor your daily costs, identify trends, and optimize resource usage. 
 
 ## Break down costs
 
