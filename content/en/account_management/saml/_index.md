@@ -1,6 +1,5 @@
 ---
 title: Single Sign On With SAML
-kind: documentation
 aliases:
   - /guides/saml
 further_reading:

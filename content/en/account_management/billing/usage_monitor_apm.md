@@ -1,6 +1,5 @@
 ---
 title: View and Alert on APM Usage
-kind: documentation
 ---
 
 Datadog has many pricing plans to fit your needs. For more information, see the [Pricing page][1].
