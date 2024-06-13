@@ -18,7 +18,7 @@ Database Monitoring provides deep visibility into your Microsoft SQL Server data
 Do the following steps to enable Database Monitoring with your database:
 
 1. [Grant the Agent access to the database](#grant-the-agent-access)
-2. [Install the Agent](#install-the-agent)
+2. [Install and configure the Agent](#install-and-configure-the-agent)
 3. [Install the Azure integration](#install-the-azure-integration)
 
 ## Before you begin
@@ -122,7 +122,7 @@ For [SQL Server on Windows Azure VM][1] follow the [Setting Up Database Monitori
 
 {{< /tabs >}}
 
-## Install the Agent
+## Install and configure the Agent
 
 Because Azure does not grant direct host access, the Datadog Agent must be installed on a separate host where it is able to talk to the SQL Server host. There are several options for installing and running the Agent.
 

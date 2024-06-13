@@ -15,7 +15,7 @@ The Agent collects telemetry directly from the database by logging in as a read-
 
 1. [Configure database parameters](#configure-mysql-settings)
 1. [Grant the Agent access to the database](#grant-the-agent-access)
-1. [Install the Agent](#install-the-agent)
+1. [Install and configure the Agent](#install-and-configure-the-agent)
 1. [Install the Cloud SQL Integration](#install-the-cloud-sql-integration)
 
 ## Before you begin
@@ -168,7 +168,7 @@ echo -e "\033[0;31mMissing REPLICATION CLIENT grant\033[0m"
 ```
 
 
-## Install the Agent
+## Install and configure the Agent
 
 To monitor Cloud SQL hosts, install the Datadog Agent in your infrastructure and configure it to connect to each instance remotely. The Agent does not need to run on the database, it only needs to connect to it. For additional Agent installation methods not mentioned here, see the [Agent installation instructions][4].
 

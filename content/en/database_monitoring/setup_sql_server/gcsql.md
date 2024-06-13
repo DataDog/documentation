@@ -15,7 +15,7 @@ Database Monitoring provides deep visibility into your Microsoft SQL Server data
 Complete the following steps to enable Database Monitoring with your database:
 
 1. [Grant the Agent access to the database](#grant-the-agent-access)
-2. [Install the Agent](#install-the-agent)
+2. [Install and configure the Agent](#install-and-configure-the-agent)
 3. [Install the Cloud SQL integration](#install-the-cloud-sql-integration)
 
 ## Before you begin
@@ -47,7 +47,7 @@ CREATE USER datadog FOR LOGIN datadog;
 
 This is required because Google Cloud SQL does not permit granting `CONNECT ANY DATABASE`. The Datadog Agent needs to connect to each database to collect database-specific file I/O statistics.
 
-## Install the Agent
+## Install and configure the Agent
 
 Google Cloud does not grant direct host access, meaning the Datadog Agent must be installed on a separate host where it is able to talk to the SQL Server host. There are several options for installing and running the Agent.
 
@@ -241,8 +241,8 @@ Complete the following steps to install the [Datadog Cluster Agent][1] on your K
             port: 1433
             username: datadog
             password: '<PASSWORD>'
-            connector: "odbc"
-            driver: "ODBC Driver 18 for SQL Server"
+            connector: 'odbc'
+            driver: 'ODBC Driver 18 for SQL Server'
             tags:  # Optional
               - 'service:<CUSTOM_SERVICE>'
               - 'env:<CUSTOM_ENV>'
