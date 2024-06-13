@@ -27,9 +27,9 @@ Esta guía muestra cómo delimitar adecuadamente los tiempos de Inactividad a tr
 
 ## Elige qué monitors silenciar
 
-Define a qué monitores quieres que apunte el tiempo de inactividad. Hay tres opciones diferentes: apuntar a un monitor específico, a varios monitores o a todos los monitores.
+Define a qué monitores quieres asignar el tiempo de inactividad. Hay tres opciones diferentes: asignarlo a un monitor específico, a varios monitores o a todos los monitores.
 
-### Apuntar a un monitor específico
+### Seleccionar un monitor específico
 
 Puedes optar por silenciar temporalmente un monitor específico. Por ejemplo, si el monitor está enviando muchas alertas en ese momento o si es el único monitor afectado por un eventual mantenimiento.
 
@@ -41,11 +41,11 @@ En la configuración del tiempo de inactividad, selecciona **Por nombre de monit
 
 Los tiempos de inactividad en monitores pueden programarse en función de tus etiquetas de monitor y luego delimitarse mediante las etiquetas agrupadas en la consulta del monitor. Selecciona `By monitor Tags` e introduce las etiquetas del monitor que quieres seleccionar.
 
-**Nota**: Las etiquetas son aditivas, lo que significa que una entrada de `env:dev team:automations` se dirigirá a monitores que tengan **ambas** etiquetas: `env:dev` Y `team:automations`.
+**Nota**: Las etiquetas son aditivas, lo que significa que una entrada de `env:dev team:automations` se asignará a monitores que tengan **ambas** etiquetas: `env:dev` Y `team:automations`.
 
-### Apuntar a todos los monitores
+### Seleccionar todos los monitores
 
-Para ambas opciones, `By monitor Name` o `By monitor Tags`, puedes optar por apuntar a todos los monitores seleccionando el primer elemento del menú desplegable etiquetado como `All monitors`.
+Para ambas opciones, `By monitor Name` o `By monitor Tags`, puedes optar por asignarlas a todos los monitores seleccionando el primer elemento del menú desplegable etiquetado como `All monitors`.
 
 ## Delimitar tiempos de inactividad de forma granular
 
