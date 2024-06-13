@@ -35,7 +35,7 @@ Asegúrate de que la opción Test Visibility [Visibilidad de pruebas][1] está c
 
 ### Configuración
 
-Después de configurar Visibilidad de pruebas, puedes configurar Reintentos automáticos de pruebas desde la [página Configuración del servicio de pruebas][2].
+Después de configurar Visibilidad de pruebas, puedes configurar Auto Test Retries (Reintentos automáticos de pruebas) desde la página Test Service Settings [Configuración del servicio de pruebas][2].
 
 {{< img src="continuous_integration/auto_test_retries_test_settings.png" alt="Reintentos automáticos de pruebas en Configuración del servicio de pruebas." style="width:100%" >}}
 
@@ -47,11 +47,11 @@ Este comportamiento se puede ajustar con las siguientes variables de entorno:
 
 ## Explorar los resultados en el Explorador de visibilidad de pruebas
 
-Puedes consultar las pruebas reintentadas en el [Explorador de visibilidad de pruebas][4]: tienen la etiqueta (tag) `@test.is_retry` establecida en `true` (algunas de ellas también pueden tener la etiqueta `@test.is_new` establecida en `true`, lo que indica que la función [Detección temprana de defectos][5] las ha reintentado).
+Puedes consultar las pruebas reintentadas en el Test Visibility Explorer [Explorador de visibilidad de pruebas][4]: tienen la etiqueta (tag) `@test.is_retry` establecida en `true` (algunas de ellas también pueden tener la etiqueta `@test.is_new` establecida en `true`, lo que indica que la función [Detección temprana de defectos][5] las ha reintentado).
 
 ## Solucionar problemas
 
-Si crees que hay algún problema con Reintentos automáticos de pruebas, ve a la [página Configuración del servicio de pruebas][2], busca tu servicio de pruebas y haz clic en **Configure** (Configurar). Haz clic en el icono de interruptor para desactivar Reintentos automáticos de pruebas.
+Si crees que hay algún problema con Reintentos automáticos de pruebas, ve a la página [Configuración del servicio de pruebas][2], busca tu servicio de pruebas y haz clic en **Configure** (Configurar). Haz clic en el icono de interruptor para desactivar Reintentos automáticos de pruebas.
 
 ## Referencias adicionales
 
