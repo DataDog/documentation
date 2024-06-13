@@ -30,21 +30,67 @@ The App Editor modal appears, allowing you to select an app and provide it with 
 
 ## Sync your app with dashboard template and time frame variables
 
-You can link your app to template variables anywhere that supports template expressions in your queries or app elements. Use the following code snippet as an example, replacing `<TEMPLATE_VARIABLE_NAME>` and `<DEFAULT_VALUE>` with the template variable name and default value, respectively. Paste the snippet into your template expression.
+You can link your app to template variables anywhere that supports template expressions in your queries or app elements.
 
-**Note**: If you want to leave an element (such as a search field) blank by default, you can set the default value to an empty string (`""`) or `undefined`.
+To populated a select component with a list of all available template variables, add the following template expression to your select component's **Options** field:
 
-{{< code-block lang="json" disable_copy="false" collapsible="false" >}}
-${self.options?.find(o => o.value.includes(global.dashboard.templateVariables?.find(v => v.name === '<TEMPLATE_VARIABLE_NAME>')?.value)) || 'DEFAULT_VALUE'}
+{{< code-block lang="json" disable_copy="false">}}
+${global?.dashboard?.templateVariables?.map(tvar => tvar.name )}
 {{< /code-block >}}
 
-You can also link your app to the time frame that is selected on your dashboard. Paste the following code snippet into your template expression:
+To list all of the available values of a specific template variable, use the following template expression:
 
-{{< code-block lang="json" disable_copy="false" collapsible="false" >}}
-${global.dashboard.timeframe}
+{{< code-block lang="json" disable_copy="false">}}
+${global?.dashboard?.templateVariables?.find(v => v.name === '<TEMPLATE_VARIABLE_NAME>')?.availableValues}
 {{< /code-block >}}
 
-You can also access specific values of `timeframe`, such as `start` and `end`, using dot notation (for example,`${global.dashboard.timeframe.start}`).
+To get the selected value of a template variable, use the following template expressions:
+
+- For a single-select template variable:
+   {{< code-block lang="json" disable_copy="false">}}
+${global?.dashboard?.templateVariables?.find(v => v.name === '<TEMPLATE_VARIABLE_NAME>')?.value}
+{{< /code-block >}}
+- For a multi-select template variable:
+   {{< code-block lang="json" disable_copy="false">}}
+${global?.dashboard?.templateVariables?.find(v => v.name === '<TEMPLATE_VARIABLE_NAME>')?.values}
+{{< /code-block >}}
+
+You can also link your app to the time frame that is selected on your dashboard.
+
+To get the time frame start value, use the following template expressions:
+
+- For the timestamp:
+   {{< code-block lang="json" disable_copy="false">}}
+${global?.dashboard?.timeframe?.start}
+{{< /code-block >}}
+- For a formatted date and time:
+   {{< code-block lang="json" disable_copy="false">}}
+${new Date(global?.dashboard?.timeframe?.start).toLocaleString()}
+{{< /code-block >}}
+
+To get the time frame end value, use the following template expressions:
+
+- For the timestamp:
+   {{< code-block lang="json" disable_copy="false">}}
+${global?.dashboard?.timeframe?.end}
+{{< /code-block >}}
+- For a formatted date and time:
+   {{< code-block lang="json" disable_copy="false">}}
+${new Date(global?.dashboard?.timeframe?.end).toLocaleString()}
+{{< /code-block >}}
+
+To add a button that sets the value of a date range picker component to the time frame of the dashboard, perform the following steps:
+
+1. Add a date range picker component to your app and name it "dateRangePicker0".
+1. Add a button to your app. Under **Events**, fill in the following values:
+    - **Event**: click
+    - **Reaction**: Set Component State
+    - **Component**: dateRangePicker0
+    - **State Function**: setValue
+    - **Value**: `${global?.dashboard?.timeframe}`
+1. Save and publish your app.
+
+
 
 ### Scope your app dynamically
 
