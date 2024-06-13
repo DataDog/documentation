@@ -28,7 +28,7 @@ kind: documentation
 title: Page Service
 ---
 
-{{< img src="tracing/visualization/service/overview_service_page_1.png" alt="Page Service détaillée" style="width:100%;">}}
+{{< img src="tracing/visualization/service/overview_service_page.png" alt="Page Service détaillée" style="width:100%;">}}
 
 ## Présentation
 
@@ -58,11 +58,11 @@ Activez-les directement ou créez vos propres [monitors APM][3].
 
 Le carrousel [Watchdow Insights][7] affiche les anomalies et singularités qui ont été détectées pour certains tags. Vous pouvez ainsi déterminer la cause à l'origine d'un problème. Les insights proviennent des solutions APM et Log Management, du profileur en continu et des données d'infrastructure comportant le tag service. Ces insights sont identiques à celles qui s'affichent sur la page de chaque produit. Par exemple, les singularités de log affichées sur la page Service sont les mêmes que celles représentées dans le [Log Explorer][19].
 
-{{< img src="tracing/visualization/service/cross_product_insight_2.jpg" alt="Watchdog Insights" style="width:100%;">}}
+{{< img src="tracing/visualization/service/cross-product-insight.jpg" alt="Watchdog Insights" style="width:100%;">}}
 
 Cliquez sur une insight pour afficher plus de détails, notamment l'intervalle, les logs ou traces associés et les prochaines étapes suggérées.
 
-{{< img src="tracing/visualization/service/watchdog_details_1.jpg" alt="Détails de Watchdog Insights" style="width:100%;">}}
+{{< img src="tracing/visualization/service/watchdog-details.jpg" alt="Détails de Watchdog Insights" style="width:100%;">}}
 
 ## Fiches récapitulatives
 
@@ -110,7 +110,7 @@ Consultez les graphiques sur les requêtes, la latence et les erreurs répartis 
 
 Sous les graphiques se trouve la liste des [ressources][11] associées à votre service. Triez les ressources de ce service par requête, latence, erreur et durée pour identifier les zones à trafic élevé ou les problèmes potentiels. Sachez que ces colonnes de métrique peuvent être personnalisées (voir l'image ci-dessous).
 
-{{< img src="tracing/visualization/service/resources_tab_1.jpg" alt="Ressources" style="width:100%;">}}
+{{< img src="tracing/visualization/service/resources_tab.jpg" alt="Ressources" style="width:100%;">}}
 
 Cliquez sur une ressource pour afficher dans un volet latéral les graphiques prêts à l'emploi (sur les requêtes, les erreurs et la latence) pour la ressource, une carte des dépendances des ressources et un tableau récapitulatif des spans. Utilisez les touches directionnelles du clavier pour passer d'une ressource à une autre dans la liste **Resources** et comparer les ressources d'un service. Pour afficher toutes les informations sur les ressources, cliquez sur **Open Full Page**.
 
@@ -152,7 +152,7 @@ Vous avez la possibilité d'ajouter des colonnes ou d'en supprimer. Vos sélecti
 * Nombre total d'erreurs.
 * Latence mesurée au p50, p75, p90, p95 ou p99, ou latence maximale.
 
-{{< img src="tracing/visualization/service/deployments_1.png" alt="Déploiements" style="width:90%;">}}
+{{< img src="tracing/visualization/service/deployments.png" alt="Déploiements" style="width:90%;">}}
 
 Pour en savoir plus sur les déploiements, consultez [la page Service][12].
 
@@ -161,7 +161,7 @@ Cet onglet affiche les problèmes constatés sur votre service. En regroupant le
 
 Cet onglet comporte des graphiques généraux indiquant les ressources les plus problématiques ainsi que la liste des problèmes les plus courants rencontrés dans votre service. Cliquez sur un problème de la liste pour afficher dans un volet latéral sa stack trace, les versions de code associées ou encore le nombre total d'occurrences d'erreurs depuis sa création.
 
-{{< img src="tracing/visualization/service/error_tracking_side_panel_1.jpg" alt="Onglet Error Tracking" style="width:90%;">}}
+{{< img src="tracing/visualization/service/error_tracking_side_panel.jpg" alt="Onglet Error Tracking" style="width:90%;">}}
 
 ### Sécurité
 Déterminez la posture de sécurité de votre service, en identifiant notamment les vulnérabilités connues exposées dans les bibliothèques du service. Analysez également les signaux de sécurité qui sont créés automatiquement lorsque Datadog détecte une attaque à l'encontre de votre application qui nuit à vos services. Les signaux vous révèlent les menaces conséquentes et vous évitent d'avoir à évaluer chaque tentative d'attaque. Pour en savoir plus, consultez la documentation relative à [Application Security Management][18].
@@ -170,7 +170,7 @@ La section supérieure de l'onglet Security contient des graphiques généraux q
 
 La section suivante du volet répertorie l'ensemble des vulnérabilités et signaux concernant le service. Cliquez sur une vulnérabilité de sécurité pour ouvrir un volet latéral contenant des détails pertinents. Ce volet vous permet d'approfondir votre analyse et de corriger la vulnérabilité. Cliquez sur un signal de sécurité pour obtenir des informations à propos de la menace détectée et découvrir des mesures à prendre pour y répondre.
 
-{{< img src="tracing/visualization/service/security_tab_1.jpg" alt="Sécurité" style="width:90%;">}}
+{{< img src="tracing/visualization/service/security_tab.jpg" alt="Sécurité" style="width:90%;">}}
 
 ### Infrastructure
 Si votre service s'exécute sur Kubernetes, l'onglet Infrastructure est disponible sur la page Service. Le tableau Kubernetes Pods fournit des informations détaillées en temps réel sur vos pods. Il indique par exemple si l'utilisation de la mémoire est proche de sa limite. Il vous permet également de savoir si les ressources de calcul provisionnées dépassent la valeur requise pour optimiser les performances de l'application. Vous pouvez ainsi optimiser l'allocation des ressources.
@@ -179,14 +179,14 @@ Si votre service s'exécute sur Kubernetes, l'onglet Infrastructure est disponib
 
 La section Kubernetes Metrics présente un résumé global de la santé de votre infrastructure pour une période donnée. Elle contient notamment des métriques sur le CPU, la mémoire, le réseau et le disque.
 
-{{< img src="tracing/visualization/service/infra_metrics_1.png" alt="Kubernetes Metrics" style="width:90%;">}}
+{{< img src="tracing/visualization/service/infra_metrics.png" alt="Kubernetes Metrics" style="width:90%;">}}
 
 Pour les environnements autres que Kubernetes (par exemple une installation basée sur un host), consultez la [documentation relative au tagging de service unifié][13].
 
 ### Métriques runtime
 Si les métriques runtime sont activées dans le client de tracing, un onglet correspondant au langage du runtime de votre service s'affiche. Pour en savoir plus, consultez la section [Métriques runtime][14].
 
-{{< img src="tracing/visualization/service/runtime_metrics_1.png" alt="Métriques runtime" style="width:90%;">}}
+{{< img src="tracing/visualization/service/runtime_metrics.png" alt="Métriques runtime" style="width:90%;">}}
 
 ### Profiling
 L'onglet Profiling s'affiche si le [Pprofileur en continu][15] est configuré pour votre service. En haut de l'onglet sont affichées des informations récapitulatives, notamment les versions disponibles et le langage du runtime. En dessous figure les métriques de profiling par défaut selon la version, l'endpoint et la méthode. Elles vous permettent d'identifier et de débugger les méthodes gourmandes en ressources. Cliquez sur n'importe quel graphique pour afficher les traces, les logs et d'autres données associés, ou ouvrez un flamegraph pour analyser le profil du code. [En savoir plus sur APM et le profileur en continu][15].
@@ -196,12 +196,12 @@ L'onglet Profiling s'affiche si le [Pprofileur en continu][15] est configuré po
 ### Traces
 L'onglet Traces présente la liste des traces associées au service, avec un filtre basé sur votre service, votre environnement et le nom de l'opération. Accédez aux spans problématiques à l'aide de [facettes][16] de base représentant le statut, la ressource ou encore le type d'erreur. Cliquez sur une span pour afficher un flamegraph de sa trace et obtenir plus de détails.
 
-{{< img src="tracing/visualization/service/traces_1.png" alt="Traces" style="width:90%;">}}
+{{< img src="tracing/visualization/service/traces.png" alt="Traces" style="width:90%;">}}
 
 ### Logs
 Cet onglet présente les patterns courants dans les logs de votre service. Pour filtrer la liste des patterns, utilisez des facettes représentant le statut dans la barre de recherche. Cliquez sur un pattern pour afficher des informations, comme les événements qui ont déclenché la cascade, dans un volet latéral. Pour en savoir plus, consultez l'article sur les [patterns de log] [17] (en anglais).
 
-{{< img src="tracing/visualization/service/log_patterns_1.png" alt="Patterns de log" style="width:90%;">}}
+{{< img src="tracing/visualization/service/log_patterns.png" alt="Patterns de log" style="width:90%;">}}
 
 ## Pour aller plus loin
 
