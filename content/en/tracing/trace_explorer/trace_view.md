@@ -68,17 +68,19 @@ Groups can be sorted by clicking on the corresponding column header: **RESOURCE*
 {{% /tab %}}
 {{% tab "Waterfall" %}}
 
-{{< img src="tracing/trace_view/waterfall.png" alt="Waterfall" style="width:90%;">}}
+{{< img src="tracing/trace_view/waterfall2.png" alt="Waterfall" style="width:100%;">}}
 
-Displays all the spans for an associated trace, color-coded on separate rows and on a timeline. This visualization is useful for isolating and focusing on relevant parts of a trace.
+Displays all spans for a trace on a timeline where each row corresponds to a span. This visualization is useful for isolating and focusing on relevant parts of a trace.
 
-On each row (that is, per span):
-* A bar (colored by service), whose length corresponds to the percentage of total trace duration
-* The service name, operation name, and resource name, with font styling: **service** operation <span style="color:gray">resource</span>
-* Absolute and relative span duration information
-* (when applicable) An error icon or HTTP status code
+Each row (span) indicates the following:
 
-To expand or collapse span descendants, click the plus or minus button on any row. To expand all spans, click the plus button to the left of the timescale.
+- **Relative span duration**: The length of the color-coded bar corresponds to the percentage of total trace duration.
+- **Absolute span duration**: The absolute time in milliseconds (ms).
+- **Span details**: The corresponding service name, operation name, and resource name are displayed.
+- **Statuses**: When applicable, an HTTP status code is displayed.
+- **Color coding**: Spans are color-coded by service (default), host, or container. To change how spans are color-coded, use the **Color by** dropdown.
+
+To expand or collapse span descendants, click the chevron (>) icon on a row. To expand or collapse all spans, click the **Expand all** (+) or **Collapse all** (-) buttons.
 
 {{% /tab %}}
 {{% tab "Map" %}}
