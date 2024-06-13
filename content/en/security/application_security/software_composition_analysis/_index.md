@@ -1,6 +1,5 @@
 ---
 title: Software Composition Analysis
-kind: documentation
 aliases:
   - /security/application_security/risk_management/
   - /security/application_security/vulnerability_management/

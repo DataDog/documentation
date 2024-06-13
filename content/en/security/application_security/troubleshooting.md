@@ -1,6 +1,5 @@
 ---
 title: Troubleshooting Application Security Management
-kind: documentation
 aliases:
   - /security_platform/application_security/troubleshooting
 further_reading:
