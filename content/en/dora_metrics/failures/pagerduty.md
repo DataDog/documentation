@@ -59,12 +59,12 @@ When an incident event is received for a specific [PagerDuty service][3], Datado
 
 The matching algorithm works in the following scenarios:
 
-1. If the incident service URL matches with the PagerDuty service URL configured for one or more services in the Service Catalog. For more information on setting the PagerDuty service URL for a Datadog service, see [Use Integrations with Service Catalog][6]. In this scenario:
+1. If the incident service URL matches with the PagerDuty service URL configured for one or more services in the Service Catalog (for more information on setting the PagerDuty service URL for a Datadog service, see [Use Integrations with Service Catalog][6]):
    - If the incident service URL matches a single Datadog service, the incident metrics and events are emitted with the Datadog service name and team retrieved from Service Catalog.
    - If the incident service URL matches multiple Datadog services, the incident metrics and events are emitted with the Datadog team name.
-3. If the PagerDuty service name of the incident matches a Datadog service name in the Service Catalog. In this scenario, the incident metrics and events are emitted with the Datadog service name and team retrieved from Service Catalog.
-4. If the PagerDuty team name of the incident matches a Datadog team name in the Service Catalog. In this scenario, the incident metrics and events are emitted with the corresponding Datadog team name.
-5. If the PagerDuty service name of the incident matches a Datadog team name in the Service Catalog. In this scenario, the incident metrics and events are emitted with the Datadog team name.
+2. If the PagerDuty service name of the incident matches a Datadog service name in the Service Catalog, the incident metrics and events are emitted with the Datadog service name and team retrieved from Service Catalog.
+3. If the PagerDuty team name of the incident matches a Datadog team name in the Service Catalog, the incident metrics and events are emitted with the corresponding Datadog team name.
+4. If the PagerDuty service name of the incident matches a Datadog team name in the Service Catalog, the incident metrics and events are emitted with the Datadog team name.
 
 ## Further Reading
 
