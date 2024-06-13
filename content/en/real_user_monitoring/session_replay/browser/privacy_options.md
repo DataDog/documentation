@@ -138,4 +138,3 @@ Datadog is working to add more privacy features to RUM & Session Replay. Have so
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes
-[2]: /real_user_monitoring/session_replay/browser/privacy_options/#override-an-html-element
