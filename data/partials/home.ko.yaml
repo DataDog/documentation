@@ -11,7 +11,7 @@ guides:
   link: getting_started/application/
   link_text: Datadog 시작하기
   title: App에서 시작하기
-heading: Datadog에 오신 것을 환영합니다!
+heading: Welcome to Datadog Docs!
 nav_sections:
 - nav_section:
   - name: 플랫폼 서비스
@@ -46,7 +46,7 @@ nav_sections:
       title: 모바일 애플리케이션
     - desc: 위험 요소가 있는 조직의 인시던트 식별, 분석 및 완화
       icon: incidents
-      link: 서비스_관리/인시던트_관리
+      link: service_management/incident_management
       title: '인시던트 관리 '
     - desc: 애플리케이션 및 인프라스트럭처에서 중요한 변경 사항 및 알림을 추적합니다.
       icon: events
