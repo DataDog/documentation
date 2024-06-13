@@ -87,7 +87,7 @@ See the [ingestion volume control guide][8] for information about the implicatio
 
 ### Probabilistic sampling
 
-When using Datadog Agent OTLP ingest, a probabilistic sampler is available starting with Agent 7.54.0.
+When using Datadog Agent OTLP ingest, a probabilistic sampler is available starting with Agent v7.54.0.
 
 #### Configuring
 
@@ -108,7 +108,7 @@ To configure probabilistic sampling, do one of the following:
 **If you use a mixed setup of Datadog tracing libraries and OTel SDKs**:
 
 - Probabilistic sampling will apply to spans originating from both Datadog and OTel tracing libraries.
-- If you send spans both to the Datadog Agent **and** OTel collector instances, set the same seed between Datadog agent (`DD_APM_PROBABILISTIC_SAMPLER_HASH_SEED`) and OTel collector (`hash_seed`) to ensure consistent sampling
+- If you send spans both to the Datadog Agent **and** OTel collector instances, set the same seed between Datadog Agent (`DD_APM_PROBABILISTIC_SAMPLER_HASH_SEED`) and OTel collector (`hash_seed`) to ensure consistent sampling.
 
 <div class="alert alert-warning"><code>DD_OTLP_CONFIG_TRACES_PROBABILISTIC_SAMPLER_SAMPLING_PERCENTAGE</code> is deprecated and has been replaced by <code>DD_APM_PROBABILISTIC_SAMPLER_SAMPLING_PERCENTAGE</code>.</div>
 
@@ -142,4 +142,4 @@ If the ingestion volume is higher than expected, consider adjusting your samplin
 [13]: https://app.datadoghq.com/dash/integration/apm_estimated_usage
 [14]: /opentelemetry/guide/migration/
 [15]: /opentelemetry/interoperability/otlp_ingest_in_the_agent/?tab=host
-[16]: tracing/trace_pipeline/ingestion_mechanisms#head-based-sampling
+[16]: /tracing/trace_pipeline/ingestion_mechanisms#head-based-sampling
