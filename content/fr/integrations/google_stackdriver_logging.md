@@ -18,7 +18,7 @@ integration_id: google-stackdriver-logging
 integration_title: Google Cloud Logging
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: google_stackdriver_logging
 public_title: "Intégration Datadog/Google\_Cloud\_Logging"

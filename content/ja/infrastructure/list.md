@@ -18,7 +18,7 @@ title: インフラストラクチャーリスト
 
 ## 概要
 
-インフラストラクチャーリストには、Datadog によって監視されているすべてのホストが、過去 2 時間 (デフォルト) のアクティビティとともに最大 1 週間分表示されます。ホストを検索するか、タグでグループ化します。
+インフラストラクチャーリストには、Datadog によって監視されているすべてのホストが、過去 2 時間 (デフォルト) のアクティビティとともに最大 1 週間分表示されます。ホストを検索するか、タグでグループ化します。Datadog で [**Infrastructure > Hosts**][10] に移動してインフラストラクチャーリストを表示します。
 
 ## ホスト
 
@@ -152,7 +152,8 @@ for host in infra['rows']:
 [3]: /ja/metrics/
 [4]: /ja/infrastructure/livecontainers/?tab=helm#overview
 [5]: /ja/logs/
-[6]: /ja/agent/guide/agent-configuration-files/
+[6]: /ja/agent/configuration/agent-configuration-files/
 [7]: /ja/api/v1/hosts/#get-the-total-number-of-active-hosts
 [8]: /ja/developers/guide/query-the-infrastructure-list-via-the-api/
 [9]: https://github.com/DataDog/Miscellany/tree/master/get_hostname_agentversion
+[10]: https://app.datadoghq.com/infrastructure

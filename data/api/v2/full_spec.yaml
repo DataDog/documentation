@@ -6238,7 +6238,7 @@ components:
           type: string
         finished_at:
           description: Unix timestamp in nanoseconds when the incident finished. It
-            should not be older than 3 hours.
+            should not be older than 1 hour.
           example: 1693491984000000000
           format: int64
           type: integer
@@ -10578,6 +10578,52 @@ components:
         project_key:
           description: Jira project key
           type: string
+      type: object
+    ListAPIsResponse:
+      description: Response for `ListAPIs`.
+      properties:
+        data:
+          description: List of API items.
+          items:
+            $ref: '#/components/schemas/ListAPIsResponseData'
+          type: array
+        meta:
+          $ref: '#/components/schemas/ListAPIsResponseMeta'
+      type: object
+    ListAPIsResponseData:
+      description: Data envelope for `ListAPIsResponse`.
+      properties:
+        id:
+          $ref: '#/components/schemas/ApiID'
+        name:
+          description: API name.
+          example: Payments API
+          type: string
+      type: object
+    ListAPIsResponseMeta:
+      description: Metadata for `ListAPIsResponse`.
+      properties:
+        pagination:
+          $ref: '#/components/schemas/ListAPIsResponseMetaPagination'
+      type: object
+    ListAPIsResponseMetaPagination:
+      description: Pagination metadata information for `ListAPIsResponse`.
+      properties:
+        limit:
+          description: Number of items in the current page.
+          example: 20
+          format: int64
+          type: integer
+        offset:
+          description: Offset for pagination.
+          example: 0
+          format: int64
+          type: integer
+        total_count:
+          description: Total number of items.
+          example: 35
+          format: int64
+          type: integer
       type: object
     ListApplicationKeysResponse:
       description: Response for a list of application keys.
@@ -23291,6 +23337,8 @@ components:
             apm_service_catalog_read: View service catalog and service definitions.
             apm_service_catalog_write: Add, modify, and delete service catalog definitions
               when those definitions are maintained by Datadog.
+            cases_read: View Cases.
+            cases_write: Create and update cases.
             ci_visibility_pipelines_write: Create CI Visibility pipeline spans using
               the API.
             ci_visibility_read: View CI Visibility.
@@ -23584,6 +23632,66 @@ paths:
       x-menu-order: 2
       x-undo:
         type: idempotent
+  /api/v2/apicatalog/api:
+    get:
+      description: List APIs and their IDs.
+      operationId: ListAPIs
+      parameters:
+      - description: Filter APIs by name
+        in: query
+        name: query
+        required: false
+        schema:
+          example: payments
+          type: string
+      - description: Number of items per page.
+        in: query
+        name: page[limit]
+        required: false
+        schema:
+          default: 20
+          format: int64
+          minimum: 1
+          type: integer
+      - description: Offset for pagination.
+        in: query
+        name: page[offset]
+        required: false
+        schema:
+          default: 0
+          format: int64
+          minimum: 0
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListAPIsResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: List APIs
+      tags:
+      - API Management
+      x-menu-order: 4
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/apicatalog/api/{id}:
     delete:
       description: Delete a specific API by ID.
@@ -23621,7 +23729,7 @@ paths:
       summary: Delete an API
       tags:
       - API Management
-      x-menu-order: 4
+      x-menu-order: 5
       x-undo:
         type: idempotent
       x-unstable: '**Note**: This endpoint is in public beta.

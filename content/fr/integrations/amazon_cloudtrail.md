@@ -18,7 +18,7 @@ integration_id: amazon-cloudtrail
 integration_title: AWS CloudTrail
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: amazon_cloudtrail
 public_title: Intégration Datadog/AWS CloudTrail

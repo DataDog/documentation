@@ -16,7 +16,7 @@ integration_id: ''
 integration_title: AWS 스토리지 게이트웨이
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: amazon_storage_gateway
 public_title: Datadog-AWS 스토리지 게이트웨이 통합

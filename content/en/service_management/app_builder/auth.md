@@ -8,8 +8,8 @@ description: Access and authentication for App builder
 <div class="alert alert-warning">App Builder is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-{{< callout url="https://www.datadoghq.com/dg/datadog-app-builder/" btn_hidden="false" header="Join the Beta!">}}
-Datadog App Builder is in private beta. Complete the form to request access.
+{{< callout url="" btn_hidden="true" header="Try the Beta!">}}
+App Builder is in beta. Access it from the <a href="https://app.datadoghq.com/app-builder/">App Builder</a> page in Datadog.
 {{< /callout >}}
 
 A few tools control access and authentication for apps and their components.
