@@ -16,10 +16,6 @@ aliases:
 
 This article provides step-by-step instructions for enabling [Cloud Security Management (CSM)][6].
 
-## Prerequisites
-
-- Datadog Agent version `7.46` or later.
-
 ## Select CSM features
 
 Datadog provides a guided workflow for enabling CSM. The first step is to select the features you want to enable. Start by clicking **Get Started with Cloud Security Management** on the [Overview][9] page to access the **Features** page. 
@@ -46,15 +42,11 @@ Next, select the features you want to enable. After making your selections, clic
 
 After confirming your selections, the [Setup][3] page is displayed. The page customizes the instructions to match the features you selected.
 
-**PLACEHOLDER FOR SCREENSHOT**
+*The Setup page also serves as a status checker for available features (Active, Not Configured, *Enable) 
 
-For detailed setup instructions, see the following articles:
+{{< img src="security/csm/settings_page.png" alt="CSM Settings page" width="100%">}}
 
-- [Enabling Cloud Security Management for Cloud Accounts][2]
-- [Enabling Cloud Security Management on the Agent][1]
-- [AWS Fargate Configuration Guide for Datadog Security][7]
-- [Enabling Source Code Integrations for IAC Remediation][8]
-- [Setting up CSM Agentless Scanning][4]
+**Note**: For instructions for setting up Agentless Scanning, see [Setting up CSM Agentless Scanning][4].
 
 ### Cloud accounts
 
@@ -67,6 +59,8 @@ To enable resource scanning for your cloud accounts, set up the AWS, Azure, or G
 **Available for**: Threat Detection &#124; Host Vulnerability Management 	&#124; Container Vulnerability Management
 
 Select your infrastructure type for detailed instructions on how to enable CSM on hosts and containers.
+
+[Enabling Cloud Security Management on the Agent][1]
 
 {{< partial name="csm/csm-agent-tiles.html" >}}
 

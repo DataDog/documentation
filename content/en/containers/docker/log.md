@@ -197,7 +197,7 @@ environment:
 
 - Logs coming from container `Stderr` have a default status of `Error`.
 
-- If using the _journald_ logging driver instead of Docker's default json-file logging driver, see the [journald integration documentation][2] for details regarding the setup for containerized environments. See the [journald filter units documentation][2] for more information on parameters for filtering.
+- If using the _journald_ logging driver instead of Docker's default json-file logging driver, see the [journald umentation][2] for details regarding the setup for containerized environments. See the [journald filter units documentation][2] for more information on parameters for filtering.
 
 
 ## Log integrations

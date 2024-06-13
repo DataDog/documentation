@@ -8,6 +8,12 @@ code_lang_weight: 80 # a number that represents relative weight. 
 
 Use the following instructions to enable [CSM Misconfigurations][1], [CSM Threats][2], and [CSM Vulnerabilities][3] on Linux. To learn more about the supported deployment types for each CSM feature, see [Setting Up Cloud Security Management][4].
 
+## Prerequisites
+
+- Datadog Agent version `7.46` or later.
+
+## Installation
+
 For a package-based deployment, install the Datadog package with your package manager, and then update the `datadog.yaml`, `security-agent.yaml`, and `system-probe.yaml` files.
 
 You can also use the [Agent install script][5] to automatically enable CSM Misconfigurations and CSM Threats:

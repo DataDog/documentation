@@ -8,6 +8,12 @@ code_lang_weight: 65 # a number that represents relative weight. 
 
 Use the following instructions to enable [CSM Misconfigurations][1] and [CSM Threats][2] on Docker. To learn more about the supported deployment types for each CSM feature, see [Setting Up Cloud Security Management][3].
 
+## Prerequisites
+
+- Datadog Agent version `7.46` or later.
+
+## Installation
+
 The following command starts the Runtime Security Agent and `system-probe` in a Docker environment:
 
 {{< code-block lang="shell" filename="docker-runtime-security.sh" >}}

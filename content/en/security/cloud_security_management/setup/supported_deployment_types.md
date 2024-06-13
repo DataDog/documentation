@@ -5,33 +5,31 @@ kind: documentation
 
 The following table summarizes the CSM features available relative to each deployment type.
 
-<div class="alert alert-info">For more details, click each of the CSM feature headings to review additional requirements for that feature.</div>
-
-| Deployment type     | Agent Required (7.46+) | CSM Misconfigurations | [CSM Threats][1] | [CSM Vulnerabilities][2] | [CSM Identity Risks][3] | [CSM Agentless Scanning][4] |
-|---------------------|------------------------|-----------------------|------------------|--------------------------|--------------------------|------------------------------|
-| Docker              | {{< X >}}              | {{< X >}}             | {{< X >}}        |                          |                          |                              |
-| Kubernetes          | {{< X >}}              | {{< X >}}             | {{< X >}}        | {{< X >}}                |                          |                              |
-| Linux               | {{< X >}}              | {{< X >}}             | {{< X >}}        | {{< X >}}                |                          |                              |
-| Amazon ECS/EKS      | {{< X >}}              | {{< X >}}             | {{< X >}}        | {{< X >}}                |                          |                              |
-| AWS Account         |                        | {{< X >}}             |                  |                          | {{< X >}}                | beta                         |
-| Azure Account       |                        | {{< X >}}             |                  |                          | {{< X >}}                |                              |
-| GCP Account         |                        | {{< X >}}             |                  |                          |                          |                              |
-| Windows             | {{< X >}}              |                       | {{< X >}}        |                          |                          |                              |
-| AWS Fargate ECS/EKS | {{< X >}}              |                       | beta             |                          |                          |                              |
-| Terraform           |                        |                       |                  |                          |                          | beta                         |
+| Deployment type     | Agent Required (7.46+) | CSM Misconfigurations | CSM Threats | CSM Vulnerabilities | CSM Identity Risks | CSM Agentless Scanning |
+|---------------------|------------------------|-----------------------|-------------|---------------------|--------------------|------------------------|
+| AWS Account         |                        | {{< X >}}             |             |                     | {{< X >}}          | beta                   |
+| Azure Account       |                        | {{< X >}}             |             |                     | {{< X >}}          |                        |
+| GCP Account         |                        | {{< X >}}             |             |                     |                    |                        |
+| Terraform           |                        |                       |             |                     |                    | beta                   |
+| Docker              | {{< X >}}              | {{< X >}}             | {{< X >}}   |                     |                    |                        |
+| Kubernetes          | {{< X >}}              | {{< X >}}             | {{< X >}}   | {{< X >}}           |                    |                        |
+| Linux               | {{< X >}}              | {{< X >}}             | {{< X >}}   | {{< X >}}           |                    |                        |
+| Amazon ECS/EKS      | {{< X >}}              | {{< X >}}             | {{< X >}}   | {{< X >}}           |                    |                        |
+| Windows             | {{< X >}}              |                       | {{< X >}}   |                     |                    |                        |
+| AWS Fargate ECS/EKS | {{< X >}}              |                       | beta        |                     |                    |                        |
 
 The following table summarizes the scope of coverage available relative to each CSM feature.
-| Resources monitored                        | CSM Misconfigurations | CSM Threats | CSM Vulnerabilities  | CSM Identity Risks | CSM Agentless scanning |
-| ----------------------------------------| --------------------- | ----------- | -------------------- | ------------------- | ----------------------| 
-| Resources in AWS Account                | {{< X >}}             |             |                      |                     |  {{< X >}}
-| Resources in Azure Subscription         | {{< X >}}             |             |                      |                     | 
-| Resources in GCP Project                | {{< X >}}             |             |                      |                     |  
-| Kubernetes Cluster                      | {{< X >}}             | {{< X >}}   |                      |                     |  
-| Docker Host                             | {{< X >}}             |             |                      |                     |
-| Linux Host                              | {{< X >}}             | {{< X >}}   |    {{< X >}}         |                     |  {{< X >}}
-| Docker Container                        |                       | {{< X >}}   |                      |                     |
-| Container Image                         |                       |             |    {{< X >}}         |                     |  {{< X >}}
-| IAM in AWS Account                      |                       |             |                      |  {{< X >}}          |
+| Resources monitored             | CSM Misconfigurations | CSM Threats | CSM Vulnerabilities | CSM Identity Risks | CSM Agentless scanning |
+|---------------------------------|-----------------------|-------------|---------------------|--------------------|------------------------|
+| Resources in AWS Account        | {{< X >}}             |             |                     |                    | {{< X >}}              |
+| Resources in Azure Subscription | {{< X >}}             |             |                     |                    |                        |
+| Resources in GCP Project        | {{< X >}}             |             |                     |                    |                        |
+| Kubernetes Cluster              | {{< X >}}             | {{< X >}}   |                     |                    |                        |
+| Docker Host                     | {{< X >}}             |             |                     |                    |                        |
+| Linux Host                      | {{< X >}}             | {{< X >}}   | {{< X >}}           |                    | {{< X >}}              |
+| Docker Container                |                       | {{< X >}}   |                     |                    |                        |
+| Container Image                 |                       |             | {{< X >}}           |                    | {{< X >}}              |
+| IAM in AWS Account              |                       |             |                     | {{< X >}}          |                        |
 
 **Note**: CSM Misconfigurations additionally monitors common resources used in your cloud accounts that are running Windows and AWS Fargate, such as EC2 instances, RDS, S3, and ELB.
 

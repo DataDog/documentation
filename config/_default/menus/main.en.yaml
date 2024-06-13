@@ -4565,11 +4565,6 @@ menu:
       parent: csm_setup
       identifier: csm_setup_source_code_integrations
       weight: 10017
-    - name: Agent Variables
-      url: security/cloud_security_management/setup/agent_variables
-      parent: csm_setup
-      identifier: csm_setup_agent_variables
-      weight: 10018
     - name: Threats
       url: security/threats/
       parent: csm

@@ -8,6 +8,12 @@ code_lang_weight: 70 # a number that represents relative weight. 
 
 Use the following instructions to enable [CSM Misconfigurations][1], [CSM Threats][2], and [CSM Vulnerabilities][3] on your ECS EC2 instances. To learn more about the supported deployment types for each CSM feature, see [Setting Up Cloud Security Management][4].
 
+## Prerequisites
+
+- Datadog Agent version `7.46` or later.
+
+## Installation
+
 Add the following environment variables to your `datadog-agent` container definition:
 
 ```json

@@ -1,5 +1,5 @@
 ---
-title: Enabling Cloud Security Management on Serverless
+title: AWS Fargate Configuration Guide for Datadog Security
 kind: documentation
 ---
 
