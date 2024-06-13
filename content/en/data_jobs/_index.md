@@ -46,7 +46,7 @@ Datadog monitors send alerts when a job fails, or is running beyond its completi
 
 Click on a job to see how it performed across multiple runs, as well as error messages for failed runs.
 
-{{< img src="data_jobs/djm_job_062024.png" alt="Example" style="width:100%;" >}}
+{{< img src="data_jobs/djm_job_062024.png" alt="Job Overview page for 'product-insights' Spark Application job" style="width:100%;" >}}
 
 ### Analyze an individual run
 
