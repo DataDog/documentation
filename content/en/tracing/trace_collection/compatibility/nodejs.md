@@ -26,7 +26,7 @@ Versioning of the Datadog Node.js tracing library follows [semver][1]. When a ne
 | Functionality changes incompatible with previous versions. | Functionality additions                                                 | |
 | Dropping support for anything such as Node.js versions, supported libraries, or other features.     | Adding tested support for anything, such as Node.js versions, supported libraries, or other features.   |  |
 
-When a release has changes that could go in multiple semver categories, the highest one is chosen.  [Release notes][2] are posted with each GitHub release.
+When a release has changes that could go in multiple semver categories, the highest one is chosen. [Release notes][2] are posted with each GitHub release.
 
 ### Maintenance
 
@@ -88,7 +88,7 @@ For details about how to how to toggle and configure plugins, check out the [API
 
 #### Complex framework usage
 
-Some modern complex Node.js frameworks, such as Next.js and Nest.js, provide their own entry-point into an application. For example, instead of running `node app.js`, you may need to run `next start`. In these cases, the entry point is a file that ships in the framework package, not a local application file  (`app.js`).
+Some modern complex Node.js frameworks, such as Next.js and Nest.js, provide their own entry-point into an application. For example, instead of running `node app.js`, you may need to run `next start`. In these cases, the entry point is a file that ships in the framework package, not a local application file (`app.js`).
 
 Loading the Datadog tracer early in your application code isn't effective because the framework could have already loaded modules that should be instrumented.
 
