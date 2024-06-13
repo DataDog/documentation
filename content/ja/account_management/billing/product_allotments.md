@@ -1,5 +1,5 @@
 ---
-kind: ドキュメント
+kind: documentation
 title: Product Allotments
 ---
 
