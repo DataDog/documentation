@@ -9,7 +9,6 @@ further_reading:
 - link: /agent/troubleshooting/agent_check_status/
   tag: Agent のトラブルシューティング
   text: Agent チェックのステータスを確認
-kind: documentation
 title: デバッグモード
 ---
 

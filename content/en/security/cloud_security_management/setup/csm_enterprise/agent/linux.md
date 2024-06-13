@@ -1,6 +1,5 @@
 ---
 title: Enabling CSM Enterprise on Linux
-kind: documentation
 code_lang: linux
 type: multi-code-lang
 code_lang_weight: 80 # a number that represents relative weight. 

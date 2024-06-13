@@ -12,7 +12,6 @@ further_reading:
 - link: agent/faq/agent_v6_changes
   tag: FAQ
   text: 에이전트 v6 변경 사항
-kind: 설명서
 title: 에이전트 버전 차이
 ---
 

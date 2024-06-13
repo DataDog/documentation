@@ -1,7 +1,6 @@
 ---
 dependencies:
 - https://github.com/DataDog/chef-datadog/blob/main/README.md
-kind: 설명서
 title: Chef
 ---
 Datadog Chef 레시피는 Datadog의 구성과 구성 요소를 자동으로 배포하는 데 사용됩니다. 쿡북에는 다음과 같은 지원 서비스가 포함됩니다.

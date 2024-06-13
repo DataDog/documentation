@@ -1,6 +1,5 @@
 ---
 title: Network Traffic
-kind: guide
 aliases:
     - /account_management/faq/what-are-the-required-ip-s-and-ports-i-need-open-to-connect-to-the-datadog-service
     - /account_management/faq/can-i-whitelist-the-ip-addresses-for-data-coming-from-datadog-via-webhook-and-integrations
