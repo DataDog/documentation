@@ -27,7 +27,7 @@ kind: documentation
 title: サービス詳細画面
 ---
 
-{{< img src="tracing/visualization/service/overview_service_page.png" alt="サービス詳細画面" style="width:100%;">}}
+{{< img src="tracing/visualization/service/overview_service_page_1.png" alt="サービス詳細画面" style="width:100%;">}}
 
 ## 概要
 
@@ -56,13 +56,13 @@ Datadog は、サービスタイプに応じてモニターのリストを提案
 
 ## Watchdog Insights
 
-[Watchdog Insights][7] カルーセルでは、特定のタグで検出された異常と外れ値が表示され、問題の根本原因を調査することができます。インサイトは、サービスタグを含む APM、Continuous Profiler、ログ管理、インフラストラクチャーのデータから発見されます。これらのインサイトは、各製品ページに表示されるインサイトと同じです。たとえば、サービスページのログの外れ値と同じものが、[ログエクスプローラー][19]に表示されます。 
+[Watchdog Insights][7] カルーセルでは、特定のタグで検出された異常と外れ値が表示され、問題の根本原因を調査することができます。インサイトは、サービスタグを含む APM、Continuous Profiler、ログ管理、インフラストラクチャーのデータから発見されます。これらのインサイトは、各製品ページに表示されるインサイトと同じです。たとえば、サービスページのログの外れ値と同じものが、[ログエクスプローラー][19]に表示されます。
 
-{{< img src="tracing/visualization/service/cross-product-insight.jpg" alt="Watchdog インサイト" style="width:100%;">}}
+{{< img src="tracing/visualization/service/cross_product_insight_1.jpg" alt="Watchdog インサイト" style="width:100%;">}}
 
 インサイトをクリックすると、インサイトの時間枠、関連するログやトレース、次のステップの候補などの詳細が表示されます。
 
-{{< img src="tracing/visualization/service/watchdog-details.jpg" alt="Watchdog インサイトの詳細" style="width:100%;">}}
+{{< img src="tracing/visualization/service/watchdog_details_1.jpg" alt="Watchdog インサイトの詳細" style="width:100%;">}}
 
 ## サマリーカード
 
@@ -123,7 +123,7 @@ Datadog は、特定のサービスに対して[すぐに使用できるグラ�
 
 下には、サービスに関連する[リソース][11]のリストがあります。このサービスのリソースをリクエスト、レイテンシー、エラー、時間でソートし、トラフィックの多いエリアや潜在的な問題を特定します。なお、これらのメトリクス列は構成することができます (下の画像を参照)。
 
-{{< img src="tracing/visualization/service/resources_tab.jpg" alt="リソース" style="width:100%;">}}
+{{< img src="tracing/visualization/service/resources_tab_1.jpg" alt="リソース" style="width:100%;">}}
 
 リソースをクリックすると、サイドパネルが開き、リソースのすぐに使えるグラフ (リクエスト、エラー、レイテンシーについて)、リソース依存マップ、スパン要約表が表示されます。キーボードのナビゲーションキーを使用して、**Resources** リスト上のリソースを切り替えたり、サービス内のリソースを比較したりできます。完全なリソースページを表示するには、**Open Full Page** をクリックします。
 
@@ -165,7 +165,7 @@ Datadog は、特定のサービスに対して[すぐに使用できるグラ�
 * エラー総数。
 * p50、p75、p90、p95、p99、または最大で計測されたレイテンシー。
 
-{{< img src="tracing/visualization/service/deployments.png" alt="デプロイメント" style="width:90%;">}}
+{{< img src="tracing/visualization/service/deployments_1.png" alt="デプロイメント" style="width:90%;">}}
 
 サービス詳細画面のデプロイメントについてご覧ください。
 
@@ -174,16 +174,16 @@ Datadog は、特定のサービスに対して[すぐに使用できるグラ�
 
 このタブには、どのリソースに最も多くの問題があるかを示す概要グラフと、サービスで発生する最も一般的な問題のリストがあります。リスト内の問題をクリックすると、サイドパネルにそのスタックトレース、関連するコードのバージョン、開始以来のエラーの総発生数などの詳細が表示されます。
 
-{{< img src="tracing/visualization/service/error_tracking_side_panel.jpg" alt="Error Tracking タブ" style="width:90%;">}}
+{{< img src="tracing/visualization/service/error_tracking_side_panel_1.jpg" alt="Error Tracking タブ" style="width:90%;">}}
 
 ### セキュリティ
 サービスのライブラリに存在する既知の脆弱性や、サービス上のセキュリティシグナルなど、サービスのセキュリティポスチャを理解できます。セキュリティシグナルは、Datadog がサービスに影響を与えるアプリケーション攻撃を検知した際に自動的に生成されます。これらのシグナルは、個々の攻撃の試みをそれぞれ評価する代わりに、ユーザーが確認すべき重要な脅威を特定します。[アプリケーションセキュリティ][18]の詳細を参照してください。
 
-セキュリティタブのトップセクションには、脆弱性の数と重大性、攻撃の時期、攻撃の種類、攻撃者情報 (クライアント IP または認証済みユーザー) を示す概要グラフが表示されます。 
+セキュリティタブのトップセクションには、脆弱性の数と重大性、攻撃の時期、攻撃の種類、攻撃者情報 (クライアント IP または認証済みユーザー) を示す概要グラフが表示されます。
 
 パネルの次のセクションには、サービスに関係するすべての脆弱性とシグナルが一覧表示されます。任意のセキュリティ脆弱性をクリックすると、関連情報が記されたサイドパネルが開き、脆弱性に関するさらなる調査と修復を実行できます。セキュリティシグナルをクリックすると、どのような脅威が検出されたか、そして修復のためにどのような対応が可能かについての情報を入手できます。
 
-{{< img src="tracing/visualization/service/security_tab.jpg" alt="セキュリティ" style="width:90%;">}}
+{{< img src="tracing/visualization/service/security_tab_1.jpg" alt="セキュリティ" style="width:90%;">}}
 
 ### インフラストラクチャー
 サービスが Kubernetes 上で実行されている場合、サービス詳細画面に Infrastructure タブが表示されます。ライブ Kubernetes Pods テーブルには、メモリ使用量が限界に近づいているかどうかなど、ポッドの詳細情報が表示されます。これにより、プロビジョニングされたコンピュートリソースが最適なアプリケーションパフォーマンスに必要なものを超えているかを明確に確認することによって、リソース割り当てを改善することが可能です。
@@ -192,14 +192,14 @@ Datadog は、特定のサービスに対して[すぐに使用できるグラ�
 
 Kubernetes Metrics セクションは、選択した期間のインフラストラクチャーの健全性の要約を示し、CPU、メモリ、ネットワーク、およびディスクメトリクスを含みます。
 
-{{< img src="tracing/visualization/service/infra_metrics.png" alt="Kubernetes メトリクス" style="width:90%;">}}
+{{< img src="tracing/visualization/service/infra_metrics_1.png" alt="Kubernetes メトリクス" style="width:90%;">}}
 
 Kubernetes 以外の環境 (ホストベースのインストールなど) については、[統合サービスタグ付けのドキュメント][13]をご覧ください。
 
 ### ランタイムメトリクス
 トレースクライアントでランタイムメトリクスが有効になっている場合、サービスのランタイム言語に対応する Runtime metrics タブが表示されます。詳しくは、[ランタイムメトリクス][14]をご覧ください。
 
-{{< img src="tracing/visualization/service/runtime_metrics.png" alt="ランタイムメトリクス" style="width:90%;">}}
+{{< img src="tracing/visualization/service/runtime_metrics_1.png" alt="ランタイムメトリクス" style="width:90%;">}}
 
 ### プロファイリング
 サービスに [Continuous Profiler][15] が設定されている場合、Profiling タブが表示されます。利用可能なバージョンやランタイム言語などの概要が上部に表示されます。以下は、バージョン、エンドポイント、メソッド別のすぐに使えるプロファイリングメトリクスで、リソースを大量に消費するメソッドの特定とデバッグを支援します。グラフをクリックすると、関連するトレース、ログ、およびその他のデータが表示されます。[APM と Continuous Profiler の詳細についてご確認ください][15]。
@@ -209,12 +209,12 @@ Kubernetes 以外の環境 (ホストベースのインストールなど) に�
 ### トレース
 トレースタブで、サービスに関連するトレースのリストを表示します。トレースは、サービス、環境、および操作名ですでにフィルタリングされています。ステータス、リソース、エラータイプなどのコア[ファセット][16]を使用して、問題のあるスパンをドリルダウンします。詳細については、スパンをクリックすると、そのトレースのフレームグラフや詳細が表示されます。
 
-{{< img src="tracing/visualization/service/traces.png" alt="トレース" style="width:90%;">}}
+{{< img src="tracing/visualization/service/traces_1.png" alt="トレース" style="width:90%;">}}
 
 ### ログ
 サービスのログによくあるパターンを表示し、検索バーのステータスなどのファセットを使用して、パターンのリストをフィルタリングします。パターンをクリックすると、サイドパネルが開き、どのイベントがカスケードを引き起こしたかなど、より詳細な情報を見ることができます。詳しくは、[ログパターン][17]をご覧ください。
 
-{{< img src="tracing/visualization/service/log_patterns.png" alt="ログパターン" style="width:90%;">}}
+{{< img src="tracing/visualization/service/log_patterns_1.png" alt="ログパターン" style="width:90%;">}}
 
 ## その他の参考資料
 

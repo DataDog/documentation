@@ -26,7 +26,7 @@ algolia:
   tags: ['service page']
 ---
 
-{{< img src="tracing/visualization/service/overview_service_page.png" alt="Detailed service page" style="width:100%;">}}
+{{< img src="tracing/visualization/service/overview_service_page_1.png" alt="Detailed service page" style="width:100%;">}}
 
 ## Overview
 
@@ -85,11 +85,11 @@ Enable them directly or create your own [APM monitors][3].
 
 The [Watchdog Insights][7] carousel surfaces anomalies and outliers detected on specific tags, enabling you to investigate the root cause of an issue. Insights are discovered from APM, Continuous Profiler, Log Management, and Infrastructure data that include the service tag. These insights are the same insights that appear in each of the product pages. For example, the same Log outliers on the service page can be found in the [Logs Explorer][19].
 
-{{< img src="tracing/visualization/service/cross-product-insight.jpg" alt="Watchdog Insights" style="width:100%;">}}
+{{< img src="tracing/visualization/service/cross_product_insight_1.jpg" alt="Watchdog Insights" style="width:100%;">}}
 
 Click on an insight to see more details, such as the time frame of the insight, related logs or traces, and suggested next steps.
 
-{{< img src="tracing/visualization/service/watchdog-details.jpg" alt="Watchdog Insights details" style="width:100%;">}}
+{{< img src="tracing/visualization/service/watchdog_details_1.jpg" alt="Watchdog Insights details" style="width:100%;">}}
 
 ## Summary cards
 
@@ -140,7 +140,7 @@ See Requests, Latency, and Error graphs broken down by resource to identify prob
 
 Below, there's a list of [resources][11] associated with your service. Sort the resources for this service by requests, latency, errors, and time, to identify areas of high traffic or potential trouble. Note that these metric columns are configurable (see image below).
 
-{{< img src="tracing/visualization/service/resources_tab.jpg" alt="Resources" style="width:100%;">}}
+{{< img src="tracing/visualization/service/resources_tab_1.jpg" alt="Resources" style="width:100%;">}}
 
 Click on a resource to open a side panel that displays the resource's out-of-the-box graphs (about requests, errors, and latency), a resource dependency map, and a span summary table. Use keyboard navigation keys to toggle between resources on the **Resources** list and compare resources in a service. To view the full resource page, click **Open Full Page**.
 
@@ -182,7 +182,7 @@ You can add columns to or remove columns from this overview table and your selec
 * Total number of Errors.
 * Latency measured by p50, p75, p90, p95, p99, or max.
 
-{{< img src="tracing/visualization/service/deployments.png" alt="Deployments" style="width:90%;">}}
+{{< img src="tracing/visualization/service/deployments_1.png" alt="Deployments" style="width:90%;">}}
 
 Read more about Deployments [on the service page][12].
 
@@ -191,7 +191,7 @@ View issues on your service, which are similar errors aggregated together to tur
 
 This tab has overview graphs that show which resources have the most issues and a list of the most common issues occurring in your service. Click on an issue in the list to see details in a side panel, including its stack trace, related code versions, and total error occurrences since inception.
 
-{{< img src="tracing/visualization/service/error_tracking_side_panel.jpg" alt="Error Tracking tab" style="width:90%;">}}
+{{< img src="tracing/visualization/service/error_tracking_side_panel_1.jpg" alt="Error Tracking tab" style="width:90%;">}}
 
 ### Security
 Understand the security posture of the service, including known vulnerabilities exposed in the service's libraries and security signals on your service, which are automatically created when Datadog detects application attacks impacting your services. The signals identify meaningful threats for you to review instead of assessing each individual attack attempt. Read more about [Application Security][18].
@@ -200,13 +200,13 @@ The top section of the security tab has overview graphs that show the number and
 
 The next section of the panel lists all the vulnerabilities and signals concerning the service. Click on a security vulnerability to open a side panel with relevant details to investigate further and remediate the vulnerability. Click on a security signal to get information about what the detected threat is and what actions you can take to remediate it.
 
-{{< img src="tracing/visualization/service/security_tab.jpg" alt="Security" style="width:90%;">}}
+{{< img src="tracing/visualization/service/security_tab_1.jpg" alt="Security" style="width:90%;">}}
 
 ### Databases
 View the list of downstream database dependencies identified by Database Monitoring and identify latency or load outliers.
 [Learn more about connecting DBM and APM][21].
 
-{{< img src="tracing/visualization/service/databases_tab.png" alt="Databases" style="width:90%;">}}
+{{< img src="tracing/visualization/service/databases_tab_1.png" alt="Databases" style="width:90%;">}}
 
 ### Infrastructure
 If your service is running on Kubernetes, you can see an Infrastructure tab on the Service Page. The live Kubernetes Pods table displays detailed information on your pods, such as if memory usage is close to its limit, and allows you to improve resource allocation by seeing if provisioned compute resources exceed what is required for optimal application performance.
@@ -215,14 +215,14 @@ If your service is running on Kubernetes, you can see an Infrastructure tab on t
 
 The Kubernetes Metrics section contains a high level summary of your infrastructure health for the selected time period, and includes CPU, Memory, Network, and Disk metrics.
 
-{{< img src="tracing/visualization/service/infra_metrics.png" alt="Kubernetes Metrics" style="width:90%;">}}
+{{< img src="tracing/visualization/service/infra_metrics_1.png" alt="Kubernetes Metrics" style="width:90%;">}}
 
 For non-Kubernetes environments (such as host-based installation), see the [Unified Service Tagging documentation][13].
 
 ### Runtime Metrics
 If runtime metrics are enabled in the tracing client, you'll see a Runtime metrics tab corresponding to the runtime language of your service. Read more in [Runtime Metrics][14].
 
-{{< img src="tracing/visualization/service/runtime_metrics.png" alt="Runtime Metrics" style="width:90%;">}}
+{{< img src="tracing/visualization/service/runtime_metrics_1.png" alt="Runtime Metrics" style="width:90%;">}}
 
 ### Profiling
 You'll see a Profiling tab if the [Continuous Profiler][15] is set up for your service.
@@ -235,23 +235,23 @@ In this example, you can see how latency is linked to a lock contention increase
 Thread.sleep(DELAY_BY.minus(elapsed).toMillis());
 ```
 
-{{< img src="profiler/apm_service_page_pivot_to_contention_comparison.mp4" alt="Pivoting from APM service page to Profiling comparison page to find the line of code causing latency" video=true >}}
+{{< img src="profiler/apm_service_page_pivot_to_contention_comparison_1.mp4" alt="Pivoting from APM service page to Profiling comparison page to find the line of code causing latency" video=true >}}
 
 ### Traces
 View the list of traces associated with the service in the traces tab, which is already filtered on your service, environment, and operation name. Drill down to problematic spans using core [facets][16] such as status, resource, and error type. For more information, click a span to view a flame graph of its trace and more details.
 
-{{< img src="tracing/visualization/service/traces.png" alt="Traces" style="width:90%;">}}
+{{< img src="tracing/visualization/service/traces_1.png" alt="Traces" style="width:90%;">}}
 
 ### Log patterns
 View common patterns in your service's logs, and use facets like status in the search bar to filter the list of patterns. Click on a pattern to open the side panel to view more details, such as what events triggered the cascade. Read more in [Log patterns][17].
 
-{{< img src="tracing/visualization/service/log_patterns.png" alt="Log patterns" style="width:90%;">}}
+{{< img src="tracing/visualization/service/log_patterns_1.png" alt="Log patterns" style="width:90%;">}}
 
 ### Costs
 Visualize the cost associate with your service's infrastructure used in the Costs tab.
 [Learn More about Cloud Cost Management][22].
 
-{{< img src="tracing/visualization/service/costs_tab.png" alt="Costs" style="width:90%;">}}
+{{< img src="tracing/visualization/service/costs_tab_1.png" alt="Costs" style="width:90%;">}}
 
 ## Further Reading
 
