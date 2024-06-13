@@ -23,16 +23,18 @@ Try the beta! Vitals are in public beta.
 
 RUM Vitals helps you find the true root cause of browser performance issues based on real user traffic. You can troubleshoot browser metrics, including the [Core Web Vitals][1] (CWV), [Loading Time][2] (Datadog's custom metric that evaluates how long it takes for a page to fully load from the user's perspective), and more. Determine what caused a slow page, with all the relevant information in one place.
 
-To get the most out of this feature, we recommend that you use:
+## Prerequisites
 
-- SDK version 5.4.0 or newer
+To get the most out of this feature, Datadog recommends that you use:
+
+- RUM Browser SDK version 5.4.0 or newer
 - Session Replay for at least some sessions
 
 ## Select a vital
 
 Navigate to the [Vitals page][3], or click the "Vitals" tab under the [**Digital Experience > Performance Monitoring**][4] page.
 
-{{< img src="real_user_monitoring/browser/vitals_performance/vital-ways-to-see-results-1.png" alt="You can check vitals for the top most visited pages or specific pages." style="width:100%;" >}}
+{{< img src="real_user_monitoring/browser/vitals_performance/vitals-page-selectors.png" alt="You can check vitals for the top most visited pages or specific pages." style="width:100%;" >}}
 
 From this view, you have two ways of selecting the page and vital that you can review and optimize:
 
@@ -41,7 +43,7 @@ From this view, you have two ways of selecting the page and vital that you can r
 
 ## Filter and evaluate
 
-Once you've selected a page and vital, you can see insights that explain the measured vital for the selected view.
+Once you've selected a page and vital, you can see insights that explain their performance.
 
 From here, you can:
 
@@ -56,7 +58,7 @@ From here, you can:
 
 The next part of the page helps you visualize exactly what your users are experiencing.
 
-Based on the selected time period and traffic, RUM Vitals highlights the most typical example of what users see on the page when the selected vital is captured. If you use [Session Replay][5], this is where you'll see a visual of the page.
+Based on the selected time period and traffic, RUM Vitals highlights the most typical example of what users see on the page when the selected vital is captured. If you use [Session Replay][5], this is where you see a visual of the page.
 
 For some vitals, you can also select other versions of the page to investigate by clicking "See a different element".
 
