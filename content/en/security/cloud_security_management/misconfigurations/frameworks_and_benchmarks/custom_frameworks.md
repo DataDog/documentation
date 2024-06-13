@@ -1,6 +1,5 @@
 ---
 title: Create Custom Compliance Frameworks
-kind: documentation
 aliases:
   - /security/misconfigurations/frameworks_and_benchmarks/custom_frameworks
 further_reading:
@@ -15,16 +14,28 @@ further_reading:
   text: "Search and explore misconfigurations"
 ---
 
-Create your own compliance framework by adding a custom tag to the compliance rules you wish to track. This enables you to filter the misconfigurations on the [Misconfigurations issue explorer][1] by the custom tag. You can also clone the **Cloud Security Management - Misconfigurations Overview** dashboard and [configure a template variable][2] for the custom tag to dynamically filter the widgets on the dashboard.
+This article provides step-by-step instructions for creating custom compliance frameworks.
 
-1. On the [**Misconfiguration Rules**][5] page, select the rule you wish to add the custom tag to.
-2. Under **Say what's happening**, navigate to the **Tag resulting misconfigurations with** section and add the `key:value` for the custom tag.
-3. Click **Update Rule**.
+1. On the [CSM Compliance page][6], click **Create Framework**.
+1. Enter the following details:
+    - **Framework name**: The name of your framework. Can include characters, numbers, and spaces. Must be at least five characters long.
+    - **Handle**: The tag name for the custom framework. Can include lowercase letters, numbers, dashes, underscores, and periods.
+    - **Version**: The version of the framework. Can include lowercase letters, numbers, dashes, underscores, and periods.
+    - **Image URL**: A publicly accessible URL for an image that will be used to identify the framework.
+1. Click **Next Step: Create Your Framework**.
 
-**Notes**:
+Next, add requirements to the framework:
 
-- `framework`, `requirement`, and `control` are reserved keys and cannot be used in custom tags. See [Custom Rules][3] for more information.
-- You can also add custom tags to rules using the [Update an existing rule API endpoint][4].
+<div class="alert alert-warning">You must add at least one requirement before you can save the custom framework.</div>
+
+1. Click **Add Requirement**.
+1. Enter the following details:
+    - **Requirement**: A requirement acts as a control family, enabling you to add controls and associate rules with each control.
+    - **Control**: A control represents the criteria that the requirement must meet and includes the rules associated with these criteria.
+1. To add additional items:
+    - For another control, click **Add Control**.
+    - For another requirement, click **Add Requirement**.
+1. Click **Save**.
 
 ## Further reading
 
@@ -35,3 +46,4 @@ Create your own compliance framework by adding a custom tag to the compliance ru
 [3]: /security/cloud_security_management/misconfigurations/custom_rules/#tagging-misconfigurations
 [4]: /api/latest/security-monitoring/#update-an-existing-rule
 [5]: https://app.datadoghq.com/security/configuration/compliance/rules
+[6]: https://app.datadoghq.com/security/compliance/home
