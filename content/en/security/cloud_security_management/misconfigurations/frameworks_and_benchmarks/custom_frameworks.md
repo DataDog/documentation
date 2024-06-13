@@ -32,10 +32,15 @@ Next, add requirements to the framework:
 1. Enter the following details:
     - **Requirement**: A requirement acts as a control family, enabling you to add controls and associate rules with each control.
     - **Control**: A control represents the criteria that the requirement must meet and includes the rules associated with these criteria.
+1. Click **Add Rules**.
+1. Select the cloud or infrastructure rules you want to assign to the control, then click **Add to Control**.
 1. To add additional items:
+    - For additional rules, click **Add Rules**.
     - For another control, click **Add Control**.
     - For another requirement, click **Add Requirement**.
 1. Click **Save**.
+
+<div class="alert alert-info">To remove a rule from a control, hover over the rule and click <strong>Remove Rule</strong>.</div>
 
 ## Further reading
 
