@@ -23,7 +23,9 @@ Follow these steps to enable Data Jobs Monitoring for Databricks.
 ### Configure the Datadog-Databricks integration
 
 1. In your Databricks workspace, go to **Settings** > **Developer**. Next to **Access tokens**, click **Manage**.
-1. Click **Generate new token**, enter a comment, and click **Generate**. Take note of your token.
+1. Click **Generate new token**, enter a comment, leave the Lifetime as empty and click **Generate**. Take note of your token.
+1. As an alternative, follow [the guide][10] to generate access token for a [service principal][11].
+1. Ensure the account generating the token has [CAN VIEW][9] access for Databricks Jobs you want to monitor and the token is configured to never expire.
 1. In Datadog, open the Databricks integration tile.
 1. On the **Configure** tab, click **Add New**.
 1. Enter a workspace name, your Databricks workspace URL, and the Databricks token you generated.
@@ -191,3 +193,6 @@ In Datadog, view the [Data Jobs Monitoring][6] page to see a list of all your Da
 [6]: https://app.datadoghq.com/data-jobs/
 [7]: /data_jobs
 [8]: https://docs.databricks.com/api/workspace/jobs/submit
+[9]: https://docs.databricks.com/en/security/auth-authz/access-control/index.html#job-acls
+[10]: https://docs.databricks.com/en/admin/users-groups/service-principals.html#manage-personal-access-tokens-for-a-service-principal
+[11]: https://docs.databricks.com/en/admin/users-groups/service-principals.html#what-is-a-service-principal
