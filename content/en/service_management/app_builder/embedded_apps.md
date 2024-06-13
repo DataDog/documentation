@@ -32,6 +32,11 @@ The App Editor modal appears, allowing you to select an app and provide it with 
 
 You can link your app to template variables anywhere that supports template expressions in your queries or app elements. You can also link your app to the time frame that is selected on your dashboard.
 
+App elements that are linked with dashboard template variables or time frame update in tandem with the values of the template variables or time frame on the dashboard. For example, selecting a particular `instance_id` value through the template variable dropdown or directly from a graph adds the `instance_id` value to the app's filter as well, so that you can take any necessary actions on that instance:
+
+{{< img src="service_management/app_builder/embedded_apps/template_variables.mp4" alt="Selecting a template variable value from a graph" video="true">}}
+
+
 ### Template variable examples
 
 To populated a select component with a list of all available template variables, add the following template expression to your select component's **Options** field:
@@ -91,14 +96,6 @@ To add a button that sets the value of a date range picker component to the time
     - **State Function**: setValue
     - **Value**: `${global?.dashboard?.timeframe}`
 1. Save and publish your app.
-
-
-
-### Scope your app dynamically
-
-App elements that are linked with dashboard template variables or time frame update in tandem with the values of the template variables or time frame on the dashboard. For example, selecting a particular `instance_id` value through the template variable dropdown or directly from a graph adds the `instance_id` value to the app's filter as well, so that you can take any necessary actions on that instance:
-
-{{< img src="service_management/app_builder/embedded_apps/template_variables.mp4" alt="Selecting a template variable value from a graph" video="true">}}
 
 ## Further reading
 
