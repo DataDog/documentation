@@ -554,7 +554,7 @@
       - repo_name: datadog-agent
         contents:
         - action: pull-and-push-file
-          branch: main
+          branch: stefon.simmons/rm-kind-sec-threats
           globs:
             - "pkg/config/config_template.yaml"
           options:
