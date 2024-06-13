@@ -88,15 +88,18 @@ For details about how to how to toggle and configure plugins, check out the [API
 
 #### Complex framework usage
 
-Some modern complex Node.js frameworks, such as Next.js and Nest.js, provide their own entry-point into an application. Instead of running something like `node app.js` they instead recommend running something like `next start`. In this case the entry point changes from a local application file, `app.js`, to a file that ships in the framework package. In this case it doesn't matter how early in your application code you load the tracer. By the time your application code runs the framework has already loaded modules that should have already been instrumented by the tracer. A different approach needs to be taken to load the tracer before the framework loads.
+Some modern complex Node.js frameworks, such as Next.js and Nest.js, provide their own entry-point into an application. For example, instead of running `node app.js`, you may need to run `next start`. In these cases, the entry point is a file that ships in the framework package, not a local application file  (`app.js`).
 
-The tracer can be loaded before any framework code by modifying the command used to start the application. One way to do this is to prefix all commands you run with an environment variable:
+Loading the Datadog tracer early in your application code isn't effective because the framework could have already loaded modules that should be instrumented.
 
-```sh
+To load the tracer before the framework, use one of the following methods:
+
+Prefix all commands you run with an environment variable:
+
+```shell
 NODE_OPTIONS='--require dd-trace/init' npm start
-```
 
-Another way to achieve this is to modify the `package.json` file if you typically start an application with npm or yarn run scripts:
+Or, modify the `package.json` file if you typically start an application with npm or yarn run scripts:
 
 ```plain
     // existing command
@@ -107,7 +110,7 @@ Another way to achieve this is to modify the `package.json` file if you typicall
     "start": "NODE_OPTIONS='--require dd-trace/initialize' ./node_modules/next start",
 ```
 
-This example assumes you're using the Next.js framework but the same pattern applies to Nest.js and likely other frameworks as well. Feel free to adapt it for your situation. Either command should work however note that using `NODE_OPTIONS` should also apply to any child Node.js processes as well.
+**Note**: The previous examples use Next.js, but the same approach applies to other frameworks with custom entry points, such as Nest.js. Adapt the commands to fit your specific framework and setup. Either command should work, but using `NODE_OPTIONS`  also applies to any child Node.js processes.
 
 
 ### Native module compatibility
