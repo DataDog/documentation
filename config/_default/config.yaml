@@ -82,8 +82,10 @@ module:
        target: static/fonts/iconfont.woff2
      - source: static/fonts/iconfont.woff
        target: static/fonts/iconfont.woff
-     - source: data/
-       target: data/
+     - source: data
+       target: data
+     - source: i18n
+       target: i18n
 
    - path: github.com/DataDog/websites-sources
      disabled: false
