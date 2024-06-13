@@ -40,7 +40,7 @@ Cloud Cost Management provides insights for engineering and finance teams to und
 
 {{< img src="cloud_cost/overview.png" alt="Gain insights into your cloud provider's cost and usage on the Cloud Costs Overview page in Datadog" style="width:100%;" >}}
 
-Datadog ingests your cloud cost data and transforms them into metrics that you can use in a search query on the [**Analytics** page][1]. If costs rise, you can correlate the increase with usage metrics to determine the root cause.
+Datadog ingests your cloud cost data and transforms it into metrics you can use in a search query on the [**Analytics** page][1]. If costs rise, you can correlate the increase with usage metrics to determine the root cause.
 
 ## Setup
 
@@ -231,7 +231,7 @@ You can create tag rules to correct missing or incorrect tags and add inferred t
 
 Proactively manage and optimize your cloud spending by creating a [Cloud Cost Monitor][3]. You can choose **Cost Changes** or **Cost Threshold** to monitor your cloud expenses.
 
-{{< img src="cloud_cost/monitor.png" alt="Create a Cloud Cost monitor that alerts on changes in your cost" style="width:100%;" >}}
+{{< img src="cloud_cost/monitor.png" alt="Create a Cloud Cost monitor that alerts on cost changes" style="width:100%;" >}}
 
 ## Allocate costs
 
