@@ -30,7 +30,9 @@ The App Editor modal appears, allowing you to select an app and provide it with 
 
 ## Sync your app with dashboard template and time frame variables
 
-You can link your app to template variables anywhere that supports template expressions in your queries or app elements.
+You can link your app to template variables anywhere that supports template expressions in your queries or app elements. You can also link your app to the time frame that is selected on your dashboard.
+
+### Template variable examples
 
 To populated a select component with a list of all available template variables, add the following template expression to your select component's **Options** field:
 
@@ -55,11 +57,11 @@ ${global?.dashboard?.templateVariables?.find(v => v.name === '<TEMPLATE_VARIABLE
 ${global?.dashboard?.templateVariables?.find(v => v.name === '<TEMPLATE_VARIABLE_NAME>')?.values}
 {{< /code-block >}}
 
-You can also link your app to the time frame that is selected on your dashboard.
+### Time frame examples
 
 To get the time frame start value, use the following template expressions:
 
-- For the timestamp:
+- For the numerical timestamp:
    {{< code-block lang="json" disable_copy="false">}}
 ${global?.dashboard?.timeframe?.start}
 {{< /code-block >}}
@@ -70,7 +72,7 @@ ${new Date(global?.dashboard?.timeframe?.start).toLocaleString()}
 
 To get the time frame end value, use the following template expressions:
 
-- For the timestamp:
+- For the numerical timestamp:
    {{< code-block lang="json" disable_copy="false">}}
 ${global?.dashboard?.timeframe?.end}
 {{< /code-block >}}
