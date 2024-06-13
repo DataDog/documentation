@@ -17,7 +17,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/datadog-security-google-cloud/
   tag: ブログ
   text: Datadog Security による Google Cloud のコンプライアンスと脅威対策機能の拡張
-kind: documentation
 title: サーバーレスの ASM を有効にする
 ---
 

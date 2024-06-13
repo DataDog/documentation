@@ -13,7 +13,6 @@ further_reading:
 - link: /security/application_security/troubleshooting
   tag: Documentation
   text: Datadog Application Security Management の一般的な問題のトラブルシューティング
-kind: documentation
 title: アプリ内 WAF ルール
 ---
 

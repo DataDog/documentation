@@ -31,7 +31,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/monitor-dns-logs-for-network-and-security-datadog/
   tag: Blog
   text: Surveiller les logs de DNS pour analyser le réseau et la sécurité
-kind: documentation
 title: Cloud SIEM
 ---
 ## Présentation
