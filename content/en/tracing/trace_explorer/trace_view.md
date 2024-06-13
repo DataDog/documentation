@@ -66,10 +66,7 @@ Groups can be sorted by clicking on the corresponding column header: **RESOURCE*
 [1]: /tracing/glossary/#resources
 [2]: /tracing/glossary/#services
 {{% /tab %}}
-{{% tab "Waterfall (Beta)" %}}
-
-<div class="alert alert-info"><strong>Join the Beta!</strong><br />
-To join the Waterfall private beta <a href="https://forms.gle/LjJR1ZbF1tNDv5JC6">fill out this form</a>.</div>
+{{% tab "Waterfall" %}}
 
 {{< img src="tracing/trace_view/waterfall.png" alt="Waterfall" style="width:90%;">}}
 
