@@ -20,7 +20,7 @@ guid: 34156dda-9288-4968-962b-6b29e1753d33
 integration_id: kube-controller-manager
 integration_title: "Kubernetes\_Controller\_Manager"
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: kube_controller_manager.
