@@ -108,7 +108,7 @@ To configure probabilistic sampling, do one of the following:
 **If you use a mixed setup of Datadog tracing libraries and OTel SDKs**:
 
 - Probabilistic sampling will apply to spans originating from both Datadog and OTel tracing libraries.
-- Set the same seed between Datadog agent (`DD_APM_PROBABILISTIC_SAMPLER_HASH_SEED`) and OTel collector (`hash_seed`) to ensure consistent sampling
+- If you send spans both to the Datadog Agent **and** OTel collector instances, set the same seed between Datadog agent (`DD_APM_PROBABILISTIC_SAMPLER_HASH_SEED`) and OTel collector (`hash_seed`) to ensure consistent sampling
 
 <div class="alert alert-warning"><code>DD_OTLP_CONFIG_TRACES_PROBABILISTIC_SAMPLER_SAMPLING_PERCENTAGE</code> is deprecated and has been replaced by <code>DD_APM_PROBABILISTIC_SAMPLER_SAMPLING_PERCENTAGE</code>.</div>
 
