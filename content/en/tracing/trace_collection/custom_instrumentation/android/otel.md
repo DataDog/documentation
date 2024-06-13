@@ -523,6 +523,9 @@ final Request:request = new Request.Builder()
 {{% /tab %}}
 {{< /tabs >}}
 
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/dd-sdk-android/tree/develop/features/dd-sdk-android-trace
 [2]: https://github.com/DataDog/dd-sdk-android/tree/develop/features/dd-sdk-android-trace-otel
