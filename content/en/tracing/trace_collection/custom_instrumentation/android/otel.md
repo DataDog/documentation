@@ -16,7 +16,7 @@ further_reading:
 ## Requirements and limitations
 
 - You need to download the [dd-sdk-android-trace][1] and [dd-sdk-android-trace-otel][2] dependencies starting 
-with 2.12.0+
+with 2.11.0+
 
 ## Setup
 
@@ -50,12 +50,6 @@ android {
         // ...
     }
 }
-```
-
-**Note**: To fix `google.auto.value` errors in R8, add the following ProGuard rule:
-
-```text
--dontwarn com.google.**
 ```
 
 2. Initialize Datadog SDK with your application context, tracking consent, and [Datadog client token][4]. For security reasons, you must use a client token, not [Datadog API keys][5], to configure Datadog SDK.
