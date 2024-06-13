@@ -1,6 +1,5 @@
 ---
 title: Cloud Security Management Guides
-kind: guide
 disable_toc: true
 aliases:
   - /security_platform/cloud_workload_security/guide/

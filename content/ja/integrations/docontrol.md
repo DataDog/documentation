@@ -20,7 +20,7 @@ integration_id: docontrol
 integration_title: DoControl
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: docontrol
 public_title: DoControl

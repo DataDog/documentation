@@ -1,6 +1,5 @@
 ---
 title: Cloud Security Management Agent Variables
-kind: documentation
 aliases:
   - /security/cloud_security_management/setup/agent_variables
 ---

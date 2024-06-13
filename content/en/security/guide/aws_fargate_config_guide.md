@@ -1,6 +1,5 @@
 ---
 title: AWS Fargate Configuration Guide for Datadog Security
-kind: documentation
 disable_toc: false
 aliases:
   - /security/cloud_security_management/setup/fargate

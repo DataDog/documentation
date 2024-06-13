@@ -13,7 +13,6 @@ further_reading:
 - link: /security/application_security/enabling/
   tag: ドキュメント
   text: Application Security Management を有効にする
-kind: documentation
 title: Datadog における Application Security Management の仕組み
 ---
 
@@ -55,7 +54,7 @@ Datadog の AWS Lambda 向け ASM は、関数を標的としている攻撃者�
 
 セットアップに関する情報については、[サーバーレスのための ASM の有効化][8]をお読みください。
 
-## コミュニティオフィスアワー
+## パフォーマンス
 
 Datadog ASM は、Agent と APM にすでに含まれているプロセスを使用するため、使用する際のパフォーマンスへの影響はほとんどありません。APM が有効な場合、Datadog ライブラリは分散型トレースを生成します。Datadog ASM は、既知の攻撃パターンを使用して、トレース内のセキュリティアクティビティにフラグを立てます。攻撃パターンと分散型トレースで提供される実行コンテキストを相関させることで、検出ルールに基づいてセキュリティシグナルをトリガーします。
 
@@ -151,7 +150,7 @@ Datadog ASM は、Log4j Log4Shell 攻撃ペイロードを識別し、悪意の�
 [10]: /ja/tracing/configure_data_security/?tab=http
 [11]: /ja/security/application_security/threats/library_configuration/#exclude-specific-parameters-from-triggering-detections
 [12]: https://owasp.org/www-project-modsecurity-core-rule-set/
-[13]: /ja/security/default_rules/#cat-application-security
+[13]: /ja/security/default_rules/?category=cat-application-security
 [14]: https://app.datadoghq.com/security/appsec/event-rules
 [15]: https://app.datadoghq.com/security/appsec/vm
 [16]: /ja/security/cloud_siem/
