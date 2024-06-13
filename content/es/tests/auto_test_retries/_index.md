@@ -27,7 +27,7 @@ un caso de prueba fallido se reintenta hasta que se supera con éxito o hasta qu
 
 ## Ajuste
 
-Asegúrate de que [Visibilidad de pruebas][1] está configurada para tus ejecuciones de prueba.
+Asegúrate de que la opción Test Visibility [Visibilidad de pruebas][1] está configurada para tus ejecuciones de prueba.
 
 ### Compatibilidad
 
