@@ -43,7 +43,7 @@ From this view, you have two ways of selecting the page and vital that you can r
 
 ## Filter and evaluate
 
-Once you've selected a page and vital, you can see insights that explain their performance.
+After you've selected a page and vital, you can see insights that explain their performance.
 
 From here, you can:
 
