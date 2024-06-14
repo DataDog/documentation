@@ -1,19 +1,19 @@
 ---
 kind: Documentación
-title: Monitorización de espacio disponible en disco
+title: Monitorización del espacio disponible en disco
 ---
 
 
 
-Una métrica de sistema habitual que se monitoriza es el espacio disponible en el disco de un sistema o host determinado. Esta guía te ayuda a crear un monitor que emite alertas cuando el espacio libre en el disco de cualquier host que informa a Datadog cae por debajo del 10%.
+Una métrica de sistema que habitualmente se monitoriza es el espacio disponible en el disco de un sistema o host determinado. Esta guía te ayuda a crear un monitor que emite alertas cuando el espacio libre en el disco de cualquier host que informa a Datadog cae por debajo del 10%.
 
-Para crear un monitor del espacio disponible en el disco:
+Para crear un monitor del espacio disponible en disco:
 
 1. En el menú de navegación, haz clic en **Monitors** (Monitores).
 2. Haz clic en **New Monitor** (Nuevo Monitor).
 3. Selecciona **Metric** (Métrica) como tipo de monitor.
      1. En la sección **Definir la métrica**, utiliza `system.disk.free` para la métrica y selecciona `host` para **avg by**. Esta es la consulta A.
-     2. Haz clic en **Add Query** (Añadir consulta). Para esta métrica, utiliza `system.disk.total` para la métrica y utiliza `host` para **avg by**. Esta es la consulta B.
+     2. Haz clic en **Add Query** (Añadir consulta), utiliza `system.disk.total` para la métrica y selecciona `host` para **avg by**. Esta es la consulta B.
      3. En la fórmula que aparece, sustituye `a + b` por `a/b*100`.
 
          {{< img src="monitors/guide/monitoring_free_disk_space.png" alt="Definición de consulta de system.disk.free y system.disk.total con la fórmula a/b*100" style="width:80%;">}}
