@@ -1,6 +1,6 @@
 ---
 - config:
-    cache_enabled: true
+    cache_enabled: false
 
 - data:
     - org_name: jenkinsci
@@ -127,24 +127,24 @@
           - "*/README.md"
           - "*/datadog_checks/*/__about__.py"
 
-      - repo_name: marketplace
-        contents:
+      # - repo_name: marketplace
+      #   contents:
 
-        - action: marketplace-integrations
-          branch: master
-          globs:
-          - "*/metadata.csv"
-          - "*/manifest.json"
-          - "*/assets/service_checks.json"
-          - "*/README.md"
-          - "*/images/*.png"
-          - "*/images/*.jpg"
-          - "*/images/*.jpeg"
-          - "*/images/*.svg"
-          options:
-            front_matters:
-              algolia:
-                subcategory: Marketplace Integrations
+      #   - action: marketplace-integrations
+      #     branch: master
+      #     globs:
+      #     - "*/metadata.csv"
+      #     - "*/manifest.json"
+      #     - "*/assets/service_checks.json"
+      #     - "*/README.md"
+      #     - "*/images/*.png"
+      #     - "*/images/*.jpg"
+      #     - "*/images/*.jpeg"
+      #     - "*/images/*.svg"
+      #     options:
+      #       front_matters:
+      #         algolia:
+      #           subcategory: Marketplace Integrations
 
 
       - repo_name: ansible-datadog

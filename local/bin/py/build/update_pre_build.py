@@ -45,12 +45,10 @@ class Build:
         )
 
         # Should match directory name in integrations_data/extracted
+        # All marketplace integrations are sourced through APW now
         self.apw_integrations = [
             'ably',
-            'akamai_mpulse',
-            'avmconsulting_workday',
-            'bottomline_mainframe',
-            'nerdvision'
+            'akamai_mpulse'
         ]        
 
     def load_config(self, build_configuration_file_path, integration_merge_configuration_file_path, disable_cache_on_retry=False):
