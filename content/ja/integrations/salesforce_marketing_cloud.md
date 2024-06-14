@@ -12,7 +12,7 @@ integration_id: ''
 integration_title: Salesforce Marketing Cloud
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: salesforce_marketing_cloud
 public_title: Salesforce Marketing Cloud

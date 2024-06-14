@@ -1,6 +1,5 @@
 ---
 title: Cloud Security Management Identity Risks
-kind: documentation
 aliases:
   - /security/identity_risks/
 further_reading:
@@ -54,6 +53,8 @@ You can also use Terraform remediation to generate a pull request in Github with
 Datadog CIEM is integrated with [AWS IAM Access Analyzer][5] to further improve the permissions gap detections. If you are using AWS IAM Access Analyzer, Datadog CIEM automatically leverages its unused access findings to enrich permissions gap detections and downsized policy recommendations.
 
 <div class="alert alert-info">If you are enabling AWS IAM Access Analyzer for the first time, there is an additional AWS cost associated with this enablement and it could take up to two hours before AWS IAM Access Analyzer's insights are made available.</div>
+
+{{< img src="security/identity_risks/aws_iam_access_analyzer.png" alt="Banner about AWS IAM Access Analyzer enriching permissions gap detections and policy recommendations" width="100%">}}
 
 ## Video walkthrough
 

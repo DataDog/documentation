@@ -19,8 +19,8 @@ further_reading:
 <div class="alert alert-warning">App Builder is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-{{< callout url="https://www.datadoghq.com/dg/datadog-app-builder/" btn_hidden="false" header="Join the Beta!">}}
-Datadog App Builder is in private beta. Complete the form to request access.
+{{< callout url="" btn_hidden="true" header="Try the Beta!">}}
+App Builder is in beta. Access it from the <a href="https://app.datadoghq.com/app-builder/">App Builder</a> page in Datadog.
 {{< /callout >}}
 
 This page provides a list of UI components that you can use when creating apps in App Builder.
@@ -28,7 +28,7 @@ This page provides a list of UI components that you can use when creating apps i
 Many component properties allow you to select from provided values. If you want to use an expression for a property's value, click **&lt;/&gt;** next to the property to use the code editor. For more information on using JavaScript in App Builder, see [JavaScript Expressions][7].
 <br><br>
 
-{{% collapse-content title="Button" level="h2" %}}
+{{% collapse-content title="Button" level="h3" %}}
 Button components have the following properties.
 
 ### General
@@ -83,7 +83,7 @@ To view this component in context, see the [Metrics Explorer & Monitors Builder]
 {{% /collapse-content %}} 
 
 
-{{% collapse-content title="Callout value" level="h2" %}}
+{{% collapse-content title="Callout value" level="h3" %}}
 Callout value components have the following properties.
 
 ### General
@@ -135,7 +135,7 @@ To view this component in context, see the [EC2 Instance Manager][3] app bluepri
 
 
 
-{{% collapse-content title="Checkbox" level="h2" %}}
+{{% collapse-content title="Checkbox" level="h3" %}}
 Checkbox components have the following properties.
 
 ### General
@@ -196,7 +196,7 @@ To view this component in context, see the [Metrics Explorer & Monitors Builder]
 
 
 
-{{% collapse-content title="Container" level="h2" %}}
+{{% collapse-content title="Container" level="h3" %}}
 Container components have the following properties.
 
 ### Appearance
@@ -216,7 +216,7 @@ To view this component in context, see the [Metrics Explorer & Monitors Builder]
 
 
 
-{{% collapse-content title="Date range picker" level="h2" %}}
+{{% collapse-content title="Date range picker" level="h3" %}}
 Date range picker components have the following properties.
 
 ### General
@@ -252,7 +252,7 @@ To view this component in context, see the [Metrics Explorer & Monitors Builder]
 
 
 
-{{% collapse-content title="JSON input" level="h2" %}}
+{{% collapse-content title="JSON input" level="h3" %}}
 JSON input components have the following properties.
 
 ### General
@@ -290,7 +290,7 @@ Displays property and value pairs in JSON format.
 
 
 
-{{% collapse-content title="Modal" level="h2" %}}
+{{% collapse-content title="Modal" level="h3" %}}
 Modal components have the following properties.
 
 ### General
@@ -330,7 +330,7 @@ To view this component in context, see the [Metrics Explorer & Monitors Builder]
 
 
 
-{{% collapse-content title="Number input" level="h2" %}}
+{{% collapse-content title="Number input" level="h3" %}}
 Number input components have the following properties.
 
 Label
@@ -387,7 +387,7 @@ To view this component in context, see the [ECS Task Manager][4] app blueprint.
 
 
 
-{{% collapse-content title="Radio" level="h2" %}}
+{{% collapse-content title="Radio" level="h3" %}}
 Radio components have the following properties.
 
 ### General
@@ -444,7 +444,7 @@ Displays property and value pairs in JSON format.
 
 
 
-{{% collapse-content title="Search" level="h2" %}}
+{{% collapse-content title="Search" level="h3" %}}
 Search components have the following properties.
 
 ### General
@@ -492,7 +492,7 @@ To view this component in context, see the [EC2 Instance Manager][3] app bluepri
 
 
 
-{{% collapse-content title="Select" level="h2" %}}
+{{% collapse-content title="Select" level="h3" %}}
 Select components have the following properties.
 
 ### General
@@ -561,7 +561,7 @@ To view this component in context, see the [Metrics Explorer & Monitors Builder]
 
 
 
-{{% collapse-content title="Table" level="h2" %}}
+{{% collapse-content title="Table" level="h3" %}}
 Table components have the following properties.
 
 ### General
@@ -680,7 +680,7 @@ For examples showing how to use advanced features of tables, see [Tables][6].
 
 
 
-{{% collapse-content title="Text" level="h2" %}}
+{{% collapse-content title="Text" level="h3" %}}
 Text components have the following properties.
 
 ### General
@@ -718,7 +718,7 @@ To view this component in context, see the [Metrics Explorer & Monitors Builder]
 
 
 
-{{% collapse-content title="Text input" level="h2" %}}
+{{% collapse-content title="Text input" level="h3" %}}
 Text input components have the following properties.
 
 Label
