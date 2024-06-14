@@ -87,7 +87,7 @@ If you select a component the **Live feed** dialog should appear in the lower-le
 
 Cloudcraft has a new new live experience which is part of an ongoing effort to improve the user experience and make cloud infrastructure diagramming more efficient and effective. The new experience is available to all users and is now the default experience for new users.
 
-See [Crafting Better Diagrams: Cloudcraft's Live Diagramming and Filtering] for more information.
+See [Crafting Better Diagrams: Cloudcraft's Live Diagramming and Filtering][4] for more information.
 
 [1]: /cloudcraft/getting-started/connect-aws-account-with-cloudcraft/
 [2]: /cloudcraft/getting-started/connect-azure-account-with-cloudcraft/
