@@ -44,32 +44,7 @@ As of v1.0.0, the Custom Metrics Server in the Datadog Cluster Agent implements 
 ### Installation
 
 {{< tabs >}}
-{{% tab "Helm" %}}
-
-To enable the external metrics server with your Cluster Agent in Helm, update your [values.yaml][1] file with the following configurations. Provide a valid Datadog API Key, Application Key, and set the `clusterAgent.metricsProvider.enabled` to `true`. Then redeploy your Datadog Helm chart:
-
-  ```yaml
-  datadog:
-    apiKey: <DATADOG_API_KEY>
-    appKey: <DATADOG_APP_KEY>
-    #(...)
-
-  clusterAgent:
-    enabled: true
-    # Enable the metricsProvider to be able to scale based on metrics in Datadog
-    metricsProvider:
-      # clusterAgent.metricsProvider.enabled
-      # Set this to true to enable Metrics Provider
-      enabled: true
-  ```
-
-This automatically updates the necessary RBAC configurations and sets up the corresponding `Service` and `APIService` for Kubernetes to use.
-
-The keys can alternatively be set by referencing the names of pre-created `Secrets` containing the data keys `api-key` and `app-key` with the configurations `datadog.apiKeyExistingSecret` and `datadog.appKeyExistingSecret`.
-
-[1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
-{{% /tab %}}
-{{% tab "Operator" %}}
+{{% tab "Datadog Operator" %}}
 
 To enable the external metrics server with your Cluster Agent managed by the Datadog Operator, first [set up the Datadog Operator][1]. Then, provide a valid Datadog API Key, Application Key, and set the `features.externalMetricsServer.enabled` to `true` in your `DatadogAgent` custom resource:
 
@@ -114,7 +89,33 @@ The keys can alternatively be set by referencing the names of pre-created `Secre
 
 [1]: /agent/guide/operator-advanced
 {{% /tab %}}
-{{% tab "Daemonset" %}}
+{{% tab "Helm" %}}
+
+To enable the external metrics server with your Cluster Agent in Helm, update your [datadog-values.yaml][1] file with the following configurations. Provide a valid Datadog API Key, Application Key, and set the `clusterAgent.metricsProvider.enabled` to `true`. Then redeploy your Datadog Helm chart:
+
+  ```yaml
+  datadog:
+    apiKey: <DATADOG_API_KEY>
+    appKey: <DATADOG_APP_KEY>
+    #(...)
+
+  clusterAgent:
+    enabled: true
+    # Enable the metricsProvider to be able to scale based on metrics in Datadog
+    metricsProvider:
+      # clusterAgent.metricsProvider.enabled
+      # Set this to true to enable Metrics Provider
+      enabled: true
+  ```
+
+This automatically updates the necessary RBAC configurations and sets up the corresponding `Service` and `APIService` for Kubernetes to use.
+
+The keys can alternatively be set by referencing the names of pre-created `Secrets` containing the data keys `api-key` and `app-key` with the configurations `datadog.apiKeyExistingSecret` and `datadog.appKeyExistingSecret`.
+
+[1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
+{{% /tab %}}
+
+{{% tab "Manual (DaemonSet)" %}}
 
 #### Custom metrics server
 
@@ -184,27 +185,7 @@ For autoscaling to work correctly, custom queries must follow these rules:
 The Custom Resource Definition (CRD) for the `DatadogMetric` object can be added to your Kubernetes cluster by using Helm, the Datadog Operator, or Daemonset:
 
 {{< tabs >}}
-{{% tab "Helm" %}}
-
-To activate usage of the `DatadogMetric` CRD update your [values.yaml][1] Helm configuration to set `clusterAgent.metricsProvider.useDatadogMetrics` to `true`. Then redeploy your Datadog Helm chart:
-
-  ```yaml
-  clusterAgent:
-    enabled: true
-    metricsProvider:
-      enabled: true
-      # clusterAgent.metricsProvider.useDatadogMetrics
-      # Enable usage of DatadogMetric CRD to autoscale on arbitrary Datadog queries
-      useDatadogMetrics: true
-  ```
-
-**Note:** This attempts to install the `DatadogMetric` CRD automatically. If that CRD already exists prior to the initial Helm installation, it may conflict.
-
-This automatically updates the necessary RBAC files and directs the Cluster Agent to manage these HPA queries through these `DatadogMetric` resources.
-
-[1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
-{{% /tab %}}
-{{% tab "Operator" %}}
+{{% tab "Datadog Operator" %}}
 
 To activate the usage of the `DatadogMetric` CRD update your `DatadogAgent` custom resource and set `features.externalMetricsServer.useDatadogMetrics` to `true`.
 
@@ -227,7 +208,27 @@ To activate the usage of the `DatadogMetric` CRD update your `DatadogAgent` cust
 The Operator automatically updates the necessary RBAC configurations and directs the Cluster Agent to manage these HPA queries through these `DatadogMetric` resources.
 
 {{% /tab %}}
-{{% tab "DaemonSet" %}}
+{{% tab "Helm" %}}
+
+To activate usage of the `DatadogMetric` CRD update your [values.yaml][1] Helm configuration to set `clusterAgent.metricsProvider.useDatadogMetrics` to `true`. Then redeploy your Datadog Helm chart:
+
+  ```yaml
+  clusterAgent:
+    enabled: true
+    metricsProvider:
+      enabled: true
+      # clusterAgent.metricsProvider.useDatadogMetrics
+      # Enable usage of DatadogMetric CRD to autoscale on arbitrary Datadog queries
+      useDatadogMetrics: true
+  ```
+
+**Note:** This attempts to install the `DatadogMetric` CRD automatically. If that CRD already exists prior to the initial Helm installation, it may conflict.
+
+This automatically updates the necessary RBAC files and directs the Cluster Agent to manage these HPA queries through these `DatadogMetric` resources.
+
+[1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
+{{% /tab %}}
+{{% tab "Manual (DaemonSet)" %}}
 To activate usage of the `DatadogMetric` CRD, follow these extra steps:
 
 1. Install the `DatadogMetric` CRD in your cluster.

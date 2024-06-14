@@ -41,8 +41,8 @@ You can send traces over Unix Domain Socket (UDS), TCP (`IP:Port`), or Kubernete
 The instructions in this section configure the Datadog Agent to receive traces over UDS. To use TCP, see the [additional configuration](#additional-configuration) section. To use Kubernetes service, see [Setting up APM with Kubernetes Service][9].
 
 {{< tabs >}}
-{{% tab "Operator" %}}
-After you [use the Operator to install the Datadog Agent][1], edit your `datadog-agent.yaml` to set `features.apm.enabled` to `true`.
+{{% tab "Datadog Operator" %}}
+Edit your `datadog-agent.yaml` to set `features.apm.enabled` to `true`.
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -67,13 +67,12 @@ When APM is enabled, the default configuration creates a directory on the host a
 
 **Note**: On minikube, you may receive an `Unable to detect the kubelet URL automatically` error. In this case, set `global.kubelet.tlsVerify` to `false`.
 
-[1]: /containers/kubernetes/installation/?tab=operator#installation
 {{% /tab %}}
 {{% tab "Helm" %}}
 
 If you [used Helm to install the Datadog Agent][1], APM is **enabled by default** over UDS or Windows named pipe.
 
-To verify, ensure that `datadog.apm.socketEnabled` is set to `true` in your `values.yaml`.
+To verify, ensure that `datadog.apm.socketEnabled` is set to `true` in your `datadog-values.yaml`.
 
 ```yaml
 datadog:
@@ -206,7 +205,7 @@ spec:
 {{% /tab %}}
 {{% tab "Helm" %}}
 
-Update your `values.yaml` file with the following APM configuration:
+Update your `datadog-values.yaml` file with the following APM configuration:
 
 ```yaml
 datadog:
@@ -221,39 +220,90 @@ datadog:
 {{% /tab %}}
 {{< /tabs >}}
 
-## Agent environment variables
+## APM environment variables
 
-**Note**: As a best practice, Datadog recommends using unified service tagging when assigning tags. Unified service tagging ties Datadog telemetry together through the use of three standard tags: `env`, `service`, and `version`. To learn how to configure your environment with unified tagging, refer to the dedicated [unified service tagging][3] documentation.
+{{< tabs >}}
+{{% tab "Datadog Operator" %}}
+Set additional APM environment variables under `override.nodeAgent.containers.trace-agent.env`:
 
-List of all environment variables available for tracing within the Agent running in Kubernetes:
+{{< code-block lang="yaml" filename="datadog-agent.yaml" >}}
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  override:
+    nodeAgent:
+      containers:
+        trace-agent:
+          env:
+            - name: <ENV_VAR_NAME>
+              value: <ENV_VAR_VALUE>
+{{< /code-block >}}
 
-| Environment variable       | Description                                                                                                                                                                                                                                                                                                                 |
-| -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `DD_API_KEY`               | Datadog API Key                                                                                                                                                                                                                                                                                                        |
-| `DD_PROXY_HTTPS`           | Set up the URL for the proxy to use.                                                                                                                                                                                                                                                                                        |
-| `DD_APM_REPLACE_TAGS`      | [Scrub sensitive data from your span's tags][4].                                                                                                                                                                                                                                                                            |
-| `DD_HOSTNAME`              | Manually set the hostname to use for metrics if autodetection fails, or when running the Datadog Cluster Agent.                                                                                                                                                                                                               |
-| `DD_DOGSTATSD_PORT`        | Set the DogStatsD port.                                                                                                                                                                                                                                                                                                     |
-| `DD_APM_RECEIVER_SOCKET`  | Collect your traces through a Unix Domain Sockets and takes priority over hostname and port configuration if set. Off by default, when set it must point to a valid sock file.                                                                                                                                            |
-| `DD_BIND_HOST`             | Set the StatsD & receiver hostname.                                                                                                                                                                                                                                                                                         |
-| `DD_LOG_LEVEL`             | Set the logging level. (`trace`/`debug`/`info`/`warn`/`error`/`critical`/`off`)                                                                                                                                                                                                                                             |
-| `DD_APM_ENABLED`           | When set to `true`, the Datadog Agent accepts trace metrics. Default value is `true` (Agent 7.18+)                                                                                                                                                                                                                                                                |
-| `DD_APM_CONNECTION_LIMIT`  | Sets the maximum connection limit for a 30 second time window.                                                                                                                                                                                                                                                              |
-| `DD_APM_DD_URL`            | Set the Datadog API endpoint where your traces are sent: `https://trace.agent.{{< region-param key="dd_site" >}}`. Defaults to `https://trace.agent.datadoghq.com`.                                                                                                                                                                                                   |
-| `DD_APM_RECEIVER_PORT`     | Port that the Datadog Agent's trace receiver listens on. Default value is `8126`.                                                                                                                                                                                                                                           |
-| `DD_APM_NON_LOCAL_TRAFFIC` | Allow non-local traffic when tracing from other containers. Default value is `true` (Agent 7.18+)                                                                                                                                                                                                                               |
-| `DD_APM_IGNORE_RESOURCES`  | Configure resources for the Agent to ignore. Format should be comma separated, regular expressions. Like <code>GET /ignore-me,(GET\|POST) /and-also-me</code>.                                                                                                                                                       |
-| `DD_ENV`                   | Sets the global `env` for all data emitted by the Agent. If `env` is not present in your trace data, this variable is used. See [APM environment setup][5] for more details.
+{{% /tab %}}
+{{% tab "Helm" %}}
+Set additional APM environment variables under `agents.containers.traceAgent.env`:
+{{< code-block lang="yaml" filename="datadog-values.yaml" >}}
+agents:
+  containers:
+    traceAgent:
+      env:
+        - name: <ENV_VAR_NAME>
+          value: <ENV_VAR_VALUE>
+{{< /code-block >}}
 
+{{% /tab %}}
+{{% tab "DaemonSet" %}}
+Add environment variables to the DaemonSet or Deployment (for Datadog Cluster Agent).
+```yaml
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: datadog
+spec:
+  template:
+    spec:
+      containers:
+        - name: agent
+          ...
+          env:
+            - name: <ENV_VAR_NAME>
+              value: <ENV_VAR_VALUE>
+```
 
-### Operator environment variables
-| Environment variable       | Description                                                                                                                                                                                                                                                                                                                 |
-| -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `agent.apm.enabled`                                                                                          | Enable this to enable APM and tracing, on port 8126. See the [Datadog Docker documentation][6].                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| `agent.apm.env`                                                                                              | The Datadog Agent supports many [environment variables][7].                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-| `agent.apm.hostPort`                                                                                         | Number of port to expose on the host. If specified, this must be a valid port number, 0 < x < 65536. If `HostNetwork` is specified, this must match `ContainerPort`. Most containers do not need this.                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| `agent.apm.resources.limits`                                                                                 | Limits describes the maximum amount of compute resources allowed. For more info, see the [Kubernetes documentation][8].                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| `agent.apm.resources.requests`                                                                               | Requests describes the minimum amount of compute resources required. If `requests` is omitted for a container, it defaults to `limits` if that is explicitly specified, otherwise to an implementation-defined value. For more info, see the [Kubernetes documentation][8].     |                                                                                                                                                                                                                                                                                                                               |
+{{% /tab %}}
+{{< /tabs >}}
+
+List of environment variables available for configuring APM:
+
+| Environment variable | Description |
+| -------------------- | ----------- |
+| `DD_APM_ENABLED`           | When set to `true`, the Datadog Agent accepts trace metrics. <br/>**Default**: `true` (Agent 7.18+) |
+| `DD_APM_ENV`           | Sets the `env:` tag on collected traces.  |
+| `DD_APM_RECEIVER_SOCKET` | For tracing over UDS. When set, must point to a valid socket file. |
+| `DD_APM_RECEIVER_PORT`     | For tracing over TCP, the port that the Datadog Agent's trace receiver listens on. <br/>**Default**: `8126` |
+| `DD_APM_NON_LOCAL_TRAFFIC` | Allow non-local traffic when tracing from other containers. <br/>**Default**: `true` (Agent 7.18+) |
+| `DD_APM_DD_URL`            | The Datadog API endpoint where your traces are sent: `https://trace.agent.{{< region-param key="dd_site" >}}`. <br/>**Default**:  `https://trace.agent.datadoghq.com` |
+| `DD_APM_TARGET_TPS`     | The target traces per second to sample. <br/>**Default**: `10` |
+| `DD_APM_ERROR_TPS`     | The target error trace chunks to receive per second. <br/>**Default**: `10` |
+| `DD_APM_MAX_EPS`     | Maximum number of APM events per second to sample. <br/>**Default**: `200` |
+| `DD_APM_MAX_MEMORY`     | What the Datadog Agent aims to use in terms of memory. If surpassed, the API rate limits incoming requests. <br/>**Default**: `500000000` |
+| `DD_APM_MAX_CPU_PERCENT`     | The CPU percentage that the Datadog Agent aims to use. If surpassed, the API rate limits incoming requests. <br/>**Default**: `50` |
+| `DD_APM_FILTER_TAGS_REQUIRE`     | Collects only traces that have root spans with an exact match for the specified span tags and values. <br/>See [Ignoring unwanted resources in APM][11]. |
+| `DD_APM_FILTER_TAGS_REJECT`     | Rejects traces that have root spans with an exact match for the specified span tags and values. <br/>See [Ignoring unwanted resources in APM][11]. |
+| `DD_APM_REPLACE_TAGS` | [Scrub sensitive data from your span's tags][4]. |
+| `DD_APM_IGNORE_RESOURCES`  | Configure resources for the Agent to ignore. Format should be comma separated, regular expressions. <br/>For example: `GET /ignore-me,(GET\|POST) /and-also-me` |
+| `DD_APM_LOG_FILE`  | Path to file where APM logs are written. |
+| `DD_APM_CONNECTION_LIMIT`  | Maximum connection limit for a 30 second time window. <br/>**Default**: 2000 |
+| `DD_APM_ADDITONAL_ENDPOINTS`     | Send data to multiple endpoints and/or with multiple API keys. <br/>See [Dual Shipping][12]. |
+| `DD_APM_DEBUG_PORT`     | Port for the debug endpoints for the Trace Agent. Set to `0` to disable the server. <br/>**Default**: `5012`. |
+| `DD_BIND_HOST`             | Set the StatsD & receiver hostname. |
+| `DD_DOGSTATSD_PORT`        | For tracing over TCP, set the DogStatsD port. |
+| `DD_ENV`                   | Sets the global `env` for all data emitted by the Agent. If `env` is not present in your trace data, this variable is used. |
+| `DD_HOSTNAME`         | Manually set the hostname to use for metrics if autodetection fails, or when running the Datadog Cluster Agent. |
+| `DD_LOG_LEVEL`             | Set the logging level. <br/>**Values**: `trace`, `debug`, `info`, `warn`, `error`, `critical`, `off` |
+| `DD_PROXY_HTTPS`     | Set up the URL for the proxy to use. |
 
 
 ## Further Reading
@@ -264,10 +314,12 @@ List of all environment variables available for tracing within the Agent running
 [1]: /containers/kubernetes/installation
 [2]: /tracing/setup/
 [3]: /getting_started/tagging/unified_service_tagging
-[4]: /tracing/configure_data_security#scrub-sensitive-data-from-your-spans
+[4]: /tracing/configure_data_security/?tab=kubernetes#replace-tags
 [5]: /tracing/guide/setting_primary_tags_to_scope/#environment
 [6]: https://github.com/DataDog/docker-dd-agent#tracing-from-the-host
 [7]: https://docs.datadoghq.com/agent/docker/?tab=standard#environment-variables
 [8]: https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/
 [9]: /tracing/guide/setting_up_apm_with_kubernetes_service/
 [10]: /tracing
+[11]: /tracing/guide/ignoring_apm_resources/?tab=kubernetes
+[12]: /agent/configuration/dual-shipping/
