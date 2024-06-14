@@ -53,7 +53,7 @@ The power of filters is available even if you do not tag your resources in your 
 
 You can watch the video below to better understand the power of **Filtered layout**. In AWS, our sales team tags several resources related to a Cloudcraft demo with the key `Environment` and the value `Demo`. To view what they want to demonstrate and how each component connects to each other, they can use the filter `Environment=demo` in the search bar just below the **Live** tab.
 
-{{< img src="cloudcraft/getting-started/create-your-first-cloudcraft-diagram/filtered-layout-example.mp4" alt="A 11 seconds video showing a user creating a filtered diagram in Cloudcraft." video="true">}}
+{{< img src="cloudcraft/getting-started/create-your-first-cloudcraft-diagram/filtered-layout-example-video.mp4" alt="A 11 seconds video showing a user creating a filtered diagram in Cloudcraft." video="true">}}
 
 The components tagged with `Environment=demo` are shown inside their respective VPCs, subnets, and security groups, even though these resources are not tagged in AWS. Even though it has the same tags, the WAF is outside of the VPC because the AWS API does not show any connection between the WAF and the other components.
 
