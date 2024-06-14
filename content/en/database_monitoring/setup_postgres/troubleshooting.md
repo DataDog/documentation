@@ -6,6 +6,8 @@ description: Troubleshoot Database Monitoring setup for Postgres
 
 This page details common issues with setting up and using Database Monitoring with Postgres, and how to resolve them. Datadog recommends staying on the latest stable Agent version and adhering to the latest [setup documentation][1], as it can change with Agent version releases.
 
+**Note:** After applying any of the changes outlined below, an [Agent restart][25] will be required for the changes to take effect 
+
 ## Diagnosing common problems
 
 ### No data is showing after configuring Database Monitoring
@@ -273,3 +275,4 @@ may cause the collection query to take longer to run which can lead to query tim
 [22]: https://www.postgresql.org/docs/12/contrib.html
 [23]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example#L281
 [24]: https://pkg.go.dev/github.com/jackc/pgx/v4#QuerySimpleProtocol
+[24]: https://docs.datadoghq.com/agent/configuration/agent-commands/?tab=agentv6v7#restart-the-agent
