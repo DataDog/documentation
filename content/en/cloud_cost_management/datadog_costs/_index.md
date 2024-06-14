@@ -58,7 +58,7 @@ You can use out-of-the-box tags to break down and allocate your costs. Use the f
 | organization | The name of the master or sub-organization. |
 | dimension_name / dimension_id | `dimension_name` is the name of the individual product being billed (for example, `Indexed Logs (15 Day Retention)`). </br></br> `dimension_id` is the snake case version of the product name which is optimized for programmatic use and easier search (for example, `logs_indexed_15day`). |
 | datadog_product / product_name | `datadog_product` is the high-level grouping name for Datadog products (for example, `indexed_logs`). </br></br> `product_name` is the snake case version of the product grouping name which is optimized for programmatic use and easier search (for example, `indexed_logs`). |
-| `<Usage Attribution tags>` | You can add up to three tag keys that are configured in [Usage Attribution][8] with the associated values (for example, `team` or `service`). |
+| `<Usage Attribution tags>` | You can add up to three tag keys, configured in [Usage Attribution][8], with their associated values (for example, `team` or `service`). |
 | cost_type | The type of charge covered by this item (for example, committed or on-demand). |
 
 ## Further reading
