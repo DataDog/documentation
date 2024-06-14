@@ -50,7 +50,6 @@ clean-dependent-repos:
 clean:  ## Clean generated files placed in the hugo site
 	@git clean -Xf ./content
 	@git clean -Xf ./data
-	@git clean -Xf ./static/images/marketplace
 
 # if .dockerenv exists we are running from inside a docker container
 # if node_modules was generated in docker when using local or vice versa

@@ -67,9 +67,6 @@ content/en/integrations/guide/amazon_cloudformation.md
 !content/en/integrations/snyk.md
 !content/en/integrations/content_security_policy_logs.md
 
-# Ignore the marketplace images that get pulled
-static/images/marketplace
-
 # security rules
 content/en/security/default_rules/*.md
 !content/en/security/default_rules/_index.md

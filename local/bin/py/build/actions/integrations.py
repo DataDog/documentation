@@ -219,7 +219,7 @@ class Integrations:
 
         return integration_content_with_link_inlined
 
-    def process_integrations(self, content, marketplace=False):
+    def process_integrations(self, content):
         """
         Goes through all files needed for integrations build
         and triggers the right function for the right type of file.
@@ -241,10 +241,7 @@ class Integrations:
                 self.process_service_checks(file_name)
 
             elif file_name.endswith(".md"):
-                self.process_integration_readme(file_name, marketplace, content)
-
-            elif file_name.endswith((".png", ".svg", ".jpg", ".jpeg", ".gif")) and marketplace:
-                self.process_images(file_name)
+                self.process_integration_readme(file_name, content)
 
             elif file_name.endswith(".go"):
                 self.process_npm_integrations(file_name)
@@ -497,134 +494,6 @@ class Integrations:
                         dict_npm, f, indent = 2, sort_keys = True
                     )
 
-    # file_name should be an extracted image file
-    # e.g. ./integrations_data/extracted/marketplace/rapdev-snmp-profiles/images/2.png
-    def process_images(self, file_name):
-        """
-        Copies a single image file to the static/images/ folder, creating a new directory if needed.
-        """
-        image_filename = basename(file_name) # img.png
-        integration_image_path = file_name.replace('../', '') # if it found local marketplace repo
-        integration_image_path = integration_image_path.replace('./integrations_data/extracted/', '') # marketplace/nerdvision/images/img.png
-        integration_image_directory = dirname(integration_image_path) # marketplace/nerdvision/images/
-        destination_directory = './static/images/{}'.format(integration_image_directory) # static/images/marketplace/nerdvision/images/
-        full_destination_path = '{}/{}'.format(destination_directory, image_filename) # static/images/marketplace/nerdvision/images/img.png
-
-        makedirs(destination_directory, exist_ok=True)
-        copyfile(file_name, full_destination_path)
-
-    @staticmethod
-    def replace_image_src(markdown_string, integration_name):
-        """
-        Takes a markdown string and replaces any image markdown with our img shortcode, pointing to the static/images folder.
-        This is needed when dealing with Marketplace Integrations to properly display images pulled from a private repo.
-        """
-        markdown_img_search_regex = r"!\[(.*?)\]\((.*?)\)"
-        img_shortcode = "{{< img src=\"marketplace/" + integration_name + "/\\2\" alt=\"\\1\" >}}"
-        integration_img_prefix = 'https://raw.githubusercontent.com/DataDog/marketplace/master/{}/'.format(integration_name)
-
-        replaced_markdown_string = markdown_string.replace(integration_img_prefix, '')
-        regex_result = re.sub(markdown_img_search_regex, img_shortcode, replaced_markdown_string, 0, re.MULTILINE)
-
-        if regex_result:
-            return regex_result
-        else:
-            return markdown_string
-
-    @staticmethod
-    def remove_h3_markdown_section(markdown_string, h3_header_string):
-        """
-        Removes markdown content from integration readme file starting with h3 markdown string provided,
-        ending with the next h2 or h3 header or horizontal line break found in the markdown.
-        """
-        if not h3_header_string.startswith('###'):
-            return markdown_string
-
-        h3_markdown_regex = r"(^|\n)(#{3}) (\w+)"
-        h3_list = re.finditer(h3_markdown_regex, markdown_string)
-        indexes = []
-        replaced_result = ''
-
-        for match in h3_list:
-            group = match.group(0)
-            start = match.start()
-
-            if h3_header_string in group:
-                start_index = start
-                h2_h3_regex = r"(^|\n)(#{2,3}) (\w+)"
-                h2_h3_regex_matches = re.finditer(h2_h3_regex, markdown_string)
-                end_index = -1
-
-                # Find the string index of the next h2 or h3 header in markdown
-                # so we can strip out all of the unwanted content
-                for match in h2_h3_regex_matches:
-                    if match.start() > start_index + 3:
-                        end_index = match.start()
-                        break
-
-                if end_index == -1:
-                    # Check to ensure footer is preserved
-                    horiz_line = markdown_string.find('\n---', start_index)
-
-                    if horiz_line != -1:
-                        end_index = horiz_line
-                    else:
-                        # If there isn't another h2, h3, or horizontal line break
-                        end_index = len(markdown_string)
-
-                content_to_remove = markdown_string[start_index:end_index]
-                indexes.append([start_index, end_index])
-
-        # In case there are multiple h3 headers with the same name.
-        # There are multiple "Pricing" headers in some integrations currently,
-        # TODO: revisit this function once that is fixed.
-        if len(indexes) > 0:
-            for indices in reversed(indexes):
-                markdown_string = markdown_string[:indices[0]] + markdown_string[indices[1]:]
-
-        return markdown_string
-
-    @staticmethod
-    def remove_markdown_section(markdown_string, h2_header_string):
-        """
-        Removes a section from markdown by deleting all content starting from provided h2_header_string argument and ending one index before the next h2 header.
-        h2_header_string argument is expected in markdown format; e.g. '## Steps'
-        """
-
-        if not h2_header_string.startswith('##'):
-            return markdown_string
-
-        h2_markdown_regex = r"(^|\n)(#{2}) (\w+)"
-        h2_list = re.finditer(h2_markdown_regex, markdown_string)
-        replaced_result = ''
-
-        for match in h2_list:
-            group = match.group(0)
-            start = match.start()
-            end = match.end() - 1
-
-            if h2_header_string in group:
-                start_index = start
-                end_index = next(h2_list).start()
-                content_to_remove = markdown_string[start_index:end_index]
-                replaced_result = markdown_string.replace(content_to_remove, '')
-
-        if replaced_result:
-            return replaced_result
-        else:
-            return markdown_string
-
-    @staticmethod
-    def validate_marketplace_integration_markdown(markdown_string):
-        """
-        Validates marketplace integration markdown string does not contain sensitive content.
-        The build should fail if we found any sections that should not be displayed in Docs.
-        Current exclude list: ["Setup", "Pricing", "Tiered Pricing"]
-        """
-        setup_header_markdown_regex = r"(#{1,6})(\s*)(Setup|Pricing|Tiered Pricing|Uninstallation)"
-        matches = re.search(setup_header_markdown_regex, markdown_string, re.MULTILINE | re.IGNORECASE)
-        return matches == None
-
     def get_collision_alternate_name(self, file_name):
         dir_path = dirname(normpath(file_name))
         dir_name = basename(dir_path)
@@ -641,16 +510,15 @@ class Integrations:
 
         return collision_name
 
-    def process_integration_readme(self, file_name, marketplace=False, content=None):
+    def process_integration_readme(self, file_name, content=None):
         """
         Take a single README.md file and
         1. extract the first h1, if this isn't a merge item
         2. add tabs if they exist
         3. inject metrics after ### Metrics header if metrics exists for file
         4. inject service checks after ### Service Checks if file exists
-        5. inject where to purchase integration if it's a marketplace integration
-        6. inject hugo front matter params at top of file
-        7. write out file to content/integrations with filename changed to integrationname.md
+        5. inject hugo front matter params at top of file
+        6. write out file to content/integrations with filename changed to integrationname.md
         :param file_name: path to a readme md file
         """
         if content is None:
@@ -714,7 +582,6 @@ class Integrations:
         regex_skip_sections_start = r"(```|\{\{< code-block |\{\{< site-region)"
 
         ## Formating all link as reference to avoid any corner cases
-        ## Replace image filenames in markdown for marketplace iterations
         result = ''
         display_on_public = True
         source_comment = f"<!--  SOURCED FROM https://github.com/DataDog/{content['repo_name']} -->\n"
@@ -724,31 +591,13 @@ class Integrations:
             if not manifest_json["display_on_public_website"]:
                 display_on_public = False
         
-        if not marketplace and display_on_public:
+        if display_on_public:
             try:
                 result = source_comment + format_link_file(file_name,regex_skip_sections_start,regex_skip_sections_end)
             except Exception as e:
                 print(e)
                 print('An error occurred formatting markdown links from integration readme file(s), exiting the build now...')
                 sys.exit(1)
-        elif marketplace:
-            with open(file_name, 'r+') as f:
-                markdown_string = f.read()
-                # Add static copy with link to the in-app tile, link converters called later will ensure the `site` flag is respected
-                purchase_copy = f"---\nThis application is made available through the Marketplace and is supported by a Datadog Technology Partner." \
-                                f" <a href=\"https://app.datadoghq.com/marketplace/app/{manifest_json['integration_id']}\" target=\"_blank\">Click Here</a> to purchase this application."
-
-                markdown_string = f"{markdown_string}\n{purchase_copy}"
-                markdown_with_replaced_images = self.replace_image_src(markdown_string, basename(dirname(file_name)))
-                markdown_setup_removed = self.remove_markdown_section(markdown_with_replaced_images, '## Setup')
-                markdown_uninstall_removed = self.remove_markdown_section(markdown_setup_removed, '## Uninstallation')
-                updated_markdown = self.remove_h3_markdown_section(markdown_uninstall_removed, '### Pricing')
-                is_marketplace_integration_markdown_valid = self.validate_marketplace_integration_markdown(updated_markdown)
-
-                if not is_marketplace_integration_markdown_valid:
-                    raise Exception('Potential setup or pricing information included in Marketplace Integration markdown.  Check {} for Setup or Pricing sections.'.format(file_name))
-                else:
-                    result = source_comment + updated_markdown
         else:
             print(f'Skipping markdown for: {file_name}')            
 
