@@ -76,7 +76,7 @@ Each row (span) indicates the following:
 
 - **Relative span duration**: The length of the color-coded bar corresponds to the percentage of total trace duration.
 - **Absolute span duration**: The absolute time in milliseconds (ms).
-- **Span details**: The corresponding service name, operation name, and resource name are displayed.
+- **Span details**: The corresponding service name and resource name are displayed.
 - **Statuses**: When applicable, an HTTP status code is displayed.
 - **Color coding**: Spans are color-coded by service (default), host, or container. To change how spans are color-coded, use the **Color by** dropdown.
 
