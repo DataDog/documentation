@@ -5,7 +5,7 @@ kind: guide
 
 Cloudcraft allows you to import your AWS cloud environment as *live diagrams*. By reverse-engineering the architecture in your AWS account, Cloudcraft can autogenerate new diagrams or enhance existing ones, saving you hours or even days of work.
 
-<div class="alert alert-info">If you are using Cloudcraft's New Live Experience, see this documentation: <a href="https://docs.datadoghq.com/cloudcraft/getting-started/crafting-better-diagrams/" title="Crafting Better Diagrams: Cloudcraft's Live Diagramming and Filtering">Crafting Better Diagrams: Cloudcraft's Live Diagramming and Filtering</a>.</div>
+<div class="alert alert-info">If you are using Cloudcraft's New Live Experience, see <a href="https://docs.datadoghq.com/cloudcraft/getting-started/crafting-better-diagrams/" title="Crafting Better Diagrams: Cloudcraft's Live Diagramming and Filtering">Crafting Better Diagrams: Cloudcraft's Live Diagramming and Filtering</a> instead.</div>
 
 ## Prerequisites
 
