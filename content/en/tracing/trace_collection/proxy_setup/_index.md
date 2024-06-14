@@ -710,7 +710,7 @@ Run the following script to download the latest version of the module:
 
 ```bash
 curl -s https://api.github.com/repos/DataDog/httpd-datadog/releases/latest \
-| grep "linux-x86_64-mod_datadog.tar.gz" \
+| grep "mod_datadog-linux-x86_64.tar.gz" \
 | cut -d : -f 2,3 \
 | tr -d \" \
 | wget -qi -
