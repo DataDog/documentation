@@ -19,7 +19,7 @@ Try the beta! Vitals are in public beta.
 
 ## Overview
 
-{{< img src="real_user_monitoring/browser/vitals_performance/vitals-results.png" alt="Select a view to start improving your performance vitals." style="width:100%;" >}}
+{{< img src="real_user_monitoring/browser/vitals_performance/vitals-workflow.mp4" alt="RUM Vitals helps you find the root cause of browser performance issues based on real user traffic." video="true" >}}
 
 RUM Vitals helps you find the true root cause of browser performance issues based on real user traffic. You can troubleshoot browser metrics, including the [Core Web Vitals][1] (CWV), [Loading Time][2] (Datadog's custom metric that evaluates how long it takes for a page to fully load from the user's perspective), and more. Determine what caused a slow page, with all the relevant information in one place.
 
