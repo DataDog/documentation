@@ -1,5 +1,5 @@
 ---
-title: Propagating the Trace Context
+title: Trace Context Propagation
 type: multi-code-lang
 description: 'Extract and inject Datadog, B3, and W3C Trace Context headers to propagate the context of a distributed trace.'
 aliases:
@@ -15,7 +15,21 @@ further_reading:
       text: 'Interoperability of OpenTelemetry API and Datadog instrumented traces'
 ---
 
-W3C Trace Context propagation is available for all supported languages. The default trace propagation style for all languages is `datadog,tracecontext`. Envoy and nginx proxies use the default of `tracecontext,datadog`.
+Trace Context propagation is the mechanism of passing tracing information like Trace ID, Span ID, and sampling decisions from one part of a distributed application to another. This enables all traces (and additional telemetry) in a request to be correlated. When automatic instrumentation is enabled, trace context propagation is handled automatically by the tracing library.
+
+## Supported Propagators
+Datadog maintains several propagators for passing trace context information in different formats:
+- Datadog
+- [W3C Trace Context][2]
+- [B3 Single][3]
+- [B3 Multi][4]
+- [AWS X-Ray][5]*
+  - Note: This is only supported in the Java tracing library
+
+## Configuration
+By default, the Datadog tracing libraries propagate trace context information using both the Datadog format and the W3C Trace Context format.
+
+When multiple propagators are enabled, the configured propagator order determines which trace context propagation format will be extracted and used for the incoming request. By default, language libraries are configured to give precedence to the Datadog format, whereas Envoy and NGINX proxies are configured to give precedence to the W3C Trace Context format.
 
 For more information about each language's configuration options for trace context propagation, see the following pages:
 
@@ -29,3 +43,7 @@ For more information about each language's configuration options for trace conte
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /opentelemetry/otel_tracing/
+[2]: https://www.w3.org/TR/trace-context/
+[3]: https://github.com/openzipkin/b3-propagation#single-header
+[4]: https://github.com/openzipkin/b3-propagation#multiple-headers
+[5]: https://docs.aws.amazon.com/xray/latest/devguide/aws-xray.html#xray-concepts-tracingheader
