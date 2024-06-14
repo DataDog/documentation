@@ -744,7 +744,7 @@ DatadogSamplingRate 0.1
 
 [1]: https://github.com/DataDog/httpd-datadog
 [2]: https://httpd.apache.org/
-[3]: https://github.com/DataDog/httpd-datadog/blob/dmehala/add-trace/doc/configuration.md
+[3]: https://github.com/DataDog/httpd-datadog/blob/main/doc/configuration.md
 {{% /tab %}}
 
 {{< /tabs >}}
