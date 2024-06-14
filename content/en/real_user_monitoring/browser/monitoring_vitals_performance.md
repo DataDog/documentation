@@ -78,7 +78,7 @@ In the troubleshooting section, you can see resources and errors that occurred o
 
 To see everything in context with the rest of the page activity, scroll down to the waterfall and timeline of events. The waterfall shows the event timeline up until the moment the vital was captured.
 
-You can select another sample event using the dropdown in the top left, and you can expand any event in the waterfall by clicking it to see the side panel, as shown below.
+You can select another sample event using the dropdown in the top left, and expand any event in the waterfall by clicking it to see the side panel, as shown below.
 
 {{< img src="real_user_monitoring/browser/vitals_performance/vitals-view-event-samples.png" alt="View event samples to see everything in context with the rest of the page activity." style="width:100%;" >}}
 
