@@ -160,6 +160,8 @@ To configure a private HTTP request:
    - No authentication
    - [Basic authentication](#create-an-http-basic-authentication-connection)
    - [Token authentication](#create-an-http-token-authentication-connection)
+   
+   For information on configuring credentials for Token authentication, see [Handling Private Action Credentials][6].
 1. Click **Next, Confirm Access** and configure access to the query.
 1. Click **Create**.
 
@@ -174,3 +176,4 @@ To configure a private HTTP request:
 [3]: https://learn.microsoft.com/en-us/azure/active-directory/develop/scopes-oidc#the-default-scope
 [4]: https://datadoghq.slack.com/
 [5]: /service_management/workflows/private_actions
+[6]: /service_management/workflows/guide/private_action_credentials/?tab=httpsaction#credential-files

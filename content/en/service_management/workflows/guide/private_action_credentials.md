@@ -15,8 +15,6 @@ Some private actions such as Jenkins and PostgreSQL require credentials to funct
 - Store your credential files in the configuration directory you created during setup.
 - When you specify the path to the credential in your runner connection, use the path to the credential file on the container.
 
-{{< img src="service_management/private-runner-creds.png" alt="The path to the credential file is '/etc/dd-action-runner/creds/creds.pgpass'" style="width:80%;" >}}
-
 ## Credential files
 
 {{< tabs >}}
@@ -24,7 +22,7 @@ Some private actions such as Jenkins and PostgreSQL require credentials to funct
 
 The PostgreSQL connection requires a PostgreSQL Connection URI credential. 
 
-In the example below, the credential is stored at `/etc/dd-action-runner/creds/creds.pgpass` on the action runner. This example uses the URI: `postgres://usr:password@example_host:5432/example_db`. For information on constructing a PostgreSQL connection URI, see [the official PostgreSQL documentation][101].
+This example uses the URI: `postgres://usr:password@example_host:5432/example_db`. For information on constructing a PostgreSQL connection URI, see [the official PostgreSQL documentation][101].
 
 {{< code-block lang="json" filename="/etc/dd-action-runner/creds/creds.pgpass" disable_copy="false" collapsible="true" >}}
 {
@@ -37,6 +35,11 @@ In the example below, the credential is stored at `/etc/dd-action-runner/creds/c
         ]
 }
 {{< /code-block >}}
+
+Point the connection to the location of the credential file on the private action runner container. In this example, the credential is stored at `/etc/dd-action-runner/creds/creds.pgpass` on the runner.
+
+{{< img src="service_management/private-runner-creds.png" alt="The path to the credential file is '/etc/dd-action-runner/creds/creds.pgpass'" style="width:80%;" >}}
+
 
 [101]: https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING-URIS
 {{% /tab %}}
@@ -67,7 +70,7 @@ In this example, all three credentials are stored in a single file. Replace `USE
 } 
 {{< /code-block >}}
 
-Your Jenkins connection points to the same path for all credentials.
+Your Jenkins connection points to the same path for all credentials. In this example, the credential file is stored at `/etc/dd-action-runner/creds/jenkins_creds.json` on the runner.
 
 {{< img src="service_management/single-file-creds.png" alt="All credential paths for the Jenkins connection point to '/etc/dd-action-runner/creds/jenkins_creds.json'" style="width:80%;" >}}
 
@@ -75,7 +78,7 @@ Your Jenkins connection points to the same path for all credentials.
 {{% collapse-content title="Multiple file example" level="p" %}}
 In this example, each Jenkins credential is stored in a separate file.
 
-Replace `USERNAME` with your username.
+For the username credential, replace `USERNAME` with your username.
 
 {{< code-block lang="json" filename="/etc/dd-action-runner/creds/jenkins_username.json" disable_copy="false" collapsible="true" >}}
 {
@@ -85,10 +88,10 @@ Replace `USERNAME` with your username.
                         "username": "USERNAME"
                 }
         ]
-} 
+}
 {{< /code-block >}}
 
-Replace `TOKEN` with your token.
+For the token credential, replace `TOKEN` with your token.
 
 {{< code-block lang="json" filename="/etc/dd-action-runner/creds/jenkins_token.json" disable_copy="false" collapsible="true" >}}
 {
@@ -101,7 +104,7 @@ Replace `TOKEN` with your token.
 }
 {{< /code-block >}}
 
-Replace `DOMAIN` with your domain.
+For the domain credential, replace `DOMAIN` with your domain.
 
 {{< code-block lang="json" filename="/etc/dd-action-runner/creds/jenkins_domain.json" disable_copy="false" collapsible="true" >}}
 {
@@ -114,11 +117,36 @@ Replace `DOMAIN` with your domain.
 }
 {{< /code-block >}}
 
-Your Jenkins connection points to path to each credential.
+Your Jenkins connection points to path to each credential. In this example, the credential files are stored at the following locations on the runner:
+- `/etc/dd-action-runner/creds/jenkins_username.json`
+- `/etc/dd-action-runner/creds/jenkins_token.json`
+- `/etc/dd-action-runner/creds/jenkins_domain.json`
 
 {{< img src="service_management/multi-file-creds.png" alt="All credential paths for the Jenkins connection point to '/etc/dd-action-runner/creds/jenkins_creds.json'" style="width:80%;" >}}
 
 {{% /collapse-content %}}
 
 {{% /tab %}}
+
+{{% tab "HTTPS action" %}}
+
+Basic authentication for the HTTP connection requires a credential file with a username and a password. Include both credentials in a single file.
+
+Replace `USERNAME` and `PASSWORD` with your username and password.
+
+{{< code-block lang="json" filename="/etc/dd-action-runner/creds/jenkins_token.json" disable_copy="false" collapsible="true" >}}
+{
+	"auth_type": "Basic Auth",
+	"credentials": [
+		{
+			"username": "USERNAME",
+			"password": "PASSWORD"
+		}
+	]
+}
+{{< /code-block >}}
+
+[101]: https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING-URIS
+{{% /tab %}}
+
 {{< /tabs >}}
