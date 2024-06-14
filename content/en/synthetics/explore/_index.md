@@ -2,6 +2,8 @@
 title: Search and Manage Synthetic Tests
 kind: documentation
 description: Learn how to search and manage your Synthetic tests.
+aliases:
+- /synthetics/search/
 further_reading:
 - link: "https://www.datadoghq.com/blog/test-creation-best-practices/"
   tag: "Blog"
@@ -9,10 +11,10 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/test-maintenance-best-practices/"
   tag: "Blog"
   text: "Best practices for maintaining end-to-end tests"
-- link: "/synthetics/search/saved_views"
+- link: "/synthetics/explore/saved_views"
   tag: "Documentation"
   text: "Learn about Saved Views"
-- link: "/continuous_testing/explorer"
+- link: "/synthetics/explore/results_explorer"
   tag: "Documentation"
   text: "Learn about the Synthetic Monitoring & Testing Results Explorer"
 - link: "/service_management/events/explorer"

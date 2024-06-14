@@ -4,8 +4,9 @@ kind: documentation
 description: Learn how to create a search query in the Synthetic Monitoring & Testing Results Explorer.
 aliases:
   - /synthetics/explorer/search_syntax
+  - /continuous_testing/explorer/search_syntax/
 further_reading:
-- link: '/continuous_testing/explorer'
+- link: '/synthetics/explore/results_explorer'
   tag: 'Documentation'
   text: 'Learn about the Synthetic Monitoring & Testing Results Explorer'
 ---

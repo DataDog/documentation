@@ -1,8 +1,10 @@
 ---
 title: Saved Views
 kind: documentation
+aliases:
+- /continuous_testing/explorer/saved_views/
 further_reading:
-- link: "/continuous_testing/explorer/search_syntax/"
+- link: "/synthetics/explore/results_explorer/search_syntax/"
   tag: "Documentation"
   text: "Learn how to create a search query"
 ---
