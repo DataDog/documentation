@@ -668,8 +668,7 @@ Datadog provides an HTTPd [module][1] to enhance [Apache HTTP Server][2] and [IH
 
 ### Compatibility
 
-- The module only supports Apache HTTP Server `v2.4.x`.
-- Since IHS HTTP Server is essentially a wrapper of the Appache HTTP Server, the module can also be used with IHS without any modifications.
+Since IHS HTTP Server is essentially a wrapper of the Appache HTTP Server, the module can also be used with IHS without any modifications.
 
 ### Installation
 
