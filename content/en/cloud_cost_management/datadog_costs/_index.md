@@ -17,6 +17,9 @@ further_reading:
 - link: "/cloud_cost_management/google_cloud"
   tag: "Documentation"
   text: "Gain insights into your Google Cloud bill"
+- link: "/cloud_cost_management/saas_costs"
+  tag: "Documentation"
+  text: "Learn about SaaS Cost Integrations"
 - link: "/cloud_cost_management/custom"
   tag: "Documentation"
   text: "Gain insights into your custom costs"
@@ -38,18 +41,15 @@ Daily Datadog costs gives you visibility into daily Datadog spending across dash
 
 ## Permissions
 
-<div class="alert alert-danger">Only existing Cloud Cost Management customers within the parent organization can access daily Datadog costs outside of <a href="https://app.datadoghq.com/billing/usage">Plan and Usage</a>.</div>
-
 [Datadog costs][4] are available for users with [Datadog Admin][5] permissions or custom [Billing Read (`billing_read`) and Usage Read (`usage_read`)][6] permissions on the [**Usage & Cost** page][7].
 
-## Visualize costs
+<div class="alert alert-info">Only existing Cloud Cost Management customers within the parent organization can access daily Datadog costs outside of <a href="https://app.datadoghq.com/billing/usage">Plan and Usage</a>.</div>
 
+## Visualize and break down costs
 
-{{< img src="cloud_cost/datadog_costs/dashboard.png" alt="Datadog costs as an option for the Cloud Cost data source in a dashboard" style="width:100%;" >}}
+Datadog cost data is available in dashboards and notebooks under the **Cloud Costs** data source. You can create dashboards to monitor your daily costs, identify trends, and optimize resource usage.
 
-Datadog cost data is available in dashboards and notebooks under the **Cloud Costs** data source. You can create dashboards to monitor your daily costs, identify trends, and optimize resource usage. 
-
-## Break down costs
+{{< img src="cloud_cost/datadog_costs/dashboard.png" alt="Datadog costs as an option for the Cloud Cost data source in a dashboard" style="width:100%;" >}} 
 
 You can use out-of-the-box tags to break down and allocate your costs. Use the following tags to filter and group your Datadog cost data.
 
