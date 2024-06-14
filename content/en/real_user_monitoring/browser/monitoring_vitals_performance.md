@@ -34,7 +34,7 @@ To get the most out of this feature, Datadog recommends that you use:
 
 Navigate to the [Vitals page][3], or click the "Vitals" tab under the [**Digital Experience > Performance Monitoring**][4] page.
 
-{{< img src="real_user_monitoring/browser/vitals_performance/vitals-page-selectors.png" alt="You can check vitals for the top most visited pages or specific pages." style="width:100%;" >}}
+{{< img src="real_user_monitoring/browser/vitals_performance/vitals-page-selectors-1.png" alt="You can check vitals for the top most visited pages or specific pages." style="width:100%;" >}}
 
 From this view, you have two ways of selecting the page and vital to review and optimize:
 
