@@ -46,7 +46,7 @@ Dynamic Instrumentation requires the following:
 - [Remote Configuration][2] is enabled in that Agent.
 - For Java applications, tracing library [`dd-trace-java`][3] 1.34.0 or higher.
 - For Python applications, tracing library [`dd-trace-py`][4] 2.2.0 or higher.
-- For .NET applications, tracing library [`dd-trace-dotnet`][5] 2.42.0 (recommended 2.53.0) or higher.
+- For .NET applications, tracing library [`dd-trace-dotnet`][5] 2.54.0 or higher.
 - [Unified Service Tagging][6] tags `service`, `env`, and `version` are applied to your deployment.
 - Recommended, [autocomplete and search (open beta)][17] is enabled.
 - Recommended, [Source Code Integration][7] is set up for your service.
@@ -99,7 +99,7 @@ All probe types require the same initial setup:
 1. Go to the [Dynamic Instrumentation page][12].
 1. Click **Create Probe** in the top right, or click the three-dot menu on a service and select **Add a probe for this service**.
 1. If they are not prefilled, choose service, runtime, environment, and version.
-1. In the source code, specify where to set the probe by selecting either a class and method or a source file and line. If you opted into the [autocomplete and search public beta][17] and you set up Source Code Integration for your service, autocomplete shows suggestions for the selecting a class / method, and displays the file's code so you can choose the line.
+1. In the source code, specify where to set the probe by selecting either a class and method or a source file and line. If you opted into the [autocomplete and search public beta][17], autocomplete shows suggestions for the selecting a class / method.
 
 See the individual probe types below for specific creation steps for each probe type.
 
