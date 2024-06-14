@@ -16,7 +16,7 @@ integration_id: google-kubernetes-engine
 integration_title: Google Kubernetes Engine, Cloud
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: google_kubernetes_engine
 public_title: Datadog-Google Kubernetes Engine, Cloud インテグレーション

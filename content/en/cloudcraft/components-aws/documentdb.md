@@ -22,7 +22,7 @@ Use the toolbar to configure and customize the component. The following options 
 
 ## API
 
-Use the [Cloudcraft API][1] to programmatically access and render your architecture diagrams as JSON objects. 
+Use the [Cloudcraft API][1] to programmatically access and render your architecture diagrams as JSON objects.
 
 ### Schema
 
@@ -65,10 +65,10 @@ The following is an example JSON object of a DocumentDB component:
 - **iops: number**: The monthly I/O limit for the cluster, in the millions. Only applicable if `role` is set to `writer`.
 - **color: object**. The fill color for the component body.
   - **isometric: string**: The fill color for the component in the 3D view. Must be a hexadecimal color.
-  - **2d: string**: The fill color for the component in the 3D view. Must be a hexadecimal color.
+  - **2d: string**: The fill color for the component in the 2D view. Must be a hexadecimal color.
 - **accentColor: object**: The accent color used to display the component logo on the block.
   - **isometric: string**. The accent color for the component in the 3D view. Must be a hexadecimal color.
-  - **2d: string**. The accent color for the component in the 3D view. Must be a hexadecimal color.
+  - **2d: string**. The accent color for the component in the 2D view. Must be a hexadecimal color.
 - **link: uri**. Link the component to another diagram using the `blueprint://ID` format or to an external website using the `https://LINK` format.
 - **locked: boolean**. If `true`, changes made to the component using the application are disabled until unlocked.
 

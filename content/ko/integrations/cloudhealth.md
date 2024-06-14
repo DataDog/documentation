@@ -18,7 +18,7 @@ integration_id: cloudhealth
 integration_title: Cloudhealth
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: cloudhealth
 public_title: Datadog-Cloudhealth 통합
