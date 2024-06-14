@@ -24,7 +24,7 @@ The **Live** tab is where you select your account, scan regions, generate layout
 
 {{< img src="cloudcraft/getting-started/create-your-first-cloudcraft-diagram/live-tab.png" alt="A live infrastructure diagram in Cloudcraft with the AWS and live tabs highlighted." responsive="true" style="width:100%;">}}
 
-If you only added one AWS account to Cloudcraft, it's automatically selected for you, otherwise, select the account you want from the drop-down.
+If you have only added one AWS account to Cloudcraft, it is automatically selected. Otherwise, select the account you want from the drop-down.
 
 Select the region you want to scan. You can scan and add multiple regions into a single diagram; however, begin by selecting one region.
 
