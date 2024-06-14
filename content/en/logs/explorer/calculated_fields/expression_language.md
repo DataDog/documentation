@@ -10,7 +10,7 @@ further_reading:
 
 ## Overview
 
-Use Calculated Fields to manipulate text, perform arithmetic operations, and evaluate conditional logic on log data in the Log Explorer. A calculated field's formula (or expression) can include log attributes, other calculated fields, and a set of supported functions and operators. 
+Use Calculated Fields to manipulate text, perform arithmetic operations, and evaluate conditional logic on log data in the Log Explorer. A calculated field's formula (or expression) can include log attributes, other calculated fields, and a set of functions and operators.
 
 ## Basic syntax and language constructs
 
@@ -35,7 +35,7 @@ The available operators in order of precedence:
 | `!`, `NOT`, `-` | A logical or arithmetic negation |
 | `*`, `/` | Multiplication, division|
 | `+`, `-` | Addition, subtraction |
-| `<`, `<=`, `>`, `>=` | less than, less than or equal to, greater than, and greater than or equal to |
+| `<`, `<=`, `>`, `>=` | Less than, less than or equal to, greater than, and greater than or equal to |
 | `==`, `!=` | Match, does not match |
 | `&&`, `AND` | Logical AND |
 | `\|\|`, `OR` | Logical OR |

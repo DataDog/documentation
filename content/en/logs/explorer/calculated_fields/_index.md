@@ -38,13 +38,15 @@ This is a quick way to create a calculated field when you are already familiar w
 1. Click on a specific JSON attribute to open the context menu.
 1. Select **Create calculated from...**.
 
-[IMAGE]
+
+{{< img src="logs/explorer/calculated_fields/create_field.png" alt="" style="width:100%;" >}}
 
 The option to add a calculated field from a attribute lets you pivot in the midst of an investigation or when exploring unfamiliar logs. For example, you may want to multiply or concatenate two values and store the result in a single field to simplify a graph or answer a specific question.
 
 ### Defining a calculated field
 
-[IMAGE]
+
+{{< img src="logs/explorer/calculated_fields/define_calculated_field.png" alt="" style="width:50%;" >}}
 
 #### Name
 
@@ -68,7 +70,7 @@ After successful creation of a new calculated field, the Log Explorer updates th
 
 Calculated fields can be used for search, aggregation, visualization, and definition of other calculated fields and works in the same way as log attributes. Make sure to use the `#` prefix to reference calculated field names.
 
-[Image]
+{{< img src="logs/explorer/calculated_fields/calculated_field.png" alt="" style="width:100%;" >}}
 
 #### When to use calculated fields
 
