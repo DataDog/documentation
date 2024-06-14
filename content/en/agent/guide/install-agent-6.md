@@ -235,30 +235,57 @@ DD_API_KEY=MY_API_KEY bash -c "$(curl -L https://raw.githubusercontent.com/DataD
 {{% tab "Amazon Linux" %}}
 ### One-step install
 
-The one-step command installs the YUM packages for the Datadog Agent and prompts you for your password. If the Agent is not already installed on your machine and you don't want it to start automatically after the installation, prepend `DD_INSTALL_ONLY=true` to the command before running it.
+The one-step command installs the YUM packages for the Datadog Agent and prompts you for your password.
+- If the Agent is not already installed on your machine and you don't want it to start automatically after the installation, prepend `DD_INSTALL_ONLY=true` to the command before running it.
+- If you have an existing Agent configuration file, existing values are retained during the update.
+- You can configure some of the Agent options during the initial install process. For more information, check the [install_script configuration options][101].
 
-Run the following command, replacing `MY_API_KEY` with your Datadog API key:
-```shell
-DD_API_KEY=MY_API_KEY bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/dd-agent/master/packaging/datadog-agent/source/install_agent.sh)"
-```
+1. Run the following command, replacing `MY_API_KEY` with your Datadog API key:
+   ```shell
+   DD_API_KEY=MY_API_KEY DD_SITE="datad0g.com" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent6.sh)"
+   ```
+
+1. For Amazon Linux 2022 installations on Agent version <= 6.39. The Agent requires the `libxcrypt-compat` package:
+   ```shell
+   dnf install -y libxcrypt-compat
+   ```
 
 ### Multi-step install
 
-1. Set up the Datadog YUM repo by creating `/etc/yum.repos.d/datadog.repo` with the following contents:
+1. On an x86_64 host, set up the Datadog YUM repo by creating `/etc/yum.repos.d/datadog.repo` with the following contents:
    ```conf
    [datadog]
    name=Datadog, Inc.
-   baseurl=https://yum.datadoghq.com/rpm/x86_64/
+   baseurl=https://yum.datadoghq.com/stable/6/x86_64/
    enabled=1
    gpgcheck=1
+   repo_gpgcheck=1
    gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
           https://keys.datadoghq.com/DATADOG_RPM_KEY_B01082D3.public
           https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
+          https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
    ```
 
-   **Note**: On i386/i686 architecture, replace "x86_64" with "i386".
+1. On an arm64 host, set up the Datadog YUM repo by creating `/etc/yum.repos.d/datadog.repo` with the following contents:
+   ```conf
+   [datadog]
+   name=Datadog, Inc.
+   baseurl=https://yum.datadoghq.com/stable/6/aarch64/ 
+   enabled=1
+   gpgcheck=1
+   repo_gpgcheck=1
+   gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
+          https://keys.datadoghq.com/DATADOG_RPM_KEY_B01082D3.public
+          https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
+          https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
+   ```
 
 1. Update your local yum repo and install the Agent:
+   ```shell
+   sudo yum makecache
+   sudo yum install datadog-agent
+   ```
+1. If upgrading from Agent 5 or 6, delete the obsolete RPM GPG key:
    ```shell
    sudo yum makecache
    sudo yum install datadog-agent
@@ -272,6 +299,8 @@ DD_API_KEY=MY_API_KEY bash -c "$(curl -L https://raw.githubusercontent.com/DataD
    ```shell
    sudo /etc/init.d/datadog-agent restart
    ```
+
+[101]: https://github.com/DataDog/agent-linux-install-script/blob/main/README.md#agent-configuration-options   
 {{% /tab %}}
 
 {{% tab "CentOS and Red Hat" %}}
