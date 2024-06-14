@@ -4,8 +4,8 @@ aliases:
 further_reading:
 - link: /monitors/types/metric/
   tag: Documentación
-  text: Monitores de métricas
-kind: guía
+  text: Monitor de métricas
+kind: Guía
 title: Umbrales de recuperación
 ---
 
@@ -28,7 +28,7 @@ El umbral de recuperación se satisface cuando se cumple la condición de recupe
 
 ## Caso práctico
 
-Los umbrales de recuperación reducen el ruido del flapping de monitor. Esto puede aumentar la confianza en que la métrica de alerta se recupere y el problema se resuelva tras la recuperación.
+Los umbrales de recuperación reducen el ruido de un monitor de flapping. Esto puede aumentar la confianza en que la métrica de alerta se recupere y el problema se resuelva tras la recuperación.
 
 ## ¿Cómo configurar los umbrales de recuperación?
 
