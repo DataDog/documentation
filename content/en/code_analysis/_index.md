@@ -93,7 +93,7 @@ Click **+ Add a Repository** on the [**Code Analysis Repositories** page][9] and
 {{< tabs >}}
 {{% tab "Datadog" %}}
 
-<div class="alert alert-warning">Datadog-hosted scans are supported by Software Composition Analysis (SCA) and GitHub repositories only. To enable Static Analysis or if you are not using a GitHub repository, run scans in your CI pipelines instead.</div>
+<div class="alert alert-warning">Datadog-hosted scans are supported by Software Composition Analysis (SCA) and GitHub repositories only. To enable Static Analysis or use a different CI provider, run scans in your CI pipelines instead.</div>
 
 To enable [Software Composition Analysis][101] on a GitHub repository, click **Select Repositories** and click the toggle for `Enable Software Composition Analysis (SCA)`.
 
