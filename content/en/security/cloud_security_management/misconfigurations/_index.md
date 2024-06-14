@@ -45,7 +45,7 @@ Use template variables and Markdown to [customize notification messages][9]. Edi
 
 Investigate details using the [Misconfigurations Explorer][10]. View detailed information about a resource, such as configuration, compliance rules applied to the resource, and tags that provide additional context about who owns the resource and its location within your environment. If a misconfiguration does not match your business use case or is an accepted risk, you can [mute the misconfiguration][13] up to an indefinite period of time.
 
-You can also [create a Jira issue][15] and assign it to a team, use Terraform remediation to generate a pull request in Github with code changes that fix the underlying identity risk, and leverage [Workflow Automation][14] to create automated workflows (with or without human involvement).
+You can also [create a Jira issue][15] and assign it to a team, use Terraform remediation to generate a pull request in Github with code changes that fix the underlying misconfiguration, and leverage [Workflow Automation][14] to create automated workflows (with or without human involvement).
 
 {{< img src="security/cspm/misconfigurations_explorer.png" alt="CSM Misconfigurations Explorer page" width="100%">}}
 
