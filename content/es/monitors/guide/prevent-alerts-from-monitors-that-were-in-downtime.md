@@ -16,7 +16,7 @@ kind: Guía
 title: Evitar alertas de monitores que estaban en tiempo de inactividad
 ---
 
-Cuando un grupo está [en tiempo de inactividad][1] y pasa de **`OK`** a uno de los estados **`ALERT`**, **`WARNING`** o **`NO DATA`**, se suprimen las notificaciones por parte de este evento. 
+Cuando un grupo está [en tiempo de inactividad][1] y pasa de **`OK`** a un estado **`ALERT`**, **`WARNING`** o **`NO DATA`**, este evento ya no puede enviarte notificaciones. 
 Cuando este tiempo de inactividad finaliza o se cancela, se permite el envío de eventos de renotificación (si están configurados) y de recuperación.
 
 Una opción es resolver el monitor antes de cancelar el tiempo de inactividad para suprimir las notificaciones de recuperación. Sin embargo, cualquier grupo que estuviera en un estado diferente de **`OK`** podría volver a su estado anterior, lo que generaría otra notificación.
