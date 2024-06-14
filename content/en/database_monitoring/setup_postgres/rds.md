@@ -8,10 +8,6 @@ further_reading:
   text: "Basic Postgres Integration"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
-{{< /site-region >}}
-
 Database Monitoring provides deep visibility into your Postgres databases by exposing query metrics, query samples, explain plans, database states, failovers, and events.
 
 The Agent collects telemetry directly from the database by logging in as a read-only user. Do the following setup to enable Database Monitoring with your Postgres database:
@@ -242,9 +238,9 @@ To configure collecting Database Monitoring metrics for an Agent running on a ho
    ssl: allow
    ```
 
-   If you want to authenticate with IAM, set the `region` and `instance_endpoint` parameters.
+   If you want to authenticate with IAM, specify the `region` and `instance_endpoint` parameters, and set `managed_authentication.enabled` to `true`.
 
-   **Note**: only set the `region` parameter if you want to use IAM authentication. IAM authentication takes precedence over the `password` field.
+   **Note**: only enable `managed_authentication` if you want to use IAM authentication. IAM authentication takes precedence over the `password` field.
 
    ```yaml
    init_config:
@@ -256,6 +252,8 @@ To configure collecting Database Monitoring metrics for an Agent running on a ho
        aws:
          instance_endpoint: '<AWS_INSTANCE_ENDPOINT>'
          region: '<REGION>'
+         managed_authentication:
+           enabled: true
        tags:
          - "dbinstanceidentifier:<DB_INSTANCE_NAME>"
        ## Required for Postgres 9.6: Uncomment these lines to use the functions created in the setup
@@ -290,16 +288,17 @@ export DD_AGENT_VERSION=7.36.1
 
 docker run -e "DD_API_KEY=${DD_API_KEY}" \
   -v /var/run/docker.sock:/var/run/docker.sock:ro \
-  -l com.datadoghq.ad.check_names='["postgres"]' \
-  -l com.datadoghq.ad.init_configs='[{}]' \
-  -l com.datadoghq.ad.instances='[{
-    "dbm": true,
-    "host": "<AWS_INSTANCE_ENDPOINT>",
-    "port": 5432,
-    "username": "datadog",
-    "password": "<UNIQUEPASSWORD>",
-    "tags": ["dbinstanceidentifier:<DB_INSTANCE_NAME>"]
-  }]' \
+  -l com.datadoghq.ad.checks='{"postgres": {
+    "init_config": [{}],
+    "instances": [{
+      "dbm": true,
+      "host": "<AWS_INSTANCE_ENDPOINT>",
+      "port": 5432,
+      "username": "datadog",
+      "password": "<UNIQUEPASSWORD>",
+      "tags": ["dbinstanceidentifier:<DB_INSTANCE_NAME>"]
+    }]
+  }}' \
   gcr.io/datadoghq/agent:${DD_AGENT_VERSION}
 ```
 
@@ -469,7 +468,7 @@ If you have installed and configured the integrations and Agent as described and
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /agent/basic_agent_usage#agent-overhead
+[1]: /database_monitoring/agent_integration_overhead/?tab=postgres
 [2]: /database_monitoring/data_collected/#sensitive-information
 [3]: https://app.datadoghq.com/integrations/amazon-web-services
 [4]: https://www.postgresql.org/docs/current/config-setting.html

@@ -4,12 +4,14 @@ further_reading:
   tag: Documentation
   text: Paramètres de formule et d'utilisation
 kind: guide
-title: Passer de la v1 à la v2 des API d'attribution de l'utilisation
+title: Passer à des API d'attribution de l'utilisation horaire et mensuelle
 ---
 
 ## Résumé
 
 Ce guide explique comment passer de la version 1 à la version 2 des API d'attribution de l'utilisation. Les API v1, désormais obsolètes, sont divisées en deux catégories : L'API d'utilisation mensuelle ([Récupérer l'attribution de l'utilisation][1]), et les API basées sur un fichier ([Récupérer la liste des rapports personnalisés journaliers disponibles][2], [Récupérer les rapports personnalisés journaliers spécifiés][3], [Récupérer la liste des rapports personnalisés mensuels disponibles][4] et [Récupérer les rapports personnalisés mensuels spécifiés][5]). Pour utiliser ce guide, accédez à la section correspondant aux API v1 que vous utilisez actuellement, et suivez les instructions pour passer aux API v2 correspondantes.
+
+**Remarque** : Toute mention de v1 et v2 dans ce document ne fait pas référence à la version du chemin de lʼURL. Toutes les API de cette documentation sont les premières versions avec leurs chemins d'accès respectifs, et utilisent donc `v1` dans le chemin de l'URL.
 
 ## API d'utilisation mensuelle
 

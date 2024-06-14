@@ -205,6 +205,8 @@ Edit a workflow in JSON by clicking **Edit JSON Spec** on your workflow page. Th
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+<br>Do you have questions or feedback? Join the **#workflows** channel on the [Datadog Community Slack][10].
+
 [1]: https://app.datadoghq.com/workflow
 [2]: https://handlebarsjs.com/guide/expressions.html#expressions
 [3]: /service_management/workflows/trigger
@@ -214,4 +216,5 @@ Edit a workflow in JSON by clicking **Edit JSON Spec** on your workflow page. Th
 [7]: /getting_started/tagging/
 [8]: /glossary/#service
 [9]: /account_management/teams/
+[10]: https://datadoghq.slack.com/
 

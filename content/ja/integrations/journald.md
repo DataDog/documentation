@@ -164,7 +164,7 @@ Datadog Agent バージョン `7.37.0`+ では、これらのパラメーター�
 - `include_user_units`: 指定されたすべてのユーザーレベルユニットを含めます。
 - `exclude_user_units`: 指定されたすべてのユーザーレベルユニットを除外します。
 
-**注**: `exclude_units` または `exclude_user_units` で `*` ワイルドカードを使用して、特定の Journald ログを指定します。
+**注**: `exclude_units` または `exclude_user_units` でワイルドカード `*` を使用すると、特定の Journald ログを指定できます。ワイルドカード `*` は `include_units` では機能しません。デフォルトでは、システムにもユーザーにもユニットがなく、一致するものが定義されていない場合、すべてのジャーナルログが収集されます。
 
 例:
 

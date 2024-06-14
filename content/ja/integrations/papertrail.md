@@ -1,26 +1,52 @@
 ---
+app_id: papertrail
+app_uuid: 630c6ff6-e853-4ef7-8be4-371a55269208
+assets:
+  integration:
+    auto_install: true
+    events:
+      creates_events: true
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 147
+    source_type_name: PaperTrail
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
-- monitoring
+- event management
+- notifications
 dependencies: []
-description: Papertrail のログを Datadog のイベントストリームで表示、検索、議論。
-doc_link: https://docs.datadoghq.com/integrations/papertrail/
+display_on_public_website: true
 draft: false
 git_integration_title: papertrail
-has_logo: true
 integration_id: papertrail
-integration_title: PaperTrail
+integration_title: Papertrail
 integration_version: ''
 is_public: true
 kind: インテグレーション
-manifest_version: '1.0'
+manifest_version: 2.0.0
 name: papertrail
-public_title: Datadog-PaperTrail インテグレーション
+public_title: Papertrail
 short_description: Papertrail のログを Datadog のイベントストリームで表示、検索、議論。
-team: web-integrations
-version: '1.0'
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Event Management
+  - Category::Notifications
+  configuration: README.md#Setup
+  description: Papertrail のログを Datadog のイベントストリームで表示、検索、議論。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Papertrail
 ---
 
-{{< img src="integrations/papertrail/papertrailexample.png" alt="Papertrail 例" popup="true">}}
+<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
+{{< img src="integrations/papertrail/papertrailexample.png" alt="Papertrail の例" popup="true">}}
 
 ## 概要
 
@@ -29,9 +55,9 @@ Papertrail と Datadog を使用して、以下のことができます。
 - 自由形式のログデータをすぐに使用できるメトリクスに変換できます。
 - 運用情報のサイロ化を避けることができます。ログ由来のメトリクスをアプリ/システムレベルのメトリクスと共に表示し、相互に関連付けることができます。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 Papertrail からのメトリクスをキャプチャするには、以下のようにします。
 
@@ -48,25 +74,25 @@ Papertrail からのメトリクスをキャプチャするには、以下のよ
 
 Papertrail が、選択された間隔で Datadog を更新します。
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 このインテグレーションに構成手順は必要ありません。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 
 Papertrail インテグレーションには、メトリクスは含まれません。
 
-### イベント
+### ヘルプ
 
 Papertrail インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 
 Papertrail インテグレーションには、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][2]までお問合せください。
 

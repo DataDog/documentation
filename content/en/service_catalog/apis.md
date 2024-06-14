@@ -13,13 +13,13 @@ further_reading:
   tag: "Documentation"
   text: "Service Definition API"
 - link: "https://github.com/DataDog/schema/blob/main/service-catalog/v2/schema.json"
-  tag: "GitHub"
+  tag: "Source Code"
   text: "Service Definition Schema (v2)"
 - link: "https://github.com/DataDog/schema/blob/main/service-catalog/v2.1/schema.json"
-  tag: "GitHub"
+  tag: "Source Code"
   text: "Service Definition Schema (v2.1)"
 - link: "https://github.com/DataDog/schema/blob/main/service-catalog/v2.2/schema.json"
-  tag: "GitHub"
+  tag: "Source Code"
   text: "Service Definition Schema (v2.2)"
 algolia:
   tags: ['service definition']

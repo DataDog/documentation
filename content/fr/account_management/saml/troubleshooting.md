@@ -102,14 +102,13 @@ Si vous ne parvenez pas à vous connecter en raison d'une erreur basée sur un r
 
 ## Erreurs concernant le fournisseur d'identité
 
-Si vous recevez une erreur de la part de votre fournisseur d'identité (Google, Active Directory, Azure, LastPass, Okta, etc) :
+Si vous recevez une erreur de la part de votre fournisseur d'identité (Google, Active Directory, Azure, Okta, etc) :
 
 - Si vous rencontrez un problème dans la console d'administration de Google, consultez la section [Messages d'erreur liés aux applications SAML][10].
 - Si vous rencontrez un problème dans Active Directory, consultez la section [Déboguer une authentification unique SAML pour des applications][11] de la documentation Azure Active Directory.
 - Si vous rencontrez un problème dans AuthO, consultez la section [Résoudre les problèmes de configuration SAML][12] (en anglais).
 - Si vous rencontrez un problème dans Azure, consultez la section [Une page d'application affiche un message d'erreur une fois que l'utilisateur est connecté][13].
 - Si vous rencontrez un problème dans Google, consultez la section [Application cloud Datadog][14].
-- Si vous rencontrez un problème dans LastPass, consultez la section [Intégration de l'application Datadog][15] (en anglais).
 - Si vous rencontrez un problème dans Okta, consultez la section [Erreur 404 lors d'une tentative de connexion à l'application][16] (en anglais).
 - Si vous rencontrez un problème dans SafeNet, consultez la section [SafeNet Trusted Access pour Datadog][17] (en anglais).
 
@@ -155,7 +154,6 @@ Avant de contacter l'assistance Datadog, discutez avec votre administrateur. Vou
 [12]: https://auth0.com/docs/troubleshoot/troubleshoot-authentication/troubleshoot-saml-configurations
 [13]: https://docs.microsoft.com/en-us/azure/active-directory/manage-apps/application-sign-in-problem-application-error
 [14]: https://support.google.com/a/answer/7553768
-[15]: https://support.logmeininc.com/lastpass/help/datadog-app-integration
 [16]: https://support.okta.com/help/s/article/Receiving-404-error-when-attempting-to-sign-into-application?language=en_US
 [17]: https://resources.safenetid.com/help/Datadog/Index.htm
 [18]: https://www.datadoghq.com/support/

@@ -50,11 +50,10 @@ title: 데이터 스트림 모니터링
 | 런타임 | 지원되는 기술 |
 |---|----|
 | 자바(Java)/Scala | Kafka(자체 호스팅됨, Amazon MSK, Confluent Cloud / Platform), RabbitMQ, HTTP, gRPC, Amazon SQS |
-| Python | Kafka(자체 호스팅, Amazon MSK, Confluent Cloud/플랫폼), Amazon SQS |
+| Python | Kafka(자체 호스팅, Amazon MSK, Confluent Cloud/플랫폼), RabbitMQ, Amazon SQS |
 | .NET | Kafka(자체 호스팅, Amazon MSK, Confluent Cloud/플랫폼), RabbitMQ, Amazon SQS |
-| Node.js | Kafka(자체 호스팅, Amazon MSK, Confluent Cloud/플랫폼), Amazon SQS |
+| Node.js | Kafka(자체 호스팅, Amazon MSK, Confluent Cloud/플랫폼), RabbitMQ, Amazon SQS |
 | Go | 전체([수동 계측 포함][1]) |
-
 
 ## 데이터 스트림 모니터링 살펴보기
 
@@ -64,8 +63,10 @@ title: 데이터 스트림 모니터링
 
 | 메트릭 이름 | 주목할 태그 | 설명 |
 |---|---|-----|
-| data_streams.latency | `start`, `end`, `env` | 특정 소스에서 목적지 소스로의 엔드투엔드 경로 지연 |
+| data_streams.latency | `start`, `end`, `env` | 특정 소스에서 대상 서비스로 가는 경로의 엔드투엔드 대기 시간 |
 | data_streams.kafka.lag_seconds | `consumer_group`, `partition`, `topic`, `env` | 생산자 및 소비자 간 초 단위의 지연이 있습니다. 자바(Java) 에이전트 v1.9.0 이상이 필요합니다. |
+| data_streams.payload_size | `consumer_group`, `topic`, `env` | 수신 및 발신 처리량 바이트|
+
 
 또한 대시보드 또는 노트북에서 이러한 메트릭을 그래프화 및 시각화할 수 있습니다.
 
@@ -115,3 +116,4 @@ Datadog은 [통합 서비스 태깅][3]을 통해 서비스 및 관련 로그를
 [3]: /ko/getting_started/tagging/unified_service_tagging
 [4]: /ko/integrations/kafka/
 [5]: /ko/integrations/amazon_sqs/
+[6]: /ko/tracing/trace_collection/runtime_config/

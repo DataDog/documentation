@@ -1,6 +1,5 @@
 ---
 title: Cloud Security Management Guides
-kind: guide
 disable_toc: true
 aliases:
   - /security_platform/cloud_workload_security/guide/
@@ -13,6 +12,7 @@ aliases:
 {{< /whatsnext >}}
 
 {{< whatsnext desc="CSM Threats Guides" >}}
+    {{< nextlink href="/security/cloud_security_management/guide/active-protection" >}}Proactively block crypto mining threats with Active Protection{{< /nextlink >}}
     {{< nextlink href="/security/cloud_security_management/guide/tuning-rules" >}}Best Practices for Fine-Tuning CSM Threats Security Signals{{< /nextlink >}}
     {{< nextlink href="/security/cloud_security_management/guide/custom-rules-guidelines" >}}Guidelines for Writing Custom Rules{{< /nextlink >}}
 {{< /whatsnext >}}

@@ -1,21 +1,21 @@
 menu:
   api:
-  - identifier: API 개요
+  - identifier: API overview
     name: 개요
     url: /api/latest/
     weight: -10
   - name: API 사용
-    parent: API 개요
+    parent: API overview
     url: /api/latest/using-the-api/
     weight: 5
-  - identifier: API 범위
+  - identifier: API Scopes
     name: 인증 범위
-    parent: API 개요
+    parent: API overview
     url: /api/latest/scopes/
     weight: 6
   - identifier: rate-limits
     name: 속도 제한
-    parent: API 개요
+    parent: API overview
     url: /api/latest/rate-limits/
     weight: 7
   - generated: true
@@ -208,7 +208,7 @@ menu:
     url: '#get-list-of-aws-log-ready-services'
   - generated: true
     identifier: aws-logs-integration-check-that-an-aws-lambda-function-exists
-    name: AWS 람다 함수 존재 여부 확대
+    name: AWS 람다 함수 존재 여부 확인
     params:
       operationids:
       - CheckAWSLogsLambdaAsync
@@ -2844,7 +2844,7 @@ menu:
     parent: snapshots
     url: '#take-graph-snapshots'
   - generated: true
-    identifier: 신서틱(Synthetic)
+    identifier: synthetics
     name: 신서틱(Synthetic)
     url: /api/latest/synthetics/
   - generated: true
@@ -2857,7 +2857,7 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: 신서틱(Synthetic)
+    parent: synthetics
     url: '#save-new-value-for-on-demand-concurrency-cap'
   - generated: true
     identifier: synthetics-get-the-on-demand-concurrency-cap
@@ -2869,7 +2869,7 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: 신서틱(Synthetic)
+    parent: synthetics
     url: '#get-the-on-demand-concurrency-cap'
   - generated: true
     identifier: synthetics-edit-a-global-variable
@@ -2881,7 +2881,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 신서틱(Synthetic)
+    parent: synthetics
     url: '#edit-a-global-variable'
   - generated: true
     identifier: synthetics-get-a-global-variable
@@ -2893,7 +2893,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 신서틱(Synthetic)
+    parent: synthetics
     url: '#get-a-global-variable'
   - generated: true
     identifier: synthetics-delete-a-global-variable
@@ -2905,7 +2905,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 신서틱(Synthetic)
+    parent: synthetics
     url: '#delete-a-global-variable'
   - generated: true
     identifier: synthetics-create-a-global-variable
@@ -2917,7 +2917,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 신서틱(Synthetic)
+    parent: synthetics
     url: '#create-a-global-variable'
   - generated: true
     identifier: synthetics-get-all-global-variables
@@ -2929,7 +2929,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 신서틱(Synthetic)
+    parent: synthetics
     url: '#get-all-global-variables'
   - generated: true
     identifier: synthetics-pause-or-start-a-test
@@ -2941,7 +2941,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 신서틱(Synthetic)
+    parent: synthetics
     url: '#pause-or-start-a-test'
   - generated: true
     identifier: synthetics-get-an-api-test-result
@@ -2953,7 +2953,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 신서틱(Synthetic)
+    parent: synthetics
     url: '#get-an-api-test-result'
   - generated: true
     identifier: synthetics-get-an-api-tests-latest-results-summaries
@@ -2965,7 +2965,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 신서틱(Synthetic)
+    parent: synthetics
     url: '#get-an-api-tests-latest-results-summaries'
   - generated: true
     identifier: synthetics-edit-a-test
@@ -2977,7 +2977,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 신서틱(Synthetic)
+    parent: synthetics
     url: '#edit-a-test'
   - generated: true
     identifier: synthetics-patch-a-synthetic-test
@@ -2989,7 +2989,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 신서틱(Synthetic)
+    parent: synthetics
     url: '#patch-a-synthetic-test'
   - generated: true
     identifier: synthetics-get-a-test-configuration
@@ -3001,7 +3001,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 신서틱(Synthetic)
+    parent: synthetics
     url: '#get-a-test-configuration'
   - generated: true
     identifier: synthetics-trigger-tests-from-ci/cd-pipelines
@@ -3013,7 +3013,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 신서틱(Synthetic)
+    parent: synthetics
     url: '#trigger-tests-from-ci/cd-pipelines'
   - generated: true
     identifier: synthetics-trigger-synthetic-tests
@@ -3025,7 +3025,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 신서틱(Synthetic)
+    parent: synthetics
     url: '#trigger-synthetic-tests'
   - generated: true
     identifier: synthetics-delete-tests
@@ -3037,7 +3037,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 신서틱(Synthetic)
+    parent: synthetics
     url: '#delete-tests'
   - generated: true
     identifier: synthetics-get-a-browser-test-result
@@ -3049,7 +3049,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 신서틱(Synthetic)
+    parent: synthetics
     url: '#get-a-browser-test-result'
   - generated: true
     identifier: synthetics-get-a-browser-tests-latest-results-summaries
@@ -3061,7 +3061,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 신서틱(Synthetic)
+    parent: synthetics
     url: '#get-a-browser-tests-latest-results-summaries'
   - generated: true
     identifier: synthetics-edit-a-browser-test
@@ -3073,7 +3073,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 신서틱(Synthetic)
+    parent: synthetics
     url: '#edit-a-browser-test'
   - generated: true
     identifier: synthetics-get-a-browser-test
@@ -3085,7 +3085,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 신서틱(Synthetic)
+    parent: synthetics
     url: '#get-a-browser-test'
   - generated: true
     identifier: synthetics-create-a-browser-test
@@ -3097,7 +3097,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 신서틱(Synthetic)
+    parent: synthetics
     url: '#create-a-browser-test'
   - generated: true
     identifier: synthetics-edit-an-api-test
@@ -3109,7 +3109,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 신서틱(Synthetic)
+    parent: synthetics
     url: '#edit-an-api-test'
   - generated: true
     identifier: synthetics-get-an-api-test
@@ -3121,7 +3121,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 신서틱(Synthetic)
+    parent: synthetics
     url: '#get-an-api-test'
   - generated: true
     identifier: synthetics-create-an-api-test
@@ -3133,7 +3133,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 신서틱(Synthetic)
+    parent: synthetics
     url: '#create-an-api-test'
   - generated: true
     identifier: synthetics-create-a-test
@@ -3145,7 +3145,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 신서틱(Synthetic)
+    parent: synthetics
     url: '#create-a-test'
   - generated: true
     identifier: synthetics-get-the-list-of-all-synthetic-tests
@@ -3157,7 +3157,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 신서틱(Synthetic)
+    parent: synthetics
     url: '#get-the-list-of-all-synthetic-tests'
   - generated: true
     identifier: synthetics-get-the-default-locations
@@ -3169,7 +3169,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 신서틱(Synthetic)
+    parent: synthetics
     url: '#get-the-default-locations'
   - generated: true
     identifier: synthetics-edit-a-private-location
@@ -3181,7 +3181,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 신서틱(Synthetic)
+    parent: synthetics
     url: '#edit-a-private-location'
   - generated: true
     identifier: synthetics-get-a-private-location
@@ -3193,7 +3193,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 신서틱(Synthetic)
+    parent: synthetics
     url: '#get-a-private-location'
   - generated: true
     identifier: synthetics-delete-a-private-location
@@ -3205,7 +3205,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 신서틱(Synthetic)
+    parent: synthetics
     url: '#delete-a-private-location'
   - generated: true
     identifier: synthetics-create-a-private-location
@@ -3217,7 +3217,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 신서틱(Synthetic)
+    parent: synthetics
     url: '#create-a-private-location'
   - generated: true
     identifier: synthetics-get-all-locations-public-and-private
@@ -3229,7 +3229,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 신서틱(Synthetic)
+    parent: synthetics
     url: '#get-all-locations-public-and-private'
   - generated: true
     identifier: synthetics-get-details-of-batch
@@ -3241,10 +3241,10 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 신서틱(Synthetic)
+    parent: synthetics
     url: '#get-details-of-batch'
   - generated: true
-    identifier: 태그
+    identifier: tags
     name: 태그
     url: /api/latest/tags/
   - generated: true
@@ -3257,7 +3257,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 태그
+    parent: tags
     url: '#update-host-tags'
   - generated: true
     identifier: tags-add-tags-to-a-host
@@ -3269,7 +3269,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 태그
+    parent: tags
     url: '#add-tags-to-a-host'
   - generated: true
     identifier: tags-get-host-tags
@@ -3281,7 +3281,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 태그
+    parent: tags
     url: '#get-host-tags'
   - generated: true
     identifier: tags-remove-host-tags
@@ -3293,7 +3293,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 태그
+    parent: tags
     url: '#remove-host-tags'
   - generated: true
     identifier: tags-get-tags
@@ -3305,7 +3305,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: 태그
+    parent: tags
     url: '#get-tags'
   - generated: true
     identifier: timeboards
@@ -3519,7 +3519,7 @@ menu:
       unstable: []
       versions:
       - v1
-    parent: usage-metering
+    parent: ''
     url: '#get-hourly-usage-for-snmp-devices'
   - generated: true
     identifier: usage-metering-get-hourly-usage-for-sensitive-data-scanner
@@ -3895,7 +3895,7 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: users
+    parent: 사용자
     url: '#get-a-user-permissions'
   - generated: true
     identifier: users-get-a-user-organization
@@ -3907,7 +3907,7 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: users
+    parent: 사용자
     url: '#get-a-user-organization'
   - generated: true
     identifier: users-get-a-user-invitation
@@ -3919,7 +3919,7 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: users
+    parent: 사용자
     url: '#get-a-user-invitation'
   - generated: true
     identifier: users-send-invitation-emails
@@ -3931,7 +3931,7 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: users
+    parent: 사용자
     url: '#send-invitation-emails'
   - generated: true
     identifier: users-update-a-user
@@ -3944,7 +3944,7 @@ menu:
       versions:
       - v1
       - v2
-    parent: users
+    parent: 사용자
     url: '#update-a-user'
   - generated: true
     identifier: users-get-user-details
@@ -3957,7 +3957,7 @@ menu:
       versions:
       - v1
       - v2
-    parent: users
+    parent: 사용자
     url: '#get-user-details'
   - generated: true
     identifier: users-disable-a-user
@@ -3970,7 +3970,7 @@ menu:
       versions:
       - v1
       - v2
-    parent: users
+    parent: 사용자
     url: '#disable-a-user'
   - generated: true
     identifier: users-create-a-user
@@ -3983,7 +3983,7 @@ menu:
       versions:
       - v1
       - v2
-    parent: users
+    parent: 사용자
     url: '#create-a-user'
   - generated: true
     identifier: users-list-all-users
@@ -3996,7 +3996,7 @@ menu:
       versions:
       - v1
       - v2
-    parent: users
+    parent: 사용자
     url: '#list-all-users'
   - generated: true
     identifier: webhooks-integration
@@ -4231,7 +4231,7 @@ menu:
     parent: apm-retention-filters
     url: '#list-all-apm-retention-filters'
   - generated: true
-    identifier: audit
+    identifier: 감사
     name: 감사
     url: /api/latest/audit/
   - generated: true
@@ -4432,7 +4432,7 @@ menu:
     url: '#update-a-cloud-workload-security-agent-rule'
   - generated: true
     identifier: csm-threats-get-a-cloud-workload-security-agent-rule
-    name: 최신 Cloud Workload Security 정책 불러오기
+    name: Cloud Workload Security Agent 규칙 받기
     params:
       operationids:
       - GetCloudWorkloadSecurityAgentRule
@@ -4444,7 +4444,7 @@ menu:
     url: '#get-a-cloud-workload-security-agent-rule'
   - generated: true
     identifier: csm-threats-delete-a-cloud-workload-security-agent-rule
-    name: 최신 Cloud Workload Security 정책 불러오기
+    name: Cloud Workload Security Agent 규칙 삭제
     params:
       operationids:
       - DeleteCloudWorkloadSecurityAgentRule
@@ -4468,7 +4468,7 @@ menu:
     url: '#create-a-cloud-workload-security-agent-rule'
   - generated: true
     identifier: csm-threats-get-all-cloud-workload-security-agent-rules
-    name: Cloud Workload Security Agent 규칙 전체 불러오기
+    name: 모든 Cloud Workload Security Agent 규칙 받기
     params:
       operationids:
       - ListCloudWorkloadSecurityAgentRules
@@ -4480,7 +4480,7 @@ menu:
     url: '#get-all-cloud-workload-security-agent-rules'
   - generated: true
     identifier: csm-threats-get-the-latest-cloud-workload-security-policy
-    name: 최신 Cloud Workload Security 정책 불러오기
+    name: 최신 Cloud Workload Security 정책 받기
     params:
       operationids:
       - DownloadCloudWorkloadPolicyFile
@@ -4580,7 +4580,7 @@ menu:
     url: '#unassign-case'
   - generated: true
     identifier: case-management-unarchive-case
-    name: 케이스 아카이브 해제
+    name: 사례 아카이브 해제
     params:
       operationids:
       - UnarchiveCase
@@ -4588,11 +4588,11 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: dbm
+    parent: case-management
     url: '#unarchive-case'
   - generated: true
     identifier: case-management-update-case-status
-    name: 케이스 상태 업데이트
+    name: 사례 상태 업데이트
     params:
       operationids:
       - UpdateStatus
@@ -4604,7 +4604,7 @@ menu:
     url: '#update-case-status'
   - generated: true
     identifier: case-management-update-case-priority
-    name: 케이스 우선순위 업데이트
+    name: 사례 우선순위 업데이트
     params:
       operationids:
       - UpdatePriority
@@ -4616,7 +4616,7 @@ menu:
     url: '#update-case-priority'
   - generated: true
     identifier: case-management-assign-case
-    name: 케이스 할당
+    name: 사례 할당
     params:
       operationids:
       - AssignCase
@@ -4628,7 +4628,7 @@ menu:
     url: '#assign-case'
   - generated: true
     identifier: case-management-archive-case
-    name: 케이스 아카이브
+    name: 사례 아카이브
     params:
       operationids:
       - ArchiveCase
@@ -4720,7 +4720,7 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: dbm
+    parent: case-management
     url: '#search-cases'
   - generated: true
     identifier: cloud-cost-management
@@ -4776,7 +4776,7 @@ menu:
     url: '#create-cloud-cost-management-azure-configs'
   - generated: true
     identifier: cloud-cost-management-list-cloud-cost-management-azure-configs
-    name: '클라우드 비용 관리 Azure 설정 나열하기 '
+    name: 클라우드 비용 관리 Azure 설정 목록화
     params:
       operationids:
       - ListCostAzureUCConfigs
@@ -4788,7 +4788,7 @@ menu:
     url: '#list-cloud-cost-management-azure-configs'
   - generated: true
     identifier: cloud-cost-management-list-related-aws-accounts
-    name: 관련 AWS 계정 나열하기
+    name: 관련 AWS 계정 목록화
     params:
       operationids:
       - ListAWSRelatedAccounts
@@ -4836,7 +4836,7 @@ menu:
     url: '#create-cloud-cost-management-aws-cur-config'
   - generated: true
     identifier: cloud-cost-management-list-cloud-cost-management-aws-cur-configs
-    name: 클라우드 비용 관리 AWS CUR 설정 표시
+    name: 클라우드 비용 관리 AWS CUR 설정 목록화
     params:
       operationids:
       - ListCostAWSCURConfigs
@@ -4852,7 +4852,7 @@ menu:
     url: /api/latest/cloudflare-integration/
   - generated: true
     identifier: cloudflare-integration-update-cloudflare-account
-    name: Cloudflare 계정 업데이트하기
+    name: Cloudflare 계정 업데이트
     params:
       operationids:
       - UpdateCloudflareAccount
@@ -4864,7 +4864,7 @@ menu:
     url: '#update-cloudflare-account'
   - generated: true
     identifier: cloudflare-integration-get-cloudflare-account
-    name: Cloudflare 계정 가져오기
+    name: Cloudflare 계정 받기
     params:
       operationids:
       - GetCloudflareAccount
@@ -4876,7 +4876,7 @@ menu:
     url: '#get-cloudflare-account'
   - generated: true
     identifier: cloudflare-integration-delete-cloudflare-account
-    name: Amazon ECS
+    name: Cloudflare 계정 삭제
     params:
       operationids:
       - DeleteCloudflareAccount
@@ -4888,7 +4888,7 @@ menu:
     url: '#delete-cloudflare-account'
   - generated: true
     identifier: cloudflare-integration-add-cloudflare-account
-    name: 분포
+    name: "\bCloudflare 계정 추가"
     params:
       operationids:
       - CreateCloudflareAccount
@@ -4900,7 +4900,7 @@ menu:
     url: '#add-cloudflare-account'
   - generated: true
     identifier: cloudflare-integration-list-cloudflare-accounts
-    name: 권한 허용
+    name: Cloudflare 계정 목록화
     params:
       operationids:
       - ListCloudflareAccounts
@@ -4916,7 +4916,7 @@ menu:
     url: /api/latest/confluent-cloud/
   - generated: true
     identifier: confluent-cloud-update-resource-in-confluent-account
-    name: 서비스 계정
+    name: Confluent 계정 리소스 업데이트
     params:
       operationids:
       - UpdateConfluentResource
@@ -4928,7 +4928,7 @@ menu:
     url: '#update-resource-in-confluent-account'
   - generated: true
     identifier: confluent-cloud-get-resource-from-confluent-account
-    name: Amazon ECS
+    name: Confluent 계정 리소스 받기
     params:
       operationids:
       - GetConfluentResource
@@ -4940,7 +4940,7 @@ menu:
     url: '#get-resource-from-confluent-account'
   - generated: true
     identifier: confluent-cloud-delete-resource-from-confluent-account
-    name: 기존 인시던트 서비스 업데이트
+    name: Confluent 계정에서 리소스 삭제
     params:
       operationids:
       - DeleteConfluentResource
@@ -4952,7 +4952,7 @@ menu:
     url: '#delete-resource-from-confluent-account'
   - generated: true
     identifier: confluent-cloud-add-resource-to-confluent-account
-    name: 권한 허용
+    name: Confluent 계정에 리소스 추가
     params:
       operationids:
       - CreateConfluentResource
@@ -4964,7 +4964,7 @@ menu:
     url: '#add-resource-to-confluent-account'
   - generated: true
     identifier: confluent-cloud-list-confluent-account-resources
-    name: 기존 인시던트 서비스 삭제
+    name: Confluent 계정 리소스 목록화
     params:
       operationids:
       - ListConfluentResource
@@ -4976,7 +4976,7 @@ menu:
     url: '#list-confluent-account-resources'
   - generated: true
     identifier: confluent-cloud-update-confluent-account
-    name: 서비스 계정
+    name: Confluent 계정 업데이트
     params:
       operationids:
       - UpdateConfluentAccount
@@ -4988,7 +4988,7 @@ menu:
     url: '#update-confluent-account'
   - generated: true
     identifier: confluent-cloud-get-confluent-account
-    name: 인시던트 서비스
+    name: Confluent 계정 받기
     params:
       operationids:
       - GetConfluentAccount
@@ -5000,7 +5000,7 @@ menu:
     url: '#get-confluent-account'
   - generated: true
     identifier: confluent-cloud-delete-confluent-account
-    name: 기존 인시던트 서비스 업데이트
+    name: Confluent 계정 삭제
     params:
       operationids:
       - DeleteConfluentAccount
@@ -5012,7 +5012,7 @@ menu:
     url: '#delete-confluent-account'
   - generated: true
     identifier: confluent-cloud-add-confluent-account
-    name: 인시던트 정보 불러오기
+    name: Cloud Workload Security 계정 추가
     params:
       operationids:
       - CreateConfluentAccount
@@ -5040,7 +5040,7 @@ menu:
     url: /api/latest/container-images/
   - generated: true
     identifier: container-images-get-all-container-images
-    name: 인시던트 서비스 전체 목록 불러오기
+    name: 모든 컨테이너 이미지 받기
     params:
       operationids:
       - ListContainerImages
@@ -5048,15 +5048,15 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: cog-2
+    parent: container-images
     url: '#get-all-container-images'
   - generated: true
-    identifier: containers
+    identifier: ㅊ
     name: 컨테이너
     url: /api/latest/containers/
   - generated: true
     identifier: containers-get-all-containers
-    name: 기존 인시던트 팀 업데이트
+    name: 모든 컨테이너 받기
     params:
       operationids:
       - ListContainers
@@ -5085,7 +5085,7 @@ menu:
     url: '#send-an-incident-event-for-dora-metrics'
   - generated: true
     identifier: dora-metrics-send-a-deployment-event-for-dora-metrics
-    name: 새로운 인시던트 팀 생성
+    name: DORA 메트릭에 대한 배포 이벤트 전송
     params:
       operationids:
       - CreateDORADeployment
@@ -5098,11 +5098,11 @@ menu:
     url: '#send-a-deployment-event-for-dora-metrics'
   - generated: true
     identifier: fastly-integration
-    name: 전체 인시던트 팀 목록 불러오기
+    name: Fastly 통합
     url: /api/latest/fastly-integration/
   - generated: true
     identifier: fastly-integration-update-fastly-service
-    name: 인시던트
+    name: Fastly 서비스 업데이트
     params:
       operationids:
       - UpdateFastlyService
@@ -5114,7 +5114,7 @@ menu:
     url: '#update-fastly-service'
   - generated: true
     identifier: fastly-integration-get-fastly-service
-    name: 인시던트 정보 불러오기
+    name: Fastly 서비스 받기
     params:
       operationids:
       - GetFastlyService
@@ -5126,7 +5126,7 @@ menu:
     url: '#get-fastly-service'
   - generated: true
     identifier: fastly-integration-delete-fastly-service
-    name: 기존 인시던트 서비스 삭제
+    name: Fastly 서비스 삭제
     params:
       operationids:
       - DeleteFastlyService
@@ -5138,7 +5138,7 @@ menu:
     url: '#delete-fastly-service'
   - generated: true
     identifier: fastly-integration-add-fastly-service
-    name: 새로운 인시던트 서비스 생성
+    name: Fastly 서비스 추가
     params:
       operationids:
       - CreateFastlyService
@@ -5150,7 +5150,7 @@ menu:
     url: '#add-fastly-service'
   - generated: true
     identifier: fastly-integration-list-fastly-services
-    name: 인시던트 서비스 전체 목록 불러오기
+    name: Fastly 서비스 목록화
     params:
       operationids:
       - ListFastlyServices
@@ -5162,7 +5162,7 @@ menu:
     url: '#list-fastly-services'
   - generated: true
     identifier: fastly-integration-update-fastly-account
-    name: 인시던트 팀
+    name: Fastly 계정 업데이트
     params:
       operationids:
       - UpdateFastlyAccount
@@ -5174,7 +5174,7 @@ menu:
     url: '#update-fastly-account'
   - generated: true
     identifier: fastly-integration-get-fastly-account
-    name: 기존 인시던트 팀 업데이트
+    name: Fastly 계정 받기
     params:
       operationids:
       - GetFastlyAccount
@@ -5186,7 +5186,7 @@ menu:
     url: '#get-fastly-account'
   - generated: true
     identifier: fastly-integration-delete-fastly-account
-    name: 인시던트 팀 불러오기
+    name: Fastly 계정 삭제
     params:
       operationids:
       - DeleteFastlyAccount
@@ -5198,7 +5198,7 @@ menu:
     url: '#delete-fastly-account'
   - generated: true
     identifier: fastly-integration-add-fastly-account
-    name: 기존 인시던트 팀 삭제
+    name: Fastly 계정 추가
     params:
       operationids:
       - CreateFastlyAccount
@@ -5210,7 +5210,7 @@ menu:
     url: '#add-fastly-account'
   - generated: true
     identifier: fastly-integration-list-fastly-accounts
-    name: 새로운 인시던트 팀 생성
+    name: Fastly 계정 목록화
     params:
       operationids:
       - ListFastlyAccounts
@@ -5226,7 +5226,7 @@ menu:
     url: /api/latest/ip-allowlist/
   - generated: true
     identifier: ip-allowlist-update-ip-allowlist
-    name: 인시던트
+    name: IP 허용 목록 업데이트
     params:
       operationids:
       - UpdateIPAllowlist
@@ -5238,7 +5238,7 @@ menu:
     url: '#update-ip-allowlist'
   - generated: true
     identifier: ip-allowlist-get-ip-allowlist
-    name: 인시던트
+    name: IP 허용 목록 받기
     params:
       operationids:
       - GetIPAllowlist
@@ -5254,7 +5254,7 @@ menu:
     url: /api/latest/incident-services/
   - generated: true
     identifier: incident-services-update-an-existing-incident-service
-    name: 인시던트 정보 불러오기
+    name: 기존 인시던트 서비스 업데이트
     params:
       operationids:
       - UpdateIncidentService
@@ -5267,7 +5267,7 @@ menu:
     url: '#update-an-existing-incident-service'
   - generated: true
     identifier: incident-services-get-details-of-an-incident-service
-    name: 기존 인시던트 삭제
+    name: 인시던트 서비스 상세 정보 받기
     params:
       operationids:
       - GetIncidentService
@@ -5280,7 +5280,7 @@ menu:
     url: '#get-details-of-an-incident-service'
   - generated: true
     identifier: incident-services-delete-an-existing-incident-service
-    name: 인시던트
+    name: 기존 인시던트 서비스 삭제
     params:
       operationids:
       - DeleteIncidentService
@@ -5293,7 +5293,7 @@ menu:
     url: '#delete-an-existing-incident-service'
   - generated: true
     identifier: incident-services-create-a-new-incident-service
-    name: 인시던트 생성
+    name: 새로운 인시던트 서비스 생성
     params:
       operationids:
       - CreateIncidentService
@@ -5306,7 +5306,7 @@ menu:
     url: '#create-a-new-incident-service'
   - generated: true
     identifier: incident-services-get-a-list-of-all-incident-services
-    name: 인시던트 목록 불러오기
+    name: 모든 인시던트 서비스 목록 받기
     params:
       operationids:
       - ListIncidentServices
@@ -5323,7 +5323,7 @@ menu:
     url: /api/latest/incident-teams/
   - generated: true
     identifier: incident-teams-update-an-existing-incident-team
-    name: 아카이브 역할 부여
+    name: 기존 인시던트 팀 업데이트
     params:
       operationids:
       - UpdateIncidentTeam
@@ -5332,11 +5332,11 @@ menu:
       - v2
       versions:
       - v2
-    parent: dbm
+    parent: incident-teams
     url: '#update-an-existing-incident-team'
   - generated: true
     identifier: incident-teams-get-details-of-an-incident-team
-    name: 아카이브의 읽기 역할 목록 표시
+    name: 인시던트 팀 상세 정보 받기
     params:
       operationids:
       - GetIncidentTeam
@@ -5349,7 +5349,7 @@ menu:
     url: '#get-details-of-an-incident-team'
   - generated: true
     identifier: incident-teams-delete-an-existing-incident-team
-    name: 아카이브에서 역할 권한 취소
+    name: 기존 인시던트 팀 삭제
     params:
       operationids:
       - DeleteIncidentTeam
@@ -5362,7 +5362,7 @@ menu:
     url: '#delete-an-existing-incident-team'
   - generated: true
     identifier: incident-teams-create-a-new-incident-team
-    name: 아카이브 업데이트
+    name: 새로운 인시던트 팀 생성
     params:
       operationids:
       - CreateIncidentTeam
@@ -5375,7 +5375,7 @@ menu:
     url: '#create-a-new-incident-team'
   - generated: true
     identifier: incident-teams-get-a-list-of-all-incident-teams
-    name: 아카이브 불러오기
+    name: 모든 인시던트 팀 목록 받기
     params:
       operationids:
       - ListIncidentTeams
@@ -5387,12 +5387,12 @@ menu:
     parent: incident-teams
     url: '#get-a-list-of-all-incident-teams'
   - generated: true
-    identifier: incidents
+    identifier: 인시던트
     name: 인시던트
     url: /api/latest/incidents/
   - generated: true
     identifier: incidents-update-an-incident-todo
-    name: 아카이브 생성
+    name: 인시던트 todo 업데이트
     params:
       operationids:
       - UpdateIncidentTodo
@@ -5405,7 +5405,7 @@ menu:
     url: '#update-an-incident-todo'
   - generated: true
     identifier: incidents-get-incident-todo-details
-    name: 아카이브 전체 불러오기
+    name: "\x1D인시던트 todo 상제 정보 받기"
     params:
       operationids:
       - GetIncidentTodo
@@ -5414,11 +5414,11 @@ menu:
       - v2
       versions:
       - v2
-    parent: incidents
+    parent: 인시던트
     url: '#get-incident-todo-details'
   - generated: true
     identifier: incidents-delete-an-incident-todo
-    name: 아카이브 순서 업데이트
+    name: 인시던트 todo 삭제
     params:
       operationids:
       - DeleteIncidentTodo
@@ -5427,11 +5427,11 @@ menu:
       - v2
       versions:
       - v2
-    parent: incidents
+    parent: 인시던트
     url: '#delete-an-incident-todo'
   - generated: true
     identifier: incidents-create-an-incident-todo
-    name: 아카이브 순서 불러오기
+    name: 인시던트 todo 생성
     params:
       operationids:
       - CreateIncidentTodo
@@ -5440,11 +5440,11 @@ menu:
       - v2
       versions:
       - v2
-    parent: incidents
+    parent: 인시던트
     url: '#create-an-incident-todo'
   - generated: true
     identifier: incidents-get-a-list-of-an-incidents-todos
-    name: 로그 아카이브
+    name: 인시던트 todo 목록 받기
     params:
       operationids:
       - ListIncidentTodos
@@ -5453,11 +5453,11 @@ menu:
       - v2
       versions:
       - v2
-    parent: incidents
+    parent: 인시던트
     url: '#get-a-list-of-an-incidents-todos'
   - generated: true
     identifier: incidents-update-an-existing-incident-integration-metadata
-    name: 로그 기반 메트릭 업데이트
+    name: 기존 인시던트 통합 메타데이터 업데이트
     params:
       operationids:
       - UpdateIncidentIntegration
@@ -5470,7 +5470,7 @@ menu:
     url: '#update-an-existing-incident-integration-metadata'
   - generated: true
     identifier: incidents-get-incident-integration-metadata-details
-    name: 로그 기반 메트릭 불러오기
+    name: 인시던트 통합 메타데이터 상세 정보 받기
     params:
       operationids:
       - GetIncidentIntegration
@@ -5479,11 +5479,11 @@ menu:
       - v2
       versions:
       - v2
-    parent: incidents
+    parent: 인시던트
     url: '#get-incident-integration-metadata-details'
   - generated: true
     identifier: incidents-delete-an-incident-integration-metadata
-    name: 로그 기반 메트릭 삭제
+    name: 인시던트 통합 메타데이터 삭제
     params:
       operationids:
       - DeleteIncidentIntegration
@@ -5492,11 +5492,11 @@ menu:
       - v2
       versions:
       - v2
-    parent: incidents
+    parent: 인시던트
     url: '#delete-an-incident-integration-metadata'
   - generated: true
     identifier: incidents-create-an-incident-integration-metadata
-    name: 로그 기반 메트릭 생성
+    name: 인시던트 통합 메타데이터 생성
     params:
       operationids:
       - CreateIncidentIntegration
@@ -5505,11 +5505,11 @@ menu:
       - v2
       versions:
       - v2
-    parent: incidents
+    parent: 인시던트
     url: '#create-an-incident-integration-metadata'
   - generated: true
     identifier: incidents-get-a-list-of-an-incidents-integration-metadata
-    name: 전체 로그 기반 메트릭 불러오기
+    name: 인시던트 통합 메타데이터 목록 받기
     params:
       operationids:
       - ListIncidentIntegrations
@@ -5518,11 +5518,11 @@ menu:
       - v2
       versions:
       - v2
-    parent: incidents
+    parent: 인시던트
     url: '#get-a-list-of-an-incidents-integration-metadata'
   - generated: true
     identifier: incidents-create,-update,-and-delete-incident-attachments
-    name: 로그 제한 쿼리
+    name: 인시던트 첨부 파일 생성, 업데이트 및 삭제
     params:
       operationids:
       - UpdateIncidentAttachments
@@ -5531,11 +5531,11 @@ menu:
       - v2
       versions:
       - v2
-    parent: incidents
+    parent: 인시던트
     url: '#create,-update,-and-delete-incident-attachments'
   - generated: true
     identifier: incidents-get-a-list-of-attachments
-    name: 제한 쿼리 역할 부여
+    name: 첨부 파일 목록 받기
     params:
       operationids:
       - ListIncidentAttachments
@@ -5544,11 +5544,11 @@ menu:
       - v2
       versions:
       - v2
-    parent: incidents
+    parent: 인시던트
     url: '#get-a-list-of-attachments'
   - generated: true
     identifier: incidents-update-an-existing-incident
-    name: 제한 쿼리 역할 목록 표시
+    name: 기존 인시던트 업데이트
     params:
       operationids:
       - UpdateIncident
@@ -5557,11 +5557,11 @@ menu:
       - v2
       versions:
       - v2
-    parent: incidents
+    parent: 인시던트
     url: '#update-an-existing-incident'
   - generated: true
     identifier: incidents-get-the-details-of-an-incident
-    name: 제한 쿼리 역할 권한 취소
+    name: 인시던트 상세 정보 받기
     params:
       operationids:
       - GetIncident
@@ -5570,11 +5570,11 @@ menu:
       - v2
       versions:
       - v2
-    parent: incidents
+    parent: 인시던트
     url: '#get-the-details-of-an-incident'
   - generated: true
     identifier: incidents-delete-an-existing-incident
-    name: 제한 쿼리 업데이트
+    name: 기존 인시던트 삭제
     params:
       operationids:
       - DeleteIncident
@@ -5583,11 +5583,11 @@ menu:
       - v2
       versions:
       - v2
-    parent: incidents
+    parent: 인시던트
     url: '#delete-an-existing-incident'
   - generated: true
     identifier: incidents-search-for-incidents
-    name: 제한 쿼리 불러오기
+    name: 인시던트 검색
     params:
       operationids:
       - SearchIncidents
@@ -5596,11 +5596,11 @@ menu:
       - v2
       versions:
       - v2
-    parent: incidents
+    parent: 인시던트
     url: '#search-for-incidents'
   - generated: true
     identifier: incidents-create-an-incident
-    name: 인시던트 만들기
+    name: 인시던트 생성
     params:
       operationids:
       - CreateIncident
@@ -5609,11 +5609,11 @@ menu:
       - v2
       versions:
       - v2
-    parent: incidents
+    parent: 인시던트
     url: '#create-an-incident'
   - generated: true
     identifier: incidents-get-a-list-of-incidents
-    name: 지정된 사용자의 제한 쿼리 전체 불러오기
+    name: 인시던트 목록 받기
     params:
       operationids:
       - ListIncidents
@@ -5622,7 +5622,7 @@ menu:
       - v2
       versions:
       - v2
-    parent: incidents
+    parent: 인시던트
     url: '#get-a-list-of-incidents'
   - generated: true
     identifier: logs-archives
@@ -5630,7 +5630,7 @@ menu:
     url: /api/latest/logs-archives/
   - generated: true
     identifier: logs-archives-grant-role-to-an-archive
-    name: 제한 쿼리 생성
+    name: 아카이브에 대한 역할 허용
     params:
       operationids:
       - AddReadRoleToArchive
@@ -5642,7 +5642,7 @@ menu:
     url: '#grant-role-to-an-archive'
   - generated: true
     identifier: logs-archives-list-read-roles-for-an-archive
-    name: 제한 쿼리 목록 표시
+    name: 아카이브에 대한 읽기 역할 목록화
     params:
       operationids:
       - ListArchiveReadRoles
@@ -5654,7 +5654,7 @@ menu:
     url: '#list-read-roles-for-an-archive'
   - generated: true
     identifier: logs-archives-revoke-role-from-an-archive
-    name: Opsgenie 통합
+    name: 아카이브에서 역할 취소
     params:
       operationids:
       - RemoveRoleFromArchive
@@ -5666,7 +5666,7 @@ menu:
     url: '#revoke-role-from-an-archive'
   - generated: true
     identifier: logs-archives-update-an-archive
-    name: 단일 서비스 객체 업데이트
+    name: 아카이브 업데이트
     params:
       operationids:
       - UpdateLogsArchive
@@ -5678,7 +5678,7 @@ menu:
     url: '#update-an-archive'
   - generated: true
     identifier: logs-archives-get-an-archive
-    name: 단일 서비스 객체 불러오기
+    name: 아카이브 받기
     params:
       operationids:
       - GetLogsArchive
@@ -5690,7 +5690,7 @@ menu:
     url: '#get-an-archive'
   - generated: true
     identifier: logs-archives-delete-an-archive
-    name: 단일 서비스 객체 삭제
+    name: 아카이브 삭제
     params:
       operationids:
       - DeleteLogsArchive
@@ -5702,7 +5702,7 @@ menu:
     url: '#delete-an-archive'
   - generated: true
     identifier: logs-archives-create-an-archive
-    name: 신규 서비스 객체 생성
+    name: 아카이브 생성
     params:
       operationids:
       - CreateLogsArchive
@@ -5714,7 +5714,7 @@ menu:
     url: '#create-an-archive'
   - generated: true
     identifier: logs-archives-get-all-archives
-    name: 전체 서비스 객체 불러오기
+    name: 모든 아카이브 받기
     params:
       operationids:
       - ListLogsArchives
@@ -5726,7 +5726,7 @@ menu:
     url: '#get-all-archives'
   - generated: true
     identifier: logs-archives-update-archive-order
-    name: 제한 쿼리 삭제
+    name: 아카이브 순서 업데이트
     params:
       operationids:
       - UpdateLogsArchiveOrder
@@ -5738,7 +5738,7 @@ menu:
     url: '#update-archive-order'
   - generated: true
     identifier: logs-archives-get-archive-order
-    name: 지정된 사용자의 제한 쿼리 전체 불러오기
+    name: 아카이브 순서 받기
     params:
       operationids:
       - GetLogsArchiveOrder
@@ -5814,7 +5814,7 @@ menu:
     url: '#get-all-custom-destinations'
   - generated: true
     identifier: logs-metrics
-    name: 신규 서비스 객체 생성
+    name: 로그 메트릭
     url: /api/latest/logs-metrics/
   - generated: true
     identifier: logs-metrics-update-a-log-based-metric
@@ -5830,7 +5830,7 @@ menu:
     url: '#update-a-log-based-metric'
   - generated: true
     identifier: logs-metrics-get-a-log-based-metric
-    name: 보안 모니터링
+    name: 로그 기반 메트릭 받기
     params:
       operationids:
       - GetLogsMetric
@@ -5842,7 +5842,7 @@ menu:
     url: '#get-a-log-based-metric'
   - generated: true
     identifier: logs-metrics-delete-a-log-based-metric
-    name: Opsgenie 통합
+    name: 로그 기반 메트릭 삭제
     params:
       operationids:
       - DeleteLogsMetric
@@ -5854,7 +5854,7 @@ menu:
     url: '#delete-a-log-based-metric'
   - generated: true
     identifier: logs-metrics-create-a-log-based-metric
-    name: 단일 서비스 객체 업데이트
+    name: 로그 기반 메트릭 생성
     params:
       operationids:
       - CreateLogsMetric
@@ -5866,7 +5866,7 @@ menu:
     url: '#create-a-log-based-metric'
   - generated: true
     identifier: logs-metrics-get-all-log-based-metrics
-    name: 프로세스 전체 불러오기
+    name: 모든 로그 기반 메트릭 받기
     params:
       operationids:
       - ListLogsMetrics
@@ -5882,7 +5882,7 @@ menu:
     url: /api/latest/logs-restriction-queries/
   - generated: true
     identifier: logs-restriction-queries-grant-role-to-a-restriction-query
-    name: RUM 이벤트 검색
+    name: 제한 쿼리에 역할 부여
     params:
       operationids:
       - AddRoleToRestrictionQuery
@@ -5895,7 +5895,7 @@ menu:
     url: '#grant-role-to-a-restriction-query'
   - generated: true
     identifier: logs-restriction-queries-list-roles-for-a-restriction-query
-    name: RUM 이벤트 목록 불러오기
+    name: 제한 쿼리에 대한 역할 목록화
     params:
       operationids:
       - ListRestrictionQueryRoles
@@ -5908,7 +5908,7 @@ menu:
     url: '#list-roles-for-a-restriction-query'
   - generated: true
     identifier: logs-restriction-queries-revoke-role-from-a-restriction-query
-    name: 전체 서비스 객체 불러오기
+    name: 제한 쿼리에서 역할 취소
     params:
       operationids:
       - RemoveRoleFromRestrictionQuery
@@ -5921,7 +5921,7 @@ menu:
     url: '#revoke-role-from-a-restriction-query'
   - generated: true
     identifier: logs-restriction-queries-update-a-restriction-query
-    name: 단일 서비스 객체 삭제
+    name: 제한 쿼리 업데이트
     params:
       operationids:
       - UpdateRestrictionQuery
@@ -5934,7 +5934,7 @@ menu:
     url: '#update-a-restriction-query'
   - generated: true
     identifier: logs-restriction-queries-get-a-restriction-query
-    name: 신규 서비스 객체 생성
+    name: 제한 쿼리 받기
     params:
       operationids:
       - GetRestrictionQuery
@@ -5947,7 +5947,7 @@ menu:
     url: '#get-a-restriction-query'
   - generated: true
     identifier: logs-restriction-queries-delete-a-restriction-query
-    name: 스크린보드
+    name: 제한 쿼리 삭제
     params:
       operationids:
       - DeleteRestrictionQuery
@@ -5960,7 +5960,7 @@ menu:
     url: '#delete-a-restriction-query'
   - generated: true
     identifier: logs-restriction-queries-get-all-restriction-queries-for-a-given-user
-    name: 보안 모니터링
+    name: 제공된 사용자에 대한 모든 제한 쿼리 받기
     params:
       operationids:
       - ListUserRestrictionQueries
@@ -5973,7 +5973,7 @@ menu:
     url: '#get-all-restriction-queries-for-a-given-user'
   - generated: true
     identifier: logs-restriction-queries-get-restriction-query-for-a-given-role
-    name: RUM 이벤트 집계
+    name: 제공된 역할에 대한 제한 쿼리 받기
     params:
       operationids:
       - GetRoleRestrictionQuery
@@ -5986,7 +5986,7 @@ menu:
     url: '#get-restriction-query-for-a-given-role'
   - generated: true
     identifier: logs-restriction-queries-create-a-restriction-query
-    name: 신규 서비스 객체 생성
+    name: 제한 쿼리 생성
     params:
       operationids:
       - CreateRestrictionQuery
@@ -5999,7 +5999,7 @@ menu:
     url: '#create-a-restriction-query'
   - generated: true
     identifier: logs-restriction-queries-list-restriction-queries
-    name: 프로세스 전체 불러오기
+    name: 제한 쿼리 목록화
     params:
       operationids:
       - ListRestrictionQueries
@@ -6012,11 +6012,11 @@ menu:
     url: '#list-restriction-queries'
   - generated: true
     identifier: okta-integration
-    name: RUM
+    name: Okta 통합
     url: /api/latest/okta-integration/
   - generated: true
     identifier: okta-integration-update-okta-account
-    name: RUM 이벤트 검색
+    name: Okta 계정 업데이트
     params:
       operationids:
       - UpdateOktaAccount
@@ -6024,11 +6024,11 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: npm
+    parent: okta-integration
     url: '#update-okta-account'
   - generated: true
     identifier: okta-integration-get-okta-account
-    name: 역할
+    name: Okta 계정 받기
     params:
       operationids:
       - GetOktaAccount
@@ -6040,7 +6040,7 @@ menu:
     url: '#get-okta-account'
   - generated: true
     identifier: okta-integration-delete-okta-account
-    name: 역할에 사용자 추가
+    name: Okta 계정 삭제
     params:
       operationids:
       - DeleteOktaAccount
@@ -6052,7 +6052,7 @@ menu:
     url: '#delete-okta-account'
   - generated: true
     identifier: okta-integration-add-okta-account
-    name: 역할의 사용자 전체 불러오기
+    name: Okta 계정 추가
     params:
       operationids:
       - CreateOktaAccount
@@ -6064,7 +6064,7 @@ menu:
     url: '#add-okta-account'
   - generated: true
     identifier: okta-integration-list-okta-accounts
-    name: 역할에서 사용자 삭제
+    name: Okta 계정 목록화
     params:
       operationids:
       - ListOktaAccounts
@@ -6080,7 +6080,7 @@ menu:
     url: /api/latest/opsgenie-integration/
   - generated: true
     identifier: opsgenie-integration-update-a-single-service-object
-    name: 역할 권한 목록 표시
+    name: 단일 서비스 개체 업데이트
     params:
       operationids:
       - UpdateOpsgenieService
@@ -6088,11 +6088,11 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: npm
+    parent: opsgenie-integration
     url: '#update-a-single-service-object'
   - generated: true
     identifier: opsgenie-integration-get-a-single-service-object
-    name: 권한 취소
+    name: 단일 서비스 개체 받기
     params:
       operationids:
       - GetOpsgenieService
@@ -6104,7 +6104,7 @@ menu:
     url: '#get-a-single-service-object'
   - generated: true
     identifier: opsgenie-integration-delete-a-single-service-object
-    name: 기존 역할을 복제하여 새 역할 생성
+    name: 단일 서비스 개체 삭제
     params:
       operationids:
       - DeleteOpsgenieService
@@ -6116,7 +6116,7 @@ menu:
     url: '#delete-a-single-service-object'
   - generated: true
     identifier: opsgenie-integration-create-a-new-service-object
-    name: 역할 업데이트
+    name: 새로운 서비스 개체 생성
     params:
       operationids:
       - CreateOpsgenieService
@@ -6128,7 +6128,7 @@ menu:
     url: '#create-a-new-service-object'
   - generated: true
     identifier: opsgenie-integration-get-all-service-objects
-    name: 역할 불러오기
+    name: 모든 서비스 개체 받기
     params:
       operationids:
       - ListOpsgenieServices
@@ -6139,12 +6139,12 @@ menu:
     parent: opsgenie-integration
     url: '#get-all-service-objects'
   - generated: true
-    identifier: powerpack
-    name: 역할 삭제
+    identifier: Powerpack
+    name: Powerpack
     url: /api/latest/powerpack/
   - generated: true
     identifier: powerpack-update-a-powerpack
-    name: 역할 생성
+    name: Powerpack 업데이트
     params:
       operationids:
       - UpdatePowerpack
@@ -6156,7 +6156,7 @@ menu:
     url: '#update-a-powerpack'
   - generated: true
     identifier: powerpack-get-a-powerpack
-    name: 역할 목록 표시
+    name: Powerpack 받기
     params:
       operationids:
       - GetPowerpack
@@ -6164,11 +6164,11 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: powerpack
+    parent: Powerpack
     url: '#get-a-powerpack'
   - generated: true
     identifier: powerpack-delete-a-powerpack
-    name: 권한 목록 표시
+    name: Powerpack 삭제
     params:
       operationids:
       - DeletePowerpack
@@ -6176,11 +6176,11 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: powerpack
+    parent: Powerpack
     url: '#delete-a-powerpack'
   - generated: true
     identifier: powerpack-create-a-new-powerpack
-    name: Sensitive Data Scanner
+    name: 새로운 Powerpack 생성
     params:
       operationids:
       - CreatePowerpack
@@ -6188,11 +6188,11 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: powerpack
+    parent: Powerpack
     url: '#create-a-new-powerpack'
   - generated: true
     identifier: powerpack-get-all-powerpacks
-    name: 역할 권한 부여
+    name: 모든 Powerpack 받기
     params:
       operationids:
       - ListPowerpacks
@@ -6200,10 +6200,10 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: powerpack
+    parent: Powerpack
     url: '#get-all-powerpacks'
   - generated: true
-    identifier: processes
+    identifier: 프로세스
     name: 프로세스
     url: /api/latest/processes/
   - generated: true
@@ -6216,15 +6216,15 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: rum
+    parent: processes
     url: '#get-all-processes'
   - generated: true
-    identifier: rum
+    identifier: RUM
     name: RUM
     url: /api/latest/rum/
   - generated: true
     identifier: rum-search-rum-events
-    name: 역할 업데이트
+    name: RUM 이벤트 검색
     params:
       operationids:
       - SearchRUMEvents
@@ -6236,7 +6236,7 @@ menu:
     url: '#search-rum-events'
   - generated: true
     identifier: rum-get-a-list-of-rum-events
-    name: 역할 불러오기
+    name: "\bRUM 이벤트 목록 받기"
     params:
       operationids:
       - ListRUMEvents
@@ -6244,11 +6244,11 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: rum
+    parent: RUM
     url: '#get-a-list-of-rum-events'
   - generated: true
     identifier: rum-update-a-rum-application
-    name: Python
+    name: RUM 애플리케이션 업데이트
     params:
       operationids:
       - UpdateRUMApplication
@@ -6256,11 +6256,11 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: rum
+    parent: RUM
     url: '#update-a-rum-application'
   - generated: true
     identifier: rum-get-a-rum-application
-    name: 역할 생성
+    name: RUM 애플리케이션 받기
     params:
       operationids:
       - GetRUMApplication
@@ -6268,11 +6268,11 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: rum
+    parent: RUM
     url: '#get-a-rum-application'
   - generated: true
     identifier: rum-delete-a-rum-application
-    name: 역할 목록 표시
+    name: RUM 애플리케이션 삭제
     params:
       operationids:
       - DeleteRUMApplication
@@ -6280,11 +6280,11 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: rum
+    parent: "\bRUM"
     url: '#delete-a-rum-application'
   - generated: true
     identifier: rum-create-a-new-rum-application
-    name: 서비스 계정
+    name: 새로운 RUM 애플리케이션 생성
     params:
       operationids:
       - CreateRUMApplication
@@ -6292,11 +6292,11 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: rum
+    parent: RUM
     url: '#create-a-new-rum-application'
   - generated: true
     identifier: rum-list-all-the-rum-applications
-    name: 본 서비스 계정용 애플리케이션 키 편집
+    name: 모든 RUM 애플리케이션 목록화
     params:
       operationids:
       - GetRUMApplications
@@ -6304,11 +6304,11 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: rum
+    parent: RUM
     url: '#list-all-the-rum-applications'
   - generated: true
     identifier: rum-aggregate-rum-events
-    name: 본 서비스 계정용 애플리케이션 키 불러오기
+    name: RUM 이벤트 집계
     params:
       operationids:
       - AggregateRUMEvents
@@ -6316,15 +6316,15 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: rum
+    parent: RUM
     url: '#aggregate-rum-events'
   - generated: true
     identifier: restriction-policies
-    name: 본 서비스 계정용 애플리케이션 키 삭제
+    name: 제한 정책
     url: /api/latest/restriction-policies/
   - generated: true
     identifier: restriction-policies-update-a-restriction-policy
-    name: 본 서비스 계정용 애플리케이션 키 생성
+    name: 제한 정책 업데이트
     params:
       operationids:
       - UpdateRestrictionPolicy
@@ -6336,7 +6336,7 @@ menu:
     url: '#update-a-restriction-policy'
   - generated: true
     identifier: restriction-policies-get-a-restriction-policy
-    name: 본 서비스 계정용 애플리케이션 키 목록 표시
+    name: 제한 정책 받기
     params:
       operationids:
       - GetRestrictionPolicy
@@ -6348,7 +6348,7 @@ menu:
     url: '#get-a-restriction-policy'
   - generated: true
     identifier: restriction-policies-delete-a-restriction-policy
-    name: 서비스 계정 생성
+    name: 제한 정책 삭제
     params:
       operationids:
       - DeleteRestrictionPolicy
@@ -6359,12 +6359,12 @@ menu:
     parent: restriction-policies
     url: '#delete-a-restriction-policy'
   - generated: true
-    identifier: roles
+    identifier: 역할
     name: 역할
     url: /api/latest/roles/
   - generated: true
     identifier: roles-add-a-user-to-a-role
-    name: Python
+    name: 사용자를 역할에 추가
     params:
       operationids:
       - AddUserToRole
@@ -6376,7 +6376,7 @@ menu:
     url: '#add-a-user-to-a-role'
   - generated: true
     identifier: roles-get-all-users-of-a-role
-    name: 역할 목록 표시
+    name: 모든 사용자 역할 받기
     params:
       operationids:
       - ListRoleUsers
@@ -6384,11 +6384,11 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: roles
+    parent: 역할
     url: '#get-all-users-of-a-role'
   - generated: true
     identifier: roles-remove-a-user-from-a-role
-    name: Python
+    name: 역할에서 사용자 제거
     params:
       operationids:
       - RemoveUserFromRole
@@ -6396,7 +6396,7 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: roles
+    parent: 역할
     url: '#remove-a-user-from-a-role'
   - generated: true
     identifier: roles-grant-permission-to-a-role
@@ -6408,11 +6408,11 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: roles
+    parent: 역할
     url: '#grant-permission-to-a-role'
   - generated: true
     identifier: roles-list-permissions-for-a-role
-    name: 본 서비스 계정용 애플리케이션 키 편집
+    name: 역할에 대한 권한 목록화
     params:
       operationids:
       - ListRolePermissions
@@ -6420,11 +6420,11 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: roles
+    parent: 역할
     url: '#list-permissions-for-a-role'
   - generated: true
     identifier: roles-revoke-permission
-    name: 본 서비스 계정용 애플리케이션 키 불러오기
+    name: 권한 취소
     params:
       operationids:
       - RemovePermissionFromRole
@@ -6432,11 +6432,11 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: roles
+    parent: 역할
     url: '#revoke-permission'
   - generated: true
     identifier: roles-create-a-new-role-by-cloning-an-existing-role
-    name: Sensitive Data Scanner
+    name: 기존 역할 복제로 새로운 역할 생성
     params:
       operationids:
       - CloneRole
@@ -6448,7 +6448,7 @@ menu:
     url: '#create-a-new-role-by-cloning-an-existing-role'
   - generated: true
     identifier: roles-update-a-role
-    name: 본 서비스 계정용 애플리케이션 키 생성
+    name: 역할 업데이트
     params:
       operationids:
       - UpdateRole
@@ -6456,11 +6456,11 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: roles
+    parent: 역할
     url: '#update-a-role'
   - generated: true
     identifier: roles-get-a-role
-    name: 본 서비스 계정용 애플리케이션 키 목록 표시
+    name: 역할 받기
     params:
       operationids:
       - GetRole
@@ -6468,11 +6468,11 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: roles
+    parent: 역할
     url: '#get-a-role'
   - generated: true
     identifier: roles-delete-role
-    name: 서비스 계정 생성
+    name: 역할 삭제
     params:
       operationids:
       - DeleteRole
@@ -6480,11 +6480,11 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: roles
+    parent: 역할
     url: '#delete-role'
   - generated: true
     identifier: roles-create-role
-    name: 서비스 정의
+    name: 역할 생성
     params:
       operationids:
       - CreateRole
@@ -6492,11 +6492,11 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: roles
+    parent: 역할
     url: '#create-role'
   - generated: true
     identifier: roles-list-roles
-    name: 추적하기
+    name: 역할 목록화
     params:
       operationids:
       - ListRoles
@@ -6504,11 +6504,11 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: roles
+    parent: 역할
     url: '#list-roles'
   - generated: true
     identifier: roles-list-permissions
-    name: 네트워크
+    name: 권한 목록화
     params:
       operationids:
       - ListPermissions
@@ -6516,7 +6516,7 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: roles
+    parent: 역할
     url: '#list-permissions'
   - generated: true
     identifier: sensitive-data-scanner
@@ -6532,11 +6532,11 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: security-lock
+    parent: sensitive-data-scanner
     url: '#list-standard-patterns'
   - generated: true
     identifier: sensitive-data-scanner-update-scanning-rule
-    name: 서비스 계정 생성
+    name: 검사 규칙 업데이트
     params:
       operationids:
       - UpdateScanningRule
@@ -6548,7 +6548,7 @@ menu:
     url: '#update-scanning-rule'
   - generated: true
     identifier: sensitive-data-scanner-delete-scanning-rule
-    name: Sensitive Data Scanner
+    name: 검사 규칙 삭제
     params:
       operationids:
       - DeleteScanningRule
@@ -6560,7 +6560,7 @@ menu:
     url: '#delete-scanning-rule'
   - generated: true
     identifier: sensitive-data-scanner-create-scanning-rule
-    name: Sensitive Data Scanner
+    name: 검사 규칙 생성
     params:
       operationids:
       - CreateScanningRule
@@ -6572,7 +6572,7 @@ menu:
     url: '#create-scanning-rule'
   - generated: true
     identifier: sensitive-data-scanner-update-scanning-group
-    name: 사용자 액션 추적
+    name: 검사 그룹 업데이트
     params:
       operationids:
       - UpdateScanningGroup
@@ -6584,7 +6584,7 @@ menu:
     url: '#update-scanning-group'
   - generated: true
     identifier: sensitive-data-scanner-delete-scanning-group
-    name: 서비스 계정 생성
+    name: 검사 그룹 삭제
     params:
       operationids:
       - DeleteScanningGroup
@@ -6596,7 +6596,7 @@ menu:
     url: '#delete-scanning-group'
   - generated: true
     identifier: sensitive-data-scanner-create-scanning-group
-    name: 서비스 정의
+    name: 검사 그룹 생성
     params:
       operationids:
       - CreateScanningGroup
@@ -6608,7 +6608,7 @@ menu:
     url: '#create-scanning-group'
   - generated: true
     identifier: sensitive-data-scanner-reorder-groups
-    name: 가이드
+    name: 그룹 재정렬
     params:
       operationids:
       - ReorderScanningGroups
@@ -6620,7 +6620,7 @@ menu:
     url: '#reorder-groups'
   - generated: true
     identifier: sensitive-data-scanner-list-scanning-groups
-    name: 추적하기
+    name: 검사 그룹 목록화
     params:
       operationids:
       - ListScanningGroups
@@ -6648,7 +6648,7 @@ menu:
     url: '#edit-an-application-key-for-this-service-account'
   - generated: true
     identifier: service-accounts-get-one-application-key-for-this-service-account
-    name: '이벤트 '
+    name: 이 서비스 계정에 대한 애플리케이션 키 받기
     params:
       operationids:
       - GetServiceAccountApplicationKey
@@ -6660,7 +6660,7 @@ menu:
     url: '#get-one-application-key-for-this-service-account'
   - generated: true
     identifier: service-accounts-delete-an-application-key-for-this-service-account
-    name: 서비스 정의
+    name: 이 서비스 계정에 대한 애플리케이션 키 삭제
     params:
       operationids:
       - DeleteServiceAccountApplicationKey
@@ -6672,7 +6672,7 @@ menu:
     url: '#delete-an-application-key-for-this-service-account'
   - generated: true
     identifier: service-accounts-create-an-application-key-for-this-service-account
-    name: Google
+    name: 이 서비스 계정에 대한 애플리케이션 키 생성
     params:
       operationids:
       - CreateServiceAccountApplicationKey
@@ -6684,7 +6684,7 @@ menu:
     url: '#create-an-application-key-for-this-service-account'
   - generated: true
     identifier: service-accounts-list-application-keys-for-this-service-account
-    name: 추적하기
+    name: 이 서비스 계정에 대한 애플리케이션 키 목록화
     params:
       operationids:
       - ListServiceAccountApplicationKeys
@@ -6696,7 +6696,7 @@ menu:
     url: '#list-application-keys-for-this-service-account'
   - generated: true
     identifier: service-accounts-create-a-service-account
-    name: 서비스 계정 만들기
+    name: 서비스 계정 생성
     params:
       operationids:
       - CreateServiceAccount
@@ -6712,7 +6712,7 @@ menu:
     url: /api/latest/service-definition/
   - generated: true
     identifier: service-definition-get-a-single-service-definition
-    name: '이벤트 '
+    name: 단일 서비스 정의 받기
     params:
       operationids:
       - GetServiceDefinition
@@ -6724,7 +6724,7 @@ menu:
     url: '#get-a-single-service-definition'
   - generated: true
     identifier: service-definition-delete-a-single-service-definition
-    name: 가이드
+    name: 단일 서비스 정의 삭제
     params:
       operationids:
       - DeleteServiceDefinition
@@ -6736,7 +6736,7 @@ menu:
     url: '#delete-a-single-service-definition'
   - generated: true
     identifier: service-definition-create-or-update-service-definition
-    name: Sensitive Data Scanner
+    name: 서비스 정의 생성 또는 업데이트
     params:
       operationids:
       - CreateOrUpdateServiceDefinitions
@@ -6748,7 +6748,7 @@ menu:
     url: '#create-or-update-service-definition'
   - generated: true
     identifier: service-definition-get-all-service-definitions
-    name: 웹 보기 추적
+    name: 모든 서비스 정의 받기
     params:
       operationids:
       - ListServiceDefinitions
@@ -6764,7 +6764,7 @@ menu:
     url: /api/latest/service-scorecards/
   - generated: true
     identifier: service-scorecards-delete-a-rule
-    name: 규칙 삭제하기
+    name: 규칙 삭제
     params:
       operationids:
       - DeleteScorecardRule
@@ -6777,7 +6777,7 @@ menu:
     url: '#delete-a-rule'
   - generated: true
     identifier: service-scorecards-create-a-new-rule
-    name: Sensitive Data Scanner
+    name: "\b새로운 규칙 생성"
     params:
       operationids:
       - CreateScorecardRule
@@ -6790,7 +6790,7 @@ menu:
     url: '#create-a-new-rule'
   - generated: true
     identifier: service-scorecards-list-all-rules
-    name: Google
+    name: 모든 규칙 목록화
     params:
       operationids:
       - ListScorecardRules
@@ -6803,7 +6803,7 @@ menu:
     url: '#list-all-rules'
   - generated: true
     identifier: service-scorecards-create-outcomes-batch
-    name: 가이드
+    name: 결과 배치 생성
     params:
       operationids:
       - CreateScorecardOutcomesBatch
@@ -6816,7 +6816,7 @@ menu:
     url: '#create-outcomes-batch'
   - generated: true
     identifier: service-scorecards-list-all-rule-outcomes
-    name: Python
+    name: 모든 규칙 결과 목록화
     params:
       operationids:
       - ListScorecardOutcomes
@@ -6828,12 +6828,12 @@ menu:
     parent: service-scorecards
     url: '#list-all-rule-outcomes'
   - generated: true
-    identifier: spans
-    name: 사용자 액션 추적
+    identifier: 스팬
+    name: 스팬
     url: /api/latest/spans/
   - generated: true
     identifier: spans-search-spans
-    name: 가이드
+    name: "\b스팬 검색"
     params:
       operationids:
       - ListSpans
@@ -6845,7 +6845,7 @@ menu:
     url: '#search-spans'
   - generated: true
     identifier: spans-get-a-list-of-spans
-    name: 가이드
+    name: 스팬 목록 받기
     params:
       operationids:
       - ListSpansGet
@@ -6853,11 +6853,11 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: spans
+    parent: 스팬
     url: '#get-a-list-of-spans'
   - generated: true
     identifier: spans-aggregate-spans
-    name: Google
+    name: 집계 스팬
     params:
       operationids:
       - AggregateSpans
@@ -6865,15 +6865,15 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: spans
+    parent: 스팬
     url: '#aggregate-spans'
   - generated: true
     identifier: spans-metrics
-    name: 웹 보기 추적
+    name: 스팬 메트릭
     url: /api/latest/spans-metrics/
   - generated: true
     identifier: spans-metrics-update-a-span-based-metric
-    name: Sensitive Data Scanner
+    name: 스팬 기반 메트릭 업데이트
     params:
       operationids:
       - UpdateSpansMetric
@@ -6885,7 +6885,7 @@ menu:
     url: '#update-a-span-based-metric'
   - generated: true
     identifier: spans-metrics-get-a-span-based-metric
-    name: '이벤트 '
+    name: 스팬 기반 메트릭 받기
     params:
       operationids:
       - GetSpansMetric
@@ -6897,7 +6897,7 @@ menu:
     url: '#get-a-span-based-metric'
   - generated: true
     identifier: spans-metrics-delete-a-span-based-metric
-    name: Google
+    name: 스팬 기반 메트릭 삭제
     params:
       operationids:
       - DeleteSpansMetric
@@ -6909,7 +6909,7 @@ menu:
     url: '#delete-a-span-based-metric'
   - generated: true
     identifier: spans-metrics-create-a-span-based-metric
-    name: Google
+    name: 스팬 기반 메트릭 생성
     params:
       operationids:
       - CreateSpansMetric
@@ -6921,7 +6921,7 @@ menu:
     url: '#create-a-span-based-metric'
   - generated: true
     identifier: spans-metrics-get-all-span-based-metrics
-    name: Google
+    name: 모든 스팬 기반 메트릭 받기
     params:
       operationids:
       - ListSpansMetrics
@@ -6932,12 +6932,12 @@ menu:
     parent: spans-metrics
     url: '#get-all-span-based-metrics'
   - generated: true
-    identifier: teams
+    identifier: 팀
     name: 팀
     url: /api/latest/teams/
   - generated: true
     identifier: teams-get-user-memberships
-    name: 사용자 멤버십 가져오기
+    name: 사용자 멤버십 받기
     params:
       operationids:
       - GetUserMemberships
@@ -6949,7 +6949,7 @@ menu:
     url: '#get-user-memberships'
   - generated: true
     identifier: teams-update-permission-setting-for-team
-    name: "팀에 대한 권한 설정 \b업데이트하기"
+    name: "팀에 대한 권한 설정 \b업데이트"
     params:
       operationids:
       - UpdateTeamPermissionSetting
@@ -6957,7 +6957,7 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: teams
+    parent: 팀
     url: '#update-permission-setting-for-team'
   - generated: true
     identifier: teams-get-permission-settings-for-a-team
@@ -6973,7 +6973,7 @@ menu:
     url: '#get-permission-settings-for-a-team'
   - generated: true
     identifier: teams-update-a-users-membership-attributes-on-a-team
-    name: 팀에서 사용자 멤버십 속성 업데이트하기
+    name: 팀에서 사용자 멤버십 속성 업데이트
     params:
       operationids:
       - UpdateTeamMembership
@@ -6981,11 +6981,11 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: teams
+    parent: 팀
     url: '#update-a-users-membership-attributes-on-a-team'
   - generated: true
     identifier: teams-remove-a-user-from-a-team
-    name: 팀에서 사용자 제거하기
+    name: 팀에서 사용자 제거
     params:
       operationids:
       - DeleteTeamMembership
@@ -6997,7 +6997,7 @@ menu:
     url: '#remove-a-user-from-a-team'
   - generated: true
     identifier: teams-add-a-user-to-a-team
-    name: 팀에 사용자 추가하기
+    name: 팀에 사용자 추가
     params:
       operationids:
       - CreateTeamMembership
@@ -7009,7 +7009,7 @@ menu:
     url: '#add-a-user-to-a-team'
   - generated: true
     identifier: teams-get-team-memberships
-    name: Get team memberships
+    name: "\b팀 구성원 받기"
     params:
       operationids:
       - GetTeamMemberships
@@ -7017,11 +7017,11 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: teams
+    parent: 팀
     url: '#get-team-memberships'
   - generated: true
     identifier: teams-update-a-team-link
-    name: 팀 링크 업데이트하기
+    name: 팀 링크 업데이트
     params:
       operationids:
       - UpdateTeamLink
@@ -7029,7 +7029,7 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: teams
+    parent: 팀
     url: '#update-a-team-link'
   - generated: true
     identifier: teams-get-a-team-link
@@ -7041,11 +7041,11 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: teams
+    parent: 팀
     url: '#get-a-team-link'
   - generated: true
     identifier: teams-remove-a-team-link
-    name: 팀 링크 제거하기
+    name: 팀 링크 제거
     params:
       operationids:
       - DeleteTeamLink
@@ -7053,11 +7053,11 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: teams
+    parent: 팀
     url: '#remove-a-team-link'
   - generated: true
     identifier: teams-create-a-team-link
-    name: 팀 링크 만들기
+    name: 팀 링크 생성
     params:
       operationids:
       - CreateTeamLink
@@ -7065,7 +7065,7 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: teams
+    parent: 팀
     url: '#create-a-team-link'
   - generated: true
     identifier: teams-get-links-for-a-team
@@ -7077,11 +7077,11 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: teams
+    parent: 팀
     url: '#get-links-for-a-team'
   - generated: true
     identifier: teams-update-a-team
-    name: 팀 업데이트하기
+    name: 팀 업데이트
     params:
       operationids:
       - UpdateTeam
@@ -7089,11 +7089,11 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: teams
+    parent: 팀
     url: '#update-a-team'
   - generated: true
     identifier: teams-get-a-team
-    name: 팀 가져오기
+    name: 팀 받기
     params:
       operationids:
       - GetTeam
@@ -7101,11 +7101,11 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: teams
+    parent: 팀
     url: '#get-a-team'
   - generated: true
     identifier: teams-remove-a-team
-    name: 팀 제거하기
+    name: 팀 제거
     params:
       operationids:
       - DeleteTeam
@@ -7113,11 +7113,11 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: teams
+    parent: 팀
     url: '#remove-a-team'
   - generated: true
     identifier: teams-create-a-team
-    name: 팀 만들기
+    name: 팀 생성
     params:
       operationids:
       - CreateTeam
@@ -7125,11 +7125,11 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: teams
+    parent: 팀
     url: '#create-a-team'
   - generated: true
     identifier: teams-get-all-teams
-    name: 모든 팀 가져오기
+    name: 모든 팀 받기
     params:
       operationids:
       - ListTeams
@@ -7137,5 +7137,5 @@ menu:
       unstable: []
       versions:
       - v2
-    parent: teams
+    parent: 팀
     url: '#get-all-teams'

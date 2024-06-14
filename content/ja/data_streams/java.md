@@ -37,6 +37,12 @@ environment:
 ```bash
 java -javaagent:/path/to/dd-java-agent.jar -Ddd.data.streams.enabled=true -jar path/to/your/app.jar
 ```
+
+### ワンクリックインストール
+サービスを再起動することなく Datadog UI から Data Streams Monitoring をセットアップするには、[Configuration at Runtime][5] を使用します。APM サービスページに移動して、DSM を有効にします。
+
+{{< img src="data_streams/enable_dsm_service_catalog.png" alt="APM サービスページの Dependencies セクションから Data Streams Monitoring を有効にします" >}}
+
 ### サポートされるライブラリ
 Data Streams Monitoring は、[confluent-kafka ライブラリ][3]をサポートしています。
 
@@ -51,3 +57,4 @@ Data Streams Monitoring は、1 つの[メッセージ属性][4]を使用して�
 [2]: /ja/tracing/trace_collection/dd_libraries/java/
 [3]: https://pypi.org/project/confluent-kafka/
 [4]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-metadata.html
+[5]: /ja/agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration

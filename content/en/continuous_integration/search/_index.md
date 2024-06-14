@@ -33,7 +33,7 @@ You can access high-level accumulation and trends, including:
 
 ## Search for pipelines
 
-To see your pipelines, navigate to [**CI** > **Pipelines**][1].
+To see your pipelines, navigate to [**Software Delivery** > **CI Visibility** > **CI Pipeline List**][1].
 
 The [Pipelines page][1] shows aggregate stats for the default branch of each pipeline over the selected time frame, as well as the status of the latest pipeline execution. Use this page to see all your pipelines and get a quick view of their health. Only pipelines with Git information associated to the default branch (usually named `main` or `prod`), as well as pipelines without any Git information, are displayed on this page.
 
@@ -50,6 +50,12 @@ Click into a specific pipeline to see the _Pipeline Details_ page which provides
 Get insights on the selected pipeline such as total and failed executions over time, build duration percentiles, error rates, and total time spent breakdown by stage. There are also summary tables for stages and jobs so you can quickly sort them in terms of duration, percentage of overall execution time, or failure rate.
 
 The pipeline execution list shows all the times that pipeline (or its stages or jobs) ran during the selected time frame, for the selected branch. Use the facets on the left side to filter the list to exactly the pipelines, stages, or jobs you want to see.
+
+### View unified pipeline trace
+
+To see the unified pipeline trace, click on the `View unified trace` checkbox on the pipeline execution page.
+
+The unified trace shows in a single trace all pipeline traces generated due to the different partial retries of your pipeline. If the pipeline execution has no partial retries, the unified trace shows only the trace of a single pipeline execution.
 
 ### Explore connections to services, resources, and network events
 
@@ -81,7 +87,7 @@ Pipeline Visibility provides AI-generated explanations for pipeline errors based
 
 [1]: https://app.datadoghq.com/ci/pipelines
 [3]: /continuous_integration/pipelines/github/#enable-log-collection
-[4]: /continuous_integration/pipelines/gitlab/#enable-job-log-collection-beta
+[4]: /continuous_integration/pipelines/gitlab/#enable-job-log-collection
 [5]: /continuous_integration/pipelines/jenkins#enable-job-log-collection
 [6]: /account_management/teams/ 
 [7]: /continuous_integration/pipelines/custom_tags_and_measures/?tab=linux

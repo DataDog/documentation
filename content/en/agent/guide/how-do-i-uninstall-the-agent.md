@@ -13,6 +13,8 @@ algolia:
 
 For information on uninstalling the Agent on your system, consult the [Basic Agent Usage][1] page for your operating system, platform, or configuration tool.
 
+{{< uninstall-agent >}}
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}

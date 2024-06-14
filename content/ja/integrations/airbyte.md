@@ -32,6 +32,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - ai/ml
+- data stores
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/airbyte/README.md
 display_on_public_website: true
@@ -54,9 +55,11 @@ tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Category::AI/ML
+  - Category::Data Stores
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Submitted Data Type::Metrics
   configuration: README.md#Setup
   description: Airbyte のデプロイの状態を監視します。
   media: []
@@ -72,13 +75,13 @@ tile:
 
 このチェックは [Airbyte][1] を監視します。メトリクスは [DogStatsD][2] を通じて Datadog に送信されます。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 Airbyte インテグレーションを適切に動作させるには、以下のステップをすべて実施する必要があります。ステップを開始する前に、StatsD/DogStatsD マッピング機能が含まれる [Datadog Agent][3] (バージョン `>=6.17` または `>=7.17`) をインストールしてください。
 
-### ブラウザトラブルシューティング
+### 構成
 
 1. [Datadogにメトリクスを送信する][4]ように Airbyte デプロイを構成します。
 2. [Datadog Agent メインコンフィギュレーションファイル][5] `datadog.yaml` に以下の構成を追加して更新します。
@@ -145,21 +148,21 @@ dogstatsd_mapper_profiles:
 
 3. Agent と Airbyte を[再起動][6]します。
 
-## リアルユーザーモニタリング
+## データ収集
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "airbyte" >}}
 
 
-### ヘルプ
+### サービスチェック
 
 Airbyte チェックには、サービスのチェック機能は含まれません。
 
-### ヘルプ
+### イベント
 
 Airbyte チェックには、イベントは含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 

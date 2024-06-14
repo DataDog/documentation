@@ -130,7 +130,7 @@ placeholders: hugpython update_pre_build
 hugpython: local/etc/requirements3.txt
 	@${PY3} -m venv --clear $@ && . $@/bin/activate && $@/bin/pip install --upgrade pip wheel && $@/bin/pip install -r $<;\
 	if [[ "$(CI_COMMIT_REF_NAME)" != "" ]]; then \
-		$@/bin/pip install https://binaries.ddbuild.io/dd-source/python/assetlib-0.0.28306535-py3-none-any.whl; \
+		$@/bin/pip install https://binaries.ddbuild.io/dd-source/python/assetlib-0.0.34132650-py3-none-any.whl; \
 	fi
 
 update_pre_build: hugpython

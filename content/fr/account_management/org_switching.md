@@ -1,8 +1,11 @@
 ---
-title: Passer d'une organisation à une autre
 kind: documentation
+title: Passer d'une organisation à une autre
 ---
+
 Si vous appartenez à plusieurs organisations Datadog, le sélecteur d'organisation en bas à gauche de la barre de navigation vous permet de changer d'organisation. Vous pouvez également afficher toutes vos organisations et passer d'une organisation à une autre depuis l'onglet **Organizations** de la page **Personal Settings**.
+
+{{< img src="account_management/org_switching.png" alt="Deux moyens de changer dʼorganisation" style="width:70%;" >}}
 
 Pour des raisons de sécurité, vous devez avoir une session valide pour chaque organisation. Si vous n'avez pas de session active, vous êtes invité à vous connecter à l'aide d'un nom d'utilisateur et d'un mot de passe ou de l'authentification SAML.
 

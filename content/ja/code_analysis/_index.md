@@ -110,8 +110,8 @@ Datadog UI の Static Analysis 結果の一部として問題のあるコード�
 
 [1]: /ja/code_analysis/static_analysis
 [2]: /ja/code_analysis/software_composition_analysis
-[3]: /ja/developers/ide_integrations/vscode/#static-analysis
-[4]: /ja/developers/ide_integrations/idea/#static-analysis
+[3]: /ja/developers/ide_plugins/vscode/#static-analysis
+[4]: /ja/developers/ide_plugins/idea/#static-analysis
 [5]: /ja/code_analysis/github_pull_requests/
 [6]: /ja/code_analysis/static_analysis_rules
 [7]: /ja/integrations/github/#link-a-repository-in-your-organization-or-personal-account

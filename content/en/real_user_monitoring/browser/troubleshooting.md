@@ -129,7 +129,7 @@ The warning is shown because the intake returns a non-empty JSON object. This be
 
 [1]: /help
 [2]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md
-[3]: /real_user_monitoring/browser/#npm
+[3]: /real_user_monitoring/browser/setup/#npm
 [4]: /real_user_monitoring/guide/proxy-rum-data/
 [5]: /integrations/content_security_policy_logs/#use-csp-with-real-user-monitoring-and-session-replay
 [6]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#override-default-rum-view-names
@@ -139,4 +139,4 @@ The warning is shown because the intake returns a non-empty JSON object. This be
 [10]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#global-context
 [11]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#user-session
 [12]: /real_user_monitoring/guide/setup-feature-flag-data-collection/?tab=browser
-[13]: /real_user_monitoring/browser/#initialization-parameters
+[13]: /real_user_monitoring/browser/setup/#initialization-parameters

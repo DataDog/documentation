@@ -22,15 +22,17 @@ further_reading:
 
 Log collection requires the Datadog Agent v6.0+. Older versions of the Agent do not include the `log collection` interface. If you are not using the Agent already, follow the [Agent installation instructions][1].
 
+See [Observability Pipelines][2] if you want to send logs using another vendor's collector or forwarder, or you want to preprocess your log data within your environment before shipping.
+
 ## Activate log collection
 
-Collecting logs is **not enabled** by default in the Datadog Agent. If you are running the Agent in a Kubernetes or Docker environment, see the dedicated [Kubernetes Log Collection][2] or [Docker Log Collection][3] documentation.
+Collecting logs is **not enabled** by default in the Datadog Agent. If you are running the Agent in a Kubernetes or Docker environment, see the dedicated [Kubernetes Log Collection][3] or [Docker Log Collection][4] documentation. 
 
-To enable log collection with an Agent running on your host, change `logs_enabled: false` to `logs_enabled: true` in the Agent's [main configuration file][4] (`datadog.yaml`).
+To enable log collection with an Agent running on your host, change `logs_enabled: false` to `logs_enabled: true` in the Agent's [main configuration file][5] (`datadog.yaml`).
 
 {{< agent-config type="log collection configuration" filename="datadog.yaml" collapsible="true">}}
 
-Starting with Agent v6.19+/v7.19+, HTTPS transport is the default transport used. For more details on how to enforce HTTPS/TCP transport, refer to the [Agent transport documentation][5].
+Starting with Agent v6.19+/v7.19+, HTTPS transport is the default transport used. For more details on how to enforce HTTPS/TCP transport, refer to the [Agent transport documentation][6].
 
 To send logs with environment variables, configure the following:
 
@@ -42,13 +44,13 @@ After activating log collection, the Agent is ready to forward logs to Datadog. 
 
 Datadog Agent v6 can collect logs and forward them to Datadog from files, the network (TCP or UDP), journald, and Windows channels:
 
-1. In the `conf.d/` directory at the root of your [Agent's configuration directory][4], create a new `<CUSTOM_LOG_SOURCE>.d/` folder that is accessible by the Datadog user.
+1. In the `conf.d/` directory at the root of your [Agent's configuration directory][5], create a new `<CUSTOM_LOG_SOURCE>.d/` folder that is accessible by the Datadog user.
 2. Create a new `conf.yaml` file in this new folder.
 3. Add a custom log collection configuration group with the parameters below.
-4. [Restart your Agent][6] to take into account this new configuration.
-5. Run the [Agent's status subcommand][7] and look for `<CUSTOM_LOG_SOURCE>` under the Checks section.
+4. [Restart your Agent][7] to take into account this new configuration.
+5. Run the [Agent's status subcommand][8] and look for `<CUSTOM_LOG_SOURCE>` under the Checks section.
 
-If there are permission errors, see [Permission issues tailing log files][12] to troubleshoot.
+If there are permission errors, see [Permission issues tailing log files][9] to troubleshoot.
 
 Below are examples of custom log collection setup:
 
@@ -156,29 +158,51 @@ List of all available parameters for log collection:
 | `port`           | Yes      | If `type` is **tcp** or **udp**, set the port for listening to logs.                                                                                                                                                                                                                                                                                     |
 | `path`           | Yes      | If `type` is **file** or **journald**, set the file path for gathering logs.                                                                                                                                                                                                                                                                             |
 | `channel_path`   | Yes      | If `type` is **windows_event**, list the Windows event channels for collecting logs.                                                                                                                                                                                                                                                                     |
-| `service`        | Yes      | The name of the service owning the log. If you instrumented your service with [Datadog APM][8], this must be the same service name. Check the [unified service tagging][9] instructions when configuring `service` across multiple data types.                                                                                                          |
-| `source`         | Yes      | The attribute that defines which integration is sending the logs. If the logs do not come from an existing integration, then this field may include a custom source name. However, it is recommended that you match this value to the namespace of any related [custom metrics][10] you are collecting, for example: `myapp` from `myapp.request.count`. |
+| `service`        | Yes      | The name of the service owning the log. If you instrumented your service with [Datadog APM][10], this must be the same service name. Check the [unified service tagging][11] instructions when configuring `service` across multiple data types.                                                                                                          |
+| `source`         | Yes      | The attribute that defines which integration is sending the logs. If the logs do not come from an existing integration, then this field may include a custom source name. However, it is recommended that you match this value to the namespace of any related [custom metrics][12] you are collecting, for example: `myapp` from `myapp.request.count`. |
 | `include_units`  | No       | If `type` is **journald**, list of the specific journald units to include.                                                                                                                                                                                                                                                                               |
 | `exclude_paths`  | No       | If `type` is **file**, and `path` contains a wildcard character, list the matching file or files to exclude from log collection. This is available for Agent version >= 6.18.                                                                                                                                                                            |
 | `exclude_units`  | No       | If `type` is **journald**, list of the specific journald units to exclude.                                                                                                                                                                                                                                                                               |
 | `sourcecategory` | No       | The attribute used to define the category a source attribute belongs to, for example: `source:postgres, sourcecategory:database` or `source: apache, sourcecategory: http_web_access`.                                                                                                                                                                                                                              |
-| `start_position` | No       | If `type` is **file**, set the position for the Agent to start reading the file. Valid values are `beginning` and `end` (default: `end`). If `path` contains a wildcard character, `beginning` is not supported. _Added in Agent v6.19/v7.19_ <br/><br/>If `type` is **journald**, set the position for the Agent to start reading the journal. Valid values are `beginning`, `end`, `forceBeginning`, and `forceEnd` (default: `end`). With `force` options, the Agent ignores the cursor stored on disk and always reads from the beginning or the end of the journal when it starts. _Added in Agent v7.38_                                                                                                          |
+| `start_position` | No       | See [Start position](#start-position) for more information.|
 | `encoding`       | No       | If `type` is **file**, set the encoding for the Agent to read the file. Set it to `utf-16-le` for UTF-16 little-endian, `utf-16-be` for UTF-16 big-endian, or `shift-jis` for Shift JIS. If set to any other value, the Agent reads the file as UTF-8.  _Added `utf-16-le` and `utf-16be` in Agent v6.23/v7.23, `shift-jis` in Agent v6.34/v7.34_                                                                                      |
-| `tags`           | No       | A list of tags added to each log collected ([learn more about tagging][11]).                                                                                                                                                                                                                                                                             |
+| `tags`           | No       | A list of tags added to each log collected ([learn more about tagging][13]).                                                                                                                                                                                                                                                                             |
+
+### Start position
+
+The `start_position` parameter is supported by **file** and **journald** tailer types. The `start_position` is always `beginning` when tailing a container.
+
+Support:
+- **File**: Agent 6.19+/7.19+
+- **Journald**: Agent 6.38+/7.38+
+
+If `type` is **file**:
+- Set the position for the Agent to start reading the file.
+- Valid values are `beginning`, `end`, `forceBeginning`, and `forceEnd` (default: `end`).
+- The `beginning` position does not support paths with wildcards.
+
+If `type` is **journald**:
+- Set the position for the Agent to start reading the journal.
+- Valid values are `beginning`, `end`, `forceBeginning`, and `forceEnd` (default: `end`).
+
+#### Precedence
+
+For both file and journald tailer types, if an `end` or `beginning` position is specified, but an offset is stored, the offset takes precedence. Using `forceBeginning` or `forceEnd` forces the Agent to use the specified value even if there is a stored offset.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest
-[2]: /agent/kubernetes/log/
-[3]: /agent/docker/log/
-[4]: /agent/configuration/agent-configuration-files/
-[5]: /agent/logs/log_transport/
-[6]: /agent/configuration/agent-commands/#restart-the-agent
-[7]: /agent/configuration/agent-commands/#agent-status-and-information
-[8]: /tracing/
-[9]: /getting_started/tagging/unified_service_tagging
-[10]: /metrics/custom_metrics/#overview
-[11]: /getting_started/tagging/
-[12]: /logs/guide/log-collection-troubleshooting-guide/#permission-issues-tailing-log-files
+[2]: https://docs.datadoghq.com/observability_pipelines/
+[3]: /agent/kubernetes/log/
+[4]: /agent/docker/log/
+[5]: /agent/configuration/agent-configuration-files/
+[6]: /agent/logs/log_transport/
+[7]: /agent/configuration/agent-commands/#restart-the-agent
+[8]: /agent/configuration/agent-commands/#agent-status-and-information
+[9]: /logs/guide/log-collection-troubleshooting-guide/#permission-issues-tailing-log-files'
+[10]: /tracing/
+[11]: /getting_started/tagging/unified_service_tagging
+[12]: /metrics/custom_metrics/#overview
+[13]: /getting_started/tagging/

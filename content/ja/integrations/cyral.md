@@ -35,7 +35,7 @@ integration_id: cyral
 integration_title: Cyral
 integration_version: 0.0.1
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: cyral
 public_title: Cyral

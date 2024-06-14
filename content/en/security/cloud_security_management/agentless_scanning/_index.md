@@ -1,12 +1,14 @@
 ---
 title: Cloud Security Management Agentless Scanning
-kind: documentation
 aliases:
  - /security/agentless_scanning
 further_reading:
 - link: "/security/cloud_security_management/setup/agentless_scanning"
   tag: "Documentation"
   text: "Setting up Agentless Scanning"
+- link: "https://www.datadoghq.com/blog/agentless-scanning/"
+  tag: "Blog"
+  text: "Detect vulnerabilities in minutes with Agentless Scanning for Cloud Security Management"
 - link: "/security/vulnerabilities"
   tag: "Documentation"
   text: "Read more about CSM Vulnerabilities"
@@ -60,7 +62,7 @@ The following diagram illustrates how Agentless Scanning works:
 - The scanner limits its use of the AWS API to prevent reaching the AWS rate limit, and uses exponential backoff if needed.
 
 ## What data is sent to Datadog
-The Agentless scanner uses the OWASP [cycloneDX][5] format to transmit a list of packages to Datadog. No confidential or private information is ever transmitted outside of your infrastructure.
+The Agentless scanner uses the OWASP [cycloneDX][3] format to transmit a list of packages to Datadog. No confidential or private personal information is ever transmitted outside of your infrastructure.
 
 Datadog does **not** send:
 - System and package configurations
@@ -70,7 +72,7 @@ Datadog does **not** send:
 
 ## Security considerations
 
-Because the scanner instances grant [permissions][3] to create and copy EBS snapshots, and describe volumes, Datadog advises restricting access to these instances solely to administrative users. 
+Because the scanner instances grant [permissions][4] to create and copy EBS snapshots, and describe volumes, Datadog advises restricting access to these instances solely to administrative users. 
 
 To further mitigate this risk, Datadog implements the following security measures:
 
@@ -87,15 +89,15 @@ To further mitigate this risk, Datadog implements the following security measure
 
 When installed, the Datadog Agent offers real-time, deep visibility into risks and vulnerabilities that exist in your cloud workloads. It is recommended to fully install the Datadog Agent.
 
-As a result, Agentless Scanning excludes resources from its scans that have the Datadog Agent installed and configured for [Vulnerability Management][8]. In this way, Cloud Security Management offers complete visibility of your risk landscape without overriding the benefits received from installing the Datadog Agent with Vulnerability Management.
+As a result, Agentless Scanning excludes resources from its scans that have the Datadog Agent installed and configured for [Vulnerability Management][5]. In this way, Cloud Security Management offers complete visibility of your risk landscape without overriding the benefits received from installing the Datadog Agent with Vulnerability Management.
 
-The following diagram illustrations how Agentless scanning works with existing Agent installations:
+The following diagram illustrates how Agentless scanning works with existing Agent installations:
 
 {{< img src="/security/agentless_scanning/agentless_existing.png" alt="Diagram showing how Agentless scanning works when the Agent is already installed with CSM vulnerability management" width="90%" >}}
 
 ## Cloud service provider cost
 
-When using Agentless Scanning, there are additional costs for running scanners in your cloud environments. To optimize on costs while being able to reliably scan every 12 hours, Datadog recommends setting up [Agentless Scanning with Terraform][4] as the default template, as this also avoids cross-region networking. 
+When using Agentless Scanning, there are additional costs for running scanners in your cloud environments. To optimize on costs while being able to reliably scan every 12 hours, Datadog recommends setting up [Agentless Scanning with Terraform][6] as the default template, as this also avoids cross-region networking. 
 
 To establish estimates on scanner costs, reach out to your [Datadog Customer Success Manager.][7]
 
@@ -105,9 +107,8 @@ To establish estimates on scanner costs, reach out to your [Datadog Customer Suc
 
 [1]: /security/cloud_security_management/setup/agentless_scanning
 [2]: /agent/remote_config/?tab=configurationyamlfile
-[3]: /security/cloud_security_management/setup/agentless_scanning/#permissions
-[4]: /security/cloud_security_management/setup/agentless_scanning#terraform
-[5]: https://cyclonedx.org/
+[3]: https://cyclonedx.org/
+[4]: /security/cloud_security_management/setup/agentless_scanning/#permissions
+[5]: https://app.datadoghq.com/security/csm/vm
+[6]: /security/cloud_security_management/setup/agentless_scanning#terraform
 [7]: mailto:success@datadoghq.com
-[8]: https://app.datadoghq.com/security/csm/vm
-[9]: /security/vulnerabilities

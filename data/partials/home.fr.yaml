@@ -14,10 +14,10 @@ guides:
   link: getting_started/application/
   link_text: Débuter avec Datadog
   title: Débuter avec Datadog
-heading: Bienvenue dans la documentation de Datadog !
+heading: Welcome to Datadog Docs!
 nav_sections:
 - nav_section:
-  - name: Plateforme
+  - name: Services de plateformes
   - navtiles:
     - desc: Installez et configurez l'Agent Datadog pour recueillir et envoyer des
         données.
@@ -36,23 +36,56 @@ nav_sections:
       icon: dashboard
       link: dashboards/
       title: Dashboards
-    - desc: Suivez vos hosts, conteneurs, processus et fonctions sans serveur.
-      icon: host-map
-      link: infrastructure/
-      title: Infrastructure
+    - desc: Créez, modifiez et gérez vos monitors et notifications.
+      icon: monitor
+      link: monitors/
+      title: Monitors et alertes
+    - desc: Détectez et visualisez des anomalies liées à vos applications et votre
+        infrastructure.
+      icon: watchdog
+      link: watchdog/
+      title: Watchdog Datadog
+    - desc: Consultez les alertes, les incidents et d'autres insights Datadog depuis
+        votre appareil mobile.
+      icon: mobile
+      link: mobile/
+      title: Application mobile
+    - desc: Identifier, analyser et atténuer les incidents perturbateurs dans votre
+        organisation
+      icon: incidents
+      link: service_management/incident_management
+      title: Gestion des incidents
     - desc: Recevez une alerte en cas de changement important dans vos applications
         et votre infrastructure.
       icon: events
       link: events/
       title: Événements
-    - desc: Explorez, recherchez et créez des distributions pour vos métriques.
-      icon: metric
-      link: metrics/
-      title: Métriques
-    - desc: Créez, modifiez et gérez vos monitors et notifications.
-      icon: monitor
-      link: monitors/
-      title: Alertes
+    - desc: Automatisez et orchestrez des processus dans toute votre pile technologique.
+      icon: workflows
+      link: workflows
+      title: Automatisation de workflows
+- nav_section:
+  - name: Produits
+  - navtiles:
+    - desc: Suivez vos hosts, conteneurs, processus et fonctions sans serveur.
+      icon: host-map
+      link: infrastructure/
+      title: Infrastructure
+    - desc: Détectez et résolvez les problèmes de performance de vos applications
+        sans serveur.
+      icon: serverless
+      link: serverless/
+      title: Serverless
+    - desc: Utilisez des objets tagués pour recueillir et représenter des données
+        à propos de votre trafic réseau.
+      icon: network
+      link: network_monitoring/
+      title: Surveillance du réseau
+    - desc: Maîtrisez vos dépenses liées au cloud avec l'observabilité unifiée et
+        les données de coût.
+      icon: cloud-cost-management
+      link: cloud_cost_management/
+      title: Cloud Cost Management
     - desc: Explorez des dashboards prêts à l'emploi sur les performances et activez
         le tracing distribué.
       icon: apm
@@ -62,72 +95,64 @@ nav_sections:
       icon: profiling-1
       link: profiler/
       title: Profileur en continu
-    - desc: Traitez, surveillez et archivez vos logs ingérés.
-      icon: log
-      link: logs/
-      title: Log Management
-    - desc: Détectez les menaces et les problèmes de configuration liés à vos applications
-        et à votre infrastructure.
-      icon: security-platform
-      link: security/
-      title: Securité
-    - desc: Vérifiez la disponibilité de vos services, identifiez les problèmes régionaux
-        et testez les performances de vos applications.
-      icon: synthetics
-      link: synthetics/
-      title: Surveillance Synthetic
-    - desc: Mettez en place des intégrations sans code et des tests en continu grâce
-        aux fournisseurs CI/CD.
-      icon: continuous-testing
-      link: continuous_testing/
-      title: Tests continus
-    - desc: Enregistrez, observez et analysez l'expérience utilisateur de vos applications.
-      icon: rum
-      link: real_user_monitoring/
-      title: Real User Monitoring
-    - desc: Utilisez des objets tagués pour recueillir et représenter des données
-        à propos de votre trafic réseau.
-      icon: network
-      link: network_monitoring/
-      title: Network Monitoring
-    - desc: Détectez et résolvez les problèmes de performance de vos applications
-        sans serveur.
-      icon: sans serveur
-      link: serverless/
-      title: Sans serveur
-    - desc: Consultez les alertes, les incidents et d'autres insights Datadog depuis
-        votre appareil mobile.
-      icon: mobile
-      link: mobile/
-      title: Application mobile
-    - desc: Détectez et visualisez des anomalies liées à vos applications et votre
-        infrastructure.
-      icon: watchdog
-      link: watchdog/
-      title: Watchdog Datadog
-    - desc: Consultez les métriques sur les tests, les résultats de build et les exécutions
-        de pipeline pour votre pipeline de CI.
-      icon: ci
-      link: continuous_integration/
-      title: CI Visibility
-    - desc: Maîtrisez vos dépenses liées au cloud avec l'observabilité unifiée et
-        les données de coût.
-      icon: cloud-cost-management
-      link: cloud_cost_management/
-      title: Cloud Cost Management
     - desc: Parcourez des dashboards enrichis, des métriques de requête et des échantillons
         de requêtes.
       icon: database-2
       link: database_monitoring/
       title: Database Monitoring
-    - desc: Gérez et surveillez vos pipelines de télémétrie.
-      icon: pipelines
-      link: observability_pipelines/
-      title: Pipelines d'observabilité
+    - desc: Surveillez et optimisez les performances de vos pipelines de diffusion
+        de données.
+      icon: datastreams-monitoring
+      link: data_streams/
+      title: Suivi des flux de données
     - desc: Découvrez, mappez et surveillez des services sans modification du code.
       icon: usm
       link: universal_service_monitoring/
       title: Universal Service Monitoring
+    - desc: Vérifiez la disponibilité de vos services, identifiez les problèmes régionaux
+        et testez les performances de vos applications.
+      icon: synthetics
+      link: synthetics/
+      title: Surveillance Synthetic
+    - desc: Enregistrez, observez et analysez l'expérience utilisateur de vos applications.
+      icon: rum
+      link: real_user_monitoring/
+      title: Real User Monitoring
+    - desc: Surveillez des parcours utilisateur et des transactions opérationnelles
+        dans des applications mobiles.
+      icon: mobile
+      link: mobile_app_testing/
+      title: Mobile Application Testing
+    - desc: Mettez en place des intégrations sans code et des tests en continu grâce
+        aux fournisseurs CI/CD.
+      icon: continuous-testing
+      link: continuous_testing/
+      title: Tests continus
+    - desc: Surveillez les performances et la santé de vos pipelines de CI.
+      icon: ci
+      link: continuous_integration/
+      title: CI Visibility
+    - desc: Détecter les tests défaillants et identifier les commits introduisant
+        des tests défaillants
+      icon: ci
+      link: tests/
+      title: Test Visibility
+    - desc: Détecter les menaces, les vulnérabilités et les mauvaises configurations
+      icon: security-platform
+      link: security/
+      title: Sécurité
+    - desc: Explorez, recherchez et créez des distributions pour vos métriques.
+      icon: metric
+      link: metrics/
+      title: Métriques
+    - desc: Traitez, surveillez et archivez vos logs ingérés.
+      icon: log
+      link: logs/
+      title: Log Management
+    - desc: Gérez et surveillez vos pipelines de télémétrie.
+      icon: pipelines
+      link: observability_pipelines/
+      title: Observability Pipelines
 - nav_section:
   - name: Configuration
   - navtiles:

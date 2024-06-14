@@ -8,10 +8,6 @@ further_reading:
     text: "Monitor and diagnose network performance issues with SNMP Traps"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Network Device Monitoring is not supported for this site.</div>
-{{< /site-region >}}
-
 ## Overview
 
 SNMP Traps are notifications sent from an SNMP-enabled device to an SNMP manager. When a network device encounters unusual activity, such as a sudden state change on a piece of equipment, the device triggers an SNMP Trap event.

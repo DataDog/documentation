@@ -42,11 +42,11 @@ Google App Engine インテグレーションをプロジェクトにインス�
 
 Google App Engine のログは Google Cloud Logging で収集され、Cloud Pub/Sub トピックを通じて Dataflow ジョブに送信されます。まだの場合は、[Datadog Dataflow テンプレートでロギングをセットアップしてください][4]。
 
-これが完了したら、Google App Engine のログを Google Cloud Logging から Pub/Sub へエクスポートします。
+これが完了したら、Google App Engine のログを Google Cloud Logging から Pub/Sub トピックへエクスポートします。
 
 1. [Google Cloud Logging のページ][5]に移動し、Google App Engine のログを絞り込みます。
 2. **Create Export** をクリックし、シンクに名前を付けます。
-3. エクスポート先として「Cloud Pub/Sub」を選択し、エクスポート用に作成された Pub/Sub を選択します。**注**: この Pub/Sub は別のプロジェクト内に配置することもできます。
+3. 宛先として "Cloud Pub/Sub" を選択し、その目的で作成された Pub/Sub トピックを選択します。**注**: Pub/Sub トピックは別のプロジェクトに配置できます。
 4. **作成**をクリックし、確認メッセージが表示されるまで待ちます。
 
 ## リアルユーザーモニタリング

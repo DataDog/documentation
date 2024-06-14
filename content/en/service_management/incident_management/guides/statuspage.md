@@ -7,7 +7,7 @@ further_reading:
   tag: "Documentation"
   text: "Install the Statuspage Integration"
 - link: "https://app.datadoghq.com/integrations/statuspage"
-  tag: "In-App"
+  tag: "App"
   text: "In-app Statuspage integration tile"
 - link: "monitors/guide/integrate-monitors-with-statuspage/"
   tag: "Guide"

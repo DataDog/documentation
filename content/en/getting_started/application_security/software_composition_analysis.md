@@ -90,7 +90,7 @@ This guide walks you through best practices for getting your team up and running
       |   `7.0 – 8.9`   | High                |
       |   `9.0 – 10.0`  | Critical            |
 
-4. Optionally, download the Software Bill of Materials (SBOM) for your service. While viewing the details of a vulnerability, click on [View in Service Catalog][6]. From here you can navigate to the [Security view][7] of your service, and download the SBOM under the [libraries tab][8]. 
+4. Optionally, download the library inventory (list of libraries and versions in CycloneDX format) for your service. While viewing the details of a vulnerability, click on [View in Service Catalog][6]. From here you can navigate to the [Security view][7] of your service, and download the library inventory under the [libraries tab][8]. 
 
 ## Phase 3: Remediate
 1. **Prioritize Response and Remediate**: While on the [Vulnerability Explorer][5], take action:

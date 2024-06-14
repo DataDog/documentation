@@ -19,6 +19,8 @@ Datadog インテグレーションは、YAML コンフィギュレーション�
 
 構成したインテグレーションが Datadog に表示されない場合、[`status` CLI コマンド][2]を実行し、*Running Checks* 見出しの下にあるインテグレーションを探します。
 
+**注**: コミュニティ、パートナー、および Marketplace インテグレーションは、Agent のアップグレード時に保持されません。Agent のバージョンアップ時にこれらのインテグレーションを再インストールする必要があります。
+
 インテグレーションが **Running Checks** の下に表示されているが、Datadog アプリで表示されていない場合
 1. `status` の出力で、インテグレーションのエントリーの下にエラーや警告が表示されていないことを確認します。
 1. [メトリクスエクスプローラー][3]で、ホストからシステムメトリクスが表示されているかどうか確認します。例えば、インテグレーションを構成したホストで、`system.cpu.user` を探します。
@@ -35,11 +37,11 @@ Datadog インテグレーションは、YAML コンフィギュレーション�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/agent/guide/agent-configuration-files/#agent-configuration-directory
-[2]: /ja/agent/guide/agent-commands/#agent-information
+[1]: /ja/agent/configuration/agent-configuration-files/#agent-configuration-directory
+[2]: /ja/agent/configuration/agent-commands/#agent-information
 [3]: https://app.datadoghq.com/metric/explorer
-[4]: /ja/agent/guide/agent-log-files/
+[4]: /ja/agent/configuration/agent-log-files/
 [5]: /ja/help/
 [6]: /ja/integrations/
 [7]: https://codebeautify.org/yaml-parser-online
-[8]: /ja/agent/guide/agent-commands/#start-stop-restart-the-agent
+[8]: /ja/agent/configuration/agent-commands/#start-stop-restart-the-agent

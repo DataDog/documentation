@@ -8,6 +8,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/flex-logging"
   tag: "Blog"
   text: "Store and analyze high-volume logs efficiently with Flex Logs"
+- link: "https://www.datadoghq.com/blog/monitor-dns-logs-for-network-and-security-datadog/"
+  tag: "Blog"
+  text: "Monitor DNS logs for network and security analysis"
 - link: "/logs/log_configuration/indexes"
   tag: "Documentation"
   text: "Log Indexes"
@@ -76,6 +79,8 @@ The following list is an example of log sources that are potentially good candid
   - AWS VPC, Direct Connect, PrivateLink, AWS NAT Gateway, Azure Basition, and Virtual WAN.
 - **Loadbalancers examples**
   - AWS ELB, ALB, NLB (GCP and Azure flavors), F5, and NGINX.
+- **Artifact repository management examples**
+  - [JFrog Artifactory][4], Archiva, Sonatype Nexus
 - **Identity services and tools examples**
   - Cisco ISE, Okta, OneLogin, and Workday User Activity Logs.
 - **Audit logs examples**
@@ -106,3 +111,4 @@ You can use the spectrum of log types shown in the image below to determine when
 [1]: /logs/log_configuration/indexes/#indexes-filters
 [2]: https://app.datadoghq.com/logs/pipelines/indexes
 [3]: https://app.datadoghq.com/logs
+[4]: https://jfrog.com/help/r/jfrog-platform-administration-documentation/monitoring-and-logging

@@ -143,6 +143,9 @@ Datadog Operator を使用するには、次の前提条件が必要です。
     apiKeyExistingSecret: datadog-secret
     appKeyExistingSecret: datadog-secret
     site: <DATADOG_SITE>
+   clusterAgent:
+    metricsProvider:
+     enabled: true
    ```
    `<DATADOG_SITE>` を [Datadog サイト][13]に置き換えます。サイトは {{< region-param key="dd_site" code="true" >}} です。(右側で正しい SITE が選択されていることを確認してください)。
 3. 次のコマンドを実行します。

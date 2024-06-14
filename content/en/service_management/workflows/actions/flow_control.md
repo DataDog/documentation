@@ -57,9 +57,13 @@ When a run completes, the workflow enters **Debug** mode. Select the For each st
 You can delete the inner step by:
 - Clicking the inner step and selecting **Delete**
 - Clicking the For each step and selecting **Clear**
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+<br>Do you have questions or feedback? Join the **#workflows** channel on the [Datadog Community Slack][3].
+
 [1]: /service_management/workflows/build/#build-a-workflow-with-the-workflow-builder
 [2]: https://app.datadoghq.com/workflow/action-catalog#logic//com.datadoghq.core.if
+[3]: https://datadoghq.slack.com/

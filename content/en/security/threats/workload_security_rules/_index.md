@@ -1,6 +1,5 @@
 ---
 title: CSM Threats Detection Rules
-kind: documentation
 aliases:
   - /security_platform/cloud_workload_security/workload_security_rules
   - /security/cloud_workload_security/workload_security_rules
@@ -20,6 +19,12 @@ further_reading:
 ---
 
 This topic explains how Cloud Security Management Threats (CSM Threats) actively monitors system activity and evaluates it against a set of out-of-the-box (OOTB) rules to detect suspicious behavior.
+
+## Proactively block threats with Active Protection
+
+By default, all OOTB Agent crypto mining threat detection rules are enabled and actively monitoring for threats.
+
+[Active Protection][12] enables you to proactively block and terminate crypto mining threats identified by the Datadog Agent threat detection rules.
 
 ## CSM Threats rules construction
 
@@ -63,7 +68,7 @@ CSM Threats uses the following pipeline when evaluating events:
 
 The following diagram illustrates this pipeline:
 
-{{< img src="security/cws/threat_detection_pipeline.png" alt="CMS Threats detection pipeline" style="width:100%;" >}}
+{{< img src="security/cws/threat_detection_pipeline_2.png" alt="CMS Threats detection pipeline" style="width:100%;" >}}
 
 ### Saving resources by design
 
@@ -79,8 +84,8 @@ Understanding the dependency threat detection rules have on Agent rules is impor
 
 There are two use cases:
 
-- **Create a threat detection rule using an existing Agent rule:** To create a threat detection rule that uses an existing Agent rule, then you only need to create a threat detection rule that references the Agent rule and adds any additional expression parameters you need.
-- **Create a threat detection rule using a new Agent rule:** To detect an event that the current Agent rules do not support, then you need to create a custom Agent rule to detect that event, and then create a custom threat detection rule that uses the custom Agent rule.
+- **Create a threat detection rule using an existing Agent rule:** To create a threat detection rule that uses an existing Agent rule, you only need to create a threat detection rule that references the Agent rule and adds any additional expression parameters you need.
+- **Create a threat detection rule using a new Agent rule:** To detect an event that the current Agent rules do not support, create a custom Agent rule to detect that event, and then create a custom threat detection rule that uses the custom Agent rule.
 
 For a detailed explanation, see [CSM Threats Detection Rules][11]. 
 
@@ -134,4 +139,5 @@ Detection rules run in the Datadog backend after events are sent over as logs. T
 [8]: /security/threats/security_signals
 [9]: https://app.datadoghq.com/security/configuration/workload/agent-rules
 [10]: https://app.datadoghq.com/security/configuration/notification-rules
-[11]: https://docs.datadoghq.com/security/threats/workload_security_rules/custom_rules
+[11]: /security/threats/workload_security_rules/custom_rules
+[12]: /security/cloud_security_management/guide/active-protection

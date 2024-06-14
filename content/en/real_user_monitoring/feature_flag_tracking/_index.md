@@ -14,10 +14,6 @@ further_reading:
   text: "Ensure release safety with feature flag tracking in Datadog RUM"
 ---
 
-<div class="alert alert-warning">
-    Feature Flag Tracking is in beta.
-</div>
-
 ## Overview
 
 Feature flag data gives you greater visibility into your user experience and performance monitoring by allowing you to determine which users are being shown a specific feature and if any change you introduce is impacting your user experience or negatively affecting performance. 

@@ -876,25 +876,25 @@ menu:
       parent: dev_tools_service_check
       identifier: dev_tools_service_check_api
       weight: 603
-    - name: IDE Integrations
-      url: developers/ide_integrations/
+    - name: IDE Plugins
+      url: developers/ide_plugins/
       parent: dev_tools
-      identifier: ide_integrations
+      identifier: ide_plugins
       weight: 7
     - name: IntelliJ IDEA
-      url: developers/ide_integrations/idea/
-      parent: ide_integrations
-      identifier: ide_integrations_idea
+      url: developers/ide_plugins/idea/
+      parent: ide_plugins
+      identifier: ide_plugins_idea
       weight: 701
     - name: VS Code
-      url: developers/ide_integrations/vscode/
-      parent: ide_integrations
-      identifier: ide_integrations_vscode
+      url: developers/ide_plugins/vscode/
+      parent: ide_plugins
+      identifier: ide_plugins_vscode
       weight: 702
     - name: Visual Studio
-      url: developers/ide_integrations/visual_studio/
-      parent: ide_integrations
-      identifier: ide_integrations_visual_studio
+      url: developers/ide_plugins/visual_studio/
+      parent: ide_plugins
+      identifier: ide_plugins_visual_studio
       weight: 703
     - name: Communauté
       url: developers/community/

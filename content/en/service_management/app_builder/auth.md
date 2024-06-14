@@ -8,8 +8,8 @@ description: Access and authentication for App builder
 <div class="alert alert-warning">App Builder is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-{{< callout url="https://www.datadoghq.com/dg/datadog-app-builder/" btn_hidden="false" header="Join the Beta!">}}
-Datadog App Builder is in private beta. Complete the form to request access.
+{{< callout url="" btn_hidden="true" header="Try the Beta!">}}
+App Builder is in beta. Access it from the <a href="https://app.datadoghq.com/app-builder/">App Builder</a> page in Datadog.
 {{< /callout >}}
 
 A few tools control access and authentication for apps and their components.
@@ -100,8 +100,11 @@ To restrict access to the app, perform the following steps in the app canvas:
 1. If you would like to remove access from a role, click the trash can icon to the right of the role name.
 1. Click **Save**.
 
-[1]: /service_management/workflows/actions_catalog/
-[2]: /service_management/workflows/connections/
+<br>Do you have questions or feedback? Join the **#app-builder** channel on the [Datadog Community Slack][6].
+
+[1]: https://app.datadoghq.com/app-builder/action-catalog
+[2]: /service_management/app_builder/connections/
 [3]: /service_management/workflows/
 [4]: /account_management/rbac/
 [5]: https://app.datadoghq.com/app-builder/
+[6]: https://datadoghq.slack.com/

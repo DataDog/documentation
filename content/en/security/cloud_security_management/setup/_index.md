@@ -1,6 +1,5 @@
 ---
 title: Setting up Cloud Security Management
-kind: documentation
 aliases:
   - /security_platform/cloud_workload_security/getting_started
   - /security/cloud_workload_security/getting_started
@@ -54,7 +53,7 @@ CSM is available in three packages: [CSM Enterprise][1], [CSM Pro][2], and [CSM 
 
 **Note**: You can enable features that aren't included in your package at any time by following the instructions on the [CSM Setup page][4].
 
-## Prerequsites
+## Prerequisites
 
 - The **minimum** Datadog Agent version required for CSM is `7.46` or higher.
 
@@ -79,26 +78,6 @@ The following table summarizes the CSM features available relative to each deplo
 
 The following tables represent additional prerequisites relative to each CSM feature.
 
-### CSM Threats 
-
-CSM Threats supports the following Linux distributions:
-
-| Linux Distributions        | Supported Versions                    |
-| ---------------------------| --------------------------------------|
-| Ubuntu LTS                 | 18.04, 20.04, 22.04                   |
-| Debian                      | 10 or later                           |
-| Amazon Linux 2              | Kernels 4.15, 5.4, 5.10, and 2023      |
-| SUSE Linux Enterprise Server| 12 and 15                              |
-| Red Hat Enterprise Linux    | 7, 8, and 9                            |
-| Oracle Linux                | 7, 8, and 9                            |
-| CentOS                      | 7                                     |
-
-**Notes:**
-
-- Custom kernel builds are not supported.
-- For compatibility with a custom Kubernetes network plugin like Cilium or Calico, see the [Troubleshooting page][102].
-- Data collection is done using eBPF, so Datadog minimally requires platforms that have underlying Linux kernel versions of 4.15.0+ or have eBPF features backported.
-
 ### CSM Vulnerabilities 
 
 | Component         | Version/Requirement                         |
@@ -107,26 +86,6 @@ CSM Threats supports the following Linux distributions:
 | [containerd][104] | v1.5.6 or later (Kubernetes and hosts only) |
 
 **Note**: CSM Vulnerabilities is **not** available for CRI-O runtime and podman runtime.
-
-Vulnerability scanning is supported for hosts and containers running the following OS versions:
-
-| OS                       | Supported Versions                                  | Package Managers |
-|--------------------------|-----------------------------------------------------|------------------|
-| Alpine Linux             | 2.2-2.7, 3.0-3.19 (edge is not supported)           | apk              |
-| Wolfi Linux              | N/A                                                 | apk              |
-| Chainguard               | N/A                                                 | apk              |
-| Red Hat Enterprise Linux | 6, 7, 8                                             | dnf/yum/rpm      |
-| CentOS                   | 6, 7, 8                                             | dnf/yum/rpm      |
-| AlmaLinux                | 8, 9                                                | dnf/yum/rpm      |
-| Rocky Linux              | 8, 9                                                | dnf/yum/rpm      |
-| Oracle Linux             | 5, 6, 7, 8                                          | dnf/yum/rpm      |
-| CBL-Mariner              | 1.0, 2.0                                            | dnf/yum/rpm      |
-| Amazon Linux             | 1, 2, 2023                                          | dnf/yum/rpm      |
-| openSUSE Leap            | 42, 15                                              | zypper/rpm       |
-| SUSE Enterprise Linux    | 11, 12, 15                                          | zypper/rpm       |
-| Photon OS                | 1.0, 2.0, 3.0, 4.0                                  | tndf/yum/rpm     |
-| Debian GNU/Linux         | 7, 8, 9, 10, 11, 12 (unstable/sid is not supported) | apt/dpkg         |
-| Ubuntu                   | All versions supported by Canonical                 | apt/dpkg         |
 
 ### CSM Identity Risks 
 

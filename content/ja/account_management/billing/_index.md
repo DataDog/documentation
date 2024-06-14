@@ -13,7 +13,7 @@ Datadog は、ホストとカスタムメトリクスの数を毎時間測定し
 
 ホストとは、Datadog で監視する実際のまたは仮想の OS インスタンスで、サーバー、VM、ノード (Kubernetes の場合)、App Service Plan インスタンス (Azure App Service の場合)、または  Heroku dyno (Heroku プラットフォームの場合)  などがあります。Datadog Agent がインストールされているすべてのインスタンスのほか、Datadog インテグレーションを使用して監視されているすべての Amazon EC2、Google Cloud、Azure、vSphere VM がホストになり得ます。Agent がインストールされている EC2 や VM は、1 つのインスタンスとしてカウントされます (二重課金はありません)。
 
-報告を行っていないホスト ([インフラストラクチャーリスト][2]でステータスが `???`) は、課金の対象になりません。そのようなホストが[インフラストラクチャーリスト][2]から除外されるまで、最大 2 時間かかることがあります。Datadog は、これらのホスト (有料アカウント) の履歴データを保持します。ホスト名またはタグがわかれば、メトリクスをダッシュボードでグラフ化できます。
+報告を行っていないホスト ([インフラストラクチャーリスト][2]でステータスが `INACTIVE`) は、課金の対象になりません。そのようなホストが[インフラストラクチャーリスト][2]から除外されるまで、最大 2 時間かかることがあります。Datadog は、これらのホスト (有料アカウント) の履歴データを保持します。ホスト名またはタグがわかれば、メトリクスをダッシュボードでグラフ化できます。
 
 ### コンテナ
 
@@ -35,9 +35,13 @@ IoT のご請求に関する詳細については、[Datadog 料金ページ][7]
 
 ## プランの詳細
 
+**支払い方法**を管理し、**サブスクリプションの詳細**を表示するには、Datadog 管理者ユーザーである必要があります。
+
+あるいは、Billing Read (`billing_read`) および Billing Edit  (`billing_edit`) [権限][8]を持つロールは、このデータにアクセスすることができます。
+
 ### 支払い方法の管理
 
-[**Payment Method**][8] セクションには、支払い方法の詳細が記載されています。
+[**Payment Method**][9] セクションには、支払い方法の詳細が記載されています。
 
 {{< img src="account_management/billing/PaymentMethodOverview.png" alt="プランページの支払い方法" style="width:90%;" >}}
 
@@ -47,7 +51,7 @@ IoT のご請求に関する詳細については、[Datadog 料金ページ][7]
 
 ### 請求先情報の管理
 
-請求先情報は、[**Billing Contact Details**][8] セクションで確認することができます。
+請求先情報は、[**Billing Contact Details**][9] セクションで確認することができます。
 
 {{< img src="account_management/billing/BillingContactDetailsOverview.png" alt="プランページの請求先情報" style="width:90%;" >}}
 
@@ -59,7 +63,7 @@ IoT のご請求に関する詳細については、[Datadog 料金ページ][7]
 
 ### サブスクリプションの詳細を表示する
 
-[Subscription Details][8] セクションには、コミットされたすべての製品の数量、契約価格、オンデマンド価格が記載されています。
+[Subscription Details][9] セクションには、コミットされたすべての製品の数量、契約価格、オンデマンド価格が記載されています。
 
 {{< img src="/account_management/billing/subscription_details.png" alt="Account Plan & Usage ページで Subscription Details セクションをハイライトしています" style="width:90%;" >}}
 
@@ -73,13 +77,13 @@ IoT のご請求に関する詳細については、[Datadog 料金ページ][7]
 
 ### クレジットカード
 
-クレジットカード払いの場合は、[管理者][9]に [Billing History][10] で前月の領収書が発行されます。請求書のコピーについては、[Datadog の請求担当][11]にメールでお問い合わせください。
+クレジットカード払いの場合は、[管理者][10]に [Billing History][11] で前月の領収書が発行されます。請求書のコピーについては、[Datadog の請求担当][13]にメールでお問い合わせください。
 
 詳細については、[クレジットカード請求][12]を参照してください。
 
 ### 請求
 
-小切手、ACH、または電信送金でお支払いの場合、請求書は毎月 10 営業日近くに請求先のメールアドレスにメールで送信されます。追加のコピーをリクエストするには、[Datadog の請求担当][11]にメールを送信してください。支払い先の詳細は請求書に記載されています。
+小切手、ACH、または電信送金でお支払いの場合、請求書は毎月 10 営業日近くに請求先のメールアドレスにメールで送信されます。追加のコピーをリクエストするには、[Datadog の請求担当][13]にメールを送信してください。支払い先の詳細は請求書に記載されています。
 
 ## お問い合わせ
 
@@ -112,6 +116,7 @@ IoT のご請求に関する詳細については、[Datadog 料金ページ][7]
 {{< /whatsnext >}}
 
 
+
 [1]: https://app.datadoghq.com/account/usage/hourly
 [2]: /ja/infrastructure/
 [3]: /ja/agent/
@@ -119,8 +124,9 @@ IoT のご請求に関する詳細については、[Datadog 料金ページ][7]
 [5]: /ja/account_management/billing/serverless
 [6]: https://www.datadoghq.com/pricing/?product=serverless#serverless
 [7]: https://www.datadoghq.com/pricing/
-[8]: https://app.datadoghq.com/billing/plan
-[9]: /ja/account_management/rbac/#datadog-default-roles
-[10]: https://app.datadoghq.com/account/billing_history
-[11]: mailto:billing@datadoghq.com
+[8]: /ja/account_management/rbac/permissions/#billing-and-usage
+[9]: https://app.datadoghq.com/billing/plan
+[10]: /ja/account_management/rbac/#datadog-default-roles
+[11]: https://app.datadoghq.com/account/billing_history
 [12]: /ja/account_management/billing/credit_card/
+[13]: mailto:billing@datadoghq.com

@@ -1,6 +1,5 @@
 ---
 title: OOTB Rules
-kind: documentation
 type: security_rules
 description: "Datadog Security detection rules"
 aliases:
@@ -37,7 +36,7 @@ cascade:
 
 Datadog provides out-of-the-box (OOTB) [detection rules][1] to flag attacker techniques and potential misconfigurations so you can immediately take steps to remediate. Datadog continuously develops new default rules, which are automatically imported into your account, your Application Security Management library, and the Agent, depending on your configuration.
 
-<div class="alert alert-info">Datadog's Security Research team continuously adds new OOTB security detection rules. While the aim is to deliver high-quality detections with the release of integrations or other new features, the performance of the detection at scale often needs to be observed before making the rule generally available. This gives Datadog's Security Research team time to either refine or deprecate detection opportunities that do not meet Datadog's standards.</div>
+<div class="alert alert-info">Datadog's Security Research team continuously adds new OOTB security detection rules. While the aim is to deliver high-quality detections with the release of integrations or other new features, the performance of these detections at scale often needs to be observed before making the rule generally available. These rules contain a Beta tag. This gives Datadog's Security Research team time to either refine or deprecate detection opportunities that do not meet Datadog's standards.</div>
 
 Click the following buttons to filter the detection rules. Security detection rules are available for [Application Security Management][5], [Cloud SIEM][2] (log detection and signal correlation), [CSM Misconfigurations][3] (cloud and infrastructure), [CSM Threats][4], [CSM Identity Risks][6], and [Attack Paths][7].
 

@@ -12,13 +12,13 @@ further_reading:
 - link: /tracing/guide/
   tag: ''
   text: 모든 가이드
-kind: 가이드
+kind: 지침
 title: 데이터베이스 서비스의 비정상 p99 대기 시간 경보
 ---
 
 _완료하는 데 걸리는 시간 3분_
 
-{{< img src="tracing/guide/alert_anomalies_p99_database/alert_anomalies_full.mp4" video="true" alt="진행 중인 경보를 보여주는 모니터 보기" style="width:90%;">}}
+{{< img src="tracing/guide/alert_anomalies_p99_database/alert_anomalies_cropped.mp4" video="true" alt="진행 중인 알람이 표시된 모니터링 보기" style="width:90%;">}}
 
 Datadog에서는 계속해서 직접 모니터링을 할 필요 없이 APM으로 서비스 상태를 점검하고 모니터링하도록 설정할 수 있습니다. 이 예시에서는 이상 징후 탐지 모니터를 살펴보겠습니다. [이상 징후 탐지][1]는 메트릭이 과거와 다르게 작동하는 것을 파악하도록 도와주는 알고리듬 기능입니다. 이상 징후를 탐지하는 데에는 계정 추세, 시즌별 요일 추세, 하루 시간별 패턴 등이 이용됩니다. 추세가 강하고 패턴이 반복되며 임계값 기반 경보만으로 모니터링이 어렵거나 불가능한 메트릭에 적합합니다.
 
@@ -29,7 +29,7 @@ Datadog에서는 계속해서 직접 모니터링을 할 필요 없이 APM으로
 
    [서비스][5]를 선택하고 나면 다음 단계 설정을 할 수 있게 되고 새 모니터가 추적하는 메트릭 성능이 페이지 상단에 나타납니다.
 
-    {{< img src="tracing/guide/alert_anomalies_p99_database/alert_anomalies_2.png" alt="진행 중인 경보를 보여주는 모니터 보기" style="width:90%;">}}
+    {{< img src="tracing/guide/alert_anomalies_p99_database/alert_anomalies_2_cropped.png" alt="진행 중인 알람이 표시된 모니터링 보기" style="width:90%;">}}
 
 3. **Anomaly Alert**를 선택하고 *For* 옵션 아래에서 p99 latency를 선택합니다.
 
@@ -54,7 +54,7 @@ Datadog에서는 계속해서 직접 모니터링을 할 필요 없이 APM으로
 
 7. ***Edit* 탭에서 *Status* 탭으로 전환하세요**.
 
-    {{< img src="tracing/guide/alert_anomalies_p99_database/alert_anomalies_4.png" alt="진행 중인 경보를 보여주는 모니터 보기" style="width:90%;">}}
+    {{< img src="tracing/guide/alert_anomalies_p99_database/alert_anomalies_4_cropped.png" alt="진행 중인 알람이 표시된 모니터링 보기" style="width:90%;">}}
 
    여기에서는 내 모니터의 현재 상태를 확인하고 음소거하거나 경보 트리거 세부 사항을 탐색할 수 있습니다.
 
@@ -62,11 +62,11 @@ Datadog에서는 계속해서 직접 모니터링을 할 필요 없이 APM으로
 
    여기에서 서비스에 설정된 다른 모니터와 설정 추천하는 모니터와 함께 **새 모니터를 볼 수 있습니다**.
 
-    {{< img src="tracing/guide/alert_anomalies_p99_database/alert_anomalies_5.png" alt="진행 중인 경보를 보여주는 모니터 보기" style="width:90%;">}}
+    {{< img src="tracing/guide/alert_anomalies_p99_database/alert_anomalies_5_cropped.png" alt="진행 중인 알람이 표시된 모니터링 보기" style="width:90%;">}}
 
    모니터를 생성하면 포함할 서비스, 메트릭, 이벤트가 늘어나고 그에 설정할 조건도 더 복잡해 집니다. 각 모니터는 서비스와 연결되어 있고 Service 페이지와 [Service Map][9]에서 액세스할 수 있습니다.
 
-    {{< img src="tracing/guide/alert_anomalies_p99_database/alert_anomalies_6.png" alt="Service Map" style="width:90%;">}}
+    {{< img src="tracing/guide/alert_anomalies_p99_database/alert_anomalies_6_cropped.png" alt="서비스 맵" style="width:90%;">}}
 
    맵에 있는 각 서비스에 있는 초록색 원은 각 모니터가 모두 조용하다는 뜻이고, 노란색은 모니터 1개 이상이 경고 상태이나 경보 상태는 아니라는 뜻이며, 빨간색은 모니터 1개 이상이 경보 상태라는 뜻이고, 회색은 서비스에 설정된 모니터가 없다는 뜻입니다.
 

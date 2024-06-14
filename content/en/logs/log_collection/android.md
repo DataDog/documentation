@@ -4,7 +4,7 @@ kind: documentation
 description: Collect logs from your Android applications.
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-android
-  tag: GitHub
+  tag: "Source Code"
   text: dd-sdk-android Source code
 - link: logs/explorer
   tag: Documentation

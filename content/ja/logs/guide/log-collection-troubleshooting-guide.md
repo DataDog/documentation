@@ -240,7 +240,7 @@ Journald からログを収集する場合は、[Journald インテグレーシ�
 問題について記述されたエラーがログに含まれている場合があります。次のコマンドを実行して、このようなエラーをチェックします。
 
 ```shell
-sudo cat /var/log/datadog/agent.log | grep ERROR
+sudo grep -i error /var/log/datadog/agent.log
 ```
 
 ## Docker 環境

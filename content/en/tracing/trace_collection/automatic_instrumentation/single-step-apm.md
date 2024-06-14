@@ -28,6 +28,8 @@ The following examples show how it works for each deployment type.
 {{< tabs >}}
 {{% tab "Linux host or VM" %}}
 
+<div class="alert alert-warning">If you've previously used Single Step Instrumentation with Linux hosts, <a href="/tracing/trace_collection/automatic_instrumentation/ssi-0-13-1">update to the latest version</a>.</div>
+
 For an Ubuntu host:
 
 1. Run the one-line installation command:
@@ -36,7 +38,7 @@ For an Ubuntu host:
    DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="<YOUR_DD_SITE>" DD_APM_INSTRUMENTATION_ENABLED=host DD_ENV=<AGENT_ENV> bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
    ```
 
-   Replace `<YOUR_DD_API_KEY>` with your [Datadog API key][4], `<YOUR_DD_SITE>` with your [Datadog site][3], and `<AGENT_ENV>` with the environment your Agent is installed on (for example, `env:staging`).
+   Replace `<YOUR_DD_API_KEY>` with your [Datadog API key][4], `<YOUR_DD_SITE>` with your [Datadog site][3], and `<AGENT_ENV>` with the environment your Agent is installed on (for example, `staging`).
    <div class="alert alert-info">See <a href=#advanced-options>Advanced options</a> for more options.</div>
 2. Start a new shell session.
 3. Restart the services on the host or VM.
@@ -63,9 +65,9 @@ For a Docker Linux container:
 2. Configure the Agent in Docker:
    ```shell
    docker run -d --name dd-agent \
-     -e DD_API_KEY=${YOUR_DD_API_KEY} \
+     -e DD_API_KEY=<YOUR_DD_API_KEY> \
      -e DD_APM_ENABLED=true \
-     -e DD_ENV=<AGENT_ENV>
+     -e DD_ENV=<AGENT_ENV> \
      -e DD_APM_NON_LOCAL_TRAFFIC=true \
      -e DD_DOGSTATSD_NON_LOCAL_TRAFFIC=true \
      -e DD_APM_RECEIVER_SOCKET=/opt/datadog/apm/inject/run/apm.socket \
@@ -74,7 +76,7 @@ For a Docker Linux container:
      -v /var/run/docker.sock:/var/run/docker.sock:ro \
      gcr.io/datadoghq/agent:7
    ```
-   Replace `<YOUR_DD_API_KEY>` with your [Datadog API key][5] and `<AGENT_ENV>` with the environment your Agent is installed on (for example, `env:staging`).
+   Replace `<YOUR_DD_API_KEY>` with your [Datadog API key][5] and `<AGENT_ENV>` with the environment your Agent is installed on (for example, `staging`).
    <div class="alert alert-info">See <a href=#advanced-options>Advanced options</a> for more options.</div>
 3. Restart the Docker containers.
 4. [Explore the performance observability of your services in Datadog][6].

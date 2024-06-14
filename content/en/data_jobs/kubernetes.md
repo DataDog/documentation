@@ -53,15 +53,15 @@ You can install the Datadog Agent using the [Datadog Operator][3] or [Helm][4].
    metadata:
      name: datadog
    spec:
-    features:
-        apm:
-        enabled: true
-        hostPortConfig:
-            enabled: true
-            hostPort: 8126
-        admissionController:
-        enabled: true
-        mutateUnlabelled: false
+     features:
+       apm:
+         enabled: true
+       hostPortConfig:
+         enabled: true
+         hostPort: 8126
+       admissionController:
+         enabled: true
+         mutateUnlabelled: false
      global:
        tags:
          - 'data_workload_monitoring_trial:true'
@@ -200,7 +200,9 @@ aws emr-containers start-job-run \
 
 In Datadog, view the [Data Jobs Monitoring][5] page to see a list of all your data processing jobs.
 
-## Tag spans at runtime
+## Advanced Configuration
+
+### Tag spans at runtime
 
 {{% djm-runtime-tagging %}}
 

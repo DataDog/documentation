@@ -47,7 +47,7 @@ To manually instrument a method:
 
 Add custom [span tags][1] to your [spans][2] to customize your observability within Datadog. Span tags are applied to your incoming traces, allowing you to correlate observed behavior with code-level information such as merchant tier, checkout amount, or user ID.
 
-Note that some Datadog tags are necessary for [unified service tagging][5].
+Note that some Datadog tags are necessary for [unified service tagging][3].
 
 {{< tabs >}}
 
@@ -109,7 +109,7 @@ span. For example:
 span.set_error(true);
 ```
 
-Add more specific information about the error by setting any combination of `error.msg`, `error.stack`, or `error.type` by using respectively `Span::set_error_message`, `Span::set_error_stack` and `Span::set_error_type`. See [Error Tracking][7] for more information about error tags.
+Add more specific information about the error by setting any combination of `error.msg`, `error.stack`, or `error.type` by using respectively `Span::set_error_message`, `Span::set_error_stack` and `Span::set_error_type`. See [Error Tracking][4] for more information about error tags.
 
 An example of adding a combination of error tags:
 
@@ -134,11 +134,11 @@ span.set_error(false);
 
 ## Propagating context with headers extraction and injection
 
-You can configure the propagation of context for distributed traces by injecting and extracting headers. Read [Trace Context Propagation][9] for information.
+You can configure the propagation of context for distributed traces by injecting and extracting headers. Read [Trace Context Propagation][5] for information.
 
 ## Resource filtering
 
-Traces can be excluded based on their resource name, to remove synthetic traffic such as health checks from sending traces and influencing trace metrics. Find information about this and other security and fine-tuning configuration on the [Security][12] page.
+Traces can be excluded based on their resource name, to remove synthetic traffic such as health checks from sending traces and influencing trace metrics. Find information about this and other security and fine-tuning configuration on the [Security][6] page.
 
 ## Further Reading
 
@@ -146,11 +146,7 @@ Traces can be excluded based on their resource name, to remove synthetic traffic
 
 [1]: /tracing/glossary/#span-tags
 [2]: /tracing/glossary/#spans
-[3]: https://github.com/DataDog/dd-opentracing-cpp/blob/master/include/datadog/tags.h
-[4]: https://github.com/opentracing/opentracing-cpp/blob/master/include/opentracing/ext/tags.h
-[5]: /getting_started/tagging/unified_service_tagging
-[6]: https://github.com/opentracing/opentracing-cpp/blob/master/include/opentracing/value.h
-[7]: /tracing/error_tracking/
-[8]: /tracing/setup/cpp/#installation
-[9]: /tracing/trace_collection/trace_context_propagation/cpp
-[12]: /tracing/security
+[3]: /getting_started/tagging/unified_service_tagging
+[4]: /tracing/error_tracking/
+[5]: /tracing/trace_collection/trace_context_propagation/cpp
+[6]: /tracing/security

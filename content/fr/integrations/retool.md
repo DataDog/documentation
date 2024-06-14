@@ -21,7 +21,7 @@ integration_id: retool
 integration_title: Retool
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: support@retool.com
 manifest_version: 1.0.0
 metric_prefix: retool

@@ -16,7 +16,7 @@ further_reading:
 - link: "/monitors/manage/status/"
   tag: "Documentation"
   text: "Consult your monitor status"
-- link: "/monitors/guide/change-alert"
+- link: "/monitors/types/change-alert"
   tag: "Documentation"
   text: "Troubleshoot change alert monitors"
 ---
@@ -50,7 +50,7 @@ This type of alert is useful to track spikes, drops, or slow changes in a metric
 
 For more information, see the [Change alert monitors][1] guide.
 
-[1]: /monitors/guide/change-alert/
+[1]: /monitors/types/change-alert/
 {{% /tab %}}
 {{% tab "Anomaly" %}}
 
@@ -210,7 +210,7 @@ For instructions on the advanced alert options (no data, auto resolve), see the 
 
 ## Notifications
 
-For instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][7] and [Monitor configuration][8] pages.
+For instructions on the **Configure notifications and automations** section, see the [Notifications][7] and [Monitor configuration][8] pages.
 
 ## Further Reading
 
@@ -222,4 +222,4 @@ For instructions on the **Say what's happening** and **Notify your team** sectio
 [5]: /monitors/configuration/?tab=thresholdalert#evaluation-window
 [6]: /monitors/configuration/#advanced-alert-conditions
 [7]: /monitors/notify/
-[8]: /monitors/configuration/?tab=thresholdalert#notify-your-team
+[8]: /monitors/configuration/?tab=thresholdalert#configure-notifications-and-automations

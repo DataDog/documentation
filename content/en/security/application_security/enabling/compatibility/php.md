@@ -26,13 +26,13 @@ The minimum tracer version to get all supported ASM capabilities for PHP is 0.98
 <div class="alert alert-info">If you would like to see support added for any of the unsupported capabilities, let us know! Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send details</a>.</div>
 
 ### Supported deployment types
-|Type | Threat Detection support | Vulnerability Management for OSS support |
-| ---           |   ---             |           ----            |
-| Docker        | {{< X >}}         |  {{< X >}}                |
-| Kubernetes    | {{< X >}}         |  {{< X >}}                |
-| Amazon ECS    | {{< X >}}         |  {{< X >}}                |
-| AWS Fargate   |                   |                           |
-| AWS Lambda    |                   |                           |
+| Type        | Threat Detection support | Software Composition Analysis |
+|-------------|--------------------------|-------------------------------|
+| Docker      | {{< X >}}                | {{< X >}}                     |
+| Kubernetes  | {{< X >}}                | {{< X >}}                     |
+| Amazon ECS  | {{< X >}}                | {{< X >}}                     |
+| AWS Fargate |                          |                               |
+| AWS Lambda  |                          |                               |
 
 ## Language and framework compatibility
 

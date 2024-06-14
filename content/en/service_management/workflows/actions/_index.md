@@ -37,4 +37,7 @@ If your use case is not covered by an integration or generic Datadog action, you
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+<br>Do you have questions or feedback? Join the **#workflows** channel on the [Datadog Community Slack][2].
+
 [1]: https://forms.gle/JzPazvxXox7fvA2R8
+[2]: https://datadoghq.slack.com/

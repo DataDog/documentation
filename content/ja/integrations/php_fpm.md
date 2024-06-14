@@ -5,6 +5,7 @@ assets:
   dashboards:
     php-fpm: assets/dashboards/php-fpm_dashboard.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -25,6 +26,7 @@ assets:
     - php7.0-fpm.service
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 117
     source_type_name: PHP-FPM
   saved_views:
     php-fpm_processes: assets/saved_views/php-fpm_processes.json
@@ -42,7 +44,7 @@ draft: false
 git_integration_title: php_fpm
 integration_id: php-fpm
 integration_title: PHP FPM
-integration_version: 3.0.0
+integration_version: 3.3.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -68,6 +70,7 @@ tile:
   title: PHP FPM
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ![PHP 概要][1]
@@ -76,22 +79,22 @@ tile:
 
 PHP-FPM チェックは、FPM プールの状態を監視し、リクエストパフォーマンスを追跡します。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 PHP-FPM チェックは [Datadog Agent][2] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 ホストで実行中の Agent でこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[コンテナ化](#コンテナ化)セクションを参照してください。
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
-#### ホスト
+#### メトリクスベース SLO
 
-ホストで実行中の Agent に対してこのチェックを構成するには:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
 1. [Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `php_fpm.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[php_fpm.d/conf.yaml のサンプル][2]を参照してください。
 
@@ -139,7 +142,7 @@ PHP-FPM チェックは [Datadog Agent][2] パッケージに含まれていま�
 [2]: https://github.com/DataDog/integrations-core/blob/master/php_fpm/datadog_checks/php_fpm/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "コンテナ化" %}}
 
 #### コンテナ化
 
@@ -147,9 +150,9 @@ PHP-FPM チェックは [Datadog Agent][2] パッケージに含まれていま�
 
 | パラメーター            | 値                                                                                                                    |
 | -------------------- | ------------------------------------------------------------------------------------------------------------------------ |
-| `<インテグレーション名>` | `php_fpm`                                                                                                                |
-| `<初期コンフィギュレーション>`      | 空白または `{}`                                                                                                            |
-| `<インスタンスコンフィギュレーション>`  | `{"status_url":"http://%%host%%/status", "ping_url":"http://%%host%%/ping", "use_fastcgi": false, "ping_reply": "pong"}` |
+| `<INTEGRATION_NAME>` | `php_fpm`                                                                                                                |
+| `<INIT_CONFIG>`      | 空白または `{}`                                                                                                            |
+| `<INSTANCE_CONFIG>`  | `{"status_url":"http://%%host%%/status", "ping_url":"http://%%host%%/ping", "use_fastcgi": false, "ping_reply": "pong"}` |
 
 #### 追加情報
 
@@ -200,21 +203,21 @@ PHP-FPM インストールが Unix ソケットを使用する場合、`status_u
 
 [Agent の `status` サブコマンドを実行][3]し、Checks セクションで `php_fpm` を探します。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "php_fpm" >}}
 
 
-### イベント
+### ヘルプ
 
 PHP-FPM チェックには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 {{< get-service-checks-from-git "php_fpm" >}}
 
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 

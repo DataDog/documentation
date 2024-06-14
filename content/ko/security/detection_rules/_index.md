@@ -17,7 +17,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/impossible-travel-detection-rules/
   tag: 블로그
   text: 불가능한 여행 탐지 규칙으로 의심스러운 로그인 활동 탐지하기
-kind: 설명서
 title: 탐지 규칙
 ---
 
