@@ -4550,10 +4550,10 @@ menu:
       parent: csm_setup
       identifier: csm_setup_deployment_types
       weight: 100
-    - name: Cloud Accounts
-      url: security/cloud_security_management/setup/cloud_accounts
+    - name: Compliance Scanning
+      url: security/cloud_security_management/setup/compliance_scanning
       parent: csm_setup
-      identifier: csm_setup_cloud_accounts
+      identifier: csm_setup_compliance_scanning
       weight: 102
     - name: Agent
       url: security/cloud_security_management/setup/agent
