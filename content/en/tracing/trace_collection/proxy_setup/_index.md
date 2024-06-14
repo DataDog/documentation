@@ -662,52 +662,56 @@ More configuration options can be found on the [kong-plugin-ddtrace][3] plugin d
 
 {{% /tab %}}
 
-{{% tab "Apache HTTP Server %}}
+{{% tab "Apache HTTP Server" %}}
 
-## HTTPd with Datadog module
-Datadog provides a [module][1] for enhancing [Apache HTTP Server][2] and [IHS HTTP Server][3] capabilities with APM Tracing.
+Datadog provides an HTTPd [module][1] to enhance [Apache HTTP Server][2] and [IHS HTTP Server][3] capabilities with APM Tracing.
 
 ### Compatibility
-Our module only support Apache HTTP Server `v2.4.x`.
 
-Since IHS HTTP Server is essentially a wrapper of the Appache HTTP Server, our module can also be used with IHS without any modifications.
+- The module only supports Apache HTTP Server `v2.4.x`.
+- Since IHS HTTP Server is essentially a wrapper of the Appache HTTP Server, the module can also be used with IHS without any modifications.
 
-### Module installation
+### Installation
+
 <div class="alert alert-warning">
-  <strong>Note:</strong> Only Apache HTTP Server 2.4.x for x86_64 architecture is supported.
+  <strong>Note</strong>: Only Apache HTTP Server 2.4.x for x86_64 architecture is supported.
 </div>
 
-The module is provided as a shared library for dynamical loading by HTTPd. Each supported platform
+The module is provided as a shared library for dynamic loading by HTTPd. Each supported platform
 and architecture has its own artifact hosted on [httpd-datadog's repository][1].
 
-Run the following script to download the latest version of the module:
+To install the module:
 
-```bash
-curl -s https://api.github.com/repos/DataDog/httpd-datadog/releases/latest \
-| grep "mod_datadog-linux-x86_64.tar.gz" \
-| cut -d : -f 2,3 \
-| tr -d \" \
-| wget -qi -
-```
+1. Run the following script to download the latest version of the module:
 
-When unpacking the tarball, the resulting file is `mod_datadog.so`, the shared library that must
-be loaded by the server.
+   ```bash
+   curl -s https://api.github.com/repos/DataDog/httpd-datadog/releases/latest \
+   | grep "mod_datadog-linux-x86_64.tar.gz" \
+   | cut -d : -f 2,3 \
+   | tr -d \" \
+   | wget -qi -
+   ```
 
-Place it in the directory where HTTPd searches for modules, typically `/usr/local/apache2/modules`.
+   When unpacking the tarball, the resulting file is `mod_datadog.so`, the shared library that must
+   be loaded by the server.
 
-Load the module by adding the following line in the configuration file:
+1. Place the file in the directory where HTTPd searches for modules, typically `/usr/local/apache2/modules`.
 
-```nginx
-LoadModule datadog_module modules/mod_datadog.so
-```
+1. Load the module by adding the following line in the configuration file:
 
-To enable the module, make sure to restart or reload HTTPd.
+   ```nginx
+   LoadModule datadog_module modules/mod_datadog.so
+   ```
 
-### Module configuration
+1. To enable the module, make sure to restart or reload HTTPd.
+
+### Configuration
+
 By default, all requests are traced and sent to the Datadog Agent.
-To change the module default behaviour, use `Datadog*` directives described in the Datadog module's [API documentation][3].
 
-For example, the following configuration sets the service name to `my-service` and the sampling rate to 10%
+To change the module default behavior, use `Datadog*` directives described in the Datadog module's [API documentation][3].
+
+For example, the following configuration sets the service name to `my-service` and the sampling rate to 10%:
 
 ```nginx
 LoadModule datadog_module modules/mod_datadog.so
