@@ -163,7 +163,7 @@ To redact the attribute:
 
 ### Data Security
 
-<div class="alert alert-warning">Data Security is in private beta. To enroll, contact your <a href="mailto:success@datadoghq.com">Datadog Customer Success Manager</a>.</div>
+<div class="alert alert-warning">Data Security is in private beta. To enroll in the private beta, <a href="https://www.datadoghq.com/private-beta/data-security">sign up here</a>.</div>
 
 If you have [Sensitive Data Scanner][8] and [Cloud Security Management][16] enabled, you can use Data Security to locate sensitive data and fix security issues impacting AWS S3 buckets and RDS instances.
 
