@@ -23,14 +23,6 @@ cascade:
     tags: ['mobile_testing']
 ---
 
-{{< site-region region="us,us5,eu" >}}
-<div class="alert alert-warning">Mobile Application Testing is Generally Available for US1, US5, and EU sites.</div>
-{{< /site-region >}}
-
-{{< site-region region="us3,ap1" >}}
-<div class="alert alert-warning">Mobile Application Testing is not supported on this site.</div>
-{{< /site-region >}}
-
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">Mobile Application Testing is not supported on this site.</div>
 {{< /site-region >}}
