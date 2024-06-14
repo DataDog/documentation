@@ -1,6 +1,7 @@
 ---
-title: LLM Observability API
+title: LLM Observability API Reference
 ---
+
 {{% site-region region="gov" %}}
 <div class="alert alert-warning">
 LLM Observability is not available in the US1-FED site.

@@ -13,7 +13,6 @@ further_reading:
 - link: /security/application_security/enabling/
   tag: Documentation
   text: Activer Application Security Management
-kind: documentation
 title: Fonctionnement d'Application Security Management dans Datadog
 ---
 
