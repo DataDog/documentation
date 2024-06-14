@@ -1,5 +1,5 @@
 ---
-title: Getting Started with DDSQL
+title: Getting Started with DDSQL Editor
 kind: guide
 ---
 
@@ -9,7 +9,7 @@ DDSQL is in private beta.
 
 ## Overview
 
-You can write a query on [DDSQL][1] in natural language or in SQL (see the [DDSQL reference documentation][2] for supported SQL expressions and usage details). Example queries are also provided throughout the UI.
+You can write a query in [DDSQL Editor][1] in natural language or in SQL (see the [DDSQL reference documentation][2] for supported SQL expressions and usage details). Example queries are also provided throughout the UI.
 
 {{< img src="dashboards/ddsql/query-ui-overview.png" alt="A list of available tables" style="width:100%;" >}}
 
@@ -18,7 +18,7 @@ You can write a query on [DDSQL][1] in natural language or in SQL (see the [DDSQ
 
 ## Example querying flow
 
-This example flow showcases the key features of DDSQL. If the example query isn't suitable for your data, you can use your own query instead.
+This example flow highlights the key features of DDSQL Editor. If the example query isn't suitable for your data, you can use your own query instead.
 
 ### Run a natural language query
 
@@ -37,13 +37,13 @@ ORDER BY count DESC;
 
 ### Modify the query SQL with the schema explorer
 
-If you want to make your query more specific, but aren't sure which data is available to you, you can use the schema explorer to examine the schema before updating your query:
+If you aren't sure which fields contain the data you want, you can use the schema explorer to examine the available tables, their columns, and their relationships to other tables:
 
 1. Click the database icon in the left sidebar to open the schema explorer.
-<!-- add screenshot -->
-1. The current query is for the `host` table, so click **All Tables > Hosts > host** to view the available fields. Choose a field to add to the query. This example uses `availability_zone`.
-<!-- add screenshot -->
-1. Update the query SQL to add the `availability_zone` to the result:
+    {{< img src="dashboards/ddsql/schema-explorer-example.png" alt="The schema explorer's list of available tables" style="width:100%;" >}}
+1. The current query is for the `host` table, so click **All Tables > Hosts > host** to view the available fields. Decide which field to add to the query. This example uses `availability_zone`.
+    {{< img src="dashboards/ddsql/schema-explorer-table-example.png" alt="The the host table displayed in the schema explorer" style="width:50%;" >}}
+1. Edit the query SQL to add the `availability_zone` to the result:
 
 {{< code-block lang="sql" >}}
 SELECT instance_type, availability_zone,

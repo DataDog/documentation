@@ -1307,20 +1307,20 @@ menu:
       url: dashboards/sharing/scheduled_reports
       parent: dashboards_sharing
       weight: 1003
-    - name: DDSQL
-      url: dashboards/ddsql
+    - name: DDSQL Editor
+      url: dashboards/ddsql_editor
       parent: dashboards
-      identifier: dashboards_ddsql
+      identifier: dashboards_ddsql_editor
       weight: 11
     - name: Getting Started
-      url: dashboards/ddsql/getting_started
-      parent: dashboards_ddsql
-      identifier: dashboards_ddsql_getting_started
+      url: dashboards/ddsql_editor/getting_started
+      parent: dashboards_ddsql_editor
+      identifier: dashboards_ddsql_editor_getting_started
       weight: 1101
     - name: Reference
-      url: dashboards/ddsql/reference
-      parent: dashboards_ddsql
-      identifier: dashboards_ddsql_reference
+      url: dashboards/ddsql_editor/reference
+      parent: dashboards_ddsql_editor
+      identifier: dashboards_ddsql_editor_reference
       weight: 1102
     - name: Guides
       url: dashboards/guide/
