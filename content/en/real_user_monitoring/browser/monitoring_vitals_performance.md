@@ -36,7 +36,7 @@ Navigate to the [Vitals page][3], or click the "Vitals" tab under the [**Digital
 
 {{< img src="real_user_monitoring/browser/vitals_performance/vitals-page-selectors.png" alt="You can check vitals for the top most visited pages or specific pages." style="width:100%;" >}}
 
-From this view, you have two ways of selecting the page and vital that you can review and optimize:
+From this view, you have two ways of selecting the page and vital to review and optimize:
 
 - Select from a list of the most visited pages
 - Enter a view name on the left and select the page
@@ -47,10 +47,12 @@ After you've selected a page and vital, you can see insights that explain their 
 
 From here, you can:
 
-- Change the time frame in the upper right.
-- Filter by different session attributes using the dropdown buttons.
-- Filter by selecting a group from the breakdown on the right ("Show Filter Breakdown").
-- Select the percentile at which to evaluate your vital. For example, a pc75 evaluation means that the displayed value is at the 75th percentile of views in the selected filters. Pc75 is the typical percentile used to evaluate CWV for a given page.
+- Change the time frame in the upper right
+- Filter by different session attributes using the dropdown buttons
+- Filter by selecting a group from the breakdown on the right ("Show Filter Breakdown")
+- Select the percentile at which to evaluate your vital
+
+In the example below, a pc75 evaluation means that the displayed value is at the 75th percentile of views in the selected filters. Pc75 is the typical percentile used to evaluate CWV for a given page.
 
 {{< img src="real_user_monitoring/browser/vitals_performance/vital-filter-and-evaluate.png" alt="Filter and evaluate your vitals for the selected view." style="width:100%;" >}}
 
