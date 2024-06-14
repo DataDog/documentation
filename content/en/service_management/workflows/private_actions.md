@@ -17,7 +17,7 @@ Private Actions are in beta. Use this form to request access today.
 
 ## Overview
 
-Private actions allow your Datadog workflows and apps to interact with services hosted on your private network without opening a port in your firewall. To use private actions, you must install a private action runner on a host in your network and pair the runner with a Datadog Connection.
+Private actions allow your Datadog workflows and apps to interact with services hosted on your private network without exposing your services to the public internet. To use private actions, you must install a private action runner on a host in your network and pair the runner with a Datadog Connection.
 
 The following integrations support private actions:
 - [Kubernetes][1]
@@ -28,10 +28,11 @@ The following integrations support private actions:
 
 ## Prerequisites
 
-The private action runner requires a Linux host that is able to reach any internal services you want to call from an action or app. The host has the following requirements:
+The private action runner requires a Linux host that is able to reach any internal services you want to call from an action or app. To use App Builder with private actions, you must be able to point a hostname to the private action runner container. This hostname must be resolvable by your App users. App Builder calls the hostname using HTTPS, so you must bring your own SSL termination.
+
+In addition, the host has the following requirements:
 - 2GB of RAM
 - Docker (with Docker Compose if that is your preference)
-- App Builder connections require SSL termination
 
 ## Set up a private action runner
 
