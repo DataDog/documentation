@@ -93,6 +93,31 @@ Clicking on a resource opens a side panel with details including:
 
 Click the **Share** button and select **Share event** to share a link to the current resource with your teammates through email, Slack, and more. See all of the [Datadog notification integrations][3] available for this feature.
 
+### Recent changes
+
+Use the **Recent Changes** tab on a resource's side panel to see a 7-day history of changes to the resource and its configuration. To forward change events from your cloud environments, follow the links or instructions for your cloud providers below:
+
+{{< tabs >}}
+{{% tab "AWS" %}}
+
+See the [AWS Config integration page][101] to launch a CloudFormation template that sets up change event forwarding through AWS Config.
+
+[101]: /integrations/amazon_config/#events
+{{% /tab %}}
+{{% tab "Azure" %}}
+
+Contact [Datadog support][201] to enable change event forwarding from your Azure environment.
+
+[201]: /help/
+{{% /tab %}}
+{{% tab "Google Cloud Platform" %}}
+
+See the [Resource change collection][301] section of the Google Cloud Platform integration page for instructions on forwarding change events through a Pub/Sub topic and subscription.
+
+[301]: #
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
