@@ -1,5 +1,5 @@
 ---
-title: Create your first live AWS diagram
+title: Create your first live cloud diagram
 kind: guide
 ---
 
