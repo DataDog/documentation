@@ -27,12 +27,12 @@ RUM Vitals helps you find the true root cause of browser performance issues base
 
 To get the most out of this feature, Datadog recommends that you use:
 
-- RUM Browser SDK version 5.4.0 or newer
-- Session Replay for at least some sessions
+- [RUM Browser SDK][3] version 5.4.0 or newer
+- [Session Replay][4] for at least some sessions
 
 ## Select a vital
 
-Navigate to the [Vitals page][3], or click the "Vitals" tab under the [**Digital Experience > Performance Monitoring**][4] page.
+Navigate to the [Vitals page][5], or click the "Vitals" tab under the [**Digital Experience > Performance Monitoring**][6] page.
 
 {{< img src="real_user_monitoring/browser/vitals_performance/vitals-page-selectors-1.png" alt="You can check vitals for the top most visited pages or specific pages." style="width:100%;" >}}
 
@@ -60,7 +60,7 @@ In the example below, a pc75 evaluation means that the displayed value is at the
 
 The next part of the page helps you visualize exactly what your users are experiencing.
 
-Based on the selected time period and traffic, RUM Vitals highlights the most typical example of what users see on the page when the selected vital is captured. If you use [Session Replay][5], this is where you see a visual of the page.
+Based on the selected time period and traffic, RUM Vitals highlights the most typical example of what users see on the page when the selected vital is captured. If you use [Session Replay][4], this is where you see a visual of the page.
 
 For some vitals, you can also select other versions of the page to investigate by clicking "See a different element".
 
@@ -90,6 +90,7 @@ You can select another sample event using the dropdown in the top left, and expa
 
 [1]: /real_user_monitoring/browser/monitoring_page_performance/#event-timings-and-core-web-vitals
 [2]: /real_user_monitoring/browser/monitoring_page_performance/#how-loading-time-is-calculated
-[3]: https://app.datadoghq.com/rum/vitals
-[4]: https://app.datadoghq.com/rum/performance-monitoring
-[5]: /real_user_monitoring/session_replay/
+[3]: /real_user_monitoring/browser/setup/
+[4]: /real_user_monitoring/session_replay/
+[5]: https://app.datadoghq.com/rum/vitals
+[6]: https://app.datadoghq.com/rum/performance-monitoring
