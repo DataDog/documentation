@@ -4,13 +4,13 @@ aliases:
 further_reading:
 - link: /logs/log_configuration/processors
   tag: 설명서
-  text: 로그 처리하는 방법 배우기
+  text: 로그 처리 방법
 - link: /logs/log_configuration/parsing
   tag: 설명서
-  text: 파싱에 대해 배우기
+  text: 파싱에 대해 알아보기
 - link: /logs/faq/how-to-investigate-a-log-parsing-issue/
   tag: FAQ
-  text: 로그 파싱 문제를 탐색하는 방법
+  text: 로그 파싱 문제 조사
 kind: 가이드
 title: 로그 파싱 - 모범 사례
 ---
