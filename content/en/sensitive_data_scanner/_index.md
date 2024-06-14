@@ -174,7 +174,7 @@ You can create custom scanning rules using regex patterns to scan for sensitive 
 {{% /tab %}}
 {{% tab "In the Agent" %}}
 
-A scanning rule determines what sensitive information to match within the data defined by a scanning group. You can add **up to 20** predefined scanning rules from Datadog's Scanning Rule Librarys. The Datadog Agent scans your data in your local environment during log collection, before logs are sent to the Datadog platform.
+A scanning rule determines what sensitive information to match within the data defined by a scanning group. You can add **up to 20** predefined scanning rules from Datadog's Scanning Rule Library. The Datadog Agent scans your data in your local environment during log collection, before logs are sent to the Datadog platform.
 
 For Terraform, see the [Datadog Sensitive Data Scanner rule][2] resource.
 
