@@ -9,7 +9,7 @@ Cloudcraft allows you to import your AWS cloud environment as *live diagrams*. B
 
 ## Prerequisites
 
-Before you begin, you must connect your AWS account to Cloudcraft. For more information, see [Connect your AWS account with Cloudcraft][1].
+Before you begin, you must connect your AWS account to Cloudcraft. For details on how to connect your AWS account with Cloudcraft, see [Connect your AWS account with Cloudcraft][1].
 
 ## Your first live diagram
 
