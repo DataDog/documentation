@@ -20,6 +20,10 @@ further_reading:
   text: "Use funnel analysis to understand and optimize key user flows"
 ---
 
+{{< callout url="http://datadoghq.com/private-beta/product-analytics" header="false" >}}
+All features in Product Analytics are in private beta. To request access, complete the form.
+{{< /callout >}}
+
 ## Overview
 
 The Analytics Explorer contains views data aggregation for understanding how your product is being used. You can control:

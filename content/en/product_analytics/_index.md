@@ -10,6 +10,10 @@ further_reading:
   text: "RUM Explorer"
 ---
 
+{{< callout url="http://datadoghq.com/private-beta/product-analytics" header="false" >}}
+Product Analytics is in private beta. To request access, complete the form.
+{{< /callout >}}
+
 ## Overview
 
 {{< img src="product_analytics/overview.png" alt="Landing page of Product Analytics.">}}

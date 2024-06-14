@@ -13,6 +13,10 @@ algolia:
   tags: ['funnel']
 ---
 
+{{< callout url="http://datadoghq.com/private-beta/product-analytics" header="false" >}}
+All features in Product Analytics are in private beta. To request access, complete the form.
+{{< /callout >}}
+
 ## Overview
 
 Funnel analysis helps you track conversion rates across key workflows to identify and address any bottlenecks in end-to-end user journeys. Specifically, you can:
