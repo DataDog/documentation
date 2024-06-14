@@ -13,7 +13,7 @@ integration_id: google-cloud-tasks
 integration_title: Google Cloud Tasks
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: google_cloud_tasks
 public_title: Datadog-Google Cloud Tasks インテグレーション

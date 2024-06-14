@@ -20,7 +20,6 @@ further_reading:
   tag: Blog
   text: La plateforme de sécurité Datadog propose davantage de fonctionnalités de
     conformité et de protection contre les menaces pour Google Cloud
-kind: documentation
 title: Activer ASM pour la surveillance sans serveur
 type: multi-code-lang
 ---

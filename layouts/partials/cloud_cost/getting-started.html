@@ -1,0 +1,28 @@
+{{ $dot := . }}
+<div class="cloud-cost-integrations">
+  <div class="container cards-dd">
+    <div class="row row-cols-3 g-2 g-xl-3 justify-content-center">
+      <div class="col">
+        <a class="card h-100" href="/cloud_cost_management/aws/">
+          <div class="card-body text-center py-2 px-1">
+            {{ partial "img.html" (dict "root" . "src" "integrations_logos/amazon-web-services_avatar.svg" "class" "img-fluid" "alt" "aws" "width" "50") }}
+          </div>
+        </a>
+      </div>
+      <div class="col">
+        <a class="card h-100" href="/cloud_cost_management/azure/">
+          <div class="card-body text-center py-2 px-1">
+            {{ partial "img.html" (dict "root" . "src" "integrations_logos/azure_avatar.svg" "class" "img-fluid" "alt" "azure" "width" "50") }}
+          </div>
+        </a>
+      </div>
+      <div class="col">
+        <a class="card h-100" href="/cloud_cost_management/google_cloud/">
+          <div class="card-body text-center py-2 px-1">
+            {{ partial "img.html" (dict "root" . "src" "integrations_logos/google-cloud-platform_avatar.svg" "class" "img-fluid" "alt" "google cloud" "width" "50") }}
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

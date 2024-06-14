@@ -61,7 +61,7 @@ Datadog では、以下の文字列が指定された文字数を超えた場合
 
 指定された 40 分間に、Datadog では以下の組み合わせが許容されます。より大きなボリュームに対応するには、特定のユースケースについて[サポート][1]までお問い合わせください。
 
-- 環境とサービスの一意な組み合わせ1000件
+- 5000 件の一意な環境とサービスの組み合わせ
 - 環境ごとに 30 個のユニークな[第 2プライマリタグ][16]値
 - 環境およびサービス当たり100件の一意の操作名
 - 環境、サービス、操作名当たり1000件の一意のリソース
@@ -165,7 +165,7 @@ kubectl exec -it <agent-pod-name> -c trace-agent -- agent flare <case-id> --loca
 [5]: /ja/tracing/troubleshooting/tracer_debug_logs/
 [6]: /ja/tracing/glossary/#services
 [7]: /ja/tracing/glossary/#resources
-[8]: /ja/tracing/glossary/#span-tags
+[8]: /ja/glossary/#span-tag
 [9]: /ja/tracing/troubleshooting/agent_rate_limits
 [10]: /ja/tracing/troubleshooting/agent_apm_resource_usage/
 [11]: /ja/tracing/custom_instrumentation/agent_customization

@@ -1,6 +1,5 @@
 ---
 title: Cloud Security Management Agentless Scanning
-kind: documentation
 aliases:
  - /security/agentless_scanning
 further_reading:
@@ -63,7 +62,7 @@ The following diagram illustrates how Agentless Scanning works:
 - The scanner limits its use of the AWS API to prevent reaching the AWS rate limit, and uses exponential backoff if needed.
 
 ## What data is sent to Datadog
-The Agentless scanner uses the OWASP [cycloneDX][3] format to transmit a list of packages to Datadog. No confidential or private information is ever transmitted outside of your infrastructure.
+The Agentless scanner uses the OWASP [cycloneDX][3] format to transmit a list of packages to Datadog. No confidential or private personal information is ever transmitted outside of your infrastructure.
 
 Datadog does **not** send:
 - System and package configurations

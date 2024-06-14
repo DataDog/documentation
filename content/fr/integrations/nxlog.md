@@ -12,7 +12,7 @@ has_logo: true
 integration_id: nxlog
 integration_title: nxlog
 is_public: true
-kind: integration
+custom_kind: integration
 name: nxlog
 public_title: Intégration Datadog/NxLog
 short_description: Configurez NxLog pour rassembler les logs de votre host, de vos

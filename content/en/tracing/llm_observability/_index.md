@@ -21,14 +21,12 @@ LLM Observability is not available in the US1-FED site.
 
 With LLM Observability, you can monitor, troubleshoot, and evaluate your LLM-powered applications, such as chatbots. You can investigate the root cause of issues, monitor operational performance, and evaluate the quality, privacy, and safety of your LLM applications. 
 
-Each request fulfilled by your application is represented as a trace on the [LLM Observability traces page][2] in Datadog.
-
-A trace can represent:
-- An individual LLM inference, including tokens, error rates, and latencies
-- A predetermined LLM *workflow*: a grouping of LLM calls and their contextual operations, such as tool calls or preprocessing steps
+Each request fulfilled by your application is represented as a trace on the [LLM Observability traces page][2] in Datadog. A trace can represent:
+- An individual LLM inference, including tokens, error information, and latency
+- A predetermined LLM workflow, which is a grouping of LLM calls and their contextual operations, such as tool calls or preprocessing steps
 - A dynamic LLM workflow executed by an LLM agent
 
-Each trace contains spans representing each choice made by an agent or each step of a given workflow. A given trace can also include input and output, execution duration, privacy issues, errors, and more.
+Each trace contains spans representing each choice made by an agent or each step of a given workflow. A given trace can also include input and output, latency, privacy issues, errors, and more.
 
 You can instrument your application with the LLM Observability SDK for Python, or by calling the LLM Observability API.
 

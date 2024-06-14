@@ -31,8 +31,6 @@ ICMP tests allow you to monitor the availability of your hosts and diagnose netw
 
 ICMP tests can run from both [managed](#select-locations) and [private locations][1] depending on whether you want to trigger ICMP pings to your endpoints from outside or inside your network. You can run ICMP tests on a defined schedule, on demand, or from within your [CI/CD pipelines][2].
 
-**Note**: Windows Private Locations do not support running `ICMP` tests. 
-
 ## Configuration
 
 After choosing to create an `ICMP` test, define your test's request.

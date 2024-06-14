@@ -32,7 +32,7 @@ integration_id: puma
 integration_title: Puma
 integration_version: 1.2.1
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: puma
 public_title: Puma

@@ -56,14 +56,14 @@ Agent v7.52.0 or greater is required to generate span links using [Datadog traci
 
 | Language  | Minimum tracing library version |
 |-----------|---------------------------------|
-| C++/Proxy | Not yet supported                   |
+| C++/Proxy | Not yet supported               |
 | Go        | 1.61.0                          |
 | Java      | 1.26.0                          |
-| .NET      | Not yet supported                   |
+| .NET      | 2.53.0                          |
 | Node      | 5.3.0                           |
 | PHP       | 0.97.0                          |
 | Python    | 2.5.0                           |
-| Ruby      | Not yet supported                   |
+| Ruby      | 2.0.0                           |
 
 ## Viewing span links
 
