@@ -15,23 +15,23 @@ title: Monitorizar métricas dispersas
 
 Los monitores que informan datos con poca frecuencia pueden tener resultados inesperados y las consultas pueden no evaluarse según lo previsto. Existen herramientas y comportamientos que puedes utilizar para asegurarte de que la configuración de un monitor es adecuada para tus datos y evaluaciones. 
 
-Esta guía cubre las siguientes estrategias de resolución de problemas y configuración de monitores con datos dispersos:
-- [Determina si tienes métricas dispersas](#how-to-determine-whether-you-have-a-sparse-metric)
-- Considera el origen de tu monitor -> [Monitor basado en métricas](#metric-based-monitor) o [Monitor basado en eventos](#event-based-monitor)
+Esta guía cubre las siguientes estrategias de resolución de problemas y de configuración de monitores con datos dispersos:
+- [Determinar si tienes métricas dispersas](#how-to-determine-whether-you-have-a-sparse-metric)
+- Considerar el origen de tu monitor -> [monitor basado en métricas](#metric-based-monitor) o [monitor basado en eventos](#event-based-monitor)
 - [¿El monitor funciona según un cronograma?](#schedule-based-monitoring)
 
 
 ## Para determinar si tienes métricas dispersas
 
-Puedes utilizar un widget de dashboard, un notebook o incluso un [gráfico del historial de un monitor existente][1] y pasar el cursor sobre los puntos de datos para ver si parecen continuos, con respecto a las líneas rectas que rellenan los espacios entre cada punto.
+Puedes utilizar un widget de dashboard, un notebook o incluso un [gráfico del historial de un monitor existente][1] y pasar el cursor sobre los puntos de datos para ver si parecen continuos, comparados con las líneas rectas que rellenan los espacios entre cada punto.
 
-En un notebook o un widget, selecciona la opción de visualización **Bars** (Barras) para ver los puntos de datos y sus frecuencias.
+En un notebook o un widget, selecciona la opción de visualización **Bars** (Barras), para ver los puntos de datos y sus frecuencias.
 
 Una métrica mostrada en un widget puede tener la siguiente apariencia:
 
 {{< img src="monitors/guide/sparse_metrics/line_graph_sparse.png" alt="Gráfico de una métrica, que muestra un gráfico de líneas que sube y baja en línea recta" style="width:90%;" >}}
 
-Pero cuando se aplica el estilo **Bars** (Barras), tiene la siguiente apariencia:
+Pero cuando se aplica la opción **Bars** (Barras), tiene la siguiente apariencia:
 
 {{< img src="monitors/guide/sparse_metrics/bar_graph_sparse.png" alt="Los mismos datos que en el gráfico de la métrica anterior, excepto que tiene barras para cada punto de datos, donde se resaltan los espacios con métricas dispersas entre las barras" style="width:90%;" >}}
 
