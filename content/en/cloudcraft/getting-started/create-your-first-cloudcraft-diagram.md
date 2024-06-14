@@ -23,7 +23,7 @@ If you only added one AWS account to Cloudcraft, it's automatically selected for
 
 {{< img src="cloudcraft/getting-started/create-your-first-cloudcraft-diagram/select-aws-account.png" alt="Screenshot showing the selection of an AWS account in Cloudcraft interface with an arrow pointing to a dropdown menu." responsive="true" style="width:75%;">}}
 
-Now, select the region you want to scan. You can scan and add multiple regions into a single diagram, but for now, just pick one.
+Select the region you want to scan. You can scan and add multiple regions into a single diagram; however, begin by selecting one region.
 
 {{< img src="cloudcraft/getting-started/create-your-first-cloudcraft-diagram/select-aws-region.png" alt="Arrow pointing to the AWS region selection dropdown menu set to us-east-1 with a 'Scan now' button." responsive="true" style="width:75%;">}}
 
