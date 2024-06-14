@@ -700,7 +700,7 @@ Since IHS HTTP Server is essentially a wrapper of the Appache HTTP Server, our m
 
 ### Module installation
 <div class="alert alert-warning">
-  <strong>Note:</strong> Only Apache HTTP Server 2.4.x is supported.
+  <strong>Note:</strong> Only Apache HTTP Server 2.4.x for x86_64 architecture is supported.
 </div>
 
 The module is provided as a shared library for dynamical loading by HTTPd. Each supported platform
