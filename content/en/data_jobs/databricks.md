@@ -23,7 +23,7 @@ Follow these steps to enable Data Jobs Monitoring for Databricks.
 ### Configure the Datadog-Databricks integration
 
 1. In your Databricks workspace, go to **Settings** > **Developer**. Next to **Access tokens**, click **Manage**.
-1. Click **Generate new token**, enter a comment, leave the Lifetime as empty and click **Generate**. Take note of your token.
+1. Click **Generate new token**, enter "Datadog Integration" in the **Comment** field, remove the default value in **Lifetime (days)**, and click **Generate**. Take note of your token. **Important:** Make sure you delete the default value in **Lifetime (days)** so that the token doesn't expire and the integration doesn't break.
 1. As an alternative, follow the [official Databricks documentation][10] to generate access token for a [service principal][11].
 1. Ensure the account generating the token has [CAN VIEW access][9] for the Databricks jobs you want to monitor, and that the token is configured to never expire.
 1. In Datadog, open the Databricks integration tile.
