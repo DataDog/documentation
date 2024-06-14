@@ -2698,21 +2698,26 @@ menu:
       parent: cloud_cost
       identifier: cloud_cost_tag_pipelines
       weight: 6
+    - name: Search Tags
+      url: cloud_cost_management/tag_explorer
+      parent: cloud_cost
+      identifier: cloud_cost_tag_explorer
+      weight: 7
     - name: Container Cost Allocation
       url: cloud_cost_management/container_cost_allocation
       parent: cloud_cost
       identifier: cloud_cost_container_cost_allocation
-      weight: 7
+      weight: 8
     - name: Cost Recommendations
       url: cloud_cost_management/recommendations
       parent: cloud_cost
       identifier: cloud_cost_recommendations
-      weight: 8
+      weight: 9
     - name: Cost Monitors
       url: /cloud_cost_management/monitors
       parent: cloud_cost
       identifier: cloud_cost_monitors
-      weight: 9
+      weight: 10
     - name: APM
       url: tracing/
       pre: apm
