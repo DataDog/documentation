@@ -44,7 +44,7 @@ Puedes elegir bloquear la fusión de la rama de características con un [Umbral 
 
 ## Configuración
 
-Antes de implementar Detección temprana de defectos, debes configurar [Visibilidad de pruebas][6] para tu entorno de desarrollo. Si reportas datos a través de Datadog Agent, utiliza las versiones 6.40 o 7.40 y posteriores.
+Antes de implementar Detección temprana de defectos, debes configurar [Visibilidad de pruebas][6] para tu entorno de desarrollo. Si reportas datos a través del Datadog Agent, utiliza las versiones 6.40 o 7.40 y posteriores.
 
 ### Configuración
 
@@ -95,7 +95,7 @@ Detección temprana de defectos no reintentará ninguna prueba de las ramas excl
 
 {{< img src="continuous_integration/early_flake_detection_commit_new_test_explanation.png" alt="Funcionamiento de Detección temprana de defectos en los commits" style="width:100%">}}
 
-Puedes gestionar la lista de ramas excluidas en la [página Parámetros del servicio de pruebas][7] y asegurarte de que la característica se adapta a tu flujo de trabajo y estructura de ramas específicos.
+Puedes gestionar la lista de ramas excluidas en la [página Parámetros del servicio de pruebas][7] y asegurarte de que la característica se adapte a tu flujo de trabajo y estructura de ramas específicos.
 
 ## Explorar los resultados en el Explorador de visibilidad de pruebas
 
