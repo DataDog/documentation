@@ -4830,61 +4830,66 @@ menu:
       parent: application_security
       identifier: appsec_threats
       weight: 7
-    - name: Library Configuration
-      url: security/application_security/threats/library_configuration/
-      parent: appsec_threats
-      identifier: threats_configuration
-      weight: 701
-    - name: OOTB Rules
-      url: security/default_rules/#cat-application-security
-      parent: appsec_threats
-      identifier: appsec_default_rules
-      weight: 702
-    - name: User Monitoring and Protection
-      url: security/application_security/threats/add-user-info/
-      parent: appsec_threats
-      identifier: threats_user_info
-      weight: 703
-    - name: Custom Detection Rules
-      url: security/application_security/threats/custom_rules/
-      parent: appsec_threats
-      identifier: threats_custom_rules
-      weight: 704
-    - name: Protection
-      url: security/application_security/threats/protection/
-      parent: appsec_threats
-      identifier: threats_protection
-      weight: 705
-    - name: In-App WAF Rules
-      url: security/application_security/threats/inapp_waf_rules/
-      parent: appsec_threats
-      identifier: threats_event_rules
-      weight: 706
-    - name: Security Signals
-      url: security/application_security/threats/security_signals/
-      parent: appsec_threats
-      identifier: threats_security_signals
-      weight: 707
-    - name: Trace Qualification
-      url: security/application_security/threats/trace_qualification/
-      parent: appsec_threats
-      identifier: threats_trace_qualification
-      weight: 708
-    - name: Threat Intelligence
-      url: security/application_security/threats/threat-intelligence/
-      parent: appsec_threats
-      identifier: threats_threat_intelligence
-      weight: 709
     - name: Attack Summary
       url: security/application_security/threats/attack-summary/
       parent: appsec_threats
       identifier: attack_summary_overview
-      weight: 710
+      weight: 701
     - name: Attacker Explorer
       url: security/application_security/threats/attacker-explorer/
       parent: appsec_threats
       identifier: threats_attackers
+      weight: 702
+    - name: Custom Detection Rules
+      url: security/application_security/threats/custom_rules/
+      parent: appsec_threats
+      identifier: threats_custom_rules
+      weight: 703
+    - name: Exploit Prevention
+      url: security/application_security/threats/exploit-prevention/
+      parent: appsec_threats
+      identifier: exploit_prevention
+      weight: 704
+    - name: In-App WAF Rules
+      url: security/application_security/threats/inapp_waf_rules/
+      parent: appsec_threats
+      identifier: threats_event_rules
+      weight: 705
+    - name: Library Configuration
+      url: security/application_security/threats/library_configuration/
+      parent: appsec_threats
+      identifier: threats_configuration
+      weight: 706
+    - name: OOTB Rules
+      url: security/default_rules/#cat-application-security
+      parent: appsec_threats
+      identifier: appsec_default_rules
+      weight: 707
+    - name: Protection
+      url: security/application_security/threats/protection/
+      parent: appsec_threats
+      identifier: threats_protection
+      weight: 708
+    - name: Security Signals
+      url: security/application_security/threats/security_signals/
+      parent: appsec_threats
+      identifier: threats_security_signals
+      weight: 709
+    - name: Threat Intelligence
+      url: security/application_security/threats/threat-intelligence/
+      parent: appsec_threats
+      identifier: threats_threat_intelligence
+      weight: 710
+    - name: Trace Qualification
+      url: security/application_security/threats/trace_qualification/
+      parent: appsec_threats
+      identifier: threats_trace_qualification
       weight: 711
+    - name: User Monitoring and Protection
+      url: security/application_security/threats/add-user-info/
+      parent: appsec_threats
+      identifier: threats_user_info
+      weight: 712
     - name: API Security Inventory
       url: security/application_security/api-inventory/
       parent: application_security
