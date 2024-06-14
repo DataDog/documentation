@@ -74,10 +74,10 @@ The following is an example JSON of a RDS component:
 - **billingOptions: object**: The pricing model used for the instance. See [Accepted values for `billingOptions`](#accepted-values-for-billingoptions) for more information.
 - **color: object**: The fill color for the component body.
   - **isometric: string**: The fill color for the component in the 3D view. Must be a hexadecimal color.
-  - **2d: string**: The fill color for the component in the 3D view. Must be a hexadecimal color.
+  - **2d: string**: The fill color for the component in the 2D view. Must be a hexadecimal color.
 - **accentColor: object**: The accent color used to display the component logo on the block.
   - **isometric: string**: The accent color for the component in the 3D view. Must be a hexadecimal color.
-  - **2d: string**: The accent color for the component in the 3D view. Must be a hexadecimal color.
+  - **2d: string**: The accent color for the component in the 2D view. Must be a hexadecimal color.
 - **link: uri**: Link the component to another diagram using the `blueprint://ID` format or to an external website using the `https://LINK` format.
 - **locked: boolean**: If `true`, changes made to the component using the application are disabled until unlocked.
 
