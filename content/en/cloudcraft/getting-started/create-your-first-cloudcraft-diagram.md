@@ -83,6 +83,13 @@ If you select a component the **Live feed** dialog should appear in the lower-le
 
 {{< img src="cloudcraft/getting-started/create-your-first-cloudcraft-diagram/live-feed.png" alt="Interactive cloud infrastructure diagram with highlighted EC2 instance and live feed information dialog box displaying instance details and status." responsive="true" style="width:100%;">}}
 
+## New live experience
+
+Cloudcraft has a new new live experience which is part of an ongoing effort to improve the user experience and make cloud infrastructure diagramming more efficient and effective. The new experience is available to all users and is now the default experience for new users.
+
+See [Crafting Better Diagrams: Cloudcraft's Live Diagramming and Filtering] for more information.
+
 [1]: /cloudcraft/getting-started/connect-aws-account-with-cloudcraft/
 [2]: /cloudcraft/getting-started/connect-azure-account-with-cloudcraft/
 [3]: /cloudcraft/faq/supported-aws-components/
+[4]: /cloudcraft/getting-started/crafting-better-diagrams/
