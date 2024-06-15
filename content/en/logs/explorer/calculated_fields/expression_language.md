@@ -10,19 +10,19 @@ further_reading:
 
 ## Overview
 
-Use Calculated Fields to manipulate text, perform arithmetic operations, and evaluate conditional logic on log data in the Log Explorer. A calculated field's formula (or expression) can include log attributes, other calculated fields, and a set of functions and operators.
+Use calculated fields to manipulate text, perform arithmetic operations, and evaluate conditional logic on log data in the Log Explorer. A calculated field's formula (or expression) can include log attributes, other calculated fields, and a set of functions and operators.
 
 ## Basic syntax and language constructs
 
 | Construct                                                                                          | Syntax and Notation                                                    |
 | -------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
-| Core and faceted attribute or tag named `attr`                                                     | `attr` (no prefix required)                                            |
+| Core or faceted attribute, or tag named `attr`                                                     | `attr` (no prefix required)                                            |
 | Custom, unfaceted attribute named `attr`                                                           | `@attr` (use an `@` prefix)                                            |
-| Calculated field named `attr`                                                                      | `#attr` (use a # prefix)                                               |
-| String literal (quote)<br>For example, `text` or `Some quoted "text"`.                             | `"text"`<br> `"Some quoted \"text\""<br>([Log Search Syntax][3] applies)|
+| Calculated field named `attr`                                                                      | `#attr` (use a `#` prefix)                                               |
+| String literal (quote)<br>For example, `text` or `Some quoted "text"`.                             | `"text"`<br> `"Some quoted \"text\""<br>(<a href="https://docs.datadoghq.com/logs/explorer/search_syntax/">Log Search Syntax</a> applies)|
 | Numeric literal (number)<br>For example, `ten` or `two to the power of five`.                      | `10`<br>`2e5`                                                          |
 | Function named `func` with parameters `one` and `two`                                              | `func(one, two)`                                                       |
-| Operator represented by a symbol or character `x`<br>For example, multiplying operands `y` and `z`.| `x`                                                                    |
+| Operator represented by a symbol or character `x`<br>For example, multiplying operands `y` and `z`.| `y*z`                                                                    |
 | Order and grouping of operations                                                                   | `second_operation x (first_operation)`<br>(uses parentheses notation)  |
 
 ## Operators
@@ -35,7 +35,7 @@ The available operators in order of precedence:
 | `!`, `NOT`, `-` | A logical or arithmetic negation |
 | `*`, `/` | Multiplication, division|
 | `+`, `-` | Addition, subtraction |
-| `<`, `<=`, `>`, `>=` | Less than, less than or equal to, greater than, and greater than or equal to |
+| `<`, `<=`, `>`, `>=` | Less than, less than or equal to, greater than, greater than or equal to |
 | `==`, `!=` | Match, does not match |
 | `&&`, `AND` | Logical AND |
 | `\|\|`, `OR` | Logical OR |
@@ -43,22 +43,24 @@ The available operators in order of precedence:
 ## Functions
 
 {{< whatsnext desc="The available functions are categorized as follows:" >}}
-    {{< nextlink href="/logs/explorer/calculated_fields#arithmetic-functions" >}}Arithmetic{{< /nextlink >}}
-    {{< nextlink href="/logs/explorer/calculated_fields#string-functions" >}}String{{< /nextlink >}}
-    {{< nextlink href="/logs/explorer/calculated_fields#logical-functions" >}}Logical{{< /nextlink >}}
-    {{< nextlink href="/logs/explorer/calculated_fields#list-functions" >}}List{{< /nextlink >}}
-    {{< nextlink href="/logs/explorer/calculated_fields#datetime-functions" >}}Datetime{{< /nextlink >}}
+    {{< nextlink href="/logs/explorer/calculated_fields/expression_language#arithmetic" >}}Arithmetic{{< /nextlink >}}
+    {{< nextlink href="/logs/explorer/calculated_fields/expression_language#string" >}}String{{< /nextlink >}}
+    {{< nextlink href="/logs/explorer/calculated_fields/expression_language#logical" >}}Logical{{< /nextlink >}}
+    {{< nextlink href="/logs/explorer/calculated_fields/expression_language#list" >}}List{{< /nextlink >}}
+    {{< nextlink href="/logs/explorer/calculated_fields/expression_language#datetime" >}}Datetime{{< /nextlink >}}
 {{< /whatsnext >}}
 
-### Arithmetic functions
+### Arithmetic
 
-#### `abs(num number)`
+#### abs(num number)
 
 Returns the absolute value of a number.
 
 <details>
 <summary>Example</summary>
-<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A log event has the following attributes: <br>&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;<code>@client_latency</code>=2<br>&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;<code>@server_latency</code> = 3<br><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A log event has the following attributes:
+<br>&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;<code>@client_latency</code> = 2
+<br>&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;<code>@server_latency</code> = 3<br><br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;abs(<code>@client_latency</code>-<code>@server_latency</code>) = 1
 </details>
 
@@ -72,11 +74,11 @@ Rounds number down to nearest integer.
 
 #### max(num value [, num value, …])
 
-Finds the maximum value amongst a set of numbers.
+Finds maximum value amongst a set of numbers.
 
 <details>
 <summary>Example</summary>
-<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A log event has the following attribute: <br>&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;<code>@list_of_values</code>=[-1, 1, 5, 5]<br><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A log event has the following attribute: <code>@list_of_values</code>=[-1, 1, 5, 5]<br><br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;max(<code>@list_of_values</code>) = 5
 </details>
 
@@ -86,89 +88,89 @@ Finds the minimum value amongst a set of numbers.
 
 <details>
 <summary>Example</summary>
-<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A log event has the following attribute:
-<br>&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;<code>@list_of_values</code> = [-1, 1, 5, 5]<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A log event has the following attribute: <code>@list_of_values</code> = [-1, 1, 5, 5]<br>
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;min(<code>@list_of_values</code>) = -1
 </details>
 
 #### round(num number, int precision)
 
-Rounds a number. Optionally define how many digits to maintain after (or round before, if negative) the decimal.
+Rounds number. Optionally, define how many digits to maintain after (or before, if the number is negative) the decimal.
 
 <details>
 <summary>Example</summary>
-<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A log event has the following attribute:
-<br>&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;<code>@randInt</code> = -1234.01<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A log event has the following attribute: <code>@randInt</code> = -1234.01<br>
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;round(<code>@randInt</code>, -1) = -1230
 </details>
 
-### String functions
+### String
 
 #### concat(expr value [, expr value, …])
 
-Combine multiple values into a single string.
+Combines multiple values into a single string.
 
 <details>
 <summary>Example</summary>
-<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A log event has the following attributes: <br>&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;<code>@first_name</code> = "Bob"<br>&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;<code>@last_name</code> = "Smith"<br><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A log event has the following attributes:
+<br>&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;<code>@first_name</code> = "Bob"
+<br>&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;<code>@last_name</code> = "Smith"<br><br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;concat(<code>@first_name</code>, <code>@last_name</code>) = "Bob Smith"
 </details>
 
 #### lower(str text)
 
-Convert string to lowercase.
+Converts string to lowercase.
 
 <details>
 <summary>Example</summary>
-<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A log event has the following attributes: <br>&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;<code>@first_name</code> = "Bob"<br><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A log event has the following attribute: <code>@first_name</code> = "Bob"<br><br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lower(<code>@first_name</code>) = "bob"
 </details>
 
 #### proper(str text)
 
-Convert string to proper-case.
+Converts string to proper case.
 
 <details>
 <summary>Example</summary>
-<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A log event has the following attributes: <br>&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;<code>@name</code> = "bob SMITH"<br><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A log event has the following attribute: <code>@name</code> = "bob SMITH"<br><br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;proper(<code>@name</code>) = "Bob Smith"
 </details>
 
 #### split_before(str text, str separator, int occurrence)
 
-Extract the portion of text preceding a certain pattern in a string.
+Extracts the portion of text preceding a certain pattern in a string.
 
 <details>
 <summary>Example</summary>
-<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A log event has the following attributes: <br>&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;<code>@row_value</code> = "1,Bob,Smith"<br><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A log event has the following attribute: <code>@row_value</code> = "1,Bob,Smith"<br><br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;split_before(<code>@row_value</code>, ",", 1) = "1"
 </details>
 
 #### split_after(str text, str separator, int occurrence)
 
-Extract the portion of text following a certain pattern in a string.
+Extracts the portion of text following a certain pattern in a string.
 
 <details>
 <summary>Example</summary>
-<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A log event has the following attributes: <br>&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;<code>@row_value</code> = "1,Bob,Smith"<br><br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A log event has the following attributes: <code>@row_value</code> = "1,Bob,Smith"<br><br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;split_after(<code>@row_value</code>, ",", 2) = "Smith"
 </details>
 
 #### substring(str text, int start, int length)
 
-Extract a portion of text from the middle of a string.
+Extracts a portion of text from the middle of a string.
 
 #### suffix(str text, int num_chars)
 
-Extract a portion of text from the end of a string.
+Extracts a portion of text from the end of a string.
 
 #### textjoin(str delimiter, expr value [, expr value, …])
 
-Combine multiple values into a single string with a delimiter in between.
+Combines multiple values into a single string with a delimiter in between.
 
 #### upper(str text)
 
-Convert string to upper-case.
+Converts string to uppercase.
 
 <details>
 <summary>Example</summary>
@@ -176,15 +178,15 @@ Convert string to upper-case.
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;upper(<code>@first_name</code>) = "BOB"
 </details>
 
-### Logical functions
+### Logical
 
 #### case(expr condition, expr if_true [, expr condition, expr if_true …], expr else)
 
-Evaluate a series of conditions and accordingly return a value.
+Evaluates a series of conditions and returns a value accordingly.
 
 #### if(expr condition, expr if_true, expr if_false)
 
-Evaluate a condition and accordingly return a value.
+Evaluates a condition and returns a value accordingly.
 
 <details>
 <summary>Example</summary>
@@ -196,7 +198,7 @@ Evaluate a condition and accordingly return a value.
 
 #### is_null(expr value)
 
-Check for nullity of an attribute or expression.
+Checks for nullity of an attribute or expression.
 
 <details>
 <summary>Example</summary>
@@ -206,14 +208,18 @@ Check for nullity of an attribute or expression.
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is_null(<code>@users_online</code> / <code>@max_capacity</code>) = TRUE
 </details>
 
-### List functions
+### List
 
 #### len(expr list)
 
-Return the number of values in a given list.
+Returns the number of values in a given list.
 
-### Datetime functions
+### Datetime
 
 #### now_ms()
 
-Return the current timestamp in Unix epoch format (ms).
+Returns the current timestamp in Unix epoch format (ms).
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}

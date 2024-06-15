@@ -13,11 +13,11 @@ further_reading:
 
 Use calculated fields to transform and enrich your log events at query time during a search or investigation. You can, directly within the Log Explorer, manipulate text, perform arithmetic operations, and evaluate conditional logic on log data and store the result as a calculated field.
 
-Like other log [attributes][2], you can use calculated fields for search, aggregation, visualization, and defining other calculated fields.
+Like other log [attributes][1], you can use calculated fields for search, aggregation, visualization, and defining other calculated fields.
 
 **Notes**:
 - You can define up to five calculated fields at a time.
-- Calculated fields are temporary and do not persist beyond a given Log Explorer session. If you decide that a calculated field you created may be useful again in the future for yourself or your team, update your [log pipelines][4] to ensure the information is encoded in your logs when they are ingested and processed.
+- Calculated fields are temporary and do not persist beyond a given Log Explorer session. If you decide that a calculated field you created may be useful again in the future for yourself or your team, update your [log pipelines][2] to ensure the information is encoded in your logs when they are ingested and processed.
 
 ## Adding a calculated field
 
@@ -25,7 +25,7 @@ There are two entry points for creating a calculated field in the Log Explorer: 
 
 ### From the Add menu
 
-1. Navigate to [Log Explorer][1].
+1. Navigate to [Log Explorer][3].
 1. Click the **Add** button next to the search bar.
 1. Select **Calculated field**.
 
@@ -33,7 +33,7 @@ This is a quick way to create a calculated field when you are already familiar w
 
 ## From a specific log event or attribute
 
-1. Navigate to [Log Explorer][1].
+1. Navigate to [Log Explorer][3].
 1. Click on a log event of interest to open the side panel.
 1. Click on a specific JSON attribute to open the context menu.
 1. Select **Create calculated from...**.
@@ -58,7 +58,7 @@ Set a descriptive name that clearly indicates the purpose or intent of the calcu
 
 The formula (or expression) determines the result to be computed and stored as the value of the calculated field for each log event. Valid constructs include log attributes, other calculated fields, and a set of supported functions and operators. Relevant fields, functions, and operators are automatically suggested as you begin to write or edit the formula, to help accelerate the process.
 
-See [Calculated Fields Expression Language][5] for the available functions and operators.
+See [Calculated Fields Expression Language][4] for the available functions and operators.
 
 #### Using calculated fields
 
@@ -86,8 +86,7 @@ If you realize that a calculated field you are using may be valuable in the long
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/logs
-[2]: /logs/log_configuration/attributes_naming_convention/
-[3]: /logs/explorer/search_syntax/
-[4]: /logs/log_configuration/pipelines/?tab=source
-[5]: /logs/explorer/calculated_fields/expression_language/
+[1]: /logs/log_configuration/attributes_naming_convention/
+[2]: /logs/log_configuration/pipelines/?tab=source
+[3]: https://app.datadoghq.com/logs
+[4]: /logs/explorer/calculated_fields/expression_language/
