@@ -73,9 +73,19 @@ Enter the following information based on your selected logs destinations.
 {{% observability_pipelines/processors/filter %}}
 
 {{% /tab %}}
+{{% tab "Edit fields" %}}
+
+{{% observability_pipelines/processors/remap %}}
+
+{{% /tab %}}
 {{% tab "Sample" %}}
 
 {{% observability_pipelines/processors/sample %}}
+
+{{% /tab %}}
+{{% tab "Grok Parser" %}}
+
+{{% observability_pipelines/processors/grok_parser %}}
 
 {{% /tab %}}
 {{% tab "Quota" %}}
@@ -83,19 +93,34 @@ Enter the following information based on your selected logs destinations.
 {{% observability_pipelines/processors/quota %}}
 
 {{% /tab %}}
+{{% tab "Reduce" %}}
+
+{{% observability_pipelines/processors/reduce %}}
+
+{{% /tab %}}
 {{% tab "Dedupe" %}}
 
 {{% observability_pipelines/processors/dedupe %}}
 
 {{% /tab %}}
-{{% tab "Edit fields" %}}
-
-{{% observability_pipelines/processors/remap %}}
-
-{{% /tab %}}
 {{% tab "Sensitive Data Scanner" %}}
 
 {{% observability_pipelines/processors/sensitive_data_scanner %}}
+
+{{% /tab %}}
+{{% tab "Add hostname" %}}
+
+{{% observability_pipelines/processors/add_hostname %}}
+
+{{% /tab %}}
+{{% tab "Parse JSON" %}}
+
+{{% observability_pipelines/processors/parse_json %}}
+
+{{% /tab %}}
+{{% tab "Enrichment table" %}}
+
+{{% observability_pipelines/processors/enrichment_table %}}
 
 {{% /tab %}}
 {{< /tabs >}}
