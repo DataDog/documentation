@@ -78,7 +78,7 @@ El siguiente ejemplo es un monitor de tasa de error de pipeline que utiliza una 
 ### Definir la consulta de búsqueda
 
 1. Tipos frecuentes de monitores (opcional): proporciona una plantilla de consulta para cada uno de los tipos frecuentes de monitores, **Nuevos tests defectuosos**, **Fallos en los tests** y **Rendimiento de los tests**, que luego puedes personalizar. Para obtener más información sobre esta característica, consulta [Realizar un seguimiento de nuevos tests defectuosos](#track-new-flaky-tests).
-2. Crea una consulta de búsqueda utilizando la misma lógica de búsqueda de un explorador de tests CI. Por ejemplo, puedes buscar tests fallidos para la rama `main` del test de servicio `myapp` utilizando la siguiente consulta: `@test.status:fail @git.branch:main @test.service:myapp`.
+2. Crea una consulta de búsqueda utilizando la misma lógica de una búsqueda del explorador de tests CI. Por ejemplo, puedes buscar tests fallidos para la rama `main` del test de servicio `myapp` utilizando la siguiente consulta: `@test.status:fail @git.branch:main @test.service:myapp`.
 3. Elige monitorizar un recuento de eventos de tests CI, una faceta o una medida:
     * **CI Test event count** (Recuento de eventos de tests CI): utiliza la barra de búsqueda (opcional) y **no** selecciones una faceta o una medida. Datadog evalúa el número de eventos de tests CI, a lo largo de un periodo de tiempo seleccionado, y luego lo compara con las condiciones del umbral.
     * **Dimensión**: selecciona la dimensión (faceta cualitativa) para emitir alertas sobre el `Unique value count` de la faceta.
@@ -91,17 +91,17 @@ El siguiente ejemplo es un monitor de tasa de error de pipeline que utiliza una 
 {{< img src="monitors/monitor_types/ci_pipelines/define-the-search-query.png" alt="Consulta de Status:Error de CI configurado para agruparse por nombre de pipeline" style="width:100%;" >}}
 
 #### Ejecución de tests con diferentes parámetros o configuraciones
-Utiliza `@test.fingerprint` en el monitor `group by` cuando tengas tests con el mismo nombre completo de test, pero diferentes parámetros o configuraciones de test. De esta forma, las alertas se activan para ejecuciones de tests con parámetros o configuraciones de test específicos. El uso de `@test.fingerprint` proporciona el mismo nivel de especificidad que la sección Estados de tests fallado y defectuoso, en la página **Información general sobre las comprobaciones**.
+Utiliza `@test.fingerprint` en el monitor `group by` cuando tengas tests con el mismo nombre completo de test, pero diferentes parámetros o configuraciones de test. De esta forma, las alertas se activan para ejecuciones de tests con parámetros o configuraciones de test específicos. El uso de `@test.fingerprint` proporciona el mismo nivel de especificidad que la sección Estados de tests fallado y defectuoso, en la página **Información general sobre las confirmaciones**.
 
 Por ejemplo, si un test con el mismo nombre completo falla en Chrome, pero se aprueba en Firefox, el uso de la huella digital sólo activa la alerta en la ejecución del test de Chrome.
 
-El uso de `@test.full_name` en este caso activa la alerta, aunque la prueba haya sido aprobada en Firefox.
+El uso de `@test.full_name` en este caso activa la alerta, aunque el test haya sido aprobado en Firefox.
 
 #### Fórmulas y funciones
 
 Puedes crear monitores de tests CI utilizando fórmulas y funciones. Esto puede utilizarse, por ejemplo, para crear monitores de la **tasa** de ocurrencia de un evento, como por ejemplo la tasa de fallo de un test (tasa de error).
 
-El siguiente ejemplo es un monitor de la tasa de errores de tests que utiliza una fórmula que calcula la proporción entre el "número de eventos de test fallidos" (`@test.status:fail`) sobre el "número de eventos de test totales" (sin filtro), agrupados por `@test.full_name` (para ser alertados una vez por test). Para obtener más información, consulta [Información general en la sección Funciones][1].
+El siguiente ejemplo es un monitor de la tasa de errores de tests que utiliza una fórmula que calcula la proporción del "número de eventos de test fallidos" (`@test.status:fail`) sobre el "número de eventos de test totales" (sin filtro), agrupados por `@test.full_name` (para ser alertados una vez por test). Para obtener más información, consulta [Información general en la sección Funciones][1].
 
 {{< img src="monitors/monitor_types/ci_tests/define-the-Buscar-query-fnf.png" alt="Monitor definido a través de las etapas a, b, c, donde las etapas a, b son consultas y la etapa c calcula la tasa a partir de las dos etapas anteriores."style="width:100%;" >}}
 
