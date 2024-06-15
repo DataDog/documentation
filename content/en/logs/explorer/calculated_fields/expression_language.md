@@ -61,7 +61,8 @@ Returns the absolute value of a number.
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A log event has the following attributes:
 <br>&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;<code>@client_latency</code> = 2
 <br>&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;<code>@server_latency</code> = 3<br><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;abs(<code>@client_latency</code>-<code>@server_latency</code>) = 1
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Formula: abs(<code>@client_latency</code>-<code>@server_latency</code>)
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Result: 1
 </details>
 
 #### ceil(num number)
@@ -79,7 +80,8 @@ Finds maximum value amongst a set of numbers.
 <details>
 <summary>Example</summary>
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A log event has the following attribute: <code>@list_of_values</code>=[-1, 1, 5, 5]<br><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;max(<code>@list_of_values</code>) = 5
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Formula: max(<code>@list_of_values</code>)
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Result: 5
 </details>
 
 #### min(num value [, num value, …])
@@ -89,7 +91,8 @@ Finds the minimum value amongst a set of numbers.
 <details>
 <summary>Example</summary>
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A log event has the following attribute: <code>@list_of_values</code> = [-1, 1, 5, 5]<br>
-<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;min(<code>@list_of_values</code>) = -1
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Formula: min(<code>@list_of_values</code>)
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Result: -1
 </details>
 
 #### round(num number, int precision)
@@ -99,7 +102,8 @@ Rounds number. Optionally, define how many digits to maintain after (or before, 
 <details>
 <summary>Example</summary>
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A log event has the following attribute: <code>@randInt</code> = -1234.01<br>
-<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;round(<code>@randInt</code>, -1) = -1230
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Formula: round(<code>@randInt</code>, -1)
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Result: -1230
 </details>
 
 ### String
@@ -113,7 +117,8 @@ Combines multiple values into a single string.
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A log event has the following attributes:
 <br>&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;<code>@first_name</code> = "Bob"
 <br>&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;<code>@last_name</code> = "Smith"<br><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;concat(<code>@first_name</code>, <code>@last_name</code>) = "Bob Smith"
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Formula: concat(<code>@first_name</code>, <code>@last_name</code>)
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Result: "Bob Smith"
 </details>
 
 #### lower(str text)
@@ -123,7 +128,8 @@ Converts string to lowercase.
 <details>
 <summary>Example</summary>
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A log event has the following attribute: <code>@first_name</code> = "Bob"<br><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lower(<code>@first_name</code>) = "bob"
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Formula: lower(<code>@first_name</code>)
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Result: "bob"
 </details>
 
 #### proper(str text)
@@ -133,7 +139,8 @@ Converts string to proper case.
 <details>
 <summary>Example</summary>
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A log event has the following attribute: <code>@name</code> = "bob SMITH"<br><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;proper(<code>@name</code>) = "Bob Smith"
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Formula: proper(<code>@name</code>)
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Result: "Bob Smith"
 </details>
 
 #### split_before(str text, str separator, int occurrence)
@@ -143,7 +150,8 @@ Extracts the portion of text preceding a certain pattern in a string.
 <details>
 <summary>Example</summary>
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A log event has the following attribute: <code>@row_value</code> = "1,Bob,Smith"<br><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;split_before(<code>@row_value</code>, ",", 1) = "1"
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Formula: split_before(<code>@row_value</code>, ",", 1)
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Result: "1"
 </details>
 
 #### split_after(str text, str separator, int occurrence)
@@ -153,7 +161,8 @@ Extracts the portion of text following a certain pattern in a string.
 <details>
 <summary>Example</summary>
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A log event has the following attributes: <code>@row_value</code> = "1,Bob,Smith"<br><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;split_after(<code>@row_value</code>, ",", 2) = "Smith"
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Formula: split_after(<code>@row_value</code>, ",", 2)
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Result: "Smith"
 </details>
 
 #### substring(str text, int start, int length)
@@ -174,8 +183,9 @@ Converts string to uppercase.
 
 <details>
 <summary>Example</summary>
-<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A log event has the following attributes: <br>&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;<code>@first_name</code> = "Bob"<br><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;upper(<code>@first_name</code>) = "BOB"
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A log event has the following attributes: <code>@first_name</code> = "Bob"<br><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Formula: upper(<code>@first_name</code>)
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Result: "BOB"
 </details>
 
 ### Logical
@@ -193,7 +203,8 @@ Evaluates a condition and returns a value accordingly.
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A log event has the following attributes:
 <br>&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;<code>@origin_country</code> = "USA"
 <br>&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;<code>@destination_country</code> = "Canada"<br>&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;<code>@origin_continent</code> = "NA"<br>&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;<code>@destination_continent</code> = "NA"<br>
-<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(<code>@origin_country</code> == <code>@destination_country</code>, "national", if(<code>@origin_continent</code> == <code>@destination_continent</code>, "continental", "intercontinental")) = "continental"
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Formula: if(<code>@origin_country</code> == <code>@destination_country</code>, "national", if(<code>@origin_continent</code> == <code>@destination_continent</code>, "continental", "intercontinental"))
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Result: "continental"
 </details>
 
 #### is_null(expr value)
@@ -205,7 +216,8 @@ Checks for nullity of an attribute or expression.
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A log event has the following attributes:
 <br>&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;<code>@users_online</code> = 5
 <br>&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;<code>@max_capacity</code> = 0<br>
-<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is_null(<code>@users_online</code> / <code>@max_capacity</code>) = TRUE
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Formula: is_null(<code>@users_online</code> / <code>@max_capacity</code>)
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Result: TRUE
 </details>
 
 ### List
