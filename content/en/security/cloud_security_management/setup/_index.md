@@ -1,6 +1,5 @@
 ---
 title: Setting up Cloud Security Management
-kind: documentation
 aliases:
   - /security_platform/cloud_workload_security/getting_started
   - /security/cloud_workload_security/getting_started

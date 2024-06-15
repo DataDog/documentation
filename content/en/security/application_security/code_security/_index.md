@@ -1,6 +1,5 @@
 ---
 title: Code Security
-kind: documentation
 further_reading:
 - link: "/security/application_security/how-appsec-works/"
   tag: "Documentation"

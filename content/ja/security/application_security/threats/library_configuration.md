@@ -22,7 +22,6 @@ further_reading:
 - link: /security/application_security/how-appsec-works/
   tag: Documentation
   text: Datadog における Application Security Management の仕組み
-kind: documentation
 title: ライブラリ構成
 ---
 
