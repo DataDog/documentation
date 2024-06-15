@@ -161,6 +161,26 @@ Enter the following information based on your selected logs destination.
 {{% observability_pipelines/destination_env_vars/sumo_logic %}}
 
 {{% /tab %}}
+{{% tab "Chronicle" %}}
+
+{{% observability_pipelines/destination_env_vars/chronicle %}}
+
+{{% /tab %}}
+{{% tab "Elasticsearch" %}}
+
+{{% observability_pipelines/destination_env_vars/elasticsearch %}}
+
+{{% /tab %}}
+{{% tab "OpenSearch" %}}
+
+{{% observability_pipelines/destination_env_vars/opensearch %}}
+
+{{% /tab %}}
+{{% tab "Amazon OpenSearch" %}}
+
+{{% observability_pipelines/destination_env_vars/amazon_opensearch %}}
+
+{{% /tab %}}
 {{< /tabs >}}
 1. Follow the instructions for your environment to install the Worker.
 {{< tabs >}}

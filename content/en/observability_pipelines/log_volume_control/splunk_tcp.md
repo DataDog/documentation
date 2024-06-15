@@ -139,6 +139,11 @@ Enter the following information based on your selected logs destination.
 1. Enter the Splunk TCP address. This is the address and port where your applications are sending their logging data. The Observability Pipelines Worker listens to this address for incoming logs.
 1. Provide the environment variables for each of your selected destinations. See [prerequisites](#prerequisites) for more information.
 {{< tabs >}}
+{{% tab "Datadog" %}}
+
+{{% observability_pipelines/destination_env_vars/datadog %}}
+
+{{% /tab %}}
 {{% tab "Splunk HEC" %}}
 
 {{% observability_pipelines/destination_env_vars/splunk_hec %}}
@@ -147,6 +152,26 @@ Enter the following information based on your selected logs destination.
 {{% tab "Sumo Logic" %}}
 
 {{% observability_pipelines/destination_env_vars/sumo_logic %}}
+
+{{% /tab %}}
+{{% tab "Chronicle" %}}
+
+{{% observability_pipelines/destination_env_vars/chronicle %}}
+
+{{% /tab %}}
+{{% tab "Elasticsearch" %}}
+
+{{% observability_pipelines/destination_env_vars/elasticsearch %}}
+
+{{% /tab %}}
+{{% tab "OpenSearch" %}}
+
+{{% observability_pipelines/destination_env_vars/opensearch %}}
+
+{{% /tab %}}
+{{% tab "Amazon OpenSearch" %}}
+
+{{% observability_pipelines/destination_env_vars/amazon_opensearch %}}
 
 {{% /tab %}}
 {{< /tabs >}}
