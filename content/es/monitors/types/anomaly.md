@@ -21,14 +21,14 @@ further_reading:
   text: Consultar el estado de tu monitor
 - link: dashboards/functions/algorithms/#anomalies
   tag: Documentación
-  text: Función de las anomalías
+  text: Función para anomalías
 kind: Documentación
 title: Monitor de anomalías
 ---
 
 ## Información general
 
-La detección de anomalías es una función algorítmica que identifica cuando una métrica se comporta de forma diferente a como lo ha hecho en el pasado y tiene en cuenta las tendencias, el día de la semana y los patrones de horas del día. Es adecuada para métricas con tendencias marcadas y patrones recurrentes, difíciles de monitorizar mediante alertas con umbrales.
+La detección de anomalías es una función algorítmica que identifica cuando una métrica se comporta de forma diferente a como lo ha hecho en el pasado y tiene en cuenta las tendencias, el día de la semana específico y los patrones de horas del día. Es adecuada para métricas con tendencias marcadas y patrones recurrentes, difíciles de monitorizar mediante alertas con umbrales.
 
 Por ejemplo, la detección de anomalías te puede ayudar a detectar cuando el tráfico de tu web es inusualmente bajo en un día laborable, por ejemplo por la tarde, pero luego se normaliza por la noche. O piensa por ejemplo en una métrica que pueda medir el número de accesos a tu sitio web en constante crecimiento. Dado que ese número aumenta a diario, cualquier umbral quedaría obsoleto, mientras que la detección de anomalías puede avisarte si se produce un descenso inesperado, lo que podría indicar un problema con el sistema de inicio de sesión.
 
@@ -39,7 +39,7 @@ Para crear un [monitor de anomalías][1] en Datadog utiliza la navegación princ
 ### Definir la métrica
 
 Cualquier métrica que informe a Datadog está disponible para monitores. Para obtener más información, consulta la página [Monitor de métricas][2].
-**Nota**: La función `anomalies` utiliza el pasado para predecir lo que se espera en el futuro, por lo que su uso en una métrica nueva podría no dar buenos resultados.
+**Nota**: La función para `anomalies` utiliza el pasado para predecir lo que se espera en el futuro, por lo que su uso en una métrica nueva podría no dar buenos resultados.
 
 Después de definir la métrica, el monitor de detección de anomalías proporciona dos gráficos de vista previa en el editor:
 {{< img src="monitors/monitor_types/anomaly/context.png" alt="Contexto histórico" style="width:80%;">}}
@@ -75,11 +75,11 @@ El rango de valores aceptados para la ventana de recuperación oscila entre 49 m
 
 Datadog analiza automáticamente la métrica elegida y establece varios parámetros. Sin embargo, puedes editar las opciones en **Advanced Options** (Opciones avanzadas).
 
-{{< img src="monitors/monitor_types/anomaly/advanced_options.png" alt="Menú Opciones avanzadas en la página de parámetros del monitor de anomalías configurado para detectar anomalías y desviaciones con respecto a los datos previstos, utilizando un algoritmo ágil con temporalidad semanal para aplicar el cambio de horario estacional y utilizar un intervalo de retroceso de 60 segundos" style="width:80%;">}}
+{{< img src="monitors/monitor_types/anomaly/advanced_options.png" alt="Menú Opciones avanzadas en la página de parámetros del monitor de anomalías configurado para detectar anomalías y desviaciones con respecto a los datos previstos, utilizando un algoritmo ágil con temporalidad semanal para aplicar el cambio de horario estacional y utilizar un intervalo de rollup de 60 segundos" style="width:80%;">}}
 
 
 Desviaciones
-: el ancho del rango gris. Equivale al parámetro de límites utilizado en la [función de anomalías][3].
+: el ancho del rango gris. Equivale al parámetro de límites utilizado en la [función para anomalías][3].
 
 Algoritmo
 : [algoritmo de detección de anomalías](#anomaly-detection-algorithms) (`basic`, `agile` o `robust`).
@@ -90,8 +90,8 @@ Temporalidad
 Cambio de horario estacional
 : disponible para la detección de anomalías `agile` o `robust` con temporalidad `weekly` o `daily`. Para obtener más información, consulta [Detección de anomalías y zonas horarias][4].
 
-Retroceso
-: [intervalo de retroceso][5].
+Rollup 
+: [intervalo de rollup][5].
 
 Umbrales
 : porcentaje de puntos que deben ser anómalos para alertar, advertir y recuperar.
@@ -197,7 +197,7 @@ avg(<query_window>):anomalies(<metric_query>, '<algorithm>', <deviations>, direc
 : el marco temporal que debe verificarse para buscar anomalías (por ejemplo, `last_5m`, `last_1h`).
 
  `interval`
-: un número entero positivo que representa el número de segundos del intervalo de retroceso. Debe ser menor o igual a un quinto de la duración de la `alert_window`.
+: un número entero positivo que representa el número de segundos del intervalo de rollup. Debe ser menor o igual a un quinto de la duración de la `alert_window`.
 
 `count_default_zero`
 : utiliza `true` para la mayoría de los monitores. Utiliza `false` sólo para enviar una métrica de recuento en la que la falta de un valor no debe interpretarse como un cero.
