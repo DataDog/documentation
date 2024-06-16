@@ -201,7 +201,7 @@ Amplitude does not support this integration. Create a ticket with Amplitude to r
 {{< tabs >}}
 {{% tab "Browser" %}}
 
-Initialize the ConfigCat Javascript SDK with subscribing to the `flagEvaluated` event that will report feature flag evaluations to Datadog:
+Initialize the ConfigCat Javascript SDK with subscribing to the `flagEvaluated` event that reports feature flag evaluations to Datadog:
 
 ```javascript
   const configCatClient = configcat.getClient(
@@ -216,13 +216,15 @@ Initialize the ConfigCat Javascript SDK with subscribing to the `flagEvaluated` 
   );
 ```
 
-For more information about initializing the ConfigCat Javascript SDK, see [Documentation](https://configcat.com/docs/sdk-reference/js).
+For more information about initializing the ConfigCat Javascript SDK, see ConfigCat's [JavaScript SDK documentation][1].
+	
+[1]: https://configcat.com/docs/sdk-reference/js
 
 
 {{% /tab %}}
 {{% tab "iOS" %}}
 
-Initialize the ConfigCat Swift (iOS) SDK with subscribing to the `flagEvaluated` event that will report feature flag evaluations to Datadog:
+Initialize the ConfigCat Swift iOS SDK by subscribing to the `flagEvaluated` event that reports feature flag evaluations to Datadog:
 
 ```swift
   let client = ConfigCatClient.get(sdkKey: "#YOUR-SDK-KEY#") { options in
@@ -232,13 +234,15 @@ Initialize the ConfigCat Swift (iOS) SDK with subscribing to the `flagEvaluated`
   }
 ```
 
-For more information about initializing the ConfigCat Swift (iOS) SDK, see [Documentation](https://configcat.com/docs/sdk-reference/ios).
+For more information about initializing the ConfigCat Swift (iOS) SDK, ConfigCat's[Swift iOS SDK documentation][1].
+	
+[1]: https://configcat.com/docs/sdk-reference/ios
 
 
 {{% /tab %}}
 {{% tab "Android" %}}
 
-Initialize the ConfigCat Android SDK with subscribing to the `flagEvaluated` event that will report feature flag evaluations to Datadog:
+Initialize the ConfigCat Android SDK by subscribing to the `flagEvaluated` event that reports feature flag evaluations to Datadog:
 
 ```java
   ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
@@ -248,13 +252,15 @@ Initialize the ConfigCat Android SDK with subscribing to the `flagEvaluated` eve
   });
 ```
 
-For more information about initializing the ConfigCat Android SDK, see [Documentation](https://configcat.com/docs/sdk-reference/android).
+For more information about initializing the ConfigCat Android SDK, see ConfigCat's [Android SDK documentation][1].
+	
+[1]: https://configcat.com/docs/sdk-reference/android
 
 
 {{% /tab %}}
 {{% tab "Flutter" %}}
 
-Initialize the ConfigCat Dart SDK with subscribing to the `flagEvaluated` event that will report feature flag evaluations to Datadog:
+Initialize the ConfigCat Dart SDK by subscribing to the `flagEvaluated` event that reports feature flag evaluations to Datadog:
 
 ```dart
   final client = ConfigCatClient.get(
@@ -270,7 +276,9 @@ Initialize the ConfigCat Dart SDK with subscribing to the `flagEvaluated` event 
   );
 ```
 
-For more information about initializing the ConfigCat Dart SDK, see [Documentation](https://configcat.com/docs/sdk-reference/dart).
+For more information about initializing the ConfigCat Dart (Flutter) SDK, see ConfigCat's [Dart SDK documentation][1].
+	
+[1]: https://configcat.com/docs/sdk-reference/dart
 
 
 {{% /tab %}}
@@ -278,7 +286,7 @@ For more information about initializing the ConfigCat Dart SDK, see [Documentati
 
 {{% tab "React Native" %}}
 
-Initialize the ConfigCat React SDK with subscribing to the `flagEvaluated` event that will report feature flag evaluations to Datadog:
+Initialize the ConfigCat React SDK by subscribing to the `flagEvaluated` event that reports feature flag evaluations to Datadog:
 
 ```typescript
 <ConfigCatProvider
@@ -295,7 +303,9 @@ Initialize the ConfigCat React SDK with subscribing to the `flagEvaluated` event
 </ConfigCatProvider>
 ```
 
-For more information about initializing the ConfigCat Dart SDK, see [Documentation](https://configcat.com/docs/sdk-reference/react).
+For more information about initializing the ConfigCat React SDK, see ConfigCat's [React SDK documentation][1].
+	
+[1]: https://configcat.com/docs/sdk-reference/react
 
 {{% /tab %}}
 {{< /tabs >}}
