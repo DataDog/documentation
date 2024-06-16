@@ -201,7 +201,7 @@ Amplitude does not support this integration. Create a ticket with Amplitude to r
 {{< tabs >}}
 {{% tab "Browser" %}}
 
-Initialize the ConfigCat Javascript SDK with subscribing to the `flagEvaluated` event that reports feature flag evaluations to Datadog:
+Initialize the ConfigCat Javascript SDK by subscribing to the `flagEvaluated` event that reports feature flag evaluations to Datadog:
 
 ```javascript
   const configCatClient = configcat.getClient(
