@@ -36,7 +36,7 @@ Ve a la página con la [**lista de monitores**][2]. Si tiene menos de 10 monitor
 Para consultar la lista de todas las plantillas de monitor, ve a la página de [**plantillas de monitor**][1]. Filtra y busca todos los monitores recomendados disponibles para tus integraciones instaladas, así como todas las plantillas disponibles.
 
 
-## Lectura adicional
+## Leer más
 
 {{< partial name="whats-next/whats-next.html" >}}
 
