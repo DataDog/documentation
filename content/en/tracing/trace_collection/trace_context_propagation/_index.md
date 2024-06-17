@@ -29,8 +29,6 @@ Datadog maintains several propagators for passing trace context information in d
 ## Configuration
 By default, the Datadog tracing libraries propagate trace context information using both the Datadog format and the W3C Trace Context format.
 
-When multiple propagators are enabled, the configured propagator order determines which trace context propagation format will be extracted and used for the incoming request. By default, language libraries are configured to give precedence to the Datadog format, whereas Envoy and NGINX proxies are configured to give precedence to the W3C Trace Context format.
-
 For more information about each language's configuration options for trace context propagation, see the following pages:
 
 {{< partial name="apm/apm-context-propagation" >}}
