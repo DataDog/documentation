@@ -160,7 +160,7 @@ To configure a private HTTP request:
    - No authentication
    - [Basic authentication](#create-an-http-basic-authentication-connection)
    - [Token authentication](#create-an-http-token-authentication-connection)
-   
+
    For information on configuring credentials for Token authentication, see [Handling Private Action Credentials][6].
 1. Click **Next, Confirm Access** and configure access to the query.
 1. Click **Create**.

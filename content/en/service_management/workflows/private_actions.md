@@ -9,6 +9,9 @@ further_reading:
 - link: "service_management/workflows/connections"
   tag: "Documentation"
   text: "Workflow Connections"
+- link: "service_management/workflows/guide/private_action_credentials"
+  tag: "Documentation"
+  text: "Handling Private Action Credentials"
 ---
 
 {{< callout url="https://google.com" btn_hidden="false" header="Join the Beta!">}}

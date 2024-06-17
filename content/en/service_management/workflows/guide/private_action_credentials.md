@@ -36,7 +36,7 @@ This example uses the URI: `postgres://usr:password@example_host:5432/example_db
 }
 {{< /code-block >}}
 
-Point the connection to the location of the credential file on the private action runner container. In this example, the credential is stored at `/etc/dd-action-runner/creds/creds.pgpass` on the runner.
+In the runner's connection, specify the location of the credential file on the private action runner container. In this example, the credential is stored at `/etc/dd-action-runner/creds/creds.pgpass` on the runner.
 
 {{< img src="service_management/private-runner-creds.png" alt="The path to the credential file is '/etc/dd-action-runner/creds/creds.pgpass'" style="width:80%;" >}}
 
@@ -55,7 +55,7 @@ You can include all credentials in a single file or store each credential in a s
 
 {{% collapse-content title="Single file example" level="p" %}}
 
-In this example, all three credentials are stored in a single file. Replace `USERNAME`, `TOKEN`, and `DOMAIN` with your username, token, and domain.
+In the runner's connection, specify the location of the credential file on the private action runner container. In this example, all three credentials are stored in a single file. Replace `USERNAME`, `TOKEN`, and `DOMAIN` with your username, token, and domain.
 
 {{< code-block lang="json" filename="/etc/dd-action-runner/creds/jenkins_creds.json" disable_copy="false" collapsible="true" >}}
 {
@@ -70,7 +70,7 @@ In this example, all three credentials are stored in a single file. Replace `USE
 } 
 {{< /code-block >}}
 
-Your Jenkins connection points to the same path for all credentials. In this example, the credential file is stored at `/etc/dd-action-runner/creds/jenkins_creds.json` on the runner.
+In the runner's connection, specify the location of the credential file on the private action runner container. Your Jenkins connection points to the same path for all credentials. In this example, the credential file is stored at `/etc/dd-action-runner/creds/jenkins_creds.json` on the runner.
 
 {{< img src="service_management/single-file-creds.png" alt="All credential paths for the Jenkins connection point to '/etc/dd-action-runner/creds/jenkins_creds.json'" style="width:80%;" >}}
 
@@ -117,7 +117,7 @@ For the domain credential, replace `DOMAIN` with your domain.
 }
 {{< /code-block >}}
 
-Your Jenkins connection points to path to each credential. In this example, the credential files are stored at the following locations on the runner:
+In the runner's connection, specify the location of the credential file on the private action runner container. Your Jenkins connection points to the path to each credential. In this example, the credential files are stored at the following locations on the runner:
 - `/etc/dd-action-runner/creds/jenkins_username.json`
 - `/etc/dd-action-runner/creds/jenkins_token.json`
 - `/etc/dd-action-runner/creds/jenkins_domain.json`
@@ -130,7 +130,9 @@ Your Jenkins connection points to path to each credential. In this example, the 
 
 {{% tab "HTTPS action" %}}
 
-Basic authentication for the HTTP connection requires a credential file with a username and a password. Include both credentials in a single file.
+### Basic authentication
+
+Basic authentication for the HTTP connection requires a credential file with a username and a password.
 
 Replace `USERNAME` and `PASSWORD` with your username and password.
 
@@ -146,9 +148,33 @@ Replace `USERNAME` and `PASSWORD` with your username and password.
 }
 {{< /code-block >}}
 
-In this example, the credential file is stored at `/etc/dd-action-runner/creds/http_creds.json` on the runner.
+In the runner's connection, specify the location of the credential file on the private action runner container. In this example, the credential file is stored at `/etc/dd-action-runner/creds/http_creds.json` on the runner.
 
 {{< img src="service_management/http-creds.png" alt="The path to the credential file is '/etc/dd-action-runner/creds/http_creds.json'" style="width:80%;" >}}
+
+### Token authentication
+
+Token authentication for the HTTP connection requires a credential file with an array of token names and values.
+
+The example below includes two tokens named `TOKEN1` and `TOKEN2`. Replace the example token names and values with your token names and values.
+
+{{< code-block lang="json" filename="/etc/dd-action-runner/creds/http_creds.json" disable_copy="false" collapsible="true" >}}
+{
+	"auth_type": "Token Auth",
+	"credentials": [
+		{
+			"tokenName": "TOKEN1",
+			"tokenValue": "VALUE1"
+		},
+		{
+			"tokenName": "TOKEN2",
+			"tokenValue": "VALUE2"
+		}
+	]
+}
+{{< /code-block >}}
+
+In the runner's connection, specify the location of the credential file on the private action runner container. In this example, the credential file is stored at `/etc/dd-action-runner/creds/http_creds.json` on the runner.
 
 [101]: https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING-URIS
 {{% /tab %}}
