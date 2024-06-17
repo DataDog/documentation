@@ -71,7 +71,7 @@ java \
 
 ### Third party detection
 
-Autocomplete and search use a heuristic to filter out third-party code. If it does not provide the autocomplete suggestions you are expecting, it may be due to your code being recognized as third-party.
+If autocomplete suggestions do not appear for your package or module, it may be incorrectly recognized as third-party code. The autocomplete and search features use a heuristic to filter out third-party code, which can sometimes lead to accidental misclassification.
 
 To ensure that your code is properly recognized and to enable accurate autocomplete and search functionality, you can configure the third-party detection settings using the following options:
 
