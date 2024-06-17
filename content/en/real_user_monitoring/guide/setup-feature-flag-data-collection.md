@@ -234,7 +234,7 @@ Initialize the ConfigCat Swift iOS SDK by subscribing to the `flagEvaluated` eve
   }
 ```
 
-For more information about initializing the ConfigCat Swift (iOS) SDK, ConfigCat's[Swift iOS SDK documentation][1].
+For more information about initializing the ConfigCat Swift (iOS) SDK, see ConfigCat's[Swift iOS SDK documentation][1].
 	
 [1]: https://configcat.com/docs/sdk-reference/ios
 
