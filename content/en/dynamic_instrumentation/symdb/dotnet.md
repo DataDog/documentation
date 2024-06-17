@@ -29,7 +29,7 @@ Run your service with Dynamic Instrumentation enabled, and additionally enable a
 
 ## Additional configuration
 
-### Third party detection
+### Third-party detection
 
 Autocomplete and search use a heuristic to filter out third-party code. If it does not provide the autocomplete suggestions you are expecting, it may be due to your code being recognized as third-party.
 
