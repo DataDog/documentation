@@ -65,7 +65,7 @@ java \
    $ java -jar my-service.jar -javaagent:dd-java-agent.jar ...
    ```
 
-3. After starting your service with Dynamic Instrumentation with autocomplete and search enabled, you can use Dynamic Instrumentation's IDE-like features on the [APM > Dynamic Instrumentation page][4].
+3. After starting your service with Dynamic Instrumentation and autocomplete and search enabled, you can use Dynamic Instrumentation's IDE-like features on the [**APM** > **Dynamic Instrumentation**][4] page.
 
 ## Additional configuration
 
