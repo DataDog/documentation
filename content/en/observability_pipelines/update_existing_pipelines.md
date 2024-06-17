@@ -48,7 +48,7 @@ On the the Worker installation page:
 {{< tabs >}}
 {{% tab "Datadog Archives" %}}
 
-{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/datadog_archives %}}
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/datadog_archives_amazon_s3 %}}
 
 {{% /tab %}}
 {{% tab "Datadog" %}}
@@ -64,6 +64,26 @@ On the the Worker installation page:
 {{% tab "Sumo Logic" %}}
 
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/sumo_logic %}}
+
+{{% /tab %}}
+{{% tab "Chronicle" %}}
+
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/chronicle %}}
+
+{{% /tab %}}
+{{% tab "Elasticsearch" %}}
+
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/elasticsearch %}}
+
+{{% /tab %}}
+{{% tab "OpenSearch" %}}
+
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/opensearch %}}
+
+{{% /tab %}}
+{{% tab "Amazon OpenSearch" %}}
+
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/amazon_opensearch %}}
 
 {{% /tab %}}
 {{< /tabs >}}

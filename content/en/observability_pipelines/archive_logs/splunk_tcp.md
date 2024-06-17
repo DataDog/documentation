@@ -20,33 +20,101 @@ This document walks you through the following steps:
 
 {{% observability_pipelines/prerequisites/splunk_tcp %}}
 
-{{% observability_pipelines/configure_log_archive/instructions %}}
+## Configure Log Archives
+
+If you already have a Datadog Log Archive configured for Observability Pipelines, skip to [Set up Observability Pipelines](#set-up-observability-pipelines).
+
+Select the cloud provider you are using to archive your logs. 
+
+{{% collapse-content title="Amazon S3" level="h4" %}}
+{{% observability_pipelines/configure_log_archive/amazon_s3/instructions %}}
 
 {{< tabs >}}
 {{% tab "Docker" %}}
 
-{{% observability_pipelines/configure_log_archive/docker %}}
-
+{{% observability_pipelines/configure_log_archive/amazon_s3/docker %}}
 
 {{% /tab %}}
 {{% tab "Amazon EKS" %}}
 
-{{% observability_pipelines/configure_log_archive/amazon_eks %}}
+{{% observability_pipelines/configure_log_archive/amazon_s3/amazon_eks %}}
 
 {{% /tab %}}
 {{% tab "Linux (APT)" %}}
 
-{{% observability_pipelines/configure_log_archive/linux_apt %}}
+{{% observability_pipelines/configure_log_archive/amazon_s3/linux_apt %}}
 
 {{% /tab %}}
 {{% tab "Linux (RPM)" %}}
 
-{{% observability_pipelines/configure_log_archive/linux_rpm %}}
+{{% observability_pipelines/configure_log_archive/amazon_s3/linux_rpm %}}
 
 {{% /tab %}}
 {{< /tabs >}}
 
-{{% observability_pipelines/configure_log_archive/connect_s3_to_datadog_log_archives %}}
+{{% observability_pipelines/configure_log_archive/amazon_s3/connect_s3_to_datadog_log_archives %}}
+
+{{% /collapse-content %}}
+
+{{% collapse-content title="Google Cloud Storage" level="h4" %}}
+{{% observability_pipelines/configure_log_archive/google_cloud_storage/instructions %}}
+
+{{< tabs >}}
+{{% tab "Docker" %}}
+
+{{% observability_pipelines/configure_log_archive/google_cloud_storage/docker %}}
+
+{{% /tab %}}
+{{% tab "Google GKE" %}}
+
+{{% observability_pipelines/configure_log_archive/google_cloud_storage/google_gke %}}
+
+{{% /tab %}}
+{{% tab "Linux (APT)" %}}
+
+{{% observability_pipelines/configure_log_archive/google_cloud_storage/linux_apt %}}
+
+{{% /tab %}}
+{{% tab "Linux (RPM)" %}}
+
+{{% observability_pipelines/configure_log_archive/google_cloud_storage/linux_rpm %}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
+{{% observability_pipelines/configure_log_archive/google_cloud_storage/connect_datadog_log_archives %}}
+
+{{% /collapse-content %}}
+{{% collapse-content title="Azure Storage" level="h4" %}}
+{{% observability_pipelines/configure_log_archive/azure_storage/instructions %}}
+
+{{< tabs >}}
+{{% tab "Docker" %}}
+
+{{% observability_pipelines/configure_log_archive/azure_storage/docker %}}
+
+{{% /tab %}}
+{{% tab "Azure AKS" %}}
+
+{{% observability_pipelines/configure_log_archive/azure_storage/azure_aks %}}
+
+{{% /tab %}}
+{{% tab "Linux (APT)" %}}
+
+{{% observability_pipelines/configure_log_archive/azure_storage/linux_apt %}}
+
+{{% /tab %}}
+{{% tab "Linux (RPM)" %}}
+
+{{% observability_pipelines/configure_log_archive/azure_storage/linux_rpm %}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
+{{% observability_pipelines/configure_log_archive/azure_storage/connect_datadog_log_archives %}}
+
+
+{{% /collapse-content %}}
 
 ## Set up Observability Pipelines
 
@@ -65,7 +133,15 @@ Enter the following information based on your selected logs destination.
 {{< tabs >}}
 {{% tab "Datadog Archives" %}}
 
-{{% observability_pipelines/destination_settings/datadog_archives %}}
+{{% observability_pipelines/destination_settings/datadog_archives_note %}}
+
+Follow the instructions for the cloud provider you are using to archive your logs.
+
+{{% observability_pipelines/destination_settings/datadog_archives_amazon_s3 %}}
+
+{{% observability_pipelines/destination_settings/datadog_archives_google_cloud_storage %}}
+
+{{% observability_pipelines/destination_settings/datadog_archives_azure_storage %}}
 
 {{% /tab %}}
 {{% tab "Datadog" %}}
@@ -178,7 +254,11 @@ Enter the following information based on your selected logs destination.
 {{< tabs >}}
 {{% tab "Datadog Archives" %}}
 
-{{% observability_pipelines/destination_env_vars/datadog_archives %}}
+{{% observability_pipelines/destination_env_vars/datadog_archives_amazon_s3 %}}
+
+{{% observability_pipelines/destination_env_vars/datadog_archives_google_cloud_storage %}}
+
+{{% observability_pipelines/destination_env_vars/datadog_archives_azure_storage %}}
 
 {{% /tab %}}
 {{% tab "Datadog" %}}
