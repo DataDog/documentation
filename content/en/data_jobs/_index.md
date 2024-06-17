@@ -12,7 +12,7 @@ further_reading:
 Data Jobs Monitoring is in private beta. Fill out this form to join the wait list.
 {{< /callout >}} 
 
-{{< img src="data_jobs/overview.png" alt="Datadog Data Jobs Monitoring" style="width:100%;" >}}
+{{< img src="data_jobs/overview_062024.png" alt="Datadog Data Jobs Monitoring overview page" style="width:100%;" >}}
 
 Data Jobs Monitoring provides visibility into the performance and reliability of data processing jobs, including Apache Spark and Databricks jobs, along with the underlying infrastructure. Data Jobs Monitoring enables you to:
 
@@ -38,38 +38,32 @@ To get started, select your platform and follow the installation instructions:
 
 View all jobs across cloud accounts and workspaces. Identify failing jobs to take action on, or find jobs with high idle CPU that are using a lot of compute and should be optimized.
 
-{{< img src="data_jobs/djm_demolist.png" alt="Job list - CPU breakdown" style="width:100%;" >}}
-
 ### Receive alerts on problematic jobs
 
-Datadog monitors send alerts when a job fails, or is running beyeond its completion time.
-
-{{< img src="data_jobs/djm_monitor_templates.png" alt="Monitors - templates for Data Jobs Monitoring" style="width:100%;" >}}
+Datadog monitors send alerts when a job fails, or is running beyond its completion time. Browse [monitor templates][1] to monitor data jobs specific to your installed integrations.
 
 ### Analyze and troubleshoot individual jobs
 
 Click on a job to see how it performed across multiple runs, as well as error messages for failed runs.
 
-{{< img src="data_jobs/djm_job.png" alt="Job list - CPU breakdown" style="width:100%;" >}}
+{{< img src="data_jobs/djm_job_062024.png" alt="Job Overview page for 'product-insights' Spark Application job" style="width:100%;" >}}
 
 ### Analyze an individual run
 
 Clicking on a run opens a side panel with details of how much time was spent on each Spark job and stage, along with a breakdown of resource consumption and Spark metrics, such as idle executor CPU, input/output data volume, shuffling, and disk spill. From this panel, you can correlate the execution with executor and driver node resource utilization, logs, and the job and cluster configuration. 
 
-{{< img src="data_jobs/djm_run.png" alt="Data Jobs Monitoring > Run panel, Info tab" style="width:100%;" >}}
-
 On the **Infrastructure** tab, you can correlate the execution to infrastructure metrics.
 
-{{< img src="data_jobs/djm_run_infra.png" alt="Data Jobs Monitoring > Run panel, Infrastructure tab" style="width:100%;" >}}
-
-To determine why a stage is taking a long time to complete,you can use the **Spark Task Metrics** tab to view task-level metrics for a specific Spark stage, so that you can identify data skew. See the distribution of time spent and data consumed by different tasks.
-
-{{< img src="data_jobs/djm_tasks.png" alt="Data Jobs Monitoring > Run panel, Spark Task Metrics tab" style="width:100%;" >}}
+{{< img src="data_jobs/djm_run_infra_062024.png" alt="Data Jobs Monitoring > Run panel, Infrastructure tab" style="width:100%;" >}}
 
 For a failed run, look at the **Errors** tab to see the stack trace, which can help you determine where and how this failure occurred.
 
-{{< img src="data_jobs/djm_stacktrace.png" alt="Data Jobs Monitoring > Run panel, Errors tab" style="width:100%;" >}}
+To determine why a stage is taking a long time to complete, you can use the **Spark Task Metrics** tab to view task-level metrics for a specific Spark stage, so that you can identify data skew. See the distribution of time spent and data consumed by different tasks.
+
+{{< img src="data_jobs/djm_task_metrics.png" alt="Data Jobs Monitoring > Run panel, Spark Task Metrics tab" style="width:100%;" >}}
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://app.datadoghq.com/monitors/recommended?q=jobs%20&only_installed=true&p=1
