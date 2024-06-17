@@ -1,5 +1,5 @@
 ---
-title: DDSQL Aggregation and AGGR Functions
+title: DDSQL Aggregation Functions
 kind: documentation
 ---
 
@@ -35,7 +35,7 @@ Aggregate functions compute a single result from a set of input values, usually 
 | Name | Return type | Description |
 |------|-------------|-------------|
 | count(expr) | integer | Computes the number of input rows in which the input value is not null. |
-| count(distinct expr) | integer | Computes the number of input values in which the input value is not null |
+| count(distinct expr) | integer | Computes the number of input values in which the input value is not null. |
 | count(*) | integer | Computes the number of input rows. |
 
 ### string_agg
@@ -46,9 +46,9 @@ Aggregate functions compute a single result from a set of input values, usually 
 ### approx_percentile
 | Name | Return type | Description |
 |------|-------------|-------------|
-| approx_percentile(expr, numeric) | real | Returns an approximated value for the desired percentile |
+| approx_percentile(expr, numeric) | real | Returns an approximated value for the desired percentile. |
 
 ### array_agg
 | Name | Return type | Description |
 |------|-------------|-------------|
-| array_agg(anynonarray) | array | Collects all the non-null input values into an array. |
+| array_agg(any_nonarray) | array | Collects all the non-null input values into an array. |

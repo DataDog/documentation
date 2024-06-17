@@ -36,7 +36,7 @@ SQL is broken into five different categories of statements. The table below indi
    {{< nextlink href="dashboards/ddsql_editor/reference/scalar_functions" >}}Scalar functions (one computed value per row){{< /nextlink >}}
    {{< nextlink href="dashboards/ddsql_editor/reference/aggregation_functions" >}}Aggregation functions (one computed value per query or group){{< /nextlink >}}
    {{< nextlink href="dashboards/ddsql/reference/window_functions" >}}Window functions{{< /nextlink >}}
-   {{< nextlink href="dashboards/ddsql_editor/reference/tags" >}}Working with tags{{< /nextlink >}}
+   {{< nextlink href="dashboards/ddsql_editor/reference/tags" >}}Querying tags{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Sessions

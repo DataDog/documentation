@@ -6,7 +6,7 @@ title: DDSQL Expressions and Operators
 DDSQL is in private beta.
 {{< /callout >}}
 
-*Value expressions* are the general expression language used to produce values for conditions, selectExprs, filters, and so on in clauses like `WHERE`, `ORDER BY`, and `GROUP BY`. The expression syntax of DDSQL is a superset of SQL expression syntax.
+*Value expressions* are the general expression language used to produce values for conditions, `SELECT` expressions, filters, and clauses like `WHERE`, `ORDER BY`, and `GROUP BY`. The expression syntax of DDSQL is a superset of SQL expression syntax.
 
 ## Arithmetic operators
 
@@ -17,7 +17,7 @@ DDSQL supports standard binary and unary infix arithmetic notation from SQL and 
 | +        | addition                 | 2 + 3   | 5      |
 | -        | subtraction              | 2 - 3   | -1     |
 | *        | multiplication           | 2 * 3   | 6      |
-| /        | division (nontruncating) | 5 / 2   | 2.5    |
+| /        | division (non-truncating) | 5 / 2   | 2.5    |
 
 
 The standard order of operations applies. To control the order of operations, add parentheses: `(5 - 2) * 3`.
@@ -35,7 +35,7 @@ DDSQL implements the following comparison operators:
 | =        | equals*                | 3 = 3   | true   |
 | !=, <>   | not equals             | 3 != 3  | false  |
 
-For tag references and tag groups, the equality operator (`=`) is treated as a "contains" comparison. See the [Tag References section] for more details.
+For tag references and tag groups, the equality operator (`=`) is treated as a "contains" comparison. See the [Querying Tags in DDSQL][1] for more details.
 
 Additionally, DDSQL supports the following SQL keywords, which function as standard boolean operators:
 
@@ -44,6 +44,7 @@ Additionally, DDSQL supports the following SQL keywords, which function as stand
 - `OR`
 
 DDSQL also supports the following comparator keywords as they are defined in the SQL standard:
+
 - `IS NULL`
 - `IS NOT NULL`
 - `LIKE`
@@ -77,3 +78,5 @@ SELECT column[array_length(column)] FROM ...
 | XOR     | Boolean logic, a ^ b    |
 | NOT     | Boolean logic, !a       |
 | IS NULL | Returns true for each row that is null |
+
+[1]: /dashboards/ddsql_editor/reference/tags/
