@@ -54,13 +54,13 @@ Debes elegir monitores que tengan los mismos grupos. De lo contrario, la interfa
 {{< img src="monitors/monitor_types/composite/composite_common_group.jpg" alt="Grupos comunes de monitores compuestos" style="width:80%;">}}
 
 
-Aunque elijas monitores con alertas múltiples con los mismos grupos, es posible que sigas viendo un `Group Matching Error` si los monitores no tienen fuentes de informes comunes (también llamadas agrupaciones comunes). Si no hay fuentes de información comunes, Datadog no puede calcular un estado para el monitor compuesto y este nunca se activa. Sin embargo, puedes ignorar la advertencia y crear el monitor de todos modos. Para obtener más información, consulta [Cómo los monitores compuestos seleccionan fuentes de informes comunes](#select-monitors-and-set-triggering-conditions).
+Aunque elijas monitores con alertas múltiples con los mismos grupos, es posible que sigas viendo un `Group Matching Error`, si los monitores no tienen fuentes de información comunes (también llamadas agrupaciones comunes). Si no hay fuentes de información comunes, Datadog no puede calcular un estado para el monitor compuesto y este nunca se activa. Sin embargo, puedes ignorar la advertencia y crear el monitor de todos modos. Para obtener más información, consulta [cómo los monitores compuestos seleccionan fuentes de informes comunes](#select-monitors-and-set-triggering-conditions).
 
 Cuando seleccionas un segundo monitor que no genera una advertencia, la interfaz de usuario rellena el campo **Trigger when** (Activar cuando) con la condición de activación predeterminada `a && b` y muestra el estado del monitor compuesto propuesto.
 
 #### Establecer las condiciones de activación
 
-En el campo **Trigger when* (Activar cuando), escribe la condición de activación deseada utilizando operadores booleanos, referida a monitores individuales por sus etiquetas (labels) de la forma `a`, `b`, `c`, etc. Utiliza paréntesis para controlar la precedencia de los operadores y crear condiciones más complejas.
+En el campo **Trigger when* (Activar cuando), escribe la condición de activación deseada, utilizando operadores booleanos, referida a monitores individuales por sus etiquetas (labels) con formato `a`, `b`, `c`, etc. Utiliza paréntesis para controlar la precedencia de los operadores y crear condiciones más complejas.
 
 Todas las siguientes condiciones de activación son válidas:
 
