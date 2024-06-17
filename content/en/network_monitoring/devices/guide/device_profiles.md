@@ -53,7 +53,7 @@ The [profile home][4] page is where you can see a snapshot of the device profile
 
 Add global tags for more advanced and granular options, which allows you to assign a weight to a specific metric.
 
-{{< img src="/network_device_monitoring/profile_onboarding/add_global_tags.png" alt="The Network Device profile creation page showing the Add Global Tags dropdown" style="width:100%;">}}
+{{< img src="/network_device_monitoring/profile_onboarding/Add_global_tags.png" alt="The Network Device profile creation page showing the Add Global Tags dropdown" style="width:100%;">}}
 
 #### Advanced Options
 
