@@ -34043,7 +34043,7 @@ paths:
       - Service Scorecards
       x-menu-order: 2
       x-pagination:
-        limitParam: page[size]
+        limitParam: page[limit]
         pageOffsetParam: page[offset]
         resultsPath: data
       x-undo:
