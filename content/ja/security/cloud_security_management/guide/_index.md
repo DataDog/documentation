@@ -3,7 +3,6 @@ aliases:
 - /ja/security_platform/cloud_workload_security/guide/
 - /ja/security_platform/cloud_security_management/guide/
 disable_toc: true
-kind: ガイド
 title: Cloud Security Management ガイド
 ---
 

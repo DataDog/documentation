@@ -1,6 +1,5 @@
 ---
 title: Troubleshooting Cloud Security Management Vulnerabilities
-kind: documentation
 aliases:
   - /security/vulnerabilities/troubleshooting/
 further_reading:

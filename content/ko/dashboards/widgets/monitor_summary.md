@@ -17,20 +17,18 @@ widget_type: manage_status
 
 ## 구성
 
-{{< img src="dashboards/widgets/monitor_summary/monitor-summary-setup.png" alt="모니터 요약 구성" style="width:80%;">}}
-
 ### 설정
 
 1. 세 가지 요약 유형 중 하나를 선택하세요: `Monitor`, `Group` 또는 `Combined`
-    - `Monitor` 요약 유형은 [모니터 쿼리][1]와 일치하는 모니터들의 상태 및 이름들을 나열합니다. 다중 경고 모니터는 결과 목록에 하나의 행만 있으며 해당 행의 상태는 다중 경고 모니터의 전반적인 상태입니다. 상태 개수는 각 상태 유형과 일치하는 모니터의 수입니다.
+    - `Monitor` 요약 유형은 [모니터 쿼리][1]와 일치하는 모니터의 상태와 이름 목록을 표시합니다. 결과 목록에는 다중 경고 모니터 행이 하나만 있으며 해당 행의 상태는 다중 경고 모니터의 전반적인 상태를 나타냅니다. 상태 개수는 각 상태 유형과 일치하는 모니터의 수를 나타냅니다.
 
     {{< img src="dashboards/widgets/monitor_summary/monitor_summary_type.png" alt="모니터 요약 유형" style="width:80%;">}}
 
-    - `Group` 요약 유형은 상태들, 이름들 및 모니터 쿼리와 일치하는 모니터 그룹들을 나열합니다. 다중 경고 모니터는 결과 목록에서 여러 행으로 나뉘며, 다중 경고 모니터에서 각 그룹 및 해당 그룹의 특정 상태와 상응합니다. `Group` 요약 유형은 [Triggered Monitors][2] 페이지와 비슷하게 모니터 쿼리에서 `group` 및 `group_status` 패싯들도 지원합니다. 상태 개수는 각 상태 유형과 일치하는 모니터 그룹의 수입니다.
+    - `Group` 요약 유형은 상태, 이름, 모니터 쿼리와 일치하는 모니터 그룹 목록을 표시합니다. 다중 경고 모니터는 결과 목록에서 여러 행으로 나뉘며, 다중 경고 모니터에서 각 그룹 및 해당 그룹의 특정 상태와 상응합니다. `Group` 요약 유형은 [Triggered Monitors][2] 페이지와 비슷하게 모니터 쿼리에서 `group` 및 `group_status` 패싯도 지원합니다. 상태 개수는 각 상태 유형과 일치하는 모니터 그룹의 수입니다.
 
     {{< img src="dashboards/widgets/monitor_summary/group_summary_type.png" alt="그룹 요약 유형" style="width:80%;">}}
 
-    - `Combined` 요약 유형은 그룹 상태의 수와 모니터 쿼리와 일치하는 모니터들의 이름을 나열합니다. 다중 경고 모니터는 `Monitor` 요약 유형과 같이 결과 목록에 하나의 행만 있지만 그룹 열에는 모니터의 전체 상태가 아닌 각 상태 유형의 그룹 수가 표시됩니다. `Group` 요약 유형과 마찬가지로 `Combined` 요약 유형도 모니터 쿼리에서 `group` 및 `group_status` 패싯들을 지원합니다. 상태 개수는 여전히 `Monitor` 요약 유형과 같이 전반적인 모니터 상태들의 개수를 표시합니다.
+    - `Combined` 요약 유형은 그룹 상태의 수와 모니터 쿼리와 일치하는 모니터의 이름 목록을 표시합니다. 다중 경고 모니터는 `Monitor` 요약 유형과 같이 결과 목록에 하나의 행만 있지만 그룹 열에는 모니터의 전체 상태가 아닌 각 상태 유형의 그룹 수가 표시됩니다. `Group` 요약 유형과 마찬가지로 `Combined` 요약 유형도 모니터 쿼리에서 `group` 및 `group_status` 패싯을 지원합니다. 상태 개수는 여전히 `Monitor` 요약 유형과 같이 전반적인 모니터 상태의 개수를 표시합니다.
 
     {{< img src="dashboards/widgets/monitor_summary/combined_summary_type.png" alt="결합된 요약 유형" style="width:80%;">}}
 
@@ -71,19 +69,9 @@ widget_type: manage_status
 
 {{< img src="dashboards/widgets/monitor_summary/monitor-summary.png" alt="표시 기본 설정" style="width:80%;">}}
 
-#### 타이틀
-
-`Show a title` 확인란을 선택하여 위젯의 커스텀 타이틀을 표시하세요.
-
-{{< img src="dashboards/widgets/monitor_summary/widget_title.png" alt="위젯 타이틀" style="width:80%;">}}
-
-선택적으로 타이틀의 크기와 정렬을 정의할 수 있습니다.
-
 ## API
 
-이 위젯은 **Dashboards API**와 함께 사용할 수 있습니다. 더 많은 정보를 원하신다면 [대시보드 API 가이드][3]를 참조하세요.
-
-모니터 요약 위젯의 전용 [위젯 JSON 스키마 정의][4]는 다음과 같습니다.
+해당 위젯은 **[대시보드 API][3]**와 함께 사용할 수 있습니다.  [위젯 JSON 스키마 정의][4]에 대해서는 다음 표를 참고하세요.
 
 {{< dashboards-widgets-api >}}
 
@@ -92,6 +80,6 @@ widget_type: manage_status
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ko/monitors/manage/
-[2]: /ko/monitors/manage/#manage-triggered-monitors-with-group-level-granularity
-[3]: /ko/api/v1/dashboards/
+[2]: /ko/monitors/manage/#grouped-results
+[3]: /ko/api/latest/dashboards/
 [4]: /ko/dashboards/graphing_json/widget_json/
