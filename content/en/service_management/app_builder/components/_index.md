@@ -19,10 +19,6 @@ further_reading:
 <div class="alert alert-warning">App Builder is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-{{< callout url="" btn_hidden="true" header="Try the Beta!">}}
-App Builder is in beta. Access it from the <a href="https://app.datadoghq.com/app-builder/">App Builder</a> page in Datadog.
-{{< /callout >}}
-
 This page provides a list of UI components that you can use when creating apps in App Builder.
 
 Many component properties allow you to select from provided values. If you want to use an expression for a property's value, click **&lt;/&gt;** next to the property to use the code editor. For more information on using JavaScript in App Builder, see [JavaScript Expressions][7].
