@@ -86,6 +86,8 @@ For log collection, the Agent does not accept multiple YAML files that point to 
 
 To preserve backwards compatibility, the Agent still picks up configuration files in the form `/etc/dd-agent/conf.d/<CHECK_NAME>.yaml`, but migrating to the new layout is strongly recommended.
 
+> Note: Files in this directory with zero length are ignored by the agent. This allows for provisioning systems that do not support skipping empty template outputs.
+
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
