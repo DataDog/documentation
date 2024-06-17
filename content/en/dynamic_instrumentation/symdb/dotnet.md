@@ -3,7 +3,7 @@ title: Enable Autocomplete and Search for .NET
 kind: Documentation
 aliases:
     - /tracing/dynamic_instrumentation/enabling/dotnet/
-is_beta: false
+is_beta: true
 private: false
 code_lang: dotnet
 type: multi-code-lang

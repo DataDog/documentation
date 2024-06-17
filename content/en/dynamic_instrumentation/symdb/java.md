@@ -21,7 +21,7 @@ Autocomplete and search are in public beta.
 
 Run your service with Dynamic Instrumentation enabled, and additionally enable autocomplete and search:
 
-1. Set the `-Ddd.symbol.database.upload.enabled` flag or the `DD_SYMBOL_DATABASE_UPLOAD_ENABLED` environment variable to `true`.
+1. Set the `-Ddd.symbol.database.upload.enabled=true` flag or the `DD_SYMBOL_DATABASE_UPLOAD_ENABLED=true` environment variable.
 2. Specify the `dd.service` and `dd.version` [Unified Service Tags][5].
 
 {{< tabs >}}
@@ -87,6 +87,11 @@ or:
   -Ddd.third.party.includes=<LIST_OF_ADDITIONAL_THIRD_PARTY_PACKAGE_PREFIXES> \
 ```
 
+Where a list means a comma separated list of package prefixes, for example
+
+```
+export DD_THIRD_PARTY_EXCLUDES=com.mycompany,io.mycompany
+```
 
 [1]: /dynamic_instrumentation
 [2]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
