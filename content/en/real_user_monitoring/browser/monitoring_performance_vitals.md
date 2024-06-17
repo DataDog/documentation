@@ -1,5 +1,5 @@
 ---
-title: Monitoring Vitals Performance
+title: Monitoring Performance Vitals
 kind: documentation
 further_reading:
   - link: "https://learn.datadoghq.com/courses/core-web-vitals-lab"
@@ -12,10 +12,6 @@ further_reading:
     tag: "Blog"
     text: "Monitor Core Web Vitals with Datadog RUM and Synthetic Monitoring"
 ---
-
-{{< beta-callout url="https://www.google.com" >}}
-Try the beta! Vitals are in public beta.
-{{< /beta-callout >}} 
 
 ## Overview
 
@@ -48,7 +44,7 @@ After you've selected a page and vital, you can see insights that explain their 
 From here, you can:
 
 - Change the time frame in the upper right
-- Filter by different session attributes using the dropdown buttons
+- Filter by different attributes using the dropdown buttons
 - Filter by selecting a group from the breakdown on the right ("Show Filter Breakdown")
 - Select the percentile at which to evaluate your vital
 

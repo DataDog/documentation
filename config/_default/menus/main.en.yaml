@@ -5233,10 +5233,10 @@ menu:
       parent: rum_browser
       identifier: page_performance
       weight: 104
-    - name: Monitoring Vitals Performance
-      url: real_user_monitoring/browser/monitoring_vitals_performance/
+    - name: Monitoring Performance Vitals
+      url: real_user_monitoring/browser/monitoring_performance_vitals/
       parent: rum_browser
-      identifier: vitals_performance
+      identifier: performance_vitals
       weight: 105
     - name: Monitoring Resource Performance
       url: real_user_monitoring/browser/monitoring_resource_performance/
