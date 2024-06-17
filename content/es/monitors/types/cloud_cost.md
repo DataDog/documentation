@@ -44,8 +44,8 @@ Elige entre dos tipos de monitores: **Comparar costes en el tiempo** o **Configu
 
 | Tipo de coste | Descripción | Ejemplos de uso |
 | ---  | ----------- | ----------- |
-| Cambios en los costes  | Comparar costes diarios, semanales o mensuales | Crea alertas para cuando la diferencia entre el coste del día actual y el de la semana anterior supera el 5%. |
-| Umbral de coste | Configurar alertas sobre los costes totales que superan un umbral en un día | Configurar alertas para cuando el coste total del día actual supera los 10.000 dólares estadounidenses |
+| Cambios en los costes  | Comparar los costes diarios, semanales o mensuales | Crea alertas para cuando la diferencia entre el coste del día actual y el de la semana anterior supera el 5%. |
+| Umbral de costes | Configurar alertas sobre los costes totales que superan un umbral en un día | Configurar alertas para cuando los costes totales del día actual superan los 10.000 dólares estadounidenses |
 
 ## Especificar qué costes se deben controlar
 
@@ -64,10 +64,10 @@ Cualquier tipo de coste o métrica que informe a Datadog está disponible para m
 
 Si el tipo de monitor de costes es **Umbral de coste**, puedes activar una alerta para cuando el coste de la nube es `above`, `below`, `above or equal` o `below or equal to` a un umbral.  
 
-Si el tipo de monitor de costes es **Cambios de costes**, puedes activar una alerta para cuando el coste `increases` o `decreases` con respecto al umbral definido. El umbral puede configurarse como **Cambio porcentual** o **Importe en dólares estadounidenses**.
+Si el tipo de monitor de costes es **Cambios en los costes**, puedes activar una alerta para cuando el coste `increases` o `decreases` con respecto al umbral definido. El umbral puede configurarse como **Cambio porcentual** o **Importe en dólares estadounidenses**.
 
 **Nota**: Para el monitor de **Cambio porcentual**, también puedes filtrar los cambios que están por debajo de un determinado umbral en dólares estadounidenses.
-Ejemplo: crea una alerta para cuando hay un cambio de costes superior al 5% en cualquier cambio que supere los 500 dólares estadounidenses.
+Ejemplo: crea una alerta para cuando hay un cambio en los costes superior al 5% en cualquier cambio que supere los 500 dólares estadounidenses.
 
 ## Configurar notificaciones y automatizaciones
 
