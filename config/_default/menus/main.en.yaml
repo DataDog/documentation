@@ -5056,41 +5056,41 @@ menu:
       url: synthetics/platform/settings
       parent: synthetics_platform
       weight: 506
-    - name: Search and Manage
-      url: synthetics/search/
+    - name: Exploring Synthetics Data
+      url: synthetics/explore/
       parent: synthetics
-      identifier: synthetics_search
-      weight: 5
+      identifier: synthetics_explore
+      weight: 6
     - name: Saved Views
-      url: synthetics/search/saved_views
-      parent: synthetics_search
-      identifier: synthetics_search_saved_views
+      url: synthetics/explore/saved_views
+      parent: synthetics_explore
+      identifier: synthetics_explore_saved_views
       weight: 601
     - name: Results Explorer
-      url: continuous_testing/explorer/
-      parent: synthetics
+      url: synthetics/explore/results_explorer
+      parent: synthetics_explore
       identifier: synthetics_results_explorer
-      weight: 7
+      weight: 602
     - name: Search Test Batches
-      url: continuous_testing/explorer/search/
+      url: synthetics/explore/results_explorer/search
       parent: synthetics_results_explorer
-      identifier: continuous_testing_results_explorer_search
-      weight: 701
+      identifier: synthetcis_results_explorer_search
+      weight: 6200
     - name: Search Test Runs
-      url: continuous_testing/explorer/search_runs/
+      url: synthetics/explore/results_explorer/search_runs
       parent: synthetics_results_explorer
-      identifier: continuous_testing_results_explorer_search_runs
-      weight: 702
+      identifier: synthetics_results_explorer_search_runs
+      weight: 6201
     - name: Search Syntax
-      url: continuous_testing/explorer/search_syntax/
+      url: synthetics/explore/results_explorer/search_syntax
       parent: synthetics_results_explorer
-      identifier: continuous_testing_results_explorer_search_syntax
-      weight: 703
+      identifier: synthetics_results_explorer_search_syntax
+      weight: 6203
     - name: Saved Views
-      url: continuous_testing/explorer/saved_views/
+      url: synthetics/explore/results_explorer/saved_views
       parent: synthetics_results_explorer
-      identifier: continuous_testing_results_explorer_saved_views
-      weight: 704
+      identifier: synthetics_results_explorer_saved_views
+      weight: 6204
     - name: Guides
       url: synthetics/guide/
       parent: synthetics
