@@ -1,5 +1,5 @@
 ---
-title: Enable autocomplete and search for Java
+title: Enable Autocomplete and Search for Java
 kind: Documentation
 is_beta: true
 private: false
