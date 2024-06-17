@@ -3,7 +3,6 @@ dependencies:
 - https://github.com/DataDog/datadog-static-analyzer-circleci-orb/blob/main/README.md
 description: Utilisez Datadog et CircleCI pour exécuter des tâches Static Analysis
   dans un pipeline CI.
-kind: documentation
 title: Static Analysis et Orbs CircleCI
 ---
 [![Statut de build CircleCI](https://circleci.com/gh/DataDog/datadog-static-analyzer-circleci-orb.svg?style=shield "CircleCI Build Status")](https://circleci.com/gh/DataDog/datadog-static-analyzer-circleci-orb) [![Version de l'Orb CircleCI](https://badges.circleci.com/orbs/datadog/datadog-static-analyzer-circleci-orb.svg)](https://circleci.com/developer/orbs/orb/datadog/datadog-static-analyzer-circleci-orb) [![Licence GitHub](https://img.shields.io/badge/license-MIT-lightgrey.svg)](https://raw.githubusercontent.com/DataDog/datadog-static-analyzer-circleci-orb/main/LICENSE) [![Communauté CircleCI](https://img.shields.io/badge/community-CircleCI%20Discuss-343434.svg)](https://discuss.circleci.com/c/ecosystem/orbs)

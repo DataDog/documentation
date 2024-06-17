@@ -1,7 +1,6 @@
 ---
 dependencies: []
 disable_edit: true
-kind: documentation
 title: JSON 出力には、json.dumps の代わりに jsonify を使う
 ---
 ## メタデータ

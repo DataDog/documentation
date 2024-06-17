@@ -7,7 +7,6 @@ further_reading:
 - link: /dashboards/guide/context-links/
   tag: 설명서
   text: 커스텀 링크
-kind: 설명서
 title: 위젯
 ---
 
