@@ -16,15 +16,9 @@ aliases:
   - /security/cloud_security_management/setup/csm_pro
 ---
 
-This article provides step-by-step instructions for setting up [Cloud Security Management (CSM)][6].
+Datadog provides a guided workflow for setting up [Cloud Security Management (CSM)][6]. The first step is to select the features you want to enable. After that, follow the instructions provided to configure the features you selected.
 
-## Overview
-
-Datadog provides a guided workflow for enabling CSM. The first step is to select the features you want to enable.
-
-## Select and enable features
-
-The following instructions apply to new CSM users only. If you're an existing user and would like to enable additional CSM features, see [Enable additional features](#enable-additional-features).
+<div class="alert alert-info">The following instructions apply to new CSM users only. If you're an existing user and would like to enable additional CSM features, see <a href="/security/cloud_security_management/setup/#enable-additional-features">Enable additional features</a>.</div>
 
 1. On the [Intro to Cloud Security Management][10] page, click **Get Started with Cloud Security Management**.
 1. On the [Features][11] page, select the features you want to enable.
@@ -32,63 +26,27 @@ The following instructions apply to new CSM users only. If you're an existing us
 
 {{< img src="security/csm/setup/features_selection_new_user.png" alt="CSM Features page" width="100%">}}
 
-## Configure CSM features
-
-After you confirm your selections, the [Setup][3] page appears. CSM customizes the instructions on the page to match the features you selected. For example, if you enable Compliance Scanning, CSM displays only the **Cloud accounts** and **Hosts and containers** sections.
+After you confirm your selections, the [Setup][3] page appears. CSM customizes the instructions on the page to match the features you selected. For example, if you enable **Compliance Scanning**, CSM displays only the **Cloud accounts** and **Hosts and containers** sections.
 
 {{< img src="security/csm/setup/settings_page.png" alt="CSM Settings page" width="100%">}}
 
 The following table shows which sections appear on the Setup page for each feature.
 
-| Feature                            | Setup page                                 |
-|------------------------------------|--------------------------------------------|
-| Compliance Scanning                | Cloud accounts, Source code integrations   |
-| Threat Detection                   | Hosts and containers, Serverless resources |
-| Identity Risks (CIEM)              | CloudTrail logs                            |
-| Host Vulnerability Management      | Hosts and containers                       |
-| Container Vulnerability Management | Hosts and containers                       |
+| Feature                                  | Setup page                                                                                        |
+|------------------------------------------|---------------------------------------------------------------------------------------------------|
+| [Misconfigurations][2]                   | Cloud accounts (required), Hosts and containers (required), Serverless resources, CloudTrail logs |
+| [Threat Detection][12]                   | Hosts and containers (required), Serverless resources                                             |
+| [Identity Risks (CIEM)][13]              | CloudTrail logs                                                                                   |
+| [Host Vulnerability Management][14]      | Hosts and containers (required), Serverless resources                                             |
+| [Container Vulnerability Management][15] | Hosts and containers (required), Serverless resources                                             |
 
-**Note**: For instructions for setting up Agentless Scanning, see [Setting up CSM Agentless Scanning][4].
-
-### Cloud accounts
-
-**Available for**: Compliance Scanning
-
-To enable resource scanning for your cloud accounts, set up the AWS, Azure, or Google Cloud integration, and then enable CSM for each AWS account, Azure subscription, or Google Cloud project. For detailed instructions, see [Enabling Cloud Security Management for Cloud Accounts][2].
-
-### Hosts and containers
-
-**Available for**: Threat Detection &#124; Host Vulnerability Management 	&#124; Container Vulnerability Management
-
-Select your infrastructure type for detailed instructions on how to enable CSM on hosts and containers.
-
-[Enabling Cloud Security Management on the Agent][1]
-
-{{< partial name="csm/csm-agent-tiles.html" >}}
-
-<br>
-
-### Serverless resources
-
-**Available for**: Threat Detection
-
-For detailed instructions, see [AWS Fargate Configuration Guide for Datadog Security][7].
-
-### CloudTrail logs
-
-**Available for**: Identity Risks (CIEM)
-
-Set up AWS CloudTrail logs forwarding to enable CSM Identity Risks and address over-permissive entitlements and risky IAM resources. For detailed instructions, see [Enable Cloud Security Management for Cloud Accounts][2].
-
-### Source code integrations
-
-**Available for**: Compliance Scanning
-
-Enable Infrastructure as Code (IaC) remediation for your Github repositories. For detailed instructions, see [Enabling Source Code Integrations for IAC Remediation][8].
+<div class="alert alert-info">For instructions on setting up Agentless Scanning, see <a href="/security/cloud_security_management/setup/agentless_scanning">Setting up CSM Agentless Scanning</a>.</div>
 
 ## Enable additional features
 
-You can enable additional CSM features at any time by returning to the [Features][11] page and clicking **Enable** for the features you want to enable. This page also serves as a status page that indicates which features are enabled, which features have been enabled but not yet configured, and which features have not been enabled.
+You can enable additional CSM features at any time by returning to the [Features][11] page and clicking **Enable** for the features you want to add. This page also serves as a status page that indicates which features are enabled, which features are enabled but not yet configured, and which features are not enabled.
+
+{{< img src="security/csm/setup/features_page.png" alt="CSM Features page" width="100%">}}
 
 [1]: /security/cloud_security_management/setup/agent
 [2]: /security/cloud_security_management/setup/cloud_accounts
@@ -101,3 +59,7 @@ You can enable additional CSM features at any time by returning to the [Features
 [9]: https://app.datadoghq.com/security/getting-started
 [10]: https://app.datadoghq.com/security/csm/intro
 [11]: https://app.datadoghq.com/security/configuration/csm/features
+[12]: /security/cloud_security_management/setup/threat_detection
+[13]: /security/cloud_security_management/setup/identity_risks_ciem
+[14]: /security/cloud_security_management/setup/host_vulnerability_management
+[15]: /security/cloud_security_management/setup/container_vulnerability_management

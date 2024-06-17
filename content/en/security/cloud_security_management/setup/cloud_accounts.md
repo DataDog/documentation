@@ -1,11 +1,11 @@
 ---
-title: Enable Compliance Scanning for Cloud Security Management
+title: Enabling Compliance Scanning
 aliases:
   - /security/cloud_security_management/setup/csm_enterprise/cloud_accounts
   - /security/cloud_security_management/setup/csm_pro/cloud_accounts
 ---
 
-Use the following instructions to enable Compliance Scanning for Cloud Security Management (CSM). Compliance Scanning is required for [CSM Misconfigurations][2] and [CSM Identity Risks][3].
+Use the following instructions to enable Compliance Scanning for Cloud Security Management (CSM).
 
 ## Enable resource scanning
 
