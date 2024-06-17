@@ -41,13 +41,9 @@ SQL is broken into five different categories of statements. The table below indi
 
 ## Sessions
 
-DDSQL queries are executed within a session. The session provides the user with a writable DDSQL environment.
+DDSQL queries are executed within a session. The session provides the user with a writable DDSQL environment. Modifications made by SQL statements, such as the creation of a table, are visible by subsequent statements in a session, but do not outlive the session. You can think of a session as executing within a `BEGIN ... ROLLBACK`.
 
-{{< code-block lang="sql" >}}
-SELECT 1; SELECT 2;
-{{< /code-block >}}
-
-Some options, such as time frame, are exposed runtime parameters within the environment and may be modified with [`SET`] and read with [`SHOW`]. Modifications made by SQL statements (for example, DDL or DML statements) are visible by subsequent statements in a session, but do not outlive the session. You can think of a session as executing within a `BEGIN ... ROLLBACK`.
+Some options, such as time frame, are exposed runtime parameters within the environment and may be modified with [`SET`][3] and read with [`SHOW`][4].
 
 The default schema in the session includes foreign table definitions that model different parts of the downstream data sources that DDSQL supports.
 
@@ -55,9 +51,11 @@ The default schema in the session includes foreign table definitions that model 
 
 "Schema on read" describes a strategy to apply a schema to data as it is read rather than when it is written. In DDSQL, it is used to enable SQL queries against unstructured data.
 
-If a table supports schema on read, references to nonexistent table columns are considered legal, and those references are mapped to the table in a way that is defined by the downstream. For many downstreams, these become tag references.
+If a table supports schema on read, references to nonexistent table columns are allowed, and those references are mapped to the table in a way that is defined by the downstream. For many downstreams, these become tag references.
 
 If a column reference cannot be unambiguously mapped to a single table, it is considered an ambiguous reference. Because schema-on-read columns don't exist in the catalog, they can typically only be used without specifying the correlation if there is exactly one table in the `FROM` clause that supports schema on read.
 
 [1]: /dashboards/ddsql_editor/reference/tags
 [2]: /dashboards/ddsql_editor
+[3]: /dashboards/ddsql_editor/reference/statements/#set
+[4]: /dashboards/ddsql_editor/reference/statements/#show
