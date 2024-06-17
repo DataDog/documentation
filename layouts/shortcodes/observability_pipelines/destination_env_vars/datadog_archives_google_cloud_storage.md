@@ -1,3 +1,3 @@
 #### Google Cloud Storage
 
-REUSE INSTRUCTIONS
+Enter the Google Cloud Platform API key you created earlier.
