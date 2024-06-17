@@ -32,13 +32,62 @@ After you confirm your selections, the [Setup][3] page appears. CSM customizes t
 
 The following table shows which sections appear on the Setup page for each feature.
 
-| Feature                                  | Setup page                                                                                        |
-|------------------------------------------|---------------------------------------------------------------------------------------------------|
-| [Misconfigurations][2]                   | Cloud accounts (required), Hosts and containers (required), Serverless resources, CloudTrail logs |
-| [Threat Detection][12]                   | Hosts and containers (required), Serverless resources                                             |
-| [Identity Risks (CIEM)][13]              | CloudTrail logs                                                                                   |
-| [Host Vulnerability Management][14]      | Hosts and containers (required), Serverless resources                                             |
-| [Container Vulnerability Management][15] | Hosts and containers (required), Serverless resources                                             |
+<table>
+  <thead>
+    <tr>
+      <th style="width: 50%;">Feature</th>
+      <th style="width: 50%;">Setup page</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Misconfigurations</td>
+      <td>
+        <ul style="font-size: 16px;">
+          <li><a href="/security/cloud_security_management/setup/cloud_accounts">Cloud accounts</a></li>
+          <li><a href="/security/cloud_security_management/setup/agent">Hosts and containers</a></li>
+          <li><a href="/security/guide/aws_fargate_config_guide/?tab=amazonecs#cloud-security-management">Serverless resources</a></li>
+          <li><a href="/security/cloud_security_management/setup/cloud_accounts/?tab=aws#set-up-cloudtrail-logs-forwarding">CloudTrail logs</a></li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td>Threat Detection</td>
+      <td>
+        <ul style="font-size: 16px;">
+          <li><a href="/security/cloud_security_management/setup/agent">Hosts and containers</a></li>
+          <li><a href="/security/guide/aws_fargate_config_guide/?tab=amazonecs#cloud-security-management">Serverless resources</a></li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td>Identity Risks (CIEM)</td>
+      <td>
+        <ul style="font-size: 16px;">
+          <li><a href="/security/cloud_security_management/setup/cloud_accounts/?tab=aws#set-up-cloudtrail-logs-forwarding">CloudTrail logs</a></li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td>Host Vulnerability Management</td>
+      <td>
+        <ul style="font-size: 16px;">
+          <li><a href="/security/cloud_security_management/setup/agent">Hosts and containers</a></li>
+          <li><a href="/security/guide/aws_fargate_config_guide/?tab=amazonecs#cloud-security-management">Serverless resources</a></li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td>Container Vulnerability Management</td>
+      <td>
+        <ul style="font-size: 16px;">
+          <li><a href="/security/cloud_security_management/setup/agent">Hosts and containers</a></li>
+          <li><a href="/security/guide/aws_fargate_config_guide/?tab=amazonecs#cloud-security-management">Serverless resources</a></li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 <div class="alert alert-info">For instructions on setting up Agentless Scanning, see <a href="/security/cloud_security_management/setup/agentless_scanning">Setting up CSM Agentless Scanning</a>.</div>
 
@@ -54,7 +103,7 @@ You can enable additional CSM features at any time by returning to the [Features
 [4]: /security/cloud_security_management/setup/agentless_scanning
 [5]: https://app.datadoghq.com/security/csm
 [6]: /security/cloud_security_management/
-[7]: /security/guide/aws_fargate_config_guide/?tab=amazonecs#cloud-security-management
+[7]: /security/guide/aws_fargate_config_guide/
 [8]: /security/cloud_security_management/setup/source_code_integrations
 [9]: https://app.datadoghq.com/security/getting-started
 [10]: https://app.datadoghq.com/security/csm/intro
