@@ -1,13 +1,15 @@
 ---
-title: Facturation des intégrations Azure
 kind: documentation
+title: Facturation des intégrations Azure
 ---
+
 ## Présentation
 
-Datadog facture chaque [machine virtuelle Azure surveillée dans Datadog][1], que l'Agent Datadog y soit installé ou non. Vous n'êtes pas facturé en double si vous exécutez l'Agent sur une machine virtuelle Azure reconnue par l'intégration Azure.
+Datadog facture chaque [machine virtuelle Azure surveillée dans Datadog][1], que l'Agent Datadog y soit installé ou non. Vous n'êtes pas facturé en double si vous exécutez l'Agent sur une machine virtuelle Azure reconnue par l'intégration Azure. Datadog considère également les nœuds des plans Azure App Service comme des hosts facturables.
 
-En outre, les nœuds associés à vos plans Azure App Service sont également considérés comme des hosts facturables par Datadog. **Remarque** : les plans App Service Partage, Dynamique et Gratuit n'incluent pas de nœuds et n'ont donc aucune incidence sur votre facturation Datadog.
-L'intégration Azure recueille des métriques à partir de toutes les autres ressources Azure (Azure SQL DB, Azure Redis Cache, Azure Load Balancer, etc.) sans frais supplémentaires.
+**Remarque** : les plans App Service partagés, dynamiques et gratuits n'ont pas de nœud associé et n'ont pas d'impact sur votre facture Datadog.
+
+Lʼintégration Azure collecte des métriques pour toutes les autres ressources Azure (telles que Azure SQL DB, Azure Redis Cache, Azure Load Balancer, etc.) sans aucun impact sur votre facturation mensuelle. Pour obtenir une liste complète des métriques collectées, consultez la section [Métriques prises en charge avec Azure Monitor][6].
 
 ## Exclure des machines virtuelles Azure
 
@@ -23,6 +25,10 @@ Utilisez le carré d'intégration Datadog/Azure pour filtrer vos plans Azure App
 
 **Remarque** : ce filtre s'applique aux métriques de l'ensemble des applications et fonctions incluses dans le plan App Service.
 
+## Métriques custom App Insights
+
+Si vous [activez la collecte de métriques custom][5], Datadog collecte toutes les métriques custom écrites sur toutes les instances dʼAzure App avec le contexte de lʼintégration. Ces métriques sont considérées comme des métriques custom dans Datadog et peuvent entraîner des frais supplémentaires. Consultez le [guide de facturation des métriques custom][4].
+
 ## Dépannage
 
 Pour toute question technique, contactez [l'assistance Datadog][2].
@@ -32,3 +38,6 @@ Pour toute question concernant la facturation, contactez votre [chargé de compt
 [1]: https://app.datadoghq.com/account/settings#integrations/azure
 [2]: /fr/getting_started/tagging/using_tags/#integrations
 [3]: /fr/infrastructure/
+[4]: /fr/account_management/billing/custom_metrics/?tab=countrate
+[5]: /fr/integrations/azure#configuration
+[6]: https://learn.microsoft.com/en-us/azure/azure-monitor/essentials/metrics-supported
