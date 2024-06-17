@@ -28,7 +28,7 @@ algolia:
 Amazon ECS is a scalable, high-performance container orchestration service that supports Docker containers. With the Datadog Agent, you can monitor ECS containers and tasks on every EC2 instance in your cluster.
 
 <div class="alert alert-info">
-If you want to monitor <b>ECS on Fargate</b>, see <a href="/integrations/ecs_fargate/">Amazon ECS on AWS Fargate</a>.  
+If you want to monitor <strong>ECS on Fargate</strong>, see <a href="/integrations/ecs_fargate/">Amazon ECS on AWS Fargate</a>.  
 </div>
 
 ## Setup
