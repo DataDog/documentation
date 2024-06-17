@@ -9,7 +9,7 @@ code_lang: android
 code_lang_weight: 10
 further_reading:
 - link: '/real_user_monitoring/error_tracking/'
-  tag: 'Error Tracking'
+  tag: 'Documentation'
   text: 'Get started with Error Tracking'
 - link: '/real_user_monitoring/error_tracking/explorer'
   tag: 'Documentation'

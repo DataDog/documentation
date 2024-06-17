@@ -4,7 +4,7 @@ kind: documentation
 description: Troubleshoot SAML issues for your Datadog account
 further_reading:
 - link: "https://www.samltool.com/online_tools.php"
-  tag: "Developer Tools"
+  tag: "External Site"
   text: "Identify your assertions with developer SAML tools"
 
 ---

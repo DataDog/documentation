@@ -114,18 +114,19 @@ Assurez-vous que `Require MFA` est toujours désactivé. Pour en savoir plus, co
 
 ## Configuration
 
-### Guides
+### AWS
 
 1. Dans votre console AWS, créez un utilisateur IAM qui sera utilisé pour lʼintégration Datadog avec les [autorisations nécessaires](#strategie-iam-de-l-integration-aws).
 2. Générez une clé d'accès et une clé de secret pour l'utilisateur IAM de l'intégration Datadog.
 
-### Ruby
+### Datadog
 
 3. Dans le [carré dʼintégration AWS][1], cliquez sur **Add AWS Account**, puis sélectionnez **Manually**.
 4. Sélectionnez lʼonglet **Access Keys (GovCloud or China\* Only)**.
-5. Saisissez votre `Account ID`, `AWS Access Key` et `AWS Secret Key`. Seules les clés d'accès et de secret pour GovCloud et la Chine sont acceptées.
-6. Cliquez sur **Save**.
-7. Patientez 10 minutes le temps que les données commencent à être recueillies, puis accédez au <a href="https://app.datadoghq.com/screen/integration/7/aws-overview" target="_blank">dashboard récapitulatif d'AWS</a> prêt à l'emploi pour visualiser les métriques envoyées par vos services et votre infrastructure AWS :
+5. Cochez la case **I confirm that the IAM User for the Datadog Integration has been added to the AWS Account**.
+6. Saisissez votre `Account ID`, `AWS Access Key` et `AWS Secret Key`. Seules les clés d'accès et de secret pour GovCloud et la Chine sont acceptées.
+7. Cliquez sur **Save**.
+8. Patientez 10 minutes le temps que les données commencent à être recueillies, puis accédez au <a href="https://app.datadoghq.com/screen/integration/7/aws-overview" target="_blank">dashboard récapitulatif d'AWS</a> prêt à l'emploi pour visualiser les métriques envoyées par vos services et votre infrastructure AWS :
 
 \* _Toute utilisation des Services Datadog dans (ou en connexion avec des environnements se situant au sein de) la Chine continentale est sujette à la remarque indiquée dans la section [Restricted Service Locations][2] de notre site web._
 

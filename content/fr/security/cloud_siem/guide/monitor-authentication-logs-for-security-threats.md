@@ -6,7 +6,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/how-to-monitor-authentication-logs/
   tag: GitHub
   text: En savoir plus sur la surveillance des logs d'authentification
-kind: guide
 title: Surveillance des logs d'authentification pour identifier les menaces de sécurité
 ---
 

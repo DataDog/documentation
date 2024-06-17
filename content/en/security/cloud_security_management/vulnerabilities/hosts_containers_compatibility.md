@@ -1,6 +1,5 @@
 ---
 title: CSM Vulnerabilities Hosts and Containers Compatibility
-kind: documentation
 ---
 
 Cloud Security Management Vulnerabilities supports vulnerability scanning for hosts and containers running the following operating system versions:

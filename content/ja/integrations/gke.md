@@ -27,7 +27,7 @@ integration_id: gke
 integration_title: Google Kubernetes Engine, Agent
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: gke
 public_title: Google Kubernetes Engine, Agent インテグレーション

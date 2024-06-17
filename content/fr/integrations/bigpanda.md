@@ -14,7 +14,7 @@ integration_id: ''
 integration_title: BigPanda
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: bigpanda
 public_title: Intégration Datadog/BigPanda

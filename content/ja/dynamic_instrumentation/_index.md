@@ -14,7 +14,7 @@ further_reading:
   text: アプリケーションのインスツルメンテーションの方法について
 - link: /getting_started/tagging/unified_service_tagging/
   tag: ドキュメント
-  text: タグの使用方法
+  text: 統合サービスタグ付け
 - link: /tracing/service_catalog/
   tag: ドキュメント
   text: Datadog に報告するサービスの発見とカタログ化

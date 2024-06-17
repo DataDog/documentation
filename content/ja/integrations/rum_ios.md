@@ -20,7 +20,7 @@ integration_id: rum-ios
 integration_title: iOS
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: rum_ios
 public_title: iOS

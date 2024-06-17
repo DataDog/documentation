@@ -1,6 +1,5 @@
 ---
 title: Investigate Security Signals
-kind: documentation
 disable_toc: false
 further_reading:
   - link: "/security/default_rules/?category=cat-csm-threats#all"
