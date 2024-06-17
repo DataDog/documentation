@@ -1,0 +1,23 @@
+{{ $dot := . }}
+<div class="dbm-setup-mongodb">
+  <div class="container cards-dd">
+    <div class="row row-cols-2 row-cols-sm-4 g-2 g-xl-3 justify-content-sm-center">
+      <div class="col">
+        <a class="card h-100" href="/database_monitoring/setup_mongodb/selfhosted">
+          <div class="card-body text-center py-2 px-1">
+            {{ partial "img.html" (dict "root" . "src" "integrations_logos/mongo.png" "class" "img-fluid" "alt" "Selfhosted" "width" "175") }}
+            <br/>Self-hosted
+          </div>
+        </a>
+      </div>
+      <div class="col">
+        <a class="card h-100" href="/database_monitoring/setup_sql_server/mongodbatlas">
+          <div class="card-body text-center py-2 px-1">
+            {{ partial "img.html" (dict "root" . "src" "integrations_logos/mongodb_atlas.png" "class" "img-fluid" "alt" "MongoDBAtlas" "width" "175") }}
+            <br/>MongoDB Atlas
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
