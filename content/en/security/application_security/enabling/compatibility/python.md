@@ -17,6 +17,7 @@ The following ASM capabilities are supported in the Python library, for the spec
 | Software Composition Analysis (SCA) | 1.5.0  |
 | Code Security (beta)  |  private beta  |
 | Automatic user activity event tracking | 1.17.0 |
+| API Security | 2.6.0 |
 
 **Note**: Threat Protection requires enabling [Remote Configuration][2], which is included in the listed minimum tracer version.
 

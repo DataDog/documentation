@@ -5,10 +5,10 @@ further_reading:
   tag: 설명서
   text: 브라우저 테스트를 위한 고급 옵션에 대해 알아보기
 - link: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_global_variable
-  tag: 테라폼
+  tag: 외부 사이트
   text: Terraform으로 Synthetic 글로벌 변수 생성 및 관리
 kind: 설명서
-title: 브라우저 테스트 단계
+title: 브라우저 테스팅 단계
 ---
 
 ## 개요
@@ -25,7 +25,7 @@ title: 브라우저 테스트 단계
 
 페이지의 요소와 상호 작용하면 단계가 기록됩니다.
 
-{{< img src="synthetics/browser_tests/click_step.mp4" alt="Click type dropdown menu in the Click step type" video="true" width="60%" >}}
+{{< img src="synthetics/browser_tests/click_step.mp4" alt="단계 유형 클릭에서 유형 드롭다운 메뉴 클릭" video="true" width="60%" >}}
 
 단계를 클릭하고 실행 타임에서 브라우저 테스트를 수행할 클릭 유형을 선택합니다:
 
@@ -38,24 +38,24 @@ title: 브라우저 테스트 단계
 
 Datadog은 `select` 드롭다운 메뉴에서 옵션을 선택하는 것과 같이 애플리케이션에서 수행하는 단계를 기록하며, 요약 내용이 단계로 표시됩니다.
 
-{{< img src="synthetics/browser_tests/input_text.mp4" alt="Browser Test Input Text Step" video="true" width="95%" >}}
+{{< img src="synthetics/browser_tests/input_text.mp4" alt="브라우저 테스트 입력 텍스트 단계" video="true" width="95%" >}}
 
 ### 옵션 선택
 
 Datadog은 `select` 드롭다운 메뉴에서 옵션을 선택하는 것과 같이 애플리케이션에서 수행하는 단계를 기록하며, 요약 내용은 왼쪽 코너에서 단계로 나타납니다.
 
-{{< img src="synthetics/browser_tests/select_options.png" alt="Select options step" style="width:70%;" >}}
+{{< img src="synthetics/browser_tests/select_options.png" alt="옵션 선택 단계" style="width:70%;" >}}
 
 ### 업로드 파일
 
-**Upload** 단계를 기록하려면, 다음 중 하나를 수행하세요:
+**업로드** 단계를 기록하려면, 다음 중 하나를 수행하세요:
 
 * 브라우저에서 데스크탑을 여세요
 * 기록할 iframe에 파일을 끌어다 놓으세요
 
 Datadog은 업로드와 같이 애플리케이션에서 수행하는 단계를 기록하고, 요약 내용은 왼쪽 코너에 단계로 나타납니다. 최대 10개의 파일을 업로드할 수 있으며 각각 5MB의 제한이 있습니다.
 
-{{< img src="synthetics/browser_tests/upload_file_step.png" alt="Create an upload file step" style="width:70%;" >}}
+{{< img src="synthetics/browser_tests/upload_file_step.png" alt="업로드 파일 생성 단계" style="width:70%;" >}}
 
 ## 수동으로 추가된 단계
 
@@ -122,21 +122,21 @@ Datadog은 더 나은 정확도를 위해 위에 나열된 두 가지 어설션�
 
 자세한 내용은 [브라우저 테스트를 통한 이메일 검증][1]을 참조하세요.
 
-#### 커스텀 JavaScript로 UI 테스트
+#### 커스텀 자바스크립트로 UI 테스트
 
-이 어설션 단계를 생성하여 JavaScript 코드를 사용하여 활성 페이지에서 커스텀 어설션을 테스트합니다. JavaScript 어설션은 동기 및 비동기 코드를 모두 지원합니다. 브라우저 테스트는 페이지에 스크립트를 추가하여 외부 JavaScript를 로드하므로 웹사이트에서 외부 JavaScript를 허용하는 경우에만 작동합니다.
+이 어설션 단계를 생성하여 자바스크립트 코드를 사용하여 활성 페이지에서 커스텀 어설션을 테스트합니다. 자바스크립트 어설션은 동기 및 비동기 코드를 모두 지원합니다. 브라우저 테스트는 페이지에 스크립트를 추가하여 외부 자바스크립트를 로드하므로 웹사이트에서 외부 자바스크립트를 허용하는 경우에만 작동합니다.
 
-JavaScript 어설션 함수는 다음 파라미터와 함께 제공되며 반환문이 필요합니다.
+자바스크립트 어설션 함수는 다음 파라미터와 함께 제공되며 반환문이 필요합니다.
 
 * `return`(필수) 문은 테스트 단계가 성공하기 위해 어설션이 충족해야 하는 조건을 반영합니다. 모든 유형이 반환될 수 있지만, 값은 자동으로 부울로 캐스팅됩니다.
 
-* `vars`(선택 사항): 브라우저 테스트의 [변수][2]를 포함하는 문자열입니다. JavaScript 스니펫에서 브라우저 테스트 변수를 참조하려면 `vars.<YOUR_VARIABLE>`를 사용하세요. 예를 들어, 브라우저 테스트에 `USERNAME` 변수가 포함된 경우 `vars.USERNAME`를 사용하여 JavaScript 스니펫에서 호출합니다.
+* `vars`(선택 사항): 브라우저 테스트의 [변수][2]를 포함하는 문자열입니다. 자바스크립트 스니펫에서 브라우저 테스트 변수를 참조하려면 `vars.<YOUR_VARIABLE>`를 사용하세요. 예를 들어, 브라우저 테스트에 `USERNAME` 변수가 포함된 경우 `vars.USERNAME`를 사용하여 자바스크립트 스니펫에서 호출합니다.
 
-* `element`  (선택 사항): 페이지의 요소 로케이터. 이를 설정하려면 **Select** 및 **Update** 대상 요소 버튼을 사용합니다. 선택한 요소는 Datadog 브라우저 테스트의 다중 배치 알고리즘을 자동으로 사용합니다.
+* `element`  (선택 사항): 페이지의 요소 로케이터. 이를 설정하려면 **선택** 및 **업데이트** 대상 요소 버튼을 사용합니다. 선택한 요소는 Datadog 브라우저 테스트의 다중 배치 알고리즘을 자동으로 사용합니다.
 
-{{< img src="synthetics/browser_tests/js_assertion.mp4" alt="Browser Test JavaScript Assertion" video="true" width="100%" >}}
+{{< img src="synthetics/browser_tests/js_assertion.mp4" alt="브라우저 테스트 자바스크립트 어서션" video="true" width="100%" >}}
 
-JavaScript 어설션은 활성 페이지의 컨텍스트에서 실행되므로, 이러한 단계에서는 활성 페이지에 정의된 모든 개체(예: 라이브러리, 내장 및 글로벌 변수)에 액세스할 수 있습니다. 외부 라이브러리를 로드하려면 promise를 사용하세요.
+자바스크립트 어설션은 활성 페이지의 컨텍스트에서 실행되므로, 이러한 단계에서는 활성 페이지에 정의된 모든 개체(예: 라이브러리, 내장 및 글로벌 변수)에 액세스할 수 있습니다. 외부 라이브러리를 로드하려면 promise를 사용하세요.
 
 예를 들면 다음과 같습니다.
 
@@ -184,33 +184,33 @@ return jQuery().jquery.startsWith('3.5.1')
 
 이 내비게이션 단계를 만들어 브라우저 테스트가 특정 페이지로 이동하도록 합니다. **Enter link URL** 상자에서 URL 앞에 `http` 또는 `https`를 추가해야 합니다.
 
-### 특별 조치
+### 특별 작업
 
-[Datadog 브라우저 테스트 레코더 확장 프로그램][3]을 사용하여 사용자 여정과 관련된 대부분의 단계를 기록하고 모니터링할 수 있습니다. 그러나 확장 프로그램은 **Hover**, **Press Key**, **Scroll** 및 **Wait**와 같은 일부 단계를 자동으로 기록하지 않습니다.
+[Datadog 브라우저 테스트 레코더 확장 프로그램][3]을 사용하여 사용자 여정과 관련된 대부분의 단계를 기록하고 모니터링할 수 있습니다. 그러나 확장 프로그램은 **커서 올리기(Hover)**, **키 누르기(Press Key)**, **스크롤(Scroll)** 및 **대기(Wait)**와 같은 일부 단계를 자동으로 기록하지 않습니다.
 
-**Special Actions**를 클릭하고 작업 유형을 선택하여 이 어설션 단계를 수동으로 생성합니다.
+**특별 작업**를 클릭하고 작업 유형을 선택하여 이 어설션 단계를 수동으로 생성합니다.
 
 #### 커서 올리기
 
 이 단계에서는 호버링 메커니즘이 아닌 전용 클릭을 사용하여, 기록 중에 사용자가 요소 위로 마우스를 가져갈 때마다 별도의 단계가 생성되지 않도록 합니다.
 
-**Hover**를 선택하고 요소를 클릭하여 단계를 추가합니다.
+**커서 올리기**를 선택하고 요소를 클릭하여 단계를 추가합니다.
 
 #### 키 누르기
 
-**Press Key** 단계를 추가하여 사용자가 키 입력을 입력하는 것을 시뮬레이션합니다. [Datadog 브라우저 테스트 레코더 확장 프로그램][3]은 다음 키를 기록할 수 있습니다:
+**키 누르기** 단계를 추가하여 사용자가 키 입력을 입력하는 것을 시뮬레이션합니다. [Datadog 브라우저 테스트 레코더 확장 프로그램][3]은 다음 키를 기록할 수 있습니다:
 
-* Enter
+* 입력
 * 화살표 (상, 하, 좌, 우)
-* Tab (양식 외)
-* Escape
-* Backspace
+* 탭(양식 외부)
+* 이스케이프
+* 백스페이스
 
-자동으로 기록되지 않는 키를 누르려면, **Value** 필드에 눌러야 하는 값을 지정합니다.
+자동으로 기록되지 않는 키를 누르려면, **값** 필드에 눌러야 하는 값을 지정합니다.
 
 `Alt`, `Control`, `Meta`, `Shift` 모디파이어를 선택하여 입력된 값에 추가합니다.
 
-{{< img src="synthetics/browser_tests/browser_test_press_key.png" alt="Press Key step in a browser test recording" style="width:50%;" >}}
+{{< img src="synthetics/browser_tests/browser_test_press_key.png" alt="브라우저 테스트 레코딩에서 키 누르기 단계" style="width:50%;" >}}
 
 #### 스크롤
 
@@ -228,15 +228,15 @@ return jQuery().jquery.startsWith('3.5.1')
 
 페이지 또는 페이지 요소를 로드하는 데 60초 이상 걸리는 경우, 단계의 [고급 옵션][2]에서 시간 제한을 사용자 지정하거나 최대값이 300초인 하드코딩된 대기 단계를 추가할 수 있습니다.
 
-{{< img src="synthetics/browser_tests/browser_test_wait_step.png" alt="Wait step in a browser test recording" style="width:50%;" >}}
+{{< img src="synthetics/browser_tests/browser_test_wait_step.png" alt="브라우저 테스트 레코딩에서 대기 단계" style="width:50%;" >}}
 
 이 추가 시간은 브라우저 테스트 기록의 **모든 실행**에 체계적으로 추가됩니다.
 
 ### 변수
 
-**Variables**를 클릭하고 드롭다운 메뉴에서 변수 생성 유형을 선택합니다.
+**변수**를 클릭하고 드롭다운 메뉴에서 변수 생성 유형을 선택합니다.
 
-{{< img src="synthetics/browser_tests/variables.png" alt="Browser Test Variables" style="width:60%;" >}}
+{{< img src="synthetics/browser_tests/variables.png" alt="브라우저 테스트 변수" style="width:60%;" >}}
 
 단계 내에서 변수를 사용하는 방법을 알아보려면 [변수 사용](#use-variables)을 참조하세요.
 
@@ -260,7 +260,7 @@ return jQuery().jquery.startsWith('3.5.1')
 : 테스트가 + 또는 - `n` 단위로 시작되는 UTC 타임스탬프에 해당하는 값으로 Datadog의 허용 단위 중 하나로 타임스탬프를 생성합니다.
 
 `{{ uuid }}`
-: 버전 4 UUID(Universally Unique Identifier)를 생성합니다.
+: 버전 4 범용 고유 식별자 (UUID)를 생성합니다.
 
 테스트 결과에서 로컬 변수 값을 명시하지 않으려면 **Hide and obfuscate variable value**를 선택합니다. 변수 문자열을 정의한 후 **Add Variable**를 클릭합니다.
 
@@ -268,24 +268,31 @@ return jQuery().jquery.startsWith('3.5.1')
 
 요소의 텍스트를 추출하여 `span` 또는 `div`과 같은 콘텐츠에서 변수를 생성합니다.
 
+#### 이메일 본문
+
+다음 방법 중 하나([`regex`][13] 또는 [`Xpath`][12])를 사용해 이메일 본문에서 변수를 생성합니다.
+
+* [`Regex`][13]는 이메일의 일반 텍스트 본문에서 첫 번째 일치 패턴을 검색하고 반환합니다(예: `/*./`). 패턴을 발견할 수 없는 경우 HTML 본문을 검색합니다.
+
+* [`Xpath`][12]는 이메일이 HTML 본문을 포함할 때만 적용 가능합니다. 해당하는 위치의 콘텐츠를 반환합니다(예: `$`).
 
 #### 자바스크립트(Javascript)
 
-JavaScript 단계는 동기 및 비동기 코드를 모두 지원합니다. 브라우저 테스트는 페이지에 스크립트를 추가하여 외부 JavaScript를 로드하기 때문에, 웹사이트가 외부 JavaScript를 허용하는 경우에만 작동합니다.
+자바스크립트 단계는 동기 및 비동기 코드를 모두 지원합니다. 브라우저 테스트는 페이지에 스크립트를 추가하여 외부 자바스크립트를 로드하기 때문에, 웹사이트가 외부 자바스크립트를 허용하는 경우에만 작동합니다.
 
-JavaScript 함수는 다음 파라미터와 함께 제공되며 반환문이 필요합니다.
+자바스크립트 함수는 다음 파라미터와 함께 제공되며 반환문이 필요합니다.
 
-* `return` (필수) 문은 JavaScript 변수와 연결하려는 값을 반환합니다. 이 문은 모든 유형을 반환할 수 있지만 자동으로 값을 문자열로 캐스팅합니다.
+* `return` (필수) 문은 자바스크립트 변수와 연결하려는 값을 반환합니다. 이 문은 모든 유형을 반환할 수 있지만 자동으로 값을 문자열로 캐스팅합니다.
 
-* `vars` (선택 사항): 코드 내에서 사용할 수 있는 브라우저 테스트의 [변수](#use-variables)를 포함하는 문자열입니다. JavaScript 스니펫에서 브라우저 테스트 변수를 참조하려면 `vars.<YOUR_VARIABLE>`를 사용하세요. 예를 들어 브라우저 테스트에 이미 `PRICE` 변수가 있는 경우, `vars.PRICE`를 사용하여 JavaScript 스니펫에서 호출합니다.
+* `vars` (선택 사항): 코드 내에서 사용할 수 있는 브라우저 테스트의 [변수](#use-variables)를 포함하는 문자열입니다. 자바스크립트 스니펫에서 브라우저 테스트 변수를 참조하려면 `vars.<YOUR_VARIABLE>`를 사용하세요. 예를 들어 브라우저 테스트에 이미 `PRICE` 변수가 있는 경우, `vars.PRICE`를 사용하여 자바스크립트 스니펫에서 호출합니다.
 
 * `element`  (선택 사항): 페이지의 요소 로케이터. 이를 설정하려면 **Select** 및 **Update** 대상 요소 버튼을 사용합니다. 선택한 요소는 Datadog 브라우저 테스트의 다중 배치 알고리즘을 자동으로 사용합니다.
 
-{{< img src="synthetics/browser_tests/js_variable.mp4" alt="Browser Test JavaScript Variable" video="true" width="100%" >}}
+{{< img src="synthetics/browser_tests/js_variable.mp4" alt="브라우저 테스트 자바스크립트 변수" video="true" width="100%" >}}
 
-JavaScript 어설션은 활성 페이지의 컨텍스트에서 실행되므로, 이러한 단계에서는 활성 페이지에 정의된 모든 개체(예: 라이브러리, 내장 및 글로벌 변수)에 액세스할 수 있습니다. 외부 라이브러리를 로드하려면 promise를 사용하세요.
+자바스크립트 어설션은 활성 페이지의 컨텍스트에서 실행되므로, 이러한 단계에서는 활성 페이지에 정의된 모든 개체(예: 라이브러리, 내장 및 글로벌 변수)에 액세스할 수 있습니다. 외부 라이브러리를 로드하려면 promise를 사용하세요.
 
-예를 들면 다음과 같습니다.
+예시:
 
 ```javascript
 const script = document.createElement('script');
@@ -355,16 +362,16 @@ HTTP 요청을 정의하려면:
    * **Request headers**: HTTP 요청에 추가할 헤더를 정의합니다. 기본 헤더(예: `user-agent` 헤더)를 재정의할 수도 있습니다.
    * **Cookies**: HTTP 요청에 추가할 쿠키를 정의합니다. `<COOKIE_NAME1>=<COOKIE_VALUE1>; <COOKIE_NAME2>=<COOKIE_VALUE2>` 형식을 사용하여 여러 쿠키를 설정합니다.
 
-   {{< /tabs >}}
+   {{% /tab %}}
 
    {{% tab "인증" %}}
 
    * **Client certificate**: 클라이언트 인증서 및 연결된 프라이빗 키를 업로드하여 mTLS를 통해 인증합니다.
    * **HTTP Basic Auth**: HTTP 기본 인증 자격 증명을 추가합니다.
-   * **Digest Auth**: 다이제스트 인증 자격 증명을 추가합니다.
-   * *NTLM**: NTLM 인증 자격 증명을 추가합니다. NTLMv2와 NTLMv1을 모두 지원합니다.
+   * **Digest Auth**: Digest 인증 자격 증명을 추가합니다.
+   * **NTLM**: NTLM 인증 자격 증명을 추가합니다. NTLMv2와 NTLMv1을 모두 지원합니다.
 
-   {{< /tabs >}}
+   {{% /tab %}}
 
    {{% tab "쿼리 파라미터" %}}
 
@@ -375,7 +382,7 @@ HTTP 요청을 정의하려면:
    {{% tab "요청 본문" %}}
 
    * **Body type**: HTTP 요청에 추가하려는 요청 본문 유형(`text/plain`, `application/json`,`text/xml` ,`text/html` ,`application/x-www-form-urlencoded`, `GraphQL` 또는 `None`)을 선택합니다.
-   * **Request body**: HTTP 요청 본문의 콘텐츠를 추가합니다. 요청 본문의 최대 크기는 50KB로 제한됩니다.
+   * **Request body**: HTTP 요청 본문의 내용을 추가합니다. 요청 본문의 최대 크기는 50KB로 제한됩니다.
 
    {{< /tabs >}}
 
@@ -384,7 +391,7 @@ HTTP 요청을 정의하려면:
    * **Proxy URL**: HTTP 요청이 통과해야 하는 프록시의 URL을 지정합니다(`http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>`).
    * **Proxy Header**: 프록시에 대한 HTTP 요청에 포함할 헤더를 추가합니다.
 
-   {{< /tabs >}}
+   {{% /tab %}}
 
    {{% tab "프라이버시" %}}
 
@@ -399,26 +406,26 @@ HTTP 요청을 정의하려면:
 
 {{< img src="synthetics/browser_tests/http_request2.png" alt="Make HTTP Request" style="width:80%;" >}}
 
-#### 어설션 추가하기
+#### 어설션 추가
 
 어설션은 예상되는 테스트 결과를 정의합니다. **Test URL**을 클릭하면 `status code`, `response time`, `header`, `content-type`에 있는 기본 어설션이 테스트 응답을 기반으로 추가됩니다. 어설션은 브라우저 테스트에서 HTTP 단계에 대한 선택 사항입니다.
 
-| 유형          | 연산자                                                                                               | 값의 유형                                                      |
+| 유형          | 연산자                                                                                               | 값 유형                                                      |
 |---------------|--------------------------------------------------------------------------------------------------------|----------------------------------------------------------------|
-| 본문          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][11], [`xpath`][12] | _String_ <br> _[Regex][13]_ <br> _String_, _[Regex][13]_ |
+| 본문          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][11], [`xpath`][12] | _문자열_ <br> _[정규식][13]_ <br> _문자열_, _[정규식][13]_ |
 | 헤더        | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`                       | _문자열_ <br>_[정규식][13]_                                      |
 | 응답 시간 | `is less than`                                                                                         | _정수 (ms)_                                                  |
 | 상태 코드   | `is`, `is not`                                                                                         | _정수_                                                      |
 
 HTTP 요청은 다음 `content-encoding` 헤더를 사용하여 본문의 압축을 풀 수 있습니다: `br`, `deflate`, `gzip` 및 `identity`.
 
-- 테스트에 응답 본문에 대한 어설션이 포함되어 있지 않으면, 본문 페이로드가 삭제되고 Synthetics Worker가 설정한 제한 시간 내에서 요청에 대한 관련 응답 시간을 반환합니다.
+- 테스트에 응답 본문에 대한 어설션이 포함되어 있지 않으면 본문 페이로드가 삭제되고 Synthetics Worker가 설정한 제한 시간 내에서 요청에 대한 관련 응답 시간을 반환합니다.
 
-- 테스트가 응답 본문에 어설션을 포함하고 시간 제한에 도달하면, `Assertions on the body/response cannot be run beyond this limit` 오류가 나타납니다.
+- 테스트에 응답 본문에 대한 어설션이 포함되어 있고 제한 시간에 도달하면, `Assertions on the body/response cannot be run beyond this limit` 오류가 나타납니다.
 
 {{< img src="synthetics/browser_tests/assertions.png" alt="Define assertions for your browser test to succeed or fail on" style="width:80%;" >}}
 
-**New Assertion**을 클릭하거나 응답 미리보기를 직접 클릭하여 단계당 최대 20개의 어설션을 생성할 수 있습니다.
+**New Assertion**을 클릭하거나 응답 미리보기를 클릭하여 단계당 최대 20개의 어설션을 생성할 수 있습니다.
 
 #### 응답에서 변수 추출
 
@@ -455,7 +462,7 @@ HTTP 요청은 다음 `content-encoding` 헤더를 사용하여 본문의 압축
 
 브라우저 테스트 단계 (예를 들면, 하위 테스트)에 따라 변수에 다른 값이 할당된 경우 변수는 처음 할당된 값을 체계적으로 사용합니다.
 
-HTTP 요청이나 JavaScript 단계의 변수와 같이 일부 변수는 런타임에만 계산됩니다. 예를 들어, `{{ <YOUR_VARIABLE_NAME> }}`이 포함된 `Type text` 단계가 있다고 가정해 보겠습니다. 테스트 실행 시 `{{ <YOUR_VARIABLE_NAME> }}`는 변수의 연관된 값으로 체계적으로 대체됩니다. 이러한 변수 중 하나를 사용하여 단계를 기록하려면 테스트를 저장하기 전에 실제 변수 값으로 단계를 기록하고 단계의 정의에서 실제 값을 `{{ <YOUR_VARIABLE_NAME> }}`로 대체합니다.
+HTTP 요청이나 자바스크립트 단계의 변수와 같이 일부 변수는 런타임에만 계산됩니다. 예를 들어, `{{ <YOUR_VARIABLE_NAME> }}`이 포함된 `Type text` 단계가 있다고 가정해 보겠습니다. 테스트 실행 시 `{{ <YOUR_VARIABLE_NAME> }}`는 변수의 연관된 값으로 체계적으로 대체됩니다. 이러한 변수 중 하나를 사용하여 단계를 기록하려면 테스트를 저장하기 전에 실제 변수 값으로 단계를 기록하고 단계의 정의에서 실제 값을 `{{ <YOUR_VARIABLE_NAME> }}`로 대체합니다.
 
 ## 참고 자료
 

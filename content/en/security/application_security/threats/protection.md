@@ -1,6 +1,5 @@
 ---
 title: Protection
-kind: documentation
 is_beta: true
 further_reading:
 - link: "/security/application_security/"

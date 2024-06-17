@@ -1,7 +1,7 @@
 The Sensitive Data Scanner processor scans logs to detect and redact or hash sensitive information such as PII, PCI, and custom sensitive data. You can pick from our library of predefined rules, or input custom Regex rules to scan for sensitive data.
 
 To set up the sensitive data scanner processor:
-1. Define a **filter query**. Only logs that match the specified [filter query](#filter-query-syntax) are scanned and processed.
+1. Define a **filter query**. Only logs that match the specified [filter query](#filter-query-syntax) are scanned and processed. All logs, regardless of whether they do or do not match the filter query, are sent to the next step in the pipeline.
 1. Click **Add Scanning Rule**.
 1. Name your scanning rule.
 1. In the **Select scanning rule type** field, select whether you want to create a rule from the library or create a custom rule.

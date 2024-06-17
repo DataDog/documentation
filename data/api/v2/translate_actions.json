@@ -23,6 +23,10 @@
     "request_description": "",
     "request_schema_description": "Request used to update an API key."
   },
+  "ListAPIs": {
+    "description": "List APIs and their IDs.",
+    "summary": "List APIs"
+  },
   "DeleteOpenAPI": {
     "description": "Delete a specific API by ID.",
     "summary": "Delete an API"
