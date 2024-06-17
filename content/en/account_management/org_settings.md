@@ -12,6 +12,8 @@ further_reading:
 ## Overview
 The Organization Settings section is available to [Administrators][1] by clicking **Organization Settings** from the account menu in the bottom of the left side navigation or by selecting **Organization Settings** from the header dropdown at the top of the Personal Settings page.
 
+{{< img src="account_management/org_settings/nav.png" alt="Navigate to your Organization Settings in Datadog" style="width:80%;" >}}
+
 Organization Settings allow you to manage users, groups, RBAC, keys, and tokens. This page outlines every section and where in the documentation you can learn about specific tasks in **Organization Settings**.
 
 ## Identity & Accounts

@@ -224,9 +224,11 @@ Custom attributes allow you to filter and group information about observed user 
 
 To set a custom global attribute, use `RUMMonitor.shared().addAttribute(forKey:value:)`.
 
-* To add an attribute, use `RUMMonitor.shared().addAttribute(forKey: "some key", value: "some value")`.
-* To update the value, use `RUMMonitor.shared().addAttribute(forKey: "some key", value: "some other value")`.
-* To remove the key, use `RUMMonitor.shared().removeAttribute(forKey: "some key")`.
+* To add an attribute, use `RUMMonitor.shared().addAttribute(forKey: "<KEY>", value: "<VALUE>")`.
+* To update the value, use `RUMMonitor.shared().addAttribute(forKey: "<KEY>", value: "<UPDATED_VALUE>")`.
+* To remove the key, use `RUMMonitor.shared().removeAttribute(forKey: "<KEY_TO_REMOVE>")`.
+
+**Note**: You can't create facets on custom attributes if you use spaces or special characters in your key names. For example, use `forKey: "store_id"` instead of `forKey: "Store ID"`.
 
 ### Track user sessions
 
@@ -603,20 +605,20 @@ To modify attributes of a RUM event before it is sent to Datadog or to drop an e
 ```swift
 let configuration = RUM.Configuration(
     applicationID: "<rum application id>",
-    viewEventMapper: { viewEvent in
-        return viewEvent
+    viewEventMapper: { RUMViewEvent in
+        return RUMViewEvent
     }
-    resourceEventMapper: { resourceEvent in
-        return resourceEvent
+    resourceEventMapper: { RUMResourceEvent in
+        return RUMResourceEvent
     }
-    actionEventMapper: { actionEvent in
-        return actionEvent
+    actionEventMapper: { RUMActionEvent in
+        return RUMActionEvent
     }
-    errorEventMapper: { errorEvent in
-        return errorEvent
+    errorEventMapper: { RUMErrorEvent in
+        return RUMErrorEvent
     }
-    longTaskEventMapper: { longTaskEvent in
-        return longTaskEvent
+    longTaskEventMapper: { RUMLongTaskEvent in
+        return RUMLongTaskEvent
     }
 )
 ```
@@ -625,24 +627,24 @@ let configuration = RUM.Configuration(
 ```objective-c
 DDRUMConfiguration *configuration = [[DDRUMConfiguration alloc] initWithApplicationID:@"<rum application id>"];
 
-[configuration setViewEventMapper:^DDRUMViewEvent * _Nonnull(DDRUMViewEvent * _Nonnull viewEvent) {
-    return viewEvent;
+[configuration setViewEventMapper:^DDRUMViewEvent * _Nonnull(DDRUMViewEvent * _Nonnull RUMViewEvent) {
+    return RUMViewEvent;
 }];
 
-[configuration setErrorEventMapper:^DDRUMErrorEvent * _Nullable(DDRUMErrorEvent * _Nonnull errorEvent) {
-    return errorEvent;
+[configuration setErrorEventMapper:^DDRUMErrorEvent * _Nullable(DDRUMErrorEvent * _Nonnull RUMErrorEvent) {
+    return RUMErrorEvent;
 }];
 
-[configuration setResourceEventMapper:^DDRUMResourceEvent * _Nullable(DDRUMResourceEvent * _Nonnull resourceEvent) {
-    return resourceEvent;
+[configuration setResourceEventMapper:^DDRUMResourceEvent * _Nullable(DDRUMResourceEvent * _Nonnull RUMResourceEvent) {
+    return RUMResourceEvent;
 }];
 
-[configuration setActionEventMapper:^DDRUMActionEvent * _Nullable(DDRUMActionEvent * _Nonnull actionEvent) {
-    return actionEvent;
+[configuration setActionEventMapper:^DDRUMActionEvent * _Nullable(DDRUMActionEvent * _Nonnull RUMActionEvent) {
+    return RUMActionEvent;
 }];
 
-[configuration setLongTaskEventMapper:^DDRUMLongTaskEvent * _Nullable(DDRUMLongTaskEvent * _Nonnull longTaskEvent) {
-    return longTaskEvent;
+[configuration setLongTaskEventMapper:^DDRUMLongTaskEvent * _Nullable(DDRUMLongTaskEvent * _Nonnull RUMLongTaskEvent) {
+    return RUMLongTaskEvent;
 }];
 ```
 {{% /tab %}}
@@ -657,10 +659,10 @@ For example, to redact sensitive information in a RUM Resource's `url`, implemen
 ```swift
 let configuration = RUM.Configuration(
     applicationID: "<rum application id>",
-    resourceEventMapper: { resourceEvent in
-        var resourceEvent = resourceEvent
-        resourceEvent.resource.url = redacted(resourceEvent.resource.url)
-        return resourceEvent
+    resourceEventMapper: { RUMResourceEvent in
+        var RUMResourceEvent = RUMResourceEvent
+        RUMResourceEvent.resource.url = redacted(RUMResourceEvent.resource.url)
+        return RUMResourceEvent
     }
 )
 ```
@@ -669,8 +671,8 @@ let configuration = RUM.Configuration(
 ```objective-c
 DDRUMConfiguration *configuration = [[DDRUMConfiguration alloc] initWithApplicationID:@"<rum application id>"];
 
-[configuration setResourceEventMapper:^DDRUMResourceEvent * _Nullable(DDRUMResourceEvent * _Nonnull resourceEvent) {
-    return resourceEvent;
+[configuration setResourceEventMapper:^DDRUMResourceEvent * _Nullable(DDRUMResourceEvent * _Nonnull RUMResourceEvent) {
+    return RUMResourceEvent;
 }];
 ```
 {{% /tab %}}
@@ -682,16 +684,16 @@ Depending on the event's type, only some specific properties can be modified:
 
 | Event Type       | Attribute key                     | Description                             |
 |------------------|-----------------------------------|-----------------------------------------|
-| RUMViewEvent     | `viewEvent.view.name`             | Name of the view.                        |
-|                  | `viewEvent.view.url`              | URL of the view.                         |
-| RUMActionEvent   | `actionEvent.action.target?.name` | Name of the action.                      |
-|                  | `actionEvent.view.url`            | URL of the view linked to this action.   |
-| RUMErrorEvent    | `errorEvent.error.message`        | Error message.                           |
-|                  | `errorEvent.error.stack`          | Stacktrace of the error.                 |
-|                  | `errorEvent.error.resource?.url`  | URL of the resource the error refers to. |
-|                  | `errorEvent.view.url`             | URL of the view linked to this error.    |
-| RUMResourceEvent | `resourceEvent.resource.url`      | URL of the resource.                     |
-|                  | `resourceEvent.view.url`          | URL of the view linked to this resource. |
+| RUMViewEvent     | `RUMViewEvent.view.name`             | Name of the view.                        |
+|                  | `RUMViewEvent.view.url`              | URL of the view.                         |
+| RUMActionEvent   | `RUMActionEvent.action.target?.name` | Name of the action.                      |
+|                  | `RUMActionEvent.view.url`            | URL of the view linked to this action.   |
+| RUMErrorEvent    | `RUMErrorEvent.error.message`        | Error message.                           |
+|                  | `RUMErrorEvent.error.stack`          | Stacktrace of the error.                 |
+|                  | `RUMErrorEvent.error.resource?.url`  | URL of the resource the error refers to. |
+|                  | `RUMErrorEvent.view.url`             | URL of the view linked to this error.    |
+| RUMResourceEvent | `RUMResourceEvent.resource.url`      | URL of the resource.                     |
+|                  | `RUMResourceEvent.view.url`          | URL of the view linked to this resource. |
 
 ## Set tracking consent (GDPR compliance)
 

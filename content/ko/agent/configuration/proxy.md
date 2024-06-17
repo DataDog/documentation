@@ -52,7 +52,7 @@ Squid와 관련한 자세한 정보는 이 페이지에서 [Squid](#Squid) 섹�
 TCP 전송을 사용하는 경우 <a href="/agent/logs/proxy">로그용 TCP 프록시</a>를 참고하세요.
 </div>
 
-`https` 요청 모두에 HTTP 프록시 설정: 
+`https` 요청 모두에 HTTP 프록시 설정:
 
 ```yaml
 proxy:
@@ -273,7 +273,7 @@ Datadog에 연결되어 있는 호스트에 HAProxy를 설치해야 합니다. �
 
 ```conf
 # 기본 설정
-글로벌 
+글로벌
     log 127.0.0.1 local0
     maxconn 4096
     stats socket /tmp/haproxy
@@ -555,7 +555,7 @@ backend datadog-remote-configuration
     timeout connect 5s
 
 # 포트 3833에서 HAP Proxy 통계 보기를 선언
-# 이 페이지를 보는 데 자격 증명이 필요하지 않고 
+# 이 페이지를 보는 데 자격 증명이 필요하지 않고
 # 구성이 끝나면 전원을 끌 수 있습니다.
 listen stats
     bind *:3833
@@ -622,7 +622,7 @@ frontend logs_http_frontend
     option tcplog
     default_backend datadog-logs-http
 
-# use_tcp: true와 함께 로그를 보내는 경우
+# force_use_tcp: true와 함께 로그를 보내는 경우
 # frontend logs_frontend
 #    bind *:10514 ssl crt <PATH_TO_PROXY_CERTIFICATE_PEM>
 #    mode tcp

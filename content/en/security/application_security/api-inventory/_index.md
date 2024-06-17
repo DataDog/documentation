@@ -1,13 +1,10 @@
 ---
 title: API Security Inventory
-kind: documentation
 further_reading:
 - link: "https://www.datadoghq.com/blog/primary-risks-to-api-security/"
   tag: "Blog"
   text: "Mitigate the primary risks to API security"
 ---
-
-<div class="alert alert-info">API Security Inventory is in beta.</div>
 
 ## Overview
 

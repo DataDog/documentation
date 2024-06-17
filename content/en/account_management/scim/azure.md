@@ -7,7 +7,17 @@ algolia:
 
 See the following instructions to synchronize your Datadog users with Azure Active Directory using SCIM.
 
-For prerequisites, capabilities, and limitations, see [SCIM][1].
+For capabilities and limitations of this feature, see [SCIM][1].
+
+## Prerequisites
+
+SCIM in Datadog is an advanced feature included in the Enterprise plan.
+
+This documentation assumes your organization manages user identities using an identity provider.
+
+Datadog strongly recommends that you use a service account application key when configuring SCIM to avoid any disruption in access. For further details, see [using a service account with SCIM][2].
+
+When using SAML and SCIM together, Datadog strongly recommends disabling SAML just-in-time (JIT) provisioning to avoid discrepancies in access. Manage user provisioning through SCIM only.
 
 ## Add Datadog to the Azure AD application gallery
 
@@ -26,8 +36,8 @@ For prerequisites, capabilities, and limitations, see [SCIM][1].
 2. In the **Provisioning Mode** menu, select **Automatic**
 3. Open **Admin Credentials**
 4. Complete the **Admin Credentials** section as follows:
-    - **Tenant URL**: `https://app.datadoghq.com/api/v2/scim`
-    - **Secret Token**: Use a valid Datadog application key. You can create an application key on [your organization settings page][2]. To maintain continuous access to your data, use a [service account][3] application key.
+    - **Tenant URL**: `https://{{< region-param key="dd_full_site" >}}/api/v2/scim` **Note:** Use the appropriate subdomain for your site. To find your URL, see [Datadog sites][3].
+    - **Secret Token**: Use a valid Datadog application key. You can create an application key on [your organization settings page][4]. To maintain continuous access to your data, use a [service account][5] application key.
 
 {{< img src="/account_management/scim/admin-credentials.png" alt="Azure AD Admin Credentials configuration screen">}}
 
@@ -61,5 +71,7 @@ For prerequisites, capabilities, and limitations, see [SCIM][1].
 Group mapping is not supported.
 
 [1]: /account_management/scim/
-[2]: https://app.datadoghq.com/organization-settings/application-keys
-[3]: /account_management/org_settings/service_accounts
+[2]: /account_management/scim/#using-a-service-account-with-scim
+[3]: /getting_started/site
+[4]: https://app.datadoghq.com/organization-settings/application-keys
+[5]: /account_management/org_settings/service_accounts

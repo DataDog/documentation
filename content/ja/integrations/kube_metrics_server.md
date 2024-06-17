@@ -36,7 +36,7 @@ integration_id: kube-metrics-server
 integration_title: Kubernetes Metrics Server
 integration_version: 3.3.0
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: kube_metrics_server
 public_title: Kubernetes Metrics Server

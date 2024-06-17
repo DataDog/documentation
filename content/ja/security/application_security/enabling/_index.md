@@ -24,7 +24,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/secure-serverless-applications-with-datadog-asm/
   tag: ブログ
   text: Datadog ASM でサーバーレスアプリケーションのセキュリティを強化する
-kind: documentation
 title: ASM の有効化
 type: multi-code-lang
 ---

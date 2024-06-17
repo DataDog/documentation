@@ -32,6 +32,9 @@ further_reading:
 - link: "https://kubernetes.github.io/ingress-nginx/user-guide/third-party-addons/opentelemetry/"
   tag: "External Site"
   text: "OpenTelemetry for Ingress-NGINX Controller"
+- link: "https://github.com/DataDog/httpd-datadog"
+  tag: "Source Code"
+  text: "Datadog Module for Apache HTTP Server"
 aliases:
 - /tracing/proxies/envoy
 - /tracing/envoy/
@@ -45,6 +48,7 @@ aliases:
 - /tracing/setup_overview/envoy/
 - /tracing/setup_overview/nginx/
 - /tracing/setup_overview/istio/
+- /tracing/setup_overview/httpd/
 - /tracing/setup_overview/proxy_setup/
 algolia:
   tags: ['proxies','tracing proxies','proxy']
@@ -298,16 +302,14 @@ Datadog APM supports NGINX in two configurations:
 Datadog provides an NGINX module for distributed tracing.
 
 ### Module installation
-There is one version of the Datadog NGINX module for each supported Docker
-image. Install the module by downloading the appropriate file from the
-[latest nginx-datadog GitHub release][1] and extracting it into NGINX's modules
-directory.
+To install the Datadog NGINX module, follow these instructions:
+1. Download the appropriate version from the [latest nginx-datadog GitHub release][1]
+2. Choose the tarball corresponding to the specific NGINX version and CPU architecture.
 
-For example, the module compatible with the Docker image
-[nginx:1.23.2-alpine][2] is included in each release as the file
-`nginx_1.23.2-alpine-amd64-ngx_http_datadog_module.so.tgz`. The module compatible with
-the Docker image [amazonlinux:2.0.20230119.1][3] is included in each release as the file
-`amazonlinux_2.0.20230119.1-amd64-ngx_http_datadog_module.so.tgz`.
+Each release includes two tarballs per combination of NGINX version and CPU architecture.
+The main tarball contains a single file, `ngx_http_datadog_module.so`, which is the Datadog NGINX module. The second one is debug symbols, it is optional.
+
+For simplicity, the following script downloads only the module for the latest release:
 
 ```bash
 get_latest_release() {
@@ -341,15 +343,14 @@ if [ -z "$ARCH" ]; then
     exit 1
 fi
 
-BASE_IMAGE=nginx:1.23.2-alpine
-BASE_IMAGE_WITHOUT_COLONS=$(echo "$BASE_IMAGE" | tr ':' '_')
+NGINX_VERSION="1.26.0"
 RELEASE_TAG=$(get_latest_release DataDog/nginx-datadog)
-tarball="$BASE_IMAGE_WITHOUT_COLONS-$ARCH-ngx_http_datadog_module.so.tgz"
-wget "https://github.com/DataDog/nginx-datadog/releases/download/$RELEASE_TAG/$tarball"
-tar -xzf "$tarball" -C /usr/lib/nginx/modules
-rm "$tarball"
-ls -l /usr/lib/nginx/modules/ngx_http_datadog_module.so
+TARBALL="ngx_http_datadog_module-${ARCH}-${NGINX_VERSION}.so.tgz"
+
+curl -Lo ${TARBALL} "https://github.com/DataDog/nginx-datadog/releases/download/${RELEASE_TAG}/${TARBALL}"
 ```
+
+Extract the `ngx_http_datadog_module.so` file from the downloaded tarball using `tar` and place it in the NGINX modules directory, typically locaated at `/usr/lib/nginx/modules`.
 
 ### NGINX configuration with Datadog module
 In the topmost section of the NGINX configuration, load the Datadog module.
@@ -660,6 +661,69 @@ More configuration options can be found on the [kong-plugin-ddtrace][3] plugin d
 [3]: https://github.com/DataDog/kong-plugin-ddtrace#configuration
 
 {{% /tab %}}
+
+{{% tab "Apache HTTP Server" %}}
+
+Datadog provides an HTTPd [module][1] to enhance [Apache HTTP Server][2] and [IHS HTTP Server][3] capabilities with APM Tracing.
+
+### Compatibility
+
+Since IHS HTTP Server is essentially a wrapper of the Appache HTTP Server, the module can also be used with IHS without any modifications.
+
+### Installation
+
+<div class="alert alert-warning">
+  <strong>Note</strong>: Only Apache HTTP Server 2.4.x for x86_64 architecture is supported.
+</div>
+
+The module is provided as a shared library for dynamic loading by HTTPd. Each supported platform
+and architecture has its own artifact hosted on [httpd-datadog's repository][1].
+
+To install the module:
+
+1. Run the following script to download the latest version of the module:
+
+   ```bash
+   curl -s https://api.github.com/repos/DataDog/httpd-datadog/releases/latest \
+   | grep "mod_datadog-linux-x86_64.tar.gz" \
+   | cut -d : -f 2,3 \
+   | tr -d \" \
+   | wget -qi -
+   ```
+
+   When unpacking the tarball, the resulting file is `mod_datadog.so`, the shared library that must
+   be loaded by the server.
+
+1. Place the file in the directory where HTTPd searches for modules, typically `/usr/local/apache2/modules`.
+
+1. Load the module by adding the following line in the configuration file:
+
+   ```nginx
+   LoadModule datadog_module modules/mod_datadog.so
+   ```
+
+1. To enable the module, make sure to restart or reload HTTPd.
+
+### Configuration
+
+By default, all requests are traced and sent to the Datadog Agent.
+
+To change the module default behavior, use `Datadog*` directives described in the Datadog module's [API documentation][3].
+
+For example, the following configuration sets the service name to `my-service` and the sampling rate to 10%:
+
+```nginx
+LoadModule datadog_module modules/mod_datadog.so
+
+DatadogServiceName my-app
+DatadogSamplingRate 0.1
+```
+
+[1]: https://github.com/DataDog/httpd-datadog
+[2]: https://httpd.apache.org/
+[3]: https://github.com/DataDog/httpd-datadog/blob/main/doc/configuration.md
+{{% /tab %}}
+
 {{< /tabs >}}
 
 ## Further Reading

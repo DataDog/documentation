@@ -33,7 +33,7 @@ integration_id: unitq
 integration_title: unitQ
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: unitq
 public_title: unitQ

@@ -14,14 +14,6 @@ further_reading:
   text: "Learn about advanced options in mobile tests"
 ---
 
-{{< site-region region="us,us5,eu" >}}
-<div class="alert alert-warning">Mobile Application Testing is Generally Available for US1, US5, and EU sites.</div>
-{{< /site-region >}}
-
-{{< site-region region="us3,ap1" >}}
-<div class="alert alert-warning">Mobile Application Testing is not supported on this site.</div>
-{{< /site-region >}}
-
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">Mobile Application Testing is not supported on this site.</div>
 {{< /site-region >}}
@@ -124,6 +116,12 @@ Specify the number of pixels you want the mobile app test to scroll vertically a
 
 By default, the **Scroll** step scrolls through the entire page. If you need to scroll on a specific element (for example, a specific `<div>`), click **Starting Element** and select an element you want the mobile app test to scroll on.
 
+#### Scroll to element
+
+This action allows you to scroll to a specific element horizontally or vertically.
+
+{{< img src="mobile_app_testing/test_steps/scroll_to_element_2.mp4" alt="Recording a scroll to element in a mobile test" style="width:60%" video=true >}}
+
 #### Press back
 
 Interacting with the **Back** button below the mobile application records a step.
@@ -150,6 +148,13 @@ Add a name to the step and enter a deep link URI.
 
 {{< img src="mobile_app_testing/open_deep_link.png" alt="Recording an Open Deep Link step in a mobile test" style="width:60%" >}}
 
+#### Restart application
+
+This action allows you to restart your application.
+This action does not reinstall the application but instead closes and then launches the application again. 
+
+{{< img src="mobile_app_testing/test_steps/restart_application.mp4" alt="Recording how to restart your application" style="width:60%" video=true >}}
+
 For more information about additional configuration in test steps, see [Advanced Options for Mobile App Test Steps][4].
 
 ### Subtests
@@ -165,6 +170,16 @@ In order to override variables from subtests in parent tests, ensure the variabl
 For more information about advanced options for subtests, see [Advanced Options for Mobile App Test Steps][5].
 
 If it does not make sense for you to run your subtest independently, you can pause it. The test continues to be called as part of your parent test, and is not executed individually. For more information, see [Reusing Browser Test Journeys Across Your Test Suite][6].
+
+### Variables
+If your subtest contains variables, they are inherited by the test you import them into. 
+To override these variables, create a variable in your parent test with the name as the variables within your subtest. 
+
+#### Extract variable from element
+
+This action allows you to extract the value of an element and save it as a variable.
+
+{{< img src="mobile_app_testing/test_steps/extract_variable_from_element.mp4" alt="Recording how to extract a variable from an element on a mobile test" style="width:60%" video=true >}}
 
 ## Manage step order
 
