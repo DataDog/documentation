@@ -1,6 +1,5 @@
 ---
 title: How Application Security Management Works in Datadog
-kind: documentation
 aliases:
   - /security_platform/guide/how-appsec-works/
   - /security_platform/application_security/how-appsec-works/

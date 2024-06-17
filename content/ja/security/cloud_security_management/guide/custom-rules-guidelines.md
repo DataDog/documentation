@@ -6,7 +6,6 @@ further_reading:
 - link: /security/cloud_workload_security/agent_expressions
   tag: Documentation
   text: Agent 式の構文
-kind: ガイド
 title: カスタム CSM Threats ルールの記述のためのガイドライン
 ---
 

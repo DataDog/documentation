@@ -62,6 +62,26 @@ Enter the following information based on your selected logs destination.
 {{% observability_pipelines/destination_settings/sumo_logic %}}
 
 {{% /tab %}}
+{{% tab "Chronicle" %}}
+
+{{% observability_pipelines/destination_settings/chronicle %}}
+
+{{% /tab %}}
+{{% tab "Elasticsearch" %}}
+
+{{% observability_pipelines/destination_settings/elasticsearch %}}
+
+{{% /tab %}}
+{{% tab "OpenSearch" %}}
+
+{{% observability_pipelines/destination_settings/opensearch %}}
+
+{{% /tab %}}
+{{% tab "Amazon OpenSearch" %}}
+
+{{% observability_pipelines/destination_settings/amazon_opensearch %}}
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Set up processors
@@ -78,9 +98,19 @@ Enter the following information based on your selected logs destination.
 {{% observability_pipelines/processors/filter %}}
 
 {{% /tab %}}
+{{% tab "Edit fields" %}}
+
+{{% observability_pipelines/processors/remap %}}
+
+{{% /tab %}}
 {{% tab "Sample" %}}
 
 {{% observability_pipelines/processors/sample %}}
+
+{{% /tab %}}
+{{% tab "Grok Parser" %}}
+
+{{% observability_pipelines/processors/grok_parser %}}
 
 {{% /tab %}}
 {{% tab "Quota" %}}
@@ -88,19 +118,34 @@ Enter the following information based on your selected logs destination.
 {{% observability_pipelines/processors/quota %}}
 
 {{% /tab %}}
+{{% tab "Reduce" %}}
+
+{{% observability_pipelines/processors/reduce %}}
+
+{{% /tab %}}
 {{% tab "Dedupe" %}}
 
 {{% observability_pipelines/processors/dedupe %}}
 
 {{% /tab %}}
-{{% tab "Edit fields" %}}
-
-{{% observability_pipelines/processors/remap %}}
-
-{{% /tab %}}
 {{% tab "Sensitive Data Scanner" %}}
 
 {{% observability_pipelines/processors/sensitive_data_scanner %}}
+
+{{% /tab %}}
+{{% tab "Add hostname" %}}
+
+{{% observability_pipelines/processors/add_hostname %}}
+
+{{% /tab %}}
+{{% tab "Parse JSON" %}}
+
+{{% observability_pipelines/processors/parse_json %}}
+
+{{% /tab %}}
+{{% tab "Enrichment table" %}}
+
+{{% observability_pipelines/processors/enrichment_table %}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -123,6 +168,26 @@ Enter the following information based on your selected logs destination.
 {{% tab "Sumo Logic" %}}
 
 {{% observability_pipelines/destination_env_vars/sumo_logic %}}
+
+{{% /tab %}}
+{{% tab "Chronicle" %}}
+
+{{% observability_pipelines/destination_env_vars/chronicle %}}
+
+{{% /tab %}}
+{{% tab "Elasticsearch" %}}
+
+{{% observability_pipelines/destination_env_vars/elasticsearch %}}
+
+{{% /tab %}}
+{{% tab "OpenSearch" %}}
+
+{{% observability_pipelines/destination_env_vars/opensearch %}}
+
+{{% /tab %}}
+{{% tab "Amazon OpenSearch" %}}
+
+{{% observability_pipelines/destination_env_vars/amazon_opensearch %}}
 
 {{% /tab %}}
 {{< /tabs >}}

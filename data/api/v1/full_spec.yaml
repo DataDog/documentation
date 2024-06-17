@@ -13987,6 +13987,12 @@ components:
     SyntheticsAssertionJSONPathTargetTarget:
       description: Composed target for `validatesJSONPath` operator.
       properties:
+        elementsOperator:
+          description: The element from the list of results to assert on.  To choose
+            from the first element in the list `firstElementMatches`, every element
+            in the list `everyElementMatches`, at least one element in the list `atLeastOneElementMatches`
+            or the serialized value of the list `serializationMatches`.
+          type: string
         jsonPath:
           description: The JSON path to assert.
           type: string
@@ -21785,6 +21791,8 @@ components:
             apm_service_catalog_read: View service catalog and service definitions.
             apm_service_catalog_write: Add, modify, and delete service catalog definitions
               when those definitions are maintained by Datadog.
+            cases_read: View Cases.
+            cases_write: Create and update cases.
             ci_visibility_pipelines_write: Create CI Visibility pipeline spans using
               the API.
             ci_visibility_read: View CI Visibility.
