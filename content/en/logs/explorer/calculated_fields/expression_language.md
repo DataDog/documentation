@@ -1,11 +1,11 @@
 ---
-title: Expressions Language
+title: Expression Language
 kind: documentation
 disable_toc: false
 further_reading:
 - link: "/logs/explorer/calculated_fields/"
   tag: "Documentation"
-  text: "Using Calculate Fields"
+  text: "Calculated Fields"
 ---
 
 ## Overview
