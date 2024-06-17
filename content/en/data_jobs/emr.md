@@ -7,10 +7,6 @@ further_reading:
       text: 'Data Jobs Monitoring'
 ---
 
-{{< callout url="https://forms.gle/PZUoEgtBsH6qM62MA" >}}
-Data Jobs Monitoring is in private beta. Fill out this form to join the wait list.
-{{< /callout >}} 
-
 [Data Jobs Monitoring][9] gives visibility into the performance and reliability of Apache Spark applications on Amazon EMR.
 
 ## Setup
