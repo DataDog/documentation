@@ -11,8 +11,6 @@ DDSQL is in private beta.
 
 `AGGR` functions are functions that can be used in the `AGGR` statement and executed by the metrics query system. `AGGR` functions take one parameter, which can be either a string name of the metric being queried, or a subquery (for [multi-layer aggregation]).
 
-TODO: Include information about rollup and interpolate options.
-
 ## avg
 | Name | Description |
 |------|-------------|

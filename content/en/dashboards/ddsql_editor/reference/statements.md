@@ -7,16 +7,6 @@ kind: documentation
 DDSQL is in private beta.
 {{< /callout >}}
 
-## Aliases
-
-Aliases are substitute names for output expressions or `FROM` items. An alias is used for brevity or to eliminate ambiguity for self-joins (where the same table is scanned multiple times).
-
-{{< code-block lang="sql" >}}
-SELECT * FROM my_long_hosts_table_name as hosts
-{{< /code-block >}}
-
-When an alias is provided in a `FROM` item, it completely hides the actual name of the table or function. In the above example, the remainder of the DQLExpr must refer to `my_long_hosts_table_name` as `hosts`.
-
 ## SELECT
 
 `SELECT` retrieves rows from a table or view.
@@ -64,9 +54,15 @@ SELECT retrieves rows from zero or more tables. The general processing of SELECT
 
 The system may execute the query in any way that is guaranteed to produce the results specified by this order.
 
-### Window functions
+## Aliases
 
-TODO
+Aliases are substitute names for output expressions or `FROM` items. An alias is used for brevity or to eliminate ambiguity for self-joins (where the same table is scanned multiple times).
+
+{{< code-block lang="sql" >}}
+SELECT * FROM my_long_hosts_table_name as hosts
+{{< /code-block >}}
+
+When an alias is provided in a `FROM` item, it completely hides the actual name of the table or function. In the above example, the remainder of the DQLExpr must refer to `my_long_hosts_table_name` as `hosts`.
 
 ## AGGR
 
@@ -75,7 +71,7 @@ TODO
 <!-- QUERY: Should the syntax template below include INTERPOLATE? -->
 
 {{< code-block lang="text" >}}
-AGGR aggrExpression
+AGGR expression
 [ FROM metrics ]
 [ WHERE expression ]
 [ ROLLUP aggregator(value) ]
@@ -87,14 +83,8 @@ AGGR aggrExpression
   [ OFFSET expression] ]
 {{< /code-block >}}
 
-`aggrExpression`
-: TODO
-
 `aggregator`
-: TODO
-
-`expression`
-: TODO
+: An [`AGGR` function][2], such as `avg` or `max`.
 
 `ROLLUP`
 : A clause that lets you specify the time aggregator. Required if the aggregator is `sum`, `min`, `max`, `avg` or `count`. See the [`ROLLUP` documentation](#rollup).
@@ -382,3 +372,4 @@ The clauses `UNION`, `WITH`, and `EXPLAIN` work with both `SELECT` and `AGGR`.
 Statements that contain `UNION` and `WITH` (but not `EXPLAIN`) are themselves DQLEXPRs, meaning that they can be chained and nested.
 
 [1]: /dashboards/functions/interpolation/#fill
+[2]: /dashboards/ddsql_editor/reference/aggr_functions
