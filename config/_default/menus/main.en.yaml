@@ -4550,51 +4550,31 @@ menu:
       parent: csm_setup
       identifier: csm_setup_deployment_types
       weight: 100
-    - name: Compliance Scanning
-      url: security/cloud_security_management/setup/compliance_scanning
+    - name: Cloud Accounts
+      url: security/cloud_security_management/setup/cloud_accounts
       parent: csm_setup
-      identifier: csm_setup_compliance_scanning
+      identifier: csm_setup_cloud_accounts
       weight: 102
-    - name: Threat Detection
-      url: security/cloud_security_management/setup/threat_detection
+    - name: Agent
+      url: security/cloud_security_management/setup/agent
       parent: csm_setup
-      identifier: csm_setup_threat_detection
+      identifier: csm_setup_agent
       weight: 103
-    - name: Identity Risks (CIEM)
-      url: security/cloud_security_management/setup/identity_risks_ciem
-      parent: csm_setup
-      identifier: csm_setup_identity_risks_ciem
-      weight: 104
-    - name: Identity Risks (CIEM)
-      url: security/cloud_security_management/setup/identity_risks_ciem
-      parent: csm_setup
-      identifier: csm_setup_identity_risks_ciem
-      weight: 104
-    - name: Host Vulnerability Management
-      url: security/cloud_security_management/setup/host_vulnerability_management
-      parent: csm_setup
-      identifier: csm_setup_host_vulnerability_management
-      weight: 105
-    - name: Container Vulnerability Management
-      url: security/cloud_security_management/setup/container_vulnerability_management
-      parent: csm_setup
-      identifier: csm_setup_container_vulnerability_management
-      weight: 106
-    - name: Serverless
-      url: security/cloud_security_management/setup/serverless
-      parent: csm_setup
-      identifier: csm_setup_serverless
-      weight: 107
     - name: Agentless Scanning
       url: security/cloud_security_management/setup/agentless_scanning
       parent: csm_setup
       identifier: csm_setup_agentless_scanning
-      weight: 108
+      weight: 104
+    - name: Serverless
+      url: security/cloud_security_management/setup/serverless
+      parent: csm_setup
+      identifier: csm_setup_serverless
+      weight: 105
     - name: Source Code Integrations
       url: security/cloud_security_management/setup/source_code_integrations
       parent: csm_setup
       identifier: csm_setup_source_code_integrations
-      weight: 109
+      weight: 106
     - name: Threats
       url: security/threats/
       parent: csm
