@@ -31,7 +31,7 @@ Para crear un [monitor de alerta de cambios][2] en Datadog, utiliza la navegaci�
 
 ## Condiciones de evaluación
 
-Las siguientes son las diferentes opciones que necesitas configurar en un monitor de alerta de cambios.
+Las siguientes son las diferentes opciones que necesitas configurar en un monitor de alertas de cambios.
 
 {{< img src="/monitors/monitor_types/change-alert/configure_define_the_metrics.png" alt="Opciones de configuración del método de detección de alertas de cambios" style="width:100%;" >}}
 
@@ -66,7 +66,7 @@ Para obtener instrucciones detalladas sobre la sección **Configurar notificacio
 Para verificar los resultados de la evaluación de una alerta de cambios, vuelve a crear las consultas de métricas utilizando un notebook. 
 Toma este monitor de alerta de cambios con la siguiente configuración. 
 
-{{< img src="monitors/monitor_types/change-alert/example_monitor_config.png" alt="Página de creación de monitores con una alerta de cambio seleccionada para evaluar el cambio porcentual del promedio de la métrica system.load.1 durante los últimos 5 minutos, en comparación con los últimos 30 minutos" ="width:100%;" >}}
+{{< img src="monitors/monitor_types/change-alert/example_monitor_config.png" alt="Página de creación de monitores con la alerta de cambios seleccionada para evaluar el cambio porcentual del promedio de la métrica system.load.1 durante los últimos 5 minutos, en comparación con los últimos 30 minutos" ="width:100%;" >}}
 
 Consulta de monitor:
 ```pct_change(avg(last_5m),last_30m):<METRIC> > -50```
@@ -91,7 +91,7 @@ El siguiente es un desglose de la consulta con las siguientes condiciones:
     - Para comparar el gráfico del notebook con la evaluación del monitor de alerta de cambios, delimita tu intervalo de tiempo para que coincida con la alerta de cambios. 
     - Por ejemplo, si quieres verificar el valor de una evaluación de monitor durante los últimos 5 minutos en el momento 1:30, ajusta tu notebook con el lapso 1:25 - 1:30. 
 
-## Lectura adicional
+## Leer más
 
 {{< partial name="whats-next/whats-next.html" >}}
 
