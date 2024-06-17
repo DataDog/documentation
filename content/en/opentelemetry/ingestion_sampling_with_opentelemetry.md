@@ -116,6 +116,7 @@ To configure probabilistic sampling, do one of the following:
 
 - The probabilistic sampler will ignore the sampling priority of spans that are set at the tracing library level. As a result, probabilistic sampling is **incompatible with [head-based sampling][16]**. This means that head-based sampled traces might still be dropped by probabilistic sampling.
 - Spans not captured by the probabilistic sampler may still be captured by the Datadog Agent's [error and rare samplers][12].
+- For consistent sampling all tracers must support [128-bit trace IDs][17].
 
 ## Monitoring ingested volumes in Datadog
 
@@ -143,3 +144,4 @@ If the ingestion volume is higher than expected, consider adjusting your samplin
 [14]: /opentelemetry/guide/migration/
 [15]: /opentelemetry/interoperability/otlp_ingest_in_the_agent/?tab=host
 [16]: /tracing/trace_pipeline/ingestion_mechanisms#head-based-sampling
+[17]: /opentelemetry/interoperability/otel_api_tracing_interoperability/#128-bit-trace-ids
