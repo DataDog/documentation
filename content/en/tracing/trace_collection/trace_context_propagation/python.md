@@ -12,18 +12,7 @@ further_reading:
       text: 'Interoperability of OpenTelemetry API and Datadog instrumented traces'
 ---
 
-For a high-level overview of trace context propagation and the supported propagators, see [Trace Context Propagation][1].
-
-Trace context propagation has two operations:
-- _Extraction_ of an upstream trace context into the current trace
-- _Injection_ of the current trace into a downstream trace context
-
-By default, the Python tracing library _extracts_ both the Datadog and the W3C Trace Context formats (preferring Datadog if both are valid) and _injects_ both the Datadog and W3C Trace Context formats.
-
-## Configuration
-If you need to customize the trace context propagation configuration, there are several environment variables you can use.
-
-**Note:** When multiple extraction styles are enabled, the extraction attempt is done in the order those styles are configured using the first successful extracted value. If valid trace contexts are found later, they are terminated and appended as span links. Additionally, if the `tracecontext` style is enabled, W3C Tracestate is propagated if W3C Traceparent matches the extracted context.
+For a high-level overview of trace context propagation, see [Trace Context Propagation][1].
 
 ### Supported propagators
 
@@ -35,19 +24,30 @@ If you need to customize the trace context propagation configuration, there are 
 | B3 Multi          | `b3multi`           |
 | None              | `none`              |
 
-### DD_TRACE_PROPAGATION_STYLE_EXTRACT
-Specifies propagators (in a comma-separated list) to use for trace context extraction, taking the highest precedence over all other configurations for configuring the extraction propagators.
+## Configuration
+Trace context propagation has two operations:
+- _Extraction_ of an upstream trace context into the current trace
+- _Injection_ of the current trace into a downstream trace context
 
-### DD_TRACE_PROPAGATION_STYLE_INJECT
-Specifies propagators (in a comma-separated list) to use for trace context injection, taking the highest precedence over all other configurations for configuring the injection propagators.
+By default, the Python tracing library _extracts_ both the Datadog and the W3C Trace Context formats (preferring Datadog if both are valid) and _injects_ both the Datadog and W3C Trace Context formats. This is equivalent to setting `DD_TRACE_PROPAGATION_STYLE=datadog,tracecontext`.
 
-### DD_TRACE_PROPAGATION_STYLE
-Specifies propagators (in a comma-separated list) to use for both trace context extraction and injection. This may be overridden by the above configurations.
+If you need to customize the trace context propagation configuration, there are several environment variables you can use to configure the extraction and injection headers jointly or individually.
 
-**Default value:** `datadog,tracecontext`
+**Note:** When multiple extraction styles are enabled, the extraction attempt is done in the order those styles are configured using the first successful extracted value. If valid trace contexts are found later, they are terminated and appended as span links. Additionally, if the `tracecontext` style is enabled, W3C Tracestate is propagated if W3C Traceparent matches the extracted context.
 
 ### OTEL_PROPAGATORS
-Specifies propagators (in a comma-separated list) to use for both trace context extraction and injection. This configuration takes the lowest precedence.
+Specifies propagators (in a comma-separated list) to be used for both trace context extraction and injection. This configuration takes the lowest precedence and will be ignored if any other Datadog propagation environment variable is set.
+
+### DD_TRACE_PROPAGATION_STYLE_EXTRACT
+Specifies propagators (in a comma-separated list) to be used only for trace context extraction. This configuration takes the highest precedence over all other configurations for configuring the extraction propagators.
+
+### DD_TRACE_PROPAGATION_STYLE_INJECT
+Specifies propagators (in a comma-separated list) to be used only for trace context injection. This configuration takes the highest precedence over all other configurations for configuring the injection propagators.
+
+### DD_TRACE_PROPAGATION_STYLE
+Specifies propagators (in a comma-separated list) to be used for both trace context extraction and injection. This may be overridden by the above configurations.
+
+**Default value:** `datadog,tracecontext`
 
 ## Further Reading
 
