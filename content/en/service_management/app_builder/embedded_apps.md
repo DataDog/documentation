@@ -39,7 +39,7 @@ When you change the value of a template variable or time frame on the dashboard,
 
 ### Template variable examples
 
-To populated a select component with a list of all available template variables, add the following template expression to your select component's **Options** field:
+To populate a select component with a list of all available template variables, add the following template expression to your select component's **Options** field:
 
 {{< code-block lang="json" disable_copy="false">}}
 ${global?.dashboard?.templateVariables?.map(tvar => tvar.name )}
