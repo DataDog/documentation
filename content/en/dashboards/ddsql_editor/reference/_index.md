@@ -7,17 +7,23 @@ kind: documentation
 DDSQL is in private beta.
 {{< /callout >}}
 
+## Overview
+
+With DDSQL, you can use SQL syntax to query your infrastructure in Datadog. DDSQL implements several standard SQL functions, as well as a few functions for working with Datadog tags, metrics, and so on. For example, [the `AGGR` statement], which aggregates metrics data, is unique to DDSQL.
+
+DDSQL uses a [schema on read](#schema-on-read) approach to allow [queries against tags][1], not just structured data. Each query is executed within a [session](#sessions) that can be configured with environment variables.
+
 ## Supported SQL syntax
 
 SQL is broken into five different categories of statements. The table below indicates which categories are supported by DDSQL.
 
-| Category                           | Examples                                         | Support                                        |
-|------------------------------------|--------------------------------------------------|------------------------------------------------|
-| DQL (Data Query Language)          | `SELECT`, `AGGR` (DDSQL alternative to `SELECT`) | Supported                                      |
-| DML (Data Modification Language)   | `INSERT`, `UPDATE`, `DELETE`                     | Limited: Data is not persisted across sessions |
-| DDL (Data Description Language)    | `CREATE`                                         | Limited: Data is not persisted across sessions |
-| DCL (Data Control Language)        | `GRANT`, `REVOKE`                                | Not supported                                  |
-| TCL (Transaction Control Language) | `BEGIN`, `END`, `ROLLBACK`                       | Not supported                                  |
+| Category   | Examples    | Support      |
+|------------|-------------|--------------|
+| DQL (Data Query Language)   | `SELECT`, `AGGR` (DDSQL alternative to `SELECT`) | Supported    |
+| DML (Data Modification Language)  | `INSERT`, `UPDATE`, `DELETE`   | Limited: Data is not persisted across sessions |
+| DDL (Data Description Language)  | `CREATE`   | Limited: Data is not persisted across sessions |
+| DCL (Data Control Language)        | `GRANT`, `REVOKE`   | Not supported       |
+| TCL (Transaction Control Language) | `BEGIN`, `END`, `ROLLBACK`  | Not supported     |
 
 ## Usage details
 
@@ -39,7 +45,7 @@ DDSQL queries are executed within a session. The session provides the user with 
 SELECT 1; SELECT 2;
 {{< /code-block >}}
 
-Some options, such as time frame, are exposed runtime parameters within the environment and may be modified with `SET` and read with `SHOW`. Modifications made by SQL statements (for example, DDL or DML statements) are visible by subsequent statements in a session, but do not outlive the session. You can think of a session as executing within a `BEGIN ... ROLLBACK`.
+Some options, such as time frame, are exposed runtime parameters within the environment and may be modified with [`SET`] and read with [`SHOW`]. Modifications made by SQL statements (for example, DDL or DML statements) are visible by subsequent statements in a session, but do not outlive the session. You can think of a session as executing within a `BEGIN ... ROLLBACK`.
 
 The default schema in the session includes foreign table definitions that model different parts of the downstream data sources that DDSQL supports.
 
@@ -51,12 +57,4 @@ If a table supports schema on read, references to nonexistent table columns are 
 
 If a column reference cannot be unambiguously mapped to a single table, it is considered an ambiguous reference. Because schema-on-read columns don't exist in the catalog, they can typically only be used without specifying the correlation if there is exactly one table in the `FROM` clause that supports schema on read.
 
-## Aliases
-
-Aliases are substitute names for output expressions or `FROM` items. An alias is used for brevity or to eliminate ambiguity for self-joins (where the same table is scanned multiple times).
-
-{{< code-block lang="sql" >}}
-SELECT * FROM my_long_hosts_table_name as hosts
-{{< /code-block >}}
-
-When an alias is provided in a `FROM` item, it completely hides the actual name of the table or function. In the above example, the remainder of the DQLExpr must refer to `my_long_hosts_table_name` as `hosts`.
+[1]: /dashboards/ddsql_editor/reference/tags

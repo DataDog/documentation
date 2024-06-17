@@ -7,6 +7,16 @@ kind: documentation
 DDSQL is in private beta.
 {{< /callout >}}
 
+## Aliases
+
+Aliases are substitute names for output expressions or `FROM` items. An alias is used for brevity or to eliminate ambiguity for self-joins (where the same table is scanned multiple times).
+
+{{< code-block lang="sql" >}}
+SELECT * FROM my_long_hosts_table_name as hosts
+{{< /code-block >}}
+
+When an alias is provided in a `FROM` item, it completely hides the actual name of the table or function. In the above example, the remainder of the DQLExpr must refer to `my_long_hosts_table_name` as `hosts`.
+
 ## SELECT
 
 `SELECT` retrieves rows from a table or view.
