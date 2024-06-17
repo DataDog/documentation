@@ -29,7 +29,7 @@ With [Tag Pipelines][1], you can create tag rules to address missing or incorrec
 
 Before creating individual rules, create a ruleset (a folder for your rules) by clicking **+ New Ruleset**. 
 
-Within each ruleset, click **+ Add New Rule** and select **Add tag**, **Alias tag keys**, or **Map multiple tags**. These rules execute in a sequential, deterministic order from top to bottom. 
+Within each ruleset, click **+ Add New Rule** and select a rule type: **Add tag**, **Alias tag keys**, or **Map multiple tags**. These rules execute in a sequential, deterministic order from top to bottom. 
 
 {{< img src="cloud_cost/tags_order.png" alt="A list of tag rules on the Tag Pipelines page displaying various categories such as team, account, service, department, business unit, and more" style="width:80%;" >}}
 
