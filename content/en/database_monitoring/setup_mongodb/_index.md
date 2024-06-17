@@ -5,6 +5,10 @@ description: Setting up Database Monitoring on a MongoDB cluster
 disable_sidebar: true
 ---
 
+{{< beta-callout url="#" btn_hidden="true" >}}
+Database Monitoring for MongoDB is currently in private beta. If you are interested in participating, please reach out to your Datadog Customer Success Manager.
+{{< /beta-callout >}}
+
 ### MongoDB versions supported
 
 |             | Self-hosted | MongoDB Atlas |
