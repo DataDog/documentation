@@ -8,10 +8,6 @@ further_reading:
 
 ---
 
-{{< callout url="https://forms.gle/PZUoEgtBsH6qM62MA" >}}
-Data Jobs Monitoring is in private beta. Fill out this form to join the wait list.
-{{< /callout >}} 
-
 {{< img src="data_jobs/overview_062024.png" alt="Datadog Data Jobs Monitoring overview page" style="width:100%;" >}}
 
 Data Jobs Monitoring provides visibility into the performance and reliability of data processing jobs, including Apache Spark and Databricks jobs, along with the underlying infrastructure. Data Jobs Monitoring enables you to:
