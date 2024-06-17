@@ -50,7 +50,7 @@ From here, you can:
 
 In the example below, a pc75 evaluation means that the displayed value is at the 75th percentile of views in the selected filters. Pc75 is the typical percentile used to evaluate CWV for a given page.
 
-{{< img src="real_user_monitoring/browser/vitals_performance/vital-filter-and-evaluate.png" alt="Filter and evaluate your vitals for the selected view." style="width:100%;" >}}
+{{< img src="real_user_monitoring/browser/vitals_performance/vital-filter-and-evaluate-1.png" alt="Filter and evaluate your vitals for the selected view." style="width:100%;" >}}
 
 ## Visualize the user's experience
 
@@ -78,7 +78,7 @@ To see everything in context with the rest of the page activity, scroll down to 
 
 You can select another sample event using the dropdown in the top left, and expand any event in the waterfall by clicking it to see the side panel, as shown below.
 
-{{< img src="real_user_monitoring/browser/vitals_performance/vitals-view-event-samples.png" alt="View event samples to see everything in context with the rest of the page activity." style="width:100%;" >}}
+{{< img src="real_user_monitoring/browser/vitals_performance/vitals-view-event-samples-1.png" alt="View event samples to see everything in context with the rest of the page activity." style="width:100%;" >}}
 
 ## Further Reading
 
