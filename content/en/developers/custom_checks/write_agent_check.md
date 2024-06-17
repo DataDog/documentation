@@ -101,7 +101,7 @@ out, err, retcode = get_subprocess_output(["vgs", "-o", "vg_free"], self.log, ra
 
 When you run the command-line program, the check captures the same output as running on the command line in the terminal. Do string processing on the output and call `int()` or `float()` on the result to return a numerical type.
 
-If you do not do string processing on the output of the subprocess, or if it does not return an integer or a float, the check appears to run without errors but doesn't report any metrics or events. The check will also fail to return metrics or events if the agent user does not have the correct permissions on any files or directories referenced in the command. This can also happen when the agent user does not have the correct permissions to run the command passed as an argument to `get_subprocess_output()`. 
+If you do not do string processing on the output of the subprocess, or if it does not return an integer or a float, the check appears to run without errors but doesn't report any metrics or events. The check also fails to return metrics or events if the Agent user does not have the correct permissions on any files or directories referenced in the command, or the correct permissions to run the command passed as an argument to `get_subprocess_output()`. 
 
 Here is an example of a check that returns the results of a command-line program:
 
