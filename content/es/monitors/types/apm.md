@@ -72,7 +72,7 @@ Para obtener instrucciones detalladas sobre las opciones avanzadas de alerta (re
 [4]: /es/monitors/configuration/#advanced-alert-conditions
 [5]: /es/monitors/types/metric/#data-window
 {{% /tab %}}
-{{% tab "Trace Analytics" (Analytics de rastreo) %}}
+{{% tab "Trace Analytics" (Rastreo Analytics) %}}
 
 <div class="alert alert-info"><strong>Nota</strong>: Existe un límite predeterminado de 1000 monitores de rastreo Analytics por cada cuenta. Si estás por alcanzar este límite, considera la posibilidad de utilizar <a href="/monitors/configuration/?tab=thresholdalert#alert-grouping">alertas múltiples</a> o <a href="/help/">ponte en contacto con el servicio de asistencia</a>.</div>
 
@@ -82,12 +82,12 @@ Para obtener instrucciones detalladas sobre las opciones avanzadas de alerta (re
 2. Elige monitorizar en base a un recuento de trazas, una [faceta][4] o una [medida][5]:
     * **Monitorizar en base a un recuento de trazas**: utiliza la barra de búsqueda (opcional) y **no** selecciones una faceta o medida. Datadog evalúa el número de trazas en un marco temporal seleccionado y luego lo compara con las condiciones del umbral.
     * **Monitorizar en base a una faceta o medida**: si seleccionas una faceta, el monitor alerta sobre el `Unique value count` de la faceta. Si seleccionas una medida, es similar al monitor de métricas, y tienes que seleccionar una agregación (`min`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, `pc98`, `pc99` o `max`).
-3. Agrupar trazas (traces) por múltiples dimensiones (opcional):
+3. Agrupar trazas por múltiples dimensiones (opcional):
    Todas las trazas que coinciden con la consulta se agregan a grupos basados en el valor de hasta cuatro facetas.
 4. Configura la estrategia de agrupación de alertas (opcional):
     * **Alerta simple**: agrega alertas de todas las fuentes de información. Recibirás una alerta cuando el valor agregado cumple las condiciones establecidas.</br>
     Si la consulta tiene un `group by` y seleccionas el modo de alerta simple, obtendrás **una** alerta cuando los valores de uno o varios grupos superen el umbral. Esta estrategia puede seleccionarse para reducir el ruido de notificación.
-    * **Alerta múltiple**: las alertas múltiples aplican la alerta a cada fuente en función de tus parámetros de grupo. Se genera un evento de alerta para cada grupo que cumple las condiciones establecidas. Por ejemplo, puedes agrupar una consulta por `@resource.name` para recibir una alerta distinta por cada recurso, cuando la tasa de error de un tramo (span) es elevada.
+    * **Alerta múltiple**: las alertas múltiples aplican la alerta a cada fuente en función de tus parámetros de grupo. Se genera un evento de alerta para cada grupo que cumple las condiciones establecidas. Por ejemplo, puedes agrupar una consulta por `@resource.name` para recibir una alerta distinta por cada recurso, cuando la tasa de error de un tramo es elevada.
 
 {{< img src="monitors/monitor_types/apm/define-the-search-query.png" alt="Definir la consulta de la búsqueda" style="width:80%;" >}}
 
