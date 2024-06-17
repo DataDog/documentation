@@ -73,7 +73,7 @@ java \
 
 Autocomplete and search use a heuristic to filter out third-party code. If it does not provide the autocomplete suggestions you are expecting, it may be due to your code being recognized as third-party.
 
-If your code is accidentally recognized as third-party code or third-party code is accidentally recognized as user code, you can configure the third-party detection with these settings:
+To ensure that your code is properly recognized and to enable accurate autocomplete and search functionality, you can configure the third-party detection settings using the following options:
 
 ```
 export DD_THIRD_PARTY_EXCLUDES=<LIST_OF_USER_CODE_PACKAGE_PREFIXES>
