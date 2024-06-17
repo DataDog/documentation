@@ -16,7 +16,7 @@ This page provides a step-by-step overview on how to implement the OAuth protoco
 
 ## Implement the OAuth protocol
 
-1. Create and configure your OAuth client in the [Developer Platform][16]. 
+1. Within your Datadog Partner Sandbox Account, create and configure your OAuth client in the [Developer Platform][16].
 
 2. After a user installs your integration, they can click the **Connect Accounts** button to connect their account in the **Configure** tab of the integration tile. 
 

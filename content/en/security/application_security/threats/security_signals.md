@@ -1,6 +1,5 @@
 ---
 title: Investigate Security Signals
-kind: documentation
 further_reading:
   - link: "/security/default_rules/?category=cat-application-security#cat-application-security"
     tag: "Documentation"

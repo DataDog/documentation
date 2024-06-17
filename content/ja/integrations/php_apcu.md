@@ -35,7 +35,7 @@ integration_id: php-apcu
 integration_title: PHP APCu
 integration_version: 0.0.2
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: php_apcu
 public_title: PHP APCu

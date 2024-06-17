@@ -39,8 +39,8 @@ Each event type supports different data sources.
 {{< /whatsnext >}}
 
 ## Limitations
-
-Deployments or incidents of the same service cannot occur at the same second.
+- When you first select a data source option (such as APM Deployment Tracking or PagerDuty), DORA Metrics begins populating data from that point forward. If you switch from source A to source B, then back to source A, the historical data from source A is only available from the time it was first selected. 
+- Deployments or incidents of the same service cannot occur at the same second.
 
 ## Further Reading
 

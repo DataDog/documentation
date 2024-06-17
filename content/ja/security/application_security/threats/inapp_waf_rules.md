@@ -13,7 +13,6 @@ further_reading:
 - link: /security/application_security/troubleshooting
   tag: Documentation
   text: Datadog Application Security Management の一般的な問題のトラブルシューティング
-kind: documentation
 title: アプリ内 WAF ルール
 ---
 
@@ -21,13 +20,13 @@ title: アプリ内 WAF ルール
 
 Application Security Management (ASM) を有効にすると、Datadog のトレーシングライブラリは、すべての Web サービスや API リクエストを積極的に監視し、疑わしいセキュリティアクティビティがないかどうかを確認します。
 
-_アプリ内 WAF ルール_は、受信するリクエストの条件を指定し、ライブラリが何を疑わしいとみなすかを定義します。Datadog トレーシングライブラリは、何百ものすぐに使える ASM アプリ内 WAF ルールを含んでおり、それらはトレースエクスプローラーやデフォルトシグナルルールで疑わしいリクエストを表示するために使用されます。
+_アプリ内 WAF ルール_は、受信するリクエストの条件を指定し、ライブラリが何を疑わしいとみなすかを定義します。Datadog トレーシングライブラリは、何百ものすぐに使える ASM アプリ内 WAF ルールを含んでおり、それらはトレースエクスプローラーやデフォルトシグナルルールでセキュリティトレースを表示するために使用されます。
 
 トレーシングライブラリをアップグレードすることなく、アプリ内 WAF ルールに追加することができます。
 
 ## ASM アプリ内 WAF ルールの構造
 
-アプリ内 WAF ルールは、カテゴリー、名前、タグ、条件からなる JSON オブジェクトです。不審なリクエストを検出すると、ルールのタグが不審なリクエストに伝搬され、[検出ルール][1]を構築するのに利用されます。
+アプリ内 WAF ルールは、カテゴリー、名前、タグ、条件からなる JSON オブジェクトです。セキュリティトレースを検出すると、ルールのタグがセキュリティトレースに伝搬され、[検出ルール][1]を構築するのに利用されます。
 
 ### 条件
 条件は、ルールが受信リクエストにタグ付けするタイミングを定義します。条件は、_入力_と_演算子_で構成されます。
@@ -56,17 +55,26 @@ _アプリ内 WAF ルール_は、受信するリクエストの条件を指定�
 
 ## カスタムアプリ内 WAF ルール
 
-**注:** この機能はベータ版です。
+<div class="alert alert-info">カスタムアプリ内 WAF ルールはベータ版です。</div>
 
-カスタムアプリ内 WAF ルールにより、ユーザーはアプリケーションへの特定のタイプのリクエストを記録することができます。たとえば、カスタムルールを使用して、ログインの成功または失敗を監視することができます。開始するには、**Security** -> **Application Security** -> **Configuration** -> **In-App WAF** -> [**Custom Rules**][4] へ移動します。
+カスタムアプリ内 WAF ルールにより、ユーザーはアプリケーションへの特定のタイプのリクエストを記録したり、ブロックしたりすることができます。例えば、カスタムルールを使用して、ログインの成功または失敗を監視することができます。開始するには、**Security** -> **Application Security** -> **Protection** -> **In-App WAF** -> [**Custom Rules**][4] へ移動します。
 
-**注:** アプリ内 WAF のデフォルトのルールは読み取り専用です。アプリ内 WAF の動作を微調整するために、アプリ内 WAF のルールを変更する必要がある場合があります。デフォルトのルールを変更することはできませんが、デフォルトのルールの 1 つに基づいてカスタムルールを作成し、必要に応じて一致条件を変更することができます。同じリクエストを評価する 2 つの非常によく似たルールが存在することにならないように、デフォルトのルールは必ず無効にしてください。
+**注:** アプリ内 WAF のデフォルトのルールは読み取り専用です。アプリ内 WAF の動作を精緻化するには、アプリ内 WAF ルールを修正します。デフォルトのルールを変更することはできませんが、デフォルトのルールの 1 つに基づいてカスタムルールを作成し、必要に応じて一致条件を変更することができます。同じリクエストを評価する 2 つの似たルールが存在することにならないように、デフォルトのルールは必ず無効にしてください。
 
-## サービスに ASM アプリ内 WAF ルールを構成する
+## ASM アプリ内 WAF ルールの構成
 
-1. Datadog で、[ASM 構成のアプリ内 WAF ページ][2]に移動します。
+サービスのブロックは、ポリシールールで定義します。アプリ内 WAF には、*Datadog Recommended*、攻撃のみを監視する *Datadog Monitoring-only*、攻撃ツールをブロックし、その他のすべての攻撃を監視する *Datadog Block Attack tools* の 3 つの Datadog デフォルトポリシーが含まれています。
 
-2. **Download Configuration** をクリックすると、コンフィギュレーションファイル `appsec-rules.json` がローカルマシンにダウンロードされます。
+ポリシーを使用しているサービスは、ポリシー管理ページに直接表示されます。
+
+1. Datadog で、[Security > Application Security > Protection > In-App WAF][2] に移動します。
+
+   {{< img src="security/application_security/threats/waf/in-app-waf.png" alt="2 つのデフォルトポリシーを示すアプリ内 WAF 構成ページ。" style="width:100%;" >}}
+
+2. ポリシーの右側にある 3 つの点をクリックし、**Download Configuration of this Policy** を選択すると、コンフィギュレーションファイルがローカルマシンにダウンロードされます。
+3. オプションで、**Apply this Policy to Services** を選択すると、保護が有効な 1 つまたは複数の ASM サービスにデフォルトポリシーが適用されます。
+
+   **注:** ポリシーは 1 つ以上のサービスに適用できますが、1 つのサービスには 1 つの_ポリシー_しか含めることができません。
 
 3. 上記の仕様に従って、新しいルールの JSON 定義を含むようにファイルを更新します。例:
 
@@ -111,13 +119,13 @@ _アプリ内 WAF ルール_は、受信するリクエストの条件を指定�
 
 ## 次にやるべきこと
 
-次に、作成したアプリ内 WAF ルールで定義された疑わしいリクエストに基づいて、[セキュリティシグナルを生成するための検出ルールを構成][1]します。ASM の検出ルールは、すぐに利用可能なものを変更したり、新しいものを作成したりすることができます。
+次に、作成したアプリ内 WAF ルールで定義されたセキュリティトレースに基づいて、[セキュリティシグナルを生成するための検出ルールを構成][1]します。ASM の検出ルールは、すぐに利用可能なものを変更したり、新しいものを作成したりすることができます。
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/security/application_security/custom_rules/
-[2]: https://app.datadoghq.com/security/appsec/in-app-waf?group_by=NONE
+[2]: https://app.datadoghq.com/security/appsec/in-app-waf
 [3]: /ja/security/application_security/enabling/
-[4]: https://app.datadoghq.com/security/configuration/asm/in-app-waf?config_by=custom-rules
+[4]: https://app.datadoghq.com/security/appsec/in-app-waf?config_by=custom-rules

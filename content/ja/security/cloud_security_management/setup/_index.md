@@ -23,7 +23,6 @@ further_reading:
 - link: /security/cloud_security_management/setup/csm_cloud_workload_security
   tag: ドキュメント
   text: CSM Workload Security のセットアップ
-kind: ドキュメント
 title: Cloud Security Management の設定
 ---
 

@@ -62,6 +62,10 @@ Once you have set up your Datadog library for Intelligent Test Runner, configure
 
 {{< img src="continuous_integration/itr_overview.png" alt="Intelligent test runner enabled in test service settings in the CI section of Datadog." style="width:80%;">}}
 
+### Git executable
+
+For Intelligent Test Runner to work, [Git][6] needs to be available in the host running tests.
+
 ### Excluded branches
 
 Due to the [limitations](#out-of-the-box-configuration-limitations) described above, the default branch of your repository is automatically excluded from having Intelligent Test Runner enabled. Datadog recommends this configuration to ensure that all of your tests run prior to reaching production.
@@ -80,7 +84,7 @@ Tracked files are non-code files that can potentially impact your tests. Changes
 
 When you specify a set of tracked files, Intelligent Test Runner runs all tests if any of these files change.
 
-You may use the `*` and `**` wildcard characters to match multiple files or directories. For instance, `**/*.mdx` matches any `.mdx` file in the repository.
+All file paths are considered to be relative to the root of the repository. You may use the `*` and `**` wildcard characters to match multiple files or directories. For instance, `**/*.mdx` matches any `.mdx` file in the repository.
 
 {{< img src="continuous_integration/itr_configuration2.png" alt="Select branches to exclude and tracked files" style="width:80%;">}}
 
@@ -92,11 +96,11 @@ You can explore the time savings you get from Intelligent Test Runner by looking
 
 {{< img src="continuous_integration/itr_savings.png" alt="Intelligent test runner enabled in a test session showing its time savings." style="width:80%;">}}
 
-When Intelligent Test Runner is active and skipping tests, purple text displays the amount of time saved on each test session or on each commit. The duration bar also changes color to purple so you can identify which test sessions are using Intelligent Test Runner on the [Test Runs][6] page.
+When Intelligent Test Runner is active and skipping tests, purple text displays the amount of time saved on each test session or on each commit. The duration bar also changes color to purple so you can identify which test sessions are using Intelligent Test Runner on the [Test Runs][7] page.
 
 ## Explore adoption and global savings
 
-Track your organization's savings and adoption of Intelligent Test Runner through the out-of-the-box [Intelligent Test Runner dashboard][7]. The dashboard includes widgets to track your overall savings as well as a per-repository, per-committer, and per-service view of the data. View the dashboard to understand which parts of your organization are using and getting the most out of Intelligent Test Runner.
+Track your organization's savings and adoption of Intelligent Test Runner through the out-of-the-box [Intelligent Test Runner dashboard][8]. The dashboard includes widgets to track your overall savings as well as a per-repository, per-committer, and per-service view of the data. View the dashboard to understand which parts of your organization are using and getting the most out of Intelligent Test Runner.
 
 {{< img src="continuous_integration/itr_dashboard1.png" alt="Intelligent Test Runner dashboard" style="width:80%;">}}
 
@@ -113,5 +117,6 @@ The dashboard also tracks adoption of Intelligent Test Runner throughout your or
 [3]: /continuous_integration/intelligent_test_runner/setup
 [4]: /continuous_integration/tests/
 [5]: https://app.datadoghq.com/ci/settings/test-service
-[6]: https://app.datadoghq.com/ci/test-runs
-[7]: https://app.datadoghq.com/dash/integration/30941/ci-visibility-intelligent-test-runner
+[6]: https://git-scm.com/
+[7]: https://app.datadoghq.com/ci/test-runs
+[8]: https://app.datadoghq.com/dash/integration/30941/ci-visibility-intelligent-test-runner

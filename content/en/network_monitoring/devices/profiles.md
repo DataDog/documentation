@@ -12,9 +12,6 @@ further_reading:
   text: "Monitor SNMP with Datadog"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Network Device Monitoring is not supported for this site.</div>
-{{< /site-region >}}
 
 ## Overview
 
@@ -28,35 +25,37 @@ By default, all profiles in the Agent configuration directory are loaded. To cus
 
 ### sysOID mapped devices
 
-Profiles allow Network Device Monitoring to reuse metric definitions across several device types or instances. Profiles define metrics the same way as instances, either inline in the configuration file or in separate files. Each instance can only match a single profile. For example, you can define a profile in the `init_config` section:
+Profiles allow Network Device Monitoring to reuse metric definitions across several device types or instances. Profiles define which metrics to collect and how to transform them into Datadog metrics. Each profile is expected to monitor a class of similar devices from the same vendor. They are automatically used by the Datadog Agent by comparing the sysObjectIds of the network device with the ones defined in the profile file.
+
+The Datadog Agent provides out-of-the-box profiles in the `conf.d/snmp.d/default_profiles` directory. This directory is cleaned and reset upon Agent upgrades so do not save anything there. You can write your own custom profiles and extend existing ones by putting files in the `conf.d/snmp.d/profiles` directory.
+
+The following example profile is used on any network device whose `sysobjectid` either _is_ `1.3.6.1.4.1.232.9.4.10` or _starts with_ `1.3.6.1.4.1.232.9.4.2.`:
 
 ```yaml
-init_config:
-  profiles:
-    my-profile:
-      definition:
-        - MIB: IP-MIB
-          table: ipSystemStatsTable
-          symbols:
-            - ipSystemStatsInReceives
-          metric_tags:
-            - tag: ipversion
-          index: 1
-      sysobjectid: '1.3.6.1.4.1.8072.3.2.10'
+sysobjectid:
+ - 1.3.6.1.4.1.232.9.4.10
+ - 1.3.6.1.4.1.232.9.4.2.*
+
+metrics:
+  - MIB: CPQHLTH-MIB
+    symbol:
+      OID: 1.3.6.1.4.1.232.6.2.8.1.0
+      name: cpqHeSysUtilLifeTime
 ```
 
-Then either reference it explicitly by name, or use sysObjectID detection:
+
+
+If you need different metrics for network devices that share the same `sysobjectid`, you can write profiles without any `sysobjectid`, and configure the `profile` option in the SNMP configuration.
 
 ```yaml
 instances:
    - ip_address: 192.168.34.10
-     profile: my-profile
+     profile: my-profile1
    - ip_address: 192.168.34.11
-     # Don't need anything else here, the check will query the sysObjectID
-     # and use the profile if it matches.
+     profile: my-profile2
+   - ip_address: 192.168.34.13
+     # For this device, the Agent will fetch the sysObjectID of the device and use the closest match
 ```
-
-If necessary, additional metrics can be defined in the instances. These metrics are collected in addition to those in the profile.
 
 ### Metric definition by profile
 

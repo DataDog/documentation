@@ -11,25 +11,31 @@ LLM Observability is not available in the US1-FED site.
 
 Our quickstart docs make use of the LLM Observability SDK for Python. For detailed usage, see [the SDK documentation][1]. If your application is written in another language, you can create traces by calling the [API][8] instead.
 
+## Jupyter notebook quickstart
+
+To run examples from Jupyter notebooks, see the [LLM Observability Jupyter Notebooks repository][12].
+
+## Command-line quickstart
+
 Use the steps below to run a simple Python script that generates an LLM Observability trace.
 
-## Prerequisites
+### Prerequisites
 
 - LLM Observability requires a Datadog API key (see [the instructions for creating an API key][7]).
 - The example script below uses OpenAI, but you can modify it to use a different provider. To run the script as written, you need:
     - An OpenAI API key stored in your environment as `OPENAI_API_KEY`. To create one, see [Account Setup][4] and [Set up your API key][6] in the OpenAI documentation.
     - The OpenAI Python library installed. See [Setting up Python][5] in the OpenAI documentation for instructions.
 
-## 1. Install the SDK
+### 1. Install the SDK
 
-Install the following `ddtrace` package hash and `openai` package:
+Install the following `ddtrace` and `openai` packages:
 
 {{< code-block lang="shell" >}}
-pip install git+https://github.com/DataDog/dd-trace-py.git@main
+pip install ddtrace
 pip install openai
 {{< /code-block >}}
 
-## 2. Create the script
+### 2. Create the script
 
 The Python script below makes a single OpenAI call. Save it as `quickstart.py`.
 
@@ -48,19 +54,19 @@ completion = oai_client.chat.completions.create(
 )
 {{< /code-block >}}
 
-## 3. Run the script
+### 3. Run the script
 
 Run the Python script with the following shell command, sending a trace of the OpenAI call to Datadog:
 
 {{< code-block lang="shell" >}}
-DD_LLMOBS_ENABLED=1 DD_LLMOBS_APP_NAME=onboarding-quickstart \ 
-DD_API_KEY=<YOUR_DATADOG_API_KEY> DD_SITE=<YOUR_DATADOG_SITE> \ 
+DD_LLMOBS_ENABLED=1 DD_LLMOBS_ML_APP=onboarding-quickstart \
+DD_API_KEY=<YOUR_DATADOG_API_KEY> DD_SITE=<YOUR_DATADOG_SITE> \
 DD_LLMOBS_AGENTLESS_ENABLED=1 ddtrace-run python quickstart.py
 {{< /code-block >}}
 
 For details on the required environment variables, see [the SDK documentation][9].
 
-## 4. View the trace
+### 4. View the trace
 
 A trace of your LLM call should appear in [the Traces tab][3] of LLM Observability in Datadog.
 
@@ -79,5 +85,6 @@ If your application consists of more elaborate prompting or complex chains or wo
 [7]: /account_management/api-app-keys/#add-an-api-key-or-client-token
 [8]: /tracing/llm_observability/api
 [9]: /tracing/llm_observability/sdk/#command-line-setup
-[10]: /tracing/llm_observability/sdk/#llm-integrations
+[10]: /tracing/llm_observability/auto_instrumentation
 [11]: /tracing/llm_observability/trace_an_llm_application
+[12]: https://github.com/DataDog/llm-observability

@@ -22,12 +22,12 @@ This document walks you through the following steps:
 {{< tabs >}}
 {{% tab "Splunk HEC" %}}
 
-{{% observability_pipelines/prerequisites/splunk_hec %}}
+{{% observability_pipelines/prerequisites/splunk_hec_destination_only %}}
 
 {{% /tab %}}
 {{% tab "Sumo Logic" %}}
 
-{{% observability_pipelines/prerequisites/sumo_logic %}}
+{{% observability_pipelines/prerequisites/sumo_logic_destination_only %}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -96,6 +96,11 @@ Enter the following information based on your selected logs destination.
 {{% tab "Edit fields" %}}
 
 {{% observability_pipelines/processors/remap %}}
+
+{{% /tab %}}
+{{% tab "Sensitive Data Scanner" %}}
+
+{{% observability_pipelines/processors/sensitive_data_scanner %}}
 
 {{% /tab %}}
 {{< /tabs >}}
