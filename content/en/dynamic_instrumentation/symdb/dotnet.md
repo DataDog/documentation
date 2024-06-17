@@ -1,5 +1,5 @@
 ---
-title: Enable autocomplete and search for .NET
+title: Enable Autocomplete and Search for .NET
 kind: Documentation
 aliases:
     - /tracing/dynamic_instrumentation/enabling/dotnet/
@@ -8,10 +8,6 @@ private: false
 code_lang: dotnet
 type: multi-code-lang
 code_lang_weight: 30
-further_reading:
-    - link: 'agent'
-      tag: 'Documentation'
-      text: 'Getting Started with Datadog Agent'
 ---
 
 {{< beta-callout url="#" btn_hidden="true" >}}
@@ -29,7 +25,7 @@ Run your service with Dynamic Instrumentation enabled, and additionally enable a
 
 1. Set the `DD_SYMBOL_DATABASE_UPLOAD_ENABLED` environment variable to `true`.
 1. Specify the `DD_SERVICE` and `DD_VERSION` [Unified Service Tags][2] as environment variables.
-1. After starting your service with Dynamic Instrumentation with autocomplete and search enabled, you can use Dynamic Instrumentation's IDE-like features on the [APM > Dynamic Instrumentation page][3].
+1. After starting your service with Dynamic Instrumentation and autocomplete and search enabled, you can use Dynamic Instrumentation's IDE-like features on the [**APM** > **Dynamic Instrumentation**][3] page.
 
 ## Additional configuration
 

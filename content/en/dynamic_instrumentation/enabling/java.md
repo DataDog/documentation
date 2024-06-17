@@ -19,7 +19,7 @@ Dynamic Instrumentation is a feature of supporting Datadog tracing libraries. If
 ## Requirements
 
 - The Datadog Dynamic Instrumentation library is supported in JDK version 8 and above.
-- Recommended, [autocomplete and search (open beta)][7] is enabled.
+- For a better experience, Datadog recommends enabling [autocomplete and search (open beta)][7].
 
 ## Installation
 

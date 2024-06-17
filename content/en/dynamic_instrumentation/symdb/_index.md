@@ -1,5 +1,5 @@
 ---
-title: Autocomplete and search
+title: Autocomplete and Search
 kind: documentation
 is_beta: true
 private: false
@@ -19,9 +19,9 @@ Autocomplete and search are in public beta.
 
 ## Overview
 
-Autocomplete and search enhance the user experience of [Dynamic Instrumentation][1] by adding IDE-like features like class- and method search and autocomplete for [Dynamic Instrumentation expression language][5].
+Autocomplete and search enhance the user experience of [Dynamic Instrumentation][1] by adding IDE-like features like class and method search and autocomplete for [Dynamic Instrumentation Expression Language][5].
 
-To provide autocomplete and search we upload nonsensitive symbols and metadata from your application to Datadog. The uploaded data includes the names of classes, methods, arguments, fields, and local variables, along with related metadata, like line numbers.
+To provide autocomplete and search, nonsensitive symbols and metadata are uploaded from your application to Datadog. The uploaded data includes the names of classes, methods, arguments, fields, and local variables, along with related metadata, like line numbers.
 
 ## Getting started
 
