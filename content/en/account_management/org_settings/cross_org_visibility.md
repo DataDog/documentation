@@ -30,7 +30,7 @@ After you set up an organization connection, the exposed data still lives in the
 
 ### Scope
 
-Cross-organization visibility supports Metrics telemetry in private [Dashboard and Notebook widgets][2].
+Cross-organization visibility supports Metrics telemetry in [Dashboard and Notebook widgets][2].
 
 All types of metrics are supported, including [custom metrics][3], [trace metrics][4], and [metrics generated from logs][5].
 

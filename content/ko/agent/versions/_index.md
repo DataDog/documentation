@@ -5,7 +5,7 @@ further_reading:
   text: 에이전트 v7로 업그레이드
 - link: agent/versions/upgrade_to_agent_v6
   tag: 설명서
-  text: 에이전트 버전 6으로 업그레이드
+  text: 에이전트 v6로 업그레이드
 - link: agent/versions/upgrade_between_agent_minor_versions
   tag: 설명서
   text: 에이전트 마이너 버전 간 업그레이드
