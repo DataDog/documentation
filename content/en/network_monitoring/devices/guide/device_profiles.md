@@ -33,7 +33,9 @@ The minimum Agent version required is `7.50` or higher.
 
 The [profile home][4] page is where you can see a snapshot of the device profiles you created using the [Device Onboarding Experience](#build-a-device-profile). 
 
-**Need Screen shot**
+**Need updated screen shot** - This is a placeholder
+
+{{< img src="/network_device_monitoring/profile_onboarding/profile_home_page.png" alt="The Network Device profile home page" style="width:100%;">}}
 
 ### Profile details
 
@@ -100,14 +102,16 @@ The advanced options for scalar and tabular metrics are the same:
 [Extract Value][7]
 : This is the same as the [advanced options](#advanced-options) for global tags.
 
-### Applying Created Devices
+### Apply a profile to created devices
 
-After saving a profile, you can return to the main page and click `Download All Profiles` to get the device profile yamls for the profiles created 
-Place in the profile directory on each of the relevant agent (link)
-Agent restart 
-To validate created profiles
-check that matching devices are as expected, and that metrics are coming into the NDM product as expected for the matched devices 
+1. Once you've saved a profile, navigate back to the [profile home page][4] and select the **Download All Profiles** option. This allows you to download the `yaml` files for the profiles you've created. 
+2. Place the `yaml` files in the [profile directory][13] on each of the relevant installed Agent's.
+3. Restart the Datadog Agent.
+4. To ensure the profiles you've created are accurate, confirm that NDM is receiving metrics from the matched devices as expected.
 
+**Need updated screen shot** - This is a placeholder
+
+{{< img src="/network_device_monitoring/profile_onboarding/download_all_profiles.png" alt="The Network Device profile main page highlighting the Download All Profiles option" style="width:100%;">}}
 
 ## Further Reading
 
@@ -125,3 +129,4 @@ check that matching devices are as expected, and that metrics are coming into th
 [10]: https://datadoghq.dev/integrations-core/tutorials/snmp/profile-format/#using-a-column-from-a-different-table-with-different-indexes 
 [11]: https://datadoghq.dev/integrations-core/tutorials/snmp/profile-format/#forced-metric-types
 [12]: https://datadoghq.dev/integrations-core/tutorials/snmp/profile-format/#scale_factor
+[13]: https://github.com/DataDog/integrations-core/tree/master/snmp/datadog_checks/snmp/data/profiles
