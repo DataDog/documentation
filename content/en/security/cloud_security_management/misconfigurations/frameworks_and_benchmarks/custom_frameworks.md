@@ -14,31 +14,31 @@ further_reading:
   text: "Search and explore misconfigurations"
 ---
 
-This article provides step-by-step instructions for creating custom compliance frameworks.
+With custom frameworks, you can define and measure compliance against your own cloud security baseline. Custom frameworks are listed on the Cloud Security Management (CSM) [Compliance][6] page, have their own real-time report and [security posture score][7], and are queryable within explorers and dashboards.
 
 1. On the [CSM Compliance page][6], click **Create Framework**.
 1. Enter the following details:
     - **Framework name**: The name of your framework. Can include characters, numbers, and spaces. Must be at least five characters long.
-    - **Handle**: The tag name for the custom framework. Can include lowercase letters, numbers, dashes, underscores, and periods.
+    - **Handle**: The tag name for the custom framework. Can include lowercase letters, numbers, dashes, underscores, and periods. This value will be used for querying the framework in the explorer or dashboards.
     - **Version**: The version of the framework. Can include lowercase letters, numbers, dashes, underscores, and periods.
     - **Image URL**: A publicly accessible URL for an image that will be used to identify the framework.
 1. Click **Next Step: Create Your Framework**.
 
 Next, add requirements to the framework:
 
-<div class="alert alert-warning">You must add at least one requirement before you can save the custom framework.</div>
+<div class="alert alert-warning">You must add at least one requirement, control, and rule before you can save the custom framework.</div>
 
 1. Click **Add Requirement**.
 1. Enter the following details:
-    - **Requirement**: A requirement acts as a control family, enabling you to add controls and associate rules with each control.
-    - **Control**: A control represents the criteria that the requirement must meet and includes the rules associated with these criteria.
+    - **Requirement**: A requirement acts as a control family, enabling you to add controls and associate rules with each control. Can include lowercase letters, numbers, dashes, underscores, and periods.
+    - **Control**: A control represents the criteria that the requirement must meet and includes the rules associated with these criteria. Multiple rules can be included in a control. Can include lowercase letters, numbers, dashes, underscores, and periods.
 1. Click **Add Rules**.
 1. Select the cloud or infrastructure rules you want to assign to the control, then click **Add to Control**.
 1. To add additional items:
     - For additional rules, click **Add Rules**.
     - For another control, click **Add Control**.
     - For another requirement, click **Add Requirement**.
-1. Click **Save**.
+1. Click **Save**. Changes can take up to four hours to be reflected in the app.
 
 <div class="alert alert-info">To remove a rule from a control, hover over the rule and click <strong>Remove Rule</strong>.</div>
 
@@ -52,3 +52,4 @@ Next, add requirements to the framework:
 [4]: /api/latest/security-monitoring/#update-an-existing-rule
 [5]: https://app.datadoghq.com/security/configuration/compliance/rules
 [6]: https://app.datadoghq.com/security/compliance/home
+[7]: /glossary/#security-posture-score

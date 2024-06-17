@@ -17,7 +17,7 @@ further_reading:
   text: "Search and explore misconfigurations"
 ---
 
-CSM Misconfigurations comes with more than 1,000 out-of-the-box compliance rules that evaluate the configuration of your cloud resources and identify potential misconfigurations. Each [compliance rule][1] maps to one or more controls within a compliance standard or industry benchmarks. See [Supported Frameworks][2] for more information.
+CSM Misconfigurations comes with more than 1,000 out-of-the-box compliance rules that evaluate the configuration of your cloud resources and identify potential misconfigurations. Each [compliance rule][1] maps to one or more controls within a [compliance standard or industry benchmark][2]. You can also [create custom frameworks][30] to define and measure compliance against your own cloud security baseline.
 
 ## View your compliance posture
 
@@ -64,3 +64,4 @@ Select a rule to view details about the misconfigured resources, the rule descri
 [27]: https://app.datadoghq.com/security/compliance
 [28]: /dashboards/template_variables/
 [29]: /api/latest/security-monitoring/#update-an-existing-rule
+[30]: /security/cloud_security_management/misconfigurations/frameworks_and_benchmarks/custom_frameworks
