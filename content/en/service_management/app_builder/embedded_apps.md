@@ -89,7 +89,8 @@ ${new Date(global?.dashboard?.timeframe?.end).toLocaleString()}
 To add a button that sets the value of a date range picker component to the dashboard's time frame, perform the following steps:
 
 1. Add a date range picker component to your app and name it "dateRangePicker0".
-1. Add a button to your app. Under **Events**, fill in the following values:
+1. Add a button to your app.
+1. Under **Events**, fill in the following values:
     - **Event**: click
     - **Reaction**: Set Component State
     - **Component**: dateRangePicker0
