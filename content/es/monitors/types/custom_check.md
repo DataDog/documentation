@@ -19,7 +19,7 @@ title: Monitor de checks de servicios
 
 ## Información general
 
-Los monitores de checks de servicios incluyen cualquier check de servicio no informado por una de las [más de {{< translate key="integration_count" >}} integraciones][1] incluidas con el Agent. Los checks de servicios pueden enviarse a Datadog utilizando un [check del Agent personalizado][2], [DogStatsD][3], o la [API][4]. Para obtener más información, consulta [Información general en la sección Check de servicio][5].
+Los monitores de checks de servicios incluyen cualquier check de servicios no informado por una de las [más de {{< translate key="integration_count" >}} integraciones][1] incluidas con el Agent. Los checks de servicios pueden enviarse a Datadog utilizando un [check del Agent personalizado][2], [DogStatsD][3], o la [API][4]. Para obtener más información, consulta [Información general en la sección Check de servicios][5].
 
 ## Creación de un monitor
 
@@ -66,7 +66,7 @@ Configura la alerta de check:
 
 Una alerta de clúster calcula el porcentaje de checks con un estado determinado y lo compara con tus umbrales.
 
-Cada check etiquetado con una combinación distinta de etiquetas (tags) se considera un check distinto en el clúster. Sólo el estado del último check de cada combinación de etiquetas se tiene en cuenta en el cálculo de porcentaje del clúster.
+Cada check etiquetado con una combinación distinta de etiquetas se considera un check distinto en el clúster. Sólo el estado del último check de cada combinación de etiquetas se tiene en cuenta en el cálculo de porcentaje del clúster.
 
 {{< img src="monitors/monitor_types/process_check/cluster_check_thresholds.png" alt="Umbrales de checks de clúster" style="width:90%;">}}
 
