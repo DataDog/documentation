@@ -1,8 +1,15 @@
 ---
 further_reading:
+- link: /dashboards/widgets/powerpack
+  tag: Documentation
+  text: Widget Powerpack
 - link: https://docs.datadoghq.com/getting_started/dashboards/#add-widgets-and-refine-what-they-show
   tag: Documentation
   text: Ajouter des widgets et paramétrer les informations affichées
+- link: https://www.datadoghq.com/blog/standardize-dashboards-powerpacks-datadog/
+  tag: Blog
+  text: Enregistrez les widgets du dashboard dans des groupes réutilisables avec les
+    Powerpacks
 - link: https://docs.datadoghq.com/dashboards/guide/maintain-relevant-dashboards/
   tag: Guide
   text: Pratiques recommandées pour conserver des dashboards pertinents
@@ -19,7 +26,7 @@ Les powerpacks sont des groupes de widgets basés sur un modèle qui peuvent êt
 Les powerpacks peuvent être prédéfinis (créés par Datadog) ou personnalisés (créés par un utilisateur).
 
 - Les powerbacks prédéfinis offrent des vues prêtes à l'emploi pour les mécanismes de surveillance couramment utilisés, tels que les métriques de performance ou l'utilisation de fonctionnalités. Ils sont souvent liés à un produit ou une intégration spécifique (comme le powerpack `RUM Page Views`) et sont tenus à jour par Datadog.
-- Les powerpacks personnalisés peuvent être créés par tout utilisateur disposant des autorisations d'écriture sur les dashboards afin de permettre aux utilisateurs de partager et d'harmoniser les meilleures pratiques internes.
+- Toute personne disposant de droits d'écriture sur un dashboard peut créer des Powerpacks personnalisés afin de permettre aux utilisateurs de partager et normaliser les meilleures pratiques internes. Les mises à jour des Powerpacks personnalisés sont synchronisées avec toutes les instances de Powerpack, de sorte qu'il n'est pas nécessaire d'effectuer des mises à jour individuelles sur plusieurs dashboards.
 
 Ce guide aborde les meilleures pratiques relatives à la création et au partage de powerpacks personnalisés.
 
@@ -88,8 +95,17 @@ Chaque utilisateur d'un powerpack peut, s'il le souhaite, choisir d'enregistrer 
 
 {{< img src="dashboards/guide/powerpacks_best_practices/configure_variables.png" alt="Un écran affichant l'option de configuration des valeurs associées aux variables de tag ou d'attribut, avec des colonnes distinctes pour « Tag or Attribute », « Name », « Value » et « Use as Template Variable ». Cette dernière contient une case à cocher pour l'option « Add to dashboard ». La case « Add to dashboard » est cochée pour $Environment et décochée pour $Service." style="width:100%;" >}}
 
+### Mettre à jour un powerpack
+
+Les modifications apportées à un Powerpack personnalisé existant sont répercutées sur toutes les instances du même Powerpack. Cela peut simplifier le processus de mise à jour d'un contenu dupliqué sur plusieurs dashboards. Cliquez sur **Edit Powerpack Layout** pour modifier les instances synchronisées du Powerpack.
+
+### Autorisations
+Par défaut, les droits d'édition des Powerpacks sont réservés à l'auteur. Les droits d'édition peuvent être modifiés à tout moment via le menu déroulant de la barre d'outils du widget ou dans l'en-tête d'une instance de Powerpack.
+
 ### Relayer l'information
 
 Une fois votre powerpack créé, parlez-en aux membres votre organisation. Vous annoncerez ainsi l'existence de votre pack et pourrez répondre aux éventuelles questions suscitées. Partagez le nom de votre powerpack avec votre organisation via différents canaux de communication (par e-mail ou via une plateforme de messagerie, par exemple), indiquez à qui s'adresse le pack et précisez l'endroit où il peut être utilisé.
+
+## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
