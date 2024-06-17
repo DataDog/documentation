@@ -5611,11 +5611,26 @@ components:
           description: The name of the index.
           example: main
           type: string
-        num_retention_days:
-          description: 'The number of days before logs are deleted from this index.
-            Available values depend on
+        num_flex_logs_retention_days:
+          description: 'The number of days logs are kept in Flex Logs (inclusive of
+            Indexing) before they are deleted.
 
-            retention plans specified in your organization''s contract/subscriptions.'
+            The values available are 30, 60, 90, 180, 360, and 450 days.
+
+
+            **Note:**: If using Flex Starter, then only 180, 360, and 450 days options
+            are available.
+
+            Flex Logs must be enabled on the account to specify this value.'
+          example: 180
+          format: int64
+          type: integer
+        num_retention_days:
+          description: 'The number of days logs are kept in Standard Indexing before
+            they are either deleted or retained in Flex Logs.
+
+            Available values depend on retention plans specified in your organization''s
+            contract / subscriptions.'
           example: 15
           format: int64
           type: integer
@@ -5674,11 +5689,28 @@ components:
           type: array
         filter:
           $ref: '#/components/schemas/LogsFilter'
-        num_retention_days:
-          description: 'The number of days before logs are deleted from this index.
-            Available values depend on
+        num_flex_logs_retention_days:
+          description: 'The number of days logs are kept in Flex Logs (inclusive of
+            Indexing) before they are deleted.
 
-            retention plans specified in your organization''s contract/subscriptions.
+            The values available are 30, 60, 90, 180, 360, and 450 days.
+
+
+            **Note:** Changing the retention for an index adjusts the length of retention
+            for all Flex logs
+
+            already in this index. It may also affect billing.
+
+            If using Flex Starter, then only 180, 360, and 450 days options are available.'
+          example: 180
+          format: int64
+          type: integer
+        num_retention_days:
+          description: 'The number of days before logs are kept in Standard Indexing
+            before they are either deleted or retained in Flex Logs.
+
+            Available values depend on retention plans specified in your organization''s
+            contract / subscriptions.
 
 
             **Note:** Changing the retention for an index adjusts the length of retention
