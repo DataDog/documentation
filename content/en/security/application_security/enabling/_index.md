@@ -37,15 +37,15 @@ further_reading:
 Before setting up Application Security capabilities, ensure the following prerequisites are met:
 - **Datadog Agent installation:** The [Datadog Agent][5] is installed and configured for your application's operating system or container, cloud, or virtual environment.
 - **Datadog APM configuration:** [Datadog APM][6] is configured for your application or service, and traces are being received by Datadog.
-- **Supported tracing library:** The Datadog Tracing Library used by your application or service supports Software Composition Analysis capabilities for the language of your application or service. For more details, refer to the [Library Compatibility][7] page.
+- **Supported tracing library:** The Datadog Tracing Library used by your application or service supports Software Composition Analysis capabilities for the language of your application or service. For more details, see [Library Compatibility][7].
 
-## Application Security Enablement Types
+## Application Security enablement types
 
 There are two main approaches to enable Application Security on your applications: Single-Step Instrumentation or Datadog Tracing Library.
 
 ### Single-step instrumentation
 
-Run a one-line install command to install the Datadog Agent and enable Application Security capabilities with [Single Step Instrumentation (Beta)][3].
+Run a one-line installation command to install the Datadog Agent and enable Application Security capabilities with [Single Step Instrumentation (Beta)][3].
 
 ### Datadog tracing libraries
 
