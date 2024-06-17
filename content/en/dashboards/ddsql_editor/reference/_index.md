@@ -9,9 +9,11 @@ DDSQL is in private beta.
 
 ## Overview
 
-With DDSQL, you can use SQL syntax to query your infrastructure in Datadog. DDSQL implements several standard SQL functions, as well as a few functions for working with Datadog tags, metrics, and so on. For example, [the `AGGR` statement], which aggregates metrics data, is unique to DDSQL.
+With DDSQL, you can use SQL syntax to query your infrastructure in the [DDSQL Editor][2] in Datadog. 
 
-DDSQL uses a [schema on read](#schema-on-read) approach to allow [queries against tags][1], not just structured data. Each query is executed within a [session](#sessions) that can be configured with environment variables.
+DDSQL implements several standard SQL functions, as well as a few functions for working with Datadog tags, metrics, and so on. For example, [the `AGGR` statement], which aggregates metrics data, is unique to DDSQL.
+
+DDSQL uses a [schema on read](#schema-on-read) approach to allow queries against unstructured data, such as [tags][1]. Each query is executed within a [session](#sessions) that can be configured with environment variables.
 
 ## Supported SQL syntax
 
@@ -58,3 +60,4 @@ If a table supports schema on read, references to nonexistent table columns are 
 If a column reference cannot be unambiguously mapped to a single table, it is considered an ambiguous reference. Because schema-on-read columns don't exist in the catalog, they can typically only be used without specifying the correlation if there is exactly one table in the `FROM` clause that supports schema on read.
 
 [1]: /dashboards/ddsql_editor/reference/tags
+[2]: /dashboards/ddsql_editor

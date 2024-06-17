@@ -64,14 +64,26 @@ SELECT * FROM my_long_hosts_table_name as hosts
 
 When an alias is provided in a `FROM` item, it completely hides the actual name of the table or function. In the above example, the remainder of the DQLExpr must refer to `my_long_hosts_table_name` as `hosts`.
 
+## Ordinals
+
+`GROUP BY` and `ORDER BY` clause expressions can be column names, arbitrary expressions formed from input columns, or the name or ordinal number of an output expression (a `SELECT` expression). Output expression ordinals are 1-indexed.
+
+For example, the output of this query is ordered first by `ex1`, then `ex2`, and then `ex3`:
+
+{{< code-block lang="java" filename="block.java" disable_copy="true" collapsible="true" >}}
+SELECT ex1, ex2, ex3 FROM table ORDER BY 3, 2, 1;
+{{< /code-block >}}
+
 ## AGGR
 
 `AGGR` is a DDSQL statement type that operates on metrics data. Its primary goal is to make executing timeseries queries more natural, flexible, composable, and concise.
 
 <!-- QUERY: Should the syntax template below include INTERPOLATE? -->
 
+### Syntax
+
 {{< code-block lang="text" >}}
-AGGR expression
+AGGR aggrExpression
 [ FROM metrics ]
 [ WHERE expression ]
 [ ROLLUP aggregator(value) ]
@@ -82,6 +94,9 @@ AGGR expression
 [ LIMIT [ ALL | expression ]
   [ OFFSET expression] ]
 {{< /code-block >}}
+
+`aggrExpression`
+: An [`AGGR` function][2], such as `avg` or `max`.
 
 `aggregator`
 : An [`AGGR` function][2], such as `avg` or `max`.
@@ -207,14 +222,16 @@ For multi-layer aggregation to work, the inner query must return a table with th
 
 ## UNION
 
+`UNION` combines the results of two or more DQLExprs into a single output table.
+
+### Syntax
+
 {{< code-block lang="text" >}}
 DQLExpr UNION [ ALL ] DQLExpr ...
 [ ORDER BY expressions [ ASC | DESC ] ]
 [ LIMIT [ ALL | expression ]
   [ OFFSET expression] ]
 {{< /code-block >}}
-
-`UNION` combines the results of two or more DQLExprs into a single output table.
 
 The `UNION` operator removes duplicate rows from the result. To retain duplicate rows, use `UNION ALL`:
 
@@ -227,17 +244,17 @@ ORDER BY service LIMIT 200 OFFSET 10;
 
 All subqueries in a `UNION` must have the same output schema. A query containing `UNION` query can only have one `ORDER BY` and `LIMIT` expression, both of which must come at the end. Because of this, `UNION` can be used to combine other DQLExpr types, but not another `UNION`.
 
-<!-- QUERY: Any details on INTERSECT and EXCEPT? Omitting them for now since there's no information available for them in the draft. -->
-
 ## WITH
 
-`WITH` provides a way to write auxiliary statements for use in a larger query.
+`WITH` provides a way to write auxiliary statements for use in a larger query. 
+
+`WITH` statements, which are also often referred to as Common Table Expressions or CTEs, can be thought of as defining temporary tables that exist for one query. Each auxiliary statement in a `WITH` clause can be any DQLExpr, and the `WITH` clause itself is attached to a primary statement that can also be any non-`WITH` DQLExpr. Subsequent auxiliary statements may reference correlations aliased in previous auxiliary statements.
+
+### Syntax
 
 {{< code-block lang="sql" >}}
 WITH alias [ ( output, schema, column, names, ... ) ] AS ( DQLExpr ) [, ...] DQLExpr
 {{< /code-block >}}
-
-`WITH` statements, which are also often referred to as Common Table Expressions or CTEs, can be thought of as defining temporary tables that exist for one query. Each auxiliary statement in a `WITH` clause can be any DQLExpr, and the `WITH` clause itself is attached to a primary statement that can also be any non-`WITH` DQLExpr. Subsequent auxiliary statements may reference correlations aliased in previous auxiliary statements.
 
 DML statements like `INSERT`, `UPDATE`, and `DELETE` are not supported in `WITH`.
 
@@ -250,18 +267,21 @@ Each aliased query may also specify its output schema and column names.
 
 `EXPLAIN` shows the execution plan of a statement. This is useful for debugging queries, and analyzing their performance. Only DQL statements can be `EXPLAIN`ed.
 
-{{< code-block lang="sql" >}}
-EXPLAIN [ ANALYZE ] DQLExpr
-{{< /code-block >}}
-
 `EXPLAIN ANALYZE` executes the query, measures its performance, and returns the queries that were sent to external downstream sources. For example, a query `AGGR AVG('system.load.1')` would be translated to a metrics query `avg:system.load.1{*}`, which `EXPLAIN ANALYZE` would display for inspection.
 
 `EXPLAIN` and `EXPLAIN ANALYZE` are mostly intended for use by developers of DDSQL as diagnostic tools, but they can be useful for users who are running into unexpected behavior.
 
+### Syntax
+
+{{< code-block lang="sql" >}}
+EXPLAIN [ ANALYZE ] DQLExpr
+{{< /code-block >}}
 
 ## CREATE
 
 DDSQL allows users to create temporary tables, insert into them, and query & reference them. These tables are not persisted across sessions.
+
+### Syntax
 
 {{< code-block lang="sql" >}}
 CREATE TABLE name (
@@ -274,6 +294,8 @@ CREATE TABLE name (
 
 DDSQL's `INSERT` statement follows the SQL standard. DDSQL only allows users to insert into temporary tables that are created with the `CREATE` statement, not downstream data sources.
 
+### Syntax
+
 {{< code-block lang="sql" >}}
 INSERT INTO tableName [ (specific, columns, ...) ] VALUES 
   ( value1, value2, ... ),
@@ -281,12 +303,15 @@ INSERT INTO tableName [ (specific, columns, ...) ] VALUES
   ...
 {{< /code-block >}}
 
-
 ## SHOW
+
+<div class="alert alert-warning">While the <code>SHOW</code> statement is a part of the SQL standard, the runtime parameter names themselves are experimental. Parameters may be renamed, retyped, or deprecated in the future.</div>
 
 When running queries, DDSQL references runtime parameters (environmental variables) that are not specified in the query statement itself, such as the default interval to use for metrics queries if no `BUCKET BY` is specified, or the start and end timestamp for a query. 
 
-To display the values of these variables, use the `SHOW` statement:
+The `SHOW` statement displays the values of these variables.
+
+### Syntax
 
 {{< code-block lang="sql" >}}
 SHOW (ALL | parameter)
@@ -294,11 +319,11 @@ SHOW (ALL | parameter)
 
 `SHOW ALL` displays all available runtime parameters in the DDSQL system, and `SHOW <PARAMETER>` displays only the parameter specified.
 
-<div class="alert alert-warning">While the <code>SHOW</code> statement is a part of the SQL standard, the runtime parameter names themselves are experimental. Parameters may be renamed, retyped, or deprecated in the future.</div>
-
 ## SET
 
 To modify a runtime parameter, use the `SET` statement.
+
+### Syntax
 
 {{< code-block lang="sql" >}}
 SET variableName = expression
@@ -310,7 +335,7 @@ The `CASE` expression is a generic conditional expression, similar to if/else st
 
 ### Simple CASE statements
 
-Simple CASE statements are of the form:
+Simple CASE statements use the following syntax:
 
 {{< code-block lang="sql" >}}
 CASE expression
@@ -324,7 +349,7 @@ The expression is computed, then compared to each of the value expressions in th
 
 ### Searched CASE statements
 
-Searched CASE statements are of the form:
+Searched CASE statements use the following syntax:
 
 {{< code-block lang="sql" >}}
 CASE
@@ -336,10 +361,11 @@ END
 
 If a condition's result is true, the value of the `CASE` expression is the result that follows the condition, and the remainder of the `CASE` expression is not processed. If the condition's result is not true, any subsequent `WHEN` clauses are examined in the same manner. If no `WHEN` condition yields true, the value of the `CASE` expression is the result of the `ELSE` clause. If the `ELSE` clause is omitted and no condition is true, the result is `NULL`.
 
-
 ## CAST
 
 `CAST` specifies a conversion from one data type to another.
+
+### Syntax
 
 {{< code-block lang="sql" >}}
 CAST(expression AS type)
@@ -348,28 +374,6 @@ CAST(expression AS type)
 Not all types are convertible in this way.
 
 DDSQL also supports Postgres casting syntax: `<EXPRESSION>::<TYPE>` (for example, `SELECT 1::text;`).
-
-## Ordinals
-
-`GROUP BY` and `ORDER BY` clause expressions can be column names, arbitrary expressions formed from input columns, or the name or ordinal number of an output expression (a `SELECT` expression). Output expression ordinals are 1-indexed.
-
-For example, the output of this query is ordered first by `ex1`, then `ex2`, and then `ex3`:
-
-{{< code-block lang="java" filename="block.java" disable_copy="true" collapsible="true" >}}
-SELECT ex1, ex2, ex3 FROM table ORDER BY 3, 2, 1;
-{{< /code-block >}}
-
-<!-- QUERY: I didn't cover the JSON response format section, since it doesn't seem applicable here. -->
-
-## Differences between SQL and DDSQL
-
-### AGGR can be used instead of SELECT
-
-In SQL, `SELECT` is the only query verb, but DDSQL adds another: `AGGR`. Both verbs return tables and are usable interchangeably in many places.
-
-The clauses `UNION`, `WITH`, and `EXPLAIN` work with both `SELECT` and `AGGR`.
-
-Statements that contain `UNION` and `WITH` (but not `EXPLAIN`) are themselves DQLEXPRs, meaning that they can be chained and nested.
 
 [1]: /dashboards/functions/interpolation/#fill
 [2]: /dashboards/ddsql_editor/reference/aggr_functions
