@@ -1434,36 +1434,41 @@ menu:
       parent: monitor_types
       identifier: monitor_types_network_performance
       weight: 318
+    - name: NetFlow
+      url: monitors/types/netflow/
+      parent: monitor_types
+      identifier: monitor_types_netflow
+      weight: 319
     - name: Outlier
       url: monitors/types/outlier/
       parent: monitor_types
       identifier: monitor_types_outlier
-      weight: 319
+      weight: 320
     - name: Process Check
       url: monitors/types/process_check/
       parent: monitor_types
       identifier: monitor_types_process_check
-      weight: 320
+      weight: 321
     - name: Real User Monitoring
       url: monitors/types/real_user_monitoring/
       parent: monitor_types
       identifier: monitor_types_rum
-      weight: 321
+      weight: 322
     - name: Service Check
       url: monitors/types/service_check/
       parent: monitor_types
       identifier: monitor_types_service_check
-      weight: 322
+      weight: 323
     - name: SLO Alerts
       url: monitors/types/slo/
       parent: monitor_types
       identifier: monitor_types_slo
-      weight: 323
+      weight: 324
     - name: Watchdog
       url: monitors/types/watchdog/
       parent: monitor_types
       identifier: monitor_types_watchdog
-      weight: 324
+      weight: 325
     - name: Notifications
       url: monitors/notify/
       parent: alerting
@@ -2637,6 +2642,11 @@ menu:
       parent: ndm
       identifier: ndm_netflow
       weight: 303
+    - name: Monitors
+      url: monitors/types/netflow
+      parent: ndm_netflow
+      identifier: ndm_netflow_monitors
+      weight: 3031
     - name: Profiles
       url: network_monitoring/devices/profiles
       parent: ndm
