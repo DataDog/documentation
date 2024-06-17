@@ -29,7 +29,7 @@ Elige los monitores existentes para crear un monitor compuesto, por ejemplo: mon
 
 A efectos de configuración, un monitor compuesto es independiente de los monitores que lo componen. La política de notificación de un monitor compuesto puede modificarse sin que ello afecte a las políticas de los monitores que lo componen, y viceversa. Además, la eliminación de un monitor compuesto no elimina los monitores que lo componen. Un monitor compuesto no es dueño de otros monitores, sino que sólo utiliza sus resultados. Además, muchos monitores compuestos pueden hacer referencia al mismo monitor individual.
 
-**Notes**
+**Notas**
 
 - Los términos `individual monitors`, `constituent monitors` y `non-composite monitors` se refieren todos a monitores utilizados por un monitor compuesto para calcular su estado.
 - Los resultados compuestos requieren agrupaciones comunes. Si seleccionas monitores que no tienen agrupaciones comunes, es posible que los monitores seleccionados en la expresión no conduzcan a un resultado compuesto.
