@@ -218,7 +218,7 @@ In multilayer aggregation, the subquery is directly referenced in the aggregator
 AGGR sum(SELECT timeseries, group1, group2 FROM (...)) ...
 {{< /code-block >}}
 
-For multi-layer aggregation to work, the inner query must return a table with the schema in the pattern of an AGGR statement: the first column must be a timeseries, and the remaining columns must be groups or tags.
+For multilayer aggregation to work, the inner query must return a table with the schema in the pattern of an AGGR statement: the first column must be a timeseries, and the remaining columns must be groups or tags.
 
 ## UNION
 
