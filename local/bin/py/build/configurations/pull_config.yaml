@@ -564,6 +564,10 @@
           globs:
           - 'docs/cloud-workload-security/agent_expressions.md'
           - 'docs/cloud-workload-security/backend.md'
+          - 'docs/cloud-workload-security/backend_linux.md'
+          - 'docs/cloud-workload-security/backend_windows.md'
+          - 'docs/cloud-workload-security/linux_expressions.md'
+          - 'docs/cloud-workload-security/windows_expressions.md'
           options:
             dest_dir: '/security/threats/'
             path_to_remove: 'docs/cloud-workload-security/'
