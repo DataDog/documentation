@@ -1,30 +1,33 @@
 ---
-title: Widget Groupe
-kind: documentation
-description: Regroupez vos widgets dans un timeboard.
 aliases:
-  - /fr/graphing/widgets/group/
+- /fr/graphing/widgets/group/
+description: Regroupez vos widgets dans un widget de dashboard.
 further_reading:
-  - link: /dashboards/timeboards/
-    tag: Documentation
-    text: Timeboards
-  - link: /dashboards/graphing_json/
-    tag: Documentation
-    text: Créer des dashboards avec JSON
+- link: /dashboards/graphing_json/
+  tag: Documentation
+  text: Créer des dashboards avec JSON
+kind: documentation
+title: Widget Groupe
+widget_type: groupe
 ---
-Le widget Groupe vous permet de regrouper des graphiques semblables sur votre [timeboard][1]. Chaque groupe a un en-tête personnalisé, peut contenir entre un et de nombreux graphiques, et peut être réduit :
 
-{{< img src="dashboards/widgets/group/group.mp4" alt="Widget Groupe" video="true" >}}
+## Présentation
+<div class="alert alert-info">Les widgets screenboard ne peuvent pas être placés dans des groupes. </a></div>
+
+Le widget Groupe vous permet de regrouper des graphiques semblables sur votre dashboard. Chaque groupe a un en-tête personnalisé, peut contenir entre un et de nombreux graphiques, et peut être réduit. Utilisez des groupes pour organiser les widgets sur votre dashboard.
 
 ## Configuration
 
-Choisissez un nom pour votre groupe en utilisant l'icône en forme d'engrenage dans le coin supérieur droit de votre groupe.
+1. Ajouter plusieurs widgets à votre dashboard.
+2. Sélectionnez plusieurs widgets à l'aide de la fonction cliquer-glisser ou appuyez sur la touche Maj et cliquez.
+3. Cliquez sur l'option **Group**.
+  {{< img src="dashboards/widgets/group/widget-group-button.png" alt="Option de groupe qui sʼaffiche après avoir sélectionné plusieurs widgets" style="width:100%;" >}}
+4. Cliquez sur l'icône en forme de crayon en haut à droite de votre groupe pour choisir un nom et appliquer un style à votre groupe.
 
 ## API
+<div class="alert alert-info">Les widgets screenboard ne peuvent pas être placés dans des groupes. </a></div>
 
-Ce widget peut être utilisé avec l'**API Dashboards**. Consultez la [documentation à ce sujet][2] pour en savoir plus.
-
-Le [schéma JSON][3] utilisé pour le widget Groupe est le suivant :
+Ce widget peut être utilisé avec l'**[API Dashboards][2]**. Le tableau ci-dessous définit le [schéma JSON du widget][3] :
 
 {{< dashboards-widgets-api >}}
 
@@ -32,6 +35,6 @@ Le [schéma JSON][3] utilisé pour le widget Groupe est le suivant :
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/dashboards/timeboard/
-[2]: /fr/api/v1/dashboards/
+[1]: /fr/dashboards/#timeboards
+[2]: /fr/api/latest/dashboards/
 [3]: /fr/dashboards/graphing_json/widget_json/
