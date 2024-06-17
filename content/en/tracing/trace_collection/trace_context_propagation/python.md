@@ -14,6 +14,8 @@ further_reading:
 
 For a high-level overview of trace context propagation, see [Trace Context Propagation][1].
 
+By default, the Python tracing library reads and writes distributed tracing headers using both the **Datadog** format and the **W3C Trace Context** formats. If an incoming request has valid Datadog headers, then the trace context from those headers will take precedence and be used to continue the distributed trace.
+
 ## Supported propagators
 
 | Propagator        | Configuration Value |
@@ -26,20 +28,18 @@ For a high-level overview of trace context propagation, see [Trace Context Propa
 
 ## Configuration
 
-By default, the Python tracing library reads and writes distributed tracing headers using both the **Datadog** format and the **W3C Trace Context** formats. If an incoming request has valid Datadog headers, then the trace context from those headers will take precedence and be used to continue the distributed trace.
-
-### Recommended configuration
-
 If you need to customize the trace context propagation configuration, there are several environment variables you can use to configure the formats that are used for reading and writing distributed tracing headers. To disable trace context propagation, set the configuration to `none`.
 
 <div class="alert alert-info">
 If multiple propagators are enabled, the extraction attempt is done in the specified order, and the first valid trace context is used to continue the distributed trace. If additional valid trace contexts are found, the tracing information will be recorded as individual span links.</div>
 
+### Recommended configuration
+
 `OTEL_PROPAGATORS`
 : Specifies propagators (in a comma-separated list) to be used for trace context propagation. This configuration takes the lowest precedence and will be ignored if any other Datadog propagation environment variable is set.
 
 `DD_TRACE_PROPAGATION_STYLE`
-: Specifies propagators (in a comma-separated list) to be used for trace context propagation. This may be overridden by the above configurations. <br>
+: Specifies propagators (in a comma-separated list) to be used for trace context propagation. This may be overridden by the extract-specific or inject-specific configurations. <br>
 **Default:** `datadog,tracecontext`
 
 ### Advanced configuration

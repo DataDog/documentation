@@ -19,16 +19,14 @@ Trace Context propagation is the mechanism of passing tracing information like T
 
 ## Supported Propagators
 Datadog maintains several propagators for passing trace context information in different formats:
-- Datadog
-- [W3C Trace Context][2]
+- Datadog (enabled by default)
+- [W3C Trace Context][2] (enabled by default)
 - [B3 Single][3]
 - [B3 Multi][4]
 - [AWS X-Ray][5]*
   - Note: This is only supported in the Java tracing library
 
 ## Configuration
-By default, the Datadog tracing libraries propagate trace context information using both the Datadog format and the W3C Trace Context format.
-
 For more information about each language's configuration options for trace context propagation, see the following pages:
 
 {{< partial name="apm/apm-context-propagation" >}}
