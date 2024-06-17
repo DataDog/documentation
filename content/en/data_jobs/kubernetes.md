@@ -102,6 +102,7 @@ You can install the Datadog Agent using the [Datadog Operator][3] or [Helm][4].
        port: 8126
      tags:
        - 'data_workload_monitoring_trial:true'
+       - 'djm_config.enabled:true'
 
    clusterAgent:
      admissionController:
