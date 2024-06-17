@@ -33,7 +33,7 @@ Run your service with Dynamic Instrumentation enabled, and additionally enable a
 
 If autocomplete suggestions do not appear for your package or module, it may be incorrectly recognized as third-party code. The autocomplete and search features use a heuristic to filter out third-party code, which can sometimes lead to accidental misclassification.
 
-If your code is accidentally recognized as third-party code or third-party code is accidentally recognized as user code, you can configure the third-party detection with these settings:
+If your code is accidentally recognized as third-party code or third-party code is accidentally recognized as user code, you can configure the third-party detection with the following settings:
 
 ```
 export DD_THIRD_PARTY_DETECTION_EXCLUDES=<LIST_OF_USER_CODE_PACKAGE_PREFIXES>
