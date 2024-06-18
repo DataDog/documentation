@@ -106,7 +106,7 @@ LLMObs.enable(
 
 #### Application naming guidelines
 
-Your application name (the value of `DD_LLMOBS_ML_APP`) must be a lowercase unicode string. It may contain the characters listed below:
+Your application name (the value of `DD_LLMOBS_ML_APP`) must be a lowercase Unicode string. It may contain the characters listed below:
 
 - Alphanumerics
 - Underscores
