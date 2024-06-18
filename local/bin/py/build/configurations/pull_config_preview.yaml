@@ -561,7 +561,7 @@
             file_name: 'agent_config.yaml'
             output_content: false
         - action: pull-and-push-folder
-          branch: main
+          branch: yoanngh/docs-os-rule-filter
           globs:
           - 'docs/cloud-workload-security/agent_expressions.md'
           - 'docs/cloud-workload-security/backend.md'
