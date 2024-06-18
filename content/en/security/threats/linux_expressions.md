@@ -16,6 +16,17 @@ title: Linux Agent attributes and helpers
 ## Linux Agent attributes and helpers
 This documentation describes Linux attributes and helpers of the [Datadog's Security Language (SECL)][1].
 
+Rules using Linux attributes and helpers must include an OS rule filter field as follows.
+
+
+{{< code-block lang="yaml" >}}
+id: [...]
+expression: [...]
+filters:
+  - os == "linux"
+
+{{< /code-block >}}
+
 ## Triggers
 Triggers are events that correspond to types of activity seen by the system. The currently supported set of triggers is:
 
