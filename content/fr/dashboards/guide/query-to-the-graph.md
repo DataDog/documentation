@@ -1,6 +1,5 @@
 ---
 title: De la requête au graphique
-kind: documentation
 aliases:
   - /fr/dashboards/faq/query-to-the-graph
 ---

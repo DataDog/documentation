@@ -2,7 +2,6 @@
 aliases:
 - /fr/graphing/widgets/event_timeline/
 description: Affichez votre flux d'événements sous forme de chronologie dans un widget.
-kind: documentation
 private: true
 title: Widget Chronologie des événements
 ---

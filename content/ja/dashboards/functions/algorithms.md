@@ -5,7 +5,6 @@ algolia:
   - 異常グラフ
 aliases:
 - /ja/graphing/functions/algorithms/
-kind: documentation
 title: アルゴリズム
 ---
 

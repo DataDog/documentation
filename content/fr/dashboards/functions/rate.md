@@ -1,6 +1,5 @@
 ---
 title: Taux
-kind: documentation
 aliases:
   - /fr/graphing/functions/rate/
 ---
