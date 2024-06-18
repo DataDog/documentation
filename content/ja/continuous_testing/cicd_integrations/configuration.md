@@ -17,7 +17,6 @@ further_reading:
 - link: /continuous_testing/testing_tunnel
   tag: ドキュメント
   text: Continuous Testing Tunnel について
-kind: documentation
 title: Continuous Testing と CI/CD の構成
 ---
 <div class="alert alert-info">このページでは、継続的インテグレーション (CI) と継続的デリバリー (CD) のパイプラインの Continuous Testing テストの構成について説明します。CI のメトリクスやデータを Datadog のダッシュボードに取り込みたい場合は、<a href="https://docs.datadoghq.com/continuous_integration/" target="_blank">CI Visibility</a> のセクションを参照してください。</div>

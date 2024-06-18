@@ -18,7 +18,6 @@ further_reading:
 - link: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_test
   tag: 테라폼
   text: 테라폼으로 테스트 생성 및 관리
-kind: 설명서
 title: 연속 테스트 설정
 ---
 {{< jqmath-vanilla >}}
