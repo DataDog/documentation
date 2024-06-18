@@ -14,7 +14,7 @@ Database Monitoring provides deep visibility into your MongoDB databases by expo
 Do the following steps to enable Database Monitoring with your database:
 
 1. [Grant the Agent access to your MongoDB instances](#grant-the-agent-access-to-your-mongodb-instances)
-1. [Install and configure the Agent](#install-and-configure-the-agent)
+2. [Install and configure the Agent](#install-and-configure-the-agent)
 
 ## Before you begin
 
