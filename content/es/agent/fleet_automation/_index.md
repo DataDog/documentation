@@ -11,7 +11,6 @@ further_reading:
   tag: Blog
   text: Controla y gestiona de forma centralizada y remota Datadog Agents a escala
     con la automatización de flotas
-kind: documentación
 title: Automatización de flotas
 ---
 

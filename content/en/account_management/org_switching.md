@@ -1,6 +1,5 @@
 ---
 title: Switching Between Organizations
-kind: documentation
 further_reading:
 - link: "account_management/multi_organization/"
   tag: "Documentation"

@@ -1,7 +1,6 @@
 ---
 dependencies:
 - https://github.com/DataDog/chef-datadog/blob/main/README.md
-kind: ドキュメント
 title: Chef
 ---
 Datadog Chef レシピは Datadog のコンポーネントとコンフィギュレーションを自動的にデプロイするために使用します。クックブックは次のバージョンに対応しています。

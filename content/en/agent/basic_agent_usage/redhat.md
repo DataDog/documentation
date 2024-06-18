@@ -1,6 +1,5 @@
 ---
 title: Basic Agent Usage for Red Hat
-kind: documentation
 platform: Red Hat
 aliases:
     - /guides/basic_agent_usage/redhat/

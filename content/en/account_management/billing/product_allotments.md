@@ -1,6 +1,5 @@
 ---
 title: Product Allotments
-kind: documentation
 ---
 
 Allotments provide additional usage that comes with subscriptions to select parent products. They grant a certain amount of usage for a child product as part of the account's committed and on-demand usage of the parent product.

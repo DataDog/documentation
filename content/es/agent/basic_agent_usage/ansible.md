@@ -1,7 +1,6 @@
 ---
 dependencies:
 - https://github.com/ansible-collections/Datadog/blob/main/README.md
-kind: documentación
 title: Ansible
 ---
 ## Información general

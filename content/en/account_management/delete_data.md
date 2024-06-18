@@ -1,6 +1,5 @@
 ---
 title: Delete Data
-kind: documentation
 private: true
 ---
 
