@@ -39,7 +39,7 @@ Set up tracing in GitLab to collect data on your pipeline executions, analyze pe
 | [Parameters][17] | Parameters | Set custom `env` or `service` parameters when a pipeline is triggered. |
 | [Pipeline failure reasons][11] | Pipeline failure reasons | Identify pipeline failure reasons from [error messages][15]. |
 | [Approval wait time][23] | Approval wait time  | View the amount of time jobs and pipelines wait for manual approvals. |
-| [Execution time][24] | Execution time  | View the amount of time pipelines have been running jobs. [View an example here][24]. Gitlab refers to this as `duration` and it might have a different value since Gitlab does not take into consideration jobs that failed due to certain kinds of failures (such as runner system failures). |
+| [Execution time][24] | Execution time  | View the amount of time pipelines have been running jobs. Gitlab refers to this metric as `duration`. Duration in Gitlab and execution time may show different values. Gitlab does not take into consideration jobs that failed due to certain kinds of failures (such as runner system failures). |
 
 The following GitLab versions are supported:
 
