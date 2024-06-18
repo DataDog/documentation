@@ -20,7 +20,7 @@ Private Actions are in beta. Use this form to request access today.
 
 ## Overview
 
-Private actions allow your Datadog workflows and apps to interact with services hosted on your private network without exposing your services to the public internet. To use private actions, you must install a private action runner on a host in your network and pair the runner with a Datadog Connection.
+Private actions allow your Datadog workflows and apps to interact with services hosted on your private network without exposing your services to the public internet. To use private actions, you must use Docker to install a private action runner on a host in your network and pair the runner with a Datadog Connection.
 
 The following integrations support private actions:
 - [Kubernetes][1]
@@ -60,11 +60,13 @@ From the **Private Action Runner** page in [Workflow Automation][6] or [App Buil
 
 {{% tab "Docker Compose" %}}
 1. Click **Docker Compose**.
-1. Create a `docker-compose.yaml` file and add the provided YAML, or add the `runner` stanza to an existing Docker Compose file.
+1. Create a `docker-compose.yaml` file and add the provided YAML, or add the `runner` stanza to an existing Docker Compose file. For information on creating a Docker Compose file, see the [official Compose docs][101].
 1. Replace `./config` with the path to the directory you created for the runner configuration.
 1. Run `docker compose up -d`.
 
    You can safely ignore the error `DATADOG TRACER DIAGNOSTIC - Agent Error: connect ECONNREFUSED`.
+
+[101]: https://docs.docker.com/compose/compose-application-model/
 {{% /tab %}}
 {{< /tabs >}}
 {{% /collapse-content %}}
@@ -82,15 +84,18 @@ From the **Private Action Runner** page in [Workflow Automation][6] or [App Buil
 
    You can safely ignore the error `DATADOG TRACER DIAGNOSTIC - Agent Error: connect ECONNREFUSED`.
 
+
 {{% /tab %}}
 
 {{% tab "Docker Compose" %}}
 1. Click **Docker Compose**.
-1. Create a `docker-compose.yaml` file and add the provided YAML, or add the `runner` stanza to an existing Docker Compose file.
+1. Create a `docker-compose.yaml` file and add the provided YAML, or add the `runner` stanza to an existing Docker Compose file. For information on creating a Docker Compose file, see the [official Compose docs][101].
 1. Replace `./config` with the path to the directory you created for the runner configuration.
 1. Run `docker compose up -d`.
 
    You can safely ignore the error: `DATADOG TRACER DIAGNOSTIC - Agent Error: connect ECONNREFUSED`.
+
+[101]: https://docs.docker.com/compose/compose-application-model/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -111,11 +116,13 @@ From the **Private Action Runner** page in [Workflow Automation][6] or [App Buil
 
 {{% tab "Docker Compose" %}}
 1. Click **Docker Compose**.
-1. Create a `docker-compose.yaml` file and add the provided YAML, or add the `runner` stanza to an existing Docker Compose file.
+1. Create a `docker-compose.yaml` file and add the provided YAML, or add the `runner` stanza to an existing Docker Compose file. For information on creating a Docker Compose file, see the [official Compose docs][101].
 1. Replace `./config` with the path to the directory you created for the runner configuration.
 1. Run `docker compose up -d`.
 
    You can safely ignore the error `DATADOG TRACER DIAGNOSTIC - Agent Error: connect ECONNREFUSED`.
+
+[101]: https://docs.docker.com/compose/compose-application-model/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -134,7 +141,7 @@ Before you can use an action runner, you must pair it with one or more connectio
 To pair a runner to a connection:
 1. From the [Workflow Automation][8] or [App Builder][9] Connections page, click **New Connection**.
 1. Select the integration you want to connect with your private action runner. For a list of integrations that support private actions, see [Overview](#overview).
-1. Add a **Connection Name** and select the **Private Action Runner** from the dropdown.
+1. Add a **Connection Name** and select your runner from the **Private Action Runner** dropdown.
 1. Add the paths to any required credential files. For more information, see [Handling Private Action Credentials][10].
 
 ## Use a private action

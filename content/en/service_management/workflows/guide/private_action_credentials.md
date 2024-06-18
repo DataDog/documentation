@@ -10,10 +10,12 @@ Private Actions are in beta. Use this form to request access today.
 
 ## Overview
 
-Some private actions, such as Jenkins and PostgreSQL, require credentials to function.
-- Create a JSON file for the credential and use the JSON structure provided in [Credential files](#credential-files).
-- Store your credential files in the configuration directory you created during setup.
-- When you specify the path to the credential in your runner connection, use the path to the credential file on the container.
+Private actions allow your Datadog workflows and apps to interact with services hosted on your private network without exposing your services to the public internet. To use private actions, you must use Docker to install a private action runner on a host in your network and pair the runner with a Datadog Connection. For more information on setting up a runner and pairing it with a connection, see [Private Actions for Workflows][1] or [Private Actions for App Builder][2].
+
+Some private actions, such as Jenkins and PostgreSQL, require credentials to function. To configure credentials for a private action, you must:
+1. Create a JSON file for the credential and use the JSON structure provided in [Credential files](#credential-files).
+2. Store your credential files in the configuration directory you created during setup.
+3. Specify the path to the credential in the runner's connection. Use the path to the credential on the container, for example: `/etc/dd-action-runner/creds/jenkins_creds.json`.
 
 ## Credential files
 
@@ -180,3 +182,6 @@ In the runner's connection, specify the location of the credential file on the p
 {{% /tab %}}
 
 {{< /tabs >}}
+
+[1]: /service_management/workflows/private_actions
+[2]: /service_management/app_builder/private_actions
