@@ -13,9 +13,9 @@ DDSQL is in private beta.
 ### Syntax
 
 {{< code-block lang="text" >}}
-SELECT [ ALL | DISTINCT ] selectExpr, ...
-  [ FROM relSource EVENT_SEARCH 'some message' USE EVENT_INDEX 'index_name'
-[ JOIN_TYPE relSource ... [ ON condition | USING (column, ... ) ] ] ... ]
+SELECT [ ALL | DISTINCT ] select_expr, ...
+  [ FROM rel_source EVENT_SEARCH 'some message' USE EVENT_INDEX 'index_name'
+[ JOIN_TYPE rel_source ... [ ON condition | USING (column, ... ) ] ] ... ]
   [ WHERE condition ]
 [ GROUP BY [ ALL | DISTINCT ] expression, ... ]
 [ HAVING condition, ... ]
@@ -24,10 +24,12 @@ SELECT [ ALL | DISTINCT ] selectExpr, ...
   [ OFFSET expression] ]
 {{< /code-block >}}
 
-`selectExpr`
+#### Placeholder types
+
+`select_expr`
 : Any expression that returns a value. It may be a constant, function call, aggregate, window, or the special expression `*`. This is the part of the query that specifies the output of the SELECT statement, and in relational algebra it is known as the projection.
  
-`relSource`
+`rel_source`
 : A correlation (a table name or alias) or a parenthesized DQLExpr.
 
 `JOIN_TYPE`
@@ -82,7 +84,7 @@ SELECT ex1, ex2, ex3 FROM table ORDER BY 3, 2, 1;
 ### Syntax
 
 {{< code-block lang="text" >}}
-AGGR aggrExpression
+AGGR aggr_expression
 [ FROM metrics ]
 [ WHERE expression ]
 [ ROLLUP aggregator(value) ]
@@ -94,7 +96,9 @@ AGGR aggrExpression
   [ OFFSET expression] ]
 {{< /code-block >}}
 
-`aggrExpression`
+#### Placeholder types
+
+`aggr_expression`
 : An [`AGGR` function][2], such as `avg` or `max`.
 
 `aggregator`
@@ -226,11 +230,16 @@ For multilayer aggregation to work, the inner query must return a table with the
 ### Syntax
 
 {{< code-block lang="text" >}}
-DQLExpr UNION [ ALL ] DQLExpr ...
+DQL_expression UNION [ ALL ] DQL_expression ...
 [ ORDER BY expressions [ ASC | DESC ] ]
 [ LIMIT [ ALL | expression ]
   [ OFFSET expression] ]
 {{< /code-block >}}
+
+#### Placeholder types
+
+`DQL_expression`
+: A query statement, such as a `SELECT` or `AGGR` statement.
 
 The `UNION` operator removes duplicate rows from the result. To retain duplicate rows, use `UNION ALL`:
 
@@ -241,21 +250,26 @@ SELECT message, service AS text, 'from logs' FROM logs WHERE env='prod'
 ORDER BY service LIMIT 200 OFFSET 10;
 {{< /code-block >}}
 
-All subqueries in a `UNION` must have the same output schema. A query containing `UNION` query can only have one `ORDER BY` and `LIMIT` expression, both of which must come at the end. Because of this, `UNION` can be used to combine other DQLExpr types, but not another `UNION`.
+All subqueries in a `UNION` must have the same output schema. A query containing `UNION` query can only have one `ORDER BY` and `LIMIT` expression, both of which must come at the end. Because of this, `UNION` can be used to combine other `DQL_expression` types, but not another `UNION`.
 
 ## WITH
 
 `WITH` provides a way to write auxiliary statements for use in a larger query. 
 
-`WITH` statements, which are also often referred to as Common Table Expressions or CTEs, can be thought of as defining temporary tables that exist for one query. Each auxiliary statement in a `WITH` clause can be any DQLExpr, and the `WITH` clause itself is attached to a primary statement that can also be any non-`WITH` DQLExpr. Subsequent auxiliary statements may reference correlations aliased in previous auxiliary statements.
+`WITH` statements, which are also often referred to as Common Table Expressions or CTEs, can be thought of as defining temporary tables that exist for one query. Each auxiliary statement in a `WITH` clause can be any DQLExpr, and the `WITH` clause itself is attached to a primary statement that can also be any non-`WITH` DQL expression. Subsequent auxiliary statements may reference correlations aliased in previous auxiliary statements.
 
 ### Syntax
 
 {{< code-block lang="sql" >}}
-WITH alias [ ( output, schema, column, names, ... ) ] AS ( DQLExpr ) [, ...] DQLExpr
+WITH alias [ ( output, schema, column, names, ... ) ] AS ( DQL_expression ) [, ...] DQL_expression
 {{< /code-block >}}
 
-DML statements like `INSERT`, `UPDATE`, and `DELETE` are not supported in `WITH`.
+#### Placeholder types
+
+`DQL_expression`
+: A query statement, such as a `SELECT` or `AGGR` statement.
+
+Data modification statements like `INSERT`, `UPDATE`, and `DELETE` are not supported in `WITH`.
 
 Each aliased query may also specify its output schema and column names.
 
@@ -268,13 +282,18 @@ Each aliased query may also specify its output schema and column names.
 
 `EXPLAIN ANALYZE` executes the query, measures its performance, and returns the queries that were sent to external downstream sources. For example, a query `AGGR AVG('system.load.1')` would be translated to a metrics query `avg:system.load.1{*}`, which `EXPLAIN ANALYZE` would display for inspection.
 
-`EXPLAIN` and `EXPLAIN ANALYZE` are mostly intended for use by developers of DDSQL as diagnostic tools, but they can be useful for users who are running into unexpected behavior.
+`EXPLAIN` and `EXPLAIN ANALYZE` are mostly intended for use by the developers of DDSQL as diagnostic tools, but they can be useful for users who are running into unexpected behavior.
 
 ### Syntax
 
 {{< code-block lang="sql" >}}
-EXPLAIN [ ANALYZE ] DQLExpr
+EXPLAIN [ ANALYZE ] DQL_expression
 {{< /code-block >}}
+
+#### Placeholder types
+
+`DQL_expression`
+: A query statement, such as a `SELECT` or `AGGR` statement.
 
 ## CREATE
 
@@ -284,7 +303,7 @@ DDSQL allows users to create temporary tables, insert into them, and query & ref
 
 {{< code-block lang="sql" >}}
 CREATE TABLE name (
-  columnName columnType
+  column_name column_type
   [ PRIMARY KEY [ AUTOINCREMENT ] | NOT NULL | UNIQUE | DEFAULT expression ] ... 
 )
 {{< /code-block >}}
@@ -296,7 +315,7 @@ DDSQL's `INSERT` statement follows the SQL standard. DDSQL only allows users to 
 ### Syntax
 
 {{< code-block lang="sql" >}}
-INSERT INTO tableName [ (specific, columns, ...) ] VALUES 
+INSERT INTO table_name [ (specific, columns, ...) ] VALUES 
   ( value1, value2, ... ),
   ( value1, value2, ... ),
   ...
