@@ -29,7 +29,7 @@ SQL is broken into five different categories of statements. The table below indi
 ## Usage details
 
 {{< whatsnext desc="For usage details, see the relevant documentation:" >}}
-   {{< nextlink href="dashboards/ddsql_editor/reference/statements" >}}Statements (such as `SELECT`){{< /nextlink >}}
+   {{< nextlink href="dashboards/ddsql_editor/reference/statements" >}}Statements (such as SELECT){{< /nextlink >}}
    {{< nextlink href="dashboards/ddsql_editor/reference/data_types" >}}Data types{{< /nextlink >}}
    {{< nextlink href="dashboards/ddsql_editor/reference/expressions_and_operators" >}}Expressions and operators{{< /nextlink >}}
    {{< nextlink href="dashboards/ddsql_editor/reference/scalar_functions" >}}Scalar functions (one computed value per row){{< /nextlink >}}

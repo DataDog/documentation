@@ -13,17 +13,17 @@ These functions return one value per row.
 ### upper
 | Name | Return type | Description |
 |------|-------------|-------------|
-| upper(text) | text | Converts text to uppercase. |
+| upper(text *s*) | text | Converts *s* to uppercase. |
 
 ### lower
 | Name | Return type | Description |
 |------|-------------|-------------|
-| lower(text) | text | Converts text to lowercase. |
+| lower(text *s*) | text | Converts *s* to lowercase. |
 
 ### length
 | Name | Return type | Description |
 |------|-------------|-------------|
-| length(text) | integer | Counts the number of characters in text. |
+| length(text *s*) | integer | Counts the number of characters in *s*. |
 
 ### concat
 | Name | Return type | Description |
@@ -50,19 +50,19 @@ These functions return one value per row.
 ### reverse
 | Name | Return type | Description |
 |------|-------------|-------------|
-| reverse(text) | string | Reverses the string. |
+| reverse(text *s*) | string | Reverses the string *s*. |
 
 ### md5
 | Name | Return type | Description |
 |------|-------------|-------------|
-| md5(text) | string | Calculates the MD5 hash of a string and returns the result in hexadecimal. |
+| md5(text *s*) | string | Calculates the MD5 hash of *s* and returns the result in hexadecimal. |
 
 ## Mathematical functions and operators
 
 ### abs
 | Name | Return type | Description |
 |------|-------------|-------------|
-| abs(numeric) | integer | Returns the absolute value. |
+| abs(numeric *n*) | integer | Returns the absolute value of *n*. |
 
 ### round
 | Name | Return type | Description |
@@ -161,7 +161,7 @@ These functions return one value per row.
 ### date_diff
 | Name | Return type | Description |
 |------|-------------|-------------|
-| date_diff(string precision, timestamp t, timestamp t) | integer | Returns the difference between two dates, in the precision specified. precision is one of("second", "minute", "hour", "day", "week", "month", "quarter", "year") |
+| date_diff(string *precision*, timestamp *t1*, timestamp *t2*) | integer | Returns the difference between two dates, in the precision specified. *precision* is one of("second", "minute", "hour", "day", "week", "month", "quarter", "year") |
 
 <!-- QUERY below function description is unclear. Time in seconds since the Unix epoch? -->
 
@@ -190,7 +190,7 @@ These functions return one value per row.
 
 | Name | Return type | Description |
 |------|-------------|-------------|
-| json_extract_path_text(text *json*, text *path...*) | text | Extracts the JSON sub-object in text defined by the path. Behavior is equivalent to that of the Postgres function of the same name. In the default executor, this function only works on resources tables; it is not implemented for metrics, events, or local tables. To extract nested fields/JSON in events tables, reference the entire path in double quotes as the column name. |
+| json_extract_path_text(text *json*, text *path...*) | text | Extracts the JSON sub-object in text defined by the path. Behavior is equivalent to that of the Postgres function of the same name. In the default executor, this function only works on resources tables; it is not implemented for metrics, events, or local tables. To extract nested fields in events tables, reference the entire path in double quotes as the column name. |
 
 ## Timeseries and point functions
 

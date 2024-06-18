@@ -9,7 +9,7 @@ DDSQL Editor is in private beta.
 
 ## Overview
 
-With [DDSQL Editor][1], you can get deeper visibility into your infrastructure by querying your resources with natural language or with [DDSQL][3], a dialect of SQL with additional support for querying tags and aggregating metrics.
+With [DDSQL Editor][1], you can get deeper visibility into your infrastructure by querying your resources with natural language or with [DDSQL][2], a dialect of SQL with additional support for querying tags and aggregating metrics.
 
 {{< img src="dashboards/ddsql/query-result.png" alt="The result of a SQL query shown on the DDSQL page in Datadog" style="width:100%;" >}}
 
@@ -29,8 +29,6 @@ FROM aws_ec2_instance
 WHERE env = 'staging' -- env is a tag, not a column
 GROUP BY instance_type
 {{< /code-block >}}
-
-[Run query in Datadog][2]
 
 ### Explore your infrastructure data
 
@@ -52,6 +50,5 @@ Browse and re-run saved queries in the side panel.
 
 {{< img src="dashboards/ddsql/saved-queries-panel.png" alt="A list of saved queries" style="width:60%;" >}}
 
-[1]: https://app.datadoghq.com/inventories
-[2]: https://app.datadoghq.com/inventories/sql?q=SELECT%20instance_type%2C%20count%28instance_type%29%0AFROM%20aws_ec2_instance%0AWHERE%20env%20%3D%20%27staging%27%20--%20env%20is%20a%20tag%2C%20not%20a%20column%0AGROUP%20BY%20instance_type&saved-view-id=2720754&viz=query
-[3]: /dashboards/ddsql_editor/reference
+[1]: https://app.datadoghq.com/ddsql
+[2]: /dashboards/ddsql_editor/reference
