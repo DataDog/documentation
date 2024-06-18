@@ -9,7 +9,6 @@ further_reading:
 - link: /cloud_cost_management/google_cloud
   tag: 설명서
   text: Google Cloud 청구서에 대한 인사이트 얻기
-kind: documentation
 title: AWS
 ---
 

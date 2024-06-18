@@ -19,7 +19,6 @@ further_reading:
 - link: /dashboards/querying/
   tag: Documentation
   text: Requêtes
-kind: documentation
 title: Widget Distribution
 widget_type: distribution
 ---

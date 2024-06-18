@@ -3,7 +3,6 @@ further_reading:
 - link: /real_user_monitoring/
   tag: Documentación
   text: Obtén información sobre RUM y la reproducción de sesiones
-kind: documentación
 title: Facturación de RUM y la reproducción de sesiones
 ---
 

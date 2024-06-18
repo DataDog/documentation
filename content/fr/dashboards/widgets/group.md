@@ -1,4 +1,6 @@
 ---
+title: Widget Groupe
+description: Regroupez vos widgets dans un timeboard.
 aliases:
 - /fr/graphing/widgets/group/
 description: Regroupez vos widgets dans un widget de dashboard.
@@ -6,7 +8,6 @@ further_reading:
 - link: /dashboards/graphing_json/
   tag: Documentation
   text: Créer des dashboards avec JSON
-kind: documentation
 title: Widget Groupe
 widget_type: groupe
 ---

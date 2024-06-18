@@ -1,5 +1,4 @@
 ---
-kind: documentation
 title: Facturation de l'intégration Google Cloud
 ---
 

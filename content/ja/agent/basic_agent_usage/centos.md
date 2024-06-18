@@ -17,7 +17,6 @@ further_reading:
 - link: /agent/configuration/network#configure-ports
   tag: Documentation
   text: インバウンドポートの構成
-kind: documentation
 platform: CentOS
 title: CentOS、Rocky、Alma Linux の基本的な Agent の使い方
 ---
