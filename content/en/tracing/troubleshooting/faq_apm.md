@@ -38,7 +38,7 @@ However, the custom metrics are generated based on the ingested spans. Hence, yo
 To resolve this, configure the trace sampling rule to 100% for the needed applications/services in the custom metric to match the trace metric value.
 
 ## Common issues associated with data volume guidelines
-If you experiencing any of the following issues, you might be exceeding our [Data Volume Guidelines][5]. 
+If you experiencing any of the following issues, you might be exceeding our [Data Volume Guidelines][5]:
 - missing some resources
 - trace metrics skewed/not reporting correctly
 - missing services in the service page even though they are reporting traces
@@ -61,16 +61,13 @@ An example of this issue is if your `service:test` is showing as all of these in
 - `Service:test-postgresdb` 
 
 
-If you would like to have the services merged into one, we have two options:
+If you would like to have the services merged into one, you can use one(1) of these two options:
 
-1. You could use `DD_SERVICE_MAPPING` or `DD_TRACE_SERVICE_MAPPING` depending on the language used. <br> <br>
-This feature is offered in Java, Go, Python, Node.js, PHP and .NET. [Choose your language for additional information on the configuration options for tracing libraries][9]
+1. You could use `DD_SERVICE_MAPPING` or `DD_TRACE_SERVICE_MAPPING` depending on the language used. This feature is offered in Java, Go, Python, Node.js, PHP and .NET. [Choose your language for additional information on the configuration options for tracing libraries][9]
 
 <br>
 
-
 2. You could use the [Inferred services][10]
-
 
 
 
