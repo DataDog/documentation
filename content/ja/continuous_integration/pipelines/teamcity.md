@@ -8,7 +8,6 @@ further_reading:
 - link: /continuous_integration/troubleshooting/
   tag: ドキュメント
   text: トラブルシューティング CI
-kind: documentation
 title: TeamCity パイプラインでトレースを設定する
 ---
 

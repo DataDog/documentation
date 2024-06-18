@@ -1,6 +1,5 @@
 ---
 title: Utiliser les intégrations de la communauté
-kind: guide
 aliases:
   - /fr/agent/guide/community-integrations-installation-with-docker-agent
 further_reading:

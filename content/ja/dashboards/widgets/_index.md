@@ -7,7 +7,6 @@ further_reading:
 - link: /dashboards/guide/context-links/
   tag: ドキュメント
   text: カスタムリンク
-kind: documentation
 title: ウィジェット
 ---
 
