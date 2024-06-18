@@ -1,6 +1,5 @@
 ---
 title: DDSQL Statements
-kind: documentation
 ---
 
 {{< callout url="https://google.com">}}

@@ -1,6 +1,5 @@
 ---
 title: AGGR Functions in DDSQL
-kind: documentation
 ---
 
 {{< callout url="https://google.com">}}

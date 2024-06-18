@@ -1,6 +1,5 @@
 ---
 title: DDSQL Aggregation Functions
-kind: documentation
 ---
 
 {{< callout url="https://google.com">}}

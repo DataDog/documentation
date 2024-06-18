@@ -1,6 +1,5 @@
 ---
 title: DDSQL Scalar Functions
-kind: documentation
 ---
 
 {{< callout url="https://google.com">}}

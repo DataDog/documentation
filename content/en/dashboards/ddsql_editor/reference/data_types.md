@@ -1,3 +1,11 @@
+---
+title: DDSQL Data Types
+---
+
+{{< callout url="https://google.com">}}
+DDSQL is in private beta.
+{{< /callout >}}
+
 ## Data types
 
 DDSQL implements a simplified version of the SQL type system that is mostly descended from SQLite.
