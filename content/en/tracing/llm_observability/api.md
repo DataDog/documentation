@@ -1,6 +1,7 @@
 ---
-title: LLM Observability API
+title: LLM Observability API Reference
 ---
+
 {{% site-region region="gov" %}}
 <div class="alert alert-warning">
 LLM Observability is not available in the US1-FED site.
@@ -326,6 +327,7 @@ Evaluations require a `span_id` and `trace_id`.
 | Field   | Type         | Description                                         |
 |---------|--------------|-----------------------------------------------------|
 | metrics [*required*] | [[EvalMetric](#evalmetric)] | A list of evaluations each associated with a span. |
+| tags        | [[Tag](#tag)] | A list of tags to apply to all the evaluations in the payload.       |
 
 #### EvalMetric
 
@@ -339,8 +341,7 @@ Evaluations require a `span_id` and `trace_id`.
 | label [*required*]      | string | The unique name or label for the provided evaluation . |
 | categorical_value [*required if the metric_type is "score"*]    | string | A string representing the category that the evaluation belongs to. |
 | score_value [*required if the metric_type is "score"*]    | number | A score value of the evaluation. |
-| flagged                | boolean| Flag content as inappropriate or incorrect. |
-| annotation             | string | A generic string note about the provided evaluation. |
+| tags        | [[Tag](#tag)] | A list of tags to apply to this particular evaluation metric.       |
 
 #### EvalMetricsRequestData
 

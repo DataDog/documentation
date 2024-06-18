@@ -1,6 +1,5 @@
 ---
 title: Signals Explorer
-kind: documentation
 aliases:
   - /security_platform/cspm/signals_explorer
   - /security/cspm/signals_explorer

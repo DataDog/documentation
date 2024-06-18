@@ -238,7 +238,7 @@ Datadog の GOVCLOUD データセンターにデータを送信するには、`f
      (...)
           {
             "name": "fips-proxy",
-            "image": "datadog/fips-proxy:1.1.1",
+            "image": "datadog/fips-proxy:1.1.2",
             "portMappings": [
                 {
                     "containerPort": 9803,

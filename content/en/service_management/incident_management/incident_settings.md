@@ -208,5 +208,5 @@ To create a postmortem template:
 [15]: https://app.datadoghq.com/incidents/settings#Integrations
 [16]: https://app.datadoghq.com/account/settings#integrations
 [17]: /service_management/incident_management/incident_details/#notifications-section
-[18]: /monitors/notifications/?tab=is_alert#notify-your-team
+[18]: /monitors/notifications/?tab=is_alert#configure-notifications-and-automations
 [19]: /service_management/mobile/

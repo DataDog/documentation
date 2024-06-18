@@ -18,11 +18,11 @@ title: 通知
 
 ## 概要
 
-通知は、チームに問題を知らせ、トラブルシューティングをサポートするモニターの重要なコンポーネントです。[モニターを作成する][1]場合は、**Notify your team** セクションに追加します。
+通知は、チームに問題を知らせ、トラブルシューティングをサポートするモニターの重要なコンポーネントです。[モニターを作成する][1]場合は、**Configure notifications and automations** (通知と自動化の構成) セクションに追加します。
 
-## チームへの通知
+## 通知と自動化の構成
 
-**Notify your team** セクションを使用して、
+**Configure notifications and automations** (通知と自動化の構成) セクションを使用して、以下を行います。
 - メール、Slack、PagerDuty、その他のインテグレーションでチームに通知を送ります。
 - ワークフローをトリガーしたり、モニターからワークフローを作成します。
 - モニターにケースを追加します。
@@ -60,11 +60,11 @@ Disk space is low @ops-team@company.com
 
 {{% notifications-email %}}
 
-#### ヘルプ
+#### チーム
 
 通知チャンネルが設定されている場合、通知を特定のチームにルーティングできます。@team-handle をターゲットにしたモニターアラートは、選択した通信チャンネルにリダイレクトされます。チームへの通知チャンネルの設定の詳細については、[Teams][6] ドキュメントを参照してください。
 
-#### ヘルプ
+#### インテグレーション
 
 {{% notifications-integrations %}}
 
@@ -144,7 +144,7 @@ Disk space is low @ops-team@company.com
 エスカレーションメッセージは次の方法で追加できます。
 
 * 元の通知メッセージの `{{#is_renotify}}` ブロック (推奨)。
-* `Notify your team` セクションの *Renotification message* フィールド。
+* `Configure notifications and automations` セクションの *Renotification message* フィールド。
 * API の `escalation_message` 属性。
 
 `{{#is_renotify}}` ブロックを使用する場合、元の通知メッセージも再通知に含まれます。
@@ -161,7 +161,7 @@ Disk space is low @ops-team@company.com
 
 モニターが作成、変更、無音設定、または削除されるたびに[イベント][14]が生成されます。`Notify` オプションを設定して、これらのイベントをチームメンバー、チャットサービス、モニター作成者に通知します。
 
-### ヘルプ
+### 権限
 
 すべてのユーザーは、関連するロールに関係なく、すべてのモニターを読むことができます。
 

@@ -59,7 +59,7 @@ When you enable CSM on Windows, the Agent sends a log to Datadog to confirm that
 
 Another method to verify that the Agent is sending events to CSM is to manually trigger a Windows security signal.
 
-1. In Windows, open a command prompt as Administrator and run the command `schtasks`.
+1. In Windows, open a command prompt as Administrator and run the command `schtasks /create /?`.
 2. In Datadog, navigate to the [CSM Signals Explorer][8] to view the generated Windows signals.
     - To view signals originating from configured Windows hosts, filter the signals by hostname using the **Hosts** > **Hostnames** facet.
     - To filter by Windows rules, use the **Workflow** > **Rule Name** facet.

@@ -37,7 +37,7 @@ integration_id: trek10-coverage-advisor
 integration_title: Trek10 AWS Coverage Advisor
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0

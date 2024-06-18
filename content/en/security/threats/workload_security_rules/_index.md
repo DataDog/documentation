@@ -1,6 +1,5 @@
 ---
 title: CSM Threats Detection Rules
-kind: documentation
 aliases:
   - /security_platform/cloud_workload_security/workload_security_rules
   - /security/cloud_workload_security/workload_security_rules
@@ -23,9 +22,9 @@ This topic explains how Cloud Security Management Threats (CSM Threats) actively
 
 ## Proactively block threats with Active Protection
 
-By default, all OOTB Agent threat detection rules are enabled and actively monitoring for threats.
+By default, all OOTB Agent crypto mining threat detection rules are enabled and actively monitoring for threats.
 
-[Active Protection][12] enables you to proactively block and terminate threats identified by the Datadog Agent threat detection rules.
+[Active Protection][12] enables you to proactively block and terminate crypto mining threats identified by the Datadog Agent threat detection rules.
 
 ## CSM Threats rules construction
 
