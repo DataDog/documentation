@@ -4,16 +4,16 @@ aliases:
 further_reading:
 - link: /service_management/service_level_objectives/burn_rate
   tag: Documentación
-  text: Alertas sobre tasas de consumo
+  text: Alertas de tasas de consumo
 - link: /service_management/service_level_objectives/error_budget
   tag: Documentación
-  text: Alertas de totales de errores
+  text: Alertas del total de errores
 kind: Documentación
 title: Alertas de SLOs
 ---
 
 <div class="alert alert-info">
-Este monitor está disponible para SLOs basados en métricas, SLOs basados en periodos de tiempo y SLOs basados en monitores compuestos por tipos de monitores para métricas (métricas, integraciones, métricas de APM, anomalías, predicciones o monitores de outliers).
+Este monitor está disponible para SLOs basados en métricas, SLOs basados en periodos de tiempo y SLOs basados en monitores compuestos por tipos de monitores de métricas (métricas, integraciones, métricas de APM, anomalías, predicciones o monitores de outliers).
 </div>
 
 ## Información general
@@ -34,7 +34,7 @@ Existen dos tipos de alertas:
 
 Las [alertas del total de errores][3] te notifican cuando se ha consumido un determinado porcentaje del total de errores de tu SLO.
 
-Las [alertas sobre tasas de consumo][4] te notifican cuando la tasa de consumo del total de errores de tu SLO ha superado el umbral especificado y se mantiene durante un determinado periodo de tiempo.
+Las [alertas de las tasas de consumo][4] te notifican cuando la tasa de consumo del total de errores de tu SLO ha superado el umbral especificado y se mantiene durante un determinado periodo de tiempo.
 
 ### Notificaciones
 
