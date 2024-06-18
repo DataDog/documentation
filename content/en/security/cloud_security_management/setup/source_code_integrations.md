@@ -3,9 +3,7 @@ title: Setting up Source Code Integrations for IAC Remediation
 kind: documentation
 ---
 
-Enabling Cloud Security Management for Infrastructure as Code remediation
-
-*Webhook step??
+Use the following instructions to enable IAC remediation for Cloud Security Management (CSM).
 
 ## Install the GitHub integration
 
