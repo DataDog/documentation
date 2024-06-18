@@ -1,11 +1,11 @@
 ---
-title: Enabling Cloud Security Management for Cloud Accounts
+title: Enabling Cloud Security Management on Cloud Accounts
 aliases:
   - /security/cloud_security_management/setup/csm_enterprise/cloud_accounts
   - /security/cloud_security_management/setup/csm_pro/cloud_accounts
 ---
 
-Use the following instructions to enable Compliance Scanning and Identity Risks (CIEM) for Cloud Security Management (CSM).
+Use the following instructions to enable [resource scanning](#enable-resource-scanning) for Misconfigurations and [CloudTrail logs forwarding](#set-up-cloudtrail-logs-forwarding) for Identity Risks (CIEM).
 
 ## Enable resource scanning
 

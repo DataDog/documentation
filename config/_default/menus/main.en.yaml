@@ -4566,7 +4566,7 @@ menu:
       identifier: csm_setup_agentless_scanning
       weight: 104
     - name: Serverless
-      url: security/cloud_security_management/setup/serverless
+      url: security/cloud_security_management/setup/serverless?tab=amazonecs#cloud-security-management
       parent: csm_setup
       identifier: csm_setup_serverless
       weight: 105
