@@ -73,7 +73,7 @@ You can install the Datadog Agent using the [Datadog Operator][3] or [Helm][4].
        nodeAgent:
          env:
            - name: DD_DJM_CONFIG_ENABLED
-             value: true
+             value: "true"
    ```
    Replace `<DATADOG_SITE>` with your [Datadog site][5]. Your site is {{< region-param key="dd_site" code="true" >}}. (Ensure the correct SITE is selected on the right).
 1. Deploy the Datadog Agent with the above configuration file:
@@ -108,7 +108,7 @@ You can install the Datadog Agent using the [Datadog Operator][3] or [Helm][4].
        - 'data_workload_monitoring_trial:true'
      env:
        - name: DD_DJM_CONFIG_ENABLED
-         value: true
+         value: "true"
 
    clusterAgent:
      admissionController:
