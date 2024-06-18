@@ -1,5 +1,4 @@
 ---
-kind: ドキュメント
 title: Agent で CSM Cloud Workload Security を有効にする
 type: multi-code-lang
 ---

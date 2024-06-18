@@ -1,6 +1,5 @@
 ---
 title: Can I disable or restrict the export options?
-kind: faq
 ---
 
 Cloudcraft Enterprise customers can disable exporting to third-party services like Draw.io and Modules.tf.

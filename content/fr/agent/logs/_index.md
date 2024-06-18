@@ -16,7 +16,6 @@ further_reading:
 - link: agent/logs/advanced_log_collection/#regles-globales-de-traitement
   tag: Documentation
   text: Règles globales de traitement
-kind: documentation
 title: Collecte de logs de l'Agent de host
 ---
 

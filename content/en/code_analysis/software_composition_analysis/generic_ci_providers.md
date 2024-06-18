@@ -1,6 +1,5 @@
 ---
 title: Generic CI Providers
-kind: documentation
 description: Learn about Datadog Static Analysis to scan code for quality issues and security vulnerabilities before your code reaches production.
 is_beta: true
 further_reading:

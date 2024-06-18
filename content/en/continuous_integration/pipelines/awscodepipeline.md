@@ -1,6 +1,5 @@
 ---
 title: Set up Tracing on a AWS CodePipeline Pipeline
-kind: documentation
 aliases:
   - /continuous_integration/setup_pipelines/codepipeline
 further_reading:

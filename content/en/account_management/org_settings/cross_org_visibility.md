@@ -1,6 +1,5 @@
 ---
 title: Cross-Organization Visibility
-kind: documentation
 private: true
 is_beta: true
 ---
