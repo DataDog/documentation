@@ -26,24 +26,23 @@ If you experience unexpected behavior with APM, the troubleshooting steps below 
 
 The traces page includes traces retained by our [Datadog intelligent filter][2], [1% flat sampling][3] and [custom retention filters][4]. While monitors include only traces that are retained by the custom retention filters.
 
-To troubleshoot this, create a [custom retention filter][4] to retain all the spans you are using in your query. 
+To resolve this, create a [custom retention filter][4] to retain all the spans you are using in your query. 
 
 
 
-## Why is there a difference in value between [trace metrics][6] and [custom span based metrics][7]?
+## Why is there a difference in value between [trace metrics][6] and [custom span-based metrics][7]?
 The trace metrics are calculated based on 100% of the application’s traffic, regardless of any [trace ingestion sampling][8] configuration. 
 
 However, the custom metrics are generated based on the ingested spans. Hence, you need to make sure you have 100% ingestion configured for the application you are creating a custom metric for to have the value match the trace metrics.
 
-To troubleshoot this, configure the trace sampling rule to 100% for the needed applications/services in the custom metric to match the trace metric value.
+To resolve this, configure the trace sampling rule to 100% for the needed applications/services in the custom metric to match the trace metric value.
 
-## Common issues in relation to data volume guidelines
-Are you experiencing any of these issues?
-- missing some resources?
-- trace metrics skewed/not reporting correctly?
-- missing services in the service page even though they are reporting traces?
+## Common issues associated with data volume guidelines
+If you experiencing any of the following issues, you might be exceeding our [Data Volume Guidelines][5]. 
+- missing some resources
+- trace metrics skewed/not reporting correctly
+- missing services in the service page even though they are reporting traces
 
-One common reason for the above behavior might be because you are exceeding our [Data Volume Guidelines][5]. 
 
 For a given 40 minute interval, Datadog accepts the following combinations. 
 - 1000 unique environments and service combinations
@@ -56,7 +55,7 @@ To accommodate larger volumes contact [Datadog support][1] to discuss your use c
 
 ## One service is showing up as multiple different services in Datadog.
 
-An example of this issue is is your `service:test` is showing as
+An example of this issue is if your `service:test` is showing as all of these in the Datadog platform:
 - `Service:test`
 - `Service:test-mongodb`
 - `Service:test-postgresdb` 
