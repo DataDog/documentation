@@ -109,7 +109,7 @@ To set up a scanning group, perform the following steps:
 
 1. Navigate to the [Sensitive Data Scanner in the Agent][1] configuration page.
 1. Click **Add scanning group**. Alternatively, click the **Add** dropdown menu on the top right corner of the page and select **Add Scanning Group**.
-1. Enter a query filter for the data you want to scan. You can use only host-level tags for matching agents. At the bottom, the number of matching and eligible agents is displayed, including the total number out of all agents that the tag matches.
+1. Enter a query filter for the data you want to scan. You can use only host-level tags for matching agents. At the bottom, the number of matching and eligible agents is displayed, including the total number out of all agents that match the tag.
 1. Enter a name and description for the group.
 1. Click **Save**.
 
@@ -206,6 +206,37 @@ To add scanning rules, perform the following steps:
 {{< /tabs >}}
 
 See [Investigate Sensitive Data Issues][8] for details on how to use the [Summary][9] page to triage your sensitive data issues.
+
+### Edit scanning rules
+
+{{< tabs >}}
+{{% tab "In the Cloud" %}}
+
+1. Navigate to the [Sensitive Data Scanner][1] configuration page.
+1. Hover over the scanning rule you want to edit and click the **Edit** (pencil) icon.
+
+   The **Define match conditions** section shows either the regular expression you wrote for your custom rule or an explanation of the library scanning rule you chose along with examples of matched sensitive information.
+1. To make sure that a rule matches your data, you can provide a sample in the **Add sample data** section. If the rule finds matches in the sample data, a green **Match** label appears next to the input field.
+1. Under **Create keyword dictionary**, you can add keywords to refine detection accuracy. For example, if you are scanning for a sixteen-digit Visa credit card number, you can add keywords like "visa", "credit", and "card". You can also require that these keywords appear within a specified number of characters before a match. By default, keywords must be within 30 characters before a match.
+1. Optionally, under **Define rule target and action**, edit the tags that you want to associate with events where the values match the rule. Datadog recommends using `sensitive_data` and `sensitive_data_category` tags, which can be used in searches, dashboards, and monitors. See [Control access to logs with sensitive data](#control-access-to-logs-with-sensitive-data) for information on how to use tags to determine who can access logs that contain sensitive data.
+1. For **Set priority level**, choose a value based on your business needs.
+1. Click **Update**.
+
+[1]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner/configuration
+{{% /tab %}}
+{{% tab "In the Agent" %}}
+
+1. Navigate to the [Sensitive Data Scanner in the Agent][1] configuration page.
+1. Hover over the scanning rule you want to edit and click the **Edit** (pencil) icon.
+
+   The **Define match conditions** section shows an explanation of the library scanning rule you chose along with examples of matched sensitive information.
+1. Under **Create keyword dictionary**, you can add keywords to refine detection accuracy. For example, if you are scanning for a sixteen-digit Visa credit card number, you can add keywords like "visa", "credit", and "card". You can also require that these keywords appear within a specified number of characters before a match. By default, keywords must be within 30 characters before a match.
+1. Click **Save**.
+
+[1]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner/configuration/agent
+{{% /tab %}}
+{{< /tabs >}}
+
 
 ### Control access to logs with sensitive data
 
