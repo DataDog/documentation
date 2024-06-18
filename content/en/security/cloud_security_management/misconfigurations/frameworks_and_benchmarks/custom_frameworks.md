@@ -19,14 +19,14 @@ With custom frameworks, you can define and measure compliance against your own c
 1. On the [CSM Compliance page][6], click **Create Framework**.
 1. Enter the following details:
     - **Framework name**: The name of your framework. Can include characters, numbers, and spaces. Must be at least five characters long.
-    - **Handle**: The tag name for the custom framework. Can include lowercase letters, numbers, dashes, underscores, and periods. This value will be used for querying the framework in the explorer or dashboards.
+    - **Handle**: The tag name for the custom framework. Can include lowercase letters, numbers, dashes, underscores, and periods. This value is used to query the framework in the explorer or in dashboards.
     - **Version**: The version of the framework. Can include lowercase letters, numbers, dashes, underscores, and periods.
-    - **Image URL**: A publicly accessible URL for an image that will be used to identify the framework.
+    - **Image URL**: A publicly accessible URL for an image that is used to identify the framework.
 1. Click **Next Step: Create Your Framework**.
 
 Next, add requirements to the framework:
 
-<div class="alert alert-warning">You must add at least one requirement, control, and rule before you can save the custom framework.</div>
+<div class="alert alert-warning">You must add at least one requirement, control, and rule before saving the custom framework.</div>
 
 1. Click **Add Requirement**.
 1. Enter the following details:
