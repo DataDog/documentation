@@ -1,12 +1,12 @@
 ---
 kind: Documentation
-title: Monitores de monitorización de bases de datos
+title: Monitores para la monitorización de bases de datos
 ---
 
 
 ## Información general
 
-Con el tipo de monitor [de monitorización de bases de datos (DBM)][1] puedes crear monitores y alertas para los datos que aparecen en DBM. Estos monitores pueden configurarse para avisarte cuándo un tipo de evento DBM se desvía de un umbral predefinido durante un periodo de tiempo determinado.
+Con el tipo de monitor [para la monitorización de bases de datos (DBM)][1] puedes crear monitores y alertas para los datos que aparecen en DBM. Estos monitores pueden configurarse para avisarte cuándo un tipo de evento de DBM se desvía de un umbral predefinido durante un periodo de tiempo determinado.
 
 Algunos escenarios de monitorización frecuentes incluyen
 - [Número de consultas en espera](#number-of-waiting-queries)
@@ -47,7 +47,7 @@ Si tienes comentarios sobre estos tipos de monitores existentes y otros que te g
 
 Nota: Monitor en el que configuras alertas sobre el **recuento de valores únicos** de las facetas.
 
-3. También tienes la opción de agrupar eventos de DBM en función de varias dimensiones. Todos los eventos de DBM que coinciden con la consulta se agrupan en función de los valores de hasta **cinco facetas**. Con la funcionalidad Agrupar por, también tienes la posibilidad de configurar la **estrategia de agrupación de alertas**:
+3. También tienes la opción de agrupar eventos de DBM según múltiples dimensiones. Todos los eventos de DBM que coinciden con la consulta se agrupan en función de los valores de hasta **cinco facetas**. Con la funcionalidad Agrupar por, también tienes la posibilidad de configurar la **estrategia de agrupación de alertas**:
     * **Alertas simples**: Las alertas simples agregan todas las fuentes de información, de modo que una alerta se activa cuando uno o varios valores de grupo superan el umbral. Puedes utilizar esta estrategia para reducir el ruido de notificación.
     * **Alertas múltiples**: Las alertas múltiples aplican la alerta a cada fuente en función de tus parámetros de grupo, lo que significa que se genera un evento de alerta para cada grupo que cumple las condiciones establecidas. Por ejemplo, puedes agrupar una consulta por `@db.user` y seleccionar el tipo de agregación de alertas múltiples para recibir una alerta independiente por cada usuario de la base de datos que activa la alerta tal y como la has definido.
 
