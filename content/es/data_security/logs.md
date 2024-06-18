@@ -7,7 +7,7 @@ further_reading:
   text: Revisar las principales categorías de datos enviados a Datadog
 - link: /data_security/pci_compliance/
   tag: Documentación
-  text: Establecer una organización Datadog que cumpla la normativa PCI
+  text: Establecer una organización de Datadog que cumpla la normativa PCI
 - link: https://www.datadoghq.com/blog/datadog-pci-compliance-log-management-apm/
   tag: Blog
   text: Datadog presenta los servicios de Log Management y APM compatibles con PCI
@@ -23,7 +23,7 @@ El producto Log Management es compatible con múltiples [entornos y formatos][1]
 
 ## Seguridad de la información
 
-El Datadog Agent envía logs a Datadog a través de HTTPS o a través de una conexión TCP cifrada TLS en el puerto 10516, lo que requiere una comunicación saliente (consulta [Transporte de logs del Agent][2]).
+El Datadog Agent envía logs a Datadog a través de HTTPS o a través de una conexión TCP con cifrado TLS en el puerto 10516, lo que requiere una comunicación saliente (consulta [Transporte de logs del Agent][2]).
 
 Datadog utiliza un cifrado simétrico en reposo (AES-256) para los logs indexados. Los logs indexados se eliminan de la plataforma Datadog una vez que su periodo de conservación expira, según lo que hayas definido.
 
@@ -33,7 +33,7 @@ En la versión 6 o posterior, el Agent puede configurarse para filtrar logs envi
 
 ## Enmascarar logs
 
-A partir de la versión 6, el Agent puede configurarse para enmascarar patrones específicos dentro de los logs enviados por el Agent a la aplicación de Datadog. Para enmascarar secuencias confidenciales dentro de tus logs, utiliza el [parámetro][4] `log_processing_rules`, con el `type` **mask_sequences**. Este parámetro permite crear una lista que contenga una o más expresiones regulares, que indican al Agent que redacte los datos confidenciales de tus logs.
+A partir de la versión 6, el Agent puede configurarse para enmascarar patrones específicos en los logs enviados por el Agent a la aplicación de Datadog. Para enmascarar secuencias confidenciales en tus logs, utiliza el [parámetro][4] `log_processing_rules`, con el `type` **mask_sequences**. Este parámetro permite crear una lista que contenga una o más expresiones regulares, que indican al Agent que redacte los datos confidenciales de tus logs.
 
 ## Clientes habilitados por la HIPAA
 
