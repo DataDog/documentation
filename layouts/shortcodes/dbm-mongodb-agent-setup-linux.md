@@ -47,6 +47,7 @@ instances:
     #
     options:
       authSource: admin
+      tls: true  # Enable TLS/SSL connection
 
     ## @param dbm - boolean - optional
     ## Set to true to enable Database Monitoring.
