@@ -24,7 +24,6 @@ further_reading:
 - link: /sensitive_data_scanner/
   tag: 설명서
   text: Sensitive Data Scanner
-kind: 설명서
 title: 데이터 관련 리스크 줄이기
 ---
 

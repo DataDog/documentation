@@ -1,5 +1,4 @@
 ---
-kind: documentation
 title: Configurer Data Streams Monitoring pour Go
 ---
 

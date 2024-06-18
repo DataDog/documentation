@@ -6,7 +6,6 @@ further_reading:
 - link: https://micrometer.io/docs/registry/prometheus
   tag: Micrometer
   text: Micrometer Prometheus
-kind: ガイド
 title: Micrometer を使用したメトリクスの送信
 ---
 
