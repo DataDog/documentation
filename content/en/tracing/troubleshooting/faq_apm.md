@@ -17,7 +17,7 @@ further_reading:
 
 
 ---
-If you experience unexpected behavior with APM, the troubleshooting steps below can help you resolve the issue quickly. If you continue to have trouble, reach out to [Datadog support][1]. 
+If you experience unexpected behavior with APM, the troubleshooting steps on this page can help you resolve the issue quickly. If you continue to have trouble, reach out to [Datadog support][1]. 
 
 
 
