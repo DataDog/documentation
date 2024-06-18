@@ -1,6 +1,5 @@
 ---
 title: Migrating to Hourly and Monthly Usage Attribution APIs
-kind: guide
 further_reading:
 - link: "/account_management/plan_and_usage/"
   tag: "Documentation"

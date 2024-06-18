@@ -8,7 +8,6 @@ further_reading:
 - link: /observability_pipelines/guide/custom-metrics-governance
   tag: 설명서
   text: 커스텀 메트릭 관리를 위해 가시성 파이프라인 사용
-kind: 설명서
 title: 커스텀 메트릭 빌링
 ---
 

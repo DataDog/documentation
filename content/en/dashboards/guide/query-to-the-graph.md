@@ -1,6 +1,5 @@
 ---
 title: Query to the Graph
-kind: documentation
 aliases:
     - /dashboards/faq/query-to-the-graph
 ---
