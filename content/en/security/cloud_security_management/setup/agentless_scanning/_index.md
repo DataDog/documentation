@@ -1,5 +1,5 @@
 ---
-title: Setting up CSM Agentless Scanning
+title: Setting up Agentless Scanning for Cloud Security Management
 kind: documentation
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: Enabling Source Code Integrations for IAC Remediation
+title: Setting up Source Code Integrations for IAC Remediation
 kind: documentation
 ---
 

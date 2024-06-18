@@ -1,5 +1,5 @@
 ---
-title: Enabling Cloud Security Management on Windows
+title: Setting up Cloud Security Management on Windows
 kind: documentation
 code_lang: windows
 type: multi-code-lang

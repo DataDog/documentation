@@ -1,5 +1,5 @@
 ---
-title: Enabling Cloud Security Management on Linux
+title: Setting up Cloud Security Management on Linux
 kind: documentation
 code_lang: linux
 type: multi-code-lang
