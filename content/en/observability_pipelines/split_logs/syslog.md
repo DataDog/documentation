@@ -6,7 +6,7 @@ disable_toc: false
 
 ## Overview
 
-Configure your Datadog Agent to send logs to the Observability Pipelines Worker and then process and route them to different destinations based on your use case.
+Configure Rsyslog or Syslog-ng to send logs to the Observability Pipelines Worker and then process and route them to different destinations based on your use case.
 
 {{< img src="observability_pipelines/use_cases/split_logs.png" alt="The log sources, processors, and destinations available for the split logs use case" width="100%" >}}
 
@@ -23,7 +23,7 @@ This document walks you through the following steps:
 
 1. Navigate to [Observability Pipelines][1].
 1. Select the **Split Logs** template to create a new pipeline.
-1. Select **Syslog** as the source.
+1. Select **Rsyslog or Syslog-ng** as the source.
 
 ### Set up the source
 
