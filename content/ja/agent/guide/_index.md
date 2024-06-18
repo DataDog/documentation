@@ -5,7 +5,6 @@ cascade:
     rank: 70
     subcategory: Agent ガイド
 disable_toc: true
-kind: ガイド
 private: true
 title: Agent ガイド
 ---

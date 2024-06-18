@@ -854,9 +854,7 @@ agents:
 
 ### Istio Monitoring
 
-<div class="alert alert-info">
-Universal Service Monitoring is available in <strong>beta</strong> to monitor services behind <a href="https://istio.io/latest/docs/tasks/security/authentication/mtls-migration/">Istio mTLS</a> and to capture encrypted HTTPs traffic.
-</div>
+Universal Service Monitoring is available to monitor services behind <a href="https://istio.io/latest/docs/tasks/security/authentication/mtls-migration/">Istio mTLS</a> and to capture encrypted HTTPs, HTTP/2, and gRPC traffic.
 
 Requires Agent version 7.50 or greater.
 

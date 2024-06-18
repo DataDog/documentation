@@ -6,7 +6,6 @@ further_reading:
 - link: /agent/guide/agent-v6-python-3/
   tag: Documentación
   text: Uso de Python 3 con el Datadog Agent v6
-kind: guía
 title: Migración de checks personalizados a Python 3
 ---
 

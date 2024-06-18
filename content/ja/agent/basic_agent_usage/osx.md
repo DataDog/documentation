@@ -17,7 +17,6 @@ further_reading:
 - link: /agent/configuration/network#configure-ports
   tag: Documentation
   text: インバウンドポートの構成
-kind: documentation
 os: osx
 platform: OS X
 title: macOS 用 Agent の基本的な使用方法

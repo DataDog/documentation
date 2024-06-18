@@ -1,6 +1,5 @@
 ---
 title: Billing
-kind: documentation
 ---
 
 ## Overview
