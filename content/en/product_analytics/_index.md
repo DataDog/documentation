@@ -31,7 +31,7 @@ Below are some key pillars of Datadog Product Analytics.
 
 ## Measure user retention
 
-Use [Retention Analysis][1] to measure how a group of users engage with specific features over time to understand where dropoff occurs.
+Use [Retention Analysis][1] to measure how a group of users engage with specific features over time to understand where drop-off occurs.
 
 ## Map user journeys
 
