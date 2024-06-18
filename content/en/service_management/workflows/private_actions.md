@@ -1,5 +1,5 @@
 ---
-title: Private actions
+title: Private Actions
 kind: Documentation
 disable_toc: false
 further_reading:
@@ -31,9 +31,11 @@ The following integrations support private actions:
 
 ## Prerequisites
 
-The private action runner requires a Linux host that is able to reach any internal services you want to call from an action or app. To use App Builder with private actions, you must be able to point a hostname to the private action runner container. This hostname must be resolvable by your App users. App Builder calls the hostname using HTTPS, so you must bring your own SSL termination.
+The private action runner requires a Linux host that is able to reach any internal services you want to call from an action or app.
 
-In addition, the host has the following requirements:
+To use App Builder with private actions, you must be able to point a hostname to the private action runner container. This hostname must be resolvable by your App users. App Builder calls the hostname using HTTPS, so you must bring your own SSL termination.
+
+In addition, the host must have the following:
 - 2GB of RAM
 - Docker (with Docker Compose if that is your preference)
 
@@ -45,7 +47,7 @@ From the **Private Action Runner** page in [Workflow Automation][6] or [App Buil
 1. Enter a name for your runner.
 1. Click **Both**.
 1. Enter a runner hostname. App Builder calls your runner using this hostname over HTTPS. You must bring your own SSL termination and forward to port 9016 in the container.
-1. Create a directory on your host where the runner can store its configuration. For example, `./config`. You can also use this directory to [store any credentials][10] required by the runner's connection.
+1. Create a directory on your host where the runner can store its configuration, such as `./config`. You can also use this directory to [store any credentials][10] required by the runner's connection.
 1. Deploy your runner with Docker or Docker Compose:
 
 {{< tabs >}}
@@ -53,7 +55,7 @@ From the **Private Action Runner** page in [Workflow Automation][6] or [App Buil
 1. Click **Docker**.
 1. Run the provided `docker run` command on your host, replacing `./config` with the path to the directory you created for the runner configuration.
 
-   You can safely ignore the error: `DATADOG TRACER DIAGNOSTIC - Agent Error: connect ECONNREFUSED`.
+   You can safely ignore the error `DATADOG TRACER DIAGNOSTIC - Agent Error: connect ECONNREFUSED`.
 {{% /tab %}}
 
 {{% tab "Docker Compose" %}}
@@ -62,7 +64,7 @@ From the **Private Action Runner** page in [Workflow Automation][6] or [App Buil
 1. Replace `./config` with the path to the directory you created for the runner configuration.
 1. Run `docker compose up -d`.
 
-   You can safely ignore the error: `DATADOG TRACER DIAGNOSTIC - Agent Error: connect ECONNREFUSED`.
+   You can safely ignore the error `DATADOG TRACER DIAGNOSTIC - Agent Error: connect ECONNREFUSED`.
 {{% /tab %}}
 {{< /tabs >}}
 {{% /collapse-content %}}
@@ -71,14 +73,14 @@ From the **Private Action Runner** page in [Workflow Automation][6] or [App Buil
 1. Enter a name for your runner.
 1. Click **App Builder**.
 1. Enter a runner hostname. App Builder calls your runner using this hostname over HTTPS. You must bring your own SSL termination and forward to port 9016 in the container.
-1. Create a directory on your host where the runner can store its configuration. For example, `./config`. You can also use this directory to [store any credentials][10] required by the runner's connection.
+1. Create a directory on your host where the runner can store its configuration, such as `./config`. You can also use this directory to [store any credentials][10] required by the runner's connection.
 1. Deploy your runner with Docker or Docker Compose:
 {{< tabs >}}
 {{% tab "Docker" %}}
 1. Click **Docker**.
 1. Run the provided `docker run` command on your host, replacing `./config` with the path to the directory you created for the runner configuration.
 
-   You can safely ignore the error: `DATADOG TRACER DIAGNOSTIC - Agent Error: connect ECONNREFUSED`.
+   You can safely ignore the error `DATADOG TRACER DIAGNOSTIC - Agent Error: connect ECONNREFUSED`.
 
 {{% /tab %}}
 
@@ -97,14 +99,14 @@ From the **Private Action Runner** page in [Workflow Automation][6] or [App Buil
 {{% collapse-content title="Workflow Automation" level="p" %}}
 1. Enter a name for your runner.
 1. Click **Workflows**.
-1. Create a directory on your host where the runner can store its configuration. For example, `./config`. You can also use this directory to [store any credentials][10] required by the runner's connection.
+1. Create a directory on your host where the runner can store its configuration, such as `./config`. You can also use this directory to [store any credentials][10] required by the runner's connection.
 1. Deploy your runner with Docker or Docker Compose:
 {{< tabs >}}
 {{% tab "Docker" %}}
 1. Click **Docker**.
 1. Run the provided `docker run` command on your host, replacing `./config` with the path to the directory you created for the runner configuration.
 
-   You can safely ignore the error: `DATADOG TRACER DIAGNOSTIC - Agent Error: connect ECONNREFUSED`.
+   You can safely ignore the error `DATADOG TRACER DIAGNOSTIC - Agent Error: connect ECONNREFUSED`.
 {{% /tab %}}
 
 {{% tab "Docker Compose" %}}
@@ -113,13 +115,13 @@ From the **Private Action Runner** page in [Workflow Automation][6] or [App Buil
 1. Replace `./config` with the path to the directory you created for the runner configuration.
 1. Run `docker compose up -d`.
 
-   You can safely ignore the error: `DATADOG TRACER DIAGNOSTIC - Agent Error: connect ECONNREFUSED`.
+   You can safely ignore the error `DATADOG TRACER DIAGNOSTIC - Agent Error: connect ECONNREFUSED`.
 {{% /tab %}}
 {{< /tabs >}}
 
 {{% /collapse-content %}}
 
-When you see the **Ready to use** status:
+When you see the **Ready to use** status, you can create a new connection for the runner or see it on the **Private Action Runners** page:
 - To create a new connection for the runner, click **Link Runner to New Connection** and select an integration.
 - Click **View Runner** to see the runner on the **Private Action Runners** page.
 
@@ -133,7 +135,7 @@ To pair a runner to a connection:
 1. From the [Workflow Automation][8] or [App Builder][9] Connections page, click **New Connection**.
 1. Select the integration you want to connect with your private action runner. For a list of integrations that support private actions, see [Overview](#overview).
 1. Add a **Connection Name** and select the **Private Action Runner** from the dropdown.
-1. Add the paths to any required Credential files. For more information, see [Handling Private Action Credentials][10].
+1. Add the paths to any required credential files. For more information, see [Handling Private Action Credentials][10].
 
 ## Use a private action
 
@@ -149,14 +151,14 @@ To use a private action in your [Workflow Automation][11] workflow or [App Build
 
 {{% collapse-content title="App Builder" level="p" %}}
 1. From the [App Builder][12] page, create an app, or open an existing app. For information on creating or editing an app, see [Build Apps][15].
-1. Click **New Query** and search for the private action you want to add to your workflow. For a list of integrations that support private actions, see [Overview](#overview).
+1. Click **New Query** and search for the private action you want to add to your app. For a list of integrations that support private actions, see [Overview](#overview).
 1. Select a **Connection** from the dropdown or click the plus (**+**) icon to add a new connection. Using a private action requires a private action runner paired with a connection. See [Connect a runner](#connect-a-runner) for more information.
-1. Complete any required fields and click **Save** to save your workflow.
+1. Complete any required fields and click **Save** to save your query.
 {{% /collapse-content %}}
 
 ## Edit private runners
 
-From the **Private Action Runner** page in [Workflow Automation][6] or [App Builder][7], you can view all of your private runners together with the workflows or apps that use the runner. To edit the connection for a runner, click **View Details**. Click the trash can icon to delete a runner.
+From the **Private Action Runner** page in [Workflow Automation][6] or [App Builder][7], you can view all of your private runners together with the workflows or apps that use each runner. To edit the connection for a runner, click **View Details**. Click the trash can icon to delete a runner.
 
 ## Further reading
 

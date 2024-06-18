@@ -50,7 +50,7 @@ The Token Auth connection uses a bearer token to authenticate the HTTP request.
 1. Select **HTTP**.
 1. Enter a **Connection Name**.
 1. Enter the **Base URL** for authentication.
-1. For Type, ensure that **Datadog** is selected.
+1. For **Type**, ensure that **Datadog** is selected.
 1. From the **Authentication Type** dropdown, select **Token Auth**.
 1. Enter a **Token Name** and **Token Value**. You can enter multiple tokens. To reference your token in a header, parameter, or the request body, use the syntax `{{ secretTokenName }}`.
 1. Optionally, add additional **Request Headers**, **URL parameters** and a **Body** to your request.
@@ -64,7 +64,7 @@ The Basic Auth connection uses an authorization header with a username and passw
 1. Select **HTTP**.
 1. Enter a **Connection Name**.
 1. Enter the **Base URL** for authentication.
-1. 1. For Type, ensure that **Datadog** is selected.
+1. For **Type**, ensure that **Datadog** is selected.
 1. From the **Authentication Type** dropdown, select **Basic Auth**.
 1. Enter a **Username** and **Password**. The required authorization request header is automatically populated using your username and password.
 1. Click **Create**.
@@ -77,7 +77,7 @@ The HTTP 2 step connection allows you to make a preliminary request to retrieve 
 1. Select **HTTP**.
 1. Enter a **Connection Name**.
 1. Enter the **Base URL** for authentication.
-1. For Type, ensure that **Datadog** is selected.
+1. For **Type**, ensure that **Datadog** is selected.
 1. From the **Authentication Type** dropdown, select **2 Step Auth**.
 
 {{< tabs >}}
@@ -126,7 +126,7 @@ The Mutual TLS (mTLS) Auth connection allows you to use a private key and TLS ce
 1. Select **HTTP**.
 1. Enter a **Connection Name**.
 1. Enter the **Base URL** for authentication.
-1. For Type, ensure that **Datadog** is selected.
+1. For **Type**, ensure that **Datadog** is selected.
 1. From the **Authentication Type** dropdown, select **mTLS Auth**.
 1. Click **Upload File** to upload your **Private Key**.
 1. Click **Upload File** to upload your **Certificate**.
@@ -153,7 +153,7 @@ Under **Error on Status**, enter a comma-delineated list of any status codes on 
 Private Actions are in beta. Use this form to request access today.
 {{< /callout >}}
 
-You can use a private HTTP action to interact with services hosted on your private network without exposing your services to the public internet. Private actions make use of a private action runner which you install on a host in your network and pair with a Datadog Connection. For more information, see [Private Actions][5].
+You can use a private HTTP action to interact with services hosted on your private network without exposing your services to the public internet. Private actions make use of a private action runner, which you install on a host in your network and pair with a Datadog Connection. For more information, see [Private Actions][5].
 
 To configure a private HTTP request:
 1. Add an HTTP query to your app.

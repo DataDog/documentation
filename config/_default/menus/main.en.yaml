@@ -2191,7 +2191,7 @@ menu:
       url: service_management/workflows/guide/
       parent: workflows
       identifier: workflows_guides
-      weight: 8
+      weight: 9
     - name: App Builder
       url: service_management/app_builder/
       pre: app-builder
@@ -2238,7 +2238,7 @@ menu:
       parent: app_builder
       identifier: app_builder_embedded_apps
       weight: 6
-    - name: Private Actidons
+    - name: Private Actions
       url: service_management/app_builder/private_actions/
       parent: app_builder
       identifier: app_builder_private_actions

@@ -10,7 +10,7 @@ Private Actions are in beta. Use this form to request access today.
 
 ## Overview
 
-Some private actions such as Jenkins and PostgreSQL require credentials to function.
+Some private actions, such as Jenkins and PostgreSQL, require credentials to function.
 - Create a JSON file for the credential and use the JSON structure provided in [Credential files](#credential-files).
 - Store your credential files in the configuration directory you created during setup.
 - When you specify the path to the credential in your runner connection, use the path to the credential file on the container.
@@ -22,7 +22,7 @@ Some private actions such as Jenkins and PostgreSQL require credentials to funct
 
 The PostgreSQL connection requires a PostgreSQL Connection URI credential. 
 
-This example uses the URI: `postgres://usr:password@example_host:5432/example_db`. For information on constructing a PostgreSQL connection URI, see [the official PostgreSQL documentation][101].
+This example uses the URI `postgres://usr:password@example_host:5432/example_db`. For information on constructing a PostgreSQL connection URI, see [the official PostgreSQL documentation][101].
 
 {{< code-block lang="json" filename="/etc/dd-action-runner/creds/creds.pgpass" disable_copy="false" collapsible="true" >}}
 {
@@ -128,7 +128,7 @@ In the runner's connection, specify the location of the credential file on the p
 
 {{% /tab %}}
 
-{{% tab "HTTPS action" %}}
+{{% tab "HTTP action" %}}
 
 ### Basic authentication
 
