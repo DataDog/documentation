@@ -1,6 +1,5 @@
 ---
 title: Search Monitors
-kind: documentation
 description: "Filter the monitor list by using the faceted search"
 ---
 

@@ -18,7 +18,6 @@ further_reading:
   tag: Blog
   text: Utilisez la résolution DNS pour surveiller les endpoints externes et les endpoints
     cloud
-kind: documentation
 title: Surveillance DNS
 ---
 

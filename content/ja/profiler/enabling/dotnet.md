@@ -16,7 +16,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/dotnet-datadog-continuous-profiler/
   tag: GitHub
   text: Datadog Continuous Profiler で .NET アプリケーションのパフォーマンスを最適化する
-kind: ドキュメント
 title: .NET プロファイラーの有効化
 type: multi-code-lang
 ---

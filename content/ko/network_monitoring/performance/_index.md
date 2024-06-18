@@ -30,7 +30,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/npm-story-centric-ux/
   tag: 블로그
   text: NPM의 스토리 중심 UX를 통한 퀵스타트 네트워크 조사
-kind: 설명서
 title: 네트워크 성능 모니터링
 ---
 

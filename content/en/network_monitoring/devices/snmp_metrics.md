@@ -1,6 +1,5 @@
 ---
 title: Collect SNMP Metrics From Your Network Devices
-kind: documentation
 aliases:
     - /network_performance_monitoring/devices/setup/
     - /network_monitoring/devices/setup/

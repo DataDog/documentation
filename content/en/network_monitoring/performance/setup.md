@@ -1,6 +1,5 @@
 ---
 title: Network Performance Monitoring Setup
-kind: documentation
 description: Collect your Network Data with the Agent.
 aliases:
     - /network_performance_monitoring/installation/
@@ -361,7 +360,6 @@ If you already have the [Agent running with a manifest][4]:
 To enable Network Performance Monitoring in Operator, use the following configuration:
 
 ```yaml
-kind: DatadogAgent
 apiVersion: datadoghq.com/v2alpha1
 metadata:
   name: placeholder

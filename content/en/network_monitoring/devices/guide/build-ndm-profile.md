@@ -1,6 +1,5 @@
 ---
 title: Build a NDM Profile
-kind: guide
 aliases:
     - /network_performance_monitoring/devices/guide/build-ndm-profile
 further_reading:

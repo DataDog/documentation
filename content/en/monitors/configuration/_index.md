@@ -1,6 +1,5 @@
 ---
 title: Configure Monitors
-kind: documentation
 description: Describes the monitor creation page.
 aliases:
   - /monitors/create/configuration

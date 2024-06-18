@@ -30,7 +30,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/monitor-consul-with-datadog-npm/
   tag: Blog
   text: Nouvelle prise en charge de la mise en réseau Consul par la solution NPM Datadog
-kind: documentation
 title: Network Performance Monitoring
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: Device Topology Map
-kind: documentation
 aliases:
 - /network_monitoring/devices/network_topology_map
 further_reading:

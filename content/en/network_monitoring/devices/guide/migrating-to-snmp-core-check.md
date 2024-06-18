@@ -1,6 +1,5 @@
 ---
 title: Migrating to the SNMP Core Check (in Go) from the Python-based Check
-kind: guide
 further_reading:
 - link: "network_monitoring/devices/setup"
   tag: "Documentation"
