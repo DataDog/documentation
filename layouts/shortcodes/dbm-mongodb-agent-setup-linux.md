@@ -47,7 +47,11 @@ instances:
     #
     options:
       authSource: admin
-      tls: true  # Enable TLS/SSL connection
+
+    ## @param tls - boolean - optional
+    ## Set to true to connect to the MongoDB instance using TLS.
+    #
+    tls: true
 
     ## @param dbm - boolean - optional
     ## Set to true to enable Database Monitoring.
