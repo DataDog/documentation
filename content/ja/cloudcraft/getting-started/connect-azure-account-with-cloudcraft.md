@@ -1,5 +1,4 @@
 ---
-kind: ドキュメント
 title: Azure アカウントを Cloudcraft に接続する
 ---
 

@@ -6,7 +6,6 @@ further_reading:
 - link: https://docs.datadoghq.com/dashboards/guide/maintain-relevant-dashboards/
   tag: Guide
   text: Pratiques recommandées pour conserver des dashboards pertinents
-kind: guide
 title: Diffuser l'expertise des créateurs de graphiques avec les powerpacks
 ---
 

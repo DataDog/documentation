@@ -1,6 +1,5 @@
 ---
 title: Customize your visualizations with unit override
-kind: Guide
 disable_toc: false
 further_reading:
 - link: "metrics/units/"

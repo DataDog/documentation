@@ -1,6 +1,5 @@
 ---
 title: Remote Configuration
-kind: documentation
 aliases:
 - /agent/guide/how_rc_works
 - /agent/guide/how_remote_config_works

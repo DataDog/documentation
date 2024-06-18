@@ -16,7 +16,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/engineering/performance-improvements-in-the-datadog-agent-metrics-pipeline/
   tag: ブログ
   text: Datadog Agent メトリクスパイプラインのパフォーマンス向上
-kind: documentation
 title: 基本的な Agent の利用方法
 ---
 
