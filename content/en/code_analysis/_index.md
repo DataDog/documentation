@@ -97,7 +97,7 @@ Click **+ Add a Repository** on the [**Code Analysis Repositories** page][9] and
 
 <div class="alert alert-warning">Datadog-hosted scans are supported by Software Composition Analysis (SCA) and GitHub repositories only. To enable Static Analysis or use a different CI provider, run scans in your CI pipelines instead.</div>
 
-To enable [Software Composition Analysis][101] on GitHub repositories, click **Select Repositories** on your desired GitHub account and click the toggle for `Enable Software Composition Analysis (SCA)` to enable for all repositories. If you don't see any GitHub accounts listed, [create a new GitHub App][12] to get started.
+To enable [Software Composition Analysis][101] on GitHub repositories, click **Select Repositories** on your desired GitHub account and click the toggle for `Enable Software Composition Analysis (SCA)` to enable for all repositories. If you don't see any GitHub accounts listed, [create a new GitHub App][102] to get started.
 
 {{< img src="code_analysis/setup/enable_account.png" alt="Enable Software Composition Analysis on all repositories for your GitHub account" style="width:100%;">}}
 
@@ -106,6 +106,7 @@ Optionally, you can select specific GitHub repositories to enable SCA by clickin
 {{< img src="code_analysis/setup/enable_repository.png" alt="Enable Software Composition Analysis on a GitHub repository" style="width:100%;">}}
 
 [101]: /code_analysis/software_composition_analysis
+[102]: /integrations/github/
 
 {{% /tab %}}
 {{% tab "CI Pipelines" %}}
@@ -156,4 +157,3 @@ For more information, see the [Source Code Integration documentation][10].
 [9]: https://app.datadoghq.com/ci/code-analysis
 [10]: /integrations/guide/source-code-integration/?tab=codeanalysis
 [11]: /code_analysis/ide_plugins/
-[12]: /integrations/github/
