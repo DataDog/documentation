@@ -29,7 +29,7 @@ El [producto de monitorización Synthetic][2] permite monitorizar de forma proac
 
 #### Artefactos
 
-Los artefactos son las capturas de pantalla, snapshots, errores y recursos de los tests del navegador.
+Los artefactos son capturas de pantalla, snapshots, errores y recursos de los tests del navegador.
 
 {{< site-region region="us,us3,us5,gov,ap1" >}}
 
