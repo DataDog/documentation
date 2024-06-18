@@ -3508,7 +3508,7 @@ menu:
       weight: 1
     - name: Data Jobs Monitoring
       url: data_jobs/
-      pre: datastreams-monitoring
+      pre: data-jobs-monitoring
       identifier: data_jobs
       parent: apm_heading
       weight: 60000
