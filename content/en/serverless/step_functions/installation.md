@@ -40,10 +40,12 @@ For developers using [Serverless Framework][4] to deploy serverless applications
         apiKeySecretArn: <DATADOG_API_KEY_SECRET_ARN>
         forwarderArn: <FORWARDER_ARN>
         enableStepFunctionsTracing: true
+        propagateUpstreamTrace : true
     ```
     - Replace `<DATADOG_SITE>` with {{< region-param key="dd_site" code="true" >}} (ensure the correct SITE is selected on the right).
     - Replace `<DATADOG_API_KEY_SECRET_ARN>` with the ARN of the AWS secret where your [Datadog API key][3] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can instead use `apiKey` and set the Datadog API key in plaintext.
     - Replace `<FORWARDER_ARN>` with the ARN of your Datadog Lambda Forwarder, as noted previously.
+    - `propagateUpstreamTrace`: Optional. Set to `true` to inject Step Function context into downstream Lambda and Step Function invocations
 
     For additional settings, see [Datadog Serverless Framework Plugin - Configuration parameters][7].
 
@@ -55,7 +57,7 @@ For developers using [Serverless Framework][4] to deploy serverless applications
 [4]: https://www.serverless.com/
 [5]: /logs/guide/forwarder/?tab=cloudformation#upgrade-to-a-new-version
 [6]: logs/guide/forwarder/?tab=cloudformation#installation
-[7]: serverless/libraries_integrations/plugin/#configuration-parameters
+[7]: https://github.com/datadog/serverless-plugin-datadog?tab=readme-ov-file#configuration-parameters
 [8]: /serverless/installation/#installation-instructions
 {{% /tab %}}
 {{% tab "Datadog CLI" %}}
@@ -70,10 +72,17 @@ For developers using [Serverless Framework][4] to deploy serverless applications
 3. Instrument your Step Function.
 
    ```shell
-   datadog-ci stepfunctions instrument --step-function <STEP_FUNCTION_ARN> --forwarder <FORWARDER_ARN>
+   datadog-ci stepfunctions instrument \
+    --step-function <STEP_FUNCTION_ARN> \
+    --forwarder <FORWARDER_ARN> \
+    --env <ENVIRONMENT> \
+    --propagate-upstream-trace
+
    ```
-   - Replace `<STEP_FUNCTION_ARN>` with the ARN of your Step Function.
+   - Replace `<STEP_FUNCTION_ARN>` with the ARN of your Step Function. Repeat the `--step-function` flag for each Step Function you wish to instrument.
    - Replace `<FORWARDER_ARN>` with the ARN of your Datadog Lambda Forwarder, as noted previously.
+   - Replace `<ENVIRONMENT>` with the environment tag you would like to apply to your Step Functions.
+   - `--propagate-upstream-trace` is optional, and will update your Step Function definitions to inject Step Function context into any downstream Step Function or Lambda invocations.
 
    For more information about the `datadog-ci stepfunctions` command, see the [Datadog CLI documentation][5].
 
