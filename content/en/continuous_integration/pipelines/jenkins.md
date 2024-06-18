@@ -1,6 +1,5 @@
 ---
 title: Set up Tracing on a Jenkins Pipeline
-kind: documentation
 aliases:
   - /continuous_integration/setup_pipelines/jenkins
 further_reading:
