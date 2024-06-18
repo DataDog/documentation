@@ -59,6 +59,7 @@ sbom:
   enabled: true
   container_image:
     enabled: true
+  # Enables Host Vulnerability Management  
   host:
     enabled: true
 container_image:

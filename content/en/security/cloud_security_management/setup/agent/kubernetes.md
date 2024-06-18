@@ -30,9 +30,10 @@ Use the following instructions to enable [CSM Misconfigurations][1], [CSM Threat
       features:
         remoteConfiguration:
           enabled: true
+        # Enables Threat Detection
         cws:
           enabled: true
-        # Enables CSM Misconfigurations
+        # Enables Compliance Scanning
         cspm:
           enabled: true
           hostBenchmarks:
@@ -40,9 +41,11 @@ Use the following instructions to enable [CSM Misconfigurations][1], [CSM Threat
         # Enables the image metadata collection and Software Bill of Materials (SBOM) collection
         sbom:
           enabled: true
+          # Enables Container Vulnerability Management
           # Image collection is enabled by default with Datadog Operator version `>= 1.3.0`
           containerImage:
             enabled: true
+          # Enables Host Vulnerability Management
           host:
             enabled: true
     ```
@@ -63,23 +66,24 @@ Use the following instructions to enable [CSM Misconfigurations][1], [CSM Threat
       remoteConfiguration:
         enabled: true
       securityAgent:
-        # Enables CSM Threats
+        # Enables Threat Detection
         runtime:
           enabled: true
-        # Enables CSM Misconfigurations
+        # Enables Compliance Scanning
         compliance:
           enabled: true
           host_benchmarks:
             enabled: true
-      # Enables CSM Vulnerabilities
-      # Image collection is enabled by default with Datadog Helm version `>= 3.46.0`
-      containerImageCollection:
-        enabled: true
       sbom:
         containerImage:
           enabled: true
+        # Enables Container Vulnerability Management
+        # Image collection is enabled by default with Datadog Helm version `>= 3.46.0`
+        containerImageCollection:
+          enabled: true
           # Uncomment the following line if you are using Google Kubernetes Engine (GKE) or Amazon Elastic Kubernetes (EKS)
           # uncompressedLayersSupport: true
+        # Enables Host Vulnerability Management
         host:
           enabled: true
     ```
