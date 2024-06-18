@@ -5,7 +5,6 @@ further_reading:
 - link: /agent/configuration/network/
   tag: 가이드
   text: 네트워크 트래픽
-kind: 가이드
 title: 이중 전달
 ---
 

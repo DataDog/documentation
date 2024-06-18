@@ -9,7 +9,6 @@ further_reading:
 - link: /agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/
   tag: FAQ
   text: 클라우드 인스턴스에 Datadog 에이전트를 설치해야 하는 이유
-kind: 설명서
 title: 에이전트 이용해 시작하기
 ---
 
