@@ -35,7 +35,7 @@ There are two entry points for creating a calculated field in the Log Explorer: 
 
 This is a quick way to create a calculated field when you are already familiar with the structure and content of the logs you are interested in.
 
-## From a specific log event or attribute
+### From a specific log event or attribute
 
 1. Navigate to [Log Explorer][3].
 1. Click on a log event of interest to open the side panel.
@@ -47,7 +47,7 @@ This is a quick way to create a calculated field when you are already familiar w
 
 The option to add a calculated field from a attribute lets you pivot in the midst of an investigation or when exploring unfamiliar logs. For example, you may want to multiply or concatenate two values and store the result in a single field to simplify a graph or answer a specific question.
 
-## Defining a calculated field
+### Defining a calculated field
 
 
 {{< img src="logs/explorer/calculated_fields/define_calculated_field.png" alt="A throughput attribute with the formula network.bytes attribute divided by the duration attribute" style="width:50%;" >}}
