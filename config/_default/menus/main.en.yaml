@@ -111,7 +111,7 @@ menu:
       url: getting_started/logs/
       parent: getting_started
       weight: 10
-    - name: Tracing
+    - name: APM Tracing
       identifier: getting_started_collect_traces
       url: getting_started/tracing/
       parent: getting_started

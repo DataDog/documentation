@@ -1,5 +1,5 @@
 ---
-title: Getting Started with APM
+title: Getting Started with APM Tracing
 kind: documentation
 aliases:
     - /getting_started/tracing/distributed-tracing
@@ -41,6 +41,8 @@ To complete this guide, you need the following:
 ## Set up Datadog APM
 
 To set up Datadog APM without needing to touch your application code, use Single Step APM Instrumentation:
+
+<div class="alert alert-info"><strong>Note</strong>: <a href="https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/single-step-apm/">Single Step APM Instrumentation</a> is in beta. Alternatively, you can  set up APM using <a href="https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/dd-libraries/">Datadog tracing libraries</a>.</div>
 
 1. Run the installation command:
 
@@ -159,6 +161,12 @@ To illustrate this, you are going to import the Datadog Python tracing library i
 
 To add custom instrumentation:
 
+1. Install the Datadog tracing library:
+
+   ```shell
+   pip install ddtrace
+   ```
+
 1. Add the following to `hello.py`:
 
    {{< highlight python "hl_lines=3 15 17" >}}
@@ -177,19 +185,18 @@ To add custom instrumentation:
     @app.route('/')
     def index():
         with tracer.trace("get_quote") as span:
-            quote = get_random_quote()
+            quote = random.choice(quotes)+"\n"
             span.set_tag("quote", quote)
             return quote
-
-    @tracer.wrap("get_random_quote")
-    def get_random_quote():
-        return random.choice(quotes)
 
     if __name__ == '__main__':
         app.run(host='0.0.0.0', port=5050)
    {{< /highlight >}}
 
-1. Restart `hello.py` in the virtual environment from earlier for the changes to take effect.
+1. Run `hello.py` in the virtual environment from earlier:
+   ```shell
+   ddtrace-run python hello.py
+   ```
 1. Run a few `curl` commands in a separate command prompt:
    ```shell
    curl http://0.0.0.0:5050/
