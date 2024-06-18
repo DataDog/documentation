@@ -1,6 +1,5 @@
 ---
 title: Upgrade to Datadog Agent v6
-kind: documentation
 aliases:
   - /agent/faq/upgrade-to-agent-v6
   - /agent/guide/upgrade-to-agent-v6

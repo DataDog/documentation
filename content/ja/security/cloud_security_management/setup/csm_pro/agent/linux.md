@@ -1,7 +1,6 @@
 ---
 code_lang: linux
 code_lang_weight: 75
-kind: ドキュメント
 title: Linux で CSM Pro を有効にする
 type: multi-code-lang
 ---

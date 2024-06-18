@@ -4,7 +4,6 @@ further_reading:
 - link: agent/basic_agent_usage/
   tag: Documentation
   text: Utilisation de base de l'Agent
-kind: Documentation
 title: Plateformes prises en charge
 ---
 
