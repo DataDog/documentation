@@ -10,7 +10,7 @@ has_logo: true
 integration_id: sinatra
 integration_title: Sinatra
 is_public: true
-kind: integration
+custom_kind: integration
 name: Sinatra
 public_title: Datadog-Sinatra 통합
 short_description: Sinatra 애플리케이션 로그 수집.

@@ -1,5 +1,4 @@
 ---
-kind: documentation
 title: Métriques d'estimation d'utilisation
 ---
 

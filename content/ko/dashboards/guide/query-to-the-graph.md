@@ -1,7 +1,6 @@
 ---
 aliases:
 - /ko/dashboards/faq/query-to-the-graph
-kind: 설명서
 title: 그래프에 대한 쿼리
 ---
 

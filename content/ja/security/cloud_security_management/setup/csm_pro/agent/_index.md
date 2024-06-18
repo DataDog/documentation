@@ -1,5 +1,4 @@
 ---
-kind: ドキュメント
 title: Agent で CSM Pro を有効にする
 type: multi-code-lang
 ---

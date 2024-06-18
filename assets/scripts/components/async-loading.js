@@ -22,7 +22,10 @@ function loadPage(newUrl) {
 
     let mainContent = document.getElementById('mainContent');
 
-    if (mainContent) {
+    // temp workaround for integrations page https://datadoghq.atlassian.net/browse/WEB-5018
+    let isIntegrations = document.querySelector('.integrations')
+
+    if (mainContent && !isIntegrations) {
         const currentTOC = document.querySelector('.js-toc-container');
 
         const httpRequest = new XMLHttpRequest();

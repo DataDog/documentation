@@ -2,7 +2,6 @@
 aliases:
 - /ko/agent/faq/upgrade-to-agent-v6
 - /ko/agent/guide/upgrade-to-agent-v6
-kind: 설명서
 title: 에이전트 v6으로 업그레이드
 ---
 
@@ -233,7 +232,7 @@ DD_UPGRADE=true bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/ins
     sudo -u dd-agent -- datadog-agent import /etc/dd-agent/ /etc/datadog-agent/
     ```
 
-5. 에이전트를 재시작 합니다.
+5. 에이전트 재시작
     ```shell
     sudo systemctl restart datadog-agent.service
     ```

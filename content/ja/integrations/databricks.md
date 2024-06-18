@@ -30,7 +30,7 @@ integration_id: databricks
 integration_title: Databricks
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: databricks
 public_title: Databricks

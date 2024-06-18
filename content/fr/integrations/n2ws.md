@@ -28,7 +28,7 @@ integration_id: n2ws
 integration_title: N2WS
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: eliad.eini@n2ws.com
 manifest_version: 1.0.0
 metric_prefix: cpm_metric.

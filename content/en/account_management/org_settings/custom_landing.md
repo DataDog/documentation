@@ -1,6 +1,5 @@
 ---
 title: Custom Organization Landing Page
-kind: documentation
 ---
 
 ## Overview
