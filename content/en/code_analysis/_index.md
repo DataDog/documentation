@@ -1,6 +1,5 @@
 ---
 title: Code Analysis
-kind: documentation
 description: Learn how to use Datadog Code Analysis to address maintainability issues, bugs, and security vulnerabilities in development to prevent customer impact.
 is_beta: true
 further_reading:
