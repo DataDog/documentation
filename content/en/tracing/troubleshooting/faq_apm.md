@@ -17,8 +17,8 @@ further_reading:
 
 
 ---
-If you experience unexpected behavior with APM, the troubleshooting steps on this page can help you resolve the issue quickly. If you continue to have trouble, reach out to [Datadog support][1]. 
 
+If you experience unexpected behavior while using the APM product, the steps on this page can help you quickly resolve the issue. If you continue to have trouble, reach out to [Datadog support][1]. 
 
 
 
@@ -39,19 +39,19 @@ To resolve this, configure the trace sampling rule to 100% for the needed applic
 
 ## Common issues associated with data volume guidelines
 If you experiencing any of the following issues, you might be exceeding our [Data Volume Guidelines][5]:
-- missing some resources
-- trace metrics skewed/not reporting correctly
-- missing services in the service page even though they are reporting traces
+- <strong> missing some resources </strong>
+- <strong> trace metrics skewed/not reporting correctly </strong>
+- <strong> missing services in the service page even though they are reporting traces </strong>
 
 
-For a given 40 minute interval, Datadog accepts the following combinations. 
-- 1000 unique environments and service combinations
-- 30 unique second primary tag values per environment
-- 100 unique operation names per environment and service
-- 1000 unique resources per environment, service, and operation name
-- 30 unique versions per environment and service
+For a given 40 minute interval, Datadog accepts the following combinations:
+- 1000 unique `environments` and `service` combinations
+- 30 unique `second primary tag values` per environment
+- 100 unique `operation names` per environment and service
+- 1000 unique `resources` per environment, service, and operation name
+- 30 unique `versions` per environment and service
 
-To accommodate larger volumes contact [Datadog support][1] to discuss your use case.
+If you need to accommodate larger volumes, contact [Datadog support][1] with your use case.
 
 ## One service is showing up as multiple different services in Datadog.
 
