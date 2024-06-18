@@ -106,28 +106,33 @@ To get the individual MongoDB instances for each shards, you can connect to the 
 
 ```shell
 use admin
-db.runCommand({ listShards: 1 })
+db.runCommand("getShardMap")
 ```
 
 The output will be similar to:
 
 ```shell
 {
-  "shards" : [
-    {
-      "_id" : "shard-0",
-      "host" : "XXXXX-00-00.4zh9o.mongodb.net:27017,XXXXX-00-01.4zh9o.mongodb.net:27017,XXXXX-00-02.4zh9o.mongodb.net:27017"
-    },
-    {
-      "_id" : "shard-1",
-      "host" : "XXXXX-01-00.4zh9o.mongodb.net:27017,XXXXX-01-01.4zh9o.mongodb.net:27017,XXXXX-01-02.4zh9o.mongodb.net:27017"
-    }
-  ],
+  "map" : {
+    "shard-0": "shard-0/XXXXX-00-00.4zh9o.mongodb.net:27017,XXXXX-00-01.4zh9o.mongodb.net:27017,XXXXX-00-02.4zh9o.mongodb.net:27017",
+    "shard-1": "shard-1/XXXXX-01-00.4zh9o.mongodb.net:27017,XXXXX-01-01.4zh9o.mongodb.net:27017,XXXXX-01-02.4zh9o.mongodb.net:27017"
+  },
+  "hosts": {
+    "XXXXX-00-00.4zh9o.mongodb.net:27017": "shard-0",
+    "XXXXX-00-01.4zh9o.mongodb.net:27017": "shard-0",
+    "XXXXX-00-02.4zh9o.mongodb.net:27017": "shard-0",
+    "XXXXX-01-00.4zh9o.mongodb.net:27017": "shard-1",
+    "XXXXX-01-01.4zh9o.mongodb.net:27017": "shard-1",
+    "XXXXX-01-02.4zh9o.mongodb.net:27017": "shard-1"
+    "XXXXX-00-00-config.4zh9o.mongodb.net:27017": "config",
+    "XXXXX-00-01-config.4zh9o.mongodb.net:27017": "config",
+    "XXXXX-00-02-config.4zh9o.mongodb.net:27017": "config"
+  },
   "ok" : 1
 }
 ```
 
-In this example, the individual MongoDB instances for shard-0 are `XXXXX-00-00.4zh9o.mongodb.net:27017`, `XXXXX-00-01.4zh9o.mongodb.net:27017`, and `XXXXX-00-02.4zh9o.mongodb.net:27017`, and for shard-1 are `XXXXX-01-00.4zh9o.mongodb.net:27017`, `XXXXX-01-01.4zh9o.mongodb.net:27017`, and `XXXXX-01-02.4zh9o.mongodb.net:27017`. You can use one of these hostnames to configure the Agent.
+In this example, the individual MongoDB instances for shard-0 are `XXXXX-00-00.4zh9o.mongodb.net:27017`, `XXXXX-00-01.4zh9o.mongodb.net:27017`, and `XXXXX-00-02.4zh9o.mongodb.net:27017`, for shard-1 are `XXXXX-01-00.4zh9o.mongodb.net:27017`, `XXXXX-01-01.4zh9o.mongodb.net:27017`, and `XXXXX-01-02.4zh9o.mongodb.net:27017`, and for the config server are `XXXXX-00-00-config.4zh9o.mongodb.net:27017`, `XXXXX-00-01-config.4zh9o.mongodb.net:27017`, and `XXXXX-00-02-config.4zh9o.mongodb.net:27017`. You can use one of these hostnames to configure the Agent.
 {{% /tab %}}
 {{< /tabs >}}
 
