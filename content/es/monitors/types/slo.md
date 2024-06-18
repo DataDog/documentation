@@ -13,7 +13,7 @@ title: Alertas de SLOs
 ---
 
 <div class="alert alert-info">
-Este monitor está disponible para SLOs basados en métricas, SLOs basados en periodos de tiempo y SLOs basados en monitores compuestos por tipos de monitores de métricas (métricas, integraciones, métricas de APM, anomalías, predicciones o monitores de outliers).
+Este monitor está disponible para SLOs basados en métricas, SLOs basados en periodos de tiempo y SLOs basados en monitores compuestos por tipos de monitores de métricas (monitores de métricas, integraciones, métricas de APM, anomalías, predicciones o outliers).
 </div>
 
 ## Información general
@@ -40,7 +40,7 @@ Las [alertas de las tasas de consumo][4] te notifican cuando la tasa de consumo 
 
 Para obtener instrucciones detalladas sobre la sección **Configurar notificaciones y automatizaciones**, consulta la página [Notificaciones][3].
 
-Además de las [variables de plantillas estándar][6] disponibles en todos los tipos de monitores, las alertas de SLOs también admiten las siguientes variables: 
+Además de las [variables de plantilla estándar][6] disponibles en todos los tipos de monitores, las alertas de SLOs también admiten las siguientes variables: 
 
 | Variable   | Descripción   |
 | ---------- | ------------- |
