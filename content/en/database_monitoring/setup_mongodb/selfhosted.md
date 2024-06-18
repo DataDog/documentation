@@ -169,7 +169,21 @@ The Database Monitoring feature for MongoDB is available in the beta version of 
 {{% /tab %}}
 {{< /tabs >}}
 
-### Configure the Agent
+### Create configuration file
+
+{{< tabs >}}
+{{% tab "Standalone" %}}
+{{% dbm-mongodb-agent-config-standalone %}}
+{{% /tab %}}
+{{% tab "Replica Set" %}}
+{{% dbm-mongodb-agent-config-replica-set %}}
+{{% /tab %}}
+{{% tab "Sharded Cluster" %}}
+{{% dbm-mongodb-agent-config-sharded-cluster %}}
+{{% /tab %}}
+{{< /tabs >}}
+
+### Setup the Agent
 
 {{< tabs >}}
 {{% tab "Linux Host" %}}
