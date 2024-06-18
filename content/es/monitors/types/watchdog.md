@@ -20,7 +20,7 @@ title: Monitor Watchdog
 
 ## Creación de un monitor
 
-Para crear un [monitor de Watchdog][2] en Datadog, utiliza la navegación principal: *Monitors --> New Monitor --> Watchdog* (Monitores > Nuevo monitor > Watchdog).
+Para crear un [monitor Watchdog][2] en Datadog, utiliza la navegación principal: *Monitors --> New Monitor --> Watchdog* (Monitores > Nuevo monitor > Watchdog).
 
 {{< img src="/monitors/monitor_types/watchdog/watchdog-monitor-1.png" alt="Configuración de un monitor Watchdog" style="width:80%;">}}
 
@@ -43,7 +43,7 @@ Una vez realizadas las selecciones, el gráfico de la parte superior de la pági
 
 Para obtener instrucciones detalladas sobre la sección **Configurar notificaciones y automatizaciones**, consulta la página [Notificaciones][4].
 
-## Lectura adicional
+## Leer más
 
 {{< partial name="whats-next/whats-next.html" >}}
 
