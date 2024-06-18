@@ -71,7 +71,7 @@ When an alias is provided in a `FROM` item, it completely hides the actual name 
 
 For example, the output of this query is ordered first by `ex1`, then `ex2`, and then `ex3`:
 
-{{< code-block lang="java" filename="block.java" disable_copy="true" collapsible="true" >}}
+{{< code-block lang="sql" >}}
 SELECT ex1, ex2, ex3 FROM table ORDER BY 3, 2, 1;
 {{< /code-block >}}
 
