@@ -22,8 +22,8 @@ This example flow highlights the key features of DDSQL Editor. If the example qu
 
 ### 1. Run a natural language query
 
-1. Navigate to [DDSQL][1].
-2. In the natural language prompt, type `Most common instance types`?
+1. Navigate to [DDSQL Editor][1].
+2. In the natural language prompt, type `Most common instance types`.
 
 The resulting generated query is similar to the one below.
 

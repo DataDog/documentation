@@ -8,7 +8,7 @@ DDSQL is in private beta.
 
 <div class="alert alert-warning">AGGR functions are experimental, and subject to change.</div>
 
-`AGGR` functions are functions that can be used in the `AGGR` statement and executed by the metrics query system. `AGGR` functions take one parameter, which can be either a string name of the metric being queried, or a [DQLExpr][1] subquery (for [multilayer aggregation]).
+`AGGR` functions are functions that can be used in the `AGGR` statement and executed by the metrics query system. `AGGR` functions take one parameter, which can be either a string name of the metric being queried, or a [DQLExpr][1] subquery (for [multilayer aggregation][2]).
 
 ## avg
 | Name | Description |
@@ -96,3 +96,4 @@ DDSQL is in private beta.
 | auto_avg(text *metric_name*) | Returns an automatic average aggregation (based on metric type). For rate and count metrics, returns the space average and time sum for each bucket. For gauge metrics, returns the space and time true average for each bucket with the `as_rate()` modifier applied. For distribution metrics, returns the space and time true average for each bucket. |
 
 [1]: /dashboards/ddsql_editor/reference#supported-sql-syntax
+[2]: /dashboards/ddsql_editor/reference/statements/#multilayer-aggregation

@@ -8,9 +8,9 @@ DDSQL is in private beta.
 
 ## Overview
 
-With DDSQL, you can use SQL syntax to query your infrastructure in the [DDSQL Editor][2] in Datadog. 
+DDSQL is a query language for Datadog data. It implements several standard SQL functions, such as `SELECT`, along with new functions for working with Datadog tags, metrics, and so on. For example, [the `AGGR` statement][5], which aggregates metrics data, is unique to DDSQL.
 
-DDSQL implements several standard SQL functions, along with new functions for working with Datadog tags, metrics, and so on. For example, [the `AGGR` statement][5], which aggregates metrics data, is unique to DDSQL.
+You can use DDSQL to query your infrastructure in the [DDSQL Editor][2] in Datadog.
 
 DDSQL uses a [schema on read](#schema-on-read) approach to allow queries against unstructured data, such as [tags][1]. Each query is executed within a [session](#sessions) that can be configured with environment variables.
 
@@ -42,7 +42,7 @@ SQL is broken into five different categories of statements. The table below indi
 
 DDSQL queries are executed within a session. The session provides the user with a writable DDSQL environment. Modifications made by SQL statements, such as the creation of a table, are visible by subsequent statements in a session, but do not outlive the session. You can think of a session as executing within a `BEGIN ... ROLLBACK`.
 
-Some options, such as time frame, are exposed runtime parameters within the environment and may be modified with [`SET`][3] and read with [`SHOW`][4].
+Some options, such as the time frame of the query, are exposed runtime parameters within the environment and may be modified with [`SET`][3] and read with [`SHOW`][4].
 
 The default schema in the session includes foreign table definitions that model different parts of the downstream data sources that DDSQL supports.
 
