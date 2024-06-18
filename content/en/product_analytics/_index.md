@@ -10,6 +10,10 @@ further_reading:
   text: "RUM Explorer"
 ---
 
+{{< callout url="http://datadoghq.com/private-beta/product-analytics" header="false" >}}
+Product Analytics is in private beta. To request access, complete the form.
+{{< /callout >}}
+
 ## Overview
 
 {{< img src="product_analytics/overview.png" alt="Landing page of Product Analytics.">}}
@@ -27,7 +31,7 @@ Below are some key pillars of Datadog Product Analytics.
 
 ## Measure user retention
 
-Use [Retention Analysis][1] to measure how a group of users engage with specific features over time to understand where dropoff occurs.
+Use [Retention Analysis][1] to measure how a group of users engage with specific features over time to understand where drop-off occurs.
 
 ## Map user journeys
 

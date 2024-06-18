@@ -25,7 +25,7 @@ All Product Analytics events that match your filter query are aggregated into gr
 
 - Unique count of coded values for a facet per group
 
-  {{< img src="product_analytics/analytics/group/group-count-of-coded-values.png" alt="Group by unique count of coded values" style="width:90%;" >}}
+  {{< img src="product_analytics/analytics/group/count-of-coded-values.png" alt="Group by unique count of coded values" style="width:90%;" >}}
 
 - Statistical operations (such as minimum, maximum, average, and percentiles) on a facet's numerical values per group
 

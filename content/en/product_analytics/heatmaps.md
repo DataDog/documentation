@@ -13,6 +13,10 @@ further_reading:
   text: 'Visualize user interactions with your pages by using Scrollmaps in Datadog Heatmaps'
 ---
 
+{{< callout url="http://datadoghq.com/private-beta/product-analytics" header="false" >}}
+All features in Product Analytics are in private beta. To request access, complete the form.
+{{< /callout >}}
+
 {{< img src="real_user_monitoring/heatmaps/heatmap_v2.png" alt="An overview of the heatmap functionality." style="width:100%;">}}
 
 A heatmap (or heat map) is a visualization of your user's interactions overlaid on Session Replay data. RUM has three different types of heatmaps:
