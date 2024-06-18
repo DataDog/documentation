@@ -50,7 +50,6 @@ The available operators in order of precedence:
 ### Arithmetic
 
 #### abs(num value)
-<h4>abs(<i>num</i> value)</h4>
 
 Returns the absolute value of a number.
 
@@ -152,7 +151,7 @@ Extracts a portion of text from the beginning of a string.
 <summary>Example</summary>
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A log event has the following attribute: <code>@country</code>="Canada"<br><br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Formula: upper(prefix(<code>@country</code>, 3))
-<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Result: "CA"
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Result: "CAN"
 </details>
 
 #### proper(str string)
