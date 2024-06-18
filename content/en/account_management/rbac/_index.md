@@ -1,6 +1,5 @@
 ---
 title: Access Control
-kind: documentation
 aliases:
     - /guides/rbac
     - /account_management/rbac/role_api

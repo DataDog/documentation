@@ -4,7 +4,6 @@ further_reading:
 - link: /account_management/audit_trail/
   tag: ドキュメント
   text: 監査証跡について
-kind: ドキュメント
 title: カスタム宛先への監査イベントの転送
 ---
 
