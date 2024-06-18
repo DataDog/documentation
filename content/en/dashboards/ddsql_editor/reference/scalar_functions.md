@@ -45,8 +45,6 @@ These functions return one value per row.
 |------|-------------|-------------|
 | regexp_replace(text *s*, text *pattern*, text *replacement*) | string | Replace substrings in *s* that match the POSIX regular expression *pattern* with the *replacement*. Supports Go's [regular expression syntax][1]. |
 
-<!-- QUERY: Should return type be "text" in the tables below? -->
-
 ### reverse
 | Name | Return type | Description |
 |------|-------------|-------------|
@@ -163,12 +161,10 @@ These functions return one value per row.
 |------|-------------|-------------|
 | date_diff(string *precision*, timestamp *t1*, timestamp *t2*) | integer | Returns the difference between two dates, in the precision specified. *precision* is one of("second", "minute", "hour", "day", "week", "month", "quarter", "year") |
 
-<!-- QUERY below function description is unclear. Time in seconds since the Unix epoch? -->
-
 ### to_timestamp
 | Name | Return type | Description |
 |------|-------------|-------------|
-| to_timestamp(numeric *n*) | timestamp | Transforms *n* into a timestamp, considering *n* as the time in seconds. |
+| to_timestamp(numeric *n*) | timestamp | Transforms *n* into a timestamp, with *n* being the time in seconds. |
 
 ### Conditional expressions
 
