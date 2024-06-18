@@ -56,7 +56,7 @@ The following sample is a minimal configuration for core infrastructure monitori
     - If you are using Windows, use [datadog-agent-ecs-win.json][22] 
 
    <div class="alert alert-info">
-   These files provide minimal configuration for core infrastructure monitoring. For more sample task definition files with various features enabled, see the <a href="#set-up-additioinal-agent-features">Set up additional Agent features</a> section on this page.
+   These files provide minimal configuration for core infrastructure monitoring. For more sample task definition files with various features enabled, see the <a href="#set-up-additional-agent-features">Set up additional Agent features</a> section on this page.
    </div>
 2. Edit your base task definition file
     - Set the `DD_API_KEY` environment variable by replacing `<YOUR_DATADOG_API_KEY>` with the [Datadog API key][14] for your account. Alternatively, you can also [supply the ARN of a secret stored in AWS Secrets Manager][16].
@@ -408,9 +408,6 @@ Need help? Contact [Datadog support][11].
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/integrations/faq/agent-5-amazon-ecs/
-[2]: https://docs.datadoghq.com/agent/docker/integrations/?tab=docker
-[3]: https://docs.datadoghq.com/integrations/ecs_fargate/
 [4]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/create-ec2-cluster-console-v2.html
 [5]: https://docs.datadoghq.com/agent/autodiscovery/
 [6]: /containers/amazon_ecs/apm/
