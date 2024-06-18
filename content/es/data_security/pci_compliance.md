@@ -3,21 +3,21 @@ disable_toc: false
 further_reading:
 - link: https://www.datadoghq.com/blog/datadog-pci-compliance-log-management-apm/
   tag: Blog
-  text: Datadog presenta los servicios de Log Management y APM que cumplen con el
-    PCI
+  text: Datadog presenta los servicios Log Management y APM de Datadog que cumplen
+    con el PCI
 kind: Documentation
-title: Cumplimiento del PCI DSS
+title: Cumplimiento del estándar PCI DSS
 ---
 
 {{% site-region region="us3,us5,eu,ap1,gov" %}}
 <div class="alert alert-warning">
-La conformidad con PCI DSS para APM y Log Management sólo está disponible para las organizaciones de Datadog en el <a href="/getting_started/site/">sitio US1</a>.
+La conformidad con el PCI DSS para APM y Log Management sólo está disponible para las organizaciones de Datadog en el <a href="/getting_started/site/">sitio US1</a>.
 </div>
 {{% /región del sitio %}}
 
 {{% site-region region="us" %}}
 <div class="alert alert-warning">
-El cumplimiento con PCI DSS para APM y Log Management sólo está disponible para organizaciones de Datadog en el <a href="/getting_started/site/">sitio US1</a>.
+El cumplimiento con el PCI DSS para APM y Log Management sólo está disponible para organizaciones de Datadog en el <a href="/getting_started/site/">sitio US1</a>.
 </div>
 
 ## Información general
