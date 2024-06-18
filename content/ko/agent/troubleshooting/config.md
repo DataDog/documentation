@@ -3,7 +3,6 @@ further_reading:
 - link: /agent/troubleshooting/debug_mode/
   tag: Agent 트러블슈팅
   text: Agent 디버그 모드
-kind: 설명서
 title: Agent 런타임 설정 관리
 ---
 

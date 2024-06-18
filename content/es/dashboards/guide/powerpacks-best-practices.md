@@ -12,7 +12,6 @@ further_reading:
 - link: https://docs.datadoghq.com/dashboards/guide/maintain-relevant-dashboards/
   tag: Guía
   text: Prácticas recomendadas para conservar dashboards relevantes
-kind: guía
 title: Escalar los conocimientos sobre la creación de gráficos con Powerpacks
 ---
 

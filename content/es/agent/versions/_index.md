@@ -12,7 +12,6 @@ further_reading:
 - link: agent/faq/agent_v6_changes
   tag: FAQ
   text: Cambios en el Agent v6
-kind: documentación
 title: Diferencias entre versiones del Agent
 ---
 

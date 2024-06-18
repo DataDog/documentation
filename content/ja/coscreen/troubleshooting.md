@@ -1,6 +1,5 @@
 ---
 is_beta: false
-kind: ガイド
 title: CoScreen の最適化およびトラブルシューティング
 ---
 

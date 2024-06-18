@@ -1,6 +1,5 @@
 ---
 title: ユーザー管理
-kind: documentation
 description: オーガニゼーションのユーザーを追加または削除します。ユーザーのロールを変更します。
 aliases:
   - /ja/account_management/team/
