@@ -22,7 +22,7 @@ further_reading:
       tag: 'Documentation'
       text: 'API documentation'
     - link: 'tracing/glossary/'
-      tag: 'Use the APM UI'
+      tag: 'Documentation'
       text: 'Explore your services, resources and traces'
     - link: 'tracing/'
       tag: 'Documentation'

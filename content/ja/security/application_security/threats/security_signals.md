@@ -9,7 +9,6 @@ further_reading:
 - link: /security/application_security/threats/threat-intelligence/
   tag: ドキュメント
   text: ASM 脅威インテリジェンス
-kind: ドキュメント
 title: セキュリティシグナルの調査
 ---
 

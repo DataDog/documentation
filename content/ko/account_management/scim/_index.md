@@ -11,7 +11,6 @@ further_reading:
 - link: account_management/scim/okta
   tag: 설명서
   text: Okta로 SCIM 설정
-kind: documentation
 title: SCIM을 이용한 사용자 프로비저닝
 ---
 

@@ -6,7 +6,6 @@ further_reading:
 - link: /agent/troubleshooting/send_a_flare/
   tag: Agent のトラブルシューティング
   text: Agent フレアの送信
-kind: documentation
 title: Agent チェックのステータス
 ---
 

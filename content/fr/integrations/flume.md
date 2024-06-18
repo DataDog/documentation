@@ -22,7 +22,7 @@ integration_id: flume
 integration_title: flume
 integration_version: 0.0.1
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: kealan.maas@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: flume.

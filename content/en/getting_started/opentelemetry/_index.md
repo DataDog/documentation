@@ -3,7 +3,7 @@ title: Getting Started with OpenTelemetry at Datadog
 kind: documentation
 further_reading:
 - link: 'https://opentelemetry.io/docs/'
-  tag: 'OpenTelemetry'
+  tag: 'External Site'
   text: 'OpenTelemetry Documentation'
 - link: '/opentelemetry'
   tag: 'Documentation'
@@ -241,8 +241,6 @@ environment:
   - OTEL_SERVICE_NAME=calendar-otel
   - OTEL_RESOURCE_ATTRIBUTES=deployment.environment=docker,host.name=otelcol-docker
 {{< /code-block >}}
-
-<div class="alert alert-warning">For OpenTelemetry applications, unified service tagging is supported for only metrics and traces, not logs.</div>
 
 ## Running the application
 

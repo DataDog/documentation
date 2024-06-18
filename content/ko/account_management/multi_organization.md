@@ -14,7 +14,6 @@ further_reading:
 - link: /account_management/billing/usage_attribution
   tag: Documentation
   text: Set-up Usage Attribution
-kind: 설명서
 title: 다중 조직 계정 관리
 ---
 

@@ -21,7 +21,7 @@ integration_id: bottomline-mainframe
 integration_title: Bottomline Record and Replay
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0

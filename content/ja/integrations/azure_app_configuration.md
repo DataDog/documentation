@@ -12,7 +12,7 @@ integration_id: azure-app-configuration
 integration_title: Microsoft Azure App Configuration
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: azure_app_configuration
 public_title: Datadog-Microsoft Azure App Configuration インテグレーション

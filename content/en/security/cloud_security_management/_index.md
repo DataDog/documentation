@@ -1,6 +1,5 @@
 ---
 title: Cloud Security Management
-kind: documentation
 aliases:
   - /security_platform/cloud_security_management/
 further_reading:

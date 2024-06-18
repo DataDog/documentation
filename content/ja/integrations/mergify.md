@@ -34,7 +34,7 @@ integration_id: mergify
 integration_title: Mergify
 integration_version: 1.0.2
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: mergify
 public_title: Mergify

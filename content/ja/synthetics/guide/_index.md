@@ -19,9 +19,8 @@ title: Synthetic モニタリングガイド
 
 {{< whatsnext desc="アラート:" >}}
     {{< nextlink href="synthetics/guide/synthetic-test-monitors/" >}}Synthetic テストでモニターを使用する{{< /nextlink >}}
-    {{< nextlink href="synthetics/guide/synthetic-test-retries-monitor-status/" >}}Synthetic テストのリトライがモニターステータスにどのように影響を与えるかを理解する{{< /nextlink >}}
-    {{< nextlink href="synthetics/guide/synthetic-test-monitors/" >}}Synthetic テストでモニターを使用する{{< /nextlink >}}
-    {{< nextlink href="synthetics/guide/uptime-percentage-widget" >}}SLO を使用して Web サイトのアップタイムを監視する{{< /nextlink >}}
+    {{< nextlink href="synthetics/guide/synthetic-test-retries-monitor-status/" >}}Synthetic テストの再試行がどのようにモニターのステータスを決定するかを理解する{{< /nextlink >}}
+    {{< nextlink href="synthetics/guide/uptime-percentage-widget" >}}SLO による Web サイトのアップタイムの監視{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="API:" >}}

@@ -13,7 +13,7 @@ integration_id: google-app-engine
 integration_title: Google App Engine
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: google_app_engine
 public_title: Intégration Datadog/Google App Engine

@@ -1,6 +1,5 @@
 ---
 title: Find a Cloud Account or Team ID using our API
-kind: guide
 ---
 
 ## Overview

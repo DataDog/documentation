@@ -1,6 +1,5 @@
 ---
 title: Timeseries Widget
-kind: documentation
 widget_type: timeseries
 description: "Display the evolution of one or more metrics, log events, indexed spans, or process metrics over time."
 aliases:

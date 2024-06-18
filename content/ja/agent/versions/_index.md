@@ -12,7 +12,6 @@ further_reading:
 - link: agent/faq/agent_v6_changes
   tag: よくあるご質問
   text: Agent v6 の変更点
-kind: documentation
 title: Agent バージョンの違い
 ---
 

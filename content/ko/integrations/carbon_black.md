@@ -11,7 +11,7 @@ has_logo: true
 integration_id: carbonblack
 integration_title: Carbon Black
 is_public: true
-kind: integration
+custom_kind: integration
 name: carbon_black
 public_title: Datadog-Carbon Black 통합
 short_description: Carbon Black 디펜스 로그 수집

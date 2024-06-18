@@ -4,7 +4,7 @@ kind: Documentation
 further_reading:
 - link: "/universal_service_monitoring/"
   tag: "Documentation"
-  text: "Universal Service Monitoring"
+  text: "Learn about Universal Service Monitoring"
 - link: "https://www.datadoghq.com/blog/universal-service-monitoring-datadog/"
   tag: "Blog"
   text: "Golden signals in seconds with Universal Service Monitoring"
@@ -26,6 +26,9 @@ Supported Windows platforms
 Supported application-layer protocols
 : HTTP<br/>
 HTTPS (OpenSSL)
+
+Known limitations
+: Universal Service Monitoring requires the use of Datadog's `system-probe`, which is not supported on Google Kubernetes Engine (GKE) Autopilot.
 
 <div class="alert alert-info">
 Additional protocols and traffic encryption methods are supported in <a href="/universal_service_monitoring/additional_protocols/">private beta</a>. If you have feedback about what platforms and protocols you'd like to see supported, <a href="/help/">contact Support</a>.
@@ -805,12 +808,53 @@ agents:
 
 {{< /tabs >}}
 
+### NodeJS TLS Monitoring
+
+<div class="alert alert-info">
+Universal Service Monitoring is available in <strong>beta</strong> to monitor HTTP, HTTP/2, and gRPC requests from services implemented in NodeJS.
+</div>
+
+**Note**:
+* Requires Agent version 7.54 or greater.
+
+{{< tabs >}}
+{{% tab "Configuration file" %}}
+
+Add the following configuration to the `system-probe.yaml`:
+
+```yaml
+service_monitoring_config:
+  enabled: true
+  tls:
+    nodejs:
+      enabled: true
+```
+
+{{% /tab %}}
+{{% tab "Environment variable" %}}
+
+```conf
+DD_SERVICE_MONITORING_CONFIG_TLS_NODEJS_ENABLED=true
+```
+{{% /tab %}}
+
+{{% tab "Helm" %}}
+
+```conf
+agents:
+  containers:
+    systemProbe:
+      env:
+        - name: DD_SERVICE_MONITORING_CONFIG_TLS_NODEJS_ENABLED
+          value: "true"
+```
+{{% /tab %}}
+
+{{< /tabs >}}
 
 ### Istio Monitoring
 
-<div class="alert alert-info">
-Universal Service Monitoring is available in <strong>beta</strong> to monitor services behind <a href="https://istio.io/latest/docs/tasks/security/authentication/mtls-migration/">Istio mTLS</a> and to capture encrypted HTTPs traffic.
-</div>
+Universal Service Monitoring is available to monitor services behind <a href="https://istio.io/latest/docs/tasks/security/authentication/mtls-migration/">Istio mTLS</a> and to capture encrypted HTTPs, HTTP/2, and gRPC traffic.
 
 Requires Agent version 7.50 or greater.
 
