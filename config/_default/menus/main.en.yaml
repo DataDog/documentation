@@ -2693,15 +2693,50 @@ menu:
       parent: cloud_cost
       identifier: cloud_cost_google_cloud
       weight: 3
-    - name: Custom Costs
-      url: cloud_cost_management/custom
-      parent: cloud_cost
-      identifier: cloud_cost_custom
-      weight: 4
     - name: SaaS Cost Integrations
       url: cloud_cost_management/saas_costs
       parent: cloud_cost
       identifier: cloud_cost_saas_cost_integrations
+      weight: 4
+    - name: Databricks
+      url: cloud_cost_management/saas_costs/?tab=databricks
+      parent: cloud_cost_saas_cost_integrations
+      identifier: cloud_cost_saas_cost_integrations_databricks
+      weight: 401
+    - name: Confluent Cloud
+      url: cloud_cost_management/saas_costs/?tab=confluentcloud
+      parent: cloud_cost_saas_cost_integrations
+      identifier: cloud_cost_saas_cost_integrations_confluentcloud
+      weight: 402
+    - name: MongoDB
+      url: cloud_cost_management/saas_costs/?tab=mongodb
+      parent: cloud_cost_saas_cost_integrations
+      identifier: cloud_cost_saas_cost_integrations_mongodb
+      weight: 403
+    - name: Snowflake
+      url: cloud_cost_management/saas_costs/?tab=snowflake
+      parent: cloud_cost_saas_cost_integrations
+      identifier: cloud_cost_saas_cost_integrations_snowflake
+      weight: 404
+    - name: OpenAI
+      url: cloud_cost_management/saas_costs/?tab=openai
+      parent: cloud_cost_saas_cost_integrations
+      identifier: cloud_cost_saas_cost_integrations_openai
+      weight: 405
+    - name: Fastly
+      url: cloud_cost_management/saas_costs/?tab=fastly
+      parent: cloud_cost_saas_cost_integrations
+      identifier: cloud_cost_saas_cost_integrations_fastly
+      weight: 406
+    - name: Twilio
+      url: cloud_cost_management/saas_costs/?tab=twilio
+      parent: cloud_cost_saas_cost_integrations
+      identifier: cloud_cost_saas_cost_integrations_twilio
+      weight: 407
+    - name: Custom Costs
+      url: cloud_cost_management/custom
+      parent: cloud_cost
+      identifier: cloud_cost_custom
       weight: 5
     - name: Tag Pipelines
       url: cloud_cost_management/tag_pipelines
