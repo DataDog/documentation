@@ -20,8 +20,10 @@ Select a log source to get started:
 - [Splunk HTTP Event Collector (HEC)][1]
 - [Splunk Heavy and Universal Forwarders (TCP)][2]
 - [Sumo Logic Hosted Collector][3]
+- [Rsyslog or Syslog-ng][5]
 
 [1]: /observability_pipelines/log_volume_control/splunk_hec
 [2]: /observability_pipelines/log_volume_control/splunk_tcp
 [3]: /observability_pipelines/log_volume_control/sumo_logic_hosted_collector
 [4]: /observability_pipelines/log_volume_control/datadog_agent
+[5]: /observability_pipelines/log_volume_control/syslog

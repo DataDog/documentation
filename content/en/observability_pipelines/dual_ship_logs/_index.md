@@ -17,7 +17,9 @@ Select a source to get started:
 - [Splunk HTTP Event Collector (HEC)][1]
 - [Splunk Heavy and Universal Forwarders (TCP)][2]
 - [Sumo Logic Hosted Collector][3]
+- [Rsyslog or Syslog-ng][4]
 
 [1]: /observability_pipelines/dual_ship_logs/splunk_hec
 [2]: /observability_pipelines/dual_ship_logs/splunk_tcp
 [3]: /observability_pipelines/dual_ship_logs/sumo_logic_hosted_collector
+[4]: /observability_pipelines/dual_ship_logs/syslog

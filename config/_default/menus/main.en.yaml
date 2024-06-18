@@ -4035,6 +4035,11 @@ menu:
       parent: observability_pipelines_log_volume_control
       identifier: observability_pipelines_log_volume_control_sumo_logic_hosted_collector
       weight: 2004
+    - name: Syslog
+      url: observability_pipelines/log_volume_control/syslog/
+      parent: observability_pipelines_log_volume_control
+      identifier: observability_pipelines_log_volume_control_syslog
+      weight: 2005
     - name: Dual Ship Logs
       url: observability_pipelines/dual_ship_logs/
       parent: observability_pipelines
@@ -4105,6 +4110,11 @@ menu:
       parent: observability_pipelines_split_logs
       identifier: observability_pipelines_split_logs_sumo_logic_hosted_collector
       weight: 5004
+    - name: Syslog
+      url: observability_pipelines/split_logs/syslog/
+      parent: observability_pipelines_split_logs
+      identifier: observability_pipelines_split_logs_syslog
+      weight: 5005
     - name: Sensitive Data Redaction
       url: observability_pipelines/sensitive_data_redaction/
       parent: observability_pipelines
@@ -4130,6 +4140,11 @@ menu:
       parent: observability_pipelines_sensitive_data_redaction
       identifier: observability_pipelines_sensitive_data_redaction_sumo_logic_hosted_collector
       weight: 6004
+    - name: Sensitive Data Redaction
+      url: observability_pipelines/sensitive_data_redaction/syslog/
+      parent: observability_pipelines_sensitive_data_redaction
+      identifier: observability_pipelines_sensitive_data_redaction_syslog
+      weight: 6005
     - name: Update Existing Pipelines
       url: observability_pipelines/update_existing_pipelines/
       parent: observability_pipelines
