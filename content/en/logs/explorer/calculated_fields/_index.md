@@ -11,6 +11,10 @@ further_reading:
 
 ## Overview
 
+{{< beta-callout url="https://docs.google.com/forms/d/18tDqsB2pg0gC2irdtfIscSsxbDkRfVbEqowLku4Uqvg/viewform?edit_requested=true" >}}
+Calculated Fields is in beta.
+{{< /beta-callout >}}
+
 Use calculated fields to transform and enrich your log events at query time during a search or investigation. You can, directly within the Log Explorer, manipulate text, perform arithmetic operations, and evaluate conditional logic on log data and store the result as a calculated field.
 
 Like other log [attributes][1], you can use calculated fields for search, aggregation, visualization, and defining other calculated fields.
@@ -39,14 +43,14 @@ This is a quick way to create a calculated field when you are already familiar w
 1. Select **Create calculated from...**.
 
 
-{{< img src="logs/explorer/calculated_fields/create_field.png" alt="" style="width:100%;" >}}
+{{< img src="logs/explorer/calculated_fields/create_field.png" alt="The log panel duration attribute with the option to create a calculated field for it" style="width:100%;" >}}
 
 The option to add a calculated field from a attribute lets you pivot in the midst of an investigation or when exploring unfamiliar logs. For example, you may want to multiply or concatenate two values and store the result in a single field to simplify a graph or answer a specific question.
 
-### Defining a calculated field
+## Defining a calculated field
 
 
-{{< img src="logs/explorer/calculated_fields/define_calculated_field.png" alt="" style="width:50%;" >}}
+{{< img src="logs/explorer/calculated_fields/define_calculated_field.png" alt="A throughput attribute with the formula network.bytes attribute divided by the duration attribute" style="width:50%;" >}}
 
 #### Name
 
@@ -70,17 +74,18 @@ After successful creation of a new calculated field, the Log Explorer updates th
 
 Calculated fields can be used for search, aggregation, visualization, and definition of other calculated fields and works in the same way as log attributes. Make sure to use the `#` prefix to reference calculated field names.
 
-{{< img src="logs/explorer/calculated_fields/calculated_field.png" alt="" style="width:100%;" >}}
+{{< img src="logs/explorer/calculated_fields/calculated_field.png" alt="A calculated fields attribute called request_duration" style="width:100%;" >}}
 
-#### When to use calculated fields
+#### Persistence
 
-Calculated fields are not a replacement for log pipelines and processors for ingest-time parsing, normalization, and enrichment of logs. Calculated fields as a complementary tool that is useful for certain scenarios, such as when you:
+Calculated fields are not a replacement for log pipelines and processors for ingest-time parsing, normalization, and enrichment of logs. Calculated fields is a complementary tool that is useful in certain scenarios, such as when:
 
-- Perform a unique one-off investigation or ad-hoc analysis, and certain information is only relevant in the current context.
-- Need to retroactively update the schema of indexed logs to answer a specific question, since pipelines changes only apply to logs ingested after a pipeline update.
-- Do not have permission (or the knowledge) to modify relevant log pipelines. Calculated fields are available to all users and carry no risk of long-term or organization-wide side effects, providing quick exploration and worry-free experimentation.
+- You need to perform a unique one-off investigation or ad-hoc analysis, and creating a temporary need for a field that you don't necessarily be reusing in the long-tem.
+- You need to retroactively update indexed logs to answer a certain question (pipelines changes only apply to logs ingested after a pipeline update).
+- You lack the permission (or knowledge) necessary to modify log pipelines in a timely manner.
+  - The calculated fields you create are only visible to you, which makes them ideal for quick exploration and worry-free experimentation.
 
-If you realize that a calculated field you are using may be valuable in the long-term, update your log pipelines so your whole team benefits from it.
+If you realize that a calculated field you are using may be valuable in the long-term, update your log pipelines so you and the rest of your team can benefit from automated processing.
 
 ## Further reading
 

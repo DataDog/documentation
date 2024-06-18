@@ -16,14 +16,13 @@ Use calculated fields to manipulate text, perform arithmetic operations, and eva
 
 | Construct                                                                                          | Syntax and Notation                                                    |
 | -------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
-| Core or faceted attribute, or tag named `attr`                                                     | `attr` (no prefix required)                                            |
-| Custom, unfaceted attribute named `attr`                                                           | `@attr` (use an `@` prefix)                                            |
-| Calculated field named `attr`                                                                      | `#attr` (use a `#` prefix)                                               |
-| String literal (quote)<br>For example, `text` or `Some quoted "text"`.                             | `"text"`<br> `"Some quoted \"text\""<br>(<a href="https://docs.datadoghq.com/logs/explorer/search_syntax/">Log Search Syntax</a> applies)|
-| Numeric literal (number)<br>For example, `ten` or `two to the power of five`.                      | `10`<br>`2e5`                                                          |
-| Function named `func` with parameters `one` and `two`                                              | `func(one, two)`                                                       |
-| Operator represented by a symbol or character `x`<br>For example, multiplying operands `y` and `z`.| `y*z`                                                                    |
-| Order and grouping of operations                                                                   | `second_operation x (first_operation)`<br>(uses parentheses notation)  |
+| Reserved attribute, or tag named `tag`                                                             | `tag` (no prefix required)                                             |
+| Attribute named `attr`                                                                             | `@attr` (use an `@` prefix)                                            |
+| Calculated field named `field`                                                                     | `#field` (use a `#` prefix)                                            |
+| String literal (quote)<br>For example, `text` or `Quoted "text"`                                   | `"text"`<br> `"Quoted \"text\""<br>(<a href="https://docs.datadoghq.com/logs/explorer/search_syntax/">Log Search Syntax</a> applies)|
+| Numeric literal (number)<br>For example, `ten`                                                     | `10`                                                                   |
+| Function named `func` with parameters `x` and `y`                                                  | `func(x, y)`                                                           |
+| Operator<br>For example, a binary operator `*` with operands `x` and `y`.                          | `x*y`                                                                  |
 
 ## Operators
 
@@ -46,13 +45,12 @@ The available operators in order of precedence:
     {{< nextlink href="/logs/explorer/calculated_fields/expression_language#arithmetic" >}}Arithmetic{{< /nextlink >}}
     {{< nextlink href="/logs/explorer/calculated_fields/expression_language#string" >}}String{{< /nextlink >}}
     {{< nextlink href="/logs/explorer/calculated_fields/expression_language#logical" >}}Logical{{< /nextlink >}}
-    {{< nextlink href="/logs/explorer/calculated_fields/expression_language#list" >}}List{{< /nextlink >}}
-    {{< nextlink href="/logs/explorer/calculated_fields/expression_language#datetime" >}}Datetime{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ### Arithmetic
 
-#### abs(num number)
+#### abs(num value)
+<h4>abs(<i>num</i> value)</h4>
 
 Returns the absolute value of a number.
 
@@ -65,13 +63,27 @@ Returns the absolute value of a number.
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Result: 1
 </details>
 
-#### ceil(num number)
+#### ceil(num value)
 
-Rounds number up to nearest integer.
+Rounds number up to the nearest integer.
 
-#### floor(num number)
+<details>
+<summary>Example</summary>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A log event has the following attribute: <code>@value</code>=2.2<br><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Formula: ceil(<code>@value</code>)
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Result: 3
+</details>
 
-Rounds number down to nearest integer.
+#### floor(num value)
+
+Rounds number down to the nearest integer.
+
+<details>
+<summary>Example</summary>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A log event has the following attribute: <code>@value</code>=9.99<br><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Formula: floow(<code>@value</code>)
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Result: 9
+</details>
 
 #### max(num value [, num value, …])
 
@@ -95,9 +107,9 @@ Finds the minimum value amongst a set of numbers.
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Result: -1
 </details>
 
-#### round(num number, int precision)
+#### round(num value, int precision)
 
-Rounds number. Optionally, define how many digits to maintain after (or before, if the number is negative) the decimal.
+Round a number. Optionally, define how many decimal places to maintain.
 
 <details>
 <summary>Example</summary>
@@ -121,7 +133,7 @@ Combines multiple values into a single string.
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Result: "Bob Smith"
 </details>
 
-#### lower(str text)
+#### lower(str string)
 
 Converts string to lowercase.
 
@@ -132,7 +144,18 @@ Converts string to lowercase.
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Result: "bob"
 </details>
 
-#### proper(str text)
+#### prefix(str string, int num_chars)
+
+Extracts a portion of text from the beginning of a string.
+
+<details>
+<summary>Example</summary>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A log event has the following attribute: <code>@country</code>="Canada"<br><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Formula: upper(prefix(<code>@country</code>, 3))
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Result: "CA"
+</details>
+
+#### proper(str string)
 
 Converts string to proper case.
 
@@ -143,18 +166,18 @@ Converts string to proper case.
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Result: "Bob Smith"
 </details>
 
-#### split_before(str text, str separator, int occurrence)
+#### split_before(str string, str separator, int occurrence)
 
 Extracts the portion of text preceding a certain pattern in a string.
 
 <details>
 <summary>Example</summary>
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A log event has the following attribute: <code>@row_value</code> = "1,Bob,Smith"<br><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Formula: split_before(<code>@row_value</code>, ",", 1)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Formula: split_before(<code>@row_value</code>, ",")
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Result: "1"
 </details>
 
-#### split_after(str text, str separator, int occurrence)
+#### split_after(str string, str separator, int occurrence)
 
 Extracts the portion of text following a certain pattern in a string.
 
@@ -165,19 +188,42 @@ Extracts the portion of text following a certain pattern in a string.
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Result: "Smith"
 </details>
 
-#### substring(str text, int start, int length)
+#### substring(str string, int start, int end)
 
 Extracts a portion of text from the middle of a string.
 
-#### suffix(str text, int num_chars)
+<details>
+<summary>Example</summary>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A log event has the following attributes: <code>@row_value</code> = "1,Bob,Smith"<br><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Formula: substring(<code>@row_value</code>, 3, 3)
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Result: "Bob"
+</details>
+
+#### suffix(str string, int num_chars)
 
 Extracts a portion of text from the end of a string.
+
+<details>
+<summary>Example</summary>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A log event has the following attributes: <code>@url</code> = "www.datadoghq.com"<br><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Formula: suffix(<code>@url</code>, 4)
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Result: ".com"
+</details>
 
 #### textjoin(str delimiter, expr value [, expr value, …])
 
 Combines multiple values into a single string with a delimiter in between.
 
-#### upper(str text)
+<details>
+<summary>Example</summary>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A log event has the following attributes:
+<br>&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;<code>@first_name</code> = "Bob"
+<br>&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;<code>@last_name</code> = "Smith"<br><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Formula: textjoin(", ", <code>@last_name</code>, <code>@first_name</code>)
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Result: "Smith, Bob"
+</details>
+
+#### upper(str string)
 
 Converts string to uppercase.
 
@@ -190,7 +236,7 @@ Converts string to uppercase.
 
 ### Logical
 
-#### case(expr condition, expr if_true [, expr condition, expr if_true …], expr else)
+#### case(expr condition, expr value_if_true [, expr condition, expr value_if_true …], expr value_else)
 
 Evaluates a series of conditions and returns a value accordingly.
 
@@ -209,7 +255,7 @@ Evaluates a condition and returns a value accordingly.
 
 #### is_null(expr value)
 
-Checks for nullity of an attribute or expression.
+Checks if an attribute or expression is null.
 
 <details>
 <summary>Example</summary>
@@ -219,18 +265,6 @@ Checks for nullity of an attribute or expression.
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Formula: is_null(<code>@users_online</code> / <code>@max_capacity</code>)
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Result: TRUE
 </details>
-
-### List
-
-#### len(expr list)
-
-Returns the number of values in a given list.
-
-### Datetime
-
-#### now_ms()
-
-Returns the current timestamp in Unix epoch format (ms).
 
 ## Further reading
 
