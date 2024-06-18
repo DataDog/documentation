@@ -33,7 +33,7 @@ Code Analysis is in public beta.
 
 ## Overview
 
-By running Code Analysis, you can obtain results for violations found by [Static Analysis][1] and [Software Composition Analysis (SCA)][2] scans in your repositories. 
+Code Analysis displays results for violations found by [Static Analysis][1] and [Software Composition Analysis (SCA)][2] scans in your repositories. 
 
 Static Analysis
 : Scans your bespoke code for maintainability issues, bugs, performance issues, and security vulnerabilities early in the development lifecycle to catch issues from reaching production and, when possible, provide suggested fixes to help engineering teams address these issues before they impact users.
@@ -43,11 +43,11 @@ Software Composition Analysis
 
 <div class="alert alert-info">Datadog Software Composition Analysis can find vulnerable libraries across the software development lifecycle (SDLC). Code Analysis summarizes results found by directly scanning your repositories. To view all vulnerabilities found in repositories and at runtime consolidated together, see <a href="/security/application_security/software_composition_analysis" target="_blank">Application Security</a> for more details.</div>
 
-After you have configured Code Analysis, you can see a summary of the results from the Static Analysis and SCA scans for each of your configured repositories on the [**Code Analysis** page][9]. The summarized results are always for the latest commit on the default branch of each repository, which ensures that you are seeing all the existing problems on each repository that you may want to triage and fix.
+After you have configured Code Analysis, you can see a summary of the results from the Static Analysis and SCA scans for each of your configured repositories on the [**Code Analysis** page][9]. The summarized results are always for the latest scanned commit on the default branch of each repository, which ensures that you are seeing all the existing problems on each repository that you may want to triage and fix.
 
 {{< img src="code_analysis/repositories.png" alt="A list of repositories with code and library scan results on the Code Analysis page" style="width:100%;">}}
 
-Select a repository from the list to search through and manage violations for that specific repository. By default, the results are filtered to the latest commit on the default branch of the repository, but you may change the branch or commit at the top of the page. 
+Select a repository from the list to search through and manage violations for that specific repository. By default, the results are filtered to the latest scanned commit on the default branch of the repository, but you may change the branch or commit at the top of the page. 
 
 Regardless of the selected branch or commit, all results are organized into the following views:
 
@@ -82,6 +82,8 @@ Manage the full list of libraries detected by SCA that have imported into your c
 {{% /tab %}}
 {{< /tabs >}}
 
+## Integrations
+
 With Static Analysis, you can receive automated feedback on poor coding practices and security vulnerabilities on the code you write [directly in an IDE][11] such as [VS Code][3] or [IntelliJ & PyCharm][4], and in your [pull requests on GitHub][5]. 
 
 {{< img src="developers/ide_plugins/vscode/static-analysis-issue.png" alt="A Static Analysis result in Visual Studio Code" style="width:100%;">}}
@@ -95,7 +97,7 @@ Click **+ Add a Repository** on the [**Code Analysis Repositories** page][9] and
 
 <div class="alert alert-warning">Datadog-hosted scans are supported by Software Composition Analysis (SCA) and GitHub repositories only. To enable Static Analysis or use a different CI provider, run scans in your CI pipelines instead.</div>
 
-To enable [Software Composition Analysis][101] on a GitHub repository, click **Select Repositories** and click the toggle for `Enable Software Composition Analysis (SCA)`.
+To enable [Software Composition Analysis][101] on GitHub repositories, click **Select Repositories** on your desired GitHub account and click the toggle for `Enable Software Composition Analysis (SCA)` to enable for all repositories. If you don't see any GitHub accounts listed, [create a new GitHub App][12] to get started.
 
 {{< img src="code_analysis/setup/enable_account.png" alt="Enable Software Composition Analysis on all repositories for your GitHub account" style="width:100%;">}}
 
@@ -108,7 +110,7 @@ Optionally, you can select specific GitHub repositories to enable SCA by clickin
 {{% /tab %}}
 {{% tab "CI Pipelines" %}}
 
-If you are not using a GitHub repository, you can select which scans you'd like to run ([Static Analysis][106] and [Software Composition Analysis][107]) and configure your CI pipeline provider accordingly.
+If you do not want to run your scans directly through Datadog, you can select which scans you'd like to run ([Static Analysis][106] and [Software Composition Analysis][107]) and configure your CI pipeline provider accordingly.
 
 ## Configure your CI/CD provider
 
@@ -154,3 +156,4 @@ For more information, see the [Source Code Integration documentation][10].
 [9]: https://app.datadoghq.com/ci/code-analysis
 [10]: /integrations/guide/source-code-integration/?tab=codeanalysis
 [11]: /code_analysis/ide_plugins/
+[12]: /integrations/github/
