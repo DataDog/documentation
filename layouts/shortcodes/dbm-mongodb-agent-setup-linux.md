@@ -59,7 +59,7 @@ instances:
     dbm: true
 
     ## @param cluster_name - string - optional
-    ## The name of the cluster to which the monitored MongoDB instance belongs.
+    ## The unique name of the cluster to which the monitored MongoDB instance belongs.
     ## Used to group MongoDB instances in a MongoDB cluster.
     ## Required when `dbm` is enabled.
     #
