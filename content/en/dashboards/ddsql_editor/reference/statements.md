@@ -21,7 +21,7 @@ SELECT [ ALL | DISTINCT ] select_expr, ...
 [ HAVING condition, ... ]
 [ ORDER BY expression, ... [ ASC | DESC ] [ NULLS FIRST | NULLS LAST ] ]
 [ LIMIT [ ALL | expression ]
-  [ OFFSET expression] ]
+  [ OFFSET expression ] ]
 {{< /code-block >}}
 
 #### Placeholder types
@@ -30,7 +30,7 @@ SELECT [ ALL | DISTINCT ] select_expr, ...
 : Any expression that returns a value. It may be a constant, function call, aggregate, window, or the special expression `*`. This is the part of the query that specifies the output of the SELECT statement, and in relational algebra it is known as the projection.
  
 `rel_source`
-: A correlation (a table name or alias) or a parenthesized DQLExpr.
+: A correlation (a table name or alias) or a parenthesized [DQL expression][3].
 
 `JOIN_TYPE`
 : The type of SQL join, such as `INNER` or `LEFT`. `INNER` joins are fully supported. `OUTER` and `CROSS` joins may require a `WHERE` condition in order to execute. `LEFT` and `RIGHT` joins are also supported if the condition is an *equijoin* expression: an equality comparison such as `<EXPRESSION_1> = <EXPRESSION_2>` where the expressions reference columns from different tables, and the output types of both expressions are the same. A `USING` expression `JOIN`ing on only one column also works.
@@ -63,7 +63,7 @@ Aliases are substitute names for output expressions or `FROM` items. An alias is
 SELECT * FROM my_long_hosts_table_name as hosts
 {{< /code-block >}}
 
-When an alias is provided in a `FROM` item, it completely hides the actual name of the table or function. In the above example, the remainder of the DQLExpr must refer to `my_long_hosts_table_name` as `hosts`.
+When an alias is provided in a `FROM` item, it completely hides the actual name of the table or function. In the above example, the remainder of the DQL expression must refer to `my_long_hosts_table_name` as `hosts`.
 
 ## Ordinals
 
@@ -225,7 +225,7 @@ For multilayer aggregation to work, the inner query must return a table with the
 
 ## UNION
 
-`UNION` combines the results of two or more DQLExprs into a single output table.
+`UNION` combines the results of two or more [DQL expressions][3] into a single output table.
 
 ### Syntax
 
@@ -250,13 +250,13 @@ SELECT message, service AS text, 'from logs' FROM logs WHERE env='prod'
 ORDER BY service LIMIT 200 OFFSET 10;
 {{< /code-block >}}
 
-All subqueries in a `UNION` must have the same output schema. A query containing `UNION` query can only have one `ORDER BY` and `LIMIT` expression, both of which must come at the end. Because of this, `UNION` can be used to combine other `DQL_expression` types, but not another `UNION`.
+All subqueries in a `UNION` must have the same output schema. A query containing `UNION` query can only have one `ORDER BY` and `LIMIT` expression, both of which must come at the end. Because of this, `UNION` can be used to combine other DQL expression types, but not another `UNION`.
 
 ## WITH
 
 `WITH` provides a way to write auxiliary statements for use in a larger query. 
 
-`WITH` statements, which are also often referred to as Common Table Expressions or CTEs, can be thought of as defining temporary tables that exist for one query. Each auxiliary statement in a `WITH` clause can be any DQLExpr, and the `WITH` clause itself is attached to a primary statement that can also be any non-`WITH` DQL expression. Subsequent auxiliary statements may reference correlations aliased in previous auxiliary statements.
+`WITH` statements, which are also often referred to as Common Table Expressions or CTEs, can be thought of as defining temporary tables that exist for one query. Each auxiliary statement in a `WITH` clause can be any [DQL expression][3], and the `WITH` clause itself is attached to a primary statement that can also be any non-`WITH` DQL expression. Subsequent auxiliary statements may reference correlations aliased in previous auxiliary statements.
 
 ### Syntax
 
@@ -395,3 +395,4 @@ DDSQL also supports Postgres casting syntax: `<EXPRESSION>::<TYPE>` (for example
 
 [1]: /dashboards/functions/interpolation/#fill
 [2]: /dashboards/ddsql_editor/reference/aggr_functions
+[3]: /dashboards/ddsql_editor/reference#supported-sql-syntax
