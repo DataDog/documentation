@@ -97,13 +97,11 @@ Click the **Share** button and select **Share event** to share a link to the cur
 
 Use the **Recent Changes** tab on a resource's side panel to see a 7-day history of changes to the resource and its configuration. To forward change events from your cloud environments, follow the links or instructions for your cloud providers below:
 
+**Note**: Contact [Datadog support][7] to enable change event forwarding from your Azure environment.
+
 #### AWS
 
 See the [AWS Config integration page][6] to launch a CloudFormation template that sets up change event forwarding through AWS Config.
-
-#### Azure
-
-Contact [Datadog support][7] to enable change event forwarding from your Azure environment.
 
 #### Google Cloud Platform
 
