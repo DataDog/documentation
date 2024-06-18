@@ -10,7 +10,7 @@ DDSQL is in private beta.
 
 With DDSQL, you can use SQL syntax to query your infrastructure in the [DDSQL Editor][2] in Datadog. 
 
-DDSQL implements several standard SQL functions, as well as a few functions for working with Datadog tags, metrics, and so on. For example, [the `AGGR` statement], which aggregates metrics data, is unique to DDSQL.
+DDSQL implements several standard SQL functions, along with new functions for working with Datadog tags, metrics, and so on. For example, [the `AGGR` statement][5], which aggregates metrics data, is unique to DDSQL.
 
 DDSQL uses a [schema on read](#schema-on-read) approach to allow queries against unstructured data, such as [tags][1]. Each query is executed within a [session](#sessions) that can be configured with environment variables.
 
@@ -58,3 +58,4 @@ If a column reference cannot be unambiguously mapped to a single table, it is co
 [2]: /dashboards/ddsql_editor
 [3]: /dashboards/ddsql_editor/reference/statements/#set
 [4]: /dashboards/ddsql_editor/reference/statements/#show
+[5]: /dashboards/ddsql_editor/reference/statements/#aggr
