@@ -14,9 +14,16 @@ aliases:
   - /security/cloud_security_management/setup/csm_enterprise
   - /security/cloud_security_management/setup/csm_cloud_workload_security
   - /security/cloud_security_management/setup/csm_pro
+further_reading:
+    - link: "/security/cloud_security_management/setup/supported_deployment_types"
+      tag: "Documentation"
+      text: "Supported Deployment Types"
+    - link: "/security/cloud_security_management/guide/agent_variables/"
+      tag: "Guide"
+      text: "Cloud Security Management Agent Variables"
 ---
 
-Datadog provides a guided workflow for setting up [Cloud Security Management (CSM)][6]. The first step is to select the features you want to enable. After that, follow the instructions provided to configure the features you selected.
+Datadog provides a guided workflow for setting up [Cloud Security Management (CSM)][6]. The first step is to select the features you want to enable. After that, follow the instructions provided to configure the selected features.
 
 <div class="alert alert-info">The following instructions apply to new CSM users only. If you're an existing user and would like to enable additional CSM features, see <a href="/security/cloud_security_management/setup/#enable-additional-features">Enable additional features</a>.</div>
 
@@ -24,11 +31,11 @@ Datadog provides a guided workflow for setting up [Cloud Security Management (CS
 1. On the [Features][11] page, select the features you want to enable.
 1. Click **Start Using Cloud Security Management** and confirm your selections.
 
-{{< img src="security/csm/setup/features_selection_new_user.png" alt="CSM Features page" width="100%">}}
+{{< img src="security/csm/setup/features_selection_new_user.png" alt="CSM Features page" width="100%">}} 
 
-After you confirm your selections, the [Setup][3] page appears. CSM customizes the instructions on the page to match the features you selected. For example, if you enable **Compliance Scanning**, CSM displays only the **Cloud accounts** and **Hosts and containers** sections.
+After you confirm your selections, the [Setup][3] page appears. The instructions on the page are customized to match the features you selected. For example, if you enable **Compliance Scanning**, only the **Cloud accounts** and **Hosts and containers** sections are displayed.
 
-{{< img src="security/csm/setup/settings_page.png" alt="CSM Settings page" width="100%">}}
+<!-- {{< img src="security/csm/setup/settings_page.png" alt="CSM Settings page" width="100%">}} -->
 
 The following table shows which sections appear on the Setup page for each feature.
 
@@ -96,6 +103,10 @@ The following table shows which sections appear on the Setup page for each featu
 You can enable additional CSM features at any time by returning to the [Features][11] page and clicking **Enable** for the features you want to add. This page also serves as a status page that indicates which features are enabled, which features are enabled but not yet configured, and which features are not enabled.
 
 {{< img src="security/csm/setup/features_page.png" alt="CSM Features page" width="100%">}}
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security/cloud_security_management/setup/agent
 [2]: /security/cloud_security_management/setup/cloud_accounts
