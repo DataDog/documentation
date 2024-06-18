@@ -5253,36 +5253,41 @@ menu:
       parent: rum_browser
       identifier: page_performance
       weight: 104
+    - name: Monitoring Performance Vitals
+      url: real_user_monitoring/browser/monitoring_performance_vitals/
+      parent: rum_browser
+      identifier: performance_vitals
+      weight: 105
     - name: Monitoring Resource Performance
       url: real_user_monitoring/browser/monitoring_resource_performance/
       parent: rum_browser
       identifier: resource_performance
-      weight: 105
+      weight: 106
     - name: Collecting Browser Errors
       url: real_user_monitoring/browser/collecting_browser_errors/
       parent: rum_browser
       identifier: collect_errors
-      weight: 106
+      weight: 107
     - name: Tracking User Actions
       url: real_user_monitoring/browser/tracking_user_actions/
       parent: rum_browser
       identifier: track_actions
-      weight: 107
+      weight: 108
     - name: Frustration Signals
       url: real_user_monitoring/browser/frustration_signals/
       parent: rum_browser
       identifier: rum_frustration_signals
-      weight: 108
+      weight: 109
     - name: Error Tracking
       url: real_user_monitoring/error_tracking/browser/
       parent: rum_browser
       identifier: rum_browser_error_tracking
-      weight: 109
+      weight: 110
     - name: Troubleshooting
       url: real_user_monitoring/browser/troubleshooting/
       parent: rum_browser
       identifier: troubleshooting
-      weight: 110
+      weight: 111
     - name: Mobile and TV Monitoring
       url: real_user_monitoring/mobile_and_tv_monitoring/
       parent: rum
