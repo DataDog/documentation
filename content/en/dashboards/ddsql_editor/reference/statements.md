@@ -79,8 +79,6 @@ SELECT ex1, ex2, ex3 FROM table ORDER BY 3, 2, 1;
 
 `AGGR` is a DDSQL statement type that operates on metrics data. Its primary goal is to make executing timeseries queries more natural, flexible, composable, and concise.
 
-<!-- QUERY: Should the syntax template below include INTERPOLATE? -->
-
 ### Syntax
 
 {{< code-block lang="text" >}}

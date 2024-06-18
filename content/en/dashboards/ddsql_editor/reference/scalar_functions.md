@@ -180,17 +180,13 @@ These functions return one value per row.
 
 ## JSON functions and operators
 
-<!-- QUERY: An example of the below function would be helpful, if we're going to include the function in the docs. -->
-
 ### json_extract_path_text
 
 | Name | Return type | Description |
 |------|-------------|-------------|
-| json_extract_path_text(text *json*, text *path...*) | text | Extracts the JSON sub-object in text defined by the path. Behavior is equivalent to that of the Postgres function of the same name. In the default executor, this function only works on resources tables; it is not implemented for metrics, events, or local tables. To extract nested fields in events tables, reference the entire path in double quotes as the column name. |
+| json_extract_path_text(text *json*, text *path*) | text | Extracts the JSON sub-object in text defined by the path. Behavior is equivalent to that of the Postgres function of the same name. In the default executor, this function only works on resources tables; it is not implemented for metrics, events, or local tables. To extract nested fields in events tables, reference the entire path in double quotes as the column name. |
 
 ## Timeseries and point functions
-
-<!-- QUERY: Which of these can take an array of timeseries? The verbiage on some of these function descriptions implied that, but the arguments didn't. -->
 
 ### timeseries_max
 | Name | Return type | Description |
