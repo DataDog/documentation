@@ -7,8 +7,8 @@ The MongoDB check is included in the Datadog Agent. No additional installation i
 Replace the values to match your account and environment. See the [sample conf file][2] for all available configuration options.
 
 ```bash
-export DD_API_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-export DD_AGENT_VERSION=7.55.0
+export DD_API_KEY=<DD_API_KEY>
+export DD_AGENT_VERSION=7.55.0~dbm~mongo~0.1
 
 docker run -e "DD_API_KEY=${DD_API_KEY}" \
   -v /var/run/docker.sock:/var/run/docker.sock:ro \
@@ -29,7 +29,7 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
       }]
     }
   }' \
-  gcr.io/datadoghq/agent:${DD_AGENT_VERSION}
+  datadog/agent-dev:${DD_AGENT_VERSION}
 ```
 
 ### Validate

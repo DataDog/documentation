@@ -153,6 +153,24 @@ db.grantRolesToUser("datadog", [
 
 It's recommended to install the agent directly on the MongoDB host as that enables the agent to collect a variety of system telemetry (CPU, memory, disk, network) in addition to MongoDB specific telemetry.
 
+### Install the beta version of the Datadog Agent
+
+The Database Monitoring feature for MongoDB is available in the beta version of the Datadog Agent. To install the beta version of the Datadog Agent, follow the instructions for your environment:
+
+{{< tabs >}}
+{{% tab "Linux Host" %}}
+{{% dbm-mongodb-agent-beta-install-linux %}}
+{{% /tab %}}
+{{% tab "Docker" %}}
+{{% dbm-mongodb-agent-beta-install-docker %}}
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
+{{% dbm-mongodb-agent-beta-install-kubernetes %}}
+{{% /tab %}}
+{{< /tabs >}}
+
+### Configure the Agent
+
 {{< tabs >}}
 {{% tab "Linux Host" %}}
 {{% dbm-mongodb-agent-setup-linux %}}

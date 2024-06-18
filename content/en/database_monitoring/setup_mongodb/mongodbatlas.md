@@ -131,6 +131,22 @@ In this example, the individual MongoDB instances for shard-0 are `XXXXX-00-00.4
 {{% /tab %}}
 {{< /tabs >}}
 
+### Install the beta version of the Datadog Agent
+
+The Database Monitoring feature for MongoDB is available in the beta version of the Datadog Agent. To install the beta version of the Datadog Agent, follow the instructions for your environment:
+
+{{< tabs >}}
+{{% tab "Linux Host" %}}
+{{% dbm-mongodb-agent-beta-install-linux %}}
+{{% /tab %}}
+{{% tab "Docker" %}}
+{{% dbm-mongodb-agent-beta-install-docker %}}
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
+{{% dbm-mongodb-agent-beta-install-kubernetes %}}
+{{% /tab %}}
+{{< /tabs >}}
+
 ### Configure the Agent
 
 {{< tabs >}}
