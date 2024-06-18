@@ -1991,6 +1991,42 @@ menu:
       url: /api/latest/organizations/
       identifier: organizations
       generated: true
+    - name: Update a specific Org Config
+      url: '#update-a-specific-org-config'
+      identifier: organizations-update-a-specific-org-config
+      parent: organizations
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateOrgConfig
+        unstable: []
+        order: 102
+    - name: Get a specific Org Config value
+      url: '#get-a-specific-org-config-value'
+      identifier: organizations-get-a-specific-org-config-value
+      parent: organizations
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetOrgConfig
+        unstable: []
+        order: 101
+    - name: List Org Configs
+      url: '#list-org-configs'
+      identifier: organizations-list-org-configs
+      parent: organizations
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListOrgConfigs
+        unstable: []
+        order: 100
     - name: Upload IdP metadata
       url: '#upload-idp-metadata'
       identifier: organizations-upload-idp-metadata
