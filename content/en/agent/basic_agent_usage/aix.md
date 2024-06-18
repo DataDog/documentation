@@ -1,6 +1,5 @@
 ---
 title: Basic Agent Usage for AIX
-kind: documentation
 further_reading:
 - link: "/agent/basic_agent_usage/#agent-architecture"
   tag: "Documentation"

@@ -1,6 +1,5 @@
 ---
 title: "AWS Components"
-kind: guide
 ---
 
 {{< whatsnext desc="Common:" >}}

@@ -1,6 +1,5 @@
 ---
 title: Basic Agent Usage for Amazon Linux
-kind: documentation
 platform: Amazon Linux
 aliases:
     - /guides/basic_agent_usage/amazonlinux/

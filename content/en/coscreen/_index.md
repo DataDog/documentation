@@ -1,6 +1,5 @@
 ---
 title: CoScreen
-kind: documentation
 further_reading:
 - link: 'https://www.datadoghq.com/blog/collaborative-screen-sharing-with-datadog-coscreen/'
   tag: 'Blog'

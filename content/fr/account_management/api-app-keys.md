@@ -6,7 +6,6 @@ aliases:
 - /fr/account_management/faq/how-do-i-reset-my-application-keys/
 - /fr/agent/faq/how-do-i-reset-my-datadog-api-keys/
 - /fr/account_management/faq/api-app-key-management/
-kind: documentation
 title: Clés d'API et clés d'application
 ---
 

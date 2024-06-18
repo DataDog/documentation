@@ -9,7 +9,6 @@ further_reading:
 - link: /agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/
   tag: よくあるご質問
   text: クラウドインスタンスに Datadog Agent をインストールした方がよいのはなぜですか
-kind: documentation
 title: Agent の概要
 ---
 

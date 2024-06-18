@@ -1,6 +1,5 @@
 ---
 title: Tag Pipelines
-kind: documentation
 further_reading:
 - link: "/cloud_cost_management/"
   tag: "Documentation"

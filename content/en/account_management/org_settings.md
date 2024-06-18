@@ -1,6 +1,5 @@
 ---
 title: Organization Settings
-kind: documentation
 further_reading:
     - link: "/account_management/api-app-keys/"
       tag: "Documentation"

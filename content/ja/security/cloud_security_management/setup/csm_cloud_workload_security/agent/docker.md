@@ -1,7 +1,6 @@
 ---
 code_lang: docker
 code_lang_weight: 65
-kind: ドキュメント
 title: Docker で CSM Cloud Workload Security を有効にする
 type: multi-code-lang
 ---
