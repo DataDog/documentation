@@ -6,7 +6,6 @@ further_reading:
 - link: /integrations/amazon_web_services/#log-collection
   tag: Documentation
   text: Collecter les logs de vos services AWS
-kind: guide
 title: Connexion à Datadog via AWS PrivateLink
 ---
 

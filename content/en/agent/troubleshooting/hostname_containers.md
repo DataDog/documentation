@@ -1,6 +1,5 @@
 ---
 title: Hostname Detection in Containers
-kind: documentation
 ---
 
 Many features in Datadog rely on the Agent to provide an accurate hostname for monitored hosts. While this is straightforward when the Agent runs directly on a host, the hostname resolution process is different when the Agent runs in a containerized environment.
@@ -70,7 +69,6 @@ datadog:
 `DatadogAgent` Kubernetes Resource:
 
 ```yaml
-kind: DatadogAgent
 apiVersion: datadoghq.com/v2alpha1
 metadata:
   name: datadog
@@ -87,7 +85,6 @@ spec:
 
 ```yaml
 apiVersion: apps/v1
-kind: DaemonSet
 metadata:
   name: datadog
 spec:
@@ -138,7 +135,6 @@ datadog:
 `DatadogAgent` Kubernetes Resource:
 
 ```yaml
-kind: DatadogAgent
 apiVersion: datadoghq.com/v2alpha1
 metadata:
   name: datadog
@@ -159,7 +155,6 @@ spec:
 
 ```yaml
 apiVersion: apps/v1
-kind: DaemonSet
 metadata:
   name: datadog
 spec:

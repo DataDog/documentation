@@ -36,7 +36,7 @@ Set up tracing in GitLab to collect data on your pipeline executions, analyze pe
 | Infrastructure metric correlation | Infrastructure metric correlation | Correlate jobs to [infrastructure host metrics][14] for self-hosted GitLab runners. |
 | Custom pre-defined tags | Custom pre-defined tags | Set [custom tags][10] to all generated pipeline, stages, and job spans. |
 | [Custom tags][15] [and measures at runtime][16] | Custom tags and measures at runtime | Configure [custom tags and measures][13] at runtime. |
-| [Parameters][17] | Parameters | Set custom `env` or `service` parameters when a pipeline is triggered. |
+| Parameters | Parameters | Set custom `env` or `service` parameters when a pipeline is triggered. |
 | [Pipeline failure reasons][11] | Pipeline failure reasons | Identify pipeline failure reasons from [error messages][15]. |
 | [Approval wait time][23] | Approval wait time  | View the amount of time jobs and pipelines wait for manual approvals. |
 
