@@ -117,7 +117,7 @@ See the [Resource change collection][8] section of the Google Cloud Platform int
 [4]: /account_management/teams
 [5]: https://app.datadoghq.com/infrastructure/catalog/configuration
 [6]: /integrations/amazon_config/#events
-[7]: https://docs.datadoghq.com/help/
-[8]: https://docs.datadoghq.com/infrastructure/resource_catalog/#recent-changes
+[7]: /help/
+[8]: /infrastructure/resource_catalog/#recent-changes
 
 
