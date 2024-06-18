@@ -171,7 +171,7 @@ img="dashboards/widgets/icons/run-workflow_light_small.svg">}} Run Workflow{{< /
 
 ## ウィジェットグラフ
 
-### OAuth アプリ
+### エクスポート
 
 | 形式 | 手順            |
 | -----  | ----------------------- |
