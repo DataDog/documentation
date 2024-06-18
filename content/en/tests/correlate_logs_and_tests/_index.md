@@ -28,7 +28,7 @@ Correlation can be configured differently depending on how you [send your tests 
 
 Agentless log submission is supported for the following languages and frameworks:
 
-- Java with `dd-trace-java >= 1.36.0` and Log4j2.
+- Java with `dd-trace-java >= 1.35.2` and Log4j2.
 
 Use the following environment variables to enable and configure agentless log submission:
 
