@@ -44,7 +44,7 @@ A partir de la versión 6, el Agent puede configurarse para enmascarar patrones 
 {{< site-region region="us" >}}
 
 <div class="alert alert-warning">
-El cumplimiento de PCI DSS para Log Management sólo está disponible para organizaciones Datadog en el <a href="/getting_started/site/">sitio US1</a>.
+El cumplimiento de PCI DSS para Log Management sólo está disponible para organizaciones de Datadog en el <a href="/getting_started/site/">sitio US1</a>.
 </div>
 
 Datadog permite a los clientes enviar logs a organizaciones de Datadog que cumplen con PCI DSS, si así lo solicitan. Para configurar una organización de Datadog que cumpla con PCI, sigue estos pasos:
