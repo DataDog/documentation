@@ -10593,8 +10593,14 @@ components:
     ListAPIsResponseData:
       description: Data envelope for `ListAPIsResponse`.
       properties:
+        attributes:
+          $ref: '#/components/schemas/ListAPIsResponseDataAttributes'
         id:
           $ref: '#/components/schemas/ApiID'
+      type: object
+    ListAPIsResponseDataAttributes:
+      description: Attributes for `ListAPIsResponseData`.
+      properties:
         name:
           description: API name.
           example: Payments API
