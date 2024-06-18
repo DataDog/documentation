@@ -86,7 +86,6 @@ To create an application to observe in Datadog:
   
   if __name__ == '__main__':
       app.run(host='0.0.0.0', port=5050)
-      ```
   {{< /code-block >}}
 
 ## Run the application
