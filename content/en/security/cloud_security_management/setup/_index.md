@@ -55,6 +55,7 @@ The following table shows which sections appear on the Setup page for each featu
           <li><a href="/security/cloud_security_management/setup/agent">Hosts and containers</a></li>
           <li><a href="/security/guide/aws_fargate_config_guide/?tab=amazonecs#cloud-security-management">Serverless resources</a></li>
           <li><a href="/security/cloud_security_management/setup/cloud_accounts/?tab=aws#set-up-cloudtrail-logs-forwarding">CloudTrail logs</a></li>
+          <li><a href="/security/cloud_security_management/setup/source_code_integrations">Source code integrations</a></li>
         </ul>
       </td>
     </tr>
