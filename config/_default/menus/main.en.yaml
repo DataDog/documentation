@@ -3013,45 +3013,45 @@ menu:
       parent: tracing
       identifier: tracing_llm_obs
       weight: 7
-    - name: Auto Instrumentation
-      url: tracing/llm_observability/auto_instrumentation/
+    - name: Core Concepts
+      url: tracing/llm_observability/core_concepts/
       parent: tracing_llm_obs
-      identifier: tracing_llm_obs_auto_instrumentation
+      identifier: tracing_llm_obs_core_concepts
       weight: 701
     - name: Quickstart
       url: tracing/llm_observability/quickstart/
       parent: tracing_llm_obs
       identifier: tracing_llm_obs_quickstart
       weight: 702
-    - name: Core Concepts
-      url: tracing/llm_observability/core_concepts/
-      parent: tracing_llm_obs
-      identifier: tracing_llm_obs_core_concepts
-      weight: 703
     - name: Trace an LLM Application
       url: tracing/llm_observability/trace_an_llm_application/
       parent: tracing_llm_obs
       identifier: tracing_llm_obs_trace_an_application
-      weight: 704
-    - name: Submit Evaluations
-      url: tracing/llm_observability/submit_evaluations/
-      parent: tracing_llm_obs
-      identifier: tracing_llm_obs_submit_evaluations
-      weight: 705
+      weight: 703
     - name: Span Kinds
       url: tracing/llm_observability/span_kinds/
       parent: tracing_llm_obs
       identifier: tracing_llm_obs_span_kinds
-      weight: 706
+      weight: 704
+    - name: Auto Instrumentation
+      url: tracing/llm_observability/auto_instrumentation/
+      parent: tracing_llm_obs
+      identifier: tracing_llm_obs_auto_instrumentation
+      weight: 705
     - name: SDK
       url: tracing/llm_observability/sdk/
       parent: tracing_llm_obs
       identifier: tracing_llm_obs_sdk
-      weight: 707
+      weight: 706
     - name: API
       url: tracing/llm_observability/api/
       parent: tracing_llm_obs
       identifier: tracing_llm_obs_api
+      weight: 707
+    - name: Submit Evaluations
+      url: tracing/llm_observability/submit_evaluations/
+      parent: tracing_llm_obs
+      identifier: tracing_llm_obs_submit_evaluations
       weight: 708
     - name: API Catalog
       url: /tracing/api_catalog/
