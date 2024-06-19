@@ -61,7 +61,7 @@ The unified trace shows in a single trace all pipeline traces generated due to t
 
 To highlight the critical path on the trace, click on the `Critical path` checkbox on the pipeline execution page.
 
-The critical path highlights the spans speeding which will speed the overall execution time of your pipeline. If a CI job is on the critical path, it means it is part of the longest weighted path through the trace in terms of execution time. Speeding up the CI Jobs on the critical path is strictly necessary to speed up the CI pipeline.
+The critical path highlights the spans that you need to speed up if you want to reduce the overall execution time of your pipeline. If a CI job is on the critical path, it means it is part of the longest weighted path through the trace in terms of execution time. Speeding up the CI Jobs on the critical path is strictly necessary to speed up the CI pipeline.
 
 ### Explore connections to services, resources, and network events
 
