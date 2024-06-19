@@ -27,7 +27,7 @@ The Datadog Agent version 7.52 and later automatically collects topology data. N
 
 ### Prerequisites
 
-1. Devices have LLDP (Link Layer Discovery Protocol) and/or CDP (Cisco Discovery Protocol) enabled with SNMP. The same protocol should be used on any two connected devices for them to discover each other. LLDP is generally preferred as it is a more common option.
+1. Devices have LLDP (Link Layer Discovery Protocol) and/or CDP (Cisco Discovery Protocol) enabled with SNMP. Use the same protocol on connected devices so that they can discover each other. LLDP is generally preferred as it is a more common option.
 2. Datadog Agent version 7.52 or later is installed.
 
 ## Navigation options
@@ -124,7 +124,7 @@ In addition to providing an overview of your network's physical connections, you
 ### Inspect
 
 Choose **Inspect** to see the device's interface connections. Click on any of the connected interfaces for further investigation.
-This view only shows the physical interfaces that are actually connected to another device. In practice this means that it shows a subset of the total set of interfaces of a network device.
+This view shows only the physical interfaces that are actually connected to another device. This means that it shows a subset of the total set of interfaces of a network device.
 
 {{< img src="/network_device_monitoring/network_topology_map/ndm_topology_interface_updated.png" alt="The Inspect view of an individual device, displaying the device's interface connections" style="width:80%;" >}}
 
