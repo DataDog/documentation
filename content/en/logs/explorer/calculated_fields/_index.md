@@ -12,16 +12,19 @@ further_reading:
 ## Overview
 
 {{< beta-callout url="https://docs.google.com/forms/d/18tDqsB2pg0gC2irdtfIscSsxbDkRfVbEqowLku4Uqvg/viewform?edit_requested=true" >}}
-Calculated Fields is in beta.
+Calculated Fields is in beta. Have feedback or a feature request? <a href= "https://docs.google.com/forms/d/e/1FAIpQLScQLJ1O_plHp0wiqRiGEEhNaO_cY0jsmu35gtEbJh_RBkqzYg/viewform">Let us know</a>.
 {{< /beta-callout >}}
 
-Use calculated fields to transform and enrich your log events at query time during a search or investigation. You can, directly within the Log Explorer, manipulate text, perform arithmetic operations, and evaluate conditional logic on log data and store the result as a calculated field.
+Use calculated fields to transform and enrich your log data at query-time. You can define [formulas](#formula) to directly:
+- [Manipulate text][1]
+- [Perform arithmetic][2]
+- [Evaluate conditional logic][3] and [more][4].
 
-Like other log [attributes][1], you can use calculated fields for search, aggregation, visualization, and defining other calculated fields.
+After a calculated field is defined, it can be used like any other [log attribute][5] for search, aggregation, visualization, and even in the definition of other calculated fields.
 
 **Notes**:
 - You can define up to five calculated fields at a time.
-- Calculated fields are temporary and do not persist beyond a given Log Explorer session. If you decide that a calculated field you created may be useful again in the future for yourself or your team, update your [log pipelines][2] to ensure the information is encoded in your logs when they are ingested and processed.
+- Calculated fields are temporary and do not persist beyond a given Log Explorer session. If you decide that a calculated field you created may be useful again in the future for yourself or your team, update your [log pipelines][6] to ensure the information is encoded in your logs when they are ingested and processed.
 
 ## Adding a calculated field
 
@@ -29,7 +32,7 @@ There are two entry points for creating a calculated field in the Log Explorer: 
 
 ### From the Add menu
 
-1. Navigate to [Log Explorer][3].
+1. Navigate to [Log Explorer][7].
 1. Click the **Add** button next to the search bar.
 1. Select **Calculated field**.
 
@@ -37,7 +40,7 @@ This is a quick way to create a calculated field when you are already familiar w
 
 ### From a specific log event or attribute
 
-1. Navigate to [Log Explorer][3].
+1. Navigate to [Log Explorer][7].
 1. Click on a log event of interest to open the side panel.
 1. Click on a specific JSON attribute to open the context menu.
 1. Select **Create calculated from...**.
@@ -54,7 +57,7 @@ The option to add a calculated field from a attribute lets you pivot in the mids
 
 #### Name
 
-Set a descriptive name that clearly indicates the purpose or intent of the calculated field. For example, if the goal is to capitalize users's first and last names and then concatenate them into one field, you might use the name`formatted_name`. To subsequently, filter logs from a user named `Bob Smith`, update your query to include `#formatted_name:"Bob Smith"`.
+Set a descriptive name that clearly indicates the purpose or intent of the calculated field. For example, if the goal is to capitalize users's first and last names and then concatenate them into one field, you might use the name`formatted_name`. To subsequently filter logs from a user named `Bob Smith`, update your query to include `#formatted_name:"Bob Smith"`.
 
 **Note:** The `#` prefix must be used to refer to calculated fields in searches, aggregation, or other calculated field definitions.
 
@@ -69,16 +72,16 @@ See [Calculated Fields Expression Language][4] for the available functions and o
 After successful creation of a new calculated field, the Log Explorer updates the following:
 - Active calculated fields, which are displayed in a new row directly under the search bar.
     - Hover over a field to view its definition, and use quick actions to edit, filter by, or group by the field.
-- The field is automatically added as a column in the **List** visualization (the title includes the `#` prefix).
+- The field is automatically added as a column in the **[List][8]** visualization (the title includes the `#` prefix).
 - Calculated fields are displayed in a separate section inside the log side panel.
 
 Calculated fields can be used for search, aggregation, visualization, and definition of other calculated fields and works in the same way as log attributes. Make sure to use the `#` prefix to reference calculated field names.
 
-{{< img src="logs/explorer/calculated_fields/calculated_field.png" alt="A calculated fields attribute called request_duration" style="width:100%;" >}}
+{{< img src="logs/explorer/calculated_fields/calculated_field.png" alt="A calculated field attribute called request_duration" style="width:100%;" >}}
 
 #### Persistence
 
-Calculated fields are not a replacement for log pipelines and processors for ingest-time parsing, normalization, and enrichment of logs. Calculated fields is a complementary tool that is useful in certain scenarios, such as when:
+Calculated fields are not a replacement for log pipelines and processors for ingest-time parsing, normalization, and enrichment of logs. Leverage calculated fields in the following scenarios:
 
 - You need to perform a unique one-off investigation or ad-hoc analysis, and creating a temporary need for a field that you don't necessarily be reusing in the long-tem.
 - You need to retroactively update indexed logs to answer a certain question (pipelines changes only apply to logs ingested after a pipeline update).
@@ -91,7 +94,11 @@ If you realize that a calculated field you are using may be valuable in the long
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/log_configuration/attributes_naming_convention/
-[2]: /logs/log_configuration/pipelines/?tab=source
-[3]: https://app.datadoghq.com/logs
+[1]: /logs/explorer/calculated_fields/expression_language/#string
+[2]: /logs/explorer/calculated_fields/expression_language/#arithmetic
+[3]: /logs/explorer/calculated_fields/expression_language/#logical
 [4]: /logs/explorer/calculated_fields/expression_language/
+[5]: /logs/log_configuration/attributes_naming_convention/
+[6]: /logs/log_configuration/pipelines/?tab=source
+[7]: https://app.datadoghq.com/logs
+[8]: /logs/explorer/visualize/#lists

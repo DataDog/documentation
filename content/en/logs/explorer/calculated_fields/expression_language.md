@@ -1,5 +1,5 @@
 ---
-title: Expression Language
+title: Calculated Fields Expression Language
 kind: documentation
 disable_toc: false
 further_reading:
@@ -8,10 +8,6 @@ further_reading:
   text: "Calculated Fields"
 ---
 
-## Overview
-
-Use calculated fields to manipulate text, perform arithmetic operations, and evaluate conditional logic on log data in the Log Explorer. A calculated field's formula (or expression) can include log attributes, other calculated fields, and a set of functions and operators.
-
 ## Basic syntax and language constructs
 
 | Construct                                                                                          | Syntax and Notation                                                    |
@@ -19,7 +15,7 @@ Use calculated fields to manipulate text, perform arithmetic operations, and eva
 | Reserved attribute, or tag named `tag`                                                             | `tag` (no prefix required)                                             |
 | Attribute named `attr`                                                                             | `@attr` (use an `@` prefix)                                            |
 | Calculated field named `field`                                                                     | `#field` (use a `#` prefix)                                            |
-| String literal (quote)<br>For example, `text` or `Quoted "text"`                                   | `"text"`<br> `"Quoted \"text\""<br>(<a href="https://docs.datadoghq.com/logs/explorer/search_syntax/">Log Search Syntax</a> applies)|
+| String literal (quote)<br>For example, `text` or `Quoted "text"`                                   | `"text"`<br> `"Quoted \"text\""`<br>(<a href="https://docs.datadoghq.com/logs/explorer/search_syntax/">Log Search Syntax</a> applies)|
 | Numeric literal (number)<br>For example, `ten`                                                     | `10`                                                                   |
 | Function named `func` with parameters `x` and `y`                                                  | `func(x, y)`                                                           |
 | Operator<br>For example, a binary operator `*` with operands `x` and `y`.                          | `x*y`                                                                  |
@@ -80,7 +76,7 @@ Rounds number down to the nearest integer.
 <details>
 <summary>Example</summary>
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A log event has the following attribute: <code>@value</code>=9.99<br><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Formula: floow(<code>@value</code>)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Formula: floor(<code>@value</code>)
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Result: 9
 </details>
 
