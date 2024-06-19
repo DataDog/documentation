@@ -25,7 +25,8 @@ To start with Data Streams Monitoring, you need recent versions of the Datadog A
 ### Installation
 
 Java uses auto-instrumentation to inject and extract additional metadata required by Data Streams Monitoring for measuring end-to-end latencies and the relationship between queues and services. To enable Data Streams Monitoring, set the `DD_DATA_STREAMS_ENABLED` environment variable to `true` on services sending messages to (or consuming messages from) Kafka, SQS or RabbitMQ.
-Also, to make the DSM to APM link work, set `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED` to true. `DD_SERVICE` will be used as the service name in traces.
+
+Also, set the `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED` variable to `true` so that `DD_SERVICE` is used as the service name in traces.
 
 For example:
 ```yaml
