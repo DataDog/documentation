@@ -22,7 +22,7 @@ To access the path view page, click into a path from the [List view][2]. On this
 
 {{< img src="network_performance_monitoring/network_path/path_view_2.png" alt="Path view in Network path highlighting a path selected from source to destination" >}}
 
-Click any path from the source to the destination to observe additional details such as `Hop TTL`, `Hop Latency`, `Traversed count`, and also click **View Device Details** to navigate to the Device details page for the selected device.
+Click any path from the source to the destination to observe additional details such as `Hop TTL`, `Hop Latency`, and `Traversed count`. Then, click **View Device Details** to navigate to the Device details page for the selected device.
 
 {{< img src="network_performance_monitoring/network_path/path_details.png" alt="Path view in Network path highlighting path details." >}}
 
@@ -40,7 +40,7 @@ The lower section of the path view page provides additional insights about each 
 
 ### End-to-end metrics graph
 
-The end-to-end metrics graph presents a visual representation of both the end-to-end latency and end-to-end packet loss for each path, allowing for easy comparison and analysis.
+The end-to-end metrics graph presents a visual representation of both the end-to-end latency and end-to-end packet loss for each path, allowing you to compare and analyze them effectively.
 
 
 {{< img src="network_performance_monitoring/network_path/end-to-end-metrics-graph.png" alt="Path view page showing the end-to-end-metrics graph." >}}

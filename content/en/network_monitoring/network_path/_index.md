@@ -4,10 +4,10 @@ kind: documentation
 description: Investigate network traffic paths 
 further_reading:
 - link: "/network_monitoring/network_path/list_view"
-  tag: "Doc"
+  tag: "Documentation"
   text: "Learn more about the List View in Network Path"
 - link: "/network_monitoring/network_path/path_view"
-  tag: "Doc"
+  tag: "Documentation"
   text: "Learn more about the Path View in Network Path"
 ---
 {{< site-region region="gov" >}}
@@ -18,18 +18,19 @@ further_reading:
 
 ## Overview
 
-[Network Path][1] illustrates the route that network traffic follows from its origin to its destination. This provides network administrators with the capability to precisely identify the source of network problems, whether they're internal or from an Internet Service Provider (ISP), or due to other issues such as mis-routing. Each row signifies a route from a source to it's destination, as depicted in the `source` and `destination` facet panel.
+[Network Path][1] illustrates the route that network traffic follows from its origin to its destination. This provides network administrators with the capability to precisely identify the source of network problems, whether they're internal or from an Internet Service Provider (ISP), or due to other issues such as misrouting. Each row signifies a route from a source to its destination, as depicted in the `source` and `destination` facet panel.
 
 {{< img src="network_performance_monitoring/network_path/network_path_default_view.png" alt="The Network Path default view, sorting by Datacenter and Un-Grouped Destination" >}}
 
 ## How it works
 
-Datadog performs a `traceroute` at the host level to illustrate the packet's journey and latency at each hop from a source to it's destination. Each host runs its own `traceroute`, and the path shown is a visual representation of this list. The following diagram depicts the typical flow of a network path from a source (host) to it's destination.
+Datadog performs a `traceroute` at the host level to illustrate the packet's journey and latency at each hop from a source to its destination. Each host runs its own `traceroute`, and the path shown is a visual representation of this list. The following diagram depicts the typical flow of a network path from a source (host) to its destination.
 
-**Note**: By default, Datadog executes a `traceroute` on static paths every minute and on dynamic paths every five minutes.
-
+The following diagram depicts the typical flow of a network path from a source (Host) to its destination.
 
 {{< img src="network_performance_monitoring/network_path/network_path_diagram.png" alt="Diagram of how Network path works" >}}
+
+**Note**: By default, Datadog executes a `traceroute` on static paths every minute and on dynamic paths every five minutes.
 
 
 ## Further Reading

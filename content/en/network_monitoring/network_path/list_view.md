@@ -4,7 +4,7 @@ kind: documentation
 description: Investigate the Network Path List View
 further_reading:
 - link: "/network_monitoring/network_path/path_view"
-  tag: "Doc"
+  tag: "Documentation"
   text: "Learn more about the Path View in Network Path"
 ---
 
