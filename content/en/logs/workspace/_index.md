@@ -13,9 +13,9 @@ During an incident investigation, you might need to run complex queries, such as
 
 - Correlate multiple data sources
 - Aggregate multiple levels of data
-- Join data using SQL
+- Join data across multiple log sources and other datasets
 - Extract data or add a calculated field at query time
-- Add visualizations for your transformed datasets.
+- Add visualizations for your transformed datasets
 
 ## Create a workspace and add a data source
 
@@ -37,7 +37,7 @@ In the [Log Explorer][2]:
 You can add the following cells to:
 - Include additional data sources such as reference tables
 - Use SQL to join data
-- Transform, correlate, and visualize the data 
+- Transform, correlate, and visualize the data
 
 Cells that depend on other cells are automatically updated when one of the cells it depends on is changed.
 
@@ -68,7 +68,13 @@ You can add a logs query or a reference table as a data source.
 1. Click the download icon to export the dataset as a CSV.
 
 ### Visualization cell
-Add the **Visualization** cell to display your data as a table, top list, treemap, pie chart, or a scatterplot.
+Add the **Visualization** cell to display your data as a:
+- Table
+- Top list
+- Timeseries
+- Treemap
+- Pie chart
+- Scatterplot
 
 1. Click the **Visualization** tile.
 1. Select the data source you want to visualize in the **Source dataset** dropdown menu.
@@ -85,8 +91,9 @@ Click the **Transformation** tile to add a cell for filtering, aggregating, and 
 1. Select the data source you want to transform in the **Source dataset** dropdown menu.
 1. Click the plus icon to add a **Filter**, **Parse**, or **Aggregate** function.
     - For **Filter**, add a filter query for the dataset.
-    - For **Parse**, enter grok syntax to extract data into a separate column. In the **from** dropdown menu, select the column the data is getting extracted from. See the [column extraction example](#column-extraction-example).
+    - For **Parse**, enter [grok syntax][3] to extract data into a separate column. In the **from** dropdown menu, select the column the data is getting extracted from. See the [column extraction example](#column-extraction-example).
     - For **Aggregate**, select what you want to group the data by in the dropdown menus.
+    - For **Limit**, enter the number of rows of the dataset you want to display.
 1. Click the download icon to export the dataset into a CSV.
 
 #### Column extraction example
@@ -99,7 +106,7 @@ The following is an example dataset:
 | May 29 10:59:29.000 | shopist.internal | Submitted order for customer 38554 |
 | May 29 10:58:54.000 | shopist.internal | Submitted order for customer 32200 |
 
-Use the following grok syntax to extract the customer ID from the message and add it to a new column called `customer_id`:
+Use the following [grok syntax][3] to extract the customer ID from the message and add it to a new column called `customer_id`:
 
 ```
 Submitted order for customer %{notSpace:customer_id}`
@@ -143,7 +150,7 @@ The example starts off with two logs data sources:
 - `transaction_start_logs`
 - `transaction_execution_logs`
 
-The next cell in the workspace is the transform cell `parsed_executed_logs`. It uses the following grok parsing syntax to extract the transaction ID from the `message` column of the `transaction_execution_logs` dataset and adds the transaction ID to a new column called `customer_id`.
+The next cell in the workspace is the transform cell `parsed_executed_logs`. It uses the following [grok parsing syntax][3] to extract the transaction ID from the `message` column of the `transaction_execution_logs` dataset and adds the transaction ID to a new column called `transaction_id`.
 
 ```
 transaction %{notSpace:transaction_id}
@@ -151,12 +158,12 @@ transaction %{notSpace:transaction_id}
 
 An example of the resulting `parsed_executed_logs` dataset:
 
-| timestamp           | host             | message                            | customer_id |
+| timestamp           | host             | message                            | transaction_id |
 | ------------------- | ---------------- | ---------------------------------- | ----------- |
-| May 29 11:09:28.000 | shopist.internal | Executing trade for customer 56519 | 56519       |
-| May 29 10:59:29.000 | shopist.internal | Executing trade for customer 23269 | 23269       |
-| May 29 10:58:54.000 | shopist.internal | Executing trade for customer 96870 | 96870       |
-| May 31 12:20:01.152 | shopist.internal | Executing trade for customer 80207 | 80207       |
+| May 29 11:09:28.000 | shopist.internal | Executing trade for transaction 56519 | 56519       |
+| May 29 10:59:29.000 | shopist.internal | Executing trade for transaction 23269 | 23269       |
+| May 29 10:58:54.000 | shopist.internal | Executing trade for transaction 96870 | 96870       |
+| May 31 12:20:01.152 | shopist.internal | Executing trade for transaction 80207 | 80207       |
 
 The analysis cell `transaction_record` uses the following SQL command to select specific columns from the `transaction_start_logs` dataset and the `transaction_execution_logs`, renames the status `INFO` to `OK`, and then joins the two datasets.
 
@@ -219,3 +226,4 @@ Finally, a treemap visualization cell is created with the `transaction_record_wi
 
 [1]: https://app.datadoghq.com/logs/analysis-workspace/list
 [2]: https://app.datadoghq.com/logs
+[3]: /logs/log_configuration/parsing/
