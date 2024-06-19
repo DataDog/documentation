@@ -45,7 +45,7 @@ The available operators in order of precedence:
 
 ### Arithmetic
 
-#### abs(num value)
+<h4>abs(<i>num</i> value)</h4>
 
 Returns the absolute value of a number.
 
@@ -58,7 +58,7 @@ Returns the absolute value of a number.
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Result: 1
 </details>
 
-#### ceil(num value)
+<h4>ceil(<i>num</i> value)</h4>
 
 Rounds number up to the nearest integer.
 
@@ -69,7 +69,7 @@ Rounds number up to the nearest integer.
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Result: 3
 </details>
 
-#### floor(num value)
+<h4>floor(<i>num</i> value)</h4>
 
 Rounds number down to the nearest integer.
 
@@ -80,7 +80,7 @@ Rounds number down to the nearest integer.
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Result: 9
 </details>
 
-#### max(num value [, num value, …])
+<h4>max(<i>num</i> value [, <i>num</i> value, …])</h4>
 
 Finds maximum value amongst a set of numbers.
 
@@ -91,7 +91,7 @@ Finds maximum value amongst a set of numbers.
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Result: 5
 </details>
 
-#### min(num value [, num value, …])
+<h4>min(<i>num</i> value [, <i>num</i> value, …])</h4>
 
 Finds the minimum value amongst a set of numbers.
 
@@ -102,7 +102,7 @@ Finds the minimum value amongst a set of numbers.
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Result: -1
 </details>
 
-#### round(num value, int precision)
+<h4>round(<i>num</i> value, <i>int</i> precision)</h4>
 
 Rounds a number. Optionally, define how many decimal places to maintain.
 
@@ -115,7 +115,7 @@ Rounds a number. Optionally, define how many decimal places to maintain.
 
 ### String
 
-#### concat(str value [, expr value, …])
+<h4>concat(<i>str</i> value [, <i>expr</i> value, …])</h4>
 
 Combines multiple values into a single string.
 
@@ -128,7 +128,7 @@ Combines multiple values into a single string.
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Result: "Bob Smith"
 </details>
 
-#### lower(str string)
+<h4>lower(<i>str</i> string)</h4>
 
 Converts string to lowercase.
 
@@ -139,7 +139,7 @@ Converts string to lowercase.
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Result: "bob"
 </details>
 
-#### prefix(str string, int num_chars)
+<h4>prefix(<i>str</i> string, <i>int</i> num_chars)</h4>
 
 Extracts a portion of text from the beginning of a string.
 
@@ -150,7 +150,7 @@ Extracts a portion of text from the beginning of a string.
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Result: "CAN"
 </details>
 
-#### proper(str string)
+<h4>proper(<i>str</i> string)</h4>
 
 Converts string to proper case.
 
@@ -161,7 +161,7 @@ Converts string to proper case.
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Result: "Bob Smith"
 </details>
 
-#### split_before(str string, str separator, int occurrence)
+<h4>split_before(<i>str</i> string, <i>str</i> separator, <i>int</i> occurrence)</h4>
 
 Extracts the portion of text preceding a certain pattern in a string.
 
@@ -172,7 +172,7 @@ Extracts the portion of text preceding a certain pattern in a string.
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Result: "1"
 </details>
 
-#### split_after(str string, str separator, int occurrence)
+<h4>split_after(<i>str</i> string, <i>str</i> separator, <i>int</i> occurrence)</h4>
 
 Extracts the portion of text following a certain pattern in a string.
 
@@ -183,7 +183,7 @@ Extracts the portion of text following a certain pattern in a string.
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Result: "Smith"
 </details>
 
-#### substring(str string, int start, int end)
+<h4>substring(<i>str</i> string, <i>int</i> start, <i>int</i> end)</h4>
 
 Extracts a portion of text from the middle of a string.
 
@@ -194,7 +194,7 @@ Extracts a portion of text from the middle of a string.
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Result: "Bob"
 </details>
 
-#### suffix(str string, int num_chars)
+<h4>suffix(<i>str</i> string, <i>int</i> num_chars)</h4>
 
 Extracts a portion of text from the end of a string.
 
@@ -205,7 +205,7 @@ Extracts a portion of text from the end of a string.
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Result: ".com"
 </details>
 
-#### textjoin(str delimiter, expr value [, expr value, …])
+<h4>textjoin(<i>str</i> delimiter, <i>expr</i> value [, <i>expr</i> value, …])</h4>
 
 Combines multiple values into a single string with a delimiter in between.
 
@@ -218,7 +218,7 @@ Combines multiple values into a single string with a delimiter in between.
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Result: "Smith, Bob"
 </details>
 
-#### upper(str string)
+<h4>upper(<i>str</i> string)</h4>
 
 Converts string to uppercase.
 
@@ -231,11 +231,11 @@ Converts string to uppercase.
 
 ### Logical
 
-#### case(expr condition, expr value_if_true [, expr condition, expr value_if_true …], expr value_else)
+<h4>case(<i>expr</i> condition, <i>expr</i> value_if_true [, <i>expr</i> condition, <i>expr</i> value_if_true …], <i>expr</i> value_else)</h4>
 
 Evaluates a series of conditions and returns a value accordingly.
 
-#### if(expr condition, expr if_true, expr if_false)
+<h4>if(<i>expr</i> condition, <i>expr</i> if_true, <i>expr</i> if_false)</h4>
 
 Evaluates a condition and returns a value accordingly.
 
@@ -248,7 +248,7 @@ Evaluates a condition and returns a value accordingly.
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Result: "continental"
 </details>
 
-#### is_null(expr value)
+<h4>is_null(<i>expr</i> value)</h4>
 
 Checks if an attribute or expression is null.
 
