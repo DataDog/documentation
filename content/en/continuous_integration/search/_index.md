@@ -57,6 +57,12 @@ To see the unified pipeline trace, click on the `View unified trace` checkbox on
 
 The unified trace shows in a single trace all pipeline traces generated due to the different partial retries of your pipeline. If the pipeline execution has no partial retries, the unified trace shows only the trace of a single pipeline execution.
 
+### Highlight critical path
+
+To highlight the critical path on the trace, click on the `Critical path` checkbox on the pipeline execution page.
+
+The critical path highlights the spans speeding which will speed the overall execution time of your pipeline. If a CI job is on the critical path, it means it is part of the longest weighted path through the trace in terms of execution time. Speeding up the CI Jobs on the critical path is strictly necessary to speed up the CI pipeline.
+
 ### Explore connections to services, resources, and network events
 
 Click one of the executions to open the pipeline execution view and see the flame graph or span list for the pipeline and its stages. The _Executions (n)_ list on the left side gives you quick access to the data for each retry of the pipeline for the same commit.
