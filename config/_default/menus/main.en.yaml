@@ -2687,6 +2687,11 @@ menu:
       parent: network_path
       identifier: network_path_path_view
       weight: 402
+    - name: Setup
+      url: network_monitoring/network_path/setup/
+      parent: network_path
+      identifier: network_path_setup
+      weight: 402
     - name: Cloud Cost
       url: cloud_cost_management/
       identifier: cloud_cost

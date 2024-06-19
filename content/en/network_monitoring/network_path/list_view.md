@@ -2,12 +2,21 @@
 title: List View
 kind: documentation
 description: Investigate the Network Path List View
+is_beta: true
 further_reading:
 - link: "/network_monitoring/network_path/path_view"
   tag: "Documentation"
   text: "Learn more about the Path View in Network Path"
+- link: "/network_monitoring/network_path/setup"
+  tag: "Documentation"
+  text: "Setup Network Path"
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Network Path for Datadog Network Performance Monitoring is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
+<div class="alert alert-info">Network Path for Datadog Network Performance Monitoring is in private beta. Reach out to your Customer Success Manager to sign up.</div>
 
 ## Overview
 
