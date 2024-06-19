@@ -28,6 +28,16 @@ On the the Worker installation page:
 {{% observability_pipelines/configure_existing_pipelines/source_env_vars/datadog_agent %}}
 
 {{% /tab %}}
+{{% tab "Fluent" %}}
+
+{{% observability_pipelines/configure_existing_pipelines/source_env_vars/fluent %}}
+
+{{% /tab %}}
+{{% tab "HTTP Client" %}}
+
+{{% observability_pipelines/configure_existing_pipelines/source_env_vars/http_client %}}
+
+{{% /tab %}}
 {{% tab "Splunk HEC" %}}
 
 {{% observability_pipelines/configure_existing_pipelines/source_env_vars/splunk_hec %}}
@@ -41,6 +51,11 @@ On the the Worker installation page:
 {{% tab "Sumo Logic" %}}
 
 {{% observability_pipelines/configure_existing_pipelines/source_env_vars/sumo_logic %}}
+
+{{% /tab %}}
+{{% tab "Syslog" %}}
+
+{{% observability_pipelines/configure_existing_pipelines/source_env_vars/syslog %}}
 
 {{% /tab %}}
 {{< /tabs >}}
