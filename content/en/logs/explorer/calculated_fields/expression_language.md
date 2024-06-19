@@ -115,7 +115,7 @@ Round a number. Optionally, define how many decimal places to maintain.
 
 ### String
 
-#### concat(expr value [, expr value, …])
+#### concat(str value [, expr value, …])
 
 Combines multiple values into a single string.
 
