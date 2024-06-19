@@ -1,5 +1,4 @@
 ---
-kind: documentación
 title: Problemas con el sitio del Agent
 ---
 

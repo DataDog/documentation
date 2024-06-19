@@ -1,6 +1,5 @@
 ---
 title: Configurer SafeNet en tant que fournisseur d'identité SAML
-kind: documentation
 further_reading:
   - link: /account_management/saml/
     tag: Documentation

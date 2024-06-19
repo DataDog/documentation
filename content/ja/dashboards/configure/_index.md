@@ -4,7 +4,6 @@ further_reading:
 - link: /dashboards/
   tag: ドキュメント
   text: ダッシュボードの概要
-kind: ドキュメント
 title: 構成
 ---
 

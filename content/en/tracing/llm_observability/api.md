@@ -1,6 +1,7 @@
 ---
-title: LLM Observability API
+title: LLM Observability API Reference
 ---
+
 {{% site-region region="gov" %}}
 <div class="alert alert-warning">
 LLM Observability is not available in the US1-FED site.
@@ -206,7 +207,7 @@ For more information about tags, see [Getting Started with Tags][3].
 
 #### Application naming guidelines
 
-Your application name (the value of `ml_app`) must start with a letter. It may contain the characters listed below:
+Your application name (the value of `DD_LLMOBS_ML_APP`) must be a lowercase Unicode string. It may contain the characters listed below:
 
 - Alphanumerics
 - Underscores
@@ -215,7 +216,7 @@ Your application name (the value of `ml_app`) must start with a letter. It may c
 - Periods
 - Slashes
 
-The name can be up to 200 characters long and contain Unicode letters (which includes most character sets, including languages such as Japanese).
+The name can be up to 193 characters long and may not contain contiguous or trailing underscores.
 
 ## Evaluations API
 

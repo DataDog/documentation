@@ -1,6 +1,5 @@
 ---
 title: Advanced Log Collection Configurations
-kind: documentation
 description: Use the Datadog Agent to collect your logs and send them to Datadog
 further_reading:
 - link: "/logs/guide/how-to-set-up-only-logs/"
@@ -102,7 +101,6 @@ To apply a specific configuration to a given container, Autodiscovery identifies
 
 ```yaml
 apiVersion: apps/v1
-kind: ReplicaSet
 metadata:
   name: cardpayment
 spec:
@@ -223,7 +221,6 @@ In a Kubernetes environment, use the pod annotation `ad.datadoghq.com` on your p
 
 ```yaml
 apiVersion: apps/v1
-kind: ReplicaSet
 metadata:
   name: cardpayment
 spec:
@@ -315,7 +312,6 @@ In a Kubernetes environment, use the pod annotation `ad.datadoghq.com` on your p
 
 ```yaml
 apiVersion: apps/v1
-kind: ReplicaSet
 metadata:
   name: cardpayment
 spec:
@@ -418,7 +414,6 @@ In a Kubernetes environment, use the pod annotation `ad.datadoghq.com` on your p
 
 ```yaml
 apiVersion: apps/v1
-kind: ReplicaSet
 metadata:
   name: postgres
 spec:
@@ -523,7 +518,6 @@ In a Docker environment, use the label `com.datadoghq.ad.logs` on your container
 
 ```yaml
 apiVersion: apps/v1
-kind: ReplicaSet
 metadata:
   name: testApp
 spec:

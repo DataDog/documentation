@@ -3,7 +3,6 @@ aliases:
 - /ja/account_management/billing/profiler/
 - /ja/account_management/billing/apm_distributed_tracing/
 - /ja/account_management/billing/apm_tracing_profiling/
-kind: documentation
 title: APM 料金
 ---
 

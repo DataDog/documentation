@@ -1,6 +1,5 @@
 ---
 title: Enabling CSM Pro on Linux
-kind: documentation
 code_lang: linux
 type: multi-code-lang
 code_lang_weight: 75 # a number that represents relative weight. 

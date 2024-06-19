@@ -1,7 +1,6 @@
 ---
 dependencies:
 - https://github.com/DataDog/puppet-datadog-agent/blob/main/README.md
-kind: 설명서
 title: Puppet
 ---
 이 모듈은 Datadog 에이전트를 설치하고 Puppet 보고서를 Datadog으로 보냅니다.

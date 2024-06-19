@@ -99,7 +99,7 @@ For reference, [find the code for Dogshell][4]. But once you have Dogshell insta
 
 * `dog metric`
 * `dog event`
-* `dog status_check`
+* `dog service_check`
 * `dog monitor`
 * `dog downtime`
 * `dog timeboard`

@@ -1,6 +1,5 @@
 ---
 title: Log collection with Docker socket
-kind: faq
 aliases:
  - /agent/faq/kubernetes-docker-socket-log-collection
 further_reading:
@@ -88,7 +87,6 @@ If you need a custom Datadog integration configuration to enable extra options, 
 On Kubernetes, you can use [ConfigMaps][1]. Reference the template below and the [Kubernetes Custom Integrations][2] documentation.
 
 ```text
-kind: ConfigMap
 apiVersion: v1
 metadata:
   name: "<NAME>-config-map"

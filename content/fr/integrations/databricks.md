@@ -29,7 +29,7 @@ integration_id: databricks
 integration_title: Databricks
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: databricks.

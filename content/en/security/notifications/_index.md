@@ -1,6 +1,5 @@
 ---
 title: Notifications
-kind: documentation
 aliases:
   - /security_platform/notifications/
 further_reading:

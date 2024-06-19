@@ -371,7 +371,7 @@ To verify you've configured the APM integration with RUM, follow the steps below
 
 ## Supported libraries
 
-The following Datadog tracing libraries are supported:
+Below is a list of the supported backend libraries that need to be on the services receiving the network requests.
 
 | Library          | Minimum Version |
 | ---------------- | --------------- |

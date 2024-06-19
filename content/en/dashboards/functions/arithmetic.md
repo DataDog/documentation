@@ -1,6 +1,5 @@
 ---
 title: Arithmetic
-kind: documentation
 aliases:
     - /graphing/functions/arithmetic/
 ---

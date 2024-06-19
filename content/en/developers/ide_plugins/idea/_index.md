@@ -180,7 +180,7 @@ Clicking the link opens the **Test Runs** tab showing the recent history for one
 
 ## View in IDE
 
-The **View in IntelliJ/GoLand/PyCharm** feature provides a link from the Datadog platform directly to your Java, Go, and Python source files. Look for the button next to frames in stack traces displayed on the platform (for example, in [Error Tracking][6]):
+The **View in IDE** feature provides a link from the Datadog platform directly to the source files in your IDE. Look for the button next to frames in stack traces displayed on the platform (for example, in [Error Tracking][6]):
 
 {{< img src="/developers/ide_plugins/idea/view-in-idea.png" alt="A stack trace on the Datadog platform showing the View in IntelliJ button." style="width:100%;" >}}
 

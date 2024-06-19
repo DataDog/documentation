@@ -1,6 +1,5 @@
 ---
 title: Heatmap Widget
-kind: documentation
 description: "Build temporal heat map over a given metric."
 widget_type: "heatmap"
 aliases:
