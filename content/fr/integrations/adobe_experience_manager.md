@@ -17,7 +17,7 @@ has_logo: true
 integration_id: adobe
 integration_title: Adobe Experience Manager
 is_public: true
-kind: integration
+custom_kind: integration
 name: adobe_experience_manager
 public_title: Datadog/Adobe Experience Manager
 short_description: Recueillez des logs pour suivre les erreurs, obtenir des délais

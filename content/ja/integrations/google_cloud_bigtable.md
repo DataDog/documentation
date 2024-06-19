@@ -14,7 +14,7 @@ integration_id: google-cloud-bigtable
 integration_title: Google Bigtable
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: google_cloud_bigtable
 public_title: Datadog-Google Bigtable インテグレーション

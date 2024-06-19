@@ -1,6 +1,5 @@
 ---
 title: Upgrade Between Datadog Agent Minor Versions
-kind: documentation
 aliases:
   - /agent/faq/upgrade-between-agent-minor-versions
   - /agent/guide/upgrade-between-agent-minor-versions

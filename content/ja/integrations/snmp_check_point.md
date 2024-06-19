@@ -30,7 +30,7 @@ integration_id: snmp-check-point
 integration_title: Check Point
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: snmp_check_point
 public_title: Check Point

@@ -1,6 +1,5 @@
 ---
 title: Cloud Security Management Misconfigurations
-kind: documentation
 aliases:
   - /security_platform/cspm/
   - /security/cspm/#glossary

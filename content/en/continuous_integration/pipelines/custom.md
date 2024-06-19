@@ -1,6 +1,5 @@
 ---
 title: Send custom pipelines to Datadog
-kind: documentation
 aliases:
   - /continuous_integration/setup_pipelines/custom
 further_reading:

@@ -1,6 +1,5 @@
 ---
 title: Custom Metrics Billing
-kind: documentation
 aliases:
     - /integrations/faq/what-standard-integrations-emit-custom-metrics/
 algolia:

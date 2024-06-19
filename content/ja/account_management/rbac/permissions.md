@@ -13,7 +13,6 @@ further_reading:
 - link: /api/v2/roles/#list-permissions
   tag: ドキュメント
   text: Permission API を使用してアクセス許可を管理する
-kind: ドキュメント
 title: Datadog ロールのアクセス許可
 ---
 

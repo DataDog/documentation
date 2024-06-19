@@ -5,11 +5,11 @@ code_lang: python
 type: multi-code-lang
 code_lang_weight: 50
 ---
-## ASM capabilities support
+## Application Security capabilities support
 
-The following ASM capabilities are supported in the Python library, for the specified tracer version:
+The following application security capabilities are supported in the Python library, for the specified tracer version:
 
-| ASM capability                   | Minimum Python tracer version |
+| Application Security capability  | Minimum Python tracer version |
 | -------------------------------- | ----------------------------|
 | Threat Detection | 1.9.0   |
 | Threat Protection | 1.10.0  |
@@ -17,6 +17,7 @@ The following ASM capabilities are supported in the Python library, for the spec
 | Software Composition Analysis (SCA) | 1.5.0  |
 | Code Security (beta)  |  private beta  |
 | Automatic user activity event tracking | 1.17.0 |
+| API Security | 2.6.0 |
 
 **Note**: Threat Protection requires enabling [Remote Configuration][2], which is included in the listed minimum tracer version.
 
@@ -34,7 +35,7 @@ The following ASM capabilities are supported in the Python library, for the spec
 
 ### Supported Python versions
 
-The Python ASM Client library follows a [versioning policy][3] that specifies the support level for the different versions of the library and Python runtime.
+The Python Application Security Client library follows a [versioning policy][3] that specifies the support level for the different versions of the library and Python runtime.
 
 Two release branches are supported:
 
@@ -58,8 +59,8 @@ And the library supports the following runtimes:
 - Tags for the HTTP request (status code, method, etc)
 - Distributed Tracing to see attack flows through your applications
 
-##### ASM Capability Notes
-- **Vulnerability Management for OSS** is supported on all frameworks
+##### Application Security Capability Notes
+- **Software Composition Analysis** is supported on all frameworks
 
 ### Supported frameworks
 
@@ -82,8 +83,8 @@ Support for query strings is not available for Flask.
 - query info (for example, a sanitized query string)
 - error and stacktrace capturing
 
-##### ASM Capability Notes
-- **Vulnerability Management for OSS** is supported on all frameworks.
+##### Application Security Capability Notes
+- **Software Composition Analysis** is supported on all frameworks.
 - **Threat Protection** also works at the HTTP request (input) layer, and so works for all databases by default, even those not listed in the table below.
 -
 The Python library supports the [database API specifications][4] and supports all generic SQL databases. This includes databases such as SQLite, Mysql, Postgres and MariaDB.

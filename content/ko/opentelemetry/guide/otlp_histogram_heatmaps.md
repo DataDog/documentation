@@ -2,7 +2,7 @@
 further_reading:
 - link: /metrics/open_telemetry/otlp_metric_types
   tag: 설명서
-  text: 노트북
+  text: OTLP 메트릭 유형
 - link: /opentelemetry/
   tag: 설명서
   text: Datadog의 OpenTelemetry 지원

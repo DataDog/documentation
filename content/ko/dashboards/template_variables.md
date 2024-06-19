@@ -22,7 +22,6 @@ further_reading:
 - link: /dashboards/widgets/
   tag: 설명서
   text: 대시보드용 위젯 살펴보기
-kind: 설명서
 title: 템플릿 변수
 ---
 

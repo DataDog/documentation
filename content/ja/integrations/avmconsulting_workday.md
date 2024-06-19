@@ -40,7 +40,7 @@ integration_id: avmconsulting-workday
 integration_title: Workday
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0

@@ -25,7 +25,7 @@ integration_id: torq
 integration_title: Torq
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: support@torq.io
 manifest_version: 1.0.0
 metric_prefix: torq.
