@@ -2,7 +2,6 @@
 aliases:
 - /ko/graphing/widgets/log_stream/
 description: 필터링된 로그 스트림을 Datadog 대시보드에 표시합니다.
-kind: 설명서
 title: 로그 스트림 위젯
 widget_type: log_stream
 ---

@@ -1,6 +1,5 @@
 ---
 title: Cloud Cost Monitor
-kind: documentation
 description: Learn how to create a monitor with Cloud Cost data.
 further_reading:
 - link: "https://www.datadoghq.com/blog/ccm-cost-monitors/"

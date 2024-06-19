@@ -1,6 +1,5 @@
 ---
 title: "DocumentDB Component"
-kind: documentation
 ---
 ## Overview
 

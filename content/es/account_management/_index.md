@@ -6,7 +6,6 @@ cascade:
   algolia:
     rank: 70
 description: Gestiona tu cuenta de Datadog y tu organización
-kind: documentación
 title: Gestión de cuentas
 ---
 {{< site-region region="gov" >}}

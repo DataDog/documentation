@@ -1,6 +1,5 @@
 ---
 title: "SNS Component (Deprecated)"
-kind: documentation
 ---
 ## Overview
 

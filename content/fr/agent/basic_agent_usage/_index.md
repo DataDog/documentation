@@ -16,7 +16,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/engineering/performance-improvements-in-the-datadog-agent-metrics-pipeline/
   tag: Blog
   text: Amélioration des performances dans le pipeline des métriques de l'Agent Datadog
-kind: documentation
 title: Utilisation de base de l'Agent
 ---
 

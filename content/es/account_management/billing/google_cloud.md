@@ -1,5 +1,4 @@
 ---
-kind: documentación
 title: Integración de la facturación de Google Cloud
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: Is the AWS China region supported?
-kind: faq
 ---
 
 No, Cloudcraft does not currently support the AWS China region, due to the region's licensing requirements.

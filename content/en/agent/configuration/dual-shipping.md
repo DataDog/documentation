@@ -1,6 +1,5 @@
 ---
 title: Dual Shipping
-kind: guide
 aliases:
 - /agent/guide/dual-shipping
 further_reading:
