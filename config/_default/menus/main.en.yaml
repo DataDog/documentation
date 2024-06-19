@@ -4090,6 +4090,11 @@ menu:
       parent: observability_pipelines_archive_logs
       identifier: observability_pipelines_archive_logs_sumo_logic_hosted_collector
       weight: 4004
+    - name: Syslog
+      url: observability_pipelines/archive_logs/syslog/
+      parent: observability_pipelines_archive_logs
+      identifier: observability_pipelines_archive_logs_syslog
+      weight: 4005
     - name: Split Logs
       url: observability_pipelines/split_logs/
       parent: observability_pipelines
