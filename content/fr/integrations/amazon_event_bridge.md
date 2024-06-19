@@ -44,7 +44,7 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
 
 ### Configuration
 
-Les autorisations `events:CreateEventBus` et `events:PutPartnerEvents` sont requises pour envoyer des notifications d'alerte à vos bus d'événements. Si cette autorisation n'est pas configurée, consultez la [documentation relative aux autorisations IAM Datadog][2] pour activer les autorisations avant toute autre étape de configuration.
+Les autorisations `events:CreateEventBus` et `events:PutPartnerEvents` sont requises pour envoyer des notifications d'alerte à vos bus d'événements. Si ces autorisations ne sont pas configurées, consultez la [documentation relative aux autorisations IAM Datadog][2] pour activer les autorisations avant toute autre étape de configuration.
 
 1. Accédez au carré d'[intégration Datadog/Amazon EventBridge][3] pour consulter la liste des comptes AWS intégrés dans Datadog et à partir desquels vous pouvez créer des bus d'événements.
 2. Dans le compte AWS de votre choix, créez un bus d'événements. Pour ce faire, saisissez un nom et sélectionnez la région de votre choix.
