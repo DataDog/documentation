@@ -16,14 +16,16 @@ As your infrastructure and applications grow, so does your log volume and the co
 
 Select a log source to get started:
 
-- [Datadog Agent][4]
-- [Splunk HTTP Event Collector (HEC)][1]
-- [Splunk Heavy and Universal Forwarders (TCP)][2]
-- [Sumo Logic Hosted Collector][3]
-- [Rsyslog or Syslog-ng][5]
+- [Datadog Agent][1]
+- [Fluentd or Fluent Bit][2]
+- [Splunk HTTP Event Collector (HEC)][3]
+- [Splunk Heavy and Universal Forwarders (TCP)][4]
+- [Sumo Logic Hosted Collector][5]
+- [Rsyslog or Syslog-ng][6]
 
-[1]: /observability_pipelines/log_volume_control/splunk_hec
-[2]: /observability_pipelines/log_volume_control/splunk_tcp
-[3]: /observability_pipelines/log_volume_control/sumo_logic_hosted_collector
-[4]: /observability_pipelines/log_volume_control/datadog_agent
-[5]: /observability_pipelines/log_volume_control/syslog
+[1]: /observability_pipelines/log_volume_control/datadog_agent
+[2]: /observability_pipelines/log_volume_control/fluent
+[3]: /observability_pipelines/log_volume_control/splunk_hec
+[4]: /observability_pipelines/log_volume_control/splunk_tcp
+[5]: /observability_pipelines/log_volume_control/sumo_logic_hosted_collector
+[6]: /observability_pipelines/log_volume_control/syslog

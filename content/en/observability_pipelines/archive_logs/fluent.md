@@ -1,12 +1,13 @@
 ---
-title: Archive Logs for Syslog
+title: Archive Logs for Fluent
 kind: document
 disable_toc: false
 ---
 
 ## Overview
 
-Configure your Rsyslog or Syslog-ng source so that the Observability Pipelines Worker formats the logs collected into a Datadog-rehydratable format before routing them to Datadog Log Archives.
+Configure Fluentd or Fluent Bit so that the Observability Pipelines Worker formats the logs collected into a Datadog-rehydratable format before routing them to Datadog Log Archives.
+
 
 {{< img src="observability_pipelines/use_cases/archive_logs.png" alt="The log sources, processors, and destinations available for the split logs use case" width="100%" >}}
 
@@ -18,7 +19,7 @@ This document walks you through the following steps:
 
 ## Prerequisites
 
-{{% observability_pipelines/prerequisites/syslog %}}
+{{% observability_pipelines/prerequisites/fluent %}}
 
 ## Configure Log Archives
 
@@ -120,11 +121,11 @@ If you already have a Datadog Log Archive configured for Observability Pipelines
 
 1. Navigate to [Observability Pipelines][1].
 1. Select the **Archive Logs** template to create a new pipeline.
-1. Select **Rsyslog** or **Syslog-ng** as the source.
+1. Select **Fluentd or Fluent Bit** as the source.
 
 ### Set up the source
 
-{{% observability_pipelines/source_settings/syslog%}}
+{{% observability_pipelines/source_settings/fluent%}}
 
 ### Set up the destinations
 
@@ -249,7 +250,7 @@ Follow the instructions for the cloud provider you are using to archive your log
 
 ## Install the Observability Pipelines Worker
 1. Select your platform in the **Choose your installation platform** dropdown menu.
-1. Enter the Syslog address. This is a Syslog compatible endpoint that the Worker exposes that your applications send logs to. The Observability Pipelines Worker listens on this address for incoming logs.
+1. Enter the Fluent socket address and port. The Observability Pipelines Worker listens on this address for incoming log messages.
 
 1. Provide the environment variables for each of your selected destinations. See [prerequisites](#prerequisites) for more information.
 {{< tabs >}}
@@ -339,6 +340,6 @@ Follow the instructions for the cloud provider you are using to archive your log
 
 ## Send logs to the Observability Pipelines Worker
 
-{{% observability_pipelines/log_source_configuration/syslog%}}
+{{% observability_pipelines/log_source_configuration/fluent%}}
 
 [1]: https://app.datadoghq.com/observability-pipelines
