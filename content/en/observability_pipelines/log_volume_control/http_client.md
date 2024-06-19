@@ -1,33 +1,30 @@
 ---
-title: Dual Ship Logs for Fluent
+title: Log Volume Control for HTTP Client
 kind: document
 disable_toc: false
 ---
 
 ## Overview
 
-Configure Fluentd or Fluent Bit and set up Observability Pipelines so that the Observability Pipelines Worker aggregates and processes the logs coming from your upstream sources before routing them to various applications.
-
-{{< img src="observability_pipelines/use_cases/dual_ship_logs.png" alt="The log sources, processors, and destinations available for the split logs use case" width="100%" >}}
+Set up the Observability Pipelines Worker with the HTTP Client source so that you route only useful logs to your destinations.
 
 This document walks you through the following steps:
 1. The [prerequisites](#prerequisites) needed to set up Observability Pipelines
 1. [Setting up Observability Pipelines](#set-up-observability-pipelines)
-1. [Sending logs to the Observability Pipelines Worker](#send-logs-to-the-observability-pipelines-worker-over-fluent)
 
 ## Prerequisites
 
-{{% observability_pipelines/prerequisites/fluent%}}
+{{% observability_pipelines/prerequisites/http_client %}}
 
 ## Set up Observability Pipelines
 
 1. Navigate to [Observability Pipelines][1].
-1. Select the **Dual Ship Logs** template to create a new pipeline.
-1. Select **Fluentd or Fluent Bit** as the source.
+1. Select the **Log Volume Control** template to create a new pipeline.
+1. Select **HTTP Client** as the source.
 
 ### Set up the source
 
-{{% observability_pipelines/source_settings/fluent%}}
+{{% observability_pipelines/source_settings/http_client%}}
 
 ### Set up the destinations
 
@@ -152,7 +149,7 @@ Follow the instructions for the cloud provider you are using to archive your log
 
 ## Install the Observability Pipelines Worker
 1. Select your platform in the **Choose your installation platform** dropdown menu.
-1. Enter the Fluent socket address and port. The Observability Pipelines Worker listens on this address for incoming log messages.
+1. Enter the full path of the HTTP/S endpoint URL. For example, `https://127.0.0.8/logs`. The Observability Pipelines Worker collects logs events from this endpoint.
 
 1. Provide the environment variables for each of your selected destinations. See [prerequisites](#prerequisites) for more information.
 {{< tabs >}}
@@ -239,9 +236,5 @@ Follow the instructions for the cloud provider you are using to archive your log
 
 {{% /tab %}}
 {{< /tabs >}}
-
-## Send logs to the Observability Pipelines Worker over Fluent
-
-{{% observability_pipelines/log_source_configuration/fluent %}}
 
 [1]: https://app.datadoghq.com/observability-pipelines

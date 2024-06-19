@@ -1,33 +1,130 @@
 ---
-title: Dual Ship Logs for Fluent
+title: Archive Logs for HTTP Client
 kind: document
 disable_toc: false
 ---
 
 ## Overview
 
-Configure Fluentd or Fluent Bit and set up Observability Pipelines so that the Observability Pipelines Worker aggregates and processes the logs coming from your upstream sources before routing them to various applications.
+Configure your HTTP Client so that the Observability Pipelines Worker formats the logs collected into a Datadog-rehydratable format before routing them to Datadog Log Archives.
 
-{{< img src="observability_pipelines/use_cases/dual_ship_logs.png" alt="The log sources, processors, and destinations available for the split logs use case" width="100%" >}}
+{{< img src="observability_pipelines/use_cases/archive_logs.png" alt="The log sources, processors, and destinations available for the split logs use case" width="100%" >}}
 
 This document walks you through the following steps:
 1. The [prerequisites](#prerequisites) needed to set up Observability Pipelines
+1. [Configuring a Log Archive](#configure-a-log-archive)
 1. [Setting up Observability Pipelines](#set-up-observability-pipelines)
-1. [Sending logs to the Observability Pipelines Worker](#send-logs-to-the-observability-pipelines-worker-over-fluent)
+1. [Sending logs to the Observability Pipelines Worker](#send-logs-to-the-observability-pipelines-worker)
 
 ## Prerequisites
 
-{{% observability_pipelines/prerequisites/fluent%}}
+{{% observability_pipelines/prerequisites/http_client %}}
+
+## Configure Log Archives
+
+If you already have a Datadog Log Archive configured for Observability Pipelines, skip to [Set up Observability Pipelines](#set-up-observability-pipelines).
+
+{{% collapse-content title="Amazon S3" level="h4" %}}
+
+{{% observability_pipelines/configure_log_archive/amazon_s3/instructions %}}
+
+{{< tabs >}}
+{{% tab "Docker" %}}
+
+{{% observability_pipelines/configure_log_archive/amazon_s3/docker %}}
+
+{{% /tab %}}
+{{% tab "Amazon EKS" %}}
+
+{{% observability_pipelines/configure_log_archive/amazon_s3/amazon_eks %}}
+
+{{% /tab %}}
+{{% tab "Linux (APT)" %}}
+
+{{% observability_pipelines/configure_log_archive/amazon_s3/linux_apt %}}
+
+{{% /tab %}}
+{{% tab "Linux (RPM)" %}}
+
+{{% observability_pipelines/configure_log_archive/amazon_s3/linux_rpm %}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
+{{% observability_pipelines/configure_log_archive/amazon_s3/connect_s3_to_datadog_log_archives %}}
+
+{{% /collapse-content %}}
+
+{{% collapse-content title="Google Cloud Storage" level="h4" %}}
+
+{{% observability_pipelines/configure_log_archive/google_cloud_storage/instructions %}}
+
+{{< tabs >}}
+{{% tab "Docker" %}}
+
+{{% observability_pipelines/configure_log_archive/google_cloud_storage/docker %}}
+
+{{% /tab %}}
+{{% tab "Google GKE" %}}
+
+{{% observability_pipelines/configure_log_archive/google_cloud_storage/google_gke %}}
+
+{{% /tab %}}
+{{% tab "Linux (APT)" %}}
+
+{{% observability_pipelines/configure_log_archive/google_cloud_storage/linux_apt %}}
+
+{{% /tab %}}
+{{% tab "Linux (RPM)" %}}
+
+{{% observability_pipelines/configure_log_archive/google_cloud_storage/linux_rpm %}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
+{{% observability_pipelines/configure_log_archive/google_cloud_storage/connect_datadog_log_archives %}}
+
+{{% /collapse-content %}}
+{{% collapse-content title="Azure Storage" level="h4" %}}
+
+{{% observability_pipelines/configure_log_archive/azure_storage/instructions %}}
+
+{{< tabs >}}
+{{% tab "Docker" %}}
+
+{{% observability_pipelines/configure_log_archive/azure_storage/docker %}}
+
+{{% /tab %}}
+{{% tab "Azure AKS" %}}
+
+{{% observability_pipelines/configure_log_archive/azure_storage/azure_aks %}}
+
+{{% /tab %}}
+{{% tab "Linux (APT)" %}}
+
+{{% observability_pipelines/configure_log_archive/azure_storage/linux_apt %}}
+
+{{% /tab %}}
+{{% tab "Linux (RPM)" %}}
+
+{{% observability_pipelines/configure_log_archive/azure_storage/linux_rpm %}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
+{{% observability_pipelines/configure_log_archive/azure_storage/connect_datadog_log_archives %}}
+
+{{% /collapse-content %}}
 
 ## Set up Observability Pipelines
 
 1. Navigate to [Observability Pipelines][1].
-1. Select the **Dual Ship Logs** template to create a new pipeline.
-1. Select **Fluentd or Fluent Bit** as the source.
+1. Select the **Archive Logs** template to create a new pipeline.
+1. Select **HTTP Client** as the source.
 
 ### Set up the source
 
-{{% observability_pipelines/source_settings/fluent%}}
+{{% observability_pipelines/source_settings/http_client%}}
 
 ### Set up the destinations
 
@@ -152,7 +249,7 @@ Follow the instructions for the cloud provider you are using to archive your log
 
 ## Install the Observability Pipelines Worker
 1. Select your platform in the **Choose your installation platform** dropdown menu.
-1. Enter the Fluent socket address and port. The Observability Pipelines Worker listens on this address for incoming log messages.
+1. Enter the full path of the HTTP/S endpoint URL. For example, `https://127.0.0.8/logs`. The Observability Pipelines Worker collects logs events from this endpoint.
 
 1. Provide the environment variables for each of your selected destinations. See [prerequisites](#prerequisites) for more information.
 {{< tabs >}}
@@ -239,9 +336,5 @@ Follow the instructions for the cloud provider you are using to archive your log
 
 {{% /tab %}}
 {{< /tabs >}}
-
-## Send logs to the Observability Pipelines Worker over Fluent
-
-{{% observability_pipelines/log_source_configuration/fluent %}}
 
 [1]: https://app.datadoghq.com/observability-pipelines
