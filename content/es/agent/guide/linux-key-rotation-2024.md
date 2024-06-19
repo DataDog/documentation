@@ -1,5 +1,4 @@
 ---
-kind: guía
 title: Rotación de claves Linux de 2024
 ---
 

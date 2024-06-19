@@ -3,7 +3,6 @@ further_reading:
 - link: /agent/guide/python-3/
   tag: ドキュメント
   text: Python 2  から Python 3 へカスタムチェックを移行する
-kind: documentation
 title: Datadog Agent v7 へのアップグレード
 ---
 

@@ -12,7 +12,6 @@ further_reading:
 - link: bits_ai/query_examples
   tag: Documentación
   text: Ejemplos de consultas en lenguaje natural
-kind: guía
 title: Gestión de incidencias
 ---
 

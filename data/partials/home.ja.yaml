@@ -11,7 +11,7 @@ guides:
   link: getting_started/application/
   link_text: Datadog で始める
   title: アプリで始める
-heading: Datadog ドキュメントへようこそ！
+heading: Welcome to Datadog Docs!
 nav_sections:
 - nav_section:
   - name: プラットフォームサービス

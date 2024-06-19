@@ -8,7 +8,6 @@ further_reading:
 - link: /continuous_integration/troubleshooting/
   tag: Documentation
   text: Dépannage de CI Visibility
-kind: documentation
 title: Configurer le tracing sur un pipeline TeamCity
 ---
 

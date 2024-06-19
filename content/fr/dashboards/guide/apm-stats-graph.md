@@ -6,7 +6,6 @@ further_reading:
 - link: /dashboards/querying/
   tag: Documentation
   text: Apprendre à effectuer des requêtes de graphiques
-kind: guide
 title: Configuration d'un graphique de statistiques APM
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: Fleet Automation
-kind: documentation
 disable_toc: false
 further_reading:
 - link: "/agent/remote_config"

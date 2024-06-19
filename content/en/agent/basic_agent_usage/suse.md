@@ -1,6 +1,5 @@
 ---
 title: Basic Agent Usage for SUSE
-kind: documentation
 platform: SUSE
 aliases:
     - /guides/basic_agent_usage/suse/

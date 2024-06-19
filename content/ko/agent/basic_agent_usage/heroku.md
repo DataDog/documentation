@@ -3,7 +3,6 @@ aliases:
 - /ko/developers/faq/how-do-i-collect-metrics-from-heroku-with-datadog
 dependencies:
 - https://github.com/DataDog/heroku-buildpack-datadog/blob/master/README.md
-kind: 설명서
 title: Datadog 헤로쿠 빌드팩
 ---
 이 [헤로쿠(Heroku) 빌드팩][1]은 Heroku dyno에 Datadog 에이전트를 설치하여 시스템 메트릭, 커스텀 애플리케이션 메트릭 및 트레이스를 수집합니다. 커스텀 애플리케이션 메트릭 또는 트레이스를 수집하려면 애플리케이션에서 [DogStatsD 또는 Datadog APM 라이브러리][2]에 적합한 언어를 포함합니다.

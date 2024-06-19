@@ -4,7 +4,6 @@ further_reading:
 - link: https://www.samltool.com/online_tools.php
   tag: Herramientas de desarrollo
   text: Identifica tus afirmaciones con herramientas para desarrolladores SAML
-kind: documentación
 title: Solucionar problemas SAML
 ---
 

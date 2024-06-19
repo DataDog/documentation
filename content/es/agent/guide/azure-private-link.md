@@ -1,5 +1,4 @@
 ---
-kind: guía
 title: Conéctate a Datadog a través de Azure Private Link
 ---
 

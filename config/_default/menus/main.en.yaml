@@ -1434,36 +1434,41 @@ menu:
       parent: monitor_types
       identifier: monitor_types_network_performance
       weight: 318
+    - name: NetFlow
+      url: monitors/types/netflow/
+      parent: monitor_types
+      identifier: monitor_types_netflow
+      weight: 319
     - name: Outlier
       url: monitors/types/outlier/
       parent: monitor_types
       identifier: monitor_types_outlier
-      weight: 319
+      weight: 320
     - name: Process Check
       url: monitors/types/process_check/
       parent: monitor_types
       identifier: monitor_types_process_check
-      weight: 320
+      weight: 321
     - name: Real User Monitoring
       url: monitors/types/real_user_monitoring/
       parent: monitor_types
       identifier: monitor_types_rum
-      weight: 321
+      weight: 322
     - name: Service Check
       url: monitors/types/service_check/
       parent: monitor_types
       identifier: monitor_types_service_check
-      weight: 322
+      weight: 323
     - name: SLO Alerts
       url: monitors/types/slo/
       parent: monitor_types
       identifier: monitor_types_slo
-      weight: 323
+      weight: 324
     - name: Watchdog
       url: monitors/types/watchdog/
       parent: monitor_types
       identifier: monitor_types_watchdog
-      weight: 324
+      weight: 325
     - name: Notifications
       url: monitors/notify/
       parent: alerting
@@ -2637,6 +2642,11 @@ menu:
       parent: ndm
       identifier: ndm_netflow
       weight: 303
+    - name: Monitors
+      url: monitors/types/netflow
+      parent: ndm_netflow
+      identifier: ndm_netflow_monitors
+      weight: 3031
     - name: Profiles
       url: network_monitoring/devices/profiles
       parent: ndm
@@ -3498,7 +3508,7 @@ menu:
       weight: 1
     - name: Data Jobs Monitoring
       url: data_jobs/
-      pre: datastreams-monitoring
+      pre: data-jobs-monitoring
       identifier: data_jobs
       parent: apm_heading
       weight: 60000
@@ -3780,16 +3790,21 @@ menu:
       parent: tests
       identifier: tests_auto_test_retries
       weight: 11
+    - name: Correlate Logs and Tests
+      url: tests/correlate_logs_and_tests
+      parent: tests
+      identifier: tests_correlate_logs_and_tests
+      weight: 12
     - name: Guides
       url: tests/guides/
       parent: tests
       identifier: tests_guides
-      weight: 12
+      weight: 13
     - name: Troubleshooting
       url: tests/troubleshooting/
       parent: tests
       identifier: tests_troubleshooting
-      weight: 13
+      weight: 14
     - name: Intelligent Test Runner
       url: intelligent_test_runner/
       pre: intelligent-test-runner
@@ -4905,61 +4920,66 @@ menu:
       parent: application_security
       identifier: appsec_threats
       weight: 7
-    - name: Library Configuration
-      url: security/application_security/threats/library_configuration/
-      parent: appsec_threats
-      identifier: threats_configuration
-      weight: 701
-    - name: OOTB Rules
-      url: security/default_rules/#cat-application-security
-      parent: appsec_threats
-      identifier: appsec_default_rules
-      weight: 702
-    - name: User Monitoring and Protection
-      url: security/application_security/threats/add-user-info/
-      parent: appsec_threats
-      identifier: threats_user_info
-      weight: 703
-    - name: Custom Detection Rules
-      url: security/application_security/threats/custom_rules/
-      parent: appsec_threats
-      identifier: threats_custom_rules
-      weight: 704
-    - name: Protection
-      url: security/application_security/threats/protection/
-      parent: appsec_threats
-      identifier: threats_protection
-      weight: 705
-    - name: In-App WAF Rules
-      url: security/application_security/threats/inapp_waf_rules/
-      parent: appsec_threats
-      identifier: threats_event_rules
-      weight: 706
-    - name: Security Signals
-      url: security/application_security/threats/security_signals/
-      parent: appsec_threats
-      identifier: threats_security_signals
-      weight: 707
-    - name: Trace Qualification
-      url: security/application_security/threats/trace_qualification/
-      parent: appsec_threats
-      identifier: threats_trace_qualification
-      weight: 708
-    - name: Threat Intelligence
-      url: security/application_security/threats/threat-intelligence/
-      parent: appsec_threats
-      identifier: threats_threat_intelligence
-      weight: 709
     - name: Attack Summary
       url: security/application_security/threats/attack-summary/
       parent: appsec_threats
       identifier: attack_summary_overview
-      weight: 710
+      weight: 701
     - name: Attacker Explorer
       url: security/application_security/threats/attacker-explorer/
       parent: appsec_threats
       identifier: threats_attackers
+      weight: 702
+    - name: Custom Detection Rules
+      url: security/application_security/threats/custom_rules/
+      parent: appsec_threats
+      identifier: threats_custom_rules
+      weight: 703
+    - name: Exploit Prevention
+      url: security/application_security/threats/exploit-prevention/
+      parent: appsec_threats
+      identifier: exploit_prevention
+      weight: 704
+    - name: In-App WAF Rules
+      url: security/application_security/threats/inapp_waf_rules/
+      parent: appsec_threats
+      identifier: threats_event_rules
+      weight: 705
+    - name: Library Configuration
+      url: security/application_security/threats/library_configuration/
+      parent: appsec_threats
+      identifier: threats_configuration
+      weight: 706
+    - name: OOTB Rules
+      url: security/default_rules/#cat-application-security
+      parent: appsec_threats
+      identifier: appsec_default_rules
+      weight: 707
+    - name: Protection
+      url: security/application_security/threats/protection/
+      parent: appsec_threats
+      identifier: threats_protection
+      weight: 708
+    - name: Security Signals
+      url: security/application_security/threats/security_signals/
+      parent: appsec_threats
+      identifier: threats_security_signals
+      weight: 709
+    - name: Threat Intelligence
+      url: security/application_security/threats/threat-intelligence/
+      parent: appsec_threats
+      identifier: threats_threat_intelligence
+      weight: 710
+    - name: Trace Qualification
+      url: security/application_security/threats/trace_qualification/
+      parent: appsec_threats
+      identifier: threats_trace_qualification
       weight: 711
+    - name: User Monitoring and Protection
+      url: security/application_security/threats/add-user-info/
+      parent: appsec_threats
+      identifier: threats_user_info
+      weight: 712
     - name: API Security Inventory
       url: security/application_security/api-inventory/
       parent: application_security
@@ -5308,36 +5328,41 @@ menu:
       parent: rum_browser
       identifier: page_performance
       weight: 104
+    - name: Monitoring Performance Vitals
+      url: real_user_monitoring/browser/monitoring_performance_vitals/
+      parent: rum_browser
+      identifier: performance_vitals
+      weight: 105
     - name: Monitoring Resource Performance
       url: real_user_monitoring/browser/monitoring_resource_performance/
       parent: rum_browser
       identifier: resource_performance
-      weight: 105
+      weight: 106
     - name: Collecting Browser Errors
       url: real_user_monitoring/browser/collecting_browser_errors/
       parent: rum_browser
       identifier: collect_errors
-      weight: 106
+      weight: 107
     - name: Tracking User Actions
       url: real_user_monitoring/browser/tracking_user_actions/
       parent: rum_browser
       identifier: track_actions
-      weight: 107
+      weight: 108
     - name: Frustration Signals
       url: real_user_monitoring/browser/frustration_signals/
       parent: rum_browser
       identifier: rum_frustration_signals
-      weight: 108
+      weight: 109
     - name: Error Tracking
       url: real_user_monitoring/error_tracking/browser/
       parent: rum_browser
       identifier: rum_browser_error_tracking
-      weight: 109
+      weight: 110
     - name: Troubleshooting
       url: real_user_monitoring/browser/troubleshooting/
       parent: rum_browser
       identifier: troubleshooting
-      weight: 110
+      weight: 111
     - name: Mobile and TV Monitoring
       url: real_user_monitoring/mobile_and_tv_monitoring/
       parent: rum

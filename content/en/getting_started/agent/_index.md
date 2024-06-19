@@ -1,6 +1,5 @@
 ---
 title: Getting Started with the Agent
-kind: documentation
 further_reading:
     - link: '/agent/basic_agent_usage/'
       tag: 'Documentation'
