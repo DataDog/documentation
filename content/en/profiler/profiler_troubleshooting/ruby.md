@@ -47,7 +47,7 @@ end
 
 ## Unexpected failures or errors from Ruby gems that use native extensions
 
-The Ruby profiler gathers data by sending `SIGPROF` unix signals to Ruby applications, enabling finer-grained data gathering.
+The Ruby profiler gathers data by sending `SIGPROF` UNIX signals to Ruby applications, enabling finer-grained data gathering.
 
 Sending `SIGPROF` is a common profiling approach, and may cause system calls from native extensions/libraries to be interrupted with a system [`EINTR` error code][8].
 Rarely, native extensions or libraries called by them may have missing or incorrect error handling for the `EINTR` error code.
