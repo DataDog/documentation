@@ -45,9 +45,9 @@ Datadog.configure do |c|
 end
 ```
 
-## Unexpected failures or errors from Ruby gems that use native extensions in `dd-trace-rb` 1.11.0+
+## Unexpected failures or errors from Ruby gems that use native extensions
 
-Starting from `dd-trace-rb` 1.11.0, the "CPU Profiling 2.0" profiler gathers data by sending `SIGPROF` unix signals to Ruby applications, enabling finer-grained data gathering.
+The Ruby profiler gathers data by sending `SIGPROF` unix signals to Ruby applications, enabling finer-grained data gathering.
 
 Sending `SIGPROF` is a common profiling approach, and may cause system calls from native extensions/libraries to be interrupted with a system [`EINTR` error code][8].
 Rarely, native extensions or libraries called by them may have missing or incorrect error handling for the `EINTR` error code.
@@ -67,8 +67,6 @@ Datadog.configure do |c|
   c.profiling.advanced.no_signals_workaround_enabled = true
 end
 ```
-
-**Note**: The above setting is only available starting in `dd-trace-rb` 1.12.0.
 
 Let our team know if you find or suspect any incompatibilities [by opening a support ticket][2].
 Doing this enables Datadog to add them to the auto-detection list, and to work with the gem/library authors to fix the issue.
