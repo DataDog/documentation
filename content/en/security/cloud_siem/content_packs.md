@@ -28,7 +28,7 @@ further_reading:
     {{< nextlink href="/security/cloud_siem/content_packs#authentication-content-packs" >}}<u>Authentication</u>: 1Password, Auth0, Cisco DUO, JumpCloud, Okta{{< /nextlink >}}
     {{< nextlink href="/security/cloud_siem/content_packs#collaboration-content-packs" >}}<u>Collaboration</u>: Google Workspace, Microsoft 365, Slack Audit Logs{{< /nextlink >}}
     {{< nextlink href="/security/cloud_siem/content_packs#network-content-packs" >}}<u>Network</u>: Cloudflare, Cisco Meraki, Cisco Umbrella, Palo Alto Networks Firewall{{< /nextlink >}}
-    {{< nextlink href="/security/cloud_siem/content_packs#web-security-content-packs" >}}<u>Network</u>: nginx{{< /nextlink >}}
+    {{< nextlink href="/security/cloud_siem/content_packs#web-security-content-packs" >}}<u>Network</u>: NGINX{{< /nextlink >}}
     {{< nextlink href="/security/cloud_siem/content_packs#cloud-developer-tools-content-packs" >}}<u>Cloud developer tools</u>: GitHub{{< /nextlink >}}
     {{< nextlink href="/security/cloud_siem/content_packs#endpoint-content-packs" >}}<u>Endpoint</u>: CrowdStrike{{< /nextlink >}}
 {{< /whatsnext >}}
@@ -178,11 +178,11 @@ The [Cisco Umbrella Content Pack][39] includes:
 
 ## Web Security Content Packs
 
-### nginx
+### NGINX
 
-Monitor and respond to web-based risks with Nginx
+Monitor and respond to web-based risks with NGINX
 
-The [nginx Content Pack][41] includes:
+The [NGINX Content Pack][41] includes:
 - [Detection Rules][42]
 - An interactive dashboard
 
