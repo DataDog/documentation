@@ -4070,20 +4070,20 @@ menu:
       parent: observability_pipelines
       identifier: observability_pipelines_dual_ship_logs
       weight: 3
-    - name: Splunk HTTP Event Collector
-      url: observability_pipelines/dual_ship_logs/splunk_hec/
-      parent: observability_pipelines_dual_ship_logs
-      identifier: observability_pipelines_dual_ship_logs_splunk_hec
-      weight: 3001
     - name: Fluent
       url: observability_pipelines/dual_ship_logs/fluent/
       parent: observability_pipelines_dual_ship_logs
       identifier: observability_pipelines_dual_ship_logs_fluent
-      weight: 3002
+      weight: 3001
     - name: HTTP Client
       url: observability_pipelines/dual_ship_logs/http_client/
       parent: observability_pipelines_dual_ship_logs
       identifier: observability_pipelines_dual_ship_logs_http_client
+      weight: 3002
+    - name: Splunk HTTP Event Collector
+      url: observability_pipelines/dual_ship_logs/splunk_hec/
+      parent: observability_pipelines_dual_ship_logs
+      identifier: observability_pipelines_dual_ship_logs_splunk_hec
       weight: 3003
     - name: Splunk Forwarders (TCP)
       url: observability_pipelines/dual_ship_logs/splunk_tcp/
