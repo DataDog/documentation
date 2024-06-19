@@ -15,12 +15,12 @@ further_reading:
 Calculated Fields is in beta. Have feedback or a feature request? <a href= "https://docs.google.com/forms/d/e/1FAIpQLScQLJ1O_plHp0wiqRiGEEhNaO_cY0jsmu35gtEbJh_RBkqzYg/viewform">Let us know</a>.
 {{< /beta-callout >}}
 
-Use calculated fields to transform and enrich your log data at query-time. You can define [formulas](#formula) to directly:
+Use calculated fields to transform and enrich your log data at query time. You can define [formulas](#formula) to:
 - [Manipulate text][1]
 - [Perform arithmetic][2]
 - [Evaluate conditional logic][3] and [more][4].
 
-After a calculated field is defined, it can be used like any other [log attribute][5] for search, aggregation, visualization, and even in the definition of other calculated fields.
+After a calculated field is defined, it can be used like any other [log attribute][5] for search, aggregation, visualization, and even defining other calculated fields.
 
 **Notes**:
 - You can define up to five calculated fields at a time.
@@ -57,7 +57,7 @@ The option to add a calculated field from a attribute lets you pivot in the mids
 
 #### Name
 
-Set a descriptive name that clearly indicates the purpose or intent of the calculated field. For example, if the goal is to capitalize users's first and last names and then concatenate them into one field, you might use the name`formatted_name`. To subsequently filter logs from a user named `Bob Smith`, update your query to include `#formatted_name:"Bob Smith"`.
+Set a descriptive name that clearly indicates the purpose of the calculated field. For example, if the goal is to capitalize users's first and last names and then concatenate them into one field, you might use the name`formatted_name` for the calculated field. To subsequently filter logs from a user named `Bob Smith`, update your query to include `#formatted_name:"Bob Smith"`.
 
 **Note:** The `#` prefix must be used to refer to calculated fields in searches, aggregation, or other calculated field definitions.
 
@@ -69,23 +69,23 @@ See [Calculated Fields Expression Language][4] for the available functions and o
 
 #### Using calculated fields
 
-After successful creation of a new calculated field, the Log Explorer updates the following:
+After successful creation of a calculated field, the Log Explorer updates the following:
 - Active calculated fields, which are displayed in a new row directly under the search bar.
     - Hover over a field to view its definition, and use quick actions to edit, filter by, or group by the field.
 - The field is automatically added as a column in the **[List][8]** visualization (the title includes the `#` prefix).
 - Calculated fields are displayed in a separate section inside the log side panel.
 
-Calculated fields can be used for search, aggregation, visualization, and definition of other calculated fields and works in the same way as log attributes. Make sure to use the `#` prefix to reference calculated field names.
+Calculated fields can be used for search, aggregation, visualization, and definition of other calculated fields and work in the same way as log attributes. Make sure to use the `#` prefix to reference calculated field names.
 
 {{< img src="logs/explorer/calculated_fields/calculated_field.png" alt="A calculated field attribute called request_duration" style="width:100%;" >}}
 
 #### Persistence
 
-Calculated fields are not a replacement for log pipelines and processors for ingest-time parsing, normalization, and enrichment of logs. Leverage calculated fields in the following scenarios:
+Calculated fields are not a replacement for log pipelines and processors for ingest-time parsing, normalization, and enrichment of logs. Use calculated fields in the following scenarios:
 
-- You need to perform a unique one-off investigation or ad-hoc analysis, and creating a temporary need for a field that you don't necessarily be reusing in the long-tem.
+- You need to perform a unique one-off investigation or ad-hoc analysis, creating a temporary need for a field that you don't need to reuse in the long-tem.
 - You need to retroactively update indexed logs to answer a certain question (pipelines changes only apply to logs ingested after a pipeline update).
-- You lack the permission (or knowledge) necessary to modify log pipelines in a timely manner.
+- You lack the permission (or knowledge) to modify log pipelines in a timely manner.
   - The calculated fields you create are only visible to you, which makes them ideal for quick exploration and worry-free experimentation.
 
 If you realize that a calculated field you are using may be valuable in the long-term, update your log pipelines so you and the rest of your team can benefit from automated processing.

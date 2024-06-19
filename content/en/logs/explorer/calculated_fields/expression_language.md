@@ -12,11 +12,11 @@ further_reading:
 
 | Construct                                                                                          | Syntax and Notation                                                    |
 | -------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
-| Reserved attribute, or tag named `tag`                                                             | `tag` (no prefix required)                                             |
+| Reserved attribute or tag named `tag`                                                             | `tag` (no prefix required)                                             |
 | Attribute named `attr`                                                                             | `@attr` (use an `@` prefix)                                            |
 | Calculated field named `field`                                                                     | `#field` (use a `#` prefix)                                            |
-| String literal (quote)<br>For example, `text` or `Quoted "text"`                                   | `"text"`<br> `"Quoted \"text\""`<br>(<a href="https://docs.datadoghq.com/logs/explorer/search_syntax/">Log Search Syntax</a> applies)|
-| Numeric literal (number)<br>For example, `ten`                                                     | `10`                                                                   |
+| String literal (quote)<br>For example, `text` or `Quoted "text"`.                                   | `"text"`<br> `"Quoted \"text\""`<br>(<a href="https://docs.datadoghq.com/logs/explorer/search_syntax/">Log Search Syntax</a> applies)|
+| Numeric literal (number)<br>For example, `ten`.                                                     | `10`                                                                   |
 | Function named `func` with parameters `x` and `y`                                                  | `func(x, y)`                                                           |
 | Operator<br>For example, a binary operator `*` with operands `x` and `y`.                          | `x*y`                                                                  |
 
@@ -104,7 +104,7 @@ Finds the minimum value amongst a set of numbers.
 
 #### round(num value, int precision)
 
-Round a number. Optionally, define how many decimal places to maintain.
+Rounds a number. Optionally, define how many decimal places to maintain.
 
 <details>
 <summary>Example</summary>
