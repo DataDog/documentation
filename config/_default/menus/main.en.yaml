@@ -4060,6 +4060,11 @@ menu:
       parent: observability_pipelines_dual_ship_logs
       identifier: observability_pipelines_dual_ship_logs_sumo_logic_hosted_collector
       weight: 3003
+    - name: Syslog
+      url: observability_pipelines/dual_ship_logs/syslog/
+      parent: observability_pipelines_dual_ship_logs
+      identifier: observability_pipelines_dual_ship_logs_syslog
+      weight: 3004
     - name: Archive Logs
       url: observability_pipelines/archive_logs/
       parent: observability_pipelines
@@ -4140,7 +4145,7 @@ menu:
       parent: observability_pipelines_sensitive_data_redaction
       identifier: observability_pipelines_sensitive_data_redaction_sumo_logic_hosted_collector
       weight: 6004
-    - name: Sensitive Data Redaction
+    - name: Syslog
       url: observability_pipelines/sensitive_data_redaction/syslog/
       parent: observability_pipelines_sensitive_data_redaction
       identifier: observability_pipelines_sensitive_data_redaction_syslog
