@@ -2672,6 +2672,21 @@ menu:
       parent: ndm
       identifier: ndm_guide
       weight: 308
+    - name: Network Path
+      url: network_monitoring/network_path/
+      parent: nm_parent
+      identifier: network_path
+      weight: 4
+    - name: List View
+      url: network_monitoring/network_path/list_view/
+      parent: network_path
+      identifier: network_path_list_view
+      weight: 401
+    - name: Path View
+      url: network_monitoring/network_path/path_view/
+      parent: network_path
+      identifier: network_path_path_view
+      weight: 402
     - name: Cloud Cost
       url: cloud_cost_management/
       identifier: cloud_cost
