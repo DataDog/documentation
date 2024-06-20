@@ -1,5 +1,7 @@
 ---
 title: LLM Observability Python SDK Reference
+aliases:
+    - /tracing/llm_observability/sdk
 ---
 
 {{% site-region region="gov" %}}
@@ -650,9 +652,9 @@ def server_process_request(request):
 [3]: https://botocore.amazonaws.com/v1/documentation/api/latest/tutorial/index.html
 [4]: https://github.com/langchain-ai/langchain
 [7]: /account_management/api-app-keys/#add-an-api-key-or-client-token
-[8]: /tracing/llm_observability/span_kinds/
+[8]: /llm_observability/span_kinds/
 [9]: /getting_started/tagging/
 [10]: https://github.com/DataDog/llm-observability
 [11]: https://docs.datadoghq.com/tracing/trace_collection/compatibility/python/#integrations
 [12]: https://docs.datadoghq.com/tracing/trace_collection/compatibility/python/#library-compatibility
-[13]: /tracing/llm_observability/auto_instrumentation/
+[13]: /llm_observability/auto_instrumentation/

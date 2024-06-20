@@ -1,6 +1,8 @@
 ---
 title: Submit Evaluations
 kind: guide
+aliases:
+    - /tracing/llm_observability/submit_evaluations
 ---
 {{% site-region region="gov" %}}
 <div class="alert alert-warning">
@@ -76,6 +78,6 @@ You can use the evaluations API provided by LLM Observability to send evaluation
 {{< /code-block >}}
 
 [1]: /metrics/custom_metrics/#naming-custom-metrics
-[2]: /tracing/llm_observability/sdk/#exporting-a-span
-[3]: /tracing/llm_observability/sdk/#submit-evaluations
-[4]: /tracing/llm_observability/api/?tab=model#evaluations-api
+[2]: /llm_observability/sdk/#exporting-a-span
+[3]: /llm_observability/sdk/#submit-evaluations
+[4]: /llm_observability/api/?tab=model#evaluations-api

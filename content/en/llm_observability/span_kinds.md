@@ -1,6 +1,8 @@
 ---
 title: Span Kinds
 kind: documentation
+aliases:
+    - /tracing/llm_observability/span_kinds
 ---
 
 {{% site-region region="gov" %}}
@@ -80,4 +82,4 @@ When used alongside embedding spans, retrieval spans can provide visibility into
 Retrieval spans typically do not have child spans, as they represent a standalone retrieval step.
 
 [1]: https://react-lm.github.io/
-[2]: /tracing/llm_observability/sdk/?tab=model#tracing-spans
+[2]: /llm_observability/sdk/?tab=model#tracing-spans
