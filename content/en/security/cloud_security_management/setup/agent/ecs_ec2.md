@@ -1,11 +1,21 @@
 ---
-title: Enabling CSM Enterprise on ECS EC2
+title: Setting up Cloud Security Management on ECS EC2
 code_lang: ecs_ec2
 type: multi-code-lang
-code_lang_weight: 70 # a number that represents relative weight. 
+code_lang_weight: 70 # a number that represents relative weight.
+aliases:
+  - /security/cloud_security_management/setup/csm_cloud_workload_security/agent/ecs_ec2
+  - /security/cloud_security_management/setup/csm_pro/agent/ecs_ec2/
+  - /security/cloud_security_management/setup/csm_enterprise/agent/ecs_ec2/
 ---
 
-Use the following instructions to enable [CSM Misconfigurations][1], [CSM Threats][2], and [CSM Vulnerabilities][3] on your ECS EC2 instances. To learn more about the supported deployment types for each CSM feature, see [Setting Up Cloud Security Management][4].
+Use the following instructions to enable Misconfigurations, Threat Detection, Host Vulnerability Management, and Container Vulnerability Management.
+
+## Prerequisites
+
+- Datadog Agent version `7.46` or later.
+
+## Installation
 
 Add the following environment variables to your `datadog-agent` container definition:
 

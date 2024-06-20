@@ -1,11 +1,21 @@
 ---
-title: Enabling CSM Enterprise on Kubernetes
+title: Setting up Cloud Security Management on Kubernetes
 code_lang: kubernetes
 type: multi-code-lang
-code_lang_weight: 60 # a number that represents relative weight. 
+code_lang_weight: 60 # a number that represents relative weight.
+aliases:
+  - /security/cloud_security_management/setup/csm_cloud_workload_security/agent/kubernetes/
+  - /security/cloud_security_management/setup/csm_pro/agent/kubernetes/
+  - /security/cloud_security_management/setup/csm_enterprise/agent/kubernetes/
 ---
 
-Use the following instructions to enable [CSM Misconfigurations][1], [CSM Threats][2], and [CSM Vulnerabilities][3] on Kubernetes. To learn more about the supported deployment types for each CSM feature, see [Setting Up Cloud Security Management][4].
+Use the following instructions to enable Misconfigurations, Threat Detection, Host Vulnerability Management, and Container Vulnerability Management.
+
+## Prerequisites
+
+- Datadog Agent version `7.46` or later.
+
+## Installation
 
 {{< tabs >}}
 
@@ -23,9 +33,10 @@ Use the following instructions to enable [CSM Misconfigurations][1], [CSM Threat
       features:
         remoteConfiguration:
           enabled: true
+        # Enables Threat Detection
         cws:
           enabled: true
-        # Enables CSM Misconfigurations
+        # Enables Misconfigurations
         cspm:
           enabled: true
           hostBenchmarks:
@@ -33,9 +44,11 @@ Use the following instructions to enable [CSM Misconfigurations][1], [CSM Threat
         # Enables the image metadata collection and Software Bill of Materials (SBOM) collection
         sbom:
           enabled: true
+          # Enables Container Vulnerability Management
           # Image collection is enabled by default with Datadog Operator version `>= 1.3.0`
           containerImage:
             enabled: true
+          # Enables Host Vulnerability Management
           host:
             enabled: true
     ```
@@ -56,23 +69,24 @@ Use the following instructions to enable [CSM Misconfigurations][1], [CSM Threat
       remoteConfiguration:
         enabled: true
       securityAgent:
-        # Enables CSM Threats
+        # Enables Threat Detection
         runtime:
           enabled: true
-        # Enables CSM Misconfigurations
+        # Enables Misconfigurations
         compliance:
           enabled: true
           host_benchmarks:
             enabled: true
-      # Enables CSM Vulnerabilities
-      # Image collection is enabled by default with Datadog Helm version `>= 3.46.0`
-      containerImageCollection:
-        enabled: true
       sbom:
         containerImage:
           enabled: true
+        # Enables Container Vulnerability Management
+        # Image collection is enabled by default with Datadog Helm version `>= 3.46.0`
+        containerImageCollection:
+          enabled: true
           # Uncomment the following line if you are using Google Kubernetes Engine (GKE) or Amazon Elastic Kubernetes (EKS)
           # uncompressedLayersSupport: true
+        # Enables Host Vulnerability Management
         host:
           enabled: true
     ```

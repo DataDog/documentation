@@ -4599,62 +4599,42 @@ menu:
       url: security/cloud_security_management/setup
       parent: csm
       identifier: csm_setup
-      weight: 1
-    - name: CSM Enterprise
-      url: security/cloud_security_management/setup/csm_enterprise
+      weight: 2
+    - name: Supported Deployment Types
+      url: security/cloud_security_management/setup/supported_deployment_types
       parent: csm_setup
-      identifier: csm_setup_enterprise
-      weight: 10000
+      identifier: csm_setup_deployment_types
+      weight: 100
     - name: Cloud Accounts
-      url: security/cloud_security_management/setup/csm_enterprise/cloud_accounts
-      parent: csm_setup_enterprise
-      identifier: csm_setup_enterprise_cloud
-      weight: 1000000
-    - name: Agent
-      url: security/cloud_security_management/setup/csm_enterprise/agent
-      parent: csm_setup_enterprise
-      identifier: csm_setup_enterprise_agent
-      weight: 1000001
-    - name: CSM Pro
-      url: security/cloud_security_management/setup/csm_pro
+      url: security/cloud_security_management/setup/cloud_accounts
       parent: csm_setup
-      identifier: csm_setup_pro
-      weight: 10005
-    - name: Cloud Accounts
-      url: security/cloud_security_management/setup/csm_pro/cloud_accounts
-      parent: csm_setup_pro
-      identifier: csm_setup_pro_cloud
-      weight: 1000000
+      identifier: csm_setup_cloud_accounts
+      weight: 102
     - name: Agent
-      url: security/cloud_security_management/setup/csm_pro/agent
-      parent: csm_setup_pro
-      identifier: csm_setup_pro_agent
-      weight: 1000001
-    - name: CSM Cloud Workload Security
-      url: security/cloud_security_management/setup/csm_cloud_workload_security
+      url: security/cloud_security_management/setup/agent
       parent: csm_setup
-      identifier: csm_setup_cloud_workload_security
-      weight: 10010
-    - name: CSM Agentless Scanning
+      identifier: csm_setup_agent
+      weight: 103
+    - name: Agentless Scanning
       url: security/cloud_security_management/setup/agentless_scanning
       parent: csm_setup
       identifier: csm_setup_agentless_scanning
-      weight: 10015
-    - name: Agent Variables
-      url: security/cloud_security_management/setup/agent_variables
+      weight: 104
+    - name: Serverless
+      url: security/cloud_security_management/setup/serverless?tab=amazonecs#cloud-security-management
       parent: csm_setup
-      identifier: csm_setup_agent_variables
-      weight: 10016
-    - name: Agent
-      url: security/cloud_security_management/setup/csm_cloud_workload_security/agent
-      parent: csm_setup_cloud_workload_security
-      identifier: csm_setup_cloud_workload_security_agent
-      weight: 1000000
+      identifier: csm_setup_serverless
+      weight: 105
+    - name: CloudTrail Logs
+      url: security/cloud_security_management/setup/cloudtrail_logs
+      parent: csm_setup
+      identifier: csm_setup_cloudtrail_logs
+      weight: 106
     - name: Threats
       url: security/threats/
       parent: csm
       identifier: cloud_workload_security
-      weight: 2
+      weight: 3
     - name: Supported Linux Distributions
       url: security/threats/supported_linux_distributions
       parent: cloud_workload_security
@@ -4694,7 +4674,7 @@ menu:
       url: security/cloud_security_management/misconfigurations/
       parent: csm
       identifier: cspm
-      weight: 3
+      weight: 4
     - name: Manage Compliance Rules
       url: security/cloud_security_management/misconfigurations/compliance_rules
       parent: cspm
@@ -4744,12 +4724,12 @@ menu:
       url: security/cloud_security_management/identity_risks/
       parent: csm
       identifier: csm_identity_risks
-      weight: 4
+      weight: 5
     - name: Vulnerabilities
       url: security/cloud_security_management/vulnerabilities
       parent: csm
       identifier: vulnerabilities
-      weight: 5
+      weight: 6
     - name: Hosts and Containers Compatibility
       url: security/cloud_security_management/vulnerabilities/hosts_containers_compatibility
       parent: vulnerabilities
@@ -4759,17 +4739,17 @@ menu:
       url: security/cloud_security_management/agentless_scanning
       parent: csm
       identifier: csm_agentless
-      weight: 6
+      weight: 7
     - name: OOTB Rules
       url: security/default_rules/#cat-cloud-security-management
       parent: csm
       identifier: csm_default_rules
-      weight: 7
+      weight: 8
     - name: Review and Remediate
       url: security/cloud_security_management/review_remediate
       parent: csm
       identifier: csm_review_remediate
-      weight: 8
+      weight: 9
     - name: Mute Issues
       url: security/cloud_security_management/review_remediate/mute_issues
       parent: csm_review_remediate
@@ -4789,17 +4769,17 @@ menu:
       url: security/cloud_security_management/severity_scoring/
       parent: csm
       identifier: csm_severity_scoring
-      weight: 9
+      weight: 10
     - name: Guides
       url: security/cloud_security_management/guide/
       parent: csm
       identifier: csm_guides
-      weight: 10
+      weight: 11
     - name: Troubleshooting
       url: security/cloud_security_management/troubleshooting/
       parent: csm
       identifier: csm_troubleshooting
-      weight: 11
+      weight: 12
     - name: Threats
       url: security/cloud_security_management/troubleshooting/threats/
       parent: csm_troubleshooting

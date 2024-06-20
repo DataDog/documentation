@@ -1,11 +1,20 @@
 ---
-title: Enabling CSM Enterprise on Docker
+title: Setting up Cloud Security Management on Docker
 code_lang: docker
 type: multi-code-lang
-code_lang_weight: 65 # a number that represents relative weight. 
+code_lang_weight: 65 # a number that represents relative weight.
+aliases:
+  - /security/cloud_security_management/setup/csm_cloud_workload_security/agent/docker
+  - /security/cloud_security_management/setup/csm_enterprise/agent/docker
 ---
 
-Use the following instructions to enable [CSM Misconfigurations][1] and [CSM Threats][2] on Docker. To learn more about the supported deployment types for each CSM feature, see [Setting Up Cloud Security Management][3].
+Use the following instructions to enable Misconfigurations and Threat Detection.
+
+## Prerequisites
+
+- Datadog Agent version `7.46` or later.
+
+## Installation
 
 The following command starts the Runtime Security Agent and `system-probe` in a Docker environment:
 
