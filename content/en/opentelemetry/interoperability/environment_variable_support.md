@@ -60,7 +60,7 @@ This maps to `DD_TRACE_LOG_LEVEL` in `node.js`<br>
 
 `OTEL_METRICS_EXPORTER`
 : **Mapping**: `DD_RUNTIME_METRICS_ENABLED=false` <br>
-**Notes**: only a value of `none ` is accepted<br>
+**Notes**: only a value of `none` is accepted<br>
 **Not Supported In**: `php` tracer<br>
 
 `OTEL_RESOURCE_ATTRIBUTES`
