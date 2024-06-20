@@ -31,38 +31,38 @@ Agent version `7.55` or higher is required.
 2. Enable [NPM][1].
 3. Enable the `system-probe` traceroute module in `/etc/datadog-agent/system-probe.yaml` by adding the following:
 
-```
-traceroute:
-  enabled: true
-```
+   ```
+   traceroute:
+     enabled: true
+   ```
 
 4.  Enable `network_path` to monitor NPM connections by creating or editing the `/etc/datadog-agent/datadog.yaml` file: 
 
-```
-network_path:
-  connections_monitoring:
-    enabled: true
-  collector:
-    workers: 10 # default 4
-```
+    ```
+    network_path:
+      connections_monitoring:
+        enabled: true
+      collector:
+        workers: 10 # default 4
+    ```
  
 
-For full configuration details, see the following:
+    For full configuration details, see the following:
 
-```
-network_path:
-  connections_monitoring:
-    ## @param enabled - bool - required - default:false
-    ## Enable network path collection
-    #
-    enabled: true
-  collector:
-    ## @param workers - int - optional - default:4
-    ## Number of workers that can collect paths in parallel
-    ## Recommendation: leave at default
-    #
-    workers: 10
-```
+    ```
+      network_path:
+       connections_monitoring:
+        ## @param enabled - bool - required - default:false
+        ## Enable network path collection
+        #
+        enabled: true
+      collector:
+        ## @param workers - int - optional - default:4
+        ## Number of workers that can collect paths in parallel
+        ## Recommendation: leave at default
+        #
+        workers: 10
+    ```
 
 5. Restart the Agent after making these configuration changes to start seeing network paths.
 
