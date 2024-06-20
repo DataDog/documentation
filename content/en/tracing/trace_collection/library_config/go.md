@@ -16,6 +16,9 @@ further_reading:
 - link: "/tracing/trace_collection/trace_context_propagation/go/"
   tag: "Documentation"
   text: "Propagating trace context"
+- link: "/opentelemetry/interoperability/environment_variable_support.md"
+  tag: "Documentation"
+  text: "OTEL Environment Variable Configurations"
 ---
 
 After you [set up the tracing library with your code, configure the Agent to collect APM data, and activate the Go integration][1], optionally configure the tracing library as desired.
@@ -181,3 +184,4 @@ The [APM environment name][7] may be configured [in the Agent][8] or using the [
 [16]: https://www.rfc-editor.org/rfc/rfc7230#section-3.2
 [17]: https://docs.datadoghq.com/tracing/metrics/runtime_metrics/go
 [18]: https://docs.datadoghq.com/tracing/trace_collection/trace_context_propagation/go/
+[19]: /opentelemetry/interoperability/environment_variable_support.md

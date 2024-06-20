@@ -19,6 +19,9 @@ further_reading:
 - link: "/tracing/"
   tag: "Documentation"
   text: "Advanced Usage"
+- link: "/opentelemetry/interoperability/environment_variable_support.md"
+  tag: "Documentation"
+  text: "OTEL Environment Variable Configurations"
 ---
 
 After you set up the tracing library with your code and configure the Agent to collect APM data, optionally configure the tracing library as desired, including setting up [Unified Service Tagging][1].
@@ -610,3 +613,4 @@ Read [Trace Context Propagation][11] for information about configuring the PHP t
 [17]: /tracing/other_telemetry/connect_logs_and_traces/php
 [18]: /tracing/trace_collection/otel_instrumentation/php/
 [19]: /tracing/trace_collection/compatibility/php/
+[20]: /opentelemetry/interoperability/environment_variable_support.md

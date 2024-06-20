@@ -34,6 +34,9 @@ further_reading:
   - link: "https://github.com/DataDog/dd-trace-dotnet"
     tag: "Source Code"
     text: "Source code"
+  - link: "/opentelemetry/interoperability/environment_variable_support.md"
+    tag: "Documentation"
+    text: "OTEL Environment Variable Configurations"
 ---
 
 After you set up the tracing library with your code and configure the Agent to collect APM data, optionally configure the tracing library as desired, including setting up [Unified Service Tagging][4].
@@ -349,3 +352,4 @@ The following configuration variables are for features that are available for us
 [17]: https://app.datadoghq.com/services
 [18]: /tracing/trace_collection/otel_instrumentation/dotnet/
 [19]: /tracing/trace_collection/compatibility/dotnet-core/#opentelemetry-based-integrations
+[20]: /opentelemetry/interoperability/environment_variable_support.md
