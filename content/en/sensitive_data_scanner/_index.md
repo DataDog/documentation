@@ -103,7 +103,7 @@ To set up a scanning group, perform the following steps:
 {{% tab "In the Agent" %}}
 <div class="alert alert-warning"><strong>Note</strong>: Sensitive Data Scanner in the Agent supports only one scanning group per organization.</div>
 
-A scanning group determines what data to scan. It consists of a query filter to match eligible agents based on host tags.
+A scanning group determines what logs to scan. It consists of a query filter to match eligible agents based on host tags.
 
 To set up a scanning group, perform the following steps:
 
