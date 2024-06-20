@@ -21,7 +21,7 @@ By default, the Datadog tracing libraries read and write distributed tracing hea
 
 ## Configuration
 
-If you need to customize the trace context propagation configuration, there are several environment variables you can use to configure the formats that are used for reading and writing distributed tracing headers. To enable a specific propagator, make sure to use the corresponding configuration value for the tracing library, as outlined in the **Supported Propagators** section.
+If you need to customize the trace context propagation configuration, there are several environment variables you can use to configure the formats that are used for reading and writing distributed tracing headers. To enable a specific propagator, make sure to use the corresponding configuration value for the tracing library, as outlined in the **Language support** section.
 
 <div class="alert alert-info">
 If multiple propagators are enabled, the extraction attempt is done in the specified order, and the first valid trace context is used to continue the distributed trace. If additional valid trace contexts are found, the tracing information will be recorded as individual span links.</div>
@@ -47,12 +47,14 @@ In the majority of scenarios, you will want to both send and receive trace conte
 `DD_TRACE_PROPAGATION_STYLE_INJECT`
 : Specifies propagators (in a comma-separated list) to be used only for trace context injection. This configuration takes the highest precedence over all other configurations for configuring the injection propagators.
 
-## Supported Propagators
-Datadog maintains several propagators for passing trace context information in different formats:
+## Language support
 
 {{< tabs >}}
 
 {{% tab "Java" %}}
+
+### Supported propagators
+The Datadog Java SDK maintains several propagators for passing trace context information in different formats:
 
 | Propagator             | Configuration Value |
 |------------------------|---------------------|
@@ -64,6 +66,13 @@ Datadog maintains several propagators for passing trace context information in d
 |                        | `b3` (deprecated)   |
 | None                   | `none`              |
 
+### Additional configuration
+In addition to the environment variable configuration, you can also update the propagators using System Property configuration:
+- `-Ddd.trace.propagation.style=datadog,b3multi`
+- `-Dotel.propagators=datadog,b3multi`
+- `-Ddd.trace.propagation.style.inject=datadog,b3multi`
+- `-Ddd.trace.propagation.style.extract=datadog,b3multi`
+
 [2]: https://www.w3.org/TR/trace-context/
 [3]: https://github.com/openzipkin/b3-propagation#single-header
 [4]: https://github.com/openzipkin/b3-propagation#multiple-headers
@@ -72,6 +81,9 @@ Datadog maintains several propagators for passing trace context information in d
 {{% /tab %}}
 
 {{% tab "Python" %}}
+
+### Supported propagators
+The Datadog Python SDK maintains several propagators for passing trace context information in different formats:
 
 | Propagator             | Configuration Value |
 |------------------------|---------------------|
@@ -90,6 +102,9 @@ Datadog maintains several propagators for passing trace context information in d
 
 {{% tab "Ruby" %}}
 
+### Supported propagators
+The Datadog Ruby SDK maintains several propagators for passing trace context information in different formats:
+
 | Propagator             | Configuration Value |
 |------------------------|---------------------|
 | Datadog                | `datadog`           |
@@ -97,6 +112,19 @@ Datadog maintains several propagators for passing trace context information in d
 | [B3 Single][3]         | `b3`                |
 | [B3 Multi][4]          | `b3multi`           |
 | None                   | `none`              |
+
+### Additional configuration
+In addition to the environment variable configuration, you can also update the propagators in code by using `Datadog.configure`:
+
+```ruby
+Datadog.configure do |c|
+  # List of header formats that should be extracted
+  c.tracing.propagation_extract_style = [ 'tracecontext', 'datadog', 'b3' ]
+
+  # List of header formats that should be injected
+  c.tracing.propagation_inject_style = [ 'tracecontext', 'datadog' ]
+end
+```
 
 [2]: https://www.w3.org/TR/trace-context/
 [3]: https://github.com/openzipkin/b3-propagation#single-header
@@ -106,6 +134,9 @@ Datadog maintains several propagators for passing trace context information in d
 {{% /tab %}}
 
 {{% tab "Go" %}}
+
+### Supported propagators
+The Datadog Go SDK maintains several propagators for passing trace context information in different formats:
 
 | Propagator             | Configuration Value |
 |------------------------|---------------------|
@@ -123,6 +154,9 @@ Datadog maintains several propagators for passing trace context information in d
 {{% /tab %}}
 
 {{% tab "NodeJS" %}}
+
+### Supported propagators
+The Datadog NodeJS SDK maintains several propagators for passing trace context information in different formats:
 
 | Propagator             | Configuration Value |
 |------------------------|---------------------|
@@ -142,6 +176,9 @@ Datadog maintains several propagators for passing trace context information in d
 
 {{% tab "PHP" %}}
 
+### Supported propagators
+The Datadog PHP SDK maintains several propagators for passing trace context information in different formats:
+
 | Propagator             | Configuration Value |
 |------------------------|---------------------|
 | Datadog                | `datadog`           |
@@ -151,14 +188,20 @@ Datadog maintains several propagators for passing trace context information in d
 |                        | `B3` (deprecated)   |
 | None                   | `none`              |
 
+### Additional use cases
+For use cases specific to the Datadog PHP SDK, see the [PHP Trace Context Propagation][5] page.
+
 [2]: https://www.w3.org/TR/trace-context/
 [3]: https://github.com/openzipkin/b3-propagation#single-header
 [4]: https://github.com/openzipkin/b3-propagation#multiple-headers
-[5]: https://docs.aws.amazon.com/xray/latest/devguide/aws-xray.html#xray-concepts-tracingheader
+[5]: /tracing/trace_collection/trace_context_propagation/php
 
 {{% /tab %}}
 
 {{% tab "C++" %}}
+
+### Supported propagators
+The Datadog C++ SDK maintains several propagators for passing trace context information in different formats:
 
 | Propagator             | Configuration Value |
 |------------------------|---------------------|
@@ -168,14 +211,53 @@ Datadog maintains several propagators for passing trace context information in d
 |                        | `b3multi`           |
 | None                   | `none`              |
 
+### Additional configuration
+In addition to the environment variable configuration, you can also update the propagators in code by using `Datadog.configure`:
+
+```cpp
+#include <datadog/tracer_config.h>
+#include <datadog/propagation_style.h>
+
+namespace dd = datadog::tracing;
+int main() {
+  dd::TracerConfig config;
+  config.service = "my-service";
+
+  // `injection_styles` indicates with which tracing systems trace propagation
+  // will be compatible when injecting (sending) trace context.
+  // All styles indicated by `injection_styles` are used for injection.
+  // `injection_styles` is overridden by the `DD_TRACE_PROPAGATION_STYLE_INJECT`
+  // and `DD_TRACE_PROPAGATION_STYLE` environment variables.
+  config.injection_styles = {dd::PropagationStyle::DATADOG, dd::PropagationStyle::B3};
+
+  // `extraction_styles` indicates with which tracing systems trace propagation
+  // will be compatible when extracting (receiving) trace context.
+  // Extraction styles are applied in the order in which they appear in
+  // `extraction_styles`. The first style that produces trace context or
+  // produces an error determines the result of extraction.
+  // `extraction_styles` is overridden by the
+  // `DD_TRACE_PROPAGATION_STYLE_EXTRACT` and `DD_TRACE_PROPAGATION_STYLE`
+  // environment variables.
+  config.extraction_styles = {dd::PropagationStyle::W3C};
+
+  ...
+}
+```
+
+### Additional use cases
+For use cases specific to the Datadog C++ SDK, see the [C++ Trace Context Propagation][5] page.
+
 [2]: https://www.w3.org/TR/trace-context/
 [3]: https://github.com/openzipkin/b3-propagation#single-header
 [4]: https://github.com/openzipkin/b3-propagation#multiple-headers
-[5]: https://docs.aws.amazon.com/xray/latest/devguide/aws-xray.html#xray-concepts-tracingheader
+[5]: /tracing/trace_collection/trace_context_propagation/cpp
 
 {{% /tab %}}
 
 {{% tab ".NET" %}}
+
+### Supported propagators
+The Datadog .NET SDK maintains several propagators for passing trace context information in different formats:
 
 | Propagator             | Configuration Value           |
 |------------------------|-------------------------------|
@@ -188,10 +270,13 @@ Datadog maintains several propagators for passing trace context information in d
 |                        | `B3` (deprecated)             |
 | None                   | `none`                        |
 
+### Additional use cases
+For use cases specific to the Datadog .NET SDK, see the [.NET Trace Context Propagation][5] page.
+
 [2]: https://www.w3.org/TR/trace-context/
 [3]: https://github.com/openzipkin/b3-propagation#single-header
 [4]: https://github.com/openzipkin/b3-propagation#multiple-headers
-[5]: https://docs.aws.amazon.com/xray/latest/devguide/aws-xray.html#xray-concepts-tracingheader
+[5]: /tracing/trace_collection/trace_context_propagation/dotnet
 
 {{% /tab %}}
 
