@@ -17,7 +17,7 @@ further_reading:
       text: 'Introducing always-on production profiling in Datadog'
     - link: 'https://www.datadoghq.com/blog/continuous-profiler-timeline-view/'
       tag: 'Blog'
-      text: 'Diagnose runtime and code inefficiencies in production by using Continuous Profiler's timeline view'
+      text: "Diagnose runtime and code inefficiencies using Continuous Profiler's timeline view"
 ---
 
 ## Search profiles
@@ -87,7 +87,7 @@ Four tabs are below the profile header:
 
 - Compare this profile with others
 - View repository commit
-- View traces for the same process and timeframe
+- View traces for the same process and time frame
 - Download the profile
 - Open the profile in full page
 
