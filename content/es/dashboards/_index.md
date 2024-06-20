@@ -38,7 +38,6 @@ further_reading:
   tag: Habilitar los fundamentos
   text: Participa en una sesión interactiva sobre las mejores visualizaciones con
     dashboards
-kind: documentación
 title: Dashboards
 ---
 

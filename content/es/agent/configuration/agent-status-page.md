@@ -14,7 +14,6 @@ further_reading:
 - link: /agent/configuration/agent-commands/
   tag: Guía
   text: Comandos del Agent
-kind: guía
 title: Página de estado del Agent v6
 ---
 

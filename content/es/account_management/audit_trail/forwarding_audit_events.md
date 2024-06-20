@@ -4,7 +4,6 @@ further_reading:
 - link: /account_management/audit_trail/
   tag: Documentación
   text: Obtener más información sobre Audit Trail
-kind: Documentación
 title: Reenvío de eventos de auditorías a destinos personalizados
 ---
 

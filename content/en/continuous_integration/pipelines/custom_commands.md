@@ -1,6 +1,5 @@
 ---
 title: Adding Custom Commands to Pipeline Traces
-kind: documentation
 aliases:
   - /continuous_integration/setup_pipelines/custom_commands
 further_reading:

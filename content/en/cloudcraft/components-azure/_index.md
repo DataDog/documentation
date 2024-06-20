@@ -1,6 +1,5 @@
 ---
 title: "Components: Azure"
-kind: guide
 ---
 
 {{< whatsnext desc="Compute:" >}}

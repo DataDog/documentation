@@ -1,6 +1,5 @@
 ---
 title: AWS Fargate Configuration Guide for Datadog Security
-kind: documentation
 disable_toc: false
 aliases:
   - /security/cloud_security_management/setup/fargate
@@ -78,8 +77,8 @@ Datadog Security provides multiple layers of visibility for AWS Fargate. Use the
 
 ### Images
 
-* `cws-instrumentation-init`: `datadog/cws-instrumentation:latest`
-* `datadog-agent`: `datadog/agent:latest`
+* `cws-instrumentation-init`: `public.ecr.aws/datadog/cws-instrumentation:latest`
+* `datadog-agent`: `public.ecr.aws/datadog/agent:latest`
 
 ### Installation
 
@@ -110,7 +109,7 @@ Datadog Security provides multiple layers of visibility for AWS Fargate. Use the
     "containerDefinitions": [
         {
             "name": "cws-instrumentation-init",
-            "image": "datadog/cws-instrumentation:latest",
+            "image": "public.ecr.aws/datadog/cws-instrumentation:latest",
             "essential": false,
             "user": "0",
             "command": [
@@ -129,7 +128,7 @@ Datadog Security provides multiple layers of visibility for AWS Fargate. Use the
         },
         {
             "name": "datadog-agent",
-            "image": "datadog/agent:latest",
+            "image": "public.ecr.aws/datadog/agent:latest",
             "essential": true,
             "environment": [
                 {
@@ -275,7 +274,7 @@ spec:
    spec:
      initContainers:
      - name: cws-instrumentation-init
-       image: datadog/cws-instrumentation:latest
+       image: public.ecr.aws/datadog/cws-instrumentation:latest
        command:
          - "/cws-instrumentation"
          - "setup"
@@ -299,7 +298,7 @@ spec:
            mountPath: "/cws-instrumentation-volume"
            readOnly: true
      - name: datadog-agent
-       image: datadog/agent:latest 
+       image: public.ecr.aws/datadog/agent:latest
        env:
          - name: DD_API_KEY
            value: "<DD_API_KEY>"

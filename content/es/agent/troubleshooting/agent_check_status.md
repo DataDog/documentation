@@ -6,7 +6,6 @@ further_reading:
 - link: /agent/troubleshooting/send_a_flare/
   tag: Documentación
   text: Enviar un flare del Agent
-kind: documentación
 title: Estado del check del Agent
 ---
 

@@ -12,7 +12,6 @@ further_reading:
   tag: Blog
   text: Surveiller et améliorer votre pipeline de CI/CD sur AWS CodePipeline avec
     CI Visibility de Datadog
-kind: documentation
 title: Configurer le tracing sur un pipeline AWS CodePipeline
 ---
 

@@ -12,7 +12,7 @@ integration_id: azure-service-fabric
 integration_title: Microsoft Azure Service Fabric
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: azure_service_fabric
 public_title: Datadog-Microsoft Azure Service Fabric インテグレーション

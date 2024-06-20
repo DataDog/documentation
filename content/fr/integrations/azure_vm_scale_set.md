@@ -14,7 +14,7 @@ integration_id: azure-vm-scale-set
 integration_title: Azure Virtual Machine Scale Set
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: azure_vm_scale_set
 public_title: Intégration Datadog/Azure Virtual Machine Scale Set

@@ -1,5 +1,4 @@
 ---
-kind: ドキュメント
 title: VPN Gateway コンポーネント
 ---
 ## 概要

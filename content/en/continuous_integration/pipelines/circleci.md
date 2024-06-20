@@ -1,6 +1,5 @@
 ---
 title: Set up Tracing on a CircleCI Workflow
-kind: documentation
 aliases:
   - /continuous_integration/setup_pipelines/circleci
 further_reading:
@@ -92,6 +91,7 @@ The Datadog CircleCI integration collects logs from your finished CircleCI jobs 
 
 To install and configure this integration, follow the [CircleCI setup guide][11].
 
+<div class="alert alert-info"><strong>Note</strong>: Logs are billed separately from CI Visibility. Log retention, exclusion, and indexes are configured in Logs Settings. Logs for CircleCI jobs can be identified by the <code>datadog.product:cipipeline</code> and <code>source:circleci</code> tags.</div>
 
 ## Visualize pipeline data in Datadog
 

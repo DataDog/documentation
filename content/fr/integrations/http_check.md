@@ -23,7 +23,7 @@ guid: eb133a1f-697c-4143-bad3-10e72541fa9c
 integration_id: network
 integration_title: HTTP Check
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: network.

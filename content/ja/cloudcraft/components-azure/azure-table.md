@@ -1,5 +1,4 @@
 ---
-kind: ドキュメント
 title: Azure Table コンポーネント
 ---
 

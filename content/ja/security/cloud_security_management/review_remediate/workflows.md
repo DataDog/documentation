@@ -8,7 +8,6 @@ further_reading:
 - link: /service_management/workflows/
   tag: ドキュメント
   text: Workflow Automation
-kind: ドキュメント
 title: Workflow Automation によるセキュリティワークフローの自動化
 ---
 

@@ -18,7 +18,6 @@ further_reading:
   tag: 설명서
   text: 소프트웨어 구성 요소 분석에 대해 알아보기
 is_beta: true
-kind: 설명서
 title: 코드 분석
 ---
 
