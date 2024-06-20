@@ -118,6 +118,6 @@ See the [Resource change collection][8] section of the Google Cloud Platform int
 [5]: https://app.datadoghq.com/infrastructure/catalog/configuration
 [6]: /integrations/amazon_config/#events
 [7]: /help/
-[8]: /infrastructure/resource_catalog/#recent-changes
+[8]: /integration/google_cloud_platform/#resource-change-collection
 
 
