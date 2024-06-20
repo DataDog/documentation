@@ -1,6 +1,5 @@
 ---
 title: IP Allowlist
-kind: documentation
 ---
 
 {{< callout url="/help/" header="Get Started with IP Allowlist" >}}

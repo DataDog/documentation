@@ -16,7 +16,6 @@ further_reading:
 - link: agent/logs/advanced_log_collection/#global-processing-rules
   tag: Documentación
   text: Reglas generales de procesamiento
-kind: documentación
 title: Recopilación de logs del Agent del host
 ---
 

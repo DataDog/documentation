@@ -1,7 +1,6 @@
 ---
 aliases:
 - /es/graphing/functions/regression/
-kind: documentación
 title: Regresión
 ---
 
