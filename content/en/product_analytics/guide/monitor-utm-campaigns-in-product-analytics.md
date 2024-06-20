@@ -1,16 +1,16 @@
 ---
-title: How to Monitor UTM Campaigns in RUM
+title: How to Monitor UTM Campaigns in Product Analytics
 kind: guide
-description: Learn how to use RUM & Session Replay to monitor the performance of UTM campaigns.
+description: Learn how to use Product Analytics & Session Replay to monitor the performance of UTM campaigns.
 ---
 
 ## Overview
 
-Urchin Tracking Module (UTM) tracking is a parameter that can be added to a URL for tracking the performance of specific campaigns and identifying attribution paths for how visitors arrived on your website. This guide walks you through the types of UTM parameters Datadog RUM collects and how you can use RUM to monitor their use.
+Urchin Tracking Module (UTM) tracking is a parameter that can be added to a URL for tracking the performance of specific campaigns and identifying attribution paths for how visitors arrived on your website. This guide walks you through the types of UTM parameters Datadog Product Analytics collects and how you can use Product Analytics to monitor their use.
 
 ## Data collected
 
-UTM campaigns are connected to [View][1] events in RUM. The campaign data is collected automatically by the Browser SDK and can be viewed as facets in the RUM Explorer. The UTM parameters Datadog collects can be defined as the following:
+UTM campaigns are connected to [View][1] events in Product Analytics. The campaign data is collected automatically by the Browser SDK and can be viewed as facets in the Analytics Explorer. The UTM parameters Datadog collects can be defined as the following:
 
 | Field                | Type   | Description                                                   |
 |-------------------------------|--------|---------------------------------------------------------------|
@@ -30,7 +30,7 @@ To measure how users arrive at your site, you can use the '@view.url_query.utm_m
 
 {{< img src="real_user_monitoring/guide/UTM-campaign-tracking.png" alt="Screenshot of all views to a given campaign page" style="width:90%;">}}
 
-In the above query, we can count all views of a page, such as the landing page, where the campaign is running. This can help you understand if certain pages are getting more visits and you should increase advertising spend toward that specific page.
+As in the above query, you can count all views of a page, such as the landing page, where the campaign is running. This can help you understand if certain pages are getting more visits and you should increase advertising spend toward that specific page.
 
 ### Analyze a UTM source by country
 
