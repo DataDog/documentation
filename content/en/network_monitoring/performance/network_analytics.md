@@ -45,7 +45,7 @@ You can set the timeframe over which traffic is aggregated using the time select
 
 {{< img src="network_performance_monitoring/network_analytics/npm_timeframe.png" alt="Time frame NPM" style="width:30%;">}}
 
-Tags from Datadog integrations or Unified Service Tagging can be used for aggregating and filtering automatically. See [custom facets](#custom-facets), below, for other tags. You can also select "Auto-grouped traffic" to see traffic bucketed into several commonly used tags such as `service`, `kube_service`, `short_image`, and `container_name`.
+Tags from Datadog integrations or [Unified Service Tagging][11] can be used for aggregating and filtering automatically. See [custom facets](#custom-facets), below, for other tags. You can also select "Auto-grouped traffic" to see traffic bucketed into several commonly used tags such as `service`, `kube_service`, `short_image`, and `container_name`.
 
 You can filter to traffic where the client or server matches a CIDR using `CIDR(network.client.ip, 10.0.0.0/8)` or `CIDR(network.server.ip, 10.0.0.0/8)`.
 
@@ -142,14 +142,16 @@ TCP is a connection-oriented protocol that guarantees in-order delivery of packe
 
 The following TCP metrics are available: 
 
-| Metric                      | Description                                                                                                                              |
-|-----------------------------|------------------------------------------------------------------------------------------------------------------------------------------|
-| **TCP Retransmits**         | TCP Retransmits represent detected failures that are retransmitted to ensure delivery. Measured in count of retransmits from the client. |
-| **TCP Latency**             | Measured as TCP smoothed round-trip time, that is, the time between a TCP frame being sent and acknowledged.                             |
-| **TCP Jitter**              | Measured as TCP smoothed round-trip time variance.                                                                                       |
-| **Established Connections** | The number of TCP connections in an established state. Measured in connections per second from the client.                               |
-| **Closed Connections**      | The number of TCP connections in a closed state. Measured in connections per second from the client.                                     |
-| **Failed Connections** (Private Beta)     | The number of unsuccessful TCP connection attempts. Measured in instances of failed connections from the client.                         |
+| Metric | Description |
+|---|---|
+| **TCP Retransmits** | TCP Retransmits represent detected failures that are retransmitted to ensure delivery. Measured in count of retransmits from the client. |
+| **TCP Latency** | Measured as TCP smoothed round-trip time, that is, the time between a TCP frame being sent and acknowledged. |
+| **TCP Jitter** | Measured as TCP smoothed round-trip time variance. |
+| **TCP Timeouts** (Private Beta) | The number of TCP connections that timed out from the perspective of the operating system. This can indicate general connectivity and latency issues.  |
+| **TCP Refusals** (Private Beta) | The number of TCP connections that were refused by the server. Typically this indicates an attempt to connect to an IP/Port that isn’t receiving connections, or a firewall/security misconfiguration. |
+| **TCP Resets** (Private Beta) | The number of TCP connections that were reset by the server.  |
+| **Established Connections** | The number of TCP connections in an established state. Measured in connections per second from the client. |
+| **Closed Connections** | The number of TCP connections in a closed state. Measured in connections per second from the client. |
 
 All metrics are instrumented from the perspective of the `client` side of the connection when available, or the server if not.
 
@@ -336,3 +338,4 @@ The **Security** tab highlights potential network threats and findings detected 
 [8]: /security/detection_rules/
 [9]: /network_monitoring/performance/setup/#enhanced-resolution
 [10]: /network_monitoring/dns/#recommended-queries
+[11]: /getting_started/tagging/unified_service_tagging/
