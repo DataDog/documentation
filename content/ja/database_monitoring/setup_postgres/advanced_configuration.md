@@ -1,12 +1,8 @@
 ---
-title: Postgres データベースモニタリングの高度なコンフィギュレーション
-kind: documentation
 description: Postgres データベースモニタリングの高度なコンフィギュレーション
-
+kind: documentation
+title: Postgres データベースモニタリングの高度なコンフィギュレーション
 ---
-{{< site-region region="us3,us5,gov" >}}
-<div class="alert alert-warning">データベースモニタリングはこのサイトでサポートされていません。</div>
-{{< /site-region >}}
 
 ## 多数のリレーションの取り扱い
 
@@ -27,31 +23,34 @@ SELECT * FROM daily_aggregates_002
 SELECT * FROM daily_aggregates_003
 ```
 
-このような場合は、`quantize_sql_tables` オプションを使用してこのクエリを単一の正規化されたクエリとして追跡すると、このクエリのすべてのメトリクスが単一のクエリにロールアップされます。
+このような場合は、`replace_digits` オプションを使用してこのクエリを単一の正規化されたクエリとして追跡すると、このクエリのすべてのメトリクスが単一のクエリにロールアップされます。
 
 ```sql
 SELECT * FROM daily_aggregates_?
 ```
 
-Datadog Agent のデータベースインスタンスのコンフィギュレーションに `quantize_sql_tables` オプションを追加します。
+Datadog Agent のデータベースインスタンスのコンフィギュレーションに `replace_digits` オプションを追加します。
 
 ```yaml
 instances:
   - dbm: true
     ...
-    quantize_sql_tables: true
+    obfuscator_options:
+      replace_digits: true
 ```
 
 ## サンプリングレートの増加
 
-比較的頻度が低い、または非常にすばやく実行するクエリがある場合は、`collection_interval` の値を下げてサンプル収集の頻度を上げ、サンプリングレートを増加します。
+比較的頻度が低い、またはすばやく実行するクエリがある場合は、`collection_interval` の値を下げてサンプル収集の頻度を上げ、サンプリングレートを増加します。
 
-Datadog Agent のデータベースインスタンスコンフィギュレーションで `collection_interval` を設定します。デフォルト値は 1 で、値を小さくするとインターバルが小さくなります。
+Datadog Agent のデータベースインスタンス構成で `collection_interval` を設定します。デフォルト値は 1 秒で、<a href="https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example#L332C9-L336" target="_blank">`postgres/conf.yaml.example`</a> で確認できます。
+
+より小さな間隔に値を下げます。
 
 ```yaml
 instances:
   - dbm: true
     ...
-    query_samples:        
+    query_samples:
         collection_interval: 0.1
 ```

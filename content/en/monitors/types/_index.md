@@ -25,6 +25,7 @@ further_reading:
 {{< nextlink href="/monitors/types/anomaly" >}}<strong>Anomaly</strong>: Detect anomalous behavior for a metric based on historical data.{{< /nextlink >}}
 {{< nextlink href="/monitors/types/apm" >}}<strong>APM</strong>: Monitor APM metrics or trace queries.{{< /nextlink >}}
 {{< nextlink href="/monitors/types/audit_trail" >}}<strong>Audit Trail</strong>: Alert when a specified type of audit log exceeds a user-defined threshold over a given period of time.{{< /nextlink >}}
+{{< nextlink href="/monitors/types/change-alert" >}}<strong>Change Alert</strong>: Alert when the absolute or relative value changes against a user-defined threshold over a given period of time.{{< /nextlink >}}
 {{< nextlink href="/monitors/types/ci" >}}<strong>CI</strong>: Monitor CI pipelines and tests data gathered by Datadog.{{< /nextlink >}}
 {{< nextlink href="/monitors/types/cloud_cost" >}}<strong>Cloud Cost</strong>: Monitor cost changes associated with cloud platforms.{{< /nextlink >}}
 {{< nextlink href="/monitors/types/composite" >}}<strong>Composite</strong>: Alert on an expression combining multiple monitors.{{< /nextlink >}}
@@ -37,6 +38,7 @@ further_reading:
 {{< nextlink href="/monitors/types/log" >}}<strong>Logs</strong>: Alert when a specified type of log exceeds a user-defined threshold over a given period of time.{{< /nextlink >}}
 {{< nextlink href="/monitors/types/network" >}}<strong>Network</strong>: Check the status of TCP/HTTP endpoints.{{< /nextlink >}}
 {{< nextlink href="/monitors/types/network_performance" >}}<strong>Network Performance</strong>: Set alerts on your network traffic.{{< /nextlink >}}
+{{< nextlink href="/monitors/types/netflow" >}}<strong>NetFlow</strong>: Monitor flow records from your NetFlow-enabled devices.{{< /nextlink >}}
 {{< nextlink href="/monitors/types/outlier" >}}<strong>Outlier</strong>: Alert on members of a group behaving differently than the others.{{< /nextlink >}}
 {{< nextlink href="/monitors/types/process_check" >}}<strong>Process Check</strong>: Watch the status produced by the process.up service check.{{< /nextlink >}}
 {{< nextlink href="/monitors/types/real_user_monitoring" >}}<strong>Real User Monitoring</strong>: Monitor real user data gathered by Datadog.{{< /nextlink >}}

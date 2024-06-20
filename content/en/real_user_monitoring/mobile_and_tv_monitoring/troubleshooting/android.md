@@ -3,7 +3,7 @@ title: Troubleshooting
 kind: documentation
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-android
-  tag: GitHub
+  tag: "Source Code"
   text: dd-sdk-android Source code
 - link: /real_user_monitoring
   tag: Documentation

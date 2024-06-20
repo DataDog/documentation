@@ -2,53 +2,52 @@
 further_reading:
 - link: /agent/basic_agent_usage/
   tag: 설명서
-  text: Agent 기본 사용법
+  text: 에이전트 기본 사용법
 - link: https://dtdg.co/fe
   tag: 기반 활성화
   text: 대화형 세션에 참여하여 인프라스트럭처 모니터링 강화
 - link: /agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/
   tag: FAQ
-  text: 클라우드 인스턴스에 Datadog Agent를 설치해야 하는 이유
-kind: 설명서
-title: Agent를 이용해 시작하기
+  text: 클라우드 인스턴스에 Datadog 에이전트를 설치해야 하는 이유
+title: 에이전트 이용해 시작하기
 ---
 
-이번 가이드에서는 Agent를 소개하고, 시스템 레벨 메트릭을 Datadog 플랫폼으로 전송할 때 사용하는 방법을 알려드리겠습니다. 우분투(Ubuntu) 상의 Agent 설치 사례도 함께 설명합니다. 이번에 다룰 주제는 다음과 같습니다.
+이번 가이드에서는 에이전트를 소개하고, 시스템 레벨 메트릭을 Datadog 플랫폼으로 전송할 때 사용하는 방법을 알려드리겠습니다. 우분투(Ubuntu) 상의 에이전트 설치 사례도 함께 설명합니다. 이번에 다룰 주제는 다음과 같습니다.
 
-  - Agent 설치
-  - Agent 실행 여부의 확인
-  - Agent 기능 설정
+  - 에이전트 설치
+  - 에이전트 실행 여부의 확인
+  - 에이전트 기능 설정
   - 트러블슈팅 자료
 
 ## 개요
 
-### Agent 소개
+### 에이전트 소개
 
-Datadog Agent는 호스트에서 실행되는 소프트웨어입니다. 호스트에서 이벤트와 메트릭을 수집하여 모니터링 및 성능 데이터를 분석할 수 있는 Datadog으로 전송합니다. 로컬 호스트(Windows, MacOS), 컨테이너화된 환경(Docker, Kubernetes), 온프레미스 데이터 센터에서 실행할 수 있습니다. 설정 관리 도구(Chef, Puppet, Ansible)를 사용하여 설치 및 구성할 수 있습니다.
+Datadog 에이전트는 호스트에서 실행되는 소프트웨어입니다. 호스트에서 이벤트와 메트릭을 수집하여 모니터링 및 성능 데이터를 분석할 수 있는 Datadog으로 전송합니다. 로컬 호스트(Windows, MacOS), 컨테이너화된 환경(Docker, Kubernetes), 온프레미스 데이터 센터에서 실행할 수 있습니다. 설정 관리 도구(Chef, Puppet, Ansible)를 사용하여 설치 및 구성할 수 있습니다.
 
 
 
-Agent는 15~20초마다 75~100개의 시스템 레벨 메트릭을 수집할 수 있습니다. 또한 Agent 추가 설정을 통해 실행 중인 프로세스에서 라이브 데이터, 로그, 트레이스를 Datadog 플랫폼으로 전송할 수 있습니다. DataDog Agent는 오픈소스로, 소스 코드는 깃허브(GitHub)의 [DataDog/datadog-agent][1]에 공개되어 있습니다.
+에이전트는 15~20초마다 75~100개의 시스템 레벨 메트릭을 수집할 수 있습니다. 또한 에이전트 추가 설정을 통해 실행 중인 프로세스에서 라이브 데이터, 로그, 트레이스를 Datadog 플랫폼으로 전송할 수 있습니다. DataDog 에이전트는 오픈소스로, 소스 코드는 깃허브(GitHub)의 [DataDog/datadog-agent][1]에 공개되어 있습니다.
 
-### Agent의 오버헤드
+### 에이전트의 오버헤드
 
-Agent가 사용하는 공간과 리소스의 양은 구성과 Agent가 전송하도록 설정한 데이터에 따라 달라집니다. 초기에는 평균 약 0.08%의 CPU와 830MB~880MB의 디스크 공간을 사용할 것으로 예상됩니다.
+에이전트가 차지하는 공간과 리소스의 양은 설정과 에이전트가 전송하도록 구성된 데이터에 따라 달라집니다. 시작 시 평균적으로 약 0.08%의 CPU가 사용되고 약 880MB~1.3GB의 디스크 공간이 사용됩니다.
 
-이러한 벤치마크 수치에 대해 자세히 알아보려면 [Agent 오버헤드][2]를 참조하세요.
+이러한 벤치마크 수치에 대해 자세히 알아보려면 [에이전트 오버헤드][2]를 참조하세요.
 
 ### 수집 데이터
 
-#### Agent 메트릭
+#### 에이전트 메트릭
 
-다음의 Agent 메트릭은 Agent 자체에 대하여 스스로 Datadog에 전송하는 정보입니다. 따라서 호스트나 컨테이너가 Agent를 실행 중인지, 언제 Agent가 시작되었는지, 어느 버전의 파이썬(Python)을 실행하는지 확인할 수 있습니다.
+다음의 에이전트 메트릭은 에이전트 자체에 대하여 스스로 Datadog에 전송하는 정보입니다. 따라서 호스트나 컨테이너가 에이전트를 실행 중인지, 언제 에이전트가 시작되었는지, 어느 버전의 파이썬(Python)을 실행하는지 확인할 수 있습니다.
 
 | 메트릭                           | 설명                                                                                                          |
 | -------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
-| `datadog.agent.python.version` | Agent가 Datadog에 보고 중인 경우 값 `1`이 표시됩니다. 메트릭에는 `python_version` 태그가 지정됩니다. |
-| `datadog.agent.running`        | Agent가 Datadog에 보고 중인 경우 값 `1`이 표시됩니다.                                                 |
-| `datadog.agent.started`        | Agent 시작 시에 값 `1`과 함께 개수 정보가 전송됩니다(v6.12 이상에서 사용할 수 있습니다).                                        |
+| `datadog.agent.python.version` | 에이전트가 Datadog에 보고 중인 경우 값 `1`이 표시됩니다. 메트릭에는 `python_version` 태그가 지정됩니다. |
+| `datadog.agent.running`        | 에이전트가 Datadog에 보고 중인 경우 값 `1`이 표시됩니다.                                                 |
+| `datadog.agent.started`        | 에이전트 시작 시에 값 `1`과 함께 개수 정보가 전송됩니다(v6.12 이상에서 사용할 수 있습니다).                                        |
 
-Agent 메트릭 전체 목록은 [Agent 메트릭][3] 통합에서 찾아볼 수 있습니다.
+에이전트 메트릭 전체 목록은 [에이전트 메트릭][3] 통합에서 찾아볼 수 있습니다.
 
 #### 점검
 
@@ -102,15 +101,15 @@ Agent는 15초마다 호스트 데이터를 수집하여 환경 전체에서 무
 
 ### 설치
 
-Datadog UI에서 **Integrations > Agent**로 이동하고 Ubuntu를 선택하여 Ubuntu용 Agent 설치 페이지로 이동합니다. 호스트에 Datadog Agent를 설치하려면 [Datadog API 키][16]로 업데이트된 해당 페이지(아래 예시 참조)의 한 줄 설치 명령을 사용합니다.
+Datadog UI에서 [에이전트 설치 페이지][18]로 이동해 **Ubuntu**를 클릭합니다. 호스트에서 Datadog 에이전트를 설치하려면 해당 페이지에서 1줄 설치 명령을 사용합니다(아래 예시). 1줄 설치 명령은 [Datadog API 키][16]로 업데이트되어야 합니다.
 
-Ubuntu 한 줄 설치 명령 예시:
+우분투(Ubuntu) 1줄 설치 명령 예시:
 
 ```shell
 DD_API_KEY=<DATADOG_API_KEY> DD_SITE="{{< region-param key="dd_site" >}}" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
 ```
 
-최신 설치 지침은 사용 중인 운영 체제의 앱 내 [Agent 설치 페이지][18]로 이동하세요.
+[에이전트 설치 페이지][18]에서 사용 중인 운영 체제에 대한 최신 설치 지침을 확인하세요.
 
 ### 검증
 
@@ -141,7 +140,7 @@ Agent (v7.36.1)
 
 #### 이벤트 
 
-Datadog UI에서 **Events > Explorer**로 이동하여 이벤트 익스플로러(Events Explorer) 페이지를 엽니다. Agent를 시작하거나 재시작했을 떄, Agent는 Datadog로 이벤트를 전송합니다. Agent가 정상적으로 설치된 경우 아래와 같은 메시지가 표시됩니다.
+Datadog UI에서 [이벤트 탐색기 페이지][20]로 이동합니다. 에이전트를 시작하거나 다시 시작하면 이벤트가 Datadog로 전송됩니다. 에이전트가 성공적으로 설치되면 다음 메시지가 표시됩니다:
 
 ```text
 Datadog agent (v. 7.XX.X) started on <Hostname>
@@ -157,11 +156,11 @@ Agent는 다음의 서비스 점검을 제공하도록 설정되어 있습니다
   - `datadog.agent.check_status`:
     Agent 점검으로 Datadog에 메트릭을 보낼 수 없는 경우 `CRITICAL`를 반환합니다. 기타 경우에는 `OK`를 반환합니다.
 
-이러한 검사는 Datadog 플랫폼에서 모니터링과 대시보드를 통해 Agent 상태를 빠르게 시각화하는 용도로 사용됩니다. 더 자세한 정보는 [서비스 검사 개요][20]를 참조하세요.
+이러한 점검은 Datadog 플랫폼에서 모니터링과 대시보드를 통해 Agent 상태를 빠르게 시각화하는 용도로 사용됩니다. 더 자세한 정보는 [서비스 점검 개요][21]를 참조하세요.
 
 #### 메트릭
 
-Datadog UI에서 **Metrics > Summary**로 이동하여 메트릭 요약 페이지를 열고 메트릭 `datadog.agent.started` 또는 메트릭 `datadog.agent.running`를 찾아보세요. 해당 메트릭이 바로 표시되지 않는 경우 Agent가 Datadog 플랫폼으로 데이터를 전송하는데 몇 분이 걸릴 수 있습니다.
+Datadog UI에서 [메트릭 요약 페이지][22]로 이동하여 `datadog.agent.started` 또는 `datadog.agent.running` 메트릭을 검색합니다. 해당 메트릭이 즉시 표시되지 않는 경우 에이전트가 Datadog 플랫폼에 데이터를 전송하는 데 수 분이 소요되기 때문일 수 있습니다.
 
 하나의 메트릭을 클릭하면 메트릭(Metric) 패널이 열립니다. 이 패널에는 메트릭이 어디에서 수집되었는지, 관련 태그가 무엇인지에 관한 메타데이터가 추가로 표시됩니다. 이번 튜토리얼에서 다루는 호스트에는 태그가 지정되어 있지 않으므로, Datadog가 메트릭에 할당할 기본 태그만(`version`나 `host` 등) 표시될 것입니다. 태그를 추가하는 방법은 다음의 Agent 설정 파일 섹션을 참조하시기 바랍니다.
 
@@ -173,7 +172,7 @@ Agent의 기본 설정 파일은 `datadog.yaml`입니다. 필수 파라미터는
 - [Datadog API 키][16]. Agent 데이터를 귀하의 조직과 연결하기 위해 사용됩니다.
 - Datadog 사이트 ({{< region-param key="dd_site" code="true" >}}). 
 
-사용 가능한 모든 설정 옵션은 [샘플 `config_template.yaml` 파일][21]을 참조하세요.
+사용 가능한 모든 설정 옵션을 보려면 [샘플 `config_template.yaml` 파일][23]을 참조하세요.
 
 Agent의 설정 파일을 조정하여 태그를 포함한 기타 Datadog의 기능을 이용할 수 있습니다.
 
@@ -181,9 +180,9 @@ Agent의 설정 파일을 조정하여 태그를 포함한 기타 Datadog의 기
 
 태그는 메트릭과 이벤트에 추가 메타데이터 레이어를 더해줍니다. 이를 활용해 Datadog에서 시각화한 데이터의 범위를 설정하고 서로 비교할 수 있습니다. 여러 호스트에서 Datadog로 데이터가 전송된 경우, 이 정보를 태그하여 시각화하고 싶은 데이터만 포함하도록 범위를 지정할 수 있습니다.
 
-예를 들어 서로 다른 팀에서 수집한 데이터를 가지고 있는데 알파 팀의 메트릭만 보고 싶은 경우를 생각해봅시다. 특정 호스트에 `team:alpha` 또는 `team:bravo` 태그를 지정하면 `team:alpha` 태그가 붙은 메트릭만 필터링할 수 있습니다. 태그 설정에 대해 자세히 알아보려면 [태그 사용 시작하기][22] 가이드를 참조해주세요.
+예를 들어, 여러 팀에서 수집한 데이터가 있고, 팀 알파의 메트릭에만 관심이 있다고 가정해 보겠습니다. 해당 특정 호스트를 `team:alpha` 또는 `team:bravo` 태그로 태깅하면 `team:alpha`로 태깅하여 메트릭을 필터링할 수 있습니다. [태그 시작하기][24]를 참조해 데이터 태깅에 대해 자세히 알아보세요.
 
-1. Agent의 [주요 설정 파일][23] 위치를 찾습니다. 우분투(Ubuntu)의 경우 파일 위치는 `/etc/datadog-agent/datadog.yaml`입니다.
+1. 에이전트의 [기본 설정 파일][25]을 찾습니다. 우분투(Ubuntu)의 경우 파일 위치는 `/etc/datadog-agent/datadog.yaml`입니다.
 
 2. `datadog.yaml` 파일에서 `tags` 파라미터를 찾습니다. 호스트 레벨 태그를 `datadog.yaml` 설정에 구성하면 해당 호스트에서 전송한 모든 메트릭, 트레이스, 로그에 태그를 지정할 수 있습니다.
 
@@ -220,19 +219,19 @@ Agent의 설정 파일을 조정하여 태그를 포함한 기타 Datadog의 기
       - test:agent_walkthrough
    ```
 
-4. Agent의 [재시작 명령][24]을 실행하여 Agent를 재시작합니다. Ubuntu 재시작 명령어:
+4. 에이전트의 [재설치 명령][26]을 실행하여 에이전트를 재설치합니다. 우분투(Ubuntu) 재시작 명령은 다음과같습니다.
 
    ```shell
    sudo service datadog-agent restart
    ```
 
-5. 몇 분 후 다시 **Metrics > Summary**로 이동하여 메트릭 `datadog.agent.started`를 클릭합니다. 기본 `host`와 `version` 태그와 함께 `team` 태그나 개인적으로 추가한 태그도 표시됩니다. 페이지 상단에 있는 `Tag` 필드에서 메트릭을 필터링할 수도 있습니다.
+5. 몇 분 후 [메트릭 요약 페이지][22]로 다시 이동하여 `datadog.agent.started` 메트릭을 클릭합니다. 기본 `host` 및 `version` 태그 외에도 `team` 태그 및 직접 추가한 태그를 확인할 수 있습니다. 페이지 상단의 `Tag` 필드를 통해 메트릭 을 필터링할 수도 있습니다.
 
-6. **Events > Explorer**에서 최신 Agent 이벤트와 함께 표시되는 커스텀 태그를 찾습니다.
+6. [이벤트 탐색기 페이지][20]로 이동하여 최신 에이전트 이벤트에 표시된 커스텀 태그를 찾습니다.
 
 #### 기타 설정 옵션
 
-[로그][25], [트레이스][26], [프로세스][27]의 데이터 수집은 Agent 설정 파일에서 활성화할 수 있으며, 기본으로 활성화되어 있지 않습니다. 예를 들어, 설정 파일에서 `logs_enabled` 파라미터가 false로 설정되어 있는 것을 확인할 수 있습니다.
+[로그][27], [트레이스][28], [프로세스][29] 데이터 수집은 에이전트 설정 파일을 통해 활성화할 수 있습니다. 이러한 기능은 기본적으로 활성화되는 기능이 아닙니다. 예를 들어 설정 파일에서 `logs_enabled` 파라미터는 거짓(false)로 설정되어 있습니다.
 
 ```yaml
 ##################################
@@ -247,23 +246,23 @@ Agent의 설정 파일을 조정하여 태그를 포함한 기타 Datadog의 기
 ```
 
 기타 Agent 설정 파일을 통해 설정할 수 있는 Datadog 기능은 다음과 같습니다.
-- [OTLP 트레이스 수집][28] 활성화
-- 민감 데이터 필터링 및 스크러빙을 위한 [로그 수집의 맞춤 설정][29]
-- [DogStatsD][30]를 통한 맞춤형 데이터 설정
+- [OTLP 트레이스 수집][30] 활성화
+- 민감한 데이터 필터링 및 스크러빙을 위한 [로그 수집 커스터마이즈][31]
+- [DogStatsD][32]를 통해 커스텀 데이터 설정하기
 
 설정 과정을 진행하는 중에 설명서에서 `datadog.yaml` 파일이나 Agent 설정 파일을 언급하는 경우, 이는 설정해야 하는 파일을 가리킵니다.
 
 ## 명령어
 
-[Agent 명령어][31]를 참조해 Agent를 [시작][32], [중지][33], 또는 [재시작][24]하세요.
+[에이전트 명령어][33]를 참조하여 에이전트를 [시작][34], [중지][35] 또는 [다시 시작][26]합니다.
 
 ## 문제 해결
 
 Agent 트러블슈팅과 관련해 도움이 필요하신 경우
 
-- [Agent 트러블슈팅][34]을 참조하세요.
-- [Agent 로그 파일][35]을 확인하세요.
-- [Datadog 고객 지원팀][36]에 문의해주세요.
+- [에이전트 트러블슈팅][26] 참조하기
+- [에이전트 로그 파일][37] 보기
+- [Datadog 지원팀][38]에 문의하기
 
 ## 참고 자료
 
@@ -298,21 +297,23 @@ Agent 트러블슈팅과 관련해 도움이 필요하신 경우
 [16]: https://app.datadoghq.com/organization-settings/api-keys
 [17]: /ko/agent/basic_agent_usage/?tab=agentv6v7
 [18]: https://app.datadoghq.com/account/settings/agent/latest
-[19]: /ko/agent/guide/agent-commands/#agent-status-and-information
-[20]: /ko/developers/service_checks/#visualize-your-service-check-in-datadog
-[21]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
-[22]: /ko/getting_started/tagging/
-[23]: /ko/agent/guide/agent-configuration-files/#agent-main-configuration-file
-[24]: /ko/agent/guide/agent-commands/#restart-the-agent
-[25]: /ko/logs/
-[26]: /ko/tracing/
-[27]: /ko/infrastructure/process/?tab=linuxwindows#introduction
-[28]: /ko/opentelemetry/otlp_ingest_in_the_agent/?tab=host
-[29]: /ko/agent/logs/advanced_log_collection/
-[30]: /ko/developers/dogstatsd/?tab=hostagent
-[31]: /ko/agent/guide/agent-commands/
-[32]: /ko/agent/guide/agent-commands/#start-the-agent
-[33]: /ko/agent/guide/agent-commands/#stop-the-agent
-[34]: /ko/agent/troubleshooting/
-[35]: /ko/agent/guide/agent-log-files/
-[36]: /ko/help/
+[19]: /ko/agent/configuration/agent-commands/#agent-status-and-information
+[20]: https://app.datadoghq.com/event/explorer
+[21]: /ko/developers/service_checks/#visualize-your-service-check-in-datadog
+[22]: https://app.datadoghq.com/metric/summary
+[23]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
+[24]: /ko/getting_started/tagging/
+[25]: /ko/agent/configuration/agent-configuration-files/#agent-main-configuration-file
+[26]: /ko/agent/configuration/agent-commands/#restart-the-agent
+[27]: /ko/logs/
+[28]: /ko/tracing/
+[29]: /ko/infrastructure/process/?tab=linuxwindows#introduction
+[30]: /ko/opentelemetry/otlp_ingest_in_the_agent/?tab=host
+[31]: /ko/agent/logs/advanced_log_collection/
+[32]: /ko/developers/dogstatsd/?tab=hostagent
+[33]: /ko/agent/configuration/agent-commands/
+[34]: /ko/agent/configuration/agent-commands/#start-the-agent
+[35]: /ko/agent/configuration/agent-commands/#stop-the-agent
+[36]: /ko/agent/troubleshooting/
+[37]: /ko/agent/configuration/agent-log-files/
+[38]: /ko/help/

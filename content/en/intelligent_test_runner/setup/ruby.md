@@ -19,12 +19,12 @@ further_reading:
 
 Intelligent Test Runner is only supported in the following versions and testing frameworks:
 
-* `datadog-ci >= 1.0.0.beta3`
+* `datadog-ci >= 1.0`
 * `Ruby >= 2.7`
   * JRuby is not supported.
 * `rspec >= 3.0.0`
 * `minitest >= 5.0.0`
-  * [Rails parallel testing][2] is not supported as of library version `1.0.0.beta3`.
+  * [Rails parallel testing][2] is not supported.
 * `cucumber >= 3.0.0`
 
 ## Setup
@@ -34,28 +34,6 @@ Intelligent Test Runner is only supported in the following versions and testing 
 Prior to setting up Intelligent Test Runner, set up [Test Visibility for Ruby][1]. If you are reporting data through the Agent, use v6.40 and later or v7.40 and later.
 
 {{% ci-itr-activation-instructions %}}
-
-### Use the latest version of a Test Visibility library
-
-Intelligent Test Runner for Ruby is available in `datadog-ci` gem version `1.0.0.beta3` and later.
-
-Add to your Gemfile:
-
-```ruby
-group :test do
-  gem 'datadog-ci', '~> 1.0.0.beta3'
-end
-```
-
-If you use other datadog products, upgrade to `2.0.0.beta2` version of gem `datadog`:
-
-```ruby
-gem 'datadog', '~> 2.0.0.beta2'
-
-group :test do
-  gem 'datadog-ci', '~> 1.0.0.beta3'
-end
-```
 
 ## Run tests with the Intelligent Test Runner enabled
 

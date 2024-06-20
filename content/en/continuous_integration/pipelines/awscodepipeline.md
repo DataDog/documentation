@@ -1,6 +1,5 @@
 ---
 title: Set up Tracing on a AWS CodePipeline Pipeline
-kind: documentation
 aliases:
   - /continuous_integration/setup_pipelines/codepipeline
 further_reading:
@@ -32,6 +31,7 @@ Set up tracing on AWS CodePipeline to collect data about pipeline executions, an
 | [Partial retries][14] | Partial pipelines | View partially retried pipeline executions. |
 | *[Running pipelines][15] | Running pipelines | View pipeline executions that are running. |
 | **Logs correlation | Logs correlation	| Correlate pipeline and job spans to logs and enable [job log correlation](#enable-log-correlation). |
+| [Approval wait time][17] | Approval wait time  | View the amount of time jobs and pipelines wait for manual approvals. |
 
 *AWS CodePipeline running pipelines don't have Git information until they have finished.\
 **AWS CodePipeline logs correlation is only available for AWS CodeBuild actions.
@@ -119,6 +119,8 @@ The AWS CodePipeline integration supports correlating **CodeBuild** actions with
 
 <div class="alert alert-warning"><strong>Note</strong>: Log correlation for CodeBuild actions requires the CodeBuild project to have the default CloudWatch log group and log stream names.</div>
 
+<div class="alert alert-info"><strong>Note</strong>: Logs are billed separately from CI Visibility. Log retention, exclusion, and indexes are configured in Logs Settings. Logs for AWS CodeBuild can be identified by the <code>source:codebuild</code> and <code>sourcecategory:aws</code> tags.</div>
+
 ## Visualize pipeline data in Datadog
 
 View your data on the [**CI Pipeline List**][11] and [**Executions**][12] pages after the pipelines finish.
@@ -145,3 +147,4 @@ The **CI Pipeline List** page shows data for only the [default branch][13] of ea
 [14]: /glossary/#partial-retry
 [15]: /glossary/#running-pipeline
 [16]: /logs/guide/send-aws-services-logs-with-the-datadog-lambda-function
+[17]: /glossary/#approval-wait-time

@@ -9,10 +9,6 @@ further_reading:
 
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
-{{< /site-region >}}
-
 Database Monitoring provides deep visibility into your MySQL databases by exposing query metrics, query samples, explain plans, connection data, system metrics, and telemetry for the InnoDB storage engine.
 
 The Agent collects telemetry directly from the database by logging in as a read-only user. Do the following setup to enable Database Monitoring with your MySQL database:
@@ -342,7 +338,7 @@ To avoid exposing the `datadog` user's password in plain text, use the Agent's [
 
 ## Install the RDS Integration
 
-To collect more comprehensive database metrics from AWS, install the [RDS integration][8] (optional).
+To see infrastructure metrics from AWS, such as CPU, alongside the database telemetry in DBM, install the [RDS integration][8] (optional).
 
 ## Troubleshooting
 
@@ -352,7 +348,7 @@ If you have installed and configured the integrations and Agent as described and
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/basic_agent_usage#agent-overhead
+[1]: /database_monitoring/agent_integration_overhead/?tab=mysql
 [2]: /database_monitoring/data_collected/#sensitive-information
 [3]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithParamGroups.html
 [4]: https://dev.mysql.com/doc/refman/8.0/en/creating-accounts.html

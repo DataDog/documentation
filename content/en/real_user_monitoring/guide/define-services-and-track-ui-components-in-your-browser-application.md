@@ -118,7 +118,7 @@ Components are tracked using custom actions [mentioned above][10]:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /real_user_monitoring/explorer/
-[2]: /real_user_monitoring/browser/#setup
+[2]: /real_user_monitoring/browser/setup
 [3]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#override-default-rum-view-names
 [4]: /real_user_monitoring/browser/monitoring_page_performance/#all-performance-metrics
 [5]: /real_user_monitoring/browser/monitoring_page_performance/#add-your-own-performance-timing

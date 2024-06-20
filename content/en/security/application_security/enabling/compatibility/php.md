@@ -6,11 +6,11 @@ type: multi-code-lang
 code_lang_weight: 40
 ---
 
-## ASM capabilities support
+## Application Security capabilities support
 
-The following ASM capabilities are supported in the PHP library, for the specified tracer version:
+The following application security capabilities are supported in the PHP library, for the specified tracer version:
 
-| ASM capability                   | Minimum PHP tracer version |
+| Application Security capability                   | Minimum PHP tracer version |
 | -------------------------------- |----------------------------|
 | Threat Detection | 0.84.0                     |
 | Threat Protection  | 0.86.0                     |
@@ -26,13 +26,13 @@ The minimum tracer version to get all supported ASM capabilities for PHP is 0.98
 <div class="alert alert-info">If you would like to see support added for any of the unsupported capabilities, let us know! Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send details</a>.</div>
 
 ### Supported deployment types
-|Type | Threat Detection support | Vulnerability Management for OSS support |
-| ---           |   ---             |           ----            |
-| Docker        | {{< X >}}         |  {{< X >}}                |
-| Kubernetes    | {{< X >}}         |  {{< X >}}                |
-| Amazon ECS    | {{< X >}}         |  {{< X >}}                |
-| AWS Fargate   |                   |                           |
-| AWS Lambda    |                   |                           |
+| Type        | Threat Detection support | Software Composition Analysis |
+|-------------|--------------------------|-------------------------------|
+| Docker      | {{< X >}}                | {{< X >}}                     |
+| Kubernetes  | {{< X >}}                | {{< X >}}                     |
+| Amazon ECS  | {{< X >}}                | {{< X >}}                     |
+| AWS Fargate |                          |                               |
+| AWS Lambda  |                          |                               |
 
 ## Language and framework compatibility
 
@@ -53,7 +53,7 @@ It's recommended to use <a href="https://www.php.net/supported-versions">officia
 | 7.1.x          | General Availability                  | All             |
 | 7.0.x          | General Availability                  | All             |
 
-PHP ASM supports the following SAPI's:
+Application Security capabililties for PHP support the following SAPI's:
 
 | SAPI           | Support type    |
 |:---------------|:----------------|
@@ -64,7 +64,7 @@ PHP ASM supports the following SAPI's:
 
 ## Supported processor architectures
 
-PHP ASM supports the following architectures:
+Application Security capabililties for PHP support the following architectures:
 
 | Processor architectures                   | Support level         | Package version                        |
 | ------------------------------------------|-----------------------|----------------------------------------|
@@ -87,11 +87,11 @@ The library supports the use of all PHP frameworks, and also the use of no frame
 - Tags for the HTTP request (status code, method, etc)
 - Distributed Tracing to see attack flows through your applications
 
-##### ASM Capability Notes
-- **Vulnerability Management for OSS** is not supported
-- **Vulnerability Management for Code-level** is not supported
+##### Application Security Capability Notes
+- **Software Composition Analysis** is not supported
+- **Code Security** is not supported
 
-The following frameworks aren't directly instrumented by ASM, but indirectly supported through runtime instrumentation.
+The following frameworks aren't directly instrumented by Application Security, but indirectly supported through runtime instrumentation.
 
 | Framework                | Versions    | Threat Detection supported? | Threat Protection supported? |
 | ------------------------ | ----------- | --------------- | ---------------------------------------------- |
@@ -123,9 +123,9 @@ The following frameworks aren't directly instrumented by ASM, but indirectly sup
 - query info (for example, a sanitized query string)
 - error and stacktrace capturing
 
-##### ASM Capability Notes
-- **Vulnerability Management for OSS** is not supported
-- **Vulnerability Management for Code-level** is not supported
+##### Application Security Capability Notes
+- **Software Composition Analysis** is not supported
+- **Code Security** is not supported
 - **Threat Protection** also works at the HTTP request (input) layer, and so works for all databases by default, even those not listed in the table below.
 
 | Framework         | Versions | Threat Detection supported?    | Threat Protection supported?|

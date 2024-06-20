@@ -11,6 +11,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-github-actions-ci-visibility/"
   tag: "Blog"
   text: "Monitor your GitHub Actions workflows with Datadog CI Visibility"
+- link: "/integrations/github/"
+  tag: "Documentation"
+  text: "Learn about the GitHub Integration"
 - link: "/integrations/guide/source-code-integration"
   tag: "Documentation"
   text: "Learn about the Source Code Integration"
@@ -27,12 +30,48 @@ further_reading:
 
 [Test Visibility][5] integrates with other developer-oriented Datadog products as well as external partners such as GitHub to streamline developer workflows with features including being able to:
 
+- [Enable test summaries in GitHub pull request comments](#test-summaries-in-github-pull-requests)
 - [Create and open GitHub issues](#create-and-open-github-issues) 
 - [Create Jira issues through Case Management](#create-jira-issues)
 - [Open tests in GitHub and your IDE](#open-tests-in-github-and-your-ide)
-- [Enable test summaries in GitHub Pull Request comments](#test-summaries-in-github-pull-requests)
 
 These features are available for all Test Visibility customers, and they do not require usage of the [Datadog GitHub integration][4].
+
+## Test summaries in GitHub pull requests
+
+Datadog integrates with GitHub to show summaries of test results directly in your pull request comments. Each summary contains an overview of the tests executions, flakiness information, error messages for failed tests, performance regressions, and code coverage changes.
+
+{{< img src="ci/github_comments_light.png" alt="Datadog GitHub pull request comment preview" style="width:100%;">}}
+
+With this information, developers get instant feedback about their tests results, and they can debug any failed or flaky tests without leaving the pull request view.
+
+<div class="alert alert-info">This integration is only available for test services hosted on `github.com`.</div>
+
+### Enable test summaries
+
+You can enable test summaries in pull requests with the following steps:
+
+1. Install the [GitHub integration][4]:
+   1. Navigate to the **Configuration** tab on the [GitHub integration tile][6] and click **+ Create GitHub App**.
+   2. Give the application read and write permissions for pull requests.
+2. Enable test summaries for one or more test services. You can do this from the [Test Service Settings page][3] or from the commit/branch page.
+
+### Test service settings page
+
+1. Navigate to the [Test Service Settings page][3] and search for the test service you want to enable. You can also search by repository.
+2. For the desired service, enable the toggle under the **GitHub Comments** column.
+
+{{< img src="ci/enable-settings-github-comments.png" alt="The Test Service Settings tab in Datadog with GitHub comments enabled for one test service" style="width:100%;">}}
+
+### Commit or branch page
+
+1. Go to the test service commit or branch page where you want to enable GitHub comments.
+2. Click on the **Settings** icon and click **View Test Service Settings**.
+3. Select **Enable GitHub Comments** so that comments display on new pull requests. This change may take a few minutes.
+
+{{< img src="ci/enable-github-comments.png" alt="Enable GitHub comments dropdown" style="width:100%;">}}
+
+Comments only appear on pull requests that were opened before the test run and that have run at least one test for an enabled test service.
 
 ## Create and open GitHub issues
 
@@ -109,58 +148,34 @@ From within a specific test run, click the **Actions** button and select **Creat
 For more information about configuring the Jira integration, see the [Case Management documentation][7].
 
 ## Open tests in GitHub and your IDE
+
 ### In-app entry points
+
 After detecting a failed and/or flaky test within Datadog, you have the option to open that test in GitHub or your IDE to fix it immediately.
 
 Under the **Error Message** section in the **Overview** tab of a test run, click the **View Code** button to view the relevant lines of code for that test within Visual Studio Code, IntelliJ, or GitHub.
 
-{{< img src="ci/IDE.png" alt="Open test in IDE" style="width:50%;">}}
+{{< img src="continuous_integration/error_message_code.png" alt="An inline code snippet with a button you can click to view the source code in GitHub or an IDE" style="width:100%;">}}
 
 The order of options in this dropdown changes depending on the language your test was written in:
 
 - IntelliJ is prioritized for Java-based tests
 - Visual Studio Code is prioritized for JavaScript and Python-based tests
 
+### Viewing source code in GitHub
+
+Optionally, you can set up the [GitHub integration][10] to open the source code for a failed or flaky test in GitHub.
+
+Under the **Source Code** section in the **Overview** tab of a test run, click the **View on GitHub** button to view the relevant lines of code for that test within GitHub.
+
+{{< img src="continuous_integration/source_code_integration.png" alt="An inline code snippet with a button you can click to view the source code in GitHub or an IDE" style="width:100%;">}}
+
 ### Installing IDE plugins
+
 IDE plugins and extensions are required to view your test in your IDE. 
+
 - If you do not have the VS Code extension installed, click **View in VS Code** to open the extension directly in VS Code for installation.
 - If you do not have the IntelliJ plugin installed, click **View in IntelliJ** to get the extension installation. Compatible Datadog versions can be found on the [Plugin Versions page][2].
-
-## Test summaries in GitHub pull requests
-
-Datadog integrates with GitHub to show test results summaries directly in your pull requests. The summary contains an overview of the tests executions, flakiness information, error messages for failed tests, performance regressions, and code coverage changes in pull request comments.
-
-{{< img src="ci/github_comments_light.png" alt="Datadog GitHub pull request comment preview" style="width:100%;">}}
-
-With this report, developers get instant feedback about their tests results, including the ability to debug any failed or flaky tests without leaving the pull request view.
-
-<div class="alert alert-info">This integration is only available for test services hosted on `github.com`.</div>
-
-### Enable test summaries
-
-You can enable test summaries in pull requests with the following steps:
-
-1. Install the [GitHub integration][4]:
-   1. Navigate to the **Configuration** tab on the [GitHub integration tile][6] and click **+ Create GitHub App**.
-   2. Give the application read and write permissions for pull requests.
-2. Enable test summaries for one or more test services. It can be done from the [Test Service Settings page][3] or from the commit/branch page.
-
-### Test service settings page
-
-1. Navigate to the [Test Service Settings page][3] and search for the repository or test service.
-2. Click on the toggle under the **GitHub Comments** column for the desired service.
-
-{{< img src="ci/enable-settings-github-comments.png" alt="The Test Service Settings tab in Datadog with GitHub comments enabled for one test service" style="width:100%;">}}
-
-### Commit or branch page
-
-1. Go to the test service commit or branch page where you want to enable GitHub comments.
-2. Click on the **Settings** icon and click **View Test Service Settings**.
-3. Select **Enable GitHub Comments** so that comments display on new pull requests. This change may take a few minutes.
-
-{{< img src="ci/enable-github-comments.png" alt="Enable GitHub comments dropdown" style="width:100%;">}}
-
-Comments only appear on pull requests that were opened before the test run and that have run at least one test for an enabled test service.
 
 ## Further reading
 
@@ -175,3 +190,4 @@ Comments only appear on pull requests that were opened before the test run and t
 [7]: /service_management/case_management/settings/#jira
 [8]: /service_management/case_management/view_and_manage#take-action
 [9]: https://app.datadoghq.com/cases
+[10]: /integrations/github/#link-a-repository-in-your-organization-or-personal-account

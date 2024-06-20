@@ -54,6 +54,7 @@
                     {{ $dot := . }}
                     {{ $first_char := substr .Title 0 1 | upper }}
                     {{ $curr_letter := $.Scratch.Get "curr_letter" }}
+                    {{ $valid_core_products_array := slice }}
                     {{ $core_products_string := (delimit (.Params.core_product | default "") ",") }}
                     <!-- Letter Header -->
                     {{ if and (ne $first_char $curr_letter) (not (in $letters $first_char)) }}
@@ -77,13 +78,14 @@
                     >
                     
                         <!-- Validate core_product values and build $products slice for filtering section (filter-btns)-->
-                        {{ range .Params.core_product  }}
+                        {{ range .Params.core_product }}
                             {{ $valid_core_product := index (where $core_product_taxonomy.possible_values "name" .) 0 }}
                             {{ if $valid_core_product }}
                                 {{ $products = union $products (slice $valid_core_product.name) }}
+                                {{ $valid_core_products_array = $valid_core_products_array | append . }}
                             {{ else }}
-                                {{ errorf "Invalid core_product tag %q" . }}
-                                {{ errorf "in %q" $dot.File.Path }}
+                                {{ warnf "Ignoring invalid core_product tag %q" . }}
+                                {{ warnf "in %q" $dot.File.Path }}
                             {{ end }}
                         {{ end }}
 
@@ -97,7 +99,7 @@
                             {{ .Params.Title }}
                         </h4>
                         <div>
-                            {{ range .Params.core_product }}
+                            {{ range $valid_core_products_array }}
                                 <div class="core-product-label btn btn-outline-secondary text-primary me-1 pe-none">
                                     {{. | upper}}
                                 </div>

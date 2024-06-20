@@ -3,12 +3,14 @@ app_id: pdh
 app_uuid: 75f6813c-934c-4f1a-b8f4-71f9f1911165
 assets:
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
       creates_events: false
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10065
     source_type_name: PDH
 author:
   homepage: https://www.datadoghq.com
@@ -24,7 +26,7 @@ draft: false
 git_integration_title: pdh_check
 integration_id: pdh
 integration_title: PDH Check
-integration_version: 2.0.0
+integration_version: 2.1.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -37,7 +39,7 @@ tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Supported OS::Windows
-  - Category::OS & System
+  - Category::OS とシステム
   configuration: README.md#Setup
   description: Windows のパフォーマンスカウンターを収集およびグラフ化。
   media: []
@@ -46,6 +48,7 @@ tile:
   title: PDH Check
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
@@ -56,13 +59,13 @@ Windows のパフォーマンスカウンターからメトリクスをリアル
 
 - PDH API を使用して Windows のパフォーマンスカウンターを視覚化および監視できます。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 PDH チェックは [Datadog Agent][2] パッケージに含まれています。追加のインストールは必要ありません。
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 1. Windows のパフォーマンスデータの収集を開始するには、[Agent の構成ディレクトリ][3]のルートにある `conf.d/` フォルダーの `pdh_check.d/conf.yaml` ファイルを編集します。使用可能なすべての構成オプションの詳細については、[サンプル pdh_check.d/conf.yaml][4] を参照してください。
 
@@ -72,21 +75,21 @@ PDH チェックは [Datadog Agent][2] パッケージに含まれています�
 
 [Agent の status サブコマンド][6]を実行し、Checks セクションの `pdh_check` を探します。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 
 PDH チェックにより収集されたすべてのメトリクスは、[カスタムメトリクス][7]として Datadog に送信できますが、これはお客様への[請求][8]に影響します。
 
-### イベント
+### ヘルプ
 
 PDH チェックには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 
 PDH チェックには、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
 

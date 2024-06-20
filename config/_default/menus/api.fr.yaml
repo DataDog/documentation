@@ -3520,7 +3520,7 @@ menu:
       versions:
       - v1
     parent: usage-metering
-    url: '#get-hourly-usage-for-snmp-devices'
+    url: '#recuperer-l-utilisation-horaire-pour-les-flux-reseau'
   - generated: true
     identifier: usage-metering-get-hourly-usage-for-sensitive-data-scanner
     name: Récupérer l'utilisation horaire pour le scanner de données sensibles
@@ -4423,11 +4423,11 @@ menu:
     name: Mettre à jour un compte Confluent
     params:
       operationids:
-      - GetConfluentResource
+      - UpdateCloudWorkloadSecurityAgentRule
       order: 5
       unstable: []
       versions:
-      - v1
+      - v2
     parent: csm-threats
     url: '#modifier-une-regle-d-agent-cloud-workload-security'
   - generated: true
@@ -4587,8 +4587,8 @@ menu:
       order: 9
       unstable: []
       versions:
-      - v1
-    parent: tracing_compatibility_nodejs
+      - v2
+    parent: case-management
     url: '#annuler-l-archivage-d-un-cas'
   - generated: true
     identifier: case-management-update-case-status
@@ -4719,8 +4719,8 @@ menu:
       order: 1
       unstable: []
       versions:
-      - v1
-    parent: tracing_compatibility_nodejs
+      - v2
+    parent: case-management
     url: '#rechercher-des-cas'
   - generated: true
     identifier: cloud-cost-management
@@ -4855,12 +4855,12 @@ menu:
     name: Récupérer un service Fastly
     params:
       operationids:
-      - GetConfluentResource
+      - UpdateCloudflareAccount
       order: 4
       unstable: []
       versions:
-      - v1
-    parent: fastly-integration-add-fastly-account
+      - v2
+    parent: cloudflare-integration
     url: '#mettre-a-jour-un-compte-cloudflare'
   - generated: true
     identifier: cloudflare-integration-get-cloudflare-account
@@ -4919,12 +4919,12 @@ menu:
     name: Supprimer un compte Fastly
     params:
       operationids:
-      - UpdateFastlyService
+      - UpdateConfluentResource
       order: 1
       unstable: []
       versions:
-      - v1
-    parent: fastly-integration-delete-fastly-account
+      - v2
+    parent: confluent-cloud
     url: '#mettre-a-jour-une-ressource-dans-un-compte-confluent'
   - generated: true
     identifier: confluent-cloud-get-resource-from-confluent-account
@@ -5043,12 +5043,12 @@ menu:
     name: Récupérer la liste de tous les services liés à un incident
     params:
       operationids:
-      - DeleteIncidentService
+      - ListContainerImages
       order: 1
       unstable: []
       versions:
-      - v1
-    parent: incident-teams-delete-an-existing-incident-team
+      - v2
+    parent: container-images
     url: '#recuperer-toutes-les-images-d-un-conteneur'
   - generated: true
     identifier: containers
@@ -5059,12 +5059,12 @@ menu:
     name: Mettre à jour une équipe liée à un incident existante
     params:
       operationids:
-      - DeleteIncidentService
+      - ListContainers
       order: 1
       unstable: []
       versions:
-      - v1
-    parent: incident-teams
+      - v2
+    parent: containers
     url: '#recuperer-tous-les-conteneurs'
   - generated: true
     identifier: dora-metrics
@@ -5075,13 +5075,13 @@ menu:
     name: Supprimer une équipe liée à un incident existante
     params:
       operationids:
-      - CreateIncidentService
+      - CreateDORAIncident
       order: 4
       unstable:
-      - v1
+      - v2
       versions:
-      - v1
-    parent: incident-teams-create-a-new-incident-team
+      - v2
+    parent: dora-metrics
     url: '#envoyer-un-evenement-d-incident-pour-des-metriques-dora'
   - generated: true
     identifier: dora-metrics-send-a-deployment-event-for-dora-metrics
@@ -5105,12 +5105,12 @@ menu:
     name: Incidents
     params:
       operationids:
-      - CreateIncidentTeam
+      - UpdateFastlyService
       order: 9
       unstable: []
       versions:
-      - v1
-    parent: incidents-create-an-incident-todo
+      - v2
+    parent: fastly-integration
     url: '#mettre-a-jour-un-service-fastly'
   - generated: true
     identifier: fastly-integration-get-fastly-service
@@ -5229,12 +5229,12 @@ menu:
     name: Créer, mettre à jour et supprimer les pièces jointes d'un incident
     params:
       operationids:
-      - UpdateIncidentAttachments
+      - UpdateIPAllowlist
       order: 2
       unstable: []
       versions:
-      - v1
-    parent: incidents-delete-an-existing-incident
+      - v2
+    parent: ip-allowlist
     url: '#mettre-a-jour-une-liste-d-adresses-IP-autorisees'
   - generated: true
     identifier: ip-allowlist-get-ip-allowlist
@@ -5257,13 +5257,13 @@ menu:
     name: Récupérer les détails d'un incident
     params:
       operationids:
-      - ListIncidentTeams
+      - UpdateIncidentService
       order: 3
       unstable:
-      - v1
+      - v2
       versions:
-      - v1
-    parent: incidents-get-a-list-of-incidents
+      - v2
+    parent: incident-services
     url: '#mettre-a-jour-un-service-lie-a-un-incident-existant'
   - generated: true
     identifier: incident-services-get-details-of-an-incident-service
@@ -5326,13 +5326,13 @@ menu:
     name: Accorder un rôle à une archive
     params:
       operationids:
-      - UpdateIncidentIntegration
+      - UpdateIncidentTeam
       order: 3
       unstable:
-      - v1
+      - v2
       versions:
-      - v1
-    parent: incidents-delete-an-incident-integration-metadata
+      - v2
+    parent: incident-teams
     url: '#mettre-a-jour-une-equipe-liee-a-un-incident-existante'
   - generated: true
     identifier: incident-teams-get-details-of-an-incident-team
@@ -5395,13 +5395,13 @@ menu:
     name: Créer une archive
     params:
       operationids:
-      - DeleteLogsArchive
+      - UpdateIncidentTodo
       order: 17
       unstable:
-      - v1
+      - v2
       versions:
-      - v1
-    parent: logs-restriction-queries-update-a-restriction-query
+      - v2
+    parent: incidents
     url: '#mettre-a-jour-un-todo-d-incident'
   - generated: true
     identifier: incidents-get-incident-todo-details
@@ -5633,12 +5633,12 @@ menu:
     name: Créer une requête de restriction
     params:
       operationids:
-      - DeleteRestrictionQuery
+      - AddReadRoleToArchive
       order: 7
       unstable: []
       versions:
-      - v1
-    parent: processes
+      - v2
+    parent: logs-archives
     url: '#accorder-un-role-a-une-archive'
   - generated: true
     identifier: logs-archives-list-read-roles-for-an-archive
@@ -5761,7 +5761,7 @@ menu:
       order: 4
       unstable: []
       versions:
-      - v1
+      - v2
     parent: logs-custom-destinations
     url: '#mettre-a-jour-une-destination-personnalisée'
   - generated: true
@@ -5821,12 +5821,12 @@ menu:
     name: Screenboards
     params:
       operationids:
-      - DeleteRestrictionQuery
+      - UpdateLogsMetric
       order: 4
       unstable: []
       versions:
-      - v1
-    parent: processes-get-all-processes
+      - v2
+    parent: logs-metrics
     url: '#mettre-a-jour-une-metrique-basee-sur-des-logs'
   - generated: true
     identifier: logs-metrics-get-a-log-based-metric
@@ -5885,13 +5885,13 @@ menu:
     name: Rechercher des événements RUM
     params:
       operationids:
-      - ListOpsgenieServices
+      - AddRoleToRestrictionQuery
       order: 7
       unstable:
-      - v1
+      - v2
       versions:
-      - v1
-    parent: restriction-policies-delete-a-restriction-policy
+      - v2
+    parent: logs-restriction-queries
     url: '#accorder-un-role-a-une-requete-de-restriction'
   - generated: true
     identifier: logs-restriction-queries-list-roles-for-a-restriction-query
@@ -6023,8 +6023,8 @@ menu:
       order: 4
       unstable: []
       versions:
-      - v1
-    parent: roles-list-permissions-for-a-role
+      - v2
+    parent: okta-integration
     url: '#mettre-a-jour-un-compte-okta'
   - generated: true
     identifier: okta-integration-get-okta-account
@@ -6083,12 +6083,12 @@ menu:
     name: Énumérer les autorisations d'un rôle
     params:
       operationids:
-      - ListOpsgenieServices
+      - UpdateOpsgenieService
       order: 4
       unstable: []
       versions:
-      - v1
-    parent: roles
+      - v2
+    parent: opsgenie-integration
     url: '#mettre-a-jour-un-objet-de-service-unique'
   - generated: true
     identifier: opsgenie-integration-get-a-single-service-object
@@ -6147,12 +6147,12 @@ menu:
     name: Créer un rôle
     params:
       operationids:
-      - DeleteRestrictionPolicy
+      - UpdatePowerpack
       order: 5
       unstable: []
       versions:
-      - v1
-    parent: roles-create-a-new-role-by-cloning-an-existing-role
+      - v2
+    parent: powerpack
     url: '#mettre-a-jour-un-powerpack'
   - generated: true
     identifier: powerpack-get-a-powerpack
@@ -6211,12 +6211,12 @@ menu:
     name: Supprimer une règle d'analyse
     params:
       operationids:
-      - DeleteScanningRule
+      - ListProcesses
       order: 1
       unstable: []
       versions:
-      - v1
-    parent: sensitive-data-scanner-create-scanning-group
+      - v2
+    parent: processes
     url: '#recuperer-tous-les-processus'
   - generated: true
     identifier: rum
@@ -6227,12 +6227,12 @@ menu:
     name: Mettre à jour un groupe d'analyse
     params:
       operationids:
-      - UpdateScanningGroup
+      - SearchRUMEvents
       order: 1
       unstable: []
       versions:
-      - v1
-    parent: account_management_saml
+      - v2
+    parent: rum
     url: '#rechercher-des-evenements-rum'
   - generated: true
     identifier: rum-get-a-list-of-rum-events
@@ -6327,12 +6327,12 @@ menu:
     name: Créer une clé d'application pour ce compte de service
     params:
       operationids:
-      - DeleteScanningGroup
+      - UpdateRestrictionPolicy
       order: 1
       unstable: []
       versions:
-      - v1
-    parent: service-definition
+      - v2
+    parent: restriction-policies
     url: '#mettre-a-jour-une-politique-de-restriction'
   - generated: true
     identifier: restriction-policies-get-a-restriction-policy
@@ -6367,12 +6367,12 @@ menu:
     name: Créer un groupe d'analyse
     params:
       operationids:
-      - CreateServiceAccount
+      - AddUserToRole
       order: 10
       unstable: []
       versions:
-      - v1
-    parent: spans-metrics-create-a-span-based-metric
+      - v2
+    parent: roles
     url: '#ajouter-un-utilisateur-a-un-role'
   - generated: true
     identifier: roles-get-all-users-of-a-role
@@ -6527,12 +6527,12 @@ menu:
     name: Équipes
     params:
       operationids:
-      - ListServiceDefinitions
+      - ListStandardPatterns
       order: 3
       unstable: []
       versions:
-      - v1
-    parent: teams-remove-a-user-from-a-team
+      - v2
+    parent: sensitive-data-scanner
     url: '#enumerer-les-patterns-standard'
   - generated: true
     identifier: sensitive-data-scanner-update-scanning-rule
@@ -6639,12 +6639,12 @@ menu:
     name: Supprimer un lien d'équipe
     params:
       operationids:
-      - CreateOrUpdateServiceDefinitions
+      - UpdateServiceAccountApplicationKey
       order: 2
       unstable: []
       versions:
-      - v1
-    parent: teams
+      - v2
+    parent: service-accounts
     url: '#modifier-une-cle-d-application-pour-ce-compte-de-service'
   - generated: true
     identifier: service-accounts-get-one-application-key-for-this-service-account
@@ -6715,12 +6715,12 @@ menu:
     name: Ajouter un utilisateur à une équipe
     params:
       operationids:
-      - CreateSpansMetric
+      - GetServiceDefinition
       order: 3
       unstable: []
       versions:
-      - v1
-    parent: teams-update-a-users-membership-attributes-on-a-team
+      - v2
+    parent: service-definition
     url: '#recuperer-une-definition-de-service-unique'
   - generated: true
     identifier: service-definition-delete-a-single-service-definition
@@ -6767,13 +6767,13 @@ menu:
     name: Supprimer une règle
     params:
       operationids:
-      - CreateTeamLink
+      - DeleteScorecardRule
       order: 3
       unstable:
-      - v1
+      - v2
       versions:
-      - v1
-    parent: teams-create-a-team
+      - v2
+    parent: service-scorecards
     url: '#supprimer-une-regle'
   - generated: true
     identifier: service-scorecards-create-a-new-rule
@@ -6836,12 +6836,12 @@ menu:
     name: Créer un lien d'équipe
     params:
       operationids:
-      - CreateTeamLink
+      - ListSpans
       order: 2
       unstable: []
       versions:
-      - v1
-    parent: teams-get-all-teams
+      - v2
+    parent: spans
     url: '#rechercher-des-spans'
   - generated: true
     identifier: spans-get-a-list-of-spans
@@ -6876,12 +6876,12 @@ menu:
     name: Supprimer une équipe
     params:
       operationids:
-      - GetTeamLinks
+      - UpdateSpansMetric
       order: 4
       unstable: []
       versions:
-      - v1
-    parent: teams-get-all-teams
+      - v2
+    parent: spans-metrics
     url: '#mettre-a-jour-une-metrique-basee-sur-des-spans'
   - generated: true
     identifier: spans-metrics-get-a-span-based-metric
@@ -6940,12 +6940,12 @@ menu:
     name: Créer une équipe
     params:
       operationids:
-      - CreateTeam
+      - GetUserMemberships
       order: 1
       unstable: []
       versions:
-      - v1
-    parent: teams-create-a-team
+      - v2
+    parent: teams
     url: '#récuperer-l-appartenance-d-un-utilisateur'
   - generated: true
     identifier: teams-update-permission-setting-for-team

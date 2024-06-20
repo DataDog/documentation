@@ -4,9 +4,6 @@ kind: documentation
 description: Advanced Configuration for Postgres Database Monitoring
 
 ---
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
-{{< /site-region >}}
 
 ## Handling many relations
 

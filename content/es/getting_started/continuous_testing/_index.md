@@ -94,7 +94,7 @@ Por separado, puedes utilizar la [Integración Datadog Synthetics frente a códi
 * Ejecuta tests de API HTTP y tests de navegador y ve tus resultados dentro de VS Code.
 * Prueba solo lo importante ejecutando los tests pertinentes al mismo tiempo.
 
-{{< img src="developers/ide_integrations/vscode/vscode-extension-demo.png" alt="vscode-extension-demo" style="width:100%;" >}}
+{{< img src="developers/ide_plugins/vscode/vscode-extension-demo.png" alt="vscode-extension-demo" style="width:100%;" >}}
 
 ### Ejecución de pruebas en VS Code
 
@@ -158,12 +158,12 @@ Consulta la [Documentación sobre paralelización][18] para obtener más detalle
 [4]: /es/mobile_app_testing/
 [5]: /es/synthetics/explorer?track=synbatch
 [6]: /es/continuous_testing/cicd_integrations/configuration/?tab=npm
-[7]: /es/developers/ide_integrations/
+[7]: /es/developers/ide_plugins/
 [8]: https://datadoghq.com
 [9]: /es/getting_started/synthetics/browser_test/#create-a-browser-test
 [10]: /es/continuous_testing/cicd_integrations/configuration/?tab=npm#install-the-package
 [11]: /es/continuous_testing/cicd_integrations/configuration/?tab=npm#reporters
-[12]: /es/developers/ide_integrations/vscode/
+[12]: /es/developers/ide_plugins/vscode/
 [13]: /es/getting_started/synthetics/private_location/
 [14]: /es/continuous_testing/
 [15]: /es/continuous_testing/explorer/?tab=testruns#create-a-search-query

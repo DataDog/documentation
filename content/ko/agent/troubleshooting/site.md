@@ -1,5 +1,4 @@
 ---
-kind: 설명서
 title: Agent 사이트 문제
 ---
 

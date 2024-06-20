@@ -1,8 +1,9 @@
 ---
-app_id: システム
+app_id: nfsstat
 app_uuid: 423f4b03-ce99-4ffc-a553-e522ebd451be
 assets:
   integration:
+    auto_install: false
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -13,6 +14,7 @@ assets:
       prefix: system.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 9164582
     source_type_name: Nfsstat
   logs:
     source: nfsstat
@@ -29,7 +31,7 @@ dependencies:
 display_on_public_website: true
 draft: false
 git_integration_title: nfsstat
-integration_id: システム
+integration_id: nfsstat
 integration_title: Nfsstat
 integration_version: 1.13.0
 is_public: true

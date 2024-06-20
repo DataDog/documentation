@@ -50,11 +50,10 @@ Data Streams Monitoring は、大規模なパイプラインを理解し管理�
 | ランタイム | 対応テクノロジー |
 |---|----|
 | Java/Scala | Kafka (セルフホスティング、Amazon MSK、Confluent Cloud / Platform)、RabbitMQ、HTTP、gRPC、Amazon SQS |
-| ブラウザエラーの収集 | Kafka (セルフホスティング、Amazon MSK、Confluent Cloud / Platform)、Amazon SQS |
+| ブラウザエラーの収集 | Kafka (セルフホスティング、Amazon MSK、Confluent Cloud / Platform)、RabbitMQ、Amazon SQS |
 | Android および AndroidTV のモニタリング | Kafka (セルフホスティング、Amazon MSK、Confluent Cloud / Platform)、RabbitMQ、Amazon SQS |
-| .NET | Kafka (セルフホスティング、Amazon MSK、Confluent Cloud / Platform)、Amazon SQS |
+| .NET | Kafka (セルフホスティング、Amazon MSK、Confluent Cloud / Platform)、RabbitMQ、Amazon SQS |
 | 収集データ | 全て ([手動インスツルメンテーション][1]で) |
-
 
 ## Data Streams Monitoring の調査
 
@@ -64,8 +63,10 @@ Data Streams Monitoring を構成すると、非同期システム内の任意�
 
 | メトリクス名 | 注目タグ | 説明 |
 |---|---|-----|
-| data_streams.latency | `start`、`end`、`env` | 指定された送信元から宛先までの経路のエンドツーエンドのレイテンシー |
+| data_streams.latency | `start`、`end`、`env` | 指定された送信元から宛先までの経路のエンドツーエンドのレイテンシー。 |
 | data_streams.kafka.lag_seconds | `consumer_group`、`partition`、`topic`、`env` | プロデューサーとコンシューマーとの間のラグ (秒単位)。Java Agent v1.9.0 以降が必要。 |
+| data_streams.payload_size | `consumer_group`、`topic`、`env` | 着信および発信のスループット (バイト単位)。|
+
 
 また、これらのメトリクスを任意のダッシュボードやノートブックでグラフ化し、視覚化することができます。
 
@@ -115,3 +116,4 @@ Datadog は、[統合サービスタグ付け][3]を通して、サービスを�
 [3]: /ja/getting_started/tagging/unified_service_tagging
 [4]: /ja/integrations/kafka/
 [5]: /ja/integrations/amazon_sqs/
+[6]: /ja/tracing/trace_collection/runtime_config/

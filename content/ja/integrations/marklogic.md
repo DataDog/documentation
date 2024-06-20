@@ -5,6 +5,7 @@ assets:
   dashboards:
     MarkLogic - Overview: assets/dashboards/overview.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -17,13 +18,14 @@ assets:
     - MarkLogic
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10124
     source_type_name: MarkLogic
   logs:
     source: marklogic
   monitors:
-    Marklogic high load: assets/recommended_monitors/marklogic_high_load.json
-    Marklogic long requests: assets/recommended_monitors/marklogic_long_requests.json
-    Marklogic low cache: assets/recommended_monitors/marklogic_low_cache.json
+    Marklogic high load: assets/monitors/marklogic_high_load.json
+    Marklogic long requests: assets/monitors/marklogic_long_requests.json
+    Marklogic low cache: assets/monitors/marklogic_low_cache.json
   saved_views:
     marklogic_processes: assets/saved_views/marklogic_processes.json
 author:
@@ -32,7 +34,7 @@ author:
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
-- data store
+- data stores
 - ログの収集
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/marklogic/README.md
@@ -41,7 +43,7 @@ draft: false
 git_integration_title: marklogic
 integration_id: marklogic
 integration_title: MarkLogic
-integration_version: 4.0.0
+integration_version: 4.2.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -58,7 +60,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::macOS
   - Supported OS::Windows
-  - Category::Data Store
+  - Category::Data Stores
   - Category::Log Collection
   configuration: README.md#Setup
   description: MarkLogic のデータベース、 フォレスト、ホスト、サーバーに関するメトリクスを追跡します。
@@ -68,17 +70,18 @@ tile:
   title: MarkLogic
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
 
 このチェックでは、Datadog Agent を通じて [MarkLogic][1] を監視します。MarkLogic Server は、運用データおよび分析データのためのデータハブとして設計されたマルチモデルデータベースです。
 
-## セットアップ
+## 計画と使用
 
 ホストで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][2]のガイドを参照してこの手順を行ってください。
 
-### インストール
+### インフラストラクチャーリスト
 
 MarkLogic チェックは [Datadog Agent][3] パッケージに含まれています。
 サーバーに追加でインストールする必要はありません。
@@ -88,7 +91,7 @@ MarkLogic チェックは [Datadog Agent][3] パッケージに含まれてい�
 API または Admin インターフェイスで、Datadog Agent に [`manage-user`][4] ロール権限が最小限のユーザーを作成します。
 `enable_health_service_checks` コンフィギュレーションを使用する予定の場合は、Datadog MarkLogic ユーザーにu少なくとも [`manage-admin`][5] ロールを付与します。
 
-##### API
+##### ヘルプ
 
 1. 特定の値でこのリクエストを調整し、Datadog ユーザーを作成します。
     ```shell
@@ -127,15 +130,15 @@ API または Admin インターフェイスで、Datadog Agent に [`manage-use
 
 4. 作成されたユーザーに十分な権限があることを確認するには、`<USER>` および `<PASSWORD>` を使用して `http://<HOSTNAME>:8002` (デフォルトポート) で認証します。
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
-#### ホスト
+#### メトリクスベース SLO
 
 1. MarkLogic のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `marklogic.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル `marklogic.d/conf.yaml` ファイル][8]を参照してください。コンフィグファイルのユーザー関連の設定については、作成した Datadog Agent ユーザーを使用します。
 
 2. [Agent を再起動します][9]。
 
-#### ログの収集
+#### 収集データ
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -165,21 +168,21 @@ _Agent バージョン 6.0 以降で利用可能_
 
 [Agent のステータスサブコマンドを実行][10]し、Checks セクションで `marklogic` を探します。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "marklogic" >}}
 
 
-### イベント
+### ヘルプ
 
 MarkLogic には、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 {{< get-service-checks-from-git "marklogic" >}}
 
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][13]までお問合せください。
 

@@ -19,7 +19,7 @@ Datadog インテグレーションを作成するには、[Agent インテグ�
 
 ### ダッシュボードの作成
 
-Datadog で [**Dashboards** > **Dashboard List**][12] に移動し、**+ New Dashboard** をクリックします。
+Datadog の [**Dashboard List**][12] から、**+ New Dashboard** をクリックします。
 
 {{< img src="dashboards/create_dashboard.png" alt="インテグレーション用のダッシュボードの作成" width="80%">}}
 

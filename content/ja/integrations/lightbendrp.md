@@ -19,6 +19,7 @@ short_description: Akka ベースのアプリケーションのアクターお�
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 {{< img src="integrations/lightbendrp/dashboard_lightbendrp.png" alt="Lightbend Reactive Platform ダッシュボード" popup="true">}}
 
 ## 概要

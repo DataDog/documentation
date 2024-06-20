@@ -10,7 +10,6 @@ further_reading:
 - link: /agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/
   tag: FAQ
   text: ¿Por qué debería instalar el Datadog Agent en mis instancias de nube?
-kind: documentación
 title: Empezando con el Agent
 ---
 

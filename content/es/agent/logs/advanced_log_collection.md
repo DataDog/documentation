@@ -6,7 +6,7 @@ description: Utiliza el Datadog Agent para recopilar tus logs y enviarlos a Data
 further_reading:
 - link: /logs/guide/how-to-set-up-only-logs/
   tag: Documentación
-  text: Utilizar el Datadog Agent solo para la recopilación de logs
+  text: Utiliza el Datadog Agent solo para la recopilación de logs
 - link: /logs/log_configuration/processors
   tag: Documentación
   text: Descubre cómo procesar tus logs
@@ -23,20 +23,19 @@ further_reading:
   tag: Documentación
   text: Logging without Limits*
 - link: /glossary/#tail
-  tag: Guías
-  text: Entrada del glosario de «supervisar»
-kind: documentación
+  tag: Glosario
+  text: Entrada del glosario para «supervisar»
 title: Configuraciones avanzadas de recopilación de logs
 ---
 
-Luego de establecer la [recopilación de logs][1], puedes personalizar la configuración de la recopilación:
+Después de establecer la [recopilación de logs][1], puedes personalizar la configuración de la recopilación:
 * [Filtrar logs](#filter-logs)
-* [Limpiar los datos confidenciales de tus logs](#scrub-sensitive-data-from-your-logs)
+* [Limpia los datos confidenciales de tus logs](#scrub-sensitive-data-from-your-logs)
 * [Agregar logs multilínea](#multi-line-aggregation)
 * [Copiar los ejemplos más utilizados](#commonly-used-log-processing-rules)
-* [Utilizar comodines para monitorizar directorios](#tail-directories-using-wildcards)
+* [Utiliza comodines para monitorizar los directorios](#tail-directories-using-wildcards)
 * [Especificar las codificaciones del archivo de logs](#log-file-encodings)
-* [Definir las reglas de procesamiento generales](#global-processing-rules)
+* [Define las reglas de procesamiento generales](#global-processing-rules)
 
 Para aplicar una regla de procesamiento a todos los logs que recopila el Datadog Agent, consulta la sección [Reglas de procesamiento generales](#global-processing-rules).
 
@@ -99,11 +98,10 @@ En un entorno de Docker, utiliza la etiqueta `com.datadoghq.ad.logs` en el **con
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-Para aplicar una configuración específica a un contenedor determinado, Autodiscovery identifica los contenedores por nombre, NO por imagen, e intenta hacer coincidir `<CONTAINER_IDENTIFIER>` con `.spec.containers[0].name`, no con `.spec.containers[0].image.`. Para configurar el uso de Autodiscovery a fin de recopilar los logs del contenedor en un `<CONTAINER_IDENTIFIER>` determinado dentro de tu pod, añade las siguientes anotaciones al parámetro `log_processing_rules` de tu pod:
+Para aplicar una configuración específica a un contenedor determinado, Autodiscovery identifica los contenedores por nombre, NO por imagen, e intenta hacer coincidir `<CONTAINER_IDENTIFIER>` con `.spec.containers[0].name`, no con `.spec.containers[0].image.`. Para configurar el uso de Autodiscovery con el fin de recopilar los logs del contenedor en un `<CONTAINER_IDENTIFIER>` determinado dentro de tu pod, añade las siguientes anotaciones al parámetro `log_processing_rules` de tu pod:
 
 ```yaml
 apiVersion: apps/v1
-kind: ReplicaSet
 metadata:
   name: cardpayment
 spec:
@@ -224,7 +222,6 @@ En un entorno de Kubernetes, utiliza la anotación de pod `ad.datadoghq.com` en 
 
 ```yaml
 apiVersion: apps/v1
-kind: ReplicaSet
 metadata:
   name: cardpayment
 spec:
@@ -260,7 +257,7 @@ spec:
 {{% /tab %}}
 {{< /tabs >}}
 
-## Limpiar los datos confidenciales de tus logs
+## Limpia los datos confidenciales de tus logs
 
 Si tus logs contienen información confidencial que es necesario ocultar, configura el Datadog Agent para limpiar secuencias confidenciales y utiliza el parámetro `log_processing_rules` en tu archivo de configuración con el tipo `mask_sequences`.
 
@@ -316,7 +313,6 @@ En un entorno de Kubernetes, utiliza la anotación de pod `ad.datadoghq.com` en 
 
 ```yaml
 apiVersion: apps/v1
-kind: ReplicaSet
 metadata:
   name: cardpayment
 spec:
@@ -419,7 +415,6 @@ En un entorno de Kubernetes, utiliza la anotación de pod `ad.datadoghq.com` en 
 
 ```yaml
 apiVersion: apps/v1
-kind: ReplicaSet
 metadata:
   name: postgres
 spec:
@@ -463,13 +458,13 @@ Más ejemplos:
 |--------------------------|---------------------------------------------------|
 | 14:20:15                 | `\d{2}:\d{2}:\d{2}`                               |
 | 11/10/2014               | `\d{2}\/\d{2}\/\d{4}`                             |
-| Thu Jun 16 08:29:03 2016 | `\w{3}\s+\w{3}\s+\d{2}\s\d{2}:\d{2}:\d{2}\s\d{4}` |
+| Jueves, 16 de junio de 2016 08:29:03 | `\w{3}\s+\w{3}\s+\d{2}\s\d{2}:\d{2}:\d{2}\s\d{4}` |
 | 20180228                 | `\d{8}`                                           |
 | 2020-10-27 05:10:49.657  | `\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}\.\d{3}`     |
 | {"date": "2018-01-02"    | `\{"date": "\d{4}-\d{2}-\d{2}`                    |
 
 ### Agregación multilínea automática
-A partir de la versión 7.37 del Agent, es posible habilitar `auto_multi_line_detection` para que el Agent pueda detectar [patrones de varias líneas habituales][3] de manera automática. 
+A partir de la versión 7.37 o posterior del Agent, es posible habilitar `auto_multi_line_detection` para que el Agent pueda detectar [patrones de varias líneas habituales][3] de manera automática. 
 
 Activa `auto_multi_line_detection` de forma general en el archivo `datadog.yaml`:
 
@@ -524,7 +519,6 @@ En un entorno de Docker, utiliza la etiqueta `com.datadoghq.ad.logs` en tu conte
 
 ```yaml
 apiVersion: apps/v1
-kind: ReplicaSet
 metadata:
   name: testApp
 spec:
@@ -552,7 +546,7 @@ spec:
 {{% /tab %}}
 {{< /tabs >}}
 
-Si se activa esta función y se abre un nuevo archivo de logs, el Agent intenta detectar un patrón. Durante este proceso, los logs se envían en forma de líneas únicas. Una vez alcanzado el umbral de detección, todos los futuros logs de ese origen se agregan con el patrón detectado, o bien como líneas únicas en caso de que no se encuentre ningún patrón. Como máximo, la detección tarda 30 segundos o lo que se tarde en detectar los primeros 500 logs (lo que ocurra antes).
+Si se activa esta función y se abre un nuevo archivo de logs, el Agent intenta detectar un patrón. Durante este proceso, los logs se envían en forma de líneas únicas. Una vez alcanzado el umbral de detección, todos los futuros logs de ese origen se agregan con el patrón detectado, o bien como líneas únicas en caso de que no se encuentre ningún patrón. Como máximo, la detección tarda 30 segundos o lo que se tarde en detectar los primeros 500 logs (lo que ocurra antes).
 
 **Nota**: Si puedes controlar el patrón de nombres del log rotado, asegúrate de que el archivo rotado sustituya al archivo activo anteriormente con ese mismo nombre. El Agent reutiliza un patrón detectado anteriormente en el archivo recién rotado para evitar tener que volver a ejecutar la detección.
 
@@ -564,7 +558,7 @@ Consulta las [preguntas frecuentes sobre las reglas de procesamiento de logs hab
 
 ## Supervisar directorios mediante comodines
 
-Si tus archivos de log se han etiquetado por fecha o si todos ellos se encuentran en el mismo directorio, configura el Datadog Agent para monitorizarlos todos y detectar de manera automática los nuevos mediante comodines en el atributo `path`. Si quieres excluir algunos archivos coincidentes con la ruta (`path`) seleccionada, inclúyelos en el atributo `exclude_paths`.
+Si tus archivos de log se han etiquetado por fecha o si todos ellos se encuentran almacenados en el mismo directorio, configura el Datadog Agent para monitorizarlos a todos y detectar de manera automática los nuevos mediante comodines en el atributo `path`. Si quieres excluir algunos archivos coincidentes con la ruta `path` seleccionada, inclúyelos en el atributo `exclude_paths`.
 
 * Al utilizar `path: /var/log/myapp/*.log`:
   * Habrá coincidencia con todos los archivos `.log` contenidos en el directorio `/var/log/myapp/`.
@@ -604,24 +598,24 @@ logs:
 
 En el ejemplo anterior, hay coincidencia con `C:\\MyApp\\MyLog.log` y se excluyen `C:\\MyApp\\MyLog.20230101.log` y `C:\\MyApp\\MyLog.20230102.log`.
 
-**Nota**: El Agent requiere permisos de lectura y ejecución en un directorio para mostrar la lista todos los archivos disponibles que contiene.
+**Nota**: El Agent requiere permisos de lectura y ejecución en un directorio para mostrar la lista de todos los archivos disponibles que contiene.
 **Nota2**: Los valores path y exclude_paths distinguen entre mayúsculas y minúsculas.
 
-## Supervisar primero los últimos archivos modificados
+## Supervisa primero los últimos archivos modificados
 
-A la hora de priorizar qué archivos supervisar, el Datadog Agent ordena los nombres de archivo de la ruta de directorio por orden lexicográfico inverso. Para ordenar los archivos por hora de modificación, define la opción de configuración`logs_config.file_wildcard_selection_mode` como `by_modification_time`.
+A la hora de priorizar qué archivos supervisar, el Datadog Agent ordena los nombres de archivo de la ruta de directorio por orden lexicográfico inverso. Para ordenar los archivos por hora de modificación, define la opción de configuración`logs_config.file_wildcard_selection_mode` con el valor `by_modification_time`.
 
-Esta opción resulta útil cuando el total de coincidencias de archivos de logs es superior a `logs_config.open_files_limit`. Al utilizar `by_modification_time`, los últimos archivos actualizados se supervisan primero en la ruta de directorio definida.
+Esta opción resulta útil cuando el total de coincidencias de archivos de logs es superior a `logs_config.open_files_limit`. Al utilizar `by_modification_time`, se garantiza que los últimos archivos actualizados se supervisan primero en la ruta de directorio definida.
 
 Para restablecer el comportamiento predeterminado, define la opción de configuración `logs_config.file_wildcard_selection_mode` con el valor `by_name`.
 
-Para usar esta función, necesitas la versión 7.40.0 del Agent o una posterior.
+Para usar esta función, se necesita la versión 7.40.0 o posterior del Agent.
 
 ## Codificaciones del archivo de logs
 
 De forma predeterminada, el Datadog Agent asume que los logs utilizan la codificación UTF-8. Si los logs de tu aplicación utilizan otra codificación, define el parámetro `encoding` con la configuración de logs.
 
-En la siguiente lista, se indican los valores de codificación compatibles. Si indicas un valor no compatible, el Agent lo ignorará y leerá el archivo como UTF-8.
+En la siguiente lista se indican los valores de codificación compatibles. Si indicas un valor no compatible, el Agent lo ignorará y leerá el archivo como UTF-8.
  * `utf-16-le`: UTF-16 little-endian (Datadog Agent **v6.23/v7.23**)
  * `utf-16-be`: UTF-16 big-endian (Datadog Agent **v6.23/v7.23**)
  * `shift-jis`: Shift-JIS (Datadog Agent **v6.34/v7.34**)
@@ -642,7 +636,7 @@ logs:
 
 ## Reglas generales de procesamiento
 
-A partir de la versión 6.10 del Datadog Agent, es posible definir las reglas de procesamiento `exclude_at_match`, `include_at_match` y `mask_sequences` de manera general en el [archivo de configuración principal][5] del Agent o mediante una variable de entorno:
+A partir de la versión 6.10 o superior del Datadog Agent, es posible definir las reglas de procesamiento `exclude_at_match`, `include_at_match` y `mask_sequences` de manera general en el [archivo de configuración principal][5] del Agent o mediante una variable de entorno:
 
 {{< tabs >}}
 {{% tab "Archivos de configuración" %}}
@@ -673,7 +667,7 @@ DD_LOGS_CONFIG_PROCESSING_RULES='[{"type": "mask_sequences", "name": "mask_user_
 {{% /tab %}}
 {{% tab "Helm" %}}
 
-Utiliza el parámetro `env` en el Helm chart para definir la variable de entorno `DD_LOGS_CONFIG_PROCESSING_RULES` y configurar las reglas de procesamiento generales. Por ejemplo:
+Utiliza el parámetro `env` en el gráfico de Helm para definir la variable de entorno `DD_LOGS_CONFIG_PROCESSING_RULES` y configurar las reglas de procesamiento generales. Por ejemplo:
 
 ```yaml
 env:
@@ -683,11 +677,11 @@ env:
 
 {{% /tab %}}
 {{< /tabs >}}
-Todos los logs recopilados por el Datadog Agent se ven afectados por las reglas generales de procesamiento.
+Todos los logs recopilados por el Datadog Agent se ven afectados por las reglas de procesamiento generales.
 
 **Nota**: El Datadog Agent no inicia el Collector de logs si existe un problema de formato en las reglas de procesamiento generales. Ejecuta el [subcomando de estado][6] del Agent para solucionar los problemas que encuentres.
 
-## Leer más
+## Lectura adicional
 
 {{< partial name="whats-next/whats-next.html" >}}
 

@@ -9,7 +9,6 @@ further_reading:
 - link: /agent/troubleshooting/
   tag: Agent のトラブルシューティング
   text: Agent のトラブルシューティング
-kind: ドキュメント
 title: Windows コンテナ問題
 ---
 

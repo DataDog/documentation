@@ -8,7 +8,7 @@ aliases:
 description: 'Send OpenTelemetry data to the OpenTelemetry Collector and Datadog Exporter'
 further_reading:
 - link: "https://opentelemetry.io/docs/collector/"
-  tag: "OpenTelemetry"
+  tag: "External Site"
   text: "Collector documentation"
 - link: "https://www.datadoghq.com/blog/ingest-opentelemetry-traces-metrics-with-datadog-exporter/"
   tag: "Blog"

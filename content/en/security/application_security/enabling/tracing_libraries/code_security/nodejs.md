@@ -12,7 +12,7 @@ further_reading:
       tag: "Documentation"
       text: "Adding user information to traces"
     - link: 'https://github.com/DataDog/dd-trace-js'
-      tag: 'GitHub'
+      tag: "Source Code"
       text: 'Node.js Datadog library source code'
     - link: "/security/default_rules/?category=cat-application-security"
       tag: "Documentation"
@@ -26,14 +26,14 @@ You can monitor application security for Node.js apps running in Docker, Kuberne
 
 {{% appsec-getstarted %}}
 
-## Enabling code security vulnerability detection
+## Enabling Code Security
 If your service runs a [tracing library version that supports code security vulnerability detection][3], enable the capability by setting the `DD_IAST_ENABLED=true` environment variable and restarting your service.
 
 
-To leverage code security vulnerability detection capabilities for your service:
+To leverage code-level vulnerability detection capabilities for your service:
 
 1. [Update your Datadog Agent][4] to at least version 7.41.1.
-2. Update your tracing library to at least the minimum version needed to turn on code security vulnerability detection. For details, see [ASM capabilities support][3].
+2. Update your tracing library to at least the minimum version needed to turn on Code Security. For details, see [ASM capabilities support][3].
 3. Add the `DD_IAST_ENABLED=true` environment variable to your application configuration.
 
    If you initialize the APM library on the command line using the `--require` option to Node.js:
@@ -100,7 +100,7 @@ Update your ECS task definition JSON file, by adding this in the environment sec
 {{< /tabs >}}
 
 4. Restart your service.
-5. To see Software Composition Analysis for code security vulnerabilities in action, browse your service and the code-level vulnerabilities appear in the [Vulnerability Explorer][5]. The `SOURCE` column shows the Code value.
+5. To see Code Security in action, browse your service and the code-level vulnerabilities will appear in the [Vulnerability Explorer][5]. The `SOURCE` column shows the Code value.
 
 {{< img src="/security/application_security/Code-Level-Vulnerability-Details.mp4" alt="Video showing Vulnerabilities tab, Code source, and inspecting the code-level vulnerability" video="true" >}}
 

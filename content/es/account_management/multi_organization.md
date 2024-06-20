@@ -17,15 +17,14 @@ further_reading:
 - link: /account_management/org_settings/cross_org_visibility
   tag: Documentación
   text: Visibilidad entre organizaciones
-kind: documentación
 title: Gestión de cuentas de varias organizaciones
 ---
 
 ## Información general
 
-Es posible gestionar varias organizaciones secundarias desde la cuenta de una organización principal. Esta opción la suelen utilizar los proveedores de servicio que tienen clientes que no deben tener acceso a los datos de los demás. 
+Es posible gestionar varias organizaciones secundarias desde la cuenta de una organización principal. Esta opción la suelen utilizar los proveedores de servicios que tienen clientes que no deben tener acceso a los datos de los demás. 
 
-La función de cuentas de varias organizaciones no está activada por defecto. Ponte en contacto con el [servicio de asistencia de Datadog][1] para activarla.
+La función de cuentas de varias organizaciones no está activada de forma predeterminada. Ponte en contacto con el [servicio de asistencia de Datadog][1] para activarla.
 
 ## Funcionalidades
 
@@ -54,15 +53,15 @@ La nueva organización secundaria hereda el plan de la organización principal y
 
 ### Contenido
 
-La incorporación de una nueva suborganización con un conjunto de dashboards y monitores de referencia puede realizarse mediante programación con la [API de Datadog][7] y herramientas como Terraform; consulta [Gestión de Datadog con Terraform][8]. Además, se pueden utilizar scripts para realizar copias de seguridad de dashboards y [monitores][9] existentes como código.
+La incorporación de una nueva suborganización con un conjunto de dashboards y monitores de referencia puede realizarse mediante programación con la [API de Datadog][7] y herramientas como Terraform. Para ello, consulta [Gestión de Datadog con Terraform][8]. Además, se pueden utilizar scripts para realizar copias de seguridad de dashboards y [monitores][9] existentes en forma de código.
 
 ### Subdominios personalizados
 
-La función de subdominios personalizados no está activada por defecto. Ponte en contacto con [el servicio de asistencia de Datadog][1] para activarla.
+La función de subdominios personalizados no está activada de forma predeterminada. Ponte en contacto con [el servicio de asistencia de Datadog][1] para activarla.
 
 Si eres miembro de varias organizaciones, los subdominios personalizados te ayudarán a identificar el origen de una alerta o notificación. Además, pueden permitirte cambiar inmediatamente a la organización asociada a ese subdominio.
 
-Por ejemplo, la URL `https://app.datadoghq.com/event/event?id=1` está asociada con un evento de la Organización A. Si un usuario es miembro tanto de la Organización A como de la Organización B, pero está visualizando Datadog dentro del contexto de la Organización B, esta URL devuelve un `404 Not Found error`. El usuario debe cambiar a la Organización A, utilizando el [menú de configuración de la cuenta de usuario][2], y luego volver a ingresar en la URL. Sin embargo, con subdominios personalizados, el usuario podría navegar a `https://org-a.datadoghq.com/event/event?id=1`, lo que cambiaría automáticamente el contexto del usuario a la Organización A y mostraría la página correcta.
+Por ejemplo, la URL `https://app.datadoghq.com/event/event?id=1` está asociada con un evento de la Organización A. Si un usuario es miembro tanto de la Organización A como de la Organización B, pero está visualizando Datadog dentro del contexto de la Organización B, esta URL devuelve un `404 Not Found error`. El usuario debe cambiar a la Organización A, utilizando el [menú de configuración de la cuenta de usuario][2], y luego volver a ingresar en la URL. Sin embargo, con subdominios personalizados, el usuario podría navegar hasta `https://org-a.datadoghq.com/event/event?id=1`, lo cual cambiaría automáticamente el contexto del usuario a la Organización A y mostraría la página correcta.
 
 **Nota**: Si tienes un subdominio de Datadog personalizado, edita manualmente los enlaces de la documentación de Datadog con tu nombre de subdominio. Por ejemplo, un enlace que redirija a `https://**app**.datadoghq.com/account/settings` pasará a ser `https://**<custom_sub-domain_name>**.datadoghq.com/account/settings`.
 
@@ -88,7 +87,7 @@ Para asegurarte de poder iniciar sesión en una organización secundaria creada 
 5. En **Select user's login methods** (Seleccionar métodos de inicio de sesión de usuario), marca la casilla **Password** (Contraseña).
 6. Asegúrate de que tu cuenta tiene una contraseña. Si necesitas ayuda para establecer una contraseña, ponte en contacto con [el servicio de asistencia de Datadog][1].
 
-Al seguir los pasos arriba indicados, podrás iniciar sesión en la cuenta principal utilizando una combinación de correo electrónico y contraseña. Una vez creada tu organización secundaria, también puedes iniciar en ella con tu correo electrónico y tu contraseña.
+Al seguir los pasos arriba indicados, podrás iniciar sesión en la cuenta principal utilizando una combinación de correo electrónico y contraseña. Una vez creada tu organización secundaria, también puedes iniciar sesión en ella con tu correo electrónico y tu contraseña.
 
 Si ya has creado la organización secundaria y no puedes continuar, podrás iniciar sesión si sigues el procedimiento.
 
@@ -139,7 +138,7 @@ Para ver los [detalles de uso][11] de una organización secundaria, puedes hacer
 
 ## Atribución de uso
 
-La organización principal puede visualizar el uso de las organizaciones secundarias mediante las claves de etiquetas (tags) existentes en la página [Asignación de uso][12]. Los administradores pueden pasar el ratón por encima de su nombre de usuario, en la parte inferior izquierda, y luego ir a: `Plan & Usage`--> `Usage Attribution`.
+La organización principal puede visualizar el uso de las organizaciones secundarias mediante las claves de etiquetas (tags) existentes en la página [Asignación de uso][12]. Los administradores pueden pasar el cursor sobre su nombre de usuario, en la parte inferior izquierda, y luego ir a: `Plan & Usage`--> `Usage Attribution`.
 
 Cuando se encuentra activada en el nivel de la organización principal, la atribución de uso muestra el uso agregado de todas las organizaciones. Esto puede resultar útil si quieres atribuir el uso de tus organizaciones secundarias a ciertos proyectos, equipos u otras agrupaciones.
 
@@ -153,15 +152,9 @@ Entre las funciones se incluyen:
 
 La atribución de uso también se puede activar en el nivel de la organización secundaria. Cuando se encuentra activada en este nivel, las etiquetas solo se aplican a esa organización secundaria en concreto, y solo se pueden ver en esta. Las etiquetas aplicadas en el nivel de una organización secundaria no tienen rollup y no se pueden ver en la organización principal.
 
-Nota: los siguientes tipos de uso no son compatibles en esta herramienta:
-
-* Eventos de logs indexados
-* Logs ingeridos
-* Tramos indexados (retenidos con filtros de retención)
-
 Usage Attribution (Atribución de uso) es una función avanzada incluida en el plan Enterprise. Para cualquier otro plan, ponte en contacto con tu representante de cuenta o escribe a <a href="mailto:success@datadoghq.com">success@datadoghq.com</a>.
 
-## Leer más
+## Lectura adicional
 
 {{< partial name="whats-next/whats-next.html" >}}
 

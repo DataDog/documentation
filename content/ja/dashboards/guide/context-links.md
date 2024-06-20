@@ -3,7 +3,6 @@ further_reading:
 - link: /dashboards/widgets
   tag: ドキュメント
   text: ダッシュボードウィジェット一覧
-kind: ガイド
 title: コンテキストリンク
 ---
 

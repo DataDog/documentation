@@ -27,10 +27,6 @@ algolia:
   tags: ['network device monitoring']
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Network Device Monitoring is not supported for this site.</div>
-{{< /site-region >}}
-
 ## Overview
 
 {{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/673243317/rendition/1080p/file.mp4?loc=external&signature=cadf7020caa33b97a62ecb01216b83e5d04b35a4ca3a1b8b0a22323b9e79d0c3" poster="/images/poster/ndm.png" >}}
@@ -62,7 +58,7 @@ Datadog provides SD-WAN (Software-Defined Wide Area Network) monitoring for sele
 Datadog supports the following vendors for SD-WAN network monitoring:
 
 - [Meraki SD-WAN][7] (public beta)
-- Cisco SD-WAN (private beta)
+- [Cisco SD-WAN][800] (private beta)
 
 ### Vendor profiles
 
@@ -284,4 +280,5 @@ The following vendor devices are supported with dedicated profiles. If a vendor 
 [210]: https://docs.datadoghq.com/integrations/snmp_juniper/
 [211]: https://docs.datadoghq.com/integrations/pan_firewall/
 [212]: https://docs.datadoghq.com/integrations/crest_data_systems_pfsense/
-[222]:https://docs.datadoghq.com/integrations/pan_firewall/
+[222]: https://docs.datadoghq.com/integrations/pan_firewall/
+[800]: https://docs.datadoghq.com/integrations/cisco_sdwan/

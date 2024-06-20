@@ -46,7 +46,7 @@ The value of the environment variable is a comma (or space) separated list of he
 {{% tab "Code" %}}
 
 ```cpp
-#include <datadog/tracer_config.h> 
+#include <datadog/tracer_config.h>
 #include <datadog/propagation_style.h>
 
 namespace dd = datadog::tracing;
@@ -81,10 +81,10 @@ int main() {
 
 If multiple extraction styles are enabled, the extraction attempt is done on the order those styles are configured and first successful extracted value is used.
 
-The default injection and extractions settings for the most recent versions of the library are `datadog,tracecontext`. If you're using Envoy or nginx upstream proxies, the default values are `tracecontext,datadog`.
+The default injection and extractions settings for the most recent versions of the library are `datadog,tracecontext`.
 
 ### Extract propagated context
-Propagation context extraction can be accomplished by implementing a custom `DictReader` interface and calling `Tracer::extract_span` or `Tracer::extract_or_create_span`. 
+Propagation context extraction can be accomplished by implementing a custom `DictReader` interface and calling `Tracer::extract_span` or `Tracer::extract_or_create_span`.
 
 Here is an implementation to extract propagation context from HTTP Headers:
 

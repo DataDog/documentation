@@ -20,7 +20,7 @@ integration_id: harness-cloud-cost-management
 integration_title: Harness クラウドコストマネジメント
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: harness_cloud_cost_management
 public_title: Harness クラウドコストマネジメント

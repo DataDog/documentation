@@ -1,6 +1,5 @@
 ---
 title: How can I graph the percentage change between an earlier value and a current value?
-kind: faq
 aliases:
     - /graphing/faq/how-can-i-graph-the-percentage-change-between-an-earlier-value-and-a-current-value
 ---

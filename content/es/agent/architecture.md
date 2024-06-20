@@ -7,7 +7,6 @@ further_reading:
 - link: /agent/configuration/
   tag: Documentación
   text: Configuración del Agent
-kind: Documentación
 title: Arquitectura del Agent
 ---
 

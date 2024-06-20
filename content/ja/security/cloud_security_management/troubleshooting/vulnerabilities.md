@@ -11,7 +11,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/datadog-container-image-view/
   tag: ブログ
   text: Datadog Container Monitoring のコンテナイメージによるトラブルシューティングワークフローの強化
-kind: ドキュメント
 title: Cloud Security Management Vulnerabilities のトラブルシューティング
 ---
 

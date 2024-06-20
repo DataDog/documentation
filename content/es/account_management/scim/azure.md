@@ -5,7 +5,6 @@ algolia:
   - proveedor de identidad
   - IdP
   - Azure AD
-kind: documentación
 title: Configurar el SCIM con Azure Active Directory
 ---
 

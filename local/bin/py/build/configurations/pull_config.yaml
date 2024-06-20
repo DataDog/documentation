@@ -47,7 +47,6 @@
             file_name: 'ansible.md'
             front_matters:
               title: Ansible
-              kind: documentation
               dependencies: ["https://github.com/ansible-collections/Datadog/blob/main/README.md"]
 
     - org_name: aws
@@ -158,7 +157,6 @@
             file_name: 'ansible_standalone_role.md'
             front_matters:
               title: Set up Ansible Using a Standalone Datadog Role
-              kind: documentation
               dependencies: ["https://github.com/DataDog/ansible-datadog/blob/main/README.md"]
 
       - repo_name: chef-datadog
@@ -173,7 +171,6 @@
             file_name: 'chef.md'
             front_matters:
               title: Chef
-              kind: documentation
               dependencies: ["https://github.com/DataDog/chef-datadog/blob/main/README.md"]
 
       - repo_name: heroku-buildpack-datadog
@@ -188,7 +185,6 @@
             file_name: 'heroku.md'
             front_matters:
               title: Datadog Heroku Buildpack
-              kind: documentation
               dependencies: ["https://github.com/DataDog/heroku-buildpack-datadog/blob/master/README.md"]
               aliases:
               - /developers/faq/how-do-i-collect-metrics-from-heroku-with-datadog
@@ -205,7 +201,6 @@
             file_name: 'puppet.md'
             front_matters:
               title: Puppet
-              kind: documentation
               dependencies: ["https://github.com/DataDog/puppet-datadog-agent/blob/main/README.md"]
 
       - repo_name: datadog-formula
@@ -220,7 +215,6 @@
             file_name: 'saltstack.md'
             front_matters:
               title: SaltStack
-              kind: documentation
               dependencies: ["https://github.com/DataDog/datadog-formula/blob/main/README.md"]
 
       - repo_name: dd-trace-rb
@@ -248,6 +242,17 @@
               - /tracing/setup_overview/setup/ruby
               - /tracing/trace_collection/ruby
               - /tracing/trace_collection/dd_libraries/ruby/
+        - action: pull-and-push-file
+          branch: release
+          globs:
+          - 'docs/legacy/GettingStarted-v1.md'
+          options:
+            dest_path: '/tracing/trace_collection/automatic_instrumentation/dd_libraries/'
+            file_name: 'ruby_v1.md'
+            front_matters:
+              dependencies: ["https://github.com/DataDog/dd-trace-rb/blob/release/docs/legacy/GettingStarted-v1.md"]
+              title: (Legacy) Tracing Ruby Applications
+              kind: documentation
 
       - repo_name: datadog-serverless-functions
         contents:
@@ -349,7 +354,6 @@
             front_matters:
               dependencies: ["https://github.com/DataDog/datadog-static-analyzer-circleci-orb/blob/main/README.md"]
               title: Static Analysis and CircleCI Orbs
-              kind: documentation
               description: Use Datadog and CircleCI to run Static Analysis jobs in a CI pipeline.
               aliases:
               - /continuous_integration/static_analysis/circleci_orbs
@@ -367,7 +371,6 @@
             front_matters:
               dependencies: ["https://github.com/DataDog/datadog-static-analyzer-github-action/blob/main/README.md"]
               title: Static Analysis and GitHub Actions
-              kind: documentation
               description: Use Datadog and GitHub to run Static Analysis jobs in a CI pipeline.
               aliases:
               - /continuous_integration/static_analysis/github_actions
@@ -397,7 +400,6 @@
             front_matters:
               dependencies: ["https://github.com/DataDog/datadog-sca-github-action/blob/main/README.md"]
               title: Software Composition Analysis and GitHub Actions
-              kind: documentation
               description: Use Datadog and GitHub to run Software Composition Analysis jobs in a CI pipeline.
 
       - repo_name: datadog-cdk-constructs
@@ -532,11 +534,12 @@
           globs:
             - "docs/en/getting-started.md"
           options:
-            dest_path: "/developers/"
+            dest_path: "/developers/faq/"
             file_name: "ui_extensions.md"
             front_matters:
               dependencies: ["https://github.com/DataDog/apps/blob/master/docs/en/getting-started.md"]
-              aliases: ["/developers/datadog_apps/"]
+              aliases: ["/developers/datadog_apps/", "/developers/ui_extensions"]
+              private: true
 
       - repo_name: datadog-agent
         contents:
@@ -552,6 +555,10 @@
           globs:
           - 'docs/cloud-workload-security/agent_expressions.md'
           - 'docs/cloud-workload-security/backend.md'
+          - 'docs/cloud-workload-security/backend_linux.md'
+          - 'docs/cloud-workload-security/backend_windows.md'
+          - 'docs/cloud-workload-security/linux_expressions.md'
+          - 'docs/cloud-workload-security/windows_expressions.md'
           options:
             dest_dir: '/security/threats/'
             path_to_remove: 'docs/cloud-workload-security/'
@@ -604,3 +611,15 @@
                 - link: 'tracing/trace_collection/dd_libraries/ruby'
                   tag: 'Documentation'
                   text: 'Instrument Your Application'
+          - action: pull-and-push-file
+            branch: release
+            globs:
+            - 'docs/legacy/Compatibility-v1.md'
+            options:
+              dest_path: '/tracing/trace_collection/compatibility/'
+              file_name: 'ruby_v1.md'
+              front_matters:
+                dependencies: ["https://github.com/DataDog/dd-trace-rb/blob/release/docs/legacy/Compatibility-v1.md"]
+                title: (Legacy) Ruby Compatibility Requirements
+                kind: documentation
+          

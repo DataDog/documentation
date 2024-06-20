@@ -12,7 +12,7 @@ integration_id: ''
 integration_title: Azure Recovery Service Vault
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: azure_recovery_service_vault
 public_title: Datadog-Azure Recovery Service Vault インテグレーション
