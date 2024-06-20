@@ -75,152 +75,6 @@ For example, the output of this query is ordered first by `ex3`, then `ex2`, and
 SELECT ex1, ex2, ex3 FROM table ORDER BY 3, 2, 1;
 {{< /code-block >}}
 
-## AGGR
-
-`AGGR` is a DDSQL statement type that operates on metrics data. Its primary goal is to make executing timeseries queries more natural, flexible, composable, and concise.
-
-### Syntax
-
-{{< code-block lang="text" >}}
-AGGR aggr_expression
-[ FROM metrics ]
-[ WHERE expression ]
-[ ROLLUP aggregator(value) ]
-[ BUCKET BY [ ALL | DEFAULT | INTERVAL 'interval' ] ]
-[ GROUP BY column1, column2, ... ]
-[ HAVING expression, ... ]
-[ ORDER BY expression [ ASC | DESC ] ]
-[ LIMIT [ ALL | expression ]
-  [ OFFSET expression] ]
-{{< /code-block >}}
-
-#### Placeholder types
-
-`aggr_expression`
-: An [`AGGR` function][2], such as `avg` or `max`.
-
-`aggregator`
-: An [`AGGR` function][2], such as `avg` or `max`.
-
-`ROLLUP`
-: A clause that lets you specify the time aggregator. Required if the aggregator is `sum`, `min`, `max`, `avg` or `count`. See the [`ROLLUP` documentation](#rollup).
-
-`BUCKET BY`
-: A clause on the `AGGR` statement that controls time aggregation. See the [`BUCKET BY` documentation](#bucket-by).
-
-`AGGR` statements can be nested to achieve multiple layers of aggregation. See [Multilayer aggregation](#multilayer-aggregation).
-
-### Examples
-
-The following query would return a table with the schema `[ timeseries ]`:
-
-{{< code-block lang="sql" >}}
-AGGR sum("metric.name")
-{{< /code-block >}}
-
-The following query would return a table with the schema `[ timeseries, tag1, tag2, tag3 ]`:
-
-{{< code-block lang="sql" >}}
-AGGR sum("metric.name") GROUP BY tag1, tag2, tag3
-{{< /code-block >}}
-
-### ROLLUP
-
-`ROLLUP` is a clause on the `AGGR` statement that lets you specify the time aggregator. 
-
-For example:
-
-{{< code-block lang="sql" >}}
-AGGR sum("system.load.1") ROLLUP count(value);
-{{< /code-block >}}
-
-The supported time aggregators are 
-
-- `sum(value)`
-- `avg(value)`
-- `min(value)`
-- `max(value)` 
-- `count(value)`
-
-`ROLLUP` can only be specified against point metric tables (and is required if the aggregator is `sum`, `min`, `max`, `avg` or `count`). It does not work for distribution metrics, or multilayer aggregation against subqueries or local tables. It also cannot be specified if the space aggregator is a combination aggregator like total or rate. 
-
-For example, the following queries would **not** work:
-
-{{< code-block lang="sql" >}}
-❌ AGGR sum("percentile.metric") ROLLUP count(value);
-❌ AGGR p99("percentile.metric") ROLLUP count(value);
-❌ AGGR total("system.load.1") ROLLUP count(value);
-❌ AGGR sum(SELECT ... ) ROLLUP count(value);
-❌ WITH localTable AS ... AGGR sum(localTable) ROLLUP count(value);
-{{< /code-block >}}
-
-### INTERPOLATE
-
-`INTERPOLATE` is a clause on the `AGGR` statement that controls interpolation, filling in missing values between buckets. It is equivalent to the [`fill()` dashboard function][1].
-
-`INTERPOLATE` can only be used when a `ROLLUP` is explicitly specified. The options for `INTERPOLATE` are
-
-- `INTERPOLATE NULL`
-- `INTERPOLATE LINEAR <OPTIONAL_INTERVAL>`
-- `INTERPOLATE LAST <OPTIONAL_INTERVAL>`
-- `INTERPOLATE ZERO <OPTIONAL_INTERVAL>`
-
-For `LINEAR`, `LAST`, and `ZERO`, if no interval is specified, it defaults to `300s`. The `OPTIONAL_INTERVAL` is a string containing an integer and a time unit, such as `"10 minutes"`, `"3h"`, or `"1 week"`.
-
-### BUCKET BY
-`BUCKET BY` is a clause on the AGGR statement that controls time aggregation. If no `BUCKET BY` is stated, the query defaults to the implicit `INTERVAL` runtime parameter (see the [`SET/SHOW` sections]). `BUCKET BY DEFAULT` also defaults to this.
-
-#### BUCKET BY INTERVAL
-`BUCKET BY INTERVAL` allows users to specify an explicit interval string. Valid interval strings are of the format `"<INTEGER> <UNIT>"` (for example, `"10 minutes"`). 
-
-Valid time units are:
-
-- `seconds`, `second`, `sec`, `s`
-- `minutes`, `minute`, `min`, `m`
-- `hours`, `hour`, `hr`, `h`
-- `days`, `day`, `d`
-- `weeks`, `week`, `w`
-- `months`, `month` ([multilayer aggregation queries](#multilayer-aggregation) only)
-- `years`, `year` ([multilayer aggregation queries](#multilayer-aggregation) only)
-
-#### BUCKET BY ALL
-
-`BUCKET BY ALL` chooses an interval that aggregates the metric down to one point for the entire query timeframe. It can only be used on [multilayer aggregation queries].
-
-The resulting column type is a timeseries with just one point in it. To access the point, use [time series functions].
-
-With `BUCKET BY ALL`, the timestamp of the resulting point is the start of the timeframe, and not necessarily aligned with metrics timestamps. For example, while a query with a `BUCKET BY INTERVAL '1d'` with a time frame of `April 15, 3:24 - April 16 3:24` returns points with timestamps of the start of each day, `BUCKET BY ALL` returns one point with a timestamp of `April 15, 3:24`.
-
-### Multilayer aggregation
-
-With `SELECT`, you can use the output of one statement as the input of another by using the subquery in the outer query's FROM clause:
-
-{{< code-block lang="sql" >}}
-SELECT avg(subquery.col) FROM (SELECT ... FROM table) subquery ...
-{{< /code-block >}}
-
-To re-aggregate a result from AGGR, the subquery is placed inside the aggregation function call, because these functions take tables as input:
-
-{{< code-block lang="sql" >}}
-AGGR sum(
-  AGGR sum("metric.name")
-  BUCKET BY INTERVAL '1d'
-  GROUP BY tag1, tag2
-) 
-BUCKET BY INTERVAL '1w'
-GROUP BY tag2
-{{< /code-block >}}
-
-In SQL, subqueries are written in the FROM clause, and individual columns themselves are referenced in the outer query (for example, in aggregator functions).
-
-In multilayer aggregation, the subquery is directly referenced in the aggregator function call:
-
-{{< code-block lang="sql" >}}
-AGGR sum(SELECT timeseries, group1, group2 FROM (...)) ...
-{{< /code-block >}}
-
-For multilayer aggregation to work, the inner query must return a table with the schema in the pattern of an AGGR statement: the first column must be a timeseries, and the remaining columns must be groups or tags.
-
 ## UNION
 
 `UNION` combines the results of two or more [DQL expressions][3] into a single output table.
@@ -237,7 +91,7 @@ DQL_expression UNION [ ALL ] DQL_expression ...
 #### Placeholder types
 
 `DQL_expression`
-: A query statement, such as a `SELECT` or `AGGR` statement.
+: A query statement, such as a `SELECT` statement.
 
 The `UNION` operator removes duplicate rows from the result. To retain duplicate rows, use `UNION ALL`:
 
@@ -265,7 +119,7 @@ WITH alias [ ( output, schema, column, names, ... ) ] AS ( DQL_expression ) [, .
 #### Placeholder types
 
 `DQL_expression`
-: A query statement, such as a `SELECT` or `AGGR` statement.
+: A query statement, such as a `SELECT` statement.
 
 Data modification statements like `INSERT`, `UPDATE`, and `DELETE` are not supported in `WITH`.
 

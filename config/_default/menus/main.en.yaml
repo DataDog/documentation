@@ -1352,16 +1352,11 @@ menu:
       parent: dashboards_ddsql_editor_reference
       identifier: dashboards_ddsql_editor_reference_window_functions
       weight: 11026
-    - name: AGGR Functions
-      url: dashboards/ddsql_editor/reference/aggr_functions
-      parent: dashboards_ddsql_editor_reference
-      identifier: dashboards_ddsql_editor_reference_aggr_functions
-      weight: 11027
     - name: Querying Tags
       url: dashboards/ddsql_editor/reference/tags
       parent: dashboards_ddsql_editor_reference
       identifier: dashboards_ddsql_editor_reference_tags
-      weight: 11028
+      weight: 11027
     - name: Guides
       url: dashboards/guide/
       parent: dashboards

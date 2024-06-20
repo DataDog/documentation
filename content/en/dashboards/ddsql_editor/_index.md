@@ -9,7 +9,7 @@ DDSQL Editor is in private beta.
 
 ## Overview
 
-With [DDSQL Editor][1], you can get deeper visibility into your infrastructure by querying your resources with natural language or with [DDSQL][2], a dialect of SQL with additional support for querying tags and aggregating metrics.
+With [DDSQL Editor][1], you can get deeper visibility into your infrastructure by querying your resources with natural language or with [DDSQL][2], a dialect of SQL with additional support for querying tags.
 
 {{< img src="dashboards/ddsql/query-result.png" alt="The result of a SQL query shown on the DDSQL page in Datadog" style="width:100%;" >}}
 
