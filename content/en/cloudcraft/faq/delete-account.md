@@ -1,6 +1,5 @@
 ---
 title: How do I delete my account?
-kind: faq
 ---
 
 You can delete your Cloudcraft account from inside the Cloudcraft application or by contacting their support team.

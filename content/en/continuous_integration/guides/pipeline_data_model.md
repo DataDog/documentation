@@ -1,6 +1,5 @@
 ---
 title: Pipeline Data Model And Execution Types 
-kind: guide
 description: Learn how Pipelines are modeled and what execution types are supported by CI Visibility.
 further_reading:
   - link: "/continuous_integration/pipelines"

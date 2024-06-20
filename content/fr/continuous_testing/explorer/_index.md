@@ -23,14 +23,14 @@ title: Explorateur de surveillance Synthetic et de tests en continu
 
 ## Présentation
 
-L'[explorateur][1] vous permet de visualiser l'ensemble des exécutions de tests et lots de tests CI associés à la **surveillance Synthetic** et aux **tests en continu**. 
+L'[Explorateur de résultats][1] vous permet de visualiser l'ensemble des exécutions de tests et lots de tests CI associés à la **surveillance Synthetic** et aux **tests en continu**. 
 
 {{< tabs >}}
-{{% tab "Lots de tests CI" %}}
-{{< img src="continuous_testing/explorer_ci_batches.png" alt="Recherchez et gérez vos lots de tests CI dans l'explorateur de surveillance Synthetic et de tests en continu" style="width:100%;">}}
+{{% tab "CI Batches" %}}
+{{< img src="continuous_testing/explorer_ci_batches_1.png" alt="Rechercher et gérer des lots CI dans lʼexplorateur de surveillance Synthetic et de tests en continu" style="width:100%;">}}
 {{% /tab %}}
-{{% tab "Exécutions de tests" %}}
-{{< img src="continuous_testing/explorer_test_runs.png" alt="Recherchez et gérez vos exécutions de tests dans l'explorateur de surveillance Synthetic et de tests en continu" style="width:100%;">}}
+{{% tab "Test Runs" %}}
+{{< img src="continuous_testing/explorer_test_runs_1.png" alt="Rechercher et gérer vos exécutions de tests dans lʼexplorateur de surveillance Synthetic et de tests en continu" style="width:100%;">}}
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -42,9 +42,9 @@ Cette fonctionnalité vous aide à accomplir ce qui suit :
 
 ## Créer une requête de recherche
 
-Accédez à [**UX Monitoring** > **Explorer**][1] et cliquez sur une requête de recherche prête à l'emploi pour consulter vos lots ou exécutions de tests et créer des visualisations.
+Accédez à [**Digital Experience > Synthetic Monitoring & Testing** > **Continuous Testing**][1] et cliquez sur une requête de recherche préconfigurée pour commencer à visualiser vos lots ou exécutions de tests et créer des visualisations.
 
-{{< img src="continuous_testing/explorer_search_query.png" alt="Requêtes de recherche prêtes à l'emploi disponibles dans l'explorateur" style="width:100%;">}}
+{{< img src="continuous_testing/explorer_search_query_1.png" alt="Requêtes de recherche préconfigurées disponibles dans lʼexplorateur" style="width:100%;">}}
 
 - Visualisez les tests ayant échoué dans un pipeline CI en appliquant le statut « blocking » comme filtre, puis vérifiez si ces tests bloquent vos nouvelles versions.
 - Analysez les tests ayant échoué avec des codes d'erreur HTTP afin d'identifier les tests API affichant des codes inattendus.
@@ -55,7 +55,7 @@ Pour en savoir plus, consultez la section [Syntaxe de recherche][5].
 
 ## Explorer les exécutions de test
 
-L'explorateur affiche toutes vos exécutions de tests issues de la [surveillance Synthetic][7] et des [tests en continu][8]. Chaque test correspond à une exécution de test pour un sous-type de test spécifiques, y compris les tentatives rapides. Cliquez sur un test dans l'explorateur pour accéder à la page des exécutions du test.
+L'explorateur de résultats affiche tous les tests effectués à partir de [la surveillance Synthetic][7] et des [tests en continu][8]. Chaque test correspond à une exécution de test pour un sous-type de test particulier, y compris les tentatives rapides. Cliquez sur un test dans l'explorateur de résultats pour accéder à la page d'exécution du test.
 
 {{< img src="continuous_testing/api_test_run.png" alt="Page détaillée des exécutions du test API" style="width:100%;">}}
 
@@ -67,15 +67,19 @@ Pour en savoir plus sur les exécutions de tests, consultez la section [Recherch
 
 ## Explorer les lots de tests
 
-L'explorateur affiche les lots de tests exécutés par la [fonctionnalité de test en continu et votre fournisseur CI/CD][2]. Chaque lot correspond à un appel de l'API Datadog (par le biais de l'une de vos [intégrations CI/CD][2], du package NPM [datadog-ci][2] ou directement de l'endpoint de l'API) et déclenche une ou plusieurs exécutions de tests. 
+L'explorateur de résultats affiche des lots de tests exécutés par [les tests continus et votre fournisseur CI/CD][2]. Chaque lot correspond à un appel de l'API Datadog (par le biais de l'une de vos [intégrations CI/CD][2], du package NPM [datadog-ci][3] ou directement de l'endpoint de l'API) et déclenche une ou plusieurs exécutions de tests. 
 
-{{< img src="continuous_testing/open_sidepanel.png" alt="Volet latéral dans l'explorateur de résultats CI" style="width:100%;">}}
+{{< img src="continuous_testing/ci_execution_side_panel.png" alt="Volet latéral pour un lot CI dʼexécutions de tests dans lʼexplorateur de surveillance Synthetic et de tests en continu" style="width:100%;">}}
 
 1. Cliquez sur un lot pour ouvrir un volet latéral contenant les métadonnées CI/CD du lot et les résultats des tests. 
 2. Explorez les exécutions de tests effectuées dans le cadre du lot et identifiez les tests ayant échoué. 
 3. Cliquez sur un test qui a échoué pour consulter la page **Test Result** détaillée et identifier l'origine du problème.
 
 Pour en savoir plus sur les lots de tests, consultez la section [Rechercher des lots de tests][4].
+
+## Exporter
+
+Exportez votre vue en tant que [vue enregistrée][9] dans l'Explorateur de surveillance Synthetic et de résultats de tests
 
 ## Pour aller plus loin
 
@@ -89,3 +93,4 @@ Pour en savoir plus sur les lots de tests, consultez la section [Rechercher des 
 [6]: /fr/continuous_testing/explorer/search_runs/
 [7]: /fr/synthetics/
 [8]: /fr/continuous_testing/
+[9]: /fr/continuous_testing/explorer/saved_views/

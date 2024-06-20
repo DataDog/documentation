@@ -1,6 +1,5 @@
 ---
 title: Attacker Explorer
-kind: documentation
 disable_toc: false
 further_reading:
 - link: "/security/application_security/threats/protection"

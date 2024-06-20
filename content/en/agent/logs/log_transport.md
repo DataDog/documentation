@@ -1,6 +1,5 @@
 ---
 title: Agent Transport for Logs
-kind: documentation
 description: Use the Datadog Agent to collect your logs and send them to Datadog
 further_reading:
 - link: "agent/logs/advanced_log_collection/#filter-logs"
