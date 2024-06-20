@@ -8,7 +8,7 @@ Add the configuration details for the MongoDB check from previous step in the `c
 
 ```shell
 export DD_API_KEY=<DD_API_KEY>
-export DD_AGENT_VERSION=7.55.0~dbm~mongo~0.1
+export DD_AGENT_VERSION=7.55.0-dbm-mongo-1.0
 
 docker run -e "DD_API_KEY=${DD_API_KEY}" \
   -v /var/run/docker.sock:/var/run/docker.sock:ro \
@@ -29,7 +29,7 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
       }]
     }
   }' \
-  datadog/agent-dev:${DD_AGENT_VERSION}
+  datadog/agent:${DD_AGENT_VERSION}
 ```
 
 ### Validate
