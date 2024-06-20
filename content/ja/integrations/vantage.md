@@ -19,7 +19,7 @@ integration_id: vantage
 integration_title: Vantage
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 legal_terms:
   eula: assets/terms-of-service.pdf
 manifest_version: 2.0.0

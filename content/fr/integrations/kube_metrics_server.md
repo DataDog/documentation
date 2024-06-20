@@ -20,7 +20,7 @@ guid: 7a477937-4db8-4277-bd58-9e56ac064185
 integration_id: kube-metrics-server
 integration_title: "Kubernetes\_Metrics\_Server"
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: kube_metrics_server.

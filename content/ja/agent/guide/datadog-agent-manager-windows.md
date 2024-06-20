@@ -3,7 +3,6 @@ further_reading:
 - link: /agent/basic_agent_usage/windows/
   tag: ドキュメント
   text: Windows Agent の基本的なエージェントの利用方法
-kind: ガイド
 title: Windows 用 Datadog Agent Manager
 ---
 

@@ -7,7 +7,6 @@ algolia:
   - 그룹 정책
 aliases:
 - /ko/agent/faq/windows-agent-ddagent-user/
-kind: 가이드
 title: Datadog Windows 에이전트 사용자
 ---
 

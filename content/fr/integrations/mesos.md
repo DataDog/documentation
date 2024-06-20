@@ -4,7 +4,7 @@ aliases:
 - /fr/integrations/mesos_slave/
 integration_title: Mesos
 is_public: true
-kind: integration
+custom_kind: integration
 short_description: Surveillez l'utilisation des ressources du cluster, le nombre d'instances
   slave et master, les différents statuts des tâches, et plus encore. and more.
 ---

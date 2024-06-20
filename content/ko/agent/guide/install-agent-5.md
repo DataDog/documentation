@@ -3,7 +3,6 @@ further_reading:
 - link: /agent/basic_agent_usage/
   tag: 설명서
   text: 기본 에이전트 사용
-kind: 가이드
 title: Datadog 에이전트 5 설치
 ---
 

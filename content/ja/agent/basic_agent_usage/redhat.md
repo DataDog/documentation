@@ -17,7 +17,6 @@ further_reading:
 - link: /agent/guide/network#configure-ports
   tag: Documentation
   text: インバウンドポートの構成
-kind: documentation
 platform: Red Hat
 title: Red Hat 用 Agent の基本的な使用方法
 ---

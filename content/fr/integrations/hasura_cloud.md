@@ -23,7 +23,7 @@ integration_id: hasura-cloud
 integration_title: Hasura Cloud
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: support@hasura.io
 manifest_version: 1.0.0
 metric_prefix: hasura_cloud.

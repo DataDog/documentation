@@ -2,7 +2,6 @@
 aliases:
 - /fr/account_management/billing/advanced_usage_reporting/
 - /fr/account_management/billing/custom_usage_reporitng/
-kind: documentation
 title: Attribution de l'utilisation
 ---
 

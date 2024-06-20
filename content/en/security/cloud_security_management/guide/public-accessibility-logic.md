@@ -1,6 +1,5 @@
 ---
 title: How Datadog Determines if Resources are Publicly Accessible
-kind: guide
 further_reading:
 - link: "/security/cloud_security_management/misconfigurations/"
   tag: "Documentation"

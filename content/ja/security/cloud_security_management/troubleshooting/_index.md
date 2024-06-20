@@ -1,6 +1,5 @@
 ---
 disable_toc: true
-kind: ドキュメント
 title: Cloud Security Management のトラブルシューティング
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: SaaS Cost Integrations
-kind: documentation
 is_beta: true
 private: true
 disable_toc: false

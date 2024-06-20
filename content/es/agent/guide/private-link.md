@@ -6,7 +6,6 @@ further_reading:
 - link: /integrations/amazon_web_services/#log-collection
   tag: Documentación
   text: Recopilar logs de tus <txprotected>servicios</txprotected> AWS
-kind: guía
 title: Conectarse a Datadog a través de PrivateLink de AWS
 ---
 
