@@ -1,4 +1,4 @@
-To configure the Agent to monitor a MongoDB replica set, the agent needs to connect to all members (including arbiter) of the replica set.
+To configure the Agent to monitor a MongoDB replica set, the Agent needs to connect to all members (including arbiter) of the replica set.
 Use the following configuration block as an example to configure the Agent to connect to a replica set member:
 
 ```yaml

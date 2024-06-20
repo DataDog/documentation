@@ -9,9 +9,9 @@ further_reading:
 
 ---
 
-Database Monitoring provides deep visibility into your MongoDB databases by exposing database metrics, operation samples, explain plans and events.
+Database Monitoring provides deep visibility into your MongoDB databases by exposing database metrics, operation samples, explain plans, and events.
 
-Do the following steps to enable Database Monitoring with your database:
+Do the following steps to enable Database Monitoring for your database:
 
 1. [Grant the Agent access to your MongoDB Atlas Cluster](#grant-the-agent-access-to-your-mongodb-atlas-cluster)
 2. [Install and configure the Agent](#install-and-configure-the-agent)
@@ -51,11 +51,11 @@ The Datadog Agent requires read-only access to the MongoDB Atlas Cluster in orde
 
 ## Install and configure the Agent
 
-To monitor your MongoDB Atlas Cluster, you need to install and configure the Datadog Agent on a host that can remotely access your MongoDB Atlas Cluster. This host can be a Linux host, a Docker container, or a Kubernetes pod.
+To monitor your MongoDB Atlas Cluster, you need to install and configure the Datadog Agent on a host that can [remotely access][1] your MongoDB Atlas Cluster. This host can be a Linux host, a Docker container, or a Kubernetes pod.
 
 ### Get the individual MongoDB instance hostname and port from the SRV connection string
 
-Applications usually connect to MongoDB Atlas using an SRV connection string. However the Datadog Agent must connect directly to the individual MongoDB instance being monitored. If the Agent connects to different MongoDB instance while it is running (as in the case of failover, load balancing, and so on), the Agent calculates the difference in statistics between two hosts, producing inaccurate metrics.
+Applications usually connect to MongoDB Atlas using an SRV connection string, but the Datadog Agent must connect directly to the individual MongoDB instance being monitored. If the Agent connects to different MongoDB instance while it is running (as in the case of failover, load balancing, and so on), the Agent calculates the difference in statistics between two hosts, producing inaccurate metrics.
 
 To get the individual MongoDB instance hostname and port, you can use the `dig` command to resolve the SRV connection string:
 
@@ -138,7 +138,7 @@ In this example, the individual MongoDB instances for shard-0 are `XXXXX-00-00.4
 
 ### Install the beta version of the Datadog Agent
 
-The Database Monitoring feature for MongoDB is available in the beta version of the Datadog Agent. To install the beta version of the Datadog Agent, follow the instructions for your environment:
+Database Monitoring for MongoDB is available in the beta version of the Datadog Agent. To install the beta version of the Datadog Agent, follow the instructions for your environment:
 
 {{< tabs >}}
 {{% tab "Linux Host" %}}
@@ -152,7 +152,7 @@ The Database Monitoring feature for MongoDB is available in the beta version of 
 {{% /tab %}}
 {{< /tabs >}}
 
-### Create configuration file
+### Create the configuration file
 
 {{< tabs >}}
 {{% tab "Replica Set" %}}
@@ -176,3 +176,5 @@ The Database Monitoring feature for MongoDB is available in the beta version of 
 {{% dbm-mongodb-agent-setup-kubernetes %}}
 {{% /tab %}}
 {{< /tabs >}}
+
+[1]: /database_monitoring/architecture/#cloud-managed-databases

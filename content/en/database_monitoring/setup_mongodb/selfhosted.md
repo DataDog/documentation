@@ -9,9 +9,9 @@ further_reading:
 
 ---
 
-Database Monitoring provides deep visibility into your MongoDB databases by exposing database metrics, operation samples, explain plans and events.
+Database Monitoring provides deep visibility into your MongoDB databases by exposing database metrics, operation samples, explain plans, and events.
 
-Do the following steps to enable Database Monitoring with your database:
+Do the following steps to enable Database Monitoring for your database:
 
 1. [Grant the Agent access to your MongoDB instances](#grant-the-agent-access-to-your-mongodb-instances)
 2. [Install and configure the Agent](#install-and-configure-the-agent)
@@ -49,7 +49,7 @@ db.createUser({
 })
 ```
 
-Grant addtionnal permissions to the `datadog` user in the databases you want to monitor:
+Grant additional permissions to the `datadog` user in the databases you want to monitor:
 
 ```shell
 db.grantRolesToUser("datadog", [
@@ -151,7 +151,7 @@ db.grantRolesToUser("datadog", [
 
 ## Install and configure the Agent
 
-It's recommended to install the agent directly on the MongoDB host as that enables the agent to collect a variety of system telemetry (CPU, memory, disk, network) in addition to MongoDB specific telemetry.
+It's recommended to install the Agent directly on the MongoDB host as that enables the agent to collect a variety of system telemetry (CPU, memory, disk, network) in addition to MongoDB specific telemetry.
 
 ### Install the beta version of the Datadog Agent
 

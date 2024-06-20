@@ -1,4 +1,4 @@
-To configure the Agent to monitor a MongoDB sharded cluster, the agent needs to connect to the Mongos router(s) and all members of the shards. If you have multiple Mongos routers, you can configure the Agent to connect to them for load balancing.
+To configure the Agent to monitor a MongoDB sharded cluster, the Agent needs to connect to the Mongos router(s) and all members of the shards. If you have multiple Mongos routers, you can configure the Agent to connect to them for load balancing.
 Use the following configuration block as an example to configure the Agent to connect to a Mongos router:
 
 ```yaml
