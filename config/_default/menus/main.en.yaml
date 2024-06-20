@@ -2814,26 +2814,31 @@ menu:
       parent: custom_instrumentation
       identifier: custom_instrumentation_dotnet
       weight: 2028
+    - name: Android
+      url: tracing/trace_collection/custom_instrumentation/android
+      parent: custom_instrumentation
+      identifier: custom_instrumentation_android
+      weight: 2029
     - name: iOS
       url: tracing/trace_collection/custom_instrumentation/ios
       parent: custom_instrumentation
       identifier: custom_instrumentation_ios
-      weight: 2029
+      weight: 2030
     - name: Rust
       url: tracing/trace_collection/custom_instrumentation/rust
       parent: custom_instrumentation
       identifier: custom_instrumentation_rust
-      weight: 2030
+      weight: 2031
     - name: Swift
       url: tracing/trace_collection/custom_instrumentation/swift
       parent: custom_instrumentation
       identifier: custom_instrumentation_swift
-      weight: 2031
+      weight: 2032
     - name: Elixir
       url: tracing/trace_collection/custom_instrumentation/elixir
       parent: custom_instrumentation
       identifier: custom_instrumentation_elixir
-      weight: 2032
+      weight: 2033
     - name: Library Compatibility
       url: tracing/trace_collection/compatibility/
       parent: tracing_trace_collection
