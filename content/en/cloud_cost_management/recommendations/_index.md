@@ -12,10 +12,6 @@ further_reading:
 <div class="alert alert-warning">Cloud Cost Management is not supported for this site.</div>
 {{< /site-region >}}
 
-{{< callout url="#" btn_hidden="true" >}}
-Cloud Cost Recommendations is in public beta with support for AWS, and is automatically enabled if you have set up <a href="/cloud_cost_management/">Cloud Cost Management</a>.
-{{< /callout >}}
-
 ## Overview
 
 [Cloud Cost Recommendations][1] provide recommendations on reducing your cloud spending by optimizing the usage of your cloud resources.
