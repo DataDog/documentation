@@ -180,7 +180,7 @@ The [Cisco Umbrella Content Pack][39] includes:
 
 ### nginx
 
-Monitor and respond to web-based risks with Nginx
+Monitor and respond to web-based risks with Nginx.
 
 The [nginx Content Pack][41] includes:
 - [Detection Rules][42]
