@@ -3,7 +3,6 @@ aliases:
 - /fr/account_management/billing/profiler/
 - /fr/account_management/billing/apm_distributed_tracing/
 - /fr/account_management/billing/apm_tracing_profiling/
-kind: documentation
 title: Tarification d'APM
 ---
 

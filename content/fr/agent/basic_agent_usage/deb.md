@@ -1,6 +1,5 @@
 ---
 title: Utilisation de base de l'Agent pour Debian
-kind: documentation
 platform: Debian
 aliases:
   - /fr/guides/basic_agent_usage/deb/

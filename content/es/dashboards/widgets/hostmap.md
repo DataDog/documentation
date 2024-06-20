@@ -6,7 +6,6 @@ further_reading:
 - link: /dashboards/graphing_json/
   tag: Documentación
   text: Creación de dashboards con JSON
-kind: documentación
 title: Widget del mapa de host
 widget_type: Mapa de host
 ---
