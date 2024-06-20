@@ -24,15 +24,6 @@ After beta access has been granted in your Datadog organization, Universal Servi
 
 Universal Service Monitoring can discover the following third-party API endpoints: Jira, Slack, Auth0, Splunk, HubSpot, Intercom, Stripe, SendGrid, Braintree, Mapbox, Twitter (X), Palo Alto Networks, TowerData, SoundCloud, Amplitude, Render, Mixpanel, GitHub, and OpenAI.
 
-
-## Additional protocols and methods of traffic encryption
-
-Request access and ensure your Datadog Agent is upgraded to at least version 7.49.0 to gain access to the following features.
-
-gRPC and HTTP2
-: Universal Service Monitoring decodes gRPC and HTTP2 protocols.
-
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}

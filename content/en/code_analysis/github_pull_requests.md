@@ -1,6 +1,5 @@
 ---
 title: GitHub Pull Requests
-kind: documentation
 description: Learn how to use Code Analysis in GitHub pull requests.
 aliases:
 - /static_analysis/github_pull_requests

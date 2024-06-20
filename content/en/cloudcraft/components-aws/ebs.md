@@ -1,6 +1,5 @@
 ---
 title: "EBS Component"
-kind: documentation
 ---
 ## Overview
 

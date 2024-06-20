@@ -1,6 +1,5 @@
 ---
 title: How to graph percentiles in Datadog?
-kind: guide
 aliases:
   - /graphing/faq/how-to-graph-percentiles-in-datadog
   - /graphing/guide/how-to-graph-percentiles-in-datadog

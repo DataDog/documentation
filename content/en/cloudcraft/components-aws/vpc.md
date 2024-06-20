@@ -1,6 +1,5 @@
 ---
 title: "VPC Component"
-kind: documentation
 ---
 ## Overview
 

@@ -4,7 +4,6 @@ further_reading:
   tag: ドキュメント
   text: Datadog サービスカタログ
 is_beta: true
-kind: ドキュメント
 title: API への所有者の割り当て
 ---
 
