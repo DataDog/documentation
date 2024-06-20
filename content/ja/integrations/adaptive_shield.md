@@ -28,7 +28,7 @@ integration_id: adaptive-shield
 integration_title: Adaptive Shield
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: adaptive_shield
 public_title: Adaptive Shield

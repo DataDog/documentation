@@ -2,7 +2,6 @@
 aliases:
 - /fr/developers/faq/access-your-support-ticket
 - /fr/account_management/faq/access-your-support-ticket
-kind: documentation
 title: Accéder à votre ticket d'assistance
 ---
 

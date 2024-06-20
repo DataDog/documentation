@@ -34,7 +34,7 @@ integration_id: superwise
 integration_title: Superwise
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: superwise
 public_title: Superwise

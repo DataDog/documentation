@@ -1,5 +1,4 @@
 ---
-kind: ドキュメント
 title: AWS アカウントを Cloudcraft に接続する
 ---
 

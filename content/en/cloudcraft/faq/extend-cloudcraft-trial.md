@@ -1,6 +1,5 @@
 ---
 title: Can you extend my Cloudcraft Pro trial?
-kind: faq
 ---
 
 Yes, in most cases, we can! [Get in touch with our support team][1] and they can arrange that for you.

@@ -31,7 +31,7 @@ integration_id: flume
 integration_title: flume
 integration_version: 0.0.1
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: flume
 public_title: flume

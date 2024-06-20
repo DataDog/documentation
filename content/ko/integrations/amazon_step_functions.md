@@ -13,7 +13,7 @@ integration_id: ''
 integration_title: AWS Step Functions
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: amazon_step_functions
 public_title: Datadog-AWS 스텝 함수 통합

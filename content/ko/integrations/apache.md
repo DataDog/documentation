@@ -49,7 +49,7 @@ integration_id: apache
 integration_title: Apache
 integration_version: 4.5.0
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: apache
 public_title: Apache

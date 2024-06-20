@@ -132,7 +132,7 @@ For a detailed dashboard of this resource, click the View Dashboard in the top r
 
 _For the Resource Utilization page, see [Resource Utilization][13]_.
 
-Within the Kubernetes Explorer, tab you can explore a selection of resource utilization metrics.
+Within the Kubernetes Explorer tab, you can explore a selection of resource utilization metrics.
 
 {{< img src="infrastructure/livecontainers/orch_ex_resource_utilization.png" alt="Container Resource Utilization" style="width:80%;">}}
 
@@ -315,7 +315,7 @@ These metrics are calculated at the time of collection, based on the average val
 
 - `metric_name` is an available metric (see below)
 - `comparator` is a supported [comparator](#comparator)
-- and `numeric_value` is a floating poing value.
+- and `numeric_value` is a floating point value.
 
 For these workload resources, the following metric names are available:
 

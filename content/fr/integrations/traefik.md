@@ -20,7 +20,7 @@ integration_id: traefik
 integration_title: Traefik
 integration_version: 1.0.0
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: '@renaudhager'
 manifest_version: 1.0.0
 metric_prefix: traefik.

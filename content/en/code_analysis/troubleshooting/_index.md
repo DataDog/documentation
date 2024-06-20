@@ -1,6 +1,5 @@
 ---
 title: Code Analysis Troubleshooting
-kind: documentation
 description: Learn how to troubleshoot common Code Analysis issues and how to engage with Support.
 further_reading:
 - link: "/code_analysis/"

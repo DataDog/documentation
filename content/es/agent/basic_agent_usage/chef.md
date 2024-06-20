@@ -1,7 +1,6 @@
 ---
 dependencies:
 - https://github.com/DataDog/chef-datadog/blob/main/README.md
-kind: documentación
 title: Chef
 ---
 Las recetas del Datadog Chef se usan para desplegar los componentes y la configuración de Datadog automáticamente. El cookbook es compatible con:

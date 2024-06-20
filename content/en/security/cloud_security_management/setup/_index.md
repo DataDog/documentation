@@ -1,6 +1,5 @@
 ---
 title: Setting up Cloud Security Management
-kind: documentation
 aliases:
   - /security_platform/cloud_workload_security/getting_started
   - /security/cloud_workload_security/getting_started
@@ -29,7 +28,7 @@ further_reading:
 
 ## Overview
 
-Cloud Security Management (CSM) delivers real-time threat detection and continuous configuration audits across your entire cloud infrastructure, all in a unified view for seamless collaboration and faster remediation.
+Cloud Security Management (CSM) delivers real-time threat detection and continuous configuration audits across your entire infrastructure, all in a unified view for seamless collaboration and faster remediation.
 
 CSM is available in three packages: [CSM Enterprise][1], [CSM Pro][2], and [CSM Workload Security][3]. For more information, see [Changes to Datadog Cloud Security Management][7]. Each package includes access to a specific set of **features**, as shown in the following table:
 
@@ -79,26 +78,6 @@ The following table summarizes the CSM features available relative to each deplo
 
 The following tables represent additional prerequisites relative to each CSM feature.
 
-### CSM Threats 
-
-CSM Threats supports the following Linux distributions:
-
-| Linux Distributions        | Supported Versions                    |
-| ---------------------------| --------------------------------------|
-| Ubuntu LTS                 | 18.04, 20.04, 22.04                   |
-| Debian                      | 10 or later                           |
-| Amazon Linux 2              | Kernels 4.15, 5.4, 5.10, and 2023      |
-| SUSE Linux Enterprise Server| 12 and 15                              |
-| Red Hat Enterprise Linux    | 7, 8, and 9                            |
-| Oracle Linux                | 7, 8, and 9                            |
-| CentOS                      | 7                                     |
-
-**Notes:**
-
-- Custom kernel builds are not supported.
-- For compatibility with a custom Kubernetes network plugin like Cilium or Calico, see the [Troubleshooting page][102].
-- Data collection is done using eBPF, so Datadog minimally requires platforms that have underlying Linux kernel versions of 4.15.0+ or have eBPF features backported.
-
 ### CSM Vulnerabilities 
 
 | Component         | Version/Requirement                         |
@@ -108,29 +87,9 @@ CSM Threats supports the following Linux distributions:
 
 **Note**: CSM Vulnerabilities is **not** available for CRI-O runtime and podman runtime.
 
-Vulnerability scanning is supported for hosts and containers running the following OS versions:
-
-| OS                       | Supported Versions                                  | Package Managers |
-|--------------------------|-----------------------------------------------------|------------------|
-| Alpine Linux             | 2.2-2.7, 3.0-3.19 (edge is not supported)           | apk              |
-| Wolfi Linux              | N/A                                                 | apk              |
-| Chainguard               | N/A                                                 | apk              |
-| Red Hat Enterprise Linux | 6, 7, 8                                             | dnf/yum/rpm      |
-| CentOS                   | 6, 7, 8                                             | dnf/yum/rpm      |
-| AlmaLinux                | 8, 9                                                | dnf/yum/rpm      |
-| Rocky Linux              | 8, 9                                                | dnf/yum/rpm      |
-| Oracle Linux             | 5, 6, 7, 8                                          | dnf/yum/rpm      |
-| CBL-Mariner              | 1.0, 2.0                                            | dnf/yum/rpm      |
-| Amazon Linux             | 1, 2, 2023                                          | dnf/yum/rpm      |
-| openSUSE Leap            | 42, 15                                              | zypper/rpm       |
-| SUSE Enterprise Linux    | 11, 12, 15                                          | zypper/rpm       |
-| Photon OS                | 1.0, 2.0, 3.0, 4.0                                  | tndf/yum/rpm     |
-| Debian GNU/Linux         | 7, 8, 9, 10, 11, 12 (unstable/sid is not supported) | apt/dpkg         |
-| Ubuntu                   | All versions supported by Canonical                 | apt/dpkg         |
-
 ### CSM Identity Risks 
 
-<div class="alert alert-info"><strong>Note</strong>: CSM Identity Risks is available for AWS and Azure.</div>
+<div class="alert alert-info"><strong>Note</strong>: CSM Identity Risks is available for AWS, Azure, and GCP.</div>
 
 To use CSM Identity Risks, you must [enable resource collection for AWS][105]. If you've already done this, no additional setup is required.
 
@@ -151,6 +110,7 @@ The following table summarizes the scope of coverage available relative to each 
 | Kubernetes Cluster                      | {{< X >}}             | {{< X >}}   |                      |                     |  
 | Docker Host                             | {{< X >}}             |             |                      |                     |
 | Linux Host                              | {{< X >}}             | {{< X >}}   |    {{< X >}}         |                     |  {{< X >}}
+| Windows Host                            |                       | {{< X >}}   |                      |                     |  
 | Docker Container                        |                       | {{< X >}}   |                      |                     |
 | Container Image                         |                       |             |    {{< X >}}         |                     |  {{< X >}}
 | IAM in AWS Account                      |                       |             |                      |  {{< X >}}          |

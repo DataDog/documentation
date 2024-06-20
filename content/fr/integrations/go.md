@@ -17,7 +17,7 @@ integration_id: go
 integration_title: Go
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: go
 public_title: Intégration Datadog/Go
