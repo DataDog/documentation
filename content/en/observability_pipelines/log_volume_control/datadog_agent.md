@@ -17,19 +17,6 @@ This document walks you through the following steps:
 
 {{% observability_pipelines/prerequisites/datadog_agent %}}
 
-{{< tabs >}}
-{{% tab "Splunk HEC" %}}
-
-{{% observability_pipelines/prerequisites/splunk_hec %}}
-
-{{% /tab %}}
-{{% tab "Sumo Logic" %}}
-
-{{% observability_pipelines/prerequisites/sumo_logic %}}
-
-{{% /tab %}}
-{{< /tabs >}}
-
 ## Set up Observability Pipelines
 
 1. Navigate to [Observability Pipelines][1].
@@ -94,6 +81,11 @@ Enter the following information based on your selected logs destination.
 {{% tab "Edit fields" %}}
 
 {{% observability_pipelines/processors/remap %}}
+
+{{% /tab %}}
+{{% tab "Sensitive Data Scanner" %}}
+
+{{% observability_pipelines/processors/sensitive_data_scanner %}}
 
 {{% /tab %}}
 {{< /tabs >}}

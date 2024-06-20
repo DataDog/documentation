@@ -6,7 +6,6 @@ further_reading:
 - link: /dashboards/querying/
   tag: 설명서
   text: 그래프 쿼링 방법 알아보기
-kind: 지침
 title: 애플리케이션 성능 모니터링(APM) 통계 그래프 설정
 ---
 

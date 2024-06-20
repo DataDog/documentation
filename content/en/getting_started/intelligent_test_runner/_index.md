@@ -151,6 +151,6 @@ Then, click on a test session run and see the amount of time saved by the Intell
 [5]: /tests/code_coverage
 [6]: /dashboards/
 [7]: https://app.datadoghq.com/dash/integration/30941/ci-visibility---intelligent-test-runner
-[8]: /continuous_integration/explorer?tab=testruns
+[8]: /tests/explorer/
 [9]: /continuous_integration/explorer/facets/?tab=testruns
 [10]: /intelligent_test_runner/how_it_works/

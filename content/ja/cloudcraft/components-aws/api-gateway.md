@@ -1,5 +1,4 @@
 ---
-kind: ドキュメント
 title: API Gateway コンポーネント
 ---
 ## 概要

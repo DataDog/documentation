@@ -801,22 +801,33 @@ class Integrations:
             collision_name = self.get_collision_alternate_name(file_name)
             print(f"{file_name} {collision_name}")
 
-        if metrics_exist:
-            result = re.sub(
-                self.regex_metrics,
-                r'\1{{< get-metrics-from-git "%s" >}}\n\3\4'
-                % format(title if not exist_collision else collision_name),
-                result,
-                0,
-            )
-        if service_check_exist:
-            result = re.sub(
-                self.regex_service_check,
-                r'\1{{< get-service-checks-from-git "%s" >}}\n\3\4'
-                % format(title if not exist_collision else collision_name),
-                result,
-                0,
-            )
+        # if we have merged integrations upstream in the source repo
+        # there can be multiple instances of code we are trying to regex out which doesn't play nice
+        # lets split the file and apply it in chunks to avoid these issues
+        parts = result.split("## Data Collected")
+        new_parts = []
+        for part in parts:
+            if metrics_exist:
+                part = re.sub(
+                    self.regex_metrics,
+                    r'\1{{< get-metrics-from-git "%s" >}}\n\3\4'
+                    % format(title if not exist_collision else collision_name),
+                    part,
+                    0,
+                )
+            if service_check_exist:
+                part = re.sub(
+                    self.regex_service_check,
+                    r'\1{{< get-service-checks-from-git "%s" >}}\n\3\4'
+                    % format(title if not exist_collision else collision_name),
+                    part,
+                    0,
+                )
+            new_parts.append(part)
+        if len(new_parts) == 1:
+            result = "".join(new_parts)
+        else:
+            result = "## Data Collected".join(new_parts)
 
         if not exist_already and no_integration_issue:
             out_name = self.content_integrations_dir + new_file_name
@@ -888,7 +899,7 @@ class Integrations:
                 ]
                 item = matches[0] if len(matches) > 0 else []
             if item:
-                item["kind"] = "integration"
+                item["custom_kind"] = "integration"
                 item["integration_title"] = (
                     item
                     .get("public_title", "")
@@ -926,7 +937,7 @@ class Integrations:
                 fm = fm.replace('!!bool "false"', 'false')
                 fm = fm.replace('!!bool "true"', 'true')
             else:
-                fm = yaml.safe_dump({"kind": "integration", **extra_fm}, width=float("inf"), default_style='"', default_flow_style=False,
+                fm = yaml.safe_dump({"custom_kind": "integration", **extra_fm}, width=float("inf"), default_style='"', default_flow_style=False,
                                     allow_unicode=True).rstrip()
         return template.format(
             front_matter=fm, content=content

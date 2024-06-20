@@ -20,7 +20,7 @@ variables:
   DATADOG_SUBDOMAIN: 'dd-corpsite'
   FORCE_COLOR: '1'
   GIT_DEPTH: 50
-  DEFAULT_TAGS: "environment:${CI_ENVIRONMENT_NAME},job_name:${CI_JOB_NAME},job_stage:${CI_JOB_STAGE},project_name:${CI_PROJECT_NAME},docker_image:${CI_REGISTRY_IMAGE},pipeline_id:${CI_PIPELINE_ID},service:gitlab"
+  DEFAULT_TAGS: "environment:${CI_ENVIRONMENT_NAME},job_name:${CI_JOB_NAME},job_stage:${CI_JOB_STAGE},project_name:${CI_PROJECT_NAME},docker_image:${CI_REGISTRY_IMAGE},pipeline_id:${CI_PIPELINE_ID},service:gitlab,pipeline_source:${CI_PIPELINE_SOURCE}"
   FF_USE_FASTZIP: "true"
   # These can be specified per job or per pipeline
   ARTIFACT_COMPRESSION_LEVEL: "fast"

@@ -49,6 +49,7 @@ For more information, see the [OkHttpClient Proxy and Authenticator][2] document
 
 When initializing the iOS SDK, specify the following proxy configuration:
 
+#### Swift
 ```swift
 import DatadogCore
 
@@ -68,6 +69,7 @@ Datadog.initialize(
 )
 ```
 
+#### Objective C
 ```objective-c
 @import DatadogObjc;
 
@@ -136,6 +138,7 @@ For more information, see the [OkHttpClient Proxy and Authenticator][2] document
 {{% tab "iOS" %}}
 When initializing the iOS SDK, specify the following proxy configuration:
 
+#### Swift
 ```swift
 import DatadogCore
 
@@ -155,6 +158,7 @@ Datadog.initialize(
 )
 ```
 
+#### Objective C
 ```objective-c
 @import DatadogObjc;
 

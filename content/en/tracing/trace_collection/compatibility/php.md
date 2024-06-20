@@ -13,6 +13,9 @@ further_reading:
       tag: 'Documentation'
       text: 'Instrument Your Application'
 ---
+<div class="alert alert-info">This documentation is for the PHP tracer v1.x. If you are looking for the PHP tracer v0.x documentation, see the legacy <a href="/tracing/trace_collection/compatibility/php_v0/">PHP Compatibility Requirements
+</a> documentation.</div>
+
 ## Runtime support policy for PHP APM
 
 The PHP Datadog Trace library is open source - view the [GitHub repository][1] for more information.
@@ -37,36 +40,38 @@ PHP APM supports the following PHP versions (both ZTS and NTS):
 
 <div class="alert alert-info">
 <strong>Note:</strong>
-PHP 5.x is fully supported until version 0.75.0. It is now in maintenance mode and supported with security and important bug fixes until December 31, 2023.
+PHP 5.x is not supported starting version 1.0.0. If you are using PHP 5, you can still use the PHP tracer up to version [0.99](https://github.com/DataDog/dd-trace-php/releases/tag/0.99.0).
 <br>
 If you are using PHP 5.x version in your application and have a feature request which is critical for your business needs, contact <a href="https://www.datadoghq.com/support/">Datadog Support</a>.
 <br>
-It's recommended to use <a href="https://www.php.net/supported-versions">officially supported versions</a> of PHP, especially 7.4, 8.0, and 8.1.
+It's recommended to use <a href="https://www.php.net/supported-versions">officially supported versions</a> of PHP, especially 8.0+.
 </div>
 
-| PHP Version    | Support level                         | Package version |
-|:---------------|:--------------------------------------|:----------------|
-| 8.3.x          | Beta (until the official PHP release) | > `0.93.0+`     |
-| 8.2.x          | General Availability                  | > `0.82.0+`     |
-| 8.1.x          | General Availability                  | > `0.66.0+`     |
-| 8.0.x          | General Availability                  | > `0.52.0+`     |
-| 7.4.x          | General Availability                  | All             |
-| 7.3.x          | General Availability                  | All             |
-| 7.2.x          | General Availability                  | All             |
-| 7.1.x          | General Availability                  | All             |
-| 7.0.x          | General Availability                  | All             |
-| 5.6.x          | Maintenance (until December 31, 2023) | All             |
-| 5.5.x          | Maintenance (until December 31, 2023) | All             |
-| 5.4.x          | Maintenance (until December 31, 2023) | All             |
+| PHP Version    | Support level        | Package version |
+|:---------------|:---------------------|:----------------|
+| 8.3.x          | General Availability | > `0.93.0+`     |
+| 8.2.x          | General Availability | > `0.82.0+`     |
+| 8.1.x          | General Availability | > `0.66.0+`     |
+| 8.0.x          | General Availability | > `0.52.0+`     |
+| 7.4.x          | General Availability | All             |
+| 7.3.x          | General Availability | All             |
+| 7.2.x          | General Availability | All             |
+| 7.1.x          | General Availability | All             |
+| 7.0.x          | General Availability | All             |
+| 5.6.x          | EOL                  | < `1.0.0`      |
+| 5.5.x          | EOL                  | < `1.0.0`      |
+| 5.4.x          | EOL                  | < `1.0.0`      |
 
 PHP APM supports the following SAPI's:
 
-| SAPI           | Support type    |
-|:---------------|:----------------|
-| apache2handler | Fully Supported |
-| cli            | Fully Supported |
-| fpm-fcgi       | Fully Supported |
-| cgi-fcgi       | Fully Supported |
+| SAPI           | Support type               |
+|:---------------|:---------------------------|
+| apache2handler | All supported PHP versions |
+| cli            | All supported PHP versions |
+| fpm-fcgi       | All supported PHP versions |
+| cgi-fcgi       | All supported PHP versions |
+| FrankenPHP     | All supported PHP versions |
+
 
 ## Supported processor architectures
 
@@ -94,27 +99,28 @@ The following table enumerates some of the frameworks and versions Datadog succe
 
 **Web frameworks**:
 
-| Module         | Versions                                | Support Type               | Instrumentation level           |
-|:---------------|:----------------------------------------|:---------------------------|:--------------------------------|
-| CakePHP        | 2.x, 3.x, 4.x, 5.x                      | All supported PHP versions | Framework-level instrumentation |
-| CodeIgniter    | 2.x, 3.x                                | PHP 7+                     | Framework-level instrumentation |
-| Drupal         |                                         | All supported PHP versions | Framework-level instrumentation |
-| FuelPHP        | 1.1                                     | PHP 7+                     | Generic web tracing             |
-| Laminas        |                                         | All supported PHP versions | Framework-level instrumentation |
-| Laravel        | 4.2, 5.x, 6.x                           | All supported PHP versions | Framework-level instrumentation |
-| Laravel 8+     | 8.x, 9.x, 10.x, 11.x (tracer `0.52.0+`) | All supported PHP versions | Framework-level instrumentation |
-| Lumen          | 5.2+                                    | All supported PHP versions | Framework-level instrumentation |
-| Magento        | 1                                       | All supported PHP versions | Generic web tracing             |
-| Magento        | 2                                       | PHP 7+                     | Framework-level instrumentation |
-| Neos Flow      | 1.1                                     | All supported PHP versions | Generic web tracing             |
-| Phalcon        | 1.3, 3.4                                | All supported PHP versions | Generic web tracing             |
-| RoadRunner     | 2.x                                     | All supported PHP versions | Framework-level instrumentation |
-| Slim           | 2.x, 3.x, 4.x                           | All supported PHP versions | Framework-level instrumentation |
-| Symfony        | 2.x, 3.3, 3.4, 4.x, 5.x, 6.x, 7.x       | All supported PHP versions | Framework-level instrumentation |
-| WordPress      | 4.x, 5.x, 6.x                           | PHP 7+                     | Framework-level instrumentation |
-| Yii            | 1.1, 2.0                                | All supported PHP versions | Framework-level instrumentation |
-| Zend Framework | 1.12, 1.21                              | All supported PHP versions | Framework-level instrumentation |
-| Zend Framework | 2.x                                     | All supported PHP versions | Generic web tracing             |
+| Module         | Versions                                | Support Type                | Instrumentation level           |
+|:---------------|:----------------------------------------|:----------------------------|:--------------------------------|
+| CakePHP        | 2.x                                     | All supported PHP versions  | Framework-level instrumentation |
+| CodeIgniter    | 2.x                                     | All supported PHP versions  | Framework-level instrumentation |
+| CodeIgniter    | 3.x                                     | All supported PHP versions  | Generic web tracing             |
+| Drupal         |                                         | All supported PHP versions  | Framework-level instrumentation |
+| FuelPHP        | 1.1                                     | All supported PHP versions  | Generic web tracing             |
+| Laminas        |                                         | All supported PHP versions  | Framework-level instrumentation |
+| Laravel        | 4.2, 5.x, 6.x                           | All supported PHP versions  | Framework-level instrumentation |
+| Laravel 8+     | 8.x, 9.x, 10.x, 11.x (tracer `0.52.0+`) | All supported PHP versions  | Framework-level instrumentation |
+| Lumen          | 5.2+                                    | All supported PHP versions  | Framework-level instrumentation |
+| Magento        | 1                                       | All supported PHP versions  | Generic web tracing             |
+| Magento        | 2                                       | All supported PHP versions  | Framework-level instrumentation |
+| Neos Flow      | 1.1                                     | All supported PHP versions  | Generic web tracing             |
+| Phalcon        | 1.3, 3.4                                | All supported PHP versions  | Generic web tracing             |
+| RoadRunner     | 2.x                                     | All supported PHP versions  | Framework-level instrumentation |
+| Slim           | 2.x, 3.x, 4.x                           | All supported PHP versions  | Framework-level instrumentation |
+| Symfony        | 2.x, 3.3, 3.4, 4.x, 5.x, 6.x, 7.x       | All supported PHP versions  | Framework-level instrumentation |
+| WordPress      | 4.x, 5.x, 6.x                           | All supported PHP versions  | Framework-level instrumentation |
+| Yii            | 1.1, 2.0                                | All supported PHP versions  | Framework-level instrumentation |
+| Zend Framework | 1.12, 1.21                              | All supported PHP versions  | Framework-level instrumentation |
+| Zend Framework | 2.x                                     | All supported PHP versions  | Generic web tracing             |
 
 Note that even if you don't see your web framework in this list, it is supported out of the box with the latest release of the tracer.
 
@@ -124,40 +130,41 @@ Datadog is continuously adding more support for in-depth tracing for PHP web-fra
 
 Tracing from the CLI SAPI is disabled by default. To enable tracing of PHP CLI scripts, set `DD_TRACE_CLI_ENABLED=true`.
 
-| Module          | Versions            | Support Type    |
-|:----------------|:--------------------|:----------------|
-| CakePHP Console | 2.x                 | Fully Supported |
-| Laravel Artisan | 5.x, 8.x, 9.x, 10.x | Fully Supported |
-| Symfony CLI     | 4.x, 5.x, 6.x       | Fully Supported |
+| Module          | Versions            | Support Type               |
+|:----------------|:--------------------|:---------------------------|
+| CakePHP Console | 2.x                 | All supported PHP versions |
+| Laravel Artisan | 5.x, 8.x, 9.x, 10.x | All supported PHP versions |
+| Symfony CLI     | 4.x, 5.x, 6.x       | All supported PHP versions |
 
 To request support for additional CLI libraries, contact our awesome [support team][3].
 
 #### Datastore compatibility
 
-| Module                                                                  | Versions                   | Support Type    |
-|-------------------------------------------------------------------------|----------------------------|-----------------|
-| Amazon RDS (using PDO or MySQLi)                                        | *(Any Supported PHP)*      | Fully Supported |
-| Elasticsearch                                                           | 1+                         | Fully Supported |
-| Eloquent                                                                | Laravel supported versions | Fully Supported |
-| Laravel Queues                                                          | Laravel supported versions | Fully Supported |
-| Memcache                                                                | *(Any Supported PHP)*      | Fully Supported |
-| Memcached                                                               | *(Any Supported PHP)*      | Fully Supported |
-| MongoDB - via [mongo][4] extension                                      | 1.4.x                      | Fully Supported |
-| MySQLi                                                                  | *(Any Supported PHP)*      | Fully Supported |
-| PDO                                                                     | *(Any Supported PHP)*      | Fully Supported |
-| PhpRedis                                                                | 3, 4, 5                    | PHP 7, 8        |
-| Predis                                                                  | 1.1                        | Fully Supported |
-| SQLSRV                                                                  | *(Any Supported PHP)*      | Fully Supported |
+| Module                                                                  | Versions                   | Support Type               |
+|-------------------------------------------------------------------------|----------------------------|----------------------------|
+| Amazon RDS (using PDO or MySQLi)                                        | *(Any Supported PHP)*      | All supported PHP versions |
+| Elasticsearch                                                           | 1+                         | All supported PHP versions |
+| Eloquent                                                                | Laravel supported versions | All supported PHP versions |
+| Laravel Queues                                                          | Laravel supported versions | All supported PHP versions |
+| Memcache                                                                | *(Any Supported PHP)*      | All supported PHP versions |
+| Memcached                                                               | *(Any Supported PHP)*      | All supported PHP versions |
+| MongoDB - via [mongo][4] extension                                      | 1.4.x                      | All supported PHP versions |
+| MySQLi                                                                  | *(Any Supported PHP)*      | All supported PHP versions |
+| PDO                                                                     | *(Any Supported PHP)*      | All supported PHP versions |
+| PhpRedis                                                                | 3, 4, 5                    | All supported PHP versions |
+| Predis                                                                  | 1.1                        | All supported PHP versions |
+| SQLSRV                                                                  | *(Any Supported PHP)*      | All supported PHP versions |
 
 To request support for additional datastores, contact our awesome [support team][3].
 
 #### Library compatibility
 
-| Module                                                    | Versions              | Support Type    |
-|:----------------------------------------------------------|:----------------------|:----------------|
-| [php-amqplib][10] | 2.x, 3.x              | PHP 7.1+        |
-| Curl                                                      | *(Any Supported PHP)* | Fully Supported |
-| Guzzle                                                    | 5.x, 6.x, 7.x         | Fully Supported |
+| Module            | Versions                   | Support Type               |
+|:------------------|:---------------------------|:---------------------------|
+| [php-amqplib][10] | 2.x, 3.x                   | PHP 7.1+                   |
+| Curl              | *(Any Supported PHP)*      | All supported PHP versions |
+| Guzzle            | 5.x, 6.x, 7.x              | All supported PHP versions |
+| Laravel Queue     | Laravel supported versions | All supported PHP versions |
 
 
 To request support for additional libraries, contact our awesome [support team][3].

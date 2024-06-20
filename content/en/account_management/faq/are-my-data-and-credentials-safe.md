@@ -1,6 +1,5 @@
 ---
 title: Are my data and credentials safe?
-kind: faq
 ---
 
 * Traffic is always initiated by the Agent to Datadog. No sessions are ever initiated from Datadog back to the Agent.

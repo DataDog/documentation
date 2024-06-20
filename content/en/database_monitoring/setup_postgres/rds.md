@@ -238,9 +238,9 @@ To configure collecting Database Monitoring metrics for an Agent running on a ho
    ssl: allow
    ```
 
-   If you want to authenticate with IAM, set the `region` and `instance_endpoint` parameters.
+   If you want to authenticate with IAM, specify the `region` and `instance_endpoint` parameters, and set `managed_authentication.enabled` to `true`.
 
-   **Note**: only set the `region` parameter if you want to use IAM authentication. IAM authentication takes precedence over the `password` field.
+   **Note**: only enable `managed_authentication` if you want to use IAM authentication. IAM authentication takes precedence over the `password` field.
 
    ```yaml
    init_config:
@@ -252,6 +252,8 @@ To configure collecting Database Monitoring metrics for an Agent running on a ho
        aws:
          instance_endpoint: '<AWS_INSTANCE_ENDPOINT>'
          region: '<REGION>'
+         managed_authentication:
+           enabled: true
        tags:
          - "dbinstanceidentifier:<DB_INSTANCE_NAME>"
        ## Required for Postgres 9.6: Uncomment these lines to use the functions created in the setup
@@ -286,16 +288,17 @@ export DD_AGENT_VERSION=7.36.1
 
 docker run -e "DD_API_KEY=${DD_API_KEY}" \
   -v /var/run/docker.sock:/var/run/docker.sock:ro \
-  -l com.datadoghq.ad.check_names='["postgres"]' \
-  -l com.datadoghq.ad.init_configs='[{}]' \
-  -l com.datadoghq.ad.instances='[{
-    "dbm": true,
-    "host": "<AWS_INSTANCE_ENDPOINT>",
-    "port": 5432,
-    "username": "datadog",
-    "password": "<UNIQUEPASSWORD>",
-    "tags": ["dbinstanceidentifier:<DB_INSTANCE_NAME>"]
-  }]' \
+  -l com.datadoghq.ad.checks='{"postgres": {
+    "init_config": [{}],
+    "instances": [{
+      "dbm": true,
+      "host": "<AWS_INSTANCE_ENDPOINT>",
+      "port": 5432,
+      "username": "datadog",
+      "password": "<UNIQUEPASSWORD>",
+      "tags": ["dbinstanceidentifier:<DB_INSTANCE_NAME>"]
+    }]
+  }}' \
   gcr.io/datadoghq/agent:${DD_AGENT_VERSION}
 ```
 
