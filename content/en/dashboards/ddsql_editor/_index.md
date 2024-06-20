@@ -42,7 +42,7 @@ Click a table name to view its columns and relationships:
 
 ### Save and share queries
 
-Save useful queries as views, or export the data as CSV.
+Save useful queries, or export the data as CSV.
 
 {{< img src="dashboards/ddsql/save-or-export-result.png" alt="A query result with the save and export actions shown" style="width:90%;" >}}
 
