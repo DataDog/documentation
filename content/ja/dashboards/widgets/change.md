@@ -15,7 +15,6 @@ further_reading:
 - link: /dashboards/graphing_json/request_json/
   tag: ドキュメント
   text: リクエスト JSON スキーマ
-kind: documentation
 title: 変化ウィジェット
 widget_type: 変化
 ---

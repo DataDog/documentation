@@ -1,7 +1,6 @@
 ---
 aliases:
 - /ja/agent/faq/dogstream
-kind: ガイド
 private: true
 title: Dogstream
 ---

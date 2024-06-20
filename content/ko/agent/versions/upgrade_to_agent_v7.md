@@ -3,7 +3,6 @@ further_reading:
 - link: /agent/guide/python-3/
   tag: 설명서
   text: 커스텀 검사를 Python 2에서 Python 3으로 마이그레이션하기
-kind: 설명서
 title: Datadog Agent v7로 업그레이드 하기
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: Agent Log Files
-kind: guide
 aliases:
   - /agent/faq/agent-log-files
   - /agent/guide/agent-log-files

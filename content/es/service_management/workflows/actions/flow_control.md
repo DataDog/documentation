@@ -53,7 +53,7 @@ Para configurar una iteración **For each** (Para cada):
 1. Para seleccionar una acción interna para repetirla, arrastra un paso existente desde tu lienzo al paso **For each** (Para cada) o haz clic en el icono más (**+**), dentro del paso **For each**, y haz una selección en el catálogo de acciones.
 1. Haz clic en el paso **For each** (Para cada) e introduce una **Input list** (Lista de entrada) para que el paso la pueda iterar.
 1. Activa **Continue on error** (Continuar en caso de error), si quieres que la acción continúe con la lista de valores restantes cuando se produce un error.
-1. Configura la acción interna. Para acceder al valor actual de la lista de entrada, utiliza la variable `{{Current.value}}`. Para acceder al índice del valor actual, utiliza `{{Current.index}}`.
+1. Configura la acción interna. Para acceder al valor actual de la lista de entrada, utiliza la variable `{{Current.Value}}`. Para acceder al índice del valor actual, utiliza `{{Current.Index}}`.
 1. **Save** (Guarda) y **Run** (Ejecuta) la acción.
 
 Cuando se completa una ejecución, el flujo de trabajo entra en modo **Debug** (Depuración). Selecciona el paso For each (Para cada) para ver:

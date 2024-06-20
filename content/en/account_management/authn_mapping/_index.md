@@ -1,6 +1,5 @@
 ---
 title: Federated Authentication to Role Mapping API
-kind: documentation
 beta: true
 aliases:
   - /account_management/authen_mapping/

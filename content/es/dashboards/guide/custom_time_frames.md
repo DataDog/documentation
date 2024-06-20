@@ -1,5 +1,4 @@
 ---
-kind: guía
 title: Marco temporal personalizadas
 ---
 
