@@ -1,6 +1,5 @@
 ---
 title: vSphere Integration Billing
-kind: documentation
 ---
 
 ## Overview

@@ -13,7 +13,7 @@ further_reading:
   tag: 설명서
   text: 프로파일러를 사용하는 동안 발생한 문제 해결
 kind: 설명서
-title: 프로파일러 사용
+title: 프로파일러 활성화
 type: multi-code-lang
 ---
 

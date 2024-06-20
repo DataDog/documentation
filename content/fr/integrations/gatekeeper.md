@@ -26,7 +26,7 @@ integration_id: gatekeeper
 integration_title: Gatekeeper
 integration_version: 0.0.1
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: ara.pulido@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: gatekeeper.

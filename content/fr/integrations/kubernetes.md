@@ -30,7 +30,7 @@ git_integration_title: kubernetes
 integration_id: kubernetes
 integration_title: Kubernetes
 is_public: true
-kind: integration
+custom_kind: integration
 name: kubernetes
 newhlevel: true
 public_title: Intégration Datadog/Kubernetes

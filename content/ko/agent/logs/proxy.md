@@ -9,7 +9,6 @@ further_reading:
 - link: /tracing/
   tag: 설명서
   text: Collect your traces
-kind: 설명서
 title: 로그를 위한 TCP Agent 프록시
 ---
 
@@ -83,7 +82,7 @@ Agent와 HAProxy 사이에는 암호화가 비활성화되어 있으며, 데이�
 
 ```
 logs_config:
-  use_tcp: true
+  force_use_tcp: true
   logs_dd_url: "<PROXY_SERVER_DOMAIN>:10514"
   logs_no_ssl: true
 ```
@@ -129,15 +128,15 @@ resolvers my-dns
     accepted_payload_size 8192
     hold valid 10s
     hold obsolete 60s
-# Agents가 로그 전송을 위해 연결되는 
+# Agents가 로그 전송을 위해 연결되는
 # 엔드포인트를 선언합니다. (예: "logs.config.logs_dd_url"의 값)
 frontend logs_frontend
     bind *:10514
     mode tcp
     option tcplog
     default_backend datadog-logs
-# Datadog 서버입니다. 실제로 위에 정의된 포워더 프런트엔드로 들어오는 
-# 모든 TCP 요청은 
+# Datadog 서버입니다. 실제로 위에 정의된 포워더 프런트엔드로 들어오는
+# 모든 TCP 요청은
 # Datadog의 퍼블릭 엔드포인트로 프록시됩니다.
 backend datadog-logs
     balance roundrobin
@@ -193,13 +192,13 @@ resolvers my-dns
     accepted_payload_size 8192
     hold valid 10s
     hold obsolete 60s
-# 로그 전송을 위해 Agents가 연결되는 
+# 로그 전송을 위해 Agents가 연결되는
 # 엔드포인트를 선언합니다. (예: "logs.config.logs_dd_url"의 값)
 frontend logs_frontend
     bind *:10514
     mode tcp
     default_backend datadog-logs
-# Datadog server입니다. 위에 정의된 포워더 프론트엔드로 
+# Datadog server입니다. 위에 정의된 포워더 프론트엔드로
 # 들어오는 모든 TCP 요청은
 # Datadog의 퍼블릭 엔드포인트로 프록시됩니다.
 backend datadog-logs
@@ -212,7 +211,7 @@ backend datadog-logs
 다음 명령을 사용하여 인증서를 다운로드합니다:
 
 * `sudo apt-get install ca-certificates` (Debian, Ubuntu)
-* `yum install ca-certificates` (CentOS, Redhat) 
+* `yum install ca-certificates` (CentOS, Redhat)
 
 성공적으로 다운로드되었다면, CentOS, Redhat용 `/etc/ssl/certs/ca-bundle.crt`에서 확인할 수 있습니다.
 
@@ -231,7 +230,7 @@ HAProxy 설정이 완료되면 다시 로드하거나 HAProxy를 다시 시작�
 
 ```yaml
 logs_config:
-  use_tcp: true
+  force_use_tcp: true
   logs_dd_url: myProxyServer.myDomain:10514
 ```
 
@@ -272,10 +271,10 @@ pid /run/nginx.pid;
 events {
     worker_connections 1024;
 }
-# Datadog Agent에 대한 TCP Proxy 
+# Datadog Agent에 대한 TCP Proxy
 stream {
     server {
-        listen 10514; #로그에 대한 수신 
+        listen 10514; #로그에 대한 수신
         proxy_ssl on;
         proxy_pass agent-intake.logs.datadoghq.eu:443;
     }

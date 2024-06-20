@@ -9,7 +9,6 @@ further_reading:
 - link: /tracing/services/service_page/
   tag: ドキュメント
   text: APM サービス詳細画面について
-kind: documentation
 title: サービスサマリーウィジェット
 widget_type: trace_service
 ---

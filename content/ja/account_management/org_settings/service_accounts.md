@@ -3,7 +3,6 @@ further_reading:
 - link: https://docs.datadoghq.com/api/latest/service-accounts/
   tag: ドキュメント
   text: サービスアカウント API リファレンス
-kind: documentation
 title: サービスアカウント
 ---
 

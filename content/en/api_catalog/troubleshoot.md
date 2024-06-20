@@ -1,6 +1,5 @@
 ---
 title: Troubleshooting
-kind: documentation
 is_beta: true
 further_reading:
 - link: "/tracing/api_catalog/"

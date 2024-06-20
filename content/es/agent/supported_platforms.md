@@ -4,7 +4,6 @@ further_reading:
 - link: agent/basic_agent_usage/
   tag: Documentación
   text: Uso básico del Agent
-kind: Documentación
 title: Plataformas compatibles
 ---
 

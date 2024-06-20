@@ -30,7 +30,7 @@ guid: a1cfafdb-5d88-4ae1-acdc-6356df755b73
 integration_id: etcd
 integration_title: etcd
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: etcd.

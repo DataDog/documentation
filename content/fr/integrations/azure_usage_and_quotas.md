@@ -15,7 +15,7 @@ integration_id: azure-usage-and-quotas
 integration_title: Utilisation et quotas Microsoft Azure
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: azure_usage_and_quotas
 public_title: Intégration Datadog/Utilisation et quotas Microsoft Azure
