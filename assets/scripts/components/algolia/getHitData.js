@@ -2,7 +2,6 @@ import { replaceSpecialCharacters } from "../../helpers/string";
 import { truncateContent, truncateContentAtHighlight } from "../../helpers/truncateContent";
 
 export function getHitData(hit, searchQuery = '') {
-    console.log(hit)
     const title = hit.title ? hit.title : hit.type;
     const cleanRelPermalink =
         hit.language == 'en' ? hit.relpermalink : hit.relpermalink.replace(`/${hit.language}/`, '');
