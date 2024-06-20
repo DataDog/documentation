@@ -178,11 +178,11 @@ The [Cisco Umbrella Content Pack][39] includes:
 
 ## Web Security Content Packs
 
-### nginx
+### NGINX
 
 Monitor and respond to web-based risks with Nginx.
 
-The [nginx Content Pack][41] includes:
+The [NGINX Content Pack][41] includes:
 - [Detection Rules][42]
 - An interactive dashboard
 
