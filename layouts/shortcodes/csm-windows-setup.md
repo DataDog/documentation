@@ -1,5 +1,5 @@
 
-Use the following instructions to enable Cloud Security Management's Threat Detection feature on Windows.
+Use the following instructions to enable Threat Detection on Windows.
 
 Datadog Cloud Security Management on Windows includes built-in threat detection for Windows process and network events. The out-of-the-box Windows ruleset includes the following default rules:
 
