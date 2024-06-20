@@ -1,15 +1,13 @@
 ---
 title: Setup
 kind: documentation
-description: Investigate the Network Path - Path View 
+description: Setting up Network Path 
 is_beta: true
 further_reading:
 - link: "https://www.datadoghq.com/blog/cloud-network-monitoring-datadog/"
   tag: "Blog"
   text: "Monitor cloud architecture and app dependencies with Datadog NPM"
 - link: "https://www.datadoghq.com/blog/network-performance-monitoring"
-  tag: "Blog"
-  text: "Network Performance Monitoring"
   tag: "Blog"
   text: "Monitor cloud endpoint health with cloud service autodetection"
 ---

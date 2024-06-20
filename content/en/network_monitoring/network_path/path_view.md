@@ -3,14 +3,12 @@ title: Path View
 kind: documentation
 description: Investigate the Network Path - Path View 
 further_reading:
+- link: "/network_monitoring/network_path/setup"
+  tag: "Documentation"
+  text: "Setup Network Path"
 - link: "https://www.datadoghq.com/blog/cloud-network-monitoring-datadog/"
   tag: "Blog"
   text: "Monitor cloud architecture and app dependencies with Datadog NPM"
-- link: "https://www.datadoghq.com/blog/network-performance-monitoring"
-  tag: "Blog"
-  text: "Network Performance Monitoring"
-  tag: "Blog"
-  text: "Monitor cloud endpoint health with cloud service autodetection"
 ---
 
 
