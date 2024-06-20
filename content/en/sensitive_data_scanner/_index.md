@@ -288,7 +288,7 @@ When Sensitive Data Scanner is enabled, an [out-of-the-box dashboard][13] summar
 
 ## Disable Sensitive Data Scanner
 
-To turn off Sensitive Data Scanner entirely, set the toggle to **off** for each Scanning Group and Scanning Rule so that they are disabled.
+To turn off Sensitive Data Scanner entirely, set the toggle to **off** for each Scanning Group so that they are disabled.
 
 ## Further Reading
 
