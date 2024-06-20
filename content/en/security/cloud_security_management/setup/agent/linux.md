@@ -2,7 +2,11 @@
 title: Setting up Cloud Security Management on Linux
 code_lang: linux
 type: multi-code-lang
-code_lang_weight: 80 # a number that represents relative weight. 
+code_lang_weight: 80 # a number that represents relative weight.
+aliases:
+  - /security/cloud_security_management/setup/csm_cloud_workload_security/agent/linux
+  - /security/cloud_security_management/setup/csm_pro/agent/linux/
+  - /security/cloud_security_management/setup/csm_enterprise/agent/linux/
 ---
 
 Use the following instructions to enable Cloud Security Management's Misconfigurations, Threat Detection, Host Vulnerability Management, and Container Vulnerability Management features.

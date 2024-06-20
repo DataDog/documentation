@@ -2,7 +2,11 @@
 title: Setting up Cloud Security Management on ECS EC2
 code_lang: ecs_ec2
 type: multi-code-lang
-code_lang_weight: 70 # a number that represents relative weight. 
+code_lang_weight: 70 # a number that represents relative weight.
+aliases:
+  - /security/cloud_security_management/setup/csm_cloud_workload_security/agent/ecs_ec2
+  - /security/cloud_security_management/setup/csm_pro/agent/ecs_ec2/
+  - /security/cloud_security_management/setup/csm_enterprise/agent/ecs_ec2/
 ---
 
 Use the following instructions to enable Cloud Security Management's Misconfigurations, Threat Detection, Host Vulnerability Management, and Container Vulnerability Management features.
