@@ -4,7 +4,6 @@ further_reading:
 - link: /continuous_integration/pipelines
   tag: 설명서
   text: Pipeline Visibility에 대해 알아보기
-kind: guide
 title: 파이프라인 데이터 모델과 실행 유형
 ---
 

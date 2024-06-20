@@ -17,7 +17,7 @@ integration_id: google-cloud-dataflow
 integration_title: Google Cloud Dataflow
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 monitors:
   job-backlog-time: assets/monitors/backlog_monitor.json

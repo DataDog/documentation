@@ -1,6 +1,5 @@
 ---
 title: Agent Version differences
-kind: documentation
 further_reading:
     - link: 'agent/versions/upgrade_to_agent_v7'
       tag: 'Documentation'

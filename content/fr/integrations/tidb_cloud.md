@@ -22,7 +22,7 @@ integration_id: tidb-cloud
 integration_title: "TiDB\_Cloud"
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: xuyifan02@pingcap.com
 manifest_version: 1.0.0
 metric_prefix: tidb_cloud.

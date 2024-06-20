@@ -1,6 +1,5 @@
 ---
 title: オートディスカバリーのトラブルシューティング
-kind: ドキュメント
 aliases:
   - /ja/agent/autodiscovery/troubleshooting
 further_reading:

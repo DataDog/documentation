@@ -1,6 +1,5 @@
 ---
 title: Cloud Cost Management
-kind: documentation
 aliases:
   - /infrastructure/cloud_cost_management
   - /integrations/cloudability

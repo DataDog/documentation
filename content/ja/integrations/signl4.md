@@ -35,7 +35,7 @@ integration_id: signl4
 integration_title: SIGNL4
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: signl4
 public_title: SIGNL4

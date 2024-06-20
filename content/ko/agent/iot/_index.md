@@ -3,7 +3,6 @@ further_reading:
 - link: /getting_started/agent/
   tag: 설명서
   text: Agent 시작하기
-kind: 설명서
 title: IoT Agent
 ---
 

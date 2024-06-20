@@ -1,6 +1,5 @@
 ---
 title: AWS
-kind: documentation
 aliases:
 - /integrations/awsbilling/
 further_reading:

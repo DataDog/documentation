@@ -1,6 +1,5 @@
 ---
 title: Cloud Cost Recommendations
-kind: documentation
 private: true
 description: Learn how to reduce the spending of your organization's cloud resources with Cost Recommendations.
 further_reading:
