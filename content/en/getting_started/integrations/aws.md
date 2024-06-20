@@ -69,6 +69,7 @@ Before getting started, ensure you have the following prerequisites:
     * iam:GetRolePolicy
     * iam:PassRole
     * iam:PutRolePolicy
+    * iam:TagRole
     * iam:UpdateAssumeRolePolicy
     * kms:Decrypt
     * lambda:AddPermission
@@ -97,6 +98,7 @@ Before getting started, ensure you have the following prerequisites:
     * s3:PutBucketPolicy
     * s3:PutBucketPublicAccessBlock
     * s3:PutEncryptionConfiguration
+    * s3:PutLifecycleConfiguration
     * secretsmanager:CreateSecret
     * secretsmanager:DeleteSecret
     * secretsmanager:GetSecretValue
@@ -166,6 +168,10 @@ Use the [Amazon ECS documentation][25] to run the [Datadog Docker Agent][26] on 
 #### ECS with Fargate launch type
 
 Use the [Amazon ECS on AWS Fargate documentation][28] to run the Agent as a container in the same task definition as your application. **Note**: Datadog Agent version 6.1.1 or higher is needed to take full advantage of the Fargate integration.
+
+#### AWS Batch with Fargate orchestration type
+
+Use the [Amazon ECS on AWS Fargate for AWS Batch documentation][58] to run the Agent as a container in the same AWS Batch job definition as your application. **Note**: Datadog Agent version 6.1.1 or higher is needed to take full advantage of the Fargate integration.
 
 #### EKS
 
@@ -270,6 +276,6 @@ If you encounter the error `Datadog is not authorized to perform sts:AssumeRole`
 [55]: /security/default_rules/#cat-posture-management-cloud
 [56]: /security/default_rules/#cat-posture-management-infra
 [57]: /integrations/guide/aws-integration-troubleshooting/
-
+[58]: /integrations/ecs_fargate/?tab=webui#installation-for-aws-batch
 
 

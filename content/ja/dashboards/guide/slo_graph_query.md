@@ -4,7 +4,6 @@ further_reading:
 - link: /dashboards/widgets/slo/
   tag: Documentation
   text: SLO サマリーウィジェット
-kind: ガイド
 title: メトリクスベースの SLO クエリをスコープする
 ---
 

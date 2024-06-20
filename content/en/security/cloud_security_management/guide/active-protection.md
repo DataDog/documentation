@@ -1,6 +1,5 @@
 ---
-title: Proactively block threats with Active Protection
-kind: documentation
+title: Proactively block crypto mining threats with Active Protection
 further_reading:
 - link: "security/threats/workload_security_rules"
   tag: "Documentation"
@@ -9,18 +8,18 @@ further_reading:
 
 <div class="alert alert-info">CSM Threats Active Protection is in beta.</div>
 
-This topic explains how to use the CSM Threats **Active Protection** feature to block threats automatically. 
+This topic explains how to use the CSM Threats **Active Protection** feature to block crypto mining threats automatically. 
 
-By default, all OOTB Agent [threat detection rules][4] are enabled and actively monitoring for threats. 
+By default, all OOTB Agent [threat detection rules][4] are enabled and actively monitoring for crypto threats. 
 
-Active Protection enables you to proactively block and terminate threats identified by the Datadog Agent threat detection rules.
+Active Protection enables you to proactively block and terminate crypto mining threats identified by the Datadog Agent threat detection rules.
 
-Active Protection streamlines threat detection and targeted response, resulting in risk reduction, allowing DevSecOps and security teams to tackle evolving threats effectively:
+Active Protection streamlines threat detection and targeted response, resulting in risk reduction, allowing DevSecOps and security teams to tackle evolving crypto mining threats effectively:
 
 - Security decides which threats warrant an automated action.
 - DevOps decides which applications and resources are resilient enough to withstand targeted protection.
 
-The end result is threat detection followed by immediate surgical mitigation against high confidence, true positive attacks.
+The end result is crypto mining threat detection followed by immediate surgical mitigation against high confidence, true positive attacks.
 
 ## Protection options
 
@@ -44,27 +43,27 @@ To check if Active Protection is already enabled in your organization, go to [Ag
 
 {{< img src="security/cws/guide/protection-column.png" alt="The protection column indicates that Active Protection is enabled in the org" style="width:100%;" >}}
 
-If Active Protection is available for a rule, then **Monitoring** or **Blocking** is listed in the **Protection** column.
+If Active Protection is available for a crypto mining rule, then **Monitoring** or **Blocking** is listed in the **Protection** column.
 
-If there is no **Monitoring** or **Blocking** in the **Protection** column, then Active Protection is not available for that rule yet.
+If there is no **Monitoring** or **Blocking** in the **Protection** column, then Active Protection is not available for that crypto mining rule yet.
 
-When Active Protection is enabled, and applies to a rule that generated a signal, you can see it by doing the following:
+When Active Protection is enabled, and applies to a crypto mining rule that generated a signal, you can see it by doing the following:
 
 1. In [Signals][1], open a signal.
 2. In the signal, view **Next Steps**. 
    - If Active Protection is enabled, in **Proactively block threats**, the **Active Protection Enabled** is displayed.
    - If Active Protection is not enabled, **Active Protection Enabled** is not displayed.
 
-If Active Protection is enabled and available for an Agent rule, you can see it by looking at the rule:
+If Active Protection is enabled and available for an Agent crypto mining rule, you can see it by looking at the rule:
 
-1. In [Agent Configuration][2], select a rule.
-2. In the rule, if Active Protection is enabled and available, there is a **Protection** section.
+1. In [Agent Configuration][2], select a crypto mining rule.
+2. In the crypto mining rule, if Active Protection is enabled and available, there is a **Protection** section.
 
 ## Enable Active Protection
 
 When you enable Active Protection, you are enabling the Active Protection capability for your entire Datadog org. Active Protection is not limited to individual users.
 
-By default, all OOTB Agent rules are in a monitoring state. Enabling Active Protection does not immediately change the default state. Enabling Active Protection allows you to change the state of a rule from monitoring to blocking.
+By default, all OOTB Agent crypto mining rules are in a monitoring state. Enabling Active Protection does not immediately change the default state. Enabling Active Protection allows you to change the state of a crypto mining rule from monitoring to blocking.
 
 Consequently, you do not need to worry that enabling Active Protection immediately changes the state of threat detection.
 
@@ -85,11 +84,11 @@ After Active Protection is enabled, you can disable it on each Agent Configurati
 
 ## Block threats detected by an Agent rule
 
-After Active Protection is enabled, you can configure the **Blocking** option on an Agent rule and the Agent will terminate the corresponding actions instantly.
+After Active Protection is enabled, you can configure the **Blocking** option on an Agent crypto mining rule and the Agent will terminate the corresponding crypto mining actions instantly.
 
 To enable blocking on an Agent rule:
 
-1. In [Agent Configuration][2], open a rule that has **Monitoring** in the **Protection** column. If there is no **Monitoring** or **Blocking** in the **Protection** column, then Active Protection is not available for that rule yet.
+1. In [Agent Configuration][2], open a crypto mining rule that has **Monitoring** in the **Protection** column. If there is no **Monitoring** or **Blocking** in the **Protection** column, then Active Protection is not available for that rule yet.
 2. In the Agent rule, in **Protection**, select **Blocking**.
    
    {{< img src="security/cws/guide/protection-blocking-option.png" alt="An Agent rule Protection section displaying the Blocking option" style="width:100%;" >}}
@@ -100,7 +99,7 @@ To enable blocking on an Agent rule:
 
 ### Scoping the Agent rule
 
-When you create or edit an Agent rule after Active Protection is enabled, you can select **Blocking** in the rule **Protection** setting. 
+When you create or edit an Agent crypto mining rule after Active Protection is enabled, you can select **Blocking** in the rule **Protection** setting. 
 
 When you select **Blocking**, you can scope where Datadog should apply the rule using the **Everywhere** and **Custom** options. 
 

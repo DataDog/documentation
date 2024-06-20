@@ -1,7 +1,6 @@
 ---
 code_lang: ecs_ec2
 code_lang_weight: 70
-kind: ドキュメント
 title: ECS EC2 で CSM Cloud Workload Security を有効にする
 type: multi-code-lang
 ---

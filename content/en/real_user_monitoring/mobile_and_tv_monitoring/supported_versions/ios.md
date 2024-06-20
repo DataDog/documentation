@@ -11,7 +11,7 @@ further_reading:
    tag: Documentation
    text: RUM iOS Advanced Configuration
  - link: "https://github.com/DataDog/dd-sdk-ios"
-   tag: "Github"
+   tag: "Source Code"
    text: "Source code for dd-sdk-ios"
  - link: "/real_user_monitoring"
    tag: "Documentation"

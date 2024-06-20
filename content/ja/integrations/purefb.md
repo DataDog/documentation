@@ -35,7 +35,7 @@ integration_id: purefb
 integration_title: Pure Storage FlashBlade
 integration_version: 1.0.4
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: purefb
 public_title: Pure Storage FlashBlade

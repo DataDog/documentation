@@ -31,7 +31,7 @@ integration_id: winkmem
 integration_title: Windows Kernel Memory
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: winkmem
 public_title: Windows Kernel Memory

@@ -1,24 +1,25 @@
 ---
-title: Live Tail
-kind: documentation
-description: すべてのログを検索し、ログ分析を実行します
 aliases:
-  - /ja/logs/explore/livetail
-  - /ja/logs/live_tail
+- /ja/logs/explore/livetail
+- /ja/logs/live_tail
+description: すべてのログを検索し、ログ分析を実行します
 further_reading:
-  - link: /logs/log_configuration/processors
-    tag: ドキュメント
-    text: ログの処理方法
-  - link: logs/explorer/side_panel
-    tag: ドキュメント
-    text: ログサイドパネル
-  - link: logs/explorer/#list-of-logs
-    tag: ドキュメント
-    text: ログのリストビュー
+- link: /logs/log_configuration/processors
+  tag: ドキュメント
+  text: ログの処理方法
+- link: logs/explorer/side_panel
+  tag: ドキュメント
+  text: ログサイドパネル
+- link: logs/explorer/#list-of-logs
+  tag: ドキュメント
+  text: ログのリストビュー
+kind: documentation
+title: Live Tail
 ---
+
 ## 概要
 
-Live Tail では、インフラストラクチャー内のどこからでもリアルタイムに近いすべてのログイベントにアクセスできます。Live Tail ビューはインデックスが選択されているかどうかに関わらず**すべての**ログを可視化します (ログインデックスの[除外フィルター][1]も参照してください) 。Live Tail を経由するログはすべて、[ログパイプライン][2]から構造化、処理、および加工されます。
+Live Tail を使用すると、インフラストラクチャー内のどこからでもほぼリアルタイムですべてのログイベントにアクセスできます。Live Tail ビューでは、Datadog にストリーミングされるインデックス付きログと非インデックス付きログの両方を可視化します (ログインデックスの[除外フィルター][1]も参照してください)。Live Tail を経由するログはすべて、[ログパイプライン][2]により構造化され、処理され、強化されます。
 
 たとえば、Live Tail はプロセスが正しい状態になっているか、また新しいデプロイがスムーズに実行されたかを確認する際に特に有用です。
 

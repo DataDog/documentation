@@ -8,7 +8,6 @@ further_reading:
 - link: /developers/integrations/new_check_howto
   tag: ドキュメント
   text: 新しいインテグレーションの設定
-kind: ガイド
 title: コミュニティインテグレーションを使用する
 ---
 

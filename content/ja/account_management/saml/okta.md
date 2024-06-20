@@ -8,7 +8,6 @@ further_reading:
 - link: /account_management/multi_organization/
   tag: Documentation
   text: 複数のアカウントを持つチームとオーガニゼーションの構成
-kind: documentation
 title: Okta SAML IdP
 ---
 

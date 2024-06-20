@@ -41,24 +41,24 @@ Activez cette intégration et instrumentez votre conteneur pour visualiser dans 
 
 Pour plus d'informations sur Cloud Run for Anthos, consultez la [documentation Google Cloud Run for Anthos][1].
 
-## Formule et utilisation
+## Configuration
 
 ### Collecte de métriques
 
-#### Liste des infrastructures
+#### Installation
 
 Configurez lʼ[intégration Google Cloud Platform][2] pour commencer à recueillir des métriques prêtes à l'emploi. Pour configurer des métriques personnalisées, consultez la [documentation sur le sans serveur][3]. 
 
 ### APM
 
-#### Presse-papiers Datadog
+#### Intégration
 Google Cloud Run expose également des [logs d'audit][4]. Les logs Google Cloud Run sont recueillis avec Google Cloud Logging et envoyés à une tâche Dataflow par le biais d'un sujet Cloud Pub/Sub. Si vous ne l'avez pas encore fait, [configurez la journalisation avec le modèle Dataflow Datadog][5].
 
-Une fois cette opération effectuée, exportez vos logs Google Cloud Run depuis Google Cloud Logging vers le Pub/Sub :
+Une fois cette opération effectuée, exportez vos logs Google Cloud Run depuis Google Cloud Logging vers la rubrique Pub/Sub :
 
 1. Accédez à la [page Google Cloud Logging][6] et filtrez les logs Google Cloud Run.
 2. Cliquez sur **Create Sink** et nommez le récepteur.
-3. Choisissez Cloud Pub/Sub comme destination et sélectionnez le Pub/Sub créé à cette fin. **Remarque** : le Pub/Sub peut se situer dans un autre projet.
+3. Choisissez « Cloud Pub/Sub » comme destination et sélectionnez le sujet Pub/Sub créé à cette fin. **Remarque** : le sujet Pub/Sub peut se situer dans un autre projet.
 
     {{< img src="integrations/google_cloud_pubsub/creating_sink2.png" alt="Exporter les logs Google Cloud Pub/Sub vers le Pub Sub" >}}
 
@@ -67,26 +67,26 @@ Une fois cette opération effectuée, exportez vos logs Google Cloud Run depui
 #### Journalisation directe
 Pour plus d'informations sur la journalisation directe des applications vers Datadog depuis vos services Cloud Run, consultez la [documentation sur lʼinformatique sans serveur][3].
 
-### Aide
+### Tracing
 
 Pour plus d'informations sur les instructions d'installation spécialisée de lʼAgent pour Google Cloud Run entièrement géré, consultez la [documentation sur lʼinformatique sans serveur][3].
 
-## Real User Monitoring
+## Données collectées
 
-### Analyse d'entonnoirs
+### Métriques
 {{< get-metrics-from-git "google_cloud_run" >}}
 
 
-### Aide
+### Événements
 
 L'intégration Google Cloud Functions n'inclut aucun événement.
 
-### Aide
+### Checks de service
 
 L'intégration Google Cloud Functions n'inclut aucun check de service.
 
 
-## Aide
+## Dépannage
 
 Besoin d'aide ? Contactez [l'assistance Datadog][8].
 
