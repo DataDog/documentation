@@ -44,7 +44,7 @@ Network Device Monitoring gives you visibility into your on-premises and virtual
     - [Overview of all devices monitored][4]
     - [Across the performance on all interfaces][5]
 5. Catch issues before they arise with proactive monitoring on any [SNMP metric][6].
-6. Optionally, configure the Agent to collect specific metrics and tags by creating [device profiles][801] directly in the Datadog app.
+6. Optionally, configure the Agent to collect specific metrics and tags by creating [device profiles][224] directly in the Datadog app.
 
 ## Supported devices
 
@@ -59,7 +59,7 @@ Datadog provides SD-WAN (Software-Defined Wide Area Network) monitoring for sele
 Datadog supports the following vendors for SD-WAN network monitoring:
 
 - [Meraki SD-WAN][7] (public beta)
-- [Cisco SD-WAN][800] (private beta)
+- [Cisco SD-WAN][223] (private beta)
 
 ### Vendor profiles
 
