@@ -15,17 +15,17 @@ menu:
     - name: Application Performance
       identifier: apm_heading
       weight: 5000000
-    - name: AI Observability
-      identifier: ai_observability_heading
-      weight: 6000000
     - name: Digital Experience
       identifier: digital_experience_heading
-      weight: 7000000
+      weight: 6000000
     - name: Software Delivery
       identifier: software_delivery_heading
-      weight: 8000000
+      weight: 7000000
     - name: Security
       identifier: security_platform_heading
+      weight: 8000000
+    - name: AI Observability
+      identifier: ai_observability_heading
       weight: 9000000
     - name: Log Management
       identifier: log_management_heading
