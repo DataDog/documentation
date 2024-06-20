@@ -112,7 +112,6 @@ You can enable additional CSM features at any time by returning to the [Features
 [5]: https://app.datadoghq.com/security/csm
 [6]: /security/cloud_security_management/
 [7]: /security/guide/aws_fargate_config_guide/
-[8]: /security/cloud_security_management/setup/source_code_integrations
 [9]: https://app.datadoghq.com/security/getting-started
 [10]: https://app.datadoghq.com/security/csm/intro
 [11]: https://app.datadoghq.com/security/configuration/csm/features
