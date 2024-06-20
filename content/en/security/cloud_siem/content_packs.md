@@ -170,7 +170,7 @@ The [Palo Alto Networks Firewall Content Pack][37] includes:
 
 ### Cisco Umbrella
 
-Collect and monitor logs from Cisco Umbrella to gain insights into DNS and Proxy logs
+Collect and monitor logs from Cisco Umbrella to gain insights into DNS and Proxy logs.
 
 The [Cisco Umbrella Content Pack][39] includes:
 - [Detection Rules][40]
