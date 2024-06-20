@@ -6,7 +6,7 @@ type: multi-code-lang
 code_lang_weight: 90
 ---
 
-ASM provides serverless capability for the following platforms and libraries:
+Application Security provides serverless capability for the following platforms and libraries:
 
 {{< partial name="security-platform/appsec-libraries-serverless.html" >}}</br>
 
@@ -24,7 +24,7 @@ ASM provides serverless capability for the following platforms and libraries:
 | Go   		| {{< X >}}         	| 	               			|						|
 
 ### Supported trigger types
-ASM Threat Detection supports HTTP requests as function input only, as that channel has the highest likelihood of attackers exploiting a serverless application. HTTP requests typically come from AWS services such as:
+Threat Detection supports HTTP requests as function input only, as that channel has the highest likelihood of attackers exploiting a serverless application. HTTP requests typically come from AWS services such as:
 - Application Load Balancer (ALB)
 - API Gateway v1 (Rest API)
 - API Gateway v2 (HTTP API)
@@ -54,11 +54,11 @@ Go
 
 ## Google Cloud Run
 
-<div class="alert alert-info">Google Cloud Run support for ASM serverless is in beta</a>.</div>
+<div class="alert alert-info">Google Cloud Run support for Application Security serverless is in beta</a>.</div>
 
 **Note**: Threat Protection through Remote Configuration is not supported. Use [Workflows][5] to block IPs in your [WAF][6].
    
-|Type           	| Threat Detection	|  Vulnerability Management for OSS	| Vulnerability Management for Code-Level 	|
+|Type           	| Threat Detection	|  Software Composition Analysis	| Code Security 	|
 | ---  		|   ---             		|           ----           			|           ----            				|
 | Java  		| beta         	| beta	                			|						|
 | .NET    	| beta         	| beta 	                          		|						|
@@ -71,11 +71,11 @@ Go
 
 ## Azure App Service
 
-Only *web applications* are supported. Azure Functions are not supported with ASM.
+Only *web applications* are supported. Azure Functions are not supported.
 
 **Note**: Threat Protection through Remote Configuration is not supported. Use [Workflows][5] to block IPs in your [WAF][6].
    
-|Type       | OS			     |Threat Detection	|  Vulnerability Management for OSS	 | Vulnerability Management for Code-Level 	|
+|Type       | OS			     |Threat Detection	|  Software Composition Analysis	 | Code Security 	|
 |-----------|--------------------|------------------|------------------------------------|------------------------------------------|
 | Java  	| Windows, Linux	 | {{< X >}}    	| {{< X >}}	                         | beta			                            |
 | .NET    	| Windows, Linux	 | {{< X >}}        | {{< X >}}      	                 |			                                |

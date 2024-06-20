@@ -27,7 +27,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/dont-fear-the-agent/
   tag: ブログ
   text: Agent は難しくない
-kind: documentation
 title: Agent
 ---
 

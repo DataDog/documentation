@@ -1,7 +1,6 @@
 ---
 aliases:
 - /ko/integrations/faq/i-can-t-filter-out-my-elb-instances-will-i-be-charged-for-them/
-kind: 설명서
 title: AWS 통합 빌링
 ---
 

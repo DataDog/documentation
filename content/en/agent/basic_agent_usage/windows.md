@@ -1,6 +1,5 @@
 ---
 title: Basic Agent Usage for Windows
-kind: documentation
 description: "Basic functionality of the Datadog Agent on the Windows platform."
 platform: Windows
 aliases:

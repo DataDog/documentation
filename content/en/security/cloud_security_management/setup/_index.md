@@ -28,7 +28,7 @@ further_reading:
 
 ## Overview
 
-Cloud Security Management (CSM) delivers real-time threat detection and continuous configuration audits across your entire cloud infrastructure, all in a unified view for seamless collaboration and faster remediation.
+Cloud Security Management (CSM) delivers real-time threat detection and continuous configuration audits across your entire infrastructure, all in a unified view for seamless collaboration and faster remediation.
 
 CSM is available in three packages: [CSM Enterprise][1], [CSM Pro][2], and [CSM Workload Security][3]. For more information, see [Changes to Datadog Cloud Security Management][7]. Each package includes access to a specific set of **features**, as shown in the following table:
 
@@ -89,7 +89,7 @@ The following tables represent additional prerequisites relative to each CSM fea
 
 ### CSM Identity Risks 
 
-<div class="alert alert-info"><strong>Note</strong>: CSM Identity Risks is available for AWS and Azure.</div>
+<div class="alert alert-info"><strong>Note</strong>: CSM Identity Risks is available for AWS, Azure, and GCP.</div>
 
 To use CSM Identity Risks, you must [enable resource collection for AWS][105]. If you've already done this, no additional setup is required.
 
@@ -110,6 +110,7 @@ The following table summarizes the scope of coverage available relative to each 
 | Kubernetes Cluster                      | {{< X >}}             | {{< X >}}   |                      |                     |  
 | Docker Host                             | {{< X >}}             |             |                      |                     |
 | Linux Host                              | {{< X >}}             | {{< X >}}   |    {{< X >}}         |                     |  {{< X >}}
+| Windows Host                            |                       | {{< X >}}   |                      |                     |  
 | Docker Container                        |                       | {{< X >}}   |                      |                     |
 | Container Image                         |                       |             |    {{< X >}}         |                     |  {{< X >}}
 | IAM in AWS Account                      |                       |             |                      |  {{< X >}}          |

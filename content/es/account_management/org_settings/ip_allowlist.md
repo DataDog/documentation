@@ -1,5 +1,4 @@
 ---
-kind: documentación
 title: Lista de IP permitidas
 ---
 

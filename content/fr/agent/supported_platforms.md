@@ -4,7 +4,6 @@ further_reading:
 - link: agent/basic_agent_usage/
   tag: Documentation
   text: Utilisation de base de l'Agent
-kind: Documentation
 title: Plateformes prises en charge
 ---
 
@@ -82,7 +81,8 @@ L'Agent Datadog est pris en charge sur un large éventail de systèmes d'exploi
     <td><i class='icon-check-bold'></td>
   </tr>
   <tr>
-    <th rowspan='2'><a href='/agent/basic_agent_usage/redhat/'>RedHat /<br>CentOS<br></a></th>
+    <th rowspan='3'><a href='/agent/basic_agent_usage/redhat/'>RedHat/<br>CentOS/</a><br>
+    <a href="/agent/basic_agent_usage/oracle">Oracle Linux</a><br></th>
     <td>5.0</td>
     <td><i class='icon-check-bold'></td>
     <td></td>
@@ -91,6 +91,12 @@ L'Agent Datadog est pris en charge sur un large éventail de systèmes d'exploi
   <tr>
     <td>>= 6.0</td>
     <td><i class='icon-check-bold'></td>
+    <td><= 6.51.1</td>
+    <td><= 7.51.1</td>
+  </tr>
+  <tr>
+    <td>>= 7.0</td>
+    <td></td>
     <td><i class='icon-check-bold'></td>
     <td><i class='icon-check-bold'></td>
   </tr>
@@ -177,7 +183,8 @@ Une coche ({{< X >}}) indique la prise en charge de toutes les versions mineures
     <td>>= 7.16.0</td>
   </tr>
   <tr>
-    <th><a href='/agent/basic_agent_usage/redhat/'>RedHat /<br>CentOS<br></a></th>
+    <th><a href='/agent/basic_agent_usage/redhat/'>RedHat /<br>CentOS/</a><br>
+    <a href='/agent/basic_agent_usage/oracle/'>Oracle Linux<br></a></th>
     <td>>= 8.0</td>
     <td>>= 6.16.0</td>
     <td>>= 7.16.0</td>
@@ -225,8 +232,8 @@ Une coche ({{< X >}}) indique la prise en charge de toutes les versions mineures
   <tr>
     <td>2012/R2</td>
     <td></td>
-    <td><= 6.49.0</td>
-    <td><= 7.49.0</td>
+    <td><= 6.46.0</td>
+    <td><= 7.46.0</td>
     <td></td>
   </tr>
   <tr>
@@ -247,8 +254,8 @@ Une coche ({{< X >}}) indique la prise en charge de toutes les versions mineures
   <tr>
     <td>8.1</td>
     <td></td>
-    <td><= 6.49.0</td>
-    <td><= 7.49.0</td>
+    <td><= 6.46.0</td>
+    <td><= 7.46.0</td>
     <td></td>
   </tr>
   <tr>
@@ -315,7 +322,7 @@ L'Agent 6 et l'Agent 7 prennent en charge les plateformes ARM V8 64 BITS suiv
 
 {{% tab "Unix" %}}
 
-L'Agent 6 et l'Agent 7 prennent en charge les versions [AIX][1] suivantes :
+L'Agent 6 et l'Agent 7 prennent en charge les versions suivantes dʼ[AIX][1] :
 
 - 6.1 TL9 SP6
 - 7.1 TL5 SP3

@@ -7,7 +7,6 @@ further_reading:
 - link: /dashboards/widgets/treemap/
   tag: 설명서
   text: 트리맵 위젯
-kind: 설명서
 title: 파이 차트 위젯
 widget_type: 선버스트
 ---
