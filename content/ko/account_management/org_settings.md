@@ -6,7 +6,6 @@ further_reading:
 - link: /account_management/users/
   tag: 설명서
   text: 사용자 관리
-kind: 설명서
 title: 조직 설정
 ---
 ## 개요

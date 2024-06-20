@@ -1,6 +1,5 @@
 ---
 title: Set up Tracing on a GitLab Pipeline
-kind: documentation
 aliases:
   - /continuous_integration/setup_pipelines/gitlab
 further_reading:
@@ -36,9 +35,10 @@ Set up tracing in GitLab to collect data on your pipeline executions, analyze pe
 | Infrastructure metric correlation | Infrastructure metric correlation | Correlate jobs to [infrastructure host metrics][14] for self-hosted GitLab runners. |
 | Custom pre-defined tags | Custom pre-defined tags | Set [custom tags][10] to all generated pipeline, stages, and job spans. |
 | [Custom tags][15] [and measures at runtime][16] | Custom tags and measures at runtime | Configure [custom tags and measures][13] at runtime. |
-| [Parameters][17] | Parameters | Set custom `env` or `service` parameters when a pipeline is triggered. |
+| Parameters | Parameters | Set custom `env` or `service` parameters when a pipeline is triggered. |
 | [Pipeline failure reasons][11] | Pipeline failure reasons | Identify pipeline failure reasons from [error messages][15]. |
 | [Approval wait time][23] | Approval wait time  | View the amount of time jobs and pipelines wait for manual approvals. |
+| [Execution time][24] | Execution time  | View the amount of time pipelines have been running jobs. Gitlab refers to this metric as `duration`. Duration in Gitlab and execution time may show different values. Gitlab does not take into consideration jobs that failed due to certain kinds of failures (such as runner system failures). |
 
 The following GitLab versions are supported:
 
@@ -329,3 +329,4 @@ The <a href="https://docs.gitlab.com/ee/administration/object_storage.html#amazo
 [21]: /glossary/#manual-step
 [22]: /glossary/#queue-time
 [23]: /glossary/#approval-wait-time
+[24]: /glossary/#pipeline-execution-time

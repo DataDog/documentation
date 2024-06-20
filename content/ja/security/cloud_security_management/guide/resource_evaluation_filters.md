@@ -6,7 +6,6 @@ further_reading:
 - link: /security/cloud_security_management/setup
   tag: ドキュメント
   text: Cloud Security Management の設定
-kind: ガイド
 title: フィルターを使用して評価からリソースを除外する
 ---
 

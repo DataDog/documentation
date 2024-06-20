@@ -1,7 +1,6 @@
 ---
 dependencies:
 - https://github.com/DataDog/ansible-datadog/blob/main/README.md
-kind: 설명서
 title: Ansible
 ---
 Datadog 에이전트 Ansible 역할을 이용해 Datadog 에이전트와 통합을 설치하고 설정합니다.

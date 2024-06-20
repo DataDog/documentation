@@ -1,7 +1,6 @@
 ---
 code_lang: kubernetes
 code_lang_weight: 60
-kind: ドキュメント
 title: Kubernetes で CSM Cloud Workload Security を有効にする
 type: multi-code-lang
 ---

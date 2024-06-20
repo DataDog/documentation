@@ -9,7 +9,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/announcing-ibm-aix-agent/
   tag: 블로그
   text: Datadog Unix 에이전트로 AIX 모니터링
-kind: 설명서
 title: AIX 에이전트 기본 사용법
 ---
 

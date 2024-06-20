@@ -102,6 +102,8 @@ Then, upgrade your Helm chart:
 helm upgrade -f datadog-values.yaml <RELEASE_NAME> datadog/datadog
 ```
 
+**Note**: Running the Agent as a container still allows you to collect host processes.
+
 [1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
 {{% /tab %}}
 {{% tab "Datadog Operator" %}}
@@ -124,6 +126,8 @@ spec:
 ```
 
 {{% k8s-operator-redeploy %}}
+
+**Note**: Running the Agent as a container still allows you to collect host processes.
 
 {{% /tab %}}
 {{% tab "Kubernetes (Manual)" %}}
