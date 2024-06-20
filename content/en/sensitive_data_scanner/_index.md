@@ -172,16 +172,16 @@ You can create custom scanning rules using regex patterns to scan for sensitive 
 {{% sds-scanning-rule %}}
 1. Click **Add Rule**.
 
+[1]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner/configuration
+[2]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/sensitive_data_scanner_rule
+{{< /collapse-content >}} 
+
 **Notes**:
 
 - Any rules that you add or update affect only data coming into Datadog after the rule was defined.
 - Sensitive Data Scanner does not affect any rules you define on the Datadog Agent directly.
 - After rules are added, ensure that the toggles for your scanning groups are enabled to begin scanning.
 
-
-[1]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner/configuration
-[2]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/sensitive_data_scanner_rule
-{{< /collapse-content >}} 
 {{% /tab %}}
 {{% tab "Using the Agent" %}}
 
