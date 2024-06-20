@@ -69,7 +69,7 @@ When an alias is provided in a `FROM` item, it completely hides the actual name 
 
 `GROUP BY` and `ORDER BY` clause expressions can be column names, arbitrary expressions formed from input columns, or the name or ordinal number of an output expression (a `SELECT` expression). Output expression ordinals are 1-indexed.
 
-For example, the output of this query is ordered first by `ex1`, then `ex2`, and then `ex3`:
+For example, the output of this query is ordered first by `ex3`, then `ex2`, and then `ex1`:
 
 {{< code-block lang="sql" >}}
 SELECT ex1, ex2, ex3 FROM table ORDER BY 3, 2, 1;
