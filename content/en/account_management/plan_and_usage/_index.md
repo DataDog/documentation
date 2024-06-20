@@ -1,6 +1,5 @@
 ---
 title: Plan and Usage Settings
-kind: documentation
 ---
 
 [Administrators][1] can access the [organization settings][2] by clicking Plan & Usage from the Account menu in the bottom of the left side navigation or by selecting Plan & Usage from the header dropdown at the top of the Personal Settings page.

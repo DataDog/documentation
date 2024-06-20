@@ -8,7 +8,6 @@ further_reading:
 - link: /developers/integrations/agent_integration
   tag: Documentación
   text: Crear una nueva integración
-kind: guía
 title: Utiliza integraciones de la comunidad y el mercado
 ---
 

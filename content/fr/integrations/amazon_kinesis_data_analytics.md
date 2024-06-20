@@ -14,7 +14,7 @@ integration_id: amazon-kinesis-data-analytics
 integration_title: Amazon Kinesis Data Analytics
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: amazon_kinesis_data_analytics
 public_title: Intégration Datadog/Amazon Kinesis Data Analytics

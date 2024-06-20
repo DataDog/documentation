@@ -1,6 +1,5 @@
 ---
 title: Container Cost Allocation
-kind: documentation
 private: true
 description: Learn how to allocate Cloud Cost Management spending across your organization with Container Cost Allocation.
 further_reading:

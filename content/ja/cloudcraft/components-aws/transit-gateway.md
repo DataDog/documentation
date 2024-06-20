@@ -1,5 +1,4 @@
 ---
-kind: ガイド
 title: Transit Gateway コンポーネント
 ---
 ## 概要

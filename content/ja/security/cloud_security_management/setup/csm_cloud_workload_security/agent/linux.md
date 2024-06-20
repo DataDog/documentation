@@ -1,7 +1,6 @@
 ---
 code_lang: linux
 code_lang_weight: 80
-kind: ドキュメント
 title: Linux で CSM Cloud Workload Security を有効にする
 type: multi-code-lang
 ---

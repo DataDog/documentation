@@ -1,6 +1,5 @@
 ---
 title: Custom Costs
-kind: documentation
 is_beta: true
 private: true
 disable_toc: false

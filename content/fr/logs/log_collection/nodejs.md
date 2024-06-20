@@ -1,28 +1,33 @@
 ---
-title: Collecte de logs avec NodeJS
-kind: documentation
 aliases:
-  - /fr/logs/languages/nodejs
+- /fr/logs/languages/nodejs
 further_reading:
-  - link: /logs/log_configuration/processors
-    tag: Documentation
-    text: Apprendre à traiter vos logs
-  - link: /logs/log_configuration/parsing
-    tag: Documentation
-    text: En savoir plus sur le parsing
-  - link: /logs/explorer/
-    tag: Documentation
-    text: Apprendre à explorer vos logs
-  - link: /logs/explorer/#visualiser-les-donnees
-    tag: Documentation
-    text: Effectuer des analyses de logs
-  - link: /logs/faq/log-collection-troubleshooting-guide/
-    tag: FAQ
-    text: Dépannage pour la collecte de logs
+- link: /logs/log_configuration/processors
+  tag: Documentation
+  text: Apprendre à traiter vos logs
+- link: /logs/log_configuration/parsing
+  tag: Documentation
+  text: En savoir plus sur le parsing
+- link: /logs/explorer/
+  tag: Documentation
+  text: Apprendre à explorer vos logs
+- link: /logs/explorer/#visualiser-les-donnees
+  tag: Documentation
+  text: Effectuer des analyses de logs
+- link: /logs/faq/log-collection-troubleshooting-guide/
+  tag: FAQ
+  text: Guide de dépannage pour la collecte de logs
+- link: /glossary/#tail
+  tag: Glossaire
+  text: Entrée du glossaire pour le terme « tail »
+kind: documentation
+title: Collecte de logs avec NodeJS
 ---
+
+
 ## Configurer votre logger
 
-Utilisez [Winston][1] pour la création de logs depuis votre application NodeJS afin de profiter de toutes les fonctionnalités dont vous avez besoin pour élaborer votre stratégie de journalisation. 
+Pour envoyer vos logs à Datadog, activez la journalisation au sein d'un fichier et suivez ce fichier avec l'Agent Datadog. Utilisez la bibliothèque de journalisation [Winston][1] pour effectuer la journalisation depuis votre application Node.js.
 
 Winston est disponible via [NPM][2]. Pour démarrer, vous devez ajouter la dépendance à votre code :
 
@@ -45,7 +50,7 @@ npm install --save winston
 }
 ```
 
-### Journalisation dans un fichier
+### Écrire les logs dans un fichier
 
 Dans votre fichier Bootstrap ou dans votre code, déclarez le logger comme suit :
 
@@ -81,8 +86,8 @@ var winston = require('winston');
 var logger = new (winston.Logger)({
     transports: [
         new (winston.transports.File)({
-            name: '<NOM_LOGGER>',
-            filename: '<NOM_FICHIER>.log',
+            name: '<LOGGER_NAME>',
+            filename: '<FILE_NAME>.log',
             json: true,
             level: 'info'
         })
@@ -90,60 +95,66 @@ var logger = new (winston.Logger)({
 });
 
 // Example logs
-logger.log('info', 'Voici un log simple');
-logger.info('Voici un log avec des métadonnées',{color: 'blue' });
+logger.log('info', 'Hello simple log!');
+logger.info('Hello log with metas',{color: 'blue' });
 ```
 
 {{% /tab %}}
 {{< /tabs >}}
 
-Vérifiez le contenu du fichier `<NOM_FICHIER>.log` pour vous assurer que Winston prend déjà en charge la journalisation de tous les éléments en JSON :
+Vérifiez le contenu du fichier `<NOM_FICHIER>.log` pour vous assurer que Winston prend en charge la journalisation en JSON :
 
 ```json
 {"level":"info","message":"Voici un log simple","timestamp":"2015-04-23T16:52:05.337Z"}
 {"color":"blue","level":"info","message":"Voici un log avec des métadonnées","timestamp":"2015-04-23T16:52:05.339Z"}
 ```
 
-## Associer votre service à l'ensemble des logs et traces
-
-Si l'APM est activé pour cette application, associez vos logs et vos traces en ajoutant automatiquement l'ID des traces, l'ID des spans et les paramètres `env`, `service` et `version` à vos logs. Pour ce faire, [suivez les instructions relatives à l'utilisation de NodeJS pour l'APM][3] (en anglais).
-
-**Remarque** : si le traceur de l'APM injecte `service` dans vos logs, cela remplace la valeur définie dans la configuration de l'Agent.
-
 ## Configurer votre Agent Datadog
 
-Créez un fichier `nodejs.d/conf.yaml` dans votre dossier `conf.d/` avec le contenu suivant :
+Une fois la [collecte de logs activée][6], configurez la [collecte de logs personnalisée][7] pour suivre vos fichiers de logs et les transmettre les nouveaux logs à Datadog.
+
+1. Créez un dossier `nodejs.d/` dans le [répertoire de configuration de l'Agent][6] `conf.d/`.
+2. Créez un fichier `conf.yaml` dans votre dossier `nodejs.d/` avec le contenu suivant :
 
 ```yaml
 init_config:
 
 instances:
 
-## Section Logs
+##Log section
 logs:
 
   - type: file
-    path: "<CHEMIN_NOM_FICHIER>.log"
-    service: nodejs
+    path: "<FILE_NAME_PATH>.log"
+    service: <SERVICE_NAME>
     source: nodejs
     sourcecategory: sourcecode
 ```
 
-## Logging sans agent
+3. [Redémarrez l'Agent][9].
+4. Lancez la [sous-commande status de l'Agent][10] et cherchez `nodejs` dans la section `Checks` pour vérifier que les logs sont bien transmis à Datadog.
+
+Si les logs sont au format JSON, Datadog [parse automatiquement les messages de log][11] pour extraire les attributs. Utilisez le [Log Explorer][12] pour visualiser et dépanner vos logs.
+
+## Associer votre service à l'ensemble des logs et traces
+
+Si l'APM est activé pour cette application, associez vos logs et vos traces en ajoutant automatiquement l'ID des traces, l'ID des spans et les paramètres `env`, `service` et `version` à vos logs. Pour ce faire, [suivez les instructions relatives à l'utilisation de Node.js pour l'APM][3] (en anglais).
+
+**Remarque** : si le traceur de l'APM injecte `service` dans vos logs, cela remplace la valeur définie dans la configuration de l'Agent.
+
+## Logging sans Agent
 
 Vous pouvez transmettre vos logs depuis votre application à Datadog sans installer d'Agent sur votre host. Veuillez cependant noter qu'il est conseillé d'utiliser un Agent pour l'envoi de vos logs, en raison de ses capacités natives de gestion de la connexion.
 
 Utilisez le [transport HTTP Winston][4] pour envoyer vos logs directement via l'[API Log Datadog][5].
 Dans votre fichier Bootstrap ou dans votre code, déclarez le logger comme suit :
 
-{{< site-region region="us" >}}
-
 ```javascript
 const { createLogger, format, transports } = require('winston');
 
 const httpTransportOptions = {
-  host: 'http-intake.logs.datadoghq.com',
-  path: '/api/v2/logs?dd-api-key=<CLÉ_API_DATADOG>&ddsource=nodejs&service=<NOM_APPLICATION>',
+  host: 'http-intake.logs.{{< region-param key="dd_site" >}}',
+  path: '/api/v2/logs?dd-api-key=<DATADOG_API_KEY>&ddsource=nodejs&service=<APPLICATION_NAME>',
   ssl: true
 };
 
@@ -158,52 +169,17 @@ const logger = createLogger({
 
 module.exports = logger;
 
-// Exemples de log
-logger.log('info', 'Voici un log simple !');
-logger.info('Voici un log avec des métadonnées',{color: 'blue' });
+// Example logs
+logger.log('info', 'Hello simple log!');
+logger.info('Hello log with metas',{color: 'blue' });
 ```
 
-Remarque : vous pouvez également tester le [transport Datadog][1] créé par la communauté.
+Remarque : vous pouvez également utiliser le [transport Datadog][1] créé par la communauté.
 
-[1]: https://github.com/winstonjs/winston/blob/master/docs/transports.md#datadog-transport
-
-{{< /site-region >}}
-{{< site-region region="eu" >}}
-
-```javascript
-const { createLogger, format, transports } = require('winston');
-
-const httpTransportOptions = {
-  host: 'http-intake.logs.datadoghq.eu',
-  path: '/api/v2/logs?dd-api-key=<CLÉ_API_DATADOG>&ddsource=nodejs&service=<NOM_APPLICATION>',
-  ssl: true
-};
-
-const logger = createLogger({
-  level: 'info',
-  exitOnError: false,
-  format: format.json(),
-  transports: [
-    new transports.Http(httpTransportOptions),
-  ],
-});
-
-module.exports = logger;
-
-// Exemples de log
-logger.log('info', 'Voici un log simple !');
-logger.info('Voici un log avec des métadonnées',{color: 'blue' });
-```
-
-[1]: https://github.com/winstonjs/winston/blob/master/docs/transports.md#http-transport
-[2]: /fr/api/v1/logs/#send-logs
-
-{{< /site-region >}}
 
 ## Dépannage
 
-Si jamais vous rencontrez des erreurs de correspondance DNS ou si votre application plante, il se peut que ce problème découle des exceptions logstash non détectées.
-Un gestionnaire doit être ajouté comme suit :
+Si jamais vous rencontrez des erreurs de correspondance DNS, il se peut que ce problème découle des exceptions logstash non détectées. Un gestionnaire doit être ajouté comme suit :
 
 ```js
 var logstash = new winston.transports.Logstash({ ... });
@@ -220,6 +196,15 @@ Assurez-vous de ne pas définir le paramètre `max_connect_retries` sur `1` (val
 
 [1]: https://github.com/winstonjs/winston
 [2]: https://www.npmjs.com
-[3]: /fr/tracing/connect_logs_and_traces/nodejs/
+[3]: /fr/tracing/other_telemetry/connect_logs_and_traces/nodejs/
 [4]: https://github.com/winstonjs/winston/blob/master/docs/transports.md#http-transport
 [5]: /fr/api/v1/logs/#send-logs
+[6]: /fr/agent/logs/?tab=tailfiles#activate-log-collection
+[7]: /fr/agent/logs/?tab=tailfiles#custom-log-collection
+[8]: /fr/agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
+[9]: /fr/agent/configuration/agent-commands/?tab=agentv6v7#restart-the-agent
+[10]: /fr/agent/configuration/agent-commands/?tab=agentv6v7#agent-status-and-information
+[11]: /fr/logs/log_configuration/parsing/?tab=matchers
+[12]: /fr/logs/explorer/#overview
+[13]: https://github.com/winstonjs/winston/blob/master/docs/transports.md#datadog-transport
+[14]: /fr/glossary/#tail

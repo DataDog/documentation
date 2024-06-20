@@ -34,7 +34,7 @@ integration_id: scalr
 integration_title: Scalr
 integration_version: 1.0.0
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: scalr
 public_title: Scalr

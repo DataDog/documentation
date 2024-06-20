@@ -151,7 +151,7 @@ To set up a monitor that alerts on your CI pipeline when the average duration in
 [6]: https://app.datadoghq.com/dash/integration/30516/ci-visibility---pipelines-dashboard
 [7]: https://app.datadoghq.com/ci/pipelines
 [8]: /continuous_integration/search/
-[9]: /continuous_integration/explorer?tab=pipelineexecutions
+[9]: /continuous_integration/explorer
 [10]: /tests/guides/flaky_test_management/
 [11]: /continuous_integration/pipelines/?tab=githubactions#supported-features
 [12]: /continuous_integration/guides/infrastructure_metrics_with_gitlab/

@@ -38,7 +38,7 @@ integration_id: redisenterprise
 integration_title: RedisEnterprise
 integration_version: 1.2.0
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: redisenterprise
 public_title: RedisEnterprise
