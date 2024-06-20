@@ -714,7 +714,7 @@ menu:
       identifier: otel_logs
       parent: otel_interoperability
       weight: 605
-    - name: Env Var Configuration
+    - name: Environment Variable Configuration
       url: /opentelemetry/interoperability/environment_variable_support
       identifier: otel_env_var_configuration
       parent: otel_interoperability

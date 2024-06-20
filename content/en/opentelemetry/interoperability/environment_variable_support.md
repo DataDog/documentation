@@ -1,5 +1,5 @@
 ---
-title: Configuring Tracing Libraries Using Open Telemetry Environment Variables
+title: Configuring Tracing Libraries Using OpenTelemetry Environment Variables
 further_reading:
     - link: '/tracing/trace_collection/library_config/dotnet-core'
       tag: 'Documentation'
