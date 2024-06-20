@@ -223,7 +223,7 @@ For more information about initializing the ConfigCat Javascript SDK, see Config
 {{% /tab %}}
 {{% tab "iOS" %}}
 
-Initialize the ConfigCat Swift iOS SDK by subscribing to the `flagEvaluated` event that reports feature flag evaluations to Datadog:
+When initializing the ConfigCat Swift iOS SDK, subscribe to the `flagEvaluated` event and report feature flag evaluations to Datadog:
 
 ```swift
   let client = ConfigCatClient.get(sdkKey: "#YOUR-SDK-KEY#") { options in
@@ -241,7 +241,7 @@ For more information about initializing the ConfigCat Swift (iOS) SDK, see Confi
 {{% /tab %}}
 {{% tab "Android" %}}
 
-Initialize the ConfigCat Android SDK by subscribing to the `flagEvaluated` event that reports feature flag evaluations to Datadog:
+When initializing the ConfigCat Android SDK, subscribe to the `flagEvaluated` event and report feature flag evaluations to Datadog:
 
 ```java
   ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
@@ -259,7 +259,7 @@ For more information about initializing the ConfigCat Android SDK, see ConfigCat
 {{% /tab %}}
 {{% tab "Flutter" %}}
 
-Initialize the ConfigCat Dart SDK by subscribing to the `flagEvaluated` event that reports feature flag evaluations to Datadog:
+When initializing the ConfigCat Dart SDK, subscribe to the `flagEvaluated` event and report feature flag evaluations to Datadog:
 
 ```dart
   final client = ConfigCatClient.get(
@@ -285,7 +285,7 @@ For more information about initializing the ConfigCat Dart (Flutter) SDK, see Co
 
 {{% tab "React Native" %}}
 
-Initialize the ConfigCat React SDK by subscribing to the `flagEvaluated` event that reports feature flag evaluations to Datadog:
+When initializing the ConfigCat React SDK, subscribe to the `flagEvaluated` event and report feature flag evaluations to Datadog:
 
 ```typescript
 <ConfigCatProvider
