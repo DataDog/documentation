@@ -10,7 +10,6 @@ further_reading:
 - link: /dashboards/graphing_json/
   tag: Documentación
   text: Creación de dashboards con JSON
-kind: documentación
 title: Widget de estado del check
 widget_type: check_status
 ---

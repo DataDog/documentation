@@ -9,7 +9,6 @@ further_reading:
 - link: /tracing/services/services_map/
   tag: 설명서
   text: 서비스 맵
-kind: 설명서
 title: 토폴로지 맵 위젯
 widget_type: topology_map
 ---

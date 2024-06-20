@@ -373,6 +373,14 @@ components:
       required: true
       schema:
         type: string
+    OrgConfigName:
+      description: The name of an Org Config.
+      in: path
+      name: org_config_name
+      required: true
+      schema:
+        example: monitor_timezone
+        type: string
     PageNumber:
       description: Specific page number to return.
       in: query
@@ -7415,10 +7423,15 @@ components:
           example: '@error.type'
           type: string
         limit:
-          description: The maximum number of groups to return.
+          default: 10
+          description: 'The maximum buckets to return for this group by. Note: at
+            most 10000 buckets are allowed.
+
+            If grouping by multiple facets, the product of limits must not exceed
+            10000.'
           example: 10
           format: int32
-          maximum: 2147483647
+          maximum: 10000
           type: integer
         sort:
           $ref: '#/components/schemas/EventsGroupBySort'
@@ -13853,6 +13866,104 @@ components:
           items:
             $ref: '#/components/schemas/OpsgenieServiceResponseData'
           type: array
+      required:
+      - data
+      type: object
+    OrgConfigGetResponse:
+      description: A response with a single Org Config.
+      properties:
+        data:
+          $ref: '#/components/schemas/OrgConfigRead'
+      required:
+      - data
+      type: object
+    OrgConfigListResponse:
+      description: A response with multiple Org Configs.
+      properties:
+        data:
+          description: An array of Org Configs.
+          items:
+            $ref: '#/components/schemas/OrgConfigRead'
+          type: array
+      required:
+      - data
+      type: object
+    OrgConfigRead:
+      description: A single Org Config.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/OrgConfigReadAttributes'
+        id:
+          description: A unique identifier for an Org Config.
+          example: abcd1234
+          type: string
+        type:
+          $ref: '#/components/schemas/OrgConfigType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    OrgConfigReadAttributes:
+      description: Readable attributes of an Org Config.
+      properties:
+        description:
+          description: The description of an Org Config.
+          example: Frobulate the turbo encabulator manifold
+          type: string
+        modified_at:
+          description: The timestamp of the last Org Config update (if any).
+          format: date-time
+          nullable: true
+          type: string
+        name:
+          description: The machine-friendly name of an Org Config.
+          example: monitor_timezone
+          type: string
+        value:
+          description: The value of an Org Config.
+        value_type:
+          description: The type of an Org Config value.
+          example: bool
+          type: string
+      required:
+      - name
+      - description
+      - value_type
+      - value
+      type: object
+    OrgConfigType:
+      description: Data type of an Org Config.
+      enum:
+      - org_configs
+      example: org_configs
+      type: string
+      x-enum-varnames:
+      - ORG_CONFIGS
+    OrgConfigWrite:
+      description: An Org Config write operation.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/OrgConfigWriteAttributes'
+        type:
+          $ref: '#/components/schemas/OrgConfigType'
+      required:
+      - type
+      - attributes
+      type: object
+    OrgConfigWriteAttributes:
+      description: Writable attributes of an Org Config.
+      properties:
+        value:
+          description: The value of an Org Config.
+      required:
+      - value
+      type: object
+    OrgConfigWriteRequest:
+      description: A request to update an Org Config.
+      properties:
+        data:
+          $ref: '#/components/schemas/OrgConfigWrite'
       required:
       - data
       type: object
@@ -32003,6 +32114,105 @@ paths:
         resultsPath: data
       x-undo:
         type: safe
+  /api/v2/org_configs:
+    get:
+      description: Returns all Org Configs (name, description, and value).
+      operationId: ListOrgConfigs
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrgConfigListResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: List Org Configs
+      tags:
+      - Organizations
+      x-menu-order: 100
+      x-undo:
+        type: safe
+  /api/v2/org_configs/{org_config_name}:
+    get:
+      description: Return the name, description, and value of a specific Org Config.
+      operationId: GetOrgConfig
+      parameters:
+      - $ref: '#/components/parameters/OrgConfigName'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrgConfigGetResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Get a specific Org Config value
+      tags:
+      - Organizations
+      x-menu-order: 101
+      x-undo:
+        type: safe
+    patch:
+      description: Update the value of a specific Org Config.
+      operationId: UpdateOrgConfig
+      parameters:
+      - $ref: '#/components/parameters/OrgConfigName'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrgConfigWriteRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrgConfigGetResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - org_management
+      summary: Update a specific Org Config
+      tags:
+      - Organizations
+      x-menu-order: 102
+      x-undo:
+        type: idempotent
   /api/v2/permissions:
     get:
       description: Returns a list of all permissions, including name, description,

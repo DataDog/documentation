@@ -1,6 +1,5 @@
 ---
 title: "Text label Component"
-kind: documentation
 ---
 
 ## Overview

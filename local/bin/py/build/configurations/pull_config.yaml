@@ -354,7 +354,6 @@
             front_matters:
               dependencies: ["https://github.com/DataDog/datadog-static-analyzer-circleci-orb/blob/main/README.md"]
               title: Static Analysis and CircleCI Orbs
-              kind: documentation
               description: Use Datadog and CircleCI to run Static Analysis jobs in a CI pipeline.
               aliases:
               - /continuous_integration/static_analysis/circleci_orbs
@@ -372,7 +371,6 @@
             front_matters:
               dependencies: ["https://github.com/DataDog/datadog-static-analyzer-github-action/blob/main/README.md"]
               title: Static Analysis and GitHub Actions
-              kind: documentation
               description: Use Datadog and GitHub to run Static Analysis jobs in a CI pipeline.
               aliases:
               - /continuous_integration/static_analysis/github_actions
@@ -402,7 +400,6 @@
             front_matters:
               dependencies: ["https://github.com/DataDog/datadog-sca-github-action/blob/main/README.md"]
               title: Software Composition Analysis and GitHub Actions
-              kind: documentation
               description: Use Datadog and GitHub to run Software Composition Analysis jobs in a CI pipeline.
 
       - repo_name: datadog-cdk-constructs

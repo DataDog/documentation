@@ -15,7 +15,6 @@ further_reading:
 - link: /dashboards/guide/slo_data_source
   tag: Guía
   text: Haz gráficos de datos históricos de SLO en dashboards
-kind: documentación
 title: Widget de series temporales
 widget_type: series temporales
 ---

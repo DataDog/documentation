@@ -1,6 +1,5 @@
 ---
 title: Can you give me a demo of the product?
-kind: faq
 ---
 
 You can book an online demo with a member of the Cloudcraft team on the [Request a live demo page][1].
