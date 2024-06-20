@@ -11,5 +11,6 @@ cascade:
 ---
 
 {{< whatsnext desc="General Guides:" >}}
-
+    {{< nextlink href="/product_analytics/guide/rum-for-product-analytics" >}}Use RUM & Session Replay for Product Analytics{{< /nextlink >}}
+    {{< nextlink href="/product_analytics/guide/rum-for-product-analytics" >}}Transitioning from RUM to Product Analytics{{< /nextlink >}}
 {{< /whatsnext >}}
