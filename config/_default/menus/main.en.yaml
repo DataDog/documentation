@@ -2173,7 +2173,7 @@ menu:
       identifier: workflows_private_actions
       weight: 5
     - name: Private Action Credentials
-      url: service_management/workflows/private_actions/private_actions_credentials/
+      url: service_management/workflows/private_actions/private_action_credentials/
       parent: workflows_private_actions
       identifier: workflows_private_actions_creds
       weight: 501
@@ -2244,7 +2244,7 @@ menu:
       identifier: app_builder_private_actions
       weight: 7
     - name: Private Action Credentials
-      url: service_management/app_builder/private_actions/private_actions_credentials/
+      url: service_management/app_builder/private_actions/private_action_credentials/
       parent: app_builder_private_actions
       identifier: app_builder_private_actions_creds
       weight: 701   

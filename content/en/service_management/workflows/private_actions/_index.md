@@ -9,12 +9,15 @@ further_reading:
 - link: "service_management/workflows/connections"
   tag: "Documentation"
   text: "Workflow Connections"
-- link: "service_management/workflows/guide/private_action_credentials"
+- link: "service_management/workflows/private_actions/private_action_credentials"
   tag: "Documentation"
-  text: "Handling Private Action Credentials"
+  text: "Handling Private Action Credentials for Workflow Automation"
+- link: "service_management/app_builder/private_actions/private_action_credentials"
+  tag: "Documentation"
+  text: "Handling Private Action Credentials for App Builder"
 ---
 
-{{< callout url="https://google.com" btn_hidden="false" header="Join the Beta!">}}
+{{< callout url="https://docs.google.com/forms/d/e/1FAIpQLSc_AEtxd8MPHUFyYIbX3hWEVF18iSWuk7kmA0PtlOPgo0pi3w/viewform" btn_hidden="false" header="Join the Beta!">}}
 Private Actions are in beta. Use this form to request access today.
 {{< /callout >}}
 
@@ -47,7 +50,7 @@ From the **Private Action Runner** page in [Workflow Automation][6] or [App Buil
 1. Enter a name for your runner.
 1. Click **Both**.
 1. Enter a runner hostname. App Builder calls your runner using this hostname over HTTPS. You must bring your own SSL termination and forward to port 9016 in the container.
-1. Create a directory on your host where the runner can store its configuration, such as `./config`. You can also use this directory to [store any credentials][10] required by the runner's connection.
+1. Create a directory on your host where the runner can store its configuration, such as `./config`. You can also use this directory to store any credentials required by the runner's connection.
 1. Deploy your runner with Docker or Docker Compose:
 
 {{< tabs >}}
@@ -75,7 +78,7 @@ From the **Private Action Runner** page in [Workflow Automation][6] or [App Buil
 1. Enter a name for your runner.
 1. Click **App Builder**.
 1. Enter a runner hostname. App Builder calls your runner using this hostname over HTTPS. You must bring your own SSL termination and forward to port 9016 in the container.
-1. Create a directory on your host where the runner can store its configuration, such as `./config`. You can also use this directory to [store any credentials][10] required by the runner's connection.
+1. Create a directory on your host where the runner can store its configuration, such as `./config`. You can also use this directory to store any credentials required by the runner's connection.
 1. Deploy your runner with Docker or Docker Compose:
 {{< tabs >}}
 {{% tab "Docker" %}}
@@ -104,7 +107,7 @@ From the **Private Action Runner** page in [Workflow Automation][6] or [App Buil
 {{% collapse-content title="Workflow Automation" level="p" %}}
 1. Enter a name for your runner.
 1. Click **Workflows**.
-1. Create a directory on your host where the runner can store its configuration, such as `./config`. You can also use this directory to [store any credentials][10] required by the runner's connection.
+1. Create a directory on your host where the runner can store its configuration, such as `./config`. You can also use this directory to store any credentials required by the runner's connection.
 1. Deploy your runner with Docker or Docker Compose:
 {{< tabs >}}
 {{% tab "Docker" %}}
@@ -142,7 +145,9 @@ To pair a runner to a connection:
 1. From the [Workflow Automation][8] or [App Builder][9] Connections page, click **New Connection**.
 1. Select the integration you want to connect with your private action runner. For a list of integrations that support private actions, see [Overview](#overview).
 1. Add a **Connection Name** and select your runner from the **Private Action Runner** dropdown.
-1. Add the paths to any required credential files. For more information, see [Handling Private Action Credentials][10].
+1. Add the paths to any required credential files. For more information on credentials, see:
+   - [Handling Private Action Credentials for Workflows][10].
+   - [Handling Private Action Credentials for App Builder][16].
 
 ## Use a private action
 
@@ -180,10 +185,11 @@ From the **Private Action Runner** page in [Workflow Automation][6] or [App Buil
 [7]: https://app.datadoghq.com/app-builder/private-action-runners
 [8]: https://app.datadoghq.com/workflow/connections
 [9]: https://app.datadoghq.com/app-builder/connections
-[10]: /service_management/workflows/guide/private_action_credentials
+[10]: /service_management/workflows/private_actions/private_action_credentials
 [11]: https://app.datadoghq.com/workflow/
 [12]: https://app.datadoghq.com/app-builder/
 [13]: /service_management/workflows/build
 [14]: /service_management/app_builder/build
 [15]: /service_management/workflows/build/#build-a-workflow-with-the-workflow-builder
+[16]: /service_management/app_builder/private_actions/private_action_credentials
 
