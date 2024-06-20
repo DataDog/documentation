@@ -1,6 +1,5 @@
 ---
 title: Setting up Cloud Security Management on the Agent
-kind: documentation
 type: multi-code-lang
 ---
 

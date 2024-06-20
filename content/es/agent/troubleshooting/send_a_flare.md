@@ -11,7 +11,6 @@ further_reading:
 - link: /agent/troubleshooting/agent_check_status/
   tag: Documentación
   text: Consultar el estado de un check del Agent
-kind: documentación
 title: Flare del Agent
 ---
 

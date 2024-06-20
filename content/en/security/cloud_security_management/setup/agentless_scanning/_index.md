@@ -1,6 +1,5 @@
 ---
 title: Setting up Agentless Scanning for Cloud Security Management
-kind: documentation
 ---
 
 {{< site-region region="gov" >}}

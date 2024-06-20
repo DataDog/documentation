@@ -1,7 +1,6 @@
 ---
 code_lang: docker
 code_lang_weight: 65
-kind: ドキュメント
 title: Docker で CSM Enterprise を有効にする
 type: multi-code-lang
 ---

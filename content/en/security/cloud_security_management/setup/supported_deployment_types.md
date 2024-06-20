@@ -1,6 +1,5 @@
 ---
 title: Cloud Security Supported Deployment Types
-kind: documentation
 ---
 
 The following table summarizes the CSM features available relative to each deployment type.

@@ -1,6 +1,5 @@
 ---
 title: Setting up Cloud Security Management on Kubernetes
-kind: documentation
 code_lang: kubernetes
 type: multi-code-lang
 code_lang_weight: 60 # a number that represents relative weight. 

@@ -961,6 +961,20 @@
     "description": "Get all active downtimes for the specified monitor.",
     "summary": "Get active downtimes for a monitor"
   },
+  "ListOrgConfigs": {
+    "description": "Returns all Org Configs (name, description, and value).",
+    "summary": "List Org Configs"
+  },
+  "GetOrgConfig": {
+    "description": "Return the name, description, and value of a specific Org Config.",
+    "summary": "Get a specific Org Config value"
+  },
+  "UpdateOrgConfig": {
+    "description": "Update the value of a specific Org Config.",
+    "summary": "Update a specific Org Config",
+    "request_description": "",
+    "request_schema_description": "A request to update an Org Config."
+  },
   "ListPermissions": {
     "description": "Returns a list of all permissions, including name, description, and ID.",
     "summary": "List permissions"

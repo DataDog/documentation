@@ -1,6 +1,5 @@
 ---
 title: Setting up Cloud Security Management on ECS EC2
-kind: documentation
 code_lang: ecs_ec2
 type: multi-code-lang
 code_lang_weight: 70 # a number that represents relative weight. 
