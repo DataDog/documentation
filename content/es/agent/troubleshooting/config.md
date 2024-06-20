@@ -3,7 +3,6 @@ further_reading:
 - link: /agent/troubleshooting/debug_mode/
   tag: Solucionar problemas del Agent
   text: Modo de depuración del Agent
-kind: documentación
 title: Gestión de la configuración del tiempo de ejecución del Agent
 ---
 

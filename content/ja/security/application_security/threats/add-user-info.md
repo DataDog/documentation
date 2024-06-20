@@ -9,7 +9,6 @@ further_reading:
 - link: /security/application_security/threats/library_configuration/
   tag: ドキュメント
   text: その他のセットアップに関する注意と構成オプション
-kind: documentation
 title: ユーザーモニタリングと保護
 ---
 

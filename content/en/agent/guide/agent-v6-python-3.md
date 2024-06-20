@@ -1,6 +1,5 @@
 ---
 title: Python Version Management
-kind: guide
 further_reading:
 - link: "/agent/versions/upgrade_to_agent_v7/"
   tag: "Documentation"
@@ -109,7 +108,6 @@ If you have previously pinned the image version:
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
-kind: DatadogAgent
 metadata:
   name: datadog
 spec:
@@ -126,7 +124,6 @@ or you are using `image.name`:
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
-kind: DatadogAgent
 metadata:
   name: datadog
 spec:
@@ -153,7 +150,6 @@ If you have enabled cluster check runners deployment, also pin the Agent 7 image
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
-kind: DatadogAgent
 metadata:
   name: datadog
 spec:
@@ -177,7 +173,6 @@ If you need to use an Agent JMX image, you can set it without specifying the Age
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
-kind: DatadogAgent
 metadata:
   name: datadog
 spec:
@@ -209,7 +204,6 @@ For example, if your previous image value was `gcr.io/datadoghq/agent:6.33.0`, u
 
 ```yaml
 apiVersion: apps/v1
-kind: DaemonSet
 spec:
   template:
     spec:
@@ -224,7 +218,6 @@ spec:
 
 ```yaml
 apiVersion: apps/v1
-kind: DaemonSet
 spec:
   template:
     spec:

@@ -8,7 +8,6 @@ cascade:
     rank: 20
     subcategory: 그래프 작성 가이드
 disable_toc: true
-kind: 가이드
 private: true
 title: 그래프 작성 가이드
 ---

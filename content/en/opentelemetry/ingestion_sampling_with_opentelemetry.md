@@ -44,7 +44,7 @@ Choose this method if you prefer a simpler setup without the need for a separate
 
 ## Reducing ingestion volume
 
-With OpenTelemetry, you can configure sampling both in the OpenTelemetry libraries and in the OpenTelemetry Collector: 
+With OpenTelemetry, you can configure sampling both in the OpenTelemetry libraries and in the OpenTelemetry Collector:
 
 - **Head-based sampling** in the OpenTelemetry SDKs
 - **Tail-based sampling** in the OpenTelemetry Collector
@@ -87,7 +87,7 @@ See the [ingestion volume control guide][8] for information about the implicatio
 
 ### Probabilistic sampling
 
-When using Datadog Agent OTLP ingest, a probabilistic sampler is available starting with Agent 7.54.0. 
+When using Datadog Agent OTLP ingest, a probabilistic sampler is available starting with Agent v7.54.0.
 
 #### Configuring
 
@@ -102,9 +102,13 @@ To configure probabilistic sampling, do one of the following:
     probabilistic_sampler:
         enabled: true
         sampling_percentage: 50 #In this example, 50% of traces are captured.
+        hash_seed: 22 #A seed used for the hash algorithm. This must match other agents and OTel
   ```
 
-If you use a mixed setup of Datadog tracing libraries and OTel SDKs, probabilistic sampling will apply to spans originating from both Datadog and OTel tracing libraries.
+**If you use a mixed setup of Datadog tracing libraries and OTel SDKs**:
+
+- Probabilistic sampling will apply to spans originating from both Datadog and OTel tracing libraries.
+- If you send spans both to the Datadog Agent **and** OTel collector instances, set the same seed between Datadog Agent (`DD_APM_PROBABILISTIC_SAMPLER_HASH_SEED`) and OTel collector (`hash_seed`) to ensure consistent sampling.
 
 <div class="alert alert-warning"><code>DD_OTLP_CONFIG_TRACES_PROBABILISTIC_SAMPLER_SAMPLING_PERCENTAGE</code> is deprecated and has been replaced by <code>DD_APM_PROBABILISTIC_SAMPLER_SAMPLING_PERCENTAGE</code>.</div>
 
@@ -112,6 +116,7 @@ If you use a mixed setup of Datadog tracing libraries and OTel SDKs, probabilist
 
 - The probabilistic sampler will ignore the sampling priority of spans that are set at the tracing library level. As a result, probabilistic sampling is **incompatible with [head-based sampling][16]**. This means that head-based sampled traces might still be dropped by probabilistic sampling.
 - Spans not captured by the probabilistic sampler may still be captured by the Datadog Agent's [error and rare samplers][12].
+- For consistent sampling all tracers must support [128-bit trace IDs][17].
 
 ## Monitoring ingested volumes in Datadog
 
@@ -138,4 +143,5 @@ If the ingestion volume is higher than expected, consider adjusting your samplin
 [13]: https://app.datadoghq.com/dash/integration/apm_estimated_usage
 [14]: /opentelemetry/guide/migration/
 [15]: /opentelemetry/interoperability/otlp_ingest_in_the_agent/?tab=host
-[16]: tracing/trace_pipeline/ingestion_mechanisms#head-based-sampling
+[16]: /tracing/trace_pipeline/ingestion_mechanisms#head-based-sampling
+[17]: /opentelemetry/interoperability/otel_api_tracing_interoperability/#128-bit-trace-ids

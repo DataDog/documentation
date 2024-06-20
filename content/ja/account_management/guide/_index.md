@@ -4,7 +4,6 @@ cascade:
     category: ガイド
     rank: 20
     subcategory: アカウントの管理ガイド
-kind: ガイド
 private: true
 title: アカウントの管理ガイド
 ---
