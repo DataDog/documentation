@@ -63,7 +63,7 @@ There are two locations where you can redact your sensitive data:
 {{% tab "In the Cloud" %}}
 By default, users with the Datadog Admin role have access to view and set up scanning rules. To allow other users access, grant the `data_scanner_read` or `data_scanner_write` permissions under [Compliance][1] to a custom role. See [Access Control][2] for details on how to set up roles and permissions.
 
-{{< img src="sensitive_data_scanner/read_write_permissions.png" alt="The compliance permissions sections showing data scanner read and writer permissions" style="width:55%;">}}
+{{< img src="sensitive_data_scanner/read_write_permissions.png" alt="The compliance permissions sections showing data scanner read and writer permissions" style="width:80%;">}}
 
 [1]: /account_management/rbac/permissions/#compliance
 [2]: /account_management/rbac/
