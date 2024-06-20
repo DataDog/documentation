@@ -61,7 +61,7 @@ Tags can be queried as if they are table columns. Add a `WHERE` clause to the qu
 SELECT instance_type, availability_zone,
   COUNT(*) AS count
 FROM host
-WHERE env = 'prod'
+WHERE #env = 'prod' -- Use '#' in front of tag names
 GROUP BY instance_type, availability_zone
 ORDER BY count DESC;
 {{< /code-block >}}
