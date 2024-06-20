@@ -26,14 +26,16 @@ If you need to customize the trace context propagation configuration, there are 
 <div class="alert alert-info">
 If multiple propagators are enabled, the extraction attempt is done in the specified order, and the first valid trace context is used to continue the distributed trace. If additional valid trace contexts are found, the tracing information will be recorded as individual span links.</div>
 
-### Recommended configuration
-
-`OTEL_PROPAGATORS`
-: Specifies propagators (in a comma-separated list) to be used for trace context propagation. This configuration takes the lowest precedence and will be ignored if any other Datadog propagation environment variable is set.
+### Recommended Datadog configuration
 
 `DD_TRACE_PROPAGATION_STYLE`
 : Specifies propagators (in a comma-separated list) to be used for trace context propagation. This may be overridden by the extract-specific or inject-specific configurations. <br>
 **Default:** `datadog,tracecontext`
+
+### Recommended OpenTelemetry configuration
+
+`OTEL_PROPAGATORS`
+: Specifies propagators (in a comma-separated list) to be used for trace context propagation. This configuration takes the lowest precedence and will be ignored if any other Datadog propagation environment variable is set.
 
 ### Advanced configuration
 
