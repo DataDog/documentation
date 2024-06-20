@@ -1,6 +1,5 @@
 ---
 title: Scheduled Reports
-kind: documentation
 disable_toc: false
 aliases:
     - /dashboards/reporting/

@@ -9,7 +9,6 @@ further_reading:
 - link: https://docs.datadoghq.com/account_management/multi_organization/
   tag: Documentation
   text: Gestion des comptes multi-organisations
-kind: documentation
 title: Détails des coûts
 ---
 

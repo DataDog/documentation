@@ -10,7 +10,6 @@ further_reading:
 - link: /account_management/plan_and_usage/
   tag: Documentación
   text: Parámetros de plan y uso
-kind: documentación
 title: Atribución de uso
 ---
 

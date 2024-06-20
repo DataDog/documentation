@@ -1,6 +1,5 @@
 ---
 title: CI Pipeline Visibility in Datadog
-kind: documentation
 aliases:
   - /continuous_integration/pipelines_setup/
   - /continuous_integration/explore_pipelines/

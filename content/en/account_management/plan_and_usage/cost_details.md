@@ -1,6 +1,5 @@
 ---
 title: Cost Details
-kind: documentation
 further_reading:
 - link: "https://docs.datadoghq.com/account_management/billing/"
   tag: "Documentation"

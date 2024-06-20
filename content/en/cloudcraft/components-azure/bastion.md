@@ -1,6 +1,5 @@
 ---
 title: "Bastion Component"
-kind: documentation
 ---
 
 ## Overview

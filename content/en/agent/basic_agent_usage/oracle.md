@@ -1,6 +1,5 @@
 ---
 title: Basic Agent Usage for Oracle Linux
-kind: documentation
 platform: Oracle
 further_reading:
 - link: "/logs/"

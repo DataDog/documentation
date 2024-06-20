@@ -18,7 +18,6 @@ further_reading:
 - link: /agent/configuration/agent-fips-proxy
   tag: Documentación
   text: Cumplimiento de FIPS de Datadog
-kind: documentación
 title: Configuración del proxy del Agent
 ---
 

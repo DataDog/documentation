@@ -14,7 +14,6 @@ further_reading:
 - link: /continuous_integration/pipelines/custom_tags_and_metrics/
   tag: ドキュメント
   text: カスタムタグとメトリクスを追加してパイプラインの可視性を拡張する
-kind: documentation
 title: CircleCI ワークフローにトレースを設定する
 ---
 
