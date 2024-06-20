@@ -19,9 +19,15 @@ further_reading:
 <div class="alert alert-info">Network Path for Datadog Network Performance Monitoring is in private beta. Reach out to your Datadog representative to sign up, and then use the following instructions to configure the Datadog Agent to gather network path data.</div>
 
 
-## Setup Instructions on Linux Agent
+## Overview
 
-1. Agent version `7.55` or higher is required.
+Setting up Network Path involves configuring your Linux environment to monitor and trace the network routes between your services and endpoints. This helps identify bottlenecks, latency issues, and potential points of failure in your network infrastructure.
+
+## Setup
+
+Agent version `7.55` or higher is required.
+
+
 2. Enable [NPM][1].
 3. Enable the `system-probe` traceroute module in `/etc/datadog-agent/system-probe.yaml` by adding the following:
 
@@ -30,11 +36,9 @@ traceroute:
   enabled: true
 ```
 
-4.  Enable network_path to monitor NPM connections by creating/editing the `/etc/datadog-agent/datadog.yaml` file: 
+4.  Enable `network_path` to monitor NPM connections by creating or editing the `/etc/datadog-agent/datadog.yaml` file: 
 
 ```
-Example:
-
 network_path:
   connections_monitoring:
     enabled: true
@@ -43,7 +47,7 @@ network_path:
 ```
  
 
-Detailed available configuration:
+For full configuration details, see the following:
 
 ```
 network_path:
