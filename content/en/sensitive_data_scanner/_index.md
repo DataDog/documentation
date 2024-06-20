@@ -43,7 +43,7 @@ This document walks you through the following:
 ## Set up Sensitive Data Scanner
 <br>
 {{< callout url="https://google.com" >}}
-  Sensitive Data Scanner Using the Agent is in private beta. To request access, full out this form.
+  Sensitive Data Scanner using the Agent is in private beta. To request access, full out this form.
 {{< /callout >}} 
 
 There are two locations where you can redact your sensitive data:
