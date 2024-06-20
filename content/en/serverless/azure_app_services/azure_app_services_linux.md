@@ -66,7 +66,7 @@ curl -s https://raw.githubusercontent.com/DataDog/datadog-aas-linux/v1.10.6/data
 {{< img src="serverless/azure_app_service/startup-command-1.jpeg" alt="Azure App Service Configuration: the Stack settings, under the Configuration section of Settings in the Azure UI. Underneath the stack, major version, and minor version fields is a 'Startup Command' field that is populated by the above curl command." style="width:100%;" >}}
 {{% /tab %}}
 {{% tab "Java" %}}
-Download the [`datadog_wrapper`][8] file from the releases and upload it to your application with the Azure CLI command:
+Download the [`datadog_wrapper`][8] file from the releases, download the zip file and upload it to your application with the Azure CLI command:
 
 ```
   az webapp deploy --resource-group <group-name> --name <app-name> --src-path <path-to-datadog-wrapper> --type=startup
