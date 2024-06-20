@@ -24,10 +24,10 @@ This instrumentation method uses Azure's [Sidecar pattern][1] to monitor contain
 
 ## Instrument your application
 
-1. [Integrate the Datadog tracer](#integrate-the-datadog-tracer) into your containerized application
-1. [Create your Linux Web App](#create-your-linux-web-app)
-1. [Add Datadog environment variables](#add-datadog-environment-variables) as application settings
-1. [Add the Datadog sidecar](#add-the-datadog-sidecar)
+1. [Integrate the Datadog tracer][11] into your containerized application
+1. [Create your Linux Web App][12]
+1. [Add Datadog environment variables][13] as application settings
+1. [Add the Datadog sidecar][14]
 
 ### Integrate the Datadog tracer
 
@@ -121,22 +121,21 @@ Corresponds to your [Datadog site][5]. Defaults to `datadoghq.com`.
 : `/home/Logfile/*.log` <br/>
 Corresponds to the path where you write your application logs. If you have changed this location, specify your custom location in this setting.
 
-`DD_DOTNET_TRACER_HOME` 
+`DD_DOTNET_TRACER_HOME` (**Required**)
 : `/datadog/tracer`
 
-`DD_TRACE_LOG_DIRECTORY` 
+`DD_TRACE_LOG_DIRECTORY` (**Required**)
 : `/home/Logfiles/dotnet`
 
-`CORECLR_ENABLE_PROFILING` 
+`CORECLR_ENABLE_PROFILING` (**Required**)
 : `1`
 
-`CORECLR_PROFILER` 
+`CORECLR_PROFILER` (**Required**)
 : `{846F5F1C-F9AE-4B07-969E-05C26BC060D8}`
 
-`CORECLR_PROFILER_PATH` 
+`CORECLR_PROFILER_PATH` (**Required**)
 : `/datadog/tracer/Datadog.Trace.ClrProfiler.Native.so`
 
-<!-- some vars above need details, and also are they dotnet specific? -->
 
 ### Add the Datadog sidecar
 
@@ -149,10 +148,6 @@ Corresponds to the path where you write your application logs. If you have chang
    - **Image and tag**: datadog-dotnet:2.0
    - **Port**: 8126
    Then, select **Apply**.
-   <!-- let's make sure these are the right things in the UI -->
-
-<!-- https://learn.microsoft.com/en-us/azure/app-service/tutorial-custom-container-sidecar -->
-<!-- https://learn.microsoft.com/en-us/azure/app-service/tutorial-custom-container?source=recommendations&tabs=azure-portal&pivots=container-linux -->
 
 ## Next steps
 
@@ -168,3 +163,7 @@ After you finish instrumenting your application, go to the [Serverless > Azure][
 [8]: https://app.datadoghq.com/functions?cloud=azure
 [9]: https://app.datadoghq.com/logs
 [10]: https://app.datadoghq.com/apm/traces
+[11]: #integrate-the-datadog-tracer
+[12]: #create-your-linux-web-app
+[13]: #add-datadog-environment-variables
+[14]: #add-the-datadog-sidecar
