@@ -19,7 +19,7 @@ guid: d70f5c68-873d-436e-bddb-dbb3e107e3b5
 integration_id: wmi
 integration_title: WMI Check
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: wmi.

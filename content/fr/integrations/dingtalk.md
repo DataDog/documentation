@@ -13,7 +13,7 @@ integration_id: dingtalk
 integration_title: DingTalk
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: dingtalk
 public_title: Intégration Datadog/DingTalk

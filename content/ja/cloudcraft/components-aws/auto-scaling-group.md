@@ -1,5 +1,4 @@
 ---
-kind: ドキュメント
 title: Auto Scaling Group コンポーネント
 ---
 ## 概要

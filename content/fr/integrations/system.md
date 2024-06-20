@@ -2,7 +2,7 @@
 integration_title: Check système
 name: system
 newhlevel: true
-kind: integration
+custom_kind: integration
 git_integration_title: system
 updated_for_agent: 5.8.5
 description: "Surveillez l'utilisation des ressources système\_: processeur, mémoire, disque, système de fichiers, et plus encore."

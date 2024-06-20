@@ -1,6 +1,5 @@
 ---
 title: Connect to Datadog over Google Cloud Private Service Connect
-kind: guide
 further_reading:
     - link: '/integrations/google_cloud_platform/'
       tag: 'Documentation'

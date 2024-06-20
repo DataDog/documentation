@@ -1,6 +1,5 @@
 ---
 title: Iframe Widget
-kind: documentation
 widget_type: iframe
 description: "Include an Iframe in your Datadog dashboards."
 aliases:

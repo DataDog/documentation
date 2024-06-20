@@ -11,7 +11,7 @@ dependencies:
     ['https://github.com/DataDog/documentation/blob/master/content/en/integrations/amazon_guardduty.md']
 integration_title: Amazon GuardDuty
 is_public: true
-kind: integration
+custom_kind: integration
 name: amazon_guardduty
 public_title: Datadog-Amazon GuardDuty Integration
 short_description: Gather your Amazon GuardDuty logs.

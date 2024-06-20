@@ -14,7 +14,7 @@ integration_id: google-cloud-audit-logs
 integration_title: Datadog Google 監査ログダッシュボード
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: google_cloud_audit_logs
 public_title: Datadog Google 監査ログダッシュボードのインテグレーション

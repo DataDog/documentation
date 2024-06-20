@@ -1,6 +1,5 @@
 ---
 title: Managing Incidents
-kind: guide
 further_reading:
 - link: "https://www.datadoghq.com/blog/bits-ai-for-incident-management/"
   tag: "Blog"
