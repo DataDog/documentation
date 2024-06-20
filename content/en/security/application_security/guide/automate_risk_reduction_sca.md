@@ -61,7 +61,7 @@ In the **Vulnerabilities** explorer, you can view the vulnerabilities and risks 
 
 A library vulnerability is a security bug in a library. 
 
-To view your library vulnerabilities, see [Library Vulnerabilities][3] or select **Security > Vulnerabilities > Library Vulnerabilities**.
+To view your library vulnerabilities, see [Library Vulnerabilities][3] or navigate to **Security > Vulnerabilities > Library Vulnerabilities**.
 
 {{< img src="/security/application_security/software_composition_analysis/vulnerabilities_library_vulnerabilities_detail.png" alt="Libraries vulnerability example expanded in dashboard" style="width:100%;" >}}
 
