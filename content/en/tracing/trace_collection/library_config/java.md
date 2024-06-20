@@ -13,7 +13,7 @@ further_reading:
     - link: "/tracing/trace_collection/trace_context_propagation/java/"
       tag: "Documentation"
       text: "Propagating trace context with headers"
-    - link: "/opentelemetry/interoperability/environment_variable_support.md"
+    - link: "/opentelemetry/interoperability/environment_variable_support"
       tag: "Documentation"
       text: "OTEL Environment Variable Configurations"
 ---
@@ -519,4 +519,4 @@ Deprecated since version 1.9.0
 [14]: /integrations/java/?tab=host#metric-collection
 [15]: /tracing/trace_collection/trace_context_propagation/java/
 [16]: /tracing/trace_collection/custom_instrumentation/java/otel/
-[17]: /opentelemetry/interoperability/environment_variable_support.md
+[17]: /opentelemetry/interoperability/environment_variable_support

@@ -10,7 +10,7 @@ further_reading:
 - link: "/tracing/trace_collection/trace_context_propagation/ruby/"
   tag: "Documentation"
   text: "Propagating trace context"
-- link: "/opentelemetry/interoperability/environment_variable_support.md"
+- link: "/opentelemetry/interoperability/environment_variable_support"
   tag: "Documentation"
   text: "OTEL Environment Variable Configurations"
 ---
@@ -24,4 +24,4 @@ For information about configuring the Ruby tracing library, see [Additional Ruby
 
 [1]: /getting_started/tagging/unified_service_tagging/
 [2]: /tracing/trace_collection/dd_libraries/ruby/#advanced-configuration
-[3]: /opentelemetry/interoperability/environment_variable_support.md
+[3]: /opentelemetry/interoperability/environment_variable_support

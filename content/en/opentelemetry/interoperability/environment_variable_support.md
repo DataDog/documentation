@@ -1,28 +1,28 @@
 ---
 title: Configuring Tracing Libraries Using Open Telemetry Environment Variables
 further_reading:
-    - link: '/tracing/trace_collection/library_config/dotnet-core.md'
+    - link: '/tracing/trace_collection/library_config/dotnet-core'
       tag: 'Documentation'
       text: '.NET Core Tracing Configuration'
-    - link: '/tracing/trace_collection/library_config/dotnet-framework.md'
+    - link: '/tracing/trace_collection/library_config/dotnet-framework'
       tag: 'Documentation'
       text: '.NET Framework Tracing Configuration'
-    - link: '/tracing/trace_collection/library_config/go.md'
+    - link: '/tracing/trace_collection/library_config/go'
       tag: 'Documentation'
       text: 'Go Tracing Configuration'
-    - link: '/tracing/trace_collection/library_config/java.md'
+    - link: '/tracing/trace_collection/library_config/java'
       tag: 'Documentation'
       text: 'Java Tracing Configuration'
-    - link: '/tracing/trace_collection/library_config/nodejs.md'
+    - link: '/tracing/trace_collection/library_config/nodejs'
       tag: 'Documentation'
       text: 'Node.js Tracing Configuration'
-    - link: '/tracing/trace_collection/library_config/php.md'
+    - link: '/tracing/trace_collection/library_config/php'
       tag: 'Documentation'
       text: 'PHP Tracing Configuration'
-    - link: '/tracing/trace_collection/library_config/python.md'
+    - link: '/tracing/trace_collection/library_config/python'
       tag: 'Documentation'
       text: 'Python Tracing Configuration'
-    - link: '/tracing/trace_collection/library_config/ruby.md'
+    - link: '/tracing/trace_collection/library_config/ruby'
       tag: 'Documentation'
       text: 'Ruby Tracing Configuration'
 ---
@@ -77,11 +77,11 @@ This maps to `DD_TRACE_LOG_LEVEL` in `node.js`<br>
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/trace_collection/library_config/dotnet-core.md
-[2]: /tracing/trace_collection/library_config/dotnet-framework.md
-[3]: /tracing/trace_collection/library_config/go.md
-[4]: /tracing/trace_collection/library_config/java.md
-[5]: /tracing/trace_collection/library_config/nodejs.md
-[6]: /tracing/trace_collection/library_config/php.md
-[7]: /tracing/trace_collection/library_config/python.md
-[8]: /tracing/trace_collection/library_config/ruby.md
+[1]: /tracing/trace_collection/library_config/dotnet-core
+[2]: /tracing/trace_collection/library_config/dotnet-framework
+[3]: /tracing/trace_collection/library_config/go
+[4]: /tracing/trace_collection/library_config/java
+[5]: /tracing/trace_collection/library_config/nodejs
+[6]: /tracing/trace_collection/library_config/php
+[7]: /tracing/trace_collection/library_config/python
+[8]: /tracing/trace_collection/library_config/ruby

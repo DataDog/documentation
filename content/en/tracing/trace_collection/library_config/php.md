@@ -19,7 +19,7 @@ further_reading:
 - link: "/tracing/"
   tag: "Documentation"
   text: "Advanced Usage"
-- link: "/opentelemetry/interoperability/environment_variable_support.md"
+- link: "/opentelemetry/interoperability/environment_variable_support"
   tag: "Documentation"
   text: "OTEL Environment Variable Configurations"
 ---
@@ -613,4 +613,4 @@ Read [Trace Context Propagation][11] for information about configuring the PHP t
 [17]: /tracing/other_telemetry/connect_logs_and_traces/php
 [18]: /tracing/trace_collection/otel_instrumentation/php/
 [19]: /tracing/trace_collection/compatibility/php/
-[20]: /opentelemetry/interoperability/environment_variable_support.md
+[20]: /opentelemetry/interoperability/environment_variable_support

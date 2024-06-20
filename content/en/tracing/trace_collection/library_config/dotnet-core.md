@@ -31,7 +31,7 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/deploy-dotnet-core-azure-app-service/"
     tag: "Blog"
     text: "Deploy ASP.NET Core applications to Azure App Service"
-  - link: "/opentelemetry/interoperability/environment_variable_support.md"
+  - link: "/opentelemetry/interoperability/environment_variable_support"
     tag: "Documentation"
     text: "OTEL Environment Variable Configurations"
 ---
@@ -337,4 +337,4 @@ The following configuration variables are for features that are available for us
 [17]: https://app.datadoghq.com/services
 [18]: /tracing/trace_collection/otel_instrumentation/dotnet/
 [19]: /tracing/trace_collection/compatibility/dotnet-core/#opentelemetry-based-integrations
-[20]: /opentelemetry/interoperability/environment_variable_support.md
+[20]: /opentelemetry/interoperability/environment_variable_support
