@@ -7423,10 +7423,15 @@ components:
           example: '@error.type'
           type: string
         limit:
-          description: The maximum number of groups to return.
+          default: 10
+          description: 'The maximum buckets to return for this group by. Note: at
+            most 10000 buckets are allowed.
+
+            If grouping by multiple facets, the product of limits must not exceed
+            10000.'
           example: 10
           format: int32
-          maximum: 2147483647
+          maximum: 10000
           type: integer
         sort:
           $ref: '#/components/schemas/EventsGroupBySort'
