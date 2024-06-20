@@ -30,7 +30,7 @@ traceroute:
   enabled: true
 ```
 
-4.  Enable network_path to Monitor NPM Connections by creating/editing the `/etc/datadog-agent/datadog.yaml` file: 
+4.  Enable network_path to monitor NPM connections by creating/editing the `/etc/datadog-agent/datadog.yaml` file: 
 
 ```
 Example:

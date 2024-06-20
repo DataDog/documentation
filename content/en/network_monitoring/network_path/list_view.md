@@ -48,7 +48,7 @@ Reachable
 
 Use the **Multi-path map** button to build a path map based on one or more selected paths:
 
-{{< img src="network_performance_monitoring/network_path/multi_path_view.png" alt="Multi-path view showing 2 selected paths with the drop down expanded" >}}
+{{< img src="network_performance_monitoring/network_path/multi_path.png" alt="Multi-path view showing 3 selected paths" >}}
 
 From this view, you can view the latency and reachability for the selected paths, as well as investigate end-to-end packet loss and hop-to-hop latency.
 For more information on this view, see the [Path View][1] documentation.

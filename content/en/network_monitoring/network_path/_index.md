@@ -26,7 +26,7 @@ Network Path illustrates the route that network traffic follows from its origin 
 
 **Note**: [Network Performance Monitoring][2] must be enabled to use Network Path functionality.
 
-{{< img src="network_performance_monitoring/network_path/network_path_default_view.png" alt="The Network Path default view, sorting by Datacenter and Un-Grouped Destination" >}}
+{{< img src="network_performance_monitoring/network_path/network_path_default_view_2.png" alt="The Network Path default view, sorting by Datacenter and Un-Grouped Destination" >}}
 
 ## How it works
 

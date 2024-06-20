@@ -53,7 +53,7 @@ Drag the latency reachability health bar to observe a snapshot of the end-to-end
 
 **Note**: Changing the health bar does not affect the global time range at the top of the page.
 
-{{< img src="network_performance_monitoring/network_path/latency_health_bar.mp4" alt="Video of the network path, selecting the latency health bar and dragging to a time period." video="true" >}}
+{{< img src="network_performance_monitoring/network_path/latency_health_bar_2.mp4" alt="Video of the network path, selecting the latency health bar and dragging to a time period." video="true" >}}
 
 ## Graphs
 
@@ -71,7 +71,7 @@ The end-to-end metrics graph presents a visual representation of both the end-to
 The hop-to-hop latency graph provides a detailed view of the latency for each hop along the path, making it easier to identify potential bottlenecks or problem areas.
 
 
-{{< img src="network_performance_monitoring/network_path/hop-to-hop-latency-graph.png" alt="Path view page showing the hop-to-hop-latency graph." >}}
+{{< img src="network_performance_monitoring/network_path/hop-to-hop-latency-graph_2.png" alt="Path view page showing the hop-to-hop-latency graph." >}}
 
 ## Further Reading
 
