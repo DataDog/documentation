@@ -10,7 +10,7 @@ DDSQL is in private beta.
 
 DDSQL is a query language for Datadog data. It implements several standard SQL functions, such as `SELECT`, along with new functions for working with Datadog tags, metrics, and so on. For example, [the `AGGR` statement][5], which aggregates metrics data, is unique to DDSQL.
 
-You can use DDSQL to query your infrastructure in the [DDSQL Editor][2] in Datadog.
+You can use DDSQL to query your infrastructure, RUM data, and metrics in the [DDSQL Editor][2] in Datadog.
 
 DDSQL uses a [schema on read](#schema-on-read) approach to allow queries against unstructured data, such as [tags][1]. Each query is executed within a [session](#sessions) that can be configured with environment variables.
 
