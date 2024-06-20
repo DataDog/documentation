@@ -1,6 +1,5 @@
 ---
 title: Scatter Plot Widget
-kind: documentation
 description: "Graph a chosen scope over two different metrics with their respective aggregation"
 widget_type: "scatterplot"
 aliases:

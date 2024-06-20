@@ -5,7 +5,6 @@ further_reading:
 - link: /account_management/audit_trail/
   tag: Documentación
   text: Obtén más información sobre Audit Trail
-kind: documentación
 title: Eventos de Audit Trail
 ---
 

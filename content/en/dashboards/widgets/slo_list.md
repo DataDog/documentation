@@ -1,6 +1,5 @@
 ---
 title: SLO List Widget
-kind: documentation
 widget_type: slo_list
 description: "Display a list of SLOs"
 aliases:

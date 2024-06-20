@@ -1,6 +1,5 @@
 ---
 title: Funnel Widget
-kind: documentation
 widget_type: funnel
 aliases:
 - /graphing/widgets/funnel/

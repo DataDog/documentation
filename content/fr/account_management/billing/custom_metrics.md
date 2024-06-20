@@ -5,7 +5,6 @@ further_reading:
 - link: /observability_pipelines/guide/custom-metrics-governance
   tag: Documentation
   text: Utiliser des pipelines d'observabilité pour contrôler vos métriques custom
-kind: documentation
 title: Facturation des métriques custom
 ---
 

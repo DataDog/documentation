@@ -28,6 +28,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/npm-story-centric-ux/"
   tag: "Blog"
   text: "Quickstart network investigations with NPM's story-centric UX"
+- link: "https://www.datadoghq.com/blog/monitor-dns-logs-for-network-and-security-datadog/"
+  tag: "Blog"
+  text: "Monitor DNS logs for network and security analysis"
 algolia:
   tags: ['npm', 'network performance monitoring']
 ---

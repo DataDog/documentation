@@ -11,9 +11,11 @@ Instrumenting your application and enabling ASM allows you to quickly get securi
 The following documentation provides instructions to enable ASM using Datadog tracing libraries for threat detection and protection capabilities, and for code security. 
 
 {{< whatsnext desc=" " >}}
-    {{< nextlink href="/security/application_security/enabling/tracing_libraries/threat_detection" >}}Enabling ASM for Threat Detection and Protection using Datadog tracing libraries{{< /nextlink >}}
+    {{< nextlink href="/security/application_security/enabling/tracing_libraries/threat_detection" >}}Enabling Threat Detection and Protection using Datadog tracing libraries{{< /nextlink >}}
 
-     {{< nextlink href="/security/application_security/enabling/tracing_libraries/code_security" >}}Enabling ASM for Code Security using Datadog tracing libraries{{< /nextlink >}}
+     {{< nextlink href="/security/application_security/enabling/tracing_libraries/code_security" >}}Enabling Code Security using Datadog tracing libraries{{< /nextlink >}}
+
+     {{< nextlink href="/security/application_security/enabling/tracing_libraries/sca" >}}Enabling Software Composition Analysis using Datadog tracing libraries{{< /nextlink >}}
 {{< /whatsnext >}}
 
 [1]: /security/application_security/enabling/single_step/

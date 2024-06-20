@@ -3,7 +3,6 @@ further_reading:
 - link: /agent/basic_agent_usage/
   tag: Documentación
   text: Uso básico del Agent
-kind: Guía
 title: Instalar Datadog Agent 5
 ---
 

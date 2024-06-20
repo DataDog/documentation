@@ -4,12 +4,12 @@ kind: documentation
 aliases :
   - /monitors/create/types/slo/
 further_reading:
-- link: "/service_management/service_level_objectives/monitor"
+- link: "/service_management/service_level_objectives/burn_rate"
   tag: "Documentation"
-  text: "Monitor-Based SLOs"
-- link: "/service_management/service_level_objectives/metric"
+  text: "Burn Rate Alerts"
+- link: "/service_management/service_level_objectives/error_budget"
   tag: "Documentation"
-  text: "Metric-Based SLOs"
+  text: "Error Budget Alerts"
 ---
 
 <div class="alert alert-info">

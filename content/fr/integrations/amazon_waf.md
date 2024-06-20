@@ -17,7 +17,7 @@ integration_id: amazon-waf
 integration_title: Amazon Web Application Firewall
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: amazon_waf
 public_title: Intégration Datadog/Amazon Web Application Firewall

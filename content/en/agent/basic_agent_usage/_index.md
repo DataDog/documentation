@@ -1,6 +1,5 @@
 ---
 title: Basic Agent Usage
-kind: documentation
 aliases:
     - /guides/basic_agent_usage/
     - /agent/faq/where-is-the-configuration-file-for-the-agent/

@@ -14,7 +14,7 @@ integration_id: amazon-backup
 integration_title: Amazon Backup
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: amazon_backup
 public_title: Intégration Datadog/Amazon Backup

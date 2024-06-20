@@ -2,7 +2,6 @@
 aliases:
 - /es/agent/faq/upgrade-to-agent-v6
 - /es/agent/guide/upgrade-to-agent-v6
-kind: documentación
 title: Actualizar el Datadog Agent a la versión 6
 ---
 
