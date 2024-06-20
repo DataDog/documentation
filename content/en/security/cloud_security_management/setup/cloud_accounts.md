@@ -5,7 +5,7 @@ aliases:
   - /security/cloud_security_management/setup/csm_pro/cloud_accounts
 ---
 
-Use the following instructions to enable Cloud Security Management's Misconfigurations and Identity Risks (CIEM) feature.
+Use the following instructions to enable Misconfigurations and Identity Risks (CIEM).
 
 ## Enable resource scanning
 

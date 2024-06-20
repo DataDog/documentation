@@ -9,7 +9,7 @@ aliases:
   - /security/cloud_security_management/setup/csm_enterprise/agent/linux/
 ---
 
-Use the following instructions to enable Cloud Security Management's Misconfigurations, Threat Detection, Host Vulnerability Management, and Container Vulnerability Management features.
+Use the following instructions to enable Misconfigurations, Threat Detection, Host Vulnerability Management, and Container Vulnerability Management.
 
 ## Prerequisites
 
@@ -79,7 +79,7 @@ runtime_security_config:
 
 **Notes**: 
 
-- You can also use the following [Agent install script][5] to automatically enable the Misconfigurations and Threat Detection features:
+- You can also use the following [Agent install script][5] to automatically enable Misconfigurations and Threat Detection:
 
   ```shell
   DD_COMPLIANCE_CONFIG_ENABLED=true DD_RUNTIME_SECURITY_CONFIG_ENABLED=true DD_API_KEY=<DATADOG_API_KEY> DD_SITE="datadoghq.com" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"

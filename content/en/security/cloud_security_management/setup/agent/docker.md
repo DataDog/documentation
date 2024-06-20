@@ -8,7 +8,7 @@ aliases:
   - /security/cloud_security_management/setup/csm_enterprise/agent/docker
 ---
 
-Use the following instructions to enable Cloud Security Management's Misconfigurations and Threat Detection features.
+Use the following instructions to enable Misconfigurations and Threat Detection.
 
 ## Prerequisites
 

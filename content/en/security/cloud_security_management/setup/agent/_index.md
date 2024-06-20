@@ -7,6 +7,6 @@ aliases:
   - /security/cloud_security_management/setup/csm_enterprise/agent
 ---
 
-Use the following instructions to enable Cloud Security Management's Misconfigurations, Threat Detection, Host Vulnerability Management, and Container Vulnerability Management features.
+Use the following instructions to enable Misconfigurations, Threat Detection, Host Vulnerability Management, and Container Vulnerability Management.
 
 {{< partial name="csm/csm-agent-tiles.html" >}}
