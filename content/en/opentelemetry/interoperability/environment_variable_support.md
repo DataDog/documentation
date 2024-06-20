@@ -46,7 +46,7 @@ This maps to `DD_TRACE_LOG_LEVEL` in `node.js`<br>
 
 `OTEL_TRACES_SAMPLER & OTEL_TRACES_SAMPLER_ARG`
 : **Mapping**: `DD_TRACE_SAMPLE_RATE`<br>
-**Notes**: Here are what the passed in map to for `DD_TRACE_SAMPLE_RATE`:<br>
+**Notes**: Here are what the values passed in map to for `DD_TRACE_SAMPLE_RATE`:<br>
   - `parentbased_always_on`		  `1.0`
   - `parentbased_always_off`		`0.0`
   - `parentbased_traceidratio`	`${OTEL_TRACES_SAMPLER_ARG}`
