@@ -1,6 +1,5 @@
 ---
 title: Agent Runtime Configuration Management
-kind: documentation
 further_reading:
 - link: "/agent/troubleshooting/debug_mode/"
   tag: "Documentation"

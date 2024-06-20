@@ -1,6 +1,5 @@
 ---
 title: Has Cloudcraft gone through security audits?
-kind: faq
 ---
 
 Yes, we hire an external security company every year to run penetration and security tests in our platform.

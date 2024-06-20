@@ -1,6 +1,5 @@
 ---
 title: Connect to Datadog over AWS PrivateLink
-kind: guide
 further_reading:
     - link: '/agent/logs'
       tag: 'Documentation'

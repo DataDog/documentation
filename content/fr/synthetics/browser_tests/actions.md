@@ -6,10 +6,10 @@ further_reading:
   tag: Documentation
   text: En savoir plus sur les options avancées des tests Browser
 - link: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_global_variable
-  tag: Terraform
+  tag: Site externe
   text: Créer et gérer des variables globales Synthetic avec Terraform
 kind: documentation
-title: Étapes des tests Browser
+title: Étapes des tests de navigateurs
 ---
 
 ## Présentation
@@ -20,7 +20,7 @@ Le délai d'expiration par défaut pour chaque étape est de 60 secondes. Vous 
 
 ## Étapes enregistrées automatiquement
 
-Lorsque vous cliquez sur **Start Recording**, l'[extension d'enregistrement de test Browser Datadog][3] détecte et enregistre automatiquement toutes vos actions sur le site Web.
+Lorsque vous cliquez sur **Start Recording**, l'[extension d'enregistrement de test Browser Datadog][3], disponible sur les navigateurs Chrome et Edge, détecte et enregistre automatiquement toutes vos actions sur le site Web.
 
 ### Clic
 
@@ -34,7 +34,7 @@ Cliquez sur l'étape et sélectionnez le type de clic que vous souhaitez effectu
 * Double click
 * Contextual click (correspond à un clic droit)
 
-### Saisie de texte
+### Type text
 
 Datadog enregistre les actions que vous effectuez dans votre application, par exemple lorsque vous sélectionnez une option à partir d'un menu déroulant `select`. Un résumé de l'action s'affiche sous la forme d'une étape.
 
@@ -132,7 +132,7 @@ La fonction d'assertion JavaScript comprend les paramètres suivants et nécessi
 
 * `element` (facultatif) : l'emplacement de l'élément sur la page. Pour configurer ce paramètre, utilisez les boutons **Select** et **Update** sur l'élément cible. L'élément sélectionné tire automatiquement parti de l'algorithme de localisation multiple des tests Browser Datadog.
 
-{{< img src="synthetics/browser_tests/js_assertion.mp4" alt="Assertion JavaScript dans un test Browser" video="true" width="100%">}}
+{{< img src="synthetics/browser_tests/js_assertion.mp4" alt="Assertion JavaScript dans un test Browser" video="true" width="100%" >}}
 
 Étant donné que les assertions JavaScript s'exécutent dans le contexte de la page active, ces étapes peuvent également accéder à tous les objets définis dans la page active (comme les bibliothèques, builtins et variables globales). Pour charger des bibliothèques externes, utilisez une promise.
 
@@ -234,7 +234,7 @@ Le temps supplémentaire est systématiquement rajouté à **chaque exécution**
 
 Cliquez sur **Variables** et sélectionnez un type de création de variable depuis le menu déroulant.
 
-{{< img src="synthetics/browser_tests/variables.png" alt="Variables d'un test Browser" style="width:60%;">}}
+{{< img src="synthetics/browser_tests/variables.png" alt="Variables d'un test Browser" style="width:60%;" >}}
 
 Pour en savoir plus sur l'utilisation de variables au sein de vos étapes, consultez la rubrique [Utiliser des variables](#utiliser-des-variables).
 
@@ -251,14 +251,14 @@ Vous pouvez sélectionner l'un des builtins disponibles suivants :
 `{{ alphanumeric(n) }}`
 : Génère une chaîne alphanumérique de `n` caractères.
 
-`{{ uuid }}`
-: Génère un identifiant unique universel (UUID) de version 4.
-
 `{{ date(n unit, format) }}`
 : Génère une date dans l'un des formats acceptés de Datadog. Sa valeur correspond à la date UTC d'initiation du test + ou - `n` unités.
 
 `{{ timestamp(n, unit) }}` 
 : Génère un timestamp dans l'une des unités acceptées de Datadog. Sa valeur correspond au timestamp UTC d'initiation du test + ou -  `n` unités.
+
+`{{ uuid }}`
+: Génère un identifiant unique universel (UUID) de version 4.
 
 Pour obfusquer les valeurs des variables locales dans les résultats des tests, sélectionnez **Hide and obfuscate variable value**. Une fois la chaîne de la variable définie, cliquez sur **Add Variable**.
 
@@ -266,6 +266,13 @@ Pour obfusquer les valeurs des variables locales dans les résultats des tests, 
 
 Créez une variable à partir du contenu, par exemple une `span` ou `div`, en extrayant le texte de l'élément.
 
+#### Corps de lʼe-mail
+
+Créez une variable à partir du corps du message en utilisant l'une des méthodes suivantes : [`regex`][13] ou [`Xpath`][12].
+
+* [`Regex`][13] recherche et renvoie le premier motif correspondant (par exemple, `/*./`) du corps du message en texte brut. Si aucun motif n'est trouvé, il recherche alors dans le corps du message en HTML.
+
+* [`Xpath`][12] ne s'applique que lorsque lʼe-mail contient un corps HTML. Il renvoie le contenu de l'emplacement correspondant (par exemple, `$`).
 
 #### JavaScript
 
@@ -279,11 +286,11 @@ La fonction JavaScript accepte les paramètres suivants et nécessite une instru
 
 * `element` (facultatif) : l'emplacement de l'élément sur la page. Pour configurer ce paramètre, utilisez les boutons **Select** et **Update** sur l'élément cible. L'élément sélectionné tire automatiquement parti de l'algorithme de localisation multiple des tests Browser Datadog.
 
-{{< img src="synthetics/browser_tests/js_variable.mp4" alt="Variable JavaScript de test Browser" video="true" width="100%">}}
+{{< img src="synthetics/browser_tests/js_variable.mp4" alt="Variable JavaScript de test Browser" video="true" width="100%" >}}
 
 Étant donné que les assertions JavaScript s'exécutent dans le contexte de la page active, ces étapes peuvent également accéder à tous les objets définis dans la page active (comme les bibliothèques, builtins et variables globales). Pour charger des bibliothèques externes, utilisez une promise.
 
-Par exemple :
+Exemple :
 
 ```javascript
 const script = document.createElement('script');
@@ -403,7 +410,7 @@ Les assertions définissent un résultat de test escompté. Lorsque vous cliquez
 
 | Type          | Opérateur                                                                                               | Type de valeur                                                      |
 |---------------|--------------------------------------------------------------------------------------------------------|----------------------------------------------------------------|
-| body          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][13], [`xpath`][14] | _Chaîne_ <br> _[Expression régulière][13]_ <br> _Chaîne_, _[Expression régulière][13]_ |
+| body          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][11], [`xpath`][12] | _Chaîne_ <br> _[Expression régulière][13]_ <br> _Chaîne_, _[Expression régulière][13]_ |
 | header        | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`                       | _Chaîne_ <br> _[Expression régulière][13]_                                      |
 | response time | `is less than`                                                                                         | _Nombre entier (ms)_                                                  |
 | status code   | `is`, `is not`                                                                                         | _Nombre entier_                                                      |
@@ -430,7 +437,7 @@ Pour commencer à parser une variable, cliquez sur **Extract a variable from res
    * Extraire la valeur à partir de l'**en-tête de la réponse** : utilisez l'en-tête de réponse complet de votre requête HTTP comme valeur de variable, ou parsez l'en-tête à l'aide d'une [`regex`][13].
    * Extraire la valeur à partir du **corps de la réponse** : utilisez le corps de réponse complet de votre requête HTTP comme valeur de variable, ou parsez le corps avec une [`regex`][13], une expression [`JSONPath`][11] ou une expression [`XPath`][12].
 
-{{< img src="synthetics/browser_tests/extracted_variable.png" alt="Variable extraite à partir de la réponse" style="width:80%;">}}
+{{< img src="synthetics/browser_tests/extracted_variable.png" alt="Variable extraite à partir de la réponse" style="width:80%;" >}}
 
 
 ## Gérer l'ordre des étapes

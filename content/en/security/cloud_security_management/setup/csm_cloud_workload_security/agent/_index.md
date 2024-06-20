@@ -1,6 +1,5 @@
 ---
 title: Enabling CSM Cloud Workload Security on the Agent
-kind: documentation
 type: multi-code-lang
 ---
 

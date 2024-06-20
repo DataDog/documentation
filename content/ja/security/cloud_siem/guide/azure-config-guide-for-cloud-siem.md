@@ -9,7 +9,6 @@ further_reading:
 - link: /security/cloud_siem/log_detection_rules/
   tag: Documentation
   text: 新しい検出ルールの作成
-kind: documentation
 title: Cloud SIEM の Azure 構成ガイド
 ---
 

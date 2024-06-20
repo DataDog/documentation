@@ -1,6 +1,5 @@
 ---
 title: Fix "unable to verify AWS account" problem
-kind: guide
 ---
 
 If you're getting an "unable to verify AWS account" error when trying to add your AWS account to Cloudcraft, it may be because your organization has attached a service control policy to the account. This prevents Cloudcraft's servers from validating the created IAM role.

@@ -1,6 +1,5 @@
 ---
 title: Custom Detection Rules
-kind: documentation
 aliases:
   - /security_platform/application_security/custom_rules
   - /security/application_security/custom_rules

@@ -34,7 +34,7 @@ integration_id: ns1
 integration_title: ns1
 integration_version: 0.0.6
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: ns1
 public_title: ns1

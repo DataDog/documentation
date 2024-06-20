@@ -1,7 +1,6 @@
 ---
 dependencies:
 - https://github.com/DataDog/ansible-datadog/blob/main/README.md
-kind: documentation
 title: Configurar Ansible con un rol independiente de Datadog
 ---
 El rol Ansible del Datadog Agent instala y configura el Datadog Agent y sus integraciones.

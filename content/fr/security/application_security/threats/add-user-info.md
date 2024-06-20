@@ -11,7 +11,6 @@ further_reading:
   tag: Documentation
   text: Éléments supplémentaires à prendre en compte lors de la configuration et autres
     options de configuration
-kind: documentation
 title: Surveillance et protection des utilisateurs
 ---
 

@@ -1,7 +1,6 @@
 ---
 aliases:
 - /ja/dashboards/faq/query-to-the-graph
-kind: ドキュメント
 title: クエリからグラフまで
 ---
 
