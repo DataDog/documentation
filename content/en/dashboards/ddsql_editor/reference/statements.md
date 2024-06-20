@@ -271,28 +271,6 @@ Data modification statements like `INSERT`, `UPDATE`, and `DELETE` are not suppo
 
 Each aliased query may also specify its output schema and column names.
 
-## EXPLAIN
-
-<div class="alert alert-warning">The DDSQL implementation of <code>EXPLAIN</code> is experimental, and subject to change.
-</div>
-
-`EXPLAIN` shows the execution plan of a statement. This is useful for debugging queries, and analyzing their performance. Only DQL statements can be `EXPLAIN`ed.
-
-`EXPLAIN ANALYZE` executes the query, measures its performance, and returns the queries that were sent to external downstream sources. For example, a query `AGGR AVG('system.load.1')` would be translated to a metrics query `avg:system.load.1{*}`, which `EXPLAIN ANALYZE` would display for inspection.
-
-`EXPLAIN` and `EXPLAIN ANALYZE` are mostly intended for use by the developers of DDSQL as diagnostic tools, but they can be useful for users who are running into unexpected behavior.
-
-### Syntax
-
-{{< code-block lang="sql" >}}
-EXPLAIN [ ANALYZE ] DQL_expression
-{{< /code-block >}}
-
-#### Placeholder types
-
-`DQL_expression`
-: A query statement, such as a `SELECT` or `AGGR` statement.
-
 ## CREATE
 
 DDSQL allows users to create temporary tables, insert into them, and query & reference them. These tables are not persisted across sessions.

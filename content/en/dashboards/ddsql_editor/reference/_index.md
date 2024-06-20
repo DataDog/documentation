@@ -26,17 +26,13 @@ SQL is broken into five different categories of statements. The table below indi
 | DCL (Data Control Language)        | `GRANT`, `REVOKE`   | Not supported       |
 | TCL (Transaction Control Language) | `BEGIN`, `END`, `ROLLBACK`  | Not supported     |
 
-## Usage details
+## Schema on read
 
-{{< whatsnext desc="For usage details, see the relevant documentation:" >}}
-   {{< nextlink href="dashboards/ddsql_editor/reference/statements" >}}Statements (such as SELECT){{< /nextlink >}}
-   {{< nextlink href="dashboards/ddsql_editor/reference/data_types" >}}Data types{{< /nextlink >}}
-   {{< nextlink href="dashboards/ddsql_editor/reference/expressions_and_operators" >}}Expressions and operators{{< /nextlink >}}
-   {{< nextlink href="dashboards/ddsql_editor/reference/scalar_functions" >}}Scalar functions (one computed value per row){{< /nextlink >}}
-   {{< nextlink href="dashboards/ddsql_editor/reference/aggregation_functions" >}}Aggregation functions (one computed value per query or group){{< /nextlink >}}
-   {{< nextlink href="dashboards/ddsql_editor/reference/window_functions" >}}Window functions{{< /nextlink >}}
-   {{< nextlink href="dashboards/ddsql_editor/reference/tags" >}}Querying tags{{< /nextlink >}}
-{{< /whatsnext >}}
+"Schema on read" describes a strategy to apply a schema to data as it is read rather than when it is written. In DDSQL, it is used to enable SQL queries against unstructured data.
+
+If a table supports schema on read, references to nonexistent table columns are allowed, and those references are mapped to the table in a way that is defined by the downstream. For many downstreams, these become tag references.
+
+If a column reference cannot be unambiguously mapped to a single table, it is considered an ambiguous reference. Because schema-on-read columns don't exist in the catalog, they can typically only be used without specifying the correlation if there is exactly one table in the `FROM` clause that supports schema on read.
 
 ## Sessions
 
@@ -45,14 +41,6 @@ DDSQL queries are executed within a session. The session provides the user with 
 Some options, such as the time frame of the query, are exposed runtime parameters within the environment and may be modified with [`SET`][3] and read with [`SHOW`][4].
 
 The default schema in the session includes foreign table definitions that model different parts of the downstream data sources that DDSQL supports.
-
-## Schema on read
-
-"Schema on read" describes a strategy to apply a schema to data as it is read rather than when it is written. In DDSQL, it is used to enable SQL queries against unstructured data.
-
-If a table supports schema on read, references to nonexistent table columns are allowed, and those references are mapped to the table in a way that is defined by the downstream. For many downstreams, these become tag references.
-
-If a column reference cannot be unambiguously mapped to a single table, it is considered an ambiguous reference. Because schema-on-read columns don't exist in the catalog, they can typically only be used without specifying the correlation if there is exactly one table in the `FROM` clause that supports schema on read.
 
 [1]: /dashboards/ddsql_editor/reference/tags
 [2]: /dashboards/ddsql_editor
