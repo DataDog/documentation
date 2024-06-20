@@ -5,7 +5,7 @@ title: Cambios en la cadena de confianza del certificado TLS de Datadog
 
 ## Información general
 
-El 5 de abril de 2023, la entidad de certificación raíz (CA) y la entidad de certificación intermedia (ICA) utilizadas para firmar los certificados de Datadog cambiaron de:
+El 5 de abril de 2023, la autoridad de certificación raíz (CA) y la autoridad de certificación intermedia (ICA) utilizadas para firmar los certificados de Datadog cambiaron de:
 
 {{< tabs >}}
 {{% tab "G1 root certificate (old)" (Certificado raíz G1 (anterior)) %}}
@@ -35,7 +35,7 @@ El 5 de abril de 2023, la entidad de certificación raíz (CA) y la entidad de c
 a:
 
 {{< tabs >}}
-{{% tab "G2 root certificate (new)" (Certificado raíz G2 (nuevo)) %}}
+{{% tab "G2 root certificate (new)" (Certificado G2 raíz (nuevo)) %}}
 `DigiCert Global Root G2`</br>
 **N.º de serie**: `03:3A:F1:E6:A7:11:A9:A0:BB:28:64:B1:1D:09:FA:E5`<br/>
 **Huella digital de SHA1**: `DF:3C:24:F9:BF:D6:66:76:1B:26:80:73:FE:06:D1:CC:8D:4F:82:A4`</br>
