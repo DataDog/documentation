@@ -184,7 +184,7 @@ These functions return one value per row.
 
 | Name | Return type | Description |
 |------|-------------|-------------|
-| json_extract_path_text(text *json*, text *path*) | text | Extracts the JSON sub-object in text defined by the path. Behavior is equivalent to that of the Postgres function of the same name. In the default executor, this function only works on resources tables; it is not implemented for metrics, events, or local tables. To extract nested fields in events tables, reference the entire path in double quotes as the column name. |
+| json_extract_path_text(text *json*, text *path1*, *path2* ...) | text | Extracts the JSON sub-object in text defined by the path (for example, `json_extract_path_text('{"address":{"street":"100 Main Street", "city": "Anytown"}', 'address', 'street')`). Behavior is equivalent to that of the [Postgres function of the same name][2]. In the default executor, this function only works on resources tables; it is not implemented for metrics, events, or local tables. To extract nested fields in events tables, reference the entire path in double quotes as the column name. |
 
 ## Timeseries and point functions
 
@@ -236,3 +236,4 @@ These functions return one value per row.
 | sort_order_ip(string *ip*) | text | Returns a string that can be used in an `ORDER BY` to provide a stable sort over IPv4 and IPv6 addresses. |
 
 [1]: https://pkg.go.dev/regexp/syntax
+[2]: https://www.postgresql.org/docs/12/functions-json.html#FUNCTIONS-JSON-PROCESSING-TABLE
