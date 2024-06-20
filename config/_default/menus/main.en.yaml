@@ -2172,21 +2172,31 @@ menu:
       parent: workflows_actions
       identifier: workflows_http
       weight: 404
+    - name: Private Actions
+      url: service_management/workflows/private_actions/
+      parent: workflows
+      identifier: workflows_private_actions
+      weight: 5
+    - name: Private Action Credentials
+      url: service_management/workflows/private_actions/private_action_credentials/
+      parent: workflows_private_actions
+      identifier: workflows_private_actions_creds
+      weight: 501
     - name: Save and Reuse Actions
       url: service_management/workflows/saved_actions/
       parent: workflows
       identifier: workflows_saved_actions
-      weight: 5
+      weight: 6
     - name: Connections
       url: service_management/workflows/connections/
       parent: workflows
       identifier: workflows_connections
-      weight: 6
+      weight: 7
     - name: Actions Catalog
       url: service_management/workflows/actions_catalog/
       parent: workflows
       identifier: workflows_actions_catalog
-      weight: 7
+      weight: 8
     - name: App Builder
       url: service_management/app_builder/
       pre: app-builder
@@ -2233,6 +2243,16 @@ menu:
       parent: app_builder
       identifier: app_builder_embedded_apps
       weight: 6
+    - name: Private Actions
+      url: service_management/app_builder/private_actions/
+      parent: app_builder
+      identifier: app_builder_private_actions
+      weight: 7
+    - name: Private Action Credentials
+      url: service_management/app_builder/private_actions/private_action_credentials/
+      parent: app_builder_private_actions
+      identifier: app_builder_private_actions_creds
+      weight: 701   
     - name: Universal Service Monitoring
       url: universal_service_monitoring/
       pre: usm
