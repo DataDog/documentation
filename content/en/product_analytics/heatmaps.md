@@ -19,7 +19,7 @@ All features in Product Analytics are in private beta. To request access, comple
 
 {{< img src="real_user_monitoring/heatmaps/heatmap_v2.png" alt="An overview of the heatmap functionality." style="width:100%;">}}
 
-A heatmap (or heat map) is a visualization of your user's interactions overlaid on Session Replay data. RUM has three different types of heatmaps:
+A heatmap (or heat map) is a visualization of your user's interactions overlaid on Session Replay data. Product Analytics has three different types of heatmaps:
 
 - **Click maps:** View user interactions (clicks) to understand how users engage with your page
 - **Top Elements:** View a ranking of up to the top 10 most interacted-with elements on a given page.
@@ -86,7 +86,7 @@ The panel to the left of the Scroll map provides high-level insights with direct
 
 ## Next steps
 
-After understanding analytics, the next step is to understand the action in the context of other data outside of heatmaps. This might mean pivoting to the [RUM explorer][4] or building a funnel that includes the action in order to [analyze conversion rates][5]. You can also watch associated [session replays][1] to visually see a user performing the action in the context of their overall session.
+After understanding analytics, the next step is to understand the action in the context of other data outside of heatmaps. This might mean pivoting to the [Analytics explorer][4] or building a funnel that includes the action in order to [analyze conversion rates][5]. You can also watch associated [session replays][1] to visually see a user performing the action in the context of their overall session.
 
 ## Troubleshooting
 
@@ -125,12 +125,12 @@ User information is not collected by default. Heatmaps use the user information 
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/session_replay/browser/
+[1]: /product_analytics/session_replay/browser/
 [2]: https://github.com/DataDog/browser-sdk/blob/main/packages/rum/package.json
-[3]: https://app.datadoghq.com/rum/heatmap/view
-[4]: /real_user_monitoring/explorer/
+[3]: https://app.datadoghq.com/product-analytics/heatmap/
+[4]: /product_analytics/analytics_explorer/
 [5]: /real_user_monitoring/guide/alerting-with-conversion-rates/
 [6]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#override-default-rum-view-names
 [7]: /real_user_monitoring/browser/tracking_user_actions/#manage-information-being-collected
 [8]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#user-session
-[9]: https://app.datadoghq.com/rum/heatmap
+[9]: https://app.datadoghq.com/product-analytics/heatmap/
