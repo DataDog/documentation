@@ -18,7 +18,6 @@ DDSQL implements a simplified version of the SQL type system that is mostly desc
 | text       | varchar, json            | Storage is always unlimited-length UTF-8. |
 | real       | double                   | Storage is always IEEE-754 float64. |
 | timestamp  | timestamp without time zone | SQL standard datetime type. |
-| interval   |      | Encodes a span of time. Useful for setting the default interval environment variable with `SET`. |
 | group      | hstore, tag_column       | Sorted set of strings with tag-like "= is contains" semantics. |
 | point      |                          | An integer (seconds since Unix epoch) and float value pair. |
 | timeseries |                          | A vector of points. |
@@ -35,7 +34,6 @@ DDSQL implements arrays: a list of elements that all have the same underlying ty
 - booleans
 - timestamps
 - dates
-- intervals
 - points
 - timeseries
 
@@ -57,7 +55,6 @@ The table below contains examples on how to declare literals for each type, for 
 | real       | `1.0`, `1e30`, `314e-2`, `.25`, `5.` |
 | timestamp  | `timestamp <TIMESTAMP_STRING>'` (where `TIMESTAMP_STRING` is a string with a format that can be parsed into a timestamp, such as `'YYYY-MM-DD HH:MM:SS'` or `'YYYY-MM-DD'`, or a relative string like `1 day ago`, `1 week ago`, and so on) |
 | date       | `date <DATE_STRING>` (where `DATE_STRING` is a string that can be parsed into a date, or a relative string like `1 day ago`') |
-| interval   | `interval <INTERVAL_STRING>` (where `INTERVAL_STRING` is a string that can be parsed into an interval, such as `1 h`, `12 days`, and so on) |
 | group      | `{'hello', 'world', 5}` (non-text elements are cast to strings) |
 | array      | An array can be implicitly typed: `array<int>[1, 2, ...]`,  `array<double>[1, 2.2, 3.4, 6, 0]`. Or the type can be inferred from the value: `['once', 'upon', 'a', 'time']`, `[1, 2, 3]` |
 | point      | `point{1641419300, 1.0}` (integer timestamp representing seconds since Unix epoch) |

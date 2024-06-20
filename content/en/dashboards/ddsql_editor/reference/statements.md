@@ -161,11 +161,11 @@ For example, the following queries would **not** work:
 `INTERPOLATE` can only be used when a `ROLLUP` is explicitly specified. The options for `INTERPOLATE` are
 
 - `INTERPOLATE NULL`
-- `INTERPOLATE LINEAR <optional interval>`
-- `INTERPOLATE LAST <optional interval>`
-- `INTERPOLATE ZERO <optional interval>`
+- `INTERPOLATE LINEAR <OPTIONAL_INTERVAL>`
+- `INTERPOLATE LAST <OPTIONAL_INTERVAL>`
+- `INTERPOLATE ZERO <OPTIONAL_INTERVAL>`
 
-For `LINEAR`, `LAST`, and `ZERO`, if no interval is specified, it defaults to 300s.
+For `LINEAR`, `LAST`, and `ZERO`, if no interval is specified, it defaults to `300s`. The `OPTIONAL_INTERVAL` is a string containing an integer and a time unit, such as `"10 minutes"`, `"3h"`, or `"1 week"`.
 
 ### BUCKET BY
 `BUCKET BY` is a clause on the AGGR statement that controls time aggregation. If no `BUCKET BY` is stated, the query defaults to the implicit `INTERVAL` runtime parameter (see the [`SET/SHOW` sections]). `BUCKET BY DEFAULT` also defaults to this.
@@ -180,8 +180,8 @@ Valid time units are:
 - `hours`, `hour`, `hr`, `h`
 - `days`, `day`, `d`
 - `weeks`, `week`, `w`
-- `months`, `month` ([multilayer aggregation queries] only)
-- `years`, `year` ([multilayer aggregation queries] only)
+- `months`, `month` ([multilayer aggregation queries](#multilayer-aggregation) only)
+- `years`, `year` ([multilayer aggregation queries](#multilayer-aggregation) only)
 
 #### BUCKET BY ALL
 
