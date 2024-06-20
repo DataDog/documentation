@@ -21,7 +21,12 @@ further_reading:
 
 Device profiles define which metrics to collect and how to transform them into Datadog metrics. Each [profile][2] is expected to monitor a class of similar devices from the same vendor. 
 
-The Device Onboarding Experience provides a guided, GUI-based experience to seamlessly create and manage device profiles, which allow you to specify tags and metrics to be collected from your network devices, as well as verify the matching devices to each profile. For more information on advanced profile details, review the [Profile Format Reference][3] page.
+The Device Onboarding Experience provides a guided, GUI-based experience to:
+- Seamlessly create and manage device profiles
+- Specify tags and metrics to be collected from your network devices 
+- Verify the matching devices to each profile
+
+For more information on advanced profile details, review the [Profile Format Reference][3] page.
 
 ## Prerequisites 
 
@@ -41,13 +46,10 @@ The [profile home][4] page is where you can see a snapshot of the device profile
 
 1. Build your own NDM profile by navigating to [Infrastructure > Network Devices > Configuration][1]. 
 2. Click on SNMP Profiles > **Create New Profile**.
-
-{{< img src="/network_device_monitoring/profile_onboarding/create_profile.png" alt="The Network Device profile creation page" style="width:100%;">}}
-
+  {{< img src="/network_device_monitoring/profile_onboarding/create_profile.png" alt="The Network Device profile creation page" style="width:100%;">}}
 3. Provide your device profile a name, vendor information(optional) and description (optional).
 4. Select the `SysObjectID`. This is what is used to match network devices to the device profiles that define what is collected and monitored from each device. 
-
-{{< img src="/network_device_monitoring/profile_onboarding/Sys_object_ID_Field.png" alt="The Network Device profile creation page showing the Sys Object ID Dropdown" style="width:100%;">}}
+  {{< img src="/network_device_monitoring/profile_onboarding/Sys_object_ID_Field.png" alt="The Network Device profile creation page showing the Sys Object ID Dropdown" style="width:100%;">}}
 
 ### Global Tags
 
@@ -62,7 +64,7 @@ Add global tags for more advanced and granular options, which allows you to assi
 | No Modification | The device's returned value will be used directly as the tag value. |
 | Format | This can be [mac_address][5] or [ip_address][6]. |
 | Extract Value | A regular expression used to [extract][7] the tag value from the SNMP value provided by the device. |
-| Mapping | This is described [here][8]. Note: our current docs may imply this can ONLY be used for table tags, which needs correction. |
+| Mapping | This is described [here][8]. |
 
 
 ### Scalar metrics
@@ -117,10 +119,10 @@ The advanced options for scalar and tabular metrics are the same:
 
 ### Apply a profile to created devices
 
-1. Once you've saved a profile, navigate back to the [profile home page][4] and select the **Download All Profiles** option. This allows you to download the `yaml` files for the profiles you've created. 
-2. Place the `yaml` files in the [profile directory][13] on each of the relevant installed Agent's.
+1. After you save a profile, navigate back to the [profile home page][4] and select the **Download All Profiles** option. This allows you to download the `yaml` files for the profiles you created. 
+2. Place the `yaml` files in the [profile directory][13] on each of the relevant installed Agents.
 3. Restart the Datadog Agent.
-4. To ensure the profiles you've created are accurate, confirm that NDM is receiving metrics from the matched devices as expected.
+4. To ensure the profiles you created are accurate, confirm that NDM is receiving metrics from the matched devices as expected.
 
 **Need updated screen shot** - This is a placeholder
 
@@ -130,7 +132,7 @@ The advanced options for scalar and tabular metrics are the same:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/devices/
+[1]: https://app.datadoghq.com/devices
 [2]: /network_monitoring/devices/profiles/
 [3]: https://datadoghq.dev/integrations-core/tutorials/snmp/profile-format/
 [4]: https://app.datadoghq.com/devices/profiles

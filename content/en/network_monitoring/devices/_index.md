@@ -33,7 +33,7 @@ algolia:
 
 <br/>
 
-Network Device Monitoring gives you visibility into your on-premise and virtual network devices, such as routers, switches, and firewalls. Automatically discover devices on any network, and start collecting metrics like bandwidth utilization, volume of bytes sent, and determine whether devices are up/down.
+Network Device Monitoring gives you visibility into your on-premises and virtual network devices, such as routers, switches, and firewalls. Automatically discover devices on any network, and start collecting metrics like bandwidth utilization, volume of bytes sent, and determine whether devices are up/down.
 
 ## Getting started
 
@@ -282,5 +282,5 @@ The following vendor devices are supported with dedicated profiles. If a vendor 
 [211]: https://docs.datadoghq.com/integrations/pan_firewall/
 [212]: https://docs.datadoghq.com/integrations/crest_data_systems_pfsense/
 [222]: https://docs.datadoghq.com/integrations/pan_firewall/
-[800]: https://docs.datadoghq.com/integrations/cisco_sdwan/
-[801]: /network_monitoring/devices/guide/device_profiles/
+[223]: https://docs.datadoghq.com/integrations/cisco_sdwan/
+[224]: /network_monitoring/devices/guide/device_profiles/
