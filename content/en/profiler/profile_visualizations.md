@@ -106,7 +106,7 @@ Compared to the flame graph, the timeline view can help you:
 To access the timeline view:
 
 1. Go to [**APM** > **Profiles** > **Explorer**][7].
-2. Set the **Visualize as** option to **Timeline**.
+2. Set the **Visualize as** option to **Thread Timeline**.
 
 Depending on the runtime and language, the timeline lanes vary:
 
