@@ -48,6 +48,8 @@ Datadog Network Performance Monitoring (NPM) gives you visibility into your netw
 
 NPM makes it simple to monitor complex networks with built in support for Linux and [Windows OS][3] as well as containerized environments that are orchestrated and [instrumented with Istio service mesh][4].
 
+Additionally, [Network path][5], a feature of NPM, is available in private beta, which allows you to see hop by hop traffic in your network.
+
 {{< whatsnext desc="This section includes the following topics:">}}
     {{< nextlink href="network_monitoring/performance/setup" >}}<u>Setup</u>: Configure the Agent to collect network data.{{< /nextlink >}}
     {{< nextlink href="network_monitoring/performance/network_analytics" >}}<u>Network Analytics</u>: Graph your network data between each client and server available.{{< /nextlink >}}
@@ -62,3 +64,4 @@ NPM makes it simple to monitor complex networks with built in support for Linux 
 [2]: https://app.datadoghq.com/network/map
 [3]: https://www.datadoghq.com/blog/npm-windows-support/
 [4]: https://www.datadoghq.com/blog/monitor-istio-with-npm/
+[5]: /network_monitoring/network_path/

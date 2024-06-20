@@ -2677,21 +2677,21 @@ menu:
       parent: nm_parent
       identifier: network_path
       weight: 4
-    - name: List View
-      url: network_monitoring/network_path/list_view/
-      parent: network_path
-      identifier: network_path_list_view
-      weight: 401
-    - name: Path View
-      url: network_monitoring/network_path/path_view/
-      parent: network_path
-      identifier: network_path_path_view
-      weight: 402
     - name: Setup
       url: network_monitoring/network_path/setup/
       parent: network_path
       identifier: network_path_setup
+      weight: 401
+    - name: List View
+      url: network_monitoring/network_path/list_view/
+      parent: network_path
+      identifier: network_path_list_view
       weight: 402
+    - name: Path View
+      url: network_monitoring/network_path/path_view/
+      parent: network_path
+      identifier: network_path_path_view
+      weight: 403
     - name: Cloud Cost
       url: cloud_cost_management/
       identifier: cloud_cost

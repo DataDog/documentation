@@ -16,16 +16,16 @@ further_reading:
 <div class="alert alert-warning">Network Path for Datadog Network Performance Monitoring is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-<div class="alert alert-info">Network Path for Datadog Network Performance Monitoring is in private beta. Reach out to your Customer Success Manager to sign up.</div>
+<div class="alert alert-info">Network Path for Datadog Network Performance Monitoring is in private beta. Reach out to your Datadog representative to sign up.</div>
 
 ## Overview
 
-The List View of [Network Path][2] is the default view for exploring various paths. Group by sources such as `datacenter`, `hostname`, and `service`.
+The List View of Network Path is the default view for exploring various paths. Group by sources such as `hostname` and `service`.
 Use the search bar to search for specific endpoints, source, or destination locations.
 
 For example, search by a specific `source.service` and `destination.service` to narrow your results:
 
-{{< img src="network_performance_monitoring/network_path/network_path_list_search.png" alt="The Network Path view, using the search by to sort by a specific source service and destination service" >}}
+{{< img src="network_performance_monitoring/network_path/network_path_list_search_2.png" alt="The Network Path view, using the search by to sort by a specific source service and destination service" >}}
 
 Additionally, search specific paths using the **Destination** and **Source** facet panels on the left hand side, such as `Destination AS Name`, `Destination Service`, or `Source Hostname`.
 
@@ -35,16 +35,13 @@ Additionally, search specific paths using the **Destination** and **Source** fac
 
 The top of the List View page also contains filter controls that can be used to give you a more granular search into the overall health of your network:
 
-{{< img src="network_performance_monitoring/network_path/reachable_unreachable_static_toggle.png" alt="Image of the reachable, unreachable and Static only toggle controls" >}}
+{{< img src="network_performance_monitoring/network_path/reachable_unreachable.png" alt="Image of the reachable abd unreachable toggle controls" >}}
 
 Unreachable
 : Filters to paths where the `traceroute` has not successfully reached the destination. This filter control can be useful to dive into a specific hop to determine where the failure is occurring.
 
 Reachable
 : Filters to paths where the `traceroute` has successfully reached the destination.
-
-Show static paths only
-: Filters to only static paths. Static paths are paths that are manually configured and do not change over time.
 
 
 ## Multi-path map
