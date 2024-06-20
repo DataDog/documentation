@@ -93,19 +93,21 @@ Four tabs are below the profile header:
 
 ### Timeline view
 
-The timeline view is the equivalent of the flame graph, with a distribution over time.
-
-{{< img src="profiler/profiling_viz-timeline2.png" alt="A timeline" >}}
-
-It shows time-based patterns and work distribution over:
-- [The period of a single profile](#single-profile)
-- [A trace][6]
+The timeline view is equivalent to the flame graph, with time-based patterns and work distribution over [the period of a single profile](#single-profile) and [a trace][6].
 
 Compared to the flame graph, the timeline view can help you:
 
 - Isolate spiky methods
 - Sort out complex interactions between threads
 - Surface runtime activity that impacted the process
+
+{{< img src="profiler/profiling_viz-timeline3.png" alt="A timeline" >}}
+
+To access the timeline view:
+
+1. Go to [**APM** > **Profiles** > **Explorer**][7].
+1. Select a profile from the **Profile List**.
+1. Set the **Visualize as** option to **Timeline**.
 
 Depending on the runtime and language, the timeline lanes vary:
 
@@ -186,3 +188,4 @@ Lanes on the top are runtime activities that may add extra latency to your reque
 [4]: /profiler/profile_types/
 [5]: /dashboards/widgets/profiling_flame_graph
 [6]: /profiler/connect_traces_and_profiles/#span-execution-timeline-view
+[7]: https://app.datadoghq.com/profiling/explorer
