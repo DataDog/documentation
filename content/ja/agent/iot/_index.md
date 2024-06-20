@@ -3,7 +3,6 @@ further_reading:
 - link: /getting_started/agent/
   tag: Documentation
   text: Agent の概要
-kind: ドキュメント
 title: IoT Agent
 ---
 

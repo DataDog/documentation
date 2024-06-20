@@ -5,7 +5,6 @@ cascade:
     rank: 70
     subcategory: Agent 가이드
 disable_toc: true
-kind: 가이드
 private: true
 title: Agent 가이드
 ---
