@@ -15,6 +15,9 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/introducing-datadog-profiling/'
       tag: 'Blog'
       text: 'Introducing always-on production profiling in Datadog'
+    - link: 'https://www.datadoghq.com/blog/continuous-profiler-timeline-view/'
+      tag: 'Blog'
+      text: 'Diagnose runtime and code inefficiencies in production by using Continuous Profiler's timeline view'
 ---
 
 ## Search profiles
