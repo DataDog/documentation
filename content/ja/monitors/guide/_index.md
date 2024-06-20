@@ -43,6 +43,7 @@ title: モニターガイド
     {{< nextlink href="monitors/guide/why-did-my-monitor-settings-change-not-take-effect" >}}モニター設定の変更が反映されない{{< /nextlink >}}
     {{< nextlink href="monitors/guide/integrate-monitors-with-statuspage" >}}モニターと Statuspage のインテグレーション{{< /nextlink >}}
 {{< nextlink href="monitors/guide/github_gating" >}}GitHub Actions のデプロイを Datadog モニターで選別する{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/monitoring-available-disk-space" >}}利用可能なディスク容量を監視する{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="クエリ:" >}}

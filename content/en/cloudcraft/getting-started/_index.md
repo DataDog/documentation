@@ -1,6 +1,5 @@
 ---
 title: Getting started
-kind: guide
 ---
 
 {{< whatsnext desc="General:" >}}

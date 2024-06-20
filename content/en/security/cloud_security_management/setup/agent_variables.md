@@ -1,6 +1,5 @@
 ---
 title: Cloud Security Management Agent Variables
-kind: documentation
 ---
 
 The Datadog Agent has several environment variables that can be enabled for Cloud Security Management. This article describes the purpose of each environment variable.

@@ -1,6 +1,5 @@
 ---
 title: Enabling ASM
-kind: documentation
 type: multi-code-lang
 aliases:
   - /security_platform/application_security/getting_started/
@@ -33,34 +32,24 @@ further_reading:
 <div class="alert alert-warning">Application Security Management is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-You can use Datadog Application Security Management products to: 
+## Prerequisites
 
-- Enable your application to [detect and protect against threats][1] targeting your production systems. 
-- [Manage risks][2] in your code and its open source dependencies using the Datadog library for your application language. 
-- Detect vulnerabilities and threats for apps hosted on a server, Docker, Kubernetes, Amazon ECS, or (for supported languages) AWS Fargate.
+Before setting up Application Security capabilities, ensure the following prerequisites are met:
+- **Datadog Agent installation:** The [Datadog Agent][5] is installed and configured for your application's operating system or container, cloud, or virtual environment.
+- **Datadog APM configuration:** [Datadog APM][6] is configured for your application or service, and traces are being received by Datadog.
+- **Supported tracing library:** The Datadog Tracing Library used by your application or service supports Software Composition Analysis capabilities for the language of your application or service. For more details, see [Library Compatibility][7].
 
-{{% appsec-getstarted %}}
+## Application Security enablement types
 
-## ASM enablement types
-
-Use the following approaches to enable ASM products.
-
-### ASM setup in the Datadog UI
-
-To set up ASM products in your browser:
-
-1. Go to [ASM Setup][5].
-2. Follow the instructions for each of the ASM products.
-
-Datadog also includes a [Getting Starting][6] guide to ASM products. Follow the guide to onboard with ASM.
+There are two main approaches to enable Application Security on your applications: Single-Step Instrumentation or Datadog Tracing Library.
 
 ### Single-step instrumentation
 
-- [Single Step Instrumentation (Beta)][3]: Run a one-line install command to install the Datadog Agent, enable ASM, and protect all of your services on your Linux host, VM, or containers.
+Run a one-line installation command to install the Datadog Agent and enable Application Security capabilities with [Single Step Instrumentation (Beta)][3].
 
 ### Datadog tracing libraries
 
-- [Datadog libraries][4]: Use Datadog tracing libraries to add and customize observability within Datadog.
+Add an environment variable or a new argument to your [Datadog Tracing Library][4] configuration.
 
 
 ## Further Reading
@@ -71,5 +60,6 @@ Datadog also includes a [Getting Starting][6] guide to ASM products. Follow the 
 [2]: /security/application_security/risk_management/
 [3]: /security/application_security/enabling/single_step
 [4]: /security/application_security/enabling/tracing_libraries
-[5]: https://app.datadoghq.com/security/configuration/asm/setup
-[6]: https://app.datadoghq.com/security/configuration/asm/onboarding
+[5]: https://app.datadoghq.com/account/settings/agent/latest
+[6]: /tracing/trace_collection/dd_libraries/
+[7]: /security/application_security/enabling/compatibility/

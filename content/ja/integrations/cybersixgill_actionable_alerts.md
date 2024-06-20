@@ -35,7 +35,7 @@ integration_id: cybersixgill-actionable-alerts
 integration_title: Cybersixgill Actionable Alerts
 integration_version: 1.0.1
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: cybersixgill_actionable_alerts
 public_title: Cybersixgill Actionable Alerts

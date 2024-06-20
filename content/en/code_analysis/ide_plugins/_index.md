@@ -1,6 +1,5 @@
 ---
 title: Datadog IDE Plugins for Code Analysis
-kind: documentation
 description: Learn how to set up Datadog IDE plugins for enhanced code analysis and quality assurance in your development environment.
 disable_toc: false
 further_reading:

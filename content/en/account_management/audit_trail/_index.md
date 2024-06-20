@@ -1,6 +1,5 @@
 ---
 title: Datadog Audit Trail
-kind: documentation
 aliases:
     - /account_management/audit_logs/
 further_reading:

@@ -39,15 +39,13 @@ title: 도커 통합 자동 탐지
 
 **참고**: `<INIT_CONFIG>`는 Datadog 에이전트 7.36에 도입된 자동 탐지 v2에 필요하지 않습니다.
 
-[**해당 매개 변수에 대한 예제와 함께 자동 탐지가 지원되는 에이전트 통합의 전체 목록을 확인하세요**][3].
-
 아래 섹션의 각 탭은 지정된 컨테이너에 통합 템플릿을 적용하는 다른 방법을 보여줍니다. 사용 가능한 방법은 다음과 같습니다:
 
 * [도커 라벨](?tab=docker#configuration)
 * [에이전트 내에서 마운트 된 설정 파일](?tab=file#configuration)
 * [키-값 저장소](?tab=keyvaluestore#configuration)
 
-**참고**: 지원되는 일부 통합은 [Ceph][4], [Varnish][5], [Postfix][6], [Cassandra Nodetools][7] 및 [Gunicorn][8]과 같은 파일 시스템 액세스 또는 프로세스 트리 데이터가 필요하기 때문에 표준 자동 탐지와 함께 작동하지 않습니다. 이러한 통합에 대해 자동 탐지를 실행하려면 포드에서 공식 Prometheus 내보내기를 사용한 다음 에이전트에서 자동 탐지를 사용하여 포드를 찾고 엔드포인트를 쿼리하세요.
+**참고**: 지원되는 일부 통합은 [Ceph][4], [Varnish][5], [Postfix][6], [Cassandra Nodetools][7] 및 [Gunicorn][8]과 같은 파일 시스템 액세스 또는 프로세스 트리 데이터가 필요하기 때문에 표준 자동 탐지와 함께 작동하지 않습니다. 이러한 통합에 대해 자동 탐지를 실행하려면 컨테이너에서 공식 Prometheus 익스포터를 사용한 다음 에이전트에서 자동 탐지를 사용하여 컨테이너를 찾고 엔드포인트를 쿼리하세요.
 
 ## 설정
 
@@ -60,7 +58,7 @@ title: 도커 통합 자동 탐지
 
 통합 템플릿은 도커 라벨로 저장될 수 있습니다. 자동 탐지를 사용하면 에이전트가 도커에서 실행 중인지를 탐지하고 모든 라벨에서 통합 템플릿을 자동으로 검색합니다. 자동 탐지에서는 라벨이 다음과 같이 표시될 것으로 예상합니다:
 
-**Dockerfile**:
+**도커파일**:
 
 ```yaml
 LABEL "com.datadoghq.ad.checks"='{"<INTEGRATION_NAME>": {"instances": [<INSTANCE_CONFIG>]}}'
@@ -246,7 +244,7 @@ instances:
 **참고**: 자동 탐지는 지정된 컨테이너에 특정 설정을 적용하기 위해 키-값 저장소 사용 시 `<CONTAINER_IDENTIFIER>`와 `.spec.containers[0].image`를 조합하여 **image**로 컨테이너를 식별합니다.
 
 [1]: /ko/integrations/consul/
-[2]: /ko/agent/guide/agent-commands/
+[2]: /ko/agent/configuration/agent-commands/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -402,7 +400,7 @@ etcdctl set /datadog/check_configs/httpd/instances '[[{"apache_status_url": "htt
 {{% /tab %}}
 {{< /tabs >}}
 
-
+## 참고 자료
 
 {{< partial name="whats-next/whats-next.html" >}}
 

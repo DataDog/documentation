@@ -1,6 +1,5 @@
 ---
 title: ASM Terms and Concepts
-kind: documentation
 disable_toc: false
 further_reading:
 - link: "/security/application_security/how-appsec-works"
