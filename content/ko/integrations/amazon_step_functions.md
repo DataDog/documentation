@@ -5,7 +5,7 @@ categories:
 - 로그 수집
 custom_kind: integration
 dependencies: []
-description: AWS 스텝 함수의 핵심 메트릭을 추적합니다.
+description: AWS Step Functions의 핵심 메트릭을 추적합니다.
 doc_link: https://docs.datadoghq.com/integrations/amazon_step_functions/
 draft: false
 git_integration_title: amazon_step_functions
@@ -16,19 +16,19 @@ integration_version: ''
 is_public: true
 manifest_version: '1.0'
 name: amazon_step_functions
-public_title: Datadog-AWS 스텝 함수 통합
-short_description: AWS 스텝 함수의 핵심 메트릭을 추적합니다.
+public_title: Datadog-AWS Step Functions 통합
+short_description: AWS Step Functions의 핵심 메트릭을 추적합니다.
 version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 개요
 
-AWS 스텝 함수로 시각적 워크플로우를 사용하여 분산 애플리케이션 및 마이크로서비스의 구성 요소를 조정할 수 있습니다.
+AWS Step Functions로 시각적 워크플로우를 사용하여 분산 애플리케이션 및 마이크로서비스의 구성 요소를 조정할 수 있습니다.
 
-이 통합을 활성화하면 Datadog에서 모든 스텝 함수 메트릭을 볼 수 있습니다.
+이 통합을 활성화하면 Datadog에서 모든 Step Functions 메트릭을 볼 수 있습니다.
 
-<div class="alert alert-warning">Datadog의 기본 AWS 스텝 함수 모니터링 기능은 공개 베타 버전으로 제공됩니다. 스텝 함수를 보강 메트릭 및 트레이스로 계측하려면 <a href="https://docs.datadoghq.com/서버리스/step_functions">서버리스 문서<a>를 참조하세요.</div>
+<div class="alert alert-warning">Datadog의 기본 AWS Step Function 모니터링 기능은 공개 베타 버전으로 제공됩니다. Step Functions를 향상된 메트릭 및 트레이스로 계측하려면 <a href="https://docs.datadoghq.com/serverless/step_functions">서버리스 문서<a>를 참조하세요.</div>
 
 ## 설정
 
@@ -44,9 +44,9 @@ states:DescribeStateMachine
 ### 메트릭 수집
 
 1. [AWS 통합 페이지][2]에서 `Metric Collection` 탭 하단에 `States`이 활성화되어 있는지 확인합니다. 상태 시스템이 AWS Lambda를 사용하는 경우 `Lambda`도 체크되어 있는지 확인합니다.
-2. [Datadog - AWS 스텝 함수 통합][3]을 설치합니다.
+2. [Datadog - AWS Step Functions 통합][3]을 설치합니다.
 
-#### AWS 람다 메트릭 보강
+#### AWS Lambda 메트릭 보강
 
 스텝 함수 상태가 Lambda 함수라면 본 통합 설치 시 Lambda 메트릭에 추가 `statemachinename`, `statemachinearn`, `stepname`  [태그][4]가 추가됩니다. Lambda 함수가 어떤 상태 시스템에 속하는지 확인할 수 있으며 [서버리스 페이지][5]에서 시각화할 수도 있습니다.
 
