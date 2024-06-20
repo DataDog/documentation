@@ -46,7 +46,7 @@ To remediate the identity risk, click **Fix in AWS** to update the resource in A
 
 {{< img src="security/identity_risks/side_panel_action_buttons_2.png" alt="Remediate identity risks using the action buttons on the side panel" width="100%">}}
 
-You can also use Terraform remediation to generate a pull request in Github with code changes that fix the underlying identity risk, or leverage [Workflow Automation][3] to create automated workflows for identity risks (with or without human involvement).
+You can also use Terraform remediation to generate a pull request in GitHub with code changes that fix the underlying identity risk, or leverage [Workflow Automation][3] to create automated workflows for identity risks (with or without human involvement).
 
 ## AWS IAM Access Analyzer integration
 
