@@ -25,6 +25,8 @@ Private Actions are in beta. Use this form to request access today.
 
 Private actions allow your Datadog workflows and apps to interact with services hosted on your private network without exposing your services to the public internet. To use private actions, you must use Docker to install a private action runner on a host in your network, then pair the runner with a Datadog Connection.
 
+## Supported private actions
+
 The following integrations support private actions:
 - [Kubernetes][1]
 - [Postgres][2]
@@ -36,7 +38,7 @@ The following integrations support private actions:
 
 The private action runner requires a Linux host that is able to reach any internal services you want to call from an action or app.
 
-To use App Builder with private actions, you must be able to point a hostname to the private action runner container. This hostname must be resolvable by your App users. App Builder calls the hostname using HTTPS, so you must bring your own SSL termination.
+To use App Builder with private actions, you must be able to point a hostname to the private action runner's container. This hostname must be resolvable by your App users. App Builder calls the hostname using HTTPS, so you must bring your own SSL termination.
 
 In addition, the host must have the following:
 - 2GB of RAM
@@ -143,7 +145,7 @@ Before you can use an action runner, you must pair it with one or more connectio
 
 To pair a runner to a connection:
 1. From the [Workflow Automation][8] or [App Builder][9] Connections page, click **New Connection**.
-1. Select the integration you want to connect with your private action runner. For a list of integrations that support private actions, see [Overview](#overview).
+1. Select the integration you want to connect with your private action runner. For a list of integrations that support private actions, see [Supported private actions](#supported-private-actions).
 1. Add a **Connection Name** and select your runner from the **Private Action Runner** dropdown.
 1. Add the paths to any required credential files. For more information on credentials, see:
    - [Handling Private Action Credentials for Workflows][10].
@@ -155,7 +157,7 @@ To use a private action in your [Workflow Automation][11] workflow or [App Build
 
 {{% collapse-content title="Workflow Automation" level="p" %}}
 1. From the [Workflow Automation][11] page, create a workflow, or open an existing workflow. For information on creating or editing a workflow, see [Build Workflows][13].
-1. Click **Add Step** and search for the private action you want to add to your workflow. For a list of integrations that support private actions, see [Overview](#overview).
+1. Click **Add Step** and search for the private action you want to add to your workflow. For a list of integrations that support private actions, see [Supported private actions](#supported-private-actions).
 1. Enter a name for the step.
 1. Select a **Connection** from the dropdown or click the plus (**+**) icon to add a new connection. Using a private action requires a private action runner that is paired with a connection. See [Connect a runner](#connect-a-runner) for more information.
 1. Complete any required fields and click **Save** to save your workflow.
@@ -163,7 +165,7 @@ To use a private action in your [Workflow Automation][11] workflow or [App Build
 
 {{% collapse-content title="App Builder" level="p" %}}
 1. From the [App Builder][12] page, create an app, or open an existing app. For information on creating or editing an app, see [Build Apps][15].
-1. Click **New Query** and search for the private action you want to add to your app. For a list of integrations that support private actions, see [Overview](#overview).
+1. Click **New Query** and search for the private action you want to add to your app. For a list of integrations that support private actions, see [Supported private actions](#supported-private-actions).
 1. Select a **Connection** from the dropdown or click the plus (**+**) icon to add a new connection. Using a private action requires a private action runner paired with a connection. See [Connect a runner](#connect-a-runner) for more information.
 1. Complete any required fields and click **Save** to save your query.
 {{% /collapse-content %}}
