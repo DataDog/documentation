@@ -38,22 +38,22 @@ These functions return one value per row.
 ### replace
 | Name | Return type | Description |
 |------|-------------|-------------|
-| replace(text *s*, text *from*, text *to*) | string | Replaces all occurrences in *s* of substring *from* from with substring *to*. |
+| replace(text *s*, text *from*, text *to*) | text | Replaces all occurrences in *s* of substring *from* from with substring *to*. |
 
 ### regexp_replace
 | Name | Return type | Description |
 |------|-------------|-------------|
-| regexp_replace(text *s*, text *pattern*, text *replacement*) | string | Replace substrings in *s* that match the POSIX regular expression *pattern* with the *replacement*. Supports Go's [regular expression syntax][1]. |
+| regexp_replace(text *s*, text *pattern*, text *replacement*) | text | Replace substrings in *s* that match the POSIX regular expression *pattern* with the *replacement*. Supports Go's [regular expression syntax][1]. |
 
 ### reverse
 | Name | Return type | Description |
 |------|-------------|-------------|
-| reverse(text *s*) | string | Reverses the string *s*. |
+| reverse(text *s*) | text | Reverses the string *s*. |
 
 ### md5
 | Name | Return type | Description |
 |------|-------------|-------------|
-| md5(text *s*) | string | Calculates the MD5 hash of *s* and returns the result in hexadecimal. |
+| md5(text *s*) | text | Calculates the MD5 hash of *s* and returns the result in hexadecimal. |
 
 ## Mathematical functions and operators
 
@@ -142,7 +142,7 @@ These functions return one value per row.
 ### array_to_string
 | Name | Return type | Description |
 |------|-------------|-------------|
-| array_to_string(array *a*, text *delimiter*, [text *nullString1*, *nullString2* ...]) | string | Concatenates array elements using the supplied *delimiter* and optional null strings (substrings to replace with `NULL`). |
+| array_to_string(array *a*, text *delimiter*, [text *nullString1*, *nullString2* ...]) | text | Concatenates array elements using the supplied *delimiter* and optional null strings (substrings to replace with `NULL`). |
 
 ### unnest
 | Name | Return type | Description |
@@ -233,6 +233,6 @@ These functions return one value per row.
 ### sort_order_ip
 | Name | Return type | Description |
 |------|-------------|-------------|
-| sort_order_ip(string *ip*) | string | Returns a string that can be used in an `ORDER BY` to provide a stable sort over IPv4 and IPv6 addresses. |
+| sort_order_ip(string *ip*) | text | Returns a string that can be used in an `ORDER BY` to provide a stable sort over IPv4 and IPv6 addresses. |
 
 [1]: https://pkg.go.dev/regexp/syntax
