@@ -88,4 +88,4 @@ The functions below can be used in windows, along with the [aggregation function
 | last_value(value *T*) | *T* | Returns the value evaluated at the row that is the last row of the window frame. |
 
 [1]: https://www.postgresql.org/docs/current/sql-expressions.html#SYNTAX-WINDOW-FUNCTIONS
-[2]: dashboards/ddsql_editor/reference/aggregation_functions
+[2]: /dashboards/ddsql_editor/reference/aggregation_functions
