@@ -775,7 +775,7 @@ Universal Service Monitoring is available in <strong>beta</strong> to monitor TL
 <strong>Note</strong>:
 <br>
 <ul role="list">
-  <li>Go HTTPS servers can upgrade HTTP1.1 protocol to HTTP/2 which is supported in private beta. Reach to your account manager for further details</li>
+  <li>Go HTTPS servers can upgrade HTTP1.1 protocol to HTTP/2 which is supported in private beta. Reach out to your account manager for details.</li>
   <li>Requires Agent version 7.51 or greater.</li>
 </ul>
 
@@ -987,7 +987,7 @@ agents:
     systemProbe:
       env:
         - name: DD_SERVICE_MONITORING_CONFIG_ENABLE_KAFKA_MONITORING
-          value: " true"
+          value: "true"
 ```
 {{% /tab %}}
 
