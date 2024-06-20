@@ -15,7 +15,7 @@ Private actions allow your Datadog workflows and apps to interact with services 
 Some private actions, such as Jenkins and PostgreSQL, require credentials to function. To configure credentials for a private action, you must:
 1. Create a JSON file for the credential and use the JSON structure provided in [Credential files](#credential-files).
 2. Store your credential files in the configuration directory you created during setup.
-3. Specify the path to the credential in the runner's connection. Use the path to the credential on the container, for example: `/etc/dd-action-runner/creds/jenkins_creds.json`.
+3. Specify the path to the credential in the runner's connection. Use the path to the credential on the container. For example: `/etc/dd-action-runner/creds/jenkins_creds.json`.
 
 ## Credential files
 
@@ -24,7 +24,7 @@ Some private actions, such as Jenkins and PostgreSQL, require credentials to fun
 
 The PostgreSQL connection requires a PostgreSQL Connection URI credential. 
 
-This example uses the URI `postgres://usr:password@example_host:5432/example_db`. For information on constructing a PostgreSQL connection URI, see [the official PostgreSQL documentation][101].
+This example uses the URI `postgres://usr:password@example_host:5432/example_db`. For information on constructing a PostgreSQL connection URI, see the [official PostgreSQL documentation][101].
 
 {{< code-block lang="json" filename="/etc/dd-action-runner/creds/creds.pgpass" disable_copy="false" collapsible="true" >}}
 {

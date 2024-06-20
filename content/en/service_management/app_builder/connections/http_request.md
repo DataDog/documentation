@@ -161,7 +161,7 @@ To configure a private HTTP request:
 1. Select **HTTP**.
 1. Enter a **Connection Name**.
 1. Enter the **Base URL** for the host in your private network.
-1. For Type, ensure that **Private Action Runner** is selected.
+1. For **Type**, ensure that **Private Action Runner** is selected.
 1. From the **Private Action Runner** drop-down, select your [private action runner][5].
 1. From the **Authentication Type** dropdown, select an Authentication type and fill in the required fields. Private HTTP requests support the following authentication types:
    - No authentication

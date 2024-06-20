@@ -23,7 +23,7 @@ Private Actions are in beta. Use this form to request access today.
 
 ## Overview
 
-Private actions allow your Datadog workflows and apps to interact with services hosted on your private network without exposing your services to the public internet. To use private actions, you must use Docker to install a private action runner on a host in your network and pair the runner with a Datadog Connection.
+Private actions allow your Datadog workflows and apps to interact with services hosted on your private network without exposing your services to the public internet. To use private actions, you must use Docker to install a private action runner on a host in your network, then pair the runner with a Datadog Connection.
 
 The following integrations support private actions:
 - [Kubernetes][1]
@@ -63,7 +63,7 @@ From the **Private Action Runner** page in [Workflow Automation][6] or [App Buil
 
 {{% tab "Docker Compose" %}}
 1. Click **Docker Compose**.
-1. Create a `docker-compose.yaml` file and add the provided YAML, or add the `runner` stanza to an existing Docker Compose file. For information on creating a Docker Compose file, see the [official Compose docs][101].
+1. Create a `docker-compose.yaml` file and add the provided YAML, or add the `runner` stanza to an existing Docker Compose file. For information on creating a Docker Compose file, see the [official Compose documentation][101].
 1. Replace `./config` with the path to the directory you created for the runner configuration.
 1. Run `docker compose up -d`.
 
@@ -157,7 +157,7 @@ To use a private action in your [Workflow Automation][11] workflow or [App Build
 1. From the [Workflow Automation][11] page, create a workflow, or open an existing workflow. For information on creating or editing a workflow, see [Build Workflows][13].
 1. Click **Add Step** and search for the private action you want to add to your workflow. For a list of integrations that support private actions, see [Overview](#overview).
 1. Enter a name for the step.
-1. Select a **Connection** from the dropdown or click the plus (**+**) icon to add a new connection. Using a private action requires a private action runner paired with a connection. See [Connect a runner](#connect-a-runner) for more information.
+1. Select a **Connection** from the dropdown or click the plus (**+**) icon to add a new connection. Using a private action requires a private action runner that is paired with a connection. See [Connect a runner](#connect-a-runner) for more information.
 1. Complete any required fields and click **Save** to save your workflow.
 {{% /collapse-content %}}
 
