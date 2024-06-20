@@ -3,7 +3,7 @@ title: DDSQL Editor
 kind: documentation
 ---
 
-{{< callout url="https://google.com">}}
+{{< callout url="https://datadoghq.com/private-beta/ddsql-editor">}}
 DDSQL Editor is in private beta.
 {{< /callout >}}
 

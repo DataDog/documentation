@@ -2,7 +2,7 @@
 title: DDSQL Expressions and Operators
 ---
 
-{{< callout url="https://google.com">}}
+{{< callout url="https://datadoghq.com/private-beta/ddsql-editor">}}
 DDSQL is in private beta.
 {{< /callout >}}
 
