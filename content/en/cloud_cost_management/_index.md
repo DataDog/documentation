@@ -218,6 +218,16 @@ When creating a dashboard, select **Cloud Cost** as the data source for your sea
 
 Optionally, you can programmatically export a timeseries graph of your cloud cost data by using the [Metrics API][2].
 
+## Use daily Datadog cost data
+
+Visualize daily Datadog spending alongside related utilization metrics to spot potential inefficiencies and savings opportunities.
+
+When creating a dashboard, select **Cloud Cost** as the data source for your search query.
+
+{{< img src="cloud_cost/datadog_costs/dashboard.png" alt="Datadog costs as an option for the Cloud Cost data source in a dashboard" style="width:100%;" >}} 
+
+Optionally, you can programmatically export a timeseries graph of your Datadog cost data by using the [Metrics API][2].
+
 ## Create tag rules
 
 Use [Tag Pipelines][5] to ensure comprehensive cost tracking by standardizing the tags across all cloud resources. This prevents any cost data from being overlooked. 
