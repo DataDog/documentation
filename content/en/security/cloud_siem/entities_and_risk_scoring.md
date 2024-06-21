@@ -3,14 +3,14 @@ title: Cloud SIEM AWS Entities and Risk Scoring
 ---
 
 {{< callout url="https://google.com" header="Join the Beta!">}}
-Cloud SIEM Entities is in private beta.
+Cloud SIEM AWS Entities is in private beta.
 {{< /callout >}}
 
 ## Overview
 
 [Cloud SIEM AWS Entities][4] consolidates multiple data sources, such as SIEM threats and CSM insights, into a profile representing a single security entity, such as an IAM user.
 
-With Cloud SIEM Entities, you can:
+With Cloud SIEM AWS Entities, you can:
 
 - Explore entities, filtering them by attributes such as [risk score](#risk-scoring) or entity type.
 - View all data relevant to an entity, such as signals, misconfigurations, and identity risks.
@@ -23,13 +23,13 @@ With Cloud SIEM Entities, you can:
 
 On the [Entities Explorer page][4], you can view all entities that have at least one signal.
 
-{{< img src="security/entities-explorer.png" alt="A list of entities and their risk scores in the Entities Explorer" style="width:100%;" >}}
+{{< img src="security/entities/entities-explorer.png" alt="A list of entities and their risk scores in the Entities Explorer" style="width:100%;" >}}
 
 ### Quickly build context on an entity
 
 Click an entity in the [Explorer][4] to open the entity details panel.
 
-{{< img src="security/entities-side-panel.png" alt="The details panel for an entity" style="width:80%;" >}}
+{{< img src="security/entities/entity-side-panel.png" alt="The details panel for an entity" style="width:90%;" >}}
 
 The top of the panel displays the count of related signals, identity risks, and so on, with links to the list view of each.
 
@@ -39,7 +39,7 @@ The **Entity Context** section displays entity's attributes, such as the entity 
 
 The **Next steps** section of the entity details panel includes the available mitigation steps.
 
-{{< img src="security/entity-next-steps.png" alt="The available next steps for an entity as shown in the entity details panel" style="width:80%;" >}}
+{{< img src="security/entities/entity-next-steps.png" alt="The available next steps for an entity as shown in the entity details panel" style="width:80%;" >}}
 
 ## Prerequisites
 
