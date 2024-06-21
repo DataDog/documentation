@@ -1,5 +1,7 @@
 ---
 title: LLM Observability API Reference
+aliases:
+    - /tracing/llm_observability/api
 ---
 
 {{% site-region region="gov" %}}
@@ -350,6 +352,6 @@ Evaluations require a `span_id` and `trace_id`.
 | type [*required*]      | string | Identifier for the request. Set to `evaluation_metric`. |
 | attributes [*required*] | [[EvalMetric](#evalmetric)] | The body of the request. | 
 
-[1]: /tracing/llm_observability/sdk/
-[2]: /tracing/llm_observability/span_kinds/
+[1]: /llm_observability/sdk/
+[2]: /llm_observability/span_kinds/
 [3]: /getting_started/tagging/

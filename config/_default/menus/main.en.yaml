@@ -24,12 +24,15 @@ menu:
     - name: Security
       identifier: security_platform_heading
       weight: 8000000
+    - name: AI Observability
+      identifier: ai_observability_heading
+      weight: 9000000
     - name: Log Management
       identifier: log_management_heading
-      weight: 9000000
+      weight: 10000000
     - name: Administration
       identifier: administration_heading
-      weight: 10000000
+      weight: 11000000
     - name: Getting Started
       identifier: getting_started
       url: getting_started/
@@ -3048,51 +3051,6 @@ menu:
       parent: tracing_services
       identifier: tracing_apm_monitors
       weight: 706
-    - name: LLM Observability
-      url: tracing/llm_observability/
-      parent: tracing
-      identifier: tracing_llm_obs
-      weight: 7
-    - name: Core Concepts
-      url: tracing/llm_observability/core_concepts/
-      parent: tracing_llm_obs
-      identifier: tracing_llm_obs_core_concepts
-      weight: 701
-    - name: Quickstart
-      url: tracing/llm_observability/quickstart/
-      parent: tracing_llm_obs
-      identifier: tracing_llm_obs_quickstart
-      weight: 702
-    - name: Trace an LLM Application
-      url: tracing/llm_observability/trace_an_llm_application/
-      parent: tracing_llm_obs
-      identifier: tracing_llm_obs_trace_an_application
-      weight: 703
-    - name: Span Kinds
-      url: tracing/llm_observability/span_kinds/
-      parent: tracing_llm_obs
-      identifier: tracing_llm_obs_span_kinds
-      weight: 704
-    - name: Auto Instrumentation
-      url: tracing/llm_observability/auto_instrumentation/
-      parent: tracing_llm_obs
-      identifier: tracing_llm_obs_auto_instrumentation
-      weight: 705
-    - name: SDK
-      url: tracing/llm_observability/sdk/
-      parent: tracing_llm_obs
-      identifier: tracing_llm_obs_sdk
-      weight: 706
-    - name: API
-      url: tracing/llm_observability/api/
-      parent: tracing_llm_obs
-      identifier: tracing_llm_obs_api
-      weight: 707
-    - name: Submit Evaluations
-      url: tracing/llm_observability/submit_evaluations/
-      parent: tracing_llm_obs
-      identifier: tracing_llm_obs_submit_evaluations
-      weight: 708
     - name: API Catalog
       url: /tracing/api_catalog/
       identifier: api_catalog
@@ -3552,6 +3510,52 @@ menu:
       identifier: data_jobs
       parent: apm_heading
       weight: 60000
+    - name: LLM Observability
+      url: llm_observability/
+      pre: llm-observability
+      identifier: llm_observability
+      parent: ai_observability_heading
+      weight: 10000
+    - name: Core Concepts
+      url: llm_observability/core_concepts/
+      parent: llm_observability
+      identifier: tracing_llm_obs_core_concepts
+      weight: 1
+    - name: Quickstart
+      url: llm_observability/quickstart/
+      parent: llm_observability
+      identifier: tracing_llm_obs_quickstart
+      weight: 2
+    - name: Trace an LLM Application
+      url: llm_observability/trace_an_llm_application/
+      parent: llm_observability
+      identifier: tracing_llm_obs_trace_an_application
+      weight: 3
+    - name: Span Kinds
+      url: llm_observability/span_kinds/
+      parent: llm_observability
+      identifier: tracing_llm_obs_span_kinds
+      weight: 4
+    - name: Auto Instrumentation
+      url: llm_observability/auto_instrumentation/
+      parent: llm_observability
+      identifier: tracing_llm_obs_auto_instrumentation
+      weight: 5
+    - name: SDK
+      url: llm_observability/sdk/
+      parent: llm_observability
+      identifier: tracing_llm_obs_sdk
+      weight: 6
+    - name: API
+      url: llm_observability/api/
+      parent: llm_observability
+      identifier: tracing_llm_obs_api
+      weight: 7
+    - name: Submit Evaluations
+      url: llm_observability/submit_evaluations/
+      parent: llm_observability
+      identifier: tracing_llm_obs_submit_evaluations
+      weight: 8
     - name: CI Visibility
       url: continuous_integration/
       pre: ci
