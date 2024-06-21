@@ -4597,7 +4597,7 @@ menu:
       url: security/cloud_siem/guide/
       parent: cloud_siem
       identifier: siem_guides
-      weight: 7
+      weight: 8
     - name: Cloud Security Management
       url: security/cloud_security_management
       parent: security_platform_heading
