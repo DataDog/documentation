@@ -29,9 +29,8 @@ Vos rapports de crash sont disponibles dans l'interface [**Error Tracking**][2].
 
 Si vous n'avez pas encore configuré le SDK Browser Datadog, suivez les [instructions de configuration intégrées à l'application][1] ou consultez la [documentation sur la configuration des logs Browser][2].
 
-1. Téléchargez la dernière version du [SDK de collecte des logs Browser][3].
-2. Configurez les tags `version`, `env` et `service` de votre application lors de l'[initialisation du SDK][4].
-3. Initialisez votre SDK, par exemple avec NPM :
+1. Téléchargez la dernière version du SDK Logs Browser. Le suivi des erreurs nécessite au minimum la version `v4.36.0`.
+2. Configurez les tags `version`, `env` et `service` de votre application lors de l'[initialisation du SDK][3]. Par exemple, avec NPM :
 
    ```javascript
    import { datadogLogs } from '@datadog/browser-logs'
@@ -46,26 +45,22 @@ Si vous n'avez pas encore configuré le SDK Browser Datadog, suivez les [instruc
    })
    ```
 
-4. Vous devez ajouter le bloc suivant près du code d'initialisation pour récupérer l'ensemble des exceptions non interceptées et les transmettre à Datadog :
+3. Pour loguer manuellement une exception interceptée, vous pouvez utiliser le [paramètre facultatif error][4] :
 
    ```javascript
-   window.onerror = function (message, source, lineno, colno, error) {
-       datadogLogs.logger.error(error?.message || '', {
-           error: { stack: error?.stack },
-       });
-   };
+   try {
+     throw new Error('wrong behavior');
+   } catch(err) {
+     datadogLogs.logger.error("an error occurred", {usr: {id: 123}}, err);
+   }
    ```
-5. Pour loguer manuellement une exception interceptée, vous pouvez utiliser le code suivant :
 
-   ```javascript
-   const e = new Error('an exception occurred');
-   datadogLogs.logger.error(e.message, {'error': {'stack': e.stack}});
-   ```
+**Remarque** : le suivi des erreurs tient uniquement compte des erreurs correspondant à des instances de `Error`.
 
 [1]: https://app.datadoghq.com/logs/onboarding/client
 [2]: /fr/logs/log_collection/javascript/#setup
-[3]: https://github.com/DataDog/browser-sdk/tree/main/packages/logs
-[4]: /fr/logs/log_collection/javascript/#choose-the-right-installation-method
+[3]: /fr/logs/log_collection/javascript/#choose-the-right-installation-method
+[4]: /fr/logs/log_collection/javascript/#error-tracking
 
 {{% /tab %}}
 {{% tab "Android" %}}
@@ -85,7 +80,7 @@ Si vous n'avez pas encore configuré le SDK Android Datadog, suivez les [instruc
    ```
 
 [1]: https://app.datadoghq.com/logs/onboarding/client
-[2]:/fr/logs/log_collection/android/#setup
+[2]: /fr/logs/log_collection/android/#setup
 [3]: https://github.com/Datadog/dd-sdk-android
 [4]: /fr/logs/log_collection/android/?tab=kotlin#setup
 

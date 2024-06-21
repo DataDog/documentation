@@ -28,10 +28,10 @@ Use the steps below to run a simple Python script that generates an LLM Observab
 
 ### 1. Install the SDK
 
-Install the following `ddtrace` package hash and `openai` package:
+Install the following `ddtrace` and `openai` packages:
 
 {{< code-block lang="shell" >}}
-pip install git+https://github.com/DataDog/dd-trace-py.git@main
+pip install ddtrace
 pip install openai
 {{< /code-block >}}
 
@@ -59,8 +59,8 @@ completion = oai_client.chat.completions.create(
 Run the Python script with the following shell command, sending a trace of the OpenAI call to Datadog:
 
 {{< code-block lang="shell" >}}
-DD_LLMOBS_ENABLED=1 DD_LLMOBS_APP_NAME=onboarding-quickstart \ 
-DD_API_KEY=<YOUR_DATADOG_API_KEY> DD_SITE=<YOUR_DATADOG_SITE> \ 
+DD_LLMOBS_ENABLED=1 DD_LLMOBS_ML_APP=onboarding-quickstart \
+DD_API_KEY=<YOUR_DATADOG_API_KEY> DD_SITE=<YOUR_DATADOG_SITE> \
 DD_LLMOBS_AGENTLESS_ENABLED=1 ddtrace-run python quickstart.py
 {{< /code-block >}}
 
@@ -85,6 +85,6 @@ If your application consists of more elaborate prompting or complex chains or wo
 [7]: /account_management/api-app-keys/#add-an-api-key-or-client-token
 [8]: /tracing/llm_observability/api
 [9]: /tracing/llm_observability/sdk/#command-line-setup
-[10]: /tracing/llm_observability/sdk/#llm-integrations
+[10]: /tracing/llm_observability/auto_instrumentation
 [11]: /tracing/llm_observability/trace_an_llm_application
 [12]: https://github.com/DataDog/llm-observability

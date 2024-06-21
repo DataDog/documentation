@@ -84,7 +84,7 @@ Tracked files are non-code files that can potentially impact your tests. Changes
 
 When you specify a set of tracked files, Intelligent Test Runner runs all tests if any of these files change.
 
-You may use the `*` and `**` wildcard characters to match multiple files or directories. For instance, `**/*.mdx` matches any `.mdx` file in the repository.
+All file paths are considered to be relative to the root of the repository. You may use the `*` and `**` wildcard characters to match multiple files or directories. For instance, `**/*.mdx` matches any `.mdx` file in the repository.
 
 {{< img src="continuous_integration/itr_configuration2.png" alt="Select branches to exclude and tracked files" style="width:80%;">}}
 

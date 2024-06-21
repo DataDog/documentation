@@ -21,7 +21,7 @@ further_reading:
   tag: 설명서
   text: 로그 수집 트러블슈팅 가이드
 - link: /glossary/#tail
-  tag: 설정
+  tag: 용어
   text: '"tail"에 대한 용어 항목'
 kind: 설명서
 title: PHP 로그 수집

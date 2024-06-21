@@ -78,8 +78,8 @@ Se admiten las siguientes variables de entorno:
 `DD_KUBERNETES_INFORMERS_RESTCLIENT_TIMEOUT`  
 : Tiempo de espera (en segundos) del cliente que se comunica con el servidor de la API. El valor predeterminado es de `60` segundos.
 
-`DD_EXPVAR_PORT`                              
-: Puerto para obtener variables públicas [expvar][2] del Datadog Cluster Agent. El puerto predeterminado es el `5000`.
+`DD_METRICS_PORT`                             
+: Puerto a exponer métricas del Datadog Cluster Agent. Por defecto, es el puerto `5000`.
 
 `DD_EXTERNAL_METRICS_PROVIDER_BATCH_WINDOW`   
 : Tiempo de espera (en segundos) para procesar un lote de métricas desde varios escaladores automáticos. El valor predeterminado es de `10` segundos.
@@ -94,7 +94,7 @@ Se admiten las siguientes variables de entorno:
 : Tamaño (en segundos) de la ventana utilizada para consultar métricas desde Datadog. El valor predeterminado es de `300` segundos.
 
 `DD_EXTERNAL_METRICS_LOCAL_COPY_REFRESH_RATE` 
-: Frecuencia para resincronizar la caché local de las métricas procesadas con el almacén global. Útil cuando hay varias réplicas del Cluster Agent.
+: Frecuencia con las que se resincroniza la caché local de las métricas procesadas con el almacén global. Útil cuando hay varias réplicas del Cluster Agent.
 
 `DD_CLUSTER_CHECKS_ENABLED`                   
 : Activa la detección automática con Autodiscovery de checks de clúster. Se establece por defecto como `false`.
@@ -128,6 +128,12 @@ Se admiten las siguientes variables de entorno:
 
 `DD_PROXY_NO_PROXY`                
 : Configura una lista de hosts que, en circunstancias normales, omiten el proxy. Los elementos de la lista se separan entre sí con espacios.
+
+`DD_ADMISSION_CONTROLLER_AUTO_INSTRUMENTATION_INIT_RESOURCES_CPU`
+: Configura las solicitudes y el límite de CPU para contenedores init.
+
+`DD_ADMISSION_CONTROLLER_AUTO_INSTRUMENTATION_INIT_RESOURCES_MEMORY`
+: Configura las solicitudes y el límite de memoria para contenedores init.
 
 ## Leer más
 

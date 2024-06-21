@@ -26,7 +26,6 @@ further_reading:
 - link: /cloud_cost_management/tag_pipelines
   tag: ドキュメント
   text: タグパイプラインでクラウドコスト全体のタグを標準化
-kind: documentation
 title: クラウド コスト マネジメント
 ---
 

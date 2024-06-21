@@ -30,7 +30,7 @@ integration_id: snmp-american-power-conversion
 integration_title: American Power Conversion
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: snmp_american_power_conversion
 public_title: American Power Conversion

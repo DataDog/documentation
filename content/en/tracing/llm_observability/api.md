@@ -1,6 +1,7 @@
 ---
-title: LLM Observability API
+title: LLM Observability API Reference
 ---
+
 {{% site-region region="gov" %}}
 <div class="alert alert-warning">
 LLM Observability is not available in the US1-FED site.
@@ -206,7 +207,7 @@ For more information about tags, see [Getting Started with Tags][3].
 
 #### Application naming guidelines
 
-Your application name (the value of `ml_app`) must start with a letter. It may contain the characters listed below:
+Your application name (the value of `DD_LLMOBS_ML_APP`) must be a lowercase Unicode string. It may contain the characters listed below:
 
 - Alphanumerics
 - Underscores
@@ -215,7 +216,7 @@ Your application name (the value of `ml_app`) must start with a letter. It may c
 - Periods
 - Slashes
 
-The name can be up to 200 characters long and contain Unicode letters (which includes most character sets, including languages such as Japanese).
+The name can be up to 193 characters long and may not contain contiguous or trailing underscores.
 
 ## Evaluations API
 
@@ -326,6 +327,7 @@ Evaluations require a `span_id` and `trace_id`.
 | Field   | Type         | Description                                         |
 |---------|--------------|-----------------------------------------------------|
 | metrics [*required*] | [[EvalMetric](#evalmetric)] | A list of evaluations each associated with a span. |
+| tags        | [[Tag](#tag)] | A list of tags to apply to all the evaluations in the payload.       |
 
 #### EvalMetric
 
@@ -339,8 +341,7 @@ Evaluations require a `span_id` and `trace_id`.
 | label [*required*]      | string | The unique name or label for the provided evaluation . |
 | categorical_value [*required if the metric_type is "score"*]    | string | A string representing the category that the evaluation belongs to. |
 | score_value [*required if the metric_type is "score"*]    | number | A score value of the evaluation. |
-| flagged                | boolean| Flag content as inappropriate or incorrect. |
-| annotation             | string | A generic string note about the provided evaluation. |
+| tags        | [[Tag](#tag)] | A list of tags to apply to this particular evaluation metric.       |
 
 #### EvalMetricsRequestData
 

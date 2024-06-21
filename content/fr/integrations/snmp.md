@@ -27,7 +27,7 @@ guid: 080bb566-d1c8-428c-9d85-71cc2cdf393c
 integration_id: snmp
 integration_title: SNMP
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: snmp.

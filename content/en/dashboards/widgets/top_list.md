@@ -1,6 +1,5 @@
 ---
 title: Top List Widget
-kind: documentation
 widget_type: "toplist"
 aliases:
     - /graphing/widgets/top_list/

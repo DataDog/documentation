@@ -371,7 +371,7 @@ To verify you've configured the APM integration with RUM, follow the steps below
 
 ## Supported libraries
 
-The following Datadog tracing libraries are supported:
+Below is a list of the supported backend libraries that need to be on the services receiving the network requests.
 
 | Library          | Minimum Version |
 | ---------------- | --------------- |
@@ -387,6 +387,8 @@ The following Datadog tracing libraries are supported:
 ## OpenTelemetry support
 
 RUM supports several propagator types to connect resources with backends that are instrumented with OpenTelemetry libraries.
+
+The default injection style is `tracecontext`, `Datadog`.
 
 {{< tabs >}}
 {{% tab "Browser RUM" %}}
@@ -475,10 +477,10 @@ RUM supports several propagator types to connect resources with backends that ar
     const config = new DatadogProviderConfiguration(
         // ...
     );
-    config.firstPartyHosts = [{ 
-        match: "example.com", 
+    config.firstPartyHosts = [{
+        match: "example.com",
         propagatorTypes: [
-            PropagatorType.TRACECONTEXT, 
+            PropagatorType.TRACECONTEXT,
             PropagatorType.DATADOG
         ]
     }];

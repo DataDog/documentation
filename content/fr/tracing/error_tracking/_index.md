@@ -24,23 +24,21 @@ title: Suivi des erreurs pour les services backend
 
 ## Présentation
 
-Pour garantir l'intégrité de votre système, il est essentiel de surveiller en permanence les erreurs recueillies par Datadog. Lorsque les événements d'erreur sont trop nombreux, il est difficile de savoir lesquels doivent être traités en priorité. En assurant le suivi, le triage et le debugging des stack traces, vous pouvez minimiser l'impact des erreurs critiques sur vos services backend.
+{{< img src="error_tracking/error-tracking-overview.png" alt="Les détails dʼun problème dans lʼError Tracking Explorer" style="width:100%;" >}}
 
-Après avoir configuré [APM][4] pour le suivi des erreurs des **services backend**, les problèmes détectés commencent à apparaître sous forme de cartes. Accédez à **APM** > **Error Tracking** pour consulter les problèmes en cours, les problèmes ignorés ou tous les problèmes, les trier par volume ou par ancienneté, et les filtrer en fonction de n'importe quelle facette par défaut ou personnalisée sur vos services backend.
+{{% error-tracking-description %}}
 
-{{< img src="tracing/error_tracking/explorer_with_backend_issues.png" alt="L'Error Tracking Explorer pour APM affichant les problèmes de vos services backend" style="width:100%;" >}}
+## Configuration
 
-Le suivi des erreurs vous permet d'accomplir ce qui suit :
+La solution Error Tracking est disponible pour tous les langages pris en charge par l'APM. Elle ne nécessite pas l'utilisation d'un autre SDK.
 
-- Définir des alertes sur des événements de suivi des erreurs, afin d'être informé en cas d'erreur critique
-- Regrouper les erreurs connexes au sein d'un problème unique, afin d'identifier plus facilement les erreurs importantes et de réduire les alertes superflues
-- Suivre l'évolution des problèmes au fil du temps pour identifier à quel moment ils sont apparus, s'ils surviennent toujours ainsi que la fréquence à laquelle ils se produisent
-- Rassembler tous les éléments de contexte pour un diagnostic simplifié
-- Accéder à une trace dans son référentiel de code source, un Git blame ou un commit
+Vous pouvez aussi choisir de voir les extraits de code dans vos stack traces en configurant [lʼintégration GitHub][4].
+
+{{< img src="tracing/error_tracking/inline_code_snippet.png" alt="Un extrait de code généré directement dans une stack trace" style="width:70%;" >}}
+
+Pour commencer à configurer votre référentiel, consultez la [documentation relative à lʼintégration du code source][6].
 
 ## Utiliser des tags de span pour le suivi des spans d'erreur
-
-<div class="alert alert-info">La fonctionnalité de suivi des erreurs est disponible pour tous les langages pris en charge par l'APM. Elle ne nécessite pas l'utilisation d'un autre SDK.</div>
 
 Les traceurs Datadog recueillent des erreurs par l'intermédiaire des intégrations et de l'instrumentation manuelle du code source de vos services backend. La fonctionnalité de suivi des erreurs traite les spans d'erreur des traces **si l'erreur se situe dans une span d'entrée de service** (la span de service la plus élevée). Pour qu'une erreur puisse être surveillée, la span doit également contenir les [tags de span][1] `error.stack`, `error.message` et `error.type`.
 
@@ -50,9 +48,9 @@ La fonctionnalité de suivi des erreurs calcule une empreinte pour chaque span d
 
 ## Examiner des problèmes pour commencer le dépannage ou le debugging
 
-Le suivi des erreurs regroupe automatiquement les erreurs recueillies depuis vos services backend sous forme de catégories dans l'[Error Tracking Explorer][3]. 
+La solution Error Tracking catégorise automatiquement les erreurs en problèmes collectés depuis vos services en backend dans l'[Error Tracking Explorer][5]. Consultez la [documentation de l'Error Tracking Explorer][3] pour une vue dʼensemble des principales fonctionnalités.
 
-Cliquez sur un problème pour afficher un résumé de l'erreur, la distribution des spans concernées, les stack traces les plus récentes et les plus pertinentes, les tags de span, les tags de host, les tags de conteneur et les métriques.
+Les problèmes créés depuis lʼAPM comportent la distribution des spans concernées, les stack traces les plus récentes et les plus pertinentes, les tags de span, les tags de host, les tags de conteneur et les métriques.
 
 ## Pour aller plus loin
 
@@ -62,3 +60,5 @@ Cliquez sur un problème pour afficher un résumé de l'erreur, la distribution 
 [2]: /fr/tracing/trace_explorer/trace_view/?tab=spantags
 [3]: /fr/tracing/error_tracking/explorer
 [4]: /fr/tracing
+[5]: https://app.datadoghq.com/apm/error-tracking
+[6]: /fr/integrations/guide/source-code-integration

@@ -33,12 +33,12 @@ You can monitor application security for Ruby apps running in Docker, Kubernetes
 1. **Update your Gemfile to include the Datadog library**:
 
    ```ruby
-   gem 'ddtrace', '~> 1.1'
+   gem 'datadog', '~> 2.0' # Use 'ddtrace' if you're using v1.x
    ```
 
    To check that your service's language and framework versions are supported for ASM capabilities, see [Compatibility][1].
 
-   For more information about upgrading from a `dd-trace` 0.x version, see [the Ruby tracer upgrade guide][2].
+   For more information about upgrading to v2 from a `dd-trace` 1.x version, see [the Ruby tracer upgrade guide][2].
 
 2. **Enable ASM** by enabling the APM tracer. The following options describe a quick setup that covers the most common cases. Read [the Ruby tracer documentation][3] for more details.
 
@@ -67,7 +67,7 @@ You can monitor application security for Ruby apps running in Docker, Kubernetes
    Or enable the APM tracer through auto-instrumentation by updating your Gemfile to auto-instrument:
 
    ```ruby
-   gem 'ddtrace', '~> 1.1', require: 'ddtrace/auto_instrument'
+   gem 'datadog', '~> 2.0', require: 'datadog/auto_instrument'
    ```
 
    And also enable `appsec`:
@@ -93,7 +93,7 @@ You can monitor application security for Ruby apps running in Docker, Kubernetes
 
    ```ruby
    require 'sinatra'
-   require 'ddtrace'
+   require 'datadog'
    require 'datadog/appsec'
 
    Datadog.configure do |c|
@@ -110,7 +110,7 @@ You can monitor application security for Ruby apps running in Docker, Kubernetes
 
    ```ruby
    require 'sinatra'
-   require 'ddtrace/auto_instrument'
+   require 'datadog/auto_instrument'
 
    Datadog.configure do |c|
      # the APM tracer is enabled by auto-instrumentation
@@ -126,7 +126,7 @@ You can monitor application security for Ruby apps running in Docker, Kubernetes
    Enable the APM tracer by adding the following to your `config.ru` file:
 
    ```ruby
-   require 'ddtrace'
+   require 'datadog'
    require 'datadog/appsec'
 
    Datadog.configure do |c|
@@ -218,5 +218,5 @@ env DD_APPSEC_ENABLED=true rails server
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security/application_security/enabling/compatibility/ruby
-[2]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/UpgradeGuide.md#from-0x-to-10
+[2]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/UpgradeGuide2.md
 [3]: /tracing/trace_collection/dd_libraries/ruby/

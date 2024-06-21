@@ -1,6 +1,5 @@
 ---
 title: Cloud Security Management Vulnerabilities
-kind: documentation
 aliases:
     - /security/infrastructure_vulnerabilities/
     - /security/vulnerabilities/

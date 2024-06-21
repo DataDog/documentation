@@ -78,7 +78,9 @@ Pour Log4j, générez les logs au format JSON en utilisant le module SLF4J [log4
       <version>6.6</version>
     </dependency>
     ```
-2. Configurez un file appender en utilisant la structure JSON dans `logback.xml` :
+2. Configurez un appender en utilisant la structure JSON dans `logback.xml` :
+
+    Pour un fichier :
 
     ```xml
     <configuration>
@@ -93,13 +95,31 @@ Pour Log4j, générez les logs au format JSON en utilisant le module SLF4J [log4
     </configuration>
     ```
 
+    Pour une console :
+
+    ```xml
+    <configuration>
+      <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+          <encoder class="ch.qos.logback.classic.encoder.JsonEncoder"/>
+      </appender>
+
+      <root>
+        <level value="DEBUG"/>
+          <appender-ref ref="CONSOLE"/>
+        </root>
+    </configuration>
+    ```
+
 [1]: http://www.slf4j.org/legacy.html#log4j-over-slf4j
 {{% /tab %}}
 {{% tab "Log4j 2" %}}
 
 Log4j 2 intègre une structure JSON.
 
-1. Configurez un file appender en utilisant la structure JSON dans `log4j2.xml` :
+1. Configurez un appender en utilisant la structure JSON dans `log4j2.xml` :
+
+    Pour un file appender :
+
     ```xml
     <?xml version="1.0" encoding="UTF-8"?>
     <Configuration>
@@ -116,6 +136,28 @@ Log4j 2 intègre une structure JSON.
       </Loggers>
     </Configuration>
     ```
+
+    Pour un console appender :
+
+    ```xml
+    <?xml version="1.0" encoding="UTF-8"?>
+    <Configuration>
+
+        <Appenders>
+            <Console name="console" target="SYSTEM_OUT">
+                <JSONLayout compact="true" eventEol="true" properties="true" stacktraceAsString="true" />
+            </Console>
+        </Appenders>
+
+        <Loggers>
+            <Root level="INFO">
+                <AppenderRef ref="console"/>
+            </Root>
+
+        </Loggers>
+    </Configuration>
+    ```
+
 2. Ajoutez les dépendances de structure JSON dans votre fichier `pom.xml` :
     ```xml
     <dependency>
@@ -179,7 +221,7 @@ Utilisez la bibliothèque [logstash-logback-encoder][1] pour les logs au format 
 {{% /tab %}}
 {{% tab "Tinylog" %}}
 
-Créez une configuration de writer JSON sortant vers un fichier en vous basant sur la [documentation officielle de Tinylog][1].
+Créez une configuration de writer JSON en vous basant sur la [documentation officielle de Tinylog][1].
 
 
 Utilisez le format suivant dans un fichier `tinylog.properties` :

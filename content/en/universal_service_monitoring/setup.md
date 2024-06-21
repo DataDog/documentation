@@ -4,7 +4,7 @@ kind: Documentation
 further_reading:
 - link: "/universal_service_monitoring/"
   tag: "Documentation"
-  text: "Universal Service Monitoring"
+  text: "Learn about Universal Service Monitoring"
 - link: "https://www.datadoghq.com/blog/universal-service-monitoring-datadog/"
   tag: "Blog"
   text: "Golden signals in seconds with Universal Service Monitoring"
@@ -27,6 +27,9 @@ Supported application-layer protocols
 : HTTP<br/>
 HTTPS (OpenSSL)
 
+Known limitations
+: Universal Service Monitoring requires the use of Datadog's `system-probe`, which is not supported on Google Kubernetes Engine (GKE) Autopilot.
+
 <div class="alert alert-info">
 Additional protocols and traffic encryption methods are supported in <a href="/universal_service_monitoring/additional_protocols/">private beta</a>. If you have feedback about what platforms and protocols you'd like to see supported, <a href="/help/">contact Support</a>.
 </div>
@@ -35,7 +38,7 @@ Additional protocols and traffic encryption methods are supported in <a href="/u
 
 - If on Linux:
     - Your service is running in a container.
-    - **Beta:** For non-containerized services see the [instructions here](#non-containerized-services-on-linux).
+    - **Beta:** For non-containerized services see the [instructions here](#additional-configuration).
 - If on Windows IIS:
     - Your service is running on a virtual machine.
 - Datadog Agent is installed alongside your service. Installing a tracing library is _not_ required.
@@ -730,8 +733,11 @@ If you use load balancers with your services, enable additional cloud integratio
 
 {{< /tabs >}}
 
-### Non-containerized services on Linux
+## Additional configuration
 
+The following systems or services require additonal configuration due to limited or beta support:
+
+{{< collapse-content title="Non-containerized services on Linux" level="h4" >}}
 <div class="alert alert-info">
 Universal Service Monitoring is available in <strong>beta</strong> to monitor services running bare-metal on Linux virtual machines.
 </div>
@@ -759,16 +765,19 @@ DD_SYSTEM_PROBE_PROCESS_SERVICE_INFERENCE_ENABLED=true
 {{% /tab %}}
 
 {{< /tabs >}}
+{{< /collapse-content >}} 
 
-### Go TLS Monitoring
-
+{{< collapse-content title="Go TLS Monitoring" level="h4" >}}
 <div class="alert alert-info">
 Universal Service Monitoring is available in <strong>beta</strong> to monitor TLS encrypted traffic from services implemented in Golang.
 </div>
 
-**Note**:
-* Go HTTPS servers can upgrade HTTP1.1 protocol to HTTP/2 which is supported in private beta. Reach to your account manager for further details
-* Requires Agent version 7.51 or greater.
+<strong>Note</strong>:
+<br>
+<ul role="list">
+  <li>Go HTTPS servers can upgrade HTTP1.1 protocol to HTTP/2 which is supported in private beta. Reach out to your account manager for details.</li>
+  <li>Requires Agent version 7.51 or greater.</li>
+</ul>
 
 {{< tabs >}}
 {{% tab "Configuration file" %}}
@@ -804,13 +813,55 @@ agents:
 {{% /tab %}}
 
 {{< /tabs >}}
+{{< /collapse-content >}} 
 
-
-### Istio Monitoring
+{{< collapse-content title="NodeJS TLS Monitoring" level="h4" >}}
 
 <div class="alert alert-info">
-Universal Service Monitoring is available in <strong>beta</strong> to monitor services behind <a href="https://istio.io/latest/docs/tasks/security/authentication/mtls-migration/">Istio mTLS</a> and to capture encrypted HTTPs traffic.
+Universal Service Monitoring is available in <strong>beta</strong> to monitor HTTP, HTTP/2, and gRPC requests from services implemented in NodeJS.
 </div>
+
+Requires Agent version 7.54 or greater.
+
+{{< tabs >}}
+{{% tab "Configuration file" %}}
+
+Add the following configuration to the `system-probe.yaml`:
+
+```yaml
+service_monitoring_config:
+  enabled: true
+  tls:
+    nodejs:
+      enabled: true
+```
+
+{{% /tab %}}
+{{% tab "Environment variable" %}}
+
+```conf
+DD_SERVICE_MONITORING_CONFIG_TLS_NODEJS_ENABLED=true
+```
+{{% /tab %}}
+
+{{% tab "Helm" %}}
+
+```conf
+agents:
+  containers:
+    systemProbe:
+      env:
+        - name: DD_SERVICE_MONITORING_CONFIG_TLS_NODEJS_ENABLED
+          value: "true"
+```
+{{% /tab %}}
+
+{{< /tabs >}}
+{{< /collapse-content >}} 
+
+{{< collapse-content title="Istio Monitoring" level="h4" >}}
+
+Universal Service Monitoring is available to monitor services behind <a href="https://istio.io/latest/docs/tasks/security/authentication/mtls-migration/">Istio mTLS</a> and to capture encrypted HTTPs, HTTP/2, and gRPC traffic.
 
 Requires Agent version 7.50 or greater.
 
@@ -848,9 +899,9 @@ agents:
 {{% /tab %}}
 
 {{< /tabs >}}
+{{< /collapse-content >}} 
 
-### HTTP/2 monitoring
-
+{{< collapse-content title="HTTP/2 monitoring" level="h4" >}}
 Universal Service Monitoring can capture HTTP/2 and gRPC traffic.
 
 Requires Agent version 7.53 or greater.
@@ -885,6 +936,63 @@ agents:
 {{% /tab %}}
 
 {{< /tabs >}}
+{{< /collapse-content >}}
+
+{{< collapse-content title="Universal Kafka Monitoring (Private Beta)" level="h4" >}}
+
+<div class="alert alert-info">
+Universal Kafka Monitoring is available in <strong>Private beta</strong>.
+</div>
+
+<strong>Note</strong>:
+<br>
+<ul role="list">
+  <li>Producers and consumers require Linux Kernel version 5.2 or later.</li>
+  <li>Producers and consumers must be interfacing with Kafka <strong>without</strong> TLS.</li>
+  <li>Datadog recommends Helm with Datadog chart version 2.26.2 or later. The chart version is defined in the <a href="https://github.com/DataDog/helm-charts/blob/main/charts/datadog/Chart.yaml">`chart.yaml`</a> file of the dd-agent.</li>
+  <li>Requires Agent version 7.53 or greater.</li>
+</ul>
+
+{{< tabs >}}
+{{% tab "Configuration file" %}}
+
+Add the following configuration to the `system-probe.yaml`:
+
+```yaml
+service_monitoring_config:
+  enabled: true
+  enable_kafka_monitoring: true
+```
+
+{{% /tab %}}
+{{% tab "Environment variable" %}}
+
+```conf
+DD_SERVICE_MONITORING_CONFIG_ENABLE_KAFKA_MONITORING=true
+```
+{{% /tab %}}
+
+{{% tab "Helm" %}}
+
+```conf
+datadog:
+  ...
+  serviceMonitoring:
+    enabled: true
+
+agents:
+  ...
+  containers:
+    systemProbe:
+      env:
+        - name: DD_SERVICE_MONITORING_CONFIG_ENABLE_KAFKA_MONITORING
+          value: "true"
+```
+{{% /tab %}}
+
+{{< /tabs >}}
+{{< /collapse-content >}}
+
 
 ## Path exclusion and replacement
 

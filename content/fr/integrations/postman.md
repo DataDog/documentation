@@ -21,7 +21,7 @@ integration_id: postman
 integration_title: Postman
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: integrations-partnerships@postman.com
 manifest_version: 1.0.0
 metric_prefix: postman

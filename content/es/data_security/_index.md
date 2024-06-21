@@ -1,7 +1,7 @@
 ---
-aliases:
-- /es/security/
-- /es/security/other/
+cascade:
+  algolia:
+    rank: 70
 further_reading:
 - link: /data_security/logs/
   tag: Documentación
@@ -11,46 +11,46 @@ further_reading:
   text: Seguridad de los datos en el Agent
 - link: /data_security/synthetics/
   tag: Documentación
-  text: Seguridad de los datos en Synthetic Monitoring
-- link: /tracing/setup_overview/configure_data_security/
+  text: Seguridad de los datos en la monitorización Synthetic
+- link: /tracing/configure_data_security/
   tag: Documentación
-  text: Seguridad de los datos en las trazas
-- link: /real_user_monitoring/browser/modifying_data_and_context/
+  text: Seguridad de los datos de rastreo
+- link: /data_security/real_user_monitoring/
   tag: Documentación
   text: Seguridad de los datos en RUM
-- link: /real_user_monitoring/session_replay/privacy_options
+- link: /real_user_monitoring/session_replay/browser/privacy_options
   tag: Documentación
   text: Opciones de privacidad de Session Replay
-- link: /account_management/org_settings/sensitive_data_detection/
+- link: /sensitive_data_scanner/
   tag: Documentación
   text: Sensitive Data Scanner
-kind: documentación
+kind: Documentación
 title: Reducir los riesgos que amenazan los datos
 ---
 
-<div class="alert alert-info">En esta página, hablamos sobre las herramientas y las medidas de seguridad existentes para proteger los datos que se envían a Datadog. Si estás buscando productos y funciones para proteger las aplicaciones y las soluciones en la nube, consulta la sección <a href="/security_platform/" target="_blank">Security Platform</a>.</div>
+<div class="alert alert-info">En esta página, hablamos sobre las herramientas y las medidas de seguridad existentes para proteger los datos que se envían a Datadog. Si estás buscando productos y funciones para proteger las aplicaciones y las soluciones en la nube, consulta la sección <a href="/security/" target="_blank">Seguridad</a>.</div>
 
-Si vas a hacer el uso previsto de Datadog, tendrás que enviar datos a la plataforma. Por tanto, te ayudamos a mitigar los riesgos a los que se exponen tus datos proporcionándote herramientas que limitan como es debido los datos que se envían y los protegen durante y después de la transmisión.
+Si vas a hacer el uso previsto de Datadog, tendrás que enviar datos a Datadog. Datadog te ayuda a reducir los riesgos asociados a los datos y te proporciona herramientas para limitar de forma apropiada los datos que envías y protegerlos durante la transmisión y una vez que esta finaliza.
 
-Te animamos a consultar la información disponible en la [sección de seguridad de Datadog][1] y a leer las cláusulas de nuestra [política de privacidad][2].
+Es posible que también quieras consultar la información disponible en la [sección de seguridad de Datadog][1] y los términos de nuestra [política de privacidad][2].
 
 ## Cómo llegan tus datos a Datadog
 
 Tus datos pueden llegar a Datadog de diversas maneras; por ejemplo, desde el Agent, [DogStatsD][3], la API pública y las integraciones. Además, los SDK de Real User Monitoring (RUM) y las bibliotecas de rastreo generan datos basados en el código de tus aplicaciones y servicios, y los envían a Datadog.
 
-Los datos que se transmiten a través de las herramientas proporcionadas por Datadog se protegen mediante los protocolos TLS y HSTS. Los datos almacenados por Datadog se mantienen a buen recaudo mediante cifrado, controles de acceso y sistemas de autenticación. Para más detalles, consulta la [sección de seguridad de Datadog][1].
+Los datos que se transmiten a través de las herramientas proporcionadas por Datadog se protegen mediante los protocolos TLS y HSTS. Los datos almacenados por Datadog se protegen mediante cifrado, controles de acceso y sistemas de autenticación. Para más detalles, consulta la [sección de seguridad de Datadog][1].
 
-### Datadog Agent
+### El Datadog Agent
 
-El Agent representa la principal vía de entrada de tus datos a Datadog desde tus sistemas. [Consulta todo lo que debes saber sobre las medidas de seguridad que aplica el Agent para proteger tus datos][4]. 
+El Agent representa la principal vía de transmisión de los datos desde tus sistemas a Datadog. [Consulta todo lo que debes saber sobre las medidas de seguridad que aplica el Agent para proteger tus datos][4]. 
 
-Si quieres saber lo que tienes que hacer para evitar guardar datos secretos como texto sin formato en los archivos de configuración de Agent, consulta el artículo [Gestión de datos secretos][5].
+Para saber cómo evitar que se almacenen secretos en texto sin formato en los archivos de configuración del Agent, consulta [Gestión de secretos][5].
 
 ### Integraciones con servicios de terceros
 
 Las integraciones con algunos servicios de terceros se configuran directamente en Datadog, y es posible que tengas que introducir tus credenciales para que Datadog se conecte a dicho servicio por ti. Datadog cifra esas credenciales y las guarda en un almacén seguro.
 
-Todos los datos que pasan por estas integraciones se cifran cuando están en reposo en los sistemas de Datadog y cuando se están transmitiendo. El acceso al almacén de credenciales seguro está controlado y se somete a auditorías; los servicios o las acciones en los servicios de terceros se limitan exclusivamente a lo necesario. Existen herramientas de detección de comportamientos anómalos en constante funcionamiento para evitar accesos no autorizados. Asimismo, el número de ingenieros de Datadog que tienen acceso para realizar labores de mantenimiento es muy reducido.
+Todos los datos que pasan por estas integraciones se cifran cuando están en reposo en los sistemas de Datadog y cuando se están transmitiendo. El acceso al almacén de credenciales seguro está controlado y se somete a auditorías, y los servicios o las acciones en los servicios de terceros se limitan exclusivamente a lo necesario. Existen herramientas de detección de comportamientos anómalos en constante funcionamiento para evitar accesos no autorizados. La autorización de acceso para realizar tareas de mantenimiento se limita a un grupo reducido de ingenieros de Datadog.
 
 ### Integraciones con soluciones en la nube
 
@@ -62,7 +62,7 @@ Las integraciones con proveedores de soluciones en la nube son de carácter conf
 
 ## Medidas para mitigar los riesgos que amenazan los datos
 
-El fin de Datadog es recopilar información de observabilidad de varias fuentes de tu infraestructura y tus servicios en un único lugar para que puedas analizarla e investigar. Para ello, es necesario que envíes una amplia variedad de datos a los servidores de Datadog. La mayoría de los datos recopilados para el funcionamiento previsto de los productos de Datadog, en la inmensa mayoría de los casos, no contienen información privada ni personal. Si se diera el caso de que los datos contuvieran información privada y personal innecesaria, para que puedas actuar, te proporcionamos instrucciones, herramientas y recomendaciones de cara a impedir o mitigar la inclusión de información privada o personal entre los datos que compartes con Datadog, y enmascararla.
+El fin de Datadog es recopilar información de observabilidad de varias fuentes de tu infraestructura y tus servicios en un único lugar para que puedas analizarla e investigar. Para ello, es necesario que envíes una amplia variedad de datos a los servidores de Datadog. La mayoría de los datos recopilados para el funcionamiento previsto de los productos de Datadog, en la inmensa mayoría de los casos, no contienen información privada ni personal. Si se diera el caso de que los datos contuvieran información privada y personal innecesaria, para que puedas actuar, te proporcionamos instrucciones, herramientas y recomendaciones de cara a impedir o mitigar la inclusión de información privada o personal en los datos que compartes con Datadog, y enmascararla.
 
 ### Sensitive Data Scanner
 
@@ -78,7 +78,7 @@ Para reducir los riesgos que amenazan la seguridad de los datos en los logs, es 
 
 ### Live Processes y Live Containers
 
-Para que no se filtren datos confidenciales cuando estás monitorizando Live Processes (procesos activos) y Live Containers (contenedores activos), Datadog tiene establecidas unas palabras clave confidenciales que se pueden quitar de argumentos de procesos y de Helm charts. Puedes enmascarar más secuencias confidenciales en comandos o argumentos de procesos con el [parámetro `custom_sensitive_words`][16] y añadirlas a la lista de palabras que limpiar con la [variable de entorno `DD_ORCHESTRATOR_EXPLORER_CUSTOM_SENSITIVE_WORDS`][17].
+Para que no se filtren datos confidenciales cuando estás monitorizando procesos activos y contenedores activos, Datadog ofrece la función predeterminada de limpieza de contraseñas confidenciales en argumentos de procesos y charts de Helm. Puedes enmascarar más secuencias confidenciales en comandos o argumentos de procesos con el [parámetro `custom_sensitive_words`][16] y añadirlas a la lista de palabras para limpiar en contenedores con la [variable de entorno `DD_ORCHESTRATOR_EXPLORER_CUSTOM_SENSITIVE_WORDS`][17].
 
 ### APM y otros productos de bibliotecas de rastreo
 
@@ -87,7 +87,7 @@ Las bibliotecas de rastreo de Datadog sirven para instrumentar aplicaciones, ser
 - Application Performance Monitoring (APM)
 - Continuous Profiler
 - CI Visibility
-- Application Security Monitoring (ASM)
+- Application Security Management
 
 Si quieres obtener información detallada sobre cómo se gestionan los datos que proceden de bibliotecas de rastreo, sobre las configuraciones de seguridad básicas y sobre las operaciones predeterminadas de enmascaramiento, limpieza, exclusión y modificación de elementos relacionados con trazas, consulta el artículo [Configurar Agent y el rastreador para proteger los datos de las trazas][18].
 
@@ -101,7 +101,7 @@ Las pruebas sintéticas simulan solicitudes y transacciones empresariales en loc
 
 ### RUM y Session Replay
 
-Puedes modificar los datos que recopila Real User Monitoring (RUM) del navegador para no proporcionar información de identificación personal y para muestrear los datos de RUM que se están recopilando. Consulta el artículo [Modificar los datos y el contexto de RUM][21] para obtener más información.
+Puedes modificar los datos que recopila Real User Monitoring (RUM) del navegador para no proporcionar información de identificación personal y para muestrear los datos de RUM que se están recopilando. Para obtener más información, consulta el artículo [Modificar los datos y el contexto de RUM][21].
 
 De manera predeterminada, Session Replay protege la privacidad de los usuarios finales e impide la recopilación de datos confidenciales de las organizaciones. Descubre cómo se enmascaran, se anulan y se ocultan elementos en las reproducciones de sesiones en el artículo [Opciones de privacidad de Session Replay][22].
 
@@ -111,7 +111,7 @@ El Database Monitoring Agent enmascara todos los parámetros ligados a consultas
 
 ## Otras fuentes de datos que pueden considerarse confidenciales
 
-Aparte de los datos confidenciales que se pueden limpiar, enmascarar y excluir de la recopilación automáticamente, mucha de la información que recopila Datadog son nombres y descripciones de elementos. Te recomendamos que no incluyas información privada ni personal en los textos que envíes. Piensa que para hacer el uso previsto de Datadog, envías los siguientes datos de texto (la lista no es exhaustiva):
+Además de los datos confidenciales que se pueden limpiar, enmascarar y excluir de la recopilación automáticamente, mucha de la información que recopila Datadog son nombres y descripciones de elementos. Te recomendamos que no incluyas información privada ni personal en los textos que envías. Piensa que para hacer el uso previsto de Datadog, envías los siguientes datos de texto (la lista no es exhaustiva):
 
 Metadatos y etiquetas
 : Los metadatos son, principalmente, [etiquetas][24] con el formato `key:value`; por ejemplo, `env:prod`. Datadog los utiliza para filtrar y agrupar datos con el fin de ayudarte a darle sentido a la información.
@@ -146,12 +146,12 @@ Pipelines y tests de integración continua
 [2]: https://www.datadoghq.com/legal/privacy/
 [3]: /es/developers/dogstatsd/
 [4]: /es/data_security/agent/
-[5]: /es/agent/guide/secrets-management/
+[5]: /es/agent/configuration/secrets-management/
 [6]: /es/integrations/amazon_web_services/
 [7]: https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#delegate-using-roles
 [8]: /es/integrations/azure/
 [9]: /es/integrations/google_cloud_platform/
-[10]: /es/account_management/org_settings/sensitive_data_detection/
+[10]: /es/sensitive_data_scanner/
 [11]: /es/data_security/logs/
 [12]: /es/logs/guide/control-sensitive-logs-data/
 [13]: /es/agent/logs/advanced_log_collection
@@ -159,11 +159,11 @@ Pipelines y tests de integración continua
 [15]: /es/logs/guide/logs-rbac-permissions
 [16]: /es/infrastructure/process/#process-arguments-scrubbing
 [17]: /es/infrastructure/livecontainers/configuration/#scrubbing-sensitive-information
-[18]: /es/tracing/setup_overview/configure_data_security/
+[18]: /es/tracing/configure_data_security/
 [19]: /es/serverless/distributed_tracing/collect_lambda_payloads#obfuscating-payload-contents
 [20]: /es/data_security/synthetics/
-[21]: /es/real_user_monitoring/browser/modifying_data_and_context/
-[22]: /es/real_user_monitoring/session_replay/privacy_options
+[21]: /es/real_user_monitoring/browser/advanced_configuration/
+[22]: /es/real_user_monitoring/session_replay/browser/privacy_options
 [23]: /es/database_monitoring/data_collected/#sensitive-information
 [24]: /es/getting_started/tagging/
-[25]: /es/tracing/visualization/
+[25]: /es/tracing/glossary/

@@ -7,7 +7,6 @@ aliases:
 - /ko/security_platform/guide/how-to-setup-security-filters-using-cloud-siem-api/
 - /ko/security_platform/cloud_siem/guide/how-to-setup-security-filters-using-cloud-siem-api/
 - /ko/security/guide/how-to-setup-security-filters-using-security-monitoring-api/
-kind: 가이드
 title: 클라우드 보안 정보와 이벤트 관리(SIEM) API를 사용하는 보안 필터
 ---
 

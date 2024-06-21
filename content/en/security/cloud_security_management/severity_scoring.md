@@ -1,6 +1,5 @@
 ---
 title: Severity Scoring
-kind: documentation
 further_reading:
 - link: "/security/cloud_security_management/misconfigurations/"
   tag: "Documentation"
