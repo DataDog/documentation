@@ -29,10 +29,10 @@ Datadog recomienda utilizar la última versión de los [clientes oficiales de Do
 
 ### Activar el almacenamiento en buffer en un cliente
 
-Algunos clientes de StatsD y DogStatsD envían, por defecto, una métrica por cada datagrama. Esto añade una sobrecarga considerable al cliente, al sistema operativo y al Agent. Si tu cliente admite el almacenamiento en búfer de varias métricas en un datagrama, la activación de esta opción aporta mejoras notables.
+Algunos clientes de StatsD y DogStatsD envían, por defecto, una métrica por cada datagrama. Esto añade una sobrecarga considerable al cliente, al sistema operativo y al Agent. Si tu cliente admite el almacenamiento en buffer de varias métricas en un datagrama, la activación de esta opción aporta mejoras notables.
 
 <div class="alert alert-info">
-Si utilizas un cliente de DogStatsD comunitario, compatible con el almacenamiento en búfer, asegúrate de configurar un tamaño máximo de datagrama que no supere el tamaño de búfer por datagrama en el Agent (8 KB por defecto, configurable en el Agent con (<code>dogstatsd_buffer_size</code>) y el tamaño máximo por datagrama en la red o el sistema operativo.
+Si utilizas un cliente de DogStatsD comunitario, compatible con el almacenamiento en búfer, asegúrate de configurar un tamaño máximo de datagrama que no supere el tamaño de buffer por datagrama en el Agent (8 KB por defecto, configurable en el Agent con (<code>dogstatsd_buffer_size</code>) y el tamaño máximo por datagrama en la red o el sistema operativo.
 </div>
 
 Los siguientes son algunos ejemplos para [clientes oficiales compatibles con DogStatsD][3]:
@@ -65,7 +65,7 @@ func main() {
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 
-Cuando se utiliza la biblioteca Python oficial de Datadog [datadogpy][1], el ejemplo siguiente utiliza un cliente de DogStatsD almacenado en búfer que envía métricas en un número mínimo de paquetes. La limpieza automática del almacenamiento se realiza al límite de tamaño de paquete y cada 300ms (configurable).
+Cuando se utiliza la biblioteca Python oficial de Datadog [datadogpy][1], el ejemplo siguiente utiliza un cliente de DogStatsD almacenado en búfer que envía métricas en un número mínimo de paquetes. El vaciado automático del almacenamiento se realiza al límite de tamaño de paquete y cada 300ms (configurable).
 
 ```python
 desde Datadog importar DogStatsd
@@ -93,7 +93,7 @@ Por defecto, las instancias del cliente Python de DogStatsD (incluyendo la insta
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
-Cuando de utiliza la biblioteca Ruby oficial de Datadog [dogstatsd-ruby][1], el siguiente ejemplo crea una instancia de cliente de DogStatsD almacenada en búfer que envía métricas en un paquete cuando se activa la limpieza:
+Cuando de utiliza la biblioteca Ruby oficial de Datadog [dogstatsd-ruby][1], el siguiente ejemplo crea una instancia de cliente de DogStatsD almacenada en búfer que envía métricas en un paquete cuando se activa el vaciado:
 
 ```ruby
 require 'datadog/statsd'
@@ -723,15 +723,15 @@ A partir de la versión `5.0.0` del cliente .NET.
 
 `datadog.dogstatsd.client.metrics`
 : **Tipo de métrica**: recuento<br>
-Número de `metrics` enviadas al cliente DogStatsD por tu aplicación (antes del muestreo).
+Número de `metrics` enviadas al cliente de DogStatsD por tu aplicación (antes del muestreo).
 
 `datadog.dogstatsd.client.events`
 : **Tipo de métrica**: recuento<br>
-Número de `events` enviados al cliente DogStatsD por tu aplicación.
+Número de `events` enviados al cliente de DogStatsD por tu aplicación.
 
 `datadog.dogstatsd.client.service_checks`
 : **Tipo de métrica**: recuento<br>
-Número de `service_checks` enviados al cliente DogStatsD por tu aplicación.
+Número de `service_checks` enviados al cliente de DogStatsD por tu aplicación.
 
 `datadog.dogstatsd.client.bytes_sent`
 : **Tipo de métrica**: recuento<br>
@@ -739,7 +739,7 @@ Número de bytes enviados correctamente al Agent.
 
 `datadog.dogstatsd.client.bytes_dropped`
 : **Tipo de métrica**: recuento<br>
-Número de bytes perdidos por el cliente DogStatsD.
+Número de bytes perdidos por el cliente de DogStatsD.
 
 `datadog.dogstatsd.client.packets_sent`
 : **Tipo de métrica**: recuento<br>
@@ -747,7 +747,7 @@ Número de datagramas enviados correctamente al Agent.
 
 `datadog.dogstatsd.client.packets_dropped`
 : **Tipo de métrica**: recuento<br>
-Número de datagramas descartados por el cliente DogStatsD.
+Número de datagramas descartados por el cliente de DogStatsD.
 
 `datadog.dogstatsd.client.packets_dropped_queue`
 : **Tipo de métrica**: recuento<br>
