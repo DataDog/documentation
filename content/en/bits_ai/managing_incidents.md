@@ -69,7 +69,7 @@ To generate an AI-assisted postmortem draft:
 
 1. Navigate to [**Service Mgmt > Incidents > Settings > Postmortems**][1].
 2. Click **New Postmortem Template** and customize your template using the provided incident variables.  
-    - Variables prefixed by `ai` yield AI-generated content instead of fixed values. There are six `ai` variables: `{{incident.ai_action_items}}`, `{{incident.ai_customer_impact}}`, `{{incident.ai_key_timeline}}`, `{{incident.ai_lessons_learned}}`, `{{incident.ai_summary}}`, and `{{incident.ai_system_overview}}`. 
+   - Variables prefixed by `ai` yield AI-generated content instead of fixed values. There are six `ai` variables: `{{incident.ai_action_items}}`, `{{incident.ai_customer_impact}}`, `{{incident.ai_key_timeline}}`, `{{incident.ai_lessons_learned}}`, `{{incident.ai_summary}}`, and `{{incident.ai_system_overview}}`. 
     - You must use a heading before each variable.
 3. Save your template to make it available as a template option during postmortem generation.
 
