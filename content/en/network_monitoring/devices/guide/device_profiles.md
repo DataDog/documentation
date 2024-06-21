@@ -44,7 +44,7 @@ The [profile home][4] page is where you can see a snapshot of the device profile
 
 1. Build your own NDM profile by navigating to [Infrastructure > Network Devices > Configuration][1]. 
 2. Click on SNMP Profiles > **Create New Profile**.
-  {{< img src="/network_device_monitoring/profile_onboarding/create_profile.png" alt="The Network Device profile creation page" style="width:100%;">}}
+  {{< img src="/network_device_monitoring/profile_onboarding/create_profile_2.png" alt="The Network Device profile creation page" style="width:100%;">}}
 3. Provide your device profile a name, vendor information(optional) and description (optional).
 4. Select the `SysObjectID`. This is what is used to match network devices to the device profiles that define what is collected and monitored from each device. 
   {{< img src="/network_device_monitoring/profile_onboarding/Sys_object_ID_Field.png" alt="The Network Device profile creation page showing the Sys Object ID Dropdown" style="width:100%;">}}
@@ -121,7 +121,6 @@ The advanced options for scalar and tabular metrics are the same:
 3. Restart the Datadog Agent.
 4. To ensure the profiles you created are accurate, confirm that NDM is receiving metrics from the matched devices as expected.
 
-**Note**: Agent sync functionality will be available with Agent version `7.56` or higher.
 
 {{< img src="/network_device_monitoring/profile_onboarding/download_all_profiles_2.png" alt="The Network Device profile main page highlighting the Download All Profiles option" style="width:100%;">}}
 
