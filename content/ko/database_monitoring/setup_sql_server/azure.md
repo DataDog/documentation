@@ -125,9 +125,9 @@ GRANT VIEW ANY DEFINITION to datadog;
 Azure는 직접적인 호스트 액세스를 허용하지 않기 때문에 Datadog Agent는 SQL Server 호스트와 통신할 수 있는 별도의 호스트에 설치되어야 합니다. Agent 설치 및 실행에는 여러 가지 옵션이 있습니다.
 
 {{< tabs >}}
-{{% tab "Windows 호스트" %}}
+{{% tab "Windows Host" %}}
 
-SQL 서버 원격 측정 수집을 시작하려면 먼저 [Datadog Agent를 설치][1]하세요.
+SQL Server 원격 측정 수집을 시작하려면 먼저 [Datadog Agent를 설치][1]하세요.
 
 SQL Server 설정 파일 `C:\ProgramData\Datadog\conf.d\sqlserver.d\conf.yaml`을 생성합니다. 사용할 수 있는 모든 설정 옵션을 보려면 [설정 파일 샘플][2]을 참고하세요.
 
@@ -196,7 +196,7 @@ driver: '{ODBC Driver 18 for SQL Server}'
 [11]: https://app.datadoghq.com/databases
 {{% /tab %}}
 {{% tab "Linux Host" %}}
-SQL Server 텔레메트리를 수집하려면 먼저 [Datadog 에이전트를 설치][1]합니다.
+SQL Server 원격 측정을 수집하려면 먼저 [Datadog Agent를 설치][1]합니다.
 
 Linux의 경우 Datadog 에이전트에 ODBC SQL Server 드라이버(예: [Microsoft ODBC 드라이버][2])를 추가 설치해야 합니다. ODBC SQL Server가 설치되면 `odbc.ini`과 `odbcinst.ini` 파일을 `/opt/datadog-agent/embedded/etc` 폴더에 복사하세요.
 
