@@ -6,9 +6,9 @@ aliases:
 - /real_user_monitoring/funnel_analysis
 - /real_user_monitoring/product_analytics/funnel_analysis
 further_reading:
-- link: "/real_user_monitoring/explorer/"
+- link: "/product_analytics/analytics_explorer/"
   tag: "Documentation"
-  text: "RUM Explorer"
+  text: "Analytics Explorer"
 algolia:
   tags: ['funnel']
 ---
