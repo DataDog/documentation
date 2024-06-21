@@ -17,6 +17,13 @@ With Risk Based Entity Insights, you can:
 - Triage relevant items in bulk.
 - Take mitigation steps such as creating a global suppression or creating a case for an entity.
 
+## Prerequisites
+
+- For AWS entities coverage, [AWS must be configured for Cloud SIEM][1].
+- To view associated Cloud Security Management (CSM) data in the entity panel, [CSM must be configured][2].
+
+No other setup is required to use Cloud SIEM Entities.
+
 ## Explore entities
 
 ### Query and filter entities
@@ -40,13 +47,6 @@ The **What contributes** section displays the list of fired signals, relevant mi
 The **Next steps** section of the entity details panel includes the available mitigation steps.
 
 {{< img src="security/entities/entity-next-steps.png" alt="The available next steps for an entity as shown in the entity details panel" style="width:80%;" >}}
-
-## Prerequisites
-
-- For AWS entities coverage, [AWS must be configured for Cloud SIEM][1].
-- To view associated Cloud Security Management (CSM) data in the entity panel, [CSM must be configured][2].
-
-No other setup is required to use Cloud SIEM Entities.
 
 ## Risk scoring
 
