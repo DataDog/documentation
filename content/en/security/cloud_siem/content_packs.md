@@ -28,7 +28,7 @@ further_reading:
     {{< nextlink href="/security/cloud_siem/content_packs#authentication-content-packs" >}}<u>Authentication</u>: 1Password, Auth0, Cisco DUO, JumpCloud, Okta{{< /nextlink >}}
     {{< nextlink href="/security/cloud_siem/content_packs#collaboration-content-packs" >}}<u>Collaboration</u>: Google Workspace, Microsoft 365, Slack Audit Logs{{< /nextlink >}}
     {{< nextlink href="/security/cloud_siem/content_packs#network-content-packs" >}}<u>Network</u>: Cloudflare, Cisco Meraki, Cisco Umbrella, Palo Alto Networks Firewall{{< /nextlink >}}
-    {{< nextlink href="/security/cloud_siem/content_packs#web-security-content-packs" >}}<u>Network</u>: NGINX{{< /nextlink >}}
+    {{< nextlink href="/security/cloud_siem/content_packs#web-security-content-packs" >}}<u>Web Security</u>: NGINX{{< /nextlink >}}
     {{< nextlink href="/security/cloud_siem/content_packs#cloud-developer-tools-content-packs" >}}<u>Cloud developer tools</u>: GitHub{{< /nextlink >}}
     {{< nextlink href="/security/cloud_siem/content_packs#endpoint-content-packs" >}}<u>Endpoint</u>: CrowdStrike{{< /nextlink >}}
 {{< /whatsnext >}}
@@ -44,7 +44,7 @@ The [AWS CloudTrail Content Pack][5] includes:
 - An interactive dashboard
 - AWS Investigator
 - Workflow Automation
-- Configuration guides
+- [Configuration guide][43]
 
 ### Azure Security
 
@@ -54,7 +54,7 @@ The [Azure Security Content Pack][7] includes:
 - [Detection Rules][8]
 - An interactive dashboard
 - Azure Investigator
-- Configuration guides
+- [Configuration guide][44]
 
 ### GCP Audit Logs
 
@@ -64,7 +64,7 @@ The [GCP Audit Logs Content Pack][9] includes:
 - [Detection Rules][10]
 - An interactive dashboard
 - GCP Investigator
-- Configuration guides
+- [Configuration guide][45]
 
 ### Kubernetes Audit Logs
 Gain coverage by monitoring audit logs in your Kubernetes control plane.
@@ -170,7 +170,7 @@ The [Palo Alto Networks Firewall Content Pack][37] includes:
 
 ### Cisco Umbrella
 
-Collect and monitor logs from Cisco Umbrella to gain insights into DNS and Proxy logs
+Collect and monitor logs from Cisco Umbrella to gain insights into DNS and Proxy logs.
 
 The [Cisco Umbrella Content Pack][39] includes:
 - [Detection Rules][40]
@@ -180,7 +180,7 @@ The [Cisco Umbrella Content Pack][39] includes:
 
 ### NGINX
 
-Monitor and respond to web-based risks with NGINX
+Monitor and respond to web-based risks with NGINX.
 
 The [NGINX Content Pack][41] includes:
 - [Detection Rules][42]
@@ -252,3 +252,6 @@ The [CrowdStrike Content Pack][29] includes:
 [40]: /security/default_rules/#cisco-umbrella-dns
 [41]: https://app.datadoghq.com/security/content-packs/nginx
 [42]: /security/default_rules/#nginx
+[43]: https://docs.datadoghq.com/security/cloud_siem/guide/aws-config-guide-for-cloud-siem/
+[44]: https://docs.datadoghq.com/security/cloud_siem/guide/azure-config-guide-for-cloud-siem
+[45]: https://docs.datadoghq.com/security/cloud_siem/guide/google-cloud-config-guide-for-cloud-siem/
