@@ -3,19 +3,19 @@ title: Mobile Session Replay Privacy Options
 kind: documentation
 description: Configure privacy options for Mobile Session Replay.
 further_reading:
-    - link: '/real_user_monitoring/session_replay/mobile'
+    - link: '/product_analytics/session_replay/mobile'
       tag: Documentation
       text: Mobile Session Replay
-    - link: '/real_user_monitoring/session_replay/mobile/app_performance'
+    - link: '/product_analytics/session_replay/mobile/app_performance'
       tag: Documentation
       text: How Mobile Session Replay Impacts App Performance
-    - link: '/real_user_monitoring/session_replay/mobile/setup_and_configuration'
+    - link: '/product_analytics/session_replay/mobile/setup_and_configuration'
       tag: Documentation
       text: Setup and Configure Mobile Session Replay
-    - link: '/real_user_monitoring/session_replay/mobile/troubleshooting'
+    - link: '/product_analytics/session_replay/mobile/troubleshooting'
       tag: Documentation
       text: Troubleshoot Mobile Session Replay
-    - link: '/real_user_monitoring/session_replay'
+    - link: '/product_analytics/session_replay'
       tag: Documentation
       text: Session Replay
 ---

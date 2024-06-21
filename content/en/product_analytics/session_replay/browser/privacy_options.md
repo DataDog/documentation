@@ -2,10 +2,8 @@
 title: Session Replay Browser Privacy Options
 kind: documentation
 description: Describes privacy controls available in Session Replay and how to set privacy options
-aliases:
-- /real_user_monitoring/session_replay/privacy_options
 further_reading:
-    - link: '/real_user_monitoring/session_replay'
+    - link: '/product_analytics/session_replay'
       tag: Documentation
       text: Session Replay
     - link: "https://www.datadoghq.com/blog/default-privacy-session-replay/"

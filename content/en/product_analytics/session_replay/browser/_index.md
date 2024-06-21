@@ -2,9 +2,6 @@
 title: Browser Session Replay
 kind: documentation
 description: Learn about how to capture and visually replay your users' web browsing experience with Session Replay.
-aliases:
-- /real_user_monitoring/guide/session-replay-getting-started/
-- /real_user_monitoring/session_replay/
 further_reading:
 - link: 'https://www.datadoghq.com/blog/session-replay-datadog/'
   tag: 'Blog'
@@ -15,9 +12,9 @@ further_reading:
 - link: 'https://www.datadoghq.com/blog/zendesk-session-replay-integration/'
   tag: 'Blog'
   text: 'Visually replay user-facing issues with Zendesk and Datadog Session Replay'
-- link: '/real_user_monitoring/explorer'
+- link: '/product_analytics/analytics_explorer'
   tag: 'Documentation'
-  text: 'Visualize your RUM data in the Explorer'
+  text: 'Visualize your Product Analytics data in the Analytics Explorer'
 - link: '/integrations/content_security_policy_logs'
   tag: 'Documentation'
   text: 'Detect and aggregate CSP violations with Datadog'

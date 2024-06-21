@@ -1,9 +1,11 @@
 ---
 title: User Retention
 kind: documentation
-aliases:
-- /real_user_monitoring/retention_analysis
-- /real_user_monitoring/product_analytics/retention_analysis
+description: Measure user retention to understand overall user satisfaction with your application.
+further_reading:
+    - link: '/product_analytics/'
+      tag: Documentation
+      text: Product Analytics
 ---
 
 {{< callout url="http://datadoghq.com/private-beta/product-analytics" header="false" >}}
