@@ -23,7 +23,7 @@ guid: b4bc604c-73a5-4bd8-8dfe-3f80fc19976b
 integration_id: sidekiq
 integration_title: Sidekiq
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: sidekiq.

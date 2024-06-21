@@ -20,7 +20,7 @@ integration_id: amazon-security-lake
 integration_title: Amazon Security Lake
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: amazon_security_lake
 public_title: Datadog-Amazon Security Lake インテグレーション

@@ -13,7 +13,7 @@ integration_id: ''
 integration_title: Microsoft Azure SQL Managed Instance
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: azure_sql_managed_instance
 public_title: Intégration Datadog/Microsoft Azure SQL Managed Instance

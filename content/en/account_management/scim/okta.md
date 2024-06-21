@@ -1,6 +1,5 @@
 ---
 title: Configure SCIM with Okta
-kind: documentation
 algolia:
   tags: ["scim", "identity provider", "IdP", "Okta"]
 ---

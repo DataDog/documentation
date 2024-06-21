@@ -1,6 +1,5 @@
 ---
 title: Content Packs
-kind: documentation
 disable_toc: false
 further_reading:
 - link: "/security/cloud_siem/log_detection_rules"
@@ -26,9 +25,10 @@ further_reading:
 
 {{< whatsnext desc="Content Packs are grouped into the following categories:" >}}
     {{< nextlink href="/security/cloud_siem/content_packs#cloud-audit-content-packs" >}}<u>Cloud Audit</u>: AWS CloudTrail, Azure Security, GCP Audit Logs, Kubernetes Audit Logs{{< /nextlink >}}
-    {{< nextlink href="/security/cloud_siem/content_packs#authentication-content-packs" >}}<u>Authentication</u>: 1Password, Auth0, JumpCloud, Okta{{< /nextlink >}}
-    {{< nextlink href="/security/cloud_siem/content_packs#collaboration-content-packs" >}}<u>Collaboration</u>: Google Workspace, Microsoft 365{{< /nextlink >}}
-    {{< nextlink href="/security/cloud_siem/content_packs#network-content-packs" >}}<u>Network</u>: Cloudflare{{< /nextlink >}}
+    {{< nextlink href="/security/cloud_siem/content_packs#authentication-content-packs" >}}<u>Authentication</u>: 1Password, Auth0, Cisco DUO, JumpCloud, Okta{{< /nextlink >}}
+    {{< nextlink href="/security/cloud_siem/content_packs#collaboration-content-packs" >}}<u>Collaboration</u>: Google Workspace, Microsoft 365, Slack Audit Logs{{< /nextlink >}}
+    {{< nextlink href="/security/cloud_siem/content_packs#network-content-packs" >}}<u>Network</u>: Cloudflare, Cisco Meraki, Cisco Umbrella, Palo Alto Networks Firewall{{< /nextlink >}}
+    {{< nextlink href="/security/cloud_siem/content_packs#web-security-content-packs" >}}<u>Web Security</u>: NGINX{{< /nextlink >}}
     {{< nextlink href="/security/cloud_siem/content_packs#cloud-developer-tools-content-packs" >}}<u>Cloud developer tools</u>: GitHub{{< /nextlink >}}
     {{< nextlink href="/security/cloud_siem/content_packs#endpoint-content-packs" >}}<u>Endpoint</u>: CrowdStrike{{< /nextlink >}}
 {{< /whatsnext >}}
@@ -44,7 +44,7 @@ The [AWS CloudTrail Content Pack][5] includes:
 - An interactive dashboard
 - AWS Investigator
 - Workflow Automation
-- Configuration guides
+- [Configuration guide][43]
 
 ### Azure Security
 
@@ -54,7 +54,7 @@ The [Azure Security Content Pack][7] includes:
 - [Detection Rules][8]
 - An interactive dashboard
 - Azure Investigator
-- Configuration guides
+- [Configuration guide][44]
 
 ### GCP Audit Logs
 
@@ -64,7 +64,7 @@ The [GCP Audit Logs Content Pack][9] includes:
 - [Detection Rules][10]
 - An interactive dashboard
 - GCP Investigator
-- Configuration guides
+- [Configuration guide][45]
 
 ### Kubernetes Audit Logs
 Gain coverage by monitoring audit logs in your Kubernetes control plane.
@@ -89,6 +89,14 @@ Monitor and generate signals around Auth0 user activity.
 
 The [Auth0 Content Pack][15] includes:
 - [Detection Rules][16]
+- An interactive dashboard
+
+### Cisco DUO
+
+Monitor and analyze MFA and secure access logs from Cisco DUO.
+
+The [Cisco DUO Content Pack][31] includes:
+- [Detection Rules][32]
 - An interactive dashboard
 
 ### JumpCloud
@@ -125,6 +133,14 @@ The [Microsoft 365 Content Pack][23] includes:
 - [Detection Rules][24]
 - An interactive dashboard
 
+### Slack Audit Logs
+
+View, analyze, and monitor Slack audit logs.
+
+The [Slack Content Pack][33] includes:
+- [Detection Rules][34]
+- An interactive dashboard
+
 ## Network Content Packs
 
 ### Cloudflare
@@ -135,6 +151,40 @@ The [Cloudflare Content Pack][25] includes:
 - [Detection Rules][26]
 - An interactive dashboard
 - Workflow Automation
+
+### Cisco Meraki
+
+Monitor Cisco Meraki logs and identify attacker activity.
+
+The [Cisco Meraki Content Pack][35] includes:
+- [Detection Rules][36]
+- An interactive dashboard
+
+### Palo Alto Networks Firewall
+
+Analyze traffic and detect threats with Palo Alto Networks Firewall.
+
+The [Palo Alto Networks Firewall Content Pack][37] includes:
+- [Detection Rules][38]
+- An interactive dashboard
+
+### Cisco Umbrella
+
+Collect and monitor logs from Cisco Umbrella to gain insights into DNS and Proxy logs.
+
+The [Cisco Umbrella Content Pack][39] includes:
+- [Detection Rules][40]
+- An interactive dashboard
+
+## Web Security Content Packs
+
+### NGINX
+
+Monitor and respond to web-based risks with NGINX.
+
+The [NGINX Content Pack][41] includes:
+- [Detection Rules][42]
+- An interactive dashboard
 
 ## Cloud developer tools Content Packs
 
@@ -190,3 +240,18 @@ The [CrowdStrike Content Pack][29] includes:
 [28]: /security/default_rules/#github-telemetry
 [29]: https://app.datadoghq.com/security/content-packs/crowdstrike
 [30]: /security/default_rules/#crowdstrike
+[31]: https://app.datadoghq.com/security/content-packs/cisco-duo
+[32]: /security/default_rules/#cisco-duo
+[33]: https://app.datadoghq.com/security/content-packs/slack
+[34]: /security/default_rules/#slack
+[35]: https://app.datadoghq.com/security/content-packs/meraki
+[36]: /security/default_rules/#meraki
+[37]: https://app.datadoghq.com/security/content-packs/pan-firewall
+[38]: /security/default_rules/#panfirewall
+[39]: https://app.datadoghq.com/security/content-packs/cisco-umbrella-dns
+[40]: /security/default_rules/#cisco-umbrella-dns
+[41]: https://app.datadoghq.com/security/content-packs/nginx
+[42]: /security/default_rules/#nginx
+[43]: https://docs.datadoghq.com/security/cloud_siem/guide/aws-config-guide-for-cloud-siem/
+[44]: https://docs.datadoghq.com/security/cloud_siem/guide/azure-config-guide-for-cloud-siem
+[45]: https://docs.datadoghq.com/security/cloud_siem/guide/google-cloud-config-guide-for-cloud-siem/

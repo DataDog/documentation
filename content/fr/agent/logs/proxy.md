@@ -9,7 +9,6 @@ further_reading:
 - link: /tracing/
   tag: Documentation
   text: Recueillir vos traces
-kind: documentation
 title: Agent avec un proxy TCP pour l'envoi de logs
 ---
 
@@ -83,7 +82,7 @@ Modifiez le fichier de configuration de l'Agent `datadog.yaml` et définissez `l
 
 ```
 logs_config:
-  use_tcp: true
+  force_use_tcp: true
   logs_dd_url: "<DOMAINE_SERVEUR_PROXY>:10514"
   logs_no_ssl: true
 ```
@@ -212,7 +211,7 @@ backend datadog-logs
 Téléchargez le certificat avec la commande suivante :
 
 * `sudo apt-get install ca-certificates` (Debian, Ubuntu)
-* `yum install ca-certificates` (CentOS, Redhat) 
+* `yum install ca-certificates` (CentOS, Redhat)
 
 Si le téléchargement fonctionne, le fichier est stocké à l'emplacement suivant pour CentOS et Redhat : `/etc/ssl/certs/ca-bundle.crt`.
 
@@ -231,7 +230,7 @@ Modifiez le fichier de configuration de l'Agent `datadog.yaml` et définissez `l
 
 ```yaml
 logs_config:
-  use_tcp: true
+  force_use_tcp: true
   logs_dd_url: monServeurProxy.monDomaine:10514
 ```
 

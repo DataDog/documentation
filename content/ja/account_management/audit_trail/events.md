@@ -5,7 +5,6 @@ further_reading:
 - link: /account_management/audit_trail/
   tag: ドキュメント
   text: 監査証跡について
-kind: documentation
 title: 監査証跡イベント
 ---
 

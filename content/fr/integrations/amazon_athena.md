@@ -14,7 +14,7 @@ integration_id: amazon-athena
 integration_title: "Amazon\_Athena"
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: amazon_athena
 public_title: "Intégration Datadog/Amazon\_Athena"

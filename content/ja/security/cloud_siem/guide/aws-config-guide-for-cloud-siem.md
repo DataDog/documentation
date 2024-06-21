@@ -21,7 +21,6 @@ further_reading:
 - link: /logs/explorer/
   tag: ドキュメント
   text: ログの調査方法
-kind: documentation
 title: Cloud SIEM のための AWS 構成ガイド
 ---
 

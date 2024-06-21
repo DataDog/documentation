@@ -1,6 +1,5 @@
 ---
 title: Set up Tracing on GitHub Actions Workflows
-kind: documentation
 aliases:
   - /continuous_integration/setup_pipelines/github
 further_reading:
@@ -26,7 +25,7 @@ further_reading:
 
 [GitHub Actions][1] is an automation tool that allows you to build, test, and deploy your code in GitHub. Create workflows that automate every step of your development process, streamlining software updates and enhancing code quality with CI/CD features integrated into your repositories.
 
-Set up tracing in GitHub Actions to track the execution of your workflows, identify performance bottlenecks,  troubleshoot operational issues, and optimize your deployment processes. 
+Set up tracing in GitHub Actions to track the execution of your workflows, identify performance bottlenecks, troubleshoot operational issues, and optimize your deployment processes.
 
 ### Compatibility
 
@@ -82,9 +81,9 @@ To enable logs, follow these steps:
 3. Click **Enable Job Logs Collection** to enable logs for the whole account.
 4. Alternatively, you can enable individual repositories by scrolling through the repository list and clicking the **Enable Job Logs Collection** toggle.
 
-Immediately after toggling logs collection, workflow job logs are forwarded to Datadog Logs. Note that logs are billed separately from CI Visibility. Log retention, exclusion, and indexes are configured in Logs Settings.
+Immediately after toggling logs collection, workflow job logs are forwarded to Datadog Logs. Log files larger than 1GiB are truncated.
 
-Log files larger than 1GiB are truncated.
+<div class="alert alert-info"><strong>Note</strong>: Logs are billed separately from CI Visibility. Log retention, exclusion, and indexes are configured in Logs Settings. Logs for GitHub jobs can be identified by the <code>datadog.product:cipipeline</code> and <code>source:github</code> tags.</div>
 
 ### Correlate infrastructure metrics to jobs
 

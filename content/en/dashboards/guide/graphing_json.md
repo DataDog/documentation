@@ -1,6 +1,5 @@
 ---
 title: Graphing with JSON
-kind: documentation
 aliases:
 - /graphingjson/
 - /graphing/miscellaneous/graphingjson

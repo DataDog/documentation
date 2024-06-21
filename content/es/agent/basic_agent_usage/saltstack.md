@@ -1,7 +1,6 @@
 ---
 dependencies:
 - https://github.com/DataDog/datadog-formula/blob/main/README.md
-kind: documentación
 title: SaltStack
 ---
 La fórmula SaltStack de Datadog se utiliza para instalar el Datadog Agent y las integraciones basadas en el Agent (checks). Para obtener más información sobre las fórmulas SaltStack, consulta las [instrucciones de instalación y uso de fórmulas Salt][1].

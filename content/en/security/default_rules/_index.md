@@ -1,6 +1,5 @@
 ---
 title: OOTB Rules
-kind: documentation
 type: security_rules
 description: "Datadog Security detection rules"
 aliases:

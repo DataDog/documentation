@@ -1,19 +1,23 @@
 ---
-title: プロセスの保持を増やす
-kind: documentation
 aliases:
-  - /ja/infrastructure/process/generate_process_metrics/
-  - /ja/processes/processing/process_to_metrics/
-  - /ja/infrastructure/generate_process_metrics/
+- /ja/infrastructure/process/generate_process_metrics/
+- /ja/processes/processing/process_to_metrics/
+- /ja/infrastructure/generate_process_metrics/
 description: プロセスからメトリクスを生成します。
 further_reading:
-  - link: metrics/distributions/
-    tag: Documentation
-    text: ディストリビューションメトリクス
-  - link: monitors/monitor_types/metric/?tab=threshold
-    tag: Documentation
-    text: メトリクスモニターの作成
+- link: metrics/distributions/
+  tag: Documentation
+  text: ディストリビューションメトリクス
+- link: monitors/monitor_types/metric/?tab=threshold
+  tag: Documentation
+  text: メトリクスモニターの作成
+- link: https://www.datadoghq.com/blog/rightsize-kubernetes-workloads/
+  tag: ブログ
+  text: Kubernetes のワークロードをライトサイジングするための実践的なヒント
+kind: documentation
+title: プロセスの保持を増やす
 ---
+
 ## 概要
 
 ライブプロセスのデータは 36 時間保管されますが、プロセスからグローバルかつパーセンタイルのディストリビューションメトリクスを生成し、リソースの消費量を長期的に監視することもできます。プロセスベースのメトリクスはその他の Datadog のメトリクスと同じく 15 か月間保管されるため、以下のような操作を行う場合に役立ちます。
@@ -27,9 +31,7 @@ further_reading:
 
 ## プロセスベースのメトリクスを生成
 
-新しいプロセスベースのメトリクスは、ライブプロセスページのクエリから直接生成するか、_[Increase Retention][1]_ タブで **Create Metric** ボタンを選択して生成できます。
-
-{{< img src="infrastructure/process/process2metrics_create_LP_2.png" alt="プロセスベースのメトリクスを生成" style="width:80%;">}}
+[**Live Processes** ページ][2]、または [**Manage Metrics** タブ][1]で、**+ New Metric** をクリックすると、クエリから新しいプロセスベースのメトリクスを直接生成できます。
 
 ### 新しいプロセスベースのメトリクスを追加
 
@@ -37,7 +39,7 @@ further_reading:
 
 1. **タグを選択してクエリにフィルターを適用**: クエリ構文は[ライブプロセス][2]と同じです。フィルターのスコープに一致するプロセスのみが集計対象と認識されます。テキスト検索フィルターはライブプロセスページのみでサポートされています。
 2. **追跡するメジャーを選択**: `Total CPU %` などのメジャーを入力して数値を集計し、対応する `count`、`min`、`max`、`sum`、`avg` の集計メトリクスを作成します。
-3. **`group by` にタグを追加**: 選択したタグをディメンションとしてメトリクスに追加し、フィルターの適用、集計、および比較を行います。デフォルトでは、プロセスから生成されたメトリクスに (明示的に追加しない限り) タグは付与されません。ライブプロセスのクエリに対して利用可能なタグは、すべてこのフィールドで使用することができます。プロセスベースのメトリクスは[カスタムメトリクス][3]として扱われます。請求に影響が及ぶ可能性があるため、`command` および `user` など、無制限または極めてカーディナリティの高いタグを使うグルーピングは避けるようにしてください。
+3. **`group by` にタグを追加**: 選択したタグをディメンションとしてメトリクスに追加し、フィルターの適用、集計、および比較を行います。デフォルトでは、プロセスから生成されたメトリクスに (明示的に追加しない限り) タグは付与されません。ライブプロセスのクエリに対して利用可能なタグは、すべてこのフィールドで使用することができます。
 4. **メトリクスに名前を付与**: メトリクスの名前を入力します。プロセスベースのメトリクスには常にプレフィックス _proc._ とサフィックス _[measure_selection]_ が付与されます。
 5. **パーセンタイル集計を追加**: _Include percentile aggregations_ チェックボックスを選択して、p50、p75、p90、p95、p99 パーセンタイルを生成します。パーセンタイルのメトリクスはカスタマーメトリクスとしても扱われ、適宜請求に追加されます。
 
@@ -45,15 +47,17 @@ further_reading:
 
 **注**: プロセスベースのメトリクスのデータポイントは 10 秒間隔で生成されます。そのため、メトリクスが作成または更新されてから最初のデータポイントが報告されるまでに最大 3 分の遅延が生じる場合があります。
 
+<div class="alert alert-warning">プロセスベースのメトリクスは<a href="/metrics/custom_metrics/">カスタムメトリクス</a>と見なされ、それに応じて請求されます。請求への影響を避けるために、<code>command</code> や <code>user</code> などの無制限または非常に高いカーディナリティタグによるグループ化は避けてください。</div>
+
 ### プロセスベースのメトリクスを更新
 
 {{< img src="infrastructure/process/process2metrics_update.png" alt="ディストリビューションメトリクスを更新" style="width:80%;">}}
 
 メトリクスの作成後、以下のフィールドを更新できます。
 
-- フィルタークエリ: ‘Filter by’ フィールドからタグを追加または削除し、メトリクスが生成されたマッチングプロセスのセットを変更します。
-- 集計グループ: ‘Group by’ フィールドからタグを追加または削除し、メトリクスを異なる方法で分割、またはそれらのカーディナリティを管理します。
-- パーセンタイルの選定: ‘Include percentile aggregations’ ボックスをチェックまたはチェックを外すことで、パーセンタイルメトリクスを削除または生成します。
+- フィルタークエリ: 'Filter by' フィールドからタグを追加または削除し、メトリクスが生成されたマッチングプロセスのセットを変更します。
+- 集計グループ: 'Group by' フィールドからタグを追加または削除し、メトリクスを異なる方法で分割、またはそれらのカーディナリティを管理します。
+- パーセンタイルの選定: 'Include percentile aggregations' ボックスをチェックまたはチェックを外すことで、パーセンタイルメトリクスを削除または生成します。
 
 メトリクスタイプまたは名前を変更するには、新しいメトリクスを作成する必要があります。
 

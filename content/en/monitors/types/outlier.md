@@ -16,6 +16,9 @@ further_reading:
 - link: "/monitors/manage/status/"
   tag: "Documentation"
   text: "Consult your monitor status"
+- link: "/watchdog/insights/"
+  tag: "Documentation"
+  text: "Outlier detection in Watchdog Insights"
 ---
 
 ## Overview
