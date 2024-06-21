@@ -11,7 +11,7 @@ further_reading:
 
 ## Setup
 
-Follow these steps to enable Data Jobs Monitoring for Amazon EMR.
+Follow these steps to enable Data Jobs Monitoring for Amazon EMR. We support [Amazon EMR Release 6.6.0][10] and above.
 
 1. [Store your Datadog API key](#store-your-datadog-api-key-in-aws-secrets-manager) in AWS Secrets Manager.
 1. [Create and configure your EMR cluster](#create-and-configure-your-emr-cluster).
@@ -122,3 +122,4 @@ In Datadog, view the [Data Jobs Monitoring][8] page to see a list of all your da
 [7]: /getting_started/site/
 [8]: https://app.datadoghq.com/data-jobs/
 [9]: /data_jobs
+[10]: https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-660-release.html
