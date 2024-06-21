@@ -14,6 +14,9 @@ further_reading:
 * The full Step Function execution length must be less than 90 minutes for full traces.
 * Linked Lambda traces are supported for Node.js (layer v94+) and Python (layer v75+) runtimes.
 
+### How it works
+Datadog AWS Step Functions Monitoring collects logs and integration metrics from the AWS integration and uses ingested logs from AWS Step Functions to generate enhanced metrics and traces for your Step Function executions.
+
 ### Setup
 
 {{< tabs >}}
@@ -123,10 +126,10 @@ For developers using [Serverless Framework][4] to deploy serverless applications
 
 <div class="alert alert-warning"> If you are using a different instrumentation method such as Serverless Framework or datadog-ci, enabling autosubscription may create duplicated logs. Choose one configuration method to avoid this behavior.</a>.</div>
 
-
-4. Enable tracing on your Step Function by adding a `DD_TRACE_ENABLED` tag. Set the value to `true`.
-5. Set up tags. Open your AWS console and go to your Step Functions state machine. Open the *Tags* section and add `env:<ENV_NAME>` and `service:<SERVICE_NAME>` tags. The `env` tag is required to see traces in Datadog, and it defaults to `dev`. The `service` tag defaults to the state machine's name.
-6. For Node.js and Python runtimes, you can link your Step Function traces to Lambda traces. On the Lambda Task, set the `Parameters` key with the following: 
+4. Enable enhanced metrics on your Step Function by adding a `DD_ENHANCED_METRICS_ENABLED` tag. Set the value to `true`. 
+5. Enable tracing on your Step Function by adding a `DD_TRACE_ENABLED` tag. Set the value to `true`.
+6. Set up tags. Open your AWS console and go to your Step Functions state machine. Open the *Tags* section and add `env:<ENV_NAME>` and `service:<SERVICE_NAME>` tags. The `env` tag is required to see traces in Datadog, and it defaults to `dev`. The `service` tag defaults to the state machine's name.
+7. For Node.js and Python runtimes, you can link your Step Function traces to Lambda traces. On the Lambda Task, set the `Parameters` key with the following: 
 
    ```json
    "Parameters": {

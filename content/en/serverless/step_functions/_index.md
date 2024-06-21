@@ -21,6 +21,9 @@ AWS Step Functions is a serverless orchestration service that lets developers cr
 
 {{< img src="serverless/step_functions/overview1.png" alt="An AWS Step Function oveview tab." style="width:100%;" >}}
 
+### How it works
+Datadog AWS Step Functions Monitoring collects logs and integration metrics from the AWS integration and uses ingested logs from AWS Step Functions to generate enhanced metrics and traces for your Step Function executions.
+
 ### Monitor the overall health of Step Functions in the Serverless view
 The Serverless view shows key metrics for your Step Functions in one place to easily provide a snapshot of the health of your Step Functions. You can access a detailed view of each Step Function to see all associated metrics, logs, and traces within a certain time frame and set monitors for problematic executions. 
 
