@@ -165,8 +165,8 @@ If the request is successful, the API responds with a 202 network code and an em
 #### Metrics
 | Field                  | Type    | Description  |
 |------------------------|---------|--------------|
-| prompt_tokens          | float64 | The number of prompt tokens. **Only valid for LLM spans.**      |
-| completion_tokens      | float64 | The number of completion tokens. **Only valid for LLM spans.**     |
+| input_tokens           | float64 | The number of input tokens. **Only valid for LLM spans.**      |
+| output_tokens          | float64 | The number of output tokens. **Only valid for LLM spans.**     |
 | total_tokens           | float64 | The total number of tokens associated with the span. **Only valid for LLM spans.**   |
 | time_to_first_token    | float64 | The time in seconds it takes for the first output token to be returned in streaming-based LLM applications. Set for root spans. |
 | time_per_output_token  | float64 | The time in seconds it takes for the per output token to be returned in streaming-based LLM applications. Set for root spans. |
