@@ -590,6 +590,7 @@ To disable [Software Composition Analysis][14]:
 
 * Go to [Services][15], select **Software Composition Analysis (SCA)**, click on your service and then click **Deactivate**.
 * To disable Software Composition Analysis on your services in bulk, click the check box in the list header and then under **Bulk Actions** select **Deactivate Software Composition Analysis (SCA) on (number of) services**.
+* To disable Software Composition Analysis using the `DD_APPSEC_SCA_ENABLED` environment variable, remove the `DD_APPSEC_SCA_ENABLED=true` environment variable from your application configuration, and restart your service. This does not apply to PHP apps.
 
 ## Disabling Code Security
 
