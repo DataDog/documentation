@@ -22,11 +22,9 @@ further_reading:
 
 Datadog Application Performance Monitoring (APM) provides deep visibility into your applications, enabling you to identify performance bottlenecks, troubleshoot issues, and optimize your services.
 
-This guide demonstrates how to get started with APM and send your first trace to Datadog.
+This guide demonstrates how to get started with APM and send your first trace to Datadog:
 
-At a high level, you need to:
-
-1. Set up Datadog APM to send observability data to Datadog.
+1. Set up Datadog APM to send traces to Datadog.
 1. Run your application to generate data.
 1. Explore the collected data in Datadog.
 
@@ -37,30 +35,6 @@ To complete this guide, you need the following:
 1. [Create a Datadog account][1] if you haven't already.
 1. Find or create a [Datadog API key][2].
 1. Start up a Linux host or VM.
-
-## Set up Datadog APM
-
-To set up Datadog APM without needing to touch your application code, use Single Step APM Instrumentation:
-
-<div class="alert alert-info"><strong>Note</strong>: <a href="https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/single-step-apm/">Single Step APM Instrumentation</a> is in beta. Alternatively, you can  set up APM using <a href="https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/dd-libraries/">Datadog tracing libraries</a>.</div>
-
-1. Run the installation command:
-
-   ```shell
-    DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="<YOUR_DD_SITE>" DD_APM_INSTRUMENTATION_ENABLED=host DD_ENV=<AGENT_ENV> bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
-    ```
- 
-    Replace `<YOUR_DD_API_KEY>` with your [Datadog API key][4], `<YOUR_DD_SITE>` with your [Datadog site][3], and `<AGENT_ENV>` with the environment your Agent is installed on (for example, `development`).
-
-1. Start a new shell session.
-1. Restart the services on your host or VM.
-1. Verify the Agent is running:
-
-    ```shell
-   sudo datadog-agent status
-   ```
-
-This approach automatically installs the Datadog Agent, enables Datadog APM, and [instruments][5] your application.
 
 ## Create an application
 
@@ -89,6 +63,30 @@ To create an application to observe in Datadog:
   if __name__ == '__main__':
       app.run(host='0.0.0.0', port=5050)
   {{< /code-block >}}
+
+## Set up Datadog APM
+
+To set up Datadog APM without needing to modify your application's code or the deployment process, use Single Step APM Instrumentation:
+
+<div class="alert alert-info"><strong>Note</strong>: <a href="https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/single-step-apm/">Single Step APM Instrumentation</a> is in beta. Alternatively, you can set up APM using <a href="https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/dd-libraries/">Datadog tracing libraries</a>.</div>
+
+1. Run the installation command:
+
+   ```shell
+    DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="<YOUR_DD_SITE>" DD_APM_INSTRUMENTATION_ENABLED=host DD_ENV=<AGENT_ENV> bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
+    ```
+ 
+    Replace `<YOUR_DD_API_KEY>` with your [Datadog API key][4], `<YOUR_DD_SITE>` with your [Datadog site][3], and `<AGENT_ENV>` with the environment your Agent is installed on (for example, `development`).
+
+1. Start a new shell session.
+1. Restart the services on your host or VM.
+1. Verify the Agent is running:
+
+    ```shell
+   sudo datadog-agent status
+   ```
+
+This approach automatically installs the Datadog Agent, enables Datadog APM, and [instruments][5] your application.
 
 ## Run the application
 
@@ -138,7 +136,7 @@ Test the application to send traces to Datadog:
 
 Each time you run the `curl` command, a new trace is sent to Datadog.
 
-## Explore observability data in Datadog
+## Explore traces in Datadog
 
 1. In Datadog, go to [**APM** > **Services**][3]. You should see a Python service named `hello`:
 
@@ -147,15 +145,15 @@ Each time you run the `curl` command, a new trace is sent to Datadog.
 1. Select a service to view its performance metrics, such as latency, throughput, and error rates.
 1. Go to [**APM** > **Traces**][4]. You should see a trace for the `hello` service:
 
-   {{< img src="/getting_started/apm/service-catalog.png" alt="Service Catalog shows the new Python service." style="width:100%;" >}}
+   {{< img src="/getting_started/apm/trace-explorer.png" alt="Trace explorer shows the trace for the hello service." style="width:100%;" >}}
 
 1. Select a trace to see its details, including the flame graph, which helps identify performance bottlenecks.
 
 ## Advanced APM setup
 
-Up until this point, you let Datadog automatically instrument the `hello.py` application using Single Step Instrumentation. This is great if you want to capture essential observability data across common libraries and languages without touching code or manually installing libraries.
+Up until this point, you let Datadog automatically instrument the `hello.py` application using Single Step Instrumentation. This is great if you want to capture essential traces across common libraries and languages without touching code or manually installing libraries.
 
-However, if you need to collect observability data from custom code or require more fine-grained control, you can add [custom instrumentation][6].
+However, if you need to collect traces from custom code or require more fine-grained control, you can add [custom instrumentation][6].
 
 To illustrate this, you are going to import the Datadog Python tracing library into `hello.py` and create a custom span and span tag.
 
@@ -167,7 +165,7 @@ To add custom instrumentation:
    pip install ddtrace
    ```
 
-1. Add the following to `hello.py`:
+1. Add the highlighted lines to the code in `hello.py`:
 
    {{< highlight python "hl_lines=3 15 17" >}}
     from flask import Flask
