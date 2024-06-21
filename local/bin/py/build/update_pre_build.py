@@ -47,6 +47,7 @@ class Build:
         # Should match directory name in integrations_data/extracted
         self.apw_integrations = [
             'ably',
+            'aerospike',
             'akamai_mpulse',
             'avmconsulting_workday',
             'bottomline_mainframe',
