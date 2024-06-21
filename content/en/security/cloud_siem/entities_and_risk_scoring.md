@@ -31,7 +31,7 @@ Click an entity in the [Explorer][4] to open the entity side panel.
 
 {{< img src="security/entities/entity-side-panel.png" alt="The details panel for an entity" style="width:90%;" >}}
 
-The **What happened** section of the panel displays the count of related signals and how they have contributed to the risk score, as well as any potential configuration risks.
+The **What Happened** section of the panel displays the count of related signals and how they have contributed to the risk score, as well as any potential configuration risks.
 
 The **What contributes** section displays the list of fired signals, relevant misconfigurations, and identity risks.
 
