@@ -28,7 +28,7 @@ Use one of the following methods to enable CSM for your Google Cloud projects:
 #### Google Cloud Platform integration page
 
 1. On the [**Google Cloud Platform Integration** page][10], select a Google Cloud project.
-2. Under **Resource Collection**, select the **Enable Cloud Security Posture Management** checkbox.
+2. Under **Resource Collection**, select **Enable Cloud Security Management**.
 3. Click **Save**.
 
 [1]: https://docs.datadoghq.com/integrations/google_cloud_platform

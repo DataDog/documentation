@@ -26,7 +26,9 @@ Code Analysis is in public beta.
 
 ## Overview
 
-Static Analysis is a clear-box software testing technique that analyzes a program's pre-production code without the need to execute the program, meaning that the program is static because it isn't running. Static Analysis helps you identify maintainability issues and security vulnerabilities early in the Software Development Life Cycle (SDLC) to ensure only the highest quality, most secure code makes it to production. Static Analysis tools that scan for security vulnerabilities are also commonly referred to as Static Application Security Testing (SAST) tools.
+Static Analysis is a clear-box software testing technique that analyzes a program's pre-production code without the need to execute the program, meaning that the program is static because it isn't running. 
+
+Static Analysis helps you identify maintainability issues and security vulnerabilities early in the software development life cycle (SDLC) to ensure only the highest quality, most secure code makes it to production. Static Analysis tools that scan for security vulnerabilities are also commonly referred to as Static Application Security Testing (SAST) tools.
 
 Using Static Analysis provides organizations with the following benefits:
 
@@ -35,20 +37,15 @@ Using Static Analysis provides organizations with the following benefits:
 * New developers to an organization are able to onboard faster because Static Analysis enables an organization to maintain a more readable codebase over time.
 * An organization's software becomes reliable over time by virtue of the code being more maintainable because the risk of a developer introducing new defects to the code is minimized.
 
-## Languages
+## Set up Static Analysis
 
-Static Analysis currently supports scanning the following languages and technologies for poor coding practices and security vulnerabilities:
+Static Analysis supports scanning for poor coding practices and security vulnerabilities in the following languages and technologies:
 
-- C#
-- Dockerfiles
-- Go
-- Java
-- JavaScript
-- Python
-- Ruby
-- TypeScript
+{{< partial name="code_analysis/languages-getting-started.html" >}}
 
-## Integrations
+</br> 
+
+## Integrate Static Analysis in your developer environment
 
 ### CI providers
 {{< whatsnext desc="With Static Analysis, you can integrate feedback on code reviews for various languages in any CI platform provider of your choice. See the documentation for information about the following integrations:">}}
