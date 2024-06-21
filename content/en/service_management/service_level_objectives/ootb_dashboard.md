@@ -13,7 +13,7 @@ further_reading:
 
 The Out-of-the-Box (OOTB) SLO Performance Dashboard supports aggregated views of SLOs to help engineering leadership understand your organization's reliability at a glance. You can customize the dashboard to be based on groupings such as service, team, user journey, or any other tag that has been added to SLOs. A summary score, based on the remaining error budget of the underlying SLOs, makes it easy to understand SLO performance across different groups and identify areas of improvement.
 
-{{< callout url="https://forms.gle/GQkcHDqaL5qWMss38" btn_hidden="false" header="Try Out the OOTB SLO Dashboard">}}
+{{< callout url="http://datadoghq.com/private-beta/ootb-slo-dashboard/" btn_hidden="false" header="Try Out the OOTB SLO Dashboard">}}
 The OOTB SLO Performance Dashboard is in Private Beta. Complete the form to request access.
 {{< /callout >}}
 
