@@ -454,11 +454,16 @@ For additional information around these capabilities, see [Cloud service enhance
 
 <div class="alert alert-warning">Failed Connections are in private beta. To start seeing <a href="/network_monitoring/performance/network_analytics/?tab=loadbalancers#tcp">failed connection metrics</a>, reach out to your Datadog representative and request access.</div>
 
-To enable the Agent to start collecting data around failed connections, add the following flag to your `/etc/datadog-agent/datadog.yaml` file.
+To enable the Agent to start collecting data around failed connections, add the following flag to your `/etc/datadog-agent/system-probe.yaml` file.
 
 ```yaml
-failed_connections:
+network_config:   # use system_probe_config for Agent versions older than 7.24.1
+  ## @param enabled - boolean - optional - default: false
+  ## Set to true to enable Network Performance Monitoring.
+  #
   enabled: true
+  enable_tcp_failed_connections: true
+
 ```
 
 [101]: /integrations/azure
