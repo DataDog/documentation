@@ -17,7 +17,7 @@ Cuando se utiliza DogStatsD para enviar un gran volumen de métricas a un único
 
 - Uso elevado de CPU por parte del Agent 
 - Datagramas y métricas perdidos
-- La biblioteca cliente DogStatsD (UDS) devuelve errores
+- La biblioteca cliente de DogStatsD (UDS) devuelve errores
 
 La mayoría de las veces los síntomas pueden aliviarse modificando algunas opciones de configuración que se describen a continuación.
 
@@ -266,7 +266,7 @@ También puedes configurar tu servidor DogStatsD si la telemetría del cliente i
 
 Para reducir la cantidad de pérdidas de paquetes:
 
-1. Aumenta el tamaño de la cola de clientes a `8192`. Para obtener más información, consulta la configuración de la biblioteca del cliente. Puede que veas disminuir la cantidad de pérdidas y que tu aplicación utilice más RAM.
+1. Aumenta el tamaño de la cola de clientes a `8192`. Para obtener más información, consulta la configuración de la biblioteca cliente. Puede que veas disminuir la cantidad de pérdidas y que tu aplicación utilice más RAM.
 2. Además, puedes activar la función `dogstatsd_pipeline_autoadjust: true` en la configuración de tu Datadog Agent. El Agent utiliza varios núcleos para procesar métricas personalizadas, lo que puede suponer un mayor uso de CPU, pero reducir las pérdidas de paquetes.
 
 ## Buffers de kernel del sistema operativo
@@ -407,7 +407,7 @@ Una ráfaga de métricas ha sido detectada por DogStatsD: el siguiente es el rec
 
 Los clientes DogStatsD por defecto envían métricas de telemetría al Agent. Esto te permite localizar mejor los cuellos de botella y resolverlos. Cada métrica se etiqueta con el idioma del cliente y la versión del cliente. Estas métricas no se contabilizan como métricas personalizadas.
 
-Cada cliente comparte un conjunto de etiquetas comunes.
+Cada cliente comparte un conjunto de etiquetas (tags) comunes.
 
 | Etiqueta                | Descripción                                       | Ejemplo                |
 | ------------------ | ------------------------------------------------- | ---------------------- |
