@@ -16,7 +16,7 @@ Cloudcraft の Confluence アプリケーションをインストールするに
 
 Confluence ページを開いた状態で **/cloudcraft** と入力し、表示されるアプリケーションコマンドをクリックします。
 
-{{< img src="cloudcraft/getting-started/embedding-cloudcraft-diagrams-confluence/embed-command.png" alt=“Confluence ドキュメントに図を埋め込むための Cloudcraft インテグレーションツール。" responsive="true" style="width:100%;">}}
+{{< img src="cloudcraft/getting-started/embedding-cloudcraft-diagrams-confluence/embed-command.png" alt="Confluence ドキュメントに図を埋め込むための Cloudcraft インテグレーションツール。" responsive="true" style="width:100%;" >}}
 
 次に、**Sign in** をクリックして Cloudcraft アカウントにログインします。
 
