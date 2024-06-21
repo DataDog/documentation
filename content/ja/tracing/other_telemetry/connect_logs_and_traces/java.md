@@ -18,7 +18,7 @@ further_reading:
   tag: ガイド
   text: クロスプロダクト相関で容易にトラブルシューティング。
 kind: documentation
-title: Java ログとトレースの接続
+title: Java ログとトレースの相関付け
 type: multi-code-lang
 ---
 ## はじめに
@@ -30,6 +30,8 @@ type: multi-code-lang
 バージョン 0.74.0 以降、Java トレーサーは自動的にトレース相関識別子を JSON 形式のログに挿入します。それ以前のバージョンでは、システムプロパティとして `dd.logs.injection=true` を追加するか、環境変数 `DD_LOGS_INJECTION=true` を使用して、Java トレーサーの自動挿入を有効にします。コンフィギュレーションの詳細については、[Java トレーサーのコンフィギュレーション][2]ページを参照してください。
 
 **注**: トレース ID の `attribute.path` が `dd.trace_id` では*ない* 場合は’、当該トレース ID の `attribute.path` 向け予約済み属性設定アカウントを確認してください。詳しくは、[関連するログがトレース ID パネルに表示されない][3]を参照してください。
+
+<div class="alert alert-info"><strong>ベータ版</strong>: バージョン 1.18.3 から、サービスが実行される場所で <a href="/agent/remote_config/">Agent リモート構成</a>が有効になっている場合、<a href="/tracing/service_catalog">サービスカタログ</a> の UI で <code>DD_LOGS_INJECTION</code> を設定できます。</div>
 
 ## 手動挿入
 
@@ -72,6 +74,25 @@ try {
 } finally {
     MDC.remove("dd.trace_id");
     MDC.remove("dd.span_id");
+}
+```
+{{% /tab %}}
+{{% tab "Tinylog" %}}
+
+```java
+import org.tinylog.ThreadContext;
+import datadog.trace.api.CorrelationIdentifier;
+
+// このブロックの前に開始され、アクティブなスパンが存在している必要があります。
+try {
+    ThreadContext.put("dd.trace_id", CorrelationIdentifier.getTraceId());
+    ThreadContext.put("dd.span_id", CorrelationIdentifier.getSpanId());
+
+// 何かをログに記録する
+
+} finally {
+    ThreadContext.remove("dd.trace_id");
+    ThreadContext.remove("dd.span_id");
 }
 ```
 {{% /tab %}}

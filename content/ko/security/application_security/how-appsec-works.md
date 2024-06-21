@@ -13,7 +13,6 @@ further_reading:
 - link: /security/application_security/enabling/
   tag: 설명서
   text: 애플리케이션 보안 관리 실행
-kind: 설명서
 title: Datadog에서 애플리케이션 보안 관리가 작동하는 방식
 ---
 

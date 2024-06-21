@@ -23,6 +23,10 @@
     "request_description": "",
     "request_schema_description": "Request used to update an API key."
   },
+  "ListAPIs": {
+    "description": "List APIs and their IDs.",
+    "summary": "List APIs"
+  },
   "DeleteOpenAPI": {
     "description": "Delete a specific API by ID.",
     "summary": "Delete an API"
@@ -38,7 +42,7 @@
     "request_schema_description": "Object for API data in an `OpenAPI` format as a file."
   },
   "CreateOpenAPI": {
-    "description": "Create a new API from the [OpenAPI](https://spec.openapis.org/oas/latest.html) specification given.\nIt supports version `2.0`, `3.0` and `3.1` of the specification. A specific extension section, `x-datadog`,\nlet you specify the `teamHandle` for your team responsible for the API in Datadog.\nIt returns the created API ID.\n",
+    "description": "Create a new API from the [OpenAPI](https://spec.openapis.org/oas/latest.html) specification given.\nSee the [API Catalog documentation](https://docs.datadoghq.com/api_catalog/add_metadata/) for additional\ninformation about the possible metadata.\nIt returns the created API ID.\n",
     "summary": "Create a new API",
     "request_description": "",
     "request_schema_description": "Object for API data in an `OpenAPI` format as a file."
@@ -957,6 +961,20 @@
     "description": "Get all active downtimes for the specified monitor.",
     "summary": "Get active downtimes for a monitor"
   },
+  "ListOrgConfigs": {
+    "description": "Returns all Org Configs (name, description, and value).",
+    "summary": "List Org Configs"
+  },
+  "GetOrgConfig": {
+    "description": "Return the name, description, and value of a specific Org Config.",
+    "summary": "Get a specific Org Config value"
+  },
+  "UpdateOrgConfig": {
+    "description": "Update the value of a specific Org Config.",
+    "summary": "Update a specific Org Config",
+    "request_description": "",
+    "request_schema_description": "A request to update an Org Config."
+  },
   "ListPermissions": {
     "description": "Returns a list of all permissions, including name, description, and ID.",
     "summary": "List permissions"
@@ -1275,11 +1293,17 @@
     "request_description": "",
     "request_schema_description": "Create a new rule."
   },
+  "TestSecurityMonitoringRule": {
+    "description": "Test a rule.",
+    "summary": "Test a rule",
+    "request_description": "",
+    "request_schema_description": "Test the rule queries of a rule (rule property is ignored when applied to an existing rule)"
+  },
   "ValidateSecurityMonitoringRule": {
     "description": "Validate a detection rule.",
     "summary": "Validate a detection rule",
     "request_description": "",
-    "request_schema_description": "Create a new rule."
+    "request_schema_description": "Validate a rule."
   },
   "DeleteSecurityMonitoringRule": {
     "description": "Delete an existing rule. Default rules cannot be deleted.",
@@ -1290,10 +1314,16 @@
     "summary": "Get a rule's details"
   },
   "UpdateSecurityMonitoringRule": {
-    "description": "Update an existing rule. When updating `cases`, `queries` or `options`, the whole field\nmust be included. For example, when modifying a query all queries must be included.\nDefault rules can only be updated to be enabled and to change notifications.",
+    "description": "Update an existing rule. When updating `cases`, `queries` or `options`, the whole field\nmust be included. For example, when modifying a query all queries must be included.\nDefault rules can only be updated to be enabled, to change notifications, or to update\nthe tags (default tags cannot be removed).",
     "summary": "Update an existing rule",
     "request_description": "",
     "request_schema_description": "Update an existing rule."
+  },
+  "TestExistingSecurityMonitoringRule": {
+    "description": "Test an existing rule.",
+    "summary": "Test an existing rule",
+    "request_description": "",
+    "request_schema_description": "Test the rule queries of a rule (rule property is ignored when applied to an existing rule)"
   },
   "ListSecurityMonitoringSignals": {
     "description": "The list endpoint returns security signals that match a search query.\nBoth this endpoint and the POST endpoint can be used interchangeably when listing\nsecurity signals.",

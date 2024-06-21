@@ -12,7 +12,7 @@ further_reading:
       tag: "Documentation"
       text: "Adding user information to traces"
     - link: 'https://github.com/DataDog/dd-trace-dotnet'
-      tag: 'GitHub'
+      tag: "Source Code"
       text: '.NET Datadog library source code'
     - link: "/security/default_rules/?category=cat-application-security"
       tag: "Documentation"
@@ -27,14 +27,14 @@ You can monitor application security for .NET apps running in Docker, Kubernetes
 {{% appsec-getstarted %}}
 
 
-## Enabling code security vulnerability detection
+## Enabling Code Security
 
 If your service runs a [tracing library version that supports code security vulnerability detection][2], enable the capability by setting the `DD_IAST_ENABLED=true` environment variable and restarting your service.
 
-To leverage code security vulnerability detection capabilities for your service:
+To leverage code-level vulnerability detection capabilities for your service:
 
 1. [Update your Datadog Agent][3] to at least version 7.41.1.
-2. Update your tracing library to at least the minimum version needed to turn on code security vulnerability detection. For details, see [ASM capabilities support][4].
+2. Update your tracing library to at least the minimum version needed to turn on code security. For details, see [ASM capabilities support][4].
 3. Add the `DD_IAST_ENABLED=true` environment variable to your application configuration. For example, on Windows self-hosted, run the following PowerShell snippet as part of your application start-up script:
 
    ```sh

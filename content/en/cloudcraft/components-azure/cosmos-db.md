@@ -1,6 +1,5 @@
 ---
 title: "Cosmos DB Component"
-kind: documentation
 ---
 
 ## Overview

@@ -124,9 +124,10 @@ Ensure to leave `Require MFA` disabled. For more details, see the [How to use an
 
 3. In the [AWS integration tile][1], click **Add AWS Account**, and then select **Manually**.
 4. Select the **Access Keys (GovCloud or China\* Only)** tab.
-5. Enter your `Account ID`, `AWS Access Key` and `AWS Secret Key`. Only access and secret keys for GovCloud and China are accepted.
-6. Click **Save**.
-7. Wait up to 10 minutes for data to start being collected, and then view the out-of-the-box <a href="https://app.datadoghq.com/screen/integration/7/aws-overview" target="_blank">AWS Overview Dashboard</a> to see metrics sent by your AWS services and infrastructure.
+5. Click the **I confirm that the IAM User for the Datadog Integration has been added to the AWS Account** checkbox.
+6. Enter your `Account ID`, `AWS Access Key` and `AWS Secret Key`. Only access and secret keys for GovCloud and China are accepted.
+7. Click **Save**.
+8. Wait up to 10 minutes for data to start being collected, and then view the out-of-the-box <a href="https://app.datadoghq.com/screen/integration/7/aws-overview" target="_blank">AWS Overview Dashboard</a> to see metrics sent by your AWS services and infrastructure.
 
 \* _All use of Datadog Services in (or in connection with environments within) mainland China is subject to the disclaimer published in the [Restricted Service Locations][2] section on our website._
 

@@ -21,7 +21,7 @@ description: Learn how to create a Datadog Log integration.
 ---
 ## Overview
 
-This page walks Technology Partners through creating a log pipeline.
+This page walks Technology Partners through creating a log pipeline. A log pipeline is required if your integration is sending in logs. 
 
 ## Log integrations
 
@@ -99,12 +99,12 @@ To add a facet or measure:
 4. For a measure, to define the unit, click **Advanced options**. Select the unit based on what the attribute represents.
 5. Click **Add**.
 
-To easily navigate the facet list, facets are grouped together. For fields specific to the integration logs, create a single group with the same name as the `source` tag. 
+To help navigate the facet list, facets are grouped together. For fields specific to the integration logs, create a **single group with the same name** as the `source` tag. 
 
 1. In the log panel, click the Cog icon next to the attribute that you want in the new group.
 2. Select **Edit facet/measure for @attribute**. If there isn't a facet for the attribute yet, select **Create facet/measure for @attribute**.
 3. Click **Advanced options**.
-4. In the **Group** field, enter the name and a description of the new group, and select **New group**.
+4. In the **Group** field, enter the name of the group matching the source tag and a description of the new group, and select **New group**.
 5. Click **Update**.
 
 **Guidelines**
@@ -144,9 +144,10 @@ After you've downloaded these files, navigate to your [integration's pull reques
 
 Validations are run automatically in your pull request. 
 
-Two common validation errors are:
+Three common validation errors are:
 1. The `id` field in both YAML files: Ensure that the `id` field matches the `app_id` field in your integration's `manifest.json` file to connect your pipeline to your integration. 
 2. Not providing the result of running the raw logs you provided against your pipeline. If the resulting output from the validation is accurate, take that output and add it to the `result` field in the YAML file containing the raw example logs.
+3. If you send `service` as a parameter, instead of sending it in the log payload, you must include the `service` field below your log samples within the yaml file.
 
 
 Once validations pass, Datadog creates and deploys the new log integration assets. If you have any questions, add them as comments in your pull request. A Datadog team member will respond within 2-3 business days.

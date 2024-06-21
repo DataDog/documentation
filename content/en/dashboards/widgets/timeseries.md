@@ -1,6 +1,5 @@
 ---
 title: Timeseries Widget
-kind: documentation
 widget_type: timeseries
 description: "Display the evolution of one or more metrics, log events, indexed spans, or process metrics over time."
 aliases:
@@ -40,8 +39,8 @@ The timeseries visualization allows you to display the evolution of one or more 
 
 Graphs can be displayed as lines, areas, and bars. Line graphs contain additional parameters:
 
-| Parameter | Options               |
-|-----------|-----------------------|
+| Parameter | Options                  |
+|-----------|--------------------------|
 | Style     | Solid, dashed, or dotted |
 | Stroke    | Normal, thin, or thick   |
 
@@ -55,6 +54,10 @@ For all graph types, Datadog offers various color options to differentiate multi
 | Consistent | Using a set of 16 colors, applies a consistent color for each series of data across all widgets for each tag group. |
 
 For line graphs, different metrics can be assigned specific palettes by separating the queries in JSON. For more information, see the guide for [Selecting the right colors for your graphs][6].
+
+### Sorting
+
+Order the graph by **Tags** or by **Values** to sort timeseries legends and stacked graphs. This only sorts the graph visualization, and does not impact the query. Toggle the **Reverse** option to sort by reverse alphabetical order or by descending values. 
 
 ### Metric aliasing
 

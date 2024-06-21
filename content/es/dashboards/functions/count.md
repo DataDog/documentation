@@ -1,7 +1,6 @@
 ---
 aliases:
 - /es/graphing/functions/count/
-kind: documentación
 title: Conteo
 ---
 

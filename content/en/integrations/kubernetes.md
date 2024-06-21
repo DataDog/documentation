@@ -1,7 +1,7 @@
 ---
 integration_title: Kubernetes
 name: kubernetes
-kind: integration
+custom_kind: integration
 git_integration_title: kubernetes
 newhlevel: true
 updated_for_agent: 6.0

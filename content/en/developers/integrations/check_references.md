@@ -3,7 +3,7 @@ description: Learn about the various assets that need to be included when prepar
   a Datadog integration.
 further_reading:
 - link: https://github.com/DataDog/documentation/blob/master/CONTRIBUTING.md
-  tag: GitHub
+  tag: "Source Code"
   text: Contributing Guidelines for the Documentation Site
 - link: /developers/integrations/
   tag: Documentation

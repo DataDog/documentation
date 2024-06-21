@@ -6,7 +6,7 @@ further_reading:
   tag: "Documentation"
   text: "Adding metadata"
 - link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_definition_yaml"
-  tag: "Terraform"
+  tag: "External Site"
   text: "Create and manage service definitions with Terraform"
 - link: "/api/latest/service-definition/"
   tag: "API"

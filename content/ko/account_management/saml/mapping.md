@@ -3,7 +3,6 @@ further_reading:
 - link: /account_management/saml/
   tag: 설명서
   text: SAML을 이용한 Single Sign On
-kind: 설명서
 title: SAML 그룹 매핑
 ---
 

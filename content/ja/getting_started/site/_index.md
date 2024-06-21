@@ -41,7 +41,7 @@ Datadog の責任は以下の通りです。
 | US1     | `https://app.datadoghq.com` | `datadoghq.com`     | US       |
 | US3     | `https://us3.datadoghq.com` | `us3.datadoghq.com` | US       |
 | US5     | `https://us5.datadoghq.com` | `us5.datadoghq.com` | US       |
-| EU1     | `https://app.datadoghq.eu`  | `datadoghq.eu`      | EU       |
+| EU1     | `https://app.datadoghq.eu`  | `datadoghq.eu`      | EU (ドイツ) |
 | US1-FED | `https://app.ddog-gov.com`  | `ddog-gov.com`      | US       |
 | AP1     | `https://ap1.datadoghq.com` | `ap1.datadoghq.com` | 日本 |
 

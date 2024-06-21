@@ -1,13 +1,11 @@
 ---
 aliases:
 - /ko/security/application_security/getting_started/serverless
-code_lang: 서버리스
-code_lang_weight: 90
 further_reading:
 - link: /security/application_security/how-appsec-works/
   tag: 설명서
   text: 애플리케이션 보안 작동 방법
-- link: /security/default_rules/#cat-application-security
+- link: /security/default_rules/?category=cat-application-security
   tag: 설명서
   text: OOTB 애플리케이션 보안 관리 규칙
 - link: /security/application_security/troubleshooting
@@ -16,9 +14,10 @@ further_reading:
 - link: /security/application_security/threats/
   tag: 설명서
   text: 애플리케이션 위협 관리
-kind: 설명서
+- link: https://www.datadoghq.com/blog/datadog-security-google-cloud/
+  tag: 블로그
+  text: Datadog 보안이 Google Cloud 기능의 규정을 준수하고 위협으로부터 보호하도록 확장됨
 title: 서버리스에서 ASM 활성화
-type: multi-code-lang
 ---
 
 {{< partial name="security-platform/appsec-serverless.html" >}}</br>
@@ -33,7 +32,7 @@ AWS Lambda에 ASM을 구성하는 데에는 다음 요소가 포함됩니다.
 2. [Datadog CLI](https://docs.datadoghq.com/serverless/serverless_integrations/cli), [AWS CDK](https://github.com/DataDog/datadog-cdk-constructs), [Datadog Serverless Framework 플러그인][6]을 사용하거나 Datadog 추적 레이어를 수동으로 사용해 ASM 계측을 설정합니다.
 3. 애플리케이션에서 보안 신호를 트리거해 Datadog에서 결과 정보를 표시하는 것을 확인합니다.
 
-### 필수 구성 요소
+### 사전 필수 요건
 
 - [Serverless APM Tracing][apm-lambda-tracing-setup]은 Lambda 함수에 설치되어 Datadog로 트레이스를 바로 전송합니다.
   X-Ray 추적만으로는 ASM에 충분치 않기 때문에 APM Tracing을 활성화해야 합니다.
@@ -985,13 +984,11 @@ curl -s https://raw.githubusercontent.com/DataDog/datadog-aas-linux/v1.4.0/datad
 
 ## 위협 감지 테스트
 
-애플리케이션 보안 관리 위협 탐지 기능이 실제로 작동하는지 확인하려면 알려진 공격 패턴을 애플리케이션에 전송하세요. 예를 들어, [보안 스캐너 공격][5] 시도를 트리거하려면 다음과 같은 `acunetix-product` 값이 포함된 HTTP 헤더를 전송합니다:
+Application Security Management 보안 감지가 작동하는지 확인하려면 알려진 공격 패턴을 애플리케이션에 보내세요. 예를 들어 사용자 에이전트 헤더가 `dd-test-scanner-log`로 설정된 요청을 보내 [보안 스캐너 공격][6] 시도를 트리거할 수 있습니다.
    ```sh
-   curl -H 'My-ASM-Test-Header: acunetix-product' https://your-function-url/existing-route
+   curl -A 'dd-test-scanner-log' https://your-function-url/existing-route
    ```
 애플리케이션을 활성화 및 실행하고 몇 분 후 **위협 정보가 [애플리케이션 신호 탐색기][3]**에 표시됩니다.
-
-{{< img src="/security/security_monitoring/explorer/signal_panel_v2.png" alt="태그, 메트릭, 제안 단계, 위협과 관련된 공격자 IP 주소를 나타내는 Security Signal 상세 페이지." style="width:100%;" >}}
 
 ## 참고 자료
 

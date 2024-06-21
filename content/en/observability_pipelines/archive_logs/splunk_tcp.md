@@ -91,8 +91,6 @@ Enter the following information based on your selected logs destination.
 
 {{% observability_pipelines/processors/filter_syntax %}}
 
-{{< img src="observability_pipelines/processors/general_processors.png" alt="The log processors available" width="40%" >}}
-
 {{% observability_pipelines/processors/add_processors %}}
 
 {{< tabs >}}
@@ -119,6 +117,11 @@ Enter the following information based on your selected logs destination.
 {{% tab "Edit fields" %}}
 
 {{% observability_pipelines/processors/remap %}}
+
+{{% /tab %}}
+{{% tab "Sensitive Data Scanner" %}}
+
+{{% observability_pipelines/processors/sensitive_data_scanner %}}
 
 {{% /tab %}}
 {{< /tabs >}}

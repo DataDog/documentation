@@ -896,25 +896,25 @@ menu:
     parent: dev_tools_service_check
     url: api/v1/service-checks/
     weight: 603
-  - identifier: ide_integrations
+  - identifier: ide_plugins
     name: IDE 통합
     parent: dev_tools
-    url: developers/ide_integrations/
+    url: developers/ide_plugins/
     weight: 7
-  - identifier: ide_integrations_idea
+  - identifier: ide_plugins_idea
     name: JetBrains IDE
-    parent: ide_integrations
-    url: developers/ide_integrations/idea/
+    parent: ide_plugins
+    url: developers/ide_plugins/idea/
     weight: 701
-  - identifier: ide_integrations_vscode
+  - identifier: ide_plugins_vscode
     name: VS 코드
-    parent: ide_integrations
-    url: developers/ide_integrations/vscode/
+    parent: ide_plugins
+    url: developers/ide_plugins/vscode/
     weight: 702
-  - identifier: ide_integrations_visual_studio
+  - identifier: ide_plugins_visual_studio
     name: Visual Studio
-    parent: ide_integrations
-    url: developers/ide_integrations/visual_studio/
+    parent: ide_plugins
+    url: developers/ide_plugins/visual_studio/
     weight: 703
   - identifier: dev_community
     name: 커뮤니티

@@ -9,11 +9,6 @@ further_reading:
 
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
-{{< /site-region >}}
-
-
 Database Monitoring provides deep visibility into your MySQL databases by exposing query metrics, query samples, explain plans, connection data, system metrics, and telemetry for the InnoDB storage engine.
 
 The Agent collects telemetry directly from the database by logging in as a read-only user. Do the following setup to enable Database Monitoring with your MySQL database:
@@ -50,7 +45,7 @@ Configure the following [Database Flags][3] and then **restart the server** for 
 {{% tab "MySQL 5.6" %}}
 | Parameter | Value | Description |
 | --- | --- | --- |
-| `performance_schema` | `on` | Required. Enables the [Performance Schema][1]. |
+| `performance_schema` | `on` | Required. Enables the [Performance Schema][9]. |
 | `max_digest_length` | `4096` | Required for collection of larger queries. Increases the size of SQL digest text in `events_statements_*` tables. If left at the default value then queries longer than `1024` characters will not be collected. |
 | <code style="word-break:break-all;">`performance_schema_max_digest_length`</code> | `4096` | Must match `max_digest_length`. |
 
@@ -60,7 +55,7 @@ Configure the following [Database Flags][3] and then **restart the server** for 
 {{% tab "MySQL ≥ 5.7" %}}
 | Parameter | Value | Description |
 | --- | --- | --- |
-| `performance_schema` | `on` | Required. Enables the [Performance Schema][1]. |
+| `performance_schema` | `on` | Required. Enables the [Performance Schema][9]. |
 | `max_digest_length` | `4096` | Required for collection of larger queries. Increases the size of SQL digest text in `events_statements_*` tables. If left at the default value then queries longer than `1024` characters will not be collected. |
 | <code style="word-break:break-all;">`performance_schema_max_digest_length`</code> | `4096` | Must match `max_digest_length`. |
 | <code style="word-break:break-all;">`performance_schema_max_sql_text_length`</code> | `4096` | Must match `max_digest_length`. |
@@ -389,7 +384,7 @@ If you have installed and configured the integrations and Agent as described and
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: https://cloud.google.com/sql/docs/mysql/flags#tips-performance-schema
+[1]: /database_monitoring/agent_integration_overhead/?tab=mysql
 [2]: /database_monitoring/data_collected/#sensitive-information
 [3]: https://cloud.google.com/sql/docs/mysql/flags
 [4]: https://app.datadoghq.com/account/settings/agent/latest
@@ -397,3 +392,4 @@ If you have installed and configured the integrations and Agent as described and
 [6]: https://app.datadoghq.com/databases
 [7]: /integrations/google_cloudsql
 [8]: /database_monitoring/troubleshooting/?tab=mysql
+[9]: https://cloud.google.com/sql/docs/mysql/flags#tips-performance-schema

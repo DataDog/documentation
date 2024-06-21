@@ -8,7 +8,7 @@ aliases:
 - /real_user_monitoring/android/data_collected/
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-android
-  tag: GitHub
+  tag: "Source Code"
   text: Source code for dd-sdk-android
 - link: /real_user_monitoring
   tag: Documentation

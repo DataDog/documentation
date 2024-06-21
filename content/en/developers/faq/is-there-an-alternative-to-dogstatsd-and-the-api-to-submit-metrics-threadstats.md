@@ -3,10 +3,10 @@ title: Submit Metrics to Datadog with Threadstats
 kind: faq
 further_reading:
 - link: "https://github.com/DataDog/datadogpy/blob/master/datadog/threadstats/"
-  tag: "Github"
+  tag: "Source Code"
   text: "Threadstats Source code"
 - link: "http://datadogpy.readthedocs.org/en/latest/#datadog-threadstats-module"
-  tag: "Read The Doc"
+  tag: "External Site"
   text: "Threadstats Documentation"
 ---
 
