@@ -17,7 +17,7 @@ With Risk Based Entity Insights, you can:
 - Triage relevant items in bulk.
 - Take mitigation steps such as creating a global suppression or creating a case for an entity.
 
-## Explore Entities
+## Explore entities
 
 ### Query and filter entities
 
