@@ -5228,6 +5228,16 @@ menu:
       parent: continuous_testing_cicd_integrations
       identifier: continuous_testing_cicd_integrations_jenkins
       weight: 206
+    - name: Upload Application
+      url: /continuous_testing/cicd_integrations/bitrise_upload
+      parent: continuous_testing_cicd_integrations
+      identifier: continuous_testing_cicd_integrations_bitrise_upload
+      weight: 207
+    - name: Run Tests
+      url: /continuous_testing/cicd_integrations/bitrise_run
+      parent: continuous_testing_cicd_integrations
+      identifier: continuous_testing_cicd_integrations_bitrise_run
+      weight: 208
     - name: Settings
       url: /continuous_testing/settings
       parent: continuous_testing
