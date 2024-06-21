@@ -43,9 +43,9 @@ tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Category::Azure
-  - "\b카테고리::클라우드"
+  - Category::Cloud
   - Category::Log Collection
-  - 카테고리::보안
+  - Category::Security
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
