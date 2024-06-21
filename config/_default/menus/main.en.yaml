@@ -4588,6 +4588,11 @@ menu:
       parent: cloud_siem
       identifier: cloud_siem_investigator
       weight: 6
+    - name: Historical Jobs
+      url: security/cloud_siem/historical_jobs
+      parent: cloud_siem
+      identifier: cloud_siem_log_historical_jobs
+      weight: 7
     - name: Guides
       url: security/cloud_siem/guide/
       parent: cloud_siem
