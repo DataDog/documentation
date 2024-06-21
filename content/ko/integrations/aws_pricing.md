@@ -23,7 +23,7 @@ author:
 categories:
 - aws
 - cloud
-- 비용 관리
+- cost management
 custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/aws_pricing/README.md
@@ -82,7 +82,7 @@ Agent v7.21+ / v6.21+의 경우 아래 지침에 따라 호스트에 AWS Pricing
 
 2. 통합을 코어 [통합][4]과 유사하게 설정하세요.
 
-### 설정
+### 구성
 
 1. AWS Pricing 데이터 수집을 시작하려면 Agent 구성 디렉터리 루트에 있는 `conf.d/` 폴더에서 `aws_pricing.d/conf.yaml` 파일을 편집합니다. 사용 가능한 모든 구성 옵션은 샘플 [aws_pricing.d/conf.yaml][5]을 참조하세요.
 
