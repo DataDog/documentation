@@ -1,6 +1,8 @@
 ---
 title: Trace an LLM Application
 kind: guide
+aliases:
+    - /tracing/llm_observability/trace_an_llm_application
 ---
 {{% site-region region="gov" %}}
 <div class="alert alert-warning">
