@@ -46,7 +46,8 @@ Reachability
 Latency 
 : How long the `traceroute` took to get from a source to its destination.
 
-**Note**: Hop to hop latency may show `N/A` for hops that were incomplete.
+**Note**: Hop-to-hop latency may show `N/A` for hops that were incomplete.
+
 ## Health bar
 
 Drag the latency reachability health bar to observe a snapshot of the end-to-end latency and end-to-end packet loss for a specific time interval along the path.

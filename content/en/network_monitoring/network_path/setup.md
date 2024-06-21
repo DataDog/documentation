@@ -28,15 +28,15 @@ Setting up Network Path involves configuring your Linux environment to monitor a
 Agent version `7.55` or higher is required.
 
 
-2. Enable [NPM][1].
-3. Enable the `system-probe` traceroute module in `/etc/datadog-agent/system-probe.yaml` by adding the following:
+1. Enable [NPM][1].
+2. Enable the `system-probe` traceroute module in `/etc/datadog-agent/system-probe.yaml` by adding the following:
 
    ```
    traceroute:
      enabled: true
    ```
 
-4.  Enable `network_path` to monitor NPM connections by creating or editing the `/etc/datadog-agent/datadog.yaml` file: 
+3.  Enable `network_path` to monitor NPM connections by creating or editing the `/etc/datadog-agent/datadog.yaml` file: 
 
     ```
     network_path:
@@ -64,7 +64,7 @@ Agent version `7.55` or higher is required.
         workers: 10
     ```
 
-5. Restart the Agent after making these configuration changes to start seeing network paths.
+4. Restart the Agent after making these configuration changes to start seeing network paths.
 
 **Note**: Network path is only supported for Linux environments. 
 
