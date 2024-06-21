@@ -2,7 +2,7 @@
 title: Risk Based Entity Insights for AWS
 ---
 
-{{< callout url=""https://datadoghq.com/private-beta/risk-based-entity-insights" header="Join the Beta!">}}
+{{< callout url="https://datadoghq.com/private-beta/risk-based-entity-insights" header="Join the Beta!">}}
 Risk Based Entity Insights is in private beta.
 {{< /callout >}}
 
