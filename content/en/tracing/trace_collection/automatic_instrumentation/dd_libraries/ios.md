@@ -294,7 +294,7 @@ DDDatadog.verbosityLevel = DDSDKVerbosityLevelDebug;
 {{% /tab %}}
 {{< /tabs >}}
 
-3. Datadog tracer implements both [Open Tracing][8] and [Open Telemetry][12] standards. Configure and enable the shared an Open Tracing `Tracer` as `Tracer.shared()`:
+3. Datadog tracer implements both [OpenTracing][8] and [OpenTelemetry][12] standards. Configure and enable the shared an OpenTracing `Tracer` as `Tracer.shared()`:
 
 {{< tabs >}}
 {{% tab "Swift" %}}
