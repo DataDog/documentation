@@ -1,16 +1,16 @@
 ---
-title: Cloud SIEM AWS Entities and Risk Scoring
+title: Cloud SIEM Risk Based Entity Insights
 ---
 
-{{< callout url="https://google.com" header="Join the Beta!">}}
-Cloud SIEM AWS Entities is in private beta.
+{{< callout url=""https://datadoghq.com/private-beta/risk-based-entity-insights" header="Join the Beta!">}}
+Risk Based Entity Insights is in private beta.
 {{< /callout >}}
 
 ## Overview
 
-[Cloud SIEM AWS Entities][4] consolidates multiple data sources, such as SIEM threats and CSM insights, into a profile representing a single security entity, such as an IAM user.
+[Cloud SIEM's Risk Based Entity Insights][4] consolidates multiple data sources, such as SIEM threats and CSM insights, into a profile representing a single security entity, such as an IAM user.
 
-With Cloud SIEM AWS Entities, you can:
+With Risk Based Entity Insights, you can:
 
 - Explore entities, filtering them by attributes such as [risk score](#risk-scoring) or entity type.
 - View all data relevant to an entity, such as signals, misconfigurations, and identity risks.
