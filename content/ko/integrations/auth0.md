@@ -39,7 +39,7 @@ name: auth0
 public_title: Auth0
 short_description: Auth0 이벤트를 확인하고 분석하세요.
 supported_os:
-- 리눅스
+- linux
 - windows
 - macos
 tile:
@@ -47,7 +47,7 @@ tile:
   classifier_tags:
   - Category::Incidents
   - Category::Log Collection
-  - 카테고리::보안
+  - Category::Security
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
