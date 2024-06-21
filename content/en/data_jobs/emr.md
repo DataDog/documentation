@@ -9,6 +9,10 @@ further_reading:
 
 [Data Jobs Monitoring][9] gives visibility into the performance and reliability of Apache Spark applications on Amazon EMR.
 
+## Requirements
+
+[Amazon EMR Release 6.6.0][10] or later is required.
+
 ## Setup
 
 Follow these steps to enable Data Jobs Monitoring for Amazon EMR. [Amazon EMR Release 6.6.0][10] and above are supported.
