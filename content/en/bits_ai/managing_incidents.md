@@ -58,10 +58,10 @@ Without going into the Datadog web app, you can ask Bits AI in Slack to:
 
 To generate an AI-assisted postmortem draft:
 
-1. Navigate to the incident which you’d like to generate a postmortem for in Datadog. 
+1. Navigate to the incident which you'd like to generate a postmortem for in Datadog. 
 2. Ensure that the incident is resolved and that its timeline has ten or more messages.
 3. Click the **Generate Postmortem** button.
-4. Select the either the out-of-the-box **General incident with AI content** template or a [custom template](#customize-postmortem-templates-with-ai-incident-variables) that you’ve created. 
+4. Select the either the out-of-the-box **General incident with AI content** template or a [custom template](#customize-postmortem-templates-with-ai-incident-variables) that you've created. 
 6. Allow up to one minute for the postmortem to be generated. Do not close the tab during this time.
 7. Review the generated postmortem. AI-generated postmortems serve as a first draft to help your incident responders get started, and they require human revisions.
 
@@ -69,7 +69,7 @@ To generate an AI-assisted postmortem draft:
 
 1. Navigate to [**Service Mgmt > Incidents > Settings > Postmortems**][1].
 2. Click **New Postmortem Template** and customize your template using the provided incident variables.  
-    - Variables prefixed by `ai` yield AI-generated content instead of fixed values. We offer six `ai` variables: `{{incident.ai_action_items}}`, `{{incident.ai_customer_impact}}`, `{{incident.ai_key_timeline}}`, `{{incident.ai_lessons_learned}}`, `{{incident.ai_summary}}`, and `{{incident.ai_system_overview}}`. 
+    - Variables prefixed by `ai` yield AI-generated content instead of fixed values. There are six `ai` variables: `{{incident.ai_action_items}}`, `{{incident.ai_customer_impact}}`, `{{incident.ai_key_timeline}}`, `{{incident.ai_lessons_learned}}`, `{{incident.ai_summary}}`, and `{{incident.ai_system_overview}}`. 
     - You must use a heading before each variable.
 3. Save your template to make it available as a template option during postmortem generation.
 
