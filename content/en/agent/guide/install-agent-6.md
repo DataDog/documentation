@@ -252,7 +252,7 @@ The one-step command installs the YUM packages for the Datadog Agent and prompts
 
 ### Multi-step install
 
-1. On an x86_64 host, set up the Datadog YUM repo by creating `/etc/yum.repos.d/datadog.repo` with the following contents:
+1. On an x86_64 host, set up the Datadog YUM repo by creating `/etc/yum.repos.d/datadog.repo` with the following configuration:
    ```conf
    [datadog]
    name=Datadog, Inc.
@@ -266,7 +266,7 @@ The one-step command installs the YUM packages for the Datadog Agent and prompts
           https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
    ```
 
-1. On an arm64 host, set up the Datadog YUM repo by creating `/etc/yum.repos.d/datadog.repo` with the following contents:
+1. On an arm64 host, set up the Datadog YUM repo by creating `/etc/yum.repos.d/datadog.repo` with the following configuration:
    ```conf
    [datadog]
    name=Datadog, Inc.
@@ -280,76 +280,201 @@ The one-step command installs the YUM packages for the Datadog Agent and prompts
           https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
    ```
 
+1. If upgrading from Agent 5 or 6, delete the obsolete RPM GPG key:
+   ```shell
+   sudo sh -c 'if rpm -q gpg-pubkey-4172a230-55dd14f6 >/dev/null; then rpm --erase gpg-pubkey-4172a230-55dd14f6; fi'
+   ```
+
 1. Update your local yum repo and install the Agent:
    ```shell
    sudo yum makecache
    sudo yum install datadog-agent
    ```
-1. If upgrading from Agent 5 or 6, delete the obsolete RPM GPG key:
+
+1. Optionally, if upgrading from Agent 5.17 or higher, import your existing Agent 5 configuration:
    ```shell
-   sudo yum makecache
-   sudo yum install datadog-agent
-   ```
-1. Copy the example config into place. Replace `MY_API_KEY` with your Datadog API key:
-   ```shell
-   sudo sh -c "sed 's/api_key:.*/api_key:MY_API_KEY /' /etc/dd-agent/datadog.conf.example > /etc/dd-agent/datadog.conf"
+   sudo -u dd-agent -- datadog-agent import /etc/dd-agent /etc/datadog-agent
    ```
 
-1. Restart the Agent:
+1. If you're not upgrading and do not want to use an old configuration, copy the example config into place and install the Agent. Replace `MY_API_KEY` with your Datadog API key:
    ```shell
-   sudo /etc/init.d/datadog-agent restart
+   sudo sh -c "sed 's/api_key:.*/api_key: MY_API_KEY/' /etc/datadog-agent/datadog.yaml.example > /etc/datadog-agent/datadog.yaml"
    ```
 
-[101]: https://github.com/DataDog/agent-linux-install-script/blob/main/README.md#agent-configuration-options   
+1. Configure the Datadog region:
+   ```shell
+   sudo sh -c "sed -i 's/# site:.*/site: datad0g.com/' /etc/datadog-agent/datadog.yaml"
+   ```
+1. Ensure the Agent user's permissions are correct::
+   ```shell
+   sudo sh -c "chown dd-agent:dd-agent /etc/datadog-agent/datadog.yaml && chmod 640 /etc/datadog-agent/datadog.yaml"
+   ```
+1. Start the Agent: 
+   - Amazon Linux 2.0:
+     ```shell
+     sudo systemctl restart datadog-agent.service
+     ```
+   - Amazon Linux 1.0:
+     ```shell
+     sudo initctl start datadog-agent
+     ```
+
+[101]: https://github.com/DataDog/agent-linux-install-script/blob/main/README.md#agent-configuration-options
 {{% /tab %}}
 
-{{% tab "CentOS and Red Hat" %}}
+{{% tab "CentOS and RedHat" %}}
 ### One-step install
 
-The one-step command installs the YUM packages for the Datadog Agent and prompts you for your password. If the Agent is not already installed on your machine and you don't want it to start automatically after the installation, prepend `DD_INSTALL_ONLY=true` to the command before running it.
+The one-step command installs the YUM packages for the Datadog Agent and prompts you for your password.
+- If the Agent is not already installed on your machine and you don't want it to start automatically after the installation, prepend `DD_INSTALL_ONLY=true` to the command before running it.
+- If you have an existing Agent configuration file, existing values are retained during the update.
+- You can configure some of the Agent options during the initial install process. For more information, check the [install_script configuration options][101].
 
 Run the following command, replacing `MY_API_KEY` with your Datadog API key:
 ```shell
-DD_API_KEY=MY_API_KEY bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/dd-agent/master/packaging/datadog-agent/source/install_agent.sh)"
+DD_UPGRADE=true DD_SITE="datad0g.com" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent6.sh)"
 ```
 
 ### Multi-step install
 
-1. Set up the Datadog YUM repo by creating `/etc/yum.repos.d/datadog.repo` with the following contents:
+1. Set up the Datadog YUM repo by creating `/etc/yum.repos.d/datadog.repo` with the following configuration:
+   ```conf
+   [datadog]
+   name=Datadog, Inc.
+   baseurl=https://yum.datadoghq.com/rpm/x86_64/
+   enabled=1
+   gpgcheck=0
+   repo_gpgcheck=1
+   gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
+          https://keys.datadoghq.com/DATADOG_RPM_KEY_B01082D3.public
+          https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
+          https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
+   ```
+
+   **Note**: The `repo_gpgcheck=0` option is a workaround for [a bug in DNF][102].
+
+1. If you're upgrading from Agent 5 or a previous version of Agent 6, delete the obsolete RPM GPG key:
+   ```shell
+   sudo sh -c 'if rpm -q gpg-pubkey-4172a230-55dd14f6 >/dev/null; then rpm --erase gpg-pubkey-4172a230-55dd14f6; fi'
+   ```
+
+1. Update your local yum repo and install the Agent:
+   ```shell
+   sudo yum makecache
+   sudo yum remove datadog-agent-base
+   sudo yum install datadog-agent
+   ```
+
+1. Optionally, if upgrading from Agent 5.17 or higher, import your existing Agent 5 configuration:
+   ```shell
+   sudo -u dd-agent -- datadog-agent import /etc/dd-agent /etc/datadog-agent
+   ```
+
+1. If you're not upgrading and do not want to use an old configuration, copy the example config into place and install the Agent. Replace `MY_API_KEY` with your Datadog API key:
+   ```shell
+   sudo sh -c "sudo sh -c "sed 's/api_key:.*/api_key: .*/api_key: MY_API_KEY/' /etc/datadog-agent/datadog.yaml.example > /etc/datadog-agent/datadog.yaml"
+   ```
+
+1. Configure the Datadog region:
+   ```shell
+   sudo sh -c "sed -i 's/# site:.*/site: datad0g.com/' /etc/datadog-agent/datadog.yaml"
+   ```
+
+1. Ensure the Agent user's permissions are correct::
+   ```shell
+   sudo sh -c "chown dd-agent:dd-agent /etc/datadog-agent/datadog.yaml && chmod 640 /etc/datadog-agent/datadog.yaml"
+   ```
+
+1. Start the Agent: 
+   - Centos or Red Hat 7 and higher:
+     ```shell
+     sudo systemctl restart datadog-agent.service
+     ```
+   - Centos or Red Hat 6:
+     ```shell
+     sudo initctl start datadog-agent
+     ```
+
+[101]: https://github.com/DataDog/agent-linux-install-script/blob/main/README.md#agent-configuration-options
+[102]: https://bugzilla.redhat.com/show_bug.cgi?id=1792506
+{{% /tab %}}
+
+{{% tab "Alma, Oracle, and Rocky" %}}
+### One-step install
+
+The one-step command installs the YUM packages for the Datadog Agent and prompts you for your password.
+- If the Agent is not already installed on your machine and you don't want it to start automatically after the installation, prepend `DD_INSTALL_ONLY=true` to the command before running it.
+- If you have an existing Agent configuration file, existing values are retained during the update.
+- You can configure some of the Agent options during the initial install process. For more information, check the [install_script configuration options][101].
+
+Run the following command, replacing `MY_API_KEY` with your Datadog API key:
+```shell
+DD_UPGRADE=true DD_SITE="datad0g.com" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent6.sh)"
+```
+
+### Multi-step install
+
+1. Set up the Datadog YUM repo by creating `/etc/yum.repos.d/datadog.repo` with the following configuration:
    ```conf
    [datadog]
    name=Datadog, Inc.
    baseurl=https://yum.datadoghq.com/rpm/x86_64/
    enabled=1
    gpgcheck=1
+   repo_gpgcheck=1
    gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
           https://keys.datadoghq.com/DATADOG_RPM_KEY_B01082D3.public
           https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
+          https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
    ```
 
-   **Note**: On i386/i686 architecture, replace "x86_64" with "i386".
+1. If you're upgrading from Agent 5 or a previous version of Agent 6, delete the obsolete RPM GPG key:
+   ```shell
+   sudo sh -c 'if rpm -q gpg-pubkey-4172a230-55dd14f6 >/dev/null; then rpm --erase gpg-pubkey-4172a230-55dd14f6; fi'
+   ```
 
-1. Update your local YUM repo and install the Agent:
+1. Update your local yum repo and install the Agent:
    ```shell
    sudo yum makecache
-   sudo yum remove datadog-agent-base 
+   sudo yum remove datadog-agent-base
    sudo yum install datadog-agent
    ```
-1. Copy the example config into place. Replace `MY_API_KEY` with your Datadog API key:
+
+1. Optionally, if upgrading from Agent 5.17 or higher, import your existing Agent 5 configuration:
    ```shell
-   sudo sh -c "sed 's/api_key:.*/api_key:MY_API_KEY /' /etc/dd-agent/datadog.conf.example > /etc/dd-agent/datadog.conf"
+   sudo -u dd-agent -- datadog-agent import /etc/dd-agent /etc/datadog-agent
    ```
 
-1. Restart the Agent:
+1. If you're not upgrading and do not want to use an old configuration, copy the example config into place and install the Agent. Replace `MY_API_KEY` with your Datadog API key:
    ```shell
-   sudo /etc/init.d/datadog-agent restart
+   sudo sh -c "sudo sh -c "sed 's/api_key:.*/api_key: .*/api_key: MY_API_KEY/' /etc/datadog-agent/datadog.yaml.example > /etc/datadog-agent/datadog.yaml"
    ```
+
+1. Configure the Datadog region:
+   ```shell
+   sudo sh -c "sed -i 's/# site:.*/site: datad0g.com/' /etc/datadog-agent/datadog.yaml"
+   ```
+
+1. Ensure the Agent user's permissions are correct::
+   ```shell
+   sudo sh -c "chown dd-agent:dd-agent /etc/datadog-agent/datadog.yaml && chmod 640 /etc/datadog-agent/datadog.yaml"
+   ```
+   
+1. Restart the Agent: 
+   ```shell
+   sudo systemctl restart datadog-agent.service
+   ```
+
+[101]: https://github.com/DataDog/agent-linux-install-script/blob/main/README.md#agent-configuration-options
 {{% /tab %}}
 
 {{% tab "Fedora" %}}
 ### One-step install
 
-The one-step command installs the YUM packages for the Datadog Agent and prompts you for your password. If the Agent is not already installed on your machine and you don't want it to start automatically after the installation, prepend `DD_INSTALL_ONLY=true` to the command before running it.
+The one-step command installs the YUM packages for the Datadog Agent and prompts you for your password.
+- If the Agent is not already installed on your machine and you don't want it to start automatically after the installation, prepend `DD_INSTALL_ONLY=true` to the command before running it.
+- If you have an existing Agent configuration file, existing values are retained during the update.
+- You can configure some of the Agent options during the initial install process. For more information, check the [install_script configuration options][101].
 
 Run the following command, replacing `MY_API_KEY` with your Datadog API key:
 ```shell
@@ -358,75 +483,129 @@ DD_API_KEY=MY_API_KEY bash -c "$(curl -L https://raw.githubusercontent.com/DataD
 
 ### Multi-step install
 
-1. Set up the Datadog YUM repo by creating `/etc/yum.repos.d/datadog.repo` with the following contents:
+1. Set up the Datadog YUM repo by creating `/etc/yum.repos.d/datadog.repo` with the following configuration:
    ```conf
    [datadog]
    name=Datadog, Inc.
    baseurl=https://yum.datadoghq.com/rpm/x86_64/
    enabled=1
    gpgcheck=1
+   repo_gpgcheck=1
    gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
           https://keys.datadoghq.com/DATADOG_RPM_KEY_B01082D3.public
           https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
+          https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
    ```
 
-   **Note**: On i386/i686 architecture, replace "x86_64" with "i386".
+1. If you're upgrading from Agent 5 or a previous version of Agent 6, delete the obsolete RPM GPG key:
+   ```shell
+   sudo sh -c 'if rpm -q gpg-pubkey-4172a230-55dd14f6 >/dev/null; then rpm --erase gpg-pubkey-4172a230-55dd14f6; fi'
+   ```
 
-1. Update your local YUM repo and install the Agent:
+1. Update your local yum repo and install the Agent:
    ```shell
    sudo yum makecache
    sudo yum install datadog-agent
    ```
-1. Copy the example config into place. Replace `MY_API_KEY` with your Datadog API key:
+
+1. Optionally, if upgrading from Agent 5.17 or higher, import your existing Agent 5 configuration:
    ```shell
-   sudo sh -c "sed 's/api_key:.*/api_key:MY_API_KEY /' /etc/dd-agent/datadog.conf.example > /etc/dd-agent/datadog.conf"
+   sudo -u dd-agent -- datadog-agent import /etc/dd-agent /etc/datadog-agent
    ```
 
-1. Restart the Agent:
+1. If you're not upgrading and do not want to use an old configuration, copy the example config into place and install the Agent. Replace `MY_API_KEY` with your Datadog API key:
    ```shell
-   sudo /etc/init.d/datadog-agent restart
+   sudo sh -c "sudo sh -c "sed 's/api_key:.*/api_key: .*/api_key: MY_API_KEY/' /etc/datadog-agent/datadog.yaml.example > /etc/datadog-agent/datadog.yaml"
    ```
+
+1. Configure the Datadog region:
+   ```shell
+   sudo sh -c "sed -i 's/# site:.*/site: datad0g.com/' /etc/datadog-agent/datadog.yaml"
+   ```
+
+1. Ensure the Agent user's permissions are correct::
+   ```shell
+   sudo sh -c "chown dd-agent:dd-agent /etc/datadog-agent/datadog.yaml && chmod 640 /etc/datadog-agent/datadog.yaml"
+   ```
+   
+1. Restart the Agent: 
+   ```shell
+   sudo systemctl restart datadog-agent.service
+   ```
+
+[101]: https://github.com/DataDog/agent-linux-install-script/blob/main/README.md#agent-configuration-options
 {{% /tab %}}
 
 {{% tab "Suse" %}}
 ### One-step install
 
-The one-step command installs the YUM packages for the Datadog Agent and prompts you for your password. If the Agent is not already installed on your machine and you don't want it to start automatically after the installation, prepend `DD_INSTALL_ONLY=true` to the command before running it.
+The one-step command installs the YUM packages for the Datadog Agent and prompts you for your password.
+- If the Agent is not already installed on your machine and you don't want it to start automatically after the installation, prepend `DD_INSTALL_ONLY=true` to the command before running it.
+- If you have an existing Agent configuration file, existing values are retained during the update.
+- You can configure some of the Agent options during the initial install process. For more information, check the [install_script configuration options][101].
 
 Run the following command, replacing `MY_API_KEY` with your Datadog API key:
 ```shell
-DD_API_KEY=MY_API_KEY bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/dd-agent/master/packaging/datadog-agent/source/install_agent.sh)"
+DD_API_KEY=MY_API_KEY DD_SITE="datad0g.com" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent6.sh)"
 ```
 
 ### Multi-step install
 
-1. Set up the Datadog YUM repo by creating `/etc/yum.repos.d/datadog.repo` with the following contents:
+1. Set up the Datadog YUM repo by creating `/etc/zypp/repos.d/datadog.repo` with the following configuration:
    ```conf
    [datadog]
    name=Datadog, Inc.
+   baseurl=hhttps://yum.datadoghq.com/suse/stable/6/x86_64
    enabled=1
-   baseurl=https://yum.datadoghq.com/suse/rpm/x86_64
-   type=rpm-md
    gpgcheck=1
-   repo_gpgcheck=0
-   gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_B01082D3.public
-   gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
+   repo_gpgcheck=1
+   gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
+          https://keys.datadoghq.com/DATADOG_RPM_KEY_B01082D3.public
+          https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
+          https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
+   ```
+
+1. If you're upgrading from Agent 5 or a previous version of Agent 6, delete the obsolete RPM GPG key:
+   ```shell
+   sudo sh -c 'if rpm -q gpg-pubkey-4172a230-55dd14f6 >/dev/null; then rpm --erase gpg-pubkey-4172a230-55dd14f6; fi'
    ```
 
 1. Update your local zypper repo and install the Agent:
    ```shell
    sudo zypper refresh
+   sudo rpm --import https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
+   sudo rpm --import https://keys.datadoghq.com/DATADOG_RPM_KEY_B01082D3.public
+   sudo rpm --import https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
+   sudo rpm --import https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
    sudo zypper install datadog-agent
    ```
-1. Copy the example config into place. Replace `MY_API_KEY` with your Datadog API key:
+
+1. Optionally, if upgrading from Agent 5.17 or higher, import your existing Agent 5 configuration:
    ```shell
-   sudo sh -c "sed 's/api_key:.*/api_key: MY_API_KEY/' /etc/dd-agent/datadog.conf.example > /etc/dd-agent/datadog.conf"
+   sudo -u dd-agent -- datadog-agent import /etc/dd-agent /etc/datadog-agent
    ```
 
-1. Restart the Agent:
+1. If you're not upgrading and do not want to use an old configuration, copy the example config into place and install the Agent. Replace `MY_API_KEY` with your Datadog API key:
    ```shell
-   sudo /etc/init.d/datadog-agent restart
+   sudo sh -c "sudo sh -c "sed 's/api_key:.*/api_key: .*/api_key: MY_API_KEY/' /etc/datadog-agent/datadog.yaml.example > /etc/datadog-agent/datadog.yaml"
    ```
+
+1. Configure the Datadog region:
+   ```shell
+   sudo sh -c "sed -i 's/# site:.*/site: datad0g.com/' /etc/datadog-agent/datadog.yaml"
+   ```
+
+1. Ensure the Agent user's permissions are correct::
+   ```shell
+   sudo sh -c "chown dd-agent:dd-agent /etc/datadog-agent/datadog.yaml && chmod 640 /etc/datadog-agent/datadog.yaml"
+   ```
+   
+1. Restart the Agent: 
+   ```shell
+   sudo systemctl restart datadog-agent.service
+   ```
+
+[101]: https://github.com/DataDog/agent-linux-install-script/blob/main/README.md#agent-configuration-options
 {{% /tab %}}
 
 {{% tab "AIX" %}}
@@ -436,48 +615,59 @@ The one-step command installs the latest BFF package for the Datadog Agent and p
 
 Run the following command, replacing `MY_API_KEY` with your Datadog API key:
 ```shell
-DD_API_KEY=MY_API_KEY bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/dd-agent/master/packaging/datadog-agent/source/install_agent.sh)"
+DD_API_KEY=MY_API_KEY DD_SITE="datad0g.com" ksh -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-unix-agent/master/scripts/install_script.sh)"
 ```
 
 ### Upgrade from a previous installation
 
 To install the Agent while keeping your existing configuration, run the following command:
 ```shell
-DD_UPGRADE=true ksh -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-unix-agent/master/scripts/install_script.sh)"
+DD_UPGRADE=true DD_SITE="datad0g.com" ksh -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-unix-agent/master/scripts/install_script.sh)"
 ```
 
-For a full list of the available installation script environment variables, see [Basic Agent Usage for AIX][1].
+For a full list of the available installation script environment variables, see [Basic Agent Usage for AIX][101].
 
 ### Multi-step install
 
-1. Download the preferred BFF from the [datadog-unix-agent][2] repo releases:
+1. Download the preferred BFF from the [datadog-unix-agent][102] repo releases.
+
 1. Install the artifact as root with `installp`:
    ```shell
    installp -aXYgd datadog-unix-agent-latest.powerpc.aix..bff datadog-unix-agent
    ```
+
 1. If you don't have an existing configuration file, copy the example config into place. Replace `MY_API_KEY` with your Datadog API key:
    ```shell
    sudo sh -c "sed 's/api_key:.*/api_key: MY_API_KEY/' /etc/datadog-agent/datadog.yaml.example > /etc/datadog-agent/datadog.yaml"
    ```
-1. Ensure that the Datadog agent has the correct permissions:
+
+1. Configure the Datadog region:
+   ```shell
+   sudo sh -c "sed \'s/# site:.*/site: datad0g.com/\' /etc/datadog-agent/datadog.yaml > /etc/datadog-agent/datadog.yaml.new && mv /etc/datadog-agent/datadog.yaml.new /etc/datadog-agent/datadog.yaml"
+   ```
+
+1. Ensure that the Datadog Agent has the correct permissions:
    ```shell
    sudo sh -c "chown dd-agent:dd-agent /etc/datadog-agent/datadog.yaml && chmod 660 /etc/datadog-agent/datadog.yaml"
    ```
+
 1. Stop the Agent service:
    ```shell
    sudo stopsrc -s datadog-agent
    ```
+
 1. Verify the Agent service has stopped:
    ```
    sudo lssrc -s datadog-agent
    ```
+
 1. Restart the Agent service:
    ```shell
    sudo startsrc -s datadog-agent
    ```
 
-[1]: /agent/basic_agent_usage/aix/#installation
-[2]: https://github.com/DataDog/datadog-unix-agent/releases
+[101]: /agent/basic_agent_usage/aix/#installation
+[102]: https://github.com/DataDog/datadog-unix-agent/releases
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -485,131 +675,8 @@ For a full list of the available installation script environment variables, see 
 ## Cloud and containers
 
 {{< tabs >}}
+
 {{% tab "Kubernetes" %}}
-## Install the Agent
-### Install with DaemonSets
-
-If you're running Kubernetes >= 1.1.0, you can take advantage of [DaemonSets][1] to automatically deploy the Datadog Agent on all your nodes
-
-1. Create a secret that contains your API key. This secret is used in the manifest to deploy the Datadog Agent. Replace `MY_API_KEY` with your Datadog API key:
-   ```shell
-   kubectl create secret generic datadog-secret --from-literal api-key =" MY_API_KEY"
-   ```
-
-1. Create the following manifest named `dd-agent.yaml`:
-
-   ```yaml
-   apiVersion: extensions/v1beta1
-   kind: DaemonSet
-   metadata:
-   name: dd-agent
-   spec:
-   template:
-      metadata:
-         labels:
-         app: dd-agent
-         name: dd-agent
-      spec:
-         containers:
-         - image: gcr.io/datadoghq/docker-dd-agent:latest
-         imagePullPolicy: Always
-         name: dd-agent
-         ports:
-            - containerPort: 8125
-               name: dogstatsdport
-               protocol: UDP
-         env:
-            - name: DD_API_KEY
-               valueFrom:
-               secretKeyRef:
-                  name: datadog-secret
-                  key: api-key
-            - name: KUBERNETES
-               value: "yes"
-            - name: SD_BACKEND
-               value: docker
-            # Uncomment this variable if the agent has issues reaching kubelet
-            # - name: KUBERNETES_KUBELET_HOST
-            #   valueFrom:
-            #     fieldRef:
-            #       fieldPath: status.hostIP  # Kubernetes >= 1.7
-            #       # or
-            #       # fieldPath: spec.nodeName  # Kubernetes < 1.7
-         resources:
-            requests:
-               memory: "256Mi"
-               cpu: "200m"
-            limits:
-               memory: "256Mi"
-               cpu: "200m"
-         volumeMounts:
-            - name: dockersocket
-               mountPath: /var/run/docker.sock
-            - name: procdir
-               mountPath: /host/proc
-               readOnly: true
-            - name: cgroups
-               mountPath: /host/sys/fs/cgroup
-               readOnly: true
-         livenessProbe:
-            exec:
-               command:
-               - ./probe.sh
-            initialDelaySeconds: 15
-            periodSeconds: 5
-         volumes:
-         - hostPath:
-               path: /var/run/docker.sock
-            name: dockersocket
-         - hostPath:
-               path: /proc
-            name: procdir
-         - hostPath:
-               path: /sys/fs/cgroup
-            name: cgroups
-   ```
-
-1. Deploy the DaemonSet:
-   ```shell
-   kubectl create -f dd-agent.yaml
-   ```
-
-<div class="alert alert-info">This manifest enables autodiscovery's auto-configuration feature. To disable auto-configuration, remove the <code>SD_BACKEND</code> environment variable definition. To learn how to configure autodiscovery, see <a href="https://docs.datadoghq.com/containers/kubernetes/integrations/?tab=kubernetesadv2">Kubernetes Integrations Autodiscovery</a>.</div>
-
-### Run the Agent as a Docker container
-
-If you are not running Kubernetes 1.1.0 or later, or you don't want to use DaemonSets, run the Agent as a Docker container on each node you want to monitor. Run the following command, replacing `MY_API_KEY` with your Datadog API key:
-
-```shell
-docker run -d --name dd-agent -h `hostname` -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e API_KEY=MY_API_KEY -e KUBERNETES=yes -e SD_BACKEND=docker gcr.io/datadoghq/docker-dd-agent:latest
-```
-
-## Send custom metrics
-
-If you plan on sending [custom metrics][2] using DogStatsD:
-1. Bind the container's StatsD port to the node's IP address by adding a `hostPort` to the `ports` section of your manifest:
-   ```yaml
-   ports:
-     - containerPort: 8125
-       hostPort: 8125
-       name: dogstatsdport
-       protocol: UDP
-   ```
-
-1. Configure your client library to send UDP packets to the node's IP. If using bridge networking, the default gateway of your application container matches the node's IP. You can also use the downward API to expose the node's hostname as an environment variable.
-
-## Customize your Agent configuration
-
-To customize your Agent configuration, see the documentation in the Agent 5 [docker-dd-agent][3] repo. To tune autodiscovery configuration, see [Kubernetes Integrations Autodiscovery][4]. To disable autodiscovery, remove the `SD_BACKEND` environment variable from your manifest.
-
-For information on collecting metrics, service checks, and events, see the [Kubernetes integration][5] documentation.
-
-[1]: https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/
-[2]: /metrics/custom_metrics
-[3]: https://github.com/DataDog/docker-dd-agent
-[4]: /containers/kubernetes/integrations/?tab=kubernetesadv2
-[5]: /integrations/kubernetes/
-
 {{% /tab %}}
 
 {{% tab "Docker" %}}
@@ -663,10 +730,6 @@ To run CoreOS Tectonic on Kubernetes, see [Kubernetes][2].
 {{% /tab %}}
 
 {{% tab "OpenShift" %}}
-For information on installing Datadog with OpenShift, see the [datadog-openshift][1] repo.
-
-[1]: https://github.com/DataDog/datadog-openshift
-
 {{% /tab %}}
 
 {{% tab "Cloud Foundry" %}}
@@ -763,8 +826,8 @@ ansible-galaxy collection install community.general
    ```shell
    ansible-galaxy collection install datadog.dd
    ```
-   - The Datadog Ansible collection is also available through the [Red Hat Automation Hub][1] where it is officially certified by Red Hat.
-   - Installing the collection is recommended. If needed, you can also install Datadog using the [standalone role][2].
+   - The Datadog Ansible collection is also available through the [Red Hat Automation Hub][101] where it is officially certified by Red Hat.
+   - Installing the collection is recommended. If needed, you can also install Datadog using the [standalone role][102].
 
 2. To deploy the Datadog Agent on hosts, add the Datadog role and your API key to your playbook. Replace `MY_API_KEY` with your Datadog API key:
    ```yaml
@@ -775,13 +838,14 @@ ansible-galaxy collection install community.general
          name: datadog.dd.agent
    vars:
       datadog_api_key: "MY_API_KEY"
-      datadog_agent_major_version: 5
+      datadog_agent_major_version: 6
+      datadog_site: "datad0g.com"
    ```
 
    To ensure that the Agent can group your hosts together, only use node hostnames that the Datadog Agent is tracking. You can check what hostnames the Agent is tracking using the following command:
 
    ```shell
-   service datadog-agent info
+   sudo datadog-agent status
    ```
 
 ## Specific Agent checks
@@ -795,7 +859,8 @@ To use a specific Agent check or integration on one of your nodes, you can use t
         name: datadog.dd.agent
   vars:
     datadog_api_key: "MY_API_KEY"
-    datadog_agent_major_version: 5
+    datadog_agent_major_version: 6
+    datadog_site: "datad0g.com"
     datadog_checks:
       process:
         init_config:
@@ -809,22 +874,27 @@ To use a specific Agent check or integration on one of your nodes, you can use t
             ignore_denied_access: true
 ```
 
-You can find more examples of the Agent role usage on the Github repo for the [standalone role][3].
+You can find more examples of the Agent role usage on the Github repo for the [standalone role][103].
 
 ### Metrics and events
 
-To get metrics and events on Datadog after Ansible runs, see the Ansible callback project's [Github page][4].
+To get metrics and events on Datadog after Ansible runs, see the Ansible callback project's [Github page][104].
 
-[1]: https://console.redhat.com/ansible/automation-hub/repo/published/datadog/dd/
-[2]: /agent/guide/ansible_standalone_role/#ansible-role-versus-ansible-collection
-[3]: https://github.com/DataDog/ansible-datadog/#role-variables
-[4]: https://github.com/DataDog/ansible-datadog-callback
+[101]: https://console.redhat.com/ansible/automation-hub/repo/published/datadog/dd/
+[102]: /agent/guide/ansible_standalone_role/#ansible-role-versus-ansible-collection
+[103]: https://github.com/DataDog/ansible-datadog/#role-variables
+[104]: https://github.com/DataDog/ansible-datadog-callback
 
 {{% /tab %}}
 {{% tab "Puppet" %}}
-<div class="alert alert-info">The <code>datadog_agent</code> module only supports Linux nodes.<br>Requires Puppet Agent version 2.7 or higher.</a></div>
+<div class="alert alert-info">Starting with version 2.9.0, the <code>datadog_agent</code> module supports both Windows and Linux nodes. Previous versions of the datadog_agent module only support Linux nodes.</a></div>
 
-1. Install the `datadog_agent` module from the [Puppet Forge][1] on your Puppet server:
+## Requirements:
+- Requires Puppet Open Source version >= 4.6 or Puppet Enterprise version >= 2016.4
+
+## Install the Agent
+
+1. Install the `datadog_agent` module from the [Puppet Forge][101] on your Puppet server:
    - For fresh installs, run the `module install command`:
      ```shell
      puppet module install datadog-datadog_agent
@@ -834,11 +904,13 @@ To get metrics and events on Datadog after Ansible runs, see the Ansible callbac
      puppet module upgrade datadog-datadog_agent
      ```
 
-2. To deploy the Datadog agent on nodes, add this parametrized class to your manifests. Replace `MY_API_KEY` with your Datadog API key:
+2. To deploy the Datadog Agent on nodes, add this parametrized class to your manifests. Replace `MY_API_KEY` with your Datadog API key:
    ```puppet
    node "db1.mydomain.com" {
       class { "datadog_agent":
-         api_key => "MY_API_KEY"
+         api_key => "MY_API_KEY",
+         datadog_site => "datad0g.com",
+         agent_major_version => 6,
       }
    }
    ```
@@ -846,7 +918,7 @@ To get metrics and events on Datadog after Ansible runs, see the Ansible callbac
    To ensure that the Agent can group your hosts together, only use node hostnames that the Datadog Agent is tracking. You can check what hostnames the Agent is tracking using the following command:
 
    ```shell
-   service datadog-agent info
+   sudo datadog-agent status
    ```
 
 3. Enable reporting to Datadog on your Puppet server:
@@ -865,9 +937,11 @@ To get metrics and events on Datadog after Ansible runs, see the Ansible callbac
       ```puppet
       node "puppet" {
          class { "datadog_agent":
-            api_key            => "MY_API_KEY",
-            puppet_run_reports => true
-            }
+            api_key => "MY_API_KEY",
+            datadog_site => "datad0g.com",
+            agent_major_version => 6,
+            puppet_run_reports => true,
+         }
       }
       ```
 1. Run Puppet on your Puppet server to install all necessary dependencies.
@@ -875,19 +949,24 @@ To get metrics and events on Datadog after Ansible runs, see the Ansible callbac
 
 ## Specific Agent checks
 
-To use a specific Agent check or integration on one of your nodes, see the relevant [integration manifest][2] for a code sample. Here is an example for the elasticsearch integration:
+To use a specific Agent check or integration on one of your nodes, see the relevant [integration manifest][102] for a code sample. Here is an example for the elasticsearch integration:
 
 ```puppet
 node "elastic-node1.mydomain.com" {
     class { "datadog_agent":
-        api_key => ""
+        api_key => "MY_API_KEY",
+        datadog_site => "datad0g.com",
+        agent_major_version => 6,
     }
     include "datadog_agent::integrations::elasticsearch"
 }
 ```
 
-[1]: https://forge.puppetlabs.com/modules/datadog/datadog_agent/readme
-[2]: https://github.com/DataDog/puppet-datadog-agent/tree/main/manifests/integrations
+Refer to the [Github repository of the module][103] for more examples and advanced use cases.
+
+[101]: https://forge.puppetlabs.com/modules/datadog/datadog_agent/readme
+[102]: https://github.com/DataDog/puppet-datadog-agent/tree/main/manifests/integrations
+[103]: https://github.com/DataDog/puppet-datadog-agent
 
 {{% /tab %}}
 
