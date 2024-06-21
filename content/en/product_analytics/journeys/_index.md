@@ -5,7 +5,7 @@ description: Journeys help you understand the path your users follow as they dis
 ---
 
 {{< callout url="http://datadoghq.com/private-beta/product-analytics" header="false" >}}
-All features in Product Analytics are in private beta. To request access, complete the form.
+All features in Product Analytics are in limited availability. To request access, complete the form.
 {{< /callout >}}
 
 ## Overview

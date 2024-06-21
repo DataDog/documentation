@@ -5669,31 +5669,31 @@ menu:
       parent: product_analytics
       identifier: pa_analytics_explorer
       weight: 5
+    - name: Search Syntax
+      url: product_analytics/analytics_explorer/search_syntax
+      parent: pa_analytics_explorer
+      identifier: pa_analytics_search_syntax
+      weight: 501
     - name: Group
       url: product_analytics/analytics_explorer/group
       parent: pa_analytics_explorer
       identifier: pa_analytics_group
-      weight: 501
+      weight: 502
     - name: Visualize
       url: product_analytics/analytics_explorer/visualize
       parent: pa_analytics_explorer
       identifier: visualize
-      weight: 502
+      weight: 503
     - name: Events
       url: product_analytics/analytics_explorer/events
       parent: pa_analytics_explorer
       identifier: pa_analytics_events
-      weight: 503
+      weight: 504
     - name: Export
       url: product_analytics/analytics_explorer/export
       parent: pa_analytics_explorer
       identifier: pa_analytics_export
-      weight: 504
-    - name: Guides
-      url: product_analytics/guide/
-      parent: product_analytics
-      identifier: pa_guides
-      weight: 6
+      weight: 505
     - name: Account Management
       url: account_management/
       pre: cog-2

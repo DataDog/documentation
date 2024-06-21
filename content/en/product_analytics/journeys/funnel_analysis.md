@@ -14,7 +14,7 @@ algolia:
 ---
 
 {{< callout url="http://datadoghq.com/private-beta/product-analytics" header="false" >}}
-All features in Product Analytics are in private beta. To request access, complete the form.
+All features in Product Analytics are in limited availability. To request access, complete the form.
 {{< /callout >}}
 
 ## Overview
@@ -78,19 +78,6 @@ You can share the entire visualization or individual widgets.
 
   {{< img src="real_user_monitoring/funnel_analysis/funnel-analysis-share-individual-widgets-1.mp4" alt="Share a widget by clicking the export icon in the upper-right of the widget" video="true" width=90% >}}
 
-## Alerting on conversion
-
-Setting up alerts on conversion and drop off rates allows you to be notified when conversion drops below a predefined threshold. You can export the conversion rate query to a monitor in a few ways:
-
-- From the visualization: This option takes the end-to-end workflow's query, allowing you to alert on the conversion rate for an entire workflow.
-
-  {{< img src="real_user_monitoring/funnel_analysis/funnel-insights-alert-on-conversion-rate.mp4" alt="Create an alert on the conversion rate for an entire workflow" video=true width=90% >}}
-
-- From the Funnel Insights panel: This allows you to take individual queries and alert on them. While this could be the overall workflow, you also have the option to alert on individual steps' conversion and drop off rates.
-
-  - For example, if you want to alert on the drop off rate between steps 3 and 4, you can do that from the Funnel Insights panel as shown below:
-
-    {{< img src="real_user_monitoring/funnel_analysis/funnel-insights-panel.mp4" alt="Alert on the drop off rate from the Funnel Insights panel" video=true width=90% >}}
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
