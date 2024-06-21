@@ -1,5 +1,7 @@
 ---
 title: LLM Observability Quickstart
+aliases:
+    - /tracing/llm_observability/quickstart
 ---
 {{% site-region region="gov" %}}
 <div class="alert alert-warning">
@@ -70,21 +72,21 @@ For details on the required environment variables, see [the SDK documentation][9
 
 A trace of your LLM call should appear in [the Traces tab][3] of LLM Observability in Datadog.
 
-{{< img src="tracing/llm_observability/quickstart-trace.png" alt="An LLM Observability trace displaying a single LLM request" style="width:100%;" >}}
+{{< img src="llm_observability/quickstart-trace.png" alt="An LLM Observability trace displaying a single LLM request" style="width:100%;" >}}
 
 The trace you see is composed of a single LLM span. The `ddtrace-run` command automatically traces your LLM calls from [Datadog's list of supported integrations][10].
 
 If your application consists of more elaborate prompting or complex chains or workflows involving LLMs, you can trace it using the [instrumentation guide][11] and the [SDK documentation][1].
 
 
-[1]: /tracing/llm_observability/sdk/
+[1]: /llm_observability/sdk/
 [3]: https://app.datadoghq.com/llm/traces
 [4]: https://platform.openai.com/docs/quickstart/account-setup
 [5]: https://platform.openai.com/docs/quickstart/step-1-setting-up-python
 [6]: https://platform.openai.com/docs/quickstart/step-2-set-up-your-api-key
 [7]: /account_management/api-app-keys/#add-an-api-key-or-client-token
-[8]: /tracing/llm_observability/api
-[9]: /tracing/llm_observability/sdk/#command-line-setup
-[10]: /tracing/llm_observability/auto_instrumentation
-[11]: /tracing/llm_observability/trace_an_llm_application
+[8]: /llm_observability/api
+[9]: /llm_observability/sdk/#command-line-setup
+[10]: /llm_observability/auto_instrumentation
+[11]: /llm_observability/trace_an_llm_application
 [12]: https://github.com/DataDog/llm-observability

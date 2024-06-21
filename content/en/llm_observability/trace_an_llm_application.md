@@ -1,6 +1,8 @@
 ---
 title: Trace an LLM Application
 kind: guide
+aliases:
+    - /tracing/llm_observability/trace_an_llm_application
 ---
 {{% site-region region="gov" %}}
 <div class="alert alert-warning">
@@ -16,7 +18,7 @@ Your application can submit data to LLM Observability in two ways: with LLM Obse
 
 Each request fulfilled by your application is represented as a trace on the [LLM Observability traces page][2] in Datadog:
 
-{{< img src="tracing/llm_observability/llm-observability-overview.png" alt="An LLM Observability trace displaying each span of a request" style="width:100%;" >}}
+{{< img src="llm_observability/llm-observability-overview.png" alt="An LLM Observability trace displaying each span of a request" style="width:100%;" >}}
 
 If you're new to LLM Observability traces, read the [Core Concepts][3] before proceeding to decide which instrumentation options best suit your application.
 
@@ -169,20 +171,20 @@ Depending on the complexity of your LLM application, you can also:
 - [Submit custom evaluations][16] such as feedback from the users of your LLM application (for example, rating from 1 to 5) with the [SDK][1] or the [API][2]. 
 
 
-[1]: /tracing/llm_observability/sdk
-[2]: /tracing/llm_observability/api
-[3]: /tracing/llm_observability/core_concepts
-[4]: /tracing/llm_observability/auto_instrumentation
-[5]: /tracing/llm_observability/sdk/#installation
-[6]: /tracing/llm_observability/sdk/#command-line-setup
-[7]: /tracing/llm_observability/sdk/#in-code-setup
-[8]: /tracing/llm_observability/quickstart/
-[9]: /tracing/llm_observability/sdk/#tracing-spans
+[1]: /llm_observability/sdk
+[2]: /llm_observability/api
+[3]: /llm_observability/core_concepts
+[4]: /llm_observability/auto_instrumentation
+[5]: /llm_observability/sdk/#installation
+[6]: /llm_observability/sdk/#command-line-setup
+[7]: /llm_observability/sdk/#in-code-setup
+[8]: /llm_observability/quickstart/
+[9]: /llm_observability/sdk/#tracing-spans
 [10]: https://app.datadoghq.com/llm/traces
 [11]: https://app.datadoghq.com/dash/integration/llm_analytics
-[12]: /tracing/llm_observability/sdk/#tracing-spans-using-inline-methods
-[13]: /tracing/llm_observability/sdk/#annotating-a-span
-[14]: /tracing/llm_observability/sdk/#tracking-user-sessions
-[15]: /tracing/llm_observability/sdk/#tracing-multiple-applications
-[16]: /tracing/llm_observability/submit_evaluations
-[17]: /tracing/llm_observability/core_concepts/#spans
+[12]: /llm_observability/sdk/#tracing-spans-using-inline-methods
+[13]: /llm_observability/sdk/#annotating-a-span
+[14]: /llm_observability/sdk/#tracking-user-sessions
+[15]: /llm_observability/sdk/#tracing-multiple-applications
+[16]: /llm_observability/submit_evaluations
+[17]: /llm_observability/core_concepts/#spans
