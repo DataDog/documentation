@@ -90,7 +90,7 @@ To add in image, click the **Image** cell option in the **Add New Cell** menu.
 {{< img src="path/to/your/image-name-here.png" alt="Image cell in the Add New Cell menu of cells" style="width:100%;" >}}
 
 You can use any of the following options to upload an image to be hosted by Datadog:
--  Drop an image file into the upload area
+- Drop an image file into the upload area
 - Click **Choose File** and locate the image in your file directory
 - Paste a publicly accessible URL for the image
 
@@ -102,13 +102,10 @@ Click the icons on the cell action tray to adjust the size, alignment, add a cap
 
 This approach places the image inline with your text, but does not provide options for resizing the image.
 
-<div class="alert alert-warning">Datadog does not host images uploaded through the Markdown editor.
-</div>
-
 Enter the edit mode on any markdown cell and use any of the following options to add the image:
 - Drop an image file into the text cell area.
 - Copy and paste the image directly into the text cell area.
-- Hyperlink an external image using the image widget in the header or by referencing the [official markdown guide][2]. 
+- Hyperlink an external image using the image widget in the header or by referencing the [official markdown guide][2]. **Note**: This option will not upload the image to be hosted by Datadog. 
 
 {{< img src="path/to/your/image-name-here.png" alt="Example markdown image syntax in a Text cell markdown editor" >}}
 
