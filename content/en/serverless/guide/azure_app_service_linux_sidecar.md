@@ -1,5 +1,5 @@
 ---
-title: Instrument Azure App Service - Linux Containers with severless-init
+title: Instrument Azure App Service - Linux Containers with Sidecar Pattern
 kind: guide
 further_reading:
 - link: "/integrations/azure_app_services/"
@@ -10,7 +10,7 @@ further_reading:
   text: "Azure App Service Environment"
 ---
 
-<div class="alert alert-info">To instrument your Azure App Service containers with <code>serverless-init</code>, see <a href="/serverless/azure_app_services_container">Instrument Azure App Service - Linux Container with serverless-init</a>.</div>
+<div class="alert alert-info">To instrument your Azure App Service containers with <code>serverless-init</code>, see <a href="/serverless/azure_app_services/azure_app_services_container">Instrument Azure App Service - Linux Container with serverless-init</a>.</div>
 
 ## Overview
 
@@ -31,9 +31,9 @@ This instrumentation method uses Azure's [Sidecar pattern][1] to monitor contain
 
 ### Integrate the Datadog tracer
 
-After your application is containerized, integrate the Datadog tracer by adding the following lines to the Dockerfile for your main application.
+1. Adding the following lines to the Dockerfile for your main application.
 
-{{< programming-lang-wrapper langs="dotnet" >}}
+   {{< programming-lang-wrapper langs="dotnet" >}}
 {{< programming-lang lang="dotnet" >}}
 
 ```dockerfile
@@ -43,11 +43,17 @@ RUN mkdir -p /home/LogFiles/dotnet
 ADD https://github.com/DataDog/dd-trace-dotnet/releases/download/v2.51.0/datadog-dotnet-apm-2.49.0.tar.gz /datadog/tracer
 RUN cd /datadog/tracer && tar -zxf datadog-dotnet-apm-2.49.0.tar.gz
 ```
+{{< /programming-lang >}}
+{{< /programming-lang-wrapper >}}
 
-This installs and configures the Datadog tracer within your application container.
+   This installs and configures the Datadog tracer within your application container.
+
+2. Then, build the image and push it to your preferred container registry.
 
 #### Full example Dockerfile
 
+{{< programming-lang-wrapper langs="dotnet" >}}
+{{< programming-lang lang="dotnet" >}}
 ```dockerfile
 # Stage 1: Build the application
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
@@ -83,8 +89,6 @@ ENTRYPOINT ["dotnet", "<your dotnet app>.dll"]
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-Then, build the image and push it to your preferred container registry.
-
 ### Create your Linux Web App
 
 1. In the Azure Portal, go to **App Services** and select **Create**.
@@ -95,63 +99,67 @@ Then, build the image and push it to your preferred container registry.
 1. On the **Container** tab, provide the required details.
    - For **Sidecar support**, select **Enabled**.
    - For **Image Source**, select your chosen registry.
-   - Then, specify the **Registry**, **Image**, **Tag**, and **Port** for your container image.
+   - Specify the **Registry**, **Image**, **Tag**, and **Port** for your container image.
 1. Select **Review + create**, then select **Create**.
 
 ### Add Datadog environment variables
 
-In the Azure portal, select your app. In the left menu, select **Configuration** > **Application settings**. Then, add the following environment variables as application settings.
+1. In the Azure portal, select your app. 
 
+2. In the left menu, select **Configuration** > **Application settings**. 
 
-`DD_API_KEY` 
-: Your [Datadog API key][3]. <br/>
-**Required**. Alternatively, you can source your API key (and other sensitive information) from Azure Key Vault. See [Use Key Vault references as app settings in Azure App Service][4].
+3. Add the following environment variables as application settings.
 
-`DD_SITE` 
-: {{< region-param key="dd_site" code="true" >}} <br/>
-Corresponds to your [Datadog site][5]. Defaults to `datadoghq.com`.
+   `DD_API_KEY` (**Required**)
+   : Your [Datadog API key][3]. <br/>
+   Alternatively, you can source your API key (and other sensitive information) from Azure Key Vault. See [Use Key Vault references as app settings in Azure App Service][4].
 
-`DD_SERVICE` 
-: Supply a service name to be displayed in your Datadog [Service Catalog][6]. See [Unified Service Tagging][7]. 
+   `DD_SITE` 
+   : {{< region-param key="dd_site" code="true" >}} <br/>
+   Corresponds to your [Datadog site][5]. Defaults to `datadoghq.com`.
 
-`DD_ENV` 
-: A name for your environment, such as `staging` or `prod`. See [Unified Service Tagging][7].
+   `DD_SERVICE` 
+   : Supply a service name to be displayed in your Datadog [Service Catalog][6]. See [Unified Service Tagging][7]. 
 
-`DD_SERVERLESS_LOG_PATH` 
-: `/home/Logfile/*.log` <br/>
-Corresponds to the path where you write your application logs. If you have changed this location, specify your custom location in this setting.
+   `DD_ENV` 
+   : A name for your environment, such as `staging` or `prod`. See [Unified Service Tagging][7].
 
-`DD_DOTNET_TRACER_HOME` (**Required**)
-: `/datadog/tracer`
+   `DD_SERVERLESS_LOG_PATH` 
+   : `/home/Logfile/*.log` <br/>
+   Corresponds to the path where you write your application logs. If you have changed this location, specify your custom location in this setting.
 
-`DD_TRACE_LOG_DIRECTORY` (**Required**)
-: `/home/Logfiles/dotnet`
+   `DD_DOTNET_TRACER_HOME` (**Required**)
+   : `/datadog/tracer`
 
-`CORECLR_ENABLE_PROFILING` (**Required**)
-: `1`
+   `DD_TRACE_LOG_DIRECTORY` (**Required**)
+   : `/home/Logfiles/dotnet`
 
-`CORECLR_PROFILER` (**Required**)
-: `{846F5F1C-F9AE-4B07-969E-05C26BC060D8}`
+   `CORECLR_ENABLE_PROFILING` (**Required**)
+   : `1`
 
-`CORECLR_PROFILER_PATH` (**Required**)
-: `/datadog/tracer/Datadog.Trace.ClrProfiler.Native.so`
+   `CORECLR_PROFILER` (**Required**)
+   : `{846F5F1C-F9AE-4B07-969E-05C26BC060D8}`
+
+   `CORECLR_PROFILER_PATH` (**Required**)
+   : `/datadog/tracer/Datadog.Trace.ClrProfiler.Native.so`
 
 
 ### Add the Datadog sidecar
 
-1. In the Azure portal, select your app. In the left menu, select **Deployment Center**.
+1. In the Azure portal, select your app. 
+1. In the left menu, select **Deployment Center**.
 1. Select **Add**. Under **Add container**, provide the following details:
    - **Name**: `datadog`
-   - **Image source**: Docker Hub or other registries
+   - **Image source**: `Docker Hub` or another registry
    - **Image type**: Public
-   - **Registry server URL**: sitecontainerssampleacr.azurecr.io
-   - **Image and tag**: datadog-dotnet:2.0
-   - **Port**: 8126
-   Then, select **Apply**.
+   - **Registry server URL**: `sitecontainerssampleacr.azurecr.io`
+   - **Image and tag**: `datadog-dotnet:2.0`
+   - **Port**: `8126`
+   Select **Apply**.
 
 ## Next steps
 
-After you finish instrumenting your application, go to the [Serverless > Azure][8] page in Datadog to see your observability data. Your application logs are available in the [Log Explorer][9], and your traces are available in the [Trace Explorer][10].
+After you finish instrumenting your application, go to the [Serverless > Azure][8] page in Datadog to see your observability data. Your application logs are available in [Log Explorer][9], and your traces are available in [Trace Explorer][10].
 
 [1]: https://azure.github.io/AppService/2024/04/04/Public-Preview-Sidecars-Webjobs.html
 [2]: /tracing/trace_collection/library_config
