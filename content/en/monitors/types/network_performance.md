@@ -18,7 +18,7 @@ further_reading:
   tag: "Documentation"
   text: "Recommended NPM Monitors"
 ---
-<div class="alert alert-info">The Network Performance monitor is in public beta.</div>
+<div class="alert alert-info">The NPM monitor is in public beta.</div>
 
 ## Overview
 
