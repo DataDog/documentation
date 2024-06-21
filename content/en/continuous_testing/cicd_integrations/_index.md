@@ -43,14 +43,14 @@ To get started, see [Integrations](#integrations) and [use the API](#use-the-api
 ## Integrations
 
 {{< whatsnext desc="With Continuous Testing and CI/CD, you can run Continuous Testing tests in any CI platform provider of choice. See the documentation for information about the following integrations, or read more about the Datadog CI NPM package:">}}
-    {{< nextlink href="synthetics/cicd_integrations/azure_devops_extension" >}}Azure DevOps Extension{{< /nextlink >}}
-    {{< nextlink href="synthetics/cicd_integrations/circleci_orb" >}}CircleCI Orb{{< /nextlink >}}
-    {{< nextlink href="synthetics/cicd_integrations/github_actions" >}}GitHub Actions{{< /nextlink >}}
-    {{< nextlink href="synthetics/cicd_integrations/gitlab" >}}GitLab{{< /nextlink >}}
-    {{< nextlink href="synthetics/cicd_integrations/jenkins" >}}Jenkins{{< /nextlink >}}
-    {{< nextlink href="synthetics/cicd_integrations/bitrise_upload" >}}Upload Applications with Bitrise{{< /nextlink >}}
-    {{< nextlink href="synthetics/cicd_integrations/bitrise_run" >}}Run Tests with Bitrise{{< /nextlink >}}
-    {{< nextlink href="synthetics/cicd_integrations/configuration" >}}NPM package{{< /nextlink >}}
+    {{< nextlink href="continuous_testing/cicd_integrations/azure_devops_extension" >}}Azure DevOps Extension{{< /nextlink >}}
+    {{< nextlink href="continuous_testing/cicd_integrations/circleci_orb" >}}CircleCI Orb{{< /nextlink >}}
+    {{< nextlink href="continuous_testing/cicd_integrations/github_actions" >}}GitHub Actions{{< /nextlink >}}
+    {{< nextlink href="continuous_testing/cicd_integrations/gitlab" >}}GitLab{{< /nextlink >}}
+    {{< nextlink href="continuous_testing/cicd_integrations/jenkins" >}}Jenkins{{< /nextlink >}}
+    {{< nextlink href="continuous_testing/cicd_integrations/bitrise_upload" >}}Upload Applications with Bitrise{{< /nextlink >}}
+    {{< nextlink href="continuous_testing/cicd_integrations/bitrise_run" >}}Run Tests with Bitrise{{< /nextlink >}}
+    {{< nextlink href="continuous_testing/cicd_integrations/configuration" >}}NPM package{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Use the CLI
