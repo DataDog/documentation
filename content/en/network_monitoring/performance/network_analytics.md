@@ -153,6 +153,8 @@ The following TCP metrics are available:
 | **Established Connections** | The number of TCP connections in an established state. Measured in connections per second from the client. |
 | **Closed Connections** | The number of TCP connections in a closed state. Measured in connections per second from the client. |
 
+<div class="alert alert-warning">TCP Timeouts, Refusals, and Resets are in private beta. Reach out to your Datadog representative to request access. Once you've signed up, follow the <a href="/network_monitoring/performance/setup/?tab=agentlinux#failed-connections-private-beta">instructions</a> to enable the feature on your agent.</div>
+
 All metrics are instrumented from the perspective of the `client` side of the connection when available, or the server if not.
 
 ### Cloud service autodetection

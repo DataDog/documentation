@@ -445,14 +445,25 @@ To set up on Amazon ECS, see the [Amazon ECS][1] documentation page.
 ### Enhanced resolution
 
 Optionally, enable resource collection for cloud integrations to allow Network Performance Monitoring to discover cloud-managed entities.
-- Install the [Azure integration][1] for visibility into Azure load balancers and application gateways.
-- Install the [AWS Integration][2] for visibility into AWS Load Balancer. **you must enable ENI and EC2 metric collection**
+- Install the [Azure integration][101] for visibility into Azure load balancers and application gateways.
+- Install the [AWS Integration][102] for visibility into AWS Load Balancer. **you must enable ENI and EC2 metric collection**
 
-For additional information around these capabilities, see [Cloud service enhanced resolution][3].
+For additional information around these capabilities, see [Cloud service enhanced resolution][103].
 
-  [1]: /integrations/azure
-  [2]: /integrations/amazon_web_services/#resource-collection
-  [3]: /network_monitoring/performance/network_analytics/#cloud-service-enhanced-resolution
+### Failed connections (private beta)
+
+<div class="alert alert-warning">Failed Connections are in private beta. To start seeing <a href="/network_monitoring/performance/network_analytics/?tab=loadbalancers#tcp">failed connection metrics</a>, reach out to your Datadog representative and request access.</div>
+
+To enable the Agent to start collecting data around failed connections, add the following flag to your `/etc/datadog-agent/datadog.yaml` file.
+
+```yaml
+failed_connections:
+  enabled: true
+```
+
+[101]: /integrations/azure
+[102]: /integrations/amazon_web_services/#resource-collection
+[103]: /network_monitoring/performance/network_analytics/#cloud-service-enhanced-resolution
 
 {{< /site-region >}}
 
