@@ -2699,37 +2699,37 @@ menu:
       identifier: cloud_cost_saas_cost_integrations
       weight: 4
     - name: Databricks
-      url: cloud_cost_management/saas_costs/?tab=databricks
+      url: cloud_cost_management/saas_costs/?tab=databricks#setup
       parent: cloud_cost_saas_cost_integrations
       identifier: cloud_cost_saas_cost_integrations_databricks
       weight: 401
     - name: Confluent Cloud
-      url: cloud_cost_management/saas_costs/?tab=confluentcloud
+      url: cloud_cost_management/saas_costs/?tab=confluentcloud#setup
       parent: cloud_cost_saas_cost_integrations
       identifier: cloud_cost_saas_cost_integrations_confluentcloud
       weight: 402
     - name: MongoDB
-      url: cloud_cost_management/saas_costs/?tab=mongodb
+      url: cloud_cost_management/saas_costs/?tab=mongodb#setup
       parent: cloud_cost_saas_cost_integrations
       identifier: cloud_cost_saas_cost_integrations_mongodb
       weight: 403
     - name: Snowflake
-      url: cloud_cost_management/saas_costs/?tab=snowflake
+      url: cloud_cost_management/saas_costs/?tab=snowflake#setup
       parent: cloud_cost_saas_cost_integrations
       identifier: cloud_cost_saas_cost_integrations_snowflake
       weight: 404
     - name: OpenAI
-      url: cloud_cost_management/saas_costs/?tab=openai
+      url: cloud_cost_management/saas_costs/?tab=openai#setup
       parent: cloud_cost_saas_cost_integrations
       identifier: cloud_cost_saas_cost_integrations_openai
       weight: 405
     - name: Fastly
-      url: cloud_cost_management/saas_costs/?tab=fastly
+      url: cloud_cost_management/saas_costs/?tab=fastly#setup
       parent: cloud_cost_saas_cost_integrations
       identifier: cloud_cost_saas_cost_integrations_fastly
       weight: 406
     - name: Twilio
-      url: cloud_cost_management/saas_costs/?tab=twilio
+      url: cloud_cost_management/saas_costs/?tab=twilio#setup
       parent: cloud_cost_saas_cost_integrations
       identifier: cloud_cost_saas_cost_integrations_twilio
       weight: 407
