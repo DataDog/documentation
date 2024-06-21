@@ -26,11 +26,11 @@ Confluence ページを開いた状態で **/cloudcraft** と入力し、表示�
 
 <div class="alert alert-info">図ピッカーでは、図の検索、フィルタリング、並べ替えもできます。</div>
 
-{{< img src="cloudcraft/getting-started/embedding-cloudcraft-diagrams-confluence/blueprint-picker.png" alt="ステージング環境と本番環境のラベル付き図を用いて、クラウドアーキテクチャの設計図を Confluence ページに挿入するためのオプションを表示している Cloudcraft Confluence アプリ。" responsive="true" style=“width:100%;">}}
+{{< img src="cloudcraft/getting-started/embedding-cloudcraft-diagrams-confluence/blueprint-picker.png" alt="ステージング環境と本番環境のラベル付き図を用いて、クラウドアーキテクチャの設計図を Confluence ページに挿入するためのオプションを表示している Cloudcraft Confluence アプリ。" responsive="true" style="width:100%;">}}
 
 図を選択すると、埋め込み図のプレビューが Confluence ページに表示されます。この時点で、ウィンドウサイズメニューから図の幅を変更したり、鉛筆アイコンをクリックして図ピッカーを再度開いたりすることもできます。
 
-{{< img src="cloudcraft/getting-started/embedding-cloudcraft-diagrams-confluence/window-size-menu.png" alt=“EC2 インスタンス、ロードバランサー、RDS データベースを Confluence ページに埋め込んだ Cloudcraft のクラウドインフラストラクチャーレイアウトのアイソメトリックビュー。" responsive="true" style="width:100%;">}}
+{{< img src="cloudcraft/getting-started/embedding-cloudcraft-diagrams-confluence/window-size-menu.png" alt="EC2 インスタンス、ロードバランサー、RDS データベースを Confluence ページに埋め込んだ Cloudcraft のクラウドインフラストラクチャーレイアウトのアイソメトリックビュー。" responsive="true" style="width:100%;">}}
 
 Confluence ページを公開またはプレビューすると、Cloudcraft の図がページに完全に埋め込まれます。
 
