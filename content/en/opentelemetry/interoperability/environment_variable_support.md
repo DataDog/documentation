@@ -73,6 +73,41 @@ This maps to `DD_TRACE_LOG_LEVEL` in `node.js`<br>
 : **Mapping**: `!DD_TRACE_OTEL_ENABLED` <br>
 **Not Supported In**: `ruby`, & `golang` tracers<br>
 
+### Java Specific Configuration
+
+`OTEL_INSTRUMENTATION_COMMON_DEFAULT_ENABLED`
+: **Mapping**: `!DD_INTEGRATIONS_ENABLED` <br>
+
+`OTEL_INSTRUMENTATION_[NAME]_ENABLED`
+: **Notes**: Enables/disables the named OTel drop-in instrumentation <br>
+
+`OTEL_JAVAAGENT_CONFIGURATION_FILE`
+: **Mapping**: `DD_TRACE_CONFIG` <br>
+
+`OTEL_INSTRUMENTATION_HTTP_CLIENT_CAPTURE_REQUEST_HEADERS`
+: **Mapping**: `DD_TRACE_REQUEST_HEADER_TAGS` <br>
+**Notes**: Note there is a difference in the generated request tag name:<br>
+  - Datadog:	 `http.request.headers.<header-name>`
+  - OTel:		   `http.request.header.<header-name>`
+
+`OTEL_INSTRUMENTATION_HTTP_CLIENT_CAPTURE_RESPONSE_HEADERS`
+: **Mapping**: `DD_TRACE_RESPONSE_HEADER_TAGS` <br>
+**Notes**: there is a difference in the generated response tag name:<br>
+  - Datadog:	`http.response.headers.<header-name>`
+  - OTel:		  `http.response.header.<header-name>`
+
+`OTEL_INSTRUMENTATION_HTTP_SERVER_CAPTURE_REQUEST_HEADERS`
+: **Mapping**: `DD_TRACE_REQUEST_HEADER_TAGS` <br>
+**Notes**: Note there is a difference in the generated request tag name:<br>
+  - Datadog:	 `http.request.headers.<header-name>`
+  - OTel:		   `http.request.header.<header-name>`
+
+`OTEL_INSTRUMENTATION_HTTP_SERVER_CAPTURE_RESPONSE_HEADERS`
+: **Mapping**: `DD_TRACE_RESPONSE_HEADER_TAGS` <br>
+**Notes**: there is a difference in the generated response tag name:<br>
+  - Datadog:	`http.response.headers.<header-name>`
+  - OTel:		  `http.response.header.<header-name>`
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
