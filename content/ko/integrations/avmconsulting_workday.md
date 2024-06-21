@@ -30,7 +30,7 @@ author:
   support_email: integrations@avmconsulting.net
   vendor_id: avmconsulting
 categories:
-- 로그 수집
+- log collection
 - marketplace
 dependencies: []
 display_on_public_website: true
@@ -40,7 +40,7 @@ integration_id: avmconsulting-workday
 integration_title: Workday
 integration_version: ''
 is_public: true
-kind: 통합
+kind: integration
 legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0
@@ -57,7 +57,7 @@ pricing:
 public_title: Workday
 short_description: Workday 통합 상태에 대한 옵저버빌리티 제공
 supported_os:
-- 리눅스
+- linux
 - windows
 - macos
 tile:
@@ -69,8 +69,8 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
-  - 제출한 데이터 유형::메트릭
-  - 제출한 데이터 유형::로그
+  - Submitted Data Type::Metrics
+  - Submitted Data Type::Logs
   configuration: README.md#Setup
   description: Workday 통합 상태에 대한 옵저버빌리티 제공
   media:
