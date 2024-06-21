@@ -11,22 +11,18 @@ kind: 설명서
 title: Azure SQL Server에서 데이터베이스 모니터링 설정
 ---
 
-{{< site-region region="gov" >}}
-해당 지역에서는 데이터베이스 모니터링이 지원되지 않습니다
-{{< /site-region >}}
-
 데이터베이스 모니터링은 쿼리 메트릭, 쿼리 샘플, 실행 계획, 데이터베이스 상태, 장애 조치, 이벤트와 같은 정보를 수집해 Microsoft SQL Server 데이터베이스에 관한 상세한 정보를 가시화합니다.
 
 데이터베이스에서 데이터베이스 모니터링을 활성화하려면 다음 단계를 따르세요.
 
 1. [에이전트에 데이터베이스 접근 권한 부여](#grant-the-agent-access)
-2. [에이전트 설치](#install-the-agent)
+2. [Agent 설치](#install-the-agent)
 3. [Azure 통합 설치](#install-the-azure-integration)
 
 ## 시작 전 참고 사항
 
 지원되는 SQL Server 버전
-: 2012, 2014, 2016, 2017, 2019, 2022
+: 2014, 2016, 2017, 2019, 2022
 
 {{% dbm-sqlserver-before-you-begin %}}
 
@@ -44,6 +40,10 @@ CREATE LOGIN datadog WITH PASSWORD = '<PASSWORD>';
 CREATE USER datadog FOR LOGIN datadog;
 ALTER SERVER ROLE ##MS_ServerStateReader## ADD MEMBER datadog;
 ALTER SERVER ROLE ##MS_DefinitionReader## ADD MEMBER datadog;
+-- Log Shipping Monitoring(Agent v7.50+에서 사용 가능)을 사용하려면 다음 세 줄의 주석을 제거하세요.
+-- USE msdb;
+-- CREATE USER datadog FOR LOGIN datadog;
+-- GRANT SELECT to datadog;
 ```
 
 이 서버에 있는 각 추가 Azure SQL 데이터베이스에 접근할 수 있도록 에이전트에 권한을 부여합니다.
@@ -52,7 +52,7 @@ ALTER SERVER ROLE ##MS_DefinitionReader## ADD MEMBER datadog;
 CREATE USER datadog FOR LOGIN datadog;
 ```
 
-**참고:** Azure 관리형 ID 인증도 지원됩니다. Azure SQL DB 인스턴스에서 이를 설정하는 방법을 보려면 [가이드][3]를 참고하세요.
+**참고:** Microsoft Entra ID 관리형 ID 인증도 지원됩니다. Azure SQL DB 인스턴스에 대해 이를 구성하는 방법은 [가이드][3]를 참조하세요.
 
 Datadog 에이전트를 설정할 때 해당 Azure SQL DB 서버에 있는 각 애플리케이션 데이터베이스의 점검 인스턴스 하나를 지정하세요. `master`나 다른 [시스템 데이터베이스][2]를 포함하지 마세요. Datadog 에이전트는 격리된 컴퓨팅 환경에서 실행 중인 Azure SQL DB의 각 애플리케이션 데이터베이스에 직접 연결되어야 합니다. 따라서 `database_autodiscovery`가 Azure SQL DB에서 작동하지 않으며 비활성화되어야 합니다.
 
@@ -99,19 +99,10 @@ CREATE USER datadog FOR LOGIN datadog;
 GRANT CONNECT ANY DATABASE to datadog;
 GRANT VIEW SERVER STATE to datadog;
 GRANT VIEW ANY DEFINITION to datadog;
-```
-
-#### SQL Server 2012
-
-```SQL
-CREATE LOGIN datadog WITH PASSWORD = '<PASSWORD>';
-CREATE USER datadog FOR LOGIN datadog;
-GRANT VIEW SERVER STATE to datadog;
-GRANT VIEW ANY DEFINITION to datadog;
-
--- Create the `datadog` user in each additional application database:
-USE [database_name];
-CREATE USER datadog FOR LOGIN datadog;
+-- 로그 전송 모니터링(에이전트 v7.50+에서 사용 가능) 기능을 활용하려면 다음 세 줄의 주석 처리를 해제하세요.
+-- USE msdb;
+-- CREATE USER datadog FOR LOGIN datadog;
+-- GRANT SELECT to datadog;
 ```
 
 **참고:** Azure 관리형 ID 인증도 지원됩니다. Azure SQL DB 인스턴스에서 이를 설정하는 방법을 보려면 [가이드][1]를 참고하세요.
@@ -131,11 +122,12 @@ CREATE USER datadog FOR LOGIN datadog;
 
 ## 에이전트 설치
 
-Azure에서는 호스트에 바로 액세스하는 것을 허용하지 않기 때문에 SQL Server 호스트와 통신할 수 있는 별도 호스트에 Datadog 에이전트를 설치해야 합니다. 에이전트를 설치하고 실행하는 데는 여러 가지 방법이 있습니다.
+Azure는 직접적인 호스트 액세스를 허용하지 않기 때문에 Datadog Agent는 SQL Server 호스트와 통신할 수 있는 별도의 호스트에 설치되어야 합니다. Agent 설치 및 실행에는 여러 가지 옵션이 있습니다.
 
 {{< tabs >}}
 {{% tab "Windows Host" %}}
-SQL Server 텔레메트리를 수집하려면 먼저 [Datadog 에이전트를 설치][1]합니다.
+
+SQL Server 원격 측정 수집을 시작하려면 먼저 [Datadog Agent를 설치][1]하세요.
 
 SQL Server 설정 파일 `C:\ProgramData\Datadog\conf.d\sqlserver.d\conf.yaml`을 생성합니다. 사용할 수 있는 모든 설정 옵션을 보려면 [설정 파일 샘플][2]을 참고하세요.
 
@@ -177,18 +169,18 @@ adoprovider: MSOLEDBSQL19  # 버전 18 이하에서는 MSOLEDBSQL로 교체
 
 #### ODBC
 
-권장하는 ODBC 드라이버는 [Microsoft ODBC DB Driver][8]입니다. 에이전트가 실행되는 호스트에 드라이버를 설치했는지 확인하세요.
+권장되는 ODBC 드라이버는 [Microsoft ODBC Driver][8]입니다. Agent 7.51부터 SQL Server용 ODBC Driver 18이 Linux용 Agent에 포함됩니다. Windows의 경우 Agent가 실행 중인 호스트에 드라이버가 설치되어 있는지 확인하세요.
 
 ```yaml
 connector: odbc
-driver: '{ODBC Driver 17 for SQL Server}'
+driver: '{ODBC Driver 18 for SQL Server}'
 ```
 
 에이전트 설정이 모두 완료되면 [Datadog 에이전트를 다시 시작][9]하세요.
 
 ### 검증
 
-[에이전트의 상태 하위 명령을 실행][10]하고 **Checks** 섹션에서 `sqlserver`를 찾아보세요. 시작하려면 Datadog의 [Databases][6] 페이지로 이동하세요.
+[에이전트의 상태 하위 명령을 실행][10]하고 **Checks** 섹션에서 `sqlserver`를 찾아보세요. 시작하려면 Datadog의 [Databases][11] 페이지로 이동하세요.
 
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest?platform=windows
@@ -199,12 +191,12 @@ driver: '{ODBC Driver 17 for SQL Server}'
 [6]: https://docs.microsoft.com/en-us/sql/ado/microsoft-activex-data-objects-ado
 [7]: https://docs.microsoft.com/en-us/sql/connect/oledb/oledb-driver-for-sql-server
 [8]: https://docs.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server
-[9]: /ko/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[10]: /ko/agent/guide/agent-commands/#agent-status-and-information
+[9]: /ko/agent/configuration/agent-commands/#start-stop-and-restart-the-agent
+[10]: /ko/agent/configuration/agent-commands/#agent-status-and-information
 [11]: https://app.datadoghq.com/databases
 {{% /tab %}}
 {{% tab "Linux Host" %}}
-SQL Server 텔레메트리를 수집하려면 먼저 [Datadog 에이전트를 설치][1]합니다.
+SQL Server 원격 측정을 수집하려면 먼저 [Datadog Agent를 설치][1]합니다.
 
 Linux의 경우 Datadog 에이전트에 ODBC SQL Server 드라이버(예: [Microsoft ODBC 드라이버][2])를 추가 설치해야 합니다. ODBC SQL Server가 설치되면 `odbc.ini`과 `odbcinst.ini` 파일을 `/opt/datadog-agent/embedded/etc` 폴더에 복사하세요.
 
@@ -246,8 +238,8 @@ instances:
 [3]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/datadog_checks/sqlserver/data/conf.yaml.example
 [4]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/assets/configuration/spec.yaml#L353-L383
 [5]: /ko/getting_started/tagging/unified_service_tagging
-[6]: /ko/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[7]: /ko/agent/guide/agent-commands/#agent-status-and-information
+[6]: /ko/agent/configuration/agent-commands/#start-stop-and-restart-the-agent
+[7]: /ko/agent/configuration/agent-commands/#agent-status-and-information
 [8]: https://app.datadoghq.com/databases
 {{% /tab %}}
 {{% tab "Docker" %}}
@@ -259,7 +251,7 @@ instances:
 
 ```bash
 export DD_API_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-export DD_AGENT_VERSION=7.35.0
+export DD_AGENT_VERSION=7.51.0
 
 docker run -e "DD_API_KEY=${DD_API_KEY}" \
   -v /var/run/docker.sock:/var/run/docker.sock:ro \
@@ -269,7 +261,7 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
     "dbm": true,
     "host": "<HOSTNAME>,<SQL_PORT>",
     "connector": "odbc",
-    "driver": "FreeTDS",
+    "driver": "ODBC Driver 18 for SQL Server",
     "username": "datadog",
     "password": "<PASSWORD>",
     "tags": [
@@ -297,7 +289,7 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
 [2]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/datadog_checks/sqlserver/data/conf.yaml.example
 [3]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/assets/configuration/spec.yaml#L353-L383
 [4]: /ko/getting_started/tagging/unified_service_tagging
-[5]: /ko/agent/guide/agent-commands/#agent-status-and-information
+[5]: /ko/agent/configuration/agent-commands/#agent-status-and-information
 [6]: https://app.datadoghq.com/databases
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
@@ -325,9 +317,9 @@ instances:
     username: datadog
     password: '<PASSWORD>'
     connector: 'odbc'
-    driver: 'FreeTDS'
-    include_ao_metrics: true  # Optional: For AlwaysOn users
-    tags:  # Optional
+    driver: 'ODBC Driver 18 for SQL Server'
+    include_ao_metrics: true  # 선택 사항: AlwaysOn 사용자의 경우 
+    tags:  # 선택 사항
       - 'service:<CUSTOM_SERVICE>'
       - 'env:<CUSTOM_ENV>'
     azure:
@@ -341,7 +333,7 @@ instances:
 연결된 설정 파일로 클러스터 점검을 설정하려면 다음 경로로 설정 파일을 클러스터 에이전트 컨테이너에 연결합니다. `/conf.d/sqlserver.yaml`:
 
 ```yaml
-cluster_check: true  # Make sure to include this flag
+cluster_check: true  # 이 플래그를 포함해야 합니다.
 init_config:
 instances:
   - dbm: true
@@ -349,11 +341,11 @@ instances:
     username: datadog
     password: '<PASSWORD>'
     connector: "odbc"
-    driver: "FreeTDS"
-    tags:  # Optional
+    driver: "ODBC Driver 18 for SQL Server"
+    tags:  # 선택 사항
       - 'service:<CUSTOM_SERVICE>'
       - 'env:<CUSTOM_ENV>'
-    # 프로젝트와 인스턴스를 추가한 후에는 CPU, 메모리 등과 같은 추가 클라우드 데이터를 풀하도록 Datadog Azure 통합을 설정합니다.
+    # 프로젝트와 인스턴스를 추가한 후 CPU, 메모리 등과 같은 추가 클라우드 데이터를 가져오도록 Datadog Azure 통합을 구성합니다.
     azure:
       deployment_type: '<DEPLOYMENT_TYPE>'
       fully_qualified_domain_name: '<AZURE_ENDPOINT_ADDRESS>'
@@ -380,8 +372,8 @@ metadata:
           "username": "datadog",
           "password": "<PASSWORD>",
           "connector": "odbc",
-          "driver": "FreeTDS",
-          "tags": ["service:<CUSTOM_SERVICE>", "env:<CUSTOM_ENV>"],  # Optional
+          "driver": "ODBC Driver 18 for SQL Server",
+          "tags": ["service:<CUSTOM_SERVICE>", "env:<CUSTOM_ENV>"],  # 선택 사항
           "azure": {
             "deployment_type": "<DEPLOYMENT_TYPE>",
             "fully_qualified_domain_name": "<AZURE_ENDPOINT_ADDRESS>"
@@ -407,7 +399,7 @@ spec:
 [2]: /ko/agent/cluster_agent/clusterchecks/
 [3]: https://helm.sh
 [4]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/assets/configuration/spec.yaml#L353-L383
-[5]: /ko/agent/guide/secrets-management
+[5]: /ko/agent/configuration/secrets-management
 {{% /tab %}}
 {{< /tabs >}}
 
