@@ -61,7 +61,7 @@ To add a mobile application, navigate to the [**Mobile Applications List** tab][
 
 To edit or delete a mobile application, hover over a mobile application in the **Mobile Applications List** and click on the respective icon.
 
-**Note**: Mobile Application Testing does not provide full support for applications developed with Flutter SDK.
+**Note**: Mobile Application Testing does not provide full support for Flutter applications.
 
 ## Manage application versions
 
