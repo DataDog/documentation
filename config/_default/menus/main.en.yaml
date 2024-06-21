@@ -2838,12 +2838,12 @@ menu:
       identifier: custom_instrumentation_dotnet
       weight: 2028
     - name: Android
-      url: tracing/trace_collection/custom_instrumentation/android
+      url: tracing/trace_collection/custom_instrumentation/android/otel
       parent: custom_instrumentation
       identifier: custom_instrumentation_android
       weight: 2029
     - name: iOS
-      url: tracing/trace_collection/custom_instrumentation/ios
+      url: tracing/trace_collection/custom_instrumentation/ios/otel
       parent: custom_instrumentation
       identifier: custom_instrumentation_ios
       weight: 2030
