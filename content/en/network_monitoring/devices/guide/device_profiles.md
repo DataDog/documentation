@@ -116,8 +116,8 @@ The advanced options for scalar and tabular metrics are the same:
 
 ### Apply a profile to created devices
 
-1. After you save a profile, navigate back to the [profile home page][4] and select the **Download All Profiles** option. This allows you to download the `yaml` files for the profiles you created. 
-2. Place the `yaml` files in the [profile directory][13] on each of the relevant installed Agents.
+1. After you save a profile, navigate back to the [profile home page][4] and select the **Download All Profiles** option. This allows you to download the JSON `gzip` files for the profiles you created. 
+2. Place the JSON files in the [profile directory][13] on each of the relevant installed Agents.
 3. Restart the Datadog Agent.
 4. To ensure the profiles you created are accurate, confirm that NDM is receiving metrics from the matched devices as expected.
 
