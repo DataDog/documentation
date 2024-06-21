@@ -1,5 +1,5 @@
 ---
-title: Cloud SIEM Risk Based Entity Insights
+title: Risk Based Entity Insights for AWS
 ---
 
 {{< callout url=""https://datadoghq.com/private-beta/risk-based-entity-insights" header="Join the Beta!">}}
@@ -8,14 +8,14 @@ Risk Based Entity Insights is in private beta.
 
 ## Overview
 
-[Cloud SIEM's Risk Based Entity Insights][4] consolidates multiple data sources, such as SIEM threats and CSM insights, into a profile representing a single security entity, such as an IAM user.
+[Cloud SIEM's Risk Based Entity Insights for AWS][4] consolidates multiple data sources, such as SIEM threats and CSM insights, into a profile representing a single security entity, such as an IAM user.
 
 With Risk Based Entity Insights, you can:
 
 - Explore entities, filtering them by attributes such as [risk score](#risk-scoring) or entity type.
 - View all data relevant to an entity, such as signals, misconfigurations, and identity risks.
 - Triage relevant items in bulk.
-- Take mitigation steps such as creating an automated workflow or creating a global case for an entity.
+- Take mitigation steps such as creating a global suppression or creating a case for an entity.
 
 ## Explore Entities
 
@@ -27,13 +27,13 @@ On the [Entities Explorer page][4], you can view all entities that have at least
 
 ### Quickly build context on an entity
 
-Click an entity in the [Explorer][4] to open the entity details panel.
+Click an entity in the [Explorer][4] to open the entity side panel.
 
 {{< img src="security/entities/entity-side-panel.png" alt="The details panel for an entity" style="width:90%;" >}}
 
-The top of the panel displays the count of related signals, identity risks, and so on, with links to the list view of each.
+The **What happened** section of the panel displays the count of related signals and how they have contributed to the risk score, as well as any potential configuration risks.
 
-The **Entity Context** section displays entity's attributes, such as the entity type and the list of fired signals. 
+The **What contributes** section displays the list of fired signals, relevant misconfigurations, and identity risks.
 
 ### Triage and mitigate threats in bulk
 
@@ -43,7 +43,7 @@ The **Next steps** section of the entity details panel includes the available mi
 
 ## Prerequisites
 
-- For coverage of AWS resources, [AWS must be configured for Cloud SIEM][1].
+- For AWS entities coverage, [AWS must be configured for Cloud SIEM][1].
 - To view associated Cloud Security Management (CSM) data in the entity panel, [CSM must be configured][2].
 
 No other setup is required to use Cloud SIEM Entities.
