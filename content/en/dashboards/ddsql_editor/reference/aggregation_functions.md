@@ -36,18 +36,3 @@ Aggregate functions compute a single result from a set of input values, usually 
 | count(expr *e*) | integer | Computes the number of input rows in which the input value is not null. |
 | count(distinct expr *e1*, *e2* ...) | integer | Computes the number of input values in which the input value is not null. |
 | count(*) | integer | Computes the number of input rows. |
-
-### string_agg
-| Name | Return type | Description |
-|------|-------------|-------------|
-| string_agg(expr *e*, text *delimiter*) | text | Concatenates the non-null input values into a string. Each value after the first is preceded by the corresponding *delimiter* (if it's not `NULL`). |
-
-### approx_percentile
-| Name | Return type | Description |
-|------|-------------|-------------|
-| approx_percentile(expr *e*, numeric *n*) | real | Returns an approximated value for the desired percentile *n*. |
-
-### array_agg
-| Name | Return type | Description |
-|------|-------------|-------------|
-| array_agg(value *v1*, *v2* ...) | array | Collects all the non-null input values into an array. |

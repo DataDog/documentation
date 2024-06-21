@@ -57,30 +57,10 @@ The functions below can be used in windows, along with the [aggregation function
 |------|-------------|-------------|
 | dense_rank() | integer | Returns the rank of the current row, without gaps. This function effectively counts peer groups. |
 
-### cumulative_rank
-| Name | Return type | Description |
-|------|-------------|-------------|
-| cumulative_rank() | integer | Returns the relative rank of the current row: `(rank - 1) / (total partition rows - 1)`. The value thus ranges from 0 to 1 inclusive. |
-
-### lag
-| Name | Return type | Description |
-|------|-------------|-------------|
-| lag(value *T* [, integer *offset* [, value *default* ]]) | *T* | Returns value evaluated at the row that is offset rows before the current row within the partition; if there is no such row, instead returns *default* (which must be of a type compatible with *value*). Both offset and default are evaluated with respect to the current row. If omitted, *offset* defaults to `1` and *default* to `NULL`. |
-
-### lead
-| Name | Return type | Description |
-|------|-------------|-------------|
-| lead(value *T* [, integer *offset* [, value *default* ]]) | *T* | Returns value evaluated at the row that is *offset* rows after the current row within the partition; if there is no such row, instead returns *default* (which must be of a type compatible with *T*). Both *offset* and *default* are evaluated with respect to the current row. If omitted, *offset* defaults to `1` and *default* to `NULL`. |
-
 ### first_value
 | Name | Return type | Description |
 |------|-------------|-------------|
 | first_value(value *T*) | *T* | Returns the value evaluated at the row that is the first row of the window frame. |
-
-### nth_value
-| Name | Return type | Description |
-|------|-------------|-------------|
-| nth_value(value *T*, integer *n*) | *T* | Returns the value evaluated at the row that is the *n*th row of the window frame (counting from 1); returns `NULL` if there is no such row. |
 
 ### last_value
 | Name | Return type | Description |

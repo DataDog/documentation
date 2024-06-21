@@ -47,7 +47,7 @@ This stricter comparison returns only one result:
 
 ## Implicit tag references
 
-[Schema-on-read][1] references on tables that support tags are treated as tag lookups, and are called implicit tag references. 
+Schema-on-read references on tables that support tags are treated as tag lookups, and are called implicit tag references. 
 
 For example, the `az` column does not exist on the `resources.host` table, but you may `SELECT az FROM resources.host`. DDSQL recognizes that the `resources.host` table supports schema on read, and `az` becomes an implicit tag reference. Its name in the projection is `az`, which may be used throughout the query.
 
@@ -64,5 +64,3 @@ SELECT #service FROM resources.host
 The tag's name in the projection is `#service`, which should be used throughout the query, as `service` refers to the schema column.
 
 For tag references that require quoting, the `#` should appear outside of quotes (for example, `#"availability-zone"`). This is necessary to differentiate between explicit tag references and columns that start with a `#` character.
-
-[1]: /dashboards/ddsql_editor/reference#schema-on-read

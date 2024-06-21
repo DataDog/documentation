@@ -53,22 +53,6 @@ DDSQL also supports the following comparator keywords as they are defined in the
 
 DDSQL supports the `BETWEEN` keyword such that `a BETWEEN x AND y` is equivalent to `a >= x AND a <= y` (see the Postgres documentation for `BETWEEN` for details).
 
-## Array operators
-
-Accessing specific elements in array-typed columns and expressions can be done with the index operator: `<EXPRESSION>[<INDEX>]`. Arrays in DDSQL are 1-indexed, following SQL standards, which means the first element in an array is accessed with `[1]`, not `[0]`.
-
-For example, to access the first element in an array:
-
-{{< code-block lang="sql" >}}
-SELECT column[1] FROM ...
-{{< /code-block >}}
-
-An expression can be used to specify the index. For example, to access the last element in an array:
-
-{{< code-block lang="sql" >}}
-SELECT column[array_length(column)] FROM ...
-{{< /code-block >}}
-
 ## Logical operators
 
 | Name    | Description             |
