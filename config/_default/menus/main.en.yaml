@@ -3534,11 +3534,16 @@ menu:
       identifier: data_streams
       parent: apm_heading
       weight: 50000
+    - name: Schema Tracking
+      url: data_streams/schema_tracking
+      identifier: data_streams_schema_tracking
+      parent: data_streams
+      weight: 1
     - name: Troubleshooting
       url: data_streams/troubleshooting
       identifier: data_streams_troubleshooting
       parent: data_streams
-      weight: 1
+      weight: 2
     - name: Data Jobs Monitoring
       url: data_jobs/
       pre: data-jobs-monitoring
