@@ -1,22 +1,18 @@
 ---
-title: Cloud SIEM Entities and Risk Scoring
+title: Cloud SIEM AWS Entities and Risk Scoring
 ---
 
 {{< callout url="https://google.com" header="Join the Beta!">}}
 Cloud SIEM Entities is in private beta.
 {{< /callout >}}
 
-<div style="border: 1px solid black; height: 400px; width: 100%; line-height: 400px; text-align: center; margin-bottom: 1em">
-Screenshot of Entities Explorer page
-</div>
-
 ## Overview
 
-Cloud SIEM Entities consolidates multiple data sources, such as SIEM threats and CSM insights, into a profile representing a single security entity, such as an IAM user.
+[Cloud SIEM AWS Entities][4] consolidates multiple data sources, such as SIEM threats and CSM insights, into a profile representing a single security entity, such as an IAM user.
 
 With Cloud SIEM Entities, you can:
 
-- Explore entities, sorting and filtering them by attributes such as [risk score](#risk-scoring) or environment.
+- Explore entities, filtering them by attributes such as [risk score](#risk-scoring) or entity type.
 - View all data relevant to an entity, such as signals, misconfigurations, and identity risks.
 - Triage relevant items in bulk.
 - Take mitigation steps such as creating an automated workflow or creating a global case for an entity.
@@ -25,27 +21,25 @@ With Cloud SIEM Entities, you can:
 
 ### Query and filter entities
 
-On the [Entities Explorer page][], you can view all entities that have at least one signal.
+On the [Entities Explorer page][4], you can view all entities that have at least one signal.
+
+{{< img src="security/entities-explorer.png" alt="A list of entities and their risk scores in the Entities Explorer" style="width:100%;" >}}
 
 ### Quickly build context on an entity
 
-Click an entity in the [Explorer][] to open the entity panel.
+Click an entity in the [Explorer][4] to open the entity details panel.
 
-<div style="border: 1px solid black; height: 400px; width: 100%; line-height: 400px; text-align: center; margin-bottom: 1em">
-Screenshot of the entity side panel
-</div>
+{{< img src="security/entities-side-panel.png" alt="The details panel for an entity" style="width:80%;" >}}
 
-The top of the entity panel displays the count of related signals, identity risks, and so on, with links to the list view of each.
+The top of the panel displays the count of related signals, identity risks, and so on, with links to the list view of each.
 
 The **Entity Context** section displays entity's attributes, such as the entity type and the list of fired signals. 
 
 ### Triage and mitigate threats in bulk
 
-The **Next steps** section of the entity panel includes the available mitigation steps.
+The **Next steps** section of the entity details panel includes the available mitigation steps.
 
-<div style="border: 1px solid black; height: 400px; width: 100%; line-height: 400px; text-align: center; margin-bottom: 1em">
-Screenshot with the next steps area highlighted and the "More actions" menu expanded
-</div>
+{{< img src="security/entity-next-steps.png" alt="The available next steps for an entity as shown in the entity details panel" style="width:80%;" >}}
 
 ## Prerequisites
 
@@ -63,3 +57,4 @@ The risk score is calculated from the characteristics of the entity's associated
 [1]: /security/cloud_siem/guide/aws-config-guide-for-cloud-siem/
 [2]: https://docs.datadoghq.com/security/cloud_security_management/setup
 [3]: https://app.datadoghq.com/security
+[4]: https://app.datadoghq.com/security/entities
