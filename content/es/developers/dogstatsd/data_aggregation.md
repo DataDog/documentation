@@ -24,7 +24,7 @@ La agregación mejora el rendimiento al reducir el número de llamadas a la API,
 
 Considera una [métrica COUNT (Recuento)][3] que se incrementa 1.000 veces (1 cada vez) en un corto periodo de tiempo. En lugar de realizar 1.000 llamadas a la API por separado, el servidor de DogStatsD las agrega en unas pocas llamadas a la API. Dependiendo de la situación (consulta a continuación), la biblioteca puede enviar, por ejemplo, 1 punto de datos con un valor 1.000 o X puntos de datos agregados con un valor acumulado de 1.000.
 
-## ¿Cómo se realiza la agregación con el servidor DogStatsD?
+## ¿Cómo se realiza la agregación con el servidor de DogStatsD?
 
 [DogStatsD][2] utiliza un intervalo de vaciado de 10 segundos. Cada 10 segundos, [DogStatsD][2] comprueba todos los datos recibidos desde el último vaciado. Todos los valores que corresponden al mismo nombre de métrica y a las mismas etiquetas (tags) se agregan juntos en un único valor.
 
