@@ -1,7 +1,7 @@
 ---
 aliases:
 - /es/developers/marketplace/offering
-description: Aprende a desarrollar y publicar un cuadro de integraciones.
+description: Aprende a desarrollar y publicar un cuadro de integración.
 further_reading:
 - link: https://www.datadoghq.com/blog/datadog-marketplace/
   tag: Blog
@@ -14,11 +14,11 @@ type: Documentation
 ---
 ## Información general
 
-Esta página guía a los socios tecnológicos a través de la creación del cuadro que representa una oferta que aparecerá en la página **Integraciones** o **Mercado**.
+Esta página guía a los socios tecnológicos a través de la creación del cuadro que representa una oferta que aparecerá en la página **Integraciones** o **Marketplace**.
 
-## Cuadro de integraciones
+## Cuadro de integración
 
-Este cuadro sirve como punto de entrada donde los clientes pueden conocer tu oferta, ver instrucciones de configuración e instalar o comprar tu oferta para desbloquear dashboards y recursos adicionales, listos para utilizar.
+Este cuadro sirve como punto de entrada donde los clientes pueden conocer tu oferta, ver instrucciones de configuración e instalar o comprar tu oferta para desbloquear dashboards y recursos adicionales, disponibles de forma inmediata.
 
 {{< img src="developers/integrations/marketplace_or_integrations_tile.png" alt="Modal de cuadro expandido con un ejemplo de oferta en la página Integraciones o Mercado" style="width:100%" >}}
 
@@ -185,7 +185,7 @@ Una vez creado el archivo `README.md`, añade las siguientes secciones como H2s 
 
 | Nombre del encabezado | Encabezado |
 |-------------|--------|
-| Información general | Escribe una descripción bajo un encabezado `## Overview` que describa el valor y los beneficios que tu oferta proporciona a los usuarios, por ejemplo, dashboards, repeticiones de sesiones de usuario, logs, alertas listos para utilizar, y más. <br><br>Esta información se muestra en la pestaña **Información general** del cuadro. |
+| Información general | Escribe una descripción bajo un encabezado `## Overview` que describa el valor y los beneficios que tu oferta proporciona a los usuarios, por ejemplo, dashboards, repeticiones de sesiones de usuario, logs, alertas disponibles de forma inmediata, y más. <br><br>Esta información se muestra en la pestaña **Información general** del cuadro. |
 | Configuración | Incluye todos los pasos necesarios para configurar tu oferta que incluye información dividida en encabezados H3 (`###`).<br>Los temas estándar incluyen:<br><br>- Instalar la integración utilizando el cuadro de integración en la aplicación. <br>- Configurar la integración con las funciones y los permisos adecuados en tu organización Datadog.<br>- Acceso a las funciones listas para utilizar de Datadog, a las que pueden acceder los usuarios que han adquirido e instalado la integración (como métricas, eventos, monitores, logs, dashboards, etc.).|
 | Desinstalación | Incluye todos los pasos para desinstalar tu oferta. Esta información se muestra en la pestaña **Configurar** del cuadro.|
 | Datos recopilados  | Especifica los tipos de datos recopilados por tu integración (si procede), incluyendo métricas, eventos, checks de servicios y logs. Las métricas añadidas al archivo `metadata.csv` aparecen automáticamente en esta pestaña. <br><br> Si tu oferta no proporciona ninguno de estos datos, no es necesario que añadas una sección para datos recopilados. |
@@ -271,7 +271,7 @@ Una vez que hayas respondido a los comentarios y hayas vuelto a solicitar revisi
 
 ## Solucionar errores
 
-Las integraciones listas para utilizar del repositorio `integrations-extras` pueden encontrarse con errores de validación cuando el repositorio bifurcado no está actualizado con el origen.
+Las integraciones del repositorio `integrations-extras` disponibles de forma inmediata pueden encontrarse con errores de validación cuando el repositorio bifurcado no está actualizado con el origen.
 
 Para resolver los errores de validación, actualiza el repositorio bifurcado en la web de GitHub:
 
