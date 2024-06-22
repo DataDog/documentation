@@ -17396,6 +17396,12 @@ components:
     UsageBillableSummaryHour:
       description: Response with monthly summary of data billed by Datadog.
       properties:
+        account_name:
+          description: The account name.
+          type: string
+        account_public_id:
+          description: The account public ID.
+          type: string
         billing_plan:
           description: The billing plan.
           type: string
@@ -33022,6 +33028,15 @@ paths:
         schema:
           format: date-time
           type: string
+      - description: 'Boolean to specify whether to include accounts connected to
+          the current account as partner customers in the Datadog partner network
+          program. Defaults to `false`. '
+        in: query
+        name: include_connected_accounts
+        required: false
+        schema:
+          default: false
+          type: boolean
       responses:
         '200':
           content:
