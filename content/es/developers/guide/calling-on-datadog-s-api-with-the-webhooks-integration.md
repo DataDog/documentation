@@ -18,11 +18,11 @@ Cada webhook debe configurarse con un nombre (al que se hará referencia en los 
 * **url field** (campo de url): la dirección URL utilizada al hacer ping a la API. Su aspecto es el siguiente:
 `https://api.datadoghq.com/api/v1/<API_ENDPOINT>?api_key=<Datadog_API_KEY>`
 
-* **custom payload field** (campo de carga útil personalizada): contiene el JSON con todas las opciones que quieras incluir en la llamada a la API. El tipo de llamada a la API determina las opciones apropiadas. A veces puedes utilizar el contenido `$symbol` del monitor para rellenar partes de los valores de las opciones.
+* **custom payload field** (campo de carga útil personalizada): contiene el JSON con todas las opciones que quieres incluir en la llamada a la API. El tipo de llamada a la API determina las opciones apropiadas. A veces puedes utilizar el contenido `$symbol` del monitor para rellenar partes de los valores de las opciones.
 
 ## Ejemplo
 
-Imagina que tienes una serie de monitores y algunas personas de tu equipo quieren ver cuando se ejecuta un recuento momentáneo de estos monitores. Les interesa este recuento en términos de cuántos de estos monitores están en un estado OK y cuántos están en un estado CRÍTICO. Puedes añadir una notificación de webhook para enviar una llamada a la API "check_run" cada vez que uno de estos monitores pasa a un estado de alerta u OK. A partir de allí, puedes añadir un widget de "check status" en un [screenboard][4] para mostrar a tus compañeros de equipo cuál era el estado de todos estos monitores en un momento dado.
+Imagina que tienes una serie de monitores y algunas personas de tu equipo quieren ver cuando se ejecuta un recuento momentáneo de estos monitores. Les interesa este recuento en términos de cuántos de estos monitores están en un estado OK y cuántos están en un estado CRÍTICO. Puedes añadir una notificación de webhook para enviar una llamada a la API "check_run" cada vez que uno de estos monitores pasa a un estado de alerta u OK. A partir de allí, puedes añadir un widget de "check status" en un [screenboard][4], para mostrar a tus compañeros de equipo cuál era el estado de todos estos monitores en un momento dado.
 
 En ese caso, necesitarás dos webhooks distintos, uno para "mymonitorgroup-alert-check" y otro para "mymonitorgroup-ok-check". Ambos utilizan el mismo endpoint de la API, por lo que sus respectivos valores de nombre y URL serán los siguientes:
 
@@ -32,7 +32,7 @@ En ese caso, necesitarás dos webhooks distintos, uno para "mymonitorgroup-alert
 * Nombre: mymonitorgroup-ok-check
   URL: `https://api.datadoghq.com/api/v1/check_run?api_key=<DATADOG_API_KEY>`
 
-La carga útil personalizada es donde se aplican el nombre y las etiquetas del check_run. Para el webhook "alerta", considera lo siguiente:
+La carga útil personalizada es donde se aplican el nombre y las etiquetas (tags) del check_run. Para el webhook "alerta", considera lo siguiente:
 
 ```json
 {
