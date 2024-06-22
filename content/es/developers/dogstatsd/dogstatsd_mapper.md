@@ -1,5 +1,5 @@
 ---
-description: Convierte partes de nombres de métricas statsd a etiquetas utilizando
+description: Convierte partes de nombres de métricas statsd a etiquetas (tags) utilizando
   reglas de mapeo en DogStatsD.
 further_reading:
 - link: developers/dogstatsd
@@ -48,15 +48,15 @@ Con los siguientes parámetros:
 | ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------- |
 |  `<PROFILE_NAME>`       | Nombre para dar al perfil de tu regla de mapeo.                                                                                              | Sí                     |
 | `<PROFILE_PREFIX>`      | Prefijo del nombre de métrica asociado a este perfil.                                                                                        | Sí                     |
-| `<METRIC_TO_MATCH>`     | Nombre de métrica del que se extraerán grupos con el la lógica de coincidencia de [comodín](#wildcard-match-pattern) o [Regex](#regex-match-pattern).         | Sí                     |
+| `<METRIC_TO_MATCH>`     | Nombre de métrica del que se extraerán grupos con el la lógica de coincidencia de [comodín](#wildcard-match-pattern) o [regex](#regex-match-pattern).         | Sí                     |
 | `<MATCH_TYPE>`          | Tipo de coincidencia que se aplicará a `<METRIC_TO_MATCH>`. Puede ser [`wildcard`](#wildcard-match-pattern) o [`regex`](#regex-match-pattern)    | no, por defecto: `wildcard` |
 | `<MAPPED_METRIC_NAME>`  | Nuevo nombre de métrica para enviar a Datadog con las etiquetas definidas en el mismo grupo.                                                           | Sí                     |
 | `<TAG_KEY>`             | Clave de etiqueta para asociar a las etiquetas recopiladas.                                                                                           | No                      |
 | `<TAG_VALUE_TO_EXPAND>` | Etiquetas recopiladas del `<MATCH_TYPE>` en línea.                                                                                     | No                      |
 
-## Patrón de coincidencias con comodines
+## Patrón de coincidencia con comodín
 
-El patrón de coincidencia con comodines empareja nombres de métricas separados por puntos utilizando `*` como comodín. El nombre de la métrica debe estar compuesto únicamente por caracteres alfanuméricos, `.` y `_` para que este patrón funcione. Los grupos extraídos pueden expandirse con una de las siguientes opciones:
+El patrón de coincidencia con comodín empareja nombres de métricas separados por puntos utilizando `*` como comodín. El nombre de la métrica debe estar compuesto únicamente por caracteres alfanuméricos, `.` y `_` para que este patrón funcione. Los grupos extraídos pueden expandirse con una de las siguientes opciones:
 
 - Formato `$n`: `$1`, `$2`, `$3`, etc.
 - Formato `${n}`: `${1}`, `${2}`, `${3}`, etc.
@@ -78,9 +78,9 @@ dogstatsd_mapper_profiles:
 
 Enviaría la métrica `custom_metric.process` a Datadog con las etiquetas `tag_key_1:value_1` y `tag_key_2:value_2`.
 
-## Patrón de coincidencia Regex
+## Patrón de coincidencia regex
 
-El patrón de coincidencia regex empareja nombres de métricas utilizando patrones regex. En comparación con el patrón de coincidencias con comodín, permite definir grupos obtenidos que contienen `.`. A continuación, los grupos extraídos pueden ampliarse con una de las siguientes opciones:
+El patrón de coincidencia regex empareja nombres de métricas utilizando patrones regex. En comparación con el patrón de coincidencia con comodín, permite definir grupos obtenidos que contienen `.`. A continuación, los grupos extraídos pueden ampliarse con una de las siguientes opciones:
 
 - Formato `$n`: `$1`, `$2`, `$3`, etc.
 - Formato `${n}`: `${1}`, `${2}`, `${3}`, etc.
