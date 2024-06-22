@@ -1,18 +1,18 @@
 ---
 kind: Guía
-title: Creación de una integración con JMX
+title: Creación de una integración JMX
 ---
 
-Esta guía describe la creación de una integración con JMX utilizando el [conjunto de herramientas para desarrolladores][1].
+Esta guía describe la creación de una integración JMX utilizando el [conjunto de herramientas para desarrolladores][1].
 
 ## Configuración
-### Crear un andamiaje para la integración con JMX
+### Crear un andamiaje para la integración JMX
 
 ```bash
 ddev create --type jmx MyJMXIntegration
 ```
 
-La integración con JMX contiene configuraciones específicas de init y de instancia:
+La integración JMX contiene configuraciones específicas de init y de instancia:
 
 ```yaml
 init_config:
@@ -25,7 +25,7 @@ instancias:
     ...
 ```
 
-Para ver más configuraciones de `init` y `instance`, consulta la [documentación de la integración con JMX][2].
+Para ver más configuraciones de `init` y `instance`, consulta la [documentación de la integración JMX][2].
 
 ### Definir la métricas a recopilar
 
@@ -38,9 +38,9 @@ También puedes utilizar herramientas como [VisualVM][3], [JConsole][4] o [jmxte
 
 Edita `metrics.yaml` para definir los filtros para recopilar métricas.
 
-Para obtener más información sobre el formato de los filtros de métricas, consulta [la integración con JMX][5].
+Para obtener más información sobre el formato de los filtros de métricas, consulta [la integración JMX][5].
 
-Los [casos de testst JMXFetch][6] proporcionan ejemplos del funcionamiento de los filtros de métricas.  
+Los [casos de tests JMXFetch][6] proporcionan ejemplos del funcionamiento de los filtros de métricas.  
 
 Ejemplo de `metrics.yaml`:
 
