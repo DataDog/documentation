@@ -938,10 +938,10 @@ agents:
 {{< /tabs >}}
 {{< /collapse-content >}}
 
-{{< collapse-content title="Universal Kafka Monitoring (Private Beta)" level="h4" >}}
+{{< collapse-content title="Kafka Monitoring (Private Beta)" level="h4" >}}
 
 <div class="alert alert-info">
-Universal Kafka Monitoring is available in <strong>Private beta</strong>.
+Kafka Monitoring is available in <strong>Private beta</strong>.
 </div>
 
 <strong>Note</strong>:
