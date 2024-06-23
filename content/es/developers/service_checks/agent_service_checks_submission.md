@@ -19,7 +19,7 @@ A continuación, encontrarás los distintos parámetros y tipos de datos disponi
 |------------|-----------------|----------|---------------|---------------------------------------------------------------------------------------------------------------|
 | `name`     | Cadena          | Sí      | -             | Nombre del check de servicio.                                                                                |
 | `status`   | Int             | Sí      | -             | Constante que describe el estado del servicio: `0` para OK (Normal), `1` para WARN (Advertencia), `2` para CRITICAL (Crítico) y `3` para UNKNOWN (Desconocido). |
-| `tags`     | Lista de cadenas | No       | `None`        | Lista de etiquetas para asociar al check de servicio.                                                          |
+| `tags`     | Lista de cadenas | No       | `None`        | Lista de etiquetas (tags) para asociar al check de servicio.                                                          |
 | `hostname` | Cadena          | No       | Host actual  | Nombre de host para asociar al check de servicio. Por defecto es el host actual.                                |
 | `message`  | Cadena          | No       | `None`        | Información adicional o una descripción de por qué se ha producido este estado.                                          |
 
