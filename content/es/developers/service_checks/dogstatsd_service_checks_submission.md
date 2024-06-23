@@ -28,7 +28,7 @@ Parámetro de función en checks de servicios:
 |------------------------|-----------------|----------|---------------|------------------------------------------------------------------------------------------------------------|
 | `<SERVICE_check_NAME>` | Cadena          | Sí      | -             | Nombre del check de servicio.                                                                             |
 | `<STATUS>`             | Int             | Sí      | -             | Constante que describe el estado del servicio: `0` para OK (Normal), `1` para WARN (Advertencia), `2` para CRITICAL (Crítico) y `3` para UNKNOWN (Desconocido). |
-| `<TAGS>`               | Lista de pares clave/valor | No       | -             | Lista de etiquetas (tags) para asociar al check de servicio.                                                        |
+| `<TAGS>`               | Lista de pares clave/valor | No       | -             | Lista de etiquetas para asociar al check de servicio.                                                        |
 | `<hostNAME>`           | Cadena          | No       | Host actual  | Nombre del host para asociar al check de servicio.                                                          |
 | `<MESSAGE>`            | Cadena          | No       | -             | Información adicional o una descripción de por qué se ha producido el estado.                                        |
 
