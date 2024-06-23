@@ -110,12 +110,12 @@ La etiqueta de táctica/técnica `<TAG>` mostrada no sigue el [marco MITRE](http
 
 ### Cases
 ```
-El estado del caso <CASE_STATUS> para <RULE_ID_KEY>=<RULE_ID> es incorrecto, debería ser uno de <STATUS_LIST>.
+The case status <CASE_STATUS> for <RULE_ID_KEY>=<RULE_ID> is incorrect, it should be one of <STATUS_LIST>.
 ```
 El estado del caso debe ser `CRITICAL`, `HIGH`, `MEDIUM`, `LOW` o `INFO`.
 
 ```
-El orden de los casos para partnerRuleId=<RULE_ID> es incorrecto. Modifícalo para ordenar los casos de mayor a menor gravedad.
+The case ordering for partnerRuleId=<RULE_ID> is incorrect, please modify to order cases from the highest severity to the lowest.
 ```
 Cada definición de regla debe ordenarse por gravedad decreciente. Reordena los casos como `CRITICAL`, `HIGH`, `MEDIUM`, `LOW` y `INFO`.
 
