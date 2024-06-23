@@ -907,7 +907,7 @@ Universal Service Monitoring can capture HTTP/2 and gRPC traffic.
 <strong>Note</strong>:
 <br>
 <ul role="list">
-  <li>Producers and consumers require Linux Kernel version 5.2 or later.</li>
+  <li>Require Linux Kernel version 5.2 or later.</li>
   <li>Requires Agent version 7.53 or greater.</li>
 </ul>
 
