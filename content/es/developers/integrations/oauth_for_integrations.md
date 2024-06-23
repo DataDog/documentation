@@ -41,19 +41,19 @@ Puedes incluir OAuth en una nueva integración (o añadirlo a una integración e
 
 El cliente es el componente de una aplicación que permite a los usuarios autorizar el acceso de la aplicación a los datos de Datadog del cliente. Para poder acceder, el cliente necesita el token de acceso adecuado.
 
-1. Ve a la pestaña **OAuth & Permissions** (OAuth y Autorizaciones) en **Features** (Características) y haz clic en **New Confidential OAuth Client** (Nuevo cliente confidencial de OAuth).
+1. Ve a la pestaña **OAuth & Permissions** (OAuth y Permisos) en **Features** (Características) y haz clic en **New Confidential OAuth Client** (Nuevo cliente confidencial OAuth).
 
-   Los clientes de OAuth que creas para las integraciones son **clientes confidenciales** que proporcionan un ID y un secreto de cliente. El cliente que creas en este paso es una versión privada de cliente, cuyas credenciales puedes utilizar para realizar tests. Cuando se crea una versión publicada de este cliente, recibes un nuevo conjunto de credenciales. **Estas credenciales no se volverán a mostrar después de la creación del cliente, así que asegúrate de guardarlas en un lugar seguro.**
+   Los clientes OAuth que creas para las integraciones son **clientes confidenciales** que proporcionan un ID y un secreto de cliente. El cliente que creas en este paso es una versión privada de cliente, cuyas credenciales puedes utilizar para realizar tests. Cuando se crea una versión publicada de este cliente, recibes un nuevo conjunto de credenciales. **Estas credenciales no se volverán a mostrar después de la creación del cliente, así que asegúrate de guardarlas en un lugar seguro.**
 
 2. Introduce la información de tu cliente, como el nombre, la descripción, los URI de redireccionamiento y la URL de incorporación.
-3. Configura contextos para el cliente de OAuth buscando contextos y seleccionando sus casillas de verificación en la columna **Requested** (Necesarios).
+3. Configura contextos para el cliente OAuth buscando contextos y seleccionando sus casillas de verificación en la columna **Requested** (Necesarios).
 
    Los contextos determinan los tipos de datos a los que puede acceder tu aplicación en la cuenta Datadog del cliente. Esto permite a tu integración acceder a los contextos necesarios. Solicita únicamente la cantidad mínima de contextos necesarios para tu caso de uso, ya que más adelante se pueden añadir más datos en función de las necesidades.
 
    Para enviar datos a Datadog, debe seleccionarse el contexto `api_keys_write`. Se trata de un contexto privad que sólo está aprobado para socios de integraciones y te permite crear una clave de API en nombre del usuario, que puedes utilizar para enviar datos a Datadog.
 
 4. Haz clic en **Save Changes** (Guardar cambios).
-5. Después de crear un cliente de OAuth y asignarle contextos, puedes implementar el protocolo OAuth PKCE en tu integración, completar el flujo de concesión de códigos de autorización y empezar a escribir código de integración utilizando los endpoints disponibles a través de OAuth.
+5. Después de crear un cliente OAuth y asignarle contextos, puedes implementar el protocolo OAuth PKCE en tu integración, completar el flujo de concesión de códigos de autorización y empezar a escribir código de integración utilizando los endpoints disponibles a través de OAuth.
 
    En el flujo de concesión de códigos de autorización, recibes un código de autorización y un token de actualización, y luego intercambias el código por un token de acceso que puede utilizarse para acceder a los datos que quieres extraer de Datadog.
 
