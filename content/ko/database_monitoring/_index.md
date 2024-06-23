@@ -26,12 +26,6 @@ further_reading:
 kind: 설명서
 title: 데이터베이스 모니터링
 ---
-{{< site-region region="gov" >}}
-해당 지역에서는 데이터베이스 모니터링이 지원되지 않습니다
-{{< /site-region >}}
-
-{{< img src="database_monitoring/dbm-overview.png" alt="데이터베이스 모니터링" style="width:100%;">}}
-
 Datadog 데이터베이스 모니터링을 사용하면 호스트 전반에 있는 데이터베이스에 대한 가시성을 확보할 수 있습니다. 쿼리 성능 메트릭 내역, 설명 계획, 호스트 수준 메트릭 등을 모두 한 곳에서 살펴보고, 데이터베이스의 상태와 성능을 파악하여 문제 발생 시 문제를 해결할 수 있습니다.
 
 ## 시작하기
@@ -60,7 +54,7 @@ Datadog 데이터베이스 모니터링은 자체 호스팅과 **Postgres**, **M
 
 ## Datadog 데이터베이스 모니터링 탐색하기
 
-UI에서 **[애플리케이션 성능 모니터링 > 데이터베이스][1]**를 클릭하여 데이터베이스 모니터링으로 이동
+Datadog에서 [데이터베이스 모니터링][1]로 이동합니다.
 
 ### 쿼리 성능 메트릭 세부 정보
 
@@ -105,6 +99,10 @@ UI에서 **[애플리케이션 성능 모니터링 > 데이터베이스][1]**를
 {{< img src="database_monitoring/databases-list.png" alt="Datadog 데이터베이스 페이지" style="width:90%;" >}}
 
 ## 참고 자료
+
+{{< learning-center-callout header="학습 센터에서 Datadog DBM으로 Postgres 데이터베이스를 모니터링해 보세요." btn_title="지금 등록" btn_url="https://learn.datadoghq.com/courses/database-monitoring"> }}
+Datadog 학습 센터에는 이 주제에 대해 학습하는 데 유용한 실습 과정이 다양하게 준비되어 있습니다. 무료로 등록하여 비효율성을 식별하고 Postgres 데이터베이스를 최적화하세요.
+{{< /learning-center-callout >}}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
