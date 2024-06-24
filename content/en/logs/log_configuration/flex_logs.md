@@ -53,14 +53,14 @@ Use the spectrum of log types shown in the image below to determine when to use 
 
 Compute is the querying capacity to run queries for Flex Logs. It is used when querying logs in the Flex Logs tier. It is not used for ingestion or when only searching Standard Indexing logs. The available compute tiers are:
 
-<div class="alert alert-warning">The compute sizes available for US3, US5, AP1, US1-FED are extra small and small.</div>
+<div class="alert alert-warning">The compute sizes available for US3, US5, AP1, US1-FED are XS and S.</div>
 
-| Compute size | Recommended Stored Volume        |
-| ------------ | -------------------------------- |
-| Extra small  | 20 to 50 billion events          |
-| Small        | 50 to 200 billion events         |
-| Medium       | 200 to 500 billion events        |
-| Large        | 500 billion to 1 trillion events |
+| Compute size     | Recommended Stored Volume        |
+| ---------------- | -------------------------------- |
+| Extra small (XS) | 20 to 50 billion events          |
+| Small (S)        | 50 to 200 billion events         |
+| Medium (M)       | 200 to 500 billion events        |
+| Large (L)        | 500 billion to 1 trillion events |
 
 Each Compute tier is approximately 2x in query performance and capacity of the previous tier. The number of concurrent queries that can be run thus depends on how each query is composed.
 
@@ -80,29 +80,51 @@ Consider the following factors when deciding on a compute tier:
 - The frequency and types of queries you run. For example, the query time windows you typically use to query your logs.
 
 The number of logs stored in the Flex tier has the largest impact on the size needed to performantly query the data. Datadog recommends the following compute sizes based on log volume:
-| Size                                  | Volume (events stored)   | Volume (Bytes per day) | Recommended number of users |
-| ------------------------------------- | ------------------------ | ---------------------- | --------------------------- |
-| Extra Small                           | 20 - 50 billion          | < ~1TB                 | Up to 10                    |
-| Small                                 | 50 - 200 billion         | < ~20TB                | Up to 250                   |
-| Medium                                | 200 - 500 billion        | < ~100TB               | Up to 500                   |
-| Large                                 | 500 billion - 1 trillion | < ~200TB               | Up to 1000                  |
-| Contact your Customer Success Manager | 1T+                      |
+| Size                                      | Volume (events stored)   |
+| ----------------------------------------- | ------------------------ |
+| Extra Small (XS)                          | 20 - 50 billion          |
+| Small (S)                                 | 50 - 200 billion         |
+| Medium (M)                                | 200 - 500 billion        |
+| Large (L)                                 | 500 billion - 1 trillion |
+| Contact your [Customer Success Manager][7]| 1T+                      |
 
 **Note**: The recommended number of users is not the number of concurrent queries. However, it is more likely for queries to run concurrently as the number of users increases. Therefore, the concurrency available is higher for queries run on larger compute instances than on smaller instances.
 
 Queries that push the limits of the concurrency of a given compute tier slows down the return of the query results and could cause other concurrent queries to slow down as well.
 
-Compute tiers are billed at a flat rate. See the pricing page for more information.
+Compute tiers are billed at a flat rate. See the [pricing page][6] for more information.
 
-## Enable Flex Logs through self-serve onboarding
+## Enable and disable Flex Logs
 
-If Flex Logs is not in your contract, you can enable Flex Logs through the self-serve onboarding option. For self-serve Flex Logs, you have the option to choose an extra small or small compute size.
+Flex Logs can be enabled or disabled at the organization level. You must have the `flex_logs_config_write` permission to be able to do that.
+
+If Flex Logs is part of your contract, the compute options available on your contract is shown in the UI.
+
+If Flex Logs is not in your contract, you can enable Flex Logs through the self-serve onboarding option. For self-serve Flex Logs, choose from the following compute sizes:
+
+- Starter
+- Extra Small
+- Small
 
 To enable Flex Logs:
-1. Navigate to [Flex Logs Control][5].
-1.  Select **Plan Type**.
+1. Navigate to the [Flex Logs Control][5] page.
+1. Select **Compute Type**.
+    - Datadog recommends the **Starter** compute size for organizations with less than 10B logs stored.
+    - Datadog recommends the scalable compute options (For example, XS, S, M, and L) for organizations with greater than 10B logs stored.
 1. Select the compute size you want. See [Determine the compute size that you need](#determine-the-compute-size-that-you-need) for more information.
 1. Click **Enable Flex Logs**.
+
+### Offboard from self-serve Flex Logs
+
+To disable Flex Logs:
+
+1. Remove Flex Storage from each index where Flex Logs is enabled.
+1. Navigate back to the [Flex Logs Control][5] page.
+1. Click **Disable Flex Logs**.
+
+## Upgrade and downgrade Flex Logs compute
+
+If you select one of the scalable compute options for Flex Logs (for example, XS, S, M, or L), you can upgrade or downgrade your compute size on the [Flex Logs Control][5] page. **Note**: Only compute options on your contract are made available. If Flex Logs is not in your contract, select between the XS and S compute options.
 
 ## Configure storage tiers
 
@@ -110,7 +132,7 @@ Flex Logs is set up within log index configurations. [Index filters][1] that app
 
 Configure Flex Tier in the [Logs Index Configuration][2] page:
 
-1. Go to [**Logs > Pipelines > Indexes**][2].
+1. Navigate to the [Indexes][2] page.
 2. Edit the index you wish to enable with Flex Logs or create a new index.
 3. Select **Flex Tier** and set the retention under *Configure Storage Tier and Retention*.
 
@@ -172,3 +194,5 @@ The following list is an example of log sources that are potentially good candid
 [3]: https://app.datadoghq.com/logs
 [4]: https://jfrog.com/help/r/jfrog-platform-administration-documentation/monitoring-and-logging
 [5]: https://app.datadoghq.com/logs/pipelines/flex-logs-controls
+[6]: https://www.datadoghq.com/pricing/?product=log-management#products
+[7]: mailto:success@datadoghq.com
