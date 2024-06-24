@@ -1,3 +1,3 @@
-- Fluent socket address and port. 
+- Fluent socket address and port:
     - The Observability Pipelines Worker listens on this address for incoming log messages.
     - Stored in the environment variable  `DD_OP_SOURCE_FLUENT_ADDRESS`.

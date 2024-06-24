@@ -1,3 +1,3 @@
-- HTTP endpoint URL. For example, `https://127.0.0.8/logs`.
-   - The Observability Pipelines Worker collects log events from this endpoint. 	
+- HTTP endpoint URL:
+   - The Observability Pipelines Worker collects log events from this endpoint.	For example, `https://127.0.0.8/logs`.
    - Stored as the environment variable: `DD_OP_SOURCE_HTTP_CLIENT_ENDPOINT_URL`.
