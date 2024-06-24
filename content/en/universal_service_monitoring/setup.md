@@ -904,7 +904,12 @@ agents:
 {{< collapse-content title="HTTP/2 monitoring" level="h4" >}}
 Universal Service Monitoring can capture HTTP/2 and gRPC traffic.
 
-Requires Agent version 7.53 or greater.
+<strong>Note</strong>:
+<br>
+<ul role="list">
+  <li>Requires Linux Kernel version 5.2 or later.</li>
+  <li>Requires Agent version 7.53 or greater.</li>
+</ul>
 
 {{< tabs >}}
 {{% tab "Configuration file" %}}
