@@ -58,7 +58,7 @@ DDSQL supports the `BETWEEN` keyword such that `a BETWEEN x AND y` is equivalent
 | Name    | Description             |
 |---------|-------------------------|
 | AND     | Boolean logic, a & b    |
-| OR      | Boolean logic, a || b |
+| OR      | Boolean logic, a &vert;&vert; b |
 | XOR     | Boolean logic, a ^ b    |
 | NOT     | Boolean logic, !a       |
 | IS NULL | Returns true for each row that is null |
