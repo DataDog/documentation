@@ -18,11 +18,18 @@ further_reading:
 
 ## Overview
 
-Datadog's trace intake API endpoint allows you to send OpenTelemetry protocol (OTLP) traces directly to Datadog, without running the [Datadog Agent][2] or [OpenTelemetry Collector + Datadog Exporter][1].
+Datadog's OpenTelemetry protocol (OTLP) intake API endpoint allows you to send traces directly to Datadog, without running the [Datadog Agent][2] or [OpenTelemetry Collector + Datadog Exporter][1].
 
-You might prefer this direct option if you don't want the overhead of using the Datadog Agent or OpenTelemetry Collector.
+You might prefer this option if you don't want the overhead of using the Datadog Agent or OpenTelemetry Collector.
 
 ## Configuration
+
+To export OTLP data to the Datadog OTLP intake endpoint:
+
+1. [Configure the OTLP HTTP Protobuf exporter](#configure-the-exporter).
+   - Set the Datadog OTLP intake endpoint.
+   - Configure the required HTTP headers.
+1. (Optional) [Set `dd-otel-span-mapping` HTTP header](#optional-map-or-filter-span-names) to map or filter spans.
 
 ### Configure the exporter
 
@@ -45,7 +52,9 @@ If you are using manual instrumentation with OpenTelemetry SDKs, configure the O
 <div class="alert alert-info">Replace <code>${YOUR_ENDPOINT}</code> with {{< region-param key="otlp_trace_endpoint" code="true" >}}. This is based on your <a href="/getting_started/site/">Datadog site</a>, which is {{< region-param key=dd_datacenter code="true" >}}.</div>
 
 {{< tabs >}}
-{{% tab "Javascript" %}}
+{{% tab "JavaScript" %}}
+
+The JavaScript exporter is [exporter-trace-otlp-proto][100]. To configure the exporter:
 
 ```javascript
 const { OTLPTraceExporter } = require('@opentelemetry/exporter-trace-otlp-proto');  // OTLP http/protobuf exporter
@@ -60,10 +69,13 @@ const exporter = new OTLPTraceExporter({
   },
 });
 ```
+[100]: https://www.npmjs.com/package/@opentelemetry/exporter-trace-otlp-proto
 
 {{% /tab %}}
 
 {{% tab "Java" %}}
+
+The Java exporter is [OtlpHttpSpanExporter][200]. To configure the exporter:
 
 ```java
 import io.opentelemetry.exporter.otlp.http.trace.OtlpHttpSpanExporter;
@@ -76,8 +88,12 @@ OtlpHttpSpanExporter exporter = OtlpHttpSpanExporter.builder()
     .build();
 ```
 
+[200]: https://javadoc.io/doc/io.opentelemetry/opentelemetry-exporter-otlp-http-trace/
+
 {{% /tab %}}
 {{% tab "Go" %}}
+
+The Go exporter is [otlptracehttp][300]. To configure the exporter:
 
 ```go
 import "go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracehttp"
@@ -95,8 +111,13 @@ traceExporter, err := otlptracehttp.New(
 		}),
 )
 ```
+
+[300]: http://go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracehttp
+
 {{% /tab %}}
 {{% tab "Python" %}}
+
+The Python exporter is [OTLPSpanExporter][400]. To configure the exporter:
 
 ```python
 from opentelemetry.exporter.otlp.proto.http.trace_exporter import OTLPSpanExporter
@@ -111,16 +132,19 @@ exporter = OTLPSpanExporter(
     },
 )
 ```
+
+[400]: https://pypi.org/project/opentelemetry-exporter-otlp-proto-http/
+
 {{% /tab %}}
 {{< /tabs >}}
 
-### Map or filter span names
+### (Optional) Map or filter span names
 
 Use the `dd-otel-span-mapping header` to configure span mapping and filtering. The JSON header contains these fields:
 
 - `ignore_resources`: A list of regular expressions to disable traces based on their resource name.
 - `span_name_remappings`: A map of Datadog span names to preferred names.
-- `span_name_as_resource_name`: Specifies whether to use the OpenTelemetry span's name as the Datadog span's operation name (default: true).
+- `span_name_as_resource_name`: Specifies whether to use the OpenTelemetry span's name as the Datadog span's operation name (default: true). If false, the operation name is derived from a combination of the instrumentation scope name and span kind.
 
 For example:
 
@@ -135,9 +159,9 @@ For example:
   ]
 }
 ```
-### OpenTelemetry Collector
+## OpenTelemetry Collector
 
-If you are using the OpenTelemetry Collector and don't want to use the Datadog Exporter, you can configure the [otlphttpexporter][4] to export traces to the Datadog endpoint.
+If you are using the OpenTelemetry Collector and don't want to use the Datadog Exporter, you can configure [otlphttpexporter][4] to export traces to the Datadog endpoint.
 
 For example, configure your `config.yaml` like this:
 
@@ -190,7 +214,7 @@ javaCopyBatchSpanProcessor batchSpanProcessor =
         .setMaxExportBatchSize(10)  // Default is 512
         .build();
 ```
-Adjust the `setMaxExportBatchSize` value according to your needs. A smaller value will result in more frequent exports with smaller payloads, reducing the likelihood of exceeding the 3.2MB limit.
+Adjust the `setMaxExportBatchSize` value according to your needs. A smaller value results in more frequent exports with smaller payloads, reducing the likelihood of exceeding the 3.2MB limit.
 
 ### Warning: "traces export: failed … 202 Accepted" in Go
 
