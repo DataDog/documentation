@@ -31,7 +31,7 @@ This instrumentation method uses Azure's [Sidecar pattern][1] to monitor contain
 
 ### Integrate the Datadog tracer
 
-1. Adding the following lines to the Dockerfile for your main application.
+1. Add the following lines to the Dockerfile for your main application:
 
    {{< programming-lang-wrapper langs="dotnet" >}}
 {{< programming-lang lang="dotnet" >}}
@@ -48,7 +48,7 @@ RUN cd /datadog/tracer && tar -zxf datadog-dotnet-apm-2.49.0.tar.gz
 
    This installs and configures the Datadog tracer within your application container.
 
-2. Then, build the image and push it to your preferred container registry.
+2. Build the image and push it to your preferred container registry.
 
 #### Full example Dockerfile
 
@@ -155,7 +155,7 @@ ENTRYPOINT ["dotnet", "<your dotnet app>.dll"]
    - **Registry server URL**: `sitecontainerssampleacr.azurecr.io`
    - **Image and tag**: `datadog-dotnet:2.0`
    - **Port**: `8126`
-   Select **Apply**.
+1. Select **Apply**.
 
 ## Next steps
 
