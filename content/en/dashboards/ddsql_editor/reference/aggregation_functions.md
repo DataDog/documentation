@@ -8,7 +8,7 @@ DDSQL is in private beta.
 
 ## Aggregation functions
 
-Aggregate functions compute a single result from a set of input values, usually used in conjunction with a GROUP BY statement.
+Aggregate functions compute a single result from a set of input values, usually used in conjunction with a `GROUP BY` statement.
 
 ### avg
 | Name | Return type | Description |
