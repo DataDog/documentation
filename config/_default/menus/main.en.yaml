@@ -4653,11 +4653,16 @@ menu:
       parent: cloud_siem
       identifier: cloud_siem_log_historical_jobs
       weight: 7
+    - name: Entities and Risk Scoring
+      url: security/cloud_siem/entities_and_risk_scoring
+      parent: cloud_siem
+      identifier: cloud_siem_entities_and_risk_scoring
+      weight: 8
     - name: Guides
       url: security/cloud_siem/guide/
       parent: cloud_siem
       identifier: siem_guides
-      weight: 8
+      weight: 9
     - name: Cloud Security Management
       url: security/cloud_security_management
       parent: security_platform_heading
