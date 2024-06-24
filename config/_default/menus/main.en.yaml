@@ -4382,46 +4382,51 @@ menu:
       url: logs/explorer/facets/
       parent: log_explorer
       weight: 505
+    - name: Calculated Fields
+      identifier: log_explorer_calculated_fields
+      url: logs/explorer/calculated_fields/
+      parent: log_explorer
+      weight: 506
     - name: Analytics
       identifier: log_explorer_analytics
       url: logs/explorer/analytics/
       parent: log_explorer
-      weight: 506
+      weight: 507
     - name: Patterns
       identifier: log_explorer_patterns
       url: logs/explorer/analytics/patterns/
       parent: log_explorer
-      weight: 507
+      weight: 508
     - name: Transactions
       identifier: log_explorer_transactions
       url: logs/explorer/analytics/transactions/
       parent: log_explorer
-      weight: 508
+      weight: 509
     - name: Visualize
       identifier: log_explorer_visualize
       url: logs/explorer/visualize/
       parent: log_explorer
-      weight: 509
+      weight: 510
     - name: Log Side Panel
       identifier: log_explorer_side_panel
       url: logs/explorer/side_panel/
       parent: log_explorer
-      weight: 510
+      weight: 511
     - name: Export
       identifier: log_explorer_export
       url: logs/explorer/export/
       parent: log_explorer
-      weight: 511
+      weight: 512
     - name: Watchdog Insights for Logs
       identifier: log_explorer_watchdog_insights
       url: logs/explorer/watchdog_insights/
       parent: log_explorer
-      weight: 512
+      weight: 513
     - name: Saved Views
       identifier: log_explorer_saved_views
       url: logs/explorer/saved_views/
       parent: log_explorer
-      weight: 513
+      weight: 514
     - name: Error Tracking
       url: logs/error_tracking/
       parent: log_management

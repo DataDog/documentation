@@ -2,7 +2,6 @@
 title: Calculated Fields
 kind: documentation
 disable_toc: false
-private: true
 further_reading:
 - link: "/logs/explorer/calculated_fields/expression_language"
   tag: "Documentation"
@@ -18,7 +17,7 @@ Calculated Fields is in beta. Have feedback or a feature request? <a href= "http
 Use calculated fields to transform and enrich your log data at query time. Define [formulas](#formula) to:
 - [Manipulate text][1]
 - [Perform arithmetic][2]
-- [Evaluate conditional logic][3] 
+- [Evaluate conditional logic][3]
 
 Once defined, a calculated field can be used like any [log attribute][5] for search, aggregation, visualization, and even defining other calculated fields.
 
