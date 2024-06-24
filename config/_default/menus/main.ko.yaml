@@ -5420,26 +5420,31 @@ menu:
     parent: account_management_audit_trail
     url: account_management/audit_trail/forwarding_audit_events/
     weight: 902
+  - name: Safety Center
+      url: account_management/safety_center/
+      parent: account_management
+      identifier: safety_center
+      weight: 10
   - identifier: account_management_plan_and_usage
     name: 계획 및 사용량
     parent: account_management
     url: account_management/plan_and_usage/
-    weight: 10
+    weight: 11
   - identifier: account_management_cost_details
     name: 비용 상세 정보
     parent: account_management_plan_and_usage
     url: account_management/plan_and_usage/cost_details/
-    weight: 1001
+    weight: 1101
   - identifier: account_management_usage_details
     name: 사용량 상세 정보
     parent: account_management_plan_and_usage
     url: account_management/plan_and_usage/usage_details/
-    weight: 1002
+    weight: 1102
   - identifier: account_management_billing
     name: 빌링
     parent: account_management
     url: account_management/billing/
-    weight: 11
+    weight: 12
   - name: 제품 할당
     parent: account_management_billing
     url: account_management/billing/product_allotments
@@ -5448,12 +5453,12 @@ menu:
     name: 멀티-org 계정
     parent: account_management
     url: account_management/multi_organization/
-    weight: 12
+    weight: 13
   - identifier: account_management_guides
     name: 가이드
     parent: account_management
     url: account_management/guide/
-    weight: 13
+    weight: 14
   - identifier: data_security
     name: 데이터 보안
     parent: administration_heading

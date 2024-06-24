@@ -5243,26 +5243,31 @@ menu:
       parent: account_management_audit_trail
       identifier: account_management_audit_trail_forwarding
       weight: 902
+    - name: Safety Center
+      url: account_management/safety_center/
+      parent: account_management
+      identifier: safety_center
+      weight: 10
     - name: Plan and Usage
       url: account_management/plan_and_usage/
       parent: account_management
       identifier: account_management_plan_and_usage
-      weight: 10
+      weight: 11
     - name: Cost Details
       identifier: account_management_cost_details
       url: account_management/plan_and_usage/cost_details/
       parent: account_management_plan_and_usage
-      weight: 1001
+      weight: 1101
     - name: Usage Details
       identifier: account_management_usage_details
       url: account_management/plan_and_usage/usage_details/
       parent: account_management_plan_and_usage
-      weight: 1002
+      weight: 1102
     - name: Billing
       identifier: account_management_billing
       url: account_management/billing/
       parent: account_management
-      weight: 11
+      weight: 12
     - name: Product Allotments
       url: account_management/billing/product_allotments
       parent: account_management_billing
@@ -5271,12 +5276,12 @@ menu:
       identifier: account_management_multi_org_accounts
       url: account_management/multi_organization/
       parent: account_management
-      weight: 12
+      weight: 13
     - name: Guides
       identifier: account_management_guides
       url: account_management/guide/
       parent: account_management
-      weight: 13
+      weight: 14
     - name: データセキュリティ
       url: data_security/
       pre: security-lock
