@@ -4,7 +4,7 @@ kind: documentation
 disable_toc: false
 ---
 
-{{< callout url="#" header="false" >}}
+{{< callout url="https://www.datadoghq.com/private-beta" header="false" >}}
   Logs Workspace is in private beta.
 {{< /callout >}}
 
