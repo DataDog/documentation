@@ -6,7 +6,7 @@ title: Querying Tags in DDSQL
 DDSQL is in private beta.
 {{< /callout >}}
 
-Tags are a widespread mechanism to encode metadata about a particular record across several products at Datadog. Tags are key/value pairs for which a key may contain multiple values.
+Tags are a widespread mechanism to encode metadata about a particular record across several products at Datadog. Tags are key-value pairs for which a key may contain multiple values.
 
 ## Equality comparisons
 
