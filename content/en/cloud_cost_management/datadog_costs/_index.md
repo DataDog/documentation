@@ -35,7 +35,7 @@ Daily Datadog costs in Cloud Cost Management are in private beta. To request acc
 
 ## Overview
 
-Daily Datadog costs gives you visibility into daily Datadog spending across dashboards, notebooks, [cost monitors][2], and Cloud Cost Analytics, along with your entire organization's cloud provider and [SaaS costs][3]. 
+Daily Datadog costs give you visibility into daily Datadog spending across dashboards, notebooks, [cost monitors][2], and Cloud Cost Analytics, along with your entire organization's cloud provider and [SaaS costs][3]. 
 
 You can view daily Datadog costs in [Cloud Cost Management][1], and access additional [Datadog costs capabilities][7] like Cost Summary and Cost Chargebacks on the [**Usage & Cost** page][4].
 
