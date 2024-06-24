@@ -257,6 +257,7 @@ Evaluations require a `span_id` and `trace_id`.
         {
           "span_id": "61399242116139924211",
           "trace_id": "13932955089405749200",
+          "ml_app": "weather-bot",
           "timestamp_ms": 1609459200,
           "metric_type": "categorical",
           "label": "Sentiment",
@@ -265,6 +266,7 @@ Evaluations require a `span_id` and `trace_id`.
         {
           "span_id": "20245611112024561111",
           "trace_id": "13932955089405749200",
+          "ml_app": "weather-bot",
           "metric_type": "score",
           "label": "Accuracy",
           "score_value": 3
@@ -299,6 +301,7 @@ Evaluations require a `span_id` and `trace_id`.
           "id": "d4f36434-f0cd-47fc-884d-6996cee26da4",
           "span_id": "61399242116139924211",
           "trace_id": "13932955089405749200",
+          "ml_app": "weather-bot",
           "timestamp_ms": 1609459200,
           "metric_type": "categorical",
           "label": "Sentiment",
@@ -308,6 +311,7 @@ Evaluations require a `span_id` and `trace_id`.
           "id": "cdfc4fc7-e2f6-4149-9c35-edc4bbf7b525",
           "span_id": "20245611112024561111",
           "trace_id": "13932955089405749200",
+          "ml_app": "weather-bot",
           "metric_type": "score",
           "label": "Accuracy",
           "score_value": 3
