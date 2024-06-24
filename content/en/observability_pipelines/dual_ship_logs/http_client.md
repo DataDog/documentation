@@ -6,7 +6,7 @@ disable_toc: false
 
 ## Overview
 
-Configure Fluentd or Fluent Bit and set up Observability Pipelines so that the Observability Pipelines Worker aggregates and processes the logs coming from your upstream sources before routing them to various applications.
+Configure your HTTP Client and set up Observability Pipelines so that the Observability Pipelines Worker aggregates and processes the logs coming from your upstream sources before routing them to various applications.
 
 {{< img src="observability_pipelines/use_cases/dual_ship_logs.png" alt="The log sources, processors, and destinations available for the split logs use case" width="100%" >}}
 

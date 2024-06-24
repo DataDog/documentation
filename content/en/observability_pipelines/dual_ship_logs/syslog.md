@@ -23,7 +23,7 @@ This document walks you through the following steps:
 
 1. Navigate to [Observability Pipelines][1].
 1. Select the **Dual Ship Logs** template to create a new pipeline.
-1. Select **Rsyslog or Syslog-ng** as the source.
+1. Select **Rsyslog** or **Syslog-ng** as the source.
 
 ### Set up the source
 
@@ -152,7 +152,7 @@ Follow the instructions for the cloud provider you are using to archive your log
 
 ## Install the Observability Pipelines Worker
 1. Select your platform in the **Choose your installation platform** dropdown menu.
-1. Enter the Syslog address. This is a Syslog compatible endpoint that the Worker exposes that your applications send logs to. The Observability Pipelines Worker listens on this address for incoming logs.
+1. Enter the Syslog address. This is a Syslog-compatible endpoint, exposed by the Worker, that your applications send logs to. The Observability Pipelines Worker listens on this address for incoming logs.
 
 1. Provide the environment variables for each of your selected destinations. See [prerequisites](#prerequisites) for more information.
 {{< tabs >}}

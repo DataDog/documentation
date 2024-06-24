@@ -4,6 +4,7 @@ If the `source` field of a log matches one of the grok parsing rule sets, the lo
 
 If there isn't a `source` field on the log, or no rule matches the log message, then no changes are made to the log and it is sent to the next step in the pipeline.
 
+To set up the grok parser:
 1. Define a **filter query**. Only logs that match the specified [filter query](#filter-query-syntax) are processed. All logs, regardless of whether they do or do not match the filter query, are sent to the next step in the pipeline.
 2. Click the **Preview Rules** button. 
-3. Search or select a source in the dropdown menu to see the grok parsing rules for it. 
+3. Search or select a source in the dropdown menu to see the grok parsing rules for that source. 

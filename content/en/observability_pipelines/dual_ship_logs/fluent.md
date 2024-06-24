@@ -8,7 +8,7 @@ disable_toc: false
 
 Configure Fluentd or Fluent Bit and set up Observability Pipelines so that the Observability Pipelines Worker aggregates and processes the logs coming from your upstream sources before routing them to various applications.
 
-{{< img src="observability_pipelines/use_cases/dual_ship_logs.png" alt="The log sources, processors, and destinations available for the split logs use case" width="100%" >}}
+{{< img src="observability_pipelines/use_cases/dual_ship_logs.png" alt="The log sources, processors, and destinations available for this use case" width="100%" >}}
 
 This document walks you through the following steps:
 1. The [prerequisites](#prerequisites) needed to set up Observability Pipelines
@@ -23,7 +23,7 @@ This document walks you through the following steps:
 
 1. Navigate to [Observability Pipelines][1].
 1. Select the **Dual Ship Logs** template to create a new pipeline.
-1. Select **Fluentd or Fluent Bit** as the source.
+1. Select **Fluentd** or **Fluent Bit** as the source.
 
 ### Set up the source
 

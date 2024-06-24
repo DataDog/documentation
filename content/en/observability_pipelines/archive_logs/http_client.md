@@ -8,7 +8,7 @@ disable_toc: false
 
 Configure your HTTP Client so that the Observability Pipelines Worker formats the logs collected into a Datadog-rehydratable format before routing them to Datadog Log Archives.
 
-{{< img src="observability_pipelines/use_cases/archive_logs.png" alt="The log sources, processors, and destinations available for the split logs use case" width="100%" >}}
+{{< img src="observability_pipelines/use_cases/archive_logs.png" alt="The log sources, processors, and destinations available for the archive logs use case" width="100%" >}}
 
 This document walks you through the following steps:
 1. The [prerequisites](#prerequisites) needed to set up Observability Pipelines

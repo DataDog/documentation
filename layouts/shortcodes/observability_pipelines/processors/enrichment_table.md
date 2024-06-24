@@ -1,16 +1,17 @@
 Use this processor to enrich your logs with information from a reference table, which could be a local file or database.
 
+To set up the enrichment table processor:
 1. Define a **filter query**. Only logs that match the specified [filter query](#filter-query-syntax) are processed. All logs, regardless of whether they do or do not match the filter query, are sent to the next step in the pipeline.
 2. Enter the source attribute of the log. The source attribute's value is what you want to find in the reference table.
 3. Enter the target attribute. The target attribute's value stores, as a JSON object, the information found in the reference table.
 4. Select the type of reference table you want to use, **File** or **GeoIP**.
    - For the **File** type:
-      a. Enter the file path.
-      b. Enter the column name. The column name in the enrichment table is used for matching the source attribute value.See Enrichment file example.
+        1. Enter the file path.
+        1. Enter the column name. The column name in the enrichment table is used for matching the source attribute value. See the following Enrichment file example.
    - For the **GeoIP** type:
-      a. Enter the GeoIP path.
+        1. Enter the GeoIP path.
 
-#### Enrichment file example
+##### Enrichment file example
 
 For this example, `merchant_id` is used as the source attribute and `merchant_info` as the target attribute.
 
