@@ -221,7 +221,7 @@ CAST(expression AS type)
 
 Not all types are convertible in this way.
 
-DDSQL also supports Postgres casting syntax: `<EXPRESSION>::<TYPE>` (for example, `SELECT 1::text;`).
+DDSQL also supports Postgres casting syntax: `<EXPRESSION>::<TYPE>`. For example, `SELECT 1::text;`.
 
 [1]: /dashboards/functions/interpolation/#fill
 [2]: /dashboards/ddsql_editor/reference/aggr_functions
