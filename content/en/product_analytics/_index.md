@@ -18,9 +18,7 @@ Product Analytics is in limited availability. To request access, complete the fo
 
 {{< img src="product_analytics/overview.png" alt="Landing page of Product Analytics.">}}
 
-Product Analytics helps you gain insight into user behavior and make data-driven decisions.
-
-It can help solve the following types of use cases in your application:
+Product Analytics helps you gain insight into user behavior and make data-driven decisions. It can help solve the following types of use cases in your application:
 
 - Understand product adoption
 - Track conversion rates and their evolution over time
@@ -29,11 +27,10 @@ It can help solve the following types of use cases in your application:
 
 By default, Product Analytics data is retained for 15 months. Learn more about [Privacy at Datadog][1].
 
-Below are some key features of Datadog Product Analytics.
 
 ## Measure user retention
 
-Use [Retention Analysis][2] to measure how a group of users engage with specific features over time to understand where drop-off occurs.
+Use [Retention Analysis][2] to measure how a group of users engage with specific features over time to understand where drop-offs occur.
 
 {{< img src="real_user_monitoring/retention_analysis/differing-events-retention-graph.png" alt="Retention graph for differing events" style="width:90%;" >}}
 

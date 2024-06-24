@@ -36,7 +36,3 @@ Individual events with multiple values for a single facet belong to that number 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
-[1]: /real_user_monitoring/explorer/visualize#top-list
-[2]: /real_user_monitoring/explorer/visualize#timeseries
-[3]: /real_user_monitoring/explorer/visualize#lists

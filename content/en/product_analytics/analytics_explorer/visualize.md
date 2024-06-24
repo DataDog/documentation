@@ -17,7 +17,7 @@ Visualize the evolution of a single measure (or a [facet][5] unique count of val
 
 {{< img src="product_analytics/analytics/visualize/analytics-timeseries-1.png" alt="Timeseries graph in the Analytics Explorer" style="width:90%;" >}}
 
-The timeseries graph depicts the evolution of the number of pageviews on the Shopist application over the past day for every view path.
+The timeseries graph depicts the evolution of the number of pageviews on an example web application over the past day for every view path.
 
 You can choose additional display options such as:
 
@@ -61,7 +61,7 @@ The following tree map shows the percentage breakdown by **View Name**.
 {{< img src="product_analytics/analytics/visualize/analytics-tree-maps.png" alt="Tree map in the Analytics Explorer" style="width:90%;">}}
 
 ## Pie charts
-A pie chart helps you organize and show data as a percentage of a whole. It is useful when comparing the relationship between different dimensions such as services, users, hosts, countries, etc. within your log data.
+A pie chart helps you organize and show data as a percentage of a whole. It is useful when comparing the relationship between different dimensions such as services, users, hosts, and countries. within your log data.
 
 The following pie chart shows the percentage breakdown by **View Path**.
 
@@ -102,7 +102,7 @@ For the remaining visualization options, click on the graph and click **View eve
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/explorer/
+[1]: /product_analytics/analytics_explorer/
 [2]: /real_user_monitoring/explorer/events/
 [4]: /real_user_monitoring/explorer/saved_views/
 [5]: /real_user_monitoring/explorer/search#setup-facets-and-measures

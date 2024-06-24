@@ -9,7 +9,7 @@ further_reading:
 
 ## Overview
 
-The Product Analytics Explorer displays individual events that include this side panel format:
+The Product Analytics Explorer displays individual events in a side panel format:
 
 {{< img src="real_user_monitoring/explorer/events/performance_side_panel.png" alt="Application performance graph and Core Web Vitals in the Performance tab" width="80%" >}}
 

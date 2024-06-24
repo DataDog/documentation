@@ -28,7 +28,7 @@ Funnel analysis helps you track conversion rates across key workflows to identif
 **Note**: The conversion rate is the number of visitors to your website that completed a desired goal (a conversion) out of the total number of visitors.
 ## Build a funnel
 
-To build a funnel, navigate to **Digital Experience > Product Analytics > Journeys** and click **Funnel**.
+To build a funnel, navigate to [**Digital Experience > Product Analytics > Journeys**][8] and click **Funnel**.
 
 {{< img src="product_analytics/journeys/funnel_analysis/overview.png" alt="Navigate to the Funnel Analysis tab within Product Analytics" style="width:100%;" >}}
 
