@@ -1,6 +1,5 @@
 ---
 title: Create your first live cloud diagram
-kind: guide
 ---
 
 Cloudcraft allows you to import your AWS and Azure cloud environments as *live diagrams*. By reverse-engineering the architecture in your cloud account, Cloudcraft can auto-generate new diagrams or enhance existing ones, saving you hours or even days of work.
