@@ -33,6 +33,10 @@ SaaS Cost Integrations are in public beta.
 
 SaaS Cost Integrations allow you to send cost data **directly from your providers** by configuring the accounts associated with your cloud cost data in Datadog. 
 
+{{< partial name="cloud_cost/cost-integrations.html" >}}
+
+</br>
+
 If your provider is not supported, use [Custom Costs][1] to upload any cost data source to Datadog and understand the total cost of your services.
 
 ## Setup
