@@ -346,8 +346,5 @@ The **Security** tab highlights potential network threats and findings detected 
 [8]: /security/detection_rules/
 [9]: /network_monitoring/performance/setup/#enhanced-resolution
 [10]: /network_monitoring/dns/#recommended-queries
-<<<<<<< alai97/npm-metric-doc-edit
 [11]: /getting_started/tagging/unified_service_tagging/
-=======
-[11]: /network_monitoring/network_path
->>>>>>> master
+[12]: /network_monitoring/network_path
