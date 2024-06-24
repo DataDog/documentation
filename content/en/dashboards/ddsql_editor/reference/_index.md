@@ -26,6 +26,3 @@ SQL is broken into five different categories of statements. The table below indi
 
 [1]: /dashboards/ddsql_editor/reference/tags
 [2]: https://app.datadoghq.com/ddsql/editor
-[3]: /dashboards/ddsql_editor/reference/statements/#set
-[4]: /dashboards/ddsql_editor/reference/statements/#show
-[5]: /dashboards/ddsql_editor/reference/statements/#aggr

@@ -51,7 +51,7 @@ DDSQL also supports the following comparator keywords as they are defined in the
 - `NOT LIKE`
 - `IN and NOT IN`
 
-DDSQL supports the `BETWEEN` keyword such that `a BETWEEN x AND y` is equivalent to `a >= x AND a <= y` (see the Postgres documentation for `BETWEEN` for details).
+DDSQL supports the `BETWEEN` keyword such that `a BETWEEN x AND y` is equivalent to `a >= x AND a <= y`. See [the Postgres documentation for `BETWEEN`][2] for details.
 
 ## Logical operators
 
@@ -64,3 +64,4 @@ DDSQL supports the `BETWEEN` keyword such that `a BETWEEN x AND y` is equivalent
 | IS NULL | Returns true for each row that is null |
 
 [1]: /dashboards/ddsql_editor/reference/tags/
+[2]: https://www.postgresql.org/docs/current/functions-comparison.html
