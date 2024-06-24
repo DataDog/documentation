@@ -2695,6 +2695,26 @@ menu:
       parent: ndm
       identifier: ndm_guide
       weight: 308
+    - name: Network Path
+      url: network_monitoring/network_path/
+      parent: nm_parent
+      identifier: network_path
+      weight: 4
+    - name: Setup
+      url: network_monitoring/network_path/setup/
+      parent: network_path
+      identifier: network_path_setup
+      weight: 401
+    - name: List View
+      url: network_monitoring/network_path/list_view/
+      parent: network_path
+      identifier: network_path_list_view
+      weight: 402
+    - name: Path View
+      url: network_monitoring/network_path/path_view/
+      parent: network_path
+      identifier: network_path_path_view
+      weight: 403
     - name: Cloud Cost
       url: cloud_cost_management/
       identifier: cloud_cost
@@ -4623,11 +4643,16 @@ menu:
       parent: cloud_siem
       identifier: cloud_siem_investigator
       weight: 6
+    - name: Historical Jobs
+      url: security/cloud_siem/historical_jobs
+      parent: cloud_siem
+      identifier: cloud_siem_log_historical_jobs
+      weight: 7
     - name: Guides
       url: security/cloud_siem/guide/
       parent: cloud_siem
       identifier: siem_guides
-      weight: 7
+      weight: 8
     - name: Cloud Security Management
       url: security/cloud_security_management
       parent: security_platform_heading
