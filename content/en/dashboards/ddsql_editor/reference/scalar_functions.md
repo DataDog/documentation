@@ -38,7 +38,7 @@ These functions return one value per row.
 ### replace
 | Name | Return type | Description |
 |------|-------------|-------------|
-| replace(text *s*, text *from*, text *to*) | text | Replaces all occurrences in *s* of substring *from* from with substring *to*. |
+| replace(text *s*, text *from*, text *to*) | text | Replaces all occurrences in *s* of substring *from* with substring *to*. |
 
 ### regexp_replace
 | Name | Return type | Description |
