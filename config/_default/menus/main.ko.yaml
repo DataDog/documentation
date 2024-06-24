@@ -5421,10 +5421,10 @@ menu:
     url: account_management/audit_trail/forwarding_audit_events/
     weight: 902
   - name: Safety Center
-      url: account_management/safety_center/
-      parent: account_management
-      identifier: safety_center
-      weight: 10
+    url: account_management/safety_center/
+    parent: account_management
+    identifier: safety_center
+    weight: 10
   - identifier: account_management_plan_and_usage
     name: 계획 및 사용량
     parent: account_management
