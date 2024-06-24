@@ -47,7 +47,7 @@ This is a quick way to create a calculated field when you are already familiar w
 1. Select **Create calculated from...**.
 
 
-{{< img src="logs/explorer/calculated_fields/create_field.png" alt="The log panel duration attribute with the option to create a calculated field for it" style="width:100%;" >}}
+{{< img src="logs/explorer/calculated_fields/create_field.png" alt="The log panel duration attribute with the option to create a calculated field for it" style="width:80%;" >}}
 
 This approach allows you to adapt quickly during an investigation or explore unfamiliar logs. For example, you may want to multiply or concatenate two values and store the result in a single field to simplify a graph or answer a specific question.
 
