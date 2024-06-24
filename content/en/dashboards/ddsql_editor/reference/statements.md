@@ -153,7 +153,7 @@ INSERT INTO table_name [ (specific, columns, ...) ] VALUES
 
 ## SHOW
 
-<div class="alert alert-warning">While the <code>SHOW</code> statement is a part of the SQL standard, the runtime parameter names themselves are experimental. Parameters may be renamed, retyped, or deprecated in the future.</div>
+<div class="alert alert-warning">While the <code>SHOW</code> statement is a part of the SQL standard, the runtime parameter names are experimental. Parameters may be renamed, retyped, or deprecated in the future.</div>
 
 When running queries, DDSQL references runtime parameters (environmental variables) that are not specified in the query statement itself, such as the default interval to use for metrics queries if no `BUCKET BY` is specified, or the start and end timestamp for a query. 
 
