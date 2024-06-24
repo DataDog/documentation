@@ -50,7 +50,7 @@ The functions below can be used in windows, along with the [aggregation function
 ### rank
 | Name | Return type | Description |
 |------|-------------|-------------|
-| rank() | integer | Returns the rank of the current row, with gaps (the row_number of the first row in its peer group). |
+| rank() | integer | Returns the rank of the current row, with gaps (the `row_number` of the first row in its peer group). |
 
 ### dense_rank
 | Name | Return type | Description |
