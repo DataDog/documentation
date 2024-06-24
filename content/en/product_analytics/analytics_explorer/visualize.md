@@ -13,7 +13,7 @@ Visualizations define the outcomes of the filters and aggregates displayed in th
 
 ## Timeseries
 
-Visualize the evolution of a single measure (or a [facet][5] unique count of values) over a selected time frame, and optionally, split by an available [facet][5].
+Visualize the evolution of a single measure (an attribute with a numerical value contained in your Product Analytics events), or a facet (unique count of values) over a selected time frame.
 
 {{< img src="product_analytics/analytics/visualize/analytics-timeseries-1.png" alt="Timeseries graph in the Analytics Explorer" style="width:90%;" >}}
 
@@ -34,7 +34,7 @@ The top list includes the top browsers used to visit the Shopist website over th
 
 ## Nested tables
 
-Visualize the top values from up to three [facets][5] according to your chosen [measure][5] (the first measure you choose in the list) and display the value of additional measures for elements that appear in the nested table. Update the search query or investigate the events corresponding to either dimension.
+Visualize the top values from up to three facets according to your chosen measure (the first measure you choose in the list) and display the value of additional measures for elements that appear in the nested table. Update the search query or investigate the events corresponding to either dimension.
 
 * When there are multiple measures, the top or bottom list is determined according to the first measure.
 * The subtotal may differ from the actual sum of values in a group since only a subset (top or bottom) is displayed. Events with a null or empty value for this dimension are not displayed as a sub-group.
@@ -69,7 +69,7 @@ The following pie chart shows the percentage breakdown by **View Path**.
 
 ## Geomaps
 
-Visualize a single [measure][5] (or a [facet][5] unique count of values) on the world map.
+Visualize a single measure (an attribute with a numerical value contained in your Product Analytics events), or a facet (unique count of values) on the world map.
 
 {{< img src="product_analytics/analytics/visualize/analytics-geomaps.png" alt="Geographical map in the Analytics Explorer" style="width:90%;">}}
 
@@ -103,10 +103,3 @@ For the remaining visualization options, click on the graph and click **View eve
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /product_analytics/analytics_explorer/
-[2]: /real_user_monitoring/explorer/events/
-[4]: /real_user_monitoring/explorer/saved_views/
-[5]: /real_user_monitoring/explorer/search#setup-facets-and-measures
-[6]: /notebooks
-[7]: /real_user_monitoring/explorer/export/
-[8]: /dashboards/widgets/list/
-[9]: /product_analytics/journeys/funnel_analysis
