@@ -8,7 +8,7 @@ title: Schema Tracking
 </div>
 {{% /site-region %}}
 
-<div class="alert alert-warning">Schema tracking is in beta for Java services using Protobuf and Avro.</div>
+<div class="alert alert-info">Schema tracking is in **beta** for Java services using Protobuf and Avro.</div>
 
 Data Streams Monitoring schema tracking provides visibility into schemas used by producers and consumers, and how schema issues impact downstream services. You can track new schemas added, schemas with errors, and schema evolutions to manage schema migrations and identify issues.
 
@@ -16,7 +16,7 @@ Changing a schema produced by a service without updating the consumer can lead t
 
 ## Prerequisites
 
-You must have [installed][1] Data Streams Monitoring on your Java producer and consumer services.
+You must have [Data Streams Monitoring installed][1] on your Java producer and consumer services.
 
 Schema tracking requires a recent version of [dd-trace-java][2]:
 - For Protobuf tracking: use tracer v1.34.0+
@@ -60,7 +60,7 @@ To view schema information at the service level:
 1. Select the **Schemas** tab.
 
 On the schemas tab, you can:
-- View input throughput by schema
+- View input throughput by schema.
 - View a list of all schemas detected within the selected time frame, along with when it was first and last seen, its type (input or output schema), error rate, and throughput.
 - Expand a schema to view all of its fields.
 
