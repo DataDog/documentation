@@ -51,7 +51,7 @@ There are two locations where you can redact your sensitive data:
 
 **In your environment:**
 
-{{< callout url="https://google.com" >}}
+{{< callout url="https://www.datadoghq.com/private-beta/sensitive-data-scanner-using-agent-in-your-premises/" >}}
   Sensitive Data Scanner using the Agent is in private beta. To request access, fill out this form.
 {{< /callout >}}
 
