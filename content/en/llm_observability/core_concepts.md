@@ -24,7 +24,7 @@ A span consists of the following attributes:
 - Error type, message, and traceback
 - Inputs and outputs, such as LLM prompts and completions
 - Metadata (for example, LLM parameters such as `temperature`, `max_tokens`)
-- Metrics, such as `prompt_tokens` and `completion_tokens`
+- Metrics, such as `input_tokens` and `output_tokens`
 - Tags
 
 ### Span kinds
