@@ -2,6 +2,10 @@
 title: Journeys
 kind: documentation
 description: Journeys help you understand the path your users follow as they discover your product, service, or brand.
+further_reading:
+- link: "/product_analytics/"
+  tag: "Documentation"
+  text: "Product Analytics"
 ---
 
 {{< callout url="http://datadoghq.com/private-beta/product-analytics" header="false" >}}
@@ -29,6 +33,9 @@ With [funnel analysis][1], you can understand the end-to-end conversion of a sin
 {{< img src="/product_analytics/journeys/pa-conversions.png" alt="View conversion rate values over time in graphs ">}}
 
 You can view [conversion rates][3] over time by showing the conversion rate value in graphs.
+
+## Further reading
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /product_analytics/journeys/funnel_analysis
 [2]: /product_analytics/journeys/sankey

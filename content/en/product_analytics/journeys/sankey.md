@@ -3,6 +3,10 @@ title: Sankey Diagram
 kind: documentation
 aliases:
 - /real_user_monitoring/product_analytics/sankey
+further_reading:
+- link: '/product_analytics/journeys'
+  tag: Documentation
+  text: Journeys
 ---
 
 {{< callout url="http://datadoghq.com/private-beta/product-analytics" header="false" >}}
@@ -54,7 +58,6 @@ Click a node for a list of analysis options, such as viewing a sample [Session R
 
 {{< img src="/product_analytics/sankey_diagrams/sankey-node-interaction.png" alt="The actions menu of a Sankey diagram node" style="width:90%;" >}}
 
-
 ### Convert the diagram to a funnel
 
 1. From the Sankey diagram page, click the **Build Funnel** button.
@@ -73,6 +76,9 @@ The algorithms for the Sankey diagram and the funnel rely on two different compu
 - The Sankey diagram only counts views to `/home` where another view follows. If a user goes to `/home` and stays on that page or leaves the app, the Sankey diagram does not include their sessions.
 
 In addition, funnels do not include active sessions, while Sankey diagrams do include active sessions.
+
+## Further reading
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/product-analytics/user-journey
 [2]: /real_user_monitoring/explorer/search_syntax/#wildcards
