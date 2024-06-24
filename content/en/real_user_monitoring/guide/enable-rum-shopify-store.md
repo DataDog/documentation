@@ -2,7 +2,7 @@
 title: Enable RUM on Your Shopify Store
 kind: guide
 further_reading:
-- link: '/product_analytics/guide/rum-for-product-analytics/'
+- link: '/real_user_monitoring/guide/rum-for-product-analytics/'
   tag: 'Documentation'
   text: 'Use RUM & Session Replay for Product Analytics'
 - link: '/real_user_monitoring/guide/alerting-with-conversion-rates/'
