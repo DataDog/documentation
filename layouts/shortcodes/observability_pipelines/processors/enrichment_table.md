@@ -1,6 +1,7 @@
 Use this processor to enrich your logs with information from a reference table, which could be a local file or database.
 
 To set up the enrichment table processor:
+To set up the enrichment table processor:
 1. Define a **filter query**. Only logs that match the specified [filter query](#filter-query-syntax) are processed. All logs, regardless of whether they do or do not match the filter query, are sent to the next step in the pipeline.
 2. Enter the source attribute of the log. The source attribute's value is what you want to find in the reference table.
 3. Enter the target attribute. The target attribute's value stores, as a JSON object, the information found in the reference table.

@@ -8,7 +8,7 @@ disable_toc: false
 
 Configure Rsyslog or Syslog-ng and set up Observability Pipelines so that the Observability Pipelines Worker aggregates and processes the logs coming from your upstream sources before routing them to various applications, including Splunk.
 
-{{< img src="observability_pipelines/use_cases/dual_ship_logs.png" alt="The log sources, processors, and destinations available for the split logs use case" width="100%" >}}
+{{< img src="observability_pipelines/use_cases/dual_ship_logs.png" alt="The log sources, processors, and destinations available for this use case" width="100%" >}}
 
 This document walks you through the following steps:
 1. The [prerequisites](#prerequisites) needed to set up Observability Pipelines
