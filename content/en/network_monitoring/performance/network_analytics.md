@@ -45,7 +45,7 @@ You can set the timeframe over which traffic is aggregated using the time select
 
 {{< img src="network_performance_monitoring/network_analytics/npm_timeframe.png" alt="Time frame NPM" style="width:30%;">}}
 
-Tags from Datadog integrations or [Unified Service Tagging][11] can be used for aggregating and filtering automatically. See [custom facets](#custom-facets), below, for other tags. You can also select "Auto-grouped traffic" to see traffic bucketed into several commonly used tags such as `service`, `kube_service`, `short_image`, and `container_name`.
+Tags from Datadog integrations or [Unified Service Tagging][12] can be used for aggregating and filtering automatically. See [custom facets](#custom-facets), below, for other tags. You can also select "Auto-grouped traffic" to see traffic bucketed into several commonly used tags such as `service`, `kube_service`, `short_image`, and `container_name`.
 
 You can filter to traffic where the client or server matches a CIDR using `CIDR(network.client.ip, 10.0.0.0/8)` or `CIDR(network.server.ip, 10.0.0.0/8)`.
 
@@ -346,8 +346,5 @@ The **Security** tab highlights potential network threats and findings detected 
 [8]: /security/detection_rules/
 [9]: /network_monitoring/performance/setup/#enhanced-resolution
 [10]: /network_monitoring/dns/#recommended-queries
-<<<<<<< alai97/npm-metric-doc-edit
 [11]: /getting_started/tagging/unified_service_tagging/
-=======
-[11]: /network_monitoring/network_path
->>>>>>> master
+[12]: /network_monitoring/network_path
