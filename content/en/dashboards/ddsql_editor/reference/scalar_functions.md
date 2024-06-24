@@ -55,7 +55,7 @@ These functions return one value per row.
 ### round
 | Name | Return type | Description |
 |------|-------------|-------------|
-| round(numeric *n*, [*s*]) | numeric | Round *n* to *s* decimal places |
+| round(numeric *n*, [*s*]) | numeric | Round *n* to *s* decimal places. |
 
 ### mod
 | Name | Return type | Description |
