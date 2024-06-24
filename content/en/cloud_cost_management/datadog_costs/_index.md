@@ -29,7 +29,7 @@ further_reading:
 <div class="alert alert-warning">Cloud Cost Management is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-{{< beta-callout url="#" btn_hidden="true" >}}
+{{< beta-callout url="https://www.datadoghq.com/private-beta/daily-datadog-costs/" >}}
 Daily Datadog costs in Cloud Cost Management are in private beta. To request access, complete the form.
 {{< /beta-callout >}}
 
