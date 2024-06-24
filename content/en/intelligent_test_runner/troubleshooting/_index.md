@@ -23,13 +23,22 @@ This page provides information to help you troubleshot issues with Intelligent T
 - Your repository needs to have a commit history of at least two commits in the past month.
 - You need to have collected test code coverage in past commits, which happens on test runs where Intelligent Test Runner was enabled.
 - Your git clone must contain commit and tree history. Intelligent Test Runner tries to unshallow git clones that do not contain history (`git clone --depth=1`), but that might not work on older versions of git. Automatic unshallowing might require additional set up in some CI providers (Harness CI, for example, requires [extra configuration][3] to make sure your pipeline can execute git commands). If your CI job is using shallow git clones, you can change it to use partial git clones by using the following command: `git clone --filter=blob:none`.
-- If you run your tests on GitHub Actions CI avoid using the `pull_request` trigger. In this setup code coverage is reported with the SHA of the merge commit, which is not supported by Intelligent Test Runner and can prevent tests to be skipped.
 
 Due to these restrictions, the first time you enable Intelligent Test Runner, you cannot see any tests skipped and the test execution time may be slower than usual because the code coverage is collected automatically.
 
 Intelligent Test Runner only takes into account the commit history and test code coverage information for the past month. Additionally, it does not take into account code coverage information that is generated more than one week after a commit was made.
 
-There is a limitation when [synchronizing a fork through GitHub's UI][4] which causes all tests to be run for the generated synchronization commit.
+### Synchronizing a fork through GitHub's UI
+
+[Synchronizing a fork through GitHub's UI][4] causes all tests to be run for the generated synchronization commit.
+
+### Collecting coverages on GitHub Actions CI triggered by pull request events
+
+If you run tests on GitHub Actions CI using the [`pull_request` trigger][5] tests might not be skipped. Code coverage information collected from merge commits is not supported.
+
+### Squash and merge your commits
+
+Using [squash and merge][6] to integrate commits into de main branch causes the git history of the feature branch to be lost. As a result Intelligent Test Runner can run tests in the main branch that should have been skipped.
 
 ## Intelligent Test Runner incorrectly skipped a test
 
@@ -50,3 +59,5 @@ If you are authoring a commit that includes any of those cases, you can force-di
 [2]: /continuous_integration/intelligent_test_runner/
 [3]: https://developer.harness.io/kb/continuous-integration/articles/using_git_credentials_from_codebase_connector_in_ci_pipelines_run_step/
 [4]: https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/syncing-a-fork#syncing-a-fork-branch-from-the-web-ui
+[5]: https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#pull_request
+[6]: https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/incorporating-changes-from-a-pull-request/about-pull-request-merges#squash-and-merge-your-commits
