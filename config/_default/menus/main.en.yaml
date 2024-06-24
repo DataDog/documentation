@@ -2836,41 +2836,46 @@ menu:
       parent: cloud_cost
       identifier: cloud_cost_custom
       weight: 5
+    - name: Datadog Costs
+      url: cloud_cost_management/datadog_costs
+      parent: cloud_cost
+      identifier: cloud_cost_datadog_costs
+      weight: 6
     - name: Tag Pipelines
       url: cloud_cost_management/tag_pipelines
       parent: cloud_cost
       identifier: cloud_cost_tag_pipelines
-      weight: 6
+      weight: 7
     - name: Container Cost Allocation
       url: cloud_cost_management/container_cost_allocation
       parent: cloud_cost
       identifier: cloud_cost_container_cost_allocation
-      weight: 7
+      weight: 8
     - name: AWS
       url: cloud_cost_management/container_cost_allocation/?tab=aws
       parent: cloud_cost_container_cost_allocation
       identifier: cloud_cost_container_cost_allocation_aws
-      weight: 701
+      weight: 801
     - name: Azure
       url: cloud_cost_management/container_cost_allocation/?tab=azure
       parent: cloud_cost_container_cost_allocation
       identifier: cloud_cost_container_cost_allocation_azure
-      weight: 702
+      weight: 802
     - name: Google Cloud
       url: cloud_cost_management/container_cost_allocation/?tab=google
       parent: cloud_cost_container_cost_allocation
       identifier: cloud_cost_container_cost_allocation_google
-      weight: 703
+      weight: 803
     - name: Cost Recommendations
       url: cloud_cost_management/recommendations
       parent: cloud_cost
       identifier: cloud_cost_recommendations
-      weight: 8
+      weight: 9
     - name: Cost Monitors
       url: /cloud_cost_management/monitors
       parent: cloud_cost
       identifier: cloud_cost_monitors
-      weight: 9
+      weight: 10
     - name: APM
       url: tracing/
       pre: apm
