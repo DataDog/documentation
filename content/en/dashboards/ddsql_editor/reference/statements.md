@@ -39,7 +39,7 @@ SELECT [ ALL | DISTINCT ] select_expr, ...
 : An expression that is evaluated and interpreted implicitly as having a boolean result.
 
 `expression`
-: A value expression. See [Expressions](#expressions) for details and examples.
+: A value expression. See [Expressions and Operators][4] for details and examples.
 
 ### Evaluation
 
@@ -226,3 +226,4 @@ DDSQL also supports Postgres casting syntax: `<EXPRESSION>::<TYPE>`. For example
 [1]: /dashboards/functions/interpolation/#fill
 [2]: /dashboards/ddsql_editor/reference/aggr_functions
 [3]: /dashboards/ddsql_editor/reference#supported-sql-syntax
+[4]: /dashboards/ddsql_editor/reference/expressions_and_operators
