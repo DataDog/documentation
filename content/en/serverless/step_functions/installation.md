@@ -14,8 +14,7 @@ further_reading:
 * The full Step Function execution length must be less than 90 minutes for full traces.
 * Linked Lambda traces are supported for Node.js (layer v94+) and Python (layer v75+) runtimes.
 
-### How it works
-Datadog AWS Step Functions Monitoring collects logs and integration metrics from the AWS integration and uses ingested logs from AWS Step Functions to generate enhanced metrics and traces for your Step Function executions.
+AWS Step Functions Monitoring collects logs and integration metrics from the AWS integration and uses ingested logs from AWS Step Functions to generate enhanced metrics and traces for your Step Function executions.
 
 ### Setup
 
