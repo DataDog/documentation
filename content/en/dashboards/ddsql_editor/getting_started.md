@@ -83,7 +83,7 @@ To generate a share link for the query:
 
 ### 6. View the query in recent queries
 
-If you forget to save a useful query before navigating away from it, you can still access it in the Recent Queries pane. Click the clock icon in the left sidebar to view a list of recent queries.
+If you forget to save a useful query before navigating away from it, you can still access it in the **Recent Queries** pane. Click the clock icon in the left sidebar to view a list of recent queries.
 
 [1]: https://app.datadoghq.com/ddsql/editor
 [2]: /dashboards/ddsql_editor/reference
