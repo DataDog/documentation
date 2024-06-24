@@ -100,7 +100,7 @@ Datadog에서 [데이터베이스 모니터링][1]로 이동합니다.
 
 ## 참고 자료
 
-{{< learning-center-callout header="학습 센터에서 Datadog DBM으로 Postgres 데이터베이스를 모니터링해 보세요." btn_title="지금 등록" btn_url="https://learn.datadoghq.com/courses/database-monitoring"> }}
+{{< learning-center-callout header="학습 센터에서 Datadog DBM으로 Postgres 데이터베이스를 모니터링해 보세요." btn_title="지금 등록" btn_url="https://learn.datadoghq.com/courses/database-monitoring" >}}
 Datadog 학습 센터에는 이 주제에 대해 학습하는 데 유용한 실습 과정이 다양하게 준비되어 있습니다. 무료로 등록하여 비효율성을 식별하고 Postgres 데이터베이스를 최적화하세요.
 {{< /learning-center-callout >}}
 
