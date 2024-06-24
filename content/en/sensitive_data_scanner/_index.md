@@ -57,8 +57,6 @@ There are two locations where you can redact your sensitive data:
 
 - With **Sensitive Data Scanner using the Agent**, Datadog redacts your logs before submitting them to the Datadog backend, and unredacted logs never need to leave your premises. With this method, you are limited to one scanning group per organization, and you can use only predefined library rules.
 
-   {{< img src="sensitive_data_scanner/sds_using_agent.png" alt="A diagram showing the flow of data from a customer environment to Datadog, where logs are redacted using the Agent before they leave the customer environment" style="width:80%;">}}
-
 - Another way to redact your sensitive data in your environment before shipping to your downstream destinations is by using [Observability Pipelines][14].
 
 ### Prerequisites
