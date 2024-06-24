@@ -1,5 +1,7 @@
 ---
 title: Auto Instrumentation
+aliases:
+    - /tracing/llm_observability/auto_instrumentation
 ---
 
 <div class="alert alert-info">LLM Observability is in public beta.</a></div>
@@ -108,8 +110,8 @@ The Anthropic integration instruments the following methods:
 [9]: https://docs.anthropic.com/en/api/client-sdks#python
 [10]: https://docs.anthropic.com/en/api/messages
 [11]: https://docs.anthropic.com/en/api/messages-streaming
-[12]: /tracing/llm_observability/sdk/#in-code-setup
+[12]: /llm_observability/sdk/#in-code-setup
 [13]: https://python.langchain.com/v0.2/docs/concepts/#llms
 [14]: https://python.langchain.com/v0.2/docs/concepts/#chat-models
 [15]: https://python.langchain.com/v0.2/docs/concepts/#runnable-interface
-[16]: /tracing/llm_observability/sdk/
+[16]: /llm_observability/sdk/

@@ -1,5 +1,7 @@
 ---
 title: Core LLM Observability Concepts
+aliases:
+    - /tracing/llm_observability/core_concepts
 ---
 
 {{% site-region region="gov" %}}
@@ -49,7 +51,7 @@ Datadog's LLM Observability product is designed to support observability for LLM
 
 LLM inference traces are composed of a single LLM span.
 
-{{< img src="tracing/llm_observability/llm-observability-llm-span.png" alt="A single LLM span" style="width:100%;" >}}
+{{< img src="llm_observability/llm-observability-llm-span.png" alt="A single LLM span" style="width:100%;" >}}
 
 Tracing individual LLM inferences unlocks basic LLM Observability features, allowing you to:
 
@@ -63,7 +65,7 @@ The SDK provides integrations to automatically capture LLM calls to specific pro
 
 A workflow trace is composed of a root workflow span with nested LLM, task, tool, embedding, and retrieval spans.
 
-{{< img src="tracing/llm_observability/llm-observability-workflow-trace.png" alt="A trace visualizing a more complex LLM workflow" style="width:100%;" >}}
+{{< img src="llm_observability/llm-observability-workflow-trace.png" alt="A trace visualizing a more complex LLM workflow" style="width:100%;" >}}
 
 Most LLM applications include operations that surround LLM calls and play a large role in your overall application performance - for example, tool calls to external APIs or preprocessing task steps.
 
@@ -73,7 +75,7 @@ By tracing LLM calls and contextual task or tool operations together under workf
 
 An agent monitoring trace is composed of a root agent span with nested LLM, task, tool, embedding, retrieval, and workflow spans.
 
-{{< img src="tracing/llm_observability/llm-observability-agent-trace.png" alt="A trace visualizing an LLM agent" style="width:100%;" >}}
+{{< img src="llm_observability/llm-observability-agent-trace.png" alt="A trace visualizing an LLM agent" style="width:100%;" >}}
 
 If your LLM application has complex autonomous logic, such as decision-making that can't be captured by a static workflow, you are likely using an LLM Agent. Agents may execute multiple different workflows depending on the user input.
 
@@ -85,7 +87,7 @@ Evaluations are a method for measuring the performance of your LLM application. 
 
 Datadog's LLM Observability associates evaluations with individual spans so that you can view the inputs and outputs that led to a specific evaluation. Datadog provides a few out-of-the-box evaluations for your traces, but you can also submit your own evaluations to LLM Observability (see the [Evaluations guide][3] for more information).
 
-[1]: /tracing/llm_observability/span_kinds
-[2]: /tracing/llm_observability/auto_instrumentation
-[3]: /tracing/llm_observability/submit_evaluations
-[4]: /tracing/llm_observability/trace_an_llm_application/?tab=decorators#instrument-your-llm-application
+[1]: /llm_observability/span_kinds
+[2]: /llm_observability/auto_instrumentation
+[3]: /llm_observability/submit_evaluations
+[4]: /llm_observability/trace_an_llm_application/?tab=decorators#instrument-your-llm-application

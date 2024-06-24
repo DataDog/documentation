@@ -24,12 +24,15 @@ menu:
     - name: Security
       identifier: security_platform_heading
       weight: 8000000
+    - name: AI Observability
+      identifier: ai_observability_heading
+      weight: 9000000
     - name: Log Management
       identifier: log_management_heading
-      weight: 9000000
+      weight: 10000000
     - name: Administration
       identifier: administration_heading
-      weight: 10000000
+      weight: 11000000
     - name: Getting Started
       identifier: getting_started
       url: getting_started/
@@ -2692,6 +2695,26 @@ menu:
       parent: ndm
       identifier: ndm_guide
       weight: 308
+    - name: Network Path
+      url: network_monitoring/network_path/
+      parent: nm_parent
+      identifier: network_path
+      weight: 4
+    - name: Setup
+      url: network_monitoring/network_path/setup/
+      parent: network_path
+      identifier: network_path_setup
+      weight: 401
+    - name: List View
+      url: network_monitoring/network_path/list_view/
+      parent: network_path
+      identifier: network_path_list_view
+      weight: 402
+    - name: Path View
+      url: network_monitoring/network_path/path_view/
+      parent: network_path
+      identifier: network_path_path_view
+      weight: 403
     - name: Cloud Cost
       url: cloud_cost_management/
       identifier: cloud_cost
@@ -2713,15 +2736,50 @@ menu:
       parent: cloud_cost
       identifier: cloud_cost_google_cloud
       weight: 3
-    - name: Custom Costs
-      url: cloud_cost_management/custom
-      parent: cloud_cost
-      identifier: cloud_cost_custom
-      weight: 4
     - name: SaaS Cost Integrations
       url: cloud_cost_management/saas_costs
       parent: cloud_cost
       identifier: cloud_cost_saas_cost_integrations
+      weight: 4
+    - name: Databricks
+      url: cloud_cost_management/saas_costs/?tab=databricks#setup
+      parent: cloud_cost_saas_cost_integrations
+      identifier: cloud_cost_saas_cost_integrations_databricks
+      weight: 401
+    - name: Confluent Cloud
+      url: cloud_cost_management/saas_costs/?tab=confluentcloud#setup
+      parent: cloud_cost_saas_cost_integrations
+      identifier: cloud_cost_saas_cost_integrations_confluentcloud
+      weight: 402
+    - name: MongoDB
+      url: cloud_cost_management/saas_costs/?tab=mongodb#setup
+      parent: cloud_cost_saas_cost_integrations
+      identifier: cloud_cost_saas_cost_integrations_mongodb
+      weight: 403
+    - name: Snowflake
+      url: cloud_cost_management/saas_costs/?tab=snowflake#setup
+      parent: cloud_cost_saas_cost_integrations
+      identifier: cloud_cost_saas_cost_integrations_snowflake
+      weight: 404
+    - name: OpenAI
+      url: cloud_cost_management/saas_costs/?tab=openai#setup
+      parent: cloud_cost_saas_cost_integrations
+      identifier: cloud_cost_saas_cost_integrations_openai
+      weight: 405
+    - name: Fastly
+      url: cloud_cost_management/saas_costs/?tab=fastly#setup
+      parent: cloud_cost_saas_cost_integrations
+      identifier: cloud_cost_saas_cost_integrations_fastly
+      weight: 406
+    - name: Twilio
+      url: cloud_cost_management/saas_costs/?tab=twilio#setup
+      parent: cloud_cost_saas_cost_integrations
+      identifier: cloud_cost_saas_cost_integrations_twilio
+      weight: 407
+    - name: Custom Costs
+      url: cloud_cost_management/custom
+      parent: cloud_cost
+      identifier: cloud_cost_custom
       weight: 5
     - name: Tag Pipelines
       url: cloud_cost_management/tag_pipelines
@@ -2835,12 +2893,12 @@ menu:
       identifier: custom_instrumentation_dotnet
       weight: 2028
     - name: Android
-      url: tracing/trace_collection/custom_instrumentation/android
+      url: tracing/trace_collection/custom_instrumentation/android/otel
       parent: custom_instrumentation
       identifier: custom_instrumentation_android
       weight: 2029
     - name: iOS
-      url: tracing/trace_collection/custom_instrumentation/ios
+      url: tracing/trace_collection/custom_instrumentation/ios/otel
       parent: custom_instrumentation
       identifier: custom_instrumentation_ios
       weight: 2030
@@ -3048,51 +3106,6 @@ menu:
       parent: tracing_services
       identifier: tracing_apm_monitors
       weight: 706
-    - name: LLM Observability
-      url: tracing/llm_observability/
-      parent: tracing
-      identifier: tracing_llm_obs
-      weight: 7
-    - name: Core Concepts
-      url: tracing/llm_observability/core_concepts/
-      parent: tracing_llm_obs
-      identifier: tracing_llm_obs_core_concepts
-      weight: 701
-    - name: Quickstart
-      url: tracing/llm_observability/quickstart/
-      parent: tracing_llm_obs
-      identifier: tracing_llm_obs_quickstart
-      weight: 702
-    - name: Trace an LLM Application
-      url: tracing/llm_observability/trace_an_llm_application/
-      parent: tracing_llm_obs
-      identifier: tracing_llm_obs_trace_an_application
-      weight: 703
-    - name: Span Kinds
-      url: tracing/llm_observability/span_kinds/
-      parent: tracing_llm_obs
-      identifier: tracing_llm_obs_span_kinds
-      weight: 704
-    - name: Auto Instrumentation
-      url: tracing/llm_observability/auto_instrumentation/
-      parent: tracing_llm_obs
-      identifier: tracing_llm_obs_auto_instrumentation
-      weight: 705
-    - name: SDK
-      url: tracing/llm_observability/sdk/
-      parent: tracing_llm_obs
-      identifier: tracing_llm_obs_sdk
-      weight: 706
-    - name: API
-      url: tracing/llm_observability/api/
-      parent: tracing_llm_obs
-      identifier: tracing_llm_obs_api
-      weight: 707
-    - name: Submit Evaluations
-      url: tracing/llm_observability/submit_evaluations/
-      parent: tracing_llm_obs
-      identifier: tracing_llm_obs_submit_evaluations
-      weight: 708
     - name: API Catalog
       url: /tracing/api_catalog/
       identifier: api_catalog
@@ -3552,6 +3565,52 @@ menu:
       identifier: data_jobs
       parent: apm_heading
       weight: 60000
+    - name: LLM Observability
+      url: llm_observability/
+      pre: llm-observability
+      identifier: llm_observability
+      parent: ai_observability_heading
+      weight: 10000
+    - name: Core Concepts
+      url: llm_observability/core_concepts/
+      parent: llm_observability
+      identifier: tracing_llm_obs_core_concepts
+      weight: 1
+    - name: Quickstart
+      url: llm_observability/quickstart/
+      parent: llm_observability
+      identifier: tracing_llm_obs_quickstart
+      weight: 2
+    - name: Trace an LLM Application
+      url: llm_observability/trace_an_llm_application/
+      parent: llm_observability
+      identifier: tracing_llm_obs_trace_an_application
+      weight: 3
+    - name: Span Kinds
+      url: llm_observability/span_kinds/
+      parent: llm_observability
+      identifier: tracing_llm_obs_span_kinds
+      weight: 4
+    - name: Auto Instrumentation
+      url: llm_observability/auto_instrumentation/
+      parent: llm_observability
+      identifier: tracing_llm_obs_auto_instrumentation
+      weight: 5
+    - name: SDK
+      url: llm_observability/sdk/
+      parent: llm_observability
+      identifier: tracing_llm_obs_sdk
+      weight: 6
+    - name: API
+      url: llm_observability/api/
+      parent: llm_observability
+      identifier: tracing_llm_obs_api
+      weight: 7
+    - name: Submit Evaluations
+      url: llm_observability/submit_evaluations/
+      parent: llm_observability
+      identifier: tracing_llm_obs_submit_evaluations
+      weight: 8
     - name: CI Visibility
       url: continuous_integration/
       pre: ci
@@ -4584,11 +4643,16 @@ menu:
       parent: cloud_siem
       identifier: cloud_siem_investigator
       weight: 6
+    - name: Historical Jobs
+      url: security/cloud_siem/historical_jobs
+      parent: cloud_siem
+      identifier: cloud_siem_log_historical_jobs
+      weight: 7
     - name: Guides
       url: security/cloud_siem/guide/
       parent: cloud_siem
       identifier: siem_guides
-      weight: 7
+      weight: 8
     - name: Cloud Security Management
       url: security/cloud_security_management
       parent: security_platform_heading
@@ -5228,6 +5292,16 @@ menu:
       parent: continuous_testing_cicd_integrations
       identifier: continuous_testing_cicd_integrations_jenkins
       weight: 206
+    - name: Upload Application
+      url: /continuous_testing/cicd_integrations/bitrise_upload
+      parent: continuous_testing_cicd_integrations
+      identifier: continuous_testing_cicd_integrations_bitrise_upload
+      weight: 207
+    - name: Run Tests
+      url: /continuous_testing/cicd_integrations/bitrise_run
+      parent: continuous_testing_cicd_integrations
+      identifier: continuous_testing_cicd_integrations_bitrise_run
+      weight: 208
     - name: Settings
       url: /continuous_testing/settings
       parent: continuous_testing

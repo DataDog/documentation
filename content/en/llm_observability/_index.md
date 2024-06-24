@@ -1,6 +1,8 @@
 ---
 title: LLM Observability
 kind: documentation
+aliases:
+    - /tracing/llm_observability/
 ---
 
 <div class="alert alert-info">LLM Observability is in public beta.</a></div>
@@ -17,7 +19,7 @@ LLM Observability is not available in the US1-FED site.
 
 ## Overview
 
-{{< img src="tracing/llm_observability/llm-observability-landing.png" alt="LLM Observability overview page with record of all prompt-response pair traces" style="width:100%;" >}}
+{{< img src="llm_observability/llm-observability-landing.png" alt="LLM Observability overview page with record of all prompt-response pair traces" style="width:100%;" >}}
 
 With LLM Observability, you can monitor, troubleshoot, and evaluate your LLM-powered applications, such as chatbots. You can investigate the root cause of issues, monitor operational performance, and evaluate the quality, privacy, and safety of your LLM applications. 
 
@@ -40,27 +42,27 @@ To get started with LLM Observability, you can build a simple example with the [
 
 View every step of your LLM application chains and calls to pinpoint problematic requests and identify the root cause of errors.
 
-{{< img src="tracing/llm_observability/llm-observability-overview.png" alt="An LLM Observability trace displaying each span of a request" style="width:100%;" >}}
+{{< img src="llm_observability/llm-observability-overview.png" alt="An LLM Observability trace displaying each span of a request" style="width:100%;" >}}
 
 ### Monitor operational metrics and optimize cost
 
 Monitor the throughput, latency, and token usage trends for all your LLM applications.
 
-{{< img src="tracing/llm_observability/dashboard.png" alt="The out-of-the-box LLM Observability dashboard" style="width:100%;" >}}
+{{< img src="llm_observability/dashboard.png" alt="The out-of-the-box LLM Observability dashboard" style="width:100%;" >}}
 
 ### Evaluate the quality and effectiveness of your LLM applications
 
 Identify problematic clusters and monitor the quality of responses over time with topical clustering and checks like sentiment, failure to answer, and so on.
 
-{{< img src="tracing/llm_observability/clusters-page.png" alt="The clusters page in LLM Observability" style="width:100%;" >}}
+{{< img src="llm_observability/clusters-page.png" alt="The clusters page in LLM Observability" style="width:100%;" >}}
 
 ### Safeguard sensitive data and identify malicious users
 
 Automatically scan and redact any sensitive data in your AI applications and identify prompt injections.
 
-{{< img src="tracing/llm_observability/prompt-injection.png" alt="An example of a prompt-injection attempt" style="width:100%;" >}}
+{{< img src="llm_observability/prompt-injection.png" alt="An example of a prompt-injection attempt" style="width:100%;" >}}
 
-[1]: /tracing/llm_observability/spans/
+[1]: /llm_observability/spans/
 [2]: https://app.datadoghq.com/llm/traces
-[3]: /tracing/llm_observability/quickstart
-[4]: /tracing/llm_observability/trace_an_llm_application
+[3]: /llm_observability/quickstart
+[4]: /llm_observability/trace_an_llm_application
