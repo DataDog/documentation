@@ -904,7 +904,12 @@ agents:
 {{< collapse-content title="HTTP/2 monitoring" level="h4" >}}
 Universal Service Monitoring can capture HTTP/2 and gRPC traffic.
 
-Requires Agent version 7.53 or greater.
+<strong>Note</strong>:
+<br>
+<ul role="list">
+  <li>Requires Linux Kernel version 5.2 or later.</li>
+  <li>Requires Agent version 7.53 or greater.</li>
+</ul>
 
 {{< tabs >}}
 {{% tab "Configuration file" %}}
@@ -938,10 +943,10 @@ agents:
 {{< /tabs >}}
 {{< /collapse-content >}}
 
-{{< collapse-content title="Universal Kafka Monitoring (Private Beta)" level="h4" >}}
+{{< collapse-content title="Kafka Monitoring (Private Beta)" level="h4" >}}
 
 <div class="alert alert-info">
-Universal Kafka Monitoring is available in <strong>Private beta</strong>.
+Kafka Monitoring is available in <strong>Private beta</strong>.
 </div>
 
 <strong>Note</strong>:
@@ -949,7 +954,6 @@ Universal Kafka Monitoring is available in <strong>Private beta</strong>.
 <ul role="list">
   <li>Producers and consumers require Linux Kernel version 5.2 or later.</li>
   <li>Producers and consumers must be interfacing with Kafka <strong>without</strong> TLS.</li>
-  <li>Datadog recommends Helm with Datadog chart version 2.26.2 or later. The chart version is defined in the <a href="https://github.com/DataDog/helm-charts/blob/main/charts/datadog/Chart.yaml">`chart.yaml`</a> file of the dd-agent.</li>
   <li>Requires Agent version 7.53 or greater.</li>
 </ul>
 
