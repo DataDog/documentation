@@ -41,10 +41,7 @@ This document walks you through the following:
 {{< img src="sensitive_data_scanner/sds_main_12_01_24.png" alt="The Sensitive Data Scanner page showing six out of the 12 active scanning groups" style="width:90%;">}}
 
 ## Set up Sensitive Data Scanner
-<br>
-{{< callout url="https://google.com" >}}
-  Sensitive Data Scanner using the Agent is in private beta. To request access, fill out this form.
-{{< /callout >}} 
+
 
 There are two locations where you can redact your sensitive data:
 
@@ -53,6 +50,10 @@ There are two locations where you can redact your sensitive data:
 - With **Sensitive Data Scanner in the Cloud**, you submit your logs in the Datadog backend. In this method, logs leave your premises before they are redacted. You can have multiple scanning groups per organization, and you can create custom scanning rules. You can also redact sensitive data in tags.
 
 **In your environment:**
+
+{{< callout url="https://google.com" >}}
+  Sensitive Data Scanner using the Agent is in private beta. To request access, fill out this form.
+{{< /callout >}}
 
 - With **Sensitive Data Scanner using the Agent**, Datadog redacts your logs before submitting them to the Datadog backend, and unredacted logs never need to leave your premises. With this method, you are limited to one scanning group per organization, and you can use only predefined library rules.
 
