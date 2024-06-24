@@ -19,14 +19,16 @@ Changing a schema produced by a service without updating the consumer can lead t
 You must have [installed][1] Data Streams Monitoring on your Java producer and consumer services.
 
 Schema tracking requires a recent version of [dd-trace-java][2]:
-- For Avro tracking: use tracer v1.34.0+
-- For Protobuf tracking: use tracer v1.36.0
+- For Protobuf tracking: use tracer v1.34.0+
+- For Avro tracking: use tracer v1.36.0+
 
 ## View schemas
 
 ### Schema list
 
 In the [schema list][3], you can view all schemas used across your pipelines. 
+
+{{< img src="data_streams/schema_list.png" alt="List view of three schemas" style="width:100%;" >}}
 
 For each schema, the table shows the following:
 - Type
@@ -36,20 +38,18 @@ For each schema, the table shows the following:
 - All producers and consumers of the schema
 - Consumer lag: the max Kafka lag for all consumers of a specific schema
 
-TODO: screenshot
+Selecting a schema from the list displays the throughput of the schema by service, errors by service, and the full schema.
+
+{{< img src="data_streams/schema_panel.png" alt="Schema list view with an open side panel showing detailed information about one schema" style="width:100%;" >}}
 
 Use the following steps to view detailed information about a schema:
 1. Navigate to [Data Streams Monitoring][4].
 1. Click the **Schemas** tab.
 1. Select the time frame.
 1. Use the quick filters to filter for new schemas (first seen within the last 3 hours), schemas with high error rates, or active schemas.
-1. Click into a schema to view the throughput of the schema by service, errors by service, and the full schema.
-
-TODO: screenshot
+1. Select a schema. A side panel opens with detailed information for that schema.
 
 ### At the service level
-
-TODO: screenshot
 
 For each service you track in Data Streams Monitoring, you can see information about the schemas that it uses.
 
