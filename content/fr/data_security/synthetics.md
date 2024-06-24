@@ -33,7 +33,7 @@ Les artefacts désignent les captures d'écran, snapshots, erreurs et ressources
 
 {{< site-region region="us,us3,us5,gov,ap1" >}}
 
-* **Stockage **: chiffrement pour les [compartiments AWS S3][1].
+* **Stockage **: chiffrement pour les [compartiments Amazon S3][1].
 * **Transport **: chiffrement pendant le transfert à l'aide du processus [AWS Signature version 4 pour S3][2].
 
 [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucket-encryption.html

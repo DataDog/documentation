@@ -1,6 +1,5 @@
 ---
 disable_toc: false
-kind: ガイド
 title: ダッシュボードで SLO 履歴データをグラフ化する
 ---
 

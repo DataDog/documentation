@@ -1,6 +1,5 @@
 ---
 title: Proactively block crypto mining threats with Active Protection
-kind: documentation
 further_reading:
 - link: "security/threats/workload_security_rules"
   tag: "Documentation"

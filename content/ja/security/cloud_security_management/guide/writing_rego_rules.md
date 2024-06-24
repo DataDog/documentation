@@ -9,7 +9,6 @@ further_reading:
   tag: ガイド
   text: フレームワークおよび業界のベンチマークの詳細
 is_beta: true
-kind: ガイド
 title: Rego によるカスタムルールの作成
 ---
 

@@ -38,7 +38,7 @@ integration_id: amazon-api-gateway
 integration_title: Amazon Api Gateway
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: amazon_api_gateway
 public_title: Intégration dʼAmazon Api Gateway
@@ -123,18 +123,18 @@ Pour activer la journalisation API Gateway :
 
 Accédez ensuite à la [page Logs][6] pour commencer à explorer vos logs.
 
-## Real User Monitoring
+## Données collectées
 
-### Analyse d'entonnoirs
+### Métriques
 {{< get-metrics-from-git "amazon_api_gateway" >}}
 
 
 
-### Aide
+### Événements
 
 L'intégration Amazon APIP Gateway n'inclut aucun événement.
 
-### Aide
+### Checks de service
 
 L'intégration Amazon API Gateway n'inclut aucun check de service.
 

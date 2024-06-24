@@ -15,10 +15,10 @@ further_reading:
 - link: /tracing/configure_data_security/
   tag: Documentation
   text: Sécurité des données de tracing
-- link: /real_user_monitoring/browser/modifying_data_and_context/
+- link: /data_security/real_user_monitoring/
   tag: Documentation
   text: Sécurité des données RUM
-- link: /real_user_monitoring/session_replay/privacy_options
+- link: /real_user_monitoring/session_replay/browser/privacy_options
   tag: Documentation
   text: Options de confidentialité de Session Replay
 - link: /sensitive_data_scanner/
@@ -123,7 +123,7 @@ Métriques
 : Les métriques, y compris les métriques d'infrastructure et les métriques provenant des intégrations et d'autres données ingérées, telles que les logs, les traces, les données RUM et les tests Synthetic, forment des séries temporelles qui peuvent être représentées en tant que graphiques. Des tags sont généralement associés aux métriques.
 
 Données APM
-: Les données APM comprennent des services, ressources, profils, traces et spans, ainsi que les tags associés. Consultez [le glossaire APM] [25] pour en savoir plus sur chaque type de données APM.
+: Les données APM comprennent les services, ressources, profils, traces et spans, ainsi que les tags associés. Consultez [le glossaire APM][25] pour en savoir plus sur chaque type de données APM.
 
 Signatures des requêtes de bases de données
 : Les données de la solution Database Monitoring comprennent des mesures et échantillons, ainsi que leurs tags associés. Ces données sont recueillies par l'Agent et servent à surveiller les performances historiques de requêtes normalisées. La granularité de ces données est définie par leur signature de requête normalisée et par l'identifiant unique du host. Tous les paramètres de requête sont obfusqués et supprimés des échantillons recueillis avant leur envoi à Datadog.
@@ -146,7 +146,7 @@ Pipelines et tests d'intégration continue
 [2]: https://www.datadoghq.com/legal/privacy/
 [3]: /fr/developers/dogstatsd/
 [4]: /fr/data_security/agent/
-[5]: /fr/agent/guide/secrets-management/
+[5]: /fr/agent/configuration/secrets-management/
 [6]: /fr/integrations/amazon_web_services/
 [7]: https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#delegate-using-roles
 [8]: /fr/integrations/azure/
@@ -162,8 +162,8 @@ Pipelines et tests d'intégration continue
 [18]: /fr/tracing/configure_data_security/
 [19]: /fr/serverless/distributed_tracing/collect_lambda_payloads#obfuscating-payload-contents
 [20]: /fr/data_security/synthetics/
-[21]: /fr/real_user_monitoring/browser/modifying_data_and_context/
-[22]: /fr/real_user_monitoring/session_replay/privacy_options
+[21]: /fr/real_user_monitoring/browser/advanced_configuration/
+[22]: /fr/real_user_monitoring/session_replay/browser/privacy_options
 [23]: /fr/database_monitoring/data_collected/#sensitive-information
 [24]: /fr/getting_started/tagging/
 [25]: /fr/tracing/glossary/

@@ -40,6 +40,7 @@ content/en/tracing/trace_collection/dd_libraries/ruby.md
 content/en/tracing/trace_collection/compatibility/ruby.md
 content/en/tracing/trace_collection/dd_libraries/ruby_v1.md
 content/en/tracing/trace_collection/compatibility/ruby_v1.md
+content/en/tracing/trace_collection/automatic_instrumentation/dd_libraries/ruby_v1.md
 
 # Log collection
 content/en/logs/guide/forwarder.md
@@ -103,6 +104,8 @@ content/en/continuous_testing/cicd_integrations/configuration.md
 content/en/continuous_testing/cicd_integrations/github_actions.md
 content/en/continuous_testing/cicd_integrations/circleci_orb.md
 content/en/continuous_testing/cicd_integrations/azure_devops_extension.md
+content/en/continuous_testing/cicd_integrations/bitrise_upload.md
+content/en/continuous_testing/cicd_integrations/bitrise_run.md
 
 # Code Analysis
 content/en/code_analysis/static_analysis/github_actions.md

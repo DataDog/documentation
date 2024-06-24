@@ -899,7 +899,7 @@ class Integrations:
                 ]
                 item = matches[0] if len(matches) > 0 else []
             if item:
-                item["kind"] = "integration"
+                item["custom_kind"] = "integration"
                 item["integration_title"] = (
                     item
                     .get("public_title", "")
@@ -937,7 +937,7 @@ class Integrations:
                 fm = fm.replace('!!bool "false"', 'false')
                 fm = fm.replace('!!bool "true"', 'true')
             else:
-                fm = yaml.safe_dump({"kind": "integration", **extra_fm}, width=float("inf"), default_style='"', default_flow_style=False,
+                fm = yaml.safe_dump({"custom_kind": "integration", **extra_fm}, width=float("inf"), default_style='"', default_flow_style=False,
                                     allow_unicode=True).rstrip()
         return template.format(
             front_matter=fm, content=content

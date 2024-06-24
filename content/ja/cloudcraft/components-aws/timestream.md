@@ -1,5 +1,4 @@
 ---
-kind: ドキュメント
 title: Timestream コンポーネント
 ---
 ## 概要

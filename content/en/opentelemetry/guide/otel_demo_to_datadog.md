@@ -108,7 +108,9 @@ Complete the following steps to configure these three components.
             action: upsert
 
     connectors:
-        datadog/connector:
+      datadog/connector:
+        traces:
+          span_name_as_resource_name: true
 
     service:
       pipelines:
@@ -180,7 +182,9 @@ Complete the following steps to configure these three components.
                 action: upsert
 
         connectors:
-            datadog/connector:
+          datadog/connector:
+            traces:
+              span_name_as_resource_name: true
 
         service:
           pipelines:

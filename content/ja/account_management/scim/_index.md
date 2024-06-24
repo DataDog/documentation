@@ -11,7 +11,6 @@ further_reading:
 - link: observability_pipelines/architecture/preventing_data_loss
   tag: ドキュメント
   text: Okta を使用した SCIM の構成
-kind: ドキュメント
 title: SCIM によるユーザープロビジョニング
 ---
 

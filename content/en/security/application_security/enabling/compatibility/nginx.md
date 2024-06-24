@@ -6,12 +6,12 @@ type: multi-code-lang
 code_lang_weight: 40
 ---
 
-## ASM capabilities support
+## Application Security capabilities support
 
-The following ASM capabilities are supported in the nginx integration, for the
+The following application security capabilities are supported in the nginx integration, for the
 specified tracer version:
 
-| ASM capability                         | Minimum nginx module version |
+| Application Security capability        | Minimum nginx module version |
 |----------------------------------------|------------------------------|
 | Threat Detection                       | 1.2.0                        |
 | Threat Protection                      | 1.2.0                        |

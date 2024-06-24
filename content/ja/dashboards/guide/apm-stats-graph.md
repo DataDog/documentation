@@ -6,7 +6,6 @@ further_reading:
 - link: /dashboards/querying/
   tag: Documentation
   text: グラフのクエリ方法について
-kind: ガイド
 title: APM 統計グラフの構成
 ---
 

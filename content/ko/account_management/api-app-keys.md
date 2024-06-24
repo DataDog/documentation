@@ -6,7 +6,6 @@ aliases:
 - /ko/account_management/faq/how-do-i-reset-my-application-keys/
 - /ko/agent/faq/how-do-i-reset-my-datadog-api-keys/
 - /ko/account_management/faq/api-app-key-management/
-kind: 설명서
 title: API와 애플리케이션 키
 ---
 
