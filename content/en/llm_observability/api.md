@@ -10,8 +10,6 @@ LLM Observability is not available in the US1-FED site.
 </div>
 {{% /site-region %}}
 
-<div class="alert alert-warning">LLM Observability is in public beta, and this API is subject to change. If changes occur, Datadog will provide release notes with any applicable upgrade instructions.</a></div>
-
 ## Overview
 
 The LLM Observability API provides an interface for developers to send LLM-related traces and spans to Datadog. If your application is written in Python, you can use the [LLM Observability SDK for Python][1].
@@ -21,7 +19,7 @@ The LLM Observability API provides an interface for developers to send LLM-relat
 Use this endpoint to send spans to Datadog. For details on the available kinds of spans, see [Span Kinds][2].
 
 Endpoint
-: `https://api.{{< region-param key="dd_site" code="true" >}}/api/unstable/llm-obs/v1/trace/spans`
+: `https://api.{{< region-param key="dd_site" code="true" >}}/api/intake/llm-obs/v1/trace/spans`
 
 Method
 : `POST`
@@ -225,7 +223,7 @@ The name can be up to 193 characters long and may not contain contiguous or trai
 Use this endpoint to send evaluations associated with a given span to Datadog.
 
 Endpoint
-: `https://api.{{< region-param key="dd_site" code="true" >}}/api/unstable/llm-obs/v1/eval-metric`
+: `https://api.{{< region-param key="dd_site" code="true" >}}/api/intake/llm-obs/v1/eval-metric`
 
 Method
 : `POST`
@@ -259,7 +257,7 @@ Evaluations require a `span_id` and `trace_id`.
         {
           "span_id": "61399242116139924211",
           "trace_id": "13932955089405749200",
-          "timestamp": 1609459200,
+          "timestamp_ms": 1609459200,
           "metric_type": "categorical",
           "label": "Sentiment",
           "categorical_value": "Positive"
@@ -301,7 +299,7 @@ Evaluations require a `span_id` and `trace_id`.
           "id": "d4f36434-f0cd-47fc-884d-6996cee26da4",
           "span_id": "61399242116139924211",
           "trace_id": "13932955089405749200",
-          "timestamp": 1609459200,
+          "timestamp_ms": 1609459200,
           "metric_type": "categorical",
           "label": "Sentiment",
           "categorical_value": "Positive"
@@ -338,7 +336,8 @@ Evaluations require a `span_id` and `trace_id`.
 | ID                     | string | Evaluation metric UUID (generated upon submission). |
 | span_id [*required*]    | string | The ID of the span that this evaluation is associated with. |
 | trace_id [*required*]   | string | The ID of the trace that this evaluation is associated with. |
-| timestamp              | int64  | A UTC UNIX timestamp representing the time the request was sent. |
+| timestamp_ms [*required*] | int64  | A UTC UNIX timestamp in milliseconds representing the time the request was sent. |
+| ml_app [*required*] | string | The name of your LLM application. See [Application naming guidelines](#application-naming-guidelines). |
 | metric_type [*required*]| string | The type of evaluation: `"categorical"` or `"score"`. |
 | label [*required*]      | string | The unique name or label for the provided evaluation . |
 | categorical_value [*required if the metric_type is "score"*]    | string | A string representing the category that the evaluation belongs to. |
@@ -347,10 +346,10 @@ Evaluations require a `span_id` and `trace_id`.
 
 #### EvalMetricsRequestData
 
-| Field      | Type            | Description  | 
+| Field      | Type            | Description  |
 |------------|-----------------|--------------|
 | type [*required*]      | string | Identifier for the request. Set to `evaluation_metric`. |
-| attributes [*required*] | [[EvalMetric](#evalmetric)] | The body of the request. | 
+| attributes [*required*] | [[EvalMetric](#evalmetric)] | The body of the request. |
 
 [1]: /llm_observability/sdk/
 [2]: /llm_observability/span_kinds/
