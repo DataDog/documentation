@@ -95,7 +95,7 @@ title: 위젯
 {{< /whatsnext >}}
 
 ### 성능 및 안정성
-{{< whatsnext desc="사이트 안정성 시각화: ">}} {{< nextlink href="/dashboards/widgets/profiling_flame_graph" img="dashboards/widgets/icons/profiling_flame_graph.svg">}} 불꽃 그래프 프로파일링 {{< /nextlink >}} {{< nextlink href="/dashboards/widgets/slo" img="dashboards/widgets/icons/slo-summary_light_large.png">}} 서비스 수준 목표(SLO) 요약{ {< /nextlink >}} {{< nextlink href="/dashboards/widgets/slo_list" img="dashboards/widgets/icons/slo-list_light_large.png">}} 서비스 수준 목표(SLO){{< /nextlink >}}{{< /whatsnext >}}
+{{< whatsnext desc="사이트 안정성 시각화: ">}} {{< nextlink href="/dashboards/widgets/profiling_flame_graph" img="dashboards/widgets/icons/profiling_flame_graph.svg">}} 불꽃 그래프 프로파일링 {{< /nextlink >}} {{< nextlink href="/dashboards/widgets/slo" img="dashboards/widgets/icons/slo-summary_light_large.png">}} 서비스 수준 목표(SLO) 요약 {{< /nextlink >}} {{< nextlink href="/dashboards/widgets/slo_list" img="dashboards/widgets/icons/slo-list_light_large.png">}} 서비스 수준 목표(SLO){{< /nextlink >}}{{< /whatsnext >}}
 
 ## 전체 화면
 
