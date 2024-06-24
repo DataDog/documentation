@@ -307,6 +307,12 @@ Select any row from the data table to see associated logs, traces, and processes
 
 {{< img src="network_performance_monitoring/network_analytics/flow_details.png" alt="Aggregate Connection Details" style="width:80%;">}}
 
+### Pivot to network path
+
+Hover over a row in the analytics table to pivot to [network path][11] and see the paths between the source and destination specified in NPM.
+
+{{< img src="network_performance_monitoring/network_analytics/view_network_path.png" alt="Example of hovering over a row in the Analytics table to show the Network Path toggle" style="width:90%;">}}
+
 ## Sidepanel
 
 The sidepanel provides contextual telemetry to help you debug network dependencies. Use the Flows, Logs, Traces, and Processes tabs to determine whether a high retransmit count or latency in traffic between two endpoints is due to:
@@ -340,4 +346,8 @@ The **Security** tab highlights potential network threats and findings detected 
 [8]: /security/detection_rules/
 [9]: /network_monitoring/performance/setup/#enhanced-resolution
 [10]: /network_monitoring/dns/#recommended-queries
+<<<<<<< alai97/npm-metric-doc-edit
 [11]: /getting_started/tagging/unified_service_tagging/
+=======
+[11]: /network_monitoring/network_path
+>>>>>>> master
