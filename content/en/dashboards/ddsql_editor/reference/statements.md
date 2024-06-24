@@ -127,7 +127,7 @@ Each aliased query may also specify its output schema and column names.
 
 ## CREATE
 
-DDSQL allows users to create temporary tables, insert into them, and query & reference them. These tables are not persisted across sessions.
+DDSQL allows users to create temporary tables, insert into them, and query and reference them. These tables are not persisted across sessions.
 
 ### Syntax
 
