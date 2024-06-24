@@ -9,7 +9,7 @@ DDSQL is in private beta.
 
 ## Overview
 
-You can write a query in [DDSQL Editor][1] in natural language or in SQL (see the [DDSQL reference documentation][2] for supported SQL expressions and usage details). Example queries are also provided throughout the UI.
+You can write a query in [DDSQL Editor][1] in natural language or in SQL. See the [DDSQL reference documentation][2] for supported SQL expressions and usage details. Example queries are also provided throughout the UI.
 
 {{< img src="dashboards/ddsql/query-ui-overview.png" alt="A list of available tables" style="width:100%;" >}}
 
