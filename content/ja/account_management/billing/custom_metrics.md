@@ -4,7 +4,6 @@ algolia:
   - カスタムメトリクスの請求
 aliases:
 - /ja/integrations/faq/what-standard-integrations-emit-custom-metrics/
-kind: documentation
 title: カスタムメトリクスの課金
 ---
 

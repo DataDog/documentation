@@ -1,6 +1,5 @@
 ---
 title: Account Management Guides
-kind: guide
 private: true
 cascade:
     algolia:

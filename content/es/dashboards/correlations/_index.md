@@ -14,7 +14,6 @@ further_reading:
 - link: /watchdog/
   tag: Documentación
   text: Watchdog
-kind: documentación
 title: Correlaciones de métricas
 ---
 

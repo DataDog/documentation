@@ -1,6 +1,5 @@
 ---
 title: Correlate Infrastructure Metrics with GitLab Jobs in Datadog
-kind: guide
 description: Learn how to correlate infrastructure metrics with your GitLab Autoscale job executions.
 further_reading:
   - link: "/continuous_integration/pipelines/gitlab"

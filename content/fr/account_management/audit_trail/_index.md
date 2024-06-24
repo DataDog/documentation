@@ -16,7 +16,6 @@ further_reading:
   tag: Blog
   text: Surveiller des ressources et configurations essentielles Datadog grâce au
     journal d'audit
-kind: documentation
 title: Journal d'audit Datadog
 ---
 

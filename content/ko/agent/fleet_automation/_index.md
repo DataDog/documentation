@@ -10,7 +10,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/fleet-automation/
   tag: 블로그
   text: 플릿 자동화를 통해 대규모로 Datadog Agents를 중앙에서 원격으로 관리합니다.
-kind: documentation
 title: 플릿 자동화
 ---
 

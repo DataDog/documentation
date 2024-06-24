@@ -15,7 +15,6 @@ further_reading:
 - link: /api/v1/users/
   tag: Documentación
   text: Gestión de usuarios a través de la API del usuario
-kind: documentación
 title: Gestión de usuarios
 ---
 {{< site-region region="gov" >}}

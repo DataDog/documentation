@@ -2,7 +2,6 @@
 aliases:
 - /ko/agent/faq/upgrade-to-agent-v6
 - /ko/agent/guide/upgrade-to-agent-v6
-kind: 설명서
 title: 에이전트 v6으로 업그레이드
 ---
 

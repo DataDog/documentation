@@ -5,7 +5,6 @@ algolia:
   - gráfica de anomalías
 aliases:
 - /es/graphing/functions/algorithms/
-kind: documentación
 title: Algoritmos
 ---
 

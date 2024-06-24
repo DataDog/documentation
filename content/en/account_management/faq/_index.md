@@ -1,6 +1,5 @@
 ---
 title: Account Management FAQ
-kind: faq
 cascade: 
   - private: true
 ---
