@@ -12,7 +12,7 @@ further_reading:
   text: "Domain Allowlist UI"
 ---
 
-{{< callout url="https://google.com" >}}
+{{< callout url="https://www.datadoghq.com/private-beta/domain-allowlist/" >}}
   Domain Allowlist is available in <strong>private beta</strong> for customers with Enterprise plans. If you're interested in this feature, complete the form to request access.
 {{< /callout >}} 
 
