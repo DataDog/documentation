@@ -1,6 +1,5 @@
 ---
 title: Region
-kind: documentation
 ---
 
 ## Overview
