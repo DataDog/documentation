@@ -4397,10 +4397,10 @@ menu:
       url: logs/explorer/saved_views/
       parent: log_explorer
       weight: 513
-    - name: Workspace
-      url: logs/workspace/
+    - name: Workspaces
+      url: logs/workspaces/
       parent: log_management
-      identifier: logs_workspace
+      identifier: logs_workspaces
       weight: 6
     - name: Error Tracking
       url: logs/error_tracking/

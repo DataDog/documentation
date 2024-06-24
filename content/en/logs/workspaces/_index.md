@@ -1,15 +1,15 @@
 ---
-title: Logs Workspace
+title: Log Workspaces
 kind: documentation
 disable_toc: false
 ---
 
 {{< callout url="https://www.datadoghq.com/private-beta" header="false" >}}
-  Logs Workspace is in private beta.
+  Log Workspaces is in private beta.
 {{< /callout >}}
 
 ## Overview
-During an incident investigation, you might need to run complex queries, such as combining attributes from multiple log sources or transforming log data, to analyze your logs. Use Logs Workspace to run queries to:
+During an incident investigation, you might need to run complex queries, such as combining attributes from multiple log sources or transforming log data, to analyze your logs. Use Log Workspaces to run queries to:
 
 - Correlate multiple data sources
 - Aggregate multiple levels of data
@@ -21,7 +21,7 @@ During an incident investigation, you might need to run complex queries, such as
 
 You can create a workspace from the Workspaces page or from the Log Explorer.
 
-On the [Logs Workspaces][1] page:
+On the [Log Workspaces][1] page:
 
 1. Click **New Workspace**.
 1. Click the **Data source** tile.
