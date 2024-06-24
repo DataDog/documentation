@@ -9,6 +9,12 @@ algolia:
   tags: ['cspm']
 ---
 
+{{< youtube id=L2E8D5q1rRY loading=lazy >}}
+
+<br>
+
+## Overview
+
 Cloud Security Management Misconfigurations (CSM Misconfigurations) makes it easier to assess and visualize the current and historic security posture of your cloud resources, automate audit evidence collection, and remediate misconfigurations that leave your organization vulnerable to attacks. By continuously surfacing security weaknesses resulting from misconfigurations, teams can mitigate risks while ensuring compliance with industry standards.
 
 ## Detect misconfigurations across your cloud resources
@@ -46,14 +52,6 @@ Use template variables and Markdown to [customize notification messages][9]. Edi
 Investigate details using the [Misconfigurations Explorer][10]. View detailed information about a resource, such as configuration, compliance rules applied to the resource, and tags that provide additional context about who owns the resource and its location within your environment. If a misconfiguration does not match your business use case or is an accepted risk, you can [mute the misconfiguration][13] up to an indefinite period of time.
 
 {{< img src="security/cspm/misconfigurations_explorer.png" alt="CSM Misconfigurations Explorer page" width="100%">}}
-
-## Video walkthrough
-
-The following video provides an overview of how to enable and use CSM Misconfigurations:
-
-{{< youtube id=L2E8D5q1rRY loading=lazy >}}
-
-<br>
 
 ## Get started
 

@@ -28,6 +28,10 @@ further_reading:
 <div class="alert alert-warning">Cloud Security Management Vulnerabilities is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
+{{< youtube id=9A-WaQFSWo8 loading=lazy >}}
+
+<br>
+
 ## Overview
 
 Cloud Security Management Vulnerabilities (CSM Vulnerabilities) helps you proactively secure your cloud infrastructure by detecting, prioritizing, and managing vulnerabilities across your container images and hosts. It leverages deep [observability context][6] and industry insights to help you remediate vulnerabilities that are most important to you at a given point in time. 
@@ -65,14 +69,6 @@ The [Vulnerabilities Explorer][1] also offers triaging options for detected vuln
 **Note**: To help you focus on the vulnerabilities that truly matter, vulnerabilities are auto-closed for infrastructure that is either no longer running, or contains the remediated fixed version of the previously-vulnerable package.
 
 {{< img src="security/vulnerabilities/csm_remediate.png" alt="Details explorer of a specific vulnerability highlighting the ability to remediate and assign to team member" width="100%">}}
-
-## Video walkthrough
-
-The following video provides an overview of how to enable and use CSM Vulnerabilities:
-
-{{< youtube id=9A-WaQFSWo8 loading=lazy >}}
-
-<br>
 
 ## Further reading
 

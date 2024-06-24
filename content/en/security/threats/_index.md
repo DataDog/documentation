@@ -9,6 +9,12 @@ aliases:
   - /security/threats/runtime_anomaly_detection
 ---
 
+{{< youtube id=RPILU7A76Pc loading=lazy >}}
+
+<br>
+
+## Overview
+
 Cloud Security Management Threats (CSM Threats) monitors file, network, and process activity across your environment to detect real-time threats to your infrastructure. As part of the Datadog platform, you can combine the real-time threat detection of CSM Threats with metrics, logs, traces, and other telemetry to see the full context surrounding a potential attack on your workloads.
 
 ## Detect threats to your production workloads in real-time
@@ -54,14 +60,6 @@ Investigate and triage security signals in the [Signals Explorer][8]. View detai
 
 Datadog is introducing a new feature called Active Protection to address the crypto threats detected in your environment automatically. Active Protection is in private beta. Fill out the form to request access.
 {{< /callout >}}
-
-## Video walkthrough
-
-The following video provides an overview of how to enable and use CSM Threats:
-
-{{< youtube id=RPILU7A76Pc loading=lazy >}}
-
-<br>
 
 ## Get started
 

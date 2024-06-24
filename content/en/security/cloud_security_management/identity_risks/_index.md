@@ -20,6 +20,12 @@ further_reading:
   text: "Learn more about Workflow Automation"
 ---
 
+{{< youtube id=fho9qYHfMe8 loading=lazy >}}
+
+<br>
+
+## Overview
+
 Cloud Security Management Identity Risks (CSM Identity Risks) is a Cloud Infrastructure Entitlement Management (CIEM) product that helps you mitigate entitlement risks across your clouds. It continually scans your cloud infrastructure and finds issues such as lingering administrative privileges, privilege escalations, permission gaps, large blast radii, and cross-account access. It also enables you to proactively resolve identity risks on an ongoing basis to secure your cloud infrastructure from IAM-based attacks. For quick remediation, it suggests [downsized policies][4], [Datadog Workflows][3] based remediations, and deep links to cloud consoles.
 
 <div class="alert alert-info">CSM Identity Risks is available for AWS, Azure, and GCP.</div>
@@ -55,14 +61,6 @@ Datadog CIEM is integrated with [AWS IAM Access Analyzer][5] to further improve 
 <div class="alert alert-info">If you are enabling AWS IAM Access Analyzer for the first time, there is an additional AWS cost associated with this enablement and it could take up to two hours before AWS IAM Access Analyzer's insights are made available.</div>
 
 {{< img src="security/identity_risks/aws_iam_access_analyzer.png" alt="Banner about AWS IAM Access Analyzer enriching permissions gap detections and policy recommendations" width="100%">}}
-
-## Video walkthrough
-
-The following video provides an overview of how to enable and use CSM Identity Risks:
-
-{{< youtube id=fho9qYHfMe8 loading=lazy >}}
-
-<br>
 
 ## Further Reading
 
