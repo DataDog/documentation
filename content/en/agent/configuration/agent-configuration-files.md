@@ -1,6 +1,5 @@
 ---
 title: Agent Configuration Files
-kind: guide
 aliases:
   - /agent/faq/agent-configuration-files
   - /agent/guide/agent-configuration-files
@@ -72,7 +71,7 @@ An example for each Agent check configuration file is found in the `conf.yaml.ex
 └── frontend.yaml
 ```
 
-A special case are YAML files with the suffix `.default`. These files are loaded by the Agent by default and help define the core set of checks that are always enabled (CPU, memory, uptime ...). They are ignored if any other configuration are found for that check, therefore you can safely ignore them. If you want to disable one of the default checks, remove that file. To configure these checks, `conf.yaml.example` should be use as a base.
+A special case are YAML files with the suffix `.default`. These files are loaded by the Agent by default and help define the core set of checks that are always enabled (CPU, memory, uptime ...). They are ignored if any other configuration are found for that check, therefore you can safely ignore them. If you want to disable one of the default checks, remove that file. To configure these checks, `conf.yaml.example` should be used as a base.
 
 Autodiscovery template files are stored in the configuration folder with the `auto_conf.yaml` file. For example, for the Redis check, here is the configuration in `redisdb.d/`:
 

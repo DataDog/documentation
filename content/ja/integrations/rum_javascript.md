@@ -20,7 +20,7 @@ integration_id: rum-javascript
 integration_title: JavaScript
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: rum_javascript
 public_title: JavaScript

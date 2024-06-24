@@ -1,7 +1,7 @@
 ---
 title: Adobe Experience Manager
 name: adobe_experience_manager
-kind: integration
+custom_kind: integration
 description: 'Collect Adobe Experience Manager logs to track errors, request response time, and track badly performing web pages.'
 short_description: 'Collect logs to track errors, request response time, etc.'
 dependencies:

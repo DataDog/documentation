@@ -3,7 +3,6 @@ further_reading:
 - link: https://docs.datadoghq.com/api/latest/service-accounts/
   tag: 설명서
   text: 서비스 계정 API 참조
-kind: 설명서
 title: 서비스 계정
 ---
 

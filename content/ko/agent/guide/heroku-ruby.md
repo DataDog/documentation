@@ -6,7 +6,6 @@ further_reading:
 - link: /logs/guide/collect-heroku-logs
   tag: 설명서
   text: Heroku 로그 수집
-kind: 가이드
 title: Datadog로 Heroku에서 Ruby on Rails 애플리케이션 계측
 ---
 

@@ -23,7 +23,7 @@ integration_id: amazon-elb
 integration_title: Amazon Load Balancer
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: amazon_elb
 public_title: Intégration Datadog/Amazon Load Balancer

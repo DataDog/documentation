@@ -23,7 +23,7 @@ guid: f7a5a40f-f73c-465a-be8f-b2b371c706a2
 integration_id: spark
 integration_title: Spark
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: spark.

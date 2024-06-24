@@ -14,7 +14,7 @@ integration_id: ''
 integration_title: API Pingdom obsolète (v2.1)
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: pingdom
 public_title: Intégration Datadog/Pingdom reposant sur l'API obsolète (v2.1)

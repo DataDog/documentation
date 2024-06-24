@@ -1,6 +1,5 @@
 ---
 title: Facturation de l'intégration Alibaba
-kind: documentation
 ---
 ## Présentation
 

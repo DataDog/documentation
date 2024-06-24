@@ -18,7 +18,6 @@ further_reading:
 - link: /agent/configuration/agent-fips-proxy
   tag: Documentation
   text: Conformité de Datadog à la norme FIPS
-kind: documentation
 title: Configuration de l'Agent pour un proxy
 ---
 

@@ -12,7 +12,7 @@ integration_id: azure-synapse
 integration_title: Microsoft Azure Synapse
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: azure_synapse
 public_title: Datadog-Microsoft Azure Synapse インテグレーション

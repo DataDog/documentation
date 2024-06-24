@@ -36,7 +36,7 @@ integration_id: octoprint
 integration_title: Datadog OctoPrint
 integration_version: 1.0.0
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: octoprint
 public_title: Datadog OctoPrint

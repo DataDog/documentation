@@ -50,7 +50,7 @@ title: 로그의 BRAC 설정하는 방법
 3. 제한 쿼리로 Datadog 애플리케이션 전체에 **로그 접근 제한**: [로그 접근 제한](#restrict-access-to-logs)
 4. **Log Assets**(파이프라인, 인덱스, 아카이브)의 권한 구성: [로그 에셋 접근 제한](#restrict-access-to-log-assets)
 
-## 필수 구성 요소
+## 사전 필수 조건
 
 ### 수신 로그 태그
 
