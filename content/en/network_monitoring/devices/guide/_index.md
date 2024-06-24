@@ -15,9 +15,10 @@ further_reading:
 ---
 
 {{< whatsnext desc="General Guides:" >}}
+    {{< nextlink href="network_monitoring/devices/guide/device_profiles" >}}Getting Started with Device Profiles (GUI){{< /nextlink >}}
     {{< nextlink href="network_monitoring/devices/guide/tags-with-regex" >}}NDM Tags with Regex{{< /nextlink >}}
     {{< nextlink href="network_monitoring/devices/guide/cluster-agent" >}}NDM with the Cluster Agent{{< /nextlink >}}
-    {{< nextlink href="network_monitoring/devices/guide/build-ndm-profile" >}}Build a NDM Profile{{< /nextlink >}}
+    {{< nextlink href="network_monitoring/devices/guide/build-ndm-profile" >}}Build an NDM Profile (Advanced){{< /nextlink >}}
     {{< nextlink href="network_monitoring/devices/guide/migrating-to-snmp-core-check" >}}Migrating to the SNMP Core Check (in Go) from the Python-based Check{{< /nextlink >}}
 {{< /whatsnext >}}
 

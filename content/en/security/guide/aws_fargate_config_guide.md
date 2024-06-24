@@ -5,8 +5,6 @@ aliases:
   - /security/cloud_security_management/setup/fargate
 ---
 
-<div class="alert alert-warning">Cloud Security Management on AWS Fargate is in beta.</div>
-
 This guide walks you through configuring [Cloud Security Management (CSM)][3], [Application Security Management (ASM)][4], and [Cloud SIEM][5] on AWS Fargate.
 
 ## Full stack coverage for AWS Fargate

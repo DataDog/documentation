@@ -28,6 +28,17 @@
   font-stretch: normal;
 }
 @font-face {
+  font-family: 'NationalWeb';
+  src: url('../fonts/NationalWeb-Bold.woff2') format('woff2'),
+      url('../fonts/NationalWeb-Bold.woff') format('woff'),
+      url('../fonts/NationalWeb-Bold.eot') format('embedded-opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-stretch: normal;
+  font-display: swap;
+}
+
+@font-face {
   font-family: 'RobotoMono-Regular';
   src: url('../fonts/RobotoMono-Regular.eot') format('embedded-opentype'),
   url('../fonts/RobotoMono-Regular.woff') format('woff'),
