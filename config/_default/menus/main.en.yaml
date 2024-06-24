@@ -1310,11 +1310,61 @@ menu:
       url: dashboards/sharing/scheduled_reports
       parent: dashboards_sharing
       weight: 1003
+    - name: DDSQL Editor
+      url: dashboards/ddsql_editor
+      parent: dashboards
+      identifier: dashboards_ddsql_editor
+      weight: 11
+    - name: Getting Started
+      url: dashboards/ddsql_editor/getting_started
+      parent: dashboards_ddsql_editor
+      identifier: dashboards_ddsql_editor_getting_started
+      weight: 1101
+    - name: Reference
+      url: dashboards/ddsql_editor/reference
+      parent: dashboards_ddsql_editor
+      identifier: dashboards_ddsql_editor_reference
+      weight: 1102
+    - name: Statements
+      url: dashboards/ddsql_editor/reference/statements
+      parent: dashboards_ddsql_editor_reference
+      identifier: dashboards_ddsql_editor_reference_statements
+      weight: 11021
+    - name: Expressions and Operators
+      url: dashboards/ddsql_editor/reference/expressions_and_operators
+      parent: dashboards_ddsql_editor_reference
+      identifier: dashboards_ddsql_editor_reference_expressions_and_operators
+      weight: 11022
+    - name: Data Types
+      url: dashboards/ddsql_editor/reference/data_types
+      parent: dashboards_ddsql_editor_reference
+      identifier: dashboards_ddsql_editor_reference_data_types
+      weight: 11023
+    - name: Scalar Functions
+      url: dashboards/ddsql_editor/reference/scalar_functions
+      parent: dashboards_ddsql_editor_reference
+      identifier: dashboards_ddsql_editor_reference_scalar_functions
+      weight: 11024
+    - name: Aggregation Functions
+      url: dashboards/ddsql_editor/reference/aggregation_functions
+      parent: dashboards_ddsql_editor_reference
+      identifier: dashboards_ddsql_editor_reference_aggregation_functions
+      weight: 11025
+    - name: Window Functions
+      url: dashboards/ddsql_editor/reference/window_functions
+      parent: dashboards_ddsql_editor_reference
+      identifier: dashboards_ddsql_editor_reference_window_functions
+      weight: 11026
+    - name: Querying Tags
+      url: dashboards/ddsql_editor/reference/tags
+      parent: dashboards_ddsql_editor_reference
+      identifier: dashboards_ddsql_editor_reference_tags
+      weight: 11027
     - name: Guides
       url: dashboards/guide/
       parent: dashboards
       identifier: dashboards_guides
-      weight: 11
+      weight: 12
     - name: Notebooks
       url: notebooks/
       identifier: notebooks
