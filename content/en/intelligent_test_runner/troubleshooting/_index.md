@@ -38,7 +38,7 @@ If you run tests on GitHub Actions CI using the [`pull_request` trigger][5] test
 
 ### Squash and merge your commits
 
-Using [squash and merge][6] to integrate commits into de main branch causes the git history of the feature branch to be lost. As a result Intelligent Test Runner can run tests in the main branch that should have been skipped.
+Using [squash and merge][6] to integrate commits into the base branch causes the git history of the feature branch to be lost. As a result, Intelligent Test Runner can run tests in the base branch that should have been skipped.
 
 ## Intelligent Test Runner incorrectly skipped a test
 
