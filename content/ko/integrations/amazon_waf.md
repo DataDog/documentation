@@ -6,17 +6,27 @@ categories:
 - security
 - aws
 - log collection
+custom_kind: integration
 dependencies: []
 description: 허용된 요청 대 차단된 요청을 추적합니다.
 doc_link: https://docs.datadoghq.com/integrations/amazon_waf/
 draft: false
+further_reading:
+- link: https://www.datadoghq.com/blog/aws-waf-metrics/
+  tag: 블로그
+  text: AWS WAF 모니터링을 위한 주요 메트릭
+- link: https://www.datadoghq.com/blog/aws-waf-monitoring-tools/
+  tag: 블로그
+  text: AWS WAF 데이터 수집 도구
+- link: https://www.datadoghq.com/blog/aws-waf-datadog/
+  tag: 블로그
+  text: Datadog으로 AWS WAF 활동 모니터링
 git_integration_title: amazon_waf
 has_logo: true
 integration_id: ''
 integration_title: AWS WAF
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: amazon_waf
 public_title: Datadog-AWS WAF 통합
@@ -27,7 +37,7 @@ version: '1.0'
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 개요
 
-AWS WAF는 일반적인 웹 취약점 공격으로부터 웹 애플리케이션을 보호하도록 도와드리는 웹 애플리케이션 방화벽입니다.
+AWS WAF는 일반적인 웹 공격으로부터 웹 애플리케이션을 보호하는 데 도움이 되는 웹 애플리케이션 방화벽입니다.
 
 본 통합을 활성화하여 Datadog에서 WAF 메트릭을 확인하세요.
 
@@ -35,7 +45,7 @@ AWS WAF는 일반적인 웹 취약점 공격으로부터 웹 애플리케이션�
 
 ### 설치
 
-아직 설정하지 않은 경우, 먼저 [Amazon Web Services 통합][1]을 설정하세요.
+아직 설정하지 않은 경우 먼저 [Amazon Web Services 통합][1]을 설정하세요.
 
 ### 메트릭 수집
 
@@ -49,13 +59,13 @@ AWS WAF는 일반적인 웹 취약점 공격으로부터 웹 애플리케이션�
 
 웹 애플리케이션 방화벽 감사 로그를 활성화하여 웹 ACL 분석 트래픽에 대한 자세한 정보를 얻어보세요.
 
-1. `aws-waf-logs-`로 시작하는 이름으로 `Amazon Kinesis Data Firehose`을 생성합니다.
-2. `Amazon Kinesis Data Firehose` 대상에서 `Amazon S3`을 선택한 다음 접두사로 `waf`을 추가합니다.
+1. 이름이 `aws-waf-logs-`로 시작하는 `Amazon Data Firehose`를 만듭니다.
+2. `Amazon Data Firehose` 대상에서 `Amazon S3`을 선택한 다음 접두사 `waf`를 추가합니다.
 3. 원하는 웹 ACL을 선택하고 로그를 새로 생성한 Firehose로 전송합니다([상세 단계][4]).
 
 WAF 로그를 수집하여 S3 버킷으로 전송합니다.
 
-#### Datadog에 로그 전송
+#### Datadog로 로그 전송
 
 1. 아직 설정하지 않은 경우 [Datadog Forwarder Lambda 함수][5]를 설정하세요.
 2. Lambda 함수를 설치한 다음 AWS 콘솔에서 WAF 로그를 포함하는 S3 버킷에 트리거를 수동으로 추가합니다. Lambda 함수에서 다음 트리거 목록의 S3를 클릭합니다.

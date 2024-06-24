@@ -58,8 +58,8 @@ Datadog provides SD-WAN (Software-Defined Wide Area Network) monitoring for sele
 
 Datadog supports the following vendors for SD-WAN network monitoring:
 
-- [Meraki SD-WAN][7] (public beta)
-- [Cisco SD-WAN][223] (private beta)
+- [Meraki SD-WAN][7] 
+- [Cisco SD-WAN][800] (public beta)
 
 ### Vendor profiles
 
