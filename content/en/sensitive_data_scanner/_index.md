@@ -238,7 +238,8 @@ To add scanning rules, perform the following steps:
 1. Hover over the scanning rule you want to edit and click the **Edit** (pencil) icon.
 
    The **Define match conditions** section shows an explanation of the library scanning rule you chose along with examples of matched sensitive information.
-1. Under **Create keyword dictionary**, you can add keywords to refine detection accuracy. For example, if you are scanning for a sixteen-digit Visa credit card number, you can add keywords like `visa`, `credit`, and `card`. You can also require that these keywords appear within a specified number of characters before a match. By default, keywords must be within 30 characters before a match.
+1. Under **Create keyword dictionary**, you can add keywords to refine detection accuracy. For example, if you are scanning for a sixteen-digit Visa credit card number, you can add keywords like `visa`, `credit`, and `card`.
+1. Choose the number of characters before a match that the keyword must appear in. By default, keywords must be within 30 characters before a match.
 1. Click **Save**.
 
 [1]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner/configuration/agent
