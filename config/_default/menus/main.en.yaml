@@ -5719,46 +5719,41 @@ menu:
       identifier: product_analytics
       parent: digital_experience_heading
       weight: 50000
-    - name: Journeys
-      url: product_analytics/journeys
-      parent: product_analytics
-      identifier: pa_journeys
-      weight: 1
-    - name: Funnel Analysis
-      url: product_analytics/journeys/funnel_analysis
-      parent: pa_journeys
-      identifier: pa_funnel_analysis
-      weight: 101
-    - name: Sankey Diagrams
-      url: product_analytics/journeys/sankey
-      parent: pa_journeys
-      identifier: pa_sankey
-      weight: 102
     - name: User Retention
       url: product_analytics/user_retention
       parent: product_analytics
       identifier: pa_user_retention
-      weight: 2
-    - name: Segmentation
-      url: product_analytics/segmentation/
+      weight: 1
+    - name: Journeys
+      url: product_analytics/journeys
       parent: product_analytics
-      identifier: pa_segmentation
-      weight: 3
+      identifier: pa_journeys
+      weight: 2
+    - name: Funnel Analysis
+      url: product_analytics/journeys/funnel_analysis
+      parent: pa_journeys
+      identifier: pa_funnel_analysis
+      weight: 201
+    - name: Sankey Diagrams
+      url: product_analytics/journeys/sankey
+      parent: pa_journeys
+      identifier: pa_sankey
+      weight: 202
     - name: Heatmaps
       url: product_analytics/heatmaps
       parent: product_analytics
       identifier: pa_heatmaps
-      weight: 4
+      weight: 3
     - name: Session Replay
       url: product_analytics/session_replay/
       parent: product_analytics
       identifier: pa_session_replay
-      weight: 5
+      weight: 4
     - name: Mobile
       url: product_analytics/session_replay/mobile
       parent: pa_session_replay
       identifier: pa_session_replay_mobile
-      weight: 501
+      weight: 401
     - name: Setup
       url: product_analytics/session_replay/mobile/setup_and_configuration
       parent: pa_session_replay_mobile
@@ -5783,7 +5778,7 @@ menu:
       url: product_analytics/session_replay/browser
       parent: pa_session_replay
       identifier: pa_session_replay_browser
-      weight: 502
+      weight: 402
     - name: Privacy Options
       url: product_analytics/session_replay/browser/privacy_options
       parent: pa_session_replay_browser
@@ -5803,32 +5798,37 @@ menu:
       url: product_analytics/analytics_explorer/
       parent: product_analytics
       identifier: pa_analytics_explorer
-      weight: 6
+      weight: 5
     - name: Search Syntax
       url: product_analytics/analytics_explorer/search_syntax
       parent: pa_analytics_explorer
       identifier: pa_analytics_search_syntax
-      weight: 601
+      weight: 501
     - name: Group
       url: product_analytics/analytics_explorer/group
       parent: pa_analytics_explorer
       identifier: pa_analytics_group
-      weight: 602
+      weight: 502
     - name: Visualize
       url: product_analytics/analytics_explorer/visualize
       parent: pa_analytics_explorer
       identifier: visualize
-      weight: 603
+      weight: 503
     - name: Events
       url: product_analytics/analytics_explorer/events
       parent: pa_analytics_explorer
       identifier: pa_analytics_events
-      weight: 604
+      weight: 504
     - name: Export
       url: product_analytics/analytics_explorer/export
       parent: pa_analytics_explorer
       identifier: pa_analytics_export
-      weight: 605
+      weight: 505
+    - name: Segmentation
+      url: product_analytics/segmentation/
+      parent: product_analytics
+      identifier: pa_segmentation
+      weight: 6
     - name: Account Management
       url: account_management/
       pre: cog-2
