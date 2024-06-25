@@ -18,7 +18,7 @@ further_reading:
 
 ## Overview
 
-Datadog's OpenTelemetry protocol (OTLP) intake API endpoint allows you to send traces directly to Datadog, without running the [Datadog Agent][2] or [OpenTelemetry Collector + Datadog Exporter][1].
+Datadog's OpenTelemetry protocol (OTLP) intake API endpoint allows you to send traces directly to Datadog. With this feature, you don't need to run the [Datadog Agent][2] or [OpenTelemetry Collector + Datadog Exporter][1].
 
 You might prefer this option if you don't want the overhead of using the Datadog Agent or OpenTelemetry Collector.
 
@@ -37,7 +37,7 @@ To send OTLP data to the Datadog OTLP intake endpoint, you need to use the OTLP 
 
 #### Automatic instrumentation
 
-If you are using [OpenTelemetry automatic instrumentation][3], set the following environment variables:
+If you are using [OpenTelemetry automatic instrumentation][3], set the following environment variables, replacing `{DD_API_KEY}` with your Datadog API Key and `{YOUR_ORG]` with your organization:
 
 ```shell
 export OTEL_EXPORTER_OTLP_TRACES_PROTOCOL="http/protobuf"
@@ -54,7 +54,7 @@ If you are using manual instrumentation with OpenTelemetry SDKs, configure the O
 {{< tabs >}}
 {{% tab "JavaScript" %}}
 
-The JavaScript exporter is [exporter-trace-otlp-proto][100]. To configure the exporter:
+The JavaScript exporter is [`exporter-trace-otlp-proto`][100]. To configure the exporter, use the following code snippet:
 
 ```javascript
 const { OTLPTraceExporter } = require('@opentelemetry/exporter-trace-otlp-proto');  // OTLP http/protobuf exporter
@@ -194,7 +194,7 @@ If you receive a `403 Forbidden` error when sending traces to the Datadog OTLP i
 
 - The API key belongs to an organization that is not allowed to access the Datadog OTLP intake endpoint.  
    **Solution**: Verify that you are using an API key from an organization that is allowed to access the Datadog OTLP intake endpoint.
-- The dd-otlp-source header is missing or has an incorrect value.  
+- The `dd-otlp-source` header is missing or has an incorrect value.  
    **Solution**: Ensure that the `dd-otlp-source` header is set with the proper value for your organization. Your site should be {{< region-param key=dd_site code="true" >}}.
 - The endpoint URL is incorrect for your organization.  
    **Solution**: Use the correct endpoint URL for your organization. Your site is {{< region-param key=dd_datacenter code="true" >}}, so you need to use the {{< region-param key="otlp_trace_endpoint" code="true" >}} endpoint.
