@@ -50,7 +50,7 @@ Unused **API keys** can facilitate unauthorized access to your organization if t
 In order to keep your organization safe it is important to follow best practices for user management. The **Users** page in **Safety Center** surfaces user-related security recommendations:
 
 - [User invites][7] that have not been accepted for 30+ days.
-- [Admin users][1] in case their number exceeds 10% of all users within an organization.
+- [Admin users][1] in the event their number exceeds 10% of all users within an organization.
 
 ### Pending Invites
 Having inactive user accounts or **stale pending user invites** increases the surface for a potential account takeover attack. That can be especially dangerous if inactive user accounts have high-privilege access. To keep the number of inactive users to a minimum consider either resending **old pending invites** or deleting them if those users do not need access to the Datadog platform.
