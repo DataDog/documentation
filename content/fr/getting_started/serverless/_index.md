@@ -5,10 +5,10 @@ further_reading:
   text: Utilisation de base de l'Agent
 - link: https://dtdg.co/fe
   tag: Validation des bases
-  text: Prenez part à une session interactive pour en savoir plus sur la surveillance
+  text: Participer à une session interactive pour en savoir plus sur la surveillance
     sans serveur
 kind: documentation
-title: Débuter avec la surveillance sans serveur AWS Lambda
+title: Débuter avec la surveillance sans serveur AWS Lambda
 ---
 
 ## Présentation
@@ -53,7 +53,7 @@ def handler(event, context):
 
 Vous pouvez [voir les fonctions de votre prototype d'application dans la vue Serverless][6].
 
-{{< img src="getting_started/serverless/dd_serverless_view.png" alt="Surveillance sans serveur : vue Serverless, une page de l'explorer" style="width:80%;">}}
+{{< img src="getting_started/serverless/serverless_view_2024.png" alt="Surveillance sans serveur : vue Serverless, une page de l'explorer" style="width:80%;">}}
 
 ## Vue Serverless
 
