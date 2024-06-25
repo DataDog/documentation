@@ -3324,37 +3324,37 @@ menu:
       url: database_monitoring/setup_postgres/selfhosted
       parent: dbm_setup_postgres
       identifier: dbm_setup_postgres_selfhosted
-      weight: 201
+      weight: 301
     - name: RDS
       url: database_monitoring/setup_postgres/rds
       parent: dbm_setup_postgres
       identifier: dbm_setup_postgres_rds
-      weight: 202
+      weight: 302
     - name: Aurora
       url: database_monitoring/setup_postgres/aurora
       parent: dbm_setup_postgres
       identifier: dbm_setup_postgres_aurora
-      weight: 203
+      weight: 303
     - name: Google Cloud SQL
       url: database_monitoring/setup_postgres/gcsql
       parent: dbm_setup_postgres
       identifier: dbm_setup_postgres_gcsql
-      weight: 204
+      weight: 304
     - name: Azure
       url: database_monitoring/setup_postgres/azure
       parent: dbm_setup_postgres
       identifier: dbm_postgres_azure
-      weight: 205
+      weight: 305
     - name: Advanced Configuration
       url: database_monitoring/setup_postgres/advanced_configuration
       parent: dbm_setup_postgres
       identifier: dbm_postgres_advanced_configuration
-      weight: 206
+      weight: 306
     - name: Troubleshooting
       url: database_monitoring/setup_postgres/troubleshooting/
       parent: dbm_setup_postgres
       identifier: dbm_troubleshooting_postgres
-      weight: 207
+      weight: 307
     - name: Setting Up MySQL
       url: database_monitoring/setup_mysql/
       parent: dbm
@@ -3364,37 +3364,37 @@ menu:
       url: database_monitoring/setup_mysql/selfhosted
       parent: dbm_setup_mysql
       identifier: dbm_setup_mysql_selfhosted
-      weight: 301
+      weight: 401
     - name: RDS
       url: database_monitoring/setup_mysql/rds
       parent: dbm_setup_mysql
       identifier: dbm_setup_mysql_rds
-      weight: 302
+      weight: 402
     - name: Aurora
       url: database_monitoring/setup_mysql/aurora
       parent: dbm_setup_mysql
       identifier: dbm_setup_mysql_aurora
-      weight: 303
+      weight: 403
     - name: Google Cloud SQL
       url: database_monitoring/setup_mysql/gcsql
       parent: dbm_setup_mysql
       identifier: dbm_setup_mysql_gcsql
-      weight: 304
+      weight: 404
     - name: Azure
       url: database_monitoring/setup_mysql/azure
       parent: dbm_setup_mysql
       identifier: dbm_mysql_azure
-      weight: 305
+      weight: 405
     - name: Advanced Configuration
       url: database_monitoring/setup_mysql/advanced_configuration
       parent: dbm_setup_mysql
       identifier: dbm_mysql_advanced_configuration
-      weight: 306
+      weight: 406
     - name: Troubleshooting
       url: database_monitoring/setup_mysql/troubleshooting/
       parent: dbm_setup_mysql
       identifier: dbm_troubleshooting_mysql
-      weight: 307
+      weight: 407
     - name: Setting Up SQL Server
       url: database_monitoring/setup_sql_server/
       parent: dbm
@@ -3404,27 +3404,27 @@ menu:
       url: database_monitoring/setup_sql_server/selfhosted/
       parent: dbm_setup_sql_server
       identifier: dbm_setup_sql_server_selfhosted
-      weight: 401
+      weight: 501
     - name: RDS
       url: database_monitoring/setup_sql_server/rds/
       parent: dbm_setup_sql_server
       identifier: dbm_setup_sql_server_rds
-      weight: 402
+      weight: 502
     - name: Azure
       url: database_monitoring/setup_sql_server/azure/
       parent: dbm_setup_sql_server
       identifier: dbm_setup_sql_server_azure
-      weight: 403
+      weight: 503
     - name: Google Cloud SQL
       url: database_monitoring/setup_sql_server/gcsql/
       parent: dbm_setup_sql_server
       identifier: dbm_setup_sql_server_gcsql
-      weight: 404
+      weight: 504
     - name: Troubleshooting
       url: database_monitoring/setup_sql_server/troubleshooting/
       parent: dbm_setup_sql_server
       identifier: dbm_troubleshooting_sql_server
-      weight: 405
+      weight: 505
     - name: Setting Up Oracle
       url: database_monitoring/setup_oracle/
       parent: dbm
@@ -3434,32 +3434,32 @@ menu:
       url: database_monitoring/setup_oracle/selfhosted/
       parent: dbm_setup_oracle
       identifier: dbm_setup_oracle_selfhosted
-      weight: 501
+      weight: 601
     - name: RDS
       url: database_monitoring/setup_oracle/rds/
       parent: dbm_setup_oracle
       identifier: dbm_setup_oracle_rds
-      weight: 502
+      weight: 602
     - name: RAC
       url: database_monitoring/setup_oracle/rac/
       parent: dbm_setup_oracle
       identifier: dbm_setup_oracle_rac
-      weight: 503
+      weight: 603
     - name: Exadata
       url: database_monitoring/setup_oracle/exadata/
       parent: dbm_setup_oracle
       identifier: dbm_setup_oracle_exadata
-      weight: 504
+      weight: 604
     - name: Autonomous Database
       url: database_monitoring/setup_oracle/autonomous_database/
       parent: dbm_setup_oracle
       identifier: dbm_setup_oracle_autonomous_database
-      weight: 505
+      weight: 605
     - name: Troubleshooting
       url: database_monitoring/setup_oracle/troubleshooting/
       parent: dbm_setup_oracle
       identifier: dbm_troubleshooting_oracle
-      weight: 506
+      weight: 606
     - name: Setting Up MongoDB
       url: database_monitoring/setup_mongodb/
       parent: dbm
@@ -3469,12 +3469,12 @@ menu:
       url: database_monitoring/setup_mongodb/selfhosted
       parent: dbm_setup_mongodb
       identifier: dbm_setup_mongodb_selfhosted
-      weight: 601
+      weight: 701
     - name: MongoDB Atlas
       url: database_monitoring/setup_mongodb/mongodbatlas
       parent: dbm_setup_mongodb
       identifier: dbm_setup_mongodb_mongodbatlas
-      weight: 602
+      weight: 702
     - name: Connecting DBM and Traces
       url: database_monitoring/connect_dbm_and_apm/
       parent: dbm
