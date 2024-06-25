@@ -27,7 +27,6 @@ Product Analytics helps you gain insight into user behavior and make data-driven
 
 By default, Product Analytics data is retained for 15 months. Learn more about [Privacy at Datadog][1].
 
-
 ## Measure user retention
 
 Use [Retention Analysis][2] to measure how a group of users engage with specific features over time to understand where drop-offs occur.
@@ -45,6 +44,14 @@ See different visualizations of the user experience when interacting with your a
 - **[Funnel][4]**: Measure the conversion rate end-to-end of a given workflow.
 - **[Sankey][5]**: Explore aggregated workflows in a single visualization to aid in answering questions about user journeys.
 - **[Conversion][6]**: Track conversion rates over time and compare it against specific attributes that may have affected conversion rates, such as browser type or geography.
+
+## Measure user retention
+
+User retention is a metric for measuring the percentage of active users who continue to use your product, app, or service over a set period of time. Use [Retention Analysis][5] to measure how a group of users engage with specific features to understand where drop-off occurs.
+
+## Create user segments
+
+Segments are users grouped by specific characteristics or behaviors. [Segmentation][6] in Datadog allows you to analyze and understand specific groups or segments of your user base.
 
 ## Visualize user interactions with heatmaps
 
