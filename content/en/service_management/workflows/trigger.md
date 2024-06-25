@@ -84,7 +84,7 @@ To trigger a workflow from a Monitor:
 
 Each time the monitor threshold is hit, the monitor triggers a workflow run.
 
-<div class="alert alert-info">Scheduled and triggered workflows don't run automatically until you've published them. To publish the workflow, click <strong>Publish</strong> from the workflow's page. Published workflows accrue costs based on workflow executions. For more information, see the <a href="https://www.datadoghq.com/pricing/?product=workflow-automation#products">Datadog Pricing page</a>.</div>
+Scheduled and triggered workflows don't run automatically until you've published them. To publish the workflow, click **Publish** from the workflow's page. Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][11].
 
 ### Test a monitor trigger
 
@@ -121,7 +121,7 @@ To trigger a workflow from a Notification Rule:
 
 Each time the Notification Rule fires, it triggers a workflow run.
 
-<div class="alert alert-info">Scheduled and triggered workflows don't run automatically until you've published them. To publish the workflow, click <strong>Publish</strong> from the workflow's page. Published workflows accrue costs based on workflow executions. For more information, see the <a href="https://www.datadoghq.com/pricing/?product=workflow-automation#products">Datadog Pricing page</a>.</div>
+Scheduled and triggered workflows don't run automatically until you've published them. To publish the workflow, click **Publish** from the workflow's page. Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][11].
 
 ### Trigger a workflow manually from Cloud SIEM Security Signals
 
@@ -147,7 +147,7 @@ To trigger a workflow from incidents, create an incident notification rule:
 1. Enter a **Template** and configure the **Renotify** settings for the notification rule.
 1. Click **Save**.
 
-<div class="alert alert-info">Scheduled and triggered workflows don't run automatically until you've published them. To publish the workflow, click <strong>Publish</strong> from the workflow's page. Published workflows accrue costs based on workflow executions. For more information, see the <a href="https://www.datadoghq.com/pricing/?product=workflow-automation#products">Datadog Pricing page</a>.</div>
+Scheduled and triggered workflows don't run automatically until you've published them. To publish the workflow, click **Publish** from the workflow's page. Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][11].
 
 ## Trigger a workflow with an API call
 
@@ -168,7 +168,7 @@ To trigger a workflow with an API call:
    ```
 1. Click **Save**.
 
-<div class="alert alert-info">Scheduled and triggered workflows don't run automatically until you've published them. To publish the workflow, click <strong>Publish</strong> from the workflow's page. Published workflows accrue costs based on workflow executions. For more information, see the <a href="https://www.datadoghq.com/pricing/?product=workflow-automation#products">Datadog Pricing page</a>.</div>
+Scheduled and triggered workflows don't run automatically until you've published them. To publish the workflow, click **Publish** from the workflow's page. Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][11].
 
 ## Trigger a workflow on a schedule
 
@@ -180,7 +180,7 @@ To schedule a workflow run:
 1. Click **Save**.
 1. Click **Publish** to 
 
-<div class="alert alert-info">Scheduled and triggered workflows don't run automatically until you've published them. To publish the workflow, click <strong>Publish</strong> from the workflow's page. Published workflows accrue costs based on workflow executions. For more information, see the <a href="https://www.datadoghq.com/pricing/?product=workflow-automation#products">Datadog Pricing page</a>.</div>
+Scheduled and triggered workflows don't run automatically until you've published them. To publish the workflow, click **Publish** from the workflow's page. Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][11].
 
 ## Run history
 
@@ -208,3 +208,4 @@ The initial run history for a workflow provides a panel with the list of previou
 [8]: /account_management/api-app-keys/#api-keys
 [9]: /account_management/api-app-keys/#application-keys
 [10]: /account_management/api-app-keys/#scopes
+[11]: https://www.datadoghq.com/pricing/?product=workflow-automation#products
