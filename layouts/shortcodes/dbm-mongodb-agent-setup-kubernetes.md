@@ -1,10 +1,10 @@
-If you have a Kubernetes cluster, use the [Datadog Cluster Agent][1] for Database Monitoring.
+If you have a Kubernetes cluster, use the [Datadog Cluster Agent][2000] for Database Monitoring.
 
-If cluster checks are not already enabled in your Kubernetes cluster, follow the instructions to [enable cluster checks][2]. You can configure the Cluster Agent either with static files mounted in the Cluster Agent container, or by using Kubernetes service annotations:
+If cluster checks are not already enabled in your Kubernetes cluster, follow the instructions to [enable cluster checks][2001]. You can configure the Cluster Agent either with static files mounted in the Cluster Agent container, or by using Kubernetes service annotations.
 
 ### Command line with Helm
 
-Execute the following [Helm][3] command to install the [Datadog Cluster Agent][1] on your Kubernetes cluster. Replace the values to match your account and environment:
+Execute the following [Helm][2002] command to install the [Datadog Cluster Agent][2000] on your Kubernetes cluster. Replace the values to match your account and environment:
 
 ```bash
 helm repo add datadog https://helm.datadoghq.com
@@ -20,7 +20,7 @@ instances:
   - hosts:
       - <HOST>:<PORT>
     username: datadog
-    password: <UNIQUEPASSWORD>
+    password: <UNIQUE_PASSWORD>
     database: <DATABASE>
     options:
       authSource: admin
@@ -41,7 +41,7 @@ instances:
   - hosts:
       - <HOST>:<PORT>
     username: datadog
-    password: <UNIQUEPASSWORD>
+    password: <UNIQUE_PASSWORD>
     database: <DATABASE>
     options:
       authSource: admin
@@ -68,7 +68,7 @@ metadata:
         "instances": [{
           "hosts": ["<HOST>:<PORT>"],
           "username": "datadog",
-          "password": "<UNIQUEPASSWORD>",
+          "password": "<UNIQUE_PASSWORD>",
           "database": "<DATABASE>",
           "options": {
             "authSource": "admin"
@@ -89,9 +89,9 @@ spec:
 
 The Cluster Agent automatically registers this configuration and begins running the MongoDB integration.
 
-To avoid exposing the `datadog` user's password in plain text, use the Agent's [secret management package][4] and declare the password using the `ENC[]` syntax.
+To avoid exposing the `datadog` user's password in plain text, use the Agent's [secret management package][2003] and declare the password using the `ENC[]` syntax.
 
-[1]: /agent/cluster_agent
-[2]: /agent/cluster_agent/clusterchecks/
-[3]: https://helm.sh
-[4]: /agent/configuration/secrets-management
+[2000]: /agent/cluster_agent
+[2001]: /agent/cluster_agent/clusterchecks/
+[2002]: https://helm.sh
+[2003]: /agent/configuration/secrets-management

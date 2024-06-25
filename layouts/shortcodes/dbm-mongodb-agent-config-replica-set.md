@@ -1,11 +1,12 @@
-To configure the Agent to monitor a MongoDB replica set, the Agent needs to connect to all members (including arbiter) of the replica set.
+To monitor a MongoDB replica set, the Agent needs to connect to all members (including the arbiter) of the replica set.
+
 Use the following configuration block as an example to configure the Agent to connect to a replica set member:
 
 ```yaml
 init_config:
 instances:
     ## @param hosts - required
-    ## Specify the hostname, IP address or UNIX domain socket of
+    ## Specify the hostname, IP address, or UNIX domain socket of
     ## a mongod instance as listed in the replica set configuration.
     ## If the port number is not specified, the default port 27017 is used.
     #
@@ -20,7 +21,7 @@ instances:
     ## @param password - string - optional
     ## The password to use for authentication.
     #
-    password: <UNIQUEPASSWORD>
+    password: <UNIQUE_PASSWORD>
 
     ## @param database - string - optional
     ## The database to collect metrics from.
@@ -52,18 +53,19 @@ instances:
     cluster_name: <MONGO_CLUSTER_NAME>
 
     ## @param reported_database_hostname - string - optional
-    ## Set the reported database hostname for the connected mongodb instance. This value overrides the mongodb hostname
-    ## detected by the Agent from mongodb admin command serverStatus.host.
+    ## Set the reported database hostname for the connected MongoDB instance. 
+    ## This value overrides the MongoDB hostname detected by the Agent 
+    ## from the MongoDB admin command serverStatus.host.
     #
     reported_database_hostname: <DATABASE_HOSTNAME_OVERRIDE>
 
 
     ## @param additional_metrics - list of strings - optional
     ## List of additional metrics to collect. Available options are:
-    ## - metrics.commands - Use of database commands
-    ## - tcmalloc -  TCMalloc memory allocator
-    ## - top - Usage statistics for each collection
-    ## - collection - Metrics of the specified collections
+    ## - metrics.commands: Use of database commands
+    ## - tcmalloc: TCMalloc memory allocator
+    ## - top: Usage statistics for each collection
+    ## - collection: Metrics of the specified collections
     #
     additional_metrics: ["metrics.commands", "tcmalloc", "top", "collection"]
 
@@ -87,7 +89,7 @@ instances:
   - hosts:
       - <HOST_REPLICA_1>:<PORT>  # Primary node
     username: datadog
-    password: <UNIQUEPASSWORD>
+    password: <UNIQUE_PASSWORD>
     database: <DATABASE>
     options:
       authSource: admin
@@ -101,7 +103,7 @@ instances:
   - hosts:
       - <HOST_REPLICA_2>:<PORT>  # Secondary node
     username: datadog
-    password: <UNIQUEPASSWORD>
+    password: <UNIQUE_PASSWORD>
     database: <DATABASE>
     options:
       authSource: admin
@@ -115,7 +117,7 @@ instances:
   - hosts:
       - <HOST_REPLICA_3>:<PORT>  # Secondary node
     username: datadog
-    password: <UNIQUEPASSWORD>
+    password: <UNIQUE_PASSWORD>
     database: <DATABASE>
     options:
       authSource: admin

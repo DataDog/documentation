@@ -35,7 +35,7 @@ The Datadog Agent requires read-only access to the MongoDB instance to collect s
 
 In a Mongo shell, authenticate to the MongoDB instance, create a read-only user for the Datadog Agent in the `admin` database, and grant the required permissions:
 
-```shell
+{{< code-block lang="shell" >}}
 # Authenticate as the admin user.
 use admin
 db.auth("admin", "<YOUR_MONGODB_ADMIN_PASSWORD>")
@@ -50,31 +50,31 @@ db.createUser({
     { role: "clusterMonitor", db: "admin" }
   ]
 })
-```
+{{< /code-block >}}
 
 Grant additional permissions to the `datadog` user in the databases you want to monitor:
 
-```shell
+{{< code-block lang="shell" >}}
 db.grantRolesToUser("datadog", [
   { role: "read", db: "mydatabase" },
   { role: "read", db: "myotherdatabase" }
 ])
-```
+{{< /code-block >}}
 
 Alternatively, you can grant `readAnyDatabase` role to the `datadog` user in the `admin` database to monitor all databases:
 
-```shell
+{{< code-block lang="shell" >}}
 db.grantRolesToUser("datadog", [
   { role: "readAnyDatabase", db: "admin" }
 ])
-```
+{{< /code-block >}}
 
 {{% /tab %}}
 {{% tab "Replica Set" %}}
 
 In a Mongo shell, authenticate to the primary node of the replica set, create a read-only user for the Datadog Agent in the `admin` database, and grant the required permissions:
 
-```shell
+{{< code-block lang="shell" >}}
 # Authenticate as the admin user.
 use admin
 db.auth("admin", "<YOUR_MONGODB_ADMIN_PASSWORD>")
@@ -89,31 +89,31 @@ db.createUser({
     { role: "clusterMonitor", db: "admin" }
   ]
 })
-```
+{{< /code-block >}}
 
 Grant additional permissions to the `datadog` user in the databases you want to monitor:
 
-```shell
+{{< code-block lang="shell" >}}
 db.grantRolesToUser("datadog", [
   { role: "read", db: "mydatabase" },
   { role: "read", db: "myotherdatabase" }
 ])
-```
+{{< /code-block >}}
 
 Alternatively, you can grant `readAnyDatabase` role to the `datadog` user in the `admin` database to monitor all databases:
 
-```shell
+{{< code-block lang="shell" >}}
 db.grantRolesToUser("datadog", [
   { role: "readAnyDatabase", db: "admin" }
 ])
-```
+{{< /code-block >}}
 
 {{% /tab %}}
 {{% tab "Sharded Cluster" %}}
 
 1. For each shard in your cluster, connect to the primary node of the shard, create a read-only user for the Datadog Agent in the `admin` database, and grant the required permissions:
 
-```shell
+{{< code-block lang="shell" >}}
 # Authenticate as the admin user.
 use admin
 db.auth("admin", "<YOUR_MONGODB_ADMIN_PASSWORD>")
@@ -128,26 +128,26 @@ db.createUser({
     { role: "clusterMonitor", db: "admin" }
   ]
 })
-```
+{{< /code-block >}}
 
 Grant additional permissions to the `datadog` user in the databases you want to monitor:
 
-```shell
+{{< code-block lang="shell" >}}
 db.grantRolesToUser("datadog", [
   { role: "read", db: "mydatabase" },
   { role: "read", db: "myotherdatabase" }
 ])
-```
+{{< /code-block >}}
 
 Alternatively, you can grant the `readAnyDatabase` role to the `datadog` user in the `admin` database to monitor all databases:
 
-```shell
+{{< code-block lang="shell" >}}
 db.grantRolesToUser("datadog", [
   { role: "readAnyDatabase", db: "admin" }
 ])
-```
+{{< /code-block >}}
 
-2. Follow the same steps and create the same user from a Mongos proxy. This action creates the local user in the config servers and allows direct connection.
+2. Follow the same steps and create the same user from a `mongos` proxy. This action creates the local user in the config servers and allows direct connection.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -158,7 +158,7 @@ Datadog recommends installing the Agent directly on the MongoDB host, as that en
 
 #### Install the beta version of the Datadog Agent
 
-The Database Monitoring feature for MongoDB is available in the beta version of the Datadog Agent. To install the beta version of the Datadog Agent, follow the instructions for your environment:
+The Database Monitoring feature for MongoDB is available in the beta version of the Datadog Agent. To install the beta version of the Datadog Agent, follow the instructions for your environment. A [Datadog API key][1] is required.
 
 {{< tabs >}}
 {{% tab "Linux Host" %}}
@@ -199,3 +199,5 @@ The Database Monitoring feature for MongoDB is available in the beta version of 
 {{% dbm-mongodb-agent-setup-kubernetes %}}
 {{% /tab %}}
 {{< /tabs >}}
+
+[1]: /account_management/api-app-keys/

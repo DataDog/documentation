@@ -1,4 +1,4 @@
-To install the beta version of the Datadog Agent on Kubernetes, run the following command. Replace `<DD_API_KEY>` with your [Datadog API key][1].
+To install the beta version of the Datadog Agent on Kubernetes, run the following command.
 
 ```shell
 # Override the following environment variables
@@ -21,4 +21,3 @@ datadog:
 
 ```
 
-[1]: /account_management/api-app-keys/

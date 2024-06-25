@@ -70,52 +70,62 @@ To get the individual MongoDB instance hostname and port, you can use the `dig` 
 
 For a sharded cluster with the SRV connection string `mongodb+srv://XXXXX.XXX.mongodb.net/`:
 
-```shell
+{{< code-block lang="shell" >}}
 dig +short SRV _mongodb._tcp.XXXXX.XXX.mongodb.net
-```
+{{< /code-block >}}
 
 The output should be similar to:
 
-```shell
+{{< code-block lang="shell" >}}
 0 0 27017 XXXXX-00-00.4zh9o.mongodb.net.
 0 0 27017 XXXXX-00-01.4zh9o.mongodb.net.
 0 0 27017 XXXXX-00-02.4zh9o.mongodb.net.
-```
+{{< /code-block >}}
 
-In this example, the individual MongoDB instances from the replica set are `XXXXX-00-00.4zh9o.mongodb.net:27017`, `XXXXX-00-01.4zh9o.mongodb.net:27017`, and `XXXXX-00-02.4zh9o.mongodb.net:27017`. You can use one of these hostnames to configure the Agent.
+In this example, the individual MongoDB instances from the replica set are:
+- `XXXXX-00-00.4zh9o.mongodb.net:27017`
+- `XXXXX-00-01.4zh9o.mongodb.net:27017`
+- `XXXXX-00-02.4zh9o.mongodb.net:27017`
+
+You can use one of these hostnames to configure the Agent.
 {{% /tab %}}
 {{% tab "Sharded Cluster" %}}
 
-##### Mongos routers
+##### mongos routers
 
 For a sharded cluster with the SRV connection string `mongodb+srv://XXXXX.XXX.mongodb.net/`:
 
-```shell
+{{< code-block lang="shell" >}}
 dig +short SRV _mongodb._tcp.XXXXX.XXX.mongodb.net
-```
+{{< /code-block >}}
 
 The output should be similar to:
 
-```shell
+{{< code-block lang="shell" >}}
 0 0 27016 XXXXX-00-00.4zh9o.mongodb.net.
 0 0 27016 XXXXX-00-01.4zh9o.mongodb.net.
 0 0 27016 XXXXX-00-02.4zh9o.mongodb.net.
-```
+{{< /code-block >}}
 
-In this example, the individual Mongos routers are `XXXXX-00-00.4zh9o.mongodb.net:27016`, `XXXXX-00-01.4zh9o.mongodb.net:27016`, and `XXXXX-00-02.4zh9o.mongodb.net:27016`. You can use one of these hostnames to configure the Agent.
+In this example, the individual `mongos` routers are:
+- `XXXXX-00-00.4zh9o.mongodb.net:27016`
+- `XXXXX-00-01.4zh9o.mongodb.net:27016`
+- `XXXXX-00-02.4zh9o.mongodb.net:27016`. 
+
+You can use one of these hostnames to configure the Agent.
 
 ##### Shard members
 
-To get the individual MongoDB instances for each shard, you can connect to the Mongos router and run the following command:
+To get the individual MongoDB instances for each shard, you can connect to the `mongos` router and run the following command:
 
-```shell
+{{< code-block lang="shell" >}}
 use admin
 db.runCommand("getShardMap")
-```
+{{< /code-block >}}
 
 The output should be similar to:
 
-```shell
+{{< code-block lang="shell" >}}
 {
   "map" : {
     "shard-0": "shard-0/XXXXX-00-00.4zh9o.mongodb.net:27017,XXXXX-00-01.4zh9o.mongodb.net:27017,XXXXX-00-02.4zh9o.mongodb.net:27017",
@@ -134,7 +144,7 @@ The output should be similar to:
   },
   "ok" : 1
 }
-```
+{{< /code-block >}}
 
 In this example, the individual MongoDB instances for shard-0 are: 
 - `XXXXX-00-00.4zh9o.mongodb.net:27017`
@@ -157,7 +167,7 @@ You can use one of these hostnames to configure the Agent.
 
 #### Install the beta version of the Datadog Agent
 
-Database Monitoring for MongoDB is available in the beta version of the Datadog Agent. To install the beta version of the Datadog Agent, follow the instructions for your environment:
+Database Monitoring for MongoDB is available in the beta version of the Datadog Agent. To install the beta version of the Datadog Agent, follow the instructions for your environment. A [Datadog API key][2] is required.
 
 {{< tabs >}}
 {{% tab "Linux Host" %}}
@@ -197,3 +207,4 @@ Database Monitoring for MongoDB is available in the beta version of the Datadog 
 {{< /tabs >}}
 
 [1]: /database_monitoring/architecture/#cloud-managed-databases
+[2]: /account_management/api-app-keys/
