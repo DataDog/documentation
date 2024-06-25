@@ -1,5 +1,4 @@
 ---
-kind: ガイド
 title: Cloudcraft API による Azure アカウントの追加
 ---
 

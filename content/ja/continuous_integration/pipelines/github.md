@@ -14,7 +14,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/datadog-github-actions-ci-visibility/
   tag: blog
   text: Datadog CI Visibility で GitHub Actions のワークフローを監視する
-kind: documentation
 title: GitHub Actions のワークフローにトレースを設定する
 ---
 

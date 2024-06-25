@@ -16,7 +16,6 @@ further_reading:
 - link: /agent/configuration/proxy/
   tag: Documentación
   text: Más información sobre el proxy
-kind: guía
 title: Instalar el Agent en un servidor con conectividad limitada a Internet
 ---
 

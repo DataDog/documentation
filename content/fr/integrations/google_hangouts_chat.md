@@ -20,7 +20,7 @@ integration_id: google-hangouts-chat
 integration_title: Google Hangouts Chat
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: google_hangouts_chat
 public_title: Intégration Datadog/Google Hangouts Chat

@@ -21,3 +21,5 @@ For setup instructions, select your hosting type:
 {{< partial name="dbm/dbm-setup-sql-server" >}}
 
 <br>
+
+[1]: /database_monitoring/setup_sql_server/troubleshooting/#known-limitations

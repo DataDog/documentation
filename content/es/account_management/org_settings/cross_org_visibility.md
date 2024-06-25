@@ -1,6 +1,5 @@
 ---
 is_beta: true
-kind: documentación
 private: true
 title: Visibilidad entre organizaciones
 ---

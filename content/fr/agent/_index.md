@@ -27,7 +27,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/dont-fear-the-agent/
   tag: Blog
   text: Tout ce que vous devez savoir sur l'Agent
-kind: documentation
 title: Agent
 ---
 

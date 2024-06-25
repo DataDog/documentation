@@ -21,7 +21,7 @@ integration_id: eventstore
 integration_title: Event Store
 integration_version: 2.0.0
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: '@xorima'
 manifest_version: 1.0.0
 metric_prefix: eventstore.

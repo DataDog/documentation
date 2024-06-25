@@ -48,11 +48,11 @@ To use private locations for [Continuous Testing tests][23], you need v1.27.0 or
 {{< tabs >}}
 {{% tab "Docker" %}}
 
-Private locations are Docker containers that you can install anywhere inside your private network. You can access the [private location worker image][101] on Google Container Registry. It can run on a Linux-based OS or Windows OS if the [Docker engine][102] is available on your host and can run in Linux containers mode.**\***
+Private locations are Docker containers that you can install anywhere inside your private network. You can access the [private location worker image][101] on Docker hub. It can run on a Linux-based OS or Windows OS if the [Docker engine][102] is available on your host and can run in Linux containers mode.**\***
 
 **\*** **Use and operation of this software is governed by the End User License Agreement available [here][103].**
 
-[101]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/synthetics-private-location-worker?pli=1
+[101]: https://hub.docker.com/r/datadog/synthetics-private-location-worker
 [102]: https://docs.docker.com/engine/install/
 [103]: https://www.datadoghq.com/legal/eula/
 
@@ -91,7 +91,7 @@ You must install .NET version 4.7.2 or later on your computer before using the M
 
 {{< /site-region >}}
 
-[101]: https://dd-public-oss-mirror.s3.amazonaws.com/synthetics-windows-pl/datadog-synthetics-worker-1.47.0.amd64.msi
+[101]: https://dd-public-oss-mirror.s3.amazonaws.com/synthetics-windows-pl/datadog-synthetics-worker-1.48.0.amd64.msi
 [102]: https://www.datadoghq.com/legal/eula/
 
 {{% /tab %}}
@@ -511,7 +511,7 @@ Because Datadog already integrates with Kubernetes and AWS, it is ready-made to 
 {{% /tab %}}
 {{% tab "Windows via GUI" %}}
 
-1. Download the [`datadog-synthetics-worker-1.47.0.amd64.msi` file][101] and run this file from the machine you want to install the private location on. 
+1. Download the [`datadog-synthetics-worker-1.48.0.amd64.msi` file][101] and run this file from the machine you want to install the private location on. 
 1. Click **Next** on the welcome page, read the EULA, and accept the terms and conditions. Click **Next**.
 1. Modify where the application will be installed, or leave the default settings. Click **Next**.
 1. To configure your Windows private location, you can either:
@@ -546,25 +546,25 @@ Once the process is complete, click **Finish** on the installation completion pa
 
 <div class="alert alert-warning">If you entered your JSON configuration, the Windows Service starts running using that configuration. If you did not enter your configuration, run <code>C:\\Program Files\Datadog-Synthetics\Synthetics\synthetics-pl-worker.exe --config=< PathToYourConfiguration ></code> from a command prompt or use the <code>start menu</code> shortcut to start the Synthetics Private Location Worker.</div>
 
-[101]: https://dd-public-oss-mirror.s3.amazonaws.com/synthetics-windows-pl/datadog-synthetics-worker-1.47.0.amd64.msi
+[101]: https://dd-public-oss-mirror.s3.amazonaws.com/synthetics-windows-pl/datadog-synthetics-worker-1.48.0.amd64.msi
 [102]: https://app.datadoghq.com/synthetics/settings/private-locations
 
 {{% /tab %}}
 {{% tab "Windows via CLI" %}}
 
-1. Download the [`datadog-synthetics-worker-1.47.0.amd64.msi` file][101] and run this file from the machine you want to install the private location on. 
+1. Download the [`datadog-synthetics-worker-1.48.0.amd64.msi` file][101] and run this file from the machine you want to install the private location on. 
 2. Run one of the following commands inside the directory where you downloaded the installer:
    
    - In a PowerShell Terminal:
 
      ```powershell
-     Start-Process msiexec "/i datadog-synthetics-worker-1.47.0.amd64.msi /quiet /qn WORKERCONFIG_FILEPATH=C:\ProgramData\Datadog-Synthetics\worker-config.json";
+     Start-Process msiexec "/i datadog-synthetics-worker-1.48.0.amd64.msi /quiet /qn WORKERCONFIG_FILEPATH=C:\ProgramData\Datadog-Synthetics\worker-config.json";
      ```
    
    - Or in a Command Terminal:
   
      ```cmd
-     msiexec /i datadog-synthetics-worker-1.47.0.amd64.msi /quiet /qn WORKERCONFIG_FILEPATH=C:\ProgramData\Datadog-Synthetics\worker-config.json
+     msiexec /i datadog-synthetics-worker-1.48.0.amd64.msi /quiet /qn WORKERCONFIG_FILEPATH=C:\ProgramData\Datadog-Synthetics\worker-config.json
      ```
 
 Additional parameters can be added:
@@ -578,7 +578,7 @@ Additional parameters can be added:
 | LOGGING_MAXDAYS | Number of days to keep file logs on the system before deleting them. Can be any number when running an unattended installation. | 7 | `--logFileMaxDays` | Integer |
 | WORKERCONFIG_FILEPATH | This should be changed to the path to your Synthetics Private Location Worker JSON configuration file. Wrap this path in quotes if your path contains spaces. | <None> | `--config` | String |
 
-[101]: https://dd-public-oss-mirror.s3.amazonaws.com/synthetics-windows-pl/datadog-synthetics-worker-1.47.0.amd64.msi
+[101]: https://dd-public-oss-mirror.s3.amazonaws.com/synthetics-windows-pl/datadog-synthetics-worker-1.48.0.amd64.msi
 
 {{% /tab %}}
 {{< /tabs >}}

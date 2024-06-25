@@ -3,7 +3,6 @@ further_reading:
 - link: /agent/guide/python-3/
   tag: Documentación
   text: Migra tus checks personalizados de Python 2 a Python 3
-kind: documentación
 title: Actualizar el Datadog Agent a la versión 7
 ---
 

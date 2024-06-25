@@ -18,7 +18,6 @@ further_reading:
   tag: Blog
   text: Monitorizar cargas de trabajo altamente reguladas con el Agent de Datadog
     habilitado por FIPS
-kind: Guía
 title: Conformidad de Datadog con los estándares FIPS
 ---
 

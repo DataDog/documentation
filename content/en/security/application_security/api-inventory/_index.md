@@ -1,6 +1,5 @@
 ---
 title: API Security Inventory
-kind: documentation
 further_reading:
 - link: "https://www.datadoghq.com/blog/primary-risks-to-api-security/"
   tag: "Blog"

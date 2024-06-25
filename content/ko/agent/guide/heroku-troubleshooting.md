@@ -1,7 +1,6 @@
 ---
 aliases:
 - /ko/agent/faq/heroku-troubleshooting/
-kind: 가이드
 title: Datadog-Heroku 빌드팩 트러블슈팅
 ---
 

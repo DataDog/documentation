@@ -29,7 +29,12 @@ further_reading:
 - link: https://www.datadoghq.com/blog/best-practices-for-ci-cd-monitoring/
   tag: 블로그
   text: CI/CD 모니터링 모범 사례
-kind: 설명서
+- link: https://www.datadoghq.com/blog/best-practices-for-monitoring-software-testing/
+  tag: 블로그
+  text: CI/CD에서 소프트웨어 모니터링에 대한 모범 사례
+- link: https://www.datadoghq.com/blog/modernize-your-ci-cd-environment/
+  tag: 블로그
+  text: Datadog CI 파이프라인 가시성을 통한 CI/CD 현대화 모니터링
 title: 지속적 통합 가시성
 ---
 
@@ -41,29 +46,31 @@ title: 지속적 통합 가시성
 
 ## 개요
 
-Datadog Continuous Integration (CI) Visibility는 CI 성능, 트렌드 및 신뢰성에 대한 데이터뿐만 아니라 CI 테스트 및 파이프라인 결과에 대한 정보를 통합합니다. CI Visibility는 CI 메트릭과 데이터를 Datadog 대시보드 및 노트북으로 가져와 CI 환경의 상태를 전달하고 팀이 항상 양질의 코드를 제공하는 능력을 갖출 수 있도록 지원합니다.
+Datadog CI(지속적 통합) 가시성은 CI 환경 전반에 걸쳐 파이프라인 결과, 성능, 추세 및 안정성에 대한 통합 보기를 제공합니다. Datadog을 CI 파이프라인과 통합하면 모니터를 만들고, [Datadog 대시보드][1] 및 [노트북][2] 내에 데이터를 표시하고, 조직의 CI 상태에 대한 시각화를 만들 수 있습니다.
 
 {{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/664357090/rendition/1080p/file.mp4?loc=external&signature=5ef9bc02bd8fb18c07a4a41ea3ac08b72bd0ab0b5d914429da049120d1e9e9b7" poster="/images/poster/ci.png" >}}
 
-CI Visibility를 사용하면 개발자가 테스트 또는 파이프라인 실패 이유를 파악하고, 테스트 스위트 실행 시간 경향을 모니터링하며, 특정 커밋이 파이프라인에 미치는 영향을 확인할 수 있습니다. 또한, 빌드 엔지니어는 조직 간의 CI 상태와 시간 경과에 따른 파이프라인 성능의 추세를 확인할 수 있습니다.
+</br>
 
-## 테스트 신뢰성을 개선하고 트레이스를 생성하세요
+CI 가시성은 개발자가 파이프라인 중단의 원인을 이해하고 파이프라인 실행 시간의 추세를 모니터링하는 데 도움이 됩니다. 또한 시간 경과에 따른 조직 간 CI 상태 및 파이프라인 성능에 대한 빌드 엔지니어의 통찰력을 제공합니다.
 
-CI Visibility를 사용하면 가장 중요한 개발 장애와 이를 발생시킨 커밋을 연결하여 테스트 실패 및 깨진 빌드 문제를 해결할 수 있습니다. 테스트를 계측하고 테스트 프레임워크가 CI에서 실행될 때 트레이스를 생성할 수 있습니다.
+## 파이프라인 안정성 향상 및 트레이스 생성
+
+CI 가기성은 가장 심각한 개발 중단을 해당 중단을 유발한 커밋에 연결하여 파이프라인 오류 및 손상된 빌드 문제를 해결하는 데 도움이 됩니다. 파이프라인을 계측하고 실행 시 추적하여 파이프라인 성능에 대한 더 깊은 통찰력을 얻을 수 있습니다.
 
 ## 원활한 통합을 통해 효율성을 높이세요
 
-Datadog은 다음 CI 공급자와 협력하여 커밋이 파이프라인에 들어간 순간부터 배포 준비가 완료될 때까지 성능 및 결과를 추적하는 파이프라인 메트릭을 수집합니다. 시간이 지남에 따라 집계된 데이터를 사용하여 테스트 및 빌드 성능의 추세를 추적하고 수정해야 할 가장 중요한 문제를 파악합니다. 
+Datadog은 다양한 CI 제공자와 통합되어 커밋부터 배포까지 CI 파이프라인의 성능을 추적하는 메트릭을 수집합니다. 이러한 메트릭은 성과 추세와 개선 기회를 식별하는 데 사용됩니다.
 
 {{< partial name="continuous_integration/ci-pipelines-getting-started.html" >}}
 
 </br>
 
-`datadog-ci` CLI를 사용하여 파이프라인에서 [트레이스 명령][8]을 사용할 수 있을 뿐만 아니라 [커스텀 태그 및 측정 명령][9]을 사용하여 파이프라인 트레이스에 사용자 정의 텍스트 및 숫자 태그를 추가할 수 있습니다.
+`datadog-ci` CLI를 사용하여 [명령을 추적][8]하고 [커스텀 태그 및 측정값][9]을 추가할 수 있습니다. 이를 통해 파이프라인 트레이스에 커스텀 텍스트와 숫자 태그를 추가할 수 있습니다.
 
 ## 시작할 준비가 되셨나요?
 
-CI 공급자와의 CI Visibility 설정 지침, 호환성 요구 사항에 대한 정보 및 데이터 수집을 계측하고 설정하는 단계는 [Pipeline Visibility][3] 및 [Test Visibility][4]를 참조하세요. 그런 다음 [CI Visibility Explorer][7]에서 테스트 실행 및 파이프라인 실행에 대한 세부 정보를 탐색하고 검색 쿼리를 [CI Pipeline or Test Monitor][6]로 내보냅니다.
+호환성 요구 사항 및 데이터 수집 구성 단계에 대한 세부 정보를 포함하여 CI 공급자를 통해 CI 가시성을 설정하는 방법에 대한 지침을 보려면 [파이프라인 가시성][3]을 방문하세요. 그런 다음 [CI 가시성 탐색기][7]에서 파이프라인 실행에 대한 세부 정보 탐색을 시작하고 검색 쿼리를 [CI 파이프라인 모니터][6]로 내보냅니다.
 
 ## 참고 자료
 

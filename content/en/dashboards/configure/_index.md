@@ -1,6 +1,5 @@
 ---
 title: Configure
-kind: Documentation
 disable_toc: false
 further_reading:
 - link: "/dashboards/"

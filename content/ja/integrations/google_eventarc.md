@@ -12,7 +12,7 @@ integration_id: google-eventarc
 integration_title: Google Eventarc
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: google_eventarc
 public_title: Google Eventarc インテグレーション

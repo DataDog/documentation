@@ -86,7 +86,7 @@ const initCodeTabs = () => {
             const selectedLanguageTab = document.querySelector(`a[data-lang="${tabQueryParameter}"]`);
 
             if (selectedLanguageTab) {
-                selectedLanguageTab.click()
+                activateCodeTab(selectedLanguageTab)
             }else{
                 activateCodeTab(firstTab)
             }

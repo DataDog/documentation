@@ -5,7 +5,7 @@ type: multi-code-lang
 description: Set up crash reporting for your mobile applications.
 further_reading:
 - link: '/real_user_monitoring/error_tracking/'
-  tag: 'Error Tracking'
+  tag: 'Documentation'
   text: 'Get started with Error Tracking'
 - link: '/real_user_monitoring/error_tracking/explorer'
   tag: 'Documentation'
