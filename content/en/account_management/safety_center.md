@@ -1,5 +1,6 @@
 ---
 title: Safety Center
+is_beta: true
 further_reading:
     - link: "/account_management/api-app-keys/"
       tag: "Documentation"
@@ -11,6 +12,11 @@ further_reading:
       tag: "Documentation"
       text: "OAuth Apps"
 ---
+
+{{< callout url="#" header="false" btn_hidden="true" >}}
+  Datadog Safety Center is in public beta.
+{{< /callout >}}
+
 ## Overview
 Datadog's Safety Center in **Organization Settings** is a centralized location for security alerts and best practices. [Administrators][1] of an organization can open this page to review recommendations and take action on high priority security warnings and alerts.
 
