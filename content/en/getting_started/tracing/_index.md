@@ -155,7 +155,7 @@ Up until this point, you let Datadog automatically instrument the `hello.py` app
 
 However, if you need to collect traces from custom code or require more fine-grained control, you can add [custom instrumentation][6].
 
-To illustrate this, you are going to import the Datadog Python tracing library into `hello.py` and create a custom span and span tag.
+To illustrate this, you will import the Datadog Python tracing library into `hello.py` and create a custom span and span tag.
 
 To add custom instrumentation:
 
