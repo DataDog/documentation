@@ -1310,11 +1310,61 @@ menu:
       url: dashboards/sharing/scheduled_reports
       parent: dashboards_sharing
       weight: 1003
+    - name: DDSQL Editor
+      url: dashboards/ddsql_editor
+      parent: dashboards
+      identifier: dashboards_ddsql_editor
+      weight: 11
+    - name: Getting Started
+      url: dashboards/ddsql_editor/getting_started
+      parent: dashboards_ddsql_editor
+      identifier: dashboards_ddsql_editor_getting_started
+      weight: 1101
+    - name: Reference
+      url: dashboards/ddsql_editor/reference
+      parent: dashboards_ddsql_editor
+      identifier: dashboards_ddsql_editor_reference
+      weight: 1102
+    - name: Statements
+      url: dashboards/ddsql_editor/reference/statements
+      parent: dashboards_ddsql_editor_reference
+      identifier: dashboards_ddsql_editor_reference_statements
+      weight: 11021
+    - name: Expressions and Operators
+      url: dashboards/ddsql_editor/reference/expressions_and_operators
+      parent: dashboards_ddsql_editor_reference
+      identifier: dashboards_ddsql_editor_reference_expressions_and_operators
+      weight: 11022
+    - name: Data Types
+      url: dashboards/ddsql_editor/reference/data_types
+      parent: dashboards_ddsql_editor_reference
+      identifier: dashboards_ddsql_editor_reference_data_types
+      weight: 11023
+    - name: Scalar Functions
+      url: dashboards/ddsql_editor/reference/scalar_functions
+      parent: dashboards_ddsql_editor_reference
+      identifier: dashboards_ddsql_editor_reference_scalar_functions
+      weight: 11024
+    - name: Aggregation Functions
+      url: dashboards/ddsql_editor/reference/aggregation_functions
+      parent: dashboards_ddsql_editor_reference
+      identifier: dashboards_ddsql_editor_reference_aggregation_functions
+      weight: 11025
+    - name: Window Functions
+      url: dashboards/ddsql_editor/reference/window_functions
+      parent: dashboards_ddsql_editor_reference
+      identifier: dashboards_ddsql_editor_reference_window_functions
+      weight: 11026
+    - name: Querying Tags
+      url: dashboards/ddsql_editor/reference/tags
+      parent: dashboards_ddsql_editor_reference
+      identifier: dashboards_ddsql_editor_reference_tags
+      weight: 11027
     - name: Guides
       url: dashboards/guide/
       parent: dashboards
       identifier: dashboards_guides
-      weight: 11
+      weight: 12
     - name: Notebooks
       url: notebooks/
       identifier: notebooks
@@ -1920,11 +1970,16 @@ menu:
       parent: slos
       identifier: burn_rate
       weight: 5
+    - name: OOTB Dashboard
+      url: service_management/service_level_objectives/ootb_dashboard/
+      parent: slos
+      identifier: slos_ootb_dashboard
+      weight: 6
     - name: Guides
       url: service_management/service_level_objectives/guide/
       parent: slos
       identifier: slos_guides
-      weight: 6
+      weight: 7
     - name: Incident Management
       url: service_management/incident_management/
       pre: incidents
@@ -2695,6 +2750,26 @@ menu:
       parent: ndm
       identifier: ndm_guide
       weight: 308
+    - name: Network Path
+      url: network_monitoring/network_path/
+      parent: nm_parent
+      identifier: network_path
+      weight: 4
+    - name: Setup
+      url: network_monitoring/network_path/setup/
+      parent: network_path
+      identifier: network_path_setup
+      weight: 401
+    - name: List View
+      url: network_monitoring/network_path/list_view/
+      parent: network_path
+      identifier: network_path_list_view
+      weight: 402
+    - name: Path View
+      url: network_monitoring/network_path/path_view/
+      parent: network_path
+      identifier: network_path_path_view
+      weight: 403
     - name: Cloud Cost
       url: cloud_cost_management/
       identifier: cloud_cost
@@ -2716,51 +2791,91 @@ menu:
       parent: cloud_cost
       identifier: cloud_cost_google_cloud
       weight: 3
-    - name: Custom Costs
-      url: cloud_cost_management/custom
-      parent: cloud_cost
-      identifier: cloud_cost_custom
-      weight: 4
     - name: SaaS Cost Integrations
       url: cloud_cost_management/saas_costs
       parent: cloud_cost
       identifier: cloud_cost_saas_cost_integrations
+      weight: 4
+    - name: Databricks
+      url: cloud_cost_management/saas_costs/?tab=databricks#setup
+      parent: cloud_cost_saas_cost_integrations
+      identifier: cloud_cost_saas_cost_integrations_databricks
+      weight: 401
+    - name: Confluent Cloud
+      url: cloud_cost_management/saas_costs/?tab=confluentcloud#setup
+      parent: cloud_cost_saas_cost_integrations
+      identifier: cloud_cost_saas_cost_integrations_confluentcloud
+      weight: 402
+    - name: MongoDB
+      url: cloud_cost_management/saas_costs/?tab=mongodb#setup
+      parent: cloud_cost_saas_cost_integrations
+      identifier: cloud_cost_saas_cost_integrations_mongodb
+      weight: 403
+    - name: Snowflake
+      url: cloud_cost_management/saas_costs/?tab=snowflake#setup
+      parent: cloud_cost_saas_cost_integrations
+      identifier: cloud_cost_saas_cost_integrations_snowflake
+      weight: 404
+    - name: OpenAI
+      url: cloud_cost_management/saas_costs/?tab=openai#setup
+      parent: cloud_cost_saas_cost_integrations
+      identifier: cloud_cost_saas_cost_integrations_openai
+      weight: 405
+    - name: Fastly
+      url: cloud_cost_management/saas_costs/?tab=fastly#setup
+      parent: cloud_cost_saas_cost_integrations
+      identifier: cloud_cost_saas_cost_integrations_fastly
+      weight: 406
+    - name: Twilio
+      url: cloud_cost_management/saas_costs/?tab=twilio#setup
+      parent: cloud_cost_saas_cost_integrations
+      identifier: cloud_cost_saas_cost_integrations_twilio
+      weight: 407
+    - name: Custom Costs
+      url: cloud_cost_management/custom
+      parent: cloud_cost
+      identifier: cloud_cost_custom
       weight: 5
+    - name: Datadog Costs
+      url: cloud_cost_management/datadog_costs
+      parent: cloud_cost
+      identifier: cloud_cost_datadog_costs
+      weight: 6
     - name: Tag Pipelines
       url: cloud_cost_management/tag_pipelines
       parent: cloud_cost
       identifier: cloud_cost_tag_pipelines
-      weight: 6
+      weight: 7
     - name: Container Cost Allocation
       url: cloud_cost_management/container_cost_allocation
       parent: cloud_cost
       identifier: cloud_cost_container_cost_allocation
-      weight: 7
+      weight: 8
     - name: AWS
       url: cloud_cost_management/container_cost_allocation/?tab=aws
       parent: cloud_cost_container_cost_allocation
       identifier: cloud_cost_container_cost_allocation_aws
-      weight: 701
+      weight: 801
     - name: Azure
       url: cloud_cost_management/container_cost_allocation/?tab=azure
       parent: cloud_cost_container_cost_allocation
       identifier: cloud_cost_container_cost_allocation_azure
-      weight: 702
+      weight: 802
     - name: Google Cloud
       url: cloud_cost_management/container_cost_allocation/?tab=google
       parent: cloud_cost_container_cost_allocation
       identifier: cloud_cost_container_cost_allocation_google
-      weight: 703
+      weight: 803
     - name: Cost Recommendations
       url: cloud_cost_management/recommendations
       parent: cloud_cost
       identifier: cloud_cost_recommendations
-      weight: 8
+      weight: 9
     - name: Cost Monitors
       url: /cloud_cost_management/monitors
       parent: cloud_cost
       identifier: cloud_cost_monitors
-      weight: 9
+      weight: 10
     - name: APM
       url: tracing/
       pre: apm
@@ -2838,12 +2953,12 @@ menu:
       identifier: custom_instrumentation_dotnet
       weight: 2028
     - name: Android
-      url: tracing/trace_collection/custom_instrumentation/android
+      url: tracing/trace_collection/custom_instrumentation/android/otel
       parent: custom_instrumentation
       identifier: custom_instrumentation_android
       weight: 2029
     - name: iOS
-      url: tracing/trace_collection/custom_instrumentation/ios
+      url: tracing/trace_collection/custom_instrumentation/ios/otel
       parent: custom_instrumentation
       identifier: custom_instrumentation_ios
       weight: 2030
@@ -3499,11 +3614,16 @@ menu:
       identifier: data_streams
       parent: apm_heading
       weight: 50000
+    - name: Schema Tracking
+      url: data_streams/schema_tracking
+      identifier: data_streams_schema_tracking
+      parent: data_streams
+      weight: 1
     - name: Troubleshooting
       url: data_streams/troubleshooting
       identifier: data_streams_troubleshooting
       parent: data_streams
-      weight: 1
+      weight: 2
     - name: Data Jobs Monitoring
       url: data_jobs/
       pre: data-jobs-monitoring
@@ -4588,11 +4708,21 @@ menu:
       parent: cloud_siem
       identifier: cloud_siem_investigator
       weight: 6
+    - name: Historical Jobs
+      url: security/cloud_siem/historical_jobs
+      parent: cloud_siem
+      identifier: cloud_siem_log_historical_jobs
+      weight: 7
+    - name: Entities and Risk Scoring
+      url: security/cloud_siem/entities_and_risk_scoring
+      parent: cloud_siem
+      identifier: cloud_siem_entities_and_risk_scoring
+      weight: 8
     - name: Guides
       url: security/cloud_siem/guide/
       parent: cloud_siem
       identifier: siem_guides
-      weight: 7
+      weight: 9
     - name: Cloud Security Management
       url: security/cloud_security_management
       parent: security_platform_heading

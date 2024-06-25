@@ -5,8 +5,6 @@ aliases:
     - /tracing/llm_observability/
 ---
 
-<div class="alert alert-info">LLM Observability is in public beta.</a></div>
-
 <div class="alert alert-warning">By using LLM Observability, you acknowledge that Datadog is authorized to share your Company's data with OpenAI Global, LLC for the purpose of providing and improving LLM Observability.
 </div>
 
