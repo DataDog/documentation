@@ -533,6 +533,7 @@ To access the RUM session ID:
       }
    ```
 {{% /tab %}}
+{{< /tabs >}}
 
 ## Further Reading
 
