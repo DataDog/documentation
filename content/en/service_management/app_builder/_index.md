@@ -9,6 +9,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-app-builder-low-code-internal-tools/"
   tag: "Blog"
   text: "Build custom monitoring and remediation tools with the Datadog App Builder"
+- link: "https://www.datadoghq.com/blog/app-builder-remediation/"
+  tag: "Blog"
+  text: "Remediate apps built using Datadog App Builder"
 ---
 
 {{< site-region region="gov" >}}

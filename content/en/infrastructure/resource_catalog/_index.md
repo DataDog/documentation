@@ -16,6 +16,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-resource-catalog/"
   tag: "Blog"
   text: "Govern your infrastructure resources with the Datadog Resource Catalog"
+- link: "https://www.datadoghq.com/blog/infrastructure-troubleshooting-recent-changes/"
+  tag: "Blog"
+  text: "Troubleshoot infrastructure issues faster with Recent Changes"
 ---
 
 {{< site-region region="gov" >}}
