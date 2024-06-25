@@ -12,7 +12,7 @@ further_reading:
       text: 'Enable runtime metrics'
     - link: '/tracing/guide/#enabling-tracing-tutorials'
       tag: 'Guides'
-      text: 'Tutorials for various ways to enable tracing`
+      text: 'Tutorials for various ways to enable tracing'
     - link: 'https://learn.datadoghq.com/courses/intro-to-apm'
       tag: 'Learning Center'
       text: 'Introduction to Application Performance Monitoring'
