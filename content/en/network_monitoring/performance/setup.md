@@ -210,14 +210,23 @@ To enable Network Performance Monitoring for Windows hosts:
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-To enable Network Performance Monitoring with Kubernetes using Helm, add:
+To enable Network Performance Monitoring with Kubernetes using Helm, add the following to your `values.yaml` file.</br>
+**Helm chart v2.4.39+ is required**. For more information, see the [Datadog Helm Chart documentation][1].
 
   ```yaml
   datadog:
     networkMonitoring:
       enabled: true
   ```
-to your values.yaml. **Helm chart v2.4.39+ is required**. For more information, see the [Datadog Helm Chart documentation][1].
+
+**Note**: If you receive a permissions error when configuring NPM on your Kubernetes environment: `Error: error enabling protocol classifier: permission denied`, add the following to your `values.yaml` (Reference this [section][5] in the Helm chart):
+
+  ```yaml
+  agents:
+    podSecurity:
+      apparmor:
+        enabled: true
+  ```
 
 If you are not using Helm, you can enable Network Performance Monitoring with Kubernetes from scratch:
 
@@ -352,6 +361,7 @@ If you already have the [Agent running with a manifest][4]:
 [2]: /resources/yaml/datadog-agent-npm.yaml
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: /agent/kubernetes/
+[5]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/values.yaml#L1519-L1523
 {{% /tab %}}
 {{% tab "Operator" %}}
 <div class="alert alert-warning">The Datadog Operator is Generally Available with the `1.0.0` version, and it reconciles the version `v2alpha1` of the DatadogAgent Custom Resource. </div>

@@ -1,20 +1,21 @@
 ---
-title: Volet latéral des logs
-kind: documentation
-description: Effectuer des recherches et des analyses sur l'ensemble de vos logs
 aliases:
-  - /fr/logs/explorer/sidepanel
+- /fr/logs/explorer/sidepanel
+description: Effectuer des recherches et des analyses sur l'ensemble de vos logs
 further_reading:
-  - link: /logs/log_configuration/processors
-    tag: Documentation
-    text: Apprendre à traiter vos logs
-  - link: /tracing/connect_logs_and_traces
-    tag: Documentation
-    text: Associer vos logs à vos traces
-  - link: /logs/guide/correlate-logs-with-metrics
-    tag: Documentation
-    text: Associer vos logs à vos métriques d'infrastructure
+- link: /logs/log_configuration/processors
+  tag: Documentation
+  text: Apprendre à traiter vos logs
+- link: tracing/other_telemetry/connect_logs_and_traces
+  tag: Documentation
+  text: Associer vos logs à vos traces
+- link: /logs/guide/correlate-logs-with-metrics
+  tag: Documentation
+  text: Associer vos logs à vos métriques d'infrastructure
+kind: documentation
+title: Volet latéral des logs
 ---
+
 ## Présentation
 Datadog affiche les informations sur les logs individuels dans le volet latéral, avec la disposition suivante :
 
@@ -40,7 +41,7 @@ Le bouton **View in context** met à jour la requête de recherche afin d'affich
 
 Cliquez sur l'onglet **Metrics** pour accéder aux métriques de votre infrastructure sous-jacente recueillies dans l'intervalle de 30 minutes associé au log.
 
-Interagissez avec la section **Host** en haut des attributs réservés pour accéder au [dashboard des hosts][5] ou à la [page Network][6]. Interagissez avec les sections **Container** pour accéder à la [page des conteneurs][7], filtrés en fonction des paramètres sous-jacents.
+Interagissez avec la section **Host** en haut des attributs réservés pour accéder au [dashboard des hosts][5] ou à la page [Network Analytics][6]. Interagissez avec les sections **Container** pour accéder à la [page des conteneurs][7], filtrés en fonction des paramètres sous-jacents.
 
 {{< img src="logs/explorer/side_panel/infra.mp4" alt="Hub vers l'infrastructure" video=true style="width:100%;">}}
 
@@ -86,11 +87,11 @@ Utilisez le bouton de **partage** pour partager le log ouvert dans le volet lat�
 [2]: /fr/integrations/#cat-log-collection
 [3]: /fr/agent/autodiscovery/integrations/?tab=kubernetes
 [4]: /fr/logs/log_configuration/attributes_naming_convention
-[5]: /fr/dashboards/#preset-lists
-[6]: /fr/network_monitoring/performance/network_page/
+[5]: /fr/dashboards/list/#preset-lists
+[6]: /fr/network_monitoring/performance/network_analytics/
 [7]: /fr/infrastructure/livecontainers/?tab=linuxwindows#introduction
 [8]: /fr/infrastructure/serverless/#function-detail-view
-[9]: /fr/tracing/connect_logs_and_traces/
+[9]: /fr/tracing/other_telemetry/connect_logs_and_traces/
 [10]: /fr/getting_started/tagging/unified_service_tagging
 [11]: /fr/tracing/app_analytics/search/#displaying-a-full-trace
 [12]: /fr/logs/explorer/facets/#overview
