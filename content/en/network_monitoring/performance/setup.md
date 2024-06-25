@@ -219,7 +219,7 @@ To enable Network Performance Monitoring with Kubernetes using Helm, add the fol
       enabled: true
   ```
 
-**Note**: If you receive a permissins error when configuring NPM on your Kubernetes environment: `Error: error enabling protocol classifier: permission denied`, add the following to your `values.yaml` (Reference this [section][5] in the Helm chart):
+**Note**: If you receive a permissions error when configuring NPM on your Kubernetes environment: `Error: error enabling protocol classifier: permission denied`, add the following to your `values.yaml` (Reference this [section][5] in the Helm chart):
 
   ```yaml
   agents:
