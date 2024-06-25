@@ -19,9 +19,13 @@ title: Agent のデータセキュリティ
 Agent の公式リポジトリおよびバイナリパッケージは署名されています。次の公開鍵のいずれかに対して署名を確認して、ディストリビューションチャンネルを確認します。
 
 - Linux DEB パッケージとリポジトリメタデータ:
+  - [D18886567EABAD8B2D2526900D826EB906462314][21]
+  - [5F1E256061D813B125E156E8E6266D4AC0962C7D][19]
   - [A2923DFF56EDA6E76E55E492D3A80E30382E94DE][3]
   - [D75CEA17048B9ACBF186794B32637D44F14F620E][4]
 - Linux RPM パッケージとリポジトリメタデータ:
+  - [2416A37757B1BB0268B3634B52AFC5994F09D16B][22]
+  - [7408BFD56BC5BF0C361AAAE85D88EEA3B01082D3][20]
   - [C6559B690CA882F023BDF3F63F4D1729FD4BF915][5]
   - [A4C0B90D7443CF6E4E8AA341F1068E14E09422B3][6]
 - Windows MSI:
@@ -95,3 +99,8 @@ Agent の構成ファイルに機密情報がプレーンテキストで格納�
 [16]: /ja/agent/faq/windows-agent-ddagent-user/
 [17]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/secrets.md
 [18]: /ja/agent/guide/secrets-management/
+[19]: https://keys.datadoghq.com/DATADOG_APT_KEY_C0962C7D.public
+[20]: https://keys.datadoghq.com/DATADOG_RPM_KEY_B01082D3.public
+[21]: https://keys.datadoghq.com/DATADOG_APT_KEY_06462314.public
+[22]: https://keys.datadoghq.com/DATADOG_RPM_KEY_4F09D16B.public
+

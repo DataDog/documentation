@@ -19,10 +19,12 @@ Es posible enviar datos al servicio Datadog utilizando un [Agent][1] instalado l
 Los repositorios oficiales y los paquetes binarios del Agent están firmados. Para verificar el canal de distribución, comprueba la firma con alguna de las siguientes claves públicas:
 
 - Paquetes DEB de Linux y metadatos del repositorio:
+  - [D18886567EABAD8B2D2526900D826EB906462314][21]
   - [5F1E256061D813B125E156E8E6266D4AC0962C7D][19]
   - [D75CEA17048B9ACBF186794B32637D44F14F620E][4]
   - [A2923DFF56EDA6E76E55E492D3A80E30382E94DE][3]
 - Paquetes RPM de Linux y metadatos del repositorio:
+  - [2416A37757B1BB0268B3634B52AFC5994F09D16B][22]
   - [7408BFD56BC5BF0C361AAAE85D88EEA3B01082D3][20]
   - [C6559B690CA882F023BDF3F63F4D1729FD4BF915][5]
   - [A4C0B90D7443CF6E4E8AA341F1068E14E09422B3][6]
@@ -111,3 +113,5 @@ Para obtener más información, consulta la documentación sobre la [gestión de
 [18]: /es/agent/configuration/secrets-management/
 [19]: https://keys.datadoghq.com/DATADOG_APT_KEY_C0962C7D.public
 [20]: https://keys.datadoghq.com/DATADOG_RPM_KEY_B01082D3.public
+[21]: https://keys.datadoghq.com/DATADOG_APT_KEY_06462314.public
+[22]: https://keys.datadoghq.com/DATADOG_RPM_KEY_4F09D16B.public
