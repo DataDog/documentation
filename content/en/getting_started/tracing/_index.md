@@ -86,7 +86,7 @@ To set up Datadog APM without needing to modify your application's code or the d
    sudo datadog-agent status
    ```
 
-This approach automatically installs the Datadog Agent, enables Datadog APM, and [instruments][5] your application.
+This approach automatically installs the Datadog Agent, enables Datadog APM, and [instruments][5] your application at runtime.
 
 ## Run the application
 
@@ -165,7 +165,7 @@ To add custom instrumentation:
    pip install ddtrace
    ```
 
-1. Add the highlighted lines to the code in `hello.py`:
+1. Add the highlighted lines to the code in `hello.py` to create a custom span tag `get_quote` and a custom span tag `quote`:
 
    {{< highlight python "hl_lines=3 15 17" >}}
     from flask import Flask
@@ -201,7 +201,7 @@ To add custom instrumentation:
    ```
 1. In Datadog, go to [**APM** > **Traces**][4].
 1. Select the **hello** trace.
-1. Find the new custom span in the flame graph and hover over it:
+1. Find the new custom `get_quote` span in the flame graph and hover over it:
 
    {{< img src="/getting_started/apm/custom-instrumentation.png" alt="The get_quote custom span displays in the flame graph. On hover, the quote span tag is displayed. " style="width:100%;" >}}
 
