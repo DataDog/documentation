@@ -46,7 +46,7 @@ Consult on this page:
 
 ## Service health
 
-{{< callout header="Opt in to the private beta!" url="https://docs.google.com/forms/d/1KsC7DPKBJ3K0wP67fK50JhRRX-CseP4FUrFrOvCYbQM/viewform?edit_requested=true" >}}
+{{< callout header="Opt in to the private beta!" url="https://www.datadoghq.com/private-beta/service-health/" >}}
   Service health is in private beta. To request access, complete the form.
 {{< /callout >}}
 
