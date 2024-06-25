@@ -677,45 +677,115 @@ For a full list of the available installation script environment variables, see 
 {{< tabs >}}
 
 {{% tab "Kubernetes" %}}
+
+Run the Datadog Agent in your Kubernetes cluster directly to start collecting your cluster and applications metrics, traces, and logs. You can deploy the Agent with a Helm chart, [the Datadog Operator][101] or directly with [a DaemonSet][102]. For more information about installing the Datadog Agent on different distributions, see the [Kubernetes distributions documentation][103].
+
+### Installing the Datadog Agent
+
+To install the chart with a custom release name `RELEASE_NAME`:
+
+1. [Install Helm][104].
+1. Add the Datadog Helm repository:
+   ```shell
+   helm repo add datadog https://helm.datadoghq.com
+   ```
+
+1. Fetch the latest version of newly added charts:
+   ```shell
+   helm repo update
+   ```
+
+1. Create an empty `values.yaml` file, and override any of the [default values][105] if desired. See the [Datadog `helm-charts` repo][106] for examples. 
+1. Deploy the Datadog Agent, replacing `MY_API_KEY` with your Datadog API key:
+   **With Helm v3+**:
+   ```shell
+   helm install RELEASE_NAME -f datadog-values.yaml --set datadog.site='datad0g.com' --set agents.image.tag='6' --set datadog.apiKey=MY_API_KEY datadog/datadog
+   ```
+
+   **With Helm v1 or v2**:
+   ```shell
+   helm install -f datadog-values.yaml --name RELEASE_NAME --set datadog.site='datad0g.com' --set agents.image.tag='6' --set datadog.apiKey=MY_API_KEY datadog/datadog
+   ```
+
+   This chart adds the Datadog Agent to all nodes in your cluster via a DaemonSet. Soon after installation, Datadog begins to report hosts and metrics data in your account.
+
+### Enabling log collection
+
+To enable log collection with Helm, update your `datadog-values.yaml` file with the following log collection configuration:
+
+```yaml
+datadog:
+  logs:
+    enabled: true
+    containerCollectAll: true
+```    
+
+Then upgrade your Datadog Helm chart:
+```shell
+helm upgrade -f datadog-values.yaml RELEASE_NAME datadog/datadog
+```
+
+### Enabling trace collection
+
+Follow the dedicated [APM setup documentation][107] to learn how to collect your application traces in a Kubernetes environment.
+
+### Further Reading
+
+For information on available Agent features, see the [Kubernetes documentation][108].
+
+[101]: /containers/kubernetes/?tab=operator
+[102]: /containers/kubernetes/?tab=daemonset
+[103]: /containers/kubernetes/distributions/
+[104]: https://v3.helm.sh/docs/intro/install/
+[105]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/values.yaml
+[106]: https://github.com/DataDog/helm-charts/tree/main/examples/datadog
+[107]: https://dd-dev-local.datad0g.com/apm/service-setup?architecture=container-based&collection=Helm%20Chart%20%28Recommended%29&environment=kubernetes
+[108]: /containers/kubernetes/
 {{% /tab %}}
 
 {{% tab "Docker" %}}
 ### One-step install
 
-The one-step install runs a Docker container which embeds the Datadog Agent to monitor your host. The Docker integration is enabled by default, as well as autodiscovery in auto config mode. To disable autodiscovery, remove the `SD_BACKEND` variable from the one-step install command.
+The one-step installation command runs a signed Docker container which embeds the Datadog Agent to monitor your host. The Docker integration is enabled by default, as well as [Autodiscovery][101] in automatic configuration mode.
 
-#### Amazon Linux
-Run the following command, replacing `MY_API_KEY` with your Datadog API key:
+<div class="alert alert-info">You must not run more than one Datadog Agent per node. Running multiple Agents may result in unexpected behavior.</a></div>
+
+For a one-step install, run the following command. Replace `MY_API_KEY` with your Datadog API key:
+
+On Amazon Linux v2:
 ```shell
-docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /cgroup/:/host/sys/fs/cgroup:ro -e API_KEY=MY_API_KEY -e SD_BACKEND=docker gcr.io/datadoghq/docker-dd-agent:latest
+docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /cgroup/:/host/sys/fs/cgroup:ro -e DD_API_KEY=MY_API_KEY -e DD_SITE="datad0g.com" gcr.io/datadoghq/agent:6
 ```
 
-#### Other operating systems
-Run the following command, replacing `MY_API_KEY` with your Datadog API key:
+On other operating systems:
 ```shell
-docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e API_KEY=MY_API_KEY -e SD_BACKEND=docker gcr.io/datadoghq/docker-dd-agent:latest
+docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e DD_API_KEY=MY_API_KEY -e DD_SITE="datad0g.com" gcr.io/datadoghq/agent:6
 ```
 
 #### Troubleshooting
 
-If the one-step install command does not work, it's possible that your system mounts the `cgroup` directory in an unexpected place or does not use CGroups for memory management. CGroups are required for the Docker check to succeed. To enable CGroups, see the documentation in the [docker-dd-agent][1] repo. If the check is failing because of an unexpected `cgroup` directory location:
+If the one-step installation command does not work, it's possible that your system mounts the `cgroup` directory in an unexpected place or does not use CGroups for memory management. CGroups are required for the Docker check to succeed. To enable CGroups, see [the Setup documentation][102]. 
 
+If CGroups are enabled, but the check is failing because of an unexpected `cgroup` directory location:
 1. Run `mount | grep "cgroup type tmpfs"` to retrieve the location of the `cgroup` directory.
-1. Replace the first occurence of `/sys/fs/cgroup` in the one-step install command with the location of the `cgroup` directory.
+1. Replace the first occurence of `/sys/fs/cgroup` in the one-step installation command with the location of the `cgroup` directory.
 
-### Send custom metrics
+### Send custom metrics with DogStatsD
 
-To send custom metrics using DogStatsD:
-1. Add the `-p 8125:8125/udp` option to the install command. This binds the container's StatsD port to the host's IP address.
-1. Configure your client library to send UDP packets to the host's IP address.
+By default, DogStatsD only listens to localhost. To listen to DogStatsD packets from other containers:
+1. Add `-e DD_DOGSTATSD_NON_LOCAL_TRAFFIC=true` to the container's parameters. 
+1. Bind the container's statsd port to the hosts's IP by adding the `-p 8125:8125/udp` option to the container's parameters.
+1. Configure your client library to send UDP packets to the hosts's IP.
 
 ### Customize your Agent configuration
 
-To customize your Agent configuration, see the documentation in the Agent 5 [docker-dd-agent][2] repo. To tune autodiscovery configuration, see [Docker Integrations Autodiscovery][3]. To disable autodiscovery, remove the `SD_BACKEND` environment variable from the one-step installation command.
+- For information on configuring the Agent, see [Docker Agent for Docker, containerd, and Podman][103].
+- To tune Autodiscovery, see [Docker Integrations Autodiscovery][104].
 
-[1]: https://github.com/DataDog/docker-dd-agent?tab=readme-ov-file#cgroups
-[2]: https://github.com/DataDog/docker-dd-agent
-[3]: https://docs.datadoghq.com/containers/docker/integrations/?tabs=docker
+[101]: /containers/docker/integrations/?tabs=docker
+[102]: /containers/docker/?tab=standard#setup
+[103]: /containers/docker/?tab=standard
+[104]: /containers/docker/integrations/?tab=docker
 
 {{% /tab %}}
 
@@ -730,6 +800,18 @@ To run CoreOS Tectonic on Kubernetes, see [Kubernetes][2].
 {{% /tab %}}
 
 {{% tab "OpenShift" %}}
+Starting with version 6.1, the Datadog Agent supports monitoring OpenShift Origin and Enterprise clusters. Depending on your needs and the security constraints of your cluster, three deployment scenarios are supported:
+
+- [Restricted SCC operations][101]
+- [Host network SCC operations][102]
+- [Custom Datadog for all features][103]
+
+To install OpenShift, see the [Kubernetes installation instructions](?tab=kubernetes#cloud-and-containers). The Kubernetes integration targets OpenShift 3.7.0+ by default. For older versions of OpenShift, you must complete additional installation steps. For more information, see the [OpenShift integration documentation][104].
+
+[101]: /integrations/openshift/?tab=helm#restricted-scc-operations
+[102]: /integrations/openshift/?tab=helm#host
+[103]: /integrations/openshift/?tab=helm#custom-datadog-scc-for-all-features
+[104]: /integrations/openshift/?tab=helm#installation
 {{% /tab %}}
 
 {{% tab "Cloud Foundry" %}}
@@ -773,7 +855,7 @@ To run CoreOS Tectonic on Kubernetes, see [Kubernetes][2].
          #       directory: "."
    ```
 
-3. Add the runtime to your runtime config:
+3. Add the runtime to your [runtime config][101]:
 
    ```shell
    # BOSH cli v1
@@ -792,7 +874,8 @@ To run CoreOS Tectonic on Kubernetes, see [Kubernetes][2].
    # BOSH cli v2
    bosh -n -d myDeployment deploy myDeployment.yml
    ```
-
+   
+[101]: https://bosh.io/docs/runtime-config/   
 {{% /tab %}}
 
 {{< /tabs >}}
