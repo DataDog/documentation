@@ -3,17 +3,17 @@ title: Datadog OTLP Trace Intake Endpoint
 private: true
 further_reading:
   - link: "https://opentelemetry.io/docs/concepts/sdk-configuration/general-sdk-configuration/"
-    tag: "External"
+    tag: "External Site"
     text: "General OpenTelemetry SDK Configuration"
   - link: "https://opentelemetry.io/docs/reference/specification/sdk-environment-variables/"
-    tag: "External"
+    tag: "External Site"
     text: "OpenTelemetry Environment Variable Spec"
   - link: "https://opentelemetry.io/docs/reference/specification/protocol/exporter/ "
-    tag: "External"
+    tag: "External Site"
     text: "OpenTelemetry Protocol Exporter"
 ---
 {{< site-region region="ap1,gov" >}}
-<div class="alert alert-danger">This feature is not available for the {{< region-param key=dd_datacenter code="true" >}} site.</div>
+<div class="alert alert-warning">OTLP Trace Intake Endpoint is not supported for your selected  <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 ## Overview
@@ -29,11 +29,11 @@ To export OTLP data to the Datadog OTLP intake endpoint:
 1. [Configure the OTLP HTTP Protobuf exporter](#configure-the-exporter).
    - Set the Datadog OTLP intake endpoint.
    - Configure the required HTTP headers.
-1. (Optional) [Set `dd-otel-span-mapping` HTTP header](#optional-map-or-filter-span-names) to map or filter spans.
+1. (Optional) [Set the `dd-otel-span-mapping` HTTP header](#optional-map-or-filter-span-names) to map or filter spans.
 
 ### Configure the exporter
 
-To send OTLP data to the Datadog OTLP intake endpoint, you need to use the OTLP HTTP Protobuf exporter.
+To send OTLP data to the Datadog OTLP intake endpoint, you need to use the OTLP HTTP Protobuf exporter. The process differs depending on whether you are using automatic or manual instrumentation for OpenTelemetry.
 
 #### Automatic instrumentation
 
@@ -140,7 +140,7 @@ exporter = OTLPSpanExporter(
 
 ### (Optional) Map or filter span names
 
-Use the `dd-otel-span-mapping header` to configure span mapping and filtering. The JSON header contains these fields:
+Use the `dd-otel-span-mapping` header to configure span mapping and filtering. The JSON header contains the following fields:
 
 - `ignore_resources`: A list of regular expressions to disable traces based on their resource name.
 - `span_name_remappings`: A map of Datadog span names to preferred names.
@@ -161,7 +161,7 @@ For example:
 ```
 ## OpenTelemetry Collector
 
-If you are using the OpenTelemetry Collector and don't want to use the Datadog Exporter, you can configure [otlphttpexporter][4] to export traces to the Datadog endpoint.
+If you are using the OpenTelemetry Collector and don't want to use the Datadog Exporter, you can configure [`otlphttpexporter`][4] to export traces to the Datadog endpoint.
 
 For example, configure your `config.yaml` like this:
 
@@ -190,22 +190,22 @@ service:
 
 ### Error: 403 Forbidden
 
-If you receive a 403 Forbidden error when sending traces to the Datadog OTLP intake endpoint, it indicates one of the following issues:
+If you receive a `403 Forbidden` error when sending traces to the Datadog OTLP intake endpoint, it indicates one of the following issues:
 
 - The API key belongs to an organization that is not allowed to access the Datadog OTLP intake endpoint.  
-   **Solution**: Verify that you are using an API key from an organization allowed to access the Datadog OTLP intake endpoint.
+   **Solution**: Verify that you are using an API key from an organization that is allowed to access the Datadog OTLP intake endpoint.
 - The dd-otlp-source header is missing or has an incorrect value.  
-   **Solution**: Ensure the `dd-otlp-source` header is set with the proper value for your organization. Your site should be {{< region-param key=dd_site code="true" >}} 
+   **Solution**: Ensure that the `dd-otlp-source` header is set with the proper value for your organization. Your site should be {{< region-param key=dd_site code="true" >}}.
 - The endpoint URL is incorrect for your organization.  
-   **Solution**: Use the correct endpoint URL for your organization. Your site is {{< region-param key=dd_datacenter code="true" >}}, so you should use the {{< region-param key="otlp_trace_endpoint" code="true" >}} endpoint.
+   **Solution**: Use the correct endpoint URL for your organization. Your site is {{< region-param key=dd_datacenter code="true" >}}, so you need to use the {{< region-param key="otlp_trace_endpoint" code="true" >}} endpoint.
 
 ### Error: 413 Request Entity Too Large
 
-If you receive a 413 Request Entity Too Large error when sending traces to the Datadog OTLP intake endpoint, it indicates that the payload size sent by the OTLP exporter exceeds the Datadog trace intake endpoint limit of 3.2MB.
+If you receive a `413 Request Entity Too Large` error when sending traces to the Datadog OTLP intake endpoint, it indicates that the payload size sent by the OTLP exporter exceeds the Datadog trace intake endpoint's limit of 3.2MB.
 
 This error usually occurs when the OpenTelemetry SDK batches too much telemetry data in a single request payload.
 
-**Solution**: Reduce the export batch size of the SDK's batch span processor. Here's an example of how to modify the BatchSpanProcessorBuilder in the OpenTelemetry Java SDK:
+**Solution**: Reduce the export batch size of the SDK's batch span processor. Here's an example of how to modify the `BatchSpanProcessorBuilder` in the OpenTelemetry Java SDK:
 
 ```java
 javaCopyBatchSpanProcessor batchSpanProcessor = 
@@ -219,11 +219,11 @@ Adjust the `setMaxExportBatchSize` value according to your needs. A smaller valu
 ### Warning: "traces export: failed … 202 Accepted" in Go
 
 
-If you are using the OpenTelemetry Go SDK and see a warning message similar to "traces export: failed … 202 Accepted", it is due to a known issue in the OpenTelemetry Go OTLP HTTP exporter.
+If you are using the OpenTelemetry Go SDK and see a warning message similar to `traces export: failed … 202 Accepted`, it is due to a known issue in the OpenTelemetry Go OTLP HTTP exporter.
 
-The OpenTelemetry Go OTLP HTTP exporter treats any HTTP status code other than 200 as an error, even if the export succeeds ([Issue 3706][5]). In contrast, other OpenTelemetry SDKs consider any status code in the range [200, 300) as a success. The Datadog OTLP intake endpoint returns a 202 Accepted status code for successful exports.
+The OpenTelemetry Go OTLP HTTP exporter treats any HTTP status code other than 200 as an error, even if the export succeeds ([Issue 3706][5]). In contrast, other OpenTelemetry SDKs consider any status code in the range [200, 300) as a success. The Datadog OTLP intake endpoint returns a `202 Accepted` status code for successful exports.
 
-The OpenTelemetry community is still discussing whether other 2xx status codes should be treated as a success ([Issue 3203][6]).
+The OpenTelemetry community is still discussing whether other `2xx` status codes should be treated as successes ([Issue 3203][6]).
 
 **Solution**: If you are using the Datadog OTLP intake endpoint with the OpenTelemetry Go SDK, you can safely ignore this warning message. Your traces are being successfully exported despite the warning.
 
@@ -237,8 +237,8 @@ When `span_name_as_resource_name` is set to `false`, the operation name is deriv
 
 **Solution**: If you want to disable the `span_name_as_resource_name` option in the Datadog OTLP intake endpoint to match the behavior of the Datadog Agent or OpenTelemetry Collector, follow these steps:
 
-1. Refer to [Map or filter span names](#map-or-filter-span-names) section in this document.
-1. Set the span_name_as_resource_name option to false in the dd-otel-span-mapping header.
+1. Refer to [Map or filter span names](#map-or-filter-span-names) in this document.
+1. Set the `span_name_as_resource_name` option to `false` in the `dd-otel-span-mapping` header.
 
 For example:
 
