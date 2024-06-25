@@ -5,9 +5,7 @@ description: Setting up Database Monitoring on a MongoDB cluster
 disable_sidebar: true
 ---
 
-{{< beta-callout url="#" btn_hidden="true" >}}
-Database Monitoring for MongoDB is currently in private beta. If you are interested in participating, please reach out to your Datadog Customer Success Manager.
-{{< /beta-callout >}}
+<div class="alert alert-info">Database Monitoring for MongoDB is in private beta. If you are interested in participating, reach out to your Datadog Customer Success Manager.</div>
 
 ### MongoDB versions supported
 
@@ -22,4 +20,3 @@ For setup instructions, select your hosting type:
 
 {{< partial name="dbm/dbm-setup-mongodb" >}}
 
-<br>

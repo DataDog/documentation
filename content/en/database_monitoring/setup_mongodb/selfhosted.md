@@ -1,7 +1,6 @@
 ---
-title: Setting Up Database Monitoring for self-hosted MongoDB
+title: Setting Up Database Monitoring for Self-Hosted MongoDB
 kind: documentation
-description: Install and configure Database Monitoring for self-hosted MongoDB
 further_reading:
 - link: "/integrations/mongo/"
   tag: "Documentation"
@@ -9,12 +8,9 @@ further_reading:
 
 ---
 
+<div class="alert alert-info">Database Monitoring for MongoDB is in private beta. If you are interested in participating, reach out to your Datadog Customer Success Manager.</div>
+
 Database Monitoring provides deep visibility into your MongoDB databases by exposing database metrics, operation samples, explain plans, and events.
-
-Do the following steps to enable Database Monitoring for your database:
-
-1. [Grant the Agent access to your MongoDB instances](#grant-the-agent-access-to-your-mongodb-instances)
-2. [Install and configure the Agent](#install-and-configure-the-agent)
 
 ## Before you begin
 
@@ -23,14 +19,21 @@ Supported MongoDB major versions
 
 {{% dbm-mongodb-before-you-begin %}}
 
-## Grant the Agent access to your MongoDB instances
+## Setup
 
-The Datadog Agent requires read-only access to the MongoDB instance in order to collect statistics and queries.
+To enable Database Monitoring for your database:
+
+1. [Grant the Agent access to your MongoDB instances](#grant-the-agent-access-to-your-mongodb-instances)
+2. [Install and configure the Agent](#install-and-configure-the-agent)
+
+### Grant the Agent access to your MongoDB instances
+
+The Datadog Agent requires read-only access to the MongoDB instance to collect statistics and queries.
 
 {{< tabs >}}
 {{% tab "Standalone" %}}
 
-In a Mongo shell, authenticate to the MongoDB instance, create a read-only user for the Datadog Agent in the `admin` database and grant the required permissions:
+In a Mongo shell, authenticate to the MongoDB instance, create a read-only user for the Datadog Agent in the `admin` database, and grant the required permissions:
 
 ```shell
 # Authenticate as the admin user.
@@ -40,7 +43,7 @@ db.auth("admin", "<YOUR_MONGODB_ADMIN_PASSWORD>")
 # Create the user for the Datadog Agent.
 db.createUser({
   "user": "datadog",
-  "pwd": "<UNIQUEPASSWORD>",
+  "pwd": "<UNIQUE_PASSWORD>",
   "roles": [
     { role: "read", db: "admin" },
     { role: "read", db: "local" },
@@ -69,7 +72,7 @@ db.grantRolesToUser("datadog", [
 {{% /tab %}}
 {{% tab "Replica Set" %}}
 
-In a Mongo shell, authenticate to the primary node of the replica set, create a read-only user for the Datadog Agent in the `admin` database and grant the required permissions:
+In a Mongo shell, authenticate to the primary node of the replica set, create a read-only user for the Datadog Agent in the `admin` database, and grant the required permissions:
 
 ```shell
 # Authenticate as the admin user.
@@ -79,7 +82,7 @@ db.auth("admin", "<YOUR_MONGODB_ADMIN_PASSWORD>")
 # Create the user for the Datadog Agent.
 db.createUser({
   "user": "datadog",
-  "pwd": "<UNIQUEPASSWORD>",
+  "pwd": "<UNIQUE_PASSWORD>",
   "roles": [
     { role: "read", db: "admin" },
     { role: "read", db: "local" },
@@ -88,7 +91,7 @@ db.createUser({
 })
 ```
 
-Grant addtionnal permissions to the `datadog` user in the databases you want to monitor:
+Grant additional permissions to the `datadog` user in the databases you want to monitor:
 
 ```shell
 db.grantRolesToUser("datadog", [
@@ -108,7 +111,7 @@ db.grantRolesToUser("datadog", [
 {{% /tab %}}
 {{% tab "Sharded Cluster" %}}
 
-1. For each shard in your cluster, connect to the primary node of the shard, create a read-only user for the Datadog Agent in the `admin` database and grant the required permissions:
+1. For each shard in your cluster, connect to the primary node of the shard, create a read-only user for the Datadog Agent in the `admin` database, and grant the required permissions:
 
 ```shell
 # Authenticate as the admin user.
@@ -118,7 +121,7 @@ db.auth("admin", "<YOUR_MONGODB_ADMIN_PASSWORD>")
 # Create the user for the Datadog Agent.
 db.createUser({
   "user": "datadog",
-  "pwd": "<UNIQUEPASSWORD>",
+  "pwd": "<UNIQUE_PASSWORD>",
   "roles": [
     { role: "read", db: "admin" },
     { role: "read", db: "local" },
@@ -127,7 +130,7 @@ db.createUser({
 })
 ```
 
-Grant addtionnal permissions to the `datadog` user in the databases you want to monitor:
+Grant additional permissions to the `datadog` user in the databases you want to monitor:
 
 ```shell
 db.grantRolesToUser("datadog", [
@@ -136,7 +139,7 @@ db.grantRolesToUser("datadog", [
 ])
 ```
 
-Alternatively, you can grant `readAnyDatabase` role to the `datadog` user in the `admin` database to monitor all databases:
+Alternatively, you can grant the `readAnyDatabase` role to the `datadog` user in the `admin` database to monitor all databases:
 
 ```shell
 db.grantRolesToUser("datadog", [
@@ -144,16 +147,16 @@ db.grantRolesToUser("datadog", [
 ])
 ```
 
-2. Follow the same steps and create the same user from a mongos proxy. This action creates the local user in the config servers and allows direct connection.
+2. Follow the same steps and create the same user from a Mongos proxy. This action creates the local user in the config servers and allows direct connection.
 
 {{% /tab %}}
 {{< /tabs >}}
 
-## Install and configure the Agent
+### Install and configure the Agent
 
-It's recommended to install the Agent directly on the MongoDB host as that enables the agent to collect a variety of system telemetry (CPU, memory, disk, network) in addition to MongoDB specific telemetry.
+Datadog recommends installing the Agent directly on the MongoDB host, as that enables the Agent to collect a variety of system telemetry (CPU, memory, disk, network) in addition to MongoDB specific telemetry.
 
-### Install the beta version of the Datadog Agent
+#### Install the beta version of the Datadog Agent
 
 The Database Monitoring feature for MongoDB is available in the beta version of the Datadog Agent. To install the beta version of the Datadog Agent, follow the instructions for your environment:
 
@@ -169,7 +172,7 @@ The Database Monitoring feature for MongoDB is available in the beta version of 
 {{% /tab %}}
 {{< /tabs >}}
 
-### Create configuration file
+#### Create the configuration file
 
 {{< tabs >}}
 {{% tab "Standalone" %}}
@@ -183,7 +186,7 @@ The Database Monitoring feature for MongoDB is available in the beta version of 
 {{% /tab %}}
 {{< /tabs >}}
 
-### Setup the Agent
+#### Set up the Agent
 
 {{< tabs >}}
 {{% tab "Linux Host" %}}
