@@ -147,6 +147,29 @@ To trigger a workflow from incidents, create an incident notification rule:
 1. Enter a **Template** and configure the **Renotify** settings for the notification rule.
 1. Click **Save**.
 
+<div class="alert alert-info">Scheduled and triggered workflows don't run automatically until you've published them. To publish the workflow, click <strong>Publish</strong> from the workflow's page. Published workflows accrue costs based on workflow executions. For more information, see the <a href="https://www.datadoghq.com/pricing/?product=workflow-automation#products">Datadog Pricing page</a>.</div>
+
+## Trigger a workflow with an API call
+
+Triggering a workflow using an API call requires [API key][8] and an [Application key][9] with the `workflows_run` scope. For information on adding a scope to an application key, see [Scopes][10].
+
+<div class="alert alert-info">Unscoped keys do not include the <code>workflows_run</code> scope by default. Ensure that you're following security best practice and use an application key with the minimum scopes needed to perform the desired task.</div>
+
+To trigger a workflow with an API call:
+1. Create a workflow with a **API** trigger, or add an **API** trigger to an existing workflow.
+1. On the workflow canvas, click **API** trigger and note the example workflow cURL request, which includes the required headers and data to trigger your workflow. An API call to trigger a workflow looks something like this:
+   ```curl
+   curl -X POST \
+     -H "Content-Type: application/json" \
+     -H "DD-API-KEY: ${DD_API_KEY}" \
+     -H "DD-APPLICATION-KEY: ${DD_APP_KEY}" \
+     -d {} \
+     https://api.datadoghq.com/api/v2/workflows/abcd-1234/instances
+   ```
+1. Click **Save**.
+
+<div class="alert alert-info">Scheduled and triggered workflows don't run automatically until you've published them. To publish the workflow, click <strong>Publish</strong> from the workflow's page. Published workflows accrue costs based on workflow executions. For more information, see the <a href="https://www.datadoghq.com/pricing/?product=workflow-automation#products">Datadog Pricing page</a>.</div>
+
 ## Trigger a workflow on a schedule
 
 To schedule a workflow run:
@@ -155,6 +178,7 @@ To schedule a workflow run:
 1. Enter a time and frequency for the run.
 1. (Optional) Enter a description for the workflow in the **Memo** field.
 1. Click **Save**.
+1. Click **Publish** to 
 
 <div class="alert alert-info">Scheduled and triggered workflows don't run automatically until you've published them. To publish the workflow, click <strong>Publish</strong> from the workflow's page. Published workflows accrue costs based on workflow executions. For more information, see the <a href="https://www.datadoghq.com/pricing/?product=workflow-automation#products">Datadog Pricing page</a>.</div>
 
@@ -181,3 +205,6 @@ The initial run history for a workflow provides a panel with the list of previou
 [5]: /service_management/workflows/build/#input-parameters
 [6]: https://app.datadoghq.com/incidents/settings#Rules
 [7]: https://datadoghq.slack.com/
+[8]: /account_management/api-app-keys/#api-keys
+[9]: /account_management/api-app-keys/#application-keys
+[10]: /account_management/api-app-keys/#scopes
