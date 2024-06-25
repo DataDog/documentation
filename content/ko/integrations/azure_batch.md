@@ -27,7 +27,7 @@ version: '1.0'
 Azure Batch Service는 Azure 애플리케이션용 관리형 작업 스케줄러 및 프로세서입니다. Azure Batch Service에서 메트릭을 얻으면 다음을 할 수 있습니다.
 
 - Batch Account 성능 가시화
-- Batch Account와 애플리케이션의 상관 관계 파악
+- Batch Account의 성능과 애플리케이션의 상관 관계 파악
 
 ## 설정
 
