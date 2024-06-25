@@ -262,6 +262,16 @@ For example:
 DatadogSdk.instance.setUserInfo("1234", "John Doe", "john@doe.com");
 ```
 
+## Retrieve the RUM session ID
+
+Retrieving the RUM session ID can be helpful for troubleshooting. For example, you can attach the session ID to support requests, emails, or bug reports so that your support team can later find the user session in Datadog.
+
+You can access the RUM session ID at runtime without waiting for the `sessionStarted` event:
+
+```dart
+final sessionId = await DatadogSdk.instance.rum?.getCurrentSessionId()
+```
+
 ## Modify or drop RUM events
 
 **Note**: This feature is not yet available for Flutter web applications.

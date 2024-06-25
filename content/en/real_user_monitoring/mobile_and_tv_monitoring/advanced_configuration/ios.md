@@ -265,6 +265,18 @@ Datadog.setUserInfo(id: "1234", name: "John Doe", email: "john@doe.com")
 {{% /tab %}}
 {{< /tabs >}}
 
+## Retrieve the RUM session ID
+
+Retrieving the RUM session ID can be helpful for troubleshooting. For example, you can attach the session ID to support requests, emails, or bug reports so that your support team can later find the user session in Datadog.
+
+You can access the RUM session ID at runtime without waiting for the `sessionStarted` event:
+
+```swift
+RumMonitor.shared().currentSessionID(completion: { sessionId in
+  currentSessionId = sessionId
+})
+```
+
 ## Initialization Parameters
 
 You can use the following properties in `Datadog.Configuration` when creating the Datadog configuration to initialize the library:

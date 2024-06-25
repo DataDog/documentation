@@ -484,56 +484,17 @@ To modify some attributes in your RUM events, or to drop some of the events enti
    
    **Note**: If you return null from the `EventMapper<T>` implementation, the event is dropped.
 
-## Retrieving the RUM session ID
+## Retrieve the RUM session ID
 
 Retrieving the RUM session ID can be helpful for troubleshooting. For example, you can attach the session ID to support requests, emails, or bug reports so that your support team can later find the user session in Datadog.
 
-You can access the RUM session ID at runtime without waiting for the `sessionStarted` event.
+You can access the RUM session ID at runtime without waiting for the `sessionStarted` event:
 
-To access the RUM session ID:
-
-{{< tabs >}}
-{{% tab "Kotlin" %}}
-   ```kotlin
-      fun `M send correct sessionId W getCurrentSessionId { session started, sampled in }`(
-          @StringForgery(type = StringForgeryType.ASCII) key: String,
-          @StringForgery name: String
-      ) {
-          // Given
-          testedMonitor = DatadogRumMonitor(
-              fakeApplicationId,
-              mockSdkCore,
-              100.0f,
-              fakeBackgroundTrackingEnabled,
-              fakeTrackFrustrations,
-              mockWriter,
-              mockHandler,
-              mockTelemetryEventHandler,
-              mockResolver,
-              mockCpuVitalMonitor,
-              mockMemoryVitalMonitor,
-              mockFrameRateVitalMonitor,
-              mockSessionListener
-          )
-          val completableFuture = CompletableFuture<String>()
-          testedMonitor.startView(key, name, fakeAttributes)
-          Thread.sleep(PROCESSING_DELAY)
-
-          // When
-          testedMonitor.getCurrentSessionId { completableFuture.complete(it) }
-
-          // Then
-          completableFuture.thenAccept {
-              argumentCaptor<String> {
-                  verify(mockSessionListener).onSessionStarted(capture(), any())
-
-                  assertThat(it).isEqualTo(firstValue)
-              }
-          }.orTimeout(PROCESSING_DELAY, TimeUnit.MILLISECONDS)
-      }
-   ```
-{{% /tab %}}
-{{< /tabs >}}
+```kotlin
+GlobalRumMonitor.get().getCurrentSessionId { sessionId ->
+  currentSessionId = sessionId
+}
+```
 
 ## Further Reading
 
