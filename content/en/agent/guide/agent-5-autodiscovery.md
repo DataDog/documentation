@@ -1,6 +1,5 @@
 ---
 title: Autodiscovery with Agent v5
-kind: guide
 private: true
 aliases:
   - /agent/faq/agent-5-autodiscovery
@@ -237,7 +236,6 @@ The following Pod annotation defines two templates-equivalent to those from the 
 
 ```yaml
 apiVersion: v1
-kind: Pod
 metadata:
   name: apache
   annotations:
@@ -260,7 +258,6 @@ If you define pods with Deployments, don't add template annotations to the Deplo
 
 ```yaml
 apiVersion: apps/v1beta1
-kind: Deployment
 metadata: # Don't add templates here
   name: apache-deployment
 spec:

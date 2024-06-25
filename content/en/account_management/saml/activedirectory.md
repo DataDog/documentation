@@ -1,6 +1,5 @@
 ---
 title: Microsoft Active Directory Federation Services SAML IdP
-kind: documentation
 aliases:
   - /account_management/faq/how-do-i-setup-microsoft-active-directory-federation-services-as-a-saml-idp/
 further_reading:

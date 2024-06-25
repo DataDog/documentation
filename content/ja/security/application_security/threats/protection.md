@@ -4,7 +4,6 @@ further_reading:
   tag: Documentation
   text: Datadog による Application Security Management
 is_beta: true
-kind: documentation
 title: 保護
 ---
 

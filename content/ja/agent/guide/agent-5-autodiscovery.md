@@ -1,7 +1,6 @@
 ---
 aliases:
 - /ja/agent/faq/agent-5-autodiscovery
-kind: ガイド
 private: true
 title: Agent v5 を使用したオートディスカバリー
 ---
@@ -237,7 +236,6 @@ Kubernetes ポッドを直接定義する (`kind: Pod`) 場合は、各ポッド
 
 ```yaml
 apiVersion: v1
-kind: Pod
 metadata:
   name: apache
   annotations:
@@ -260,7 +258,6 @@ Deployment からポッドを定義する場合は、テンプレートアノテ
 
 ```yaml
 apiVersion: apps/v1beta1
-kind: Deployment
 metadata: # ここにテンプレートを追加しないでください
   name: apache-deployment
 spec:

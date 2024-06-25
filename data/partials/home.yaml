@@ -7,7 +7,7 @@ guides:
     link_text: Getting Started with the Agent
     link: getting_started/agent/
   - title: Set Up Integrations
-    desc: Gather metrics, traces, and logs with over 700 built-in integrations to send to Datadog.
+    desc: Gather metrics, traces, and logs with over 750 built-in integrations to send to Datadog.
     link_text: Getting Started with Integrations
     link: getting_started/integrations/
   - title: Get Started in App
@@ -95,6 +95,10 @@ nav_sections:
         link: data_streams/
         icon: datastreams-monitoring
         desc: Track and improve performance of your data streaming pipelines
+      - title: Data Jobs Monitoring
+        link: data_jobs/
+        icon: data-jobs-monitoring
+        desc: Monitor and optimize your data processing jobs
       - title: Universal Service Monitoring
         link: universal_service_monitoring/
         icon: usm

@@ -16,7 +16,6 @@ further_reading:
 - link: /continuous_integration/troubleshooting/
   tag: Documentation
   text: CI の表示に関するトラブルシューティング
-kind: documentation
 title: Datadog の CI Pipeline Visibility
 ---
 

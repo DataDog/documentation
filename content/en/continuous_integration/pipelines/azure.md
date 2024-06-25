@@ -1,6 +1,5 @@
 ---
 title: Set up Tracing on an Azure Pipeline
-kind: documentation
 aliases:
   - /continuous_integration/setup_pipelines/azure
 further_reading:

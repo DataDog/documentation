@@ -19,7 +19,7 @@ _서버리스(Serverless)_는 개발자가 인프라스트럭처를 자체적으
 ### 샘플 앱 설치하기
 
 1. [CloudFormation Stack을 시작하세요][3]. 이 링크를 사용하면 CloudFormation의 **Create stack** 페이지로 이동합니다.
-2. [Datadog API key][4]와 [Datadog 사이트][5] ({{< region-param key="dd_site" code="true" >}})를 입력하세요.
+2. [Datadog API 키][4]와 [Datadog 사이트][5] ({{< region-param key="dd_site" code="true" >}})를 입력하세요.
 
   {{< img src="getting_started/serverless/aws_create_stack.png" alt="두 함수의 클로즈업 화면" style="width:80%;">}}
 
@@ -52,7 +52,7 @@ def handler(event, context):
 
 [서버리스 보기에서 샘플 앱 함수를 확인][6]할 수 있습니다.
 
-{{< img src="getting_started/serverless/dd_serverless_view.png" alt="서버리스 모니터링: 서버리스 보기, 익스플로러 페이지" style="width:80%;">}}
+{{< img src="getting_started/serverless/serverless_view_2024.png" alt="서버리스 모니터링: 서버리스 보기, 탐색기 페이지" style="width:80%;">}}
 
 ## 서버리스 보기 화면
 
