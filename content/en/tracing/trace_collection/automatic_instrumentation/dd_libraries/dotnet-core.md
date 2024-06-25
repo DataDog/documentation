@@ -117,6 +117,16 @@ To install the .NET Tracer machine-wide:
    Other distributions
    : `sudo tar -C /opt/datadog -xzf datadog-dotnet-apm<TRACER_VERSION>-tar.gz && /opt/datadog/createLogPath.sh`
 
+   For chiseled or distro-less Docker image (without shell)
+   : use `ADD` to put the tracer files in the container, and `COPY --chown=$APP_UID` with an empty folder as source to create the logs path.
+   For instance:
+   ```
+   ADD datadog-dotnet-apm-<TRACER_VERSION>.tar.gz /opt/datadog/
+   COPY --chown=$APP_UID --from=<OTHER_STAGE> /empty/ /var/log/datadog/dotnet/
+   ```
+
+   
+
 
 [1]: https://github.com/DataDog/dd-trace-dotnet/releases
 {{% /tab %}}
