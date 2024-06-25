@@ -1,4 +1,4 @@
-4F09D16B---
+---
 aliases:
 - /fr/agent/faq/upgrade-to-agent-v6
 - /fr/agent/guide/upgrade-to-agent-v6
