@@ -30,7 +30,7 @@ further_reading:
 ---
 ## Compatibility requirements
 
-The latest Node.js Tracer supports versions `>=14`. For a full list of Datadog's Node.js version and framework support (including legacy and maintenance versions), see the [Compatibility Requirements][1] page.
+The latest Node.js Tracer supports Node.js versions `>=18`. For a full list of Datadog's Node.js version and framework support (including legacy and maintenance versions), see the [Compatibility Requirements][1] page.
 
 ## Getting started
 
@@ -38,17 +38,17 @@ Before you begin, make sure you've already [installed and configured the Agent][
 
 ### Install the Datadog tracing library
 
-To install the Datadog tracing library using npm for Node.js 14+, run:
+To install the Datadog tracing library using npm for Node.js 18+, run:
 
   ```shell
   npm install dd-trace --save
   ```
-To install the Datadog tracing library (version 2.x of `dd-trace`) for end-of-life Node.js version 12, run:
+To install the Datadog tracing library (version 4.x of `dd-trace`) for end-of-life Node.js version 16, run:
   ```shell
-  npm install dd-trace@latest-node12
+  npm install dd-trace@latest-node16
   ```
 For more information on Datadog's distribution tags and Node.js runtime version support, see the [Compatibility Requirements][1] page.
-If you are upgrading from a previous major version of the library (0.x, 1.x, or 2.x) to another major version (2.x or 3.x), read the [Migration Guide][5] to assess any breaking changes.
+If you are upgrading from a previous major version of the library (0.x, 1.x, 2.x or 4.x) to another major version, read the [Migration Guide][5] to assess any breaking changes.
 
 ### Import and initialize the tracer
 
