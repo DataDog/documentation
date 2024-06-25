@@ -885,7 +885,9 @@ To install OpenShift, see the [Kubernetes installation instructions](?tab=kubern
 {{< tabs >}}
 {{% tab "Ansible" %}}
 
-<div class="alert alert-info">The Datadog Ansible collection supports most Debian, RHEL-based and SUSE-based Linux distributions, macOS, and Windows.<br>Requires Ansible version 2.10 or higher.</div>
+Installing the Agent via Ansible requires Ansible version 2.10 or higher.
+
+<div class="alert alert-info">The Datadog Ansible collection supports most Debian, RHEL-based and SUSE-based Linux distributions, macOS, and Windows.<br></div>
 
 ### Prerequisites
 
@@ -957,11 +959,11 @@ To use a specific Agent check or integration on one of your nodes, you can use t
             ignore_denied_access: true
 ```
 
-You can find more examples of the Agent role usage on the Github repo for the [standalone role][103].
+You can find more examples of the Agent role usage on the GitHub repo for the [standalone role][103].
 
 ### Metrics and events
 
-To get metrics and events on Datadog after Ansible runs, see the Ansible callback project's [Github page][104].
+To get metrics and events on Datadog after Ansible runs, see the Ansible callback project's [GitHub page][104].
 
 [101]: https://console.redhat.com/ansible/automation-hub/repo/published/datadog/dd/
 [102]: /agent/guide/ansible_standalone_role/#ansible-role-versus-ansible-collection
@@ -1016,6 +1018,7 @@ To get metrics and events on Datadog after Ansible runs, see the Ansible callbac
       report = true
       pluginsync = true
       ```
+
    1. In your manifest, add the `puppet_run_reports` option to your Puppet server. For example:
       ```puppet
       node "puppet" {
@@ -1045,11 +1048,12 @@ node "elastic-node1.mydomain.com" {
 }
 ```
 
-Refer to the [Github repository of the module][103] for more examples and advanced use cases.
+Refer to the [GitHub repository of the module][103] for more examples and advanced use cases.
 
 [101]: https://forge.puppetlabs.com/modules/datadog/datadog_agent/readme
 [102]: https://github.com/DataDog/puppet-datadog-agent/tree/main/manifests/integrations
 [103]: https://github.com/DataDog/puppet-datadog-agent
+[104]: 
 
 {{% /tab %}}
 
@@ -1058,9 +1062,9 @@ Refer to the [Github repository of the module][103] for more examples and advanc
 <div class="alert alert-info">Requires Chef version 10.14.x or higher.</a></div>
 
 1. Add the Datadog cookbook:
-   - If you are using [Berkshelf][1], add the cookbook to your Berksfile:
+   - If you are using [Berkshelf][101], add the cookbook to your Berksfile:
       ```shell
-      cookbook 'datadog'
+      cookbook 'datadog', '~> 4.0'
       ```
 
    - If you're not using Berkshelf, install the cookbook in to your repository using Knife:
@@ -1071,8 +1075,15 @@ Refer to the [Github repository of the module][103] for more examples and advanc
 1. Set the Datadog-specific attributes in either a role, environment, or another recipe. Replace `MY_API_KEY` with your Datadog API key:
    ```chef
    node.default['datadog']['api_key'] = "MY_API_KEY"
+
    # Use an existing application key or create a new one for Chef
    node.default['datadog']['application_key'] = "Generate Application Key"
+
+   # Enable install for Agent version 6
+   node.default['datadog']['agent_major_version'] = 6
+
+   # Set the Datadog site
+   node.default['datadog']['site'] = "datad0g.com"
    ```
 
 1. Upload the updated cookbook to your Chef server:
@@ -1094,19 +1105,27 @@ Refer to the [Github repository of the module][103] for more examples and advanc
 
 1. Wait for the next scheduled `chef-client` run.
 
-[1]: https://docs.chef.io/workstation/berkshelf/
+### Windows upgrades
+
+If you're using Chef with a Windows installation, follow the [Chef instructions][103] in Datadog to upgrade your Agent. 
+
+For more information and examples, see the [Agent GitHub repository][102].
+
+[101]: https://docs.chef.io/workstation/berkshelf/
+[102]: https://github.com/DataDog/chef-datadog
+[103]: https://app.datadoghq.com/help/agent_fix#chef
 
 {{% /tab %}}
 
 {{% tab "SaltStack" %}}
 
 <div class="alert alert-info">The Datadog Saltstack formula only supports Debian-based and RedHat-based systems.<br><br>
-The following instructions add the Datadog formula to the base Salt environment. To add it to another Salt environment, replace references to <code>base</code> with the name of your Salt environment.</div>
+The following instructions add the Datadog formula to the <code>base</code> Salt environment. To add it to another Salt environment, replace references to <code>base</code> with the name of your Salt environment.</div>
 
 <!-- vale Datadog.inclusive = NO -->
 
 ### Install using `gitfs_remotes`
-1. Install the [Datadog formula][1] in the base environment of your Salt Master node, using the `gitfs_remotes` option in your Salt Master configuration file (by default `/etc/salt/master`):
+1. Install the [Datadog formula][101] in the base environment of your Salt Master node, using the `gitfs_remotes` option in your Salt Master configuration file (by default `/etc/salt/master`):
    ```yaml
    fileserver_backend:
    - roots # Active by default, necessary to be able to use the local salt files we define in the next steps
@@ -1130,9 +1149,10 @@ The following instructions add the Datadog formula to the base Salt environment.
 
 ### Install by cloning the Datadog formula
 
-1. Clone the [Datadog formula][1] on your Salt Master node:
+1. Clone the [Datadog formula][101] on your Salt Master node:
    ```shell
-   mkdir -p /srv/formulas && cd /srv/formulas git clone https://github.com/DataDog/datadog-formula.git
+   mkdir -p /srv/formulas && cd /srv/formulas
+   git clone https://github.com/DataDog/datadog-formula.git
    ```
 1. Add the cloned formula to the base environment in the `file_roots` of your Salt Master configuration file (by default `/etc/salt/master`):
    ```yaml
@@ -1157,7 +1177,7 @@ The following instructions add the Datadog formula to the base Salt environment.
      config:
        api_key: MY_API_KEY
      install_settings:
-       agent_version: <AGENT5_VERSION>
+       agent_version: <AGENT6_VERSION>
    ```
 
 1. Add the `datadog.sls` pillar file to the top pillar file (by default `/srv/pillar/top.sls`):
@@ -1173,7 +1193,7 @@ The following instructions add the Datadog formula to the base Salt environment.
      config:
        api_key: MY_API_KEY
      install_settings:
-       agent_version: <AGENT5_VERSION>
+       agent_version: <AGENT6_VERSION>
      checks:
        directory:
          config:
@@ -1182,25 +1202,18 @@ The following instructions add the Datadog formula to the base Salt environment.
                name: "pillars"
    ```         
 
-Refer to the formula [Github repository][1] for logs configuration, check examples, and advanced use cases.
+Refer to the formula [GitHub repository][101] for logs configuration, check examples, and advanced use cases.
 <!-- vale Datadog.inclusive = YES -->
-[1]: https://github.com/DataDog/datadog-formula
+[101]: https://github.com/DataDog/datadog-formula
 {{% /tab %}}
 
 {{< /tabs >}}
 
 ## Install from source
 
-<div class="alert alert-info">The Datadog Agent requires python 2.7 and <code>sysstat</code> on Linux.</div>
+Follow [the instructions in the Agent GitHub repository][11] to build the Agent 6` .deb` and `.rpm` packages on Linux with Docker.
 
-Use the one-step source install script. Replace `MY_API_KEY` with your Datadog API key:
-```shell
-DD_API_KEY=MY_API_KEY sh -c "$(curl -L https://raw.githubusercontent.com/DataDog/dd-agent/master/packaging/datadog-agent/source/setup_agent.sh)"
-``` 
-
-The script installs the Agent in its own self-contained sandbox located at `~/.datadog-agent`.
-
-To make the installation permanent, set up your `init` daemon to run `$sandbox_dir/bin/agent` with `$sandbox_dir` set at the current working directory. The sandbox directory is portable and can run from any location on your file system. The sandbox directory is set to `~/.datadog-agent` by default.
+Alternatively, you can build the Agent binary for version 6 following the [Getting Started instructions][12].
 
 ## Further reading
 
@@ -1217,3 +1230,5 @@ To make the installation permanent, set up your `init` daemon to run `$sandbox_d
 [8]: /integrations/azure/
 [9]: https://github.com/DataDog/dd-agent/wiki/Windows-Agent-Installation
 [10]: /agent/guide/windows-agent-ddagent-user/
+[11]: https://github.com/DataDog/datadog-agent/blob/main/docs/dev/agent_omnibus.md#building-inside-docker-linux-only-recommended
+[12]: https://github.com/DataDog/datadog-agent#getting-started
