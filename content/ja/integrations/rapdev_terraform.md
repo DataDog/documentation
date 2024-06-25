@@ -31,6 +31,7 @@ categories:
 - 構成 & デプロイ
 - developer tools
 - マーケットプレイス
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -39,7 +40,6 @@ integration_id: rapdev-terraform
 integration_title: Terraform
 integration_version: ''
 is_public: true
-custom_kind: integration
 legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0
@@ -70,8 +70,14 @@ tile:
   configuration: README.md#Setup
   description: terraform アカウントと失敗した実行を監視する
   media:
-  - caption: Terraform ダッシュボード
-    image_url: images/terraform_dashboard.png
+  - caption: Terraform の組織とワークスペースの実行
+    image_url: images/1.jpg
+    media_type: image
+  - caption: Terraform の組織トークンと権限
+    image_url: images/2.jpg
+    media_type: image
+  - caption: Terraform の権限監査と Agent
+    image_url: images/3.jpg
     media_type: image
   overview: README.md#Overview
   support: README.md#Support
@@ -86,11 +92,11 @@ tile:
 
 Terraform とのインテグレーションにより、組織は Terraform のアカウントをアクティブに監視し、その動作状況や使用頻度をよりよく理解することができます。このインテグレーションはさらに権限の監査も提供します。
 
-### ライブラリ
+### ダッシュボード
 
 1. RapDev Terraform ダッシュボード
 
-## Agent
+## サポート
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから RapDev.io にお問い合わせください。
 
 - サポート: support@rapdev.io
