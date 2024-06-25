@@ -50,6 +50,8 @@ func main() {
 The Go tracer supports additional environment variables and functions for configuration.
 See all available options in the [configuration documentation][3].
 
+### Unified service tagging
+
 `DD_VERSION`
 : Set the application's version, for example: `1.2.3`, `6c44da20`, `2020.02.13`
 
@@ -59,17 +61,7 @@ See all available options in the [configuration documentation][3].
 `DD_ENV`
 : Set the application's environment, for example: prod, pre-prod, staging.
 
-`DD_AGENT_HOST`
-: **Default**: `localhost` <br>
-Override the default trace Agent host address for trace submission.
-
-`DD_TRACE_AGENT_PORT`
-: **Default**: `8126` <br>
-Overrides the default trace Agent port for Datadog trace submission. If the [Agent configuration][13] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then the library configuration `DD_DOGSTATSD_PORT` must match it.
-
-`DD_DOGSTATSD_PORT`
-: **Default**: `8125` <br>
-Overrides the default trace Agent port for DogStatsD metric submission. If the [Agent configuration][13] sets `dogstatsd_port` or `DD_DOGSTATSD_PORT` to something other than the default `8125`, then the library configuration `DD_DOGSTATSD_PORT` must match it.
+### Spans  
 
 `DD_TRACE_SAMPLING_RULES`
 : **Default**: `nil`<br>
@@ -84,9 +76,6 @@ A JSON array of objects. Each object must have a `"sample_rate"`. The `"name"`,`
   - Set the sample rate to 40% for services that have `HTTP GET` resource name: `'[{"resource": "HTTP GET", "sample_rate": 0.4}]'`.
   - Set the sample rate to 100% for services that have a `tier` tag with the value `premium`: `'[{"tags": {"tier":"premium"}, "sample_rate": 1}]'`.
 
-`DD_TRACE_SAMPLE_RATE`
-: Enable ingestion rate control.
-
 `DD_SPAN_SAMPLING_RULES`
 : **Default**: `nil`<br>
 A JSON array of objects. Each object must have a `"sample_rate"`. The `"name"`,`"service"`, `"resource"`, and `"tags"` fields are optional. Rules are applied in configured order to determine the span's sample rate. The `sample_rate` value must be between 0.0 and 1.0 (inclusive).
@@ -98,12 +87,17 @@ A JSON array of objects. Each object must have a `"sample_rate"`. The `"name"`,`
   - Set the span sample rate to 50% for the service `my-service` and operation name `http.request`, up to 50 traces per second: `'[{"service": "my-service", "name": "http.request", "sample_rate":0.5, "max_per_second": 50}]'`
   - Set the sample rate to 100% for services that have a `priority` tag with the value `high`: `'[{"tags": {"priority":"high"}, "sample_rate": 1}]'`.
 
+### Traces
+
+`DD_TRACE_AGENT_PORT`
+: **Default**: `8126` <br>
+Overrides the default trace Agent port for Datadog trace submission. If the [Agent configuration][13] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then the library configuration `DD_DOGSTATSD_PORT` must match it.
+
+`DD_TRACE_SAMPLE_RATE`
+: Enable ingestion rate control.
+
 `DD_TRACE_RATE_LIMIT`
 : Maximum number of spans to sample per-second, per-Go process. Defaults to 100 when DD_TRACE_SAMPLE_RATE is set. Otherwise, delegates rate limiting to the Datadog Agent.
-
-`DD_TAGS`
-: **Default**: [] <br>
-A list of default tags to be added to every span and profile. Tags can be separated by commas or spaces, for example: `layer:api,team:intake,key:value` or `layer:api team:intake key:value`.
 
 `DD_TRACE_STARTUP_LOGS`
 : **Default**: `true` <br>
@@ -113,17 +107,9 @@ Enable startup configuration and the diagnostic log.
 : **Default**: `false` <br>
 Enable debug logging in the tracer.
 
-`DD_TRACE_ENABLED`
-: **Default**: `true` <br>
-Enable web framework and library instrumentation. When false, the application code doesn't generate any traces.
-
 `DD_SERVICE_MAPPING`
 : **Default**: `null` <br>
 Dynamically rename services through configuration. Services can be separated by commas or spaces, for example: `mysql:mysql-service-name,postgres:postgres-service-name`, `mysql:mysql-service-name postgres:postgres-service-name`.
-
-`DD_INSTRUMENTATION_TELEMETRY_ENABLED`
-: **Default**: `true` <br>
-Datadog may collect [environmental and diagnostic information about your system][6] to improve the product. When false, this telemetry data will not be collected.
 
 `DD_TRACE_PARTIAL_FLUSH_ENABLED`
 : **Default**: `false` <br>
@@ -147,6 +133,28 @@ List of comma-separated HTTP headers to be used as span tags. Optionally specify
   - Capture request header `my-header`: `"DD_TRACE_HEADER_TAGS=my-header"`
   - Capture request headers `my-header-1` and `my-header-2`: `"DD_TRACE_HEADER_TAGS=my-header1,my-header-2"`
   - Capture request header `my-header` and rename it to `my-tag`: `"DD_TRACE_HEADER_TAGS=my-header:my-tag"`
+
+### Agent  
+
+`DD_AGENT_HOST`
+: **Default**: `localhost` <br>
+Override the default trace Agent host address for trace submission.
+
+`DD_DOGSTATSD_PORT`
+: **Default**: `8125` <br>
+Overrides the default trace Agent port for DogStatsD metric submission. If the [Agent configuration][13] sets `dogstatsd_port` or `DD_DOGSTATSD_PORT` to something other than the default `8125`, then the library configuration `DD_DOGSTATSD_PORT` must match it.
+
+`DD_TAGS`
+: **Default**: [] <br>
+A list of default tags to be added to every span and profile. Tags can be separated by commas or spaces, for example: `layer:api,team:intake,key:value` or `layer:api team:intake key:value`.
+
+`DD_TRACE_ENABLED`
+: **Default**: `true` <br>
+Enable web framework and library instrumentation. When false, the application code doesn't generate any traces.
+
+`DD_INSTRUMENTATION_TELEMETRY_ENABLED`
+: **Default**: `true` <br>
+Datadog may collect [environmental and diagnostic information about your system][6] to improve the product. When false, this telemetry data will not be collected.
 
 ## Configure APM environment name
 
