@@ -29,7 +29,7 @@ By default, Product Analytics data is retained for 15 months. Learn more about [
 
 ## Measure user retention
 
-Use [Retention Analysis][2] to measure how a group of users engage with specific features over time to understand where drop-offs occur.
+User retention is a metric for measuring the percentage of active users who continue to use your product, app, or service over a set period of time. Use [Retention Analysis][2] to measure how a group of users engage with specific features over time to understand where drop-offs occur.
 
 {{< img src="real_user_monitoring/retention_analysis/differing-events-retention-graph.png" alt="Retention graph for differing events" style="width:90%;" >}}
 
@@ -45,17 +45,13 @@ See different visualizations of the user experience when interacting with your a
 - **[Sankey][5]**: Explore aggregated workflows in a single visualization to aid in answering questions about user journeys.
 - **[Conversion][6]**: Track conversion rates over time and compare it against specific attributes that may have affected conversion rates, such as browser type or geography.
 
-## Measure user retention
-
-User retention is a metric for measuring the percentage of active users who continue to use your product, app, or service over a set period of time. Use [Retention Analysis][5] to measure how a group of users engage with specific features to understand where drop-off occurs.
-
 ## Create user segments
 
-Segments are users grouped by specific characteristics or behaviors. [Segmentation][6] in Datadog allows you to analyze and understand specific groups or segments of your user base.
+Segments are users grouped by specific characteristics or behaviors. [Segmentation][7] in Datadog allows you to analyze and understand specific groups or segments of your user base.
 
 ## Visualize user interactions with heatmaps
 
-[Heatmaps][7] visualize the most interacted with elements on a page to see where hot spots of activity are, along with analyzing scroll depth to see how far users scrolled down a given page. You can view every swipe, scroll, and click with a pixel-perfect reproduction of exactly what users went through on both browser and mobile applications to identify high-or low-performing content.
+[Heatmaps][8] visualize the most interacted with elements on a page to see where hot spots of activity are, along with analyzing scroll depth to see how far users scrolled down a given page. You can view every swipe, scroll, and click with a pixel-perfect reproduction of exactly what users went through on both browser and mobile applications to identify high-or low-performing content.
 
 {{< img src="real_user_monitoring/heatmaps/heatmap_v2.png" alt="An overview of the heatmap functionality." style="width:100%;">}}
 
@@ -68,4 +64,5 @@ Segments are users grouped by specific characteristics or behaviors. [Segmentati
 [4]: /product_analytics/journeys/funnel_analysis
 [5]: /product_analytics/journeys/sankey
 [6]: /product_analytics/journeys#conversion
-[7]: /product_analytics/heatmaps
+[7]: /product_analytics/segmentation/
+[8]: /product_analytics/heatmaps
