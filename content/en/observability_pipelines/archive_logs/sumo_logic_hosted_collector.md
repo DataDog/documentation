@@ -57,6 +57,7 @@ Select the cloud provider you are using to archive your logs.
 {{% /collapse-content %}}
 
 {{% collapse-content title="Google Cloud Storage" level="h4" %}}
+
 {{% observability_pipelines/configure_log_archive/google_cloud_storage/instructions %}}
 
 {{< tabs >}}
@@ -86,33 +87,8 @@ Select the cloud provider you are using to archive your logs.
 
 {{% /collapse-content %}}
 {{% collapse-content title="Azure Storage" level="h4" %}}
+
 {{% observability_pipelines/configure_log_archive/azure_storage/instructions %}}
-
-{{< tabs >}}
-{{% tab "Docker" %}}
-
-{{% observability_pipelines/configure_log_archive/azure_storage/docker %}}
-
-{{% /tab %}}
-{{% tab "Azure AKS" %}}
-
-{{% observability_pipelines/configure_log_archive/azure_storage/azure_aks %}}
-
-{{% /tab %}}
-{{% tab "Linux (APT)" %}}
-
-{{% observability_pipelines/configure_log_archive/azure_storage/linux_apt %}}
-
-{{% /tab %}}
-{{% tab "Linux (RPM)" %}}
-
-{{% observability_pipelines/configure_log_archive/azure_storage/linux_rpm %}}
-
-{{% /tab %}}
-{{< /tabs >}}
-
-{{% observability_pipelines/configure_log_archive/azure_storage/connect_datadog_log_archives %}}
-
 
 {{% /collapse-content %}}
 

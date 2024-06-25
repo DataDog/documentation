@@ -90,31 +90,6 @@ If you already have a Datadog Log Archive configured for Observability Pipelines
 
 {{% observability_pipelines/configure_log_archive/azure_storage/instructions %}}
 
-{{< tabs >}}
-{{% tab "Docker" %}}
-
-{{% observability_pipelines/configure_log_archive/azure_storage/docker %}}
-
-{{% /tab %}}
-{{% tab "Azure AKS" %}}
-
-{{% observability_pipelines/configure_log_archive/azure_storage/azure_aks %}}
-
-{{% /tab %}}
-{{% tab "Linux (APT)" %}}
-
-{{% observability_pipelines/configure_log_archive/azure_storage/linux_apt %}}
-
-{{% /tab %}}
-{{% tab "Linux (RPM)" %}}
-
-{{% observability_pipelines/configure_log_archive/azure_storage/linux_rpm %}}
-
-{{% /tab %}}
-{{< /tabs >}}
-
-{{% observability_pipelines/configure_log_archive/azure_storage/connect_datadog_log_archives %}}
-
 {{% /collapse-content %}}
 
 ## Set up Observability Pipelines
