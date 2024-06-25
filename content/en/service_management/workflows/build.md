@@ -216,7 +216,6 @@ To add a condition:
 
 {{< img src="service_management/workflows/wait-until-condition.png" alt="An example of wait until condition" style="width:100%;" >}}
 
-
 ## Edit a workflow with JSON
 
 Edit a workflow in JSON by clicking **Edit JSON Spec** on your workflow page. The JSON editor also allows you to:
