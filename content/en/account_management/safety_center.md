@@ -60,7 +60,7 @@ Having inactive user accounts or **stale pending user invites** increases the su
 {{< img src="account_management/safety_center/delete-pending-invite.png" alt="Deleting pending invite" style="width:70%;" >}}
 
 ### Admins
-Giving **admin access** to users without careful consideration increases potential security risks in case a user account with elevated privileges gets compromised. To keep the number of users with **admin access** low, review your admin users regularly and revoke admin privileges if users do not require them.
+Giving **admin access** to users without careful consideration increases potential security risks in the event where a user account with elevated privileges gets compromised. To keep the number of users with **admin access** low, review your admin users regularly and revoke admin privileges if users do not require them.
 
 {{< img src="account_management/safety_center/edit-admin-user.png" alt="Editing admin user" style="width:70%;" >}}
 
