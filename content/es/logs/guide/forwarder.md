@@ -359,7 +359,7 @@ Datadog recomienda utilizar al menos 10 de concurrencia reservada, pero este val
 ### Reenvío de logs (opcional)
 
 `DdTags`
-: Añade etiquetas (tags) personalizadas a logs reenviados, en cadenas delimitadas por comas, sin comas finales, como `env:prod,stack:classic`.
+: Añade etiquetas personalizadas a logs reenviados, en cadenas delimitadas por comas, sin comas finales, como `env:prod,stack:classic`.
 
 `DdMultilineLogRegexPattern`
 : Utiliza la expresión regular proporcionada para detectar una nueva línea de logs para logs de múltiples líneas de S3, como `\d{2}\/\d{2}\/\d{4}` para los logs de múltiples líneas que comienzan con el patrón "11/10/2014".
