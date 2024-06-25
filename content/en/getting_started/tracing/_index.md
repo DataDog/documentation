@@ -76,7 +76,7 @@ To set up Datadog APM without needing to modify your application's code or the d
     DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="<YOUR_DD_SITE>" DD_APM_INSTRUMENTATION_ENABLED=host DD_ENV=<AGENT_ENV> bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
     ```
  
-    Replace `<YOUR_DD_API_KEY>` with your [Datadog API key][4], `<YOUR_DD_SITE>` with your [Datadog site][3], and `<AGENT_ENV>` with the environment your Agent is installed on (for example, `development`).
+    Replace `<YOUR_DD_API_KEY>` with your [Datadog API key][2], `<YOUR_DD_SITE>` with your [Datadog site][7], and `<AGENT_ENV>` with the environment your Agent is installed on (for example, `development`).
 
 1. Start a new shell session.
 1. Restart the services on your host or VM.
@@ -113,7 +113,7 @@ To run `hello.py`:
    pip install flask
    ```
 
-1. Run `hello.py`:
+1. Set the service name and run `hello.py`:
 
    ```shell
    export DD_SERVICE=hello
@@ -142,7 +142,7 @@ Each time you run the `curl` command, a new trace is sent to Datadog.
 
    {{< img src="/getting_started/apm/service-catalog.png" alt="Service Catalog shows the new Python service." style="width:100%;" >}}
 
-1. Select a service to view its performance metrics, such as latency, throughput, and error rates.
+1. Select the service to view its performance metrics, such as latency, throughput, and error rates.
 1. Go to [**APM** > **Traces**][4]. You should see a trace for the `hello` service:
 
    {{< img src="/getting_started/apm/trace-explorer.png" alt="Trace explorer shows the trace for the hello service." style="width:100%;" >}}
@@ -151,7 +151,7 @@ Each time you run the `curl` command, a new trace is sent to Datadog.
 
 ## Advanced APM setup
 
-Up until this point, you let Datadog automatically instrument the `hello.py` application using Single Step Instrumentation. This is great if you want to capture essential traces across common libraries and languages without touching code or manually installing libraries.
+Up until this point, you let Datadog automatically instrument the `hello.py` application using Single Step Instrumentation. This approach is recommended if you want to capture essential traces across common libraries and languages without touching code or manually installing libraries.
 
 However, if you need to collect traces from custom code or require more fine-grained control, you can add [custom instrumentation][6].
 
@@ -218,3 +218,4 @@ To add custom instrumentation:
 [4]: https://app.datadoghq.com/apm/traces
 [5]: /tracing/glossary/#instrumentation
 [6]: /tracing/trace_collection/custom_instrumentation/
+[7]: /getting_started/site/
