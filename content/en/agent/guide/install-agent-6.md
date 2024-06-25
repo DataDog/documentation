@@ -1211,7 +1211,7 @@ Refer to the formula [GitHub repository][101] for logs configuration, check exam
 
 ## Install from source
 
-Follow [the instructions in the Agent GitHub repository][11] to build the Agent 6` .deb` and `.rpm` packages on Linux with Docker.
+Follow [the instructions in the Agent GitHub repository][11] to build the Agent 6 `.deb` and `.rpm` packages on Linux with Docker.
 
 Alternatively, you can build the Agent binary for version 6 following the [Getting Started instructions][12].
 
