@@ -42,7 +42,7 @@ Use [Retention Analysis][2] to measure how a group of users engage with specific
 
 See different visualizations of the user experience when interacting with your application:
 
-- **[Funnel][4]**: Measure the conversion rate end-to-end of a given workflow. Understand the underlying reason behind the conversion rate - was there a performance issue or error? Then watch a Session Replay of a user who converted or dropped to see exactly what happened.
+- **[Funnel][4]**: Measure the conversion rate end-to-end of a given workflow.
 - **[Sankey][5]**: Explore aggregated workflows in a single visualization to aid in answering questions about user journeys.
 - **[Conversion][6]**: Track conversion rates over time and compare it against specific attributes that may have affected conversion rates, such as browser type or geography.
 
@@ -51,14 +51,6 @@ See different visualizations of the user experience when interacting with your a
 [Heatmaps][7] visualize the most interacted with elements on a page to see where hot spots of activity are, along with analyzing scroll depth to see how far users scrolled down a given page. You can view every swipe, scroll, and click with a pixel-perfect reproduction of exactly what users went through on both browser and mobile applications to identify high-or low-performing content.
 
 {{< img src="real_user_monitoring/heatmaps/heatmap_v2.png" alt="An overview of the heatmap functionality." style="width:100%;">}}
-
-## Get granular answers with the Analytics Explorer
-
-With the [Analytics Explorer][8], you can query and see graphs for specific questions you might have, such as:
-
-- What is the average purchase amount per customer?
-- Which geographical regions tend to be the heaviest consumers of the new home decor line?
-- How long do people spend on the website?
 
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}
@@ -70,4 +62,3 @@ With the [Analytics Explorer][8], you can query and see graphs for specific ques
 [5]: /product_analytics/journeys/sankey
 [6]: /product_analytics/journeys#conversion
 [7]: /product_analytics/heatmaps
-[8]: /product_analytics/analytics_explorer
