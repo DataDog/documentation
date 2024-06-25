@@ -212,7 +212,7 @@ The Datadog C++ SDK maintains several propagators for passing trace context info
 | None                   | `none`              |
 
 ### Additional configuration
-In addition to the environment variable configuration, you can also update the propagators in code by using `Datadog.configure`:
+In addition to the environment variable configuration, you can also update the propagators in code:
 
 ```cpp
 #include <datadog/tracer_config.h>
