@@ -2,7 +2,6 @@
 aliases:
 - /es/graphing/faq/screenboard-api-doc
 - /es/graphing/guide/screenboard-api-doc
-kind: guía
 title: API screenboard
 ---
 

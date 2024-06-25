@@ -47,7 +47,7 @@ To configure a **For each** iteration:
 1. To select an inner action to repeat, drag an existing step from your canvas into the **For each** step, or click the plus (**+**) icon inside the **For each** step and make a selection from the action catalog.
 1. Click the **For each** step and enter an **Input list** for the step to iterate over.
 1. Toggle **Continue on error** if you want the action to continue down the list of remaining values when an error is encountered.
-1. Configure the inner action. To access the current value in the input list, use the `{{Current.value}}` variable. To access the index of the current value, use `{{Current.index}}`.
+1. Configure the inner action. To access the current value in the input list, use the `{{Current.Value}}` variable. To access the index of the current value, use `{{Current.Index}}`.
 1. **Save** and **Run** the action.
 
 When a run completes, the workflow enters **Debug** mode. Select the For each step to see:

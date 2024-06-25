@@ -3,7 +3,6 @@ aliases:
 - /es/developers/faq/how-do-i-collect-metrics-from-heroku-with-datadog
 dependencies:
 - https://github.com/DataDog/heroku-buildpack-datadog/blob/master/README.md
-kind: documentación
 title: Paquete de compilación de Heroku de Datadog
 ---
 Este [paquete de compilación de Heroku][1] instala el Datadog Agent en tu dyno de Heroku para recopilar métricas del sistema, métricas personalizadas de la aplicación y trazas (traces). Si quieres recopilar métricas personalizadas de la aplicación o trazas, debes incluir la [biblioteca de DogStatsD o Datadog APM][2] apropiada según el lenguaje en tu aplicación.

@@ -173,7 +173,7 @@ In CSM Threats, the runtime Agent logs are generated from collected kernel event
 1. Go to your chosen signal details side-panel and click the Events tab. 
 2. Click **View in Log Explorer** to navigate to Log Management, which displays the full list of logs that instigate this signal.
    Because there can be many logs, the signal side-panel combines these logs and their shared attributes into a JSON structure.
-3. Go back to the Event tab and scroll to the end of the panel. Expand the JSON dropdown to access all log attributes contained in runtime Agent events.
+3. Go back to the Events tab and scroll to the end of the panel. Expand the JSON dropdown to access all log attributes contained in runtime Agent events.
 4. Identify key-value pairs to suppress signals by common keys, including `@process.args`, `@process.group`, `@process.ancestors.comm`, or `@process.ancestors.args`.
 5. Open the rule in the Rule editor and in the **Exclude benign activity with suppression queries**. Add the list of key-value pairs that you identified as helpful.
 

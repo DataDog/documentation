@@ -5,7 +5,6 @@ further_reading:
 - link: /dashboards/faq/how-can-i-graph-the-percentage-change-between-an-earlier-value-and-a-current-value/
   tag: よくあるご質問
   text: 以前の値から現在の値への変化率をグラフ化する
-kind: documentation
 title: タイムシフト
 ---
 

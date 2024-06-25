@@ -1,6 +1,5 @@
 ---
 title: Treemap Widget
-kind: documentation
 widget_type: treemap
 description: "Graph proportions of one or more datasets"
 aliases:

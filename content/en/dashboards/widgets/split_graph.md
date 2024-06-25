@@ -1,6 +1,5 @@
 ---
 title: Split Graph Widget
-kind: documentation
 widget_type: split_group
 further_reading:
 - link: "/dashboards/guide/graphing_json/"
