@@ -11,7 +11,7 @@ title: Guides d'utilisation de la solution Database Monitoring
 ---
 
 {{< whatsnext desc="Guides généraux :" >}}
-    {{< nextlink href="database_monitoring/guide/heroku-postgres" >}}Configurer Heroku Postgres pour la solution Database Monitoring{< /nextlink >}}
+    {{< nextlink href="database_monitoring/guide/heroku-postgres" >}}Configurer Heroku Postgres pour la solution Database Monitoring{{< /nextlink >}}
     {{< nextlink href="database_monitoring/guide/tag_database_statements" >}}Appliquer des tags aux instructions Database{{< /nextlink >}}
     {{< nextlink href="database_monitoring/guide/managed_authentication" >}}Se connecter avec l'authentification gérée{{< /nextlink >}}
     {{< nextlink href="database_monitoring/guide/aurora_autodiscovery" >}}Configurer Database Monitoring pour les clusters Amazon Aurora DB{{< /nextlink >}}
