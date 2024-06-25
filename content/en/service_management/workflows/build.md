@@ -157,6 +157,27 @@ All the variables of the Source object are visible in the Context Variables tab.
 
 {{< img src="service_management/workflows/context-variables-tab-source-object-variables.png" alt="The Source object variables in the Context Variables tab" >}}
 
+## Workflow notifications
+
+You can configure your workflow to send you a notification on success or failure. The following integrations are supported:
+- Slack
+- Microsoft Teams
+- PagerDuty
+- Email
+
+To add a notification:
+1. In the workflow configuration panel, scroll down to the **Notifications** section.
+1. To add a notification if the workflow succeeds:
+   1. Click the plus (`+`) icon next to **Notify on success**.
+   1. Select the integration that you want to use for notifications.
+   1. Complete the required fields for the specified integration.
+   1. Click **Save** to save your workflow.
+1. To add a notification if the workflow fails:
+   1. Click the plus (`+`) icon next to **Notify on failure**.
+   1. Select the integration that you want to use for notifications.
+   1. Complete the required fields for the specified integration.
+   1. Click **Save** to save your workflow.
+
 ## Error handling
 
 You can specify the number of times you want your workflow to retry a failed step, and at what interval, before moving on to an optional error path. If no error path is present, the workflow terminates after all retries are exhausted.
@@ -194,6 +215,7 @@ To add a condition:
 1. Enter a maximum wait time for the workflow. If the condition is not met in time, the step fails.
 
 {{< img src="service_management/workflows/wait-until-condition.png" alt="An example of wait until condition" style="width:100%;" >}}
+
 
 ## Edit a workflow with JSON
 
