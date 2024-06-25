@@ -3,23 +3,23 @@ guides:
   link: getting_started/agent/
   link_text: Agent の概要
   title: Agent のインストール
-- desc: 700 以上のビルトインインテグレーションにより、メトリクス、トレース、ログを収集し、Datadog に送信することができます。
+- desc: 750 以上のビルトインインテグレーションにより、メトリクス、トレース、ログを収集し、Datadog に送信することができます。
   link: getting_started/integrations/
-  link_text: インテグレーションを始める
+  link_text: インテグレーションの概要
   title: インテグレーションをセットアップ
 - desc: Datadog で収集したデータを可視化し、ダッシュボード、アラート、モニターなどを作成することができます。
   link: getting_started/application/
-  link_text: Datadog の開始
-  title: アプリで使用を開始
-heading: Datadog ドキュメントへようこそ！
+  link_text: Datadog で始める
+  title: アプリで始める
+heading: Welcome to Datadog Docs!
 nav_sections:
 - nav_section:
   - name: プラットフォームサービス
   - navtiles:
-    - desc: Datadog のエージェントをインストールして構成し、データを収集、送信
+    - desc: Datadog Agent をインストールして構成し、データを収集、送信
       icon: agent-fill
       link: agent/
-      title: エージェント
+      title: Agent
     - desc: アプリケーション、サービス、システムに関するデータを収集
       icon: integrations
       link: integrations/
@@ -46,7 +46,7 @@ nav_sections:
       title: Mobile Application
     - desc: 組織における破壊的インシデントの特定、分析、緩和
       icon: incidents
-      link: service_management/incident_management/
+      link: service_management/incident_management
       title: Incident Management
     - desc: アプリケーションとインフラストラクチャーの注目すべき変化やアラートを追跡
       icon: events
@@ -54,28 +54,28 @@ nav_sections:
       title: イベント
     - desc: 技術スタック全体のプロセスの自動化とオーケストレーション
       icon: workflows
-      link: workflows/
+      link: workflows
       title: Workflow Automation
 - nav_section:
   - name: 製品
   - navtiles:
-    - desc: ホスト、コンテナ、プロセス、サーバーレス機能を追跡
+    - desc: ホスト、コンテナ、プロセス、サーバーレス関数を追跡
       icon: host-map
       link: infrastructure/
       title: インフラストラクチャー
     - desc: サーバーレスアプリケーションにおけるパフォーマンスの問題を検出し、解決
       icon: serverless
       link: serverless/
-      title: Serverless
+      title: サーバーレス
     - desc: タグ付きオブジェクトを使用して、ネットワークトラフィックに関するデータを収集し、グラフ化
       icon: network
       link: network_monitoring/
       title: Network Monitoring
-    - desc: 統合された観測性とコストデータでクラウド支出を管理
+    - desc: 統合された可観測性とコストデータでクラウド支出を管理
       icon: cloud-cost-management
       link: cloud_cost_management/
       title: Cloud Cost Management
-    - desc: すぐに使えるパフォーマンスダッシュボードと分散型トレース機能
+    - desc: すぐに使えるパフォーマンスダッシュボードと分散型トレースを探る
       icon: apm
       link: tracing/
       title: APM
@@ -83,15 +83,15 @@ nav_sections:
       icon: profiling-1
       link: profiler/
       title: Continuous Profiler
-    - desc: 充実したダッシュボード、クエリ メトリック、クエリ サンプルを調べる
+    - desc: 充実したダッシュボード、クエリメトリクス、クエリサンプルを調べる
       icon: database-2
       link: database_monitoring/
-      title: データベース モニタリング
+      title: Database Monitoring
     - desc: データストリーミングパイプラインのパフォーマンスを追跡し、改善する
       icon: datastreams-monitoring
       link: data_streams/
       title: Data Streams Monitoring
-    - desc: コードを変更せずにサービスを検出、マッピング、監視する
+    - desc: コードを変更せずにサービスを発見、マッピング、監視する
       icon: usm
       link: universal_service_monitoring/
       title: Universal Service Monitoring
@@ -105,9 +105,9 @@ nav_sections:
       title: Real User Monitoring
     - desc: モバイルアプリケーションにおけるユーザージャーニーとビジネストランザクションの監視
       icon: mobile
-      link: synthetics/mobile_app_testing/
+      link: mobile_app_testing/
       title: Mobile Application Testing
-    - desc: CI/CD プロバイダーでコードレスインテグレーションとエンドツーエンドテストを実施する
+    - desc: CI/CD プロバイダーでコードレスインテグレーションとエンドツーエンドテストを実施
       icon: continuous-testing
       link: continuous_testing/
       title: Continuous Testing
@@ -126,12 +126,12 @@ nav_sections:
     - desc: メトリクスの探索、検索、および分布の作成
       icon: metric
       link: metrics/
-      title: Metrics
+      title: メトリクス
     - desc: 取り込んだログを処理し、監視し、アーカイブ
       icon: log
       link: logs/
-      title: ログ管理
-    - desc: テレメトリパイプラインの管理と監視
+      title: Log Management
+    - desc: テレメトリーパイプラインの管理と監視
       icon: pipelines
       link: observability_pipelines/
       title: Observability Pipelines
@@ -142,24 +142,24 @@ nav_sections:
       icon: api
       link: api/latest/
       title: API
-    - desc: 組織ベースの設定と課金にアクセス
+    - desc: 組織ベースの設定と請求にアクセス
       icon: cog-2
       link: account_management/
-      title: Account Management
+      title: アカウントの管理
     - desc: Datadog のデータ保護方法について
       icon: security-lock
-      link: data_security
-      title: Data Security
+      link: data_security/
+      title: データセキュリティ
     - desc: Datadog プラットフォーム上での開発
       icon: dev-code
       link: developers/
-      title: Developers
+      title: 開発者
 popular_searches:
 - link: api/
   title: API ドキュメント
   weight: 10
 - link: getting_started/agent/
-  title: エージェントのインストール
+  title: Agent のインストール
   weight: 20
 - link: logs/log_collection/
   title: ログの収集

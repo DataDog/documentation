@@ -1,6 +1,5 @@
 ---
 title: CSM Threats Supported Linux Distributions
-kind: documentation
 ---
 
 Cloud Security Management Threats supports the following Linux distributions:

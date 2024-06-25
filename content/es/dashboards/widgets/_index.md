@@ -7,7 +7,6 @@ further_reading:
 - link: /dashboards/guide/context-links/
   tag: Documentación
   text: Enlaces personalizados
-kind: documentación
 title: Widgets
 ---
 

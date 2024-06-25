@@ -6,7 +6,6 @@ further_reading:
 - link: /security/application_security/
   tag: ドキュメント
   text: Datadog Application Security Management で脅威から守る
-kind: ドキュメント
 title: Threat Intelligence
 ---
 

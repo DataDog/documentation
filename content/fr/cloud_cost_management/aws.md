@@ -11,7 +11,6 @@ further_reading:
 - link: /cloud_cost_management/google_cloud
   tag: Documentation
   text: Obtenir des informations utiles sur votre facture Google Cloud
-kind: documentation
 title: AWS
 ---
 

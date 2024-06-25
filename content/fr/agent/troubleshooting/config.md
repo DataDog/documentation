@@ -1,6 +1,5 @@
 ---
 title: Gestion de la configuration du runtime de l'Agent
-kind: documentation
 further_reading:
   - link: /agent/troubleshooting/debug_mode/
     tag: Dépannage de l'Agent

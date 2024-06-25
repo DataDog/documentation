@@ -18,7 +18,6 @@ further_reading:
   tag: Blog
   text: Détecter les activités de connexion suspectes grâce aux règles de détection
     de voyage impossible
-kind: documentation
 title: Règles de détection
 ---
 

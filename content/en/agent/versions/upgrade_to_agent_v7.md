@@ -1,6 +1,5 @@
 ---
 title: Upgrade to Datadog Agent v7
-kind: documentation
 further_reading:
 - link: "/agent/guide/python-3/"
   tag: "Documentation"

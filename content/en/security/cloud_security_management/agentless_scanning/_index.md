@@ -1,6 +1,5 @@
 ---
 title: Cloud Security Management Agentless Scanning
-kind: documentation
 aliases:
  - /security/agentless_scanning
 further_reading:
@@ -18,8 +17,6 @@ further_reading:
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">Agentless Scanning for Cloud Security Management is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
-
-<div class="alert alert-info">Agentless Scanning for Cloud Security Management is in public beta for AWS cloud environments.</div>
 
 ## Overview
 
@@ -54,7 +51,7 @@ The following diagram illustrates how Agentless Scanning works:
 
 2. For Lambda functions, the scanners fetch the function's code.
 3. The scanner creates snapshots of EBS volumes used by EC2 instances. These snapshots serve as the basis for conducting scans. Using the snapshots, or the code, the scanner generates a list of packages.
-4. After the scan is complete, only the list of packages is transmitted to Datadog, while all other data remains within your infrastructure. Snapshots created during the scan cycle are deleted.
+4. After the scan is complete, the list of packages and information related to collected hosts (hostnames/EC2 instances) are transmitted to Datadog, with all other data remaining within your infrastructure. Snapshots created during the scan cycle are deleted.
 5. Leveraging the collected package list along with Datadog's access to the Trivy vulnerabilities database, Datadog finds matching affected vulnerabilities in your resources and code.
 
 **Notes**:

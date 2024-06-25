@@ -21,7 +21,6 @@ further_reading:
 - link: /metrics/#querying-metrics
   tag: ドキュメント
   text: メトリクスのクエリ
-kind: documentation
 title: 関数
 ---
 

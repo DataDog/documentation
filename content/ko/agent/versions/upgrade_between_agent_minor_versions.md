@@ -2,7 +2,6 @@
 aliases:
 - /ko/agent/faq/upgrade-between-agent-minor-versions
 - /ko/agent/guide/upgrade-between-agent-minor-versions
-kind: 설명서
 title: Datadog 에이전트 부 버전 간 업그레이드
 ---
 
