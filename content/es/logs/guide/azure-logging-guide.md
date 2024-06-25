@@ -186,7 +186,7 @@ Para obtener más información, consulta el [activador de centros de eventos Azu
 
 Para obtener más información, consulta [Empezando con funciones Azure][215].
 
-##### Apuntar tu activador de centros de eventos a Datadog
+##### Dirigir tu activador de centros de eventos hacia Datadog
 
 1. En la página de detalles de la función de tu activador de centros de eventos, haz clic en **Code + Test** (Código + Test), en el menú lateral **Developer** (Desarrollador).
 2. Añade el [código de la función Azure de Datadog][204] al archivo `index.js` de la función.
@@ -308,7 +308,7 @@ Si ya tienes una aplicación de función configurada para este fin, pasa directa
 
 Para obtener más información, consulta [Empezando con funciones Azure][307].
 
-##### Apuntar tu activador de almacenamiento de blobs a Datadog
+##### Dirigir tu activador de almacenamiento de blobs hacia Datadog
 
 1. En la página de detalles de la función de tu activador de centros de eventos, haz clic en **Code + Test** (Código + Test), en el menú lateral **Developer** (Desarrollador).
 2. Añade el [código de la función Azure de Datadog][308] al archivo `index.js` de la función.
