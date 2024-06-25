@@ -60,31 +60,6 @@ If you already have a Datadog Log Archive configured for Observability Pipelines
 
 {{% observability_pipelines/configure_log_archive/google_cloud_storage/instructions %}}
 
-{{< tabs >}}
-{{% tab "Docker" %}}
-
-{{% observability_pipelines/configure_log_archive/google_cloud_storage/docker %}}
-
-{{% /tab %}}
-{{% tab "Google GKE" %}}
-
-{{% observability_pipelines/configure_log_archive/google_cloud_storage/google_gke %}}
-
-{{% /tab %}}
-{{% tab "Linux (APT)" %}}
-
-{{% observability_pipelines/configure_log_archive/google_cloud_storage/linux_apt %}}
-
-{{% /tab %}}
-{{% tab "Linux (RPM)" %}}
-
-{{% observability_pipelines/configure_log_archive/google_cloud_storage/linux_rpm %}}
-
-{{% /tab %}}
-{{< /tabs >}}
-
-{{% observability_pipelines/configure_log_archive/google_cloud_storage/connect_datadog_log_archives %}}
-
 {{% /collapse-content %}}
 {{% collapse-content title="Azure Storage" level="h4" %}}
 
