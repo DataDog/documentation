@@ -48,7 +48,7 @@ To install the Datadog tracing library (version 4.x of `dd-trace`) for end-of-li
   npm install dd-trace@latest-node16
   ```
 For more information on Datadog's distribution tags and Node.js runtime version support, see the [Compatibility Requirements][1] page.
-If you are upgrading from a previous major version of the library (0.x, 1.x, 2.x or 4.x) to another major version, read the [Migration Guide][5] to assess any breaking changes.
+If you are upgrading from a previous major version of the library (0.x, 1.x, 2.x, 3.x or 4.x) to another major version, read the [Migration Guide][5] to assess any breaking changes.
 
 ### Import and initialize the tracer
 
