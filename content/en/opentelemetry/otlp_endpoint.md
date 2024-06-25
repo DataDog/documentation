@@ -13,7 +13,7 @@ further_reading:
     text: "OpenTelemetry Protocol Exporter"
 ---
 {{< site-region region="ap1,gov" >}}
-<div class="alert alert-warning">OTLP Trace Intake Endpoint is not supported for your selected  <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-warning">OTLP Trace Intake Endpoint is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 ## Overview
@@ -75,7 +75,7 @@ const exporter = new OTLPTraceExporter({
 
 {{% tab "Java" %}}
 
-The Java exporter is [OtlpHttpSpanExporter][200]. To configure the exporter:
+The Java exporter is [OtlpHttpSpanExporter][200]. To configure the exporter, use the following code snippet:
 
 ```java
 import io.opentelemetry.exporter.otlp.http.trace.OtlpHttpSpanExporter;
@@ -93,7 +93,7 @@ OtlpHttpSpanExporter exporter = OtlpHttpSpanExporter.builder()
 {{% /tab %}}
 {{% tab "Go" %}}
 
-The Go exporter is [otlptracehttp][300]. To configure the exporter:
+The Go exporter is [otlptracehttp][300]. To configure the exporter, use the following code snippet:
 
 ```go
 import "go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracehttp"
@@ -117,7 +117,7 @@ traceExporter, err := otlptracehttp.New(
 {{% /tab %}}
 {{% tab "Python" %}}
 
-The Python exporter is [OTLPSpanExporter][400]. To configure the exporter:
+The Python exporter is [OTLPSpanExporter][400]. To configure the exporter, use the following code snippet:
 
 ```python
 from opentelemetry.exporter.otlp.proto.http.trace_exporter import OTLPSpanExporter
