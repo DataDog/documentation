@@ -30,7 +30,7 @@ If multiple propagators are enabled, the extraction attempt is done in the speci
 
 `DD_TRACE_PROPAGATION_STYLE`
 : Specifies propagators (in a comma-separated list) to be used for trace context propagation. This may be overridden by the extract-specific or inject-specific configurations. <br>
-**Default:** `datadog,tracecontext` for language SDKs, `tracecontext,datadog` for Envoy and NGINX procies
+**Default:** `datadog,tracecontext`
 
 ### Recommended OpenTelemetry configuration
 
