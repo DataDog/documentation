@@ -1,5 +1,5 @@
 ---
-title: Build a NDM Profile
+title: Build an NDM Profile (Advanced)
 kind: guide
 aliases:
     - /network_performance_monitoring/devices/guide/build-ndm-profile
@@ -16,8 +16,8 @@ Datadog Network Device Monitoring uses profiles for collecting metrics from netw
 
 NDM profiles use SNMP concepts. For basic details on SNMP, refer to the [terminology][1].
 
-<div class="alert alert-warning">
-This guide is for advanced users. Most devices can be configured using the <a href="/network_monitoring/devices/profiles#metric-definition-by-profile">Datadog profiles</a>.
+<div class="alert alert-info">
+This guide is for advanced users. Most devices can be configured using the GUI based experience in the <a href="/network_monitoring/devices/guide/device_profiles/">Getting Started with Device Profiles</a> documentation, or by using <a href="/network_monitoring/devices/profiles#metric-definition-by-profile">Datadog profiles</a>.
 </div>
 
 ## Research
