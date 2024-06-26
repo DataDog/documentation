@@ -87,98 +87,53 @@ DD_TRACE_DEBUG=1 php -d datadog.service=my-app -S localhost:8888
 
 The following table lists the environment variables for configuring tracing, and corresponding INI settings (where available) and defaults.
 
-`DD_AGENT_HOST`
-: **INI**: `datadog.agent_host`<br>
-**Default**: `localhost` <br>
-The Agent host name.
-
-`DD_AUTOFINISH_SPANS`
-: **INI**: `datadog.autofinish_spans`<br>
-**Default**: `0`<br>
-Whether spans are automatically finished when the tracer is flushed.
-
-`DD_DISTRIBUTED_TRACING`
-: **INI**: `datadog.distributed_tracing`<br>
-**Default**: `1`<br>
-Whether to enable distributed tracing.
+#### Unified service tagging
 
 `DD_ENV`
 : **INI**: `datadog.env`<br>
 **Default**: `null`<br>
-Set an application's environment, for example: `prod`, `pre-prod`, `stage`. Starting version `0.90.0`, changes to `datadog.version` at run-time through `ini_set` are also applied to the current root span.
+Set an application's environment, for example: `prod`, `pre-prod`, `stage`. Starting version `0.90.0`, changes to `datadog.version` at runtime through `ini_set` are also applied to the current root span.
 
-`DD_LOGS_INJECTION`
-: **INI**: `datadog.logs_injection`<br>
-**Default**: `0`<br>
-Enables or disables automatic injection of correlation identifiers into application logs. Added in version `0.89.0`<br>
-See [logs correlation documentation][17] for more information.
-
-`DD_PROFILING_ENABLED`
-: **INI**: `datadog.profiling.enabled`. INI available since `0.82.0`.<br>
-**Default**: `1`<br>
-Enable the Datadog profiler. Added in version `0.69.0`. See [Enabling the PHP Profiler][4]. For version `0.81.0` and below it defaulted to `0`.
-
-`DD_PROFILING_ENDPOINT_COLLECTION_ENABLED`
-: **INI**: `datadog.profiling.endpoint_collection_enabled`. INI available since `0.82.0`.<br>
-**Default**: `1`<br>
-Whether to enable the endpoint data collection in profiles. Added in version `0.79.0`.
-
-`DD_PROFILING_ALLOCATION_ENABLED`
-: **INI**: `datadog.profiling.allocation_enabled`. INI available since `0.88.0`.<br>
-**Default**: `1`<br>
-Enable the allocation size and allocation bytes profile type. Added in version `0.88.0`. When an active JIT is detected, allocation profiling is turned off for PHP version `8.0.0`-`8.1.20` and `8.2.0`-`8.2.7` due to a limitation of the ZendEngine.<br>
-**Note**: This supersedes the `DD_PROFILING_EXPERIMENTAL_ALLOCATION_ENABLED` environment variable (`datadog.profiling.experimental_allocation_enabled` INI setting), which was available since `0.84`. If both are set, this one takes precedence.
-
-`DD_PROFILING_EXPERIMENTAL_FEATURES_ENABLED`
-: **INI**: `datadog.profiling.experimental_features_enabled`. INI available since `0.96.0`.<br>
-**Default**: `0`<br>
-Enable all experimental features.<br>
-**Note**: This setting overrides the more specific configurations and if enabled, toggling other experimental configuration settings won't have an effect.
-
-`DD_PROFILING_EXPERIMENTAL_CPU_TIME_ENABLED`
-: **INI**: `datadog.profiling.experimental_cpu_time_enabled`. INI available since `0.82.0`.<br>
-**Default**: `1`<br>
-Enable the experimental CPU profile type. Added in version `0.69.0`. For version `0.76` and below it defaulted to `0`.
-
-`DD_PROFILING_EXCEPTION_ENABLED`
-: **INI**: `datadog.profiling.exception_enabled`. INI available since `0.96.0`.<br>
-**Default**: `1`<br>
-Enable the exception profile type. Added in version `0.92.0` and GA
-in version `0.96.0`.<br><br>
-**Note**: This supersedes the `DD_PROFILING_EXPERIMENTAL_EXCEPTION_ENABLED` environment variable (`datadog.profiling.experimental_exception_enabled` INI setting), which was available since `0.92`. If both are set, this one takes precedence.
-
-`DD_PROFILING_EXCEPTION_MESSAGE_ENABLED`
-: **INI**: `datadog.profiling.exception_message_enabled`. INI available since `0.98.0`.<br>
-**Default**: `0`<br>
-Enable the collection of exception messages with exception samples.<br><br>
-**Note**: Please be aware that your exception messages might contain PII (Personal Identifiable Information), which is the reason why this setting is default disabled.
-
-`DD_PROFILING_EXCEPTION_SAMPLING_DISTANCE`
-: **INI**: `datadog.profiling.exception_sampling_distance`. INI available since `0.96.0`.<br>
-**Default**: `100`<br>
-Configure the sampling distance for exceptions. The higher the sampling distance, the fewer samples are created and the lower the overhead.<br><br>
-**Note**: This supersedes the `DD_PROFILING_EXPERIMENTAL_EXCEPTION_SAMPLING_DISTANCE` environment variable (`datadog.profiling.experimental_exception_sampling_distance` INI setting), which was available since `0.92`. If both are set, this one takes precedence.
-
-`DD_PROFILING_TIMELINE_ENABLED`
-: **INI**: `datadog.profiling.timeline_enabled`. INI available since `0.98.0`.<br>
-**Default**: `1`<br>
-Enable the timeline profile type. Added in version `0.89.0`.<br><br>
-**Note**: This supersedes the `DD_PROFILING_EXPERIMENTAL_TIMELINE_ENABLED` environment variable (`datadog.profiling.experimental_timeline_enabled` INI setting), which was available since `0.89` (default `0`). If both are set, this one takes precedence.
-
-`DD_PROFILING_LOG_LEVEL`
-: **INI**: `datadog.profiling.log_level`. INI available since `0.82.0`.<br>
-**Default**: `off`<br>
-Set the profiler's log level. Acceptable values are `off`, `error`, `warn`, `info`, `debug`, and `trace`. The profiler's logs are written to the standard error stream of the process. Added in version `0.69.0`.
-
-`DD_PRIORITY_SAMPLING`
-: **INI**: `datadog.priority_sampling`<br>
-**Default**: `1`<br>
-Whether to enable priority sampling.
+`DD_VERSION`
+: **INI**: `datadog.version`<br>
+**Default**: `null`<br>
+Set an application's version in traces and logs, for example: `1.2.3`, `6c44da20`, `2020.02.13`. Starting version `0.90.0`, changes to `datadog.version` at runtime through `ini_set` are also applied to the current root span.
 
 `DD_SERVICE`
 : **INI**: `datadog.service`<br>
 **Default**: `null`<br>
 The default app name.
+
+#### Spans
+
+`DD_TRACE_SAMPLING_RULES`
+: **INI**: `datadog.trace.sampling_rules`<br>
+**Default**: `null`<br>
+A JSON encoded string to configure the sampling rate. Examples: Set the sample rate to 20%: `'[{"sample_rate": 0.2}]'`. Set the sample rate to 10% for services starting with 'a' and span name 'b' and set the sample rate to 20% for all other services: `'[{"service": "a.*", "name": "b", "sample_rate": 0.1}, {"sample_rate": 0.2}]'` (see [Integration names](#integration-names)). The JSON object **must** be surrounded by single quotes (`'`) to avoid problems with escaping of the double quote (`"`) character. The service matching takes `DD_SERVICE_MAPPING` into account (starting version `0.90.0`). The name and service must be a valid regular expression. Rules that are not valid regular expressions are ignored.
+
+`DD_TRACE_SAMPLING_RULES_FORMAT`
+: **INI**: `datadog.trace.sampling_rules_format`<br>
+**Default**: `glob`<br>
+Rules the format (`regex` or `glob`) used for sampling rules defined by `DD_TRACE_SAMPLING_RULES`. Added in version `0.98.0` and deprecated as of `1.0.0`.
+
+`DD_TRACE_SPANS_LIMIT`
+: **INI**: `datadog.trace.spans_limit`<br>
+**Default**: `1000`<br>
+The maximum number of spans that are generated within one trace. If the maximum number of spans is reached, then spans are no longer generated. If the limit is increased, then the amount of memory that is used by a pending trace will increase and might reach the PHP maximum amount of allowed memory. The maximum amount of allowed memory can be increased with the PHP INI system setting `memory_limit`.
+
+`DD_SPAN_SAMPLING_RULES`
+: **INI**: `datadog.span_sampling_rules`<br>
+**Default**: `null`<br>
+A JSON encoded string to configure the sampling rate. Rules are applied in configured order to determine the span's sample rate. The `sample_rate` value must be between 0.0 and 1.0 (inclusive). <br>
+**Example**: Set the span sample rate to 50% for the service 'my-service' and operation name 'http.request', up to 50 traces per second: `'[{"service": "my-service", "name": "http.request", "sample_rate":0.5, "max_per_second": 50}]'`. The JSON object **must** be surrounded by single quotes (`'`) to avoid problems with escaping of the double quote (`"`) character.<br>
+For more information, see [Ingestion Mechanisms][6].<br>
+
+#### Traces
+
+`DD_PRIORITY_SAMPLING`
+: **INI**: `datadog.priority_sampling`<br>
+**Default**: `1`<br>
+Whether to enable priority sampling.
 
 `DD_SERVICE_MAPPING`
 : **INI**: `datadog.service_mapping`<br>
@@ -222,16 +177,6 @@ The Agent request transfer timeout (in milliseconds).
 **Default**: `null`<br>
 The Agent URL; takes precedence over `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`. For example: `https://localhost:8126`. If the [Agent configuration][13] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then `DD_TRACE_AGENT_PORT` or `DD_TRACE_AGENT_URL` must match it.
 
-`DD_DOGSTATSD_URL`
-: **INI**: `datadog.dogstatsd_url`<br>
-**Default**: `null`<br>
-The URL used to negotiate connection to DogStatsD. This setting takes precedence over `DD_AGENT_HOST` and `DD_DOGSTATSD_PORT`. Supports `udp://` or `unix://` schemas only.
-
-`DD_DOGSTATSD_PORT`
-: **INI**: `datadog.dogstatsd_port`<br>
-**Default**: `8125`<br>
-The port used to connect to DogStatsD, used in combination with `DD_AGENT_HOST` to negotiate connection to DogStatsD when `DD_TRACE_HEALTH_METRICS_ENABLED` is enabled.
-
 `DD_TRACE_AUTO_FLUSH_ENABLED`
 : **INI**: `datadog.trace.auto_flush_enabled`<br>
 **Default**: `0`<br>
@@ -262,45 +207,20 @@ Specifies a log file. If none is specified, logs go to the default PHP error loc
 **Default**: `1`<br>
 Indicates whether to trace a forked process. Set to `1` to trace forked processes, or to `0` to disable tracing in forked processes. If set to `0`, you can still manually re-enable a process' trace in code with `ini_set("datadog.trace.enabled", "1");`, but it will be presented as a fresh trace. Forked process traces are shown as whole distributed traces only when both `DD_TRACE_FORKED_PROCESS` and `DD_DISTRIBUTED_TRACING` are configured to `1` (on).
 
-`DD_TRACE_ENABLED`
-: **INI**: `datadog.trace.enabled`<br>
-**Default**: `1`<br>
-Enable the tracer globally.
-
 `DD_TRACE_GENERATE_ROOT_SPAN`
 : **INI**: `datadog.trace.generate_root_span`<br>
 **Default**: `1`<br>
 Automatically generate a top-level span; set to `0` in conjunction with `DD_TRACE_AUTO_FLUSH_ENABLED=1` to trace [long-running processes][14].
-
-`DD_TAGS`
-: **INI**: `datadog.tags`<br>
-**Default**: `null`<br>
-Tags to be set on all spans, for example: `key1:value1,key2:value2`.
 
 `DD_TRACE_HEADER_TAGS`
 : **INI**: `datadog.trace.header_tags`<br>
 **Default**: `null`<br>
 CSV of header names that are reported on the root span as tags.
 
-`DD_TRACE_DB_CLIENT_SPLIT_BY_INSTANCE`
-: **INI**: `datadog.trace.db_client_split_by_instance`<br>
-**Default**: `0`<br>
-Set the service name of HTTP requests to `pdo-<hostname>`. For example, a `PDO->query()` call to a database host `datadoghq.com` has the service name `pdo-datadoghq.com` instead of the default service name of `pdo`.
-
 `DD_TRACE_HTTP_CLIENT_SPLIT_BY_DOMAIN`
 : **INI**: `datadog.trace.http_client_split_by_domain`<br>
 **Default**: `0`<br>
 Set the service name of HTTP requests to `host-<hostname>`, for example a `curl_exec()` call to `https://datadoghq.com` has the service name `host-datadoghq.com` instead of the default service name of `curl`.
-
-`DD_TRACE_REDIS_CLIENT_SPLIT_BY_HOST`
-: **INI**: `datadog.trace.redis_client_split_by_host`<br>
-**Default**: `0`<br>
-Set the service name of Redis clients operations to `redis-<hostname>`.
-
-`DD_TRACE_<INTEGRATION>_ENABLED`
-: **INI**: `datadog.trace.<INTEGRATION>_enabled`<br>
-**Default**: `1`<br>
-Enable or disable an integration; all integrations are enabled by default (see [Integration names](#integration-names)).
 
 `DD_TRACE_MEASURE_COMPILE_TIME`
 : **INI**: `datadog.trace.measure_compile_time`<br>
@@ -359,43 +279,15 @@ Enable route-based naming for HTTP server requests. Set to `true` to use the int
 **Default**: `-1`<br>
 The sampling rate for the traces, a number between `0.0` and `1.0`. The default value of `-1` defers control of sampling to the Datadog Agent.
 
-`DD_TRACE_SAMPLING_RULES`
-: **INI**: `datadog.trace.sampling_rules`<br>
-**Default**: `null`<br>
-A JSON encoded string to configure the sampling rate. Examples: Set the sample rate to 20%: `'[{"sample_rate": 0.2}]'`. Set the sample rate to 10% for services starting with 'a' and span name 'b' and set the sample rate to 20% for all other services: `'[{"service": "a.*", "name": "b", "sample_rate": 0.1}, {"sample_rate": 0.2}]'` (see [Integration names](#integration-names)). The JSON object **must** be surrounded by single quotes (`'`) to avoid problems with escaping of the double quote (`"`) character. The service matching takes `DD_SERVICE_MAPPING` into account (starting version `0.90.0`). The name and service must be a valid regular expression. Rules that are not valid regular expressions are ignored.
-
-`DD_TRACE_SAMPLING_RULES_FORMAT`
-: **INI**: `datadog.trace.sampling_rules_format`<br>
-**Default**: `glob`<br>
-Rules the format (`regex` or `glob`) used for sampling rules defined by `DD_TRACE_SAMPLING_RULES`. Added in version `0.98.0` and deprecated as of `1.0.0`.
-
 `DD_TRACE_RATE_LIMIT`
 : **INI**: `datadog.trace.rate_limit`<br>
 **Default**: `0`<br>
 Maximum number of spans to sample per second. All processes in an Apache or FPM pool share the same limiter. When unset (0) rate limiting is delegated to the Datadog Agent.
 
-`DD_TRACE_SPANS_LIMIT`
-: **INI**: `datadog.trace.spans_limit`<br>
-**Default**: `1000`<br>
-The maximum number of spans that are generated within one trace. If the maximum number of spans is reached, then spans are no longer generated. If the limit is increased, then the amount of memory that is used by a pending trace will increase and might reach the PHP maximum amount of allowed memory. The maximum amount of allowed memory can be increased with the PHP INI system setting `memory_limit`.
-
-`DD_SPAN_SAMPLING_RULES`
-: **INI**: `datadog.span_sampling_rules`<br>
-**Default**: `null`<br>
-A JSON encoded string to configure the sampling rate. Rules are applied in configured order to determine the span's sample rate. The `sample_rate` value must be between 0.0 and 1.0 (inclusive). <br>
-**Example**: Set the span sample rate to 50% for the service 'my-service' and operation name 'http.request', up to 50 traces per second: `'[{"service": "my-service", "name": "http.request", "sample_rate":0.5, "max_per_second": 50}]'`. The JSON object **must** be surrounded by single quotes (`'`) to avoid problems with escaping of the double quote (`"`) character.<br>
-For more information, see [Ingestion Mechanisms][6].<br>
-
-
 `DD_TRACE_URL_AS_RESOURCE_NAMES_ENABLED`
 : **INI**: `datadog.trace.url_as_resource_names_enabled`<br>
 **Default**: `1`<br>
 Enable URL's as resource names (see [Map resource names to normalized URI](#map-resource-names-to-normalized-uri)).
-
-`DD_VERSION`
-: **INI**: `datadog.version`<br>
-**Default**: `null`<br>
-Set an application's version in traces and logs, for example: `1.2.3`, `6c44da20`, `2020.02.13`. Starting version `0.90.0`, changes to `datadog.version` at runtime through `ini_set` are also applied to the current root span.
 
 `DD_TRACE_HTTP_URL_QUERY_PARAM_ALLOWED`
 : **INI**: `datadog.trace.http_url_query_param_allowed`<br>
@@ -444,6 +336,133 @@ The IP header to be used for client IP collection, for example: `x-forwarded-for
 Valid values are: `true` or `false`.<br>
 **Default**: `false`
 
+#### Logs
+
+`DD_LOGS_INJECTION`
+: **INI**: `datadog.logs_injection`<br>
+**Default**: `0`<br>
+Enables or disables automatic injection of correlation identifiers into application logs. Added in version `0.89.0`<br>
+See [logs correlation documentation][17] for more information.
+
+#### Database
+
+`DD_TRACE_DB_CLIENT_SPLIT_BY_INSTANCE`
+: **INI**: `datadog.trace.db_client_split_by_instance`<br>
+**Default**: `0`<br>
+Set the service name of HTTP requests to `pdo-<hostname>`. For example, a `PDO->query()` call to a database host `datadoghq.com` has the service name `pdo-datadoghq.com` instead of the default service name of `pdo`.
+
+`DD_TRACE_REDIS_CLIENT_SPLIT_BY_HOST`
+: **INI**: `datadog.trace.redis_client_split_by_host`<br>
+**Default**: `0`<br>
+Set the service name of Redis clients operations to `redis-<hostname>`.
+
+#### Agent
+
+`DD_AGENT_HOST`
+: **INI**: `datadog.agent_host`<br>
+**Default**: `localhost` <br>
+The Agent host name.
+
+`DD_AUTOFINISH_SPANS`
+: **INI**: `datadog.autofinish_spans`<br>
+**Default**: `0`<br>
+Whether spans are automatically finished when the tracer is flushed.
+
+`DD_DISTRIBUTED_TRACING`
+: **INI**: `datadog.distributed_tracing`<br>
+**Default**: `1`<br>
+Whether to enable distributed tracing.
+
+`DD_DOGSTATSD_URL`
+: **INI**: `datadog.dogstatsd_url`<br>
+**Default**: `null`<br>
+The URL used to negotiate connection to DogStatsD. This setting takes precedence over `DD_AGENT_HOST` and `DD_DOGSTATSD_PORT`. Supports `udp://` or `unix://` schemas only.
+
+`DD_DOGSTATSD_PORT`
+: **INI**: `datadog.dogstatsd_port`<br>
+**Default**: `8125`<br>
+The port used to connect to DogStatsD, used in combination with `DD_AGENT_HOST` to negotiate connection to DogStatsD when `DD_TRACE_HEALTH_METRICS_ENABLED` is enabled.
+
+`DD_TAGS`
+: **INI**: `datadog.tags`<br>
+**Default**: `null`<br>
+Tags to be set on all spans, for example: `key1:value1,key2:value2`.
+
+`DD_INSTRUMENTATION_TELEMETRY_ENABLED`
+: **INI**: `datadog.instrumentation_telemetry_enabled`<br>
+**Default**: `true`<br>
+Datadog may collect [environmental and diagnostic information about your system][16] to improve the product. When false, this telemetry data will not be collected.
+
+#### Profiling
+
+`DD_PROFILING_ENABLED`
+: **INI**: `datadog.profiling.enabled`. INI available since `0.82.0`.<br>
+**Default**: `1`<br>
+Enable the Datadog profiler. Added in version `0.69.0`. See [Enabling the PHP Profiler][4]. For version `0.81.0` and below it defaulted to `0`.
+
+`DD_PROFILING_ENDPOINT_COLLECTION_ENABLED`
+: **INI**: `datadog.profiling.endpoint_collection_enabled`. INI available since `0.82.0`.<br>
+**Default**: `1`<br>
+Whether to enable the endpoint data collection in profiles. Added in version `0.79.0`.
+
+`DD_PROFILING_ALLOCATION_ENABLED`
+: **INI**: `datadog.profiling.allocation_enabled`. INI available since `0.88.0`.<br>
+**Default**: `1`<br>
+Enable the allocation size and allocation bytes profile type. Added in version `0.88.0`. When an active JIT is detected, allocation profiling is turned off for PHP version `8.0.0`-`8.1.20` and `8.2.0`-`8.2.7` due to a limitation of the ZendEngine.<br>
+**Note**: This supersedes the `DD_PROFILING_EXPERIMENTAL_ALLOCATION_ENABLED` environment variable (`datadog.profiling.experimental_allocation_enabled` INI setting), which was available since `0.84`. If both are set, this one takes precedence.
+
+`DD_PROFILING_EXPERIMENTAL_FEATURES_ENABLED`
+: **INI**: `datadog.profiling.experimental_features_enabled`. INI available since `0.96.0`.<br>
+**Default**: `0`<br>
+Enable all experimental features.<br>
+**Note**: This setting overrides the more specific configurations and if enabled, toggling other experimental configuration settings won't have an effect.
+
+`DD_PROFILING_EXPERIMENTAL_CPU_TIME_ENABLED`
+: **INI**: `datadog.profiling.experimental_cpu_time_enabled`. INI available since `0.82.0`.<br>
+**Default**: `1`<br>
+Enable the experimental CPU profile type. Added in version `0.69.0`. For version `0.76` and below it defaulted to `0`.
+
+`DD_PROFILING_EXCEPTION_ENABLED`
+: **INI**: `datadog.profiling.exception_enabled`. INI available since `0.96.0`.<br>
+**Default**: `1`<br>
+Enable the exception profile type. Added in version `0.92.0` and GA
+in version `0.96.0`.<br><br>
+**Note**: This supersedes the `DD_PROFILING_EXPERIMENTAL_EXCEPTION_ENABLED` environment variable (`datadog.profiling.experimental_exception_enabled` INI setting), which was available since `0.92`. If both are set, this one takes precedence.
+
+`DD_PROFILING_EXCEPTION_MESSAGE_ENABLED`
+: **INI**: `datadog.profiling.exception_message_enabled`. INI available since `0.98.0`.<br>
+**Default**: `0`<br>
+Enable the collection of exception messages with exception samples.<br><br>
+**Note**: Please be aware that your exception messages might contain PII (Personal Identifiable Information), which is the reason why this setting is default disabled.
+
+`DD_PROFILING_EXCEPTION_SAMPLING_DISTANCE`
+: **INI**: `datadog.profiling.exception_sampling_distance`. INI available since `0.96.0`.<br>
+**Default**: `100`<br>
+Configure the sampling distance for exceptions. The higher the sampling distance, the fewer samples are created and the lower the overhead.<br><br>
+**Note**: This supersedes the `DD_PROFILING_EXPERIMENTAL_EXCEPTION_SAMPLING_DISTANCE` environment variable (`datadog.profiling.experimental_exception_sampling_distance` INI setting), which was available since `0.92`. If both are set, this one takes precedence.
+
+`DD_PROFILING_TIMELINE_ENABLED`
+: **INI**: `datadog.profiling.timeline_enabled`. INI available since `0.98.0`.<br>
+**Default**: `1`<br>
+Enable the timeline profile type. Added in version `0.89.0`.<br><br>
+**Note**: This supersedes the `DD_PROFILING_EXPERIMENTAL_TIMELINE_ENABLED` environment variable (`datadog.profiling.experimental_timeline_enabled` INI setting), which was available since `0.89` (default `0`). If both are set, this one takes precedence.
+
+`DD_PROFILING_LOG_LEVEL`
+: **INI**: `datadog.profiling.log_level`. INI available since `0.82.0`.<br>
+**Default**: `off`<br>
+Set the profiler's log level. Acceptable values are `off`, `error`, `warn`, `info`, `debug`, and `trace`. The profiler's logs are written to the standard error stream of the process. Added in version `0.69.0`.
+
+#### Database monitoring
+
+`DD_DBM_PROPAGATION_MODE`
+: **INI**: `datadog.dbm_propagation_mode`<br>
+**Default**: `'disabled'`<br>
+Enables linking between data sent from APM and the Database Monitoring product when set to `'service'` or `'full'`.<br>
+The `'service'` option enables the connection between DBM and APM services. Available for Postgres, MySQL and SQLServer.<br>
+The `'full'` option enables connection between database spans with database query events. Available for Postgres and MySQL.<br>
+
+#### Headers extraction and injection
+
 `DD_TRACE_PROPAGATION_STYLE_INJECT`
 : **INI**: `datadog.trace.propagation_style_inject`<br>
 **Default**: `Datadog,tracecontext`<br>
@@ -464,6 +483,13 @@ Propagation styles to use when extracting tracing headers. If using multiple sty
   - [B3 single header][8]
   - Datadog
 
+#### Integrations
+
+`DD_TRACE_<INTEGRATION>_ENABLED`
+: **INI**: `datadog.trace.<INTEGRATION>_enabled`<br>
+**Default**: `1`<br>
+Enable or disable an integration; all integrations are enabled by default (see [Integration names](#integration-names)).
+
 `DD_TRACE_WORDPRESS_ADDITIONAL_ACTIONS`
 : **INI**: `datadog.trace.wordpress_additional_actions`<br>
 **Default**: `null`<br>
@@ -474,17 +500,6 @@ A comma-separated list of WordPress action hooks to be instrumented. This featur
 **Default**: `true` for PHP tracer >= v1.0<br>
 Enables WordPress action hook callbacks instrumentation. This feature is only available when `DD_TRACE_WORDPRESS_ENHANCED_INTEGRATION` is enabled. Added in version `0.91.0`.
 
-`DD_DBM_PROPAGATION_MODE`
-: **INI**: `datadog.dbm_propagation_mode`<br>
-**Default**: `'disabled'`<br>
-Enables linking between data sent from APM and the Database Monitoring product when set to `'service'` or `'full'`.<br>
-The `'service'` option enables the connection between DBM and APM services. Available for Postgres, MySQL and SQLServer.<br>
-The `'full'` option enables connection between database spans with database query events. Available for Postgres and MySQL.<br>
-
-`DD_INSTRUMENTATION_TELEMETRY_ENABLED`
-: **INI**: `datadog.instrumentation_telemetry_enabled`<br>
-**Default**: `true`<br>
-Datadog may collect [environmental and diagnostic information about your system][16] to improve the product. When false, this telemetry data will not be collected.
 
 #### Integration names
 
