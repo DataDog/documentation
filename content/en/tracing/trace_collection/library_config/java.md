@@ -199,29 +199,6 @@ When `false`, informational startup logging is disabled. Available for versions 
 **Default**: `false`<br>
 When `true`, user principal is collected. Available for versions 0.61+.
 
-`dd.trace.propagation.style.inject`
-: **Environment Variable**: `DD_TRACE_PROPAGATION_STYLE_INJECT`<br>
-**Default**: `datadog,tracecontext`<br>
-A comma-separated list of header formats to include to propagate distributed traces between services.<br>
-Available since version 1.9.0
-
-`dd.trace.propagation.style.extract`
-: **Environment Variable**: `DD_TRACE_PROPAGATION_STYLE_EXTRACT`<br>
-**Default**: `datadog,tracecontext`<br>
-A comma-separated list of header formats from which to attempt to extract distributed tracing propagation data. The first format found with complete and valid headers is used to define the trace to continue.<br>
-Available since version 1.9.0
-
-`dd.trace.propagation.style`
-: **Environment Variable**: `DD_TRACE_PROPAGATION_STYLE`<br>
-**Default**: `datadog,tracecontext`<br>
-A comma-separated list of header formats from which to attempt to inject and extract distributed tracing propagation data. The first format found with complete and valid headers is used to define the trace to continue. The more specific `dd.trace.propagation.style.inject` and `dd.trace.propagation.style.extract` configuration settings take priority when present.<br>
-Available since version 1.9.0
-
-`trace.propagation.extract.first`
-: **Environment Variable**: `DD_TRACE_PROPAGATION_EXTRACT_FIRST`<br>
-**Default**: `false`<br>
-When set to `true`, stop extracting trace context when a valid one is found.
-
 `dd.trace.rate.limit`
 : **Environment Variable**: `DD_TRACE_RATE_LIMIT`<br>
 **Default**: `100`<br>
@@ -252,6 +229,31 @@ When `true`, the tracer will inject 128 bit Trace IDs as 32 lowercase hexadecima
 **Default**: `false`<br>
 When `true`, OpenTelemetry-based tracing for [custom][16] instrumentation is enabled.
 
+### Headers extraction and injection
+
+`dd.trace.propagation.style.inject`
+: **Environment Variable**: `DD_TRACE_PROPAGATION_STYLE_INJECT`<br>
+**Default**: `datadog,tracecontext`<br>
+A comma-separated list of header formats to include to propagate distributed traces between services.<br>
+Available since version 1.9.0
+
+`dd.trace.propagation.style.extract`
+: **Environment Variable**: `DD_TRACE_PROPAGATION_STYLE_EXTRACT`<br>
+**Default**: `datadog,tracecontext`<br>
+A comma-separated list of header formats from which to attempt to extract distributed tracing propagation data. The first format found with complete and valid headers is used to define the trace to continue.<br>
+Available since version 1.9.0
+
+`dd.trace.propagation.style`
+: **Environment Variable**: `DD_TRACE_PROPAGATION_STYLE`<br>
+**Default**: `datadog,tracecontext`<br>
+A comma-separated list of header formats from which to attempt to inject and extract distributed tracing propagation data. The first format found with complete and valid headers is used to define the trace to continue. The more specific `dd.trace.propagation.style.inject` and `dd.trace.propagation.style.extract` configuration settings take priority when present.<br>
+Available since version 1.9.0
+
+`trace.propagation.extract.first`
+: **Environment Variable**: `DD_TRACE_PROPAGATION_EXTRACT_FIRST`<br>
+**Default**: `false`<br>
+When set to `true`, stop extracting trace context when a valid one is found.
+
 ### Logs
 
 `dd.logs.injection`
@@ -271,8 +273,6 @@ When set to `true` db spans get assigned the instance name as the service name
 : **Environment Variable**: `DD_TRACE_DB_CLIENT_SPLIT_BY_HOST` <br>
 **Default**: `false`<br>
 When set to `true` db spans get assigned the remote database hostname as the service name
-
-### ASM
 
 ### Agent
 

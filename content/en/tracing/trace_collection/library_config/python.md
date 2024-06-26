@@ -63,14 +63,6 @@ For more information, see [Ingestion Mechanisms][5].<br>
 : **Default**: `false`<br>
 Enable debug logging in the tracer.
 
-`DD_TRACE_PROPAGATION_STYLE_INJECT`
-: **Default**: `tracecontext,Datadog`<br>
-Propagation styles to use when injecting tracing headers. For example, use `DD_TRACE_PROPAGATION_STYLE_INJECT=Datadog,B3` to inject both Datadog and B3 format headers.
-
-`DD_TRACE_PROPAGATION_STYLE_EXTRACT`
-: **Default**: Value of `DD_TRACE_PROPAGATION_STYLE_INJECT` (`tracecontext,Datadog`)<br>
-Propagation styles to use when extracting tracing headers. When multiple values are given, it uses the first header match found. The order of matching is based on the order of values given. For example, `DD_TRACE_PROPAGATION_STYLE_EXTRACT=B3,Datadog` looks for `B3` headers first, and only uses `Datadog` headers if those are not available.
-
 `DD_SERVICE_MAPPING`
 : Define service name mappings to allow renaming services in traces, for example: `postgres:postgresql,defaultdb:postgresql`. Available in version 0.47+.
 
@@ -83,6 +75,16 @@ Comma-separated list of header names that are reported on the root span as tags.
 
 `DD_TRACE_AGENT_URL`
 : The URL of the Trace Agent that the tracer submits to. If set, this takes priority over hostname and port. Supports Unix Domain Sockets (UDS) in combination with the `apm_config.receiver_socket` configuration in your `datadog.yaml` file or the `DD_APM_RECEIVER_SOCKET` environment variable set on the Datadog Agent. For example, `DD_TRACE_AGENT_URL=http://localhost:8126` for HTTP URL and `DD_TRACE_AGENT_URL=unix:///var/run/datadog/apm.socket` for UDS. If the [Agent configuration][13] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then `DD_AGENT_PORT` or `DD_TRACE_AGENT_URL` must match it. 
+
+### Headers extraction and injection
+
+`DD_TRACE_PROPAGATION_STYLE_INJECT`
+: **Default**: `tracecontext,Datadog`<br>
+Propagation styles to use when injecting tracing headers. For example, use `DD_TRACE_PROPAGATION_STYLE_INJECT=Datadog,B3` to inject both Datadog and B3 format headers.
+
+`DD_TRACE_PROPAGATION_STYLE_EXTRACT`
+: **Default**: Value of `DD_TRACE_PROPAGATION_STYLE_INJECT` (`tracecontext,Datadog`)<br>
+Propagation styles to use when extracting tracing headers. When multiple values are given, it uses the first header match found. The order of matching is based on the order of values given. For example, `DD_TRACE_PROPAGATION_STYLE_EXTRACT=B3,Datadog` looks for `B3` headers first, and only uses `Datadog` headers if those are not available.
 
 ### Logs
 
