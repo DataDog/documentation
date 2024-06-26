@@ -77,7 +77,7 @@ En este ejemplo, el servicio `email-api-py` con el estado `INFO` y el patrón `r
 
 Los filtros de exclusión pueden deshabilitarse en cualquier momento, cambiando la opción de deshabilitación situada a la derecha del filtro. También pueden modificarse y eliminarse, situándose sobre el filtro y seleccionando la opción para editar o eliminar.
 
-## 4. Generar métricas para realizar un seguimiento de los logs excluidos
+## 4. Generar métricas para realizar un seguimiento de logs excluidos
 
 Una vez que un patrón de logs se excluye del Explorador de logs, puedes seguir realizando un seguimiento de los KPI a lo largo del tiempo, en el nivel de consumo, mediante la creación de una nueva [métrica personalizada basada en logs][8].
 
@@ -89,8 +89,8 @@ Una vez que un patrón de logs se excluye del Explorador de logs, puedes seguir 
 1. Haz clic en **New Metric** (Nueva métrica), en la esquina superior derecha.
 1. Introduce un nombre para tu métrica. loguear Los nombres de métricas basadas en logs deben seguir la convención de nomenclatura para métricas.
 1. En **Define Query** (Definir consulta), introduce la consulta de búsqueda que has copiado y pegado en el filtro de exclusión de patrones. Por ejemplo: `service:web-store status:info "updating recommendations with customer_id" "url shops"`, como en el ejemplo anterior.
-1. Selecciona el campo del que quieres hacer un seguimiento: selecciona `*` para generar un recuento de todos los logs que coinciden con tu consulta o introduce una medida (por ejemplo, `@duration`) para agregar un valor numérico y crear su correspondiente recuento, mínimo, máximo, suma y media de métricas agregadas.
-1. Añade dimensiones al grupo: selecciona atributos de logs o claves de etiqueta para aplicarlos a las métricas basadas en logs para transformarlos en etiquetas (tags) siguiendo el formato de `<KEY>:<VALUE>`. Las métricas basadas en logs se consideran métricas personalizadas. Evita agrupar por atributos no limitados o de cardinalidad extremadamente alta como marcas de tiempo, ID de usuario, ID de solicitud o ID de sesión, para evitar un impacto negativo en tu facturación.
+1. Selecciona el campo del que quieres realizar un seguimiento: selecciona `*` para generar un recuento de todos los logs que coinciden con tu consulta o introduce una medida (por ejemplo, `@duration`) para agregar un valor numérico y crear su correspondiente recuento, mínimo, máximo, suma y media de métricas agregadas.
+1. Añade dimensiones al grupo: selecciona atributos de logs o claves de etiqueta (tag) para aplicarlos a las métricas basadas en logs para transformarlos en etiquetas siguiendo el formato de `<KEY>:<VALUE>`. Las métricas basadas en logs se consideran métricas personalizadas. Evita agrupar por atributos no limitados o de cardinalidad extremadamente alta como marcas de tiempo, ID de usuario, ID de solicitud o ID de sesión, para evitar un impacto negativo en tu facturación.
 
 ### Crear un monitor de detección de anomalías
 
