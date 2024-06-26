@@ -14,31 +14,28 @@ further_reading:
 
 ## Overview
 
-Instrument your services and track user activity to detect and block bad actors.
+ASM allows you to monitor your user login events and authenticated requests to associate them to security attacks and business logic events, and run security detection rules, such as our Account TakeOver detection, to ultimately to block bad actors targeting your authenticated attack surface.
 
-[Add authenticated user information on traces](#adding-authenticated-user-information-to-traces-and-enabling-user-blocking-capability) to identify and block bad actors targeting your authenticated attack surface. To do this, set the user ID tag on the running APM trace, providing the necessary instrumentation for ASM to block authenticated attackers. This allows ASM to associate attacks and business logic events to users.
+Datadog Tracing Libraries automatically detect and report such user activity events for [compatible frameworks](https://docs.datadoghq.com/security/application_security/enabling/compatibility/)>, or can otherwise be performed with manual instrumentation of your services.
 
-[Track user logins and activity](#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces) to detect account takeovers and business logic abuse with out-of-the-box detection rules, and to ultimately block attackers.
+ASM provides a set of detection rules out of the box, relying on the following security events:
+- [Rate limited activity from IP][4]
+- [Unauthorized activity detected][5]
+- [Credential Stuffing attack][6]
+- [Excessive account creations from an IP][7]
+- [Excessive account deletion from an IP][8]
+- [Password reset brute force attempts][9]
+- [Excessive payment failures from IP][10]
 
-<div class="alert alert-info">
-<strong>Automated Detection of User Activity:</strong> Datadog Tracing Libraries attempt to detect and report user activity events automatically. For more information, read <a href="/security/application_security/threats/add-user-info/?tab=set_user#disabling-automatic-user-activity-event-tracking">Disabling automatic user activity event tracking</a>.
-</div>
+## Monitoring and protecting authenticated requests
 
-The custom user activity for which out-of-the-box detection rules are available are as follow:
+Monitoring authenticated requests allows to associate the authenticated users to the attacks found by ASM and get finer-grained insights on your security events. Doing this ultimately allows you to block authenticated requests whose user IDs are in the ASM user denylist (for instance as a result of an Account TakeOver security signal action).
 
-| Built-in event names   | Required metadata                                    | Related rules                                                                                                                                                                                                       |
-|------------------------|------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `activity.sensitive`   | `{ "name": "coupon_use", "required_role": "user" }`  | [Rate limited activity from IP][4]<br>[Unauthorized activity detected][5] |
-| `users.login.success`  | User ID is mandatory, optional metadata can be added | [Credential Stuffing attack][6]                                                                                                              |
-| `users.login.failure`  | User ID is mandatory, optional metadata can be added | [Credential Stuffing attack][6]                                                                                                              |
-| `users.signup`         | `{ "usr.id": "12345" }`                              | [Excessive account creations from an IP][7]                                                                                                    |
-| `users.delete`         | `{ "usr.id": "12345" }`                              | [Excessive account deletion from an IP][8]                                                                                           |
-| `users.password_reset` | `{ "usr.id": "12345", "exists": true }`              | [Password reset brute force attempts][9]                                                                                                         |
-| `payment.attempt`      | `{ "status": "failed" }`                             | [Excessive payment failures from IP][10]                                                                                                        |
+### Automated monitoring of authenticated requests
 
-## Adding authenticated user information to traces and enabling user blocking capability
+TODO: auto instrum compat table, including auto user blocking
 
-You can [add custom tags to your root span][3], or use the instrumentation functions described below.
+### Manual monitoring of authenticated requests
 
 {{< programming-lang-wrapper langs="java,dotnet,go,ruby,php,nodejs,python" >}}
 
@@ -271,8 +268,6 @@ if (tracer.appsec.isUserBlocked(user)) {  // also set the currently authenticate
 
 For information and options, read [the Node.js tracer documentation][1].
 
-
-
 [1]: https://datadoghq.dev/dd-trace-js/#set-user
 {{< /programming-lang >}}
 
@@ -295,7 +290,74 @@ set_user(tracer, user_id, name="John", email="test@test.com", scope="some_scope"
 
 {{< /programming-lang-wrapper >}}
 
-## Adding business logic information (login success, login failure, any business logic) to traces
+## Monitoring and protecting user login business logic
+
+TODO: intro on the 3 different options
+
+### Automated monitoring
+
+When ASM is enabled, recent Datadog Tracing Libraries attempt to detect user activity events automatically.
+
+The events that can be automatically detected are:
+- `users.login.success`
+- `users.login.failure`
+- `users.signup`
+
+#### Automatic user activity event tracking mode
+
+<div class="alert alert-warning"><strong>This is deprecated</strong> and only applies to older agent versions. See the <a href="/security/application_security/enabling/compatibility/">ASM capabilities table</a>.</div>
+
+Automatic user activity tracking offers two modes: <code>safe</code>, and <code>extended</code>
+
+In <code>safe</code> mode, the trace library does not include any PII information on the events metadata. The tracer library tries to collect the user ID, and only if the user ID is a valid [GUID][10]
+
+In <code>extended</code> mode, the trace library tries to collect the user ID, and the user email. In this mode, we do not check the type for the user ID to be a GUID. The trace library reports whatever value can be extracted from the event.
+
+To configure automatic user event tracking mode, you can set the environment variable <code>DD_APPSEC_AUTOMATED_USER_EVENTS_TRACKING</code> to <code>safe</code> or <code>extended</code>. By default, the tracer library uses the <code>safe</code> mode.
+
+<div class="alert alert-info">For compatibility, see the <a href="/security/application_security/enabling/compatibility/">ASM capabilities table</a>.</div>
+
+Automatic user ID collection offers three modes: <code>identification</code>, <code>anonymization</code>, and <code>disabled</code>.
+
+To configure manually the automatic user ID collection mode, you can set the environment variable <code>DD_APPSEC_AUTO_USER_INSTRUMENTATION_MODE</code> to <code>ident</code>, <code>anon</code>, or <code>disabled</code>. By default, the tracer library uses the <code>ident</code> mode.
+
+You can configure the automatic user ID collection mode in your remote service configuration settings in the [Service Catalog][12]. Under the capabilities tab, you can choose the mode you want to apply.
+
+{{< img src="security/application_security/threats/service-capabilities-threat-management.png" alt="Access the Automated User ID Collection Mode Button from the Service Catalog by clicking on your service, then in the Capabilites tab" style="width:100%;" >}}
+
+The available modes are: <code>identification</code>, <code>anonymization</code>, <code>disabled</code> and <code>local</code>. Local mode removes all remote configuration and lets local configuration take over for the user ID collection mode.
+
+**Note**: There could be cases in which the trace library won't be able to extract any information from the user event. The event would be reported with empty metadata. In those cases, we recommend using the [SDK](#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces) to manually instrument the user events.
+
+#### Disabling automatic user activity event tracking
+
+<div class="alert alert-warning"><strong>This is deprecated</strong> and only applies to older agent versions. See the <a href="/security/application_security/enabling/compatibility/">ASM capabilities table</a>.</div>
+
+If you wish to disable the detection of these events, you should set the environment variable <code>DD_APPSEC_AUTOMATED_USER_EVENTS_TRACKING</code> to <code>disabled</code>. This should be set on the application hosting the Datadog Tracing Library, and not on the Datadog Agent.
+
+<div class="alert alert-info">For compatibility, see the <a href="/security/application_security/enabling/compatibility/">ASM capabilities table</a>.</div>
+
+If you wish to disable the automatic user ID collection, you should set the environment variable <code>DD_APPSEC_AUTO_USER_INSTRUMENTATION_MODE</code> to <code>disabled</code>. This should be set on the application hosting the Datadog Tracing Library, and not on the Datadog Agent. This can also be done by selecting <code>disabled</code> mode in remote service configuration settings.
+
+You should only turn this feature off, if you wish to prevent the collection of user IDs for privacy reasons. Disabling auto-instrumentation will prevent detection of some classes of attacks (such as account takeovers).
+
+### Automated In-App WAF security rules
+If your service has ASM enabled and [Remote Configuraton][1] enabled, you can create a custom WAF rule to flag any request it matches with a custom business logic tag. This doesn't require any modification to your application, and can be done entirely from Datadog.
+
+To get started, navigate to the [Custom WAF Rule page][2] and click on "Create New Rule".
+
+{{< img src="security/application_security/threats/custom-waf-rule-menu.png" alt="Access the Custom WAF Rule Menu from the ASM homepage by clicking on Protection, then In-App WAF and Custom Rules" style="width:100%;" >}}
+
+This will open a menu in which you may define your custom WAF rule. By selecting the "Business Logic" category, you will be able to configure an event type (for instance, `users.password_reset`). You can then select the service you want to track, and a specific endpoint. You may also use the rule condition to target a specific parameter to identify the codeflow you want to _instrument_. When the condition matches, the library tags the trace and flags it to be forwarded to ASM. If you don't need the condition, you may set a broad condition to match everything.
+
+{{< img src="security/application_security/threats/custom-waf-rule-form.png" alt="Screenshot of the form that appear when you click on the Create New Rule button" style="width:50%;" >}}
+
+Once saved, the rule is deployed to instances of the service that have Remote Configuration enabled.
+
+[1]: /agent/remote_config?tab=configurationyamlfile#application-security-management-asm
+[2]: https://app.datadoghq.com/security/appsec/in-app-waf?config_by=custom-rules
+
+### Manual monitoring
 
 {{< programming-lang-wrapper langs="java,dotnet,go,ruby,php,nodejs,python" >}}
 {{< programming-lang lang="java" >}}
@@ -681,72 +743,6 @@ track_custom_event(tracer, event_name, metadata)
 {{< /programming-lang >}}
 
 {{< /programming-lang-wrapper >}}
-
-### Tracking business logic information without modifying the code
-
-If your service has ASM enabled and [Remote Configuraton][1] enabled, you can create a custom WAF rule to flag any request it matches with a custom business logic tag. This doesn't require any modification to your application, and can be done entirely from Datadog.
-
-To get started, navigate to the [Custom WAF Rule page][2] and click on "Create New Rule".
-
-{{< img src="security/application_security/threats/custom-waf-rule-menu.png" alt="Access the Custom WAF Rule Menu from the ASM homepage by clicking on Protection, then In-App WAF and Custom Rules" style="width:100%;" >}}
-
-This will open a menu in which you may define your custom WAF rule. By selecting the "Business Logic" category, you will be able to configure an event type (for instance, `users.password_reset`). You can then select the service you want to track, and a specific endpoint. You may also use the rule condition to target a specific parameter to identify the codeflow you want to _instrument_. When the condition matches, the library tags the trace and flags it to be forwarded to ASM. If you don't need the condition, you may set a broad condition to match everything.
-
-{{< img src="security/application_security/threats/custom-waf-rule-form.png" alt="Screenshot of the form that appear when you click on the Create New Rule button" style="width:50%;" >}}
-
-Once saved, the rule is deployed to instances of the service that have Remote Configuration enabled.
-
-
-[1]: /agent/remote_config?tab=configurationyamlfile#application-security-management-asm
-[2]: https://app.datadoghq.com/security/appsec/in-app-waf?config_by=custom-rules
-
-## Automatic user activity event tracking
-
-When ASM is enabled, recent Datadog Tracing Libraries attempt to detect user activity events automatically.
-
-The events that can be automatically detected are:
-
-- `users.login.success`
-- `users.login.failure`
-- `users.signup`
-
-### Automatic user activity event tracking mode
-
-<div class="alert alert-warning"><strong>This is deprecated</strong> and only applies to older agent versions. See the <a href="/security/application_security/enabling/compatibility/">ASM capabilities table</a>.</div>
-
-Automatic user activity tracking offers two modes: <code>safe</code>, and <code>extended</code>
-
-In <code>safe</code> mode, the trace library does not include any PII information on the events metadata. The tracer library tries to collect the user ID, and only if the user ID is a valid [GUID][10]
-
-In <code>extended</code> mode, the trace library tries to collect the user ID, and the user email. In this mode, we do not check the type for the user ID to be a GUID. The trace library reports whatever value can be extracted from the event.
-
-To configure automatic user event tracking mode, you can set the environment variable <code>DD_APPSEC_AUTOMATED_USER_EVENTS_TRACKING</code> to <code>safe</code> or <code>extended</code>. By default, the tracer library uses the <code>safe</code> mode.
-
-<div class="alert alert-info">For compatibility, see the <a href="/security/application_security/enabling/compatibility/">ASM capabilities table</a>.</div>
-
-Automatic user ID collection offers three modes: <code>identification</code>, <code>anonymization</code>, and <code>disabled</code>.
-
-To configure manually the automatic user ID collection mode, you can set the environment variable <code>DD_APPSEC_AUTO_USER_INSTRUMENTATION_MODE</code> to <code>ident</code>, <code>anon</code>, or <code>disabled</code>. By default, the tracer library uses the <code>ident</code> mode.
-
-You can configure the automatic user ID collection mode in your remote service configuration settings in the [Service Catalog][12]. Under the capabilities tab, you can choose the mode you want to apply.
-
-{{< img src="security/application_security/threats/service-capabilities-threat-management.png" alt="Access the Automated User ID Collection Mode Button from the Service Catalog by clicking on your service, then in the Capabilites tab" style="width:100%;" >}}
-
-The available modes are: <code>identification</code>, <code>anonymization</code>, <code>disabled</code> and <code>local</code>. Local mode removes all remote configuration and lets local configuration take over for the user ID collection mode.
-
-**Note**: There could be cases in which the trace library won't be able to extract any information from the user event. The event would be reported with empty metadata. In those cases, we recommend using the [SDK](#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces) to manually instrument the user events.
-
-## Disabling automatic user activity event tracking
-
-<div class="alert alert-warning"><strong>This is deprecated</strong> and only applies to older agent versions. See the <a href="/security/application_security/enabling/compatibility/">ASM capabilities table</a>.</div>
-
-If you wish to disable the detection of these events, you should set the environment variable <code>DD_APPSEC_AUTOMATED_USER_EVENTS_TRACKING</code> to <code>disabled</code>. This should be set on the application hosting the Datadog Tracing Library, and not on the Datadog Agent.
-
-<div class="alert alert-info">For compatibility, see the <a href="/security/application_security/enabling/compatibility/">ASM capabilities table</a>.</div>
-
-If you wish to disable the automatic user ID collection, you should set the environment variable <code>DD_APPSEC_AUTO_USER_INSTRUMENTATION_MODE</code> to <code>disabled</code>. This should be set on the application hosting the Datadog Tracing Library, and not on the Datadog Agent. This can also be done by selecting <code>disabled</code> mode in remote service configuration settings.
-
-You should only turn this feature off, if you wish to prevent the collection of user IDs for privacy reasons. Disabling auto-instrumentation will prevent detection of some classes of attacks (such as account takeovers).
 
 ## Further Reading
 
