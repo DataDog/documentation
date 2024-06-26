@@ -292,7 +292,7 @@ module "lambda-datadog" {
 
    たとえば、`aws_lambda_function` では、`environment` は `variables` 引数を持つブロックとして定義されています。`lambda-datadog` Terraformモジュールでは、`environment_variables` の値が `aws_lambda_function` の `environment.variables` 引数に渡されます。このモジュールの変数の完全なリストは [Inputs][3] を参照してください。
 
-3. 環境変数のプレースホルダーを埋めていきます。
+3. 環境変数のプレースホルダーを埋めます。
 
    - `<DATADOG_API_KEY_SECRET_ARN>` を、[Datadog API キー][3]が安全に保存されている AWS シークレットの ARN に置き換えます。キーはプレーンテキスト文字列として保存する必要があります (JSON blob ではありません)。また、`secretsmanager:GetSecretValue`権限が必要です。迅速なテストのために、代わりに環境変数 `DD_API_KEY` を使用して、Datadog API キーをプレーンテキストで設定することができます。
    - `<ENVIRONMENT>` を、`prod` や `staging` などの Lambda 関数の環境で置き換えます。　
