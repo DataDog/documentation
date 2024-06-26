@@ -16,7 +16,7 @@ The following application security capabilities are supported in the Node.js lib
 | Threat Protection                      | 4.0.0                                              |
 | Customize response to blocked requests | 4.1.0                                              |
 | Software Composition Analysis (SCA)    | 4.0.0                                              |
-| Code Security (beta)                   | 4.18.0 for Node.js 16+, or 5.0.0 for Node.js 18+   |
+| Code Security                          | 4.18.0 for Node.js 16+, or 5.0.0 for Node.js 18+   |
 | Automatic user activity event tracking | 4.4.0 for Node.js 16+                              |
 | API Security                           | 4.30.0 for Node.js 16+, or 5.6.0 for Node.js 18+   |
 
