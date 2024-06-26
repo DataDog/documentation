@@ -1,7 +1,7 @@
 ---
 disable_toc: false
-kind: guía
-title: Administra logs y métricas con Terraform
+kind: Terraform
+title: Administra logs y métricas con la guía de
 ---
 
 ## Información general
