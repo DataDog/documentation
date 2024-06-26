@@ -728,11 +728,11 @@ Automatic user ID collection offers three modes: <code>identification</code>, <c
 
 To configure manually the automatic user ID collection mode, you can set the environment variable <code>DD_APPSEC_AUTO_USER_INSTRUMENTATION_MODE</code> to <code>ident</code>, <code>anon</code>, or <code>disabled</code>. By default, the tracer library uses the <code>ident</code> mode.
 
-You can configure the automatic user ID collection mode in your remote service configuration settings in the [Service Catalog][13]. Under the capabilities tab, you can choose the mode you want to apply.
+You can configure the automatic user ID collection mode in your remote service configuration settings in the [Service Catalog][12]. Under the capabilities tab, you can choose the mode you want to apply.
 
 {{< img src="security/application_security/threats/service-capabilites-threat-management.png" alt="Access the Automated User ID Collection Mode Button from the Service Catalog by clicking on your service, then in the Capabilites tab" style="width:100%;" >}}
 
-The available modes are: <code>identification</code>, <code>anonymization</code>, <code>disabled</code> and <code>disabled</code>. Local mode removes all remote configuration and lets local configuration take over for the user ID collection mode.
+The available modes are: <code>identification</code>, <code>anonymization</code>, <code>disabled</code> and <code>local</code>. Local mode removes all remote configuration and lets local configuration take over for the user ID collection mode.
 
 **Note**: There could be cases in which the trace library won't be able to extract any information from the user event. The event would be reported with empty metadata. In those cases, we recommend using the [SDK](#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces) to manually instrument the user events.
 
