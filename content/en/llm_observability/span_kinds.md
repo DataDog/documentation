@@ -11,8 +11,6 @@ LLM Observability is not available in the US1-FED site.
 </div>
 {{% /site-region %}}
 
-<div class="alert alert-info">LLM Observability is in public beta.</a></div>
-
 ## Overview
 
 LLM Observability categorizes spans by their *span kind*, which defines the type of work the span is performing. This can give you more granular insights on what operations are being performed by your LLM application.

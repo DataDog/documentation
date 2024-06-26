@@ -1,17 +1,23 @@
 ---
 title: Sankey Diagram
 kind: documentation
+aliases:
+- /real_user_monitoring/product_analytics/sankey
+further_reading:
+- link: '/product_analytics/journeys'
+  tag: Documentation
+  text: Journeys
 ---
 
-{{< callout url="#" btn_hidden="true" header="Try the Beta!" >}}
-Sankey diagrams are in public beta.
+{{< callout url="http://datadoghq.com/private-beta/product-analytics" header="false" >}}
+All features in Product Analytics are in limited availability. To request access, complete the form.
 {{< /callout >}}
 
 ## Overview
 
 The Sankey diagram allows you to visualize all user journeys across your application to analyze the critical path.
 
-{{< img src="real_user_monitoring/product_analytics/sankey_diagrams/default-sankey.png" alt="The default Sankey diagram for an app" style="width:90%;" >}}
+{{< img src="/product_analytics/sankey_diagrams/sankey-overview.png" alt="The default Sankey diagram for an app" style="width:90%;" >}}
 
 Each node represents a view the user visited. The thickness of each node represents the count of user sessions on that page. A page with fewer visitors will have a thinner node in the diagram.
 
@@ -34,7 +40,7 @@ You can use the **Define Sankey** menu to customize this diagram to display:
 
 The example below displays the four steps that users in the United States take after visiting `/department/lightning`:
 
-{{< img src="real_user_monitoring/product_analytics/sankey_diagrams/customized-sankey.png" alt="A customized Sankey diagram for an app" style="width:90%;" >}}
+{{< img src="/product_analytics/sankey_diagrams/customized-sankey.png" alt="A customized Sankey diagram for an app" style="width:90%;" >}}
 
 ### Graph all views containing a given phrase
 
@@ -42,7 +48,7 @@ Sankey diagrams support [Datadog wildcards][2], allowing you to build a diagram 
 
 To match multiple routes, type a wildcard instead of choosing a single view name. The example below displays the five steps that users take after visiting any view matching `/department/*`:
 
-{{< img src="real_user_monitoring/product_analytics/sankey_diagrams/wildcard-sankey.png" alt="A Sankey diagram that uses a wildcard to match several routes" style="width:90%;" >}}
+{{< img src="/product_analytics/sankey_diagrams/wildcard-sankey.png" alt="A Sankey diagram that uses a wildcard to match several routes" style="width:90%;" >}}
 
 ## Analyze a Sankey diagram
 
@@ -50,8 +56,7 @@ You can hover over a diagram node to view the number of sessions that included v
 
 Click a node for a list of analysis options, such as viewing a sample [Session Replay][3] or building a Sankey diagram that starts with that view.
 
-{{< img src="real_user_monitoring/product_analytics/sankey_diagrams/sankey-node-interaction.png" alt="The actions menu of a Sankey diagram node" style="width:90%;" >}}
-
+{{< img src="/product_analytics/sankey_diagrams/sankey-node-interaction.png" alt="The actions menu of a Sankey diagram node" style="width:90%;" >}}
 
 ### Convert the diagram to a funnel
 
@@ -59,7 +64,7 @@ Click a node for a list of analysis options, such as viewing a sample [Session R
 2. In the Sankey diagram, click the nodes of the views you want to include in the funnel.
 3. Click **Create Funnel from Selection**.
 
-{{< img src="real_user_monitoring/product_analytics/sankey_diagrams/sankey-funnel-conversion.png" alt="A Sankey to funnel conversion in process" style="width:90%;" >}}
+{{< img src="/product_analytics/sankey_diagrams/sankey-funnel-conversion.png" alt="A Sankey to funnel conversion in process" style="width:90%;" >}}
 
 ## Troubleshooting
 
@@ -71,6 +76,9 @@ The algorithms for the Sankey diagram and the funnel rely on two different compu
 - The Sankey diagram only counts views to `/home` where another view follows. If a user goes to `/home` and stays on that page or leaves the app, the Sankey diagram does not include their sessions.
 
 In addition, funnels do not include active sessions, while Sankey diagrams do include active sessions.
+
+## Further reading
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/product-analytics/user-journey
 [2]: /real_user_monitoring/explorer/search_syntax/#wildcards

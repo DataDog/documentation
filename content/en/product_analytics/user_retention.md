@@ -1,10 +1,16 @@
 ---
 title: User Retention
 kind: documentation
-aliases:
-- /real_user_monitoring/retention_analysis
-- /real_user_monitoring/product_analytics/retention_analysis
+description: Measure user retention to understand overall user satisfaction with your application.
+further_reading:
+    - link: '/product_analytics/'
+      tag: Documentation
+      text: Product Analytics
 ---
+
+{{< callout url="http://datadoghq.com/private-beta/product-analytics" header="false" >}}
+All features in Product Analytics are in limited availability. To request access, complete the form.
+{{< /callout >}}
 
 ## Overview
 Retention Analysis allows you to measure how often users are successfully returning to a page or action. By tracking user retention over time, you can gain insights into overall user satisfaction.
@@ -71,6 +77,9 @@ Reading the **Dec 04 2023** row of the above graph from left to right:
 ## Data retention
 
 Data retention for this feature is limited to 30 days unless your organization is configured to retain data for 90 days. You can file a [support ticket][5] to increase retention to 90 days at no additional cost.
+
+## Further reading
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/rum/retention-analysis
 [2]: /real_user_monitoring/browser/data_collected/#view-attributes
