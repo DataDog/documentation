@@ -155,20 +155,37 @@ Triggering a workflow using an API call requires an [API key][8] and an [applica
 
 <div class="alert alert-info">Unscoped keys do not include the <code>workflows_run</code> scope by default. Ensure that you're following security best practice and use an application key with the minimum scopes needed to perform the desired task.</div>
 
-To trigger a workflow with an API call:
-1. Create a workflow with a **API** trigger, or add an **API** trigger to an existing workflow.
-1. On the workflow canvas, click **API** trigger and note the example workflow cURL request, which includes the required headers and data to trigger your workflow. An API call to trigger a workflow looks something like this:
-   ```curl
-   curl -X POST \
-     -H "Content-Type: application/json" \
-     -H "DD-API-KEY: ${DD_API_KEY}" \
-     -H "DD-APPLICATION-KEY: ${DD_APP_KEY}" \
-     -d {} \
-     https://api.datadoghq.com/api/v2/workflows/abcd-1234/instances
-   ```
-1. Click **Save**.
+You can trigger a workflow by sending a POST request with the workflow ID to the endpoint `https://api.datadoghq.com/api/v2/workflows/WORKFLOW-ID/instances`. When you add an API trigger to a workflow, the trigger interface gives you an example cURL request that you can use to trigger the workflow.
 
-Scheduled and triggered workflows don't run automatically until you've published them. To publish the workflow, click **Publish** from the workflow's page. Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][11].
+To add an API trigger to a workflow:
+1. Click **Add Trigger** > **API** to add an API trigger to your workflow.
+1. On the workflow canvas, click **API** and note the example workflow cURL request, which includes the required headers and data to trigger your workflow.
+
+   An cURL request to trigger a workflow looks something like this:
+   {{< code-block lang="shell" >}}
+curl -X POST \
+  -H "Content-Type: application/json" \
+  -H "DD-API-KEY: ${DD_API_KEY}" \
+  -H "DD-APPLICATION-KEY: ${DD_APP_KEY}" \
+  -d {} \
+  https://api.datadoghq.com/api/v2/workflows/32866005-d275-4553-be86-9f1b13066d84/instances
+{{< /code-block >}}
+
+   If the workflow includes input parameters, include them in the request payload. The following example uses two input parameters, `example_input1` and `example_input2`:
+
+   {{< code-block lang="shell" >}}
+curl -X POST \
+  -H "Content-Type: application/json" \
+  -H "DD-API-KEY: ${DD_API_KEY}" \
+  -H "DD-APPLICATION-KEY: ${DD_APP_KEY}" \
+  -d { "meta": { "payload": { \
+    "example_input1": "...", \
+    "example_input2": "..." \
+  } } } \
+  https://api.datadoghq.com/api/v2/workflows/32866005-d275-4553-be86-9f1b13066d84/instances
+   {{< /code-block >}}
+1. Click **Save**.
+1. Click **Publish** to publish the workflow. A workflow must be published before you can trigger it with a POST request. Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][11].
 
 ## Trigger a workflow on a schedule
 
