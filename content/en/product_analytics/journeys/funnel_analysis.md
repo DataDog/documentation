@@ -4,13 +4,18 @@ kind: documentation
 disable_toc: false
 aliases:
 - /real_user_monitoring/funnel_analysis
+- /real_user_monitoring/product_analytics/funnel_analysis
 further_reading:
-- link: "/real_user_monitoring/explorer/"
+- link: "/product_analytics/analytics_explorer/"
   tag: "Documentation"
-  text: "RUM Explorer"
+  text: "Analytics Explorer"
 algolia:
   tags: ['funnel']
 ---
+
+{{< callout url="http://datadoghq.com/private-beta/product-analytics" header="false" >}}
+All features in Product Analytics are in limited availability. To request access, complete the form.
+{{< /callout >}}
 
 ## Overview
 
@@ -23,11 +28,11 @@ Funnel analysis helps you track conversion rates across key workflows to identif
 **Note**: The conversion rate is the number of visitors to your website that completed a desired goal (a conversion) out of the total number of visitors.
 ## Build a funnel
 
-To build a funnel, navigate to **Digital Experience > Product Analytics > User Journeys**.
+To build a funnel, navigate to [**Digital Experience > Product Analytics > Journeys**][8] and click **Funnel**.
 
-{{< img src="real_user_monitoring/explorer/analytics/funnels-tab.png" alt="Navigate to the Funnel Analysis tab within RUM" style="width:100%;" >}}
+{{< img src="product_analytics/journeys/funnel_analysis/overview.png" alt="Navigate to the Funnel Analysis tab within Product Analytics" style="width:100%;" >}}
 
-From this view, choose your starting view or action and click on the plus icon to build additional steps. You can also use drag and drop functionality to move steps around.
+From this page, choose your starting view or action and click on the plus icon to build additional steps. You can also use drag and drop functionality to move steps around.
 
 {{< img src="real_user_monitoring/funnel_analysis/funnel-analysis-building-a-funnel-1.mp4" alt="Filtering network map with search" video=true >}}
 
@@ -73,19 +78,6 @@ You can share the entire visualization or individual widgets.
 
   {{< img src="real_user_monitoring/funnel_analysis/funnel-analysis-share-individual-widgets-1.mp4" alt="Share a widget by clicking the export icon in the upper-right of the widget" video="true" width=90% >}}
 
-## Alerting on conversion
-
-Setting up alerts on conversion and drop off rates allows you to be notified when conversion drops below a predefined threshold. You can export the conversion rate query to a monitor in a few ways:
-
-- From the visualization: This option takes the end-to-end workflow's query, allowing you to alert on the conversion rate for an entire workflow.
-
-  {{< img src="real_user_monitoring/funnel_analysis/funnel-insights-alert-on-conversion-rate.mp4" alt="Create an alert on the conversion rate for an entire workflow" video=true width=90% >}}
-
-- From the Funnel Insights panel: This allows you to take individual queries and alert on them. While this could be the overall workflow, you also have the option to alert on individual steps' conversion and drop off rates.
-
-  - For example, if you want to alert on the drop off rate between steps 3 and 4, you can do that from the Funnel Insights panel as shown below:
-
-    {{< img src="real_user_monitoring/funnel_analysis/funnel-insights-panel.mp4" alt="Alert on the drop off rate from the Funnel Insights panel" video=true width=90% >}}
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
