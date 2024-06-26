@@ -30,7 +30,7 @@ First, [deploy the Cluster Agent][3].
 Then, deploy the cluster check runner using either [Datadog Operator][4] or [Helm][5]:
 
 {{< tabs >}}
-{{% tab "Operator" %}}
+{{% tab "Datadog Operator" %}}
 
 Using the Operator, you can launch and manage all of these resources with a single manifest. For example:
 
