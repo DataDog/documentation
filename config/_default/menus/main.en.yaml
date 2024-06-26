@@ -4561,71 +4561,76 @@ menu:
       url: logs/explorer/saved_views/
       parent: log_explorer
       weight: 513
+    - name: Workspaces
+      url: logs/workspaces/
+      parent: log_management
+      identifier: logs_workspaces
+      weight: 6
     - name: Error Tracking
       url: logs/error_tracking/
       parent: log_management
       identifier: log_management_error_tracking
-      weight: 6
+      weight: 7
     - name: Error Tracking Explorer
       url: logs/error_tracking/explorer
       parent: log_management_error_tracking
       identifier: log_management_error_tracking_explorer
-      weight: 601
+      weight: 701
     - name: Issue States
       url: logs/error_tracking/issue_states
       parent: log_management_error_tracking
       identifier: log_management_error_tracking_states
-      weight: 602
+      weight: 702
     - name: Track Browser and Mobile Errors
       identifier: log_management_error_tracking_browser_and_mobile
       url: logs/error_tracking/browser_and_mobile
       parent: log_management_error_tracking
-      weight: 603
+      weight: 703
     - name: Track Backend Errors
       identifier: log_management_error_tracking_backend
       url: logs/error_tracking/backend
       parent: log_management_error_tracking
-      weight: 604
+      weight: 704
     - name: Default Grouping
       url: logs/error_tracking/default_grouping
       parent: log_management_error_tracking
       identifier: log_management_error_tracking_default_grouping
-      weight: 605
+      weight: 705
     - name: Custom Grouping
       url: logs/error_tracking/custom_grouping
       parent: log_management_error_tracking
       identifier: log_management_error_tracking_custom_grouping
-      weight: 606
+      weight: 706
     - name: Manage Data Collection
       url: logs/error_tracking/manage_data_collection
       parent: log_management_error_tracking
       identifier: log_management_error_tracking_manage_data_collection
-      weight: 607
+      weight: 707
     - name: Identify Suspect Commits
       url: logs/error_tracking/suspect_commits
       parent: log_management_error_tracking
       identifier: log_management_error_tracking_suspect_commits
-      weight: 608
+      weight: 708
     - name: Troubleshooting
       url: error_tracking/troubleshooting
       parent: log_management_error_tracking
       identifier: log_management_error_tracking_troubleshooting
-      weight: 609
+      weight: 709
     - name: Guides
       url: logs/guide/
       parent: log_management
       identifier: log_guides
-      weight: 7
+      weight: 8
     - name: Data Security
       url: data_security/logs/
       parent: log_management
       identifier: log_security
-      weight: 8
+      weight: 9
     - name: Troubleshooting
       url: logs/troubleshooting
       parent: log_management
       identifier: log_troubleshooting
-      weight: 9
+      weight: 10
     - name: Security Overview
       url: security/
       pre: security-platform
