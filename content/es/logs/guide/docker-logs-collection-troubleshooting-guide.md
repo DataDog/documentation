@@ -79,10 +79,10 @@ Si no puede acceder a la ruta de los archivos de logs, el Agent realiza el segui
 Cuando se recopilan logs del contenedor de Docker del archivo, el Agent recurre a la recopilación del socket de Docker, si no puede leer del directorio en el que se almacenan los logs del contenedor de Docker (`/var/lib/docker/containers` en Linux). En algunas circunstancias, el Datadog Agent puede fallar a la hora de recopilar logs del archivo. Para diagnosticar este problema, comprueba el estado del Agent de logs y busca una entrada de tipo de archivo que muestre un error similar al siguiente:
 
 ```text
-    - Tipo: archivo
-      Identificador: ce0bae54880ad75b7bf320c3d6cac1ef3efda21fc6787775605f4ba8b6efc834
-      Ruta: /var/lib/docker/containers/ce0bae54880ad75b7bf320c3d6cac1ef3efda21fc6787775605f4ba8b6efc834/ce0bae54880ad75b7bf320c3d6cac1ef3efda21fc6787775605f4ba8b6efc834-json.log
-      Estado: Error: archivo /var/lib/docker/containers/ce0bae54880ad75b7bf320c3d6cac1ef3efda21fc6787775605f4ba8b6efc834/ce0bae54880ad75b7bf320c3d6cac1ef3efda21fc6787775605f4ba8b6efc834-json.log no existe
+    - Type: file
+      Identifier: ce0bae54880ad75b7bf320c3d6cac1ef3efda21fc6787775605f4ba8b6efc834
+      Path: /var/lib/docker/containers/ce0bae54880ad75b7bf320c3d6cac1ef3efda21fc6787775605f4ba8b6efc834/ce0bae54880ad75b7bf320c3d6cac1ef3efda21fc6787775605f4ba8b6efc834-json.log
+      Status: Error: file /var/lib/docker/containers/ce0bae54880ad75b7bf320c3d6cac1ef3efda21fc6787775605f4ba8b6efc834/ce0bae54880ad75b7bf320c3d6cac1ef3efda21fc6787775605f4ba8b6efc834-json.log does not exist
 ```
 
 Este estado significa que el Agent no puede encontrar un archivo de log para un determinado contenedor. Para resolver este problema, comprueba que la carpeta que contiene logs del contenedor de Docker está correctamente expuesta al contenedor del Datadog Agent. En Linux, esto corresponde a `-v /var/lib/Docker/containers:/var/lib/Docker/containers:ro` 1 en la línea de comandos que inicia el contenedor del Agent, mientras que en Windows corresponde a `-v c:/programdata/Docker/containers:c:/programdata/Docker/containers:ro`. 2 Fíjate que el directorio asociado al host subyacente podría ser diferente debido a la configuración específica del daemon Docker. Esto no representa un inconveniente durante la correcta asignación de volúmenes Docker. Por ejemplo, utiliza `-v /data/Docker/containers:/var/lib/Docker/containers:ro` 3 Si el directorio de datos de Docker se ha reubicado en `/data/Docker` en el subyacente host.
@@ -101,13 +101,13 @@ Si el estado del Agent de logs muestra `Status: Pending`:
 ==========
 Logs Agent
 ==========
-    LogsProcessed: 0
-    LogsSent: 0
+    Logs procesados 0
+    Logs enviados: 0
 
   container_collect_all
   ---------------------
-    Type: docker
-    Status: Pending
+    Tipo: docker
+    Estado: pendiente
 ```
 
 Este estado significa que el Agent de logs se está ejecutando pero no ha empezado a recopilar logs de contenedor. Esto puede deberse a varias razones:
@@ -204,9 +204,9 @@ logs_config:
 Si estás utilizando el Agent host, el usuario `dd-agent` necesita ser añadido al grupo Docker para tener permiso para leer el socket de Docker. Si ves los siguientes logs con errores en el archivo `agent.log`:
 
 ```text
-2019-10-11 09:17:56 UTC | CORE | INFO | (pkg/autodiscovery/autoconfig.go:360 in initListenerCandidates) | No se puede iniciar el escuchador, se volverá a intentar más tarde: no se ha podido determinar la versión de la API del servidor Docker: se ha negado el permiso al intentar conectar al socket del daemon Docker en unix:///var/run/docker.sock: Get http://%2Fvar%2Frun%2Fdocker.sock/version: dial unix /var/run/docker.sock: conexión: permiso denegado
+2019-10-11 09:17:56 UTC | CORE | INFO | (pkg/autodiscovery/autoconfig.go:360 in initListenerCandidates) | docker listener cannot start, will retry: temporary failure in dockerutil, will retry later: could not determine docker server API version: Got permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Get http://%2Fvar%2Frun%2Fdocker.sock/version: dial unix /var/run/docker.sock: connect: permission denied
 
-2019-10-11 09:17:56 UTC | CORE | ERROR | (pkg/autodiscovery/config_poller.go:123 in collect) | No se pueden recopilar configuraciones del Docker del proveedor: fallo temporario en dockerutil, se volverá a intentar más tarde: no se ha podido determinar la versión de la API del servidor Docker: se ha negado el permiso al intentar conectar al socket del daemon Docker en unix:///var/run/docker.sock: Get http://%2Fvar%2Frun%2Fdocker.sock/version: dial unix /var/run/docker.sock: conexión: permiso denegado
+2019-10-11 09:17:56 UTC | CORE | ERROR | (pkg/autodiscovery/config_poller.go:123 in collect) | Unable to collect configurations from provider docker: temporary failure in dockerutil, will retry later: could not determine docker server API version: Got permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Get http://%2Fvar%2Frun%2Fdocker.sock/version: dial unix /var/run/docker.sock: connect: permission denied
 ```
 
 Para añadir el Agent host al grupo de usuarios Docker, ejecuta el siguiente comando: `usermod -a -G docker dd-agent`.
