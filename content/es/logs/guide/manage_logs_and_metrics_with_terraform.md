@@ -17,19 +17,19 @@ Si aún no lo has hecho, configura el [proveedor de Terraform Datadog][4] para i
 
 ### Configura varios índices
 
-Configura [múltiples índices][5] si quieres segmentar tus logs para diferentes periodos de retención o cuotas diarias, monitorización de uso y facturación. Por ejemplo, si tienes logs que solo deben conservarse durante 7 días, mientras que otros logs deben conservarse durante 30 días, utiliza múltiples índices para separar los logs por los dos periodos de retención. Consulta la documentación [filtros de inclusión][6] y [filtros de exclusión][7] para obtener información sobre cómo definir consultas para ellos. Dado que los logs ingestados van al primer índice con cuyo filtro coinciden, [ordena tus índices][8] en función de tu caso de uso.
+Configura [varios índices][5] si quieres segmentar tus logs para diferentes periodos de retención o cuotas diarias, monitorización de uso y facturación. Por ejemplo, si tienes logs que solo deben conservarse durante 7 días, mientras que otros logs deben conservarse durante 30 días, utiliza varios índices para separar los logs por los dos periodos de retención. Consulta la documentación [filtros de inclusión][6] y [filtros de exclusión][7] para obtener información sobre cómo definir consultas para ellos. Dado que los logs ingestados van al primer índice con cuyo filtro coinciden, [ordena tus índices][8] en función de tu caso de uso.
 
-### Configura una canalización personalizada
+### Configura un pipeline personalizado.
 
-Los pipelines logs son una cadena de procesadores secuenciales que extraen información o atributos significativos del contenido para reutilizarlos como facetas. Cada log que pasa por los pipelines se compara con cada filtro de pipeline. Si coincide con el filtro, todos los procesadores se aplican al log antes de pasar al siguiente pipeline. Configura un [pipeline personalizado][9] para analizar y enriquecer tus logs. Consulta la [documentación sobre procesadores][10] para obtener más información sobre los procesadores disponibles. También puedes [reordenar tus pipelines][11] para asegurarte de que los logs se procesen en el orden correcto.
+Los pipelines de logs son una cadena de procesadores secuenciales que extraen información o atributos significativos del contenido para reutilizarlos como facetas. Cada log que pasa por los pipelines se compara con cada filtro de pipeline. Si coincide con el filtro, todos los procesadores se aplican al log antes de pasar al siguiente pipeline. Configura un [pipeline personalizado][9] para analizar y enriquecer tus logs. Consulta la [documentación sobre procesadores][10] para obtener más información sobre los procesadores disponibles. También puedes [reordenar tus pipelines][11] para asegurarte de que los logs se procesen en el orden correcto.
 
-Los pipelines de integrations (integraciones) se instalan automáticamente cuando envías logs desde ciertas fuentes (por ejemplo, la integración con NGINX). Puedes reordenar estos pipelines con el [recurso de pipelines de integraciones de logs][12].
+Los pipelines de integraciones (integrations) se instalan automáticamente cuando envías logs desde ciertas fuentes (por ejemplo, la integración con NGINX). Puedes reordenar estos pipelines con el [recurso de pipelines de integraciones de logs][12].
 
-### Crea varios archivos para el almacenamiento prolongado.
+### Configura varios archivos para el almacenamiento prolongado.
 
 Configura [archivos de logs][13] si quieres almacenar tus logs durante más tiempo. Los archivos de logs envían tus logs a un sistema de almacenamiento optimizado, como Amazon S3, Azure Storage o Google Cloud Storage. También puedes [reordenar tus archivos][14] según sea necesario.
 
-### Genera métricas a partir de los logs ingestados.
+### Genera métricas a partir de logs ingestados.
 
 [Genera métricas basadas en logs][15] para resumir los datos de tus logs ingestados. Por ejemplo, puedes generar una métrica de recuento de logs que coincidan con una consulta o que coincidan con una métrica de distribución de un valor numérico contenido en los logs, como la duración de la solicitud. Consulta [Genera métricas a partir de logs ingestados][16] para obtener más información.
 
