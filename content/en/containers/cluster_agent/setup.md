@@ -276,7 +276,7 @@ For more information, see [Troubleshooting Windows Container Issues][2].
 
 ## Monitoring AWS managed services
 
-To monitor an AWS managed service like MSK, ElastiCache, or RDS, set `clusterChecksRunner` in your Helm chart to create a Pod with an IAM role assigned through `serviceAccountAnnotation`. Then, set the integration configurations under `clusterAgent.confd`.
+To monitor an AWS managed service like Amazon Managed Streaming for Apache Kafka (MSK), ElastiCache, or Relational Database Service (RDS), set `clusterChecksRunner` in your Helm chart to create a Pod with an IAM role assigned through `serviceAccountAnnotation`. Then, set the integration configurations under `clusterAgent.confd`.
 
 {{< code-block lang="yaml" filename="datadog-values.yaml">}}
 clusterChecksRunner:

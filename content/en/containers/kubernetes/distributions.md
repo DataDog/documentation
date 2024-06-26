@@ -49,7 +49,7 @@ If you are using AWS Bottlerocket OS on your nodes, add the following to enable 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
 
-In an EKS cluster, you can install the Operator using [Helm][5] or as an [EKS add-on][6].
+In an EKS cluster, you can install the Operator using [Helm][1] or as an [EKS add-on][2].
 
 The configuration below is meant to work with either setup (Helm or EKS add-on) when the Agent is installed in the same namespace as the Datadog Operator.
 
@@ -76,6 +76,9 @@ spec:
         name: gcr.io/datadoghq/cluster-agent:latest
 ```
 
+[1]:/containers/kubernetes/installation/?tab=datadogoperator
+[2]: /agent/guide/operator-eks-addon
+
 {{% /tab %}}
 {{% tab "Helm" %}}
 
@@ -87,8 +90,8 @@ datadog:
   appKey: <DATADOG_APP_KEY>
   criSocketPath: /run/dockershim.sock
   env:
-  - name: DD_AUTOCONFIG_INCLUDE_FEATURES
-    value: "containerd"
+    - name: DD_AUTOCONFIG_INCLUDE_FEATURES
+      value: "containerd"
 ```
 
 {{% /tab %}}
@@ -433,12 +436,12 @@ agents:
     securityContextConstraints:
       create: true
   tolerations:
-  - effect: NoSchedule
-    key: node-role.kubernetes.io/master
-    operator: Exists
-  - effect: NoSchedule
-    key: node-role.kubernetes.io/infra
-    operator: Exists
+    - effect: NoSchedule
+      key: node-role.kubernetes.io/master
+      operator: Exists
+    - effect: NoSchedule
+      key: node-role.kubernetes.io/infra
+      operator: Exists
 clusterAgent:
   podSecurity:
     securityContextConstraints:
@@ -526,12 +529,12 @@ datadog:
     tlsVerify: false
 agents:
   tolerations:
-  - effect: NoSchedule
-    key: node-role.kubernetes.io/controlplane
-    operator: Exists
-  - effect: NoExecute
-    key: node-role.kubernetes.io/etcd
-    operator: Exists
+    - effect: NoSchedule
+      key: node-role.kubernetes.io/controlplane
+      operator: Exists
+    - effect: NoExecute
+      key: node-role.kubernetes.io/etcd
+      operator: Exists
 ```
 
 {{% /tab %}}
@@ -583,8 +586,8 @@ datadog:
   appKey: <DATADOG_APP_KEY>
   criSocketPath: /run/dockershim.sock
   env:
-  - name: DD_AUTOCONFIG_INCLUDE_FEATURES
-    value: "containerd"
+    - name: DD_AUTOCONFIG_INCLUDE_FEATURES
+      value: "containerd"
 ```
 
 {{% /tab %}}

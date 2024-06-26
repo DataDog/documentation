@@ -255,9 +255,9 @@ datadog:
   kubelet:
     tlsVerify: false
   ignoreAutoConfig:
-  - etcd
-  - kube_scheduler
-  - kube_controller_manager
+    - etcd
+    - kube_scheduler
+    - kube_controller_manager
   confd:
     etcd.yaml: |-
       ad_identifiers:
@@ -765,12 +765,12 @@ agents:
       mountPath: /host/opt/rke/etc/kubernetes/ssl
       readOnly: true
   tolerations:
-  - effect: NoSchedule
-    key: node-role.kubernetes.io/controlplane
-    operator: Exists
-  - effect: NoExecute
-    key: node-role.kubernetes.io/etcd
-    operator: Exists
+    - effect: NoSchedule
+      key: node-role.kubernetes.io/controlplane
+      operator: Exists
+    - effect: NoExecute
+      key: node-role.kubernetes.io/etcd
+      operator: Exists
 {{< /code-block >}}
 
 {{% /tab %}}
@@ -881,12 +881,12 @@ agents:
       mountPath: /host/opt/rke/etc/kubernetes/ssl
       readOnly: true
   tolerations:
-  - effect: NoSchedule
-    key: node-role.kubernetes.io/controlplane
-    operator: Exists
-  - effect: NoExecute
-    key: node-role.kubernetes.io/etcd
-    operator: Exists
+    - effect: NoSchedule
+      key: node-role.kubernetes.io/controlplane
+      operator: Exists
+    - effect: NoExecute
+      key: node-role.kubernetes.io/etcd
+      operator: Exists
 {{< /code-block >}}
 
 {{% /tab %}}

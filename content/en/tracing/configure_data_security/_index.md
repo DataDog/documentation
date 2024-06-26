@@ -498,7 +498,7 @@ Set the `DD_APM_REPLACE_TAGS` environment variable:
           ]'
 ```
 
-**Examples**
+#### Examples
 
 Datadog Operator:
 
