@@ -48,6 +48,9 @@ You need to generate exports for two data types: **actual** and **amortized**. D
 
 {{< img src="cloud_cost/exports_scope.png" alt="In Azure portal highlighting Exports option in navigation and the export scope" >}}
 
+{{< tabs >}}
+{{% tab "Regular exports" %}}
+
 4. Select the following Export details:
     - Metric: **Actual Cost (usage and purchases)** THEN **Amortized Cost (usage and purchases)**
     - Export type: **Daily export of month-to-date costs**
@@ -55,19 +58,35 @@ You need to generate exports for two data types: **actual** and **amortized**. D
 
 {{< img src="cloud_cost/new_export.png" alt="Export details with Metric: Actual, Export type: Daily, and File Partitioning: On" >}}
 
-**Note**: CCM is supporting the [improved exports experience][8]. However, at this time, there is no support for version 2019-10-01.
-We recommend using the newest versions.
-{{< img src="cloud_cost/improved_export.png" alt="Export details with Metric: Actual, Export type: Daily, and Dataset Version" >}}.
-
-In the destination tab, select the following details:
-    - File partitioning: `On`
-    - Overwrite Data: `Off`
-{{< img src="cloud_cost/export_destination.png" alt="Export Destination with File partitioning and Overwrite data settings" >}}.
-
 5. Choose a storage account, container, and directory for the exports.
     - **Note:** Do not use special characters like `.` in these fields.
     - **Note:** Billing exports can be stored in any subscription. If you are creating exports for multiple subscriptions, Datadog recommends storing them in the same storage account. Export names must be unique.
-7. Select **Create**.
+6. Select **Create**.
+
+{{% /tab %}}
+
+{{% tab "Improved exports" %}}
+
+4. Select the following Export details:
+    - Metric: **Actual Cost (usage and purchases)** THEN **Amortized Cost (usage and purchases)**
+    - Frequency: **Daily export of month-to-date costs**
+    - Dataset version:
+      - Supported versions are `2021-10-01`, `2021-01-01`, `2020-01-01`
+      - Version `2019-10-01` is not supported at this time
+
+{{< img src="cloud_cost/improved_export.png" alt="Export details with Metric: Actual, Export type: Daily, and Dataset Version" >}}.
+
+4. In the destination tab, select the following details:
+    - Choose a storage account, container, and directory for the exports.
+        - **Note:** Do not use special characters like `.` in these fields.
+        - **Note:** Billing exports can be stored in any subscription. If you are creating exports for multiple subscriptions, Datadog recommends storing them in the same storage account. Export names must be unique.
+    - File partitioning: `On`
+    - Overwrite Data: `Off`
+
+{{< img src="cloud_cost/export_destination.png" alt="Export Destination with File partitioning and Overwrite data settings" >}}.
+
+{{% /tab %}}
+{{< /tabs >}}
 
 For faster processing, generate the first exports manually by clicking **Run Now**.
 {{< img src="cloud_cost/run_now.png" alt="Click Run Now button in export side panel to generate exports" >}}
