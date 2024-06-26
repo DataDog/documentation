@@ -730,7 +730,7 @@ To configure manually the automatic user ID collection mode, you can set the env
 
 You can configure the automatic user ID collection mode in your remote service configuration settings in the [Service Catalog][12]. Under the capabilities tab, you can choose the mode you want to apply.
 
-{{< img src="security/application_security/threats/service-capabilites-threat-management.png" alt="Access the Automated User ID Collection Mode Button from the Service Catalog by clicking on your service, then in the Capabilites tab" style="width:100%;" >}}
+{{< img src="security/application_security/threats/service-capabilities-threat-management.png" alt="Access the Automated User ID Collection Mode Button from the Service Catalog by clicking on your service, then in the Capabilites tab" style="width:100%;" >}}
 
 The available modes are: <code>identification</code>, <code>anonymization</code>, <code>disabled</code> and <code>local</code>. Local mode removes all remote configuration and lets local configuration take over for the user ID collection mode.
 
