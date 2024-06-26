@@ -75,7 +75,7 @@ The following environment variables are supported:
 : Enable Cluster Check Autodiscovery. Defaults to `false`.
 
 `DD_CLUSTER_AGENT_AUTH_TOKEN`                 
-: 32 characters long token that needs to be shared between the node Agent and the Datadog Cluster Agent.
+: 32-character token that needs to be shared between the node Agent and the Datadog Cluster Agent.
 
 `DD_CLUSTER_AGENT_KUBERNETES_SERVICE_NAME`    
 : Name of the Kubernetes service through which Cluster Agents are exposed. Defaults to `datadog-cluster-agent`.
@@ -96,7 +96,7 @@ The following environment variables are supported:
 : Name of the instance tag set with the `DD_CLUSTER_NAME` option. Defaults to `cluster_name`.
 
 `DD_CLUSTER_CHECKS_EXTRA_TAGS`                
-: Adds extra tags to cluster checks metrics.
+: Adds extra tags to cluster check metrics.
 
 `DD_CLUSTER_CHECKS_ADVANCED_DISPATCHING_ENABLED`
 : When true, the leader Cluster Agent collects stats from the cluster-level check runners to optimize check dispatching logic. Default: `false`.

@@ -454,9 +454,9 @@ kube-state-metrics:
 
 ## Rancher {#Rancher}
 
-Rancher installations are close to vanilla Kubernetes, requiring only some minor configuration:
-- Tolerations are required to schedule the Node Agent on `controlplane` and `etcd` nodes
-- Cluster name should be set as it cannot be retrieved automatically from cloud provider
+Rancher installations are similar to vanilla Kubernetes installations, requiring only some minor configuration:
+- Tolerations are required to schedule the Node Agent on `controlplane` and `etcd` nodes.
+- The cluster name should be set as it cannot be retrieved automatically from the cloud provider.
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
@@ -591,8 +591,8 @@ datadog:
 
 {{< /tabs >}}
 
-More `datadog-values.yaml` examples can be found in the [Helm chart repository][3]
-More `datadog-agent.yaml` examples can be found in the [Datadog Operator repository][4]
+More `datadog-values.yaml` examples can be found in the [Helm chart repository][3].
+More `datadog-agent.yaml` examples can be found in the [Datadog Operator repository][4].
 
 ## vSphere Tanzu Kubernetes Grid (TKG) {#TKG}
 

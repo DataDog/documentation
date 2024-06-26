@@ -298,7 +298,7 @@ List of environment variables available for configuring APM:
 | `DD_APM_CONNECTION_LIMIT`  | Maximum connection limit for a 30 second time window. <br/>**Default**: 2000 |
 | `DD_APM_ADDITONAL_ENDPOINTS`     | Send data to multiple endpoints and/or with multiple API keys. <br/>See [Dual Shipping][12]. |
 | `DD_APM_DEBUG_PORT`     | Port for the debug endpoints for the Trace Agent. Set to `0` to disable the server. <br/>**Default**: `5012`. |
-| `DD_BIND_HOST`             | Set the StatsD & receiver hostname. |
+| `DD_BIND_HOST`             | Set the StatsD and receiver hostname. |
 | `DD_DOGSTATSD_PORT`        | For tracing over TCP, set the DogStatsD port. |
 | `DD_ENV`                   | Sets the global `env` for all data emitted by the Agent. If `env` is not present in your trace data, this variable is used. |
 | `DD_HOSTNAME`         | Manually set the hostname to use for metrics if autodetection fails, or when running the Datadog Cluster Agent. |

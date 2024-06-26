@@ -91,7 +91,7 @@ The keys can alternatively be set by referencing the names of pre-created `Secre
 {{% /tab %}}
 {{% tab "Helm" %}}
 
-To enable the external metrics server with your Cluster Agent in Helm, update your [datadog-values.yaml][1] file with the following configurations. Provide a valid Datadog API Key, Application Key, and set the `clusterAgent.metricsProvider.enabled` to `true`. Then redeploy your Datadog Helm chart:
+To enable the external metrics server with your Cluster Agent in Helm, update your [datadog-values.yaml][1] file with the following configurations. Provide a valid Datadog API Key and Application Key, and set `clusterAgent.metricsProvider.enabled` to `true`. Then redeploy your Datadog Helm chart:
 
   ```yaml
   datadog:
