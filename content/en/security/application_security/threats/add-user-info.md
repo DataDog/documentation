@@ -722,7 +722,7 @@ In <code>extended</code> mode, the trace library tries to collect the user ID, a
 
 To configure automatic user event tracking mode, you can set the environment variable <code>DD_APPSEC_AUTOMATED_USER_EVENTS_TRACKING</code> to <code>safe</code> or <code>extended</code>. By default, the tracer library uses the <code>safe</code> mode.
 
-<div class="alert alert-info">For compatibility, see this <a href="/security/application_security/enabling/compatibility/">page</a>.</div>
+<div class="alert alert-info">For compatibility, see this <a href="/security/application_security/enabling/compatibility/">ASM capabilities table</a>.</div>
 
 Automatic user ID collection offers three modes: <code>identification</code>, <code>anonymization</code>, and <code>disabled</code>.
 
@@ -742,7 +742,7 @@ The available modes are: <code>identification</code>, <code>anonymization</code>
 
 If you wish to disable the detection of these events, you should set the environment variable <code>DD_APPSEC_AUTOMATED_USER_EVENTS_TRACKING</code> to <code>disabled</code>. This should be set on the application hosting the Datadog Tracing Library, and not on the Datadog Agent.
 
-<div class="alert alert-info">For compatibility, see this <a href="/security/application_security/enabling/compatibility/">page</a>.</div>
+<div class="alert alert-info">For compatibility, see this <a href="/security/application_security/enabling/compatibility/">ASM capabilities table</a>.</div>
 
 If you wish to disable the automatic user ID collection, you should set the environment variable <code>DD_APPSEC_AUTO_USER_INSTRUMENTATION_MODE</code> to <code>disabled</code>. This should be set on the application hosting the Datadog Tracing Library, and not on the Datadog Agent. This can also be done by selecting <code>disabled</code> mode in remote service configuration settings.
 
