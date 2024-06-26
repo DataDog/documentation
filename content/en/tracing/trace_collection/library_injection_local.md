@@ -406,7 +406,6 @@ The config file for `LOCAL` and `BLOB` can be formatted as JSON:
 ```json
 {
 	"version": 1,
-	"service_language": "<LANG>",
 	"tracing_enabled": true,
 	"log_injection_enabled": true,
 	"health_metrics_enabled": true,
@@ -433,7 +432,6 @@ Or as YAML:
 ```yaml
 ---
 version: 1
-service_language: <LANG>
 tracing_enabled: true
 log_injection_enabled: true
 health_metrics_enabled: true
@@ -458,16 +456,6 @@ tracing_log_level: debug
 ```
 
 The value of `version` is always `1`. This refers to the configuration schema version in use, not the version of the content.
-
-If the language is known, set `service_language` to one of the following values:
-
-- `java`
-- `node`
-- `dotnet`
-- `python`
-- `ruby`
-
-If multiple languages are used, leave `service_language` unset.
 
 The following table shows how the injection configuration values map to the corresponding [tracing library configuration options][4]:
 
@@ -662,7 +650,6 @@ If you specify `BLOB` or `LOCAL` configuration source, create a JSON or YAML fil
 ```json
 {
 	"version": 1,
-	"service_language": "<LANG>",
 	"tracing_enabled": true,
 	"log_injection_enabled": true,
 	"health_metrics_enabled": true,
@@ -689,7 +676,6 @@ Or as YAML:
 ```yaml
 ---
 version: 1
-service_language: <LANG>
 tracing_enabled: true
 log_injection_enabled: true
 health_metrics_enabled: true
@@ -713,14 +699,6 @@ tracing_debug: true
 tracing_log_level: debug
 ```
 
-Set `service_language` to one of the following values:
-- `java`
-- `node`
-- `dotnet`
-- `python`
-- `ruby`
-
-In this configuration file, the value of `version` is always `1`. This refers to the configuration schema version in use, not the version of the content.
 
 The following table shows how the injection configuration values map to the corresponding [tracing library configuration options][4]:
 
@@ -862,7 +840,6 @@ If you specify `BLOB` or `LOCAL` configuration source, create a JSON or YAML fil
 ```json
 {
 	"version": 1,
-	"service_language": "<LANG>",
 	"tracing_enabled": true,
 	"log_injection_enabled": true,
 	"health_metrics_enabled": true,
@@ -889,7 +866,6 @@ Or as YAML:
 ```yaml
 ---
 version: 1
-service_language: <LANG>
 tracing_enabled: true
 log_injection_enabled: true
 health_metrics_enabled: true
@@ -912,13 +888,6 @@ tracing_partial_flush_min_spans: 1
 tracing_debug: true
 tracing_log_level: debug
 ```
-
-Set `service_language` to one of the following values:
-- `java`
-- `node`
-- `dotnet`
-- `python`
-- `ruby`
 
 In this configuration file, the value of `version` is always `1`. This refers to the configuration schema version in use, not the version of the content.
 
