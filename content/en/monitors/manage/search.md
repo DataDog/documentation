@@ -8,7 +8,7 @@ To search your monitors, construct a query using the facet panel on the left and
 
 ## Search bar
 
-Use simple text to search across all monitor titles and notification messages. For example, a search of `*postgresql*` returns all monitors with `postgresql` anywhere in the title or 
+Use simple text to search across all monitor titles and notification messages. For example, a search of `*postgresql*` returns all monitors with `postgresql` anywhere in the title or
 notification message.
 
 To limit the search, specify the field name:
@@ -27,7 +27,7 @@ Additionally, you can search for a monitor using the ID, for example: `1234567`.
 Enhance your search query with boolean operators (`AND`, `OR`, `NOT`) and parentheses. The search syntax is similar to [Elasticsearch][2] with the following exceptions:
 
 * Regular expressions are not supported.
-* Single-character wildcard (`?`) is not supported, but the general wildcard (`*`) is supported.
+* Both single-character wildcard (`?`) and the general wildcard (`*`) are supported.
 * Proximity searches are not supported, but the [fuzzy][3] operator is supported.
 * Ranges are not supported.
 * Boosting is not supported.
@@ -50,7 +50,7 @@ Advanced search lets you filter monitors by any combination of monitor attribute
 | Type         | The Datadog [monitor type][4]                                                                   |
 | Creator      | The creator of the monitor                                                                      |
 | Service      | Service tags used by you in the form `service:<VALUE>`.                                         |
-| Tag          | The [tags](#monitor-tags) assigned to the monitor                                               |
+| Tag          | The [tags][5] assigned to the monitor                                               |
 | Env          | Environment tags used by you in the form `env:<VALUE>`.                                         |
 | Scope        | Search tags listed in the `from` field of your monitor query.                                   |
 | Metric/Check | The metric or service check being monitored                                                     |
@@ -97,3 +97,4 @@ From the default view entry in the Views panel:
 [2]: https://www.elastic.co/guide/en/elasticsearch/reference/2.4/query-dsl-query-string-query.html#query-string-syntax
 [3]: https://www.elastic.co/guide/en/elasticsearch/reference/2.4/query-dsl-query-string-query.html#_fuzziness
 [4]: /monitors/
+[5]: /monitors/manage/#monitor-tags

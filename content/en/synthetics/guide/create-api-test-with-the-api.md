@@ -9,15 +9,17 @@ further_reading:
   tag: "Documentation"
   text: "Learn about Synthetic Monitoring"
 - link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_test"
-  tag: "Terraform"
+  tag: "External Site"
   text: "Create and manage Synthetic API tests with Terraform"
 ---
 
 ## Overview
 
-This guide contains examples of configuration files you can use to create API tests.
+This guide contains examples of configuration files and links to [Terraform][2] resources you can use to create API tests, as well as associated synthetics resources such as global variables.
 
-To create API tests with the API, see the [JSON configuration examples](#json-configuration). To create a HTTP test with the Python client, see the [Python client example](#python-client).
+   - If you're using the API, see the [JSON configuration examples](#json-configuration) 
+   - If you're using the Python client, see the [Python client example](#python-client)
+   - If you're using Terraform, see the [Terraform example](#terraform)
 
 For more information, see [Create an API test][1] in the API documentation.
 
@@ -464,8 +466,34 @@ configuration = Configuration(
         print("Exception when calling SyntheticsApi->create_synthetics_api_test: %s\n" % e)
 {{< /code-block >}}
 
+## Terraform
+
+### API tests
+
+The [synthetic test resource][7], with `type` set to `api`, can be used to create and manage your API tests through Terraform. 
+
+### Private locations
+
+If you need to run your synthetic tests from custom or secured locations, you can use the [private location resource][3] to create and manage private locations to run your tests from. Learn more on the [private locations][4] page.
+
+### Global and local variables
+
+Use the [synthetics global variable resource][5] to create and manage synthetics global variables, which are variables that can be securely shared across tests. You can also create test-specific [local variables with builtins][8] by defining the [config_variable][9] nested schema with `type = "text"` in your synthetic test resources.
+
+### Concurrency cap
+
+The [synthetics concurrency cap resource][6] enables you to limit the number of synthetic tests run in parallel.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /api/latest/synthetics/#create-an-api-test
+[2]: https://www.terraform.io/
+[3]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_private_location
+[4]: /synthetics/private_locations
+[5]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_global_variable
+[6]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_concurrency_cap
+[7]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_test
+[8]: https://docs.datadoghq.com/synthetics/api_tests/http_tests/?tab=requestoptions#create-local-variables
+[9]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_test#nested-schema-for-config_variable

@@ -53,6 +53,9 @@ affinity:
 ## In the meantime, beware of cost implications of running this LB!
 service:
   enabled: true
+  ## You must manually specify the ports to open; this will match the Datadog Agent source.
+  ports:
+    - port: 8282
   type: "LoadBalancer"
   externalTrafficPolicy: "Local"
   annotations:

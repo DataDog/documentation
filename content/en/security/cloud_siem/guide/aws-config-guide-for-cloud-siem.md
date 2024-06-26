@@ -1,11 +1,10 @@
 ---
 title: AWS Configuration Guide for Cloud SIEM
-kind: documentation
 further_reading:
 - link: "/security/default_rules/#cat-cloud-siem-log-detection"
   tag: "Documentation"
   text: "Explore Cloud SIEM default detection rules"
-- link: "/security/explorer/"
+- link: "/security/cloud_siem/investigate_security_signals"
   tag: "Documentation"
   text: "Learn about the Security Signals Explorer"
 - link: "/security/cloud_siem/log_detection_rules/"
@@ -101,7 +100,7 @@ Since Cloud SIEM applies detection rules to all processed logs, see the [in-app 
 [7]: https://app.datadoghq.com/logs?query=service%3Acloudtrail
 [8]: https://docs.datadoghq.com/logs/explorer/
 [9]: https://app.datadoghq.com/security?query=%40workflow.rule.type%3A%28%22Log%20Detection%22%29%20&column=time&order=desc&product=siem
-[10]: https://docs.datadoghq.com/security/explorer/
+[10]: /security/cloud_siem/investigate_security_signals
 [11]: https://app.datadoghq.com/dash/integration/30459/aws-cloudtrail
 [12]: https://docs.datadoghq.com/security/default_rules/#cat-cloud-siem
 [13]: https://docs.datadoghq.com/security/detection_rules/

@@ -1,6 +1,5 @@
 ---
 title: User Monitoring and Protection
-kind: documentation
 aliases:
   - /security_platform/application_security/add-user-info
   - /security/application_security/add-user-info
@@ -78,7 +77,7 @@ Blocking
     .blockIfMatch();
 ```
 
-[1]: /tracing/trace_collection/compatibility/java/#setup
+[1]: /tracing/trace_collection/custom_instrumentation/opentracing/java#setup
 {{< /programming-lang >}}
 
 {{< programming-lang lang="dotnet" >}}
@@ -682,6 +681,24 @@ track_custom_event(tracer, event_name, metadata)
 {{< /programming-lang >}}
 
 {{< /programming-lang-wrapper >}}
+
+### Tracking business logic information without modifying the code
+
+If your service has ASM enabled and [Remote Configuraton][1] enabled, you can create a custom WAF rule to flag any request it matches with a custom business logic tag. This doesn't require any modification to your application, and can be done entirely from Datadog.
+
+To get started, navigate to the [Custom WAF Rule page][2] and click on "Create New Rule".
+
+{{< img src="security/application_security/threats/custom-waf-rule-menu.png" alt="Access the Custom WAF Rule Menu from the ASM homepage by clicking on Protection, then In-App WAF and Custom Rules" style="width:100%;" >}}
+
+This will open a menu in which you may define your custom WAF rule. By selecting the "Business Logic" category, you will be able to configure an event type (for instance, `users.password_reset`). You can then select the service you want to track, and a specific endpoint. You may also use the rule condition to target a specific parameter to identify the codeflow you want to _instrument_. When the condition matches, the library tags the trace and flags it to be forwarded to ASM. If you don't need the condition, you may set a broad condition to match everything.
+
+{{< img src="security/application_security/threats/custom-waf-rule-form.png" alt="Screenshot of the form that appear when you click on the Create New Rule button" style="width:50%;" >}}
+
+Once saved, the rule is deployed to instances of the service that have Remote Configuration enabled.
+
+
+[1]: /agent/remote_config?tab=configurationyamlfile#application-security-management-asm
+[2]: https://app.datadoghq.com/security/appsec/in-app-waf?config_by=custom-rules
 
 ## Automatic user activity event tracking
 

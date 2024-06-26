@@ -1,6 +1,5 @@
 ---
 title: Basic Agent Usage for macOS
-kind: documentation
 platform: OS X
 os: osx
 aliases:
@@ -18,9 +17,11 @@ further_reading:
 - link: "/agent/basic_agent_usage/#agent-architecture"
   tag: "Documentation"
   text: "Find out more about the Agent's architecture"
-- link: "/agent/guide/network#configure-ports"
+- link: "/agent/configuration/network#configure-ports"
   tag: "Documentation"
   text: "Configure inbound ports"
+algolia:
+  tags: ['uninstall', 'uninstalling']
 ---
 
 ## Overview
@@ -98,6 +99,63 @@ Configuration files for [Integrations][1]:
 * `~/.datadog-agent/conf.d/`
 
 [1]: /integrations/
+{{% /tab %}}
+{{< /tabs >}}
+
+## Uninstall the Agent
+
+{{< tabs >}}
+{{% tab "Agent v6 & v7" %}}
+**Single user installation**
+
+To remove the Agent and all Agent configuration files:
+1. Stop and close the Datadog Agent with the bone icon in the tray.
+2. Drag the Datadog application from the application folder to the trash bin.
+3. Run the following commands:
+    ```shell
+    sudo rm -rf /opt/datadog-agent
+    sudo rm -rf /usr/local/bin/datadog-agent
+    sudo rm -rf ~/.datadog-agent/** # to remove broken symlinks
+    launchctl remove com.datadoghq.agent
+    sudo rm -rf /var/log/datadog
+    ```
+4. Reboot your machine for the changes to take effect.
+
+**System-wide LaunchDaemon installation**
+
+To remove the Agent and all Agent configuration files:
+1. Drag the Datadog application from the application folder to the trash bin.
+2. To remove remaining files, run the following:
+    ```shell
+    sudo rm -rf /opt/datadog-agent
+    sudo rm -rf /usr/local/bin/datadog-agent
+    sudo rm -rf ~/.datadog-agent/** # to remove broken symlinks
+    sudo launchctl disable system/com.datadoghq.agent && sudo launchctl bootout system/com.datadoghq.agent
+    sudo rm /Library/LaunchDaemons/com.datadoghq.agent.plist
+    sudo rm -rf /var/log/datadog
+    ```
+3. Reboot your machine for the changes to take effect.
+{{% /tab %}}
+
+{{% tab "Agent v5" %}}
+1. Stop and close the Datadog Agent with the bone icon in the tray.
+2. Drag the Datadog application from the application folder to the trash bin.
+3. Run:
+
+```shell
+sudo rm -rf /opt/datadog-agent
+sudo rm -rf /usr/local/bin/datadog-agent
+sudo rm -rf ~/.datadog-agent/** # to remove broken symlinks
+```
+
+If you ran the optional install commands to have the Agent run at boot time, run the following to finish uninstalling:
+
+```shell
+sudo launchctl unload -w /Library/LaunchDaemons/com.datadoghq.agent.plist
+sudo rm /Library/LaunchDaemons/com.datadoghq.agent.plist
+```
+
+> This method removes the Agent, as well as all Agent configuration files.
 {{% /tab %}}
 {{< /tabs >}}
 

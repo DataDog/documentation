@@ -8,7 +8,6 @@ further_reading:
 - link: /continuous_integration/troubleshooting/
   tag: 설명서
   text: CI 문제 해결
-kind: 설명서
 title: TeamCity 파이프라인에서 트레이스 설정
 ---
 

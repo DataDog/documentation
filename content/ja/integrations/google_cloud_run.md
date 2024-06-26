@@ -30,6 +30,7 @@ short_description: クラスターからメトリクス、トレース、ログ�
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Cloud Run は、HTTP リクエストを使って呼び出し可能なステートレスコンテナを実行できるマネージド型のコンピューティングプラットフォームです。
@@ -38,25 +39,25 @@ Cloud Run は、HTTP リクエストを使って呼び出し可能なステー�
 
 Cloud Run for Anthos の詳細については、[Google Cloud Run for Anthos ドキュメント][1]を参照してください。
 
-## セットアップ
+## 計画と使用
 
 ### メトリクスの収集
 
-#### インストール
+#### インフラストラクチャーリスト
 
 [Google Cloud Platform インテグレーション][2]をセットアップして、すぐに使えるメトリクスの収集を開始します。カスタムメトリクスを設定するには、[Serverless ドキュメント][3]を参照してください。
 
-### ログの収集
+### 収集データ
 
-#### インテグレーション
-Google Cloud Run は、[監査ログ][4]も公開します。
-Google Cloud Run のログは、Google Cloud Logging を使用して収集され、HTTP プッシュフォワーダーを使用して Cloud Pub/Sub へ送信されます。Cloud Pub/Sub をまだセットアップしていない場合は、[HTTP プッシュフォワーダーを使用してセットアップ][5]してください。
+#### Datadog クリップボード
+Google Cloud Run は[監査ログ][4]も公開します。
+Google Cloud Run のログは Google Cloud Logging で収集され、Cloud Pub/Sub トピックを通じて Dataflow ジョブに送信されます。まだの場合は、[Datadog Dataflow テンプレートでロギングをセットアップしてください][5]。
 
-これが完了したら、Google Cloud Run のログを Google Cloud Logging から Pub/Sub へエクスポートします。
+これが完了したら、Google Cloud Run のログを Google Cloud Logging から Pub/Sub トピックへエクスポートします。
 
 1. [Google Cloud Logging のページ][6]に移動し、Google Cloud Run のログを絞り込みます。
 2. **シンクを作成**し、シンクに適宜名前を付けます。
-3. エクスポート先として「Cloud Pub/Sub」を選択し、エクスポート用に作成された Pub/Sub を選択します。**注**: この Pub/Sub は別のプロジェクト内に配置することもできます。
+3. 宛先として "Cloud Pub/Sub" を選択し、その目的で作成された Pub/Sub トピックを選択します。**注**: Pub/Sub トピックは別のプロジェクトに配置できます。
 
     {{< img src="integrations/google_cloud_pubsub/creating_sink2.png" alt="Google Cloud Pub/Sub ログを Pub Sub へエクスポート" >}}
 
@@ -65,26 +66,26 @@ Google Cloud Run のログは、Google Cloud Logging を使用して収集され
 #### 直接ロギング
 Cloud Run サービスから Datadog へのアプリケーションの直接ロギングについては、[Serverless ドキュメント][3]を参照してください。
 
-### トレーシング
+### ヘルプ
 
 フルマネージド Google Cloud Run に特化した Agent の設定手順については、[Serverless ドキュメント][3]を参照してください。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "google_cloud_run" >}}
 
 
-### イベント
+### ヘルプ
 
 Google Cloud Functions インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 
 Google Cloud Functions インテグレーションには、サービスのチェック機能は含まれません。
 
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 

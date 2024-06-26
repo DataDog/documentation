@@ -180,7 +180,7 @@ Maintenance prévue sur une instance EC2
 
 Zabbix ou Prometheus a déclenché une alerte pour un service aujourd'hui
 : Ancienne syntaxe </br>
-`events('tags:service priority:all status:error sources:prometheus sources:zabbix).rollup('count').last(‘1d’) > 0`
+`events('tags:service priority:all status:error sources:prometheus sources:zabbix).rollup('count').last('1d') > 0`
 : Nouvelle syntaxe </br>
 `events("source:(prometheus OR zabbix) status:error tags:service").rollup("count").last("1d") > 0`
 
@@ -196,7 +196,7 @@ Les anciens monitors d'événement ne prennent pas en charge la méthode de roll
 
 
 [1]: /fr/service_management/events/explorer
-[2]: /fr/service_management/events/explorer/#event-analytics
+[2]: /fr/service_management/events/explorer/analytics
 [3]: /fr/service_management/events/#generate-custom-metrics-from-events
 [4]: https://app.datadoghq.com/dash/integration/30532/monitor-notifications-overview
 [5]: /fr/service_management/events/guides/new_events_sources/

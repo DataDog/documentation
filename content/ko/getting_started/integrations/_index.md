@@ -1,18 +1,18 @@
 ---
-aliases:
-- /ko/getting_started/integrations
 further_reading:
-- link: https://learn.datadoghq.com/
+- link: https://learn.datadoghq.com/courses/intro-to-integrations
   tag: 학습 센터
-  text: Datadog 소개
+  text: 통합 소개
 - link: /integrations/
-  tag: 통합
-  text: Datadog의 전체 통합 목록
+  tag: 설명서
+  text: Datadog 통합 목록 보기
 kind: 설명서
-title: 통합의 소개
+title: 통합 소개
 ---
 
-여기에서는 통합 사용 방법에 대해 설명해드리겠습니다. 새로운 통합 구축 방법은 [새로운 통합 생성][1] 페이지를 참고하시기 바랍니다.
+## 개요
+
+통합 사용에 대한 가이드입니다. 새 통합 구축에 대한 정보는 [새 통합 생성하기][1] 페이지를 참조하세요.
 
 크게 보았을 때, 통합이란 일반적으로 개별 검토하는 요소에서 통합형 시스템을 구축하는 것을 말합니다. Datadog에서는 통합을 이용하여 인프라스트럭처에서 모든 메트릭과 로그를 수집하여 통합형 시스템을 전체적으로 파악할 수 있습니다. 각각의 요소는 물론, 개별 요소가 전체에 어떻게 영향을 주는지도 확인할 수 있습니다.
 
@@ -22,13 +22,17 @@ Datadog는 크게 3종류의 주요 통합 유형을 지원합니다.
 
 - **Agent 기반** 통합은 Datadog Agent와 함께 설치되며, `check`라고 하는 파이썬(Python) 클래스 메소드를 사용하여 수집하는 메트릭을 정의합니다.
 - **인증(크롤러) 기반** 통합은 [Datadog][2]에서 설정됩니다. 이때 API를 사용하여 메트릭을 가져오기 위한 자격 정보를 지정합니다. [Slack][3], [AWS][4], [Azure][5], [PagerDuty][6]를 비롯해 자주 사용되는 통합이 여기에 포함됩니다.
-- **라이브러리** 통합에서는 [Datadog API][7]를 사용하여 [Node.js][8]나 [파이썬][9]을 비롯해 애플리케이션 개발에 쓰인 언어로 애플리케이션을 모니터링할 수 있습니다.
+- **라이브러리** 통합에서는 [Datadog API][7]를 사용하여 [Node.js][8]나 [Python][9]을 비롯해 애플리케이션 개발에 쓰인 언어로 애플리케이션을 모니터링할 수 있습니다.
 
 고유한 인하우스 시스템에서 메트릭을 정의하고 Datadog로 메트릭을 전송하는 [커스텀 점검][10]을 구성할 수도 있습니다.
 
 ## 통합 설정하기
 
-Datadog Agent 패키지에는 Datadog가 공식적으로 지원하는 [통합 코어][11]가 포함되어 있습니다. 이러한 통합을 사용하려면 Datadog Agent를 다운로드하세요. 커뮤니티 기반 통합은 [통합 엑스트라][12]에 있습니다. 이를 사용하려면 [개발 툴킷][13]을 다운로드해야 합니다. 이러한 통합을 설치하거나 관리하는 방법을 자세히 알아보고 싶다면 [통합 관리 가이드][14]를 참조하세요.
+Datadog Agent 패키지에는 [통합 코어][11]에 Datadog이 공식적으로 지원하는 통합이 포함되어 있습니다. 이러한 통합을 사용하려면 Datadog Agent를 다운로드하세요. 커뮤니티 기반 통합은 [통합 추가][12]에 있습니다. 이러한 통합을 설치하거나 관리하는 방법에 대한 자세한 내용은 [통합 관리 가이드][14]를 참조하세요.
+
+### 권한
+
+통합 타일과 상호 작용하려면 `manage_integrations` 권한이 필요합니다. 자세한 내용은 [RBAC 역할][45]을 참조하세요.
 
 ### API와 애플리케이션 키
 
@@ -70,7 +74,7 @@ logs:
       sourcecategory: http_web_access
 ```
 
-Apache 서비스 두 개를 모니터링하기 위해 동일한 Agent 점검 내에 복수의 인스턴스를 생성하는 경우, `-` in the ` `instances` 섹션에서 새 인스턴스를 만드세요.
+동일한 Agent 검사에서 여러 Apache 인스턴스를 모니터링하려면 `instances` 섹션에 인스턴스를 추가합니다.
 
 ```yaml
 init_config:
@@ -87,7 +91,7 @@ instances:
 
 Datadog 표준 통합에서 기본 수집 간격은 15초입니다. 수집 간격을 변경하려면 파라미터 `min_collection_interval`을 사용하세요. 자세한 정보는 [수집 간격 업데이트][24] 가이드를 참조하시기 바랍니다.
 
-### 태그 설정
+### 태깅
 
 태그 설정은 많은 소스에서 Datadog에 들어오는 데이터를 필터링 및 집계하는데 중요한 부분이 됩니다. 태그 설정에 대한 자세한 내용은 [태그 시작하기][25] 가이드를 참조하세요.
 
@@ -103,7 +107,7 @@ init_config:
 
 ignore_autodiscovery_tags: true
 
-# Rest of the config here
+# 나머지 구성은 여기에
 ```
 
 ### 검증
@@ -118,14 +122,13 @@ Agent와 통합 설정을 검증하려면 [Agent의 `status` 하위 명령을 �
 
 [프로세스 수집][29]을 설정하면 Datadog는 호스트에서 실행되는 기술을 자동 탐지합니다. 그러면 기술의 모니터링에 도움이 되는 Datadog 통합이 식별됩니다. 자동 탐지된 통합은 [통합 검색][2]에 나타납니다.
 
-{{< img src="getting_started/integrations/ad_integrations.png" alt="자동 탐지된 통합" >}}
+{{< img src="getting_started/integrations/ad_integrations_1.png" alt="자동 감지된 통합" >}}
 
-각 통합은 두 가지 상태 유형 중 하나에 해당합니다.
+각 통합에는 세 가지 상태 유형 중 하나가 있습니다:
 
-- **+ Detected**: 이 통합을 실행하는 호스트가 활성화하지 않은 통합입니다.
-- **✓ Partial Visibility**: 일부 호스트가 활성화했지만, 모든 관련 호스트에서 실행되지는 않는 통합입니다.
-
-통합을 실행하고 있지만 통합을 활성화하지 않은 호스트는 통합 타일의 **Hosts** 탭에 표시됩니다.
+- **Detected**: 호스트에서 기술이 실행되고 있지만 통합이 설치 또는 구성되지 않았으며 일부 메트릭만 수집되고 있습니다. 전체 범위를 포함하도록 통합을 설정하세요. 자동 감지된 기술을 실행 중인 호스트 목록을 찾으려면 통합 타일을 열고 **Hosts** 탭을 선택합니다.
+- **Installed**: 이 통합은 호스트에 설치 및 구성됩니다.
+- **Available**: **Installed** 및 **Detected** 카테고리에 속하지 않는 모든 통합입니다.
 
 ## 보안 정책
 
@@ -139,7 +142,7 @@ Datadog에서 사용자 데이터를 처리하는 방법이나 기타 보안 관
 
 ## 트러블슈팅
 
-통합과 관련하여 트러블슈팅 시, 먼저 코드 편집기에서 플러그인을 사용하거나 다양한 온라인 도구를 통해 YAML이 유효한지 확인하세요. 다음은 [Agent 트러블슈팅][37] 절차를 모두 따라주시기 바랍니다.
+통합과 관련하여 트러블슈팅 시, 먼저 코드 편집기에서 플러그인을 사용하거나 다양한 온라인 도구를 통해 YAML이 유효한지 확인하세요. 다음은 [Agent 트러블슈팅][37] 단계를 실행하는 것입니다.
 
 계속 문제가 발생한다면 [Datadog 지원팀][38]에 문의하세요.
 
@@ -170,7 +173,7 @@ Datadog에서 사용자 데이터를 처리하는 방법이나 기타 보안 관
 : 각 통합을 통해 수집된 메트릭을 목록으로 만들고 저장하는 파일입니다.
 
 메트릭
-: 각 통합에 따라 시스템에서 수집되는 데이터 목록입니다. 각 통합의 메트릭은 그 통합의 `metadata.csv` 파일에 있습니다. 메트릭에 대한 자세한 내용은 [메트릭][42] 개발자 페이지를 참조하세요. 또한, [커스텀 메트릭][43]을 설정할 수도 있습니다. 통합에서 그대로 사용할 수 있는 메트릭이 제공되지 않는 경우, 일반적으로 커스텀 메트릭을 추가합니다.
+: 각 통합에 의해 시스템에서 수집되는 항목의 목록입니다. 해당 통합의 `metadata.csv` 파일에서 각 통합에 대한 메트릭을 찾을 수 있습니다. 메트릭에 대한 자세한 내용은 [메트릭][42] 개발자 페이지를 참조하세요. 통합이 기본 메트릭을 제공하지 않는 경우 [커스텀 메트릭][43]을 추가할 수도 있습니다.
 
 파라미터
 : `conf.yaml` 파일의 파라미터를 사용하여 통합 데이터 소스와 Agent의 액세스를 제어할 수 있습니다. 각 통합의 `conf.yaml.example` 파일에는 필수 파라미터와 선택형 파라미터가 모두 나열되어 있습니다.
@@ -185,7 +188,7 @@ Datadog에서 사용자 데이터를 처리하는 방법이나 기타 보안 관
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ko/developers/integrations/new_check_howto/
+[1]: /ko/developers/integrations/agent_integration/
 [2]: https://app.datadoghq.com/account/settings
 [3]: /ko/integrations/slack/
 [4]: /ko/integrations/amazon_web_services/
@@ -197,14 +200,13 @@ Datadog에서 사용자 데이터를 처리하는 방법이나 기타 보안 관
 [10]: /ko/developers/custom_checks/write_agent_check/
 [11]: https://github.com/DataDog/integrations-core
 [12]: https://github.com/DataDog/integrations-extras
-[13]: /ko/developers/integrations/new_check_howto/#developer-toolkit
 [14]: /ko/agent/guide/integration-management/
-[15]: https://app.datadoghq.com/account/settings#agent
+[15]: https://app.datadoghq.com/account/settings/agent/latest
 [16]: /ko/account_management/api-app-keys/
 [17]: https://app.datadoghq.com/organization-settings/api-keys
 [18]: /ko/integrations/
-[19]: https://app.datadoghq.com/account/settings#agent/docker
-[20]: https://app.datadoghq.com/account/settings#agent/kubernetes
+[19]: https://app.datadoghq.com/account/settings/agent/latest?platform=docker
+[20]: https://app.datadoghq.com/account/settings/agent/latest?platform=kubernetes
 [21]: /ko/agent/guide/agent-commands/#restart-the-agent
 [22]: /ko/developers/integrations/check_references/#param-specification
 [23]: https://github.com/DataDog/integrations-core/blob/master/apache/datadog_checks/apache/data/conf.yaml.example
@@ -214,7 +216,7 @@ Datadog에서 사용자 데이터를 처리하는 방법이나 기타 보안 관
 [27]: /ko/getting_started/tagging/unified_service_tagging/
 [28]: /ko/agent/guide/agent-commands/#agent-status-and-information
 [29]: /ko/infrastructure/process/
-[30]: /ko/security/
+[30]: /ko/data_security/
 [31]: /ko/metrics/explorer/
 [32]: /ko/dashboards/
 [33]: /ko/monitors/
@@ -229,3 +231,4 @@ Datadog에서 사용자 데이터를 처리하는 방법이나 기타 보안 관
 [42]: /ko/metrics/
 [43]: /ko/metrics/custom_metrics/
 [44]: /ko/monitors/guide/visualize-your-service-check-in-the-datadog-ui/
+[45]: /ko/account_management/rbac/permissions/#integrations

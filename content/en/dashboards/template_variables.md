@@ -1,6 +1,5 @@
 ---
 title: Template Variables
-kind: documentation
 aliases:
     - /graphing/dashboards/template_variables/correlate-metrics-and-events-using-dashboard-template-variables
     - /graphing/dashboards/template_variables/how-do-i-overlay-events-onto-my-dashboards
@@ -28,7 +27,7 @@ further_reading:
 
 ## Overview
 
-Template variables allow you to dynamically filter one or more widgets in a dashboard. You can build saved views from your template variable selections which allows your to organize and navigate your visualizations through the dropdown selections. 
+Template variables allow you to dynamically filter one or more widgets in a dashboard. You can build saved views from your template variable selections to organize and navigate your visualizations through the dropdown selections. 
 
 A template variable is defined by:
 
@@ -42,21 +41,40 @@ A template variable is defined by:
 ## Add a template variable
 
 To add a template variable in a dashboard:
-1. Click **Add Template Variables**. 
-1. If template variables are already defined, click the *pencil* icon to open the template variable editor. 
-1. In edit mode, click **+ Add Template Variable** to create a new template variable.
-1. (Optional) After creating a template variable, Datadog displays the number of sources using the variable. In the example below, the template variable `team` is used in two graphs on the dashboard:
-{{< img src="dashboards/template_variables/stats_tv_modal.png" alt="Template variable with several variables set" style="width:90%;">}}
-1. (Optional) To add this template variable for all widget filters, click the **Add to All** option. You can also [customize the template variables](#usage) in individual widgets.
-1. (Optional) To remove a template variable from all widgets, click the **Remove From All** option.
+1. Click **Add Variables**. 
+1. If template variables are already defined, hover over the dashboard header and click the **Edit** button to enter edit mode.
+1. In edit mode, click the **+ (plus)** icon to create a new template variable.
+1. (Optional) After selecting a tag, click the **+ Configure Dropdown Values** button to rename the variable and set default or available values.
+  {{< img src="dashboards/template_variables/add_template_variable_configure_dropdown_values.png" alt="Add Variable popover showing the Configure Dropdown Values button" style="width:80%;" >}}
+
+## Edit a template variable
+
+To edit a template variable in a dashboard:
+1. Click the **Edit** button in the dashboard header.
+1. In edit mode, click on a template variable and make changes in the popover.
+1. To rearrange variables in the header, hover over a variable, then click and drag the drag icon handle.
+  {{< img src="dashboards/template_variables/edit_template_variable_drag.png" alt="Template variable edit mode popover showing the drag icon allowing you to rearrange the order" style="width:100%;" >}}
+
+## Apply a template variable to widgets
+
+To add a template variable to widget queries:
+1. Click the **Edit** button in the dashboard header.
+1. In edit mode, click on a template variable to open its popover.
+1. Click **Select Widgets** to enter widget selection mode.
+1. The banner displays the number of sources using the variable. In the example below, the template variable `env` is used in 20 graphs on the dashboard:
+  {{< img src="dashboards/template_variables/apply_template_variable_to_widgets.png" alt="Example dashboard displaying confirmation to apply 'env' template variable to 20 widgets" style="width:100%;" >}}
+1. Click on individual widgets to preview the graph with the template variable interpolated.
+1. To add or remove from all widgets in a group, toggle the checkbox on the right corner of the group.
+1. To add or remove from all widgets on the dashboard, click **Select All** or **Deselect All** in the selection banner.
+1. Click **Save** or **X** in the banner to exit widget selection mode.
 
 ## Saved views
-
-{{< img src="dashboards/template_variables/saved_views.mp4" alt="Walk through of how to create, delete, and modify saved views" style="width:100%;" video="true">}}
 
 ### Create
 
 Click on the **Saved Views** dropdown menu to the left of the template variables in your dashboard. When you update a template variable value, the value does not automatically save to a view.
+
+{{< img src="dashboards/template_variables/saved_views_dropdown_options.png" alt="Saved views dropdown options to set selected template variables as the default view or a saved view" style="width:90%;" >}}
 
 To save your current template variables' values in a view, select **Save selections as view** from the **Saved Views** dropdown menu. Enter a unique name for the view and click **Save**. 
 

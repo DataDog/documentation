@@ -1,6 +1,5 @@
 ---
 title: Why am I unable to iFrame certain HTTPS URLs?
-kind: guide
 aliases:
     - /graphing/faq/why-am-i-unable-to-iframe-certain-https-urls
     - /dashboards/faq/why-am-i-unable-to-iframe-certain-https-urls

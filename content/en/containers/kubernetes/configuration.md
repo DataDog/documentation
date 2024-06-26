@@ -38,7 +38,43 @@ After you have installed the Datadog Agent in your Kubernetes environment, you m
 
 ## Enable APM and tracing
 
-If you have installed Kubernetes using the Datadog Operator or Helm, **APM is enabled by default**.
+{{< tabs >}}
+{{% tab "Datadog Operator" %}}
+
+Edit your `datadog-agent.yaml` to set `features.apm.enabled` to `true`.
+
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    credentials:
+      apiKey: <DATADOG_API_KEY>
+
+  features:
+    apm:
+      enabled: true
+```
+
+{{% k8s-operator-redeploy %}}
+
+{{% /tab %}}
+{{% tab "Helm" %}}
+
+In Helm, APM is **enabled by default** over UDS or Windows named pipe.
+
+To verify, ensure that `datadog.apm.socketEnabled` is set to `true` in your `values.yaml`.
+
+```yaml
+datadog:
+  apm:
+    socketEnabled: true    
+```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 For more information, see [Kubernetes Trace Collection][16].
 
@@ -273,7 +309,7 @@ spec:
     credentials:
       apiKey: <DATADOG_API_KEY>
       appKey: <DATADOG_APP_KEY>
-  clusterAgentToken: <DATADOG_CLUSTER_AGENT_TOKEN>
+    clusterAgentToken: <DATADOG_CLUSTER_AGENT_TOKEN>
 ```
 
 Alternatively, you can specify this token by referencing the name of an existing `Secret` and the data key containing this token:
@@ -288,9 +324,9 @@ spec:
     credentials:
       apiKey: <DATADOG_API_KEY>
       appKey: <DATADOG_APP_KEY>
-  clusterAgentTokenSecret: 
-    secretName: <SECRET_NAME>
-    keyName: <KEY_NAME>
+    clusterAgentTokenSecret: 
+      secretName: <SECRET_NAME>
+      keyName: <KEY_NAME>
 ```
 
 **Note**: When set manually, this token must be 32 alphanumeric characters.
@@ -374,10 +410,10 @@ datadog:
   apiKey: <DATADOG_API_KEY>
   appKey: <DATADOG_APP_KEY>
 
-  clusterAgent:
+clusterAgent:
+  enabled: true
+  metricsProvider:
     enabled: true
-    metricsProvider:
-      enabled: true
 ```
 
 Then upgrade your Helm chart:
@@ -498,9 +534,9 @@ datadog:
 
 See the [Orchestrator Explorer documentation][21] for additional information.
 
-## Environment variables
+## Basic configuration
 
-Use the following environment variables to configure the Datadog Agent.
+Use the following configuration fields to configure the Datadog Agent.
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
@@ -518,11 +554,11 @@ Use the following environment variables to configure the Datadog Agent.
 | `global.site` | Sets the Datadog [intake site][1] to which Agent data is sent. Your site is {{< region-param key="dd_site" code="true" >}}. (Ensure the correct SITE is selected on the right). |
 | `global.tags` | A list of tags to attach to every metric, event, and service check collected. |
 
-For a complete list of environment variables for the Datadog Operator, see the [Operator v2alpha1 spec][2]. For older versions, see the [Operator v1alpha1 spec][3].
+For a complete list of configuration fields for the Datadog Operator, see the [Operator v2alpha1 spec][2]. For older versions, see the [Operator v1alpha1 spec][3]. Configuration fields can also be queried using `kubectl explain datadogagent --recursive`.
 
 [1]: /getting_started/
 [2]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md
-[3]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v1alpha1.md
+[3]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v1alpha1.md 
 {{% /tab %}}
 {{% tab "Helm" %}}
 |  Helm | Description |
@@ -553,6 +589,75 @@ For a complete list of environment variables for the Helm chart, see the [full l
 | `DD_URL` (6.36+/7.36+)            | Alias for `DD_DD_URL`. Ignored if `DD_DD_URL` is already set.                                                                                                                                                                                                                                                                                    |
 | `DD_CHECK_RUNNERS`   | The Agent runs all checks concurrently by default (default value = `4` runners). To run the checks sequentially, set the value to `1`. If you need to run a high number of checks (or slow checks) the `collector-queue` component might fall behind and fail the healthcheck. You can increase the number of runners to run checks in parallel. |
 | `DD_LEADER_ELECTION` | If multiple instances of the Agent are running in your cluster, set this variable to `true` to avoid the duplication of event collection.                                                                                                                                                                                                                         |
+{{% /tab %}}
+{{< /tabs >}}
+
+## Environment variables
+The containerized Datadog Agent can be configured by using environment variables. For an extensive list of supported environment variables, see the [Environment variables][26] section of the Docker Agent documentation.
+
+### Examples
+{{< tabs >}}
+{{% tab "Datadog Operator" %}}
+When using the Datadog Operator, you can set additional environment variables in `override` for a component with `[key].env []object`, or for a container with `[key].containers.[key].env []object`. The following keys are supported: 
+
+- `nodeAgent`
+- `clusterAgent`
+- `clusterChecksRunner`
+
+Container-level settings take priority over any component-level settings.
+
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  override:
+    nodeAgent:
+      env:
+        - name: <ENV_VAR_NAME>
+          value: <ENV_VAR_VALUE>
+    clusterAgent:
+      containers:
+        cluster-agent:
+          env:
+            - name: <ENV_VAR_NAME>
+              value: <ENV_VAR_VALUE>
+```
+
+{{% /tab %}}
+{{% tab "Helm" %}}
+
+```yaml
+datadog:
+  env:
+  - name: <ENV_VAR_NAME>
+    value: <ENV_VAR_VALUE>
+clusterAgent:
+  env:
+  - name: <ENV_VAR_NAME>
+    value: <ENV_VAR_VALUE>
+```
+
+{{% /tab %}}
+{{% tab "DaemonSet" %}}
+Add environment variables to the DaemonSet or Deployment (for Datadog Cluster Agent).
+```yaml
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: datadog
+spec:
+  template:
+    spec:
+      containers:
+        - name: agent
+          ...
+          env:
+            - name: <ENV_VAR_NAME>
+              value: <ENV_VAR_VALUE>
+```
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -742,7 +847,7 @@ Starting with Agent v6.4.0 (and v6.5.0 for the Trace Agent), you can override th
 [2]: /containers/cluster_agent/
 [3]: https://app.datadoghq.com/containers
 [5]: /containers/kubernetes/integrations/
-[12]: /agent/guide/secrets-management/
+[12]: /agent/configuration/secrets-management/
 [13]: /agent/guide/autodiscovery-management/
 [14]: /containers/guide/kubernetes_daemonset#cluster-agent-event-collection
 [15]: /infrastructure/containers/
@@ -750,9 +855,10 @@ Starting with Agent v6.4.0 (and v6.5.0 for the Trace Agent), you can override th
 [17]: /containers/kubernetes/log
 [18]: /network_monitoring/performance/
 [19]: /developers/dogstatsd
-[20]: https://app.datadoghq.com/orchestration/overview/
+[20]: https://app.datadoghq.com/orchestration/overview
 [21]: /infrastructure/containers/orchestrator_explorer
 [22]: /containers/guide/cluster_agent_autoscaling_metrics/?tab=helm
 [23]: /infrastructure/process/ 
 [24]: /account_management/api-app-keys/#application-keys
 [25]: /integrations/kubernetes_state_core/
+[26]: /containers/docker/?tab=standard#environment-variables

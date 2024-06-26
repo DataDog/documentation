@@ -1,24 +1,24 @@
 ---
-title: Tutorial - Enabling Tracing for a Go Application on AWS ECS with Fargate
+title: Tutorial - Enabling Tracing for a Go Application on Amazon ECS with Fargate
 kind: guide
 further_reading:
 - link: /tracing/trace_collection/library_config/go/
-  tags: Documentation
+  tag: "Documentation"
   text: Additional tracing library configuration options
 - link: /tracing/trace_collection/dd_libraries/go/
-  tags: Documentation
+  tag: "Documentation"
   text: Detailed tracing library setup instructions
 - link: /tracing/trace_collection/compatibility/go/
-  tags: Documentation
+  tag: "Documentation"
   text: Supported Go frameworks for automatic instrumentation
 - link: /tracing/trace_collection/custom_instrumentation/go/
-  tags: Documentation
+  tag: "Documentation"
   text: Manually configuring traces and spans
 - link: /tracing/trace_pipeline/ingestion_mechanisms/
-  tags: Documentation
+  tag: "Documentation"
   text: Ingestion mechanisms
 - link: https://github.com/DataDog/dd-trace-Go
-  tags: GitHub
+  tag: "Source Code"
   text: Tracing library open source code repository
 ---
 
@@ -38,8 +38,8 @@ See [Tracing Go Applications][2] for general comprehensive tracing setup documen
 - Git
 - Docker
 - Terraform
-- AWS ECS
-- an AWS ECR repository for hosting images
+- Amazon ECS
+- an Amazon ECR repository for hosting images
 - An AWS IAM user with `AdministratorAccess` permission. You must add the profile to your local credentials file using the access and secret access keys. For more information, read [Configuring the AWS SDK for Go V2][4].
 
 ## Install the sample Go application
@@ -56,7 +56,7 @@ In addition, this tutorial uses several configuration files in the `terraform/Fa
 
 ### Initial ECS setup
 
-The application requires some initial configuration, including adding your AWS profile (already configured with the correct permissions to create an ECS cluster and read from ECR), AWS region, and AWS ECR repository.
+The application requires some initial configuration, including adding your AWS profile (already configured with the correct permissions to create an ECS cluster and read from ECR), AWS region, and Amazon ECR repository.
 
 Open `terraform/Fargate/global_constants/variables.tf`. Replace the variable values below with your correct AWS account information:
 
@@ -109,7 +109,7 @@ Your application (without tracing enabled) is containerized and available for EC
 
 Start the application and send some requests without tracing. After you've seen how the application works, you'll instrument it using the tracing library and Datadog Agent.
 
-To start, use a Terraform script to deploy to AWS ECS:
+To start, use a Terraform script to deploy to Amazon ECS:
 
 1. From the `terraform/Fargate/deployment` directory, run the following commands:
 
@@ -345,7 +345,7 @@ Your multi-service application with tracing enabled is containerized and availab
 
 Redeploy the application and exercise the API:
 
-1. Redeploy the application to AWS ECS using the [same terraform commands as before](#deploy-the-application), but with the instrumented version of the configuration files. From the `terraform/Fargate/deployment` directory, run the following commands:
+1. Redeploy the application to Amazon ECS using the [same terraform commands as before](#deploy-the-application), but with the instrumented version of the configuration files. From the `terraform/Fargate/deployment` directory, run the following commands:
 
    ```shell
    terraform init
@@ -380,7 +380,7 @@ Redeploy the application and exercise the API:
    : This command calls both the `notes` and `calendar` services.
 
 4. Wait a few moments, and take a look at your Datadog UI. Navigate to [**APM > Traces**][9]. The Traces list shows something like this:
-   {{< img src="tracing/guide/tutorials/tutorial-go-host-traces.png" alt="Traces view shows trace data coming in from host." style="width:100%;" >}}
+   {{< img src="tracing/guide/tutorials/tutorial-go-host-traces2.png" alt="Traces view shows trace data coming in from host." style="width:100%;" >}}
 
    There are entries for the database (`db`) and the `notes` app. The traces list shows all the spans, when they started, what resource was tracked with the span, and how long it took.
 

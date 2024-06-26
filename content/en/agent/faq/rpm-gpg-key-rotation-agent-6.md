@@ -1,10 +1,9 @@
 ---
 title: RPM GPG Key Rotation
-kind: faq
 ---
 
 <div class="alert alert-warning">
-This page pertains to the 2019 key rotation. For the 2022 key rotation, consult the <a href="/agent/guide/linux-agent-2022-key-rotation">2022 Linux Agent Key Rotation</a> documentation.
+This page pertains to the 2019 key rotation. For the 2022 key rotation, consult the <a href="/agent/faq/linux-agent-2022-key-rotation">2022 Linux Agent Key Rotation</a> documentation.
 </div>
 
 

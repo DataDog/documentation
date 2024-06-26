@@ -17,24 +17,26 @@ aliases:
 - /ko/getting_started/from_the_query_to_the_graph
 - /ko/graphing/miscellaneous/from_the_query_to_the_graph
 - /ko/graphing/functions/
-kind: 설명서
+further_reading:
+- link: /metrics/#querying-metrics
+  tag: 설명서
+  text: 메트릭 쿼리
 title: 함수
 ---
 
 ## 개요
 
-그래프화 편집기에서 `+` 아이콘을 클릭하여 쿼리에 함수를 적용할 수 있습니다. 대부분의 함수는 마지막 단계에서 적용됩니다([시간][1] 및 [공간 집계][2] 이후).
+함수는 메트릭 쿼리 결과가 시각화를 위해 어떻게 반환될지를 수정할 수 있습니다. 대부분의 함수는 메트릭 쿼리 결과가 반환된 후에 적용되지만 함수는 쿼리가 수행되기 전에 파라미터를 변경할 수도 있습니다. 
 
-{{< img src="dashboards/functions/addingfunctions.png" alt="함수 추가" style="width:75%;" >}}
+예를 들어 Rollup 함수는 결과가 반환되기 전에 쿼리의 시간 집계를 변경합니다. 또는 산술 함수가 메트릭 쿼리의 반환된 결과에 변경 사항을 적용합니다. 메트릭 쿼리에 대한 자세한 내용은 [메트릭][3] 페이지를 참조하세요. 다양한 함수에 대해 자세히 알아보려면 [함수 유형](#function-types)을 참조하세요.
 
-메트릭의 특정값을 제외하기 위해 제외 함수를 적용하는 방법의 예는 다음과 같습니다.
+## 함수 추가
 
-{{< img src="dashboards/functions/exclusion_example.png" alt="상위 목록을 이용한 제외 예시" style="width:75%;" >}}
+그래프 편집기에서 Add Function `Σ` 아이콘을 클릭하면 쿼리에 함수를 적용할 수 있습니다. 대부분의 기능은 [시간][1]과 [공간 집계][2] 이후에 적용됩니다.
 
-현재 데이터를 일주일 전의 데이터와 비교하기 위해 오류 로그에 타임시프트 함수를 적용하는 방법의 예시는 다음과 같습니다.
+{{< img src="dashboards/functions/sigmaaddingfunctions.png" alt="Add Function의 대문자 시그마 기호" style="width:100%;" >}}
 
-{{< img src="dashboards/functions/timeshift_example.png" alt="로그를 이용한 타임시프트 예시" style="width:75%;" >}}
-
+## 함수 유형
 
 {{< whatsnext desc="Choose a type of function:" >}}
     {{< nextlink href="/dashboards/functions/algorithms" >}}알고리즘: 이상 또는 아웃라이어 감지를 구현합니다.{{< /nextlink >}}
@@ -51,6 +53,10 @@ title: 함수
     {{< nextlink href="/dashboards/functions/beta" >}}베타: 메트릭의 이동평균값을 계산합니다.{{< /nextlink >}}
 {{< /whatsnext >}}
 
+## 참고 자료
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ko/metrics/#time-aggregation
 [2]: /ko/metrics/#space-aggregation
+[3]: /ko/metrics/#anatomy-of-a-metric-query

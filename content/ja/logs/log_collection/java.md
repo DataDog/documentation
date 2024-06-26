@@ -78,7 +78,9 @@ Log4j の場合、SLF4J モジュール [log4j-over-slf4j][1] を Logback と組
       <version>6.6</version>
     </dependency>
     ```
-2. `logback.xml` の JSON レイアウトを使用してファイルアペンダーを構成します。
+2. `logback.xml` の JSON レイアウトを使用してアペンダーを構成します。
+
+   ファイル:
 
     ```xml
     <configuration>
@@ -93,13 +95,31 @@ Log4j の場合、SLF4J モジュール [log4j-over-slf4j][1] を Logback と組
     </configuration>
     ```
 
+   コンソール:
+
+    ```xml
+    <configuration>
+      <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+          <encoder class="ch.qos.logback.classic.encoder.JsonEncoder"/>
+      </appender>
+
+      <root>
+        <level value="DEBUG"/>
+          <appender-ref ref="CONSOLE"/>
+        </root>
+    </configuration>
+    ```
+
 [1]: http://www.slf4j.org/legacy.html#log4j-over-slf4j
 {{% /tab %}}
 {{% tab "Log4j 2" %}}
 
 Log4j 2 には JSON レイアウトが含まれています。
 
-1. `log4j2.xml` の JSON レイアウトを使用してファイルアペンダーを構成します。
+1. `log4j2.xml` の JSON レイアウトを使用してアペンダーを構成します。
+
+   ファイルアペンダー:
+
     ```xml
     <?xml version="1.0" encoding="UTF-8"?>
     <Configuration>
@@ -116,6 +136,28 @@ Log4j 2 には JSON レイアウトが含まれています。
       </Loggers>
     </Configuration>
     ```
+
+   コンソールアペンダー:
+
+    ```xml
+    <?xml version="1.0" encoding="UTF-8"?>
+    <Configuration>
+
+        <Appenders>
+            <Console name="console" target="SYSTEM_OUT">
+                <JSONLayout compact="true" eventEol="true" properties="true" stacktraceAsString="true" />
+            </Console>
+        </Appenders>
+
+        <Loggers>
+            <Root level="INFO">
+                <AppenderRef ref="console"/>
+            </Root>
+
+        </Loggers>
+    </Configuration>
+    ```
+
 2. JSON レイアウトの依存関係を `pom.xml` に追加します。
     ```xml
     <dependency>
@@ -176,6 +218,30 @@ Logback の JSON 形式のログには、[logstash-logback-encoder][1] を使用
     ```
 
 [1]: https://github.com/logstash/logstash-logback-encoder
+{{% /tab %}}
+{{% tab "Tinylog" %}}
+
+[Tinylog 公式ドキュメント][1]に基づいて、JSON ライターの構成を作成します。
+
+
+`tinylog.properties` ファイルには以下のフォーマットを使用します。
+
+```properties
+writer                     = json
+writer.file                = log.json
+writer.format              = LDJSON
+writer.level               = info
+writer.field.level         = level
+writer.field.source        = {class}.{method}()
+writer.field.message       = {message}
+writer.field.dd.trace_id   = {context: dd.trace_id}
+writer.field.dd.span_id    = {context: dd.span_id}
+writer.field.dd.service    = {context: dd.service}
+writer.field.dd.version    = {context: dd.version}
+writer.field.dd.env        = {context: dd.env}
+```
+
+[1]: https://tinylog.org/v2/configuration/#json-writer
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -258,6 +324,22 @@ Logback の JSON 形式のログには、[logstash-logback-encoder][1] を使用
 ```
 
 {{% /tab %}}
+{{% tab "Tinylog" %}}
+
+[Tinylog 公式ドキュメント][1]に基づいて、ファイルに出力するライターの構成を作成します。
+
+
+`tinylog.properties` ファイルには以下のフォーマットを使用します。
+
+```properties
+writer          = file
+writer.level    = debug
+writer.format   = {level} - {message} - "dd.trace_id":{context: dd.trace_id} - "dd.span_id":{context: dd.span_id}
+writer.file     = log.txt
+```
+
+[1]: https://tinylog.org/v2/configuration/#json-writer
+{{% /tab %}}
 {{< /tabs >}}
 
 #### ログへのトレース ID の挿入
@@ -279,8 +361,8 @@ Logback の JSON 形式のログには、[logstash-logback-encoder][1] を使用
     logs:
 
       - type: file
-        path: "/path/to/your/java/log.log"
-        service: java
+        path: "<path_to_your_java_log>.log"
+        service: <service_name>
         source: java
         sourcecategory: sourcecode
         # For multiline logs, if they start by the date with the format yyyy-mm-dd uncomment the following processing rule
@@ -531,9 +613,9 @@ logger.info("Emitted 1001 messages during the last 93 seconds");
 [3]: /ja/tracing/other_telemetry/connect_logs_and_traces/java/
 [4]: /ja/agent/logs/?tab=tailfiles#activate-log-collection
 [5]: /ja/agent/logs/?tab=tailfiles#custom-log-collection
-[6]: /ja/agent/guide/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
-[7]: /ja/agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent
-[8]: /ja/agent/guide/agent-commands/?tab=agentv6v7#agent-status-and-information]
+[6]: /ja/agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
+[7]: /ja/agent/configuration/agent-commands/?tab=agentv6v7#restart-the-agent
+[8]: /ja/agent/configuration/agent-commands/?tab=agentv6v7#agent-status-and-information]
 [9]: /ja/logs/log_configuration/parsing/?tab=matchers
 [10]: /ja/logs/explorer/#overview
 [11]: https://github.com/logstash/logstash-logback-encoder

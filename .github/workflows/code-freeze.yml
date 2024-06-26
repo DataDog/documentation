@@ -12,8 +12,9 @@ concurrency:
 # 1. Set ACTIVE_FREEZE to "true".
 # 2. Change codefreeze-check-unfrozen to codefreeze-check-YYYYmmdd format `echo "check-$(date -u +'%Y%m%d')"`.
 # 3. Push the changes to the Github repo and open a PR.
-# 4. In the Github repo settings, add codefreeze-check-YYYYmmdd as a required status check for the master branch.
-# 5. Merge the PR.
+# 4. Merge the PR.
+# 5. In the Github repo settings, add codefreeze-check-YYYYmmdd as a required status check for the master branch.
+
 
 ### To disable a freeze:
 # 1. Set ACTIVE_FREEZE to "false".
@@ -51,7 +52,7 @@ jobs:
     - name: Get Changed files
       if: env.ACTIVE_FREEZE == 'true' && ! (contains( github.event.pull_request.labels.*.name, 'MERGE-NOW') || contains( github.event.pull_request.labels.*.name, 'codefreeze-approved'))
       id: changed-files
-      uses: tj-actions/changed-files@v34
+      uses: tj-actions/changed-files@v42
       with:
         separator: ","
         fetch_depth: 5
@@ -62,8 +63,10 @@ jobs:
       with:
         python-version: '3.10'    # get all commits, not just the latest
     - name: Check for frozen files
+      env:
+        ALL_CHANGED_AND_MODIFIED_FILES: ${{ steps.changed-files.outputs.all_changed_and_modified_files }}
       if: env.ACTIVE_FREEZE == 'true' && steps.changed-files.outputs.any_modified == 'true' && ! (contains( github.event.pull_request.labels.*.name, 'MERGE-NOW') || contains( github.event.pull_request.labels.*.name, 'codefreeze-approved'))
-      run: python local/bin/py/code-freeze-check.py -c '${{ steps.changed-files.outputs.all_changed_and_modified_files }}'
+      run: python local/bin/py/code-freeze-check.py -c $ALL_CHANGED_AND_MODIFIED_FILES
     - name: Frozen file exception pass
       if: env.ACTIVE_FREEZE == 'true' && (contains( github.event.pull_request.labels.*.name, 'MERGE-NOW') || contains( github.event.pull_request.labels.*.name, 'codefreeze-approved'))
       run: echo 'This PR was marked for exception, passing.'

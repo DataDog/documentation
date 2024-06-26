@@ -1,5 +1,5 @@
 {{/*
-  This navigation is used on the left of the site, and is the main documentation nav.
+  This navigation is used on the left of the site, and is the main API documentation nav.
   Looking for the header nav? see website-modules
 */}}
 
@@ -24,23 +24,22 @@
 {{ end }}
 
 
-{{/*  
-    build array ($engMenuChildren) of english menu items with parents from "menus.en.yaml". 
-    for use in providing english names for anchoring the nav-links (.nav-link)  
+{{/*
+    build array ($engMenuChildren) of english menu items with parents from "api.en.yaml".
+    for use in providing english names for anchoring the nav-links (.nav-link)
 */}}
 {{ if ne $currentPage.Lang "en" }}
 {{$engMenu := (index .Sites.First.Menus $apiMenu) }}
-{{$dot.Scratch.Set "engMenuChildren" slice}}
 {{ range $engMenu }}
     {{ if and (.HasChildren) (ne $currentPage.CurrentSection.RelPermalink "/api/") }}
     {{ range .Children }}
-        {{$dot.Scratch.Add "engMenuChildren" (dict "identifier" .Identifier "name" .Name) }}
+        {{ $dot.Scratch.SetInMap "engMenuChildren" .Identifier .Name }}
     {{ end }}
     {{ end }}
 {{ end }}
 {{ end }}
 
-{{$engMenuChildren := $dot.Scratch.Get "engMenuChildren"}}
+{{$engMenuChildren := $dot.Scratch.Get "engMenuChildren" | default dict}}
 
 <ul class="list-unstyled">
 {{ range $menu }}
@@ -54,14 +53,12 @@
                 {{ range sort .Children ".Params.order" "asc"  }}
                     <li class="row nav-item {{ if $currentPage.IsMenuCurrent $apiMenu . }}active{{ end }}">
                         {{$identifier := .Identifier}}
-                        {{/*                           
-                            lookup english equivalent of non-english menu item identifier attr.  
+                        {{/*
+                            lookup english equivalent of non-english menu item identifier attr.
                             pull the name attr and plug into anchor href.
                         */}}
                         {{ if ne $currentPage.Lang "en" }}
-                        {{ range where $engMenuChildren "identifier" $identifier  }}
-                            {{$dot.Scratch.Set "name" .name}}
-                        {{ end }}
+                        {{ $dot.Scratch.Set "name" (index $engMenuChildren $identifier) }}
                         {{ end }}
 
                         {{$engName := $dot.Scratch.Get "name"}}

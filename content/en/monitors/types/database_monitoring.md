@@ -69,7 +69,7 @@ When you split the monitor by any dimension (tag or facet) and use a `below` con
 For more information about advanced alert options such as evaluation delay, see [Configure Monitors][3].
 
 ### Notifications
-For more information about the **Notify your team** and **Say what's happening** sections, see [Notifications][4].
+For more information about the **Configure notifications and automations** section, see [Notifications][4].
 
 ## Example monitors
 
@@ -92,7 +92,7 @@ This monitor detects whether the number of waiting queries has exceeded a given 
 
 #### Configure notifications
 
-1. Under **Notify your team**, write the notification message. For detailed instructions, see [Notifications][4]. You can use this text for the message body:
+1. Under **Configure notifications and automations**, write the notification message. For detailed instructions, see [Notifications][4]. You can use this text for the message body:
 {{< code-block lang="text" >}}
 {{#is_alert}}
 Waiting queries on {{host.name}} have exceeded {{threshold}} 
@@ -131,7 +131,7 @@ This monitor detects whether the number of long-running queries has exceeded a g
 
 #### Configure notifications
 
-1. Under **Notify your team**, write the notification message. For detailed instructions, see [Notifications][4]. You can use this text for the message body:
+1. Under **Configure notifications and automations**, write the notification message. For detailed instructions, see [Notifications][4]. You can use this text for the message body:
 {{< code-block lang="text" >}}
 {{#is_alert}}
 The number of queries with a duration of >30s has exceeded 
@@ -176,7 +176,7 @@ With minor changes, the monitor can instead reflect hourly averages, measure the
 
 1. Click **Add Query** to create query **b**, a copy of query **a**.
 1. Change **a + b** to **a - b**. Because the two queries are temporarily identical, this value displays on the chart as 0.
-1. In the **b** query, click the the **∑** button and choose **Timeshift > Week before**. This configures the monitor to detect significant changes between last week and the present.
+1. In the **b** query, click the **∑** button and choose **Timeshift > Week before**. This configures the monitor to detect significant changes between last week and the present.
 
 #### Set the alert threshold
 
@@ -186,7 +186,7 @@ With minor changes, the monitor can instead reflect hourly averages, measure the
 
 #### Configure notifications
 
-1. Under **Notify your team**, write the notification message. For detailed instructions, see [Notifications][4]. You can use this text for the message body:
+1. Under **Configure notifications and automations**, write the notification message. For detailed instructions, see [Notifications][4]. You can use this text for the message body:
 {{< code-block lang="text" >}}
 {{#is_alert}}
 The daily average explain-plan cost on {{host.name}} has increased by at least {{threshold}} 
@@ -212,6 +212,6 @@ of the cost on this day last week.
 [4]: /monitors/notify/
 [5]: /monitors/configuration/?tab=thresholdalert#thresholds
 [6]: /monitors/configuration/?tab=thresholdalert#set-alert-conditions
-[7]: /monitors/configuration/?tab=thresholdalert#notify-your-team
+[7]: /monitors/configuration/?tab=thresholdalert#configure-notifications-and-automations
 [8]: https://app.datadoghq.com/databases/list
 [9]: /help/

@@ -36,12 +36,12 @@ datadogRum.setGlobalContextProperty('department', 'marketing');
 
 To set tags for **mobile sessions**, use the [`addAttribute`][5] method. Here's an example:
 
-```javascript
+```
 //Android
-GlobalRumMonitor.addAttribute('department', 'marketing')
+GlobalRumMonitor.get().addAttribute("department", "marketing")
 
 //iOS
-Global.rum.addAttribute(forKey: 'department', value: 'marketing')
+RumMonitor.shared().addAttribute(forKey: "department", value: "marketing")
 ```
 
 **Note**: A few tags are included by default (`service`, `env`, `version`, `application.id`, and `application.name`). For anything else, set the global context using the method above.
@@ -49,9 +49,9 @@ Global.rum.addAttribute(forKey: 'department', value: 'marketing')
 Once you've deployed this step, new RUM sessions are tracked according to the tags you added.
 
 ## View RUM usage
-The newly tagged sessions are displayed on the [Usage Attribution][3] page. Now when you review the Estimated RUM Sessions column, you can see the number of sessions by department.
+The newly tagged sessions are displayed on the [Usage Attribution][3] page. When you review the RUM with Session Replay Sessions and RUM Sessions columns, you can see the number of sessions by department.
 
-{{< img src="real_user_monitoring/guide/rum-usage-attribution-tags/rum-use-attribution-tags-2.jpeg" alt="View RUM usage by department" style="width:100%;">}}
+{{< img src="real_user_monitoring/guide/rum-usage-attribution-tags/rum-use-attribution-tags-3.png" alt="View RUM usage by department" style="width:100%;">}}
 
 Usage information is also available through the [`GetHourlyUsageAttribution`][4] endpoint.
 
@@ -60,7 +60,7 @@ Usage information is also available through the [`GetHourlyUsageAttribution`][4]
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/billing/usage-attribution
-[2]: /real_user_monitoring/browser/modifying_data_and_context/?tab=npm#global-context
+[2]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#global-context
 [3]: https://app.datadoghq.com/billing/usage-attribution
 [4]: /api/latest/usage-metering/#get-hourly-usage-attribution-v1
-[5]: /real_user_monitoring/android/advanced_configuration/?tab=kotlin#track-attributes
+[5]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/?tab=kotlin#track-attributes

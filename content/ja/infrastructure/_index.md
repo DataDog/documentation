@@ -2,6 +2,12 @@
 aliases:
 - /ja/graphing/infrastructure/
 cascade:
+- _target:
+    path: /infrastructure/resource_catalog/aws_iam_user.md
+  aliases:
+  - /security/cspm/custom_rules/aws_iam_user/
+- _target:
+    path: /infrastructure/**/*
   algolia:
     rank: 70
 further_reading:
@@ -14,6 +20,14 @@ further_reading:
 kind: documentation
 title: インフラストラクチャー
 ---
+
+{{< img src="infrastructure/Hostmap-compressed.mp4" alt="ホストマップを Nginx ホストにフィルターするビデオ" video="true">}}
+
+## 概要
+
+インフラストラクチャーモニタリングには、ホスト、コンテナ、プロセスのパフォーマンスを視覚化、監視、測定する Datadog のコア機能が含まれています。
+
+## コンポーネント
 
 {{< whatsnext desc="このセクションには、以下のトピックがあります。">}}
     {{< nextlink href="/infrastructure/list" >}}<u>インフラストラクチャーリスト</u> - Datadog が監視しているすべてのホストの一覧を表示します。{{< /nextlink >}}

@@ -29,23 +29,26 @@ Pour commencer à recueillir des logs à partir de vos services AWS :
 
 Tous les services AWS qui génèrent des logs dans un compartiment S3 ou un groupe de logs CloudWatch sont pris en charge. Consultez les instructions de configuration des services les plus utilisés dans le tableau ci-dessous :
 
-| Service AWS                        | Activation de la journalisation pour le service AWS                                                                    | Envoi des logs AWS à Datadog                                                    |
-| ---------------------------------- | ----------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
-| [API Gateway][3]                  | [Activer les logs AWS API Gateway][4]                                                               | Collecte des logs [manuelle][5] et [automatique](#configurer-automatiquement-des-declencheurs)                                                |
-| [Cloudfront][6]                   | [Activer les logs AWS Cloudfront][7]                                                                | Collecte des logs [manuelle][8] et [automatique](#configurer-automatiquement-des-declencheurs)  |
-| [Cloudtrail][9]                   | [Activer les logs AWS Cloudtrail][9]                                                                | Collecte de logs [manuelle][10]. Consultez la section [Guide de configuration d'AWS pour Cloud SIEM][11] si vous configurez AWS CloudTrail pour Cloud SIEM.                                                  |
-| [DynamoDB][12]                     | [Activer les logs AWS DynamoDB][13]                                                                  | Collecte de logs [manuelle][14].                                                 |
-| [EC2][15]                          | `-`                                                                                             | Utiliser l'[Agent Datadog][15] pour envoyer vos logs à Datadog                    |
-| [ECS][16]                          | `-`                                                                                             | [Utiliser l'Agent Docker pour rassembler vos logs][17].                              |
-| [Elastic Load Balancing (ELB)][18] | [Activer les logs AWS ELB][19]                                                                       | Collecte des logs [manuelle][20] et [automatique](#configurer-automatiquement-des-declencheurs)  |
-| [Lambda][21]                       | `-`                                                                                             | Collecte des logs [manuelle][22] et [automatique](#configurer-automatiquement-des-declencheurs) |
-| [RDS][23]                         | [Activer les logs AWS RDS][24]                                                                      | Collecte de logs [manuelle][25].                                                |
-| [Route 53][26]                    | [Activer les logs AWS Route 53][27]                                                                 | Collecte de logs [manuelle][28].                                                |
-| [S3][29]                          | [Activer les logs AWS S3][30]                                                                       | Collecte des logs [manuelle][31] et [automatique](#configurer-automatiquement-des-declencheurs) |
-| [SNS][32]                         | SNS ne fournit pas de logs, mais vous pouvez traiter les logs et les événements transmis via le service SNS. | Collecte de logs [manuelle][33].                                                |
-| [RedShift][34]                    | [Activer les logs AWS Redshift][35]                                                                 | Collecte des logs [manuelle][36] et [automatique](#configurer-automatiquement-des-declencheurs) |
-| [Verified Access][37]             | [Activer les logs Verified Access][38]                                                              | Collecte de logs [manuelle][39].                                                |
-| [VPC][40]                         | [Activer les logs AWS VPC][41]                                                                      | Collecte de logs [manuelle][42].                                                |
+| Service AWS                        | Activation de la journalisation pour le service AWS                                                          | Envoi des logs AWS à Datadog                                                                                                                                |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [API Gateway][3]                   | [Activer les logs AWS API Gateway][4]                                                                        | Collecte des logs [manuelle][5] et [automatique](#configurer-automatiquement-des-declencheurs)                                                              |
+| [Cloudfront][6]                    | [Activer les logs AWS Cloudfront][7]                                                                         | Collecte des logs [manuelle][8] et [automatique](#configurer-automatiquement-des-declencheurs)                                                              |
+| [Cloudtrail][9]                    | [Activer les logs AWS Cloudtrail][9]                                                                         | Collecte de logs [manuelle][10]. Consultez la section [Guide de configuration d'AWS pour Cloud SIEM][11] si vous configurez AWS CloudTrail pour Cloud SIEM. |
+| [DynamoDB][12]                     | [Activer les logs AWS DynamoDB][13]                                                                          | Collecte de logs [manuelle][14].                                                                                                                            |
+| [EC2][15]                          | `-`                                                                                                          | Utiliser l'[Agent Datadog][15] pour envoyer vos logs à Datadog                                                                                              |
+| [ECS][16]                          | `-`                                                                                                          | [Utiliser l'Agent Docker pour rassembler vos logs][17].                                                                                                     |
+| [Elastic Load Balancing (ELB)][18] | [Activer les logs AWS ELB][19]                                                                               | Collecte des logs [manuelle][20] et [automatique](#configurer-automatiquement-des-declencheurs)                                                             |
+| [Lambda][21]                       | `-`                                                                                                          | Collecte des logs [manuelle][22] et [automatique](#configurer-automatiquement-des-declencheurs)                                                             |
+| [RDS][23]                          | [Activer les logs AWS RDS][24]                                                                               | Collecte de logs [manuelle][25].                                                                                                                            |
+| [Route 53][26]                     | [Activer les logs AWS Route 53][27]                                                                          | Collecte de logs [manuelle][28].                                                                                                                            |
+| [S3][29]                           | [Activer les logs AWS S3][30]                                                                                | Collecte des logs [manuelle][31] et [automatique](#configurer-automatiquement-des-declencheurs)                                                             |
+| [SNS][32]                          | SNS ne fournit pas de logs, mais vous pouvez traiter les logs et les événements transmis via le service SNS. | Collecte de logs [manuelle][33].                                                                                                                            |
+| [RedShift][34]                     | [Activer les logs AWS Redshift][35]                                                                          | Collecte des logs [manuelle][36] et [automatique](#configurer-automatiquement-des-declencheurs)                                                             |
+| [Verified Access][37]              | [Activer les logs Verified Access][38]                                                                       | Collecte de logs [manuelle][39].                                                                                                                            |
+| [VPC][40]                          | [Activer les logs AWS VPC][41]                                                                               | Collecte de logs [manuelle][42].                                                                                                                            |
+| [Step Functions][52]               | [Activer les logs AWS Step Functions][53]                                                                    | Collecte de logs [manuelle][54].                                                                                                                            |
+| [Web Application Firewall][49]     | [Activer les logs AWS WAF][50]                                                                               | Collecte de logs [manuelle][51]                                                                                                                             |
+
 
 ## Configurer des déclencheurs
 
@@ -58,18 +61,20 @@ Il existe deux méthodes de configuration des déclencheurs sur la fonction Lamb
 
 Datadog peut automatiquement configurer des déclencheurs sur la fonction Lambda du Forwarder Datadog afin de recueillir les logs AWS à partir des sources et emplacements suivants :
 
-| Source                          | Emplacement       |
-| ------------------------------- | ---------------|
-| Logs d'accès API Gateway         | CloudWatch     |
-| Logs d'exécution API Gateway      | CloudWatch     |
+| Source                                | Emplacement    |
+| ------------------------------------- | -------------- |
+| Logs d'accès API Gateway              | CloudWatch     |
+| Logs d'exécution API Gateway          | CloudWatch     |
 | Logs d'accès ELB de l'application     | S3             |
-| Logs d'accès ELB classique         | S3             |
-| Logs d'accès CloudFront          | S3             |
-| Logs Lambda                     | CloudWatch     |
-| Logs Redshift                   | S3             |
-| Logs d'accès S3                  | S3             |
+| Logs d'accès ELB classique            | S3             |
+| Logs d'accès CloudFront               | S3             |
+| Logs Lambda                           | CloudWatch     |
+| Logs Redshift                         | S3             |
+| Logs d'accès S3                       | S3             |
+| Log des Step Functions                | CloudWatch     |
+| Logs d'accès Web Application Firewall | S3, CloudWatch |
 
-**Remarque** : `SubscriptionFilter` n'est pas créé automatiquement.
+**Remarque** : Les [Filtres d'abonnement][48] ne sont pas créés automatiquement par le DatadogForwarder. Créez les directement dans un Log Group.
 
 1. Si vous ne l'avez pas déjà fait, configurez la [fonction Lambda de collecte de logs AWS avec Datadog][1].
 2. Vérifiez que la stratégie du rôle IAM utilisé pour l'[intégration Datadog/AWS][43] possède les autorisations suivantes. Le fonctionnement de ces autorisations est décrit ci-dessous :
@@ -88,6 +93,9 @@ Datadog peut automatiquement configurer des déclencheurs sur la fonction Lambda
     "s3:GetBucketNotification",
     "s3:ListAllMyBuckets",
     "s3:PutBucketNotification",
+    "states:ListStateMachines",
+    "states:DescribeStateMachine",
+    "wafv2:ListLoggingConfigurations",
     "logs:PutSubscriptionFilter",
     "logs:DeleteSubscriptionFilter",
     "logs:DescribeSubscriptionFilters"
@@ -108,6 +116,9 @@ Datadog peut automatiquement configurer des déclencheurs sur la fonction Lambda
     | `s3:GetBucketNotification`                                  | Récupère les configurations des déclencheurs Lambda existants.                                  |
    {{< partial name="whats-next/whats-next.html" >}}
     | `s3:PutBucketNotification`                                  | Ajoute ou supprime un déclencheur Lambda basé sur des événements de compartiment S3.                    |
+    | `states:ListStateMachines`                                  | Répertorie toutes les Step Functions.                                        |
+    | `states:DescribeStateMachine`                               | Récupère la configuration des logs d'une Step Function.                      |
+    | `wafv2:ListLoggingConfigurations`                           | Répertorie toutes les configurations de logs de Web Application Firewall.            |
     | `logs:PutSubscriptionFilter`                                | Ajoute un déclencheur Lambda basé sur des événements de log CloudWatch.                          |
     | `logs:DeleteSubscriptionFilter`                             | Supprime un déclencheur Lambda basé sur des événements de log CloudWatch.                       |
     | `logs:DescribeSubscriptionFilters`                          | Répertorie les filtres d'abonnement pour le groupe de logs spécifié.                  |
@@ -292,3 +303,10 @@ Vous pouvez également exclure ou envoyer uniquement les logs correspondant à u
 [45]: https://app.datadoghq.com/logs
 [46]: https://github.com/DataDog/datadog-serverless-functions/tree/master/aws/logs_monitoring#log-scrubbing-optional
 [47]: https://github.com/DataDog/datadog-serverless-functions/tree/master/aws/logs_monitoring#log-filtering-optional
+[48]: https://docs.aws.amazon.com/fr_fr/AmazonCloudWatch/latest/logs/SubscriptionFilters.html
+[49]: /integrations/amazon_waf/
+[50]: /integrations/amazon_waf/#log-collection
+[51]: /integrations/amazon_waf/#send-logs-to-datadog
+[52]: /integrations/amazon_step_functions/
+[53]: /integrations/amazon_step_functions/#log-collection
+[54]: /integrations/amazon_step_functions/#send-logs-to-datadog

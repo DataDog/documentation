@@ -1,6 +1,5 @@
 ---
 title: Monitor Authentication Logs for Security Threats
-kind: guide
 aliases:
   - /security_monitoring/guide/monitor-authentication-logs-for-security-threats/
   - /security_platform/guide/monitor-authentication-logs-for-security-threats/
@@ -87,7 +86,7 @@ Another common authentication attack technique is [**credential stuffing**][11].
 
 Datadog offers pre-configured [Detection Rules][12] that scan your ingested logs in real time for common attacker techniques like the two mentioned above. If any log triggers one of these rules, Datadog automatically generates a [Security Signal][13]. This signal includes key data about the event, such as the type of attack detected and suggestions on how to respond and remedy the situation. You can view, filter, and sort all of your Security Signals in the explorer to triage them and see where to best focus your efforts.
 
-For signals triggered from the `Credential Stuffing Attack` Detection Rule, there is an [out-of-the-box runbook][14] available to help with response and remediation. This runbook guides you through investigating a potential credential stuffing attack and includes graphs of related logs. To use this runbook, save a copy and set the the time frame, document your investigation in markdown, and share it with teammates [for commenting][15].
+For signals triggered from the `Credential Stuffing Attack` Detection Rule, there is an [out-of-the-box runbook][14] available to help with response and remediation. This runbook guides you through investigating a potential credential stuffing attack and includes graphs of related logs. To use this runbook, save a copy and set the time frame, document your investigation in markdown, and share it with teammates [for commenting][15].
 
 ### Use dashboards to investigate
 

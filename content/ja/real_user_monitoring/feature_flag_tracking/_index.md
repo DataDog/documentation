@@ -14,10 +14,6 @@ kind: documentation
 title: 機能フラグ追跡
 ---
 
-<div class="alert alert-warning">
-    機能フラグ追跡はベータ版です。
-</div>
-
 ## 概要
 
 機能フラグデータにより、どのユーザーに特定の機能が表示されているか、導入した変更がユーザー体験に影響を与えているか、パフォーマンスに悪影響を与えているかを判断できるため、ユーザー体験やパフォーマンス監視の可視性が高まります。
@@ -45,14 +41,14 @@ RUM データを機能フラグデータでリッチ化することで、以下�
 
 ## 機能フラグを表示する
 
-機能フラグデータ収集を設定したら、RUM 内の [**Feature Flags**][4] タブに移動するか、**UX Monitoring** の下の [**Feature Flags**][4] タブをクリックします。
+機能フラグデータ収集をセットアップしたら、RUM 内の [**Feature Flags**][4] タブに移動します。
 
 このビューから、機能フラグの健全性や使用状況について疑問点を調査することができます。
 - 各バリアントを体験しているユーザー数をモニターし、機能フラグのサマリー統計を見る
 - 機能フラグのステータスを確認し、コードクリーンアップのために削除できるものがあるかどうかを確認する
 - 機能フラグがどのページで評価されているかを確認する
 
-{{< img src="real_user_monitoring/feature_flag_tracking/feature-flag-list.png" alt="機能フラグの一覧を表示し、機能フラグの健全性や使用状況について疑問点を調査することができます" style="width:90%;" >}}
+{{< img src="real_user_monitoring/feature_flag_tracking/feature-flag-list-2.png" alt="機能フラグの一覧を表示し、機能フラグの健全性や使用状況について疑問点を調査することができます" style="width:90%;" >}}
 
 
 ### 検索とフィルター
@@ -61,7 +57,8 @@ RUM データを機能フラグデータでリッチ化することで、以下�
 {{< img src="real_user_monitoring/feature_flag_tracking/feature-flag-list-search-filter.png" alt="機能フラグリストの検索バーとフィルター" style="width:90%;" >}}
 
 ### 機能フラグのステータス
-機能フラグのステータスは 2 種類あります。
+機能フラグのステータスは 3 種類あります。
+- **Active**: 機能フラグは過去 2 週間、さまざまなバリアントを評価してきました
 - **Inactive**: 過去 2 週間、コントロールバリアンについての機能フラグ評価のみです
 - **Out to 100%**: 過去 2 週間、非コントロールバリアントの 1 つについての機能フラグ評価のみです
 
@@ -96,7 +93,7 @@ RUM エクスプローラーでは、`@feature_flags.{flag_name}` 属性でセ�
 [2]: /ja/real_user_monitoring/browser#setup
 [3]: /ja/real_user_monitoring/guide/setup-feature-flag-data-collection/?tab=npm#custom-feature-flag-management
 [4]: https://app.datadoghq.com/rum/feature-flags
-[5]: /ja/real_user_monitoring/session_replay/
+[5]: /ja/real_user_monitoring/session_replay/browser/
 [6]: /ja/real_user_monitoring/error_tracking/explorer/#explore-your-issues
 [7]: https://app.datadoghq.com/rum/explorer
 [8]: /ja/dashboards/

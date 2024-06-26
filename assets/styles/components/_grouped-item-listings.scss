@@ -30,6 +30,12 @@
 
   .group-header-text {
     margin-top: -1px;
+    i{
+      cursor: copy;
+      position: relative;
+      top: 4px;
+      margin-left: 4px;
+    }
   }
 
   &:hover {
@@ -69,6 +75,9 @@
 .rule-specification {
   p {
     margin-bottom: 4px;
+  }
+  a.stretched-link:hover{
+    color: white;
   }
 }
 

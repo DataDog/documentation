@@ -31,7 +31,7 @@ The Agent's [main configuration file][1] is `datadog.yaml`. For the serverless A
 | Environment Variable                                  | Description                                                                                                                                                                                                                          |
 |-----------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `DD_LOGS_ENABLED`                             | Set to `true` to enable Datadog Agent log collection.                                                                                                                                                          |
-| `DD_LOGS_CONFIG_DD_URL`                       | Define the endpoint and port to hit when using a proxy for logs. Because logs are forwarded in TCP, the proxy must be able to handle TCP connections. String in the format `<ENDPOINT>:<PORT>`.                                  |
+| `DD_LOGS_CONFIG_LOGS_DD_URL`                       | Define the endpoint and port to hit when using a proxy for logs. Because logs are forwarded in TCP, the proxy must be able to handle TCP connections. String in the format `<ENDPOINT>:<PORT>`.                                  |
 | `DD_LOGS_CONFIG_LOGS_NO_SSL`                  | Disable the SSL encryption. This parameter should only be used when logs are forwarded locally to a proxy. It is highly recommended to then handle the SSL encryption on the proxy side.                                             |
 | `DD_LOGS_CONFIG_PROCESSING_RULES`             | Global processing rules that are applied to all logs. The available rules are `exclude_at_match`, `include_at_match`, and `mask_sequences`. For more information, see [Global Processing Rules][2].                                            |
 | `DD_LOGS_CONFIG_FORCE_USE_HTTP`               | By default, the Agent sends logs in HTTPS batches to port 443 if HTTPS connectivity can be established at Agent startup, and falls back to TCP otherwise. Set this parameter to `true` to always send logs with HTTPS (recommended). |
@@ -110,7 +110,7 @@ Send custom metrics with [the StatsD protocol][5]:
 
 [5]: /developers/dogstatsd/
 
-[6]: /agent/proxy/#agent-v6
+[6]: /agent/configuration/proxy/#agent-v6
 
 [7]: /serverless/libraries_integrations/cli/#environment-variables
 

@@ -12,7 +12,6 @@ author:
   vendor_id: instabug
 categories:
 - マーケットプレイス
-- モニタリング
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -21,20 +20,19 @@ integration_id: instabug-instabug
 integration_title: Instabug
 integration_version: ''
 is_public: true
-kind: integration
+kind: インテグレーション
 legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0
 name: instabug_instabug
-oauth: {}
 pricing:
 - billing_type: tag_count
   includes_assets: true
   metric: datadog.marketplace.instabug.instabug
   product_id: instabug
-  short_description: 月間 250,000 セッションを上限とするパフォーマンスと安定性のオールインワンツール
+  short_description: パフォーマンスと安定性を兼ね備えたオールインワンツールで、月間 25 万セッションの上限あり
   tag: セッション
-  unit_label: 250,000 セッション
+  unit_label: 25 万セッション
   unit_price: 540
 public_title: Instabug
 short_description: 優れたモバイルアプリのパフォーマンスを実現
@@ -49,7 +47,6 @@ tile:
   - Supported OS::Windows
   - Supported OS::macOS
   - Category::Marketplace
-  - Category::Monitoring
   - Offering::Software License
   configuration: README.md#Setup
   description: 優れたモバイルアプリのパフォーマンスを実現
@@ -75,28 +72,27 @@ tile:
   uninstallation: README.md#Uninstallation
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
 ## 概要
-Instabug により、モバイルアプリケーションのチームは、開発ライフサイクル全体を通じて、安定性、パフォーマンス、機能開発のバランスをとることができます。
-
-軽量な SDK をベースにした Instabug は、独自のインサイトを提供し、モバイルチームが自信を持ってリリースし、キーパフォーマンスメトリクスを調整し、エンドユーザーに影響を与える前に重要な問題を特定し解決できるようにします。
+Instabug により、モバイルアプリケーションのチームは、開発ライフサイクル全体を通じて、安定性、パフォーマンス、機能開発のバランスをとることができます。軽量な SDK をベースにした Instabug は、独自のインサイトを提供し、モバイルチームが自信を持ってリリースし、キーパフォーマンスメトリクスを調整し、エンドユーザーに影響を与える前に重要な問題を特定し解決できるようにします。
 
 Instabug を使えば、チームの可視性を高め、優れたモバイルアプリ体験を一貫して提供することができます。
 
-### リリース中心:
+### リリース中心
 モバイルのパフォーマンスを追跡し、バージョンの採用、安定性、パフォーマンスを比較します。問題をすばやく特定し、リリースごとに問題を監視し、回帰した問題を効率的に解決します。
 
-### 統合されたパフォーマンスモニタリング:
+### 統合されたパフォーマンスモニタリング
 クラッシュのないセッションにとどまらず、画面遷移の遅れ、ネットワークエラー、致命的なアプリのハングアップ、OOM クラッシュなどの問題をモニタリングしながら、単一のアプリケーションパフォーマンスメトリクスを中心にチームをまとめます。
 
-### 包括的なデバッグ:
+### 包括的なデバッグ
 ログ、スクリーンショット、デバイスの詳細へのアクセスにすぐに使えるので、ユーザーが影響を受ける前に、アプリケーションのライフサイクルを通じてパフォーマンス、品質、安定性の問題を素早く特定できます。
 
-### 安全な設計:
+### 設計段階からのセキュリティ
 機密性の高いビューをオーバーレイで隠し、レポートから個人情報を除外することで、ユーザーのプライバシーを保護します。Instabug は GDPR に完全に準拠しています。
 
-### シームレスなインテグレーション:
+### シームレスなインテグレーション
 Jira、GitHub、Slack などのインテグレーションで、ワークフローを同期させます。
 
 ## サポート

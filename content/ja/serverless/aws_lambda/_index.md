@@ -28,7 +28,29 @@ kind: documentation
 title: AWS Lambda のためのサーバーレスモニタリング
 ---
 
+Datadog の AWS Lambda のためのサーバーレスモニタリングは、Lambda 関数を可視化します。
+
 まずは、[インストール手順][1]に従って、サーバーレスアプリケーションからメトリクス、トレース、ログを収集します。
+
+## 仕組み
+
+{{< img src="serverless/serverless_custom_metrics.png" alt="AWS Lambda からの拡張メトリクスの収集" >}}
+
+Datadog のサーバーレスモニタリングは、Datadog Lambda 拡張機能とともにランタイム固有の Datadog Lambda ライブラリを活用し、Lambda 関数からテレメトリーを送信します。
+
+Datadog Lambda 拡張機能は、Datadog Lambda ライブラリからのトレース、拡張メトリクス、カスタムメトリクスに加え、CloudWatch を通じてログを収集します。
+
+## 使用
+
+以下のページでは、AWS Lambda のためのサーバーレスモニタリングのインストール方法と構成方法について、完全な可視化を実現するためのメトリクス、トレース、およびログの使用方法を含めて説明します。
+
+{{< whatsnext desc=" ">}}
+    {{< nextlink href="/serverless/installation" >}}<u>インストール</u>: AWS Lambda のためのサーバーレスモニタリングをインストールします。{{< /nextlink >}}
+    {{< nextlink href="/serverless/enhanced_lambda_metrics" >}}<u>Lambda メトリクス</u>: 拡張メトリクスの詳細とカスタムメトリクスの送信方法を説明します。{{< /nextlink >}}
+    {{< nextlink href="/serverless/distributed_tracing" >}}<u>分散型トレーシング</u>: APM と分散型トレーシングを使用して、アプリケーションのパフォーマンスに関する豊富な情報を入手できます。{{< /nextlink >}}
+    {{< nextlink href="/serverless/aws_lambda/logs" >}}
+    <u>ログ収集</u>: ログの収集、ログのフィルタリング方法、ログとトレースの関連付け方法を説明します。{{< /nextlink >}}
+{{< /whatsnext >}}
 
 ### サーバーレスビューでサーバーレススタック全体を監視
 
@@ -58,6 +80,13 @@ Datadog の高度な Lambda メトリクスは、Datadog で `aws.lambda.enhance
 
 {{< img src="serverless/serverless_deployment_tracking.jpeg" alt="Datadog サーバーレスモニタリング" style="width:100%;" >}}
 
+## その他の機能
+
+{{< whatsnext desc=" ">}}
+    {{< nextlink href="/serverless/aws_lambda/profiling" >}}<u>Continuous Profiler</u>: Datadog の Continuous Profiler を有効にすると、ボトルネックの原因となっている Lambda 関数のコードの行を正確に発見できます。{{< /nextlink >}}
+    {{< nextlink href="/serverless/aws_lambda/securing_functions" >}}<u>セキュリティ機能</u>: Application Security Management (ASM) を使用して、関数に対する脅威を管理します。{{< /nextlink >}}
+    {{< nextlink href="/serverless/deployment_tracking" >}}<u>デプロイ追跡</u>: デプロイを追跡して、コードの新バージョンや構成の変更がいつ劣化を引き起こしているかを確認します。{{< /nextlink >}}
+{{< /whatsnext >}}
 
 ## その他の参考資料
 

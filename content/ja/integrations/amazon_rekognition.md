@@ -9,7 +9,7 @@ doc_link: https://docs.datadoghq.com/integrations/amazon_rekognition/
 draft: false
 git_integration_title: amazon_rekognition
 has_logo: true
-integration_id: amazon-rekognition
+integration_id: ''
 integration_title: Amazon Rekognition
 integration_version: ''
 is_public: true
@@ -21,15 +21,16 @@ short_description: Amazon Rekognition のキーメトリクスを追跡
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Amazon Rekognition を使用すると、イメージ分析やビデオ分析をアプリケーションに簡単に追加することができます。Rekognition API にイメージやビデオを与えるだけで、このサービスがモノ、人物、テキスト、シーン、アクティビティを識別します。
 
 このインテグレーションを有効にすると、Datadog にすべての Rekognition メトリクスを表示できます。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 
@@ -38,7 +39,7 @@ Amazon Rekognition を使用すると、イメージ分析やビデオ分析を�
 1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `Rekognition` が有効になっていることを確認します。
 2. [Datadog - Amazon Rekognition インテグレーション][3]をインストールします。
 
-### ログの収集
+### 収集データ
 
 #### ログの有効化
 
@@ -54,21 +55,21 @@ Amazon Rekognition から S3 バケットまたは CloudWatch のいずれかに
     - [S3 バケットに手動トリガーを追加][5]
     - [CloudWatch ロググループに手動トリガーを追加][6]
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "amazon_rekognition" >}}
 
 
-### イベント
+### ヘルプ
 
 Amazon Rekognition インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 
 Amazon Rekognition インテグレーションには、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 

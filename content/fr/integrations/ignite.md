@@ -37,10 +37,9 @@ integration_id: ignite
 integration_title: ignite
 integration_version: 2.2.2
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: ignite
-oauth: {}
 public_title: ignite
 short_description: Recueillez des métriques à partir de votre serveur Ignite.
 supported_os:

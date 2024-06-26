@@ -14,6 +14,13 @@
         "title_size": "16",
         "title_align": "left",
         "time": {},
+        "style": {
+          "display": {
+            "type": "stacked",
+            "legend": "inline"
+          },
+          "scaling": "relative"
+        },
         "type": "toplist",
         "requests": [
           {
@@ -27,13 +34,19 @@
             ],
             "formulas": [
               {
-                "formula": "query1",
-                "limit": {
-                  "count": 10,
-                  "order": "desc"
-                }
+                "formula": "query1"
               }
             ],
+            "sort": {
+              "count": 10,
+              "order_by": [
+                {
+                  "type": "formula",
+                  "index": 0,
+                  "order": "desc"
+                }
+              ]
+            },
             "response_format": "scalar"
           }
         ]

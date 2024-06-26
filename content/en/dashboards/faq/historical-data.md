@@ -1,6 +1,5 @@
 ---
 title: Historical Data
-kind: faq
 aliases:
   - /graphing/faq/how-do-i-delete-a-host-or-metric-from-the-ui/
   - /graphing/faq/is-it-possible-to-query-historical-data-after-a-host-has-been-destroyed/
@@ -41,5 +40,5 @@ If you're running the Agent, and you've intentionally [stopped][4] or [removed][
 [1]: /dashboards/graphing_json/
 [2]: /agent/
 [3]: /infrastructure/
-[4]: /agent/guide/agent-commands/#start-stop-restart-the-agent
+[4]: /agent/configuration/agent-commands/#start-stop-restart-the-agent
 [5]: /agent/guide/how-do-i-uninstall-the-agent/

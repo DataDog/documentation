@@ -22,8 +22,10 @@ On the other hand, resource overconsumption of either the client or server endpo
 
 ## Application errors in code
 
-Network errors and latency can also be caused by client-side application errors. For instance, if your application is generating connections on loop unnecessarily, it could be overwhelming the endpoints that rely on it, leading to downstream application and network issues. Use the **Traces** tab in NPM or the **Network** tab in APM Traces and look for application request errors to determine whether this is the case.
+Network errors and latency can also be caused by client-side application errors. For instance, if your application is generating connections on loop unnecessarily, it could be overwhelming the endpoints that rely on it, leading to downstream application and network issues. To determine whether this is the case, look for application request errors in the **Traces** tab of a specific service in [NPM > DNS][1], or the **Network** tab of a specific trace in APM Traces.
 
-{{< img src="network_performance_monitoring/guide/detecting_a_network_outage/traces.png" alt="Application errors in code">}}
+{{< img src="network_performance_monitoring/guide/detecting_a_network_outage/traces_2.png" alt="Application errors in code">}}
 
 If none of these steps lead to a root cause, and you are seeing errors and latency for your dependencies scoped to a particular region, availability zone, or third-party domain endpoint, then you are experiencing a network outage. In this case, you can reach out to the relevant providers to report and resolve the issue.
+
+[1]: https://app.datadoghq.com/network/dns

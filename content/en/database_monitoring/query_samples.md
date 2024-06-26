@@ -15,19 +15,13 @@ further_reading:
 
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
-{{< /site-region >}}
+The [Samples page][1] helps you understand which queries were running at a given time. Compare each execution to the average performance of the query and related queries.
 
-The Query Samples view helps you understand which queries were running at a given time. Compare each execution to the average performance of the query and related queries.
-
-Navigate to the Query Samples view within Database Monitoring by clicking **[APM > Databases][1]**, and selecting the **Query Samples** tab in the UI.
-
-The Query Samples page shows a snapshot in time of running and recently finished queries. Because it's a snapshot in time, it doesn't necessarily show a representation of _all_ queries, but can indicate proportions.
+The Samples page shows a snapshot in time of running and recently finished queries. Because it's a snapshot in time, it doesn't necessarily show a representation of _all_ queries, but can indicate proportions.
 
 ## Search and filter
 
-The Query Samples page shows queries on all supported database products together (unlike on the Query Metrics page where you select which database you want to dive into). Filter on the `source` facet to see data for a particular database (Postgres or MySQL).
+The Samples page shows queries on all supported database products together (unlike on the Query Metrics page where you select which database you want to dive into). Filter on the `source` facet to see data for a particular database (Postgres or MySQL).
 
 Enter tags into the Search field to filter the list of query samples, or use the facets listed on the left side. The facets include:
 
@@ -70,7 +64,7 @@ Graphs show the query's performance metrics---number of executions, duration, an
 
 The Explain Plan section shows Duration and Cost stats for the current sample _and_ averages and p90 for all collected snapshots across the time frame.
 
-The explain plan also shows measures for each node (step) in the the plan: startup cost, total cost, plan rows, and plan width. Hover over the column heading to see a description of each measure.
+The explain plan also shows measures for each node (step) in the plan: startup cost, total cost, plan rows, and plan width. Hover over the column heading to see a description of each measure.
 
 {{< img src="database_monitoring/dbm_sd_explain_plan.png" alt="Explain plan samples statistics and step metrics" style="width:100%;">}}
 
@@ -96,5 +90,5 @@ For quick access to dashboards that showcase database-related infrastructure and
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/databases
+[1]: https://app.datadoghq.com/databases/samples
 [2]: /database_monitoring/data_collected/#which-queries-are-tracked

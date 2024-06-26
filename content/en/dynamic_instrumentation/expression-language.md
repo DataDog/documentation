@@ -6,7 +6,7 @@ private: false
 
 ## Overview
 
-The Dynamic Instrumentation Expression Language is a language helps you formulate log probe message templates, metric probe expressions, span tag values, and probe conditions. It borrows syntax elements from common programming languages, but also has its own unique rules. The language lets you access local variables, method parameters, and nested fields within objects, and it supports the use of comparison and logical operators. 
+The Dynamic Instrumentation Expression Language helps you formulate log probe message templates, metric probe expressions, span tag values, and probe conditions. It borrows syntax elements from common programming languages, but also has its own unique rules. The language lets you access local variables, method parameters, and nested fields within objects, and it supports the use of comparison and logical operators. 
 
 For example, you can create a histogram from the size of a collection using `count(myCollection)` as the metric expression. Metric expressions must evaluate to a number.
 
@@ -16,7 +16,7 @@ Probe conditions must evaluate to a Boolean, for example: `startsWith(user.name,
 
 Generally, the Expression Language supports:
 * Accessing local variables, method parameters, and deeply nested fields and attributes within objects.
-* Using comparison operators (`<`, `>`, `>=`, `<=`, `==`, `!=`) to compare variables, fields, and constants in your conditions, for example: `localVar1.field1.field2 != 15`.
+* Using comparison operators (`<`, `>`, `>=`, `<=`, `==`, `!=`, `instanceof`) to compare variables, fields, and constants in your conditions, for example: `localVar1.field1.field2 != 15`.
 * Using logical operators (`&&`, `||`, and `not` or `!`) to build complex Boolean conditions.
 * Using the `null` literal (equivalent to `nil` in Python).
 
@@ -33,6 +33,7 @@ The following sections summarize the variables and operations that the Dynamic I
 | `@return`   | Provides access to the return value                                        |
 | `@duration` | Provides access to the call execution duration                             |
 | `@it`       | Provides access to the current value in collection iterating operations    |
+| `@exception`| Provides access to the current uncaught exception                          |
 
 
 ## String operations

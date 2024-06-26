@@ -3,9 +3,6 @@ title: Troubleshooting DBM Setup for Postgres
 kind: documentation
 description: Troubleshoot Database Monitoring setup for Postgres
 ---
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
-{{< /site-region >}}
 
 This page details common issues with setting up and using Database Monitoring with Postgres, and how to resolve them. Datadog recommends staying on the latest stable Agent version and adhering to the latest [setup documentation][1], as it can change with Agent version releases.
 
@@ -117,10 +114,11 @@ ALTER ROLE datadog SET search_path = "$user",public,schema_with_pg_stat_statemen
 
 ### Certain queries are missing
 
-If you have data from some queries, but do not see a particular query or set of queries in Database Monitoring that you're expecting to see , follow this guide.
+If you have data from some queries, but do not see a particular query or set of queries in Database Monitoring that you're expecting to see, follow this guide.
 | Possible cause                         | Solution                                  |
 |----------------------------------------|-------------------------------------------|
 | For Postgres 9.6, if you only see queries executed by the datadog user, then the instance configuration is likely missing some settings. | For monitoring instances on Postgres 9.6, the Datadog Agent instance config must use the settings `pg_stat_statements_view: datadog.pg_stat_statements()` and `pg_stat_activity_view: datadog.pg_stat_activity()` based on the functions created in the initial setup guide. These functions must be created in all databases. |
+| The Datadog user does not have sufficient access to view queries by other users. | The Datadog user must have the [`pg_monitor` role][25] to access tables such as `pg_stat_activity`. Ensure that the Datadog user has this role: `GRANT pg_monitor TO datadog`. |
 | The query is not a "top query," meaning the sum of its total execution time is not in the top 200 normalized queries at any point in the selected time frame. | The query may be grouped into the "Other Queries" row. For more information on which queries are tracked, see see [Data Collected][5]. The number of top queries tracked can be raised by contacting Datadog Support. |
 | The query is not a SELECT, INSERT, UPDATE, or DELETE query. | Non-utility functions are not tracked by default. To collect them, set the Postgres parameter `pg_stat_statements.track_utility` to `on`. See the [Postgres documentation][6] for more information. |
 | The query is executed in a function or stored procedure. | To track queries executed in functions or procedures, set the configuration parameter `pg_stat_statements.track` to `on`. See the [Postgres documentation][6] for more information. |
@@ -209,7 +207,7 @@ For versions prior to Postgres 12, this feature is not supported. However, if yo
 | Node     | [node-postgres][17]       | Uses the extended query protocol and cannot be disabled. To enable the Datadog Agent to collect execution plans, use [pg-format][18] to format SQL Queries before passing them to [node-postgres][17].|
 
 #### Query is in a database ignored by the Agent instance config
-The query is in a database ignored by the Agent instance config `ignore_databases`. Default databases such as the `rdsadmin` and the `azure_maintenance` databases are ignored in the `ignore_databases` setting. Queries in these databases do not have samples or explain plans. Check the the value of this setting in your instance config and the default values in the [example config file][19].
+The query is in a database ignored by the Agent instance config `ignore_databases`. Default databases such as the `rdsadmin` and the `azure_maintenance` databases are ignored in the `ignore_databases` setting. Queries in these databases do not have samples or explain plans. Check the value of this setting in your instance config and the default values in the [example config file][19].
 
 **Note:** The `postgres` database is also ignored by default in Agent versions <7.41.0.
 
@@ -254,8 +252,8 @@ may cause the collection query to take longer to run which can lead to query tim
 
 [1]: /database_monitoring/setup_postgres/
 [2]: /agent/troubleshooting/
-[3]: /agent/guide/agent-commands/?tab=agentv6v7#agent-status-and-information
-[4]: /agent/guide/agent-log-files
+[3]: /agent/configuration/agent-commands/?tab=agentv6v7#agent-status-and-information
+[4]: /agent/configuration/agent-log-files
 [5]: /database_monitoring/data_collected/#which-queries-are-tracked
 [6]: https://www.postgresql.org/docs/current/pgstatstatements.html#id-1.11.7.38.8
 [7]: /database_monitoring/setup_postgres/advanced_configuration
@@ -276,3 +274,4 @@ may cause the collection query to take longer to run which can lead to query tim
 [22]: https://www.postgresql.org/docs/12/contrib.html
 [23]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example#L281
 [24]: https://pkg.go.dev/github.com/jackc/pgx/v4#QuerySimpleProtocol
+[25]: https://www.postgresql.org/docs/current/predefined-roles.html#:~:text=a%20long%20time.-,pg_monitor,-Read/execute%20various

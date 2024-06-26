@@ -228,7 +228,7 @@ Agent を `awsvpc` モードで実行することは可能ですが、これは�
 {{% site-region region="gov" %}}
 #### GOVCLOUD 環境向け FIPS プロキシ
 
-Datadog の GOVCLOUD データセンターにデータを送信するには、`fips-proxy` サイドカーコンテナを追加し、コンテナポートを開いて[すべての機能](https://github.com/DataDog/datadog-agent/blob/7.45.x/pkg/config/config.go#L1564-L1577)に適切な通信を確保します。
+Datadog の GOVCLOUD データセンターにデータを送信するには、`fips-proxy` サイドカーコンテナを追加し、コンテナポートを開いて、[サポートされている機能](https://docs.datadoghq.com/agent/configuration/agent-fips-proxy/?tab=helmonamazoneks#supported-platforms-and-limitations)の適切な通信を確保します。
 
 **注**: この機能は、Linux でのみ使用可能です
 
@@ -238,7 +238,7 @@ Datadog の GOVCLOUD データセンターにデータを送信するには、`f
      (...)
           {
             "name": "fips-proxy",
-            "image": "datadog/fips-proxy:0.5.5",
+            "image": "datadog/fips-proxy:1.1.2",
             "portMappings": [
                 {
                     "containerPort": 9803,
@@ -294,6 +294,14 @@ Datadog の GOVCLOUD データセンターにデータを送信するには、`f
                 },
                 {
                     "containerPort": 9816,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9817,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9818,
                     "protocol": "tcp"
                 }
             ],

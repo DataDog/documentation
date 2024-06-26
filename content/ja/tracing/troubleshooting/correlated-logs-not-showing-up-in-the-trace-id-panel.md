@@ -1,6 +1,7 @@
 ---
 aliases:
 - /ja/tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/
+- /ja/tracing/troubleshooting/correlating-logs-not-showing-up-in-the-trace-id-panel/
 further_reading:
 - link: /tracing/other_telemetry/connect_logs_and_traces/
   tag: ドキュメント
@@ -33,7 +34,7 @@ title: 関連するログがトレース ID パネルに表示されない
 
 `host`、`container_id`、または `pod_name` オプションの **Log** セクションが空の場合、[Log エクスプローラー][2]に移動し、以下の条件を確認します。
 
-1. ログがトレースを出したホスト/コンテナ/ポッドから送信されている。
+1. トレースを発行したホスト/コンテナ/ポッドからログが送信されている。
 2. トレースの時間枠内にそのホストのログがある。
 3. ログのタイムスタンプが正しく設定されている。詳しくは、[ログに期待したタイムスタンプが表示されない][3]をご覧ください。
 
@@ -90,6 +91,8 @@ title: 関連するログがトレース ID パネルに表示されない
 ID が正しく挿入され、ログにリマップされると、トレースパネルでトレースと相関のあるログを見ることができます。
 
 {{< img src="tracing/troubleshooting/trace_id_injection.png" alt="関連するログを含むログセクションを表示するトレースページ" style="width:90%;">}}
+
+**注**: ログまたは UI のログ属性には、トレース ID およびスパン ID は表示されません。
 
 ## その他の参考資料
 

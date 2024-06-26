@@ -57,7 +57,7 @@ title: 属性とエイリアス設定
 
 ## 標準属性
 
-ログのインテグレーションは標準属性の[デフォルトセット](#デフォルトの標準属性リスト)に依存します。
+ログのインテグレーションは標準属性の[デフォルトセット][9]に依存します。
 
 リストはオーガニゼーションの管理者が作成できます。
 
@@ -83,198 +83,38 @@ title: 属性とエイリアス設定
 
 ### デフォルトの標準属性リスト
 
-デフォルトの標準属性リストは機能領域に分かれています。
+[ログ管理のデフォルトの標準属性][9]の完全なリストをご覧ください。リストは機能ドメイン別に分かれています。
 
-- [ネットワーク/通信](#web-access)
-- [ジオロケーション](#geolocation)
-- [HTTP リクエスト](#http-requests)
-- [ソースコード](#source-code)
-- [データベース](#database)
-- [パフォーマンス](#performance)
-- [ユーザー関連の属性](#user-related-attributes)
-- [Syslog およびログシッパー](#syslog-and-log-shippers)
-- [DNS](#dns)
-- [イベント](#events)
-
-#### Web アクセス
-
-以下は、ネットワーク通信で使用されるデータに関連する属性です。すべてのフィールドとメトリクスに `network` というプレフィックスが付きます。
-
-| **完全名**               | **型** | **説明**                                                                          |
-| :------------------------- | :------- | :--------------------------------------------------------------------------------------- |
-| `network.client.ip`        | `string` | TCP 接続を開始したクライアントの IP アドレス。                          |
-| `network.destination.ip`   | `string` | クライアントが接続した先の IP アドレス。                                                  |
-| `network.client.port`      | `number` | 接続を開始したクライアントのポート。                                    |
-| `network.destination.port` | `number` | クライアントが接続した先の TCP ポート。                                                    |
-| `network.bytes_read`       | `number` | ログの送信時にクライアントからサーバーに転送された合計バイト数。 |
-| `network.bytes_written`    | `number` | ログの送信時にサーバーからクライアントに転送された合計バイト数。 |
-
-これらの属性に依存する代表的なインテグレーションには、[Apache][4]、[Varnish][9]、[AWS ELB][10]、[Nginx][11]、[HAProxy][12] などがあります。
-
-#### 位置情報
-
-以下は、ネットワーク通信で使用される IP アドレスの位置情報に関連する属性です。すべてのフィールドに `network.client.geoip` または `network.destination.geoip` というプレフィックスが付きます。
-
-`network.client.geoip.country.name` 
-: タイプ: `string` <br> 国の名前。
-
-`network.client.geoip.country.iso_code` 
-: タイプ: `string` <br> 国の [ISO コード][13] (例えば、アメリカなら `US`、フランスなら `FR`)。
-
-`network.client.geoip.continent.code` 
-: タイプ: `string` <br> 大陸の ISO コード (`EU`、`AS`、`NA`、`AF`、`AN`、`SA`、`OC`)。
-
-`network.client.geoip.continent.name`
-: タイプ: `string` <br> 大陸名 (`Europe`、`Australia`、`North America`、`Africa`、`Antartica`、`South America`、`Oceania`)。
-
-`network.client.geoip.subdivision.name`
-: タイプ: `string` <br> 国の第一小区分レベルの名称 (米国は `California` 州、フランスは `Sarthe` 県など)。
-
-`network.client.geoip.subdivision.iso_code`
-: タイプ: `string` <br> 国の第一小区分レベルの [ISO コード][13] (米国は `CA` 州、フランスは `SA` 県など)。
-
-`network.client.geoip.city.name`
-: タイプ: `string` <br> 都市名 (例: `Paris`、`New York`)。
-
-#### HTTP リクエスト
-
-以下は、HTTP リクエストおよびアクセスで一般に使用されるデータに関連する属性です。すべての属性に `http` というプレフィックスが付きます。
-
-これらの属性に依存する代表的なインテグレーションには、[Apache][4]、Rails、[AWS CloudFront][10]、Web アプリケーションサーバーなどがあります。
-
-##### 共通属性
-
-| **完全名**       | **型** | **説明**                                                                                           |
-| :----------------- | :------- | :-------------------------------------------------------------------------------------------------------- |
-| `http.url`         | `string` | HTTP リクエストの URL。                                                                              |
-| `http.status_code` | `number` | HTTP 応答ステータスコード。                                                                            |
-| `http.method`      | `string` | リソースに対して行われるアクションを示します。                                        |
-| `http.referer`     | `string` | リクエスト中のリソースにリンクした Web ページのアドレスを識別する HTTP ヘッダーフィールド。 |
-| `http.request_id`  | `string` | HTTP リクエストの ID。                                                                               |
-| `http.useragent`   | `string` | 送信されたままの User-Agent (未加工の形式)。[詳細については下記を参照してください](#user-agent-attributes)。          |
-| `http.version`     | `string` | リクエストに使用された HTTP のバージョン。                                                                 |
-
-##### URL 詳細属性
-
-これらの属性は、HTTP URL のパースされた各部に関する詳細を提供します。[URL パーサー][14]によって生成されます。すべての属性に `http.url_details` というプレフィックスが付きます。
-
-| **完全名**                   | **型** | **説明**                                                                         |
-| :----------------------------- | :------- | :-------------------------------------------------------------------------------------- |
-| `http.url_details.host`        | `string` | URL の HTTP ホスト部分。                                                          |
-| `http.url_details.port`        | `number` | URL の HTTP ポート部分。                                                          |
-| `http.url_details.path`        | `string` | URL の HTTP パス部分。                                                          |
-| `http.url_details.queryString` | `object` | クエリパラメーターの key/value 属性として分解された、URL の HTTP クエリ文字列部分。 |
-| `http.url_details.scheme`      | `string` | URL のプロトコル名 (HTTP または HTTPS)。                                            |
-
-##### User-Agent 属性
-
-これらの属性は、ユーザーエージェント属性の意味に関する詳細を示すものです。[ユーザーエージェントパーサー][15]によって生成されます。すべての属性に `http.useragent_details` というプレフィックスが付きます。
-
-| **完全名**                            | **型** | **説明**                                |
-| :-------------------------------------- | :------- | :--------------------------------------------- |
-| `http.useragent_details.os.family`      | `string` | User-Agent によって報告された OS ファミリー。      |
-| `http.useragent_details.browser.family` | `string` | User-Agent によって報告されたブラウザファミリー。 |
-| `http.useragent_details.device.family`  | `string` | User-Agent によって報告されたデバイスファミリー。  |
-
-#### ソースコード
-
-以下は、カスタムアプリケーションのロガーを使用してログまたはエラーを生成する際に使用されるデータに関係する属性です。すべての属性に `logger` または `error` というプレフィックスが付きます。
-
-| **完全名**         | **型** | **説明**                                                  |
-| :------------------- | :------- | :--------------------------------------------------------------- |
-| `logger.name`        | `string` | ロガーの名前。                                          |
-| `logger.thread_name` | `string` | ログの生成時の現在のスレッドの名前。            |
-| `logger.method_name` | `string` | クラスメソッド名。                                           |
-| `logger.version`     | `string` | ロガーのバージョン。                                       |
-| `error.kind`         | `string` | エラーのタイプまたは種類 (場合によってはコード)。                  |
-| `error.message`      | `string` | イベントについて簡潔にわかりやすく説明する 1 行メッセージ。 |
-| `error.stack`        | `string` | スタックトレースまたはエラーに関する補足情報。 |
-
-これらの属性に依存する代表的なインテグレーションには、_Java_、_NodeJs_、_.NET_、_Golang_、_Python_ などがあります。
-
-#### データベース
-
-データベース関連の属性には `db` というプレフィックスが付いています。
-
-`db.instance`
-: タイプ: `string` <br> データベースインスタンス名。たとえば、Java で `jdbc.url="jdbc:mysql://127.0.0.1:3306/customers"` の場合、インスタンス名は `customers` です。
-
-`db.statement`
-:タイプ: `string` <br> 指定されたデータベースタイプのデータベースステートメント。たとえば、mySQL の場合は `"SELECT * FROM wuser_table";`、Redis の場合は `"SET mykey 'WuValue'"` です。
-
-`db.operation`
-: タイプ: `string` <br> 実行された操作 ("query"、"update"、"delete" など)。
-
-`db.user`
-: タイプ: `string` <br> 操作を行うユーザー。
-
-これらの属性に依存する代表的なインテグレーションには、[Cassandra][16]、[MySQL][17]、[RDS][18]、[Elasticsearch][19] などがあります。
-
-#### パフォーマンス
-
-パフォーマンスメトリクス属性。
-
-| **完全名** | **型** | **説明**                                                                                   |
-| :----------- | :------- | :------------------------------------------------------------------------------------------------ |
-| `duration`   | `number` | **nanoseconds** 単位の任意の種類の時間。HTTP 応答時間、データベースクエリ時間、レイテンシーなどがあります。 |
-
-Datadog ではこの属性を[トレース検索][21]のデフォルトの[メジャー][1]として表示および使用するため、この属性に関するログ内で処理時間を[再マップ][20]することを推奨しています。
-
-#### ユーザー関連の属性
-
-すべての属性とメジャーに `usr` というプレフィックスが付きます。
-
-| **完全名** | **型** | **説明**         |
-| :----------- | :------- | :---------------------- |
-| `usr.id`     | `string` | ユーザーの識別子。    |
-| `usr.name`   | `string` | わかりやすいユーザー名。 |
-| `usr.email`  | `string` | ユーザーの電子メール。         |
-
-#### Syslog とログシッパー
-
-以下は、syslog またはログシッパーエージェントによって追加されるデータに関連する属性です。すべてのフィールドとメトリクスに `syslog` というプレフィックスが付きます。
-
-| **完全名**       | **型** | **説明**                                                               |
-| :----------------- | :------- | :---------------------------------------------------------------------------- |
-| `syslog.hostname`  | `string` | ホスト名。                                                                  |
-| `syslog.appname`   | `string` | アプリケーション名。通常は、予約済み属性 `service` に再マップされます。 |
-| `syslog.severity`  | `number` | ログの重大度。通常は、予約済み属性 `status` に再マップされます。      |
-| `syslog.timestamp` | `string` | ログのタイムスタンプ。通常は、予約済み属性 `date` に再マップされます。       |
-| `syslog.env`       | `string` | ログのソースが由来する環境名。                      |
-
-これらに依存するインテグレーションには、[Rsyslog][22]、[NxLog][23]、[Syslog-ng][24]、[Fluentd][25]、[Logstash][26] があります。
-
-#### DNS
-
-すべての属性とメジャーに `dns` というプレフィックスが付きます。
-
-| **完全名**         | **型** | **説明**                                                           |
-| :------------------- | :------- | :------------------------------------------------------------------------ |
-| `dns.id`             | `string` | DNS のクエリ識別子。                                                 |
-| `dns.question.name`  | `string` | クエリ対象のドメイン名。                                                  |
-| `dns.question.type`  | `string` | DNS の質問の種類を指定する [2 オクテットのコード][27]。             |
-| `dns.question.class` | `string` | DNS の質問で検索されるクラス (インターネットを使用する場合は IP など) 。 |
-| `dns.question.size`  | `number` | DNS 質問のバイトサイズ。                                           |
-| `dns.answer.name`    | `string` | DNS で回答する際の IP アドレス。                                 |
-| `dns.answer.type`    | `string` | DNS の回答の種類を指定する [2 オクテットのコード][27]。               |
-| `dns.answer.class`   | `string` | DNS によって回答されるクラス。                                            |
-| `dns.answer.size`    | `number` | DNS 回答のバイトサイズ。                                             |
-| `dns.flags.rcode`    | `string` | DNS の返答コード。                                                       |
-
-#### イベント
-
-すべての属性に `evt` というプレフィックスが付きます。
-
-| **完全名** | **型** | **説明**                                                                       |
-|:--------------|:---------|:-------------------------------------------------------------------------------------|
-| `evt.name`    | `string` | 同じアクティビティ (例: 認証) によって生成されたイベント間での共有名。 |
-| `evt.outcome` | `string` | イベントの結果 (例: `success`、`failure`)。                                 |
+- [ネットワーク/通信][10]
+  - ネットワーク通信で使用されるデータに関連する属性です。すべてのフィールドとメトリクスに `network` というプレフィックスが付けられています。
+- [位置情報][11]
+  - ネットワーク通信で使用される IP アドレスの位置情報に関連する属性です。すべてのフィールドに `network.client.geoip` または `network.destination.geoip` というプレフィックスが付けられています。
+- [HTTP リクエスト][12]
+  - HTTP リクエストおよびアクセスで一般に使用されるデータに関連する属性です。すべての属性に `http` というプレフィックスが付けられています。
+  - これらの属性に依存する代表的なインテグレーションには、[Apache][4]、Rails、[AWS CloudFront][13]、Web アプリケーションサーバーなどがあります。
+  - URL の詳細に関する属性には、`http.url_details` というプレフィックスが付きます。これらの属性は、HTTP URL のパースされた各部に関する詳細を提供します。[URL パーサー][14]によって生成されます。
+- [ソースコード][15]
+  - カスタムアプリケーションのロガーを使用してログまたはエラーを生成する際に使用されるデータに関係する属性です。すべての属性に `logger` または `error` というプレフィックスが付けられています。
+  - これらの属性に依存する代表的なインテグレーションには、Java、NodeJs、.NET、Golang、Python などがあります。
+- [データベース][16]
+  - これらの属性に依存する代表的なインテグレーションには、[Cassandra][17]、[MySQL][18]、[RDS][19]、[Elasticsearch][20] などがあります。
+- [パフォーマンス][21]
+  - パフォーマンスメトリクスに関係する属性です。Datadog ではこの属性を[トレース検索][23]のデフォルトの[メジャー][1]として表示および使用するため、この属性に関するログ内で処理時間を[再マッピング][22]することを推奨しています。
+- [ユーザー関連の属性][24]
+  - すべての属性とメジャーに `usr` というプレフィックスが付きます。
+- [Syslog とログシッパー][25]
+  - 以下は、syslog またはログシッパーエージェントによって追加されるデータに関連する属性です。すべてのフィールドとメトリクスに `syslog` というプレフィックスが付きます。
+  - これらに依存するインテグレーションには、[Rsyslog][26]、[NxLog][27]、[Syslog-ng][28]、[Fluentd][29]、[Logstash][30] などがあります。
+- [DNS][31]
+  - すべての属性とメジャーに `dns` というプレフィックスが付きます。
+- [イベント][32]
+  - すべての属性に `evt` というプレフィックスが付きます。
 
 ## エイリアス設定
 
 宛先属性にマップされるソース属性のエイリアスを作成することで、ログにソースと宛先の両方の属性が含まれるようにできます。
 
-ユーザーはエイリアス設定された (ソース) または標準 (宛先) ファセット属性のいずれかを利用することができますが、[推奨される][28]のは、エイリアス設定されたファセットではなく標準ファセットです。これにより命名規則に従う必要性が強調され、非標準のコンテンツに基づくアセットの構築 (保存済みのビューやダッシュボードなど) を回避することができます。
+ユーザーはエイリアス設定された (ソース) または標準 (宛先) ファセット属性のいずれかを利用することができますが、[推奨される][33]のは、エイリアス設定されたファセットではなく標準ファセットです。これにより命名規則に従う必要性が強調され、非標準のコンテンツに基づくアセットの構築 (保存済みのビューやダッシュボードなど) を回避することができます。
 
 **エイリアス設定に関する確認事項**:
 
@@ -287,7 +127,7 @@ Datadog ではこの属性を[トレース検索][21]のデフォルトの[メ�
 - 属性は標準属性に対してのみエイリアス設定が可能です。
 - ログの JSON 構造を尊重するため、ある標準属性を別の標準属性の子とすることはできません (`user` と `user.name` の両方を標準属性にすることは不可) 。
 
-詳しくは、[ファセットのエイリアス設定][29] を参照してください。
+詳しくは、[ファセットのエイリアス設定][34] を参照してください。
 
 ## その他の参考資料
 
@@ -301,24 +141,29 @@ Datadog ではこの属性を[トレース検索][21]のデフォルトの[メ�
 [6]: /ja/getting_started/tagging/unified_service_tagging/
 [7]: /ja/logs/explorer/patterns/
 [8]: /ja/tracing/other_telemetry/connect_logs_and_traces/
-[9]: /ja/integrations/varnish/
-[10]: /ja/integrations/amazon_elb/
-[11]: /ja/integrations/nginx/
-[12]: /ja/integrations/haproxy/
-[13]: https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes
+[9]: /ja/standard-attributes/?product=log+management
+[10]: /ja/standard-attributes/?product=log+management&search=network
+[11]: /ja/standard-attributes/?product=log+management&search=geolocation
+[12]: /ja/standard-attributes/?search=http.&product=log+management
+[13]: /ja/integrations/amazon_elb/
 [14]: /ja/logs/log_configuration/processors/#url-parser
-[15]: /ja/logs/log_configuration/processors/#user-agent-parser
-[16]: /ja/integrations/cassandra/
-[17]: /ja/integrations/mysql/
-[18]: /ja/integrations/amazon_rds/
-[19]: /ja/integrations/elastic/
-[20]: /ja/logs/log_configuration/processors/#remapper
-[21]: /ja/tracing/app_analytics/search/
-[22]: /ja/integrations/rsyslog/
-[23]: /ja/integrations/nxlog/
-[24]: /ja/integrations/syslog_ng/
-[25]: /ja/integrations/fluentd/
-[26]: /ja/integrations/logstash/
-[27]: https://en.wikipedia.org/wiki/List_of_DNS_record_types
-[28]: /ja/logs/explorer/facets/#aliased-facets
-[29]: /ja/logs/explorer/facets/#alias-facets
+[15]: /ja/standard-attributes/?search=logger+error&product=log+management
+[16]: /ja/standard-attributes/?search=db&product=log+management
+[17]: /ja/integrations/cassandra/
+[18]: /ja/integrations/mysql/
+[19]: /ja/integrations/amazon_rds/
+[20]: /ja/integrations/elastic/
+[21]: /ja/standard-attributes/?search=duration&product=log+management
+[22]: /ja/logs/log_configuration/processors/#remapper
+[23]: /ja/tracing/app_analytics/search/
+[24]: /ja/standard-attributes/?search=usr&product=log+management
+[25]: /ja/standard-attributes/?search=syslog&product=log+management
+[26]: /ja/integrations/rsyslog/
+[27]: /ja/integrations/nxlog/
+[28]: integrations/syslog_ng/
+[29]: /ja/integrations/fluentd/
+[30]: /ja/integrations/logstash/
+[31]: /ja/standard-attributes/?search=dns&product=log+management
+[32]: /ja/standard-attributes/?search=evt&product=log+management
+[33]: /ja/logs/explorer/facets/#aliased-facets
+[34]: /ja/logs/explorer/facets/#alias-facets

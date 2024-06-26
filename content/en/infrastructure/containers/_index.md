@@ -15,6 +15,9 @@ further_reading:
 - link: "/infrastructure/process/"
   tag: "Documentation"
   text: "Understand what is going on at any level of your system"
+- link: "https://www.datadoghq.com/blog/kubernetes-cpu-requests-limits/"
+  tag: "Blog"
+  text: "A deep dive into CPU requests and limits in Kubernetes"
 - link: "https://www.datadoghq.com/blog/monitor-kubernetes-anomalies/"
   tag: "Blog"
   text: "Expedite infrastructure investigations with Kubernetes Anomalies"
@@ -29,7 +32,7 @@ Taking inspiration from bedrock tools like *htop*, *ctop*, and *kubectl*, the Co
 
 Coupled with [Docker][2], [Kubernetes][3], [ECS][4], and other container technologies, plus built-in tagging of dynamic components, the Containers page provides a detailed overview of your containers' health, resource consumption, logs, and deployment in real-time:
 
-{{< img src="infrastructure/livecontainers/live-containers-overview.png" alt="Live containers with summaries" >}}
+{{< img src="infrastructure/livecontainers/live-containers-overview_2.png" alt="Live containers with summaries" >}}
 
 ## Setup
 
@@ -251,6 +254,6 @@ You can see indexed logs that you have chosen to index and persist by selecting 
 [15]: https://github.com/DataDog/helm-charts/tree/master/charts/datadog
 [16]: /infrastructure/containers/configuration
 [17]: /infrastructure/faq/live-containers-legacy-configuration
-[18]: https://app.datadoghq.com/orchestration/overview/
+[18]: https://app.datadoghq.com/orchestration/overview
 [19]: /infrastructure/containers/orchestrator_explorer/
 [20]: /infrastructure/containers/kubernetes_resources

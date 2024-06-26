@@ -697,7 +697,7 @@ Agent v6.4.0 (トレース Agent の場合は v6.5.0) より、以下の環境�
 [17]: /ja/containers/kubernetes/log
 [18]: /ja/network_monitoring/performance/
 [19]: /ja/developers/dogstatsd
-[20]: https://app.datadoghq.com/orchestration/overview/
+[20]: https://app.datadoghq.com/orchestration/overview
 [21]: /ja/infrastructure/containers/orchestrator_explorer
 [22]: /ja/containers/guide/cluster_agent_autoscaling_metrics/?tab=helm
 [23]: /ja/infrastructure/process/ 

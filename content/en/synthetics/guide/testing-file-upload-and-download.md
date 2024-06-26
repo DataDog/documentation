@@ -1,5 +1,5 @@
 ---
-title: Test File Upload and Download
+title: Upload and Download A Test File
 kind: guide
 further_reading:
     - link: 'https://www.datadoghq.com/blog/introducing-synthetic-monitoring/'
@@ -31,7 +31,7 @@ Datadog's browser tests and the `Test a downloaded file` assertion allow you to 
 
 To setup a browser test with this assertion:
 
-1. **Record the step that generates the file download** in your browser test. The example below shows how to record a click on a button that triggers the download of a `.docx` file. The file size must be below 50Mb.
+1. **Record the step that generates the file download** in your browser test. The example below shows how to record a click on a button that triggers the download of a `.docx` file. The file size must be below 100Mb.
 
     {{< img src="synthetics/guide/testing-a-downloaded-file/recording_step.mp4" alt="Recording steps" video="true">}}
 

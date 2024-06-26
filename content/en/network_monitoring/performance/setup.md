@@ -58,6 +58,8 @@ Datadog Network Performance Monitoring does not support macOS platforms.
 
 NPM helps you visualize the architecture and performance of your containerized and orchestrated environments, with support for [Docker][5], [Kubernetes][6], [ECS][7], and other container technologies. Datadog's container integrations enable you to aggregate traffic by meaningful entities--such as containers, tasks, pods, clusters, and deployments--with out-of-the-box tags such as `container_name`, `task_name`, and `kube_service`.
 
+NPM is not supported for Google Kubernetes Engine (GKE) Autopilot.
+
 ### Network routing tools
 
 #### Istio
@@ -171,7 +173,7 @@ If these utilities do not exist in your distribution, follow the same procedure 
 
 
 [1]: /infrastructure/process/?tab=linuxwindows#installation
-[2]: /agent/guide/agent-commands/#restart-the-agent
+[2]: /agent/configuration/agent-commands/#restart-the-agent
 [3]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/selinux/system_probe_policy.te
 {{% /tab %}}
 {{% tab "Agent (Windows)" %}}
@@ -204,18 +206,27 @@ To enable Network Performance Monitoring for Windows hosts:
 
 
 [1]: /agent/basic_agent_usage/windows/?tab=commandline
-[2]: /agent/guide/agent-commands/#restart-the-agent
+[2]: /agent/configuration/agent-commands/#restart-the-agent
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-To enable Network Performance Monitoring with Kubernetes using Helm, add:
+To enable Network Performance Monitoring with Kubernetes using Helm, add the following to your `values.yaml` file.</br>
+**Helm chart v2.4.39+ is required**. For more information, see the [Datadog Helm Chart documentation][1].
 
   ```yaml
   datadog:
     networkMonitoring:
       enabled: true
   ```
-to your values.yaml. **Helm chart v2.4.39+ is required**. For more information, see the [Datadog Helm Chart documentation][1].
+
+**Note**: If you receive a permissions error when configuring NPM on your Kubernetes environment: `Error: error enabling protocol classifier: permission denied`, add the following to your `values.yaml` (Reference this [section][5] in the Helm chart):
+
+  ```yaml
+  agents:
+    podSecurity:
+      apparmor:
+        enabled: true
+  ```
 
 If you are not using Helm, you can enable Network Performance Monitoring with Kubernetes from scratch:
 
@@ -350,6 +361,7 @@ If you already have the [Agent running with a manifest][4]:
 [2]: /resources/yaml/datadog-agent-npm.yaml
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: /agent/kubernetes/
+[5]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/values.yaml#L1519-L1523
 {{% /tab %}}
 {{% tab "Operator" %}}
 <div class="alert alert-warning">The Datadog Operator is Generally Available with the `1.0.0` version, and it reconciles the version `v2alpha1` of the DatadogAgent Custom Resource. </div>
@@ -405,35 +417,34 @@ If using `docker-compose`, make the following additions to the Datadog Agent ser
 ```
 version: '3'
 services:
-  ..
   datadog:
     image: "gcr.io/datadoghq/agent:latest"
     environment:
-       DD_SYSTEM_PROBE_NETWORK_ENABLED=true
-       DD_PROCESS_AGENT_ENABLED=true
-       DD_API_KEY=<DATADOG_API_KEY>
+      - DD_SYSTEM_PROBE_NETWORK_ENABLED=true
+      - DD_PROCESS_AGENT_ENABLED=true
+      - DD_API_KEY=<DATADOG_API_KEY>
     volumes:
-    - /var/run/docker.sock:/var/run/docker.sock:ro
-    - /proc/:/host/proc/:ro
-    - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
-    - /sys/kernel/debug:/sys/kernel/debug
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /proc/:/host/proc/:ro
+      - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
+      - /sys/kernel/debug:/sys/kernel/debug
     cap_add:
-    - SYS_ADMIN
-    - SYS_RESOURCE
-    - SYS_PTRACE
-    - NET_ADMIN
-    - NET_BROADCAST
-    - NET_RAW
-    - IPC_LOCK
-    - CHOWN
+      - SYS_ADMIN
+      - SYS_RESOURCE
+      - SYS_PTRACE
+      - NET_ADMIN
+      - NET_BROADCAST
+      - NET_RAW
+      - IPC_LOCK
+      - CHOWN
     security_opt:
-    - apparmor:unconfined
+      - apparmor:unconfined
 ```
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{% tab "ECS" %}}
-To set up on AWS ECS, see the [AWS ECS][1] documentation page.
+To set up on Amazon ECS, see the [Amazon ECS][1] documentation page.
 
 
 [1]: /agent/amazon_ecs/#network-performance-monitoring-collection-linux-only
@@ -444,14 +455,30 @@ To set up on AWS ECS, see the [AWS ECS][1] documentation page.
 ### Enhanced resolution
 
 Optionally, enable resource collection for cloud integrations to allow Network Performance Monitoring to discover cloud-managed entities.
-- Install the [Azure integration][1] for visibility into Azure load balancers and application gateways.
-- Install the [AWS Integration][2] for visibility into AWS Load Balancer. **you must enable ENI and EC2 metric collection**
+- Install the [Azure integration][101] for visibility into Azure load balancers and application gateways.
+- Install the [AWS Integration][102] for visibility into AWS Load Balancer. **you must enable ENI and EC2 metric collection**
 
-For additional information around these capabilities, see [Cloud service enhanced resolution][3].
+For additional information around these capabilities, see [Cloud service enhanced resolution][103].
 
-  [1]: /integrations/azure
-  [2]: /integrations/amazon_web_services/#resource-collection
-  [3]: /network_monitoring/performance/network_analytics/#cloud-service-enhanced-resolution
+### Failed connections (private beta)
+
+<div class="alert alert-warning">Failed Connections are in private beta. To start seeing <a href="/network_monitoring/performance/network_analytics/?tab=loadbalancers#tcp">failed connection metrics</a>, reach out to your Datadog representative and request access.</div>
+
+To enable the Agent to start collecting data around failed connections, add the following flag to your `/etc/datadog-agent/system-probe.yaml` file.
+
+```yaml
+network_config:   # use system_probe_config for Agent versions older than 7.24.1
+  ## @param enabled - boolean - optional - default: false
+  ## Set to true to enable Network Performance Monitoring.
+  #
+  enabled: true
+  enable_tcp_failed_connections: true
+
+```
+
+[101]: /integrations/azure
+[102]: /integrations/amazon_web_services/#resource-collection
+[103]: /network_monitoring/performance/network_analytics/#cloud-service-enhanced-resolution
 
 {{< /site-region >}}
 

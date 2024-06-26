@@ -1,6 +1,10 @@
 ---
 categories:
+- automation
+- configuration & deployment
+- developer tools
 - orchestration
+- provisioning
 dependencies: []
 description: デプロイをキャプチャおよび検索し、主要メトリクスのグラフに重ねて表示。
 doc_link: https://docs.datadoghq.com/integrations/capistrano/
@@ -19,6 +23,7 @@ short_description: デプロイをキャプチャおよび検索し、主要メ�
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 [Capistrano][1] は、Ruby で記述されたリモートサーバー自動化およびデプロイツールです。
@@ -30,9 +35,9 @@ Capistrano Datadog インテグレーションをインストールすると、�
 
 特定の `Capfile` に対してこのインテグレーションを有効にすると、完了した Capistrano タスクがイベントとして Datadog に送信されます。ロール情報とログ出力も送信されます。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 `dogapi` Ruby gem をインストールします。
 
@@ -40,7 +45,7 @@ Capistrano Datadog インテグレーションをインストールすると、�
 sudo gem install dogapi --version ">=1.10.0"
 ```
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 Datadog に送信したいタスクを持つ `Capfile` の先頭に以下を追加します。
 
@@ -59,21 +64,21 @@ set :datadog_api_key, "${独自の_API_キー}"
 
 {{< img src="integrations/capistrano/capistranoevents.mp4" video="true" >}}
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 
 Capistrano インテグレーションには、メトリクスは含まれません。
 
-### イベント
+### ヘルプ
 
 Capistrano インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 
 Capistrano インテグレーションには、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 

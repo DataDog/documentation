@@ -1,10 +1,11 @@
 ---
-title: Migration depuis les checks basés sur Python vers les checks SNMP Core (en Go)
-kind: guide
 further_reading:
 - link: network_monitoring/devices/setup
   tag: Documentation
   text: En savoir plus sur la configuration de NDM
+kind: guide
+title: Migration depuis les checks basés sur Python vers les checks SNMP Core (en
+  Go)
 ---
 
 ## Présentation
@@ -25,14 +26,12 @@ La version 7.27.0 de l'Agent Datadog prend en charge une nouvelle version des c
 
 ## Instructions
 
-### Pour les environnements avec un Agent de cluster Datadog ou sans Kubernetes
-
 1. Mettez à jour l'Agent Datadog en installant la version 7.27+ pour la plate-forme correspondante.
 
 2. Modifiez la section `init_config` dans le check SNMP afin d'indiquer le nouveau check core dans `snmp.d/conf.yaml`.
 
 ``` yaml
-  init_config
+  init_config:
       loader: core
 ```
 3. Uniquement si vous utilisez Autodiscovery ou l'analyse de sous-réseaux : déplacez la configuration de chaque instance (sous-réseau) depuis la configuration du check SNMP vers le fichier principal `datadog.yaml` de l'Agent Datadog.
@@ -44,20 +43,22 @@ La version 7.27.0 de l'Agent Datadog prend en charge une nouvelle version des c
 listeners:
   - name: snmp
 snmp_listener:
-  workers: 100              # nombre de workers utilisés pour découvrir simultanément des appareils
-  discovery_interval: 3600  # secondes
+  workers: 100  # nombre de workers utilisés pour découvrir simultanément des périphériques
+  discovery_interval: 3600  # intervalle entre chaque processus Autodiscovery en secondes
+  loader: core  # utiliser l'implémentation de check de base pour l'intégration SNMP, conseillé
+  use_device_id_as_hostname: true  # conseillé
   configs:
-    - network: 1.2.3.4/24   # notation CIDR, Datadog recommande de ne pas indiquer plus de /24 blocs
-      version: 2
+    - network_address: 10.10.0.0/24  # sous-réseau CIDR
+      snmp_version: 2
       port: 161
-      community: ***
-    tags:
+      community_string: '***'  # mettre la valeur entre des guillemets simples
+      tags:
       - "key1:val1"
       - "key2:val2"
-    - network: 2.3.4.5/24
-      version: 2
+    - network_address: 10.20.0.0/24
+      snmp_version: 2
       port: 161
-      community: ***
+      community_string: '***'
       tags:
       - "key1:val1"
       - "key2:val2"
@@ -71,49 +72,35 @@ snmp_listener:
 listeners:
   - name: snmp
 snmp_listener:
-  workers: 100              # nombre de workers utilisés pour découvrir simultanément des appareils
-  discovery_interval: 3600  # intervalle entre chaque découverte automatique, en secondes
+  workers: 100  # nombre de workers utilisés pour découvrir simultanément des périphériques
+  discovery_interval: 3600  # intervalle entre chaque processus Autodiscovery en secondes
+  loader: core  # utiliser l'implémentation de check de base pour l'intégration SNMP, conseillé
+  use_device_id_as_hostname: true  # conseillé
   configs:
-    - network: 1.2.3.4/24   # notation CIDR, Datadog recommande de ne pas indiquer plus de /24 blocs
+    - network_address: 10.10.0.0/24  # sous-réseau CIDR
       snmp_version: 3
-      user: "user"
-      authProtocol: "fakeAuth"
-      authKey: "fakeKey"
-      privProtocol: "fakeProtocol"
-      privKey: "fakePrivKey"
+      user: 'user'
+      authProtocol: 'SHA256'  # Valeurs possibles : MD5, SHA, SHA224, SHA256, SHA384, SHA512
+      authKey: 'fakeKey'  # mettre la valeur entre des guillemets simples
+      privProtocol: 'AES256'  # valeurs possibles : DES, AES (128 bits), AES192, AES192C, AES256, AES256C
+      privKey: 'fakePrivKey'  # mettre la valeur entre des guillemets simples
       tags:
-        - "key1:val1"
-        - "key2:val2"
-    - network: 2.3.4.5/24
-      version: 3
+        - 'key1:val1'
+        - 'key2:val2'
+    - network_address: 10.20.0.0/24
       snmp_version: 3
-      user: "user"
-      authProtocol: "fakeAuth"
-      authKey: "fakeKey"
-      privProtocol: "fakeProtocol"
-      privKey: "fakePrivKey"
+      user: 'user'
+      authProtocol: 'SHA256'
+      authKey: 'fakeKey'
+      privProtocol: 'AES256'
+      privKey: 'fakePrivKey'
       tags:
-        - "key1:val1"
-        - "key2:val2"
+        - 'key1:val1'
+        - 'key2:val2'
 ```
 
 {{% /tab %}}
 {{< /tabs >}}
-
-### Spécificités de l'Agent de cluster Datadog
-
-Certains paramètres de `snmp_listener` ont été modifiés. Par exemple, `network_address` a été remplacé par `network`, tandis que `community_string` a été remplacé par `community`. Vous trouverez ci-dessous la liste complète des modifications de paramètres :
-
-| Configurations d'intégration (Python et core) | snmp_listener                                                    |
-| ----------------------------------- | -----------------------------------------------------------------|
-| `community_string`                  | `community`                                                      |
-| `network_address`                   | `network`                                                        |
-| `authKey`                           | `authentication_key`                                             |
-| `authProtocol`                      | `authentication_protocol`                                        |
-| `privKey`                           | `privacy_key`                                                    |
-| `privProtocol`                      | `privacy_protocol`                                               |
-| `snmp_version`                      | `version`                                                        |
-| `discovery_allowed_failures`        | `allowed_failures`, configuration principale : `snmp_listener.allowed_failures` |
 
 ### Migration des profils personnalisés (distincts du déploiement)
 
@@ -126,7 +113,7 @@ Il n'est plus possible de faire référence à des OID en indiquant uniquement l
 {{< code-block lang="yaml" filename="scalar_symbols.yaml" >}}
 metrics:
   - MIB: HOST-RESOURCES-MIB
-  symbol: hrSystemUptime
+    symbol: hrSystemUptime
 {{< /code-block >}}
 
 **Avec l'Agent v7.27.0 :**
@@ -134,9 +121,9 @@ metrics:
 {{< code-block lang="yaml" filename="scalar_symbols_7_27.yaml" >}}
 metrics:
   - MIB: HOST-RESOURCES-MIB
-  symbol:
-    OID: 1.3.6.1.2.1.25.1.1.0
-    name: hrSystemUptime
+    symbol:
+      OID: 1.3.6.1.2.1.25.1.1.0
+      name: hrSystemUptime
 {{< /code-block >}}
 
 #### Symboles de table
@@ -146,14 +133,14 @@ metrics:
 {{< code-block lang="yaml" filename="table_symbols.yaml" >}}
 
 metrics:
-  -MIB: HOST-RESOURCES-MIB
-  table: hrStorageTable
-  symbols:
-    - hrStorageAllocationUnits
-    - hrStoageSize
-  metrics_tags:
-    - tag: storagedec
-      column: hrStorageDescr
+  - MIB: HOST-RESOURCES-MIB
+    table: hrStorageTable
+    symbols:
+      - hrStorageAllocationUnits
+      - hrStoageSize
+    metrics_tags:
+      - tag: storagedec
+        column: hrStorageDescr
 
 {{< /code-block >}}
 
@@ -162,20 +149,20 @@ metrics:
 
 {{< code-block lang="yaml" filename="table_symbols_7_27.yaml" >}}
 metrics:
-  -MIB: HOST-RESOURCES-MIB
-  table:
-    OID: 1.3.6.1.2.1.25.2.3
-    name: hrStorageTable
-  symbols:
-    - OID: 1.3.6.1.2.1.25.2.3.1.4
-      name: hrStorageAllocationUnits
-    - OID: 1.3.6.1.2.1.25.2.3.1.5
-      name: hrStoageSize
-  metrics_tags:
-    - tag: storagedec
-      column:
-        OID: 1.3.6.1.2.1.25.2.3.1.3
-        name: hrStorageDescr
+  - MIB: HOST-RESOURCES-MIB
+    table:
+      OID: 1.3.6.1.2.1.25.2.3
+      name: hrStorageTable
+    symbols:
+      - OID: 1.3.6.1.2.1.25.2.3.1.4
+        name: hrStorageAllocationUnits
+      - OID: 1.3.6.1.2.1.25.2.3.1.5
+        name: hrStoageSize
+    metrics_tags:
+      - tag: storagedec
+        column:
+          OID: 1.3.6.1.2.1.25.2.3.1.3
+          name: hrStorageDescr
 {{< /code-block >}}
 
 

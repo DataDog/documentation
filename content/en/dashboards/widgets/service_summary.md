@@ -1,6 +1,5 @@
 ---
 title: Service Summary Widget
-kind: documentation
 description: "Displays the graphs of a chosen service in a dashboard widget."
 widget_type: "trace_service"
 aliases:
@@ -14,7 +13,7 @@ further_reading:
   text: "Learn more about the APM Service Page"
 ---
 
-The service summary displays the graphs of a chosen [service][1] in your dashboard.
+A service is a set of processes that do the same job, for example, a web framework or database. Datadog provides out-of-the-box graphs to display service information, as seen on the Service page. Use the service summary widget to display the graphs of a chosen [service][1] in your dashboard.
 
 {{< img src="dashboards/widgets/service_summary/service_summary.png" alt="service summary" >}}
 

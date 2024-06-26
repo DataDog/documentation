@@ -20,7 +20,7 @@ The [Metrics Summary page][1] displays a list of your metrics reported to Datado
 
 Search your metrics by metric name or tag using the **Metric** or **Tag** search fields:
 
-{{< img src="metrics/summary/tag_advancedfiltering.mp4" alt="The metrics summary page with NOT team:* entered in the Tag search bar" video=true style="width:75%;">}}
+{{< img src="metrics/summary/tag_advancedfiltering3.mp4" alt="The metrics summary page with NOT team:* entered in the Tag search bar" video=true style="width:75%;">}}
 
 Tag filtering supports boolean and wildcard syntax so that you can quickly identify: 
 * Metrics that are tagged with a particular tag key, for example, `team`: `team:*`
@@ -29,18 +29,23 @@ Tag filtering supports boolean and wildcard syntax so that you can quickly ident
 
 ## Facet panel
 
-The search bars provide the most comprehensive set of actions to filter the list of metrics. But facets can also quickly filter your metrics by:
-* **Configuration** : Quickly identify metrics with tag configurations or additional percentile aggregations
-* **Metric Type** : Quickly identify distributions vs non-distributions (counts, gauges, rates)
-* **Distribution Metric Origin**: Quickly identify which product the distribution metrics have originated from (for example, Generate Metrics from Logs, Generate Metrics from Spans, etc.) 
+The search bars provide the most comprehensive set of actions to filter the list of metrics. But facets can also filter your metrics by:
 
-{{< img src="metrics/summary/facets2.jpg" alt="Metrics Facet Panel" style="width:75%;">}}
+- **Configuration**: Metrics with tag configurations
+- **Percentiles**: Distribution metrics enabled by percentiles/advanced query capabilities
+- **Historical Metrics**: Metrics that have historical metrics ingestion enabled 
+- **Query Activity** (Beta): Metrics not queried in the app or by the API in the past 30 days
+- **Metric Type**: Differentiate between distribution and non-distribution metrics (counts, gauges, rates)
+- **Distribution Metric Origin**: The product from which the metric originated (for example, metrics generated from Logs or APM Spans)
 
+**Note**: A metric included on a Dashboard that has not been loaded by a user in the last 30 days would not be considered actively queried.
+
+{{< img src="metrics/summary/facets4.png" alt="Metrics Facet Panel" style="width:75%;">}}
 
 ## Configuration of multiple metrics 
 There are two buttons that allow you to configure multiple metrics at a time: 
 
-{{< img src="metrics/summary/configurationbuttons.jpg" alt="Bulk Configuration Buttons" style="width:75%;">}}
+{{< img src="metrics/summary/configurationbuttons2.png" alt="Bulk Configuration Buttons" style="width:75%;">}}
 
 * **Calculate Percentiles**: Add percentile aggregations to multiple distribution metrics.
 
@@ -48,7 +53,8 @@ There are two buttons that allow you to configure multiple metrics at a time:
 
 * **Configure Tags**: Configure tags on multiple custom metrics matching a namespace using Metrics without Limits™
 
-{{< img src="metrics/summary/bulkconfig.mp4" alt="Bulk Metric Tag Configuration" video=true style="width:75%;">}} 
+{{< img src="metrics/summary/bulkconfig_new-compressed.mp4" alt="Bulk Metric Tag Configuration" video="true" style="width:100%;" >}}
+
 
 ## Metric details sidepanel
 
@@ -60,13 +66,13 @@ Click on any metric name to display its details sidepanel for more information r
 
 The name of your metric in the [Metrics Explorer][2], [dashboards][3], etc.
 
-### Ingested Custom Metrics
+### Ingested custom metrics
 
 A metric name may emit multiple ingested custom metrics depending on its associated tag value combinations. Ingested custom metrics represent all of the data originally submitted with code.
 
 Learn more in the [custom metrics][4] documentation.
 
-### Indexed Custom Metrics
+### Indexed custom metrics
 
 Unlike ingested custom metrics, indexed custom metrics represent those that remain queryable across the Datadog platform. This number may be impacted by adding or removing percentile aggregations or by use of Metrics without Limits™. Learn more in the [Metrics without Limits™][10] documentation.
 
@@ -132,6 +138,16 @@ For any particular tag key, you can:
 
 [Learn more about tagging][5].
 
+## Metrics Related Assets
+
+{{< img src="metrics/summary/related_assets_dashboards.png" alt="Related Assets for a specified metrics name" style="width:80%;">}}
+
+To determine the value of any metric name to your organization, use Metrics Related Assets. Metrics related assets refers to any dashboard, notebook, monitor, or SLO that queries a particular metric. 
+
+1. Scroll to the bottom of the metric's details side panel to the "Related Assets" section.
+2. Click the dropdown button to view the type of related asset you are interested in (dashboards, monitors, notebooks, SLOs). You can additionally leverage the search bar to validate specific assets.
+   
+
 ## Metrics without Limits™
 Metrics without Limits™ provides you control over the size of your custom metrics without requiring any agent or code-level changes. 
 
@@ -143,10 +159,11 @@ You can configure tags using the bulk metric tag configuration button or the **M
 
 1. Click on your custom distribution metric name in the **Metrics Summary** table to open the metrics details side panel.
 2. Click the **Manage Tags** button to open the tag configuration modal.
-3. Click the **Custom...** tab to customize the tags you'd like to keep available for query. Tag configurations are _allowlists_ of the tags you'd like to keep. 
-4. Preview the effects of your proposed allowlist with the cardinality estimator before selecting **Save**.
 
-**Note**: The exclusion of tags is not supported in the allowlist-based customization of tags. Adding tags starting with `!` is not accepted. Also, the cardinality estimator requires the metric to be older than 48 hours.
+3. Select **Include tags...** or **Exclude tags...** to customize the tags you do or don't want to query for. For more information on tag configuration, see the [Metrics without Limits][10] documentation.
+4. Preview the effects of your proposed tag configuration with the cardinality estimator before selecting **Save**.
+
+**Note**: The cardinality estimator requires the metric to be older than 48 hours.
 
 ### Queryable tags 
 
@@ -169,7 +186,7 @@ More aggregations are available should they be valuable to you. You can add or r
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[10]:/metrics/metrics-without-limits
+[10]: /metrics/metrics-without-limits
 [1]: https://app.datadoghq.com/metric/summary
 [2]: /metrics/explorer/
 [3]: /dashboards/

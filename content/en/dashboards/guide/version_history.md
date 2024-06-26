@@ -1,6 +1,5 @@
 ---
 title: Version History for Dashboards
-kind: documentation
 disable_toc: false
 further_reading:
 - link: "/dashboards/"
@@ -58,7 +57,7 @@ If you do not want to change your current dashboard but you'd like to create a c
 | Audit Trail **Enabled**  | 90 days |
 
 
-[1]:/account_management/audit_trail/
+[1]: /account_management/audit_trail/
 
 ## Further reading
 

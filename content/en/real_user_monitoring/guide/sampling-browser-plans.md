@@ -25,16 +25,21 @@ This feature requires the Datadog Browser SDK v3.0.0+.
 <blockquote class="alert alert-info">
 The Datadog Browser SDK v4.20.0 introduces the <code>sessionReplaySampleRate</code> initialization parameter, deprecating the <code>premiumSampleRate</code> and <code>replaySampleRate</code> initialization parameter.
 </blockquote>
+<blockquote class="alert alert-info">
+The Datadog Browser SDK v5.0.0 introduces two major behavior changes:
 
+- Only sessions that have recorded a replay are considered as Browser RUM & Session Replay
+- The <code>sessionReplaySampleRate</code> initialization parameter default value is `0` . Previous versions of the SDK use `100`.
+</blockquote>
 When a session is created, RUM tracks it as either:
 
-- [**Browser RUM**][2]: Sessions, views, actions, resources, long tasks, and errors are collected. Calls to `startSessionReplayRecording()` are ignored.
-- [**Browser RUM & Session Replay**][2]: Everything from Browser RUM is collected, including replay recordings. To collect replay recordings, call `startSessionReplayRecording()`.
+- [**Browser RUM**][2]: Sessions, views, actions, resources, long tasks, and errors are collected.
+- [**Browser RUM & Session Replay**][2]: Everything from Browser RUM is collected, including replay recordings.
 
 Two initialization parameters are available to control how the session is tracked:
 
 - `sessionSampleRate` controls the percentage of overall sessions being tracked. It defaults to `100%`, so every session is tracked by default.
-- `sessionReplaySampleRate` is applied **after** the overall sample rate, and controls the percentage of sessions tracked as Browser RUM & Session Replay. It defaults to `100%`, so every session is tracked as Browser RUM & Session Replay by default.
+- `sessionReplaySampleRate` is applied **after** the overall sample rate, and controls the percentage of sessions tracked as Browser RUM & Session Replay. From Datadog Browser SDK v5.0.0, it defaults to `0`, so no session is tracked as Browser RUM & Session Replay by default.
 
 To track 100% of your sessions as Browser RUM:
 
@@ -202,6 +207,22 @@ datadogRum.init({
 ```
 
 </details>
+
+From v5.0.0, to track 100% of the sessions that reach a custom state as Browser RUM & Session Replay:
+
+```
+datadogRum.init({
+    ....
+    sessionSampleRate: 100,
+    sessionReplaySampleRate: 100,
+    startSessionReplayRecordingManually: true,
+});
+
+// when the custom state is reached
+datadogRum.startSessionReplayRecording()
+```
+
+With the use of `startSessionReplayRecordingManually: true`, sessions that do not call `startSessionReplayRecording()` are considered as Browser RUM.
 
 For more information about tagging and exploring attributes, see [Browser Monitoring][3].
 

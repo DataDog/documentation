@@ -20,10 +20,9 @@ integration_id: eversql
 integration_title: 'EverSQL : Optimisation des bases de données'
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: eversql
-oauth: {}
 public_title: 'EverSQL : Optimisation des bases de données'
 short_description: Optimisation automatique des requêtes SQL et des bases de données
   pour MySQL, PostgreSQL, Aurora

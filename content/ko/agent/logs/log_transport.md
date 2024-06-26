@@ -16,7 +16,6 @@ further_reading:
 - link: agent/logs/advanced_log_collection/#global-processing-rules
   tag: 설명서
   text: 글로벌 처리 규칙
-kind: 설명서
 title: Agent 로그 전송
 ---
 
@@ -30,7 +29,7 @@ v6.19/v7.19 이상 버전의 Agent는 기본적으로 이전 버전에 맞게 TC
 
 Agent가 사용하는 전송 방식을 확인하려면 [Agent 상태 명령어][1]를 실행하세요.
 
-{{< img src="agent/logs/agent-status.png" alt="Agent 상태"  style="width:70%;">}}
+{{< img src="agent/logs/agent-status.png" alt="Agent 상태" style="width:70%;">}}
 
 **참조**:
 
@@ -104,9 +103,9 @@ logs_config:
 
 로그를 HTTPS 경유로 전송하는 경우는, 로그를 웹 프록시 경유로 전송할 때도 다른 데이터 타입과 같은 [프록시 설정 세트][3]를 사용합니다.
 
-[1]: /ko/agent/guide/agent-configuration-files/
+[1]: /ko/agent/configuration/agent-configuration-files/
 [2]: /ko/agent/basic_agent_usage/#agent-overhead
-[3]: /ko/agent/proxy/
+[3]: /ko/agent/configuration/proxy/
 {{% /tab %}}
 {{% tab "TCP" %}}
 
@@ -115,21 +114,21 @@ TCP 트랜스포트를 강제 사용하려면 Agent [주요 설정 파일][1](`d
 ```yaml
 logs_enabled: true
 logs_config:
-  use_tcp: true
+  force_use_tcp: true
 ```
 환경 변수와 로그를 보내려면 다음과 같이 설정하세요.
 
 * `DD_LOGS_ENABLED=true`
-* `DD_LOGS_CONFIG_USE_TCP=true`
+* `DD_LOGS_CONFIG_FORCE_USE_TCP=true`
 
 기본적으로 Datadog Agent에서 로그를 Datadog로 전송할 때는 TLS-암호화 TCP를 사용합니다. 이를 위해 아웃바운드 커뮤니케이션(Datadog 미국 사이트의 경우 포트 `10516`로, Datadog 유럽 사이트의 경우 포트 `443`로)이 필요합니다.
 
-[1]: /ko/agent/guide/agent-configuration-files/
+[1]: /ko/agent/configuration/agent-configuration-files/
 {{% /tab %}}
 {{< /tabs >}}
 
 **참조**: [SOCKS5 프록시][2] 서버 설정 시 TCP 트랜스포트를 강제 사용하세요. socks5 프록시가 아직 HTTPS에서 압축을 지원하지 않기 때문입니다.
 
 
-[1]: /ko/agent/guide/agent-commands/?tab=agentv6v7#service-status
+[1]: /ko/agent/configuration/agent-commands/?tab=agentv6v7#service-status
 [2]: /ko/agent/logs/proxy/?tab=socks5

@@ -1,10 +1,9 @@
 ---
 aliases:
-  - /ja/integrations/azure_apimanagement
+- /ja/integrations/azure_apimanagement
 categories:
-  - cloud
-  - azure
-ddtype: crawler
+- cloud
+- azure
 dependencies: []
 description: Azure API Management のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_api_management/
@@ -22,33 +21,35 @@ public_title: Datadog-Microsoft Azure API Management インテグレーション
 short_description: Azure API Management のキーメトリクスを追跡
 version: '1.0'
 ---
+
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Azure API Management は、顧客が API を公開、セキュリティ保護、変換、保守、および監視できるフルマネージド型サービスです。
 
 Datadog Azure インテグレーションを使用して、Azure API Management からメトリクスを収集できます。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 [Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "azure_api_management" >}}
 
 
-### イベント
+### ヘルプ
 
 Azure API Management インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 
 Azure API Management インテグレーションには、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 

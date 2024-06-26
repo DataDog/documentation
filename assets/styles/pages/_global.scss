@@ -58,7 +58,11 @@ body {
         position: relative;
     }
 }
-
+.chroma {
+    max-height: 350px;
+    overflow-wrap: break-word;
+    white-space: inherit;
+}
 .greyside {
     position: absolute;
     height: 100%;
@@ -883,6 +887,10 @@ table,
             width: 50%;
         }
     }
+
+    @include media-breakpoint-up(xl) {
+            table-layout: fixed;
+    }
 }
 
 .break-word {
@@ -905,7 +913,7 @@ dl {
     }
 
     dd {
-        padding: 0 0.75rem 1rem 1.75rem;
+        padding: 0 0.75rem 0rem 1.75rem;
 
         &:last-of-type {
             padding-bottom: 0.5rem;
@@ -1030,6 +1038,12 @@ dl {
     }
     .container__content {
         max-width: 1440px !important;
+    }
+}
+
+@media (min-width: 1400px) {
+    .container {
+        max-width: 1336px !important;
     }
 }
 

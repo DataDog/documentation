@@ -6,6 +6,7 @@ assets:
     IIS-Overview: assets/dashboards/iis_overview.json
     iis: assets/dashboards/iis_dashboard.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -16,6 +17,7 @@ assets:
       prefix: iis.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 46
     source_type_name: IIS
   logs:
     source: iis
@@ -43,12 +45,11 @@ draft: false
 git_integration_title: iis
 integration_id: iis
 integration_title: IIS
-integration_version: 2.19.1
+integration_version: 3.1.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: iis
-oauth: {}
 public_title: IIS
 short_description: 全体またはサイトごとのメトリクスを追跡し、各サイトの稼働/停止状態を監視。
 supported_os:
@@ -66,6 +67,7 @@ tile:
   title: IIS
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ![IIS グラフ][1]
@@ -74,15 +76,15 @@ tile:
 
 すべてのサイトを集計して、またはサイトごとに IIS メトリクスを収集します。IIS Agent チェックは、アクティブな接続数、送信および受信バイト数、HTTP メソッド別のリクエスト数などのメトリクスを収集します。サイトごとのサービスチェックも送信されるため、サイトが稼働しているか停止しているかを把握できます。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 IIS チェックは Agent にパッケージ化されています。IIS メトリクスとログの収集を開始するには、[Agent をインストールします][2]。
 
-#### ホスト
+#### メトリクスベース SLO
 
-ホストで実行中の Agent に対してこのチェックを構成するには:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
 ##### メトリクスの収集
 
@@ -92,7 +94,7 @@ IIS チェックは Agent にパッケージ化されています。IIS メト�
 
 **注**: このチェックのバージョン 2.14.0 以降では、メトリクスの収集に新しい実装を使用し、これには Python 3 が必要です。Python 3 の使用が不可能なホストの場合や、このチェックのレガシーバージョンを使用する場合は、以下の[コンフィグ][7]を参照してください。
 
-##### ログの収集
+##### 収集データ
 
 1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
 
@@ -114,28 +116,28 @@ IIS チェックは Agent にパッケージ化されています。IIS メト�
 
 3. [Agent を再起動します][6]。
 
-**注**: `datadog-agent` ユーザーが、収集したいログファイルを追跡するための読み取りアクセス権を持っていることを確認してください。詳細は、[ログファイルの追跡における権限の問題][8]を参照してください。
+**注**: `datadog-agent` ユーザーが、収集したいログファイルをテールするための読み取りアクセスと実行アクセスを持っていることを確認してください。IIS が新しいサブフォルダを作成するとき (新しいサイトが作成されるときなど)、親フォルダの権限は自動的に継承されません。詳細については、[ログファイルのテールに関する権限の問題][8]を参照してください。
 
 
 ### 検証
 
 [Agent の status サブコマンドを実行][9]し、Checks セクションで `iis` を探します。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "iis" >}}
 
 
-### イベント
+### ヘルプ
 
 IIS チェックには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 {{< get-service-checks-from-git "iis" >}}
 
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][12]までお問合せください。
 

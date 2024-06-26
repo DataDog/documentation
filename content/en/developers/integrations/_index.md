@@ -45,24 +45,6 @@ The [Marketplace page][101] is a commercial platform for Technology Partners to 
 {{% /tab %}}
 {{< /tabs >}}
 
-## Join the Datadog partner network
-
-Before listing an integration on Datadog, first apply to the [Datadog Partner Network's][5] **Technology Partner** track. Once your application has been approved, you can begin developing your integration.
-
-## Create a Datadog integration
-
-### Agent-based integrations
-
-Agent-based integrations use the [Datadog Agent][11] to submit data through checks written by Technology Partners. The implementation code for these integrations is hosted by Datadog. 
-
-Agent integrations are best suited for collecting data from systems or applications that live in a local area network (LAN) or virtual private cloud (VPC). [Creating an Agent integration][2] requires you to publish and deploy your solution as a Python wheel (`.whl`).
-
-### API-based integrations
-
-API-based integrations can submit telemetry—such as metrics, traces, logs, and more—from external platforms using the [Datadog API][12]. Customers can then visualize and correlate this data alongside data from the rest of their stack, allowing them to quickly analyze and remediate issues. API-based integrations may also read data out of Datadog once customers [authorize access using OAuth][13]. 
-
-Technology Partners write and host the implementation code that makes up the integration. [Creating an API integration][1] works well for Technology Partners building a connector between Datadog and another SaaS platform.
-
 ### Benefits
 
 By creating an integration, you can achieve the following benefits:
@@ -76,11 +58,11 @@ Decrease mean-time-to-resolution (MTTR) for customers
 Increase adoption and visibility 
 : Ensuring native functionality for Datadog reduces friction to adoption, and displaying a tile on the [Integrations page][10] or the [Marketplace page][17] provides key visibility to all of Datadog's customers.
 
-### Responsibilities
-
-As the author of the integration, you are responsible for maintaining the code and ensuring the integration functions properly across all [Datadog sites][15]. If you encounter any setup issues, [contact Support][16].
-
 ## Get started 
+
+### Join the Datadog partner network
+
+Before listing an integration on Datadog, first apply to the [Datadog Partner Network's][5] **Technology Partner** track. Once your application has been approved, you can begin developing your integration.
 
 ### Request a sandbox account
 
@@ -105,6 +87,32 @@ Once you've joined the **Technology Partner** track and requested a sandbox acco
 * Reading the documentation about creating [Agent-based integrations][2].
 
 For more information about selling a Datadog integration or other type of offering, see [Build a Marketplace Offering][4].
+
+## Create a Datadog integration
+
+### Responsibilities
+
+As the author of the integration, you are responsible for maintaining the code and ensuring the integration functions properly across all [Datadog sites][15]. If you encounter any setup issues, [contact Support][16].
+
+### Agent-based integrations
+
+Agent-based integrations use the [Datadog Agent][11] to submit data through checks written by Technology Partners. The implementation code for these integrations is hosted by Datadog. 
+
+Agent integrations are best suited for collecting data from systems or applications that live in a local area network (LAN) or virtual private cloud (VPC). [Creating an Agent integration][2] requires you to publish and deploy your solution as a Python wheel (`.whl`).
+
+### API-based integrations
+
+API-based integrations can submit telemetry—such as metrics, traces, logs, and more—from external platforms using the [Datadog API][12]. Customers can then visualize and correlate this data alongside data from the rest of their stack, allowing them to quickly analyze and remediate issues. API-based integrations may also read data out of Datadog once customers [authorize access using OAuth][13]. 
+
+Technology Partners write and host the implementation code that makes up the integration. [Creating an API integration][1] works well for Technology Partners building a connector between Datadog and another SaaS platform.
+
+## Requirements
+All integrations must include the following:
+* An out-of-the-box integration dashboard
+* 3 or more images for your tile
+* OAuth (for API integrations only)
+* A log pipeline (for log integrations only)
+* Recommended Monitor (for integrations that sends in metrics)
 
 ## Further reading
 

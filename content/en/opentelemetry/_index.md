@@ -1,6 +1,8 @@
 ---
 title: OpenTelemetry in Datadog
 kind: Documentation
+aliases:
+- /tracing/setup_overview/open_standards/
 further_reading:
 - link: "https://www.datadoghq.com/blog/opentelemetry-instrumentation/"
   tag: "Blog"
@@ -33,6 +35,10 @@ cascade:
         rank: 70
 ---
 
+<div class="alert alert-danger">
+  <strong>Important:</strong> OpenTelemetry Collector Contrib v0.95.0 introduces a breaking change that disables Trace Metrics computation in the Datadog Exporter. Follow Datadog's <a href="/opentelemetry/guide/migration/">migration guide</a> when upgrading.
+</div>
+
 ## Overview
 
 [OpenTelemetry][1] is an open source observability framework that provides IT teams with standardized protocols and tools for collecting and routing telemetry data. Created as an incubator project by the [Cloud Native Computing Foundation][2] (CNCF), OpenTelemetry provides a consistent format for instrumenting, generating, gathering, and exporting application telemetry data—namely metrics, logs, and traces—to monitoring platforms for analysis and insight.
@@ -41,7 +47,7 @@ If your applications and services are instrumented with OpenTelemetry libraries,
 
 1. [Send data to the OpenTelemetry collector, and use the Datadog exporter to forward it to Datadog][3], or
 
-2. [Ingest data with the Datadog Agent, which collects it for Datadog][4] (metrics and traces only).
+2. [Ingest data with the Datadog Agent, which collects it for Datadog][4].
 
 {{< img src="tracing/setup/open_standards/otel-flow.png" alt="Map options for generating telemetry data and sending it to observability products.">}}
 
@@ -49,13 +55,13 @@ If your applications and services are instrumented with OpenTelemetry libraries,
 
 Datadog supports the [W3C Trace Context standard][6], ensuring complete traces are captured even when a request travels between services that have been instrumented with different tools. Services need only be instrumented with any system, such as an OpenTelemetry library or Datadog tracing library, that follows the W3C Trace Context standard. Read [Propagating Trace Context][5] for more information.
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://opentelemetry.io/
 [2]: https://www.cncf.io/
-[3]: /opentelemetry/otel_collector_datadog_exporter/
+[3]: /opentelemetry/collector_exporter/
 [4]: /opentelemetry/otlp_ingest_in_the_agent/
 [5]: /tracing/trace_collection/trace_context_propagation/
 [6]: https://www.w3.org/TR/trace-context/

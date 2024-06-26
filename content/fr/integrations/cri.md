@@ -5,6 +5,7 @@ assets:
   dashboards:
     cri: assets/dashboards/overview.json
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -14,6 +15,7 @@ assets:
       prefix: cri.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10043
     source_type_name: CRI
 author:
   homepage: https://www.datadoghq.com
@@ -32,10 +34,9 @@ integration_id: cri
 integration_title: CRI
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: cri
-oauth: {}
 public_title: CRI
 short_description: Surveillez toutes vos métriques CRI avec Datadog.
 supported_os:
@@ -54,15 +55,16 @@ tile:
   title: CRI
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## Présentation
 
 Ce check surveille une interface de runtime de conteneur (Container Runtime Interface ou CRI).
 
-## Implémentation
+## Formule et utilisation
 
-### Installation
+### Liste des infrastructures
 
 CRI est un [check de base de l'Agent Datadog][1] qui doit être configuré dans `datadog.yaml` avec `cri.d/conf.yaml`.
 
@@ -107,7 +109,7 @@ spec:
 
 **Remarque :** le répertoire `/var/run` doit être monté à partir du host pour que l'intégration s'exécute correctement.
 
-### Configuration
+### Dépannage de la solution Browser
 
 1. Modifiez le fichier `cri.d/conf.yaml` dans le dossier `conf.d/` à la racine du répertoire de configuration de votre Agent pour commencer à recueillir vos données de performance CRI. Consultez le [fichier d'exemple cri.d/conf.yaml][2] pour découvrir toutes les options de configuration disponibles.
 
@@ -117,21 +119,21 @@ spec:
 
 Lancez la [sous-commande status][3] de l'Agent et cherchez `cri` dans la section Checks.
 
-## Données collectées
+## Real User Monitoring
 
-### Métriques
+### Analyse d'entonnoirs
 {{< get-metrics-from-git "cri" >}}
 
 
-### Checks de service
+### Aide
 
 CRI n'inclut aucun check de service.
 
-### Événements
+### Aide
 
 CRI n'inclut aucun événement.
 
-## Dépannage
+## Aide
 
 Besoin d'aide ? Contactez [l'assistance Datadog][5].
 

@@ -30,7 +30,7 @@ title: API テストの概要
 
 ## 概要
 
-API テストは、**最も重要なサービス**がいつでもどこからでも利用できることを**プロアクティブに監視**します。[シングル API テスト][1]には、システムのさまざまなネットワーク層 (`HTTP`、`SSL`、`DNS`、`WebSocket`、`TCP`、`UDP`、`ICMP`、`gRPC`) でリクエストを起動できる 8 つのサブタイプがあります。[マルチステップ API テスト][2]では、HTTP テストを順番に実行して、API レベルで主要なジャーニーのアップタイムを監視できます。
+API テストは、**最も重要なサービス**がいつでもどこからでも利用できることを**プロアクティブに監視**します。[シングル API テスト][1]には、システムのさまざまなネットワーク層 (`HTTP`、`SSL`、`DNS`、`WebSocket`、`TCP`、`UDP`、`ICMP`、`gRPC`) に対してリクエストを発行できる 8 つのサブタイプがあります。[マルチステップ API テスト][2]では、API テストを順番に実行して、API レベルで主要なジャーニーのアップタイムを監視できます。
 
 ## 単一の API テストを作成する
 
@@ -42,7 +42,7 @@ HTTP テストは、API エンドポイントを監視し、レスポンス遅�
 
 ### リクエストを定義する
 
-1. Datadog サイトで、**UX Monitoring** にカーソルを合わせ、**[Synthetic Tests][4]** を選択します。
+1. Datadog サイトで、**Digital Experience** にカーソルを合わせ、**[Tests][4]** (**Synthetic Monitoring & Testing** の下) を選択します。
 2. **New Test** > **[New API test][5]** をクリックします。
 3. `HTTP` リクエストタイプを選択します。
 4. リクエストを定義します。
@@ -111,7 +111,7 @@ An alert is triggered if your test fails for 3 minutes from any 2 of 13 location
 
 {{< img src="getting_started/synthetics/multistep-api-test.png" alt="マルチステップ Synthetics API テストの概要" style="width:100%;" >}}
 
-[HTTP テスト][3]と同様に、マルチステップ API テストは、エンドポイントが遅くなりすぎたり、定義した条件を満たせなくなったりしたときに警告を発します。個々のステップ応答から変数を作成し、後続のステップでそれらの値を再注入して、アプリケーションまたはサービスの動作を模倣する方法でステップをチェーン化することもできます。
+[API テスト][3]と同様、マルチステップ API テストは、エンドポイントの反応が遅すぎる場合や定義した条件を満たさない場合に警告を発します。個々のステップ応答から変数を作成し、後続のステップでそれらの値を再注入して、アプリケーションまたはサービスの動作を模倣する方法でステップをチェーン化することもできます。
 
 以下のテスト例は、カートへのアイテムの追加を監視するマルチステップ API テストの作成を示しています。このテストには、次の 3 つのステップが含まれます。
 
@@ -209,7 +209,7 @@ Datadog の [APM と Synthetic モニタリングのインテグレーション]
 [1]: /ja/synthetics/api_tests/
 [2]: /ja/synthetics/multistep
 [3]: /ja/synthetics/api_tests/http_tests
-[4]: https://app.datadoghq.com/synthetics/list
+[4]: https://app.datadoghq.com/synthetics/tests
 [5]: https://app.datadoghq.com/synthetics/create
 [6]: /ja/synthetics/settings/#global-variables
 [7]: /ja/synthetics/api_tests/http_tests#variables
@@ -220,3 +220,4 @@ Datadog の [APM と Synthetic モニタリングのインテグレーション]
 [12]: https://app.datadoghq.com/synthetics/multi-step/create
 [13]: /ja/synthetics/guide/synthetic-test-monitors
 [14]: /ja/synthetics/apm/
+[15]: /ja/synthetics/api_tests/grpc_tests

@@ -2,7 +2,7 @@
 aliases:
 - /fr/real_user_monitoring/faq/session_replay_service_worker/
 further_reading:
-- link: /real_user_monitoring/session_replay/
+- link: /real_user_monitoring/session_replay/browser/
   tag: Documentation
   text: En savoir plus sur Session Replay
 kind: guide

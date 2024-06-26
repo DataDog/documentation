@@ -11,7 +11,7 @@ doc_link: https://docs.datadoghq.com/integrations/amazon_emr/
 draft: false
 git_integration_title: amazon_emr
 has_logo: true
-integration_id: amazon-emr
+integration_id: ''
 integration_title: Amazon EMR
 integration_version: ''
 is_public: true
@@ -23,15 +23,16 @@ short_description: Amazon EMR のキーメトリクスを追跡します。
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Amazon EMR は、膨大な量のデータを迅速かつコスト効率よく簡単に処理できる Web サービスです。
 
 このインテグレーションを有効にすると、EMR メトリクスを Datadog に表示できます。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 
@@ -45,9 +46,9 @@ Amazon EMR は、膨大な量のデータを迅速かつコスト効率よく簡
     | `elasticmapreduce:ListClusters`    | 使用できるクラスターを一覧表示します。          |
     | `elasticmapreduce:DescribeCluster` | CloudWatch EMR メトリクスにタグを追加します。|
 
-3. [Datadog - AWS EMR インテグレーション][5]をインストールします。
+3. [Datadog - Amazon EMR インテグレーション][5]をインストールします。
 
-### ログの収集
+### 収集データ
 
 #### ログの有効化
 
@@ -63,23 +64,23 @@ Amazon EMR から S3 バケットまたは CloudWatch のいずれかにログ�
     - [S3 バケットに手動トリガーを追加][7]
     - [CloudWatch ロググループに手動トリガーを追加][8]
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "amazon_emr" >}}
 
 
 AWS から取得される各メトリクスには、ホスト名やセキュリティ グループなど、AWS コンソールに表示されるのと同じタグが割り当てられます。
 
-### イベント
+### ヘルプ
 
-AWS EMR インテグレーションには、イベントは含まれません。
+Amazon EMR インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 
-AWS EMR インテグレーションには、サービスのチェック機能は含まれません。
+Amazon EMR インテグレーションには、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
 

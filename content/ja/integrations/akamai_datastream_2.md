@@ -32,10 +32,9 @@ integration_id: akamai-datastream-2
 integration_title: Akamai DataStream 2
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: akamai_datastream_2
-oauth: {}
 public_title: Akamai DataStream 2
 short_description: Akamai DataStream のログを Datadog に送信
 supported_os:

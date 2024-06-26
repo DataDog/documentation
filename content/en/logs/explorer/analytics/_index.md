@@ -25,7 +25,7 @@ further_reading:
 Logs can be valuable as individual events, but sometimes valuable information lives in a subset of events. 
 
 {{< whatsnext desc="In order to expose this information, you can group your logs into:" >}}
-    {{< nextlink href="logs/explorer/analytics/#fields" >}}Fields{{< /nextlink >}}
+    {{< nextlink href="logs/explorer/analytics/#group-logs-by-fields" >}}Fields{{< /nextlink >}}
     {{< nextlink href="logs/explorer/analytics/patterns" >}}Patterns{{< /nextlink >}}
     {{< nextlink href="logs/explorer/analytics/transactions" >}}Transactions{{< /nextlink >}}
 {{< /whatsnext >}}
@@ -45,7 +45,7 @@ When aggregating indexed logs by **Fields**, all logs matching your query filter
 On top of these aggregates, you can extract the following measures:
 
 - **count of logs** per group
-- **unique count** of coded values for a query search value per group
+- **count of unique coded values** for a query search value per group (shown in the UI as `count unique of`)
 - **statistical operations** (`min`, `max`, `avg`, and `percentiles`) on numerical values of a query search value per group
 
 Individual logs with multiple query search values belong to that many aggregates. For instance, a log with the `team:sre` and the `team:marketplace` tags are counted once in the `team:sre` aggregate and once in the `team:marketplace` aggregate.
@@ -106,16 +106,6 @@ You can apply a function to a formula by clicking on the `Σ` icon. Here is an e
 
 {{< img src="logs/explorer/group/timeshift_function_logs.jpg" alt="The query editor showing a formula with the week before timeshift function applied to it" style="width:100%;" >}}
 
-## Filter logs based on Reference Tables
-
-<div class="alert alert-warning">Reference Tables and the feature to filter logs based on Reference Tables are in beta. There is a limit of 100 Reference Tables per account and a limit of 1000 rows in a Reference Table.</div>
-
-Reference Tables allow you to combine metadata with logs, providing more information to resolve application issues. Add a query filter based on a Reference Table to perform lookup queries. For more information on creating and managing this feature, see the [Reference Tables][17] guide.
-
-To apply a query filter with Reference Tables, click on the `+ Add` button next to the query editor and select **Reference Table**. In the following example, the Reference Table query filter is used to search all recent logs that include a malicious IP address from a threat intel reference table:
-
-{{< img src="/logs/explorer/group/reference_tables_logs.png" alt="The Datadog log explorer with reference table search options highlighted" border="true" popup="true" style="width:100%;" >}}
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -136,4 +126,3 @@ To apply a query filter with Reference Tables, click on the `+ Add` button next 
 [14]: /dashboards/functions/smoothing
 [15]: /dashboards/functions/rollup
 [16]: /dashboards/functions/exclusion
-[17]: /integrations/guide/reference-tables/?tab=manualupload

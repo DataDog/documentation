@@ -22,12 +22,12 @@ jobs:
 
     - name: Find changed files
       id: changed_files
-      uses: tj-actions/changed-files@v39
+      uses: tj-actions/changed-files@v42
       with:
         separator: ','
 
     - name: Set up Python
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5.1.0
       with:
         python-version: '3.10'
     - run: pip install pyyaml requests
@@ -37,6 +37,7 @@ jobs:
       env:
         GH_EVENT: ${{ github.event_name }}
         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_CHECK_CACHE }}
+        ALL_CHANGED_FILES: ${{ steps.changed_files.outputs.all_changed_files }}
       run: |
         python local/bin/py/check_cache_values.py \
-        --files='${{ steps.changed_files.outputs.all_changed_files }}'
+        --files=$ALL_CHANGED_FILES

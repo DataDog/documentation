@@ -19,7 +19,7 @@ further_reading:
   text: ECS Fargate インテグレーション
 git_integration_title: amazon_ecs
 has_logo: true
-integration_id: amazon-ecs
+integration_id: ''
 integration_title: Amazon ECS on EC2
 integration_version: ''
 is_public: true
@@ -31,6 +31,7 @@ short_description: コンテナ ステータスのモニタリングやリソー
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 <div class="alert alert-warning">
 コンテナ化された Datadog Agent を ECS クラスターにデプロイする方法については、<a href="https://docs.datadoghq.com/agent/amazon_ecs/"><b>Amazon ECS Agent ドキュメント</b></a>を参照してください。
 </div>
@@ -41,9 +42,9 @@ Amazon ECS on EC2 は、EC2 インスタンスで実行される Docker コン�
 
 Amazon ECS Datadog インテグレーションを利用し、CloudWatch から ECS メトリクスを自動的に収集します。ECS API に ECS イベント、タグ、およびコンテナインスタンス、タスク、サービスのステータスを照会することで、これらのメトリクスを拡張します。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 
@@ -61,13 +62,13 @@ Amazon ECS Datadog インテグレーションを利用し、CloudWatch から E
 
 3. [AWS インテグレーションページ][4]で、`Metric Collection` タブの下にある `ECS` が有効になっていることを確認します。
 
-    {{< img src="integrations/amazon_ecs/aws_tile.png" alt="AWS ECS コンフィギュレーション" >}}
+    {{< img src="integrations/amazon_ecs/aws_tile.png" alt="Amazon ECS コンフィギュレーション" >}}
 
 メトリクスの収集が有効な場合、ECS メトリクスの詳細を提供する[既定のダッシュボード][5]をこのインテグレーションで利用できます。詳細は、[Datadog で ECS をモニタリング][6]をご覧ください。
 
-## 収集データ
+## Datadog Operator
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "amazon_ecs" >}}
 
 
@@ -75,19 +76,19 @@ AWS から取得される各メトリクスには、ホスト名やセキュリ�
 
 **注**: [AWS インテグレーションページ][4]の `Metric Collection` タブで `Collect custom metrics` を有効にすることで、プレフィックスに `ecs.containerinsights.*` を持つメトリクスを収集することができます。
 
-### イベント
+### ヘルプ
 
-ノイズを減らすため、Amazon ECS インテグレーションは次の単語を含むイベントのみを収集するように自動的に設定されます。`drain`、`error`、`fail`、`insufficient memory`、`pending`、`reboot`、`terminate`。以下にイベントの例を示します。
+ノイズを減らすため、Amazon ECS インテグレーションは `drain`、`error`、`fail`、`insufficient memory`、`pending`、`reboot`、`terminate` の単語を含むイベントのみを収集するように自動的に設定されます。以下にイベントの例を示します。
 
-{{< img src="integrations/amazon_ecs/aws_ecs_events.png" alt="AWS ECS イベント" >}}
+{{< img src="integrations/amazon_ecs/aws_ecs_events.png" alt="Amazon ECS イベント" >}}
 
 包含リストを削除し、Datadog Amazon ECS インテグレーションからすべてのイベントを取得できるようにするには、[Datadog のサポートチーム][8]までお問い合わせください。
 
-### サービスのチェック
+### ヘルプ
 {{< get-service-checks-from-git "amazon_ecs" >}}
 
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 

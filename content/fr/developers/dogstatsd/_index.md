@@ -14,9 +14,6 @@ further_reading:
 - link: developers/libraries
   tag: Documentation
   text: Bibliothèques client de Datadog et sa communauté pour DogStatsD et les API
-- link: https://github.com/DataDog/datadog-agent/tree/main/pkg/dogstatsd
-  tag: GitHub
-  text: Code source de DogStatsD
 - link: https://www.datadoghq.com/blog/monitor-azure-app-service-linux/
   tag: Blog
   text: Surveiller vos applications Web Linux sur Azure App Service avec Datadog

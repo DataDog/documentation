@@ -1,7 +1,7 @@
 ---
 aliases:
 - /ja/real_user_monitoring/guide/session-replay-getting-started/
-description: セッションリプレイでユーザーの Web 閲覧体験をキャプチャし、視覚化する方法について説明します。
+description: セッションリプレイでユーザーの Web 閲覧またはモバイルアプリの体験をキャプチャし、視覚的に再生する方法について説明します。
 further_reading:
 - link: https://www.datadoghq.com/blog/session-replay-datadog/
   tag: ブログ
@@ -9,11 +9,14 @@ further_reading:
 - link: https://www.datadoghq.com/blog/reduce-customer-friction-funnel-analysis/
   tag: ブログ
   text: ファネル分析により、主要なユーザーフローを理解し、最適化する
+- link: https://www.datadoghq.com/blog/zendesk-session-replay-integration/
+  tag: ブログ
+  text: Zendesk と Datadog セッションリプレイでユーザーが直面する問題を視覚的に再生する
 - link: /real_user_monitoring/explorer
-  tag: ドキュメント
+  tag: Documentation
   text: RUM データを Explorer で確認
 - link: /integrations/content_security_policy_logs
-  tag: Documentation
+  tag: ドキュメント
   text: Datadog で CSP 違反の検出と集計を行う
 kind: documentation
 title: Session Replay
@@ -21,53 +24,51 @@ title: Session Replay
 
 ## 概要
 
-セッションリプレイは、ユーザーのウェブブラウジング体験をキャプチャして視覚的に再生できるようにすることで、ユーザーエクスペリエンスモニタリングを拡張します。セッションリプレイを RUM パフォーマンスデータと組み合わせると、エラーの識別、再現、解決に有益で、ウェブアプリケーションの使用パターンと設計上の落とし穴に対する洞察をもたらすこともできます。
+セッションリプレイは、ユーザーの Web 閲覧またはモバイルアプリの体験をキャプチャして視覚的に再生できるようにすることで、ユーザーエクスペリエンスモニタリングを拡張します。セッションリプレイを RUM パフォーマンスデータと組み合わせると、エラーの識別、再現、解決に有益で、アプリケーションの使用パターンと設計上の落とし穴に対する洞察をもたらすこともできます。
+
+## ブラウザセッションリプレイ
+
+ブラウザセッションリプレイは、ユーザーの Web 閲覧体験をキャプチャして視覚的に再生できるようにすることで、ユーザーエクスペリエンスモニタリングを拡張します。セッションリプレイを RUM パフォーマンスデータと組み合わせると、エラーの識別、再現、解決に有益で、Web アプリケーションの使用パターンと設計上の落とし穴に対する洞察をもたらすこともできます。
 
 RUM ブラウザ SDK は[オープンソース][1]であり、オープンソースの [rrweb][2] プロジェクトを活用したものです。
 
-## セッションリプレイレコーダー
+[ブラウザ向けセッションリプレイ][3]について詳しくはこちらをご覧ください。
 
-セッションリプレイレコーダーは、RUM ブラウザ SDK の一部です。このレコーダーは、Web ページで発生したイベント (DOM の変更、マウスの移動、クリック、入力イベントなど) を、これらのイベントのタイムスタンプとともに追跡して記録することにより、ブラウザの DOM と CSS のスナップショットを取得します。
+## モバイルセッションリプレイ
 
-その後、Datadog は Web ページを再構築し、記録されたイベントをリプレイビューの適切なタイミングで再適用します。セッションリプレイは、通常の RUM セッションと同じ 30 日間の保持ポリシーに従います。
+モバイルセッションリプレイは、タップ、スワイプ、スクロールなどの各ユーザー操作を視覚的に再生することで、モバイルアプリケーションの可視性を拡大します。Android と iOS の両方のネイティブアプリで利用できます。アプリケーション上のユーザーインタラクションを視覚的に再生することで、クラッシュやエラーの再現が容易になり、UI を改善するためのユーザージャーニーの理解も容易になります。
 
-セッションリプレイレコーダーは、IE11 を除き、RUM ブラウザ SDK でサポートされているすべてのブラウザをサポートしています。詳しくは、[ブラウザサポートテーブル][3]を参照してください。
+[モバイル向けセッションリプレイ][4]について詳しくはこちらをご覧ください。
 
-セッションリプレイのネットワークへの影響を軽減し、セッションリプレイレコーダーがアプリケーションのパフォーマンスに与えるオーバーヘッドを最小限に抑えるため、Datadog はデータを送信する前に圧縮を行います。また、Datadog は CPU に負荷のかかる作業 (圧縮など) のほとんどを専用 Web ワーカーに委ねることで、ブラウザの UI スレッドの負荷を軽減しています。ネットワーク帯域幅への影響は 100kB/分未満と予想されます。
+## データ保持
 
-## セットアップ
+デフォルトでは、セッションリプレイデータは 30 日間保持されます。
 
-セッションリプレイは、RUM ブラウザ SDK で利用できます。セッションリプレイのデータ収集を開始するには、RUM アプリケーションの作成、クライアントトークン生成、RUM ブラウザ SDK の初期化により、[Datadog RUM ブラウザモニタリング][4]をセットアップしてください。
+保持期間を 15 か月に延長するには、個々のセッションリプレイで _Extended Retention_ を有効にします。これらのセッションは非アクティブである必要があります (ユーザーは体験を完了している)。
 
-<div class="alert alert-info">最新バージョンの SDK (v3.6.0 以降) である必要があります</div>
+Extended Retention はセッションリプレイにのみ適用され、関連イベントは含まれません。15 か月は、セッションが収集されたときではなく、Extended Retention が有効になったときに開始します。
 
-## 使用方法
+Extended Retention はいつでも無効にできます。セッションリプレイの保持期間がまだデフォルトの 30 日以内である場合、リプレイは最初の 30 日間のウィンドウの終了時に失効します。30 日を過ぎたセッションリプレイで Extended Retention を無効にすると、リプレイは直ちに失効します。
 
-`init()` を呼び出しても、セッションリプレイは自動的に記録を開始しません。記録を開始するには、`startSessionReplayRecording()` を呼び出します。これは、条件付きで記録を開始する場合に役立ちます。たとえば、認証されたユーザーセッションのみを記録する場合などです。
+{{< img src="real_user_monitoring/session_replay/session-replay-extended-retention.png" alt="Extended Retention を有効にする" style="width:100%;" >}}
 
-```javascript
-window.DD_RUM.init({
-  applicationId: '<DATADOG_APPLICATION_ID>',
-  clientToken: '<DATADOG_CLIENT_TOKEN>',
-  site: '<DATADOG_SITE>',
-  //  service: 'my-web-application',
-  //  env: 'production',
-  //  version: '1.0.0',
-  sessionSampleRate: 100,
-  sessionReplaySampleRate: 100, // 含まれない場合 - デフォルト 100
-  ...
-});
+保持期間の延長でどのようなデータが保持されるかは下の図を参照してください。
 
-if (user.isAuthenticated) {
-    window.DD_RUM.startSessionReplayRecording();
-}
-```
+{{< img src="real_user_monitoring/session_replay/replay-extended-retention.png" alt="保持期間の延長で保持されるデータの図" style="width:100%;" >}}
 
-セッションリプレイの記録を停止するには、`stopSessionReplayRecording()` を呼び出してください。
+## 再生履歴
 
-### セッションリプレイを無効にする
+プレーヤーページに表示される **watched** カウントをクリックすると、指定したセッションリプレイを誰が視聴したかを確認できます。この機能により、記録を共有したい相手がすでに視聴しているかどうかを確認することができます。
 
-セッションの記録を停止するには、`startSessionReplayRecording()` を削除し、`sessionReplaySampleRate` を `0` に設定します。これにより、リプレイを含む [Browser RUM & セッションリプレイプラン][5]のデータ収集が停止します。
+{{< img src="real_user_monitoring/session_replay/session-replay-playback-history.png" alt="セッションの記録を誰が見たかを確認" style="width:100%;" >}}
+
+履歴には、プレーヤーページまたは[ノートブック][5]やサイドパネルのような埋め込みプレーヤーでの再生のみが含まれます。含まれる再生は、[監査証跡][6]イベントも生成します。サムネイルプレビューは履歴に含まれません。
+
+自分の再生履歴を見るには、プレイリストの [My Watch History][7] をご覧ください。
+
+## プレイリスト
+
+セッションリプレイのプレイリストを作成して、気づいたパターンで整理することができます。[セッションリプレイプレイリスト][8]について詳しくはこちらをご覧ください。
 
 ## その他の参考資料
 
@@ -75,6 +76,9 @@ if (user.isAuthenticated) {
 
 [1]: https://github.com/DataDog/browser-sdk
 [2]: https://www.rrweb.io/
-[3]: https://github.com/DataDog/browser-sdk/blob/main/packages/rum/BROWSER_SUPPORT.md
-[4]: /ja/real_user_monitoring/browser/#setup
-[5]: https://www.datadoghq.com/pricing/?product=real-user-monitoring--session-replay#real-user-monitoring--session-replay
+[3]: /ja/real_user_monitoring/session_replay/browser/
+[4]: /ja/real_user_monitoring/session_replay/mobile/
+[5]: https://docs.datadoghq.com/ja/notebooks/
+[6]: https://docs.datadoghq.com/ja/account_management/audit_trail/
+[7]: https://app.datadoghq.com/rum/replay/playlists/my-watch-history
+[8]: /ja/real_user_monitoring/session_replay/playlists

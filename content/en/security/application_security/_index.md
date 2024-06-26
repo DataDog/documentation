@@ -1,6 +1,5 @@
 ---
 title: Application Security Management
-kind: documentation
 description: Monitor threats targeting production system, leveraging the execution context provided by distributed traces.
 aliases:
   - /security_platform/application_security
@@ -10,10 +9,10 @@ further_reading:
   text: "How Application Security Management Works"
 - link: "/security/application_security/threats/"
   tag: "Documentation"
-  text: "Threat Monitoring and Protection"
-- link: "/security/application_security/risk_management/"
+  text: "Threat Management"
+- link: "/security/application_security/software_composition_analysis/"
   tag: "Documentation"
-  text: "Application Vulnerability Management"
+  text: "Software Composition Analysis"
 - link: "/security/application_security/enabling/#compatibility"
   tag: "Documentation"
   text: "Learn more about language and framework compatibility"
@@ -38,11 +37,18 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/threat-modeling-datadog-application-security-management/"
   tag: "Blog"
   text: "Threat modeling with Datadog Application Security Management"
+- link: "https://www.datadoghq.com/blog/aws-waf-datadog/"
+  tag: "Blog"
+  text: "Monitor AWS WAF activity with Datadog"
 ---
+
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Application Security Management is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
 
 {{< img src="/security/application_security/app-sec-landing-page.png" alt="A security signal panel in Datadog, which displays attack flows and flame graphs" width="75%">}}
 
-Datadog Application Security Management (ASM) provides protection against application-level attacks that aim to exploit code-level vulnerabilities, such as Server-Side-Request-Forgery (SSRF), SQL injection, Log4Shell, and Reflected Cross-Site-Scripting (XSS). You can monitor and protect apps hosted directly on a server, Docker, Kubernetes, AWS ECS, and (for supported languages) AWS Fargate.
+Datadog Application Security Management (ASM) provides protection against application-level attacks that aim to exploit code-level vulnerabilities, such as Server-Side-Request-Forgery (SSRF), SQL injection, Log4Shell, and Reflected Cross-Site-Scripting (XSS). You can monitor and protect apps hosted directly on a server, Docker, Kubernetes, Amazon ECS, and (for supported languages) AWS Fargate.
 
 ASM leverages Datadog [tracing libraries][1], and the [Datadog Agent][2] to identify services exposed to application attacks. Once configured, ASM leverages in-app detection rules to detect and protect against threats in your application environment and trigger security signals whenever an attack impacts your production system, or a vulnerability is triggered from the code.
 
@@ -52,7 +58,7 @@ Once a security signal is triggered, quickly pivot to investigate and protect in
 
 With ASM, you can cut through the noise of continuous trace data to focus on securing and protecting your environment.
 
-Until you fully remediate the potential vulnerabilities in your application code, ASM enables you to slow down attackers by blocking their IPs temporarily or permanently, with a single click. One-click blocking is in beta.
+Until you fully remediate the potential vulnerabilities in your application code, ASM enables you to slow down attackers by blocking their IPs temporarily or permanently, with a single click.
 
 ## Understanding how application security is implemented in Datadog
 
@@ -70,7 +76,7 @@ In the [Security Signals Explorer][6], click on any security signal to see what 
 
 ## Investigate risk introduced in upstream open source libraries and dependencies
 
-[Application Vulnerability Management][8] shows you when your services are at risk because they use or have dependencies on open source libraries that have known vulnerabilities. Investigate vulnerability findings and secure your software by following remediation advice or researching the cause of the vulnerability.
+[Software Composition Analysis (SCA)][8] shows you when your services are at risk because they use or have dependencies on open source libraries that have known vulnerabilities. Investigate vulnerability findings and secure your software by following remediation advice or researching the cause of the vulnerability.
 
 ## Next steps
 
@@ -79,8 +85,8 @@ In the [Security Signals Explorer][6], click on any security signal to see what 
 [1]: /tracing/
 [2]: /agent/
 [3]: /security/application_security/how-appsec-works/
-[4]: /security/default_rules/#cat-application-security
+[4]: /security/default_rules/?category=cat-application-security
 [5]: /security/application_security/enabling/
-[6]: /security/explorer/
+[6]: https://app.datadoghq.com/security
 [7]: https://dashcon.io/appsec
-[8]: /security/application_security/risk_management/
+[8]: /security/application_security/software_composition_analysis/

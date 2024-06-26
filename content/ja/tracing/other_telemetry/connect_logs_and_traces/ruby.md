@@ -12,7 +12,7 @@ further_reading:
   tag: ガイド
   text: クロスプロダクト相関で容易にトラブルシューティング。
 kind: documentation
-title: Ruby ログとトレースの接続
+title: Ruby ログとトレースの相関付け
 type: multi-code-lang
 ---
 
@@ -24,7 +24,7 @@ type: multi-code-lang
 
 #### 自動挿入
 
-デフォルトのロガー (`ActiveSupport::TaggedLogging`)、`lograge` または `semantic_logger` を使用している Rails アプリケーションでは、トレース相関挿入は自動的に構成されます。
+デフォルトのロガー (`ActiveSupport::TaggedLogging`)、`lograge` または `semantic_logger` を使用している Rails アプリケーションでは、トレース ID のインジェクションは自動的に構成されます。関連するログをトレースと接続するには、[トレースリマッパー][1]を追加する必要があります。
 
 #### 手動挿入
 
@@ -68,6 +68,8 @@ logger.warn('これはトレースされないオペレーションです。')
 Datadog::Tracing.trace('my.operation') { logger.warn('これはトレースされるオペレーションです。') }
 # [2019-01-16 18:38:41 +0000][my_app][WARN][dd.env=production dd.service=billing-api dd.version=2.5.17 dd.trace_id=8545847825299552251 dd.span_id=3711755234730770098] これはトレースされるオペレーションです。
 ```
-
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /ja/logs/log_configuration/processors/?tab=ui#trace-remapper

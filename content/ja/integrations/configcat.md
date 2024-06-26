@@ -3,6 +3,7 @@ app_id: configcat
 app_uuid: 22b2d616-b246-457e-8883-a79bee8c467d
 assets:
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: true
@@ -12,6 +13,7 @@ assets:
       prefix: configcat.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10094
     source_type_name: ConfigCat
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -20,7 +22,7 @@ author:
   support_email: developer@configcat.com
 categories:
 - 構成 & デプロイ
-- notification
+- notifications
 - プロビジョニング
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/configcat/README.md
@@ -34,7 +36,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: configcat
-oauth: {}
 public_title: ConfigCat
 short_description: Datadog により追跡する設定変更イベント
 supported_os:
@@ -45,7 +46,7 @@ tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Category::Configuration & Deployment
-  - Category::Notification
+  - Category::Notifications
   - Category::Provisioning
   - Supported OS::Linux
   - Supported OS::Windows
@@ -58,6 +59,7 @@ tile:
   title: ConfigCat
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -69,7 +71,7 @@ tile:
 *例:*
 ![Datadog イベント][4]
 
-## セットアップ
+## 計画と使用
 
 1. [Datadog サブスクリプション][5]を入手します。
 2. [Datadog API キー][6]を取得します。
@@ -84,13 +86,13 @@ tile:
 1. ConfigCat ダッシュボードで [integrations タブ][8]を開きます。
 2. Datadog の DISCONNECT ボタンをクリックし、Datadog API キーを設定します。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 
 ConfigCat インテグレーションには、メトリクスは含まれません。
 
-### イベント
+### ヘルプ
 
 収集されたすべての ConfigCat 関連のイベントは、`source:configcat` プロパティと一緒に Datadog イベントストリームに表示され、製品、コンフィギュレーション、環境の各名前でタグ付けされます。
 
@@ -98,11 +100,11 @@ ConfigCat インテグレーションには、メトリクスは含まれませ�
 
 ![フィルタリング][9]
 
-### サービスのチェック
+### ヘルプ
 
 ConfigCat インテグレーションには、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 ヘルプが必要な場合は [ConfigCat ドキュメント][10]を確認するか、[ConfigCat サポート][11]にお問い合わせください。
 

@@ -62,10 +62,7 @@
 
       <div role="tabpanel" class="tab-pane js-tab-example" id="example">
         <div class="code-snippet-wrapper">
-          <div class="code-snippet">
-            <div class="code-button-wrapper position-absolute">
-              <button class="btn text-primary js-copy-button">{{ i18n "copy" }}</button>
-            </div>
+          <div class="code-snippet append-copy-btn">
             {{ print $json | safeHTML }}
           </div>
         </div>

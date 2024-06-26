@@ -29,6 +29,7 @@ To instrument your application, begin by adding the following key-value pairs un
 - `DD_SITE` is the Datadog site [parameter][2]. Your site is {{< region-param key="dd_site" code="true" >}}. This value defaults to `datadoghq.com`.
 - `DD_SERVICE` is the service name used for this program. Defaults to the name field value in `package.json`.
 - `DD_START_APP` is the command used to start your application. For example, `node ./bin/www` (unnecessary for applications running in Tomcat).
+- `DD_PROFILING_ENABLED` (optional) Enables the [Continuous Profiler][15], specific to .NET.
 
 ### Identifying your startup command
 
@@ -47,6 +48,7 @@ Set these values in the `DD_START_APP` environment variable. Examples below are 
 [7]: https://learn.microsoft.com/en-us/troubleshoot/azure/app-service/faqs-app-service-linux#what-are-the-expected-values-for-the-startup-file-section-when-i-configure-the-runtime-stack-
 [12]: https://learn.microsoft.com/en-us/azure/app-service/configure-language-nodejs?pivots=platform-linux#configure-nodejs-server
 [13]: https://learn.microsoft.com/en-us/azure/app-service/configure-language-php?pivots=platform-linux#customize-start-up
+[15]: /profiler/enabling/dotnet/?tab=azureappservice
 
 
 **Note**: The application restarts when new settings are saved.
@@ -58,7 +60,7 @@ Set these values in the `DD_START_APP` environment variable. Examples below are 
 Go to **General settings** and add the following to the **Startup Command** field:
 
 ```
-curl -s https://raw.githubusercontent.com/DataDog/datadog-aas-linux/v1.4.0/datadog_wrapper | bash
+curl -s https://raw.githubusercontent.com/DataDog/datadog-aas-linux/v1.10.6/datadog_wrapper | bash
 ```
 
 {{< img src="serverless/azure_app_service/startup-command-1.jpeg" alt="Azure App Service Configuration: the Stack settings, under the Configuration section of Settings in the Azure UI. Underneath the stack, major version, and minor version fields is a 'Startup Command' field that is populated by the above curl command." style="width:100%;" >}}
@@ -91,6 +93,10 @@ To configure your application to submit metrics, follow the appropriate steps fo
 - [.NET][6]
 - [PHP][10]
 - [Python][11]
+
+## Deployment
+
+{{% aas-workflow-linux %}}
 
 ## Troubleshooting
 

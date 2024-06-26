@@ -5,6 +5,7 @@ assets:
   dashboards:
     Cyral Overview: assets/dashboards/cyral_overview.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -15,6 +16,7 @@ assets:
       prefix: cyral.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10115
     source_type_name: Cyral
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -22,7 +24,7 @@ author:
   sales_email: product@cyral.com
   support_email: product@cyral.com
 categories:
-- モニタリング
+- data stores
 - security
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/cyral/README.md
@@ -33,10 +35,9 @@ integration_id: cyral
 integration_title: Cyral
 integration_version: 0.0.1
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: cyral
-oauth: {}
 public_title: Cyral
 short_description: Cyral インスタンスモニタリング MySQL からランタイムメトリクスを収集。
 supported_os:
@@ -44,9 +45,9 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Category::Monitoring
+  - Category::Data Stores
   - Category::Security
+  - Supported OS::Linux
   configuration: README.md#Setup
   description: Cyral インスタンスモニタリング MySQL からランタイムメトリクスを収集。
   media: []
@@ -55,17 +56,18 @@ tile:
   title: Cyral
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
 
 このチェックは、Datadog Agent を通じて [Cyral][1] MySQL サイドカーを監視します。
 
-## セットアップ
+## 計画と使用
 
 Cyral チェックは [Datadog Agent][2] パッケージに含まれていないため、お客様自身でインストールする必要があります。
 
-### インストール
+### インフラストラクチャーリスト
 
 Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Cyral チェックをホストにインストールします。Docker Agent または 上記バージョン以前の Agent でインストールする場合は、[コミュニティインテグレーションの使用][3]をご参照ください。
 
@@ -77,7 +79,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Cyral チェ�
 
 2. コアの[インテグレーション][4]と同様にインテグレーションを構成します。
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 1. cyral のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `cyral.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル cyral.d/conf.yaml][5] を参照してください。
 
@@ -95,21 +97,21 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Cyral チェ�
 
 [Agent の status サブコマンドを実行][7]し、Checks セクションで `cyral` を探します。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "cyral" >}}
 
 
-### サービスのチェック
+### ヘルプ
 
 Cyral には、サービスのチェック機能は含まれません。
 
-### イベント
+### ヘルプ
 
 Cyral には、イベントは含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 ### Agent が接続できない
 
@@ -125,7 +127,7 @@ Cyral には、イベントは含まれません。
 ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
 
 [1]: https://cyral.com/
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/
 [4]: https://docs.datadoghq.com/ja/getting_started/integrations/
 [5]: https://github.com/DataDog/integrations-extras/blob/master/cyral/datadog_checks/cyral/data/conf.yaml.example

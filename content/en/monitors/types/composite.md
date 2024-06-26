@@ -82,7 +82,7 @@ For detailed instructions on the advanced alert options (auto resolve, etc.), se
 
 ### Notifications
 
-For instructions on using template variables from a composite monitor's constituent monitors in your notifications, see [composite monitor variables][4]. For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][3] page.
+For instructions on using template variables from a composite monitor's constituent monitors in your notifications, see [composite monitor variables][4]. For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][3] page.
 
 ### API
 
@@ -125,19 +125,21 @@ Consider a composite monitor that uses two individual monitors: `A` and `B`. The
 | Monitor A   | Monitor B   | Condition   | Notify No Data   | Composite status | Alert triggered? |
 |-------------|-------------|-------------|------------------|------------------|------------------|
 | Alert (T)   | Warn (T)    | `A && B`    |                  | Warn (T)         | {{< X >}}        |
-| Alert (T)   | Warn (T)    | `A \|\| B`    |                  | Alert (T)        | {{< X >}}        |
+| Alert (T)   | Warn (T)    | `A \|\| B`  |                  | Alert (T)        | {{< X >}}        |
+| Alert (T)   | Ok (F)      | `A && B`    |                  | OK (F)           |                  |
+| Alert (T)   | Ok (F)      | `A \|\| B`  |                  | Alert (T)        | {{< X >}}        |
 | Warn (T)    | Ok (F)      | `A && B`    |                  | OK (F)           |                  |
-| Warn (T)    | Ok (F)      | `A \|\| B`    |                  | Warn (T)         | {{< X >}}        |
+| Warn (T)    | Ok (F)      | `A \|\| B`  |                  | Warn (T)         | {{< X >}}        |
 | No Data (T) | Warn (T)    | `A && B`    | True             | No Data (T)      | {{< X >}}        |
-| No Data (T) | Warn (T)    | `A \|\| B`    | True             | Warn (T)         | {{< X >}}        |
+| No Data (T) | Warn (T)    | `A \|\| B`  | True             | Warn (T)         | {{< X >}}        |
 | No Data (T) | Warn (T)    | `A && B`    | False            | Last known       |                  |
-| No Data (T) | Warn (T)    | `A \|\| B`    | False            | Warn (T)         | {{< X >}}        |
+| No Data (T) | Warn (T)    | `A \|\| B`  | False            | Warn (T)         | {{< X >}}        |
 | No Data (T) | OK (F)      | `A && B`    | False            | OK (F)           |                  |
-| No Data (T) | OK (F)      | `A \|\| B`    | False            | Last known       |                  |
+| No Data (T) | OK (F)      | `A \|\| B`  | False            | Last known       |                  |
 | No Data (T) | OK (F)      | `A && B`    | True             | OK (F)           |                  |
-| No Data (T) | OK (F)      | `A \|\| B`    | True             | No Data (T)      | {{< X >}}        |
+| No Data (T) | OK (F)      | `A \|\| B`  | True             | No Data (T)      | {{< X >}}        |
 | No Data (T) | No Data (T) | `A && B`    | True             | No Data (T)      | {{< X >}}        |
-| No Data (T) | No Data (T) | `A \|\| B`    | True             | No Data (T)      | {{< X >}}        |
+| No Data (T) | No Data (T) | `A \|\| B`  | True             | No Data (T)      | {{< X >}}        |
 
 **Note**: When the composite has `notify_no_data` to false, and the result of the evaluation of the sub-monitors should end up on a `No Data` status for the composite, the composite uses the last known state instead.
 

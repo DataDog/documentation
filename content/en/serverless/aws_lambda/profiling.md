@@ -25,7 +25,10 @@ To enable profiling:
 1. Ensure you have [installed the associated tracing library][2] in your Lambda function.
 2. Set the `DD_PROFILING_ENABLED` environment variable to `true`.
 
+Data is available after a minimum of 60 execution seconds of the Lambda function.
+
 The profiler works by spawning a thread that periodically wakes up and takes a snapshot of the CPU and heap of running code. This includes the profiler itself. If you want the profiler to ignore itself, set `DD_PROFILING_IGNORE_PROFILER` to `true`.
+
 
 ### Support
 
@@ -33,8 +36,8 @@ Depending on your runtime, this feature requires the following tracer and layer 
 
 | Runtime | Minimum tracer version | Minimum layer version |
 | ------- | ---------------------- | --------------------- |
-| Python | 4.62.0 | 62 |
-| Node.js | 6.87.0 | 87 |
+| Python | 1.4.0 | 62 |
+| Node.js | 2.22.1, 3.9.0 | 87 |
 
 ## Further Reading
 

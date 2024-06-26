@@ -1,6 +1,5 @@
 ---
 title: Basic Agent Usage for Source Installation
-kind: documentation
 platform: Source
 aliases:
     - /guides/basic_agent_usage/source/
@@ -17,9 +16,11 @@ further_reading:
 - link: "/agent/basic_agent_usage/#agent-architecture"
   tag: "Documentation"
   text: "Find out more about the Agent's architecture"
-- link: "/agent/guide/network#configure-ports"
+- link: "/agent/configuration/network#configure-ports"
   tag: "Documentation"
   text: "Configure inbound ports"
+algolia:
+  tags: ['uninstall', 'uninstalling']
 ---
 ## Overview
 

@@ -16,13 +16,11 @@ further_reading:
   text: "Limit data collection to a subset of containers only"
 ---
 
-The Agent can create and assign tags to all metrics, traces, and logs emitted by a Pod, based on its labels or annotations.
-
-If you are running the Agent as a binary on a host, configure your tag extractions with the [Agent](?tab=agent) tab instructions. If you are running the Agent as a container in your Kubernetes cluster, configure your tag extraction with the [Containerized Agent](?tab=containerizedagent) tab instructions.
+The Datadog Agent can automatically assign tags to metrics, traces, and logs emitted by a pod (or an individual container within a pod) based on labels or annotations.
 
 ## Out-of-the-box tags
 
-The Agent can autodiscover and attach tags to all data emitted by the entire pods or an individual container within this pod. The list of tags attached automatically depends on the agent [cardinality configuration][1].
+The list of automatically-assigned tags depends on the Agent's [cardinality configuration][1].
 
 <div style="overflow-x: auto;">
 
@@ -98,19 +96,84 @@ annotations:
   ad.datadoghq.com/<CONTAINER_IDENTIFIER>.tags: '{"<TAG_KEY>": "<TAG_VALUE>","<TAG_KEY_1>": "<TAG_VALUE_1>"}'
 ```
 
-Starting with Agent v7.17+, the Agent can Autodiscover tags from Docker labels. This process allows the Agent to associate custom tags to all data emitted by a container, without [modifying the Agent `datadog.yaml` file][3].
+Starting with Agent v7.17+, the Agent can Autodiscover tags from Docker labels. This process allows the Agent to associate custom tags to all data emitted by a container, without modifying the Agent configuration.
 
 ```yaml
 com.datadoghq.ad.tags: '["<TAG_KEY>:TAG_VALUE", "<TAG_KEY_1>:<TAG_VALUE_1>"]'
 ```
 
-## Node labels as tags
+## Tag extraction
+### Node labels as tags
 
-Starting with Agent v6.0+, the Agent can collect labels for a given node and use them as tags to attach to all metrics emitted by all pods on this node:
+Starting with Agent v6.0+, the Agent can collect labels for a given node and use them as tags to attach to all metrics, traces, and logs emitted associated with this `host` in Datadog:
 
 {{< tabs >}}
-{{% tab "Containerized Agent" %}}
+{{% tab "Datadog Operator" %}}
+To extract a given node label `<NODE_LABEL>` and transform it as a tag key `<TAG_KEY>` within Datadog, add the following configuration to your Operator's `DatadogAgent` configuration in `datadog-agent.yaml`:
 
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    nodeLabelsAsTags:
+      <NODE_LABEL>: <TAG_KEY>
+```
+
+For example, you could set up:
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    nodeLabelsAsTags:
+      kubernetes.io/arch: arch
+```
+
+For Agent v7.24.0+, use the following environment variable configuration to add all node labels as tags to your metrics. In this example, the tags' names are prefixed by `<PREFIX>_`:
+
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    nodeLabelsAsTags:
+      "*": <PREFIX>_%%label%%
+```
+{{% /tab %}}
+
+{{% tab "Helm" %}}
+To extract a given node label `<NODE_LABEL>` and transform it as a tag key `<TAG_KEY>` within Datadog, add the following configuration to your Helm `datadog-values.yaml` file:
+
+```yaml
+datadog:
+  nodeLabelsAsTags:
+    <NODE_LABEL>: <TAG_KEY>
+```
+
+For example, you could set up:
+```yaml
+datadog:
+  nodeLabelsAsTags:
+    kubernetes.io/arch: arch
+```
+
+For Agent v7.24.0+, use the following environment variable configuration to add all node labels as tags to your metrics. In this example, the tags' names are prefixed by `<PREFIX>_`:
+
+```yaml
+datadog:
+  nodeLabelsAsTags:
+    "*": <PREFIX>_%%label%%
+```
+{{% /tab %}}
+
+{{% tab "Manual (DaemonSet)" %}}
 To extract a given node label `<NODE_LABEL>` and transform it as a tag key `<TAG_KEY>` within Datadog, add the following environment variable to the Datadog Agent:
 
 ```bash
@@ -120,46 +183,90 @@ DD_KUBERNETES_NODE_LABELS_AS_TAGS='{"<NODE_LABEL>": "<TAG_KEY>"}'
 For example, you could set up:
 
 ```bash
-DD_KUBERNETES_NODE_LABELS_AS_TAGS='{"app":"kube_app"}'
+DD_KUBERNETES_NODE_LABELS_AS_TAGS='{"kubernetes.io/arch":"arch"}'
 ```
 
-For Agent v7.24.0+, use the following environment variable configuration to add all node labels as tags to your metrics. In this example, the tags names are prefixed by `<PREFIX>_`:
+For Agent v7.24.0+, use the following environment variable configuration to add all node labels as tags to your metrics. In this example, the tags' names are prefixed by `<PREFIX>_`:
 
 ```bash
 DD_KUBERNETES_NODE_LABELS_AS_TAGS='{"*":"<PREFIX>_%%label%%"}'
 ```
-
-**Note**: Custom metrics may impact billing. See the [custom metrics billing page][1] for more information.
-
-[1]: /account_management/billing/custom_metrics
-{{% /tab %}}
-{{% tab "Agent" %}}
-
-To extract a given node label `<NODE_LABEL>` and transform it as a tag key `<TAG_KEY>` within Datadog, add the following configuration block in the [Agent `datadog.yaml` configuration file][1]:
-
-```yaml
-kubernetes_node_labels_as_tags:
-  <NODE_LABEL>: <TAG_KEY>
-```
-
-For example, you could set up:
-
-```yaml
-kubernetes_node_labels_as_tags:
-  app: kube_app
-```
-
-[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}
 {{< /tabs >}}
 
-## Pod labels as tags
+**Note**: Custom metrics may impact billing. See the [custom metrics billing page][3] for more information.
 
-Starting with Agent v6.0+, the Agent can collect labels for a given pod and use them as tags to attach to all metrics emitted by this pod:
+### Pod labels as tags
+
+Starting with Agent v6.0+, the Agent can collect labels for a given pod and use them as tags to attach to all metrics, traces, and logs emitted by this pod:
 
 {{< tabs >}}
-{{% tab "Containerized Agent" %}}
+{{% tab "Datadog Operator" %}}
+To extract a given pod label `<POD_LABEL>` and transform it as a tag key `<TAG_KEY>` within Datadog, add the following configuration to your Operator's `DatadogAgent` configuration in `datadog-agent.yaml`:
 
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    podLabelsAsTags:
+      <POD_LABEL>: <TAG_KEY>
+```
+
+For example, you could set up:
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    podLabelsAsTags:
+      app: kube_app
+```
+
+For Agent v7.24.0+, use the following environment variable configuration to add all pod labels as tags to your metrics. In this example, the tags' names are prefixed by `<PREFIX>_`:
+
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    podLabelsAsTags:
+      "*": <PREFIX>_%%label%%
+```
+{{% /tab %}}
+
+{{% tab "Helm" %}}
+To extract a given pod label `<POD_LABEL>` and transform it as a tag key `<TAG_KEY>` within Datadog, add the following configuration to your Helm `datadog-values.yaml` file:
+
+```yaml
+datadog:
+  podLabelsAsTags:
+    <POD_LABEL>: <TAG_KEY>
+```
+
+For example, you could set up:
+```yaml
+datadog:
+  podLabelsAsTags:
+    app: kube_app
+```
+
+For Agent v7.24.0+, use the following environment variable configuration to add all pod labels as tags to your metrics. In this example, the tags' names are prefixed by `<PREFIX>_`:
+
+```yaml
+datadog:
+  podLabelsAsTags:
+    "*": <PREFIX>_%%label%%
+```
+{{% /tab %}}
+
+{{% tab "Manual (DaemonSet)" %}}
 To extract a given pod label `<POD_LABEL>` and transform it as a tag key `<TAG_KEY>` within Datadog, add the following environment variable to the Datadog Agent:
 
 ```bash
@@ -177,48 +284,83 @@ For Agent v6.8.0+, use the following environment variable configuration to add a
 ```bash
 DD_KUBERNETES_POD_LABELS_AS_TAGS='{"*":"<PREFIX>_%%label%%"}'
 ```
-
-**Note**: Custom metrics may impact billing. See the [custom metrics billing page][1] for more information.
-
-[1]: /account_management/billing/custom_metrics
-{{% /tab %}}
-{{% tab "Agent" %}}
-
-To extract a given pod label `<POD_LABEL>` and transform it as a Tag Key `<TAG_KEY>` within Datadog, add the following configuration block in the [Agent `datadog.yaml` configuration file][1]:
-
-```yaml
-kubernetes_pod_labels_as_tags:
-  <POD_LABEL>: <TAG_KEY>
-```
-
-For example, you could set up:
-
-```yaml
-kubernetes_pod_labels_as_tags:
-  app: kube_app
-```
-
-For Agent v6.8.0+, use the following environment variable configuration to add all pod labels as tags to your metrics. In this example, the tag names are prefixed by `<PREFIX>_`:
-
-```yaml
-kubernetes_pod_labels_as_tags:
-  *: <PREFIX>_%%label%%
-```
-
-**Note**: Custom metrics may impact billing. See the [custom metrics billing page][3] for more information.
-
-[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}
 {{< /tabs >}}
 
-## Pod annotations as tags
+**Note**: Custom metrics may impact billing. See the [custom metrics billing page][3] for more information.
 
-Starting with Agent v6.0+, the Agent can collect annotations for a given pod and use them as tags to attach to all metrics emitted by this pod:
+### Pod annotations as tags
+
+Starting with Agent v6.0+, the Agent can collect annotations for a given pod and use them as tags to attach to all metrics, traces, and logs emitted by this pod:
 
 {{< tabs >}}
-{{% tab "Containerized Agent" %}}
+{{% tab "Datadog Operator" %}}
+To extract a given pod annotation `<POD_ANNOTATION>` and transform it as a tag key `<TAG_KEY>` within Datadog, add the following configuration to your Operator's `DatadogAgent` configuration in `datadog-agent.yaml`
 
-To extract a given pod label `<POD_ANNOTATION>` and transform it as a tag key `<TAG_KEY>` within Datadog, add the following environment variable to the Datadog Agent:
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    podAnnotationsAsTags:
+      <POD_ANNOTATION>: <TAG_KEY>
+```
+
+For example, you could set up:
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    podAnnotationsAsTags:
+      app: kube_app
+```
+
+For Agent v7.24.0+, use the following environment variable configuration to add all pod annotations as tags to your metrics. In this example, the tags' names are prefixed by `<PREFIX>_`:
+
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    podAnnotationsAsTags:
+      "*": <PREFIX>_%%label%%
+```
+{{% /tab %}}
+
+{{% tab "Helm" %}}
+To extract a given pod annotation `<POD_ANNOTATION>` and transform it as a tag key `<TAG_KEY>` within Datadog, add the following configuration to your Helm `datadog-values.yaml` file:
+
+```yaml
+datadog:
+  podAnnotationsAsTags:
+    <POD_ANNOTATION>: <TAG_KEY>
+```
+
+For example, you could set up:
+```yaml
+datadog:
+  podAnnotationsAsTags:
+    app: kube_app
+```
+
+For Agent v7.24.0+, use the following environment variable configuration to add all pod annotation as tags to your metrics. In this example, the tags' names are prefixed by `<PREFIX>_`:
+
+```yaml
+datadog:
+  podAnnotationsAsTags:
+    "*": <PREFIX>_%%label%%
+```
+{{% /tab %}}
+
+{{% tab "Manual (DaemonSet)" %}}
+To extract a given pod annotation `<POD_ANNOTATION>` and transform it as a tag key `<TAG_KEY>` within Datadog, add the following environment variable to the Datadog Agent:
 
 ```bash
 DD_KUBERNETES_POD_ANNOTATIONS_AS_TAGS='{"<POD_ANNOTATION>": "<TAG_KEY>"}'
@@ -235,38 +377,82 @@ For Agent v7.24.0+, use the following environment variable configuration to add 
 ```bash
 DD_KUBERNETES_POD_ANNOTATIONS_AS_TAGS='{"*":"<PREFIX>_%%annotation%%"}'
 ```
-
-**Note**: Custom metrics may impact billing. See the [custom metrics billing page][1] for more information.
-
-[1]: /account_management/billing/custom_metrics
-{{% /tab %}}
-{{% tab "Agent" %}}
-
-To extract a given pod annotation `<POD_ANNOTATION>` and transform it as a tag key `<TAG_KEY>` within Datadog, add the following configuration block in the [Agent `datadog.yaml` configuration file][1]:
-
-```yaml
-kubernetes_pod_annotations_as_tags:
-  <POD_ANNOTATION>: <TAG_KEY>
-```
-
-For example, you could set up:
-
-```yaml
-kubernetes_pod_annotations_as_tags:
-  app: kube_app
-```
-
-[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}
 {{< /tabs >}}
 
-## Namespace labels as tags
+**Note**: Custom metrics may impact billing. See the [custom metrics billing page][3] for more information.
 
-Starting with Agent v7.27+, the Agent can collect labels for a given namespace and use them as tags to attach to all metrics emitted by all pods in this namespace:
+### Namespace labels as tags
+
+Starting with Agent v7.27+, the Agent can collect labels for a given namespace and use them as tags to attach to all metrics, traces, and logs emitted by all pods in this namespace:
 
 {{< tabs >}}
-{{% tab "Containerized Agent" %}}
+{{% tab "Datadog Operator" %}}
+To extract a given namespace label `<NAMESPACE_LABEL>` and transform it as a tag key `<TAG_KEY>` within Datadog, add the following configuration to your Operator's `DatadogAgent` configuration in `datadog-agent.yaml`:
 
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    namespaceLabelsAsTags:
+      <NAMESPACE_LABEL>: <TAG_KEY>
+```
+
+For example, you could set up:
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    namespaceLabelsAsTags:
+      app: kube_app
+```
+
+For Agent v7.24.0+, use the following environment variable configuration to add all namespace labels as tags to your metrics. In this example, the tags' names are prefixed by `<PREFIX>_`:
+
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    namespaceLabelsAsTags:
+      "*": <PREFIX>_%%label%%
+```
+{{% /tab %}}
+
+{{% tab "Helm" %}}
+To extract a given namespace label `<NAMESPACE_LABEL>` and transform it as a tag key `<TAG_KEY>` within Datadog, add the following configuration to your Helm `datadog-values.yaml` file:
+
+```yaml
+datadog:
+  namespaceLabelsAsTags:
+    <NAMESPACE_LABEL>: <TAG_KEY>
+```
+
+For example, you could set up:
+```yaml
+datadog:
+  namespaceLabelsAsTags:
+    app: kube_app
+```
+
+For Agent v7.24.0+, use the following environment variable configuration to add all namespace labels as tags to your metrics. In this example, the tags' names are prefixed by `<PREFIX>_`:
+
+```yaml
+datadog:
+  namespaceLabelsAsTags:
+    "*": <PREFIX>_%%label%%
+```
+{{% /tab %}}
+
+{{% tab "Manual (DaemonSet)" %}}
 To extract a given namespace label `<NAMESPACE_LABEL>` and transform it as a tag key `<TAG_KEY>` within Datadog, add the following environment variable to the Datadog Agent:
 
 ```bash
@@ -284,38 +470,70 @@ Use the following environment variable configuration to add all namespace labels
 ```bash
 DD_KUBERNETES_NAMESPACE_LABELS_AS_TAGS='{"*":"<PREFIX>_%%label%%"}'
 ```
-
-**Note**: Custom metrics may impact billing. See the [custom metrics billing page][1] for more information.
-
-[1]: /account_management/billing/custom_metrics
-{{% /tab %}}
-{{% tab "Agent" %}}
-
-To extract a given namespace label `<NAMESPACE_LABEL>` and transform it as a tag key `<TAG_KEY>` within Datadog, add the following configuration block in the [Agent `datadog.yaml` configuration file][1]:
-
-```yaml
-kubernetes_namespace_labels_as_tags:
-  <NAMESPACE_LABEL>: <TAG_KEY>
-```
-
-For example, you could set up:
-
-```yaml
-kubernetes_namespace_labels_as_tags:
-  app: kube_app
-```
-
-[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}
 {{< /tabs >}}
 
-## Container environment variables as tags
+**Note**: Custom metrics may impact billing. See the [custom metrics billing page][3] for more information.
 
-Starting with Agent v7.32+, the Agent can collect container environment variables and use them as tags to attach to all metrics corresponding to the container. Both `docker` and `containerd` containers are supported:
+### Container environment variables as tags
+
+Starting with Agent v7.32+, the Agent can collect container environment variables and use them as tags to attach to all metrics, traces, and logs corresponding to the container. Both `docker` and `containerd` containers are supported:
 
 {{< tabs >}}
-{{% tab "Containerized Agent" %}}
+{{% tab "Datadog Operator" %}}
+To extract a given environment variable `<ENV_VAR>` and transform it as a tag key `<TAG_KEY>` within Datadog, add the following configuration to your Operator's `DatadogAgent` configuration in `datadog-agent.yaml`:
 
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  #(...)
+  override:
+    nodeAgent:
+      env:
+        - name: DD_CONTAINER_ENV_AS_TAGS
+          value: '{"<ENV_VAR>": "<TAG_KEY>"}'
+```
+
+For example, you could set up:
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  #(...)
+  override:
+    nodeAgent:
+      env:
+        - name: DD_CONTAINER_ENV_AS_TAGS
+          value: '{"app":"kube_app"}'
+```
+
+{{% /tab %}}
+
+{{% tab "Helm" %}}
+To extract a given environment variable `<ENV_VAR>` and transform it as a tag key `<TAG_KEY>` within Datadog, add the following configuration to your Helm `datadog-values.yaml` file:
+
+```yaml
+datadog:
+  env:
+    - name: DD_CONTAINER_ENV_AS_TAGS
+      value: '{"<ENV_VAR>": "<TAG_KEY>"}'
+```
+
+For example, you could set up:
+```yaml
+datadog:
+  env:
+    - name: DD_CONTAINER_ENV_AS_TAGS
+      value: '{"app":"kube_app"}'
+```
+{{% /tab %}}
+
+{{% tab "Manual (DaemonSet)" %}}
 To extract a given environment variable `<ENV_VAR>` and transform it as a tag key `<TAG_KEY>` within Datadog, add the following environment variable to the Datadog Agent:
 
 ```bash
@@ -328,38 +546,72 @@ For example:
 DD_CONTAINER_ENV_AS_TAGS='{"app":"kube_app"}'
 ```
 
-**Note**: Custom metrics may impact billing. See [Custom Metrics Billing][1] for more details.
-
-[1]: /account_management/billing/custom_metrics
-{{% /tab %}}
-{{% tab "Agent" %}}
-
-To extract a given environment variable `<ENV_VAR>` and transform it as a tag key `<TAG_KEY>` within Datadog, add the following configuration block in the [Agent `datadog.yaml` configuration file][1]:
-
-```yaml
-container_env_as_tags:
-  <ENV_VAR>: <TAG_KEY>
-```
-
-For example:
-
-```yaml
-container_env_as_tags:
-  app: kube_app
-```
-
-[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}
 {{< /tabs >}}
 
-## Container labels as tags
+**Note**: Custom metrics may impact billing. See [Custom Metrics Billing][3] for more details.
 
-Starting with Agent v7.33+, the Agent can collect container labels and use them as tags. The agent attaches the tags to all metrics associated with the container.
+### Container labels as tags
+
+Starting with Agent v7.33+, the Agent can collect container labels and use them as tags. The agent attaches the tags to all metrics, traces, and logs associated with the container.
+
 The Agent can generate tags from container labels for both `docker` and `containerd` containers. In the case of `containerd`, the minimum supported version is v1.5.6, because previous releases do not propagate labels correctly.
 
 {{< tabs >}}
-{{% tab "Containerized Agent" %}}
+{{% tab "Datadog Operator" %}}
+To extract a given container label `<CONTAINER_LABEL>` and transform it as a tag key `<TAG_KEY>` within Datadog, add the following configuration to your Operator's `DatadogAgent` configuration in `datadog-agent.yaml`:
 
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  #(...)
+  override:
+    nodeAgent:
+      env:
+        - name: DD_CONTAINER_LABELS_AS_TAGS
+          value: '{"<CONTAINER_LABEL>": "<TAG_KEY>"}'
+```
+
+For example, you could set up:
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  #(...)
+  override:
+    nodeAgent:
+      env:
+        - name: DD_CONTAINER_LABELS_AS_TAGS
+          value: '{"app":"kube_app"}'
+```
+
+{{% /tab %}}
+
+{{% tab "Helm" %}}
+To extract a given container label `<CONTAINER_LABEL>` and transform it as a tag key `<TAG_KEY>` within Datadog, add the following configuration to your Helm `datadog-values.yaml` file:
+
+```yaml
+datadog:
+  env:
+    - name: DD_CONTAINER_LABELS_AS_TAGS
+      value: '{"<CONTAINER_LABEL>": "<TAG_KEY>"}'
+```
+
+For example, you could set up:
+```yaml
+datadog:
+  env:
+    - name: DD_CONTAINER_LABELS_AS_TAGS
+      value: '{"app":"kube_app"}'
+```
+{{% /tab %}}
+
+{{% tab "Manual (DaemonSet)" %}}
 To extract a given container label `<CONTAINER_LABEL>` and transform it to a tag key `<TAG_KEY>`, add the following environment variable to the Datadog Agent:
 
 ```bash
@@ -371,30 +623,10 @@ For example:
 ```bash
 DD_CONTAINER_LABELS_AS_TAGS='{"app":"kube_app"}'
 ```
-
-**Note**: Custom metrics may impact billing. See [Custom Metrics Billing][1] for more details.
-
-[1]: /account_management/billing/custom_metrics
-{{% /tab %}}
-{{% tab "Agent" %}}
-
-To extract a given container label `<CONTAINER_LABEL>` and transform it to a tag key `<TAG_KEY>`, add the following configuration block in the [Agent `datadog.yaml` configuration file][1]:
-
-```yaml
-container_labels_as_tags:
-  <CONTAINER_LABEL>: <TAG_KEY>
-```
-
-For example:
-
-```yaml
-container_labels_as_tags:
-  app: kube_app
-```
-
-[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}
 {{< /tabs >}}
+
+**Note**: Custom metrics may impact billing. See [Custom Metrics Billing][3] for more details.
 
 ## Further Reading
 
@@ -402,4 +634,4 @@ container_labels_as_tags:
 
 [1]: /getting_started/tagging/assigning_tags/?tab=containerizedenvironments#environment-variables
 [2]: /getting_started/tagging/unified_service_tagging
-[3]: /agent/kubernetes/tag/?tab=agent#extract-labels-as-tags
+[3]: /account_management/billing/custom_metrics

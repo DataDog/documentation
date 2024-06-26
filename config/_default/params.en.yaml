@@ -1,11 +1,10 @@
 site_name: "Datadog Infrastructure and Application Monitoring"
-meta_image: datadog_logo_share_tt.png
 meta_title: Getting Started with Datadog
 meta_description: Datadog, the leading service for cloud-scale monitoring.
 disclaimer: "This page is not yet available in English, we are working on its translation. <br> May you have any questions or feedback about our current translation project, <a href=\"https://docs.datadoghq.com/fr/help/\">feel free to reach out to us!</a>"
 announcement_banner:
-  desktop_message: "Read the DASH 2023 Roundup for our latest product and feature announcements"
-  mobile_message: "Read the DASH 2023 Roundup"
-  external_link: "https://www.datadoghq.com/blog/dash-2023-new-feature-roundup/?utm_source=organic&utm_medium=display&utm_campaign=dg-organic-websites-ww-docs-announcement-announcement-roundup-202308dash"
+  desktop_message: "Read the 2024 State of Cloud Costs Study!"
+  mobile_message: "Read the State of Cloud Costs Study!"
+  external_link: "https://www.datadoghq.com/state-of-cloud-costs/?utm_source=inbound&utm_medium=corpsite-display&utm_campaign=dg-cloudcostmgmt-ww-research-banner-report-state-cloud-costs"
 exclude: []
-translate_status_banner: "This translation isn't up to date, for the latest english version click here"
+translate_status_banner: "This translation isn't up-to-date. For the latest English version, click here"

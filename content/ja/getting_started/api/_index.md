@@ -33,8 +33,7 @@ Datadog API を使用すると、Datadog との間でデータをやり取りで
 data-postman-action="collection/fork"
 data-postman-visibility="public"
 data-postman-var-1="20651290-809b13c1-4ada-46c1-af65-ab276c434068"
-data-postman-collection-url="entityId=20651290-809b13c1-4ada-46c1-af65-ab276c434068&entityType=collection&workspaceId=bf049f54-c695-4e91-b879-0cad1854bafa"
-data-postman-param="env%5BDatadog%20Authentication%5D=W3sia2V5IjoiYXBpX2tleSIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZSwic2Vzc2lvblZhbHVlIjoiIiwic2Vzc2lvbkluZGV4IjowfSx7ImtleSI6ImFwcGxpY2F0aW9uX2tleSIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZSwic2Vzc2lvblZhbHVlIjoiIiwic2Vzc2lvbkluZGV4IjoxfV0="></div>
+data-postman-collection-url="entityId=20651290-809b13c1-4ada-46c1-af65-ab276c434068&entityType=collection&workspaceId=bf049f54-c695-4e91-b879-0cad1854bafa"></div>
 <script type="text/javascript">
   (function (p,o,s,t,m,a,n) {
     !p[s] && (p[s] = function () { (p[t] || (p[t] = [])).push(arguments); });
@@ -47,21 +46,27 @@ data-postman-param="env%5BDatadog%20Authentication%5D=W3sia2V5IjoiYXBpX2tleSIsIn
 
 </br>このコレクションは  Web 用 Postman またはお使いの Postman アプリケーションで動作します。読み込みに数秒かかることがあります。
 
+**注**: API キーとアプリケーションキーの値を使って、Datadog API コレクションの**コレクション変数**を構成します。
+
 ### Postman 環境のセットアップ
 
 Postman コレクションをインポートすると、Postman の左ペインに、使用できるすべての Datadog API 呼び出しの一覧がフォルダーごとに構造化されて表示されます。
 
-#### Authentication
+#### Go
 
-コレクションには、[Postman 環境][6]である `Datadog Authentication` が含まれます。ここに Datadog API キーと認証用のアプリケーションキーを追加します。
+認証用に Datadog の API キーとアプリケーションキーを[コレクション変数][6]に追加します。
 
 以下の手順に従って環境をセットアップします。
 
-1. Postman の右上隅にある **Environments** ドロップダウンをクリックします。現時点で環境が選択されていない場合は、**Environments** ドロップダウンに `No Environment` と表示されます。
+1. Datadog API コレクションを選択します。
 
-2. **Datadog Authentication** を選択します
+2. **Variables** タブをクリックします。
 
-3. **Datadog Authentication** 環境を編集して Datadog [API キー][2]を `api_key` 変数の初期値および現在値として追加し、お使いの Datadog [アプリケーションキー][2]を `application_key` 変数の初期値および現在値として追加します。
+3. `api_key` および `application_key` 変数の **Current value** フィールドに、それぞれ有効な Datadog API キーとアプリケーションキーを入力します。
+
+4. **Save** をクリックします。
+
+{{< img src="getting_started/postman/collection_variables.png" alt="変数 api_key と application_key collection が構成された Datadog API コレクション" style="width:100%;">}}
 
 #### API エンドポイントに切り替える
 
@@ -111,6 +116,6 @@ Postman コレクションをインポートすると、Postman の左ペイン�
 [3]: https://identity.getpostman.com/signup
 [4]: https://identity.getpostman.com/login
 [5]: https://www.postman.com/downloads/
-[6]: https://learning.postman.com/docs/postman/variables-and-environments/variables/#environments-in-postman
+[6]: https://learning.postman.com/docs/sending-requests/variables/variables/#defining-collection-variables
 [7]: /ja/api/latest/#api-reference
 [8]: /ja/api/

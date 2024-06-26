@@ -1,6 +1,7 @@
 ---
 aliases:
 - /ja/tracing/trace_retention/
+- /ja/tracing/trace_queries/one_percent_flat_sampling/
 description: 保持フィルターでトレース保持を制御する方法について説明します。
 further_reading:
 - link: /tracing/trace_pipeline/ingestion_mechanisms
@@ -30,6 +31,8 @@ Datadog APM では、[トレースの取り込みと 15 日間の保持][1]を�
 - [インテリジェント保持フィルター](#datadog-intelligent-retention-filter)は、環境、サービス、オペレーション、リソースごとに異なるレイテンシー分布のスパンを保持します。
 - `Error Default` 保持フィルターは `status:error` を持つエラースパンをインデックス化します。保持率とクエリは構成することができます。例えば、本番環境のエラーを取得するには、クエリを `status:error, env:production` に設定します。デフォルトでエラーを捕捉したくない場合は、保持フィルターを無効にしてください。
 - Application Security Management を使用している場合、`Application Security` 保持フィルターが有効になります。このフィルタは、アプリケーションセキュリティの影響 (攻撃の試み) があると識別されたトレース内のすべてのスパンの保持を保証します。
+- Synthetic Monitoring を使用している場合、`Synthetics` 保持フィルターが有効になります。デフォルトでは、Synthetic API と Synthetic ブラウザテストから生成されたトレースが利用可能な状態に保たれます。トレースと Synthetic テストを相関付ける方法など、詳細は [Synthetic APM][15] を参照してください。
+
 
 これらに加えて、サービスのための[カスタムタグベースの保持フィルター](#create-your-own-retention-filter)をいくつでも追加作成し、ビジネスにとって最も重要なデータをキャプチャすることが可能です。
 
@@ -65,17 +68,31 @@ Enabled toggle
 
 ### Datadog インテリジェント保持フィルター
 
-Datadog のインテリジェント保持フィルターは、サービスに対して常にアクティブであり、何十ものカスタム保持フィルターを作成する必要なく、代表的なトレースの選択を保持します。
+Datadog のインテリジェント保持フィルターは、サービスに対して常にアクティブであり、何十ものカスタム保持フィルターを作成する必要なく、代表的なトレースの選択を保持します。これは以下で構成されます。
+- [多様性サンプリング](#diversity-sampling)
+- [1% フラットサンプリング](#one-percent-flat-sampling)
 
-**サービスエントリースパン**をスキャンして、以下を 30 日間保持します。
+**注:** [Trace Queries][11] は、インテリジェント保持フィルターによってインデックス化されたデータに基づいています。
+
+インテリジェント保持フィルターによってインデックス化されたスパン (多様性サンプリングと 1% フラットサンプリング) は、インデックス化されたスパンの**使用量にカウントされない**ため、**請求に影響を与えません**。
+
+インテリジェント保持フィルターが保持するスパンよりも多くインデックス化したい特定のタグや属性がある場合、[独自の保持フィルターを作成](#create-your-own-retention-filter)してください。
+
+#### 多様性サンプリング
+
+多様性サンプリングは**サービスエントリースパン**をスキャンして、以下を 30 日間保持します。
 
 - 環境、サービス、オペレーション、リソースの各組み合わせについて、最大 15 分ごとに少なくとも 1 つのスパン (および関連するトレース)。これにより、トラフィックの少ないエンドポイントでも、[サービス][9]と[リソース][10]のページに常にトレース例を見つけることができるようになっています。
 - 環境、サービス、オペレーション、リソースの組み合わせごとに、`p75`、`p90`、`p95` のパーセンタイルスパン (および関連するトレース) の高レイテンシースパン。
 - エラーの代表的な選択。これにより、エラーの多様性を保証します (たとえば、応答ステータスコード 400、500)。
 
-**注**: インテリジェント保持フィルターによってインデックス化されたスパンは、インデックス化されたスパンの**使用量にカウントされない**ため、**請求に影響を与えません**。
+多様性サンプリングでキャプチャされたデータセットは、一様にサンプリングされていません (つまり、全トラフィックを比例的に代表していません)。エラーやレイテンシーの高いトレースに偏ります。
 
-ダイバーシティサンプリングが保持するスパンよりも多くのスパンをインデックス化したい特定のタグや属性がある場合は、[独自の保持フィルターを作成](#create-your-own-retention-filter)してください。
+#### 1% フラットサンプリング
+
+フラット 1% サンプリングは[取り込まれたスパン][12]の**均一な 1% サンプル**です。これは `trace_id` に基づいて適用され、同じトレースに属するすべてのスパンが同じサンプリング決定を共有することを意味します。
+
+このサンプリングメカニズムは均一であり、取り込まれたトラフィック全体を比例的に代表します。その結果、短い時間枠でフィルタリングすると、トラフィックの少ないサービスやエンドポイントがそのデータセットから欠落する可能性があります。
 
 ### 独自の Retention Filter を作成
 
@@ -109,7 +126,8 @@ Datadog のインテリジェント保持フィルターは、サービスに対
 しかし、ダイバーシティサンプリングされたデータセットは、**一様にサンプリングされていない** (つまり、全トラフィックを比例して代表していない) ため、エラーや高レイテンシーのトレースに偏っているので、クエリに `-retained_by:diversity_sampling` クエリパラメーターを追加すれば、これらのスパンをこれらの表示から除外することができます。
 
 `retained_by` 属性は、すべての保持されたスパンに存在します。その値は次の通りです。
-- スパンがダイバーシティサンプリング (つまり[インテリジェント保持フィルター](#datadog-intelligent-retention-filter)) によってキャプチャされた場合は `retained_by:diversity_sampling`。
+- スパンがダイバーシティサンプリング ([インテリジェント保持フィルター](#datadog-intelligent-retention-filter)の一部) によってキャプチャされた場合は `retained_by:diversity_sampling`。
+- スパンが 1% フラットサンプリングでインデックス化された場合は、`retained_by:flat_sampled`。
 - スパンが、`Error Default` や `Application Security Default` などの[タグベースの保持フィルター](#create-your-own-retention-filter)によってキャプチャされていた場合は、`retained_by:retention_filter`。
 
 {{< img src="tracing/trace_indexing_and_ingestion/retention_filters/trace_analytics.png" style="width:100%;" alt="ファセットで保持" >}}
@@ -132,3 +150,8 @@ Datadog のインテリジェント保持フィルターは、サービスに対
 [8]: /ja/tracing/glossary/#trace-root-span
 [9]: /ja/tracing/services/service_page/
 [10]: /ja/tracing/services/resource_page/
+[11]: /ja/tracing/trace_explorer/trace_queries
+[12]: /ja/tracing/trace_pipeline/ingestion_controls/
+[13]: /ja/tracing/trace_explorer/
+[14]: /ja/monitors/types/apm/?tab=traceanalytics
+[15]: /ja/synthetics/apm/

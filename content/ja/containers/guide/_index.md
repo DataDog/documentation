@@ -25,7 +25,11 @@ title: コンテナガイド
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Cluster Agent ガイド:" >}}
-    {{< nextlink href="/containers/guide/cluster_agent_autoscaling_metrics" >}}Cluster Agent でカスタムおよび外部メトリクスを使用したオートスケーリング{{< /nextlink >}}
+    {{< nextlink href="/containers/guide/cluster_agent_autoscaling_metrics" >}}Cluster Agent におけるカスタムメトリクスおよび外部メトリクスを用いたオートスケーリング{{< /nextlink >}}
     {{< nextlink href="/containers/guide/clustercheckrunners" >}}クラスターチェックランナー{{< /nextlink >}}
-    {{< nextlink href="/containers/guide/datadogoperator_migration" >}}Datadog Operator のバージョン 1.0 への移行{{< /nextlink >}}
+{{< /whatsnext >}}
+
+{{< whatsnext desc="Operator guides:" >}}
+    {{< nextlink href="/containers/guide/datadogoperator_migration" >}}Datadog Operator バージョン 1.0 への移行{{< /nextlink >}}
+    {{< nextlink href="/containers/guide/operator-eks-addon" >}}Datadog Operator アドオンを使用した Amazon EKS 上の Datadog Agent のインストール{{< /nextlink >}}
 {{< /whatsnext >}}

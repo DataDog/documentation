@@ -3,9 +3,6 @@ description: Configuration avancée de Database Monitoring pour Postgres
 kind: documentation
 title: Configuration avancée de Database Monitoring pour Postgres
 ---
-{{< site-region region="us5,gov" >}}
-<div class="alert alert-warning">La solution Database Monitoring n'est pas prise en charge pour ce site.</div>
-{{< /site-region >}}
 
 ## Gérer de nombreuses relations
 
@@ -46,7 +43,9 @@ instances:
 
 Si certaines requêtes sont relativement peu fréquentes ou s'exécutent rapidement, augmentez le taux d'échantillonnage en réduisant la valeur `collection_interval` afin de recueillir des échantillons plus fréquemment.
 
-Définissez le paramètre `collection_interval` dans la configuration de l'instance de votre base de données dans l'Agent Datadog. Ce paramètre est défini sur 1 par défaut. Réduisez cette valeur pour obtenir un intervalle plus court :
+Définissez le paramètre `collection_interval` dans la configuration de l'instance de votre base de données dans l'Agent Datadog. Ce paramètre est défini sur 1 seconde par défaut. Un exemple est disponible dans le fichier <a href="https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example#L332C9-L336" target="_blank">`postgres/conf.yaml.example`</a>.
+
+Réduisez cette valeur pour obtenir un intervalle plus court :
 
 ```yaml
 instances:

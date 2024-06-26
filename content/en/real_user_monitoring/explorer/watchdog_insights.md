@@ -75,5 +75,5 @@ You can begin your investigation for the root cause of a performance issue in th
 [1]: /watchdog/insights/
 [2]: /real_user_monitoring/explorer
 [3]: /real_user_monitoring/explorer/search/#facets
-[4]: /real_user_monitoring/browser/monitoring_page_performance/#core-web-vitals
+[4]: /real_user_monitoring/browser/monitoring_page_performance/#event-timings-and-core-web-vitals
 [5]: /real_user_monitoring/browser/monitoring_page_performance/#monitoring-single-page-applications-spa

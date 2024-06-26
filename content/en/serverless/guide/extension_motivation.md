@@ -38,7 +38,7 @@ If you only want to collect logs, especially from many Lambda functions, it make
 
 ## Migrate to the Datadog Lambda Extension
 
-To migrate from the the Datadog Forwarder to the Datadog Lambda Extension, see the [Serverless configuration documentation][5].
+To migrate from the Datadog Forwarder to the Datadog Lambda Extension, see the [Serverless configuration documentation][5].
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

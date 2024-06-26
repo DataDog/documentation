@@ -32,7 +32,7 @@ Metrics collection is disabled by default. You can enable it by setting the `DD_
 ```ruby
 # config/initializers/datadog.rb
 require 'datadog/statsd'
-require 'ddtrace'
+require 'datadog' # Use 'ddtrace' if you're using v1.x
 
 Datadog.configure do |c|
   # To enable runtime metrics collection, set `true`. Defaults to `false`
@@ -51,6 +51,8 @@ Runtime metrics can be viewed in correlation with your Ruby services. See the [S
 By default, runtime metrics from your application are sent to the Datadog Agent with DogStatsD over port `8125`. Make sure that [DogStatsD is enabled for the Agent][2].
 If you are running the Agent as a container, ensure that `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` [is set to true][4], and that port `8125` is open on the Agent.
 In Kubernetes, [bind the DogstatsD port to a host port][5]; in ECS, [set the appropriate flags in your task definition][6].
+
+Alternatively, the Agent can ingest metrics with a Unix Domain Socket (UDS) as an alternative to UDP transport. For more information, read [DogStatsD over Unix Domain Socket][8].
 
 ## Data Collected
 
@@ -71,3 +73,4 @@ Along with displaying these metrics in your APM Service Page, Datadog provides a
 [5]: /developers/dogstatsd/?tab=kubernetes#agent
 [6]: /agent/amazon_ecs/#create-an-ecs-task
 [7]: https://app.datadoghq.com/dash/integration/30268/ruby-runtime-metrics
+[8]: /developers/dogstatsd/unix_socket/

@@ -32,10 +32,9 @@ integration_id: eks-fargate
 integration_title: Amazon EKS sur AWS Fargate
 integration_version: 3.1.0
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: eks_fargate
-oauth: {}
 public_title: Amazon EKS sur AWS Fargate
 short_description: Recueillez vos métriques, traces et logs Amazon EKS.
 supported_os:

@@ -3,10 +3,13 @@ further_reading:
 - link: /agent/basic_agent_usage/
   tag: Documentación
   text: Uso básico del Agent
+- link: https://dtdg.co/fe
+  tag: Habilitar los fundamentos
+  text: Participa en una sesión interactiva para potenciar la monitorización de tu
+    infraestructura
 - link: /agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/
   tag: FAQ
   text: ¿Por qué debería instalar el Datadog Agent en mis instancias de nube?
-kind: documentación
 title: Empezando con el Agent
 ---
 
@@ -21,13 +24,13 @@ Esta guía sirve de introducción al Agent y te explica cómo usarlo para enviar
 
 ### Acerca del Agent
 
-El Datadog Agent es un software que se ejecuta en tus hosts. Recopila eventos y métricas de los hosts y se los envía a Datadog, donde puedes analizar tus datos de monitorización y rendimiento. Puede ejecutarse en tus hosts locales (Windows, MacOS), entornos contenedorizados (Docker, Kubernetes) y en los centros de datos on-premise. Para instalarlo y configurarlo, puedes usar herramientas de gestión de configuración (como Chef, Puppet o Ansible). 
+El Datadog Agent es un software que se ejecuta en tus hosts. Recopila eventos y métricas de los hosts y los envía a Datadog, donde puedes analizar tus datos de monitorización y rendimiento. Puede ejecutarse en tus hosts locales (Windows, MacOS), entornos contenedorizados (Docker, Kubernetes) y en los centros de datos on-premise. Para instalarlo y configurarlo, puedes utilizar herramientas de gestión de configuración (como Chef, Puppet o Ansible).
 
 El Agent puede recopilar entre 75 y 100 métricas de nivel de sistema cada 15-20 segundos. Con configuración adicional, el Agent puede enviar datos, logs y trazas en tiempo real desde los procesos en ejecución a la plataforma de Datadog. El Datadog Agent es de código abierto, y su código fuente está disponible en GitHub: [DataDog/datadog-agent][1].
 
 ### Sobrecarga del Agent
 
-La cantidad de espacio y recursos que es capaz de absorber el Agent depende de la configuración y del tipo datos configurados para su envío. Al principio, lo normal es que se use de media alrededor del 0,08 % de la CPU con un espacio en disco de entre 830 MB y 880 MB.
+La cantidad de espacio y recursos que es capaz de absorber el Agent depende de la configuración y del tipo datos configurados para su envío. Al principio, lo normal es que se utilice de media alrededor del 0,08 % de la CPU con un espacio en disco de entre 830 MB y 880 MB.
 
 Para obtener más información sobre estos puntos de referencia, consulta [Sobrecarga del Agent][2].
 
@@ -79,9 +82,9 @@ Consulta [Docker Agent][12] o [Kubernetes][13] para ver un tutorial sobre cómo 
 
 ## ¿Por qué debería instalar el Agent?
 
-Para que el Agent envíe datos desde cualquiera de las numerosas integraciones basadas en Agent, tiene que estar instalado. No tiene por qué desviar los datos a la plataforma de Datadog; por ejemplo, puedes enviar logs y métricas a través de la API de Datadog. No obstante, si lo que quieres es desviar tus datos hacia la plataforma de Datadog, el Agent es el método recomendado.
+Para que el Agent envíe datos desde cualquiera de las numerosas integraciones basadas en Agent, tiene que estar instalado. No tiene necesidad de desviar los datos a la plataforma de Datadog; por ejemplo, puedes enviar logs y métricas a través de la API de Datadog. Sin embargo, el Agent es el método recomendado obstante para desviar tus datos hacia la plataforma de Datadog.
 
-El Agent recopila datos del host cada 15 segundos para ofrecer información precisa sobre lo que sucede en tus entornos. Como se ha mencionado anteriormente en la sección [Checks][14], el Agent tiene varios checks activados que recopilan más de 50 métricas predeterminadas para dar más información sobre los datos de nivel de sistema.
+El Agent recopila datos del host cada 15 segundos para ofrecer información precisa sobre lo que sucede en tus entornos. Como se ha mencionado anteriormente en la sección [Checks][14], el Agent tiene varios checks activados que recopilan más de 50 métricas predeterminadas para brindar más información sobre los datos de nivel de sistema.
 
 ## Configuración
 
@@ -89,7 +92,7 @@ El Agent recopila datos del host cada 15 segundos para ofrecer información pre
 
 1. Crea una [cuenta de Datadog][15].
 
-2. Ten tu [clave de API de Datadog][16] a mano. 
+2. Ten a mano tu [clave de API de Datadog][16].
 
 3. Ten la IU de Datadog abierta.
 
@@ -105,38 +108,38 @@ Ejemplo de comando de instalación de una línea en Ubuntu:
 DD_API_KEY=<DATADOG_API_KEY> DD_SITE="{{< region-param key="dd_site" >}}" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
 ```
 
-En la aplicación, dirígete a la página [Agent Installation (Instalación del Agent)][18] correspondiente a tu sistema operativo y consulta las instrucciones de instalación más recientes.
+En la aplicación, dirígete a la página [Instalación del Agent)][18] correspondiente a tu sistema operativo y consulta las instrucciones de instalación más recientes.
 
 ### Validación
 
 #### Comando del terminal
 
-Ejecuta el [comando status][19] del Agent para verificar la instalación.
+Ejecuta el [comando de estado][19] del Agent para verificar la instalación.
 
 ```shell
 sudo datadog-agent status
 ```
 Si la instalación se realiza correctamente, devolverá un informe de estado de Agent con la información del Agent al comienzo. Ejemplo:
 
-```shell
+```text
 ===============
 Agent (v7.36.1)
 ===============
 
-  Fecha de estado: 2022-06-15 15:54:48.364 EDT / 2022-06-15 19:54:48.364 UTC (1655322888364)
-  Inicio del Agent: 2022-06-15 15:54:29.85 EDT / 2022-06-15 19:54:29.85 UTC (1655322869850)
+  Status date: 2022-06-15 15:54:48.364 EDT / 2022-06-15 19:54:48.364 UTC (1655322888364)
+  Agent start: 2022-06-15 15:54:29.85 EDT / 2022-06-15 19:54:29.85 UTC (1655322869850)
   Pid: 9801
-  Versión de Go: go1.17.6
-  Versión de Python: 3.8.11
-  Arquit. de compilación: amd64
-  Tipo de Agent: agent
-  Ejecutores de checks: 6
-  Nivel de log: info
+  Go Version: go1.17.6
+  Python Version: 3.8.11
+  Build arch: amd64
+  Agent flavor: agent
+  Check Runners: 6
+  Log Level: info
 ```
 
 #### Events (Eventos)
 
-En la IU de Datadog, dirígete a la página del Events Explorer (navegador de eventos) **Events > Explorer** (Eventos > Navegador). El Agent envía eventos a Datadog cada vez que se inicia o reinicia un Agent. En el siguiente mensaje, se indica si el Agent se ha instalado correctamente:
+En la interfaz de usuario Datadog, ve a la página de gestión de eventos **Gestión de servicio > Gestión de event**. El Agent envía eventos a Datadog cuando se inicia o reinicia Agent. El siguiente mensaje aparece si tu Agent se instala correctamente:
 
 ```text
 Agent de Datadog (v. 7.XX.X) iniciado en <Hostname>
@@ -152,25 +155,25 @@ El Agent está configurado para ofrecer los siguientes checks de servicios:
   - `datadog.agent.check_status`:
     Devuelve `CRITICAL` si un check de Agent no puede enviar métricas a Datadog; en caso contrario, devuelve `OK`.
 
-Estos checks se pueden usar en la plataforma de Datadog para visualizar rápidamente el estado del Agent a través de los dashboards y monitores. Para más detalles, consulta la [información general sobre los checks de servicios][20].
+Estos checks se pueden utilizar en la plataforma de Datadog para visualizar rápidamente el estado del Agent a través de los dashboards y monitores. Para más detalles, consulta la [información general sobre los checks de servicios][20].
 
 #### Métricas
 
-En la IU de Datadog, dirígete a la página del Metrics Summary (resumen de métricas) **Metrics > Summary** (Métricas > Resumen) y busca la métrica `datadog.agent.started` o la métrica `datadog.agent.running`. Si no las ves al momento, puede que el Agent tarde unos minutos en enviar los datos a la plataforma de Datadog.
+En la IU de Datadog, dirígete a la página Metrics Summary (Resumen de métricas) **Metrics > Summary** (Métricas > Resumen) y busca la métrica `datadog.agent.started` o la métrica `datadog.agent.running`. Si no las ves al momento, puede que el Agent tarde unos minutos en enviar los datos a la plataforma de Datadog.
 
-Haz clic en cualquiera de las métricas para que se abra un panel de métrica. Aquí, podrás ver metadatos adicionales sobre el lugar desde el que se recopilaron las métricas, así como cualquier etiqueta (tag) asociada. Como no se ha configurado ninguna etiqueta en el host a estas alturas del tutorial, solo deberías ver las etiquetas predeterminadas que Datadog asigna a las métricas, como `version` y `host`. Para obtener más información sobre cómo añadir etiquetas, consulta la siguiente sección sobre los archivos de configuración del Agent.
+Haz clic en cualquiera de las métricas para que se abra un panel de métrica. Aquí, podrás ver metadatos adicionales sobre el lugar desde el que se recopilaron las métricas, así como cualquier etiqueta asociada. Como no se ha configurado ninguna etiqueta en el host a estas alturas del tutorial, solo deberías ver las etiquetas predeterminadas que Datadog asigna a las métricas, como `version` y `host`. Para obtener más información sobre cómo añadir etiquetas, consulta la siguiente sección sobre los archivos de configuración del Agent.
 
 Explora otras métricas predeterminadas, como `ntp.offset` o `system.cpu.idle`.
 
 ## Archivos de configuración del Agent
 
 El archivo de configuración principal del Agent es `datadog.yaml`. Estos son los parámetros obligatorios:
-- tu [clave de API de Datadog][16], que se usa para asociar los datos del Agent con tu organización, y
-- el sitio de Datadog ({{< region-param key="dd_site" code="true" >}}). 
+- tu [clave de API de Datadog][16], que se utiliza para asociar los datos del Agent con tu organización, y
+- el sitio de Datadog ({{< region-param key="dd_site" code="true" >}}).
 
 Consulta el [archivo `config_template.yaml` de muestra][21] para ver todas las opciones de configuración disponibles.
 
-Puedes modificar los archivos de configuración del Agent para sacarles partido a otras funciones de Datadog, como las etiquetas.
+Puedes modificar los archivos de configuración del Agent para aprovechar otras funciones de Datadog, incluidas las etiquetas.
 
 #### Configurar etiquetas mediante el archivo de configuración del Agent
 
@@ -180,10 +183,10 @@ Por ejemplo, si tienes datos recopilados a partir de varios equipos diferentes y
 
 1. Localiza el [archivo de configuración principal][23] de tu Agent. En Ubuntu, el archivo se encuentra en `/etc/datadog-agent/datadog.yaml`.
 
-2. En el archivo `datadog.yaml`, localiza el parámetro `tags`. Puedes definir las etiquetas de nivel de host en la configuración de `datadog.yaml` para aplicar las etiquetas en todas las métricas, trazas y logs que se desvíen desde este host.
+2. En el archivo `datadog.yaml`, localiza el parámetro `tags`. Puedes definir las etiquetas de nivel de host en la configuración de `datadog.yaml` para aplicar las etiquetas en todas las métricas, rastreos y logs que se desvíen desde este host.
 
    ```yaml
-   ## @param tags  - list of key:value elements - optional  
+   ## @param tags  - list of key:value elements - optional
    ## @env DD_TAGS - space separated list of strings - optional
    ## List of host tags. Attached in-app to every metric, event, log, trace, and service check emitted by this Agent.
    ##
@@ -198,9 +201,9 @@ Por ejemplo, si tienes datos recopilados a partir de varios equipos diferentes y
    #   - <TAG_KEY>:<TAG_VALUE>
    ```
 
-3. Quita la marca de comentario del parámetro tags y de la etiqueta `team:infra` del ejemplo. También puedes añadir tu propia etiqueta personalizada (por ejemplo, `test:agent_walkthrough`).
+3. Quita la marca de comentario del parámetro de etiquetas y de la etiqueta `team:infra` del ejemplo. También puedes añadir tu propia etiqueta personalizada (por ejemplo, `test:agent_walkthrough`).
    ```yaml
-   ## @param tags  - list of key:value elements - optional  
+   ## @param tags  - list of key:value elements - optional
    ## @env DD_TAGS - space separated list of strings - optional
    ## List of host tags. Attached in-app to every metric, event, log, trace, and service check emitted by this Agent.
    ##
@@ -215,7 +218,7 @@ Por ejemplo, si tienes datos recopilados a partir de varios equipos diferentes y
       - test:agent_walkthrough
    ```
 
-4. Reinicia el Agent ejecutando el [comando restart][24] del Agent. Comando de reinicio en Ubuntu:
+4. Reinicia el Agent ejecutando el [comando de reinicio][24] del Agent. Comando de reinicio en Ubuntu:
 
    ```shell
    sudo service datadog-agent restart
@@ -223,11 +226,11 @@ Por ejemplo, si tienes datos recopilados a partir de varios equipos diferentes y
 
 5. Unos minutos más tarde, dirígete de nuevo a **Metrics > Summary** (Métricas > Resumen) y haz clic en la métrica `datadog.agent.started`. Además de las etiquetas `host` y `version` predeterminadas, verás la etiqueta `team` y las etiquetas personales que hayas añadido. También puedes filtrar las métricas con el campo `Tag` en la parte superior de la página.
 
-6. Dirígete a **Events > Explorer** (Eventos > Navegador) y busca las etiquetas personalizadas que aparecen junto al último evento de Agent.
+6. Ve a **Service Mgmt > Event Management** (Gestión de servicios > Gestión de eventos) y busca el etiquetas personalizadas que aparecen con el último evento del Agent.
 
 #### Otras opciones de configuración
 
-La recopilación de datos de los [logs][25], [trazas][26] y [procesos][27] puede activarse a través del archivo de configuración del Agent. Ten en cuenta que estas funciones no están activadas de forma predeterminada. Por ejemplo, si vas al archivo de configuración, verás que el parámetro `logs_enabled` está establecido como false.
+La recopilación de datos de los [logs][25], [rastreos][26] y [procesos][27] puede activarse a través del archivo de configuración del Agent. Ten en cuenta que estas funciones no están activadas de forma predeterminada. Por ejemplo, si vas al archivo de configuración, verás que el parámetro `logs_enabled` está establecido como false.
 
 ```yaml
 ##################################
@@ -242,7 +245,7 @@ La recopilación de datos de los [logs][25], [trazas][26] y [procesos][27] puede
 ```
 
 Para configurar otras funciones de Datadog mediante el archivo de configuración del Agent, es necesario:
-- Activar la [ingesta de trazas OTLP][28]
+- Activar la [ingesta de rastreos OTLP][28]
 - [Personalizar la recopilación de logs][29] para filtrar o limpiar los datos confidenciales
 - Configurar los datos personalizados mediante [DogStatsD][30]
 
@@ -250,7 +253,7 @@ Durante la configuración, cuando veas que la documentación hace referencia al 
 
 ## Comandos
 
-Consulta [Comandos del Agent][31] para [iniciar][32], [detener][33] o [reiniciar][24] tu Agent.
+Consulta [Comandos del Agent][31] para [iniciar][32], [Detener][33] o [Reiniciar][24] tu Agent.
 
 ## Solucionar problemas
 
@@ -271,8 +274,8 @@ Si necesitas ayuda para solucionar problemas relacionados con el Agent:
 {{< whatsnext desc="Una vez que el Agent esté instalado:">}}
 {{< nextlink href="/getting_started/integrations" >}}Obtén información sobre las integraciones{{< /nextlink >}}
 {{< nextlink href="/getting_started/application" >}}Obtén información sobre la IU de Datadog{{< /nextlink >}}
-{{< nextlink href="/getting_started/logs" >}}Descubre cómo recopilar logs a través del Agent{{< /nextlink >}}
-{{< nextlink href="/getting_started/tracing" >}}Descubre cómo recopilar trazas a través del Agent{{< /nextlink >}}
+{{< nextlink href="/getting_started/logs" >}}Obtén información sobre cómo recopilar logs a través del Agent{{< /nextlink >}}
+{{< nextlink href="/getting_started/tracing" >}}Obtén información sobre cómo recopilar rastreos a través del Agent{{< /nextlink >}}
 {{< /whatsnext >}}
 
 [1]: https://github.com/DataDog/datadog-agent
@@ -292,22 +295,22 @@ Si necesitas ayuda para solucionar problemas relacionados con el Agent:
 [15]: https://www.datadoghq.com
 [16]: https://app.datadoghq.com/organization-settings/api-keys
 [17]: /es/agent/basic_agent_usage/?tab=agentv6v7
-[18]: https://app.datadoghq.com/account/settings#agent/
-[19]: /es/agent/guide/agent-commands/#agent-status-and-information
+[18]: https://app.datadoghq.com/account/settings/agent/latest
+[19]: /es/agent/configuration/agent-commands/#agent-status-and-information
 [20]: /es/developers/service_checks/#visualize-your-service-check-in-datadog
 [21]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
 [22]: /es/getting_started/tagging/
-[23]: /es/agent/guide/agent-configuration-files/#agent-main-configuration-file
-[24]: /es/agent/guide/agent-commands/#restart-the-agent
+[23]: /es/agent/configuration/agent-configuration-files/#agent-main-configuration-file
+[24]: /es/agent/configuration/agent-commands/#restart-the-agent
 [25]: /es/logs/
 [26]: /es/tracing/
 [27]: /es/infrastructure/process/?tab=linuxwindows#introduction
 [28]: /es/opentelemetry/otlp_ingest_in_the_agent/?tab=host
 [29]: /es/agent/logs/advanced_log_collection/
 [30]: /es/developers/dogstatsd/?tab=hostagent
-[31]: /es/agent/guide/agent-commands/
-[32]: /es/agent/guide/agent-commands/#start-the-agent
-[33]: /es/agent/guide/agent-commands/#stop-the-agent
+[31]: /es/agent/configuration/agent-commands/
+[32]: /es/agent/configuration/agent-commands/#start-the-agent
+[33]: /es/agent/configuration/agent-commands/#stop-the-agent
 [34]: /es/agent/troubleshooting/
-[35]: /es/agent/guide/agent-log-files/
+[35]: /es/agent/configuration/agent-log-files/
 [36]: /es/help/

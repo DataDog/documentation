@@ -5,6 +5,7 @@ assets:
   dashboards:
     OpenLDAP Overview: assets/dashboards/openldap_overview.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -15,6 +16,7 @@ assets:
       prefix: openldap.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10040
     source_type_name: OpenLDAP
   logs:
     source: openldap
@@ -24,7 +26,7 @@ author:
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
-- data store
+- data stores
 - ログの収集
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/openldap/README.md
@@ -33,12 +35,11 @@ draft: false
 git_integration_title: openldap
 integration_id: openldap
 integration_title: OpenLDAP
-integration_version: 1.10.0
+integration_version: 1.12.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: openldap
-oauth: {}
 public_title: OpenLDAP
 short_description: cn=monitor バックエンドを使用して OpenLDAP サーバーからメトリクスを収集
 supported_os:
@@ -51,7 +52,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::macOS
   - Supported OS::Windows
-  - Category::Data Store
+  - Category::Data Stores
   - Category::Log Collection
   configuration: README.md#Setup
   description: cn=monitor バックエンドを使用して OpenLDAP サーバーからメトリクスを収集
@@ -61,22 +62,23 @@ tile:
   title: OpenLDAP
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
 
 OpenLDAP インテグレーションを使用すると、OpenLDAP サーバーの `cn=Monitor` バックエンドからメトリクスを取得できます。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 OpenLDAP インテグレーションは Agent とパッケージ化されています。OpenLDAP メトリクスの収集を開始するには、以下を実行します。
 
 1. OpenLDAP サーバーで `cn=Monitor` バックエンドを構成します。
 2. OpenLDAP サーバーに [Agent をインストール][1]します。
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 #### OpenLDAP の準備
 
@@ -130,11 +132,11 @@ OpenLDAP インテグレーションは Agent とパッケージ化されてい�
 #### OpenLDAP インテグレーションの構成
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
-#### ホスト
+#### メトリクスベース SLO
 
-ホストで実行中の Agent に対してこのチェックを構成するには:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
 ###### メトリクスの収集
 
@@ -163,7 +165,7 @@ OpenLDAP インテグレーションは Agent とパッケージ化されてい�
 
 2. [Agent を再起動します][2]。
 
-###### ログの収集
+###### 収集データ
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -190,7 +192,7 @@ _Agent バージョン 6.0 以降で利用可能_
 [1]: https://github.com/DataDog/integrations-core/blob/master/openldap/datadog_checks/openldap/data/conf.yaml.example
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "コンテナ化" %}}
 
 #### コンテナ化
 
@@ -200,11 +202,11 @@ _Agent バージョン 6.0 以降で利用可能_
 
 | パラメーター            | 値                                                                                           |
 | -------------------- | ----------------------------------------------------------------------------------------------- |
-| `<インテグレーション名>` | `openldap`                                                                                      |
-| `<初期コンフィギュレーション>`      | 空白または `{}`                                                                                   |
-| `<インスタンスコンフィギュレーション>`  | `{"url":"ldaps://%%host%%:636","username":"<ユーザーの識別名>","password":"<パスワード>"}` |
+| `<INTEGRATION_NAME>` | `openldap`                                                                                      |
+| `<INIT_CONFIG>`      | 空白または `{}`                                                                                   |
+| `<INSTANCE_CONFIG>`  | `{"url":"ldaps://%%host%%:636","username":"<ユーザーの識別名>","password":"<パスワード>"}` |
 
-###### ログの収集
+###### 収集データ
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -227,26 +229,26 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 このチェックは、すべての主要プラットフォームと互換性があります。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "openldap" >}}
 
 
-### イベント
+### ヘルプ
 
 openldap チェックには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 {{< get-service-checks-from-git "openldap" >}}
 
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 
 
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [3]: https://docs.datadoghq.com/ja/help/

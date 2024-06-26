@@ -5,6 +5,7 @@ assets:
   dashboards:
     crio: assets/dashboards/overview.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -15,6 +16,7 @@ assets:
       prefix: crio.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10044
     source_type_name: CRI-O
 author:
   homepage: https://www.datadoghq.com
@@ -30,12 +32,11 @@ draft: false
 git_integration_title: crio
 integration_id: cri-o
 integration_title: CRI-O
-integration_version: 2.4.1
+integration_version: 2.6.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: crio
-oauth: {}
 public_title: CRI-O
 short_description: CRI-O のすべてのメトリクスを Datadog で追跡
 supported_os:
@@ -57,19 +58,20 @@ tile:
   title: CRI-O
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
 
 このチェックは [CRI-O][1] を監視します。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 このインテグレーションは、CRI-O の `--enable-metrics` オプションに依存します。このオプションはデフォルトでは無効です。有効にした場合は、`127.0.0.1:9090/metrics` でメトリクスが公開されます。
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 1. CRI-Oのパフォーマンスデータを収集するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `crio.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル crio.d/conf.yaml][2] を参照してください。
 
@@ -79,22 +81,22 @@ tile:
 
 [Agent の `status` サブコマンドを実行][4]し、Checks セクションで `crio` を探します。
 
-## 収集データ
+## リアルユーザーモニタリング
 
 CRI-O は、ランタイムによって実行される操作のカウントとレイテンシーに関するメトリクスを収集します。
 さらに、Datadog-CRI-O インテグレーションは、CRI-O Golang バイナリ自体の CPU 使用率とメモリ使用量を収集します。
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "crio" >}}
 
 
-### サービスのチェック
+### ヘルプ
 {{< get-service-checks-from-git "crio" >}}
 
 
-## トラブルシューティング
+## ヘルプ
 
-ご不明な点は、[Datadog のサポートチーム][7]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][7]までお問い合わせください。
 
 
 [1]: http://cri-o.io

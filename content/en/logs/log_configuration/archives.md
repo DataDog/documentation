@@ -27,7 +27,7 @@ Configure your Datadog account to forward all the logs ingested—whether [index
 
 {{< img src="logs/archives/log_forwarding_archives_tab.png" alt="Archives tab on the Log Forwarding page" style="width:100%;">}}
 
-Navigate to the [**Log Forwarding** page][14] to set up an archive for forwarding ingested logs to your own cloud-hosted storage bucket.
+Navigate to the [**Log Forwarding** page][3] to set up an archive for forwarding ingested logs to your own cloud-hosted storage bucket.
 
 1. If you haven't already, set up a Datadog [integration](#set-up-an-integration) for your cloud provider.
 2. Create a [storage bucket](#create-a-storage-bucket).
@@ -35,6 +35,8 @@ Navigate to the [**Log Forwarding** page][14] to set up an archive for forwardin
 4. [Route your logs](#route-your-logs-to-a-bucket) to and from that archive.
 5. Configure [advanced settings](#advanced-settings) such as encryption, storage class, and tags.
 6. [Validate](#validation) your setup and check for possible misconfigurations that Datadog would be able to detect for you.
+
+See how to [archive your logs with Observability Pipelines][4] if you want to route your logs to a storage-optimized archive directly from your environment.
 
 ## Configure an archive
 
@@ -75,6 +77,10 @@ Set up the [Google Cloud integration][1] for the project that holds your GCS sto
 
 ### Create a storage bucket
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Sending logs to an archive is outside of the Datadog GovCloud environment, which is outside the control of Datadog. Datadog shall not be responsible for any logs that have left the Datadog GovCloud environment, including without limitation, any obligations or requirements that the user may have related to FedRAMP, DoD Impact Levels, ITAR, export compliance, data residency or similar regulations applicable to such logs.</div>
+{{< /site-region >}}
+
 {{< tabs >}}
 {{% tab "AWS S3" %}}
 
@@ -83,13 +89,12 @@ Go into your [AWS console][1] and [create an S3 bucket][2] to send your archives
 **Notes:**
 
 - Do not make your bucket publicly readable.
-- For [US1, US3, and US5 sites][4], see [AWS Pricing][5] for inter-region data transfer fees and how cloud storage costs may be impacted. Consider creating your storage bucket in `us-east-1` to manage your inter-region data transfer fees.
+- For [US1, US3, and US5 sites][3], see [AWS Pricing][4] for inter-region data transfer fees and how cloud storage costs may be impacted. Consider creating your storage bucket in `us-east-1` to manage your inter-region data transfer fees.
 
 [1]: https://s3.console.aws.amazon.com/s3
 [2]: https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html
-[3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock-overview.html
-[4]: /getting_started/site/
-[5]: https://aws.amazon.com/s3/pricing/
+[3]: /getting_started/site/
+[4]: https://aws.amazon.com/s3/pricing/
 {{% /tab %}}
 
 {{% tab "Azure Storage" %}}
@@ -118,7 +123,7 @@ Go to your [Google Cloud account][1] and [create a GCS bucket][2] to send your a
 
 ### Set permissions
 
-Only Datadog users with the [`logs_write_archive` permission][3] can create, modify, or delete log archive configurations.
+Only Datadog users with the [`logs_write_archive` permission][5] can create, modify, or delete log archive configurations.
 
 {{< tabs >}}
 {{% tab "AWS S3" %}}
@@ -191,12 +196,12 @@ Only Datadog users with the [`logs_write_archive` permission][3] can create, mod
 
 ### Route your logs to a bucket
 
-Navigate to the [Log Forwarding page][5] and select **Add a new archive** on the **Archives** tab.
+Navigate to the [Log Forwarding page][6] and select **Add a new archive** on the **Archives** tab.
 
-**Notes:** 
-* Only Datadog users with the [`logs_write_archive` permission][3] can complete this and the following step.  
-* Archiving logs to Azure Blob Storage requires an App Registration. See instructions [on the Azure integration page][6], and set the "site" on the right-hand side of the documentation page to "US." App Registration(s) created for archiving purposes only need the "Storage Blob Data Contributor" role. If your storage bucket is in a subscription being monitored through a Datadog Resource, a warning is displayed about the App Registration being redundant. You can ignore this warning.
-* If your bucket restricts network access to specified IPs, add the webhook IPs from the [IP ranges list][4] to the allowlist. 
+**Notes:**
+* Only Datadog users with the [`logs_write_archive` permission][5] can complete this and the following step.  
+* Archiving logs to Azure Blob Storage requires an App Registration. See instructions [on the Azure integration page][7], and set the "site" on the right-hand side of the documentation page to "US." App Registration(s) created for archiving purposes only need the "Storage Blob Data Contributor" role. If your storage bucket is in a subscription being monitored through a Datadog Resource, a warning is displayed about the App Registration being redundant. You can ignore this warning.
+* If your bucket restricts network access to specified IPs, add the webhook IPs from the {{< region-param key="ip_ranges_url" link="true" text="IP ranges list">}} to the allowlist.
 
 {{< tabs >}}
 {{% tab "AWS S3" %}}
@@ -241,9 +246,9 @@ By default:
 
 Use this optional configuration step to assign roles on that archive and restrict who can:
 
-* Edit that archive configuration. See the [`logs_write_archive`][7] permission.
-* Rehydrate from that archive. See the [`logs_read_archives`][8] and [`logs_write_historical_view`][9] permissions.
-* Access rehydrated logs in case you use the legacy [`read_index_data` permission][10].
+* Edit that archive configuration. See the [`logs_write_archive`][9] permission.
+* Rehydrate from that archive. See the [`logs_read_archives`][10] and [`logs_write_historical_view`][11] permissions.
+* Access rehydrated logs in case you use the legacy [`read_index_data` permission][12].
 
 {{< img src="logs/archives/archive_restriction.png" alt="Restrict access to Archives and Rehydrated logs" style="width:75%;">}}
 
@@ -252,7 +257,7 @@ Use this optional configuration step to assign roles on that archive and restric
 Use this optional configuration step to:
 
 * Include all log tags in your archives (activated by default on all new archives). **Note**: This increases the size of resulting archives.
-* Add tags on rehydrated logs according to your Restriction Queries policy. See the [`logs_read_data`][11] permission.
+* Add tags on rehydrated logs according to your Restriction Queries policy. See the [`logs_read_data`][13] permission.
 
 {{< img src="logs/archives/tags_in_out.png" alt="Configure Archive Tags" style="width:75%;">}}
 
@@ -264,6 +269,18 @@ For Archives with a maximum scan size defined, all users need to estimate the sc
 
 {{< img src="logs/archives/max_scan_size.png" alt="Define maximum scan size on Archive" style="width:75%;">}}
 
+{{< site-region region="us3" >}}
+#### Firewall rules
+
+{{< tabs >}}
+{{% tab "Azure storage" %}}
+
+Firewall rules are not supported.
+
+{{% /tab %}}
+{{< /tabs >}}
+
+{{< /site-region >}}
 #### Storage class
 
 {{< tabs >}}
@@ -386,11 +403,11 @@ Once your archive settings are successfully configured in your Datadog account, 
 
 However, after creating or updating your archive configurations, it can take several minutes before the next archive upload is attempted. The frequency at which archives are uploaded can vary. **Check back on your storage bucket in 15 minutes** to make sure the archives are successfully being uploaded from your Datadog account. 
 
-After that, if the archive is still in a pending state, check your inclusion filters to make sure the query is valid and matches log events in [Live Tail][12]. When Datadog fails to upload logs to an external archive, due to unintentional changes in settings or permissions, the corresponding Log Archive is highlighted in the configuration page. 
+After that, if the archive is still in a pending state, check your inclusion filters to make sure the query is valid and matches log events in [Live Tail][14]. When Datadog fails to upload logs to an external archive, due to unintentional changes in settings or permissions, the corresponding Log Archive is highlighted in the configuration page. 
 
 {{< img src="logs/archives/archive_errors_details.png" alt="Check that your archives are properly set up" style="width:100%;">}}
 
-Hover over the archive to view the error details and the actions to take to resolve the issue. An event is also generated in the [Events Explorer][13]. You can create a monitor for these events to detect and remediate failures quickly.
+Hover over the archive to view the error details and the actions to take to resolve the issue. An event is also generated in the [Events Explorer][15]. You can create a monitor for these events to detect and remediate failures quickly.
 
 ## Multiple archives
 
@@ -436,15 +453,16 @@ Within the zipped JSON file, each event's content is formatted as follows:
 
 [1]: /logs/indexes/#exclusion-filters
 [2]: /logs/archives/rehydrating/
-[3]: /account_management/rbac/permissions/?tab=ui#logs_write_archives
-[4]: https://ip-ranges.datadoghq.com/
-[5]: https://app.datadoghq.com/logs/pipelines/archives
-[6]: /integrations/azure/
-[7]: /account_management/rbac/permissions#logs_write_archives
-[8]: /account_management/rbac/permissions#logs_read_archives
-[9]: /account_management/rbac/permissions#logs_write_historical_view
-[10]: /account_management/rbac/permissions#logs_read_index_data
-[11]: /account_management/rbac/permissions#logs_read_data
-[12]: /logs/explorer/live_tail/
-[13]: /service_management/events/explorer/
-[14]: https://app.datadoghq.com/logs/pipelines/log-forwarding
+[3]: https://app.datadoghq.com/logs/pipelines/log-forwarding
+[4]: /observability_pipelines/archive_logs/
+[5]: /account_management/rbac/permissions/?tab=ui#logs_write_archives
+[6]: https://app.datadoghq.com/logs/pipelines/archives
+[7]: /integrations/azure/
+[8]: https://ip-ranges.datadoghq.com/
+[9]: /account_management/rbac/permissions#logs_write_archives
+[10]: /account_management/rbac/permissions#logs_read_archives
+[11]: /account_management/rbac/permissions#logs_write_historical_view
+[12]: /account_management/rbac/permissions#logs_read_index_data
+[13]: /account_management/rbac/permissions#logs_read_data
+[14]: /logs/explorer/live_tail/
+[15]: /service_management/events/explorer/

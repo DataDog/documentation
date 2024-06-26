@@ -1,6 +1,5 @@
 ---
 title: CoScreen
-kind: documentation
 further_reading:
 - link: 'https://www.datadoghq.com/blog/collaborative-screen-sharing-with-datadog-coscreen/'
   tag: 'Blog'
@@ -23,7 +22,7 @@ The CoScreen desktop app is available for Windows 10 and macOS v10.15 Catalina a
 
 [Download CoScreen][1].
 
-After installing CoScreen, launch the desktop app and sign up.
+After installing CoScreen, launch the desktop app. You can sign in with your Datadog account.
 
 [1]: https://www.coscreen.co/download
 {{% /tab %}}
@@ -37,11 +36,15 @@ The CoScreen web app has limited functionality. To make full use of CoScreen's f
 {{< /tabs >}}
 
 ## Usage
-### Join your first CoScreen
+### Join a CoScreen
 
 If you were invited to a CoScreen, click on the link. You can click on **Join from browser** to join the CoScreen through the web app, or you can launch the desktop app. You can also join manually by entering your meeting link or ID.
 
 When you join a CoScreen, it is added to your list of _Recent CoScreens_ in the main menu. You can rejoin these at any time.
+
+To enable noise reduction in the desktop app, go to **Settings** > **Audio** and select _Apply noise reduction to my microphone_.
+
+On macOS, you can enable background blurring under **Settings** > **Camera** > **Video Effects**.
 
 ### Invite your collaborators
 
@@ -79,27 +82,21 @@ Screen sharing is deactivated by default when you join a CoScreen.
 
 You can see the mouse pointers of remote participants whenever they move their pointers over a shared window. When viewing a remote window, two tabs appear: **Control**, which enables you to interact with the window, click on buttons, and type into text fields; and **Draw**, which enables you to draw on the window.
 
-### Collaborate in CoTerm, a shared terminal
+### Collaborate in a shared terminal
 
-CoTerm is a collaborative terminal built into CoScreen that enables users to run commands and to write and debug code together.
+CoScreen includes a shared, collaborative terminal that enables users to run commands and to write and debug code together.
 
-To start shared terminal, click on the **Share terminal** button in the meeting menu:
+To start a shared terminal, click on the **Share terminal** button in the meeting menu:
 
 {{< img src="coscreen/share_terminal.png" alt="A panel of buttons from the CoScreen desktop UI. The 'Share terminal' button is highlighted." style="width:70%;">}}
 
-Then, confirm the onboarding dialog:
-
-{{< img src="coscreen/coterm_dialog.png" alt="The CoTerm onboarding dialog, with an option to allow remote control selected." style="width:50%;">}}
-
 The shared terminal appears for you and all other participants in the CoScreen session. If you enable remote control in CoScreen, other users can type and click into your terminal.
 
-{{< img src="coscreen/coterm.png" alt="A CoTerm window." style="width:60%;">}}
+{{< img src="coscreen/coterm.png" alt="A shared CoScreen terminal window." style="width:60%;">}}
 
 To stop sharing, click the **Unshare** tab on the terminal window, or on the button in the meeting menu. 
 
-For privacy, CoTerm uses [Sensitive Data Scanner][8] and entropy filters to detect and obfuscate sensitive data.
-
-**Note**: Unsharing closes the terminal.
+For privacy, CoScreen uses [Sensitive Data Scanner][8] and entropy filters to detect and obfuscate sensitive data.
 
 ### Integrations
 

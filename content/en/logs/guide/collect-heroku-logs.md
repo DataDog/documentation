@@ -3,8 +3,6 @@ title: Collect Heroku logs
 kind: guide
 ---
 
-**This log integration is currently in public beta**
-
 Heroku provides 3 types of logs:
 
 * `App Logs`: output from the application you pushed on the platform.
@@ -21,7 +19,7 @@ To send all these logs to Datadog:
 * Set up the HTTPS drain with the following command:
 
 ```text
-heroku drains:add "https://http-intake.logs.{{< region-param key="dd_site" >}}/api/v2/logs?dd-api-key=<DD_API_KEY>&ddsource=heroku&env=<ENV>&service=<SERVICE>&host=<HOST>" -a <APPLICATION_NAME>
+heroku drains:add "https://http-intake.logs.{{< region-param key="dd_site" >}}/api/v2/logs?dd-api-key=<DD_API_KEY>&ddsource=heroku&ddtags=env:<ENV>&service=<SERVICE>&host=<HOST>" -a <APPLICATION_NAME>
 ```
 
 * Replace `<DD_API_KEY>` with your [Datadog API Key][2].

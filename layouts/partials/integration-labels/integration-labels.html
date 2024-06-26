@@ -1,4 +1,5 @@
 {{ $dot := . }}
+{{ $integration_version_blocklist := slice "oracle" }}
 
 {{ if .Params.is_beta }}
     <div class="row">
@@ -69,12 +70,11 @@
     {{ partial "badge.html" (dict "context" . "text" "marketplace") }}
 {{ end }}
 
-{{ with .Params.integration_version }}
+{{ if and (.Params.integration_version) (not (in $integration_version_blocklist .Params.app_id)) }}
 <div class="row integration-labels">
     <div class="integration-version col-12">
-        <span>{{ i18n "integration_version" }}</span><span>{{ . }}</span>
+        <span>{{ i18n "integration_version" }}</span><span>{{ .Params.integration_version }}</span>
     </div>
-
 </div>
 {{ end }}
 

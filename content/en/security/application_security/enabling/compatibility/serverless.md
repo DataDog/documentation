@@ -6,20 +6,34 @@ type: multi-code-lang
 code_lang_weight: 90
 ---
 
-<div class="alert alert-info">ASM support for AWS Lambda is in beta. Threat detection is done by using the Datadog's lambda extension.<br><br> Don't see your desired technology listed here? Datadog is continually adding additional support. Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send details</a>.</div>
+Application Security provides serverless capability for the following platforms and libraries:
 
-## Language and framework compatibility
+{{< partial name="security-platform/appsec-libraries-serverless.html" >}}</br>
 
-### Supported cloud environments
+## AWS Lambda
+**Note**: Threat Protection through Remote Configuration is not supported. Use [Workflows][5] to block IPs in your [WAF][6].
+  
+|Type           	| Threat Detection	|  Software Composition Analysis (SCA)	| Code Security 	|
+| ---  		|   ---             		|           ----           			|           ----            				|
+| Java  		| {{< X >}}         	| 	                			|						|
+| .NET    	| {{< X >}}         	|  	                          		|						|
+| Node 		| {{< X >}}     		| beta	              			|						|
+| Python   	| {{< X >}}         	| beta                 			|						|
+| Ruby   	| {{< X >}}         	|  	                 			|						|
+| PHP   	| 		        	|	            			|						|
+| Go   		| {{< X >}}         	| 	               			|						|
 
-- AWS Lambda (beta)
+### Supported trigger types
+Threat Detection supports HTTP requests as function input only, as that channel has the highest likelihood of attackers exploiting a serverless application. HTTP requests typically come from AWS services such as:
+- Application Load Balancer (ALB)
+- API Gateway v1 (Rest API)
+- API Gateway v2 (HTTP API)
+- Function URL
 
-### Version dependencies
+<div class="alert alert-info">If you would like to see support added for any of the unsupported capabilities, fill out this <a href="https://forms.gle/gHrxGQMEnAobukfn7">form</a> to send feedback.</div>
 
-- Lambda Extension version: `39`
-- Serverless plugin version: `5.20.0`
 
-### Supported languages and their requirements
+### Additional language specific compatibility information
 
 Node.js
 : If you are bundling using webpack or esbuild, [follow the specific bundler instructions][4].
@@ -37,36 +51,43 @@ Go
 .NET
 : 
 
-### ASM capabilities 
-The following ASM capabilities are not supported for Lambda functions:
- - ASM Risk Management
- - IP, user, and suspicious request blocking
- - 1-Click enabling ASM
 
-## ASM capabilities support
+## Google Cloud Run
 
-The following ASM capabilities are supported for serverless, for the specified Datadog Lambda extension version:
+<div class="alert alert-info">Google Cloud Run support for Application Security serverless is in beta</a>.</div>
 
-| ASM capability                   | Minimum extension version |
-| -------------------------------- | ----------------------------|
-| Threat Detection <br/> --> Business logic API  | Supported for Node.js, Java, Python, Go, and .NET with Lambda Extension version 39 and Serverless plugin version 5.20.0. <br/> --> Business logic capabilities follow the language-specific versions in which the service is built. |
-| Threat Protection <br/> --> IP blocking <br/> --> Suspicious request blocking <br> --> User blocking   | not supported<br/><br/><br/> |
-| Vulnerability Management <br/> --> Open source vulnerability detection <br/> --> Custom code vulnerability detection | not supported<br/> |
+**Note**: Threat Protection through Remote Configuration is not supported. Use [Workflows][5] to block IPs in your [WAF][6].
+   
+|Type           	| Threat Detection	|  Software Composition Analysis	| Code Security 	|
+| ---  		|   ---             		|           ----           			|           ----            				|
+| Java  		| beta         	| beta	                			|						|
+| .NET    	| beta         	| beta 	                          		|						|
+| Node 		| beta     		| beta	              			|						|
+| Python   	| beta         	| beta                 			|						|
+| Ruby   	| beta         	|  beta	                 			|						|
+| PHP   	| 		      |	            			|						|
+| Go   		| beta         	| beta	               			|						|
 
 
-<div class="alert alert-info">If you would like to see support added for any of the unsupported capabilities, let us know! Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send details</a>.</div>
+## Azure App Service
 
-## Supported trigger types
+Only *web applications* are supported. Azure Functions are not supported.
 
-ASM Threat Detection supports HTTP requests as function input only. These typically come from AWS services such as:
-
-- Application Load Balancer (ALB)
-- API Gateway v1 (Rest API)
-- API Gateway v2 (HTTP API)
-- Function URL
+**Note**: Threat Protection through Remote Configuration is not supported. Use [Workflows][5] to block IPs in your [WAF][6].
+   
+|Type       | OS			     |Threat Detection	|  Software Composition Analysis	 | Code Security 	|
+|-----------|--------------------|------------------|------------------------------------|------------------------------------------|
+| Java  	| Windows, Linux	 | {{< X >}}    	| {{< X >}}	                         | beta			                            |
+| .NET    	| Windows, Linux	 | {{< X >}}        | {{< X >}}      	                 |			                                |
+| Node 		| Linux			     | {{< X >}}        | {{< X >}}        	                 | beta			                            |
+| Python   	| Linux			     | {{< X >}}        | {{< X >}}                          |			                                |
+| Ruby   	| Linux			     | {{< X >}}        | {{< X >}}      	                 |			                                |
+| PHP   	| Linux			     |		        	| {{< X >}} 	                     |			                                |
 
 
 [1]: /serverless/distributed_tracing/
 [2]: /serverless/guide/datadog_forwarder_python
 [3]: /serverless/guide/upgrade_java_instrumentation
 [4]: /serverless/guide/serverless_tracing_and_bundlers/
+[5]: /service_management/workflows/
+[6]: /security/application_security/threats/inapp_waf_rules/

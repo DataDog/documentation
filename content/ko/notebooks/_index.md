@@ -1,6 +1,9 @@
 ---
 aliases:
 - /ko/graphing/notebooks/
+cascade:
+  algolia:
+    rank: 70
 further_reading:
 - link: https://www.datadoghq.com/blog/incident-management-templates-notebooks-list/
   tag: 블로그
@@ -11,6 +14,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/incident-postmortem-process-best-practices/
   tag: 블로그
   text: 인시던트 포스트모템(사후 분석) 생성 모범 사례
+- link: https://www.datadoghq.com/blog/automate-security-tasks-with-workflows-and-cloud-siem/
+  tag: 블로그
+  text: Datadog 워크플로 및 Cloud SIEM으로 일반적인 보안 작업을 자동화하고 위협에 대비하세요.
 kind: 설명서
 title: 노트북
 ---
@@ -21,7 +27,7 @@ title: 노트북
 
 ## 시작하기
 
-1. 기본 탐색 **Notebooks > New Notebook**에서 [새 노트북][1]을 만듭니다.
+1. [노트북 목록 ][1] 페이지에서 **+노트북 새로 만들기**를 클릭합니다.
 
 2. **Save Notebook** 버튼을 클릭합니다. </br>
   **참고**: 새 노트북은 기본적으로 저장되지 않습니다.
@@ -62,15 +68,13 @@ title: 노트북
 
 노트북을 문서 편집기로 복사하려면 **Copy formatted contents**를 클릭합니다. Google Docs 또는 Microsoft Word 와 같은 문서 편집기에 붙여넣어 그래프 등 노트북 콘텐츠를 원래 형식으로 볼 수 있습니다.
 
-{{< img src="notebooks/export-to-gdocs.jpeg" alt="Google Docs에서 내보낸 노트북의 예시" style="width:100%;">}}
-
 ### 노트북 JSON 가져오기 또는 내보내기
 
 노트북 정의가 포함된 JSON 파일을 다운로드하려면 **Export Notebook JSON**을 사용하세요. **Import Notebook JSON**은 업로드된 JSON 콘텐츠로 노트북의 모든 콘텐츠를 덮어씁니다.
 
 ### 개별 셀에 링크를 연결하기
 
-셀의 **Share** 메뉴에서 **Link directly to cell**을 클릭하여 특정 셀의 URL을 복사합니다. 직접 연결은 시각화 및 Markdown 셀 모두에서 사용할 수 있습니다.
+특정 셀의 URL을 복사하려면 셀의 **공유** 메뉴를 클릭하고 **셀에 직접 링크**를 선택합니다. 직접 링크는 시각화 및 마크다운 셀 모두에 사용할 수 있습니다.
 
 사용자가 특정 셀의 URL을 방문하면 노트북이 열리고 뷰포트 상단에 셀이 표시됩니다. 링크는 절대적입니다. 셀의 URL은 노트북 내에서 새 위치로 이동하더라도 같게 유지됩니다.
 
@@ -78,7 +82,7 @@ title: 노트북
 
 {{< img src="notebooks/notebook_list.png" alt="선택한 노트북의 셀 유형을 미리 보는 노트북 목록" style="width:100%;">}}
 
-[Notebook List][2]에서는 이전에 생성한 노트북을 보고 검색할 수 있습니다. 각 노트북의 이름, 생성자 및 마지막 수정 날짜가 표시됩니다. 노트북은 다음을 기준으로 그룹화됩니다.
+[Notebook List][1]에서는 이전에 작성한 노트북들을 보고 검색할 수 있습니다. 각 노트북의 이름, 작성자 및 마지막 수정 날짜가 표시됩니다. 노트북은 다음으로 그룹화됩니다:
 
 * **Your Notebooks**: 사용자가 생성한 노트북.
 * **All Notebooks**: 조직의 모든 노트북.
@@ -87,7 +91,10 @@ title: 노트북
 위젯 유형 및 Markdown을 포함하여 콘텐츠의 미리보기를 보려면 노트북의 Preview 아이콘 위로 마우스를 가져갑니다. 노트북을 [View Mode](#view-mode)로 열려면 노트북 위로 마우스를 가져간 후 오른쪽의 **Open notebook in view mode**를 클릭하세요.
 
 ## 템플릿 갤러리
-[Template Gallery][3]에서 인시던트 대응 사후 분석 및 새 노트북을 생성할 수 있는 인시던트 보고서를 포함하여 바로 사용 가능한 템플릿을 확인할 수 있습니다. 재사용 가능한 노트북 구조를 구축하기 위해 새 커스텀 템플릿을 생성할 수도 있습니다.
+[템플릿 갤러리][2]에서 바로 사용할 수 있는 템플릿을 확인하여 노트북을 새로 만들 수 있습니다. 템플릿에는 인시던트 대응 사후 분석, 인시던트 보고서 및 SLO 사양이 포함되어 있습니다. 재사용 가능한 노트북 구조를 빌드하기 위해 새 커스텀 템플릿을 생성할 수도 있습니다.
+
+## 비전 기록
+노트북 에서 **설정** 아이콘을 클릭하고 **버전 기록**을 클릭하여 버전 기록 사이드 패널을 엽니다. 노트북의 버전 기록을 미리 보거나 복원하거나 복제할 수 있습니다. 자세한 내용은 [버전 기록 가이드][3]를 참조하세요.
 
 ## 노트북 설정
 
@@ -153,36 +160,61 @@ title: 노트북
 
 #### 콘텐츠 유형
 
-노트북은 시각화 및 텍스트 셀을 지원합니다. 텍스트 셀은 제목, 부제목, 링크, 이미지, 목록 및 코드 블록을 사용할 수 있는 [Markdown][5]으로 형식이 지정됩니다. 노트북은 [MermaidJS][15] 형식의 다이어그램도 지원합니다.
+노트북은 시각화 및 텍스트 셀을 지원합니다. 텍스트 셀은 제목, 부제목, 링크, 이미지, 목록 및 코드 블록을 사용할 수 있는 [마크다운][5]으로 형식이 지정됩니다. 노트북은 또한 [MermaidJS][6]로 형식의 다이어그램을 지원합니다.
 
 노트북의 그래프는 메트릭, 로그 이벤트, 인덱스 스팬, 실시간 프로세스, 네트워크 트래픽, RUM 이벤트, 프로파일링 메트릭, 보안 신호 등 모든 Datadog 데이터 소스를 지원합니다. 그래프는 Datadog 쿼리 편집기로 생성됩니다. 노트북은 다음을 지원합니다.
 
-* [시계열][6]
-* [상위 목록][7]
-* [표][8]
-* [히트맵][9]
-* [배포][10]
-* [목록][11]
-* [쿼리 값][12]
-* [퍼널][13]
-* [파이][14]
+* [시계열][7]
+* [상위 목록][8]
+* [표][9]
+* [히트맵][10]
+* [분포][11]
+* [목록][12]
+* [쿼리 값][13]
+* [퍼널][14]
+* [원형][15]
+* [SLO][16]
 
+### [편집 액세스 제한]
 
+기본적으로 모든 사용자는 노트북에 대한 전체 액세스 권한을 갖고 있습니다.
+
+세분화된 액세스 제어를 사용하여 특정 노트북을 편집할 수 있는 [역할][17]을 제한합니다:
+1. 노트북을 보고 있는 동안 오른쪽 상단의 톱니를 클릭하면 설정 메뉴가 열립니다.
+1. **권한**을 선택하세요.
+1. **액세스 제한**을 클릭하세요.
+1. 대화 상자가 업데이트되어 기본적으로 **뷰어** 액세스 권한이 있는 조직 구성원을 표시합니다.
+1. 드롭다운을 사용하여 노트북을 편집할 수 있는 하나 이상의 역할, 팀 또는 사용자를 선택하세요.
+1. **Add**를 클릭합니다.
+1. 대화상자가 업데이트되어 선택한 역할에 **편집자** 권한이 있는지 표시합니다.
+1. **Save**를 클릭합니다
+
+**참고:** 노트북에 대한 편집 권한을 유지하려면 저장하기 전에 사용자가 구성원인 역할을 하나 이상 포함해야 합니다.
+
+액세스가 제한된 노트북에 대한 일반 액세스를 복원하려면 다음 단계를 따르세요.
+1. 노트북을 보면서 오른쪽 상단의 톱니를 클릭하면 설정 메뉴가 열립니다.
+1. **권한**을 선택하세요.
+1. **Restore Full Access**를 클릭하세요.
+1. **저장**을 클릭합니다.
+
+## 참고 자료
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/notebook
-[2]: https://app.datadoghq.com/notebook/list
-[3]: https://app.datadoghq.com/notebook/template-gallery
+[1]: https://app.datadoghq.com/notebook/list
+[2]: https://app.datadoghq.com/notebook/template-gallery
+[3]: /ko/notebooks/guide/version_history
 [4]: /ko/dashboards/template_variables/
 [5]: https://daringfireball.net/projects/markdown/
-[6]: /ko/dashboards/widgets/timeseries/
-[7]: /ko/dashboards/widgets/top_list/
-[8]: /ko/dashboards/widgets/table/
-[9]: /ko/dashboards/widgets/heat_map/
-[10]: /ko/dashboards/widgets/distribution/
-[11]: /ko/dashboards/widgets/list/
-[12]: /ko/dashboards/widgets/query_value/
-[13]: /ko/dashboards/widgets/funnel/
-[14]: /ko/dashboards/widgets/pie_chart/
-[15]: https://mermaid.js.org/
+[6]: https://mermaid.js.org/
+[7]: /ko/dashboards/widgets/timeseries/
+[8]: /ko/dashboards/widgets/top_list/
+[9]: /ko/dashboards/widgets/table/
+[10]: /ko/dashboards/widgets/heatmap/
+[11]: /ko/dashboards/widgets/distribution/
+[12]: /ko/dashboards/widgets/list/
+[13]: /ko/dashboards/widgets/query_value/
+[14]: /ko/dashboards/widgets/funnel/
+[15]: /ko/dashboards/widgets/pie_chart/
+[16]: /ko/dashboards/widgets/slo/
+[17]: /ko/account_management/rbac/

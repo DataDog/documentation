@@ -5,6 +5,7 @@ assets:
   dashboards:
     Superwise: assets/dashboards/superwise.json
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -14,6 +15,7 @@ assets:
       prefix: superwise.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10246
     source_type_name: Superwise
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -21,7 +23,8 @@ author:
   sales_email: support@superwise.ai
   support_email: support@superwise.ai
 categories:
-- モニタリング
+- インシデント
+- ai/ml
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/superwise/README.md
 display_on_public_website: true
@@ -31,23 +34,23 @@ integration_id: superwise
 integration_title: Superwise
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: superwise
-oauth: {}
 public_title: Superwise
 short_description: 本番環境の機械学習モデルのためのモデル観測プラットフォーム
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
+  - Category::Incidents
+  - Category::AI/ML
   - Supported OS::Linux
-  - Supported OS::macOS
   - Supported OS::Windows
-  - Category::Monitoring
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: 本番環境の機械学習モデルのためのモデル観測プラットフォーム
   media: []
@@ -56,6 +59,7 @@ tile:
   title: Superwise
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -68,7 +72,7 @@ Superwise のモデルメトリクスとインシデントのインテグレー�
 
 Superwise で Datadog インテグレーションを構成すると、標準的なモデルメトリクスが Datadog に送信され、ユーザーは Datadog でモデル観測性のダッシュボードを取得できます。特定のモデルメトリクスやインシデントポリシーを構成し、Datadog に送信することで、ユースケースに合わせたモデル観測性を実現することが可能です。
 
-## セットアップ
+## 計画と使用
 
 1. [Superwise ポータル][3]で、**Integrations** を選択します。
 
@@ -89,21 +93,21 @@ Datadog の **Metrics Explorer** で、メトリクス `superwise.integration.te
 
 ![Datadog の superwise.integration.test グラフ][7]
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "superwise" >}}
 
 
-### イベント
+### ヘルプ
 
 Superwise インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 
 Superwise インテグレーションには、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 サポートが必要な場合は、[Superwise のドキュメント][9]をご覧ください。
 

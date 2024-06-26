@@ -18,7 +18,7 @@ further_reading:
 
 ## Overview
 
-The Infrastructure list shows all of your hosts monitored by Datadog with activity during the last two hours (default) and up to one week. Search your hosts or group them by tags.
+The Infrastructure list shows all of your hosts monitored by Datadog with activity during the last two hours (default) and up to one week. Search your hosts or group them by tags. In Datadog, navigate to [**Infrastructure > Hosts**][10] to view the Infrastructure list.
 
 ## Hosts
 
@@ -114,7 +114,7 @@ At times it may also be prove useful to audit your Agent versions to ensure you 
 
 #### No Agent
 
-Another use case of the JSON export would be to get a list of AWS EC2 (excluding RDS) instances with no Agent installed. These instances appear in the infrastructure list by setting up your AWS account in the Datadog AWS integration tile. See the Python3 script below:
+Another use case of the JSON export would be to get a list of Amazon EC2 (excluding RDS) instances with no Agent installed. These instances appear in the infrastructure list by setting up your AWS account in the Datadog AWS integration tile. See the Python3 script below:
 
 ```python
 # 3p
@@ -151,8 +151,8 @@ for host in infra['rows']:
 [3]: /metrics/
 [4]: /infrastructure/livecontainers/?tab=helm#overview
 [5]: /logs/
-[6]: /agent/guide/agent-configuration-files/
+[6]: /agent/configuration/agent-configuration-files/
 [7]: /api/v1/hosts/#get-the-total-number-of-active-hosts
 [8]: /developers/guide/query-the-infrastructure-list-via-the-api/
 [9]: https://github.com/DataDog/Miscellany/tree/master/get_hostname_agentversion
-
+[10]: https://app.datadoghq.com/infrastructure

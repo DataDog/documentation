@@ -55,7 +55,6 @@ service:
     ## to keep things within the availability zone, which kube-proxy might change.
     service.beta.kubernetes.io/aws-load-balancer-nlb-target-type: "ip"
 
-
 ## Buffering
 ## This creates an EBS drive that can be used for buffers, which
 ## must then be configured in the sinks themselves.

@@ -1,5 +1,5 @@
 ---
-title: Connecting Node.js Logs and Traces
+title: Correlating Node.js Logs and Traces
 kind: documentation
 description: 'Connect your Node.js logs and traces to correlate them in Datadog.'
 code_lang: nodejs

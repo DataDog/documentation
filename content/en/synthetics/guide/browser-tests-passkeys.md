@@ -1,5 +1,5 @@
 ---
-title: Using Passkeys (FIDO2) In Browser Tests
+title: Use Passkeys (FIDO2) In Browser Tests
 kind: guide
 description: Learn how to ensure your Synthetic browser tests can log in to your applications. 
 further_reading:
@@ -29,7 +29,14 @@ Passkeys in Synthetic Monitoring are handled by Virtual Authenticator global var
 ## Use passkeys in your Synthetic browser tests
 <div class="alert alert-warning">Synthetic Monitoring supports passkeys in browser tests for Chrome and Edge.</div>
 
-When [creating a browser test][3], complete your application's passkeys registration and authentication flow using the passkeys stored in your virtual authenticator global variable. 
+### Add passkeys to a browser test
+
+1. Click [Digital Experience > New Test > Browser Test][3].
+2. Click **Save & Edit Recording**.
+3. On the recording page, click **Add Variable** > **Create variable from Global Variable**.
+4. Supply the passkeys stored in your virtual authenticator global variable that you created in the [previous step](#create-your-virtual-authenticator-global-variable).
+
+{{< img src="synthetics/guide/browser-tests-passkeys/synthetics_add_variable.png" alt="Adding your Virtual Authenticator global variable to your browser test" style="width:70%;" >}}
 
 ### Test a registration flow
 

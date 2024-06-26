@@ -16,7 +16,7 @@ further_reading:
 - link: "/monitors/manage/status/"
   tag: "Documentation"
   text: "Consult your monitor status"
-- link: "/monitors/guide/change-alert"
+- link: "/monitors/types/change-alert"
   tag: "Documentation"
   text: "Troubleshoot change alert monitors"
 ---
@@ -25,7 +25,7 @@ further_reading:
 
 Metric monitors are useful for a continuous stream of data. Any metric sent to Datadog can be alerted upon if they cross a threshold over a given period of time.
 
-To create a [metric monitor][1] in Datadog, use the main navigation: *Monitors --> New Monitor --> Metric*.
+To create a metric monitor in Datadog, navigate to [**Monitors > New Monitor**][1] and select the **Metric** monitor type.
 
 ## Choose the detection method
 
@@ -34,7 +34,9 @@ To create a [metric monitor][1] in Datadog, use the main navigation: *Monitors -
 
 A threshold alert compares metric values to a static threshold.
 
-On each alert evaluation, Datadog calculates the average, minimum, maximum, or sum over the selected period and checks if it is above or below the threshold. This is for standard alert cases where you know the expected values. The [distribution metric type][1] offers the additional threshold option of calculating percentiles over the selected period.
+On each alert evaluation, Datadog calculates the average, minimum, maximum, or sum over the selected period and checks if it is above, below, equal to, or not equal to the threshold. This is for standard alert cases where you know the expected values. The [distribution metric type][1] offers the additional threshold option of calculating percentiles over the selected period.
+
+For more information, see the [Set alert conditions](#set-alert-conditions) section.
 
 [1]: /metrics/distributions/
 {{% /tab %}}
@@ -46,6 +48,9 @@ On each alert evaluation, Datadog calculates the raw difference (a positive or n
 
 This type of alert is useful to track spikes, drops, or slow changes in a metric when there is not an unexpected threshold.
 
+For more information, see the [Change alert monitors][1] guide.
+
+[1]: /monitors/types/change-alert/
 {{% /tab %}}
 {{% tab "Anomaly" %}}
 
@@ -55,7 +60,7 @@ Anomaly alerts calculate an expected range of values for a series based on the p
 
 On each alert evaluation, Datadog calculates the percentage of the series that falls above, below, and outside of the expected range. An alert is triggered when this percentage crosses the configured threshold.
 
-For more detailed information, see the [Anomaly Monitor][1] page.
+For more information, see the [Anomaly Monitor][1] page.
 
 [1]: /monitors/types/anomaly/
 {{% /tab %}}
@@ -65,7 +70,7 @@ Outlier monitors detect when a member of a group (hosts, availability zones, par
 
 On each alert evaluation, Datadog checks whether or not all groups are clustered together and exhibiting the same behavior. An alert is triggered when one or more groups diverges from the rest of the groups.
 
-For more detailed information, see the [Outlier Monitor][1] page.
+For more information, see the [Outlier Monitor][1] page.
 
 [1]: /monitors/types/outlier/
 {{% /tab %}}
@@ -75,7 +80,7 @@ A forecast alert predicts the future behavior of a metric and compares it to a s
 
 On each alert evaluation, a forecast alert predicts the future values of the metric along with the expected deviation bounds. An alert is triggered when any part of the bounds crosses the configured threshold.
 
-For more detailed information, see the [Forecast Monitor][1] page.
+For more information, see the [Forecast Monitor][1] page.
 
 [1]: /monitors/types/forecasts/
 {{% /tab %}}
@@ -88,7 +93,7 @@ Any metric reporting to Datadog is available for monitors. Use the editor and th
 {{< tabs >}}
 {{% tab "Threshold" %}}
 
-{{< img src="monitors/monitor_types/metric/new_metric_monitor_threshold.png" alt="define the metric for threshold detection metric monitor" style="width:100%;">}}
+{{< img src="monitors/monitor_types/metric/metric_threshold_config.png" alt="define the metric for threshold detection metric monitor" style="width:100%;">}}
 
 | Step                              | Required | Default        | Example           |
 |-----------------------------------|----------|----------------|-------------------|
@@ -113,7 +118,7 @@ Any metric reporting to Datadog is available for monitors. Use the editor and th
 {{% /tab %}}
 {{% tab "Change" %}}
 
-{{< img src="monitors/monitor_types/metric/new_metric_monitor_change.png" alt="define the metric for change detection metric monitor" style="width:100%;">}}
+{{< img src="monitors/monitor_types/metric/metric_change_alert_config.png" alt="define the metric for change detection metric monitor" style="width:100%;">}}
 
 | Step                              | Required | Default        | Example           |
 |-----------------------------------|----------|----------------|-------------------|
@@ -143,14 +148,22 @@ Any metric reporting to Datadog is available for monitors. Use the editor and th
 {{< /tabs >}}
 
 **Notes:**
-  - If using a distribution metric with a percentile aggregator, a matching percentile threshold is automatically specified.
+  - If using a distribution metric with a percentile aggregator, a matching percentile threshold is automatically specified. Metrics with percentile aggregators do not generate a snapshot graph in the notifications message.
   - **max/min**: These descriptions of max and min assume that the monitor alerts when the metric goes above the threshold. For monitors that alert when below the threshold, the max and min behavior is reversed.
   - Defining metrics for monitors is similar to defining metrics for graphs. For details on using the `Advanced...` option, see [Advanced graphing][2].
   - There are different behaviors when utilizing `as_count()`. See [as_count() in Monitor Evaluations][3] for details.
 
 ## Set alert conditions
 
-Trigger when the metric is `above`, `above or equal to`, `below`, or `below or equal to`. If the value is between zero and one, a leading zero is required. For example, `0.3`.
+Trigger when the metric is one of the following:
+- `above`
+- `above or equal to`
+- `below`
+- `below or equal to`
+- `equal to`
+- `not equal to`
+
+If the value is between zero and one, a leading zero is required. For example, `0.3`.
 
 ### Advanced alert conditions
 
@@ -193,20 +206,20 @@ For more information on the Evaluation Window, see the [Monitor configuration][5
 
 #### Other options
 
-For detailed instructions on the advanced alert options (no data, auto resolve, etc.), see the [Monitor configuration][6] page.
+For instructions on the advanced alert options (no data, auto resolve), see the [Monitor configuration][6] page.
 
 ## Notifications
 
-For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][7] and [Monitor configuration][8] pages.
+For instructions on the **Configure notifications and automations** section, see the [Notifications][7] and [Monitor configuration][8] pages.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/monitors#create/metric
+[1]: https://app.datadoghq.com/monitors/create
 [2]: /dashboards/querying/#advanced-graphing
 [3]: /monitors/guide/as-count-in-monitor-evaluations/
 [5]: /monitors/configuration/?tab=thresholdalert#evaluation-window
 [6]: /monitors/configuration/#advanced-alert-conditions
 [7]: /monitors/notify/
-[8]: /monitors/configuration/?tab=thresholdalert#notify-your-team
+[8]: /monitors/configuration/?tab=thresholdalert#configure-notifications-and-automations

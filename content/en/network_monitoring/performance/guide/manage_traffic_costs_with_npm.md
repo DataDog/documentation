@@ -37,7 +37,7 @@ or monitor your own team's output specifically.
     {{< img src="network_performance_monitoring/guide/manage_traffic_costs_with_npm/scope_destination_points.png" alt="Use the type facet.">}}
     Then group your destination by `domain` to break down external traffic volume by where it is going. Although you cannot install a Datadog Agent on public servers, Datadog can resolve IPs representing external and cloud endpoints to human-readable domain names. 
     {{< img src="network_performance_monitoring/guide/manage_traffic_costs_with_npm/dns_resolution.png" alt="Group by DNS.">}}
-    The example query above filters for traffic to AWS S3, elastic load balancers, APIs, and external `.com` domains using substring wildcard entries (for example: `dns:*s3*`).  
+    The example query above filters for traffic to Amazon S3, elastic load balancers, APIs, and external `.com` domains using substring wildcard entries (for example: `dns:*s3*`).  
     {{< img src="network_performance_monitoring/guide/manage_traffic_costs_with_npm/wildcard.png" alt="Search with wildcards">}}
 
 ## Visualizing traffic costs 

@@ -26,7 +26,7 @@ Versioning of the Datadog Node.js tracing library follows [semver][1]. When a ne
 | Functionality changes incompatible with previous versions. | Functionality additions                                                 | |
 | Dropping support for anything such as Node.js versions, supported libraries, or other features.     | Adding tested support for anything, such as Node.js versions, supported libraries, or other features.   |  |
 
-When a release has changes that could go in multiple semver categories, the highest one is chosen.  [Release notes][2] are posted with each GitHub release.
+When a release has changes that could go in multiple semver categories, the highest one is chosen. [Release notes][2] are posted with each GitHub release.
 
 ### Maintenance
 
@@ -73,18 +73,45 @@ For details about how to how to toggle and configure plugins, check out the [API
 
 | Module                  | Versions | Support Type    | Notes                                      |
 | ----------------------- | -------- | --------------- | ------------------------------------------ |
-| [connect][6]           | `>=2`    | Fully supported |                                            |
-| [express][7]           | `>=4`    | Fully supported | Supports Sails, Loopback, and [more][8]   |
-| [fastify][9]           | `>=1`    | Fully supported |                                            |
+| [connect][6]           | `>=2`    | Fully supported |                                             |
+| [express][7]           | `>=4`    | Fully supported | Supports Sails, Loopback, and [more][8]     |
+| [fastify][9]           | `>=1`    | Fully supported |                                             |
 | [graphql][10]           | `>=0.10` | Fully supported | Supports Apollo Server and express-graphql |
 | [gRPC][11]              | `>=1.13` | Fully supported |                                            |
 | [hapi][12]              | `>=2`    | Fully supported | Supports [@hapi/hapi] versions `>=17.9`    |
 | [koa][13]               | `>=2`    | Fully supported |                                            |
 | [microgateway-core][14] | `>=2.1`  | Fully supported | Core library for Apigee Edge. Support for the [edgemicro][15] CLI requires static patching using [@datadog/cli][16]. |
 | [moleculer][17]         | `>=0.14` | Fully supported |                                            |
-| [next][18]              | `>=9.5`  | Fully supported | CLI usage requires `NODE_OPTIONS='-r dd-trace/init'`. |
+| [next][18]              | `>=9.5`  | Fully supported | See note on Complex framework usage.<br /><br />The tracer supports the following Next.js features: <ul><li>Standalone (`output: 'standalone'`)</li><li>App Router</li><li>Middleware: Not traced, use tracer versions `4.18.0` and `3.39.0` or higher for best experience.</li></ul> |
 | [paperplane][19]        | `>=2.3`  | Fully supported | Not supported in [serverless-mode][20]     |
 | [restify][21]           | `>=3`    | Fully supported |                                            |
+
+#### Complex framework usage
+
+Some modern complex Node.js frameworks, such as Next.js and Nest.js, provide their own entry-point into an application. For example, instead of running `node app.js`, you may need to run `next start`. In these cases, the entry point is a file that ships in the framework package, not a local application file (`app.js`).
+
+Loading the Datadog tracer early in your application code isn't effective because the framework could have already loaded modules that should be instrumented.
+
+To load the tracer before the framework, use one of the following methods:
+
+Prefix all commands you run with an environment variable:
+
+```shell
+NODE_OPTIONS='--require dd-trace/init' npm start
+
+Or, modify the `package.json` file if you typically start an application with npm or yarn run scripts:
+
+```plain
+    // existing command
+    "start": "next start",
+
+    // suggested command
+    "start": "node --require dd-trace/initialize ./node_modules/next start",
+    "start": "NODE_OPTIONS='--require dd-trace/initialize' ./node_modules/next start",
+```
+
+**Note**: The previous examples use Next.js, but the same approach applies to other frameworks with custom entry points, such as Nest.js. Adapt the commands to fit your specific framework and setup. Either command should work, but using `NODE_OPTIONS`  also applies to any child Node.js processes.
+
 
 ### Native module compatibility
 
@@ -133,6 +160,7 @@ For details about how to how to toggle and configure plugins, check out the [API
 | Module             | Versions   | Support Type    | Notes                                                  |
 | ------------------ | ---------- | --------------- | ------------------------------------------------------ |
 | [aws-sdk][49]      | `>=2.1.35` | Fully supported | CloudWatch, DynamoDB, Kinesis, Redshift, S3, SNS, SQS, and generic requests. |
+| [openai][64]       | `3.x`      | Fully supported |                                                        |
 
 ### Promise library compatibility
 
@@ -228,3 +256,4 @@ For additional information or to discuss [leave a comment on this github issue][
 [61]: https://www.meteor.com/
 [62]: https://github.com/DataDog/dd-trace-js/issues/1229
 [63]: https://github.com/mariadb-corporation/mariadb-connector-nodejs
+[64]: https://github.com/openai/openai-node

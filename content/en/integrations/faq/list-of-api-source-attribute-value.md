@@ -25,98 +25,98 @@ Search for events in the event explorer using `sources:<SEARCH_TERM>`.
 | Akamai Mpulse                 | akamai mpulse                 | akamaimpulse               |
 | Alibaba Cloud                 | alibaba cloud                 | alibabacloud               |
 | Amazon Appstream              | amazon appstream              | appstream                  |
-| Amazon Appsync                | amazon appsync                | appsync                    |
+| AWS AppSync                   | amazon appsync                | appsync                    |
 | Amazon Api Gateway            | amazon api gateway            | apigateway                 |
 | Amazon Athena                 | amazon athena                 | athena                     |
-| Amazon Auto Scaling           | amazon auto scaling           | autoscaling                |
+| AWS Auto Scaling              | amazon auto scaling           | autoscaling                |
 | Bigpanda                      | bigpanda                      | bigpanda                   |
-| Amazon App Runner             | amazon app runner             | awsapprunner               |
+| AWS App Runner                | amazon app runner             | awsapprunner               |
 | AWS Backup                    | amazon backup                 | awsbackup                  |
-| Amazon Billing                | amazon billing                | billing                    |
-| Amazon Certificate Manager    | amazon certificate manager    | awscertificatemanager      |
+| AWS Billing                   | amazon billing                | billing                    |
+| AWS Certificate Manager       | amazon certificate manager    | awscertificatemanager      |
 | Amazon Cloudfront             | amazon cloudfront             | cloudfront                 |
-| Amazon Cloudhsm               | amazon cloudhsm               | cloudhsm                   |
-| Amazon Cloudsearch            | amazon cloudsearch            | cloudsearch                |
-| Amazon Cloudtrail             | amazon cloudtrail             | cloudtrail                 |
-| Amazon Codebuild              | amazon codebuild              | codebuild                  |
-| Amazon Codedeploy             | amazon codedeploy             | codedeploy                 |
+| AWS CloudHSM                  | amazon cloudhsm               | cloudhsm                   |
+| Amazon CloudSearch            | amazon cloudsearch            | cloudsearch                |
+| AWS Cloudtrail                | amazon cloudtrail             | cloudtrail                 |
+| AWS CodeBuild                 | amazon codebuild              | codebuild                  |
+| AWS CodeDeploy                | amazon codedeploy             | codedeploy                 |
 | Amazon Cognito                | amazon cognito                | cognito                    |
-| Amazon Compute Optimizer      | amazon compute optimizer      | amazoncomputeoptimizer     |
+| AWS Compute Optimizer         | amazon compute optimizer      | amazoncomputeoptimizer     |
 | Amazon Security Lake          | amazon security lake          | amazonsecuritylake         |
 | Amazon Connect                | amazon connect                | awsconnect                 |
-| Amazon Directconnect          | amazon directconnect          | directconnect              |
-| Amazon Dms                    | amazon dms                    | awsdms                     |
+| AWS Direct Connect            | amazon directconnect          | directconnect              |
+| AWS Database Migration Service| amazon dms                    | awsdms                     |
 | Amazon Documentdb             | amazon documentdb             | documentdb                 |
 | Amazon Dynamodb               | amazon dynamodb               | dynamodb                   |
 | Amazon Dynamodb Accelerator   | amazon dynamodb accelerator   | dynamodbaccelerator        |
-| Amazon Ebs                    | amazon ebs                    | ebs                        |
-| Amazon Ec2                    | amazon ec2                    | ec2                        |
-| Amazon Ec2 Spot               | amazon ec2 spot               | ec2spot                    |
-| Amazon Ecr                    | amazon ecr                    | ecr                        |
-| Amazon Ecs                    | amazon ecs                    | ecs                        |
-| Amazon Efs                    | amazon efs                    | efs                        |
-| Amazon Elasticache            | amazon elasticache            | elasticache                |
+| Amazon EBS                    | amazon ebs                    | ebs                        |
+| Amazon EC2                    | amazon ec2                    | ec2                        |
+| Amazon EC2 Spot               | amazon ec2 spot               | ec2spot                    |
+| Amazon ECR                    | amazon ecr                    | ecr                        |
+| Amazon ECS                    | amazon ecs                    | ecs                        |
+| Amazon EFS                    | amazon efs                    | efs                        |
+| Amazon ElastiCache            | amazon elasticache            | elasticache                |
 | AWS Elastic Beanstalk         | amazon elasticbeanstalk       | elasticbeanstalk           |
 | Amazon Elastic Transcoder     | amazon elastic transcoder     | elastictranscoder          |
-| Amazon Mediaconnect           | amazon mediaconnect           | mediaconnect               |
-| Amazon Mediaconvert           | amazon mediaconvert           | mediaconvert               |
-| Amazon Medialive              | amazon medialive              | medialive                  |
-| Amazon Mediapackage           | amazon mediapackage           | mediapackage               |
-| Amazon Mediastore             | amazon mediastore             | mediastore                 |
-| Amazon Mediatailor            | amazon mediatailor            | mediatailor                |
-| Amazon Elb                    | amazon elb                    | elb                        |
-| Amazon Emr                    | amazon emr                    | emr                        |
-| Amazon Es                     | amazon es                     | es                         |
-| Amazon Eventbridge            | amazon eventbridge            | awseventhub                |
+| AWS MediaConnect              | amazon mediaconnect           | mediaconnect               |
+| AWS MediaConvert              | amazon mediaconvert           | mediaconvert               |
+| AWS MediaLive                 | amazon medialive              | medialive                  |
+| AWS MediaPackage              | amazon mediapackage           | mediapackage               |
+| AWS MediaStore                | amazon mediastore             | mediastore                 |
+| AWS MediaTailor               | amazon mediatailor            | mediatailor                |
+| Amazon ELB                    | amazon elb                    | elb                        |
+| Amazon EMR                    | amazon emr                    | emr                        |
+| Amazon ES                     | amazon es                     | es                         |
+| Amazon EventBridge            | amazon eventbridge            | awseventhub                |
 | Amazon Firehose               | amazon firehose               | firehose                   |
 | Amazon Fsx                    | amazon fsx                    | awsfsx                     |
 | Amazon Gamelift               | amazon gamelift               | gamelift                   |
-| Amazon Glue                   | amazon glue                   | glue                       |
-| Amazon Health                 | amazon health                 | health                     |
+| AWS Glue                      | amazon glue                   | glue                       |
+| AWS Health                    | amazon health                 | health                     |
 | Amazon Inspector              | amazon inspector              | inspector                  |
-| Amazon Iot                    | amazon iot                    | iot                        |
+| AWS IOT Core                  | amazon iot                    | iot                        |
 | Amazon Keyspaces              | amazon keyspaces              | keyspaces                  |
 | Amazon Kinesis Data Analytics | amazon kinesis data analytics | kinesisanalytics           |
 | Amazon Kinesis                | amazon kinesis                | kinesis                    |
-| Amazon Kms                    | amazon kms                    | kms                        |
+| AWS Key Management Service    | amazon kms                    | kms                        |
 | AWS Lambda                    | amazon lambda                 | lambda                     |
 | Amazon Lex                    | amazon lex                    | awslex                     |
-| Amazon App Mesh               | amazon app mesh               | amazonappmesh              |
-| Amazon Machine Learning       | amazon machine learning       | machinelearning            |
+| AWS App Mesh                  | amazon app mesh               | amazonappmesh              |
+| AWS Machine Learning          | amazon machine learning       | machinelearning            |
 | Amazon Mwaa                   | amazon mwaa                   | mwaa                       |
-| Amazon Mq                     | amazon mq                     | mq                         |
-| Amazon Msk                    | amazon msk                    | msk                        |
-| Amazon Nat Gateway            | amazon nat gateway            | natgateway                 |
+| Amazon MQ                     | amazon mq                     | mq                         |
+| Amazon MSK                    | amazon msk                    | msk                        |
+| AWS Nat Gateway               | amazon nat gateway            | natgateway                 |
 | Amazon Neptune                | amazon neptune                | neptune                    |
 | Amazon Ops Works              | amazon ops works              | opsworks                   |
 | Amazon Polly                  | amazon polly                  | polly                      |
-| Amazon Privatelink            | amazon privatelink            | privatelink                |
-| Amazon Rds                    | amazon rds                    | rds                        |
-| Amazon Rds Proxy              | amazon rds proxy              | rdsproxy                   |
-| Amazon Redshift               | amazon redshift               | redshift                   |
+| AWS PrivateLink               | amazon privatelink            | privatelink                |
+| Amazon RDS                    | amazon rds                    | rds                        |
+| Amazon RDS Proxy              | amazon rds proxy              | rdsproxy                   |
+| Amazon RedShift               | amazon redshift               | redshift                   |
 | Amazon Rekognition            | amazon rekognition            | rekognition                |
-| Amazon Route53                | amazon route53                | route53                    |
+| Amazon Route 53               | amazon route53                | route53                    |
 | Amazon S3                     | amazon s3                     | s3                         |
 | Amazon S3 Storage Lens        | amazon s3 storage lens        | s3storagelens              |
 | Amazon Sagemaker              | amazon sagemaker              | sagemaker                  |
-| Amazon Security Hub           | amazon security hub           | amazon_security_hub        |
-| Amazon Ses                    | amazon ses                    | ses                        |
-| Amazon Shield                 | amazon shield                 | shield                     |
-| Amazon Sns                    | amazon sns                    | sns                        |
-| Amazon Sqs                    | amazon sqs                    | sqs                        |
-| Amazon Step Functions         | amazon step functions         | stepfunctions              |
-| Amazon Storage Gateway        | amazon storage gateway        | storagegateway             |
-| Amazon Swf                    | amazon swf                    | swf                        |
+| AWS Security Hub              | amazon security hub           | amazon_security_hub        |
+| Amazon SES                    | amazon ses                    | ses                        |
+| AWS Shield                    | amazon shield                 | shield                     |
+| Amazon SNS                    | amazon sns                    | sns                        |
+| Amazon SQS                    | amazon sqs                    | sqs                        |
+| AWS Step Functions            | amazon step functions         | stepfunctions              |
+| AWS Storage Gateway           | amazon storage gateway        | storagegateway             |
+| Amazon SWF                    | amazon swf                    | swf                        |
 | Amazon Textract               | amazon textract               | awstextract                |
-| Amazon Transit Gateway        | amazon transit gateway        | awstransitgateway          |
+| AWS Transit Gateway           | amazon transit gateway        | awstransitgateway          |
 | Amazon Translate              | amazon translate              | translate                  |
-| Amazon Trusted Advisor        | amazon trusted advisor        | trustedadvisor             |
-| Amazon Waf                    | amazon waf                    | waf                        |
-| Amazon Network Firewall       | amazon network firewall       | networkfirewall            |
-| Amazon Vpn                    | amazon vpn                    | awsvpn                     |
+| AWS Trusted Advisor           | amazon trusted advisor        | trustedadvisor             |
+| AWS WAF                       | amazon waf                    | waf                        |
+| AWS Network Firewall          | amazon network firewall       | networkfirewall            |
+| AWS VPN                       | amazon vpn                    | awsvpn                     |
 | Amazon Web Services           | amazon web services           | cloudwatch                 |
 | Amazon Workspaces             | amazon workspaces             | workspaces                 |
-| Amazon Xray                   | amazon xray                   | awsxray                    |
+| Amazon X-Ray                  | amazon xray                   | awsxray                    |
 | Ansible                       | ansible                       | ansible                    |
 | Apache                        | apache                        | apache                     |
 | Azure Analysis Services       | azure analysis services       | azureanalysisservices      |

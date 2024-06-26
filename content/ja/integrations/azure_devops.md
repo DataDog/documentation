@@ -14,6 +14,12 @@ further_reading:
 - link: https://www.datadoghq.com/blog/azure-pipelines-ci-visibility/
   tag: ブログ
   text: Datadog CI Visibility で Azure Pipelines を監視する
+- link: https://www.datadoghq.com/blog/azure-pipeline-testing-with-datadog-synthetic-monitoring/
+  tag: ブログ
+  text: Azure Pipelines で Datadog Synthetic テストを実行する
+- link: https://www.datadoghq.com/blog/monitor-azure-devops/
+  tag: ブログ
+  text: Datadog を使用して Azure DevOps のワークフローとパイプラインを監視する
 git_integration_title: azure_devops
 has_logo: true
 integration_id: azuredevops
@@ -29,22 +35,23 @@ team: web-integrations
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
-Datadog と Azure DevOps を統合して、次のことを行います。
+[Azure DevOps][1] は、組織が製品をより迅速に作成・開発するために使用する機能を提供します。Datadog を Azure DevOps にインテグレーションすることで、次のことが可能になります。
 
 - プルリクエストを追跡し、さまざまなプロジェクトにマージします。
 - リリースを監視し、スタックの他のデータとの関連でイベントを作成します。
 - 完了したビルドと作業項目の期間を追跡します。
 - 作業項目と更新を追跡します。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
-Datadog で、[Azure DevOps インテグレーションタイル][1]のインストールボタンをクリックします。
+Datadog で、[Azure DevOps インテグレーションタイル][2]のインストールボタンをクリックします。
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 サービスフックを使用して、Azure DevOps サービスからのイベントに応じて Datadog でイベントとメトリクスを作成します。
 
@@ -54,18 +61,18 @@ Datadog で、[Azure DevOps インテグレーションタイル][1]のインス
 2. **Create subscription** をクリックします。
 3. Datadog サービスを選択します。
 4. トリガーする Visual Studio イベントを構成します。
-5. [Datadog API キー][2]を必須フィールドに入力します。
+5. [Datadog API キー][3]を必須フィールドに入力します。
 6. Datadog 組織のサイトを追加: {{< region-param key="dd_site_name" code="true" >}}
 7. サービスフックサブスクリプションをテストし、ウィザードを終了します。**注**: テストは、API キーまたは Datadog オーガニゼーションサイトは検証しません。
 8. Datadog に送信するイベントタイプごとにステップ 4〜7 を繰り返します。すべてのイベントタイプが受け入れられます。
 
 サービスフックを構成したら、Datadog に移動して、Azure DevOps のイベントとメトリクスを確認します。
 
-Azure 側の他の参照先: [Create a service hook for Azure DevOps Services and TFS with Datadog][3]
+Azure 側の他の参照先: [Datadog で Azure DevOps Services と TFS のサービスフックを作成する][4]
 
 #### プログラマティック
 
-Azure ドキュメントに従い[プログラムでサービスフックサブスクリプションを作成][4]し、Datadog のエンドポイントを使用します。
+Azure ドキュメントに従い[プログラムでサービスフックサブスクリプションを作成][5]し、Datadog のエンドポイントを使用します。
 
 ```text
 https://{{< region-param key="dd_full_site" >}}/intake/webhook/azuredevops?api_key=<DATADOG_API_KEY>
@@ -73,9 +80,9 @@ https://{{< region-param key="dd_full_site" >}}/intake/webhook/azuredevops?api_k
 
 ### Datadog モニターを Azure Pipelines のゲートとして使用する
 
-Datadog モニターを、Azure Pipelines の[リリースデプロイをコントロール][5]するためのゲートとして使用することもできます。このオプションを使用すると、Datadog で異常な状態が検出された場合、問題のあるデプロイを自動的に停止できます。
+Datadog のモニターをゲートとして使用し、Azure Pipelines でのリリースデプロイメントを制御することもできます。このオプションを使用すると、Datadog で異常な状態が検出された場合、問題のあるデプロイを自動的に停止できます。
 
-1. [Datadog Monitors as Deployment Gates][6] 拡張機能を Azure DevOps 組織に追加します。
+1. [Datadog Monitors as Deployment Gates][7] 拡張機能を Azure DevOps 組織に追加します。
 
     {{< img src="integrations/azure_devops/extension-service-connection.mp4" alt="拡張サービス接続" video="true" >}}
 
@@ -90,32 +97,32 @@ Datadog モニターを、Azure Pipelines の[リリースデプロイをコン�
 
 8. ステップ 5〜7 を繰り返して、デプロイパイプラインの必要に応じてゲートを追加します。
 
-**注**: 各ステージの単一の健全性状態の一部としてパイプラインのゲートの複数の状況を監視するには、[複合条件モニター][7]を使用します。
+**注**: 各ステージの単一の健全性状態の一部としてパイプラインのゲートの複数の状況を監視するには、[複合条件モニター][8]を使用します。
 
-ソースコードを表示するには、[Azure Devops Monitor Gate Extension リポジトリ][8]をご覧ください。
+ソースコードを表示するには、[Azure Devops Monitor Gate Extension リポジトリ][9]をご覧ください。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "azure_devops" >}}
 
 
-### イベント
+### ヘルプ
 
-Azure DevOps インテグレーションは、以下の[サービスフックイベントタイプ][10]をサポートします。
+Azure DevOps インテグレーションは、以下の[サービスフックイベントタイプ][11]をサポートします。
 
 - ビルドとリリース
 - 作業項目
 - コード
 
 
-### サービスのチェック
+### ヘルプ
 
 Azure DevOps インテグレーションには、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
-ご不明な点は、[Datadog のサポートチーム][11]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][12]までお問合せください。
 
 ### よくあるご質問
 
@@ -145,14 +152,15 @@ Azure DevOps インテグレーションには、サービスのチェック機�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/account/settings#integrations/azuredevops
-[2]: https://app.datadoghq.com/organization-settings/api-keys
-[3]: https://docs.microsoft.com/en-us/azure/devops/service-hooks/services/datadog?view=azure-devops
-[4]: https://docs.microsoft.com/en-us/azure/devops/service-hooks/create-subscription?view=azure-devops
-[5]: https://docs.microsoft.com/en-us/azure/devops/pipelines/release/approvals/gates?view=azure-devops
-[6]: https://marketplace.visualstudio.com/items?itemName=Datadog.datadog-monitors
-[7]: /ja/monitors/monitor_types/composite/
-[8]: https://github.com/DataDog/azure-devops-monitor-gate-extension
-[9]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_dev_ops/azure_dev_ops_metadata.csv
-[10]: https://docs.microsoft.com/en-us/azure/devops/service-hooks/events?view=azure-devops#available-event-types
-[11]: https://docs.datadoghq.com/ja/help/
+[1]: https://learn.microsoft.com/en-us/azure/devops/user-guide/what-is-azure-devops?toc=%2Fazure%2Fdevops%2Fget-started%2Ftoc.json&view=azure-devops
+[2]: https://app.datadoghq.com/integrations/azuredevops
+[3]: https://app.datadoghq.com/organization-settings/api-keys
+[4]: https://docs.microsoft.com/en-us/azure/devops/service-hooks/services/datadog?view=azure-devops
+[5]: https://docs.microsoft.com/en-us/azure/devops/service-hooks/create-subscription?view=azure-devops
+[6]: https://docs.microsoft.com/en-us/azure/devops/pipelines/release/approvals/gates?view=azure-devops
+[7]: https://marketplace.visualstudio.com/items?itemName=Datadog.datadog-monitors
+[8]: /ja/monitors/monitor_types/composite/
+[9]: https://github.com/DataDog/azure-devops-monitor-gate-extension
+[10]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_dev_ops/azure_dev_ops_metadata.csv
+[11]: https://docs.microsoft.com/en-us/azure/devops/service-hooks/events?view=azure-devops#available-event-types
+[12]: https://docs.datadoghq.com/ja/help/

@@ -5,7 +5,7 @@ aliases:
 - /ja/tracing/kubernetes/
 - /ja/tracing/setup/kubernetes
 - /ja/integrations/faq/using-rbac-permission-with-your-kubernetes-integration
-- /ja/integrations/faq/can-i-install-the-agent-on-my-Kubernetes-master-node-s
+- /ja/integrations/faq/can-i-install-the-agent-on-my-kubernetes-master-node-s
 - /ja/integrations/faq/docker-ecs-kubernetes-events/
 - /ja/integrations/faq/container-integration-event/
 - /ja/integrations/faq/why-is-the-kubernetes-check-failing-with-a-connecttimeout-error-to-port-10250/

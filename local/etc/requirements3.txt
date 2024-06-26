@@ -8,10 +8,11 @@ cssutils>=1.0.0
 htmlmin>=0.1.10
 pycparser==2.14
 requests==2.23.0
-PyYAML==5.4
+PyYAML==6.0.1
 tqdm==4.43.0
 Pygments==2.7.4
 datadog==0.35.0
 markdown2==2.3.8
 Jinja2==3.0.1
 GitPython
+

@@ -7,6 +7,7 @@ assets:
   dashboards:
     Insights Overview: assets/dashboards/overview.json
   integration:
+    auto_install: false
     configuration: {}
     events:
       creates_events: true
@@ -16,6 +17,7 @@ assets:
       prefix: fairwinds.insights.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10112
     source_type_name: Fairwinds Insights
 author:
   homepage: https://www.fairwinds.com
@@ -38,12 +40,11 @@ integration_id: fairwinds-insights
 integration_title: Fairwinds Insights
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0
 name: fairwinds_insights
-oauth: {}
 pricing:
 - billing_type: tag_count
   includes_assets: true
@@ -73,6 +74,8 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Submitted Data Type::Metrics
+  - Submitted Data Type::Events
   configuration: README.md#Setup
   description: 業務の遂行に不可欠な Kubernetes アプリケーションを保護、最適化します
   media:
@@ -111,6 +114,7 @@ tile:
   uninstallation: README.md#Uninstallation
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
 ## 概要
@@ -138,23 +142,23 @@ tile:
 * コンテナ内の既知の脆弱性を監視
 * Kubernetes のデプロイメントコンフィギュレーションを確認
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 
 Fairwinds Insights インサイトのアクションアイテムは、タグと共に Datadog に表示されるため、必要な分析を行うことができます。
 
-### サービスのチェック
+### ヘルプ
 
 Fairwinds Insights にサービスのチェックは含まれません。
 
-### イベント
+### ヘルプ
 
 * 最初のイベントは、インテグレーションのセットアップを完了すると表示されます
 * Fairwinds Insights の新しいアクションアイテムごとのイベント
 * Fairwinds Insights のイベント修正済みアクションアイテムごとのイベント
 
-## サポート
+## Agent
 
 サポートまたはリクエストをご希望の場合は、以下のチャンネルから Fairwinds にお問い合わせください。
 

@@ -5,6 +5,7 @@ assets:
   dashboards:
     Zscaler Overview: assets/dashboards/zscaler_overview.json
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -14,7 +15,8 @@ assets:
       prefix: zscaler.
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_name: Zscaler
+    source_type_id: 10261
+    source_type_name: Zscaler (コミュニティバージョン)
   logs:
     source: zscaler
 author:
@@ -36,10 +38,9 @@ integration_id: z-scaler
 integration_title: Zscaler
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: zscaler
-oauth: {}
 public_title: Zscaler
 short_description: Zscaler とのインテグレーションにより、クラウドセキュリティログを提供
 supported_os:
@@ -62,6 +63,7 @@ tile:
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -72,7 +74,7 @@ version: '1.0'
 
 Zscaler Cloud NSS のサブスクリプションが必要です。
 
-## セットアップ
+## 計画と使用
 
 ### ZIA の Web ログ
 
@@ -95,7 +97,7 @@ Zscaler Cloud NSS のサブスクリプションが必要です。
       ```
       \{ "sourcetype" : "zscalernss-web", "event" : \{"datetime":"%d{yy}-%02d{mth}-%02d{dd} %02d{hh}:%02d{mm}:%02d{ss}","reason":"%s{reason}","event_id":"%d{recordid}","protocol":"%s{proto}","action":"%s{action}","transactionsize":"%d{totalsize}","responsesize":"%d{respsize}","requestsize":"%d{reqsize}","urlcategory":"%s{urlcat}","serverip":"%s{sip}","clienttranstime":"%d{ctime}","requestmethod":"%s{reqmethod}","refererURL":"%s{ereferer}","useragent":"%s{eua}","product":"NSS","location":"%s{elocation}","ClientIP":"%s{cip}","status":"%s{respcode}","user":"%s{elogin}","url":"%s{eurl}","vendor":"Zscaler","hostname":"%s{ehost}","clientpublicIP":"%s{cintip}","threatcategory":"%s{malwarecat}","threatname":"%s{threatname}","filetype":"%s{filetype}","appname":"%s{appname}","pagerisk":"%d{riskscore}","department":"%s{edepartment}","urlsupercategory":"%s{urlsupercat}","appclass":"%s{appclass}","dlpengine":"%s{dlpeng}","urlclass":"%s{urlclass}","threatclass":"%s{malwareclass}","dlpdictionaries":"%s{dlpdict}","fileclass":"%s{fileclass}","bwthrottle":"%s{bwthrottle}","servertranstime":"%d{stime}","contenttype":"%s{contenttype}","unscannabletype":"%s{unscannabletype}","deviceowner":"%s{deviceowner}","devicehostname":"%s{devicehostname}"\}\}
       ```
-5. **保存**をクリックします。
+5. **Save** をクリックします。
 6. 変更した内容を**有効にします**。
 
 ### ZIA ファイアーウォールのログ
@@ -120,7 +122,7 @@ Zscaler Cloud NSS のサブスクリプションが必要です。
       ```
       \{ "sourcetype" : "zscalernss-fw", "event" :\{"datetime":"%s{time}","user":"%s{elogin}","department":"%s{edepartment}","locationname":"%s{elocation}","cdport":"%d{cdport}","csport":"%d{csport}","sdport":"%d{sdport}","ssport":"%d{ssport}","csip":"%s{csip}","cdip":"%s{cdip}","ssip":"%s{ssip}","sdip":"%s{sdip}","tsip":"%s{tsip}","tunsport":"%d{tsport}","tuntype":"%s{ttype}","action":"%s{action}","dnat":"%s{dnat}","stateful":"%s{stateful}","aggregate":"%s{aggregate}","nwsvc":"%s{nwsvc}","nwapp":"%s{nwapp}","proto":"%s{ipproto}","ipcat":"%s{ipcat}","destcountry":"%s{destcountry}","avgduration":"%d{avgduration}","rulelabel":"%s{erulelabel}","inbytes":"%ld{inbytes}","outbytes":"%ld{outbytes}","duration":"%d{duration}","durationms":"%d{durationms}","numsessions":"%d{numsessions}","ipsrulelabel":"%s{ipsrulelabel}","threatcat":"%s{threatcat}","threatname":"%s{ethreatname}","deviceowner":"%s{deviceowner}","devicehostname":"%s{devicehostname}"\}\}
       ```
-5. **保存**をクリックします。
+5. **Save** をクリックします。
 6. 変更した内容を**有効にします**。
 
 ### ZIA の DNS ログ
@@ -144,7 +146,7 @@ Zscaler Cloud NSS のサブスクリプションが必要です。
       ```
       \{ "sourcetype" : "zscalernss-dns", "event" :\{"datetime":"%s{time}","user":"%s{login}","department":"%s{dept}","location":"%s{location}","reqaction":"%s{reqaction}","resaction":"%s{resaction}","reqrulelabel":"%s{reqrulelabel}","resrulelabel":"%s{resrulelabel}","dns_reqtype":"%s{reqtype}","dns_req":"%s{req}","dns_resp":"%s{res}","srv_dport":"%d{sport}","durationms":"%d{durationms}","clt_sip":"%s{cip}","srv_dip":"%s{sip}","category":"%s{domcat}","odeviceowner":"%s{odeviceowner}","odevicehostname":"%s{odevicehostname}"\}\}
       ```
-5. **保存**をクリックします。
+5. **Save** をクリックします。
 6. 変更した内容を**有効にします**。
 
 ### ZIA トンネルログ
@@ -168,28 +170,28 @@ Zscaler Cloud NSS のサブスクリプションが必要です。
       ```
       \{ "sourcetype" : "zscalernss-tunnel", "event" : \{"datetime":"%s{datetime}","Recordtype":"%s{tunnelactionname}","tunneltype":"IPSEC IKEV %d{ikeversion}","user":"%s{vpncredentialname}","location":"%s{locationname}","sourceip":"%s{sourceip}","destinationip":"%s{destvip}","sourceport":"%d{srcport}","destinationport":"%d{dstport}","lifetime":"%d{lifetime}","ikeversion":"%d{ikeversion}","spi_in":"%lu{spi_in}","spi_out":"%lu{spi_out}","algo":"%s{algo}","authentication":"%s{authentication}","authtype":"%s{authtype}","recordid":"%d{recordid}"\}\}
       ```
-5. **保存**をクリックします。
+5. **Save** をクリックします。
 6. 変更した内容を**有効にします**。
 
 ### 検証
 
 [Agent の status サブコマンドを実行][7]し、Checks セクションで `zscaler` を探します。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 
 Zscaler には、メトリクスは含まれません。
 
-### サービスのチェック
+### ヘルプ
 
 Zscaler には、サービスのチェック機能は含まれません。
 
-### イベント
+### ヘルプ
 
 Zscaler には、イベントは含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 

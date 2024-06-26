@@ -1,6 +1,5 @@
 ---
 title: Library Configuration
-kind: documentation
 aliases:
   - /security_platform/application_security/setup_and_configure
   - /security/application_security/setup_and_configure
@@ -12,7 +11,7 @@ further_reading:
 - link: "/security/application_security/enabling/"
   tag: "Documentation"
   text: "Enabling ASM for Your Services"
-- link: "/security/default_rules/#cat-application-security"
+- link: "/security/default_rules/?category=cat-application-security"
   tag: "Documentation"
   text: "Out-of-the-Box Application Security Management Rules"
 - link: "/security/application_security/add-user-info/"
@@ -41,10 +40,10 @@ Read [Tracking User Activity][1] for more information on how to manually track u
 
 ## Exclude specific parameters from triggering detections
 
-There may be a time when an ASM signal, or a suspicious request, is a false positive. For example, ASM repeatedly detects
-the same suspicious request and a signal is generated, but the signal has been reviewed and is not a threat.
+There may be a time when an ASM signal, or a security trace, is a false positive. For example, ASM repeatedly detects
+the same security trace and a signal is generated, but the signal has been reviewed and is not a threat.
 
-You can add an entry to the passlist, which ignore events from a rule, to eliminate noisy signal patterns and focus on legitimately suspicious requests.
+You can add an entry to the passlist, which ignore events from a rule, to eliminate noisy signal patterns and focus on legitimately security traces.
 
 To add a passlist entry, do one of the following:
 
@@ -57,7 +56,7 @@ To add a passlist entry, do one of the following:
 
 The data that you collect with Datadog can contain sensitive information that you want to filter out, obfuscate, scrub, filter, modify, or just not collect. Additionally, the data may contain synthetic traffic that might cause your threat detection be inaccurate, or cause Datadog to not accurately indicate the security of your services.
 
-By default, ASM collects information from suspicious requests to help you understand why the request was flagged as suspicious. Before sending the data, ASM scans it for patterns and keywords that indicate that the data is sensitive. If the data is deemed sensitive, it is replaced with a `<redacted>` flag. This enables you to observe that although the request was suspicious, the request data was not collected because of data security concerns.
+By default, ASM collects information from security traces to help you understand why the request was flagged as suspicious. Before sending the data, ASM scans it for patterns and keywords that indicate that the data is sensitive. If the data is deemed sensitive, it is replaced with a `<redacted>` flag. This enables you to observe that although the request was suspicious, the request data was not collected because of data security concerns.
 
 To protect users' data, sensitive data scanning is activated by default in ASM. You can customize the configuration by using the following environment variables. The scanning is based on the [RE2 syntax][2]. To customize scanning, set the value of these environment variables to a valid RE2 pattern:
 
@@ -96,12 +95,6 @@ The following are examples of data that are flagged as sensitive by default:
 
 See [APM Data Security][3] for information about other mechanisms in the Datadog Agent and libraries that can also be used to remove sensitive data.
 
-## Disabling Application Security Management
-
-To disable ASM, remove the `DD_APPSEC_ENABLED=true` environment variable from your application configuration. Once it's removed, restart your service.
-
-If you need additional help, contact [Datadog support][6].
-
 ## Configure a custom blocking page or payload
 
 {{% asm-protection-page-configuration %}}
@@ -119,3 +112,6 @@ If you need additional help, contact [Datadog support][6].
 [5]: https://app.datadoghq.com/security/configuration/asm/passlist
 [6]: /help/
 [7]: /security/application_security/threats/add-user-info/?tab=set_user#disabling-automatic-user-activity-event-tracking
+[8]: https://app.datadoghq.com/security/configuration/asm/services-config
+
+

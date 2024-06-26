@@ -22,7 +22,9 @@ The profiler is shipped within Datadog tracing libraries. If you are already usi
 
 ## Requirements
 
-The Datadog Profiler requires at least Node.js 14, but Node.js 16 or higher is recommended. **If you use a version of Node.js earlier than 16, some applications see tail latency spikes every minute when starting the next profile.**
+For a summary of the minimum and recommended runtime and tracer versions across all languages, read [Supported Language and Tracer Versions][7].
+
+The Datadog Profiler requires at least Node.js 14, but Node.js 16 or higher is recommended. If you use a version of Node.js earlier than 16, some applications see tail latency spikes every minute when starting the next profile.
 
 Continuous Profiler is not supported on serverless platforms, such as AWS Lambda.
 
@@ -30,7 +32,7 @@ Continuous Profiler is not supported on serverless platforms, such as AWS Lambda
 
 To begin profiling applications:
 
-1. If you are already using Datadog, upgrade your Agent to version [7.20.2][2]+ or [6.20.2][3]+.
+1. Ensure Datadog Agent v6+ is installed and running. Datadog recommends using [Datadog Agent v7+][2].
 
 2. Run `npm install --save dd-trace@latest` to add a dependency on the `dd-trace` module which includes the profiler.
 
@@ -73,11 +75,13 @@ const tracer = require('dd-trace/init')
 {{% /tab %}}
 {{< /tabs >}}
 
-4. A minute or two after starting your Node.js application, your profiles will show up on the [APM > Profiler page][4].
+4. Optional: Set up [Source Code Integration][4].
+
+5. A minute or two after starting your Node.js application, your profiles will show up on the [APM > Profiler page][5].
 
 ## Not sure what to do next?
 
-The [Getting Started with Profiler][5] guide takes a sample service with a performance problem and shows you how to use Continuous Profiler to understand and fix the problem.
+The [Getting Started with Profiler][6] guide takes a sample service with a performance problem and shows you how to use Continuous Profiler to understand and fix the problem.
 
 ## Experiencing high overhead?
 
@@ -90,5 +94,7 @@ Node.js 16 or higher is recommended. On earlier versions, some applications see 
 [1]: /tracing/trace_collection/
 [2]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
 [3]: https://app.datadoghq.com/account/settings/agent/6?platform=overview
-[4]: https://app.datadoghq.com/profiling
-[5]: /getting_started/profiler/
+[4]: /integrations/guide/source-code-integration/?tab=nodejs
+[5]: https://app.datadoghq.com/profiling
+[6]: /getting_started/profiler/
+[7]: /profiler/enabling/supported_versions/

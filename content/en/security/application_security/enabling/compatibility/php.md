@@ -1,53 +1,49 @@
 ---
-title: PHP Compatibility Requirements 
+title: PHP Compatibility Requirements
 kind: documentation
 code_lang: php
 type: multi-code-lang
 code_lang_weight: 40
 ---
 
-## ASM capabilities support
+## Application Security capabilities support
 
-The following ASM capabilities are supported in the PHP library, for the specified tracer version:
+The following application security capabilities are supported in the PHP library, for the specified tracer version:
 
-| ASM capability                   | Minimum PHP tracer version |
+| Application Security capability                   | Minimum PHP tracer version |
 | -------------------------------- |----------------------------|
 | Threat Detection | 0.84.0                     |
 | Threat Protection  | 0.86.0                     |
-| Vulnerability Management for Open Source Software (OSS) | 0.90.0              |
-| Vulnerability Management for Code-level (beta) | not supported              |
+| Customize response to blocked requests | 0.86.0 |
+| Software Composition Analysis (SCA) | 0.90.0              |
+| Code Security        | not supported              |
 | Automatic user activity event tracking | 0.89.0                     |
+| API Security | 0.98.0 |
 
-The minimum tracer version to get all supported ASM capabilities for PHP is 0.86.0.
+The minimum tracer version to get all supported ASM capabilities for PHP is 0.98.0.
 
 
 <div class="alert alert-info">If you would like to see support added for any of the unsupported capabilities, let us know! Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send details</a>.</div>
 
 ### Supported deployment types
-|Type | Threat Detection support | Vulnerability Management for OSS support |
-| ---           |   ---             |           ----            |
-| Docker        | {{< X >}}         |                           |
-| Kubernetes    | {{< X >}}         |                           | 
-| AWS ECS       | {{< X >}}         |                           |
-| AWS Fargate   |                   |                           |
-| AWS Lambda    |                   |                           |   
+| Type        | Threat Detection support | Software Composition Analysis |
+|-------------|--------------------------|-------------------------------|
+| Docker      | {{< X >}}                | {{< X >}}                     |
+| Kubernetes  | {{< X >}}                | {{< X >}}                     |
+| Amazon ECS  | {{< X >}}                | {{< X >}}                     |
+| AWS Fargate |                          |                               |
+| AWS Lambda  |                          |                               |
 
 ## Language and framework compatibility
 
 <div class="alert alert-info">
 <strong>Note:</strong>
-PHP 5.x is fully supported until version 0.75.0. It is now in maintenance mode and supported with security and important bug fixes until December 31, 2023.
-
-<br>
-<br>
-
-If you are using PHP 5.x version in your application and have a feature request which is critical for your business needs, contact <a href="https://www.datadoghq.com/support/">Datadog Support</a>.
-
-It's recommended to use <a href="https://www.php.net/supported-versions">officially supported versions</a> of PHP, especially 7.4, 8.0, and 8.1.
+It's recommended to use <a href="https://www.php.net/supported-versions">officially supported versions</a> of PHP, especially 8.0, 8.1 and 8.2.
 </div>
 
 | PHP Version    | Support level                         | Package version |
 |:---------------|:--------------------------------------|:----------------|
+| 8.3.x          | General Availability                  | > `0.95.0+`     |
 | 8.2.x          | General Availability                  | > `0.82.0+`     |
 | 8.1.x          | General Availability                  | > `0.66.0+`     |
 | 8.0.x          | General Availability                  | > `0.52.0+`     |
@@ -56,11 +52,8 @@ It's recommended to use <a href="https://www.php.net/supported-versions">officia
 | 7.2.x          | General Availability                  | All             |
 | 7.1.x          | General Availability                  | All             |
 | 7.0.x          | General Availability                  | All             |
-| 5.6.x          | Maintenance (until December 31, 2023) | All             |
-| 5.5.x          | Maintenance (until December 31, 2023) | All             |
-| 5.4.x          | Maintenance (until December 31, 2023) | All             |
 
-PHP ASM supports the following SAPI's:
+Application Security capabililties for PHP support the following SAPI's:
 
 | SAPI           | Support type    |
 |:---------------|:----------------|
@@ -71,17 +64,19 @@ PHP ASM supports the following SAPI's:
 
 ## Supported processor architectures
 
-PHP ASM supports the following architectures:
+Application Security capabililties for PHP support the following architectures:
 
 | Processor architectures                   | Support level         | Package version                        |
 | ------------------------------------------|-----------------------|----------------------------------------|
 | Linux GNU amd64 (`x86-64-linux-gnu`)      | GA                    | All                                    |
 | Linux MUSL amd64 (`x86-64-linux-musl`)    | GA                    | All                                    |
+| Linux GNU arm64 (aarch64-linux-gnu)       | GA                    | > `0.95.0`                             |
+| Linux MUSL arm64 (aarch64-linux-musl)     | GA                    | > `0.95.0`                             |
 
 The Datadog PHP library supports PHP version 7.0 and above on the following architectures:
 
-- Linux (GNU) x86-64
-- Alpine Linux (musl) x86-64
+- Linux (GNU) x86-64 and arm64
+- Alpine Linux (musl) x86-64 and arm64
 
 The library supports the use of all PHP frameworks, and also the use of no framework.
 
@@ -92,11 +87,11 @@ The library supports the use of all PHP frameworks, and also the use of no frame
 - Tags for the HTTP request (status code, method, etc)
 - Distributed Tracing to see attack flows through your applications
 
-##### ASM Capability Notes
-- **Vulnerability Management for OSS** is not supported
-- **Vulnerability Management for Code-level** is not supported
+##### Application Security Capability Notes
+- **Software Composition Analysis** is not supported
+- **Code Security** is not supported
 
-The following frameworks aren't directly instrumented by ASM, but indirectly supported through runtime instrumentation.
+The following frameworks aren't directly instrumented by Application Security, but indirectly supported through runtime instrumentation.
 
 | Framework                | Versions    | Threat Detection supported? | Threat Protection supported? |
 | ------------------------ | ----------- | --------------- | ---------------------------------------------- |
@@ -109,7 +104,6 @@ The following frameworks aren't directly instrumented by ASM, but indirectly sup
 | Magento       |  3.8+       |  {{< X >}} | {{< X >}} |
 | Neos Flow     |  3.0.x      |  {{< X >}} | {{< X >}} |
 | Phalcon       | 3.1+        |  {{< X >}} | {{< X >}} |
-| Roadrunner    | 3.1+        |  {{< X >}} | {{< X >}} |
 | Slim          | 3.1+        |  {{< X >}} | {{< X >}} |
 | Symfony 3     | 3.1+        |  {{< X >}} | {{< X >}} |
 | Symfony 4     | 3.1+        |  {{< X >}} | {{< X >}} |
@@ -118,6 +112,7 @@ The following frameworks aren't directly instrumented by ASM, but indirectly sup
 | Yii           | 3.1+        |  {{< X >}} | {{< X >}} |
 | Zend          | 3.1+        |  {{< X >}} | {{< X >}} |
 | Symfony 3     | 3.1+        |  {{< X >}} | {{< X >}} |
+| RoadRunner    | 2.x         |  {{< X >}} | {{< X >}} |
 
 
 ### Data store compatibility
@@ -128,14 +123,14 @@ The following frameworks aren't directly instrumented by ASM, but indirectly sup
 - query info (for example, a sanitized query string)
 - error and stacktrace capturing
 
-##### ASM Capability Notes
-- **Vulnerability Management for OSS** is not supported
-- **Vulnerability Management for Code-level** is not supported
+##### Application Security Capability Notes
+- **Software Composition Analysis** is not supported
+- **Code Security** is not supported
 - **Threat Protection** also works at the HTTP request (input) layer, and so works for all databases by default, even those not listed in the table below.
 
 | Framework         | Versions | Threat Detection supported?    | Threat Protection supported?|
 |-------------------|-----------------|-----------------|---------------|
-| Amazon RDS        | Any supported PHP | {{< X >}}  |   {{< X >}} | 
+| Amazon RDS        | Any supported PHP | {{< X >}}  |   {{< X >}} |
 | Eloquent       | Laravel supported versions | {{< X >}} | {{< X >}} |
 | Memcached        | Any supported PHP |   {{< X >}}    | {{< X >}} |
 | MySQLi        | Any supported PHP | {{< X >}} | {{< X >}} |

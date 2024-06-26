@@ -5,10 +5,12 @@ assets:
   dashboards:
     OneLogin-Overview: assets/dashboards/OneLogin-Overview_dashboard.json
   integration:
+    auto_install: false
     events:
       creates_events: false
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 617
     source_type_name: OneLogin
 author:
   homepage: https://www.datadoghq.com
@@ -18,7 +20,6 @@ author:
 categories:
 - ログの収集
 - セキュリティ
-- web
 dependencies: []
 description: OneLogin
 display_on_public_website: true
@@ -30,10 +31,9 @@ integration_id: onelogin
 integration_title: OneLogin
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: onelogin
-oauth: {}
 public_title: OneLogin
 short_description: OneLogin のイベントログとインテグレーションします。
 supported_os:
@@ -49,7 +49,6 @@ tile:
   - Supported OS::macOS
   - Category::Log Collection
   - Category::Security
-  - Category::Web
   configuration: README.md#Setup
   description: OneLogin のイベントログとインテグレーションします。
   media: []
@@ -59,13 +58,14 @@ tile:
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
 ## 概要
 
 Datadog と OneLogin を接続すると、OneLogin が公開するログを見ることができます。
 
-## セットアップ
+## 計画と使用
 
-### ログの収集
+### 収集データ
 #### クライアント ID とクライアントシークレットを生成する
 
 1. OneLogin アカウントにログインします。
@@ -80,11 +80,11 @@ Datadog と OneLogin を接続すると、OneLogin が公開するログを見�
 2. クライアント ID、クライアントシークレットを対応するフィールドに入力します。
 3. オプションで、ログに関連付けるタグをカンマ区切りで追加することができます。
 
-### メトリクス
+### データセキュリティ
 
 OneLogin インテグレーションには、メトリクスは含まれません。
 
-### イベント
+### ヘルプ
 
 OneLogin インテグレーションには、イベントは含まれません。
 
@@ -92,7 +92,7 @@ OneLogin インテグレーションには、イベントは含まれません�
 
 OneLogin インテグレーションには、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][2]までお問合せください。
 

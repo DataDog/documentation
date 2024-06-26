@@ -27,4 +27,4 @@ Query #2: `p99:distribution.rollup(60)`
 Unlike COUNT, GAUGE, and RATE metric types which aggregate first in time and then in space the distribution metric type is stored as DDSketches. Distributions with percentiles are merged in time and space at the same time. By selecting `p99 by`, you're aggregating the distribution metric by the 99th percentile in time and space.
 
 _Example: Suppose you're graphing on a dashboard timeframe of the Past 4 hours, p99:distribution.rollup(60)._
-Datadog merges the sketch data server-side to represent a rollup interval of a minute (for every minute within the dashboard timeframe of 4 hours). After the the rollup is calculated, Datadog calculates a 99th percentile value for each minute interval.
+Datadog merges the sketch data server-side to represent a rollup interval of a minute (for every minute within the dashboard timeframe of 4 hours). After the rollup is calculated, Datadog calculates a 99th percentile value for each minute interval.

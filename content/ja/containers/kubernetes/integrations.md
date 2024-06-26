@@ -48,8 +48,8 @@ title: Kubernetes インテグレーションオートディスカバリー
 * [Key-Value ストア](?tab=keyvaluestore#configuration)
 * [Helm チャート](?tab=helm#configuration)
 
-**注**: サポートされているインテグレーションの一部 ([Ceph][5]、[Varnish][6]、[Postfix][7]、[Cassandra Nodetools][8]、[Gunicorn][9]) は、プロセスツリーデータまたはファイルシステムへのアクセスを必要とするため、標準のオートディスカバリーに対応していません。
-標準のオートディスカバリーと互換性のないインテグレーションを設定するには、ポッドで公式の Prometheus エクスポーターを使用し、次に Agent で OpenMetrics チェックとオートディスカバリーを使用してポッドを見つけ、エンドポイントをクエリします。たとえば、Kubernetes の標準パターンは、ノードレベルまたはクラスターレベルのコレクターを持つサイドカーアダプターです。この設定によってエクスポーターはデータにアクセスでき、HTTP エンドポイントを使用してそのデータを公開します。これにより、OpenMetrics チェックと Datadog オートディスカバリーはこのデータにアクセスできます。
+**注**: サポートされているインテグレーションの一部 ([Ceph][4]、[Varnish][5]、[Postfix][6]、[Cassandra Nodetools][7]、[Gunicorn][8]) は、プロセスツリーデータまたはファイルシステムへのアクセスを必要とするため、標準のオートディスカバリーに対応していません。
+標準のオートディスカバリーに対応していないインテグレーションを設定するためには、ポッド内で公式の Prometheus エクスポーターを利用し、その後、Agent で OpenMetrics チェックとオートディスカバリーを用いてポッドを検出し、エンドポイントに対してクエリを行います。例えば、Kubernetes の標準パターンは、ノードレベルまたはクラスターレベルのコレクターを持つサイドカーアダプターです。この設定を通じて、エクスポーターはデータにアクセスし、HTTP エンドポイントを介してデータを公開できます。その結果、OpenMetrics チェックと Datadog オートディスカバリーもこのデータにアクセス可能になります。
 
 ## コンフィギュレーション
 
@@ -293,7 +293,7 @@ key-value ストアがテンプレートソースとして有効になってい�
 **注**: key-value ストアを使用している場合、オートディスカバリーは特定の構成を特定のコンテナに適用するために、`<CONTAINER_IDENTIFIER>` と `.spec.containers[0].image` の一致を試みることで、コンテナを**イメージ**で識別します。
 
 [1]: /ja/integrations/consul/
-[2]: /ja/agent/guide/agent-commands/
+[2]: /ja/agent/configuration/agent-commands/
 {{% /tab %}}
 {{% tab "Helm" %}}
 
@@ -317,6 +317,39 @@ key-value ストアがテンプレートソースとして有効になってい�
 [2]: /ja/agent/guide/ad_identifiers/
 [3]: https://github.com/DataDog/helm-charts/blob/92fd908e3dd7b7149ce02de1fe859ae5ac717d03/charts/datadog/values.yaml#L680-L689
 [4]: /ja/agent/cluster_agent/clusterchecks
+{{% /tab %}}
+{{% tab "Operator" %}}
+
+`DatadogAgent` 構成の `nodeAgent` コンポーネントにオーバーライドの `extraConfd.configDataMap`を追加することで、静的およびオートディスカバリーのインテグレーションチェックの両方を定義することができます。各キーが Agent の `conf.d` ディレクトリのファイルになります。
+
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    [...]
+  features:
+    [...]
+  override:
+    nodeAgent:
+      extraConfd:
+        configDataMap:
+          <INTEGRATION_NAME>.yaml: |-
+            ad_identifiers:
+              - <INTEGRATION_AUTODISCOVERY_IDENTIFIER>
+            init_config:
+              - <INIT_CONFIG>
+            instances:
+              - <INSTANCES_CONFIG>
+```
+`<INTEGRATION_AUTODISCOVERY_IDENTIFIER>` の詳細については、[オートディスカバリーコンテナ識別子][1]を参照してください。
+
+**注**: Cluster Agent を使用していて、クラスターチェック用のオートディスカバリーを構成したい場合は、`clusterAgent` コンポーネントにオーバーライドの `extraConfd.configDataMap` を追加し、必ず `cluster_check: true` を入れてください。詳細については、[クラスターチェック][2]を参照してください。
+
+[1]: /ja/agent/guide/ad_identifiers/
+[2]: /ja/agent/cluster_agent/clusterchecks
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -421,7 +454,7 @@ spec:
 kind: ConfigMap
 apiVersion: v1
 metadata:
-  name: redis-config-map
+  name: redisdb-config-map
   namespace: default
 data:
   redisdb-config: |-
@@ -470,7 +503,7 @@ etcdctl set /datadog/check_configs/redis/instances '[{"host": "%%host%%","port":
 
 **注**: パスワードがプレーンテキストで保存されることを避けるために、`"%%env_<ENV_VAR>%%"` テンプレート変数ロジックが使用されています。そのため、`REDIS_PASSWORD` 環境変数を Agent に渡す必要があります。[オートディスカバリーテンプレート変数のドキュメント][1]を参照してください。
 
-auto-conf ファイルとは異なり、**key-value ストアの場合は、コンテナ識別子として短いイメージ名 (`redis` など) も長いイメージ名 (`redis:latest` など) も使用できます**。
+auto-conf ファイルと異なり、**key-value ストアでは、短いイメージ名 (`redis` など) または長いイメージ名 (`redis:latest` など) をコンテナ識別子として使用できます**。
 
 [1]: /ja/agent/faq/template_variables/
 {{% /tab %}}
@@ -484,11 +517,41 @@ auto-conf ファイルとは異なり、**key-value ストアの場合は、コ�
         - redis
       init_config:
       instances:
-        - host: %%host%%
+        - host: "%%host%%"
           port: 6379
-          password: %%env_REDIS_PASSWORD%%
+          password: "%%env_REDIS_PASSWORD%%"
 ```
-結果として、Agent には `/confd` ディレクトリに上記のコンフィギュレーションで `redis.yaml` ファイルが含まれます。
+結果として、Agent には `conf.d` ディレクトリに上記のコンフィギュレーションで `redisdb.yaml` ファイルが含まれます。
+**注**: パスワードがプレーンテキストで保存されることを避けるために、`"%%env_<ENV_VAR>%%"` テンプレート変数ロジックが使用されています。そのため、`REDIS_PASSWORD` 環境変数を Agent に渡す必要があります。[オートディスカバリーテンプレート変数のドキュメント][1]を参照してください。
+
+[1]: /ja/agent/faq/template_variables/
+{{% /tab %}}
+{{% tab "Operator" %}}
+
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    [...]
+  features:
+    [...]
+  override:
+    nodeAgent:
+      extraConfd:
+        configDataMap:
+          redisdb.yaml: |-
+            ad_identifiers:
+              - redis
+            init_config:
+            instances:
+              - host: "%%host%%"
+                port: 6379
+                password: "%%env_REDIS_PASSWORD%%"
+```
+結果として、Agent には `conf.d` ディレクトリに上記のコンフィギュレーションで `redisdb.yaml` ファイルが含まれます。
 **注**: パスワードがプレーンテキストで保存されることを避けるために、`"%%env_<ENV_VAR>%%"` テンプレート変数ロジックが使用されています。そのため、`REDIS_PASSWORD` 環境変数を Agent に渡す必要があります。[オートディスカバリーテンプレート変数のドキュメント][1]を参照してください。
 
 [1]: /ja/agent/faq/template_variables/
@@ -499,7 +562,7 @@ auto-conf ファイルとは異なり、**key-value ストアの場合は、コ�
 
 以下の構成は、`<CONTAINER_IDENTIFIER>` : `apache` を持つ Apache コンテナイメージに適用されます。オートディスカバリーテンプレートは、Apache コンテナからメトリクスを収集し、2 つのエンドポイントをテストするためのインスタンスで Datadog-HTTP チェックをセットアップするように構成されます。
 
-チェック名は、`apache`、`http_check`、これらの `<初期コンフィギュレーション>`、および `<インスタンスコンフィギュレーション>` です。完全な構成は、それぞれのドキュメントの [Datadog-Apache インテグレーション][10]と [Datadog-HTTP チェックインテグレーション][11]のページにあります。
+チェック名は、`apache`、`http_check`、これらの `<初期コンフィギュレーション>`、および `<インスタンスコンフィギュレーション>` です。完全な構成は、それぞれのドキュメント、 [Datadog-Apache インテグレーション][9]と [Datadog-HTTP チェックインテグレーション][10]で確認することができます。
 
 {{< tabs >}}
 {{% tab "Kubernetes (AD v2)" %}}
@@ -708,11 +771,11 @@ etcdctl set /datadog/check_configs/httpd/instances '[[{"apache_status_url": "htt
 
 [1]: /ja/agent/docker/integrations/
 [2]: /ja/getting_started/integrations/#configuring-agent-integrations
-[3]: /ja/agent/guide/secrets-management/
-[5]: /ja/integrations/ceph/
-[6]: /ja/integrations/varnish/#autodiscovery
-[7]: /ja/integrations/postfix/
-[8]: /ja/integrations/cassandra/#agent-check-cassandra-nodetool
-[9]: /ja/integrations/gunicorn/
-[10]: /ja/integrations/apache/#setup
-[11]: /ja/integrations/http_check/#setup
+[3]: /ja/agent/configuration/secrets-management/
+[4]: /ja/integrations/ceph/
+[5]: /ja/integrations/varnish/#autodiscovery
+[6]: /ja/integrations/postfix/
+[7]: /ja/integrations/cassandra/#agent-check-cassandra-nodetool
+[8]: /ja/integrations/gunicorn/
+[9]: /ja/integrations/apache/#setup
+[10]: /ja/integrations/http_check/#setup

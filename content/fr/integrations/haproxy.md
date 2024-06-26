@@ -44,7 +44,7 @@ guid: cd935030-131f-4545-8b6a-a4ca21b8565b
 integration_id: haproxy
 integration_title: HAProxy
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: haproxy.

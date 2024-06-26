@@ -3,6 +3,7 @@ app_id: resin
 app_uuid: ff99886d-87b7-407a-aa90-7bea5ca27564
 assets:
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -13,6 +14,7 @@ assets:
       prefix: resin.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10203
     source_type_name: Resin
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -20,7 +22,6 @@ author:
   sales_email: brent@bmontague.com
   support_email: brent@bmontague.com
 categories:
-- web
 - ログの収集
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/resin/README.md
@@ -31,24 +32,22 @@ integration_id: resin
 integration_title: Resin
 integration_version: 1.0.0
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: resin
-oauth: {}
 public_title: Resin
 short_description: Resin 内のスレッドプールと接続プールの設定を追跡
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Web
   - Category::Log Collection
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Resin 内のスレッドプールと接続プールの設定を追跡
   media: []
@@ -57,19 +56,20 @@ tile:
   title: Resin
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
 
 このチェックは、Datadog Agent を通じて [Resin][1] を監視します。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 Resin チェックは [Datadog Agent][2] パッケージに含まれていないため、お客様自身でインストールする必要があります。
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 1. 以下の JVM 引数を追加して [Resin のデフォルトサーバー][3]を構成し、JMX を有効にします。
 
@@ -88,7 +88,7 @@ Resin チェックは [Datadog Agent][2] パッケージに含まれていない
 
 [Agent の status サブコマンドを実行][5]し、Checks セクションで `resin` を探します。
 
-### ログの収集
+### 収集データ
 
 Linux プラットフォームの場合は、`/etc/datadog-agent/datadog.yaml` で Datadog Agent のログ収集を有効にします。その他のプラットフォームの場合は、[Agent コンフィギュレーションファイルガイド][6]を参照し、コンフィギュレーションファイルの場所を調べてください。
 
@@ -104,21 +104,21 @@ logs_enabled: true
         source: resin
     ```
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "resin" >}}
 
 
-### イベント
+### ヘルプ
 
 Resin には、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 {{< get-service-checks-from-git "resin" >}}
 
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
 

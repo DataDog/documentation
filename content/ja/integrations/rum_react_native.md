@@ -1,16 +1,18 @@
 ---
 app_id: rum-react-native
 app_uuid: 61207de8-cc1e-4915-a18a-7fb25093d85c
+assets: {}
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
-- メトリクス
-- モバイル
+- ログの収集
+- モニター
+- apm
 - ネットワーク
-- トレーシング
+- profiler_troubleshooting
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/rum_react_native/README.md
 display_on_public_website: true
@@ -20,30 +22,24 @@ integration_id: rum-react-native
 integration_title: React Native
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: rum_react_native
-oauth: {}
 public_title: React Native
 short_description: Datadog RUM を使用した React Native アプリケーションの監視とメトリクス生成
 supported_os:
 - android
-- linux
-- windows
 - ios
-- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
+  - Category::Log Collection
   - Category::Metrics
   - Category::Mobile
   - Category::Network
   - Category::Tracing
   - Supported OS::Android
-  - Supported OS::Linux
-  - Supported OS::Windows
   - Supported OS::iOS
-  - Supported OS::macOS
   configuration: README.md#Setup
   description: Datadog RUM を使用した React Native アプリケーションの監視とメトリクス生成
   media: []
@@ -52,6 +48,7 @@ tile:
   title: React Native
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -74,7 +71,7 @@ React Native アプリケーションのエンドツーエンドの健全性を�
 - クライアントサイドとサーバーサイドのメトリクス、トレース、ログを統合し、クラッシュのデバッグを高速化
 - フロントエンドとバックエンドのチーム向けに、フルスタックモニタリングを単一プラットフォームで実現
 
-## セットアップ
+## 計画と使用
 
 ### RUM イベントの収集
 
@@ -88,9 +85,9 @@ React Native アプリケーションは、自動的に Datadog にトレース�
 
 React Native アプリケーションのログを Datadog に転送し始めるには、[React Native ログ収集][3]をご覧ください。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 
 React Native インテグレーションには、メトリクスは含まれていません。RUM アプリケーションからカスタムメトリクスを生成するには、[メトリクスの生成][4]を参照してください。
 
@@ -102,7 +99,7 @@ React Native インテグレーションには、メトリクスは含まれて�
 
 React Native インテグレーションには、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][6]までお問い合わせください。
 

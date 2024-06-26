@@ -1,10 +1,9 @@
 ---
 title: IP Allowlist
-kind: documentation
 ---
 
 {{< callout url="/help/" header="Get Started with IP Allowlist" >}}
-The IP allowlist feature is available for enterprise-level customers only. Request access by contacting support.
+The IP allowlist feature is available for customers on an enterprise plan only. Request access by contacting support.
 {{< /callout >}}
 
 ## Overview

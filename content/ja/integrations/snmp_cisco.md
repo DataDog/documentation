@@ -31,7 +31,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: snmp_cisco
-oauth: {}
 public_title: Cisco
 short_description: Cisco ネットワークデバイスから SNMP メトリクスを収集
 supported_os:

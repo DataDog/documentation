@@ -7,9 +7,8 @@ export function initializeGroupedListings() {
     const allRules = document.querySelectorAll('.js-single-rule');
     const allRuleGroups = document.querySelectorAll('.js-group');
     const jsEmptyResults = document.querySelector('.js-empty-results');
-    const urlParams = new URLSearchParams(window.location.search);
-    const urlHash = window.location.hash;
-    const keyword = urlParams.get('q');
+    const url = new URL(window.location.href);
+    const searchKeywords = url.searchParams.get('search');
     const form = document.getElementById('rules');
     let keyupTimeout;
     let filters;
@@ -37,13 +36,10 @@ export function initializeGroupedListings() {
     }
 
     const activateButton = (activeButton, siblings) => {
-        let button;
-        let i;
-
         if (activeButton && siblings) {
-            for (i = 0; i < siblings.length; i++) {
-                button = siblings[i];
-                button.classList[button === activeButton ? 'add' : 'remove']('active');
+            for (let i = 0; i < siblings.length; i++) {
+                const button = siblings[i];
+                button.classList[button.dataset.filter === activeButton.dataset.filter ? 'add' : 'remove']('active');
             }
         }
 
@@ -54,9 +50,9 @@ export function initializeGroupedListings() {
     }
 
     const handleEmptyResultSet = () => {
-        const searchQuery = inputSearch.value;
+        const searchQuery = inputSearch?.value;
         const activeEl = document.querySelector('.controls .active');
-        const txt = (activeEl) ? activeEl.text : '';
+        const txt = (activeEl) ? activeEl.textContent : '';
         const activeCategoryFilter = stringToTitleCase(txt);
         const message = `No results found for query "${searchQuery}" in category ${activeCategoryFilter}`;
         if(jsEmptyResults) {
@@ -107,22 +103,28 @@ export function initializeGroupedListings() {
             return;
 
         const searchValue = inputSearch.value.length >= 2 ? inputSearch.value.toLowerCase().trim() : '';
+        url.searchParams.set('category', event.target.dataset.filter)
+        window.history.pushState(null,'', url.toString())
+        
         const filtered = filterResults(event.target.dataset.filter, searchValue);
         activateButton(event.target, filters);
         showResults(filtered);
     }
-
+    
     const handleKeyup = () => {
         const searchValue = inputSearch.value.length >= 2 ? inputSearch.value.toLowerCase().trim() : '';
         const activeCategory = document.querySelector('.controls .active');
         const activeCategoryFilter = (activeCategory) ? activeCategory.dataset.filter : '';
-        const { hash } = window.location;
-        const replaceUrl = hash ? `?q=${searchValue}${hash}` : `?q=${searchValue}`
 
+        if(searchValue){
+            url.searchParams.set('search', searchValue)
+        }else{
+            url.searchParams.delete('search')
+        }
         clearTimeout(keyupTimeout);
-
+        
         keyupTimeout = setTimeout(() => {
-            window.history.replaceState({q: searchValue}, '', replaceUrl);
+            window.history.pushState(null,'', url.toString())
             const filtered = filterResults(activeCategoryFilter, searchValue);
             showResults(filtered);
         }, 350);
@@ -145,19 +147,50 @@ export function initializeGroupedListings() {
     });
 
     // We cannot listen for a DOM loaded event due to the script loading async; this code should execute when the default rules content is loaded.
-    if (controls) {
-        controls.addEventListener('click', handleCategoryFilterClick);
-        let searchValue = '';
+    controls?.addEventListener('click', handleCategoryFilterClick);
 
-        if (keyword) {
-            searchValue = keyword;
-            inputSearch.value = keyword;
-        }
-
-        const activeCategoryFilter = urlHash ? urlHash.substring(1) : 'all';
-        const activeFilterButton = document.querySelector(`[data-filter="${activeCategoryFilter}"]`);
-        const filtered = filterResults(activeCategoryFilter, searchValue);
-        activateButton(activeFilterButton, filters);
-        showResults(filtered);
+    if (searchKeywords) {
+        inputSearch.value = searchKeywords;
     }
+    
+    const activeCategoryFilter = url.searchParams.get('category') || 'all';
+    const activeFilterButton = document.querySelector(`[data-filter="${activeCategoryFilter}"]`);
+    const filtered = filterResults(activeCategoryFilter, searchKeywords);
+    activateButton(activeFilterButton, filters);
+    showResults(filtered);
+
+
+    /**
+     * Copy href of a term
+     * @param {object} event 
+     */
+    const copyActionHref = (event) => {
+        const clickableIconWrapper = event.currentTarget.parentElement
+        const copyConfirmedIconWrapper = clickableIconWrapper.nextElementSibling
+        const anchor = clickableIconWrapper.dataset.anchor
+        const {pathname, origin} = window.location
+        const path = new URL(`${origin}${pathname}${anchor}`)
+
+        const Clipboard = navigator.clipboard
+        // write href to clipboard
+        Clipboard.writeText(path.href).then(() => {
+            clickableIconWrapper.classList.add('d-none');
+            copyConfirmedIconWrapper.classList.remove('d-none')
+            setTimeout(function() {
+                clickableIconWrapper.classList.remove('d-none');
+                copyConfirmedIconWrapper.classList.add('d-none')
+            }, 1000)
+        })
+    }
+
+    // Copy anchor - event listener
+    const copyIcons = document.querySelectorAll('.group-header-text .icon-click')
+
+    copyIcons.forEach(e => {
+        e.addEventListener('click', (e) => {
+            e.stopPropagation()
+            copyActionHref(e)
+        })
+    })
+
 }

@@ -1,7 +1,6 @@
 ---
 title: Getting Started with RUM Deployment Tracking
 kind: guide
-beta: true
 description: Learn how to set up RUM to capture new releases, track your deployments, and analyze the performance in Datadog
 aliases:
 - /real_user_monitoring/guide/getting-started-rum-deployment-tracking/
@@ -16,10 +15,6 @@ further_reading:
   tag: "Blog"
   text: "Troubleshoot faulty frontend deployments with Deployment Tracking in RUM"
 ---
-
-<div class="alert alert-warning">
-    RUM Deployment Tracking is currently in beta.
-</div>
 
 
 ## Overview
@@ -78,7 +73,7 @@ The version tag is captured automatically from the application's manifest.
 
 #### iOS RUM
 
-The version tag is captured automatically from the application's app's `info.plist`.
+The version tag is captured automatically from the application's `info.plist`.
 
 ## Analyze your deployment performance in RUM
 

@@ -6,7 +6,6 @@ further_reading:
 - link: /security/default_rules/#cat-cloud-security-management
   tag: ドキュメント
   text: すぐに使える検出ルール
-kind: ガイド
 title: Datadog がリソースの公開状況を判断する方法
 ---
 
@@ -53,7 +52,7 @@ Datadog は、クラウドリソース間の関係をマッピングするグラ
 
 詳細については、[Amazon S3 ストレージへのパブリックアクセスをブロックする][2]を参照してください。
 
-### Amazon CloudTrail トレイル
+### AWS CloudTrail トレイル
 
 次の場合、[Cloudtrail トレイル][3] (`aws_cloudtrail_trail`) は公開されていると判断されます。
 

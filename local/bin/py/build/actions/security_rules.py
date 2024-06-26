@@ -70,8 +70,13 @@ def security_rules(content, content_dir):
     """
     logger.info("Starting security rules action...")
     global_aliases = []
+    source_comment = f"<!--  SOURCED FROM https://github.com/DataDog/{content['repo_name']} -->\n\n"
+
     for file_name in chain.from_iterable(glob.glob(pattern, recursive=True) for pattern in content["globs"]):
         data = None
+
+        if "deprecated" in file_name:
+            continue
 
         if file_name.endswith(".json"):
             with open(file_name, mode="r+") as f:
@@ -100,6 +105,10 @@ def security_rules(content, content_dir):
             if not message_file_name.exists():
                 continue
 
+        # get path relative to the repo root for comparisons
+        relative_path = str(p.parent).split(f"/{content['repo_name']}/")[1]
+
+        is_enabled = bool(data.get("isEnabled", True))
         is_beta = bool(data.get("isBeta", False))
 
         # Logic for when to remove a rule.
@@ -112,8 +121,11 @@ def security_rules(content, content_dir):
         is_past_deprecation_date = date(*[int(x) for x in deprecation_date.split('-')]) < date.today() if deprecation_date else False
         # 3. general flags we should respect for removal. At least one true to cause removal
         is_removed = (data.get('isShadowDeployed', False) or data.get('isDeleted', False) or data.get('isDeprecated', False))
+        # 4. If rule not enabled and under posture-management/infrastructure-monitoring directory lets remove the rule
+        # this is to cover the case where some rules were inherited that haven't been evaluated completely..
+        is_disabled_and_infra = not is_enabled and 'posture-management' in relative_path
 
-        if is_restricted_and_not_beta or is_removed or is_past_deprecation_date:
+        if is_restricted_and_not_beta or is_removed or is_past_deprecation_date or is_disabled_and_infra:
             if p.exists():
                 logger.info(f"removing file {p.name}")
                 global_aliases.append(f"/security/default_rules/{p.stem}")
@@ -124,15 +136,15 @@ def security_rules(content, content_dir):
 
         # The message of a detection rule is located in a Markdown file next to the rule definition
         with open(str(message_file_name), mode="r+") as message_file:
-            message = message_file.read()
+            message = source_comment + message_file.read()
 
             # strip out [text] e.g "[CIS Docker] Ensure that.." becomes "Ensure that..."
             parsed_title = re.sub(r"\[.+\]\s?(.*)", "\\1", data.get('name', ''), 0, re.MULTILINE)
             page_data = {
                 "title": parsed_title,
-                "kind": "documentation",
                 "type": "security_rules",
                 "disable_edit": True,
+                "default_rule_id": data.get('defaultRuleId', '').strip(),
                 "aliases": [
                     # f"{data.get('defaultRuleId', '').strip()}",
                     # f"/security_monitoring/default_rules/{data.get('defaultRuleId', '').strip()}",
@@ -143,8 +155,6 @@ def security_rules(content, content_dir):
                 "is_beta": is_beta
             }
 
-            # get path relative to the repo root for comparisons
-            relative_path = str(p.parent).split(f"/{content['repo_name']}/")[1]
             # lets build up this categorization for filtering purposes
 
             tags = data.get('tags', [])
@@ -157,12 +167,14 @@ def security_rules(content, content_dir):
 
             if 'posture-management' in relative_path:
                 if 'cloud-configuration' in relative_path:
-                    page_data['rule_category'].append('CSM Misconfigurations (Cloud)')
 
                     if tags and 'dd_rule_type:combination' in tags:
-                        page_data['rule_category'].append('CSM Security Issues')
-                    if tags and 'dd_rule_type:ciem' in tags:
+                        page_data['rule_category'].append('Attack Paths')
+                    elif tags and 'dd_rule_type:ciem' in tags:
                         page_data['rule_category'].append('CSM Identity Risks')
+                    else:
+                        page_data['rule_category'].append('CSM Misconfigurations (Cloud)')
+
 
                 if 'infrastructure-configuration' in relative_path:
                     page_data['rule_category'].append('CSM Misconfigurations (Infra)')
@@ -208,6 +220,29 @@ def security_rules(content, content_dir):
             cloud = page_data.get("cloud", None)
             if cloud and cloud == 'aws':
                 page_data["integration_id"] = "amazon-{}".format(page_data["integration_id"])
+
+            # Deeplinks to in-app rules
+            if page_data['rule_category'][0] == "Application Security":
+                # App Sec
+                page_data["view_rule_url"] = f"https://app.datadoghq.com/security/configuration/asm/rules?query=type%3Aapplication_security%20defaultRuleId%3A{page_data['default_rule_id']}"
+                page_data["view_findings_url"] = f"https://app.datadoghq.com/security?query=%40workflow.rule.defaultRuleId%3A{page_data['default_rule_id']}"
+            elif page_data['rule_category'][0] in ["Cloud SIEM (Log Detection)", "Cloud SIEM (Signal Correlation)"]:
+                # Cloud SIEM
+                page_data["view_rule_url"] = f"https://app.datadoghq.com/security/configuration/siem/rules?query=type%3A%28log_detection%20OR%20signal_correlation%29%20defaultRuleId%3A{page_data['default_rule_id']}%20&deprecated=hide&groupBy=tactic&product=siem"
+                page_data["view_findings_url"] = f"https://app.datadoghq.com/security?query=%40workflow.rule.type%3A%28%22Log%20Detection%22%20OR%20%22Signal%20Correlation%22%29%20%40workflow.rule.defaultRuleId%3A{page_data['default_rule_id']}%20&column=time&order=desc&product=siem&viz=stream"
+            elif page_data['rule_category'][0] == "CSM Threats":
+                # CSM Threats
+                page_data["view_rule_url"] = f"https://app.datadoghq.com/security/configuration/workload/rules?query=type%3Aworkload_security%20defaultRuleId%3A{page_data['default_rule_id']}%20&deprecated=hide&groupBy=tactic&product=cws&sort=rule_name"
+                page_data["view_findings_url"] = f"https://app.datadoghq.com/security?query=%40workflow.rule.defaultRuleId%3A{page_data['default_rule_id']}%20&column=time&order=desc"
+            elif page_data['rule_category'][0] in [ "CSM Identity Risks", "CSM Misconfigurations (Cloud)", "CSM Misconfigurations (Infra)", "Attack Paths"]:
+                # CSM Identity Risks, CSM Misconfigurations, Attack Paths
+                page_data["view_rule_url"] = f"https://app.datadoghq.com/security/configuration/compliance/rules?query=type%3A%28cloud_configuration%20OR%20infrastructure_configuration%29%20defaultRuleId%3A{page_data['default_rule_id']}%20&deprecated=hide&groupBy=framework&product=cspm&sort=rule_name"
+                if page_data['rule_category'][0] != "Attack Paths":
+                    if "CSM Misconfigurations" in page_data['rule_category'][0]:
+                        page_data["view_findings_url"] = f"https://app.datadoghq.com/security/compliance?query=%40workflow.rule.defaultRuleId%3A{page_data['default_rule_id']}%20&aggregation=resources&column=status&order=asc&sort=ruleSeverity%2CfailedResources-desc"
+                    else:
+                        page_data["view_findings_url"] = f"https://app.datadoghq.com/security/identities?query=%40workflow.rule.defaultRuleId%3A{page_data['default_rule_id']}%20&aggregation=resources&column=status&order=asc&sort=ruleSeverity%2CfailedResources-desc"
+
 
             front_matter = yaml.dump(page_data, default_flow_style=False).strip()
             output_content = TEMPLATE.format(front_matter=front_matter, content=message.strip())

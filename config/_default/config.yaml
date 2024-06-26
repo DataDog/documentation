@@ -21,6 +21,11 @@ defaultContentLanguageInSubdir: false
 # set this as a default otherwise we get "Error: found overlapping content dirs"
 # contentDir: "content/en"
 
+caches:
+    getjson:
+        dir: :cacheDir/:project
+        maxAge: '1h'
+
 # gitinfo vars
 enableGitInfo: true
 
@@ -33,7 +38,7 @@ markup:
     guessSyntax: true
 
 module:
-  imports:
+  imports:  
    - path: github.com/DataDog/websites-modules
      disabled: false
      mounts:
@@ -77,6 +82,19 @@ module:
        target: static/fonts/iconfont.woff2
      - source: static/fonts/iconfont.woff
        target: static/fonts/iconfont.woff
+     - source: data
+       target: data
+     - source: i18n
+       target: i18n
+
+   - path: github.com/DataDog/websites-sources
+     disabled: false
+     mounts:
+     - source: content/en/integrations
+       target: content/integrations
+       lang: en
+     - source: data
+       target: data
 
   mounts:
     # default mounts
@@ -116,7 +134,7 @@ security:
   funcs:
     getenv:
       # allow os.Getenv to read gitlab CI_ prefixed os environment vars
-      - ^(HUGO_|CI_)
+      - ^(HUGO_|CI_|IA_SUBDOMAIN)
   exec:
     osEnv:
       # as suggested here https://github.com/gohugoio/hugo/issues/9333#issuecomment-1022435616
@@ -134,4 +152,7 @@ outputFormats:
     mediaType: "text/plain"
     notAlternative: true
 
-timeout: "45s"
+timeout: "90s"
+
+minify:
+  disableSVG: true

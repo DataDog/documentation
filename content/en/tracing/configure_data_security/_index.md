@@ -10,6 +10,10 @@ aliases:
     - /tracing/custom_instrumentation/agent_customization
     - /tracing/faq/if-i-instrument-a-database-with-datadog-apm-will-there-be-sensitive-database-data-sent-to-datadog
     - /tracing/setup_overview/configure_data_security/
+further_reading:
+- link: "/data_security/pci_compliance/"
+  tag: "Documentation"
+  text: "Set up a PCI-compliant Datadog organization"
 ---
 ## Overview
 
@@ -134,8 +138,7 @@ The table below describes the default behavior of each language tracing library 
 
 {{% tab "Go" %}}
 
-**Note:** Client IPs are not collected by default and must be enabled. Database statements and
-Client URIs are obfuscated by the Datadog Agent.
+**Note:** Client IPs are not collected by default and must be enabled. Database statements are obfuscated by the Datadog Agent.
 
 | Category                | Collected                       | Obfuscated                      |
 |:------------------------|:-------------------------------:|:-------------------------------:|
@@ -145,7 +148,7 @@ Client URIs are obfuscated by the Datadog Agent.
 | Database statements     | <i class="icon-check-bold"></i> |                                 |
 | Geographic location     |                                 |                                 |
 | Client URI path         | <i class="icon-check-bold"></i> |                                 |
-| Client URI query string | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
+| Client URI query string | <i class="icon-check-bold"></i> |                                 |
 | Server URI path         | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
 | Server URI query string | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
 | HTTP body               | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
@@ -154,15 +157,72 @@ Client URIs are obfuscated by the Datadog Agent.
 
 {{% /tab %}}
 
+{{% tab "Nginx" %}}
+
+| Category                | Collected                       | Obfuscated |
+|:------------------------|:-------------------------------:|:----------:|
+| Name                    |                                 |            |
+| Email                   |                                 |            |
+| Client IP               | <i class="icon-check-bold"></i> |            |
+| Database statements     |                                 |            |
+| Geographic location     |                                 |            |
+| Client URI path         | <i class="icon-check-bold"></i> |            |
+| Client URI query string | <i class="icon-check-bold"></i> |            |
+| Server URI path         |                                 |            |
+| Server URI query string |                                 |            |
+| HTTP body               |                                 |            |
+| HTTP cookies            |                                 |            |
+| HTTP headers            |                                 |            |
+
+{{% /tab %}}
+
+{{% tab "Kong" %}}
+
+| Category                | Collected                       | Obfuscated |
+|:------------------------|:-------------------------------:|:----------:|
+| Name                    |                                 |            |
+| Email                   |                                 |            |
+| Client IP               | <i class="icon-check-bold"></i> |            |
+| Database statements     |                                 |            |
+| Geographic location     |                                 |            |
+| Client URI path         | <i class="icon-check-bold"></i> |            |
+| Client URI query string |                                 |            |
+| Server URI path         |                                 |            |
+| Server URI query string |                                 |            |
+| HTTP body               |                                 |            |
+| HTTP cookies            |                                 |            |
+| HTTP headers            |                                 |            |
+
+{{% /tab %}}
+
+{{% tab "Envoy" %}}
+
+| Category                | Collected                       | Obfuscated |
+|:------------------------|:-------------------------------:|:----------:|
+| Name                    |                                 |            |
+| Email                   |                                 |            |
+| Client IP               | <i class="icon-check-bold"></i> |            |
+| Database statements     |                                 |            |
+| Geographic location     |                                 |            |
+| Client URI path         |                                 |            |
+| Client URI query string |                                 |            |
+| Server URI path         |                                 |            |
+| Server URI query string |                                 |            |
+| HTTP body               |                                 |            |
+| HTTP cookies            |                                 |            |
+| HTTP headers            |                                 |            |
+
+{{% /tab %}}
+
 {{% /tabs %}}
 
-If you use Datadog Application Security Management (ASM), the tracing libraries collect HTTP request data to help you understand the nature of a suspicious request. Datadog ASM automatically redacts certain data, and you can configure your own detection rules. Learn more about these defaults and configuration options in the Datadog ASM [data privacy][13] documentation.
+If you use Datadog Application Security Management (ASM), the tracing libraries collect HTTP request data to help you understand the nature of a security trace. Datadog ASM automatically redacts certain data, and you can configure your own detection rules. Learn more about these defaults and configuration options in the Datadog ASM [data privacy][13] documentation.
 
 ## Agent
 
 ### Resource names
 
-Datadog spans include a resource name attribute that may contain sensitive data. The Datadog Agent implements obfuscation for several known cases:
+Datadog spans include a resource name attribute that may contain sensitive data. The Datadog Agent implements obfuscation of resource names for several known cases:
 
 * **SQL numeric literals and bind variables are obfuscated**: For example, the following query `SELECT data FROM table WHERE key=123 LIMIT 10` is obfuscated to `SELECT data FROM table WHERE key = ? LIMIT ?` before setting the resource name for the query span.
 * **SQL literal strings are identified using standard ANSI SQL quotes**: This means strings should be surrounded in single quotes (`'`). Some SQL variants optionally support double-quotes (`"`) for strings, but most treat double-quoted things as identifiers. The Datadog obfuscator treats these as identifiers rather than strings and does not obfuscate them.
@@ -170,22 +230,25 @@ Datadog spans include a resource name attribute that may contain sensitive data.
 
 ### Trace obfuscation
 
-Agent [trace][2] obfuscation is disabled by default. Enable it in your `datadog.yaml` configuration file to obfuscate all information attached to your traces.
+The Datadog Agent also obfuscates sensitive [trace][2] data that is not within the resource name. You can configure the obfuscation rules using environment variables or the `datadog.yaml` configuration file.
 
-This option works with the following services:
+The following metadata can be obfuscated:
 
-* `mongodb`
-* `elasticsearch`
-* `redis`
-* `memcached`
-* `http`
-* `remove_stack_traces`
+* MongoDB queries
+* ElasticSearch request bodies
+* Redis commands
+* MemCached commands
+* HTTP URLs
+* Stack traces
+
+**Note:** Obfuscation can have a performance impact on your system, or could redact important information that is not sensitive. Consider what obfuscation you need for your setup, and customize your configuration appropriately.
 
 **Note:** You can use automatic scrubbing for multiple types of services at the same time. Configure each in the `obfuscation` section of your `datadog.yaml` file.
 {{< tabs >}}
+
 {{% tab "MongoDB" %}}
 
-Applies to [spans][1] of type `mongodb`, more specifically: to the `mongodb.query` span tags.
+MongoDB queries within a [span][1] of type `mongodb` are obfuscated by default.
 
 ```yaml
 apm_config:
@@ -194,23 +257,26 @@ apm_config:
   ## (...)
 
   obfuscation:
-    # MongoDB obfuscation rules. Applies to spans of type "mongodb".
-    # More specifically, to the "mongodb.query" tag.
     mongodb:
+      ## Configures obfuscation rules for spans of type "mongodb". Enabled by default.
       enabled: true
-      # Values for the keys listed here will not be obfuscated.
       keep_values:
         - document_id
         - template_id
+      obfuscate_sql_values:
+        - val1
 ```
 
-* `keep_values` - defines a set of keys to exclude from Agent trace obfuscation.
+This can also be disabled with the environment variable `DD_APM_OBFUSCATION_MONGODB_ENABLED=false`.
+
+* `keep_values` or environment variable `DD_APM_OBFUSCATION_MONGODB_KEEP_VALUES` - defines a set of keys to exclude from Datadog Agent trace obfuscation. If not set, all keys are obfuscated.
+* `obfuscate_sql_values` or environment variable `DD_APM_OBFUSCATION_MONGODB_OBFUSCATE_SQL_VALUES` - defines a set of keys to include in Datadog Agent trace obfuscation. If not set, all keys are obfuscated.
 
 [1]: /tracing/glossary/#spans
 {{% /tab %}}
 {{% tab "ElasticSearch" %}}
 
-Applies to [spans][1] of type `elasticsearch`, more specifically, to the `elasticsearch.body` span tags:
+ElasticSearch request bodies within a [span][1] of type `elasticsearch` are obfuscated by default.
 
 ```yaml
 apm_config:
@@ -219,21 +285,26 @@ apm_config:
   ## (...)
 
   obfuscation:
-    # ElasticSearch obfuscation rules. Applies to spans of type "elasticsearch".
-    # More specifically, to the "elasticsearch.body" tag.
     elasticsearch:
+      ## Configures obfuscation rules for spans of type "elasticsearch". Enabled by default.
       enabled: true
-      # Values for the keys listed here will not be obfuscated.
       keep_values:
         - client_id
         - product_id
+      obfuscate_sql_values:
+        - val1
 ```
+
+This can also be disabled with the environment variable `DD_APM_OBFUSCATION_ELASTICSEARCH_ENABLED=false`.
+
+* `keep_values` or environment variable `DD_APM_OBFUSCATION_ELASTICSEARCH_KEEP_VALUES` - defines a set of keys to exclude from Datadog Agent trace obfuscation. If not set, all keys are obfuscated.
+* `obfuscate_sql_values` or environment variable `DD_APM_OBFUSCATION_ELASTICSEARCH_OBFUSCATE_SQL_VALUES` - defines a set of keys to include in Datadog Agent trace obfuscation. If not set, all keys are obfuscated.
 
 [1]: /tracing/glossary/#spans
 {{% /tab %}}
 {{% tab "Redis" %}}
 
-Applies to [spans][1] of type `redis`, more specifically, to the `redis.raw_command` span tags:
+Redis commands within a [span][1] of type `redis` are obfuscated by default.
 
 ```yaml
 apm_config:
@@ -242,17 +313,21 @@ apm_config:
   ## (...)
 
   obfuscation:
+    ## Configures obfuscation rules for spans of type "redis". Enabled by default.
     redis:
       enabled: true
-      # If true, replaces all arguments with a single "?".
       remove_all_args: true
 ```
+
+This can also be disabled with the environment variable `DD_APM_OBFUSCATION_REDIS_ENABLED=false`.
+
+* `remove_all_args` or environment variable `DD_APM_OBFUSCATION_REDIS_REMOVE_ALL_ARGS` - replaces all arguments of a redis command with a single "?" if true. Disabled by default.
 
 [1]: /tracing/glossary/#spans
 {{% /tab %}}
 {{% tab "MemCached" %}}
 
-Applies to [spans][1] of type `memcached`, more specifically, to the `memcached.command` span tags:
+MemCached commands within a [span][1] of type `memcached` are obfuscated by default.
 
 ```yaml
 apm_config:
@@ -262,14 +337,19 @@ apm_config:
 
   obfuscation:
     memcached:
+      ## Configures obfuscation rules for spans of type "memcached". Enabled by default.
       enabled: true
 ```
+
+This can also be disabled with the environment variable `DD_APM_OBFUSCATION_MEMCACHED_ENABLED=false`.
 
 [1]: /tracing/glossary/#spans
 {{% /tab %}}
 {{% tab "Http" %}}
 
-HTTP obfuscation rules for `http.url` metadata in [spans][1] of type `http` or `web`:
+HTTP URLs within a [span][1] of type `http` or `web` are not obfuscated by default.
+
+**Note:** Passwords within the Userinfo of a URL are not collected by Datadog.
 
 ```yaml
 apm_config:
@@ -279,6 +359,7 @@ apm_config:
 
   obfuscation:
     http:
+      ## Enables obfuscation of query strings in URLs. Disabled by default.
       remove_query_string: true
       remove_paths_with_digits: true
 ```
@@ -286,12 +367,13 @@ apm_config:
 * `remove_query_string` or environment variable `DD_APM_OBFUSCATION_HTTP_REMOVE_QUERY_STRING`: If true, obfuscates query strings in URLs (`http.url`).
 * `remove_paths_with_digits` or environment variable `DD_APM_OBFUSCATION_HTTP_REMOVE_PATHS_WITH_DIGITS`: If true, path segments in URLs (`http.url`) containing only digits are replaced by "?".
 
-
 [1]: /tracing/glossary/#spans
 {{% /tab %}}
 {{% tab "Stack Traces" %}}
 
-Set the `remove_stack_traces` parameter to true, to remove stack traces and replace them with `?`.
+Disabled by default.
+
+Set the `remove_stack_traces` parameter to true to remove stack traces and replace them with `?`.
 
 ```yaml
 apm_config:
@@ -300,8 +382,11 @@ apm_config:
   ## (...)
 
   obfuscation:
-    remove_stack_traces: true
+    ## Enables removing stack traces to replace them with "?". Disabled by default.
+    remove_stack_traces: true # default false
 ```
+
+This can also be enabled with the environment variable `DD_APM_OBFUSCATION_REMOVE_STACK_TRACES=true`.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -378,9 +463,12 @@ DD_APM_REPLACE_TAGS=[
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-Put this environment variable in the trace-agent container if you are using the [daemonset configuration][1], or use `agents.containers.traceAgent.env` in the `values.yaml` file if you are using [helm chart][2].
+Set the `DD_APM_REPLACE_TAGS` environment variable:
+- For Datadog Operator, in `override.nodeAgent.env` in your `datadog-agent.yaml`
+- For Helm, in `agents.containers.traceAgent.env` in your `datadog-values.yaml`
+- For manual configuration, in the `trace-agent` container section of your manifest
 
-```datadog-agent.yaml
+```yaml
 - name: DD_APM_REPLACE_TAGS
   value: '[
             {
@@ -410,13 +498,49 @@ Put this environment variable in the trace-agent container if you are using the 
           ]'
 ```
 
+#### Examples
+
+Datadog Operator:
+
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  override:
+    nodeAgent:
+      env:
+        - name: DD_APM_REPLACE_TAGS
+          value: '[
+                   {
+                     "name": "http.url",
+                  # (...)
+                  ]'
+```
+
+Helm:
+
+```yaml
+agents:
+  containers:
+    traceAgent:
+      env:
+        - name: DD_APM_REPLACE_TAGS
+          value: '[
+                   {
+                     "name": "http.url",
+                  # (...)
+                  ]'
+```
+
 [1]: /containers/kubernetes/installation/?tab=daemonset
 [2]: /containers/kubernetes/installation/?tab=helm
 {{% /tab %}}
 {{% tab "docker-compose" %}}
 
 ```docker-compose.yaml
-- DD_APM_REPLACE_TAGS=[{"name":"http.url","pattern":"token/(.*)","repl":"?"},{"name":"resource.name","pattern":"(.*)\/$","repl": "$1"},{"name":"*","pattern":"foo","repl":"bar"},{"name":"error.stack","pattern":"(?s).*"}, {"name": "error.msg", "pattern": "[0-9]{10}", "repl": "[REDACTED]"}]
+- DD_APM_REPLACE_TAGS=[{"name":"http.url","pattern":"token/(.*)","repl":"?"},{"name":"resource.name","pattern":"(.*)\/$","repl":"$1"},{"name":"*","pattern":"foo","repl":"bar"},{"name":"error.stack","pattern":"(?s).*"},{"name":"error.msg","pattern":"[0-9]{10}","repl":"[REDACTED]"}]
 ```
 
 {{% /tab %}}
@@ -501,28 +625,17 @@ export DD_INSTRUMENTATION_TELEMETRY_ENABLED=false
 {{< site-region region="us" >}}
 
 <div class="alert alert-warning">
-PCI compliance for APM is only available for new Datadog organizations created in the <a href="/getting_started/site/">US1 site</a>.
+PCI compliance for APM is only available for Datadog organizations in the <a href="/getting_started/site/">US1 site</a>.
 </div>
 
-PCI compliance for APM is available when you create a new Datadog organization. To set up a PCI-compliant Datadog org, follow these steps:
+To set up a PCI-compliant Datadog org, follow these steps:
 
-1. Set up a new Datadog org in the [US1 site][1]. PCI DSS compliance is only supported for new orgs created in US1.
-2. Contact [Datadog support][2] or your [Customer Success Manager][3] to request that the new org be configured as a PCI-compliant org.
-3. Enable [Audit Trail][4] in the new org. Audit Trail must be enabled and remain enabled for PCI DSS compliance.
-4. After Datadog support or Customer Success confirms that the new org is PCI DSS compliant, configure the Agent configuration file to send spans to the dedicated PCI-compliant endpoint (`https://trace-pci.agent.datadoghq.com`):
-    ```
-    apm_config:
-      apm_dd_url: <https://trace-pci.agent.datadoghq.com>
-    ```
+{{% pci-apm %}}
 
-To enable PCI compliance for logs, see [PCI DSS compliance for Log Management][5].
+See [PCI DSS Compliance][1] for more information. To enable PCI compliance for logs, see [PCI DSS compliance for Log Management][2].
 
-[1]: /getting_started/site/
-[2]: /help/
-[3]: mailto:success@datadoghq.com
-[4]: /account_management/audit_trail/
-[5]: /data_security/logs/#pci-dss-compliance-for-log-management
-
+[1]: /data_security/pci_compliance/
+[2]: /data_security/pci_compliance/?tab=logmanagement
 
 {{< /site-region >}}
 
@@ -530,11 +643,15 @@ To enable PCI compliance for logs, see [PCI DSS compliance for Log Management][5
 PCI compliance for APM is not available for the {{< region-param key="dd_site_name" >}} site.
 {{< /site-region >}}
 
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /help/
 [2]: /tracing/glossary/#trace
 [3]: /tracing/trace_collection/tracing_naming_convention/#http-requests
 [4]: /tracing/glossary/#spans
-[5]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[5]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
 [6]: /tracing/guide/ignoring_apm_resources/
 [7]: /agent/docker/apm/?tab=standard#docker-apm-agent-environment-variables
 [8]: /tracing/guide/send_traces_to_agent_by_api/

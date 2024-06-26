@@ -53,6 +53,9 @@ affinity:
 ## This example configuration avoids cross-availability-zone costs where possible.
 service:
   enabled: true
+  ## You must manually specify the ports to open; this will match the Splunk source.
+  ports:
+    - port: 8088
   type: "LoadBalancer"
   externalTrafficPolicy: "Local"
   annotations:

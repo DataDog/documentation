@@ -3,7 +3,6 @@ further_reading:
 - link: /agent/basic_agent_usage/windows/
   tag: 설명서
   text: 윈도우즈(Windows) Agent의 기본 사용법
-kind: 가이드
 title: 윈도우즈(Windows)용 Datadog Agent Manager
 ---
 
@@ -123,7 +122,7 @@ cpu
 
 관리 점검 페이지는 활성화된 점검 설정 파일의 내용을 표시합니다. Datadog Agent Manager에서 파일을 바로 편집할 수 있습니다. 파일을 변경한 후에는 상단 오른족의 **Save**를 클릭하고, [Agent를 재시작](#restart-agent)하세요.
 
-점검을 추가하려면 드롭다운 메뉴에서 **Add a Check**를 선택하세요. 설치할 수 있는 점검 목록이 표시됩니다. 특정 점검의 [통합][3] 페이지를 참조해 설정의 상세 정보를 알아볼 수 있습니다.
+점검을 추가하려면 드롭다운 메뉴에서 **점검 추가**를 선택합니다. 설치할 수 있는 사용 가능한 점검 목록을 표시합니다. 설정 상세 정보는 구체적인 점검 [통합][3] 페이지를 참조합니다.
 
 #### 점검 요약
 

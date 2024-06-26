@@ -28,7 +28,11 @@ With log-based metrics, you can generate a count metric of logs that match a que
 
 {{< img src="logs/processing/logs_to_metrics/generate_logs_to_metric.png" alt="Generate Logs to metric" style="width:80%;">}}
 
-To generate a new log-based metric, go to the [Configuration page][5] of your Datadog account and select the _[Generate Metrics][6]_ tab, then the **New Metric+** button.
+To generate a new log-based metric:
+
+1. Navigate to the [Generate Metrics][5] page.
+1. Select the **Generate Metrics** tab.
+1. Click **+New Metric**.
 
 You can also create metrics from an Analytics search by selecting the "Generate new metric" option from the Export menu.
 
@@ -38,13 +42,13 @@ You can also create metrics from an Analytics search by selecting the "Generate 
 
 {{< img src="logs/processing/logs_to_metrics/create_custom_metrics2.png" alt="Create a Logs to metric" style="width:80%;">}}
 
-1. **Input a query to filter the log stream**: The query syntax is the same as for the [Log Explorer Search][7]. Only logs ingested with a timestamp within the past 20 minutes are considered for aggregation.
-2. **Select the field you would like to track**: Select `*` to generate a count of all logs matching your query or enter a log attribute (for example, `@network.bytes_written`) to aggregate a numeric value and create its corresponding `count`, `min`, `max`, `sum`, and `avg` aggregated metrics. If the log attribute facet is a [measure][8], the value of the metric is the value of the log attribute.
-3. **Add dimensions to `group by`**: By default, metrics generated from logs do not have any tags unless explicitly added. Any attribute or tag dimension that exists in your logs (for example, `@network.bytes_written`, `env`) can be used to create metric [tags][9]. Metric tags names are equal to the originating attribute or tag name, without the @.
-4. **Add percentile aggregations**: For distribution metrics, you can optionally generate p50, p75, p90, p95, and p99 percentiles. Percentile metrics are also considered custom metrics, and [billed accordingly][10].
-5. **Name your metric**: Log-based metric names must follow the [custom metric naming convention][11].
+1. **Input a query to filter the log stream**: The query syntax is the same as for the [Log Explorer Search][6]. Only logs ingested with a timestamp within the past 20 minutes are considered for aggregation.
+2. **Select the field you would like to track**: Select `*` to generate a count of all logs matching your query or enter a log attribute (for example, `@network.bytes_written`) to aggregate a numeric value and create its corresponding `count`, `min`, `max`, `sum`, and `avg` aggregated metrics. If the log attribute facet is a [measure][7], the value of the metric is the value of the log attribute.
+3. **Add dimensions to `group by`**: By default, metrics generated from logs do not have any tags unless explicitly added. Any attribute or tag dimension that exists in your logs (for example, `@network.bytes_written`, `env`) can be used to create metric [tags][8]. Metric tags names are equal to the originating attribute or tag name, without the @.
+4. **Add percentile aggregations**: For distribution metrics, you can optionally generate p50, p75, p90, p95, and p99 percentiles. Percentile metrics are also considered custom metrics, and [billed accordingly][9].
+5. **Name your metric**: Log-based metric names must follow the [custom metric naming convention][10].
 
-**Note**: Data points for log-based metrics are generated at 10-second intervals. When you create a [dashboard graph][12] for log-based metrics, the `count unique` parameter is based on the values within the 10-second interval.
+**Note**: Data points for log-based metrics are generated at 10-second intervals. When you create a [dashboard graph][11] for log-based metrics, the `count unique` parameter is based on the values within the 10-second interval.
 
 {{< img src="logs/processing/logs_to_metrics/count_unique.png" alt="The timeseries graph configuration page with the count unique query parameter highlighted" style="width:80%;">}}
 
@@ -91,11 +95,10 @@ An extra `status` tag is available on the `datadog.estimated_usage.logs.ingested
 [2]: /logs/indexes/#exclusion-filters
 [3]: /metrics/distributions/#overview
 [4]: /metrics/custom_metrics/
-[5]: https://app.datadoghq.com/logs/pipelines
-[6]: https://app.datadoghq.com/logs/pipelines/generate-metrics
-[7]: /logs/search_syntax/
-[8]: /logs/explorer/facets/#quantitative-facets-measures
-[9]: /getting_started/tagging/
-[10]: /account_management/billing/custom_metrics/?tab=countrategauge
-[11]: /metrics/custom_metrics/#naming-custom-metrics
-[12]: /dashboards/querying/
+[5]: https://app.datadoghq.com/logs/pipelines/generate-metrics
+[6]: /logs/search_syntax/
+[7]: /logs/explorer/facets/#quantitative-facets-measures
+[8]: /getting_started/tagging/
+[9]: /account_management/billing/custom_metrics/?tab=countrategauge
+[10]: /metrics/custom_metrics/#naming-custom-metrics
+[11]: /dashboards/querying/

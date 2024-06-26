@@ -30,8 +30,8 @@ title: 保存ビュー
 
 - ユーザーによって作成されたカスタム保存ビュー。これらは、組織内の誰でも編集可能で、ビューを作成したユーザーのアバターが表示されます。**Save** をクリックすると、RUM エクスプローラーの現在のコンテンツからカスタム保存ビューが作成されます。
 - 保存ビューテンプレートは、RUM エクスプローラーで事前に定義された、すぐに使える保存ビューです。これらのテンプレートを使用して、Datadog アバター付きの保存ビューを作成することができます。テンプレートにアクセスするには、保存ビューのリストの一番下までスクロールします。
-</br>
-  {{< img src="real_user_monitoring/explorer/rum-saved-views.png" alt="保存ビューにアクセスするには、Real User Monitoring の左にあるタブをクリックします" width="50%" >}}
+<br /><br />
+  {{< img src="real_user_monitoring/explorer/rum-saved-views-2.png" alt="保存ビューにアクセスするには、Real User Monitoring の左にあるタブをクリックします" width="90%" >}}
 
 以下が可能です。
 

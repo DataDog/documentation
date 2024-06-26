@@ -4,8 +4,8 @@ kind: documentation
 description: Collect logs from your Roku channel.
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-roku
-  tag: GitHub
-  text: dd-sdk-roku Source code
+  tag: "Source Code"
+  text: Source code for dd-sdk-roku
 - link: logs/explorer
   tag: Documentation
   text: Learn how to explore your logs
@@ -194,6 +194,6 @@ To ensure the SDK doesn't use too much disk space, the data on the disk is autom
 [3]: /account_management/api-app-keys/#api-keys
 [4]: /logs/processing/attributes_naming_convention/
 [5]: /tagging/
-[6]: /real_user_monitoring/roku/?tab=us
+[6]: /real_user_monitoring/mobile_and_tv_monitoring/setup/roku/?tab=us
 [7]: https://github.com/DataDog/dd-sdk-roku/releases
 [8]: https://developer.roku.com/fr-fr/docs/developer-program/getting-started/architecture/file-system.md#cachefs

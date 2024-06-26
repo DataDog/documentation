@@ -5,6 +5,7 @@ assets:
   dashboards:
     Nvidia Jetson: assets/dashboards/nvidia_jetson.json
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -14,6 +15,7 @@ assets:
       prefix: nvidia.jetson.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10134
     source_type_name: Nvidia Jetson
 author:
   homepage: https://www.datadoghq.com
@@ -34,7 +36,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: nvidia_jetson
-oauth: {}
 public_title: Nvidia Jetson
 short_description: Nvidia Jetson ボードに関するメトリクスを収集します
 supported_os:
@@ -43,7 +44,7 @@ tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Supported OS::Linux
-  - Category::IOT
+  - Category::IoT
   configuration: README.md#Setup
   description: Nvidia Jetson ボードに関するメトリクスを収集します
   media: []
@@ -52,6 +53,7 @@ tile:
   title: Nvidia Jetson
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
@@ -59,14 +61,14 @@ tile:
 このチェックは [Nvidia Jetson][1] ボードを監視します。
 `tegrastats` から収集されたメトリクスを報告します。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 Nvidia Jetson チェックは [Datadog Agent][2] パッケージに含まれています。
 サーバーに追加でインストールする必要はありません。
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 1. Agent の構成ディレクトリのルートにある `conf.d/` フォルダーに `jetson.d/conf.yaml` ファイルを作成して、
    Jetson パフォーマンスデータの収集を開始します。 
@@ -78,9 +80,9 @@ Nvidia Jetson チェックは [Datadog Agent][2] パッケージに含まれて�
 
 [Agent の status サブコマンド][5]を実行し、Checks セクションで `jetson` を探します。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "nvidia_jetson" >}}
 
 
@@ -92,20 +94,20 @@ Nvidia Jetson チェックは [Datadog Agent][2] パッケージに含まれて�
 - `nvidia.jetson.gpu.freq`
 - `nvidia.jetson.cpu.freq`
 
-### サービスのチェック
+### ヘルプ
 
 Nvidia Jetson インテグレーションには、サービスのチェック機能は含まれません。
 
-### イベント
+### ヘルプ
 
 Nvidia Jetson インテグレーションには、イベントは含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
-ご不明な点は、[Datadog のサポートチーム][7]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][7]までお問い合わせください。
 
 [1]: https://developer.nvidia.com/embedded-computing
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/dist/conf.d/jetson.d/conf.yaml.example
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-restart-the-agent
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information

@@ -1,6 +1,5 @@
 ---
 title: Downgrade the Agent to a prior major version
-kind: faq
 aliases:
 - /agent/faq/agent-downgrade
 ---
@@ -12,7 +11,7 @@ aliases:
 
 First, [uninstall Agent v7 from your system][1].
 
-Then, if you followed the instructions to [upgrade from v6 to v7][2], run the following Agent installation command in order to downgrade your Agent from version 7 to version 6:
+Then, if you followed the instructions to [upgrade from v6 to v7][2], run the following Agent installation command to downgrade your Agent from version 7 to version 6:
 
 ```shell
 DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent6.sh)"
@@ -36,13 +35,13 @@ The command works on all supported versions of Amazon Linux, CentOS, Debian, Fed
 [1]: /agent/guide/how-do-i-uninstall-the-agent/
 [2]: https://ddagent-windows-stable.s3.amazonaws.com/datadog-agent-6-latest.amd64.msi
 [3]: https://app.datadoghq.com/organization-settings/api-keys
-[4]: https://s3.amazonaws.com/ddagent-windows-stable/installers.json
+[4]: https://ddagent-windows-stable.s3.amazonaws.com/installers_v2.json
 {{% /tab %}}
 {{% tab "MacOS" %}}
 
 First, [uninstall Agent v7 from your system][1].
 
-Then, if you followed the instructions to [upgrade from v6 to v7][2], run the Agent installation command with the environment variable `DD_AGENT_MAJOR_VERSION=6` in order to downgrade your Agent from version 7 to version 6:
+Then, if you followed the instructions to [upgrade from v6 to v7][2], run the Agent installation command with the environment variable `DD_AGENT_MAJOR_VERSION=6` to downgrade your Agent from version 7 to version 6:
 
 ```shell
 DD_AGENT_MAJOR_VERSION=6 DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_mac_os.sh)"

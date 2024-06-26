@@ -82,7 +82,7 @@ APM は、プラグインシステムを使用することで追加設定なし�
 | [koa][13]               | `2 以降`    | 完全対応 |                                            |
 | [microgateway-core][14] | `2.1 以降`  | 完全対応 | Apigee Edge 用のコアライブラリ。[edgemicro][15] CLI への対応には [@datadog/cli][16] を使用した静的パッチが必要。 |
 | [moleculer][17]         | `>=0.14` | 完全対応 |                                            |
-| [next][18]              | `>=9.5`  | 完全対応 | CLI で使用する場合は、`NODE_OPTIONS='-r dd-trace/init'` が必要です。 |
+| [next][18]              | `>=9.5`  | 完全対応 | CLI で使用する場合は、`NODE_OPTIONS='-r dd-trace/init'` が必要です。 <br><br>トレーサーは、次のNext.jsの機能をサポートしています：<ul><li>Standalone (`output: 'standalone'`)</li><li>App Router</li><li>Middleware: トレースされません。最適な体験のためには、トレーサーのバージョン `4.18.0` と `3.39.0` またはそれ以上を使用してください。</li></ul> |
 | [paperplane][19]        | `2.3 以降`  | 完全対応 | [serverless-mode][20] では非対応     |
 | [restify][21]           | `3 以降`    | 完全対応 |                                            |
 

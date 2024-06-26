@@ -1,5 +1,7 @@
 ---
 title: time aggregation
+core_product:
+  - metrics
 synonyms:
   - rollup
 ---

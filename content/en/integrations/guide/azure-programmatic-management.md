@@ -147,4 +147,4 @@ See the [Virtual Machine Extension resource][10] in the Terraform registry for m
 [17]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/integration_azure
 [18]: /logs/guide/azure-logging-guide
 [19]: https://app.datadoghq.com/monitors/recommended
-[20]: /monitors/notify/#notify-your-team
+[20]: /monitors/notify/#configure-notifications-and-automations

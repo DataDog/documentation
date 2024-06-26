@@ -124,9 +124,9 @@ If APM is enabled for this application, the correlation between application logs
 [2]: /logs/log_configuration/parsing
 [3]: /agent/logs/?tab=tailfiles#activate-log-collection
 [4]: /agent/logs/?tab=tailfiles#custom-log-collection
-[5]: /agent/guide/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
-[6]: /agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent
-[7]: /agent/guide/agent-commands/?tab=agentv6v7#agent-status-and-information
+[5]: /agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
+[6]: /agent/configuration/agent-commands/?tab=agentv6v7#restart-the-agent
+[7]: /agent/configuration/agent-commands/?tab=agentv6v7#agent-status-and-information
 [8]: /logs/log_configuration/parsing/?tab=matchers
 [9]: /logs/explorer/#overview
 [10]: /tracing/other_telemetry/connect_logs_and_traces/go/

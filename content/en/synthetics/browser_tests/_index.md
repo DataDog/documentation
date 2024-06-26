@@ -1,5 +1,5 @@
 ---
-title: Browser Tests
+title: Browser Testing
 kind: documentation
 description: Simulate and monitor user journeys from specific locations.
 aliases:
@@ -22,7 +22,7 @@ further_reading:
   tag: "Documentation"
   text: "Learn about Synthetic test monitors"
 - link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_test"
-  tag: "Terraform"
+  tag: "External Site"
   text: "Create and manage Synthetic Browser Tests with Terraform"
 ---
 
@@ -58,10 +58,10 @@ Define the configuration of your browser test.
 
    {{% tab "Certificate" %}}
 
-   Select **Ignore server certificate error** to instruct the test to skip errors in the server certificate. 
-  
+   Select **Ignore server certificate error** to instruct the test to skip errors in the server certificate.
+
    * **Client Certificate**: Perform tests on systems that require client certificates by clicking **Upload File** and uploading your certificate file and private key. Only PEM certificates are accepted.
-   * **Client Certificate Domains**: Once the certificate files are uploaded, the client certificate applies to the starting URL's domain. To apply the client certificate on another domain, specify the domain in the **Value** field.  
+   * **Client Certificate Domains**: Once the certificate files are uploaded, the client certificate applies to the starting URL's domain. To apply the client certificate on another domain, specify the domain in the **Value** field.
 
    You can include wildcards in the URL.
 
@@ -77,8 +77,8 @@ Define the configuration of your browser test.
 
    {{% tab "Privacy" %}}
 
-   Select **Do not capture any screenshots for this test** to prevent screenshots from being taken in your test steps. 
-  
+   Select **Do not capture any screenshots for this test** to prevent screenshots from being taken in your test steps.
+
    This privacy option is available as an [advanced option][1] at the individual test step level and ensures that no sensitive data appears in your test results. Preventing the test from taking screenshots makes troubleshooting failures more difficult. For more information, see [Data Security][2].
 
 [1]: /synthetics/browser_tests/advanced_options#prevent-screenshot-capture
@@ -95,23 +95,23 @@ Define the configuration of your browser test.
 
 3. Add a **name**: The name of your browser test.
 4. Select **environment and additional tags**: Set the `env` and related tags attached to your browser test. Use the `<KEY>:<VALUE>` format to filter on a `<VALUE>` for a given `<KEY>`.
-5. Select **browsers and devices**: The browsers (such as `Chrome`, `Firefox`, and `Edge`), and devices (such as `Laptop Large`, `Tablet`, and `Mobile Small`) to run your test on. 
-   - For a large laptop device, the dimensions are 1440 pixels x 1100 pixels. 
+5. Select **browsers and devices**: The browsers (such as `Chrome`, `Firefox`, and `Edge`), and devices (such as `Laptop Large`, `Tablet`, and `Mobile Small`) to run your test on.
+   - For a large laptop device, the dimensions are 1440 pixels x 1100 pixels.
    - For a tablet device, the dimensions are 768 pixels x 1020 pixels.
-   - For a small mobile device, the dimensions are 320 pixels x 550 pixels.  
-6. Select **managed and private locations**: Select locations around the world that are managed by Datadog or create [private locations][1] to run your browser test from custom locations or inside private networks. 
+   - For a small mobile device, the dimensions are 320 pixels x 550 pixels.
+6. Select **managed and private locations**: Select locations around the world that are managed by Datadog or create [private locations][1] to run your browser test from custom locations or inside private networks.
 
-   {{% managed-locations %}} 
+   {{% managed-locations %}}
 
-   You can also use the [Continuous Testing Tunnel][15] to trigger tests on your local development setup or in your CI/CD pipeline to test internal environments. 
-  
+   You can also use the [Continuous Testing Tunnel][15] to trigger tests on your local development setup or in your CI/CD pipeline to test internal environments.
+
 7. Set the **test frequency**: The intervals vary from every five minutes to once per week. To request one-minute frequency, [contact Support][2].
 
 {{% synthetics-variables %}}
 
 ### Use global variables
 
-You can use the [global variables defined in **Settings**][3] in the **Starting URL** and **Advanced Options** of your browser test details, as well as in your test recording. 
+You can use the [global variables defined in **Settings**][3] in the **Starting URL** and **Advanced Options** of your browser test details, as well as in your test recording.
 
 To display a list of available variables:
 
@@ -123,7 +123,7 @@ To display a list of available variables:
 
   {{< img src="synthetics/browser_tests/recording_inject_variable_1.mp4" alt="Injecting a local variable into a field during a browser recording" video="true" width="90%" >}}
 
-For more information about using variables in your browser test recording, see [Browser Test Steps][4]. 
+For more information about using variables in your browser test recording, see [Browser Test Steps][4].
 
 ### Define alert conditions
 
@@ -168,7 +168,7 @@ You can switch tabs in a browser test recording in order to perform an action on
 {{< img src="synthetics/browser_tests/browser_check_record_test.png" alt="Browser test record test" width="90%" >}}
 
 1. Optionally, select **Open in a pop-up** at the upper right of the page to open your test recording in a separate pop-up window. This is useful if your application does not support being opened in an iframe or if you want to avoid sizing issues at recording. You can also open the pop-up in **Incognito mode** to start recording your test from a fresh browser free from already logged-in sessions, cookies from your existing browser, and more.
-2. Optionally, enable Datadog to automatically collect RUM data when running step recordings from your browser test. For more information, see [Explore RUM & Session Replay][11]. 
+2. Optionally, enable Datadog to automatically collect RUM data when running step recordings from your browser test. For more information, see [Explore RUM & Session Replay][11].
 3. Click **Start Recording** to begin recording your browser test.
 4. As you click on your application going through the user journey you want to monitor, your actions are automatically recorded and used to create [steps][12] within your browser test scenario on the left.
 5. In addition to the automatically recorded steps, you can also use the [steps][12] available in the upper left corner to enrich your scenario:
@@ -187,7 +187,7 @@ If you are using the [custom role feature][13], add your user to any custom role
 
 Access restriction is available for customers using [custom roles][14] on their accounts.
 
-You can restrict access to a browser test based on the roles in your organization. When creating a browser test, choose which roles (in addition to your user) can read and write your test. 
+You can restrict access to a browser test based on the roles in your organization. When creating a browser test, choose which roles (in addition to your user) can read and write your test.
 
 {{< img src="synthetics/settings/restrict_access_1.png" alt="Set permissions for your test" style="width:70%;" >}}
 
@@ -209,6 +209,6 @@ You can restrict access to a browser test based on the roles in your organizatio
 [12]: /synthetics/browser_tests/actions/
 [13]: /account_management/rbac#custom-roles
 [14]: /account_management/rbac/#create-a-custom-role
-[15]: /continuous_testing/testing_tunnel
+[15]: /continuous_testing/environments/proxy_firewall_vpn
 [16]: /synthetics/guide/browser-tests-passkeys
 [17]: /monitors/notify/variables/?tab=is_alert#conditional-variables

@@ -8,6 +8,9 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/monitor-otel-with-w3c-trace-context/'
       tag: 'Blog'
       text: 'Monitor OpenTelemetry-instrumented apps with support for W3C Trace Context'
+    - link: '/opentelemetry/guide/otel_api_tracing_interoperability'
+      tag: 'Documentation'
+      text: 'Interoperability of OpenTelemetry API and Datadog instrumented traces'
 ---
 
 The Datadog APM Tracer supports [B3][7] and [W3C Trace Context][10] headers extraction and injection for distributed tracing.
@@ -16,19 +19,19 @@ You can configure injection and extraction styles for distributed headers.
 
 The PHP Tracer supports the following styles:
 
-- Datadog: `Datadog`
+- Datadog: `datadog`
 - W3C Trace Context: `tracecontext`
 - B3 Multi Header: `b3multi` (`B3` alias is deprecated)
 - B3 Single Header: `B3 single header`
 
 You can use the following environment variables to configure the PHP tracing library injection and extraction styles. For instance:
 
-- `DD_TRACE_PROPAGATION_STYLE_INJECT=Datadog,tracecontext,B3 single header`
-- `DD_TRACE_PROPAGATION_STYLE_EXTRACT=Datadog,tracecontext,B3 single header`
+- `DD_TRACE_PROPAGATION_STYLE_INJECT=datadog,tracecontext,B3 single header`
+- `DD_TRACE_PROPAGATION_STYLE_EXTRACT=datadog,tracecontext,B3 single header`
 
-The environment variable values are comma-separated lists of header styles enabled for injection or extraction. By default, only the `tracecontext` and `Datadog` injection styles are enabled.
+The environment variable values are comma-separated lists of header styles enabled for injection or extraction. The default style setting is `datadog,tracecontext` (for PHP tracer versions prior to v0.98.0, the default setting is `tracecontext,Datadog`).
 
-If multiple extraction styles are enabled, the extraction attempt is completed with the following priorities: `tracecontext` has priority, then `Datadog`, then B3.
+If multiple extraction styles are enabled, the extraction attempt is done on the order those styles are configured and first successful extracted value is used.
 
 When a new PHP script is launched, the tracer automatically checks for the presence of Datadog headers for distributed tracing:
 - `x-datadog-trace-id` (environment variable: `HTTP_X_DATADOG_TRACE_ID`)

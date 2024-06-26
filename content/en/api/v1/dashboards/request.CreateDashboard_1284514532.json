@@ -29,7 +29,10 @@
             },
             "display_type": "bars"
           }
-        ]
+        ],
+        "time": {
+          "live_span": "week_to_date"
+        }
       }
     }
   ],

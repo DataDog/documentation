@@ -13,16 +13,12 @@ further_reading:
 
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
-{{< /site-region >}}
-
 Database Monitoring provides deep visibility into your Microsoft SQL Server databases by exposing query metrics, query samples, explain plans, database states, failovers, and events.
 
 Do the following steps to enable Database Monitoring with your database:
 
 1. [Configure the AWS integration](#configure-the-aws-integration)
-1. [Grant the Agent access to the database](#grant-the-agent-access)
+1. [Grant the Agent access](#grant-the-agent-access)
 1. [Install the Agent](#install-the-agent)
 1. [Install the RDS integration](#install-the-rds-integration)
 
@@ -50,6 +46,8 @@ GO
 --Set context to msdb database and create datadog user
 USE [msdb];
 CREATE USER datadog FOR LOGIN datadog;
+-- To use Log Shipping Monitoring (available in Agent v7.50+), uncomment the next line:
+-- GRANT SELECT to datadog;
 GO
 --Switch back to master and grant datadog user server permissions
 USE [master];
@@ -68,21 +66,23 @@ This is required because RDS does not permit granting `CONNECT ANY DATABASE`. Th
 
 ## Install the Agent
 
-Since AWS does not grant direct host access, the Datadog Agent must be installed on a separate host where it is able to talk to the SQL Server host. There are several options for installing and running the Agent.
-
-**For AlwaysOn users**, the Agent must be installed on a separate server and connected to the cluster through the listener endpoint, as information about Availability Group (AG) secondary replicas is collected from the primary replica. Additionally, installing the Agent in this way helps keep it up and running in the event of a failover.
+Because AWS does not grant direct host access, the Datadog Agent must be installed on a separate host where it is able to talk to the SQL Server host. There are several options for installing and running the Agent.
 
 {{< tabs >}}
 {{% tab "Windows Host" %}}
+{{% dbm-alwayson %}}
 {{% dbm-sqlserver-agent-setup-windows %}}
 {{% /tab %}}
 {{% tab "Linux Host" %}}
+{{% dbm-alwayson %}}
 {{% dbm-sqlserver-agent-setup-linux %}}
 {{% /tab %}}
 {{% tab "Docker" %}}
+{{% dbm-alwayson %}}
 {{% dbm-sqlserver-agent-setup-docker %}}
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
+{{% dbm-alwayson %}}
 {{% dbm-sqlserver-agent-setup-kubernetes %}}
 {{% /tab %}}
 {{< /tabs >}}

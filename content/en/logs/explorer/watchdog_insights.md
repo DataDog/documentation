@@ -41,6 +41,11 @@ Every insight comes with embedded interactions and a side panel with troubleshoo
 
 ## Insight Types
 
+[Watchdog Insights][8] surfaces anomalies and outliers detected on specific tags, enabling you to investigate the root cause of an issue. [Insights][9] are discovered from APM, Continuous Profiler, Log Management, and infrastructure data that include the `service` tag. The two types of insights specific to Log Management are:
+
+- [Log Anomaly Detection](#log-anomaly-detection)
+- [Error Outliers](#error-outliers)
+
 ### Log Anomaly Detection
 
 Ingested logs are analyzed at the intake level where Watchdog performs aggregations on detected patterns as well as `environment`, `service`, `source` and `status` tags.
@@ -52,7 +57,7 @@ These aggregated logs are scanned for anomalous behaviors, such as the following
 
 The logs surface as Insights in the Log Explorer, matching the search context and any restrictions applied to your role.
 
-{{< img src="logs/explorer/watchdog_insights/log-anomalies-light.mp4" alt="A user scrolling through the details of a specific insight" video="true">}}
+{{< img src="logs/explorer/watchdog_insights/log-anomalies-light-cropped.mp4" alt="A user scrolling through the details of a specific insight" video="true">}}
 
 Click on a specific insight to see the full description of the detected anomaly as well as the list of patterns contributing to it.
 
@@ -103,3 +108,5 @@ In the **full side panel** view, you can see:
 [5]: /logs/explorer/analytics/patterns
 [6]: https://app.datadoghq.com/watchdog
 [7]: /monitors/types/watchdog/
+[8]: /watchdog/
+[9]: /watchdog/insights/?tab=logmanagement#outlier-types

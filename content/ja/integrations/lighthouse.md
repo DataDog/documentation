@@ -3,6 +3,7 @@ app_id: lighthouse
 app_uuid: e61bdb03-995f-4f46-8b14-afd59e35453b
 assets:
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -12,6 +13,7 @@ assets:
       prefix: lighthouse.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10199
     source_type_name: Lighthouse
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -19,7 +21,7 @@ author:
   sales_email: mustin.eric@gmail.com
   support_email: mustin.eric@gmail.com
 categories:
-- web
+- developer tools
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/lighthouse/README.md
 display_on_public_website: true
@@ -27,12 +29,11 @@ draft: false
 git_integration_title: lighthouse
 integration_id: lighthouse
 integration_title: Lighthouse
-integration_version: 2.1.1
+integration_version: 2.2.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: lighthouse
-oauth: {}
 public_title: Lighthouse
 short_description: Google Lighthouse 監査統計
 supported_os:
@@ -40,8 +41,8 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
+  - Category::Developer Tools
   - Supported OS::Linux
-  - Category::Web
   configuration: README.md#Setup
   description: Google Lighthouse 監査統計
   media: []
@@ -50,6 +51,7 @@ tile:
   title: Lighthouse
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -59,11 +61,11 @@ tile:
 - Lighthouse 統計を視覚化および監視できます。
 - Web サイトのアクセシビリティ、ベストプラクティス、パフォーマンス、PWA、および SEO 監査スコアを追跡および監査できます。
 
-## セットアップ
+## 計画と使用
 
 Lighthouse チェックは [Datadog Agent][2] パッケージに含まれていないため、お客様自身でインストールする必要があります。
 
-### インストール
+### インフラストラクチャーリスト
 
 Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Lighthouse チェックをホストにインストールします。Docker Agent または 上記バージョン以前の Agent でインストールする場合は、[コミュニティインテグレーションの使用][3]をご参照ください。
 
@@ -75,7 +77,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Lighthouse チ
 
 2. コアの[インテグレーション][4]と同様にインテグレーションを構成します。
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 1. Lighthouse の[メトリクス](#metrics)の収集を開始するには、[Agent のコンフィギュレーションディレクトリ][5]のルートにある `conf.d/` フォルダーの `lighthouse.d/conf.yaml` ファイルを編集します。
    使用可能なすべてのコンフィギュレーションオプションについては、[lighthouse.d/conf.yaml のサンプル][6]を参照してください。
@@ -153,26 +155,26 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Lighthouse チ
 
 [Agent の status サブコマンドを実行][12]し、Checks セクションで `lighthouse` を探します。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "lighthouse" >}}
 
 
-### イベント
+### ヘルプ
 
 Lighthouse インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 
 Lighthouse インテグレーションには、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][14]までお問合せください。
 
 [1]: https://developers.google.com/web/tools/lighthouse
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/
 [4]: https://docs.datadoghq.com/ja/getting_started/integrations/
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory

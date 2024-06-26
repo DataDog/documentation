@@ -16,7 +16,7 @@ further_reading:
 - link: /real_user_monitoring/explorer/visualize/
   tag: Documentation
   text: Appliquer des visualisations sur vos événements
-- link: /real_user_monitoring/dashboards/
+- link: /real_user_monitoring/platform/dashboards/
   tag: Documentation
   text: En savoir plus sur les dashboards RUM
 kind: documentation
@@ -52,17 +52,31 @@ Les [signaux Web essentiels de Google][5] désignent trois métriques visant à 
 | [Largest Contentful Paint][7] | Performances de chargement | Moment où l'objet DOM le plus volumineux est affiché dans la fenêtre d'affichage (à savoir, visible à l'écran) lors du chargement de la page.         | < 2,5 s       |
 | [First Input Delay][8]        | Interactivité    | Délai entre le moment où l'utilisateur interagit pour la première fois avec la page et le moment où le navigateur répond à cette interaction.             | < 100 ms      |
 | [Cumulative Layout Shift][9]  | Stabilité visuelle | Nombre de mouvements de page inattendus causés par le chargement de contenu dynamique (par exemple, des publicités tierces). Lorsqu'aucun décalage ne se produit, cette métrique a pour valeur 0. | < 0,1        |
+| [Interaction To Next Paint][19]| Interactivité    | Durée la plus longue entre l'interaction d'un utilisateur avec la page et le rendu suivant. Requiert la version 5.1.0 du SDK RUM. | <200 ms        |
+
+### Éléments cibles des signaux Web essentiels
+
+L'identification de l'élément ayant déclenché une métrique de signaux Web essentiels élevée est la première étape dans la compréhension de son origine et l'amélioration des performances. RUM transmet l'élément associé à chaque instance des signaux Web essentiels :
+
+- Pour la métrique Largest Contentful Paint, RUM transmet le sélecteur CSS de l'élément correspondant au rendu du contenu principal.
+- Pour la métrique Interaction to Next Paint, RUM transmet le sélecteur CSS de l'élément associé à l'interaction la plus longue avant le rendu suivant.
+- Pour la métrique First Input Delay, RUM transmet le sélecteur CSS du premier élément avec lequel l'utilisateur a interagi.
+- Pour Cumulative Layout Shift, le service RUM transmet le sélecteur CSS de lʼélément le plus modifié contribuant au CLS.
 
 ## Toutes les métriques de performance
-
 
 | Attribut                       | Type        | Description                                                                                                                                                                                                                      |
 |---------------------------------|-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `view.time_spent`               | nombre (ns) | Temps passé sur la vue actuelle.                                                                                                                                                                                                  |
 | `view.first_byte`               | nombre (ns) | Temps écoulé avant la réception du premier octet de la vue.                                                                                                |
 | `view.largest_contentful_paint` | nombre (ns) | Moment dans la chronologie de chargement de page où l'objet DOM le plus volumineux est représenté dans la fenêtre d'affichage et est visible à l'écran.                                                                                                               |
+| `view.largest_contentful_paint_target_selector` | chaîne (sélecteur CSS) | Sélecteur CSS de lʼélément correspondant au rendu du contenu principal.                                                                                     |
 | `view.first_input_delay`        | nombre (ns) | Délai entre le moment où l'utilisateur interagit pour la première fois avec la page et le moment où le navigateur répond à cette interaction.                                                                                                                                        |
+| `view.first_input_delay_target_selector`      | chaîne (sélecteur CSS) | Sélecteur CSS du premier élément avec lequel l'utilisateur a interagi.                                                                                                                |
+| `view.interaction_to_next_paint`| nombre (ns) | Durée la plus longue entre l'interaction d'un utilisateur avec la page et le rendu suivant.                                                                                                                              |
+| `view.interaction_to_next_paint_target_selector`| chaîne (sélecteur CSS) | Sélecteur CSS de l'élément associé à l'interaction la plus longue avant le rendu suivant.                                                                                                          |
 | `view.cumulative_layout_shift`  | nombre      | Nombre de mouvements de page inattendus causés par le chargement dynamique de contenu (par exemple, des publicités tierces). Lorsqu'aucun décalage ne se produit, cette métrique a pour valeur 0.                                                                                      |
+| `view.cumulative_layout_shift_target_selector`  | chaîne (sélecteur CSS) | Sélecteur CSS de lʼélément le plus modifié contribuant au CLS de la page.                                           |
 | `view.loading_time`             | nombre (ns) | Temps écoulé avant que la page ne soit prête et que toutes les requêtes réseau ou mutations DOM soient terminées. Pour en savoir plus, consultez la rubrique relative à la [surveillance des performances des pages][10].                                                                          |
 | `view.first_contentful_paint`   | nombre (ns) | Temps écoulé avant le premier affichage de texte, d'image (images d'arrière-plan incluses), de canvas non blanc ou de SVG. Pour en savoir plus sur l'affichage par le navigateur, consultez la [définition du w3c][11] (en anglais).                                         |
 | `view.dom_interactive`          | nombre (ns) | Moment auquel le parser termine de travailler sur le document principal. Pour en savoir plus, consultez la [documentation MDN][12].                                                                                                        |
@@ -133,6 +147,7 @@ window.DD_RUM.init({
 Le SDK RUM surveille automatiquement les frameworks qui reposent sur une navigation par hash (`#`). Il détecte les `HashChangeEvent` et génère une nouvelle vue. Les événements issus d'une ancre HTML n'affectent pas le contexte de la vue actuelle et sont ignorés.
 
 ## Ajouter vos propres durées de performance
+
 Outre les durées de performance proposées par défaut par la solution RUM, il est possible de mesurer de façon flexible combien de temps votre application consacre à chaque tâche. Grâce à l'API `addTiming`, vous pouvez facilement ajouter des durées de performance supplémentaires.
 
 Par exemple, il est possible d'ajouter le temps écoulé avant l'affichage de votre bannière :
@@ -155,11 +170,11 @@ document.addEventListener("scroll", function handler() {
 });
 ```
 
-Une fois la durée envoyée, elle est accessible via `@view.custom_timings.<nom_durée>` (p. ex., `@view.custom_timings.first_scroll`). Vous devez [créer une mesure][18] avant de pouvoir générer une visualisation dans le RUM Explorer ou dans vos dashboards.
+Une fois la durée envoyée, elle est accessible en nanosecondes via `@view.custom_timings.<nom_durée>` (p. ex., `@view.custom_timings.first_scroll`). Vous devez [créer une mesure][18] avant de pouvoir générer une visualisation dans le RUM Explorer ou dans vos dashboards.
 
 Pour les applications monopages, l'API `addTiming` envoie une durée relative au début de la vue RUM actuelle. Par exemple, si un utilisateur accède à votre application (chargement initial), visite une autre page après 5 secondes (changement de route), puis déclenche enfin `addTiming` après 8 secondes, la durée est égale à `8-5 = 3` secondes.
 
-Si votre configuration est basée sur une approche asynchrone, vous pouvez définir votre propre durée (le nombre de millisecondes par rapport au début de la vue RUM active ou du timestamp epoch UNIX) comme paramètre secondaire.
+Si votre configuration est basée sur une approche asynchrone, vous pouvez définir votre propre durée (sous forme de timestamp epoch UNIX) comme paramètre secondaire.
 
 Par exemple :
 
@@ -176,14 +191,13 @@ document.addEventListener("scroll", function handler() {
 
 ```
 
-
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/real_user_monitoring/dashboards/
+[1]: /fr/real_user_monitoring/platform/dashboards/
 [2]: /fr/real_user_monitoring/browser/data_collected/#default-attributes
-[3]: /fr/real_user_monitoring/dashboards/performance
+[3]: /fr/real_user_monitoring/platform/dashboards/performance
 [4]: /fr/real_user_monitoring/explorer/
 [5]: https://web.dev/vitals/
 [6]: /fr/synthetics/browser_tests/
@@ -199,3 +213,4 @@ document.addEventListener("scroll", function handler() {
 [16]: https://developer.mozilla.org/en-US/docs/Web/API/History
 [17]: https://en.wikipedia.org/wiki/Comet_&#40;programming&#41;
 [18]: /fr/real_user_monitoring/explorer/search/#setup-facets-and-measures
+[19]: https://web.dev/inp/

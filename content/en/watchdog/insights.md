@@ -24,7 +24,7 @@ Investigating an incident requires trial and error. Drawing from their experienc
 Throughout most of Datadog, Watchdog returns two types of insights:
 
 - **Anomalies**: All the pre-calculated [Watchdog alerts][11] matching the active search query that Watchdog found by scanning your organization's data. Access the full list in the [Watchdog Alert explorer][12].
-- **Outliers**: Calculated on the product data matching the active query, outliers surface tags that appear too frequently in some event types (for example, errors) or drive some continuous metrics upwards (for example, latency).
+- **Outliers**: Tags that appear too frequently in some event types (for example, errors) or drive some continuous metrics upwards (for example, latency).  Outliers are dynamically calculated on the data matching the active query and the time frame.
 
 {{< img src="logs/explorer/watchdog_insights/insights-for-log-explorer.png" alt="The log explorer showing the Watchdog Insights banner with five log anomalies" style="width:100%;" >}}
 
@@ -57,8 +57,17 @@ Every outlier comes with embedded interactions and a side panel with troubleshoo
 ### Filter on Insight query
 
 To refine your current view to match a Watchdog Insight, hover over the top right corner of an Insight summary card. Two icons appear. Click on the inverted triangle icon with the tooltip **Filter on Insight**. The page refreshes to show a list of entries corresponding to the insight.
+**Note**: Filtering on Watchdog Insights automatically changes the scope you're looking at. As a result, if you select an outlier insight, it is no longer visible, as it is treated as the baseline.
 
 {{< img src="watchdog/filter_on_insight.png" alt="Filtering the explorer on the insight context" style="width:70%;">}}
+
+### Share an outlier
+
+To share a given outlier, click on it in the insight panel to open the details side panel. Click the **Copy Link** button at the top of the details panel:
+
+{{< img src="watchdog/share-outlier.png" alt="Outlier side panel showing how to copy the link" style="width:80%;">}}
+
+The link to the outlier expires with the retention of the underlying data. For instance, if the logs used to build the outlier are retained for 15 days, the link to the outlier expires with the logs after 15 days.
 
 ## Outlier types
 
@@ -138,7 +147,7 @@ In the full side panel, you can see a latency distribution graph for the tag and
 {{% /tab %}}
 {{% tab "Profiling" %}}
 
-### Lock pressure outlier
+### Lock contention outlier
 
 In the banner card view, you can see:
 
@@ -146,11 +155,11 @@ In the banner card view, you can see:
   * The number of threads impacted
   * The potential CPU savings (and estimated cost savings)
     
-{{< img src="watchdog/small_card_profiling_lock_pressure.png" alt="Profiling insight on Lock Pressure" style="width:50%;">}}
+{{< img src="watchdog/small_card_profiling_lock_pressure.png" alt="Profiling insight on Lock Contention" style="width:50%;">}}
 
-In the full side panel, you can see instructions on how to resolve the lock pressure:
+In the full side panel, you can see instructions on how to resolve the lock contention:
 
-{{< img src="watchdog/side_panel_profiling_lock_pressure.png" alt="Side panel with all the information on how to adress the Lock Pressure outlier" style="width:100%;">}}
+{{< img src="watchdog/side_panel_profiling_lock_pressure.png" alt="Side panel with all the information on how to address the Lock Contention outlier" style="width:100%;">}}
 
 ### Garbage collection outlier
 
@@ -163,7 +172,7 @@ In the banner card view, you can see:
 
 In the full side panel, you can see instructions on how to better configure garbage collection to free up some CPU time:
 
-{{< img src="watchdog/side_panel_profiling_garbage_collection.png" alt="Side panel with all the information on how to adress the Garbage Collection outlier" style="width:100%;">}}
+{{< img src="watchdog/side_panel_profiling_garbage_collection.png" alt="Side panel with all the information on how to address the Garbage Collection outlier" style="width:100%;">}}
 
 ### Regex compilation outlier
 
@@ -176,7 +185,7 @@ In the banner card view, you can see:
 
 In the full side panel, you can see instructions on how to improve regex compilation time, as well as examples of functions within your code that could be improved:
 
-{{< img src="watchdog/side_panel_profiling_regex_compilation.png" alt="Side panel with all the information on how to adress the Regex Compilation outlier" style="width:100%;">}}
+{{< img src="watchdog/side_panel_profiling_regex_compilation.png" alt="Side panel with all the information on how to address the Regex Compilation outlier" style="width:100%;">}}
 
 {{% /tab %}}
 {{% tab "Databases" %}}
@@ -231,7 +240,7 @@ In the full side panel, you can see a timeseries graph about the performance met
 {{< img src="real_user_monitoring/explorer/watchdog_insights/latency_outlier_side_panel-1.png" alt="Latency Outlier full side panel view" style="width:100%;" >}}
 
 [1]: /real_user_monitoring/explorer/search/#facets
-[2]: /real_user_monitoring/browser/monitoring_page_performance/#core-web-vitals
+[2]: /real_user_monitoring/browser/monitoring_page_performance/#event-timings-and-core-web-vitals
 [3]: /real_user_monitoring/browser/monitoring_page_performance/#monitoring-single-page-applications-spa
 {{% /tab %}}
 {{% tab "Serverless" %}}

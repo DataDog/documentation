@@ -1,5 +1,5 @@
 ---
-title: Browser Test Steps
+title: Browser Testing Steps
 kind: documentation
 description: Learn how to automatically record and manually set steps in a browser test recording.
 further_reading:
@@ -7,7 +7,7 @@ further_reading:
   tag: "Documentation"
   text: "Learn about advanced options for browser tests"
 - link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_global_variable"
-  tag: "Terraform"
+  tag: "External Site"
   text: "Create and manage Synthetic Global Variables with Terraform"
 ---
 
@@ -19,7 +19,7 @@ The default timeout for each step is 60 seconds. You can override this default t
 
 ## Automatically recorded steps
 
-Once you click **Start Recording**, the [Datadog browser test recorder extension][3] automatically detects and records steps on your website.
+Once you click **Start Recording**, the [Datadog browser test recorder extension][3], available for Chrome and Edge browsers, automatically detects and records steps on your website.
 
 ### Click
 
@@ -265,6 +265,13 @@ To obfuscate local variable values in test results, select **Hide and obfuscate 
 
 Create a variable from content such as a `span` or `div` by extracting the element's text.
 
+#### Email body
+
+Create a variable from the email body using one of the following methods: [`regex`][13] or [`Xpath`][12].
+
+* [`Regex`][13] searches and returns the first matching pattern (for example, `/*./`) from the email's plain text body. If the pattern is not found, it then searches the HTML body.
+
+* [`Xpath`][12] is only applicable when the email contains an HTML body. It returns the content of the corresponding location (for example, `$`).
 
 #### JavaScript
 

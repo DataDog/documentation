@@ -82,7 +82,7 @@ L'objet de l'e-mail devient le titre de l'événement, et le corps de l'e-mail d
 
 ### Markdown
 
-Le texte de l'événement Datadog prend en charge le [Markdown][4], mais il n'est pas possible d'incorporer du HTML dans le Markdown. Pour utiliser le langage Markdown dans le texte de l'événement, vous devez ajouter `%%% \n` au début du bloc de texte et `\n %%%` à la fin du bloc :
+Le texte de l'événement Datadog prend en charge le [Markdown][5], mais il n'est pas possible d'incorporer du HTML dans le Markdown. Pour utiliser le langage Markdown dans le texte de l'événement, vous devez ajouter `%%% \n` au début du bloc de texte et `\n %%%` à la fin du bloc :
 
 ```json
 {

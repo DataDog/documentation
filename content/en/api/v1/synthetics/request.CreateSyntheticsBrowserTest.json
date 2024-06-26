@@ -34,7 +34,7 @@
     "accept_self_signed": false,
     "allow_insecure": true,
     "device_ids": [
-      "tablet"
+      "chrome.laptop_large"
     ],
     "disableCors": true,
     "follow_redirects": true,
@@ -42,7 +42,7 @@
     "min_location_failed": 1,
     "noScreenshot": true,
     "retry": {
-      "count": 3,
+      "count": 2,
       "interval": 10
     },
     "tick_every": 300

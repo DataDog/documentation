@@ -1,9 +1,44 @@
 {
+  "CreateAWSAccount": [
+    {
+      "group": "aws_integration",
+      "suffix": "",
+      "description": "Create an AWS integration returns \"OK\" response"
+    }
+  ],
+  "DeleteAWSAccount": [
+    {
+      "group": "aws_integration",
+      "suffix": "",
+      "description": "Delete an AWS integration returns \"OK\" response"
+    }
+  ],
   "UpdateAWSAccount": [
     {
       "group": "aws_integration",
       "suffix": "",
       "description": "Update an AWS integration returns \"OK\" response"
+    }
+  ],
+  "CreateAzureIntegration": [
+    {
+      "group": "azure_integration",
+      "suffix": "",
+      "description": "Create an Azure integration returns \"OK\" response"
+    }
+  ],
+  "DeleteAzureIntegration": [
+    {
+      "group": "azure_integration",
+      "suffix": "",
+      "description": "Delete an Azure integration returns \"OK\" response"
+    }
+  ],
+  "UpdateAzureIntegration": [
+    {
+      "group": "azure_integration",
+      "suffix": "",
+      "description": "Update an Azure integration returns \"OK\" response"
     }
   ],
   "CreateDashboardList": [
@@ -80,6 +115,11 @@
       "group": "dashboards",
       "suffix": "_1284514532",
       "description": "Create a new dashboard with a timeseries widget using formulas and functions cloud cost query"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_2563642929",
+      "description": "Create a new dashboard with a toplist widget sorted by group"
     },
     {
       "group": "dashboards",
@@ -240,6 +280,11 @@
       "group": "dashboards",
       "suffix": "_417992286",
       "description": "Create a new dashboard with note widget"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_1754992756",
+      "description": "Create a new dashboard with powerpack widget"
     },
     {
       "group": "dashboards",
@@ -452,6 +497,32 @@
       "description": "Post an event with a long title returns \"OK\" response"
     }
   ],
+  "CreateGCPIntegration": [
+    {
+      "group": "gcp_integration",
+      "suffix": "",
+      "description": "Create a GCP integration returns \"OK\" response"
+    }
+  ],
+  "DeleteGCPIntegration": [
+    {
+      "group": "gcp_integration",
+      "suffix": "",
+      "description": "Delete a GCP integration returns \"OK\" response"
+    }
+  ],
+  "UpdateGCPIntegration": [
+    {
+      "group": "gcp_integration",
+      "suffix": "_3544259255",
+      "description": "Update a GCP integration cloud run revision filters returns \"OK\" response"
+    },
+    {
+      "group": "gcp_integration",
+      "suffix": "",
+      "description": "Update a GCP integration returns \"OK\" response"
+    }
+  ],
   "ListLogs": [
     {
       "group": "logs",
@@ -530,6 +601,11 @@
       "group": "monitors",
       "suffix": "_2012680290",
       "description": "Create a metric monitor returns \"OK\" response"
+    },
+    {
+      "group": "monitors",
+      "suffix": "_1539578087",
+      "description": "Create a metric monitor with a custom schedule returns \"OK\" response"
     },
     {
       "group": "monitors",
@@ -632,6 +708,11 @@
   "CreateSLO": [
     {
       "group": "service_level_objectives",
+      "suffix": "_3765703239",
+      "description": "Create a time-slice SLO object returns \"OK\" response"
+    },
+    {
+      "group": "service_level_objectives",
       "suffix": "",
       "description": "Create an SLO object returns \"OK\" response"
     }
@@ -682,6 +763,11 @@
     },
     {
       "group": "synthetics",
+      "suffix": "_1987645492",
+      "description": "Create an API HTTP test has bodyHash filled out"
+    },
+    {
+      "group": "synthetics",
       "suffix": "_1487281163",
       "description": "Create an API HTTP test returns \"OK - Returns the created test details.\" response"
     },
@@ -707,6 +793,11 @@
     },
     {
       "group": "synthetics",
+      "suffix": "_1241981394",
+      "description": "Create an API test with a file payload returns \"OK - Returns the created test details.\" response"
+    },
+    {
+      "group": "synthetics",
       "suffix": "_1279271422",
       "description": "Create an API test with multi subtype returns \"OK - Returns the created test details.\" response"
     }
@@ -716,6 +807,13 @@
       "group": "synthetics",
       "suffix": "",
       "description": "Edit an API test returns \"OK\" response"
+    }
+  ],
+  "PatchTest": [
+    {
+      "group": "synthetics",
+      "suffix": "",
+      "description": "Patch a Synthetic test returns \"OK\" response"
     }
   ],
   "TriggerTests": [

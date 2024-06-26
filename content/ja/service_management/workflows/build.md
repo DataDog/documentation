@@ -105,11 +105,9 @@ Datadog の [**Workflow Automation** ページ][1]からワークフローを作
 
 各ステップの **Context Variables** タブには、そのステップで利用可能なすべてのコンテキスト変数のマップが表示されます。
 
-{{< img src="service_management/workflows/context-variables3.png" alt="Context Variables タブ" >}}
+{{< img src="service_management/workflows/context-variables4.png" alt="Context Variables タブ" >}}
 
 二重中括弧 (`{{`) で囲んで、ステップ内のコンテキスト変数にアクセスします。コンテキスト変数内のフィールドにアクセスするには、[ハンドルバー式構文][2]を使います。
-
-{{< img src="service_management/workflows/use-context-variable1.png" alt="サポートされているテキストフィールドで二重中括弧を使用して、コンテキスト変数を挿入します" >}}
 
 ### ワークフロー変数
 
@@ -142,7 +140,7 @@ Datadog の [**Workflow Automation** ページ][1]からワークフローを作
 
 ステップ内の入力パラメーターを参照するには、`{{ Trigger.<parameter name>}}` という構文を使用します。例えば、`user` という名前の入力パラメーターを参照するには、`{{Trigger.user}}` を使用します。
 
-{{< img src="service_management/workflows/input-parameter1.png" alt="入力パラメーターをステップに追加すると、自動的にワークフローに追加される" style="width:100%;">}}
+{{< img src="service_management/workflows/input-parameter2.png" alt="入力パラメーターをステップに追加すると、自動的にワークフローに追加される" style="width:100%;">}}
 
 **Input Parameters** セクションには、既存のすべての入力パラメーターの名前とカウンターが表示されます。カウンターにカーソルを合わせると、そのパラメーターを使用しているステップを確認できます。
 

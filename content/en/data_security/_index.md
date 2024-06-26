@@ -14,10 +14,10 @@ further_reading:
 - link: "/tracing/configure_data_security/"
   tag: "Documentation"
   text: "Tracing Data Security"
-- link: "/real_user_monitoring/browser/modifying_data_and_context/"
+- link: "/data_security/real_user_monitoring/"
   tag: "Documentation"
   text: "RUM Data Security"
-- link: "/real_user_monitoring/session_replay/privacy_options"
+- link: "/real_user_monitoring/session_replay/browser/privacy_options"
   tag: "Documentation"
   text: "Session Replay Privacy Options"
 - link: "/sensitive_data_scanner/"
@@ -146,7 +146,7 @@ Continuous Integration pipelines and tests
 [2]: https://www.datadoghq.com/legal/privacy/
 [3]: /developers/dogstatsd/
 [4]: /data_security/agent/
-[5]: /agent/guide/secrets-management/
+[5]: /agent/configuration/secrets-management/
 [6]: /integrations/amazon_web_services/
 [7]: https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#delegate-using-roles
 [8]: /integrations/azure/
@@ -162,8 +162,8 @@ Continuous Integration pipelines and tests
 [18]: /tracing/configure_data_security/
 [19]: /serverless/distributed_tracing/collect_lambda_payloads#obfuscating-payload-contents
 [20]: /data_security/synthetics/
-[21]: /real_user_monitoring/browser/modifying_data_and_context/
-[22]: /real_user_monitoring/session_replay/privacy_options
+[21]: /real_user_monitoring/browser/advanced_configuration/
+[22]: /real_user_monitoring/session_replay/browser/privacy_options
 [23]: /database_monitoring/data_collected/#sensitive-information
 [24]: /getting_started/tagging/
 [25]: /tracing/glossary/

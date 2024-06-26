@@ -9,12 +9,12 @@ further_reading:
   tag: ドキュメント
   text: Synthetic モニタリングの設定
 kind: documentation
-title: Synthetics で RUM とセッションリプレイを確認する
+title: Synthetic の RUM 機能のプレビューを見る
 ---
 
 ## 概要
 
-<div class="alert alert-info">Real User Monitoring を導入していない場合、Synthetic ブラウザテストの実行から RUM のプレビュー、セッションリプレイ、エラートラッキング、追加パフォーマンスデータにアクセスできます。</div>
+<div class="alert alert-info">Real User Monitoring を導入している場合、Synthetic ブラウザテストの実行を通じて RUM、セッションリプレイ、エラートラッキング、および追加のパフォーマンスデータのプレビューにアクセスできます。</div>
 
 Synthetic ブラウザテストは、Real User Monitoring SDK を組み込み、以下の確認を可能にします。
 
@@ -26,11 +26,11 @@ Synthetic ブラウザテストは、Real User Monitoring SDK を組み込み、
 ## RUM アプリケーションでの Synthetic データの許可
 
 <div class="alert alert-warning">
-</div>ターゲットアプリケーションがすでに RUM でインスツルメンテーションされている場合、予期せぬ動作を引き起こす可能性があるため、Synthetic テストの構成内で RUM データ収集を有効にするべきではありません。
+ターゲットアプリケーションがすでに RUM でインスツルメンテーションされている場合、予期せぬ動作を引き起こす可能性があるため、Synthetic テストの構成内で RUM データ収集を有効にするべきではありません。</div>
 
 ブラウザテストの記録で、**Start Recording** ボタンの上にある **Collect RUM Data on** をクリックし、データを収集するアプリケーションを選択します。記録とテスト構成を保存すると、RUM はテストデータを収集し、ブラウザテスト実行からセッション記録を生成します。
 
-1. [**UX Monitoring** > **Settings** > **Integration Settings**][5] へ移動します。
+1. **Digital Experience** > **Settings** (Synthetic Monitoring & Testing の下) > [**Integration Settings**][5] に移動します。
 2. **Synthetic Data RUM Collection** の下で、**Enable Synthetic RUM data collection** をクリックし、Datadog がテスト実行から RUM データを収集することを有効にします。
 3. **Save RUM Data Collection** をクリックします。
 4. **Synthetic Data RUM Applications** の下で、ドロップダウンメニューから、Browser Test Recorder で提案されたデフォルトの RUM アプリケーションを選択します。
@@ -68,8 +68,8 @@ Synthetics とテストの結果に戻るには、**View Synthetic Test Result**
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/real_user_monitoring/session_replay/
-[2]: /ja/real_user_monitoring/session_replay/developer_tools/
+[1]: /ja/real_user_monitoring/session_replay/browser/
+[2]: /ja/real_user_monitoring/session_replay/browser/developer_tools/
 [3]: /ja/real_user_monitoring/explorer/
 [4]: /ja/real_user_monitoring/error_tracking/
 [5]: https://app.datadoghq.com/synthetics/settings/integrations

@@ -168,31 +168,31 @@
     "request_schema_description": "The distribution points payload."
   },
   "ListDowntimes": {
-    "description": "Get all scheduled downtimes.",
+    "description": "Get all scheduled downtimes. **Note:** This endpoint has been deprecated. Please use v2 endpoints.",
     "summary": "Get all downtimes"
   },
   "CreateDowntime": {
-    "description": "Schedule a downtime.",
+    "description": "Schedule a downtime. **Note:** This endpoint has been deprecated. Please use v2 endpoints.",
     "summary": "Schedule a downtime",
     "request_description": "Schedule a downtime request body.",
     "request_schema_description": "Downtiming gives you greater control over monitor notifications by\nallowing you to globally exclude scopes from alerting.\nDowntime settings, which can be scheduled with start and end times,\nprevent all alerting related to specified Datadog tags."
   },
   "CancelDowntimesByScope": {
-    "description": "Delete all downtimes that match the scope of `X`.",
+    "description": "Delete all downtimes that match the scope of `X`. **Note:** This only interacts with Downtimes created using v1 endpoints. This endpoint has been deprecated and will not be replaced. Please use v2 endpoints to find and cancel downtimes.",
     "summary": "Cancel downtimes by scope",
     "request_description": "Scope to cancel downtimes for.",
     "request_schema_description": "Cancel downtimes according to scope."
   },
   "CancelDowntime": {
-    "description": "Cancel a downtime.",
+    "description": "Cancel a downtime. **Note:** This endpoint has been deprecated. Please use v2 endpoints.",
     "summary": "Cancel a downtime"
   },
   "GetDowntime": {
-    "description": "Get downtime detail by `downtime_id`.",
+    "description": "Get downtime detail by `downtime_id`. **Note:** This endpoint has been deprecated. Please use v2 endpoints.",
     "summary": "Get a downtime"
   },
   "UpdateDowntime": {
-    "description": "Update a single downtime by `downtime_id`.",
+    "description": "Update a single downtime by `downtime_id`. **Note:** This endpoint has been deprecated. Please use v2 endpoints.",
     "summary": "Update a downtime",
     "request_description": "Update a downtime request body.",
     "request_schema_description": "Downtiming gives you greater control over monitor notifications by\nallowing you to globally exclude scopes from alerting.\nDowntime settings, which can be scheduled with start and end times,\nprevent all alerting related to specified Datadog tags."
@@ -238,7 +238,7 @@
     "summary": "Take graph snapshots"
   },
   "MuteHost": {
-    "description": "Mute a host.",
+    "description": "Mute a host. **Note:** This creates a [Downtime V2](https://docs.datadoghq.com/api/latest/downtimes/#schedule-a-downtime) for the host.",
     "summary": "Mute a host",
     "request_description": "Mute a host request body.",
     "request_schema_description": "Combination of settings to mute a host."
@@ -280,6 +280,22 @@
   "ListAvailableAWSNamespaces": {
     "description": "List all namespace rules for a given Datadog-AWS integration. This endpoint takes no arguments.",
     "summary": "List namespace rules"
+  },
+  "DeleteAWSEventBridgeSource": {
+    "description": "Delete an Amazon EventBridge source.",
+    "summary": "Delete an Amazon EventBridge source",
+    "request_description": "Delete the Amazon EventBridge source with the given name, region, and associated AWS account.",
+    "request_schema_description": "An object used to delete an EventBridge source."
+  },
+  "ListAWSEventBridgeSources": {
+    "description": "Get all Amazon EventBridge sources.",
+    "summary": "Get all Amazon EventBridge sources"
+  },
+  "CreateAWSEventBridgeSource": {
+    "description": "Create an Amazon EventBridge source.",
+    "summary": "Create an Amazon EventBridge source",
+    "request_description": "Create an Amazon EventBridge source for an AWS account with a given name and region.",
+    "request_schema_description": "An object used to create an EventBridge source."
   },
   "DeleteAWSTagFilter": {
     "description": "Delete a tag filtering entry.",
@@ -584,7 +600,7 @@
     "summary": "Get all monitor details"
   },
   "CreateMonitor": {
-    "description": "Create a monitor using the specified options.\n\n#### Monitor Types\n\nThe type of monitor chosen from:\n\n- anomaly: `query alert`\n- APM: `query alert` or `trace-analytics alert`\n- composite: `composite`\n- custom: `service check`\n- event: `event alert`\n- forecast: `query alert`\n- host: `service check`\n- integration: `query alert` or `service check`\n- live process: `process alert`\n- logs: `log alert`\n- metric: `query alert`\n- network: `service check`\n- outlier: `query alert`\n- process: `service check`\n- rum: `rum alert`\n- SLO: `slo alert`\n- watchdog: `event alert`\n- event-v2: `event-v2 alert`\n- audit: `audit alert`\n- error-tracking: `error-tracking alert`\n- database-monitoring: `database-monitoring alert`\n\n**Note**: Synthetic monitors are created through the Synthetics API. See the [Synthetics API] (https://docs.datadoghq.com/api/latest/synthetics/) documentation for more information.\n\n#### Query Types\n\n##### Metric Alert Query\n\nExample: `time_aggr(time_window):space_aggr:metric{tags} [by {key}] operator #`\n\n- `time_aggr`: avg, sum, max, min, change, or pct_change\n- `time_window`: `last_#m` (with `#` between 1 and 10080 depending on the monitor type) or `last_#h`(with `#` between 1 and 168 depending on the monitor type) or `last_1d`, or `last_1w`\n- `space_aggr`: avg, sum, min, or max\n- `tags`: one or more tags (comma-separated), or *\n- `key`: a 'key' in key:value tag syntax; defines a separate alert for each tag in the group (multi-alert)\n- `operator`: <, <=, >, >=, ==, or !=\n- `#`: an integer or decimal number used to set the threshold\n\nIf you are using the `_change_` or `_pct_change_` time aggregator, instead use `change_aggr(time_aggr(time_window),\ntimeshift):space_aggr:metric{tags} [by {key}] operator #` with:\n\n- `change_aggr` change, pct_change\n- `time_aggr` avg, sum, max, min [Learn more](https://docs.datadoghq.com/monitors/create/types/#define-the-conditions)\n- `time_window` last\\_#m (between 1 and 2880 depending on the monitor type), last\\_#h (between 1 and 48 depending on the monitor type), or last_#d (1 or 2)\n- `timeshift` #m_ago (5, 10, 15, or 30), #h_ago (1, 2, or 4), or 1d_ago\n\nUse this to create an outlier monitor using the following query:\n`avg(last_30m):outliers(avg:system.cpu.user{role:es-events-data} by {host}, 'dbscan', 7) > 0`\n\n##### Service Check Query\n\nExample: `\"check\".over(tags).last(count).by(group).count_by_status()`\n\n- `check` name of the check, for example `datadog.agent.up`\n- `tags` one or more quoted tags (comma-separated), or \"*\". for example: `.over(\"env:prod\", \"role:db\")`; `over` cannot be blank.\n- `count` must be at greater than or equal to your max threshold (defined in the `options`). It is limited to 100.\nFor example, if you've specified to notify on 1 critical, 3 ok, and 2 warn statuses, `count` should be at least 3.\n- `group` must be specified for check monitors. Per-check grouping is already explicitly known for some service checks.\nFor example, Postgres integration monitors are tagged by `db`, `host`, and `port`, and Network monitors by `host`, `instance`, and `url`. See [Service Checks](https://docs.datadoghq.com/api/latest/service-checks/) documentation for more information.\n\n##### Event Alert Query\n\nExample: `events('sources:nagios status:error,warning priority:normal tags: \"string query\"').rollup(\"count\").last(\"1h\")\"`\n\n- `event`, the event query string:\n- `string_query` free text query to match against event title and text.\n- `sources` event sources (comma-separated).\n- `status` event statuses (comma-separated). Valid options: error, warn, and info.\n- `priority` event priorities (comma-separated). Valid options: low, normal, all.\n- `host` event reporting host (comma-separated).\n- `tags` event tags (comma-separated).\n- `excluded_tags` excluded event tags (comma-separated).\n- `rollup` the stats roll-up method. `count` is the only supported method now.\n- `last` the timeframe to roll up the counts. Examples: 45m, 4h. Supported timeframes: m, h and d. This value should not exceed 48 hours.\n\n**NOTE** The Event Alert Query is being deprecated and replaced by the Event V2 Alert Query. For more information, see the [Event Migration guide](https://docs.datadoghq.com/events/guides/migrating_to_new_events_features/).\n\n##### Event V2 Alert Query\n\nExample: `events(query).rollup(rollup_method[, measure]).last(time_window) operator #`\n\n- `query` The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).\n- `rollup_method` The stats roll-up method - supports `count`, `avg` and `cardinality`.\n- `measure` For `avg` and cardinality `rollup_method` - specify the measure or the facet name you want to use.\n- `time_window` #m (between 1 and 2880), #h (between 1 and 48).\n- `operator` `<`, `<=`, `>`, `>=`, `==`, or `!=`.\n- `#` an integer or decimal number used to set the threshold.\n\n##### Process Alert Query\n\nExample: `processes(search).over(tags).rollup('count').last(timeframe) operator #`\n\n- `search` free text search string for querying processes.\nMatching processes match results on the [Live Processes](https://docs.datadoghq.com/infrastructure/process/?tab=linuxwindows) page.\n- `tags` one or more tags (comma-separated)\n- `timeframe` the timeframe to roll up the counts. Examples: 10m, 4h. Supported timeframes: s, m, h and d\n- `operator` <, <=, >, >=, ==, or !=\n- `#` an integer or decimal number used to set the threshold\n\n##### Logs Alert Query\n\nExample: `logs(query).index(index_name).rollup(rollup_method[, measure]).last(time_window) operator #`\n\n- `query` The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).\n- `index_name` For multi-index organizations, the log index in which the request is performed.\n- `rollup_method` The stats roll-up method - supports `count`, `avg` and `cardinality`.\n- `measure` For `avg` and cardinality `rollup_method` - specify the measure or the facet name you want to use.\n- `time_window` #m (between 1 and 2880), #h (between 1 and 48).\n- `operator` `<`, `<=`, `>`, `>=`, `==`, or `!=`.\n- `#` an integer or decimal number used to set the threshold.\n\n##### Composite Query\n\nExample: `12345 && 67890`, where `12345` and `67890` are the IDs of non-composite monitors\n\n* `name` [*required*, *default* = **dynamic, based on query**]: The name of the alert.\n* `message` [*required*, *default* = **dynamic, based on query**]: A message to include with notifications for this monitor.\nEmail notifications can be sent to specific users by using the same '@username' notation as events.\n* `tags` [*optional*, *default* = **empty list**]: A list of tags to associate with your monitor.\nWhen getting all monitor details via the API, use the `monitor_tags` argument to filter results by these tags.\nIt is only available via the API and isn't visible or editable in the Datadog UI.\n\n##### SLO Alert Query\n\nExample: `error_budget(\"slo_id\").over(\"time_window\") operator #`\n\n- `slo_id`: The alphanumeric SLO ID of the SLO you are configuring the alert for.\n- `time_window`: The time window of the SLO target you wish to alert on. Valid options: `7d`, `30d`, `90d`.\n- `operator`: `>=` or `>`\n\n##### Audit Alert Query\n\nExample: `audits(query).rollup(rollup_method[, measure]).last(time_window) operator #`\n\n- `query` The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).\n- `rollup_method` The stats roll-up method - supports `count`, `avg` and `cardinality`.\n- `measure` For `avg` and cardinality `rollup_method` - specify the measure or the facet name you want to use.\n- `time_window` #m (between 1 and 2880), #h (between 1 and 48).\n- `operator` `<`, `<=`, `>`, `>=`, `==`, or `!=`.\n- `#` an integer or decimal number used to set the threshold.\n\n**NOTE** Only available on US1-FED and in closed beta on US1, EU, AP1, US3, and US5.\n\n##### CI Pipelines Alert Query\n\nExample: `ci-pipelines(query).rollup(rollup_method[, measure]).last(time_window) operator #`\n\n- `query` The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).\n- `rollup_method` The stats roll-up method - supports `count`, `avg`, and `cardinality`.\n- `measure` For `avg` and cardinality `rollup_method` - specify the measure or the facet name you want to use.\n- `time_window` #m (between 1 and 2880), #h (between 1 and 48).\n- `operator` `<`, `<=`, `>`, `>=`, `==`, or `!=`.\n- `#` an integer or decimal number used to set the threshold.\n\n**NOTE** CI Pipeline monitors are in alpha on US1, EU, AP1, US3, and US5.\n\n##### CI Tests Alert Query\n\nExample: `ci-tests(query).rollup(rollup_method[, measure]).last(time_window) operator #`\n\n- `query` The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).\n- `rollup_method` The stats roll-up method - supports `count`, `avg`, and `cardinality`.\n- `measure` For `avg` and cardinality `rollup_method` - specify the measure or the facet name you want to use.\n- `time_window` #m (between 1 and 2880), #h (between 1 and 48).\n- `operator` `<`, `<=`, `>`, `>=`, `==`, or `!=`.\n- `#` an integer or decimal number used to set the threshold.\n\n**NOTE** CI Test monitors are available only in closed beta on US1, EU, AP1, US3, and US5.\n\n##### Error Tracking Alert Query\n\nExample(RUM): `error-tracking-rum(query).rollup(rollup_method[, measure]).last(time_window) operator #`\nExample(APM Traces): `error-tracking-traces(query).rollup(rollup_method[, measure]).last(time_window) operator #`\n\n- `query` The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).\n- `rollup_method` The stats roll-up method - supports `count`, `avg`, and `cardinality`.\n- `measure` For `avg` and cardinality `rollup_method` - specify the measure or the facet name you want to use.\n- `time_window` #m (between 1 and 2880), #h (between 1 and 48).\n- `operator` `<`, `<=`, `>`, `>=`, `==`, or `!=`.\n- `#` an integer or decimal number used to set the threshold.\n\n**Database Monitoring Alert Query**\n\nExample: `database-monitoring(query).rollup(rollup_method[, measure]).last(time_window) operator #`\n\n- `query` The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).\n- `rollup_method` The stats roll-up method - supports `count`, `avg`, and `cardinality`.\n- `measure` For `avg` and cardinality `rollup_method` - specify the measure or the facet name you want to use.\n- `time_window` #m (between 1 and 2880), #h (between 1 and 48).\n- `operator` `<`, `<=`, `>`, `>=`, `==`, or `!=`.\n- `#` an integer or decimal number used to set the threshold.\n\n**NOTE** Database Monitoring monitors are in alpha on US1.",
+    "description": "Create a monitor using the specified options.\n\n#### Monitor Types\n\nThe type of monitor chosen from:\n\n- anomaly: `query alert`\n- APM: `query alert` or `trace-analytics alert`\n- composite: `composite`\n- custom: `service check`\n- event: `event alert`\n- forecast: `query alert`\n- host: `service check`\n- integration: `query alert` or `service check`\n- live process: `process alert`\n- logs: `log alert`\n- metric: `query alert`\n- network: `service check`\n- outlier: `query alert`\n- process: `service check`\n- rum: `rum alert`\n- SLO: `slo alert`\n- watchdog: `event-v2 alert`\n- event-v2: `event-v2 alert`\n- audit: `audit alert`\n- error-tracking: `error-tracking alert`\n- database-monitoring: `database-monitoring alert`\n\n**Notes**:\n- Synthetic monitors are created through the Synthetics API. See the [Synthetics API](https://docs.datadoghq.com/api/latest/synthetics/) documentation for more information.\n- Log monitors require an unscoped App Key.\n\n#### Query Types\n\n##### Metric Alert Query\n\nExample: `time_aggr(time_window):space_aggr:metric{tags} [by {key}] operator #`\n\n- `time_aggr`: avg, sum, max, min, change, or pct_change\n- `time_window`: `last_#m` (with `#` between 1 and 10080 depending on the monitor type) or `last_#h`(with `#` between 1 and 168 depending on the monitor type) or `last_1d`, or `last_1w`\n- `space_aggr`: avg, sum, min, or max\n- `tags`: one or more tags (comma-separated), or *\n- `key`: a 'key' in key:value tag syntax; defines a separate alert for each tag in the group (multi-alert)\n- `operator`: <, <=, >, >=, ==, or !=\n- `#`: an integer or decimal number used to set the threshold\n\nIf you are using the `_change_` or `_pct_change_` time aggregator, instead use `change_aggr(time_aggr(time_window),\ntimeshift):space_aggr:metric{tags} [by {key}] operator #` with:\n\n- `change_aggr` change, pct_change\n- `time_aggr` avg, sum, max, min [Learn more](https://docs.datadoghq.com/monitors/create/types/#define-the-conditions)\n- `time_window` last\\_#m (between 1 and 2880 depending on the monitor type), last\\_#h (between 1 and 48 depending on the monitor type), or last_#d (1 or 2)\n- `timeshift` #m_ago (5, 10, 15, or 30), #h_ago (1, 2, or 4), or 1d_ago\n\nUse this to create an outlier monitor using the following query:\n`avg(last_30m):outliers(avg:system.cpu.user{role:es-events-data} by {host}, 'dbscan', 7) > 0`\n\n##### Service Check Query\n\nExample: `\"check\".over(tags).last(count).by(group).count_by_status()`\n\n- `check` name of the check, for example `datadog.agent.up`\n- `tags` one or more quoted tags (comma-separated), or \"*\". for example: `.over(\"env:prod\", \"role:db\")`; `over` cannot be blank.\n- `count` must be at greater than or equal to your max threshold (defined in the `options`). It is limited to 100.\nFor example, if you've specified to notify on 1 critical, 3 ok, and 2 warn statuses, `count` should be at least 3.\n- `group` must be specified for check monitors. Per-check grouping is already explicitly known for some service checks.\nFor example, Postgres integration monitors are tagged by `db`, `host`, and `port`, and Network monitors by `host`, `instance`, and `url`. See [Service Checks](https://docs.datadoghq.com/api/latest/service-checks/) documentation for more information.\n\n##### Event Alert Query\n\n**Note:** The Event Alert Query has been replaced by the Event V2 Alert Query. For more information, see the [Event Migration guide](https://docs.datadoghq.com/service_management/events/guides/migrating_to_new_events_features/).\n\n##### Event V2 Alert Query\n\nExample: `events(query).rollup(rollup_method[, measure]).last(time_window) operator #`\n\n- `query` The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).\n- `rollup_method` The stats roll-up method - supports `count`, `avg` and `cardinality`.\n- `measure` For `avg` and cardinality `rollup_method` - specify the measure or the facet name you want to use.\n- `time_window` #m (between 1 and 2880), #h (between 1 and 48).\n- `operator` `<`, `<=`, `>`, `>=`, `==`, or `!=`.\n- `#` an integer or decimal number used to set the threshold.\n\n##### Process Alert Query\n\nExample: `processes(search).over(tags).rollup('count').last(timeframe) operator #`\n\n- `search` free text search string for querying processes.\nMatching processes match results on the [Live Processes](https://docs.datadoghq.com/infrastructure/process/?tab=linuxwindows) page.\n- `tags` one or more tags (comma-separated)\n- `timeframe` the timeframe to roll up the counts. Examples: 10m, 4h. Supported timeframes: s, m, h and d\n- `operator` <, <=, >, >=, ==, or !=\n- `#` an integer or decimal number used to set the threshold\n\n##### Logs Alert Query\n\nExample: `logs(query).index(index_name).rollup(rollup_method[, measure]).last(time_window) operator #`\n\n- `query` The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).\n- `index_name` For multi-index organizations, the log index in which the request is performed.\n- `rollup_method` The stats roll-up method - supports `count`, `avg` and `cardinality`.\n- `measure` For `avg` and cardinality `rollup_method` - specify the measure or the facet name you want to use.\n- `time_window` #m (between 1 and 2880), #h (between 1 and 48).\n- `operator` `<`, `<=`, `>`, `>=`, `==`, or `!=`.\n- `#` an integer or decimal number used to set the threshold.\n\n##### Composite Query\n\nExample: `12345 && 67890`, where `12345` and `67890` are the IDs of non-composite monitors\n\n* `name` [*required*, *default* = **dynamic, based on query**]: The name of the alert.\n* `message` [*required*, *default* = **dynamic, based on query**]: A message to include with notifications for this monitor.\nEmail notifications can be sent to specific users by using the same '@username' notation as events.\n* `tags` [*optional*, *default* = **empty list**]: A list of tags to associate with your monitor.\nWhen getting all monitor details via the API, use the `monitor_tags` argument to filter results by these tags.\nIt is only available via the API and isn't visible or editable in the Datadog UI.\n\n##### SLO Alert Query\n\nExample: `error_budget(\"slo_id\").over(\"time_window\") operator #`\n\n- `slo_id`: The alphanumeric SLO ID of the SLO you are configuring the alert for.\n- `time_window`: The time window of the SLO target you wish to alert on. Valid options: `7d`, `30d`, `90d`.\n- `operator`: `>=` or `>`\n\n##### Audit Alert Query\n\nExample: `audits(query).rollup(rollup_method[, measure]).last(time_window) operator #`\n\n- `query` The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).\n- `rollup_method` The stats roll-up method - supports `count`, `avg` and `cardinality`.\n- `measure` For `avg` and cardinality `rollup_method` - specify the measure or the facet name you want to use.\n- `time_window` #m (between 1 and 2880), #h (between 1 and 48).\n- `operator` `<`, `<=`, `>`, `>=`, `==`, or `!=`.\n- `#` an integer or decimal number used to set the threshold.\n\n##### CI Pipelines Alert Query\n\nExample: `ci-pipelines(query).rollup(rollup_method[, measure]).last(time_window) operator #`\n\n- `query` The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).\n- `rollup_method` The stats roll-up method - supports `count`, `avg`, and `cardinality`.\n- `measure` For `avg` and cardinality `rollup_method` - specify the measure or the facet name you want to use.\n- `time_window` #m (between 1 and 2880), #h (between 1 and 48).\n- `operator` `<`, `<=`, `>`, `>=`, `==`, or `!=`.\n- `#` an integer or decimal number used to set the threshold.\n\n##### CI Tests Alert Query\n\nExample: `ci-tests(query).rollup(rollup_method[, measure]).last(time_window) operator #`\n\n- `query` The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).\n- `rollup_method` The stats roll-up method - supports `count`, `avg`, and `cardinality`.\n- `measure` For `avg` and cardinality `rollup_method` - specify the measure or the facet name you want to use.\n- `time_window` #m (between 1 and 2880), #h (between 1 and 48).\n- `operator` `<`, `<=`, `>`, `>=`, `==`, or `!=`.\n- `#` an integer or decimal number used to set the threshold.\n\n##### Error Tracking Alert Query\n\nExample(RUM): `error-tracking-rum(query).rollup(rollup_method[, measure]).last(time_window) operator #`\nExample(APM Traces): `error-tracking-traces(query).rollup(rollup_method[, measure]).last(time_window) operator #`\n\n- `query` The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).\n- `rollup_method` The stats roll-up method - supports `count`, `avg`, and `cardinality`.\n- `measure` For `avg` and cardinality `rollup_method` - specify the measure or the facet name you want to use.\n- `time_window` #m (between 1 and 2880), #h (between 1 and 48).\n- `operator` `<`, `<=`, `>`, `>=`, `==`, or `!=`.\n- `#` an integer or decimal number used to set the threshold.\n\n**Database Monitoring Alert Query**\n\nExample: `database-monitoring(query).rollup(rollup_method[, measure]).last(time_window) operator #`\n\n- `query` The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).\n- `rollup_method` The stats roll-up method - supports `count`, `avg`, and `cardinality`.\n- `measure` For `avg` and cardinality `rollup_method` - specify the measure or the facet name you want to use.\n- `time_window` #m (between 1 and 2880), #h (between 1 and 48).\n- `operator` `<`, `<=`, `>`, `>=`, `==`, or `!=`.\n- `#` an integer or decimal number used to set the threshold.",
     "summary": "Create a monitor",
     "request_description": "Create a monitor request body.",
     "request_schema_description": "Object describing a monitor."
@@ -602,7 +618,7 @@
     "summary": "Monitors search"
   },
   "ValidateMonitor": {
-    "description": "Validate the monitor provided in the request.",
+    "description": "Validate the monitor provided in the request.\n\n**Note**: Log monitors require an unscoped App Key.",
     "summary": "Validate a monitor",
     "request_description": "Monitor request object",
     "request_schema_description": "Object describing a monitor."
@@ -622,7 +638,7 @@
     "request_schema_description": "Object describing a monitor update request."
   },
   "ListMonitorDowntimes": {
-    "description": "Get all active downtimes for the specified monitor.",
+    "description": "Get all active v1 downtimes for the specified monitor. **Note:** This endpoint has been deprecated. Please use v2 endpoints.",
     "summary": "Get active downtimes for a monitor"
   },
   "MuteMonitor": {
@@ -698,7 +714,8 @@
   "UploadIdPForOrg": {
     "description": "There are a couple of options for updating the Identity Provider (IdP)\nmetadata from your SAML IdP.\n\n* **Multipart Form-Data**: Post the IdP metadata file using a form post.\n\n* **XML Body:** Post the IdP metadata file as the body of the request.",
     "summary": "Upload IdP metadata",
-    "request_description": ""
+    "request_description": "",
+    "request_schema_description": "Object describing the IdP configuration."
   },
   "QueryMetrics": {
     "description": "Query timeseries points.",
@@ -914,6 +931,12 @@
     "description": "Get the detailed configuration associated with a Synthetic test.",
     "summary": "Get a test configuration"
   },
+  "PatchTest": {
+    "description": "Patch the configuration of a Synthetic test with partial data.",
+    "summary": "Patch a Synthetic test",
+    "request_description": "[JSON Patch](https://jsonpatch.com/) compliant list of operations",
+    "request_schema_description": "Wrapper around an array of [JSON Patch](https://jsonpatch.com) operations to perform on the test"
+  },
   "UpdateTest": {
     "description": "This endpoint is deprecated. To edit a test, use [Edit an API test](https://docs.datadoghq.com/api/latest/synthetics/#edit-an-api-test) or [Edit a browser test](https://docs.datadoghq.com/api/latest/synthetics/#edit-a-browser-test).",
     "summary": "Edit a test",
@@ -983,47 +1006,43 @@
     "request_schema_description": "Set of tags to associate with your host."
   },
   "GetUsageAnalyzedLogs": {
-    "description": "Get hourly usage for analyzed logs (Security Monitoring).\n**Note:** hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) for the associated migration guide.",
+    "description": "Get hourly usage for analyzed logs (Security Monitoring).\n**Note:** This endpoint has been deprecated. Hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) for the associated migration guide.",
     "summary": "Get hourly usage for analyzed logs"
-  },
-  "GetUsageAttribution": {
-    "description": "Get usage attribution.\n**Note:** This endpoint will be fully deprecated on December 1, 2022.\nRefer to [Migrating from v1 to v2 of the Usage Attribution API](https://docs.datadoghq.com/account_management/guide/usage-attribution-migration/) for the associated migration guide.",
-    "summary": "Get usage attribution"
   },
   "GetUsageAuditLogs": {
     "description": "Get hourly usage for audit logs.\n**Note:** This endpoint has been deprecated.",
     "summary": "Get hourly usage for audit logs"
   },
   "GetUsageLambda": {
-    "description": "Get hourly usage for lambda.\n**Note:** hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) for the associated migration guide.",
-    "summary": "Get hourly usage for lambda"
+    "description": "Get hourly usage for Lambda.\n**Note:** This endpoint has been deprecated. Hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) for the associated migration guide.",
+    "summary": "Get hourly usage for Lambda"
   },
   "GetUsageBillableSummary": {
-    "description": "Get billable usage across your account.",
+    "description": "Get billable usage across your account.\n\nThis endpoint is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/).",
     "summary": "Get billable usage across your account"
   },
   "GetUsageCIApp": {
-    "description": "Get hourly usage for CI visibility (tests, pipeline, and spans).\n**Note:** hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) for the associated migration guide.",
+    "description": "Get hourly usage for CI visibility (tests, pipeline, and spans).\n**Note:** This endpoint has been deprecated. Hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) for the associated migration guide.",
     "summary": "Get hourly usage for CI visibility"
   },
   "GetUsageCloudSecurityPostureManagement": {
-    "description": "Get hourly usage for cloud security management (CSM) pro.\n**Note:** hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) for the associated migration guide.",
+    "description": "Get hourly usage for cloud security management (CSM) pro.\n**Note:** This endpoint has been deprecated. Hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) for the associated migration guide.",
     "summary": "Get hourly usage for CSM Pro"
   },
   "GetUsageCWS": {
-    "description": "Get hourly usage for cloud workload security.\n**Note:** hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) for the associated migration guide.",
+    "description": "Get hourly usage for cloud workload security.\n**Note:** This endpoint has been deprecated. Hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) for the associated migration guide.",
     "summary": "Get hourly usage for cloud workload security"
   },
   "GetUsageDBM": {
-    "description": "Get hourly usage for database monitoring\n**Note:** hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) for the associated migration guide.",
+    "description": "Get hourly usage for database monitoring\n**Note:** This endpoint has been deprecated. Hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) for the associated migration guide.",
     "summary": "Get hourly usage for database monitoring"
   },
   "GetUsageFargate": {
-    "description": "Get hourly usage for [Fargate](https://docs.datadoghq.com/integrations/ecs_fargate/).\n**Note:** hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) for the associated migration guide.",
+    "description": "Get hourly usage for [Fargate](https://docs.datadoghq.com/integrations/ecs_fargate/).\n**Note:** This endpoint has been deprecated. Hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) for the associated migration guide.",
     "summary": "Get hourly usage for Fargate"
   },
   "GetUsageHosts": {
-    "description": "Get hourly usage for hosts and containers.\n**Note:** hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) for the associated migration guide.",
+    "description": "Get hourly usage for hosts and containers.\n**Note:** This endpoint has been deprecated. Hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) for the associated migration guide.",
     "summary": "Get hourly usage for hosts and containers"
   },
   "GetHourlyUsageAttribution": {
@@ -1031,27 +1050,27 @@
     "summary": "Get hourly usage attribution"
   },
   "GetIncidentManagement": {
-    "description": "Get hourly usage for incident management.\n**Note:** hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) for the associated migration guide.",
+    "description": "Get hourly usage for incident management.\n**Note:** This endpoint has been deprecated. Hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) for the associated migration guide.",
     "summary": "Get hourly usage for incident management"
   },
   "GetUsageIndexedSpans": {
-    "description": "Get hourly usage for indexed spans.\n**Note:** hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) for the associated migration guide.",
+    "description": "Get hourly usage for indexed spans.\n**Note:** This endpoint has been deprecated. Hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) for the associated migration guide.",
     "summary": "Get hourly usage for indexed spans"
   },
   "GetIngestedSpans": {
-    "description": "Get hourly usage for ingested spans.\n**Note:** hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) for the associated migration guide.",
+    "description": "Get hourly usage for ingested spans.\n**Note:** This endpoint has been deprecated. Hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) for the associated migration guide.",
     "summary": "Get hourly usage for ingested spans"
   },
   "GetUsageInternetOfThings": {
-    "description": "Get hourly usage for IoT.\n**Note:** hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) for the associated migration guide.",
+    "description": "Get hourly usage for IoT.\n**Note:** This endpoint has been deprecated. Hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) for the associated migration guide.",
     "summary": "Get hourly usage for IoT"
   },
   "GetUsageLogs": {
-    "description": "Get hourly usage for logs.\n**Note:** hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) for the associated migration guide.",
+    "description": "Get hourly usage for logs.\n**Note:** This endpoint has been deprecated. Hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) for the associated migration guide.",
     "summary": "Get hourly usage for logs"
   },
   "GetUsageLogsByRetention": {
-    "description": "Get hourly usage for indexed logs by retention period.\n**Note:** hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) for the associated migration guide.",
+    "description": "Get hourly usage for indexed logs by retention period.\n**Note:** This endpoint has been deprecated. Hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) for the associated migration guide.",
     "summary": "Get hourly logs usage by retention"
   },
   "GetUsageLogsByIndex": {
@@ -1063,55 +1082,55 @@
     "summary": "Get monthly usage attribution"
   },
   "GetUsageNetworkFlows": {
-    "description": "Get hourly usage for network flows.\n**Note:** hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) for the associated migration guide.",
+    "description": "Get hourly usage for network flows.\n**Note:** This endpoint has been deprecated. Hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) for the associated migration guide.",
     "summary": "get hourly usage for network flows"
   },
   "GetUsageNetworkHosts": {
-    "description": "Get hourly usage for network hosts.\n**Note:** hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) for the associated migration guide.",
+    "description": "Get hourly usage for network hosts.\n**Note:** This endpoint has been deprecated. Hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) for the associated migration guide.",
     "summary": "Get hourly usage for network hosts"
   },
   "GetUsageOnlineArchive": {
-    "description": "Get hourly usage for online archive.\n**Note:** hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) for the associated migration guide.",
+    "description": "Get hourly usage for online archive.\n**Note:** This endpoint has been deprecated. Hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) for the associated migration guide.",
     "summary": "Get hourly usage for online archive"
   },
   "GetUsageProfiling": {
-    "description": "Get hourly usage for profiled hosts.\n**Note:** hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) for the associated migration guide.",
+    "description": "Get hourly usage for profiled hosts.\n**Note:** This endpoint has been deprecated. Hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) for the associated migration guide.",
     "summary": "Get hourly usage for profiled hosts"
   },
   "GetUsageRumUnits": {
-    "description": "Get hourly usage for [RUM](https://docs.datadoghq.com/real_user_monitoring/) Units.\n**Note:** hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) for the associated migration guide.",
+    "description": "Get hourly usage for [RUM](https://docs.datadoghq.com/real_user_monitoring/) Units.\n**Note:** This endpoint has been deprecated. Hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) for the associated migration guide.",
     "summary": "Get hourly usage for RUM units"
   },
   "GetUsageRumSessions": {
-    "description": "Get hourly usage for [RUM](https://docs.datadoghq.com/real_user_monitoring/) Sessions.\n**Note:** hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) for the associated migration guide.",
+    "description": "Get hourly usage for [RUM](https://docs.datadoghq.com/real_user_monitoring/) Sessions.\n**Note:** This endpoint has been deprecated. Hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) for the associated migration guide.",
     "summary": "Get hourly usage for RUM sessions"
   },
   "GetUsageSDS": {
-    "description": "Get hourly usage for sensitive data scanner.\n**Note:** hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) for the associated migration guide.",
+    "description": "Get hourly usage for sensitive data scanner.\n**Note:** This endpoint has been deprecated. Hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) for the associated migration guide.",
     "summary": "Get hourly usage for sensitive data scanner"
   },
   "GetUsageSNMP": {
-    "description": "Get hourly usage for SNMP devices.\n**Note:** hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) for the associated migration guide.",
+    "description": "Get hourly usage for SNMP devices.\n**Note:** This endpoint has been deprecated. Hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) for the associated migration guide.",
     "summary": "Get hourly usage for SNMP devices"
   },
   "GetUsageSummary": {
-    "description": "Get all usage across your account.",
+    "description": "Get all usage across your account.\n\nThis endpoint is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/).",
     "summary": "Get usage across your account"
   },
   "GetUsageSynthetics": {
-    "description": "Get hourly usage for [synthetics checks](https://docs.datadoghq.com/synthetics/).\n**Note:** hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) for the associated migration guide.",
+    "description": "Get hourly usage for [synthetics checks](https://docs.datadoghq.com/synthetics/).\n**Note:** This endpoint has been deprecated. Hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) for the associated migration guide.",
     "summary": "Get hourly usage for synthetics checks"
   },
   "GetUsageSyntheticsAPI": {
-    "description": "Get hourly usage for [synthetics API checks](https://docs.datadoghq.com/synthetics/).\n**Note:** hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) for the associated migration guide.",
+    "description": "Get hourly usage for [synthetics API checks](https://docs.datadoghq.com/synthetics/).\n**Note:** This endpoint has been deprecated. Hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) for the associated migration guide.",
     "summary": "Get hourly usage for synthetics API checks"
   },
   "GetUsageSyntheticsBrowser": {
-    "description": "Get hourly usage for synthetics browser checks.\n**Note:** hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) for the associated migration guide.",
+    "description": "Get hourly usage for synthetics browser checks.\n**Note:** This endpoint has been deprecated. Hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) for the associated migration guide.",
     "summary": "Get hourly usage for synthetics browser checks"
   },
   "GetUsageTimeseries": {
-    "description": "Get hourly usage for [custom metrics](https://docs.datadoghq.com/developers/metrics/custom_metrics/).\n**Note:** hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) for the associated migration guide.",
+    "description": "Get hourly usage for [custom metrics](https://docs.datadoghq.com/developers/metrics/custom_metrics/).\n**Note:** This endpoint has been deprecated. Hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) for the associated migration guide.",
     "summary": "Get hourly usage for custom metrics"
   },
   "GetUsageTopAvgMetrics": {

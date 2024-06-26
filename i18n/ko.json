@@ -1,6 +1,6 @@
 {
   "integration_count": {
-    "other": "600"
+    "other": "750"
   },
 
   "beta_sentence": {
@@ -306,10 +306,10 @@
     "other": "소개"
   },
   "footer_blurb_heading": {
-    "other": "뭔가를 찾을 수 없습니까?"
+    "other": "찾으시는 정보가 없나요?"
   },
   "footer_blurb_desc": {
-    "other": "친절하고 지식이 풍부한 솔루션 엔지니어가 도와드리겠습니다!"
+    "other": "데이터독 서포트 엔지니어링팀이 도와드리겠습니다."
   },
   "integration_version": {
     "other": "Integration version"
@@ -319,5 +319,17 @@
   },
   "learn_more": {
     "other": "자세히 보기"
+  },
+  "configuration_management" : {
+    "other": "Configuration management"
+  },
+  "cloud_and_container" : {
+    "other": "Cloud and container"
+  },
+  "source" : {
+    "other": "Source"
+  },
+  "try_this_rule" : {
+    "other": "TRY THIS RULE"
   }
 }

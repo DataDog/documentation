@@ -1,6 +1,5 @@
 ---
 title: Agent Transport for Logs
-kind: documentation
 description: Use the Datadog Agent to collect your logs and send them to Datadog
 further_reading:
 - link: "agent/logs/advanced_log_collection/#filter-logs"
@@ -34,7 +33,7 @@ To check which transport is used by the Agent, run the [Agent status command][1]
 
 **Notes**:
 
-* For older Agent versions, TCP transport is used by default. Datadog strongly recommends you to enforce HTTPS transport if you are running v6.14+/v7.14+ and HTTPS compression if you are running v6.16+/v7.16+. 
+* For older Agent versions, TCP transport is used by default. Datadog strongly recommends you to enforce HTTPS transport if you are running v6.14+/v7.14+ and HTTPS compression if you are running v6.16+/v7.16+.
 * Always enforce a specific transport (either TCP or HTTPS) when using a proxy to forwards logs to Datadog
 
 ## Enforce a specific transport
@@ -69,7 +68,7 @@ Using HTTP, the Agent sends log batches with the following limits:
 
 * Maximum batch size: 1MB
 * Maximum size for a single log: 256kB
-* Maximum number of logs in a batch: 200
+* Maximum number of logs in a batch: 1,000
 
 ### Log compression
 
@@ -104,9 +103,9 @@ Or use the `DD_LOGS_CONFIG_BATCH_WAIT=2` environment variable. The unit is in se
 
 When logs are sent through HTTPS, use the same [set of proxy settings][3] as the other data types to send logs through a web proxy.
 
-[1]: /agent/guide/agent-configuration-files/
+[1]: /agent/configuration/agent-configuration-files/
 [2]: /agent/basic_agent_usage/#agent-overhead
-[3]: /agent/proxy/
+[3]: /agent/configuration/proxy/
 {{% /tab %}}
 {{% tab "TCP" %}}
 
@@ -115,21 +114,21 @@ To enforce TCP transport, update the Agent's [main configuration file][1] (`data
 ```yaml
 logs_enabled: true
 logs_config:
-  use_tcp: true
+  force_use_tcp: true
 ```
 To send logs with environment variables, configure the following:
 
 * `DD_LOGS_ENABLED=true`
-* `DD_LOGS_CONFIG_USE_TCP=true`
+* `DD_LOGS_CONFIG_FORCE_USE_TCP=true`
 
 By default, the Datadog Agent sends its logs to Datadog over TLS-encrypted TCP. This requires outbound communication (on port `10516` for Datadog US site and port `443`for Datadog EU site).
 
-[1]: /agent/guide/agent-configuration-files/
+[1]: /agent/configuration/agent-configuration-files/
 {{% /tab %}}
 {{< /tabs >}}
 
 **Note**: Setting up a [SOCKS5 proxy][2] server enforces TCP transport because socks5 proxies are not yet supported in HTTPS with compression.
 
 
-[1]: /agent/guide/agent-commands/?tab=agentv6v7#service-status
+[1]: /agent/configuration/agent-commands/?tab=agentv6v7#service-status
 [2]: /agent/logs/proxy/?tab=socks5

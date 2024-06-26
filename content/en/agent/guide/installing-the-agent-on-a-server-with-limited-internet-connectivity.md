@@ -1,13 +1,12 @@
 ---
 title: Installing the Agent on a server with limited internet connectivity
-kind: guide
 aliases:
   - /agent/faq/how-do-i-install-the-agent-on-a-server-with-limited-internet-connectivity/
 further_reading:
 - link: "/agent/"
   tag: "Documentation"
   text: "Learn more about the Datadog Agent"
-- link: "/agent/proxy/"
+- link: "/agent/configuration/proxy/"
   tag: "Documentation"
   text: "Learn more about Proxy"
 algolia:
@@ -56,9 +55,9 @@ Then, [start the Agent][7] using the appropriate command for your system.
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest
-[2]: /agent/proxy
+[2]: /agent/configuration/proxy
 [3]: https://yum.datadoghq.com/stable/6
 [4]: https://yum.datadoghq.com/stable/7
 [5]: https://apt.datadoghq.com/pool/d/da
 [6]: https://app.datadoghq.com/organization-settings/api-keys
-[7]: /agent/guide/agent-commands/#start-the-agent
+[7]: /agent/configuration/agent-commands/#start-the-agent

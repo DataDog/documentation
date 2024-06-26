@@ -5,6 +5,7 @@ assets:
   dashboards:
     cockroach_cloud_overview: assets/dashboards/cockroach_cloud_overview.json
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -14,6 +15,7 @@ assets:
       prefix: crdb_dedicated.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10274
     source_type_name: CockroachDB Dedicated
   logs:
     source: cockroach-cloud
@@ -23,7 +25,7 @@ author:
   sales_email: help@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- data store
+- data stores
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/cockroachdb_dedicated/README.md
 display_on_public_website: true
@@ -33,10 +35,9 @@ integration_id: cockroach-cloud
 integration_title: CockroachDB Dedicated
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: cockroachdb_dedicated
-oauth: {}
 public_title: CockroachDB Dedicated
 short_description: Cockroach Cloud のメトリクスを DataDog に送信します。
 supported_os:
@@ -46,7 +47,7 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Category::Data Store
+  - Category::Data Stores
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
@@ -58,15 +59,16 @@ tile:
   title: CockroachDB Dedicated
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
 
 Datadog の Cockroach Cloud インテグレーションは、Datadog プラットフォームを利用して、[Prometheus エンドポイント][1]で利用できる CockroachDB メトリックのサブセットに関するデータ収集とアラートを可能にします。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 Cockroach Cloud クラスターに対して Datadog のモニタリングを有効にするには
 
@@ -80,7 +82,7 @@ Cockroach Cloud クラスターに対して Datadog のモニタリングを有�
 
 4. Datadog に登録されると、Datadog の[インフラストラクチャーリスト][4]にクラスターが表示されます。これには最大で数分かかることがあります。
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 Datadog [Dashboard List][5] を開き、`CockroachDB Dedicated Overview` をクリックします。このダッシュボードには、CockroachDB Dedicated Overview のメトリクスが表示されます。
 
@@ -128,21 +130,21 @@ CockroachDB からのメトリクスエクスポートは、以下のような�
 
 インテグレーションを非アクティブにした後も、メトリクスデータは Datadog にデフォルトの[保持期間][11]の間残ります。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "cockroachdb_dedicated" >}}
 
 
-### サービスのチェック
+### ヘルプ
 
 CockroachDB Dedicated インテグレーションには、サービスのチェック機能は含まれません。
 
-### イベント
+### ヘルプ
 
 CockroachDB Dedicated インテグレーションには、イベントは含まれません。
 
-## サポート
+## Agent
 
 ご不明な点は、[Datadog のサポートチーム][13]までお問合せください。
 

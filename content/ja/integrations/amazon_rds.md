@@ -6,7 +6,7 @@ aliases:
 categories:
 - aws
 - cloud
-- data store
+- data stores
 - log collection
 - network
 dependencies: []
@@ -41,6 +41,7 @@ short_description: Amazon RDS に関連する大量のメトリクスを追跡�
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 {{< img src="integrations/awsrds/rdsdashboard.png" alt="RDS ダッシュボード" popup="true">}}
 
 ## 概要
@@ -174,7 +175,7 @@ Lambda 関数のテストボタンをクリックすると、次のエラーが�
     | `rds:ListTagsForResource` | RDS インスタンスにカスタムタグを追加します。|
     | `rds:DescribeEvents`      | RDS データベースに関連するイベントを追加します。|
 
-3. [Datadog - AWS RDS インテグレーション][4]をインストールします。
+3. [Datadog - Amazon RDS インテグレーション][4]をインストールします。
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/#installation
@@ -192,7 +193,7 @@ Lambda 関数のテストボタンをクリックすると、次のエラーが�
     | `rds:ListTagsForResource` | RDS インスタンスにカスタムタグを追加します。|
     | `rds:DescribeEvents`      | RDS データベースに関連するイベントを追加します。|
 
-3. [Datadog - AWS RDS インテグレーション][4]をインストールします。
+3. [Datadog - Amazon RDS インテグレーション][4]をインストールします。
 
 
 [1]: https://app.datadoghq.com/integrations/amazon-web-services
@@ -300,9 +301,9 @@ AWS から取得される各メトリクスには、ホスト名やセキュリ�
 
 ### イベント
 
-AWS RDS インテグレーションには、DB インスタンス、セキュリティグループ、スナップショット、およびパラメーターグループに関連するイベントが含まれます。以下はイベントの例です。
+Amazon RDS インテグレーションには、DB インスタンス、セキュリティグループ、スナップショット、およびパラメーターグループに関連するイベントが含まれます。以下はイベントの例です。
 
-{{< img src="integrations/amazon_rds/aws_rds_events.png" alt="AWS RDS イベント" >}}
+{{< img src="integrations/amazon_rds/aws_rds_events.png" alt="Amazon RDS イベント" >}}
 
 ### サービスのチェック
 
@@ -316,10 +317,10 @@ AWS RDS インテグレーションには、DB インスタンス、セキュリ
 
 ## すぐに使える監視
 
-AWS RDS インテグレーションは、パフォーマンスを監視し最適化するために、すぐに使える監視機能を提供します。
+Amazon RDS インテグレーションは、パフォーマンスを監視し最適化するために、すぐに使える監視機能を提供します。
 
-- AWS RDS ダッシュボード: すぐに使える [AWS RDS ダッシュボード][9]を使用して、RDS インスタンスの包括的な概要を得ることができます。
-- 推奨モニター: [AWS RDS の推奨モニター][10]を有効にすると、問題をプロアクティブに検出し、タイムリーなアラートを受信することができます。
+- Amazon RDS ダッシュボード: すぐに使える [Amazon RDS ダッシュボード][9]を使用して、RDS インスタンスの包括的な概要を得ることができます。
+- 推奨モニター: [Amazon RDS の推奨モニター][10]を有効にすると、問題をプロアクティブに検出し、タイムリーなアラートを受信することができます。
 
 ## トラブルシューティング
 

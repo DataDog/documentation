@@ -6,6 +6,7 @@ assets:
     metrics: assets/dashboards/metrics.json
     overview: assets/dashboards/overview.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -18,6 +19,7 @@ assets:
     - java weblogic.Server
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10245
     source_type_name: WebLogic
   logs:
     source: weblogic
@@ -39,12 +41,11 @@ draft: false
 git_integration_title: weblogic
 integration_id: weblogic
 integration_title: WebLogic
-integration_version: 1.1.1
+integration_version: 1.3.0
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: weblogic
-oauth: {}
 public_title: WebLogic
 short_description: WebLogic サーバーの健全性とパフォーマンスを監視します。
 supported_os:
@@ -67,6 +68,7 @@ tile:
   title: WebLogic
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
@@ -80,9 +82,9 @@ Datadog による Oracle WebLogic のモニタリングでは、以下のこと�
 - スレッドプールとメッセージングサービスを追跡する
 - データベース接続プールの使用量を追跡する
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 WebLogic チェックは [Datadog Agent][1] パッケージに含まれています。
 サーバーに追加でインストールする必要はありません。
@@ -133,7 +135,7 @@ WebLogic チェックは [Datadog Agent][1] パッケージに含まれていま
 
    変更をアクティブにして、WebLogic サーバーを再起動します。
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 1. Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `weblogic.d/conf.yaml` ファイルを編集して、
    WebLogic パフォーマンスデータの収集を開始します。 
@@ -151,13 +153,13 @@ WebLogic チェックは [Datadog Agent][1] パッケージに含まれていま
 
 [Agent の `status` サブコマンドを実行][6]し、Checks セクションで `weblogic` を探します。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "weblogic" >}}
 
 
-### ログの収集
+### 収集データ
 
 1. WebLogic ロギングサービスは、Java ロギング API に基づく実装をデフォルトで使用します。別のフォーマットを使用する場合は、[インテグレーションパイプライン][11]のクローンを作成し編集します。
 
@@ -206,20 +208,20 @@ WebLogic チェックは [Datadog Agent][1] パッケージに含まれていま
 ### コンテナ化
 コンテナ環境の場合は、[JMX を使用したオートディスカバリー][12]のガイドを参照してください。
 
-### イベント
+### ヘルプ
 
 WebLogic インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 {{< get-service-checks-from-git "weblogic" >}}
 
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://docs.oracle.com/javase/8/docs/technotes/guides/management/agent.html#gdenl
 [3]: https://support.oracle.com/cloud/faces/DocumentDisplay?_afrLoop=308314682308664&_afrWindowMode=0&id=1465052.1&_adf.ctrl-state=10ue97j4er_4
 [4]: https://docs.oracle.com/en/middleware/standalone/weblogic-server/14.1.1.0/jmxcu/understandwls.html#GUID-1D2E290E-F762-44A8-99C2-EB857EB12387

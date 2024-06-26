@@ -5,6 +5,7 @@ assets:
   dashboards:
     kyototycoon: assets/dashboards/kyototycoon_dashboard.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -17,6 +18,7 @@ assets:
     - ktserver
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 62
     source_type_name: Kyoto Tycoon
   logs:
     source: kyototycoon
@@ -28,7 +30,7 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- data store
+- data stores
 - log collection
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/kyototycoon/README.md
@@ -37,12 +39,11 @@ draft: false
 git_integration_title: kyototycoon
 integration_id: kyoto-tycoon
 integration_title: Kyoto Tycoon
-integration_version: 2.2.0
+integration_version: 2.5.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: kyototycoon
-oauth: {}
 public_title: Kyoto Tycoon
 short_description: 取得/設定/削除操作の追跡とレプリケーションラグの監視。
 supported_os:
@@ -55,7 +56,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::macOS
   - Supported OS::Windows
-  - Category::データストア
+  - Category::Data Stores
   - Category::ログの収集
   configuration: README.md#Setup
   description: 取得/設定/削除操作の追跡とレプリケーションラグの監視。
@@ -65,19 +66,20 @@ tile:
   title: Kyoto Tycoon
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
 
 Agent の KyotoTycoon チェックは、取得/設定/削除の操作を追跡し、レプリケーションラグを監視します。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 KyotoTycoon チェックは [Datadog Agent][1] パッケージに含まれています。KyotoTycoon サーバーに追加でインストールする必要はありません。
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 1. [Agent のコンフィギュレーションディレクトリ][2]のルートにある `conf.d/` フォルダーの `kyototycoon.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル kyototycoon.d/conf.yaml][3] を参照してください。
 
@@ -93,7 +95,7 @@ KyotoTycoon チェックは [Datadog Agent][1] パッケージに含まれてい
 
 2. [Agent を再起動します][4]。
 
-##### ログの収集
+##### 収集データ
 
 1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
 
@@ -118,26 +120,26 @@ KyotoTycoon チェックは [Datadog Agent][1] パッケージに含まれてい
 
 [Agent の `status` サブコマンドを実行][5]し、Checks セクションで `kyototycoon` を検索します。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "kyototycoon" >}}
 
 
-### イベント
+### ヘルプ
 
 KyotoTycoon チェックには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 {{< get-service-checks-from-git "kyototycoon" >}}
 
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [3]: https://github.com/DataDog/integrations-core/blob/master/kyototycoon/datadog_checks/kyototycoon/data/conf.yaml.example
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent

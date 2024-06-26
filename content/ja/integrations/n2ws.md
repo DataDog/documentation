@@ -9,6 +9,7 @@ assets:
     N2WSBackup&Recovery-GraphicalVersion-Areas: assets/dashboards/N2WSBackup&Recovery-BackupSuccessRates(AreasGraphs).json
     N2WSBackup&Recovery-GraphicalVersionV4.0: assets/dashboards/N2WSBackup&Recoveryv4.1-BackupSuccessRates(ColumnGraphs).json
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -18,6 +19,7 @@ assets:
       prefix: cpm_metric.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10129
     source_type_name: N2WS Backup & Recovery
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -38,7 +40,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: n2ws
-oauth: {}
 public_title: N2WS
 short_description: 接続されているすべての N2WS Backup & Recovery ホストからの要約データを表示する
 supported_os:
@@ -60,6 +61,7 @@ tile:
   title: N2WS
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -70,9 +72,9 @@ N2WS として知られる N2WS Backup & Recovery (CPM) は、Amazon Web Service
 N2WS Backup and Recovery インスタンスは、Datadog のモニタリングサービスを使用したバックアップのモニタリング、ディザスタリカバリ、S3 へのコピー、アラートなどをサポートします。
 このインテグレーションにより、ユーザーは N2WS Backup and Recovery ダッシュボードのメトリクスを監視、分析できます。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 1.  [Python インテグレーション][1]をインストールします。
 
@@ -108,7 +110,7 @@ N2WS Backup and Recovery インスタンスは、Datadog のモニタリング�
 
     また、[N2WS から JSON テンプレートをインポートする][4]ことでダッシュボードを作成することも可能です。
 
-## 収集データ
+## リアルユーザーモニタリング
 
 Datadog は、N2WS Backup & Recovery バックアップに関する以下のデータを収集します。
 
@@ -119,19 +121,19 @@ Datadog は、N2WS Backup & Recovery バックアップに関する以下のデ�
 - 任意のタイプの保護されたリソース
 - ボリューム容量に関するデータ（AWS のみ）、アラートなど
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "n2ws" >}}
 
 
-### イベント
+### ヘルプ
 
 Datadog では、すべての N2WS Backup & Recovery ホストからアラートメッセージを収集します。
 
-### サービスのチェック
+### ヘルプ
 
 N2WS Backup & Recovery インテグレーションには、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 - [N2WS ユーザーガイドとドキュメント][6]
 - [N2WS サポート][7]

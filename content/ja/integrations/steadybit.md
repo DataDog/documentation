@@ -5,6 +5,7 @@ assets:
   dashboards:
     Steadybit Chaos Engineering Activity: assets/dashboards/steadybit.json
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: true
@@ -14,6 +15,7 @@ assets:
       prefix: steadybit.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10321
     source_type_name: Steadybit
 author:
   homepage: https://steadybit.com/
@@ -32,10 +34,9 @@ integration_id: steadybit
 integration_title: Steadybit
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: steadybit
-oauth: {}
 public_title: Steadybit
 short_description: カオスエンジニアリングでシステムの信頼性を即座に向上させる
 supported_os:
@@ -72,6 +73,7 @@ tile:
   title: Steadybit
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -80,7 +82,7 @@ tile:
 
 Steadybit インテグレーションは、カオスエンジニアリングの実験内で Datadog モニターのステータスを使用します。このインテグレーションは、実験の環境、開始・終了時間、実験の結果など、カオスエンジニアリングのアクティビティを Datadog のイベントを通じてチームに洞察させるものです。
 
-## セットアップ
+## 計画と使用
 
 Datadog と Steadybit のインテグレーションは、[Steadybit Datadog 拡張機能][2]を介して行われます。この拡張機能は、Datadog の API と対話し、モニターに関する情報を収集し、Datadog にイベントを報告します。
 
@@ -88,7 +90,7 @@ Datadog と Steadybit のインテグレーションは、[Steadybit Datadog 拡
 
 Steadybit の[無償または有償ライセンス][3]が必要です。インテグレーションは、Steadybit の SAAS とオンプレミスの提供をサポートしています。
 
-### インストール
+### インフラストラクチャーリスト
 
 いくつかの[インストール方法がサポートされています][4]。最高の体験を得るためには、以下のように専用の Helm チャートを介して Steadybit Datadog 拡張機能をインストールしてください。`datadog.siteParameter` と `datadog.siteUrl` にサポートされている値については、[Datadog サイト][5]のページを参照してください。
 
@@ -113,27 +115,27 @@ helm upgrade steadybit-extension-datadog \
 
 Steadybit Datadog 拡張機能を実行すると、Steadybit の *Landscape* タブ内に Datadog モニターのリストが表示されます。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 
 Steadybit には、メトリクスは含まれません。
 
-### サービスのチェック
+### ヘルプ
 
 Steadybit には、サービスのチェック機能は含まれません。
 
-### イベント
+### ヘルプ
 
 Steadybit は、カオスエンジニアリングのアクティビティを示すイベントを Datadog に報告します。そのようなイベントにはすべて `source:steadybit` タグが付きます。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Steadybit のサポートチーム][6]までお問い合わせください。
 
 [1]: https://steadybit.com/?utm_campaign=datadogintegration&utm_source=datadog&utm_medium=integration-readme
-[2]: https://hub.steadybit.com/extension/com.github.steadybit.extension_datadog?utm_campaign=datadogintegration&utm_source=datadog&utm_medium=integration-readme
+[2]: https://hub.steadybit.com/extension/com.steadybit.extension_datadog?utm_campaign=datadogintegration&utm_source=datadog&utm_medium=integration-readme
 [3]: https://signup.steadybit.io/?utm_campaign=datadogintegration&utm_source=datadog&utm_medium=integration-readme
-[4]: https://hub.steadybit.com/extension/com.github.steadybit.extension_datadog?utm_campaign=datadogintegration&utm_source=datadog&utm_medium=integration-readme#content-installation
+[4]: https://hub.steadybit.com/extension/com.steadybit.extension_datadog?utm_campaign=datadogintegration&utm_source=datadog&utm_medium=integration-readme#content-installation
 [5]: https://docs.datadoghq.com/ja/getting_started/site/#access-the-datadog-site
 [6]: mailto:support@steadybit.com

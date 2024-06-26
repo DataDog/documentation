@@ -33,10 +33,9 @@ integration_id: oracle
 integration_title: Oracle
 integration_version: 4.0.1
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: oracle
-oauth: {}
 public_title: Oracle
 short_description: Système de base de données relationnelle Oracle conçu pour les
   architectures grid computing d'entreprise

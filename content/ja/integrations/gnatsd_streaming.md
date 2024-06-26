@@ -3,6 +3,7 @@ app_id: gnatsd-streaming
 app_uuid: 264e486e-d704-4851-987a-d33c11036521
 assets:
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -13,6 +14,7 @@ assets:
       prefix: gnatsd.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10235
     source_type_name: Gnatsd streaming
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -33,7 +35,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: gnatsd_streaming
-oauth: {}
 public_title: Gnatsd Streaming
 short_description: NATS サーバーストリーミング
 supported_os:
@@ -55,6 +56,7 @@ tile:
   title: Gnatsd Streaming
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -64,11 +66,11 @@ gnatsd_streaming サービスからメトリクスをリアルタイムに取得
 - gnatsd_streaming の状態を視覚化および監視できます。
 - gnatsd_streaming のフェイルオーバーとイベントの通知を受けることができます。
 
-## セットアップ
+## 計画と使用
 
 gnatsd_streaming チェックは [Datadog Agent][1] パッケージに含まれていないため、お客様自身でインストールする必要があります。
 
-### インストール
+### インフラストラクチャーリスト
 
 Agent v7.21 / v6.21 以降の場合は、下記の手順に従い gnatsd_streaming チェックをホストにインストールします。Docker Agent または 上記バージョン以前の Agent でインストールする場合は、[コミュニティインテグレーションの使用][2]をご参照ください。
 
@@ -80,7 +82,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い gnatsd_streami
 
 2. コアの[インテグレーション][3]と同様にインテグレーションを構成します。
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 1. GnatsD のストリーミング[メトリクス](#metric)の収集を開始するには、[Agent のコンフィギュレーションディレクトリ][4]のルートにある `conf.d/` フォルダーの `gnatsd_streaming.d/conf.yaml` ファイルを編集します。
    使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル gnatsd_streaming.d/conf.yaml][5] を参照してください。
@@ -95,28 +97,28 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い gnatsd_streami
 
 gnatsd_streaming チェックは、すべての主要プラットフォームと互換性があります。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "gnatsd_streaming" >}}
 
 
 Nats ストリーミングサーバーのメトリクスは、"nss-cluster_id" のような名前でタグ付けされます。
 
-### イベント
+### ヘルプ
 
 Nats ストリーミングサーバーをフォールトトレラントグループ内で実行している場合、サーバーのステータスが `FT_STANDBY` と `FT_ACTIVE` の間で切り替わると、Nats ストリーミングフェイルオーバーイベントが発行されます。
 
-### サービスのチェック
+### ヘルプ
 {{< get-service-checks-from-git "gnatsd_streaming" >}}
 
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
 
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/
 [3]: https://docs.datadoghq.com/ja/getting_started/integrations/
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory

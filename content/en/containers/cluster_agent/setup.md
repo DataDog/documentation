@@ -25,29 +25,7 @@ algolia:
 If you deploy the Datadog Agent using Helm chart v2.7.0+ or Datadog Operator v0.7.0+, the Cluster Agent is enabled by default.
 
 {{< tabs >}}
-{{% tab "Helm" %}}
-
-The Cluster Agent is enabled by default since Helm chart v2.7.0.
-
-To activate it on older versions, or if you use a custom [datadog-values.yaml][1] that overrides the `clusterAgent` key, update your [datadog-values.yaml][1] file with the following Cluster Agent configuration:
-
-  ```yaml
-  clusterAgent:
-    # clusterAgent.enabled -- Set this to false to disable Datadog Cluster Agent
-    enabled: true
-  ```
-
-Then, upgrade your Datadog Helm chart.
-
-This automatically updates the necessary RBAC files for the Cluster Agent and Datadog Agent. Both Agents use the same API key.
-
-This also automatically generates a random token in a `Secret` shared by both the Cluster Agent and the Datadog Agent to secure communication. You can manually specify this token using the `clusterAgent.token` configuration. You can alternatively set this by referencing the name of an existing `Secret` containing a `token` value through the `clusterAgent.tokenExistingSecret` configuration.
-
-When set manually, this token must be 32 alphanumeric characters.
-
-[1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
-{{% /tab %}}
-{{% tab "Operator" %}}
+{{% tab "Datadog Operator" %}}
 
 The Cluster Agent is enabled by default since Datadog Operator v1.0.0. The Operator creates the necessary RBACs, deploys the Cluster Agent, and modifies the Agent DaemonSet configuration.
 
@@ -70,6 +48,28 @@ This also automatically generates a random token in a `Secret` shared by both th
 When set manually, this token must be 32 alphanumeric characters.
 
 [1]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md#override
+{{% /tab %}}
+{{% tab "Helm" %}}
+
+The Cluster Agent is enabled by default since Helm chart v2.7.0.
+
+To activate it on older versions, or if you use a custom [datadog-values.yaml][1] that overrides the `clusterAgent` key, update your [datadog-values.yaml][1] file with the following Cluster Agent configuration:
+
+  ```yaml
+  clusterAgent:
+    # clusterAgent.enabled -- Set this to false to disable Datadog Cluster Agent
+    enabled: true
+  ```
+
+Then, upgrade your Datadog Helm chart.
+
+This automatically updates the necessary RBAC files for the Cluster Agent and Datadog Agent. Both Agents use the same API key.
+
+This also automatically generates a random token in a `Secret` shared by both the Cluster Agent and the Datadog Agent to secure communication. You can manually specify this token using the `clusterAgent.token` configuration. You can alternatively set this by referencing the name of an existing `Secret` containing a `token` value through the `clusterAgent.tokenExistingSecret` configuration.
+
+When set manually, this token must be 32 alphanumeric characters.
+
+[1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
 {{% /tab %}}
 {{% tab "Manual (DaemonSet)" %}}
 
@@ -254,7 +254,7 @@ The Datadog Cluster Agent can only be deployed on Linux nodes.
 
 To monitor Windows containers, use two installations of the Helm chart in a mixed cluster. The first Helm chart deploys the Datadog Cluster Agent and the Agent DaemonSet for Linux nodes (with `targetSystem: linux`). The second Helm chart (with `targetSystem: windows`) deploys the Agent only on Windows nodes and connects to the existing Cluster Agent deployed as part of the first Helm chart.
 
-Use the following `values.yaml` file to configure communication between Agents deployed on Windows nodes and the Cluster Agent.
+Use the following `datadog-values.yaml` file to configure communication between Agents deployed on Windows nodes and the Cluster Agent.
 
 ```yaml
 targetSystem: windows
@@ -276,9 +276,9 @@ For more information, see [Troubleshooting Windows Container Issues][2].
 
 ## Monitoring AWS managed services
 
-To monitor an AWS managed service like MSK, ElastiCache, or RDS, set `clusterChecksRunner` to create a Pod with an IAM role assigned through the serviceAccountAnnotation in the Helm chart. Then, set the integration configurations under `clusterAgent.confd`.
+To monitor an AWS managed service like Amazon Managed Streaming for Apache Kafka (MSK), ElastiCache, or Relational Database Service (RDS), set `clusterChecksRunner` in your Helm chart to create a Pod with an IAM role assigned through `serviceAccountAnnotation`. Then, set the integration configurations under `clusterAgent.confd`.
 
-{{< code-block lang="yaml" >}}
+{{< code-block lang="yaml" filename="datadog-values.yaml">}}
 clusterChecksRunner:
   enabled: true
   rbac:
@@ -300,5 +300,5 @@ clusterAgent:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/agent/guide/agent-commands/?tab=agentv6v7#agent-information
+[1]: https://docs.datadoghq.com/agent/configuration/agent-commands/?tab=agentv6v7#agent-information
 [2]: https://docs.datadoghq.com/agent/troubleshooting/windows_containers/#mixed-clusters-linux--windows

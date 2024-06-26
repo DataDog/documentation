@@ -16,7 +16,7 @@ integration_id: ''
 integration_title: Microsoft Azure Deployment Manager
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: azure_deployment_manager
 public_title: Datadog-Microsoft Azure Deployment Manager
@@ -24,19 +24,20 @@ short_description: Azure Deployment Manager でのカナリアデプロイを監
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Azure Deployment Manager (ADM) を使用すると、複雑なアプリケーションを安全にデプロイするための段階的ロールアウトを管理できます。
 
 Datadog の使用によって、Azure Deployment Manager 用の健全性チェックを作成し、問題が検出された場合にデプロイを中止することが可能になります。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 Datadog を ADM の健全性チェックとして使用するには、アクティブな Datadog アカウントと Azure Deployment Manager のアクティブなインスタンスが必要です。
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 1. 最初に、デプロイ用のモニターを Datadog でセットアップします。リージョンごとのモニターのセットアップから始めます。アプリケーションの複雑さによっては、各リージョンで、デプロイのさまざまな部分にそれぞれモニターが必要になる場合があります。[チュートリアル: Resource Manager テンプレートで Azure Deployment Manager を使用する][1]に従うと、何を監視するかを決定する際に役立ちます。モニターの考え方については、[こちらのブログ記事][2]を参照してください。
 2. リージョンごとに複数のモニターをセットアップすることにした場合は、ロールアウト手順ごと、またはリージョンごとに[複合条件モニター][3]を作成します。複合条件モニターは、複数のモニターを論理的に組み合わることで、1 つのデプロイ手順の全体的なステータスを示します。
@@ -186,21 +187,21 @@ Azure Deployment Manager は、テンプレートで指定されている正規�
 
 `overall_status: OK` が見つかった場合は、チェックは正常と見なされます。ステータスが `Warn`、`No Data`、または `Alert` の場合、チェックは異常と見なされ、Azure Deployment Manager はデプロイを中止します。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 
 Azure Deployment Manager は、メトリクスを報告しません。
 
-### イベント
+### ヘルプ
 
 Azure Deployment Manager には、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 
 Azure Deployment Manager には、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
 

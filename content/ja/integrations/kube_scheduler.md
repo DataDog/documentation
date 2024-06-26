@@ -5,6 +5,7 @@ assets:
   dashboards:
     kube_scheduler: assets/dashboards/overview.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -15,6 +16,7 @@ assets:
       prefix: kube_scheduler.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10056
     source_type_name: Kube_scheduler
   logs:
     source: kube_scheduler
@@ -35,12 +37,11 @@ draft: false
 git_integration_title: kube_scheduler
 integration_id: kube-scheduler
 integration_title: Kubernetes Scheduler
-integration_version: 4.6.0
+integration_version: 4.10.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: kube_scheduler
-oauth: {}
 public_title: Kubernetes Scheduler
 short_description: Kubernetes Scheduler の監視
 supported_os:
@@ -65,6 +66,7 @@ tile:
   title: Kubernetes Scheduler
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ![Kube Scheduler ダッシュボード][1]
@@ -75,14 +77,14 @@ tile:
 
 **注**: サービスが公開されていないため、このチェックは Amazon EKS クラスターのデータを収集しません。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 Kubernetes Scheduler チェックは [Datadog Agent][3] パッケージに含まれています。
 サーバーに追加でインストールする必要はありません。
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 [オートディスカバリーのインテグレーションテンプレート][4]のガイドを参照して、次のパラメーターを適用してください。
 
@@ -92,7 +94,7 @@ Kubernetes Scheduler チェックは [Datadog Agent][3] パッケージに含ま
 
 2. [Agent を再起動します][6]。
 
-#### ログの収集
+#### 収集データ
 
 Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][7]を参照してください。
 
@@ -104,21 +106,21 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 [Agent の status サブコマンドを実行][8]し、Checks セクションで `kube_scheduler` を探します。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "kube_scheduler" >}}
 
 
-### イベント
+### ヘルプ
 
 Kube Scheduler には、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 {{< get-service-checks-from-git "kube_scheduler" >}}
 
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][11]までお問合せください。
 

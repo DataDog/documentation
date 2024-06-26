@@ -9,7 +9,7 @@ doc_link: https://docs.datadoghq.com/integrations/amazon_elastic_transcoder/
 draft: false
 git_integration_title: amazon_elastic_transcoder
 has_logo: true
-integration_id: amazon-elastic-transcoder
+integration_id: ''
 integration_title: Amazon Elastic Transcoder
 integration_version: ''
 is_public: true
@@ -21,15 +21,16 @@ short_description: Amazon Elastic Transcoder のキーメトリクスを追跡
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Amazon Elastic Transcoder を使用すると、Amazon S3 に保存したメディアファイルを、市販再生デバイスに対応した形式のメディアファイルに変換できます。
 
 このインテグレーションを有効にすると、Datadog にすべての Elastic Transcoder メトリクスを表示できます。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 
@@ -38,7 +39,7 @@ Amazon Elastic Transcoder を使用すると、Amazon S3 に保存したメデ�
 1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `Elastic Transcoder` が有効になっていることを確認します。
 2. [Datadog - Amazon Elastic Transcoder インテグレーション][3]をインストールします。
 
-### ログの収集
+### 収集データ
 
 #### ログの有効化
 
@@ -54,21 +55,21 @@ Amazon Elastic Transcoder から S3 バケットまたは CloudWatch のいず�
     - [S3 バケットに手動トリガーを追加][5]
     - [CloudWatch ロググループに手動トリガーを追加][6]
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "amazon_elastic_transcoder" >}}
 
 
-### イベント
+### ヘルプ
 
 Amazon Elastic Transcoder インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 
 Amazon Elastic Transcoder インテグレーションには、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 

@@ -8,6 +8,9 @@ further_reading:
 - link: "/monitors/notify/"
   tag: "Documentation"
   text: "Monitor Notifications"
+- link: "https://www.datadoghq.com/blog/tagging-best-practices-monitors/"
+  tag: "Blog"
+  text: "Best practices for tagging your monitors"
 ---
 
 ## Overview
@@ -29,7 +32,7 @@ Monitor tag policies allow you to enforce data validation on tags and tag values
 
 ### Configure monitor tag policies
 
-1. Navigate to the [**Monitors** > **Settings**][1] page.
+1. Navigate to the [**Monitors Settings**][1] page.
 2. Open the "Tag policies" tab. There are three data validation rules that are enforced through tag policies:
     - Require tags with mandatory values
     - Require tags only
@@ -66,8 +69,9 @@ For more information, see [Role Based Access Control][2] and [Role Permissions][
 ## Deleted monitors
 Monitors are retained for 7 days before being permanently deleted. To restore recently deleted Datadog monitors:
 1. Navigate to the [**Monitors** > **Settings**][1] page.
-2. Open "Deleted Monitors" tab.
-3. Click the **Restore** button to restore all the selected monitors or restore them individually.
+1. Open the **Deleted Monitors** tab.
+1. Select the monitor(s) you want to restore.
+1. Click the **Restore** button at the top of the table.
 
 {{< img src="monitors/settings/recently_deleted.png" alt="Restore deleted monitor" style="width:100%;">}}
 

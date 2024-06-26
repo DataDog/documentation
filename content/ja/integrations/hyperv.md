@@ -5,6 +5,7 @@ assets:
   dashboards:
     hyper-v: assets/dashboards/overview.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -15,6 +16,7 @@ assets:
       prefix: hyperv.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10046
     source_type_name: HyperV
 author:
   homepage: https://www.datadoghq.com
@@ -31,12 +33,11 @@ draft: false
 git_integration_title: hyperv
 integration_id: hyper-v
 integration_title: HyperV
-integration_version: 1.8.0
+integration_version: 1.11.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: hyperv
-oauth: {}
 public_title: HyperV
 short_description: Microsoft の Hyper-V 仮想化テクノロジーを監視
 supported_os:
@@ -55,19 +56,20 @@ tile:
   title: HyperV
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
 
 このチェックは、Datadog Agent を通じて [Hyper-V][1] を監視します。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 Hyper-V チェックは [Datadog Agent][2] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 1. Hyper-V のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `hyperv.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル hyperv.d/conf.yaml][3] を参照してください。
 
@@ -79,21 +81,21 @@ Hyper-V チェックは [Datadog Agent][2] パッケージに含まれていま�
 
 [Agent の status サブコマンドを実行][6]し、Checks セクションで `hyperv` を探します。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "hyperv" >}}
 
 
-### サービスのチェック
+### ヘルプ
 
 Hyper-V には、サービスのチェック機能は含まれません。
 
-### イベント
+### ヘルプ
 
 Hyper-V には、イベントは含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 
@@ -104,7 +106,7 @@ Hyper-V には、イベントは含まれません。
 - [Datadog を使用した Microsoft Hyper-V の監視][9]
 
 [1]: https://docs.microsoft.com/en-us/windows-server/virtualization/hyper-v/hyper-v-on-windows-server
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://github.com/DataDog/integrations-core/blob/master/hyperv/datadog_checks/hyperv/data/conf.yaml.example
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [5]: https://github.com/DataDog/integrations-core/blob/7.33.x/hyperv/datadog_checks/hyperv/data/conf.yaml.example

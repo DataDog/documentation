@@ -238,7 +238,12 @@ function loadInstantSearch(currentPageWasAsyncLoaded) {
                         const clickPosition = getSearchResultClickPosition(target.href, hitsArray, numHits, page)
                         sendSearchRumAction(search.helper.state.query, target.href, clickPosition);
                         window.history.pushState({}, '', target.href);
-                        window.location.reload();
+
+                        if (e.metaKey || e.ctrlKey) {
+                            window.open(target.href, "_blank")
+                        } else {
+                            window.location.reload()
+                        }
                     }
 
                     target = target.parentNode;
@@ -261,9 +266,12 @@ function loadInstantSearch(currentPageWasAsyncLoaded) {
 
             const handleResizeDebounced = debounce(handleResize, 500, false);
 
-            window.addEventListener('resize', handleResizeDebounced);
-
             handleResizeDebounced();
+            
+            // Bugfix for disappearing android keyboard on search input focus/autoresizing
+            if (!navigator.userAgent.toLowerCase().match(/android/i)) {
+                window.addEventListener('resize', handleResizeDebounced);
+            } 
         }
     }
 }

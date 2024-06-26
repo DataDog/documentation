@@ -14,11 +14,18 @@ const { gaTag } = configDocs[env];
 
 function loadPage(newUrl) {
     // scroll to top of page on new page load
-    window.scroll(0, 0);
+    window.scroll({
+        top: 0,
+        left: 0,
+        behavior: "instant"
+    });
 
     let mainContent = document.getElementById('mainContent');
 
-    if (mainContent) {
+    // temp workaround for integrations page https://datadoghq.atlassian.net/browse/WEB-5018
+    let isIntegrations = document.querySelector('.integrations')
+
+    if (mainContent && !isIntegrations) {
         const currentTOC = document.querySelector('.js-toc-container');
 
         const httpRequest = new XMLHttpRequest();

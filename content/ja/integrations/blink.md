@@ -29,10 +29,9 @@ integration_id: blink
 integration_title: Blink
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: blink
-oauth: {}
 public_title: Blink
 short_description: Blink は、セキュリティとインフラストラクチャーのためのノーコード自動化プラットフォームです。
 supported_os:

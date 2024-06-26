@@ -48,7 +48,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: varnish
-oauth: {}
 public_title: Varnish
 short_description: クライアントとバックエンドの接続数、キャッシュミス数、エビクション数などを追跡。
 supported_os:

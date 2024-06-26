@@ -119,9 +119,9 @@ For detailed instructions on the advanced alert options (evaluation delay, etc.)
 
 ### Notifications
 
-For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][3] page.
+For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][3] page.
 
-**Note**: Find service level monitors on the [Services page][4] and on the [Service Map][5], and find resource level monitors on the individual resource pages (you can get there by clicking on the specific resource listed on the [Services page][4]).
+**Note**: Find service level monitors on the [Service Catalog][4] and on the [Service Map][5], and find resource level monitors on the individual resource pages (you can get there by clicking on the specific resource listed on the a service details page).
 
 ## Further Reading
 
@@ -130,5 +130,5 @@ For detailed instructions on the **Say what's happening** and **Notify your team
 [1]: /monitors/types/metric/
 [2]: https://app.datadoghq.com/monitors#create/apm
 [3]: /monitors/notify/
-[4]: https://app.datadoghq.com/apm/services
+[4]: https://app.datadoghq.com/services
 [5]: https://app.datadoghq.com/apm/map

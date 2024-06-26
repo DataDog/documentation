@@ -2,7 +2,7 @@
 title: Getting Started with Session Replay
 kind: documentation
 further_reading:
-    - link: '/real_user_monitoring/session_replay/'
+    - link: '/real_user_monitoring/session_replay/browser'
       tag: 'Documentation'
       text: 'Session Replay'
     - link: '/real_user_monitoring/session_replay/mobile/'
@@ -136,8 +136,8 @@ You can share the replay with your team by selecting the **Share** dropdown at t
 [4]: https://app.datadoghq.com/rum/sessions
 [5]: /real_user_monitoring/explorer/search/#facets
 [6]: /real_user_monitoring/explorer/saved_views/
-[7]: /real_user_monitoring/browser/#setup
-[8]: /real_user_monitoring/session_replay/developer_tools
+[7]: /real_user_monitoring/browser/setup
+[8]: /real_user_monitoring/session_replay/browser/developer_tools
 [9]: /real_user_monitoring/connect_rum_and_traces
 [10]: /real_user_monitoring/error_tracking/
 [11]: /synthetics/guide/rum-to-synthetics/

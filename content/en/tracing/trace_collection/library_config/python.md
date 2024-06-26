@@ -6,10 +6,10 @@ type: multi-code-lang
 code_lang_weight: 20
 further_reading:
     - link: 'https://github.com/DataDog/dd-trace-py'
-      tag: 'GitHub'
+      tag: "Source Code"
       text: 'Source code'
     - link: 'https://ddtrace.readthedocs.io/en/stable/'
-      tag: 'Pypi'
+      tag: 'External Site'
       text: 'API Docs'
     - link: "/tracing/trace_collection/trace_context_propagation/python/"
       tag: "Documentation"
@@ -18,7 +18,7 @@ further_reading:
       tag: 'Documentation'
       text: 'Explore your services, resources and traces'
     - link: 'tracing/'
-      tag: 'Advanced Usage'
+      tag: 'Documentation'
       text: 'Advanced Usage'
 ---
 
@@ -122,4 +122,4 @@ Enable [connecting logs and trace injection][6].
 [4]: https://ddtrace.readthedocs.io/en/stable/integrations.html#django
 [5]: /tracing/trace_pipeline/ingestion_mechanisms/
 [6]: /tracing/other_telemetry/connect_logs_and_traces/python/
-[13]: /agent/guide/network/#configure-ports
+[13]: /agent/configuration/network/#configure-ports

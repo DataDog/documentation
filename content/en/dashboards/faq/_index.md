@@ -1,6 +1,5 @@
 ---
 title: Graphing FAQ
-kind: faq
 cascade: 
   - private: true
 aliases:
@@ -11,7 +10,6 @@ aliases:
 ---
 
 {{< whatsnext desc="List of Frequently Asked Questions:" >}}
-    {{< nextlink href="dashboards/faq/why-isn-t-my-aws-trusted-advisor-dashboard-showing-any-data" >}}Why isn't my AWS Trusted Advisor Dashboard showing any data?{{< /nextlink >}}
     {{< nextlink href="https://github.com/DataDog/Miscellany/tree/master/merge_screenboards" >}}How to Merge Screenboards ?{{< /nextlink >}}
     {{< nextlink href="dashboards/faq/how-can-i-graph-the-percentage-change-between-an-earlier-value-and-a-current-value" >}}How can I graph the percentage change between an earlier value and a current value?{{< /nextlink >}}
     {{< nextlink href="dashboards/faq/there-are-too-many-lines-on-my-graph-can-i-only-display-the-most-important-ones" >}}There are too many lines on my graph, can I only display the most important ones?{{< /nextlink >}}

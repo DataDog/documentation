@@ -3,6 +3,7 @@ title: Correlated Logs Are Not Showing Up In The Trace ID Panel
 kind: documentation
 aliases:
   - /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/
+  - /tracing/troubleshooting/correlating-logs-not-showing-up-in-the-trace-id-panel/
 further_reading:
 - link: '/tracing/other_telemetry/connect_logs_and_traces/'
   tag: 'Documentation'
@@ -89,7 +90,9 @@ If the **Log** section is empty for the `trace_id` option, ensure you have a sta
 
 Once the IDs are properly injected and remapped to your logs, you can see the logs correlated to the trace in the trace panel.
 
-{{< img src="tracing/troubleshooting/trace_id_injection.png" alt="A trace page showing the the logs section with correlated logs" style="width:90%;">}}
+{{< img src="tracing/troubleshooting/trace_id_injection.png" alt="A trace page showing the logs section with correlated logs" style="width:90%;">}}
+
+**Note**: Trace IDs and span IDs are not displayed in your logs or log attributes in the UI.
 
 ## Further Reading
 

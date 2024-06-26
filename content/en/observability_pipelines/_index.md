@@ -1,84 +1,81 @@
 ---
 title: Observability Pipelines
-kind: Documentation
-aliases:
-  - /integrations/observability_pipelines/
+kind: documentation
+disable_toc: false
 further_reading:
-  - link: /observability_pipelines/setup/
-    tag: Documentation
-    text: Set up Observability Pipelines
-  - link: https://www.datadoghq.com/blog/datadog-observability-pipelines/
-    tag: Blog
-    text: Take control of your telemetry data with Observability Pipelines
-  - link: /observability_pipelines/configurations/
-    tag: Documentation
-    text: Learn more about Observability Pipelines configurations
-cascade:
-    algolia:
-        rank: 70
+- link: "/logs/log_collection/"
+  tag: "documentation"
+  text: "Log collection and integrations"
+- link: "data_security/logs/"
+  tag: "documentation"
+  text: "Log Management data security"
+- link: "/sensitive_data_scanner/"
+  tag: "documentation"
+  text: "Sensitive Data Scanner"
+- link: "/agent/configuration/dual-shipping/#yaml-configuration"
+  tag: "documentation"
+  text: "Dual shipping with Observability Pipelines"
+- link: "https://www.datadoghq.com/blog/observability-pipelines-sensitive-data-redaction/"
+  tag: "blog"
+  text: "Redact sensitive data from your logs on-prem by using Observability Pipelines"
+- link: "https://www.datadoghq.com/blog/observability-pipelines-dual-ship-logs/"
+  tag: "blog"
+  text: "Dual ship logs with Datadog Observability Pipelines"
+- link: "https://www.datadoghq.com/blog/observability-pipelines-log-volume-control/"
+  tag: "blog"
+  text: "Control your log volumes with Datadog Observability Pipelines"
+- link: "https://www.datadoghq.com/blog/observability-pipelines-archiving/"
+  tag: "blog"
+  text: "Archive your logs with Observability Pipelines for a simple and affordable migration to Datadog"
+- link: "https://www.datadoghq.com/blog/observability-pipelines/"
+  tag: "blog"
+  text: "Aggregate, process, and route logs easily with Datadog Observability Pipelines"
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Observability Pipelines are not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-danger">Observability Pipelines is not available on the US1-FED Datadog site.</div>
 {{< /site-region >}}
 
-
-{{< img src="observability_pipelines/obs_pipelines.png" alt="A graphic showing different data sources on the left that flows into three hexagons named transform, reduce, and route, with arrows pointing to different destinations for the modified data" style="width:100%;" >}}
+<div class="alert alert-info">
+Datadog recommends you update Observability Pipelines Worker (OPW) with every minor and patch release, or, at a minimum, monthly. <br><br> Upgrading to a major OPW version and keeping it updated is the only supported way to get the latest OPW functionality, fixes, and security updates.
+</div>
 
 ## Overview
 
-Observability Pipelines allow you to collect, process, and route observability data (logs, metrics, and traces) from any source to any destination in infrastructure that you own or manage. With Observability Pipelines, you can:
+{{< img src="observability_pipelines/op_marketecture_04182024.png" alt="A graphic showing different data sources on the left that flows into three hexagons named transform, reduce, and route, with arrows pointing to different destinations for the modified data" style="width:100%;" >}}
 
-- Control your data volume before routing to manage costs.
-- Route data anywhere to reduce vendor lock-in and simplify migrations.
-- Transform logs and metrics by adding, parsing, enriching, and removing fields and tags.
-- Redact sensitive data from your telemetry data.
+Observability Pipelines allows you to collect, process, and route logs in your own infrastructure. It comes with out-of-the-box templates so that you can easily build and deploy pipelines. The templates are purpose-built for the following use cases:
 
-The Observability Pipelines Worker is the software that runs in your infrastructure. It aggregates and centrally processes and routes your data. More specifically, the Worker can:
+- Log volume control: Cut down on your log volume before it leaves your infrastructure or network.
+- Dual ship logs: Send copies of your logs to multiple destinations.
+- Split logs: Send your logs to different destinations based on your use case. For example, you can send DevOps logs to Datadog and security logs to a security vendor.
+- Archive logs: Send logs to a log vendor and to an archive in Datadog rehydratable format.
+- Sensitive data redaction: Remove sensitive data from your logs before they are routed outside of your infrastructure.
 
-- Receive or pull all your observability data collected by your agents, collectors, or forwarders.
-- Transform ingested data (for example: parse, filter, sample, enrich, and more).
-- Route the processed data to any destination.
+The Observability Pipelines Worker is the software that runs in your infrastructure. It aggregates and centrally processes and routes your logs based on the selected use case.
 
-The Datadog UI provides a control plane to manage your Observability Pipelines Workers. You can monitor your pipelines to understand the health of your pipelines, identify bottlenecks and latencies, fine-tune performance, validate data delivery, and investigate your largest volume contributors. You can build or edit pipelines, whether it be routing a subset of data to a new destination or introducing a new sensitive data redaction rule, and roll out these changes to your active pipelines from the Datadog UI.
+The Datadog UI provides a control plane to manage your Observability Pipelines Workers. You can build and edit pipelines, deploy pipeline changes to your Workers, and monitor your pipelines to evaluate the health of your pipelines.
 
 ## Get started
 
-1. [Set up the Observability Pipelines Worker][1].
-2. [Create pipelines to collect, transform and route your data][2].
-
-## Explore Observability Pipelines
-
-Start getting insights into your Observability Pipelines:
-
-###  Collect data from any source and route data to any destination
-
-Collect logs, metrics, and traces from any source and route them to any destination to reduce vendor lock-in and simplify migrations.
-
-
-{{< img src="observability_pipelines/component_panel.png" alt="The Datadog Logs component side panel showing a line graph of events in/out per second and a link graph of bytes in/out per second" style="width:100%;" >}}
-
-### Control your data volume before it gets routed
-
-Optimize volume and reduce the size of your observability data by sampling, filtering, deduplicating, and aggregating your logs and metrics. Govern your telemetry by enforcing data standards and controlling tags for metrics.
-
-{{< img src="observability_pipelines/transforms.png" alt="The list of transforms side panel showing the transforms available such as aggregate, AWS EC2 Metadata, dedupe and more." style="width:100%;" >}}
-
-### Redact sensitive data from your telemetry data
-
-Redact sensitive data before they are routed outside of your infrastructure, using out-of-the-box patterns to scan for PII, PCI, private keys, and more.
-
-{{< img src="observability_pipelines/scanning_rules.png" alt="The sensitive data scanner rules library panel showing the available rules for personal identifiable information and network and device information" style="width:85%;" >}}
-
-### Monitor the health of your pipelines
-
-Get a holistic view of all of your pipelines' topologies and monitor key performance indicators, such as average load, error rate, and throughput for each of your flows.
-
-{{< img src="observability_pipelines/pipeline_health.png" alt="The pipeline configuration page showing a warning because components are experiencing errors and an event ingestion delay was detected" style="width:90%;" >}}
+1. [Set up bootstrap options for the Observability Pipelines Worker][1].
+1. Navigate to [Observability Pipelines][2].
+1. Select a use case:
+    - [Log volume control][3]
+    - [Dual ship logs][4]
+    - [Split logs][5]
+    - [Archive logs to Datadog Archives][6]
+    - [Sensitive data redaction][7]
+1. Enable monitors.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /observability_pipelines/setup/
-[2]: /observability_pipelines/configurations/
+[1]: /observability_pipelines/setup_opw/
+[2]: https://app.datadoghq.com/observability-pipelines
+[3]: /observability_pipelines/log_volume_control/
+[4]: /observability_pipelines/dual_ship_logs/
+[5]: /observability_pipelines/split_logs/
+[6]: /observability_pipelines/archive_logs/
+[7]: /observability_pipelines/sensitive_data_redaction/

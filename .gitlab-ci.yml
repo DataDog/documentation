@@ -13,14 +13,18 @@ variables:
   PREVIEW_DOMAIN: "https://docs-staging.datadoghq.com/"
   KUBERNETES_SERVICE_ACCOUNT_OVERWRITE: documentation
   KUBERNETES_CPU_REQUEST: 8
-  KUBERNETES_MEMORY_REQUEST: 24Gi
-  KUBERNETES_MEMORY_LIMIT: 24Gi
+  KUBERNETES_MEMORY_REQUEST: 32Gi
+  KUBERNETES_MEMORY_LIMIT: 32Gi
   # datadog-ci
   DATADOG_SITE: 'datadoghq.com'
   DATADOG_SUBDOMAIN: 'dd-corpsite'
   FORCE_COLOR: '1'
   GIT_DEPTH: 50
-  DEFAULT_TAGS: "environment:${CI_ENVIRONMENT_NAME},job_name:${CI_JOB_NAME},job_stage:${CI_JOB_STAGE},project_name:${CI_PROJECT_NAME},docker_image:${CI_REGISTRY_IMAGE},pipeline_id:${CI_PIPELINE_ID},service:gitlab"
+  DEFAULT_TAGS: "environment:${CI_ENVIRONMENT_NAME},job_name:${CI_JOB_NAME},job_stage:${CI_JOB_STAGE},project_name:${CI_PROJECT_NAME},docker_image:${CI_REGISTRY_IMAGE},pipeline_id:${CI_PIPELINE_ID},service:gitlab,pipeline_source:${CI_PIPELINE_SOURCE}"
+  FF_USE_FASTZIP: "true"
+  # These can be specified per job or per pipeline
+  ARTIFACT_COMPRESSION_LEVEL: "fast"
+  CACHE_COMPRESSION_LEVEL: "fast"
 
   # gitlab checkout
   DOCS_REPO_NAME: documentation
@@ -29,6 +33,7 @@ variables:
   YARN_CACHE_FOLDER: "${CI_PROJECT_DIR}/.yarn/cache/"
   PREVIEW_PATTERN: '/.+?\/[a-zA-Z0-9_-]+/'
   PREVIEW_ERROR_LOG: "/go/src/github.com/DataDog/documentation/preview_error.log"
+  PIP_CACHE_DIR: "${CI_PROJECT_DIR}/.pipcache/"
 
 
 # ================== copy scripts =============== #
@@ -46,6 +51,7 @@ before_script:
   - export BRANCH=${CI_COMMIT_REF_NAME}
   - export SLACK_URL=$(get_secret 'slack_url')
   - export WEBOPS_SLACK_URL=$(get_secret 'webops_slack_url')
+  - export IA_SUBDOMAIN=$(in-isolation get_ia_subdomain)
   - git config --global url."https://${GITHUB_TOKEN}@github.com/DataDog".insteadOf https://github.com/DataDog
   - type build_dogrc &>/dev/null && build_dogrc || echo "build_dogrc not found." # create .dogrc for metrics, events submission
   - export job_start=$(date +%s) # we need the start of each job recorded for the ci reporting
@@ -83,6 +89,14 @@ before_script:
       - ${YARN_CACHE_FOLDER}
     policy: pull-push
 
+.pip_cache: &pip_cache
+  - key:
+      files:
+        - local/etc/requirements3.txt
+    paths:
+      - ${PIP_CACHE_DIR}
+    policy: pull-push
+
 # ==================== rules ==================== #
 .preview_rules: &preview_rules
   rules:
@@ -105,7 +119,7 @@ before_script:
       when: on_success
 # ================== templates ================== #
 .base_template: &base_template
-  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/websites-images:webops-site-build-20222111
+  image: registry.ddbuild.io/ci/websites/webops-site-build:v33259941-f0dfbc91
   tags:
     - "arch:amd64"
   rules:
@@ -124,6 +138,7 @@ build_preview:
   cache:
     - *hugo_cache
     - *yarn_cache_pull_push
+    - *pip_cache
   environment: "preview"
   variables:
     URL: ${PREVIEW_DOMAIN}
@@ -137,6 +152,7 @@ build_preview:
     - touch preview_error.log # Create log file for errors
     - exec 2> $PREVIEW_ERROR_LOG # We want to output any detected error to a log for use in notifications
     - make dependencies
+    - make vector_data
     - make config
     - ./node_modules/.bin/jest --testPathPattern=assets/scripts/tests/
     - yarn run prebuild
@@ -159,6 +175,7 @@ build_preview:
       - ./logs
       - ./public/redirects.txt
       - $PREVIEW_ERROR_LOG
+      - ./latest-cached.tar.gz
   after_script:
     - |
       if [ -s $PREVIEW_ERROR_LOG && $CI_JOB_STATUS != 'success' ]; then
@@ -209,9 +226,27 @@ algolia_sync_preview:manual:
   environment: "preview"
   allow_failure: true
   interruptible: true
+  timeout: 2h
+  cache:
+    - *hugo_cache
+    - *yarn_cache
+    - *pip_cache
+  dependencies:
+    - build_preview
   script:
-    - yarn add atomic-algolia@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/atomic-algolia-v0.3.29.tgz
-    - ALGOLIA_APP_ID=$(get_secret 'algolia_preview_application_id') ALGOLIA_ADMIN_KEY=$(get_secret 'algolia_preview_api_key') yarn run algolia:sync
+    # build the site to get algolia.json ondemand
+    - touch Makefile.config preview_error.log
+    - make dependencies
+    - make config
+    - yarn run prebuild
+    - build_site
+    # end build
+    - yarn add atomic-algolia@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/atomic-algolia-v1.0.2.tgz
+    - >
+      ALGOLIA_APP_ID=$(get_secret 'algolia_preview_application_id')
+      ALGOLIA_ADMIN_KEY=$(get_secret 'algolia_preview_api_key')
+      CI_PIPELINE_SOURCE=$CI_PIPELINE_SOURCE
+      yarn run algolia:sync
   rules:
     - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
       when: never
@@ -225,9 +260,16 @@ algolia_sync_live:
   environment: "live"
   allow_failure: true
   interruptible: true
+  timeout: 2h
+  dependencies:
+    - build_live
   script:
-    - yarn add atomic-algolia@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/atomic-algolia-v0.3.29.tgz
-    - ALGOLIA_APP_ID=$(get_secret 'algolia_docsearch_application_id') ALGOLIA_ADMIN_KEY=$(get_secret 'algolia_docsearch_api_key') yarn run algolia:sync
+    - yarn add atomic-algolia@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/atomic-algolia-v1.0.2.tgz
+    - >
+      ALGOLIA_APP_ID=$(get_secret 'algolia_docsearch_application_id')
+      ALGOLIA_ADMIN_KEY=$(get_secret 'algolia_docsearch_api_key')
+      CI_PIPELINE_SOURCE=$CI_PIPELINE_SOURCE
+      yarn run algolia:sync
 
 sourcemaps_preview:
   <<: *base_template
@@ -282,6 +324,7 @@ build_live:
   cache:
     - *hugo_cache
     - *yarn_cache_pull_push
+    - *pip_cache
   environment: "live"
   retry: 1
   variables:
@@ -296,6 +339,7 @@ build_live:
     - touch Makefile.config
     - make clean-examples
     - make dependencies
+    - make vector_data
     - yarn run prebuild
     - build_site
     - in-isolation deploy_site
@@ -418,12 +462,10 @@ link_checks:on-schedule:
 
 # template for what runs in pa11y to avoid duplication
 .pa11y_live_template: &pa11y_live_template
-  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/websites-images:pa11y-17812916
-  tags: ["runner:docker"]
+  image: registry.ddbuild.io/ci/websites/pa11y:v33259941-f0dfbc91
+  tags: ["arch:amd64"]
   stage: post-deploy
   cache: []
-  dependencies:
-    - build_live
   variables:
     GIT_STRATEGY: none
   script:
@@ -436,6 +478,8 @@ link_checks:on-schedule:
 
 run_pa11y:schedule:
   <<: *pa11y_live_template
+  dependencies:
+    - build_live
   rules:
     - if: $CI_COMMIT_BRANCH == "master" && $CI_PIPELINE_SOURCE == "schedule"
       when: always
@@ -517,6 +561,40 @@ set_redirect_metadata_live:
   script:
     - in-isolation run_update_redirect_metadata
   interruptible: true
+
+run_notranslate_tag:schedule:
+  <<: *base_template
+  stage: post-deploy
+  cache: []
+  dependencies:
+    - build_live
+  timeout: 4h
+  script:
+    - python3 -m venv ./venv && source ./venv/bin/activate && pip install transifex-python
+    - export transifex_api_key="$(get_secret 'transifex_api_key')"
+    - source ./venv/bin/activate && python3 ./local/bin/py/add_notranslate_tag.py
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH && $CI_PIPELINE_SOURCE == "schedule"
+      when: always
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+      when: manual
+      allow_failure: true
+    - when: never
+
+# run_notranslate_tag:manual:
+#   <<: *base_template
+#   <<: *live_schedule_rules
+#   allow_failure: true
+#   stage: post-deploy
+#   timeout: 2h
+#   script:
+#     - export transifex_api_key="$(get_secret 'transifex_api_key')"
+#     - python3 ./local/bin/py/add_notranslate_tag.py
+#   rules:
+#     - if: $CI_COMMIT_TAG != null || $CI_COMMIT_BRANCH =~ "/pull/\/.*/"
+#       when: never
+#     - if: $CI_COMMIT_TAG == null
+#       when: manual
 
 ####################################
 #                                  #

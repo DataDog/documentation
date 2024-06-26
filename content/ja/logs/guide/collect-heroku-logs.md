@@ -3,8 +3,6 @@ kind: ガイド
 title: Heroku ログの収集
 ---
 
-**このログインテグレーションは、現在、公開ベータ版です。**
-
 Heroku は、次の 3 種類のログを提供します。
 
 * `アプリログ`: プラットフォームにプッシュしたアプリケーションからの出力
@@ -21,7 +19,7 @@ Datadog の HTTP API は、コンテンツヘッダー `application/logplex-1` �
 * 以下のコマンドを使用して HTTPS ドレインをセットアップします。
 
 ```text
-heroku drains:add "https://http-intake.logs.{{< region-param key="dd_site" >}}/api/v2/logs?dd-api-key=<DD_API_KEY>&ddsource=heroku&env=<ENV>&service=<SERVICE>&host=<HOST>" -a <APPLICATION_NAME>
+heroku drains:add "https://http-intake.logs.{{< region-param key="dd_site" >}}/api/v2/logs?dd-api-key=<DD_API_KEY>&ddsource=heroku&ddtags=env:<ENV>&service=<SERVICE>&host=<HOST>" -a <APPLICATION_NAME>
 ```
 
 * `<DD_API_KEY>` は [Datadog API キー][2]に置き換えます。

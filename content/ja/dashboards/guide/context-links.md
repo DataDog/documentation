@@ -3,7 +3,6 @@ further_reading:
 - link: /dashboards/widgets
   tag: ドキュメント
   text: ダッシュボードウィジェット一覧
-kind: ガイド
 title: コンテキストリンク
 ---
 
@@ -11,11 +10,11 @@ title: コンテキストリンク
 
 ダッシュボードは、複数のソースからデータを収集し、そのデータを視覚化として表示します。
 
-ダッシュボードは、[モニター通知][1]にアタッチしたり、スクリーンボードとして使用して主要な技術的またはビジネス指標を観察したり、[ランブック][2]で参照して追加のコンテキストを提供することができます。ダッシュボードでは、プラットフォームの現在の状態のスナップショットだけでなく、インタラクションも確認できるため、問題を先取りして、専門ページでより深く分析することができます。
+ダッシュボードを[モニター通知][1]に関連付けたり、キーとなる技術指標やビジネス指標を観察するためにスクリーンボードとして使用したり、[ランブック][2]で参照してコンテキストを追加したりできます。ダッシュボードを使用すると、インタラクションだけでなく、プラットフォームの現在の状態のスナップショットを見ることができるため、問題を先取りして、専門ページでより深く分析することができます。
 
 以下のビデオは、Web アプリケーションの概要ダッシュボードを見るユーザーを想定しています。ユーザーは、技術的なメトリクスでスパイクを特定し、詳細を確認するためにズームインし、根本的な原因をチェックするために基礎となるホストダッシュボードにアクセスします。
 
-{{< img src="dashboards/guide/context_links/overview.mp4" alt="コンテキストリンクのデモ" video="true" style="width:80%;" >}}
+{{< img src="dashboards/guide/context_links/overview.mp4" alt="ダッシュボードのメトリクスグラフから、コンテキストリンクを使用して問題の根本原因を見つけるトラブルシューティングワークフロー" video="true" style="width:80%;" >}}
 
 このガイドでは、ダッシュボードにおける**コンテキストリンク**を紹介し、以下の内容について説明します。
 
@@ -76,6 +75,7 @@ title: コンテキストリンク
 
 * `{{something}}` は、そのキーにプレフィックスを付けた値を返します。例えば、`env:prod` です。
 * `{{something.value}}` は生の値を返します。例えば、`prod` です。
+* [複数の変数を構成するユースケース例](#configure-multiple-variables)を参照してください。
 
 
 この例では、**View in Acme** をクリックすると、リンク先が`https://prod.acme.io/search?what=basic&when=1643021787564` になります。
@@ -143,11 +143,11 @@ URL に変数を追加すると、テンプレートリンクが `https://acme.z
 
 ### ダッシュボードから AWS コンソールへのリンク
 
-次の例では、ダッシュボードウィジェットのホストから、AWS コンソールの対応する AWS EC2 インスタンスページへのリンクを作成する方法を説明します。
+次の例では、ダッシュボードウィジェット内のホストから、AWS コンソールの対応する Amazon EC2 インスタンスページへのリンクを作成する方法を説明します。
 
 #### コンテキスト
 
-プラットフォームは [AWS EC2][19] インスタンスでホストされており、プラットフォームのアップスケールとダウンスケールの手順は、ほとんど手作業です。
+プラットフォームは [Amazon EC2][19] インスタンス上にホストされており、プラットフォームのアップスケールとダウンスケールの手順は、ほとんど手作業です。
 
 Datadog のダッシュボードには、インフラストラクチャーの主要なヘルスメトリクスが集約されています。
 
@@ -155,7 +155,7 @@ Datadog のダッシュボードには、インフラストラクチャーの主
 
 #### アプローチ
 
-典型的な AWS EC2 インスタンスの概要リンクは `https://eu-west-3.console.aws.amazon.com/ec2/v2/home?region=eu-west-3#InstanceDetails:instanceId=i-04b737b9f8bf94a94` です。
+典型的な Amazon EC2 インスタンスの概要リンクは `https://eu-west-3.console.aws.amazon.com/ec2/v2/home?region=eu-west-3#InstanceDetails:instanceId=i-04b737b9f8bf94a94` であり、そこで以下を確認することができます。
 
 * `eu-west-3`: サブドメインと URL のパラメーターとして表示される、データセンターのリージョン。
 * `i-04b737b9f8bf94a94`: ハッシュパラメーターとして表示されるホスト ID。
@@ -166,21 +166,21 @@ Datadog のダッシュボードには、インフラストラクチャーの主
 
 * リージョンがクエリ集計の一部である場合 (例えば、以下のスクリーンショット)、テンプレートリンクは `https://{{region.value}}.console.aws.amazon.com/ec2/v2/home?region={{region.value}}#InstanceDetails:instanceId={{host.value}}` で、ここで `{{region.value}}` は **query** 変数です。
 
-{{< img src="dashboards/guide/context_links/ec2_query.png" alt="AWS EC2 クエリ" style="width:90%;" >}}
+{{< img src="dashboards/guide/context_links/ec2_query.png" alt="Amazon EC2 クエリ" style="width:90%;" >}}
 
 * リージョンがクエリ集計の一部である場合 (例えば、以下のスクリーンショット)、テンプレートリンクは `https://{{$region.value}}.console.aws.amazon.com/ec2/v2/home?region={{$region.value}}#InstanceDetails:instanceId={{host.value}}` で、ここで `{{region.value}}` は **template** 変数です。
 
-{{< img src="dashboards/guide/context_links/ec2_query2.png" alt="AWS EC2 クエリ" style="width:90%;" >}}
+{{< img src="dashboards/guide/context_links/ec2_query2.png" alt="Amazon EC2 クエリ" style="width:90%;" >}}
 
 #### 結果
 
 ダッシュボードウィジェットには、AWS コンソールの適切なホストに移動するためのリンクが含まれています。
 
-{{< img src="dashboards/guide/context_links/ec2_interaction.png" alt="AWS EC2 クエリコンテキストリンク" style="width:90%;" >}}
+{{< img src="dashboards/guide/context_links/ec2_interaction.png" alt="Amazon EC2 クエリコンテキストリンク" style="width:90%;" >}}
 
-**AWS EC2 Instance Summary** のリンクをクリックすると、AWS コンソールの AWS EC2 インスタンスページに移動します。
+**Amazon EC2 Instance Summary** のリンクをクリックすると、AWS コンソールの Amazon EC2 インスタンスページに移動します。
 
-{{< img src="dashboards/guide/context_links/ec2_result.png" alt="AWS EC2 クエリの結果" style="width:70%;" >}}
+{{< img src="dashboards/guide/context_links/ec2_result.png" alt="Amazon EC2 クエリの結果" style="width:70%;" >}}
 
 ### ダッシュボードから Datadog の保存ビューとリマップされた属性へのリンク
 
@@ -224,6 +224,29 @@ API Gateways チームは、受信ログの最新の更新を考慮して保存�
 
 IP アドレスをリマップすることで、RUM イベントと対応するログをつなぐコンテキストリンクが作成されます。
 
+### 複数の変数の構成
+
+次の例では、コンテキストリンククエリで複数の変数と条件を構成する方法を説明します。
+
+#### コンテキスト
+
+特定のログや条件を調査するためのコンテキストリンクを追加します。
+- 同じコンテキストで複数のタグ値を持っている場合 (例: `env:production OR env:prod`)。
+- ログを複数の条件で絞り込みたい場合 (例: `env:prod AND service:backend`)
+
+#### アプローチ
+
+トラブルシューティングしたいテンプレート変数を選択すると、コンテキストリンク構成はそれらのテンプレート変数を取り込み、クエリに挿入します。**注**: 構文と括弧はクエリに影響します。
+
+例えば、`service:backend` AND (`env:production` OR `env:prod`) でコンテキストリンクを構成したい場合は、以下の構成を使用します。
+
+```
+service:backend (env:{{$env.value}})
+```
+
+#### 結果
+
+括弧は `(env:{{$env.value}})` を `(env:*)` に変換し、コンテキストリンククエリに複数の変数を入力できるようにします。
 
 ## その他の参考資料
 
@@ -232,7 +255,7 @@ IP アドレスをリマップすることで、RUM イベントと対応する�
 
 [1]: /ja/monitors/notify/
 [2]: /ja/notebooks/
-[3]: /ja/dashboards/#permissions
+[3]: /ja/dashboards/configure/#permissions
 [4]: https://app.datadoghq.com/apm/traces/
 [5]: https://app.datadoghq.com/logs
 [6]: https://app.datadoghq.com/rum/explorer/
@@ -243,11 +266,11 @@ IP アドレスをリマップすることで、RUM イベントと対応する�
 [11]: /ja/infrastructure/process/?tab=linuxwindows
 [12]: /ja/tracing/trace_explorer/?tab=listview
 [13]: /ja/real_user_monitoring/explorer/
-[14]: /ja/tracing/profiler/search_profiles/
+[14]: /ja/profiler/profile_visualizations/
 [15]: /ja/logs/explorer/
 [16]: /ja/dashboards/widgets/
 [17]: /ja/real_user_monitoring/
-[18]: /ja/security_platform/cloud_siem/
+[18]: /ja/security/cloud_siem/
 [19]: /ja/integrations/amazon_ec2/
 [20]: https://aws.amazon.com/console/
 [21]: /ja/logs/

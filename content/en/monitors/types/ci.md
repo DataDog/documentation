@@ -141,7 +141,7 @@ For detailed instructions on the advanced alert options (such as evaluation dela
 
 ### Notifications
 
-For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][4] page.
+For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][4] page.
 
 #### Samples and breaching values top list
 
@@ -212,4 +212,4 @@ For more information, see [Code Coverage][7].
 [4]: /monitors/notify/
 [5]: /continuous_integration/pipelines/custom_tags_and_metrics/?tab=linux
 [6]: /continuous_integration/search/#new-flaky-tests
-[7]: /continuous_integration/integrate_tests/code_coverage
+[7]: /continuous_integration/tests/code_coverage
