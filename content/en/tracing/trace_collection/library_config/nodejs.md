@@ -58,22 +58,7 @@ Accepts a comma-delimited list of case-insensitive HTTP headers optionally mappe
 
 It is recommended that you use `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `env`, `service`, and `version` for your services. Review the [Unified Service Tagging][1] documentation for recommendations on configuring these environment variables.
 
-### Instrumentation
-
-`DD_TRACE_ENABLED`
-: **Configuration**: N/A<br>
-**Default**: `true`<br>
-Whether to enable dd-trace. Setting this to `false` disables all features of the library.
-
-`DD_TRACE_DEBUG`
-: **Configuration**: N/A<br>
-**Default**: `false`<br>
-Enable debug logging in the tracer.
-
-`DD_TRACING_ENABLED`
-: **Configuration**: N/A<br>
-**Default**: `true`<br>
-Whether to enable tracing.
+### Agent
 
 `DD_TRACE_AGENT_URL`
 : **Configuration**: `url`<br>
@@ -95,60 +80,54 @@ The port of the Trace Agent that the tracer submits to. If the [Agent configurat
 **Default**: `8125`<br>
 The port of the DogStatsD Agent that metrics are submitted to. If the [Agent configuration][13] sets `dogstatsd_port` or `DD_DOGSTATSD_PORT` to something other than the default `8125`, then this tracing library `DD_DOGSTATSD_PORT` must match it.
 
-`DD_LOGS_INJECTION`
-: **Configuration**: `logInjection`<br>
+`DD_RUNTIME_METRICS_ENABLED`
+: **Configuration**: `runtimeMetrics`<br>
 **Default**: `false`<br>
-Enable automatic injection of trace IDs in logs for supported logging libraries.
+Whether to enable capturing runtime metrics. Port `8125` (or configured with `DD_DOGSTATSD_PORT`) must be opened on the Agent for UDP.
 
-`DD_TRACE_SAMPLE_RATE`
-: **Configuration**: `sampleRate`<br>
-**Default**: Defers the decision to the Agent.<br>
-Controls the ingestion sample rate (between 0.0 and 1.0) between the Agent and the backend.
+`DD_REMOTE_CONFIG_POLL_INTERVAL_SECONDS`
+: **Configuration**: `remoteConfig.pollInterval`<br>
+**Default**: 5<br>
+Remote configuration polling interval in seconds.
+
+### Traces
+
+`DD_TRACE_ENABLED`
+: **Configuration**: N/A<br>
+**Default**: `true`<br>
+Whether to enable dd-trace. Setting this to `false` disables all features of the library.
+
+`DD_TRACING_ENABLED`
+: **Configuration**: N/A<br>
+**Default**: `true`<br>
+Whether to enable tracing.
+
+`DD_TRACE_DEBUG`
+: **Configuration**: N/A<br>
+**Default**: `false`<br>
+Enable debug logging in the tracer.
 
 `DD_TRACE_RATE_LIMIT`
 : **Configuration**: `rateLimit`<br>
 **Default**: `100` when `DD_TRACE_SAMPLE_RATE` is set. Otherwise, delegates rate limiting to the Datadog Agent.
 The maximum number of traces per second per service instance.<br>
 
+
+`DD_TRACE_SAMPLE_RATE`
+: **Configuration**: `sampleRate`<br>
+**Default**: Defers the decision to the Agent.<br>
+Controls the ingestion sample rate (between 0.0 and 1.0) between the Agent and the backend.
+
 `DD_TRACE_SAMPLING_RULES`
 : **Configuration**: `samplingRules`<br>
 **Default**: `[]`<br>
 Sampling rules to apply to priority sampling. A JSON array of objects. Each object must have a `sample_rate` value between 0.0 and 1.0 (inclusive). Each rule has optional `name` and `service` fields, which are regex strings to match against a trace's `service` and `name`. Rules are applied in configured order to determine the trace's sample rate. If omitted, the tracer defers to the Agent to dynamically adjust sample rate across all traces.
-
-`DD_SPAN_SAMPLING_RULES`
-: **Configuration**: `spanSamplingRules`<br>
-**Default**: `[]`<br>
-Span sampling rules to keep individual spans when the rest of the trace would otherwise be dropped. A JSON array of objects. Rules are applied in configured order to determine the span's sample rate. The `sample_rate` value must be between 0.0 and 1.0 (inclusive).
-For more information, see [Ingestion Mechanisms][3].<br>
-**Example:**<br>
-  - Set the span sample rate to 50% for the service `my-service` and operation name `http.request`, up to 50 traces per second: `'[{"service": "my-service", "name": "http.request", "sample_rate":0.5, "max_per_second": 50}]'`
-
-`DD_SPAN_SAMPLING_RULES_FILE`
-: **Configuration**: N/A<br>
-**Default**: N/A<br>
-Points to a JSON file that contains the span sampling rules. `DD_SPAN_SAMPLING_RULES` takes precedence over this variable. See `DD_SPAN_SAMPLING_RULES` for the rule format.
-
-`DD_RUNTIME_METRICS_ENABLED`
-: **Configuration**: `runtimeMetrics`<br>
-**Default**: `false`<br>
-Whether to enable capturing runtime metrics. Port `8125` (or configured with `DD_DOGSTATSD_PORT`) must be opened on the Agent for UDP.
 
 `DD_SERVICE_MAPPING`
 : **Configuration**: `serviceMapping`<br>
 **Default**: N/A<br>
 **Example**: `mysql:my-mysql-service-name-db,pg:my-pg-service-name-db`<br>
 Provide service names for each plugin. Accepts comma separated `plugin:service-name` pairs, with or without spaces.
-
-`DD_TRACE_DISABLED_PLUGINS`
-: **Configuration**: N/A<br>
-**Default**: N/A<br>
-**Example**: `DD_TRACE_DISABLED_PLUGINS=express,dns`<br>
-A comma-separated string of integration names automatically disabled when the tracer is initialized.
-
-`DD_TRACE_LOG_LEVEL`
-: **Configuration**: `logLevel`<br>
-**Default**: `debug`<br>
-A string for the minimum log level for the tracer to use when debug logging is enabled, for example, `error`, `debug`.
 
 Flush Interval
 : **Configuration**: `flushInterval`<br>
@@ -180,15 +159,15 @@ Custom function for DNS lookups when sending requests to the Agent. Some setups 
 **Default**: `0.4`<br>
 Protocol version to use for requests to the Agent. The version configured must be supported by the Agent version installed or all traces are dropped.
 
-`DD_PROFILING_ENABLED`
-: **Configuration**: `profiling`<br>
-**Default**: `false`<br>
-Whether to enable profiling.
-
 `DD_TRACE_REPORT_HOSTNAME`
 : **Configuration**: `reportHostname`<br>
 **Default**: `false`<br>
 Whether to report the system's hostname for each trace. When disabled, the hostname of the Agent is used instead.
+
+`DD_TRACE_STARTUP_LOGS`
+: **Configuration**: `startupLogs`<br>
+**Default**: `false`<br>
+Enable tracer startup configuration and diagnostic log.
 
 Experimental Features
 : **Configuration**: `experimental`<br>
@@ -200,15 +179,7 @@ Automatically Instrument External Libraries
 **Default**: `true`<br>
 Whether to enable automatic instrumentation of external libraries using the built-in plugins.
 
-`DD_TRACE_STARTUP_LOGS`
-: **Configuration**: `startupLogs`<br>
-**Default**: `false`<br>
-Enable tracer startup configuration and diagnostic log.
-
-`DD_DBM_PROPAGATION_MODE`
-: **Configuration**: `dbmPropagationMode`<br>
-**Default**: `'disabled'`<br>
-To enable DBM to APM link using tag injection, can be set to `'service'` or `'full'`. The `'service'` option enables the connection between DBM and APM services. The `'full'` option enables connection between database spans with database query events. Available for Postgres.
+### ASM
 
 `DD_APPSEC_ENABLED`
 : **Configuration**: `appsec.enabled`<br>
@@ -235,10 +206,52 @@ A regex string to redact sensitive data by its key in attack reports.
 **Default**: N/A<br>
 A regex string to redact sensitive data by its value in attack reports.
 
-`DD_REMOTE_CONFIG_POLL_INTERVAL_SECONDS`
-: **Configuration**: `remoteConfig.pollInterval`<br>
-**Default**: 5<br>
-Remote configuration polling interval in seconds.
+### Logs
+
+`DD_LOGS_INJECTION`
+: **Configuration**: `logInjection`<br>
+**Default**: `false`<br>
+Enable automatic injection of trace IDs in logs for supported logging libraries.
+
+`DD_TRACE_LOG_LEVEL`
+: **Configuration**: `logLevel`<br>
+**Default**: `debug`<br>
+A string for the minimum log level for the tracer to use when debug logging is enabled, for example, `error`, `debug`.
+
+### Profiling
+
+`DD_PROFILING_ENABLED`
+: **Configuration**: `profiling`<br>
+**Default**: `false`<br>
+Whether to enable profiling.
+
+### Spans
+
+`DD_SPAN_SAMPLING_RULES`
+: **Configuration**: `spanSamplingRules`<br>
+**Default**: `[]`<br>
+Span sampling rules to keep individual spans when the rest of the trace would otherwise be dropped. A JSON array of objects. Rules are applied in configured order to determine the span's sample rate. The `sample_rate` value must be between 0.0 and 1.0 (inclusive).
+For more information, see [Ingestion Mechanisms][3].<br>
+**Example:**<br>
+  - Set the span sample rate to 50% for the service `my-service` and operation name `http.request`, up to 50 traces per second: `'[{"service": "my-service", "name": "http.request", "sample_rate":0.5, "max_per_second": 50}]'`
+
+`DD_SPAN_SAMPLING_RULES_FILE`
+: **Configuration**: N/A<br>
+**Default**: N/A<br>
+Points to a JSON file that contains the span sampling rules. `DD_SPAN_SAMPLING_RULES` takes precedence over this variable. See `DD_SPAN_SAMPLING_RULES` for the rule format.
+
+`DD_TRACE_DISABLED_PLUGINS`
+: **Configuration**: N/A<br>
+**Default**: N/A<br>
+**Example**: `DD_TRACE_DISABLED_PLUGINS=express,dns`<br>
+A comma-separated string of integration names automatically disabled when the tracer is initialized.
+
+### Database monitoring
+
+`DD_DBM_PROPAGATION_MODE`
+: **Configuration**: `dbmPropagationMode`<br>
+**Default**: `'disabled'`<br>
+To enable DBM to APM link using tag injection, can be set to `'service'` or `'full'`. The `'service'` option enables the connection between DBM and APM services. The `'full'` option enables connection between database spans with database query events. Available for Postgres.
 
 ### Headers extraction and injection
 
