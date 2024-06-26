@@ -36,7 +36,7 @@ title: Network Device Monitoring
 
 <br/>
 
-La fonctionnalité Network Device Monitoring vous offre une visibilité optimale sur vos périphériques réseau virtuels et physiques, tels que les routeurs, les switchs, et les pare-feu. Identifiez automatiquement les périphériques connectés à n'importe quel réseau, recueillez instantanément diverses métriques comme la bande passante utilisée ou le nombre d'octets envoyés, et déterminez la disponibilité des périphériques.
+La fonctionnalité Network Device Monitoring vous offre une visibilité optimale sur vos périphériques réseau virtuels et physiques, tels que les routeurs, les switchs, et les pare-feu. Identifiez automatiquement les périphériques connectés à n'importe quel réseau, recueillez diverses métriques comme la bande passante utilisée ou le nombre d'octets envoyés, et déterminez la disponibilité des périphériques.
 
 ## Prise en main
 
@@ -47,6 +47,7 @@ La fonctionnalité Network Device Monitoring vous offre une visibilité optimale
     - [Vue d'ensemble de tous les périphériques surveillés][4]
     - [Performances sur toutes les interfaces][5]
 5. Identifiez les problèmes avant même qu'ils ne se produisent grâce à la surveillance proactive sur n'importe quelle [métrique SNMP][6].
+6. Vous pouvez également configurer lʼAgent pour qu'il collecte des métriques spécifiques et des tags en créant des [profils d'appareil][224] directement dans l'application Datadog.
 
 ## Périphériques pris en charge
 
@@ -60,14 +61,14 @@ Datadog offre une surveillance SD-WAN (Software-Defined Wide Area Network) pour 
 
 Datadog prend en charge les fournisseurs suivants pour la surveillance de réseau SD-WAN :
 
-- [Meraki SD-WAN][7] (version Bêta publique)
-- [Cisco SD-WAN][800] (version Bêta privée)
+- [Meraki SD-WAN][7] 
+- [Cisco SD-WAN][223] (version Bêta publique)
 
 ### Profils fournisseur
 
 Les périphériques suivants sont pris en charge via des profils dédiés. Si un fournisseur/type de périphérique est pris en charge mais que le modèle spécifique ne l'est pas, vous pouvez :
-  - personnaliser votre propre profil YAML (consultez la [page des questions/réponses pour le dépannage de NDM][8] pour savoir comment)
-  - créer de nouveaux [profils][9] pour commencer à surveiller de nouveaux modèles d'appareils
+  - personnaliser votre propre profil YAML (consultez la [page des questions/réponses pour le dépannage de NDM][8] pour savoir comment).
+  - créer de nouveaux [profils][9] pour commencer à surveiller de nouveaux modèles d'appareils.
 
 | Fournisseur | Fichiers de configuration |
 | ---  | ----------- |
@@ -284,4 +285,5 @@ Les périphériques suivants sont pris en charge via des profils dédiés. Si un
 [211]: https://docs.datadoghq.com/fr/integrations/pan_firewall/
 [212]: https://docs.datadoghq.com/fr/integrations/crest_data_systems_pfsense/
 [222]: https://docs.datadoghq.com/fr/integrations/pan_firewall/
-[800]: https://docs.datadoghq.com/fr/integrations/cisco_sdwan/
+[223]: https://docs.datadoghq.com/fr/integrations/cisco_sdwan/
+[224]: /fr/network_monitoring/devices/guide/device_profiles/
