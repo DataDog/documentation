@@ -37,23 +37,54 @@ cascade:
 
 ## Overview
 
-Monitoring all of your infrastructure in one place wouldn't be complete without the ability to know when critical changes are occurring. Datadog gives you the ability to create monitors that actively check metrics, integration availability, network endpoints, and more.
+Datadog Monitors provide vital visibility into your infrastructure, enabling proactive detection and response to performance issues and outages in real-time. By configuring monitors to track essential metrics and thresholds, organizations can promptly receive alerts, allowing them to address problems before customer impact or system downtime occurs. Additionally, with the capacity planning feature, businesses can predict resource needs for growing workloads, avoiding performance degradation by scaling infrastructure proactively. 
 
-Configure monitors, configure notifications and automations, and manage alerts at a glance on the Alerting platform.
+Datadog also allows users to monitor critical changes by actively checking metrics, integration availability, and network endpoints, all managed conveniently on the Alerting platform. Simplify monitoring and response processes, enhance operational efficiency, and ensure optimal performance with Datadog Monitors.
 
-**Note**: View and search for Monitors on your mobile device with the [Datadog Mobile App][1], available on the [Apple App Store][2] and [Google Play Store][3].
+## Getting started
 
-## Create monitors
+The fastest way to start with Datadog Monitors is with [Recommended Monitors][100]. These are a collection of monitors within Datadog that have been preconfigured by Datadog, integration partners, and other users.
 
-To create a monitor in Datadog:
+Build your own monitors from scratch in lab environments in the Learning Center, or in your application by following the Getting Started with Monitors guide.
 
-1. Navigate to [**Monitors** > **New Monitor**][4].
-1. Select a monitor type corresponding to the kind of telemetry you want to alert on. See [Monitor Types][5] for the full list.
-1. [Configure Monitors][6]: Alert over metrics, events, logs, integration availability, network endpoints, and more.
+{{< whatsnext desc="Use the following resources to create:" >}}
+    {{< nextlink href="/getting_started/monitors/" >}}Getting started with Monitors: Guide on how to build a metric based monitor{{< /nextlink >}}
+    {{< nextlink href="/monitors/types/" >}}Create a monitor from Monitor Types{{< /nextlink >}}
+    {{< nextlink href="https://learn.datadoghq.com/courses/datadog-foundation" >}}Learning Center: Build a metric base monitor in a sandbox lab environment{{< /nextlink >}}
+{{< /whatsnext >}}
 
-{{< img src="/monitors/create.png" alt="Create a monitor" style="width:90%;">}}
+## Analyze aggregate data
 
-To create a monitor programmatically, see the [Datadog API][7] or [community maintained libraries][8].
+Monitor data to achieve observability in systems. Good data should be well-understood, granular, tagged by scope, and long-lived. Use different data types for alerts and diagnostics, based on the level of urgency. Instrument everything and collect as much relevant data as possible for comprehensive measurements and observability of complex systems.
+
+Measure the health of your applications and the state of your infrastructure through data sent to Datadog. Use data from across the platform whether Logs, Metrics, Traces, Cloud Cost, RUM, or Security, to create alerts on the potential issues.
+
+## Alert on what matters
+
+Set up [Monitor Notifications][101] when creating monitors to keep your team informed of issues and provide troubleshooting guidance. Route the notifications to the correct people, leverage template variables to include details, and attach snapshots when sending the alerts by email or Slack. 
+
+Reduce alerting fatigue so teams can focus on the resolving alerts when it matters. Create [downtimes][102] to mute alerts during application maintenance. 
+
+## What's next
+
+Monitors and alerts are essential tools for ensuring the reliability, performance, and availability of IT systems and applications. They help maintain operational efficiency, improve user experience, and mitigate potential risks by enabling quick detection and response to issues before they escalate.
+
+1. Select a monitor type.
+1. Configure monitors.
+1. 
+1. 
+1. 
+1. 
+1. 
+
+{{< whatsnext desc="Learn more about Monitor features:">}}
+    {{< nextlink href="/monitors/types/" >}}1. Select a monitor type{{< /nextlink >}}
+    {{< nextlink href="/monitors/configuration" >}}2. Configure monitors{{< /nextlink >}}
+    {{< nextlink href="/monitors/notify" >}}3. Configure notifications{{< /nextlink >}}
+    {{< nextlink href="/monitors/downtimes" >}}4. Schedule downtimes{{< /nextlink >}}
+    {{< nextlink href="/monitors/guide" >}}5. Organize and manage monitors{{< /nextlink >}}
+    {{< nextlink href="/monitors/quality" >}}6. Resolve misconfigured monitors with Monitor Quality{{< /nextlink >}}
+{{< /whatsnext >}}
 
 ## Configure notifications and automations
 
@@ -125,3 +156,7 @@ To import a monitor:
 [17]: /monitors/notify/#workflows
 [18]: /monitors/notify/#notifications
 [19]: /monitors/notify/#teams
+
+[100]: https://app.datadoghq.com/monitors/recommended
+[101]: /monitors/notify
+[102]: /monitors/downtimes
