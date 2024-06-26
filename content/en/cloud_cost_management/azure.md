@@ -55,8 +55,10 @@ You need to generate exports for two data types: **actual** and **amortized**. D
 
 {{< img src="cloud_cost/new_export.png" alt="Export details with Metric: Actual, Export type: Daily, and File Partitioning: On" >}}
 
-Note: if you are using the [improved exports experience][8], at this time, there is no support for version 2019-10-01. We recommend using the newest version.
+**Note**: CCM is supporting the [improved exports experience][8]. However, at this time, there is no support for version 2019-10-01.
+We recommend using the newest versions.
 {{< img src="cloud_cost/improved_export.png" alt="Export details with Metric: Actual, Export type: Daily, and Dataset Version" >}}.
+
 In the destination tab, select the following details:
     - File partitioning: `On`
     - Overwrite Data: `Off`
