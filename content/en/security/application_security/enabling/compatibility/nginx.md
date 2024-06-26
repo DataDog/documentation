@@ -17,7 +17,7 @@ specified tracer version:
 | Threat Protection                      | 1.2.0                        |
 | Customize response to blocked requests | 1.2.0                        |
 | Software Composition Analysis (SCA)    | not applicable               |
-| Code Security (beta)                   | not applicable               |
+| Code Security                          | not applicable               |
 | Automatic user activity event tracking | not supported                |
 | API Security                           | not supported                |
 
