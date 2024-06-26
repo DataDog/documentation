@@ -44,7 +44,7 @@ Si aparece el siguiente mensaje al ejecutar el comando de estado del Agent:
 Logs Agent
 ==========
 
-  Logs Agent is not running
+  Logs Agent no se está ejecutando
 ```
 
 Esto significa que no has activado la gestión de logs en el Agent.
@@ -59,8 +59,8 @@ Si el estado del Agent de logs no muestra integraciones y ves `LogsProcessed: 0 
 ==========
 Logs Agent
 ==========
-    LogsProcessed: 0
-    LogsSent: 0
+    Logs procesados: 0
+    Logs enviados: 0
 ```
 
 Este estado significa que los logs están habilitados, pero no se ha especificado de qué contenedores debe recopilarlos el Agent.
@@ -79,10 +79,10 @@ Si no puede acceder a la ruta de los archivos de logs, el Agent realiza el segui
 Cuando se recopilan logs del contenedor de Docker del archivo, el Agent recurre a la recopilación del socket de Docker, si no puede leer del directorio en el que se almacenan los logs del contenedor de Docker (`/var/lib/docker/containers` en Linux). En algunas circunstancias, el Datadog Agent puede fallar a la hora de recopilar logs del archivo. Para diagnosticar este problema, comprueba el estado del Agent de logs y busca una entrada de tipo de archivo que muestre un error similar al siguiente:
 
 ```text
-    - Type: file
-      Identifier: ce0bae54880ad75b7bf320c3d6cac1ef3efda21fc6787775605f4ba8b6efc834
-      Path: /var/lib/docker/containers/ce0bae54880ad75b7bf320c3d6cac1ef3efda21fc6787775605f4ba8b6efc834/ce0bae54880ad75b7bf320c3d6cac1ef3efda21fc6787775605f4ba8b6efc834-json.log
-      Status: Error: file /var/lib/docker/containers/ce0bae54880ad75b7bf320c3d6cac1ef3efda21fc6787775605f4ba8b6efc834/ce0bae54880ad75b7bf320c3d6cac1ef3efda21fc6787775605f4ba8b6efc834-json.log does not exist
+    - Tipo: archivo
+      Identificador: ce0bae54880ad75b7bf320c3d6cac1ef3efda21fc6787775605f4ba8b6efc834
+      Ruta: /var/lib/docker/containers/ce0bae54880ad75b7bf320c3d6cac1ef3efda21fc6787775605f4ba8b6efc834/ce0bae54880ad75b7bf320c3d6cac1ef3efda21fc6787775605f4ba8b6efc834-json.log
+      Estado: Error: archivo /var/lib/docker/containers/ce0bae54880ad75b7bf320c3d6cac1ef3efda21fc6787775605f4ba8b6efc834/ce0bae54880ad75b7bf320c3d6cac1ef3efda21fc6787775605f4ba8b6efc834-json.log no existe
 ```
 
 Este estado significa que el Agent no puede encontrar un archivo de log para un determinado contenedor. Para resolver este problema, comprueba que la carpeta que contiene logs del contenedor de Docker está correctamente expuesta al contenedor del Datadog Agent. En Linux, esto corresponde a `-v /var/lib/Docker/containers:/var/lib/Docker/containers:ro` 1 en la línea de comandos que inicia el contenedor del Agent, mientras que en Windows corresponde a `-v c:/programdata/Docker/containers:c:/programdata/Docker/containers:ro`. 2 Fíjate que el directorio asociado al host subyacente podría ser diferente debido a la configuración específica del daemon Docker. Esto no representa un inconveniente durante la correcta asignación de volúmenes Docker. Por ejemplo, utiliza `-v /data/Docker/containers:/var/lib/Docker/containers:ro` 3 Si el directorio de datos de Docker se ha reubicado en `/data/Docker` en el subyacente host.
