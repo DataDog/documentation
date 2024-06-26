@@ -5623,6 +5623,11 @@ menu:
       parent: rum_session_replay_browser
       identifier: rum_session_replay_troubleshooting
       weight: 104
+    - name: Playlists
+      url: real_user_monitoring/session_replay/playlists
+      parent: rum_session_replay
+      identifier: rum_session_replay_playlists
+      weight: 503
     - name: Exploring RUM Data
       url: real_user_monitoring/explorer/
       parent: rum
