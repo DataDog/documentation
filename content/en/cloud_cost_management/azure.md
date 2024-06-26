@@ -155,4 +155,3 @@ You can create historical data in your storage account using the [Microsoft API]
 [6]: https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/tutorial-export-acm-data?tabs=azure-cli
 [7]: https://support.microsoft.com
 [8]: https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/tutorial-improved-exports
-[9]: https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/enable-preview-features-cost-management-labs#explore-preview-features
