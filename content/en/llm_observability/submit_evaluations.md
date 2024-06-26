@@ -10,8 +10,6 @@ LLM Observability is not available in the US1-FED site.
 </div>
 {{% /site-region %}}
 
-<div class="alert alert-info">LLM Observability is in public beta.</a></div>
-
 ## Overview
 
 In the context of LLM applications, it's important to track user feedback and evaluate the quality of your LLM application's responses.
