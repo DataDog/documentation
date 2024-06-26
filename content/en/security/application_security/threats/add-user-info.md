@@ -712,7 +712,7 @@ The events that can be automatically detected are:
 
 ### Automatic user activity event tracking mode
 
-<div class="alert alert-info"><strong>This is deprecated</strong> and only applies to older agent versions before x</div>
+<div class="alert alert-warning"><strong>This is deprecated</strong> and only applies to older agent versions before x</div>
 
 Automatic user activity tracking offers two modes: <code>safe</code>, and <code>extended</code>
 
@@ -738,7 +738,7 @@ The available modes are: <code>identification</code>, <code>anonymization</code>
 
 ## Disabling automatic user activity event tracking
 
-<div class="alert alert-info"><strong>This is deprecated</strong> and only applies to older agent versions before x</div>
+<div class="alert alert-warning"><strong>This is deprecated</strong> and only applies to older agent versions before x</div>
 
 If you wish to disable the detection of these events, you should set the environment variable <code>DD_APPSEC_AUTOMATED_USER_EVENTS_TRACKING</code> to <code>disabled</code>. This should be set on the application hosting the Datadog Tracing Library, and not on the Datadog Agent.
 
