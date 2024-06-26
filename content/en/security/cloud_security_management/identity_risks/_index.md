@@ -20,7 +20,7 @@ further_reading:
   text: "Learn more about Workflow Automation"
 ---
 
-Cloud Security Management Identity Risks (CSM Identity Risks) is a Cloud Infrastructure Entitlement Management (CIEM) product that helps you mitigate entitlement risks across your clouds. It continually scans your cloud infrastructure and finds issues such as lingering administrative privileges, privilege escalations, permission gaps, large blast radii, and cross-account access. It also enables you to proactively resolve identity risks on an ongoing basis to secure your cloud infrastructure from IAM-based attacks. For quick remediation, it suggests [downsized policies][4], [Datadog Workflows][3] based remediations, and deep links to cloud consoles.
+Cloud Security Management Identity Risks (CSM Identity Risks) is a Cloud Infrastructure Entitlement Management (CIEM) product that helps you mitigate entitlement risks across your clouds. It continually scans your cloud infrastructure and finds issues such as lingering administrative privileges, privilege escalations, permission gaps, large blast radius, and cross-account access. It also enables you to proactively resolve identity risks on an ongoing basis to secure your cloud infrastructure from IAM-based attacks. For quick remediation, it suggests [downsized policies][4], [Datadog Workflows][3] based remediations, and deep links to cloud consoles.
 
 <div class="alert alert-info">CSM Identity Risks is available for AWS, Azure, and GCP.</div>
 
