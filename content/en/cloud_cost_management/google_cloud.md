@@ -48,6 +48,7 @@ The <a href="https://cloud.google.com/billing/docs/how-to/export-data-bigquery-t
 
 {{< img src="cloud_cost/billing_export.png" alt="Google Cloud project and dataset info highlighted" >}}
 
+_Newly created BigQuery datasets will only contain the most recent two months of data._
 
 #### Enable Google Service APIs
 The following permissions allow Datadog to access and transfer the billing export into the storage bucket using a scheduled BigQuery query.
