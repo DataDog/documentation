@@ -5,6 +5,9 @@ description: Product Analytics help you understand your application usage at a g
 aliases:
 - /real_user_monitoring/product_analytics
 further_reading:
+- link: "https://www.datadoghq.com/blog/datadog-product-analytics/"
+  tag: "Blog"
+  text: "Make data-driven design decisions with Product Analytics"
 - link: "/product_analytics/analytics_explorer/"
   tag: "Documentation"
   text: "Analytics Explorer"
