@@ -1827,21 +1827,26 @@ menu:
       parent: service_catalog
       identifier: service_catalog_scorecards
       weight: 8
+    - name: Software Templates
+      url: service_catalog/software_templates
+      parent: service_catalog
+      identifier: software_templates
+      weight: 9
     - name: APIs
       url: service_catalog/apis
       parent: service_catalog
       identifier: service_catalog_apis
-      weight: 9
+      weight: 10
     - name: Integrations
       url: service_catalog/integrations
       parent: service_catalog
       identifier: service_catalog_integrations
-      weight: 10
+      weight: 11
     - name: Troubleshooting and Best Practices
       url: service_catalog/guides
       parent: service_catalog
       identifier: troubleshooting_best_practices
-      weight: 11
+      weight: 12
     - name: API Catalog
       url: /api_catalog/
       pre: api-catalog
