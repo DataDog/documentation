@@ -13,77 +13,9 @@ further_reading:
       text: 'Interoperability of OpenTelemetry API and Datadog instrumented traces'
 ---
 
-## Overview
+This page documents additional use cases of trace context propagation for the Datadog C++ SDK. For a high-level overview of trace context propagation, see [Trace Context Propagation][1].
 
-Datadog APM tracer supports [B3][11] and [W3C][1] headers extraction and injection for distributed tracing.
-
-Distributed headers injection and extraction is controlled by configuring injection/extraction styles. The supported styles for C++ are:
-
-- Datadog: `datadog`
-- B3: `b3`
-- W3C: `tracecontext`
-
-### Configuration
-
-{{< tabs >}}
-
-{{% tab "Environment Variable" %}}
-
-#### Injection styles
-
-`DD_TRACE_PROPAGATION_STYLE_INJECT="datadog,b3"`
-
-The value of the environment variable is a comma (or space) separated list of header styles that are enabled for injection. The default injection styles are `datadog,tracecontext`.
-
-#### Extraction styles
-
-`DD_TRACE_PROPAGATION_STYLE_EXTRACT="datadog,b3"`
-
-The value of the environment variable is a comma (or space) separated list of header styles that are enabled for extraction. The default extraction styles are `datadog,tracecontext`.
-
-{{% /tab %}}
-
-{{% tab "Code" %}}
-
-```cpp
-#include <datadog/tracer_config.h>
-#include <datadog/propagation_style.h>
-
-namespace dd = datadog::tracing;
-int main() {
-  dd::TracerConfig config;
-  config.service = "my-service";
-
-  // `injection_styles` indicates with which tracing systems trace propagation
-  // will be compatible when injecting (sending) trace context.
-  // All styles indicated by `injection_styles` are used for injection.
-  // `injection_styles` is overridden by the `DD_TRACE_PROPAGATION_STYLE_INJECT`
-  // and `DD_TRACE_PROPAGATION_STYLE` environment variables.
-  config.injection_styles = {dd::PropagationStyle::DATADOG, dd::PropagationStyle::B3};
-
-  // `extraction_styles` indicates with which tracing systems trace propagation
-  // will be compatible when extracting (receiving) trace context.
-  // Extraction styles are applied in the order in which they appear in
-  // `extraction_styles`. The first style that produces trace context or
-  // produces an error determines the result of extraction.
-  // `extraction_styles` is overridden by the
-  // `DD_TRACE_PROPAGATION_STYLE_EXTRACT` and `DD_TRACE_PROPAGATION_STYLE`
-  // environment variables.
-  config.extraction_styles = {dd::PropagationStyle::W3C};
-
-  ...
-}
-```
-
-{{% /tab %}}
-
-{{< /tabs >}}
-
-If multiple extraction styles are enabled, the extraction attempt is done on the order those styles are configured and first successful extracted value is used.
-
-The default injection and extractions settings for the most recent versions of the library are `datadog,tracecontext`.
-
-### Extract propagated context
+## Extract propagated context
 Propagation context extraction can be accomplished by implementing a custom `DictReader` interface and calling `Tracer::extract_span` or `Tracer::extract_or_create_span`.
 
 Here is an implementation to extract propagation context from HTTP Headers:
@@ -133,7 +65,7 @@ void handle_http_request(const Request& request, datadog::tracing::Tracer& trace
 }
 ```
 
-### Inject context for distributed tracing
+## Inject context for distributed tracing
 Propagation context injection can be accomplished by implementing the `DictWriter` interface and calling `Span::inject` on a span instance.
 
 ```cpp
@@ -173,7 +105,4 @@ void handle_http_request(const Request& request, dd::Tracer& tracer) {
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://github.com/w3c/trace-context
-[9]: https://github.com/opentracing/opentracing-cpp/#inject-span-context-into-a-textmapwriter
-[10]: https://github.com/opentracing/opentracing-cpp/blob/master/include/opentracing/propagation.h
-[11]: https://github.com/openzipkin/b3-propagation
+[1]: /tracing/trace_collection/trace_context_propagation

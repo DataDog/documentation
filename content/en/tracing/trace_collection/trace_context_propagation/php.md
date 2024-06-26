@@ -13,32 +13,16 @@ further_reading:
       text: 'Interoperability of OpenTelemetry API and Datadog instrumented traces'
 ---
 
-The Datadog APM Tracer supports [B3][7] and [W3C Trace Context][10] headers extraction and injection for distributed tracing.
+This page documents additional use cases of trace context propagation for the Datadog PHP SDK. For a high-level overview of trace context propagation, see [Trace Context Propagation][1].
 
-You can configure injection and extraction styles for distributed headers.
-
-The PHP Tracer supports the following styles:
-
-- Datadog: `datadog`
-- W3C Trace Context: `tracecontext`
-- B3 Multi Header: `b3multi` (`B3` alias is deprecated)
-- B3 Single Header: `B3 single header`
-
-You can use the following environment variables to configure the PHP tracing library injection and extraction styles. For instance:
-
-- `DD_TRACE_PROPAGATION_STYLE_INJECT=datadog,tracecontext,B3 single header`
-- `DD_TRACE_PROPAGATION_STYLE_EXTRACT=datadog,tracecontext,B3 single header`
-
-The environment variable values are comma-separated lists of header styles enabled for injection or extraction. The default style setting is `datadog,tracecontext` (for PHP tracer versions prior to v0.98.0, the default setting is `tracecontext,Datadog`).
-
-If multiple extraction styles are enabled, the extraction attempt is done on the order those styles are configured and first successful extracted value is used.
-
+## Distributed tracing on PHP script launch
 When a new PHP script is launched, the tracer automatically checks for the presence of Datadog headers for distributed tracing:
 - `x-datadog-trace-id` (environment variable: `HTTP_X_DATADOG_TRACE_ID`)
 - `x-datadog-parent-id` (environment variable: `HTTP_X_DATADOG_PARENT_ID`)
 - `x-datadog-origin` (environment variable: `HTTP_X_DATADOG_ORIGIN`)
 - `x-datadog-tags` (environment variable: `HTTP_X_DATADOG_TAGS`)
 
+## Manually setting the distributed tracing context
 To manually set this information in a CLI script on new traces or an existing trace, a function `DDTrace\set_distributed_tracing_context(string $trace_id, string $parent_id, ?string $origin = null, ?array $tags = null)` is provided.
 
 ```php
@@ -105,5 +89,4 @@ Creating this surrounding trace to your consuming-processing logic ensures obser
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[7]: https://github.com/openzipkin/b3-propagation
-[10]: https://www.w3.org/TR/trace-context/#trace-context-http-headers-format
+[1]: /tracing/trace_collection/trace_context_propagation
