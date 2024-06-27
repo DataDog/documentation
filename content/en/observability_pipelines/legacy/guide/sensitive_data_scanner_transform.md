@@ -1,6 +1,5 @@
 ---
 title: (LEGACY) Sensitive Data Scanner Transform
-kind: documentation
 disable_toc: false
 private: true
 is_beta: true

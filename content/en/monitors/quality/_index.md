@@ -1,6 +1,5 @@
 ---
 title: Monitor Quality
-kind: Documentation
 disable_toc: false
 further_reading:
 - link: "https://app.datadoghq.com/monitors/quality"

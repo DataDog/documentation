@@ -1,6 +1,5 @@
 ---
 title: Synthetic Monitoring Data Security
-kind: documentation
 aliases:
     - /synthetics/security/
 further_reading:

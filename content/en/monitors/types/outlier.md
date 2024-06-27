@@ -1,6 +1,5 @@
 ---
 title: Outlier Monitor
-kind: documentation
 aliases:
     - /guides/outliers
     - /monitors/monitor_types/outlier

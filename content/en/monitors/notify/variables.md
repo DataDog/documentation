@@ -1,6 +1,5 @@
 ---
 title: Variables
-kind: documentation
 description: "Use variables to customize your monitor notifications"
 further_reading:
 - link: "/monitors/guide/template-variable-evaluation/"

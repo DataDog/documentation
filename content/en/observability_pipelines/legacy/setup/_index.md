@@ -1,6 +1,5 @@
 ---
 title: (LEGACY) Set Up the Observability Pipelines Worker
-kind: documentation
 type: multi-code-lang
 aliases:
   - /getting_started/observability_pipelines/

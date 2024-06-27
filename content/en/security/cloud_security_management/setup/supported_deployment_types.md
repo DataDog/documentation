@@ -6,10 +6,10 @@ The following table summarizes the CSM features available relative to each deplo
 
 | Deployment type     | Agent Required (7.46+) | CSM Misconfigurations | CSM Threats | CSM Vulnerabilities | CSM Identity Risks | CSM Agentless Scanning |
 |---------------------|------------------------|-----------------------|-------------|---------------------|--------------------|------------------------|
-| AWS Account         |                        | {{< X >}}             |             |                     | {{< X >}}          | beta                   |
+| AWS Account         |                        | {{< X >}}             |             |                     | {{< X >}}          | {{< X >}}              |
 | Azure Account       |                        | {{< X >}}             |             |                     | {{< X >}}          |                        |
 | GCP Account         |                        | {{< X >}}             |             |                     |                    |                        |
-| Terraform           |                        |                       |             |                     |                    | beta                   |
+| Terraform           |                        |                       |             |                     |                    | {{< X >}}              |
 | Docker              | {{< X >}}              | {{< X >}}             | {{< X >}}   |                     |                    |                        |
 | Kubernetes          | {{< X >}}              | {{< X >}}             | {{< X >}}   | {{< X >}}           |                    |                        |
 | Linux               | {{< X >}}              | {{< X >}}             | {{< X >}}   | {{< X >}}           |                    |                        |

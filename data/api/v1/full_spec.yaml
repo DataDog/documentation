@@ -8670,11 +8670,11 @@ components:
           format: double
           type: number
         rum_replay_sessions_percentage:
-          description: The percentage of RUM Replay Sessions usage by tag(s).
+          description: The percentage of RUM Session Replay usage by tag(s).
           format: double
           type: number
         rum_replay_sessions_usage:
-          description: The total RUM Replay Sessions usage by tag(s).
+          description: The total RUM Session Replay usage by tag(s).
           format: double
           type: number
         sds_scanned_bytes_percentage:
@@ -18495,7 +18495,7 @@ components:
       x-enum-varnames:
       - REPORTS
     UsageRumSessionsHour:
-      description: Number of RUM Sessions recorded for each hour for a given organization.
+      description: Number of RUM sessions recorded for each hour for a given organization.
       properties:
         hour:
           description: The hour for the usage.
@@ -18508,46 +18508,46 @@ components:
           description: The organization public ID.
           type: string
         replay_session_count:
-          description: Contains the number of RUM Replay Sessions (data available
+          description: Contains the number of RUM Session Replay counts (data available
             beginning November 1, 2021).
           format: int64
           type: integer
         session_count:
-          description: Contains the number of browser RUM Lite Sessions.
+          description: Contains the number of browser RUM lite Sessions.
           format: int64
           nullable: true
           type: integer
         session_count_android:
-          description: Contains the number of mobile RUM Sessions on Android (data
+          description: Contains the number of mobile RUM sessions on Android (data
             available beginning December 1, 2020).
           format: int64
           nullable: true
           type: integer
         session_count_flutter:
-          description: Contains the number of mobile RUM Sessions on Flutter (data
+          description: Contains the number of mobile RUM sessions on Flutter (data
             available beginning March 1, 2023).
           format: int64
           nullable: true
           type: integer
         session_count_ios:
-          description: Contains the number of mobile RUM Sessions on iOS (data available
+          description: Contains the number of mobile RUM sessions on iOS (data available
             beginning December 1, 2020).
           format: int64
           nullable: true
           type: integer
         session_count_reactnative:
-          description: Contains the number of mobile RUM Sessions on React Native
+          description: Contains the number of mobile RUM sessions on React Native
             (data available beginning May 1, 2022).
           format: int64
           nullable: true
           type: integer
       type: object
     UsageRumSessionsResponse:
-      description: Response containing the number of RUM Sessions for each hour for
+      description: Response containing the number of RUM sessions for each hour for
         a given organization.
       properties:
         usage:
-          description: Get hourly usage for RUM Sessions.
+          description: Get hourly usage for RUM sessions.
           items:
             $ref: '#/components/schemas/UsageRumSessionsHour'
           type: array
@@ -18803,7 +18803,8 @@ components:
         audit_logs_lines_indexed_sum:
           deprecated: true
           description: Shows the sum of audit logs lines indexed over all hours in
-            the current date for all organizations.
+            the current date for all organizations (To be deprecated on October 1st,
+            2024).
           format: int64
           type: integer
         audit_trail_enabled_hwm:
@@ -18841,18 +18842,22 @@ components:
           format: int64
           type: integer
         browser_rum_lite_session_count_sum:
+          deprecated: true
           description: Shows the sum of all browser lite sessions over all hours in
-            the current date for all organizations.
+            the current date for all organizations (To be deprecated on October 1st,
+            2024).
           format: int64
           type: integer
         browser_rum_replay_session_count_sum:
           description: Shows the sum of all browser replay sessions over all hours
-            in the current date for all organizations.
+            in the current date for all organizations (To be deprecated on October
+            1st, 2024).
           format: int64
           type: integer
         browser_rum_units_sum:
+          deprecated: true
           description: Shows the sum of all browser RUM units over all hours in the
-            current date for all organizations.
+            current date for all organizations (To be deprecated on October 1st, 2024).
           format: int64
           type: integer
         ci_pipeline_indexed_spans_sum:
@@ -19128,43 +19133,58 @@ components:
           format: int64
           type: integer
         mobile_rum_lite_session_count_sum:
+          deprecated: true
           description: Shows the sum of all mobile lite sessions over all hours in
-            the current date for all organizations.
+            the current date for all organizations (To be deprecated on October 1st,
+            2024).
           format: int64
           type: integer
         mobile_rum_session_count_android_sum:
-          description: Shows the sum of all mobile RUM Sessions on Android over all
-            hours in the current date for all organizations.
+          deprecated: true
+          description: Shows the sum of all mobile RUM sessions on Android over all
+            hours in the current date for all organizations (To be deprecated on October
+            1st, 2024).
           format: int64
           type: integer
         mobile_rum_session_count_flutter_sum:
-          description: Shows the sum of all mobile RUM Sessions on Flutter over all
-            hours in the current date for all organizations.
+          deprecated: true
+          description: Shows the sum of all mobile RUM sessions on Flutter over all
+            hours in the current date for all organizations (To be deprecated on October
+            1st, 2024).
           format: int64
           type: integer
         mobile_rum_session_count_ios_sum:
-          description: Shows the sum of all mobile RUM Sessions on iOS over all hours
-            in the current date for all organizations.
+          deprecated: true
+          description: Shows the sum of all mobile RUM sessions on iOS over all hours
+            in the current date for all organizations (To be deprecated on October
+            1st, 2024).
           format: int64
           type: integer
         mobile_rum_session_count_reactnative_sum:
-          description: Shows the sum of all mobile RUM Sessions on React Native over
-            all hours in the current date for all organizations.
+          deprecated: true
+          description: Shows the sum of all mobile RUM sessions on React Native over
+            all hours in the current date for all organizations (To be deprecated
+            on October 1st, 2024).
           format: int64
           type: integer
         mobile_rum_session_count_roku_sum:
-          description: Shows the sum of all mobile RUM Sessions on Roku over all hours
-            in the current date for all organizations.
+          deprecated: true
+          description: Shows the sum of all mobile RUM sessions on Roku over all hours
+            in the current date for all organizations (To be deprecated on October
+            1st, 2024).
           format: int64
           type: integer
         mobile_rum_session_count_sum:
-          description: Shows the sum of all mobile RUM Sessions over all hours in
-            the current date for all organizations
+          deprecated: true
+          description: Shows the sum of all mobile RUM sessions over all hours in
+            the current date for all organizations (To be deprecated on October 1st,
+            2024).
           format: int64
           type: integer
         mobile_rum_units_sum:
+          deprecated: true
           description: Shows the sum of all mobile RUM units over all hours in the
-            current date for all organizations.
+            current date for all organizations (To be deprecated on October 1st, 2024).
           format: int64
           type: integer
         ndm_netflow_events_sum:
@@ -19173,8 +19193,10 @@ components:
           format: int64
           type: integer
         netflow_indexed_events_count_sum:
+          deprecated: true
           description: Shows the sum of all Network flows indexed over all hours in
-            the current date for all organizations.
+            the current date for all organizations (To be deprecated on October 1st,
+            2024).
           format: int64
           type: integer
         npm_host_top99p:
@@ -19221,22 +19243,117 @@ components:
           type: integer
         rum_browser_and_mobile_session_count:
           description: Shows the sum of all mobile sessions and all browser lite and
-            legacy sessions over all hours in the current month for all organizations.
+            legacy sessions over all hours in the current month for all organizations
+            (To be deprecated on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_browser_legacy_session_count_sum:
+          description: Shows the sum of all browser RUM legacy sessions over all hours
+            in the current date for all organizations (To be introduced on October
+            1st, 2024).
+          format: int64
+          type: integer
+        rum_browser_lite_session_count_sum:
+          description: Shows the sum of all browser RUM lite sessions over all hours
+            in the current date for all organizations (To be introduced on October
+            1st, 2024).
+          format: int64
+          type: integer
+        rum_browser_replay_session_count_sum:
+          description: Shows the sum of all browser RUM Session Replay counts over
+            all hours in the current date for all organizations (To be introduced
+            on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_lite_session_count_sum:
+          description: Shows the sum of all RUM lite sessions (browser and mobile)
+            over all hours in the current date for all organizations (To be introduced
+            on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_legacy_session_count_android_sum:
+          description: Shows the sum of all mobile RUM legacy sessions on Android
+            over all hours in the current date for all organizations (To be introduced
+            on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_legacy_session_count_flutter_sum:
+          description: Shows the sum of all mobile RUM legacy Sessions on Flutter
+            over all hours in the current date for all organizations (To be introduced
+            on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_legacy_session_count_ios_sum:
+          description: Shows the sum of all mobile RUM legacy sessions on iOS over
+            all hours in the current date for all organizations (To be introduced
+            on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_legacy_session_count_reactnative_sum:
+          description: Shows the sum of all mobile RUM legacy sessions on React Native
+            over all hours in the current date for all organizations (To be introduced
+            on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_legacy_session_count_roku_sum:
+          description: Shows the sum of all mobile RUM legacy sessions on Roku over
+            all hours in the current date for all organizations (To be introduced
+            on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_lite_session_count_android_sum:
+          description: Shows the sum of all mobile RUM lite sessions on Android over
+            all hours in the current date for all organizations (To be introduced
+            on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_lite_session_count_flutter_sum:
+          description: Shows the sum of all mobile RUM lite sessions on Flutter over
+            all hours in the current date for all organizations (To be introduced
+            on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_lite_session_count_ios_sum:
+          description: Shows the sum of all mobile RUM lite sessions on iOS over all
+            hours in the current date for all organizations (To be introduced on October
+            1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_lite_session_count_reactnative_sum:
+          description: Shows the sum of all mobile RUM lite sessions on React Native
+            over all hours in the current date for all organizations (To be introduced
+            on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_lite_session_count_roku_sum:
+          description: Shows the sum of all mobile RUM lite sessions on Roku over
+            all hours in the current date for all organizations (To be introduced
+            on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_replay_session_count_sum:
+          description: Shows the sum of all RUM Session Replay counts over all hours
+            in the current date for all organizations (To be introduced on October
+            1st, 2024).
           format: int64
           type: integer
         rum_session_count_sum:
-          description: Shows the sum of all browser RUM Lite Sessions over all hours
-            in the current date for all organizations
+          deprecated: true
+          description: Shows the sum of all browser RUM lite sessions over all hours
+            in the current date for all organizations (To be deprecated on October
+            1st, 2024).
           format: int64
           type: integer
         rum_total_session_count_sum:
-          description: Shows the sum of RUM Sessions (browser and mobile) over all
+          description: Shows the sum of RUM sessions (browser and mobile) over all
             hours in the current date for all organizations.
           format: int64
           type: integer
         rum_units_sum:
+          deprecated: true
           description: Shows the sum of all browser and mobile RUM units over all
-            hours in the current date for all organizations.
+            hours in the current date for all organizations (To be deprecated on October
+            1st, 2024).
           format: int64
           type: integer
         sds_apm_scanned_bytes_sum:
@@ -19373,7 +19490,8 @@ components:
         audit_logs_lines_indexed_sum:
           deprecated: true
           description: Shows the sum of all audit logs lines indexed over all hours
-            in the current date for the given org.
+            in the current date for the given org (To be deprecated on October 1st,
+            2024).
           format: int64
           type: integer
         audit_trail_enabled_hwm:
@@ -19411,18 +19529,21 @@ components:
           format: int64
           type: integer
         browser_rum_lite_session_count_sum:
+          deprecated: true
           description: Shows the sum of all browser lite sessions over all hours in
-            the current date for the given org.
+            the current date for the given org (To be deprecated on October 1st, 2024).
           format: int64
           type: integer
         browser_rum_replay_session_count_sum:
           description: Shows the sum of all browser replay sessions over all hours
-            in the current date for the given org.
+            in the current date for the given org (To be deprecated on October 1st,
+            2024).
           format: int64
           type: integer
         browser_rum_units_sum:
+          deprecated: true
           description: Shows the sum of all browser RUM units over all hours in the
-            current date for the given org.
+            current date for the given org (To be deprecated on October 1st, 2024).
           format: int64
           type: integer
         ci_pipeline_indexed_spans_sum:
@@ -19682,8 +19803,9 @@ components:
           format: int64
           type: integer
         indexed_events_count_sum:
+          deprecated: true
           description: Shows the sum of all log events indexed over all hours in the
-            current date for the given org.
+            current date for the given org (To be deprecated on October 1st, 2024).
           format: int64
           type: integer
         infra_host_top99p:
@@ -19707,43 +19829,56 @@ components:
           format: int64
           type: integer
         mobile_rum_lite_session_count_sum:
+          deprecated: true
           description: Shows the sum of all mobile lite sessions over all hours in
-            the current date for the given org.
+            the current date for the given org (To be deprecated on October 1st, 2024).
           format: int64
           type: integer
         mobile_rum_session_count_android_sum:
-          description: Shows the sum of all mobile RUM Sessions on Android over all
-            hours in the current date for the given org.
+          deprecated: true
+          description: Shows the sum of all mobile RUM sessions on Android over all
+            hours in the current date for the given org (To be deprecated on October
+            1st, 2024).
           format: int64
           type: integer
         mobile_rum_session_count_flutter_sum:
-          description: Shows the sum of all mobile RUM Sessions on Flutter over all
-            hours in the current date for the given org.
+          deprecated: true
+          description: Shows the sum of all mobile RUM sessions on Flutter over all
+            hours in the current date for the given org (To be deprecated on October
+            1st, 2024).
           format: int64
           type: integer
         mobile_rum_session_count_ios_sum:
-          description: Shows the sum of all mobile RUM Sessions on iOS over all hours
-            in the current date for the given org.
+          deprecated: true
+          description: Shows the sum of all mobile RUM sessions on iOS over all hours
+            in the current date for the given org (To be deprecated on October 1st,
+            2024).
           format: int64
           type: integer
         mobile_rum_session_count_reactnative_sum:
-          description: Shows the sum of all mobile RUM Sessions on React Native over
-            all hours in the current date for the given org.
+          deprecated: true
+          description: Shows the sum of all mobile RUM sessions on React Native over
+            all hours in the current date for the given org (To be deprecated on October
+            1st, 2024).
           format: int64
           type: integer
         mobile_rum_session_count_roku_sum:
-          description: Shows the sum of all mobile RUM Sessions on Roku over all hours
-            in the current date for the given org.
+          deprecated: true
+          description: Shows the sum of all mobile RUM sessions on Roku over all hours
+            in the current date for the given org (To be deprecated on October 1st,
+            2024).
           format: int64
           type: integer
         mobile_rum_session_count_sum:
-          description: Shows the sum of all mobile RUM Sessions over all hours in
-            the current date for the given org.
+          deprecated: true
+          description: Shows the sum of all mobile RUM sessions over all hours in
+            the current date for the given org (To be deprecated on October 1st, 2024).
           format: int64
           type: integer
         mobile_rum_units_sum:
+          deprecated: true
           description: Shows the sum of all mobile RUM units over all hours in the
-            current date for the given org.
+            current date for the given org (To be deprecated on October 1st, 2024).
           format: int64
           type: integer
         name:
@@ -19755,8 +19890,9 @@ components:
           format: int64
           type: integer
         netflow_indexed_events_count_sum:
+          deprecated: true
           description: Shows the sum of all Network flows indexed over all hours in
-            the current date for the given org.
+            the current date for the given org (To be deprecated on October 1st, 2024).
           format: int64
           type: integer
         npm_host_top99p:
@@ -19804,22 +19940,117 @@ components:
           type: string
         rum_browser_and_mobile_session_count:
           description: Shows the sum of all mobile sessions and all browser lite and
-            legacy sessions over all hours in the current date for the given org.
+            legacy sessions over all hours in the current date for the given org (To
+            be deprecated on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_browser_legacy_session_count_sum:
+          description: Shows the sum of all browser RUM legacy sessions over all hours
+            in the current date for the given org (To be introduced on October 1st,
+            2024).
+          format: int64
+          type: integer
+        rum_browser_lite_session_count_sum:
+          description: Shows the sum of all browser RUM lite sessions over all hours
+            in the current date for the given org (To be introduced on October 1st,
+            2024).
+          format: int64
+          type: integer
+        rum_browser_replay_session_count_sum:
+          description: Shows the sum of all browser RUM Session Replay counts over
+            all hours in the current date for the given org (To be introduced on October
+            1st, 2024).
+          format: int64
+          type: integer
+        rum_lite_session_count_sum:
+          description: Shows the sum of all RUM lite sessions (browser and mobile)
+            over all hours in the current date for the given org (To be introduced
+            on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_legacy_session_count_android_sum:
+          description: Shows the sum of all mobile RUM legacy sessions on Android
+            over all hours in the current date for the given org (To be introduced
+            on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_legacy_session_count_flutter_sum:
+          description: Shows the sum of all mobile RUM legacy sessions on Flutter
+            over all hours in the current date for the given org (To be introduced
+            on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_legacy_session_count_ios_sum:
+          description: Shows the sum of all mobile RUM legacy sessions on iOS over
+            all hours in the current date for the given org (To be introduced on October
+            1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_legacy_session_count_reactnative_sum:
+          description: Shows the sum of all mobile RUM legacy sessions on React Native
+            over all hours in the current date for the given org (To be introduced
+            on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_legacy_session_count_roku_sum:
+          description: Shows the sum of all mobile RUM legacy sessions on Roku over
+            all hours in the current date for the given org (To be introduced on October
+            1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_lite_session_count_android_sum:
+          description: Shows the sum of all mobile RUM lite sessions on Android over
+            all hours in the current date for the given org (To be introduced on October
+            1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_lite_session_count_flutter_sum:
+          description: Shows the sum of all mobile RUM lite sessions on Flutter over
+            all hours in the current date for the given org (To be introduced on October
+            1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_lite_session_count_ios_sum:
+          description: Shows the sum of all mobile RUM lite sessions on iOS over all
+            hours in the current date for the given org (To be introduced on October
+            1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_lite_session_count_reactnative_sum:
+          description: Shows the sum of all mobile RUM lite sessions on React Native
+            over all hours in the current date for the given org (To be introduced
+            on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_lite_session_count_roku_sum:
+          description: Shows the sum of all mobile RUM lite sessions on Roku over
+            all hours in the current date for the given org (To be introduced on October
+            1st, 2024).
+          format: int64
+          type: integer
+        rum_replay_session_count_sum:
+          description: Shows the sum of all RUM Session Replay counts over all hours
+            in the current date for the given org (To be introduced on October 1st,
+            2024).
           format: int64
           type: integer
         rum_session_count_sum:
-          description: Shows the sum of all browser RUM Lite Sessions over all hours
-            in the current date for the given org.
+          deprecated: true
+          description: Shows the sum of all browser RUM lite sessions over all hours
+            in the current date for the given org (To be deprecated on October 1st,
+            2024).
           format: int64
           type: integer
         rum_total_session_count_sum:
-          description: Shows the sum of RUM Sessions (browser and mobile) over all
+          description: Shows the sum of RUM sessions (browser and mobile) over all
             hours in the current date for the given org.
           format: int64
           type: integer
         rum_units_sum:
+          deprecated: true
           description: Shows the sum of all browser and mobile RUM units over all
-            hours in the current date for the given org.
+            hours in the current date for the given org (To be deprecated on October
+            1st, 2024).
           format: int64
           type: integer
         sds_apm_scanned_bytes_sum:
@@ -19956,7 +20187,8 @@ components:
         audit_logs_lines_indexed_agg_sum:
           deprecated: true
           description: Shows the sum of all audit logs lines indexed over all hours
-            in the current month for all organizations.
+            in the current month for all organizations (To be deprecated on October
+            1st, 2024).
           format: int64
           type: integer
         audit_trail_enabled_hwm_sum:
@@ -20000,18 +20232,23 @@ components:
           format: int64
           type: integer
         browser_rum_lite_session_count_agg_sum:
+          deprecated: true
           description: Shows the sum of all browser lite sessions over all hours in
-            the current month for all organizations.
+            the current month for all organizations (To be deprecated on October 1st,
+            2024).
           format: int64
           type: integer
         browser_rum_replay_session_count_agg_sum:
           description: Shows the sum of all browser replay sessions over all hours
-            in the current month for all organizations.
+            in the current month for all organizations (To be deprecated on October
+            1st, 2024).
           format: int64
           type: integer
         browser_rum_units_agg_sum:
+          deprecated: true
           description: Shows the sum of all browser RUM units over all hours in the
-            current month for all organizations.
+            current month for all organizations (To be deprecated on October 1st,
+            2024).
           format: int64
           type: integer
         ci_pipeline_indexed_spans_agg_sum:
@@ -20271,8 +20508,10 @@ components:
           format: int64
           type: integer
         indexed_events_count_agg_sum:
+          deprecated: true
           description: Shows the sum of all log events indexed over all hours in the
-            current month for all organizations.
+            current month for all organizations (To be deprecated on October 1st,
+            2024).
           format: int64
           type: integer
         infra_host_top99p_sum:
@@ -20301,9 +20540,9 @@ components:
           format: date-time
           type: string
         live_indexed_events_agg_sum:
+          deprecated: true
           description: Shows the sum of all live logs indexed over all hours in the
-            current month for all organizations (data available as of December 1,
-            2020).
+            current month for all organization (To be deprecated on October 1st, 2024).
           format: int64
           type: integer
         live_ingested_bytes_agg_sum:
@@ -20315,43 +20554,59 @@ components:
         logs_by_retention:
           $ref: '#/components/schemas/LogsByRetention'
         mobile_rum_lite_session_count_agg_sum:
+          deprecated: true
           description: Shows the sum of all mobile lite sessions over all hours in
-            the current month for all organizations.
+            the current month for all organizations (To be deprecated on October 1st,
+            2024).
           format: int64
           type: integer
         mobile_rum_session_count_agg_sum:
-          description: Shows the sum of all mobile RUM Sessions over all hours in
-            the current month for all organizations.
+          deprecated: true
+          description: Shows the sum of all mobile RUM sessions over all hours in
+            the current month for all organizations (To be deprecated on October 1st,
+            2024).
           format: int64
           type: integer
         mobile_rum_session_count_android_agg_sum:
-          description: Shows the sum of all mobile RUM Sessions on Android over all
-            hours in the current month for all organizations.
+          deprecated: true
+          description: Shows the sum of all mobile RUM sessions on Android over all
+            hours in the current month for all organizations (To be deprecated on
+            October 1st, 2024).
           format: int64
           type: integer
         mobile_rum_session_count_flutter_agg_sum:
-          description: Shows the sum of all mobile RUM Sessions on Flutter over all
-            hours in the current month for all organizations.
+          deprecated: true
+          description: Shows the sum of all mobile RUM sessions on Flutter over all
+            hours in the current month for all organizations (To be deprecated on
+            October 1st, 2024).
           format: int64
           type: integer
         mobile_rum_session_count_ios_agg_sum:
-          description: Shows the sum of all mobile RUM Sessions on iOS over all hours
-            in the current month for all organizations.
+          deprecated: true
+          description: Shows the sum of all mobile RUM sessions on iOS over all hours
+            in the current month for all organizations (To be deprecated on October
+            1st, 2024).
           format: int64
           type: integer
         mobile_rum_session_count_reactnative_agg_sum:
-          description: Shows the sum of all mobile RUM Sessions on React Native over
-            all hours in the current month for all organizations.
+          deprecated: true
+          description: Shows the sum of all mobile RUM sessions on React Native over
+            all hours in the current month for all organizations (To be deprecated
+            on October 1st, 2024).
           format: int64
           type: integer
         mobile_rum_session_count_roku_agg_sum:
-          description: Shows the sum of all mobile RUM Sessions on Roku over all hours
-            in the current month for all organizations.
+          deprecated: true
+          description: Shows the sum of all mobile RUM sessions on Roku over all hours
+            in the current month for all organizations (To be deprecated on October
+            1st, 2024).
           format: int64
           type: integer
         mobile_rum_units_agg_sum:
+          deprecated: true
           description: Shows the sum of all mobile RUM units over all hours in the
-            current month for all organizations.
+            current month for all organizations (To be deprecated on October 1st,
+            2024).
           format: int64
           type: integer
         ndm_netflow_events_agg_sum:
@@ -20360,8 +20615,10 @@ components:
           format: int64
           type: integer
         netflow_indexed_events_count_agg_sum:
+          deprecated: true
           description: Shows the sum of all Network flows indexed over all hours in
-            the current month for all organizations.
+            the current month for all organizations (To be deprecated on October 1st,
+            2024).
           format: int64
           type: integer
         npm_host_top99p_sum:
@@ -20407,9 +20664,10 @@ components:
           format: int64
           type: integer
         rehydrated_indexed_events_agg_sum:
+          deprecated: true
           description: Shows the sum of all rehydrated logs indexed over all hours
-            in the current month for all organizations (data available as of December
-            1, 2020).
+            in the current month for all organizations (To be deprecated on October
+            1st, 2024).
           format: int64
           type: integer
         rehydrated_ingested_bytes_agg_sum:
@@ -20420,22 +20678,117 @@ components:
           type: integer
         rum_browser_and_mobile_session_count:
           description: Shows the sum of all mobile sessions and all browser lite and
-            legacy sessions over all hours in the current month for all organizations.
+            legacy sessions over all hours in the current month for all organizations
+            (To be deprecated on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_browser_legacy_session_count_agg_sum:
+          description: Shows the sum of all browser RUM legacy sessions over all hours
+            in the current month for all organizations (To be introduced on October
+            1st, 2024).
+          format: int64
+          type: integer
+        rum_browser_lite_session_count_agg_sum:
+          description: Shows the sum of all browser RUM lite sessions over all hours
+            in the current month for all organizations (To be introduced on October
+            1st, 2024).
+          format: int64
+          type: integer
+        rum_browser_replay_session_count_agg_sum:
+          description: Shows the sum of all browser RUM Session Replay counts over
+            all hours in the current month for all organizations (To be introduced
+            on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_lite_session_count_agg_sum:
+          description: Shows the sum of all RUM lite sessions (browser and mobile)
+            over all hours in the current month for all organizations (To be introduced
+            on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_legacy_session_count_android_agg_sum:
+          description: Shows the sum of all mobile RUM legacy sessions on Android
+            over all hours in the current month for all organizations (To be introduced
+            on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_legacy_session_count_flutter_agg_sum:
+          description: Shows the sum of all mobile RUM legacy sessions on Flutter
+            over all hours in the current month for all organizations (To be introduced
+            on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_legacy_session_count_ios_agg_sum:
+          description: Shows the sum of all mobile RUM legacy sessions on iOS over
+            all hours in the current month for all organizations (To be introduced
+            on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_legacy_session_count_reactnative_agg_sum:
+          description: Shows the sum of all mobile RUM legacy sessions on React Native
+            over all hours in the current month for all organizations (To be introduced
+            on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_legacy_session_count_roku_agg_sum:
+          description: Shows the sum of all mobile RUM legacy sessions on Roku over
+            all hours in the current month for all organizations (To be introduced
+            on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_lite_session_count_android_agg_sum:
+          description: Shows the sum of all mobile RUM lite sessions on Android over
+            all hours in the current month for all organizations (To be introduced
+            on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_lite_session_count_flutter_agg_sum:
+          description: Shows the sum of all mobile RUM lite sessions on Flutter over
+            all hours in the current month for all organizations (To be introduced
+            on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_lite_session_count_ios_agg_sum:
+          description: Shows the sum of all mobile RUM lite sessions on iOS over all
+            hours in the current month for all organizations (To be introduced on
+            October 1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_lite_session_count_reactnative_agg_sum:
+          description: Shows the sum of all mobile RUM lite sessions on React Native
+            over all hours in the current month for all organizations (To be introduced
+            on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_lite_session_count_roku_agg_sum:
+          description: Shows the sum of all mobile RUM lite sessions on Roku over
+            all hours in the current month for all organizations (To be introduced
+            on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_replay_session_count_agg_sum:
+          description: Shows the sum of all RUM Session Replay counts over all hours
+            in the current month for all organizations (To be introduced on October
+            1st, 2024).
           format: int64
           type: integer
         rum_session_count_agg_sum:
-          description: Shows the sum of all browser RUM Lite Sessions over all hours
-            in the current month for all organizations.
+          deprecated: true
+          description: Shows the sum of all browser RUM lite sessions over all hours
+            in the current month for all organizations (To be deprecated on October
+            1st, 2024).
           format: int64
           type: integer
         rum_total_session_count_agg_sum:
-          description: Shows the sum of RUM Sessions (browser and mobile) over all
+          description: Shows the sum of RUM sessions (browser and mobile) over all
             hours in the current month for all organizations.
           format: int64
           type: integer
         rum_units_agg_sum:
+          deprecated: true
           description: Shows the sum of all browser and mobile RUM units over all
-            hours in the current month for all organizations.
+            hours in the current month for all organizations (To be deprecated on
+            October 1st, 2024).
           format: int64
           type: integer
         sds_apm_scanned_bytes_sum:
