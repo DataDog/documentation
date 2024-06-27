@@ -16,7 +16,7 @@ further_reading:
 {{< /site-region >}}
 
 {{< callout url="https://www.datadoghq.com/private-beta/easily-onboard-and-start-monitoring-network-devices-to-datadog/" >}}
-  Device Onboarding is currently in private beta, but you can easily request access! Use this form to submit your request today.
+  Device Onboarding is in private beta. Use this form to request access.
 {{< /callout >}}
 
 ## Overview
