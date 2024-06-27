@@ -189,6 +189,12 @@ To monitor Aurora hosts, install the Datadog Agent in your infrastructure and co
 {{< tabs >}}
 {{% tab "Host" %}}
 
+### Autodiscovery setup (recommended)
+
+The Datadog Agent supports Autodiscovery of all Aurora endpoints in a cluster. Unless you want different configurations for different instances, or want to find and list Aurora endpoints manually, follow the [Autodiscovery setup instructions for Aurora DB clusters][3] instead of the manual setup section below.
+
+### Manual setup
+
 To configure collecting Database Monitoring metrics for an Agent running on a host, for example when you provision a small EC2 instance for the Agent to collect from an Aurora database:
 
 1. Edit the `postgres.d/conf.yaml` file to point to your `host` / `port` and set the masters to monitor. See the [sample postgres.d/conf.yaml][1] for all available configuration options.
@@ -216,12 +222,10 @@ To configure collecting Database Monitoring metrics for an Agent running on a ho
 
 2. [Restart the Agent][2].
 
-**The Datadog Agent supports [Autodiscovery][14] of all Aurora endpoints in a cluster.** 
-
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example
 [2]: /agent/configuration/agent-commands/#start-stop-and-restart-the-agent
-[14]: /database_monitoring/guide/aurora_autodiscovery/?tab=postgres
+[3]: /database_monitoring/guide/aurora_autodiscovery/?tab=postgres
 {{% /tab %}}
 {{% tab "Docker" %}}
 
