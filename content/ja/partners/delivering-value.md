@@ -1,6 +1,5 @@
 ---
 description: Datadog にデータを流した後の推奨ステップ。
-kind: documentation
 private: true
 title: 価値の提供
 ---

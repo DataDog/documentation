@@ -1,6 +1,5 @@
 ---
 title: Log Volume Control for Splunk Heavy and Universal Forwarders (TCP)
-kind: document
 disable_toc: false
 ---
 

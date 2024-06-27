@@ -1,6 +1,5 @@
 ---
 title: Anomaly Monitor
-kind: documentation
 aliases:
     - /guides/anomalies
     - /monitors/monitor_types/anomaly

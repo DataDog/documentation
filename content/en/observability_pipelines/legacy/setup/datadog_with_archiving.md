@@ -1,6 +1,5 @@
 ---
 title: (LEGACY) Set Up Observability Pipelines to Send Logs in Datadog-Rehydratable Format to Amazon S3 and Datadog
-kind: Documentation
 aliases:
   - /observability_pipelines/setup/datadog_with_archiving/
 further_reading:

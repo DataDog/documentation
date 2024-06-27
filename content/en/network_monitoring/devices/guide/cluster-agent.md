@@ -1,6 +1,5 @@
 ---
 title: Network Device Monitoring with the Cluster Agent
-kind: guide
 aliases:
     - /network_performance_monitoring/devices/guide/cluster-agent/
 further_reading:

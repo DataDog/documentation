@@ -16,7 +16,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/ruby-profiling-datadog-continuous-profiler/
   tag: Blog
   text: Analyser les performances de code Ruby avec le profileur en continu Datadog
-kind: Documentation
 title: Activer le profileur Ruby
 type: multi-code-lang
 ---

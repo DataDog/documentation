@@ -17,7 +17,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/automate-security-tasks-with-workflows-and-cloud-siem/
   tag: 블로그
   text: Datadog 워크플로 및 Cloud SIEM으로 일반적인 보안 작업을 자동화하고 위협에 대비하세요.
-kind: 설명서
 title: 노트북
 ---
 

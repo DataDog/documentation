@@ -6,7 +6,6 @@ further_reading:
 - link: /continuous_testing/explorer
   tag: 설명서
   text: 신서틱 모니터링 및 연속 테스트 탐색기에 대해 알아보기
-kind: 설명서
 title: 검색 테스트 배치
 ---
 

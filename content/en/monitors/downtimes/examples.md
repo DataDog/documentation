@@ -1,6 +1,5 @@
 ---
 title: Examples
-kind: Documentation
 aliases:
 - /monitors/guide/suppress-alert-with-downtimes
 further_reading:

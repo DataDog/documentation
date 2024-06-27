@@ -1,6 +1,5 @@
 ---
 title: Network Monitor
-kind: documentation
 description: "Check the status of TCP/HTTP endpoints."
 aliases:
 - /monitors/monitor_types/network

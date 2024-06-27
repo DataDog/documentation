@@ -1,6 +1,5 @@
 ---
 title: Historical Metrics Ingestion
-kind: documentation
 further_reading:
 - link: "https://www.datadoghq.com/blog/historical-metrics/"
   tag: "Blog"
