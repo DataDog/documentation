@@ -20,7 +20,7 @@
             front_matters:
               dependencies: ["https://github.com/jenkinsci/datadog-plugin/blob/master/README.md"]
               public_title: Datadog-Jenkins Integration
-              kind: integration
+              custom_kind: integration
               name: jenkins
               is_public: true
               integration_title: Jenkins
