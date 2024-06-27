@@ -70,17 +70,20 @@ paths:
 
 ### Add API metadata from a GitHub repository
 
-Use the Datadog GitHub integration to import API definitions and keep them synchronized. Once a file is connected, the created API will automatically update once the file content is changed in the repository. 
+Use the Datadog GitHub integration to import API definitions and keep them updated. After connecting, the API automatically updates whenever the file content changes in the repository.
 
-To import and OpenAPI/Swagger file using the GitHub integration:
-1. Make sure the GitHub integration is enabled, and that a GitHub app is configured.
-1. Go to the Catalog page.
-1. Click Add API.
-1. Select GitHub.
+To import an OpenAPI or Swagger file using the GitHub integration:
+1. Set up the [Datadog GitHub integration][1].
+1. Navigate to the [API Catalog][2] in Datadog.
+1. Click on the **Manage** tab, and select **Add API**.
+1. Select **GitHub**.
 1. Choose the repository and the file you want to register.
-1. Click Create.
+1. Select Create.
 
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /integrations/github/
+[2]: https://app.datadoghq.com/apis/catalog
