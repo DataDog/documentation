@@ -31,19 +31,20 @@ When writing your application, you can enable development logs by setting the `v
 Datadog.verbosityLevel = .debug
 ```
 
-If all goes well you should see output similar to this saying that a batch of RUM data was properly uploaded:
+You should then see an output similar to the below, indicating that a batch of RUM data was properly uploaded:
 ```
 [DATADOG SDK] 🐶 → 17:23:09.849 [DEBUG] ⏳ (rum) Uploading batch...
 [DATADOG SDK] 🐶 → 17:23:10.972 [DEBUG]    → (rum) accepted, won't be retransmitted: success
 ```
 
-**Recommendation:** Use `Datadog.verbosityLevel` in `DEBUG` configuration, and unset it in `RELEASE`.
+**Recommendation:** Use `Datadog.verbosityLevel` in the `DEBUG` configuration, and unset it in `RELEASE`.
 
 ## Using `DDURLSessionDelegate` with your own session delegate
 
 If you want to [automatically track network requests][2] with `DDURLSessionDelegate` but your app already implements its own session delegate, you can use either _inheritance_ or _composition_ patterns and forward calls to `DDURLSessionDelegate`.
 
-When using _inheritance_, use `DDURLSessionDelegate` as a base class for your custom delegate and make sure to call the `super` implementation from your overridden methods. For example:
+When using an _inheritance_ pattern, use `DDURLSessionDelegate` as a base class for your custom delegate and make sure to call the `super` implementation from your overridden methods. For example:
+
 ```swift
 class YourCustomDelegateURLSessionDelegate: DDURLSessionDelegate {
     override func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
@@ -53,7 +54,8 @@ class YourCustomDelegateURLSessionDelegate: DDURLSessionDelegate {
 }
 ```
 
-When using _composition_, leverage Datadog's `__URLSessionDelegateProviding` protocol to keep an internal instance of `DDURLSessionDelegate` and forward calls to `ddURLSessionDelegate`. For example:
+When using a _composition_ pattern, leverage Datadog's `__URLSessionDelegateProviding` protocol to keep an internal instance of `DDURLSessionDelegate` and forward calls to `ddURLSessionDelegate`. For example:
+
 ```swift
 private class YourCustomDelegateURLSessionDelegate: NSObject, URLSessionTaskDelegate, URLSessionDataDelegate, __URLSessionDelegateProviding {
     // MARK: - __URLSessionDelegateProviding conformance

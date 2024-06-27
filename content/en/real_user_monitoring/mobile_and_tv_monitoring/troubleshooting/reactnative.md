@@ -60,15 +60,22 @@ You cannot send events before initialization, and attempting to do so puts the S
 
 #### Solution
 
-With **`DdSdkReactNative.initialize`**:
+{{< tabs >}}
+{{% tab "DdSdkReactNative.initialize" %}}
 
 If you use `DdSdkReactNative.initialize` to start the Datadog SDK, call this function in your top-level `index.js` file so that the SDK is initialized before your other events are sent.
 
-With **`DatadogProvider`**:
+{{% /tab %}}
+{{% tab "DatadogProvider" %}}
 
 Starting from SDK version `1.2.0`, you can initialize the SDK using the `DatadogProvider` component. This component includes a RUM events buffer that makes sure the SDK is initialized before sending any data to Datadog, which prevents this issue from happening.
 
-To use it, see the [Migrate to the Datadog Provider guide][2].
+To use it, see the [Migrate to the Datadog Provider guide][1].
+
+[1]: https://github.com/DataDog/dd-sdk-reactnative/blob/develop/docs/migrating_to_datadog_provider.md
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Review native logs
 
@@ -103,21 +110,29 @@ If you see the log below, it means that you have called a RUM method before init
 
 ##### Solution
 
-With **`DdSdkReactNative.initialize`**:
+{{< tabs >}}
+{{% tab "DdSdkReactNative.initialize" %}}
 
 If you use `DdSdkReactNative.initialize` to start the Datadog SDK, call this function in your top-level `index.js` file so the SDK is initialized before your other events are sent.
 
-With **`DatadogProvider`**:
+{{% /tab %}}
+{{% tab "DatadogProvider" %}}
 
 Starting from SDK version `1.2.0`, you can initialize the SDK using the `DatadogProvider` component. This component includes a RUM events buffer that makes sure the SDK is initialized before sending any data to Datadog, which prevents this issue from happening.
 
-To use it, see the [Migrate to the Datadog Provider guide][2].
+To use it, see the [Migrate to the Datadog Provider guide][1].
+
+
+[1]: https://github.com/DataDog/dd-sdk-reactnative/blob/develop/docs/migrating_to_datadog_provider.md
+
+{{% /tab %}}
+{{< /tabs >}}
 
 #### On Android
 
-- For a better debugging experience, Datadog recommends installing [pidcat][3].
+- For a better debugging experience, Datadog recommends installing [pidcat][2].
   - pidcat filters the device logs (obtained by `adb logcat`) to only show the one from your application.
-  - See [this issue][4] for M1 users who don't have Python 2.
+  - See [this issue][3] for M1 users who don't have Python 2.
 - Modify `node_modules/@datadog/mobile-react-native/android/src/main/kotlin/com/datadog/reactnative/DdSdk.kt` to enable verbose logging from the native SDK:
 
   ```java
@@ -164,7 +179,7 @@ LIBRARY_SEARCH_PATHS = (
 
 ## Undefined symbols: _RCTModule
 
-If you see an undefined _RCTModule symbol, it may be related to this change in the [react-native v0.63 changelog][5].
+If you see an undefined _RCTModule symbol, it may be related to this change in the [react-native v0.63 changelog][4].
 
 You can make the following change to fix it:
 
@@ -272,8 +287,7 @@ dependencies {
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /help
-[2]: https://github.com/DataDog/dd-sdk-reactnative/blob/develop/docs/migrating_to_datadog_provider.md
-[3]: https://github.com/JakeWharton/pidcat
-[4]: https://github.com/JakeWharton/pidcat/issues/180#issuecomment-1124019329
-[5]: https://github.com/facebook/react-native/commit/6e08f84719c47985e80123c72686d7a1c89b72ed
-[6]: https://github.com/facebook/react-native/issues/28801
+[2]: https://github.com/JakeWharton/pidcat
+[3]: https://github.com/JakeWharton/pidcat/issues/180#issuecomment-1124019329
+[4]: https://github.com/facebook/react-native/commit/6e08f84719c47985e80123c72686d7a1c89b72ed
+[5]: https://github.com/facebook/react-native/issues/28801
