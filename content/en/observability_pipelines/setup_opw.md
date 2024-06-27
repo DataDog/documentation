@@ -25,7 +25,7 @@ further_reading:
 
 ## Overview
 
-<div class="alert alert-warning">All configuration file paths specified in the pipeline need to be under <code>DD_OP_DATA_DIR/config</code>. 
+<div class="alert alert-warning">All configuration file paths specified in the pipeline need to be under <code>DD_OP_DATA_DIR/config</code>.
 Modifying files under that location while OPW is running might have adverse effects.
 </div>
 
@@ -61,6 +61,12 @@ To set bootstrap options, do one of the following:
 `threads`
 : env var: `DD_OP_THREADS`
 : The number of threads to use for processing (optional, default: the number of available cores).
+
+`proxy`
+: env variables: `DD_HTTP_PROXY`, `DD_HTTPS_PROXY`
+: Set proxy servers for the Worker.
+: For example:
+: &nbsp;&nbsp;&nbsp;&nbsp;proxy:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;enabled: true<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;https: https://foo.bar:3128
 
 ## Further reading
 
