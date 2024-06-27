@@ -360,7 +360,7 @@ metadata:
           "host": "<AWS_INSTANCE_ENDPOINT>",
           "port": 5432,
           "username": "datadog",
-          "password": "<UNIQUEPASSWORD>"
+          "password": "<UNIQUE_PASSWORD>"
         }
       ]
 spec:
@@ -371,6 +371,37 @@ spec:
     name: postgres
 ```
 <div class="alert alert-warning"><strong>Important</strong>: Use the Aurora instance endpoint here, not the Aurora cluster endpoint.</div>
+
+To configure more than one instance, you can use the format below:
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    ad.datadoghq.com/service.checks: |
+    { 
+      "postgres": 
+      { "instances": 
+        [ 
+          { 
+            "dbm":true, 
+            "host":"your-host-1.us-east-2.rds.amazonaws.com", 
+            "password":"<UNIQUE_PASSWORD>", 
+            "port":5432, 
+            "username":"<USERNAME>" 
+          }, 
+          { 
+            "dbm":true, 
+            "host":"your-host-2.us-east-2.rds.amazonaws.com", 
+            "password":"<UNIQUE_PASSWORD>", 
+            "port":5432, 
+            "username": "<USERNAME>" 
+          } 
+        ] 
+      } 
+    }
+```
 
 For Postgres 9.6, add the following settings to the instance config where host and port are specified:
 
