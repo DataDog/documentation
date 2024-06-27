@@ -29,7 +29,7 @@ title: Amazon ECS
 아마존 ECS는 도커(Docker) 컨테이너를 지원하며 확장성과 성능이 뛰어난 컨테이너 오케스트레이션 서비스입니다. Datadog Agent와 함께 사용하면 클러스터 내 모든 EC2 인스턴스의 ECS 컨테이너와 작업을 모니터링할 수 있습니다.
 
 <div class="alert alert-info">
-Fargate에서 <strong>ECS를 모니터링하려면</strong>, <a href="/integrations/ecs_fargate/">AWS Fargate 기반 Amazon ECS</a>를 참조하세요.  
+Fargate에서 <strong>ECS를 모니터링하려면</strong>, <a href="/integrations/ecs_fargate/">AWS Fargate 기반 Amazon ECS</a>를 참조하세요.
 </div>
 
 ## 설정
@@ -64,7 +64,7 @@ ECS 컨테이너 및 작업을 모니터링하려면 Datadog 에이전트를 ECS
     - `DD_SITE` 환경 변수를 [Datadog 사이트][13]로 설정합니다. 귀하의 사이트는 {{< region-param key="dd_site" code="true" >}}입니다.
 
       <div class="alert alert-info">
-      If <code>DD_SITE</code> is not set, it defaults to the <code>US1</code> site, <code>datadoghq.com</code>. 
+      If <code>DD_SITE</code> is not set, it defaults to the <code>US1</code> site, <code>datadoghq.com</code>.
       </div>
     - 선택적으로 `DD_TAGS` 환경 변수를 추가하여 태그 을 추가로 지정합니다.
 
@@ -201,7 +201,7 @@ EC2 인스턴스의 보안 그룹 설정이 APM 및 DogStatsD의 포트를 공�
 }
 {{< /highlight >}}
 
-#### 네트워크 성능 모니터링 
+#### 네트워크 성능 모니터링
 
 <div class="alert alert-warning">
 이 기능은 리눅스에서만 사용할 수 있습니다.
@@ -285,7 +285,7 @@ Agent v6.10+인 경우 호스트 인스턴스의 보안 그룹이 관련 포트�
      (...)
           {
             "name": "fips-proxy",
-            "image": "datadog/fips-proxy:1.1.2",
+            "image": "datadog/fips-proxy:1.1.3",
             "portMappings": [
                 {
                     "containerPort": 9803,

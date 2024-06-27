@@ -49,7 +49,7 @@ Si no tienes un clúster de EC2 Container Service en funcionamiento, consulta la
 
 ### Crear una tarea de ECS
 
-La definición de tarea inicia el contenedor del Datadog Agent con las configuraciones necesarias. Cuando necesites modificar la configuración del Agent, actualiza esta definición de tarea y vuelve a implementar el servicio daemon como resulte necesario. Puedes configurar la definición de tarea utilizando las [herramientas de interfaz de línea de comandos de AWS][9] o la consola web de Amazon. 
+La definición de tarea inicia el contenedor del Datadog Agent con las configuraciones necesarias. Cuando necesites modificar la configuración del Agent, actualiza esta definición de tarea y vuelve a implementar el servicio daemon como resulte necesario. Puedes configurar la definición de tarea utilizando las [herramientas de interfaz de línea de comandos de AWS][9] o la consola web de Amazon.
 
 El siguiente ejemplo es una configuración mínima para la monitorización de inraestructuras básicas, aunque también tienes más ejemplos de definiciones de tareas con varias funciones activadas en la sección [Configurar las funciones adicionales del Agent](#setup-additional-agent-features) por si quieres usarlas en su lugar.
 
@@ -57,11 +57,11 @@ El siguiente ejemplo es una configuración mínima para la monitorización de in
 
 1. Para contenedores Linux, descarga [datadog-agent-ecs.json][20]
     1. Si vas a usar una AMI de Amazon Linux 1, utiliza [datadog-agent-ecs1.json][21]
-    2. Si usas Windows, utiliza [datadog-agent-ecs-win.json][22] 
+    2. Si usas Windows, utiliza [datadog-agent-ecs-win.json][22]
 
 2. Editar tu archivo de definición de tarea de base
     1. Configura `<YOUR_DATADOG_API_KEY>` con la [clave de API de Datadog][14] para tu cuenta.
-    2. Configura la variable de entorno `DD_SITE` en {{< region-param key="dd_site" code="true" >}} 
+    2. Configura la variable de entorno `DD_SITE` en {{< region-param key="dd_site" code="true" >}}
 
         **Nota**: Si la variable de entorno `DD_SITE` no está configurada explícitamente, se establece de forma predeterminada en el sitio `US` de `datadoghq.com`. Si usas alguno de los otros sitios (`EU`, `US3` o `US1-FED`) y no la configuras, se genera un mensaje de clave de API no válida. Utiliza el [selector de sitio de documentación][13] para ver la documentación correspondiente al sitio que estés usando.
 
@@ -238,7 +238,7 @@ Para enviar datos al centro de datos GOVCLOUD de Datadog, añade el contenedor l
      (...)
           {
             "name": "fips-proxy",
-            "image": "datadog/fips-proxy:1.1.2",
+            "image": "datadog/fips-proxy:1.1.3",
             "portMappings": [
                 {
                     "containerPort": 9803,
