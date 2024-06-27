@@ -34,21 +34,81 @@ The available commands for the Datadog Cluster Agents are:
 `datadog-cluster-agent flare <CASE_ID>`     
 : Similarly to the node-based Agent, the Cluster Agent can aggregate the logs and the configurations used and forward an archive to the support team, or be deflated and used locally. **Note**: this command runs from within the Cluster Agent pod.
 
-## Cluster Agent options
+## Cluster Agent environment variables
+
+{{< tabs >}}
+{{% tab "Datadog Operator" %}}
+Set Cluster Agent environment variables under `override.clusterAgent.env`:
+
+{{< code-block lang="yaml" filename="datadog-agent.yaml" >}}
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  override:
+    clusterAgent:
+      env:
+        - name: <ENV_VAR_NAME>
+          value: <ENV_VAR_VALUE>
+{{< /code-block >}}
+
+{{% /tab %}}
+{{% tab "Helm" %}}
+Set Cluster Agent environment variables under `clusterAgent.env`:
+{{< code-block lang="yaml" filename="datadog-values.yaml" >}}
+clusterAgent:
+  env:
+    - name: <ENV_VAR_NAME>
+      value: <ENV_VAR_VALUE>
+{{< /code-block >}}
+
+{{% /tab %}}
+{{< /tabs >}}
 
 The following environment variables are supported:
 
 `DD_API_KEY`                                  
 : Your [Datadog API key][1].
 
+`DD_CLUSTER_CHECKS_ENABLED`                   
+: Enable Cluster Check Autodiscovery. Defaults to `false`.
+
+`DD_CLUSTER_AGENT_AUTH_TOKEN`                 
+: 32-character token that needs to be shared between the node Agent and the Datadog Cluster Agent.
+
+`DD_CLUSTER_AGENT_KUBERNETES_SERVICE_NAME`    
+: Name of the Kubernetes service through which Cluster Agents are exposed. Defaults to `datadog-cluster-agent`.
+
+`DD_CLUSTER_NAME`                             
+: Cluster name. Added as an instance tag to all cluster check configurations.
+
+`DD_CLUSTER_CHECKS_ENABLED`
+: When true, enables dispatching logic on the leader Cluster Agent. Default: `false`.
+
+`DD_CLUSTER_CHECKS_NODE_EXPIRATION_TIMEOUT`   
+: Time (in seconds) after which node-based Agents are considered down and removed from the pool. Defaults to `30` seconds.
+
+`DD_CLUSTER_CHECKS_WARMUP_DURATION`           
+: Delay (in seconds) between acquiring leadership and starting the Cluster Checks logic, allowing for all node-based Agents to register first. Default is `30` seconds.
+
+`DD_CLUSTER_CHECKS_CLUSTER_TAG_NAME`          
+: Name of the instance tag set with the `DD_CLUSTER_NAME` option. Defaults to `cluster_name`.
+
+`DD_CLUSTER_CHECKS_EXTRA_TAGS`                
+: Adds extra tags to cluster check metrics.
+
+`DD_CLUSTER_CHECKS_ADVANCED_DISPATCHING_ENABLED`
+: When true, the leader Cluster Agent collects stats from the cluster-level check runners to optimize check dispatching logic. Default: `false`.
+
+`DD_CLUSTER_CHECKS_CLC_RUNNERS_PORT`
+: The port used by the Cluster Agent client to reach cluster-level check runners and collect their stats. Default: `5005`.
+
 `DD_HOSTNAME`                                 
 : Hostname to use for the Datadog Cluster Agent.
 
 `DD_ENV`                                      
 : Sets the `env` tag for data emitted by the Cluster Agent. Recommended only if the Cluster Agent monitors services within a single environment.
-
-`DD_CLUSTER_AGENT_CMD_PORT`                   
-: Port for the Datadog Cluster Agent to serve. Defaults to `5005`.
 
 `DD_USE_METADATA_MAPPER`                      
 : Enables cluster level metadata mapping. Defaults to `true`.
@@ -62,14 +122,8 @@ The following environment variables are supported:
 `DD_LEADER_LEASE_DURATION`                    
 : Used only if leader election is activated. Value in seconds, 60 by default.
 
-`DD_CLUSTER_AGENT_AUTH_TOKEN`                 
-: 32 characters long token that needs to be shared between the node Agent and the Datadog Cluster Agent.
-
 `DD_KUBE_RESOURCES_NAMESPACE`                 
 : Configures the namespace where the Cluster Agent creates the configmaps required for the leader election, event collection (optional), and horizontal pod autoscaling.
-
-`DD_CLUSTER_AGENT_KUBERNETES_SERVICE_NAME`    
-: Name of the Kubernetes service through which Cluster Agents are exposed. Defaults to `datadog-cluster-agent`.
 
 `DD_KUBERNETES_INFORMERS_RESYNC_PERIOD`       
 : Frequency (in seconds) for querying the API server to resync the local cache. The default is 5 minutes, or `300` seconds.
@@ -95,29 +149,11 @@ The following environment variables are supported:
 `DD_EXTERNAL_METRICS_LOCAL_COPY_REFRESH_RATE` 
 : Rate to resync local cache of processed metrics with the global store. Useful when there are several replicas of the Cluster Agent.
 
-`DD_CLUSTER_CHECKS_ENABLED`                   
-: Enable Cluster Check Autodiscovery. Defaults to `false`.
-
 `DD_EXTRA_CONFIG_PROVIDERS`                   
 : Additional Autodiscovery configuration providers to use.
 
 `DD_EXTRA_LISTENERS`                          
 : Additional Autodiscovery listeners to run.
-
-`DD_CLUSTER_NAME`                             
-: Cluster name. Added as an instance tag to all cluster check configurations.
-
-`DD_CLUSTER_CHECKS_CLUSTER_TAG_NAME`          
-: Name of the instance tag set with the `DD_CLUSTER_NAME` option. Defaults to `cluster_name`.
-
-`DD_CLUSTER_CHECKS_NODE_EXPIRATION_TIMEOUT`   
-: Time (in seconds) after which node-based Agents are considered down and removed from the pool. Defaults to `30` seconds.
-
-`DD_CLUSTER_CHECKS_WARMUP_DURATION`           
-: Delay (in seconds) between acquiring leadership and starting the Cluster Checks logic, allowing for all node-based Agents to register first. Default is `30` seconds.
-
-`DD_CLUSTER_CHECKS_EXTRA_TAGS`                
-: Adds extra tags to cluster checks metrics.
 
 `DD_PROXY_HTTPS`                
 : Sets a proxy server for HTTPS requests.

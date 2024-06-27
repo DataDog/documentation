@@ -30,6 +30,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/npm-story-centric-ux/
   tag: 블로그
   text: NPM의 스토리 중심 UX를 통한 퀵스타트 네트워크 조사
+- link: https://www.datadoghq.com/blog/monitor-dns-logs-for-network-and-security-datadog/
+  tag: 블로그
+  text: 네트워크 및 보안 분석에 대한 DNS 모니터링
 title: 네트워크 성능 모니터링
 ---
 

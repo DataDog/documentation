@@ -60,7 +60,7 @@ Requires `dd-trace-py` version 0.44.0+.
 
 Code Hotspots identification is enabled by default when you [turn on profiling for your Ruby service][1].
 
-The new [timeline feature](#span-execution-timeline-view) (beta) is enabled by default in `dd-trace-rb` 1.21.1+.
+The new [timeline feature](#span-execution-timeline-view) is enabled by default in `dd-trace-rb` 1.21.1+.
 
 To additionally enable showing [GC in timeline](#span-execution-timeline-view):
 - set `DD_PROFILING_FORCE_ENABLE_GC=true`
@@ -73,7 +73,7 @@ Code Hotspots identification is enabled by default when you [turn on profiling f
 
 Requires `dd-trace-js` version 5.0.0+, 4.24.0+ or 3.45.0+.
 
-The new [timeline feature](#span-execution-timeline-view) (beta) is enabled by default in `dd-trace-js` 5.11.0+, 4.35.0+, and 3.56.0+.
+The new [timeline feature](#span-execution-timeline-view) is enabled by default in `dd-trace-js` 5.11.0+, 4.35.0+, and 3.56.0+.
 
 [1]: /profiler/enabling/nodejs
 {{< /programming-lang >}}
@@ -81,7 +81,7 @@ The new [timeline feature](#span-execution-timeline-view) (beta) is enabled by d
 
 Code Hotspots identification is enabled by default when you [turn on profiling for your Go service][1].
 
-To enable the new [timeline feature](#span-execution-timeline-view) (beta), set the environment variables below:
+To enable the new [timeline feature](#span-execution-timeline-view), set the environment variables below:
 
 ```go
 os.Setenv("DD_PROFILING_EXECUTION_TRACE_ENABLED", "true")
@@ -97,7 +97,7 @@ You can find this data:
 
 While recording execution traces, your application may observe an increase in CPU usage similar to a garbage collection. Although this should not have a significant impact for most applications, Go 1.21 includes [patches][7] to eliminate this overhead.
 
-This capability requires `dd-trace-go` version 1.37.0+ (1.52.0+ for timeline beta) and works best with Go version 1.18 or later (1.21 or later for timeline beta).
+This capability requires `dd-trace-go` version 1.37.0+ (1.52.0+ for timeline view) and works best with Go version 1.18 or later (1.21 or later for timeline view).
 
 [1]: /profiler/enabling/go
 [2]: https://github.com/DataDog/dd-trace-go/issues/2099
@@ -121,7 +121,7 @@ Code Hotspots identification is enabled by default when you [turn on profiling f
 
 Requires `dd-trace-php` version 0.71+.
 
-To enable the [timeline feature](#span-execution-timeline-view) (beta):
+To enable the [timeline feature](#span-execution-timeline-view):
 - Upgrade to `dd-trace-php` version 0.98+.
 - Set the environment variable `DD_PROFILING_TIMELINE_ENABLED=1` or INI setting `datadog.profiling.timeline_enabled=1`
 

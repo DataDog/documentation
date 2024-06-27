@@ -283,6 +283,35 @@
               aliases:
               - /serverless/serverless_integrations/plugin
 
+      - repo_name: synthetics-test-automation-bitrise-step-upload-application
+        contents:
+        - action: pull-and-push-file
+          branch: main
+          globs:
+          - 'README.md'
+          options:
+            dest_path: '/continuous_testing/cicd_integrations/'
+            file_name: 'bitrise_upload.md'
+            front_matters:
+              dependencies: ["https://github.com/DataDog/synthetics-test-automation-bitrise-step-upload-application/blob/main/README.md"]
+              title: Continuous Testing and Bitrise
+              kind: documentation
+      
+      - repo_name: synthetics-test-automation-bitrise-step-run-tests
+        contents:
+        - action: pull-and-push-file
+          branch: main
+          globs:
+          - 'README.md'
+          options:
+            dest_path: '/continuous_testing/cicd_integrations/'
+            file_name: 'bitrise_run.md'
+            front_matters:
+              dependencies: ["https://github.com/DataDog/synthetics-test-automation-bitrise-step-run-tests/blob/main/README.md"]
+              title: Continuous Testing and Bitrise
+              kind: documentation
+
+
       - repo_name: datadog-cloudformation-macro
         contents:
         - action: pull-and-push-file
@@ -354,7 +383,6 @@
             front_matters:
               dependencies: ["https://github.com/DataDog/datadog-static-analyzer-circleci-orb/blob/main/README.md"]
               title: Static Analysis and CircleCI Orbs
-              kind: documentation
               description: Use Datadog and CircleCI to run Static Analysis jobs in a CI pipeline.
               aliases:
               - /continuous_integration/static_analysis/circleci_orbs
@@ -372,7 +400,6 @@
             front_matters:
               dependencies: ["https://github.com/DataDog/datadog-static-analyzer-github-action/blob/main/README.md"]
               title: Static Analysis and GitHub Actions
-              kind: documentation
               description: Use Datadog and GitHub to run Static Analysis jobs in a CI pipeline.
               aliases:
               - /continuous_integration/static_analysis/github_actions
@@ -390,7 +417,6 @@
             front_matters:
               dependencies: ["https://github.com/DataDog/datadog-sca-github-action/blob/main/README.md"]
               title: Software Composition Analysis and GitHub Actions
-              kind: documentation
               description: Use Datadog and GitHub to run Software Composition Analysis jobs in a CI pipeline.
 
       - repo_name: datadog-static-analyzer-rule-docs

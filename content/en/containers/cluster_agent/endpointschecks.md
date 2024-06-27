@@ -81,7 +81,7 @@ By design, endpoint checks are dispatched to Agents that run on the same node as
 ## Set up endpoint check dispatching
 
 {{< tabs >}}
-{{% tab "Operator" %}}
+{{% tab "Datadog Operator" %}}
 
 Endpoint check dispatching is enabled in the Operator deployment of the Cluster Agent by using the `features.clusterChecks.enabled` configuration key:
 ```yaml
@@ -177,6 +177,30 @@ In Cluster Agent v1.18.0+, you can use `advanced_ad_identifiers` and [Autodiscov
 To perform an [HTTP check][9] against the endpoints of a Kubernetes service,
 
 {{< tabs >}}
+{{% tab "Datadog Operator" %}}
+
+Use the `spec.override.clusterAgent.extraConfd.configDataMap` section to define your check configuration:
+
+```yaml
+spec:
+#(...)
+  override:
+    clusterAgent:
+      extraConfd:
+        configDataMap:
+          <INTEGRATION_NAME>.yaml: |-
+            advanced_ad_identifiers:
+              - kube_endpoints:
+                  name: "<ENDPOINTS_NAME>"
+                  namespace: "<ENDPOINTS_NAMESPACE>"
+            cluster_check: true
+            init_config:
+            instances:
+              - url: "http://%%host%%"
+                name: "<EXAMPLE_NAME>"
+```
+
+{{% /tab %}}
 {{% tab "Helm" %}}
 Use the `clusterAgent.confd` field to define your check configuration:
 

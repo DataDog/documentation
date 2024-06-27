@@ -49,7 +49,7 @@ Advanced search lets you filter monitors by any combination of monitor attribute
 | Type         | The Datadog [monitor type][4]                                                                   |
 | Creator      | The creator of the monitor                                                                      |
 | Service      | Service tags used by you in the form `service:<VALUE>`.                                         |
-| Tag          | The [tags](#monitor-tags) assigned to the monitor                                               |
+| Tag          | The [tags][5] assigned to the monitor                                               |
 | Env          | Environment tags used by you in the form `env:<VALUE>`.                                         |
 | Scope        | Search tags listed in the `from` field of your monitor query.                                   |
 | Metric/Check | The metric or service check being monitored                                                     |
@@ -96,3 +96,4 @@ From the default view entry in the Views panel:
 [2]: https://www.elastic.co/guide/en/elasticsearch/reference/2.4/query-dsl-query-string-query.html#query-string-syntax
 [3]: https://www.elastic.co/guide/en/elasticsearch/reference/2.4/query-dsl-query-string-query.html#_fuzziness
 [4]: /monitors/
+[5]: /monitors/manage/#monitor-tags

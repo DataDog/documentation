@@ -141,7 +141,7 @@ See the documentation for [process check][1], [integration check][2], and [custo
 
 
 [1]: /monitors/types/process_check/
-[2]: /monitors/types/integration/?tab=checkalert#integration-status
+[2]: /monitors/types/integration/?tab=checkalert#integration-metric
 [3]: /monitors/types/custom_check/
 {{% /tab %}}
 {{< /tabs >}}
@@ -310,7 +310,7 @@ If you configure tags or dimensions in your query, these values are available fo
 [4]: /monitors/configuration/?tabs=othermonitortypes#no-data
 [5]: /monitors/notify/variables/
 [6]: /monitors/notify/#configure-notifications-and-automations
-[7]: /monitors/notify/#say-whats-happening
+[7]: /monitors/notify/
 [8]: /monitors/notify/variables/?tab=is_alert#attribute-and-tag-variables
 [9]: /getting_started/tagging/
 [10]: /account_management/teams/
