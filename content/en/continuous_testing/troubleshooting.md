@@ -1,6 +1,5 @@
 ---
 title: Continuous Testing and CI/CD Troubleshooting
-kind: documentation
 description: Learn about Continuous Testing and CI/CD concepts and troubleshoot common errors.
 aliases:
   - /synthetics/cicd_integrations/troubleshooting

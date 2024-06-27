@@ -1,6 +1,5 @@
 ---
 title: Archive Logs for the Datadog Agent
-kind: document
 disable_toc: false
 ---
 
@@ -116,6 +115,11 @@ Enter the following information based on your selected logs destination.
 {{% tab "Edit fields" %}}
 
 {{% observability_pipelines/processors/remap %}}
+
+{{% /tab %}}
+{{% tab "Sensitive Data Scanner" %}}
+
+{{% observability_pipelines/processors/sensitive_data_scanner %}}
 
 {{% /tab %}}
 {{< /tabs >}}

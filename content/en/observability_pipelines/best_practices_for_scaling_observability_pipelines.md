@@ -1,6 +1,5 @@
 ---
 title: Best Practices for Scaling Observability Pipelines
-kind: Documentation
 
 ---
 
@@ -67,8 +66,6 @@ The following units are starting points for estimating your resource capacity, b
 | ----------------------| --------- | ----------------------------------------- |
 | Unstructured log event| ~512 bytes| ~10 MiB/s/vCPU                            |
 | Structured log event  | ~1.5 KB   | ~25 MiB/s/vCPU                            |
-| Metric event          | ~256 bytes| ~25 MiB/s/vCPU                            |
-| Trace span event      | ~1.5 KB   | ~25 MiB/s/vCPU                            |
 
 *These numbers are conservative for estimation purposes. 1 vCPU = 1 ARM physical CPU and 0.5 Intel physical CPU.
 

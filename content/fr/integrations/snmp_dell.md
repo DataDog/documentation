@@ -23,7 +23,7 @@ integration_id: snmp-dell
 integration_title: Dell Inc.
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_to_check:

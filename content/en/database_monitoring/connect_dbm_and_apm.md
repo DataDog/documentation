@@ -31,10 +31,12 @@ APM tracer integrations support a *Propagation Mode*, which controls the amount 
 
 SQL Server and Oracle do not support `full` propagation mode due to statement caching behavior which could cause performance issues when including full trace context.
 
-| DD_DBM_PROPAGATION_MODE | Postgres  |   MySQL   | SQL Server |  Oracle   |
-|:------------------------|:---------:|:---------:|:----------:|:---------:|
-| `full`                  | {{< X >}} | {{< X >}} |            |           |
-| `service`               | {{< X >}} | {{< X >}} | {{< X >}}  | {{< X >}} |
+| DD_DBM_PROPAGATION_MODE | Postgres  |   MySQL     | SQL Server |  Oracle   |
+|:------------------------|:---------:|:-----------:|:----------:|:---------:|
+| `full`                  | {{< X >}} | {{< X >}} * |            |           |
+| `service`               | {{< X >}} | {{< X >}}   | {{< X >}}  | {{< X >}} |
+
+\* Full propagation mode on Aurora MySQL requires version 3.
 
 **Supported application tracers and drivers**
 
@@ -191,7 +193,7 @@ In your Gemfile, install or update [dd-trace-rb][1] to version `1.8.0` or greate
 
 ```rb
 source 'https://rubygems.org'
-gem 'ddtrace', '>= 1.8.0'
+gem 'datadog' # Use `'ddtrace', '>= 1.8.0'` if you're using v1.x
 
 # Depends on your usage
 gem 'mysql2'
@@ -335,7 +337,7 @@ Enable the database monitoring propagation feature using one of the following me
    const tracer = require('dd-trace').init({ dbmPropagationMode: 'full' })
    ```
 
-* Enable only at the integration level: 
+* Enable only at the integration level:
    ```javascript
    const tracer = require('dd-trace').init();
    tracer.use('pg', {

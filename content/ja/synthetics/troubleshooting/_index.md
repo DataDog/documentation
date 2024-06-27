@@ -12,7 +12,7 @@ further_reading:
   text: API テストの構成
 - link: /synthetics/private_locations/
   tag: ドキュメント
-  text: タイムボード
+  text: プライベートロケーションの作成
 kind: documentation
 title: Synthetic モニタリングのトラブルシューティング
 ---
@@ -111,9 +111,16 @@ Chrome ブラウザに、拡張機能が正常に記録できないようにす�
 
 自動化されたブラウザは、CSS の `pointer` メディア機能をエミュレートすることをサポートしていません。ブラウザテストでは、すべてのテストとデバイス (ラップトップ、タブレット、モバイル) で `pointer: none` が使用されます。
 
+### リソースのロード時間
+
+#### リソースのロード時間が実際のステップの実行時間よりも長い
+
+ロード時間の長いリソースは、複数のステップにまたがる可能性があります。Datadog は、テスト結果の各ステップ内で、その特定のステップの実行中に開始されたすべてのリソースを返します。ただし、Datadog は、重要なネットワークの呼び出しが終了するまで、およそ 20 秒の猶予を与え
+ます。この時間が経過すると、Synthetics ワーカーは次のステップに進みます。ワーカーが使用するタイムアウトは階層化されており、速度と信頼性のバランスが取られています。このため、Datadog では、ステップの実行時間を使って Web アプリケーションの速度や遅さを測定することを推奨していません。ステップの実行時間は、ワーカーが信頼できる結果を出すために必要なバランスが考慮された時間となっています。
+
 ## API およびブラウザのテスト
 
-### 不正なエラー
+### 認証エラー
 
 Synthetics テストの 1 つが 401 をスローしている場合は、エンドポイントで認証できないことを意味している可能性が高いです。そのエンドポイント (Datadog 外) での認証に使用するメソッドを使用し、Synthetic テストを構成するときにそれを複製する必要があります。
 
@@ -126,7 +133,7 @@ Synthetics テストの 1 つが 401 をスローしている場合は、エン�
 
 * このエンドポイントは **IP ベース認証**を使用していますか？その場合は、[Synthetics テストの元となる IP][11] の一部またはすべてを許可する必要があります。
 
-### Forbidden エラー
+### アクセス拒否エラー
 
 Synthetic テストによって返された `403 Forbidden` エラーが確認された場合は、`Sec-Datadog` ヘッダーを含むリクエストを Web サーバーがブロックまたはフィルタリングした結果である可能性があります。このヘッダーは、Datadog が開始する各 Synthetic リクエストに追加され、トラフィックのソースを識別し、Datadog サポートが特定のテスト実行を識別するのを支援します。
 
@@ -141,11 +148,11 @@ Synthetic テストによって返された `403 Forbidden` エラーが確認�
 {{< tabs >}}
 {{% tab "共通" %}}
 
-### ブラウザテストの結果で、`Page crashed` エラーが表示されることがあります
+### ブラウザテストの結果で、`Page crashed` エラーが表示されることがある
 
 これにより、プライベートロケーションワーカーのリソース消費の問題が明らかになることがあります。プライベートロケーションワーカーが、[十分なメモリリソース][101]でプロビジョニングされていることを確認してください。
 
-### テストの実行が通常より遅くなることがあります
+### テストの実行が遅くなることがある
 
 これにより、プライベートロケーションワーカーのリソース消費の問題が明らかになることがあります。プライベートロケーションワーカーが、[十分な CPU リソース][101]でプロビジョニングされていることを確認してください。
 
@@ -159,7 +166,7 @@ API テストの実行が設定されているエンドポイントに、プラ�
 
 {{< img src="synthetics/timeout.png" alt="プライベートロケーションがタイムアウトした API テスト" style="width:70%;" >}}
 
-[101]: /ja/synthetics/private_locations#private-location-total-hardware-requirements
+[101]: /ja/synthetics/private_locations/dimensioning
 [102]: https://docs.docker.com/config/containers/resource_constraints/
 [103]: /ja/synthetics/private_locations/dimensioning#define-your-total-hardware-requirements
 [104]: /ja/help/
@@ -216,7 +223,7 @@ Private Location ユーザー (`dog`) は、さまざまな理由で `sudo` を�
 
 さらに、Private Location のバージョン `>v1.27` では、Datadog は `clone3` システムコールの使用に依存しています。古いバージョンのコンテナランタイム環境 (Docker バージョン <20.10.10 など) では、`clone3` はデフォルトの `seccomp` ポリシーではサポートされていません。コンテナランタイム環境の `seccomp` ポリシーに `clone3` が含まれていることを確認してください。これは、使用中のランタイムのバージョンを更新したり、`seccomp` ポリシーに `clone3` を手動で追加したり、または `unconfined` seccomp ポリシーを使用することで実現できます。詳細については、[Docker の `seccomp` ドキュメント][13]を参照してください。
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -231,5 +238,5 @@ Private Location ユーザー (`dog`) は、さまざまな理由で `sudo` を�
 [9]: /ja/synthetics/settings/?tab=createfromhttptest#global-variables
 [10]: /ja/synthetics/browser_tests/#use-global-variables
 [11]: https://ip-ranges.datadoghq.com/synthetics.json
-[12]: /ja/synthetics/api_tests/?tab=httptest#notify-your-team
+[12]: /ja/synthetics/api_tests/?tab=httptest#configure-the-test-monitor
 [13]: https://docs.docker.com/engine/security/seccomp/

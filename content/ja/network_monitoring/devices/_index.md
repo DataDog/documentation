@@ -24,7 +24,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/diagnose-network-performance-with-snmp-trap-monitoring/
   tag: ブログ
   text: SNMP トラップによるネットワークパフォーマンスの問題の監視と診断
-kind: documentation
 title: ネットワークデバイスモニタリング
 ---
 

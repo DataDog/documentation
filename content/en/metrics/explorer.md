@@ -1,6 +1,5 @@
 ---
 title: Metrics Explorer
-kind: documentation
 description: "Explore all of your metrics and perform analytics."
 aliases:
   - /graphing/metrics/explorer/

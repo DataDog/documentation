@@ -20,7 +20,7 @@ integration_id: snmpwalk
 integration_title: "SNMP\_walk"
 integration_version: 1.0.0
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 name: snmpwalk

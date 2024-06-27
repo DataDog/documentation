@@ -23,7 +23,7 @@ title: Prise en main de la solution Database Monitoring
 
 ## Présentation
 
-La solution Database Monitoring de Datadog vous aide à mieux comprendre la santé et les performances de vos bases de données et à déterminer la cause à l'origine de vos problèmes.
+La solution Database Monitoring de Datadog vous aide à mieux comprendre la santé et les performances de vos bases de données et à déterminer la cause première de vos problèmes.
 
 Vous pouvez visualiser depuis une interface unique :
 
@@ -48,24 +48,24 @@ L'exemple d'application lance l'Agent Datadog ainsi qu'une base de données Post
 Suivez les instructions ci-dessous pour installer l'exemple d'application sous macOS ou Linux.
 
 1. Dupliquez le [référentiel][5] contenant l'exemple d'application :
-```
-git clone https://github.com/DataDog/dd-database-monitoring-example
-```
+    ```
+    git clone https://github.com/DataDog/dd-database-monitoring-example
+    ```
 
 2. Accédez au référentiel `dd-database-monitoring-example` :
-```
-cd dd-database-monitoring-example
-```
+    ```
+    cd dd-database-monitoring-example
+    ```
 
 3. Définissez la variable d'environnement `DD_API_KEY` sur votre clé d'API Datadog :
-```
-export DD_API_KEY=<CLÉ_API>
-```
+    ```
+    export DD_API_KEY=<API_KEY>
+    ```
 
 4. Lancez l'application :
-```
-make postgres
-```
+    ```
+    make postgres
+    ```
 
 La commande continue à s'exécuter jusqu'à ce que vous l'arrêtiez à l'aide du raccourci Ctrl + C.
 
@@ -73,27 +73,31 @@ La commande continue à s'exécuter jusqu'à ce que vous l'arrêtiez à l'aide d
 
 Quelle est la requête qui utilise le plus longtemps la base de données ? Pour répondre à cette question, utilisez la vue Query Metrics.
 
-1. Accédez à Database Monitoring en cliquant sur **APM > Databases** dans l'interface. La vue Query Metrics s'ouvre alors.
+1. Sur la page [Database Monitoring][6], cliquez sur lʼonglet **Query metrics** dans l'interface utilisateur.
 
 2. Triez le tableau Normalized Query par **Person time** pour afficher la requête dont l'exécution est la plus longue.
 
-La requête qui utilise le plus longtemps la base de données figure sur la première ligne.
+   La requête qui utilise le plus longtemps la base de données figure sur la première ligne :
 
-{{< img src="database_monitoring/dbm_qm_sort_time.png" alt="Requêtes normalisées triées par pourcentage de temps" style="width:100%;">}}
+   {{< img src="database_monitoring/dbm_qm_sort_time.png" alt="Requêtes normalisées triées par pourcentage de temps" style="width:100%;">}}
 
 ## Diagnostiquer une requête lente
 
 La solution Database Monitoring Datadog vous permet non seulement d'identifier les requêtes lentes, mais également de les diagnostiquer. Le plan d'exécution d'une requête décrit les étapes réalisées par la base de données pour résoudre la requête. Pour afficher un plan d'exécution, il vous suffit de cliquer sur un échantillon dans la vue Query Samples.
 
-Pour accéder à la vue Query Samples depuis l'interface Database Monitoring, cliquez sur **[APM > Databases][6]**, puis sélectionnez l'onglet **Query Samples**.
+1. Accédez à la vue Query Samples depuis [Database Monitoring][6] en sélectionnant l'onglet **Samples**.
 
-Triez le tableau Normalized Query par **Duration**.
+2. Dans le menu déroulant **In**, sélectionnez **Explain Plans**. 
 
-{{< img src="database_monitoring/dbm_qs_sort_duration.png" alt="Échantillons de requêtes normalisées triés par durée" style="width:100%;">}}
+3. Triez le tableau Normalized Query par **Duration**.
 
-Cherchez dans le tableau une requête pour laquelle la colonne **Explain Plan** n'est pas vide, puis cliquez dessus pour ouvrir la page Sample Details. Le plan d'exécution ci-dessous, qui figure en bas de la page Sample Details, indique que la requête nécessite un _scan d'index_.
+   {{< img src="database_monitoring/dbm_qs_explain_plan_duration.png" alt="Échantillons de requêtes normalisées triés par durée">}}
 
-{{< img src="database_monitoring/dbm_qs_explain_plan.png" alt="Plan d'exécution d'une requête indiquant un scan d'index" style="width:100%;">}}
+4. Recherchez une requête dans la colonne **Explain Plan** du tableau comportant des données et cliquez dessus pour ouvrir la page des détails de l'échantillon. 
+
+5. Dans la section **Explain Plan**, cliquez sur **List View**. Le plan d'explication qui se trouve en bas de la page dʼexemple explique que la requête nécessite un _scan dʼindex_.
+
+   {{< img src="database_monitoring/dbm_qs_explain_plan_list_view.png" alt="Plan d'exécution d'une requête indiquant un scan d'index">}}
 
 ## Visualiser la santé et les performances de bases de données
 
@@ -115,21 +119,17 @@ Pour visualiser, par exemple, la variation absolue du volume de requêtes au cou
 
 5. Sélectionnez `host` dans la liste déroulante **Break it down by** pour agréger les requêtes par host.
 
-{{< img src="database_monitoring/dashboard_change_postgres.png" alt="Configurer un widget Évolution pour une métrique de requêtes postgres" style="width:100%;">}}
+   {{< img src="database_monitoring/dashboard_change_postgres.png" alt="Configurer un widget Évolution pour une métrique de requêtes postgres" style="width:100%;">}}
 
 7. Cliquez sur le bouton **Save**. Le dashboard affiche alors votre nouveau widget.
 
-{{< img src="database_monitoring/dashboard_change_widget.png" alt="Widget Évolution affichant le nombre de requêtes" style="width:100%;">}}
+   {{< img src="database_monitoring/dashboard_change_widget.png" alt="Widget Évolution affichant le nombre de requêtes" style="width:100%;">}}
 
-### Afficher les dashboards par défaut
+### Consulter des dashboards prêts à l'emploi
 
 Observez les activités, l'utilisation des ressources et d'autres valeurs de la base de données active grâce aux dashboards prêts à l'emploi proposés par la solution Database Monitoring Datadog.
 
-Pour accéder aux dashboards, procédez comme suit :
-
-1. Cliquez sur **APM > Databases** dans l'interface pour accéder à Database Monitoring. 
-
-2. Sélectionnez l'onglet **Dashboards** et choisissez le dashboard de votre choix.
+Pour accéder aux dashboards, à partir de la page [Database Monitoring][6], sélectionnez lʼonglet **Dashboards** et choisissez le dashboard que vous souhaitez consulter.
 
 Vous pouvez dupliquer et modifier des dashboards prêts à l'emploi pour les personnaliser en fonction de vos besoins.
 

@@ -1,6 +1,5 @@
 ---
 title: Enabling the Ruby Profiler
-kind: Documentation
 code_lang: ruby
 type: multi-code-lang
 code_lang_weight: 40
@@ -27,7 +26,7 @@ The profiler is shipped within Datadog tracing libraries. If you are already usi
 
 For a summary of the minimum and recommended runtime and tracer versions across all languages, read [Supported Language and Tracer Versions][14].
 
-The Datadog Profiler requires Ruby 2.3+. JRuby and TruffleRuby are not supported.
+The Datadog Profiler requires Ruby 2.5+. JRuby and TruffleRuby are not supported.
 
 The following operating systems and architectures are supported:
 - Linux (GNU libc) x86-64, aarch64
@@ -51,14 +50,11 @@ To begin profiling applications:
 
 1. Ensure Datadog Agent v6+ is installed and running. Datadog recommends using [Datadog Agent v7+][2].
 
-2. Add the `ddtrace` gem to your `Gemfile` or `gems.rb` file:
+2. Add the `datadog` gem to your `Gemfile` or `gems.rb` file:
 
     ```ruby
-    gem 'ddtrace', '~> 1.21'
+    gem 'datadog', '~> 2.0'
     ```
-
-    If you're running a version of `ddtrace` older than 1.15.0, add the `google-protobuf` gem (version ~> 3.0) as a dependency.
-
 3. Install the gems with `bundle install`.
 
 4. Enable the profiler:

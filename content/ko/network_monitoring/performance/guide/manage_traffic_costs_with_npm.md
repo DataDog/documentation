@@ -1,7 +1,6 @@
 ---
 aliases:
 - /ko/network_performance_monitoring/guide/manage_traffic_costs_with_npm/
-kind: 가이드
 title: NPM으로 클라우드 트래픽 비용 관리
 ---
 트래픽은 특히 클라우드에서 비용이 많이 듭니다. 클라우드 제공업체는 가용 영역(AZ) 내, AZ 간, 특정 리전 간 또는 개방형 인터넷으로 이동하는 트래픽에 대해 각각 다른 가격을 책정합니다. 리전 간 및 송신 트래픽은 가장 비용이 많이 들 뿐만 아니라 오류, 지연 시간, 보안 위협에 가장 취약합니다.

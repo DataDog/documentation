@@ -14,7 +14,7 @@ integration_id: ''
 integration_title: AWS PrivateLink
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: amazon_privatelink
 public_title: Datadog-AWS PrivateLink インテグレーション

@@ -1,6 +1,5 @@
 ---
 description: Datadog로 데이터를 피드하는 방법과 사용자나 클라이언트 환경에 있어야 할 필수 구성 요소를 알아봅니다.
-kind: 설명서
 private: true
 title: 데이터 수집
 ---
