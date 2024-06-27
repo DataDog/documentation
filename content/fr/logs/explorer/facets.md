@@ -15,7 +15,6 @@ further_reading:
 - link: logs/explorer/saved_views
   tag: Documentation
   text: Configurer automatiquement votre vue Log Explorer
-kind: documentation
 title: Facettes de log
 ---
 

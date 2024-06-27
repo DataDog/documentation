@@ -1,6 +1,5 @@
 ---
 title: React Native Crash Reporting and Error Tracking
-kind: documentation
 description: Set up Error Tracking for your React Native projects.
 aliases:
 - /real_user_monitoring/error_tracking/reactnative

@@ -1,7 +1,6 @@
 ---
 dependencies: []
 disable_edit: true
-kind: documentation
 title: NullBooleanField を使用しない
 ---
 ## メタデータ

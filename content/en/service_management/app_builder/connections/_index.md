@@ -1,6 +1,5 @@
 ---
 title: Connections
-kind: documentation
 description: App Builder connections
 disable_toc: false
 further_reading:

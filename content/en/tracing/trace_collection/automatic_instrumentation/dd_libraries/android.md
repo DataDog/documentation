@@ -14,7 +14,6 @@ further_reading:
 - link: tracing/visualization/
   tag: Documentation
   text: Explore your services, resources, and traces
-kind: documentation
 title: Tracing Android Applications
 ---
 Send [traces][1] to Datadog from your Android applications with [Datadog's `dd-sdk-android-trace` client-side tracing library][2] and leverage the following features:

@@ -1,6 +1,5 @@
 ---
 title: Intelligent Test Runner for Swift
-kind: documentation
 is_beta: true
 code_lang: swift
 type: multi-code-lang

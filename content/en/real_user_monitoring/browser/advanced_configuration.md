@@ -1,6 +1,5 @@
 ---
 title: Advanced Configuration
-kind: documentation
 aliases:
   - /real_user_monitoring/installation/advanced_configuration/
   - /real_user_monitoring/browser/modifying_data_and_context/

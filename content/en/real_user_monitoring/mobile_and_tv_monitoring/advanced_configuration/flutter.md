@@ -1,6 +1,5 @@
 ---
 title: RUM Flutter Advanced Configuration
-kind: documentation
 description: Learn how to configure Flutter Monitoring.
 code_lang: flutter
 type: multi-code-lang

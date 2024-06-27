@@ -1,6 +1,5 @@
 ---
 title: Troubleshooting
-kind: documentation
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-android
   tag: "Source Code"

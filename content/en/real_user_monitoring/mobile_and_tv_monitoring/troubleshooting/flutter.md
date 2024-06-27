@@ -1,6 +1,5 @@
 ---
 title: Troubleshooting
-kind: documentation
 description: Learn how to troubleshoot issues with Flutter Monitoring.
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-flutter

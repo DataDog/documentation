@@ -1,6 +1,5 @@
 ---
 title: Quality Gates or Rule Execution Facets
-kind: documentation
 description: Learn about facets in the Quality Gates Explorer.
 further_reading:
 - link: 'quality_gates/explorer/'

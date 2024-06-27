@@ -4,7 +4,6 @@ aliases:
 - /fr/developers/service_checks/visualize-your-service-check-in-the-datadog-ui
 - /fr/guides/services_checks/
 - /fr/monitors/guide/visualize-your-service-check-in-the-datadog-ui
-kind: documentation
 title: Check de service
 ---
 

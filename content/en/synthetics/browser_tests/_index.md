@@ -1,6 +1,5 @@
 ---
 title: Browser Testing
-kind: documentation
 description: Simulate and monitor user journeys from specific locations.
 aliases:
   - /synthetics/browser_check

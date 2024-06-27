@@ -1,6 +1,5 @@
 ---
 title: Account Takeover Protection
-kind: documentation
 disable_toc: false
 further_reading:
 - link: "security/application_security/terms/"

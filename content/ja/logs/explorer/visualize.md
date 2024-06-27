@@ -12,7 +12,6 @@ further_reading:
 - link: /logs/explorer/export
   tag: ドキュメント
   text: ログエクスプローラーからビューをエクスポートする
-kind: documentation
 title: ログの視覚化
 ---
 

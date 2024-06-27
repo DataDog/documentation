@@ -13,7 +13,6 @@ further_reading:
 - link: /monitors/downtimes/
   tag: ドキュメント
   text: モニターをミュートするダウンタイムのスケジュール
-kind: documentation
 title: 監査証跡モニター
 ---
 

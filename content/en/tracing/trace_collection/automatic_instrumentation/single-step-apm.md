@@ -1,6 +1,5 @@
 ---
 title: Single Step APM Instrumentation (Beta)
-kind: documentation
 is_beta: true
 aliases:
 - /tracing/trace_collection/single-step-apm

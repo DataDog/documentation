@@ -1,6 +1,5 @@
 ---
 title: Serverless Compatibility Requirements 
-kind: documentation
 code_lang: serverless
 type: multi-code-lang
 code_lang_weight: 90

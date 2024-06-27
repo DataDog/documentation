@@ -1,6 +1,5 @@
 ---
 title: .NET Framework Compatibility Requirements
-kind: documentation
 description: 'Compatibility Requirements for the .NET Tracer'
 aliases:
   - /tracing/compatibility_requirements/dotnet-framework

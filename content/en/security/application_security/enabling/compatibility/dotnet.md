@@ -1,6 +1,5 @@
 ---
 title: .NET Compatibility Requirements
-kind: documentation
 code_lang: dotnet
 type: multi-code-lang
 code_lang_weight: 10

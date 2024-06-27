@@ -1,6 +1,5 @@
 ---
 title: Go Compatibility Requirements
-kind: documentation
 code_lang: go
 type: multi-code-lang
 code_lang_weight: 20
