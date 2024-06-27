@@ -253,7 +253,7 @@ A comma-separated string of integration names automatically disabled when the tr
 **Default**: `'disabled'`<br>
 To enable DBM to APM link using tag injection, can be set to `'service'` or `'full'`. The `'service'` option enables the connection between DBM and APM services. The `'full'` option enables connection between database spans with database query events. Available for Postgres.
 
-### Headers extraction and injection
+### Trace context propagation
 
 For information about valid values and using the following configuration options, see [Propagating Node.js Trace Context][5].
 

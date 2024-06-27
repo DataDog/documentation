@@ -56,6 +56,10 @@ For more information, see [Ingestion Mechanisms][5].<br>
 
 ### Traces
 
+`DD_TRACE_ENABLED`
+: **Default**: `true`<br>
+Enable web framework and library instrumentation. When `false`, the application code doesn't generate any traces.
+
 `DD_TRACE_SAMPLE_RATE`
 : Enable trace volume control
 
@@ -76,7 +80,7 @@ Comma-separated list of header names that are reported on the root span as tags.
 `DD_TRACE_AGENT_URL`
 : The URL of the Trace Agent that the tracer submits to. If set, this takes priority over hostname and port. Supports Unix Domain Sockets (UDS) in combination with the `apm_config.receiver_socket` configuration in your `datadog.yaml` file or the `DD_APM_RECEIVER_SOCKET` environment variable set on the Datadog Agent. For example, `DD_TRACE_AGENT_URL=http://localhost:8126` for HTTP URL and `DD_TRACE_AGENT_URL=unix:///var/run/datadog/apm.socket` for UDS. If the [Agent configuration][13] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then `DD_AGENT_PORT` or `DD_TRACE_AGENT_URL` must match it. 
 
-### Headers extraction and injection
+### Trace context propagation
 
 `DD_TRACE_PROPAGATION_STYLE_INJECT`
 : **Default**: `tracecontext,Datadog`<br>
@@ -99,10 +103,6 @@ Enable [connecting logs and trace injection][6].
 
 `DD_TAGS`
 : A list of default tags to be added to every span and profile, for example: `layer:api,team:intake,key:value`. Available in version 0.38+.
-
-`DD_TRACE_ENABLED`
-: **Default**: `true`<br>
-Enable web framework and library instrumentation. When `false`, the application code doesn't generate any traces.
 
 `DD_AGENT_HOST`
 : **Default**: `localhost`<br>

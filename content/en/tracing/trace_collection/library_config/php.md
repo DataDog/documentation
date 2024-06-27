@@ -130,6 +130,11 @@ For more information, see [Ingestion Mechanisms][6].<br>
 
 #### Traces
 
+`DD_TRACE_ENABLED`
+: **INI**: `datadog.trace.enabled`<br>
+**Default**: `1`<br>
+Enable the tracer globally.
+
 `DD_PRIORITY_SAMPLING`
 : **INI**: `datadog.priority_sampling`<br>
 **Default**: `1`<br>
@@ -601,7 +606,7 @@ Note that `DD_TRACE_RESOURCE_URI_MAPPING_INCOMING` applies to only incoming requ
 When [`open_basedir`][9] setting is used, then `/opt/datadog-php` should be added to the list of allowed directories.
 When the application runs in a docker container, the path `/proc/self` should also be added to the list of allowed directories.
 
-### Headers extraction and injection
+### Trace context propagation
 
 Read [Trace Context Propagation][11] for information about configuring the PHP tracing library to extract and inject headers for propagating distributed trace context.
 ## Further Reading

@@ -70,6 +70,11 @@ A range of errors can be accepted. By default 5xx status codes are reported as e
 
 ### Traces
 
+`dd.trace.enabled`
+: **Environment Variable**: `DD_TRACE_ENABLED`<br>
+**Default**: `true`<br>
+When `false` tracing agent is disabled.
+
 `dd.trace.config`
 : **Environment Variable**: `DD_TRACE_CONFIG`<br>
 **Default**: `null`<br>
@@ -229,7 +234,7 @@ When `true`, the tracer will inject 128 bit Trace IDs as 32 lowercase hexadecima
 **Default**: `false`<br>
 When `true`, OpenTelemetry-based tracing for [custom][16] instrumentation is enabled.
 
-### Headers extraction and injection
+### Trace context propagation
 
 `dd.trace.propagation.style.inject`
 : **Environment Variable**: `DD_TRACE_PROPAGATION_STYLE_INJECT`<br>
@@ -286,11 +291,6 @@ A list of default tags to be added to every span, profile, and JMX metric. If DD
 : **Environment Variable**: `DD_AGENT_HOST`<br>
 **Default**: `localhost`<br>
 Hostname for where to send traces to. If using a containerized environment, configure this to be the host IP. See [Tracing Docker Applications][5] for more details.
-
-`dd.trace.enabled`
-: **Environment Variable**: `DD_TRACE_ENABLED`<br>
-**Default**: `true`<br>
-When `false` tracing agent is disabled.
 
 `dd.instrumentation.telemetry.enabled`
 : **Environment Variable**: `DD_INSTRUMENTATION_TELEMETRY_ENABLED`<br>

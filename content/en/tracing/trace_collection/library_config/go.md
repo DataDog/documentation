@@ -89,6 +89,10 @@ A JSON array of objects. Each object must have a `"sample_rate"`. The `"name"`,`
 
 ### Traces
 
+`DD_TRACE_ENABLED`
+: **Default**: `true` <br>
+Enable web framework and library instrumentation. When false, the application code doesn't generate any traces.
+
 `DD_TRACE_AGENT_PORT`
 : **Default**: `8126` <br>
 Overrides the default trace Agent port for Datadog trace submission. If the [Agent configuration][13] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then the library configuration `DD_DOGSTATSD_PORT` must match it.
@@ -147,10 +151,6 @@ Overrides the default trace Agent port for DogStatsD metric submission. If the [
 `DD_TAGS`
 : **Default**: [] <br>
 A list of default tags to be added to every span and profile. Tags can be separated by commas or spaces, for example: `layer:api,team:intake,key:value` or `layer:api team:intake key:value`.
-
-`DD_TRACE_ENABLED`
-: **Default**: `true` <br>
-Enable web framework and library instrumentation. When false, the application code doesn't generate any traces.
 
 `DD_INSTRUMENTATION_TELEMETRY_ENABLED`
 : **Default**: `true` <br>
