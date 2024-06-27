@@ -1,10 +1,11 @@
 ---
 aliases:
-- /es/logs/FAQ/por-qué-mis-logs-aparecen-con-un-estado-de-info-aún-para-advertencias-o-errores
+- /es/logs/FAQ/por-qué-mis-logs-aparecen-con-un-estado-de-información-incluso-para-advertencias-o-errores
 further_reading:
 - link: /logs/guía/reasignar-gravedad-personalizada-al-estado-de-log-oficial/
   tag: Documentación
-  text: Aprende a reasignar valores de gravedad personalizados al estado de log oficial
+  text: Aprende cómo reasignar valores de gravedad personalizados al estado de log
+    oficial
 - link: /logs/log_configuration/processors
   tag: Documentación
   text: Aprende cómo procesar tus logs
