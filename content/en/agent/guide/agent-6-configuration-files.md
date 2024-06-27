@@ -21,9 +21,6 @@ See the [sample `config_template.yaml` file][1] for all available configuration 
 
 Prior releases of Datadog Agent stored configuration files in `/dd-agent/conf.d/`. Starting with the 6.0 release, configuration files are stored in `/etc/datadog-agent/conf.d/<CHECK_NAME>.d/`.
 
-{{< tabs >}}
-{{% tab "Agent v6 & v7" %}}
-
 | Platform                             | Command                        |
 |:-------------------------------------|:-------------------------------|
 | AIX                                  | `/etc/datadog-agent/conf.d/`   |
