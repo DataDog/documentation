@@ -7,7 +7,7 @@ Create an [Azure storage account][9051] if you don't already have one.
 1. Select the subscription name and resource name you want to use.
 1. Enter a name for your storage account.
 1. Select a region in the dropdown menu.
-1. Select  **Standard** performance or **Premium** account type. and select the hot or cool access tier.
+1. Select  **Standard** performance or **Premium** account type.
 1. Click **Next**.
 1. In the **Blob storage** section, select **Hot** or **Cool** storage.
 1. Click **Review + create**.
