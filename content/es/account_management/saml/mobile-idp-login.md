@@ -9,7 +9,6 @@ further_reading:
   tag: Documentación
   text: Configurar equipos y organizaciones con varias cuentas
 is_public: true
-kind: documentación
 title: Las aplicaciones móviles de Datadog con SAML iniciado por IdP
 ---
 

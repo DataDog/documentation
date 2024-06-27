@@ -17,7 +17,6 @@ further_reading:
 - link: /service_management/workflows/
   tag: ドキュメント
   text: Workflow Automation について
-kind: ドキュメント
 title: Cloud Security Management Identity Risks
 ---
 

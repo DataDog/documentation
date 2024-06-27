@@ -8,7 +8,7 @@ dependencies: ["https://github.com/DataDog/documentation/blob/master/content/en/
 has_logo: true
 integration_title: Alcide
 is_public: true
-kind: integration
+custom_kind: integration
 name: alcide
 public_title: Datadog-Alcide Integration
 short_description: Ingest and process your Alcide logs

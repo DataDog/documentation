@@ -8,95 +8,121 @@ kind: 설명서
 title: Azure Database for PostgreSQL용 데이터베이스 모니터링 설정
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">데이터베이스 모니터링은 이 사이트에서 지원되지 않습니다.</div>
-{{< /site-region >}}
+데이터베이스 모니터링은 쿼리 메트릭, 쿼리 샘플, 설명 계획, 데이터베이스 상태, 페일오버 및 이벤트를 노출하여 Postgres 데이터베이스에 대한 심층적인 가시성을 제공합니다.
 
-데이터베이스 모니터링을 사용해 쿼리 메트릭, 쿼리 샘플, 실행 계획, 데이터베이스 상태, 장애 조치, 이벤트를 노출시켜 Postgres 데이터베이스를 상세히 가시화할 수 있습니다.
-
-에이전트에서는 데이터베이스에 읽기 전용 사용자로 로그인해 원격 분석 데이터를 직접 수집합니다. Postgres 데이터베이스에서 데이터베이스 모니터링을 사용하려면 다음 단계를 따르세요.
+Agent는 읽기 전용 사용자로 로그인하여 데이터베이스에서 직접 원격 분석을 수집합니다. Postgres 데이터베이스로 데이터베이스 모니터링을 활성화하려면 다음 설정을 수행합니다.
 
 1. [데이터베이스 파라미터 설정](#configure-postgres-settings)
-1. [에이전트가 데이터베이스에 액세스할 수 있도록 권한 부여](#grant-the-agent-access)
-1. [에이전트 설치](#install-the-agent)
-1. [Azure PostgreSQL 통합 설치](#iinstall-the-azure-postgresql-integration)
+1. [에이전트에 데이터베이스 접근 권한 부여](#grant-the-agent-access)
+1. [Agent 설치](#install-the-agent)
+1. [Azure PostgreSQL 통합 설치](#install-the-azure-postgresql-integration)
 
-## 시작 전에 참고 사항
+## 시작 전 참고 사항
 
 지원되는 PostgreSQL 버전
-: 9.6, 10, 11, 12, 13, 14
+: 9.6, 10, 11, 12, 13, 14, 15
 
 지원되는 Azure PostgreSQL 배포 유형
-: PostgreSQL on Azure VMs, Single Server, Flexible Server
+: Azure VM의 PostgreSQL, 단일 서버, 유연한 서버
 
-지원되는 에이전트 버전
+지원되는 Agent 버전
 : 7.36.1+
 
 성능에 미치는 영향
-: 데이터베이스 모니터링을 위한 기본 에이전트 설정은 보수적이지만 수집 간격 및 쿼리 샘플 등 설정을 조정해 요구 사항을 더 잘 충족할 수 있습니다. 대부분의 워크로드의 경우 에이전트는 데이터베이스에서 쿼리 실행 시간의 1% 미만, CPU 비율의 1% 미만을 차지합니다. <br/>
-데이터베이스 모니터링은 기본 에이전트에서 통합으로 실행됩니다([벤치마크 참조][1]).
+: 데이터베이스 모니터링에 대한 기본 Agent 설정은 변경하지 않는 것이 좋으나 수집 간격 및 쿼리 샘플링 속도와 같은 설정은 필요에 맞게 조정할 수 있습니다. 대부분의 워크로드에서 Agent는 데이터베이스에서 쿼리 실행 시간의 1% 미만, CPU의 1% 미만을 나타냅니다. <br/><br/>
+데이터베이스 모니터링은 기본 Agent 위에서 통합으로 실행됩니다([벤치마크 참조][1]).
 
-프록시, 로드 밸런서, 연결 풀러
-: 에이전트는 모니터링 중인 호스트에 직접 연결해야 합니다. 자체 호스팅 데이트베이스는  `127.0.0.1`이나 소켓을 통해 연결하는 것이 좋습니다. 에이전트를 프록시, 로드 밸런`pgbouncer`와 같은 연결 풀러로 연결하지 마세요. 이는 클라이언트 애플리케이션에 안티 패턴일 수 있으나 각 에이전트가 기본 호스트 이름을 알고 있어야 하며, 장애 조치 시에도 수명 기간 동안에는 단일 호스트에 연결되어야 합니다. Datadog 에이전트가 실행되는 동안 다른 호스트에 연결되면 메트릭 값이 올바르지 않게 됩니다.
+프록시, 로드 밸런서 및 연결 풀러
+: Datadog Agent는 모니터링 중인 호스트에 직접 연결해야 합니다. 자체 호스팅 데이터베이스의 경우 `127.0.0.1` 또는 소켓이 선호됩니다. Agent는 `pgbouncer`와 같은 프록시, 로드 밸런서, 연결 풀러를 통해 데이터베이스에 연결해서는 안됩니다. Agent가 실행되는 동안 다른 호스트에 연결하는 경우(페일오버, 로드밸런싱 등) Agent는 두 호스트 간의 통계 차이를 계산하여 부정확한 메트릭을 생성합니다.
 
-데이터 보안 고려사항
-: 에이전트가 데이터베이스에서 어떤 정보를 수집하고 어떻게 보안을 확보하는지 알아보려면 [민감한 정보][2]를 참고하세요.
+데이터 보안 고려 사항
+: Agent가 데이터베이스에서 수집하는 데이터와 데이터 보안을 유지하는 방법에 대한 자세한 내용은 [민감한 정보][2]를 참조하세요.
 
 ## Postgres 설정 구성
 
-[서버 파라미터][4]에서 다음 [파라미터][3]를 설정합니다. **서버를 재시작**해야 설정이 적용됩니다.
+설정을 적용하려면 [서버 파라미터][4]에서 다음 [파라미터][3]를 구성한 다음 **서버를 재시작**합니다.
 
 {{< tabs >}}
-{{% tab "Single Server" %}}
+{{% tab "단일 서버" %}}
 
 | 파라미터 | 값 | 설명 |
 | --- | --- | --- |
-| `track_activity_query_size` | `4096` | 대량 쿼리 수집에 필요. `pg_stat_activity`와 `pg_stat_statements`에서 SQL 텍스트 크기를 늘림. 기본값으로 두면 `1024`자보다 긴 쿼리가 수집되지 않음. |
-| `pg_stat_statements.track` | `ALL` | 선택 사항. 저장된 절차와 함수 내에 있는 문 추적을 활성화. |
-| `pg_stat_statements.max` | `10000` | 선택 사항. `pg_stat_statements`에 있는 표준화된 쿼리 추적 수를 늘림. 데이터베이스 볼륨이 크고 여러 클라이언트에서 다양한 유형의 쿼리가 포함된 경우에 이 설정을 추천. |
-| `pg_stat_statements.track_utility` | `off` | 선택 사항. PREPARE 및 EXPLAIN과 같은 유틸리티 명령을 비활성화. 이 값을 `off`로 하면 SELECT, UPDATE, DELETE과 같은 쿼리만 추적함. |
-| `track_io_timing` | `on` | 선택 사항. 블록 읽기 및 쓰기 쿼리 시간 수집 활성화. |
+| `track_activity_query_size` | `4096` | 더 큰 쿼리를 수집하는 데 필요합니다. `pg_stat_activity`에서 SQL 텍스트의 크기를 늘립니다. 기본값으로 두면 `1024`자보다 긴 쿼리는 수집되지 않습니다. |
+| `pg_stat_statements.track` | `ALL` | 선택 사항. 저장 프로시저 및 함수 내에서 명령문을 추적할 수 있습니다. |
+| `pg_stat_statements.max` | `10000` | 선택 사항. `pg_stat_statements`에서 추적되는 정규화된 쿼리 수를 늘립니다. 이 설정은 다양한 클라이언트의 다양한 유형의 쿼리를 보는 대용량 데이터베이스에 권장됩니다. |
+| `pg_stat_statements.track_utility` | `off` | 선택 사항. PREPARE 및 EXPLAIN과 같은 유틸리티 명령을 비활성화합니다. 이 값을 `off`로 설정하면 SELECT, UPDATE, DELETE와 같은 쿼리만 추적됩니다. |
+| `track_io_timing` | `on` | 선택 사항. 쿼리에 대한 블록 읽기 및 쓰기 시간 수집을 활성화합니다. |
 
 {{% /tab %}}
-{{% tab "Flexible Server" %}}
+{{% tab "유연한 서버" %}}
 
-| 파라미터 | 값 | 설명 |
+| 파라미터            | 값 | 설명 |
 |----------------------| -- | --- |
-| `azure.extensions` | `pg_stat_statements` | `postgresql.queries.*` 메트릭에 필요. [pg_stat_statements][1] 확장을 통해 쿼리 메트릭 수집 활성화. |
-| `track_activity_query_size` | `4096` | 대량 쿼리 수집에 필요. `pg_stat_activity`와 `pg_stat_statements`에서 SQL 텍스트 크기를 늘림. 기본값으로 두면 `1024`자보다 긴 쿼리가 수집되지 않음. |
-| `pg_stat_statements.track` | `ALL` | 선택 사항. 저장된 절차와 함수 내에 있는 문 추적을 활성화. |
-| `pg_stat_statements.max` | `10000` | 선택 사항. `pg_stat_statements`에 있는 표준화된 쿼리 추적 수를 늘림. 데이터베이스 볼륨이 크고 여러 클라이언트에서 다양ㅎ하 유형의 쿼리가 포함된 경우에 이 설정을 추천. |
-| `pg_stat_statements.track_utility` | `off` | 선택 사항. PREPARE 및 EXPLAIN과 같은 유틸리티 명령을 비활성화. 이 값을 `off`로 하면 SELECT, UPDATE, DELETE와 같은 쿼리만 추적함. |
-| `track_io_timing` | `on` | 선택 사항. 블록 읽기 및 쓰기 쿼리 시간 수집 활성화.|
+| `azure.extensions` | `pg_stat_statements` | `postgresql.queries.*` 메트릭에 필요합니다. [pg_stat_statements][1] 확장을 사용하여 쿼리 메트릭 수집을 활성화합니다. |
+| `track_activity_query_size` | `4096` | 더 큰 쿼리를 수집하는 데 필요합니다. `pg_stat_activity`에서 SQL 텍스트의 크기를 늘립니다. 기본값으로 두면 `1024`자보다 긴 쿼리는 수집되지 않습니다. |
+| `pg_stat_statements.track` | `ALL` | 선택 사항. 저장 프로시저 및 함수 내에서 명령문을 추적할 수 있습니다. |
+| `pg_stat_statements.max` | `10000` | 선택 사항. `pg_stat_statements`에서 추적되는 정규화된 쿼리 수를 늘립니다. 이 설정은 다양한 클라이언트의 다양한 유형의 쿼리를 보는 대용량 데이터베이스에 권장됩니다. |
+| `pg_stat_statements.track_utility` | `off` | 선택 사항. PREPARE 및 EXPLAIN과 같은 유틸리티 명령을 비활성화합니다. 이 값을 `off`로 설정하면 SELECT, UPDATE, DELETE와 같은 쿼리만 추적됩니다. |
+| `track_io_timing` | `on` | 선택 사항. 쿼리에 대한 블록 읽기 및 쓰기 시간 수집을 활성화합니다. |
 
 [1]: https://www.postgresql.org/docs/current/pgstatstatements.html
 {{% /tab %}}
 {{< /tabs >}}
 
-## 에이전트 액세스 허용
+## 에이전트에 접근 권한 부여
 
-Datadog 에이전트가 통계와 쿼리를 수집하려면 데이터베이스 서버에 읽기 전용 액세스가 필요합니다.
+Datadog 에이전트가 통계와 쿼리를 수집하려면 데이터베이스에 읽기 전용 액세스가 필요합니다.
 
-Postgres가 복제되면 다음 SQL 명령을 **주** 데이터베이스 서버(쓰기 권한자)에서 실행해야 합니다. 데이터베이스 서버에서 에이전트를 연결할 PostgreSQL 데이베이스를 선택하세요. 어떤 데이터베이스에 연결하든 에이전트는 서버에 있는 모든 데이터베이스에서 원격 분석 데이터를 수집하기 때문에 기본값인 `postgres` 데이터베이스에 연결하는 것이 좋습니다. 에이전트에서 [특정 데이터베이스의 커스텀 쿼리][5]를 실행하고 싶을 경우에만 다른 데이터베이스를 선택하세요.
+Postgres가 복제된 경우 클러스터의 **기본** 데이터베이스 서버(작성자)에서 다음 SQL 명령을 실행해야 합니다. Agent가 연결할 데이터베이스 서버에서 PostgreSQL 데이터베이스를 선택합니다. Agent는 연결된 데이터베이스에 관계없이 데이터베이스 서버의 모든 데이터베이스에서 원격 측정을 수집할 수 있으므로 기본 `postgres` 데이터베이스를 사용하는 것이 좋습니다. Agent가 [해당 데이터베이스 고유의 데이터에 대한 사용자 지정 쿼리][5]를 실행하는 경우에만 다른 데이터베이스를 선택하세요.
 
-선택한 데이터베이스에 슈퍼 사용자(또는 충분한 권한이 있는 다른 사용자)로 연결합니다. 예를 들어 선택한 데이터베이스가 `postgres`면 다음을 실행하여 [psql][6]을 이용해 `postgres` 사용자로 연결합니다.
+선택한 데이터베이스를 수퍼유저(또는 충분한 권한이 있는 다른 사용자)와 연결합니다. 예를 들어 선택한 데이터베이스가 `postgres`면 다음을 실행하여 [psql][6]을 사용하는 `postgres` 사용자로 연결합니다.
 
  ```bash
  psql -h mydb.example.com -d postgres -U postgres
  ```
 
-`datadog` 사용자를 생성합니다.
+`datadog` 사용자 생성:
 
 ```SQL
 CREATE USER datadog WITH password '<PASSWORD>';
 ```
 
-**참고:** Azure 관리형 ID 인증도 지원됩니다. Azure 인스턴스에서 인증을 설정하는 방법은 [가이드][12]를 참고하세요.
+**참고:** Microsoft Entra ID 관리 ID 인증도 지원됩니다. Azure 인스턴스에 대해 이를 구성하는 방법은 [가이드][12]를 참조하세요.
+
 
 {{< tabs >}}
+{{% tab "Postgres ≥ 16" %}}
+
+**모든 데이터베이스에** 다음 스키마를 생성합니다.
+
+```SQL
+CREATE SCHEMA datadog;
+GRANT USAGE ON SCHEMA datadog TO datadog;
+GRANT USAGE ON SCHEMA public TO datadog;
+GRANT pg_read_all_settings TO datadog;
+GRANT pg_read_all_stats TO datadog;
+CREATE EXTENSION IF NOT EXISTS pg_stat_statements;
+```
+
+{{% /tab %}}
+
+{{% tab "Postgres 15" %}}
+
+**모든 데이터베이스에** 다음 스키마를 생성합니다.
+
+```SQL
+CREATE SCHEMA datadog;
+GRANT USAGE ON SCHEMA datadog TO datadog;
+GRANT USAGE ON SCHEMA public TO datadog;
+GRANT pg_monitor TO datadog;
+CREATE EXTENSION IF NOT EXISTS pg_stat_statements;
+```
+
+{{% /tab %}}
+
 {{% tab "Postgres ≥ 10" %}}
 
-**모든 데이터베이스**에 다음 스키마를 생성합니다.
+**모든 데이터베이스에** 다음 스키마를 생성합니다.
 
 ```SQL
 CREATE SCHEMA datadog;
@@ -108,7 +134,7 @@ GRANT pg_monitor TO datadog;
 {{% /tab %}}
 {{% tab "Postgres 9.6" %}}
 
-**모든 데이터베이스**에 다음 스키마를 생성합니다.
+**모든 데이터베이스에** 다음 스키마를 생성합니다.
 
 ```SQL
 CREATE SCHEMA datadog;
@@ -117,15 +143,15 @@ GRANT USAGE ON SCHEMA public TO datadog;
 GRANT SELECT ON pg_stat_database TO datadog;
 ```
 
-**모든 데이터베이스**에 함수를 생성해 에이전트가 `pg_stat_activity`와 `pg_stat_statements`의 모든 컨텐츠를 읽을 수 있도록 합니다.
+Agent가 `pg_stat_activity` 및 `pg_stat_statements`의 전체 내용을 읽을 수 있도록 **모든 데이터베이스에** 함수를 만듭니다.
 
 ```SQL
 CREATE OR REPLACE FUNCTION datadog.pg_stat_activity() RETURNS SETOF pg_stat_activity AS
-$$ SELECT * FROM pg_catalog.pg_stat_activity; $$
+  $$ SELECT * FROM pg_catalog.pg_stat_activity; $$
 LANGUAGE sql
 SECURITY DEFINER;
 CREATE OR REPLACE FUNCTION datadog.pg_stat_statements() RETURNS SETOF pg_stat_statements AS
-$$ SELECT * FROM pg_stat_statements; $$
+    $$ SELECT * FROM pg_stat_statements; $$
 LANGUAGE sql
 SECURITY DEFINER;
 ```
@@ -133,7 +159,7 @@ SECURITY DEFINER;
 {{% /tab %}}
 {{< /tabs >}}
 
-<div class="alert alert-info">추가 테이블 쿼리가 필요한 데이터 수집이나 커스텀 메트릭의 경우 <code>datadog</code> 사용자에게 해당 테이블과 관련한 <code>SELECT</code> 권한을 부여해야 할 수 있습니다. 예: <code>grant SELECT on &lt;TABLE_NAME&gt; to datadog;</code>. 더 자세한 내용은 <a href="https://docs.datadoghq.com/integrations/faq/postgres-custom-metric-collection-explained/">PostgreSQL 커스텀 메트릭 수집</a>을 참고하세요.</div>
+<div class="alert alert-info">추가 테이블을 쿼리해야 하는 데이터 수집 또는 커스텀 메트릭의 경우 해당 테이블에 대한 <code>SELECT</code> 권한을 <code>datadog</code> 사용자에게 부여해야 할 수도 있습니다. 예: <code>&lt;TABLE_NAME&gt;에서 SELECT 권한을 Datadog에 부여합니다</code>. 자세한 내용은 <a href="https://docs.datadoghq.com/integrations/faq/postgres-custom-metric-collection-explained/">PostgreSQL 커스텀 메트릭 수집</a>을 참조하세요.</div>
 
 에이전트가 실행 계획을 수집하려면 **모든 데이터베이스**에 함수를 생성해야 합니다.
 
@@ -160,7 +186,7 @@ RETURNS NULL ON NULL INPUT
 SECURITY DEFINER;
 ```
 
-### 인증
+### 확인
 
 권한이 정확한지 확인하려면 다음 명령을 실행해 에이전트 사용자가 데이터베이스에 연결하고 코어 테이블을 읽을 수 있는지 확인합니다.
 {{< tabs >}}
@@ -203,7 +229,7 @@ psql -h mydb.example.com -U datadog postgres -A \
 
 암호 입력 메시지가 나타나면 `datadog` 사용자를 생성할 때 입력한 암호를 사용합니다.
 
-## 에이전트 설치하기
+## 에이전트 설치
 
 Azure Postgres 데이터베이스를 모니터링하려면 인프라스트럭처에 Datadog 에이전트를 설치하고 각 인스턴스에 원격으로 연결하도록 설정합니다. 에이전트를 데이터베이스에서 실행할 필요가 없고 데이터베이스에 연결만 하면 됩니다. 여기에 나와있지 않은 다른 설치 방법을 보려면 [에이전트 설치 지침][7]을 참고하세요.
 
@@ -221,7 +247,7 @@ Azure Postgres 데이터베이스를 모니터링하려면 인프라스트럭처
        port: 5432
        username: 'datadog@<AZURE_INSTANCE_ENDPOINT>'
        password: '<PASSWORD>'
-       ssl: true
+       ssl: 'require'
        ## Required for Postgres 9.6: Uncomment these lines to use the functions created in the setup
        # pg_stat_statements_view: datadog.pg_stat_statements()
        # pg_stat_activity_view: datadog.pg_stat_activity()
@@ -238,12 +264,12 @@ Azure Postgres 데이터베이스를 모니터링하려면 인프라스트럭처
 `deployment_type`과 `name` 필드를 설정하는 방법에 관한 자세한 정보는 [Postgres 통합 스펙][3]을 참고하세요.
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example
-[2]: /ko/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[2]: /ko/agent/configuration/agent-commands/#start-stop-and-restart-the-agent
 [3]: https://github.com/DataDog/integrations-core/blob/master/postgres/assets/configuration/spec.yaml#L446-L474
 {{% /tab %}}
-{{% tab "도커(Docker)" %}}
+{{% tab "도커" %}}
 
-도커 컨테이너에서 실행하는 데이터베이스 모니터링 에이전트를 구성하려면 에이전트 컨테이너에서 [자동탐지 통합 템플릿][1]을 도커 레이블로 설정합니다.
+도커 컨테이너에서 실행하는 데이터베이스 모니터링 에이전트를 구성하려면 에이전트 컨테이너에서 [Autodiscovery Integration Templates][1]을 도커 레이블로 설정합니다.
 
 **참고**: 에이전트에 도커 자동탐지 레이블을 읽을 수 있는 권한이 있어야 작동합니다. 
 
@@ -265,7 +291,7 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
     "port": 5432,
     "username": "datadog@<AZURE_INSTANCE_ENDPOINT>",
     "password": "<UNIQUEPASSWORD>",
-    "ssl": true,
+    "ssl": "require",
     "azure": {
       "deployment_type": "<DEPLOYMENT_TYPE>",
       "name": "<AZURE_INSTANCE_ENDPOINT>"
@@ -290,7 +316,7 @@ FROM datadog/agent:7.36.1
 
 LABEL "com.datadoghq.ad.check_names"='["postgres"]'
 LABEL "com.datadoghq.ad.init_configs"='[{}]'
-LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<AZURE_INSTANCE_ENDPOINT>", "port": 3306,"username": "datadog@<AZURE_INSTANCE_ENDPOINT>","password": "<UNIQUEPASSWORD>", "ssl": true, "azure": {"deployment_type": "<DEPLOYMENT_TYPE>", "name": "<AZURE_INSTANCE_ENDPOINT>"}}]'
+LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<AZURE_INSTANCE_ENDPOINT>", "port": 3306,"username": "datadog@<AZURE_INSTANCE_ENDPOINT>","password": "<UNIQUEPASSWORD>", "ssl": "require", "azure": {"deployment_type": "<DEPLOYMENT_TYPE>", "name": "<AZURE_INSTANCE_ENDPOINT>"}}]'
 ```
 
 Postgres 9.6의 경우 호스트와 포트가 지정된 인스턴스 구성에 다음 설정을 추가하세요.
@@ -307,18 +333,18 @@ pg_stat_activity_view: datadog.pg_stat_activity()
 
 [1]: /ko/agent/docker/integrations/?tab=docker
 [2]: https://github.com/DataDog/integrations-core/blob/master/postgres/assets/configuration/spec.yaml#L446-L474
-[3]: /ko/agent/guide/secrets-management
+[3]: /ko/agent/configuration/secrets-management
 [4]: /ko/agent/faq/template_variables/
 {{% /tab %}}
-{{% tab "쿠버네티스(Kubernetes)" %}}
+{{% tab "Kubernetes" %}}
 
 쿠버네티스 클러스터가 있는 경우 데이터베이스 모니터링에서  [Datadog 클러스터 에이전트][1]를 사용하세요.
 
 쿠버네티스 클러스터에서 클러스터 점검을 아직 활성화하지 않은 경우 [클러스터 확인 활성화][2] 지침에 따라 활성화합니다. 클러스터 에이전트 컨테이너에 연결된 정적 파일을 이용하거나 서비스 주석을 이용해 Postgres 설정을 선언할 수 있습니다.
 
-### Helm을 사용한 명령줄
+### Helm 명령줄
 
-다음 [Helm][3] 명령을 실행해 쿠버네티스(Kubernetes) 클러스터에서 [Datadog 클러스터 에이전트][1]를 설치하세요. 계정 및 환경에 맞게 값을 교체하세요.
+다음 [Helm][3] 명령을 실행해 쿠버네티스 클러스터에서 [Datadog 클러스터 에이전트][1]를 설치하세요. 내 계정과 환경에 맞게 값을 변경하세요.
 
 ```bash
 helm repo add datadog https://helm.datadoghq.com
@@ -336,7 +362,7 @@ instances:
     port: 5432
     username: "datadog@<AZURE_INSTANCE_ENDPOINT>"
     password: "<UNIQUEPASSWORD>"
-    ssl: true
+    ssl: "require"
     azure:
       deployment_type: "<DEPLOYMENT_TYPE>"
       fully_qualified_domain_name: "<AZURE_INSTANCE_ENDPOINT>"' \
@@ -355,7 +381,7 @@ pg_stat_activity_view: datadog.pg_stat_activity()
 연결된 설정 파일로 클러스터 점검을 설정하려면 다음 경로로 설정 파일을 클러스터 에이전트 컨테이너에 연결합니다. `/conf.d/postgres.yaml`:
 
 ```yaml
-cluster_check: true  # Make sure to include this flag
+cluster_check: true  # 이 플래그를 반드시 포함하세요
 init_config:
 instances:
   - dbm: true
@@ -363,13 +389,13 @@ instances:
     port: 5432
     username: 'datadog@<AZURE_INSTANCE_ENDPOINT>'
     password: '<PASSWORD>'
-    ssl: true
-    # After adding your project and instance, configure the Datadog Azure integration to pull additional cloud data such as CPU, Memory, etc.
+    ssl: "require"
+    # 프로젝트와 인스턴스를 추가한 후 CPU, 메모리 등과 같은 추가 클라우드 데이터를 가져오도록 Datadog Azure 통합을 구성합니다.
     azure:
       deployment_type: '<DEPLOYMENT_TYPE>'
       fully_qualified_domain_name: '<AZURE_INSTANCE_ENDPOINT>'
 
-    ## Required: For Postgres 9.6, uncomment these lines to use the functions created in the setup
+    ## 필수: Postgres 9.6의 경우 설정에서 생성된 함수를 사용하려면 이 줄의 주석 처리를 제거하세요.
     # pg_stat_statements_view: datadog.pg_stat_statements()
     # pg_stat_activity_view: datadog.pg_stat_activity()
 ```
@@ -398,7 +424,7 @@ metadata:
           "port": 5432,
           "username": "datadog@<AZURE_INSTANCE_ENDPOINT>",
           "password": "<UNIQUEPASSWORD>",
-          "ssl": true,
+          "ssl": "require",
           "azure": {
             "deployment_type": "<DEPLOYMENT_TYPE>",
             "fully_qualified_domain_name": "<AZURE_INSTANCE_ENDPOINT>"
@@ -430,7 +456,7 @@ pg_stat_activity_view: datadog.pg_stat_activity()
 [2]: /ko/agent/cluster_agent/clusterchecks/
 [3]: https://helm.sh
 [4]: https://github.com/DataDog/integrations-core/blob/master/postgres/assets/configuration/spec.yaml#L446-L474
-[5]: /ko/agent/guide/secrets-management
+[5]: /ko/agent/configuration/secrets-management
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -443,6 +469,24 @@ pg_stat_activity_view: datadog.pg_stat_activity()
 
 Azure에서 좀 더 포괄적인 데이터베이스를 수집하려면 [Azure PostgreSQL 통합][10](선택 사항)을 설치하세요.
 
+## 알려진 문제
+
+Postgres 16 데이터베이스의 경우 다음 오류 메시지가 로그 파일에 기록됩니다.
+
+```
+psycopg2.errors.InsufficientPrivilege: permission denied for function pg_ls_waldir
+2024-03-05 12:36:16 CET | CORE | ERROR | (pkg/collector/python/datadog_agent.go:129 in LogMessage) | - | (core.py:94) | Error querying wal_metrics: permission denied for function pg_ls_waldir
+2024-03-05 12:36:30 CET | CORE | ERROR | (pkg/collector/python/datadog_agent.go:129 in LogMessage) | postgres:cc861f821fbbc2ae | (postgres.py:239) | Unhandled exception while using database connection postgres
+Traceback (most recent call last):
+  File "/opt/datadog-agent/embedded/lib/python3.11/site-packages/datadog_checks/postgres/postgres.py", line 224, in db
+    yield self._db
+  File "/opt/datadog-agent/embedded/lib/python3.11/site-packages/datadog_checks/postgres/postgres.py", line 207, in execute_query_raw
+    cursor.execute(query)
+psycopg2.errors.InsufficientPrivilege: permission denied for function pg_ls_waldir
+```
+
+결과적으로 Agent는 Postgres 16에 대해 다음 메트릭을 수집하지 않습니다: `postgresql.wal_count`, `postgresql.wal_size`, `postgresql.wal_age`.
+
 ## 트러블슈팅
 
 설명에 따라 통합과 에이전트를 설치하고 설정했는데 제대로 작동하지 않는 경우 [트러블슈팅][11]을 참고하세요.
@@ -452,14 +496,14 @@ Azure에서 좀 더 포괄적인 데이터베이스를 수집하려면 [Azure Po
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /ko/agent/basic_agent_usage#agent-overhead
+[1]: /ko/database_monitoring/agent_integration_overhead/?tab=postgres
 [2]: /ko/database_monitoring/data_collected/#sensitive-information
 [3]: https://www.postgresql.org/docs/current/config-setting.html
 [4]: https://docs.microsoft.com/en-us/azure/postgresql/howto-configure-server-parameters-using-portal
 [5]: /ko/integrations/faq/postgres-custom-metric-collection-explained/
 [6]: https://www.postgresql.org/docs/current/app-psql.html
 [7]: https://app.datadoghq.com/account/settings/agent/latest
-[8]: /ko/agent/guide/agent-commands/#agent-status-and-information
+[8]: /ko/agent/configuration/agent-commands/#agent-status-and-information
 [9]: https://app.datadoghq.com/databases
 [10]: /ko/integrations/azure_db_for_postgresql/
 [11]: /ko/database_monitoring/setup_postgres/troubleshooting/

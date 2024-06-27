@@ -104,6 +104,8 @@ content/en/continuous_testing/cicd_integrations/configuration.md
 content/en/continuous_testing/cicd_integrations/github_actions.md
 content/en/continuous_testing/cicd_integrations/circleci_orb.md
 content/en/continuous_testing/cicd_integrations/azure_devops_extension.md
+content/en/continuous_testing/cicd_integrations/bitrise_upload.md
+content/en/continuous_testing/cicd_integrations/bitrise_run.md
 
 # Code Analysis
 content/en/code_analysis/static_analysis/github_actions.md

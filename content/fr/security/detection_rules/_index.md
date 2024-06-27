@@ -18,15 +18,26 @@ further_reading:
   tag: Blog
   text: Détecter les activités de connexion suspectes grâce aux règles de détection
     de voyage impossible
-kind: documentation
+products:
+- icon: cloud-security-management
+  name: Cloud SIEM
+  url: /security/cloud_siem/
+- icon: cloud-security-management
+  name: Cloud Security Management
+  url: /security/cloud_security_management/
+- icon: app-sec
+  name: Application Security Management
+  url: /security/application_security/
 title: Règles de détection
 ---
 
-Les règles de détection définissent la logique conditionnelle appliquée à l'ensemble des configurations cloud et des logs ingérés. Lorsqu'un scénario d'une règle se réalise sur une période donnée, un signal de sécurité est généré. Ces signaux sont accessibles depuis le [Signals Explorer][16].
+{{< product-availability >}}
+
+Les règles de détection définissent la logique conditionnelle appliquée à l'ensemble des configurations cloud et des logs ingérés. Lorsque le scénario d'une règle se réalise sur une période donnée, un signal de sécurité est généré. Ces signaux sont accessibles depuis le [Signals Explorer][16].
 
 ## Règles de détection prêtes à l'emploi
 
-Datadog fournit des [règles de détection prêtes à l'emploi][1] afin de signaler les attaques et éventuels problèmes de configuration. Lorsque de nouvelles règles de détection sont publiées, elles sont automatiquement importées dans votre compte, dans votre bibliothèque Application Security Management, ainsi que dans l'Agent, selon votre configuration.
+Datadog fournit des [règles de détection prêtes à l'emploi][1] afin de signaler les attaques et dʼéventuels problèmes de configuration. Lorsque de nouvelles règles de détection sont publiées, elles sont automatiquement importées dans votre compte, dans votre bibliothèque Application Security Management, ainsi que dans l'Agent, selon votre configuration.
 
 Les règles de détection prêtes à l'emploi sont disponibles pour les solutions de sécurité suivantes :
 
@@ -39,7 +50,7 @@ Les règles de détection prêtes à l'emploi sont disponibles pour les solution
 
 ## Règle de détection en version bêta
 
-L'équipe de sécurité Datadog ajoute régulièrement de nouvelles règles de détection prêtes à l'emploi visant à garantir votre sécurité. Bien que chaque règle vise à détecter efficacement les problèmes liés à la publication de nouvelles intégrations et d'autres fonctionnalités, il est nécessaire d'observer les capacités de détection à grande échelle d'une règle avant de la rendre disponible pour tous. Ainsi, l'équipe de sécurité Datadog est à même d'optimiser ou de supprimer les mécanismes de détection qui ne répondent pas aux normes établies.
+L'équipe de sécurité de Datadog ajoute régulièrement de nouvelles règles de détection prêtes à l'emploi visant à garantir votre sécurité. Bien que chaque règle vise à détecter efficacement les problèmes liés à la publication de nouvelles intégrations et d'autres fonctionnalités, il est nécessaire d'observer les capacités de détection à grande échelle d'une règle avant de la rendre disponible pour tous. Ainsi, l'équipe de sécurité Datadog est à même d'optimiser ou de supprimer les mécanismes de détection qui ne répondent pas aux normes établies.
 
 ## Règles de détection personnalisées
 
@@ -49,7 +60,7 @@ Pour [créer des règles personnalisées](#creer-des-regles-de-detection), vous 
 
 ## Rechercher et filtrer des règles de détection
 
-Pour consulter dans Datadog les règles de détection prêtes à l'emploi et personnalisées, accédez à [**Security** > **Configuration**][15]. Les règles de chaque solution (Application Security, Cloud Security Management et Cloud SIEM) sont répertoriées sur des pages distinctes.
+Pour consulter dans Datadog les règles de détection prêtes à l'emploi et personnalisées, accédez à la page [**Security Settings**][15]. Les règles de chaque solution (Application Security, Cloud Security Management et Cloud SIEM) sont répertoriées sur des pages distinctes.
 
 Pour rechercher et filtrer des règles, utilisez la zone de recherche et les facettes afin de créer une requête basée sur une valeur. Par exemple, pour afficher uniquement les règles d'un certain type, passez votre curseur sur le type de règle, puis sélectionnez `only`. Vous pouvez également appliquer un filtre basé sur des facettes, comme `source` et `severity`, pendant l'analyse et le tri de problèmes en cours.
 
@@ -57,7 +68,7 @@ Pour rechercher et filtrer des règles, utilisez la zone de recherche et les fac
 
 ## Créer des règles de détection
 
-Pour créer une règle de détection personnalisée, cliquez sur le bouton **New Rule** dans le coin supérieur de la page Detection Rules. Vous pouvez également [dupliquer une règle par défaut ou personnalisée](#dupliquer-une-regle) afin de l'utiliser comme modèle.
+Pour créer une règle de détection personnalisée, cliquez sur le bouton **New Rule** dans le coin supérieur droit de la page Detection Rules. Vous pouvez également [dupliquer une règle par défaut ou personnalisée](#dupliquer-une-regle) afin de l'utiliser comme modèle.
 
 Pour obtenir des instructions détaillées, consultez la documentation relative aux solutions suivantes :
 
@@ -126,7 +137,7 @@ Pour exporter la copie d'une règle au format JSON, cliquez sur l'icône des tro
 
 ## Obsolescence des règles
 
-Toutes les règles de détection font régulièrement l'objet de contrôles afin de garantir la pertinence de leurs signaux. Lorsqu'une règle est considérée comme obsolète, elle est remplacée par une nouvelle version.
+Des audits de toutes les règles de détection sont régulièrement effectués afin de maintenir un signal de haute fidélité. Les règles obsolètes sont remplacées par une règle améliorée.
 
 Le processus d'obsolescence des règles suit les étapes suivantes : 
 
@@ -135,7 +146,7 @@ Le processus d'obsolescence des règles suit les étapes suivantes :
     - Dans le volet latéral des problèmes de configuration (CSM Misconfigurations uniquement)
     - Dans l'[éditeur de règle][15] de la règle en question
 2. Lorsqu'une règle devient obsolète, elle reste disponible pendant 15 mois avant d'être supprimée, car les signaux sont conservés pendant cette durée. Durant cette période, vous pouvez réactiver la règle en [la dupliquant](#dupliquer-une-regle) dans l'interface.
-3. Une fois la règle supprimée, vous ne pouvez plus la dupliquer ni la réactiver.
+3. Après que la règle a été supprimée, vous ne pouvez plus la dupliquer ni la réactiver.
 
 ## Pour aller plus loin
 
@@ -144,7 +155,7 @@ Le processus d'obsolescence des règles suit les étapes suivantes :
 [1]: /fr/security/default_rules/
 [2]: /fr/security/cloud_siem/
 [3]: /fr/security/cloud_siem/log_detection_rules/
-[4]: /fr/security/misconfigurations/
+[4]: /fr/security/cloud_security_management/misconfigurations/
 [5]: /fr/security/threats/
 [6]: /fr/security/application_security/
 [7]: /fr/tracing/
@@ -152,8 +163,8 @@ Le processus d'obsolescence des règles suit les étapes suivantes :
 [9]: https://app.datadoghq.com/security/configuration/rules
 [10]: /fr/account_management/rbac/
 [11]: /fr/security/application_security/threats/custom_rules/
-[12]: /fr/security/misconfigurations/custom_rules
+[12]: /fr/security/cloud_security_management/misconfigurations/custom_rules
 [13]: /fr/security/threats/workload_security_rules?tab=host#create-custom-rules
-[14]: /fr/security/identity_risks/
+[14]: /fr/security/cloud_security_management/identity_risks/
 [15]: https://app.datadoghq.com/security/configuration/
 [16]: https://app.datadoghq.com/security

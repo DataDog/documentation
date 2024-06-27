@@ -12,7 +12,7 @@ integration_id: ''
 integration_title: セールスフォース・ドットコム
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: salesforce
 public_title: セールスフォース・ドットコム

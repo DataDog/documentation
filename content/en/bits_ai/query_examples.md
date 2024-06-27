@@ -1,6 +1,5 @@
 ---
 title: Example Natural Language Queries
-kind: guide
 disable_toc: false
 further_reading:
 - link: "bits_ai/"

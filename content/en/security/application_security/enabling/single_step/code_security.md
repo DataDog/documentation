@@ -15,7 +15,7 @@ kind: documentation
 
 ## Enabling in one step
 
-If you [install or update a Datadog Agent][1] with the **Enable Code Security (beta)** option selected, the Agent is installed and configured to enable detection of code-level vulnerabilities in your applications. This allows you to automatically instrument your application, without any additional installation or configuration steps. Restart services for this instrumentation to take effect.
+If you [install or update a Datadog Agent][1] with the **Enable Code Security** option selected, the Agent is installed and configured to enable detection of code-level vulnerabilities in your applications. This allows you to automatically instrument your application, without any additional installation or configuration steps. Restart services for this instrumentation to take effect.
 
 
 {{< img src="/security/application_security/single_step/asm_single_step_code_security.png" alt="Account settings Ubuntu setup page highlighting the toggle for Enabling APM instrumentation and ASM for Code Security." style="width:100%;" >}}
@@ -25,7 +25,7 @@ The following examples show how it works on each infrastructure type.
 {{< tabs >}}
 {{% tab "Linux host or VM" %}}
 
-With one command, you can install, configure, and start the Agent, while also instrumenting your services with ASM.
+With one command, you can install, configure, and start the Agent, while also instrumenting your services with Application Security options.
 
 For an Ubuntu host:
 
@@ -50,11 +50,11 @@ For an Ubuntu host:
 4. Restart the services on the host or VM.
 5. [Explore the performance observability of your services in Datadog][5].
 
-**Note:** To configure single-step for both ASM Threat Protection and Code Security, add the environment variables `DD_APPSEC_ENABLED=true` _and_ `DD_IAST_ENABLED=true` to your one-line installation command.
+**Note:** To configure single-step for **both** Code Security and Threat Protection, add **both** the `DD_IAST_ENABLED=true` _and_ `DD_APPSEC_ENABLED=true` environment variables to your one-line installation command.
 
 ### Specifying tracing library versions {#lib-linux}
 
-By default, enabling APM on your server installs support for Java, Python, Node.js, and .NET Core services. If you only have services implemented in some of these languages, set `DD_APM_INSTRUMENTATION_LIBRARIES` in your one-line installation command:
+By default, enabling APM on your server installs support for Java, Node.js, .NET Core, and Python services. If you only have services implemented in some of these languages, set `DD_APM_INSTRUMENTATION_LIBRARIES` in your one-line installation command:
 
 ```shell
 DD_APM_INSTRUMENTATION_LIBRARIES="java:1.25.0,python" DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="<YOUR_DD_SITE>" DD_APM_INSTRUMENTATION_ENABLED=host DD_IAST_ENABLED=true  DD_ENV=staging bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
