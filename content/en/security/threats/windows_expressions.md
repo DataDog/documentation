@@ -5,7 +5,6 @@ further_reading:
 - link: /security/cloud_workload_security/getting_started/
   tag: Documentation
   text: Get started with Datadog CSM Threats
-kind: documentation
 title: Windows Agent attributes and helpers
 ---
 <!--  SOURCED FROM https://github.com/DataDog/datadog-agent -->
@@ -59,6 +58,7 @@ List of the available variables:
 | [`container.created_at`](#container-created_at-doc) | Timestamp of the creation of the container |
 | [`container.id`](#container-id-doc) | ID of the container |
 | [`container.tags`](#container-tags-doc) | Tags of the container |
+| [`event.hostname`](#event-hostname-doc) | Hostname associated with the event |
 | [`event.origin`](#event-origin-doc) | Origin of the event |
 | [`event.os`](#event-os-doc) | Operating system of the event |
 | [`event.service`](#event-service-doc) | Service associated with the event |
@@ -579,6 +579,13 @@ Definition: ID of the container
 Type: string
 
 Definition: Tags of the container
+
+
+
+### `event.hostname` {#event-hostname-doc}
+Type: string
+
+Definition: Hostname associated with the event
 
 
 

@@ -1,7 +1,6 @@
 ---
 description: JSON schema documentation of the CSM Threats Windows backend event
 disable_edit: true
-kind: documentation
 title: CSM Threats Windows Events Formats
 ---
 <!--  SOURCED FROM https://github.com/DataDog/datadog-agent -->
