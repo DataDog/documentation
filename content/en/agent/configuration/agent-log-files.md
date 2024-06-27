@@ -21,9 +21,6 @@ The Datadog Agent does a logs rollover every 10MB by default. When a rollover oc
 
 ## Agent log directory
 
-{{< tabs >}}
-{{% tab "Agent v6 & v7" %}}
-
 | Platform                              | Command                       |
 |---------------------------------------|-------------------------------|
 | Linux                                 | `/var/log/datadog/`           |
@@ -31,25 +28,7 @@ The Datadog Agent does a logs rollover every 10MB by default. When a rollover oc
 | macOS, Agent older than 6.28.0/7.28.0 | `/var/log/datadog`            |
 | Windows                               | `C:\ProgramData\Datadog\logs` |
 
-{{% /tab %}}
-{{% tab "Agent v5" %}}
-
-| Platform                             | Command                                                              |
-|--------------------------------------|----------------------------------------------------------------------|
-| Linux                                | `/var/log/datadog/`                                                  |
-| macOS                                | `/var/log/datadog/`                                                  |
-| Windows Server 2008, Vista and newer | `C:\ProgramData\Datadog\logs\`                                       |
-| Windows Server 2003, XP or older     | `C:\Documents and Settings\All Users\Application Data\Datadog\logs\` |
-| SmartOS                              | `/opt/local/datadog/logs/supervisord/`                               |
-| Source build                         | `~/.datadog-agent/supervisord/logs/`                                 |
-
-{{% /tab %}}
-{{< /tabs >}}
-
 ## Agent log files
-
-{{< tabs >}}
-{{% tab "Agent v6 & v7" %}}
 
 * `agent.log`
 * `process-agent.log`
@@ -58,20 +37,9 @@ The Datadog Agent does a logs rollover every 10MB by default. When a rollover oc
 * `jmxfetch.log` for Agent >= 7.24.0/6.24.0
 * `dogstatsd.log` for Agent >= 7.46.0
 
-{{% /tab %}}
-{{% tab "Agent v5" %}}
-
-* `collector.log`
-* `dogstatsd.log`
-* `forwarder.log`
-* `supervisord.log`
-
-{{% /tab %}}
-{{< /tabs >}}
-
 ## Agent installation log files
 
-| Platform                             | Location and file name        |
+| Platform                             | Location and filename        |
 |--------------------------------------|-------------------------------|
 | Linux                                | `$(pwd)/ddagent-install.log`  |
 | macOS                                | `/tmp/dd_agent.log`           |
