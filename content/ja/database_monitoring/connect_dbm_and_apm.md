@@ -8,68 +8,65 @@ further_reading:
 kind: documentation
 title: Database Monitoring とトレースの相関付け
 ---
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Database Monitoring はこのサイトではサポートされていません。</div>
-{{< /site-region >}}
 
-このガイドでは、[Database Monitoring][1] を構成し、[APM][2] を使用していることを前提としています。APM と DBM を接続すると、DBM のデータ収集に APM トレース識別子が注入され、これによりこれら 2 つのデータソースの相関が可能になります。これにより、APM 製品ではデータベース情報を、DBM 製品では APM データを表示する製品機能が有効になります。
+このガイドは、[データベースモニタリング][1]を構成し、[APM][2] を使用していることを前提にしています。APM と DBM を接続すると、APM のトレース識別子が DBM のデータ収集に挿入され、これら 2 つのデータソースを相関させることができます。これにより、APM 製品ではデータベース情報を、DBM 製品では APM データを表示する製品機能が実現します。
 
-## 始める前に
+## はじめに
 
-対応データベース
-: Postgres、MySQL、SQL Server
+対応データベース:
+Postgres、MySQL、SQL Server、Oracle
 
-対応 Agent バージョン
+サポート対象の Agent バージョン
 : 7.46+
 
 データプライバシー
-: SQL コメントの伝播を有効にすると、潜在的に機密のデータ (サービス名) がデータベースに保存され、データベースへのアクセスを許可された他のサードパーティがアクセスできるようになります。
+: SQL コメントの伝播を有効にすると、潜在的に機密データ (サービス名) がデータベースに保存され、データベースへのアクセスを許可された他の第三者がアクセスすることが可能になります。
 
 
-APM トレーサーインテグレーションは、アプリケーションからデータベースに渡される情報の量を制御する *Propagation Mode* をサポートしています。
+APM トレーサーインテグレーションは、アプリケーションからデータベースに渡される情報量を制御する*伝搬モード*をサポートしています。
 
-- `full` モードは完全なトレース情報をデータベースに送信し、DBM 内で個々のトレースを調査できるようにします。これはほとんどのインテグレーションで推奨される方法です。
-- `service` モードはサービス名を送信し、これによりどのサービスがデータベース負荷の原因となっているかを知ることができます。これは SQL Server アプリケーションでサポートされている唯一のモードです。
-- `none` モードは伝播を無効にし、アプリケーションからの情報を送信しません。
+- `full` モードは完全なトレース情報をデータベースに送信し、DBM 内で個々のトレースを調査できるようにします。これはほとんどのインテグレーションで推奨されるソリューションです。
+- `service` モードはサービス名を送信し、どのサービスがデータベース負荷に寄与しているかを把握できます。このモードは Oracle と SQL Server アプリケーションで唯一サポートされているモードです。
+- `disabled` モードは伝搬を無効にし、アプリケーションからの情報を送信しません。
 
-ステートメントキャッシングの動作が完全なトレースコンテキストを含む場合にパフォーマンスの問題を引き起こす可能性があるため、SQL Server は `full` 伝播モードをサポートしていません。
+SQL Server と Oracle は、ステートメントキャッシュの動作により、完全なトレースコンテキストを含むとパフォーマンスの問題が発生する可能性があるため、`full` 伝搬モードをサポートしていません。
 
-| DD_DBM_PROPAGATION_MODE  | Postgres  |   MySQL   |  SQL Server  |
-|:-------------------------|:---------:|:---------:|:------------:|
-| `full`                   | {{< X >}} | {{< X >}} |          |
-| `service`                | {{< X >}} | {{< X >}} | {{< X >}}    |
+| DD_DBM_PROPAGATION_MODE | Postgres  |   MySQL   | SQL Server |  Oracle   |
+|:------------------------|:---------:|:---------:|:----------:|:---------:|
+| `full`                  | {{< X >}} | {{< X >}} |            |           |
+| `service`               | {{< X >}} | {{< X >}} | {{< X >}}  | {{< X >}} |
 
-**対応アプリケーショントレーサーおよびドライバー**
+**サポート対象のアプリケーショントレーサーとドライバー**
 
-| 言語                                 | ライブラリまたはフレームワーク | Postgres  |   MySQL   |                SQL Server              |
-|:-----------------------------------------|:---------------------|:---------:|:---------:|:--------------------------------------:|
-| **Go:** [dd-trace-go][3] >= 1.44.0       |                      |           |           |                                        |
-|                                          | [database/sql][4]    | {{< X >}} | {{< X >}} | `service` モードのみ                    |
-|                                          | [sqlx][5]            | {{< X >}} | {{< X >}} | `service` モードのみ                    |
-| **Java** [dd-trace-java][23] >= 1.11.0   |                      |           |           |                                        |
-|                                          | [jdbc][22]           | {{< X >}} | {{< X >}} | `service` モードのみ                    |
-| **Ruby:** [dd-trace-rb][6] >= 1.8.0      |                      |           |           |                                        |
-|                                          | [pg][8]              | {{< X >}} |           |                                        |
-|                                          | [mysql2][7]          |           | {{< X >}} |                                        |
-| **Python:** [dd-trace-py][11] >= 1.9.0   |                      |           |           |                                        |
-|                                          | [psycopg2][12]       | {{< X >}} |           |                                        |
-| **.NET** [dd-trace-dotnet][15] >= 2.35.0 |                      |           |           |                                        |
-|                                          | [Npgsql][16] *         | {{< X >}} |           |                                        |
-|                                          | [MySql.Data][17] *     |           | {{< X >}} |                                        |
-|                                          | [MySqlConnector][18] * |           | {{< X >}} |                                        |
-|                                          | [ADO.NET][24] *        |           |           | `service` モードのみ                    |
-| **PHP**  [dd-trace-php][19] >= 0.86.0    |                      |           |           |                                        |
-|                                          | [pdo][20]            | {{< X >}} | {{< X >}} |                                        |
-|                                          | [MySQLi][21]         |           | {{< X >}} |                                        |
-| **Node.js:** [dd-trace-js][9] >= 3.17.0  |                      |           |           |                                        |
-|                                          | [postgres][10]       | {{< X >}} |           |                                        |
-|                                          | [mysql][13]          |           | {{< X >}} |                                        |
-|                                          | [mysql2][14]         |           | {{< X >}} |                                        |
+| 言語                                 | ライブラリまたはフレームワーク   | Postgres  |   MySQL   |     SQL Server      |       Oracle        |
+|:-----------------------------------------|:-----------------------|:---------:|:---------:|:-------------------:|:-------------------:|
+| **Go:** [dd-trace-go][3] >= 1.44.0       |                        |           |           |                     |                     |
+|                                          | [database/sql][4]      | {{< X >}} | {{< X >}} | `service` モードのみ | `service` モードのみ |
+|                                          | [sqlx][5]              | {{< X >}} | {{< X >}} | `service` モードのみ | `service` モードのみ |
+| **Java** [dd-trace-java][23] >= 1.11.0   |                        |           |           |                     |                     |
+|                                          | [jdbc][22]             | {{< X >}} | {{< X >}} | `service` モードのみ | `service` モードのみ |
+| **Ruby:** [dd-trace-rb][6] >= 1.8.0      |                        |           |           |                     |                     |
+|                                          | [pg][8]                | {{< X >}} |           |                     |                     |
+|                                          | [mysql2][7]            |           | {{< X >}} |                     |                     |
+| **Python:** [dd-trace-py][11] >= 1.9.0   |                        |           |           |                     |                     |
+|                                          | [psycopg2][12]         | {{< X >}} |           |                     |                     |
+| **.NET** [dd-trace-dotnet][15] >= 2.35.0 |                        |           |           |                     |                     |
+|                                          | [Npgsql][16] *         | {{< X >}} |           |                     |                     |
+|                                          | [MySql.Data][17] *     |           | {{< X >}} |                     |                     |
+|                                          | [MySqlConnector][18] * |           | {{< X >}} |                     |                     |
+|                                          | [ADO.NET][24] *        |           |           | `service` モードのみ |                     |
+| **PHP**  [dd-trace-php][19] >= 0.86.0    |                        |           |           |                     |                     |
+|                                          | [pdo][20]              | {{< X >}} | {{< X >}} |                     |                     |
+|                                          | [MySQLi][21]           |           | {{< X >}} |                     |                     |
+| **Node.js:** [dd-trace-js][9] >= 3.17.0  |                        |           |           |                     |                     |
+|                                          | [postgres][10]         | {{< X >}} |           |                     |                     |
+|                                          | [mysql][13]            |           | {{< X >}} |                     |                     |
+|                                          | [mysql2][14]           |           | {{< X >}} |                     |                     |
 
 \* [CommandType.StoredProcedure][25] はサポートされていません
 
 ## セットアップ
-最高のユーザーエクスペリエンスを得るためには、以下の環境変数がアプリケーションに設定されていることを確認してください。
+最高のユーザーエクスペリエンスを得るために、アプリケーションで以下の環境変数が設定されていることを確認してください。
 
 ```
 DD_SERVICE=(application name)
@@ -80,12 +77,12 @@ DD_VERSION=(application version)
 {{< tabs >}}
 {{% tab "Go" %}}
 
-アプリの依存関係を更新して、[dd-trace-go@v1.44.0][1] 以上を含めます。
+アプリの依存関係を更新して、[dd-trace-go@v1.44.0][1] 以上を含むようにします。
 ```
 go get gopkg.in/DataDog/dd-trace-go.v1@v1.44.0
 ```
 
-`contrib/database/sql` パッケージをインポートするようにコードを更新します。
+コードを更新して `contrib/database/sql` パッケージをインポートします。
 ```go
 import (
    "database/sql"
@@ -94,16 +91,16 @@ import (
 )
 ```
 
-以下のいずれかの方法を使用して、データベースモニタリングの伝播機能を有効にします。
+以下のいずれかの方法で、データベースモニタリングの伝搬機能を有効にします。
 1. 環境変数:
    `DD_DBM_PROPAGATION_MODE=full`
 
-2. ドライバー登録時のコードの使用
+2. ドライバー登録時にコードを使用する:
    ```go
    sqltrace.Register("postgres", &pq.Driver{}, sqltrace.WithDBMPropagation(tracer.DBMPropagationModeFull), sqltrace.WithServiceName("my-db-service"))
    ```
 
-3. `sqltrace.Open` のコードの使用
+3. `sqltrace.Open` のコードを使用する:
    ```go
    sqltrace.Register("postgres", &pq.Driver{}, sqltrace.WithServiceName("my-db-service"))
 
@@ -122,17 +119,17 @@ import (
 )
 
 func main() {
-    // 最初のステップは、ドライバーの登録時に dbm 伝搬モードを設定することです。これは
-    // sqltrace.Open でも行うことができ、この機能をより細かく制御することができます。
+    // まず、ドライバの登録時に dbm 伝搬モードを設定します。これは sqltrace.Open で行うこともでき、
+    // この機能をより詳細に制御できることに注意してください。
     sqltrace.Register("postgres", &pq.Driver{}, sqltrace.WithDBMPropagation(tracer.DBMPropagationModeFull))
 
-    // 続いて Open の呼び出し。
+    // 続いて、Open へのコール。
     db, err := sqltrace.Open("postgres", "postgres://pqgotest:password@localhost/pqgotest?sslmode=disable")
     if err != nil {
         log.Fatal(err)
     }
 
-    // 次に、database/sql パッケージをトレースしながら通常通り使用します。
+    // そして、データベース/SQL パッケージを通常通り、トレースしながら使い続けます。
     rows, err := db.Query("SELECT name FROM users WHERE age=?", 27)
     if err != nil {
         log.Fatal(err)
@@ -147,18 +144,18 @@ func main() {
 
 {{% tab "Java" %}}
 
-[Java トレース][1]インスツルメンテーションの説明に従い、Agent の `1.11.0` またはそれ以上のバージョンをインストールします。
+[Java トレーシング][1]のインスツルメンテーションの説明に従い、Agent の `1.11.0` またはそれ以上のバージョンをインストールする必要があります。
 
-また、`jdbc-datastore` [インスツルメンテーション][2]を有効にする必要があります。
+また、`jdbc-datasource` [インスツルメンテーション][2]を有効にする必要があります。
 
-以下の方法の**いずれか**を使用して、データベースモニタリングの伝播機能を有効にします。
+以下の**いずれか**の方法で、データベースモニタリングの伝搬機能を有効にします。
 
 - システムプロパティ `dd.dbm.propagation.mode=full` を設定する
 - 環境変数 `DD_DBM_PROPAGATION_MODE=full` を設定する
 
 完全な例:
 ```
-# 必要なシステムプロパティで Java Agent を起動します
+# 必要なシステムプロパティでJava Agentを起動します
 java -javaagent:/path/to/dd-java-agent.jar -Ddd.dbm.propagation.mode=full -Ddd.integration.jdbc-datasource.enabled=true -Ddd.service=my-app -Ddd.env=staging -Ddd.version=1.0 -jar path/to/your/app.jar
 ```
 
@@ -181,7 +178,7 @@ public class Application {
 }
 ```
 
-**注**: プリペアドステートメントは `full` モードではサポートされておらず、プリペアドステートメントを使用するすべての JDBC API 呼び出しは自動的に `service` モードにダウングレードされます。ほとんどの Java SQL ライブラリはデフォルトでプリペアドステートメントを使用するため、**ほとんどの** Java アプリケーションは `service` モードしか使用できません。
+**注**: プリペアドステートメントは `full` モードではサポートされていません。プリペアドステートメントを使用するすべての JDBC API 呼び出しは自動的に `service` モードにダウングレードされます。ほとんどの Java SQL ライブラリはデフォルトでプリペアドステートメントを使用するため、**ほとんどの** Java アプリケーションは `service` モードしか使用できません。
 
 [1]: /ja/tracing/trace_collection/dd_libraries/java/
 [2]: /ja/tracing/trace_collection/compatibility/java/#data-store-compatibility
@@ -190,18 +187,18 @@ public class Application {
 
 {{% tab "Ruby" %}}
 
-Gemfile で、[dd-trace-rb][1] をバージョン `1.8.0` 以上にインストールまたは更新します。
+Gemfile で [dd-trace-rb][1] をバージョン `1.8.0` 以降にインストールまたはアップデートします。
 
 ```rb
 source 'https://rubygems.org'
 gem 'ddtrace', '>= 1.8.0'
 
-# 使用状況により異なります
+# 使用による
 gem 'mysql2'
 gem 'pg'
 ```
 
-以下のいずれかの方法を使用して、データベースモニタリングの伝播機能を有効にします。
+以下のいずれかの方法で、データベースモニタリングの伝搬機能を有効にします。
 1. 環境変数:
    `DD_DBM_PROPAGATION_MODE=full`
 
@@ -238,17 +235,17 @@ client.query("SELECT 1;")
 
 {{% tab "Python" %}}
 
-アプリの依存関係を更新して、[dd-trace-py>=1.9.0][1] を含めます。
+アプリの依存関係を更新して、[dd-trace-py>=1.9.0][1] を含むようにします。
 ```
 pip install "ddtrace>=1.9.0"
 ```
 
-[psycopg2][2] をインストールします (**注**: DBM と APM の接続は MySQL クライアントではサポートされていません)。
+[psycopg2][2] をインストールします。
 ```
 pip install psycopg2
 ```
 
-以下の環境変数を設定して、データベースモニタリングの伝播機能を有効にします。
+以下の環境変数を設定して、データベースモニタリングの伝搬機能を有効にします。
    - `DD_DBM_PROPAGATION_MODE=full`
 
 完全な例:
@@ -264,10 +261,10 @@ POSTGRES_CONFIG = {
     "dbname": "postgres_db_name",
 }
 
-# Postgres DB に接続します
+# postgres db に接続する
 conn = psycopg2.connect(**POSTGRES_CONFIG)
 cursor = conn.cursor()
-# SQL クエリを実行します
+# sql クエリを実行する
 cursor.execute("select 'blah'")
 cursor.executemany("select %s", (("foo",), ("bar",)))
 ```
@@ -280,7 +277,7 @@ cursor.executemany("select %s", (("foo",), ("bar",)))
 {{% tab ".NET" %}}
 
 <div class="alert alert-warning">
-この機能を使用するには、.NET サービスの自動インスツルメンテーションを有効にする必要があります。
+この機能を使用するには、.NET サービスの自動インスツルメンテーションが有効である必要があります。
 </div>
 
 [.NET Framework のトレース手順][1]または [.NET Core のトレース手順][2]に従って、自動インスツルメンテーションパッケージをインストールし、サービスのトレースを有効にしてください。
@@ -328,20 +325,29 @@ const tracer = require('dd-trace').init();
 ```
 
 以下のいずれかの方法で、データベースモニタリングの伝搬機能を有効にします。
-1. 環境変数:
-   `DD_DBM_PROPAGATION_MODE=full`
-
-2. オプション `dbmPropagationMode` (デフォルト: `ENV['DD_DBM_PROPAGATION_MODE']`):
-   ```javascript
-   tracer.use('pg', { dbmPropagationMode: 'full', service: 'my-db-service' })
+* 以下の環境変数を設定します。
    ```
+   DD_DBM_PROPAGATION_MODE=full
+   ```
+
+* トレーサーが `dbmPropagationMode` オプションを使用するように設定します (デフォルト: `ENV['DD_DBM_PROPAGATION_MODE']`)。
+   ```javascript
+   const tracer = require('dd-trace').init({ dbmPropagationMode: 'full' })
+   ```
+
+* インテグレーションレベルでのみ有効にします。
+   ```javascript
+   const tracer = require('dd-trace').init();
+   tracer.use('pg', {
+      dbmPropagationMode: 'full'
+   })
+   ```
+
 
 完全な例:
 ```javascript
 const pg = require('pg')
-const tracer = require('dd-trace').init()
-
-tracer.use('pg', { dbmPropagationMode: 'full', service: 'my-db-service' })
+const tracer = require('dd-trace').init({ dbmPropagationMode: 'full' })
 
 const client = new pg.Client({
     user: 'postgres',
@@ -355,7 +361,7 @@ client.connect(err => {
 });
 
 client.query('SELECT $1::text as message', ['Hello world!'], (err, result) => {
-    // 処理結果
+    // 結果を処理します
 })
 ```
 

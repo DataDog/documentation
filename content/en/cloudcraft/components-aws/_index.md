@@ -1,9 +1,9 @@
 ---
 title: "AWS Components"
-kind: guide
 ---
 
 {{< whatsnext desc="Common:" >}}
+    {{< nextlink href="cloudcraft/components-aws/region">}}Region{{< /nextlink >}}
     {{< nextlink href="cloudcraft/components-aws/vpc">}}VPC{{< /nextlink >}}
     {{< nextlink href="cloudcraft/components-aws/security-group">}}Security group{{< /nextlink >}}
     {{< nextlink href="cloudcraft/components-aws/subnet">}}Subnet{{< /nextlink >}}

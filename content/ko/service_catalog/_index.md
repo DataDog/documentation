@@ -82,9 +82,9 @@ Datadog [Service Catalog][1]는 소유권 메타데이터, 성능 인사이트, 
 
 ## 시작하기
 
-{{< whatsnext desc="Service Catalog 제공 사항 알아보기:" >}}
-    {{< nextlink href="tracing/service_catalog/browsing/" >}}Service Catalog 살펴보기{{< /nextlink >}}
-    {{< nextlink href="tracing/service_catalog/investigating" >}}서비스 살펴보기{{< /nextlink >}}
+{{< whatsnext desc="서비스 카탈로그 기능:" >}}
+    {{< nextlink href="/service_catalog/navigating/" >}}서비스 카탈로그 살펴보기{{< /nextlink >}}
+    {{< nextlink href="/service_catalog/investigating" >}}서비스 자세히 살펴보기{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## 역할 기반 액세스 및 권한
@@ -124,15 +124,6 @@ Service Catalog 쓰기 권한을 통해 사용자는 서비스 카탈로그 데�
 *  Web
 
 일부 통합은 유형에 대한 별칭입니다. 예를 들어 Postgres, MySQL 및 Cassandra는 "DB" 유형에 매핑됩니다. Redis 및 Memcache 통합은 "Cache" 유형에 매핑됩니다.
-
-### 서비스 유형 및 언어 업데이트하기
-[Service Catalog 메타데이터 스키마 2.2][5]를 사용하면 사용자 정의 서비스에 대한 유형 및 언어를 지정하거나 계측된 서비스에 대해 자동 감지된 유형 및 언어를 덮어쓸 수 있습니다. 서비스 유형과 언어에 올바른 레이블을 지정하여 다른 팀이 서비스의 기능과 상호 작용 방법을 더 잘 이해할 수 있도록 하세요.
-
-## 서비스 색상 변경하기
-
-서비스 색상은 트레이스 시각화에 사용됩니다. 서비스 유형 아이콘을 클릭하여 변경하세요.
-
-{{< img src="tracing/service_catalog/change_service_color.png" alt="다른 아이콘 색상을 선택하려면 서비스 아이콘을 클릭하세요." style="width:80%;" >}}
 
 ## 데이터 보존
 **Service List** 및 **Service Page**의 서비스 및 리소스 통계와 스팬 요약은 최대 30일 동안 유지됩니다. APM 트레이스 메트릭에 대한 사용자 정의 쿼리의 경우 Metric Explorer를 사용하세요. [APM의 데이터 보존에 대해 자세히 알아보세요][4].

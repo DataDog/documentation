@@ -12,10 +12,10 @@ type: multi-code-lang
 code_lang_weight: 30
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-unity
-  tag: GitHub
+  tag: "Source Code"
   text: Source code for dd-sdk-unity
 - link: https://github.com/DataDog/unity-package
-  tag: GitHub
+  tag: "Source Code"
   text: Package URL for Unity SDK
 - link: real_user_monitoring/explorer/
   tag: Documentation
@@ -28,7 +28,7 @@ further_reading:
 ## Overview
 
 {{< beta-callout url="#" btn_hidden="true" >}}
-Unity Monitoring is in private beta. To request access, reach out to Datadog support.
+Unity Monitoring is in public beta.
 {{< /beta-callout >}}
 
 Datadog Real User Monitoring (RUM) enables you to visualize and analyze user journeys of your application's individual users.
@@ -50,6 +50,10 @@ Datadog does not support Desktop (Windows, Mac, or Linux), console, or web deplo
 
 To ensure the safety of your data, you must use a client token. For more information about setting up a client token, see the [Client Token documentation][2].
 
+### Sample RUM sessions
+
+You can control the data your application sends to Datadog RUM during instrumentation of the RUM Unity SDK. Specify the **Session Sample Rate** as a percentage between 0 and 100 in the Project Settings window in Unity.
+
 ### Installing
 
 1. Install [External Dependency Manager for Unity (EDM4U)][3]. This can be done using [Open UPM][4].
@@ -58,7 +62,9 @@ To ensure the safety of your data, you must use a client token. For more informa
 
 3. Configure your project to use [Gradle templates][6], and enable both `Custom Main Template` and `Custom Gradle Properties Template`.
 
-4. If you build and recieve `Duplicate class` errors (common in Unity 2022.x) add the following block in the `dependencies` block in your `mainTemplate.gradle`:
+4. In the iOS setting for External Dependency Manager (**Assets** > **External Dependency Manager** > **iOS Resolver** > **Settings**), disable the **Link frameworks statically** option and ensure that **Allow the same pod to be in multiple targets** is enabled.
+
+5. If you build and receive `Duplicate class` errors (common in Unity 2022.x), add the following block in the `dependencies` block in your `mainTemplate.gradle`:
 
    ```groovy
    constraints {

@@ -1,4 +1,5 @@
-Use the following instructions to enable [CSM Threats][11] on Windows. To learn more about the supported deployment types for each CSM feature, see [Setting Up Cloud Security Management][12].
+
+Use the following instructions to enable Threat Detection on Windows.
 
 Datadog Cloud Security Management on Windows includes built-in threat detection for Windows process and network events. The out-of-the-box Windows ruleset includes the following default rules:
 
@@ -59,7 +60,7 @@ When you enable CSM on Windows, the Agent sends a log to Datadog to confirm that
 
 Another method to verify that the Agent is sending events to CSM is to manually trigger a Windows security signal.
 
-1. In Windows, open a command prompt as Administrator and run the command `schtasks`.
+1. In Windows, open a command prompt as Administrator and run the command `schtasks /create /?`.
 2. In Datadog, navigate to the [CSM Signals Explorer][8] to view the generated Windows signals.
     - To view signals originating from configured Windows hosts, filter the signals by hostname using the **Hosts** > **Hostnames** facet.
     - To filter by Windows rules, use the **Workflow** > **Rule Name** facet.
@@ -95,4 +96,3 @@ To get alerts whenever a Windows signal is created, create a [Notification Rule]
 [9]: https://docs.datadoghq.com/security/notifications/rules/
 [10]: /security/cloud_security_management/setup
 [11]: /security/threats
-[12]: /security/cloud_security_management/setup#supported-deployment-types-and-features

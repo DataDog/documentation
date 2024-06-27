@@ -210,23 +210,6 @@ Use `DD_CIVISIBILITY_JACOCO_PLUGIN_VERSION` environment variable to specify whic
 [101]: https://www.eclemma.org/jacoco/
 [102]: https://mvnrepository.com/artifact/org.jacoco/org.jacoco.agent
 {{% /tab %}}
-{{% tab "JUnit Report Uploads" %}}
-
-### Compatibility
-* `datadog-ci>=2.17.2`.
-
-You can upload a code coverage percentage value when using JUnit Report uploads:
-
-```shell
-datadog-ci junit upload --service <service_name> --report-measures=test.code_coverage.lines_pct:85 <path>
-```
-
-In this example, `85` is the percentage of lines covered by your tests and needs to be generated with a different tool.
-
-The code coverage report needs to be generated in a different process, otherwise the JUnit report uploads will not generate code coverage reports. The reported metric name must be `test.code_coverage.lines_pct`.
-
-{{% /tab %}}
-
 {{% tab "Python" %}}
 
 ### Compatibility
@@ -274,7 +257,22 @@ DD_ENV=ci DD_SERVICE=my-python-service pytest --cov
 [101]: https://github.com/nedbat/coveragepy
 [102]: https://github.com/pytest-dev/pytest-cov
 {{% /tab %}}
+{{% tab "JUnit Report Uploads" %}}
 
+### Compatibility
+* `datadog-ci>=2.17.2`.
+
+You can upload a code coverage percentage value when using JUnit Report uploads:
+
+```shell
+datadog-ci junit upload --service <service_name> --report-measures=test.code_coverage.lines_pct:85 <path>
+```
+
+In this example, `85` is the percentage of lines covered by your tests and needs to be generated with a different tool.
+
+The code coverage report needs to be generated in a different process, otherwise the JUnit report uploads will not generate code coverage reports. The reported metric name must be `test.code_coverage.lines_pct`.
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Graph code coverage

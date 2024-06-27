@@ -75,7 +75,7 @@ JBoss/WildFly チェックは [Datadog Agent][3] パッケージに含まれて�
 
 ### ブラウザトラブルシューティング
 
-このチェックでは、インスタンスあたりのメトリクス数が 350 に制限されています。返されたメトリクスの数は、情報ページに表示されます。以下で説明するコンフィギュレーションを編集することで、関心があるメトリクスを指定できます。収集するメトリクスをカスタマイズする方法については、[JMX チェックのドキュメント][4]で詳細な手順を参照してください。制限以上のメトリクスを監視する必要がある場合は、[Datadog のサポートチーム][5]までお問い合わせください。
+このチェックでは、インスタンスあたりのメトリクス数が 350 に制限されています。返されたメトリクスの数は、[ステータスページ][4]に表示されます。下記の構成を編集することで、関心のあるメトリクスを指定できます。収集するメトリクスをカスタマイズする方法については、[JMX チェックのドキュメント][5]で詳細な手順を参照してください。制限以上のメトリクスを監視する必要がある場合は、[Datadog のサポートチーム][6]までお問い合わせください。
 
 {{< tabs >}}
 {{% tab "ホスト" %}}
@@ -150,7 +150,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 ### 検証
 
-[Agent の status サブコマンドを実行][6]し、Checks セクションで `jboss_wildfly` を探します。
+[Agent の status サブコマンドを実行][4]し、Checks セクションで `jboss_wildfly` を探します。
 
 ## リアルユーザーモニタリング
 
@@ -168,13 +168,13 @@ JBoss/WildFly インテグレーションには、イベントは含まれませ
 
 ## ヘルプ
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
+ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
 
 
 
 [1]: https://developers.redhat.com/products/eap/overview
 [2]: http://wildfly.org
 [3]: https://app.datadoghq.com/account/settings/agent/latest
-[4]: https://docs.datadoghq.com/ja/integrations/java/
-[5]: https://docs.datadoghq.com/ja/help/
-[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[5]: https://docs.datadoghq.com/ja/integrations/java/
+[6]: https://docs.datadoghq.com/ja/help/

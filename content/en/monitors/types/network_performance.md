@@ -14,11 +14,11 @@ further_reading:
 - link: "/monitors/manage/status/"
   tag: "Documentation"
   text: "Check your monitor status"
+- link: "/network_monitoring/performance/recommended_monitors"
+  tag: "Documentation"
+  text: "Recommended NPM Monitors"
 ---
-
-{{< callout btn_hidden="true" header="Join the Beta!">}}
-The Network Performance monitor is in private beta. Reach out to your Datadog representative to sign up for access.
-{{< /callout >}}
+<div class="alert alert-info">The NPM monitor is in public beta.</div>
 
 ## Overview
 
@@ -62,7 +62,10 @@ The following tables list the different NPM metrics you can create monitors on.
 ### TCP
 | Metric name             | Definition                                    | 
 | ----------------------  | --------------------------------------------- | 
-| Retransmits             |Retransmits between client/server.              |
+| Retransmits             | Retransmits between client/server.              |
+| Latency                 | Average time it takes to make the connection.   |
+| RTT (Round-Trip Time)   | Average time it takes to receive a response. |
+| Jitter                  | Average variance in RTT.                     |
 | Established Connections | Establishes connections between client/server. |
 | Closed Connections      | Closed connections between client/server.      |
 
@@ -70,6 +73,7 @@ The following tables list the different NPM metrics you can create monitors on.
 | Metric name              | Definition                               |
 | -----------------------  | ---------------------------------------  |
 | DNS Requests             | Total number of DNS requests.             |
+| DNS Failures             | Total number of DNS failures.             |
 | DNS Timeouts             | Total number of DNS timeouts.             |
 | DNS Failed Responses     | Total number of DNS failed responses.             |
 | DNS Successful Responses | Total number of DNS successful responses.     |
@@ -79,12 +83,13 @@ The following tables list the different NPM metrics you can create monitors on.
 | SERVFAIL Errors          | Total number of SERVFAIL errors.          |
 | Other Errors             | Total number of other errors.           |
 
+
 ### Set alert conditions
 
 Configure monitors to trigger if the query value crosses a threshold and customize advanced alert options for recovery thresholds and evaluations delays. For more information, see [Configure Monitors][5].
 
 ### Notifications
-For detailed instructions on the Notify your team section, see the [Notifications][6] page.
+For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][6] page.
 
 ## Common monitors
 You can start creating monitors on NPM with the following common monitors. These provide a good starting point to track your network and get alerted if your network is experiencing unusual traffic and potentially experiencing unexpected network behavior. 

@@ -96,12 +96,15 @@
         {{- end -}}
     {{- end -}}
 {{- end -}}
-<span class="kn">"</span>{{ " \\" }}
-<span class="o">-H</span> <span class="s1">"Accept: application/json"</span>
-{{- /* Content-Type header based on "requestBody" */ -}}
-{{- if (or ($body) ($endpoint.action.requestBody)) -}}
+<span class="kn">"</span>
+{{- /* Accept header based on "responses" */ -}}
 {{- with (index $endpoint.action.responses "204") -}}
 {{- else -}}
+{{ " \\" }}
+<span class="o">-H</span> <span class="s1">"Accept: application/json"</span>
+{{- end -}}
+{{- /* Content-Type header based on "requestBody" */ -}}
+{{- if (or ($body) ($endpoint.action.requestBody)) -}}
 {{ " \\" }}
 <span class="o">-H</span> <span class="s1">"Content-Type: {{ default "application/json" .contentType }}"</span>
 {{- with $parameters.headerParams -}}
@@ -114,7 +117,6 @@
 {{- else -}}
 {{ " \\" }}
 <span class="o">-H</span> <span class="s1">"{{ .name }}: {{ .example | default .schema.example }}"</span>
-{{- end -}}
 {{- end -}}
 {{- end -}}
 {{- end -}}

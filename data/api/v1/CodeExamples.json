@@ -118,6 +118,11 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_2563642929",
+      "description": "Create a new dashboard with a toplist widget sorted by group"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_2308247857",
       "description": "Create a new dashboard with alert_graph widget"
     },
@@ -755,6 +760,11 @@
       "group": "synthetics",
       "suffix": "_1402674167",
       "description": "Create an API GRPC test returns \"OK - Returns the created test details.\" response"
+    },
+    {
+      "group": "synthetics",
+      "suffix": "_1987645492",
+      "description": "Create an API HTTP test has bodyHash filled out"
     },
     {
       "group": "synthetics",

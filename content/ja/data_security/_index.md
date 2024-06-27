@@ -18,7 +18,7 @@ further_reading:
 - link: /data_security/real_user_monitoring/
   tag: ドキュメント
   text: RUM のデータセキュリティ
-- link: /real_user_monitoring/session_replay/privacy_options
+- link: /real_user_monitoring/session_replay/browser/privacy_options
   tag: ドキュメント
   text: セッションリプレイのプライバシーオプション
 - link: /sensitive_data_scanner/
@@ -163,7 +163,7 @@ Continuous Integration のパイプラインとテスト
 [19]: /ja/serverless/distributed_tracing/collect_lambda_payloads#obfuscating-payload-contents
 [20]: /ja/data_security/synthetics/
 [21]: /ja/real_user_monitoring/browser/advanced_configuration/
-[22]: /ja/real_user_monitoring/session_replay/privacy_options
+[22]: /ja/real_user_monitoring/session_replay/browser/privacy_options
 [23]: /ja/database_monitoring/data_collected/#sensitive-information
 [24]: /ja/getting_started/tagging/
 [25]: /ja/tracing/glossary/

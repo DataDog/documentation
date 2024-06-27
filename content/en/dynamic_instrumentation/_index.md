@@ -73,6 +73,12 @@ For more detailed instructions, select your runtime below:
 
 {{< partial name="dynamic_instrumentation/dynamic-instrumentation-languages.html" >}}
 
+
+### Limitations
+
+- Dynamic Instrumentation is not yet compatible with Azure App Services or serverless environments.
+- Support is limited to applications built with Python, Java, and .NET.
+
 ## Explore Dynamic Instrumentation
 
 Dynamic Instrumentation can help you understand what your application is doing at runtime. By adding a Dynamic Instrumentation probe you are exporting additional data from your application, without the need to change code or redeploy it.

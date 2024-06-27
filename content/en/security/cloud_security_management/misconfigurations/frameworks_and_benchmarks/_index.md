@@ -17,10 +17,6 @@ further_reading:
   text: "Search and explore misconfigurations"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Cloud Security Management Misconfigurations is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 CSM Misconfigurations comes with more than 1,000 out-of-the-box compliance rules that evaluate the configuration of your cloud resources and identify potential misconfigurations. Each [compliance rule][1] maps to one or more controls within a compliance standard or industry benchmarks. See [Supported Frameworks][2] for more information.
 
 ## View your compliance posture
@@ -52,7 +48,7 @@ Select a rule to view details about the misconfigured resources, the rule descri
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security_monitoring/default_rules/
-[2]: /security/cloud_security_management/misconfigurations/supported_frameworks
+[2]: /security/cloud_security_management/misconfigurations/frameworks_and_benchmarks/supported_frameworks/
 [11]: /security/cloud_siem/
 [12]: /integrations/amazon_cloudtrail/
 [13]: https://app.datadoghq.com/security/configuration/rules?product=cspm

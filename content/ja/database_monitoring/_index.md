@@ -26,12 +26,6 @@ further_reading:
 kind: documentation
 title: データベース モニタリング
 ---
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">データベースモニタリングはこのサイトでサポートされていません。</div>
-{{< /site-region >}}
-
-{{< img src="database_monitoring/dbm-overview.png" alt="Database Monitoring" style="width:100%;">}}
-
 Datadog Database Monitoring は、すべてのホストにわたるデータベースの詳細な可視性を提供します。データベースの正常性とパフォーマンスを理解し、問題が発生したときにトラブルシューティングを行うために、過去のクエリパフォーマンスメトリクスを掘り下げ、計画とホストレベルのメトリクスをすべて 1 か所で説明します。
 
 ## はじめに
@@ -60,7 +54,7 @@ Datadog Database Monitoring は、**Postgres**、**MySQL**、**Oracle**、**SQL 
 
 ## Datadog Database Monitoring の調査
 
-UI で **[APM > Databases][1]** をクリックして、Database Monitoring に移動します。
+Datadog の [Database Monitoring][1] に移動します。
 
 ### クエリパフォーマンスメトリクスを掘り下げる
 
@@ -105,6 +99,10 @@ UI で **[APM > Databases][1]** をクリックして、Database Monitoring に�
 {{< img src="database_monitoring/databases-list.png" alt="Datadog の Databases ページ" style="width:90%;" >}}
 
 ## その他の参考資料
+
+{{< learning-center-callout header="ラーニングセンターで Datadog DBM による Postgres データベースの監視をお試しください" btn_title="今すぐ登録" btn_url="https://learn.datadoghq.com/courses/database-monitoring">}}
+  Datadog ラーニングセンターは、このトピックに関する実践的なコースが充実しており、無料で参加することで Postgres データベースの非効率性を特定し、最適化することができます。
+{{< /learning-center-callout >}}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

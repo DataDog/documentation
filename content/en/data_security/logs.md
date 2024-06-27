@@ -37,17 +37,7 @@ As of version 6, the Agent can be configured to obfuscate specific patterns with
 
 ## HIPAA-enabled customers
 
-Datadog will sign a Business Associate Agreement (BAA) with customers that transmit protected health information (ePHI) via Datadog's Log Management Service.
-
-These features are not available to customers who have signed Datadog's BAA:
-
-* Users cannot request support through chat.
-* You cannot [share][5] logs, security signals, or traces from the Datadog explorer.
-* Security rules cannot include triggering group-by values in the notification title.
-* Security rules cannot include message template variables.
-* Security rules cannot notify through webhooks.
-
-If you have any questions about how the Log Management Service satisfies the applicable requirements under HIPAA, contact your account manager. HIPAA-enabled customers do not need to use specific endpoints to submit logs to enforce specific encryptions. The encryptions are enabled on all log submission endpoints.
+{{% hipaa-customers %}}
 
 ## PCI DSS compliance for Log Management
 
@@ -92,3 +82,4 @@ All log submission endpoints are encrypted. These legacy endpoints are still sup
 [3]: /agent/logs/advanced_log_collection/#filter-logs
 [4]: /agent/logs/advanced_log_collection/#scrub-sensitive-data-from-your-logs
 [5]: /logs/explorer/#share-views
+[6]: https://www.datadoghq.com/legal/hipaa-eligible-services/

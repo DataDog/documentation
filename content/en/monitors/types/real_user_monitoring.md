@@ -21,7 +21,7 @@ further_reading:
 
 ## Overview
 
-Datadog's[Real User Monitoring (RUM)][1]  provides real-time visibility into individual user activity for web and mobile applications. It addresses performance tracking, error management, analytics, and support use cases. 
+Datadog's [Real User Monitoring (RUM)][1]  provides real-time visibility into individual user activity for web and mobile applications. It addresses performance tracking, error management, analytics, and support use cases. 
 
 After you enable RUM for your organization, you can create a RUM monitor to alert you when a specific RUM event type exceeds a predefined threshold over a given period of time.
 
@@ -93,7 +93,7 @@ For more information about advanced alert options such as evaluation delay, see 
 
 ### Notifications
 
-For more information about the **Say what's happening** and **Notify your team** sections, see [Notifications][7].
+For more information about the **Configure notifications and automations** section, see [Notifications][7].
 
 ## Further Reading
 

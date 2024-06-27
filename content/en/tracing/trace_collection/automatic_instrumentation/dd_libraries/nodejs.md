@@ -16,63 +16,60 @@ type: multi-code-lang
 code_lang_weight: 30
 further_reading:
     - link: 'https://github.com/DataDog/dd-trace-js'
-      tag: 'GitHub'
+      tag: "Source Code"
       text: 'Source code'
     - link: 'https://datadog.github.io/dd-trace-js'
       tag: 'Documentation'
       text: 'API documentation'
     - link: 'tracing/glossary/'
-      tag: 'Use the APM UI'
+      tag: 'Documentation'
       text: 'Explore your services, resources and traces'
     - link: 'tracing/'
-      tag: 'Advanced Usage'
+      tag: 'Documentation'
       text: 'Advanced Usage'
 ---
 ## Compatibility requirements
 
-The latest Node.js Tracer supports versions `>=14`. For a full list of Datadog's Node.js version and framework support (including legacy and maintenance versions), see the [Compatibility Requirements][1] page.
+The latest Node.js Tracer supports Node.js versions `>=18`. For a full list of Datadog's Node.js version and framework support (including legacy and maintenance versions), see the [Compatibility Requirements][1] page.
 
 ## Getting started
 
-Before you begin, make sure you've already [installed and configured the Agent][13].
+Before you begin, make sure you've already [installed and configured the Agent][13]. Then, complete the following steps to add the Datadog tracing library to your Node.js application to instrument it. 
 
-### Instrument your application
+### Install the Datadog tracing library
 
-After you install and configure your Datadog Agent, the next step is to add the tracing library directly in the application to instrument it. Read more about [compatibility information][1].
+To install the Datadog tracing library using npm for Node.js 18+, run:
 
-After the Agent is installed, follow these steps to add the Datadog tracing library to your Node.js applications:
+  ```shell
+  npm install dd-trace --save
+  ```
+To install the Datadog tracing library (version 4.x of `dd-trace`) for end-of-life Node.js version 16, run:
+  ```shell
+  npm install dd-trace@latest-node16
+  ```
+For more information on Datadog's distribution tags and Node.js runtime version support, see the [Compatibility Requirements][1] page.
+If you are upgrading from a previous major version of the library (0.x, 1.x, 2.x, 3.x or 4.x) to another major version, read the [Migration Guide][5] to assess any breaking changes.
 
-1. Install the Datadog Tracing library using npm for Node.js 14+:
+### Import and initialize the tracer
 
-    ```sh
-    npm install dd-trace --save
-    ```
-    If you need to trace end-of-life Node.js version 12, install version 2.x of `dd-trace` by running:
-    ```
-    npm install dd-trace@latest-node12
-    ```
-    For more information on our distribution tags and Node.js runtime version support, see the [Compatibility Requirements][1] page.
-    If you are upgrading from a previous major version of the library (0.x, 1.x, or 2.x) to another major version (2.x or 3.x), read the [Migration Guide][5] to assess any breaking changes.
+Import and initialize the tracer either in code or with command line arguments. The Node.js tracing library needs to be imported and initialized **before** any other module.
 
-2. Import and initialize the tracer either in code or via command line arguments. The Node.js tracing library needs to be imported and initialized **before** any other module.
+After you have completed setup, if you are not receiving complete traces, including missing URL routes for web requests, or disconnected or missing spans, **confirm the tracer has been imported and initialized correctly**. The tracing library being initialized first is necessary for the tracer to properly patch all of the required libraries for automatic instrumentation.
 
-   Once you have completed setup, if you are not receiving complete traces, including missing URL routes for web requests, or disconnected or missing spans, **confirm step 2 has been correctly done**. The tracing library being initialized first is necessary for the tracer to properly patch all of the required libraries for automatic instrumentation.
+When using a transpiler such as TypeScript, Webpack, Babel, or others, import and initialize the tracer library in an external file and then import that file as a whole when building your application.
 
-   When using a transpiler such as TypeScript, Webpack, Babel, or others, import and initialize the tracer library in an external file and then import that file as a whole when building your application.
+#### Option 1: Add the tracer in code
 
-### Adding the tracer in code
-
-#### JavaScript
+##### JavaScript
 
 ```javascript
 // This line must come before importing any instrumented module.
 const tracer = require('dd-trace').init();
 ```
 
-#### TypeScript and bundlers
+##### TypeScript and bundlers
 
-For TypeScript and bundlers that support EcmaScript Module syntax, initialize the tracer in a separate file in order to maintain correct load
-order.
+For TypeScript and bundlers that support EcmaScript Module syntax, initialize the tracer in a separate file to maintain correct load order.
 
 ```typescript
 // server.ts
@@ -92,17 +89,29 @@ initializes in one step.
 import 'dd-trace/init';
 ```
 
-### Adding the tracer via command line arguments
+#### Option 2: Add the tracer with command line arguments
 
-Use the `--require` option to Node.js to load and initialize the tracer in one
-step.
+Use the `--require` option to Node.js to load and initialize the tracer in one step.
 
 ```sh
 node --require dd-trace/init app.js
 ```
 
-**Note:** This approach requires using environment variables for all
-configuration of the tracer.
+**Note:** This approach requires using environment variables for all configuration of the tracer.
+
+#### ESM applications only: Import the loader
+
+EcmaScript Modules (ESM) applications require an additional command line argument. Run this command regardless of how the tracer is imported and initialized.
+
+**Node.js < v20.6**
+```shell
+node --loader dd-trace/loader-hook.mjs entrypoint.js
+```
+
+**Node.js >= v20.6**
+```shell
+node --import dd-trace/register.js entrypoint.js
+```
 
 ### Bundling
 

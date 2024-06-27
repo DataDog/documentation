@@ -8,19 +8,17 @@ title: Datadog 포워더를 사용해 Java 서버리스 애플리케이션 계�
 Datadog 서버리스를 처음 사용하신다면 <a href="/serverless/installation/go">Datadog Lambda 확장을 사용해 Lambda 함수를 계측하는 방법</a>을 따르세요. Lambda가 즉시 사용 가능한 기능을 제공하기 전에 Datadog 포워더를 사용하여 Datadog 서버리스를 설정한 경우, 이 가이드를 사용하여 인스턴스를 유지 관리하세요.
 </div>
 
-{{< img src="serverless/java-lambda-tracing.png" alt="Datadog을 통한 Java Lambda 함수 모니터링" style="width:100%;">}}
-
 <div class="alert alert-danger">
 일부 예전 버전의 <code>datadog-lambda-java</code>에서는  <code>log4j <=2.14.0</code>을 전이 종속성으로 가져옵니다. <a href="#upgrading">업그레이드 지침</a>은 아래를 참고하세요.
 </div>
 
-## 전제 조건
+## 사전 필수 요건
 
 AWS Lambda 트레이스, 향상된 메트릭, 커스텀 메트릭, 로그를 수집하려면 [Datadog 포워더 Lambda 함수][2]가 필요합니다.
 
 분산 트레이싱으로 서버리스 애플리케이션을 완전히 계측하려면 Java Lamda 함수가 Java 8 Corretto(`java8.al2`), Java 11(`java11`), Java 17(`java17`) 런타임을 사용해야 합니다.
 
-## 설정
+## 구성
 
 ### 설치
 
@@ -53,21 +51,12 @@ dependencies {
 
 ### 계측
 
-{{< site-region region="us,us3,us5,eu,gov" >}}
+
 1. 함수에 Datadog Lambda Layer를 설치하세요. 최신 `VERSION`은 `{{< latest-lambda-layer-version layer="dd-trace-java" >}}`입니다.
 
     ```yaml
     arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-java:<VERSION>
     ```
-{{< /site-region >}}
-
-{{< site-region region="ap1" >}}
-1. 함수에 Datadog Lambda Layer를 설치하세요. 최신 `VERSION`은 `{{< latest-lambda-layer-version layer="dd-trace-java" >}}`입니다.
-
-    ```yaml
-    arn:aws:lambda:<AWS_REGION>:417141415827:layer:dd-trace-java:<VERSION>
-    ```
-{{< /site-region >}}
 
 2. 함수에서 다음 환경 변수를 설정합니다:
 
@@ -94,7 +83,7 @@ dependencies {
     }
     ```
 
-### 연결
+### 구독
 
 각 함수 로그 그룹에서 Datadog 포워더 Lambda 함수를 연결하세요. 그러면 메트릭, 트레이스, 로그를 Datadog으로 보낼 수 있습니다.
 
@@ -185,7 +174,7 @@ Lambda 함수의 `datadog-lambda-java` 종속성 버전은 `pom.xml`(Maven) 또�
 ```
 
 `VERSION`을 위에서 언급한 최신 버전의 `datadog-lambda-java`로 교체하세요.
-그런 다음 Lambda 함수를 다시 배포합니다.
+ 그런 다음  Lambda 함수를 다시 배포합니다.
 
 {{% /tab %}}
 
@@ -207,17 +196,10 @@ dependencies {
 
 0.3.x에서 1.4.x로 업그레이드하고 `dd-trace-java` 트레이서를 사용하려면, `dd-trace-java` Lambda 레이어 레퍼런스를 찾아 다음으로 변경하세요:
 
-{{< site-region region="us,us3,us5,eu,gov" >}}
 ```
 arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-java:4
 ```
-{{< /site-region >}}
 
-{{< site-region region="ap1" >}}
-```
-arn:aws:lambda:<AWS_REGION>:417141415827:layer:dd-trace-java:4
-```
-{{< /site-region >}}
 
 [2]: /ko/serverless/forwarder/
 [3]: /ko/serverless/enhanced_lambda_metrics

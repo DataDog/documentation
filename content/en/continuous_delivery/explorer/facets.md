@@ -31,7 +31,7 @@ The [CD Visibility Explorer][4] includes out-of-the-box facets such as `Environm
 - Perform deployment or environment analytics.
 - Start troubleshooting after your deployments complete.
 
-Navigate to [**CI** > **Deployment Executions**][7] to access the list of facets left of the deployment executions list.
+Navigate to [**Software Delivery** > **CD Visibility** > **Executions**][7] to access the list of facets left of the deployment executions list.
 
 {{< img src="/continuous_delivery/explorer/facets.png" text="Facets list on the Deployment Executions page of the CD Visibility Explorer" style="width:100%" >}}
 

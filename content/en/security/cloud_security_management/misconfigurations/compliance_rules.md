@@ -1,6 +1,5 @@
 ---
 title: Manage CSM Misconfigurations Compliance Rules
-kind: documentation
 aliases:
   - /security_platform/cspm/configuration_rules
   - /security/cspm/configuration_rules
@@ -18,10 +17,6 @@ further_reading:
     tag: "Documentation"
     text: Misconfigurations Reports
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Cloud Security Management Misconfigurations is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
 
 Cloud Security Management Misconfigurations (CSM Misconfigurations) [out-of-the-box compliance rules][1] evaluate the configuration of your cloud resources and identify potential misconfigurations so you can immediately take steps to remediate.
 

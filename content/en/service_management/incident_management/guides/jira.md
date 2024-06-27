@@ -7,7 +7,7 @@ further_reading:
   tag: "Documentation"
   text: "Install the Jira Integration"
 - link: "https://app.datadoghq.com/integrations/jira"
-  tag: "In-App"
+  tag: "App"
   text: "In-app Jira integration tile"
 
 ---

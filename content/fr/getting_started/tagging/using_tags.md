@@ -1,38 +1,44 @@
 ---
-title: Utiliser les tags
-kind: documentation
 aliases:
-  - /fr/tagging/using_tags/
+- /fr/tagging/using_tags/
+description: Découvrez comment utiliser des tags dans les solutions Datadog.
 further_reading:
-  - link: /getting_started/tagging/
-    tag: Documentation
-    text: Débuter avec les tags
-  - link: /getting_started/tagging/assigning_tags/
-    tag: Documentation
-    text: Apprendre à assigner des tags
-  - link: https://www.datadoghq.com/blog/tagging-best-practices/
-    tag: Blog
-    text: Bonnes pratiques en matière de tagging pour votre infrastructure et vos applications
+- link: https://www.datadoghq.com/blog/tagging-best-practices/
+  tag: Blog
+  text: Bonnes pratiques en matière de tagging pour votre infrastructure et vos applications
+- link: /getting_started/tagging/
+  tag: Documentation
+  text: Débuter avec les tags
+- link: /getting_started/tagging/assigning_tags/
+  tag: Documentation
+  text: Apprendre à assigner des tags
+kind: documentation
+title: Utiliser des tags
 ---
-Après avoir [assigné des tags][1], utilisez-les pour filtrer et regrouper vos données au sein de la plateforme Datadog. Les tags vous permettent d'inclure et d'exclure des données. Lorsque vous choisissez d'inclure ou d'exclure plusieurs tags :
+
+## Présentation
+
+Après avoir [assigné des tags][1], utilisez-les pour filtrer et regrouper vos données au sein de la plateforme Datadog. Les tags vous permettent d'inclure et d'exclure des données.
+
+Lorsque vous souhaitez inclure ou exclure plusieurs tags :
 
 * la fonction Include utilise la logique `AND` ;
 * la fonction Exclude utilise la logique `OR`.
 
 ## Événements
 
-Le [flux d'événements][2] affiche tous les événements de votre environnement au cours de l'intervalle spécifié. Utilisez des tags pour affiner la liste d'événements et étudier un sous-ensemble d'événements. Saisissez `tags:` suivi du nom d'un tag pour afficher tous les événements générés par un host, une [intégration][3] ou un service qui possèdent ce tag. Dans l'exemple ci-dessous, l'expression `tags:service:coffee-house` permet de rechercher le tag `service:coffee-house`. Pour effectuer une recherche inclusive avec plusieurs tags, séparez chaque tag par l'opérateur OR : `tags:service:coffee-house OR host:coffeehouseprod`. Pour effectuer une recherche exclusive avec plusieurs tags, séparez chaque tag par une virgule : `tags:service:coffee-house,host:coffeehouseprod.`
+L'[Events Explorer][2] affiche les événements de votre environnement au cours de l'intervalle spécifié. Utilisez des tags pour affiner la liste d'événements et étudier un sous-ensemble d'événements. Saisissez `tags:` suivi du nom d'un tag pour afficher tous les événements générés par un host, une [intégration][3] ou un service qui possèdent ce tag. Par exemple, l'expression `tags:service:coffee-house` permet de rechercher le tag `service:coffee-house`.
 
-{{< img src="tagging/using_tags/eventtags.png" alt="Liste d'événements et tags" style="width:80%;">}}
+Pour effectuer une recherche inclusive avec plusieurs tags, utilisez des parenthèses et séparez chaque tag par l'opérateur OR : `tags:(service:coffee-house OR host:coffeehouseprod)`. Pour effectuer une recherche exclusive avec plusieurs tags, séparez chaque tag par l'opérateur AND : `tags:(service:coffee-house AND host:coffeehouseprod)`.
 
 ## Dashboards
 
 {{< tabs >}}
 {{% tab "Assignation" %}}
 
-Utilisez des tags pour filtrer les métriques à afficher dans un [graphique de dashboard][1] ou pour créer des groupes agrégés de métriques à afficher. Pour filtrer les métriques à afficher, saisissez les tags dans la zone de texte **from**. Les données de la métrique choisie s'afficheront alors pour toutes les sources qui possèdent ce tag (à savoir, `service:coffee-house` dans l'exemple ci-dessous).
+Utilisez des tags pour filtrer les métriques à afficher dans un [graphique de dashboard][1] ou pour créer des groupes agrégés de métriques à afficher. Pour filtrer les métriques à afficher, saisissez les tags dans la zone de texte **from**. Cette métrique s'affiche alors pour toutes les sources qui possèdent ce tag (à savoir, `service:web-store` dans l'exemple ci-dessous).
 
-{{< img src="tagging/using_tags/dashboardtags_1.png" alt="Tags dans des dashboards avec la zone de texte from" style="width:80%;">}}
+{{< img src="tagging/using_tags/dashboards_tags_example.png" alt="Ajoutez un tag dans le champ from pour filtrer les métriques affichées dans des dashboards. Pour cet exemple, le filtre service:web-store est appliqué à la métrique." style="width:80%;">}}
 
 Le filtrage avancé des valeurs de tag peut également inclure des filtres booléens. La syntaxe booléenne suivante est prise en charge :
 
@@ -44,24 +50,23 @@ Le filtrage avancé des valeurs de tag peut également inclure des filtres bool�
 
 Utilisez `AND` ou `OR` pour examiner une métrique en fonction de tags spécifiques :
 
-{{< img src="tagging/using_tags/dashboard_boolean_1.png" alt="Filtre booléen avec AND/OR" style="width:80%;">}}
+{{< img src="tagging/using_tags/dashboard_advanced_tags_AND_OR.png" alt="Filtre booléen avec les opérateurs AND/OR" style="width:80%;">}}
 
 Utilisez `IN` ou `NOT IN` pour filtrer rapidement une métrique en fonction de tags spécifiques :
 
-{{< img src="tagging/using_tags/dashboards_boolean_2.png" alt="Filtre booléen avec IN/NOT IN" style="width:80%;">}}
+{{< img src="tagging/using_tags/dashboard_advanced_tags_NOT_IN.png" alt="Filtre booléen avec les opérateurs IN/NOT IN" style="width:80%;">}}
 
-Pour créer un groupe agrégé à l'aide de tags, saisissez la clé du tag dans la zone de texte **avg by**. Par exemple, si vous disposez d'un graphique de séries temporelles présentant une métrique taguée avec la clé `service`, comme `service:coffee-house`, saisissez `service` dans la zone de texte **avg by** pour afficher une ligne pour chaque valeur de tag `service`. Chaque ligne représente la valeur moyenne de la métrique pour l'ensemble des sources qui partagent la valeur de tag `service`. 
+Pour créer un groupe agrégé à l'aide de tags, saisissez la clé du tag dans la zone de texte **avg by**. Par exemple, si vous disposez d'un graphique de série temporelle présentant une métrique taguée avec la clé `service`, comme `service:web-store`, saisissez `service` dans la zone de texte **avg by** pour afficher une ligne pour chaque valeur de tag `service`. Chaque ligne représente la valeur moyenne de la métrique pour l'ensemble des sources qui partagent la valeur de tag `service`. 
 
-{{< img src="tagging/using_tags/dashboardtags.png" alt="Tags dans des dashboards avec la zone de texte avg by" style="width:80%;">}}
+{{< img src="tagging/using_tags/dashboard_group_by_tags.png" alt="Tags dans des dashboards avec la zone de texte avg by" style="width:80%;">}}
 
-Les tags peuvent également être utilisés pour superposer des événements sur un dashboard, comme dans le [flux d'événements][2].
-Saisissez `tags:` suivi du nom du tag. Les événements correspondants sont superposés sous la forme de barres verticales dans le graphique. L'exemple ci-dessous utilise l'expression `tags:service:coffee-house`.
+Les tags peuvent également servir à superposer des événements sur un dashboard, comme dans l'[Events Explorer][2]. Les événements correspondants sont superposés sous la forme de barres verticales dans le graphique. L'exemple ci-dessous utilise l'expression `service:web-store`.
 
-{{< img src="tagging/using_tags/dashboardeventtags.png" alt="Superposition d'événements dans des dashboards" style="width:80%;">}}
+{{< img src="tagging/using_tags/dashboard_event_overlays.png" alt="Utiliser des tags pour superposer des événements dans des dashboards" style="width:80%;">}}
 
 Utilisez des [template variables][3] pour activer facilement le tag **from** sur les graphiques de votre dashboard. Dans l'exemple ci-dessous, `service` est utilisé pour représenter la clé de tag `service`. Ajoutez la template variable `$service` dans la zone de texte **from** de votre requête de graphique pour l'utiliser.
 
-{{< img src="tagging/using_tags/dashboardtemplatevariables.png" alt="Template variables dashboard" style="width:80%;">}}
+{{< img src="tagging/using_tags/dashboard_dynamic_template_variables.png" alt="Template variables dans un dashboard" style="width:80%;">}}
 
 [1]: /fr/dashboards/
 [2]: /fr/events/
@@ -69,17 +74,17 @@ Utilisez des [template variables][3] pour activer facilement le tag **from** sur
 {{% /tab %}}
 {{% tab "Exemples" %}}
 
-Vous trouverez ci-dessous un exemple de tags avec l'éditeur de graphiques pour séries temporelles. Aucun tag n'a été appliqué dans la première capture d'écran. L'utilisation moyenne de processeur est donc affichée pour l'ensemble des hosts :
+Vous trouverez ci-dessous un exemple de tags avec l'éditeur de graphiques pour séries temporelles. Aucun tag n'a été appliqué dans la première capture d'écran. L'utilisation moyenne du CPU est donc affichée pour l'ensemble des hosts :
 
-{{< img src="tagging/using_tags/Tags_1.png" alt="Tags_1" style="width:75%;">}}
+{{< img src="tagging/using_tags/dashboard_timeseries_graph_editor_no_tags.png" alt="Éditeur de graphiques pour séries temporelles, sans aucun tag défini" style="width:75%;">}}
 
-Les informations de l'éditeur sont ensuite mises à jour afin d'inclure un tag (`region:eastus`) dans la zone de texte **from**. Cela permet à Datadog d'afficher l'utilisation de processeur sur l'ensemble de la région Est des États-Unis. Le tag `region` est utilisé à titre d'exemple : vous pouvez utiliser n'importe quel tag arbitraire transmis à votre plateforme Datadog, comme `application`, `service`, `environment`, etc.
+Les informations de l'éditeur sont ensuite mises à jour afin d'inclure un tag (`region:eastus`) dans la zone de texte **from**. Cela permet à Datadog d'afficher l'utilisation du CPU sur l'ensemble de la région Est des États-Unis. Le tag `region` est utilisé à titre d'exemple : vous pouvez utiliser n'importe quel tag arbitraire transmis à votre plateforme Datadog, comme `application`, `service` ou `environment`.
 
-{{< img src="tagging/using_tags/Tags_2.png" alt="Tags_2" style="width:75%;">}}
+{{< img src="tagging/using_tags/dashboard_timeseries_graph_editor_from_tag.png" alt="Éditeur de graphiques pour séries temporelles avec le tag « region:us-east-1 »" style="width:75%;">}}
 
-Enfin, le deuxième champ vide (la zone de texte **avg by**) est utilisé pour afficher une ligne de série temporelle pour chaque `host`. Le processeur du serveur est affiché pour chaque host exécuté dans la région Est des États-Unis.
+Enfin, le deuxième champ vide (la zone de texte **avg by**) est utilisé pour afficher une ligne de série temporelle pour chaque `host`. Le CPU du serveur est affiché pour chaque host exécuté dans la région Est des États-Unis.
 
-{{< img src="tagging/using_tags/Tags_3.png" alt="Tags_3" style="width:75%;">}}
+{{< img src="tagging/using_tags/dashboard_timeseries_graph_editor_sumby_tag.png" alt="Éditeur de graphiques pour séries temporelles avec le tag « region:us-east-1 » et un regroupement basé sur host" style="width:75%;">}}
 
 Vous pouvez ajouter d'autres tags pour réduire davantage la portée, afin d'étudier par exemple les hosts dans `region:eastus` et `env:production`. Les tags peuvent être utilisés pour de nombreuses fonctionnalités de Datadog et appliqués à l'ensemble des éléments de base (métriques, traces et logs).
 
@@ -126,45 +131,22 @@ La page des live processes propose les champs de filtrage et de regroupement sui
 
 ## Monitors
 
-{{< tabs >}}
-{{% tab "Gérer les monitors" %}}
+Pour filtrer des monitors et des [downtimes de monitor][31] en fonction des [tags qui leur sont assignés][32], utilisez la barre de recherche ou les cases des facettes. Vous devez utiliser le format suivant dans la barre de recherche : `tag:<KEY>:<VALUE>`. Indiquez par exemple `tag:service:coffee-house`. Pour exclure les monitors associés à un tag spécifique de votre recherche, utilisez `-` (par exemple : `tag:-service:coffee-house`).
 
-Pour filtrer des monitors en fonction des [tags qui leur sont assignés][1], utilisez la barre de recherche ou les cases des facettes. Vous devez utiliser le format suivant dans la barre de recherche : `tag:<KEY>:<VALUE>`. Indiquez par exemple `tag:service:coffee-house`. Pour exclure les monitors associés à un tag spécifique de votre recherche, utilisez `-` (par exemple : `tag:-service:coffee-house`). **Remarque** : les tags de monitor ne fonctionnent pas de la même façon que les tags de métrique.
+{{< img src="/tagging/using_tags/manage_monitor_tags.png" alt="Filtrer des monitors dans la barre de recherche avec des tags" style="width:80%;">}}
 
-{{< img src="tagging/using_tags/managemonitorstags.png" alt="Gérer les tags de monitor" style="width:80%;">}}
+**Remarque** : les tags de monitor ne fonctionnent pas de la même façon que les tags de métrique. Pour en savoir plus, consultez la rubrique [Tags de monitor][30].
 
-[1]: /fr/getting_started/tagging/assigning_tags/
-{{% /tab %}}
-
-{{% tab "Nouveau monitor" %}}
-
-Lorsque vous créez un [monitor][1], utilisez les tags de métrique dans :
-
+Lorsque vous créez un monitor, utilisez des *tags de métrique* dans :
 * la zone de texte **from**, afin de limiter la portée du monitor et d'inclure uniquement les métriques possédant les tags indiqués ;
-
 * la zone de texte **excluding**, afin d'exclure les métriques correspondantes de la portée du monitor ;
-
 * la zone de texte **avg by**, afin de transformer le monitor en un monitor à alertes multiples pour chaque valeur de tag.
-
-{{< img src="tagging/using_tags/newmonitortags.png" alt="Tags nouveau monitor" style="width:80%;">}}
-
-[1]: /fr/monitors/create/types/
-{{% /tab %}}
-{{% tab "Gérer les downtimes" %}}
-
-Pour filtrer les [downtimes][1] en fonction d'un tag de monitor, saisissez le nom du tag dans la barre de recherche, par exemple `service:coffee-house`.
-
-{{< img src="tagging/using_tags/managedowntimetags.png" alt="Gérer les tags de monitor" style="width:80%;">}}
-
-[1]: /fr/monitors/notify/downtimes/
-{{% /tab %}}
-{{< /tabs >}}
 
 ## Métriques
 
-Utilisez les tags dans [Metrics Explorer][8] pour filtrer les métriques en fonction de tags ou pour afficher plusieurs graphiques selon une clé de tag. L'exemple ci-dessous représente une métrique avec l'expression `service:coffee-house` et affiche un graphique par `host`.
+Utilisez des tags dans le [Metrics Explorer][8] pour filtrer les métriques en fonction de tags ou pour afficher plusieurs graphiques selon une clé de tag. L'exemple ci-dessous représente une métrique filtrée selon `service:web-store`.
 
-{{< img src="tagging/using_tags/metricsexplorertags.png" alt="Gérer les tags de monitor" style="width:80%;">}}
+{{< img src="tagging/using_tags/metrics_explorer.png" alt="Un graphique de métrique filtré sur un tag spécifique" style="width:80%;">}}
 
 ## Intégrations
 
@@ -231,14 +213,14 @@ Consultez la documentation Google Cloud pour en savoir plus sur la [création et
 ## APM
 
 {{< tabs >}}
-{{% tab "Analytics" %}}
+{{% tab "Trace Explorer" %}}
 
-Pour [les recherches de traces][1], filtrez les traces avec des tags à l'aide de la barre de recherche ou des cases des facettes. Vous devez utiliser le format suivant dans la barre de recherche : `<KEY>:<VALUE>`. Indiquez par exemple `service:coffee-house`. Pour effectuer une recherche avancée, consultez la page [sur les recherches de traces][2].
+Depuis le [Trace Explorer][1], vous pouvez filtrer les traces avec des tags à l'aide de la barre de recherche ou les cases des facettes. Vous devez utiliser le format suivant dans la barre de recherche : `<KEY>:<VALUE>`. Indiquez par exemple `service:coffee-house`. Pour effectuer une recherche avancée, consultez la section [Syntaxe de requête][2].
 
-{{< img src="tagging/using_tags/tracesearchtags.png" alt="Tags recherche de traces" style="width:80%;">}}
+{{< img src="tagging/using_tags/trace_explorer.png" alt="Tags dans le Trace Explorer" style="width:80%;">}}
 
-[1]: /fr/tracing/app_analytics/search/
-[2]: /fr/tracing/app_analytics/search/#search-bar
+[1]: /fr/tracing/trace_explorer/search/
+[2]: /fr/tracing/trace_explorer/query_syntax/
 {{% /tab %}}
 {{% tab "Service Map" %}}
 
@@ -267,7 +249,7 @@ Pour exclure des tags, utilisez `</>` afin de modifier le texte, puis ajoutez le
 
 ## Logs
 
-Pour [les recherches][10], [les analyses][11], [les patterns][12] et le [Live Tailing][13] de logs, filtrez les logs avec des tags à l'aide de la barre de recherche ou des cases des facettes. Vous devez utiliser le format suivant dans la barre de recherche : `<KEY>:<VALUE>`. Indiquez par exemple `service:coffee-house`. Pour effectuer une recherche avancée, consultez la page [sur les recherches de logs][10].
+Pour [les recherches][10], [les analyses][11], [les patterns][12] et le [Live Tailing][13] de logs, filtrez les logs avec des tags à l'aide de la barre de recherche ou les cases des facettes. Vous devez utiliser le format suivant dans la barre de recherche : `<KEY>:<VALUE>`. Indiquez par exemple `service:coffee-house`. Pour effectuer une recherche avancée, consultez la section [Rechercher des logs][10].
 
 {{< tabs >}}
 {{% tab "Recherche" %}}
@@ -296,15 +278,54 @@ Les tags permettent également de filtrer un [pipeline][14] de logs. Dans l'exem
 
 {{< img src="tagging/using_tags/logpipelinetags.png" alt="Tags de pipeline" style="width:80%;">}}
 
+## RUM et Session Replay
+
+Le [RUM Explorer][15] représente les événements provenant de votre environnement sur une période donnée.
+
+Pour filtrer les données des événements RUM en fonction de tags, utilisez la barre de recherche ou les cases de facettes. Vous devez utiliser le format suivant dans la barre de recherche : `<KEY>:<VALUE>`. Indiquez par exemple `service:shopist`. Pour effectuer une recherche avancée, consultez la section [Rechercher des événements RUM][16].
+
+{{< img src="tagging/using_tags/rumtags.png" alt="Tags RUM" style="width:80%;">}}
+
+## Synthetics
+
+{{< tabs >}}
+{{% tab "Tests Synthetic" %}}
+
+La page [Synthetic Tests][1] répertorie la liste de vos tests Synthetic.
+
+Pour filtrer des tests en fonction de tags, utilisez la barre de recherche ou les cases de facettes. Vous devez utiliser le format suivant dans la barre de recherche : `<KEY>:<VALUE>`. Indiquez par exemple `tag:mini-website`. Pour effectuer une recherche avancée, consultez la section [Rechercher et gérer des tests Synthetic][2].
+
+{{< img src="tagging/using_tags/syntheticstags.png" alt="Tags Synthetic" style="width:80%;">}}
+
+
+[1]: https://app.datadoghq.com/synthetics/tests
+[2]: /fr/synthetics/search/
+{{% /tab %}}
+{{% tab "Explorer" %}}
+
+La vue [Synthetic Monitoring & Testing Results Explorer][1] présente vos exécutions de test et lots d'exécutions au sein d'un [pipeline de CI][2].
+
+Pour filtrer des exécutions de test en fonctions de tags, utilisez la barre de recherche ou les cases de facettes. Vous devez utiliser le format suivant dans la barre de recherche : `<KEY>:<VALUE>`. Indiquez par exemple `@ci.provider.name:github`. Pour effectuer une recherche avancée, consultez la section [Rechercher des lots de tests][3].
+
+{{< img src="tagging/using_tags/syntheticscitags.png" alt="Tags Synthetics et CI" style="width:80%;">}}
+
+
+[1]: https://app.datadoghq.com/synthetics/explorer/
+[2]: /fr/continuous_testing/cicd_integrations
+[3]: /fr/continuous_testing/explorer/search/
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Service Level Objectives
 
 {{< tabs >}}
 {{% tab "Gérer vos SLO" %}}
 
-Pour filtrer des SLO en fonction des [tags qui leur sont assignés][1], utilisez la barre de recherche ou les cases des facettes. Vous devez utiliser le format suivant dans la barre de recherche : `<KEY>:<VALUE>` (par exemple : `journey:add_item`). Pour exclure les SLO associés à un tag spécifique de votre recherche, utilisez `-` (par exemple : `-journey:add_item`). **Remarque** : les tags de SLO sont différents et distincts des tags de métrique ou de monitor utilisés dans les métriques ou les monitors qui composent un SLO.
+Pour filtrer des SLO en fonction des [tags qui leur sont assignés][1], utilisez la barre de recherche ou les cases des facettes. Vous devez utiliser le format suivant dans la barre de recherche : `<KEY>:<VALUE>`. Indiquez par exemple `journey:add_item`. Pour exclure les SLO associées à un tag spécifique de votre recherche, utilisez `-` (par exemple : `-journey:add_item`).
 
 {{< img src="tagging/using_tags/manage_slo_tags.png" alt="Tags de SLO" style="width:80%;">}}
+
+Les tags de SLO ne fonctionnent pas de la même façon que les tags appliqués aux métriques ou monitors sous-jacents d'un SLO.
 
 [1]: /fr/getting_started/tagging/assigning_tags/?tab=servicelevelobjectives#ui
 {{% /tab %}}
@@ -316,9 +337,7 @@ Lorsque vous créez un [SLO basé sur des métriques][1], utilisez les tags de m
 * La zone de texte **from** permet de limiter le contexte de la métrique à ces tags uniquement.
 * La zone de texte **sum by** permet de créer un SLO groupé basé sur des métriques qui affiche un pourcentage de statut ainsi que la marge d'erreur restante pour le SLO global et pour chaque valeur de tag.
 
-{{< img src="tagging/using_tags/metric_based_slo_tags.png" alt="Tags de SLO basé sur des métriques" style="width:80%;">}}
-
-[1]: /fr/monitors/service_level_objectives/metric/
+[1]: /fr/service_management/service_level_objectives/metric/
 {{% /tab %}}
 {{% tab "SLO basés sur des monitors" %}}
 
@@ -326,36 +345,67 @@ Lorsque vous créez un SLO [basé sur des monitors][1] à partir d'un seul [moni
 
 {{< img src="tagging/using_tags/monitor_based_slo_tags.png" alt="Tags de SLO basé sur des monitors" style="width:80%;">}}
 
-[1]: /fr/monitors/service_level_objectives/monitor/
+[1]: /fr/service_management/service_level_objectives/monitor/
 [2]: /fr/getting_started/tagging/using_tags/?tab=newmonitor#monitors
+{{% /tab %}}
+{{< /tabs >}}
+
+## CI Visibility
+
+{{< tabs >}}
+{{% tab "Exécutions de test" %}}
+
+La vue [CI Visibility Explorer][101] affiche vos exécutions de test dans un pipeline de CI.
+
+Pour filtrer des exécutions de test en fonction de tags, utilisez la barre de recherche ou les cases de facettes. Vous devez utiliser le format suivant dans la barre de recherche : `<KEY>:<VALUE>`. Indiquez par exemple `@test.status:failed`. Pour effectuer une recherche avancée, consultez la section [Rechercher et gérer des tests CI][102].
+
+{{< img src="/continuous_integration/test_runs.png" alt="Exécutions de test dans le CI Visibility Explorer" style="width:80%;">}}
+
+[101]: https://app.datadoghq.com/ci/test-runs
+[102]: /fr/tests/search/
+
+{{% /tab %}}
+{{% tab "Exécutions de pipeline" %}}
+
+La vue [CI Visibility Explorer][101] affiche vos exécutions de pipeline de CI.
+
+Pour filtrer des exécutions de pipeline en fonctions de tags, utilisez la barre de recherche ou les cases de facettes. Vous devez utiliser le format suivant dans la barre de recherche : `<KEY>:<VALUE>`. Indiquez par exemple `@ci.provider.name:gitlab`. Pour effectuer une recherche avancée, consultez la section [Rechercher des lots de tests][102].
+
+{{< img src="/continuous_integration/pipeline_executions.png" alt="Exécutions de pipeline dans le CI Visibility Explorer" style="width:80%;">}}
+
+[101]: https://app.datadoghq.com/ci/pipeline-executions
+[102]: /fr/continuous_testing/explorer/search/
+
 {{% /tab %}}
 {{< /tabs >}}
 
 ## Développeurs
 
-Les tags peuvent être utilisés de diverses façons avec l'[API][15]. Cliquez sur les liens ci-dessous pour accéder aux rubriques indiquées :
+Il existe diverses façons d'exploiter les tags avec l'[API][17].
 
-* [Planifier le downtime d'un monitor][16]
-* [Interroger le flux d'événements][17]
-* [Rechercher des hosts][18]
-* Intégrations pour [AWS][19] et [Google Cloud][20]
-* [Interroger les points de séries temporelles][21]
-* [Récupérer tous les détails d'un monitor][22]
-* [Désactiver un monitor][23]
-* [Rechercher des monitors][22]
-* [Rechercher des groupes de monitors][22]
-* [Créer un screenboard][24]
-* [Créer un timeboard][24]
-* [Créer un SLO][25]
-* [Récupérer les détails d'un SLO][26]
-* [Mettre à jour un SLO][27]
+Consultez la liste de liens ci-dessous pour accéder aux rubriques correspondantes :
+
+* [Planifier un downtime de monitor][18]
+* [Interroger l'Events Explorer][19]
+* [Rechercher des hosts][20]
+* Intégrations pour [AWS][21] et [Google Cloud][22]
+* [Interroger les points de séries temporelles][23]
+* [Récupérer tous les détails d'un monitor][24]
+* [Désactiver un monitor][25]
+* [Rechercher des monitors][24]
+* [Rechercher des groupes de monitors][24]
+* [Créer un screenboard][26]
+* [Créer un timeboard][26]
+* [Créer un SLO][27]
+* [Récupérer les détails d'un SLO][28]
+* [Mettre à jour un SLO][29]
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/getting_started/tagging/assigning_tags/
-[2]: /fr/events/
+[2]: /fr/service_management/events/explorer
 [3]: /fr/integrations/
 [4]: /fr/infrastructure/hostmap/
 [5]: /fr/infrastructure/
@@ -368,16 +418,21 @@ Les tags peuvent être utilisés de diverses façons avec l'[API][15]. Cliquez s
 [12]: /fr/logs/explorer/patterns/
 [13]: /fr/logs/live_tail/
 [14]: /fr/logs/log_configuration/pipelines
-[15]: /fr/api/
-[16]: /fr/api/v1/downtimes/#schedule-a-downtime
-[17]: /fr/api/v1/events/#query-the-event-stream
-[18]: /fr/api/v1/hosts/
-[19]: /fr/api/v1/aws-integration/
-[20]: /fr/api/v1/gcp-integration/
-[21]: /fr/api/v1/metrics/#query-timeseries-points
-[22]: /fr/api/v1/monitors/#get-all-monitor-details
-[23]: /fr/api/v1/monitors/#mute-a-monitor
-[24]: /fr/api/v1/dashboards/#create-a-new-dashboard
-[25]: /fr/api/v1/service-level-objectives/#create-a-slo-object
-[26]: /fr/api/v1/service-level-objectives/#get-a-slos-details
-[27]: /fr/api/v1/service-level-objectives/#update-a-slo
+[15]: /fr/real_user_monitoring/explorer/
+[16]: /fr/real_user_monitoring/explorer/search/
+[17]: /fr/api/
+[18]: /fr/api/v1/downtimes/#schedule-a-downtime
+[19]: /fr/api/v1/events/#query-the-event-stream
+[20]: /fr/api/v1/hosts/
+[21]: /fr/api/v1/aws-integration/
+[22]: /fr/api/v1/gcp-integration/
+[23]: /fr/api/v1/metrics/#query-timeseries-points
+[24]: /fr/api/v1/monitors/#get-all-monitor-details
+[25]: /fr/api/v1/monitors/#mute-a-monitor
+[26]: /fr/api/v1/dashboards/#create-a-new-dashboard
+[27]: /fr/api/v1/service-level-objectives/#create-a-slo-object
+[28]: /fr/api/v1/service-level-objectives/#get-a-slos-details
+[29]: /fr/api/v1/service-level-objectives/#update-a-slo
+[30]: /fr/monitors/manage/#monitor-tags
+[31]: /fr/monitors/downtimes/
+[32]: /fr/getting_started/tagging/assigning_tags?tab=monitors

@@ -48,11 +48,49 @@ Wrote ~/.dogrc.
 
 `.dogrc`파일을 직접 작성하려면 이 파일의 내용은 다음과 같아야 합니다:
 
+{{< site-region region="us" >}}
 ```text
 [Connection]
 apikey = <DATADOG_API_KEY>
 appkey = <YOUR_APPLICATION_KEY>
+api_host = https://datadoghq.com
 ```
+{{< /site-region >}}
+{{< site-region region="us3" >}}
+```text
+apikey = <DATADOG_API_KEY>
+appkey = <YOUR_APPLICATION_KEY>
+api_host = https://us3.datadoghq.com
+```
+{{< /site-region >}}
+{{< site-region region="us5" >}}
+```text
+apikey = <DATADOG_API_KEY>
+appkey = <YOUR_APPLICATION_KEY>
+api_host = https://us5.datadoghq.com
+{{< /site-region >}}
+{{< site-region region="eu" >}}
+```text
+apikey = <DATADOG_API_KEY>
+appkey = <YOUR_APPLICATION_KEY>
+api_host = https://datadoghq.eu
+```
+{{< /site-region >}}
+{{< site-region region="gov" >}}
+```text
+apikey = <DATADOG_API_KEY>
+appkey = <YOUR_APPLICATION_KEY>
+api_host = https://ddog-gov.com
+```
+{{< /site-region >}}
+{{< site-region region="ap1" >}}
+```text
+apikey = <DATADOG_API_KEY>
+appkey = <YOUR_APPLICATION_KEY>
+api_host = https://ap1.datadoghq.com
+```
+{{< /site-region >}}
+
 이 기능은 파일을 많은 서버에 프로그래밍 방식으로 푸시해 모든 서버에서`dog` 명령을 실행하려는 경우 유용합니다.
 
 ## Dogshell 명령
@@ -71,6 +109,8 @@ appkey = <YOUR_APPLICATION_KEY>
 * `dog tag`
 * `dog search`
 * `dog comment`
+
+**참고**: `dogshell` 명령은 기본적으로 Datadog US1에 데이터를 보냅니다. 다른 사이트로 데이터를 보내야 하는 경우 `--api_host` 옵션을 사용하거나 `.dogrc` 파일에 api_host를 지정하여 전송할 수 있습니다.
 
 ### 사용 중인 Dogshell
 

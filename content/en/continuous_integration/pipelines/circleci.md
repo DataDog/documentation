@@ -1,6 +1,5 @@
 ---
 title: Set up Tracing on a CircleCI Workflow
-kind: documentation
 aliases:
   - /continuous_integration/setup_pipelines/circleci
 further_reading:
@@ -12,7 +11,7 @@ further_reading:
       text: "Extend Pipeline Visibility by tracing individual commands"
     - link: "/continuous_integration/troubleshooting/"
       tag: "Documentation"
-      text: "Troubleshooting CI"
+      text: "Troubleshooting CI Visibility"
     - link: "/continuous_integration/pipelines/custom_tags_and_measures/"
       tag: "Documentation"
       text: "Extend Pipeline Visibility by adding custom tags and measures"
@@ -22,17 +21,21 @@ further_reading:
 <div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
-## Compatibility
+## Overview
 
-- **Partial pipelines**: View partial and downstream pipeline executions
+[CircleCI][1] is a continuous integration and delivery platform that enables teams to build, test, and deploy software at scale. 
 
-- **Logs correlation**: Correlate pipeline and job spans to logs and [enable job log collection][10]
+Set up tracing on CircleCI to optimize the performance of your pipelines, improve collaboration across teams, and ensure consistent, compliant build processes.
 
-- **Custom spans**: Configure custom spans
+### Compatibility
 
-- **Custom pre-defined tags**: Set [custom tags][6] to all generated pipeline and job spans
-
-- **Custom tags and measures at runtime**: Configure [custom tags][7] and measures at runtime
+| Pipeline Visibility | Platform | Definition |
+|---|---|---|
+| [Partial retries][12] | Partial pipelines | View partially retried pipeline executions. |
+| Logs correlation | Logs correlation | Correlate pipeline and job spans to logs and enable [job log collection][10]. |
+| [Custom spans][13] | Custom spans | Configure custom spans for your pipelines. |
+| Custom pre-defined tags | Custom pre-defined tags | Set [custom tags][6] to all generated pipeline and job spans. |
+| [Custom tags][14] [and measures at runtime][15] | Custom tags and measures at runtime | Configure [custom tags and measures][7] at runtime. |
 
 ## Configure the Datadog integration
 
@@ -88,12 +91,13 @@ The Datadog CircleCI integration collects logs from your finished CircleCI jobs 
 
 To install and configure this integration, follow the [CircleCI setup guide][11].
 
+<div class="alert alert-info"><strong>Note</strong>: Logs are billed separately from CI Visibility. Log retention, exclusion, and indexes are configured in Logs Settings. Logs for CircleCI jobs can be identified by the <code>datadog.product:cipipeline</code> and <code>source:circleci</code> tags.</div>
 
 ## Visualize pipeline data in Datadog
 
-The [Pipelines][4] and [Pipeline Executions][5] pages populate with data after the workflows finish.
+The [**CI Pipeline List**][4] and [**Executions**][5] pages populate with data after the workflows finish.
 
-**Note**: The Pipelines page shows data for only the default branch of each repository.
+The **CI Pipeline List** page shows data for only the default branch of each repository.
 
 ## Further reading
 
@@ -110,3 +114,7 @@ The [Pipelines][4] and [Pipeline Executions][5] pages populate with data after t
 [9]: https://raw.githubusercontent.com/DataDog/ci-visibility-circle-ci/main/service_hooks.py
 [10]: /continuous_integration/pipelines/circleci/#enable-log-collection
 [11]: /integrations/circleci/#setup
+[12]: /glossary/#partial-retry
+[13]: /glossary/#custom-span
+[14]: /glossary/#custom-tag
+[15]: /glossary/#custom-measure

@@ -3,7 +3,6 @@ aliases:
 - /fr/developers/faq/how-do-i-collect-metrics-from-heroku-with-datadog
 dependencies:
 - https://github.com/DataDog/heroku-buildpack-datadog/blob/master/README.md
-kind: documentation
 title: Buildpack Heroku Datadog
 ---
 Ce [buildpack Heroku][1] installe l'Agent Datadog dans votre dyno Heroku pour recueillir des métriques système, des métriques d'application personnalisée et des traces. Pour recueillir des métriques ou des traces d'application personnalisée, ajoutez le langage approprié [via la bibliothèque DogStatsD ou APM Datadog][2] dans votre application.
@@ -14,38 +13,44 @@ Ce guide suppose que votre application s'exécute déjà sur Heroku. Consultez l
 
 1. Accédez aux [paramètres d'API Datadog][3] et copiez votre clé d'API Datadog. Exportez-la dans une variable d'environnement :
 
- ```shell
- export DD_API_KEY=<YOUR_API_KEY>
- ```
+   ```shell
+   export DD_API_KEY=<YOUR_API_KEY>
+   ```
 
 2. Exportez le nom de votre application vers la variable d'environnement APPNAME :
 
-```shell
-export APPNAME=<NOM_DE_VOTRE_APPLICATION_HEROKU>
-```
+   ```shell
+   export APPNAME=<YOUR_HEROKU_APP_NAME>
+   ```
 
-3. Ajoutez le buildpack Datadog à votre projet :
+3. Exportez votre site Datadog vers la variable d'environnement DD_SITE :
 
-```shell
-cd <DOSSIER_RACINE_PROJET_HEROKU>
+   ```shell
+   export DD_SITE={{< region-param key=dd_site code="true" >}}
+   ```
 
-# Utiliser la dernière version majeure de l'Agent
-heroku config:add DD_AGENT_MAJOR_VERSION=7
+4. Ajoutez le buildpack Datadog à votre projet :
 
-# Activer les métadonnées Heroku Labs Dyno pour définir automatiquement la variable d'environnement HEROKU_APP_NAME
-heroku labs:enable runtime-dyno-metadata -a $APPNAME
+   ```shell
+   cd <HEROKU_PROJECT_ROOT_FOLDER>
 
-# Définir le hostname dans Datadog sur appname.dynotype.dynonumber pour garantir la continuité des métriques
-heroku config:add DD_DYNO_HOST=true
+   # Enable Heroku Labs Dyno Metadata to set HEROKU_APP_NAME env variable automatically
+   heroku labs:enable runtime-dyno-metadata -a $APPNAME
 
-# Ajouter ce buildpack et définir votre clé d'API Datadog
-heroku buildpacks:add --index 1 https://github.com/DataDog/heroku-buildpack-datadog.git
-heroku config:add DD_API_KEY=$DD_API_KEY
+   # Set hostname in Datadog as appname.dynotype.dynonumber for metrics continuity
+   heroku config:add DD_DYNO_HOST=true
 
-# Déployer sur Heroku pour forcer un rebuild
-git commit --allow-empty -m "Rebuild slug"
-git push heroku main
-```
+   # Set the DD_SITE env variable automatically
+   heroku config:add DD_SITE=$DD_SITE
+
+   # Add this buildpack and set your Datadog API key
+   heroku buildpacks:add --index 1 https://github.com/DataDog/heroku-buildpack-datadog.git
+   heroku config:add DD_API_KEY=$DD_API_KEY
+
+   # Deploy to Heroku forcing a rebuild
+   git commit --allow-empty -m "Rebuild slug"
+   git push heroku main
+   ```
 
 Une fois terminé, l'Agent Datadog se lance automatiquement à chaque démarrage de dyno.
 
@@ -114,10 +119,15 @@ Outre les exemples ci-dessus, vous pouvez définir un certain nombre de variable
 | `DD_PROCESS_AGENT`         | *Facultatif*. L'Agent de processus Datadog est désactivé par défaut. Définissez cette variable sur `true` pour l'activer. Si vous modifiez cette option, vous devrez recompiler le slug. Consultez la section [Mises à niveau et recompilation du slug](#mises-a-niveau-et-recompilation-du-slug) pour en savoir plus.                                                                                                                                                                                                                                                 |
 | `DD_SITE`                  | *Facultatif*. Si vous utilisez le service app.datadoghq.eu, définissez cette variable sur `datadoghq.eu`. Valeur par défaut : `datadoghq.com`.                                                                                                                                                                                                                                                                                                                                                                                                               |
 | `DD_AGENT_VERSION`         | *Facultatif*. Par défaut, le buildpack installe la version 6.x de l'Agent Datadog disponible dans le référentiel de paquets. Utilisez cette variable pour installer une ancienne version de l'Agent Datadog. **Remarque** : toutes les versions de l'Agent ne sont pas nécessairement disponibles. Cette option prime sur le paramètre `DD_AGENT_MAJOR_VERSION`. Si vous la modifiez, vous devrez recompiler le slug. Consultez la section [Mises à niveau et recompilation du slug](#mises-a-niveau-et-recompilation-du-slug) pour en savoir plus.                                           |
-| `DD_AGENT_MAJOR_VERSION`   | *Facultatif*. Par défaut, le buildpack installe la dernière version 6.x de l'Agent Datadog disponible dans le référentiel des packages. Définissez cette variable sur `7` pour installer la dernière version 7.x de l'Agent Datadog. **Il est fortement conseillé de définir cette variable sur `7`**. Consultez la section [Versions de Python et de l'Agent](#versions-de-python-et-de-l-agent) pour en savoir plus sur le lien entre la version de l'Agent et la version de Python. Si vous modifiez cette option, vous devrez recompiler le slug. Consultez la section [Mises à niveau et recompilation du slug](#mises-a-niveau-et-recompilation-du-slug) pour en savoir plus.     |
+| `DD_AGENT_MAJOR_VERSION`   | *Facultatif*. Par défaut, le buildpack installe la dernière version 7.x de l'Agent Datadog disponible dans le référentiel des packages. Définissez cette variable sur `6` pour installer la dernière version 6.x de l'Agent Datadog. Consultez la rubrique [Versions de Python et de l'Agent](#versions-de-python-et-de-l-agent) pour en savoir plus sur le lien entre la version de l'Agent et la version de Python. Si vous modifiez cette option, vous devrez recompiler le slug. Consultez la rubrique [Mises à niveau et recompilation du slug](#mises-a-niveau-et-recompilation-du-slug) pour en savoir plus.     |
 | `DD_DISABLE_HOST_METRICS`  | *Facultatif*. Par défaut, le buildpack transmet des métriques système pour la machine du host qui exécute le dyno. Définissez cette variable sur `true` pour désactiver la collecte des métriques système. Consultez la [section Métriques système](#metriques-système) ci-dessous pour en savoir plus.                                                                                                                                                                                                                                                                                  |
 | `DD_PYTHON_VERSION`        | *Facultatif*. À partir de la version `6.14.0`, l'Agent Datadog est fourni avec les versions `2` et `3` de Python. Le buildpack ne conserve que l'une de ces versions. Définissez ce paramètre sur `2` ou `3` pour sélectionner la version de Python que vous souhaitez que l'Agent conserve. Si le paramètre n'est pas défini, le buildpack conserve la version `2`. Consultez la section [Versions de Python et de l'Agent](#versions-de-python-et-de-l-agent) pour en savoir plus. Si vous modifiez cette option, vous devrez recompiler le slug. Consultez la section [Mises à niveau et recompilation du slug](#mises-a-niveau-et-recompilation-du-slug) pour en savoir plus. |
 | `DD_HEROKU_CONF_FOLDER`    | *Facultatif*. Par défaut, le buildpack recherche les fichiers de configuration que vous souhaitez inclure, par exemple le [script prerun.sh](#script-de-pre-execution), dans le dossier `/datadog` à la racine de votre application. Vous pouvez modifier cet emplacement en définissant ce paramètre sur le chemin de votre choix. |
+| `DD_ENABLE_HEROKU_REDIS`    | *Facultatif*. Définissez cette variable sur true pour activer le processus de découverte automatique de l'intégration Redis. Consultez la rubrique [Activer l'intégration Datadog/Redis](#activer-l-integration-datadog-redis) pour obtenir plus de détails. |
+| `DD_REDIS_URL_VAR`    | *Facultatif*. Par défaut, le processus de découverte automatique de l'intégration Redis repose sur la chaîne de connexion stockée dans `REDIS_URL`. Pour ignorer cette chaîne, définissez cette variable sur la liste de noms de variables stockant les chaînes de connexion, en prenant soin de séparer chaque nom par une virgule. Consultez la rubrique [Activer l'intégration Datadog/Redis](#activer-l-integration-datadog-redis) pour obtenir plus de détails. |
+| `DD_ENABLE_HEROKU_POSTGRES`    | *Facultatif*. Définissez cette variable sur true pour activer le processus de découverte automatique de l'intégration Postgres. Consultez la rubrique [Activer l'intégration Datadog/Postgres](#activer-l-integration-datadog-postgres) pour obtenir plus de détails. |
+| `DD_POSTGRES_URL_VAR`    | *Facultatif*. Par défaut, le processus de découverte automatique de l'intégration Postgres repose sur la chaîne de connexion stockée dans `DATABASE_URL`. Pour ignorer cette chaîne, définissez cette variable sur la liste de noms de variables stockant les chaînes de connexion, en prenant soin de séparer chaque nom par une virgule. Consultez la rubrique [Activer l'intégration Datadog/Postgres](#activer-l-integration-datadog-postgres) pour obtenir plus de détails. |
+| `DD_ENABLE_DBM`    | *Facultatif*. Si vous activez l'intégration Datadog/Postgres en suivant les instructions de [ce guide](#activer-l-integration-datadog-postgres), définissez cette variable d'environnement sur `true` pour activer Database Monitoring. |
 
 Pour obtenir davantage d'informations, consultez la [documentation relative à l'Agent Datadog][12].
 
@@ -160,43 +170,87 @@ Afin de recueillir des métriques système pour tous vos dynos, vous devez :
 
 ## Activation d'intégrations
 
-Pour activer l'[intégration Datadog <NOM_INTÉGRATION>][17], procédez comme suit :
+### Activer l'intégration Datadog/Redis
+
+Si vous utilisez une extension Redis dans votre application Heroku (par exemple, Heroku Data for Redis ou Redis Enterprise Cloud), vous pouvez définir la variable d'environnement suivante pour activer l'intégration Datadog/Redis :
+
+```
+heroku config:set DD_ENABLE_HEROKU_REDIS=true
+```
+
+Par défaut, cette intégration part du principe que l'URL de connexion Redis est définie dans la variable d'environnement `REDIS_URL` (il s'agit de la configuration par défaut de l'extension Heroku Data for Redis et d'autres extensions Redis).
+
+Si votre URL de connexion est définie dans une autre variable d'environnement, ou si vous souhaitez configurer plusieurs instances de Redis, définissez la variable d'environnement `DD_REDIS_URL_VAR` sur la liste de noms de variables de vos chaînes de connexion, en prenant soin de séparer chaque nom par une virgule. Par exemple, si vous utilisez à la fois Heroku Redis et Redis Enterprise Cloud, définissez `DD_REDIS_URL_VAR` comme indiqué ci-dessous :
+
+```
+heroku config:set REDIS_URL="redis://aaaaa:bbbbb@redis-url"
+heroku config:set REDISCLOUD_URL="redis://xxxxx:yyyyy@redis-cloud-url"
+
+# Cette variable d'environnement doit pointer vers d'autres variables d'environnement.
+heroku config:set DD_REDIS_URL_VAR=REDIS_URL,REDISCLOUD_URL
+```
+
+### Activer l'intégration Datadog/Postgres
+
+Si vous utilisez une extension Postgres dans votre application Heroku (par exemple, Heroku Postgres), vous pouvez définir la variable d'environnement suivante pour activer l'intégration Datadog/Postgres :
+
+```
+heroku config:set DD_ENABLE_HEROKU_POSTGRES=true
+```
+
+Par défaut, cette intégration part du principe que l'URL de connexion Postgres est définie dans la variable d'environnement `DATABASE_URL` (il s'agit de la configuration par défaut de l'extension Heroku Postgres et d'autres extensions Redis).
+
+Si votre URL de connexion est définie dans une autre variable d'environnement, ou si vous souhaitez configurer plusieurs instances de Postgres, définissez la variable d'environnement `DD_POSTGRES_URL_VAR` sur la liste de noms de variables de vos chaînes de connexion, en prenant soin de séparer chaque nom par une virgule. Par exemple, si vous disposez de deux instances Postgres et que vos chaînes de connexion sont stockées dans `POSTGRES_URL1` et `POSTGRES_URL2`, définissez `DD_POSTGRES_URL_VAR` comme indiqué ci-dessous :
+
+```
+heroku config:set POSTGRES_URL1="postgres://aaaaa:bbbbb@postgres-url-1:5432/dbname"
+heroku config:set POSTGRES_URL2="postgres://xxxxx:yyyyy@postgres-url-2:5432/dbname"
+
+# Cette variable d'environnement doit pointer vers d'autres variables d'environnement.
+heroku config:set DD_POSTGRES_URL_VAR=POSTGRES_URL1,POSTGRES_URL2
+```
+
+Pour activer [Database Monitoring][17] pour vos instances Postgres, suivez [ces instructions][18] afin d'autoriser l'Agent à accéder à votre base de données. Définissez ensuite `DD_ENABLE_DBM` sur true :
+
+```
+heroku config:set DD_ENABLE_DBM=true
+```
+
+La solution Database Monitoring requiert la création d'identifiants de base de données pour l'Agent Datadog. Pour cette raison, vous ne pouvez pas en tirer parti si vous bénéficiez simplement d'une offre Essential pour Heroku Postgres.
+
+### Activer d'autres intégrations
+
+Pour activer une [intégration Datadog intitulée -<NOM_INTÉGRATION>][19], procédez comme suit :
 
 * Créez un dossier `datadog/conf.d` au sein de votre application.
 * Pour chaque intégration à activer, créez un dossier `<NOM_INTÉGRATION>.d`.
-* Dans ce dossier, créez un fichier `conf.yaml` contenant la [configuration de l'intégration][18].
+* Dans ce dossier, créez un fichier `conf.yaml` contenant la [configuration de l'intégration][20].
 
 Lors du démarrage du dyno, vos fichiers YAML sont copiés vers les répertoires de configuration de l'Agent Datadog appropriés.
 
-Par exemple, pour activer l'[intégration Datadog/Redis][19], ajoutez le fichier `/datadog/conf.d/redisdb.d/conf.yaml` à la racine de votre application (ou `/$DD_HEROKU_CONF_FOLDER/conf.d/redisdb.d/conf.yaml` si vous avez modifié cette [option de configuration](#configuration)) :
+Par exemple, pour activer l'[intégration Datadog/Memcache][21], ajoutez le fichier `/datadog/conf.d/mcache.d/conf.yaml` à la racine de votre application (ou `/$DD_HEROKU_CONF_FOLDER/conf.d/mcache.d/conf.yaml` si vous avez modifié cette [option de configuration](#configuration)) :
 
 ```yaml
 init_config:
 
 instances:
-
-    ## @param host - chaîne - obligatoire
-    ## Saisir le host auquel se connecter.
-    #
-  - host: <REDIS_HOST>
-
-    ## @param port - entier - obligatoire
-    ## Saisir le port du host auquel se connecter.
-    #
-    port: 6379
+  ## @param url - chaîne, requis
+  ## URL servant à se connecter à l'instance Memcached.
+  #
+  - url: localhost
 ```
 
-**Remarque** : consultez le fichier d'exemple [redisdb.d/conf.yaml][20] pour découvrir toutes les options de configuration disponibles.
+**Remarque** : consultez le fichier d'exemple [mcache.d/conf.yaml][22] pour découvrir toutes les options de configuration disponibles.
 
 ### Intégrations de la communauté
 
-Si l'intégration que vous activez fait partie des [intégrations de la communauté][21], installez le package au sein du [script de pré-exécution](#script-de-pre-execution).
+Si l'intégration que vous activez fait partie des [intégrations de la communauté][23], installez le package au sein du [script de pré-exécution](#script-de-pre-execution).
 
 ```
 agent-wrapper integration install -t datadog-<NOM_INTÉGRATION>==<VERSION_INTÉGRATION>
 ```
 
-Par exemple, pour installer l'[intégration ping][22], créez le fichier de configuration `datadog/conf.d/ping.d/conf.yaml` et ajoutez la ligne suivante à votre script de pré-exécution :
+Par exemple, pour installer l'[intégration ping][24], créez le fichier de configuration `datadog/conf.d/ping.d/conf.yaml` et ajoutez la ligne suivante à votre script de pré-exécution :
 
 ```
 agent-wrapper integration install -t datadog-ping==1.0.0
@@ -216,7 +270,7 @@ fi
 
 ## Activer des checks custom
 
-Pour activer vos propres [checks d'Agent custom][23], créez un dossier `checks.d` dans le dossier de configuration Datadog de votre application. Collez-y tous les fichiers `.py` et `.yaml` de vos checks custom. Lors du lancement des dynos, vos fichiers seront copiés vers les répertoires de configuration appropriés de l'Agent Datadog.
+Pour activer vos propres [checks d'Agent custom][25], créez un dossier `checks.d` dans le dossier de configuration Datadog de votre application. Collez-y tous les fichiers `.py` et `.yaml` de vos checks custom. Lors du lancement des dynos, vos fichiers seront copiés vers les répertoires de configuration appropriés de l'Agent Datadog.
 
 Par exemple, voici un exemple d'arborescence pour deux checks custom `foo` et `bar` :
 
@@ -246,7 +300,7 @@ if [ "$DYNOTYPE" == "run" ]; then
   DISABLE_DATADOG_AGENT="true"
 fi
 
-# Désactiver des intégrations en fonction du type de dyno
+# Désactiver des integrations en fonction du type de dyno
 if [ "$DYNOTYPE" != "web" ]; then
   rm -f "$DD_CONF_DIR/conf.d/gunicorn.d/conf.yaml"
 fi
@@ -256,19 +310,7 @@ if [ -n "$HEROKU_SLUG_COMMIT" ]; then
   DD_VERSION=$HEROKU_SLUG_COMMIT
 fi
 
-# Mettre à jour la configuration Postgres ci-dessus à l'aide des variables d'environnements de l'application Heroku
-if [ -n "$DATABASE_URL" ]; then
-  POSTGREGEX='^postgres://([^:]+):([^@]+)@([^:]+):([^/]+)/(.*)$'
-  if [[ $DATABASE_URL =~ $POSTGREGEX ]]; then
-    sed -i "s/<VOTRE_HOSTNAME>/${BASH_REMATCH[3]}/" "$DD_CONF_DIR/conf.d/postgres.d/conf.yaml"
-    sed -i "s/<VOTRE_NOM_UTILISATEUR>/${BASH_REMATCH[1]}/" "$DD_CONF_DIR/conf.d/postgres.d/conf.yaml"
-    sed -i "s/<VOTRE_MOT_DE_PASSE>/${BASH_REMATCH[2]}/" "$DD_CONF_DIR/conf.d/postgres.d/conf.yaml"
-    sed -i "s/<VOTRE_PORT>/${BASH_REMATCH[4]}/" "$DD_CONF_DIR/conf.d/postgres.d/conf.yaml"
-    sed -i "s/<VOTRE_BASE_DE_DONNÉES>/${BASH_REMATCH[5]}/" "$DD_CONF_DIR/conf.d/postgres.d/conf.yaml"
-  fi
-fi
-
-# Installer l'intégration de la communauté « ping »
+# Installer l'intégration « ping » de la communauté
 agent-wrapper integration install -t datadog-ping==1.0.0
 ```
 
@@ -290,7 +332,7 @@ Pour réduire la taille de votre slug, assurez-vous que `DD_APM_ENABLED` est dé
 
 ## Debugging
 
-Pour exécuter les [commandes de debugging ou d'information][24], utilisez la commande `agent-wrapper`.
+Pour exécuter les [commandes de debugging ou d'information][26], utilisez la commande `agent-wrapper`.
 
 Par exemple, pour afficher le statut de votre Agent Datadog et des intégrations activées, exécutez :
 
@@ -310,7 +352,7 @@ Le buildpack Datadog ne recueille pas de logs à partir de la plateforme Heroku.
 
 ## Utiliser Heroku avec des images Docker
 
-Ce buildpack ne fonctionne que pour les déploiements Heroku qui utilisent le [compilateur de slug Heroku][25]. Si vous déployez votre application dans Heroku à l'aide de conteneurs Docker, procédez comme suit :
+Ce buildpack ne fonctionne que pour les déploiements Heroku qui utilisent le [compilateur de slug Heroku][27]. Si vous déployez votre application dans Heroku à l'aide de conteneurs Docker, procédez comme suit :
 
 1. Intégrez l'Agent Datadog à votre image Docker et lancez l'Agent en tant que processus distinct dans votre conteneur.
 2. Définissez l'option de configuration suivante dans votre application Heroku pour vous assurer que Datadog la transmet bien comme un dyno Heroku :
@@ -326,13 +368,15 @@ Par exemple, si vous créez votre image Docker depuis un système d'exploitation
 RUN apt-get update \
  && apt-get install -y gnupg apt-transport-https gpg-agent curl ca-certificates
 
-# Ajouter les clés de signature et le référentiel Datadog
+# Ajouter le référentiel et les clés de signature Datadog
 ENV DATADOG_APT_KEYRING="/usr/share/keyrings/datadog-archive-keyring.gpg"
 ENV DATADOG_APT_KEYS_URL="https://keys.datadoghq.com"
 RUN sh -c "echo 'deb [signed-by=${DATADOG_APT_KEYRING}] https://apt.datadoghq.com/ stable 7' > /etc/apt/sources.list.d/datadog.list"
 RUN touch ${DATADOG_APT_KEYRING}
 RUN curl -o /tmp/DATADOG_APT_KEY_CURRENT.public "${DATADOG_APT_KEYS_URL}/DATADOG_APT_KEY_CURRENT.public" && \
     gpg --ignore-time-conflict --no-default-keyring --keyring ${DATADOG_APT_KEYRING} --import /tmp/DATADOG_APT_KEY_CURRENT.public
+RUN curl -o /tmp/DATADOG_APT_KEY_C0962C7D.public "${DATADOG_APT_KEYS_URL}/DATADOG_APT_KEY_C0962C7D.public" && \
+    gpg --ignore-time-conflict --no-default-keyring --keyring ${DATADOG_APT_KEYRING} --import /tmp/DATADOG_APT_KEY_C0962C7D.public
 RUN curl -o /tmp/DATADOG_APT_KEY_F14F620E.public "${DATADOG_APT_KEYS_URL}/DATADOG_APT_KEY_F14F620E.public" && \
     gpg --ignore-time-conflict --no-default-keyring --keyring ${DATADOG_APT_KEYRING} --import /tmp/DATADOG_APT_KEY_F14F620E.public
 RUN curl -o /tmp/DATADOG_APT_KEY_382E94DE.public "${DATADOG_APT_KEYS_URL}/DATADOG_APT_KEY_382E94DE.public" && \
@@ -345,7 +389,7 @@ RUN apt-get update && apt-get -y --force-yes install --reinstall datadog-agent
 # Copier le point d'entrée
 COPY entrypoint.sh /
 
-# Exposer les ports de DogStatsD et du trace-agent
+# Exposer les ports de DogStatsD et de trace-agent
 EXPOSE 8125/udp 8126/tcp
 
 # Copier votre configuration Datadog
@@ -364,15 +408,15 @@ datadog-agent run &
 /opt/datadog-agent/embedded/bin/process-agent --config=/etc/datadog-agent/datadog.yaml
 ```
 
-Pour utiliser des options plus avancées dans l'image Docker, consultez les [fichiers Docker de l'Agent Datadog][26].
+Pour utiliser des options plus avancées dans l'image Docker, consultez les [fichiers Docker de l'Agent Datadog][28].
 
 ## Contributions
 
-Consultez les [règles de contribution][27] pour découvrir comment créer un ticket ou une pull request dans le [référentiel Heroku-buildpack-datadog][28].
+Consultez les [règles de contribution][29] pour découvrir comment créer un ticket ou une pull request dans le [référentiel Heroku-buildpack-datadog][30].
 
 ## Historique
 
-Plusieurs forks ont été créés à partir d'anciennes versions du [projet heroku-buildpack-datadog de miketheman][29]. Ce dernier a été presque entièrement réécrit pour la version 6 de l'Agent Datadog. La liste des changements ainsi que d'autres informations sont disponibles dans le [changelog][30].
+Plusieurs forks ont été créées à partir d'anciennes versions du [projet heroku-buildpack-datadog de miketheman][31]. Ce dernier a été presque entièrement réécrit pour la version 6 de l'Agent Datadog. La liste des changements ainsi que d'autres informations sont disponibles dans le [changelog][32].
 
 ## Dépannage
 
@@ -509,17 +553,19 @@ Une fois le buildpack ou l'Agent mis à niveau, vous devez recompiler le slug de
 [14]: https://devcenter.heroku.com/articles/log-runtime-metrics
 [15]: https://docs.datadoghq.com/fr/logs/guide/collect-heroku-logs
 [16]: https://docs.datadoghq.com/fr/logs/logs_to_metrics/
-[17]: https://docs.datadoghq.com/fr/integrations/
-[18]: https://docs.datadoghq.com/fr/getting_started/integrations/#configuring-agent-integrations
-[19]: https://docs.datadoghq.com/fr/integrations/redisdb/
-[20]: https://github.com/DataDog/integrations-core/blob/master/redisdb/datadog_checks/redisdb/data/conf.yaml.example
-[21]: https://github.com/DataDog/integrations-extras/
-[22]: https://github.com/DataDog/integrations-extras/tree/master/ping
-[23]: https://docs.datadoghq.com/fr/developers/custom_checks/
-[24]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
-[25]: https://devcenter.heroku.com/articles/slug-compiler
-[26]: https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles
-[27]: https://github.com/DataDog/heroku-buildpack-datadog/blob/master/CONTRIBUTING.md
-[28]: https://github.com/DataDog/heroku-buildpack-datadog
-[29]: https://github.com/miketheman/heroku-buildpack-datadog
-[30]: https://github.com/DataDog/heroku-buildpack-datadog/blob/master/CHANGELOG.md
+[17]: https://docs.datadoghq.com/fr/database_monitoring/
+[18]: https://docs.datadoghq.com/fr/database_monitoring/setup_postgres/selfhosted/?tab=postgres10#grant-the-agent-access
+[19]: https://docs.datadoghq.com/fr/integrations/
+[20]: https://docs.datadoghq.com/fr/getting_started/integrations/#configuring-agent-integrations
+[21]: https://docs.datadoghq.com/fr/integrations/mcache/
+[22]: https://github.com/DataDog/integrations-core/blob/master/mcache/datadog_checks/mcache/data/conf.yaml.example
+[23]: https://github.com/DataDog/integrations-extras/
+[24]: https://github.com/DataDog/integrations-extras/tree/master/ping
+[25]: https://docs.datadoghq.com/fr/developers/custom_checks/
+[26]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
+[27]: https://devcenter.heroku.com/articles/slug-compiler
+[28]: https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles
+[29]: https://github.com/DataDog/heroku-buildpack-datadog/blob/master/CONTRIBUTING.md
+[30]: https://github.com/DataDog/heroku-buildpack-datadog
+[31]: https://github.com/miketheman/heroku-buildpack-datadog
+[32]: https://github.com/DataDog/heroku-buildpack-datadog/blob/master/CHANGELOG.md

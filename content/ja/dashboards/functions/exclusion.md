@@ -1,7 +1,6 @@
 ---
 aliases:
 - /ja/graphing/functions/exclusion/
-kind: ドキュメント
 title: 除外
 ---
 

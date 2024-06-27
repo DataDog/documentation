@@ -1,9 +1,10 @@
 ---
-title: as_count() dans les évaluations de monitors
-kind: guide
 aliases:
-  - /monitors/guide/as-count-monitor-evaluation
+- /fr/monitors/guide/as-count-monitor-evaluation
+kind: guide
+title: as_count() dans les évaluations de monitors
 ---
+
 ## Présentation
 
 Lors des évaluations de monitors, les requêtes utilisant les modificateurs **`as_count()`** et **`as_rate()`** sont calculées selon des méthodes susceptibles de produire des résultats différents. Les monitors faisant intervenir une opération arithmétique et au moins 1 modificateur **`as_count()`** utilisent un chemin d'évaluation distinct qui modifie l'ordre dans lequel les agrégations arithmétique et temporelle sont réalisées.
@@ -69,13 +70,11 @@ et le chemin **`as_count_eval_path`** comme :
 
 ```text
 sum(last_5m):error
----
+-----------------
 sum(last_5m):total
 ```
 
-Si l'agrégation temporelle **`avg`** avec **`.as_rate()`** convient généralement, l'agrégation **`sum`** avec **`.as_count()`** est recommandée pour les taux d'erreur. L'utilisation de méthodes d'agrégation autres que **`sum`** (affichée sous forme de _total_ dans l'application) avec **`.as_count()`** serait illogique.
-
-**Remarque** : les méthodes d'agrégation autres que la somme (affichée sous forme de total dans l'application) ne peuvent pas être utilisées avec `.as_count()`.
+Si l'agrégation temporelle **`avg`** avec **`.as_rate()`** convient généralement, l'agrégation **`sum`** avec **`.as_count()`** est recommandée pour les taux d'erreur. L'utilisation de méthodes d'agrégation autres que **`sum`** avec **`.as_count()`** serait illogique (et impossible).
 
 [Contactez l'équipe d'assistance Datadog][1] si vous avez des questions.
 

@@ -1,7 +1,7 @@
 ---
 title: Fluent Bit
 name: fluentbit
-kind: integration
+custom_kind: integration
 description: 'Configure Fluent Bit to collect, parse, and forward log data from several sources.'
 short_description: 'Collect, parse, and forward log data from several sources.'
 categories:
@@ -41,7 +41,7 @@ Before you begin, you need to have a [Datadog account][3], a [Datadog API key][4
 | Key            | Description                                                                                                              | Default                                                                     |
 | -------------- | ------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------- |
 | Host           | _Required_ - The Datadog server where you are sending your logs.                                                         | {{< region-param key="http_endpoint" code="true" >}} |
-| TLS            | _Required_ - End-to-end security communications security protocol. Datadog recommends setting this to `on`.              | `off`                                                                       |
+| TLS            | _Required_ - End-to-end security communications security protocol. This setting must be set to `on`.              | `off`                                                                       |
 | apikey         | _Required_ - Your [Datadog API key][4].                                                                                  |                                                                             |
 | compress       | _Recommended_ - compresses the payload in GZIP format, Datadog supports and recommends setting this to `gzip`.           |                                                                             |
 | dd_service     | _Recommended_ - The human readable name for your service generating the logs - the name of your application or database. |                                                                             |

@@ -21,7 +21,11 @@ further_reading:
       text: 'Collect your Network Data with the Datadog Agent.'
 ---
 
-{{< img src="network_performance_monitoring/network_analytics/main_page_npm2.png" alt="Main page" >}}
+## Overview
+
+The Network Analytics page provides insights into your overall network health and shows [recommended queries](#recommended-queries) at the top of the page. These recommended queries enable you to run common queries and see snapshots of relevant metrics, so that you can see changes in throughput, latency, DNS errors, and more. Clicking on a recommended query automatically populates the search bar, group bys, and summary graphs to provide you with relevant insights into your network.
+
+{{< img src="network_performance_monitoring/network_analytics/main_page_npm3.png" alt="Network Analytics landing page under Network Performance" >}}
 
 ## Queries
 
@@ -31,7 +35,7 @@ To refine your search to traffic between particular endpoints, aggregate and fil
 
 The following screenshot shows the default view, which aggregates the client and server by the `service` tag. Accordingly, each row in the table represents service-to-service aggregate connections when aggregated over a one hour time period.
 
-{{< img src="network_performance_monitoring/network_analytics/context_npm2.png" alt="context" style="width:80%;">}}
+{{< img src="network_performance_monitoring/network_analytics/context_npm2.png" alt="Query interface, with the inputs 'Search for', 'View clients as', and 'View servers as'" style="width:90%;">}}
 
 The next example shows all aggregate connections from IP addresses representing services in region `us-east-1` to availability zones:
 
@@ -41,7 +45,7 @@ You can set the timeframe over which traffic is aggregated using the time select
 
 {{< img src="network_performance_monitoring/network_analytics/npm_timeframe.png" alt="Time frame NPM" style="width:30%;">}}
 
-Tags from Datadog integrations or Unified Service Tagging can be used for aggregating and filtering automatically. See [custom facets](#custom-facets), below, for other tags. You can also select "Auto-grouped traffic" to see traffic bucketed into several commonly used tags such as `service`, `kube_service`, `short_image`, and `container_name`.
+Tags from Datadog integrations or [Unified Service Tagging][12] can be used for aggregating and filtering automatically. See [custom facets](#custom-facets), below, for other tags. You can also select "Auto-grouped traffic" to see traffic bucketed into several commonly used tags such as `service`, `kube_service`, `short_image`, and `container_name`.
 
 You can filter to traffic where the client or server matches a CIDR using `CIDR(network.client.ip, 10.0.0.0/8)` or `CIDR(network.server.ip, 10.0.0.0/8)`.
 
@@ -130,19 +134,28 @@ The following network load metrics are available:
 | Metric          |  Description                                                                                                                                    |
 | --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Volume**      | The number of bytes sent or received over a period. Measured in bytes (or orders of magnitude thereof) bidirectional.                           |
-|  **Throughput** | The rate of bytes sent or received over a period. Measured in bytes per second, bidirectional.                                                  |
+| **Throughput**  | The rate of bytes sent or received over a period. Measured in bytes per second, bidirectional.                                                  |
 
 #### TCP
 
-TCP is a connection-oriented protocol that guarantees in-order delivery of packets. The following TCP metrics are available: All metrics are instrumented from the perspective of the `client` side of the connection when available, or the server if not.
+TCP is a connection-oriented protocol that guarantees in-order delivery of packets. 
 
-| Metric                      | Description                                                                                                                              |
-|-----------------------------|------------------------------------------------------------------------------------------------------------------------------------------|
-| **TCP Retransmits**         | TCP Retransmits represent detected failures that are retransmitted to ensure delivery. Measured in count of retransmits from the client. |
-| **TCP Latency**             | Measured as TCP smoothed round-trip time, that is, the time between a TCP frame being sent and acknowledged.                              |
-| **TCP Jitter**              | Measured as TCP smoothed round-trip time variance.                                                                                       |
-| **Established Connections** | The number of TCP connections in an established state. Measured in connections per second from the client.                               |
-| **Closed Connections**      | The number of TCP connections in a closed state. Measured in connections per second from the client.                                     |
+The following TCP metrics are available: 
+
+| Metric | Description |
+|---|---|
+| **TCP Retransmits** | TCP Retransmits represent detected failures that are retransmitted to ensure delivery. Measured in count of retransmits from the client. |
+| **TCP Latency** | Measured as TCP smoothed round-trip time, that is, the time between a TCP frame being sent and acknowledged. |
+| **TCP Jitter** | Measured as TCP smoothed round-trip time variance. |
+| **TCP Timeouts** (Private Beta) | The number of TCP connections that timed out from the perspective of the operating system. This can indicate general connectivity and latency issues.  |
+| **TCP Refusals** (Private Beta) | The number of TCP connections that were refused by the server. Typically this indicates an attempt to connect to an IP/Port that isn’t receiving connections, or a firewall/security misconfiguration. |
+| **TCP Resets** (Private Beta) | The number of TCP connections that were reset by the server.  |
+| **Established Connections** | The number of TCP connections in an established state. Measured in connections per second from the client. |
+| **Closed Connections** | The number of TCP connections in a closed state. Measured in connections per second from the client. |
+
+<div class="alert alert-warning">TCP Timeouts, Refusals, and Resets are in private beta. Reach out to your Datadog representative to request access. Once you've signed up, follow the <a href="/network_monitoring/performance/setup/?tab=agentlinux#failed-connections-private-beta">instructions</a> to enable the feature on your agent.</div>
+
+All metrics are instrumented from the perspective of the `client` side of the connection when available, or the server if not.
 
 ### Cloud service autodetection
 
@@ -150,15 +163,15 @@ If you're relying on managed cloud services like S3 or Kinesis, you can monitor 
 
 {{< img src="network_performance_monitoring/network_analytics/cloud-service-hero-docs2.png" alt="Cloud Service Map" >}}
 
-For instance, you can
+For instance, you can:
 
-- visualize data flow from your internal Kubernetes cluster to `server_service:aws.s3` in the [Network Map][2].
-- pivot to the [Network Page](#table) to isolate which pods are establishing the most connections to that service, and
-- validate that their request are successful by analyzing S3 performance metrics, which are correlated with traffic performance directly in the sidepanel for a given dependency, under the *Integration Metrics* tab.
+- Visualize data flow from your internal Kubernetes cluster to `server_service:aws.s3` in the [Network Map][2].
+- Pivot to the [Network Page](#table) to isolate which pods are establishing the most connections to that service, and
+- Validate that their request is successful by analyzing S3 performance metrics, which are correlated with traffic performance directly in the side panel for a given dependency, under the *Integration Metrics* tab.
 
-NPM automatically maps
+NPM automatically maps:
 
-- network calls to S3 (which can broken down by `s3_bucket`), RDS (which can be broken down by `rds_instance_type`), Kinesis, ELB, Elasticache, and other [AWS services][3].
+- Network calls to S3 (which can broken down by `s3_bucket`), RDS (which can be broken down by `rds_instance_type`), Kinesis, ELB, Elasticache, and other [AWS services][3].
 - API calls to AppEngine, Google DNS, Gmail, and other [Google Cloud services][4].
 
 To monitor other endpoints where an Agent cannot be installed (such as public APIs), group the destination in the Network Overview by the [`domain` tag](#domain-resolution). Or, see the section below for cloud service resolution.
@@ -294,6 +307,12 @@ Select any row from the data table to see associated logs, traces, and processes
 
 {{< img src="network_performance_monitoring/network_analytics/flow_details.png" alt="Aggregate Connection Details" style="width:80%;">}}
 
+### Pivot to network path
+
+Hover over a row in the analytics table to pivot to [network path][11] and see the paths between the source and destination specified in NPM.
+
+{{< img src="network_performance_monitoring/network_analytics/view_network_path.png" alt="Example of hovering over a row in the Analytics table to show the Network Path toggle" style="width:90%;">}}
+
 ## Sidepanel
 
 The sidepanel provides contextual telemetry to help you debug network dependencies. Use the Flows, Logs, Traces, and Processes tabs to determine whether a high retransmit count or latency in traffic between two endpoints is due to:
@@ -327,3 +346,5 @@ The **Security** tab highlights potential network threats and findings detected 
 [8]: /security/detection_rules/
 [9]: /network_monitoring/performance/setup/#enhanced-resolution
 [10]: /network_monitoring/dns/#recommended-queries
+[11]: /getting_started/tagging/unified_service_tagging/
+[12]: /network_monitoring/network_path

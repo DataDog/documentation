@@ -18,18 +18,18 @@ further_reading:
 
 ## Overview
 
-Notifications are a key component of monitors that keep your team informed of issues and support troubleshooting. When [creating your monitor][1], add to the **Notify your team** section.
+Notifications are a key component of monitors that keep your team informed of issues and support troubleshooting. When [creating your monitor][1], add to the **Configure notifications and automations** section.
 
-## Notify your team
+## Configure notifications and automations
 
-Use the **Notify your team** section to:
+Use the **Configure notifications and automations** section to:
 - Send notifications to your team through email, Slack, PagerDuty, and other integrations. 
 - Trigger a workflow or create a workflow from a monitor.
 - Add a case to your monitor.
 
 ### Title
 
-Add a unique title to your monitor (required). For multi alert monitors, some tags identifying your triggering scope are automatically inserted. Additionally, you can use [tag variables][2].
+Add a unique title to your monitor (required). For multi alert monitors, some tags identifying your triggering scope are automatically inserted. Additionally, you can use [tag variables][12].
 
 ### Message
 
@@ -81,11 +81,29 @@ You can trigger a [workflow automation][7] or create a new workflow from a monit
 For more information on triggering a workflow, see [Trigger a workflow][8].
 
 **To create a workflow**:
-1. Click **Add Worklfow**.
+1. Click **Add Workflow**.
 1. Click the **+** icon and select a Blueprint, or select **Start From Scratch**.
    {{< img src="/monitors/notifications/create-workflow.png" alt="Click the + button to add a new workflow" style="width:90%;">}}
 
 For more information on building a workflow, see [Build workflows][9].
+
+### Priority
+
+Add a priority (optional) associated with your monitors. Values range from P1 through P5, with P1 being the highest priority and the P5 being the lowest.
+To override the monitor priority in the notification message, use `{{override_priority 'Pi'}}` where `Pi` is between P1 and P5.
+
+For example, you can set different priorities for `alert` and `warning` notifications:
+
+```
+{{#is_alert}}
+{{override_priority 'P1'}}
+ ...
+{{/is_alert}}
+{{#is_warning}}
+{{override_priority 'P4'}}
+...
+{{/is_warning}}
+```
 
 ### Toggle additional content
 
@@ -108,7 +126,7 @@ The options are:
 
 Add metadata (Priority, Tags, Datadog Team) to your monitor. Monitor Priority allows you to set the importance of your monitor through P-level (P1 to P5). Monitor tag--which are different from metric tags--are used in the UI to group and search for monitors. If tag policies are configured, the required tags and tag values need to be added. To learn more, see [Tag Policies][10]. Datadog Teams allows you to set a layer of ownership to this monitor and view all the monitors linked to your team. To learn more, see [Datadog Teams][11].
 
-{{< img src="monitors/notifications/notifications_add_required_tags.png" alt="View of policy tag configuration. Underneath 'Policy tags' are three example tags, cost_center, product_id, and env, next to a 'Select value' dropdown." style="width:100%;" >}}
+{{< img src="monitors/notifications/notifications_metadata.png" alt="View of policy tag configuration. Underneath 'Policy tags' are three example tags, cost_center, product_id, and env, next to a 'Select value' dropdown." style="width:100%;" >}}
 
 ### Renotify
 
@@ -127,7 +145,7 @@ If renotification is enabled, you are given the option to include an escalation 
 The escalation message can be added in the following ways:
 
 * In the `{{#is_renotify}}` block in the original notification message (recommended).
-* In the *Renotification message* field in the `Notify your team` section.
+* In the *Renotification message* field in the `Configure notifications and automations` section.
 * With the `escalation_message` attribute in the API.
 
 If you use the `{{#is_renotify}}` block, the original notification message is also included in the renotification, so:
@@ -194,7 +212,6 @@ Message variables auto-populate with a randomly selected group based on the scop
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /monitors/configuration
-[2]: /monitors/notify/variables/#tag-variables
 [3]: http://daringfireball.net/projects/markdown/syntax
 [4]: /monitors/notify/variables/
 [5]: /monitors/notify/variables/#conditional-variables

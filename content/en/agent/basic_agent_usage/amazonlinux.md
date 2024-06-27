@@ -1,6 +1,5 @@
 ---
 title: Basic Agent Usage for Amazon Linux
-kind: documentation
 platform: Amazon Linux
 aliases:
     - /guides/basic_agent_usage/amazonlinux/
@@ -20,6 +19,8 @@ further_reading:
 - link: "/agent/configuration/network#configure-ports"
   tag: "Documentation"
   text: "Configure inbound ports"
+algolia:
+  tags: ['uninstall', 'uninstalling']
 ---
 
 ## Overview
@@ -165,6 +166,8 @@ sudo userdel dd-agent \
 ```
 {{% /tab %}}
 {{< /tabs >}}
+
+{{% apm-ssi-uninstall-linux %}}
 
 ## Troubleshooting
 

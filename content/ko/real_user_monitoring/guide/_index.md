@@ -44,10 +44,12 @@ title: 실제 사용자 모니터링 및 세션 재생 가이드
 {{< /whatsnext >}}
 
 {{< whatsnext desc="모바일 RUM:" >}}
-    {{< nextlink href="real_user_monitoring/guide/mobile-sdk-deprecation-policy" >}}RUM 모바일 SDK 지원 중단 정책{{< /nextlink >}}
-    {{< nextlink href="real_user_monitoring/guide/mobile-sdk-upgrade" >}}RUM 모바일 SDK 업그레이드{{< /nextlink >}}
-    {{< nextlink href="real_user_monitoring/guide/mobile-sdk-multi-instance" >}}모바일 SDK의 여러 인스턴스 사용{{< /nextlink >}}
-    {{< nextlink href="real_user_monitoring/guide/proxy-mobile-rum-data" >}}모바일 RUM 데이터 프록시{{< /nextlink >}}
+{{< nextlink href="real_user_monitoring/guide/mobile-sdk-deprecation-policy" >}}RUM 모바일 SDK 지원 중단 정책{{< /nextlink >}}
+{{< nextlink href="real_user_monitoring/guide/mobile-sdk-upgrade" >}}RUM 모바일 SDK 업그레이드{{< /nextlink >}}
+{{< nextlink href="real_user_monitoring/guide/mobile-sdk-multi-instance" >}}모바일 SDK의 여러 인스턴스 사용{{< /nextlink >}}
+{{< nextlink href="real_user_monitoring/guide/proxy-mobile-rum-data" >}}모바일 RUM 데이터 프록시{{< /nextlink >}}
+{{< nextlink href="real_user_monitoring/guide/initialize-your-native-sdk-before-react-native-starts" >}}React Native가 시작되기 전에 네이티브 SDK 초기화{{< /nextlink >}}
+{{< nextlink href="real_user_monitoring/guide/monitor-hybrid-react-native-applications" >}}하이브리드 React Native 애플리케이션 모니터링{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="세션 재생:" >}}

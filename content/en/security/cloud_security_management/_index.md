@@ -1,6 +1,5 @@
 ---
 title: Cloud Security Management
-kind: documentation
 aliases:
   - /security_platform/cloud_security_management/
 further_reading:
@@ -53,10 +52,6 @@ cascade:
         subcategory: Cloud Security Management
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Cloud Security Management Misconfigurations is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 Datadog Cloud Security Management (CSM) delivers real-time threat detection and continuous configuration audits across your entire cloud infrastructure, all in a unified view for seamless collaboration and faster remediation. Powered by observability data, security teams can determine the impact of a threat by tracing the full attack flow and identify the resource owner where a vulnerability was triggered.
 
 CSM leverages the Datadog Agent and platform-wide cloud integrations and includes:
@@ -83,6 +78,10 @@ Use the [Explorers][7] to review and remediate your organization's security dete
 {{< img src="security/csm/explorers_page.png" alt="CSM Explorers page" width="100%">}}
 
 ## Investigate resources
+
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Resource Catalog is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
 
 <div class="alert alert-info">Resource Catalog is in beta.</div>
 

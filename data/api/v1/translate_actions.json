@@ -1018,7 +1018,7 @@
     "summary": "Get hourly usage for Lambda"
   },
   "GetUsageBillableSummary": {
-    "description": "Get billable usage across your account.",
+    "description": "Get billable usage across your account.\n\nThis endpoint is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/).",
     "summary": "Get billable usage across your account"
   },
   "GetUsageCIApp": {
@@ -1114,7 +1114,7 @@
     "summary": "Get hourly usage for SNMP devices"
   },
   "GetUsageSummary": {
-    "description": "Get all usage across your account.",
+    "description": "Get all usage across your account.\n\nThis endpoint is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/).",
     "summary": "Get usage across your account"
   },
   "GetUsageSynthetics": {

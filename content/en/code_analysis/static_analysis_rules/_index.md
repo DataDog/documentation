@@ -1,6 +1,5 @@
 ---
 title: Static Analysis Rules
-kind: documentation
 description: View rules for multiple languages for Static Analysis.
 aliases:
 - /continuous_integration/static_analysis/rules
@@ -185,6 +184,40 @@ rulesets:
     title: "Identify potential security hotspots in Node"
     description: |
       Rules to identify potential security hotspots in Node. This may include false positives that require further triage.
+
+cascade:
+  modal:
+    title: Try this rule and analyze your code with Datadog Code Analysis
+    top_box: 
+      title: How to use this rule
+      steps:
+        - Create a static-analysis.datadog.yml with the content above at the root of your repository
+        - Use our free IDE Plugins or add Code Analysis scans to your CI pipelines
+        - Get feedback on your code
+      footer: For more information, please read the <a href="/code_analysis">Code Analysis documentation</a>
+    bottom_boxes:
+      - title: VS Code Extension
+        icon: vscode
+        subtitle: Identify code vulnerabilities directly in your</br>VS Code editor
+        cta_title: Download Extension
+        cta_url: https://marketplace.visualstudio.com/items?itemName=Datadog.datadog-vscode
+      - title: JetBrains Plugin
+        icon: jetbrains
+        subtitle: Identify code vulnerabilities directly in</br>JetBrains products
+        cta_title: Download Plugin
+        cta_url: https://plugins.jetbrains.com/plugin/19495-datadog
+    footer:
+      text: Use Datadog Code Analysis to catch code issues at every step of your development process
+      link:
+        name: Datadog Code Analysis
+        url: https://www.datadoghq.com/code-analysis/
+
+  banner: 
+    title: "<span>Seamless integrations.</span> Try Datadog Code Analysis"
+    link:
+      name: Datadog Code Analysis
+      url: https://www.datadoghq.com/code-analysis/
+
 
 further_reading:
   - link: "/code_analysis/"

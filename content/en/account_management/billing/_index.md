@@ -1,6 +1,5 @@
 ---
 title: Billing
-kind: documentation
 ---
 
 ## Overview
@@ -13,7 +12,7 @@ Datadog meters the count of hosts and custom metrics hourly. The billable count 
 
 A host is any physical or virtual OS instance that you monitor with Datadog. It could be a server, VM, node (in the case of Kubernetes), App Service Plan instance (in the case of Azure App Service), or Heroku dyno (in the case of the Heroku platform). Hosts can be instances with the Datadog Agent installed plus any Amazon EC2s, Google Cloud, Azure, or vSphere VMs monitored with Datadog integrations. Any EC2s or VMs with the Agent installed count as a single instance (no double-billing).
 
-Non-reporting hosts (status `???` in your [Infrastructure list][2]) do not count towards billing. It could take up to 2 hours for these hosts to drop out of the [Infrastructure List][2]. Datadog retains the historical data for these hosts (paid accounts). Metrics can be graphed on a dashboard by knowing the specific host name or tags.
+Non-reporting hosts (status `INACTIVE` in your [Infrastructure list][2]) do not count towards billing. It could take up to 2 hours for these hosts to drop out of the [Infrastructure List][2]. Datadog retains the historical data for these hosts (paid accounts). Metrics can be graphed on a dashboard by knowing the specific host name or tags.
 
 ### Containers
 
@@ -77,13 +76,13 @@ There are two choices for payment method:
 
 ### Credit card
 
-If you pay by credit card, receipts are available to [Administrators][10] for previous months under [Billing History][11]. For copies of your invoice, email [Datadog billing][11].
+If you pay by credit card, receipts are available to [Administrators][10] for previous months under [Billing History][11]. For copies of your invoice, email [Datadog billing][13].
 
-See [Credit Card Billing][13] for more details.
+See [Credit Card Billing][12] for more details.
 
 ### Invoicing
 
-If you pay by check, ACH, or wire, invoices are emailed to the billing email addresses near the 10th business day of each month. To request an additional copy, email [Datadog billing][12]. Details on where to remit payment can be found on the invoice.
+If you pay by check, ACH, or wire, invoices are emailed to the billing email addresses near the 10th business day of each month. To request an additional copy, email [Datadog billing][13]. Details on where to remit payment can be found on the invoice.
 
 ## Contact
 
@@ -116,6 +115,7 @@ If you pay by check, ACH, or wire, invoices are emailed to the billing email add
 {{< /whatsnext >}}
 
 
+
 [1]: https://app.datadoghq.com/account/usage/hourly
 [2]: /infrastructure/
 [3]: /agent/
@@ -127,6 +127,5 @@ If you pay by check, ACH, or wire, invoices are emailed to the billing email add
 [9]: https://app.datadoghq.com/billing/plan
 [10]: /account_management/rbac/#datadog-default-roles
 [11]: https://app.datadoghq.com/account/billing_history
-[12]: mailto:billing@datadoghq.com
-[13]: /account_management/billing/credit_card/
-
+[12]: /account_management/billing/credit_card/
+[13]: mailto:billing@datadoghq.com

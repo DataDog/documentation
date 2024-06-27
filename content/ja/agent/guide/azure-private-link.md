@@ -1,5 +1,4 @@
 ---
-kind: ガイド
 title: Azure Private Link を介して Datadog に接続する
 ---
 

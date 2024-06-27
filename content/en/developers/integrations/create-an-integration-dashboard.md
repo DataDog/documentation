@@ -19,7 +19,7 @@ To create a Datadog integration, see [Create an Agent Integration][2].
 
 ### Create a dashboard
 
-In Datadog, navigate to [**Dashboards** > **Dashboard List**][12] and click **+ New Dashboard**. 
+In Datadog, from the [**Dashboard List**][12], click **+ New Dashboard**.
 
 {{< img src="dashboards/create_dashboard.png" alt="Create a dashboard for your integration" width="80%">}}
 

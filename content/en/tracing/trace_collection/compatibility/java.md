@@ -105,7 +105,7 @@ Beta integrations are disabled by default but can be enabled individually:
 | Ratpack                 | 1.5+       | Fully Supported                                     | `ratpack`                                                |
 | Restlet HTTP Server     | 2.2 - 2.4  | Fully Supported                                     | `restlet-http`.                                          |
 | Spark Java              | 2.3+       | [Beta](#framework-integrations-disabled-by-default) | `sparkjava` (requires `jetty`)                           |
-| Spring Boot             | 1.5        | Fully Supported                                     | `spring-web` or `spring-webflux`                         |
+| Spring Boot             | 1.5+       | Fully Supported                                     | `spring-web` or `spring-webflux`                         |
 | Spring Web (MVC)        | 4.0+       | Fully Supported                                     | `spring-web`                                             |
 | Spring WebFlux          | 5.0+       | Fully Supported                                     | `spring-webflux`                                         |
 | Tomcat                  | 5.5+       | Fully Supported                                     | `tomcat`                                                 |
@@ -199,7 +199,7 @@ Don't see your desired networking framework? Datadog is continually adding addit
 | Lettuce                 | 4.0+     | Fully Supported | `lettuce`, `lettuce-4-async`, `lettuce-5-rx`                                               |
 | MongoDB                 | 3.0-4.0+ | Fully Supported | `mongo`                                                                                    |
 | OpenSearch Rest         | 1.x-2.x  | Fully Supported | `opensearch`, `opensearch-rest`                                                            |
-| OpenSearch Transport    | 1.0+     | Fully Supported | `opensearch`, `opensearch-transport`                                                       |
+| OpenSearch Transport    | 1.x-2.x  | Fully Supported | `opensearch`, `opensearch-transport`                                                       |
 | RediScala               | 1.5+     | Fully Supported | `rediscala`, `redis`                                                                       |
 | Redisson                | 2.x-3.x  | Fully Supported | `redisson`, `redis`                                                                        |
 | SpyMemcached            | 2.12+    | Fully Supported | `spymemcached`                                                                             |

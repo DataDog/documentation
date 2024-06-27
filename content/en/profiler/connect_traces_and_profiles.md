@@ -21,13 +21,13 @@ You can move directly from span information to profiling data on the Code Hotspo
 
 ## Identify code hotspots in slow traces
 
-{{< img src="profiler/code_hotspots_tab-2.mp4" alt="Code Hotspots tab shows profiling information for a APM trace span" video=true >}}
+{{< img src="profiler/code_hotspots_tab.png" alt="Code Hotspots tab shows profiling information for a APM trace span" >}}
 
 ### Prerequisites
 
 {{< programming-lang-wrapper langs="java,python,go,ruby,nodejs,dotnet,php" >}}
 {{< programming-lang lang="java" >}}
-Code Hotspots identification is enabled by default when you [turn on profiling for your Java service][1] on Linux and macOS. 
+Code Hotspots identification is enabled by default when you [turn on profiling for your Java service][1] on Linux and macOS.
 The feature is not available on Windows.
 
 For manually instrumented code, continuous profiler requires scope activation of spans:
@@ -61,7 +61,7 @@ Requires `dd-trace-py` version 0.44.0+.
 
 Code Hotspots identification is enabled by default when you [turn on profiling for your Ruby service][1].
 
-The new [timeline feature](#span-execution-timeline-view) (beta) is enabled by default in `dd-trace-rb` 1.21.1+.
+The new [timeline feature](#span-execution-timeline-view) is enabled by default in `dd-trace-rb` 1.21.1+.
 
 To additionally enable showing [GC in timeline](#span-execution-timeline-view):
 - set `DD_PROFILING_FORCE_ENABLE_GC=true`
@@ -74,9 +74,7 @@ Code Hotspots identification is enabled by default when you [turn on profiling f
 
 Requires `dd-trace-js` version 5.0.0+, 4.24.0+ or 3.45.0+.
 
-To enable the [timeline feature](#span-execution-timeline-view) (beta):
-- upgrade to `dd-trace-js` 5.1.0+, 4.25.0+, or 3.46.0+
-- set `DD_PROFILING_TIMELINE_ENABLED=1`
+The new [timeline feature](#span-execution-timeline-view) is enabled by default in `dd-trace-js` 5.11.0+, 4.35.0+, and 3.56.0+.
 
 [1]: /profiler/enabling/nodejs
 {{< /programming-lang >}}
@@ -84,7 +82,7 @@ To enable the [timeline feature](#span-execution-timeline-view) (beta):
 
 Code Hotspots identification is enabled by default when you [turn on profiling for your Go service][1].
 
-To enable the new [timeline feature](#span-execution-timeline-view) (beta), set the environment variables below:
+To enable the new [timeline feature](#span-execution-timeline-view), set the environment variables below:
 
 ```go
 os.Setenv("DD_PROFILING_EXECUTION_TRACE_ENABLED", "true")
@@ -100,7 +98,7 @@ You can find this data:
 
 While recording execution traces, your application may observe an increase in CPU usage similar to a garbage collection. Although this should not have a significant impact for most applications, Go 1.21 includes [patches][7] to eliminate this overhead.
 
-This capability requires `dd-trace-go` version 1.37.0+ (1.52.0+ for timeline beta) and works best with Go version 1.18 or later (1.21 or later for timeline beta).
+This capability requires `dd-trace-go` version 1.37.0+ (1.52.0+ for timeline view) and works best with Go version 1.18 or later (1.21 or later for timeline view).
 
 [1]: /profiler/enabling/go
 [2]: https://github.com/DataDog/dd-trace-go/issues/2099
@@ -124,7 +122,7 @@ Code Hotspots identification is enabled by default when you [turn on profiling f
 
 Requires `dd-trace-php` version 0.71+.
 
-To enable the [timeline feature](#span-execution-timeline-view) (beta):
+To enable the [timeline feature](#span-execution-timeline-view):
 - Upgrade to `dd-trace-php` version 0.98+.
 - Set the environment variable `DD_PROFILING_TIMELINE_ENABLED=1` or INI setting `datadog.profiling.timeline_enabled=1`
 
@@ -179,7 +177,7 @@ Click the plus icon `+` to expand the stack trace to that method **in reverse or
 
 ### Span execution timeline view
 
-{{< img src="profiler/code_hotspots_tab-timeline.mp4" alt="Code Hotspots tab has a timeline view that breakdown execution over time and threads" video=true >}}
+{{< img src="profiler/code_hotspots_tab-timeline.png" alt="Code Hotspots tab has a timeline view that breakdown execution over time and threads" >}}
 
 The **Timeline** view surfaces time-based patterns and work distribution over the period of the span.
 
@@ -230,7 +228,7 @@ Lanes on the top are garbage collector **runtime activities** that may add extra
 {{< programming-lang lang="php" >}}
 See [prerequisites](#prerequisites) to learn how to enable this feature for PHP.
 
-There is one lane for each PHP **thread**. In PHP NTS, this is one lane; in PHP ZTS, there is one lane per **thread**. Fibers that run in this **thread** are represented in the same lane.
+There is one lane for each PHP **thread** (in PHP NTS, this is only one lane). Fibers that run in this **thread** are represented in the same lane.
 
 Lanes on the top are runtime activities that may add extra latency to your request, due to file compilation and garbage collection.
 {{< /programming-lang >}}
@@ -238,9 +236,9 @@ Lanes on the top are runtime activities that may add extra latency to your reque
 
 ### Viewing a profile from a trace
 
-{{< img src="profiler/flamegraph_view-1.mp4" alt="Opening a view of the profile in a flame graph" video=true >}}
+{{< img src="profiler/view_profile_from_trace.png" alt="Opening a view of the profile in a flame graph" >}}
 
-For each type from the breakdown, click **View In Full Page** to see the same data opened up in a in a new page . From there you can change visualization to the flame graph.
+For each type from the breakdown, click **Open in Profiling** to see the same data opened up in a new page. From there, you can change the visualization to a flame graph.
 Click the **Focus On** selector to define the scope of the data:
 
 - **Span & Children** scopes the profiling data to the selected span and all descendant spans in the same service.
@@ -320,7 +318,7 @@ With endpoint profiling you can:
 - Isolate the top endpoints responsible for the consumption of valuable resources such as CPU, memory, or exceptions. This is particularly helpful when you are generally trying to optimize your service for performance gains.
 - Understand if third-party code or runtime libraries are the reason for your endpoints being slow or resource-consumption heavy.
 
-{{< img src="profiler/endpoint_agg.mp4" alt="Troubleshooting a slow endpoint by using endpoint aggregation" video=true >}}
+{{< img src="profiler/endpoint_agg.png" alt="Troubleshooting a slow endpoint by using endpoint aggregation" >}}
 
 ### Surface code that impacted your production latency
 
@@ -346,9 +344,9 @@ The following image shows that `GET /store_history` is periodically impacting th
 
 Select `Per endpoint call` to see behavior changes even as traffic shifts over time. This is useful for progressive rollout sanity checks or analyzing daily traffic patterns.
 
-The following video shows that CPU per request doubled for `/GET train`:
+The following example shows that CPU per request increased for `/GET train`:
 
-{{< img src="profiler/endpoint_per_request.mp4" alt="Troubleshooting a endpoint that started using more resource per request" video=true >}}
+{{< img src="profiler/endpoint_per_request2.mp4" alt="Troubleshooting a endpoint that started using more resource per request" video="true" >}}
 
 ## Further reading
 

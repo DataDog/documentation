@@ -144,7 +144,7 @@ instances:
 ```
 
 ### Collecting schemas
-To enable this feature, use the `collect_schemas` option. You must also [configure the Agent to connect to each logical database](#monitoring-relation-metrics-for-multiple-logical-databases).
+To enable this feature, use the `collect_schemas` option. You must also [configure the Agent to connect to each logical database](#monitoring-relation-metrics-for-multiple-databases).
 
 Use the `database_autodiscovery` option to avoid specifying each logical database. See the sample [postgres.d/conf.yaml](https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example) for more details.
 

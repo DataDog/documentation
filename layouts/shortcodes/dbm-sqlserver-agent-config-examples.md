@@ -36,8 +36,10 @@
     ```
 5. Restart the Agent.
 
-### Using Always On
-When monitoring Always On clusters, the Agent must be installed on a separate server from the SQL Servers and connect to the cluster through the listener endpoint.
+### Using AlwaysOn
+
+**Note: For AlwaysOn users, the Agent must be installed on a separate server and connected to the cluster through the listener endpoint**. This is because information about Availability Group (AG) secondary replicas is collected from the primary replica. Additionally, installing the Agent in this way helps to keep it up and running in the event of a failover.
+
 ```yaml
 instances:
   - dbm: true

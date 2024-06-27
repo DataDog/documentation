@@ -1,6 +1,5 @@
 ---
 title: Investigate Security Signals
-kind: documentation
 disable_toc: false
 further_reading:
   - link: "/security/default_rules/?category=cat-csm-threats#all"
@@ -39,6 +38,10 @@ You can triage a signal by assigning it to a user for further investigation. The
     - **Archived**: The detection that caused the signal has been resolved. From the **Archived** state, you can move the signal back to **Open** if it's within 30 days of when the signal was originally detected.
 
 ## Create a case
+
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Case Management is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
 
 Use [Case Management][6] to track, triage, and investigate security signals.
 

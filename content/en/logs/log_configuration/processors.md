@@ -158,7 +158,7 @@ Each incoming status value is mapped as follows:
 * Strings beginning with **w** (case-insensitive) map to **warning (4)**
 * Strings beginning with **n** (case-insensitive) map to **notice (5)**
 * Strings beginning with **i** (case-insensitive) map to **info (6)**
-* Strings beginning with **d**, **trace** or **verbose** (case-insensitive) map to **debug (7)**
+* Strings beginning with **d**, **t**, **v**, **trace**, or **verbose** (case-insensitive) map to **debug (7)**
 * Strings beginning with **o** or **s**, or matching **OK** or **Success** (case-insensitive) map to **OK**
 * All others map to **info (6)**
 
@@ -476,14 +476,14 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following category proce
 
 Use the arithmetic processor to add a new attribute (without spaces or special characters in the new attribute name) to a log with the result of the provided formula. This remaps different time attributes with different units into a single attribute, or compute operations on attributes within the same log.
 
-A arithmetic processor formula can use parentheses and basic arithmetic operators: `-`, `+`, `*`, `/`.
+An arithmetic processor formula can use parentheses and basic arithmetic operators: `-`, `+`, `*`, `/`.
 
 By default, a calculation is skipped if an attribute is missing. Select *Replace missing attribute by 0* to automatically populate missing attribute values with 0 to ensure that the calculation is done.
 
 **Notes**:
 
 * An attribute may be listed as missing if it is not found in the log attributes, or if it cannot be converted to a number.
-* The operator `-` needs to be space split in the formula as it can also be contained in attribute names.
+* When using the operator `-`, add spaces around it because attribute names like `start-time` may contain dashes. For example, the following formula must include spaces around the `-` operator: `(end-time - start-time) / 1000`.
 * If the target attribute already exists, it is overwritten by the result of the formula.
 * Results are rounded up to the 9th decimal. For example, if the result of the formula is `0.1234567891`, the actual value stored for the attribute is `0.123456789`.
 * If you need to scale a unit of measure, use the scale filter.

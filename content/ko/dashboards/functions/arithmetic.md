@@ -1,7 +1,6 @@
 ---
 aliases:
 - /ko/graphing/functions/arithmetic/
-kind: 설명서
 title: 산술
 ---
 
@@ -57,9 +56,15 @@ title: 산술
 
 {{< img src="dashboards/functions/arithmetic/cumsum.png" alt="절대값이 있는 누적 합계 함수" style="width:80%;">}}
 
+## 모니터의 누적 총계
+
+누적 총계 함수는 시각적 함수이므로 모니터 쿼리에서 피해야 합니다. 대시보드나 노트북에서 이용하는 경우 숫자는 선택한 기간 기준 값을 반영합니다. 모니터에서는 사용 기간의 개념이 없기 때문에 모니터에서 제대로 도출되기 어렵습니다.
+
+대신 모니터 평가 기간 동안 [누적 기간][1]을 설정하세요.
+
 ## 적분
 
-| 기능     | 설명                       | 예시                             |
+| 함수     | 설명                       | 예시                             |
 | :----        | :-------                          | :---------                          |
 | `integral()` | 메트릭의 적분을 그래프화합니다. | `integral(<METRIC_NAME>{*})` |
 
@@ -81,3 +86,5 @@ title: 산술
     {{< nextlink href="/dashboards/functions/smoothing" >}}평활화: 메트릭 변동을 평활화합니다.{{< /nextlink >}}
     {{< nextlink href="/dashboards/functions/timeshift" >}}타임시프트: 타임라인을 따라 메트릭 데이터 포인트를 이동합니다. {{< /nextlink >}}
 {{< /whatsnext >}}
+
+[1]: /ko/monitors/configuration/?tab=thresholdalert#cumulative-time-windows

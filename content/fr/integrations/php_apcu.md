@@ -24,7 +24,7 @@ integration_id: php-apcu
 integration_title: PHP APCu
 integration_version: 0.0.2
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: noname@withgod.jp
 manifest_version: 1.0.0
 metric_prefix: php_apcu.

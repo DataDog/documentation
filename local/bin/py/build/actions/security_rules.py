@@ -142,7 +142,6 @@ def security_rules(content, content_dir):
             parsed_title = re.sub(r"\[.+\]\s?(.*)", "\\1", data.get('name', ''), 0, re.MULTILINE)
             page_data = {
                 "title": parsed_title,
-                "kind": "documentation",
                 "type": "security_rules",
                 "disable_edit": True,
                 "default_rule_id": data.get('defaultRuleId', '').strip(),
@@ -170,7 +169,7 @@ def security_rules(content, content_dir):
                 if 'cloud-configuration' in relative_path:
 
                     if tags and 'dd_rule_type:combination' in tags:
-                        page_data['rule_category'].append('CSM Security Issues')
+                        page_data['rule_category'].append('Attack Paths')
                     elif tags and 'dd_rule_type:ciem' in tags:
                         page_data['rule_category'].append('CSM Identity Risks')
                     else:
@@ -235,10 +234,10 @@ def security_rules(content, content_dir):
                 # CSM Threats
                 page_data["view_rule_url"] = f"https://app.datadoghq.com/security/configuration/workload/rules?query=type%3Aworkload_security%20defaultRuleId%3A{page_data['default_rule_id']}%20&deprecated=hide&groupBy=tactic&product=cws&sort=rule_name"
                 page_data["view_findings_url"] = f"https://app.datadoghq.com/security?query=%40workflow.rule.defaultRuleId%3A{page_data['default_rule_id']}%20&column=time&order=desc"
-            elif page_data['rule_category'][0] in [ "CSM Identity Risks", "CSM Misconfigurations (Cloud)", "CSM Misconfigurations (Infra)", "CSM Security Issues"]:
-                # CSM Identity Risks, CSM Misconfigurations, CSM Sec Issues
+            elif page_data['rule_category'][0] in [ "CSM Identity Risks", "CSM Misconfigurations (Cloud)", "CSM Misconfigurations (Infra)", "Attack Paths"]:
+                # CSM Identity Risks, CSM Misconfigurations, Attack Paths
                 page_data["view_rule_url"] = f"https://app.datadoghq.com/security/configuration/compliance/rules?query=type%3A%28cloud_configuration%20OR%20infrastructure_configuration%29%20defaultRuleId%3A{page_data['default_rule_id']}%20&deprecated=hide&groupBy=framework&product=cspm&sort=rule_name"
-                if page_data['rule_category'][0] != "CSM Security Issues":
+                if page_data['rule_category'][0] != "Attack Paths":
                     if "CSM Misconfigurations" in page_data['rule_category'][0]:
                         page_data["view_findings_url"] = f"https://app.datadoghq.com/security/compliance?query=%40workflow.rule.defaultRuleId%3A{page_data['default_rule_id']}%20&aggregation=resources&column=status&order=asc&sort=ruleSeverity%2CfailedResources-desc"
                     else:

@@ -1,7 +1,6 @@
 ---
 aliases:
 - /es/agent/faq/agent-5-autodiscovery
-kind: guía
 private: true
 title: Autodiscovery con el Agent v5
 ---
@@ -237,7 +236,6 @@ La siguiente anotación de pod define dos plantillas (equivalentes a las del fin
 
 ```yaml
 apiVersion: v1
-kind: Pod
 metadata:
   name: apache
   annotations:
@@ -260,7 +258,6 @@ Si vas a definir los pods con despliegues, no añadas anotaciones de plantilla a
 
 ```yaml
 apiVersion: apps/v1beta1
-kind: Deployment
 metadata: # Don't add templates here
   name: apache-deployment
 spec:
@@ -335,7 +332,7 @@ El Agent gestiona las siguientes variables de plantilla:
   - `%%host_<NETWORK NAME>%%`: especifica el nombre de red que se utilizará cuando se conecte a varias redes. Por ejemplo, `%%host_bridge%%`, `%%host_swarm%%`, etc. Actúa como `%%host%%` si no se encuentra el nombre de red especificado.
 
 - Puerto del contenedor: `port`
-  - `%%port%%`: utiliza el puerto expuesto más alto **clasificado por orden numérico ascendente** (p. ej., 8443 para un contenedor que expone los puertos 80, 443 y 8443).
+  - `%%port%%`Utiliza el puerto expuesto más alto **ordenado numéricamente y en orden ascendente** (por ejemplo, 8443 para un contenedor que expone los puertos 80, 443 y 8443)
   - `%%port_0%%`: utiliza el primer puerto **clasificado por orden numérico ascendente** (para el mismo contenedor, `%%port_0%%` se refiere al puerto 80 y `%%port_1%%`, al 443).
   - Si tu puerto de destino es constante, Datadog recomienda que lo especifiques directamente, sin usar la variable `port`.
 
@@ -408,5 +405,5 @@ checks:
 [19]: https://github.com/DataDog/integrations-core/blob/master/riak/datadog_checks/riak/data/auto_conf.yaml
 [20]: https://github.com/DataDog/docker-dd-agent#configuration-files
 [21]: https://github.com/DataDog/integrations-core/blob/master/apache/datadog_checks/apache/data/conf.yaml.example
-[22]: /es/agent/guide/agent-commands/#start-stop-restart-the-agent
+[22]: /es/agent/configuration/agent-commands/#start-stop-restart-the-agent
 [23]: https://github.com/DataDog/integrations-core/blob/master/http_check/datadog_checks/http_check/data/conf.yaml.example

@@ -249,8 +249,8 @@ See [Providing metadata with XPath expressions](#providing-metadata-with-xpath-e
 **Default**: `false`
 
 `--skip-git-metadata-upload`
-: Flag used to skip git metadata upload. If you want to upload git metadata, you may pass --skip-git-metadata-upload=0 or --skip-git-metadata-upload=false.<br/>
-**Default**: `true`<br/>
+: Boolean flag used to skip git metadata upload.<br/>
+**Default**: `false`<br/>
 
 `--git-repository-url`
 : The repository URL to retrieve git metadata from. If it is not passed, the URL is retrieved from the local git repository.<br/>
@@ -264,7 +264,7 @@ See [Providing metadata with XPath expressions](#providing-metadata-with-xpath-e
 Positional arguments
 : The file paths or directories in which the JUnit XML reports are located. If you pass a directory, the CLI looks for all `.xml` files in it.
 
-For more information about `service` and `env` reserved tags, see [Unified Service Tagging][17].
+For more information about `service` and `env` reserved tags, see [Unified Service Tagging][7].
 
 The following environment variables are supported:
 
@@ -275,17 +275,13 @@ The following environment variables are supported:
 Additionally, configure the Datadog site to use the selected one ({{< region-param key="dd_site_name" >}}):
 
 `DATADOG_SITE` (Required)
-: The [Datadog site][7] to upload results to.<br/>
+: The [Datadog site][8] to upload results to.<br/>
 **Default**: `datadoghq.com`<br/>
 **Selected site**: {{< region-param key="dd_site" code="true" >}}
 
 ## Collecting Git metadata
 
 {{% ci-git-metadata %}}
-
-## Uploading Git metadata
-
-From `datadog-ci` version `2.9.0` or later, CI Visibility automatically uploads Git metadata information (commit history). This metadata contains file names but no file contents. If you want to opt out of this behavior, pass the flag `--skip-git-metadata-upload`.
 
 ## Collecting environment configuration metadata
 
@@ -338,14 +334,14 @@ For mobile apps (Swift, Android):
 **Examples**: `iPhone 12 Pro Simulator`, `iPhone 13 (QA team)`
 
 ## Adding code owners
-To add [codeowners][11] information to your JUnit XML tests, you can use the [GitHub integration][16] to read the `CODEOWNERS` file in your repository or provide some additional information manually.
+To add [codeowners][9] information to your JUnit XML tests, you can use the [GitHub integration][10] to read the `CODEOWNERS` file in your repository or provide some additional information manually.
 
 As a result, the JUnit XML tests have a `test.codeowners` tag with the owner of those tests.
 
 ### Using the GitHub integration (recommended)
 
 To automatically add the `test.codeowners` tag to your tests, you need to:
-1. Have a `CODEOWNERS` file [in one of the allowed locations][15] in your repository.
+1. Have a `CODEOWNERS` file [in one of the allowed locations][11] in your repository.
 2. Provide the tests source file in your JUnit XML report. The following plugins do this automatically and add the `file` attribute to the `<testcase>` or `<testsuite>` elements in the XML report:
 
     * phpunit
@@ -400,7 +396,7 @@ There are multiple ways to provide the `test.source.file` tag:
 
 In addition to the `--tags` CLI parameter and the `DD_TAGS` environment variable, which apply custom tags globally to all tests included the uploaded XML report, the `--xpath-tag` parameter provides custom rules to add tags from different attributes within the XML to each test.
 
-The parameter provided must have the format `key=expression`, where `key` is the name of the custom tag to be added and `expression` is a valid [XPath][8] expression within the ones supported.
+The parameter provided must have the format `key=expression`, where `key` is the name of the custom tag to be added and `expression` is a valid [XPath][15] expression within the ones supported.
 
 While XPath syntax is used for familiarity, only the following expressions are supported:
 
@@ -548,7 +544,7 @@ It is possible to report code coverage for a given JUnit report via the `--repor
 datadog-ci junit upload --service my-api-service --report-measures test.code_coverage.lines_pct:82 unit-tests/junit-reports e2e-tests/single-report.xml
 ```
 
-For more information, see [Code Coverage][10].
+For more information, see [Code Coverage][16].
 
 ## Further reading
 
@@ -560,13 +556,13 @@ For more information, see [Code Coverage][10].
 [4]: https://github.com/DataDog/datadog-ci/releases
 [5]: https://app.datadoghq.com/organization-settings/api-keys
 [6]: /logs/
-[7]: /getting_started/site/
-[8]: https://www.w3schools.com/xml/xpath_syntax.asp
-[10]: /continuous_integration/tests/code_coverage/?tab=junitreportuploads
-[11]: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+[7]: /getting_started/tagging/unified_service_tagging
+[8]: /getting_started/site/
+[9]: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+[10]: https://docs.datadoghq.com/integrations/github/
+[11]: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners#codeowners-file-location
 [12]: https://docs.github.com/developers/apps/getting-started-with-apps/about-apps
 [13]: https://app.datadoghq.com/integrations/github/
 [14]: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners#codeowners-syntax
-[15]: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners#codeowners-file-location
-[16]: https://docs.datadoghq.com/integrations/github/
-[17]: /getting_started/tagging/unified_service_tagging
+[15]: https://www.w3schools.com/xml/xpath_syntax.asp
+[16]: /continuous_integration/tests/code_coverage/?tab=junitreportuploads

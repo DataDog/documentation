@@ -49,7 +49,7 @@ Use the "New Index" button to create a new index. There is a maximum number of i
 
 ### Delete indexes
 
-To delete an index from your organization, use the "Delete icon" in the index action tray. Only users with both `Logs delete data` and `User manage access` permissions can use this option. 
+To delete an index from your organization, use the "Delete icon" in the index action tray. Only users with the `Logs delete data` permission can use this option.
 
 {{< img src="logs/indexes/delete-index.png" alt="Delete index" style="width:70%;">}}
 
@@ -153,6 +153,8 @@ You can configure or remove this quota at any time when editing the Index:
 - Set a daily quota in millions of logs
 - (Optional) Set a custom reset time; by default, index daily quotas reset automatically at [2:00pm UTC][19]
 - (Optional) Set a warning threshold as a percentage of the daily quota (minimum 50%)
+
+**Note**: Changes to daily quotas and warning thresholds take effect immediately.
 
 {{< img src="logs/indexes/daily_quota_config.png" alt="index details" style="width:70%;">}}
 

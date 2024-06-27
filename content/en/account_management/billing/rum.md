@@ -1,6 +1,5 @@
 ---
 title: RUM & Session Replay Billing
-kind: documentation
 further_reading:
 - link: "/real_user_monitoring/"
   tag: "Documentation"
@@ -50,6 +49,14 @@ The **Browser RUM & Session Replay** Plan unlocks session recordings (replays).
 - If you are collecting replays, you are billed for the sessions under the Replay Plan.
 
 - If you want to disable session recordings from being captured, see the [Session Replay documentation][1].
+
+## How do webviews in mobile applications impact session recordings and billing?
+
+When a mobile application contains webviews and you've instrumented both your web and mobile applications with Datadog SDKs, a bridge is created. All events recorded by the Browser SDK on the web app that are loaded through the webview are forwarded to the Mobile SDK. These events are linked to the session that started on the mobile application.
+
+In other words, only the one RUM mobile session is visible in Datadog and therefore is the only one that is billable.
+
+{{< img src="account_management/billing/rum/rum-webviews-impact-on-billing-2.png" alt="If you've instrumented both your web and mobile applications with Datadog SDKs, you are only be billed for the mobile session." >}}
 
 ## Further Reading
 

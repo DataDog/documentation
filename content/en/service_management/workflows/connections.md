@@ -38,7 +38,7 @@ If the integration you need to set up is not listed above, set up connection cre
 
 ## Connection credentials
 
-Workflow connections extend your installed integrations to give you control over workflow step authentication. Use connection credentials to authenticate a [generic action][8] or any action for which the integration tile does not offer authentication. For a list of integrations that use the integration tile for authentication, see the [Integration tile credentials](#integration-tile-credentials) section. Connection credentials are only available for use within the Workflow Automation product.
+Workflow connections extend your installed integrations to give you control over workflow step authentication. Use connection credentials to authenticate a [generic action][8] or any action for which the integration tile does not offer authentication. For a list of integrations that use the integration tile for authentication, see the [Integration tile credentials](#integration-tile-credentials) section. Connection credentials are only available for use within the Workflow Automation and App Builder products.
 
 Connections support the following example use cases:
 - The integration you need is not available as a built-in connection.
@@ -81,7 +81,7 @@ Alternatively, add a connection from the workflow page:
 
 The example below shows the **New Connection** dialog box for the OpenAI connection. Each connection requires different authentication information. The OpenAI connection requires a valid Connection Name and API Token.
 
-{{< img src="service_management/workflows/new-connection2.png" alt="The New Connection dialog box for the OpenAI connection" >}}
+{{< img src="service_management/new-connection.png" alt="The New Connection dialog box for the OpenAI connection" >}}
 
 ### Edit a connection
 
@@ -110,6 +110,8 @@ To connect to an arbitrary service, use the HTTP connection type. For authentica
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+<br>Do you have questions or feedback? Join the **#workflows** channel on the [Datadog Community Slack][11].
+
 [1]: /service_management/workflows/actions_catalog/generic_actions/
 [2]: https://app.datadoghq.com/workflow
 [3]: https://app.datadoghq.com/workflow/connections
@@ -118,3 +120,4 @@ To connect to an arbitrary service, use the HTTP connection type. For authentica
 [8]: /service_management/workflows/actions_catalog/generic_actions/
 [9]: https://app.datadoghq.com/workflow
 [10]: /service_management/workflows/actions/http/
+[11]: https://datadoghq.slack.com/

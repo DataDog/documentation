@@ -31,7 +31,7 @@ Datadog publishes new releases of the `serverless-init` container image to Googl
 
 Images are tagged based on semantic versioning, with each new version receiving three relevant tags:
 
-* `1`, `1-alpine`: use these to track the latest minor releases, without breaking chagnes
+* `1`, `1-alpine`: use these to track the latest minor releases, without breaking changes
 * `1.x.x`, `1.x.x-alpine`: use these to pin to a precise version of the library
 * `latest`, `latest-alpine`: use these to follow the latest version release, which may include breaking changes
 

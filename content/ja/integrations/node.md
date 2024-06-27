@@ -81,9 +81,13 @@ _Agent v6.0 以上で使用可能_
 
 ログを Datadog に転送するには、[Node.js ログ収集][3]のセットアップに関するドキュメントを参照してください。
 
+### プロファイルの収集
+
+[Node.js プロファイラを有効にするための][4]専用ドキュメントをご覧ください。
+
 ## ヘルプ
 
-ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 
 ## その他の参考資料
 
@@ -92,4 +96,5 @@ _Agent v6.0 以上で使用可能_
 [1]: https://docs.datadoghq.com/ja/metrics/custom_metrics/dogstatsd_metrics_submission/?code-lang=nodejs
 [2]: https://docs.datadoghq.com/ja/tracing/setup/nodejs/
 [3]: https://docs.datadoghq.com/ja/logs/log_collection/nodejs/
-[4]: https://docs.datadoghq.com/ja/help/
+[4]: https://docs.datadoghq.com/ja/profiler/enabling/nodejs/
+[5]: https://docs.datadoghq.com/ja/help/

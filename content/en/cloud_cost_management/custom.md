@@ -1,6 +1,5 @@
 ---
 title: Custom Costs
-kind: documentation
 is_beta: true
 private: true
 disable_toc: false
@@ -20,7 +19,7 @@ further_reading:
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Cloud Cost Management is not supported for this site.</div>
+<div class="alert alert-warning">Cloud Cost Management is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 {{< beta-callout url="#" btn_hidden="true" >}}
@@ -236,7 +235,7 @@ After your data is formatted to the requirements above, upload your CSV and JSON
 {{< tabs >}}
 {{% tab "UI" %}}
 
-Navigate to [**Cloud Costs** > **Settings** > **Uploaded Files**][101] and click **+ Upload Costs**.
+Navigate to [**Infrastructure > Cloud Costs > Settings > Cost Files**][101]. Select **Cost Files** from the Settings dropdown.
 
 {{< img src="cloud_cost/upload_file.png" alt="Upload a CSV or JSON file to Datadog" style="width:80%" >}}
 

@@ -1,6 +1,5 @@
 ---
 title: Change Widget
-kind: documentation
 widget_type: change
 description: "Graph the change in a value over a chosen time period."
 aliases:
@@ -66,4 +65,4 @@ This widget can be used with the **[Dashboards API][2]**. See the following tabl
 [2]: /api/latest/dashboards/
 [3]: /dashboards/graphing_json/widget_json/
 [6]: /monitors/types/metric/?tab=change
-[7]: /monitors/guide/change-alert/
+[7]: /monitors/types/change-alert/

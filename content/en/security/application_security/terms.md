@@ -1,6 +1,5 @@
 ---
 title: ASM Terms and Concepts
-kind: documentation
 disable_toc: false
 further_reading:
 - link: "/security/application_security/how-appsec-works"
@@ -86,6 +85,14 @@ threat intelligence
 : A set of rules executed in the Datadog libraries to detect threats. These include Web Application Firewall (WAF) patterns that monitor for attempts to exploit known vulnerabilities.
 : See [Threat Intelligence][16]
 
+suspicious attackers
+: A precursor to Flagged IPs. Suspicious IPs have met a minimum threshold of attack traffic to be classified as suspicious, but not the threshold for Flagged. Thresholds are not user-configurable.
+: See [Attacker Explorer][17]
+
+flagged attackers
+: IPs that send large amounts of attack traffic. We recommend reviewing and blocking Flagged IPs. Thresholds are not user-configurable.
+: See [Attacker Explorer][17]
+
 ## Attacks and known vulnerabilities terms
 
 Open Web Application Security Project (OWASP)
@@ -139,3 +146,4 @@ Object-Graph Navigation Language Injection (OGNLi)
 [14]: /security/application_security/threats/add-user-info/
 [15]: /security/application_security/threats/trace_qualification/
 [16]: /security/application_security/threats/threat-intelligence/
+[17]: /security/application_security/threats/attacker-explorer/

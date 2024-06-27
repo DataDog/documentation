@@ -1,6 +1,5 @@
 ---
 title: Container Cost Allocation
-kind: documentation
 private: true
 description: Learn how to allocate Cloud Cost Management spending across your organization with Container Cost Allocation.
 further_reading:
@@ -10,7 +9,7 @@ further_reading:
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Cloud Cost Management is not supported for this site.</div>
+<div class="alert alert-warning">Cloud Cost Management is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 {{< jqmath-vanilla >}}
@@ -23,7 +22,7 @@ Clouds
 : CCM allocates costs of your AWS, Azure, or Google host instances. A host is a computer (such as an EC2 instance in AWS, a virtual machine in Azure, or a Compute Engine instance in Google Cloud) that is listed in your cloud provider's cost and usage report and may be running Kubernetes pods.
 
 Resources
-: CCM allocates costs for Kubernetes clusters and includes cost analysis for many associated resources such as Kubernetes persistent volumes used by your pods. 
+: CCM allocates costs for Kubernetes clusters and includes cost analysis for many associated resources such as Kubernetes persistent volumes used by your pods.
 
 CCM displays costs for resources including CPU, memory, and more depending on the cloud and orchestrator you are using on the [**Containers** page][1].
 
@@ -45,7 +44,7 @@ The following table presents the list of collected features and the minimal Agen
 
 1. Configure the AWS Cloud Cost Management integration on the [Cloud Costs Setup page][101].
 1. For Kubernetes support, install the [**Datadog Agent**][102] in a Kubernetes environment and ensure that you enable the [**Orchestrator Explorer**][103] in your Agent configuration.
-1. For AWS ECS support, set up [**Datadog Container Monitoring**][104] in ECS tasks. 
+1. For AWS ECS support, set up [**Datadog Container Monitoring**][104] in ECS tasks.
 1. Optionally, enable [AWS Split Cost Allocation][105] for usage-based ECS allocation.
 
 [101]: https://app.datadoghq.com/cost/setup
@@ -57,9 +56,7 @@ The following table presents the list of collected features and the minimal Agen
 {{% /tab %}}
 {{% tab "Azure" %}}
 
-<div class="alert alert-warning">Container Cost Allocation for Azure is in private beta. To request access, <a href="/help/">contact Support</a>.</div>
-
-CCM allocates costs of all Kubernetes clusters, including those managed through Azure Kubernetes Service (AKS). 
+CCM allocates costs of all Kubernetes clusters, including those managed through Azure Kubernetes Service (AKS).
 
 The following table presents the list of collected features and the minimal Agent and Cluster Agent versions for each.
 
@@ -138,8 +135,6 @@ ECS tasks that run on Fargate are already fully allocated [in the CUR][103]. CCM
 
 {{% /tab %}}
 {{% tab "Azure" %}}
-
-<div class="alert alert-warning">Container Cost Allocation for Azure is in private beta. To request access, <a href="/help/">contact Support</a>.</div>
 
 ### Compute
 
@@ -225,8 +220,6 @@ The cost of an AWS EBS volume has three components: IOPS, throughput, and storag
 {{% /tab %}}
 {{% tab "Azure" %}}
 
-<div class="alert alert-warning">Container Cost Allocation for Azure is in private beta. To request access, <a href="/help/">contact Support</a>.</div>
-
 ### Compute
 
 The cost of a host instance is split into two components: 60% for the CPU and 40% for the memory. Each component is allocated to individual workloads based on their resource reservations and usage.
@@ -273,7 +266,7 @@ Depending on the cloud provider, certain resources may or may not be available f
 | GPU |  |  | Limited* |
 | {{< ccm-details title="Local storage" >}}Directly-attached storage resources for a node.{{< /ccm-details >}} |  | Limited* | Limited* |
 
-`Limited*` resources have been identified as part of your Kubernetes spend, but are not fully allocated to specific workloads or pods. These resources are host-level costs, not pod or namespace-level costs, and are identified with `allocated_spend_type:<resource>_not_supported`. 
+`Limited*` resources have been identified as part of your Kubernetes spend, but are not fully allocated to specific workloads or pods. These resources are host-level costs, not pod or namespace-level costs, and are identified with `allocated_spend_type:<resource>_not_supported`.
 
 ## Cost metrics
 
@@ -289,8 +282,6 @@ When the prerequisites are met, the following cost metrics automatically appear.
 
 {{% /tab %}}
 {{% tab "Azure" %}}
-
-<div class="alert alert-warning">Container Cost Allocation for Azure is in private beta. To request access, <a href="/help/">contact Support</a>.</div>
 
 | Cost Metric                    | Description    |
 | ---                                | ----------- |
@@ -312,7 +303,7 @@ For example, say you have the tag `team` on a storage bucket, a cloud provider m
 
 ## Applying tags
 
-Datadog consolidates and applies the following tags from various sources to cost metrics. 
+Datadog consolidates and applies the following tags from various sources to cost metrics.
 
 {{< tabs >}}
 {{% tab "AWS" %}}
@@ -345,7 +336,7 @@ In addition to Kubernetes pod and Kubernetes node tags, the following out-of-the
 
 ### Amazon ECS
 
-In addition to ECS task tags, the following out-of-the-box tags are applied to cost metrics. 
+In addition to ECS task tags, the following out-of-the-box tags are applied to cost metrics.
 
 **Note**: Most tags from ECS containers are applied (excluding `container_name`).
 
@@ -359,8 +350,6 @@ In addition to ECS task tags, the following out-of-the-box tags are applied to c
 
 {{% /tab %}}
 {{% tab "Azure" %}}
-
-<div class="alert alert-warning">Container Cost Allocation for Azure is in private beta. To request access, <a href="/help/">contact Support</a>.</div>
 
 ### Kubernetes
 

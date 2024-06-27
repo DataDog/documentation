@@ -25,8 +25,7 @@ author:
   support_email: support@cyebrsixgill.com
 categories:
 - セキュリティ
-- モニタリング
-- event management
+- イベント管理
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/cybersixgill_actionable_alerts/README.md
 display_on_public_website: true
@@ -36,7 +35,7 @@ integration_id: cybersixgill-actionable-alerts
 integration_title: Cybersixgill Actionable Alerts
 integration_version: 1.0.1
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: cybersixgill_actionable_alerts
 public_title: Cybersixgill Actionable Alerts
@@ -53,7 +52,6 @@ tile:
   - Supported OS::Windows
   - Supported OS::macOS
   - Category::Security
-  - Category::Monitoring
   - Category::Event Management
   - Submitted Data Type::Events
   configuration: README.md#Setup
@@ -82,10 +80,10 @@ tile:
 ## 概要
 Cybersixgill Actionable Alerts チェックでは、IP アドレス、ドメイン、脆弱性、VIP など、ディープ Web、ダーク Web、サーフェス Web にまたがる重要なアセットを監視します。重大度、脅威の種類、説明、投稿スニペット、推奨事項、評価などのコンテキストを持つアラートを受信します。このインテグレーションにより、すぐに使えるダッシュボードが提供され、脅威の優先度を決定して対応することができるようになります。
 
-## 計画と使用
+## セットアップ
 
 
-### インフラストラクチャーリスト
+### インストール
 
 Cybersixgill Actionable Alerts チェックをホストにインストールするには
 1. マシンに[開発者ツール][1]をインストールします。
@@ -96,7 +94,7 @@ Cybersixgill Actionable Alerts チェックをホストにインストールす�
 datadog-agent integration install -t datadog-cybersixgill-actionable-alerts==1.0.1
 ```
 
-### ブラウザトラブルシューティング
+### 構成
 5. [Cybersixgill サポート][3]に連絡し、Cybersixgill Developer Platform へのアクセスをリクエストします。
 6. Cybersixgill 開発者プラットフォームにアクセスできるウェルカムメールを受け取ります。
 7. Cybersixgill 開発者プラットフォーム内で、クライアント ID およびクライアントシークレットを作成します。
@@ -106,16 +104,16 @@ datadog-agent integration install -t datadog-cybersixgill-actionable-alerts==1.0
 ### 検証
 [Datadog Events Explorer][4] で Cybersixgill のイベントが生成されていることを確認します。
 
-## リアルユーザーモニタリング
+## データ収集
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "cybersixgill_actionable_alerts" >}}
 
 
-### ヘルプ
+### イベント
 このインテグレーションは、API タイプのイベントを Datadog に送信します。
 
-## ヘルプ
+## トラブルシューティング
 ご不明な点は、[Cybersixgill サポート][3]までお問い合わせください。
 
 

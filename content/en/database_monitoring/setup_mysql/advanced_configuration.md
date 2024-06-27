@@ -5,10 +5,6 @@ description: Advanced Configuration for MySQL Database Monitoring
 
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
-{{< /site-region >}}
-
 ## Truncating `events_statements_summary_by_digest`
 
 Certain workloads require some maintenance on tables in `performance_schema`. Query statistics are aggregated in the `performance_schema.events_statements_summary_by_digest` table, which has a limit on the number of rows. This limit is specified by the [`performance_schema_digests_size` system variable][1]. If the table is full, new query digests are tracked in a catch-all row with null schema and null query digest, preventing the Agent from distinguishing between queries that make up that row.

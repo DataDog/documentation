@@ -1,6 +1,5 @@
 ---
 title: Cloud Cost Recommendations
-kind: documentation
 private: true
 description: Learn how to reduce the spending of your organization's cloud resources with Cost Recommendations.
 further_reading:
@@ -10,7 +9,7 @@ further_reading:
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Cloud Cost Management is not supported for this site.</div>
+<div class="alert alert-warning">Cloud Cost Management is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 {{< callout url="#" btn_hidden="true" >}}
@@ -19,7 +18,7 @@ Cloud Cost Recommendations is in public beta with support for AWS, and is automa
 
 ## Overview
 
-[Cloud Cost Recommendations][1] provide recommendations on reducing your cloud spending by optimizing the usage of your cloud resources. 
+[Cloud Cost Recommendations][1] provide recommendations on reducing your cloud spending by optimizing the usage of your cloud resources.
 
 {{< img src="cloud_cost/recommendations/cost_recommendations.png" alt="Overview tab with potential monthly savings, potential annual savings, and total number of open cases on the Cloud Cost Recommendations page" style="width:100%;" >}}
 
@@ -39,17 +38,17 @@ Datadog generates a set of recommendations by combining your observability data 
 
 {{< img src="cloud_cost/recommendations/overprovisioned_k8s_containers_sidepanel.png" alt="A side panel displaying a Kubernetes container that is over-provisioned in the ad-auction service with recommended next steps to change its usage as well as investigation metrics." style="width:100%;" >}}
 
-Recommendations are run on a daily basis, and are automatically refreshed in your account. When new recommendations are released, Datadog automatically adds them to your account. 
+Recommendations are run on a daily basis, and are automatically refreshed in your account. When new recommendations are released, Datadog automatically adds them to your account.
 
 ### Terminate resource recommendations
 
-Datadog scans your cloud environment to identify and surface orphaned resources that can be removed. 
+Datadog scans your cloud environment to identify and surface orphaned resources that can be removed.
 
 Unused EC2 Instances
-: EC2 instances with less than 5% CPU utilization, and less than 10% memory utilization. 
+: EC2 instances with less than 5% CPU utilization, and less than 10% memory utilization.
 
 Unattached EBS Volumes
-: Volumes that have been detached from an EC2 instance. 
+: Volumes that have been detached from an EC2 instance.
 
 Unused EBS Volumes
 : Volumes attached to a non-running EC2 instance.
@@ -61,16 +60,16 @@ Abandoned S3 Multipart Uploads
 : Incomplete multipart uploads (requires [Storage Lens metrics][6]).
 
 Unused Redshift Cluster
-: Redshift cluster with 0 database connections.  
+: Redshift cluster with 0 database connections.
 
 Unused Elasticache Redis Cluster
-: Elasticache Redis Cluster with 0 cache hits and 0 replication bytes.  
+: Elasticache Redis Cluster with 0 cache hits and 0 replication bytes.
 
 Unused MQ Broker
-: An MQ broker with 0 connections. 
+: An MQ broker with 0 connections.
 
 Old ECR Images
-: ECR Image bytes are older than 180 days. 
+: ECR Image bytes are older than 180 days.
 
 OpenSearch Cluster
 : An OpenSearch cluster with 0 connections.
@@ -79,26 +78,26 @@ Unused Classic Elastic Load Balancers
 : Classic Elastic Load Balancer with no active connections that is not attached to an EC2 instance.
 
 Unused Network Elastic Load Balancer
-: A network load balancer with 0 processed bytes. 
+: A network load balancer with 0 processed bytes.
+
+Unused Application Load Balancer
+: An application load balancer with no traffic being processed.
 
 Unused NAT Gateway
-: A NAT Gateway that has no bytes sent out. 
+: A NAT Gateway that has no bytes sent out.
 
 Idle Elastic IP Address
 : Elastic IP addresses with idle charges in your AWS cost and usage report.
-
-Application Load Balancer (ELB)
-: An application load balancer with no traffic being processed for the past 7 days.
 
 ### Migrate resource recommendations
 
 Datadog surfaces resources that are running on legacy hardware, which you can consider upgrading to reduce your costs and improve the performance of your resources.
 
 Legacy EC2 Instance
-: EC2 Instances that are previous generation, and can be upgraded to a newer instance type. 
+: EC2 Instances that are previous generation, and can be upgraded to a newer instance type.
 
 GP2 EBS Volumes
-: EBS volumes that are GP2 and can be upgraded to GP3 for cost reduction and performance improvement.  
+: EBS volumes that are GP2 and can be upgraded to GP3 for cost reduction and performance improvement.
 
 I01 EBS Volumes
 : EBS volumes that are I01 and can be upgraded to GP3 for cost reduction and performance improvement.
@@ -116,11 +115,11 @@ Overprovisioned Kubernetes Containers
 
 
 Overprovisioned EBS Volume Throughput
-: EBS Volumes where the amount of throughput exceeds what is being used.  
+: EBS Volumes where the amount of throughput exceeds what is being used.
 
 
 Overprovisioned EBS Volume IOPS
-: EBS Volumes where the amount of IOPS exceeds what is being used. 
+: EBS Volumes where the amount of IOPS exceeds what is being used.
 
 ## Further reading
 

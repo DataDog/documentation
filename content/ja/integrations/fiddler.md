@@ -34,9 +34,9 @@ draft: false
 git_integration_title: fiddler
 integration_id: fiddler
 integration_title: Fiddler
-integration_version: 2.0.0
+integration_version: 3.0.0
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: fiddler
 public_title: Fiddler
@@ -101,7 +101,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Fiddler チェ
 1. 以下のコマンドを実行して、Agent インテグレーションをインストールします。
 
    ```shell
-   datadog-agent integration install -t datadog-fiddler==2.0.0
+   datadog-agent integration install -t datadog-fiddler==3.0.0
    ```
 
 2. Agent ベースの[インテグレーション][3]と同様にインテグレーションを構成します。

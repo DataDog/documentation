@@ -1,12 +1,11 @@
 ---
 title: Adding Custom Commands to Pipeline Traces
-kind: documentation
 aliases:
   - /continuous_integration/setup_pipelines/custom_commands
 further_reading:
   - link: "/continuous_integration/pipelines/custom_commands/"
     tag: "Documentation"
-    text: "Troubleshooting CI"
+    text: "Troubleshooting CI Visibility"
 ---
 
 {{< site-region region="gov" >}}
@@ -21,7 +20,7 @@ Custom commands provide a way to trace individual commands in your CI pipelines,
 
 Custom commands work with the following CI providers:
 
-- Jenkins with Datadog plugin >= v3.2.0
+- Jenkins with the Datadog plugin >= v3.2.0
 - CircleCI
 
 ## Install the Datadog CI CLI
@@ -72,6 +71,12 @@ These options are available for the `datadog-ci trace` command:
 **Example**: `team:backend`<br/>
 **Note**: Tags specified using `--tags` and with the `DD_TAGS` environment variable are merged. If the same key appears in both `--tags` and `DD_TAGS`, the value in the environment variable `DD_TAGS` takes precedence.
 
+`--measures`
+: Key-value pairs in the form `key:value` to be attached to the custom command as numerical values (the `--measures` parameter can be specified multiple times).<br/>
+_(Requires datadog-ci >=v2.35.0)_ <br/>
+**Default**: (none)<br/>
+**Example**: `size:1024`<br/>
+
 `--no-fail`
 : Prevents datadog-ci from failing even if run in an unsupported CI provider. In this case, the command is run and nothing is reported to Datadog.<br/>
 **Default**: `false`
@@ -94,7 +99,7 @@ Additionally, configure the Datadog site to use the selected one ({{< region-par
 **Selected site**: {{< region-param key="dd_site" code="true" >}}
 {{< /site-region >}}
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 

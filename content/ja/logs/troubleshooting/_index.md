@@ -22,7 +22,7 @@ Datadog Logs で予期しない動作が発生した場合に、ご自分で確�
 
 Datadog にインジェストされる前に JSON ログのタイムスタンプを[認識できる日付フォーマット][4]に変換できない場合、以下の手順で Datadog の[算術プロセッサ][5]と[ログ日付リマッパー][6]を使ってタイムスタンプを変換しマッピングしてください。
 
-1. **Logs > Configuration** に移動します。
+1. [Pipelines][7] ページに移動します。
 
 2. **Pipelines** で、**Preprocessing for JSON logs** にカーソルを合わせ、鉛筆のアイコンをクリックします。
 
@@ -47,3 +47,4 @@ Datadog にインジェストされる前に JSON ログのタイムスタンプ
 [4]: /ja/logs/log_configuration/pipelines/?tab=date#date-attribute
 [5]: /ja/logs/log_configuration/processors/?tab=ui#arithmetic-processor
 [6]: /ja/logs/log_configuration/processors/?tab=ui#log-date-remapper
+[7]: https://app.datadoghq.com/logs/pipelines

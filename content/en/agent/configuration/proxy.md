@@ -1,6 +1,5 @@
 ---
 title: Agent Proxy Configuration
-kind: documentation
 aliases:
 - /account_management/faq/can-i-use-a-proxy-to-connect-my-servers-to-datadog/
 - /agent/proxy
@@ -355,7 +354,7 @@ frontend logs_http_frontend
     option tcplog
     default_backend datadog-logs-http
 
-# If sending logs with use_tcp: true
+# If sending logs with force_use_tcp: true
 # frontend logs_frontend
 #    bind *:10514
 #    mode tcp
@@ -621,7 +620,7 @@ frontend logs_http_frontend
     option tcplog
     default_backend datadog-logs-http
 
-# If sending logs with use_tcp: true
+# If sending logs with force_use_tcp: true
 # frontend logs_frontend
 #    bind *:10514 ssl crt <PATH_TO_PROXY_CERTIFICATE_PEM>
 #    mode tcp

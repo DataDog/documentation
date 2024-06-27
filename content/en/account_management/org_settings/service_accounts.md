@@ -1,6 +1,5 @@
 ---
 title: Service Accounts
-kind: documentation
 further_reading:
     - link: "https://docs.datadoghq.com/api/latest/service-accounts/"
       tag: "Documentation"
@@ -57,7 +56,9 @@ To modify a service account, click on one in the service accounts list.
 2. Update any fields you would like to change. You can edit the name, email address, status, and roles.
 3. Click **Save**.
 
-To disable a service account, follow the procedure above to edit the service account and set the status to **Disabled**.
+To disable a service account, the user must have the User Manage Access permission in addition to Service Account Write.
+
+To disable a service account, follow the previous procedure to edit the service account and set the status to **Disabled**.
 
 ### Create or revoke application keys
 

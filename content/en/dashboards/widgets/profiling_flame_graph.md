@@ -1,8 +1,9 @@
 ---
 title: Profiling Flame Graph Widget
-kind: documentation
 description: "Graph a breakdown of top consuming lines of code (CPU, Memory, ...)"
 widget_type: "flame_graph"
+aliases:
+- /video-categories/flamegraph/
 further_reading:
 - link: "/profiler/profile_visualizations/"
   tag: "Documentation"

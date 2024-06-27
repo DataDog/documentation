@@ -1,35 +1,36 @@
 ---
-title: Kubernetes 監査ログ
-name: kubernetes_audit_logs
-kind: インテグレーション
-description: Kubernetes クラスター内で起きるすべてのことを追跡
-short_description: Kubernetes クラスターの内部を追跡
-dependencies:
-  - https://github.com/DataDog/documentation/blob/master/content/en/integrations/kubernetes_audit_logs.md
-categories:
-  - ログの収集
-  - コンテナ
-  - オーケストレーション
-doc_link: /integrations/kubernetes_audit_logs/
 aliases:
-  - /ja/logs/log_collection/kubernetes_audit_logs
+- /ja/logs/log_collection/kubernetes_audit_logs
+categories:
+- ログの収集
+- コンテナ
+- オーケストレーション
+dependencies:
+- https://github.com/DataDog/documentation/blob/master/content/en/integrations/kubernetes_audit_logs.md
+description: Kubernetes クラスター内で起きるすべてのことを追跡
+doc_link: /integrations/kubernetes_audit_logs/
+further_reading:
+- link: logs/
+  tag: ドキュメント
+  text: ログ管理
+- link: https://www.datadoghq.com/blog/key-kubernetes-audit-logs-for-monitoring-cluster-security/
+  tag: ブログ
+  text: クラスターセキュリティを監視するための主要な Kubernetes 監査ログ
 has_logo: true
+integration_id: kubernetes-audit-logs
 integration_title: Kubernetes 監査ログ
 is_public: true
+kind: インテグレーション
+name: kubernetes_audit_logs
 public_title: Datadog-Kubernetes 監査ログ
+short_description: Kubernetes クラスターの内部を追跡
 supported_os:
-  - linux
-  - mac_os
-  - windows
-further_reading:
-  - link: logs/
-    tag: ドキュメント
-    text: ログ管理
-  - link: https://www.datadoghq.com/blog/key-kubernetes-audit-logs-for-monitoring-cluster-security/
-    tag: ブログ
-    text: クラスターセキュリティを監視するための主要な Kubernetes 監査ログ
-integration_id: kubernetes-audit-logs
+- linux
+- mac_os
+- windows
+title: Kubernetes 監査ログ
 ---
+
 ## 概要
 
 [Kubernetes 監査ログ][1]を収集すると、任意のサービスで作成される Kubernetes API へのあらゆる呼び出しをはじめ、Kubernetes クラスター内で起こるすべてのことを追跡できます。たとえば、Control Plane（ビルトインコントローラ、スケジューラ）、ノードのデーモン（kubelet、kube-proxy、その他）、クラスターサービス（クラスターのオートスケーラーなど）、ユーザーが作成する `kubectl` リクエスト、さらに Kubernetes API 自体も追跡できます。

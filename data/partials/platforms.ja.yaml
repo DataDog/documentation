@@ -117,6 +117,10 @@ platforms:
   image: platform_macosx.png
   link: agent/basic_agent_usage/osx/
   name: osx
+- category: Linux
+  image: platform_oracle.png
+  link: agent/basic_agent_usage/oracle/
+  name: Oracle
 - category: configuration_management
   image: platform_puppet.png
   link: agent/basic_agent_usage/puppet/
@@ -145,6 +149,10 @@ platforms:
   image: platform_windows.png
   link: agent/basic_agent_usage/windows/
   name: windows
+- category: ログの収集
+  image: platform_sccm.png
+  link: agent/basic_agent_usage/sccm/
+  name: sccm
 - category: source
   image: platform_fromsource.png
   link: agent/basic_agent_usage/source/

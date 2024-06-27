@@ -7,11 +7,11 @@ further_reading:
       text: 'Data Jobs Monitoring'
 ---
 
-{{< callout url="https://forms.gle/PZUoEgtBsH6qM62MA" >}}
-Data Jobs Monitoring is in private beta. Fill out this form to join the wait list.
-{{< /callout >}} 
-
 [Data Jobs Monitoring][9] gives visibility into the performance and reliability of Apache Spark applications on Amazon EMR.
+
+## Requirements
+
+[Amazon EMR Release 6.6.0][10] or later is required.
 
 ## Setup
 
@@ -38,16 +38,35 @@ Follow these steps to enable Data Jobs Monitoring for Amazon EMR.
 
 When you create a new EMR cluster in the [Amazon EMR console][4], add a bootstrap action on the **Create Cluster** page:
 
-1. Save [this init script][6] to an S3 bucket that your EMR cluster can read. Take note of the path to this script.
+1. Save the following script to an S3 bucket that your EMR cluster can read. Take note of the path to this script. 
+
+   ```shell
+   #!/bin/bash
+
+   # Set required parameter DD_SITE
+   DD_SITE={{< region-param key="dd_site" code="true" >}}
+   
+   # Set required parameter DD_API_KEY with Datadog API key. 
+   # The commands below assumes the API key is stored in AWS Secrets Manager, with the secret name as datadog/dd_api_key and the key as dd_api_key.
+   # IMPORTANT: Modify if you choose to manage and retrieve your secret differently.
+   SECRET_NAME=datadog/dd_api_key
+   DD_API_KEY=$(aws secretsmanager get-secret-value --secret-id $SECRET_NAME | jq -r .SecretString | jq -r '.["dd_api_key"]')
+
+   # Optional parameters
+   # Uncomment the following line to allow adding init script logs when reporting a failure back to Datadog. A failure is reported when the init script fails to start the Datadog Agent successfully.
+   # export DD_DJM_ADD_LOGS_TO_FAILURE_REPORT=true
+
+   # Download and run the latest init script
+   DD_SITE=$DD_SITE DD_API_KEY=$DD_API_KEY bash -c "$(curl -L https://dd-data-jobs-monitoring-setup.s3.amazonaws.com/scripts/emr/emr_init_latest.sh)" || true
+
+   ```
+
+   The script above sets the required parameters, downloads and runs the latest init script for Data Jobs Monitoring in EMR. If you want to pin your script to a specific version, you can replace the file name in the URL with `emr_init_1.2.0.sh` to use the last stable version.
+
 1. On the **Create Cluster** page, find the **Bootstrap actions** section. Click **Add** to bring up the **Add bootstrap action** dialog.
-   {{< img src="data_jobs/emr/add_bootstrap_action.png" alt="Amazon EMR console, Create Cluster, Add Bootstrap Action dialog. Text fields for name, script location, and arguments." style="width:80%;" >}}
+   {{< img src="data_jobs/emr/add_bootstrap_action_without_arguments.png" alt="Amazon EMR console, Create Cluster, Add Bootstrap Action dialog. Text fields for name, script location, and arguments." style="width:80%;" >}}
    - For **Name**, give your bootstrap action a name. You can use `datadog_agent`.
    - For **Script location**, enter the path to where you stored the init script in S3.
-   - For **Arguments**, enter two arguments separated by a space: your Datadog site, and the name of the secret in which you stored your Datadog API key. 
-      Example:
-      ```text
-      {{< region-param key="dd_site" code="true" >}} datadog/dd_api_key
-      ```
    - Click **Add bootstrap action**.
 
 When your cluster is created, this bootstrap action installs the Datadog Agent and downloads the Java tracer on each node of the cluster.
@@ -89,7 +108,9 @@ spark-submit \
 
 In Datadog, view the [Data Jobs Monitoring][8] page to see a list of all your data processing jobs.
 
-## Tag spans at runtime
+## Advanced Configuration
+
+### Tag spans at runtime
 
 {{% djm-runtime-tagging %}}
 
@@ -102,7 +123,7 @@ In Datadog, view the [Data Jobs Monitoring][8] page to see a list of all your da
 [3]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotating-secrets.html
 [4]: https://console.aws.amazon.com/emr
 [5]: https://console.aws.amazon.com/iam/
-[6]: /resources/sh/data_jobs/datadog_emr_job_monitoring_init_v2.sh
 [7]: /getting_started/site/
 [8]: https://app.datadoghq.com/data-jobs/
 [9]: /data_jobs
+[10]: https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-660-release.html
