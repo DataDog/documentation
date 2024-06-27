@@ -1,6 +1,5 @@
 ---
 title: Docker Integrations Autodiscovery
-kind: documentation
 aliases:
 - /agent/docker/integrations
 further_reading:

@@ -20,7 +20,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/cloud-cost-management-container-support/
   tag: blog
   text: Datadog Cloud Cost Management で Kubernetes と ECS の支出を把握する
-kind: documentation
 title: Amazon ECS
 ---
 

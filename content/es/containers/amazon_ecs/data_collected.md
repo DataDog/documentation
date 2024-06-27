@@ -11,7 +11,6 @@ further_reading:
 - link: /agent/amazon_ecs/data_collected/#metrics
   tag: Documentación
   text: Recopilar métricas de ECS
-kind: documentation
 title: Recopilación de datos de Amazon ECS
 ---
 
