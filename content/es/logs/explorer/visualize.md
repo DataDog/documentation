@@ -96,7 +96,7 @@ El siguiente gráfico circular muestra el desglose porcentual por **servicio**.
 
 Un mapa de árbol te ayuda a organizar y mostrar datos como porcentaje de un todo en un formato visualmente atractivo. Los mapas de árbol muestran los datos en rectángulos anidados. Compara diferentes dimensiones utilizando tanto el tamaño como los colores de los rectángulos. También puedes seleccionar varios atributos para ver una jerarquía de rectángulos.
 
-El siguiente mapa de arból muestra el desglose porcentual por **servicio**.
+El siguiente mapa de árbol muestra el desglose porcentual por **servicio**.
 
 {{< img src="logs/explorer/doc_tree_map.png" alt="Ejemplo de mapa de árbol que muestra el desglose de porcentaje por servicio" style="width:90%;">}}
 
