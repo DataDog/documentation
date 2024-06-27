@@ -60,7 +60,7 @@ Export your graph to a dashboard or notebook with the buttons at the top right. 
 [1]: https://app.datadoghq.com/metric/explorer
 [2]: /notebooks/
 [3]: /dashboards/#screenboards
-[4]: /dashboards/#timeboards
+[4]: /dashboards/#get-started
 [5]: /metrics/introduction/#space-aggregation
 [6]: https://docs.datadoghq.com/dashboards/querying/#advanced-graphing
 
