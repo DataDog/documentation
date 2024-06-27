@@ -8,7 +8,6 @@ further_reading:
 - link: /database_monitoring/troubleshooting/?tab=sqlserver
   tag: Documentation
   text: Résoudre les problèmes courants
-kind: documentation
 title: Configuration de Database Monitoring pour Azure SQL Server
 ---
 
@@ -358,7 +357,6 @@ Au lieu de monter un fichier, vous pouvez déclarer la configuration d'instance 
 
 ```yaml
 apiVersion: v1
-kind: Service
 metadata:
   name: sqlserver-datadog-check-instances
   annotations:

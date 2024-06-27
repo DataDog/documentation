@@ -1,7 +1,6 @@
 ---
 description: Oracle データベースでのデータベースモニタリングの設定
 disable_sidebar: true
-kind: documentation
 title: Oracle の設定
 ---
 

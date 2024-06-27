@@ -4,7 +4,6 @@ further_reading:
 - link: /integrations/postgres/
   tag: Documentation
   text: Intégration Postgres basique
-kind: documentation
 title: Configuration de Database Monitoring pour Postgres avec une gestion sur Amazon RDS
 ---
 
@@ -332,7 +331,6 @@ Au lieu de monter un fichier, vous pouvez déclarer la configuration d'instance 
 
 ```yaml
 apiVersion: v1
-kind: Service
 metadata:
   name: postgres
   labels:
