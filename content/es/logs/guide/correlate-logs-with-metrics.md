@@ -45,7 +45,7 @@ Para correlacionar logs y métricas en un [dashboard][5]:
 
 Para correlacionar logs y métricas en la página del [Explorador de métricas][7]:
 
-1. Selecciona una métrica para realizar el gráfico.
+1. Selecciona una métrica para realizar su gráfico.
 2. Haz clic en cualquier punto del gráfico para que aparezca el menú de gráficos.
 3. Selecciona **View related logs** (Ver logs relacionados).
 
