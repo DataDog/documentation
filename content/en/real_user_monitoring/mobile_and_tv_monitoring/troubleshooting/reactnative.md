@@ -1,6 +1,12 @@
 ---
 title: Troubleshooting
 kind: documentation
+description: Learn how to troubleshoot issues with React Native Monitoring.
+aliases:
+    - /real_user_monitoring/mobile_and_tv_monitoring/troubleshooting/
+code_lang: reactnative
+type: multi-code-lang
+code_lang_weight: 50
 further_reading:
   - link: "https://github.com/DataDog/dd-sdk-reactnative"
     tag: "Source Code"
@@ -10,6 +16,8 @@ further_reading:
     text: "Datadog Real User Monitoring"
 
 ---
+
+## Overview
 
 If you experience unexpected behavior with Datadog React Native RUM, use this guide to resolve issues quickly. If you continue to have trouble, contact [Datadog Support][1] for further assistance.
 
@@ -38,8 +46,8 @@ Here are some common things to check for:
   INFO  DATADOG: Datadog SDK is tracking interactions
   INFO  DATADOG: Datadog SDK is tracking XHR resources
   INFO  DATADOG: Datadog SDK is tracking errors
-  DEBUG  DATADOG: Starting RUM View “Products” #Products-oaZlP_FVwGM5vtPoup_rT
-  DEBUG  DATADOG: Adding RUM Action “RCTView” (TAP)
+  DEBUG  DATADOG: Starting RUM View "Products" #Products-oaZlP_FVwGM5vtPoup_rT
+  DEBUG  DATADOG: Adding RUM Action "RCTView" (TAP)
   ```
 
   **Note**: In this example, the first four logs indicate that the SDK has been correctly configured and the last two lines are events that were sent.
@@ -172,9 +180,9 @@ You can make the following change to fix it:
 
 If you run into an [issue where your React Native project displays a stream of error messages and significantly raises your CPU usage][5], try creating a new React Native project.
 
-## Android build failures with SDK version `2.*`
+## Android build failures with SDK version 2.*
 
-### `Unable to make field private final java.lang.String java.io.File.path accessible`
+### Unable to make field private final java.lang.String java.io.File.path accessible
 
 If your Android build fails with an error like:
 
@@ -186,9 +194,9 @@ Execution failed for task ':app:processReleaseMainManifest'.
 > Unable to make field private final java.lang.String java.io.File.path accessible: module java.base does not "opens java.io" to unnamed module @1bbf7f0e
 ```
 
-You are using Java 17, which is not compatible for your React Native version. Switch to Java 11 to solve the issue.
+You are using Java 17, which is not compatible with your React Native version. Switch to Java 11 to solve the issue.
 
-### `java.lang.UnsupportedClassVersionError`
+### java.lang.UnsupportedClassVersionError
 
 If your Android build fails with an error like:
 
@@ -198,7 +206,7 @@ java.lang.UnsupportedClassVersionError: com/datadog/android/lint/DatadogIssueReg
 
 You are using a version of Java that is too old. Switch to Java 17 to solve the issue.
 
-### `Unsupported class file major version 61`
+### Unsupported class file major version 61
 
 If your Android build fails with an error like:
 
@@ -213,13 +221,13 @@ Could not determine the dependencies of task ':app:lintVitalRelease'.
          > Failed to transform '/Users/me/.gradle/caches/modules-2/files-2.1/com.datadoghq/dd-sdk-android-core/2.0.0/a97f8a1537da1de99a86adf32c307198b477971f/dd-sdk-android-core-2.0.0.aar' using Jetifier. Reason: IllegalArgumentException, message: Unsupported class file major version 61. (Run with --stacktrace for more details.)
 ```
 
-You use a version of Android Gradle Plugin below `5.0`. To fix the issue, add in your `android/gradle.properties` file:
+You are using a version of Android Gradle Plugin below `5.0`. To fix the issue, add in your `android/gradle.properties` file:
 
 ```properties
 android.jetifier.ignorelist=dd-sdk-android-core
 ```
 
-### `Duplicate class kotlin.collections.jdk8.*`
+### Duplicate class kotlin.collections.jdk8.*
 
 If your Android build fails with an error like:
 

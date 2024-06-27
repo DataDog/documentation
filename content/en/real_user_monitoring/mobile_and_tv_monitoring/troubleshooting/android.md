@@ -1,6 +1,12 @@
 ---
 title: Troubleshooting
 kind: documentation
+description: Learn how to troubleshoot issues with Android Monitoring.
+aliases:
+    - /real_user_monitoring/mobile_and_tv_monitoring/troubleshooting/
+code_lang: android
+type: multi-code-lang
+code_lang_weight: 10
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-android
   tag: "Source Code"
@@ -9,6 +15,10 @@ further_reading:
   tag: Documentation
   text: Explore Real User Monitoring
 ---
+
+## Overview
+
+If you experience unexpected behavior with Datadog RUM, use this guide to resolve issues quickly. If you continue to have trouble, contact [Datadog Support][1] for further assistance.
 
 ## Check if Datadog RUM is initialized
 Use the utility method `isInitialized` to check if the SDK is properly initialized:
@@ -52,10 +62,11 @@ This means that even if users open your application while offline, no data is lo
 
 ## Migrating to 2.0.0
 
-If you've been using the SDK v1, there are some breaking changes introduced in version `2.0.0`. See the [migration guide][1] for more information.
+If you've been using the SDK v1, there are some breaking changes introduced in version `2.0.0`. See the [migration guide][2] for more information.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://github.com/DataDog/dd-sdk-android/blob/develop/MIGRATION.MD
+[1]: /help
+[2]: https://github.com/DataDog/dd-sdk-android/blob/develop/MIGRATION.MD
