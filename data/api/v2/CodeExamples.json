@@ -804,6 +804,13 @@
       "description": "Change the triage state of a security signal returns \"OK\" response"
     }
   ],
+  "ConvertSecurityMonitoringRuleFromJSONToTerraform": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Convert a rule from JSON to Terraform returns \"OK\" response"
+    }
+  ],
   "CreateSecurityMonitoringRule": [
     {
       "group": "security_monitoring",
