@@ -238,7 +238,7 @@ Para enviar datos al centro de datos GOVCLOUD de Datadog, añade el contenedor l
      (...)
           {
             "name": "fips-proxy",
-            "image": "datadog/fips-proxy:1.1.2",
+            "image": "datadog/fips-proxy:1.1.3",
             "portMappings": [
                 {
                     "containerPort": 9803,
