@@ -13,9 +13,9 @@ further_reading:
   text: Buenas prácticas de registro en Docker
 - link: /glossary/#tail
   tag: Glosario
-  text: Entrada de glosario para "tail" (cola)
+  text: Entrada de glosario para "tail" (rastrear)
 kind: guía
-title: Utiliza el agente contenedor para raestrear logs del host
+title: Utiliza el agente contenedor para rastrear logs del host
 ---
 
 <div class="alert alert-info">Datadog recomienda utilizar <b>STDOUT/STDERR</b> para recolectar logs del contenedor.</div>
