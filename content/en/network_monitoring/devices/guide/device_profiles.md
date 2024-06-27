@@ -15,7 +15,9 @@ further_reading:
 <div class="alert alert-warning">The Device Onboarding Experience is not supported on this site.</div>
 {{< /site-region >}}
 
-<div class="alert alert-info"> The Device Onboarding Experience is in Private Beta. Reach out to your Customer Success Manager to sign up.</div>
+{{< callout url="https://www.datadoghq.com/private-beta/easily-onboard-and-start-monitoring-network-devices-to-datadog/" >}}
+  Device Onboarding is currently in private beta, but you can easily request access! Use this form to submit your request today.
+{{< /callout >}}
 
 ## Overview
 
