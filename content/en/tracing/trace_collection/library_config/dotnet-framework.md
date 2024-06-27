@@ -114,11 +114,11 @@ To configure the Tracer using a JSON file, create `datadog.json` in the instrume
 
 {{< /tabs >}}
 
-### Configuration settings
+## Configuration settings
 
 Using the methods described above, customize your tracing configuration with the following variables. Use the environment variable name (for example, `DD_TRACE_AGENT_URL`) when setting environment variables or configuration files. Use the TracerSettings property (for example, `Exporter.AgentUri`) when changing settings in code.
 
-#### Unified Service Tagging
+### Unified Service Tagging
 
 To use [Unified Service Tagging][4], configure the following settings for your services:
 
@@ -134,19 +134,17 @@ If specified, sets the service name. Otherwise, the .NET Tracer tries to determi
 : **TracerSettings property**: `ServiceVersion`<br>
 If specified, sets the version of the service. Added in version 1.17.0.
 
-#### Optional configuration
+### Optional configuration
 
 The following configuration variables are available for both automatic and custom instrumentation:
+
+#### Traces
 
 `DD_TRACE_AGENT_URL`
 : **TracerSettings property**: `Exporter.AgentUri`<br>
 Sets the URL endpoint where traces are sent. Overrides `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` if set. If the [Agent configuration][13] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then `DD_TRACE_AGENT_PORT` or `DD_TRACE_AGENT_URL` must match it.<br>
 Note that Unix Domain Sockets (UDS) are not supported on .NET Framework.<br>
 **Default**: `http://<DD_AGENT_HOST>:<DD_TRACE_AGENT_PORT>` if they are set or `http://localhost:8126`.
-
-`DD_AGENT_HOST`
-: Sets the host where the Agent is listening for connections. Can be a hostname or an IP address. Use `DD_TRACE_AGENT_URL`, which has precedence over this parameter. <br>
-**Default**: `localhost`
 
 `DD_TRACE_AGENT_PORT`
 : Sets the TCP port where the Agent is listening for connections. Use `DD_TRACE_AGENT_URL`, which has precedence over this parameter. If the [Agent configuration][13] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then `DD_TRACE_AGENT_PORT` or `DD_TRACE_AGENT_URL` must match it.<br>
@@ -204,24 +202,6 @@ Added in version `2.19.0`.<br>
 Added in version `2.19.0`.<br>
 **Default**: Datadog parses the following: `x-forwarded-for`, `x-real-ip`, `true-client-ip`, `x-client-ip`, `x-forwarded`, `forwarded-for`, `x-cluster-client-ip`, `fastly-client-ip`, `cf-connecting-ip`, `cf-connecting-ipv6`. If several are present, none will be reported.<br>
 
-`DD_TAGS`
-: **TracerSettings property**: `GlobalTags`<br>
-If specified, adds all of the specified tags to all generated spans. <br>
-**Example**: `layer:api, team:intake, key:value` <br>
-**Note**: The delimiter is a comma and a space: `, `. <br>
-Added in version 1.17.0. <br>
-
-`DD_TRACE_LOG_DIRECTORY`
-: Sets the directory for .NET Tracer logs. <br>
-**Default**: `%ProgramData%\Datadog .NET Tracer\logs\`
-
-`DD_TRACE_LOGFILE_RETENTION_DAYS`
-: During the tracer's startup, this configuration uses the tracer's current log directory to delete log files the same age and older than the given number of days. Added in version 2.19.0. <br>
-**Default**: `31`
-
-`DD_TRACE_LOGGING_RATE`
-: Sets rate limiting for log messages. If set, unique log lines are written once per `x` seconds. For example, to log a given message once per 60 seconds, set to `60`. Setting to `0` disables log rate limiting. Added in version 1.24.0. Disabled by default.
-
 `DD_TRACE_SERVICE_MAPPING`
 : Rename services using configuration. Accepts a comma-separated list of key-value pairs from the service name keys to rename, and the name to use instead, in the format `[from-key]:[to-name]`. <br>
 **Example**: `mysql:main-mysql-db, mongodb:offsite-mongodb-service`<br>
@@ -238,18 +218,48 @@ The `from-key` value is specific to the integration type, and should exclude the
 `DD_TRACE_OBFUSCATION_QUERY_STRING_REGEXP`
 : When `DD_HTTP_SERVER_TAG_QUERY_STRING` is true, this regex redacts sensitive data from incoming requests' query string reported in the `http.url` tag (matches are replaced with `<redacted>`). This regex executes for every incoming request.
 
+#### Agent
+
+`DD_AGENT_HOST`
+: Sets the host where the Agent is listening for connections. Can be a hostname or an IP address. Use `DD_TRACE_AGENT_URL`, which has precedence over this parameter. <br>
+**Default**: `localhost`
+
+`DD_TAGS`
+: **TracerSettings property**: `GlobalTags`<br>
+If specified, adds all of the specified tags to all generated spans. <br>
+**Example**: `layer:api, team:intake, key:value` <br>
+**Note**: The delimiter is a comma and a space: `, `. <br>
+Added in version 1.17.0. <br>
+
 `DD_INSTRUMENTATION_TELEMETRY_ENABLED`
 : Datadog may collect [environmental and diagnostic information about your system][15] to improve the product. When false, this telemetry data will not be collected.<br>
 **Default**: `true`
+
+#### Logs
+
+`DD_TRACE_LOG_DIRECTORY`
+: Sets the directory for .NET Tracer logs. <br>
+**Default**: `%ProgramData%\Datadog .NET Tracer\logs\`
+
+`DD_TRACE_LOGFILE_RETENTION_DAYS`
+: During the tracer's startup, this configuration uses the tracer's current log directory to delete log files the same age and older than the given number of days. Added in version 2.19.0. <br>
+**Default**: `31`
+
+`DD_TRACE_LOGGING_RATE`
+: Sets rate limiting for log messages. If set, unique log lines are written once per `x` seconds. For example, to log a given message once per 60 seconds, set to `60`. Setting to `0` disables log rate limiting. Added in version 1.24.0. Disabled by default.
+
+#### OpenTelemetry
 
 `DD_TRACE_OTEL_ENABLED`
 : Enables or disables OpenTelemetry based tracing, both for [custom][18] or [automatic][19] instrumentation.
 Valid values are: `true` or `false`.<br>
 **Default**: `false`
 
-#### Automatic instrumentation optional configuration
+### Automatic instrumentation optional configuration
 
 The following configuration variables are available **only** when using automatic instrumentation:
+
+#### Agent
 
 `DD_TRACE_ENABLED`
 : **TracerSettings property**: `TraceEnabled`<br>
@@ -261,6 +271,13 @@ Enables or disables all instrumentation. Valid values are: `true` or `false`.<br
 : Enables linking between data sent from APM and the Database Monitoring product when set to `service` or `full`. The `service` option enables the connection between DBM and APM services. The `full` option enables connection between database spans with database query events. Available for Postgres and MySQL.<br>
 **Default**: `disabled`
 
+`DD_RUNTIME_METRICS_ENABLED`
+: Enables .NET runtime metrics. Valid values are `true` or `false`. <br>
+**Default**: `false`<br>
+Added in version 1.23.0.
+
+#### Errors
+
 `DD_HTTP_CLIENT_ERROR_STATUSES`
 : Sets status code ranges that will cause HTTP client spans to be marked as errors. <br>
 **Default**: `400-499`
@@ -269,16 +286,15 @@ Enables or disables all instrumentation. Valid values are: `true` or `false`.<br
 : Sets status code ranges that will cause HTTP server spans to be marked as errors. <br>
 **Default**: `500-599`
 
+#### Logs
+
 `DD_LOGS_INJECTION`
 : **TracerSettings property**: `LogsInjectionEnabled` <br>
 Enables or disables automatic injection of correlation identifiers into application logs. <br>
 Your logger needs to have a `source` that sets the `trace_id` mapping correctly. The default source for .NET Applications, `csharp`, does this automatically. For more information, see [correlated logs in the Trace ID panel][5]. <br><br>
 **Beta**: Starting in version 2.35.0, if [Agent Remote Configuration][16] is enabled where this service runs, you can set `DD_LOGS_INJECTION` in the [Service Catalog][17] UI.
 
-`DD_RUNTIME_METRICS_ENABLED`
-: Enables .NET runtime metrics. Valid values are `true` or `false`. <br>
-**Default**: `false`<br>
-Added in version 1.23.0.
+#### Traces
 
 `DD_TRACE_EXPAND_ROUTE_TEMPLATES_ENABLED`
 : Expands all route parameters in the application for ASP.NET/ASP.NET Core (except ID parameters)<br>
@@ -299,7 +315,7 @@ Wildcard support `[*]` added in version 2.7.0.
 When set to `true`, the consumer span is created when a message is consumed and closed before consuming the next message. The span duration is representative of the computation between one message consumption and the next. Use this setting when message consumption is performed in a loop. <br>
 When set to `false`, the consumer span is created when a message is consumed and immediately closed. Use this setting when a message is not processed completely before consuming the next one, or when multiple messages are consumed at once. When you set this parameter to `false`, consumer spans are closed right away. If you have child spans to trace, you must extract the context manually. Read [Headers extraction and injection][12] for more details.
 
-#### Automatic instrumentation integration configuration
+### Automatic instrumentation integration configuration
 
 The following table lists configuration variables that are available **only** when using automatic instrumentation and can be set for each integration.
 
@@ -312,7 +328,7 @@ Sets a list of integrations to disable. All other integrations remain enabled. I
 Enables or disables a specific integration. Valid values are: `true` or `false`. Integration names are listed in the [Integrations][7] section.<br>
 **Default**: `true`
 
-#### Experimental features
+### Experimental features
 
 The following configuration variables are for features that are available for use but may change in future releases.
 
@@ -320,7 +336,7 @@ The following configuration variables are for features that are available for us
 : Enables incrementally flushing large traces to the Datadog Agent, reducing the chance of rejection by the Agent. Use only when you have long-lived traces or traces with many spans. Valid values are `true` or `false`. Added in version 1.26.0, only compatible with the Datadog Agent 7.26.0+.<br>
 **Default**: `false`
 
-#### Deprecated settings
+### Deprecated settings
 
 `DD_TRACE_LOG_PATH`
 : Sets the path for the automatic instrumentation log file and determines the directory of all other .NET Tracer log files. Ignored if `DD_TRACE_LOG_DIRECTORY` is set.
