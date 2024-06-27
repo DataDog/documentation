@@ -1,5 +1,5 @@
 ---
-title: Agent v6 Status Page
+title: Agent Status Page
 aliases:
 - /agent/guide/agent-status-page
 further_reading:

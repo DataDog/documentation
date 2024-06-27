@@ -6,7 +6,11 @@ disable_toc: false
 
 ## Agent main configuration file
 
+Configuration files for Agent checks and integrations are stored in the `conf.d` directory.
+
 The Agent v6 configuration file uses **YAML** to better support complex configurations, and to provide a consistent configuration experience, as Checks also use YAML configuration files. Therefore, `datadog.conf` (v5) is retired in favor of `datadog.yaml` (v6).
+
+The location of the `conf.d` directory differs depending on the operating system.
 
 | Platform                             | Command                              |
 |:-------------------------------------|:-------------------------------------|
@@ -19,7 +23,7 @@ See the [sample `config_template.yaml` file][1] for all available configuration 
 
 ## Agent configuration directory
 
-Prior releases of Datadog Agent stored configuration files in `/dd-agent/conf.d/`. Starting with the 6.0 release, configuration files are stored in `/etc/datadog-agent/conf.d/<CHECK_NAME>.d/`.
+Prior releases of Datadog Agent stored configuration files in `/dd-agent/conf.d/`. Starting with the 6.0 release, configuration files are stored in the `conf.d` directory. The location of the directory differs depending on the operating system.
 
 | Platform                             | Command                        |
 |:-------------------------------------|:-------------------------------|
@@ -35,7 +39,7 @@ Prior releases of Datadog Agent stored configuration files in `/dd-agent/conf.d/
 | Ubuntu                               | `/etc/datadog-agent/conf.d/`   |
 | Windows                              | `%ProgramData%\Datadog\conf.d` |
 
-### Checks configuration files for Agent 6
+### Check configuration files
 
 An example for each Agent check configuration file is found in the `conf.yaml.example` file in the corresponding `<CHECK_NAME>.d/` folder. Rename this file to `conf.yaml` to enable the associated check. **Note**: The Agent loads valid YAML files contained in the folder: `/etc/datadog-agent/conf.d/<CHECK_NAME>.d/`. This allows complex configurations to be broken down into multiple files. For example, a configuration for the `http_check` might look like this:
 
