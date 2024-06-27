@@ -66,6 +66,21 @@ paths:
          description: An internal server error
 {{< /code-block >}}
 
+## Automations for adding metadata
+
+### Add API metadata from a GitHub repository
+
+Use the Datadog GitHub integration to import API definitions and keep them synchronized. Once a file is connected, the created API will automatically update once the file content is changed in the repository. 
+
+To import and OpenAPI/Swagger file using the GitHub integration:
+1. Make sure the GitHub integration is enabled, and that a GitHub app is configured.
+1. Go to the Catalog page.
+1. Click Add API.
+1. Select GitHub.
+1. Choose the repository and the file you want to register.
+1. Click Create.
+
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
