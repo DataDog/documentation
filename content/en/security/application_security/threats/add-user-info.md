@@ -471,7 +471,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
   metadata := /* optional extra event metadata */
   userdata := /* optional extra user data */
 
-  // Track login success, replace `my-uid` by a unique identifier of the user (numeric, username, email...)
+  // Track login success, replace `my-uid` by a unique identifier of the user (such as numeric, username, and email)
   if appsec.TrackUserLoginSuccessEvent(r.Context(), "my-uid", metadata, userdata) != nil {
     // The given user id is blocked and the handler should be aborted asap.
     // The blocking response will be sent by the appsec middleware.
