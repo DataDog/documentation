@@ -21,7 +21,7 @@ further_reading:
 
 ## Overview
 
-As your organization scales, the volume of logs collected from your infrastructure and applications grows along with it. The use cases for your logs increase in complexity as well. For example, you might be collecting logs from your infrastructure, applications, security tools, network, and so forth.  All of these use cases have varying retention and querying needs.
+As your organization scales, the volume of logs collected from your infrastructure and applications grows along with it. The use cases for your logs increase in complexity as well. For example, you might be collecting logs from your infrastructure, applications, security tools, network, and so forth. All of these use cases have varying retention and querying needs.
 
 With Flex Logs, your teams can determine the query capacity they need to meet their use case, whether it's a time-critical incident, a security investigation, or a compliance audit. By decoupling storage from compute costs, Flex Logs provides cost-effective long-term retention of your logs.
 
