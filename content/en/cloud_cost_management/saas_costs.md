@@ -22,7 +22,7 @@ further_reading:
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Cloud Cost Management is not supported for this site.</div>
+<div class="alert alert-warning">Cloud Cost Management is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 {{< beta-callout url="#" btn_hidden="true" >}}
@@ -32,6 +32,10 @@ SaaS Cost Integrations are in public beta.
 ## Overview
 
 SaaS Cost Integrations allow you to send cost data **directly from your providers** by configuring the accounts associated with your cloud cost data in Datadog. 
+
+{{< partial name="cloud_cost/cost-integrations.html" >}}
+
+</br>
 
 If your provider is not supported, use [Custom Costs][1] to upload any cost data source to Datadog and understand the total cost of your services.
 

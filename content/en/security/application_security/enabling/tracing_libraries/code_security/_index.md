@@ -26,8 +26,6 @@ further_reading:
   text: "Secure serverless applications with Datadog"
 ---
 
-<div class="alert alert-info">Code Security is in beta.</div>
-
 Select your application language for details on how to enable Code Security for your language and infrastructure types.
 
 {{< partial name="security-platform/appsec-languages-code-security.html" >}}</br>

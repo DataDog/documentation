@@ -16,13 +16,11 @@ further_reading:
   text: "Limit data collection to a subset of containers only"
 ---
 
-The Agent can create and assign tags to all metrics, traces, and logs emitted by a Pod, based on its labels or annotations.
-
-If you are running the Agent as a binary on a host, configure your tag extractions with the [Agent](?tab=agent) tab instructions. If you are running the Agent as a container in your Kubernetes cluster, configure your tag extraction with the [Containerized Agent](?tab=containerizedagent) tab instructions.
+The Datadog Agent can automatically assign tags to metrics, traces, and logs emitted by a pod (or an individual container within a pod) based on labels or annotations.
 
 ## Out-of-the-box tags
 
-The Agent can autodiscover and attach tags to all data emitted by the entire pods or an individual container within this pod. The list of tags attached automatically depends on the agent [cardinality configuration][1].
+The list of automatically-assigned tags depends on the Agent's [cardinality configuration][1].
 
 <div style="overflow-x: auto;">
 
@@ -175,7 +173,7 @@ datadog:
 ```
 {{% /tab %}}
 
-{{% tab "Containerized Agent" %}}
+{{% tab "Manual (DaemonSet)" %}}
 To extract a given node label `<NODE_LABEL>` and transform it as a tag key `<TAG_KEY>` within Datadog, add the following environment variable to the Datadog Agent:
 
 ```bash
@@ -268,7 +266,7 @@ datadog:
 ```
 {{% /tab %}}
 
-{{% tab "Containerized Agent" %}}
+{{% tab "Manual (DaemonSet)" %}}
 To extract a given pod label `<POD_LABEL>` and transform it as a tag key `<TAG_KEY>` within Datadog, add the following environment variable to the Datadog Agent:
 
 ```bash
@@ -361,7 +359,7 @@ datadog:
 ```
 {{% /tab %}}
 
-{{% tab "Containerized Agent" %}}
+{{% tab "Manual (DaemonSet)" %}}
 To extract a given pod annotation `<POD_ANNOTATION>` and transform it as a tag key `<TAG_KEY>` within Datadog, add the following environment variable to the Datadog Agent:
 
 ```bash
@@ -454,7 +452,7 @@ datadog:
 ```
 {{% /tab %}}
 
-{{% tab "Containerized Agent" %}}
+{{% tab "Manual (DaemonSet)" %}}
 To extract a given namespace label `<NAMESPACE_LABEL>` and transform it as a tag key `<TAG_KEY>` within Datadog, add the following environment variable to the Datadog Agent:
 
 ```bash
@@ -535,7 +533,7 @@ datadog:
 ```
 {{% /tab %}}
 
-{{% tab "Containerized Agent" %}}
+{{% tab "Manual (DaemonSet)" %}}
 To extract a given environment variable `<ENV_VAR>` and transform it as a tag key `<TAG_KEY>` within Datadog, add the following environment variable to the Datadog Agent:
 
 ```bash
@@ -613,7 +611,7 @@ datadog:
 ```
 {{% /tab %}}
 
-{{% tab "Containerized Agent" %}}
+{{% tab "Manual (DaemonSet)" %}}
 To extract a given container label `<CONTAINER_LABEL>` and transform it to a tag key `<TAG_KEY>`, add the following environment variable to the Datadog Agent:
 
 ```bash
