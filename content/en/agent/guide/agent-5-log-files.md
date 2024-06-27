@@ -1,0 +1,38 @@
+---
+title: Agent 5 Log Files
+kind: Guide
+disable_toc: false
+---
+
+## Overview
+
+The Datadog Agent does a logs rollover every 10MB by default. When a rollover occurs, one backup (`agent.log.1`) is kept. If a previous backup exists, it is overwritten during the rollover. To set the maximum size of one log file and the maximum number of backup files to keep, use `log_file_max_size`(default: 10485760 bytes) and `log_file_max_rolls`(default: 1) in the [Agent main configuration file][1].
+
+## Agent log directory
+
+| Platform                             | Command                                                              |
+|--------------------------------------|----------------------------------------------------------------------|
+| Linux                                | `/var/log/datadog/`                                                  |
+| macOS                                | `/var/log/datadog/`                                                  |
+| Windows Server 2008, Vista and newer | `C:\ProgramData\Datadog\logs\`                                       |
+| Windows Server 2003, XP or older     | `C:\Documents and Settings\All Users\Application Data\Datadog\logs\` |
+| SmartOS                              | `/opt/local/datadog/logs/supervisord/`                               |
+| Source build                         | `~/.datadog-agent/supervisord/logs/`                                 |
+
+## Agent log files
+
+* `collector.log`
+* `dogstatsd.log`
+* `forwarder.log`
+* `supervisord.log`
+
+## Agent installation log files
+
+| Platform                             | Location and file name        |
+|--------------------------------------|-------------------------------|
+| Linux                                | `$(pwd)/ddagent-install.log`    |
+| macOS                                | `/tmp/dd_agent.log`           |
+| Windows                              | `%TEMP%\MSI*.LOG`             |
+
+
+[1]: /agent/guide/agent-5-configuration-files#agent-main-configuration-file

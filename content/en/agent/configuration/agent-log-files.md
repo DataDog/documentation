@@ -73,7 +73,7 @@ The Datadog Agent does a logs rollover every 10MB by default. When a rollover oc
 
 | Platform                             | Location and file name        |
 |--------------------------------------|-------------------------------|
-| Linux                                | `$(pwd)/ddagent-install.log`    |
+| Linux                                | `$(pwd)/ddagent-install.log`  |
 | macOS                                | `/tmp/dd_agent.log`           |
 | Windows                              | `%TEMP%\MSI*.LOG`             |
 
