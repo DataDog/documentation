@@ -77,13 +77,13 @@ Links to all available versions of the Windows installer are available in [JSON 
 1. Download and run the [Datadog Agent installer][4].
 1. Run one of the following commands inside the directory where you downloaded the installer, replacing `MY_API_KEY` with your Datadog API key:
    - Command prompt:
-     {{< code-block lang="shell" collapsible="true" >}}
+     {{< code-block lang="shell" >}}
 start /wait msiexec /qn /i datadog-agent-6-latest.amd64.msi APIKEY="MY_API_KEY" SITE="datad0g.com"
 {{< /code-block >}}
    - Powershell:
-     {{< code-block lang="powershell" collapsible="true" >}}
+     {{< code-block lang="powershell" >}}
 Start-Process -Wait msiexec -ArgumentList '/qn /i datadog-agent-6-latest.amd64.msi APIKEY="MY_API_KEY" SITE="datad0g.com"'
-{{< /code-block >}} 
+{{< /code-block >}}
 
 `HOSTNAME` and `TAGS` are optional values. See the [Windows Agent documentation][5] for all available options.
 
@@ -1105,15 +1105,11 @@ Refer to the [GitHub repository of the module][103] for more examples and advanc
 
 1. Wait for the next scheduled `chef-client` run.
 
-### Windows upgrades
-
-If you're using Chef with a Windows installation, follow the [Chef instructions][103] in Datadog to upgrade your Agent. 
 
 For more information and examples, see the [Agent GitHub repository][102].
 
 [101]: https://docs.chef.io/workstation/berkshelf/
 [102]: https://github.com/DataDog/chef-datadog
-[103]: https://app.datadoghq.com/help/agent_fix#chef
 
 {{% /tab %}}
 
