@@ -1,6 +1,5 @@
 ---
 title: Log Volume Control for the Sumo Logic Hosted Collector HTTP Logs Source
-kind: document
 disable_toc: false
 ---
 

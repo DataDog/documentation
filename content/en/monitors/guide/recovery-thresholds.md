@@ -1,6 +1,5 @@
 ---
 title: Recovery thresholds
-kind: guide
 further_reading:
 - link: "/monitors/types/metric/"
   tag: "Documentation"

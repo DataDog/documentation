@@ -1,6 +1,5 @@
 ---
 title: NetFlow Monitoring
-kind: documentation
 is_beta: true
 further_reading:
 - link: "/network_monitoring/devices/profiles"

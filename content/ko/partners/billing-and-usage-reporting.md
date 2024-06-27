@@ -1,6 +1,5 @@
 ---
 description: 여러 조직 계정 설정에서 개별 클라이언트 및 Datadog 플랫폼 사용량 합계를 모니터링하기
-kind: 설명서
 private: true
 title: 빌링 및 사용량 보고
 ---

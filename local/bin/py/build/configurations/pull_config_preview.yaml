@@ -1,6 +1,6 @@
 ---
 - config:
-    cache_enabled: true
+    cache_enabled: false
 
 - data:
     - org_name: jenkinsci
@@ -354,7 +354,6 @@
             front_matters:
               dependencies: ["https://github.com/DataDog/datadog-ci/blob/master/src/commands/synthetics/README.md"]
               title: Continuous Testing and CI/CD Configuration
-              kind: documentation
               description: Configure Continuous Testing to run tests in your CI/CD pipelines.
               aliases:
                 - /synthetics/cicd_integrations/configuration
@@ -474,7 +473,6 @@
             front_matters:
               dependencies: ["https://github.com/DataDog/datadog-ci-azure-devops/blob/main/README.md"]
               title: Continuous Testing and Datadog CI Azure DevOps Extension
-              kind: documentation
               description: Use the Synthetics and Datadog CI extension to create tasks that you can use in a CI pipeline.
               aliases:
                 - /synthetics/cicd_integrations/azure_devops_extension
@@ -491,7 +489,6 @@
             front_matters:
               dependencies: ["https://github.com/DataDog/synthetics-ci-github-action/blob/main/README.md"]
               title: Continuous Testing and GitHub Actions
-              kind: documentation
               aliases:
                 - /synthetics/cicd_integrations/github_actions
 
@@ -507,7 +504,6 @@
             front_matters:
               dependencies: ["https://github.com/DataDog/synthetics-test-automation-circleci-orb/blob/main/README.md"]
               title: Continuous Testing and CircleCI Orb
-              kind: documentation
               aliases:
                 - /synthetics/cicd_integrations/circleci_orb
 

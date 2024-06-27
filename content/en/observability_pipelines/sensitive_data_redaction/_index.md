@@ -1,6 +1,5 @@
 ---
 title: Sensitive Data Redaction
-kind: document
 disable_toc: false
 ---
 

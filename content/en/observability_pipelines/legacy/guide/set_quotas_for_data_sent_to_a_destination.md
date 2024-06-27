@@ -1,6 +1,5 @@
 ---
 title: (LEGACY) Set Quotas for Data Sent to a Destination
-kind: documentation
 disable_toc: false
 private: true
 is_beta: true

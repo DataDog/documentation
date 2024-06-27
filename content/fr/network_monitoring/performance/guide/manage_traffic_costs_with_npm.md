@@ -1,6 +1,5 @@
 ---
 title: Gestion des coûts liés au trafic cloud avec la solution NPM
-kind: guide
 aliases:
   - /fr/network_performance_monitoring/guide/manage_traffic_costs_with_npm/
 ---
