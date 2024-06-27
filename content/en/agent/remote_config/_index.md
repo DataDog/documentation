@@ -46,10 +46,16 @@ The following diagram illustrates how Remote Configuration works:
 3. Agents in your environments securely poll, receive, and automatically apply configuration updates from Datadog. Tracing libraries, deployed in your environments, communicate with Agents to request and receive configuration updates from Datadog.
 
 ## Configuration order precedence
-Configurations set by the highest priority source will take precedence in the active configuration displayed in Fleet Automation. Sources from highest to lowest priority:
-1. Remote Configuration issued configurations have priority over configuration values set through environment variables and agent configuration file (datadog.yaml). Note, configuration changes applied through Remote Configuration are not shown in your local configuration file (datadog.yaml).
-2. Environment variables set by tools like Helm override configuration values set through configuration file (datadog.yaml).
-3. Configuration files (datadog.yaml) that are managed locally or by configuration management tools like Ansible, Chef, and Puppet have the lowest priority and will be overridden by other configuration methods.
+Configurations set by higher-priority sources take precedence in the active configuration displayed in Fleet Automation. 
+
+Sources from highest to lowest priority:
+
+1. Remote Configuration
+   **Note**: Configuration changes applied through Remote Configuration are not shown in your local configuration file (`datadog.yaml`).
+2. Environment variables set by tools like Helm
+3. Configuration files (`datadog.yaml`) that are managed locally or by configuration management tools like Ansible, Chef, or Puppet
+
+Configurations issued by higher-priority sources override configurations issued by lower-priority sources.
 
 ## Supported products and feature capabilities
 The following products and features are supported with Remote Configuration:
