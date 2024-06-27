@@ -380,27 +380,27 @@ kind: Service
 metadata:
   annotations:
     ad.datadoghq.com/service.checks: |
-    { 
-      "postgres": 
-      { "instances": 
-        [ 
-          { 
-            "dbm":true, 
-            "host":"your-host-1.us-east-2.rds.amazonaws.com", 
-            "password":"<UNIQUE_PASSWORD>", 
-            "port":5432, 
-            "username":"<USERNAME>" 
-          }, 
-          { 
-            "dbm":true, 
-            "host":"your-host-2.us-east-2.rds.amazonaws.com", 
-            "password":"<UNIQUE_PASSWORD>", 
-            "port":5432, 
-            "username": "<USERNAME>" 
-          } 
-        ] 
-      } 
-    }
+      { 
+        "postgres": 
+        { "instances": 
+          [ 
+            { 
+              "dbm":true, 
+              "host":"your-host-1.us-east-2.rds.amazonaws.com", 
+              "password":"<UNIQUE_PASSWORD>", 
+              "port":5432, 
+              "username":"<USERNAME>" 
+            }, 
+            { 
+              "dbm":true, 
+              "host":"your-host-2.us-east-2.rds.amazonaws.com", 
+              "password":"<UNIQUE_PASSWORD>", 
+              "port":5432, 
+              "username": "<USERNAME>" 
+            } 
+          ] 
+        } 
+      }
 ```
 
 For Postgres 9.6, add the following settings to the instance config where host and port are specified:
