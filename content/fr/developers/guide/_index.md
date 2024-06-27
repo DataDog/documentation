@@ -21,7 +21,8 @@ title: Guides du développeur
     {{< nextlink href="getting_started/api/">}}Utiliser Postman avec les API Datadog{{< /nextlink >}}
     {{< nextlink href="developers/guide/calling-on-datadog-s-api-with-the-webhooks-integration">}}Appeler l'API de Datadog avec l'intégration Webhooks{{< /nextlink >}}
     {{< nextlink href="developers/guide/dogshell-quickly-use-datadog-s-api-from-terminal-shell">}}Dogshell{{< /nextlink >}}
-    {{< nextlink href="developers/guide/dogwrap">}}Appeler des commandes et générer des événements à partir de résultats{{< /nextlink >}}
+    {{< nextlink href="developers/guide/dogwrap">}}Appeler des commandes et générer des événements à partir de résultats.{{< /nextlink >}}
     {{< nextlink href="developers/guide/query-data-to-a-text-file-step-by-step">}}Guide pour interroger vos données et les enregistrer dans un fichier texte{{< /nextlink >}}
     {{< nextlink href="developers/guide/custom-python-package">}}Ajouter un package Python personnalisé à l'Agent{{< /nextlink >}}
+    {{< nextlink href="developers/guide/legacy">}}Créer un check de lʼAgent pour lʼAgent Datadog v5{{< /nextlink >}}
 {{< /whatsnext >}}
