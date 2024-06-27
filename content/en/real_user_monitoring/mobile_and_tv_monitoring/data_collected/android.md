@@ -246,8 +246,8 @@ Before data is uploaded to Datadog, it is stored in cleartext in your applicatio
 
 The RUM Android SDK allows you to get the data you need to Datadog while considering user bandwidth impact. The Datadog SDK batches and uploads events as follows:
 
-- On _event collected_, Datadog appends uncompressed events to a batch file (using a tag-length-value, or TLV encoding format)
-- On _upload_ (when the batch is considered "closed"), Datadog:
+- On _event collected_, the Datadog SDK appends uncompressed events to a batch file (using a tag-length-value, or TLV encoding format)
+- On _upload_ (when the batch is considered "closed"), the Datadog SDK:
   - Reads the batch and extract events
   - Drops redundant View events in RUM (no optimizations in other tracks)
   - Builds payloads specific to each track
