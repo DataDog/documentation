@@ -6714,8 +6714,6 @@ components:
         priority:
           description: Integer from 1 (high) to 5 (low) indicating alert severity.
           format: int64
-          maximum: 5
-          minimum: 1
           nullable: true
           type: integer
         query:
@@ -7804,8 +7802,7 @@ components:
         priority:
           description: Integer from 1 (high) to 5 (low) indicating alert severity.
           format: int64
-          maximum: 5
-          minimum: 1
+          nullable: true
           type: integer
         query:
           description: The monitor query.
