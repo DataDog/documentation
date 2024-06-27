@@ -582,7 +582,6 @@ Definition: Tags of the container
 
 
 
-
 ### `event.origin` {#event-origin-doc}
 Type: string
 
