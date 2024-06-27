@@ -1,5 +1,5 @@
 ---
-title: Troubleshooting
+title: Troubleshooting iOS SDK issues
 kind: documentation
 description: Learn how to troubleshoot issues with iOS Monitoring.
 aliases:

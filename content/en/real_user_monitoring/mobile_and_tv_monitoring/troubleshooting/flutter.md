@@ -1,5 +1,5 @@
 ---
-title: Troubleshooting
+title: Troubleshooting Flutter SDK issues
 kind: documentation
 description: Learn how to troubleshoot issues with Flutter Monitoring.
 aliases:

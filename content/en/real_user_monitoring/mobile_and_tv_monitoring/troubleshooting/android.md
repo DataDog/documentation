@@ -1,5 +1,5 @@
 ---
-title: Troubleshooting
+title: Troubleshooting Android SDK issues
 kind: documentation
 description: Learn how to troubleshoot issues with Android Monitoring.
 aliases:

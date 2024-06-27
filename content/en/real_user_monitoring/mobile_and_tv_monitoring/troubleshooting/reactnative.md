@@ -1,5 +1,5 @@
 ---
-title: Troubleshooting
+title: Troubleshooting React Native SDK issues
 kind: documentation
 description: Learn how to troubleshoot issues with React Native Monitoring.
 aliases:
