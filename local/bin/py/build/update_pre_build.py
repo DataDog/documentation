@@ -51,7 +51,8 @@ class Build:
             'akamai_mpulse',
             'avmconsulting_workday',
             'bottomline_mainframe',
-            'nerdvision'
+            'nerdvision',
+            'slack'
         ]        
 
     def load_config(self, build_configuration_file_path, integration_merge_configuration_file_path, disable_cache_on_retry=False):
