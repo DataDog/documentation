@@ -10,8 +10,6 @@ LLM Observability is not available in the US1-FED site.
 </div>
 {{% /site-region %}}
 
-<div class="alert alert-info">LLM Observability is in public beta.</a></div>
-
 ## Overview
 
 Your application can submit data to LLM Observability in two ways: with LLM Observability's [Python SDK][1], or with the LLM Observability [API][2].

@@ -1827,21 +1827,26 @@ menu:
       parent: service_catalog
       identifier: service_catalog_scorecards
       weight: 8
+    - name: Software Templates
+      url: service_catalog/software_templates
+      parent: service_catalog
+      identifier: software_templates
+      weight: 9
     - name: APIs
       url: service_catalog/apis
       parent: service_catalog
       identifier: service_catalog_apis
-      weight: 9
+      weight: 10
     - name: Integrations
       url: service_catalog/integrations
       parent: service_catalog
       identifier: service_catalog_integrations
-      weight: 10
+      weight: 11
     - name: Troubleshooting and Best Practices
       url: service_catalog/guides
       parent: service_catalog
       identifier: troubleshooting_best_practices
-      weight: 11
+      weight: 12
     - name: API Catalog
       url: /api_catalog/
       pre: api-catalog
@@ -2310,7 +2315,7 @@ menu:
       url: service_management/app_builder/private_actions/private_action_credentials/
       parent: app_builder_private_actions
       identifier: app_builder_private_actions_creds
-      weight: 701   
+      weight: 701
     - name: Universal Service Monitoring
       url: universal_service_monitoring/
       pre: usm
@@ -4561,71 +4566,76 @@ menu:
       url: logs/explorer/saved_views/
       parent: log_explorer
       weight: 513
+    - name: Workspaces
+      url: logs/workspaces/
+      parent: log_management
+      identifier: logs_workspaces
+      weight: 6
     - name: Error Tracking
       url: logs/error_tracking/
       parent: log_management
       identifier: log_management_error_tracking
-      weight: 6
+      weight: 7
     - name: Error Tracking Explorer
       url: logs/error_tracking/explorer
       parent: log_management_error_tracking
       identifier: log_management_error_tracking_explorer
-      weight: 601
+      weight: 701
     - name: Issue States
       url: logs/error_tracking/issue_states
       parent: log_management_error_tracking
       identifier: log_management_error_tracking_states
-      weight: 602
+      weight: 702
     - name: Track Browser and Mobile Errors
       identifier: log_management_error_tracking_browser_and_mobile
       url: logs/error_tracking/browser_and_mobile
       parent: log_management_error_tracking
-      weight: 603
+      weight: 703
     - name: Track Backend Errors
       identifier: log_management_error_tracking_backend
       url: logs/error_tracking/backend
       parent: log_management_error_tracking
-      weight: 604
+      weight: 704
     - name: Default Grouping
       url: logs/error_tracking/default_grouping
       parent: log_management_error_tracking
       identifier: log_management_error_tracking_default_grouping
-      weight: 605
+      weight: 705
     - name: Custom Grouping
       url: logs/error_tracking/custom_grouping
       parent: log_management_error_tracking
       identifier: log_management_error_tracking_custom_grouping
-      weight: 606
+      weight: 706
     - name: Manage Data Collection
       url: logs/error_tracking/manage_data_collection
       parent: log_management_error_tracking
       identifier: log_management_error_tracking_manage_data_collection
-      weight: 607
+      weight: 707
     - name: Identify Suspect Commits
       url: logs/error_tracking/suspect_commits
       parent: log_management_error_tracking
       identifier: log_management_error_tracking_suspect_commits
-      weight: 608
+      weight: 708
     - name: Troubleshooting
       url: error_tracking/troubleshooting
       parent: log_management_error_tracking
       identifier: log_management_error_tracking_troubleshooting
-      weight: 609
+      weight: 709
     - name: Guides
       url: logs/guide/
       parent: log_management
       identifier: log_guides
-      weight: 7
+      weight: 8
     - name: Data Security
       url: data_security/logs/
       parent: log_management
       identifier: log_security
-      weight: 8
+      weight: 9
     - name: Troubleshooting
       url: logs/troubleshooting
       parent: log_management
       identifier: log_troubleshooting
-      weight: 9
+      weight: 10
     - name: Security Overview
       url: security/
       pre: security-platform
@@ -5377,12 +5387,12 @@ menu:
       parent: continuous_testing_cicd_integrations
       identifier: continuous_testing_cicd_integrations_jenkins
       weight: 206
-    - name: Upload Application
+    - name: Bitrise (Upload Application)
       url: /continuous_testing/cicd_integrations/bitrise_upload
       parent: continuous_testing_cicd_integrations
       identifier: continuous_testing_cicd_integrations_bitrise_upload
       weight: 207
-    - name: Run Tests
+    - name: Bitrise (Run Tests)
       url: /continuous_testing/cicd_integrations/bitrise_run
       parent: continuous_testing_cicd_integrations
       identifier: continuous_testing_cicd_integrations_bitrise_run
@@ -5523,31 +5533,6 @@ menu:
       parent: mobile_and_tv_monitoring
       identifier: rum_mobile_supported_versions
       weight: 209
-    - name: Product Analytics
-      identifier: rum_product_analytics
-      url: real_user_monitoring/product_analytics
-      parent: rum
-      weight: 3
-    - name: Sankey Diagrams
-      url: real_user_monitoring/product_analytics/sankey
-      parent: rum_product_analytics
-      identifier: rum_sankey
-      weight: 301
-    - name: Funnel Analysis
-      url: real_user_monitoring/product_analytics/funnel_analysis
-      parent: rum_product_analytics
-      identifier: rum_funnel_analysis
-      weight: 302
-    - name: User Retention
-      url: real_user_monitoring/product_analytics/user_retention
-      parent: rum_product_analytics
-      identifier: rum_user_retention
-      weight: 303
-    - name: Heatmaps
-      url: real_user_monitoring/product_analytics/heatmaps
-      parent: rum_product_analytics
-      identifier: rum_heatmaps
-      weight: 304
     - name: Platform
       identifier: real_user_monitoring_platform
       url: real_user_monitoring/platform
@@ -5643,6 +5628,11 @@ menu:
       parent: rum_session_replay_browser
       identifier: rum_session_replay_troubleshooting
       weight: 104
+    - name: Playlists
+      url: real_user_monitoring/session_replay/playlists
+      parent: rum_session_replay
+      identifier: rum_session_replay_playlists
+      weight: 503
     - name: Exploring RUM Data
       url: real_user_monitoring/explorer/
       parent: rum
@@ -5753,6 +5743,122 @@ menu:
       url: data_security/real_user_monitoring/
       parent: rum
       weight: 10
+    - name: Product Analytics
+      url: product_analytics
+      pre: product-analytics
+      identifier: product_analytics
+      parent: digital_experience_heading
+      weight: 50000
+    - name: User Retention
+      url: product_analytics/user_retention
+      parent: product_analytics
+      identifier: pa_user_retention
+      weight: 1
+    - name: Journeys
+      url: product_analytics/journeys
+      parent: product_analytics
+      identifier: pa_journeys
+      weight: 2
+    - name: Funnel Analysis
+      url: product_analytics/journeys/funnel_analysis
+      parent: pa_journeys
+      identifier: pa_funnel_analysis
+      weight: 201
+    - name: Sankey Diagrams
+      url: product_analytics/journeys/sankey
+      parent: pa_journeys
+      identifier: pa_sankey
+      weight: 202
+    - name: Heatmaps
+      url: product_analytics/heatmaps
+      parent: product_analytics
+      identifier: pa_heatmaps
+      weight: 3
+    - name: Session Replay
+      url: product_analytics/session_replay/
+      parent: product_analytics
+      identifier: pa_session_replay
+      weight: 4
+    - name: Mobile
+      url: product_analytics/session_replay/mobile
+      parent: pa_session_replay
+      identifier: pa_session_replay_mobile
+      weight: 401
+    - name: Setup
+      url: product_analytics/session_replay/mobile/setup_and_configuration
+      parent: pa_session_replay_mobile
+      identifier: pa_session_replay_mobile_setup
+      weight: 101
+    - name: Privacy Options
+      url: product_analytics/session_replay/mobile/privacy_options
+      parent: pa_session_replay_mobile
+      identifier: pa_session_replay_mobile_privacy
+      weight: 102
+    - name: Impact on App Performance
+      url: product_analytics/session_replay/mobile/app_performance
+      parent: pa_session_replay_mobile
+      identifier: pa_session_replay_mobile_app_performance
+      weight: 103
+    - name: Troubleshooting
+      url: product_analytics/session_replay/mobile/troubleshooting
+      parent: pa_session_replay_mobile
+      identifier: pa_session_replay_mobile_troubleshooting
+      weight: 104
+    - name: Browser
+      url: product_analytics/session_replay/browser
+      parent: pa_session_replay
+      identifier: pa_session_replay_browser
+      weight: 402
+    - name: Privacy Options
+      url: product_analytics/session_replay/browser/privacy_options
+      parent: pa_session_replay_browser
+      identifier: pa_session_replay_browser_privacy_options
+      weight: 102
+    - name: Developer Tools
+      url: product_analytics/session_replay/browser/developer_tools
+      parent: pa_session_replay_browser
+      identifier: pa_session_replay_browser_developer_tools
+      weight: 103
+    - name: Troubleshooting
+      url: product_analytics/session_replay/browser/troubleshooting
+      parent: pa_session_replay_browser
+      identifier: pa_session_replay_browser_troubleshooting
+      weight: 104
+    - name: Analytics Explorer
+      url: product_analytics/analytics_explorer/
+      parent: product_analytics
+      identifier: pa_analytics_explorer
+      weight: 5
+    - name: Search Syntax
+      url: product_analytics/analytics_explorer/search_syntax
+      parent: pa_analytics_explorer
+      identifier: pa_analytics_search_syntax
+      weight: 501
+    - name: Group
+      url: product_analytics/analytics_explorer/group
+      parent: pa_analytics_explorer
+      identifier: pa_analytics_group
+      weight: 502
+    - name: Visualize
+      url: product_analytics/analytics_explorer/visualize
+      parent: pa_analytics_explorer
+      identifier: visualize
+      weight: 503
+    - name: Events
+      url: product_analytics/analytics_explorer/events
+      parent: pa_analytics_explorer
+      identifier: pa_analytics_events
+      weight: 504
+    - name: Export
+      url: product_analytics/analytics_explorer/export
+      parent: pa_analytics_explorer
+      identifier: pa_analytics_export
+      weight: 505
+    - name: Segmentation
+      url: product_analytics/segmentation/
+      parent: product_analytics
+      identifier: pa_segmentation
+      weight: 6
     - name: Account Management
       url: account_management/
       pre: cog-2
@@ -5914,26 +6020,31 @@ menu:
       parent: account_management_audit_trail
       identifier: account_management_audit_trail_forwarding
       weight: 902
+    - name: Safety Center
+      url: account_management/safety_center/
+      parent: account_management
+      identifier: safety_center
+      weight: 10
     - name: Plan and Usage
       url: account_management/plan_and_usage/
       parent: account_management
       identifier: account_management_plan_and_usage
-      weight: 10
+      weight: 11
     - name: Cost Details
       identifier: account_management_cost_details
       url: account_management/plan_and_usage/cost_details/
       parent: account_management_plan_and_usage
-      weight: 1001
+      weight: 1101
     - name: Usage Details
       identifier: account_management_usage_details
       url: account_management/plan_and_usage/usage_details/
       parent: account_management_plan_and_usage
-      weight: 1002
+      weight: 1102
     - name: Billing
       identifier: account_management_billing
       url: account_management/billing/
       parent: account_management
-      weight: 11
+      weight: 12
     - name: Product Allotments
       url: account_management/billing/product_allotments
       parent: account_management_billing
@@ -5942,12 +6053,12 @@ menu:
       identifier: account_management_multi_org_accounts
       url: account_management/multi_organization/
       parent: account_management
-      weight: 12
+      weight: 13
     - name: Guides
       identifier: account_management_guides
       url: account_management/guide/
       parent: account_management
-      weight: 13
+      weight: 14
     - name: Data Security
       url: data_security/
       pre: security-lock

@@ -59,18 +59,39 @@ apm_config:
 {{< /code-block >}}
 
 {{% /tab %}}
-{{% tab "Kubernetes Helm" %}}
+{{% tab "Kubernetes" %}}
+#### Datadog Operator
 
-In the `traceAgent` section of the `values.yaml` file, add `DD_APM_FILTER_TAGS_REJECT` in the `env` section, then [spin up helm as usual][1]. For multiple tags, separate each key:value with a space.
+{{< code-block lang="yaml" filename="datadog-agent.yaml" >}}
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  override:
+    nodeAgent:
+      containers:
+        trace-agent:
+          env:
+            - name: DD_APM_FILTER_TAGS_REJECT
+              value: tag_key1:tag_val2 tag_key2:tag_val2
+{{< /code-block >}}
 
-{{< code-block lang="yaml" filename="values.yaml" >}}
-traceAgent:
-  # agents.containers.traceAgent.env -- Additional environment variables for the trace-agent container
-    env:
-      - name: DD_APM_FILTER_TAGS_REJECT
-        value: tag_key1:tag_val2 tag_key2:tag_val2
+{{% k8s-operator-redeploy %}}
+
+#### Helm
+
+{{< code-block lang="yaml" filename="datadog-values.yaml" >}}
+agents:
+  containers:
+    traceAgent:
+      env:
+        - name: DD_APM_FILTER_TAGS_REJECT
+          value: tag_key1:tag_val2 tag_key2:tag_val2
 
 {{< /code-block >}}
+
+{{% k8s-helm-redeploy %}}
 
 [1]: /agent/kubernetes/?tab=helm#installation
 {{% /tab %}}
