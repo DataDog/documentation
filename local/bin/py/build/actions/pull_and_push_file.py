@@ -26,7 +26,6 @@ def pull_and_push_file(content, content_dir):
     """
     base_path = pathlib.Path(content["options"].get("base_path", content_dir))
     with open("".join(content["globs"]), mode="r+") as f:
-        source_comment = f"<!--  SOURCED FROM https://github.com/DataDog/{content['repo_name']} -->\n\n"
         file_content = f.read()
         boundary = re.compile(r'^-{3,}$', re.MULTILINE)
         split = boundary.split(file_content, 2)
@@ -63,4 +62,4 @@ def pull_and_push_file(content, content_dir):
             mode="w+",
             encoding="utf-8",
         ) as f:
-            f.write(source_comment + file_content)
+            f.write(file_content)
