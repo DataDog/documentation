@@ -54,7 +54,7 @@ Concede a un rol la capacidad de crear y modificar [índices de logs][5]. Esto i
 
 - Configurar [filtros de índices][6] para los que los logs deben enrutarse a un índice.
 - Configura la [conservación de logs][7] para un índice.
-- Concede a otro rol los permisos para [datos de índices de lectura de logs](#logs_read_index_data) y para [filtros de exclusión de escritura de logs](#logs_write_exclusion_filters), delimitados a un índice específico.
+- Concede a otro rol los permisos para [datos de índices de lectura de logs](#logs_read_index_data) y para [filtros de exclusión de escritura de logs](#logs_write_exclusion_filters), delimitados a un índice específico
 
 Este permiso es global y permite tanto la creación de nuevos índices, como la edición de los índices ya existentes.
 
@@ -245,7 +245,7 @@ Esta vista muestra:
 
 Crea una nueva consulta de restricción definiendo su filtro de consulta. La nueva consulta aparece en lista de restricciones sin ningún rol asociado.
 
-{{< img src="account_management/rbac/logs_rq-create.mp4" alt="Vídeo 'Crear una consulta de restricción'"=true style="width:70%;">}}
+{{< img src="account_management/rbac/logs_rq-create.mp4" alt="Vídeo 'Crear una restricción de consultas'"=true style="width:70%;">}}
 
 ### Asignar un rol a una consulta de restricción
 
@@ -253,7 +253,7 @@ Elige el rol donde se encuentre y asígnalo a la consulta de restricción previs
 
 **Nota**: Ten en cuenta que a un rol no se le puede asignar más de una consulta de restricción. Es decir, cuando se asigna un rol a una consulta de restricción, pierde la conexión con la consulta de restricción a la que estaba asignado.
 
-{{< img src="account_management/rbac/logs_rq-assign_roles.mp4" alt="Vídeo 'Asignar un rol a una consulta de restricción'"=true style="width:70%;">}}
+{{< img src="account_management/rbac/logs_rq-assign_roles.mp4" alt="Vídeo 'Asignar un rol a una restricción de consultas'"=true style="width:70%;">}}
 
 Del mismo modo, utiliza la misma interacción "Move" (Mover) para conceder `Unrestricted Access` a un rol o, a la inversa, para convertirlo en un rol `No Access`.
 
