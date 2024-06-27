@@ -79,13 +79,13 @@ When a user visits the URL for a specific cell, the notebook is opened to show t
 
 <div class="alert alert-info">Only PNG, JPG, JPEG, and GIF file types are supported. Uploads have a max file size of 4MB.</a></div>
 
-You can add images to your notebook using either the [image cell](#image-cell) or the  [markdown editor](#markdown-editor).
+You can add images to your notebook using either the [image cell](#image-cell) or the [Markdown editor](#markdown-editor).
 
 ### Image cell
 
-This approach places the image in a separate cell from your text, but provides options for resizing and justifying the image as well as adding a caption. Images uploaded by the Image cell are hosted by Datadog.
+This approach places the image in a separate cell from your text, and provides options for resizing, aligning, and captioning the image. Images uploaded by the image cell are hosted by Datadog.
 
-To add in image, click the **Image** cell option in the **Add New Cell** menu. 
+To add an image, click the **Image** cell option in the **Add New Cell** menu. 
 
 {{< img src="notebooks/image_cell.png" alt="Image cell in the Add New Cell menu of cells" style="width:70%;" >}}
 
@@ -102,10 +102,10 @@ Click the icons on the cell action tray to adjust the size, alignment, add a cap
 
 This approach places the image inline with your text, but does not provide options for resizing the image.
 
-Enter the edit mode on any markdown cell and use any of the following options to add the image:
+Enter the edit mode on any Markdown cell and use any of the following options to add the image:
 - Drop an image file into the text cell area.
 - Copy and paste the image directly into the text cell area.
-- Hyperlink an external image using the image widget in the header or by referencing the [official markdown guide][2]. **Note**: This option will not upload the image to be hosted by Datadog. 
+- Hyperlink an external image using the image widget in the header or by referencing the [official Markdown guide][2]. **Note**: This option does not upload the image to be hosted by Datadog. 
 
 You can preview the image in the Preview tab before saving it to your notebook.
 
