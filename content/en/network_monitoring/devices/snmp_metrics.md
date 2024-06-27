@@ -104,30 +104,29 @@ To use Autodiscovery with Network Device Monitoring:
 {{% tab "SNMPv2" %}}
 
 ```yaml
-listeners:
-  - name: snmp
-snmp_listener:
-  workers: 100  # number of workers used to discover devices concurrently
-  discovery_interval: 3600  # interval between each autodiscovery in seconds
-  loader: core  # use core check implementation of SNMP integration. recommended
-  use_device_id_as_hostname: true  # recommended
-  configs:
-    - network_address: 10.10.0.0/24  # CIDR subnet
-      loader: core
-      snmp_version: 2
-      port: 161
-      community_string: '***'  # enclose with single quote
-      tags:
-      - "key1:val1"
-      - "key2:val2"
-    - network_address: 10.20.0.0/24
-      loader: core
-      snmp_version: 2
-      port: 161
-      community_string: '***'
-      tags:
-      - "key1:val1"
-      - "key2:val2"
+network_devices:
+  autodiscovery:
+    workers: 100  # number of workers used to discover devices concurrently
+    discovery_interval: 3600  # interval between each autodiscovery in seconds
+    loader: core  # use core check implementation of SNMP integration. recommended
+    use_device_id_as_hostname: true  # recommended
+    configs:
+      - network_address: 10.10.0.0/24  # CIDR subnet
+        loader: core
+        snmp_version: 2
+        port: 161
+        community_string: '***'  # enclose with single quote
+        tags:
+        - "key1:val1"
+        - "key2:val2"
+      - network_address: 10.20.0.0/24
+        loader: core
+        snmp_version: 2
+        port: 161
+        community_string: '***'
+        tags:
+        - "key1:val1"
+        - "key2:val2"
 ```
 
 {{% /tab %}}
@@ -135,40 +134,41 @@ snmp_listener:
 {{% tab "SNMPv3" %}}
 
 ```yaml
-listeners:
-  - name: snmp
-snmp_listener:
-  workers: 100  # number of workers used to discover devices concurrently
-  discovery_interval: 3600  # interval between each autodiscovery in seconds
-  loader: core  # use core check implementation of SNMP integration. recommended
-  use_device_id_as_hostname: true  # recommended
-  configs:
-    - network_address: 10.10.0.0/24  # CIDR subnet
-      snmp_version: 3
-      user: 'user'
-      authProtocol: 'SHA256'  # choices: MD5, SHA, SHA224, SHA256, SHA384, SHA512
-      authKey: 'fakeKey'  # enclose with single quote
-      privProtocol: 'AES256'  # choices: DES, AES, AES192, AES192C, AES256, AES256C
-      privKey: 'fakePrivKey'  # enclose with single quote
-      tags:
-        - 'key1:val1'
-        - 'key2:val2'
-    - network_address: 10.20.0.0/24
-      snmp_version: 3
-      user: 'user'
-      authProtocol: 'SHA256'
-      authKey: 'fakeKey'
-      privProtocol: 'AES256'
-      privKey: 'fakePrivKey'
-      tags:
-        - 'key1:val1'
-        - 'key2:val2'
+network_devices:
+  autodiscovery:
+    workers: 100  # number of workers used to discover devices concurrently
+    discovery_interval: 3600  # interval between each autodiscovery in seconds
+    loader: core  # use core check implementation of SNMP integration. recommended
+    use_device_id_as_hostname: true  # recommended
+    configs:
+      - network_address: 10.10.0.0/24  # CIDR subnet
+        snmp_version: 3
+        user: 'user'
+        authProtocol: 'SHA256'  # choices: MD5, SHA, SHA224, SHA256, SHA384, SHA512
+        authKey: 'fakeKey'  # enclose with single quote
+        privProtocol: 'AES256'  # choices: DES, AES, AES192, AES192C, AES256, AES256C
+        privKey: 'fakePrivKey'  # enclose with single quote
+        tags:
+          - 'key1:val1'
+          - 'key2:val2'
+      - network_address: 10.20.0.0/24
+        snmp_version: 3
+        user: 'user'
+        authProtocol: 'SHA256'
+        authKey: 'fakeKey'
+        privProtocol: 'AES256'
+        privKey: 'fakePrivKey'
+        tags:
+          - 'key1:val1'
+          - 'key2:val2'
 ```
 
 {{% /tab %}}
 {{< /tabs >}}
 
 **Note**: The Datadog Agent automatically configures the SNMP check with each of the IPs that are discovered. A discovered device is an IP that responds successfully when being polled using SNMP.
+
+**Note**: Make sure you are on Agent 7.53+ for this syntax. For previous versions, see the [previous config_template.yaml][10]
 
 ### Ping
 
@@ -209,29 +209,28 @@ To set up ping with Network Device Monitoring:
 
 {{% tab "Autodiscovery" %}}
 
-- To apply ping settings to all Autodiscovery subnets, create ping configuration under the `snmp_listener` section.
+- To apply ping settings to all Autodiscovery subnets, create ping configuration under the `network_devices.autodiscovery` section.
 
 	```yaml
-	listeners:
-	  - name: snmp
-	snmp_listener:
-	  workers: 100
-	  discovery_interval: 3600
-	  loader: core
-	  use_device_id_as_hostname: true
-	  configs:
-	    - network_address: 10.10.0.0/24
-	      loader: core
-	      snmp_version: 2
-	      port: 161
-	      community_string: '***'
-	      tags:
-	      - "key1:val1"
-	      - "key2:val2"
-	      ping:
-	        enabled: true            # (default false) enable the ping check
-	        linux:                   # (optional) Linux specific configuration
-	          use_raw_socket: true   # (optional, default false) send pings using a raw socket (see step 3 above)
+	network_devices:
+    autodiscovery:
+	    workers: 100
+	    discovery_interval: 3600
+	    loader: core
+	    use_device_id_as_hostname: true
+	    configs:
+	      - network_address: 10.10.0.0/24
+	        loader: core
+	        snmp_version: 2
+	        port: 161
+	        community_string: '***'
+	        tags:
+	        - "key1:val1"
+	        - "key2:val2"
+	        ping:
+	          enabled: true            # (default false) enable the ping check
+	          linux:                   # (optional) Linux specific configuration
+	            use_raw_socket: true   # (optional, default false) send pings using a raw socket (see step 3 above)
 	```
 
 {{% /tab %}}
@@ -266,3 +265,4 @@ ping:
 [7]: /agent
 [8]: /agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
 [9]: /agent/configuration/agent-commands/#agent-status-and-information
+[10]: https://github.com/DataDog/datadog-agent/blob/51dd4482466cc052d301666628b7c8f97a07662b/pkg/config/config_template.yaml#L855

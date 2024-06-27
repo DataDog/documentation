@@ -39,28 +39,27 @@ The Datadog Agent 7.27.0 introduces a new SNMP check version in Go that has both
 {{% tab "SNMPv2" %}}
 
 ```yaml
-listeners:
-  - name: snmp
-snmp_listener:
-  workers: 100  # number of workers used to discover devices concurrently
-  discovery_interval: 3600  # interval between each autodiscovery in seconds
-  loader: core  # use core check implementation of SNMP integration. recommended
-  use_device_id_as_hostname: true  # recommended
-  configs:
-    - network_address: 10.10.0.0/24  # CIDR subnet
-      snmp_version: 2
-      port: 161
-      community_string: '***'  # enclose with single quote
-      tags:
-      - "key1:val1"
-      - "key2:val2"
-    - network_address: 10.20.0.0/24
-      snmp_version: 2
-      port: 161
-      community_string: '***'
-      tags:
-      - "key1:val1"
-      - "key2:val2"
+network_devices:
+  autodiscovery:
+    workers: 100  # number of workers used to discover devices concurrently
+    discovery_interval: 3600  # interval between each autodiscovery in seconds
+    loader: core  # use core check implementation of SNMP integration. recommended
+    use_device_id_as_hostname: true  # recommended
+    configs:
+      - network_address: 10.10.0.0/24  # CIDR subnet
+        snmp_version: 2
+        port: 161
+        community_string: '***'  # enclose with single quote
+        tags:
+        - "key1:val1"
+        - "key2:val2"
+      - network_address: 10.20.0.0/24
+        snmp_version: 2
+        port: 161
+        community_string: '***'
+        tags:
+        - "key1:val1"
+        - "key2:val2"
 ```
 
 {{% /tab %}}
@@ -68,38 +67,39 @@ snmp_listener:
 {{% tab "SNMPv3" %}}
 
 ```yaml
-listeners:
-  - name: snmp
-snmp_listener:
-  workers: 100  # number of workers used to discover devices concurrently
-  discovery_interval: 3600  # interval between each autodiscovery in seconds
-  loader: core  # use core check implementation of SNMP integration. recommended
-  use_device_id_as_hostname: true  # recommended
-  configs:
-    - network_address: 10.10.0.0/24  # CIDR subnet
-      snmp_version: 3
-      user: 'user'
-      authProtocol: 'SHA256'  # choices: MD5, SHA, SHA224, SHA256, SHA384, SHA512
-      authKey: 'fakeKey'  # enclose with single quote
-      privProtocol: 'AES256'  # choices: DES, AES (128 bits), AES192, AES192C, AES256, AES256C
-      privKey: 'fakePrivKey'  # enclose with single quote
-      tags:
-        - 'key1:val1'
-        - 'key2:val2'
-    - network_address: 10.20.0.0/24
-      snmp_version: 3
-      user: 'user'
-      authProtocol: 'SHA256'
-      authKey: 'fakeKey'
-      privProtocol: 'AES256'
-      privKey: 'fakePrivKey'
-      tags:
-        - 'key1:val1'
-        - 'key2:val2'
+network_devices:
+  autodiscovery:
+    workers: 100  # number of workers used to discover devices concurrently
+    discovery_interval: 3600  # interval between each autodiscovery in seconds
+    loader: core  # use core check implementation of SNMP integration. recommended
+    use_device_id_as_hostname: true  # recommended
+    configs:
+      - network_address: 10.10.0.0/24  # CIDR subnet
+        snmp_version: 3
+        user: 'user'
+        authProtocol: 'SHA256'  # choices: MD5, SHA, SHA224, SHA256, SHA384, SHA512
+        authKey: 'fakeKey'  # enclose with single quote
+        privProtocol: 'AES256'  # choices: DES, AES (128 bits), AES192, AES192C, AES256, AES256C
+        privKey: 'fakePrivKey'  # enclose with single quote
+        tags:
+          - 'key1:val1'
+          - 'key2:val2'
+      - network_address: 10.20.0.0/24
+        snmp_version: 3
+        user: 'user'
+        authProtocol: 'SHA256'
+        authKey: 'fakeKey'
+        privProtocol: 'AES256'
+        privKey: 'fakePrivKey'
+        tags:
+          - 'key1:val1'
+          - 'key2:val2'
 ```
 
 {{% /tab %}}
 {{< /tabs >}}
+
+**Note**: Make sure you are on Agent 7.53+ for this syntax. For previous versions, see the [previous config_template.yaml][1]
 
 ### Migrating custom profiles (independent of deployment)
 
@@ -183,3 +183,5 @@ metrics_tags:
     symbol: sysName
     tag: snmp_host
 {{< /code-block >}}
+
+[1]: https://github.com/DataDog/datadog-agent/blob/51dd4482466cc052d301666628b7c8f97a07662b/pkg/config/config_template.yaml#L855
