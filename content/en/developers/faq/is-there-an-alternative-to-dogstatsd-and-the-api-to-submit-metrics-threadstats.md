@@ -6,7 +6,7 @@ further_reading:
   tag: "Source Code"
   text: "Threadstats Source code"
 - link: "http://datadogpy.readthedocs.org/en/latest/#datadog-threadstats-module"
-  tag: "Read The Doc"
+  tag: "External Site"
   text: "Threadstats Documentation"
 ---
 

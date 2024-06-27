@@ -1,6 +1,5 @@
 ---
 title: Agent ランタイムコンフィギュレーション管理
-kind: ドキュメント
 further_reading:
   - link: /agent/troubleshooting/debug_mode/
     tag: Agent のトラブルシューティング

@@ -1,21 +1,21 @@
 ---
-title: Enabling ASM Code Security using single step instrumentation
+title: Enabling Code Security using single step instrumentation
 kind: documentation
 ---
 
-<div class="alert alert-info">Enabling ASM code security using single step instrumentation is in beta.</div>
+<div class="alert alert-info">Enabling Code Security using single step instrumentation is in beta.</div>
 
 
 ## Requirements
 
 - **Minimum Agent version 7.53.0**
 - **Minimum Datadog Helm chart version 3.62.0** (for Kubernetes deployments).
-- **Languages and architectures**: Single step ASM instrumentation for code security only supports tracing Java, Python (support available in private beta), Node.js, and .NET Core services on `x86_64` and `arm64` architectures.
+- **Languages and architectures**: Single step instrumentation for Code Security only supports tracing Java, Node.js, .NET Core services on `x86_64` and `arm64` architectures, and Python (support available in private beta).
 - **Operating systems**: Linux VMs (Debian, Ubuntu, Amazon Linux, CentOS/Red Hat, Fedora), Docker, Kubernetes clusters with Linux containers.
 
 ## Enabling in one step
 
-If you [install or update a Datadog Agent][1] with the **Enable Code Security (beta)** option selected, the Agent is installed and configured to enable ASM. This allows you to automatically instrument your application, without any additional installation or configuration steps. Restart services for this instrumentation to take effect.
+If you [install or update a Datadog Agent][1] with the **Enable Code Security** option selected, the Agent is installed and configured to enable detection of code-level vulnerabilities in your applications. This allows you to automatically instrument your application, without any additional installation or configuration steps. Restart services for this instrumentation to take effect.
 
 
 {{< img src="/security/application_security/single_step/asm_single_step_code_security.png" alt="Account settings Ubuntu setup page highlighting the toggle for Enabling APM instrumentation and ASM for Code Security." style="width:100%;" >}}
@@ -25,7 +25,7 @@ The following examples show how it works on each infrastructure type.
 {{< tabs >}}
 {{% tab "Linux host or VM" %}}
 
-With one command, you can install, configure, and start the Agent, while also instrumenting your services with ASM.
+With one command, you can install, configure, and start the Agent, while also instrumenting your services with Application Security options.
 
 For an Ubuntu host:
 
@@ -50,11 +50,11 @@ For an Ubuntu host:
 4. Restart the services on the host or VM.
 5. [Explore the performance observability of your services in Datadog][5].
 
-**Note:** To configure single-step for both ASM Threat Protection and Code Security, add the environment variables `DD_APPSEC_ENABLED=true` _and_ `DD_IAST_ENABLED=true` to your one-line installation command.
+**Note:** To configure single-step for **both** Code Security and Threat Protection, add **both** the `DD_IAST_ENABLED=true` _and_ `DD_APPSEC_ENABLED=true` environment variables to your one-line installation command.
 
 ### Specifying tracing library versions {#lib-linux}
 
-By default, enabling APM on your server installs support for Java, Python, Node.js, and .NET Core services. If you only have services implemented in some of these languages, set `DD_APM_INSTRUMENTATION_LIBRARIES` in your one-line installation command:
+By default, enabling APM on your server installs support for Java, Node.js, .NET Core, and Python services. If you only have services implemented in some of these languages, set `DD_APM_INSTRUMENTATION_LIBRARIES` in your one-line installation command:
 
 ```shell
 DD_APM_INSTRUMENTATION_LIBRARIES="java:1.25.0,python" DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="<YOUR_DD_SITE>" DD_APM_INSTRUMENTATION_ENABLED=host DD_IAST_ENABLED=true  DD_ENV=staging bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
@@ -64,10 +64,10 @@ You can optionally provide a version number for the tracing library by placing a
 
 Supported languages include:
 
-- .NET (`dotnet`)
-- Python (`python`)
 - Java (`java`)
 - Node.js (`js`)
+- .NET (`dotnet`)
+- Python (`python`)
 
 **Note**: For the Node.js tracing library, different versions of Node.js are compatible with different versions of the Node.js tracing library. See [DataDog/dd-trace-js: JavaScript APM Tracer][6] for more information.
 
@@ -136,10 +136,10 @@ You can optionally provide a version number for the tracing library by placing a
 
 Supported languages include:
 
-- .NET (`dotnet`)
-- Python (`python`)
 - Java (`java`)
 - Node.js (`js`)
+- .NET (`dotnet`)
+- Python (`python`)
 
 **Note**: For the Node.js tracing library, different versions of Node.js are compatible with different versions of the Node.js tracing library. See [DataDog/dd-trace-js: JavaScript APM Tracer][7] for more information.
 
@@ -235,7 +235,7 @@ For more information on Kubernetes single step instrumentation, see the followin
 {{% /tab %}}
 {{< /tabs >}}
 
-## Removing Single Step APM and ASM instrumentation from your Agent
+## Removing Single Step APM and Application Security instrumentation from your Agent
 
 If you don't want to collect trace data for a particular service, host, VM, or container, complete the follow steps:
 
@@ -253,7 +253,7 @@ Run the following commands and restart the service to stop injecting the library
    ```
 2. Restart the service.
 
-3. To disable ASM for code security, remove the `DD_IAST_ENABLED=true` environment variable from your application configuration, and restart your service.
+3. To disable Code Security, remove the `DD_IAST_ENABLED=true` environment variable from your application configuration, and restart your service.
 
 
 
@@ -267,7 +267,7 @@ Run the following commands and restart the service to stop injecting the library
    ```
 2. Restart the service.
 
-3. To disable ASM for code security, remove the `DD_IAST_ENABLED=true` environment variable from your application configuration, and restart your service.
+3. To disable Code Security, remove the `DD_IAST_ENABLED=true` environment variable from your application configuration, and restart your service.
 {{% /tab %}}
 
 {{% tab "Kubernetes" %}}
@@ -281,7 +281,7 @@ Run the following commands and restart the service to stop injecting the library
          labels:
            admission.datadoghq.com/enabled: "false"
 
-<div class="alert alert-info"> You can disable ASM code security while keeping APM up by adding the <code>DD_IAST_ENABLED=false</code> environment variable to your deployments.</div>
+<div class="alert alert-info"> You can disable Code Security while keeping APM up by adding the <code>DD_IAST_ENABLED=false</code> environment variable to your deployments.</div>
 
 {{% /tab %}}
 

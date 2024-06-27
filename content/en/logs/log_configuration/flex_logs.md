@@ -8,6 +8,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/flex-logging"
   tag: "Blog"
   text: "Store and analyze high-volume logs efficiently with Flex Logs"
+- link: "https://www.datadoghq.com/blog/monitor-dns-logs-for-network-and-security-datadog/"
+  tag: "Blog"
+  text: "Monitor DNS logs for network and security analysis"
 - link: "/logs/log_configuration/indexes"
   tag: "Documentation"
   text: "Log Indexes"
@@ -34,7 +37,7 @@ Flex Logs is set up within log index configurations. [Index filters][1] that app
 
 Configure Flex Tier in the [Logs Index Configuration][2] page:
 
-1. Go to [**Logs > Configuration > Indexes**][2].
+1. Go to [**Logs > Pipelines > Indexes**][2].
 2. Edit the index you wish to enable with Flex Logs or create a new index.
 3. Select **Flex Tier** and set the retention under *Configure Storage Tier and Retention*.
 

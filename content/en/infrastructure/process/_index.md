@@ -102,6 +102,8 @@ Then, upgrade your Helm chart:
 helm upgrade -f datadog-values.yaml <RELEASE_NAME> datadog/datadog
 ```
 
+**Note**: Running the Agent as a container still allows you to collect host processes.
+
 [1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
 {{% /tab %}}
 {{% tab "Datadog Operator" %}}
@@ -124,6 +126,8 @@ spec:
 ```
 
 {{% k8s-operator-redeploy %}}
+
+**Note**: Running the Agent as a container still allows you to collect host processes.
 
 {{% /tab %}}
 {{% tab "Kubernetes (Manual)" %}}
@@ -451,7 +455,7 @@ When you inspect a dependency in the [Network Analytics][11] page, you can view 
 
 ## Real-time monitoring
 
-While actively working with the Live Processes, metrics are collected at 2s resolution. This is important for volatile metrics such as CPU. In the background, for historical context, metrics are collected at 10s resolution.
+Processes are normally collected at 10s resolution. While actively working with the Live Processes page, metrics are collected at 2s resolution and displayed in real time, which is important for volatile metrics such as CPU. However, for historical context, metrics are ingested at the default 10s resolution.
 
 ## Additional information
 

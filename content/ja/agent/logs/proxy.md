@@ -9,7 +9,6 @@ further_reading:
 - link: /tracing/
   tag: ドキュメント
   text: トレースの収集
-kind: documentation
 title: TCP Agent のログ用プロキシ
 ---
 
@@ -83,7 +82,7 @@ logs_config:
 
 ```
 logs_config:
-  use_tcp: true
+  force_use_tcp: true
   logs_dd_url: "<プロキシサーバードメイン>:10514"
   logs_no_ssl: true
 ```
@@ -212,7 +211,7 @@ backend datadog-logs
 次のコマンドで証明書をダウンロードしてください:
 
 * `sudo apt-get install ca-certificates` (Debian、Ubuntu)
-* `yum install ca-certificates` (CentOS、Redhat) 
+* `yum install ca-certificates` (CentOS、Redhat)
 
 成功した場合、CentOS、Redhat の場合、ファイルは `/etc/ssl/certs/ca-bundle.crt` にあります。
 
@@ -231,7 +230,7 @@ HAProxy コンフィギュレーションが完成したら、リロードする
 
 ```yaml
 logs_config:
-  use_tcp: true
+  force_use_tcp: true
   logs_dd_url: myProxyServer.myDomain:10514
 ```
 

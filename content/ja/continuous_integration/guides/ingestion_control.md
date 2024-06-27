@@ -7,7 +7,6 @@ further_reading:
 - link: https://www.datadoghq.com/pricing/?product=ci-visibility#ci-visibility
   tag: 料金
   text: CI Visibility の価格を見る
-kind: ガイド
 title: CI Visibility の取り込み制御
 ---
 

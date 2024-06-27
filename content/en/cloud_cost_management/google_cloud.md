@@ -1,6 +1,5 @@
 ---
 title: Google Cloud
-kind: documentation
 disable_toc: false
 further_reading:
 - link: "/cloud_cost_management/"
@@ -15,7 +14,7 @@ further_reading:
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Cloud Cost Management is not supported for this site.</div>
+<div class="alert alert-warning">Cloud Cost Management is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 ## Overview

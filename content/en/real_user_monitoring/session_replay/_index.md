@@ -40,11 +40,13 @@ Mobile Session Replay expands visibility into your mobile applications by visual
 
 Learn more about the [Session Replay for Mobile][4].
 
-## Data retention
+## Extend data retention
 
 By default, Session Replay data is retained for 30 days.
 
-To extend retention to 15 months, you can enable _Extended Retention_ on individual session replays. These sessions must be non-active (the user has completed their experience).
+To extend Session Replay data retention to 15 months, you can enable _Extended Retention_ on individual session replays. These sessions must be non-active (the user has completed their experience).
+
+To access any Session Replay at a later time, Datadog recommends saving the URL or adding it to a [Playlist][8].
 
 Extended Retention only applies to Session Replay and does not include associated events. The 15 months start when Extended Retention is enabled, not when the session is collected.
 

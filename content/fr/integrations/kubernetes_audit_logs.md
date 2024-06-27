@@ -1,7 +1,7 @@
 ---
 title: Logs d'audit Kubernetes
 name: kubernetes_audit_logs
-kind: integration
+custom_kind: integration
 description: Effectuez le suivi de tous les événements ce qui se produisent dans vos clusters Kubernetes
 short_description: Surveillez vos clusters Kubernetes
 dependencies:

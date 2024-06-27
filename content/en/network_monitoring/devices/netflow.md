@@ -18,6 +18,8 @@ further_reading:
 
 Use NetFlow Monitoring in Datadog to visualize and monitor your flow records from your NetFlow-enabled devices.
 
+{{< img src="network_device_monitoring/netflow/home.png" alt="The NetFlow Monitoring page containing tabs for top sources, destinations, protocols, source ports, destination ports, and device trends" style="width:100%;" >}}
+
 ## Installation
 
 To use NetFlow Monitoring with Network Device Monitoring, ensure you are using the [Agent][1] version 7.45 or newer.
@@ -79,11 +81,120 @@ From the **Configuration** tab in NetFlow, click **Add Enrichment** to upload th
 
 ## Visualization
 
-You can find the NetFlow page on the [Network Devices page][5].
-{{< img src="network_device_monitoring/netflow/netflow_page.png" alt="NetFlow Page" width="80%" >}}
+You can access the data collected by NetFlow Monitoring on the [**NetFlow** page][5]. Hover over a flow from the list for additional information about hosts, pods, and containers, and access related network connections.
 
-This data is also available in Dashboards, Notebooks, and more for more precise queries and for correlating with other sources of data.
-{{< img src="network_device_monitoring/netflow/notebook.png" alt="Notebook" width="80%" >}}
+{{< img src="network_device_monitoring/netflow/information.png" alt="Hover over a flow aggregated from a device emitting netflow to access related network connections" width="100%" >}}
+
+When creating a [NetFlow monitor][6], you should consider the following fields with respect to the source IP or destination IP from the perspective of the device. These fields provide insights into network traffic patterns and help with optimizing performance and security.
+
+### Interface information
+
+The following fields represent details about the ingress and egress interfaces.
+
+| Field Name | Field Description |
+|---|---|
+| Egress Interface Alias | Alias of the egress interface. |
+| Egress Interface Index | Index of the egress interface. |
+| Egress Interface Name | Name of the egress interface. |
+| Ingress Interface Alias | Alias of the ingress interface. |
+| Ingress Interface Index | Index of the ingress interface. |
+| Ingress Interface Name | Name of the ingress interface. |
+
+### Device information
+
+The following fields represent details related to the device generating NetFlow records.
+
+| Field Name | Field Description |
+|---|---|
+| Device IP | IP address used to map to a device in NDM for enrichment purposes. |
+| Exporter IP | IP address from which NetFlow packets originate. |
+| Device Model | Model of the device. |
+| Device Name | Name of the device. |
+| Device Namespace | Namespace of the device. |
+| Device Vendor | Vendor of the device. |
+
+### Flow details
+
+The following fields represent characteristics of the network flow.
+
+| Field Name | Field Description |
+|---|---|
+| Direction | Indicates whether the flow is inbound or outbound. |
+| Start Time | Timestamp of the first network packet between the source and destination IP addresses. |
+| End Time | Timestamp of the last network packet between the source and destination IP addresses. |
+| Ether Type | Type of Ethernet frame encapsulation (IPv4 or IPv6). |
+| Flow Type | Type of NetFlow data format (IPFIX, sFlow5, NetFlow5, NetFlow9, or Unknown). |
+| IP Protocol | Protocol used for communication (such as ICMP, TCP, or UDP). |
+| Next Hop IP | IP address of the next hop in the network path. |
+| TCP Flag | Union of all TCP flags observed over the life of the flow. |
+| Bytes | Total number of bytes transferred. |
+| Packets | Total number of packets transferred. |
+
+In addition to fields, you can also use out-of-the-box facets to start analyzing traffic patterns based on NetFlow destination and source IP addresses.
+
+### NetFlow Destination IP facets
+
+| Facet Name | Facet Description |
+|---|---|
+| Destination AS Domain | The domain associated with the Autonomous System (AS) to which the destination IP belongs. |
+| Destination AS Name | The name of the Autonomous System (AS) to which the destination IP belongs. |
+| Destination AS Number | The number assigned to the Autonomous System (AS) to which the destination IP belongs. |
+| Destination AS Route | The route information associated with the Autonomous System (AS) to which the destination IP belongs. |
+| Destination AS Type | The type of Autonomous System (AS) to which the destination IP belongs (such as transit, customer, peer). |
+| Destination Application Name | The name of the application associated with the destination IP. |
+| Destination City Name | The name of the city associated with the destination IP. |
+| Destination Cloud Provider Name | The name of the cloud provider associated with the destination IP. |
+| Destination Cloud Provider Region | The region of the cloud provider associated with the destination IP. |
+| Destination Cloud Provider Service | The service provided by the cloud provider associated with the destination IP. |
+| Destination Continent Code | The code representing the continent associated with the destination IP. |
+| Destination Continent Name | The name of the continent associated with the destination IP. |
+| Destination Country ISO Code | The ISO code representing the country associated with the destination IP. |
+| Destination Country Name | The name of the country associated with the destination IP. |
+| Destination IP | The destination IP address. |
+| Destination Latitude | The latitude coordinate associated with the destination IP. |
+| Destination Longitude | The longitude coordinate associated with the destination IP. |
+| Destination MAC | The Media Access Control (MAC) address associated with the destination IP. |
+| Destination Mask | The subnet mask associated with the destination IP. |
+| Destination Port | The destination port number. |
+| Destination Subdivision ISO Code | The ISO code representing the subdivision (such as state or province) associated with the destination IP. |
+| Destination Subdivision Name | The name of the subdivision (such as state or province) associated with the destination IP. |
+| Destination Timezone | The timezone associated with the destination IP. |
+
+### NetFlow Source IP facets
+
+| Facet Name | Facet Description |
+|---|---|
+| Source AS Domain | The domain associated with the Autonomous System (AS) to which the source IP belongs. |
+| Source AS Name | The name of the Autonomous System (AS) to which the source IP belongs. |
+| Source AS Number | The number assigned to the Autonomous System (AS) to which the source IP belongs. |
+| Source AS Route | The route information associated with the Autonomous System (AS) to which the source IP belongs. |
+| Source AS Type | The type of Autonomous System (AS) to which the source IP belongs (such as transit, customer, peer). |
+| Source Application Name | The name of the application associated with the source IP. |
+| Source City Name | The name of the city associated with the source IP. |
+| Source Cloud Provider Name | The name of the cloud provider associated with the source IP. |
+| Source Cloud Provider Region | The region of the cloud provider associated with the source IP. |
+| Source Cloud Provider Service | The service provided by the cloud provider associated with the source IP. |
+| Source Continent Code | The code representing the continent associated with the source IP. |
+| Source Continent Name | The name of the continent associated with the source IP. |
+| Source Country ISO Code | The ISO code representing the country associated with the source IP. |
+| Source Country Name | The name of the country associated with the source IP. |
+| Source IP | The source IP address. |
+| Source Latitude | The latitude coordinate associated with the source IP. |
+| Source Longitude | The longitude coordinate associated with the source IP. |
+| Source MAC | The Media Access Control (MAC) address associated with the source IP. |
+| Source Mask | The subnet mask associated with the source IP. |
+| Source Port | The source port number. |
+| Source Subdivision ISO Code | The ISO code representing the subdivision (such as state or province) associated with the source IP. |
+| Source Subdivision Name | The name of the subdivision (such as state or province) associated with the source IP. |
+| Source Timezone | The timezone associated with the source IP. |
+
+By monitoring these key fields and using facets to analyze NetFlow events, organizations can gain visibility into their network infrastructure, optimize performance, and improve security posture.
+
+{{< img src="monitors/monitor_types/netflow/monitor.png" alt="Create a dashboard with NetFlow data" width="100%" >}}
+
+This data is also available in dashboards and notebooks, enabling precise queries and correlation with other data sources. When creating a dashboard with NetFlow data, select **NetFlow** as the source in the **Graph your data** section.
+
+{{< img src="network_device_monitoring/netflow/dashboard.png" alt="Create a dashboard with NetFlow data" width="100%" >}}
 
 ## Sampling rate
 
@@ -94,7 +205,9 @@ Additionally, you can query for **Bytes (Adjusted) (@adjusted_bytes)** and **Pac
 
 ## Retention
 
-NetFlow data is retained for 30 days by default.
+NetFlow data is retained for 30 days by default, with options for 15, 30, 60, and 90 day retention. 
+
+<div class="alert alert-danger">To retain NetFlow data for longer periods of time, contact your account representative.</div>
 
 ## Further Reading
 
@@ -104,4 +217,5 @@ NetFlow data is retained for 30 days by default.
 [2]: /network_monitoring/devices/snmp_metrics/
 [3]: /agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
 [4]: /agent/configuration/agent-commands/?tab=agentv6v7#start-stop-and-restart-the-agent
-[5]: https://app.datadoghq.com/infrastructure/devices?facets=&viewTab=netflow
+[5]: https://app.datadoghq.com/devices/netflow
+[6]: /monitors/types/netflow/

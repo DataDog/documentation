@@ -1,7 +1,6 @@
 ---
 aliases:
 - /ko/graphing/functions/beta/
-kind: 설명서
 title: 베타 함수
 ---
 

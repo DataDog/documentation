@@ -1,6 +1,5 @@
 ---
 title: CSM Threats Detection Rules
-kind: documentation
 aliases:
   - /security_platform/cloud_workload_security/workload_security_rules
   - /security/cloud_workload_security/workload_security_rules

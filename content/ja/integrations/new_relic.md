@@ -1,26 +1,55 @@
 ---
+app_id: new-relic
+app_uuid: 82c7d333-a23e-44f9-a6c5-cd22fb541022
+assets:
+  integration:
+    auto_install: false
+    events:
+      creates_events: true
+    metrics:
+      check:
+      - new_relic.application_summary.apdex_score
+      - new_relic.apdex.score
+      metadata_path: metadata.csv
+      prefix: new_relic.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 54
+    source_type_name: New Relic
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - notifications
 dependencies: []
-description: New Relic のメトリクスとイベントを Datadog で表示。
-doc_link: https://docs.datadoghq.com/integrations/new_relic/
+display_on_public_website: true
 draft: false
 git_integration_title: new_relic
-has_logo: true
 integration_id: new-relic
 integration_title: New Relic
 integration_version: ''
 is_public: true
 kind: インテグレーション
-manifest_version: '1.0'
+manifest_version: 2.0.0
 name: new_relic
-public_title: Datadog-New Relic インテグレーション
-short_description: New Relic のメトリクスとイベントを Datadog で表示。
-team: web-integrations
-version: '1.0'
+public_title: New Relic
+short_description: New Relic は、Web アプリケーションとモバイルアプリケーション向けのアプリケーションモニタリングサービスです。
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Notifications
+  configuration: README.md#Setup
+  description: New Relic は、Web アプリケーションとモバイルアプリケーション向けのアプリケーションモニタリングサービスです。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: New Relic
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
+<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
 
 ## 概要
 
@@ -28,7 +57,7 @@ version: '1.0'
 
 New Relic に接続すると、イベントストリームに New Relic のアラートが表示されます。
 
-## 計画と使用
+## セットアップ
 
 ### イベントストリームへの New Relic アラートの表示
 
@@ -78,3 +107,9 @@ New Relic のベータアラート機能の "Use Custom Payload" オプション
 ```
 
 変更が完了したら、**Update Channel** を選択して変更を保存します。
+
+## トラブルシューティング
+
+ご不明な点は、[Datadog のサポートチーム][1]までお問合せください。
+
+[1]: https://docs.datadoghq.com/ja/help/

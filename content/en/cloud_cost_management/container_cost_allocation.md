@@ -1,6 +1,5 @@
 ---
 title: Container Cost Allocation
-kind: documentation
 private: true
 description: Learn how to allocate Cloud Cost Management spending across your organization with Container Cost Allocation.
 further_reading:
@@ -10,7 +9,7 @@ further_reading:
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Cloud Cost Management is not supported for this site.</div>
+<div class="alert alert-warning">Cloud Cost Management is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 {{< jqmath-vanilla >}}

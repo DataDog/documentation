@@ -7,10 +7,6 @@ further_reading:
       text: 'Data Jobs Monitoring'
 ---
 
-{{< callout url="https://forms.gle/PZUoEgtBsH6qM62MA" >}}
-Data Jobs Monitoring is in private beta. Fill out this form to join the wait list.
-{{< /callout >}}
-
 [Data Jobs Monitoring][6] gives visibility into the performance and reliability of Apache Spark applications on Kubernetes.
 
 ## Setup
@@ -56,9 +52,9 @@ You can install the Datadog Agent using the [Datadog Operator][3] or [Helm][4].
      features:
        apm:
          enabled: true
-       hostPortConfig:
-         enabled: true
-         hostPort: 8126
+         hostPortConfig:
+           enabled: true
+           hostPort: 8126
        admissionController:
          enabled: true
          mutateUnlabelled: false
@@ -73,6 +69,11 @@ You can install the Datadog Agent using the [Datadog Operator][3] or [Helm][4].
          appSecret:
            secretName: datadog-secret
            keyName: app-key
+     override:
+       nodeAgent:
+         env:
+           - name: DD_DJM_CONFIG_ENABLED
+             value: "true"
    ```
    Replace `<DATADOG_SITE>` with your [Datadog site][5]. Your site is {{< region-param key="dd_site" code="true" >}}. (Ensure the correct SITE is selected on the right).
 1. Deploy the Datadog Agent with the above configuration file:
@@ -105,6 +106,9 @@ You can install the Datadog Agent using the [Datadog Operator][3] or [Helm][4].
        port: 8126
      tags:
        - 'data_workload_monitoring_trial:true'
+     env:
+       - name: DD_DJM_CONFIG_ENABLED
+         value: "true"
 
    clusterAgent:
      admissionController:
@@ -200,7 +204,9 @@ aws emr-containers start-job-run \
 
 In Datadog, view the [Data Jobs Monitoring][5] page to see a list of all your data processing jobs.
 
-## Tag spans at runtime
+## Advanced Configuration
+
+### Tag spans at runtime
 
 {{% djm-runtime-tagging %}}
 

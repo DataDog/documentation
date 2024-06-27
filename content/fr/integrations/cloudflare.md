@@ -12,7 +12,7 @@ integration_id: cloudflare
 integration_title: Cloudflare
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 monitors:
   '[Cloudflare] Abnormal bandwidth being sent for zone: {{zone_name.name}}': assets/monitors/bandwidth.json
