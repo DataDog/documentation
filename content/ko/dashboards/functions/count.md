@@ -1,7 +1,6 @@
 ---
 aliases:
 - /ko/graphing/functions/count/
-kind: 설명서
 title: 계산
 ---
 

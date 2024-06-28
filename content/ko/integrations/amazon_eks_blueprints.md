@@ -30,7 +30,7 @@ integration_id: amazon-eks-blueprints
 integration_title: Datadog Blueprints 애드온
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: amazon_eks_blueprints
 public_title: Datadog Blueprints 애드온

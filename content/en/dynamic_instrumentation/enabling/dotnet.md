@@ -1,6 +1,5 @@
 ---
 title: Enable Dynamic Instrumentation for .NET
-kind: Documentation
 aliases:
     - /tracing/dynamic_instrumentation/enabling/dotnet/
 is_beta: false

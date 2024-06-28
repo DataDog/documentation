@@ -1,6 +1,5 @@
 ---
 title: Docker and Integrations
-kind: documentation
 aliases:
 - /agent/docker/integrations
 further_reading:

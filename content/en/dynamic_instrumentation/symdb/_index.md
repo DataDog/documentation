@@ -1,6 +1,5 @@
 ---
 title: Symbol Database
-kind: documentation
 is_beta: true
 private: true
 further_reading:

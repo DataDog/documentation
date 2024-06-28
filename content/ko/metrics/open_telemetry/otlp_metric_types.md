@@ -11,7 +11,6 @@ further_reading:
 - link: /opentelemetry/guide/otlp_delta_temporality/
   tag: 지침
   text: OpenTelemetry로 델타 임시 메트릭 생성
-kind: 설명서
 title: OTLP 메트릭 유형
 ---
 

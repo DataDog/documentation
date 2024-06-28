@@ -42,7 +42,7 @@ integration_id: agora-analytics
 integration_title: Agora Analytics
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: agora_analytics
 public_title: Agora Analytics

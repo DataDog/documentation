@@ -2,7 +2,6 @@
 aliases:
 - /ja/graphing/faq/maintain-relevant-dashboards
 - /ja/graphing/guide/maintain-relevant-dashboards
-kind: ガイド
 title: 適切なダッシュボードを維持するためのベストプラクティス
 ---
 

@@ -24,7 +24,6 @@ further_reading:
   tag: Blog
   text: Detectar y corregir rápidamente las implementaciones fallidas con las superposiciones
     de cambios
-kind: documentación
 title: Cambiar superposiciones
 ---
 <div class="alert alert-warning">

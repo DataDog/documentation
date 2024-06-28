@@ -1,6 +1,5 @@
 ---
 title: Billing and invoices
-kind: guide
 ---
 
 As an Account Owner, you can make changes to your subscription and payment methods at any time.

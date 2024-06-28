@@ -1,5 +1,4 @@
 ---
-kind: documentation
 title: 推定使用量メトリクス
 ---
 

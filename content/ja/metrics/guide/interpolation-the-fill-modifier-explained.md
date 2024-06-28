@@ -2,7 +2,6 @@
 aliases:
 - /ja/graphing/faq/interpolation-the-fill-modifier-explained
 - /ja/dashboards/faq/interpolation-the-fill-modifier-explained
-kind: faq
 title: 補間とフィル修飾子
 ---
 

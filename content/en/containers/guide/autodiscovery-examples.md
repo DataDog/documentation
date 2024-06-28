@@ -1,6 +1,5 @@
 ---
 title: "Autodiscovery: Scenarios & Examples"
-kind: guide
 further_reading:
 - link: "/agent/kubernetes/log/"
   tag: "Documentation"

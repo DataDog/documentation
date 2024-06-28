@@ -23,7 +23,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/building-security-coverage-for-cloud-environments/
   tag: ブログ
   text: クラウド環境に対する十分なセキュリティカバレッジの構築
-kind: documentation
 title: Cloud SIEM
 ---
 ## 概要
