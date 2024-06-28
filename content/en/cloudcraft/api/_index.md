@@ -50,3 +50,7 @@ import { Cloudcraft } from 'cloudcraft';
 {{< /programming-lang >}}
 
 {{< /programming-lang-wrapper >}}
+
+Or check out the SDKs directly:
+
+{{< partial name="cloudcraft/sdk-languages.html" >}}
