@@ -5,7 +5,6 @@ aliases:
 - /es/serverless/libraries_integrations/forwarder/
 dependencies:
 - https://github.com/DataDog/datadog-serverless-functions/blob/master/aws/logs_monitoring/README.md
-kind: Documentación
 title: Datadog Forwarder
 ---
 

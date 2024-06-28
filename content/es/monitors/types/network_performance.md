@@ -12,7 +12,6 @@ further_reading:
 - link: /monitors/manage/status/
   tag: Documentación
   text: Comprobar el estado del monitor
-kind: Documentación
 title: Monitor de rendimiento de red
 ---
 

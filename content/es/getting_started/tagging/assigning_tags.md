@@ -11,7 +11,6 @@ further_reading:
 - link: /getting_started/tagging/using_tags/
   tag: Documentación
   text: Descubre cómo usar etiquetas (tags) en Datadog.
-kind: documentación
 title: Asignar etiquetas (tags)
 ---
 
