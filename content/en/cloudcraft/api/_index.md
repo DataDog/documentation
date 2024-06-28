@@ -9,7 +9,7 @@ cascade:
 
 ## Client SDKs
 
-By default, the Cloudcraft API docs show examples in cURL. Each endpoint also includes code examples from one of the official client library languages. To install each library:
+By default, the Cloudcraft API docs show examples in cURL. Each endpoint also includes code examples from one of the official SDKs. To install each SDK:
 
 {{< programming-lang-wrapper langs="go,python" class="api-reference" >}}
 
