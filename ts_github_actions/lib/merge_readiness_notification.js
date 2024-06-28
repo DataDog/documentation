@@ -43,11 +43,11 @@ async function main() {
         team_slug: 'documentation'
     });
     const teamMemberLogins = members.map((member) => member.login);
-    console.log(`Docs team members: ${teamMemberLogins.join(', ')}`);
+    console.log(`Docs team members retrieved: ${teamMemberLogins.join(', ')}`);
     // If the person who removed the label is a docs team member,
     // skip the Slack notification
     const actor = github_1.context.actor;
-    console.log(`Actor: ${actor}`);
+    console.log(`Label removal performed by: ${actor}`);
     // Get the list of reviewers who have approved the PR
     const { data: reviews } = await github.rest.pulls.listReviews({
         owner: github_1.context.repo.owner,
@@ -65,7 +65,7 @@ async function main() {
             const approverLogin = review.user.login;
             if (teamMemberLogins.includes(approverLogin)) {
                 isApproved = true;
-                console.log(`PR was approved by a docs team member: ${approverLogin}.`);
+                console.log(`The PR is approved by a docs team member: ${approverLogin}. Notifying Slack ...`);
                 break;
             }
         }
