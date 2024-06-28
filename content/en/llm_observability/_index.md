@@ -5,7 +5,7 @@ aliases:
     - /tracing/llm_observability/
 ---
 
-<div class="alert alert-warning">By using LLM Observability, you acknowledge that Datadog is authorized to share your Company’s data with OpenAI Global, LLC for the purpose of providing and improving LLM Observability. OpenAI will not use your data for training or tuning purpose.
+<div class="alert alert-warning">By using LLM Observability, you acknowledge that Datadog is authorized to share your Company's data with OpenAI Global, LLC for the purpose of providing and improving LLM Observability. OpenAI will not use your data for training or tuning purpose.
 </div>
 
 {{% site-region region="gov" %}}
