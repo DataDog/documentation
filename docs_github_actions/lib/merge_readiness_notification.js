@@ -26,7 +26,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const core = __importStar(require("@actions/core"));
 const httpm = __importStar(require("@actions/http-client"));
 const github_1 = require("@actions/github");
-const SLACK_WEBHOOK_URL = 'https://hooks.slack.com/triggers/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';
 process.on('unhandledRejection', handleError);
 main().catch(handleError);
 async function main() {
@@ -36,6 +35,7 @@ async function main() {
         return;
     }
     const apiToken = core.getInput('api-token', { required: true });
+    const slackWebhookUrl = core.getInput('slack-webhook-url', { required: true });
     const github = (0, github_1.getOctokit)(apiToken, {});
     // Get the docs team members
     const { data: members } = await github.rest.teams.listMembersInOrg({
@@ -79,7 +79,7 @@ async function main() {
     const body = {
         prLink: github_1.context.payload.pull_request._links.html.href
     };
-    const slackResponse = await http.postJson(SLACK_WEBHOOK_URL, body);
+    const slackResponse = await http.postJson(slackWebhookUrl, body);
     console.log('Response code from Slack:', slackResponse.statusCode);
 }
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

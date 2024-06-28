@@ -21,3 +21,4 @@ jobs:
         uses: ./../../docs_github_actions/merge_readiness_notification
         with: 
           api-token: ${{ secrets.API_TOKEN }}
+          slack-webhook-url: ${{ secrets.MERGE_READINESS_SLACK_WEBHOOK_URL }}
