@@ -11,7 +11,7 @@ cascade:
 
 By default, the Cloudcraft API docs show examples in cURL. Each endpoint also includes code examples from one of the official SDKs. To install each SDK:
 
-{{< programming-lang-wrapper langs="go,python" class="api-reference" >}}
+{{< programming-lang-wrapper langs="go,python,node" class="api-reference" >}}
 
 {{< programming-lang lang="go" >}}
 #### Installation
@@ -35,6 +35,17 @@ pip3 install cloudcraftco
 #### Usage
 ```python
 from cloudcraftco import Cloudcraft
+```
+{{< /programming-lang >}}
+
+{{< programming-lang lang="node" >}}
+#### Installation
+```sh
+npm install cloudcraft
+```
+#### Usage
+```javascript
+import { Cloudcraft } from 'cloudcraft';
 ```
 {{< /programming-lang >}}
 
