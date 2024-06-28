@@ -21,7 +21,7 @@ See TypeScript's [Get Started documentation][1] for resources tailored to your e
 
 The [merge_readiness_notification][2] action is intended to be run when the 'Do Not Merge' label has been removed from a PR in the documentation repo. If the label remover is not on the docs team, and if the PR has already been approved by a docs team member, the action makes a call to a Slack webhook to notify team members that a previously approved PR is ready to merge.
 
-Example usage:
+Example workflow that uses the `merge_readiness_notification` action:
 
 ```yaml
 name: Process label removal
