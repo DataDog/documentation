@@ -7,7 +7,7 @@ cascade:
 
 {{< openapi-ref-docs url="cloudcraft.json" >}}
 
-## Client libraries
+## Client SDKs
 
 By default, the Cloudcraft API docs show examples in cURL. Each endpoint also includes code examples from one of the official client library languages. To install each library:
 
