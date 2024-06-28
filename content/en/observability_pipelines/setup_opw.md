@@ -65,7 +65,7 @@ To set bootstrap options, do one of the following:
 `proxy`
 : env variables: `DD_HTTP_PROXY`, `DD_HTTPS_PROXY`
 : Set proxy servers for the Observability Pipelines Worker. The proxy configuration for the Worker works in the same way as it does for the [Datadog Agent][4].
-: The settings are applied to the entire Worker process. The HTTP proxy and HTTPS values are resolved first based on this order:
+: The settings are applied to the entire Worker process. First, the HTTP proxy and HTTPS values are resolved in this order:
 <br>&nbsp;&nbsp;&nbsp;1. `DD_HTTP[S]_PROXY`
 <br>&nbsp;&nbsp;&nbsp;2. `HTTP[S]_PROXY`
 <br>&nbsp;&nbsp;&nbsp;3. `proxy`
