@@ -1,6 +1,5 @@
 ---
 title: Kubernetes APM - Trace Collection
-kind: documentation
 aliases:
     - /agent/kubernetes/apm
 further_reading:

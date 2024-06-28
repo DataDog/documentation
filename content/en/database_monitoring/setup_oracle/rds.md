@@ -1,6 +1,5 @@
 ---
 title: Setting Up Database Monitoring for RDS Oracle
-kind: documentation
 description: Install and configure Database Monitoring for RDS Oracle
 further_reading:
 - link: "/integrations/oracle/"

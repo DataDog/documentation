@@ -122,7 +122,7 @@ cascade:
   - /integrations/snowflake/
 description: 모든 시스템, 앱, 서비스에서 데이터를 수집하세요.
 disable_sidebar: true
-kind: 설명서
+custom_kind: 설명서
 title: 통합
 ---
 

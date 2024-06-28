@@ -1,6 +1,5 @@
 ---
 title: Troubleshooting Database Monitoring
-kind: documentation
 description: Troubleshoot Database Monitoring setup
 
 ---
