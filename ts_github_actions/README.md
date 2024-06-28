@@ -1,6 +1,6 @@
 # Docs GitHub Actions
 
-This folder is an NPM package set up to allow you to write a GitHub action in TypeScript.
+This folder is an NPM package set up for authoring GitHub actions in TypeScript.
 
 ## New to TypeScript?
 
