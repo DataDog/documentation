@@ -1070,7 +1070,7 @@
     "summary": "Get a restriction policy"
   },
   "UpdateRestrictionPolicy": {
-    "description": "Updates the restriction policy associated with a resource.\n\n#### Supported resources\nRestriction policies can be applied to the following resources:\n- Dashboards: `dashboard`\n- Notebooks: `notebook`\n- Powerpacks: `powerpack`\n- Security Rules: `security-rule`\n- Service Level Objectives: `slo`\n\n#### Supported relations for resources\nResource Type            | Supported Relations\n-------------------------|--------------------------\nDashboards               | `viewer`, `editor`\nNotebooks                | `viewer`, `editor`\nPowerpacks               | `viewer`, `editor`\nSecurity Rules           | `viewer`, `editor`\nService Level Objectives | `viewer`, `editor`",
+    "description": "Updates the restriction policy associated with a resource.\n\n#### Supported resources\nRestriction policies can be applied to the following resources:\n- Dashboards: `dashboard`\n- Notebooks: `notebook`\n- Powerpacks: `powerpack`\n- Security Rules: `security-rule`\n- Service Level Objectives: `slo`\n- Suppression Rules: `suppression-rule`\n\n#### Supported relations for resources\nResource Type            | Supported Relations\n-------------------------|--------------------------\nDashboards               | `viewer`, `editor`\nNotebooks                | `viewer`, `editor`\nPowerpacks               | `viewer`, `editor`\nSecurity Rules           | `viewer`, `editor`\nService Level Objectives | `viewer`, `editor`\nSuppression Rules        | `viewer`, `editor`",
     "summary": "Update a restriction policy",
     "request_description": "Restriction policy payload",
     "request_schema_description": "Update request for a restriction policy."

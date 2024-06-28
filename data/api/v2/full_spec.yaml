@@ -428,7 +428,7 @@ components:
         type: string
     ResourceID:
       description: 'Identifier, formatted as `type:id`. Supported types: `connection`,
-        `dashboard`, `notebook`, `security-rule`, `slo`.'
+        `dashboard`, `notebook`, `security-rule`, `slo`, `suppression-rule`.'
       example: dashboard:abc-def-ghi
       in: path
       name: resource_id
@@ -33098,6 +33098,8 @@ paths:
 
         - Service Level Objectives: `slo`
 
+        - Suppression Rules: `suppression-rule`
+
 
         #### Supported relations for resources
 
@@ -33113,7 +33115,9 @@ paths:
 
         Security Rules           | `viewer`, `editor`
 
-        Service Level Objectives | `viewer`, `editor`'
+        Service Level Objectives | `viewer`, `editor`
+
+        Suppression Rules        | `viewer`, `editor`'
       operationId: UpdateRestrictionPolicy
       parameters:
       - $ref: '#/components/parameters/ResourceID'
