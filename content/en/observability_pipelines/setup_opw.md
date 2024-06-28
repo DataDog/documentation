@@ -64,8 +64,13 @@ To set bootstrap options, do one of the following:
 
 `proxy`
 : env variables: `DD_HTTP_PROXY`, `DD_HTTPS_PROXY`
-: Set proxy servers for the Worker.
-: For example:
+: Set proxy servers for the Observability Pipelines Worker. The proxy configuration for the Worker works in the same way as it does for the [Datadog Agent][4].
+: The settings are applied to the entire Worker process. The HTTP proxy and HTTPS values are resolved first based on this order:
+<br>&nbsp;&nbsp;&nbsp;1. `DD_HTTP[S]_PROXY`
+<br>&nbsp;&nbsp;&nbsp;2. `HTTP[S]_PROXY`
+<br>&nbsp;&nbsp;&nbsp;3. `proxy`
+: Then, the settings are used in the Remote Config client and global Worker options.
+: An example proxy configuration:
 : &nbsp;&nbsp;&nbsp;&nbsp;proxy:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;enabled: true<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;https: https://foo.bar:3128
 
 ## Further reading
@@ -75,3 +80,4 @@ To set bootstrap options, do one of the following:
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: https://app.datadoghq.com/observability-pipelines
 [3]: /getting_started/site/
+[4]: /agent/configuration/proxy/?tab=linux#environment-variables
