@@ -23,7 +23,7 @@ further_reading:
 
 As your organization scales, the volume of logs collected from your infrastructure and applications grows along with it. The use cases for your logs increase in complexity as well. For example, you might be collecting logs from your infrastructure, applications, security tools, network, and so forth. All of these use cases have varying retention and querying needs.
 
-With Flex Logs, your teams can determine the query capacity they need to meet their use case, whether it's a time-critical incident, a security investigation, or a compliance audit. By decoupling storage from compute costs, Flex Logs provides cost-effective long-term retention of your logs.
+With Flex Logs, your teams can determine the query capacity they need to meet their use case, whether it's a time-critical incident, a security investigation, or a compliance audit. By decoupling storage from compute costs, Flex Logs provides cost-effective, long-term retention of your logs.
 
 Some example use cases for Flex storage include:
 
@@ -40,7 +40,7 @@ Datadog Log Management provides the following solutions:
 - Flex Logs for logs that need to be retained long-term, but sometimes need to be queried urgently, such as security, transaction, and network logs.
 - Archiving for logs that are infrequently queried and need to be stored long-term, such as audit and configuration logs.
 
-Use the spectrum of log types shown in the image below to determine when to use the Flex Logs tier. Any high volume, infrequent access, or long term retention log sources are good candidates. You can even retain logs in Standard Indexing first and then extend them using Flex Logs; this is a perfect solution for application logs that you need to retain for longer. See [Potential sources for sending directly to the Flex Logs tier](#potential-sources-for-sending-directly-to-the-flex-logs-indexing-tier) for more information.
+Use the spectrum of log types shown in the image below to determine when to use the Flex Logs tier. Any high volume, infrequent access, or long term retention log sources are good candidates. You can also retain logs in Standard Indexing first and then extend them using Flex Logs; this is a perfect solution for application logs that you need to retain for longer. See [Potential sources for sending directly to the Flex Logs tier](#potential-sources-for-sending-directly-to-the-flex-logs-indexing-tier) for more information.
 
 {{< img src="logs/log_configuration/flex_logging/logs-spectrum.png" alt="Logs indexing and access frequency spectrum graph" style="width:100%;" >}}
 
@@ -62,7 +62,7 @@ Compute is the querying capacity to run queries for Flex Logs. It is used when q
 | Medium (M)       | 200 to 500 billion events        |
 | Large (L)        | 500 billion to 1 trillion events |
 
-Each Compute tier is approximately 2x in query performance and capacity of the previous tier. The number of concurrent queries that can be run thus depends on how each query is composed.
+Each compute tier is approximately 2X the query performance and capacity of the previous tier. The number of concurrent queries that can be run thus depends on how each query is composed.
 
 ### Determine the compute size that you need
 
@@ -88,15 +88,15 @@ The number of logs stored in the Flex tier has the largest impact on the size ne
 | Large (L)                                 | 500 billion - 1 trillion |
 | Contact your [Customer Success Manager][7]| 1T+                      |
 
-**Note**: The recommended number of users is not the number of concurrent queries. However, it is more likely for queries to run concurrently as the number of users increases. Therefore, the concurrency available is higher for queries run on larger compute instances than on smaller instances.
+**Note**: The recommended number of users is not the number of concurrent queries. However, it is more likely for queries to run concurrently as the number of users increases. Therefore, the available concurrency is higher for queries run on larger compute instances than on smaller instances.
 
-Queries that push the limits of the concurrency of a given compute tier slows down the return of the query results and could cause other concurrent queries to slow down as well.
+Queries that push the limits of the concurrency of a compute tier, slows down the return of the query results and can also cause other concurrent queries to slow down.
 
 Compute tiers are billed at a flat rate. See the [pricing page][6] for more information.
 
 ## Enable and disable Flex Logs
 
-Flex Logs can be enabled or disabled at the organization level. You must have the `flex_logs_config_write` permission to be able to do that.
+You can enable or disable Flex Logs at the organization level. You must have the `flex_logs_config_write` permission to do so.
 
 If Flex Logs is part of your contract, the compute options available on your contract is shown in the UI.
 
