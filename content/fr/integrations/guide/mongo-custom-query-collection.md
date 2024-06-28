@@ -1,6 +1,6 @@
 ---
 title: Recueillir des métriques custom Mongo
-kind: guide
+
 further_reading:
   - link: /integrations/mongo/
     tag: Documentation

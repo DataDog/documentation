@@ -3,7 +3,7 @@ further_reading:
 - link: /serverless/configuration/#migrer-vers-l-extension-lambda-datadog
   tag: Documentation
   text: Migration vers l'extension Lambda Datadog
-kind: guide
+
 title: Choisir s'il est pertinent de migrer vers l'extension Lambda Datadog
 ---
 

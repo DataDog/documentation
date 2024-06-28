@@ -1,6 +1,6 @@
 ---
 title: Datadog Source Code Integration
-kind: guide
+
 description: "Set up the source code integration that integrates with APM to link your telemetry with your repositories, embed git information into artifacts in your CI pipeline, and use the GitHub integration to generate inline code snippets."
 further_reading:
 - link: "/integrations/github/"

@@ -1,6 +1,6 @@
 ---
 title: SLO Checklist
-kind: guide
+
 aliases:
 - /monitors/guide/slo-checklist/
 further_reading:

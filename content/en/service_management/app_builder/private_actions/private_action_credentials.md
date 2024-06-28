@@ -1,6 +1,6 @@
 ---
 title: Handling Private Action Credentials
-kind: guide
+
 disable_toc: false
 ---
 

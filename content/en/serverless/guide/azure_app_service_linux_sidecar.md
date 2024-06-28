@@ -1,6 +1,6 @@
 ---
 title: Instrument Azure App Service - Linux Containers with Sidecar Pattern
-kind: guide
+
 further_reading:
 - link: "/integrations/azure_app_services/"
   tag: "Documentation"
