@@ -15,10 +15,16 @@ jobs:
     if: github.event.label.name == 'Do Not Merge'
     name: Process removal of 'Do Not Merge' label
     steps:
+      - name: Generate a token
+        id: generate-token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ vars.DOCS_GH_APP_ID }}
+          private-key: ${{ secrets.DOCS_GH_APP_PRIVATE_KEY }}
       - name: Checkout
         uses: actions/checkout@v4
       - name: Notify Slack if PR is already approved
         uses: ./../../ts_github_actions/merge_readiness_notification
         with: 
-          api-token: ${{ secrets.API_TOKEN }}
+          api-token: ${{ steps.generate-token.outputs.token }}
           slack-webhook-url: ${{ secrets.MERGE_READINESS_SLACK_WEBHOOK_URL }}
