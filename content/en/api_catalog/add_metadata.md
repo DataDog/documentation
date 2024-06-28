@@ -80,7 +80,7 @@ To import an OpenAPI or Swagger file using the GitHub integration:
 1. Choose the repository and the file you want to register.
 1. Select Create.
 
-{{< img src="tracing/api_catalog/api-catalog-create-from-github.png" alt="API Catalog modal showing how to create a new API from GitHub" style="width:100%;" >}}
+{{< img src="tracing/api_catalog/api-catalog-create-from-github2.png" alt="API Catalog modal showing how to create a new API from GitHub" style="width:100%;" >}}
 
 
 ## Further reading
