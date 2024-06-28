@@ -259,6 +259,27 @@ Valid values are: `true` or `false`.<br>
 
 The following configuration variables are available **only** when using automatic instrumentation:
 
+#### Traces
+
+`DD_TRACE_EXPAND_ROUTE_TEMPLATES_ENABLED`
+: Expands all route parameters in the application for ASP.NET/ASP.NET Core (except ID parameters)<br>
+This can be useful if you are using parameter names to differentiate between form values, or a slug, such as in GraphQL.
+**Default**: `false`
+Added in version 2.5.2
+
+`DD_TRACE_METHODS`
+: List of methods to trace. Accepts a semicolon (`;`) separated list where each entry has the format `TypeName[MethodNames]`, where `MethodNames` is either a comma (`,`) separated list of method names or the `*` wildcard. For generic types, replace the angled brackets and the type parameters' names with a backtick (`` ` ``) followed by the number of generic type parameters. For example, `Dictionary<TKey, TValue>` must be written as `` Dictionary`2 ``. For generic methods, you only need to specify the method name. <br>
+**Example**: ```Namespace1.Class1[Method1,GenericMethod];Namespace1.GenericTypeWithOneTypeVariable`1[ExecuteAsync];Namespace2.Class2[*]```<br>
+**Note:** The wildcard method support (`[*]`) selects all methods in a type except constructors, property getters and setters, `Equals`, `Finalize`, `GetHashCode`, and `ToString`. <br>
+Added in version 2.6.0.
+Wildcard support `[*]` added in version 2.7.0.
+
+`DD_TRACE_KAFKA_CREATE_CONSUMER_SCOPE_ENABLED`
+: Alters the behavior of the Kafka consumer span<br>
+**Default**: `true`<br>
+When set to `true`, the consumer span is created when a message is consumed and closed before consuming the next message. The span duration is representative of the computation between one message consumption and the next. Use this setting when message consumption is performed in a loop. <br>
+When set to `false`, the consumer span is created when a message is consumed and immediately closed. Use this setting when a message is not processed completely before consuming the next one, or when multiple messages are consumed at once. When you set this parameter to `false`, consumer spans are closed right away. If you have child spans to trace, you must extract the context manually. Read [Headers extraction and injection][12] for more details.
+
 #### Agent
 
 `DD_TRACE_ENABLED`
@@ -293,27 +314,6 @@ Added in version 1.23.0.
 Enables or disables automatic injection of correlation identifiers into application logs. <br>
 Your logger needs to have a `source` that sets the `trace_id` mapping correctly. The default source for .NET Applications, `csharp`, does this automatically. For more information, see [correlated logs in the Trace ID panel][5]. <br><br>
 **Beta**: Starting in version 2.35.0, if [Agent Remote Configuration][16] is enabled where this service runs, you can set `DD_LOGS_INJECTION` in the [Service Catalog][17] UI.
-
-#### Traces
-
-`DD_TRACE_EXPAND_ROUTE_TEMPLATES_ENABLED`
-: Expands all route parameters in the application for ASP.NET/ASP.NET Core (except ID parameters)<br>
-This can be useful if you are using parameter names to differentiate between form values, or a slug, such as in GraphQL.
-**Default**: `false`
-Added in version 2.5.2
-
-`DD_TRACE_METHODS`
-: List of methods to trace. Accepts a semicolon (`;`) separated list where each entry has the format `TypeName[MethodNames]`, where `MethodNames` is either a comma (`,`) separated list of method names or the `*` wildcard. For generic types, replace the angled brackets and the type parameters' names with a backtick (`` ` ``) followed by the number of generic type parameters. For example, `Dictionary<TKey, TValue>` must be written as `` Dictionary`2 ``. For generic methods, you only need to specify the method name. <br>
-**Example**: ```Namespace1.Class1[Method1,GenericMethod];Namespace1.GenericTypeWithOneTypeVariable`1[ExecuteAsync];Namespace2.Class2[*]```<br>
-**Note:** The wildcard method support (`[*]`) selects all methods in a type except constructors, property getters and setters, `Equals`, `Finalize`, `GetHashCode`, and `ToString`. <br>
-Added in version 2.6.0.
-Wildcard support `[*]` added in version 2.7.0.
-
-`DD_TRACE_KAFKA_CREATE_CONSUMER_SCOPE_ENABLED`
-: Alters the behavior of the Kafka consumer span<br>
-**Default**: `true`<br>
-When set to `true`, the consumer span is created when a message is consumed and closed before consuming the next message. The span duration is representative of the computation between one message consumption and the next. Use this setting when message consumption is performed in a loop. <br>
-When set to `false`, the consumer span is created when a message is consumed and immediately closed. Use this setting when a message is not processed completely before consuming the next one, or when multiple messages are consumed at once. When you set this parameter to `false`, consumer spans are closed right away. If you have child spans to trace, you must extract the context manually. Read [Headers extraction and injection][12] for more details.
 
 ### Automatic instrumentation integration configuration
 

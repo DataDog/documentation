@@ -39,22 +39,7 @@ It is recommended to use `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `env`, 
 `DD_VERSION`
 : Set the application's version, for example: `1.2.3`, `6c44da20`, `2020.02.13`. Available in version 0.38+.
 
-
-### Spans
-
-`DD_TRACE_SAMPLING_RULES`
-: **Default**: `[]`<br>
-A JSON array of objects. Each object must have a `"sample_rate"`. The `"name"` and `"service"` fields are optional. The `"sample_rate"` value must be between `0.0` and `1.0` (inclusive). Rules are applied in configured order to determine the trace's sample rate.
-
-`DD_SPAN_SAMPLING_RULES`
-: **Default**: `[]`<br>
-A JSON array of objects. Rules are applied in configured order to determine the span's sample rate. The `sample_rate` value must be between 0.0 and 1.0 (inclusive).
-For more information, see [Ingestion Mechanisms][5].<br>
-**Example:**<br>
-  - Set the span sample rate to 50% for the service `my-service` and operation name `http.request`, up to 50 traces per second: `'[{"service": "my-service", "name": "http.request", "sample_rate":0.5, "max_per_second": 50}]'`
-
-
-### Traces
+## Traces
 
 `DD_TRACE_ENABLED`
 : **Default**: `true`<br>
@@ -80,23 +65,18 @@ Comma-separated list of header names that are reported on the root span as tags.
 `DD_TRACE_AGENT_URL`
 : The URL of the Trace Agent that the tracer submits to. If set, this takes priority over hostname and port. Supports Unix Domain Sockets (UDS) in combination with the `apm_config.receiver_socket` configuration in your `datadog.yaml` file or the `DD_APM_RECEIVER_SOCKET` environment variable set on the Datadog Agent. For example, `DD_TRACE_AGENT_URL=http://localhost:8126` for HTTP URL and `DD_TRACE_AGENT_URL=unix:///var/run/datadog/apm.socket` for UDS. If the [Agent configuration][13] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then `DD_AGENT_PORT` or `DD_TRACE_AGENT_URL` must match it. 
 
-### Trace context propagation
+`DD_TRACE_SAMPLING_RULES`
+: **Default**: `[]`<br>
+A JSON array of objects. Each object must have a `"sample_rate"`. The `"name"` and `"service"` fields are optional. The `"sample_rate"` value must be between `0.0` and `1.0` (inclusive). Rules are applied in configured order to determine the trace's sample rate.
 
-`DD_TRACE_PROPAGATION_STYLE_INJECT`
-: **Default**: `tracecontext,Datadog`<br>
-Propagation styles to use when injecting tracing headers. For example, use `DD_TRACE_PROPAGATION_STYLE_INJECT=Datadog,B3` to inject both Datadog and B3 format headers.
+`DD_SPAN_SAMPLING_RULES`
+: **Default**: `[]`<br>
+A JSON array of objects. Rules are applied in configured order to determine the span's sample rate. The `sample_rate` value must be between 0.0 and 1.0 (inclusive).
+For more information, see [Ingestion Mechanisms][5].<br>
+**Example:**<br>
+  - Set the span sample rate to 50% for the service `my-service` and operation name `http.request`, up to 50 traces per second: `'[{"service": "my-service", "name": "http.request", "sample_rate":0.5, "max_per_second": 50}]'`
 
-`DD_TRACE_PROPAGATION_STYLE_EXTRACT`
-: **Default**: Value of `DD_TRACE_PROPAGATION_STYLE_INJECT` (`tracecontext,Datadog`)<br>
-Propagation styles to use when extracting tracing headers. When multiple values are given, it uses the first header match found. The order of matching is based on the order of values given. For example, `DD_TRACE_PROPAGATION_STYLE_EXTRACT=B3,Datadog` looks for `B3` headers first, and only uses `Datadog` headers if those are not available.
-
-### Logs
-
-`DD_LOGS_INJECTION`
-: **Default**: `false`<br>
-Enable [connecting logs and trace injection][6].
-
-### Agent
+## Agent
 
 `DD_PATCH_MODULES`
 : Override the modules patched for this application execution. Follow the format: `DD_PATCH_MODULES=module:patch,module:patch...`
@@ -122,6 +102,22 @@ Override the address of the trace Agent host that the default tracer attempts to
 `DD_DOGSTATSD_PORT`
 : **Default**: `8125`<br>
 Override the port that the default tracer submits DogStatsD metrics to. If the [Agent configuration][13] sets `dogstatsd_port` or `DD_DOGSTATSD_PORT` to something other than the default `8125`, then this tracing library  `DD_DOGSTATSD_PORT` or `DD_DOGSTATSD_URL` must match it.
+
+## Logs
+
+`DD_LOGS_INJECTION`
+: **Default**: `false`<br>
+Enable [connecting logs and trace injection][6].
+
+## Trace context propagation
+
+`DD_TRACE_PROPAGATION_STYLE_INJECT`
+: **Default**: `tracecontext,Datadog`<br>
+Propagation styles to use when injecting tracing headers. For example, use `DD_TRACE_PROPAGATION_STYLE_INJECT=Datadog,B3` to inject both Datadog and B3 format headers.
+
+`DD_TRACE_PROPAGATION_STYLE_EXTRACT`
+: **Default**: Value of `DD_TRACE_PROPAGATION_STYLE_INJECT` (`tracecontext,Datadog`)<br>
+Propagation styles to use when extracting tracing headers. When multiple values are given, it uses the first header match found. The order of matching is based on the order of values given. For example, `DD_TRACE_PROPAGATION_STYLE_EXTRACT=B3,Datadog` looks for `B3` headers first, and only uses `Datadog` headers if those are not available.
 
 ## Further Reading
 

@@ -61,32 +61,6 @@ See all available options in the [configuration documentation][3].
 `DD_ENV`
 : Set the application's environment, for example: prod, pre-prod, staging.
 
-### Spans  
-
-`DD_TRACE_SAMPLING_RULES`
-: **Default**: `nil`<br>
-A JSON array of objects. Each object must have a `"sample_rate"`. The `"name"`,`"service"`, `"resource"`, and `"tags"` fields are optional. The `"sample_rate"` value must be between `0.0` and `1.0` (inclusive). Rules are applied in configured order to determine the trace's sample rate.
-
-  <div class="alert alert-info">Support for sampling by resource and tags is in beta.</div>
-
-  For more information, see [Ingestion Mechanisms][4].<br>
-  **Examples:**<br>
-  - Set the sample rate to 20%: `'[{"sample_rate": 0.2}]'`
-  - Set the sample rate to 10% for services starting with 'a' and span name 'b' and set the sample rate to 20% for all other services: `'[{"service": "a.*", "name": "b", "sample_rate": 0.1}, {"sample_rate": 0.2}]'`.
-  - Set the sample rate to 40% for services that have `HTTP GET` resource name: `'[{"resource": "HTTP GET", "sample_rate": 0.4}]'`.
-  - Set the sample rate to 100% for services that have a `tier` tag with the value `premium`: `'[{"tags": {"tier":"premium"}, "sample_rate": 1}]'`.
-
-`DD_SPAN_SAMPLING_RULES`
-: **Default**: `nil`<br>
-A JSON array of objects. Each object must have a `"sample_rate"`. The `"name"`,`"service"`, `"resource"`, and `"tags"` fields are optional. Rules are applied in configured order to determine the span's sample rate. The `sample_rate` value must be between 0.0 and 1.0 (inclusive).
-
-  <div class="alert alert-info">Support for sampling by resource and tags is in beta.</div>
-
-  For more information, see [Ingestion Mechanisms][5].<br>
-  **Example:**<br>
-  - Set the span sample rate to 50% for the service `my-service` and operation name `http.request`, up to 50 traces per second: `'[{"service": "my-service", "name": "http.request", "sample_rate":0.5, "max_per_second": 50}]'`
-  - Set the sample rate to 100% for services that have a `priority` tag with the value `high`: `'[{"tags": {"priority":"high"}, "sample_rate": 1}]'`.
-
 ### Traces
 
 `DD_TRACE_ENABLED`
@@ -137,6 +111,30 @@ List of comma-separated HTTP headers to be used as span tags. Optionally specify
   - Capture request header `my-header`: `"DD_TRACE_HEADER_TAGS=my-header"`
   - Capture request headers `my-header-1` and `my-header-2`: `"DD_TRACE_HEADER_TAGS=my-header1,my-header-2"`
   - Capture request header `my-header` and rename it to `my-tag`: `"DD_TRACE_HEADER_TAGS=my-header:my-tag"`
+
+`DD_TRACE_SAMPLING_RULES`
+: **Default**: `nil`<br>
+A JSON array of objects. Each object must have a `"sample_rate"`. The `"name"`,`"service"`, `"resource"`, and `"tags"` fields are optional. The `"sample_rate"` value must be between `0.0` and `1.0` (inclusive). Rules are applied in configured order to determine the trace's sample rate.
+
+  <div class="alert alert-info">Support for sampling by resource and tags is in beta.</div>
+
+  For more information, see [Ingestion Mechanisms][4].<br>
+  **Examples:**<br>
+  - Set the sample rate to 20%: `'[{"sample_rate": 0.2}]'`
+  - Set the sample rate to 10% for services starting with 'a' and span name 'b' and set the sample rate to 20% for all other services: `'[{"service": "a.*", "name": "b", "sample_rate": 0.1}, {"sample_rate": 0.2}]'`.
+  - Set the sample rate to 40% for services that have `HTTP GET` resource name: `'[{"resource": "HTTP GET", "sample_rate": 0.4}]'`.
+  - Set the sample rate to 100% for services that have a `tier` tag with the value `premium`: `'[{"tags": {"tier":"premium"}, "sample_rate": 1}]'`.
+
+`DD_SPAN_SAMPLING_RULES`
+: **Default**: `nil`<br>
+A JSON array of objects. Each object must have a `"sample_rate"`. The `"name"`,`"service"`, `"resource"`, and `"tags"` fields are optional. Rules are applied in configured order to determine the span's sample rate. The `sample_rate` value must be between 0.0 and 1.0 (inclusive).
+
+  <div class="alert alert-info">Support for sampling by resource and tags is in beta.</div>
+
+  For more information, see [Ingestion Mechanisms][5].<br>
+  **Example:**<br>
+  - Set the span sample rate to 50% for the service `my-service` and operation name `http.request`, up to 50 traces per second: `'[{"service": "my-service", "name": "http.request", "sample_rate":0.5, "max_per_second": 50}]'`
+  - Set the sample rate to 100% for services that have a `priority` tag with the value `high`: `'[{"tags": {"priority":"high"}, "sample_rate": 1}]'`.
 
 ### Agent  
 

@@ -30,7 +30,7 @@ INI settings can be configured globally, for example, in the `php.ini` file, or 
 
 **Note**: If you use code auto-instrumentation (the recommended approach), be aware that the instrumenting code is executed before any user code. As a result, the environment variables and the INI settings below must be set at the server level and be available to the PHP runtime before any user code is executed. For example, `putenv()` and `.env` files do not work.
 
-### Apache
+## Apache
 
 For Apache with php-fpm, use the `env` directive in your `www.conf` configuration file to configure the PHP tracer, for example:
 
@@ -54,7 +54,7 @@ SetEnv DD_TRACE_DEBUG 1
 php_value datadog.service my-app
 ```
 
-### NGINX and PHP-FPM
+## NGINX and PHP-FPM
 
 <div class="alert alert-warning">
 <strong>Note:</strong> PHP-FPM does not support the value <code>false</code> in <code>env[...]</code> directives. Use <code>1</code> in place of <code>true</code> and <code>0</code> in place of <code>false</code>.
@@ -75,7 +75,7 @@ php_value[datadog.service] = my-app
 
 **Note**: If you have enabled APM for your NGINX server, make sure you have properly configured the `opentracing_fastcgi_propagate_context` setting for distributed tracing to properly work. See [NGINX APM configuration][3] for more details.
 
-### PHP CLI server
+## PHP CLI server
 
 Set in the command line to start the server.
 
@@ -83,11 +83,11 @@ Set in the command line to start the server.
 DD_TRACE_DEBUG=1 php -d datadog.service=my-app -S localhost:8888
 ```
 
-### Environment variable configuration
+## Environment variable configuration
 
 The following table lists the environment variables for configuring tracing, and corresponding INI settings (where available) and defaults.
 
-#### Unified service tagging
+### Unified service tagging
 
 `DD_ENV`
 : **INI**: `datadog.env`<br>
@@ -104,31 +104,7 @@ Set an application's version in traces and logs, for example: `1.2.3`, `6c44da20
 **Default**: `null`<br>
 The default app name.
 
-#### Spans
-
-`DD_TRACE_SAMPLING_RULES`
-: **INI**: `datadog.trace.sampling_rules`<br>
-**Default**: `null`<br>
-A JSON encoded string to configure the sampling rate. Examples: Set the sample rate to 20%: `'[{"sample_rate": 0.2}]'`. Set the sample rate to 10% for services starting with 'a' and span name 'b' and set the sample rate to 20% for all other services: `'[{"service": "a.*", "name": "b", "sample_rate": 0.1}, {"sample_rate": 0.2}]'` (see [Integration names](#integration-names)). The JSON object **must** be surrounded by single quotes (`'`) to avoid problems with escaping of the double quote (`"`) character. The service matching takes `DD_SERVICE_MAPPING` into account (starting version `0.90.0`). The name and service must be a valid regular expression. Rules that are not valid regular expressions are ignored.
-
-`DD_TRACE_SAMPLING_RULES_FORMAT`
-: **INI**: `datadog.trace.sampling_rules_format`<br>
-**Default**: `glob`<br>
-Rules the format (`regex` or `glob`) used for sampling rules defined by `DD_TRACE_SAMPLING_RULES`. Added in version `0.98.0` and deprecated as of `1.0.0`.
-
-`DD_TRACE_SPANS_LIMIT`
-: **INI**: `datadog.trace.spans_limit`<br>
-**Default**: `1000`<br>
-The maximum number of spans that are generated within one trace. If the maximum number of spans is reached, then spans are no longer generated. If the limit is increased, then the amount of memory that is used by a pending trace will increase and might reach the PHP maximum amount of allowed memory. The maximum amount of allowed memory can be increased with the PHP INI system setting `memory_limit`.
-
-`DD_SPAN_SAMPLING_RULES`
-: **INI**: `datadog.span_sampling_rules`<br>
-**Default**: `null`<br>
-A JSON encoded string to configure the sampling rate. Rules are applied in configured order to determine the span's sample rate. The `sample_rate` value must be between 0.0 and 1.0 (inclusive). <br>
-**Example**: Set the span sample rate to 50% for the service 'my-service' and operation name 'http.request', up to 50 traces per second: `'[{"service": "my-service", "name": "http.request", "sample_rate":0.5, "max_per_second": 50}]'`. The JSON object **must** be surrounded by single quotes (`'`) to avoid problems with escaping of the double quote (`"`) character.<br>
-For more information, see [Ingestion Mechanisms][6].<br>
-
-#### Traces
+### Traces
 
 `DD_TRACE_ENABLED`
 : **INI**: `datadog.trace.enabled`<br>
@@ -336,32 +312,29 @@ The IP header to be used for client IP collection, for example: `x-forwarded-for
   ```
   Regular expression used to obfuscate the query string included as part of the URL. This expression is also used in the redaction process for HTTP POST data. Added in version `0.76.0`.
 
-`DD_TRACE_OTEL_ENABLED`
-: Enables or disables OpenTelemetry based tracing, both for [custom][18] or [automatic][19] instrumentation. <br>
-Valid values are: `true` or `false`.<br>
-**Default**: `false`
+`DD_TRACE_SAMPLING_RULES`
+: **INI**: `datadog.trace.sampling_rules`<br>
+**Default**: `null`<br>
+A JSON encoded string to configure the sampling rate. Examples: Set the sample rate to 20%: `'[{"sample_rate": 0.2}]'`. Set the sample rate to 10% for services starting with 'a' and span name 'b' and set the sample rate to 20% for all other services: `'[{"service": "a.*", "name": "b", "sample_rate": 0.1}, {"sample_rate": 0.2}]'` (see [Integration names](#integration-names)). The JSON object **must** be surrounded by single quotes (`'`) to avoid problems with escaping of the double quote (`"`) character. The service matching takes `DD_SERVICE_MAPPING` into account (starting version `0.90.0`). The name and service must be a valid regular expression. Rules that are not valid regular expressions are ignored.
 
-#### Logs
+`DD_TRACE_SAMPLING_RULES_FORMAT`
+: **INI**: `datadog.trace.sampling_rules_format`<br>
+**Default**: `glob`<br>
+Rules the format (`regex` or `glob`) used for sampling rules defined by `DD_TRACE_SAMPLING_RULES`. Added in version `0.98.0` and deprecated as of `1.0.0`.
 
-`DD_LOGS_INJECTION`
-: **INI**: `datadog.logs_injection`<br>
-**Default**: `0`<br>
-Enables or disables automatic injection of correlation identifiers into application logs. Added in version `0.89.0`<br>
-See [logs correlation documentation][17] for more information.
+`DD_TRACE_SPANS_LIMIT`
+: **INI**: `datadog.trace.spans_limit`<br>
+**Default**: `1000`<br>
+The maximum number of spans that are generated within one trace. If the maximum number of spans is reached, then spans are no longer generated. If the limit is increased, then the amount of memory that is used by a pending trace will increase and might reach the PHP maximum amount of allowed memory. The maximum amount of allowed memory can be increased with the PHP INI system setting `memory_limit`.
 
-#### Database
+`DD_SPAN_SAMPLING_RULES`
+: **INI**: `datadog.span_sampling_rules`<br>
+**Default**: `null`<br>
+A JSON encoded string to configure the sampling rate. Rules are applied in configured order to determine the span's sample rate. The `sample_rate` value must be between 0.0 and 1.0 (inclusive). <br>
+**Example**: Set the span sample rate to 50% for the service 'my-service' and operation name 'http.request', up to 50 traces per second: `'[{"service": "my-service", "name": "http.request", "sample_rate":0.5, "max_per_second": 50}]'`. The JSON object **must** be surrounded by single quotes (`'`) to avoid problems with escaping of the double quote (`"`) character.<br>
+For more information, see [Ingestion Mechanisms][6].<br>
 
-`DD_TRACE_DB_CLIENT_SPLIT_BY_INSTANCE`
-: **INI**: `datadog.trace.db_client_split_by_instance`<br>
-**Default**: `0`<br>
-Set the service name of HTTP requests to `pdo-<hostname>`. For example, a `PDO->query()` call to a database host `datadoghq.com` has the service name `pdo-datadoghq.com` instead of the default service name of `pdo`.
-
-`DD_TRACE_REDIS_CLIENT_SPLIT_BY_HOST`
-: **INI**: `datadog.trace.redis_client_split_by_host`<br>
-**Default**: `0`<br>
-Set the service name of Redis clients operations to `redis-<hostname>`.
-
-#### Agent
+### Agent
 
 `DD_AGENT_HOST`
 : **INI**: `datadog.agent_host`<br>
@@ -398,7 +371,43 @@ Tags to be set on all spans, for example: `key1:value1,key2:value2`.
 **Default**: `true`<br>
 Datadog may collect [environmental and diagnostic information about your system][16] to improve the product. When false, this telemetry data will not be collected.
 
-#### Profiling
+### Databases
+
+`DD_TRACE_DB_CLIENT_SPLIT_BY_INSTANCE`
+: **INI**: `datadog.trace.db_client_split_by_instance`<br>
+**Default**: `0`<br>
+Set the service name of HTTP requests to `pdo-<hostname>`. For example, a `PDO->query()` call to a database host `datadoghq.com` has the service name `pdo-datadoghq.com` instead of the default service name of `pdo`.
+
+`DD_TRACE_REDIS_CLIENT_SPLIT_BY_HOST`
+: **INI**: `datadog.trace.redis_client_split_by_host`<br>
+**Default**: `0`<br>
+Set the service name of Redis clients operations to `redis-<hostname>`.
+
+### Database monitoring
+
+`DD_DBM_PROPAGATION_MODE`
+: **INI**: `datadog.dbm_propagation_mode`<br>
+**Default**: `'disabled'`<br>
+Enables linking between data sent from APM and the Database Monitoring product when set to `'service'` or `'full'`.<br>
+The `'service'` option enables the connection between DBM and APM services. Available for Postgres, MySQL and SQLServer.<br>
+The `'full'` option enables connection between database spans with database query events. Available for Postgres and MySQL.<br>
+
+### Logs
+
+`DD_LOGS_INJECTION`
+: **INI**: `datadog.logs_injection`<br>
+**Default**: `0`<br>
+Enables or disables automatic injection of correlation identifiers into application logs. Added in version `0.89.0`<br>
+See [logs correlation documentation][17] for more information.
+
+### OpenTelemetry
+
+`DD_TRACE_OTEL_ENABLED`
+: Enables or disables OpenTelemetry based tracing, both for [custom][18] or [automatic][19] instrumentation. <br>
+Valid values are: `true` or `false`.<br>
+**Default**: `false`
+
+### Profiling
 
 `DD_PROFILING_ENABLED`
 : **INI**: `datadog.profiling.enabled`. INI available since `0.82.0`.<br>
@@ -457,16 +466,9 @@ Enable the timeline profile type. Added in version `0.89.0`.<br><br>
 **Default**: `off`<br>
 Set the profiler's log level. Acceptable values are `off`, `error`, `warn`, `info`, `debug`, and `trace`. The profiler's logs are written to the standard error stream of the process. Added in version `0.69.0`.
 
-#### Database monitoring
+### Trace context propagation
 
-`DD_DBM_PROPAGATION_MODE`
-: **INI**: `datadog.dbm_propagation_mode`<br>
-**Default**: `'disabled'`<br>
-Enables linking between data sent from APM and the Database Monitoring product when set to `'service'` or `'full'`.<br>
-The `'service'` option enables the connection between DBM and APM services. Available for Postgres, MySQL and SQLServer.<br>
-The `'full'` option enables connection between database spans with database query events. Available for Postgres and MySQL.<br>
-
-#### Headers extraction and injection
+Read [Trace Context Propagation][11] for information about configuring the PHP tracing library to extract and inject headers for propagating distributed trace context.
 
 `DD_TRACE_PROPAGATION_STYLE_INJECT`
 : **INI**: `datadog.trace.propagation_style_inject`<br>
@@ -488,7 +490,7 @@ Propagation styles to use when extracting tracing headers. If using multiple sty
   - [B3 single header][8]
   - Datadog
 
-#### Integrations
+### Integrations
 
 `DD_TRACE_<INTEGRATION>_ENABLED`
 : **INI**: `datadog.trace.<INTEGRATION>_enabled`<br>
@@ -543,7 +545,7 @@ Use the name when setting integration-specific configuration such as, `DD_TRACE_
 | Yii           | `yii`           |
 | ZendFramework | `zendframework` |
 
-#### Map resource names to normalized URI
+## Map resource names to normalized URI
 
 <div class="alert alert-warning">
 Note that setting any of the following: <code>DD_TRACE_RESOURCE_URI_FRAGMENT_REGEX</code>, <code>DD_TRACE_RESOURCE_URI_MAPPING_INCOMING</code>, and <code>DD_TRACE_RESOURCE_URI_MAPPING_OUTGOING</code> will opt-in to the new resource normalization approach and any value in <code>DD_TRACE_RESOURCE_URI_MAPPING</code> will be ignored.
@@ -567,7 +569,7 @@ Numeric IDs, UUIDs (with and without dashes), and 32-to-512-bit hexadecimal hash
 
 You can turn this functionality OFF using `DD_TRACE_URL_AS_RESOURCE_NAMES_ENABLED=0`.
 
-##### Custom URL-to-resource mapping
+### Custom URL-to-resource mapping
 
 There are a few cases that are not covered by the automatic normalization that is applied.
 
@@ -583,7 +585,7 @@ There are two classes of scenarios that are not covered by automatic normalizati
   - The path fragment to normalize has a reproducible pattern and can be present in any part of the url, for example `id<number>` in the example above. This scenario is covered by the setting `DD_TRACE_RESOURCE_URI_FRAGMENT_REGEX` below.
   - The path fragment can be anything, and the previous path fragment indicates that a value has to be normalized. For example `/cities/new-york` tells us that `new-york` has to be normalized as it is the name of a city. This scenario is covered by settings `DD_TRACE_RESOURCE_URI_MAPPING_INCOMING` and `DD_TRACE_RESOURCE_URI_MAPPING_OUTGOING` for incoming and outgoing requests respectively.
 
-###### `DD_TRACE_RESOURCE_URI_FRAGMENT_REGEX`
+##### `DD_TRACE_RESOURCE_URI_FRAGMENT_REGEX`
 
 This setting is a CSV of one or more regular expressions that are applied to every path fragment independently. For example, setting `DD_TRACE_RESOURCE_URI_FRAGMENT_REGEX` to `^id\d+$` for a path of `/using/prefix/id123/for/id` applies the regex to each of the fragments: `using`, `prefix`, `id123`, `for`, and `id`.
 
@@ -593,7 +595,7 @@ This setting is a CSV of one or more regular expressions that are applied to eve
 
 Note that because the format of this variable is a CSV, the comma character `,` is not escaped and cannot be used in your regular expressions.
 
-###### `DD_TRACE_RESOURCE_URI_MAPPING_INCOMING` and `DD_TRACE_RESOURCE_URI_MAPPING_OUTGOING`
+##### `DD_TRACE_RESOURCE_URI_MAPPING_INCOMING` and `DD_TRACE_RESOURCE_URI_MAPPING_OUTGOING`
 
 This setting is a CSV of patterns that can contain a wildcard `*`. For example, adding the pattern `cities/*` means that every time the fragment `cities` is found while analyzing a URL, then the next fragment, if any, will be replaced with `?`. Patterns are applied at any depth, so applying the following rule will both normalize `/cities/new-york` and `/nested/cities/new-york` in the table above.
 
@@ -601,14 +603,11 @@ Patterns can be applied to a part of a specific fragment. For example `path/*-fi
 
 Note that `DD_TRACE_RESOURCE_URI_MAPPING_INCOMING` applies to only incoming requests (for example web frameworks) while `DD_TRACE_RESOURCE_URI_MAPPING_OUTGOING` only applies to outgoing requests (for example `curl` and `guzzle` requests).
 
-### `open_basedir` restrictions
+##### `open_basedir` restrictions
 
 When [`open_basedir`][9] setting is used, then `/opt/datadog-php` should be added to the list of allowed directories.
 When the application runs in a docker container, the path `/proc/self` should also be added to the list of allowed directories.
 
-### Trace context propagation
-
-Read [Trace Context Propagation][11] for information about configuring the PHP tracing library to extract and inject headers for propagating distributed trace context.
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

@@ -39,9 +39,6 @@ Adds the `env` tag with the specified value to all generated spans.
 **Example**: `1.2.3`, `6c44da20`, `2020.02.13` <br>
 Sets the version of the service.
 
-### Errors
-### Spans
-### Sampling
 ### Traces
 
 `DD_TRACE_ENABLED`

@@ -51,23 +51,6 @@ Your application environment (for example, production, staging). Available for v
 **Default**: `null`<br>
 Your application version (for example, 2.5, 202003181415, 1.3-alpha). Available for versions 0.48+.
 
-### Errors
-
-`dd.http.client.tag.query-string`
-: **Environment Variable**: `DD_HTTP_CLIENT_TAG_QUERY_STRING`<br>
-**Default**: `false`<br>
-When set to `true` query string parameters and fragment get added to web client spans
-
-`dd.http.client.error.statuses`
-: **Environment Variable**: `DD_HTTP_CLIENT_ERROR_STATUSES`<br>
-**Default**: `400-499`<br>
-A range of errors can be accepted. By default 4xx errors are reported as errors for http clients. This configuration overrides that. Ex. `dd.http.client.error.statuses=400-403,405,410-499`
-
-`dd.http.server.error.statuses`
-: **Environment Variable**: `DD_HTTP_SERVER_ERROR_STATUSES`<br>
-**Default**: `500-599`<br>
-A range of errors can be accepted. By default 5xx status codes are reported as errors for http servers. This configuration overrides that. Ex. `dd.http.server.error.statuses=500,502-599`
-
 ### Traces
 
 `dd.trace.enabled`
@@ -234,7 +217,64 @@ When `true`, the tracer will inject 128 bit Trace IDs as 32 lowercase hexadecima
 **Default**: `false`<br>
 When `true`, OpenTelemetry-based tracing for [custom][16] instrumentation is enabled.
 
+### Agent
+
+`dd.tags`
+: **Environment Variable**: `DD_TAGS`<br>
+**Default**: `null`<br>
+**Example**: `layer:api,team:intake,key:value`<br>
+A list of default tags to be added to every span, profile, and JMX metric. If DD_ENV or DD_VERSION is used, it overrides any env or version tag defined in DD_TAGS. Available for versions 0.50.0+.
+
+`dd.agent.host`
+: **Environment Variable**: `DD_AGENT_HOST`<br>
+**Default**: `localhost`<br>
+Hostname for where to send traces to. If using a containerized environment, configure this to be the host IP. See [Tracing Docker Applications][5] for more details.
+
+`dd.instrumentation.telemetry.enabled`
+: **Environment Variable**: `DD_INSTRUMENTATION_TELEMETRY_ENABLED`<br>
+**Default**: `true`<br>
+When `true`, the tracer collects [telemetry data][8]. Available for versions 0.104+. Defaults to `true` for versions 0.115+.
+
+### Databases
+
+`dd.trace.db.client.split-by-instance`
+: **Environment Variable**: `DD_TRACE_DB_CLIENT_SPLIT_BY_INSTANCE` <br>
+**Default**: `false`<br>
+When set to `true` db spans get assigned the instance name as the service name
+
+`dd.trace.db.client.split-by-host`
+: **Environment Variable**: `DD_TRACE_DB_CLIENT_SPLIT_BY_HOST` <br>
+**Default**: `false`<br>
+When set to `true` db spans get assigned the remote database hostname as the service name
+
+### Errors
+
+`dd.http.client.tag.query-string`
+: **Environment Variable**: `DD_HTTP_CLIENT_TAG_QUERY_STRING`<br>
+**Default**: `false`<br>
+When set to `true` query string parameters and fragment get added to web client spans
+
+`dd.http.client.error.statuses`
+: **Environment Variable**: `DD_HTTP_CLIENT_ERROR_STATUSES`<br>
+**Default**: `400-499`<br>
+A range of errors can be accepted. By default 4xx errors are reported as errors for http clients. This configuration overrides that. Ex. `dd.http.client.error.statuses=400-403,405,410-499`
+
+`dd.http.server.error.statuses`
+: **Environment Variable**: `DD_HTTP_SERVER_ERROR_STATUSES`<br>
+**Default**: `500-599`<br>
+A range of errors can be accepted. By default 5xx status codes are reported as errors for http servers. This configuration overrides that. Ex. `dd.http.server.error.statuses=500,502-599`
+
+### Logs
+
+`dd.logs.injection`
+: **Environment Variable**: `DD_LOGS_INJECTION`<br>
+**Default**: `true`<br>
+Enabled automatic MDC key injection for Datadog trace and span IDs. See [Advanced Usage][2] for details.<br><br>
+**Beta**: Starting in version 1.18.3, if [Agent Remote Configuration][3] is enabled where this service runs, you can set `DD_LOGS_INJECTION` in the [Service Catalog][4] UI.
+
 ### Trace context propagation
+
+For information about valid values and using the following configuration options, see [Propagating Java Trace Context][15].
 
 `dd.trace.propagation.style.inject`
 : **Environment Variable**: `DD_TRACE_PROPAGATION_STYLE_INJECT`<br>
@@ -258,44 +298,6 @@ Available since version 1.9.0
 : **Environment Variable**: `DD_TRACE_PROPAGATION_EXTRACT_FIRST`<br>
 **Default**: `false`<br>
 When set to `true`, stop extracting trace context when a valid one is found.
-
-### Logs
-
-`dd.logs.injection`
-: **Environment Variable**: `DD_LOGS_INJECTION`<br>
-**Default**: `true`<br>
-Enabled automatic MDC key injection for Datadog trace and span IDs. See [Advanced Usage][2] for details.<br><br>
-**Beta**: Starting in version 1.18.3, if [Agent Remote Configuration][3] is enabled where this service runs, you can set `DD_LOGS_INJECTION` in the [Service Catalog][4] UI.
-
-### Database
-
-`dd.trace.db.client.split-by-instance`
-: **Environment Variable**: `DD_TRACE_DB_CLIENT_SPLIT_BY_INSTANCE` <br>
-**Default**: `false`<br>
-When set to `true` db spans get assigned the instance name as the service name
-
-`dd.trace.db.client.split-by-host`
-: **Environment Variable**: `DD_TRACE_DB_CLIENT_SPLIT_BY_HOST` <br>
-**Default**: `false`<br>
-When set to `true` db spans get assigned the remote database hostname as the service name
-
-### Agent
-
-`dd.tags`
-: **Environment Variable**: `DD_TAGS`<br>
-**Default**: `null`<br>
-**Example**: `layer:api,team:intake,key:value`<br>
-A list of default tags to be added to every span, profile, and JMX metric. If DD_ENV or DD_VERSION is used, it overrides any env or version tag defined in DD_TAGS. Available for versions 0.50.0+.
-
-`dd.agent.host`
-: **Environment Variable**: `DD_AGENT_HOST`<br>
-**Default**: `localhost`<br>
-Hostname for where to send traces to. If using a containerized environment, configure this to be the host IP. See [Tracing Docker Applications][5] for more details.
-
-`dd.instrumentation.telemetry.enabled`
-: **Environment Variable**: `DD_INSTRUMENTATION_TELEMETRY_ENABLED`<br>
-**Default**: `true`<br>
-When `true`, the tracer collects [telemetry data][8]. Available for versions 0.104+. Defaults to `true` for versions 0.115+.
 
 ### JMX metrics
 
@@ -493,11 +495,6 @@ Would produce the following result:
 {{< img src="tracing/setup/java/jmxfetch_example.png" alt="JMX fetch example" >}}
 
 See the [Java integration documentation][14] to learn more about Java metrics collection with JMX fetch.
-### Headers extraction and injection
-
-For information about valid values and using the following configuration options, see [Propagating Java Trace Context][15].
-
-
 
 #### Deprecated extraction and injection settings
 
