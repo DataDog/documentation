@@ -5,7 +5,6 @@ aliases:
   - /guides/servicediscovery/
   - /guides/autodiscovery/
   - /agent/kubernetes/integrations
-kind: documentation
 further_reading:
 - link: "/agent/kubernetes/log/"
   tag: "Documentation"

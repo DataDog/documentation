@@ -15,7 +15,6 @@ further_reading:
 - link: https://dtdg.co/fe
   tag: Foundation Enablement
   text: ログ管理を最適化するためのインタラクティブなセッションに参加できます
-kind: documentation
 title: ログの使用を開始する
 ---
 
