@@ -28,7 +28,6 @@ further_reading:
 ---
 
 
-
 ## Overview
 
 Datadog [Software Composition Analysis][1] (SCA) continuously monitors your production environment for vulnerabilities in the open source libraries your applications rely on. You can identify and prioritize the remediation of the highest vulnerabilities by business impact.
