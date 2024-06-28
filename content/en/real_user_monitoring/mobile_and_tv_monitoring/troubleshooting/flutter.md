@@ -1,5 +1,5 @@
 ---
-title: Troubleshooting
+title: Troubleshooting Flutter SDK issues
 description: Learn how to troubleshoot issues with Flutter Monitoring.
 aliases:
     - /real_user_monitoring/mobile_and_tv_monitoring/troubleshooting/
