@@ -166,6 +166,12 @@ To monitor Aurora hosts, install the Datadog Agent in your infrastructure and co
 {{< tabs >}}
 {{% tab "Host" %}}
 
+### Autodiscovery setup (recommended)
+
+The Datadog Agent supports Autodiscovery of all Aurora endpoints in a cluster. Unless you want different configurations for different instances, or want to find and list Aurora endpoints manually, follow the [Autodiscovery setup instructions for Aurora DB clusters][4] instead of the manual setup section below.
+
+### Manual setup
+
 To configure this check for an Agent running on a host, for example when you provision a small EC2 instance for the Agent to collect from an Aurora database:
 
 Edit the `mysql.d/conf.yaml` file, in the `conf.d/` folder at the root of your [Agent's configuration directory][1]. See the [sample mysql.d/conf.yaml][2] for all available configuration options, including those for custom metrics.
@@ -193,13 +199,11 @@ instances:
 
 [Restart the Agent][3] to start sending MySQL metrics to Datadog.
 
-**The Datadog Agent supports [Autodiscovery][10] of all Aurora endpoints in a cluster.** 
-
 
 [1]: /agent/configuration/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/mysql/datadog_checks/mysql/data/conf.yaml.example
 [3]: /agent/configuration/agent-commands/#start-stop-and-restart-the-agent
-[10]: /database_monitoring/guide/aurora_autodiscovery/?tab=mysql
+[4]: /database_monitoring/guide/aurora_autodiscovery/?tab=mysql
 {{% /tab %}}
 {{% tab "Docker" %}}
 

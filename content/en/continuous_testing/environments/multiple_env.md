@@ -1,6 +1,5 @@
 ---
 title: Testing Multiple Environments
-kind: documentation
 description: Learn how to use Continuous Testing to reuse the same Synthetics scenarios against multiple environments.
 further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-synthetic-ci-cd-testing/"

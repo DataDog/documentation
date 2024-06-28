@@ -285,7 +285,7 @@ Agent v6.10+인 경우 호스트 인스턴스의 보안 그룹이 관련 포트�
      (...)
           {
             "name": "fips-proxy",
-            "image": "datadog/fips-proxy:1.1.2",
+            "image": "datadog/fips-proxy:1.1.3",
             "portMappings": [
                 {
                     "containerPort": 9803,

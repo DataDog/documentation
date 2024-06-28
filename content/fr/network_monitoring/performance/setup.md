@@ -16,7 +16,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/monitor-consul-with-datadog-npm/
   tag: Blog
   text: Nouvelle prise en charge de Consul par la solution NPM Datadog
-kind: documentation
 title: Configuration du Network Performance Monitoring
 ---
 
@@ -362,7 +361,6 @@ Si l'[Agent est déjà exécuté avec un manifeste][4] :
 Pour activer NPM dans l'Operator, appliquez la configuration suivante :
 
 ```yaml
-kind: DatadogAgent
 apiVersion: datadoghq.com/v2alpha1
 metadata:
   name: placeholder

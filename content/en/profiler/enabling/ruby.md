@@ -1,6 +1,5 @@
 ---
 title: Enabling the Ruby Profiler
-kind: Documentation
 code_lang: ruby
 type: multi-code-lang
 code_lang_weight: 40

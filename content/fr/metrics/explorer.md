@@ -9,7 +9,6 @@ further_reading:
 - link: /metrics/distributions/
   tag: Documentation
   text: Distributions de métriques
-kind: documentation
 title: Metrics Explorer
 ---
 

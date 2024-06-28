@@ -3,7 +3,6 @@ aliases:
 - /fr/metrics/custom_metrics/guide/
 description: Index des guides sur les métriques
 disable_toc: true
-kind: guide
 private: true
 title: Guides sur les métriques
 cascade:

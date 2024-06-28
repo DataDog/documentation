@@ -1,6 +1,5 @@
 ---
 title: (LEGACY) Networking
-kind: Documentation
 aliases:
   - /observability_pipelines/architecture/networking/
 ---

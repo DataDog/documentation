@@ -15,7 +15,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/monitor-consul-with-datadog-npm/
   tag: ブログ
   text: Datadog NPM が Consul ネットワーキングに対応
-kind: documentation
 title: ネットワークパフォーマンスモニタリングのセットアップ
 ---
 
@@ -359,7 +358,6 @@ Helm をお使いでない場合は、Kubernetes を使用してネットワー�
 Operator でネットワークパフォーマンスのモニタリングを有効化するには、次のコンフィギュレーションを使用します。
 
 ```yaml
-kind: DatadogAgent
 apiVersion: datadoghq.com/v2alpha1
 metadata:
   name: placeholder
