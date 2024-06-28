@@ -13,6 +13,9 @@ further_reading:
 - link: "/network_monitoring/network_path/setup"
   tag: "Documentation"
   text: "Setup Network Path"
+- link: "https://www.datadoghq.com/blog/datadog-network-path-monitoring/"
+  tag: "Blog"
+  text: "Get end-to-end network visibility with Datadog Network Path"
 ---
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">Network Path for Datadog Network Performance Monitoring is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
