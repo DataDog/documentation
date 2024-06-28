@@ -1,7 +1,6 @@
 ---
 aliases:
 - /es/graphing/functions/rank/
-kind: documentación
 title: Clasificación
 ---
 

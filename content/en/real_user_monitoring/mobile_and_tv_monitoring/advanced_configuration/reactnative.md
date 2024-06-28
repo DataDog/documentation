@@ -272,6 +272,41 @@ const spanId = await DdTrace.startSpan('foo', { custom: 42 }, Date.now());
 DdTrace.finishSpan(spanId, { custom: 21 }, Date.now());
 ```
 
+## Track custom global attributes
+
+You can attach user information to all RUM events to get more detailed information from your RUM sessions.
+
+### User information
+
+For user-specific information, use the following code wherever you want in your app (after the SDK has been initialized). The `id`, `name`, and `email` attributes are built into Datadog, and you can add other attributes that makes sense for your app.
+
+```js
+DdSdkReactNative.setUser({
+    id: '1337',
+    name: 'John Smith',
+    email: 'john@example.com',
+    type: 'premium'
+});
+```
+
+If you want to clear the user information (for example, when the user signs out), you can do so by passing an empty object, as follows:
+
+```js
+DdSdkReactNative.setUser({});
+```
+
+### Global attributes
+
+You can also keep global attributes to track information about a specific session, such as A/B testing configuration, ad campaign origin, or cart status.
+
+```js
+DdSdkReactNative.setAttributes({
+    profile_mode: 'wall',
+    chat_enabled: true,
+    campaign_origin: 'example_ad_network'
+});
+```
+
 ## Modify or drop RUM events
 
 To modify attributes of a RUM event before it is sent to Datadog, or to drop an event entirely, use the Event Mappers API when configuring the RUM React Native SDK:
@@ -332,6 +367,20 @@ Events include additional context:
 | ResourceEvent | `resourceEvent.resourceContext`                  | [XMLHttpRequest][6] corresponding to the resource or `undefined`.       |
 |               | `resourceEvent.additionalInformation.userInfo`   | Contains the global user info set by `DdSdkReactNative.setUser`.        |
 |               | `resourceEvent.additionalInformation.attributes` | Contains the global attributes set by `DdSdkReactNative.setAttributes`. |
+
+## Retrieve the RUM session ID
+
+Retrieving the RUM session ID can be helpful for troubleshooting. For example, you can attach the session ID to support requests, emails, or bug reports so that your support team can later find the user session in Datadog.
+
+You can access the RUM session ID at runtime without waiting for the `sessionStarted` event:
+
+```kotlin
+   fun getCurrentSessionId(promise: Promise) {
+       datadog.getRumMonitor().getCurrentSessionId {
+           promise.resolve(it)
+        }
+    }
+```
 
 ## Resource timings
 

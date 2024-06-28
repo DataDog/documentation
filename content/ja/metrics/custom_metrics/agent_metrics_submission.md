@@ -6,7 +6,6 @@ further_reading:
 - link: /developers/custom_checks/write_agent_check/
   tag: ドキュメント
   text: Agent カスタムチェックの書き方
-kind: documentation
 title: "メトリクスの送信: \bカスタム Agent チェック"
 ---
 

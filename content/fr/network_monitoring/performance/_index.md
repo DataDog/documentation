@@ -30,7 +30,13 @@ further_reading:
 - link: https://www.datadoghq.com/blog/monitor-consul-with-datadog-npm/
   tag: Blog
   text: Nouvelle prise en charge de la mise en réseau Consul par la solution NPM Datadog
-kind: documentation
+- link: https://www.datadoghq.com/blog/npm-story-centric-ux/
+  tag: Blog
+  text: Débuter vos enquêtes réseau grâce à l'interface NPM et à ses fonctionnalités
+    de mise en récit des données
+- link: https://www.datadoghq.com/blog/monitor-dns-logs-for-network-and-security-datadog/
+  tag: Blog
+  text: Surveiller les logs de DNS pour analyser le réseau et la sécurité
 title: Network Performance Monitoring
 ---
 
@@ -47,10 +53,13 @@ La solution Network Performance Monitoring (NPM) de Datadog est conçue pour vou
 
 Grâce à la solution NPM, qui est compatible avec les systèmes d'exploitation Linux et [Windows][3], vous pouvez surveiller facilement des réseaux complexes. En outre, elle permet d'orchestrer les environnements conteneurisés et de les [instrumenter avec le maillage de service Istio][4].
 
+En outre, le [chemin réseau][5], une fonctionnalité de NPM, est disponible en version bêta privée, ce qui vous permet de voir le trafic hop-by-hop dans votre réseau.
+
 {{< whatsnext desc="Cette section aborde les sujets suivants :">}}
     {{< nextlink href="network_monitoring/performance/setup" >}}<u>Configuration</u> : configurez l'Agent pour recueillir des données réseau.{{< /nextlink >}}
-    {{< nextlink href="network_monitoring/performance/network_page" >}}<u>Page Network</u> : représentez graphiquement vos données réseau entre chaque client et serveur disponibles.{{< /nextlink >}}
+    {{< nextlink href="network_monitoring/performance/network_analytics" >}}<u>Analyse réseau</u> : représentez graphiquement vos données réseau entre chaque client et serveur disponibles.{{< /nextlink >}}
     {{< nextlink href="network_monitoring/performance/network_map" >}}<u>Network Map</u> : mappez vos données réseau entre vos tags.{{< /nextlink >}}
+    {{< nextlink href="monitors/types/network_performance/" >}}<u>Monitors recommandés</u> : configurez des monitors NPM recommandés.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Pour aller plus loin
@@ -61,3 +70,4 @@ Grâce à la solution NPM, qui est compatible avec les systèmes d'exploitation 
 [2]: https://app.datadoghq.com/network/map
 [3]: https://www.datadoghq.com/blog/npm-windows-support/
 [4]: https://www.datadoghq.com/blog/monitor-istio-with-npm/
+[5]: /fr/network_monitoring/network_path/

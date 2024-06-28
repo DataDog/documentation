@@ -320,7 +320,6 @@ Agent とお客様のサービスの両方が、現実または仮想のホス�
 ```json
 {
     "version": 1,
-    "service_language": "<LANG>",
     "tracing_enabled": true,
     "log_injection_enabled": true,
     "health_metrics_enabled": true,
@@ -347,7 +346,6 @@ Agent とお客様のサービスの両方が、現実または仮想のホス�
 ```yaml
 ---
 version: 1
-service_language: <LANG>
 tracing_enabled: true
 log_injection_enabled: true
 health_metrics_enabled: true
@@ -370,12 +368,6 @@ tracing_partial_flush_min_spans: 1
 tracing_debug: true
 tracing_log_level: debug
 ```
-
-`service_language` に以下のいずれかの値を設定します。
-- `java`
-- `node`
-- `dotnet`
-- `python`
 
 このコンフィギュレーションファイルでは、`version` の値は常に `1` です。これは、コンテンツのバージョンではなく、使用する構成スキーマのバージョンを指しています。
 
@@ -532,7 +524,6 @@ output_paths:
 ```json
 {
     "version": 1,
-    "service_language": "<LANG>",
     "tracing_enabled": true,
     "log_injection_enabled": true,
     "health_metrics_enabled": true,
@@ -559,7 +550,6 @@ output_paths:
 ```yaml
 ---
 version: 1
-service_language: <LANG>
 tracing_enabled: true
 log_injection_enabled: true
 health_metrics_enabled: true
@@ -583,11 +573,6 @@ tracing_debug: true
 tracing_log_level: debug
 ```
 
-`service_language` に以下のいずれかの値を設定します。
-- `java`
-- `node`
-- `dotnet`
-- `python`
 
 このコンフィギュレーションファイルでは、`version` の値は常に `1` です。これは、コンテンツのバージョンではなく、使用する構成スキーマのバージョンを指しています。
 
@@ -752,7 +737,6 @@ config_sources: BASIC
 ```json
 {
     "version": 1,
-    "service_language": "<LANG>",
     "tracing_enabled": true,
     "log_injection_enabled": true,
     "health_metrics_enabled": true,
@@ -779,7 +763,6 @@ config_sources: BASIC
 ```yaml
 ---
 version: 1
-service_language: <LANG>
 tracing_enabled: true
 log_injection_enabled: true
 health_metrics_enabled: true
@@ -802,12 +785,6 @@ tracing_partial_flush_min_spans: 1
 tracing_debug: true
 tracing_log_level: debug
 ```
-
-`service_language` に以下のいずれかの値を設定します。
-- `java`
-- `node`
-- `dotnet`
-- `python`
 
 このコンフィギュレーションファイルでは、`version` の値は常に `1` です。これは、コンテンツのバージョンではなく、使用する構成スキーマのバージョンを指しています。
 

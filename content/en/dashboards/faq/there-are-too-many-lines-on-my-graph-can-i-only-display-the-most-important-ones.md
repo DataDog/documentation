@@ -1,6 +1,5 @@
 ---
 title: There are too many lines on my graph, can I only display the most important ones?
-kind: faq
 aliases:
     - /graphing/faq/there-are-too-many-lines-on-my-graph-can-i-only-display-the-most-important-ones
 ---

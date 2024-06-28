@@ -12,7 +12,6 @@ further_reading:
 - link: https://docs.datadoghq.com/dashboards/guide/maintain-relevant-dashboards/
   tag: 지침
   text: 관련 대시보드 유지 관리를 위한 모범 사례
-kind: 지침
 title: Powerpack으로 그래프 전문성 확장
 ---
 

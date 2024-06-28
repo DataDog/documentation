@@ -21,7 +21,6 @@ further_reading:
 - link: /agent/kubernetes/tag/
   tag: Documentación
   text: Asignar etiquetas (tags) a todos los datos emitidos por un contenedor
-kind: documentación
 title: Datos de Kubernetes recopilados
 ---
 

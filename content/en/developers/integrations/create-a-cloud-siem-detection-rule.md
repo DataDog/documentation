@@ -1,6 +1,5 @@
 ---
 title: Create a Cloud SIEM Detection Rule
-kind: Documentation
 description: Learn how to create a Cloud SIEM detection rule for your integration.
 aliases:
 - /developers/integrations/create-an-integration-detection-rule

@@ -7,7 +7,6 @@ further_reading:
 - link: /metrics/custom_metrics/dogstatsd_metrics_submission/
   tag: Documentation
   text: Utilisation des distributions dans DogStatsD
-kind: documentation
 title: Distributions
 ---
 ## Présentation

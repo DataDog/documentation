@@ -1,6 +1,5 @@
 ---
 title: NDM プロファイルの構築
-kind: ガイド
 aliases:
   - /ja/network_performance_monitoring/devices/guide/build-ndm-profile
 further_reading:
