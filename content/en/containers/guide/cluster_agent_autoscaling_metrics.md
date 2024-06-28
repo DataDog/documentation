@@ -217,7 +217,7 @@ To activate the usage of the `DatadogMetric` CRD update your `DatadogAgent` cust
     global:
       credentials:
         apiKey: <DATADOG_API_KEY>
-        appKey: <DATADOG_API_KEY>
+        appKey: <DATADOG_APP_KEY>
     features:
       externalMetricsServer:
         enabled: true
