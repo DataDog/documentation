@@ -9,4 +9,4 @@ inputs:
     required: true
 runs:
   using: "node20"
-  main: "../lib/merge-readiness-notification.js"
+  main: "../lib/merge_readiness_notification.js"
