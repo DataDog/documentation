@@ -1,1 +1,1 @@
-REUSE INSTRUCTIONS
+Optionally, enter the name of the OpenSearch index.

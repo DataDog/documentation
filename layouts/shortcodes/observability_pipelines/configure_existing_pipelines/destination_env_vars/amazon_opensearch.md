@@ -1,1 +1,6 @@
-REUSE INSTRUCTIONS
+- Amazon OpenSearch authentication username
+	- Stored in the environment variable `DD_OP_DESTINATION_AMAZON_OPENSEARCH_USERNAME`.
+- Amazon OpenSearch authentication password
+	- Stored in the environment variable `DD_OP_DESTINATION_AMAZON_OPENSEARCH_PASSWORD`.
+- Amazon OpenSearch  endpoint URL
+	- Stored in the environment variable `DD_OP_DESTINATION_AMAZON_OPENSEARCH_ENDPOINT_URL`.
