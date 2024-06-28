@@ -18,7 +18,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Notify Slack if PR is already approved
-        uses: ./../../docs_github_actions/merge_readiness_notification
+        uses: ./../../ts_github_actions/merge_readiness_notification
         with: 
           api-token: ${{ secrets.API_TOKEN }}
           slack-webhook-url: ${{ secrets.MERGE_READINESS_SLACK_WEBHOOK_URL }}
