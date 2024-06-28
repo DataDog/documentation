@@ -18,7 +18,7 @@ integration_id: ''
 integration_title: Amazon DocumentDB
 integration_version: ''
 is_public: true
-custom_kind: intégration
+custom_kind: integration
 manifest_version: '1.0'
 name: amazon_documentdb
 public_title: Intégration Datadog/Amazon DocumentDB

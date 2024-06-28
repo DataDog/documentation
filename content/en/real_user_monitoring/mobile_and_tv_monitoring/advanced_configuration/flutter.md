@@ -313,6 +313,16 @@ Depending on the event's type, only some specific properties can be modified:
 |                  | `resourceEvent.view.referrer`     | Referrer of the view linked to this action.   |
 |                  | `resourceEvent.view.url`          | URL of the view linked to this resource.      |
 
+## Retrieve the RUM session ID
+
+Retrieving the RUM session ID can be helpful for troubleshooting. For example, you can attach the session ID to support requests, emails, or bug reports so that your support team can later find the user session in Datadog.
+
+You can access the RUM session ID at runtime without waiting for the `sessionStarted` event:
+
+```dart
+final sessionId = await DatadogSdk.instance.rum?.getCurrentSessionId()
+```
+
 ## Set tracking consent (GDPR & CCPA compliance)
 
 In order to be compliant with data protection and privacy policies, the Flutter RUM SDK requires the tracking consent value at initialization.

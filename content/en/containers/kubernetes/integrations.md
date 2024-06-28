@@ -103,7 +103,7 @@ If you define pods indirectly (with deployments, ReplicaSets, or ReplicationCont
 {{% /tab %}}
 {{% tab "Local file" %}}
 
-You can store Autodiscovery templates as local files inside the mounted `/conf.d` directory. You must restart your Agent containers each time you change, add, or remove templates.
+You can store Autodiscovery templates as local files inside the mounted `conf.d` directory (`/etc/datadog-agent/conf.d`). You must restart your Agent containers each time you change, add, or remove templates.
 
 1. Create a `conf.d/<INTEGRATION_NAME>.d/conf.yaml` file on your host:
    ```yaml
@@ -502,7 +502,7 @@ Then, in your manifest, define the `volumeMounts` and `volumes`:
         volumeMounts:
         # [...]
           - name: postgresql-config-map
-            mountPath: /conf.d/postgresql.d
+            mountPath: /etc/datadog-agent/conf.d/postgresql.d
         # [...]
       volumes:
       # [...]

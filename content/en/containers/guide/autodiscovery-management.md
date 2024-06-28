@@ -20,7 +20,7 @@ You can adjust the discovery rules for the Agent to restrict metric and log coll
 
 These restrictions can be set by either:
 - Providing environment variables to the Datadog Agent container as an allowlist/blocklist of containers.
-- Adding annotations to your Kubernetes pods to allow/block individual containers.
+- Adding annotations to your Kubernetes pods to block individual pods or containers.
 
 The first option works well as a list of container names, images, or Kubernetes namespaces to exclude for the entire cluster. The second option works well for more fine tuned exclusions in Kubernetes.
 

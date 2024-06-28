@@ -452,7 +452,7 @@ tracer.use('http', {
 ```
 <div class="alert alert-info"><strong>Note</strong>: The tracer configuration for the integration must come <em>before</em> that instrumented module is imported.</div>
 
-[1]: https://datadoghq.dev/dd-trace-js/interfaces/plugins.connect.html#blocklist
+[1]: https://datadoghq.dev/dd-trace-js/interfaces/export_.plugins.connect.html#blocklist
 {{< /programming-lang >}}
 
 {{< programming-lang lang="java" >}}
