@@ -6,7 +6,7 @@ This folder is an NPM package set up for authoring GitHub actions in TypeScript.
 
 TypeScript is a typed programming language that compiles to JavaScript. When you run `npm run build` from this folder, any TypeScript in `src` is compiled into JavaScript files that are stored in the `lib` folder.
 
-See TypeScript's [Getting Started documentation][1] for resources tailored to your experience level.
+See TypeScript's [Get Started documentation][1] for resources tailored to your experience level.
 
 **Key concepts to understand before editing anything in this package:**
 
@@ -19,7 +19,7 @@ See TypeScript's [Getting Started documentation][1] for resources tailored to yo
 
 ### merge_readiness_notification
 
-The [merge_readiness_notification] action is intended to be run when the 'Do Not Merge' label has been removed from a PR in the documentation repo. If the label remover is not on the docs team, and if the PR has already been approved by a docs team member, the action makes a call to a Slack webhook to notify team members that a previously approved PR is ready to merge.
+The [merge_readiness_notification][2] action is intended to be run when the 'Do Not Merge' label has been removed from a PR in the documentation repo. If the label remover is not on the docs team, and if the PR has already been approved by a docs team member, the action makes a call to a Slack webhook to notify team members that a previously approved PR is ready to merge.
 
 Example usage:
 
