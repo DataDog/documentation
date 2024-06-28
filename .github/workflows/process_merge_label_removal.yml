@@ -1,0 +1,23 @@
+# If the "Do Not Merge" label is removed 
+# from a docs-approved PR,
+# and the remover is not a member of the docs team,
+# notify the docs team via the Slack webhook
+# that the PR is ready to be merged
+name: Process label removal
+on: 
+  pull_request:
+    types:
+      - unlabeled
+
+jobs:
+  run-ts-action:
+    runs-on: ubuntu-latest
+    if: github.event.label.name == 'Do Not Merge'
+    name: Process removal of 'Do Not Merge' label
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Notify Slack if PR is already approved
+        uses: ./../../docs_github_actions/merge_readiness_notification
+        with: 
+          api-token: ${{ secrets.API_TOKEN }}
