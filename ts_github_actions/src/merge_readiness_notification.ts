@@ -24,6 +24,7 @@ async function main(): Promise<any> {
         team_slug: 'documentation'
     });
     const teamMemberLogins = members.map((member) => member.login);
+    console.log(`Docs team members: ${teamMemberLogins.join(', ')}`);
 
     // If the person who removed the label is a docs team member,
     // skip the Slack notification
