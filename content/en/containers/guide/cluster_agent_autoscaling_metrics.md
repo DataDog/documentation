@@ -82,7 +82,7 @@ To enable the external metrics server with your Cluster Agent managed by the Dat
     global:
       credentials:
         apiKey: <DATADOG_API_KEY>
-        appKey: <DATADOG_API_KEY>
+        appKey: <DATADOG_APP_KEY>
 
     features:
       externalMetricsServer:
