@@ -1,5 +1,4 @@
-import { getHitData } from './getHitData';
-import { truncateContentAtHighlight } from '../../helpers/truncateContent';
+import { getHitData, getSnippetForDisplay } from './getHitData';
 import connectHits from 'instantsearch.js/es/connectors/hits/connectHits';
 
 const renderHits = (renderOptions, isFirstRender) => {
@@ -37,7 +36,7 @@ const renderHits = (renderOptions, isFirstRender) => {
         return hitsArray
             .map((item) => {
                 const hit = getHitData(item, renderOptions.results.query);
-                const displayContent = truncateContentAtHighlight(hit.content, 300);
+                const displayContent = getSnippetForDisplay(hit, false);
                 const cleanRelpermalink = `${basePathName}${hit.relpermalink}`.replace('//', '/');
 
                 return `
