@@ -71,7 +71,7 @@ COPY datadog-init /app/datadog-init
 
 サーバーレスアプリケーションをデプロイすると、コードへの変更を含むバージョンの Serverless-Init で実行されます。
 
-## ヘルプ
+## コミュニティ
 
 製品のフィードバックや質問については、[Slack の Datadog コミュニティ](https://chat.datadoghq.com/)の `#serverless` チャンネルに参加してください。
 
