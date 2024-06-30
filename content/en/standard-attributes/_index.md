@@ -133,11 +133,6 @@ attributes:
       - icon-log
     type: string
     domain: HTTP
-    description: The version of HTTP used for the request.
-    product_source: 
-      - icon-log
-    type: string
-    domain: HTTP
   - name: http.url_details.host
     description: The HTTP host part of the URL.
     product_source: 
