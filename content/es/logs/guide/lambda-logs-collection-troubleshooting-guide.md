@@ -28,7 +28,7 @@ Si no ves logs reenviados desde una función Lambda del Datadog Forwarder en el 
 
 2. Haz clic en la pestaña Monitoring (Monitorización).
 
-    {{< img src="logs/guide/lambda-monitoring-tab.png" alt="Pestaña Monitoring (Monitorización)" style="width:80%;" >}}
+    {{< img src="logs/guide/lambda-monitoring-tab.png" alt="Pestaña de monitorización" style="width:80%;" >}}
 
 3. La pestaña Monitoring (Monitorización) muestra una serie de gráficos que indican la siguiente información sobre tu función Lambda: 
     * invocaciones
