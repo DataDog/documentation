@@ -27,7 +27,7 @@ Use the following template variables when configuring Autodiscovery in order to 
 | `"%%port_<NAME>%%"`     | Uses the port associated with the port name `<NAME>`.                                                                                                                                                           |
 | `"%%pid%%"`                 | Retrieves the container process ID as returned by `docker inspect --format '{{.State.Pid}}' <CONTAINER_NAME>`.                                                                                              |
 | `"%%hostname%%"`            | Retrieves the `hostname` value from the container configuration. Only use it if the `"%%host%%"` variable cannot fetch a reliable IP (example: [ECS awsvpc mode][1]).                                       |
-| `"%%env_<ENV_VAR>%%"`       | Uses the contents of the `$<ENV_VAR>` environment variable **as seen by the Agent process**.                                                                                                                |
+| `"%%env_<ENV_VAR>%%"`       | Uses the contents of the `$<ENV_VAR>` environment variable **as seen by the Agent process**. For any checks dispatched by the Cluster Agent (clusterchecks), the contents of the `$<ENV_VAR>` as seen by the Cluster Agent process are used instead.                                                                                                                |
 | `"%%kube_namespace%%"`      | Auto-detects the Kubernetes namespace |
 | `"%%kube_pod_name%%"`       | Auto-detects the Kubernetes pod name  |
 | `"%%kube_pod_uid%%"`        | Auto-detects the Kubernetes pod UID   |
