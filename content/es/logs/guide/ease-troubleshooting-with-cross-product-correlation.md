@@ -18,7 +18,7 @@ title: Facilitar la resolución de problemas a través de la correlación entre 
 
 ## Información general
 
-El [etiquetado unificado de servicios][1] ofrece capacidades de correlación de alto nivel. En ocasiones, es posible que los puntos de partida de tu investigación sean un log, una traza, una vista o un test Synthetic únicos. Correlacionar logs, trazas y vistas con otros datos proporciona un contexto útil que te permite calcular el impacto en el negocio e identificar la causa raíz de un problema rápidamente.
+El [etiquetado unificado de servicios][1] ofrece capacidades de correlación de alto nivel. En ocasiones, es posible que los puntos de partida de tu investigación sean un log, una traza, una vista o un test Synthetic únicos. Correlacionar logs, trazas y vistas con otros datos proporciona un contexto útil que te permite calcular el impacto en tus actividades e identificar la causa raíz de un problema rápidamente.
 
 {{< img src="logs/guide/ease-troubleshooting-with-cross-product-correlation/full-stack-cover.png" alt="Correlación de pila completa" style="width:100%;" >}}
 
@@ -36,11 +36,11 @@ En esta guía te explica cómo correlacionar los datos de toda la pila. Dependie
 
 ## Correlacionar logs del lado del servidor con trazas
 
-Cuando tus usuarios encuentran errores o una latencia elevada en tu aplicación, la visualización de logs específicos de una solicitud problemática puede revelar exactamente qué ha salido mal. Al reunir todos los logs relativos a una solicitud determinada, puedes ver con lujo de detalles cómo se ha gestionado de principio a fin, para diagnosticar rápidamente el problema.
+Cuando tus usuarios encuentran errores o una latencia elevada en tu aplicación, la visualización de logs específicos de una solicitud problemática puede revelar exactamente qué ha salido mal. Al reunir todos los logs relativos a una solicitud determinada, puedes ver con lujo de detalles cómo se ha gestionado de principio a fin y así diagnosticar rápidamente el problema.
 
 Correlacionar tus logs con trazas también facilita la aplicación de [una agresiva estrategia de muestreo sin pérdida de coherencia a nivel de la entidad][2] mediante el uso de `trace_id`.
 
-La [correlación de logs de aplicación](#correlate-application-logs) te proporciona una amplia visibilidad de toda tu pila, pero algunos casos de uso específicos requieren una correlación más profunda en tu pila. Sigue los siguientes enlaces para completar la configuración para cada caso de uso:
+La [correlación de logs de aplicación](#correlate-application-logs) te proporciona una amplia visibilidad de toda tu pila, pero algunos casos de uso específicos requieren una correlación más profunda en tu pila. Sigue los siguientes enlaces para completar la configuración de cada caso de uso:
 
 * [Correlacionar logs de proxy](#correlate-proxy-logs)
 * [Correlacionar logs de base de datos](#correlate-database-logs)
