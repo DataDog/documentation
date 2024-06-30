@@ -2,7 +2,7 @@
 aliases:
 - /es/logs/faq/how-to-set-up-only-logs
 kind: documentación
-title: Uso del Datadog Agent sólo para la recopilación de logs
+title: Uso exclusivo del Datadog Agent para la recopilación de logs
 ---
 
 Para deshabilitar las cargas útiles, debes ejecutar el Agent v6.4 o superior. Esto deshabilita el envío de datos de métricas, para que los hosts dejen de aparecer en Datadog. Sigue estos pasos:
