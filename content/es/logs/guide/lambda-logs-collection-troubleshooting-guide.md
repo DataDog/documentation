@@ -16,7 +16,7 @@ Si no ves logs reenviados desde una función Lambda del Datadog Forwarder en el 
 1. Ve a la [vista de Live Tail del Explorador de logs][2].
 2. En la barra de búsqueda, utiliza un filtro para limitar la vista de Live Tail sólo a la logs procedentes de tu función Lambda. Algunas consultas comunes de búsqueda son:
     * Por fuente: la fuente suele estar configurada como`source:lambda`, `source:aws` o `source:cloudwatch`, pero puedes encontrar otras fuentes posibles en la función`parse_event_source` en la [función Lambda][3]. 
-    * Por nombre de Forwarder: la función Lambda añade una etiqueta `forwardername` a todos los logs que reenvía. Puedes filtrar a través de esta etiqueta buscando `forwardername:*` o `forwardername:<Forwarder_FUNCTION_NAME>`.
+    * Por nombre de Forwarder: la función Lambda añade una etiqueta (tag) `forwardername` a todos los logs que reenvía. Puedes filtrar a través de esta etiqueta buscando `forwardername:*` o `forwardername:<Forwarder_FUNCTION_NAME>`.
 3. Si ves logs en Live Tail, pero no en el Explorador de logs, significa que tu índice de logs tiene configurados algunos [filtros de exclusión][4]. Estos filtros están filtrando tus logs.
 4. Si no ves logs en Live Tail, los logs no están llegando a Datadog.
 
@@ -38,9 +38,9 @@ Si no ves logs reenviados desde una función Lambda del Datadog Forwarder en el 
 4. Si no ves ningún punto de datos en el gráfico **Invocations** (Invocaciones), puede que haya un problema con los activadores que has configurado para tu función. Consulte [Gestionar los activadores de tu función](#manage-your-function-triggers). Para obtener más información sobre las invocaciones de tu Lambda sin utilizar la pestaña de monitorización, consulta [Visualización de métricas Lambda en Datadog](#viewing-lambda-metrics-in-datadog).
 5. Si ves puntos de datos en el gráfico "Error count and success rate" (Recuento de errores y tasa de éxito), [comprueba los logs de la función Lambda](#check-the-lambda-function-logs) para ver de qué mensajes de error se están informando.
 
-### Visualización de métricas de Lambda en Datadog
+### Visualización de métricas Lambda en Datadog
 
-Si has habilitado métricas de AWS Lambda, puedes ver métricas relacionadas con invocaciones de Lambda y errores en Datadog. Todas las siguientes métricas tienen la etiqueta `functionname`: 
+Si has habilitado métricas AWS Lambda, puedes ver métricas relacionadas con invocaciones de Lambda y errores en Datadog. Todas las siguientes métricas tienen la etiqueta `functionname`: 
 
 | Métrica                        | Descripción                                                                                        |
 |-------------------------------|----------------------------------------------------------------------------------------------------|
@@ -50,7 +50,7 @@ Si has habilitado métricas de AWS Lambda, puedes ver métricas relacionadas con
 | `aws.lambda.duration.maximum` | Tiempo máximo (en milisegundos) que ha tardado en terminar de ejecutarse la función Lambda  |
 | `aws.lambda.throttles`        | Número de intentos de invocación que se limitaron debido a que los índices de invocación excedían los límites del cliente |
 
-Para obtener más información sobre éstas y otras métricas de AWS Lambda, consulta las [métricas de AWS Lambda][6].
+Para obtener más información sobre éstas y otras métricas de AWS Lambda, consulta las [métricas AWS Lambda][6].
 
 ### Gestionar los activadores de tu función
 
