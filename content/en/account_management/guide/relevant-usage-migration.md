@@ -163,20 +163,20 @@ After October 1, 2024, the [Get hourly usage by product family][1] v2 endpoint w
         "region": "us",
         "timestamp": "2024-04-01T00:00:00+00:00",
         "measurements": [
-// Three new keys representing SKUs that your RUM usage may be billed on.
+// Three new keys representing SKUs that your RUM usage might be billed on.
           {
               "usage_type": "rum_total_session_count", 
-// SKU that your usage may be billed on. Null if the SKU is not active for your org
+// SKU that your usage might be billed on. Null if the SKU is not active for your org
               "usage": null
            },
            {
              "usage_type": "rum_replay_session_count", 
-// SKU that your usage may be billed on. Null if the SKU is not active for your org
+// SKU that your usage might be billed on. Null if the SKU is not active for your org
               "usage": 50
            },
            {
               "usage_type": "rum_lite_session_count", 
-// SKU that your usage may be billed on. Null if the SKU is not active for your org
+// SKU that your usage might be billed on. Null if the SKU is not active for your org
               "usage": 50
             }
 
@@ -385,7 +385,7 @@ After October 1, 2024, the [Get usage across your account][2] v1 endpoint will h
 {{< highlight json "hl_lines=3 8 23" >}}
 {
   "usage": {
-// Three keys representing SKUs that your RUM usage may be billed on 
+// Three keys representing SKUs that your RUM usage might be billed on
     "rum_total_session_count_agg_sum": null,
     "rum_replay_session_count_agg_sum": 50,  
     "rum_lite_session_count_agg_sum": null,
@@ -426,7 +426,7 @@ Keys that represent total usage across all retentions will be deprecated and dis
 - `live_indexed_events_agg_sum`
 - `rehydrated_indexed_events_agg_sum`
 
-The usage across all retention periods can continue be calculated by summing the individual per-retention keys. 
+You can continue to calculate the usage across all retention periods by summing the individual retention keys.
 
 #### Current response structure
 
