@@ -5,13 +5,13 @@ The Rsyslog and Syslog-ng destinations match these log fields to the following S
 | Log Event       | SYSLOG FIELD | Default                    |
 |-----------------|--------------|----------------------------|
 | log["message"]  | MESSAGE      | `NIL`                      |
-| log["procid"]   | PROCID       | `<OPW PID>    `            |
+| log["procid"]   | PROCID       | The running Worker's process ID. |
 | log["appname"]  | APP-NAME     | `observability_pipelines`  |
 | log["facility"] | FACILITY     | `8 (log_user)`             |
 | log["msgid"]    | MSGID        | `NIL`                      |
 | log["severity"] | SEVERITY     | `info`                     |
 | log["host"]     | HOSTNAME     | `NIL`                      |
-| log["timestamp"]| TIMESTAMP    | `Utc::now()`               |
+| log["timestamp"]| TIMESTAMP    | Current UTC time.          |
 
 The following destination settings are optional:
 
