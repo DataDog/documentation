@@ -1,49 +1,50 @@
 ---
+title: Export Logs
+kind: documentation
+description: 'Export your Log Explorer view to reuse it later or in different contexts.'
 aliases:
-- /ja/logs/export
-description: ログエクスプローラーのビューをエクスポートして、後で、または別のコンテキストで再利用することができます。
+    - /logs/export
 further_reading:
-- link: logs/explorer/search
-  tag: ドキュメント
-  text: ログのフィルター方法
-- link: logs/explorer/analytics
-  tag: ドキュメント
-  text: ログをグループ化する方法
-- link: logs/explorer/visualize
-  tag: ドキュメント
-  text: ログからビジュアライゼーションを作成する
-title: ログのエクスポート
+    - link: logs/explorer/search
+      tag: Documentation
+      text: Learn how to filter logs
+    - link: logs/explorer/analytics
+      tag: Documentation
+      text: Learn how to group logs
+    - link: logs/explorer/visualize
+      tag: Documentation
+      text: Create visualizations from logs
 ---
 
-## 概要
+## Overview
 
-いつでも、現在の集計に応じて、ログ探索を次のように**エクスポート**または**保存**します。
+At any moment, and depending on your current aggregation, **export** or **save** your log exploration as a:
 
-- 将来の自身またはチームメイトの調査の開始点として使用する[**保存ビュー**][1]。
-- レポートまたは統合を目的とした[**ダッシュボードウィジェット**][2]または[**ノートブックウィジェット**][8]。
-- 事前定義されたしきい値でアラートをトリガーするための[**監視**][3]。
-- ログが Datadog に取り込まれるときに、ログを長期 KPI に集計するための[**メトリクス**][4]。
-- ログエクスプローラーでクエリをテストし、[Datadog API][5] を使用してカスタムレポートを構築するための **cURL コマンド**。
-- **CSV** (個別ログとトランザクションの場合)。個別ログは 10 万件まで、パターンは 300 件まで、トランザクションは 500 件まで一度にエクスポートすることができます。また、時系列、トップリスト、テーブルビューを CSV ファイルとしてダウンロードすることができます。
-- ビューの**共有**: メールや Slack などを通じて、現在のビューへのリンクをチームメートと共有します。この機能で利用可能なすべての[Datadog 通知インテグレーション][6]を参照してください。
+- [**Saved View**][1] to use as an investigation starting point for future-yourself or your teammates.
+- [**Dashboard widget**][2] or [**Notebooks widget**][8] for reporting or consolidation purposes.
+- [**Monitor**][3] to trigger alerts on predefined thresholds.
+- [**Metric**][4] to aggregate your logs into long term KPIs, as they are ingested in Datadog.
+- **cURL command** to test your queries in the Log Explorer and then build custom reports using [Datadog APIs][5].
+- **CSV** (for individual logs and transactions). You can export up to 100,000 logs at once for individual logs, 300 for Patterns, and 500 for Transactions. You can also download a timeseries, top list, or table view as a CSV file.
+- **Share** View: Share a link to the current view with your teammates through email, Slack, and more. See all of the [Datadog notification integrations][6] available for this feature.
 
-{{< img src="logs/explorer/export3.png" alt="検索フィルター" style="width:100%;" >}}
+{{< img src="logs/explorer/export3.png" alt="Search Filter" style="width:100%;" >}}
 
-また、ログイベントのサイドパネルで `Save to notebook` を選択することで、個々のログをノートブックに保存することができます。ノートブックに保存されたログは読み手に優しい形式で表示され、この表示はログイベント自体の保持期間が終了した後でもノートブックに保存されます。
+You can also save individual logs to a notebook by selecting `Save to notebook` in the log event side panel. Logs saved to notebooks are displayed in a reader-friendly format, and this display is saved in the Notebook even after the log event itself has aged out of retention.
 
-{{< img src="logs/explorer/save_logs_to_notebooks.png" alt="ログをノートブックに保存する" style="width:80%;" >}}
+{{< img src="logs/explorer/save_logs_to_notebooks.png" alt="Save logs to notebooks" style="width:80%;" >}}
 
-Logs API が返す最大 1000 件以上のログリストを取得する場合は、[ページネーション機能][7]を使用します。
+To retrieve a log list longer than the maximum 1000 logs limit returned by the Logs API, use [the pagination feature][7].
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/logs/explorer/saved_views/
-[2]: /ja/dashboards/
-[3]: /ja/monitors/types/log/
-[4]: /ja/logs/logs_to_metrics
-[5]: /ja/api/latest/logs/
-[6]: /ja/integrations/#cat-notification
-[7]: /ja/logs/guide/collect-multiple-logs-with-pagination/?tab=v2api
-[8]: /ja/notebooks/
+[1]: /logs/explorer/saved_views/
+[2]: /dashboards/
+[3]: /monitors/types/log/
+[4]: /logs/logs_to_metrics
+[5]: /api/latest/logs/
+[6]: /integrations/#cat-notification
+[7]: /logs/guide/collect-multiple-logs-with-pagination/?tab=v2api
+[8]: /notebooks/

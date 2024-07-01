@@ -1,314 +1,316 @@
 ---
+title: Query Syntax
+kind: documentation
+description: "Global search of all your traces with tags"
 aliases:
-- /ja/tracing/trace_search_analytics/
-- /ja/tracing/trace_search/
-- /ja/tracing/search
-- /ja/tracing/getting_further/apm_events/
-- /ja/tracing/trace_search_and_analytics/search/
-- /ja/tracing/search/
-- /ja/tracing/advanced/search/
-- /ja/tracing/app_analytics/search
-- /ja/tracing/live_search_and_analytics/search
-- /ja/tracing/trace_search_analytics/analytics
-- /ja/tracing/analytics
-- /ja/tracing/visualization/analytics
-- /ja/tracing/trace_search_and_analytics/analytics/
-- /ja/tracing/app_analytics/analytics
-- /ja/tracing/trace_search_and_analytics/query_syntax
-description: タグを使用したすべてのトレースのグローバル検索
+ - /tracing/search_syntax/
+ - /tracing/trace_search_analytics/
+ - /tracing/trace_search/
+ - /tracing/search
+ - /tracing/getting_further/apm_events/
+ - /tracing/trace_search_and_analytics/search/
+ - /tracing/search/
+ - /tracing/advanced/search/
+ - /tracing/app_analytics/search
+ - /tracing/live_search_and_analytics/search
+ - /tracing/trace_search_analytics/analytics
+ - /tracing/analytics
+ - /tracing/visualization/analytics
+ - /tracing/trace_search_and_analytics/analytics/
+ - /tracing/app_analytics/analytics
+ - /tracing/trace_search_and_analytics/query_syntax
 further_reading:
 - link: /tracing/trace_collection/
-  tag: ドキュメント
-  text: アプリケーションで APM トレースをセットアップする方法
+  tag: Documentation
+  text: Learn how to setup APM tracing with your application
 - link: /tracing/trace_explorer/trace_view/
-  tag: ドキュメント
-  text: Datadog トレースの読み方を理解する
-- link: /tracing/services/services_list/
-  tag: ドキュメント
-  text: Datadog に報告するサービスの一覧
+  tag: Documentation
+  text: Understand how to read a Datadog Trace
+- link: /tracing/service_catalog/
+  tag: Documentation
+  text: Discover and catalog the services reporting to Datadog
 - link: /tracing/services/service_page/
-  tag: ドキュメント
-  text: Datadog のサービスについて
+  tag: Documentation
+  text: Learn more about services in Datadog
 - link: /tracing/services/resource_page/
-  tag: ドキュメント
-  text: リソースのパフォーマンスとトレースの詳細
-title: 検索構文
+  tag: Documentation
+  text: Dive into your resource performance and traces
 ---
 
-## 検索バー
+## Search bar
 
-すべての検索パラメーターは、ページの URL に含まれているので、ビューを共有するのに便利です。
+All search parameters are contained in the url of the page, which can be helpful for sharing your view.
 
-### 検索構文
+### Search syntax
 
-クエリは*条件*と*演算子*で構成されます。
+A query is composed of *terms* and *operators*.
 
-*条件*には 2 種類あります。
+There are two types of *terms*:
 
-* [**ファセット**](#facet-search)
+* A [**Facet**](#facet-search)
 
-* [**タグ**](#tags-search)
+* A [**Tag**](#tags-search)
 
-複合クエリで複数の*条件*を組み合わせるには、以下のブール演算子のいずれかを使用します。
+To combine multiple *terms* into a complex query, use any of the following boolean operators:
 
-| **演算子** | **説明**                                                                                        | **例**                  |
+| **Operator** | **Description**                                                                                        | **Example**                  |
 |:-------------|:-------------------------------------------------------------------------------------------------------|:-----------------------------|
-| `AND`        | **積**: 両方の条件を含むイベントが選択されます (何も追加しなければ、AND がデフォルトで採用されます)。 | authentication AND failure   |
-| `OR`         | **和**: いずれかの条件を含むイベントが選択されます。                                            | authentication OR password   |
-| `-`          | **排他**: 後続の条件はイベントに含まれません。                                                  | authentication AND -password |
+| `AND`        | **Intersection**: both terms are in the selected events (if nothing is added, AND is taken by default) | authentication AND failure   |
+| `OR`         | **Union**: either terms is contained in the selected events                                            | authentication OR password   |
+| `-`          | **Exclusion**: the following term is NOT in the event                                                  | authentication AND -password |
 
-### ファセット検索
+### Facet search
 
-特定の[ファセット](#facets)を検索するには、[まずそれをファセットとして追加](#create-a-facet)し、次に `@` を追加してファセット検索を指定します。
+To search on a specific [facet](#facets) you must [add it as a facet first](#create-a-facet) then add `@` to specify you are searching on a facet.
 
-たとえば、ファセット名が **url** で、**url** の値 *www.datadoghq.com* で絞り込む場合は、次のように入力します。
+For instance, if your facet name is **url** and you want to filter on the **url** value *www.datadoghq.com* just enter:
 
 `@url:www.datadoghq.com`
 
-### タグ検索
+### Tags search
 
-トレースは、タグを生成するホストと[インテグレーション][1]からタグを引き継ぎます。これらも、ファセットとして検索で使用できます。
+Your traces inherit tags from hosts and [integrations][1] that generate them. They can be used in the search and as facets as well:
 
-| クエリ                                                          | 一致                                                                       |
+| Query                                                          | Match                                                                       |
 |:---------------------------------------------------------------|:----------------------------------------------------------------------------|
-| `("env:prod" OR test)`                                         | タグ `#env:prod` またはタグ `#test` を持つすべてのトレース                      |
-| `(service:srvA OR service:srvB)` または `(service:(srvA OR srvB))` | タグ `#service:srvA` または `#service:srvB` を含むすべてのトレース。            |
-| `("env:prod" AND -"version:beta")`                             | `#env:prod` を含み、`#version:beta` を含まないすべてのトレース |
+| `("env:prod" OR test)`                                         | All traces with the tag `#env:prod` or the tag `#test`                      |
+| `(service:srvA OR service:srvB)` or `(service:(srvA OR srvB))` | All traces that contain tags `#service:srvA` or `#service:srvB`.            |
+| `("env:prod" AND -"version:beta")`                             | All traces that contain `#env:prod` and that do not contain `#version:beta` |
 
-タグが[タグのベストプラクティス][2]に従わず、`key:value` 構文も使用していない場合は、次の検索クエリを使用します。
+If your tags don't follow [tags best practices][2] and don't use the `key:value` syntax, use this search query:
 
 * `tags:<MY_TAG>`
 
-### ワイルドカード
+### Wildcards
 
-複数文字のワイルドカード検索を実行するには、`*` 記号を次のように使用します。
+To perform a multi-character wildcard search, use the `*` symbol as follows:
 
-* `service:web*` は、`web` で始まるサービスを持つすべてのトレースに一致します
-* `@url:data*` は、`data` で始まる `url` を持つすべてのトレースに一致します。
+* `service:web*`  matches every trace that has a services starting with `web`
+* `@url:data*`  matches every trace that has a `url` starting with `data`.
 
-### 数値
+### Numerical values
 
-`<`、`>`、`<=`、または `>=` を使用して、数値属性の検索を実行します。たとえば、100ms を超える応答時間を持つすべてのトレースを取得するには、次のようにします。
+Use `<`,`>`, `<=`, or `>=` to perform a search on numerical attributes. For instance, retrieve all traces that have a response time over 100ms with:
 
-`@http.response_time:&gt;100`
+`@http.response_time:>100`
 
-特定の範囲内にある数値属性を検索することもできます。たとえば、4xx エラーをすべて取得するには、次のようにします。
+It is also possible to search for numerical attributes within a specific range. For instance, retrieve all your 4xx errors with:
 
 `@http.status_code:[400 TO 499]`
 
-### オートコンプリート
+### Autocomplete
 
-複雑なクエリを入力するのは面倒です。検索バーのオートコンプリート機能を使用すると、既存の値を使用してクエリを完成させることができます。
+Typing a complex query can be cumbersome. Use the search bar's autocomplete feature to complete your query using existing values:
 
-{{< img src="tracing/app_analytics/search/search_bar_autocomplete.png" alt="検索バーのオートコンプリート" style="width:60%;">}}
+{{< img src="tracing/app_analytics/search/search_bar_autocomplete.png" alt="search bar autocomplete " style="width:60%;">}}
 
-### 特殊文字のエスケープ
+### Escaping of special characters
 
-`?`、`>`、`<`、`:`、`=`、`"`、`~`、`/`、および `\` は特殊属性と見なされ、`\` を使用してエスケープする必要があります。
-たとえば、`url` に `user=JaneDoe` を含むトレースを検索するには、次の検索を入力する必要があります。
+The following attributes are considered as special: `?`, `>`, `<`, `:`, `=`,`"`, `~`, `/`, and `\` require escaping.
+For instance, to search traces that contain `user=JaneDoe` in their `url` the following search must be entered:
 
 `@url:*user\=JaneDoe*`
 
-同じロジックはトレース属性内のスペースにも適用する必要があります。トレース属性にスペースを含めることはお勧めしませんが、含まれている場合は、スペースをエスケープする必要があります。
-属性の名前が `user.first name` の場合、スペースをエスケープしてこの属性で検索を実行します。
+The same logic must be applied to spaces within trace attributes. It is not recommended to have spaces in trace attributes but in such cases, spaces require escaping.
+If an attribute is called `user.first name`, perform a search on this attribute by escaping the space:
 
 `@user.first\ name:myvalue`
 
-### 検索の保存
+### Saved searches
 
-同じビューを毎日作成するのは時間の無駄です。保存された検索には、検索クエリ、列、期間が含まれます。検索名やクエリにかかわらず、オートコンプリートの一致により、これは検索バーで利用できます。
+Don't lose time building the same views everyday. Saved searches contain your search query, columns, and time horizon. They are then available in the search bar thanks to the auto-complete matching whether the search name or query.
 
-{{< img src="tracing/app_analytics/search/saved_search.png" alt="保存された検索" style="width:80%;">}}
+{{< img src="tracing/app_analytics/search/saved_search.png" alt="Saved Search" style="width:80%;">}}
 
-保存された検索を削除するには、Trace search ドロップダウンメニューの下にあるごみ箱のアイコンをクリックします。
+To delete a saved search, click on the bin icon under the Trace search dropdown menu.
 
-## タイムレンジ
+## Time range
 
-タイムレンジを使用すると、特定の期間内のトレースを表示できます。タイムレンジをすばやく変更するには、プリセットされたレンジをドロップダウンメニューから選択します（または、[カスタムタイムフレームを入力します][3]):
+The time range allows you to display traces within a given time period. Quickly change the time range by selecting a preset range from the dropdown menu (or [entering a custom time frame][3]):
 
-{{< img src="tracing/app_analytics/search/time_frame2.png" style="width:50%;" alt="タイムフレームを選択" >}}
+{{< img src="tracing/app_analytics/search/time_frame2.png" style="width:50%;" alt="Select time frame" >}}
 
-## トレースストリーム
+## Trace stream
 
-トレースストリームは、選択されたコンテキストに一致するトレースのリストです。コンテキストは、[検索バー](#search-bar)のフィルターと[タイムレンジ](#time-range)で定義されます。
+The Trace Stream is the list of traces that match the selected context. A context is defined by a [search bar](#search-bar) filter and a [time range](#time-range).
 
-### 完全なトレースの表示
+### Displaying a full trace
 
-トレースをクリックして、詳細を表示します。
+Click on any trace to see more details about it:
 
-{{< img src="tracing/app_analytics/search/trace_in_tracestream.png" alt="トレースストリームのトレース" style="width:80%;">}}
+{{< img src="tracing/app_analytics/search/trace_in_tracestream.png" alt="Trace in tracestream" style="width:80%;">}}
 
-### 列
+### Columns
 
-リストにトレースの詳細を追加するには、**Options** ボタンをクリックして、表示するファセットを選択します。
+To add more Trace details to the list, click the **Options** button and select any Facets you want to see:
 
-{{< img src="tracing/app_analytics/search/trace_list_with_column.png" alt="列を含むトレースリスト" style="width:80%;">}}
+{{< img src="tracing/app_analytics/search/trace_list_with_column.png" alt="Trace list with columns" style="width:80%;">}}
 
-### 複数行表示
+### Multi-line display
 
-{{< img src="tracing/app_analytics/search/multi_line_display.png" alt="複数行表示" style="width:30%;">}}
+{{< img src="tracing/app_analytics/search/multi_line_display.png" alt="Multi-line display" style="width:30%;">}}
 
-トレースの表示行数を 1 行、3 行、10 行 から選択します。3 行と 10 行で表示すると、`error.stack` 属性に関する情報をより多く得ることができます。
+Choose to display one, three, or ten lines from your traces. 3 and 10 lines display are here to give you more insights on the `error.stack` attribute.
 
-* 1 行表示の場合
-{{< img src="tracing/app_analytics/search/1_multi_line.png" alt="1 行の複数行表示" style="width:80%;">}}
+* With one line displayed:
+{{< img src="tracing/app_analytics/search/1_multi_line.png" alt="1 line Multi-line display" style="width:80%;">}}
 
-* 3 行表示の場合
-{{< img src="tracing/app_analytics/search/3_multi_line.png" alt="2 行の複数行表示" style="width:80%;">}}
+* With three lines displayed:
+{{< img src="tracing/app_analytics/search/3_multi_line.png" alt="2 lines with Multi-line display" style="width:80%;">}}
 
-* 10 行表示の場合
-{{< img src="tracing/app_analytics/search/10_multi_line.png" alt="10 行の複数行表示" style="width:80%;">}}
+* With ten lines displayed:
+{{< img src="tracing/app_analytics/search/10_multi_line.png" alt="10 lines with Multi-line display" style="width:80%;">}}
 
-## ファセット
+## Facets
 
-ファセットは、1 つの属性またはタグの個別値をすべて表示すると共に、示されたトレースの量などのいくつかの基本分析も提供します。また、データを絞り込むためのスイッチにもなります。
+A Facet displays all the distinct values of an attribute or a tag as well as provides some basic analytics such as the amount of traces represented. This is also a switch to filter your data.
 
-ファセットを使用すると、特定の属性に基づいてデータセットを絞り込んだり、データセットの切り口を変えることができます。ファセットには、ユーザーやサービスなどがあります。
+Facets allow you to pivot or filter your datasets based on a given attribute. Examples Facets may include users, services, etc...
 
-{{< img src="tracing/app_analytics/search/facets_demo.png" alt="ファセットデモ" style="width:80%;">}}
+{{< img src="tracing/app_analytics/search/facets_demo.png" alt="Facets demo" style="width:80%;">}}
 
-### 定量 (メジャー)
+### Quantitative (measures)
 
-**必要に応じてメジャーを使用します。**
-* 複数のトレースから値を集計する。たとえば、Cassandra の行数にメジャーを作成し、リクエストされたファイルサイズの合計ごとに最上位の参照元または P95 を表示します。
-* ショッピングカートの値が $1000 を超えるサービスの最もレイテンシーの高いものを数値的に計算します。
-* 連続する値をフィルタリングします。たとえば、ビデオストリームの各ペイロードチャンクのサイズ（バイト単位）。
+**Use measures when you need to:**
+* Aggregate values from multiple traces. For example, create a measure on the number of rows in Cassandra and view the P95 or top-most referrers per sum of file size requested.
+* Numerically compute the highest latency services for shopping cart values over $1000.
+* Filter continuous values. For example, the size in bytes of each payload chunk of a video stream.
 
-**タイプ**
+**Types**
 
-メジャーには、同等の機能のために、（長）整数またはダブル値が付属しています。
+Measures come with either a (long) integer or double value, for equivalent capabilities.
 
-**単位**
+**Units**
 
-メジャーは、クエリ時間と表示時間の桁数を処理するための単位（秒単位の時間またはバイト単位のサイズ）をサポートします。単位は、フィールドではなく、メジャー自体のプロパティです。たとえば、ナノ秒単位の duration メジャーを考えてみます。`duration:1000` が 1000 ミリ秒を表す `service:A` からのスパンタグと、`duration:500` が 500 マイクロ秒を表す `service:B` からの他のスパンタグがあるとします。
-算術演算プロセッサーで流入するすべてのスパンタグの期間をナノ秒にスケーリングします。`service:A` のスパンタグには `*1000000` 乗数を使用し、`service:B` のスパンタグには `*1000` 乗数を使用します。
-`duration:>20ms`（検索構文を参照）を使用して、両方のサービスから一度に一貫してスパンタグにクエリを実行し、最大 1 分の集計結果を確認します。
+Measures support units (time in seconds or size in bytes) for handling of orders of magnitude at query time and display time. Unit is a property of the measure itself, not of the field. For example, consider a duration measure in nanoseconds: you have a span tag from `service:A` where `duration:1000` stands for `1000 milliseconds`, and another span tags from `service:B` where `duration:500` stands for `500 microseconds`:
+Scale duration into nanoseconds for all span tags flowing in with the arithmetic processor. Use a `*1000000` multiplier on span tags from `service:A`, and a `*1000` multiplier on span tags from `service:B`.
+Use `duration:>20ms` (see search syntax for reference) to consistently query span tags from both services at once, and see an aggregated result of max one minute.
 
-### ファセットの作成
+### Create a facet
 
-属性をファセットとして使用したり、検索で使用したりするには、属性をクリックしてファセットとして追加します。
+To start using an attribute as a Facet or in the search, click on it and add it as a Facet:
 
-{{< img src="tracing/app_analytics/search/create_facet.png" style="width:50%;" alt="ファセットの作成" style="width:50%;">}}
+{{< img src="tracing/app_analytics/search/create_facet.png" style="width:50%;" alt="Create Facet" style="width:50%;">}}
 
-これで、この属性の値が**すべての新しいトレースに**格納され、[検索バー](#search-bar)、[ファセットパネル](#facet-panel)、およびトレースグラフクエリで使用できるようになります。
+Once this is done, the value of this attribute is stored **for all new traces** and can be used in [the search bar](#search-bar), [the Facet Panel](#facet-panel), and in the Trace graph query.
 
-### ファセットパネル
+### Facet panel
 
-ファセットを使用し、トレースをフィルタリングします。検索バーと URL には、選択内容が自動的に反映されます。
+Use Facets to filter on your Traces. The search bar and url automatically reflect your selections.
 
-{{< img src="tracing/app_analytics/search/facet_panel.png" alt="ファセットパネル" style="width:30%;">}}
+{{< img src="tracing/app_analytics/search/facet_panel.png" alt="Facet panel" style="width:30%;">}}
 
-## Analytics の概要
+## Analytics overview
 
-[Analytics][4] を使用して、アプリケーション性能メトリクスや [Indexed Span][5] をタグで絞り込むことができます。これにより、サービスを流れるウェブリクエストを詳細に調べることができます。
+Use [Analytics][4] to filter application performance metrics and [Indexed Spans][5] by tags. It allows deep exploration of the web requests flowing through your service.
 
-Analytics は、15 分間 (ローリングウィンドウ) で収集されたデータを 100% 有するすべての APM [サービス][6]に対して自動的に有効化されます。カスタム [Retention Filter][7] およびレガシー版の App Analytics でインデックス化されたスパンは Analytics で 15 日間利用可能です。
+Analytics is automatically enabled for all APM [services][6] with 100% of ingested data for 15 minutes (rolling window). Spans indexed by custom [retention filters][7] and legacy App Analytics are available in Analytics for 15 days.
 
-データベースやキャッシュレイヤーなどのダウンストリームのサービスは、トレースを生成しないため利用可能なサービス一覧には含まれませんが、それらの情報は呼び出し側の上位レベルのサービスから取得されます。
+Downstream services like databases and cache layers aren't in the list of available services (as they don't generate traces on their own), but their information is picked up by the top level services that call them.
 
-## Analytics クエリ
+## Analytics query
 
-クエリを使用して、Analytics に表示させるデータを制御できます。
+Use the query to control what's displayed in your Analytics:
 
-1. 分析する `Duration` メトリクスまたは [ファセット][8]を選択します。`Duration` メトリクスを選択した場合は、集計関数を選択します。ファセットを選択した場合は、ユニーク数が表示されます。
+1. Choose the `Duration` metric or a [Facet][8] to analyze. Selecting the `Duration` metric lets you choose the aggregation function whereas a facet displays the unique count.
 
-    {{< img src="tracing/app_analytics/analytics/choose_measure_facet.png" alt="メジャーファセットを選択" style="width:50%;">}}
+    {{< img src="tracing/app_analytics/analytics/choose_measure_facet.png" alt="choose measure facet" style="width:50%;">}}
 
-2. `Duration` メトリクスには集計関数を選択します。
+2. Select the aggregation function for the `Duration` metric:
 
-    {{< img src="tracing/app_analytics/analytics/agg_function.png" alt="集計関数" style="width:50%;">}}
+    {{< img src="tracing/app_analytics/analytics/agg_function.png" alt="aggregation function" style="width:50%;">}}
 
-3. タグまたはファセットを使用して、分析を分割します。
+3. Use a tag or facet to split your Analytic.
 
-    {{< img src="tracing/app_analytics/analytics/split_by.png" alt="分割条件" style="width:50%;">}}
+    {{< img src="tracing/app_analytics/analytics/split_by.png" alt="split by" style="width:50%;">}}
 
-4. 選択したファセットに応じて、上位 (**top**) X 個と下位 (**bottom**) X 個のどちらの値を表示するかを選択します。
+4. Choose to display either the *X* **top** or **bottom** values according to the selected facet or `Duration`.
 
-    {{< img src="tracing/app_analytics/analytics/top_bottom_button.png" alt="上位下位ボタン" style="width:20%;">}}
+    {{< img src="tracing/app_analytics/analytics/top_bottom_button.png" alt="top bottom button" style="width:20%;">}}
 
-5. 分析タイムステップを選択します。
- グローバルタイムフレームを変更すると、使用可能なタイムステップ値のリストも変更されます。
+5. Choose the Analytic Timesteps.
+ Changing the global timeframe changes the list of available Timesteps values.
 
-    {{< img src="tracing/app_analytics/analytics/timesteps.png" alt="タイムステップ" style="width:30%;">}}
+    {{< img src="tracing/app_analytics/analytics/timesteps.png" alt="Timestep" style="width:30%;">}}
 
-## 視覚化
+## Visualizations
 
-分析セレクターを使用して、Analytics の可視化タイプを選択します。
+Select an Analytics visualization type using the Analytic selector:
 
 * [Timeseries](#timeseries)
-* [トップリスト](#top-list)
-* [テーブル](#table)
+* [Top List](#top-list)
+* [Table](#table)
 
 ### Timeseries
 
-選択したタイムフレーム内での `Duration` メトリクス（またはファセットのユニーク値数）の動きを可視化し、使用可能なファセットで分割します (オプション) 。
+Visualize the evolution of the `Duration` metric (or a facet unique count of values) over a selected time frame, and (optionally) split by an available facet.
 
-次の時系列 Analytics は、各**サービス**における **pc99** の **5 分**おきの**継続時間**の動きを示しています。
+The following timeseries Analytics shows the evolution of the **pc99** **duration** by steps of **5min** for each **Service**
 
-{{< img src="tracing/app_analytics/analytics/timeserie_example.png" alt="時系列例" style="width:90%;">}}
+{{< img src="tracing/app_analytics/analytics/timeserie_example.png" alt="timeserie example" style="width:90%;">}}
 
-### Toplist
+### Top list
 
-`継続時間`（またはファセットのユニーク値数）に基づいて、ファセットの上位の値を可視化します。
+Visualize the top values from a facet according to their `Duration` (or a facet unique count of values).
 
-以下の Analytics トップリストは、**pc99** の**サービス**の**継続時間**を上から示しています。
+The following top list analytics shows the top **pc99** **duration** of **Service**:
 
-{{< img src="tracing/app_analytics/analytics/top_list_example.png" alt="トップリストの例" style="width:90%;">}}
+{{< img src="tracing/app_analytics/analytics/top_list_example.png" alt="top list example" style="width:90%;">}}
 
-### 表
+### Table
 
-選択した[メジャー][9] (リストで選択した最初のメジャー) に基づいてファセットから上位の値を可視化し、この上位のリストに現れる要素に対して他のメジャーの値を表示します。検索クエリを更新したり、いずれかのディメンションに対応するログを調査することができます。
+Visualize the top values from a facet according to a chosen [measure][9] (the first measure you choose in the list), and display the value of additional measures for elements appearing in this top list. Update the search query or investigate logs corresponding to either dimension.
 
-* 複数のディメンションがある場合、上位の値は最初のディメンションに基づき決定されます。その後最初のディメンション内の上位値内の 2 番めのディメンション、次に 2 番目のディメンション内の上位値内の 3 番めのディメンションに基づき決定されます。
-* メジャーが複数ある場合、最初のメジャーに応じて上位または下位リストが決定されます。
-* サブセット（上位または下位）のみが表示されるため、小計がグループ内の実際の合計値とは異なる場合があります。このディメンジョンに対する、値が null または空欄のイベントは、サブグループとして表示されません。
+* When there are multiple dimensions, the top values are determined according to the first dimension, then according to the second dimension within the top values of the first dimension, then according to the third dimension within the top values of the second dimension.
+* When there are multiple measures, the top or bottom list is determined according to the first measure.
+* The subtotal may differ from the actual sum of values in a group, since only a subset (top or bottom) is displayed. Events with a null or empty value for this dimension are not displayed as a sub-group.
 
-**注**: 単一のメジャーと単一のディメンジョンで使用されるテーブルの可視化は、表示が異なりますが、上位リストと同じです。
+**Note**: A table visualization used for one single measure and one single dimension is the same as a toplist, just with a different display.
 
-次のテーブルログ分析は、**スループット**に基づいて、過去 15 分間の**上位ステータスコード**の動きをユニーク**クライアント IP** の数と共に示しています。
+The following Table Log Analytics shows the evolution of the **top Status Codes** according to their **Throughput**, along with the number of unique **Client IPs**, and over the last 15 minutes:
 
-{{< img src="tracing/app_analytics/analytics/trace_table_example.png" alt="上位リストの例" style="width:90%;">}}
+{{< img src="tracing/app_analytics/analytics/trace_table_example.png" alt="top list example" style="width:90%;">}}
 
-## 関連トレース
+## Related traces
 
-グラフの一部を選択またはクリックすると、グラフをズームインしたり、選択範囲に対応する[トレース][10]のリストを表示したりすることができます。
+Select or click on a section of the graph to either zoom in the graph or see the list of [traces][10] corresponding to your selection:
 
-{{< img src="tracing/app_analytics/analytics/view_traces.png" alt="トレースを確認" style="width:40%;">}}
+{{< img src="tracing/app_analytics/analytics/view_traces.png" alt="view Traces" style="width:40%;">}}
 
-## エクスポート
+## Export
 
-{{< img src="tracing/app_analytics/analytics/export_button.png" alt="分析をエクスポートボタン" style="width:40%;">}}
+{{< img src="tracing/app_analytics/analytics/export_button.png" alt="Export your analytics button" style="width:40%;">}}
 
-Analyticsをエクスポート
+Export your Analytics:
 
-* 新しい[APMモニター][11]宛
-* 既存の[タイムボード][12]宛。この機能はベータ版です。組織内でこれを有効にするには、[Datadogのサポートチームまでお問い合わせ][13]ください。
+* To a new [APM monitor][11]
+* To an existing [Timeboard][12]. This feature is in beta. [Contact the Datadog support team][13] to activate it for your organization.
 
-**注:** Analytics は [Indexed Span][14] ベースでのみエクスポートできます。
+**Note:** Analytics can be exported only when powered by [indexed spans][14].
 
-## ダッシュボード内のトレース
+## Traces in dashboard
 
-トレース検索から [Analytics][4] をエクスポートするか、[ダッシュボード][15]でメトリクスおよびログと共に直接構築します。 
+Export [Analytics][4] from the trace search or build them directly in your [Dashboard][15] alongside metrics and logs.
 
-[時系列ウィジェットに関する詳細][16]
+[Learn more about the timeseries widget][16].
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/tracing/setup/java/#integrations
-[2]: /ja/getting_started/tagging/#tags-best-practices
-[3]: /ja/dashboards/guide/custom_time_frames/
-[4]: /ja/tracing/trace_search_and_analytics/
-[5]: /ja/tracing/glossary/#apm-event
-[6]: /ja/tracing/glossary/#services
-[7]: /ja/tracing/trace_pipeline/trace_retention/#retention-filters
-[8]: /ja/tracing/trace_search_and_analytics/query_syntax/#facets
-[9]: /ja/tracing/trace_search_and_analytics/query_syntax/#measures
-[10]: /ja/tracing/glossary/#trace
-[11]: /ja/monitors/types/apm/
-[12]: /ja/dashboards/#timeboards
-[13]: /ja/help/
-[14]: /ja/tracing/glossary/#indexed-span
-[15]: /ja/dashboards/
-[16]: /ja/dashboards/widgets/timeseries/
+[1]: /tracing/setup/java/#integrations
+[2]: /getting_started/tagging/#tags-best-practices
+[3]: /dashboards/guide/custom_time_frames/
+[4]: /tracing/trace_search_and_analytics/
+[5]: /tracing/glossary/#apm-event
+[6]: /tracing/glossary/#services
+[7]: /tracing/trace_pipeline/trace_retention/#retention-filters
+[8]: /tracing/trace_search_and_analytics/query_syntax/#facets
+[9]: /tracing/trace_search_and_analytics/query_syntax/#measures
+[10]: /tracing/glossary/#trace
+[11]: /monitors/types/apm/
+[12]: /dashboards/#get-started
+[13]: /help/
+[14]: /tracing/glossary/#indexed-span
+[15]: /dashboards/
+[16]: /dashboards/widgets/timeseries/

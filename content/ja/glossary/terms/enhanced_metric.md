@@ -1,8 +1,8 @@
 ---
-core_product:
-- serverless monitoring
+title: enhanced metric
 synonyms:
-- 拡張 Lambda メトリクス
-title: 拡張メトリクス
+  - enhanced Lambda metric
+core_product:
+  - serverless monitoring
 ---
-Datadog は、Lambda ランタイムから拡張 Lambda メトリクスのセットを生成します。これらは、AWS Lambda インテグレーションによって提供されるデフォルトの Lambda メトリクスに追加されます。拡張 Lambda メトリクスは、`aws.lambda.enhanced.*` を先頭に付けます。
+Datadog generates a set of enhanced Lambda metrics from your Lambda runtime. These are in addition to the default Lambda metrics provided by the AWS Lambda integration. Enhanced Lambda metrics are prepended with `aws.lambda.enhanced.*`.

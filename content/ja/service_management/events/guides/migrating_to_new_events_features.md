@@ -1,204 +1,204 @@
 ---
+title: Migrating to the New Events Features
+kind: guide
 aliases:
-- /ja/events/guides/migrating_from_stream_to_explorer
-- /ja/events/guides/migrating_to_new_events_features
+- /events/guides/migrating_from_stream_to_explorer
+- /events/guides/migrating_to_new_events_features
 further_reading:
-- link: https://www.datadoghq.com/blog/datadog-events/
-  tag: ブログ
-  text: Datadog イベントの改善によるトラブルシューティングの迅速化
-kind: ガイド
-title: 新イベント機能への移行
+- link: "https://www.datadoghq.com/blog/datadog-events/"
+  tag: Blog
+  text: Troubleshoot faster with improved Datadog Events
 ---
 
 <div class="alert alert-warning">
-Datadog のレガシーイベントストリームとイベントモニターは、<strong>2022 年 6 月 30 日</strong>に廃止します。Datadog は、すべてのお客様を新しく改良されたイベントエクスペリエンスに移行します。このページには、この移行に関する重要な情報が記載されています。廃止日までに、このページの手順に従って、既存のイベント可視化およびモニターが引き続き適切に動作することを確認してください。</div>
+Datadog's legacy event stream and event monitors retire on <strong>June 30, 2022</strong>. Datadog is migrating all customers to a new and improved events experience. This page contains important information about this migration. Before the retirement date, follow the steps on this page to ensure that your existing event visualizations and monitors continue to work properly.</div>
 
 
-## なぜイベント機能を変更するのですか？
+## Why change Events features?
 
-10 年以上前に開始された Datadog のイベントストリームは、最も初期の機能の 1 つです。新しいイベントエクスペリエンスには、イベントからさらに大きな価値を得ることができる多くの新機能が含まれています。具体的には、イベント分析、イベントからメトリクスを生成する機能、イベントを後処理するパイプラインを作成する機能、ログ管理や APM など他の Datadog 製品と連携した、よりフレンドリーで直感的なクエリ構文などです。
+Launched more than 10 years ago, Datadog's event stream is one of its earliest features. The new events experience includes many new features that allow you to get even more value from your events. These include event analytics, the ability to generate metrics from your events, the ability to create pipelines to post-process events, and a much friendlier and more intuitive query syntax that is better aligned with other Datadog products, such as Log Management and APM.
 
-## 移行スケジュールを教えてください。
+## What is the migration timeline?
 
-<strong>2022 年 3 月</strong> - 新しいイベントエクスプローラーと分析にアクセスできるようになります。Datadog は、API で管理されていないお客様のダッシュボードやモニターの移行を開始します。
+<strong>March 2022</strong> - New Events Explorer and analytics are accessible. Datadog begins to migrate customer dashboards and monitors that are not managed with APIs.
 
-<strong>2022 年 5 月 5 日</strong> - イベントストリームは廃止し、イベントエクスプローラーに移行します。
+<strong>May 5, 2022</strong> - The event stream is retired in favor of the Event Explorer.
 
-<strong>2022 年 5 月 19 日</strong> - Datadog は移行されていないイベントモニターの評価は続けますが、この日からその編集はできなくなります。新しいイベントモニターは、新しい構文を使用する必要があります。
+<strong>May 19, 2022</strong> - Starting on this date, while Datadog continues to evaluate event monitors that have not been migrated, they are no longer editable. New event monitors must use the new syntax.
 
-<strong>2022 年 6 月 30 日</strong> - Datadog は、移行されていないイベントモニターの評価を停止します。レガシーイベントモニターが動作しなくなります。
+<strong>June 30, 2022</strong> - Datadog stops evaluating event monitors that have not been migrated. Legacy event monitors stop working.
 
-## どのようなアクションが必要ですか？
+## What action do I need to take?
 
-外部の API ベースのツール (Terraform やスクリプトなど) を使用してダッシュボードやモニターを管理<strong>していない</strong>場合、<strong>お客様側での対応は必要ありません</strong>。Datadog は、2022 年 4 月 30 日までにお客様のダッシュボードとモニターを移行します。Datadog は、古いモニターをそのまま残しますが、それらはミュートされ、遅くとも 2022 年 6 月 30 日までに Datadog はその評価を停止します。
+If you do <strong>not</strong> manage your dashboard or monitors using external API-based tools (such as Terraform or scripts), <strong>then no action is required on your end</strong>. Datadog will migrate your dashboards and monitors before April 30, 2022. Datadog will leave your old monitors in place but they will be muted and Datadog will stop evaluating them by June 30, 2022 at the latest.
 
-<strong>Terraform や他の API ベースのスクリプトを使用</strong>して<strong>ダッシュボード</strong>のすべてまたは一部を管理している場合、Datadog はイベントウィジェットやオーバーレイのクエリを新しい構文に移行しますが、2022 年 6 月 30 日までに同期を取るためにスクリプトを更新する必要があります。
+<strong>If you use Terraform or other API-based scripts</strong> to manage all or some of your <strong>dashboards</strong>, Datadog will migrate queries in your event widgets and overlays to the new syntax, but you will need to update your scripts to keep them in sync before June 30, 2022.
 
-<strong>Terraform やその他の API ベースのスクリプトを使用</strong>して<strong>モニター</strong>のすべてまたは一部を管理している場合、2022 年 6 月 30 日までに更新する必要があります。この日以降、Datadog は移行されていないモニターの新バージョンを作成し、既存のモニターをミュートして、アラートが継続されるようにします。
+<strong>If you use Terraform or other API-based scripts</strong> to manage all or some of your <strong>monitors</strong>, you have until June 30, 2022, to update them. After this date, Datadog will create new versions of any non-migrated monitors and mute the existing monitors to ensure that you continue to have alerting.
 
-また、Datadog は、アップデートを提案したり、モニターにアップデートを適用することで、モニターの移行を支援することができます。
+Datadog can also assist you with migrating your monitors by suggesting updates or by applying the updates to your monitors.
 
-## 新機能は？
+## What's new?
 
-### イベントエクスプローラー
+### Events Explorer
 
-イベントエクスプローラーは、インフラストラクチャーやサービス、または監視アラートによって生成された最新のイベントを表示します。これは、イベントストリームに代わるもので、より親しみやすく直感的なクエリ構文を提供します。詳しくは、[イベントエクスプローラー][1]を参照してください。
+The Events Explorer displays the most recent events generated by your infrastructure and services or monitoring alerts. It replaces the Events Stream and provides a friendlier and more intuitive query syntax. See [Events Explorer][1] to learn more.
 
-### イベント分析
+### Event Analytics
 
-{{< img src="service_management/events/events-analytics.png" alt="Events Analytics の表示を 'source:cloudtrail' でフィルターしたもの" >}}
+{{< img src="service_management/events/events-analytics.png" alt="Events Analytics display filtered by 'source:cloudtrail'" >}}
 
-エクスプローラーでのイベントの表示や検索に加え、時系列、トップリスト、テーブルとしてグラフ化し、指定したクエリのイベント数をグループ化することができるようになりました。詳しくは、[イベントアナリティクス][2]をご覧ください。
+In addition to viewing and searching events in the Explorer, you can now graph as a timeseries, top list or table and group the number of events for a given query. See [Event Analytics][2] to learn more.
 
-また、イベント検索クエリから 15 ヶ月間保持される[メトリクスを生成][3]し、過去のイベントに基づきモニターやアラートを作成できます。
+You may also [generate metrics][3] with 15-month retention from any event search query to create monitors and alerts based on historical events.
 
-{{< img src="service_management/events/generate-metrics.png" alt="イベント検索クエリによるメトリクスのイメージ。" >}}
+{{< img src="service_management/events/generate-metrics.png" alt="Image of metrics with the events search query." >}}
 
 
-### ダッシュボードでイベントをグラフ化する
+### Graph events in dashboards
 
 {{< img src="service_management/events/graph-events.png" alt="Events Analytics">}}
 
-ダッシュボード内で、指定したクエリのイベントを、時系列グラフ、クエリ値、トップリスト、テーブルなどでグラフ化できるようになりました。
+You can now graph events for a given query inside your dashboards as a timeseries graph, query value, top list, table and more.
 
-例えば、[Monitor Notifications Overview][4] ダッシュボードは、モニターアラートイベントの傾向を分析し、構成の改善とアラートの疲労を軽減するのに役立ちます。
+For example, check out the [Monitor Notifications Overview][4] dashboard, which analyzes monitor alert event trends to help you improve your configuration and reduce alert fatigue.
 
-### 新イベントモニター体験
+### New event monitors experience
 
-イベントモニターは、他の製品 (ログ、RUM、APM) と同じ標準化された機能セットを使用するように移植され、さらに機能を追加しています。
+Event monitors have been ported to use the same standardized set of features as other products (Logs, RUM, APM) and have additional capabilities.
 
-イベントモニターを作成する際、従来の空白で埋めるタイプのクエリから、新しいクエリ検索フィールドにオートコンプリートが追加されました。
+When you create event monitors, the new query search field uses autocomplete, rather than the legacy fill-in-the-blank query.
 
-{{< img src="service_management/events/guides/events-migration-monitor-new.png" alt="モニタークエリ構文の新しい UI" style="width:100%;" >}}
+{{< img src="service_management/events/guides/events-migration-monitor-new.png" alt="New UI for monitor query syntax" style="width:100%;" >}}
 
-新しいクエリ検索では、ブール演算子やワイルドカードなどの新しい機能により、イベントモニターで複雑なクエリを使用することができます。
+The new query search allows you to use complex queries in event monitors with new capabilities such as Boolean operators or wildcards.
 
-### パイプライン
+### Pipelines
 
-Datadog は、JSON 形式のイベントを自動的にパースします。イベントが JSON 形式でない場合は、処理パイプラインで順次イベントを連結することにより、パースされ、リッチ化されます。プロセッサーは、半構造化テキストから意味のある情報や属性を抽出し、ファセットとして再利用します。パイプラインを通過する各イベントは、すべてのパイプラインフィルターに対してテストされます。もしフィルターにマッチすれば、次のパイプラインに移る前に、すべてのプロセッサーが順次適用されます。
+Datadog automatically parses JSON-formatted events. When events are not JSON-formatted, they are parsed and enriched by chaining them sequentially through a processing pipeline. Processors extract meaningful information or attributes from semi-structured text to reuse as facets. Each event that comes through the pipelines is tested against every pipeline filter. If it matches a filter, then all the processors are applied sequentially before moving to the next pipeline.
 
-## 予約済み属性
+## Reserved attributes
 
-このリストでは、イベントとともに自動的に取り込まれる予約属性について説明します。
+This list describes automatically ingested reserved attributes with events.
 
-| 属性 | 説明                                                                                                                                                                                                                                |
+| Attribute | Description                                                                                                                                                                                                                                |
 |-----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `host`    | メトリクスで定義された送信元ホストの名前。Datadog で一致したホストから、対応するホストタグが自動的に取得され、イベントに適用されます。Agent では、この値が自動的に設定されます。                          |
-| `source`  | これは、インテグレーション名、またはイベントの生成元に対応します。インテグレーション名と一致する場合、対応するパーサーとファセットが自動的にインストールされます。たとえば、`nginx`、`postgresql` などです。 |
-| `status`  | これは、イベントのレベルまたは重大度に対応します。      |
-| `service` | イベントを生成するアプリケーションまたはサービスの名前。 |
-| `message` | デフォルトでは、Datadog は `message` 属性の値をイベントエントリーの本文として取り込みます。 |                     
+| `host`    | The name of the originating host as defined in metrics. Datadog automatically retrieves corresponding host tags from the matching host in Datadog and applies them to your events. The Agent sets this value automatically.                          |
+| `source`  | This corresponds to the integration name, or the technology from which the event originated. When it matches an integration name, Datadog automatically installs the corresponding parsers and facets. For example: `nginx`, `postgresql`, and more. |
+| `status`  | This corresponds to the level or severity of an event.      |
+| `service` | The name of the application or service generating the events. |
+| `message` | By default, Datadog ingests the value of the `message` attribute as the body of the event entry. |                     
 
-## 何が変わったのですか？
+## What Changed?
 
-**注:** イベント送信の流れは従来通りです。これまで通り、API、Agent、メールでのイベント送信機能を使用してイベントを送信することができます。
+**Note:** The process for sending events remains the same. You can continue sending events using the API, the Agent, or the events via email feature as before.
 
-### イベントの集計が実行されず、UI にも表示されなくなりました
-Datadog は、イベントの集計を自動的に行わなくなり、`aggregation_key`属性でイベントをグループ化しなくなりました。UI にイベントの集計が表示されなくなりました。
+### Event aggregations are no longer performed or displayed in the UI
+Datadog no longer automatically performs Event aggregation, and no longer groups Events by the `aggregation_key` attribute. The UI no longer displays Event aggregation.
 
-### イベントコメントがサポートされなくなり、UI にも表示されなくなりました
-API を使って `user_update` イベントタイプで作成されたコメントは、通常のイベントとして表示されます。
+### Event comments are no longer supported or displayed in the UI
+Comments created using the API with the `user_update` event type will be displayed as normal events.
 
-### クエリのステータスリマッピング
-一部のステータス値が変更になりました。
+### Status remapping in queries
+Some status values have changed:
 
-| レガシーステータス | 新しいステータス |
+| Legacy status | New status |
 |---------------|------------|
 | success       | ok         |
-| 警告       | warn       |
+| warning       | warn       |
 | info          | info       |
 | error         | error      |
 
-### クエリのソースリマッピング
-多くのイベントソース名が変更されています。影響を受ける[ソース名][5]の全リストをご覧ください。
+### Source remapping in queries
+Many Event source names have changed. See the full list of affected [source names][5].
 
-### モニター評価ウィンドウは 48 時間に制限されています。
-モニターは 48 時間を超えて評価されることはありません。より長い評価ウィンドウを使用する必要がある場合は、イベントから[カスタムメトリクスを生成][3]して、評価ウィンドウが最大 1 ヶ月になるメトリクスモニターを使用することができます。
+### The monitor evaluation window is limited to 48 hours.
+Your monitors are not evaluated beyond a 48 hour window. If you need to use a longer evaluation window, you can [generate custom metrics][3] from events and use a metrics monitor, where the evaluation window can be up to one month.
 
-### 最大 4 つのファセットのみでグループ化できます。
-(従来: 無制限グループ) グループの最高頻度値であるトップバリューは、グループの総数に基づいて制限されています。例えば、あるモニターがファセットの制限回数より多くトリガーした場合、トップグループでソートし、上位 N グループのみを表示します。例えば、2 つのファセットでグループ化し、1 つのファセットが `host` である場合、N = 30 の結果ホストとなります。
-  * 1 つのファセットで 1000 個のトップバリューの制限があります。
-  * 2 つのファセットでは、1 ファセットあたり 30 個のトップバリューの制限があります (最大 900 グループ)。
-  * 3 つのファセットでは、1 ファセットあたり 10 個のトップバリューの制限があります (最大 1000 グループ)。
-  * 4 つのファセットでは、1 グループあたり 5 個のトップバリューの制限があります (最大 625 グループ)。
+### You can group by only up to 4 facets.
+(Previously: Unlimited groups) Top-values, the highest frequency values of a group, are limited based on the total number of groups. For example, if a monitor triggers more times than the facet limit, it sorts by top group and shows only the top N groups. For example, N = 30 resulting hosts if grouping by two facets and one facet is `host`.
+  * One facet results in a limit of 1000 top values.
+  * Two facets results in a limit of 30 top values per facet (at most 900 groups)
+  * Three facets results in a limit of 10 top values per facet (at most 1000 groups)
+  * Four facets results in a limit of 5 top values per group (at most 625 groups)
 
-### モニターの回復しきい値はサポートされなくなりました
-イベントモニターのしきい値は、もはや `warning_recovery` と `critical_recovery` のしきい値タイプをサポートしません。新しいイベントモニターでは、回復しきい値を削除する必要があります。
+### Recovery thresholds in monitors are no longer supported
+Event monitor thresholds no longer support the `warning_recovery` and `critical_recovery` threshold types. Recovery thresholds need to be removed in new Event monitors.
 
-これらの機能を使用している場合は、[サポートに連絡][6]して、別の解決策を見つけるための支援を得てください。
+If you are using these features, [contact Support][6] to get help finding an alternative solution.
 
-## 例
+## Examples
 
-### 新旧イベントクエリ構文例
+### Event query syntax examples before and after
 
-GitHub または Chef からのイベントを表示する
-: レガシー構文</br>
+Show events from GitHub or Chef
+: Legacy syntax</br>
 `sources:github,chef`
-: 新しい構文</br>
+: New syntax </br>
 `source:(github OR chef)`
 
-`env-prod` のタグが付いたイベントを表示する
-: レガシー構文</br>
+Show events tagged with `env-prod`
+: Legacy syntax</br>
 `tags:env-prod`
-: 新しい構文</br>
+: New syntax </br>
 `tags:env-prod`
 
-`#env-prod` または `#db` のタグが付いたイベントを表示する
-: レガシー構文</br>
+Show events tagged with `#env-prod` or `#db`
+: Legacy syntax</br>
 `tags:env-prod,db`, `tags:env-prod OR db`
-: 新しい構文</br>
+: New syntax </br>
 `tags:(env-prod OR db)`
 
-`#security-group:sg-123` と `#role:common-node` のタグが付いたイベントを表示する
-: レガシー構文</br>
+Show events tagged with `#security-group:sg-123` and `#role:common-node`
+: Legacy syntax</br>
 `tags:security-group:sg-123 AND role:common-node`
-: 新しい構文 </br>
+: New syntax </br>
 `tags:(security-group:sg-123 AND role:common-node)`
 
-ワイルドカードを使用して接頭辞や接尾辞を検索する
-: レガシー構文</br>
-利用不可
-: 新しい構文 </br>
-`*web` は `web` で終わるすべてのイベントメッセージにマッチします</br>
-`source:amazon*` は、ソースが `amazon` で始まるすべてのイベントにマッチします
+Use wildcards to search for prefixes and suffixes
+: Legacy syntax</br>
+Not available
+: New syntax </br>
+`*web` matches all event messages ending with `web`</br>
+`source:amazon*` matches all events that source starts with `amazon`
 
-### 新旧イベントモニター API 構文例
+### Event monitors API syntax examples before and after
 
-[イベントモニター API][7] に新しいモニタークエリ構文 (「イベント V2 アラートクエリ」セクション参照) が追加され、平均値とカーディナリティのロールアップメソッドと必須属性の数が減少しました。
+The [Event monitors API][7] has a new monitor query syntax (See "Event V2 Alert Query" section), with Average and Cardinality rollup methods and fewer required attributes.
 
-過去 24 時間に Slack のイベントがない
-: レガシー構文</br>
+No Slack events in the past 24 hours
+: Legacy syntax </br>
 `events('priority:all sources:slack').rollup('count').last('1d') < 1`
-: 新しい構文 </br>
+: New syntax </br>
 `events("source:slack").rollup("count").last("1d") < 1`
 
-メンテナンスのためにマークされた EC2 インスタンス
-: レガシー構文 </br>
+EC2 Instance marked for maintenance
+: Legacy syntax </br>
 `events('priority:all "Upcoming AWS maintenance event"').by('name,host').rollup('count').last('2d') >= 1`
-: 新しい構文 </br>
+: New syntax </br>
 `events("Upcoming AWS maintenance event").rollup("count").by("name,host").last("2d") >= 1`
 
-今日、Zabbix または Prometheus がサービスのアラートをトリガーした
-: レガシー構文 </br>
+Zabbix or Prometheus has triggered an alert for a service today
+: Legacy syntax </br>
 `events('tags:service priority:all status:error sources:prometheus sources:zabbix).rollup('count').last('1d') > 0`
-: 新しい構文 </br>
+: New syntax </br>
 `events("source:(prometheus OR zabbix) status:error tags:service").rollup("count").last("1d") > 0`
 
-データセンターで、サービス `datadog-agent` のイベントを受信していない
-: レガシー構文 </br>
-レガシーイベントモニターは、カーディナリティロールアップをサポートしていません。
-: 新しい構文 </br>
+No events received in a datacenter for service `datadog-agent`
+: Legacy syntax </br>
+Legacy Event Monitors do not support cardinality rollup.
+: New syntax </br>
 `events("service:datadog-agent").rollup("cardinality", "datacenter").by("service").last("15m") < 1`
 
-## その他の参考資料
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /ja/service_management/events/explorer
-[2]: /ja/service_management/events/explorer/#event-analytics
-[3]: /ja/service_management/events/#generate-custom-metrics-from-events
+[1]: /service_management/events/explorer
+[2]: /service_management/events/explorer/analytics
+[3]: service_management/events/usage/#custom-metrics
 [4]: https://app.datadoghq.com/dash/integration/30532/monitor-notifications-overview
-[5]: /ja/service_management/events/guides/new_events_sources/
-[6]: /ja/help/
-[7]: /ja/api/latest/monitors/#create-a-monitor
+[5]: /service_management/events/guides/new_events_sources/
+[6]: /help/
+[7]: /api/latest/monitors/#create-a-monitor

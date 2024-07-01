@@ -1,132 +1,132 @@
 ---
-app_id: sap-hana
-app_uuid: 53d66afa-de92-4f09-9514-778324f38f5c
-assets:
-  dashboards:
-    SAP HANA Overview: assets/dashboards/overview.json
-  integration:
-    auto_install: true
-    configuration:
-      spec: assets/configuration/spec.yaml
-    events:
-      creates_events: false
-    metrics:
-      check: sap_hana.uptime
-      metadata_path: metadata.csv
-      prefix: sap_hana.
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 10076
-    source_type_name: SAP HANA
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com (日本語対応)
-  support_email: help@datadoghq.com
-categories:
+"app_id": "sap-hana"
+"app_uuid": "53d66afa-de92-4f09-9514-778324f38f5c"
+"assets":
+  "dashboards":
+    "SAP HANA Overview": assets/dashboards/overview.json
+  "integration":
+    "auto_install": true
+    "configuration":
+      "spec": assets/configuration/spec.yaml
+    "events":
+      "creates_events": false
+    "metrics":
+      "check": sap_hana.uptime
+      "metadata_path": metadata.csv
+      "prefix": sap_hana.
+    "service_checks":
+      "metadata_path": assets/service_checks.json
+    "source_type_id": !!int "10076"
+    "source_type_name": SAP HANA
+"author":
+  "homepage": "https://www.datadoghq.com"
+  "name": Datadog
+  "sales_email": info@datadoghq.com
+  "support_email": help@datadoghq.com
+"categories":
 - data stores
 - sap
-dependencies:
-- https://github.com/DataDog/integrations-core/blob/master/sap_hana/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: sap_hana
-integration_id: sap-hana
-integration_title: SAP HANA
-integration_version: 3.2.0
-is_public: true
-kind: インテグレーション
-manifest_version: 2.0.0
-name: sap_hana
-public_title: SAP HANA
-short_description: SAP HANA システムのメモリ、ネットワーク、ボリューム、およびその他のメトリクスを監視します。
-supported_os:
+"custom_kind": "integration"
+"dependencies":
+- "https://github.com/DataDog/integrations-core/blob/master/sap_hana/README.md"
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "sap_hana"
+"integration_id": "sap-hana"
+"integration_title": "SAP HANA"
+"integration_version": "3.2.0"
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "sap_hana"
+"public_title": "SAP HANA"
+"short_description": "Monitor memory, network, volume, and other metrics from your SAP HANA system."
+"supported_os":
 - linux
 - windows
 - macos
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Data Stores
-  - Category::SAP
-  - Supported OS::Linux
-  - Supported OS::Windows
-  - Supported OS::macOS
-  configuration: README.md#Setup
-  description: SAP HANA システムのメモリ、ネットワーク、ボリューム、およびその他のメトリクスを監視します。
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: SAP HANA
+"tile":
+  "changelog": CHANGELOG.md
+  "classifier_tags":
+  - "Category::Data Stores"
+  - "Category::SAP"
+  - "Supported OS::Linux"
+  - "Supported OS::Windows"
+  - "Supported OS::macOS"
+  "configuration": "README.md#Setup"
+  "description": Monitor memory, network, volume, and other metrics from your SAP HANA system.
+  "media": []
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": SAP HANA
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## 概要
+## Overview
 
-このチェックは、Datadog Agent を通じて [SAP HANA][1] 2.0, SPS 2 を監視します。
+This check monitors [SAP HANA][1] 2.0, SPS 2 through the Datadog Agent.
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-SAP HANA チェックは、[Datadog Agent][2] のパッケージに含まれています。このインテグレーションを使用するには、[hdbcli][3] ライブラリを手動でインストールする必要があります。
+The SAP HANA check is included in the [Datadog Agent][2] package. To use this integration, you need to manually install the [hdbcli][3] library.
 
 
-Unix: の場合:
+For Unix:
 
 ```text
 sudo -Hu dd-agent /opt/datadog-agent/embedded/bin/pip install hdbcli==2.10.15
 ```
 
-Windows の場合:
+For Windows:
 
 ```text
 "C:\Program Files\Datadog\Datadog Agent\embedded<PYTHON_MAJOR_VERSION>\python.exe" -m pip install hdbcli==2.10.15
 ```
 
-#### HANA の準備
+#### Prepare HANA
 
-特定のビューを照会するには、選択した HANA 監視ユーザーに特定の特権を付与する必要があります。詳細については、[権限の付与](#granting-privileges)を参照してください。
+To query certain views, specific privileges must be granted to the chosen HANA monitoring user. For more information, see [Granting privileges](#granting-privileges).
 
-HANA テナント、シングルテナント、システムデータベースのポート番号を設定する方法については、[SAP への接続のドキュメント][4]を参照してください。
+To learn how to set the port number for HANA tenant, single-tenant, and system databases, see the [Connect to SAP documentation][4].
 
-##### ユーザーの作成
+##### User creation
 
-1. システムデータベースに接続し、次のコマンドを実行してユーザーを作成します。
+1. Connect to the system database and run the following command to create a user:
 
    ```shell
    CREATE RESTRICTED USER <USER> PASSWORD <PASSWORD>;
    ```
 
-2. 次のコマンドを実行して、ユーザーがシステムに接続できるようにします。
+2. Run the following command to allow the user to connect to the system:
 
    ```shell
    ALTER USER <USER> ENABLE CLIENT CONNECT;
    ```
 
-3. （任意）サービスの中断を回避するために、パスワードの有効期間を長くすることができます。
+3. (optional) To avoid service interruption you may want to make the password long-lived:
 
    ```shell
    ALTER USER <USER> DISABLE PASSWORD LIFETIME;
    ```
 
-##### 権限の付与
+##### Granting privileges
 
-1. 次のコマンドを実行して監視ロールを作成します（これらの例では `DD_MONITOR` と呼びます）。
+1. Run the following command to create a monitoring role (named `DD_MONITOR` for these examples):
 
    ```shell
    CREATE ROLE DD_MONITOR;
    ```
 
-2. 次のコマンドを実行して、すべてのシステムビューへの読み取り専用アクセスを許可します。
+2. Run the following command to grant read-only access to all system views:
 
    ```shell
    GRANT CATALOG READ TO DD_MONITOR;
    ```
 
-3. 次に、次のコマンドを実行して、各システムビューで選択権限を付与します。
+3. Then run the following commands to grant select privileges on each system view:
 
    ```shell
    GRANT SELECT ON SYS.M_DATABASE TO DD_MONITOR;
@@ -142,39 +142,39 @@ HANA テナント、シングルテナント、システムデータベースの
    GRANT SELECT ON SYS_DATABASES.M_VOLUME_IO_TOTAL_STATISTICS TO DD_MONITOR;
    ```
 
-4. 最後に、次のコマンドを実行して、目的のユーザーに監視ロールを割り当てます。
+4. Finally, run the following command to assign the monitoring role to the desired user:
 
    ```shell
    GRANT DD_MONITOR TO <USER>;
    ```
 
-### ブラウザトラブルシューティング
+### Configuration
 
-1. sap_hana のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `sap_hana.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル sap_hana.d/conf.yaml][5] を参照してください。
+1. Edit the `sap_hana.d/conf.yaml` file, in the `conf.d/` folder at the root of your Agent's configuration directory to start collecting your sap_hana performance data. See the [sample sap_hana.d/conf.yaml][5] for all available configuration options.
 
-2. [Agent を再起動します][6]。
+2. [Restart the Agent][6].
 
-### 検証
+### Validation
 
-[Agent の status サブコマンドを実行][7]し、Checks セクションの `sap_hana` を探します。
+Run the [Agent's status subcommand][7] and look for `sap_hana` under the Checks section.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "sap_hana" >}}
 
 
-### ヘルプ
+### Events
 
-SAP HANA には、イベントは含まれません。
+SAP HANA does not include any events.
 
-### ヘルプ
+### Service Checks
 {{< get-service-checks-from-git "sap_hana" >}}
 
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
+Need help? Contact [Datadog support][10].
 
 
 [1]: https://www.sap.com/products/hana.html
@@ -182,8 +182,9 @@ SAP HANA には、イベントは含まれません。
 [3]: https://pypi.org/project/hdbcli/
 [4]: https://help.sap.com/viewer/0eec0d68141541d1b07893a39944924e/2.0.02/en-US/d12c86af7cb442d1b9f8520e2aba7758.html
 [5]: https://github.com/DataDog/integrations-core/blob/master/sap_hana/datadog_checks/sap_hana/data/conf.yaml.example
-[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-restart-the-agent
-[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[6]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-restart-the-agent
+[7]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
 [8]: https://github.com/DataDog/integrations-core/blob/master/sap_hana/metadata.csv
 [9]: https://github.com/DataDog/integrations-core/blob/master/sap_hana/assets/service_checks.json
-[10]: https://docs.datadoghq.com/ja/help/
+[10]: https://docs.datadoghq.com/help/
+

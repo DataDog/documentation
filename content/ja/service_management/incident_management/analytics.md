@@ -1,66 +1,67 @@
 ---
+title: Incident Management Analytics
+kind: documentation
+description: Track and analyze aggregated incident management statistics in Dashboards and Notebooks
 aliases:
-- /ja/monitors/incident_management/analytics
-description: ダッシュボードとノートブックで、インシデント管理の集計された統計情報を追跡・分析
-title: インシデント管理分析
+- /monitors/incident_management/analytics
 ---
 
-## 概要
+## Overview
 
 {{< img src="service_management/incidents/incident_analytics.mp4" alt="Incident Management Analytics" video=true style="width:80%;">}}
 
-Incident Management Analytics は、インシデントの統計情報を集計したクエリ可能なデータソースです。[ダッシュボード][1]と[ノートブック][2]の両方で、さまざまなグラフウィジェットでこれらの分析結果をクエリし、インシデント対応の履歴を時系列で分析することができます。Datadog では、インシデント管理の概要を示す [Dashboard テンプレート][3]と [Notebook テンプレート][4]を提供しており、必要に応じて複製してカスタマイズすることができます。
+Incident Management Analytics is a queryable data source for aggregated incident statistics. You can query these analytics in a variety of graph widgets in both [Dashboards][1] and [Notebooks][2] to analyze the history of your incident response over time. To give you a starting point, Datadog provides an Incident Management Overview [Dashboard template][3] and [Notebook template][4] that you can clone and customize as necessary.
 
-以下のウィジェットは、Incident Management Analytics をサポートしています。
+The following widgets support Incident Management Analytics:
 
 * Timeseries
-* トップリスト
-* クエリ値
+* Top List 
+* Query Value 
 
-### メジャー
+### Measures
 
-Datadog は、分析クエリを形成するために、以下のすぐに使える集計メジャーを提供します。
+Datadog provides the following aggregated measures out of the box for forming analytics queries:
 
-1. カウント (*)
-2. 顧客への影響期間
-3. ステータスアクティブ期間 (インシデントが `Active` ステータスであった時間)
-4. ステータス安定期間 (インシデントが `Stable` ステータスであった時間)
-5. 修復までの時間 (顧客影響終了タイムスタンプ - インシデント作成タイムスタンプ)
-6. 解決までの時間 (解決されたタイムスタンプ - 作成されたタイムスタンプ)
+1. Count (*)
+2. Customer Impact Duration 
+3. Status Active Duration (amount of time the incident was in `Active` status)
+4. Status Stable Duration (amount of time the incident was in `Stable` status)
+5. Time to Repair (customer impact end timestamp - incident creation timestamp)
+6. Time to Resolve (resolved timestamp - created timestamp)
 
-これらのデフォルトに加えて、[インシデント設定][7]でカスタムの *Number* プロパティフィールドを追加することで、新しいメジャーを作成することができます。
+In addition to these defaults, you can create new measures by adding custom *Number* property fields in your [Incident Settings][7]. 
 
-### グラフコンフィギュレーション
+### Graph configuration
 
-Incident Management Analytics のデータを使用してグラフを構成するには、次の手順に従います。
+To configure your graph using Incident Management Analytics data, follow these steps:
 
-1. [視覚化に使用するウィジェットを選択します][5]。
-2. データソースのドロップダウンメニューから `Incidents` を選択します。
-3. 黄色のドロップダウンメニューからメジャーを選択します。
-     - **Default Statistic:** インシデントの数を数えます。
-4. メジャーの集計を選択します。
-5. (オプション) メジャーのロールアップを選択します。
-6. (オプション) 検索バーを使用して、インシデントの特定のサブセットに統計をフィルタリングします。
-7. (オプション) ピンクのドロップダウンメニューでファセットを選択してメジャーをグループごとに分割し、表示するグループの数を制限します。
-8. [グラフのタイトルを決めます][6]。
-9. ウィジェットを保存します。
+1. [Select your visualization][5].
+2. Select `Incidents` from the data source dropdown menu.
+3. Select a measure from the yellow dropdown menu.
+     - **Default Statistic:** Counts the number of incidents.
+4. Select an aggregation for the measure.
+5. (Optional) Select a rollup for the measure.
+6. (Optional) Use the search bar to filter the statistic down to a specific subset of incidents.
+7. (Optional) Select a facet in the pink dropdown menu to break the measure up by group and select a limited number of groups to display.
+8. [Title the graph][6].
+9. Save your widget.
 
-**例:** サービスごとの毎週の停止の顧客への影響期間
+**Example:** Weekly Outage Customer Impact Duration by Service
 
-1. ウィジェット: 時系列折れ線グラフ
-2. データソース: `Incidents`
-3. メジャー: `Customer Impact Duration`
-4. 集計: `avg`
-5. ロールアップ: `1w`
-6. フィルター: `severity:("SEV-1" OR "SEV-2")`
-7. グループ: `Services`, limit to top 5
+1. Widget: Timeseries Line Graph
+2. Datasource: `Incidents`
+3. Measure: `Customer Impact Duration`
+4. Aggregation: `avg`
+5. Rollup: `1w`
+6. Filter: `severity:("SEV-1" OR "SEV-2")`
+7. Group: `Services`, limit to top 5
 
-{{< img src="service_management/incidents/incident_analytics_query_example.jpeg" alt="インシデント分析のクエリ例" style="width:80%;">}}
+{{< img src="service_management/incidents/incident_analytics_query_example.jpeg" alt="Incident Analytics Query Example" style="width:80%;">}}
 
-[1]: /ja/dashboards/
-[2]: /ja/notebooks/
+[1]: /dashboards/
+[2]: /notebooks/
 [3]: https://app.datadoghq.com/dash/integration/30523/incident-management-overview?from_ts=1632093826308&to_ts=1634685826308&live=true
 [4]: https://app.datadoghq.com/notebook/template/11/incident-management-overview
-[5]: /ja/dashboards/querying/#select-your-visualization
-[6]: /ja/dashboards/querying/#create-a-title
-[7]: /ja/service_management/incident_management/incident_settings#property-fields
+[5]: /dashboards/querying/#select-your-visualization
+[6]: /dashboards/querying/#create-a-title
+[7]: /service_management/incident_management/incident_settings#property-fields

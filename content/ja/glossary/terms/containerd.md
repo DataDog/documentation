@@ -1,6 +1,6 @@
 ---
-core_product:
-- infrastructure monitoring
 title: containerd
+core_product:
+  - infrastructure monitoring
 ---
-<a href="https://containerd.io/">Containerd</a> は、コンテナランタイムです。
+<a href="https://containerd.io/">Containerd</a> is a container runtime.

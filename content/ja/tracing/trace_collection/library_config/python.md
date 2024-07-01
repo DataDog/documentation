@@ -1,124 +1,125 @@
 ---
+title: Configuring the Python Tracing Library
+kind: documentation
 code_lang: python
+type: multi-code-lang
 code_lang_weight: 20
 further_reading:
-- link: https://github.com/DataDog/dd-trace-py
-  tag: GitHub
-  text: ソースコード
-- link: https://ddtrace.readthedocs.io/en/stable/
-  tag: Pypi
-  text: API ドキュメント
-- link: /tracing/trace_collection/trace_context_propagation/python/
-  tag: ドキュメント
-  text: トレースコンテキストの伝搬
-- link: tracing/glossary/
-  tag: Documentation
-  text: サービス、リソース、トレースを調査する
-- link: tracing/
-  tag: 高度な使用方法
-  text: 高度な使用方法
-title: Python トレーシングライブラリの構成
-type: multi-code-lang
+    - link: "https://github.com/DataDog/dd-trace-py"
+      tag: Source Code
+      text: Source code
+    - link: "https://ddtrace.readthedocs.io/en/stable/"
+      tag: External Site
+      text: API Docs
+    - link: /tracing/trace_collection/trace_context_propagation/python/
+      tag: Documentation
+      text: Propagating trace context
+    - link: tracing/glossary/
+      tag: Documentation
+      text: Explore your services, resources and traces
+    - link: tracing/
+      tag: Documentation
+      text: Advanced Usage
 ---
 
-コードを使用してトレーシングライブラリをセットアップし、APM データを収集するように Agent を構成した後、オプションで[統合サービスタグ付け][1]のセットアップなど、必要に応じてトレーシングライブラリを構成してください。
+After you set up the tracing library with your code and configure the Agent to collect APM data, optionally configure the tracing library as desired, including setting up [Unified Service Tagging][1].
 
-**ddtrace-run** を使用する場合、次の[環境変数 (オプション)][2] を利用できます。
+When using **ddtrace-run**, the following [environment variable options][2] can be used:
 
 `DD_TRACE_DEBUG`
-: **デフォルト**: `false`<br>
-トレーサーでデバッグロギングを有効化します。
+: **Default**: `false`<br>
+Enable debug logging in the tracer.
 
 `DD_PATCH_MODULES`
-: このアプリケーションの実行のためにパッチされたモジュールをオーバーライドします。次のような形式になります。 `DD_PATCH_MODULES=module:patch,module:patch...`
+: Override the modules patched for this application execution. Follow the format: `DD_PATCH_MODULES=module:patch,module:patch...`
 
-サービスに `env`、`service`、`version` を設定するには、`DD_ENV`、`DD_SERVICE`、`DD_VERSION` を使用することをおすすめします。このような環境変数の構成におすすめの方法については、[統合サービスタグ付け][1]のドキュメントをご参照ください。
+It is recommended to use `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `env`, `service`, and `version` for your services. Refer to the [Unified Service Tagging][1] documentation for recommendations on how to configure these environment variables.
 
 `DD_ENV`
-: アプリケーションの環境 (例: `prod`、`pre-prod`、`staging`) を設定します。詳細については、[環境の設定方法][3]を参照してください。バージョン 0.38 以降で利用可能。
+: Set the application's environment, for example: `prod`, `pre-prod`, `staging`. Learn more about [how to setup your environment][3]. Available in version 0.38+.
 
 `DD_SERVICE`
-: このアプリケーションで使用するサービス名。値は、Web フレームワークのインテグレーション (例: Pylons、Flask、Django) 用のミドルウェアを設定する際にパススルーされます。Web インテグレーションを行わずにトレースする場合は、コード内でサービス名を設定する ([Django ドキュメントで例をご確認ください][4]) ことをお勧めします。バージョン 0.38 以降で利用可能。
+: The service name to be used for this application. The value is passed through when setting up middleware for web framework integrations like Pylons, Flask, or Django. For tracing without a web integration, it is recommended that you set the service name in code ([for example, see these Django docs][4]). Available in version 0.38+.
 
 `DD_TRACE_PROPAGATION_STYLE_INJECT`
-: **デフォルト**: `tracecontext,Datadog`<br>
-トレーシングヘッダを注入するときに使用する伝搬スタイル。例えば、`DD_TRACE_PROPAGATION_STYLE_INJECT=Datadog,B3` を使用すると、 Datadog と B3 形式のヘッダを注入することができます。
+: **Default**: `tracecontext,Datadog`<br>
+Propagation styles to use when injecting tracing headers. For example, use `DD_TRACE_PROPAGATION_STYLE_INJECT=Datadog,B3` to inject both Datadog and B3 format headers.
 
 `DD_TRACE_PROPAGATION_STYLE_EXTRACT`
-: **デフォルト**: `DD_TRACE_PROPAGATION_STYLE_INJECT` の値 (`tracecontext,Datadog`)<br>
-トレーシングヘッダを抽出する際に使用する伝搬スタイル。複数の値が与えられた場合、最初に見つかったヘッダのマッチングを使用します。マッチングの順番は、与えられた値の順番に基づきます。例えば、`DD_TRACE_PROPAGATION_STYLE_EXTRACT=B3,Datadog` は最初に `B3` ヘッダーを探し、それが利用できない場合にのみ `Datadog` ヘッダーを使用します。
+: **Default**: Value of `DD_TRACE_PROPAGATION_STYLE_INJECT` (`tracecontext,Datadog`)<br>
+Propagation styles to use when extracting tracing headers. When multiple values are given, it uses the first header match found. The order of matching is based on the order of values given. For example, `DD_TRACE_PROPAGATION_STYLE_EXTRACT=B3,Datadog` looks for `B3` headers first, and only uses `Datadog` headers if those are not available.
 
 `DD_SERVICE_MAPPING`
-: サービス名のマッピングを定義し、トレース内におけるサービスの名前変更を許可します (例: `postgres:postgresql,defaultdb:postgresql`)。バージョン 0.47 以降で利用可能。
+: Define service name mappings to allow renaming services in traces, for example: `postgres:postgresql,defaultdb:postgresql`. Available in version 0.47+.
 
 `DD_VERSION`
-: アプリケーションのバージョン (例: `1.2.3`、`6c44da20`、 `2020.02.13`) を設定します。バージョン 0.38 以降で利用可能。
+: Set the application's version, for example: `1.2.3`, `6c44da20`, `2020.02.13`. Available in version 0.38+.
 
 `DD_TRACE_SAMPLE_RATE`
-: トレースボリュームコントロールを有効にします
+: Enable trace volume control
 
 `DD_TRACE_SAMPLING_RULES`
-: **デフォルト**: `[]`<br>
-オブジェクトの JSON 配列。各オブジェクトは `"sample_rate"` を持たなければなりません。`"name"` と `"service"` フィールドは省略可能です。`"sample_rate"` の値は `0.0` と `1.0` の間でなければなりません (この値を含む)。ルールは、トレースのサンプルレートを決定するために設定された順序で適用されます。
+: **Default**: `[]`<br>
+A JSON array of objects. Each object must have a `"sample_rate"`. The `"name"` and `"service"` fields are optional. The `"sample_rate"` value must be between `0.0` and `1.0` (inclusive). Rules are applied in configured order to determine the trace's sample rate.
 
 `DD_TRACE_RATE_LIMIT`
-: 1 秒あたり、Python プロセスごとにサンプリングするスパンの最大数。`DD_TRACE_SAMPLE_RATE` が設定されている場合、デフォルトは `100` です。それ以外の場合は、Datadog Agent にレート制限を委ねます。
+: Maximum number of spans to sample per-second, per-Python process. Defaults to `100` when `DD_TRACE_SAMPLE_RATE` is set. Otherwise, delegates rate limiting to the Datadog Agent.
 
 `DD_SPAN_SAMPLING_RULES`
-: **デフォルト**: `[]`<br>
-オブジェクトの JSON 配列。ルールは、スパンのサンプルレートを決定するために構成された順序で適用されます。`sample_rate` の値は 0.0 から 1.0 の間でなければなりません (この値を含む)。<br>
-詳細は、[取り込みメカニズム][3]を参照してください。
-**例:**<br>
-  - サービス名 `my-service` と演算子名 `http.request` のスパンサンプリングレートを 50% に設定し、1 秒間に最大 50 トレースします: `'[{"service": "my-service", "name": "http.request", "sample_rate":0.5, "max_per_second": 50}]'`
+: **Default**: `[]`<br>
+A JSON array of objects. Rules are applied in configured order to determine the span's sample rate. The `sample_rate` value must be between 0.0 and 1.0 (inclusive).
+For more information, see [Ingestion Mechanisms][5].<br>
+**Example:**<br>
+  - Set the span sample rate to 50% for the service `my-service` and operation name `http.request`, up to 50 traces per second: `'[{"service": "my-service", "name": "http.request", "sample_rate":0.5, "max_per_second": 50}]'`
 
 
 `DD_TAGS`
-: すべてのスパンとプロファイルに追加されるデフォルトタグのリスト (例: `layer:api,team:intake,key:value`)。バージョン 0.38 以降で利用可能。
+: A list of default tags to be added to every span and profile, for example: `layer:api,team:intake,key:value`. Available in version 0.38+.
 
 `DD_TRACE_HEADER_TAGS`
-: **デフォルト**: `null`<br>
-ルートスパンでタグとして報告されるヘッダー名のカンマ区切りのリスト。例えば、`DD_TRACE_HEADER_TAGS="User-Agent:http.user_agent,Referer:http.referer,Content-Type:http.content_type,Etag:http.etag"` のようにします。
+: **Default**: `null`<br>
+Comma-separated list of header names that are reported on the root span as tags. For example, `DD_TRACE_HEADER_TAGS="User-Agent:http.user_agent,Referer:http.referer,Content-Type:http.content_type,Etag:http.etag"`.
 
 `DD_TRACE_ENABLED`
-: **デフォルト**: `true`<br>
-Web フレームワークとライブラリインスツルメンテーションを有効にします。`false` の場合、アプリケーションコードはトレースを生成しません。
+: **Default**: `true`<br>
+Enable web framework and library instrumentation. When `false`, the application code doesn't generate any traces.
 
 `DD_AGENT_HOST`
-: **デフォルト**: `localhost`<br>
-デフォルトのトレーサーがトレースの送信を試みるトレースエージェントホストの宛先アドレスをオーバーライドします。
+: **Default**: `localhost`<br>
+Override the address of the trace Agent host that the default tracer attempts to submit traces to.
 
 `DD_AGENT_PORT`
-: **デフォルト**: `8126`<br>
-デフォルトのトレーサーが送信するポートをオーバーライドします。[Agent 構成][13]で `receiver_port` や `DD_APM_RECEIVER_PORT` をデフォルトの `8126` 以外に設定した場合、`DD_AGENT_PORT` や `DD_TRACE_AGENT_URL` をそれに合わせなければなりません。
+: **Default**: `8126`<br>
+Overrides the port that the default tracer submit traces to. If the [Agent configuration][13] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then `DD_AGENT_PORT` or `DD_TRACE_AGENT_URL` must match it. 
 
 `DD_TRACE_AGENT_URL`
-: トレーサが送信する Trace Agent の URL です。設定された場合、これはホスト名とポートよりも優先されます。`datadog.yaml` ファイル内の `apm_config.receiver_socket` 構成、または Datadog Agent に設定された `DD_APM_RECEIVER_SOCKET` 環境変数との組み合わせで Unix Domain Sockets (UDS) をサポートします。例えば、HTTP の URL には `DD_TRACE_AGENT_URL=http://localhost:8126`、UDS の URL には `DD_TRACE_AGENT_URL=unix:///var/run/datadog/apm.socket` を指定します。[Agent 構成][13]で `receiver_port` や `DD_APM_RECEIVER_PORT` をデフォルトの `8126` 以外に設定した場合、`DD_AGENT_PORT` や `DD_TRACE_AGENT_URL` をそれに合わせなければなりません。
+: The URL of the Trace Agent that the tracer submits to. If set, this takes priority over hostname and port. Supports Unix Domain Sockets (UDS) in combination with the `apm_config.receiver_socket` configuration in your `datadog.yaml` file or the `DD_APM_RECEIVER_SOCKET` environment variable set on the Datadog Agent. For example, `DD_TRACE_AGENT_URL=http://localhost:8126` for HTTP URL and `DD_TRACE_AGENT_URL=unix:///var/run/datadog/apm.socket` for UDS. If the [Agent configuration][13] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then `DD_AGENT_PORT` or `DD_TRACE_AGENT_URL` must match it. 
 
 `DD_DOGSTATSD_URL`
-: Datadog Agent for DogStatsD メトリクスへの接続に使用する URL。設定した場合、これはホスト名とポートよりも優先されます。`datadog.yaml` ファイル内の `dogstatsd_socket` 構成、または Datadog Agent に設定された `DD_DOGSTATSD_SOCKET` 環境変数との組み合わせで Unix Domain Sockets (UDS) をサポートします。例えば、UDP の URL には `DD_DOGSTATSD_URL=udp://localhost:8126`、UDS の URL には `DD_DOGSTATSD_URL=unix:///var/run/datadog/dsd.socket` を指定します。[Agent 構成][13]で `dogstatsd_port` や `DD_DOGSTATSD_PORT` をデフォルトの `8125` 以外に設定した場合、このトレーシングライブラリ `DD_DOGSTATSD_URL` や `DD_DOGSTATSD_PORT` をそれに合わせなければなりません。
+: The URL used to connect to the Datadog Agent for DogStatsD metrics. If set, this takes priority over hostname and port. Supports Unix Domain Sockets (UDS) in combination with the `dogstatsd_socket` configuration in your `datadog.yaml` file or the `DD_DOGSTATSD_SOCKET` environment variable set on the Datadog Agent. For example, `DD_DOGSTATSD_URL=udp://localhost:8126` for UDP URL and `DD_DOGSTATSD_URL=unix:///var/run/datadog/dsd.socket` for UDS. If the [Agent configuration][13] sets `dogstatsd_port` or `DD_DOGSTATSD_PORT` to something other than the default `8125`, then this tracing library `DD_DOGSTATSD_URL` or `DD_DOGSTATSD_PORT` must match it.
 
 `DD_DOGSTATSD_HOST`
-: **デフォルト**: `localhost`<br>
-デフォルトのトレーサーが DogStatsD のメトリクスを送信しようとするトレース Agent ホストのアドレスをオーバーライドします。`DD_DOGSTATSD_HOST` をオーバーライドするには、 `DD_AGENT_HOST` を使用します。
+: **Default**: `localhost`<br>
+Override the address of the trace Agent host that the default tracer attempts to submit DogStatsD metrics to. Use `DD_AGENT_HOST` to override `DD_DOGSTATSD_HOST`.
 
 `DD_DOGSTATSD_PORT`
-: **デフォルト**: `8125`<br>
-デフォルトのトレーサーが DogStatsD メトリクスを送信するポートをオーバーライドします。[Agent 構成][13]で `dogstatsd_port` や `DD_DOGSTATSD_PORT` をデフォルトの `8125` 以外に設定した場合、このトレーシングライブラリ `DD_DOGSTATSD_PORT` や `DD_DOGSTATSD_URL` をそれに合わせなければなりません。
+: **Default**: `8125`<br>
+Override the port that the default tracer submits DogStatsD metrics to. If the [Agent configuration][13] sets `dogstatsd_port` or `DD_DOGSTATSD_PORT` to something other than the default `8125`, then this tracing library  `DD_DOGSTATSD_PORT` or `DD_DOGSTATSD_URL` must match it.
 
 `DD_LOGS_INJECTION`
-: **デフォルト**: `false`<br>
-[ログとトレースの挿入を接続する][6]を有効にします。
+: **Default**: `false`<br>
+Enable [connecting logs and trace injection][6].
 
 
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/getting_started/tagging/unified_service_tagging
+[1]: /getting_started/tagging/unified_service_tagging
 [2]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#ddtracerun
-[3]: /ja/tracing/guide/setting_primary_tags_to_scope/
+[3]: /tracing/guide/setting_primary_tags_to_scope/
 [4]: https://ddtrace.readthedocs.io/en/stable/integrations.html#django
-[5]: /ja/tracing/trace_pipeline/ingestion_mechanisms/
-[6]: /ja/tracing/other_telemetry/connect_logs_and_traces/python/
-[13]: /ja/agent/guide/network/#configure-ports
+[5]: /tracing/trace_pipeline/ingestion_mechanisms/
+[6]: /tracing/other_telemetry/connect_logs_and_traces/python/
+[13]: /agent/configuration/network/#configure-ports

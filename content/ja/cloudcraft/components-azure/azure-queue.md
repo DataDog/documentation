@@ -1,31 +1,31 @@
 ---
-title: Azure Queue コンポーネント
+title: "Azure Queue Component"
 ---
 
-## 概要
+## Overview
 
-Azure Queue コンポーネントを使用すると、Azure 環境のキューストレージを表現して視覚化できます。
+You can use the Azure Queue component to represent and visualize queue storage from your Azure environment.
 
-{{< img src="cloudcraft/components-azure/azure-queue/component-azure-queue-diagram.png" alt="相互接続された Azure コンポーネントを示す、等角投影された Cloudcraft 図のスクリーンショット。" responsive="true" style="width:60%;">}}
+{{< img src="cloudcraft/components-azure/azure-queue/component-azure-queue-diagram.png" alt="Screenshot of an isometric Cloudcraft diagram showing interconnected Azure components." responsive="true" style="width:60%;">}}
 
 
-## ツールバー
+## Toolbar
 
-ツールバーを使用して、コンポーネントの構成とカスタマイズを行います。以下のオプションがあります。
+Use the toolbar to configure and customize the component. The following options are available:
 
-- **Color**: 3D ビューでコンポーネント本体のアクセントカラーと塗りつぶしカラーを選択します。
-- **Kind**: ストレージアカウントの種類を選択します。
-- **Redundancy**: プライマリおよびセカンダリのリージョンで、データのレプリケーションをどのように行うかを選択します。
-- **Storage (GiB)**: キューで利用可能なデータの総量をギビバイト単位で入力します。
-- **Class 1 Requests (10k)**: リクエスト 1 万件を 1 つの単位として、クラス 1 リクエストの数を入力します。
-- **Class 2 Requests (10k)**: リクエスト 1 万件を 1 つの単位として、クラス 2 リクエストの数を入力します。
-- **Replication (GiB)**: キューの geo レプリケーションのためのデータ転送の総量を入力します。
+- **Color**: Select accent and fill colors for the body of the component in 3D view.
+- **Kind**: Select the storage account kind.
+- **Redundancy**: Select how your data is replicated in the primary and secondary regions.
+- **Storage (GiB)**: Enter the total volume of data available for the queue in gibibytes.
+- **Class 1 Requests (10k)**: Enter the number of Class 1 requests in 10k request units.
+- **Class 2 Requests (10k)**: Enter the number of Class 2 requests in 10k request units.
+- **Replication (GiB)**: Enter the total volume of geo-replication data transfer for the queue.
 
-## ヘルプ
+## API
 
-[Cloudcraft API][1] を使用して、プログラムでアーキテクチャ図にアクセスし、JSON オブジェクトとしてレンダリングします。以下は、Azure Queue コンポーネントの JSON オブジェクトの例です。
+Use [the Cloudcraft API][1] to programmatically access and render your architecture diagrams as JSON objects. The following is an example JSON object of an Azure Queue component:
 
-### スキーマ
+### Schema
 
 ```json
 {
@@ -52,24 +52,24 @@ Azure Queue コンポーネントを使用すると、Azure 環境のキュー�
 }
 ```
 
-- **type: 文字列**: コンポーネントのタイプ。このコンポーネントの値 `azurequeue` の文字列でなければなりません。
-- **id: string, uuid**: コンポーネントの一意な識別子。API は内部的に UUID v4 を使用しますが、任意の一意な文字列を受け付けます。
-- **resourceId: 文字列**: Azure 内のコンポーネントのグローバルに一意な識別子。
-- **region: 文字列**: コンポーネントの Azure リージョン。API は、中国を除くすべてのグローバルリージョンをサポートしています。
-- **mapPos: 配列**: ブループリント内のコンポーネントの位置。API では、一意の X 座標と Y 座標のペアを使用して位置を表現します。
-- **kind: 文字列**: ストレージアカウントの種類。`Storage` と `StorageV2` の 2 つの値のいずれかを使用できます。デフォルトは `Storage` です。
-- **redundancy: 文字列**: データをリージョン間でどのように複製するかを決める冗長性のオプション。`LRS`、 `ZRS`、`GRS`、`GZRS`、`RA-GRS`、`RA-GZRS` の 6 つの値のいずれかを使用できます。デフォルトは `LRS` です。
-- **storageGb: 数値**: キューで利用可能なデータの総量 (ギビバイト単位)。デフォルトは `0` です。
-- **requestUnitsC1: 数値**: Class 1 リクエストの数 (単位は 1 万)。デフォルトは `0` です。
-- **requestUnitsC2: 数値**: Class 2 リクエストの数 (単位は 1 万)。デフォルトは `0` です。
-- **replicationGb: 数値**: キューの geo レプリケーションのためのデータ転送の総量。デフォルトは `0` です。
-- **color: オブジェクト**: コンポーネント本体の塗りつぶし色。
-  - **isometric: 文字列**: 3D ビューでのコンポーネント本体の 16 進数カラー。デフォルトは `#CEE0F5` です。
-  - **2d: 文字列**: 2D ビューでのコンポーネント本体の 16 進数カラー。デフォルトは `null` です。
-- **accentColor: オブジェクト**: コンポーネントロゴのアクセントカラー。
-  - **isometric: 文字列**: 3D ビューでのコンポーネントロゴの 16 進数カラー。デフォルトは `#0078D4` です。
-  - **2d: 文字列**: 2D ビューでのコンポーネントロゴの 16 進数カラー。デフォルトは `null` です。
-- **link: 文字列、uri**: コンポーネントを別の図や外部の Web サイトにリンクする URI。`blueprint://` または `https://` の 2 つの形式のどちらかを指定します。
-- **locked: ブール値**: Web インターフェイスを通してコンポーネントの位置の変更を許可するかどうか。デフォルトは `false` です。
+- **type: string**: The type of component. Must be a string of value `azurequeue` for this component.
+- **id: string, uuid**: The unique identifier for the component. The API uses a UUID v4 internally but accepts any unique string.
+- **resourceId: string**: The globally unique identifier for the component within Azure.
+- **region: string**: The Azure region for the component. The API supports all global regions, except China.
+- **mapPos: array**: The position of the component in the blueprint. The API uses a unique X and Y coordinate pair to express positioning.
+- **kind: string**: The storage account kind. Accepts one of two values, `Storage` and `StorageV2`. Defaults to `Storage`.
+- **redundancy: string**: The redundancy option for how data is replicated across regions. Accepts one of six values, `LRS`, `ZRS`, `GRS`, `GZRS`, `RA-GRS`, and `RA-GZRS`: Defaults to `LRS`.
+- **storageGb: number**: The total volume of data available for the queue in gibibytes. Defaults to `0`.
+- **requestUnitsC1: number**: The number of Class 1 requests in 10k units. Defaults to `0`.
+- **requestUnitsC2: number**: The number of Class 2 requests in 10k units. Defaults to `0`.
+- **replicationGb: number**: The total volume of geo-replication data transfer for the queue. Defaults to `0`.
+- **color: object**: The fill color for the component body.
+  - **isometric: string**: A hexadecimal color for the component body in 3D view. Defaults to `#CEE0F5`.
+  - **2d: string**: A hexadecimal color for the component body in 2D view. Defaults to `null`.
+- **accentColor: object**: The accent color for the component logo.
+  - **isometric: string**: A hexadecimal color for the component logo in 3D view. Defaults to `#0078D4`.
+  - **2d: string**: A hexadecimal color for the component logo in 2D view. Defaults to `null`.
+- **link: string, uri**: A URI that links the component to another diagram or an external website. Accepts one of two formats, `blueprint://` or `https://`.
+- **locked: boolean**: Whether to allow changes to the position of the component through the web interface. Defaults to `false`.
 
 [1]: https://developers.cloudcraft.co/

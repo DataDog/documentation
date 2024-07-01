@@ -1,6 +1,8 @@
 ---
+title: Monitoring Azure App Service
+kind: documentation
 aliases:
-- /ja/infrastructure/serverless/azure_app_services/
+  - /infrastructure/serverless/azure_app_services/
 further_reading:
 - link: /integrations/azure_app_services/
   tag: Documentation
@@ -8,60 +10,64 @@ further_reading:
 - link: /integrations/azure_app_service_environment/
   tag: Documentation
   text: Azure App Service Environment
-- link: https://www.datadoghq.com/blog/azure-app-service-extension/
-  tag: ブログ
-  text: Azure App Service の Datadog 拡張機能で Monitor .NET ウェブアプリを監視
-- link: https://www.datadoghq.com/blog/deploy-dotnet-core-azure-app-service/
-  tag: ブログ
-  text: ASP.NET Core アプリケーションを Azure App Service にデプロイする
-- link: https://www.datadoghq.com/pricing/?product=application-performance-monitoring#application-performance-monitoring-apm_faq-what-is-considered-as-a-host-for-azure-app-services
-  tag: 料金
-  text: Azure App Service APM 価格設定
-title: Azure App Service のモニタリング
+- link: "https://www.datadoghq.com/blog/azure-app-service-extension/"
+  tag: Blog
+  text: Monitor .NET web apps with the Datadog extension for Azure App Service
+- link: "https://www.datadoghq.com/blog/deploy-dotnet-core-azure-app-service/"
+  tag: Blog
+  text: Deploy ASP.NET Core applications to Azure App Service
+- link: "https://www.datadoghq.com/pricing/?product=application-performance-monitoring#application-performance-monitoring-apm_faq-what-is-considered-as-a-host-for-azure-app-services"
+  tag: Pricing
+  text: Azure App Service APM Pricing
 ---
 
-## 概要
+## Overview
 
-Microsoft [Azure App Service][1] は、インフラストラクチャーを管理せずに Web アプリやモバイルバックエンド、イベント駆動型関数、RESTful API の構築とホスティングを行うことが可能な統合型のサーバーレスリソースです。あらゆる規模のワークロードのホスティングのほか、オートスケーリングと高可用性オプションにも対応しています。
+Microsoft [Azure App Service][1] is a group of serverless resources that enable you to build and host web apps, mobile backends, event-driven functions, and RESTful APIs without managing infrastructure. It can host workloads of all sizes and offers auto-scaling and high availability options.
 
-Datadog では Azure App Service に属するすべてのリソースタイプのモニタリングが可能です。
+Datadog provides monitoring capabilities for all Azure App Service resource types:
 
-- [Azure インテグレーション][3]を使用したアプリおよび関数向けの Azure Monitor [メトリクス][2]。
-- [Azure App Service ビュー][4]を使用して、問題をすばやく特定し、Azure App Service リソース間の関係をマッピングし、コストとパフォーマンスに関する洞察を得ることができます。
-- API を通じてカスタムメトリクスの送信を行います。
-- [イベントハブ][6]から[リソースログ][5]を送信します。
+- Azure Monitor [metrics][2] for Apps and Functions using the [Azure Integration][3].
+- Use the [Azure App Service View][4] to quickly spot issues, map relationships between your Azure App Service resources, and gain insights into cost and performance.
+- Submit custom metrics through the API.
+- Submit [resource logs][5] through [Event Hub][6].
 
-Datadog は、Basic、Standard、Premium プランにおいて、以下の Azure App Service のワークロードランタイムの監視機能を追加提供します。
+Datadog provides additional monitoring capabilities for the following Azure App Service workload runtimes on Basic, Standard, and Premium plans:
 
-| OS | ランタイム |アプリタイプ|ステータス|Documentation| 
+| OS | Runtime |App Type|Status|Documentation| 
 |----|---------|-----|----|--------------|
-|Windows|.NET|関数アプリと Web アプリ|GA|[Windows .NET のセットアップ][7]|
-|Windows|Java|関数アプリと Web アプリ|beta|[Windows Java のセットアップ][8]|
-|Linux|.NET|Web アプリ|GA|[Linux .NET のセットアップ][9]|
-|Linux|Node|Web アプリ|GA|[Linux Node のセットアップ][9]|
-|Linux|PHP|Web アプリ|GA|[Linux PHP のセットアップ][9]|
-|Linux|Java|Web アプリ|GA|[Linux Java のセットアップ][10]|
-|Linux|Python|Web アプリ|GA|[Linux Python のセットアップ][9]|
+|Windows|.NET|Function App & Web App|GA|[Windows .NET setup][7]|
+|Windows|Java|Web App|GA|[Windows Java setup][8]|
+|Windows|Node|Web App|GA|[Windows Node setup][13]|
+|Linux|.NET|Web App|GA|[Linux .NET setup][9]|
+|Linux|Node|Web App|GA|[Linux Node setup][9]|
+|Linux|PHP|Web App|GA|[Linux PHP setup][9]|
+|Linux|Java|Web App|GA|[Linux Java setup][10]|
+|Linux|Python|Web App|GA|[Linux Python setup][9]|
+|Linux|Container|Web App|GA|[Linux Container setup][12]|
 
-機能:
-- 自動インスツルメンテーションを用いた完全分散型 APM トレーシング
-- カスタマイズされた APM サービスとトレースビューは、関連する Azure App Service のメトリクスとメタデータを表示します
-- スパンのカスタマイズが可能な、手動 APM インスツルメンテーション
-- アプリケーションログへの `Trace_ID` 挿入
-- [DogStatsD][11] を使用したカスタムメトリクス
 
-## その他の参考資料
+Capabilities:
+- Fully distributed APM tracing using automatic instrumentation
+- Customized APM service and trace views showing relevant Azure App Service metrics and metadata
+- Manual APM instrumentation to customize spans
+- `Trace_ID` injection into application logs
+- Custom metrics with [DogStatsD][11]
+
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://learn.microsoft.com/en-us/azure/app-service/overview
-[2]: /ja/integrations/azure_app_services/#metrics
-[3]: /ja/integrations/azure/
+[2]: /integrations/azure_app_services/#metrics
+[3]: /integrations/azure/
 [4]: https://app.datadoghq.com/functions?search=&cloud=azure&entity_view=app_service_plan
-[5]: /ja/integrations/azure/#log-collection
+[5]: /integrations/azure/#log-collection
 [6]: https://learn.microsoft.com/azure/event-hubs/
-[7]: /ja/serverless/azure_app_services/azure_app_services_windows?tab=net#setup
-[8]: /ja/serverless/azure_app_services/azure_app_services_windows?tab=java#setup
-[9]: /ja/serverless/azure_app_services/azure_app_services_linux?tab=nodenetphppython
-[10]: /ja/serverless/azure_app_services/azure_app_services_linux?tab=java
-[11]: /ja/developers/dogstatsd/
+[7]: /serverless/azure_app_services/azure_app_services_windows?tab=net#setup
+[8]: /serverless/azure_app_services/azure_app_services_windows?tab=java#setup
+[9]: /serverless/azure_app_services/azure_app_services_linux?tab=nodenetphppython
+[10]: /serverless/azure_app_services/azure_app_services_linux?tab=java
+[11]: /developers/dogstatsd/
+[12]: /serverless/azure_app_services/azure_app_services_container
+[13]: /serverless/azure_app_services/azure_app_services_windows?tab=nodejs#setup

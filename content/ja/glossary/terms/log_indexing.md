@@ -1,6 +1,6 @@
 ---
+title: log indexing
 core_product:
-- log management
-title: ログインデックス
+  - log management
 ---
-ログインデックス機能により、ログを異なる保持期間、クォータ、使用量監視、請求のためのバリューグループにフィルターします。
+Log indexing filters logs into value groups for different retention periods, quotas, usage monitoring, and billing.

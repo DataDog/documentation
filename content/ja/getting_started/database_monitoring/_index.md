@@ -1,137 +1,138 @@
 ---
+title: Getting Started with Database Monitoring
+kind: documentation
 further_reading:
-- link: /database_monitoring/
-  tag: ドキュメント
-  text: データベース モニタリング
-- link: /database_monitoring/troubleshooting/
-  tag: ドキュメント
-  text: トラブルシューティング
-- link: https://www.datadoghq.com/blog/database-performance-monitoring-datadog/
-  tag: ブログ
-  text: Datadog によるデータベースパフォーマンスの監視
-- link: https://dtdg.co/fe
-  tag: Foundation Enablement
-  text: データベースモニタリングのレベルアップのためのインタラクティブなセッションに参加できます
-title: Database モニタリングの概要
+    - link: /database_monitoring/
+      tag: Documentation
+      text: Database Monitoring
+    - link: /database_monitoring/troubleshooting/
+      tag: Documentation
+      text: Troubleshooting
+    - link: "https://www.datadoghq.com/blog/database-performance-monitoring-datadog/"
+      tag: Blog
+      text: Database performance monitoring with Datadog
+    - link: "https://dtdg.co/fe"
+      tag: Foundation Enablement
+      text: Join an interactive session to level up your Database Monitoring
 ---
 
 {{% site-region region="gov" %}}
-<div class="alert alert-warning">選択した Datadog サイト ({{< region-param key="dd_site_name" >}}) ではデータベースモニタリングは利用できません。</div>
+<div class="alert alert-warning">Database Monitoring is not available for your selected Datadog site ({{< region-param key="dd_site_name" >}}).</div>
 {{% /site-region %}}
 
-## 概要
+## Overview
 
-Datadog データベースモニタリングを使用すると、データベースの状態とパフォーマンスの理解を深め、問題の根本原因を特定しやすくなります。
+Datadog Database Monitoring helps you to better understand the health and performance of your databases and to determine the root cause of any problems.
 
-1 つの場所で、次を表示できます。
+In one place, you can view:
 
-* ホストレベルのメトリクス
-* 説明プラン
-* 過去のクエリパフォーマンスメトリクス
+* Host-level metrics
+* Explain plans
+* Historical query performance metrics
 
-このガイドに目を通し、PostgreSQL データベースの例で Datadog データベースモニタリングを設定してください。次に、高価なクエリを特定し、遅いクエリのトラブルシューティングを行い、ダッシュボードを作成してクエリ量の変化を表示します。
+Work through this guide to set up Datadog Database Monitoring on an example PostgreSQL database. Next, identify an expensive query, troubleshoot a slow query, and create a dashboard to view changes in query volume.
 
-## セットアップ
+## Setup
 
-### 前提条件
+### Prerequisites
 
-始める前に、[Datadog アカウント][1]が必要です。
+Before getting started, you need a [Datadog account][1].
 
-サンプルアプリケーションを実行するには、[GNU Make][2] と [Docker][3] を備えたマシンが必要です。Datadog [API キー][4]を利用できるようにします。
+To run the example application, you need a machine with [GNU Make][2] and [Docker][3]. Have your Datadog [API key][4] available.
 
-### サンプルアプリケーションをインストールします
+### Install the example application
 
-サンプルアプリケーションは、Docker コンテナ内の Datadog Agent と PostgreSQL データベースを起動します。アプリケーションの実行中、Agent はデータベースメトリクスを Datadog に送信します。Datadog データベースモニタリングでアプリケーションからのデータを表示できます。
+The example application starts up the Datadog Agent and a PostgreSQL database in a Docker container. While the application runs, the Agent sends database metrics to Datadog. You can view the data from the application in Datadog Database Monitoring.
 
-以下の手順に従って、サンプルアプリケーションを MacOS または Linux にインストールします。
+Follow these instructions to install the example application on MacOS or Linux.
 
-1. サンプルアプリケーションを含む[リポジトリ][5]のクローンを作成します。
+1. Clone the [repository][5] containing the example application:
     ```
     git clone https://github.com/DataDog/dd-database-monitoring-example
     ```
 
-2. `dd-database-monitoring-example` ディレクトリに変更します。
+2. Change to the `dd-database-monitoring-example` directory:
     ```
     cd dd-database-monitoring-example
     ```
 
-3. 環境変数 `DD_API_KEY` を Datadog API キーに設定します。
+3. Set the environment variable `DD_API_KEY` to your Datadog API key:
     ```
     export DD_API_KEY=<API_KEY>
     ```
 
-4. アプリケーションを起動します。
+4. Start the application:
     ```
     make postgres
     ```
 
-Ctrl + C を押してコマンドを停止するまで、コマンドは実行され続けます。
+The command continues to run until you stop it by pressing Ctrl + C.
 
-## 高価なクエリを特定する
+## Identify an expensive query
 
-どのクエリが最もデータベース時間を消費するかを調べるには、クエリメトリクスビューを使用します。
+Which query consumes the most database time? To find out, use the Query Metrics view.
 
-1. [Database Monitoring][6] ページで、UI の **Query metrics** タブをクリックします。
+1. On the [Database Monitoring][6] page, click the **Query metrics** tab in the UI.
 
-2. 正規化されたクエリテーブルを **Percent time** で並べ替えて、データベースの実行に最も多くの時間を費やしているクエリを確認します。
+2. Sort the Normalized Query table by **Percent time** to see the query that the database spends the most time executing.
 
-   データベース時間を最も消費するクエリが最初の行に表示されます。
+   The query that consumes the most database time appears on the first line:
 
-   {{< img src="database_monitoring/dbm_qm_sort_time.png" alt="パーセント時間でソートされた正規化されたクエリ" style="width:100%;">}}
+   {{< img src="database_monitoring/dbm_qm_sort_time.png" alt="Normalized queries sorted by percent time" style="width:100%;">}}
 
-## 遅いクエリをトラブルシューティングする
+## Troubleshoot a slow query
 
-遅いクエリを識別するだけでなく、Datadog データベースモニタリングはその診断にも役立ちます。クエリの説明プランは、データベースがクエリを解決するために実行する手順を説明します。クエリサンプルビューでサンプルをクリックして、説明プランを表示します。
+In addition to identifying slow queries, Datadog Database Monitoring can help you diagnose them. A query's Explain Plan describes the steps that the database takes to resolve the query. View an Explain Plan by clicking on a sample in the Query Samples view.
 
-1. [Database Monitoring][6] 内の **Samples** タブを選択して、Query Samples ビューに移動します。
+1. Navigate to the Query Samples view within [Database Monitoring][6] by selecting the **Samples** tab.
 
-2. **In** ドロップダウンで、**Explain Plans** を選択します。
+2. In the **In** dropdown, select **Explain Plans**. 
 
-3. 正規化されたクエリテーブルを **Duration** で並べ替えます。
+3. Sort the Normalized Query table by **Duration**.
 
-   {{< img src="database_monitoring/dbm_qs_explain_plan_duration.png" alt="期間でソートされた正規化されたクエリサンプル">}}
+   {{< img src="database_monitoring/dbm_qs_explain_plan_duration.png" alt="Normalized query samples sorted by duration">}}
 
-4. テーブル内の **Explain Plan** 列にデータがあるクエリを見つけてクリックし、Sample Details ページを開きます。
+4. Find a query in the table with data in the **Explain Plan** column and click on it to open the Sample Details page. 
 
-5. **Explain Plan** の下で、**List View** をクリックします。Explain Plan Sample ページの下部にあるこの実行計画では、クエリに _Index Scan_ が必要であることが示されています。
+5. Under **Explain Plan**, click **List View**. This Explain Plan at the bottom of the Explain Plan Sample page shows that the query requires an _Index Scan_.
 
-   {{< img src="database_monitoring/dbm_qs_explain_plan_list_view.png" alt="インデックススキャンを示すクエリ実行計画">}}
+   {{< img src="database_monitoring/dbm_qs_explain_plan_list_view.png" alt="Query explain plan showing Index Scan">}}
 
-## データベースの状態とパフォーマンスを視覚化する
+## Visualize database health and performance
 
-データベースの状態とパフォーマンスを一目で理解するには、Datadog データベースモニタリングメトリクスをダッシュボードに追加します。
+To understand the health and performance of your databases at a glance, add Datadog Database Monitoring metrics to a dashboard.
 
-### クエリ量の変更を表示する
+### View changes in query volume
 
-たとえば、クエリカウントメトリクスを追跡する **Change** ウィジェットを追加することで、過去 1 時間のクエリ量の絶対的な変化を確認できます。
+For example, you can see the absolute change in query volume in the past hour by adding a **Change** widget to track a query count metric.
 
-1. UI で **Dashboards > New Dashboard** を選択します。
+1. Select **Dashboards > New Dashboard** in the UI.
 
-2. ダッシュボードの名前を入力します。**New Dashboard** ボタンをクリックして、新しいダッシュボードに移動します。
+2. Enter a name for your dashboard. Click the **New Dashboard** button to go to your new dashboard.
 
-2. ダッシュボードにコンテンツを追加するには、**Add Widgets** をクリックします。
+2. To add content to your dashboard, click **Add Widgets**.
 
-3. ウィジェットカルーセルで、**Change** ウィジェットを選択します。
+3. In the widget carousel, select the **Change** widget.
 
-4. **Metric** ドロップダウンで `postgresql.queries.count` を選択します。このメトリクスは、PostgreSQL データベースに送信されたクエリの数をカウントします。
+4. Select `postgresql.queries.count` in the **Metric** dropdown. This metric counts the number of queries sent to a PostgreSQL database.
 
-5. ウィジェットがホストごとにクエリを集計するように、**Break it down by** ドロップダウンで `host` を選択します。
+5. Select `host` in the **Break it down by** dropdown so that the widget aggregates queries by host.
 
-   {{< img src="database_monitoring/dashboard_change_postgres.png" alt="postgres クエリメトリクスの変更ウィジェットを構成する" style="width:100%;">}}
+   {{< img src="database_monitoring/dashboard_change_postgres.png" alt="Configure change widget for postgres queries metric" style="width:100%;">}}
 
-7. **Save** ボタンをクリックします。ダッシュボードに新しいウィジェットが表示されます。
+7. Click the **Save** button. The dashboard shows your new widget.
 
-   {{< img src="database_monitoring/dashboard_change_widget.png" alt="クエリカウントを表示するウィジェットを変更する" style="width:100%;">}}
+   {{< img src="database_monitoring/dashboard_change_widget.png" alt="Change widget showing query count" style="width:100%;">}}
 
-### すぐに使えるダッシュボードを表示する
+### View out-of-the-box dashboards
 
-Datadog データベースモニタリングが提供するすぐに使用できるダッシュボードで、現在のデータベースアクティビティ、リソース使用率などを確認します。
+Observe current database activity, resource utilization, and more on out-of-the-box dashboards provided by Datadog Database Monitoring.
 
-ダッシュボードにアクセスするには、[Database Monitoring][6] ページから **Dashboards** タブを選択し、表示したいダッシュボードを選択します。
+To access the dashboards, from the [Database Monitoring][6] page, select the **Dashboards** tab and choose the dashboard that you want to see.
 
-必要に応じて、すぐに使用できるダッシュボードのクローンを作成して変更できます。
+You can clone and modify out-of-the-box dashboards to suit your needs.
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 

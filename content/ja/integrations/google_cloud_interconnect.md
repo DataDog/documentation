@@ -1,71 +1,72 @@
 ---
-categories:
+"categories":
 - cloud
 - google cloud
-- ログの収集
-- ネットワーク
-dependencies: []
-description: Google Cloud Interconnect のキーメトリクスを追跡
-doc_link: https://docs.datadoghq.com/integrations/google_cloud_interconnect/
-draft: false
-git_integration_title: google_cloud_interconnect
-has_logo: true
-integration_id: google-cloud-interconnect
-integration_title: Google Cloud Interconnect
-integration_version: ''
-is_public: true
-custom_kind: integration
-manifest_version: '1.0'
-name: google_cloud_interconnect
-public_title: Datadog-Google Cloud Interconnect インテグレーション
-short_description: Google Cloud Interconnect のキーメトリクスを追跡
-version: '1.0'
+- log collection
+- network
+"custom_kind": "integration"
+"dependencies": []
+"description": "Track key Google Cloud Interconnect metrics."
+"doc_link": "https://docs.datadoghq.com/integrations/google_cloud_interconnect/"
+"draft": false
+"git_integration_title": "google_cloud_interconnect"
+"has_logo": true
+"integration_id": "google-cloud-interconnect"
+"integration_title": "Google Cloud Interconnect"
+"integration_version": ""
+"is_public": true
+"manifest_version": "1.0"
+"name": "google_cloud_interconnect"
+"public_title": "Datadog-Google Cloud Interconnect Integration"
+"short_description": "Track key Google Cloud Interconnect metrics."
+"version": "1.0"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-## 概要
+## Overview
 
-Google Cloud Interconnect は、高可用性かつ低レイテンシーの接続により、オンプレミスのネットワークを Google のネットワークに拡張します。
+Google Cloud Interconnect extends your on-premises network to Google's network through a highly available, low latency connection.
 
-Datadog Google Cloud Platform インテグレーションを使用して、Google Cloud Interconnect からメトリクスを収集できます。
+Use the Datadog Google Cloud Platform integration to collect metrics from Google Cloud Interconnect.
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-[Google Cloud Platform インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
+If you haven't already, set up the [Google Cloud Platform integration][1] first. There are no other installation steps.
 
-### 収集データ
+### Log collection
 
-Google Cloud Interconnect のログは Google Cloud Logging で収集され、Cloud Pub/Sub トピックを通じて Dataflow ジョブに送信されます。まだの場合は、[Datadog Dataflow テンプレートでロギングをセットアップしてください][2]。
+Google Cloud Interconnect logs are collected with Google Cloud Logging and sent to a Dataflow job through a Cloud Pub/Sub topic. If you haven't already, [set up logging with the Datadog Dataflow template][2].
 
-これが完了したら、Google Cloud Interconnect のログを Google Cloud Logging から Pub/Sub へエクスポートします。
+Once this is done, export your Google Cloud Interconnect logs from Google Cloud Logging to the Pub/Sub topic:
 
-1. [Google Cloud Logging のページ][3]に移動し、Google Cloud Interconnect のログを絞り込みます。
-2. **Create Export** をクリックし、シンクに名前を付けます。
-3. エクスポート先として「Cloud Pub/Sub」を選択し、エクスポート用に作成された Pub/Sub を選択します。**注**: この Pub/Sub は別のプロジェクト内に配置することもできます。
-4. **作成**をクリックし、確認メッセージが表示されるまで待ちます。
+1. Go to the [Google Cloud Logging page][3] and filter the Google Cloud Interconnect logs.
+2. Click **Create Export** and name the sink.
+3. Choose "Cloud Pub/Sub" as the destination and select the Pub/Sub topic that was created for that purpose. **Note**: The Pub/Sub topic can be located in a different project.
+4. Click **Create** and wait for the confirmation message to show up.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "google_cloud_interconnect" >}}
 
 
-### ヘルプ
+### Events
 
-Google Cloud Interconnect インテグレーションには、イベントは含まれません。
+The Google Cloud Interconnect integration does not include any events.
 
-### ヘルプ
+### Service Checks
 
-Google Cloud Interconnect インテグレーションには、サービスのチェック機能は含まれません。
+The Google Cloud Interconnect integration does not include any service checks.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
+Need help? Contact [Datadog support][5].
 
-[1]: https://docs.datadoghq.com/ja/integrations/google_cloud_platform/
-[2]: https://docs.datadoghq.com/ja/integrations/google_cloud_platform/#log-collection
+[1]: https://docs.datadoghq.com/integrations/google_cloud_platform/
+[2]: https://docs.datadoghq.com/integrations/google_cloud_platform/#log-collection
 [3]: https://console.cloud.google.com/logs/viewer
 [4]: https://github.com/DataDog/dogweb/blob/prod/integration/google_cloud_interconnect/google_cloud_interconnect_metadata.csv
-[5]: https://docs.datadoghq.com/ja/help/
+[5]: https://docs.datadoghq.com/help/
+

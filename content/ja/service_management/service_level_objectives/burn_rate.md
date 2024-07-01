@@ -1,143 +1,148 @@
 ---
+title: Burn Rate Alerts
+kind: documentation
+description: "Use Monitors to alert off of the burn rate of an SLO"
 aliases:
-- /ja/monitors/service_level_objectives/burn_rate/
-description: モニターを使用して SLO のバーンレートを警告する
-title: バーンレートアラート
+- /monitors/service_level_objectives/burn_rate/
 ---
 {{< jqmath-vanilla >}}
 
-## 概要
+## Overview
 
-SLO バーンレートアラートは、SLO エラーバジェットの消費率が指定した閾値を超え、それが特定の期間継続した場合に通知されます。たとえば、SLO の 30 日間目標に対して、過去 5 分間で過去 1 時間に 14.4 以上のバーンレートが測定された場合にアラートを設定できます。また、アラートが必要な閾値より少し低い閾値、例えば 7.2 以上のバーンレートが観測された場合にオプションで警告を出すように設定することができます。
+SLO burn rate alerts notify you when the rate of consumption of your SLO error budget has exceeded your specified threshold and is sustained for a specific period of time. For example, you can set an alert if a burn rate of 14.4 or more is measured for the past hour over the past 5 minutes for your SLO's 30-day target. And you can set it to optionally warn you for a slightly lower threshold than you would want an alert, for example if a burn rate of 7.2 or more is observed.
 
-**注:** バーンレートアラートは、メトリクスモニターの種類（メトリクス、インテグレーション、APM メトリクス、異常検知、予測値、外れ値モニター）のみで構成された[メトリクスベースの SLO][1] または[モニターベースの SLO][2] でのみ利用可能です。
+**Note:** Burn rate alerts are available for the following SLO types:
 
-{{< img src="service_management/service_level_objectives/burn_rate_alert_config.jpeg" alt="バーンレートアラートのコンフィギュレーション">}}
+- [Metric-based SLOs][1], 
+- [Monitor-based SLOs][2] that are only composed of Metric Monitor types (Metric, Integration, APM Metric, Anomaly, Forecast, or Outlier Monitors), and
+- [Time Slice SLOs][7]
 
-## バーンレートアラートの仕組み
+{{< img src="service_management/service_level_objectives/slo-burn-rate-alert-v2.png" alt="Burn rate alert configuration">}}
 
-バーンレートとは、Google の造語で、SLO の目標長に対してエラーバジェットがどの程度速く消費されるかを示す単位なしの値です。たとえば、30 日間を目標とする場合、バーンレートが 1 であれば、1 の割合が一定であれば、エラー予算がちょうど 30 日で完全に消費されることを意味します。消費率 2 とは、一定であれば 15 日、消費率 3とは 10 日でエラーバジェットが枯渇することを意味します。
+## How Burn Rate Alerts work
 
-この関係は以下の式で表されます。
+A burn rate is a unitless value [coined by Google][3] that indicates how fast your error budget is consumed relative to your SLO's target length. For example, a 30-day target, a burn rate of 1 means your error budget would be fully consumed in exactly 30 days if the rate of 1 was kept constant. A burn rate of 2 means the error budget would be exhausted in 15 days if kept constant, and a burn rate of 3 means 10 days, etc.
 
-$${\text"SLO 目標の長さ" \text" (7、30 または 90 日)"} / \text"バーンレート" = \text"エラーバジェットが枯渇するまでの時間"\$$
+This relationship is represented by the following formula:
 
-バーンレートアラートは、観測されたバーンレートを測定するために、最近の「エラー率」を計算に使用します。「エラー率」とは、*ある期間*の全動作に対する不良動作の比率を意味することに注意してください。
+$${\text"length of SLO target" \text" (7, 30 or 90 days)"} / \text"burn rate" = \text"time until error budget is fully consumed"\$$
 
-$$\text"エラー率" = 1 - {\text"期間中の良好動作" / \text"期間中の全動作"}$$
+A burn rate alert will use the recent "error rate" in its calculation to measure the observed burn rate. Note that "error rate" means the ratio of bad behavior over total behavior during a *given period*:
 
-「動作」の単位は、SLO の種類によって異なります。メトリクスベースの SLO は、何かの発生数 (成功したリクエストや失敗したリクエストの数など) を追跡し、モニターベースの SLO は、時間の量 (モニターのダウンタイムやアップタイムなど) を追跡します。
+$$\text"error rate" = 1 - {\text"good behavior during time period" / \text"total behavior during time period"}$$
 
-SLO の目標 (99.9%など) を設定する場合、エラーバジェットは、どの程度の信頼性の低さを許容するかということです。
+The units of "behavior" will differ depending on the type of SLO. Metric-based SLOs track the number of occurrences of something (like number of successful or failed requests), while monitor-based SLOs track amounts of time (like downtime and uptime of monitors).
 
-$$\text"エラーバジェット" = 100% - \text"SLO 目標"$$
+When you set a target for your SLO (like 99.9%), your error budget is the amount of unreliability you're allowed to have:
 
-言い換えれば、エラーバジェット (分数形式) は、維持すべき理想的なエラー率です。つまり、バーンレートは理想的なエラー率の倍率と解釈することもできます。たとえば、30 日間 99.9% の SLO の場合、バーンレートが 10 であれば、エラーバジェットは 3 日で完全に枯渇するペースであり、観測されたエラー率は理想的なエラー率の 10 倍であることを意味します。
+$$\text"error budget" = 100% - \text"SLO Target"$$
 
-$$(\text"バーンレート") (\text"理想的なエラー率") = \text"観測されたエラー率"$$
+In other words, your error budget (in fractional form) is the ideal error rate you should be maintaining. So, a burn rate can alternatively be interpreted as a multiplier of your ideal error rate. For example, for a 99.9% SLO over 30 days, if the SLO is experiencing a burn rate of 10 that means the error budget is on pace to be completely depleted in 3 days and that the observed error rate is 10 times the ideal error rate: 
+
+$$(\text"burn rate") (\text"ideal error rate") = \text"observed error rate"$$
 $$(10)(0.001) = 0.01$$
 
-理想的には、SLO の目標期間中、常にバーンレート 1 を維持するようにします (新機能でアプリケーションを進化させるために投資する際)。しかし、実際には、問題やインシデントによって、問題が解決されるまでの間、バーンレートが急激に上昇するため、バーンレートは変動することになります。したがって、バーンレートに関するアラートを使用すると、問題がエラーバジェットを消費する割合が高くなり、SLO の目標を達成できない可能性がある場合に、積極的に通知されるようになります。
+Ideally, you should always try to maintain a burn rate of 1 over the course of your SLO's target (as you invest in evolving your application with new features). However, in practice, your burn rate will fluctuate as issues or incidents cause your burn rate to increase rapidly until the issue is resolved. Therefore, alerting on burn rates allows you to be proactively notified when an issue is consuming your error budget at an elevated rate that could potentially cause you to miss your SLO target.
 
-バーンレートアラートを構成する場合、バーンレートの閾値と、観測されたバーンレートを測定する「長いアラートウィンドウ」と「短いアラートウィンドウ」を指定します。長いアラートウィンドウは時間単位で指定し、重大な問題に対応するのに十分な長さの期間にわたってバーンレートを測定するようにモニターを設定します。これにより、軽微な問題によってモニターが薄っぺらなアラートを発するのを防ぐことができます。短いアラートウィンドウは、分単位で指定されます。これは、最近のバーンレートがまだ閾値を上回っているかどうかを確認することで、実際の問題が終わった後、モニターが迅速に回復することを保証します。Google は、短いウィンドウを長いウィンドウの 1/12 にすることを推奨しています。しかし、Datadog では API や Terraform を使ってプログラムで短いウィンドウをカスタマイズすることができるようになります。以下は、バーンレートアラートがどのように評価されるかの完全な計算式です。
+When you configure a burn rate alert, you specify the burn rate threshold alongside a "long alerting window" and "short alerting window" over which the observed burn rate will be measured. The long alerting window is specified in hours and ensures the monitor measures the burn rate over a period long enough to correspond to a significant issue. This prevents the monitor from triggering flaky alerts due to minor issues. The short alerting window is specified in minutes. It ensures the monitor recovers quickly after the actual issue is over by checking if the recent burn rate is still above the threshold. Google recommends the short window to be 1/12 of the long window. However, you will be able to customize the short window programmatically in Datadog through the API or with Terraform. Here is the full formula for how the burn rate alert evaluates:
 
-$$(\text"長いウィンドウのエラー率" / {1 - \text"SLO 目標"} ≥ \text"バーンレートしきい値") ∧ (\text"短いウィンドウのエラー率" / {1 - \text"SLO 目標"} ≥ \text"バーンレートしきい値") = \text"アラート"$$
+$$(\text"long window error rate" / {1 - \text"SLO target"} ≥ \text"burn rate threshold") ∧ (\text"short window error rate" / {1 - \text"SLO target"} ≥ \text"burn rate threshold") = \text"ALERT"$$
 
-## 最大バーンレート値
+## Maximum burn rate values
 
-上述したように、この式を使って、長いウィンドウと短いウィンドウの両方で観測されたバーンレートを評価することができます。
+As noted above, you can use this formula to evaluate the observed burn rate for both the long window and short window: 
 
-$$\text"エラー率" / {1 - \text"SLO 目標"}$$
+$$\text"error rate" / {1 - \text"SLO target"}$$
 
-これまでに観測されたエラー率の最大値は 1 です (例えば、ある時間帯に全体の 100% が不良動作であった場合)。つまり、バーンレートアラートで使用できるバーンレートの最大値が存在することになります。
+The maximum error rate that you can ever observe is 1 (for example, when 100% of the total behavior is bad behavior during the given time period). This means that there is a maximum possible burn rate value that you can use in your burn rate alerts: 
 
-$$\text"最大バーンレート" = 1 / {1 - \text"SLO 目標"}$$
+$$\text"max burn rate" = 1 / {1 - \text"SLO target"}$$
 
-SLO 目標値が低いほど、可能な最大バーンレート値も低くなります。この値より高いバーンレートの閾値を設定しようとすると、アラートが作動することは不可能になります。バーンレートアラートの条件を上記の式で決定される最大値よりも高い値に設定すると、SLO に 100% を超えるエラー率が発生したときに通知するようにバーンレートアラートに指示することになります (これは不可能です)。そこで、役に立たないアラートが誤って作成されるのを防ぐため、Datadog は、最大値を超えるバーンレート値を設定するバーンレートアラートの作成をブロックしています。
+The lower your SLO target, the lower your maximum possible burn rate value. If you were to attempt to set a burn rate threshold higher than this value, it would be impossible for the alert to trigger. If you set a burn rate alert's condition to a value higher than the maximum determined by the above formula, you're telling the burn rate alert to notify you when your SLO is seeing an error rate greater than 100% (which is impossible). So, to avoid unhelpful alerts from being accidentally created, Datadog blocks the creation of burn rate alerts that set a burn rate value beyond their maximum.
 
-## バーンレート値の選択
+## Picking burn rate values
 
-アラートを発するためのバーンレート値の選択は、SLO が使用する目標とタイムウィンドウに依存します。バーンレートアラートを構成する場合、バーンレート閾値自体の設定と長いウィンドウの設定に主に焦点を当てるべきです。Datadog は、Google が提案するように、最初は短いウィンドウを長いウィンドウの 1/12 に保ち、アラートを使用した後に必要に応じて値を調整することを推奨します。可能な最大バーンレートは、前のセクションで説明した関係によって制限されます。
+Picking burn rate values to alert off of depends on the target and time window your SLO uses. When you configure a burn rate alert, your main focus should be on setting the burn rate threshold itself and setting the long window. Datadog recommends initially keeping the short window as 1/12 of the long window, as Google suggests, and then adjust the value if needed after using the alert. Your maximum possible burn rate will be bounded by the relationship described in the previous section.
 
-### アプローチ #1: エラーバジェット枯渇までの時間
+### Approach #1: Time to error budget depletion
 
-バーンレートの閾値については、先ほどの関係を思い出してください。
+For the burn rate threshold, recall the previous relationship:
 
-$$\text"SLO 目標の長さ (7日、30日、90日)" / \text"バーンレート" = \text"エラーバジェットが完全に消費されるまでの時間"$$
-バーンレートを求め、重要な問題と認定されるエラーバジェットが完全に消費されるまでの時間を選びます。
+$$\text"length of SLO target (7, 30, or 90 days)" / \text"burn rate" = \text"time until error budget is fully consumed"$$
+Solve for burn rate and pick a time until the error budget is fully consumed that would qualify as a significant issue. 
 
-長いウィンドウでは、軽微な一過性の問題ではなく、実際の問題を示すために、高いバーンレートが持続しなければならない期間を選択します。バーンレートが高いほど、長いウィンドウを小さくする必要があります (重大な問題をより早く発見できるように)。
+For the long window, choose a period of time that an elevated burn rate would have to be sustained to indicate a real issue rather than a minor transient issue. The higher the burn rate you select, the smaller a long window you should pair it with (so that high severity issues are caught sooner).
 
-### アプローチ #2: 理論上のエラーバジェット消費量
+### Approach #2: Theoretical error budget consumption
 
-あるいは、バーンレートと長いウィンドウの組み合わせを、理論上のエラーバジェット消費量で考えてもよいでしょう。
+Alternatively, you may think of a burn rate and long window pairing in terms of theoretical error budget consumption:
 
-$$\text"バーンレート" = {\text"SLO 目標の長さ (時間単位) " * \text" エラーバジェット消費率"} / {\text"長いウィンドウ (時間単位) " * 100%}$$
+$$\text"burn rate" = {\text"length of SLO target (in hours) " * \text" percentage of error budget consumed"} / {\text"long window (in hours) " * 100%}$$
 
-例えば、7 日間の SLO の場合、1 時間を長いウィンドウとして、理論上のエラーバジェット消費量が 10% の場合にアラートを発するには、次のようなバーンレートを選択する必要があります。
+For example, for a 7-day SLO, to be alerted if the theoretical error budget consumption is 10% with 1 hour as your long window, the selected burn rate should be:
 
-$$\text"バーンレート" = {7 \text"日" * 24 \text"時間" * 10% \text"消費したエラーバジェット"} / {1 \text"時間" * 100%} = 16.8$$
+$$\text"burn rate" = {7 \text"days" * 24 \text"hours" * 10% \text"error budget consumed"} / {1 \text"hour" * 100%} = 16.8$$
 
-**注:** メトリクスベースの SLO の場合、アプローチ #2 の関係は、長いウィンドウに含まれる発生回数の合計を、SLO 目標値の全長に外挿するものです。実際には、メトリクスベースの SLO によって追跡される発生回数の合計は、一日を通して異なる可能性が高いため、観測されるエラーバジェット消費量は、この関係に正確に対応しません。バーンレートアラートは、エラーバジェットの大幅な消費を発生前に予測するためのものです。モニターベースの SLO の場合、時間は常に一定の速度で移動するため、理論上のエラーバジェット消費量 と実際のエラーバジェット消費量は同じになります。例えば、60 分のモニターデータは、常に 1 時間のウィンドウに含まれます。
+**Note:** For metric-based SLOs, the relationship in Approach #2 extrapolates the total number of occurrences contained in the long window out to the full length of the SLO target. In practice, the error budget consumption observed won't correspond exactly to this relationship, as the total occurrences tracked by the metric-based SLO in a rolling window will likely differ throughout the day. A burn rate alert is meant to predict significant amounts of error budget consumption before they occur. For monitor-based SLOs, theoretical error budget consumption and actual error budget consumption are equal because time always moves at a constant rate . For example, 60 minutes of monitor data is aways contained in the 1 hour window.
 
-## モニターの作成
+## Monitor creation
 
-1. [SLO ステータスページ][4]に移動します。
-2. 新しい SLO を作成、または既存のものを編集し、**Save and Set Alert** ボタンをクリックします。既存の SLO の場合は、SLO 詳細のサイドパネルの **Set up Alerts** ボタンをクリックすると、アラートのコンフィギュレーションに直接アクセスできます。
-3. **Step 1: Setting alerting conditions** で **Burn Rate** タブを選択します。
-4. 特定の長さのウィンドウで、特定のバーンレートが測定されたときに、アラートがトリガーされるように設定します。
-   * バーンレートの値は、以下の範囲でなければなりません。
-     $$0 < \text"バーンレート" ≤ 1 / {1 - \text"SLO 目標"}$$
-   * Datadog は、長いウィンドウの最大値として 48 時間をサポートしています。長いウィンドウは、`1 hour <= long window <= 48 hours` の範囲である必要があります。
-   * 短いウィンドウは、UI 上で `short window = 1/12 * long window` として自動的に計算されます。
-   * [API または Terraform](#api-and-terraform) を使用して別の短いウィンドウ値を指定できますが、常に長いウィンドウより小さい値である必要があります。
-5. **Say what's happening** セクションと **Notify your team** セクションに、[通知情報][4]を追加します。
-6. SLO コンフィギュレーションページで **Save and Exit** ボタンをクリックします。
+1. Navigate to the [SLO status page][4].
+2. Create a new SLO or edit an existing one, then click the **Save and Set Alert** button. For existing SLOs, you can also click the **Set up Alerts** button in the SLO detail side panel to take you directly to the alert configuration.
+3. Select the **Burn Rate** tab in **Step 1: Setting alerting conditions**
+4. Set an alert to trigger when a certain burn rate is measured during a specific long window:
+   * The burn rate value must be in the range of
+     $$0 < \text"burn rate" ≤ 1 / {1 - \text"SLO target"}$$
+   * Datadog supports a maximum value of 48 hours for the long window. Your long window must be in the range of `1 hour <= long window <= 48 hours`.
+   * The short window is then automatically calculated in the UI as `short window = 1/12 * long window`.
+   * You can specify a different short window value using the [API or Terraform](#api-and-terraform), but it must always be less than the long window.
+5. Add [Notification information][4] into the **Configure notifications and automations** section.
+6. Click the **Save and Exit** button on the SLO configuration page.
 
-### 例
+### Examples
 
-以下は、7 日、30 日、90 日の目標に対する Datadog の推奨値の表です。
+Below are tables of Datadog's recommended values for 7, 30, and 90-day targets. 
 
-- これらの例は 99.9% の目標値を想定していますが、96% という低い目標値でも妥当です (96% の最大バーンレートは 25)。しかし、より低い目標値を使用する場合は、[最大バーンレート値](#maximum-burn-rate-values)のセクションで説明したように、より低い閾値が必要になる場合があります。Datadog では、消費される理論上のエラーバジェットの値を小さくするか長いウィンドウに大きな値を設定して[アプローチ #2](#approach-2-theoretical-error-budget-consumption)を使うことを推奨しています。
-- メトリクスベースの SLO の場合、消費される理論上のエラーバジェットは、長いアラートウィンドウで観察された総発生数を SLO 目標値の全長に外挿することによって計算されます。
+- These examples assume a 99.9% target, but they are reasonable for targets as low as 96% (the max burn rate for 96% is 25). However, if you are using lower targets you may require lower thresholds as described in the [Maximum Burn Rate Values](#maximum-burn-rate-values) section, Datadog recommends that you use [Approach #2](#approach-2-theoretical-error-budget-consumption) with either a smaller value for theoretical error budget consumed or a higher value for the long window.
+- For metric-based SLOs, the theoretical error budget consumed is calculated by extrapolating the number of total occurrences observed in the long alerting window out to the total length of the SLO target. 
 
-7 日間目標の場合:
+For 7-day targets:
 
-| バーンレート | 長いウィンドウ | 短いウィンドウ | 消費される理論上のエラーバジェット |
+| Burn rate | Long window | Short window | Theoretical error budget consumed |
 |---|---|---|---|
-| 16.8  | 1 時間  | 5 分  | 10%  |
-| 5.6  | 6 時間  | 30 分  | 20%  |
-| 2.8  | 24 時間  | 120 分  | 40%  |
+| 16.8  | 1 hour  | 5 minutes  | 10%  |
+| 5.6  | 6 hours  | 30 minutes  | 20%  |
+| 2.8  | 24 hours  | 120 minutes  | 40%  |
 
-30 日間目標の場合:
+For 30-day targets:
 
-| バーンレート | 長いウィンドウ | 短いウィンドウ | 消費される理論上のエラーバジェット |
+| Burn rate | Long window | Short window | Theoretical error budget consumed |
 |---|---|---|---|
-| 14.4  | 1 時間  | 5 分  | 2%  |
-| 6  | 6 時間  | 30 分  | 5%  |
-| 3  | 24 時間  | 120 分  | 10%  |
+| 14.4  | 1 hour  | 5 minutes  | 2%  |
+| 6  | 6 hours  | 30 minutes  | 5%  |
+| 3  | 24 hours  | 120 minutes  | 10%  |
 
-90 日間目標の場合:
+For 90-day targets:
 
-| バーンレート | 長いウィンドウ | 短いウィンドウ | 消費される理論上のエラーバジェット |
+| Burn rate | Long window | Short window | Theoretical error budget consumed |
 |---|---|---|---|
-| 21.6  | 1 時間  | 5 分  | 1%  |
-| 10.8  | 6 時間  | 30 分  | 3%  |
-| 4.5  | 24 時間  | 120 分  | 5%  |
+| 21.6  | 1 hour  | 5 minutes  | 1%  |
+| 10.8  | 6 hours  | 30 minutes  | 3%  |
+| 4.5  | 24 hours  | 120 minutes  | 5%  |
 
-**推奨:** バーンレートアラートが常に不安定であることがわかった場合、これは短いウィンドウを少し大きくする必要があることを示すものです。ただし、短いウィンドウを大きくすると、問題が終了した後のモニターの回復が遅くなることに注意してください。
+**Recommendation:** If you find that your burn rate alert is consistently too flaky, this is an indication that you should make your short window slightly larger. However, note that the larger you make your short window, the slower the monitor will be in recovering after an issue has ended.
 
-### API および Terraform
+### API and Terraform
 
-[create-monitor API エンドポイント][5]を使用して、SLO バーンレートアラートを作成することができます。以下は、過去 1 時間と過去 5 分に 14.4 のバーンレートが測定されたときにアラートを発するバーンレートアラートのクエリ例です。*slo_id* をバーンレートアラートを構成する SLO の英数字 ID に置き換え、*time_window* を 7d、30d、90d のいずれかに置き換えます (SLO の構成に使用する目標値によって異なります)。
+You can create SLO burn rate alerts using the [create-monitor API endpoint][5]. Below is an example query for a burn rate alert, which alerts when a burn rate of 14.4 is measured for the past hour and past 5 minutes. Replace *slo_id* with the alphanumeric ID of the SLO you wish to configure a burn rate alert on and replace *time_window* with one of 7d, 30d or 90d - depending on which target is used to configure your SLO:
 
 ```
 burn_rate("slo_id").over("time_window").long_window("1h").short_window("5m") > 14.4
 ```
 
-また、[Terraform の datadog_monitor リソース][6]を使用して SLO バーンレートアラートを作成することも可能です。以下は、上記と同じクエリ例を使用して、メトリクスベースの SLO にバーンレートアラートを構成する .tf の例です。
+In addition, SLO burn rate alerts can also be created using the [datadog_monitor resource in Terraform][6]. Below is an example .tf for configuring a burn rate alert for a metric-based SLO using the same example query as above.
 
-**注:** SLO バーンレートアラートは、Terraform プロバイダー v2.7.0 以前および v2.13.0 以降のみでサポートされています。v2.7.0 から v2.13.0 の間のバージョンはサポートされていません。
+**Note:** SLO burn rate alerts are only supported in Terraform provider v2.7.0 or earlier and in provider v2.13.0 or later. Versions between v2.7.0 and v2.13.0 are not supported.
 
 ```
 resource "datadog_monitor" "metric-based-slo" {
@@ -157,9 +162,10 @@ resource "datadog_monitor" "metric-based-slo" {
 ```
 
 
-[1]: /ja/service_management/service_level_objectives/metric/
-[2]: /ja/service_management/service_level_objectives/monitor/
+[1]: /service_management/service_level_objectives/metric/
+[2]: /service_management/service_level_objectives/monitor/
 [3]: https://sre.google/workbook/alerting-on-slos/
 [4]: https://app.datadoghq.com/slo
-[5]: /ja/api/v1/monitors/#create-a-monitor
+[5]: /api/v1/monitors/#create-a-monitor
 [6]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/monitor
+[7]: /service_management/service_level_objectives/time_slice

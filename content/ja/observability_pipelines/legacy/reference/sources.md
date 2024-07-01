@@ -1,14 +1,14 @@
 ---
-aliases:
-- /ja/integrations/observability_pipelines/guide/
-- /ja/observability_pipelines/integrations/
-- /ja/observability_pipelines/reference/sources/
+title: Sources
 legacy: true
-title: OOTB ルール
+aliases:
+    - /integrations/observability_pipelines/guide/
+    - /observability_pipelines/integrations/
+    - /observability_pipelines/reference/sources/
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Observability Pipelines は、US1-FED Datadog サイトではご利用いただけません。</div>
+<div class="alert alert-warning">Observability Pipelines is not available on the US1-FED Datadog site.</div>
 {{< /site-region >}}
 
-ソースは、データが収集され、観測可能性パイプラインに送信される場所です。構成内のソースコンポーネントは、観測可能性パイプラインがソースからデータを収集または受信する方法を定義します。
+A source is where data is collected and sent to Observability Pipelines. The source component in a configuration defines how Observability Pipelines collects or receives data from the source.

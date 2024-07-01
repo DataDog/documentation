@@ -1,38 +1,38 @@
 ---
+title: Allow Third-Party Service Workers For Session Replay
+kind: guide
 aliases:
-- /ja/real_user_monitoring/faq/session_replay_service_worker/
+  - /real_user_monitoring/faq/session_replay_service_worker/
 further_reading:
-- link: /real_user_monitoring/session_replay/
-  tag: ドキュメント
-  text: セッションリプレイについて
-kind: ガイド
-title: サードパーティーのサービスワーカーによるセッションリプレイの許可
+- link: /real_user_monitoring/session_replay/browser/
+  tag: Documentation
+  text: Learn about Session Replay
 ---
 
-## 概要
+## Overview
 
-セッションリプレイは、お客様のプライバシーを保護し、データの安全性を保証しながら、最高の体験を提供するために、別のドメイン `session-replay-datadoghq.com` にあるサービスワーカーを使用しています。
+Session Replay uses a Service Worker in another domain `session-replay-datadoghq.com` to provide the best experience possible while protecting your privacy and guaranteeing the safety of your data.
 
-お客様がブラウザの設定でサードパーティーのクッキーをブロックしている場合、またはブラウザの初期設定でブロックしている場合、サービスワーカーが正しく登録できないことがあります。
+If you have blocked third-party cookies in your browser settings, or if your browser blocks them by default, this prevents the service worker from registering correctly.
 
-### 例外を許可する
+### Allow an exception
 
-Datadog では、セッションリプレイのサービスワーカーが正しく機能するように、サードパーティーのクッキーブロックを例外化することを推奨しています。
+Datadog recommends that you make an exception to your third-party cookie blocking to allow Session Replay's service worker to function properly.
 
-Google Chrome を使用している場合は、以下の手順に従ってください。この例外的なワークフローは、Firefox や、Brave、Edge を含むその他のデスクトップブラウザにも適用されます。
+If you use Google Chrome, follow the instructions below. This exception workflow also applies to Firefox and other desktop browsers, including Brave and Edge.
 
-1. Web ブラウザで、ページの URL の左側にある **Lock** アイコンをクリックします。
-2. **Cookies** をクリックします。ポップアップモーダルが表示されます。
+1. In your web browser, click the **Lock** icon to the left of the page URL.
+2. Click **Cookies**. A pop-up modal appears.
 
-   {{< img src="real_user_monitoring/session_replay/allow-3p-serviceworker-1.png" alt="セッションリプレイサードパーティサービスワーカーを許可する" >}}
+   {{< img src="real_user_monitoring/session_replay/allow-3p-serviceworker-1.png" alt="Allow Session Replay Third-Party Service Worker" >}}
 
-3. **Blocked** タブを開き、ページの一覧から `session-replay-datadoghq.com` を選択します。
-4. **Allow** と **Done** をクリックします。
+3. Navigate to the **Blocked** tab and select `session-replay-datadoghq.com` from the list of pages.
+4. Click **Allow** and **Done**.
 
-   {{< img src="real_user_monitoring/session_replay/allow-3p-serviceworker-2.png" alt="セッションリプレイサードパーティサービスワーカーを許可する" >}}
+   {{< img src="real_user_monitoring/session_replay/allow-3p-serviceworker-2.png" alt="Allow Session Replay Third-Party Service Worker" >}}
 
-クッキーの設定を更新したら、ページを再読み込みしてください。
+Once you have updated your cookie settings, reload the page.
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

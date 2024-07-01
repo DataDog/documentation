@@ -1,313 +1,323 @@
 ---
+title: Docker Agent for Docker, containerd, and Podman
 aliases:
-- /ja/guides/basic_agent_usage/docker/
-- /ja/agent/docker
-- /ja/agent/basic_agent_usage/docker/
-- /ja/integrations/docker_daemon/
-- /ja/docker/
+  - /guides/basic_agent_usage/docker/
+  - /agent/docker
+  - /agent/basic_agent_usage/docker/
+  - /integrations/docker_daemon/
+  - /docker/
 further_reading:
-- link: https://app.datadoghq.com/release-notes?category=Container%20Monitoring
-  tag: リリースノート
-  text: Datadog Containers の最新リリースをチェック！ (アプリログインが必要です)。
-- link: /agent/docker/log/
-  tag: ドキュメント
-  text: アプリケーションログの収集
-- link: /agent/docker/apm/
-  tag: ドキュメント
-  text: アプリケーショントレースの収集
-- link: /agent/docker/prometheus/
-  tag: ドキュメント
-  text: Prometheus メトリクスの収集
-- link: /agent/docker/integrations/
-  tag: ドキュメント
-  text: アプリケーションのメトリクスとログを自動で収集
-- link: /agent/guide/autodiscovery-management/
-  tag: ドキュメント
-  text: データ収集をコンテナのサブセットのみに制限
-- link: /agent/docker/tag/
-  tag: ドキュメント
-  text: コンテナから送信された全データにタグを割り当て
-title: Docker、containerd、Podman に対応した Docker Agent
+  - link: "https://app.datadoghq.com/release-notes?category=Container%20Monitoring"
+    tag: Release Notes
+    text: Check out the latest Datadog Containers releases! (App login required).
+  - link: /agent/docker/log/
+    tag: Documentation
+    text: Collect your application logs
+  - link: /agent/docker/apm/
+    tag: Documentation
+    text: Collect your application traces
+  - link: /agent/docker/prometheus/
+    tag: Documentation
+    text: Collect your Prometheus metrics
+  - link: /agent/docker/integrations/
+    tag: Documentation
+    text: Collect automatically your applications metrics and logs
+  - link: /agent/guide/autodiscovery-management/
+    tag: Documentation
+    text: Limit data collection to a subset of containers only
+  - link: /agent/docker/tag/
+    tag: Documentation
+    text: Assign tags to all data emitted by a container
 ---
 
-## 概要
+## Overview
 
-Datadog Docker Agent は、ホスト [Agent][1] をコンテナ化したバージョンです。Docker Agent は、Docker、containerd、Podman のランタイムをサポートしています。公式の [Docker イメージ][2]は Docker Hub、GCR 、および ECR-Public からご利用いただけます。
+The Datadog Docker Agent is the containerized version of the host [Agent][1]. The Docker Agent supports Docker, containerd, and Podman runtimes. The official [Docker image][2] is available on Docker Hub, GCR, and ECR-Public.
 
-<div class="alert alert-warning">2023 年 7 月 10 日、Docker Hub は Datadog の Docker Hub レジストリへのダウンロードレート制限を実施するようになります。これらのレジストリからのイメージのプルは、レート制限割り当てにカウントされます。<br/><br/>
+<div class="alert alert-warning">Docker Hub is subject to image pull rate limits. If you are not a Docker Hub customer, Datadog recommends that you update your Datadog Agent and Cluster Agent configuration to pull from GCR or ECR. For instructions, see <a href="/agent/guide/changing_container_registry">Changing your container registry</a>.</div>
 
-Datadog は、Datadog Agent と Cluster Agent の構成を更新して、レート制限が適用されない他のレジストリからプルすることを推奨しています。手順については、<a href="/agent/guide/changing_container_registry">コンテナレジストリを変更する</a>を参照してください。</div>
-
-64-bit x86 および Arm v8 アーキテクチャ用のイメージをご用意しています。
+Images are available for 64-bit x86 and Arm v8 architectures.
 
 | ECR-Public                                                           | GCR                                                             | Docker Hub                                             |
 |----------------------------------------------------------------------|-----------------------------------------------------------------|--------------------------------------------------------|
-| [Agent v6+][4]<br>`docker pull public.ecr.aws/datadog/agent`         | [Agent v6+][3]<br>`docker pull gcr.io/datadoghq/agent`          | [Agent v6+][2]<br>`docker pull datadog/agent`          | 
+| [Agent v6+][4]<br>`docker pull public.ecr.aws/datadog/agent`         | [Agent v6+][3]<br>`docker pull gcr.io/datadoghq/agent`          | [Agent v6+][2]<br>`docker pull datadog/agent`          |
 | [Agent v5][7]<br>`docker pull public.ecr.aws/datadog/docker-dd-agent`| [Agent v5][6]<br>`docker pull gcr.io/datadoghq/docker-dd-agent` | [Agent v5][5]<br>`docker pull datadog/docker-dd-agent` |
 
 
-このページの CLI コマンドは Docker ランタイム用です。containerd ランタイムは `docker` を `nerdctl` に、Podman ランタイムは `podman` に置き換えてください。
+The CLI commands on this page are for the Docker runtime. Replace `docker` with `nerdctl` for the containerd runtime, or `podman` for the Podman runtime.
 
-## セットアップ
+## Setup
 
-Docker Agent をまだインストールしていない場合は、以下の手順または[アプリ内のインストール手順][8]を参照してください。[サポートされるバージョン][9]については、Agent のドキュメントを参照してください。ワンステップインストールコマンドを使用し、`<YOUR_DATADOG_API_KEY>` を [Datadog API キー][10]と置き換えてください。
+If you haven't installed the Docker Agent, follow the [in-app installation instructions][8] or see below. For [supported versions][9], see the Agent documentation. Use the one-step install command. Replace `<YOUR_DATADOG_API_KEY>` with your [Datadog API key][10], and `<DATADOG_SITE>` with {{< region-param key=dd_site code="true" >}}.
 
 {{< tabs >}}
-{{% tab "標準" %}}
+{{% tab "Standard" %}}
 
 ```shell
-docker run -d --cgroupns host --pid host --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e DD_API_KEY=<DATADOG_API_KEY> gcr.io/datadoghq/agent:7
+docker run -d --cgroupns host --pid host --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e DD_SITE=<DATADOG_SITE> -e DD_API_KEY=<DATADOG_API_KEY> gcr.io/datadoghq/agent:7
 ```
 
-ECR-Public の場合:
+For ECR-public:
 
 ```shell
-docker run -d --cgroupns host --pid host --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e DD_API_KEY=<DATADOG_API_KEY> public.ecr.aws/datadog/agent:7
+docker run -d --cgroupns host --pid host --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e DD_SITE=<DATADOG_SITE> -e DD_API_KEY=<DATADOG_API_KEY> public.ecr.aws/datadog/agent:7
 ```
 
-**注**: GCR または ECR-Public 以外の別のレジストリを使用している場合は、必ずイメージを更新してください。
+**Note**: If you're using a different registry besides GCR or ECR-public, make sure to update the image.
 
-**注**: ネットワークモニタリング、セキュリティエージェント、oom_kill チェックなど system-probe が提供するいくつかの機能では、 `/etc/os-release` ファイルを `-v /etc/os-release:/host/etc/os-release:ro` でマウントする必要があります。Linux ディストリビューションに `/etc/os-release` ファイルがない場合は、 `/etc/redhat-release` や `/etc/fedora-release` などの同等のファイルをマウントしてください。
+**Note**: For some features provided by system-probe, including network monitoring, security agent, and oom_kill check, you must also mount the `/etc/os-release` file with `-v /etc/os-release:/host/etc/os-release:ro`. If your Linux distribution does not include an `/etc/os-release` file, mount the equivalent one provided, for example `/etc/redhat-release` or `/etc/fedora-release`.
 
 {{% /tab %}}
 {{% tab "Amazon Linux" %}}
 
-Amazon Linux < v2 の場合:
+For Amazon Linux < v2:
 
 ```shell
-docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /cgroup/:/host/sys/fs/cgroup:ro -e DD_API_KEY=<DATADOG_API_KEY> gcr.io/datadoghq/agent:7
+docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /cgroup/:/host/sys/fs/cgroup:ro -e DD_SITE=<DATADOG_SITE> -e DD_API_KEY=<DATADOG_API_KEY> gcr.io/datadoghq/agent:7
 ```
-ECR-Public の場合:
+For ECR-public:
 
 ```shell
-docker run -d --cgroupns host --pid host --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /cgroup/:/host/sys/fs/cgroup:ro -e DD_API_KEY=<DATADOG_API_KEY> public.ecr.aws/datadog/agent:7
+docker run -d --cgroupns host --pid host --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /cgroup/:/host/sys/fs/cgroup:ro -e DD_SITE=<DATADOG_SITE> -e DD_API_KEY=<DATADOG_API_KEY> public.ecr.aws/datadog/agent:7
 ```
 
-Amazon Linux v2 の場合:
+For Amazon Linux v2:
 
 ```shell
-docker run -d --cgroupns host --pid host --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e DD_API_KEY=<DATADOG_API_KEY> gcr.io/datadoghq/agent:7
+docker run -d --cgroupns host --pid host --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e DD_SITE=<DATADOG_SITE> -e DD_API_KEY=<DATADOG_API_KEY> gcr.io/datadoghq/agent:7
 ```
-ECR-Public の場合:
+For ECR-public:
 
 ```shell
-docker run -d --cgroupns host --pid host --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e DD_API_KEY=<DATADOG_API_KEY> public.ecr.aws/datadog/agent:7
+docker run -d --cgroupns host --pid host --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e DD_SITE=<DATADOG_SITE> -e DD_API_KEY=<DATADOG_API_KEY> public.ecr.aws/datadog/agent:7
 ```
 
 {{% /tab %}}
 {{% tab "Windows" %}}
 
-Datadog Agent は、Windows Server 2019 (LTSC) と Windows Server 2022 (LTSC) でサポートされています。
+The Datadog Agent is supported in Windows Server 2019 (LTSC) and Windows Server 2022 (LTSC).
 
 ```shell
-docker run -d --name dd-agent -e DD_API_KEY=<API_KEY> -v \\.\pipe\docker_engine:\\.\pipe\docker_engine gcr.io/datadoghq/agent
+docker run -d --name dd-agent -e DD_SITE=<DATADOG_SITE> -e DD_API_KEY=<API_KEY> -v \\.\pipe\docker_engine:\\.\pipe\docker_engine gcr.io/datadoghq/agent
 ```
 
-ECR-Public の場合:
+For ECR-Public:
 
 ```shell
-docker run -d --name dd-agent -e DD_API_KEY=<API_KEY> -v \\.\pipe\docker_engine:\\.\pipe\docker_engine public.ecr.aws/datadog/agent
+docker run -d --name dd-agent -e DD_SITE=<DATADOG_SITE> -e DD_API_KEY=<API_KEY> -v \\.\pipe\docker_engine:\\.\pipe\docker_engine public.ecr.aws/datadog/agent
 ```
 
 {{% /tab %}}
-{{% tab "非特権" %}}
+{{% tab "Unprivileged" %}}
 
-(オプション) 非特権インストールを実行するには、インストールコマンドに `--group-add=<DOCKER_GROUP_ID>` を追加します。次に例を示します。
+(Optional) To run an unprivileged installation, add `--group-add=<DOCKER_GROUP_ID>` to the install command, for example:
 
 ```shell
-docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e DD_API_KEY=<DATADOG_API_KEY> gcr.io/datadoghq/agent:7 --group-add=<DOCKER_GROUP_ID>
+docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e DD_SITE=<DATADOG_SITE> -e DD_API_KEY=<DATADOG_API_KEY> gcr.io/datadoghq/agent:7 --group-add=<DOCKER_GROUP_ID>
 ```
-ECR-Public の場合:
+For ECR-Public:
 
 
 ```shell
-docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e DD_API_KEY=<DATADOG_API_KEY> public.ecr.aws/datadog/agent:7 --group-add=<DOCKER_GROUP_ID>
+docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e DD_SITE=<DATADOG_SITE> -e DD_API_KEY=<DATADOG_API_KEY> public.ecr.aws/datadog/agent:7 --group-add=<DOCKER_GROUP_ID>
 ```
 
 {{% /tab %}}
 {{< /tabs >}}
 
-**注**: Docker Compose については、[Compose と Datadog Agent][11] を参照してください。
+**Note**: For Docker Compose, see [Compose and the Datadog Agent][11].
 
-## インテグレーション
+## Integrations
 
-クラスター内で Agent を起動し、実行したら、[Datadog のオートディスカバリー機能][12]を使ってアプリケーションコンテナからメトリクスとログを自動的に収集します。
+Once the Agent is up and running, use [Datadog's Autodiscovery feature][12] to collect metrics and logs automatically from your application containers.
 
 
-## 環境変数
+## Environment variables
 
-Agent の [メインコンフィギュレーションファイル][13]は `datadog.yaml` です。Docker Agent の場合、`datadog.yaml` コンフィギュレーションオプションは環境変数で渡されます。
+The Agent's [main configuration file][13] is `datadog.yaml`. For the Docker Agent, `datadog.yaml` configuration options are passed in with environment variables.
 
-### グローバルオプション
+### Global options
 
-| 環境変数         | 説明                                                                                                                                                                                                                                                                                                                                      |
+| Env Variable         | Description                                                                                                                                                                                                                                                                                                                                      |
 |----------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `DD_API_KEY`         | Datadog API キー (**必須**)                                                                                                                                                                                                                                                                                                              |
-| `DD_ENV`             | 出力されるすべてのデータにグローバル `env` タグを設定します。                                                                                                                                                                                                                                                                                                  |
-| `DD_HOSTNAME`        | メトリクスに使用するホスト名 (自動検出が失敗した場合)                                                                                                                                                                                                                                                                                             |
-| `DD_HOSTNAME_FILE`        | 環境によっては、ホスト名の自動検出がうまくいかず、環境変数で値を設定できない場合があります。このような場合、ホスト上のファイルを使って適切な値を提供することができます。もし `DD_HOSTNAME` が空でない値に設定されている場合、このオプションは無視されます。                                              |
-| `DD_TAGS`            | スペース区切りのホストタグ。例: `key1:value1 key2:value2`                                                                                                                                                                                                                                                                 |
-| `DD_SITE`            | メトリクス、トレース、ログの送信先サイト。Datadog サイトを `{{< region-param key="dd_site" >}}` に設定します。デフォルトは `datadoghq.com` です。                                                                                                                                                                                                |
-| `DD_DD_URL`          | メトリクス送信用 URL を上書きします。設定は任意です。                                                                                                                                                                                                                                                                                      |
-| `DD_URL` (6.36+/7.36+)            | `DD_DD_URL` のエイリアス。すでに `DD_DD_URL` が設定されている場合は無視されます。                                                                                                                                                                                                                                                                                    |
-| `DD_CHECK_RUNNERS`   | Agent はデフォルトですべてのチェックを同時に実行します (デフォルト値は `4` ランナーです)。チェックを順次実行する場合は、値を `1` に設定してください。ただし、多数のチェック (または時間のかかるチェック) を実行する必要がある場合、`collector-queue` コンポーネントが遅延して、ヘルスチェックに失敗する可能性があります。ランナーの数を増やすと、チェックを並行して実行できます。 |
-| `DD_APM_ENABLED`             | トレース収集を有効にします。デフォルトは `true` です。トレース収集の追加環境変数について詳しくは、[Docker アプリケーションのトレース][14]をご覧ください。   |
-| `DD_LOGS_CONFIG_EXPECTED_TAGS_DURATION` | 環境によっては、ホストからの最初のログに正しいタグが含まれないことがあります。新しいホストのタグがログに含まれていない場合は、この環境変数を含めて `"10m"` に設定してください。|
+| `DD_API_KEY`         | Your Datadog API key (**required**).                                                                                                                                                                                                                                                                                                              |
+| `DD_ENV`             | Sets the global `env` tag for all data emitted.                                                                                                                                                                                                                                                                                                  |
+| `DD_HOSTNAME`        | Hostname to use for metrics (if autodetection fails).                                                                                                                                                                                                                                                                                             |
+| `DD_HOSTNAME_FILE`        | In some environments, auto-detection of the hostname is not adequate, and you cannot set the value with environment variables. In these cases, you can use a file on the host to provide an appropriate value. If `DD_HOSTNAME` is set to a non-empty value, this option is ignored.                                              |
+| `DD_TAGS`            | Host tags separated by spaces. For example: `key1:value1 key2:value2`.                                                                                                                                                                                                                                                                 |
+| `DD_SITE`            | Destination site for your metrics, traces, and logs. Set your Datadog site to: `{{< region-param key="dd_site" >}}`. Defaults to `datadoghq.com`.                                                                                                                                                                                                |
+| `DD_DD_URL`          | Optional setting to override the URL for metric submission.                                                                                                                                                                                                                                                                                      |
+| `DD_URL` (6.36+/7.36+)            | Alias for `DD_DD_URL`. Ignored if `DD_DD_URL` is already set.                                                                                                                                                                                                                                                                                    |
+| `DD_CHECK_RUNNERS`   | The Agent runs all checks concurrently by default (default value = `4` runners). To run the checks sequentially, set the value to `1`. If you need to run a high number of checks (or slow checks), the `collector-queue` component may fall behind and fail the health check. You can increase the number of runners to run checks in parallel. |
+| `DD_APM_ENABLED`             | Enables trace collection. Defaults to `true`. For more information about additional trace collection environment variables, see [Tracing Docker Applications][14].   |
+| `DD_LOGS_CONFIG_EXPECTED_TAGS_DURATION` | In some environments, the initial logs from hosts might not include the correct tags. If you're missing tags on new hosts in your logs, include this environment variable and set it to `"10m"`.|
 
-### プロキシ設定
+### Proxy settings
 
-Agent v6.4.0 (トレース Agent の場合は v6.5.0) より、以下の環境変数を使用して Agent のプロキシ設定を上書きできるようになりました。
+Starting with Agent v6.4.0 (and v6.5.0 for the Trace Agent), you can override the Agent proxy settings with the following environment variables:
 
-| 環境変数        | 説明                                                       |
+| Env Variable        | Description                                                       |
 |---------------------|-------------------------------------------------------------------|
-| `DD_PROXY_HTTP`     | `http` リクエスト用のプロキシとして使用する HTTP URL です。                |
-| `DD_PROXY_HTTPS`    | `https` リクエスト用のプロキシとして使用する HTTPS URL です。              |
-| `DD_PROXY_NO_PROXY` | プロキシを使用すべきではない場合に必要となる、URL をスペースで区切ったリストです。 |
+| `DD_PROXY_HTTP`     | An HTTP URL to use as a proxy for `http` requests.                |
+| `DD_PROXY_HTTPS`    | An HTTPS URL to use as a proxy for `https` requests.              |
+| `DD_PROXY_NO_PROXY` | A space-separated list of URLs for which no proxy should be used. |
 
-プロキシ設定の詳細については、[Agent v6 プロキシのドキュメント][15]を参照してください。
+For more information about proxy settings, see the [Agent v6 Proxy documentation][15].
 
-### オプションの収集 Agent
+### Optional collection Agents
 
-セキュリティまたはパフォーマンス上の理由により、オプションの収集 Agent はデフォルトで無効になっています。このエージェントを有効にするには、以下の環境変数を使用します。
+Optional collection Agents are disabled by default for security or performance reasons. Use these environment variables to enable them:
 
-| 環境変数               | 説明                                                                                                                                                                                                                                                      |
-|----------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `DD_APM_NON_LOCAL_TRAFFIC` | [他のコンテナからのトレース][16]時に非ローカルなトラフィックを許可します。       |
-| `DD_LOGS_ENABLED`          | ログ Agent による[ログの収集][17]を有効にします。                                                                                                                                                                                                                 |
-| `DD_PROCESS_AGENT_ENABLED` | プロセス Agent による[ライブプロセスの収集][18]を有効にします。Docker ソケットがある場合、[ライブコンテナービュー][19]はすでにデフォルトで有効になっています。`false` に設定すると、[ライブプロセスの収集][18]と[ライブコンテナービュー][19]が無効になります。 |
+| Env Variable                                   | Description                                                                                                                                                   |
+|------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `DD_APM_NON_LOCAL_TRAFFIC`                     | Allow non-local traffic when [tracing from other containers][16].                                                                                             |
+| `DD_LOGS_ENABLED`                              | Enable [log collection][17] with the Logs Agent.                                                                                                              |
+| `DD_PROCESS_CONFIG_PROCESS_COLLECTION_ENABLED` | Enable [live process collection][18] with the Process Agent. The [live container view][19] is already enabled by default if the Docker socket is available. |
 
-### DogStatsD (カスタムメトリクス)
+### DogStatsD (custom metrics)
 
-カスタムメトリクスを [StatsD プロトコル][20]で送信します。
+Send custom metrics with [the StatsD protocol][20]:
 
-| 環境変数                     | 説明                                                                                                                                                |
+| Env Variable                     | Description                                                                                                                                                |
 |----------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` | 他のコンテナからの DogStatsD パケットをリスニングします (カスタムメトリクスの送信に必要)。                                                                       |
-| `DD_HISTOGRAM_PERCENTILES`       | 計算するヒストグラムのパーセンタイル (スペース区切り)。デフォルトは `0.95` です。                                                                         |
-| `DD_HISTOGRAM_AGGREGATES`        | 計算するヒストグラムの集計 (スペース区切り)。デフォルトは "max median avg count" です。                                                          |
-| `DD_DOGSTATSD_SOCKET`            | リスニングする UNIX ソケットのパス。`rw` でマウントされたボリューム内にある必要があります。                                                                                    |
-| `DD_DOGSTATSD_ORIGIN_DETECTION`  | UNIX ソケットのメトリクス用にコンテナの検出とタグ付けを有効にします。                                                                                            |
-| `DD_DOGSTATSD_TAGS`              | この DogStatsD サーバーが受信するすべてのメトリクス、イベント、サービスのチェックに付加する追加タグ。たとえば `"env:golden group:retrievers"` のように追加します。 |
-| `DD_USE_DOGSTATSD`           | DogStatsD ライブラリからのカスタムメトリクスの送信を有効または無効にします。                                                                                                |
-詳しくは、[Unix ドメインソケット上の DogStatsD][21] を参照してください。
+| `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` | Listen to DogStatsD packets from other containers (required to send custom metrics).                                                                       |
+| `DD_HISTOGRAM_PERCENTILES`       | The histogram percentiles to compute (separated by spaces). The default is `0.95`.                                                                         |
+| `DD_HISTOGRAM_AGGREGATES`        | The histogram aggregates to compute (separated by spaces). The default is "max median avg count".                                                          |
+| `DD_DOGSTATSD_SOCKET`            | Path to the unix socket to listen to. Must be in a `rw` mounted volume.                                                                                    |
+| `DD_DOGSTATSD_ORIGIN_DETECTION`  | Enable container detection and tagging for unix socket metrics.                                                                                            |
+| `DD_DOGSTATSD_TAGS`              | Additional tags to append to all metrics, events, and service checks received by this DogStatsD server, for example: `"env:golden group:retrievers"`. |
+| `DD_USE_DOGSTATSD`           | Enable or disable sending custom metrics from the DogStatsD library.                                                                                                |
+Learn more about [DogStatsD over Unix Domain Sockets][21].
 
-### タグ付け
+### Tagging
 
-ベストプラクティスとして、Datadog はタグを割り当てるときに[統合サービスタグ付け][22]を使用することをお勧めします。
+As a best practice, Datadog recommends using [unified service tagging][22] when assigning tags.
 
-Datadog は Docker、Kubernetes、ECS、Swarm、Mesos、Nomad、Rancher から一般的なタグを自動的に収集します。さらに多くのタグを抽出するには、次のオプションを使用します。
+Datadog automatically collects common tags from Docker, Kubernetes, ECS, Swarm, Mesos, Nomad, and Rancher. To extract even more tags, use the following options:
 
-| 環境変数                  | 説明                                                                                             |
+| Env Variable                  | Description                                                                                             |
 |-------------------------------|---------------------------------------------------------------------------------------------------------|
-| `DD_CONTAINER_LABELS_AS_TAGS` | コンテナラベルを抽出します。この環境は、古い `DD_DOCKER_LABELS_AS_TAGS` 環境と同等です。             |
-| `DD_CONTAINER_ENV_AS_TAGS`    | コンテナ環境変数を抽出します。この環境は、古い `DD_DOCKER_ENV_AS_TAGS` 環境と同等です。 |
-| `DD_COLLECT_EC2_TAGS`         | AWS インテグレーションを使用せずに、カスタム EC2 タグを抽出します。                                              |
+| `DD_CONTAINER_LABELS_AS_TAGS` | Extract container labels. This env is equivalent to the old `DD_DOCKER_LABELS_AS_TAGS` env.             |
+| `DD_CONTAINER_ENV_AS_TAGS`    | Extract container environment variables. This env is equivalent to the old `DD_DOCKER_ENV_AS_TAGS` env. |
+| `DD_COLLECT_EC2_TAGS`         | Extract custom EC2 tags without using the AWS integration.                                              |
 
-詳細については、[Docker タグの抽出][23]ドキュメントを参照してください。
+See the [Docker Tag Extraction][23] documentation to learn more.
 
-### シークレットファイルの使用
+### Using secret files
 
-インテグレーションの資格情報を Docker や Kubernetes のシークレットに格納し、オートディスカバリーテンプレートで使用できます。詳細については、[シークレット管理のドキュメント][24]を参照してください。
+Integration credentials can be stored in Docker or Kubernetes secrets and used in Autodiscovery templates. For more information, see the [Secrets Management documentation][24].
 
-### コンテナの無視
+### Ignore containers
 
-ログの収集、メトリクスの収集、オートディスカバリーからコンテナを除外します。Datadog はデフォルトで Kubernetes と OpenShift の `pause` コンテナを除外します。これらの許可リストとブロックリストはオートディスカバリーにのみ適用されます。トレースと DogStatsD は影響を受けません。これらの環境変数の値は、正規表現をサポートしています。
+Exclude containers from logs collection, metrics collection, and Autodiscovery. Datadog excludes Kubernetes and OpenShift `pause` containers by default. These allowlists and blocklists apply to Autodiscovery only; traces and DogStatsD are not affected. The value for these environment variables support regular expressions.
 
-| 環境変数                   | 説明                                                                                                                                                                                                                                                                                                               |
+| Env Variable                   | Description                                                                                                                                                                                                                                                                                                               |
 |--------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `DD_CONTAINER_INCLUDE`         | 処理対象に入れるコンテナの許可リスト (スペース区切り)。すべてを対象に入れる場合は、`.*` を使用します。例: `"image:image_name_1 image:image_name_2"`、`image:.*` OpenShift 環境内で ImageStreams を使用する場合は、イメージの代わりにコンテナ名を使用してください。例: "name:container_name_1 name:container_name_2", name:.* |
-| `DD_CONTAINER_EXCLUDE`         | 処理対象から除外するコンテナのブロックリスト (スペース区切り)。すべてを対象から除外する場合は、`.*` を使用します。例: `"image:image_name_3 image:image_name_4"` (**注**: この変数はオートディスカバリーに対してのみ有効)、`image:.*`                                                                                                        |
-| `DD_CONTAINER_INCLUDE_METRICS` | メトリクスを含めたいコンテナの許可リスト。                                                                                                                                                                                                                                                                |
-| `DD_CONTAINER_EXCLUDE_METRICS` | メトリクスを除外したいコンテナのブロックリスト。                                                                                                                                                                                                                                                                |
-| `DD_CONTAINER_INCLUDE_LOGS`    | ログを含めたいコンテナの許可リスト。                                                                                                                                                                                                                                                                   |
-| `DD_CONTAINER_EXCLUDE_LOGS`    | ログを除外したいコンテナのブロックリスト。                                                                                                                                                                                                                                                                   |
-| `DD_AC_INCLUDE`                | **非推奨**: 処理対象に入れるコンテナの許可リスト (スペース区切り)。すべてを対象に入れる場合は、`.*` を使用します。例: `"image:image_name_1 image:image_name_2"`、`image:.*`                                                                                                                                                     |
-| `DD_AC_EXCLUDE`                | **非推奨**: 処理対象から除外するコンテナのブロックリスト (スペース区切り)。すべてを対象から除外する場合は、`.*` を使用します。例: `"image:image_name_3 image:image_name_4"` (**注**: この変数はオートディスカバリーに対してのみ有効)、`image:.*`                                                                                        |
+| `DD_CONTAINER_INCLUDE`         | Allowlist of containers to include (separated by spaces). Use `.*` to include all. For example: `"image:image_name_1 image:image_name_2"`, `image:.*`  When using ImageStreams inside OpenShift environments, use the container name instead of image. For example:"name:container_name_1 name:container_name_2", name:.* |
+| `DD_CONTAINER_EXCLUDE`         | Blocklist of containers to exclude (separated by spaces). Use `.*` to exclude all. For example: `"image:image_name_3 image:image_name_4"` (**Note**: This variable is only honored for Autodiscovery.), `image:.*`                                                                                                        |
+| `DD_CONTAINER_INCLUDE_METRICS` | Allowlist of containers whose metrics you wish to include.                                                                                                                                                                                                                                                                |
+| `DD_CONTAINER_EXCLUDE_METRICS` | Blocklist of containers whose metrics you wish to exclude.                                                                                                                                                                                                                                                                |
+| `DD_CONTAINER_INCLUDE_LOGS`    | Allowlist of containers whose logs you wish to include.                                                                                                                                                                                                                                                                   |
+| `DD_CONTAINER_EXCLUDE_LOGS`    | Blocklist of containers whose logs you wish to exclude.                                                                                                                                                                                                                                                                   |
+| `DD_AC_INCLUDE`                | **Deprecated**. Allowlist of containers to include (separated by spaces). Use `.*` to include all. For example: `"image:image_name_1 image:image_name_2"`, `image:.*`                                                                                                                                                     |
+| `DD_AC_EXCLUDE`                | **Deprecated**. Blocklist of containers to exclude (separated by spaces). Use `.*` to exclude all. For example: `"image:image_name_3 image:image_name_4"` (**Note**: This variable is only honored for Autodiscovery.), `image:.*`                                                                                        |
 
-その他の例は[コンテナのディスカバリー管理][25]ページでご確認いただけます。
+Additional examples are available on the [Container Discover Management][25] page.
 
-**注**: `kubernetes.containers.running`、`kubernetes.pods.running`、`docker.containers.running`、`.stopped`、`.running.total`、`.stopped.total` の各メトリクスは、この設定の影響を受けません。すべてのコンテナを対象とします。なお、これらはコンテナの課金に影響しません。
+**Note**: The `kubernetes.containers.running`, `kubernetes.pods.running`, `docker.containers.running`, `.stopped`, `.running.total` and `.stopped.total` metrics are not affected by these settings. All containers are counted. This does not affect your per-container billing.
 
-**注**: containerd を使用する場合、`DD_CONTAINERD_NAMESPACES` と `DD_CONTAINERD_EXCLUDE_NAMESPACES` を使用すると、ネームスペースでコンテナを無視することが可能です。どちらもスペースで区切られたネームスペースのリストです。`DD_CONTAINERD_NAMESPACES` が設定されている場合、Agent はリストに存在するネームスペースに属するコンテナのデータを報告します。`DD_CONTAINERD_EXCLUDE_NAMESPACES` が設定されている場合、Agent はリストのネームスペースに属するものを除く、すべてのコンテナのデータをレポートします。
+**Note**: When using containerd, it's possible to ignore containers by namespace using `DD_CONTAINERD_NAMESPACES` and `DD_CONTAINERD_EXCLUDE_NAMESPACES`. Both are a space-separated list of namespaces. When `DD_CONTAINERD_NAMESPACES` is set, the agent reports data for the containers that belong to a namespace present in the list. When `DD_CONTAINERD_EXCLUDE_NAMESPACES` is set, the agent reports data for all the containers except the ones that belong to a namespace of the list.
 
-### その他
+### Autodiscovery
 
-| 環境変数                        | 説明                                                                                                                                                     |
+| Env Variable                 | Description                                                                                                                                                                           |
+|------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `DD_LISTENERS`               | Autodiscovery listeners to run.                                                                                                                                                       |
+| `DD_EXTRA_LISTENERS`         | Additional Autodiscovery listeners to run. They are added in addition to the variables defined in the `listeners` section of the `datadog.yaml` configuration file.                   |
+| `DD_CONFIG_PROVIDERS`        | The providers the Agent should call to collect checks configurations. The default provider is `docker`. The Docker provider handles templates embedded in container labels. |
+| `DD_EXTRA_CONFIG_PROVIDERS`  | Additional Autodiscovery configuration providers to use. They are added in addition to the variables defined in the `config_providers` section of the `datadog.yaml` configuration file. |
+
+### Misc
+
+| Env Variable                        | Description                                                                                                                                                     |
 |-------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `DD_PROCESS_AGENT_CONTAINER_SOURCE` | コンテナソースの自動検出を上書きして、1 つのソースに制限します (`"docker"`、`"ecs_fargate"`、`"kubelet"` など)。Agent v7.35.0 以降、不要になりました。 |
-| `DD_HEALTH_PORT`                    | これを `5555` に設定すると、Agent のヘルスチェックをポート `5555` で公開します。                                                                                             |
+| `DD_PROCESS_AGENT_CONTAINER_SOURCE` | Overrides container source auto-detection to force a single source. e.g `"docker"`, `"ecs_fargate"`, `"kubelet"`. This is no longer needed since Agent v7.35.0. |
+| `DD_HEALTH_PORT`                    | Set this to `5555` to expose the Agent health check at port `5555`.                                                                                             |
 
-リスナーおよび構成プロバイダーを追加するには、`DD_EXTRA_LISTENERS` と `DD_EXTRA_CONFIG_PROVIDERS` の環境変数を使用します。これらは `datadog.yaml` 構成ファイルの `listeners` セクションと `config_providers` セクションに定義する変数に追加されます。
+## Commands
 
-## コマンド
+See the [Agent Commands guides][26] to discover all the Docker Agent commands.
 
-すべての Docker Agent コマンドは [Agent コマンドガイド][26]でご確認いただけます。
+## Data collected
 
-## 収集データ
+### Metrics
 
-### メトリクス
+By default, the Docker Agent collects metrics with the following core checks. To collect metrics from other technologies, see the [Integrations](#integrations) section.
 
-デフォルトで、Docker Agent はメトリクスを以下の主要なチェックのために収集します。他のテクノロジーからメトリクスを収集するには、[インテグレーション](#インテグレーション)のセクションを参照してください。
-
-| チェック       | メトリクス       |
+| Check       | Metrics       |
 |-------------|---------------|
-| コンテナ   | [Metrics][27]
+| Container   | [Metrics][27]
 | CPU         | [System][28]  |
-| ディスク        | [Disk][29]    |
+| Disk        | [Disk][29]    |
 | Docker      | [Docker][30]  |
-| ファイル処理 | [System][28]  |
+| File Handle | [System][28]  |
 | IO          | [System][28]  |
-| ロード        | [System][28]  |
-| メモリ      | [System][28]  |
-| ネットワーク     | [Network][31] |
+| Load        | [System][28]  |
+| Memory      | [System][28]  |
+| Network     | [Network][31] |
 | NTP         | [NTP][32]     |
-| アップタイム      | [System][28]  |
+| Uptime      | [System][28]  |
 
-### イベント
+### Events
 
-Agent の起動または再起動の際に、Docker Agent はイベントを Datadog に送信します。
+The Docker Agent sends events to Datadog when an Agent is started or restarted.
 
-### サービスチェック
+### Service checks
 
 **datadog.agent.up**: <br>
-Agent が Datadog に接続できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
+Returns `CRITICAL` if the Agent is unable to connect to Datadog, otherwise returns `OK`.
 
 **datadog.agent.check_status**: <br>
-Agent チェックが Datadog にメトリクスを送信できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
+Returns `CRITICAL` if an Agent check is unable to send metrics to Datadog, otherwise returns `OK`.
 
-## その他の参考資料
+## Uninstall Single Step APM Instrumentation
+
+If you installed the Datadog Docker Agent with Single Step APM Instrumentation, and you want to uninstall the Agent, you need to [run additional commands][33] to uninstall APM Instrumentation.
+
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/agent/
+[1]: /agent/
 [2]: https://hub.docker.com/r/datadog/agent
 [3]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/agent
 [4]: https://gallery.ecr.aws/datadog/agent
 [5]: https://hub.docker.com/r/datadog/docker-dd-agent
 [6]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/docker-dd-agent?gcrImageListsize=30
 [7]: https://gallery.ecr.aws/datadog/docker-dd-agent
-[8]: https://app.datadoghq.com/account/settings#agent/docker
-[9]: /ja/agent/basic_agent_usage/#supported-os-versions
+[8]: https://app.datadoghq.com/account/settings/agent/latest?platform=docker
+[9]: /agent/supported_platforms/?tab=cloudandcontainers
 [10]: https://app.datadoghq.com/organization-settings/api-keys
-[11]: /ja/agent/guide/compose-and-the-datadog-agent/
-[12]: /ja/agent/docker/integrations/
-[13]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
-[14]: /ja/agent/docker/apm/
-[15]: /ja/agent/proxy/#agent-v6
-[16]: /ja/agent/docker/apm/#tracing-from-other-containers
-[17]: /ja/agent/docker/log/
-[18]: /ja/infrastructure/process/
-[19]: /ja/infrastructure/livecontainers/
-[20]: /ja/developers/dogstatsd/
-[21]: /ja/developers/dogstatsd/unix_socket/
-[22]: /ja/getting_started/tagging/unified_service_tagging/
-[23]: /ja/agent/docker/tag/
-[24]: /ja/agent/guide/secrets-management/?tab=linux
-[25]: /ja/agent/guide/autodiscovery-management/
-[26]: /ja/agent/guide/agent-commands/
-[27]: /ja/integrations/container/
-[28]: /ja/integrations/system/#metrics
-[29]: /ja/integrations/disk/#metrics
-[30]: /ja/agent/docker/data_collected/#metrics
-[31]: /ja/integrations/network/#metrics
-[32]: /ja/integrations/ntp/#metrics
+[11]: /agent/guide/compose-and-the-datadog-agent/
+[12]: /agent/docker/integrations/
+[13]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
+[14]: /agent/docker/apm/
+[15]: /agent/configuration/proxy/#agent-v6
+[16]: /agent/docker/apm/#tracing-from-other-containers
+[17]: /agent/docker/log/
+[18]: /infrastructure/process/
+[19]: /infrastructure/livecontainers/
+[20]: /developers/dogstatsd/
+[21]: /developers/dogstatsd/unix_socket/
+[22]: /getting_started/tagging/unified_service_tagging/
+[23]: /agent/docker/tag/
+[24]: /agent/configuration/secrets-management/?tab=linux
+[25]: /agent/guide/autodiscovery-management/
+[26]: /agent/configuration/agent-commands/
+[27]: /integrations/container/
+[28]: /integrations/system/#metrics
+[29]: /integrations/disk/#metrics
+[30]: /agent/docker/data_collected/#metrics
+[31]: /integrations/network/#metrics
+[32]: /integrations/ntp/#metrics
+[33]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/?tab=docker#removing-apm-for-all-services-on-the-infrastructure

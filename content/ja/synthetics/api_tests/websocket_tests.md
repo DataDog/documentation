@@ -1,57 +1,55 @@
 ---
-algolia:
-  category: Documentation
-  rank: 70
-  subcategory: Synthetic API テスト
-  tags:
-  - websocket
-  - websocket テスト
-  - websocket テスト
-aliases: null
-description: WebSocket リクエストをシミュレートして、パブリックおよび内部 API エンドポイントを監視します
+title: WebSocket Testing
+kind: documentation
+description: Simulate WebSocket requests to monitor public and internal API endpoints
+aliases:
 further_reading:
-- link: https://www.datadoghq.com/blog/introducing-synthetic-monitoring/
-  tag: ブログ
-  text: Datadog Synthetic モニタリングの紹介
-- link: https://www.datadoghq.com/blog/udp-websocket-api-tests/
-  tag: ブログ
-  text: UDP と WebSocket のテストを実行し、レイテンシーが重要なアプリケーションを監視します
-- link: https://learn.datadoghq.com/courses/intro-to-synthetic-tests
-  tag: ラーニングセンター
-  text: Synthetic テストの紹介
+- link: "https://www.datadoghq.com/blog/introducing-synthetic-monitoring/"
+  tag: Blog
+  text: Introducing Datadog Synthetic Monitoring
+- link: "https://www.datadoghq.com/blog/udp-websocket-api-tests/"
+  tag: Blog
+  text: Run UDP and WebSocket tests to monitor latency-critical applications
+- link: "https://learn.datadoghq.com/courses/intro-to-synthetic-tests"
+  tag: Learning Center
+  text: Introduction to Synthetic Tests
 - link: /synthetics/guide/synthetic-test-monitors
-  tag: ドキュメント
-  text: Synthetic テストモニターについて
-title: WebSocket テスト
+  tag: Documentation
+  text: Learn about Synthetic test monitors
+algolia:
+  rank: 70
+  category: Documentation
+  subcategory: Synthetic API Tests
+  tags: [websocket, websocket test, websocket tests]
 ---
-## 概要
+## Overview
 
-WebSocket テストでは、エンドポイントで WebSocket 接続を積極的に開き、応答と、全体的な応答時間や期待されるヘッダーなどの定義された条件を確認することができます。
+WebSocket tests allow you to proactively open WebSocket connections on your endpoints to verify responses and defined conditions, such as overall response times or expected headers.
 
-WebSocket テストは、ネットワークの外部または内部からのテストの実行の好みに応じて、[管理ロケーション](#select-locations)と[プライベートロケーション][1]の両方から実行することができます。WebSocket テストは、スケジュール、オンデマンド、または [CI/CD パイプライン][2]内で直接実行することができます。
+WebSocket tests can run from both [managed](#select-locations) and [private locations][1] depending on your preference for running the test from outside or inside your network. WebSocket tests can run on a schedule, on-demand, or directly within your [CI/CD pipelines][2].
 
-## コンフィギュレーション
+## Configuration
 
-`WebSocket` テストの作成を選択した後、テストのリクエストを定義します。
+After choosing to create an `WebSocket` test, define your test's request.
 
-### リクエストを定義する
+### Define request
 
-1. テストを実行する **URL** を指定します。
-2. テストで送信したい文字列を入力します。
-3. **Advanced Options** (オプション) をテストに追加します。
+1. Specify the **URL** to run your test on.
+2. Enter the string you want to send in your test. 
+3. Add **Advanced Options** (optional) to your test:
 
    {{< tabs >}}
 
-   {{% tab "リクエストオプション" %}}
-   * **Timeout**: テストがタイムアウトするまでの時間を秒単位で指定します。
-   * **Request headers**: WebSocket 接続を開始する HTTP リクエストに追加するヘッダーを定義します。デフォルトのヘッダー (たとえば、`user-agent` ヘッダー) をオーバーライドすることもできます。
-   * **Cookies**: クッキーを定義して WebSocket 接続を開始する HTTP リクエストに追加します。複数のクッキーを設定するには、次の書式を使用します `<COOKIE_NAME1>=<COOKIE_VALUE1>; <COOKIE_NAME2>=<COOKIE_VALUE2>`。
+   {{% tab "Request Options" %}}
+   * **Timeout**: Specify the amount of time in seconds before the test times out.
+   * **Request headers**: Define headers to add to the HTTP request initiating the WebSocket connection. You can also override the default headers (for example, the `user-agent` header).
+   * **Cookies**: Define cookies to add to the HTTP request initiating the WebSocket connection. Set multiple cookies using the format `<COOKIE_NAME1>=<COOKIE_VALUE1>; <COOKIE_NAME2>=<COOKIE_VALUE2>`.
 
    {{% /tab %}}
 
-   {{% tab "認証" %}}
+   {{% tab "Authentication" %}}
 
-   * **HTTP Basic Auth**: HTTP 基本認証資格情報を追加します。
+   * **HTTP Basic Auth**: Add HTTP basic authentication credentials.
 
    {{% /tab %}}
 
@@ -59,148 +57,112 @@ WebSocket テストは、ネットワークの外部または内部からのテ�
 
 <br/>
 
-4. WebSocket テストに**名前**を付けます。
-5. WebSocket テストに `env` **タグ**とその他のタグを追加します。次に、これらのタグを使用して、[Synthetic Monitoring ホームページ][3]で Synthetic テストをすばやくフィルタリングできます。
+4. **Name** your WebSocket test.
+5. Add `env` **Tags** as well as any other tag to your WebSocket test. You can then use these tags to filter through your Synthetic tests on the [Synthetic Monitoring & Continuous Testing page][3].
 
-{{< img src="synthetics/api_tests/websocket_test_config.png" alt="WebSocket リクエストを定義する" style="width:90%;" >}}
+{{< img src="synthetics/api_tests/websocket_test_config.png" alt="Define WebSocket request" style="width:90%;" >}}
 
-**Test URL** をクリックして、リクエストのコンフィギュレーションをテストします。画面の右側に応答プレビューが表示されます。
+Click **Test URL** to try out the request configuration. A response preview is displayed on the right side of your screen.
 
-### アサーションを定義する
+### Define assertions
 
-アサーションは、期待されるテスト結果が何であるかを定義します。**Test URL** をクリックすると、`response time` の基本的なアサーションが追加されます。テストで監視するには、少なくとも 1 つのアサーションを定義する必要があります。
+Assertions define what an expected test result is. When you click **Test URL**, a basic assertion on `response time` is added. You must define at least one assertion for your test to monitor.
 
-| タイプ            | 演算子                                                                         | 値の型                        |
+| Type            | Operator                                                                         | Value Type                        |
 |-----------------|----------------------------------------------------------------------------------|-----------------------------------|
-| response time   | `is less than`                                                                   | 整数 (ms)                    |
-| 文字列応答 | `contains`、`does not contain`、`is`、`is not`、<br> `matches`、`does not match` | _文字列_ <br> _[正規表現][4]_        |
-| ヘッダー          | `contains`、`does not contain`、`is`、`is not`、<br> `matches`、`does not match` | _文字列_ <br> _[正規表現][4]_        |
+| response time   | `is less than`                                                                   | _Integer (ms)_                    |
+| string response | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match` | _String_ <br> _[Regex][4]_        |
+| header          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match` | _String_ <br> _[Regex][4]_        |
 
-応答プレビューを直接選択するか、**New Assertion** をクリックしてアサーションを作成します。WebSocket テストごとに最大 20 個のアサーションを作成することができます。
+Select the response preview directly or click **New Assertion** to create an assertion. You can create up to 20 assertions per WebSocket test.
 
-{{< img src="synthetics/api_tests/websocket_assertions.png" alt="WebSocket テストが成功または失敗するためのアサーションを定義する" style="width:90%;" >}}
+{{< img src="synthetics/api_tests/websocket_assertions.png" alt="Define assertions for your WebSocket test to succeed or fail on" style="width:90%;" >}}
 
-アサーションで `OR` ロジックを実行するには、`matches regex` あるいは `does not match regex` コンパレータを使用して、`(0|100)` のように同じアサーションタイプに対して複数の期待値を設定した正規表現を定義します。文字列レスポンスまたはヘッダーアサーションの値が 0 あるいは 100 の場合、テストは成功です。
+To perform `OR` logic in an assertion, use the `matches regex` or `does not match regex` comparators to define a regex with multiple expected values for the same assertion type like `(0|100)`. The test result is successful if the string response or header assertions' value is 0 or 100.
 
-テストがレスポンス本文にアサーションを含まない場合、本文のペイロードはドロップし、Synthetics Worker で設定されたタイムアウト制限内でリクエストに関連するレスポンスタイムを返します。
+If a test does not contain an assertion on the response body, the body payload drops and returns an associated response time for the request within the timeout limit set by the Synthetics Worker.
 
-テストがレスポンス本文に対するアサーションを含み、タイムアウトの制限に達した場合、`Assertions on the body/response cannot be run beyond this limit` というエラーが表示されます。
+If a test contains an assertion on the response body and the timeout limit is reached, an `Assertions on the body/response cannot be run beyond this limit` error appears.
 
-### ロケーションを選択する
+### Select locations
 
-WebSocket テストを実行する**ロケーション**を選択します。WebSocket テストは、ネットワークの外部または内部のどちらからテストを実行するかの好みによって、管理ロケーションと[プライベートロケーション][1]の両方から実行できます。
+Select the **Locations** to run your WebSocket test from. WebSocket tests can run from both managed and [private locations][1] depending on your preference for running the test from outside or inside your network.
 
 {{% managed-locations %}} 
 
-### テストの頻度を指定する
+### Specify test frequency
 
-WebSocket テストは次の頻度で実行できます。
+WebSocket tests can run:
 
-* **On a schedule**: 最も重要なエンドポイントにユーザーが常にアクセスできるようにします。Datadog で WebSocket テストを実行する頻度を選択します。
-* [**Within your CI/CD pipelines**][2]: 欠陥のあるコードがカスタマーエクスペリエンスに影響を与える可能性があることを恐れずに出荷を開始します。
-* **On-demand**: チームにとって最も意味のあるときにいつでもテストを実行します。
+* **On a schedule** to ensure your most important endpoints are always accessible to your users. Select the frequency at which you want Datadog to run your WebSocket test.
+* [**Within your CI/CD pipelines**][2] to start shipping without fearing faulty code might impact your customers' experience.
+* **On-demand** to run your tests whenever makes the most sense for your team.
 
-### アラート条件を定義する
-
-アラート条件で、テストが失敗しアラートをトリガーする状況を設定します。
-
-#### アラート設定規則
-
-アラートの条件を `An alert is triggered if your test fails for X minutes from any n of N locations` に設定すると、次の 2 つの条件が当てはまる場合にのみアラートがトリガーされます。
-
-* 直近 *X* 分間に、最低 1 個のロケーションで失敗 (最低 1 つのアサーションが失敗)、
-* 直近 *X* 分間に、ある時点で最低 *n* 個のロケーションで失敗。
-
-#### 高速再試行
-
-テストが失敗した場合、`Y` ミリ秒後に `X` 回再試行することができます。再試行の間隔は、警告の感性に合うようにカスタマイズしてください。
-
-ロケーションのアップタイムは、評価ごとに計算されます (評価前の最後のテスト結果がアップかダウンか)。合計アップタイムは、構成されたアラート条件に基づいて計算されます。送信される通知は、合計アップタイムに基づきます。
-
-### テストモニターを構成する
-
-以前に定義された[アラート条件](#define-alert-conditions)に基づいて、テストによって通知が送信されます。このセクションを使用して、チームに送信するメッセージの方法と内容を定義します。
-
-1. [モニターの構成方法と同様][5]、メッセージに `@notification` を追加するか、ドロップダウンボックスでチームメンバーと接続されたインテグレーションを検索して、通知を受信する**ユーザーやサービス**を選択します。
-
-2. テストの通知**メッセージ**を入力します。このフィールドでは、標準の[マークダウン形式][6]のほか、以下の[条件付き変数][7]を使用できます。
-
-    | 条件付き変数       | 説明                                                         |
-    |----------------------------|---------------------------------------------------------------------|
-    | `{{#is_alert}}`            |テストがアラートを発する場合に表示します。                                          |
-    | `{{^is_alert}}`            |テストがアラートを発しない限り表示します。                                        |
-    | `{{#is_recovery}}`         | テストがアラートから回復したときに表示します。                          |
-    | `{{^is_recovery}}`         | テストがアラートから回復しない限り表示します。                        |
-    | `{{#is_renotify}}`         | モニターが再通知したときに表示します。                                   |
-    | `{{^is_renotify}}`         | モニターが再通知しない限り表示します。                                 |
-    | `{{#is_priority}}`         | モニターが優先順位 (P1～P5) に一致したときに表示します。                  |
-    | `{{^is_priority}}`         | モニターが優先順位 (P1～P5) に一致しない限り表示します。                |
-
-3. テストが失敗した場合に、テストで**通知メッセージを再送信する**頻度を指定します。テストの失敗を再通知しない場合は、`Never renotify if the monitor has not been resolved` オプションを使用してください。
-
-4. **Create** をクリックすると、テストの構成とモニターが保存されます。
-
-詳しくは、[Synthetic テストモニターの使用][8]をご覧ください。
+{{% synthetics-alerting-monitoring %}}
 
 {{% synthetics-variables %}} 
 
-### 変数を使用する
+### Use variables
 
-WebSocket テストの URL、高度なオプション、アサーションで、[**Settings** ページで定義されたグローバル変数][4]を使用することができます。
+You can use the [global variables defined on the **Settings** page][4] in the URL, advanced options, and assertions of your WebSocket tests.
 
-変数のリストを表示するには、目的のフィールドに `{{` と入力します。
+To display your list of variables, type `{{` in your desired field.
 
-## テストの失敗
+## Test failure
 
-テストが 1 つ以上のアサーションを満たさない場合、またはリクエストが時期尚早に失敗した場合、テストは `FAILED` と見なされます。場合によっては、エンドポイントに対してアサーションをテストすることなくテストが実際に失敗することがあります。
+A test is considered `FAILED` if it does not satisfy one or more assertions or if the request prematurely failed. In some cases, the test can fail without testing the assertions against the endpoint. 
 
-これらの理由には以下が含まれます。
+These reasons include the following:
 
 `CONNRESET`
-: 接続がリモートサーバーによって突然閉じられました。Web サーバーにエラーが発生した、応答中にシステムが停止した、Web サーバーへの接続が失われた、などの原因が考えられます。
+: The connection was abruptly closed by the remote server. Possible causes include the web server encountering an error or crashing while responding, or loss of connectivity of the web server.
 
 `DNS`
-: テスト URL に対応する DNS エントリが見つかりませんでした。テスト URL の構成の誤りまたは DNS エントリの構成の誤りの原因が考えられます。
+: DNS entry not found for the test URL. Possible causes include misconfigured test URL or the wrong configuration of your DNS entries.
 
 `INVALID_REQUEST` 
-: テストのコンフィギュレーションが無効です (URL に入力ミスがあるなど)。
+: The configuration of the test is invalid (for example, a typo in the URL).
 
 `SSL`
-: SSL 接続を実行できませんでした。[詳細については、個別のエラーページを参照してください][9]。
+: The SSL connection couldn't be performed. [See the dedicated error page for more information][9].
 
 `TIMEOUT`
-: リクエストを一定時間内に完了できなかったことを示します。`TIMEOUT` には 2 種類あります。
-  - `TIMEOUT: The request couldn't be completed in a reasonable time.` は、リクエストの持続時間がテスト定義のタイムアウト (デフォルトは 60 秒に設定されています) に当たったことを示します。
-  各リクエストについて、ネットワークウォーターフォールに表示されるのは、リクエストの完了したステージのみです。例えば、`Total response time` だけが表示されている場合、DNS の解決中にタイムアウトが発生したことになります。
-  - `TIMEOUT: Overall test execution couldn't be completed in a reasonable time.`  は、テスト時間 (リクエスト＋アサーション) が最大時間 (60.5s) に達したことを示しています。
+: The request couldn't be completed in a reasonable time. Two types of `TIMEOUT` errors can happen:
+  - `TIMEOUT: The request couldn't be completed in a reasonable time.` indicates that the request duration hit the test defined timeout (default is set to 60s). 
+  For each request only the completed stages for the request are displayed in the network waterfall. For example, in the case of `Total response time` only being displayed, the timeout occurred during the DNS resolution.
+  - `TIMEOUT: Overall test execution couldn't be completed in a reasonable time.` indicates that the test duration (request + assertions) hits the maximum duration (60.5s).
 
-## アクセス許可
+`WEBSOCKET`
+: The WebSocket connection was closed or cannot be opened. One type of `WEBSOCKET` error can happen:
+  - `WEBSOCKET: Received message longer than the maximum supported length.` indicates that the response message length hits the maximum length (50kb). 
 
-デフォルトでは、[Datadog 管理者および Datadog 標準ロール][10]を持つユーザーのみが、Synthetic WebSocket テストを作成、編集、削除できます。Synthetic WebSocket テストの作成、編集、削除アクセスを取得するには、ユーザーをこれら 2 つの[デフォルトのロール][10]のいずれかにアップグレードします。
+## Permissions
 
-[カスタムロール機能][11]を使用している場合は、`synthetics_read` および `synthetics_write` 権限を含むカスタムロールにユーザーを追加します。
+By default, only users with the [Datadog Admin and Datadog Standard roles][10] can create, edit, and delete Synthetic WebSocket tests. To get create, edit, and delete access to Synthetic WebSocket tests, upgrade your user to one of those two [default roles][10].
 
-### アクセス制限
+If you are using the [custom role feature][11], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions.
 
-アカウントに[カスタムロール][12]を使用しているお客様は、アクセス制限が利用可能です。
+### Restrict access
 
-組織内の役割に基づいて、WebSocket テストへのアクセスを制限することができます。WebSocket テストを作成する際に、(ユーザーのほかに) どのロールがテストの読み取りと書き込みを行えるかを選択します。
+Access restriction is available for customers using [custom roles][12] on their accounts.
 
-{{< img src="synthetics/settings/restrict_access.png" alt="テストのアクセス許可の設定" style="width:70%;" >}}
+You can restrict access to a WebSocket test based on the roles in your organization. When creating a WebSocket test, choose which roles (in addition to your user) can read and write your test. 
 
-## その他の参考資料
+{{< img src="synthetics/settings/restrict_access_1.png" alt="Set permissions for your test" style="width:70%;" >}}
+
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/synthetics/private_locations
-[2]: /ja/synthetics/cicd_integrations
-[3]: /ja/synthetics/search/#search
-[4]: /ja/synthetics/settings/#global-variables
-[5]: /ja/monitors/notify/#notify-your-team
+[1]: /synthetics/private_locations
+[2]: /synthetics/cicd_integrations
+[3]: /synthetics/search/#search
+[4]: /synthetics/settings/#global-variables
+[5]: /monitors/notify/#configure-notifications-and-automations
 [6]: https://www.markdownguide.org/basic-syntax/
-[7]: /ja/monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
-[8]: /ja/synthetics/guide/synthetic-test-monitors
-[9]: /ja/synthetics/api_tests/errors/#ssl-errors
-[10]: /ja/account_management/rbac/
-[11]: /ja/account_management/rbac#custom-roles
-[12]: /ja/account_management/rbac/#create-a-custom-role
+[7]: /monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
+[8]: /synthetics/guide/synthetic-test-monitors
+[9]: /synthetics/api_tests/errors/#ssl-errors
+[10]: /account_management/rbac/
+[11]: /account_management/rbac#custom-roles
+[12]: /account_management/rbac/#create-a-custom-role

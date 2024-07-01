@@ -1,105 +1,105 @@
 ---
+title: TCP Agent proxy for logs
 further_reading:
 - link: /logs/
-  tag: ドキュメント
-  text: ログの収集
+  tag: Documentation
+  text: Collect your logs
 - link: /infrastructure/process/
-  tag: ドキュメント
-  text: プロセスの収集
+  tag: Documentation
+  text: Collect your processes
 - link: /tracing/
-  tag: ドキュメント
-  text: トレースの収集
-title: TCP Agent のログ用プロキシ
+  tag: Documentation
+  text: Collect your traces
 ---
 
-## 概要
+## Overview
 
-ログの収集には、Datadog Agent v6.0 以上が必要です。古いバージョンの Agent には、`log collection` インターフェイスが含まれていません。
+Log collection requires the Datadog Agent v6.0+. Older versions of the Agent do not include the `log collection` interface.
 
-Agent v6.14/v7.14 では、Datadog は **HTTPS** トランスポートの使用と適用を推奨しています ([ログのエージェントトランスポート][1]を参照)。
-ログに HTTPS トランスポートを使用している場合は、[Agent プロキシのドキュメント][2]を参照し、他のデータタイプと同じプロキシ設定のセットを使用してください。
+As of Agent v6.14/v7.14, Datadog recommends the use of and enforcing **HTTPS** transport (see [agent Transport for Logs][1]).
+If you are using the HTTPS transport for logs, please refer to the [agent proxy documentation][2] and use the same set of proxy settings as other data types.
 
 {{< tabs >}}
 {{% tab "TCP" %}}
 
-TCP 通信用のプロキシを使用する場合は、`datadog.yaml` 構成ファイルで次のパラメーターを使用して、TCP 経由でプロキシにログを送信するように Datadog Agent を構成します。
+If you use a proxy for TCP transmission, configure the Datadog Agent to send logs to your proxy through TCP using the following parameters in the `datadog.yaml` configuration file:
 
 ```yaml
 logs_config:
-  logs_dd_url: "<プロキシエンドポイント>:<プロキシポート>"
+  logs_dd_url: "<PROXY_ENDPOINT>:<PROXY_PORT>"
   logs_no_ssl: true
 ```
 
-上記のパラメーターを次の環境変数で設定することもできます。
+The parameters above can also be set with the following environment variables:
 
 * `DD_LOGS_CONFIG_LOGS_DD_URL`
 * `DD_LOGS_CONFIG_LOGS_NO_SSL`
 
-**注**: パラメーター `logs_no_ssl` は、Agent が SSL 証明書のホスト名 ({{< region-param key="tcp_endpoint" code="true" >}}) とプロキシホスト名との不一致を無視するために必要です。プロキシと Datadog インテークエンドポイントの間では SSL 暗号化接続を使用することをお勧めします。
+**Note**: The parameter `logs_no_ssl` is required to make the Agent ignore the discrepancy between the hostname on the SSL certificate ({{< region-param key="tcp_endpoint" code="true" >}}) and your proxy hostname. It is recommended to use a SSL encrypted connection between your proxy and Datadog intake endpoint.
 
-* 次に、`<PROXY_PORT>` をリッスンし、受信したログを転送するようにプロキシを構成します。{{< region-param key="dd_site" code="true" >}} の場合、ポート {{< region-param key="tcp_endpoint_port" code="true" >}} で {{< region-param key="tcp_endpoint" code="true" >}} を使用し、SSL 暗号化をアクティブにします。
+* Then configure your proxy to listen on `<PROXY_PORT>` and forward the received logs. For {{< region-param key="dd_site" code="true" >}}, use {{< region-param key="tcp_endpoint" code="true" >}} on port {{< region-param key="tcp_endpoint_port" code="true" >}} and activate SSL encryption.
 
-* 以下のコマンドを使用して、SSL 暗号化用の TLS 暗号化の `CA 証明書`をダウンロードします。
-  - `sudo apt-get install ca-certificates` (Debian、Ubuntu)
-  - `yum install ca-certificates` (CentOS、Redhat)
+* Download the `CA certificates` for TLS encryption for the SSL encryption with the following command:
+  - `sudo apt-get install ca-certificates` (Debian, Ubuntu)
+  - `yum install ca-certificates` (CentOS, Redhat)
 
-  および `/etc/ssl/certs/ca-certificates.crt`(Debian、Ubuntu) または `/etc/ssl/certs/ca-bundle.crt` (CentOS、Redhat) にある証明書ファイルを使用
+  And use the certificate file located in `/etc/ssl/certs/ca-certificates.crt`(Debian, Ubuntu) or `/etc/ssl/certs/ca-bundle.crt` (CentOS, Redhat)
 
 {{% /tab %}}
 {{% tab "SOCKS5" %}}
 
-SOCKS5 プロキシサーバーを使用して Datadog アカウントにログを送信するには、`datadog.yaml` 構成ファイルで次の設定を使用します。
+To send your logs to your Datadog account with a SOCKS5 proxy server use the following settings in your `datadog.yaml` configuration file:
 
 ```yaml
 logs_config:
-  socks5_proxy_address: "<MY_SOCKS5_プロキシ_URL>:<MY_SOCKS5_プロキシポート>"
+  socks5_proxy_address: "<MY_SOCKS5_PROXY_URL>:<MY_SOCKS5_PROXY_PORT>"
 ```
 
-上記のパラメーターを次の環境変数で設定することもできます。
+The parameter above can also be set with the following environment variable:
 
 * `DD_LOGS_CONFIG_SOCKS5_PROXY_ADDRESS`
 
 {{% /tab %}}
 {{< /tabs >}}
 
-## TCP プロキシの例
+## Examples of TCP proxy
 
 {{< tabs >}}
 {{% tab "HAProxy" %}}
-### ログの TCP プロキシとしての HAProxy の使用
+### Using HAProxy as a TCP proxy for logs
 
-この例では、HAProxy がインストールされ、ポート `10514` でリッスンしているサーバーに TCP でログを送信し、ログを Datadog に転送するように Datadog Agent を構成する方法について説明します。
+This example explains how to configure the Datadog Agent to send logs in TCP to a server with HAProxy installed and listening on port `10514` to then forward the logs to Datadog.
 
 `agent ---> haproxy ---> Datadog`
 
-暗号化は Agent と HAProxy の間で無効にされており、Datadog に送信する前にデータを暗号化するように構成されています。
+The encryption is disabled between the Agent and HAProxy which is then configured to encrypt the data before sending it to Datadog.
 
-#### Agent の構成
+#### Agent configuration
 
-`datadog.yaml` Agent コンフィギュレーションファイルを編集し、`logs_no_ssl` を `true` に設定します。これが必要なのは、HAProxy はトラフィックを転送せず、Datadog バックエンドではないため、同じ証明書を使用することができないからです。
+Edit the `datadog.yaml` Agent configuration file and set `logs_no_ssl` to `true`. This is needed as HAProxy does not forward the traffic and is not the Datadog backend, so you cannot use the same certificate.
 
-**注**: HAProxy はデータを暗号化するように構成されているため、`logs_no_ssl` を true に設定する場合があります。それ以外の場合は、このパラメーターを `true` に設定しないでください。
+**Note**: `logs_no_ssl` might set to true because HAProxy is configured to encrypt the data. Do not set this parameter to `true` otherwise.
 
 ```
 logs_config:
   force_use_tcp: true
-  logs_dd_url: "<プロキシサーバードメイン>:10514"
+  logs_dd_url: "<PROXY_SERVER_DOMAIN>:10514"
   logs_no_ssl: true
 ```
 
-#### HAProxy コンフィギュレーション
+#### HAProxy configuration
 
-Datadog への接続があるホストに HAProxy をインストールする必要があります。次の構成ファイルを使用します (まだ構成していない場合)。
+HAProxy should be installed on a host that has connectivity to Datadog. Use the following configuration file if you do not already have it configured.
 
 {{% site-region region="us" %}}
 
 ```conf
-# 基本的なコンフィギュレーション
+# Basic configuration
 global
     log 127.0.0.1 local0
     maxconn 4096
     stats socket /tmp/haproxy
-# 妥当なデフォルト値
+# Some sane defaults
 defaults
     log     global
     option  dontlognull
@@ -108,17 +108,17 @@ defaults
     timeout client 5s
     timeout server 5s
     timeout connect 5s
-# ポート 3833 で HAProxy 統計情報の表示を宣言します
-# このページを表示するための資格情報は不要です
-# 一度セットアップを行うとオフにできます。
+# This declares a view into HAProxy statistics, on port 3833
+# You do not need credentials to view this page and you can
+# turn it off once you are done with setup.
 listen stats
     bind *:3833
     mode http
     stats enable
     stats uri /
-# このセクションは、DNS レコードをリロードするためのものです
-# <DNS_SERVER_IP> と <DNS_SECONDARY_SERVER_IP> を DNS サーバーの IP アドレスに置き換えます。
-# HAProxy 1.8 以降の場合
+# This section is to reload DNS Records
+# Replace <DNS_SERVER_IP> and <DNS_SECONDARY_SERVER_IP> with your DNS Server IP addresses.
+# For HAProxy 1.8 and newer
 resolvers my-dns
     nameserver dns1 <DNS_SERVER_IP>:53
     nameserver dns2 <DNS_SECONDARY_SERVER_IP>:53
@@ -128,16 +128,16 @@ resolvers my-dns
     accepted_payload_size 8192
     hold valid 10s
     hold obsolete 60s
-# これは、ログを送信するために Agent が接続するエンドポイントを
-# 宣言します (例: "logs.config.logs_dd_url" の値)
+# This declares the endpoint where your Agents connects for
+# sending Logs (e.g the value of "logs.config.logs_dd_url")
 frontend logs_frontend
     bind *:10514
     mode tcp
     option tcplog
     default_backend datadog-logs
-# これは Datadog サーバーです。実際、上記で定義された
-# Forwarderのフロントエンドに着信する TCP リクエストは、
-# Datadog のパブリックエンドポイントにプロキシされます。
+# This is the Datadog server. In effect any TCP request coming
+# to the forwarder frontends defined above are proxied to
+# Datadog's public endpoints.
 backend datadog-logs
     balance roundrobin
     mode tcp
@@ -145,25 +145,25 @@ backend datadog-logs
     server datadog agent-intake.logs.datadoghq.com:10516 ssl verify required ca-file /etc/ssl/certs/ca-certificates.crt check port 10516
 ```
 
-**注**: 次のコマンドで証明書をダウンロードしてください:
+**Note**: Download the certificate with the following command:
 
-* `sudo apt-get install ca-certificates` (Debian、Ubuntu)
-* `yum install ca-certificates` (CentOS、Redhat)
+* `sudo apt-get install ca-certificates` (Debian, Ubuntu)
+* `yum install ca-certificates` (CentOS, Redhat)
 
-成功した場合、CentOS、Redhat の場合、ファイルは `/etc/ssl/certs/ca-bundle.crt` にあります。
+If successful, the file will be located at `/etc/ssl/certs/ca-bundle.crt` for CentOS, Redhat.
 
-HAProxy コンフィギュレーションが完成したら、リロードするか、HAProxy を再起動できます。`app.datadoghq.com` が別の IP にフェールオーバーした場合のために、**`cron` ジョブで 10 分ごとに HAProxy を再読み込みする**ことで (例: `service haproxy reload`)、HAProxy の DNS キャッシュを強制的に更新することをお勧めします。
+Once the HAProxy configuration is in place, you can reload it or restart HAProxy. **It is recommended to have a `cron` job that reloads HAProxy every 10 minutes** (for example, `service haproxy reload`) to force a refresh of HAProxy's DNS cache, in case `app.datadoghq.com` fails over to another IP.
 
 {{% /site-region %}}
 {{% site-region region="eu" %}}
 
 ```conf
-# 基本的なコンフィギュレーション
+# Basic configuration
 global
     log 127.0.0.1 local0
     maxconn 4096
     stats socket /tmp/haproxy
-# 妥当なデフォルト値
+# Some sane defaults
 defaults
     log     global
     option  dontlognull
@@ -172,17 +172,17 @@ defaults
     timeout client 5s
     timeout server 5s
     timeout connect 5s
-# これは、ポート 3833 で HAProxy 統計の表示を宣言します
-# このページを表示するために資格情報は必要ありません。
-# セットアップが完了したら、このページをオフにすることができます。
+# This declares a view into HAProxy statistics, on port 3833
+# You do not need credentials to view this page and you can
+# turn it off once you are done with setup.
 listen stats
     bind *:3833
     mode http
     stats enable
     stats uri /
-# このセクションは、DNS レコードをリロードするためのものです
-# <DNS_SERVER_IP> と <DNS_SECONDARY_SERVER_IP> を DNS サーバーの IP アドレスに置き換えます。
-# HAProxy 1.8 以降の場合
+# This section is to reload DNS Records
+# Replace <DNS_SERVER_IP> and <DNS_SECONDARY_SERVER_IP> with your DNS Server IP addresses.
+# For HAProxy 1.8 and newer
 resolvers my-dns
     nameserver dns1 <DNS_SERVER_IP>:53
     nameserver dns2 <DNS_SECONDARY_SERVER_IP>:53
@@ -192,15 +192,15 @@ resolvers my-dns
     accepted_payload_size 8192
     hold valid 10s
     hold obsolete 60s
-# これは、ログを送信するために Agent が接続するエンドポイントを
-# 宣言します (例: "logs.config.logs_dd_url" の値)
+# This declares the endpoint where your Agents connects for
+# sending Logs (e.g the value of "logs.config.logs_dd_url")
 frontend logs_frontend
     bind *:10514
     mode tcp
     default_backend datadog-logs
-# これは Datadog サーバーです。実際、上記で定義された
-# フォワーダーのフロントエンドに着信する TCP リクエストは、
-# Datadog のパブリックエンドポイントにプロキシされます。
+# This is the Datadog server. In effect any TCP request coming
+# to the forwarder frontends defined above are proxied to
+# Datadog's public endpoints.
 backend datadog-logs
     balance roundrobin
     mode tcp
@@ -208,25 +208,25 @@ backend datadog-logs
     server datadog agent-intake.logs.datadoghq.eu:443 ssl verify required ca-file /etc/ssl/certs/ca-bundle.crt check port 443
 ```
 
-次のコマンドで証明書をダウンロードしてください:
+Download the certificate with the following command:
 
-* `sudo apt-get install ca-certificates` (Debian、Ubuntu)
-* `yum install ca-certificates` (CentOS、Redhat)
+* `sudo apt-get install ca-certificates` (Debian, Ubuntu)
+* `yum install ca-certificates` (CentOS, Redhat)
 
-成功した場合、CentOS、Redhat の場合、ファイルは `/etc/ssl/certs/ca-bundle.crt` にあります。
+If successful, the file will be located at `/etc/ssl/certs/ca-bundle.crt` for CentOS, Redhat.
 
-HAProxy コンフィギュレーションが完成したら、リロードするか、HAProxy を再起動できます。`app.datadoghq.eu` が別の IP にフェールオーバーした場合のために、**`cron` ジョブで 10 分ごとに HAProxy を再読み込みする**ことで (例: `service haproxy reload`)、HAProxy の DNS キャッシュを強制的に更新することをお勧めします。
+Once the HAProxy configuration is in place, you can reload it or restart HAProxy. **It is recommended to have a `cron` job that reloads HAProxy every 10 minutes** (for example, `service haproxy reload`) to force a refresh of HAProxy's DNS cache, in case `app.datadoghq.eu` fails over to another IP.
 
 {{% /site-region %}}
 
 {{% /tab %}}
 
 {{% tab "NGINX" %}}
-### ログの TCP プロキシとしての NGINX の使用
+### Using NGINX as a TCP Proxy for logs
 
-#### Agent の構成
+#### Agent configuration
 
-`datadog.yaml` Agent コンフィギュレーションファイルを編集し、Datadog と直接接続を確立する代わりに新しく作成されたプロキシを使用するように `logs_config.logs_dd_url` を設定します。
+Edit the `datadog.yaml` Agent configuration file and set `logs_config.logs_dd_url` to use the newly created proxy instead of establishing a connection directly with Datadog:
 
 ```yaml
 logs_config:
@@ -234,11 +234,11 @@ logs_config:
   logs_dd_url: myProxyServer.myDomain:10514
 ```
 
-**注**: NGINX はトラフィックを Datadog に転送しており、トラフィックの解読または暗号化は行わないため、`logs_no_ssl` パラメーターを変更しないでください。
+**Note**: Do not change the `logs_no_ssl` parameter as NGINX is forwarding the traffic to Datadog and does not decrypt or encrypt the traffic.
 
-#### NGINX コンフィギュレーション
+#### NGINX configuration
 
-この例では、`nginx.conf` を使用して、Agent のトラフィックを Datadog にプロキシ転送できます。このコンフィギュレーションにおける最後のサーバーブロックで TLS ラップを行うことで、プロキシと Datadog のログインテーク API エンドポイントとの間で内部的なプレーンテキストログを暗号化します。
+In this example, `nginx.conf` can be used to proxy Agent traffic to Datadog. The last server block in this configuration does TLS wrapping to ensure internal plaintext logs are encrypted between your proxy and Datadog's log intake API endpoint:
 
 {{% site-region region="us" %}}
 
@@ -250,7 +250,7 @@ pid /run/nginx.pid;
 events {
     worker_connections 1024;
 }
-# Datadog Agent の TCP プロキシ
+# TCP Proxy for Datadog Agent
 stream {
     server {
         listen 10514; #listen for logs
@@ -271,7 +271,7 @@ pid /run/nginx.pid;
 events {
     worker_connections 1024;
 }
-# Datadog Agent の TCP プロキシ
+# TCP Proxy for Datadog Agent
 stream {
     server {
         listen 10514; #listen for logs
@@ -286,9 +286,9 @@ stream {
 {{< /tabs >}}
 
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/agent/logs/log_transport?tab=https
-[2]: /ja/agent/proxy/
+[1]: /agent/logs/log_transport?tab=https
+[2]: /agent/configuration/proxy/

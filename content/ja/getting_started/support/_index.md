@@ -1,73 +1,76 @@
 ---
+title: Getting Started with Datadog Support
+kind: documentation
 further_reading:
-- link: https://docs.datadoghq.com/agent/troubleshooting/
+- link: "https://docs.datadoghq.com/agent/troubleshooting/"
   tag: Documentation
-  text: Agent のトラブルシューティング
-title: Datadog サポートの概要
+  text: Agent Troubleshooting
 ---
 
-## 概要
+## Overview
 
-Datadog は、サポートを求めるお客様に 2 つの主要チャンネルを提供しています。
-   - [サポートチケットを開く][1]ことができます。
-   - テキストチャットで Datadog テクニカルサポートエンジニアとライブで会話することができます。
+Datadog provides two primary channels for customers seeking support:
+   - [Opening a support ticket][1].
+   - Chatting live with Datadog Technical Support Engineers through a text chat.
 
-どちらも迅速かつ効果的な解決策を提供することに重点を置いていますが、リクエストのタイミングや性質、緊急性によって、どちらかのプラットフォームが適している場合もあります。
+While both options focus on providing quick and effective solutions, one platform may be better suited depending on the timing, nature, and urgency of the request.
 
-このガイドでは、サポートチームに連絡するためのベストプラクティスと、お客様に適したサポートチャンネルを決定するためのガイドラインを提供します。
+This guide provides best practices for reaching out to the Support team, and guidelines for determining the support channel that's right for you.
 
-## 前提条件
+## Prerequisites
 
-最も効率的に問題を解決するために、以下の関連情報やリソースを提供できるように準備してください。
+For the most efficient resolution of an issue, be ready to provide any of the relevant information and resources listed below:
 
-   - 組織名 ([複数][2]にアクセスできる場合)
-   - [Datadog サイト][3]
-   - Datadog アカウントで問題を実証しているページへのリンク
-   - 当該動作を撮影したスクリーンショットまたは画面記録
-   - 問題を再現するために取ることのできる手順
-   - 問題が Datadog Agent の機能に関連している場合、[Agent フレア][4]
-   - 使用したドキュメントページへのリンク
+   - Organization name (if you have access to [more than one][2])
+   - [Datadog Site][3]
+   - Links to any pages demonstrating the issue in your Datadog account
+   - Screenshots or screen recordings of the behavior in question
+   - Steps that can be taken to replicate the issue
+   - If the issue is related to the functioning of the Datadog Agent, an [Agent flare][4]
+   - Links to any documentation pages used
 
-## チャットかサポートチケットか？
+## Chat or support ticket?
 
-以下の表を参考に、[サポートチケット][1]を開くか、チャットで連絡を取るかを決定してください。日本語でのチャットは、日本時間 (JST) 平日の 10:00～16:00 の間であれば、いつでもご利用いただけます。(土日、日本の祝日および年末年始 (12月29日〜1月3日) を除く。)
+Use the table below to determine whether to open a [support ticket][1] or [reach out on chat](#reaching-out-on-chat). 
 
-| サポートチケット                  | チャット        |
+| Support Ticket                  | Chat        |
 | ------------------------------- | ----------- |
-| 緊急の問題                   | 製品構成サポート
-| 通話/スクリーンシェアのリクエスト       | セットアップに関する質問
-| インシデントと障害           | ドキュメントの明確化
-| 多くの構成ファイル、ログ、クエリにまたがる複雑なサポートトラブルシューティング | 特定のコンフィギュレーションファイル、ログ、またはクエリに関するマイナーな問題
+| Urgent issues                   | Product configuration support
+| Call/Screenshare requests       | Setup questions
+| Incidents and outages           | Documentation clarification
+| Complex support troubleshooting across many configuration files, logs, or queries | Minor issues involving a specific configuration file, log, or query
 
-どちらのオプションが最適かわからない場合は、どちらのチャンネルでも Datadog のサポートに接続できますので、ご自由にお使いください。チャットが閉じられると自動的にサポートチケットが作成されるため、チャットで解決できなかった場合でも、問題の調査を継続することができます。
+If you're not sure which option is best, feel free to use either channel to connect with Datadog support. A support ticket is automatically created whenever a chat is closed, so the issue can continue to be investigated even if it's not resolved in chat.
 
-## チャットでのお問い合わせ
+## Reaching out on chat
 
-開始するには、Datadog アカウントの左パネルにある **Live Chat** をクリックします。
+<div class="alert alert-warning">Chat is available any business day between the hours of 10:00 and 19:00 Eastern Time (ET). Chat is not available for HIPAA-enabled accounts.</a></div>
 
-{{< img src="getting_started/chat/chat_button.png" alt="Datadog でハイライトされるチャットボタン" style="width:80%" >}}
+To get started, click **Support** on the bottom-left corner of the navigation menu.
 
-新しいチャットが開かれると、**技術的な**質問か**販売に関する**質問か尋ねられます。
-   - 技術的な質問の場合、最初に対応可能なテクニカルサポートエンジニアに転送されます。Datadog の使用や構成に関する質問には最適です。
-   - 販売に関する質問の場合、請求やアカウント管理に関する質問に答えることができる Datadog の営業チームの担当者に案内されます。
+{{< img src="getting_started/support/support_chat_nav.png" alt="The Support button at the bottom of the app left navigation menu" style="width:40%" >}}
 
-**注**: 緊急性の高い問題については、サポートチケットでご連絡いただくことをお勧めします。これにより、サポートリーダーは、お客様のケースをすぐに適切な専門家に転送することができます。
+When a new chat is opened, you are asked if you have a **technical** or **sales** question.
+   - For technical questions, you are routed to the first available Technical Support Engineer. This is ideal for any questions you have about using or configuring Datadog.
+   - For sales questions, you are routed to the first available member of the Datadog sales team, who can answer questions about billing and account management.
 
-### 技術的な質問に対するベストプラクティス
+**Note**: For urgent issues, it's best to reach out through a Support Ticket, and indicate why your request is urgent. This ensures that Support leadership can route your case to an appropriate expert immediately. 
 
-関連する[前提条件](#prerequisites)をできるだけ多くご用意ください。チャットで接続した Datadog のチームメンバーは、問題についての情報を収集し、解決するために最善を尽くします。すべての問題がチャットセッションで解決できるわけではありません。より詳細な調査が必要な場合、Datadog のサポートは、チャット終了後に調査に必要な情報を収集することに重点を置きます。
+### Best practices for technical questions
 
-### フォローアップ
+Ensure that you have as many of the relevant [prerequisites](#prerequisites) available as possible. The Datadog team member you connect with on chat does their best to collect information about the issue and resolve it. Not all issues can be resolved in a chat session. If a more detailed investigation is required, Datadog support focuses on collecting the information needed to conduct the investigation after the chat is over.
 
-チャットが終了すると、サポートチケットが自動的に作成されます。チャットで問題が解決された場合は、チケットを閉じることができます。
+### Following up
 
-追加調査が必要な場合、チケットは適切な分野の専門家に転送され、チャット中に提供された詳細とコンテキストが完全に転送されます。このチケットは、Datadog サポートチームとさらに連絡を取るために使用します。
+When the chat closes, a support ticket is automatically created. If the issue was resolved on chat, the ticket can be closed. 
 
-## その他の参考資料
+If additional investigation is required, the ticket is routed to experts in the appropriate areas, with a full transfer of the details and context provided during the chat. Use the ticket for further communication with the Datadog Support team.
+
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://help.datadoghq.com/hc/
-[2]: /ja/account_management/org_switching/
-[3]: /ja/getting_started/site/
-[4]: /ja/agent/troubleshooting/send_a_flare/
+[2]: /account_management/org_switching/
+[3]: /getting_started/site/
+[4]: /agent/troubleshooting/send_a_flare/

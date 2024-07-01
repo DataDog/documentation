@@ -1,38 +1,38 @@
 ---
-title: Azure AKS クラスターを Cloudcraft に接続する
+title: Connect an Azure AKS Cluster with Cloudcraft
 ---
 
-Azure AKS クラスターをスキャンすることで、Cloudcraft はシステムアーキテクチャ図を生成し、デプロイされたワークロードとポッドの視覚化をサポートします。
+By scanning your Azure AKS clusters, Cloudcraft allows you to generate system architecture diagrams to help visualize your deployed workloads and pods.
 
-Cloudcraft は Azure の Kubernetes Service クラスターユーザーロールを使用しており、クラスターの内部を見るための特別なソフトウェアやエージェントは必要ありません。
+Cloudcraft uses Azure's Kubernetes Service Cluster User Role, and requires no special software or agent to look inside your clusters.
 
-<div class="alert alert-info">Azure AKS クラスター および Azure アカウントをスキャンする機能は、Cloudcraft Pro の契約者のみが利用できます。詳細については、<a href="https://www.cloudcraft.co/pricing">Cloudcraft の料金ページを</a>参照してください。</div>
+<div class="alert alert-info">The ability to scan Azure AKS clusters and Azure accounts is only available to Cloudcraft Pro subscribers. Refer to <a href="https://www.cloudcraft.co/pricing">Cloudcraft's pricing page</a> for more information.</div>
 
-## 前提条件
+## Prerequisites
 
-Azure AKS クラスターを Cloudcraft に接続する前に、まず Azure アカウントを接続し、クラスターを含めた構成図を生成する必要があります。詳細については、[Azure アカウントを Cloudcraft に接続する][1]を参照してください。
+Before connecting your Azure AKS clusters with Cloudcraft, you must connect your Azure account and generate diagrams that include your clusters. For more information, see [Connect your Azure account with Cloudcraft][1].
 
-## Cloudcraft IAM ユーザーを読み取り専用に認可する
+## Authorizing the Cloudcraft IAM user for view-only access
 
-まず、既存の Azure AKS クラスターでブループリントを開くか、**自動レイアウト**機能を使用して、新しいブループリントを生成します。
+Start by opening a blueprint with an existing Azure AKS cluster, or using the **Auto Layout** feature to generate a new blueprint.
 
-Azure 環境をブループリントにマッピングした状態で、スキャンしたい Azure AKS クラスターを選択し、コンポーネントツールバーに表示される **Enable cluster scanning** ボタンをクリックします。
+With your Azure environment mapped into a blueprint, select the Azure AKS cluster that you wish to scan, and click the **Enable cluster scanning** button that appears in the component toolbar.
 
-{{< img src="cloudcraft/getting-started/connect-an-azure-aks-cluster-with-cloudcraft/enable-cluster-scanning.png" alt="AWS EKS クラスターとハイライト表示された enable cluster scanning ボタンを示すインタラクティブな Cloudcraft の構成図。" responsive="true" style="width:100%;">}}
+{{< img src="cloudcraft/getting-started/connect-an-azure-aks-cluster-with-cloudcraft/enable-cluster-scanning.png" alt="Interactive Cloudcraft diagram showing an Azure AKS cluster with enable cluster scanning button highlighted." responsive="true" style="width:100%;">}}
 
-次の画面では、Azure で実行する手順が順を追って表示されます。
+The next screen provides step-by-step instructions to complete in Azure.
 
-1. 最初のリンクをクリックして Azure Subscriptions ページを開き、左サイドバーの **Access control (IAM)** をクリックします。
-2. **Add** をクリックし、**Add role assignment** を選択します。
-3.  **Azure Kubernetes Service Cluster User Role** を検索して選択し、**Next** をクリックします。
-4. **Select members** をクリックします。
-5. Azure AKS クラスターへのアクセスを許可したい IAM ユーザー (通常は cloudcraft という名前) を検索し、**Select** をクリックします。
-6. **Review + assign** を 2 回クリックしてプロセスを完了させます。
+1. Click the first link to open your Azure Subscriptions page, then click **Access control (IAM)** on the left sidebar.
+2. Click **Add** and select **Add role assignment**.
+3.  Search for and select **Azure Kubernetes Service Cluster User Role**, then click **Next**.
+4. Click **Select members**.
+5. Search for the IAM user that you want to grant access to your Azure AKS cluster—usually named cloudcraft—and click **Select**.
+6. Click **Review + assign** twice to complete the process.
 
-## クラスターへのアクセスをテストする
+## Testing access to the cluster
 
-Cloudcraft がクラスター にアクセスできることをテストするには、**Enable Kubernetes Cluster Scanning** 画面の一番下にある **Test cluster access** をクリックします。
+To test that Cloudcraft can access to the cluster, click **Test cluster access** at the bottom of the **Enable Kubernetes Cluster Scanning** screen.
 
-{{< img src="cloudcraft/getting-started/connect-an-azure-aks-cluster-with-cloudcraft/test-cluster-access.png" alt="手順と Test Cluster Access ボタンが表示された Cloudcraft の Enable Kubernetes Cluster Scanning インターフェースのスクリーンショット。" responsive="true" style="width:100%;">}}
+{{< img src="cloudcraft/getting-started/connect-an-azure-aks-cluster-with-cloudcraft/test-cluster-access.png" alt="Screenshot of Cloudcraft Enable Kubernetes Cluster Scanning interface with instructions and Test Cluster Access button." responsive="true" style="width:100%;">}}
 
-[1]: /ja/cloudcraft/getting-started/connect-azure-account-with-cloudcraft/
+[1]: /cloudcraft/getting-started/connect-azure-account-with-cloudcraft/

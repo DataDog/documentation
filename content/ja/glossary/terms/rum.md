@@ -1,6 +1,6 @@
 ---
+title: real user monitoring (RUM)
 core_product:
-- real user monitoring
-title: リアルユーザーモニタリング (RUM)
+  - real user monitoring
 ---
-RUM は、Web サイトやアプリケーションとユーザーとのインタラクションを記録する UX モニタリング技術です。
+RUM is a UX monitoring technology that records user interactions with a website or application.

@@ -1,57 +1,58 @@
 ---
-categories:
-- 自動化
+"categories":
+- automation
 - azure
-- クラウド
-dependencies: []
-description: Azure Automation のキーメトリクスを追跡
-doc_link: https://docs.datadoghq.com/integrations/azure_automation/
-draft: false
-git_integration_title: azure_automation
-has_logo: true
-integration_id: azure-automation
-integration_title: Microsoft Azure Automation
-integration_version: ''
-is_public: true
-custom_kind: integration
-manifest_version: '1.0'
-name: azure_automation
-public_title: Datadog-Microsoft Azure Automation インテグレーション
-short_description: Azure Automation のキーメトリクスを追跡
-version: '1.0'
+- cloud
+"custom_kind": "integration"
+"dependencies": []
+"description": "Track key Azure Automation metrics."
+"doc_link": "https://docs.datadoghq.com/integrations/azure_automation/"
+"draft": false
+"git_integration_title": "azure_automation"
+"has_logo": true
+"integration_id": "azure-automation"
+"integration_title": "Microsoft Azure Automation"
+"integration_version": ""
+"is_public": true
+"manifest_version": "1.0"
+"name": "azure_automation"
+"public_title": "Datadog-Microsoft Azure Automation Integration"
+"short_description": "Track key Azure Automation metrics."
+"version": "1.0"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-## 概要
+## Overview
 
-Azure Automation は、Azure 環境と非 Azure 環境の両方を一貫して管理できる、クラウドベースの自動化および構成サービスを提供します。
+Azure Automation delivers a cloud-based automation and configuration service that provides consistent management across your Azure and non-Azure environments.
 
-Datadog Azure インテグレーションを使用して、Azure Automation からメトリクスを収集できます。
+Use the Datadog Azure integration to collect metrics from Azure Automation.
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-[Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
+If you haven't already, set up the [Microsoft Azure integration][1] first. There are no other installation steps.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "azure_automation" >}}
 
 
-### ヘルプ
+### Events
 
-Azure Automation インテグレーションには、イベントは含まれません。
+The Azure Automation integration does not include any events.
 
-### ヘルプ
+### Service Checks
 
-Azure Automation インテグレーションには、サービスのチェック機能は含まれません。
+The Azure Automation integration does not include any service checks.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
+Need help? Contact [Datadog support][3].
 
-[1]: https://docs.datadoghq.com/ja/integrations/azure/
+[1]: https://docs.datadoghq.com/integrations/azure/
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_automation/azure_automation_metadata.csv
-[3]: https://docs.datadoghq.com/ja/help/
+[3]: https://docs.datadoghq.com/help/
+

@@ -1,99 +1,106 @@
 ---
-app_id: wayfinder
-app_uuid: a68bad83-ba55-4350-a913-2f98bb667bad
-assets:
-  dashboards:
-    Wayfinder: assets/dashboards/wayfinder_overview.json
-  integration:
-    auto_install: true
-    configuration:
-      spec: assets/configuration/spec.yaml
-    events:
-      creates_events: false
-    metrics:
-      check: wayfinder.workqueue.depth
-      metadata_path: metadata.csv
-      prefix: wayfinder.
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 10370
-    source_type_name: wayfinder
-  logs: {}
-author:
-  homepage: https://www.appvia.io/product/
-  name: Appvia
-  sales_email: info@appvia.io
-  support_email: support@appvia.io
-categories:
-- incident-teams
-- 開発ツール
+"app_id": "wayfinder"
+"app_uuid": "a68bad83-ba55-4350-a913-2f98bb667bad"
+"assets":
+  "dashboards":
+    "Wayfinder": assets/dashboards/wayfinder_overview.json
+  "integration":
+    "auto_install": true
+    "configuration":
+      "spec": assets/configuration/spec.yaml
+    "events":
+      "creates_events": false
+    "metrics":
+      "check": wayfinder.workqueue.depth
+      "metadata_path": metadata.csv
+      "prefix": wayfinder.
+    "service_checks":
+      "metadata_path": assets/service_checks.json
+    "source_type_id": !!int "10370"
+    "source_type_name": wayfinder
+  "logs": {}
+"author":
+  "homepage": "https://www.appvia.io/product/"
+  "name": Appvia
+  "sales_email": info@appvia.io
+  "support_email": support@appvia.io
+"categories":
+- containers
+- developer tools
 - kubernetes
-- モニター
-- オーケストレーション
-dependencies:
-- https://github.com/DataDog/integrations-extras/blob/master/wayfinder/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: wayfinder
-integration_id: wayfinder
-integration_title: Wayfinder
-integration_version: 1.0.0
-is_public: true
-kind: インテグレーション
-manifest_version: 2.0.0
-name: wayfinder
-public_title: Wayfinder
-short_description: Wayfinder メトリクスを Datadog に送信する
-supported_os:
+- metrics
+- orchestration
+"custom_kind": "integration"
+"dependencies":
+- "https://github.com/DataDog/integrations-extras/blob/master/wayfinder/README.md"
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "wayfinder"
+"integration_id": "wayfinder"
+"integration_title": "Wayfinder"
+"integration_version": "1.0.0"
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "wayfinder"
+"public_title": "Wayfinder"
+"short_description": "Send Wayfinder metrics to Datadog"
+"supported_os":
 - linux
 - windows
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Containers
-  - Category::Developer Tools
-  - Category::Kubernetes
-  - Category::Metrics
-  - Category::Orchestration
-  - Submitted Data Type::Metrics
-  - Supported OS::Linux
-  - Supported OS::Windows
-  - Offering::Integration
-  configuration: README.md#Setup
-  description: Wayfinder メトリクスを Datadog に送信する
-  media:
-  - caption: Wayfinder サンプル Datadog ダッシュボード
-    image_url: images/wayfinder-datadog-dash.png
-    media_type: image
-  - caption: Wayfinder UI
-    image_url: images/wayfinder-ui.png
-    media_type: image
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Wayfinder
+"tile":
+  "changelog": CHANGELOG.md
+  "classifier_tags":
+  - "Category::Containers"
+  - "Category::Developer Tools"
+  - "Category::Kubernetes"
+  - "Category::Metrics"
+  - "Category::Orchestration"
+  - "Submitted Data Type::Metrics"
+  - "Supported OS::Linux"
+  - "Supported OS::Windows"
+  - "Offering::Integration"
+  "configuration": "README.md#Setup"
+  "description": Send Wayfinder metrics to Datadog
+  "media":
+  - "caption": Wayfinder Sample Datadog Dashboard
+    "image_url": images/wayfinder-datadog-dash.png
+    "media_type": image
+  - "caption": Wayfinder UI
+    "image_url": images/wayfinder-ui.png
+    "media_type": image
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": Wayfinder
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
-## 概要
+## Overview
 
-[Wayfinder][1] は、一元構成によって開発者のセルフサービスを可能にするインフラストラクチャー管理プラットフォームです。このチェックでは、Datadog Agent を通じて Wayfinder のキー管理コンポーネントを監視します。 
+[Wayfinder][1] is an infrastructure management platform that enables developer
+self-service through a centralized configuration. This check monitors Wayfinder
+key management components through the Datadog Agent.
 
+The integration collects key metrics from the Wayfinder API server, controller,
+and webhook components. These metrics should highlight issues in managed
+workspaces. 
 
-インテグレーションは Wayfinder API サーバー、コントローラー、Webhook コンポーネントからキーメトリクスを収集します。これらのメトリクスは、管理されたワークスペースの問題を明らかにします。
+## Setup
 
-## 計画と使用
+Follow the instructions below to install the integration in the Wayfinder
+Kubernetes management cluster.
 
-以下の手順に従って、Wayfinder Kubernetes 管理クラスターにインテグレーションをインストールしてください。
+### Installation
 
-### インフラストラクチャーリスト
+For containerized environments, the best way to use this integration with the
+Docker Agent is to build the Agent with the Wayfinder integration installed. 
 
-コンテナ環境では、Docker Agent とこのインテグレーションを使用する最善の方法は、Wayfinder インテグレーションをインストールした Agent をビルドすることです。
+### Prerequisites:
 
-### 前提条件:
-
-Datadog Agent が Wayfinder コンポーネントに接続できるようにするには、 ネットワークポリシーを構成する必要があります。以下のネットワークポリシーは、 Datadog が Datadog ネームスペースに、 Wayfinder が Wayfinder ネームスペースにデプロイされていることを前提としています。
+A network policy must be configured to allow the Datadog Agent to connect to
+Wayfinder components. The network policy below assumes Datadog is deployed to
+the Datadog namespace and Wayfinder is deployed to the Wayfinder namespace.
 
 ```yaml
 apiVersion: networking.k8s.io/v1
@@ -125,9 +132,9 @@ spec:
   - Ingress
 ```
 
-Agent のアップデート版をビルドするには
+To build an updated version of the Agent:
 
-1. 以下の Dockerfile を使用します。
+1. Use the following Dockerfile:
 
     ```dockerfile
     FROM gcr.io/datadoghq/agent:latest
@@ -137,11 +144,11 @@ Agent のアップデート版をビルドするには
     RUN agent integration install -r -t datadog-wayfinder==${INTEGRATION_VERSION}
     ```
 
-2. イメージをビルドし、プライベート Docker レジストリにプッシュします。
+2. Build the image and push it to your private Docker registry.
 
-3. Datadog Agent コンテナイメージをアップグレードします。Helm チャートを使用している場合は、
-   `values.yaml` ファイルの `agents.image` セクションを変更して、
-   デフォルトの Agent イメージを置き換えます。
+3. Upgrade the Datadog Agent container image. If you are using a Helm chart,
+   modify the `agents.image` section in the `values.yaml` file to replace the
+   default agent image:
 
     ```yaml
     agents:
@@ -151,53 +158,55 @@ Agent のアップデート版をビルドするには
         repository: <YOUR_PRIVATE_REPOSITORY>/<AGENT_NAME>
     ```
 
-4. 新しい `values.yaml` ファイルを使用して Agent をアップグレードします。
+4. Use the new `values.yaml` file to upgrade the Agent:
 
     ```shell
     helm upgrade -f values.yaml <RELEASE_NAME> datadog/datadog
     ```
 
-### ブラウザトラブルシューティング
+### Configuration
 
-1. Agent の構成ディレクトリの root にある `conf.d/` フォルダーの `wayfinder/conf.yaml` ファイルを編集して、
-   Wayfinder データの収集を開始します。
-   使用可能なすべての構成オプションの詳細については、[サンプル wayfinder/conf.yaml][4] を参照してください
-   。
+1. Edit the `wayfinder/conf.yaml` file, in the `conf.d/` folder at the root of
+   your Agent's configuration directory to start collecting your Wayfinder data.
+   See the [sample wayfinder/conf.yaml][4] for all available configuration
+   options.
 
-2. [Agent を再起動します][5]。
+2. [Restart the Agent][5].
 
-### 検証
+### Validation
 
-[Agent の status サブコマンドを実行][6]し、Checks セクションで `wayfinder` を探します。
+[Run the Agent's status subcommand][6] and look for `wayfinder` under the Checks
+section.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "wayfinder" >}}
 
 
-### ヘルプ
+### Service Checks
 
-Wayfinder には、サービスのチェック機能は含まれません。
+Wayfinder does not include any service checks.
 
-### ヘルプ
+### Events
 
-Wayfinder には、イベントは含まれません。
+Wayfinder does not include any events.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][2]までお問合せください。
+Need help? Contact [Datadog support][2].
 
 [4]:
     https://github.com/DataDog/integrations-extras/blob/master/wayfinder/datadog_checks/wayfinder/data/conf.yaml.example
 [5]:
-    https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+    https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [6]:
-    https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+    https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
 [7]:
     https://github.com/DataDog/integrations-extras/blob/master/wayfinder/metadata.csv
 [8]:
     https://github.com/DataDog/integrations-extras/blob/master/wayfinder/assets/service_checks.json
 
 [1]: https://www.appvia.io/product/
-[2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/agent/kubernetes/integrations/
+

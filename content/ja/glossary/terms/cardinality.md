@@ -1,4 +1,6 @@
 ---
-title: カーディナリティ
+title: cardinality
+core_product:
+  - metrics
 ---
-Datadog では、カーディリティは、メトリクスのタグキーに関連するタグ値の数です。
+In Datadog, cardinality is the number of tag values associated with a tag key for a metric. 

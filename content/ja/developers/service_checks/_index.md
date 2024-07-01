@@ -1,81 +1,82 @@
 ---
-aliases:
-- /ja/developers/faq/how-can-i-submit-a-custom-status-check
-- /ja/developers/service_checks/visualize-your-service-check-in-the-datadog-ui
-- /ja/guides/services_checks/
-- /ja/monitors/guide/visualize-your-service-check-in-the-datadog-ui
 title: Service Check
+kind: documentation
+aliases:
+    - /developers/faq/how-can-i-submit-a-custom-status-check
+    - /developers/service_checks/visualize-your-service-check-in-the-datadog-ui
+    - /guides/services_checks/
+    - /monitors/guide/visualize-your-service-check-in-the-datadog-ui
 ---
 
-## 概要
+## Overview
 
-サービスチェックを使用すると、サービスのステータスを特徴付けて、Datadog 内でサービスを監視できます。サービスチェックは、特定のサービスのアップまたはダウンステータスを監視します。指定された回数の連続したチェックでモニタリング Agent がそのサービスに接続できなかった場合は常に警告が表示されます。たとえば、Redis ホスト上のモニタリング Agent が Redis への接続とメトリクスの収集に 3 回連続して失敗したことを報告した場合に、アラートを受け取ることができます。
+Service checks allow you to characterize the status of a service to monitor it within Datadog. Service checks monitor the up or down status of the specific service. You are alerted whenever the monitoring Agent fails to connect to that service in a specified number of consecutive checks. For example, you can get an alert any time the monitoring Agent on a Redis host reports three consecutive failed attempts to connect to Redis and collect metrics.
 
-クラスターレベルでのサービスチェックは、いくつかの障害に耐えることができる分散型システムまたは冗長システムを監視するための効果的な代替手段になります。これらのアラートは、個々のホストが複数のサービスを実行しているアーキテクチャに使用します。これは、そのサービスを実行しているホストが引き続き使用可能である (ホストレベルのヘルスチェックに成功する) 場合でも、サービスの低下を表面化できるためです。
+Service checks at the cluster level offer another effective way to monitor distributed or redundant systems that can withstand some failures. Use these alerts for architectures where individual hosts run multiple services, because they can surface the degradation of the service even if the hosts running that service remain available (and would pass a host-level health check).
 
-重要な非冗長サービスが失われた場合、または広範囲にわたるノードの損失のためにクラスターが障害の危機に瀕している場合に備えて、モニタリングとアラートを設定できます。その他の重要なアラートとしては、リクエストスループットの低下またはリクエストレイテンシーの増加が挙げられます。
+You can set up monitoring and an alert for when a critical, non-redundant service is lost, or if a cluster is on the verge of failure due to widespread node loss. Other critical alerts could be a drop in request throughput or an increase in request latency.
 
-サービスチェックを設定する必要があるのは、インテグレーションにネイティブのサービスチェックがない場合や、アップまたはダウンステータスを監視したい内部サービスがある場合などです。
+You might need to set up a service check if an integration does not have one natively or for an internal service that you want to monitor for up or down status.
 
-サービスチェックを使用するには、最初にチェックを設定します。
+To use service checks, first set up the check:
 
 {{< whatsnext >}}
-    {{< nextlink href="/developers/service_checks/agent_service_checks_submission" >}}カスタム Agent チェックを送信する。{{< /nextlink >}}
-    {{< nextlink href="/developers/service_checks/dogstatsd_service_checks_submission" >}}DogStatsD でサービスチェックを送信する。{{< /nextlink >}}
-    {{< nextlink href="/api/v1/service-checks/" >}}Datadog API を通じてサービスチェックを送信する。{{< /nextlink >}}
+    {{< nextlink href="/developers/service_checks/agent_service_checks_submission" >}}Submit a custom Agent Check.{{< /nextlink >}}
+    {{< nextlink href="/developers/service_checks/dogstatsd_service_checks_submission" >}}Submit a Service Check with DogStatsD.{{< /nextlink >}}
+    {{< nextlink href="/api/v1/service-checks/" >}}Submit a Service Check through Datadog API.{{< /nextlink >}}
 {{< /whatsnext >}}
 
-サービスチェックがデータを送信したら、チェック内容のサマリーを確認し、ダッシュボード、モニター、アラートを設定します。
+Once the service check is sending data, check out your check summary and set up dashboards, monitors, and alerts:
 
-## Datadog UI でのサービスチェックの視覚化
+## Visualize your service check in Datadog
 
-サービスチェックを視覚化して、Datadog の以下の 3 つのセクションで使用できます。
+Service checks can be visualized and used in 3 Datadog sections:
 
-- [チェック内容のサマリー][1]
-- [スクリーンボード][2]
-- [サービスチェックモニター][3]
+- [Check Summary][1]
+- [Screenboards][2]
+- [Service Check Monitor][3]
 
-### チェック内容のサマリー
+### Check summary
 
-[Check Summary][1] ページには、過去 1 日間にインフラストラクチャー全体で報告されたすべてのチェックが一覧表示されます。チェックを選択すると、そのチェックに関連するステータスとタグに関する洞察が表示されます。
+The [Check Summary][1] page lists all checks reported across your infrastructure in the past day. Select a check to get insights on the status and tags associated with the check.
 
-{{< img src="developers/service_checks/check_summary.png" alt="チェック内容のサマリー" >}}
+{{< img src="developers/service_checks/check_summary.png" alt="Check summary" >}}
 
-### シグナルの詳細を取得する
+### Screenboards
 
-スクリーンボードの**チェックステータス**ウィジェットを使用して、サービスチェックを視覚化できます。
+You can visualize service checks with a **Check status** widget in a screenboard:
 
-{{< img src="developers/service_checks/check_status_widget.png" alt="チェックステータスウィジェット" >}}
+{{< img src="developers/service_checks/check_status_widget.png" alt="Check status widget" >}}
 
-**チェックステータス**ウィジェットアイコンをクリックすると、次のポップアップが表示されます。
+After clicking on the **Check status** widget icon, the following pop-up appears:
 
-{{< img src="developers/service_checks/check_widget_config.png" alt="チェックステータス構成" >}}
+{{< img src="developers/service_checks/check_widget_config.png" alt="Check widget config" >}}
 
-このフォームで、以下の設定を行うことができます。
+In this form, you can:
 
-- **Check Name**: サービスチェック名を選択します。
-- **Reporting Timeframe**: ステータスを集計するタイムフレームを選択します。
-- **Scoping**: 1 つのチェックを選択するか、1 つのタグ値またはタグキーに基づいて報告されるチェックステータスのクラスターを選択します。
-- **Widget Title**: ウィジェットのタイトルを設定します。
+- **Check Name**: Select your service check name.
+- **Reporting Timeframe**: Select the time frame on which you want to aggregate your status.
+- **Scoping**: Select a single check or a cluster of check statuses reported by a single tag value or a tag key.
+- **Widget Title**: Set your widget title.
 
-## サービスチェックモニター
+## Service check monitor
 
-サービスチェックをメトリクスのように時系列でグラフ化できなくても、[Service Check Monitor][3] で監視することができます。
+Even if you can't graph a service check over time as you would for metrics, you can still monitor it with a [Service Check Monitor][3].
 
-{{< img src="developers/service_checks/service_check_monitor.png" alt="チェックモニター" >}}
+{{< img src="developers/service_checks/service_check_monitor.png" alt="Check monitor" >}}
 
-このフォームで、以下の設定を行うことができます。
+In this form, you can:
 
-- **Pick a service check**: 監視するチェックステータス名を選択します。
-- **Pick monitor scope**: モニターのコンテキストを選択します (タグの選択/除外)。
-- **Set alert conditions**: シンプルチェックアラートまたはクラスターアラートを選択します。
-- **通知と自動化の構成**: このモニターで誰に通知するかを選択し、送信される通知を編集します ([Datadog の通知][4]に関する詳細はこちら)。
-- **アクセス許可と監査通知の定義**: モニターのアクセス許可を編集し、監査通知を設定します。
+- **Pick a service check**: Select the check status name to monitor.
+- **Pick monitor scope**: Select the context for your monitor (including/excluding tags).
+- **Set alert conditions**: Choose between a simple check alert or a cluster alert.
+- **Configure notifications and automations**: Choose who this monitor should notify and edit the notifications sent (find more about [Datadog notifications][4]).
+- **Define permissions and audit notifications**: Edit access permissions for your monitor and set audit notifications.
 
-サービスチェックの作成については、[サービスチェックモニター][5]を参照してください。
+For more information on creating a service check, see [Service Check Monitor][5].
 
 [1]: https://app.datadoghq.com/check/summary
 [2]: https://app.datadoghq.com/dashboard
 [3]: https://app.datadoghq.com/monitors/create/custom
-[4]: /ja/monitors/notify/
-[5]: /ja/monitors/types/service_check/
+[4]: /monitors/notify/
+[5]: /monitors/types/service_check/

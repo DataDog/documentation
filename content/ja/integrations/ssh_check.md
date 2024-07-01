@@ -1,88 +1,91 @@
 ---
-app_id: ssh
-app_uuid: 66833cbe-1bfc-4104-9d77-7b828219470b
-assets:
-  integration:
-    configuration:
-      spec: assets/configuration/spec.yaml
-    events:
-      creates_events: false
-    metrics:
-      check: sftp.response_time
-      metadata_path: metadata.csv
-      prefix: sftp.
-    process_signatures:
-    - ssh
-    - sftp
-    - sshd
-    - 'sshd:'
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_name: SSH
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com
-  support_email: help@datadoghq.com
-categories:
-- developer tools
-- network
-dependencies:
-- https://github.com/DataDog/integrations-core/blob/master/ssh_check/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: ssh_check
-integration_id: ssh
-integration_title: SSH
-integration_version: 2.7.0
-is_public: true
-kind: インテグレーション
-manifest_version: 2.0.0
-name: ssh_check
-public_title: SSH
-short_description: SSH 接続と SFTP レイテンシーを監視。
-supported_os:
-- linux
-- windows
-- macos
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Developer Tools
-  - Category::ネットワーク
-  - Supported OS::Linux
-  - Supported OS::Windows
-  - Supported OS::macOS
-  configuration: README.md#Setup
-  description: SSH 接続と SFTP レイテンシーを監視。
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: SSH
+"app_id": "ssh"
+"app_uuid": "66833cbe-1bfc-4104-9d77-7b828219470b"
+"assets":
+  "integration":
+    "auto_install": true
+    "configuration":
+      "spec": "assets/configuration/spec.yaml"
+    "events":
+      "creates_events": false
+    "metrics":
+      "check": "sftp.response_time"
+      "metadata_path": "metadata.csv"
+      "prefix": "sftp."
+    "process_signatures":
+    - "ssh"
+    - "sftp"
+    - "sshd"
+    - "sshd:"
+    "service_checks":
+      "metadata_path": "assets/service_checks.json"
+    "source_type_id": !!int "90"
+    "source_type_name": "SSH"
+"author":
+  "homepage": "https://www.datadoghq.com"
+  "name": "Datadog"
+  "sales_email": "info@datadoghq.com"
+  "support_email": "help@datadoghq.com"
+"categories":
+- "developer tools"
+- "network"
+"custom_kind": "integration"
+"dependencies":
+- "https://github.com/DataDog/integrations-core/blob/master/ssh_check/README.md"
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "ssh_check"
+"integration_id": "ssh"
+"integration_title": "SSH"
+"integration_version": "2.8.0"
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "ssh_check"
+"public_title": "SSH"
+"short_description": "Monitor SSH connectivity and SFTP latency."
+"supported_os":
+- "linux"
+- "windows"
+- "macos"
+"tile":
+  "changelog": "CHANGELOG.md"
+  "classifier_tags":
+  - "Category::Developer Tools"
+  - "Category::Network"
+  - "Supported OS::Linux"
+  - "Supported OS::Windows"
+  - "Supported OS::macOS"
+  "configuration": "README.md#Setup"
+  "description": "Monitor SSH connectivity and SFTP latency."
+  "media": []
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": "SSH"
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## 概要
+## Overview
 
-このチェックを使用して、リモートホストへの SSH 接続と SFTP 応答時間を監視できます。
+This check lets you monitor SSH connectivity to remote hosts and SFTP response times.
 
-## セットアップ
+## Setup
 
-### インストール
+### Installation
 
-SSH/SFTP チェックは [Datadog Agent][1] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
+The SSH/SFTP check is included in the [Datadog Agent][1] package. No additional installation is needed on your server.
 
-### コンフィギュレーション
+### Configuration
 
 {{< tabs >}}
 {{% tab "Host" %}}
 
-#### ホスト
+#### Host
 
-ホストで実行中の Agent に対してこのチェックを構成するには:
+To configure this check for an Agent running on a host:
 
-1. [Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `ssh_check.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル ssh_check.d/conf.yaml][2] を参照してください。
+1. Edit the `ssh_check.d/conf.yaml` file in the `conf.d/` folder at the root of your [Agent's configuration directory][1]. See the [sample ssh_check.d/conf.yaml][2] for all available configuration options:
 
    ```yaml
    init_config:
@@ -98,52 +101,52 @@ SSH/SFTP チェックは [Datadog Agent][1] パッケージに含まれていま
        # add_missing_keys: True    # default is False
    ```
 
-2. [Agent を再起動][3]すると、Datadog への SSH/SFTP メトリクスおよびサービスチェックの送信が開始されます。
+2. [Restart the Agent][3] to start sending SSH/SFTP metrics and service checks to Datadog.
 
-[1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
+[1]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/ssh_check/datadog_checks/ssh_check/data/conf.yaml.example
-[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[3]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
 {{% tab "Containerized" %}}
 
-#### コンテナ化
+#### Containerized
 
-コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
+For containerized environments, see the [Autodiscovery Integration Templates][1] for guidance on applying the parameters below.
 
-| パラメーター            | 値                                                        |
+| Parameter            | Value                                                        |
 | -------------------- | ------------------------------------------------------------ |
-| `<インテグレーション名>` | `ssh_check`                                                  |
-| `<初期コンフィギュレーション>`      | 空白または `{}`                                                |
-| `<インスタンスコンフィギュレーション>`  | `{"host": "%%host%%", "port":"22", "username":"<USERNAME>"}` |
+| `<INTEGRATION_NAME>` | `ssh_check`                                                  |
+| `<INIT_CONFIG>`      | blank or `{}`                                                |
+| `<INSTANCE_CONFIG>`  | `{"host": "%%host%%", "port":"22", "username":"<USERNAME>"}` |
 
-[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
+[1]: https://docs.datadoghq.com/agent/kubernetes/integrations/
 {{% /tab %}}
 {{< /tabs >}}
 
-### 検証
+### Validation
 
-[Agent の `status` サブコマンドを実行][2]し、Checks セクションで `ssh_check` を探します。
+[Run the Agent's `status` subcommand][2] and look for `ssh_check` under the Checks section.
 
-## 収集データ
+## Data Collected
 
-### メトリクス
+### Metrics
 {{< get-metrics-from-git "ssh_check" >}}
 
 
-### イベント
+### Events
 
-SSH チェックには、イベントは含まれません。
+The SSH Check does not include any events.
 
-### サービスのチェック
+### Service Checks
 {{< get-service-checks-from-git "ssh_check" >}}
 
 
-## トラブルシューティング
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
+Need help? Contact [Datadog support][3].
 
 
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest
-[2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[3]: https://docs.datadoghq.com/ja/help/
+[2]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
+[3]: https://docs.datadoghq.com/help/

@@ -1,70 +1,71 @@
 ---
+title: Enable RUM on Your Shopify Store
+kind: guide
 further_reading:
 - link: /real_user_monitoring/guide/rum-for-product-analytics/
   tag: Documentation
-  text: RUM とセッションリプレイを製品分析に活用する
+  text: Use RUM & Session Replay for Product Analytics
 - link: /real_user_monitoring/guide/alerting-with-conversion-rates/
   tag: Documentation
-  text: コンバージョン率でアラートを出す
-kind: ガイド
-title: Shopify ストアで RUM を有効にする
+  text: Alerting With Conversion Rates
 ---
 
-## 概要
+## Overview
 
-オンラインストアを成功させるには、顧客がどのように Web ページとやりとりしているかを理解することが重要です。
+Understanding how customers interact with your web pages is crucial to the success of your online store.
 
-このガイドでは、Shopify ストアでリアルユーザーモニタリングを設定する方法を説明します。
+This guide walks through how you can set up Real User Monitoring on your Shopify-powered store.
 
-## セットアップ
+## Setup
 
-1. Shopify の管理パネルにログインします。
-2. **Sales channels** の下にある、**Online Store** をクリックします。
+1. Log into your Shopify administration panel.
+2. Under **Sales channels**, click **Online Store**.
 
-   {{< img src="real_user_monitoring/guide/enable-rum-shopify-store/enable-rum-shopify-1.png" alt="Shopify ストアで RUM を有効にする" style="width:30%;">}}
+   {{< img src="real_user_monitoring/guide/enable-rum-shopify-store/enable-rum-shopify-1.png" alt="Enable RUM on your Shopify store" style="width:30%;">}}
 
-3. 新しいメニューが開きますので、**Themes** をクリックします。
+3. This opens up a new menu, click on **Themes**.
 
-   {{< img src="real_user_monitoring/guide/enable-rum-shopify-store/enable-rum-shopify-2.png" alt="Shopify ストアで RUM を有効にする" style="width:30%;">}}
+   {{< img src="real_user_monitoring/guide/enable-rum-shopify-store/enable-rum-shopify-2.png" alt="Enable RUM on your Shopify store" style="width:30%;">}}
 
-4. 現在のテーマの **Edit code** ボタンをクリックします。
+4. Click the **Edit code** button for your current theme.
 
-   {{< img src="real_user_monitoring/guide/enable-rum-shopify-store/enable-rum-shopify-3.png" alt="Shopify ストアで RUM を有効にする" >}}
+   {{< img src="real_user_monitoring/guide/enable-rum-shopify-store/enable-rum-shopify-3.png" alt="Enable RUM on your Shopify store" >}}
 
-5. **Layout** ディレクトリの下で、テーマのメインファイル **theme.liquid** を探します。そのファイルをクリックして編集します。
+5. Under the **Layout** directory, find the main file of your theme **theme.liquid**. Click the file to edit it.
 
-   {{< img src="real_user_monitoring/guide/enable-rum-shopify-store/enable-rum-shopify-4.png" alt="Shopify ストアで RUM を有効にする" style="width:30%;">}}
+   {{< img src="real_user_monitoring/guide/enable-rum-shopify-store/enable-rum-shopify-4.png" alt="Enable RUM on your Shopify store" style="width:30%;">}}
 
-6. `<head>` タグ内に SDK コードスニペットを追加して、ブラウザ RUM SDK を初期化します。どのインストール方法を選択するかについては、[RUM ブラウザモニタリングドキュメント][1]を参照してください。
+6. Initialize the Browser RUM SDK by adding the SDK code snippet inside the `<head>` tag. For more information about which installation method to choose, see the [RUM Browser Monitoring documentation][1].
 
-   {{< img src="real_user_monitoring/guide/enable-rum-shopify-store/enable-rum-shopify-5.png" alt="Shopify ストアで RUM を有効にする" >}}
+   {{< img src="real_user_monitoring/guide/enable-rum-shopify-store/enable-rum-shopify-5.png" alt="Enable RUM on your Shopify store" >}}
 
-7. **Save** ボタンをクリックして変更を保存します。
+7. Click the **Save** button to save your changes.
 
-更新後、Shopify の UI では以下のように表示されます。
+The updated looks like the following in the Shopify UI:
 
-   {{< img src="real_user_monitoring/guide/enable-rum-shopify-store/enable-rum-shopify-6.png" alt="Shopify ストアで RUM を有効にする" style="width:50%;">}}
+   {{< img src="real_user_monitoring/guide/enable-rum-shopify-store/enable-rum-shopify-6.png" alt="Enable RUM on your Shopify store" style="width:50%;">}}
 
-テーマコードの編集に関する詳細は [Shopify のドキュメント][2]を参照してください。
+See more information regarding theme code's editing in [Shopify's documentation][2].
 
-## 探索を始める
+## Start exploring
 
-ブラウザ RUM SDK を初期化したら、Shopify ストアでリアルユーザーモニタリングを使い始めることができます。
+Once you've initialized the Browser RUM SDK, you can start using Real User Monitoring with your Shopify store.
 
-たとえば、次のようなことができます。
+For example, you can:
 
-- データに基づいた意思決定を行ってストアを改善することで、
-顧客の行動に関する貴重な洞察を得ることができます
-- [セッションリプレイ][3]を使ってブラウザの記録でリッチ化されたセッションを見ることでコンバージョンを向上させます。
-- [ファネル分析][4]を使ってカスタマージャーニーをより深く理解します。または
-- 新たにキャプチャされたセッションから[メトリクスを生成][5]します。
+- Get valuable insights about your customers' behavior by
+making data-driven decisions to improve your store
+- Increase conversion by watching browser recordings enriched sessions with [Session Replay][3]
+- Use [funnel analysis][4] to better understand the customer journey, or
+- [Generate metrics][5] from those newly captured sessions
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/real_user_monitoring/browser/#choose-the-right-installation-method/
+[1]: /real_user_monitoring/browser/setup/#choose-the-right-installation-method/
 [2]: https://help.shopify.com/en/manual/online-store/themes/theme-structure/extend/edit-theme-code
-[3]: /ja/real_user_monitoring/session_replay/
-[4]: /ja/real_user_monitoring/funnel_analysis/
-[5]: /ja/real_user_monitoring/generate_metrics/
+[3]: /real_user_monitoring/session_replay/browser/
+[4]: /product_analytics/journeys/funnel_analysis
+[5]: /real_user_monitoring/platform/generate_metrics/
+

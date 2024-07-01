@@ -1,57 +1,65 @@
 ---
+title: RUM & Session Replay Billing
 further_reading:
 - link: /real_user_monitoring/
-  tag: ドキュメント
-  text: RUM とセッションリプレイについて
-title: RUM とセッションリプレイの課金
+  tag: Documentation
+  text: Learn about RUM & Session Replay
 ---
 
-## 概要
+## Overview
 
-このページでは、RUM とセッションリプレイの課金に関するよくある質問とその回答を掲載しています。
+This page contains common questions and answers about billing topics for RUM & Session Replay.
 
-## セッションはどのように定義されていますか。
+## How is a session defined?
 
-セッションとは、ウェブアプリケーションまたはモバイルアプリケーションでユーザーが行う操作 (カスタマージャーニー) です。通常、セッションには複数ページの表示とそれに関連するテレメトリーが含まれます。
+A session is a user journey on your web or mobile application. A session usually includes multiple page views with their associated telemetry.
 
-## セッションに期限はありますか？
+## When does a session expire?
 
-15 分間操作が行われないとセッションの期限が切れます。また、セッションの持続時間は 4 時間までに制限されています。4 時間経つと、新しいセッションが自動的に作成されます。
+A session expires after 15 minutes of inactivity, and its duration is limited to 4 hours. After 4 hours, a new session is automatically created.
 
-## セッションリプレイの記録時間はどのくらいですか？
+## How long are Session Replay recordings?
 
-セッションリプレイの記録は、セッションの長さによって異なることがあります。例えば、5～8 秒の短いセッションリプレイを観測している場合、ユーザーは 5～8 秒後にセッションを終了したことを意味します。
+Session Replay recordings can vary based on the session length. For example, if you're observing short, 5-8 second Session Replays, that means the user ended their session after 5-8 seconds.
 
-## Datadog の RUM とセッションリプレイは、どのようなデータを収集するのですか？
+## What data does Datadog RUM & Session Replay collect?
 
-Datadog は、エンドユーザーが訪問したすべてのページを、読み込みリソース (XHR、イメージ、CSS ファイル、JS スクリプト)、フロントエンドエラー、クラッシュレポート、長時間のタスクなど、重要なテレメトリーと一緒に収集します。これらはすべてユーザーセッションに含まれるデータです。セッションリプレイでは、Datadog は DOM のスナップショットに基づいて iframe を作成します。Datadog リアルユーザーモニタリング (RUM) サービスで収集されたセッション 1,000 件ごとに課金されます。
+Datadog collects all the pages visited by your end users along with the telemetry that matters, such as resources loading (XHRs, images, CSS files, and JS scripts), frontend errors, crash reports, and long tasks. All of this is included in the user session. For Session Replay, Datadog creates an iframe based on snapshots of the DOM. Datadog charges per one thousand (1,000) sessions ingested in the Datadog Real User Monitoring (RUM) service.
 
-## Datadog はシングルページアプリケーションに対応していますか？
+## Does Datadog handle single page applications?
 
-はい。お客様側でのコンフィギュレーションは必要ありません。Datadog RUM が自動的にページの変更を追跡します。
+Yes, without any configuration on your side. Datadog RUM automatically tracks page changes.
 
-## エンドポイントリクエストをエンドツーエンドでどのように表示しますか？
+## How do you view endpoint requests end-to-end?
 
-付属の APM インテグレーションを使用して、あらゆる XHR または Fetch リクエストを、対応するバックエンドのトレースに紐付けることができます。
+With the out-of-the-box APM integration, you can tie any XHR or Fetch request to its corresponding backend trace.
 
-## RUM のブラウザコレクターからのログをどのように表示しますか？
+## How do you view logs from the browser collector in RUM?
 
-ブラウザのログは自動的に対応する RUM セッションに紐付けられるため、エンドユーザーのジャーニーで発生したログを監視できます。
+Browser logs are automatically tied to the corresponding RUM session, enabling you to monitor when they happen during the end user journey.
 
-## Datadog はクッキーを使用しますか？
+## Does Datadog use cookies?
 
-はい。Datadog ではクッキーを使用して、セッションまでのユーザーのさまざまなステップをまとめます。ただし、クロスドメインクッキーは使用しないほか、アプリケーション外部のユーザーアクションは追跡されません。
+Yes. Datadog uses cookies to stitch together the various steps of your users into a session. This process does not use cross-domain cookies, and it does not track the actions of your users outside your applications.
 
-## 使用量ページには、Browser RUM & セッションリプレイプランで課金された RUM セッションが表示されていますが、私のアプリケーションではセッション記録のキャプチャが構成されていません。
+## My Usage page shows RUM sessions billed under the Browser RUM & Session Replay Plan, but I have not configured capturing session recordings for my application.
 
-**Browser RUM & セッションリプレイ**プランは、セッションの記録 (リプレイ) をアンロックします。
+The **Browser RUM & Session Replay** Plan unlocks session recordings (replays).
 
-- リプレイを収集している場合は、リプレイプランでの課金となります。
+- If you are collecting replays, you are billed for the sessions under the Replay Plan.
 
-- セッションの記録をキャプチャしないようにするには、[セッションリプレイのドキュメント][1]を参照してください。
+- If you want to disable session recordings from being captured, see the [Session Replay documentation][1].
 
-## その他の参考資料
+## How do webviews in mobile applications impact session recordings and billing?
+
+When a mobile application contains webviews and you've instrumented both your web and mobile applications with Datadog SDKs, a bridge is created. All events recorded by the Browser SDK on the web app that are loaded through the webview are forwarded to the Mobile SDK. These events are linked to the session that started on the mobile application.
+
+In other words, only the one RUM mobile session is visible in Datadog and therefore is the only one that is billable.
+
+{{< img src="account_management/billing/rum/rum-webviews-impact-on-billing-2.png" alt="If you've instrumented both your web and mobile applications with Datadog SDKs, you are only be billed for the mobile session." >}}
+
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/real_user_monitoring/session_replay/#how-do-you-disable-session-replay
+[1]: /real_user_monitoring/session_replay/browser#disable-session-replay

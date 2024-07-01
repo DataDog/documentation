@@ -1,6 +1,6 @@
 ---
+title: action
 core_product:
-- real user monitoring
-title: アクション
+  - real user monitoring
 ---
-Datadog RUM では、アクションはイベントの一種です。アクションイベントは、ユーザージャーニー中のユーザーインタラクションを追跡します。
+In Datadog RUM, an action is a type of event. Action events track user interactions during a user journey.

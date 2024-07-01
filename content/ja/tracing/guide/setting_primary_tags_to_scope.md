@@ -1,59 +1,60 @@
 ---
+title: Set Primary Tags to Scope
+kind: documentation
 aliases:
-- /ja/tracing/advanced/setting_primary_tags_to_scope/
+  - /tracing/advanced/setting_primary_tags_to_scope/
 further_reading:
 - link: /tracing/other_telemetry/connect_logs_and_traces/
-  tags: トレースの加工
-  text: ログとトレースの接続
+  tag: Documentation
+  text: Connect your Logs and Traces together
 - link: /tracing/manual_instrumentation/
-  tags: トレースの加工
-  text: 手動でアプリケーションのインスツルメンテーションを行いトレースを作成します。
+  tag: Documentation
+  text: Instrument manually your application to create traces.
 - link: /tracing/opentracing/
-  tags: トレースの加工
-  text: アプリケーション全体に Opentracing を実装します。
+  tag: Documentation
+  text: Implement Opentracing across your applications.
 - link: /tracing/glossary/
-  tag: APM の UI を利用する
-  text: サービス、リソース、トレースの詳細
-title: プライマリタグをスコープに設定
+  tag: Documentation
+  text: Explore your services, resources, and traces
 ---
 
-## 定義
+## Definition
 
-Datadog APM アプリケーション全体をスコープに設定するために使用できるディメンションが複数あります。これには、集計統計（リクエスト/秒、レイテンシー、エラー率、Apdex スコアなど）および表示可能な[トレース][1]が含まれます。こうしたディメンションは、アプリケーションの動作をさらに詳細に把握できるプライマリタグを介して設定されます。プライマリタグのユースケースには、環境、アベイラビリティゾーン、データセンターなどがあります。
+There are several dimensions available to scope an entire Datadog APM application. These include aggregate statistics (such as requests/second, latency, error rate, Apdex score) and visible [traces][1]. These dimensions are set up through primary tags that allow you to get an even finer view of your application's behavior. Use cases for primary tags include environment, availability zone, datacenter, etc.
 
-プライマリタグは、従来の [Datadog タグ][2]とは異なるルールセットに従う必要があります。
+Primary tags must follow a different set of rules from those of conventional [Datadog tags][2].
 
-## セットアップ
+## Setup
 
-### 環境
+### Environment
 
-デフォルトの必須プライマリタグは、トレースの収集元の環境です。タグキーは `env` で、タグなしデータのデフォルト値は `env:none` です。
+The default and mandatory primary tag is the environment your traces are collected from. Its tag key is `env`, and its default value for un-tagged data is `env:none`.
 
-#### トレーサー環境
+#### Tracer environment
 
-Datadog は、トレーサーに `env` を設定することをお勧めします。`env` の定義はサービスの実際のランタイム内に存在するため、これにより柔軟性も向上します。
+Datadog recommends having the tracer set `env`. It also allows for greater flexibility because the definition of `env` lives within the actual runtime of the service.
 
-`DD_ENV` がサービスのプロセスに公開されている場合、トレーサーはそれを自動的に使用します。`DD_ENV` およびその他の標準サービス環境変数の設定については、[統合サービスタグ付け][3]を参照してください。
+If `DD_ENV` is exposed to your service's process, the tracer will use it automatically. See [Unified Service Tagging][3] to learn about setting `DD_ENV` and other standard service environment variables.
 
-コードでトレーサーのグローバルタグとして `env` を手動で設定することもできます。詳細については、[APM でのタグの割り当て][4]を参照してください。
+You may also manually set `env` as a global tag for the tracer in code. See [assigning tags in APM][4] for more information.
 
-#### Agent 環境
+#### Agent environment
 
-`env` タグは、Agent コンフィギュレーションで設定できます。
-**トレーサーと Agent に異なる `env` タグを設定しないでください。これを行うと、[トレースメトリクス][5]でタグが重複する可能性があります。**
+The `env` tag can be set in your Agent configuration.
+**Do not set different `env` tags on the Tracer and Agent. This may cause duplicate tagging on [trace metrics][5].**
 
-オプション
+Options:
 
-1. トップレベル Agent コンフィギュレーション:
+1. Top-level Agent configuration:
 
     ```yaml
     env: <ENVIRONMENT>
     ...
     ```
 
-    **コンテナ化環境**: Agent は、環境変数 `DD_ENV` によるトップレベルの `env` のコンフィギュレーションもサポートしています。
+    **Containerized environments**: The Agent also supports configuration of the top-level `env` through the environment variable `DD_ENV`.
 
-2. Agent ホストタグ:
+2. Agent host tag:
 
     ```yaml
     tags:
@@ -61,40 +62,41 @@ Datadog は、トレーサーに `env` を設定することをお勧めしま�
         ...
     ```
 
-    **コンテナ化環境**: Agent は、環境変数 `DD_TAGS` によるトップレベルの `tags` のコンフィギュレーションもサポートしています。
+    **Containerized environments**: The Agent also supports configuration of top-level `tags` through the environment variable `DD_TAGS`.
 
-#### 環境ごとのデータ
+#### Data by environment
 
-環境は、APM ページの上部に表示されます。`env` ドロップダウンを使用して、現在のページに表示されるデータのスコープを設定します。
+Environments appear at the top of APM pages. Use the `env` dropdown to scope the data displayed on the current page.
 
-## Datadog に 2 番目のプライマリタグを追加する
+## Add a second primary tag in Datadog
 
-トレースメトリクスを追加のディメンションにわたって集計する必要がある場合、デフォルトで必須のプライマリタグ `env:<ENVIRONMENT>` に加えて、2 つ目のプライマリタグを設定することをお勧めします。構成すると、**Service Catalog Performance** タブで 2 つ目のドロップダウンが利用可能になります。
+If you need to aggregate your trace metrics across additional dimensions, we recommend setting up a second primary tag in addition to the
+default and mandatory primary tag `env:<ENVIRONMENT>`. Once configured, a second dropdown is available in the **Service Catalog Performance** tab. 
 
-[APM 設定][6]ページで、プライマリタグの定義、変更、削除を行います。
+Go to the [APM Settings][6] page to define, change, or remove your primary tags.
 
-**注**:
+**Note**:
 
-* 組織管理者のみがこのページにアクセスできます。
-* 変更が UI に反映されるまでに最大 2 時間かかる場合があります。
-* トレーサーは常に `resource`、`name`、`service` タグをスパンに追加します。Datadog は、混乱を避けるために、これらをホストレベルのタグとして追加しないことをお勧めします。
-* 2 つ目のプライマリタグは最大 30 個のユニークな値をサポートします。詳しくは [APM データ量ガイドライン][9]を参照してください。
+* Only organization administrators have access to this page.
+* Changes may take up to two hours to be reflected in the UI.
+* The tracer always adds `resource`, `name`, and `service` tags to spans. Datadog recommends never adding these as host level tags to avoid confusion.
+* The second primary tag supports up to 30 unique values. See [APM Data Volume Guidelines][9] for details.
 
-以前に設定したプライマリタグを変更する場合は、次のことに注意してください。
+If you change a previously set primary tag, be aware of the following:
 
-* 以前に設定されたタグによって集計された履歴 APM データにはアクセスできなくなります。
-* 前のタグをスコープとする APM モニターには、_No Data_ のステータスが表示されます。
+* Historical APM data aggregated by the previously set tag is no longer accessible.
+* Any APM monitors scoped to the previous tag display a status of _No Data_.
 
-## コンテナベースの第 2 プライマリタグ
+## Container-based second primary tags
 
-Linux ベースのプラットフォームで、Docker コンテナや Kubernetes ポッドのメタデータに由来するタグに基づいて、トレースメトリクスのインデックスを作成することができます。コンテナベースの第 2 プライマリタグは、Datadog Agent バージョン 7.35.0 以降で利用可能です。
+You can index your trace metrics based on the tags derived from Docker containers and Kubernetes pod metadata on Linux-based platforms. Container-based second primary tags are available in Datadog Agent versions 7.35.0 and later.
 
-コンテナベースの第 2 プライマリタグを有効にするには、Agent バージョン 7.35.0 以降をインストールし、CID 統計の設定を以下のように更新し、Agent を再起動します。有効化の手順は、Agent のインストール方法によって異なります。
+To enable container-based second primary tags, install Agent version 7.35.0 or later, update the CID stats setting as described below, and restart the Agent. The procedure for enabling depends on how you installed the Agent:
 
 {{< tabs >}}
 {{% tab "Helm" %}}
 
-Datadog Helm チャートバージョン 2.26.2 以降を使用して、values ファイルに以下を追加します。
+Using the Datadog Helm chart version 2.26.2 or later, add the following to your values file:
 
 ```yaml
 #...
@@ -105,11 +107,11 @@ datadog:
       value: 'enable_cid_stats'
 ```
 
-{{< /tabs >}}
+{{% /tab %}}
 
-{{% tab "Kubernetes (Helm を使用しない)" %}}
+{{% tab "Kubernetes (without Helm)" %}}
 
-Agent DaemonSet で以下の環境変数を使用します。Agent プロセスごとにコンテナを実行する場合は、すべてのコンテナに以下の環境変数を追加します。それ以外の場合は、Agent コンテナに追加します。
+Use the following environment variable in the Agent DaemonSet. If you are running a container per Agent process, add the following environment variable to all containers. Otherwise, add it to the Agent container.
 
 ```yaml
 # (...)
@@ -122,7 +124,7 @@ Agent DaemonSet で以下の環境変数を使用します。Agent プロセス�
 {{% /tab %}}
 {{% tab "Docker Compose" %}}
 
-以下を [docker-compose.yml][1] ファイルに追加します。
+Add the following to your [docker-compose.yml][1] file:
 
 ```yaml
 services:
@@ -134,11 +136,11 @@ services:
 ```
 
 
-[1]: /ja/agent/guide/compose-and-the-datadog-agent/
+[1]: /agent/guide/compose-and-the-datadog-agent/
 {{% /tab %}}
-{{% tab "環境変数" %}}
+{{% tab "Environment variables" %}}
 
-Docker や ECS のインストールでよくあるように、Agent を環境変数で構成する場合、Docker イメージのアップグレード後に以下の環境変数をトレース Agent に渡します。
+If you configure the Agent with environment variables, as is common with Docker and ECS installations, pass the following environment variable to the trace Agent after upgrading the Docker image.
 
 ```
 DD_APM_FEATURES=enable_cid_stats
@@ -147,31 +149,31 @@ DD_APM_FEATURES=enable_cid_stats
 {{% /tab %}}
 {{< /tabs >}}
 
-Agent を再起動します。[APM 設定][6]ページに移動し、使用する第 2 プライマリタグを選択します。この設定の変更が反映されるまで、最大で 2 時間かかることがあります。
+Restart the Agent. Go to the [APM Settings][6] page and select the second primary tag you want to use. It can take up to two hours for changes to this setting to take effect. 
 
-これで、[サービスカタログ][7]で、コンテナ化されたサービスから送信されるタグによって、サービスをフィルターすることができます。ダッシュボードやモニターで使用されるトレースメトリクスも、コンテナのプライマリタグで集計することができます。
+Now you can filter your services in the [Service Catalog][7] by the tag being sent by your containerized services. Trace metrics used by Dashboards and Monitors can also be aggregated by the container primary tag.
 
-### タグとしてのカスタムラベル
+### Custom labels as tags
 
-まだの方は、[タグの割り当て][8]で、コンテナやポッドのラベルをトレースのカスタムタグとして送信するように Agent を構成することも可能です。
+If you haven't already, you may also configure the Agent to send container or Pod labels as custom tags for your traces with [Assigning Tags][8].
 
-## プライマリタグごとのデータの表示
+## View data by primary tag
 
-プライマリタグは、APM ページの上部に表示されます。これらのセレクターを使用して、現在のページに表示されるデータをフィルターします。プライマリタグに依存しないすべてのデータを表示するには、ドロップダウンから `<タグ名>:*` を選択します。
+Primary tags appear at the top of APM pages. Use these selectors to filter the data displayed on the current page. To view all data independent of a primary tag, choose `<TAG_NAME>:*` from the dropdown.
 
-{{< img src="tracing/guide/setting_primary_tags/second-primary-tag-dropdown.png" alt="第 2 プライマリタグを持つスコープを選択するためのオプションを示すドロップダウンメニュー" style="width:90%;">}}
+{{< img src="tracing/guide/setting_primary_tags/second-primary-tag-dropdown.png" alt="The dropdown menu showing options for selecting a scope with the second primary tag" style="width:90%;">}}
 
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/tracing/glossary/#trace
-[2]: /ja/getting_started/tagging/
-[3]: /ja/getting_started/tagging/unified_service_tagging
-[4]: /ja/getting_started/tagging/assigning_tags/#traces
-[5]: /ja/tracing/metrics/metrics_namespace/
+[1]: /tracing/glossary/#trace
+[2]: /getting_started/tagging/
+[3]: /getting_started/tagging/unified_service_tagging
+[4]: /getting_started/tagging/assigning_tags/#traces
+[5]: /tracing/metrics/metrics_namespace/
 [6]: https://app.datadoghq.com/apm/settings
 [7]: https://app.datadoghq.com/services
-[8]: /ja/getting_started/tagging/assigning_tags
-[9]: /ja/tracing/troubleshooting/#data-volume-guidelines
+[8]: /getting_started/tagging/assigning_tags
+[9]: /tracing/troubleshooting/#data-volume-guidelines

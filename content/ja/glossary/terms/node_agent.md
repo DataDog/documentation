@@ -1,6 +1,6 @@
 ---
-core_product:
-- datadog agent
 title: Node Agent
+core_product:
+  - datadog agent
 ---
-Node Agent は、ホスト上で実行される Datadog Agent のバージョンです。
+The Node Agent is the version of the Datadog Agent that runs on a host.

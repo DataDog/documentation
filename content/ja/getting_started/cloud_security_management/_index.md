@@ -1,73 +1,88 @@
 ---
+title: Getting Started with Cloud Security Management
+kind: documentation
 further_reading:
 - link: /security/cloud_security_management/
   tag: Documentation
-  text: クラウド セキュリティ マネジメント
-- link: /security/cspm/custom_rules/schema/
+  text: Cloud Security Management
+- link: /infrastructure/resource_catalog/schema/
   tag: Documentation
-  text: CSM Misconfigurations クラウドリソーススキーマ
-- link: https://www.datadoghq.com/blog/automate-end-to-end-processes-with-datadog-workflows/
-  tag: ブログ
-  text: Datadog Workflows でエンドツーエンドプロセスを自動化する
-- link: https://dtdg.co/fe
+  text: Cloud Resources Schema Reference
+- link: "https://www.datadoghq.com/blog/automate-end-to-end-processes-with-datadog-workflows/"
+  tag: Blog
+  text: Automate end-to-end processes with Datadog Workflows
+- link: "https://www.datadoghq.com/blog/csm-at-datadog/"
+  tag: Blog
+  text: How we use Datadog CSM to improve security posture in our cloud infrastructure
+- link: "https://www.datadoghq.com/blog/detecting-leaked-credentials/"
+  tag: Blog
+  text: How we detect and notify users about leaked Datadog credentials
+- link: "https://www.datadoghq.com/blog/security-posture-csm/"
+  tag: Blog
+  text: Report on changes to your security posture with Cloud Security Management
+- link: "https://dtdg.co/fe"
   tag: Foundation Enablement
-  text: セキュリティと脅威検出を高めるインタラクティブなセッションに参加できます
-- link: https://securitylabs.datadoghq.com/
+  text: Join an interactive session to elevate your security and threat detection
+- link: "https://securitylabs.datadoghq.com/"
   tag: Security Labs
-  text: Datadog のセキュリティリサーチ、レポート、ヒント、ビデオ
-title: Cloud Security Management の概要
+  text: Security research, reports, tips, and videos from Datadog
 ---
 
-## 概要
+## Overview
 
-[Datadog Cloud Security Management][1] (CSM) は、クラウドインフラストラクチャー全体にわたって、リアルタイムの脅威検出と継続的な構成監査を提供します。観測可能性データを活用した CSM には、[Misconfigurations][2] と [Threats][3] が含まれています。
+[Datadog Cloud Security Management][1] (CSM) delivers real-time threat detection and continuous configuration audits across your entire cloud infrastructure. Powered by observability data, CSM includes [Misconfigurations][2] and [Threats][3].
 
-このガイドでは、CSM の導入と運用のためのベストプラクティスを説明します。
+This guide walks you through best practices for getting your team up and running with CSM.
 
-## フェーズ 1: デプロイメント
+## Phase 1: Deployment
 
-1. [Datadog Agent (バージョン 7.44 以上)][4] をインストールします。
-2. クラウドリソースとインフラストラクチャーに対して、CSM を有効にします。
-    - **CSM Threats**: [Kubernetes][5]、[Docker][6]、[ホストベース][7]のインストール。
-    - **CSM Misconfigurations**: [AWS][10]、[Azure][11]、[GCP][12]、[Kubernetes][8]、[Docker][9] の手順。
-3. [CSM ホームページ][13]をチェックして、組織のリスクと脅威の概要を把握します。
-4. [すぐに使える 500 以上の Threats と Misconfigurations の検出ルール][14]を確認します。
-5. [セキュリティシグナル][15]を探り、[CSM Misconfigurations の発見][16]を確認します。
-6. [通知ルール][17]を設定し、Slack、Jira、メールなどを使ってアラートを受け取ります。
+1. Install the [Datadog Agent (version 7.46 or above)][4].
+2. [Enable CSM for for your cloud resources and infrastructure][5]:
+    - **CSM Threats**: Kubernetes, Docker, and host-based installations.
+    - **CSM Misconfigurations**: AWS, Azure, GCP, Kubernetes, and Docker instructions.
+    - **CSM Identity Risks**: Enable AWS resource collection and Cloudtrail logs forwarding.
+    - **CSM Vulnerabilities**: Container image scanning and host scanning instructions for Kubernetes, ECS EC2 instances, and host-based installations.
+3. Check out the [CSM homepage][13] to get an overview of your organization's risks and threats.
+4. Review [500+ out-of-the-box Threats and Misconfigurations detection rules][14].
+5. Explore [security signals][15] and review [CSM Misconfigurations findings][16].
+6. Review and remediate [identity risks][28] on the [Identity Risks][29] page.
+7. Review container vulnerabilities on the [Container Images][25] page, and a consolidated list of vulnerabilities on the [Infrastructure Vulnerability][30] page.
+8. Set up [notification rules][17] and receive alerts using Slack, Jira, email, and more.
 
-## フェーズ 2: カスタマイズ
+## Phase 2: Customization
 
-1. [CSM Threats 抑制ルール][18]を設定し、ノイズを低減します。
-2. [CSM Misconfigurations][19] と [CSM Threats][20] のカスタム検出ルールを作成します。
+1. Set up [CSM Threats suppression rules][18] to reduce noise.
+2. Create custom detection rules for [CSM Misconfigurations][19] and [CSM Threats][20].
 
-## フェーズ 3: レポートとダッシュボード
+## Phase 3: Reports and dashboards
 
-1. [コンプライアンスレポート][21]を確認することで、組織の姿勢を評価します。
-2. すぐに使えるダッシュボードや、[独自に作成][22]したダッシュボードを使って、調査、報告、監視を迅速に行うことができます。
+1. Assess your organization's posture by reviewing [compliance reports][21].
+2. Use out-of-the-box dashboards or [create your own][22] for faster investigations, reporting, and monitoring.
+3. Subscribe to the weekly [security digest][31] reports to begin investigation and remediation of the most important new security issues discovered in the last seven days. 
 
-## その他の参考資料
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/security/cloud_security_management/
-[2]: /ja/security/cspm/
-[3]: /ja/security/cloud_workload_security/
+[1]: /security/cloud_security_management/
+[2]: /security/cloud_security_management/misconfigurations/
+[3]: /security/threats/
 [4]: https://app.datadoghq.com/account/settings/agent/latest
-[5]: /ja/security/cloud_workload_security/setup/?tab=kubernetes
-[6]: /ja/security/cloud_workload_security/setup/?tab=docker
-[7]: /ja/security/cloud_workload_security/setup/?tab=hostothers
-[8]: /ja/security/cspm/setup?tab=kubernetes
-[9]: /ja/security/cspm/setup?tab=docker
-[10]: /ja/security/cspm/setup?tab=aws
-[11]: /ja/security/cspm/setup?tab=azure
-[12]: /ja/security/cspm/setup?tab=gcp
+[5]: /security/cloud_security_management/setup
 [13]: https://app.datadoghq.com/security/csm
-[14]: /ja/security/default_rules/#cat-cloud-security-management
-[15]: /ja/security/cspm/signals_explorer/
-[16]: /ja/security/cspm/findings/
+[14]: /security/default_rules/#cat-cloud-security-management
+[15]: /security/cloud_security_management/misconfigurations/signals_explorer/
+[16]: /security/cloud_security_management/misconfigurations/findings/
 [17]: https://app.datadoghq.com/security/configuration/notification-rules
-[18]: /ja/security/cloud_security_management/guide/tuning-rules/
-[19]: /ja/security/cspm/custom_rules
-[20]: /ja/security/cloud_workload_security/agent_expressions
-[21]: /ja/security/cspm/frameworks_and_benchmarks
-[22]: /ja/dashboards/#overview
+[18]: /security/cloud_security_management/guide/tuning-rules/
+[19]: /security/cloud_security_management/misconfigurations/custom_rules
+[20]: /security/threats/agent_expressions
+[21]: /security/cloud_security_management/misconfigurations/frameworks_and_benchmarks
+[22]: /dashboards/#overview
+[25]: https://app.datadoghq.com/containers/images
+[26]: /integrations/amazon_web_services/?tab=roledelegation#cloud-security-posture-management
+[27]: /integrations/amazon_cloudtrail/#send-logs-to-datadog
+[28]: /security/cloud_security_management/identity_risks/
+[29]: https://app.datadoghq.com/security/identities
+[30]: https://app.datadoghq.com/security/infra-vulnerability
+[31]: https://app.datadoghq.com/security/configuration/reports

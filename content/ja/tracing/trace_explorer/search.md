@@ -1,43 +1,44 @@
 ---
-description: スパンをフィルターします。現在関心のあるスパンのサブセットに焦点を絞る、拡大する、またはシフトします。
+title: Search Spans
+kind: documentation
+description: 'Filter spans to narrow down, broaden, or shift your focus on the subset of spans of current interest.'
 further_reading:
-- link: tracing/trace_explorer/query_syntax
-  tag: ドキュメント
-  text: 検索構文
-title: スパンを検索する
+    - link: tracing/trace_explorer/query_syntax
+      tag: Documentation
+      text: Query Syntax
 ---
 
-## 概要
+## Overview
 
-個々のスパンからの情報はリストとして視覚化すると便利ですが、集計することで価値ある情報にアクセスできる場合もあります。この情報にアクセスするには、トレースエクスプローラーでスパンを検索し、時系列、トップリスト、またはテーブルとして表示します。
+While information from individual spans can be useful visualized as a list, sometimes valuable information can be accessed through aggregation. To access this information, search spans in the Trace Explorer and display them as timeseries, top lists, or tables.
 
-トレースエクスプローラーの検索は、時間範囲と `key:value` とフルテキスト検索を組み合わせた検索クエリで構成されています。視覚化する次元 (スパンの数、ユニークな値の数、定量的な次元の尺度) を選択し、時間枠を選択し、1 つまたは複数の次元でクエリをグループ化します。
+Trace Explorer search consists of a time range and a search query that combines `key:value` and full-text search. Choose which dimension to visualize (count of spans, count of unique values, measure of a quantitative dimension), select a time frame, and group the query by one or multiple dimensions.
 
-## 検索クエリ
+## Search query
 
-例えば、Web ストアサービスから過去 30 分間のエラーステータスのスパンを見つけるには、`service:web-store status:error` といったカスタムクエリを作成し、時間範囲を `Past 30 minutes` に設定します。
+For example, to find spans from a web store service, with an error status, over the past thirty minutes, create a custom query like `service:web-store status:error`, and set the time range to the `Past 30 minutes`:
 
-{{< img src="tracing/trace_explorer/search/trace_explorer_list_search.png" alt="ユーザーが 'service:web-store' と 'status:error' を検索した場合のトレースエクスプローラーリスト検索。リクエストバーチャート、エラーバーチャート、レイテンシーラインチャートが表示されます。Visualize As オプションは、List に設定されています。" style="width:100%;">}}
+{{< img src="tracing/trace_explorer/search/trace_explorer_list_search.png" alt="Trace Explorer list search, where user has searched for 'service:web-store' and 'status:error'. A requests bar chart, errors bar chart, and latency line chart are shown. The Visualize As option is set to List." style="width:100%;">}}
 
-トップリスト表示を選択し、クエリを `resource` でグループ化すると、どのリソースが最も影響を受けているかを確認することができます。
+Select a top list view, and group the query by `resource` to see which specific resources are most affected.
 
-{{< img src="tracing/trace_explorer/search/trace_explorer_top_list_search.png" alt="トレースエクスプローラーリスト検索。Visualize As オプションは、Top List に設定されています。" style="width:100%;">}}
+{{< img src="tracing/trace_explorer/search/trace_explorer_top_list_search.png" alt="Trace Explorer list search. The Visualize As option is set to Top List." style="width:100%;">}}
 
 {{< site-region region="us,eu,us3,us5,ap1" >}}
-**注**: `key:value` クエリでは、事前に[ファセットを宣言][1]する必要は**ありません**。
+**Note**: `key:value` queries **do not** require that you [declare a facet][1] beforehand.
 
-[1]: /ja/tracing/trace_explorer/query_syntax/#facets
+[1]: /tracing/trace_explorer/query_syntax/#facets
 {{< /site-region >}}
 
-## 検索構文
+## Query Syntax
 
-トレースエクスプローラーでスパンの検索を始めるには、[クエリ構文ドキュメント][2]を参照し、カスタムタイムフレームの詳細については、[タイムフレームドキュメント][3]をお読みください。
+To begin searching for spans in the Trace Explorer, read the [query syntax documentation][2] and the [time frame documentation][3] for more details on custom time frames.
 
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/tracing/trace_explorer/query_syntax/#facets
-[2]: /ja/tracing/trace_explorer/query_syntax
-[3]: /ja/dashboards/guide/custom_time_frames
+[1]: /tracing/trace_explorer/query_syntax/#facets
+[2]: /tracing/trace_explorer/query_syntax
+[3]: /dashboards/guide/custom_time_frames

@@ -1,128 +1,128 @@
 ---
-description: Azure App Services の Datadog サポート
-
-title: Azure App Services のサポート
+title: Support for Azure App Services
+kind: faq
+description: "Datadog support for Azure App Services"
 ---
 
-| 略語 | 機能 |
+| Abbreviation | Feature |
 | ------------ | ------- |
-| IM | インテグレーションメトリクス |
-| IL | Azure インテグレーションログ |
-| T | トレーシング |
-| CM | カスタムメトリクス |
+| IM | Integration Metrics |
+| IL | Azure Integration Logs |
+| T | Tracing |
+| CM | Custom Metrics |
 | P | Profiling |
-| DL | 直接ロギング |
+| DL | Direct Logging |
 
 ### Windows
 
 <table>
     <tr>
-        <th>アプリタイプ</th>
-        <th>プラン</th>
+        <th>App Type</th>
+        <th>Plan</th>
         <th>.NET</th>
         <th>Java</th>
-        <th>Node</th>
+        <th>Node.js</th>
         <th>PHP</th>
-        <th>コンテナ</th>
+        <th>Container</th>
     </tr>
     <tr>
         <td rowspan="3">
-            Web/API アプリ
+            Web/API App
         </td>
         <td>
-            スタンダード + プレミアム
+            Standard + Premium
         </td>
-        <td>IM、IL、T、CM、P</td>
-        <td>IM、IL、T+、CM+</td>
-        <td>IM、IL</td>
-        <td>IM、IL</td>
-        <td>IM、IL</td>
+        <td>IM, IL, T, CM, P</td>
+        <td>IM, IL, T+, CM+</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
     </tr>
     <tr>
         <td>
-            消費
+            Consumption
         </td>
-        <td>IM、IL</td>
-        <td>IM、IL</td>
-        <td>IM、IL</td>
-        <td>IM、IL</td>
-        <td>IM、IL</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
     </tr>
     <tr>
         <td>
-            アプリサービス環境 (分離)
+            App Service Environment (Isolated)
         </td>
-        <td>IM、IL</td>
-        <td>IM、IL</td>
-        <td>IM、IL</td>
-        <td>IM、IL</td>
-        <td>IM、IL</td>
-    </tr>
-    <tr>
-        <td rowspan="3">
-            関数アプリ
-        </td>
-        <td>
-            スタンダード + プレミアム
-        </td>
-        <td>IM、IL、T、CM、P</td>
-        <td>IM、IL、T+、CM+</td>
-        <td>IM、IL</td>
-        <td>IM、IL</td>
-        <td>IM、IL</td>
-    </tr>
-    <tr>
-        <td>
-            消費
-        </td>
-        <td>IM、IL</td>
-        <td>IM、IL</td>
-        <td>IM、IL</td>
-        <td>IM、IL</td>
-        <td>IM、IL</td>
-    </tr>
-    <tr>
-        <td>
-            アプリサービス環境 (分離)
-        </td>
-        <td>IM、IL</td>
-        <td>IM、IL</td>
-        <td>IM、IL</td>
-        <td>IM、IL</td>
-        <td>IM、IL</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
     </tr>
     <tr>
         <td rowspan="3">
-            Web ジョブ
+            Function App
         </td>
         <td>
-            スタンダード + プレミアム
+            Standard + Premium
         </td>
-        <td>IM、IL</td>
-        <td>IM、IL</td>
-        <td>IM、IL</td>
-        <td>IM、IL</td>
-        <td>IM、IL</td>
+        <td>IM, IL, T, CM, P</td>
+        <td>IM, IL, T+, CM+</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
     </tr>
     <tr>
         <td>
-            消費
+            Consumption
         </td>
-        <td>IM、IL</td>
-        <td>IM、IL</td>
-        <td>IM、IL</td>
-        <td>IM、IL</td>
-        <td>IM、IL</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
     </tr>
     <tr>
         <td>
-            アプリサービス環境 (分離)
+            App Service Environment (Isolated)
         </td>
-        <td>IM、IL</td>
-        <td>IM、IL</td>
-        <td>IM、IL</td>
-        <td>IM、IL</td>
-        <td>IM、IL</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+    </tr>
+    <tr>
+        <td rowspan="3">
+            Web Jobs
+        </td>
+        <td>
+            Standard + Premium
+        </td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+    </tr>
+    <tr>
+        <td>
+            Consumption
+        </td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+    </tr>
+    <tr>
+        <td>
+            App Service Environment (Isolated)
+        </td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
     </tr>
 </table>
 
@@ -130,92 +130,92 @@ title: Azure App Services のサポート
 
 <table>
     <tr>
-        <th>アプリタイプ</th>
-        <th>プラン</th>
+        <th>App Type</th>
+        <th>Plan</th>
         <th>.NET</th>
         <th>Java</th>
-        <th>Node</th>
+        <th>Node.js</th>
         <th>Python</th>
         <th>Ruby</th>
         <th>PHP</th>
-        <th>コンテナ</th>
+        <th>Container</th>
     </tr>
     <tr>
         <td rowspan="3">
-            Web/API アプリ
+            Web/API App
         </td>
         <td>
-            スタンダード + プレミアム
+            Standard + Premium
         </td>
-        <td>IM、IL、T+、CM+</td>
-        <td>IM、IL、T+、CM+</td>
-        <td>IM、IL、T+、CM+</td>
-        <td>IM、IL、T+、CM+</td>
-        <td>IM、IL、T+、CM+</td>
-        <td>IM、IL、T+、CM+</td>
-        <td>IM、IL、T+、CM+</td>
+        <td>IM, IL, T+, CM+</td>
+        <td>IM, IL, T+, CM+</td>
+        <td>IM, IL, T+, CM+</td>
+        <td>IM, IL, T+, CM+</td>
+        <td>IM, IL, T+, CM+</td>
+        <td>IM, IL, T+, CM+</td>
+        <td>IM, IL, T+, CM+</td>
     </tr>
     <tr>
         <td>
-            消費
+            Consumption
         </td>
-        <td>IM、IL</td>
-        <td>IM、IL</td>
-        <td>IM、IL</td>
-        <td>IM、IL</td>
-        <td>IM、IL</td>
-        <td>IM、IL</td>
-        <td>IM、IL</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
     </tr>
     <tr>
         <td>
-            アプリサービス環境 (分離)
+            App Service Environment (Isolated)
         </td>
-        <td>IM、IL</td>
-        <td>IM、IL</td>
-        <td>IM、IL</td>
-        <td>IM、IL</td>
-        <td>IM、IL</td>
-        <td>IM、IL</td>
-        <td>IM、IL</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
     </tr>
     <tr>
         <td rowspan="3">
-            関数アプリ
+            Function App
         </td>
         <td>
-            スタンダード + プレミアム
+            Standard + Premium
         </td>
-        <td>IM、IL、T、CM、P</td>
-        <td>IM、IL、T+、CM+</td>
-        <td>IM、IL</td>
-        <td>IM、IL</td>
-        <td>IM、IL</td>
-        <td>IM、IL</td>
-        <td>IM、IL</td>
+        <td>IM, IL, T, CM, P</td>
+        <td>IM, IL, T+, CM+</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
     </tr>
     <tr>
         <td>
-            消費
+            Consumption
         </td>
-        <td>IM、IL</td>
-        <td>IM、IL</td>
-        <td>IM、IL</td>
-        <td>IM、IL</td>
-        <td>IM、IL</td>
-        <td>IM、IL</td>
-        <td>IM、IL</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
     </tr>
     <tr>
         <td>
-            アプリサービス環境 (分離)
+            App Service Environment (Isolated)
         </td>
-        <td>IM、IL</td>
-        <td>IM、IL</td>
-        <td>IM、IL</td>
-        <td>IM、IL</td>
-        <td>IM、IL</td>
-        <td>IM、IL</td>
-        <td>IM、IL</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
+        <td>IM, IL</td>
     </tr>
 </table>

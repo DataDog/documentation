@@ -1,19 +1,19 @@
 ---
-disable_sidebar: true
-title: 認可スコープ
+title: Authorization Scopes
 type: documentation
+disable_sidebar: true
 ---
-## 認可スコープ
+## Authorization scopes
 
-スコープは、アプリケーションが組織の Datadog データにアクセスする際の粒度を制限し、定義できるようにするための認可メカニズムです。ユーザーやサービスアカウントの代わりにアクセスを許可されると、アプリケーションは明示的に要求された情報のみにアクセスでき、それ以上にはアクセスできません。
+Scope is an authorization mechanism that allows you to limit and define the granular access that applications have to an organization's Datadog data. When authorized access on behalf of a user or service account, applications can access only the information explicitly requested and nothing more.
 
-アプリケーションのスコープに関するベストプラクティスは、アプリケーションが意図したとおりに機能するために必要な最小限の特権と最も制限の多いスコープを維持することです。これにより、ユーザーはアプリケーションへのきめ細かなアクセス制御が可能になり、アプリケーションがどのようにデータを使用しているかが透けて見えるようになります。たとえば、ダッシュボードのデータを読み取るだけのサードパーティアプリケーションには、組織内のユーザーを削除または管理する権限は必要ありません。
+The best practice for scoping applications is to maintain the minimal privileges and most restrictive scopes necessary for an application to function as intended. This gives users fine-grained access control of applications and transparency into how an application is using their data. For example, a third-party application that only reads dashboard data does not need permissions to delete or manage users in an organization.
 
-Datadog では、次の 2 つの方法でスコープを使用することができます。
-- [Datadog Apps][1] の OAuth2 クライアントをスコープする
-- [アプリケーションキー][2]をスコープする
+You may use scopes two ways with Datadog:
+- Scope OAuth2 clients for your [Datadog Apps][1]
+- Scope your [application keys][2] 
 
 {{< api-scopes >}}
 
-[1]: https://docs.datadoghq.com/ja/developers/datadog_apps/#oauth-api-access
-[2]: https://docs.datadoghq.com/ja/account_management/api-app-keys/
+[1]: https://docs.datadoghq.com/developers/datadog_apps/#oauth-api-access
+[2]: https://docs.datadoghq.com/account_management/api-app-keys/

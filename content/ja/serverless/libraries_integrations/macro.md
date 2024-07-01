@@ -1,36 +1,37 @@
 ---
 aliases:
-- /ja/serverless/serverless_integrations/macro/
+- /serverless/serverless_integrations/macro/
 dependencies:
-- https://github.com/DataDog/datadog-cloudformation-macro/blob/main/serverless/README.md
-title: Datadog のサーバーレスマクロ
+- "https://github.com/DataDog/datadog-cloudformation-macro/blob/main/serverless/README.md"
+kind: documentation
+title: Datadog Serverless Macro
 ---
 ![build_serverless](https://github.com/DataDog/datadog-cloudformation-macro/workflows/build_serverless/badge.svg)
 [![Slack](https://chat.datadoghq.com/badge.svg?bg=632CA6)](https://chat.datadoghq.com/)
 
-Datadog では、AWS SAM をご利用のお客様のサーバーレスアプリケーションのデプロイに、サーバーレスの CloudFormation マクロをおすすめしています。
+Datadog recommends the Serverless CloudFormation macro for customers using AWS SAM to deploy their serverless applications.
 
-以下を行うことで、サーバーレスアプリケーションからのメトリクス、トレース、ログの収集をマクロで自動的に構成できます。
+The macro automatically configures ingestion of metrics, traces, and logs from your serverless applications by:
 
-- [Python][1]、[Node.js][2]、[.NET][9]、および [Java][10] Lambda 関数用に Datadog Lambda ライブラリおよび Lambda 拡張機能をインストールし構成。
-- Lambda 関数からの拡張 Lambda メトリクスおよびカスタムメトリクスの収集を有効化。
-- 必要に応じて、Datadog Forwarder から Lambda 関数ロググループへのサブスクリプションを管理。
+- Installing and configuring the Datadog Lambda Library and Lambda Extension for your [Python][1], [Node.js][2], [.NET][9], and [Java][10] Lambda functions.
+- Enabling the collection of enhanced Lambda metrics and custom metrics from your Lambda functions.
+- Managing subscriptions from the Datadog Forwarder to your Lambda function log groups, if desired.
 
-## インストール
+## Installation
 
-AWS アカウントで Datadog サーバーレスマクロを使用可能にするには、Datadog のテンプレートで CloudFormation スタックをデプロイします。このデプロイには、CloudFormation マクロリソースと、マクロを実行したときに呼び出される Lambda 関数が含まれます。このスタックを有効にすると、同じアカウントにデプロイされた他の CloudFormation スタックにマクロを使用できるようになります。アカウントのマクロ定義に関する詳細は、[CloudFormation ドキュメントページ][3]を参照してください。
+To make the Datadog serverless macro available for use in your AWS account, deploy a CloudFormation stack with a Datadog-provided template. This deployment includes a CloudFormation macro resource and a Lambda function that is invoked when the macro is run. Deploying this stack enables you to use the macro on other CloudFormation stacks deployed in the same account. For more details about defining a macro in your account, see the [CloudFormation documentation page][3].
 
-**注:** Datadog サーバーレスマクロは、変換したいスタックを含む各リージョンで一度だけ作成する必要があります。
+**Note:** The Datadog serverless macro needs to be created once in each region that contains stacks you wish to transform.
 
-### オプション 1: AWS Console
+### Option 1: AWS Console
 
 [![Launch Stack](https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png)](https://console.aws.amazon.com/cloudformation/home?region=sa-east-1#/stacks/quickCreate?stackName=datadog-serverless-macro&templateURL=https://datadog-cloudformation-template.s3.amazonaws.com/aws/serverless-macro/latest.yml)
 
-上記の `Launch Stack` テンプレートリンクを使用して、AWS アカウントで Datadog サーバーレスマクロスタックを作成します。
+Create the Datadog serverless macro stack in your AWS account using the `Launch Stack` template link above.
 
-### オプション 2: AWS CLI
+### Option 2: AWS CLI
 
-初めてインストールする場合は、以下のようにデプロイします。
+If you are installing for the first time, deploy with:
 
 ```bash
 aws cloudformation create-stack \
@@ -39,9 +40,9 @@ aws cloudformation create-stack \
   --capabilities CAPABILITY_AUTO_EXPAND CAPABILITY_IAM
 ```
 
-## AWS SAM での使用
+## Usage with AWS SAM
 
-SAM を使用してサーバーレスアプリケーションをデプロイするには、必要な SAM 変換の後に Datadog Serverless CloudFormation マクロを `template.yml` ファイルの `Transform` セクションに追加します。また、パラメーターを追加してマクロに渡すことで、Datadog ソースコードインテグレーションを有効化します。
+To deploy your serverless application with SAM, add the Datadog Serverless CloudFormation macro under the `Transform` section in your `template.yml` file, after the required SAM transform. Also add a `DDGitData` parameter and pass it to the macro to enable Datadog Source Code Integration:
 
 ```yaml
 Transform:
@@ -50,15 +51,15 @@ Transform:
     Parameters:
       stackName: !Ref "AWS::StackName"
       apiKey: "<DATADOG_API_KEY>"
-      pythonLayerVersion: "<LAYER_VERSION>" # 他のランタイムには適切なパラメーターを使用
+      pythonLayerVersion: "<LAYER_VERSION>" # Use appropriate parameter for other runtimes
       extensionLayerVersion: "<LAYER_VERSION>"
-      service: "<SERVICE>" # オプション
-      env: "<ENV>" # オプション
-      version: "<VERSION>" # オプション
-      tags: "<TAGS>" # オプション
-      # ソースコードインテグレーションのタグ付けを有効にするには、ここで DDGitData を渡す
+      service: "<SERVICE>" # Optional
+      env: "<ENV>" # Optional
+      version: "<VERSION>" # Optional
+      tags: "<TAGS>" # Optional
+      # Pass DDGitData here to enable Source Code Integration tagging
       gitData: !Ref DDGitData
-      # その他のパラメーターについては、構成セクションを参照
+      # For additional parameters, see the Configuration section
 
 Parameters:
   DDGitData:
@@ -67,15 +68,15 @@ Parameters:
     Description: "The output of $(git rev-parse HEAD),$(git config --get remote.origin.url). Used for Datadog Source Code Integration tagging"
 ```
 
-Datadog のソースコードインテグレーションで `DDGitData` パラメーターを設定するには、SAM の `--parameter-overrides` オプションを使用します。
+To set the `DDGitData` parameter for Datadog's Source Code Integration, use SAM's `--parameter-overrides` option:
 
 ```bash
 sam deploy --parameter-overrides  DDGitData="$(git rev-parse HEAD),$(git config --get remote.origin.url)"
 ```
 
-注: マクロをインストールしたときに、提供された `template.yml` ファイルを変更しないと、アカウントに定義されたマクロ名は `DatadogServerless` になります。オリジナルのテンプレートを変更する場合は、個々に追加する変換の名前が `AWS::CloudFormation::Macro` リソースの `Name` プロパティと一致するようにしてください。
+Note: If you did not modify the provided `template.yml` file when you installed the macro, then the name of the macro defined in your account will be `DatadogServerless`. If you have modified the original template, make sure the name of the transform you add here matches the `Name` property of the `AWS::CloudFormation::Macro` resource.
 
-注: 構成の一部を一度だけ指定したい場合は、`template.yml` を修正して、そのリージョンに設定したい環境変数を追加することができます。これは、追加のデフォルト値を制御するための方法です。以下の例では、`DD_API_KEY_SECRET_ARN` と `DD_ENV` を設定していますが、マクロはこれをデフォルト値として扱います。
+Note: If you want to specify some of the configuration only once, you can modify `template.yml` and add the environment variables you want to configure for that region. This is a way to control additional default values. The example below sets `DD_API_KEY_SECRET_ARN` and `DD_ENV`, which the macro will treats as default values:
 
 ```yaml
 Resources:
@@ -97,9 +98,9 @@ Resources:
           DD_ENV: "dev"
 ```
 
-## 更新
+## Updating
 
-新リリース後にマクロを更新する場合は、`update-stack` メソッドを使用します。
+If you are updating the macro after a new release, use the `update-stack` method:
 
 ```bash
 aws cloudformation update-stack \
@@ -108,61 +109,61 @@ aws cloudformation update-stack \
   --capabilities CAPABILITY_AUTO_EXPAND CAPABILITY_IAM
 ```
 
-また、最新の [リリース](https://github.com/DataDog/datadog-cloudformation-macro/releases)からマクロのバージョンを指定することもできます。それには、`latest.yml` をリリースバージョンに置き換えます (例: `0.1.2.yml`)。
+You may also specify a version of the macro from the latest [releases](https://github.com/DataDog/datadog-cloudformation-macro/releases) by replacing `latest.yml` with the release version, e.g. `0.1.2.yml`.
 
-## コンフィギュレーション
+## Configuration
 
-プラグインをさらに構成するには、以下のカスタムパラメーターを使用します。
+To further configure your plugin, use the following custom parameters:
 
-| パラメーター                   | 説明                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| Parameter                   | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 | --------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `addLayers`                 | Lambda レイヤーを追加またはユーザーが独自のレイヤーを使用。デフォルトは true。「true」の場合、Lambda ライブラリのバージョン変数も必要になります。「false」の場合は、関数のデプロイメントパッケージに Datadog Lambda ライブラリを含める必要があります。                                                                                                                                                                                                                                        |
-| `pythonLayerVersion`        | インストールする Python Lambda レイヤーのバージョン（例: "21"）。Python で記述された Lambda 関数を 1 つ以上デプロイする場合で、`addLayers` が「true」のときは必須。最新バージョンの数字は、[https://github.com/DataDog/datadog-lambda-python/releases][5] で確認できます。                                                                                                                                                                                                                              |
-| `nodeLayerVersion`          | インストールする Node.js Lambda レイヤーのバージョン（例: "29"）。Node.js で記述された Lambda 関数を 1 つ以上デプロイする場合で、`addLayers` が「true」のときは必須。最新バージョンの数字は、[https://github.com/DataDog/datadog-lambda-js/releases][6] で確認できます。                                                                                                                                                                                                                                |
-| `dotnetLayerVersion`        | インストールする .NET Lambda レイヤーのバージョン（例: "14"）。.NET で記述された Lambda 関数を 1 つ以上デプロイする場合で、`addLayers` が「true」のときは必須。最新バージョンの数字は、[https://github.com/DataDog/dd-trace-dotnet-aws-lambda-layer/releases][9] で確認できます。
-| `javaLayerVersion`        | インストールする Java Lambda レイヤーのバージョン（例: "12"）。Java で記述された Lambda 関数を 1 つ以上デプロイする場合で、`addLayers` が「true」のときは必須。最新バージョンの数字は、[https://github.com/DataDog/datadog-lambda-java/releases][10] で確認できます。
-| `extensionLayerVersion`     | "5" など、インストールする Datadog Lambda Extension レイヤーのバージョン。`extensionLayerVersion` が設定されている場合は、`apiKey` (暗号化の場合は `apiKMSKey` または `apiKeySecretArn`) の設定も必要となります。`extensionLayerVersion` を使用する場合は、`forwarderArn` を設定しないでください。Lambda Extension の詳細は[こちら][8]。                                                                                                                                                                                   |
-| `forwarderArn`              | 設定すると、プラグインにより関数のロググループが自動的に Datadog Forwarder にサブスクライブされます。または、[AWS::Logs::SubscriptionFilter][7] リソースを使用してログサブスクリプションを定義できます。**注**: ロググループおよびサブスクリプションフィルターの作成にはマクロに関数名が必要なため、初めてデプロイされる関数には 'FunctionName' プロパティが定義されている必要があります。'FunctionName' に、`!Sub` などの CloudFormation 関数を含めることはできません。 |
-| `stackName`                 | デプロイする CloudFormation スタックの名前。`forwarderArn` が提供されていて、Lambda 関数が動的に命名されている (`FunctionName` プロパティが Lambda に提供されていない) 場合のみ必須。このパラメーターを SAM および CDK に追加する方法については、以下の例を参照してください。                                                                                                                                                                                          |
-| `flushMetricsToLogs`        | Datadog Forwarder Lambda 関数を使用して、ログ経由でカスタムメトリクスを送信します (推奨)。デフォルトは `true`。`false` に設定した場合、Datadog API キーを `apiKey` (暗号化の場合は `apiKMSKey` または `apiKeySecretArn`) を使用して定義する必要があります。                                                                                                                                                                                                                                                             |
-| `site`                      | データを送信する Datadog サイトを設定します。flushMetricsToLogs が `false` の場合にのみ必要です。可能な値は、`datadoghq.com`、`datadoghq.eu`、`us3.datadoghq.com`、`us5.datadoghq.com`、`ap1.datadoghq.com`、`ddog-gov.com` です。デフォルトは `datadoghq.com` です。                                                                                                                                                                                                                                        |
-| `apiKey`                    | Datadog API キー。`flushMetricsToLogs` が `false` の場合のみ必要。                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| `apiKeySecretArn`           | AWS Secrets Manager で Datadog の API キーを保存しているシークレットの ARN。`flushMetricsToLogs` が `false` の場合や `extensionLayerVersion` が設定されている場合に、`apiKey` の代わりにこのパラメータを使用することができます。Lambda  の実行ロールに `secretsmanager:GetSecretValue` アクセス許可を追加することを忘れないようにしましょう。                                                                                                                                                                                                              |
-| `apiKMSKey`                 | KMS を使用して暗号化された Datadog API キー。`flushMetricsToLogs` が「false」で、KMS 暗号化を使用している場合、`apiKey` の代わりにこのパラメーターを使用します。                                                                                                                                                                                                                                                                                                                                                  |
-| `enableEnhancedMetrics`     | Lambda 関数の拡張メトリクスを有効にします。デフォルトは `true`。Datadog Forwarder Lambda 関数が関数ロググループにサブスクライブする必要があります。                                                                                                                                                                                                                                                                                                                                                      |
-| `enableXrayTracing`         | Lambda 関数のトレースを有効にします。デフォルトは「false」。                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| `enableDDTracing`           | dd-trace、Datadog の APM ライブラリを使用して Lambda 関数のトレースを有効にします。デフォルトは `true`。Datadog Forwarder Lambda 関数が関数ロググループにサブスクライブする必要があります。                                                                                                                                                                                                                                                                                                                           |
-| `enableDDLogs`              | Lambda 関数の Datadog ログ収集を有効にします。注: この設定は、Datadog Forwarder を介して送信されるログには影響しません。デフォルトは true です。                                                                                                                                                                                                                                                                                                                                                   |
-| `service`                   | `extensionLayerVersion` と共に設定すると、マクロによって指定した値を持つすべての Lambda 関数に `DD_SERVICE` 環境変数が追加されます。`forwarderArn` と共に設定すると、マクロによって指定した値を持つすべての Lambda 関数に `service` タグが追加されます。                                                                                                                                                                                                                        |
-| `env`                       | `extensionLayerVersion` と共に設定すると、マクロによって指定した値を持つすべての Lambda 関数に `DD_ENV` 環境変数が追加されます。`forwarderArn` と共に設定すると、マクロによって指定した値を持つすべての Lambda 関数に `env` タグが追加されます。                                                                                                                                                                                                                               |
-| `version`                   | `extensionLayerVersion` と共に設定すると、マクロによって指定した値を持つすべての Lambda 関数に `DD_VERSION` 環境変数が追加されます。`forwarderArn` と共に設定すると、マクロによって指定した値を持つすべての Lambda 関数に `version` タグが追加されます。                                                                                                                                                                                                                        |
-| `tags`                      | 1 つの文字列としての key:value のペアのカンマ区切りのリスト。`extensionLayerVersion` と共に設定すると、すべての Lambda 関数に `DD_TAGS` 環境変数が追加され、指定した値が設定されます。`forwarderArn` と共に指定すると、マクロは文字列をパースして、各 key:value ペアをタグとしてすべての Lambda 関数に設定します。                                                                                                                                                                |
-| `logLevel`                  | ログのレベルを設定します。拡張ロギングの場合 `DEBUG` に設定します。                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| `captureLambdaPayload`      | 関数の実行スパンにリクエストと応答のペイロードを自動的にタグ付けして、APM アプリケーションに表示できるようにします。                                                                                                                                                                                                                                                                                                                                                                 |
-| `enableColdStartTracing`    | コールドスタートトレースを無効にするには、`false` に設定します。NodeJS と Python で使用されます。デフォルトは `true` です。                                                                                                                                                                                                                                                                                                                                                                                                        |
-| `coldStartTraceMinDuration` | コールドスタートトレースでトレースするモジュールロードイベントの最小継続時間 (ミリ秒) を設定します。数値。デフォルトは `3` です。                                                                                                                                                                                                                                                                                                                                                                   |
-| `coldStartTraceSkipLibs`    | オプションで、カンマで区切られたライブラリのリストに対してコールドスタートスパンの作成をスキップすることができます。深さを制限したり、既知のライブラリをスキップするのに便利です。デフォルトはランタイムに依存します。                                                                                                                                                                                                                                                                                                                                       |
-| `enableProfiling`           | Datadog Continuous Profiler を `true` で有効にします。NodeJS と Python のベータ版でサポートされています。デフォルトは `false` です。                                                                                                                                                                                                                                                                                                                                                                                   |
-| `encodeAuthorizerContext`   | Lambda オーサライザーで `true` に設定すると、トレースコンテキストがレスポンスにエンコードされて伝搬されます。NodeJS と Python でサポートされています。デフォルトは `true` です。                                                                                                                                                                                                                                                                                                                              |
-| `decodeAuthorizerContext`   | Lambda オーサライザーで認可された Lambda に対して `true` を設定すると、エンコードされたトレースコンテキストをパースして使用します (見つかった場合)。NodeJS と Python でサポートされています。デフォルトは `true` です。                                                                                                                                                                                                                                                                                                       |
-| `apmFlushDeadline`          | タイムアウトが発生する前にスパンを送信するタイミングをミリ秒単位で決定するために使用されます。AWS Lambda の呼び出しの残り時間が設定された値よりも小さい場合、トレーサーは、現在のアクティブなスパンとすべての終了したスパンの送信を試みます。NodeJS と Python でサポートされています。デフォルトは `100` ミリ秒です。                                                                                                                                                                                    |
+| `addLayers`                 | Whether to add the Lambda Layers or expect the user to bring their own. Defaults to true. When true, the Lambda Library version variables are also required. When false, you must include the Datadog Lambda library in your functions' deployment packages.                                                                                                                                                                                                                                        |
+| `pythonLayerVersion`        | Version of the Python Lambda layer to install, such as "21". Required if you are deploying at least one Lambda function written in Python and `addLayers` is true. Find the latest version number from [https://github.com/DataDog/datadog-lambda-python/releases][5].                                                                                                                                                                                                                              |
+| `nodeLayerVersion`          | Version of the Node.js Lambda layer to install, such as "29". Required if you are deploying at least one Lambda function written in Node.js and `addLayers` is true. Find the latest version number from [https://github.com/DataDog/datadog-lambda-js/releases][6].                                                                                                                                                                                                                                |
+| `dotnetLayerVersion`        | Version of the .NET Lambda layer to install, such as "14". Required if you are deploying at least one Lambda function written in .NET and `addLayers` is true. Find the latest version number from [https://github.com/DataDog/dd-trace-dotnet-aws-lambda-layer/releases][9].
+| `javaLayerVersion`        | Version of the Java Lambda layer to install, such as "12". Required if you are deploying at least one Lambda function written in Java and `addLayers` is true. Find the latest version number from [https://github.com/DataDog/datadog-lambda-java/releases][10].
+| `extensionLayerVersion`     | Version of the Datadog Lambda Extension layer to install, such as "5". When `extensionLayerVersion` is set, `apiKey` (or if encrypted, `apiKMSKey` or `apiKeySecretArn`) needs to be set as well. While using `extensionLayerVersion` do not set `forwarderArn`. Learn more about the Lambda extension [here][8].                                                                                                                                                                                   |
+| `forwarderArn`              | When set, the plugin will automatically subscribe the functions' log groups to the Datadog Forwarder. Alternatively, you can define the log subscription using the [AWS::Logs::SubscriptionFilter][7] resource. **Note**: The 'FunctionName' property must be defined for functions that are deployed for the first time because the macro needs the function name to create the log groups and subscription filters. 'FunctionName' must NOT contain any CloudFormation functions, such as `!Sub`. |
+| `stackName`                 | The name of the CloudFormation stack being deployed. Only required when a `forwarderArn` is provided and Lambda functions are dynamically named (when the `FunctionName` property isn't provided for a Lambda). For more information on how to add this parameter for SAM and CDK, see the examples below.                                                                                                                                                                                          |
+| `flushMetricsToLogs`        | Send custom metrics via logs with the Datadog Forwarder Lambda function (recommended). Defaults to `true`. When set to `false`, the Datadog API key must be defined using `apiKey` (or if encrypted, `apiKMSKey` or `apiKeySecretArn`).                                                                                                                                                                                                                                                             |
+| `site`                      | Set which Datadog site to send data, only needed when flushMetricsToLogs is `false`. Possible values are `datadoghq.com`, `datadoghq.eu`, `us3.datadoghq.com`, `us5.datadoghq.com`, `ap1.datadoghq.com`, and `ddog-gov.com`. The default is `datadoghq.com`.                                                                                                                                                                                                                                        |
+| `apiKey`                    | The Datadog API Key, only needed when `flushMetricsToLogs` is set to `false`.                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| `apiKeySecretArn`           | The ARN of the secret storing the Datadog API key in AWS Secrets Manager. Use this parameter in place of `apiKey` when `flushMetricsToLogs` is `false` or `extensionLayerVersion` is set. Remember to add the `secretsmanager:GetSecretValue` permission to the Lambda execution role.                                                                                                                                                                                                              |
+| `apiKMSKey`                 | Datadog API Key encrypted using KMS. Use this parameter in place of `apiKey` when `flushMetricsToLogs` is false, and you are using KMS encryption.                                                                                                                                                                                                                                                                                                                                                  |
+| `enableEnhancedMetrics`     | Enable enhanced metrics for Lambda functions. Defaults to `true`. The Datadog Forwarder Lambda function must subscribe the function log group.                                                                                                                                                                                                                                                                                                                                                      |
+| `enableXrayTracing`         | Enable tracing on Lambda functions. Defaults to false.                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| `enableDDTracing`           | Enable tracing on Lambda function using dd-trace, Datadog's APM library. Defaults to `true`. The Datadog Forwarder Lambda function must subscribe the function log group.                                                                                                                                                                                                                                                                                                                           |
+| `enableDDLogs`              | Enable Datadog log collection for the Lambda function. Note: This setting has no effect on logs sent via the Datadog Forwarder. Defaults to true.                                                                                                                                                                                                                                                                                                                                                   |
+| `service`                   | When set along with the `extensionLayerVersion`, the macro adds a `DD_SERVICE` environment variable to all lambda functions with the provided value. When set along with the `forwarderArn`, the macro adds a `service` tag to all Lambda functions with the provided value.                                                                                                                                                                                                                        |
+| `env`                       | When set along with the `extensionLayerVersion`, the macro adds a `DD_ENV` environment variable to all lambda functions with the provided value. When set along with the `forwarderArn`, the macro adds an `env` tag to all Lambda functions with the provided value.                                                                                                                                                                                                                               |
+| `version`                   | When set along with the `extensionLayerVersion`, the macro adds a `DD_VERSION` environment variable to all lambda functions with the provided value. When set along with the `forwarderArn`, the macro adds a `version` tag to all Lambda functions with the provided value.                                                                                                                                                                                                                        |
+| `tags`                      | A comma separated list of key:value pairs as a single string. When set along with `extensionLayerVersion`, a `DD_TAGS` environment variable is added on all Lambda functions with the provided value. When set along with `forwarderArn`, the macro parses the string and sets each key:value pair as a tag on all Lambda functions.                                                                                                                                                                |
+| `logLevel`                  | Sets the log level. Set to `DEBUG` for extended logging.                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| `captureLambdaPayload`      | Automatically tags the function execution span with request and response payloads, so they can be displayed in the APM application.                                                                                                                                                                                                                                                                                                                                                                 |
+| `enableColdStartTracing`    | Set to `false` to disable Cold Start Tracing. Used in NodeJS and Python. Defaults to `true`.                                                                                                                                                                                                                                                                                                                                                                                                        |
+| `coldStartTraceMinDuration` | Sets the minimum duration (in milliseconds) for a module load event to be traced via Cold Start Tracing. Number. Defaults to `3`.                                                                                                                                                                                                                                                                                                                                                                   |
+| `coldStartTraceSkipLibs`    | optionally skip creating Cold Start Spans for a comma-separated list of libraries. Useful to limit depth or skip known libraries. Default depends on runtime.                                                                                                                                                                                                                                                                                                                                       |
+| `enableProfiling`           | Enable the Datadog Continuous Profiler with `true`. Supported in Beta for NodeJS and Python. Defaults to `false`.                                                                                                                                                                                                                                                                                                                                                                                   |
+| `encodeAuthorizerContext`   | When set to `true` for Lambda authorizers, the tracing context will be encoded into the response for propagation. Supported for NodeJS and Python. Defaults to `true`.                                                                                                                                                                                                                                                                                                                              |
+| `decodeAuthorizerContext`   | When set to `true` for Lambdas that are authorized via Lambda authorizers, it will parse and use the encoded tracing context (if found). Supported for NodeJS and Python. Defaults to `true`.                                                                                                                                                                                                                                                                                                       |
+| `apmFlushDeadline`          | Used to determine when to submit spans before a timeout occurs, in milliseconds. When the remaining time in an AWS Lambda invocation is less than the value set, the tracer attempts to submit the current active spans and all finished spans. Supported for NodeJS and Python. Defaults to `100` milliseconds.                                                                                                                                                                                    |
 
-## UDS の仕組み
+## How it works
 
-このマクロにより CloudFormation テンプレートが変更され、[Node.js][2]、[Python][1]、[.NET][9]、および [Java][10] 用の Lambda レイヤーを関数にアタッチすることで Datadog Lambda ライブラリがインストールされます。そして、コードの変更を必要とせずに、Lambda ライブラリを初期化する置換ハンドラーへリダイレクトされます。
+This macro modifies your CloudFormation template to install the Datadog Lambda Library by attaching the Lambda Layers for [Node.js][2], [Python][1], [.NET][9], and [Java][10] to your functions. It redirects to a replacement handler that initializes the Lambda Library without any required code changes.
 
-## ヘルプ
+## Troubleshooting
 
-### デバッグログ
+### Debug Logs
 
-デバッグの問題が発生した場合は、CloudWatch ログでマクロ Lambda 関数を確認することができます。CloudWatch ログへのアクセス方法:
+In order to help debug issues, you can look at the CloudWatch Logs for the macro Lambda function. To find the CloudWatch logs:
 
-- マクロ CloudFormation スタック (手順に従ってコマンドをコピーした場合、名称は `datadog-serverless-macro` となります) を検索します
-- 「Resources」タブをクリックして、論理 ID が`MacroFunctionLogGroup` のCloudWatch ロググループを見つけます
+- Find the macro CloudFormation stack (named `datadog-serverless-macro` if you copied the command under instructions)
+- Click on the resources tab and the CloudWatch Log Group should be available with Logical ID `MacroFunctionLogGroup`
 
-### エラーメッセージ: 'FunctionName' プロパティが未定義です...
+### Error message: 'FunctionName' property is undefined for...
 
-このエラーは、`forwarderArn` を提供し、Lambda 関数を初めてデプロイする場合に発生します。ロググループが存在せず、マクロはこのロググループの作成または Forwarder へのサブスクライブができません。この問題を修正する一つの方法は、Lambda で `FunctionName` プロパティを明示的に定義することです（下記の例を参照）。
+This error occurs when you provide a `forwarderArn` and are deploying your Lambda function for the first time, so no log group currently exists, and the macro cannot create this log group or subscribe to the Forwarder for you. One way to fix this issue is to explicitly define the `FunctionName` property on your Lambda (see the example below).
 
 ```yml
 Resources:
@@ -171,10 +172,10 @@ Resources:
     Properties:
       Handler: index.handler
       Runtime: nodejs12.x
-      FunctionName: MyFunctionName # このプロパティを Lambda に追加します
+      FunctionName: MyFunctionName # Add this property to your Lambdas
 ```
 
-`FunctionName` を明示的に定義できない（または定義しない）場合は、SAM テンプレートまたは CDK ソースコードから `forwarderArn` パラメーターを削除し、以下のように [AWS::Logs::SubscriptionFilter][7] リソースを使用してサブスクリプションフィルターを定義します。
+If you cannot (or prefer not) define the `FunctionName` explicitly, then remove the `forwarderArn` parameter from the SAM template or CDK source code, and instead define the subscription filters using the [AWS::Logs::SubscriptionFilter][7] resource like below.
 
 ```yaml
 Resources:
@@ -186,11 +187,11 @@ Resources:
       FilterPattern: ""
 ```
 
-### エラーメッセージ: 'logGroupNamePrefix' は制約を満たせませんでした...
+### Error message: 'logGroupNamePrefix' failed to satisfy constraint...
 
-`FunctionName` に、`!Sub` などの CloudFormation 関数が含まれる場合、`forwarderArn` オプションは機能しません。この場合、マクロは実際の関数名にアクセスできません（CloudFormation は変換後に関数を実行します）。そのため、関数にロググループやサブスクリプションフィルターを作成できません。
+The `forwarderArn` option does not work when `FunctionName` contains CloudFormation functions, such as `!Sub`. In this case, the macro does not have access to the actual function name (CloudFormation executes functions after transformations). It therefore cannot create log groups and subscription filters for your functions.
 
-SAM テンプレートまたは CDK ソースコードから `forwarderArn` パラメーターを削除し、以下のように [AWS::Logs::SubscriptionFilter][7] リソースを使用してサブスクリプションフィルターを定義します。
+Remove the `forwarderArn` parameter from the SAM template or CDK source code, and instead define the subscription filters using the [AWS::Logs::SubscriptionFilter][7] resource like below.
 
 ```yaml
 Resources:
@@ -202,13 +203,13 @@ Resources:
       FilterPattern: ""
 ```
 
-### エラーメッセージ: 'Failed to execute transform DatadogServerless'
+### Error message: 'Failed to execute transform DatadogServerless'
 
-このエラーは、コマンドを実行する IAM ユーザーに `lambda:InvokeFunction` 権限がない場合に発生する可能性があります。そのユーザーの IAM ロールに権限を追加してください。
+This error can occur if the IAM user executing the command lacks the `lambda:InvokeFunction` permission. Add the permission to the user's IAM role.
 
-## ヘルプ
+## Community
 
-製品のフィードバックや質問については、[Slack の Datadog コミュニティ](https://chat.datadoghq.com/)の `#serverless` チャンネルに参加してください。
+For product feedback and questions, join the `#serverless` channel in the [Datadog community on Slack](https://chat.datadoghq.com/).
 
 [1]: https://github.com/DataDog/datadog-lambda-layer-python
 [2]: https://github.com/DataDog/datadog-lambda-layer-js
@@ -217,6 +218,6 @@ Resources:
 [5]: https://github.com/DataDog/datadog-lambda-python/releases
 [6]: https://github.com/DataDog/datadog-lambda-js/releases
 [7]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-logs-subscriptionfilter.html
-[8]: https://docs.datadoghq.com/ja/serverless/datadog_lambda_library/extension/
+[8]: https://docs.datadoghq.com/serverless/datadog_lambda_library/extension/
 [9]: https://github.com/DataDog/dd-trace-dotnet-aws-lambda-layer/releases
 [10]: https://github.com/DataDog/datadog-lambda-java/releases

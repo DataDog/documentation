@@ -1,109 +1,147 @@
 ---
+title: Log Search Syntax
+kind: documentation
+description: "Search through all of your logs."
 aliases:
-- /ja/logs/search-syntax
-- /ja/logs/search_syntax/
-description: すべてのログを検索する
+    - /logs/search-syntax
+    - /logs/search_syntax/
 further_reading:
-- link: /logs/explorer/#visualize
-  tag: ドキュメント
-  text: ログを視覚化する方法
-- link: /logs/explorer/#patterns
-  tag: ドキュメント
-  text: ログ内のパターン検出
+- link: "/logs/explorer/#visualize"
+  tag: Documentation
+  text: Learn how to visualize logs
+- link: "/logs/explorer/#patterns"
+  tag: Documentation
+  text: Detect patterns inside your logs
 - link: /logs/log_configuration/processors
-  tag: ドキュメント
-  text: ログの処理方法
+  tag: Documentation
+  text: Learn how to process your logs
 - link: /logs/explorer/saved_views/
-  tag: ドキュメント
-  text: 保存ビューについて
-title: ログ検索構文
+  tag: Documentation
+  text: Learn about Saved Views
 ---
 
-## 概要
+## Overview
 
-クエリフィルターは条件と演算子で構成されます。
+A query filter is composed of terms and operators.
 
-条件には 2 種類あります。
+There are two types of terms:
 
-* **単一条件**は、1 つの単語です (`test`、`hello` など)。
+* A **single term** is a single word such as `test` or `hello`.
 
-* **シーケンス**は、二重引用符で囲まれた単語のグループです (`"hello dolly"` など)。
+* A **sequence** is a group of words surrounded by double quotes, such as `"hello dolly"`.
 
-複合クエリで複数の条件を組み合わせるには、以下の大文字と小文字を区別するブール演算子を使用します。
+To combine multiple terms into a complex query, you can use any of the following case sensitive Boolean operators:
 
 |              |                                                                                                        |                              |
 |--------------|--------------------------------------------------------------------------------------------------------|------------------------------|
-| **演算子** | **説明**                                                                                        | **例**                  |
-| `AND`        | **積**: 両方の条件を含むイベントが選択されます (何も追加しなければ、AND がデフォルトで採用されます)。 | authentication AND failure   |
-| `OR`         | **和**: いずれかの条件を含むイベントが選択されます。                                             | authentication OR password   |
-| `-`          | **除外**: 以下の用語はイベントに含まれません (個々の生テキスト検索に適用されます)。                                                  | authentication AND -password |
+| **Operator** | **Description**                                                                                        | **Example**                  |
+| `AND`        | **Intersection**: both terms are in the selected events (if nothing is added, AND is taken by default) | authentication AND failure   |
+| `OR`         | **Union**: either term is contained in the selected events                                             | authentication OR password   |
+| `-`          | **Exclusion**: the following term is NOT in the event (apply to each individual raw text search)                                                  | authentication AND -password |
 
-## 特殊文字とスペースのエスケープ
+## Full-text search 
 
-特殊文字と見なされる `+` `-` `=` `&&` `||` `>` `<` `!` `(` `)` `{` `}` `[` `]` `^` `"` `“` `”` `~` `*` `?` `:` `\`、ならびにスペースは、`\` 文字を使用してエスケープする必要があります。
+<div class="alert alert-warning">The full-text search feature is only available in Log Management and works in monitor, dashboard, and notebook queries. The full-text search syntax cannot be used to define index filters, archive filters, log pipeline filters, or in Live Tail. </div>
 
-ログメッセージ内の特殊文字を検索することはできません。特殊文字が属性の中にある場合は、検索することができます。
+Use the syntax `*:search_term` to perform a full-text search across all log attributes, including the log message.
 
-特殊文字を検索するには、[Grok Parser][1] で特殊文字を属性にパースし、その属性を含むログを検索してください。
+### Single term example
+
+| Search syntax | Search type | Description                                           |
+| ------------- | ----------- | ----------------------------------------------------- |
+| `*:hello` | Full-text   | Searches all log attributes for the term `hello`.     |
+| `hello`       | Free text   | Searches only the log message for the term `hello`.   |
+
+### Search term with wildcard example
+
+| Search syntax | Search type | Description                                                                                  |
+| ------------- | ----------- | -------------------------------------------------------------------------------------------- |
+| `*:hello` | Full-text   | Searches all log attributes for the exact string `hello`.                                    |
+| `*:hello*`| Full-text   | Searches all log attributes for strings that starts with `hello`. For example, `hello_world`.|
+
+### Multiple terms with exact match example
+
+| Search syntax       | Search type | Description                                            |
+| ------------------- | ----------- |------------------------------------------------------- |
+| `*:"hello world"` | Full-text   | Searches all log attributes for the term `hello world`. |
+| `hello world`       | Free text   | Searches only the log message for the term `hello`.     |
+
+### Multiple terms without exact match example
+
+The full-text search syntax `*:hello world` is equivalent to `*:hello *:world`. It searches all log attributes for the terms `hello` and `world`.
+
+### Multiple terms with a white space example
+
+The full-text search syntax `*:"hello world" "i am here"` is equivalent to `*:"hello world" *:"i am here"`. It searches all log attributes for the terms `hello world` and `i am here`.
+
+## Escape special characters and spaces
+
+The following characters, which are considered special: `+` `-` `=` `&&` `||` `>` `<` `!` `(` `)` `{` `}` `[` `]` `^` `"` `“` `”` `~` `*` `?` `:` `\` `#`, and spaces require escaping with the `\` character. 
+`/` is not considered a special character and doesn't need to be escaped.
+
+You cannot search for special characters in a log message. You can search for special characters when they are inside of an attribute.
+
+To search for special characters, parse them into an attribute with the [Grok Parser][1], and search for logs that contain that attribute.
 
 
-## 属性検索
+## Attributes search
 
-特定の属性を検索するには、`@` を付けて属性検索であることを明示します。
+To search on a specific attribute, add `@` to specify you are searching on an attribute.
 
-たとえば、属性名が **url** で、**url** の値 `www.datadoghq.com` で絞り込む場合は、次のように入力します。
+For instance, if your attribute name is **url** and you want to filter on the **url** value `www.datadoghq.com`, enter:
 
 ```
 @url:www.datadoghq.com
 ```
 
 
-**注**:
+**Notes**:
 
-1. 属性やタグを検索するためのファセットの定義は**不要です**。
+1. It is **not** required to define a facet to search on attributes and tags.
 
-2. 属性検索では大文字と小文字が区別されます。大文字と小文字を区別したくない場合はフリーテキスト検索を使用してください。または、Grok パーサーでのパース実行中に `lowercase` フィルターを適用すれば、文字の種類に関わらない検索結果を得ることができます。
+2. Attributes searches are case sensitive. Use [full-text search](#full-text-search) to get case insensitive results. Another option is to use the `lowercase` filter with your Grok parser while parsing to get case insensitive results during search.
 
-3. 特殊文字を含む属性値を検索するには、エスケープ処理または二重引用符が必要です。
-    - たとえば、値が `hello:world` の属性 `my_attribute` は、`@my_attribute:hello\:world` または `@my_attribute:"hello:world"` を使用して検索します。
-    - 単一の特殊文字またはスペースに一致させるには、`?` ワイルドカードを使用します。たとえば、値が `hello world` の属性 `my_attribute` は、`@my_attribute:hello?world` を使用して検索します。
+3. Searching for an attribute value that contains special characters requires escaping or double quotes.
+    - For example, for an attribute `my_attribute` with the value `hello:world`, search using: `@my_attribute:hello\:world` or `@my_attribute:"hello:world"`.
+    - To match a single special character or space, use the `?` wildcard. For example, for an attribute `my_attribute` with the value `hello world`, search using: `@my_attribute:hello?world`.
 
-例:
+Examples:
 
-| 検索クエリ                                                         | 説明                                                                                                                                                         |
+| Search query                                                         | Description                                                                                                                                                         |
 |----------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `@http.url_details.path:"/api/v1/test"`                              | 属性 `http.url_details.path` に `/api/v1/test` と一致するすべてのログを検索します。                                                                               |
-| `@http.url:\/api\/v1\/*`                                             | 属性 `http.url` に、`/api/v1/` で始まる値を含むすべてのログを検索します。                                                                             |
-| `@http.status_code:[200 TO 299] @http.url_details.path:\/api\/v1\/*` | 200 から 299 の `http.status_code` 値を含み、`http.url_details.path` 属性に `/api/v1/` で始まる値を含むすべてのログを検索します。 |
-| `-@http.status_code:*`                                                | `http.status_code` 属性を含まないすべてのログを検索します |
+| `@http.url_details.path:"/api/v1/test"`                              | Searches all logs matching `/api/v1/test` in the attribute `http.url_details.path`.                                                                               |
+| `@http.url:/api\-v1/*`                                             | Searches all logs containing a value in `http.url` attribute that start with `/api-v1/`                                                                             |
+| `@http.status_code:[200 TO 299] @http.url_details.path:/api\-v1/*` | Searches all logs containing a `http.status_code` value between 200 and 299, and containing a value in `http.url_details.path` attribute that start with `/api-v1/` |
+| `-@http.status_code:*`                                                | Searches all logs not containing the `http.status_code` attribute |
 
-### CIDR 表記による検索
-CIDR (Classless Inter Domain Routing) は、IP アドレスの範囲 (CIDR ブロックとも呼ばれる) を簡潔に定義することができる表記法です。CIDR は、ネットワーク (VPC など) またはサブネットワーク (VPC 内のパブリック/プライベートサブネットなど) を定義するために最もよく使用されます。
+### Search using CIDR notation
+Classless Inter Domain Routing (CIDR) is a notation that allows users to define a range of IP addresses (also called CIDR blocks) succinctly. CIDR is most commonly used to define a network (such as a VPC) or a subnetwork (such as public/private subnet within a VPC).
 
-ユーザーは `CIDR()` 関数を使用して、CIDR 表記を使用してログの属性をクエリすることができます。`CIDR()` 関数は、フィルタリングのパラメーターとしてログ属性を渡し、その後に 1 つまたは複数の CIDR ブロックを渡す必要があります。
+Users can use the `CIDR()` function to query attributes in logs using CIDR notation. The `CIDR()` function needs to be passed in a log attribute as a parameter to filter against, followed by one or multiple CIDR blocks. 
 
-#### 例
-- `CIDR(@network.client.ip,13.0.0.0/8)` は、フィールド `network.client.ip` の IP アドレスが 13.0.0.0/8 CIDR ブロックに該当するログにマッチしてフィルターをかけます。
-- `CIDR(@network.ip.list,13.0.0.0/8, 15.0.0.0/8)` は、配列属性 `network.ip.list` の IP アドレスが 13.0.0.0/8 または 15.0.0.0/8 CIDR ブロックに該当するログにマッチしてフィルターをかけます。
-- `source:pan.firewall evt.name:reject CIDR(@network.client.ip, 13.0.0.0/8)` は、13.0.0.0/8 サブネットで発信されるパロアルトファイアウォールの拒否イベントにマッチしてフィルターにかけます。
-- `source:vpc NOT(CIDR(@network.client.ip, 13.0.0.0/8)) CIDR(@network.destination.ip, 15.0.0.0/8)` は、サブネット間で環境内のネットワークトラフィックを分析するため、サブネット 13.0.0.0/8 から発生していないが、宛先サブネット 15.0.0.0/8 へ向けられている VPC ログをすべて表示します。
+#### Examples
+- `CIDR(@network.client.ip,13.0.0.0/8)` matches and filters logs that have IP addresses in the field `network.client.ip` that fall under the 13.0.0.0/8 CIDR block.
+- `CIDR(@network.ip.list,13.0.0.0/8, 15.0.0.0/8)` matches and filters logs that have any IP addresses in an array attribute `network.ip.list` that fall under the 13.0.0.0/8 or 15.0.0.0/8 CIDR blocks.
+- `source:pan.firewall evt.name:reject CIDR(@network.client.ip, 13.0.0.0/8)` would match and filter reject events from palo alto firewall that originate in the 13.0.0.0/8 subnet
+- `source:vpc NOT(CIDR(@network.client.ip, 13.0.0.0/8)) CIDR(@network.destination.ip, 15.0.0.0/8)` will show all VPC logs that do not originate in subnet 13.0.0.0/8 but are designated for destination subnet 15.0.0.0/8 because you want to analyze network traffic in your environments between subnets
 
-`CIDR()` 関数は、IPv4 と IPv6 の CIDR 表記をサポートし、ログエクスプローラー、Live Tail、ダッシュボードのログウィジェット、ログモニター、およびログ構成で動作します。
+The `CIDR()` function supports both IPv4 and IPv6 CIDR notations and works in Log Explorer, Live Tail, log widgets in Dashboards, log monitors, and log configurations.
 
+## Wildcards
 
-## ワイルドカード
+You can use wildcards with free text search. However, it only searches for terms in the log message, the text in the `content` column in Log Explorer. See [Full-text search](#full-text-search) if you want to search for a value in a log attribute.
 
-### 複数文字のワイルドカード
+### Multi-character wildcard
 
-複数文字のワイルドカード検索を実行するには、`*` 記号を次のように使用します。
+To perform a multi-character wildcard search in the log message (the `content` column in Log Explorer), use the `*` symbol as follows:
 
-* `service:web*` は、`web` で始まるサービスを持つすべてのログメッセージに一致します。
-* `web*` は、`web` で始まるすべてのログメッセージに一致します。
-* `*web` は、`web` で終わるすべてのログメッセージに一致します。
+* `service:web*` matches every log message that has a service starting with `web`.
+* `web*` matches all log messages starting with `web`.
+* `*web` matches all log messages that end with `web`.
 
-**注**: ワイルドカードは、二重引用符の外側にあるワイルドカードとしてのみ機能します。例えば、`"*test*"` は、メッセージの中に `*test*` という文字列があるログにマッチします。`*test*` は、メッセージのどこかに test という文字列を持つログにマッチします。
+**Note**: Wildcards only work as wildcards outside of double quotes. For example, `"*test*"` matches a log which has the string `*test*` in its message. `*test*` matches a log which has the string test anywhere in its message.
 
-ワイルドカード検索は、この構文を使用してタグおよび属性 (ファセット使用の有無を問わない) 内で機能します。次のクエリは、文字列 `mongo` で終わるすべてのサービスを返します。
+Wildcard searches work within tags and attributes (faceted or not) with this syntax. This query returns all the services that end with the string `mongo`:
 <p> </p>
 <p></p>
 
@@ -111,74 +149,74 @@ CIDR (Classless Inter Domain Routing) は、IP アドレスの範囲 (CIDR ブ�
 service:*mongo
 ```
 
-ワイルドカード検索は、ファセットに含まれないログのプレーンテキスト内の検索にも使用できます。次のクエリは、文字列 `NETWORK` を含むすべてのログを返します。
+Wildcard searches can also be used to search in the plain text of a log that is not part of a log attribute. For example, this query returns all logs with content (message) that contain the string `NETWORK`:
 
 ```
 *NETWORK*
 ```
 
-ただし、この検索条件は、ファセット内に文字列 `NETWORK` を含み、ログメッセージには含まれない場合はログを返しません。
+However, this search term does not return logs that contain the string `NETWORK` if it is in a log attribute and not part of the log message.
 
-### ワイルドカードを検索
+### Search wildcard
 
-特殊文字を含む属性値またはタグ値を検索する場合や、エスケープまたは二重引用符を必要とする場合は、`?` ワイルドカードを使用して 1 つの特殊文字またはスペースに一致させます。たとえば、値が `hello world` の属性 `my_attribute` を検索するには: `@my_attribute:hello?world`
+When searching for an attribute or tag value that contains special characters or requires escaping or double quotes, use the `?` wildcard to match a single special character or space. For example, to search for an attribute `my_attribute` with the value `hello world`: `@my_attribute:hello?world`.
 <p> </p>
 
-## 数値
+## Numerical values
 
-数値属性を検索するには、まず[その属性をファセットとして追加][2]します。次に、数値演算子 (`<`、`>`、`<=`、または `>=`) を使用して、数値ファセットの検索を行うことができます。
-例えば、応答時間が 100ms 超のログをすべて取得するには、次のようにします。
+In order to search on a numerical attribute, first [add it as a facet][2]. You can then use numerical operators (`<`,`>`, `<=`, or `>=`) to perform a search on numerical facets.
+For instance, retrieve all logs that have a response time over 100ms with:
 <p> </p>
 
 ```
 @http.response_time:>100
 ```
 
-特定の範囲内にある数値属性を検索することができます。たとえば、4xx エラーをすべて取得するには、次のようにします。
+You can search for numerical attribute within a specific range. For instance, retrieve all your 4xx errors with:
 
 ```
 @http.status_code:[400 TO 499]
 ```
 
-## タグ
+## Tags
 
-ログは、タグを生成する[ホスト][3]と[インテグレーション][4]からタグを引き継ぎます。これらも、ファセットとして検索で使用できます。
+Your logs inherit tags from [hosts][3] and [integrations][4] that generate them. They can be used in the search and as facets as well:
 
-* `test` は文字列「test」を検索します。
-* `env:(prod OR test)` は、タグ `env:prod` またはタグ `env:test` を含むすべてのログに一致します。
-* `(env:prod AND -version:beta)` は、タグ `env:prod` を含み、タグ `version:beta` は含まないすべてのログに一致します。
+* `test` is searching for the string "test".
+* `env:(prod OR test)` matches all logs with the tag `env:prod` or the tag `env:test`
+* `(env:prod AND -version:beta)` matches all logs that contain tag `env:prod` and that do not contain tag `version:beta`
 
-タグが[タグのベストプラクティス][5]に従わず、`key:value` 構文も使用していない場合は、次の検索クエリを使用します。
+If your tags don't follow [tags best practices][5] and don't use the `key:value` syntax, use this search query:
 
 * `tags:<MY_TAG>`
 
-## 配列
+## Arrays
 
-次の例では、ファセットで `Peter` 値をクリックすると、`users.names` 属性の値が `Peter` であるか、`Peter` を含む配列であるすべてのログが返されます。
+In the below example, clicking on the `Peter` value in the facet returns all the logs that contains a `users.names` attribute, whose value is either `Peter` or an array that contains `Peter`:
 
-{{< img src="logs/explorer/search/array_search.png" alt="配列とファセット" style="width:80%;">}}
+{{< img src="logs/explorer/search/array_search.png" alt="Array and Facets" style="width:80%;">}}
 
-**注**: 同等の構文を使用して、検索をファセットではない配列属性にも使用することができます。
+**Note**: Search can also be used on non-faceted array attributes using an equivalent syntax.
 
-以下の例では、Windows 用の CloudWatch ログは、`@Event.EventData.Data` の下に JSON オブジェクトの配列が含まれています。JSON オブジェクトの配列にファセットを作成することはできませんが、以下の構文で検索することができます。
+In the following example, CloudWatch logs for Windows contain an array of JSON objects under `@Event.EventData.Data`. You cannot create a facet on array of JSON objects, but you can search using the following syntax.
 
-* `@Event.EventData.Data.Name:ObjectServer` はキー`Name` と値 `ObjectServer` ですべてのログに一致します。
+* `@Event.EventData.Data.Name:ObjectServer` matches all logs with the key `Name` and value `ObjectServer`.
 
-{{< img src="logs/explorer/search/facetless_query_json_arrray2.png" alt="JSON オブジェクト配列上のファセットなしクエリ" style="width:80%;">}}
+{{< img src="logs/explorer/search/facetless_query_json_arrray2.png" alt="Facetless query on array of JSON objects" style="width:80%;">}}
 <p> </p>
 
-## 検索の保存
+## Saved searches
 
-[保存ビュー][6]に、検索クエリ、列、対象期間、およびファセットが格納されます。
+[Saved Views][6] contain your search query, columns, time horizon, and facet.
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/logs/log_configuration/parsing
-[2]: /ja/logs/explorer/facets/
-[3]: /ja/infrastructure/
-[4]: /ja/integrations/#cat-log-collection
-[5]: /ja/getting_started/tagging/#tags-best-practices
-[6]: /ja/logs/explorer/saved_views/
-[7]: /ja/logs/explorer/facets/#facet-panel
+[1]: /logs/log_configuration/parsing
+[2]: /logs/explorer/facets/
+[3]: /infrastructure/
+[4]: /integrations/#cat-log-collection
+[5]: /getting_started/tagging/#tags-best-practices
+[6]: /logs/explorer/saved_views/
+[7]: /logs/explorer/facets/#facet-panel

@@ -1,103 +1,103 @@
 ---
+title: Network Monitor
+description: "Check the status of TCP/HTTP endpoints."
 aliases:
-- /ja/monitors/monitor_types/network
-- /ja/monitors/create/types/network/
-description: TCP/HTTP エンドポイントのステータスをチェックする。
+- /monitors/monitor_types/network
+- /monitors/create/types/network/
 further_reading:
 - link: /monitors/notify/
-  tag: ドキュメント
-  text: モニター通知の設定
+  tag: Documentation
+  text: Configure your monitor notifications
 - link: /monitors/downtimes/
-  tag: ドキュメント
-  text: モニターをミュートするダウンタイムのスケジュール。
+  tag: Documentation
+  text: Schedule downtime to mute a monitor.
 - link: /monitors/manage/status/
-  tag: ドキュメント
-  text: モニターステータスを確認
-title: ネットワークモニター
+  tag: Documentation
+  text: Check your monitor status
 ---
 
-## 概要
+## Overview
 
-ネットワークモニターは、Agent で使用できる TCP チェックと HTTP チェックを対象とします。Agent 構成の詳細については、[HTTP チェック][1]または [TCP チェック][2]のドキュメントを参照してください。
+Network monitors cover the TCP and HTTP checks available in the Agent. For details on Agent configuration, see the [HTTP check][1] or [TCP check][2] documentation.
 
-## モニターの作成
+## Monitor creation
 
-Datadog で[ネットワークモニター][3]を作成するには、メインナビゲーションを使用して次のように移動します: Monitors --> New Monitor --> Network。
+To create a [network monitor][3] in Datadog, use the main navigation: *Monitors --> New Monitor --> Network*.
 
-### ネットワークステータス
+### Network status
 
-#### チェックを選択する
+#### Pick a check
 
-* ネットワークチェックタイプ（`ssl`、`http`、または `tcp`）を選択します。
-* 特定のエンドポイントまたは `All monitored <タイプ> endpoints` を選択します。
+* Choose a network check type (`ssl`, `http`, or `tcp`).
+* Choose a specific endpoint or `All monitored <TYPE> endpoints`.
 
-#### モニターのスコープを選択
+#### Pick monitor scope
 
-ホスト名、タグ、または `All Monitored Hosts` を選択して、監視するスコープを決定します。特定のホストを除外する必要がある場合は、2 番目のフィールドに名前やタグをリストアップします。
+Select the scope to monitor by choosing host names, tags, or choose `All Monitored Hosts`. If you need to exclude certain hosts, use the second field to list names or tags.
 
-* インクルードフィールドでは `AND` ロジックを使用します。ホストに存在するリストアップされたすべてのホスト名とタグはスコープに含まれます。
-* エクスクルードフィールドでは `OR` ロジックを使用します。リストアップされたホスト名やタグを持つホストはスコープから除外されます。
+* The include field uses `AND` logic. All listed hostnames and tags must be present on a host for it to be included.
+* The exclude field uses `OR` logic. Any host with a listed hostname or tag is excluded.
 
-#### アラートの条件を設定する
+#### Set alert conditions
 
-このセクションで、**Check Alert** または **Cluster Alert** を選択します。
+In this section, choose between a **Check Alert** or **Cluster Alert**:
 
 {{< tabs >}}
 {{% tab "Check Alert" %}}
 
-チェックアラートは、各チェックグループにつき、送信されたステータスを連続的にトラックし、しきい値と比較します。
+A check alert tracks consecutive statuses submitted per check grouping and compares it to your thresholds.
 
-チェックアラートをセットアップする
+Set up the check alert:
 
-1. チェックレポートを送信する各 `<グループ>` に対し、アラートを個別にトリガーします。
+1. Trigger a separate alert for each `<GROUP>` reporting your check.
 
-    チェックグループは既存のグループリストから指定するか、独自に指定します。ネットワークモニターでは、チェックごとのグループを明確にします。たとえば HTTP チェックなら、`host`、`instance`、`url` でタグ付けします。
+    Check grouping is specified either from a list of known groupings or by you. For network monitors, the per-check grouping is explicitly known. For example, the HTTP check is tagged with `host`, `instance`, and `url`.
 
-2. 何回連続して失敗したらアラートをトリガーするか、回数 `<数値>` を選択します。
+2. Trigger the alert after selected consecutive failures: `<NUMBER>`
 
-    各チェックは `OK`、`WARN`、`CRITICAL` のいずれか 1 つのステータスを送信します。`CRITICAL` ステータスが連続して何回送信されたら通知をトリガーするか選択します。たとえば、HTTP チェックで接続に失敗する異常が 1 回発生したとします。値を `> 1` に設定した場合、この異常は無視されますが、2 回以上連続で失敗した場合は通知をトリガーします。
+    Each check run submits a single status of `OK`, `WARN`, or `CRITICAL`. Choose how many consecutive runs with the `CRITICAL` status trigger a notification. For example, your HTTP check might have a single blip where the connection fails. If you set this value to `> 1`, the blip is ignored, but a problem with more than one consecutive failure triggers a notification.
 
-3. 何回連続して成功したらアラートを解決するか、回数 `<数値>` を選択します。
+3. Resolve the alert after selected consecutive successes: `<NUMBER>`
 
-    何回連続して `OK` ステータスが送信されたらアラートを解決するか、回数を選択します。
+    Choose how many consecutive runs with the `OK` status resolve the alert.
 
 {{% /tab %}}
 {{% tab "Cluster Alert" %}}
 
-クラスターアラートは、既定のステータスでチェックの割合を計算し、しきい値と比較します。
+A cluster alert calculates the percent of checks in a given status and compares it to your thresholds.
 
-クラスターアラートをセットアップする
+Set up a cluster alert:
 
-1. タグによりチェックをグループ化するかどうか決定します。`Ungrouped` はすべてのソースでステータスのパーセンテージを計算します。`Grouped` は各グループごとのステータスのパーセンテージを計算します。
+1. Decide whether or not to group your checks according to a tag. `Ungrouped` calculates the status percentage across all sources. `Grouped` calculates the status percentage on a per-group basis.
 
-2. アラートのしきい値となるパーセンテージを選択します。
+2. Select the percentage for the alert threshold.
 
 {{% /tab %}}
 {{< /tabs >}}
 
-#### 高度なアラート条件
+#### Advanced alert conditions
 
-[データなし][5]、[自動解決][6]、[新しいグループ遅延][7]の各オプションに関する情報は、[モニターコンフィギュレーション][4]ドキュメントを参照してください。
+See the [Monitor configuration][4] documentation for information on [No data][5], [Auto resolve][6], and [New group delay][7] options.
 
-#### 通知
+#### Notifications
 
-**Say what's happening** セクションと **Notify your team** セクションの詳細については、[通知][8]ページをご確認ください。
+For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][8] page.
 
-### ネットワークメトリクス
+### Network metric
 
-[メトリクスモニター][10]ドキュメントの手順に従って、ネットワークメトリクスモニターを作成します。モニタータイプにネットワークメトリクスを選択すると、[モニターの管理][9]ページで、確実にネットワークモニタータイプのファセットでモニターを選択できるようになります。
+Create a network metric monitor by following the instructions in the [metric monitor][10] documentation. Using the network metric monitor type ensures the monitor can be selected by the network monitor type facet on the [Manage Monitors][9] page.
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/integrations/http_check/
-[2]: /ja/integrations/tcp_check/
+[1]: /integrations/http_check/
+[2]: /integrations/tcp_check/
 [3]: https://app.datadoghq.com/monitors#create/network
-[4]: /ja/monitors/configuration/#advanced-alert-conditions
-[5]: /ja/monitors/configuration/#no-data
-[6]: /ja/monitors/configuration/#auto-resolve
-[7]: /ja/monitors/configuration/#new-group-delay
-[8]: /ja/monitors/notify/
+[4]: /monitors/configuration/#advanced-alert-conditions
+[5]: /monitors/configuration/#no-data
+[6]: /monitors/configuration/#auto-resolve
+[7]: /monitors/configuration/#new-group-delay
+[8]: /monitors/notify/
 [9]: https://app.datadoghq.com/monitors/manage
-[10]: /ja/monitors/types/metric
+[10]: /monitors/types/metric

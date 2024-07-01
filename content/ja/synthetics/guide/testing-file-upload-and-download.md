@@ -1,57 +1,57 @@
 ---
+title: Upload and Download A Test File
+kind: guide
 further_reading:
-- link: https://www.datadoghq.com/blog/introducing-synthetic-monitoring/
-  tag: ブログ
-  text: Datadog Synthetic モニタリングの紹介
-- link: synthetics/
-  tag: Documentation
-  text: Synthetic モニタリングについて
-- link: synthetics/browser_tests
-  tag: Documentation
-  text: ブラウザテストの設定
-kind: ガイド
-title: テストファイルのアップロードとダウンロード
+    - link: "https://www.datadoghq.com/blog/introducing-synthetic-monitoring/"
+      tag: Blog
+      text: Introducing Datadog Synthetic Monitoring
+    - link: synthetics/
+      tag: Documentation
+      text: Learn about Synthetic Monitoring
+    - link: synthetics/browser_tests
+      tag: Documentation
+      text: Configure a Browser Test
 ---
 
-## 概要
+## Overview
 
-Web アプリケーションには多くのロジックを埋め込むことができ、ウェブサイトのテスト用のエンドツーエンドのテストは、多くの場合、基本的なインタラクション (クリックや入力フォームなど) によって作成されますが、重要なビジネストランザクションをアプリケーションで実行できるか確認するため、時にはもう一歩踏み込んで複雑なインタラクションを検証する必要があります。
+Web applications can embed a lot of logic, and although end-to-end tests are often mostly made of basic interactions (for example, clicks and input forms) for testing your website, you sometimes need to go one step further and verify complex interactions to ensure key business transactions can be performed on your application.
 
-## ファイルアップロードのテスト
+## Testing a file upload
 
-プロファイルの作成をテストするための機能的なワークフローの最終ステップを検証するため、**ファイルをアップロード**できます。テストレコーダーのレベルでファイルをアップロードすると、Datadog Synthetic ブラウザテストではアップロードされたファイルを自動的に識別し、[`Upload file` 関連ステップ][1]が作成されます。それが済むと、テストの実行時にそのファイルを再びアップロードすることができます。
+You can **upload a file** to validate the final step of a functional workflow to test a profile creation. When uploading a file at the test recorder level, Datadog Synthetic browser tests automatically identify the uploaded file and create the [`Upload file` associated step][1]. It is then able to upload that file again at test execution.
 
-{{< img src="synthetics/guide/testing-a-downloaded-file/upload_file.mp4" alt="ファイルのアップロード" video="true" width="100%">}}
+{{< img src="synthetics/guide/testing-a-downloaded-file/upload_file.mp4" alt="Upload File" video="true" width="100%">}}
 
-## ファイルダウンロードのテスト
+## Testing a file download
 
-**Downloading files** も、ユーザーが Web アプリケーションで利用する一般的なアクションです。たとえば、E コマースサイトから注文確認書をダウンロードしたり、銀行の口座取引記録を PDF や CSV 形式でエクスポートすることを思い浮かべてください。
+**Downloading files** is another common action users take on web applications: downloading an order confirmation from an e-commerce website or the PDF or CSV export history of bank account transactions.
 
-Datadog のブラウザテストおよび `Test a downloaded file` アサーションにより、Web アプリケーションからのダウンロード可能なファイルが (例えば FTP サーバーから) 正しく提供されているかを確認することができます。このアサーションにより、ダウンロード可能なファイルをテストし、ファイル名、ファイルサイズ、データが正しいことを確認できます。
+Datadog's browser tests and the `Test a downloaded file` assertion allow you to verify that downloadable files from your web application are correctly being served (for example, from your FTP server). With this assertion, downloadable files can be tested to ensure they have the correct file name, size, and data.
 
-このアサーションでブラウザテストをセットアップするには
+To setup a browser test with this assertion:
 
-1. ブラウザテストで、**ファイルのダウンロードを生成するステップを記録**します。以下の例では `.docx` ファイルのダウンロードをトリガーするボタンクリックの記録方法を示しています。ファイルサイズは 50Mb 以下でなければなりません。
+1. **Record the step that generates the file download** in your browser test. The example below shows how to record a click on a button that triggers the download of a `.docx` file. The file size must be below 100Mb.
 
-    {{< img src="synthetics/guide/testing-a-downloaded-file/recording_step.mp4" alt="ステップの記録" video="true">}}
+    {{< img src="synthetics/guide/testing-a-downloaded-file/recording_step.mp4" alt="Recording steps" video="true">}}
 
-2. ** `Test a downloaded file` アサーションを追加** し、ファイルが正常にダウンロードされたことを確認します。
+2. **Add a `Test a downloaded file` assertion** to confirm that the file was correctly downloaded:
 
-    {{< img src="synthetics/guide/testing-a-downloaded-file/basic_assert.mp4" alt="アサーションの追加" video="true">}}
+    {{< img src="synthetics/guide/testing-a-downloaded-file/basic_assert.mp4" alt="Adding assertions" video="true">}}
 
-     必要に応じて、md5 文字列を使ったファイル名、ファイルサイズ、統合性など、より高度な検証を行うことができます。
+     If needed, you can perform some more advanced verifications, for instance on your filename, on its size, and even on its integrity using a md5 string:
 
-    {{< img src="synthetics/guide/testing-a-downloaded-file/advanced_assert.mp4" alt="高度な検証" video="true">}}
+    {{< img src="synthetics/guide/testing-a-downloaded-file/advanced_assert.mp4" alt="Advanced verification" video="true">}}
 
-     [ブラウザテストアサーション][2]の一覧から `Test a downloaded file` アサーションの詳細を確認できます。
+     See the full list of [Browser test assertions][2] to learn more on the `Test a downloaded file` assertion.
 
-3. **ファイルがダウンロードされたことを確認**し、生成されたテスト結果からアサーションで設定した要件と一致することを確認します。 
+3. **Confirm that the file was downloaded** and matched the requirements you set up in your assertion by looking at the generated test result:
 
-    {{< img src="synthetics/guide/testing-a-downloaded-file/test_results.png" alt="テスト結果" >}}
+    {{< img src="synthetics/guide/testing-a-downloaded-file/test_results.png" alt="Test results" >}}
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/synthetics/browser_tests/actions/#upload-file
-[2]: /ja/synthetics/browser_tests/actions/#assertion
+[1]: /synthetics/browser_tests/actions/#upload-file
+[2]: /synthetics/browser_tests/actions/#assertion

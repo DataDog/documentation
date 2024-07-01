@@ -1,61 +1,61 @@
 ---
-description: Synthetic テストのリトライが、関連するモニターのステータスにどのような影響を与えるかをご説明します。
+title: Understand How Synthetic Test Retries Determine Monitor Status
+kind: guide
+description: Learn how a Synthetic test retry affects the associated monitor status.
 further_reading:
 - link: /synthetics/guide/synthetic-test-monitors/
-  tag: ドキュメント
-  text: Synthetic テストモニターについて
+  tag: Documentation
+  text: Learn about Synthetic test monitors
 - link: /continuous_testing/explorer/search_runs/
-  tag: ドキュメント
-  text: Synthetic テストの実行について
-kind: ガイド
-title: Synthetic テストのリトライがモニターステータスにどのように影響を与えるかを理解する
+  tag: Documentation
+  text: Learn about Synthetic test runs
 ---
 
-## 概要
+## Overview
 
-アラート疲労を軽減するために、テスト実行が失敗した場合、Synthetic テストはリトライ可能です。失敗時にリトライを設定したテストは、_高速リトライ_と呼ばれます。
+To reduce alert fatigue, Synthetic tests can be retried when a test run fails. If you have configured a test to be retried on failures, this is a _fast retry_. 
 
-高速リトライでは、Datadog がテストのモニターをアラート状態に移行し、通知を送る前に、Synthetic テストを複数回実行します。Synthetic テストに関連するモニターの詳細については、[Synthetic テストモニターの使用][3]を参照してください。
+With a fast retry, Datadog runs a Synthetic test multiple times before transitioning the test's monitor to alert and sending you a notification. For more information about monitors associated with your Synthetic tests, see [Use Synthetic Test Monitors][3].
 
-{{< img src="synthetics/guide/synthetics_test_retries/fast_retries.png" alt="高速リトライによる失敗したテストの実行" style="width:100%;">}}
+{{< img src="synthetics/guide/synthetics_test_retries/fast_retries.png" alt="Failed test runs with fast retries" style="width:100%;">}}
 
 
-## グループ評価
+## Group evaluations
 
-高速リトライの結果はローカルグループ評価に使用されるものの、トータルグループ評価では最終リトライの結果のみが考慮されます。元の実行とすべての中間リトライは評価から破棄されます。
+While fast retry results are used in the local group evaluation, only the final retry is taken into account in the total group evaluation. The original run and all intermediate retries are discarded from the evaluation.
 
-ローカルグループ評価
-: ロケーションステータスの評価。
+Local Group Evaluation
+: Evaluation of the location status.
 
-トータルグループ評価
-: テストステータスの評価。
+Total Group Evaluation
+: Evaluation of the test status.
 
-最大リトライ回数に達した後も失敗している実行は最終的なものと見なされ、この最終結果がトータルグループ評価に考慮されます。
+A run that is still failing after it has reached the maximum number of retries is considered final, and this final result is taken into account in the total group evaluation. 
 
-## 他のテスト実行と重複するリトライ
+## Retries that overlap with other test runs
 
-この例では、Synthetic テストが 3 分ごとに実行されるようにスケジュールされ、2 分の遅延で最大 2 回のリトライが構成されています。 
+In this example, a Synthetic test is scheduled to run every three minutes, and has a retry configured to a maximum of two times with a delay of two minutes.  
 
-この評価では、最終リトライのみがトータルグループ評価に考慮されます。
+The evaluation only takes the final retry into account for the total group evaluation. 
 
-すべてのリトライが失敗した場合
+When all retries fail:
 
-{{< img src="synthetics/guide/synthetics_test_retries/diagram_1.png" alt="2 回リトライされ、すべてのリトライで失敗したテスト実行を、ローカルグループおよびトータルグループとして評価" style="width:100%;">}}
+{{< img src="synthetics/guide/synthetics_test_retries/diagram_1.png" alt="A test run which was retried twice and failed on all retries, evaluated as a local group and as a total group" style="width:100%;">}}
 
-またはリトライが成功した場合
+Or when a retry is successful:
 
-{{< img src="synthetics/guide/synthetics_test_retries/diagram_2.png" alt="2 回リトライされ、3 回目のリトライで成功したテスト実行を、ローカルグループおよびトータルグループとして評価" style="width:100%;">}}
+{{< img src="synthetics/guide/synthetics_test_retries/diagram_2.png" alt="A test run which was retried twice and succeeded on the third retry, evaluated as a local group and as a total group" style="width:100%;">}}
 
-**注:** `minFailureDuration` と `minLocationsFailed` パラメーターに何を設定したかによって、動作が異なる場合があります。
+**Note:** Depending on what you set for the `minFailureDuration` and `minLocationsFailed` parameters, you may see different behavior.
 
-## タイムスタンプ
+## Timestamps
 
-システムは、最終結果のタイムスタンプに、テストが最初にスケジュールされた時刻ではなく、テストがリトライされた時刻を反映します。結果は、テストが開始されたときのタイムスタンプで考慮されます。テストの実行時間により、結果が評価に利用できるようになるまでに若干の遅れが生じる場合があります。
+The system populates the timestamp for a final result with the time when the test was retried, not the time the test was originally scheduled. Results are considered at the timestamp when the test was started. Due to the test's execution time, there may be a small delay before the results become available for the evaluation.
 
-## その他の参考資料
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/continuous_testing/explorer/search_runs/
+[1]: /continuous_testing/explorer/search_runs/
 [2]: https://app.datadoghq.com/synthetics/explorer
-[3]: /ja/synthetics/guide/synthetic-test-monitors/
+[3]: /synthetics/guide/synthetic-test-monitors/

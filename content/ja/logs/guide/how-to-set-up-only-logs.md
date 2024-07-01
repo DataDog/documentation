@@ -1,20 +1,17 @@
 ---
+title: Use the Datadog Agent for Log Collection Only
 aliases:
-- /ja/logs/faq/how-to-set-up-only-logs
-title: Datadog Agent をログ収集のみに使用
+  - /logs/faq/how-to-set-up-only-logs
+kind: documentation
 ---
 
-<div class="alert alert-danger">
-インフラストラクチャーメトリクスなしのログ収集をセットアップするには、一部のペイロードを無効にする必要があります。結果として、収集しているログのメタデータおよびタグが失われる場合があるため、Datadog ではこれを推奨しません。このコンフィギュレーションについて、詳しくは <a href="/help/">Datadog サポート</a>までお問い合わせください。
-</div>
-
-ペイロードを無効にするには、Agent v6.4 以降を実行している必要があります。これにより、メトリクスデータの送信が無効になり、ホストが Datadog に表示されなくなります。以下のステップを実行してください。
+To disable payloads, you must be running Agent v6.4+. This disables metric data submission so that hosts stop showing up in Datadog. Follow these steps:
 
 {{< tabs >}}
 {{% tab "Host " %}}
 
-1. [datadog.yaml コンフィギュレーションファイル][1]を開きます。
-2. 以下の設定で `enable_payloads` 属性を追加します。
+1. Open the [datadog.yaml configuration file][1].
+2. Add the `enable_payloads` attribute with the following settings:
 
     ```yaml
     enable_payloads:
@@ -24,16 +21,16 @@ title: Datadog Agent をログ収集のみに使用
         sketches: false
     ```
 
-3. [Agent を構成してログを収集][2]します。
-4. [Agent を再起動します][3]。
+3. [Configure the Agent to collect Logs][2].
+4. [Restart the Agent][3].
 
-[1]: /ja/agent/guide/agent-configuration-files/
-[2]: /ja/logs/log_collection/
-[3]: /ja/agent/guide/agent-commands/#restart-the-agent
+[1]: /agent/configuration/agent-configuration-files/
+[2]: /logs/log_collection/
+[3]: /agent/configuration/agent-commands/#restart-the-agent
 {{% /tab %}}
 {{% tab "Docker" %}}
 
-Docker コンテナ化された Agent を使用している場合は、`DD_ENABLE_PAYLOADS_EVENTS`、`DD_ENABLE_PAYLOADS_SERIES`、`DD_ENABLE_PAYLOADS_SERVICE_CHECKS`、`DD_ENABLE_PAYLOADS_SKETCHES` の環境変数を `false` に設定し、Agent のコンフィギュレーションを以下のようにします。
+If you are using the Docker containerized Agent, set the `DD_ENABLE_PAYLOADS_EVENTS`, `DD_ENABLE_PAYLOADS_SERIES`, `DD_ENABLE_PAYLOADS_SERVICE_CHECKS`, and `DD_ENABLE_PAYLOADS_SKETCHES` environment variables to `false` in addition to your Agent configuration:
 
 ```shell
 docker run -d --name datadog-agent \
@@ -57,10 +54,10 @@ docker run -d --name datadog-agent \
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-Agent を Kubernetes にデプロイしている場合は、`DD_ENABLE_PAYLOADS_EVENTS`、`DD_ENABLE_PAYLOADS_SERIES`、`DD_ENABLE_PAYLOADS_SERVICE_CHECKS`、`DD_ENABLE_PAYLOADS_SKETCHES` の環境変数を `false` に設定し、Agent のコンフィギュレーションを以下のようにします。
+If you are deploying the Agent in Kubernetes, set the `DD_ENABLE_PAYLOADS_EVENTS`, `DD_ENABLE_PAYLOADS_SERIES`, `DD_ENABLE_PAYLOADS_SERVICE_CHECKS`, and `DD_ENABLE_PAYLOADS_SKETCHES` environment variables to `false` in addition to your Agent configuration.
 
 ```yaml
- ## ログのみ送信
+ ## Send logs only
  datadog:
  [...]
    env:

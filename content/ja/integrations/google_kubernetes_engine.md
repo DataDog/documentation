@@ -1,97 +1,98 @@
 ---
-categories:
+"categories":
 - cloud
-- コンテナ
+- containers
 - google cloud
 - kubernetes
-- ログの収集
-- ネットワーク
-dependencies: []
-description: GKE リソースの使用状況を監視します。
-doc_link: https://docs.datadoghq.com/integrations/google_kubernetes_engine/
-draft: false
-git_integration_title: google_kubernetes_engine
-has_logo: true
-integration_id: google-kubernetes-engine
-integration_title: Google Kubernetes Engine, Cloud
-integration_version: ''
-is_public: true
-custom_kind: integration
-manifest_version: '1.0'
-name: google_kubernetes_engine
-public_title: Datadog-Google Kubernetes Engine, Cloud インテグレーション
-short_description: GKE リソースの使用状況を監視します。
-version: '1.0'
+- log collection
+- network
+"custom_kind": "integration"
+"dependencies": []
+"description": "Monitor your GKE resource usage."
+"doc_link": "https://docs.datadoghq.com/integrations/google_kubernetes_engine/"
+"draft": false
+"git_integration_title": "google_kubernetes_engine"
+"has_logo": true
+"integration_id": "google-kubernetes-engine"
+"integration_title": "Google Kubernetes Engine, Cloud"
+"integration_version": ""
+"is_public": true
+"manifest_version": "1.0"
+"name": "google_kubernetes_engine"
+"public_title": "Datadog-Google Kubernetes Engine, Cloud Integration"
+"short_description": "Monitor your GKE resource usage."
+"version": "1.0"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-## 概要
+## Overview
 
-Google Kubernetes Engine (GKE)  は、Docker コンテナを実行するための強力なクラスターマネージャーおよびオーケストレーションシステムです。
+Google Kubernetes Engine (GKE) is a powerful cluster manager and orchestration system for running your Docker containers.
 
-Google Kubernetes Engine からメトリクスを取得して、以下のことができます。
+Get metrics from Google Kubernetes Engine to:
 
-- GKE コンテナおよび GKE コントロールプレーンのパフォーマンスを可視化する。
-- GKE コンテナとアプリケーションのパフォーマンスを関連付ける。
+- Visualize the performance of your GKE containers and GKE control plane.
+- Correlate the performance of your GKE containers with your applications.
 
-このインテグレーションには、2 つの独立したプリセットダッシュボードが付属しています。
+This integration comes with two separate preset dashboards:
 
-- 標準の GKE ダッシュボードには、Google インテグレーションから収集した GKE と GKE コントロールプレーンのメトリクスが表示されます。
-- 拡張 GKE ダッシュボードには、Datadog の Agent ベースの Kubernetes インテグレーションからのメトリクスと、Google インテグレーションから収集した GKE コントロールプレーンメトリクスが表示されます。
+- The standard GKE dashboard presents the GKE and GKE control plane metrics collected from the Google integration.
+- The enhanced GKE dashboard presents metrics from Datadog's Agent-based Kubernetes integration alongside GKE control plane metrics collected from the Google integration.
 
-標準のダッシュボードは、簡単なコンフィギュレーションで GKE での観測が可能です。拡張ダッシュボードは、追加のコンフィギュレーション手順が必要ですが、よりリアルタイムの Kubernetes メトリクスを提供し、本番でワークロードを監視するためのダッシュボードをクローンしてカスタマイズする際に、しばしばより良い場所から始めることができます。
+The standard dashboard provides observability in GKE with a simple configuration. The enhanced dashboard requires additional configuration steps, but provides more real-time Kubernetes metrics, and is often a better place to start from when cloning and customizing a dashboard for monitoring workloads in production.
 
-セルフホスティングの Kubernetes クラスターとは異なり、GKE コントロールプレーンは Google によって管理され、クラスターで動作する Datadog Agent からはアクセスできません。そのため、クラスターの監視に Datadog Agent を主に使用している場合でも、GKE コントロールプレーンへの観測可能性は Google とのインテグレーションを必要とします。
+Unlike self-hosted Kubernetes clusters, the GKE control plane is managed by Google and not accessible by a Datadog Agent running in the cluster. Therefore, observability into the GKE control plane requires the Google integration even if you are primarily using the Datadog Agent to monitor your clusters.
 
-## 計画と使用
+## Setup
 
-### メトリクスの収集
+### Metric collection
 
-#### インフラストラクチャーリスト
+#### Installation
 
-1. まだの方は、まず[Google Cloud Platform とのインテグレーション][1]を設定してください。標準のメトリクスとプリセットダッシュボードについては、他のインストール手順はありません。
+1. If you haven't already, set up the [Google Cloud Platform integration][1] first. There are no other installation steps for the standard metrics and preset dashboard.
 
-2. 拡張ダッシュボードを表示し、APM トレース、ロギング、プロファイリング、セキュリティ、およびその他の Datadog サービスを有効にするには、[GKE クラスターに Datadog Agent をインストールします][2]。
+2. To populate the enhanced dashboard and enable APM tracing, logging, profiling, security, and other Datadog services, [install the Datadog Agent into your GKE cluster][2].
 
-3. コントロールプレーンメトリクスを入力するには、[GKE コントロールプレーンメトリクスを有効にする][3]必要があります。コントロールプレーンメトリクスは、Google が GKE で管理している Kubernetes コントロールプレーンの動作を可視化するものです。
+3. To populate the control plane metrics, you must [enable GKE control plane metrics][3]. Control plane metrics give you visibility into the operation of the Kubernetes control plane, which is managed by Google in GKE.
 
-### 収集データ
+### Log collection
 
-Google Kubernetes Engine のログは Google Cloud Logging で収集され、Cloud Pub/Sub トピックを通じて Dataflow ジョブに送信されます。まだの場合は、[Datadog Dataflow テンプレートでロギングをセットアップしてください][4]。
+Google Kubernetes Engine logs are collected with Google Cloud Logging and sent to a Dataflow job through a Cloud Pub/Sub topic. If you haven't already, [set up logging with the Datadog Dataflow template][4].
 
-これが完了したら、Google Kubernetes Engine のログを Google Cloud Logging から Pub/Sub へエクスポートします。
+Once this is done, export your Google Kubernetes Engine logs from Google Cloud Logging to the Pub/Sub topic:
 
-1. [GCP Logs Explorer ページ][5]にアクセスし、Kubernetes と GKE のログをフィルタリングします。
-2. **シンクを作成**し、シンクに適宜名前を付けます。
-3. エクスポート先として「Cloud Pub/Sub」を選択し、エクスポート用に作成された Pub/Sub を選択します。**注**: この Pub/Sub は別のプロジェクト内に配置することもできます。
+1. Go to the [GCP Logs Explorer page][5] and filter Kubernetes and GKE logs.
+2. Click **Create Sink** and name the sink accordingly.
+3. Choose "Cloud Pub/Sub" as the destination and select the Pub/Sub topic that was created for that purpose. **Note**: The Pub/Sub topic can be located in a different project.
 
-    {{< img src="integrations/google_cloud_pubsub/creating_sink2.png" alt="Google Cloud Pub/Sub ログを Pub Sub へエクスポート" >}}
+    {{< img src="integrations/google_cloud_pubsub/creating_sink2.png" alt="Export Google Cloud Pub/Sub Logs to Pub Sub" >}}
 
-4. **作成**をクリックし、確認メッセージが表示されるまで待ちます。
+4. Click **Create** and wait for the confirmation message to show up.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "google_kubernetes_engine" >}}
 
 
-### ヘルプ
+### Events
 
-Google Kubernetes Engine インテグレーションには、イベントは含まれません。
+The Google Kubernetes Engine integration does not include any events.
 
-### ヘルプ
+### Service Checks
 
-Google Kubernetes Engine インテグレーションには、サービスのチェック機能は含まれません。
+The Google Kubernetes Engine integration does not include any service checks.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][7]までお問い合わせください。
+Need help? Contact [Datadog support][7].
 
 
-[1]: https://docs.datadoghq.com/ja/integrations/google_cloud_platform/
-[2]: https://docs.datadoghq.com/ja/integrations/gke/?tab=standard
+[1]: https://docs.datadoghq.com/integrations/google_cloud_platform/
+[2]: https://docs.datadoghq.com/integrations/gke/?tab=standard
 [3]: https://cloud.google.com/stackdriver/docs/solutions/gke/managing-metrics#enable-control-plane-metrics
-[4]: https://docs.datadoghq.com/ja/integrations/google_cloud_platform/?tab=datadogussite#log-collection
+[4]: https://docs.datadoghq.com/integrations/google_cloud_platform/?tab=datadogussite#log-collection
 [5]: https://console.cloud.google.com/logs/viewer
 [6]: https://github.com/DataDog/dogweb/blob/prod/integration/google_kubernetes_engine/google_kubernetes_engine_metadata.csv
-[7]: https://docs.datadoghq.com/ja/help/
+[7]: https://docs.datadoghq.com/help/
+

@@ -1,61 +1,62 @@
 ---
+title: Datadog Clipboard
+kind: documentation
+description: Create and manage incidents
 aliases:
-- /ja/monitors/incident_management/datadog_clipboard
-description: インシデントの作成と管理
+- /monitors/incident_management/datadog_clipboard
 further_reading:
-- link: https://www.datadoghq.com/blog/datadog-clipboard/
-  tag: ブログ
-  text: Datadog クリップボードでデータを楽に検索
-title: Datadog クリップボード
+- link: "https://www.datadoghq.com/blog/datadog-clipboard/"
+  tag: Blog
+  text: Explore your data effortlessly with the Datadog Clipboard
 ---
 
-## 概要
+## Overview
 
-Datadog クリップボードは、さまざまなコンテキストを収集して共有するためのクロスプラットフォーム型ツールです。各ユーザーが個別に使用でき、コピーしたすべてのグラフを保存したリンクと一緒に保存できます。また、シグナルは分類して、ダッシュボード、ノートブック、インシデントにエクスポートできます。
+The Datadog Clipboard is a cross-platform tool for collecting and sharing signals across contexts. It is personal to each user and stores all copied graphs alongside any saved links. Signals can be grouped and exported to a dashboard, notebook, or incident.
 
-{{< img src="service_management/incidents/clipboard-full.png" alt="クリップボード">}}
+{{< img src="service_management/incidents/clipboard-full.png" alt="The main clipboard">}}
 
-## クロスページ検索
+## Cross-page exploration
 
-クリップボードは Datadog のすべてのページに対応しており、各ユーザーがコピーしたすべてのグラフの記録がクリップボードに保持されます。ただし、クエリテキスト、イベント JSON、その他のテキストベースのコンテンツは自動的にクリップボードにコピーされません。
+The Clipboard works on all pages in Datadog and keeps a record of all graphs copied by an individual user. The Clipboard does not automatically copy query text, event JSON, or other text-based content.
 
-## クリップボードを開く
+## Opening the Clipboard
 
-クリップボードを開くには、いずれかのグラフをコピーして、ポップアップ内で **Open Clipboard** をクリックします。
+To open the Clipboard, copy any graph and click **Open Clipboard** in the popup.
 
-{{< img src="service_management/incidents/open-clipboard.png" alt="クリップボードでグラフを開く" style="width:80%;">}}
+{{< img src="service_management/incidents/open-clipboard.png" alt="Open a graph in the Clipboard" style="width:80%;">}}
 
-または、最小化されたクリップボード上で "`Cmd/Ctrl + Shift + K` to open" をクリックします。
+Or, click "`Cmd/Ctrl + Shift + K` to open" on the minimized Clipboard.
 
-クリップボードの開閉には、`Cmd/Ctrl + Shift + K` も使用できます。クリップボードを最小化するには、最小化アイコンをクリックします。最小化されたクリップボードは、Datadog の全ページにそのまま残ります。
+The Clipboard can also be opened and closed using `Cmd/Ctrl + Shift + K`. To minimize the Clipboard, click the Minimize icon. The minimized Clipboard persists on all pages of Datadog.
 
-## クリップの追加
+## Adding clips
 
-グラフを追加するには、`Cmd/Ctrl + C` キーを押してコピーするか、エクスポートメニューで **Copy** をクリックします。クリップボードが開いた際に、コピーしたグラフが自動的に追加されます。
+To add a graph, copy it with `Cmd/Ctrl + C` or click **Copy** in the export menu. Once the Clipboard is open, copied graphs get added automatically.
 
-URL を追加するには、クリップボードを開き、**Add current page** をクリクします。
+To add a URL, open the Clipboard and click **Add current page**.
 
-{{< img src="service_management/incidents/add-page.png" alt="クリップボードにダッシュボードを追加" style="width:80%;">}}
+{{< img src="service_management/incidents/add-page.png" alt="Add a dashboard to the Clipboard" style="width:80%;">}}
 
-## クリップの管理
+## Managing clips
 
-クリップボードの各アイテムは、開く、閉じる、削除することができます。シグナルの上にカーソルを置くと、これらの操作を実行できます。アイテムを開くと、元のシグナルのリンクへと移動します。アイテムのタイトルをクリックすると、グラフのソース (クリップ元のダッシュボードなど) が開きます。
+Each item in the Clipboard can be opened, cloned, or deleted; these options are available when you hover over any signal. Opening an item navigates to the link of the original signal. Open the source of any graph (like the dashboard it was clipped from) by clicking the title of the item.
 
-{{< img src="service_management/incidents/managing-clips.png" alt="クリップを管理" style="width:80%;">}}
+{{< img src="service_management/incidents/managing-clips.png" alt="Manage your clips" style="width:80%;">}}
 
-クリップボードには、最大 20 個の信号を保存できます。削除する場合は、1 つずつ削除するか、**Remove All** をクリックします。20 個を超える信号が追加された場合、一番古い信号 (一番左側に保存) が自動的に削除されます。
+The Clipboard holds a maximum of 20 signals. Remove signals by deleting them individually, or by clicking **Remove All**. If more than 20 signals are added, the oldest signals, stored furthest to the left, are removed automatically.
 
-## エクスポート
+## Exporting
 
-クリップボードのアイテムは、キーボードショートカットまたはエクスポートメニューを使用して、ダッシュボード、ノートブック、またはインシデントにエクスポートできます。個々のシグナルをコピーするには、シグナルにカーソルを合わせ、`Cmd/Ctrl + C` を使用してコピーし、`Cmd/Ctrl + V` を使用してダッシュボードまたはノートブックに貼り付けます。複数のシグナルをコピーするには、`Shift + Click` を使用してグラフとリンクを選択し、`Cmd/Ctrl + C` を使用してそれらをコピーします。
+Items on the Clipboard can be exported to Dashboards, Notebooks, or Incidents using keyboard shortcuts or the export menu. To copy an individual signal, hover over it and use `Cmd/Ctrl + C` to copy, and paste it into a dashboard or notebook with `Cmd/Ctrl + V`. To copy multiple signals, use  `Shift + Click` to select graphs and links, and use `Cmd/Ctrl + C` to copy them.
 
-または、エクスポートメニューを使用して、選択内容を新規または既存のダッシュボード、ノートブック、またはインシデントにエクスポートします。ノートブックにエクスポートできるのは[サポートされているグラフ][1]のみです。
+Alternatively, export your selection to a new or existing dashboard, notebook, or incident using the export menu. Only [supported graphs][1] can be exported to Notebooks.
 
-{{< img src="service_management/incidents/exporting.png" alt="クリップボードからエクスポート" style="width:80%;">}}
+{{< img src="service_management/incidents/exporting.png" alt="Export from the Clipboard" style="width:80%;">}}
 
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/ja/notebooks/#visualization
+[1]: https://docs.datadoghq.com/notebooks/#visualization

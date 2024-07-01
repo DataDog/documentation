@@ -1,5 +1,7 @@
 ---
 title: count
+core_product:
+  - metrics
 ---
-"Count" は、ある時間間隔に送信されたすべての値を加算するメトリクスタイプです。
-詳細は、<a href="/metrics/#metric-types">ドキュメントを参照してください</a>。
+"Count" is a metric type that adds up all the submitted values in a time interval.
+For more information, <a href="/metrics/#metric-types">see the documentation</a>.

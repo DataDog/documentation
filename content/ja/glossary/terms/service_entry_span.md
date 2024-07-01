@@ -1,8 +1,8 @@
 ---
+title: service entry span
 core_product:
-- apm
-title: サービスエントリスパン
+  - apm
 ---
-[スパン][1]とは、サービスへのリクエストに対するエントリーポイントメソッドとなるサービスエントリスパンを指します。フレームグラフ上の直属の親のカラーが異なる場合、この値を APM で可視化することができます。
+A [span][1] is a service entry span when it is the entrypoint method for a request to a service. You can visualize this in APM when the color of the immediate parent on a flame graph is a different color.
 
-[1]: /ja/glossary/#span
+[1]: /glossary/#span

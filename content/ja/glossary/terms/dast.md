@@ -1,7 +1,7 @@
 ---
+title: dynamic application security testing (DAST)
 core_product:
-- security
-- appsec
-title: ダイナミックアプリケーションセキュリティテスト (DAST)
+  - security
+  - appsec
 ---
-DAST は、実行中のアプリケーションをソースコードを見ることなく解析するセキュリティテスト手法です。
+DAST is a security testing methodology that analyzes a running application without looking at its source code.

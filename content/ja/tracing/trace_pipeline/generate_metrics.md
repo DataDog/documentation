@@ -1,87 +1,91 @@
 ---
+title: Generate Metrics from Spans
+kind: documentation
+description: 'Generate custom metrics from ingested spans.'
 aliases:
-- /ja/tracing/span_to_metrics/
-- /ja/tracing/generate_metrics/
-description: 取り込んだスパンからカスタムメトリクスを生成します。
+- /tracing/span_to_metrics/
+- /tracing/generate_metrics/
 further_reading:
-- link: tracing/trace_pipeline
-  tag: ドキュメント
-  text: トレースの取り込みをカスタマイズし、重要なトレースを保持します。
-- link: tracing/trace_search_and_analytics/query_syntax
-  tag: ドキュメント
-  text: 保持されたトレースに基づいて分析クエリとモニターを使用します。
-title: スパンからメトリクスを生成する
+    - link: tracing/trace_pipeline
+      tag: Documentation
+      text: Customize trace ingestion and retain important traces.
+    - link: tracing/trace_search_and_analytics/query_syntax
+      tag: Documentation
+      text: Use Analytics queries and monitors based on retained traces.
+    - link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/spans_metric"
+      tag: External Site
+      text: Create and manage span-based metrics with Terraform
 ---
 
-{{< img src="tracing/apm_lifecycle/span_based_metrics.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="スパンベースメトリクス" >}}
+{{< img src="tracing/apm_lifecycle/span_based_metrics.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Span-based metrics" >}}
 
-スパンが[保持フィルター][1]でインデックス化されているかどうかに関係なく、取り込んだスパンの 100% からメトリクスを生成します。
+Generate metrics from 100% of ingested spans, regardless of whether the spans are indexed by a [retention filter][1].
 
-特定の固定クエリや比較にカスタムメトリクスを使用する一方、保持フィルターを作成することで、保持されたトレースとそのフレームグラフの任意のクエリと調査が可能になります。
+Use custom metrics for specific fixed queries and comparisons, while creating retention filters to allow arbitrary querying and investigation of the retained trace and its flame graph.
 
-**請求について:** 取り込まれたスパンから生成されたメトリクスは、[カスタムメトリクス][2] として請求されます。
+**Billing Note:** Metrics created from ingested spans are billed as [Custom Metrics][2].
 
-たとえば、カスタムメトリクスを異常検知の視覚化やダッシュボードおよびモニターの作成に使用して、ビジネスコンテキストにとって重要なさまざまなパラメーターの傾向を把握することができます。生成されたすべてのメトリクスは、Datadog [カスタムメトリクス][3]として 15 か月間利用可能です。
+For example, you may want to use custom metrics to visualize anomalies, create dashboards and monitors, and see trends across any parameters that are important to your business context. All generated metrics are available for 15 months as Datadog [custom metrics][3].
 
-| 理由                        | スパンから生成されたカスタムメトリクス                   | Retention Filters                           |
+| Reason                        | Custom Metrics Generated from Spans                   | Retention Filters                           |
 | -------------------------------------- | -------------------------------------- | --------------------------------- |
-| 保持期間                     | 15 か月                    | 15 日             |
-| 異常検知                           | 生成されたメトリクスに基づき[異常検知モニター][4]を作成します。                            | 分析を使用して過去 15 日間の動作を比較し、完全なトレースを表示して根本原因を調査します。                         |
-| 完全なコンテキストで一致するトレースの調査                          | N/A - カスタムメトリクスは、関連するトレースを保持しません。                            | [保持フィルター][1]を使用して、ビジネスコンテキストに関連するトレースを正確に保持します。                            |
-| 動作の粒度                           | 重要なエンドポイントまたはその他のカーディナリティの低いグループのカスタムメトリクスを作成します。                        | 特定のエンドポイントに[トレースエクスプローラー][5]を使用するか、[分析][6]で 'Group By' オプションを使用します。                    |
-| 予測または複雑な数学                          | 生成されたメトリクスに基づき、[予測値モニター][7]を作成します。                          |   N/A                            |
+| Retention Period                     | 15 months                    | 15 days             |
+| Anomaly Detection                           | Create an [Anomaly Monitor][4] based on generated metrics.                            | Use Analytics to compare behavior over the past 15 days, and view complete traces to investigate root cause.                         |
+| Investigation of matching traces with full context                          | N/A - Custom Metrics do not result in any retention of associated traces.                            | Keep exactly the traces relevant to your business context with [retention filters][1].                            |
+| Granularity of behavior                           | Create custom metrics for important endpoints or other low-cardinality groups.                        | Use [Trace Explorer][5] for specific endpoints, or use the 'Group By' option in [Analytics][6].                    |
+| Forecasting or complex mathematics                          | Create a [Forecast monitor][7] based on generated metrics.                          |   N/A                            |
 
-スパンからメトリクスを生成するには、[APM のセットアップとコンフィギュレーション][8] ページで [Generate Metrics][9] タブを選択し、**New Metric** ボタンをクリックします。
+To generate metrics from spans, on the [APM Setup and Configuration][8] page select the [Generate Metrics][9] tab, and click the **New Metric** button.
 
 <br>
 
-{{< img src="tracing/span_to_metrics/GenerateMetrics.png" style="width:100%;" alt="取り込んだスパンからメトリクスを生成する" >}}
+{{< img src="tracing/span_to_metrics/GenerateMetrics.png" style="width:100%;" alt="Generate metrics from ingested spans" >}}
 
 
-## スパンベースのメトリクスの作成
+## Creating a span-based metric
 
-{{< img src="tracing/span_to_metrics/createspantometrics.png" style="width:100%;" alt="メトリクスの作成方法" >}}
+{{< img src="tracing/span_to_metrics/createspantometrics.png" style="width:100%;" alt="How to create a metric" >}}
 
-1. **メトリクスクエリを定義する:** 必要なデータセットにフィルタリング用のクエリを追加することから始めます。[クエリ構文][10]は、APM 検索と分析と同じです。
+1. **Define the metric query:** Start by adding a query for filtering to your required dataset. The [query syntax][10] is the same as APM Search and Analytics.
 
-1. **追跡するフィールドを定義する:** `*` を選択してクエリに一致するすべてのスパンのカウントを生成するか、属性 (たとえば、`@cassandra_row_count`) を入力して数値を集計し、対応するカウント、最小、最大、合計、および平均の集計メトリクスを作成します。属性タイプがメジャーの場合、メトリクスの値はスパン属性の値です。
+1. **Define the field you want to track:** Select `*` to generate a count of all spans matching your query or enter an attribute (for example, `@cassandra_row_count`) to aggregate a numeric value and create its corresponding count, minimum, maximum, sum, and average aggregated metrics. If the attribute type is a measure, the value of the metric is the value of the span attribute.
 
-   **注**: 数値でないスパン属性は集計に使用できません。スパン属性の異なる値をカウントするメトリクスを生成するには (例えば、特定のエンドポイントを訪問するユーザー ID の数をカウントする)、このディメンションを `group by` セレクタに追加し、`count_nonzero` 関数を使用してタグ値の数をカウントします。
+   **Note**: Span attributes that are not numerical values cannot be used for aggregation. To generate a metric that counts the distinct values of a span attribute (for instance count the number of user IDs hitting a specific endpoint), add this dimension to the `group by` selector, and use the `count_nonzero` function to count the number of tag values.
 
-1. **グループ化ディメンションを指定する:** デフォルトでは、スパンから生成されたメトリクスには、明示的に追加されない限りタグがありません。スパンに存在する属性またはタグを使用して、メトリクスタグを作成できます。
+1. **Specify the group-by dimension:** By default, metrics generated from spans will not have any tags unless explicitly added. Any attribute or tag that exists in your spans can be used to create metric tags.
 
-1. **ライブ分析と検索クエリのプレビューを確認する:** クエリがデータの視覚化に与える影響と、クエリで考慮される一致するスパンをライブプレビューでリアルタイムに表示できます。
+1. **Check the Live Analytics and Search Query preview:** You can view the impact of your query in real-time on the data visualization, and the matching spans considered for your query in a live preview.
 
-1. **メトリクスに名前を付ける:** メトリクス名は、[メトリクス命名規則][11]に従う必要があります。`trace.*` で始まるメトリクス名は許可されておらず、保存されません。
+1. **Name your metric:** Metric names must follow the [metric naming convention][11]. Metric names that start with `trace.*` are not permitted and will not be saved.
 
-<div class="alert alert-warning">スパンベースのメトリクスは<a href="/metrics/custom_metrics/">カスタムメトリクス</a>と見なされ、それに応じて請求されます。請求への影響を避けるために、タイムスタンプ、ユーザー ID、リクエスト ID、セッション ID などの無制限または非常に高いカーディナリティ属性によるグループ化は避けてください。</div>
+<div class="alert alert-warning"> Span-based metrics are considered <a href="/metrics/custom_metrics/">custom metrics</a> and billed accordingly. Avoid grouping by unbounded or extremely high cardinality attributes like timestamps, user IDs, request IDs, or session IDs to avoid impacting your billing.</div>
 
-## 既存のスパンベースのメトリクスの更新
+## Updating existing span-based metrics
 
-{{< img src="tracing/span_to_metrics/editspantometrics.png" style="width:100%;" alt="既存のメトリクスを編集する" >}}
+{{< img src="tracing/span_to_metrics/editspantometrics.png" style="width:100%;" alt="Edit an existing metrics" >}}
 
-メトリクスの作成後、2 つのフィールドのみを更新できます。
+After a metric is created, only two fields can be updated:
 
-| フィールド                                 | 理由                                                                                                             |
+| Field                                 | Reason                                                                                                             |
 |----------------------------------------|-------------------------------------------------------------------------------------------------------------------------|
-| Stream filter query                  | 一致するスパンのセットを変更して、メトリクスに集計します。            |
-| 集計グループ             | タグを更新して、生成されたメトリクスのカーディナリティを管理します。                                                     |
+| Stream filter query                  | Change the set of matching spans to be aggregated into metrics.            |
+| Aggregation groups             | Update the tags to manage the cardinality of generated metrics.                                                     |
 
-**注**: メトリクスのタイプまたは名前を変更するには、新しいメトリクスを作成し、古いメトリクスを削除します。
+**Note**: To change the metric type or name, create a new metric and delete the old one.
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /ja/tracing/trace_pipeline/trace_retention
-[2]: /ja/account_management/billing/custom_metrics/
-[3]: https://docs.datadoghq.com/ja/metrics/#overview
-[4]: /ja/monitors/types/anomaly/#overview
-[5]: /ja/tracing/trace_explorer/
-[6]: /ja/tracing/trace_explorer/query_syntax/#analytics-query
-[7]: /ja/monitors/types/forecasts/
+[1]: /tracing/trace_pipeline/trace_retention
+[2]: /account_management/billing/custom_metrics/
+[3]: https://docs.datadoghq.com/metrics/#overview
+[4]: /monitors/types/anomaly/#overview
+[5]: /tracing/trace_explorer/
+[6]: /tracing/trace_explorer/query_syntax/#analytics-query
+[7]: /monitors/types/forecasts/
 [8]: https://app.datadoghq.com/apm/getting-started
 [9]: https://app.datadoghq.com/apm/traces/generate-metrics
-[10]: /ja/tracing/trace_explorer/query_syntax/
-[11]: /ja/metrics/#naming-metrics
+[10]: /tracing/trace_explorer/query_syntax/
+[11]: /metrics/#naming-metrics

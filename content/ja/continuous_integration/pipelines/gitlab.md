@@ -1,63 +1,66 @@
 ---
+title: Set up Tracing on a GitLab Pipeline
 aliases:
-- /ja/continuous_integration/setup_pipelines/gitlab
+  - /continuous_integration/setup_pipelines/gitlab
 further_reading:
-- link: /continuous_integration/pipelines
-  tag: ドキュメント
-  text: パイプラインの実行結果とパフォーマンスを確認する
-- link: /continuous_integration/troubleshooting/
-  tag: ドキュメント
-  text: トラブルシューティング CI
-- link: /continuous_integration/pipelines/custom_tags_and_metrics/
-  tag: ドキュメント
-  text: カスタムタグとメトリクスを追加してパイプラインの可視性を拡張する
-title: GitLab パイプラインでトレースを設定する
+    - link: /continuous_integration/pipelines
+      tag: Documentation
+      text: Explore Pipeline Execution Results and Performance
+    - link: /continuous_integration/troubleshooting/
+      tag: Documentation
+      text: Troubleshooting CI Visibility
+    - link: /continuous_integration/pipelines/custom_tags_and_measures/
+      tag: Documentation
+      text: Extend Pipeline Visibility by adding custom tags and measures
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">選択したサイト ({{< region-param key="dd_site_name" >}}) では、現時点では CI Visibility は使用できません。</div>
+<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
-## 互換性
+## Overview
 
-- **対応する GitLab のバージョン**:
+[GitLab][19] is a DevOps platform that automates the software development lifecycle with integrated CI/CD features, enabling you to deploy applications quickly and securely.
+
+Set up tracing in GitLab to collect data on your pipeline executions, analyze performance bottlenecks, troubleshoot operational issues, and optimize your deployment workflows.
+
+### Compatibility
+
+| Pipeline Visibility | Platform | Definition |
+|---|---|---|
+| [Partial retries][20] | Partial pipelines | View partially retried pipeline executions. |
+| [Manual steps][21] | Manual steps | View manually triggered pipelines. |
+| [Queue time][22] | Queue time | View the amount of time pipeline jobs sit in the queue before processing. |
+| Logs correlation | Logs correlation | Correlate pipeline spans to logs and enable [job log collection][12]. |
+| Infrastructure metric correlation | Infrastructure metric correlation | Correlate jobs to [infrastructure host metrics][14] for self-hosted GitLab runners. |
+| Custom pre-defined tags | Custom pre-defined tags | Set [custom tags][10] to all generated pipeline, stages, and job spans. |
+| [Custom tags][15] [and measures at runtime][16] | Custom tags and measures at runtime | Configure [custom tags and measures][13] at runtime. |
+| Parameters | Parameters | Set custom `env` or `service` parameters when a pipeline is triggered. |
+| [Pipeline failure reasons][11] | Pipeline failure reasons | Identify pipeline failure reasons from [error messages][15]. |
+| [Approval wait time][23] | Approval wait time  | View the amount of time jobs and pipelines wait for manual approvals. |
+| [Execution time][24] | Execution time  | View the amount of time pipelines have been running jobs. Gitlab refers to this metric as `duration`. Duration in Gitlab and execution time may show different values. Gitlab does not take into consideration jobs that failed due to certain kinds of failures (such as runner system failures). |
+
+The following GitLab versions are supported:
+
 - GitLab.com (SaaS)
-- GitLab >= 14.1 (セルフホスティング)
-- GitLab >= 13.7.0 (セルフホスティング)、機能フラグ `datadog_ci_integration` を有効にすることで利用可能です
+- GitLab >= 14.1 (self-hosted)
+- GitLab >= 13.7.0 (self-hosted) with the `datadog_ci_integration` feature flag enabled
 
-- **Partial pipelines**: [一部再試行][11]とダウンストリームパイプラインの実行を表示する
-
-- **Manual steps**: 手動でトリガーされたパイプラインを表示する
-
-- **Queue time**: パイプラインのジョブが処理されるまでのキューでの待ち時間を表示する
-
-- **Logs correlation**: パイプラインスパンをログに関連付け、[ジョブログの収集を有効にする][12]
-
-- **Infrastructure metric correlation**: セルフホスティングの GitLab ランナーのために、パイプラインを[インフラストラクチャーホストメトリクス][14]に関連付ける
-
-- **Custom pre-defined tags**: 生成されたすべてのパイプライン、ステージ、ジョブスパンに[カスタムタグ][10]を構成する
-
-- **Custom tags and metrics at runtime**: ランタイムの[カスタムタグ][13]とメトリクスを構成する
-
-- **Parameters**: カスタム `env` または `service` パラメーターを設定する
-
-- **Pipeline failure reasons**: [エラーメッセージ][15]からパイプラインの障害理由を特定する
-
-## Datadog インテグレーションの構成
+## Configure the Datadog integration
 
 {{< tabs >}}
 {{% tab "GitLab.com" %}}
 
-[プロジェクト][1]または[グループ][2]でのインテグレーションを構成するには、インスツルメントしたい各プロジェクトまたはグループに対して **Settings > Integrations > Datadog** に移動します。
+Configure the integration on a [project][1] or [group][2] by going to **Settings > Integrations > Datadog** for each project or group you want to instrument.
 
 [1]: https://docs.gitlab.com/ee/user/admin_area/settings/project_integration_management.html#use-custom-settings-for-a-group-or-project-integration
 [2]: https://docs.gitlab.com/ee/user/admin_area/settings/project_integration_management.html#manage-group-level-default-settings-for-a-project-integration
 {{% /tab %}}
 {{% tab "GitLab &gt;&equals; 14.1" %}}
 
-[プロジェクト][1]または[グループ][2]でのインテグレーションを構成するには、インスツルメントしたい各プロジェクトまたはグループに対して **Settings > Integrations > Datadog** に移動します。
+Configure the integration on a [project][1] or [group][2] by going to **Settings > Integrations > Datadog** for each project or group you want to instrument.
 
-また、GitLab [インスタンス][3]レベルで、**Admin > Settings > Integrations > Datadog** にアクセスして、インテグレーションを有効にすることができます。
+You can also activate the integration at the GitLab [instance][3] level, by going to **Admin > Settings > Integrations > Datadog**.
 
 [1]: https://docs.gitlab.com/ee/user/admin_area/settings/project_integration_management.html#use-custom-settings-for-a-group-or-project-integration
 [2]: https://docs.gitlab.com/ee/user/admin_area/settings/project_integration_management.html#manage-group-level-default-settings-for-a-project-integration
@@ -65,15 +68,15 @@ title: GitLab パイプラインでトレースを設定する
 {{% /tab %}}
 {{% tab "GitLab &lt; 14.1" %}}
 
-`datadog_ci_integration` [機能フラグ][1]を有効にして、インテグレーションを有効にします。インストールの種類に応じて、GitLab の [Rails Runner][2] を使用する次のコマンドのいずれかを実行します。
+Enable the `datadog_ci_integration` [feature flag][1] to activate the integration. Run one of the following commands, which use GitLab's [Rails Runner][2], depending on your installation type:
 
-**Omnibus インストール**
+**Omnibus installations**
 
 {{< code-block lang="shell" >}}
 sudo gitlab-rails runner "Feature.enable(:datadog_ci_integration)"
 {{< /code-block >}}
 
-**ソースインストールから**
+**From source installations**
 
 {{< code-block lang="shell" >}}
 sudo -u git -H bundle exec rails runner \
@@ -81,178 +84,229 @@ sudo -u git -H bundle exec rails runner \
   "Feature.enable(:datadog_ci_integration)"
 {{< /code-block >}}
 
-**Kubernetes インストール**
+**Kubernetes installations**
 
 {{< code-block lang="shell" >}}
 kubectl exec -it <task-runner-pod-name> -- \
   /srv/gitlab/bin/rails runner "Feature.enable(:datadog_ci_integration)"
 {{< /code-block >}}
 
-次に、インスツルメントしたい各プロジェクトの **Settings > Integrations > Datadog** で、[プロジェクト][3]単位でインテグレーションを構成します。
+Then, configure the integration on a [project][3] by going to **Settings > Integrations > Datadog** for each project you want to instrument.
 
-<div class="alert alert-warning"><strong>注</strong>: GitLab の初期バージョンの<a href="https://gitlab.com/gitlab-org/gitlab/-/issues/335218">バグ</a>により、<strong>GitLab のバージョン 14.1 未満</strong>では、GitLab の UI でオプションが利用可能であっても、<strong>グループまたはインスタンス</strong>レベルで Datadog インテグレーションを有効にすることができません。</div>
+<div class="alert alert-warning"><strong>Note</strong>: Due to a <a href="https://gitlab.com/gitlab-org/gitlab/-/issues/335218">bug</a> in early versions of GitLab, the Datadog integration cannot be enabled at <strong>group or instance</strong> level on <strong>GitLab versions < 14.1</strong>, even if the option is available on GitLab's UI</div>
 
 [1]: https://docs.gitlab.com/ee/administration/feature_flags.html
 [2]: https://docs.gitlab.com/ee/administration/operations/rails_console.html#using-the-rails-runner
 [3]: https://docs.gitlab.com/ee/user/admin_area/settings/project_integration_management.html#use-custom-settings-for-a-group-or-project-integration
 {{% /tab %}}
-{{< /tabs >}}
 
-インテグレーションコンフィギュレーション設定を入力します。
+{{% tab "GitLab &lt; 13.7" %}}
 
-**Active**
-: インテグレーションを有効にします。
+For older versions of GitLab, you can use [webhooks][1] to send pipeline data to Datadog.
 
-**Datadog site**
-: データを送信する [Datadog サイト][1]を指定します。<br/>
-**デフォルト**: `datadoghq.com`<br/>
-**選択したサイト**: {{< region-param key="dd_site" code="true" >}}<br/>
+<div class="alert alert-info"><strong>Note</strong>: Direct support with webhooks is not under development. Unexpected issues could happen. Datadog recommends that you update GitLab instead.</div>
 
-**API URL** (オプション)
-: データを直接送信するために使用される API URL をオーバーライドできます。これは、高度なシナリオでのみ使用されます。<br/>
-**デフォルト**: (空、オーバーライドなし)
+Go to **Settings > Webhooks** in your repository (or GitLab instance settings), and add a new webhook:
 
-**API key**
-: データを送信するときに使用する API キーを指定します。Datadog の Integrations セクションの [APIs タブ][2]で生成できます。
+- **URL**: <code>https://webhook-intake.{{< region-param key="dd_site" >}}/api/v2/webhook/?dd-api-key=<API_KEY></code> where `<API_KEY>` is your [Datadog API key][2].
+- **Secret Token**: leave blank
+- **Trigger**: Select `Job events` and `Pipeline events`.
 
-**Service** (オプション)
-: インテグレーションによって生成された各スパンにアタッチするサービス名を指定します。これを使用して、GitLab インスタンスを区別します。<br/>
-**デフォルト**: `gitlab-ci`
+To set custom `env` or `service` parameters, add more query parameters in the webhooks URL: `&env=<YOUR_ENV>&service=<YOUR_SERVICE_NAME>`
 
-**Env** (オプション)
-: インテグレーションによって生成された各スパンに接続する環境 (`env` タグ) を指定します。これを使用して、GitLab インスタンスのグループを区別します (例: ステージングまたは本番)。<br/>
-**デフォルト**: `none`
+**Set custom tags**
 
-**タグ** (オプション)
-: インテグレーションによって生成された各スパンに付ける任意のカスタムタグを指定します。1 行に 1 つのタグを `key:value` の形式で指定します。<br/>
-**デフォルト**: (空、追加タグなし)<br/>
-**注**: GitLab.com と GitLab >= 14.8 セルフホスティングでのみ利用可能です。
-
-**Test settings** ボタンを使用してインテグレーションをテストできます (プロジェクトでインテグレーションを構成する場合にのみ使用できます)。成功したら、**Save changes** をクリックしてインテグレーションのセットアップを完了します。
-
-## Webhook を介したインテグレーション
-
-ネイティブの Datadog インテグレーションを使用する代わりに、[Webhook][3] を使用してパイプラインデータを Datadog に送信できます。
-
-<div class="alert alert-info"><strong>注</strong>: ネイティブの Datadog インテグレーションは、推奨されるアプローチであり、積極的に開発中のオプションです。</div>
-
-リポジトリ (または GitLab インスタンス設定) の **Settings > Webhooks** に移動し、新しい Webhook を追加します。
-
-- **URL**: <code>https://webhook-intake.{{< region-param key="dd_site" >}}/api/v2/webhook/?dd-api-key=<API_KEY></code> ここで、`<API_KEY>` は [Datadog API キー][2]です。
-- **Secret Token**: 空白のままにします
-- **Trigger**: `Job events` と `Pipeline events` を選択します。
-
-カスタムの `env` または `service` パラメーターを設定するには、Webhook の URL で他のクエリパラメーターを追加します: `&env=<YOUR_ENV>&service=<YOUR_SERVICE_NAME>`
-
-### カスタムタグの設定
-
-インテグレーションによって生成されたすべてのパイプラインとジョブのスパンにカスタムタグを設定するには、**URL** に URL エンコードされたクエリパラメーター `tags` を追加し、`key:value` ペアをカンマで区切って指定します。key:value のペアにカンマが含まれる場合は、引用符で囲んでください。例えば、`key1:value1, "key2: value with , comma",key3:value3` を追加するには、以下の文字列を **Webhook URL** に追記する必要があります。
+To set custom tags to all the pipeline and job spans generated by the integration, add to the **URL** a URL-encoded query parameter `tags`, with `key:value` pairs separated by commas. If a key:value pair contains any commas, surround it with quotes. For example, to add `key1:value1,"key2: value with , comma",key3:value3`, the following string would need to be appended to the **Webhook URL**:
 
 `?tags=key1%3Avalue1%2C%22key2%3A+value+with+%2C+comma%22%2Ckey3%3Avalue3`
 
-#### Datadog Teams と統合する
-パイプラインに関連付けられたチームの表示とフィルタリングを行うには、カスタムタグとして `team:<your-team>` を追加します。カスタムタグ名は、[Datadog Teams][16] のチームハンドルと正確に一致している必要があります。
+[1]: https://docs.gitlab.com/ee/user/project/integrations/webhooks.html
+[2]: https://app.datadoghq.com/organization-settings/api-keys
+{{% /tab %}}
+{{< /tabs >}}
 
-## Datadog でパイプラインデータを視覚化する
+Fill in the integration configuration settings:
 
-インテグレーションが正常に構成された後、パイプラインが終了すると、[Pipelines][4] ページと [Pipeline Executions][5] ページにデータが表示されます。
+**Active**
+: Enables the integration.
 
-**注**: Pipelines ページには、各リポジトリのデフォルトブランチのデータのみが表示されます。
+**Datadog site**
+: Specifies which [Datadog site][1] to send data to.<br/>
+**Default**: `datadoghq.com`<br/>
+**Selected site**: {{< region-param key="dd_site" code="true" >}}<br/>
 
-### 部分的およびダウンストリームパイプライン
+**API URL** (optional)
+: Allows overriding the API URL used for sending data directly, only used in advanced scenarios.<br/>
+**Default**: (empty, no override)
 
-**Pipeline Executions** のページでは、検索バーで以下のフィルターを使用することができます。
+**API key**
+: Specifies which API key to use when sending data. You can generate one in the [APIs tab][2] of the Integrations section on Datadog.
+
+**Service** (optional)
+: Specifies which service name to attach to each span generated by the integration. Use this to differentiate between GitLab instances.<br/>
+**Default**: `gitlab-ci`
+
+**Env** (optional)
+: Specifies which environment (`env` tag) to attach to each span generated by the integration. Use this to differentiate between groups of GitLab instances (for example: staging or production).<br/>
+**Default**: `none`
+
+**Tags** (optional)
+: Specifies any custom tags to attach to each span generated by the integration. Provide one tag per line in the format: `key:value`.<br/>
+**Default**: (empty, no additional tags)<br/>
+**Note**: Available only in GitLab.com and GitLab >= 14.8 self-hosted.
+
+You can test the integration with the **Test settings** button (only available when configuring the integration on a project). After it's successful, click **Save changes** to finish the integration set up.
+
+
+#### Integrate with Datadog Teams
+To display and filter the teams associated with your pipelines, add `team:<your-team>` as a custom tag. The custom tag name must match your [Datadog Teams][16] team handle exactly.
+
+## Visualize pipeline data in Datadog
+
+Once the integration is successfully configured, the [**CI Pipeline List**][4] and [**Executions**][5] pages populate with data after the pipelines finish.
+
+The Pipelines page shows data for only the default branch of each repository.
+
+### Partial and downstream pipelines
+
+On the **Executions** page, you can use the filters below in the search bar:
 
 `Downstream Pipeline`
-: 可能な値: `true`、`false`
+: Possible values: `true`, `false`
 
 `Manually Triggered`
-: 可能な値: `true`、`false`
+: Possible values: `true`, `false`
 
 `Partial Pipeline`
-: 可能な値: `retry`、`paused`、`resumed`
+: Possible values: `retry`
 
-{{< img src="ci/partial_retries_search_tags.png" alt="検索クエリに Partial Pipeline:retry を入力したパイプラインの実行画面" style="width:100%;">}}
+{{< img src="ci/partial_retries_search_tags.png" alt="The Pipeline executions page with Partial Pipeline:retry entered in the search query" style="width:100%;">}}
 
-これらのフィルターは、ページの左側にあるファセットパネルからも適用することができます。
-{{< img src="ci/partial_retries_facet_panel.png" alt="Partial Pipeline ファセットが展開され、値 Retry が選択されたファセットパネル、Partial Retry ファセットが展開され、値 true が選択されたファセットパネル" style="width:40%;">}}
+These filters can also be applied through the facet panel on the left hand side of the page.
+{{< img src="ci/partial_retries_facet_panel_without_paused.png" alt="The facet panel with Partial Pipeline facet expanded and the value Retry selected, the Partial Retry facet expanded and the value true selected" style="width:40%;">}}
 
 
-### インフラストラクチャーメトリクスとジョブの相関付け
+### Correlate infrastructure metrics to jobs
 
-セルフホスティングの GitLab ランナーを使っている場合、ジョブとそれを実行しているインフラストラクチャーを関連付けることができます。この機能を使うには、GitLab ランナーに `host:<hostname>` という形式のタグが必要です。タグは、[新しいランナーを登録する][6]際に追加することができます。既存のランナーでは、ランナーの `config.toml` を更新することでタグを追加します。または、UI から **Settings > CI/CD > Runners** に移動して、該当するランナーを編集することでタグを追加します。
+If you are using self-hosted GitLab runners, you can correlate jobs with the infrastructure that is running them.
+For this feature to work, the GitLab runner must have a tag of the form `host:<hostname>`. Tags can be added while
+[registering a new runner][6]. For existing runners:
 
-これらのステップの後、CI Visibility は各ジョブにホスト名を追加します。メトリクスを見るには、トレースビューでジョブスパンをクリックします。ドロワーに、ホストメトリクスを含む **Infrastructure** という新しいタブが表示されます。
+{{< tabs >}}
+{{% tab "GitLab &gt;&equals; 15.8" %}}
+Add tags through the UI by going to **Settings > CI/CD > Runners** and editing the appropriate runner.
+{{% /tab %}}
 
-### パイプライン失敗時のエラーメッセージの表示
+{{% tab "GitLab &lt; 15.8" %}}
+Add tags by updating the runner's `config.toml`. Or add tags
+through the UI by going to **Settings > CI/CD > Runners** and editing the appropriate runner.
+{{% /tab %}}
+{{< /tabs >}}
 
-エラーメッセージは GitLab のバージョン 15.2.0 以降でサポートされています。
+After these steps, CI Visibility adds the hostname to each job. To see the metrics, click on a job span in the trace
+view. In the drawer, a new tab named **Infrastructure** appears which contains the host metrics.
 
-GitLab パイプラインの実行に失敗した場合、特定のパイプライン実行内の `Errors` タブの下の各エラーは、GitLab からのエラータイプに関連するメッセージを表示します。
+CI Visibility also supports Infrastructure metrics for "Instance" and "Docker Autoscaler" executors. For more information, see the [Correlate Infrastructure Metrics with GitLab Jobs guide][18].
 
-{{< img src="ci/ci_gitlab_failure_reason_new.png" alt="GitLab の失敗の理由" style="width:100%;">}}
 
-各エラータイプに関連するメッセージとドメインについては、以下の表を参照してください。リストにないエラータイプは、`Job failed` というエラーメッセージと `unknown` というエラードメインになります。
+### View error messages for pipeline failures
 
-| エラーの種類 | エラーメッセージ | エラードメイン |
+Error messages are supported for GitLab versions 15.2.0 and above.
+
+For failed GitLab pipeline executions, each error under the `Errors` tab within a specific pipeline execution displays a message associated with the error type from GitLab.
+
+{{< img src="ci/ci_gitlab_failure_reason_new.png" alt="GitLab Failure Reason" style="width:100%;">}}
+
+See the table below for the message and domain correlated with each error type. Any unlisted error type will lead to the error message of `Job failed` and error domain of `unknown`.
+
+| Error Type | Error Message | Error Domain |
 | :---  |    :----:   |  ---: |
-|  unknown_failure  |  原因不明で失敗  |  不明
-|  config_error  |  CI/CD コンフィギュレーションファイルのエラーによる失敗 |  ユーザー
-|  external_validation_failure  |  外部パイプラインの検証のため失敗  |  不明
-|  user_not_verified  |  ユーザーが認証されていないため、パイプラインが失敗した  |  ユーザー
-|  activity_limit_exceeded  |  パイプラインのアクティビティ制限を超過した  |  プロバイダー
-|  size_limit_exceeded  |  パイプラインのサイズ制限を超過した  |  プロバイダー
-|  job_activity_limit_exceeded  |  パイプラインのジョブアクティビティ制限を超過した  |  プロバイダー
-|  deployments_limit_exceeded  |  パイプラインのデプロイ制限を超過した  |  プロバイダー
-|  project_deleted  |  このパイプラインに関連するプロジェクトが削除された  |  プロバイダー
-|  api_failure  |  API の失敗  |  プロバイダー
-|  stuck_or_timeout_failure  |  パイプラインが停止している、またはタイムアウトしている  |  不明
-|  runner_system_failure  |  ランナーシステムの不具合による失敗  |  プロバイダー
-|  missing_dependency_failure  |  依存関係がないため失敗  |  不明
-|  runner_unsupported  |  未対応のランナーのため失敗  |  プロバイダー
-|  stale_schedule  |  スケジュールが古くなったため失敗  |  プロバイダー
-|  job_execution_timeout  |  ジョブのタイムアウトによる失敗  |  不明
-|  archived_failure  |  アーカイブの失敗  |  プロバイダー
-|  unmet_prerequisites  |  前提条件が満たされていないため失敗  |  不明
-|  scheduler_failure  |  スケジュール不具合による失敗  |  プロバイダー
-|  data_integrity_failure  |  データ整合性のため失敗  |  プロバイダー
-|  forward_deployment_failure  |  デプロイメントの失敗  |  不明
-|  user_blocked  |  ユーザーによってブロックされた  |  ユーザー
-|  ci_quota_exceeded  |  CI の割り当て超過  |  プロバイダー
-|  pipeline_loop_detected  |  パイプラインループを検出  |  ユーザー
-|  builds_disabled  |  ビルド無効  |  ユーザー
-|  deployment_rejected  |  デプロイメントが拒否された  |  ユーザー
-|  protected_environment_failure  |  環境に関する失敗  |  プロバイダー
-|  secrets_provider_not_found  |  シークレットプロバイダーが見つからない  |  ユーザー
-|  reached_max_descendant_pipelines_depth  |  子孫パイプラインの最大値に到達  |  ユーザー
-|  ip_restriction_failure  |  IP 制限の失敗  |  プロバイダー
+|  unknown_failure  |  Failed due to unknown reason  |  unknown
+|  config_error  |  Failed due to error on CI/CD configuration file |  user
+|  external_validation_failure  |  Failed due to external pipeline validation  |  unknown
+|  user_not_verified  |  The pipeline failed due to the user not being verified  |  user
+|  activity_limit_exceeded  |  The pipeline activity limit was exceeded  |  provider
+|  size_limit_exceeded  |  The pipeline size limit was exceeded  |  provider
+|  job_activity_limit_exceeded  |  The pipeline job activity limit was exceeded  |  provider
+|  deployments_limit_exceeded  |  The pipeline deployments limit was exceeded  |  provider
+|  project_deleted  |  The project associated with this pipeline was deleted  |  provider
+|  api_failure  |  API Failure  |  provider
+|  stuck_or_timeout_failure  |  Pipeline is stuck or timed out  |  unknown
+|  runner_system_failure  |  Failed due to runner system failure  |  provider
+|  missing_dependency_failure  |  Failed due to missing dependency  |  unknown
+|  runner_unsupported  |  Failed due to unsupported runner  |  provider
+|  stale_schedule  |  Failed due to stale schedule  |  provider
+|  job_execution_timeout  |  Failed due to job timeout  |  unknown
+|  archived_failure  |  Archived failure  |  provider
+|  unmet_prerequisites  |  Failed due to unmet prerequisite  |  unknown
+|  scheduler_failure  |  Failed due to schedule failure  |  provider
+|  data_integrity_failure  |  Failed due to data integrity  |  provider
+|  forward_deployment_failure  |  Deployment failure  |  unknown
+|  user_blocked  |  Blocked by user  |  user
+|  ci_quota_exceeded  |  CI quota exceeded  |  provider
+|  pipeline_loop_detected  |  Pipeline loop detected  |  user
+|  builds_disabled  |  Build disabled  |  user
+|  deployment_rejected  |  Deployment rejected  |  user
+|  protected_environment_failure  |  Environment failure  |  provider
+|  secrets_provider_not_found  |  Secret provider not found  |  user
+|  reached_max_descendant_pipelines_depth  |  Reached max descendant pipelines  |  user
+|  ip_restriction_failure  |  IP restriction failure  |  provider
 
 <!-- | ---------- | ---------- | ---------- | -->
 <!-- | :---        |    :----:   |          ---: | -->
 
-## ジョブログ収集を有効にする
+## Enable job log collection
 
-以下の GitLab バージョンは、ジョブログの収集をサポートしています。
+The following GitLab versions support collecting job logs:
 
 * GitLab.com (SaaS)
-* GitLab >= 14.8 (セルフホスティング) [ジョブログを格納するためにオブジェクトストレージ][7]を使用している場合のみ
+* GitLab >= 15.3 (self-hosted) only if you are using [object storage to store job logs][7]
+* GitLab >= 14.8 (self-hosted) by enabling the `datadog_integration_logs_collection` feature flag
 
-ジョブログの収集を有効にするには
+<div class="alert alert-info"><strong>Note</strong>: Logs are billed separately from CI Visibility.</div>
 
-1. GitLab セルフホスティングまたは GitLab.com アカウントで `datadog_integration_logs_collection` [機能フラグ][8]を有効にします。これにより、[Pipeline Setup ページ][17]の **Enable job logs collection** チェックボックスが表示されるようになります。
-2. **Enable job logs collection** をクリックし、**Save changes** をクリックします。
+Job logs are collected in [Log Management][9] and are automatically correlated with the GitLab pipeline in CI Visibility. Log files larger than one GiB are truncated.
 
-ジョブログは[ログ管理][9]で収集され、CI Visibility で GitLab パイプラインと自動的に相関付けられます。1 GiB を超えるログファイルは切り捨てられます。
+For more information about processing job logs collected from the GitLab integration, see the [Processors documentation][17].
 
-<div class="alert alert-info"><strong>注</strong>: Logs は、CI Visibility とは別課金となります。</div>
+To enable collection of job logs:
 
-GitLab インテグレーションから収集されたジョブログの処理についての詳細は、[プロセッサーのドキュメント][18]を参照してください。
+{{< tabs >}}
+{{% tab "GitLab.com" %}}
+1. Click the **Enable job logs collection** checkbox in the GitLab integration **Settings > Integrations > Datadog**.
+2. Click **Save changes**.
+{{% /tab %}}
 
-## 参考資料
+{{% tab "GitLab &gt;&equals; 15.3" %}}
+<div class="alert alert-warning">Datadog downloads log files directly from your GitLab logs <a href="https://docs.gitlab.com/ee/administration/job_artifacts.html#using-object-storage">object storage</a> with temporary pre-signed URLs.
+This means that for Datadog servers to access the storage, the storage must not have network restrictions
+The <a href="https://docs.gitlab.com/ee/administration/object_storage.html#amazon-s3">endpoint</a>, if set, should resolve to a publicly accessible URL.</div>
+
+1. Click **Enable job logs collection** checkbox in the GitLab integration under **Settings > Integrations > Datadog**.
+2. Click **Save changes**.
+
+{{% /tab %}}
+
+{{% tab "GitLab &gt;&equals; 14.8" %}}
+<div class="alert alert-warning">Datadog downloads log files directly from your GitLab logs <a href="https://docs.gitlab.com/ee/administration/job_artifacts.html#using-object-storage">object storage</a> with temporary pre-signed URLs.
+This means that for Datadog servers to access the storage, the storage must not have network restrictions
+The <a href="https://docs.gitlab.com/ee/administration/object_storage.html#amazon-s3">endpoint</a>, if set, should resolve to a publicly accessible URL.</div>
+
+1. Enable the `datadog_integration_logs_collection` [feature flag][1] in your GitLab. This allows you to see the **Enable job logs collection** checkbox in the GitLab integration under **Settings > Integrations > Datadog**.
+2. Click **Enable job logs collection**.
+3. Click **Save changes**.
+
+[1]: https://docs.gitlab.com/ee/administration/feature_flags.html
+{{% /tab %}}
+{{< /tabs >}}
+
+<div class="alert alert-info"><strong>Note</strong>: Logs are billed separately from CI Visibility. Log retention, exclusion, and indexes are configured in Logs Settings. Logs for GitLab jobs can be identified by the <code>datadog.product:cipipeline</code> and <code>source:gitlab</code> tags.</div>
+
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/getting_started/site/
+[1]: /getting_started/site/
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://docs.gitlab.com/ee/user/project/integrations/webhooks.html
 [4]: https://app.datadoghq.com/ci/pipelines
@@ -260,13 +314,19 @@ GitLab インテグレーションから収集されたジョブログの処理�
 [6]: https://docs.gitlab.com/runner/register/
 [7]: https://docs.gitlab.com/ee/administration/job_artifacts.html#using-object-storage
 [8]: https://docs.gitlab.com/ee/administration/feature_flags.html
-[9]: /ja/logs/
-[10]: /ja/continuous_integration/pipelines/gitlab/?tab=gitlabcom#set-custom-tags
-[11]: /ja/continuous_integration/pipelines/gitlab/?tab=gitlabcom#partial-and-downstream-pipelines
-[12]: /ja/continuous_integration/pipelines/gitlab/#enable-job-log-collection
-[13]: /ja/continuous_integration/pipelines/custom_tags_and_metrics/?tab=linux
-[14]: /ja/continuous_integration/pipelines/gitlab/?tab=gitlabcom#correlate-infrastructure-metrics-to-jobs
-[15]: /ja/continuous_integration/pipelines/gitlab/?tab=gitlabcom#view-error-messages-for-pipeline-failures
-[16]: /ja/account_management/teams/
-[17]: https://app.datadoghq.com/ci/setup/pipeline?provider=gitlab
-[18]: /ja/logs/log_configuration/processors/
+[9]: /logs/
+[10]: /continuous_integration/pipelines/gitlab/?tab=gitlabcom#set-custom-tags
+[11]: /continuous_integration/pipelines/gitlab/?tab=gitlabcom#partial-and-downstream-pipelines
+[12]: /continuous_integration/pipelines/gitlab/#enable-job-log-collection
+[13]: /continuous_integration/pipelines/custom_tags_and_measures/?tab=linux
+[14]: /continuous_integration/pipelines/gitlab/?tab=gitlabcom#correlate-infrastructure-metrics-to-jobs
+[15]: /continuous_integration/pipelines/gitlab/?tab=gitlabcom#view-error-messages-for-pipeline-failures
+[16]: /account_management/teams/
+[17]: /logs/log_configuration/processors/
+[18]: /continuous_integration/guides/infrastructure_metrics_with_gitlab
+[19]: https://about.gitlab.com/
+[20]: /glossary/#partial-retry
+[21]: /glossary/#manual-step
+[22]: /glossary/#queue-time
+[23]: /glossary/#approval-wait-time
+[24]: /glossary/#pipeline-execution-time

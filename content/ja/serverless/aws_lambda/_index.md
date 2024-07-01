@@ -1,94 +1,95 @@
 ---
+title: Serverless Monitoring for AWS Lambda
+kind: documentation
 further_reading:
 - link: /serverless/configuration/
-  tag: ドキュメント
-  text: サーバーレスモニタリングの構成
+  tag: Documentation
+  text: Configure Serverless monitoring
 - link: /integrations/amazon_lambda/
-  tag: ドキュメント
-  text: AWS Lambda インテグレーション
-- link: https://www.datadoghq.com/blog/monitoring-lambda-containers/
-  tag: ブログ
-  text: コンテナイメージを使用してデプロイされた AWS Lambda 関数を監視する
-- link: https://www.datadoghq.com/blog/manage-serverless-logs-datadog/
-  tag: ブログ
-  text: サーバーレスログを収集、管理するためのベストプラクティス
-- link: https://www.datadoghq.com/blog/aws-serverless-application-design/
-  tag: ブログ
-  text: 実稼働準備が整った AWS サーバーレスアプリケーションの設計
-- link: https://www.datadoghq.com/blog/well-architected-serverless-applications-best-practices/
-  tag: ブログ
-  text: AWS の Well-Architected フレームワークに従うサーバーレスアプリケーション構築のためのベストプラクティス
-- link: https://www.datadoghq.com/blog/aws-lambda-functions-ephemeral-storage-monitoring/
-  tag: ブログ
-  text: AWS Lambda 関数のエフェメラルストレージ使用量を監視。
-- link: https://www.datadoghq.com/blog/serverless-cold-start-traces/
-  tag: ブログ
-  text: コールドスタートトレーシングでサーバーレス関数のパフォーマンスを把握する
-title: AWS Lambda のためのサーバーレスモニタリング
+  tag: Documentation
+  text: AWS Lambda integration
+- link: "https://www.datadoghq.com/blog/monitoring-lambda-containers/"
+  tag: Blog
+  text: Monitor AWS Lambda functions deployed using container images
+- link: "https://www.datadoghq.com/blog/manage-serverless-logs-datadog/"
+  tag: Blog
+  text: Best practices for collecting and managing serverless logs
+- link: "https://www.datadoghq.com/blog/aws-serverless-application-design/"
+  tag: Blog
+  text: Designing production-ready AWS serverless applications
+- link: "https://www.datadoghq.com/blog/well-architected-serverless-applications-best-practices/"
+  tag: Blog
+  text: Best practices for building serverless applications that follow AWS's Well-Architected Framework
+- link: "https://www.datadoghq.com/blog/aws-lambda-functions-ephemeral-storage-monitoring/"
+  tag: Blog
+  text: Monitor your AWS Lambda functions' ephemeral storage usage
+- link: "https://www.datadoghq.com/blog/serverless-cold-start-traces/"
+  tag: Blog
+  text: Understand serverless function performance with Cold Start Tracing
 ---
 
-Datadog の AWS Lambda のためのサーバーレスモニタリングは、Lambda 関数を可視化します。
+Datadog Serverless Monitoring for AWS Lambda gives you visibility into your Lambda functions.
 
-まずは、[インストール手順][1]に従って、サーバーレスアプリケーションからメトリクス、トレース、ログを収集します。
+To get started, follow the [installation instructions][1] to collect metrics, traces, and logs from your serverless applications.
 
-## 仕組み
+## How it works
 
-{{< img src="serverless/serverless_custom_metrics.png" alt="AWS Lambda からの拡張メトリクスの収集" >}}
+{{< img src="serverless/serverless_custom_metrics.png" alt="Collecting Enhanced Metrics from AWS Lambda" >}}
 
-Datadog のサーバーレスモニタリングは、Datadog Lambda 拡張機能とともにランタイム固有の Datadog Lambda ライブラリを活用し、Lambda 関数からテレメトリーを送信します。
+Datadog Serverless Monitoring makes use of a runtime-specific Datadog Lambda Library, in conjunction with the Datadog Lambda extension, to send telemetry from your Lambda functions.
 
-Datadog Lambda 拡張機能は、Datadog Lambda ライブラリからのトレース、拡張メトリクス、カスタムメトリクスに加え、CloudWatch を通じてログを収集します。
+The Datadog Lambda extension collects logs through CloudWatch, in addition to traces, enhanced metrics, and custom metrics from the Datadog Lambda Library.
 
-## 使用
+## Usage
 
-以下のページでは、AWS Lambda のためのサーバーレスモニタリングのインストール方法と構成方法について、完全な可視化を実現するためのメトリクス、トレース、およびログの使用方法を含めて説明します。
+The following pages describe how to install and configure Serverless Monitoring for AWS Lambda—including how to use metrics, traces, and logs for full visibility.
 
 {{< whatsnext desc=" ">}}
-    {{< nextlink href="/serverless/installation" >}}<u>インストール</u>: AWS Lambda のためのサーバーレスモニタリングをインストールします。{{< /nextlink >}}
-    {{< nextlink href="/serverless/enhanced_lambda_metrics" >}}<u>Lambda メトリクス</u>: 拡張メトリクスの詳細とカスタムメトリクスの送信方法を説明します。{{< /nextlink >}}
-    {{< nextlink href="/serverless/distributed_tracing" >}}<u>分散型トレーシング</u>: APM と分散型トレーシングを使用して、アプリケーションのパフォーマンスに関する豊富な情報を入手できます。{{< /nextlink >}}
+    {{< nextlink href="/serverless/installation" >}}<u>Installation</u>: Install Serverless Monitoring for AWS Lambda.{{< /nextlink >}}
+    {{< nextlink href="/serverless/enhanced_lambda_metrics" >}}<u>Lambda Metrics</u>: Read more about enhanced metrics and learn how to submit custom metrics.{{< /nextlink >}}
+    {{< nextlink href="/serverless/distributed_tracing" >}}<u>Distributed Tracing</u>: Use APM and Distributed Tracing for a context-rich picture of your application's performance.{{< /nextlink >}}
     {{< nextlink href="/serverless/aws_lambda/logs" >}}
-    <u>ログ収集</u>: ログの収集、ログのフィルタリング方法、ログとトレースの関連付け方法を説明します。{{< /nextlink >}}
+    <u>Log Collection</u>: Read more about log collection, how to filter logs, and how to connect logs and traces.{{< /nextlink >}}
 {{< /whatsnext >}}
 
-### サーバーレスビューでサーバーレススタック全体を監視
+### Monitor your entire serverless stack in the Serverless view
 
-サーバーレスビューを使用すると、AWS リソースからの高レベルメトリクスを Lambda 関数と関連付けられるため、問題をすばやく発見し調査を開始することができます。
+The Serverless view enables you to correlate high-level metrics from AWS resources with those of Lambda functions, so you can quickly spot issues and start your investigation.
 
-デフォルトで、サーバーレスビューではサービス別にサーバーレスリソースがグループ化され、アプリケーションの各部のパフォーマンスを視覚化できます。各サービスに属する関数と、それを呼び出すリソース (Amazon API Gateway、SNS、SQS、DynamoDB、S3、EventBridge、Kinesis) を確認できます。
+By default, the Serverless view groups your serverless resources by service to help you visualize how each part of your application is performing. For each service, you can see the functions that belong to it, along with the resources (Amazon API Gateway, SNS, SQS, DynamoDB, S3, EventBridge, Kinesis) that invoked them.
 
-{{< img src="serverless/serverless-view-hero.jpeg" alt="Datadog サーバーレスモニタリング" style="width:100%;" >}}
+{{< img src="serverless/serverless-view-hero.jpeg" alt="Datadog Serverless Monitoring" style="width:100%;" >}}
 
-### 呼び出しペイロードを監視することで、AWS Lambda 関数の障害を迅速に解決する
+### Resolve AWS Lambda function failures faster by monitoring invocation payloads
 
-Datadog で自動的に関数リクエストが収集されてすべての関数呼び出しに応答し、問題のトラブルシューティングに役立つ重要な情報が提供されます。たとえば、ある Lambda 関数に障害が発生しているという通知を受けた場合、関連するリクエストのペイロードを分析し、不足しているパラメーター、リソースアドレスの入力間違い、または障害の背後にある構成ミスなどをチェックすることができます。
+Datadog automatically collects function requests and responses for all of your function invocations, providing key information that can help troubleshoot issues. For example, if you're notified that one of your Lambda functions is experiencing failures, you can analyze relevant request payloads to check for missing parameters, mistyped resource addresses, or other misconfigurations that may be behind the failures.
 
-失敗したリクエストの構成ミスを特定することで、開発環境で問題を容易に再生し、バグ修正を確認するためのテストを実行できます。
+By identifying misconfigurations in failing requests, you can more easily reproduce issues in your development environment—and then run tests to verify your bug fixes.
 
-{{< img src="serverless/lambda_payload_hero.jpeg" alt="Datadog サーバーレスモニタリング" style="width:100%;" >}}
+{{< img src="serverless/lambda_payload_hero.jpeg" alt="Datadog Serverless Monitoring" style="width:100%;" >}}
 
-### Lambda 関数環境全体で問題をアラートするリアルタイムメトリクス
+### Real-time metrics for alerting on issues across your Lambda function environment
 
-Datadog の高度な Lambda メトリクスは、Datadog で `aws.lambda.enhanced` のプレフィックスで表示され、秒単位の粒度で、ほぼリアルタイムで利用できます。高度な Lambda メトリクスは、すべての Lambda 関数におけるコールドスタート、推定 AWS コスト、タイムアウト、メモリ不足エラー、そしてメモリ使用量に関するアラートや SLO に使用できます。これにより、サーバーレス環境で発生するパフォーマンスの問題を確認し、直ちにトラブルシューティングすることが可能になります。
+Datadog's enhanced Lambda metrics, which appear in Datadog with the prefix `aws.lambda.enhanced`, are available at second granularity and in near real time. You can use enhanced Lambda metrics for alerts or SLOs on cold starts, estimated AWS costs, timeouts, out-of-memory errors, and memory usage across all of your Lambda functions. This enables you to view performance issues in your serverless environments as they occur and troubleshoot without delay.
 
-{{< img src="serverless/serverless_enhanced_metrics.jpeg" alt="Datadog サーバーレスモニタリング" style="width:100%;" >}}
+{{< img src="serverless/serverless_enhanced_metrics.jpeg" alt="Datadog Serverless Monitoring" style="width:100%;" >}}
 
-### デプロイメント追跡でサーバーレスコンフィギュレーションの変更を監視
+### Monitor serverless configuration changes with deployment tracking
 
-サーバーレスコード、コンフィギュレーション、そしてデプロイメントの変更をメトリクス、トレース、そして関数からのログと容易に関連付け、リアルタイムのインサイトによりこのような変更がアプリケーションの正常性やパフォーマンスに与える影響を確認できます。
+Easily correlate serverless code, configuration, and deployment changes with metrics, traces, and logs from your functions for real-time insight into how these changes may affect the health and performance of your applications.
 
-{{< img src="serverless/serverless_deployment_tracking.jpeg" alt="Datadog サーバーレスモニタリング" style="width:100%;" >}}
+{{< img src="serverless/serverless_deployment_tracking.jpeg" alt="Datadog Serverless Monitoring" style="width:100%;" >}}
 
-## その他の機能
+## Additional capabilities
 
 {{< whatsnext desc=" ">}}
-    {{< nextlink href="/serverless/aws_lambda/profiling" >}}<u>Continuous Profiler</u>: Datadog の Continuous Profiler を有効にすると、ボトルネックの原因となっている Lambda 関数のコードの行を正確に発見できます。{{< /nextlink >}}
-    {{< nextlink href="/serverless/aws_lambda/securing_functions" >}}<u>セキュリティ機能</u>: Application Security Management (ASM) を使用して、関数に対する脅威を管理します。{{< /nextlink >}}
-    {{< nextlink href="/serverless/deployment_tracking" >}}<u>デプロイ追跡</u>: デプロイを追跡して、コードの新バージョンや構成の変更がいつ劣化を引き起こしているかを確認します。{{< /nextlink >}}
+    {{< nextlink href="/serverless/aws_lambda/profiling" >}}<u>Continuous Profiler</u>: Enable Datadog's Continuous Profiler to find the exact line of code in your Lambda function that is causing bottlenecks.{{< /nextlink >}}
+    {{< nextlink href="/serverless/aws_lambda/securing_functions" >}}<u>Secure Functions</u>: Use Application Security Management (ASM) to manage threats to your functions.{{< /nextlink >}}
+    {{< nextlink href="/serverless/deployment_tracking" >}}<u>Deployment Tracking</u>: Track deployments to see when a new version of code or a configuration change causes a regression.{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/serverless/installation
+[1]: /serverless/installation

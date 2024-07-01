@@ -1,6 +1,6 @@
 ---
+title: facet
 core_product:
-- log management
-title: ファセット
+  - log management
 ---
-ファセットとは、インデックス化されたログのユーザー定義のタグまたは属性です。これは、定量的または定性的であり、ログエクスプローラーで、ログを検索し、ログパターンを定義し、ログ分析を実行するために使用されます。
+A facet is a user-defined tag or attribute of indexed logs. It can be quantitative or qualitative and is used in Log Explorer to search logs, define log patterns, and perform log analytics.

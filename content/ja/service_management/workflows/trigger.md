@@ -1,155 +1,183 @@
 ---
-algolia:
-  tags:
-  - ワークフロー
-  - tracing_otel_inst_java
-  - ワークフローの自動化
-aliases:
-- /ja/workflows/trigger
+title: Trigger a workflow
+kind: documentation
 disable_toc: false
+algolia:
+  tags: [workflow, workflows, workflow automation]
+aliases:
+- /workflows/trigger
 further_reading:
 - link: /getting_started/workflow_automation/
   tag: Documentation
-  text: Workflow Automation を始める
-- link: /service_management/workflows/access/#service-accounts/
+  text: Getting Started with Workflow Automation
+- link: "/service_management/workflows/access/#service-accounts/"
   tag: Documentation
-  text: ワークフローのサービスアカウントについての詳細はこちら
-- link: serverless_aws_lambda
+  text: Find out more about Service Accounts for workflows
+- link: dashboards
   tag: Documentation
-  text: ダッシュボードの設定についての詳細はこちら
+  text: Find out more about setting up a dashboard
 - link: /security
   tag: Documentation
-  text: セキュリティシグナルの詳細はこちら
-- link: ノートブック
-  tag: ドキュメント
-  text: モニターの詳細はこちら
+  text: Find out more about Security Signals
+- link: monitors
+  tag: Documentation
+  text: Find out more about Monitors
 - link: /security/cloud_security_management/workflows
-  tag: ドキュメント
-  text: Workflow Automation によるセキュリティワークフローの自動化
-title: ワークフローをトリガーする
+  tag: Documentation
+  text: Automate Security Workflows with Workflow Automation
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">選択した <a href="/getting_started/site">Datadog サイト</a> ({{< region-param key="dd_site_name" >}}) では Workflow Automation はサポートされていません。</div>
+<div class="alert alert-warning">Workflow Automation is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-ワークフローは、手動または自動でトリガーすることができます。
+You can trigger a workflow manually or automatically.
 
-ワークフローは、ワークフローを所有するユーザーのアイデンティティ、またはワークフローに関連付けられたサービスアカウントのアイデンティティで実行することができます。サービスアカウントの詳細については、[ワークフロー自動化のためのサービスアカウント][1]を参照してください。
+A workflow can either run with the identity of the user who owns it, or with the identity of a service account associated with the workflow. For more information on service accounts, see [Service accounts for Workflow Automation][1].
 
-## ワークフローを手動でトリガーする
+## Manually trigger a workflow
 
-ワークフローを手動でトリガーするには
-1. ワークフローページから、**Run** をクリックします。
-1. 既存のトリガー変数の値を入力します。
-1. ワークフローを実行する準備ができたら、**Save & Run** をクリックします。
+To trigger a workflow manually:
+1. From the workflow page, click **Run**.
+1. Enter the values for existing trigger variables.
+1. When you're ready to run the workflow, click **Save & Run**.
 
-## ワークフローをダッシュボードからトリガーする
+## Trigger a workflow from a Dashboard
 
-ダッシュボードからワークフローをトリガーするには、**Run Workflow** ウィジェットを追加します。
-1. ダッシュボードから、**Add Widget** をクリックします。
-1. `workflows` を検索して、**Run Workflow** ウィジェットを追加します。
-1. **Select the workflow** の下にあるドロップダウンメニューから、ワークフローを探します。
-1. ダッシュボードテンプレート変数をワークフロー入力パラメーターにマッピングします。これにより、ワークフローを実行する際に、ダッシュボードテンプレート変数の値が入力パラメーターに直接マッピングされます。
-1. ウィジェットのタイトルを入力し、**Save** をクリックします。
+To trigger a workflow from a Dashboard, add the **Run Workflow** widget:
+1. From your Dashboard, click **Add Widget**.
+1. Search for `workflows` and add the **Run Workflow** widget.
+1. Under **Select the workflow**, find your workflow in the dropdown menu.
+1. Map dashboard template variables to workflow input parameters. This allows the values of your dashboard template variables to be mapped directly to the input parameters when you run the workflow.
+1. Enter a title for the widget and click **Save**.
 
-{{< img src="service_management/workflows/trigger-from-dashboard2.png" alt="Run Workflow をクリックすると、ダッシュボードウィジェットからワークフローをトリガーすることができます。" >}}
+{{< img src="service_management/workflows/trigger-from-dashboard2.png" alt="Click Run Workflow to trigger a workflow from Dashboard widget." >}}
 
-ワークフローを実行するには
-1. ダッシュボードウィジェットの **Run Workflow** をクリックします。
-1. **Execution parameters** の下で、ワークフロー入力にマッピングしたテンプレート変数が自動的に入力されます。マップされていない実行パラメーターの値を入力するか、必要であれば既存の値を編集します。
-1. ワークフローを実行するには、**Run** をクリックします。
+To run the workflow:
+1. Click **Run Workflow** on your dashboard widget.
+1. Under **Execution parameters**, any template variables you mapped to workflow inputs are automatically populated. Enter the values for any unmapped execution parameters, or edit the existing values if needed.
+1. Click **Run** to run the workflow.
 
-## ワークフローをワークフローからトリガーする
+## Trigger a workflow from a workflow
 
-**Trigger Workflow** アクションを使用すると、別のワークフローから子ワークフロー をトリガーすることができます。例えば、複雑な一連のステップをいくつかのワークフローで再利用する場合、すべてのワークフローでステップを再作成する必要はありません。その代わりに、新しいワークフローにステップを追加し、Trigger Workflow アクションを使用して他のワークフローでトリガーします。
+You can trigger a child workflow from another workflow using the **Trigger Workflow** action. For example, if you have a complex series of steps that you need to reuse in several workflows, there's no need to recreate those steps for all of your workflows. Instead, add the steps to a new workflow and trigger it in your other workflows using the Trigger Workflow action.
 
-<div class="alert alert-info">請求上、子ワークフローのトリガーは新規ワークフローの実行として登録されます。</div>
+<div class="alert alert-info">For billing purposes, triggering a child workflow registers as a new workflow execution.</div>
 
-子ワークフローに[入力パラメーター][5]がある場合、これらのパラメーターは Trigger Workflow アクションの必須フィールドとして表示されます。以下の例では、子ワークフローの入力パラメーターとして `service_name` が設定されているため、**service_name** 入力パラメーターは必須となります。
+If the child workflow has [input parameters][5], these parameters appear as required fields in the Trigger Workflow action. In the example below, the **service_name** input parameter is required because `service_name` is set as an input parameter in the child workflow.
 
-{{< img src="service_management/workflows/trigger-workflow-step.png" alt="子ワークフローでは、service-name 入力パラメーターが必須です" style="width:100%;" >}}
+{{< img src="service_management/workflows/trigger-workflow-step.png" alt="The service_name input parameter is required in the child workflow" style="width:100%;" >}}
 
-## ワークフローをモニターからトリガーする
+## Trigger a workflow from a Monitor
 
-ワークフローをモニターからトリガーするには
-1. ワークフローキャンバスで、**Add an Automated Trigger** をクリックし、**@mention** を選択します。
-1. ワークフローを保存します。
-1. Datadog の [**Monitors** ページ][2]に移動します。
-1. ワークフローのトリガーに使用するモニターを検索して編集するか、新しいモニターを作成します。
-1. メッセージセクションに、ワークフローの完全なメンション名を追加します。
-   - メンション名は `@workflow-` で始まる必要があります。例えば、`@workflow-my-workflow` のようになります。
-   - ワークフローにトリガー変数を渡すには、カンマで区切ったリストで `@workflow-name(key=value, key=value)` という構文を使用します。例えば、`@workflow-my-workflow(name="Bits", alert_threshold=threshold)` のようになります。
-1. モニターを保存。
+To trigger a workflow from a Monitor:
+1. On the workflow canvas, click **Add an Automated Trigger** and select **@mention**.
+1. Save your Workflow.
+1. Navigate to the [**Monitors** page][2] in Datadog.
+1. Find the monitor you'd like to use to trigger the workflow and edit it, or create a new monitor.
+1. In the message section, add the full workflow mention name:
+   - The mention name should start with `@workflow-`. For example, `@workflow-my-workflow`
+   - To pass trigger variables into the workflow, use a comma-separated list with the syntax `@workflow-name(key=value, key=value)`. For example, `@workflow-my-workflow(name="Bits", alert_threshold=threshold)`
+1. Save the monitor.
 
-{{< img src="service_management/workflows/monitor-trigger.png" alt="モニタートリガーをモニターのメッセージセクションに追加する" >}}
+{{< img src="service_management/workflows/monitor-trigger.png" alt="Add a monitor trigger to the message section of a Monitor" >}}
 
-モニターのしきい値に達するたびに、モニターはワークフローの実行をトリガーします。
+Each time the monitor threshold is hit, the monitor triggers a workflow run.
 
-<div class="alert alert-info">スケジュールされたワークフローおよびトリガーされるワークフローは、公開されるまで自動的に実行されません。ワークフローを公開するには、ワークフローのページから <strong>Publish</strong> をクリックします。公開されたワークフローは、ワークフローの実行に基づいてコストが発生します。詳細は、<a href="https://www.datadoghq.com/pricing/?product=workflow-automation#products">Datadog の料金ページ</a>を参照してください。</div>
+<div class="alert alert-info">Scheduled and triggered workflows don't run automatically until you've published them. To publish the workflow, click <strong>Publish</strong> from the workflow's page. Published workflows accrue costs based on workflow executions. For more information, see the <a href="https://www.datadoghq.com/pricing/?product=workflow-automation#products">Datadog Pricing page</a>.</div>
 
-## ワークフローをセキュリティシグナルからトリガーする
+### Test a monitor trigger
 
-任意のセキュリティシグナルに対して自動的にワークフローをトリガーしたり、Cloud SIEM のセキュリティシグナルパネルから手動でワークフローをトリガーすることができます。
+You can test a monitor trigger during workflow creation. Testing a monitor generates a snippet that you can paste into your monitor notification window to trigger the workflow.
 
-### ワークフローをセキュリティシグナルの通知ルールから自動的にトリガーする
+To test a monitor trigger:
+1. Select the monitor trigger action in your workflow.
+1. Click **Test from Monitor**.
+1. If your monitor passes inputs to the workflow, enter a test value under **Workflow Inputs**.
+1. Select a monitor to test.
+1. Select a monitor state.
+1. Click **Run From Monitor**.
 
-セキュリティシグナルの通知ルールが発動するたびにトリガーされるワークフローを設定することができます。
+{{< img src="service_management/workflows/test-monitor.mp4" alt="Test your monitor using the Test from Monitor button" video="true" >}}
 
-ワークフローを通知ルールからトリガーするには
-1. ワークフローキャンバスで、**Add an Automated Trigger** をクリックし、**@mention** を選択します。
-1. **@workflow-** の横に、トリガーのメンション名を入力します。メンション名は一意でなければなりません。
-1. ワークフローを保存します。
-1. [Configuration][3] ページから、ワークフローのトリガーに使用したい通知ルールを見つけるか、新しいルールを作成します。
-1. **Recipient** セクションに、ワークフローの完全なメンション名を追加します。例えば、`@workflow-my-workflow` のようになります。
-1. 一意の通知名を追加します。
-1. **Save and Activate** をクリックします。
+## Trigger a workflow from a Security Signal
 
-{{< img src="service_management/workflows/notification-rule-trigger2.png" alt="通知ルールの受信者セクションにワークフロー名を追加する" >}}
+You can trigger a Workflow automatically for any Security Signal, or manually trigger a Workflow from a Cloud SIEM Security Signal panel.
 
-通知ルールが発動するたびに、ワークフローの実行がトリガーされます。
+### Trigger a workflow automatically from Security Signal Notification Rules
 
-<div class="alert alert-info">スケジュールされたワークフローおよびトリガーされるワークフローは、公開されるまで自動的に実行されません。ワークフローを公開するには、ワークフローのページから <strong>Publish</strong> をクリックします。公開されたワークフローは、ワークフローの実行に基づいてコストが発生します。詳細は、<a href="https://www.datadoghq.com/pricing/?product=workflow-automation#products">Datadog の料金ページ</a>を参照してください。</div>
+You can set up a workflow to trigger every time a Security Signal Notification Rule fires.
 
-### ワークフローを Cloud SIEM のセキュリティシグナルから手動でトリガーする
+To trigger a workflow from a Notification Rule:
+1. On the workflow canvas, click **Add an Automated Trigger** and select **@mention**.
+1. Next to **@workflow-**, enter a mention name for the trigger. Your mention name must be unique.
+1. Save your Workflow.
+1. From the [Configuration][3] page, find the notification rule you'd like to use to trigger your workflow, or create a new rule.
+1. In the **Recipient** section, add the full workflow mention name. For example, `@workflow-my-workflow`.
+1. Add a unique notification name.
+1. Click **Save and Activate**.
 
-Cloud SIEM Security Signal のパネルから手動でワークフローを開始することができます。
+{{< img src="service_management/workflows/notification-rule-trigger2.png" alt="Add the workflow name to the recipient section of a Notification rule" >}}
 
-1. Security Signal パネルの上部にある **Run Workflow** をクリックします。
-1. 検索モーダルで、実行するワークフローの名前を入力します。ワークフローを選択します。
-1. ワークフローで入力パラメーターが必要な場合、必要に応じて値を入力します。入力パラメーターの横に表示されるシグナルオブジェクト JSON から値をコピーし、パラメーターフィールドに貼り付けることができます。
-1. **Run** をクリックします。
-1. ワークフローの実行ステータスは、セキュリティシグナルの **Workflow** セクションで確認できます。
+Each time the Notification Rule fires, it triggers a workflow run.
 
-自動化できるセキュリティワークフローのその他の例については、[Workflow Automation でセキュリティワークフローを自動化する][4]を参照してください。
+<div class="alert alert-info">Scheduled and triggered workflows don't run automatically until you've published them. To publish the workflow, click <strong>Publish</strong> from the workflow's page. Published workflows accrue costs based on workflow executions. For more information, see the <a href="https://www.datadoghq.com/pricing/?product=workflow-automation#products">Datadog Pricing page</a>.</div>
 
-## ワークフローをスケジュールでトリガーする
+### Trigger a workflow manually from Cloud SIEM Security Signals
 
-ワークフローの実行をスケジュールするには
-1. ワークフローキャンバスで、**Add an Automated Trigger** をクリックし、**Schedule** を選択します。
-1. **Create** をクリックすると、サービスアカウントが作成されます。詳しくは、[サービスアカウントを使用する][1]を参照してください。
-1. 実行する時間や回数を入力します。
-1. (オプション) ワークフローの説明を **Memo** フィールドに入力します。
-1. **Save** をクリックします。
+You can manually start a workflow from a Cloud SIEM Security Signal panel.
 
-<div class="alert alert-info">スケジュールされたワークフローおよびトリガーされるワークフローは、公開されるまで自動的に実行されません。ワークフローを公開するには、ワークフローのページから <strong>Publish</strong> をクリックします。公開されたワークフローは、ワークフローの実行に基づいてコストが発生します。詳細は、<a href="https://www.datadoghq.com/pricing/?product=workflow-automation#products">Datadog の料金ページ</a>を参照してください。</div>
+1. Click **Run Workflow** at the top of the Security Signal panel.
+1. In the search modal, enter the name of the workflow you want to run. Select the workflow. 
+1. If your workflow requires input parameters, enter the values as required. You can copy the values from the Signal object JSON displayed next to the input parameters, and paste them into the parameter fields.
+1. Click **Run**.
+1. You can see the workflow run status in the **Workflow** section of the Security Signal.
 
-## 実行履歴
+For additional examples of Security workflows you can automate, see [Automate Security Workflows with Workflow Automation][4].
 
-ワークフローをトリガーした後、ワークフローページはワークフローの**実行履歴**に切り替わります。左上の **Configuration** または **Run History** をクリックして、構成と実行履歴の表示を切り替えます。
+## Trigger a workflow from incidents
 
-実行履歴は、トリガーされたワークフローの進捗を確認したり、失敗したステップをデバッグするために使用します。失敗したステップをクリックすると、そのステップの入力、出力、実行コンテキスト、および関連するエラーメッセージが表示されます。以下の例では、_GitHub プルリクエストステータス_のステップが失敗していることを示しています。エラーメッセージは、権限がないためにステップが失敗したことを示しています。
+To trigger a workflow from incidents, create an incident notification rule:
+1. Create a workflow with a **Monitor, Incident, or Security signal** trigger, or add a **Monitor, Incident, or Security signal** trigger to an existing workflow.
+1. Click on the trigger in the workflow canvas and copy the **Mention handle**.
+1. From the [Incidents Settings][6] page, select **Rules**.
+1. Click **New Rule**.
+1. Configure a **Severity**, **Service**, and **Other attributes** for your notification rule.
+1. Under **Notify**, paste the workflow handle that you copied earlier.
+1. Enter a **Template** and configure the **Renotify** settings for the notification rule.
+1. Click **Save**.
 
-{{< img src="service_management/workflows/failed-step4.png" alt="ステップに失敗したワークフロー。" >}}
+## Trigger a workflow on a schedule
 
-ワークフローの最初の実行履歴には、過去のワークフロー実行のリストと各実行が成功したか失敗したかがパネルで表示されます。失敗には、失敗したワークフローステップへのリンクが含まれます。リスト内のワークフロー実行をクリックすることで、それを検査することができます。ワークフローキャンバスの任意の場所をクリックすることで、いつでも初期実行履歴に戻ることができます。
+To schedule a workflow run:
+1. On the workflow canvas, click **Add an Automated Trigger** and select **Schedule**.
+1. Click **Create** to create a service account. For more information, see [Use a service account][1].
+1. Enter a time and frequency for the run.
+1. (Optional) Enter a description for the workflow in the **Memo** field.
+1. Click **Save**.
 
-## その他の参考資料
+<div class="alert alert-info">Scheduled and triggered workflows don't run automatically until you've published them. To publish the workflow, click <strong>Publish</strong> from the workflow's page. Published workflows accrue costs based on workflow executions. For more information, see the <a href="https://www.datadoghq.com/pricing/?product=workflow-automation#products">Datadog Pricing page</a>.</div>
+
+## Run history
+
+After you trigger a workflow, the workflow page switches to the workflow's **Run History**. Click **Configuration** or **Run History** in the top-left to switch between the configuration and run history views.
+
+Use run history to watch the progress of a triggered workflow, or debug a failed step. Clicking on a failed step gives you the inputs, outputs, and execution context for the step, as well as the associated error message. The example below shows a failed _GitHub pull request status_ step. The error message shows that the step failed due to missing permissions:
+
+{{< img src="service_management/workflows/failed-step4.png" alt="A workflow with a failed step." >}}
+
+The initial run history for a workflow provides a panel with the list of previous workflow executions and whether each execution succeeded or failed. Failures include a link to the failed workflow step. Click on a workflow execution in the list to inspect it. You can return to the initial execution history at any time by clicking anywhere on the workflow canvas.
+
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/service_management/workflows/access/#use-a-service-account
+<br>Do you have questions or feedback? Join the **#workflows** channel on the [Datadog Community Slack][7].
+
+[1]: /service_management/workflows/access/#use-a-service-account
 [2]: https://app.datadoghq.com/monitors/manage
 [3]: https://app.datadoghq.com/security/configuration/notification-rules
-[4]: /ja/security/cloud_security_management/workflows
-[5]: /ja/service_management/workflows/build/#input-parameters
+[4]: /security/cloud_security_management/workflows
+[5]: /service_management/workflows/build/#input-parameters
+[6]: https://app.datadoghq.com/incidents/settings#Rules
+[7]: https://datadoghq.slack.com/

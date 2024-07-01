@@ -1,49 +1,47 @@
 ---
+title: Metrics
 aliases:
-- /ja/graphing/metrics/
-- /ja/metrics/introduction/
-- /ja/graphing/faq/inconsistent-sum-aggregation-between-different-time-windows-on-graph/
-- /ja/dashboards/faq/inconsistent-sum-aggregation-between-different-time-windows-on-graph/
+  - /graphing/metrics/
+  - /metrics/introduction/
+  - /graphing/faq/inconsistent-sum-aggregation-between-different-time-windows-on-graph/
+  - /dashboards/faq/inconsistent-sum-aggregation-between-different-time-windows-on-graph/
 cascade:
-  algolia:
-    rank: 70
-    tags:
-    - メトリクスを送信する
-    - メトリクスの送信
-title: メトリクス
+    algolia:
+        rank: 70
+        tags: [submit metrics, metrics submission]
 ---
-Datadog のメトリクスとその有用性についてご紹介します。このセクションには以下のトピックが含まれます。
+This is an introduction to Metrics in Datadog and why they're useful. This section includes the following topics: 
 
-{{< whatsnext desc="Datadog へのメトリクス送信" >}}
-    {{< nextlink href="/metrics/custom_metrics">}}<u>カスタムメトリクスの送信</u> - カスタムメトリクスとその送信方法をご紹介します。{{< /nextlink >}}
-    {{< nextlink href="/opentelemetry/otel_metrics" >}}<u>OpenTelemetry メトリクスの送信</u> - Datadog Agent や OpenTelemetry Collector の構成方法について学びます。{{< /nextlink >}}
-    {{< nextlink href="/metrics/types" >}}<u>メトリクスタイプ</u> - Datadog に送信できるメトリクスのタイプ。{{< /nextlink >}}
-    {{< nextlink href="/metrics/distributions" >}}<u>ディストリビューションメトリクス</u> - ディストリビューションメトリクスとグローバルに正確なパーセンタイルについてご紹介します。{{< /nextlink >}}
-    {{< nextlink href="/metrics/units" >}}<u>メトリクス単位</u> - メトリクスに関連付けられる単位についてご紹介します。{{< /nextlink >}}
+{{< whatsnext desc="Submit metrics to Datadog" >}}
+    {{< nextlink href="/metrics/custom_metrics">}}<u>Submit Custom Metrics</u> - Learn what custom metrics are and how to submit them.{{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/otel_metrics" >}}<u>Send OpenTelemetry Metrics</u> - Configure the Datadog Agent or OpenTelemetry Collector.{{< /nextlink >}}
+    {{< nextlink href="/metrics/types" >}}<u>Metrics Types</u> - Types of metrics that can be submitted to Datadog.{{< /nextlink >}}
+    {{< nextlink href="/metrics/distributions" >}}<u>Distribution Metrics</u> - Learn about Distribution Metrics and globally accurate percentiles.{{< /nextlink >}}
+    {{< nextlink href="/metrics/units" >}}<u>Metrics Units</u> - Learn about the units that can be associated with metrics.{{< /nextlink >}}
 {{< /whatsnext >}}
 
-{{< whatsnext desc="メトリクスの視覚化とクエリ" >}}
-    {{< nextlink href="/metrics/explorer" >}}<u>メトリクスエクスプローラー</u> - すべてのメトリクスを探索し、分析を行います。{{< /nextlink >}}
-    {{< nextlink href="/metrics/summary" >}}<u>メトリクスサマリー</u> - Datadog メトリクスのアクティブなレポートを理解します。{{< /nextlink >}}
-    {{< nextlink href="/metrics/advanced-filtering" >}}<u>高度なフィルタリング</u> - データをフィルタリングして、返されるメトリクスの範囲を絞り込みます。{{< /nextlink >}}
+{{< whatsnext desc="Visualize and query your metrics" >}}
+    {{< nextlink href="/metrics/explorer" >}}<u>Metrics Explorer</u> - Explore all of your metrics and perform Analytics.{{< /nextlink >}}
+    {{< nextlink href="/metrics/summary" >}}<u>Metrics Summary</u> - Understand your actively reporting Datadog metrics.{{< /nextlink >}}
+    {{< nextlink href="/metrics/advanced-filtering" >}}<u>Advanced Filtering</u> - Filter your data to narrow the scope of metrics returned.{{< /nextlink >}}
 {{< /whatsnext >}}
 
-{{< whatsnext desc="カスタムメトリクスのボリュームとコストの把握と管理" >}}
-    {{< nextlink href="metrics/metrics-without-limits/" >}}<u>Metrics without Limits™</u> - Metrics without Limits™ を使用して、タグと集計構成を通じてカスタムメトリクスのボリュームを制御する方法を学びます。{{< /nextlink >}}
+{{< whatsnext desc="Understand and manage your custom metrics volumes and costs" >}}
+    {{< nextlink href="metrics/metrics-without-limits/" >}}<u>Metrics without LimitsTM</u> - Learn how to control custom metrics volumes with tags and aggregations configurations using Metrics without LimitsTM.{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## 概要
-### メトリクスとは？
+## Overview
+### What are metrics?
 
-メトリクスは、レイテンシーからエラー率、ユーザーのサインアップまで、環境に関するあらゆる情報を経時的に追跡できる数値です。
+Metrics are numerical values that can track anything about your environment over time, from latency to error rates to user signups.
 
-Datadog では、メトリクスデータは値とタイムスタンプを持つデータポイントとして収集され、格納されます。
+In Datadog, metric data is ingested and stored as data points with a value and timestamp:
 
 ```text
 [ 17.82,  22:11:01 ]
 ```
 
-一連のデータポイントが 1 つの時系列として格納されます。
+A sequence of data points is stored as a timeseries:
 
 ```text
 [ 17.82,  22:11:01 ]
@@ -52,166 +50,166 @@ Datadog では、メトリクスデータは値とタイムスタンプを持つ
 [  7.06,  22:12:00 ]
 ```
 
-タイムスタンプが秒の端数であるメトリクスは、最も近い秒に丸められます。同じタイムスタンプを持つポイントがある場合、最新のポイントが前のポイントを上書きします。
+Any metrics with fractions of a second timestamps are rounded to the nearest second. If any points have the same timestamp, the latest point overwrites the previous ones.
 
-### メトリクスが役立つ理由は？
+### Why are metrics useful?
 
-メトリクスは、システムの全体像を提供します。それを使用して、環境の状態を一目で評価できます。たとえば、ユーザーが Web サイトをロードする速度や、サーバーの平均メモリ消費量などを視覚化します。問題を特定したら、[ログ][1]と[トレース][2]を使用して、トラブルシューティングします。
+Metrics provide an overall picture of your system. You can use them to assess the health of your environment at a glance. Visualize how quickly users are loading your website, or the average memory consumption of your servers, for instance. Once you identify a problem, you can use [logs][1] and [tracing][2] to further troubleshoot.
 
-システムの状態を追跡するメトリクスは、{{< translate key="integration_count" >}} 以上のサービスと Datadog のインテグレーションによって自動的に取得されます。ビジネスに固有のメトリクス (カスタムメトリクスとも呼ばれます) を追跡することもできます。ユーザーログインの数、ユーザーカートのサイズ、チームのコードコミットの頻度などを追跡することができます。
+Metrics that track system health come automatically through Datadog's integrations with more than {{< translate key="integration_count" >}} services. You can also track metrics that are specific to your business—also known as custom metrics. You can track things such as the number of user logins or user cart sizes to the frequency of your team's code commits.
 
-さらに、メトリクスは、顧客からの需要を満たすために環境の規模を調整するのに役立ちます。リソースをどれだけ消費する必要があるかを正確に知ることは、お金を節約したり、パフォーマンスを向上させたりするのに役立ちます。
+In addition, metrics can help you adjust the scale of your environment to meet the demand from your customers. Knowing exactly how much you need to consume in resources can help you save money or improve performance.
 
-### Datadog へのメトリクスの送信
+### Submitting metrics to Datadog
 
-メトリクスは、いくつかの場所から Datadog に送信できます。
+Metrics can be sent to Datadog from several places.
 
-- [Datadog がサポートするインテグレーション][8]: {{< translate key="integration_count" >}} 以上ある Datadog のインテグレーションには、すぐに使用できるメトリクスが含まれています。このメトリクスにアクセスするには、サービスの特定のページに移動し、インストール手順に従います。たとえば、EC2 インスタンスを監視する必要がある場合は、[Amazon EC2 インテグレーションドキュメント][9]に移動します。
+- [Datadog-Supported Integrations][8]: Datadog's {{< translate key="integration_count" >}}+ integrations include metrics out of the box. To access these metrics, navigate to the specific integration page for your service and follow the installation instructions there. If you need to monitor an EC2 instance, for example, you would go to the [Amazon EC2 integration documentation][9].
 
-- Datadog のプラットフォーム内で、メトリクスを直接生成できます。たとえば、ログに表示されるエラーステータスコードをカウントし、Datadog に[それを新しいメトリクスとして保存][10]することができます。
+- You can generate metrics directly within the Datadog platform. For instance, you can count error status codes appearing in your logs and [store that as a new metric][10] in Datadog.
 
-- 多くの場合、ビジネスに関連するメトリクス (ユーザーのログインや登録数など) を追跡する必要があります。このような場合、[カスタムメトリクス][11]を作成できます。カスタムメトリクスは、[Agent][12]、[DogStatsD][13]、または [HTTP API][14] を介して送信できます。
+- Often, you'll need to track metrics related to your business (for example, number of user logins or signups). In these cases, you can create [custom metrics][11]. Custom metrics can be submitted through the [Agent][12], [DogStatsD][13], or the [HTTP API][14].
 
-- さらに、[Datadog Agent][15] は、いくつかの標準メトリクス (CPU やディスク使用量など) を自動的に送信します。
+- Additionally, the [Datadog Agent][15] automatically sends several standard metrics (such as CPU and disk usage).
 
-すべてのメトリクス送信ソースとメソッドの概要については、[メトリクスタイプのドキュメント][16]をお読みください。
+For a summary of all metric submission sources and methods, read the [Metrics Types documentation][16].
 
-### メトリクスタイプとリアルタイムメトリクスの可視性
+### Metric types and real-time metrics visibility
 
-#### メトリクスタイプ
+#### Metric types
 
-Datadog では、カウント、ゲージ、レート、ヒストグラム、分布など、異なるユースケースに対応するいくつかの異なるメトリクスタイプをサポートしています。メトリクスタイプは、アプリのメトリクスで使用できるグラフと関数を決定します。
+Datadog supports several different metric types that serve distinct use cases: count, gauge, rate, histogram, and distribution. Metric types determine which graphs and functions are available to use with the metric in the app.
 
-Datadog Agent が、送信するデータポイントごとに Datadog のサーバーに個別のリクエストを行うことはありません。代わりに、_フラッシュ時間間隔_で収集された値を報告します。メトリクスのタイプは、この間隔でホストから収集された値が送信のためにどのように集計されるかを決定します。
+The Datadog Agent doesn't make a separate request to Datadog's servers for every single data point you send. Instead, it reports values collected over a _flush time interval_. The metric's type determines how the values collected from your host over this interval are aggregated for submission.
 
-**_カウント_**タイプは、送信されたすべての値を時間間隔で合計します。これは、たとえば、Web サイトのヒット数を追跡するメトリクスに適しています。
+A **_count_** type adds up all the submitted values in a time interval. This would be suitable for a metric tracking the number of website hits, for instance.
 
-**_レート_**タイプはカウントを取り、それを時間間隔の長さで割ったものです。これは、1 秒あたりのヒット数に興味がある場合に有用です。
+The **_rate_** type takes the count and divides it by the length of the time interval. This is useful if you're interested in the number of hits per second.
 
-**_ゲージ_**タイプは、間隔中に報告された最後の値を取ります。このタイプは、RAM または CPU の使用量を追跡するのに役立ちます。最後の値を取得すると、時間間隔中のホストの動作の代表的な像が得られます。この場合、_カウント_などの別のタイプを使用すると、不正確で極端な値になる可能性があります。正しいメトリクスタイプを選択することで、正確なデータを得ることができます。
+A **_gauge_** type takes the last value reported during the interval. This type would make sense for tracking RAM or CPU usage, where taking the last value provides a representative picture of the host's behavior during the time interval. In this case, using a different type such as _count_ would probably lead to inaccurate and extreme values. Choosing the correct metric type ensures accurate data.
 
-**_ヒストグラム_**は、送信された値を要約した 5 つの異なる値、平均、カウント、中央値、95 パーセンタイル、最大を報告します。これにより、5 つの異なる時系列が生成されます。このメトリクスタイプは、平均値を知るだけでは不十分なレイテンシーなどに適しています。ヒストグラムを使用すると、すべてのデータポイントを記録しなくても、データがどのように分散しているかを理解できます。
+A **_histogram_** reports five different values summarizing the submitted values: the average, count, median, 95th percentile, and max. This produces five different timeseries. This metric type is suitable for things like latency, for which it's not enough to know the average value. Histograms allow you to understand how your data was spread out without recording every single data point.
 
-**_分布_**はヒストグラムに似ていますが、環境内のすべてのホストにわたって時間間隔中に送信された値を要約します。複数のパーセンタイルをレポートすることもできます(p50、p75、p90、p95、p99)。この強力な機能の詳細については、[ディストリビューションのドキュメント][19]をご覧ください。
+A **_distribution_** is similar to a histogram, but it summarizes values submitted during a time interval across all hosts in your environment. You can also choose to report multiple percentiles: p50, p75, p90, p95, and p99. You can learn more about this powerful feature in the [Distributions documentation][19].
 
-各メトリクスタイプの詳細な例と送信手順については、[メトリクスタイプ][16]のドキュメントを参照してください。
+See the [metrics types][16] documentation for more detailed examples of each metric type and submission instructions.
 
-## メトリクスのクエリ
+## Querying metrics
 
-[メトリクスエクスプローラー][3]、[ダッシュボード][4]、または[ノートブック][5]の Datadog 全体でメトリクスを視覚化してグラフを作成できます。
+You can visualize your metrics and create graphs throughout Datadog: in [Metrics Explorer][3], [Dashboards][4], or [Notebooks][5].
 
-以下は、時系列を視覚化した場合の例です。
+Here's an example of a timeseries visualization:
 
-{{< img src="metrics/introduction/timeseries_example.png" alt="時系列グラフでは、レイテンシーメトリクスを 1 本の青い線で表し、いくつかのスパイクを付けて表示します。" >}}
+{{< img src="metrics/introduction/timeseries_example.png" alt="A timeseries graph displays a latency metric represented by a single blue line with several spikes" >}}
 
-この折れ線グラフは、x 軸の時間に対して、y 軸のユーザーが経験したレイテンシー (ミリ秒単位) をプロットします。
+This line graph plots latency (in milliseconds) experienced by users on the y-axis against time on the x-axis.
 
-#### 追加の視覚化
+#### Additional visualizations
 
-Datadog は、メトリクスを簡単にグラフ化して表示できるように、さまざまな視覚化オプションを提供しています。
+Datadog offers a variety of visualization options to help users easily graph and display their metrics. 
 
-メトリクスクエリは、開始時に同じ 2 つの評価ステップ、時間集計と空間集計で構成されています。詳しくは[メトリクスクエリの構造][6]を参照してください。
+A metric query consists of the same two evaluation steps to start: time aggregation and space aggregation. See the [anatomy of a metric query][6] for more information.
 
-{{< whatsnext desc="メトリクスのユーザーがよく便利だと感じる 2 つの視覚化製品">}}
-    {{< nextlink href="dashboards/widgets/query_value/" >}}<u>クエリ値ウィジェット</u> - この 2 つのステップの結果を 1 つの値に還元します。{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/top_list/" >}}<u>トップリスト</u> - グループごとに 1 つの値を返します。{{< /nextlink >}}
+{{< whatsnext desc="Two visualization offerings that Metrics users often find useful are:">}}
+    {{< nextlink href="dashboards/widgets/query_value/" >}}<u>Query Value Widget</u> - Reduces the results of those two steps into a single value.{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/top_list/" >}}<u>Top List</u> - Returns a single value per group.{{< /nextlink >}}
 {{< /whatsnext >}}
 
-また、Datadog には、視覚化のための多くのタイプのグラフやウィジェットがあります。詳しくは、Datadog の[メトリクスグラフに関するブログシリーズ][7]をご覧ください。
+Additionally, Datadog has many other types of graphs and widgets for visualizations. You can learn more about them in Datadog's [blog series about metric graphs][7].
 
-ダッシュボード、ノートブック、モニターのいずれを使用しても、グラフの作成方法は一定です。グラフエディタ UI を使用するか、生のクエリ文字列を直接変更するからのいずれかの方法により、グラフを作成できます。クエリ文字列を編集するには、右端の `</>` ボタンを押します。
+The graphing experience is consistent whether you are using dashboards, notebooks, or monitors. You can create graphs by using the graphing editor UI or by directly changing the raw query string. To edit the query string, use the `</>` button on the far right.
 
-### メトリクスクエリの構造
+### Anatomy of a metric query
 
-Datadog のメトリクスクエリは次のようになります。
+A metric query in Datadog looks like this:
 
-{{< img src="metrics/introduction/newanatomy.jpg" alt="カラーコードのセクションで示されたサンプルクエリ" style="width:70%;">}}
+{{< img src="metrics/introduction/newanatomy.jpg" alt="Example query with color-coded sections" style="width:70%;">}}
 
-このクエリはいくつかのステップに分けることができます。
+You can break this query into a few steps:
 
-#### メトリクス名
+#### Metric name
 
-まず、グラフを作成する特定のメトリクスを検索または **Metric** の横にあるドロップダウンから選択します。使用するメトリクスが不明な場合は、メトリクスエクスプローラーまたはノートブックで開始します。メトリクスの概要ページで、アクティブにレポートを送信しているメトリクスのリストを確認することも可能です。
+First, choose the specific metric that you'd like to graph by searching or selecting it from the dropdown next to **Metric**. If you're not sure which metric to use, start with the Metrics Explorer or a notebook. You can also see a list of actively reporting metrics on the Metrics Summary page.
 
-#### メトリクスのフィルタリング
+#### Filter your metric
 
-メトリクスを選択したら、タグに基づいてクエリにフィルターを適用することができます。たとえば、`account:prod` を使用してクエリの_スコープ_を定義し、本番環境のホストからのメトリクスのみに絞り込むことができます。詳細は[タグ付けに関するドキュメント][17]をお読みください。
+After selecting a metric, you can filter your query based on tag(s). For instance, you can use `account:prod` to _scope_ your query to include only the metrics from your production hosts. For more information, read the [tagging documentation][17].
 
-#### 時間集計の構成
+#### Configure time aggregation
 
-次に、時間ロールアップを使用してデータの粒度を選択します。この例では、1 時間 (3600 秒) ごとに 1 つのデータポイントがあると定義しました。各タイムバケットのデータをどのように集計するかを選択することができます。デフォルトでは、_平均_ が適用されますが、他にも _合計_、_最小_、_最大_、_カウント_ のオプションが使用可能です。関数やアプリ内モディファイア―を使って、メトリクスデータの集計方法やバケット化の方法をカスタマイズすることもできます。たとえば、最大を適用し、カレンダーに沿ったクエリに合わせてメトリクスデータのロールアップとバケット化の方法をカスタマイズしたい場合は、`.rollup(max, 60)` を使用できます。詳しくは、[関数][24]、[ロールアップ][23]、[アプリ内モディファイア―][25]のドキュメントを参照してください。
+Next, choose the granularity of your data using time rollup. In this example, you've defined that there is one data point for every hour (3600 seconds). You can choose how you want to aggregate the data in each time bucket. By default, _avg_ is applied, but other available options are _sum_, _min_, _max_, and _count_. You can also customize how your metrics data is aggregated and bucketed with functions or in-application modifiers. For example, if you wanted to apply max and customize how your metrics data is rolled up and bucketed in time with calendar aligned queries, you would use `.rollup(max, 60)`. For more information, see the [Functions][24], [Rollup][23], and [In-application modifiers][25] documentation.
 
-#### 空間集計の構成
+#### Configure space aggregation
 
-Datadog では、「空間」とは、メトリクスがさまざまなホストやタグに分散される方法を指します。制御できる空間には、Aggregator とグループ化という 2 つの異なる側面があります。
+In Datadog, "space" refers to the way metrics are distributed over different hosts and tags. There are two different aspects of space that you can control: aggregator and grouping
 
-_Aggregator_ は、各グループのメトリクスを組み合わせる方法を定義します。利用可能な集計には、合計、最小、最大、平均の 4 つがあります。
+_Aggregator_ defines how the metrics in each group are combined. There are four aggregations available: sum, min, max, and avg.
 
-_グループ化_は、グラフ上の線を構成するものを定義します。たとえば、4 つのリージョンに数百のホストが分散している場合、リージョンごとにグループ化すると、リージョンごとに 1 つの線をグラフ化します。これにより、時系列の数を 4 つに減らすことができます。
+_Grouping_ defines what constitutes a line on the graph. For example, if you have hundreds of hosts spread across four regions, grouping by region allows you to graph one line for every region. This would reduce the number of timeseries to four.
 
-#### 関数の適用 (任意)
+#### Apply functions (optional)
 
-グラフ値は数学[関数][18]で変更することができます。これにより、整数とメトリクス (メトリクスを2乗するなど) 間、または 2 つのメトリクス間 (`jvm.heap_memory / jvm.heap_memory_max` のように、メモリ使用率に関する新しい時系列を作成するなど) の算術演算を実行することができます。
+You can modify your graph values with mathematical [functions][18]. This can mean performing arithmetic between an integer and a metric (for example, multiplying a metric by 2). Or performing arithmetic between two metrics (for example, creating a new timeseries for the memory utilization rate like this: `jvm.heap_memory / jvm.heap_memory_max`).
 
-### 時間と空間の集計
+### Time and space aggregation
 
-_時間集計_と_空間集計_は、クエリの 2 つの重要なコンポーネントです。これらの集計がどのように機能するかを理解すると、グラフの誤解を避けるのに役立つため、これらの概念について以下で詳しく説明します。
+_Time aggregation_ and _space aggregation_ are two important components of any query. Because understanding how these aggregations work helps you avoid misinterpreting your graphs, these concepts are explained in more detail below.
 
-#### 時間集計
+#### Time aggregation
 
-Datadog は大量のポイントを保管しており、ほとんどの場合、そのすべてをグラフ上に表示することはできません。ピクセルよりもデータポイント数の方が多くなるためです。Datadog は時間集計を使用して、データポイントとタイムバケツを組み合わせることでこの問題を解決しています。例えば、4 時間を調べる場合、データポイントは 2 分のバケットにまとめられます。これは_ロールアップ_と呼ばれます。クエリに定義した時間間隔が長くなると、データの粒度は小さくなります。
+Datadog stores a large volume of points, and in most cases it's not possible to display all of them on a graph. There would be more datapoints than pixels. Datadog uses time aggregation to solve this problem by combining data points into time buckets. For example, when examining four hours, data points are combined into two-minute buckets. This is called a _rollup_. As the time interval you've defined for your query increases, the granularity of your data decreases.
 
-各タイムバケットのデータを組み合わせるために適用できる集計には、合計、最小、最大、平均、カウントの 5 つがあります。
+There are five aggregations you can apply to combine your data in each time bucket: sum, min, max, avg, and count.
 
-クエリを実行するたびに時間集計が_常に_適用されることを覚えておくことが重要です。
+It's important to remember that time aggregation is _always_ applied in every query you make.
 
-#### 空間集計
+#### Space aggregation
 
-空間集計は、ホスト、コンテナ、リージョンなどのタグによって単一のメトリクスを複数の時系列に分割します。たとえば、リージョンごとの EC2 インスタンスのレイテンシーを表示する場合は、空間集計のグループ化機能を使用して各リージョンのホストを組み合わせる必要があります。
+Space aggregation splits a single metric into multiple timeseries by tags such as host, container, and region. For instance, if you wanted to view the latency of your EC2 instances by region, you would need to use space aggregation's grouping by functionality to combine each region's hosts.
 
-Aggregator を使用するときに適用できる集計には、_合計_、_最小_、_最大_、_平均_の 4 つがあります。上記の例を使用して、ホストが us-east-1、us-east-2、us-west-1、us-west-2 の 4 つのリージョンに分散しているとします。各リージョンのホストは、集計関数を使用して組み合わせる必要があります。_最大_アグリゲーターを使用すると、各リージョンのホスト間で最大のレイテンシーが発生し、_平均_アグリゲーターを使用すると、リージョンごとの平均レイテンシーが発生します。
+There are four aggregators that can be applied when using space aggregation: _sum_, _min_, _max_, and _avg_. Using the above example, say that your hosts are spread across four regions: us-east-1, us-east-2, us-west-1, and us-west-2. The hosts in each region need to be combined using an aggregator function. Using the _max_ aggregator would result in the maximum latency experienced across hosts in each region, while the _avg_ aggregator would yield the average latency per region.
 
-### メトリクスに関するリアルタイム情報を表示する
+### View real-time information about metrics
 
-[メトリクスの概要ページ][20]には、過去 1 時間、1 日、または 1 週間の指定されたタイムフレームで Datadog に報告されたメトリクスのリストが表示されます。メトリクスは、メトリクス名またはタグでフィルタリングできます。
+The [Metrics Summary page][20] displays a list of your metrics reported to Datadog under a specified time frame: the past hour, day, or week. Metrics can be filtered by metric name or tag.
 
-メトリクス名をクリックすると、詳細サイドパネルに詳細情報が表示されます。詳細再度パネルには、メタデータ (タイプ、ユニット、間隔)、個別のメトリクスの数、レポートホストの数、送信されたタグの数、メトリクスで送信されたすべてのタグを含むテーブルなど、特定のメトリクスの重要な情報が表示されます。メトリクスで送信されているタグを確認すると、タグ値の組み合わせによって異なるため、メトリクスからレポートされる個別のメトリクスの数を理解するのに役立ちます。
+Click on any metric name to display a details sidepanel with more detailed information. The details sidepanel displays key information for a given metric, including its metadata (type, unit, interval), number of distinct metrics, number of reporting hosts, number of tags submitted, and a table containing all tags submitted on a metric. Seeing which tags are being submitted on a metric helps you understand the number of distinct metrics reporting from it, since this number depends on your tag value combinations.
 
-**注:** メトリクスの概要の詳細サイドパネルで報告される個別のメトリクスの数によって請求が定義されるわけではありません。過去 1 か月間の使用量の正確な計算については、[使用量の詳細][21]を参照してください。
+**Note:** The number of distinct metrics reported in the details sidepanel on Metrics Summary does not define your bill. See your [usage details][21] for a precise accounting of your usage over the past month.
 
-詳細については、[メトリクスの概要ドキュメント][22]をお読みください。
+Read the [metrics summary documentation][22] for more details.
 
-## その他の参考資料
+## Further reading
 
-{{< whatsnext desc="メトリクスに関するトピックを続行する場合は、以下を確認してください。">}}
-    {{< nextlink href="/metrics/advanced-filtering" >}}<u>高度なフィルタリング</u> - フィルターを使用して返されたメトリクスのスコープを絞り込みます。{{< /nextlink >}}
-    {{< nextlink href="/metrics/distributions" >}}<u>ディストリビューションメトリクス</u> - データセット全体のグローバルパーセンタイルを計算します。{{< /nextlink >}}
-    {{< nextlink href="metrics/metrics-without-limits/" >}}<u>Metrics without Limits™</u> - Metrics without Limits™ を使って、タグや集計構成によりカスタムメトリクスのボリュームを制御する方法をご紹介します。{{< /nextlink >}}
-    {{< nextlink href="https://dtdg.co/fe" >}}<u>Foundation Enablement</u> - メトリクスの可能性を最大限に引き出すインタラクティブなセッションにご参加ください。{{< /nextlink >}}
+{{< whatsnext desc="To continue with metrics, check out:">}}
+    {{< nextlink href="/metrics/advanced-filtering" >}}<u>Advanced Filtering</u> - Filter your data to narrow the scope of metrics returned.{{< /nextlink >}}
+    {{< nextlink href="/metrics/distributions" >}}<u>Distribution metrics</u> - Compute global percentiles across your entire dataset.{{< /nextlink >}}
+    {{< nextlink href="metrics/metrics-without-limits/" >}}<u>Metrics without LimitsTM</u> - Learn how to control custom metrics volumes with tags and aggregations configurations using Metrics without LimitsTM.{{< /nextlink >}}
+    {{< nextlink href="https://dtdg.co/fe" >}}<u>Foundation Enablement</u> - Join an interactive session to unlock the full potential of metrics.{{< /nextlink >}}
 {{< /whatsnext >}}
 
-[1]: /ja/logs
-[2]: /ja/tracing/
-[3]: /ja/metrics/explorer/
-[4]: /ja/dashboards/
-[5]: /ja/notebooks/
-[6]: https://docs.datadoghq.com/ja/metrics/#anatomy-of-a-metric-query
+[1]: /logs
+[2]: /tracing/
+[3]: /metrics/explorer/
+[4]: /dashboards/
+[5]: /notebooks/
+[6]: https://docs.datadoghq.com/metrics/#anatomy-of-a-metric-query
 [7]: https://www.datadoghq.com/blog/timeseries-metric-graphs-101/
-[8]: /ja/integrations/
-[9]: /ja/integrations/amazon_ec2/
-[10]: /ja/logs/logs_to_metrics/
-[11]: /ja/metrics/custom_metrics/
-[12]: /ja/agent/
-[13]: /ja/metrics/custom_metrics/dogstatsd_metrics_submission/
-[14]: /ja/api/
-[15]: https://docs.datadoghq.com/ja/agent/basic_agent_usage/
-[16]: /ja/metrics/types/
-[17]: /ja/getting_started/tagging/using_tags/
-[18]: /ja/dashboards/functions/
-[19]: /ja/metrics/distributions/
+[8]: /integrations/
+[9]: /integrations/amazon_ec2/
+[10]: /logs/logs_to_metrics/
+[11]: /metrics/custom_metrics/
+[12]: /agent/
+[13]: /metrics/custom_metrics/dogstatsd_metrics_submission/
+[14]: /api/
+[15]: https://docs.datadoghq.com/agent/basic_agent_usage/
+[16]: /metrics/types/
+[17]: /getting_started/tagging/using_tags/
+[18]: /dashboards/functions/
+[19]: /metrics/distributions/
 [20]: https://app.datadoghq.com/metric/summary
-[21]: /ja/account_management/plan_and_usage/usage_details/
-[22]: /ja/metrics/summary/
-[23]: /ja/dashboards/functions/rollup/#rollup-with-calendar-aligned-queries
-[24]: /ja/dashboards/functions/
-[25]: /ja/metrics/custom_metrics/type_modifiers/?tab=count#in-application-modifiers
+[21]: /account_management/plan_and_usage/usage_details/
+[22]: /metrics/summary/
+[23]: /dashboards/functions/rollup/#rollup-with-calendar-aligned-queries
+[24]: /dashboards/functions/
+[25]: /metrics/custom_metrics/type_modifiers/?tab=count#in-application-modifiers

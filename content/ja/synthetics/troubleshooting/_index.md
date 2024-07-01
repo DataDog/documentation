@@ -1,241 +1,241 @@
 ---
-description: Synthetic モニタリングでよくある問題のトラブルシューティング。
+title: Synthetic Monitoring Troubleshooting
+kind: documentation
+description: Troubleshoot common Synthetic Monitoring issues.
 further_reading:
 - link: /synthetics/
-  tag: ドキュメント
-  text: Synthetic テストの管理
+  tag: Documentation
+  text: Manage your Synthetic tests
 - link: /synthetics/browser_tests/
-  tag: ドキュメント
-  text: ブラウザテストの構成
+  tag: Documentation
+  text: Configure a browser test
 - link: /synthetics/api_tests/
-  tag: ドキュメント
-  text: API テストの構成
+  tag: Documentation
+  text: Configure an API test
 - link: /synthetics/private_locations/
-  tag: ドキュメント
-  text: プライベートロケーションの作成
-title: Synthetic モニタリングのトラブルシューティング
+  tag: Documentation
+  text: Create a private location
 ---
 
-## 概要
+## Overview
 
-Datadog Synthetic モニタリングのセットアップや構成で問題が発生した場合は、こちらのページを参考にしてトラブルシューティングをお試しください。問題が解決されない場合は、[Datadog サポートまでお問い合わせ][1]ください。
+If you experience issues setting up or configuring Datadog Synthetic Monitoring, use this page to start troubleshooting. If you continue to have trouble, [contact Datadog Support][1].
 
-## API テスト
+## API tests
 
-### ネットワークのタイミングが一様ではない
+### Network timings are varied
 
-API テストの[時間メトリクス][2]に急激な上昇や全体的な増加がある場合、リクエストにボトルネックまたは遅延があることを示しています。詳しくは、[API テストの時間とバリエーション][3]のガイドを参照してください。
+If you see a sudden spike or overall increase in your API test [timing metrics][2], this usually indicates a bottleneck or delay in the request. For more information, see this guide on [API Test Timings and Variations][3].
 
-## ブラウザテスト
+## Browser tests
 
-### 記録
+### Recording
 
-#### ウェブサイトが iframe で読み込まれない
+#### The website is not loading in the iframe
 
-[Datadog 拡張機能][4]をダウンロードすると、ブラウザテストのレコーダーの右側にある iframe で Web サイトを確認できなくなり、`Your website does not support being loaded through an iframe.` (この Web サイトは iframe 経由の読み込みをサポートしていません) と表示されます。この場合、アプリケーションの設定で iframe での表示が抑制されている場合があります。
+After downloading the [Datadog extension][4], you are unable to see your website in the iframe on the right side of your Browser test's recorder and the iframe displays `Your website does not support being loaded through an iframe.`. This could mean that your application has some settings preventing it from being opened in an iframe. 
 
-あるいは、iframe レコーダーで記録しているときに Web サイトにログインできない場合、アプリケーションのリクエストがブロックされている可能性があります。
+Or, if you are unable to login to your website when recording in the iframe recorder, this could mean that your application has a request that is blocked.
 
-**Open in Popup** をクリックして Web サイトをポップアップウィンドウで開き、ユーザージャーニーを記録してみてください。 
+Try opening your website in a pop-up window by clicking **Open in Popup** to record your user journey.  
 
-#### 一部のアプリケーションは iframe に読み込まれるが、読み込まれないものがある
+#### Some applications load in the iframe but some do not
 
-これは、アプリケーションと環境によって制限が異なることを意味します。そのため、一部は iframe で視覚化されますが、表示されないものもあります。
+This means your applications and environments have different restrictions, which causes some of them to be visualized in an iframe while the others are not viewable.
 
-#### iframe の上部に「We've detected HTTP requests that are not supported inside the iframe, you may need to record in a popup (iframe 内でサポートされていない HTTP リクエストを検知したため、ポップアップで記録を行う必要があります)」と表示される
+#### The "We've detected HTTP requests that are not supported inside the iframe, you may need to record in a popup" banner appears at the top of the iframe
 
-これは `http` ページでステップを記録しようとしている場合に主に発生します。iframe レコーダーでは `https` のみサポートされています。ページをポップアップとして開くか、URL を `https` に変更してページの記録を開始してください。
+This most likely means you are trying to record steps on an `http` page. Only `https` is supported in the recorder iframe. You should open your page as a pop-up or change your URL to an `https` one to start recording on the page. 
 
-{{< img src="synthetics/http_iframe.png" alt="HTTP を iframe で開いた場合" style="width:100%;" >}}
+{{< img src="synthetics/http_iframe.png" alt="HTTP in iframe" style="width:100%;" >}}
 
-#### iframe で Web サイトが読み込まれず、Web サイトをポップアップで開いてもステップを記録できない
+#### My website is not loading in the iframe and I cannot record any steps, even when opening my website in a pop-up
 
-[Datadog 拡張機能][4]をダウンロードすると、ブラウザテストのレコーダーの右側にある iframe でウェブサイトを確認できなくなります。さらに、ウェブサイトを iframe とポップアップのどちらで開いても、ステップを記録できなくなります。
+After downloading the [Datadog extension][4], you are unable to see your website in the iframe on the right side of your Browser test's recorder. Additionally, you cannot record any steps, regardless of whether you open your website in the iframe or in a pop-up:
 
-{{< img src="synthetics/recording_iframe.mp4" alt="ブラウザテストのステップの記録に関する問題" video="true" width="100%" >}}
+{{< img src="synthetics/recording_iframe.mp4" alt="Issues recording Browser test steps" video="true" width="100%" >}}
 
-このような場合は、`On specific sites` セクションでウェブサイトを指定するか、`On all sites` にトグルボタンを変更して、意図したウェブサイトのデータの読み取りおよび変更の許可を [Datadog 拡張機能][5]に付与してください。
+If that happens, ensure the [Datadog extension][5] has the permissions to read and change data on the intended websites by specifying your website in the `On specific sites` section or by toggling `On all sites`:
 
-{{< img src="synthetics/extension.mp4" alt="拡張機能にすべてのサイトのデータ読み取りを許可" video="true" width="100%" >}}
+{{< img src="synthetics/extension.mp4" alt="Allowing extension to read data on all sites" video="true" width="100%" >}}
 
-#### アプリケーションで手順を記録することができません
+#### I'm unable to record steps on my application
 
-Chrome ブラウザに、拡張機能が正常に記録できないようにするポリシーがある可能性があります。
+Your Chrome browser might have some policies preventing the extension from performing the recording as expected. 
 
-確認するには、`chrome://policy` へ移動して [`ExtensionSettings`][6] のような拡張機能に関する設定を探します。
+To find out, go to `chrome://policy` and look for any extension-related settings such as [`ExtensionSettings`][6].
 
-#### レコーダーにログインページが表示されない
+#### I don't see the login page in the recorder
 
-デフォルトでは、レコーダーの iframe/ポップアップは、ユーザーが使用しているブラウザを使用します。したがって、すでにアプリケーションにログインしている場合、iframe/ポップアップがログイン後のページを直接表示し、先にログアウトしないとログイン手順を記録できない可能性があります。
+By default, the iframe/pop-up of the recorder uses your own browser. This means that if you're already logged into your application, the iframe/pop-up might directly display a post login page, therefore preventing you from recording your login steps without logging out first.
 
-アプリケーションからログアウトせずに手順を記録できるようにするには、レコーダーの**シークレットモード**を利用します。
+To be able to record your steps without logging out from your application, just leverage the recorder's **incognito mode**:
 
-{{< img src="synthetics/incognito_mode.mp4" alt="シークレットモードのブラウザテストの使用" video="true" width="100%" >}}
+{{< img src="synthetics/incognito_mode.mp4" alt="Using Incognito Mode Browser Tests" video="true" width="100%" >}}
 
-**シークレットモードでポップアップウィンドウを開く**と、使用中のブラウザのメインセッションとユーザーデータから完全に分離されたセッションとして、テストコンフィギュレーションで設定した開始 URL からテストの記録を開始できます。
+**Opening a pop-up window in incognito mode** allows you to start your test's recording from the start URL set in your test configuration with a session completely isolated from your own browser's main session and user data. 
 
-このシークレットポップアップウィンドウは、以前のブラウザ履歴 (Cookie やローカルデータなど) を無視します。アカウントから自動的にログアウトされ、初めて Web サイトにアクセスした場合と同じようにログイン手順の記録を開始できます。
+This incognito pop-up window ignores your previous browser history including cookies and local data. You are automatically logged out from your account and can start recording your login steps as if you were visiting your website for the first time.
 
-### テスト結果
+### Test results
 
-#### Mobile Small またはタブレットブラウザテストの結果が失敗し続けます
+#### My mobile small or tablet browser test results keep failing
 
-ウェブサイトに**レスポンシブ**技術を使用している場合、その DOM はテストを実行するデバイスにより大きく異なります。`Laptop Large` から実行するときは特定の DOM を使用し、`Tablet` または `Mobile Small` から実行する場合は別のアーキテクチャになります。
+If your website is using **responsive** techniques, its DOM might differ a lot depending on the device your test is running on. It might use a specific DOM when running from a `Laptop Large`, and have a different architecture when running from a `Tablet` or a `Mobile Small`.  
 
-つまり、`Laptop Large` のビューポートから記録されたステップは `Mobile Small` からアクセスされた同じウェブサイトには適用されず、`Mobile Small` のテスト結果が失敗となることがあります。
+This means that the steps you recorded from a `Laptop Large` viewport might not be applicable to the same website accessed from a `Mobile Small`, causing your `Mobile Small` test results to fail:
 
-{{< img src="synthetics/device_failures.png" alt="モバイルタブレットデバイスの失敗" style="width:100%;" >}}
+{{< img src="synthetics/device_failures.png" alt="Mobile Tablet Device Failing" style="width:100%;" >}}
 
-このような場合のため、Datadog では、ランタイムでテストが設定されたビューポートと記録されたステップが一致する、**`Mobile Small` または `Tablet` に特定の別々のテスト**を作成することをおすすめしています。
+For these types of cases, Datadog recommends creating **separate `Mobile Small` or `Tablet` specific tests** where the recorded steps match the viewport your test is set to at runtime.  
 
-`Mobile Small` または `Tablet` ビューポートでステップを記録するには、**Start Recording** ボタンを押す前にレコーダーのドロップダウンで `Mobile Small` または `Tablet` を選択します。
+To record steps with a `Mobile Small` or `Tablet` viewport, selecting `Mobile Small` or `Tablet` in the recorder dropdown before hitting the **Start Recording** button.
 
-{{< img src="synthetics/record_device.png" alt="モバイルタブレットでの記録ステップ" style="width:100%;" >}}
+{{< img src="synthetics/record_device.png" alt="Recording steps on mobile tablet" style="width:100%;" >}}
 
-さらに、Datadog のテストブラウザは**ヘッドレス**で実行されるため、ブラウザテストがサポートしない機能があります。たとえば、ブラウザテストは `touch` をサポートしないため、ウェブサイトがモバイルデザインで表示されるべきかを `touch` で検出することはできません。
+Additionally, Datadog's test browsers run in **headless**, meaning Browser tests do not support some features. For example, Browser tests do not support `touch` and cannot use `touch` to detect whether the website should appear with its mobile design.
 
-#### ブラウザテストで `None or multiple elements detected` というステップの警告が表示される
+#### `None or multiple elements detected` step warning appears in browser tests
 
-ブラウザテストのステップに `None or multiple elements detected` のステップ警告が表示されています。
+One of your browser test steps is showing a `None or multiple elements detected` step warning:
 
-{{< img src="synthetics/step_warning.png" alt="ユーザーのロケーターのステップ警告" style="width:100%;" >}}
+{{< img src="synthetics/step_warning.png" alt="User locator step warning" style="width:100%;" >}}
 
-これは、このステップに定義されたユーザーロケーターが、複数の要素を対象としているか、いずれの要素も対象としていないため、ブラウザテストで対応する必要のある要素が不明であるという意味です。
+This means that the user locator defined for that step is either targeting several elements, or none of them, consequently preventing the Browser test from knowing which element needs to be interacted with.   
 
-この問題を修正するには、問題のあるステップの詳細オプションを開き、テストするステップのページで `Test` をクリックします。これにより、要素がハイライトされるかエラーメッセージが印刷されます。次に、ページの単一要素に一致するようユーザーロケーターを修正できます。
+To fix it, go edit your recording, open the advanced options of the step that is having the issue, go to the page the step is testing, and click on `Test`. This highlights the located element or prints an error message. You can then go ahead and fix your user locator to have it match a single element of the page:
 
-{{< img src="synthetics/fix_user_locator.mp4" alt="ユーザーロケーターのエラーを修正" video="true" width="100%" >}}
+{{< img src="synthetics/fix_user_locator.mp4" alt="Fixing User Locator error" video="true" width="100%" >}}
 
-#### CSS のポインタープロパティで問題が発生している
+#### I am having issues with a CSS pointer property
 
-自動化されたブラウザは、CSS の `pointer` メディア機能をエミュレートすることをサポートしていません。ブラウザテストでは、すべてのテストとデバイス (ラップトップ、タブレット、モバイル) で `pointer: none` が使用されます。
+Automated browsers do not support emulating the CSS `pointer` media feature. Browser tests have `pointer: none` for all tests and devices (laptop, tablet, or mobile).
 
-### リソースのロード時間
+### Resource duration
 
-#### リソースのロード時間が実際のステップの実行時間よりも長い
+#### A resource is of a longer duration than the actual step duration
 
-ロード時間の長いリソースは、複数のステップにまたがる可能性があります。Datadog は、テスト結果の各ステップ内で、その特定のステップの実行中に開始されたすべてのリソースを返します。ただし、Datadog は、重要なネットワークの呼び出しが終了するまで、およそ 20 秒の猶予を与え
-ます。この時間が経過すると、Synthetics ワーカーは次のステップに進みます。ワーカーが使用するタイムアウトは階層化されており、速度と信頼性のバランスが取られています。このため、Datadog では、ステップの実行時間を使って Web アプリケーションの速度や遅さを測定することを推奨していません。ステップの実行時間は、ワーカーが信頼できる結果を出すために必要なバランスが考慮された時間となっています。
+Long-loading resources may span across multiple steps. Within a test result's step, Datadog returns all resources initiated during that specific step. However, Datadog allows roughly 20 seconds for important network calls to finish. After this period, the synthetics worker proceeds to the subsequent step. The worker uses a hierarchy of timeouts, allowing it to balance speed and reliability. Because of this, Datadog does not advise using step duration to measure the speed or slowness of a web application. The step duration reflects the balanced time the worker needs to deliver a reliable result.
 
-## API およびブラウザのテスト
+## API and browser tests
 
-### 認証エラー
+### Unauthorized errors
 
-Synthetics テストの 1 つが 401 をスローしている場合は、エンドポイントで認証できないことを意味している可能性が高いです。そのエンドポイント (Datadog 外) での認証に使用するメソッドを使用し、Synthetic テストを構成するときにそれを複製する必要があります。
+If one of your Synthetic tests is throwing a 401, it most likely means that it is unable to authenticate on the endpoint. You should use the method that you use to authenticate on that endpoint (outside of Datadog) and replicate it when configuring your Synthetic test.
 
-* エンドポイントは**ヘッダーベース認証**を使用していますか？
-  * **基本の認証情報**: [HTTP][7] または[ブラウザテスト][8]の**高度なオプション**に、関連する認証情報を指定します。
-  * **トークンベース認証**: 最初の [HTTP テスト][7]でトークンを抽出し、その最初のテストの応答をパースして[グローバル変数][9]を作成し、その変数を認証トークンを必要とする 2 回目の [HTTP][7] または[ブラウザテスト][10]に再挿入します。
-  * **セッションベース認証**: [HTTP][7] または[ブラウザテスト][8]の**高度なオプション**に必要なヘッダーまたはクッキーを追加します。
+* Is your endpoint using **header-based authentication**?
+  * **Basic Authentication**: specify the associated credentials in the **Advanced options** of your [HTTP][7] or [Browser test][8].
+  * **Token based authentication**: extract your token with a first [HTTP test][7], create a [global variable][9] by parsing the response of that first test, and re-inject that variable in a second [HTTP][7] or [Browser test][10] requiring the authentication token.
+  * **Session based authentication**: add the required headers or cookies in the **Advanced options** of your [HTTP][7] or [Browser test][8].
 
-* このエンドポイントは**認証用のクエリパラメーター**を使用していますか (たとえば、URL パラメーターに特定の API キーを追加する必要がありますか)？
+* Is this endpoint using **query parameters for authentication** (for example, do you need to add a specific API key in your URL parameters?)
 
-* このエンドポイントは **IP ベース認証**を使用していますか？その場合は、[Synthetics テストの元となる IP][11] の一部またはすべてを許可する必要があります。
+* Is this endpoint using **IP-based authentication**? If so, you might need to allow part or all of the [IPs from which Synthetic tests originate][11].
 
-### アクセス拒否エラー
+### Forbidden errors
 
-Synthetic テストによって返された `403 Forbidden` エラーが確認された場合は、`Sec-Datadog` ヘッダーを含むリクエストを Web サーバーがブロックまたはフィルタリングした結果である可能性があります。このヘッダーは、Datadog が開始する各 Synthetic リクエストに追加され、トラフィックのソースを識別し、Datadog サポートが特定のテスト実行を識別するのを支援します。
+If you observe `403 Forbidden` errors returned by Synthetic tests, it may be the result of your web server blocking or filtering requests that include the `Sec-Datadog` header. This header is added to each Synthetic request Datadog initiates to identify the source of the traffic and assist Datadog support in identifying the specific test execution.  
 
-さらに、[Datadog Synthetics のモニタリング IP 範囲][11]がファイアウォールによってトラフィックソースとして許可されていることを確認する必要がある場合もあります。
+Additionally, you might also have to ensure [Datadog Synthetic Monitoring IP ranges][11] are allowed as traffic sources by your firewalls.
 
-### 通知の欠落
+### Missing notifications
 
-デフォルト設定では、Synthetic テストは [再通知][12]しません。これは、トランジション（たとえば、テストがアラート状態になる、または直近のアラートから回復するなど）が生成された後に通知ハンドル（メールアドレスや Slack ハンドルなど）を追加しても、そのトランジションの通知は送信されないことを意味します。次のトランジションから通知が送信されます。
+Synthetic tests by default do not [renotify][12]. This means that if you add your notification handle such as your email address or Slack handle after a transition is generated (for example: a test going into alert or recovering from a previous alert), a notification is not sent for that transition. A notification is sent for the next transition.
 
-## プライベートロケーション
+## Private locations
 
 {{< tabs >}}
-{{% tab "共通" %}}
+{{% tab "Common" %}}
 
-### ブラウザテストの結果で、`Page crashed` エラーが表示されることがある
+### My browser test results sometimes show `Page crashed` errors
 
-これにより、プライベートロケーションワーカーのリソース消費の問題が明らかになることがあります。プライベートロケーションワーカーが、[十分なメモリリソース][101]でプロビジョニングされていることを確認してください。
+This could uncover a resource exhaustion issue on your private location workers. Make sure your private location workers are provisioned with [sufficient memory resources][101].
 
-### テストの実行が遅くなることがある
+### My tests are sometimes slower to execute 
 
-これにより、プライベートロケーションワーカーのリソース消費の問題が明らかになることがあります。プライベートロケーションワーカーが、[十分な CPU リソース][101]でプロビジョニングされていることを確認してください。
+This could uncover a resource exhaustion issue on your private locations workers. Make sure your private location workers are provisioned with [sufficient CPU resources][101].
 
-### ブラウザテストの実行に時間がかかりすぎる
+### My browser tests are taking too long to run
 
-プライベートロケーションのデプロイメントで、[メモリ不足の問題][102]が発生していないことを確認します。[ディメンショニングガイドライン][103]に従ってワーカーインスタンスのスケーリングを既に試した場合は、[Datadog サポート][104]に連絡してください。
+Confirm you are not seeing [out of memory issues][102] with your private location deployments. If you have tried scaling your workers instances following the [dimensioning guidelines][103] already, reach out to [Datadog Support][104].
 
-### プライベートロケーションから実行される API テストに `TIMEOUT` エラーが表示される
+### `TIMEOUT` errors appear in API tests executed from my private location
 
-API テストの実行が設定されているエンドポイントに、プライベートロケーションが到達できていない可能性があります。テストするエンドポイントと同じネットワークにプライベートロケーションがインストールされていることを確認してください。別のエンドポイントでテストを実行し、同じ `TIMEOUT` エラーが表示されるかどうか試してみることも可能です。
+This might mean your private location is unable to reach the endpoint your API test is set to run on. Confirm that the private location is installed in the same network as the endpoint you are willing to test. You can also try to run your test on different endpoints to see if you get the same `TIMEOUT` error or not.
 
-{{< img src="synthetics/timeout.png" alt="プライベートロケーションがタイムアウトした API テスト" style="width:70%;" >}}
+{{< img src="synthetics/timeout.png" alt="API test on private location timing out" style="width:70%;" >}}
 
-[101]: /ja/synthetics/private_locations/dimensioning
+[101]: /synthetics/private_locations/dimensioning
 [102]: https://docs.docker.com/config/containers/resource_constraints/
-[103]: /ja/synthetics/private_locations/dimensioning#define-your-total-hardware-requirements
-[104]: /ja/help/
+[103]: /synthetics/private_locations/dimensioning#define-your-total-hardware-requirements
+[104]: /help/
 
 {{% /tab %}}
 {{% tab "Docker" %}}
 
-### 時々、プライベートロケーションのコンテナが、強制終了された `OOM` を取得する
+### My private location containers sometimes get killed `OOM`
 
-強制終了された `Out Of Memory` を取得するプライベートロケーションのコンテナは、通常、プライベートロケーションワーカーのリソース消費の問題を明らかにします。プライベートロケーションのコンテナが、[十分なメモリリソース][101]でプロビジョニングされていることを確認してください。
+Private location containers getting killed `Out Of Memory` generally uncover a resource exhaustion issue on your private location workers. Make sure your private location containers are provisioned with [sufficient memory resources][101].
 
-### プライベートロケーションのテストを実行しようとすると、`invalid mount config for type "bind": source path must be a directory` というエラーが表示される
+### The `invalid mount config for type "bind": source path must be a directory` error appears when attempting to run a private location
 
-これは、Windows ベースのコンテナで単一ファイルをマウントしようとした場合に発生し、これはサポートされていません。詳しくは、[Docker マウントボリュームのドキュメント][102]をご参照ください。バインドマウントのソースがローカルディレクトリであることをご確認ください。
+This occurs when you attempt to mount a single file in a Windows-based container, which is not supported. For more information, see the [Docker mount volume documentation][102]. Ensure that the source of the bind mount is a local directory.
 
-[101]: /ja/synthetics/private_locations#private-location-total-hardware-requirements
+[101]: /synthetics/private_locations#private-location-total-hardware-requirements
 [102]: https://docs.docker.com/engine/reference/commandline/run/#mount-volume--v---read-only
 
 {{% /tab %}}
 {{% tab "Windows" %}}
 
-### 再起動せずに Synthetics Private Location Worker サービスを再起動する
+### Restart the Synthetics Private Location Worker service without a reboot
 
-まず、インストール時に指定した構成でプライベートロケーションをインストールしたことを確認します。サービスを再起動するには、GUI を使用するか、Windows PowerShell を使用します。
+First, ensure that you installed the private location with a configuration specified at installation time. You can either use a GUI or use Windows PowerShell to restart the service.
 
 #### GUI
 
-1. MSI インストーラーを開き、**Start** メニューで **Services** を検索します。
-1. 任意のユーザーアカウントで **Services** を起動します。
-1. **Services (Local)** をクリックし、`Datadog Synthetics Private Location` というサービスを探します。
-1. ステップ 2 で見つかったサービスを右クリックし、**Restart** を選択します。
+1. Open the MSI installer and search for **Services** in the **Start** menu.
+1. Start **Services** on any user account.
+1. Click **Services (Local)** and find the service called `Datadog Synthetics Private Location`.
+1. Right-click on the service found in Step 2 and choose **Restart**.
 
-Synthetics Private Location Worker は **Local Service** アカウントで実行されるようになりました。これを確認するには、タスクマネージャーを起動し、**Details** タブで `synthetics-pl-worker` プロセスを探します。
+The Synthetics Private Location Worker now runs under the **Local Service** account. To confirm this, launch Task Manager and look for the `synthetics-pl-worker` process on the **Details** tab.
 
 #### PowerShell
 
-1. PowerShell スクリプトの実行権限を持つ任意の Windows アカウントで **Windows PowerShell** を起動します。
-1. コマンド `Restart-Service -Name “Datadog Synthetics Private Location”` を実行します。
+1. Start **Windows PowerShell** on any Windows account that has the rights to execute PowerShell scripts.
+1. Run the following command: `Restart-Service -Name “Datadog Synthetics Private Location”`.
 
-### Synthetics Private Location Worker の実行を維持する
+### Keep the Synthetics Private Location Worker running
 
-まず、Synthetics Private Location Windows Service がインストールされているマシンにログインし、そのマシンでスケジュールタスクを作成する権限を持っていることを確認してください。
+First, ensure that you are logged in on the machine where the Synthetics Private Location Windows Service is installed, and you have the permissions to create scheduled tasks on the machine.
 
-Synthetics Private Location Worker がクラッシュした場合、Windows に PowerShell スクリプトを実行するスケジュールタスクを追加し、アプリケーションの実行が停止した場合に再起動するようにします。これにより、クラッシュ後にプライベートロケーションが確実に再起動されます。
+If the Synthetics Private Location Worker crashes, add a scheduled task in Windows that runs a PowerShell script to restart the application if it stops running. This ensures that a private location is restarted after a crash. 
 
-アプリケーションのインストール時にコンフィギュレーションファイルを提供した場合、インストール後に `Datadog Synthetics Private Location` という名前の Windows サービスが自動的に開始されます。これを確認するには、**Services** ツールでサービスが実行されていることを確認します。この Windows サービスは、プライベートロケーションを自動的に再起動します。
+If you provided a configuration file when installing the application, a Windows service called `Datadog Synthetics Private Location` starts automatically after installation. To verify this, ensure that you can see the service running in the **Services** tool. This Windows service restarts the private location automatically.
 
 {{% /tab %}}
 {{< /tabs >}}
 
-### sudo のパスワードを要求される/dog ユーザーのパスワードを要求される
+### I am being asked for a password for sudo/I am being asked for a password for the dog user
 
-Private Location ユーザー (`dog`) は、さまざまな理由で `sudo` を必要とします。通常、このユーザーには、コンテナ上で Private Location を起動する過程で `sudo` アクセスを許可する特定の権限が付与されます。ポリシーで `dog` ユーザーの `sudo` 権限を制限しているか、`dog` ユーザー (UID 501) としてコンテナを起動できないようにしているか確認してください。
+The Private Location user (`dog`) requires `sudo` for various reasons. Typically, this user is granted certain permissions to allow `sudo` access in the process of launching the Private Location on your container. Confirm if you have a policy in place that restricts the `dog` user's ability to `sudo`, or prevents the container from launching as the `dog` user (UID 501).
 
-さらに、Private Location のバージョン `>v1.27` では、Datadog は `clone3` システムコールの使用に依存しています。古いバージョンのコンテナランタイム環境 (Docker バージョン <20.10.10 など) では、`clone3` はデフォルトの `seccomp` ポリシーではサポートされていません。コンテナランタイム環境の `seccomp` ポリシーに `clone3` が含まれていることを確認してください。これは、使用中のランタイムのバージョンを更新したり、`seccomp` ポリシーに `clone3` を手動で追加したり、または `unconfined` seccomp ポリシーを使用することで実現できます。詳細については、[Docker の `seccomp` ドキュメント][13]を参照してください。
+Additionally, in Private Location versions `>v1.27`, Datadog depends on the use of the `clone3` system call. In some older versions of container runtime environments (such as Docker versions <20.10.10), `clone3` is not supported by the default `seccomp` policy. Confirm that your container runtime environment's `seccomp` policy includes `clone3`. Yo can do this by updating the version of your runtime in use, manually adding `clone3` to your `seccomp` policy, or using an `unconfined` seccomp policy. For more information, see [Docker's `seccomp` documentation][13].
 
-## 参考資料
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/help/
-[2]: /ja/synthetics/metrics/#api-tests
-[3]: /ja/synthetics/guide/api_test_timing_variations/
+[1]: /help/
+[2]: /synthetics/metrics/#api-tests
+[3]: /synthetics/guide/api_test_timing_variations/
 [4]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
 [5]: chrome://extensions/?id=kkbncfpddhdmkfmalecgnphegacgejoa
 [6]: https://chromeenterprise.google/policies/#ExtensionSettings
-[7]: /ja/synthetics/api_tests/?tab=httptest#make-a-request
-[8]: /ja/synthetics/browser_tests/#test-details
-[9]: /ja/synthetics/settings/?tab=createfromhttptest#global-variables
-[10]: /ja/synthetics/browser_tests/#use-global-variables
+[7]: /synthetics/api_tests/?tab=httptest#make-a-request
+[8]: /synthetics/browser_tests/#test-details
+[9]: /synthetics/settings/?tab=createfromhttptest#global-variables
+[10]: /synthetics/browser_tests/#use-global-variables
 [11]: https://ip-ranges.datadoghq.com/synthetics.json
-[12]: /ja/synthetics/api_tests/?tab=httptest#configure-the-test-monitor
+[12]: /synthetics/api_tests/?tab=httptest#configure-the-test-monitor
 [13]: https://docs.docker.com/engine/security/seccomp/

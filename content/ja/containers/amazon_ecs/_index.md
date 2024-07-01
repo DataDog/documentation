@@ -1,75 +1,77 @@
 ---
-algolia:
-  tags:
-  - ecs
+title: Amazon ECS
 aliases:
-- /ja/agent/amazon_ecs/
+  - /agent/amazon_ecs/
 further_reading:
 - link: /agent/amazon_ecs/logs/
-  tag: ドキュメント
-  text: アプリケーションログの収集
-- link: /agent/amazon_ecs/apm/
-  tag: ドキュメント
-  text: アプリケーショントレースの収集
-- link: /agent/amazon_ecs/data_collected/#metrics
   tag: Documentation
-  text: ECS メトリクスの収集
-- link: https://www.datadoghq.com/blog/amazon-ecs-anywhere-monitoring/
-  tag: ブログ
-  text: Amazon ECS Anywhere のサポート開始
-- link: https://www.datadoghq.com/blog/cloud-cost-management-container-support/
+  text: Collect your application logs
+- link: /agent/amazon_ecs/apm/
+  tag: Documentation
+  text: Collect your application traces
+- link: "/agent/amazon_ecs/data_collected/#metrics"
+  tag: Documentation
+  text: Collect ECS metrics
+- link: "https://www.datadoghq.com/blog/amazon-ecs-anywhere-monitoring/"
+  tag: Blog
+  text: Announcing support for Amazon ECS Anywhere
+- link: "https://www.datadoghq.com/blog/cloud-cost-management-container-support/"
   tag: blog
-  text: Datadog Cloud Cost Management で Kubernetes と ECS の支出を把握する
-title: Amazon ECS
+  text: Understand your Kubernetes and ECS spend with Datadog Cloud Cost Management
+algolia:
+  tags: [ecs]
 ---
 
-## 概要
+## Overview
 
-Amazon ECS は、Docker コンテナに対応する、拡張性とパフォーマンスに優れたコンテナオーケストレーションサービスです。Datadog Agent と使用すると、クラスター内のすべての EC2 インスタンスの ECS コンテナおよびタスクを監視できます。
+Amazon ECS is a scalable, high-performance container orchestration service that supports Docker containers. With the Datadog Agent, you can monitor ECS containers and tasks on every EC2 instance in your cluster.
 
-このページは Datadog コンテナ Agent を使用した Amazon ECS のセットアップについて説明します。他のセットアップについては、以下を参照してください。
+<div class="alert alert-info">
+If you want to monitor <strong>ECS on Fargate</strong>, see <a href="/integrations/ecs_fargate/">Amazon ECS on AWS Fargate</a>.  
+</div>
 
-- [Amazon ECS 向け Datadog Container Agent v5 のセットアップ][1]
-- [オートディスカバリーを使用した Datadog Host Agent のセットアップ][2]
+## Setup
 
-**注**: **ECS on Fargate** をセットアップする場合は、[Amazon ECS on AWS Fargate][3] の手順を参照してください。EC2 インスタンスにデプロイされた Datadog Agent コンテナは、Fargate Tasks を監視することはできません。また、AWS Batch はサポートされていません。
+To monitor your ECS containers and tasks, deploy the Datadog Agent as a container **once on each EC2 instance** in your ECS cluster. You can do this by creating a task definition for the Datadog Agent container and deploying it as a daemon service. Each Datadog Agent container then monitors the other containers on its respective EC2 instance.
 
-## セットアップ
+The following instructions assume that you have configured an EC2 cluster. See the [Amazon ECS documentation for creating a cluster][4].
 
-ECS の Datadog Agent は、ECS クラスター内の各 EC2 インスタンスに一度、コンテナとしてデプロイする必要があります。これは、Datadog Agent コンテナ用のタスク定義を作成し、それをデーモンサービスとしてデプロイすることで実現します。各 Datadog Agent コンテナは、それぞれの EC2 インスタンス上の他のコンテナを監視します。
+1. [Create and add an ECS task definition][27]
+2. [Schedule the Datadog Agent as a daemon service][28]
+3. (Optional) [Set up additional Datadog Agent features][29]
 
-稼働中の EC2 Container Service クラスターが構成されていない場合は、[ECS ドキュメント内の Getting Started セクション][4]を参照してクラスターを設定、構成します。構成したら、下記のセットアップ手順に従います。
+**Note:** Datadog's [Autodiscovery][5] can be used in conjunction with ECS and Docker to automatically discover and monitor running tasks in your environment.
 
-1. [ECS タスク定義の作成と追加](#create-an-ecs-task)
-2. [Datadog Agent を Daemon サービスとしてスケジュール](#run-the-agent-as-a-daemon-service)
-3. **オプション** [Datadog Agent の追加機能の設定](#setup-additional-agent-features)
+### Create an ECS task definition
 
-**注:** ECS および Docker を併用して Datadog の[オートディスカバリー][5]を実行すると、環境内で実行中のタスクを自動的に検出して監視できます。
+This [ECS task definition][30] launches the Datadog Agent container with the necessary configurations. When you need to modify the Agent configuration, update this task definition and redeploy the daemon service. You can configure this task definition by using the AWS Management Console, or with the [AWS CLI][9]. 
 
-### ECS タスクの作成
+The following sample is a minimal configuration for core infrastructure monitoring. However, additional Task Definition samples with various features enabled are provided in the [Setup additional Agent features](#setup-additional-agent-features) section if you want to use those instead.
 
-タスク定義は、必要な構成で Datadog Agent コンテナを起動します。Agent の構成を変更する必要がある場合、このタスク定義を更新し、必要に応じてデーモンサービスを再デプロイします。タスク定義は、[AWS CLI ツール][9]または Amazon Web Console のいずれかを使用して構成することができます。
+#### Create and manage the task definition file
 
-以下のサンプルは、コアインフラストラクチャーを監視するための最小限の構成です。しかし、様々な機能を有効にした追加のタスク定義のサンプルが [Agent の追加機能の設定](#setup-additional-agent-features)のセクションで提供されていますので、それらを代わりに使用することができます。
+1. For Linux containers, download [datadog-agent-ecs.json][20].
+    - If you are using Amazon Linux 1 (AL1, formerly Amazon Linux AMI), use [datadog-agent-ecs1.json][21]
+    - If you are using Windows, use [datadog-agent-ecs-win.json][22] 
 
-#### タスク定義ファイルの管理
+   <div class="alert alert-info">
+   These files provide minimal configuration for core infrastructure monitoring. For more sample task definition files with various features enabled, see the <a href="#set-up-additional-agent-features">Set up additional Agent features</a> section on this page.
+   </div>
+2. Edit your base task definition file
+    - Set the `DD_API_KEY` environment variable by replacing `<YOUR_DATADOG_API_KEY>` with the [Datadog API key][14] for your account. Alternatively, you can also [supply the ARN of a secret stored in AWS Secrets Manager][16].
+    - Set the `DD_SITE` environment variable to your [Datadog site][13]. Your site is: {{< region-param key="dd_site" code="true" >}} 
 
-1. Linux コンテナの場合、[datadog-Agent-ecs.json][20] をダウンロードします。
-    1. オリジナルの Amazon Linux 1 AMI を使用している場合は、[datadog-agent-ecs1.json][21] を使用します。
-    2. Windows を使用している場合は、[datadog-Agent-ecs-win.json][22] を使用します。
+      <div class="alert alert-info">
+      If <code>DD_SITE</code> is not set, it defaults to the <code>US1</code> site, <code>datadoghq.com</code>. 
+      </div>
+    - Optionally, add a `DD_TAGS` environment variable to specify any additional tags.
 
-2. ベースとなるタスク定義ファイルを編集する
-    1. `<YOUR_DATADOG_API_KEY>` にアカウントの [Datadog API キー][14] を設定します。
-    2. 環境変数 `DD_SITE` に {{< region-param key="dd_site" code="true" >}} を設定します。
-
-        **注**: `DD_SITE` 環境変数が明示的に設定されていない場合、値はデフォルトで `US` サイトの `datadoghq.com` に設定されます。その他のサイト (`EU`、`US3`、または `US1-FED`) のいずれかを使用しており、これを設定しない場合は、API キーのメッセージが無効になります。[ドキュメントのサイト選択ドロップダウン][13]を使用して、使用中のサイトに適したドキュメントを確認してください。
-
-3. オプション - 以下を ECS タスクの定義に追加して [ECS Anywhere クラスター][15]にデプロイします。
+3. (Optional) To deploy on an [ECS Anywhere cluster][15], add the following line to your ECS task definition:
     ```json
     "requiresCompatibilities": ["EXTERNAL"]
     ```
 
-4. オプション - ECS タスク定義に Agent ヘルスチェックを追加する
+4. (Optional) To add an Agent health check, add the following line to your ECS task definition:
     ```json
     "healthCheck": {
       "retries": 3,
@@ -80,90 +82,134 @@ ECS の Datadog Agent は、ECS クラスター内の各 EC2 インスタンス�
     }
     ```
 
-これらの例では、環境変数 `DD_API_KEY` に、[AWS Secret Manager に保存されている "Plaintext" シークレットの ARN][16] を参照することで代用することができます。追加のタグは環境変数 `DD_TAGS` によって追加することができます。
 
-#### タスク定義の登録
+#### Register the task definition
 
 {{< tabs >}}
 {{% tab "AWS CLI" %}}
-タスク定義ファイルを作成したら、以下のコマンドを実行して、これを AWS に登録します。
+After you have created your task definition file, execute the following command to register the file in AWS.
 
 ```bash
 aws ecs register-task-definition --cli-input-json file://<path to datadog-agent-ecs.json>
 ```
 {{% /tab %}}
 {{% tab "Web UI" %}}
-タスク定義ファイルを作成したら、AWS コンソールにログインしてこれを登録することができます。
-1. AWS コンソールにログインし、Elastic コンテナサービス セクションに移動します。
-2. 左側の **Task Definitions** をクリックし、**Create new Task Definition** ボタンをクリックします。
-3. 起動タイプとして "EC2" を選択します。ECS Anywhere クラスターにエージェントタスクをデプロイする場合は、"External" を選択することもできます。
-4. "Configure task and container definitions" ページで、一番下までスクロールし、**Configure via JSON** を選択します。ここから、ファイルから構成をコピーアンドペーストすることができます。
-5. JSON タブの **Save** をクリックします。
-6. このページから、またはこの **Configure via JSON** プロセスを繰り返すことで、追加の変更を行うことができます。
-7. 下部の **Create** をクリックすると、このタスク定義が登録されます。
+After you have your task definition file, use the AWS Console to register the file.
+1. Log in to your AWS Console and navigate to the Elastic Container Service section.
+2. Select **Task Definitions** in the navigation pane. On the **Create new task definition** menu, select **Create new task definition with JSON**.
+3. In the JSON editor box, paste the contents of your task definition file.
+4. Select **Create**.
 
 {{% /tab %}}
 {{< /tabs >}}
 
 
-### Agent を Daemon サービスとして実行
+### Run the Agent as a daemon service
 
-理想的には、各 EC2 インスタンス上で 1 つの Datadog Agent コンテナを実行します。これを実現する最も簡単な方法は、Datadog Agent タスク定義を[デーモンサービス][10]として実行することです。
+To have one Datadog Agent container running on each EC2 instance, run the Datadog Agent task definition as a [daemon service][10].
 
-#### Datadog の ECS タスクを使用して、AWS でDaemon サービスをスケジューリング
+#### Schedule a daemon service in AWS using Datadog's ECS task
 
-1. AWS コンソールにログインし、ECS クラスターページに移動します。Agent を実行するクラスターをクリックします。
-2. 新しいサービスを作成するには、「サービス」で **Create** ボタンをクリックします。
-3. 起動タイプに EC2 を選択し、先に作成したタスク定義を選択します。
-4. サービスタイプに `DAEMON` を選択し、サービス名を入力したら **Next** をクリックします。
-5. サービスは各インスタンスで 1 度しか実行されないため、ロードバランサーは不要です。選択せずに **Next** をクリックします。
-6. デーモンサービスはオートスケーリングを必要としないので、**Next Step** の後に **Create Service** をクリックします。
+1. Log in to the AWS Console and navigate to the ECS section. On the **Clusters** page, choose the cluster you run the Agent on.
+2. On your cluster's **Services** tab, select **Create**.
+3. Under **Deployment configuration**, for **Service type**, select **Daemon**.
+3. You do not need to configure load balancing or autoscaling.
+4. Click **Next Step**, and then **Create Service**.
 
-### Agent の追加機能の設定
+### Set up additional Agent features
 
-上記の最初のタスク定義は、かなり最小限のものです。このタスク定義は、E CSクラスタ内のコンテナに関するコアメトリクスを収集するための基本構成を持つ Agent コンテナをデプロイします。この Agent は、対応するコンテナ上で発見された [Docker オートディスカバリーラベル][12]に基づいて、Agent インテグレーションを実行することも可能です。
+The task definition files provided in the previous section are minimal. These files deploy an Agent container with a base configuration to collect core metrics about the containers in your ECS cluster. The Agent can also run Agent integrations [based on Docker Labels][12] discovered on your containers.
 
-もし、
-- APM を使用している場合は、[APM セットアップドキュメント][6]とサンプル [datadog-agent-ecs-apm.json][23] を参照してください。
-- ログ管理を使用している場合は、[ログ収集ドキュメント][7]とサンプル [datadog-agent-ecs-logs.json][24] を参照してください。
+For additional features:
+
+#### APM
+Consult the [APM setup documentation][6] and the sample [datadog-agent-ecs-apm.json][23].
+
+#### Log Management
+Consult the [Log collection documentation][7] and the sample [datadog-agent-ecs-logs.json][24]
 
 #### DogStatsD
 
-[DogStatsD][8] を使用している場合、以下のように Datadog Agent のコンテナ定義に 8125/udp のホストポートマッピングを追加します。
-```json
-"portMappings": [
-  {
-    "hostPort": 8125,
-    "protocol": "udp",
-    "containerPort": 8125
-  }
-]
-```
+If you're using [DogStatsD][8], edit your Datadog Agent's container definition to add in host port mapping for 8125/udp and set the environment variable `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` to `true`.:
 
-このポートマッピングに加えて、環境変数 `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` を `true` に設定します。
-
-この設定により、DogStatsD のトラフィックは、アプリケーションコンテナからホストとホストポートを経由して、Datadog Agent コンテナにルーティングされるようになります。ただし、アプリケーションコンテナは、このトラフィックにホストのプライベート IP アドレスを使用する必要があります。これは、環境変数 `DD_AGENT_HOST` に EC2 インスタンスのプライベート IP アドレスを設定することで有効になり、インスタンスメタデータサービス (IMDS) から取得することができます。また、初期化時にコードで設定することもできます。DogStatsD の構成は APM と同じで、Agent のエンドポイントを設定する例については [Trace Agent のエンドポイントを構成する][17]を参照してください。
-
-EC2 インスタンスのセキュリティグループ設定で、APM と DogStatsD のポートが公に公開されていないことを確認します。
-
-#### プロセスの収集
-
-Live Container のデータは、Datadog Agent コンテナによって自動的に収集されます。全てのコンテナの Live Process 情報を収集し、Datadog に送信するには、環境変数でタスク定義を更新してください。
-
-```json
+{{< highlight json "hl_lines=6-12 23-24" >}}
 {
-  "name": "DD_PROCESS_AGENT_ENABLED",
-  "value": "true"
+ "containerDefinitions": [
+  {
+   "name": "datadog-agent",
+   (...)
+   "portMappings": [
+     {
+      "hostPort": 8125,
+      "protocol": "udp",
+      "containerPort": 8125
+     }
+   ],
+   "environment" : [
+     {
+       "name": "DD_API_KEY",
+       "value": "<YOUR_DATADOG_API_KEY>"
+     },
+     {
+       "name": "DD_SITE",
+       "value": "datadoghq.com"
+     },
+     {
+       "name": "DD_DOGSTATSD_NON_LOCAL_TRAFFIC",
+       "value": "true"
+     }
+   ]
+  }
+ ],
+ (...)
 }
-```
+{{< /highlight >}}
 
-#### ネットワークパフォーマンスのモニタリングの収集
+This setup allows DogStatsD traffic to be routed from the application containers, through the host and host port, to the Datadog Agent container. However, the application container must use the host's private IP address for this traffic. You can enable this by setting the environment variable `DD_AGENT_HOST` to the private IP address of the EC2 instance, which you can retrieve from the Instance Metadata Service (IMDS). Alternatively, you can set this in the code during initialization. The implementation for DogStatsD is the same as for APM. See [Configure the Trace Agent endpoint][17] for examples of setting the Agent endpoint.
 
-**この機能は、Linux でのみ使用可能です**
+Ensure that the security group settings on your EC2 instances do not publicly expose the ports for APM and DogStatsD.
 
-1. [前述の手順](#create-an-ecs-task)に従い Datadog Agent をインストールします。
-   - 初めてインストールする場合は、[datadog-agent-sysprobe-ecs.json][25] ファイル (Amazon Linux オリジナルの AMI を使用している場合は [datadog-agent-sysprobe-ecs1.json][26]) を使用し、[上記の説明](#managing-the-task-definition-file)で利用することが可能です。**注**: NPM の初期設定は、AWS UI で `linuxParameters` を追加できないため、CLI で行う必要があります。
-2. タスク定義がすでに存在する場合は、次のコンフィギュレーションで [datadog-agent-ecs.json][20] ファイル (オリジナルの Amazon Linux AMI を使用している場合は [datadog-agent-ecs1.json][21]) を更新します。
+#### Process collection
+
+To collect Live Process information for all your containers and send it to Datadog, update your task definition with the `DD_PROCESS_AGENT_ENABLED` environment variable:
+
+{{< highlight json "hl_lines=16-17" >}}
+{
+ "containerDefinitions": [
+  {
+   "name": "datadog-agent",
+   (...)
+   "environment" : [
+     {
+       "name": "DD_API_KEY",
+       "value": "<YOUR_DATADOG_API_KEY>"
+     },
+     {
+       "name": "DD_SITE",
+       "value": "datadoghq.com"
+     },
+     {
+       "name": "DD_PROCESS_AGENT_ENABLED",
+       "value": "true"
+     }
+   ]
+  }
+ ],
+ (...)
+}
+{{< /highlight >}}
+
+#### Network Performance Monitoring
+
+<div class="alert alert-warning">
+This feature is only available for Linux.
+</div>
+
+Consult the sample [datadog-agent-sysprobe-ecs.json][25] file.
+
+If you are using Amazon Linux 1 (AL1, formerly Amazon Linux AMI), consult [datadog-agent-sysprobe-ecs1.json][26].
+
+If you already have a task definition, update your file to include the following configuration:
 
  ```json
  {
@@ -216,20 +262,20 @@ Live Container のデータは、Datadog Agent コンテナによって自動的
  }
  ```
 
-## AWSVPC モード
+## AWSVPC mode
 
-Agent バージョン 6.10 以降は、ホストインスタンスのセキュリティグループが関連するポート上の適用可能なコンテナに到達できるよう、セキュリティグループが設定されている場合には、適用可能なコンテナに `awsvpc` モードが対応しています。
+For Agent v6.10+, `awsvpc` mode is supported for applicative containers, provided that security groups are set to allow the host instance's security group to reach the applicative containers on relevant ports.
 
-Agent を `awsvpc` モードで実行することは可能ですが、これは推奨されるセットアップではありません。Agent を DogStatsD メトリクスや APM トレースに到達させるための ENI IP を取得することが難しい可能性があるからです。
-
-代わりに、ブリッジモードで Agent をポートマッピングとともに実行すると、[メタデータサーバを介するホスト IP][6] を簡単に取得できます。
+You can run the Agent in `awsvpc` mode, but Datadog does not recommend this because it may be difficult to retrieve the ENI IP to reach the Agent for DogStatsD metrics and APM traces. Instead, run the Agent in bridge mode with port mapping to allow easier retrieval of [host IP through the metadata server][6].
 
 {{% site-region region="gov" %}}
-#### GOVCLOUD 環境向け FIPS プロキシ
+#### FIPS proxy for Datadog for Government environments
 
-Datadog の GOVCLOUD データセンターにデータを送信するには、`fips-proxy` サイドカーコンテナを追加し、コンテナポートを開いて、[サポートされている機能](https://docs.datadoghq.com/agent/configuration/agent-fips-proxy/?tab=helmonamazoneks#supported-platforms-and-limitations)の適切な通信を確保します。
+<div class="alert alert-warning">
+This feature is only available for Linux.
+</div>
 
-**注**: この機能は、Linux でのみ使用可能です
+To send data to the Datadog for Government site, add the `fips-proxy` sidecar container and open container ports to ensure proper communication for [supported features][1].
 
 ```json
  {
@@ -321,7 +367,7 @@ Datadog の GOVCLOUD データセンターにデータを送信するには、`f
 }
 ```
 
-また、Datadog Agent のコンテナの環境変数を更新して、FIPS プロキシを介したトラフィックの送信を可能にする必要があります。
+You also need to update the environment variables of the Datadog Agent's container to enable sending traffic through the FIPS proxy:
 
 ```json
 {
@@ -350,33 +396,31 @@ Datadog の GOVCLOUD データセンターにデータを送信するには、`f
    "family": "datadog-agent-task"
 }
 ```
+[1]: https://docs.datadoghq.com/agent/configuration/agent-fips-proxy/?tab=helmonamazoneks#supported-platforms-and-limitations
 {{% /site-region %}}
 
-## トラブルシューティング
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][11]までお問合せください。
+Need help? Contact [Datadog support][11].
 
-## その他の参考資料
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/ja/integrations/faq/agent-5-amazon-ecs/
-[2]: https://docs.datadoghq.com/ja/agent/docker/integrations/?tab=docker
-[3]: https://docs.datadoghq.com/ja/integrations/ecs_fargate/
-[4]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ECS_GetStarted_EC2.html
-[5]: https://docs.datadoghq.com/ja/agent/autodiscovery/
-[6]: /ja/containers/amazon_ecs/apm/
-[7]: /ja/containers/amazon_ecs/logs/
-[8]: /ja/developers/dogstatsd/?tab=containeragent
+[4]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/create-ec2-cluster-console-v2.html
+[5]: https://docs.datadoghq.com/agent/autodiscovery/
+[6]: /containers/amazon_ecs/apm/
+[7]: /containers/amazon_ecs/logs/
+[8]: /developers/dogstatsd/?tab=containeragent
 [9]: https://aws.amazon.com/cli
 [10]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html#service_scheduler_daemon
-[11]: https://docs.datadoghq.com/ja/help/
-[12]: https://docs.datadoghq.com/ja/containers/docker/integrations/?tab=docker
-[13]: /ja/getting_started/site/
+[11]: https://docs.datadoghq.com/help/
+[12]: https://docs.datadoghq.com/containers/docker/integrations/?tab=docker
+[13]: /getting_started/site/
 [14]: https://app.datadoghq.com/organization-settings/api-keys
 [15]: https://www.datadoghq.com/blog/amazon-ecs-anywhere-monitoring/
 [16]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data-tutorial.html
-[17]: /ja/containers/amazon_ecs/apm/?tab=ec2metadataendpoint#configure-the-trace-agent-endpoint
+[17]: /containers/amazon_ecs/apm/?tab=ec2metadataendpoint#configure-the-trace-agent-endpoint
 [20]: /resources/json/datadog-agent-ecs.json
 [21]: /resources/json/datadog-agent-ecs1.json
 [22]: /resources/json/datadog-agent-ecs-win.json
@@ -384,3 +428,7 @@ Datadog の GOVCLOUD データセンターにデータを送信するには、`f
 [24]: /resources/json/datadog-agent-ecs-logs.json
 [25]: /resources/json/datadog-agent-sysprobe-ecs.json
 [26]: /resources/json/datadog-agent-sysprobe-ecs1.json
+[27]: #create-an-ecs-task-definition
+[28]: #run-the-agent-as-a-daemon-service
+[29]: #set-up-additional-agent-features
+[30]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definitions.html

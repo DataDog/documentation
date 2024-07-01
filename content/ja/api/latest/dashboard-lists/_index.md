@@ -1,3 +1,3 @@
 ---
-title: ダッシュボードリスト
+title: Dashboard Lists
 ---

@@ -1,62 +1,63 @@
 ---
+title: Saved Views
+kind: documentation
 further_reading:
 - link: /real_user_monitoring/explorer/search/
-  tag: ドキュメント
-  text: イベント検索
-title: 保存ビュー
+  tag: Documentation
+  text: Search for your events
 ---
 
-## 概要
+## Overview
 
-保存ビューにより、RUM エクスプローラーの状態を保存し、スコープ付きクエリ、関連ファセット、可視化オプション、および時間範囲にすばやくアクセスできるため、効果的なトラブルシューティングを行うことができます。
+Saved views allow you to save the state of the RUM Explorer and enable effective troubleshooting by providing you with quick access to scoped queries, relevant facets, visualization options, and the time range. 
 
-保存ビューは、次のものを追跡できます。
+Saved views can keep track of your:
 
-- RUM イベント (セッション、ビュー、エラー、アクション、リソース、ロングタスクなど)
-- 検索クエリ (トップユーザーやアプリのバージョン採用状況など)
-- 列のソート順
-- ライブの時間範囲 (過去 1 時間や過去 1 週間など)
-- 視覚化 (時系列、トップリスト、表、ファネルグラフなど)
-- ファセットのサブセット
+- RUM events (such as sessions, views, errors, actions, resources, and long tasks)
+- Search queries (such as top users and app version adoption)
+- Column sort order
+- Live time range (such as the past hour or the past week)
+- Visualizations (such as a timeseries, toplist, table, or funnel graph)
+- Subset of facets
 
-また、保存ビューを使用して、チームメイトと共通のクエリや構成を共有することもできます。
+You can also use saved views to share common queries and configurations with your teammates.
 
-## 保存済みビュー
+## Saved views
 
-保存ビューにアクセスするには、[RUM エクスプローラー][1]の **Sessions & Replays** タブ上の左側にある **> Views** を展開します。
+To access your saved views, expand **> Views** to the left above the **Sessions & Replays** tab in the [RUM Explorer][1].
 
-[デフォルトビュー](#default-views)以外の保存ビューは、組織全体で共有されます。これには以下が含まれます。
+All saved views except for the [default view](#default-views) are shared across the organization, including:
 
-- ユーザーによって作成されたカスタム保存ビュー。これらは、組織内の誰でも編集可能で、ビューを作成したユーザーのアバターが表示されます。**Save** をクリックすると、RUM エクスプローラーの現在のコンテンツからカスタム保存ビューが作成されます。
-- 保存ビューテンプレートは、RUM エクスプローラーで事前に定義された、すぐに使える保存ビューです。これらのテンプレートを使用して、Datadog アバター付きの保存ビューを作成することができます。テンプレートにアクセスするには、保存ビューのリストの一番下までスクロールします。
+- Custom saved views created by users. These are editable by anyone in your organization and display the user's avatar who created the view. Click **Save** to create a custom saved view from the current content in your RUM Explorer.
+- Saved view templates are out-of-the-box saved views that are predefined in the RUM Explorer. You can use these templates to create a saved view with a Datadog avatar. Scroll to the bottom of the list of saved views to access the templates.
 <br /><br />
-  {{< img src="real_user_monitoring/explorer/rum-saved-views-2.png" alt="保存ビューにアクセスするには、Real User Monitoring の左にあるタブをクリックします" width="90%" >}}
+  {{< img src="real_user_monitoring/explorer/rum-saved-views-2.png" alt="Access Saved Views by clicking the tab to the left of Real User Monitoring" width="90%" >}}
 
-以下が可能です。
+You can:
 
-- 保存ビューをロードまたはリロード
-- 保存ビューを現在のビューの構成で更新
-- 保存ビューの名前を変更または削除
-- ショートリンクを使用して保存ビューを共有
-- 保存ビューをお気に入りに登録し、ナビゲーションメニューからアクセスできる Saved Views リストに追加
+- Load or reload a saved view
+- Update a saved view with the current view's configuration
+- Rename or delete a saved view
+- Share a saved view through a short link
+- Favorite a saved view to add it to your Saved Views list accessible in the navigation menu
 
-<div class="alert alert-info">更新、名前の変更、削除の操作は、読み取り専用ユーザーには無効です。</div>
+<div class="alert alert-info">Update, rename, and delete actions are disabled for read-only users.</div>
 
-## デフォルトビュー
+## Default views
 
-[RUM エクスプローラー][2]では、[保存ビュー](#saved-views)をデフォルトのランディングページに設定することができます。デフォルトビューはユーザーごとに設定され、組織には影響がありません。
+You can set a [saved view](#saved-views) to be your default landing page in the [RUM Explorer][2]. Default views are set per user and have no impact on your organization. 
 
-デフォルトの保存ビューは、UI でアクションを完了するか、別のコンフィギュレーションが埋め込まれた RUM エクスプローラーへのリンクを開くことで、一時的に上書きされます。
+Temporarily override your default saved view by completing an action in the UI or opening links in the RUM Explorer that embeds a different configuration.
 
-**Views** パネルのデフォルトビューエントリでは、以下のアクションが可能です。
+In the default view entry in the **Views** panel, you can:
 
-- エントリをクリックして、デフォルトビューをリロード
-- 現在のパラメーターでデフォルトビューを更新
-- デフォルトビューをデフォルト設定にリセットして、再起動
+- Click on the entry to reload your default view
+- Update your default view with the current parameters
+- Reset your default view back to the default setting for a fresh restart
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/rum/explorer
-[2]: /ja/real_user_monitoring/explorer/
+[2]: /real_user_monitoring/explorer/

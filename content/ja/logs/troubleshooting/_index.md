@@ -1,49 +1,50 @@
 ---
-title: Logs のトラブルシューティング
+title: Logs Troubleshooting
+kind: documentation
 ---
 
-Datadog Logs で予期しない動作が発生した場合に、ご自分で確認できるよくある問題を本ガイドでいくつかご紹介します。問題が解決しない場合は、[Datadog サポート][1] にお問い合わせください。
+If you experience unexpected behavior with Datadog Logs, there are a few common issues you can investigate and this guide may help resolve issues quickly. If you continue to have trouble, reach out to [Datadog support][1] for further assistance.
 
-## ログの欠落 - ログの 1 日のクォータに達した場合
+## Missing logs - logs daily quota reached
 
-ログコンフィギュレーションを変更していないのに、[ログエクスプローラー][2]に今日のログがないことが表示されます。これは、1 日のクォータに達しているために起こっている可能性があります。
+You have not made any changes to your log configuration, but the [Logs Explorer][2] shows that logs are missing for today. This may be happening because you have reached your daily quota.
 
-{{< img src="logs/troubleshooting/daily_quota_reached.png" alt="ログがないことを示す棒グラフと、1 日のクォータに達したことを示すメッセージ" style="width:90%" >}}
+{{< img src="logs/troubleshooting/daily_quota_reached.png" alt="A bar graph showing missing logs and a message saying daily quota reached" style="width:90%" >}}
 
-クォータの設定、更新、削除については、[1 日のクォータを設定する][3]を参照してください。
+See [Set daily quota][3] for more information on setting up, updating or removing the quota.
 
-## ログの欠落 - タイムスタンプが取り込み対象期間外である場合
+## Missing logs - timestamp outside of the ingestion window
 
-タイムスタンプの経過時間が 18 時間を超えているログは、取り込み時に削除されます。
-`datadog.estimated_usage.logs.drop_count` メトリクスでどの `service` と `source` が影響を受けているかを確認して、ソースの問題を修正します。
+Logs with a timestamp further than 18 hours in the past are dropped at intake.
+Fix the issue at the source by checking which `service` and `source` are impacted with the `datadog.estimated_usage.logs.drop_count` metric.
 
-## JSON ログからタイムスタンプキーをパースできない
+## Unable to parse timestamp key from JSON logs
 
-Datadog にインジェストされる前に JSON ログのタイムスタンプを[認識できる日付フォーマット][4]に変換できない場合、以下の手順で Datadog の[算術プロセッサ][5]と[ログ日付リマッパー][6]を使ってタイムスタンプを変換しマッピングしてください。
+If you are unable to convert the timestamp of JSON logs to a [recognized date format][4] before they are ingested into Datadog, follow these steps to convert and map the timestamps using Datadog's [arithmetic processor][5] and [log date remapper][6]:
 
-1. [Pipelines][7] ページに移動します。
+1. Navigate to the [Pipelines][7] page.
 
-2. **Pipelines** で、**Preprocessing for JSON logs** にカーソルを合わせ、鉛筆のアイコンをクリックします。
+2. In **Pipelines**, hover over **Preprocessing for JSON logs**, and click the pencil icon.
 
-3. 予約済み属性マッピングリストから `timestamp` を削除します。この属性は、前処理中にログの正式なタイムスタンプとしてパースされません。
+3. Remove `timestamp` from the reserved attribute mapping list. The attribute is not being parsed as the official timestamp of the log during preprocessing.
 
-{{< img src="logs/troubleshooting/preprocessing_json_timestamp.png" alt="JSON ログコンフィギュレーションボックスと日付属性 (デフォルトでタイムスタンプを含む) の前処理" style="width:90%" >}}
+{{< img src="logs/troubleshooting/preprocessing_json_timestamp.png" alt="The preprocessing for JSON logs configuration box with the date attributes, which includes timestamp by default" style="width:90%" >}}
 
-2. [算術プロセッサ][5]を設定し、タイムスタンプに 1000 を掛けてミリ秒に変換する数式を表示します。計算式の結果は新しい属性になります。
+2. Set up the [arithmetic processor][5] so that the formula multiples your timestamp by 1000 to convert it to milliseconds. The formula's result is a new attribute.
 
-3. 新しい属性を正式なタイムスタンプとして使用するために、[ログ日付リマッパー][6]を設定します。
+3. Set up the [log date remapper][6] to use the new attribute as the official timestamp.
 
-[ログエクスプローラー][2]にアクセスすると、新しい JSON ログとそのタイムスタンプがマッピングされて表示されます。
+Go to [Logs Explorer][2] to see new JSON logs with their mapped timestamp.
 
-## ログの切り捨て
+## Truncated logs
 
-1MB を超えるログは切り捨てられます。
-`datadog.estimated_usage.logs.truncated_count` と `datadog.estimated_usage.logs.truncated_bytes` のメトリクスでどの`service` と `source` が影響を受けているかを確認して、ソースの問題を修正します。
+Logs above 1MB are truncated.
+Fix the issue at the source by checking which `service` and `source` are impacted with the `datadog.estimated_usage.logs.truncated_count` and `datadog.estimated_usage.logs.truncated_bytes` metrics.
 
-[1]: /ja/help/
+[1]: /help/
 [2]: https://app.datadoghq.com/logs
-[3]: /ja/logs/log_configuration/indexes/#set-daily-quota
-[4]: /ja/logs/log_configuration/pipelines/?tab=date#date-attribute
-[5]: /ja/logs/log_configuration/processors/?tab=ui#arithmetic-processor
-[6]: /ja/logs/log_configuration/processors/?tab=ui#log-date-remapper
+[3]: /logs/log_configuration/indexes/#set-daily-quota
+[4]: /logs/log_configuration/pipelines/?tab=date#date-attribute
+[5]: /logs/log_configuration/processors/?tab=ui#arithmetic-processor
+[6]: /logs/log_configuration/processors/?tab=ui#log-date-remapper
 [7]: https://app.datadoghq.com/logs/pipelines

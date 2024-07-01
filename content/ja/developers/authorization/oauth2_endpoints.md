@@ -1,101 +1,98 @@
 ---
-description: OAuth2 認可エンドポイントの使用方法について
+title: OAuth2 Authorization Endpoints Reference
+description: Learn how to use the OAuth2 authorization endpoints.
 further_reading:
 - link: /developers/authorization/
   tag: Documentation
-  text: OAuth2 認可について
-title: OAuth2 認可エンドポイントリファレンス
+  text: Learn about OAuth2 Authorization
 ---
-{{< callout btn_hidden="true" >}}
-  Datadog Developer Platform は現在ベータ版です。アクセス権をお持ちでない場合は、apps@datadoghq.com までご連絡ください。
-{{< /callout >}} 
 
-## 概要
+## Overview
 
-保護された Datadog リソースを使用するアプリケーションは、ユーザーの代理で Datadog API にアクセスする前に、ユーザーによって認可される必要があります。これらのエンドポイントは、認可コード付与フローを通じてアプリケーションを誘導します。
+Applications using protected Datadog resources must be authorized by a user before they can access Datadog APIs on the user's behalf. These endpoints direct the application through the authorization code grant flow. 
 
 {{< tabs >}}
-{{% tab "認可エンドポイント" %}}
+{{% tab "Authorization Endpoints" %}}
 
-## ユーザーへの認可リクエスト
+## Request authorization from a user
 
 ### `GET /oauth2/v1/authorize`
 
-#### 概要
+#### Overview
 
-認可コード付与フローを開始するために、アプリケーションは Datadog の認可エンドポイントに `GET` リクエストを行います。これはユーザーを Datadog の認可付与フローにリダイレクトし、アプリケーションがリクエストしたスコープのリストと、ユーザーがアクセスを認可するためのプロンプトを表示する同意ページをレンダリングします。これはまた、リクエスト元の [Datadog サイト][1] を返します。
+To start the authorization code grant flow, an application makes a `GET` request to Datadog's authorization endpoint. This redirects a user to Datadog's authorization-grant flow and renders a consent page displaying the list of scopes requested by your application and a prompt for the user to authorize access. This also returns the [Datadog site][1] that the request is being made from. 
 
-#### リクエスト
-認可リクエストでは、アプリケーションは `application/x-www-form-urlencoded` フォーマットを用いて、URI のクエリコンポーネントに以下のパラメーターを追加することでリダイレクト URI を構築します。
+#### Request 
+In the authorization request, the application constructs the redirect URI by adding the following parameters to the query component of the URI using the `application/x-www-form-urlencoded` format: 
 
-| URL パラメーター                               | 説明                                                                                               |
+| URL Parameter                               | Description                                                                                               |
 |---------------------------------------------|-----------------------------------------------------------------------------------------------------------|
-| `redirect_uri`                                | ユーザーがアクセスを許可または拒否した後の、アプリケーションのリダイレクトエンドポイント。                              |
-| `client_id`                                   | OAuth2 クライアントの Client ID。                                                                       |
-| `response_type`                               | レスポンスタイプは、この付与フロー用のコードでなければなりません。                                                        |
-| `code_challenge`  (PKCE が有効な場合)        | `code_verifier` の変換。Datadog は `SHA-256` を使用してコードチャレンジを計算することを推奨します。     |
-| `code_challenge_method`  (PKCE が有効な場合) | コードチャレンジの計算に使用する方式。`SHA-256`、または `S256` がサポートされています。  |
+| `redirect_uri`                                | Your application's redirection endpoint after a user grants or denies access.                              |
+| `client_id`                                   | The Client ID of your OAuth2 client.                                                                       |
+| `response_type`                               | The response type must be code for this grant flow.                                                        |
+| `code_challenge`  (if PKCE is enabled)        | A transformation of `code_verifier`. Datadog recommends using `SHA-256` to compute the code challenge.     |
+| `code_challenge_method`  (if PKCE is enabled) | The method used to compute the code challenge. `SHA-256`, or `S256`, is supported.  |
 
-#### リクエスト例
+#### Example Request
 
-Datadog の同意ページをレンダリングするには、指定されたパラメーターでエンドポイントにユーザーをリダイレクトします。
+To render Datadog's consent page, redirect users to the endpoint with the specified parameters: 
 ```
 https://app.datadoghq.com/oauth2/v1/authorize?redirect_uri=http://localhost:500/oauth_redirect&client_id=abcdefghijklmnopqrstuvwxyz_123456789&response_type=code&code_challenge=12345&code_challenge_method=S256
 ```
 
-#### 成功レスポンス
+#### Success Response
 
-ユーザーがアクセスリクエストの許可に成功した場合、アプリケーションは[認可コードを取得](#obtain-an-authorization-code)し、クエリコンポーネントに `site` パラメーターと同様に認可 `code` を指定してリダイレクト URI にユーザーをリダイレクトさせます。
+If a user successfully grants the access request, your application [obtains an authorization code](#obtain-an-authorization-code) and redirects the user to the redirect URI with the authorization `code`, as well as the `domain` parameter, in the query component. 
 
-#### エラーレスポンス
+#### Error Response
 
-無効な `redirect_uri` や `client_id` が原因でリクエストが失敗した場合、ユーザーは指定した URI にリダイレクトされず、代わりに Datadog のエラーページが表示されます。
+If the request fails due to an invalid `redirect_uri` or `client_id`, the user is not redirected to the specified URI; instead, a Datadog error page displays.
 
-ユーザーが認可を拒否した場合、あるいはその他の理由でリクエストが失敗した場合、ユーザーはクエリーコンポーネントに [error][2] パラメーターを指定して `redirect_uri` へとリダイレクトされます。
+If a user denies authorization, or the request fails due to other reasons, the user is redirected to the `redirect_uri` with an [error][2] parameter in the query component.
 
-## 認可コードを取得する
+## Obtain an authorization code
 
 ### `POST /oauth2/v1/authorize`
 
-#### 概要
-ユーザーが同意ページの **Authorize** ボタンをクリックすると、`POST` リクエストが自動的に[認可エンドポイント][3]に送られ、リクエストを検証して固有の認可コードが返されます。ユーザーは、クエリコンポーネントに認可コードパラメーターを指定して、アプリケーションの `redirect_uri` にリダイレクトされます。
+#### Overview
+When a user clicks the **Authorize** button on the consent page, a `POST` request is automatically sent to the [authorization endpoint][3] to verify the request and return a unique authorization code. The user is redirected to your application's `redirect_uri` with the authorization code parameter in the query component.
 
-#### リクエスト
-アプリケーションは、この認可リクエストを行う必要はありません。このステップは、前のユーザー認可リクエストに対する応答であり、ユーザーがアプリケーションの認可に成功すると、Datadog によって自動的にリクエストされます。
+#### Request 
+Your application does not need to make this authorization request. This step is a response to the previous user authorization request and is automatically requested by Datadog when a user successfully authorizes an application. 
 
 
-[1]: https://docs.datadoghq.com/ja/getting_started/site/
+[1]: https://docs.datadoghq.com/getting_started/site/
 [2]: https://datatracker.ietf.org/doc/html/rfc6749#section-4.1.2.1
 [3]: https://datatracker.ietf.org/doc/html/rfc6749#section-3.1
 {{% /tab %}}
-{{% tab "トークンエンドポイント" %}}
+{{% tab "Token Endpoints" %}}
 
-## アクセストークンの交換認可コード
+## Exchange authorization code for access token
 
 ### `POST /oauth2/v1/token`
 
-#### 概要
+#### Overview
 
-認可リクエストから認可コードが返されると、アプリケーションはこのコードをアクセストークンやリフレッシュトークンに交換することができます。認可コードはリダイレクト URI から抽出され、Datadog の OAuth2 [トークンエンドポイント][1]に `POST` リクエストで送信されます。
+Once an authorization code is returned from the authorization request, your application can exchange this code for an access token and a refresh token. The authorization code is extracted from the redirect URI and sent in a `POST` request to Datadog's OAuth2 [token endpoint][1]. 
 
-Datadog の[アクセストークン][2]は、1 時間の TTL を持つ短命のトークンで、Datadog の API にアクセスを許可します。Marketplace OAuth クライアントの [Refresh トークン][3]は、有効期限がない長寿命なトークン (TTL は無限大) で、有効期限が切れるたびに新しいアクセストークンを自動的に取得するために使用されるトークンです。ユーザーが認可を取り消した場合、アプリケーションに対して新しいアクセストークンとリフレッシュトークンのセットを再認可する必要があります (リフレッシュトークンは期限切れとなります)。
+Datadog [access tokens][2] are short-lived tokens with a time-to-live (TTL) of 1 hour that grant access to Datadog APIs. [Refresh tokens][3] for Marketplace OAuth clients are long-lived tokens with no expiration (TTL of infinity) that are used to automatically obtain a new access token each time it expires. When a user revokes their authorization, they have to re-authorize a new set of access and refresh tokens for the application (the refresh token expires). 
 
-#### リクエスト
+#### Request
 
-[アクセストークンのリクエスト][4]は、`application/x-www-form-urlencoded` 形式の `POST` リクエストの本文に、以下のパラメーターを指定して行います。
+The [access token request][4] is made with the following parameters in the body of the `POST` request with the `application/x-www-form-urlencoded` format:
 
-|  HTTP 本体パラメーター               | 説明                                                                                                                                                                                        |
+|  HTTP Body Parameter               | Description                                                                                                                                                                                        |
 |------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `redirect_uri`                       | 認可リクエストで送信されたのと同じ[リダイレクトエンドポイント][5]。                                                                                                                                   |
-| `client_id`                          | OAuth2 クライアントのクライアント ID。                                                                                                                                                                |
-| `client_secret` (発行された場合)          | OAuth2 機密クライアントのクライアントシークレット。                                                                                                                                                    |
-| `grant_type`                         | 最初のアクセストークンとリフレッシュトークンを受け取るには、付与タイプを `authorization_code` とし、それ以降のアクセストークンとリフレッシュトークンを受け取るには、付与タイプを `refresh_token` にしてください。 |
-| `code_verifier`  (PKCE が有効な場合) | 認可リクエストで送信されたコードチャレンジを導き出すために使用される生の[コードベリファイア][6]。                                                                                                         |
-| `code`                               | 前回の認可 POST リクエストから生成され返された認可コード。                                                                                                         |
+| `redirect_uri`                       | The same [redirection endpoint][5] sent in the authorization requests.                                                                                                                                   |
+| `client_id`                          | The client ID of your OAuth2 client.                                                                                                                                                                |
+| `client_secret` (if issued)          | The client secret of your OAuth2 confidential client.                                                                                                                                                    |
+| `grant_type`                         | The grant type should be `authorization_code` to receive your initial access token and refresh token, and the grant type should be `refresh_token` to receive any subsequent access and refresh tokens. |
+| `code_verifier` (if PKCE is enabled) | The raw [code verifier][6] used to derive the code challenge sent in the authorization requests.                                                                                                         |
+| `code`                               | The authorization code generated and returned from the previous authorization POST request.                                                                                                         |
 
-#### リクエスト例
+#### Example Request 
 
-アクセストークンのリクエストを行うには、この cURL コマンドを使用します。
+Use this cURL command to make an access token request:
 
 ```
 curl -X POST \
@@ -105,39 +102,39 @@ curl -X POST \
     "https://api.datadoghq.com/oauth2/v1/token"
 ```
 
-#### 成功レスポンス
+#### Success Response
 
-アクセストークンのリクエストが有効で認可された場合、[トークンレスポンス][7]は、アクセストークンとリフレッシュトークンを HTTP レスポンスの本文に含めて、`200 OK` ステータスコードを返します。
+If the access token request is valid and authorized, the [token response][7] returns a `200 OK` status code with the access token and refresh token contained in the body of the HTTP response. 
 
-#### エラーレスポンス
+#### Error Response
 
-トークンのエンドポイントへのリクエストに失敗した場合は、アプリケーション上でユーザーを適切なエラーページにリダイレクトするなどして、アプリケーション側で処理する必要があります。
+Failed requests made to token endpoints should be handled by the application, such as redirecting users to an appropriate error page on the application. 
 
-発行されたクライアントシークレットを持つ機密クライアントが `client_secret` パラメーターを指定せずにトークンリクエストを行うと、 `401 Unauthorized` ステータスコードが返されます。
+If a confidential client with an issued client secret makes a token request without providing the `client_secret` parameter, a `401 Unauthorized` status code is returned.
 
-不正なリクエストや無効な認可コードなど、その他の理由でトークンリクエストが失敗した場合、(特に指定がない限り) `400 Bad Request` ステータスコードが [`error`][8] パラメーターとともに返されます。
+If a token request fails for other reasons, such as a malformed request or an invalid authorization code, a `400 Bad Request` status code (unless specified otherwise) is returned with an [`error`][8] parameter. 
 
-## トークンの取り消し
+## Revoke tokens 
 
 ### `POST /oauth2/v1/revoke`
 
-#### 概要
+#### Overview
 
-ユーザーは、いつでもアクセス権を取り消したり、トークンを更新したりすることができます。トークンを取り消すと、Datadog の API にアクセスするためにトークンを使用することができなくなります。トークンを取り消すには、アプリケーションから Datadog の[トークン取り消しエンドポイント][9]に POST リクエストを行います。
+Users can revoke access or refresh tokens at any time. When revoked, tokens can no longer be used to access Datadog APIs. To revoke a given token, your application makes a POST request to Datadog's [token revocation endpoint][9]. 
 
-#### リクエスト
-[取り消しリクエスト][10]は、`application/x-www-form-urlencoded` 形式の `HTTP POST` リクエストの**本文**に、以下のパラメーターを指定して行います。
+#### Request
+The [revocation request][10] is made with the following parameters in the **body** of the `HTTP POST` request with the `application/x-www-form-urlencoded` format:
 
-| HTTP 本体パラメーター          | 説明                                                                                                              |
+| HTTP Body Parameter          | Description                                                                                                              |
 |------------------------------|--------------------------------------------------------------------------------------------------------------------------|
-| `client_id`                    | OAuth2 クライアントのクライアント ID。                                                                                      |
-| `client_secret` (発行された場合)                    | OAuth2 機密クライアントのクライアントシークレット。                                                                                       |
-| `token`                        | 取り消すトークン文字列。                                                                                           |
-| `token_type_hint` (オプション)   | トークンの検索を最適化するための、取り消すトークンの種類に関するヒント。例えば、`access_token` や `refresh_token` など。  |
+| `client_id`                    | The client ID of your OAuth2 client.                                                                                      |
+| `client_secret` (if issued)                    | The client secret of your OAuth2 confidential client.                                                                                       |
+| `token`                        | The token string to be revoked.                                                                                           |
+| `token_type_hint` (optional)   | A hint about the token type to be revoked to help optimize token lookup. For example, `access_token` or `refresh_token`.  |
 
-#### コード例
+#### Code Example 
 
-取り消しリクエストを行うには、この cURL コマンドを使用します。
+Use this cURL command to make a revocation request:
 
 ```
 curl -X POST \
@@ -146,13 +143,13 @@ curl -X POST \
     "https://api.datadoghq.com/oauth2/v1/revoke" \ 
 ```
 
-#### 成功レスポンス
+#### Success Response
 
-トークンの取り消しに成功した場合、あるいは `token` パラメーターが無効な場合、[取り消しレスポンス][11]は `200 OK` ステータスコードを返します。
+If a token has been revoked successfully, or if the `token` parameter is invalid, the [revocation response][11] returns an `200 OK` status code.
 
-#### エラーレスポンス
+#### Error Response
 
-パラメーターが足りない、あるいは無効であるなど、何らかの理由でトークンリクエストに失敗した場合、(特に指定がない限り) 400 Bad Request ステータスコードが [`error`][8] パラメーターとともに返されます。
+If a token request fails for any reason, such as missing or invalid parameters, 400 Bad Request status code (unless specified otherwise) is returned with an [`error`][8] parameter.
 
 [1]: https://tools.ietf.org/html/rfc6749#section-3.2
 [2]: https://datatracker.ietf.org/doc/html/rfc6749#section-1.4
@@ -166,25 +163,25 @@ curl -X POST \
 [10]: https://datatracker.ietf.org/doc/html/rfc7009#section-2.1
 [11]: https://datatracker.ietf.org/doc/html/rfc7009#section-2.2
 {{% /tab %}}
-{{% tab "API キー作成エンドポイント" %}}
+{{% tab "API Key Creation Endpoints" %}}
 
-## ユーザーに代わって API キーを作成する
+## Create an API Key on behalf of a user
 
 ### `POST /api/v2/api_keys/marketplace`
 
-#### 概要
+#### Overview
 
-有効な OAuth アクセストークンまたはリフレッシュトークンを受け取ると、それを使って認可ユーザーの代わりに API キーを作成することができます。
+Once you've received a valid OAuth access or refresh token, you can use it to create an API key on behalf of the authorizing user. 
 
-このエンドポイントから作成される API キーは、OAuth を通して Datadog にデータを送信する唯一の方法です。API キーは Datadog の組織ごとに 1 つだけ存在でき、API キーの値は作成後に 1 度だけ表示されるので、それに従って保存してください。
+An API key, created through this endpoint, is the only way to send data into Datadog through OAuth. Only one API key can exist per Datadog organization, and the API Key value is shown once after creation, so store it accordingly.
 
-**このエンドポイントにアクセスするには、プライベートな `API_KEYS_WRITE` スコープが OAuth クライアントに関連付けられなければなりません**。
+**In order to access this endpoint, the private `API_KEYS_WRITE` scope must be associated with your OAuth client**. 
 
-<div class="alert alert-info">このスコープの設定に問題がある場合は、marketplace@datadog.com までご連絡ください。</div>
+<div class="alert alert-info">If you are having issues setting this scope, reach out to marketplace@datadog.com. </div>
 
-#### リクエスト例
+#### Example Request
 
-`api_keys` エンドポイントにリクエストを行うには、この cURL コマンドを使用します。
+Use this cURL command to make a request to the `api_keys` endpoint:
 
 ```
 curl -X POST \
@@ -192,9 +189,9 @@ curl -X POST \
     "https://api.datadoghq.com/api/v2/api_keys/marketplace"
 ```
 
-#### 成功レスポンス
+#### Success Response
 
-アクセスまたはリフレッシュトークンのリクエストが有効で認可された場合、以下が返されます。
+If the access or refresh token request is valid and authorized, the following is returned:
 
 ```
 {
@@ -229,6 +226,6 @@ curl -X POST \
 {{% /tab %}}
 {{< /tabs >}}
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

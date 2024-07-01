@@ -1,106 +1,104 @@
 ---
-app_id: azure-iot-edge
-app_uuid: 9c4d7121-eed1-429c-bd86-18952b11d3f5
-assets:
-  dashboards:
-    azure_iot_edge: assets/dashboards/overview.json
-  integration:
-    auto_install: true
-    configuration:
-      spec: assets/configuration/spec.yaml
-    events:
-      creates_events: false
-    metrics:
-      check: azure.iot_edge.edge_agent.iotedged_uptime_seconds
-      metadata_path: metadata.csv
-      prefix: azure.iot_edge.
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 10125
-    source_type_name: Azure IoT Edge
-  logs:
-    source: azure.iot_edge
-  monitors:
-    Disk usage: assets/monitors/disk_usage.json
-    Edge Hub retries: assets/monitors/edgehub_retries.json
-    IoT Hub syncs: assets/monitors/iothub_syncs.json
-    Memory usage: assets/monitors/memory_usage.json
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com (日本語対応)
-  support_email: help@datadoghq.com
-categories:
+"app_id": "azure-iot-edge"
+"app_uuid": "9c4d7121-eed1-429c-bd86-18952b11d3f5"
+"assets":
+  "dashboards":
+    "azure_iot_edge": assets/dashboards/overview.json
+  "integration":
+    "auto_install": true
+    "configuration":
+      "spec": assets/configuration/spec.yaml
+    "events":
+      "creates_events": false
+    "metrics":
+      "check": azure.iot_edge.edge_agent.iotedged_uptime_seconds
+      "metadata_path": metadata.csv
+      "prefix": azure.iot_edge.
+    "service_checks":
+      "metadata_path": assets/service_checks.json
+    "source_type_id": !!int "10125"
+    "source_type_name": Azure IoT Edge
+  "monitors":
+    "Disk usage": assets/monitors/disk_usage.json
+    "Edge Hub retries": assets/monitors/edgehub_retries.json
+    "IoT Hub syncs": assets/monitors/iothub_syncs.json
+    "Memory usage": assets/monitors/memory_usage.json
+"author":
+  "homepage": "https://www.datadoghq.com"
+  "name": Datadog
+  "sales_email": info@datadoghq.com
+  "support_email": help@datadoghq.com
+"categories":
 - azure
 - iot
-- ログの収集
-- ネットワーク
-dependencies:
-- https://github.com/DataDog/integrations-core/blob/master/azure_iot_edge/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: azure_iot_edge
-integration_id: azure-iot-edge
-integration_title: Azure IoT Edge
-integration_version: 4.2.0
-is_public: true
-kind: インテグレーション
-manifest_version: 2.0.0
-name: azure_iot_edge
-public_title: Azure IoT Edge
-short_description: Azure IoT Edge デバイスとモジュールの健全性とパフォーマンスを監視。
-supported_os:
+- log collection
+- network
+"custom_kind": "integration"
+"dependencies":
+- "https://github.com/DataDog/integrations-core/blob/master/azure_iot_edge/README.md"
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "azure_iot_edge"
+"integration_id": "azure-iot-edge"
+"integration_title": "Azure IoT Edge"
+"integration_version": "4.2.1"
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "azure_iot_edge"
+"public_title": "Azure IoT Edge"
+"short_description": "Monitor the health and performance of an Azure IoT Edge device and modules."
+"supported_os":
 - linux
 - windows
 - macos
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Azure
-  - Category::IoT
-  - Category::Log Collection
-  - Category::Network
-  - Supported OS::Linux
-  - Supported OS::Windows
-  - Supported OS::macOS
-  configuration: README.md#Setup
-  description: Azure IoT Edge デバイスとモジュールの健全性とパフォーマンスを監視。
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Azure IoT Edge
+"tile":
+  "changelog": CHANGELOG.md
+  "classifier_tags":
+  - "Category::Azure"
+  - "Category::IoT"
+  - "Category::Log Collection"
+  - "Category::Network"
+  - "Supported OS::Linux"
+  - "Supported OS::Windows"
+  - "Supported OS::macOS"
+  "configuration": "README.md#Setup"
+  "description": Monitor the health and performance of an Azure IoT Edge device and modules.
+  "media": []
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": Azure IoT Edge
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## 概要
+## Overview
 
-[Azure IoT Edge][1] は、クラウドのワークロードをデプロイして、標準コンテナを使って Internet of Things (IoT) Edge デバイスで実行するためのフルマネージド型サービスです。
+[Azure IoT Edge][1] is a fully managed service to deploy Cloud workloads to run on Internet of Things (IoT) Edge devices using standard containers.
 
-Datadog-Azure IoT Edge インテグレーションを使用すると IoT Edge デバイスからメトリクスや健全性の状態を収集できます。
+Use the Datadog-Azure IoT Edge integration to collect metrics and health status from IoT Edge devices.
 
-**注**: このインテグレーションには、IoT Edge ランタイムバージョン 1.0.10 以降が必要です。
+**Note**: This integration requires IoT Edge runtime version 1.0.10 or above.
 
-## 計画と使用
+## Setup
 
-以下の手順に従って、このチェックをデバイスホストで実行中の IoT Edge デバイスにインストール、構成します。
+Follow the instructions below to install and configure this check for an IoT Edge device running on a device host.
 
-### インフラストラクチャーリスト
+### Installation
 
-Azure IoT Edge チェックは [Datadog Agent][2] パッケージに含まれています。
+The Azure IoT Edge check is included in the [Datadog Agent][2] package.
 
-デバイスに追加でインストールする必要はありません。
+No additional installation is needed on your device.
 
-### ブラウザトラブルシューティング
+### Configuration
 
-Agent がカスタムモジュールとして実行するよう、IoT Edge デバイスを構成します。Azure IoT Edge のインストール方法およびカスタムモジュールの利用方法について、詳しくは Microsoft のドキュメントで [Azure IoT Edge モジュールの実装][3]をご確認ください。
+Configure the IoT Edge device so that the Agent runs as a custom module. Follow the Microsoft documentation on [deploying Azure IoT Edge modules][3] for information on installing and working with custom modules for Azure IoT Edge.
 
-IoT Edge メトリクスの収集を開始するには、下記の手順で IoT Edge デバイス、ランタイムモジュール、そして Datadog Agent を構成します。
+Follow the steps below to configure the IoT Edge device, runtime modules, and the Datadog Agent to start collecting IoT Edge metrics.
 
-1. **Edge Agent** ランタイムモジュールを以下のように構成します。
-    - イメージバージョンは `1.0.10` 以上である必要があります。
-    - "Create Options" で、次の `Labels` を追加します。`com.datadoghq.ad.instances` ラベルを適宜編集します。使用可能なすべてのコンフィギュレーションオプションについては、[azure_iot_edge.d/conf.yaml のサンプル conf.yaml][4] を参照してください。ラベルベースのインテグレーションコンフィギュレーションに関する詳細は、[Docker インテグレーションオートディスカバリー][5]のドキュメントをご参照ください。
+1. Configure the **Edge Agent** runtime module as follows:
+    - Image version must be `1.0.10` or above.
+    - Under "Create Options", add the following `Labels`. Edit the `com.datadoghq.ad.instances` label as appropriate. See the [sample azure_iot_edge.d/conf.yaml][4] for all available configuration options. See the documentation on [Docker Integrations Autodiscovery][5] for more information on labels-based integration configuration.
 
         ```json
         "Labels": {
@@ -110,14 +108,14 @@ IoT Edge メトリクスの収集を開始するには、下記の手順で IoT 
         }
         ```
 
-2. **Edge Hub** ランタイムモジュールを以下のように構成します。
-    - イメージバージョンは `1.0.10` 以上である必要があります。
+2. Configure the **Edge Hub** runtime module as follows:
+    - Image version must be `1.0.10` or above.
 
-3. Datadog Agent を**カスタムモジュール**としてインストールし、構成します。
-    - モジュール名を設定します。(例: `datadog-agent`)
-    - Agent のイメージ URI を設定します。(例: `datadog/agent:7`)
-    - "Environment Variables" で `DD_API_KEY` を構成します。ここで、追加の Agent コンフィギュレーションを設定することも可能です ([Agent の環境変数][6]参照)。
-    - "Container Create Options" で、デバイスの OS に基づき以下のコンフィギュレーションを入力します。**注**: `NetworkId` は、デバイスの `config.yaml` ファイルに設定されたネットワーク名と一致する必要があります。
+3. Install and configure the Datadog Agent as a **custom module**:
+    - Set the module name. For example: `datadog-agent`.
+    - Set the Agent image URI. For example: `datadog/agent:7`.
+    - Under "Environment Variables", configure your `DD_API_KEY`. You may also set extra Agent configuration here (see [Agent Environment Variables][6]).
+    - Under "Container Create Options", enter the following configuration based on your device OS. **Note**: `NetworkId` must correspond to the network name set in the device `config.yaml` file.
 
         - Linux:
             ```json
@@ -140,20 +138,20 @@ IoT Edge メトリクスの収集を開始するには、下記の手順で IoT 
             }
             ```
 
-    - Datadog Agent カスタムモジュールを保存します。
+    - Save the Datadog Agent custom module.
 
-4. 変更を保存しデバイスのコンフィギュレーションにデプロイします。
+4. Save and deploy changes to your device configuration.
 
-#### 収集データ
+#### Log collection
 
-1. Datadog Agent で、ログの収集はデフォルトで無効になっています。Datadog Agent カスタムモジュールを構成することで、これを有効にします。
-    - "Environment Variables" で、`DD_LOGS_ENABLED` 環境変数を設定します。
+1. Collecting logs is disabled by default in the Datadog Agent, enable it by configuring your Datadog Agent custom module:
+    - Under "Environment Variables", set the `DD_LOGS_ENABLED` environment variable:
 
         ```yaml
         DD_LOGS_ENABLED: true
         ```
 
-2. "Create Options" で **Edge Agent** および **Edge Hub** モジュールを構成し、以下のラベルを追加します。
+2. Configure the **Edge Agent** and **Edge Hub** modules: under "Create Options", add the following label:
 
     ```json
     "Labels": {
@@ -162,46 +160,47 @@ IoT Edge メトリクスの収集を開始するには、下記の手順で IoT 
     }
     ```
 
-    環境に合わせて `service` を変更します。
+    Change the `service` based on your environment.
 
-    ログを収集するカスタムモジュールに、この操作を繰り返します。
+    Repeat this operation for any custom modules you'd like to collect logs for.
 
-3. 変更を保存しデバイスのコンフィギュレーションにデプロイします。
+3. Save and deploy changes to your device configuration.
 
-### 検証
+### Validation
 
-Agent がデバイスにデプロイされたら、[Agent の status サブコマンドを実行][7]し、Checks セクションで `azure_iot_edge` を探します。
+Once the Agent has been deployed to the device, [run the Agent's status subcommand][7] and look for `azure_iot_edge` under the Checks section.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "azure_iot_edge" >}}
 
 
-### ヘルプ
+### Events
 
-Azure IoT Edge には、イベントは含まれません。
+Azure IoT Edge does not include any events.
 
-### ヘルプ
+### Service Checks
 {{< get-service-checks-from-git "azure_iot_edge" >}}
 
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
+Need help? Contact [Datadog support][10].
 
-## その他の参考資料
+## Further Reading
 
-- [Datadog を使用した Azure IoT Edge の監視][11]
+- [Monitor Azure IoT Edge with Datadog][11]
 
 [1]: https://azure.microsoft.com/en-us/services/iot-edge/
 [2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.microsoft.com/en-us/azure/iot-edge/how-to-deploy-modules-portal
 [4]: https://github.com/DataDog/integrations-core/blob/master/azure_iot_edge/datadog_checks/azure_iot_edge/data/conf.yaml.example
-[5]: https://docs.datadoghq.com/ja/agent/docker/integrations/
-[6]: https://docs.datadoghq.com/ja/agent/guide/environment-variables/
-[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[5]: https://docs.datadoghq.com/agent/docker/integrations/
+[6]: https://docs.datadoghq.com/agent/guide/environment-variables/
+[7]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
 [8]: https://github.com/DataDog/integrations-core/blob/master/azure_iot_edge/metadata.csv
 [9]: https://github.com/DataDog/integrations-core/blob/master/azure_iot_edge/assets/service_checks.json
-[10]: https://docs.datadoghq.com/ja/help/
+[10]: https://docs.datadoghq.com/help/
 [11]: https://www.datadoghq.com/blog/monitor-azure-iot-edge-with-datadog/
+

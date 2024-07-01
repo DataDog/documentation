@@ -1,66 +1,66 @@
 ---
+title: Top List Widget
+widget_type: "toplist"
 aliases:
-- /ja/graphing/widgets/top_list/
+    - /graphing/widgets/top_list/
 further_reading:
-- link: /ja/dashboards/graphing_json/
-  tag: ドキュメント
-  text: JSON を使用したダッシュボードの構築
-- link: /notebooks/
-  tag: ドキュメント
-  text: ノートブック
-- link: /dashboards/guide/context-links/#overview/
+- link: /dashboards/graphing_json/
   tag: Documentation
-  text: コンテキストリンク
-title: トップリストウィジェット
-widget_type: toplist
+  text: Building Dashboards using JSON
+- link: /notebooks/
+  tag: Documentation
+  text: Notebooks
+- link: "/dashboards/guide/context-links/#overview/"
+  tag: Documentation
+  text: Context Links
 ---
 
-トップリスト可視化機能を使用すると、`hostname`、`service` などのタグ値のリストを任意のメトリクス値の最大値または最小値と共に表示できます。たとえば、CPU を多く使用しているサービス、ディスクの空き容量が少ないホストなどをリストできます。
+The top list visualization enables you to display a list of tag values with the most or least of any metric or event value, such as highest consumers of CPU, hosts with the least disk space, or cloud products with the highest costs.
 
-{{< img src="dashboards/widgets/toplist/toplist_w_colors.png" alt="条件に応じた視覚化の書式設定ルールを適用したトップリストウィジェット" >}}
+## Setup
 
-## セットアップ
+{{< img src="dashboards/widgets/toplist/top_list_graph_display.png" alt="Configuration options for graph display highlighting Stacked, Relative display mode, and Visual Formatting Rules" style="width:100%;" >}}
 
-{{< img src="dashboards/widgets/toplist/toplist_config.png" alt="トップリストの視覚化の書式設定ルールのセットアップ画面" style="width:80%;">}}
+### Configuration
 
-### コンフィギュレーション
+1. Choose the data to graph:
+    * Metric: See the [querying][1] documentation to configure a metric query.
+    * Non-metric data sources: See the [Trace search documentation][2] or [Log search documentation][3] to configure an event query.
 
-1. グラフ化するデータを選択します。
-    * メトリクス: メトリクスのクエリを構成するには、[クエリ作成][1]のドキュメントを参照してください。
-    * Indexed Span: Indexed Span クエリの構成については、[トレース検索に関するドキュメント][2]を参照してください。
-    * ログイベント: ログイベントクエリの構成については、[ログ検索に関するドキュメント][3]を参照してください。
+2. Optional: see additional [graph display](#graph-display) configurations. 
 
-2. オプション: *視覚化の書式設定ルール**で、エントリの値に応じた*条件付き書式を構成します。Datadog 全体で視覚化データ同士を結び付けるには、[コンテキストリンク][6]を追加します。
+### Options
 
-### オプション
+#### Graph display
 
-#### グローバルタイム
+Configure the optional Display Mode features to add context to your top list visualization.
 
-スクリーンボードとノートブックの場合にのみ、ウィジェットがカスタムタイムフレームを持つか、グローバルタイムフレームを使用するかを選択します。
+* Display multiple stacked groups to show a break down of each dimension in your query. **Stacked** is enabled by default. You can switch to **Flat**.
+* Select **Relative** display mode to show values as a percent of the total or **Absolute** display mode to show the raw count of data you are querying.</br>
+   **Note**: Relative display is only available for count data, such as count metrics or log events.
+* Configure conditional formatting in **Visual Formatting Rules** depending on your entries' values. 
 
-#### タイトル
+#### Context links
 
-`Show a Title` チェックボックスをオンにして、ウィジェットのカスタムタイトルを表示します。
+[Context links][4] are enabled by default, and can be toggled on or off. Context links bridge dashboard widgets with other pages in Datadog, or third party applications.
 
-{{< img src="dashboards/widgets/options/title.png" alt="ウィジェットのタイトル" style="width:80%;">}}
+#### Global time
 
-オプションで、サイズと配置を定義できます。
+On screenboards and notebooks, choose whether your widget has a custom timeframe or uses the global timeframe.
 
 ## API
 
-このウィジェットは、**ダッシュボード API** とともに使用できます。詳しくは、[ダッシュボード API][4] ドキュメントをご参照ください。
-
-トップリストウィジェットの[ウィジェット JSON スキーマ定義][5]は次のとおりです。
+This widget can be used with the **[Dashboards API][5]**. See the following table for the [widget JSON schema definition][6]:
 
 {{< dashboards-widgets-api >}}
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/dashboards/querying/
-[2]: /ja/tracing/app_analytics/search/#search-bar
-[3]: /ja/logs/search_syntax/
-[4]: /ja/api/v1/dashboards/
-[5]: /ja/dashboards/graphing_json/widget_json/
-[6]: /ja/dashboards/guide/context-links/#overview
+[1]: /dashboards/querying/
+[2]: /tracing/trace_explorer/query_syntax/#search-bar
+[3]: /logs/search_syntax/
+[4]: /dashboards/guide/context-links
+[5]: /api/latest/dashboards/
+[6]: /dashboards/graphing_json/widget_json/

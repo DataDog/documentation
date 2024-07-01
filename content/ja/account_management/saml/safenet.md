@@ -1,36 +1,37 @@
 ---
 title: SafeNet SAML IdP
 further_reading:
-  - link: /account_management/saml/
-    tag: Documentation
-    text: Datadog アカウントのための SAML の構成
+- link: /account_management/saml/
+  tag: Documentation
+  text: Configure SAML for your Datadog account
 ---
-## セットアップ
 
-[メインの SAML コンフィギュレーション手順ガイド][1]に従い、[SafeNet Trusted Access for Datadog][2] のドキュメントを参照して、SafeNet をSAML IdP として設定します。
+## Setup
+
+Follow the [main SAML configuration instructions][1], then see the [SafeNet Trusted Access for Datadog][2] docs to configure SafeNet as your SAML IdP.
 
 ## Datadog
 
-* IdP メタデータは、SafeNet Trusted Access コンソールで **Download Metadata** ボタンをクリックして入手できます。
-* Datadog で、**Identity Provider (IdP) Initiated Login** チェックボックスをオンにします。
-* Datadog の[サービスプロバイダーメタデータ][3]が必要です。
+* The IdP metadata is available in the SafeNet Trusted Access console by clicking the **Download Metadata** button.
+* In Datadog, ensure the **Identity Provider (IdP) Initiated Login** box is checked.
+* Datadog's [Service Provider metadata][3] is needed.
 
-## 認証の検証
+## Verify authentication
 
-### STA コンソールの使用
+### Using STA console
 
-Datadog のログイン URL にアクセスします。SafeNet Trusted Access のサインインページにリダイレクトされたら、プライマリディレクトリのログイン情報を入力し、二要素認証を承認してください。認証後に Datadog にリダイレクトされます。
+Navigate to the Datadog login URL. Once redirected to the SafeNet Trusted Access sign-in page, enter your primary directory login information and approve the two-factor authentication. This redirects you back to Datadog after authentication.
 
-**注**: IdP 始動モードの場合は、SafeNet Trusted Access コンソールで、Datadog に表示される **Assertion Consumer Service URL** を入力します。
+**Note**: For IdP initiated mode, enter the **Assertion Consumer Service URL** found in Datadog on the SafeNet Trusted Access console.
 
-### STA ユーザーポータルの使用
+### Using STA user portal
 
-ユーザーポータル URL にアクセスし、STA ユーザーポータルダッシュボードにログインします。ダッシュボードには、アクセス可能なアプリケーションの一覧が表示されます。Datadog アプリケーションアイコンをクリックすると、認証後に Datadog にリダイレクトされます。
+Navigate to the User Portal URL to log in to the STA User Portal dashboard. The dashboard shows you a list of applications to which you have access. Click on the Datadog application icon, which redirects you to Datadog after authentication.
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/account_management/saml/#configure-saml
+[1]: /account_management/saml/#configure-saml
 [2]: https://resources.safenetid.com/help/Datadog/Index.htm
 [3]: https://app.datadoghq.com/account/saml/metadata.xml

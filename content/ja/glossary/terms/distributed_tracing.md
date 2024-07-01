@@ -1,6 +1,6 @@
 ---
+title: distributed tracing
 core_product:
-- apm
-title: 分散型トレーシング
+  - apm
 ---
-分散型トレーシングは、アプリケーションのリクエストがフロントエンドのデバイスからバックエンドのサービスやデータベースに流れるのを追跡する方法です。開発者は分散型トレーシングを利用して、高いレイテンシーやエラーを示すリクエストのトラブルシューティングを行うことができます。
+Distributed tracing is a method of tracking application requests as they flow from frontend devices to backend services and databases. Developers can use distributed tracing to troubleshoot requests that exhibit high latency or errors.

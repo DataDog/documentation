@@ -1,143 +1,161 @@
 ---
-algolia:
-  subcategory: Marketplace インテグレーション
-app_id: embrace-mobile-license
-app_uuid: 2996b6e0-1aed-46cc-9fe5-4ea72aeae636
-assets: {}
-author:
-  homepage: https://embrace.io
-  name: Embrace
-  sales_email: datadogsupport@embrace.io
-  support_email: datadogsupport@embrace.io
-  vendor_id: embrace
-categories:
-- マーケットプレイス
-- モバイル
-- ネットワーク
-dependencies: []
-display_on_public_website: true
-draft: false
-git_integration_title: embrace_mobile_license
-integration_id: embrace-mobile-license
-integration_title: Embrace モバイルライセンス
-integration_version: ''
-is_public: true
-custom_kind: integration
-legal_terms:
-  eula: assets/eula.pdf
-manifest_version: 2.0.0
-name: embrace_mobile_license
-pricing:
-- billing_type: tag_count
-  includes_assets: true
-  metric: datadog.marketplace.embrace.mobile_license
-  product_id: mobile-license
-  short_description: Pro プランには、Embrace プラットフォームへのフルアクセスが含まれます。大容量アプリのカスタム価格は、営業チームと相談可能です。割引に関するご質問は、datadogsupport@embrace.io
-    までご連絡ください。
-  tag: セッション
-  unit_label: 500,000 セッション
-  unit_price: 500
-public_title: Embrace モバイルライセンス
-short_description: iOS、Android、React Native、Unity のためのモバイル可観測性
-supported_os:
+"algolia":
+  "subcategory": Marketplace Integrations
+"app_id": "embrace-mobile-license"
+"app_uuid": "2996b6e0-1aed-46cc-9fe5-4ea72aeae636"
+"assets": {}
+"author":
+  "homepage": "https://embrace.io"
+  "name": Embrace
+  "sales_email": datadogsupport@embrace.io
+  "support_email": datadogsupport@embrace.io
+  "vendor_id": embrace
+"categories":
+- marketplace
+- mobile
+- network
+"custom_kind": "integration"
+"dependencies": []
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "embrace_mobile_license"
+"integration_id": "embrace-mobile-license"
+"integration_title": "Embrace Mobile License"
+"integration_version": ""
+"is_public": true
+"legal_terms":
+  "eula": assets/eula.pdf
+"manifest_version": "2.0.0"
+"name": "embrace_mobile_license"
+"pricing":
+- "billing_type": tag_count
+  "includes_assets": true
+  "metric": datadog.marketplace.embrace.mobile_license
+  "product_id": mobile-license
+  "short_description": "Pro plan includes full access to the Embrace platform. Custom pricing for large volume apps can be discussed with the 
+sales team. Please reach out to datadogsupport@embrace.io for any questions regarding discounts."
+  "tag": session
+  "unit_label": 500,000 Sessions
+  "unit_price": !!int "500"
+"public_title": "Embrace Mobile License"
+"short_description": "Mobile observability for iOS, Android, React Native, and Unity"
+"supported_os":
 - android
 - ios
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Marketplace
-  - Category::Mobile
-  - Category::Network
-  - Offering::Software License
-  - Supported OS::Android
-  - Supported OS::iOS
-  configuration: README.md#Setup
-  description: iOS、Android、React Native、Unity のためのモバイル可観測性
-  media:
-  - caption: モバイル専用に構築された唯一の可観測性とデータのプラットフォームである Embrace を体験してください。あらゆるユーザー体験から得られる実用的なデータと洞察により、企業はリ保持と収益の真のドライバーを理解することで、最適なビジネス決定を下すことができます。
-    image_url: images/video_thumbnail.jpg
-    media_type: ビデオ
-    vimeo_id: 619368139
-  - caption: ウィジェットを追加して、Datadog から直接 Embrace のクラッシュおよびネットワーキングデータを監視。
-    image_url: images/datadog_dashboard.jpg
-    media_type: image
-  - caption: 影響を受けたすべてのユーザーセッションから、すべてのスタックトレースにアクセスして、アプリおよびセッションの詳細情報と共にクラッシュを調査。さらに、Embrace
-      でユーザーセッションの完全なリプレイに直接移動し、詳しいコンテキストを把握できます。
-    image_url: images/datadog_side_panel.jpg
-    media_type: image
-  - caption: Embrace のユーザーセッションリプレイにより、ユーザーセッションの技術的および行動的詳細を時間単位で視覚化。問題を手動で再生しなくても、根本原因をすばやく認識できます。
-    image_url: images/embrace_session.jpg
-    media_type: image
-  - caption: タイミング、結果、そしてユーザーアクションを追跡して主要なユーザーフローを最適化。動作の遅延やフリーズに不満を感じたユーザーが使用を放棄した箇所をすばやく特定、修正し、エンゲージメントおよび収益の強化を図ります。
-    image_url: images/embrace_app_performance.jpg
-    media_type: image
-  - caption: リアルタイムダッシュボードで主要なメトリクスを監視。パフォーマンス、安定性、エンゲージメント、収益化などを簡単に追跡できるため、チームは重要なデータに注力できます。
-    image_url: images/embrace_dashboard.jpg
-    media_type: image
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Embrace モバイルライセンス
-  uninstallation: README.md#Uninstallation
+"tile":
+  "changelog": CHANGELOG.md
+  "classifier_tags":
+  - "Category::Marketplace"
+  - "Category::Mobile"
+  - "Category::Network"
+  - "Offering::Software License"
+  - "Supported OS::Android"
+  - "Supported OS::iOS"
+  "configuration": "README.md#Setup"
+  "description": Mobile observability for iOS, Android, React Native, and Unity
+  "media":
+  - "caption": Experience an overview of Embrace, the only observability and data platform built exclusively for mobile. With actionable data and insights derived from every user experience, companies can make optimal business decisions by understanding the true drivers of retention and revenue.
+    "image_url": images/video_thumbnail.jpg
+    "media_type": video
+    "vimeo_id": !!int "619368139"
+  - "caption": Monitor Embrace crash and networking data directly from Datadog by adding widgets.
+    "image_url": images/datadog_dashboard.jpg
+    "media_type": image
+  - "caption": Investigate crashes by accessing every stack trace from every affected user session, alongside app and session details. For more context, navigate directly to the full user session replay in Embrace. 
+    "image_url": images/datadog_side_panel.jpg
+    "media_type": image
+  - "caption": Embrace's user session replays provide the full technical and behavioral details of every user session in a time-based visualization. Instantly identify the root cause without having to manually reproduce issues.
+    "image_url": images/embrace_session.jpg
+    "media_type": image
+  - "caption": Optimize key user flows by tracking timing, outcome, and user actions. Quickly identify where frustrated users are abandoning slow or frozen experiences and fix them to boost engagement and revenue.
+    "image_url": images/embrace_app_performance.jpg
+    "media_type": image
+  - "caption": Monitor key metrics with real-time dashboards. Easily track performance, stability, engagement, monetization, and more so teams can focus on the data they care about.
+    "image_url": images/embrace_dashboard.jpg
+    "media_type": image
+  "overview": "README.md#Overview"
+  "resources":
+  - "resource_type": blog
+    "url": "https://www.datadoghq.com/blog/mobile-application-monitoring-embrace-datadog/"
+  - "resource_type": documentation
+    "url": "https://embrace.io/docs/"
+  "support": "README.md#Support"
+  "title": Embrace Mobile License
+  "uninstallation": "README.md#Uninstallation"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
-## 概要
+## Overview
 
-### Embrace とは？
+### What is Embrace?
 
-[Embrace][1] は、モバイルチームが最高のユーザー体験を提供できるよう、パフォーマンスの最適化、問題の優先順位付けと修正作業、そして機能やリリース、カスタムセグメントの監視を可能にするモバイル可観測性およびデータのプラットフォームです。Embrace では、複雑なモバイルデータをアクションに変換できます。あらゆるすべてのユーザーエクスペリエンスの包括的なセッションレベルデータを収集することで、Embrace は強力なインサイトを抽出しビジネスの成長を促進します。
+[Embrace][1] is a mobile observability and data platform that empowers mobile teams to deliver optimal user experiences for 
+performance optimization, issue prioritization and remediation, and monitoring across features, releases, and custom 
+segments. At its core, Embrace turns complex mobile data into action. By collecting comprehensive session-level data for
+each and every user experience, Embrace extracts powerful insights to fuel your growth.
 
-インテグレーションをインストールすると、Embrace のダッシュボードでモバイルの主要なヘルスメトリクスを追跡できるようになります。パフォーマンスの低下があった場合、手動でユーザーセッションを再生しなくても、影響のあったセッションの完全な詳細を調査することができます。
+After integration installation, Embrace provides dashboards that track key mobile health metrics. For any regression, you can inspect 
+the full details of every affected user session without having to manually reproduce it. 
 
-### Embrace Datadog ダッシュボード
+### Embrace Datadog Dashboard
 
-Datadog ダッシュボードは、クラッシュやネットワークに関するクライアント側の Embrace データをサーバー側のデータに接続します。
+The Datadog dashboard connects client-side Embrace data for crashes and networking to your server-side data.
 
-#### クラッシュ
+#### Crashes
 
-Datadog で直接、クラッシュの傾向を監視し、すべてのクラッシュのスタックトレースを調査します。さらに、Embrace でユーザーセッションの詳細を確認することができます。
+Monitor crash trends and inspect stack traces for every crash directly within Datadog. For more context, review full
+user session details within Embrace.
 
-#### SSL
+#### Networking
 
-Embrace は、サーバーに到達しなかったものも含め、すべてのネットワークコールを収集します。4xx、5xx、タイムアウト、接続エラーなど、エンドポイントでのすべてのエラーを確認できます。
+Embrace collects every network call, even the ones that never make it to the servers. See all errors on your
+endpoints, including 4xxs, 5xxs, timeouts, and connection errors.
 
 ---
 
-Datadog から、Embrace プラットフォーム内のモバイル体験を最適化するために必要な実用的なデータとインサイトにすぐに移動できます。これには以下が含まれます。
+From Datadog, immediately navigate to the actionable data and insights needed to optimize mobile experiences within the
+Embrace platform. These include:
 
-#### ユーザーセッションリプレイ
+#### User Session Replays
 
-再現の手間なく、あらゆるユーザーセッションを体験することができます。技術的、行動的な詳細をすべて再現し、横断可能なビジュアルにすることで、どのチームメンバーもすぐに質問や苦情に答えられるようにします。
+Experience any user session without the hassle of reproducing. Replay all the technical and behavioral details in one
+traversable visual so that any team member can immediately answer any question or complaint.
 
-#### アプリのパフォーマンス
+#### App Performance
 
-モバイルアプリの健全性を正しく測定し、改善するために、ユーザー体験が損なわれている原因を理解します。クラッシュだけでなく、強制終了や主要なユーザーフローの放棄につながる遅延またはフリーズエリアを取り除くために、パフォーマンスを最適化します。
+Understand the cause of a broken user experience to correctly measure and improve mobile app health. Beyond crashes,
+optimize performance to remove slow or frozen areas that lead to force quits and abandonment of key user flows.
 
-#### ライブラリ
+#### Dashboards
 
-リアルタイムダッシュボードで、適応、パフォーマンス、安定性、エンゲージメント、収益化など、ビジネスにとって重要なメトリクスを確認できます。個人またはチームでダッシュボードを作成し、気になる機能や実験に焦点を当てます。
+Track adoption, performance, stability, engagement, and monetization with real-time dashboards for the metrics that 
+matter to your business. Create individual or team dashboards to hone in on the features or experiments they care about.
 
-#### エラーログ
+#### Error Logging
 
-セッションとログのプロパティを設定し、強力なフィルタリングで根本原因を切り分けます。デバイス、バージョン、OS、地域、ユーザーセグメント、イベント属性に渡るパターンを発見し、ビジネスへの影響や問題の改善の優先度を把握することができます。
+Set session and log properties to allow powerful filtering to isolate the root cause. Uncover patterns across 
+device, version, OS, region, user segment, and event attributes so that your team knows the business impact and 
+remediation priority of issues. 
 
-#### プロアクティブアラート
+#### Proactive Alerting
 
-機能やリリースのパフォーマンスや安定性の低下について、いち早くお知らせします。不具合の原因がコードにあるのか、バックエンドにあるのか、サードパーティの SDK やベンダーにあるのか、Embrace がリアルタイムで通知するので、ユーザーから苦情が来る前に対策を講じることができます。
+Be the first to know about regressions in the performance and stability of your features and releases. Whether the 
+failure is in your code, your backend, or a bad actor third-party SDK or vendor, Embrace notifies you in real-time
+so you can take action before your users complain.
 
-## Agent
-サポートやご質問は、以下のチャンネルから Embrace にお問い合わせください。
+## Support
+For support or questions, contact Embrace through the following channel: 
 
-メール: [datadogsupport@embrace.io][4] 
+Email: [datadogsupport@embrace.io][4] 
 
-### その他の参考資料
+### Further Reading
 
-お役に立つドキュメント、リンクや記事:
+Additional helpful documentation, links, and articles:
 
-- [Datadog Marketplace の Embrace の製品を使ってモバイルアプリを監視する][6]
-- [Embrace ドキュメント][2]
+- [Monitor your mobile apps with Embrace's offering in the Datadog Marketplace][6]
+- [Embrace Documentation][2]
 
 [1]: https://embrace.io
 [2]: https://embrace.io/docs/
@@ -146,4 +164,4 @@ Datadog から、Embrace プラットフォーム内のモバイル体験を最�
 [5]: https://app.datadoghq.com/integrations/embrace-mobile
 [6]: https://www.datadoghq.com/blog/mobile-application-monitoring-embrace-datadog/
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/embrace-mobile-license" target="_blank">こちらをクリック</a>してください。
+This application is made available through the Marketplace and is supported by a Datadog Technology Partner. <a href="https://app.datadoghq.com/marketplace/app/embrace-mobile-license" target="_blank">Click Here</a> to purchase this application.

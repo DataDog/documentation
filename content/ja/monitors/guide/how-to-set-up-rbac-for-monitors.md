@@ -1,47 +1,46 @@
 ---
+title: How to set up RBAC for Monitors
 further_reading:
-- link: /account_management/rbac/permissions/#monitors
-  tag: ドキュメント
-  text: モニターの RBAC 権限の詳細
-- link: /api/latest/monitors/#create-a-monitor
-  tag: ドキュメント
-  text: API を使った制限付きモニターの作成について詳しく見る
-- link: /monitors/notify/#permissions
-  tag: ドキュメント
-  text: UI を使った制限付きモニターの作成について詳しく見る
-kind: ガイド
-title: モニター用に RBAC を設定する方法
+- link: "/account_management/rbac/permissions/#monitors"
+  tag: Documentation
+  text: Learn more about RBAC permissions for Monitors
+- link: "/api/latest/monitors/#create-a-monitor"
+  tag: Documentation
+  text: Learn more about creating restricted monitors via API
+- link: "/monitors/notify/#permissions"
+  tag: Documentation
+  text: Learn more about creating restricted monitors via the UI
 ---
 
-## 概要
+## Overview
 
-モニターは、システムの潜在的な問題をチームに警告します。権限のあるユーザーだけがモニターを編集できるようにすることで、モニターの構成が誤って変更されることを防ぎます。
+Monitors alert your teams to potential issues with your systems. Making sure only authorized users can edit your monitors prevents accidental changes in your monitors' configurations.
 
-個々のモニターの編集権限を特定のロールに制限することで、モニターを安全に管理することができます。
+Safely manage your monitors by restricting edit permissions for each individual monitor to specific roles.
 
-## ロールを設定する
+## Set up roles
 
-デフォルトロールとカスタムロールの詳細、カスタムロールの作成方法、ロールへの権限の割り当て、ユーザーへのロールの割り当てについては、[ロールベースアクセス制御][1]を参照してください。
+For more information about default and custom roles, how to create custom roles, assign permissions to roles, and assign roles to users, see [Role Based Access Control][1].
 
-## モニターへのアクセスを制限する
+## Restrict access to monitors
 
 {{< tabs >}}
 
 {{% tab "UI" %}}
 
-1. 新規にモニターを作成するか、既存のモニターを編集して、モニター編集画面に移動します。
-2. フォームの下部で、作成者に加えてモニターの編集を許可されるロールを指定します。
+1. Navigate to the monitor editing page by creating a new monitor or editing an existing one.
+2. At the bottom of the form, specify which roles, in addition to the creator, are allowed to edit the monitor.
 
-{{< img src="/monitors/guide/monitor_rbac_restricted.jpg" alt="RBAC 制限付きモニター" >}}
+{{< img src="/monitors/guide/monitor_rbac_restricted.jpg" alt="RBAC Restricted Monitor" >}}
 
-詳しくは、[モニター権限][1]をご覧ください。
+For more information, see [Monitors Permissions][1].
 
-[1]: /ja/monitors/notify/#permissions
+[1]: /monitors/notify/#permissions
 {{% /tab %}}
 
 {{% tab "API" %}}
 
-[List Roles API エンドポイント][1]を使用して、ロールの一覧とその ID を取得します。
+Use the [List Roles API endpoint][1] to get the list of roles and their ids.
 
 ```bash
 curl --request GET 'https://api.datadoghq.com/api/v2/roles' \
@@ -84,9 +83,9 @@ curl --request GET 'https://api.datadoghq.com/api/v2/roles' \
 }
 ```
 
-[Create][2] または [Edit a monitor][3] API エンドポイントと `restricted_roles` パラメーターを使用すると、モニターの編集を特定のロールセットとモニターの作成者に制限することができます。
+Use the [Create][2] or [Edit a monitor][3] API endpoint and the `restricted_roles` parameter to restrict monitor editing to a specific set of roles and to the monitor's creator. 
 
-**注:** 1 つまたは複数のロール UUID を指定することができます。`restricted_roles` を `null` に設定すると、[Monitor Write 権限][4]を持つすべてのユーザーに対して、モニター編集を許可します。
+**Note:** You can specify one or multiple role UUIDs. Setting `restricted_roles` to `null` allows monitor editing for all users with [Monitor Write permissions][4].
 
 ```bash
 curl --location --request POST 'https://api.datadoghq.com/api/v1/monitor' \
@@ -110,109 +109,106 @@ curl --location --request POST 'https://api.datadoghq.com/api/v1/monitor' \
 }'
 ```
 
-詳しくは、[ロール][5]および[モニター API リファレンス][6]を参照してください。
+For more information, see [Roles][5] and [Monitors API Reference][6] .
 
 
-[1]: /ja/api/latest/roles/#list-roles
-[2]: /ja/api/latest/monitors/#create-a-monitor
-[3]: /ja/api/latest/monitors/#edit-a-monitor
-[4]: /ja/account_management/rbac/permissions/#monitors
-[5]: /ja/api/latest/roles/
-[6]: /ja/api/latest/monitors/
+[1]: /api/latest/roles/#list-roles
+[2]: /api/latest/monitors/#create-a-monitor
+[3]: /api/latest/monitors/#edit-a-monitor
+[4]: /account_management/rbac/permissions/#monitors
+[5]: /api/latest/roles/
+[6]: /api/latest/monitors/
 {{% /tab %}}
 {{< /tabs >}}
 
-## ロックされたロールから制限されたロールへのモニターの移行
+## Migrate monitors from locked to restricted roles
 
-Datadog がモニターの編集を特定のロールに制限できる機能をリリースする以前は、モニターをロックすることができました。ロックされたモニターを編集できるのは、作成者と [Datadog Admin Role][2] を持つユーザーだけです。
+Before Datadog released the feature allowing restriction of monitor editing to specific roles, monitors could be locked. Only the creator and users with the [Datadog Admin Role][2] can edit a locked monitor. 
 
-{{< img src="/monitors/guide/monitor_rbac_locked.jpg" alt="RBAC ロックされたモニター" style="width:70%;">}}
+{{< img src="/monitors/guide/monitor_rbac_locked.jpg" alt="RBAC Locked Monitor" style="width:70%;">}}
 
-ロックされたモニターは非推奨であり、もはやサポートされません。代わりに、どのユーザーがモニターを編集できるかを柔軟に定義するロール制限オプションを使用してください。
+Locked monitors are deprecated and are no longer supported. Instead, use the role restriction option, which gives you more flexibility to define which users are allowed to edit monitors.
 
-以下のセクションでは、モニターの管理方法に応じて、ロック機構から制限されたロールに移行する方法について説明します。
+The sections below describe how to migrate from the locked mechanism to restricted roles, depending on the way you manage your monitors.
 
-### ヘルプ
+### API
 
-上記のロックメカニズムに対応する `locked` パラメーターはもはやサポートされません。これは、API や Terraform を通じて管理されるモニターの定義を更新し、`locked` の使用を中止し、`restricted_roles` (新しいロール制限オプションに添付されたパラメーター) を使用する必要があることを意味します。
+The `locked` parameter corresponding to the above mentioned locking mechanism is no longer supported. This means you must update the definition of your monitors managed through API or Terraform to stop using `locked` and start using `restricted_roles` (parameter attached with the new role restriction option).
 
-モニターの定義を更新する方法については、[モニター API エンドポイントの編集][3]および[モニター API オプション][4]を参照してください。
+For more information on how to update your monitors' definitions, see [Edit a monitor API endpoint][3] and [Monitor API Options][4].
 
 ### UI
 
-UI から作成されるすべての新しいモニターは `restricted_roles` パラメーターを使用します。
-また、基本的なメカニズムに関係なく、すべてのモニターはロール制限オプションを表示します。
+All new monitors created from the UI use the `restricted_roles` parameter. 
+All monitors also display the role restriction option regardless of the underlying mechanism:
 
-{{< img src="/monitors/guide/monitor_rbac_non_restricted.jpg" alt="RBAC 非制限モニター" >}}
+{{< img src="/monitors/guide/monitor_rbac_non_restricted.jpg" alt="RBAC Non Restricted Monitor" >}}
 
-Datadog は、モニターが保存されるたびに、既存のモニター定義を古いロックされたメカニズムから新しいロール制限のメカニズムに更新します。
+Datadog updates existing monitor definitions from the old locked mechanism to the new role restriction one whenever a monitor is saved.
 
-以下は、ロック機構を使用しているモニターを保存する必要がある場合の手順です。
+Below are some instructions to help you determine how to proceed in case you need to save a monitor that is using the locked mechanism.
 
-#### 作成者または Datadog Admin Role を持つユーザーが編集したロックされたモニター (`locked:true`)
+#### Locked monitors (`locked:true`) edited by creator or user with Datadog Admin Role
 
-あなたは、[Datadog Admin Role][2] を持つユーザー、またはモニターの作成者です。ロックされたモニターを編集すると、次の警告が表示されます。
+You are a user with the [Datadog Admin Role][2] or are the creator of the monitor. You edit a locked monitor and see the following warning:
 
 ```
 This monitor is using the locked attribute: only its creator and admins can edit it. locked is deprecated in favor of restricted_roles. On save, the monitor will be automatically updated to use a restricted_roles attribute set to all roles with Admin permissions. 
 If there is no specific change you want to apply to this monitor's permissions, click Save. If you want to update this monitor's permissions, read this doc.
 ```
-(このモニターは locked 属性を使用しています。作成者と管理者のみが編集できます。locked は廃止され、restricted_roles に代わりました。保存すると、モニターは自動的に更新され、Admin 権限を持つすべてのロールに設定された restricted_roles 属性を使用するようになります。
-このモニターの権限に適用したい特定の変更がない場合、Save をクリックします。このモニターの権限を更新する場合は、このドキュメントをお読みください。)
 
-保存すると、モニターの定義が Admin 権限を持つすべてのロールに更新されます。
-この警告は、モニターに加える変更に応じて、さまざまな方法で対処することができます。
+On save, your monitor's definition will be updated to all roles with Admin permissions.
+You have different ways to handle this warning depending on the changes you are willing to make to your monitor:
 
-**1. モニターの権限を一切変更したくない場合**
+**1. You do not want to change anything about your monitor permissions**
 
-モニターを保存します。Datadog は、ロック機構から制限されたロールにモニターを自動的に移行します。しきい値の更新やメッセージなど、モニターに行った他の更新も同時に保存されます。
+Save the monitor. Datadog automatically migrates the monitor from the locked mechanism to restricted roles. Any other updates you made to your monitor, such as threshold update or message, are saved at the same time.
 
-何も変更せずに **Save** をクリックすると、モニターの更新も実行されます。
+Clicking **Save** without making any changes also performs the update for your monitor.
 
-**2. すべてのユーザーがこのモニターを編集できるようにしたい場合**
+**2. You want to allow all users to edit this monitor**
 
-モニターを保存すると、Datadog が制限されたロールに移行させます。編集ページを再度開きます。**Restrict editing of this monitor to** ドロップダウンメニューで、すべてのロールを削除します。**Save** を再びクリックします。
+Save the monitor, causing Datadog to migrate it to restricted roles. Reopen the editing page. In the **Restrict editing of this monitor to** dropdown menu, remove all roles. Click **Save** a second time.
 
-**3. モニターを一部のロールに制限したいが、Admin 権限を持つすべてのロールに制限されたくない場合**
+**3. You want your monitor to be restricted to some roles, but not to all roles with Admin permissions**
 
-**Restrict editing of this monitor to** ドロップダウンメニューで、このモニターを修正できるロールを選択します。モニターを保存します。モニターは選択したロールにのみ制限されます。
+In the **Restrict editing of this monitor to** dropdown menu, select the roles that can modify this monitor. Save the monitor. Monitor is restricted only to the roles you selected.
 
-#### 非作成者または Datadog Admin Role を持たないユーザーが編集したロックされたモニター (`locked:true`)
+#### Locked monitors (`locked:true`) edited by non creator or user without Datadog Admin Role
 
-あなたは、[Datadog Admin Role][2] を持たないユーザーであり、またモニターの作成者ではありません。ロックされたモニターを編集すると、次の警告が表示されます。
+You are a user without the [Datadog Admin Role][2] and are not the creator of the monitor. You edit a locked monitor and see the following warning:
 
 ```
 This monitor is locked: only its creator and admins can edit it. Read more here.
 ```
-(このモニターはロックされています。作成者と管理者のみが編集可能です。詳しくはこちらをご覧ください。)
 
-このモニターはロックされています。[Datadog Admin Role][2] を持つユーザーまたはモニターの作成者に連絡し、モニターのロール制限にあなたのロールの 1 つを追加するよう依頼してください。管理者は、[ロックされたモニター](#locked-monitors-lockedtrue-edited by-creator-or-user-with-datadog-admin-role)について上記のステップ 2 または 3 を実行する必要があります。
+This monitor is locked. Reach out to a user with the [Datadog Admin Role][2] or to the creator of the monitor and ask them to add one of your roles to the monitor role restrictions. Your admin will have to follow steps two or three above for [locked monitors](#locked-monitors-lockedtrue-edited-by-creator-or-user-with-datadog-admin-role).
 
-**注:** 警告とオプションの間に見られる不一致は予期されるものです。警告は、locked パラメーターを使用しているモニターの現在の状態を反映しています。[Datadog Admin Role][2] を持つユーザーまたはモニターの作成者が編集して保存すると、オプションは、モニターの更新後となるロール制限オプションを反映します。モニターが保存されると、警告は消え、適切な制限されたロールがドロップダウンに入力されます。
+**Note:** The discrepancy you see between the warning and the option is expected. The warning reflects the current state of the monitor that is using the locked parameter. The option reflects the role restriction option your monitor will be updated to once a user with the [Datadog Admin Role][2] or the monitor's creator edits and saves it. Once the monitor is saved, the warning disappears and the appropriate restricted roles populate the dropdown.
 
-#### ロックされていないモニター (`locked:false`、`locked:null`、未定義の `locked`)
+#### Non locked monitors (`locked:false`, `locked:null`, undefined `locked`)
 
-ロックされていないモニターを編集すると、次のオプションが表示されます。
+You edit a non locked monitor and see the following option:
 
-{{< img src="/monitors/guide/monitor_rbac_non_restricted.jpg" alt="RBAC 非制限モニター" >}}
+{{< img src="/monitors/guide/monitor_rbac_non_restricted.jpg" alt="RBAC Non Restricted Monitor" >}}
 
-このオプションは、モニターに加える変更に応じて、さまざまな方法で処理することができます。
+You have different ways to handle this option depending on the changes you are willing to make on your monitor:
 
-**1. モニターの権限を一切変更したくない場合**
+**1. You do not want to change anything about your monitor permissions**
 
-モニターを保存します。Datadog は、ロック機構から制限されたロールにモニターを自動的に移行します。しきい値の更新やメッセージなど、モニターに行った他の更新も同時に保存されます。
+Save the monitor. Datadog automatically migrates the monitor from the locked mechanism to restricted roles. Any other updates you made to your monitor, such as threshold update or message, are saved at the same time.
 
-何も変更せずに **Save** をクリックすると、モニターの更新も実行されます。
+Clicking **Save** without making any changes also performs the update for your monitor.
 
-**2. モニターを一部のロールに制限したい場合**
+**2. You want to restrict your monitor to some roles**
 
-**Restrict editing of this monitor to** ドロップダウンメニューで、このモニターを修正できるロールを選択します。モニターを保存します。モニターは選択したロールに制限されます。
+In the **Restrict editing of this monitor to** dropdown menu, select the roles that can modify this monitor. Save the monitor. Monitor is restricted to the roles you selected.
 
-## その他の参考資料
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/account_management/rbac/
-[2]: /ja/account_management/rbac/?tab=datadogapplication#datadog-default-roles
-[3]: /ja/api/latest/monitors/#edit-a-monitor
-[4]: /ja/monitors/guide/monitor_api_options/#permissions-options
+[1]: /account_management/rbac/
+[2]: /account_management/rbac/?tab=datadogapplication#datadog-default-roles
+[3]: /api/latest/monitors/#edit-a-monitor
+[4]: /monitors/guide/monitor_api_options/#permissions-options

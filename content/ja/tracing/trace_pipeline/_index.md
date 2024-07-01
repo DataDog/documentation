@@ -1,53 +1,54 @@
 ---
+title: The Trace Pipeline
+kind: documentation
 aliases:
-- /ja/tracing/ingestion/
-- /ja/tracing/trace_ingestion/
-- /ja/tracing/trace_retention_and_ingestion/
-description: スパンの取り込みをコントロールする方法を学ぶ
-title: トレースパイプライン
+    - /tracing/ingestion/
+    - /tracing/trace_ingestion/
+    - /tracing/trace_retention_and_ingestion/
+description: "Learn how to control span ingestion"
 ---
 
-{{< img src="tracing/apm_lifecycle/trace_pipeline.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="トレースパイプライン" >}}
+{{< img src="tracing/apm_lifecycle/trace_pipeline.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Pipeline" >}}
 
-インスツルメントされたアプリケーションからトレースを収集し、アプリケーションをエンドツーエンドで視覚化することができます。[トレースエクスプローラー][1]から分散型トレースをクエリして視覚化し、マイクロサービス内のリクエストの流れを理解して、エラーやパフォーマンスの問題を簡単に調査することができます。
+Collect traces from your intrumented applications to gain end-to-end visibility into your applications. Query and visualize distributed traces from the [Trace Explorer][1], understand how requests flow through your microservices and easily investigate errors and performance issues.
 
-APM では、トレースの**取り込み**と**保持**の両方を完全にカスタマイズすることができます。
+With APM, both the **ingestion** and the **retention** of traces are fully customizable.
 
-## 取り込みのメカニズム
+## Ingestion mechanisms
 
-トレースを設定し、きめ細かい[取り込み構成][2]でアプリケーションをエンドツーエンドで可視化することができます。アプリケーションの停止やサービスの応答性低下などのパフォーマンスの問題を見逃さないために、すべてのエラーと高レイテンシーのトレースを含む完全なトレースを取得することができます。
+Set up tracing to gain end-to-end visibility into your applications with fine-grained [ingestion configuration][2]. Make sure to capture complete traces, including all error and high-latency traces to never miss performance issues such as an application outage or an unresponsive service.
 
-{{< img src="tracing/trace_indexing_and_ingestion/service_setup.png" style="width:80%;" alt="サービスセットアップ" >}}
+{{< img src="tracing/trace_indexing_and_ingestion/service_setup.png" style="width:80%;" alt="Service Setup" >}}
 
 
 ## Ingestion controls
 
-[Ingestion Control ページ][3]では、サービス全体の取り込み量と構成設定の概要を確認できます。
+The [Ingestion Control page][3] overviews ingestion volumes and configuration settings across your services.
 
-{{< img src="tracing/trace_indexing_and_ingestion/ingestion_controls_page.png" style="width:100%;" alt="Ingestion Control ページ概要" >}}
+{{< img src="tracing/trace_indexing_and_ingestion/ingestion_controls_page.png" style="width:100%;" alt="Ingestion Control Page Overview" >}}
 
-## スパンからメトリクスを生成する
+## Generating metrics from spans
 
-取り込んだスパンからメトリクスを生成し、そのカスタムメトリクスをクエリや比較に使用することができます。詳しくは、[スパンからメトリクスを生成する][4]を参照してください。
+You can generate metrics from ingested spans, and use those custom metrics for queries and comparisons. Learn more in [Generating Metrics from Spans][4].
 
-{{< img src="tracing/span_to_metrics/metrics_from_spans_1.png" style="width:100%;" alt="スパンベースメトリクスのグラフ" >}}
+{{< img src="tracing/span_to_metrics/metrics_from_spans_1.png" style="width:100%;" alt="Graph of a span-based metric" >}}
 
-## トレースの保持
+## Trace retention
 
-Datadog によってスパンが取り込まれた後、アカウントに設定された[保持フィルター][5]に従って、一部は 15 日間保管されます。Datadog インテリジェント保持フィルターは、アプリケーションの健全性を監視するために、トレースの一定割合をインデックス化します。さらに、独自のカスタム保持フィルターを定義して、組織の目標をサポートするために保持したいトレースデータのインデックスを作成することができます。
+After spans have been ingested by Datadog, some are kept for 15 days according to the [Retention Filters][5] that have been set on your account. The Datadog Intelligent Retention Filter indexes a proportion of traces to help you monitor the health of your applications. Plus, you can define your own custom retention filters to index trace data you want to keep in support your organization's goals.
 
-{{< img src="tracing/trace_indexing_and_ingestion/retention_filters/retention_filters.png" style="width:100%;" alt="保持フィルターページ" >}}
+{{< img src="tracing/trace_indexing_and_ingestion/retention_filters/retention_filters.png" style="width:100%;" alt="Retention Filters Page" >}}
 
-## トレース使用量メトリクス
+## Trace usage metrics
 
-APM 推定使用量や取り込み理由ダッシュボードの使用など、取り込み量やインデックスされたデータの量を追跡・監視する方法については、[使用量メトリクス][6]をご覧ください。
+Learn about how to track and monitor your volume of ingested and indexed data, including using the APM Estimated Usage and Ingestion Reasons dashboards, by reading [Usage Metrics][6].
 
-{{< img src="tracing/trace_indexing_and_ingestion/usage_metrics/dashboard_apm_usage.png" style="width:100%;" alt="APM Estimated Usage ダッシュボード" >}}
+{{< img src="tracing/trace_indexing_and_ingestion/usage_metrics/dashboard_apm_usage.png" style="width:100%;" alt="APM Estimated Usage Dashboard" >}}
 
 
-[1]: /ja/tracing/trace_explorer
-[2]: /ja/tracing/trace_pipeline/ingestion_mechanisms/
-[3]: /ja/tracing/trace_pipeline/ingestion_controls
-[4]: /ja/tracing/trace_pipeline/generate_metrics
-[5]: /ja/tracing/trace_pipeline/trace_retention
-[6]: /ja/tracing/trace_pipeline/metrics
+[1]: /tracing/trace_explorer
+[2]: /tracing/trace_pipeline/ingestion_mechanisms/
+[3]: /tracing/trace_pipeline/ingestion_controls
+[4]: /tracing/trace_pipeline/generate_metrics
+[5]: /tracing/trace_pipeline/trace_retention
+[6]: /tracing/trace_pipeline/metrics

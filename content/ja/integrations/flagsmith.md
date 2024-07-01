@@ -1,121 +1,122 @@
 ---
-app_id: flagsmith
-app_uuid: 0ad66873-2958-4ca5-ae25-ee893b4c6e31
-assets:
-  dashboards:
-    Flagsmith Dashboard: assets/dashboards/flagsmith-dashboard.json
-  integration:
-    auto_install: true
-    configuration: {}
-    events:
-      creates_events: true
-    metrics:
-      check: []
-      metadata_path: metadata.csv
-      prefix: flagsmith.
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 10137
-    source_type_name: Flagsmith
-author:
-  homepage: https://flagsmith.com/
-  name: Flagsmith
-  sales_email: support@flagsmith.com
-  support_email: support@flagsmith.com
-categories:
-- 問題追跡
+"app_id": "flagsmith"
+"app_uuid": "0ad66873-2958-4ca5-ae25-ee893b4c6e31"
+"assets":
+  "dashboards":
+    "Flagsmith Dashboard": assets/dashboards/flagsmith-dashboard.json
+  "integration":
+    "auto_install": true
+    "configuration": {}
+    "events":
+      "creates_events": true
+    "metrics":
+      "check": []
+      "metadata_path": metadata.csv
+      "prefix": flagsmith.
+    "service_checks":
+      "metadata_path": assets/service_checks.json
+    "source_type_id": !!int "10137"
+    "source_type_name": Flagsmith
+"author":
+  "homepage": "https://flagsmith.com/"
+  "name": Flagsmith
+  "sales_email": support@flagsmith.com
+  "support_email": support@flagsmith.com
+"categories":
+- issue tracking
 - developer tools
-dependencies:
-- https://github.com/DataDog/integrations-extras/blob/master/flagsmith/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: flagsmith
-integration_id: flagsmith
-integration_title: Flagsmith
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: 2.0.0
-name: flagsmith
-public_title: Flagsmith
-short_description: Flagsmith のフラグ変更イベントが Datadog に表示されます
-supported_os:
+"custom_kind": "integration"
+"dependencies":
+- "https://github.com/DataDog/integrations-extras/blob/master/flagsmith/README.md"
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "flagsmith"
+"integration_id": "flagsmith"
+"integration_title": "Flagsmith"
+"integration_version": ""
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "flagsmith"
+"public_title": "Flagsmith"
+"short_description": "Flag change events in Flagsmith appear in Datadog"
+"supported_os":
 - linux
 - macos
 - windows
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Issue Tracking
-  - Category::Developer Tools
-  - Offering::UI Extension
-  - Offering::Integration
-  configuration: README.md#Setup
-  description: Flagsmith のフラグ変更イベントが Datadog に表示されます
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Flagsmith
+"tile":
+  "changelog": CHANGELOG.md
+  "classifier_tags":
+  - "Supported OS::Linux"
+  - "Supported OS::macOS"
+  - "Supported OS::Windows"
+  - "Category::Issue Tracking"
+  - "Category::Developer Tools"
+  - "Offering::UI Extension"
+  - "Offering::Integration"
+  "configuration": "README.md#Setup"
+  "description": Flag change events in Flagsmith appear in Datadog
+  "media": []
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": Flagsmith
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
-## 概要
+## Overview
 
-[Flagsmith][1] は、Web、モバイル、およびサーバー側のアプリケーション全体の機能管理を容易にします。Datadog Flagsmith インテグレーションにより、Datadog 内でフラグの変更に関する情報を直接表示できるようになります。
+[Flagsmith][1] facilitates feature management across web, mobile, and server side applications. The Datadog Flagsmith integration enables you to view information about flag changes directly within Datadog.
 
-Flagsmith は、Datadog と以下のインテグレーションを提供しています。
+Flagsmith provides the following integrations with Datadog:
 
-### イベントインテグレーション
+### Events integration
 
-すべてのフラグ変更イベントは Datadog に送信されます。これらのイベントは、変更された環境でタグ付けされています。
+All flag change events are sent to Datadog. These events are tagged with the environment they were changed in.
 
-### ダッシュボードウィジェット
+### Dashboard widget
 
-Flagsmith のダッシュボードウィジェットを使用すると、Flagsmith のフラグと監査ログを Datadog で直接確認することができます。
+Flagsmith's dashboard widget lets you view your Flagsmith Flags and Audit Logs directly in Datadog.
 
-## 計画と使用
+## Setup
 
-[Flagsmith ダッシュボード][2]の Integrations Menu を選択し、Datadog Integration を追加します。[Datadog API キー][3]を入力します。Base URL には、US Datadog サイトを使用している場合は `https://api.datadoghq.com`、EU Datadog サイトを使用している場合は `https://api.datadoghq.eu` を入力します。
+In the [Flagsmith Dashboard][2], select the Integrations Menu and then add the Datadog Integration. Enter your [Datadog API Key][3]. For Base URL, enter `https://api.datadoghq.com` if you are using the US Datadog site, or `https://api.datadoghq.eu` if you are using the EU Datadog site.
 
-### Flagsmith ダッシュボードウィジェット
+### Flagsmith Dashboard widget
 
-1. [Flagsmith インテグレーションタイル][4]で、Flagsmith インテグレーションがインストールされていることを確認します。
-1. Datadog で確認したいアカウントで Flagsmith にログインしていることを確認します。
-1. Datadog で、既存のダッシュボードに移動するか、新しいダッシュボードを作成します。
-1. **Add Widgets** ボタンを押すと、ウィジェットドローワが表示されます。
-1. **Flagsmith** と検索すると、ウィジェットドローワの **Apps** セクションに Flagsmith ウィジェットが見つかります。
-1. **Flagsmith ウィジェットアイコン**を選択すると、ダッシュボードに追加され、**Flagsmith エディタ**モーダルが表示されます。Flag または監査ログビューアウィジェットのいずれかを選択して追加することができます。
-1. ダッシュボードに追加したい Flagsmith Organisation、Project、Environment を選択します。
-1. 選択したら、**Project ID** と **Environment ID** をコピーして Datadog に貼り付けます。
-1. ページサイズと、オプションでフィルターにかけるウィジェットタイトルと Flagsmith Tag を選択します。
-1. **Save** をクリックして、ダッシュボードウィジェットの構成を完了します。
+1. On the [Flagsmith integration tile][4], make sure the integration is installed.
+1. Make sure you are logged into Flagsmith with the account you want to see in Datadog.
+1. In Datadog, navigate to an existing dashboard or create a new one.
+1. Press the **Add Widgets** button to expose the widget drawer.
+1. Search for **Flagsmith** to find the Flagsmith widget in the **Apps** section of the widget drawer.
+1. Select the **Flagsmith widget icon** to add it your your dashboard and open the **Flagsmith editor** modal. You can choose to add either the Flag or Audit log viewer widget.
+1. Select the Flagsmith Organisation, Project and Environment you want to add to your dashboard.
+1. Once selected, copy and paste the **Project ID** and **Environment ID** into Datadog.
+1. Select the page size and, optionally, a widget title and Flagsmith Tag to filter on.
+1. Click **Save** to finish configuring the dashboard widget.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 
-Flagsmith インテグレーションには、メトリクスは含まれません。
+The Flagsmith integration does not include any metrics.
 
-### ヘルプ
+### Service Checks
 
-Flagsmith インテグレーションには、サービスのチェック機能は含まれません。
+The Flagsmith integration does not include any service checks.
 
-### ヘルプ
+### Events
 
-すべての Flagsmith イベントが Datadog のイベントストリームに送信されます。
+All Flagsmith events are sent to the Datadog event stream.
 
-## ヘルプ
+## Troubleshooting
 
-サポートが必要な場合は、 [Flagsmith のドキュメント][5]をご覧いただくか、[Datadog サポート][6]までお問い合わせください。
+Need help? See the [Flagsmith documentation][5] or contact [Datadog Support][6].
 
 [1]: https://www.flagsmith.com/
 [2]: https://app.flagsmith.com/
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: https://app.datadoghq.com/integrations/flagsmith
 [5]: https://docs.flagsmith.com/integrations/datadog/
-[6]: https://docs.datadoghq.com/ja/help/
+[6]: https://docs.datadoghq.com/help/
+

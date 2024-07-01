@@ -1,132 +1,133 @@
 ---
-aliases:
-- /ja/overview
-- /ja/getting_started/faq/
-cascade:
-  algolia:
-    category: はじめに
-    rank: 50
+title: Getting Started
+kind: documentation
 disable_sidebar: true
+aliases:
+    - /overview
+    - /getting_started/faq/
 further_reading:
-- link: https://learn.datadoghq.com/
-  tag: ラーニングセンター
-  text: Datadog を始めるためのコースを受講する
-- link: https://datadoghq.com/blog/
-  tag: ブログ
-  text: Datadog の新しい製品や機能、インテグレーションについて学びましょう
-title: はじめに
+    - link: 'https://learn.datadoghq.com/'
+      tag: 'Learning Center'
+      text: 'Take a course to get started with Datadog'
+    - link: 'https://datadoghq.com/blog/'
+      tag: 'Blog'
+      text: 'Learn about new Datadog products and features, integrations, and more'
+cascade:
+    algolia:
+        rank: 50
+        category: Getting Started
 ---
 
-## Datadog とは？
+## What is Datadog?
 
-Datadog は、任意のスタックでのソフトウェア開発の各フェーズを支援する可観測性プラットフォームです。このプラットフォームは、ビルド、テスト、監視、デバッグ、最適化、セキュリティ確保のための多様な製品から構成されており、これらは単独で使用することも、カスタマイズされたソリューションとして組み合わせることも可能です。
+Datadog is an observability platform that supports every phase of software development on any stack. The platform consists of many products that help you build, test, monitor, debug, optimize, and secure your software. These products can be used individually or combined into a customized solution.
 
-以下の表は、Datadog 製品の例をいくつか列挙したものです。
+The table below lists a few examples of Datadog products:
 
 <table>
     <thead>
-        <th>カテゴリー</th>
-        <th>製品例</th>
+        <th>Category</th>
+        <th>Product examples</th>
     </thead>
     <tr>
-        <td><p><strong>開発</strong></p></td>
+        <td><p><strong>Development</strong></p></td>
         <td>
         <ul>
-        <li><a href="/coscreen/">CoScreen</a> を使って遠隔ペアプログラミングセッションを促進します。</li>
-        <li><a href="/code_analysis/?tab=codevulnerabilities">Code Analysis</a> を使って、テキストエディタや GitHub 上でコードの脆弱性を明示します。</li></ul>
+        <li>Facilitate a remote pair-programming session with <a href="/coscreen/">CoScreen</a>.</li>
+        <li>Highlight code vulnerabilities in your text editor or on GitHub with <a href="/code_analysis/?tab=codevulnerabilities">Code Analysis</a>.</li></ul>
         </td>
     </tr>
     <tr>
-        <td><p><strong>テスト</strong></p></td>
+        <td><p><strong>Testing</strong></p></td>
         <td>
             <ul>
-                <li><a href="/quality_gates/">Quality Gates</a> を使って、欠陥のあるコードが本番環境にデプロイされるのをブロックします。</li>
-                <li><a href="/synthetics/">Synthetic Monitoring</a> を使って、世界中のユーザーをシミュレートし、Web アプリ、API、モバイルアプリケーションをテストします。</li>
+                <li>Block faulty code from deploying to production with <a href="/quality_gates/">Quality Gates</a>.</li>
+                <li>Simulate users around the globe to test your web app, API, or mobile application with <a href="/synthetics/">Synthetic Monitoring</a>.</li>
             </ul>
         </td>
     </tr>
     <tr>
-        <td><p><strong>監視</strong></p></td>
+        <td><p><strong>Monitoring</strong></p></td>
         <td>
             <ul>
-                <li>処理、集計、<a href="/monitors/">アラート</a>をきめ細かく制御しながら、<a href="/logs/">ログ</a>、<a href="/metrics/">メトリクス</a>、<a href="/events/">イベント</a>、<a href="/tracing/glossary/#trace">ネットワークトレース</a>を取り込みます。</li>
-                <li> Continuous Profiler</a> を使ってホストのパフォーマンスを評価します。</li>
-                <li><a href="/tracing/">Application Performance Monitoring</a> を使って、アプリケーションパフォーマンスを評価します。</li>
+                <li>Ingest <a href="/logs/">logs</a>, <a href="/metrics/">metrics</a>, <a href="/events/">events</a>, and <a href="/tracing/glossary/#trace">network traces</a> with granular control over processing, aggregation, and <a href="/monitors/">alerting.</a></li>
+                <li>Assess host performance with <a href="/profiler/">Continuous Profiler</a>.</li>
+                <li>Assess application performance with <a href="/tracing/">Application Performance Monitoring</a>.</li>
             </ul>
         </td>
     </tr>
     <tr>
-        <td><p><strong>トラブルシューティング</strong></p></td>
+        <td><p><strong>Troubleshooting</strong></p></td>
         <td>
             <ul>
-                <li><a href="/error_tracking/">エラー</a>や<a href="/service_management/incident_management/">インシデント</a>を管理し、問題をまとめ、修正を提案します。</li>
-                <li><a href="/real_user_monitoring/">Real User Monitoring</a> を使ってユーザーの離脱を測定し、ユーザーの不満を検出します。</li>
+                <li>Manage <a href="/error_tracking/">errors</a> and <a href="/service_management/incident_management/">incidents</a>, summarizing issues and suggesting fixes.</li>
+                <li>Measure user churn and detect user frustration with <a href="/real_user_monitoring/">Real User Monitoring</a>.</li>
             </ul>
         </td>
     </tr>
     <tr>
-        <td><p><strong>セキュリティ</p></td>
+        <td><p><strong>Security</strong></p></td>
         <td>
             <ul>
-                <li><a href="/security/">Datadog Security</a> を使って脅威と攻撃を検出します。</li>
+                <li>Detect threats and attacks with <a href="/security/">Datadog Security</a>.</li>
             </ul>
         </td>
     </tr>
 </table>
 
-さらに、何百もの[インテグレーション][1]により、既に使用しているテクノロジーに Datadog の機能を統合することができます。例えば、[AWS インテグレーション][2]は、90 以上の AWS サービスからログ、イベント、メトリクスを収集します。
+Additionally, hundreds of [integrations][1] allow you to layer Datadog features over the technologies you already use. For example, the [AWS integration][2] collects logs, events, and metrics from more than 90 AWS services.
 
-## 詳細はこちら
+## Learn more
 
-### コースを受講
-Datadog ラーニングセンターでは、Datadog プラットフォームを実際に体験することができます。[はじめにコース][3]では、可観測性の実践や Datadog のキーコンセプトなどを学ぶことができます。
+### Take a course
+The Datadog Learning Center offers hands-on experience with the Datadog platform. The [Getting Started courses][3] cover observability practices, key Datadog concepts, and more.
 
-Datadog を操作するための最速の入門コースとして、[クイックスタートコース][4]が用意されています。
+For the fastest introduction to navigating Datadog, try the [Quick Start course][4].
 
-### 製品エリアをさらに深掘りする
+### Dive deeper into a product area
 {{< whatsnext desc="Get started with one of the guides below:">}}
-{{< nextlink href="/getting_started/application" >}}<u>Datadog</u>: ダッシュボード、インフラストラクチャーリスト、マップなど、Datadog UI の使い方をご紹介します。{{< /nextlink >}}
-{{< nextlink href="/getting_started/site" >}}<u>Datadog サイト</u>: 地域とセキュリティ要件に適した Datadog サイトを選択します。{{< /nextlink >}}
-{{< nextlink href="/getting_started/devsecops" >}}<u>DevSecOps バンドル</u>: APM DevSecOps およびインフラストラクチャー DevSecOps バンドルで始めましょう。{{< /nextlink >}}
-{{< nextlink href="/getting_started/agent" >}}<u>Agent</u>: ホストから Datadog にメトリクスとイベントを送信します。{{< /nextlink >}}
-{{< nextlink href="/getting_started/api" >}}<u>API</u>: Datadog HTTP API を使い始めましょう。{{< /nextlink >}}
-{{< nextlink href="/getting_started/integrations" >}}<u>インテグレーション</u>: Datadog インテグレーションによるメトリクス、トレース、ログの収集方法をご紹介します。{{< /nextlink >}}
-{{< nextlink href="/getting_started/tagging" >}}<u>タグ</u>: メトリクス、ログ、トレースのタグ付けを始めましょう。{{< /nextlink >}}
-{{< nextlink href="/getting_started/opentelemetry" >}}<u>OpenTelemetry</u>: OpenTelemetry のメトリクス、トレース、ログを Datadog に送信する方法をご紹介します。{{< /nextlink >}}
-{{< nextlink href="/getting_started/learning_center" >}}<u>ラーニングセンター</u>: ラーニングパスをたどったり、セルフガイドのクラスやラボを受講したり、Datadog 認定プログラムを探したりすることができます。{{< /nextlink >}}
+{{< nextlink href="/getting_started/application" >}}<u>Datadog</u>: Discover how to use the Datadog UI: Dashboards, infrastructure list, maps, and more.{{< /nextlink >}}
+{{< nextlink href="/getting_started/site" >}}<u>Datadog Site</u>: Select the appropriate Datadog site for your region and security requirements.{{< /nextlink >}}
+{{< nextlink href="/getting_started/devsecops" >}}<u>DevSecOps Bundles</u>: Get started with the APM DevSecOps and Infrastructure DevSecOps bundles.{{< /nextlink >}}
+{{< nextlink href="/getting_started/agent" >}}<u>Agent</u>: Send metrics and events from your hosts to Datadog.{{< /nextlink >}}
+{{< nextlink href="/getting_started/api" >}}<u>API</u>: Get started with the Datadog HTTP API.{{< /nextlink >}}
+{{< nextlink href="/getting_started/integrations" >}}<u>Integrations</u>: Learn how to collect metrics, traces, and logs with Datadog integrations.{{< /nextlink >}}
+{{< nextlink href="/getting_started/tagging" >}}<u>Tags</u>: Start tagging your metrics, logs, and traces.{{< /nextlink >}}
+{{< nextlink href="/getting_started/opentelemetry" >}}<u>OpenTelemetry</u>: Learn how to send OpenTelemetry metrics, traces, and logs to Datadog.{{< /nextlink >}}
+{{< nextlink href="/getting_started/learning_center" >}}<u>Learning Center</u>: Follow a learning path, take a self-guided class or lab, and explore the Datadog certification program.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Platform Services:">}}
-{{< nextlink href="/getting_started/dashboards" >}}<u>ダッシュボード</u>: 重要な業務質問に答えるためのダッシュボードを作成、共有、維持します。{{< /nextlink >}}
-{{< nextlink href="/getting_started/monitors" >}}<u>モニター</u>: アラートと通知をセットアップして、重要な変更が発生したときにチームに通知します。{{< /nextlink >}}
-{{< nextlink href="/getting_started/incident_management" >}}<u>Incident Management</u>: システムの問題を伝え、追跡します。{{< /nextlink >}}
-{{< nextlink href="/getting_started/workflow_automation" >}}<u>Workflow Automation</u>: アラートやセキュリティシグナルへの対応として、エンドツーエンドプロセスを自動化します。{{< /nextlink >}}
+{{< nextlink href="/getting_started/dashboards" >}}<u>Dashboards</u>: Create, share, and maintain dashboards that answer the work questions that matter to you.{{< /nextlink >}}
+{{< nextlink href="/getting_started/monitors" >}}<u>Monitors</u>: Set up alerts and notifications so that your team knows when critical changes occur.{{< /nextlink >}}
+{{< nextlink href="/getting_started/incident_management" >}}<u>Incident Management</u>: Communicate and track problems in your systems.{{< /nextlink >}}
+{{< nextlink href="/getting_started/workflow_automation" >}}<u>Workflow Automation</u>: Automate end-to-end processes in response to alerts and security signals.{{< /nextlink >}}
 {{< /whatsnext >}}
 
-{{< whatsnext desc="製品:">}}
-{{< nextlink href="/getting_started/containers" >}}<u>コンテナ</u>: Agent オートディスカバリーと Datadog オペレーターの使用方法をご紹介します。{{< /nextlink >}}
-{{< nextlink href="/getting_started/serverless" >}}<u>Serverless for AWS Lambda</u>: サーバーレスインフラストラクチャーからメトリクス、ログ、トレースを収集する方法をご紹介します。{{< /nextlink >}}
-{{< nextlink href="/getting_started/service_catalog" >}}<u>サービスカタログ</u>: サービスカタログで、サービスの所有権、信頼性、パフォーマンスを大規模に管理します。 {{< /nextlink >}}
-{{< nextlink href="/getting_started/tracing" >}}<u>トレーシング</u>: Agent をセットアップして、小さなアプリケーションをトレースします。{{< /nextlink >}}
-{{< nextlink href="/getting_started/profiler" >}}<u>Profiler</u>: Continuous Profiler を使用して、コードのパフォーマンス問題を発見し、修正します。{{< /nextlink >}}
-{{< nextlink href="/getting_started/database_monitoring" >}}<u>Database Monitoring</u>: データベースの健全性とパフォーマンスを表示し、発生した問題を迅速にトラブルシューティングします。{{< /nextlink >}}
-{{< nextlink href="/getting_started/synthetics" >}}<u>Synthetic Monitoring</u>: Synthetic テストを使って、API エンドポイントと主要なビジネスジャーニーのテストと監視を開始します。{{< /nextlink >}}
-{{< nextlink href="/getting_started/session_replay" >}}<u>Session Replay</u>: Session Replay を利用して、ユーザーが製品とどのようにやり取りしているかを詳細に観察できます。{{< /nextlink >}}
-{{< nextlink href="/getting_started/continuous_testing" >}}<u>Continuous Testing</u>: CI パイプラインや IDE でエンドツーエンドの Synthetic テストを実行します。{{< /nextlink >}}
-{{< nextlink href="/getting_started/application_security" >}}<u>Application Security Management</u>: ASM を使ってチームを活性化するためのベストプラクティスをご紹介します。{{< /nextlink >}}
-{{< nextlink href="/getting_started/cloud_security_management" >}}<u>Cloud Security Management</u>: CSM を使ってチームを活性化するためのベストプラクティスをご紹介します。{{< /nextlink >}}
-{{< nextlink href="/getting_started/cloud_siem" >}}<u>Cloud SIEM</u>: Cloud SIEM を使ってチームを活性化するためのベストプラクティスをご紹介します。{{< /nextlink >}}
-{{< nextlink href="/getting_started/ci_visibility" >}}<u>CI Visibility</u>: CI プロバイダーとのインテグレーションをセットアップすることで、CI パイプラインデータを収集します。{{< /nextlink >}}
-{{< nextlink href="/getting_started/logs" >}}<u>ログ</u>: 最初のログを送信し、ログ処理を使ってログを充実させましょう。{{< /nextlink >}}
-{{< nextlink href="/getting_started/test_visibility" >}}<u>Test Visibility</u>: Datadog でテストサービスをセットアップして、CI テストデータを収集します。{{< /nextlink >}}
-{{< nextlink href="/getting_started/intelligent_test_runner" >}}<u>Intelligent Test Runner</u>: コード変更に関連するテストのみを実行することで、テストスイートを最適化し、CI コストを削減します。{{< /nextlink >}}
+{{< whatsnext desc="Product:">}}
+{{< nextlink href="/getting_started/containers" >}}<u>Containers</u>: Learn how to use Agent Autodiscovery and the Datadog operator.{{< /nextlink >}}
+{{< nextlink href="/getting_started/serverless" >}}<u>Serverless for AWS Lambda</u>: Learn how to collect metrics, logs, and traces from your serverless infrastructure.{{< /nextlink >}}
+{{< nextlink href="/getting_started/service_catalog" >}}<u>Service Catalog</u>: Manage service ownership, reliability, and performance at scale in Service Catalog. {{< /nextlink >}}
+{{< nextlink href="/getting_started/tracing" >}}<u>Tracing</u>: Set up the Agent to trace a small application.{{< /nextlink >}}
+{{< nextlink href="/getting_started/profiler" >}}<u>Profiler</u>: Use Continuous Profiler to find and fix performance problems in your code.{{< /nextlink >}}
+{{< nextlink href="/getting_started/database_monitoring" >}}<u>Database Monitoring</u>: View the health and performance of databases, and quickly troubleshoot any issues that arise.{{< /nextlink >}}
+{{< nextlink href="/getting_started/synthetics" >}}<u>Synthetic Monitoring</u>: Start testing and monitoring your API endpoints and key business journeys with Synthetic tests.{{< /nextlink >}}
+{{< nextlink href="/getting_started/session_replay" >}}<u>Session Replay</u>: Get an in-depth look at how users are interacting with your product with Session Replays.{{< /nextlink >}}
+{{< nextlink href="/getting_started/continuous_testing" >}}<u>Continuous Testing</u>: Run end-to-end Synthetic tests in your CI pipelines and IDEs.{{< /nextlink >}}
+{{< nextlink href="/getting_started/application_security" >}}<u>Application Security Management</u>: Discover best practices for getting your team up and running with ASM.{{< /nextlink >}}
+{{< nextlink href="/getting_started/cloud_security_management" >}}<u>Cloud Security Management</u>: Discover best practices for getting your team up and running with CSM.{{< /nextlink >}}
+{{< nextlink href="/getting_started/cloud_siem" >}}<u>Cloud SIEM</u>: Discover best practices for getting your team up and running with Cloud SIEM.{{< /nextlink >}}
+{{< nextlink href="/getting_started/ci_visibility" >}}<u>CI Visibility</u>: Collect CI pipeline data by setting up integrations with your CI providers.{{< /nextlink >}}
+{{< nextlink href="/getting_started/logs" >}}<u>Logs</u>: Send your first logs and use log processing to enrich them.{{< /nextlink >}}
+{{< nextlink href="/getting_started/test_visibility" >}}<u>Test Visibility</u>: Collect CI test data by setting up test services in Datadog.{{< /nextlink >}}
+{{< nextlink href="/getting_started/intelligent_test_runner" >}}<u>Intelligent Test Runner</u>: Optimize your test suite and reduce CI costs by only running tests that are relevant to your code changes.{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/getting_started/integrations/
-[2]: /ja/integrations/amazon_web_services/
+[1]: /getting_started/integrations/
+[2]: /integrations/amazon_web_services/
 [3]: https://learn.datadoghq.com/collections/getting-started
 [4]: https://learn.datadoghq.com/courses/course-quickstart

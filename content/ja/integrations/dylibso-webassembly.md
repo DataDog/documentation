@@ -1,104 +1,105 @@
 ---
-app_id: webassembly-observe-sdk
-app_uuid: 30eb706f-9143-461e-99af-89015e8493d5
-assets: {}
-author:
-  homepage: https://dylibso.com
-  name: Dylibso
-  sales_email: sales@dylibso.com
-  support_email: support@dylibso.com
-categories:
-- 開発ツール
-- 言語
-- profiler_troubleshooting
-dependencies:
-- https://github.com/DataDog/integrations-extras/blob/master/dylibso-webassembly/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: dylibso-webassembly
-integration_id: webassembly-observe-sdk
-integration_title: WebAssembly Observe SDK
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: 2.0.0
-name: dylibso-webassembly
-public_title: WebAssembly Observe SDK
-short_description: 任意のランタイムの WebAssembly (wasm) コードからトレースを抽出
-supported_os:
+"app_id": "webassembly-observe-sdk"
+"app_uuid": "30eb706f-9143-461e-99af-89015e8493d5"
+"assets": {}
+"author":
+  "homepage": "https://dylibso.com"
+  "name": Dylibso
+  "sales_email": sales@dylibso.com
+  "support_email": support@dylibso.com
+"categories":
+- developer tools
+- languages
+- tracing
+"custom_kind": "integration"
+"dependencies":
+- "https://github.com/DataDog/integrations-extras/blob/master/dylibso-webassembly/README.md"
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "dylibso-webassembly"
+"integration_id": "webassembly-observe-sdk"
+"integration_title": "WebAssembly Observe SDK"
+"integration_version": ""
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "dylibso-webassembly"
+"public_title": "WebAssembly Observe SDK"
+"short_description": "Extract traces from WebAssembly (wasm) code from any runtime"
+"supported_os":
 - linux
 - windows
 - macos
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Developer Tools
-  - Category::Languages
-  - Category::Tracing
-  - Supported OS::Linux
-  - Supported OS::Windows
-  - Supported OS::macOS
-  - Submitted Data Type::Traces
-  configuration: README.md#Setup
-  description: 任意のランタイムの WebAssembly (wasm) コードからトレースを抽出
-  media:
-  - caption: アプリケーションで実行されている WebAssembly コードからキャプチャしたトレースを視覚化する
-    image_url: images/wasm-observability.png
-    media_type: image
-  overview: README.md#Overview
-  support: README.md#Support
-  title: WebAssembly Observe SDK
+"tile":
+  "changelog": CHANGELOG.md
+  "classifier_tags":
+  - "Category::Developer Tools"
+  - "Category::Languages"
+  - "Category::Tracing"
+  - "Supported OS::Linux"
+  - "Supported OS::Windows"
+  - "Supported OS::macOS"
+  - "Submitted Data Type::Traces"
+  "configuration": "README.md#Setup"
+  "description": Extract traces from WebAssembly (wasm) code from any runtime
+  "media":
+  - "caption": Visualize captured traces from WebAssembly code running in your application
+    "image_url": images/wasm-observability.png
+    "media_type": image
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": WebAssembly Observe SDK
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
-## 概要
+## Overview
 
-このインテグレーションは、アプリケーションで実行されている WebAssembly (WASM) コードからの関数トレースを提供します。WebAssembly コードのパフォーマンスだけでなく、以下の動作についての洞察も得られます。
-- 関数呼び出し時間
-- 実行トレーシング
-- メモリ割り当て
+This integration provides function traces from WebAssembly (WASM) code running in your application. Gain insight into WebAssembly code performance as well as the following behavior:
+- Function call duration
+- Execution tracing
+- Memory allocation
 
-WebAssembly コードは安全で制約の多い環境で実行されるため、従来のコード監視技術は機能しません。私たちの特化した可観測性スタックを使えば、他のアプリケーションに期待するのと同じレベルで WASM モジュールを継続的に監視することができます。
+Since WebAssembly code is executed in a secure and constrained environment, traditional techniques to monitor code do not work. Our specialized observability stack allows you to continuously monitor WASM modules at the same level you expect of your other applications.
 
-Datadog をご利用のお客様は、オープンソースの SDK と Adapter を使って、WASM プログラムから完全なトレースを出力することができます。お使いのアプリケーション用の Datadog Adapter をインストールするには、[`dylibso/observe-sdk`][1] リポジトリを参照してください。
+Datadog customers can use our open source SDKs and Adapters to emit full traces from your WASM programs. Please see the [`dylibso/observe-sdk`][1] repository to install the Datadog Adapter for your application.
 
-さらに、Dylibso は、既存の WASM モジュールを再コンパイルして、関数とメモリ割り当てのトレースを含めることができる自動インスツルメンテーションツールを提供しています。詳細については、[support@dylibso.com][2] にお問い合わせいただくか、[自動 WebAssembly インスツルメンテーション][3]の詳細をご覧ください。
-
-
-## 計画と使用
-
-### インフラストラクチャーリスト
-
-アプリケーションのプログラミング言語に応じて、GitHub の [`dylibso/observe-sdk`][1] から適切な Datadog Adapter を 1 つ選択します。
+In addition, Dylibso provides automatic instrumentation tooling which can take any existing WASM module and recompile it to include function and memory allocation tracing. For more information, contact [support@dylibso.com][2] or learn more about [automatic WebAssembly instrumentation][3].
 
 
-### ブラウザトラブルシューティング
+## Setup
 
-SDK と Adapter を Datadog Agent に接続するには、以下の情報を準備する必要があります。
+### Installation
 
-1. Datadog Agent のホスト URL。
-2. SDK および Adapter をインポートするアプリケーションのサービス名。
+Depending on the programming language your application is written in, choose one of the appropriate Datadog Adapters from [`dylibso/observe-sdk`][1] on GitHub.
 
-### 検証
 
-Observe SDK 内の利用可能なオプションから Datadog Adapter をインポートし、構成した後、
+### Configuration
 
-1. WebAssembly コードを呼び出す場所に Datadog Adapter が含まれるように、アプリケーションを再デプロイします。
-2. WebAssembly モジュール (`.wasm`) がロードされ、そのエクスポート関数を呼び出していることを確認してください。
-3. Datadog ダッシュボードで、サービスから送信されたトレースを確認します。
+In order to connect the SDK and Adapter to your Datadog Agent, you must have the following information ready:
 
-## リアルユーザーモニタリング
+1. Your Datadog Agent host URL.
+2. The service name of the application where the SDK and Adapter are imported.
 
-### ヘルプ
+### Validation
 
-WebAssembly Observe SDK は、アプリケーションから関数実行やメモリ割り当てイベントのトレースを収集します。
+After you have imported and configured your Datadog Adapter from the available options within the Observe SDK:
 
-## ヘルプ
+1. Redeploy your application so the Datadog Adapter is included where you're calling WebAssembly code.
+2. Ensure that a WebAssembly module (`.wasm`) has been loaded and you are calling one of its exported functions.
+3. Check in your Datadog dashboard for traces sent from your service.
 
-ご不明な点は、[Dylibso サポート][2]までお問い合わせください。
+## Data Collected
+
+### Events
+
+WebAssembly Observe SDK collects traces of function execution and memory allocation events from your application.
+
+## Troubleshooting
+
+Need help? Contact [Dylibso support][2].
 
 [1]: https://github.com/dylibso/observe-sdk
 [2]: mailto:support@dylibso.com
 [3]: https://dylibso.com/products/observe
+

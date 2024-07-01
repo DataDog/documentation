@@ -1,70 +1,95 @@
 ---
-categories:
-- cloud
+"app_id": "google-cloud-apis"
+"app_uuid": "b2dc9b16-68b8-47c0-a9e0-351d9c356baa"
+"assets":
+  "dashboards":
+    "google-cloud-apis": assets/dashboards/google_cloud_apis_overview.json
+  "integration":
+    "auto_install": true
+    "events":
+      "creates_events": false
+    "metrics":
+      "check":
+      - gcp.serviceruntime.api.request_count
+      "metadata_path": metadata.csv
+      "prefix": gcp.
+    "service_checks":
+      "metadata_path": assets/service_checks.json
+    "source_type_id": !!int "262"
+    "source_type_name": Google Cloud APIs
+  "monitors":
+    "[GCP] Number of instances per VPC network is approaching quota limit for {{network_id.name}} in {{project_id.name}}": assets/monitors/compute_instance_vpc_quota.json
+    "[GCP] Service Quota utilization is high for {{quota_metric.name}} in {{project_id.name}}": assets/monitors/serviceruntime_rate_quota.json
+"author":
+  "homepage": "https://www.datadoghq.com"
+  "name": Datadog
+  "sales_email": info@datadoghq.com
+  "support_email": help@datadoghq.com
+"categories":
 - google cloud
-- ログの収集
-dependencies: []
-description: Google Cloud APIs のキーメトリクスを追跡
-doc_link: https://docs.datadoghq.com/integrations/google_cloud_apis/
-draft: false
-git_integration_title: google_cloud_apis
-has_logo: true
-integration_id: google-cloud-apis
-integration_title: Google Cloud APIs
-integration_version: ''
-is_public: true
-custom_kind: integration
-manifest_version: '1.0'
-name: google_cloud_apis
-public_title: Datadog-Google Cloud APIs インテグレーション
-short_description: Google Cloud APIs のキーメトリクスを追跡
-version: '1.0'
+- metrics
+- cloud
+"custom_kind": "integration"
+"dependencies": []
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "google_cloud_apis"
+"integration_id": "google-cloud-apis"
+"integration_title": "Google Cloud APIs"
+"integration_version": ""
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "google_cloud_apis"
+"public_title": "Google Cloud APIs"
+"short_description": "Google Cloud APIs allow you to access Google Cloud Platform products from your code."
+"supported_os": []
+"tile":
+  "changelog": CHANGELOG.md
+  "classifier_tags":
+  - "Category::Google Cloud"
+  - "Category::Metrics"
+  - "Category::Cloud"
+  - "Queried Data Type::Metrics"
+  "configuration": "README.md#Setup"
+  "description": Google Cloud APIs allow you to access Google Cloud Platform products from your code.
+  "media": []
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": Google Cloud APIs
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-## 概要
+<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
+## Overview
 
-Google Cloud APIs を使用すると、Google Cloud Platform 製品にコードからアクセスできます。
+Google Cloud APIs allow you to access Google Cloud Platform products from your code.
 
-Datadog Google Cloud Platform インテグレーションを使用して、Google Cloud APIs からメトリクスを収集できます。
+Use the Datadog Google Cloud Platform integration to collect metrics from Google Cloud APIs.
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-[Google Cloud Platform インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
+If you haven't already, set up the [Google Cloud Platform integration][1] first. There are no other installation steps.
 
-### 収集データ
+## Data Collected
 
-Google Cloud API のログは Google Cloud Logging で収集され、Cloud Pub/Sub トピックを通じて Dataflow ジョブに送信されます。まだの場合は、[Datadog Dataflow テンプレートでロギングをセットアップしてください][2]。
-
-これが完了したら、Google Cloud API のログを Google Cloud Logging から Pub/Sub トピックへエクスポートします。
-
-1. [Google Cloud Logging のページ][3]に移動し、Google Cloud API のログを絞り込みます。
-2. **Create Export** をクリックし、シンクに名前を付けます。
-3. 宛先として "Cloud Pub/Sub" を選択し、その目的で作成された Pub/Sub トピックを選択します。**注**: Pub/Sub トピックは別のプロジェクトに配置できます。
-4. **作成**をクリックし、確認メッセージが表示されるまで待ちます。
-
-## リアルユーザーモニタリング
-
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "google_cloud_apis" >}}
 
 
-### ヘルプ
+### Events
 
-Google Cloud APIs インテグレーションには、イベントは含まれません。
+The Google Cloud APIs integration does not include any events.
 
-### ヘルプ
+### Service Checks
 
-Google Cloud APIs インテグレーションには、サービスのチェック機能は含まれません。
+The Google Cloud APIs integration does not include any service checks.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
+Need help? Contact [Datadog support][3].
 
-[1]: https://docs.datadoghq.com/ja/integrations/google_cloud_platform/
-[2]: https://docs.datadoghq.com/ja/integrations/google_cloud_platform/#log-collection
-[3]: https://console.cloud.google.com/logs/viewer
-[4]: https://github.com/DataDog/dogweb/blob/prod/integration/google_cloud_apis/google_cloud_apis_metadata.csv
-[5]: https://docs.datadoghq.com/ja/help/
+[1]: https://docs.datadoghq.com/integrations/google_cloud_platform/
+[2]: https://github.com/DataDog/dogweb/blob/prod/integration/google_cloud_apis/google_cloud_apis_metadata.csv
+[3]: https://docs.datadoghq.com/help/
+

@@ -1,4 +1,4 @@
 ---
-title: 標準属性
+title: standard attribute
 ---
-標準属性は、デフォルトの属性セットからのものです。これらのデフォルトの属性は、組織の命名規則を作成するためにカスタマイズすることができます。
+A standard attribute is from a default set of attributes. These default attributes can be customized to create a naming convention for your organization.

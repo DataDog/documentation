@@ -1,42 +1,45 @@
 ---
-further_reading:
-- link: https://www.datadoghq.com/blog/collect-traces-logs-from-cloud-run-with-datadog/
-  tag: GitHub
-  text: Cloud Run サービスからのトレース、ログ、カスタムメトリクスの収集
 title: Google Cloud Run
+kind: documentation
+further_reading:
+
+- link: "https://www.datadoghq.com/blog/collect-traces-logs-from-cloud-run-with-datadog/"
+  tag: Blog
+  text: Collect traces, logs, and custom metrics from Cloud Run services
+
 ---
 
-## 概要
+## Overview
 
-Google Cloud Run は、コンテナベースのアプリケーションをデプロイし、スケーリングするためのフルマネージドサーバーレスプラットフォームです。Datadog は、[Google Cloud インテグレーション][1]を通して Cloud Run のモニタリングとログ収集を提供しています。また、Datadog は、トレース、カスタムメトリクス、直接ログ収集を可能にする専用 Agent で Cloud Run アプリケーションをインスツルメントするソリューションも提供しています。
+Google Cloud Run is a fully managed serverless platform for deploying and scaling container-based applications. Datadog provides monitoring and log collection for Cloud Run through the [Google Cloud integration][1]. Datadog also provides a solution for instrumenting your Cloud Run applications with a purpose-built Agent to enable tracing, custom metrics, and direct log collection.
 
-### 前提条件
+### Prerequisites
 
-[Datadog API キー][6]を取得済みであることと、[Datadog トレーシングライブラリがサポートする][2]プログラミング言語を使用していることを確認してください。
+Make sure you have a [Datadog API Key][6] and are using a programming language [supported by a Datadog tracing library][2].
 
-## アプリケーションをインスツルメントする
+## Instrument your application
 
-アプリケーションをインスツルメンテーションするには、[Dockerfile](#dockerfile) と[ビルドパック](#buildpack)の 2 つの方法があります。
+You can instrument your application in one of two ways: [Dockerfile](#dockerfile) or [buildpack](#buildpack).
 
 ### Dockerfile
 
-Datadog は、`serverless-init` コンテナイメージの新しいリリースを Google の gcr.io、AWS の ECR、および Docker Hub に公開しています。
+Datadog publishes new releases of the `serverless-init` container image to Google’s gcr.io, AWS’ ECR, and on Docker Hub:
 
 | dockerhub.io | gcr.io | public.ecr.aws |
 | ------------ | ------ | -------------- |
 | datadog/serverless-init | gcr.io/datadoghq/serverless-init | public.ecr.aws/datadog/serverless-init |
 
-イメージはセマンティックバージョニングに基づいてタグ付けされ、新しいバージョンごとに 3 つの関連タグが付与されます。
+Images are tagged based on semantic versioning, with each new version receiving three relevant tags:
 
-* `1`、`1-alpine`: 重大な変更がない最新のマイナーリリースを追跡する場合、これらを使用します
-* `1.x.x`、`1.x.x-alpine`: ライブラリの正確なバージョンにピン留めする場合、これらを使用します
-* `latest`、`latest-alpine`: 重大な変更が含まれる可能性がある最新のバージョンリリースに従う場合、これらを使用します
+* `1`, `1-alpine`: use these to track the latest minor releases, without breaking changes
+* `1.x.x`, `1.x.x-alpine`: use these to pin to a precise version of the library
+* `latest`, `latest-alpine`: use these to follow the latest version release, which may include breaking changes
 
-## `serverless-init` の動作
+## How `serverless-init` works
 
-`serverless-init` アプリケーションはプロセスをラップし、サブプロセスとしてこれを実行します。このアプリケーションはメトリクス用の DogStatsD リスナーとトレース用の Trace Agent リスナーを起動します。アプリケーションの stdout/stderr ストリームをラップすることでログを収集します。ブートストラップの後、serverless-init はサブプロセスとしてコマンドを起動します。
+The `serverless-init` application wraps your process and executes it as a subprocess. It starts a DogStatsD listener for metrics and a Trace Agent listener for traces. It collects logs by wrapping the stdout/stderr streams of your application. After bootstrapping, serverless-init then launches your command as a subprocess.
 
-完全なインスツルメンテーションを得るには、Docker コンテナ内で実行する最初のコマンドとして `datadog-init` を呼び出していることを確認します。これを行うには、エントリーポイントとして設定するか、CMD の最初の引数として設定します。
+To get full instrumentation, ensure you are calling `datadog-init` as the first command that runs inside your Docker container. You can do this through by setting it as the entrypoint, or by setting it as the first argument in CMD.
 
 {{< programming-lang-wrapper langs="nodejs,python,java,go,dotnet,ruby,php" >}}
 {{< programming-lang lang="nodejs" >}}
@@ -78,9 +81,9 @@ Datadog は、`serverless-init` コンテナイメージの新しいリリース
 
 ### Buildpack
 
-[`Pack Buildpacks`][3] は Dockerfile を使用せずに、コンテナをパッケージ化する便利な手段を提供します。
+[`Pack Buildpacks`][3] provide a convenient way to package your container without using a Dockerfile.
 
-まず、トレーサーを手動でインストールします。
+First, manually install your tracer:
 - [Node.JS][14]
 - [Python][13]
 - [Java][15]
@@ -89,7 +92,7 @@ Datadog は、`serverless-init` コンテナイメージの新しいリリース
 - [Ruby][16]
 - [PHP][17]
 
-次に、以下のコマンドを実行して、アプリケーションを構築します。
+Then, build your application by running the following command:
 
 ```shell
 pack build --builder=gcr.io/buildpacks/builder \
@@ -98,19 +101,19 @@ pack build --builder=gcr.io/buildpacks/builder \
 gcr.io/YOUR_PROJECT/YOUR_APP_NAME
 ```
 
-**注**: ビルドパックのインスツルメンテーションは Alpine イメージと互換性がありません
+**Note**: Buildpack instrumentation is not compatible with Alpine images
 
-## アプリケーションを構成する
+## Configure your application
 
-コンテナが構築され、レジストリにプッシュされたら、最後の手順として Datadog Agent 用に必要な環境変数を設定します。
-- `DD_API_KEY`: データを Datadog アカウントに送信するために使用する Datadog API キー。プライバシーと安全性の問題を考慮して、[Google Cloud シークレット][11]に設定する必要があります。
-- `DD_SITE`: Datadog のエンドポイントと Web サイト。このページの右側で自分のサイトを選択します。あなたのサイトは {{< region-param key="dd_site" code="true" >}} です。
-- `DD_TRACE_ENABLED`: `true` に設定してトレースを有効にします
-- `DD_TRACE_PROPAGATION_STYLE`: これを `datadog` に設定することで、コンテキスト伝搬とログトレースの相関を利用できます。
+Once the container is built and pushed to your registry, the last step is to set the required environment variables for the Datadog Agent:
+- `DD_API_KEY`: Datadog API key, used to send data to your Datadog account. It should be configured as a [Google Cloud Secret][11] for privacy and safety issue.
+- `DD_SITE`: Datadog endpoint and website. Select your site on the right side of this page. Your site is: {{< region-param key="dd_site" code="true" >}}.
+- `DD_TRACE_ENABLED`: set to `true` to enable tracing
+- `DD_TRACE_PROPAGATION_STYLE`: Set this to `datadog` to use context propagation and log trace correlation.
 
-環境変数とその機能の詳細については、[追加の構成](#additional-configurations)を参照してください。
+For more environment variables and their function, see [Additional Configurations](#additional-configurations).
 
-次のコマンドでサービスをデプロイし、どの外部接続からもそのサービスにアクセスできるようにします。`DD_API_KEY` を環境変数として設定し、サービスのリスニングポートを 8080 に設定します。
+The following command deploys the service and allows any external connection to reach it. Set `DD_API_KEY` as an environment variable, and set your service listening to port 8080.
 
 ```
 shell
@@ -122,69 +125,69 @@ gcloud run deploy APP_NAME --image=gcr.io/YOUR_PROJECT/APP_NAME \
   --update-env-vars=DD_TRACE_PROPAGATION_STYLE='datadog' \
 ```
 
-## 結果
+## Results
 
-デプロイが完了すると、メトリクスとトレースが Datadog に送信されます。Datadog で **Infrastructure->Serverless** に移動すると、サーバーレスメトリクスとトレースを確認できます。
+Once the deployment is completed, your metrics and traces are sent to Datadog. In Datadog, navigate to **Infrastructure->Serverless** to see your serverless metrics and traces.
 
-## 追加の構成
+## Additional configurations
 
-- **高度なトレース:** Datadog Agent は、一般的なフレームワーク向けに基本的なトレース機能をすでにいくつか提供しています。さらに詳しい情報については、[高度なトレースガイド][2]に従ってください。
+- **Advanced Tracing:** The Datadog Agent already provides some basic tracing for popular frameworks. Follow the [advanced tracing guide][2] for more information.
 
-- **ログ:** [Google Cloud インテグレーション][1]を使用している場合は、すでにログが収集されています。また、環境変数 `DD_LOGS_ENABLED` を `true` に設定することで、サーバーレスインスツルメンテーションを通じて直接アプリケーションログをキャプチャすることも可能です。
+- **Logs:** If you use the [Google Cloud integration][1], your logs are already being collected. Alternatively, you can set the `DD_LOGS_ENABLED` environment variable to `true` to capture application logs through the serverless instrumentation directly.
 
-- **カスタムメトリクス:** [DogStatsd クライアント][4]を使って、カスタムメトリクスを送信することができます。Cloud Run やその他のサーバーレスアプリケーションの監視には、[ディストリビューション][9]メトリクスを使用します。ディストリビューションは、デフォルトで `avg`、`sum`、`max`、`min`、`count` の集計データを提供します。Metric Summary ページでは、パーセンタイル集計 (p50、p75、p90、p95、p99) を有効にすることができ、タグの管理も可能です。ゲージメトリクスタイプの分布を監視するには、[時間集計と空間集計][11]の両方で `avg`を使用します。カウントメトリクスタイプの分布を監視するには、時間集計と空間集計の両方で `sum` を使用します。
+- **Custom Metrics:** You can submit custom metrics using a [DogStatsd client][4]. For monitoring Cloud Run and other serverless applications, use [distribution][9] metrics. Distributions provide `avg`, `sum`, `max`, `min`, and `count` aggregations by default. On the Metric Summary page, you can enable percentile aggregations (p50, p75, p90, p95, p99) and also manage tags. To monitor a distribution for a gauge metric type, use `avg` for both the [time and space aggregations][11]. To monitor a distribution for a count metric type, use `sum` for both the time and space aggregations.
 
-### 環境変数
+### Environment Variables
 
-| 変数 | 説明 |
+| Variable | Description |
 | -------- | ----------- |
-|`DD_API_KEY`| [Datadog API キー][7] - **必須**|
-| `DD_SITE` | [Datadog サイト][5] - **必須** |
-| `DD_LOGS_ENABLED` | true の場合、ログ (stdout と stderr) を Datadog に送信します。デフォルトは false です。 |
-| `DD_LOGS_INJECTION`| true の場合、[Java][19]、[Node][20]、[.NET][21]、および [PHP][22] でサポートされているロガーのトレースデータですべてのログをリッチ化します。[Python][23]、[Go][24]、[Ruby][25] については追加のドキュメントを参照してください。 |
-| `DD_TRACE_SAMPLE_RATE`|  トレース取り込みのサンプルレート `0.0` と `1.0` をコントロールします。 |
-| `DD_SERVICE`      | [統合サービスタグ付け][6]を参照してください。                                  |
-| `DD_VERSION`      | [統合サービスタグ付け][6]を参照してください。                                  |
-| `DD_ENV`          | [統合サービスタグ付け][6]を参照してください。                                  |
-| `DD_SOURCE`       | [統合サービスタグ付け][6]を参照してください。                                  |
-| `DD_TAGS`         | [統合サービスタグ付け][6]を参照してください。                                  |
+|`DD_API_KEY`| [Datadog API Key][7] - **Required**|
+| `DD_SITE` | [Datadog site][5] - **Required** |
+| `DD_LOGS_ENABLED` | When true, send logs (stdout and stderr) to Datadog. Defaults to false. |
+| `DD_LOGS_INJECTION`| When true, enrich all logs with trace data for supported loggers in [Java][19], [Node][20], [.NET][21], and [PHP][22]. See additional docs for [Python][23], [Go][24], and [Ruby][25]. |
+| `DD_TRACE_SAMPLE_RATE`|  Controls the trace ingestion sample rate `0.0` and `1.0`. |
+| `DD_SERVICE`      | See [Unified Service Tagging][6].                                  |
+| `DD_VERSION`      | See [Unified Service Tagging][6].                                  |
+| `DD_ENV`          | See [Unified Service Tagging][6].                                  |
+| `DD_SOURCE`       | See [Unified Service Tagging][6].                                  |
+| `DD_TAGS`         | See [Unified Service Tagging][6].                                  |
 
-## ヘルプ
+## Troubleshooting
 
-このインテグレーションは、ランタイムに完全な SSL 実装があることが前提です。slim イメージを使用している場合、証明書を含めるために Dockerfile に次のコマンドを追加する必要があります。
+This integration depends on your runtime having a full SSL implementation. If you are using a slim image, you may need to add the following command to your Dockerfile to include certificates.
 
 ```
 RUN apt-get update && apt-get install -y ca-certificates
 ```
 
 
-## その他の参考資料
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /ja/integrations/google_cloud_platform/#log-collection
-[2]: /ja/tracing/trace_collection/#for-setup-instructions-select-your-language
+[1]: /integrations/google_cloud_platform/#log-collection
+[2]: /tracing/trace_collection/#for-setup-instructions-select-your-language
 [3]: https://buildpacks.io/docs/tools/pack/
-[4]: /ja/metrics/custom_metrics/dogstatsd_metrics_submission/
-[5]: /ja/getting_started/site/
-[6]: /ja/getting_started/tagging/unified_service_tagging/
-[7]: /ja/account_management/api-app-keys/#api-keys
+[4]: /metrics/custom_metrics/dogstatsd_metrics_submission/
+[5]: /getting_started/site/
+[6]: /getting_started/tagging/unified_service_tagging/
+[7]: /account_management/api-app-keys/#api-keys
 [8]: https://github.com/DataDog/crpb/tree/main
-[9]: /ja/metrics/distributions/
-[10]: /ja/metrics/#time-and-space-aggregation
+[9]: /metrics/distributions/
+[10]: /metrics/#time-and-space-aggregation
 [11]: https://cloud.google.com/run/docs/configuring/secrets
-[12]: /ja/tracing/trace_collection/library_config/go/
-[13]: /ja/tracing/trace_collection/dd_libraries/python/?tab=containers#instrument-your-application
-[14]: /ja/tracing/trace_collection/dd_libraries/nodejs/?tab=containers#instrument-your-application
-[15]: /ja/tracing/trace_collection/dd_libraries/java/?tab=containers#instrument-your-application
-[16]: /ja/tracing/trace_collection/dd_libraries/ruby/?tab=containers#instrument-your-application
-[17]: /ja/tracing/trace_collection/dd_libraries/php/?tab=containers#install-the-extension
-[18]: /ja/tracing/trace_collection/dd_libraries/dotnet-core/?tab=linux#custom-instrumentation
-[19]: /ja/tracing/other_telemetry/connect_logs_and_traces/java/?tab=log4j2
-[20]: /ja/tracing/other_telemetry/connect_logs_and_traces/nodejs
-[21]: /ja/tracing/other_telemetry/connect_logs_and_traces/dotnet?tab=serilog
-[22]: /ja/tracing/other_telemetry/connect_logs_and_traces/php
-[23]: /ja/tracing/other_telemetry/connect_logs_and_traces/python
-[24]: /ja/tracing/other_telemetry/connect_logs_and_traces/go
-[25]: /ja/tracing/other_telemetry/connect_logs_and_traces/ruby
+[12]: /tracing/trace_collection/library_config/go/
+[13]: /tracing/trace_collection/dd_libraries/python/?tab=containers#instrument-your-application
+[14]: /tracing/trace_collection/dd_libraries/nodejs/?tab=containers#instrument-your-application
+[15]: /tracing/trace_collection/dd_libraries/java/?tab=containers#instrument-your-application
+[16]: /tracing/trace_collection/dd_libraries/ruby/?tab=containers#instrument-your-application
+[17]: /tracing/trace_collection/dd_libraries/php/?tab=containers#install-the-extension
+[18]: /tracing/trace_collection/dd_libraries/dotnet-core/?tab=linux#custom-instrumentation
+[19]: /tracing/other_telemetry/connect_logs_and_traces/java/?tab=log4j2
+[20]: /tracing/other_telemetry/connect_logs_and_traces/nodejs
+[21]: /tracing/other_telemetry/connect_logs_and_traces/dotnet?tab=serilog
+[22]: /tracing/other_telemetry/connect_logs_and_traces/php
+[23]: /tracing/other_telemetry/connect_logs_and_traces/python
+[24]: /tracing/other_telemetry/connect_logs_and_traces/go
+[25]: /tracing/other_telemetry/connect_logs_and_traces/ruby

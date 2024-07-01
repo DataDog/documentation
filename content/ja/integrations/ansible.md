@@ -1,88 +1,89 @@
 ---
-categories:
-- automation
-- configuration & deployment
-- log collection
-- orchestration
-- provisioning
-dependencies: []
-description: 失敗したタスクを追跡し、イベントストリームにプレイブックの実行を表示。
-doc_link: https://docs.datadoghq.com/integrations/ansible/
-draft: false
-git_integration_title: ansible
-has_logo: true
-integration_id: ansible
-integration_title: Ansible
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: '1.0'
-name: ansible
-public_title: Datadog-Ansible インテグレーション
-short_description: 失敗したタスクを追跡し、イベントストリームにプレイブックの実行を表示。
-version: '1.0'
+"categories":
+- "automation"
+- "configuration & deployment"
+- "log collection"
+- "orchestration"
+- "provisioning"
+"custom_kind": "integration"
+"dependencies": []
+"description": "Track failed tasks and see playbook runs in your event stream."
+"doc_link": "https://docs.datadoghq.com/integrations/ansible/"
+"draft": false
+"git_integration_title": "ansible"
+"has_logo": true
+"integration_id": "ansible"
+"integration_title": "Ansible"
+"integration_version": ""
+"is_public": true
+"manifest_version": "1.0"
+"name": "ansible"
+"public_title": "Datadog-Ansible Integration"
+"short_description": "Track failed tasks and see playbook runs in your event stream."
+"version": "1.0"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-{{< img src="integrations/ansible/ansibledashboard.png" alt="Ansible ダッシュボード" popup="true">}}
+{{< img src="integrations/ansible/ansibledashboard.png" alt="Ansible dashboard" popup="true">}}
 
-## 概要
+## Overview
 
-Datadog Ansible コールバックインテグレーションをインストールすると、以下のことができます。
+Install the Datadog Ansible callback integration to:
 
-- Ansible サーバーの実行に関するリアルタイムのレポートを取得できます。
-- すべてのサーバーで Ansible のキーパフォーマンスメトリクスを追跡できます。
-- 失敗した Ansible の実行をすばやく特定してチームで議論できます。
+- Get real-time reports on Ansible server runs
+- Track key Ansible performance metrics across all your servers
+- Quickly identify and discuss failed Ansible runs with your team
 
-Datadog の Ansible インテグレーションの使用方法については、ブログ記事 [Ansible + Datadog: 自動化の監視と監視の自動化][1]を参照してください。
+For more information about using Datadog integrations with Ansible, read the blog post [Ansible + Datadog: Monitor your automation, automate your monitoring][1].
 
-## セットアップ
+## Setup
 
-### インストール
+### Installation
 
-1. 以下の必須の Python ライブラリが、サーバーにインストールされていることを確認します。
+1. Ensure the prerequisite Python libraries are installed on the server:
 
     - datadogpy
-    - pyyaml (`pip install pyyaml` でインストール)
-    - Mac OS X ユーザーの場合: OS にインストールされているバージョン 2.7.10 以前の Python を実行している場合は、`pip install pyopenssl idna` を使用して、新しいバージョンの OpenSSL にアップグレードしてください。
+    - pyyaml (install with `pip install pyyaml`)
+    - For Mac OS X users: If you're running OS-installed Python 2.7.10 or below, upgrade to a newer version of OpenSSL - `pip install pyopenssl idna`
 
-2. [ansible-datadog-callback GitHub リポジトリ][2]を複製します。
-3. `datadog_callback.py` をプレイブックのコールバックディレクトリ (デフォルトでは、プレイブックのルートディレクトリにある callback_plugins/) にコピーします。このディレクトリがない場合は、作成してください。
-4. `datadog_callback.py` と同じ場所に `datadog_callback.yml` ファイルを作成し、このファイルで次のように API キーを設定します。
+2. Clone the [ansible-datadog-callback GitHub repo][2].
+3. Copy `datadog_callback.py` to your playbook callback directory (by default callback_plugins/ in your playbook's root directory). Create the directory if it doesn't exist.
+4. Create a `datadog_callback.yml` file alongside `datadog_callback.py`, and set its contents with your API key, as following:
 
 
         api_key: <YOUR_DATADOG_API_KEY>
 
 
-5. プレイブックが実行されると、Ansible のイベントおよびメトリクスが Datadog に表示されます。
+5. Ansible events and metrics appear in Datadog after your playbook is run.
 
-Ansible を使用して Datadog Agent をインストールするには、[Agent インストール手順][3]を参照してください。
+To install the Datadog Agent using Ansible, see the [Agent Installation Instructions][3].
 
-### ログの収集
+### Log collection
 
-Ansible を使用して、ログ収集を有効にして Datadog Agent をインストールする方法については、[こちらのプレイブックの例を参照][4]してください。
+See the [playbook example][4] to learn how to install the Datadog Agent with log collection enabled using Ansible.
 
-## 収集データ
+## Data Collected
 
-### メトリクス
+### Metrics
 {{< get-metrics-from-git "ansible" >}}
 
 
-### イベント
+### Events
 
-[ansible-datadog-callback][2] が実行中のプレイブックから Ansible のイベントを取得します。
+The [ansible-datadog-callback][2] captures Ansible events from your playbook runs.
 
-### サービスのチェック
+### Service Checks
 
-Ansible インテグレーションには、サービスのチェック機能は含まれません。
+The Ansible integration does not include any service checks.
 
-## トラブルシューティング
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
+Need help? Contact [Datadog support][6].
 
 [1]: https://www.datadoghq.com/blog/ansible-datadog-monitor-your-automation-automate-your-monitoring
 [2]: https://github.com/datadog/ansible-datadog-callback
 [3]: https://app.datadoghq.com/account/settings/agent/latest?platform=ansible
 [4]: https://github.com/DataDog/ansible-datadog#example-playbooks
 [5]: https://github.com/DataDog/dogweb/blob/prod/integration/ansible/ansible_metadata.csv
-[6]: https://docs.datadoghq.com/ja/help/
+[6]: https://docs.datadoghq.com/help/
+

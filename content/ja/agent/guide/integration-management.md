@@ -1,51 +1,50 @@
 ---
+title: Integration Management
 algolia:
-  tags:
-  - インテグレーション管理
-title: インテグレーション管理
+  tags: [integration management]
 ---
 
-## 概要
+## Overview
 
-Agent には Datadog インテグレーションの公式セットが付属しているため、ユーザーはアプリケーションの監視をすぐに開始できます。これらのインテグレーションは、それぞれ Python パッケージとして用意され、個別にアップグレードできます。
+The Agent comes with a set of bundled official Datadog integrations to allow users to start monitoring their applications quickly. These integrations are available as single Python packages, and you can upgrade them separately.
 
-**注**: コミュニティ、パートナー、および Marketplace インテグレーションは、Agent のアップグレード時に保持されません。Agent のバージョンアップ時にこれらのインテグレーションを再インストールする必要があります。
+**Note**: Community, Partner, and Marketplace integrations are not retained when the Agent is upgraded. These integrations need to be re-installed upon upgrading the Agent version.
 
-Agent v6.8 以降では、`datadog-agent integration` コマンドを使用して、Agent で使用できる公式 Datadog インテグレーションを管理できます。このコマンドには、次のサブコマンドがあります。
+For Agent v6.8+, the `datadog-agent integration` command allows users to manage the official Datadog integrations that are available for the Agent. It has the following subcommands:
 
  * [install](#install)
  * [remove](#remove)
  * [show](#show)
  * [freeze](#freeze)
 
-これらのコマンドの使用方法とドキュメントは、`datadog-agent integration --help` を使用して出力できます。
-Linux では `dd-agent` ユーザーとして、Windows では `administrator` として、コマンドを実行します。
+Print the usage and documentation of these commands with `datadog-agent integration --help`.
+For Linux, execute the command as the `dd-agent` user. For Windows, execute the command as an `administrator`.
 
-## インテグレーション管理用コマンド
+## Integration commands
 
-### ワークフロー
+### Workflow
 
-1. `show` コマンドを使用して、Agent にインストールされているインテグレーションのバージョンをチェックします。
-2. [integrations-core][1] リポジトリにある特定のインテグレーションの changelog を確認して、必要なバージョンを決定します。
-3. `install` コマンドを使用して、インテグレーションをインストールします。
-4. Agent を再起動します。
+1. Check the version of the integration installed in your Agent with the `show` command.
+2. Review the changelog of the specific integration on the [integrations-core][1] repository to identify the version you want.
+3. Install the integration with the `install` command.
+4. Restart your Agent.
 
-**注**: 構成管理ツールを使用する場合は、インテグレーションを目的のバージョンに固定することをお勧めします。Agent をアップグレードする準備ができたら、この固定を解除します。インテグレーションのバージョン固定を解除しないで Agent をアップグレードすると、インテグレーションのバージョンが Agent の新しいバージョンと互換性がない場合に、構成管理ツールが失敗する可能性があります。
+**Note**: When using a configuration management tool, it is recommended to pin the integration to the desired version. When you're ready to upgrade the Agent, remove the pin. Upgrading the Agent without removing the integration pin can cause the configuration management tool to fail if the version of the integration is not compatible with the new version of the Agent.
 
-### インストール
+### Install
 
-`datadog-agent integration install` コマンドを使用して、公式 Datadog インテグレーションの特定のバージョン ([integrations-core リポジトリ][1]内) をインストールできます。ただし、そのバージョンが Agent のバージョンと互換性がある必要があります。このコマンドは、互換性を検証し、互換性がない場合はエラー付きで終了します。
+Use the `datadog-agent integration install` command to install a specific version of an official Datadog integration (available on the [integrations-core repository][1]), provided that it is compatible with the version of the Agent. The command does this verification and exits with a failure in case of incompatibilities.
 
-インテグレーションは、両方の条件が満たされた場合、互換性がありインストール可能です。
+An integration is compatible and installable if both conditions are met:
 
-1. [Agent に付属しているバージョン][2]より新しいバージョンである。
-2. インストールされている Agent 内の [datadog_checks_base][3] のバージョンと互換性がある。
+1. The version is newer than the one [shipped with the Agent][2].
+2. It is compatible with the version of the [datadog_checks_base][3] in the installed Agent.
 
-**注**: `datadog_checks_base` を手動でインストールすることはできません。ベースチェックは、Agent をアップグレードすることによってのみアップグレードできます。
+**Note**: `datadog_checks_base` cannot be manually installed. The base check can only be upgraded by upgrading the Agent.
 
-このコマンドの構文は、`datadog-agent integration install <インテグレーション_パッケージ名>==<バージョン>` です。`<インテグレーション_パッケージ名>` は `datadog-` で始まるインテグレーションの名称です。
+The syntax for this command is `datadog-agent integration install <INTEGRATION_PACKAGE_NAME>==<VERSION>` where `<INTEGRATION_PACKAGE_NAME>` is the name of the integration prefixed with `datadog-`.
 
-たとえば、vSphere インテグレーションのバージョン 3.6.0 をインストールするには、以下を実行します。
+For example, to install version 3.6.0 of the vSphere integration, run:
 
 {{< tabs >}}
 {{% tab "Linux" %}}
@@ -54,30 +53,30 @@ sudo -u dd-agent -- datadog-agent integration install datadog-vsphere==3.6.0
 ```
 {{% /tab %}}
 {{% tab "Windows PowerShell" %}}
-`powershell.exe` を**管理者特権** (管理者として実行) で実行します。
+Run `powershell.exe` as **elevated** (run as admin).
 ```powershell
 & "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" integration install datadog-vsphere==3.6.0
 ```
 {{% /tab %}}
 {{< /tabs >}}
 
-このコマンドは、インテグレーションの Python パッケージをインストールすると共に、構成ファイル (`conf.yaml.example`、`conf.yaml.default`、`auto_conf.yaml`) を `conf.d` ディレクトリにコピーして、既存の構成ファイルを上書きします。Agent 全体のアップグレード時にも、同じ処理が行われます。ファイルのコピー中に障害が発生した場合、コマンドはエラー付きで終了しますが、指定したバージョンのインテグレーションはインストールされます。
+The command installs the Python package of the integration and copies the configuration files (`conf.yaml.example`, `conf.yaml.default`, `auto_conf.yaml`) to the `conf.d` directory, overwriting the existing ones. The same thing is done during a full Agent upgrade. If a failure occurs while copying of the files, the command exits with a failure, but the version of the integration you specified still gets installed.
 
-アップグレード後は、Agent を再起動すると、新しくインストールされたインテグレーションの使用が開始されます。
+After upgrading, restart your Agent to begin using the newly installed integration.
 
-このコマンドは特に、Agent の次のバージョンがリリースされるまで待たなくても、個々のインテグレーションをアップグレードして、新機能やバグ修正を利用可能になり次第入手できるように設計されています。**注**: Agent の最新リリースには、常にすべてのインテグレーションのその時点での最新バージョンが付属するため、可能な限り Agent をアップグレードすることをお勧めします。
+This command is designed specifically to allow users to upgrade an individual integration to get a new feature or bugfix as soon as it is available, without needing to wait for the next release of the Agent. **Note**: It is still recommended to upgrade the Agent when possible, as it always ships the latest version of every integration at the time of the release.
 
-Agent をアップグレードすると、このコマンドを使用して個別にアップグレードしたすべてのインテグレーションが、Agent に付属するインテグレーションで上書きされます。
+Upon Agent upgrade, every integration that you individually upgraded using the command gets overwritten by the integration shipped within the Agent.
 
-#### 構成管理ツール
+#### Configuration management tools
 
-構成管理ツールは、このコマンドを利用して、そのバージョンのインテグレーションをインフラストラクチャー全体にデプロイできます。
+Configuration management tools can leverage this command to deploy the version of an integration across your entire infrastructure.
 
-### 削除
+### Remove
 
-インテグレーションを削除するには、`datadog-agent integration remove` コマンドを使用します。このコマンドの構文は `datadog-agent integration remove <インテグレーション_パッケージ名>` です。`<インテグレーション_パッケージ名>` は `datadog-` で始まるインテグレーションの名称です。
+To remove an integration, use the `datadog-agent integration remove` command. The syntax for this command is `datadog-agent integration remove <INTEGRATION_PACKAGE_NAME>` where `<INTEGRATION_PACKAGE_NAME>` is the name of the integration prefixed with `datadog-`.
 
-たとえば、vSphere インテグレーションを削除するには、以下を実行します。
+For example, to remove the vSphere integration, run:
 
 {{< tabs >}}
 {{% tab "Linux" %}}
@@ -86,20 +85,20 @@ sudo -u dd-agent -- datadog-agent integration remove datadog-vsphere
 ```
 {{% /tab %}}
 {{% tab "Windows PowerShell" %}}
-`powershell.exe` を**管理者特権** (管理者として実行) で実行します。
+Run `powershell.exe` as **elevated** (run as admin).
 ```powershell
 & "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" integration remove datadog-vsphere
 ```
 {{% /tab %}}
 {{< /tabs >}}
 
-インテグレーションを削除しても、`conf.d` ディレクトリ内にある対応する構成フォルダーは削除されません。
+Removing an integration does not remove the corresponding configuration folder in the `conf.d` directory.
 
 ### Show
 
-バージョンなど、インストールされているインテグレーションの情報を取得するには、`datadog-agent integration show` コマンドを使用します。このコマンドの構文は `datadog-agent integration show <インテグレーション_パッケージ名>` です。`<インテグレーション_パッケージ名>` は `datadog-` で始まるインテグレーションの名称です。
+To get information, such as the version, about an installed integration, use the `datadog-agent integration show` command. The syntax for this command is `datadog-agent integration show <INTEGRATION_PACKAGE_NAME>` where `<INTEGRATION_PACKAGE_NAME>` is the name of the integration prefixed with `datadog-`.
 
-たとえば、vSphere インテグレーションに関する情報を表示するには、以下を実行します。
+For example, to show information on the vSphere integration, run:
 
 {{< tabs >}}
 {{% tab "Linux" %}}
@@ -108,7 +107,7 @@ sudo -u dd-agent -- datadog-agent integration show datadog-vsphere
 ```
 {{% /tab %}}
 {{% tab "Windows PowerShell" %}}
-`powershell.exe` を**管理者特権** (管理者として実行) で実行します。
+Run `powershell.exe` as **elevated** (run as admin).
 ```powershell
 & "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" integration show datadog-vsphere
 ```
@@ -117,7 +116,7 @@ sudo -u dd-agent -- datadog-agent integration show datadog-vsphere
 
 ### Freeze
 
-Agent の Python 環境にインストールされているすべての Python パッケージを一覧表示するには、`datadog-agent integration freeze` コマンドを使用します。これにより、すべての Datadog インテグレーション (`datadog-` で始まるパッケージ) およびインテグレーションの実行に必要な Python 依存関係が一覧表示されます。
+To list all the Python packages installed in the Agent's Python environment, use the `datadog-agent integration freeze` command. This lists all the Datadog integrations (packages starting with `datadog-`) and the Python dependencies required to run the integrations.
 
 {{< tabs >}}
 {{% tab "Linux" %}}
@@ -126,7 +125,7 @@ sudo -u dd-agent -- datadog-agent integration freeze
 ```
 {{% /tab %}}
 {{% tab "Windows PowerShell" %}}
-`powershell.exe` を**管理者特権** (管理者として実行) で実行します。
+Run `powershell.exe` as **elevated** (run as admin).
 ```powershell
 & "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" integration freeze
 ```

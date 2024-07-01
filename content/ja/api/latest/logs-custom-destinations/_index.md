@@ -1,3 +1,3 @@
 ---
-title: ログのカスタム宛先
+title: Logs Custom Destinations
 ---

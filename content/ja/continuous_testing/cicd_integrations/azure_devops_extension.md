@@ -1,57 +1,57 @@
 ---
 aliases:
-- /ja/synthetics/cicd_integrations/azure_devops_extension
+- /synthetics/cicd_integrations/azure_devops_extension
 dependencies:
-- https://github.com/DataDog/datadog-ci-azure-devops/blob/main/README.md
-description: Synthetics と Datadog CI 拡張機能を使用して、CI パイプラインで使用できるタスクを作成します。
-title: Continuous Testing と Datadog CI Azure DevOps 拡張機能
+- "https://github.com/DataDog/datadog-ci-azure-devops/blob/main/README.md"
+description: Use the Synthetics and Datadog CI extension to create tasks that you can use in a CI pipeline.
+title: Continuous Testing and Datadog CI Azure DevOps Extension
 ---
 [![Visual Studio Marketplace Version](https://img.shields.io/visual-studio-marketplace/v/Datadog.datadog-ci)][1]
 [![Build Status](https://dev.azure.com/datadog-ci/Datadog%20CI%20Azure%20DevOps%20Extension/_apis/build/status%2FDevelopment?branchName=main)](https://dev.azure.com/datadog-ci/Datadog%20CI%20Azure%20DevOps%20Extension/_build/latest?definitionId=4&branchName=main)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
-## 概要
+## Overview
 
-Datadog Continuous Testing Azure DevOps 拡張機能を使用すると、Azure パイプラインの構成内で Synthetic テストを実行し、Azure DevOps を使用しているすべてのチームが、ソフトウェアライフサイクルの各段階で Synthetic テストの恩恵を受けられるようにすることができます。タスクとして [`SyntheticsRunTests`][3] を実行することができます。
+With the Datadog Continuous Testing Azure DevOps Extension, you can run Synthetic tests within your Azure Pipeline configuration and ensure all your teams using Azure DevOps can benefit from Synthetic tests at every stage of the software lifecycle. You can run [`SyntheticsRunTests`][3] as a task.
 
 ## Authentication
 
-### サービス接続
+### Service Connection
 
-[Datadog サイト][11]に接続するために、Datadog は Synthetic Run Test タスクの構成時にカスタムサービス接続を設定することを推奨しています。
+To connect to your [Datadog site][11], Datadog recommends setting up a custom service connection when configuring the Synthetics Run Test task. 
 
-以下の入力が必要です。
+You need to provide the following inputs:
 
-- Datadog site: どの [Datadog サイト][11]に接続し、データを送信するか。
-- Custom subdomain (デフォルト: `app`): Datadog アプリケーションにアクセスするために設定されたカスタムサブドメインの名前。Datadog へのアクセスに使用する URL が `myorg.datadoghq.com` の場合、この値は `myorg` にする必要があります。
-- API Key: Datadog API キー。このキーは、[Datadog 組織][6]によって作成されます。
-- Application key: Datadog アプリケーションキー。このキーは、[Datadog 組織][6]によって作成されます。
+- Datadog site: Which [Datadog site][11] to connect and send data to. 
+- Custom subdomain (default: `app`): The name of the custom subdomain set to access your Datadog application. If the URL used to access Datadog is `myorg.datadoghq.com`, this value needs to be set to `myorg`.
+- API Key: Your Datadog API key. This key is created by your [Datadog organization][6].
+- Application key: Your Datadog application key. This key is created by your [Datadog organization][6].
 
 
-### API キーとアプリケーションキー
+### API and Application keys
 
-- API Key: Datadog API キー。このキーは [Datadog 組織][6]によって作成され、環境変数としてアクセスされます。
-- Application key: Datadog アプリケーションキー。このキーは [Datadog 組織][6]によって作成され、環境変数としてアクセスされます。
-- Datadog site: 接続し、データを送信する [Datadog サイト][11]。
-- Custom subdomain (オプション): Datadog アプリケーションにアクセスするために設定されたカスタムサブドメインの名前。Datadog へのアクセスに使用する URL が `myorg.datadoghq.com` の場合、この値は `myorg` にする必要があります。
+- API Key: Your Datadog API key. This key is created by your [Datadog organization][6] and is accessed as an environment variable.
+- Application key: Your Datadog application key. This key is created by your [Datadog organization][6] and is accessed as an environment variable.
+- Datadog site: The [Datadog site][11] to connect and send data to. 
+- Custom subdomain (optional): The name of the custom subdomain set to access your Datadog application. If the URL used to access Datadog is `myorg.datadoghq.com`, this value needs to be set to `myorg`.
 
-## セットアップ
+## Setup
 
-Datadog アカウントに接続するために、Azure パイプラインプロジェクトで [Datadog CI サービス接続を作成][5]します。一度作成すれば、あとはタスクにサービス接続の名前を入れるだけです。
+To connect to your Datadog account, [create a Datadog CI service connection][5] in your Azure pipelines project. Once created, all you need is the name of the service connection in the tasks.
 
-1. Azure Organization に [Visual Studio Marketplace から Datadog Continuous Testing 拡張機能][1]をインストールします。
-2. [Datadog CI サービス接続](#authentication)に、または [Azure パイプラインプロジェクトのシークレット][7]として Datadog API キーとアプリケーションキーを追加します。
-3. Azure DevOps パイプラインで、`SyntheticsRunTests` タスクを使用します。
+1. Install the [Datadog Continuous Testing extension from the Visual Studio Marketplace][1] in your Azure Organization.
+2. Add your Datadog API and application keys in the [Datadog CI service connection](#authentication), or as [secrets to your Azure Pipelines project][7].
+3. In your Azure DevOps pipeline, use the `SyntheticsRunTests` task.
 
-タスクは[シンプル](#simple-usage)または[複雑](#complex-usage)にすることができます。
+Your task can be [simple](#simple-usage) or [complex](#complex-usage).
 
-## シンプルの使用
+## Simple usage
 
-> **注**: 最近、タスクのメジャーバージョンを `SyntheticsRunTests@0` から `SyntheticsRunTests@1` に変更しました。
+> **Note**: We recently changed the major version of the task from `SyntheticsRunTests@0` to `SyntheticsRunTests@1`.
 >
-> これは**重大な変更ではありません**が、タスクバージョンと拡張機能バージョンの間の調整です。
+> This is **NOT a breaking change**, but an alignment between the task version and the extension version.
 
-### 公開 ID を使用したタスク例
+### Example task using public IDs
 
 ```yaml
 - task: SyntheticsRunTests@1
@@ -64,7 +64,7 @@ Datadog アカウントに接続するために、Azure パイプラインプロ
       jkl-mn0-pqr
 ```
 
-### 既存の `synthetics.json` ファイルを使用したタスク例
+### Example task using existing `synthetics.json` files
 
 ```yaml
 - task: SyntheticsRunTests@1
@@ -75,9 +75,9 @@ Datadog アカウントに接続するために、Azure パイプラインプロ
     files: 'e2e-tests/*.synthetics.json'
 ```
 
-テストファイルの例としては、この [`test.synthetics.json` ファイル][14]を参照してください。
+For an example test file, see this [`test.synthetics.json` file][14].
 
-### 認証にパイプラインシークレットを使用したタスク例
+### Example task using pipeline secrets for authentication
 
 ```yaml
 - task: SyntheticsRunTests@1
@@ -89,13 +89,13 @@ Datadog アカウントに接続するために、Azure パイプラインプロ
     datadogSite: '$(DatadogSite)'
 ```
 
-## 複雑の使用
+## Complex usage
 
-> **注**: 最近、タスクのメジャーバージョンを `SyntheticsRunTests@0` から `SyntheticsRunTests@1` に変更しました。
+> **Note**: We recently changed the major version of the task from `SyntheticsRunTests@0` to `SyntheticsRunTests@1`.
 >
-> これは**重大な変更ではありません**が、タスクバージョンと拡張機能バージョンの間の調整です。
+> This is **NOT a breaking change**, but an alignment between the task version and the extension version.
 
-### `testSearchQuery` を使用したタスク例
+### Example task using the `testSearchQuery`
 
 ```yaml
 - task: SyntheticsRunTests@1
@@ -106,7 +106,7 @@ Datadog アカウントに接続するために、Azure パイプラインプロ
     testSearchQuery: 'tag:e2e-tests'
 ```
 
-### `testSearchQuery` と変数のオーバーライドを使用したタスク例
+### Example task using the `testSearchQuery` and variable overrides
 
 ```yaml
 - task: SyntheticsRunTests@1
@@ -120,9 +120,9 @@ Datadog アカウントに接続するために、Azure パイプラインプロ
       PASSWORD=$(StagingPassword)
 ```
 
-### `configPath` によるグローバル構成オーバーライドを使用したタスク例
+### Example task using a global configuration file with `configPath`
 
-このタスクは、グローバルな `datadog-ci.config.json` ファイルへのパスをオーバーライドします。
+By default, the path to the global configuration file is `datadog-ci.json`. You can override this path with the `config_path` input.
 
 ```yaml
 - task: SyntheticsRunTests@1
@@ -130,50 +130,50 @@ Datadog アカウントに接続するために、Azure パイプラインプロ
   inputs:
     authenticationType: 'connectedService'
     connectedService: 'my-datadog-ci-connected-service'
-    configPath: './synthetics-config.json'
+    configPath: './global.config.json'
 ```
 
-コンフィギュレーションファイルの例としては、この [`global.config.json` ファイル][13] をご覧ください。
+For an example of a global configuration file, see this [`global.config.json` file][13].
 
-## 入力
+## Inputs
 
-| 名前                   | 要件 | 説明                                                                                                                                                                                                                                     |
+| Name                   | Requirement | Description                                                                                                                                                                                                                                     |
 | ---------------------- | :---------: | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `authenticationType`   | _必須_  | Datadog に使用させたい認証のタイプで、`connectedService` または `apiAppKeys` のどちらか。                                                                                                                                                  |
-| `connectedService`     | _オプション_  | [Datadog CI サービス接続](#setup)で、`connectedService` 認証タイプを使用する際に使用する名前。                                                                                                                           |
-| `apiKey`               | _オプション_  | `apiAppKeys` 認証タイプを使用する際の Datadog API キー。このキーは [Datadog 組織][6]によって作成され、[シークレット][7]として保存される必要があります。                                                                              |
-| `appKey`               | _オプション_  | `apiAppKeys` 認証タイプを使用する際の Datadog アプリケーションキー。このキーは [Datadog 組織][6]によって作成され、[シークレット][7]として保存される必要があります。                                                                      |
-| `subdomain`            | _オプション_  | `apiAppKeys` 認証タイプを使用する際に、Datadog アプリケーションにアクセスするために設定するカスタムサブドメインの名前。Datadog にアクセスするための URL が `myorg.datadoghq.com` である場合、この値は `myorg` に設定する必要があります。**デフォルト:** `app`。 |
-| `datadogSite`          | _オプション_  | `apiAppKeys` 認証タイプを使用する場合の [Datadog サイト][11]。**デフォルト:** `datadoghq.com`。                                                                                                                                           |
-| `publicIds`            | _オプション_  | トリガーしたい Synthetic テストの ID を、改行またはカンマで区切ったリスト。値を指定しない場合、タスクは `synthetics.json` という名前のファイルを探します。                                                                       |
-| `testSearchQuery`      | _オプション_  | [検索][8]クエリに対応するテストをトリガーします。これは、テストの構成にタグを付けている場合に便利です。詳しくは、[タグの命名規則とベストプラクティス][10]を参照してください。                                                   |
-| `files`                | _オプション_  | Synthetic テストの構成ファイルを検出するための Glob パターン。**デフォルト:** `{,!(node_modules)/**/}*.synthetics.json`。                                                                                                                                   |
-| `configPath`           | _オプション_  | テストを起動するときに使用されるグローバル JSON 構成。詳細は[構成例][9]を参照してください。**デフォルト:** `datadog-ci.json`。                                                                                              |
-| `variables`            | _オプション_  | Synthetic テストに使用するグローバル変数のリストで、改行またはカンマで区切って指定します。例: `START_URL=https://example.org,MY_VARIABLE=My title`。**デフォルト:** `[]`。                                                                  |
-| `jUnitReport`          | _オプション_  | JUnit レポートを生成したい場合のファイル名。                                                                                                                                                                                    |
-| `pollingTimeout`       | _オプション_  | タスクがテスト結果のポーリングを停止するまでの時間 (ミリ秒単位)。CI レベルでは、この時間以降に完了したテスト結果は失敗とみなされます。**デフォルト:** 30 分。                                                 |
-| `failOnCriticalErrors` | _オプション_  | テストがトリガーされなかったり、Datadog から結果を取得できなかったりした場合に、CI ジョブを失敗させます。**デフォルト:** `false`                                                                                                                                 |
-| `failOnMissingTests`   | _オプション_  | パブリック ID (`publicIds` を使用するか、[テストファイル][14]にリストされている) を持つ指定されたテストが少なくとも 1 つ実行中に見つからない場合 (例えば、プログラム上または Datadog サイトで削除された場合)、CI ジョブを失敗させます。**デフォルト:** `false`     |
-| `failOnTimeout`        | _オプション_  | 少なくとも 1 つのテストがデフォルトのテストタイムアウトを超えた場合、CI ジョブを失敗させます。**デフォルト:** `true`                                                                                                                                                     |
+| `authenticationType`   | _required_  | The type of authentication you want Datadog to use, either `connectedService` or `apiAppKeys`.                                                                                                                                                  |
+| `connectedService`     | _optional_  | The name of the [Datadog CI service connection](#setup) to use when using the `connectedService` authentication type.                                                                                                                           |
+| `apiKey`               | _optional_  | Your Datadog API key when using the `apiAppKeys` authentication type. This key is created by your [Datadog organization][6] and should be stored as a [secret][7].                                                                              |
+| `appKey`               | _optional_  | Your Datadog application key when using the `apiAppKeys` authentication type. This key is created by your [Datadog organization][6] and should be stored as a [secret][7].                                                                      |
+| `subdomain`            | _optional_  | The name of the custom subdomain set to access your Datadog application when using the `apiAppKeys` authentication type. If the URL used to access Datadog is `myorg.datadoghq.com`, this value needs to be set to `myorg`. **Default:** `app`. |
+| `datadogSite`          | _optional_  | The [Datadog site][11] when using the `apiAppKeys` authentication type. **Default:** `datadoghq.com`.                                                                                                                                           |
+| `publicIds`            | _optional_  | A list of tests IDs for Synthetic tests you want to trigger, separated by new lines or commas. If no value is provided, the task looks for files named `synthetics.json`.                                                                       |
+| `testSearchQuery`      | _optional_  | Trigger tests corresponding to a [search][8] query. This can be useful if you are tagging your test configurations. For more information, see [rules and best practices for naming tags][10].                                                   |
+| `files`                | _optional_  | Glob pattern to detect Synthetic tests' config files. **Default:** `{,!(node_modules)/**/}*.synthetics.json`.                                                                                                                                   |
+| `configPath`           | _optional_  | The [global JSON configuration][9] used when launching tests. For more information, see the [example configuration][9]. **Default:** `datadog-ci.json`.                                                                                         |
+| `variables`            | _optional_  | A list of global variables to use for Synthetic tests, separated by new lines or commas. For example: `START_URL=https://example.org,MY_VARIABLE=My title`. **Default:** `[]`.                                                                  |
+| `jUnitReport`          | _optional_  | The filename for a JUnit report if you want to generate one.                                                                                                                                                                                    |
+| `pollingTimeout`       | _optional_  | The duration (in milliseconds) after which the task stops polling for test results. At the CI level, test results completed after this duration are considered failed. **Default:** 30 minutes.                                                 |
+| `failOnCriticalErrors` | _optional_  | Fail the CI job if no tests were triggered, or results could not be fetched from Datadog. **Default:** `false`.                                                                                                                                 |
+| `failOnMissingTests`   | _optional_  | Fail the CI job if at least one specified test with a public ID (using `publicIds` or listed in a [test file][14]) is missing in a run (for example, if it has been deleted programmatically or on the Datadog site). **Default:** `false`.     |
+| `failOnTimeout`        | _optional_  | Fail the CI job if at least one test exceeds the default test timeout. **Default:** `true`.                                                                                                                                                     |
 
-## その他の参考資料
+## Further reading
 
-お役に立つドキュメント、リンクや記事:
+Additional helpful documentation, links, and articles:
 
-- [Continuous Testing と CI/CD の構成][4]
-- [Datadog を使った継続的テストのベストプラクティス][12]
+- [Continuous Testing and CI/CD Configuration][4]
+- [Best practices for continuous testing with Datadog][12]
 
 [1]: https://marketplace.visualstudio.com/items?itemName=Datadog.datadog-ci
 [2]: https://github.com/DataDog/datadog-ci
 [3]: https://github.com/DataDog/datadog-ci-azure-devops/tree/main/SyntheticsRunTestsTask
-[4]: https://docs.datadoghq.com/ja/continuous_testing/cicd_integrations/configuration
+[4]: https://docs.datadoghq.com/continuous_testing/cicd_integrations/configuration
 [5]: https://docs.microsoft.com/en-us/azure/devops/pipelines/library/service-endpoints
-[6]: https://docs.datadoghq.com/ja/account_management/api-app-keys/
+[6]: https://docs.datadoghq.com/account_management/api-app-keys/
 [7]: https://docs.microsoft.com/en-us/azure/devops/pipelines/process/set-secret-variables
-[8]: https://docs.datadoghq.com/ja/synthetics/search/#search
-[9]: https://docs.datadoghq.com/ja/continuous_testing/cicd_integrations/configuration/?tab=npm#setup-the-client
-[10]: https://docs.datadoghq.com/ja/developers/guide/what-best-practices-are-recommended-for-naming-metrics-and-tags/#rules-and-best-practices-for-naming-tags
-[11]: https://docs.datadoghq.com/ja/getting_started/site/
+[8]: https://docs.datadoghq.com/synthetics/search/#search
+[9]: https://docs.datadoghq.com/continuous_testing/cicd_integrations/configuration/?tab=npm#setup-the-client
+[10]: https://docs.datadoghq.com/developers/guide/what-best-practices-are-recommended-for-naming-metrics-and-tags/#rules-and-best-practices-for-naming-tags
+[11]: https://docs.datadoghq.com/getting_started/site/
 [12]: https://www.datadoghq.com/blog/best-practices-datadog-continuous-testing/
 [13]: https://github.com/DataDog/datadog-ci/blob/master/.github/workflows/e2e/global.config.json
-[14]: https://docs.datadoghq.com/ja/continuous_testing/cicd_integrations/configuration/?tab=npm#test-files
+[14]: https://docs.datadoghq.com/continuous_testing/cicd_integrations/configuration/?tab=npm#test-files

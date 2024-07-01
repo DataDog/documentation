@@ -1,58 +1,58 @@
 ---
-aliases:
-- /ja/agent/kubernetes/operator_configuration
-- /ja/containers/kubernetes/operator_configuration
-further_reading:
-- link: /getting_started/containers/datadog_operator
-  tag: ガイド
-  text: Datadog Operator の概要
-- link: https://github.com/DataDog/datadog-operator/blob/main/docs/installation.md
-  tag: GitHub
-  text: 'Datadog Operator: 高度なインストール'
-- link: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md
-  tag: GitHub
-  text: 'Datadog Operator: 構成'
 title: Datadog Operator
+aliases:
+  - /agent/kubernetes/operator_configuration
+  - /containers/kubernetes/operator_configuration
+further_reading:
+  - link: /getting_started/containers/datadog_operator
+    tag: guide
+    text: Getting Started with the Datadog Operator
+  - link: "https://github.com/DataDog/datadog-operator/blob/main/docs/installation.md"
+    tag: Source Code
+    text: "Datadog Operator: Advanced Installation"
+  - link: "https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md"
+    tag: Source Code
+    text: "Datadog Operator: Configuration"
 ---
 
-[Datadog Operator][1] は、Kubernetes 環境に Datadog Agent をデプロイし、構成することができるオープンソースの [Kubernetes Operator][2] です。
+[Datadog Operator][1] is an open source [Kubernetes Operator][2] that enables you to deploy and configure the Datadog Agent in a Kubernetes environment. 
 
-Operator を使用することで、単一の Custom Resource Definition (CRD) を使用して、ノードベースの Agent、[Cluster Agent][3]、[クラスターチェックランナー][4]をデプロイすることができます。Operator は、デプロイのステータス、健全性、およびエラーを Operator の CRD のステータスで報告します。Operator はより高度な構成オプションを使用するため、誤構成のリスクを制限できます。
+By using the Operator, you can use a single Custom Resource Definition (CRD) to deploy the node-based Agent, [Cluster Agent][3], and [cluster checks runner][4]. The Operator reports deployment status, health, and errors in the Operator's CRD status. Because the Operator uses higher-level configuration options, it limits the risk of misconfiguration.
 
-Agent をデプロイすると、Datadog Operator は次のことを提供します。
+Once you have deployed the Agent, the Datadog Operator provides the following:
 
-- Agent 構成の検証
-- すべての Agent が構成を常に把握できるようにする
-- Agent リソースの作成と更新のためのオーケストレーション
-- Operator の CRD ステータスに Agent の構成ステータスを報告する
-- オプションとして、Datadog の [ExtendedDaemonSet][5] を使用した高度な DaemonSet のデプロイメントを使用することができます
+- Validation for your Agent configurations
+- Keeping all Agents up-to-date with your configuration
+- Orchestration for creating and updating Agent resources
+- Reporting of Agent configuration status in the Operator's CRD status
+- Optionally, use of an advanced DaemonSet deployment by using Datadog's [ExtendedDaemonSet][5]
 
-### Helm チャートや DaemonSet ではなく、Datadog Operator を使用する理由は何ですか？
+### Why use the Datadog Operator instead of a Helm chart or DaemonSet?
 
-Kubernetes に Datadog Agent をインストールするために、Helm チャートまたは DaemonSet を使用することも可能です。しかし、Datadog Operator を使用することで、以下のような利点があります。
+You can also use a Helm chart or a DaemonSet to install the Datadog Agent on Kubernetes. However, using the Datadog Operator offers the following advantages:
 
-- Operator には、Datadog のベストプラクティスに基づくデフォルトが組み込まれています。
-- Operator の構成は、将来の機能拡張に対応できるよう、より柔軟になっています。
-- [Kubernetes Operator][2] として、Datadog Operator は Kubernetes API でファーストクラスのリソースとして扱われます。
-- Helm チャートとは異なり、Operator は Kubernetes の Reconciliation Loop に含まれます。
+- The Operator has built-in defaults based on Datadog best practices.
+- Operator configuration is more flexible for future enhancements.
+- As a [Kubernetes Operator][2], the Datadog Operator is treated as a first-class resource by the Kubernetes API.
+- Unlike the Helm chart, the Operator is included in the Kubernetes reconciliation loop.
 
-Datadog は、DaemonSet を使用して Agent をデプロイすることを完全にサポートしていますが、手動で DaemonSet を構成すると、エラーが発生する可能性が高くなります。そのため、DaemonSet の使用はあまり推奨されません。
+Datadog fully supports using a DaemonSet to deploy the Agent, but manual DaemonSet configuration leaves significant room for error. Therefore, using a DaemonSet is not highly recommended.
 
-## 使用方法
+## Usage
 
-Operator を使用して Datadog Agent をデプロイする方法については、[Datadog Operator の概要][6]のガイドを参照してください。
+See the [Getting Started with the Datadog Operator][6] guide to learn how to use the Operator to deploy the Datadog Agent. 
 
-全てのインストールと構成オプションについては、[`datadog-operator`][1] リポジトリにある詳細な[インストール][7]と[構成][8]のページを参照してください。
+For all installation and configuration options, see the detailed [installation][7] and [configuration][8] pages in the [`datadog-operator`][1] repo. 
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: http://github.com/DataDog/datadog-operator
 [2]: https://kubernetes.io/docs/concepts/extend-kubernetes/operator/
-[3]: /ja/containers/cluster_agent
-[4]: /ja/containers/cluster_agent/clusterchecks
+[3]: /containers/cluster_agent
+[4]: /containers/cluster_agent/clusterchecks
 [5]: https://github.com/DataDog/extendeddaemonset
-[6]: /ja/getting_started/containers/datadog_operator
+[6]: /getting_started/containers/datadog_operator
 [7]: https://github.com/DataDog/datadog-operator/blob/main/docs/installation.md
 [8]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md

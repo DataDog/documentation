@@ -1,3 +1,3 @@
 ---
-title: ログ
+title: Logs
 ---

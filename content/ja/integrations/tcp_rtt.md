@@ -1,57 +1,57 @@
 ---
-aliases:
-- /ja/integrations/tcprtt
-categories:
-- network
-dependencies:
-- https://github.com/DataDog/documentation/blob/master/content/en/integrations/tcp_rtt.md
-integration_id: tcp-rtt
 integration_title: TCP RTT
-is_public: true
-custom_kind: integration
 name: tcp_rtt
+custom_kind: integration
 newhlevel: true
-public_title: Datadog-TCP RTT インテグレーション
-short_description: リモートホストへの TCP 接続を監視
+is_public: true
+public_title: Datadog-TCP RTT Integration
+short_description: 'Monitor TCP connectivity to remote hosts.'
+categories:
+    - network
+dependencies:
+    ["https://github.com/DataDog/documentation/blob/master/content/en/integrations/tcp_rtt.md"]
+integration_id: "tcp-rtt"
+aliases:
+    - /integrations/tcprtt
 ---
 
-## 概要
+## Overview
 
-TCP RTT チェックは、Agent のホストと Agent の通信相手のホストの間のラウンドトリップ回数を報告します。このチェックは受動的で、チェックの外部から送信されて受信したパケットの RTT 回数のみを報告します。チェック自身はパケットを送信しません。
+The TCP RTT check reports on roundtrip times between the Agent's host and any host it is communicating with. This check is passive and only reports RTT times for packets being sent and received from outside the check. The check itself does not send any packets.
 
-このチェックは、64 ビットの DEB および RPM Datadog Agent v5 パッケージにのみ付属しています。Agent の他のバージョンで go-metro バイナリをビルドする方法については、[Datadog/go-metro の使用法][1]を参照してください。
+This check is only shipped with the 64-bit DEB and RPM Datadog Agent v5 packages. For other versions of the Agent, see the [Datadog/go-metro usage][1] for instructions on how to build the go-metro binary.
 
-## セットアップ
+## Setup
 
-### インストール
+### Installation
 
-このチェックは、発信パケットから対応する TCP 受信確認までの時間を計算するために、PCAP ライブラリで提供されているタイムスタンプを使用します。そのため、PCAP をインストールして構成する必要があります。
+The check uses timestamps provided by the PCAP library to compute the time between any outgoing packet and the corresponding TCP acknowledgment. As such, PCAP must be installed and configured.
 
-Debian ベースのシステムでは、以下のいずれかを使用します。
+Debian-based systems should use one of the following:
 
 ```text
 $ sudo apt-get install libcap
 $ sudo apt-get install libcap2-bin
 ```
 
-Redhat ベースのシステムでは、以下のいずれかを使用します。
+Redhat-based systems should use one of these:
 
 ```text
 $ sudo yum install libcap
 $ sudo yum install compat-libcap1
 ```
 
-最後に、PCAP を構成します。
+Finally, configure PCAP:
 
 ```text
 $ sudo setcap cap_net_raw+ep /opt/datadog-agent/bin/go-metro
 ```
 
-### コンフィギュレーション
+### Configuration
 
-[Agent のコンフィギュレーションディレクトリ][2]のルートにある `conf.d/` フォルダーの `go-metro.d/conf.yaml` を編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル go-metro.d/conf.yaml][3] を参照してください。
+Edit `go-metro.d/conf.yaml`, in the `conf.d/` folder at the root of your [Agent's configuration directory][2]. See the [sample go-metro.d/conf.yaml][3] for all available configuration options.
 
-次の例では、`app.datadoghq.com` と `192.168.0.22` の TCP RTT 回数を取得します。
+The following example retrieves the TCP RTT times for `app.datadoghq.com` and `192.168.0.22`:
 
 ```yaml
 init_config:
@@ -73,9 +73,9 @@ instances:
           - app.datadoghq.com
 ```
 
-### 検証
+### Validation
 
-チェックが正しく実行されているかを検証するには、Datadog インターフェイスに表示される `system.net.tcp.rtt` メトリクスを確認します。また、`sudo /etc/init.d/datadog-agent status` を実行した場合は、以下のような結果が表示されます。
+To validate that the check is running correctly, you should see `system.net.tcp.rtt` metrics showing in the Datadog interface. Also, if you run `sudo /etc/init.d/datadog-agent status`, you should see something similar to the following:
 
 ```bash
 datadog-agent.service - "Datadog Agent"
@@ -92,16 +92,16 @@ Main PID: 10025 (supervisord)
           └─10047 /opt/datadog-.../python /opt/datadog-agent/agent/agent.py foreground --use-local-forwarder
 ```
 
-TCP RTT チェックが開始している場合は、上のような go-metro 行が表示されます。
+If the TCP RTT check has started you should see something similar to the go-metro line above.
 
-これは受動チェックであるため、yaml ファイルで指定されているホストにパケットがアクティブに送信されない限り、メトリクスは報告されません。
+This is a passive check, so unless there are packets actively being sent to the hosts mentioned in the yaml file, the metrics are not reported.
 
-## 収集データ
+## Data Collected
 
-### メトリクス
+### Metrics
 
 {{< get-metrics-from-git "system" "system.net.tcp.rtt" >}}
 
 [1]: https://github.com/DataDog/go-metro#usage
-[2]: /ja/agent/guide/agent-configuration-files/#agent-configuration-directory
+[2]: /agent/guide/agent-configuration-files/#agent-configuration-directory
 [3]: https://github.com/DataDog/integrations-core/blob/master/go-metro/datadog_checks/go-metro/data/conf.yaml.example

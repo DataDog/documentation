@@ -1,53 +1,53 @@
 ---
-aliases:
-- /ja/logs/log_collection/nxlog
+title: Sinatra
+name: Sinatra
+custom_kind: integration
+description: 'Gather Sinatra application logs.'
+short_description: 'Gather Sinatra application logs.'
 categories:
-- ログの収集
-dependencies:
-- https://github.com/DataDog/documentation/blob/master/content/en/integrations/sinatra.md
-description: Sinatra アプリケーションログを収集
+    - log collection
+aliases:
+    - /logs/log_collection/nxlog
 has_logo: true
-integration_id: sinatra
 integration_title: Sinatra
 is_public: true
-kind: インテグレーション
-name: Sinatra
-public_title: Datadog-Sinatra インテグレーション
-short_description: Sinatra アプリケーションログを収集
+public_title: Datadog-Sinatra Integration
+dependencies:
+    ["https://github.com/DataDog/documentation/blob/master/content/en/integrations/sinatra.md"]
 supported_os:
-- linux
-- mac_os
-- windows
-title: Sinatra
+    - linux
+    - mac_os
+    - windows
+integration_id: "sinatra"
 ---
 
-## 概要
+## Overview
 
-このインテグレーションを使用すると、[Sinatra][1] アプリケーションから Web アクセスログを取得して、以下を監視できます。
+This integration enables you to get web access logging from your [Sinatra][1] applications in order to monitor:
 
-- エラーログ (4xx コード、5xx コード)
-- Web ページの応答時間
-- リクエスト数
-- 送受信されたバイト数
+- Errors logs (4xx codes, 5xx codes)
+- Web pages response time
+- Number of requests
+- Number of bytes exchanged
 
-## セットアップ
+## Setup
 
-### インストール
+### Installation
 
-Sinatra アプリケーションを実行するインスタンスに [Agent をインストール][2]します。
+[Install the Agent][2] on the instance that runs your Sinatra application.
 
-### コンフィギュレーション
+### Configuration
 
-[Sinatra のログ機能][3]は、デフォルトでログを stdout に記録します。[Rack][4] の [CommonLogger][5] を使用して、ログをファイルとコンソールに記録することをお勧めします。
+The default [Sinatra logging][3] feature logs to stdout. Datadog recommends that you use the [Rack][4] [Common Logger][5] in order to log to a file and in the console.
 
-以下に、ログをファイルとコンソールに生成する構成例を示します。これは、Rack 構成ファイル (`config.ru`) または Sinatra アプリケーションの構成ブロックで設定できます。
+Here is a configuration example that generate logs in a file and the console. This can be set in the Rack configuration file (`config.ru`) or the configuration block for your Sinatra application.
 
 ```ruby
 require 'sinatra'
 
 configure do
-  # クラシックスタイルのアプリケーションでは、ログはデフォルトで有効になっています。
-  # したがって、`enable :logging` は必要ありません。
+  # logging is enabled by default in classic style applications,
+  # so `enable :logging` is not needed
   file = File.new("/var/log/sinatra/access.log", 'a+')
   file.sync = true
   use Rack::CommonLogger, file
@@ -58,24 +58,24 @@ get '/' do
 end
 ```
 
-このロガーは、一般的な Apache アクセス形式を使用して、次の形式でログを生成します。
+This logger uses the common Apache Access format and generates logs in the following format:
 
 ```text
 127.0.0.1 - - [15/Jul/2018:17:41:40 +0000] "GET /uptime_status HTTP/1.1" 200 34 0.0004
 127.0.0.1 - - [15/Jul/2018 23:40:31] "GET /uptime_status HTTP/1.1" 200 6997 1.8096
 ```
 
-#### ログの収集
+#### Log collection
 
-_Agent バージョン 6.0 以降で利用可能_
+_Available for Agent versions >6.0_
 
-1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
+1. Collecting logs is disabled by default in the Datadog Agent. Enable it in your `datadog.yaml` file with:
 
     ```yaml
     logs_enabled: true
     ```
 
-2. Sinatra アプリケーションログの収集を開始するには、[Agent の構成ディレクトリ][6]のルートにある `sinatra.d/conf.yaml` ファイルに次の構成ブロックを追加します。
+2. Add this configuration block to your `sinatra.d/conf.yaml` file at the root of your [Agent's configuration directory][6] to start collecting your Sinatra application logs:
 
     ```yaml
     logs:
@@ -85,14 +85,14 @@ _Agent バージョン 6.0 以降で利用可能_
         service: webapp
     ```
 
-      `path` パラメーターと `service` パラメーターの値を変更し、環境に合わせて構成してください。
+      Change the `path` and `service` parameter values and configure them for your environment.
 
-3. [Agent を再起動します][7]。
+3. [Restart the Agent][7]
 
 [1]: http://sinatrarb.com
 [2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: http://sinatrarb.com/intro.html#Logging
 [4]: http://rack.github.io
 [5]: https://www.rubydoc.info/github/rack/rack/Rack/CommonLogger
-[6]: /ja/agent/guide/agent-configuration-files/#agent-configuration-directory
-[7]: /ja/agent/guide/agent-commands/#restart-the-agent
+[6]: /agent/guide/agent-configuration-files/#agent-configuration-directory
+[7]: /agent/guide/agent-commands/#restart-the-agent

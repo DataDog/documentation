@@ -1,31 +1,31 @@
 ---
+title: Create An API Test With The API
+kind: guide
 further_reading:
 - link: /api/latest/synthetics/
   tag: API
   text: Synthetics API
 - link: /synthetics/
-  tag: ドキュメント
-  text: Synthetic モニタリングについて
-- link: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_test
-  tag: Terraform
-  text: Terraform による Synthetic API テストの作成と管理
-kind: ガイド
-title: API で API テストを作成する
+  tag: Documentation
+  text: Learn about Synthetic Monitoring
+- link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_test"
+  tag: External Site
+  text: Create and manage Synthetic API tests with Terraform
 ---
 
-## 概要
+## Overview
 
-このガイドには、API テストの作成に使用できるコンフィギュレーションファイルの例や [Terraform][2] リソースへのリンク、グローバル変数などの関連する Synthetics リソースが含まれています。
+This guide contains examples of configuration files and links to [Terraform][2] resources you can use to create API tests, as well as associated synthetics resources such as global variables.
 
-   - API を使用している場合は、[JSON の構成例](#json-configuration)を参照してください。
-   - Python クライアントを使用している場合は、[Python クライアントの例](#python-client)を参照してください。
-   - Terraform を使用している場合は、[Terraform の例](#terraform)を参照してください。
+   - If you're using the API, see the [JSON configuration examples](#json-configuration) 
+   - If you're using the Python client, see the [Python client example](#python-client)
+   - If you're using Terraform, see the [Terraform example](#terraform)
 
-詳しくは、API ドキュメントの [API テストの作成][1]をご覧ください。
+For more information, see [Create an API test][1] in the API documentation.
 
-## JSON コンフィギュレーション
+## JSON configuration
 
-### HTTP テスト
+### HTTP test
 
 {{< code-block lang="json" disable_copy="false" collapsible="true" >}}
 {
@@ -81,7 +81,7 @@ title: API で API テストを作成する
 }
 {{< /code-block >}}
 
-### SSL テスト
+### SSL test
 
 {{< code-block lang="json" disable_copy="false" collapsible="true" >}}
 {
@@ -136,7 +136,7 @@ title: API で API テストを作成する
 }
 {{< /code-block >}}
 
-### DNS テスト
+### DNS test
 
 {{< code-block lang="json" disable_copy="false" collapsible="true" >}}
 {
@@ -192,7 +192,7 @@ title: API で API テストを作成する
 }
 {{< /code-block >}}
 
-### WebSocket テスト
+### WebSocket test
 
 {{< code-block lang="json" disable_copy="false" collapsible="true" >}}
 {
@@ -241,7 +241,7 @@ title: API で API テストを作成する
 }
 {{< /code-block >}}
 
-### TCP テスト
+### TCP test
 
 {{< code-block lang="json" disable_copy="false" collapsible="true" >}}
 {
@@ -286,7 +286,7 @@ title: API で API テストを作成する
 }
 {{< /code-block >}}
 
-### UDP テスト
+### UDP test
 
 {{< code-block lang="json" disable_copy="false" collapsible="true" >}}
 {
@@ -336,7 +336,7 @@ title: API で API テストを作成する
 }
 {{< /code-block >}}
 
-### ICMP テスト
+### ICMP test
 
 {{< code-block lang="json" disable_copy="false" collapsible="true" >}}
 {
@@ -392,9 +392,9 @@ title: API で API テストを作成する
 }
 {{< /code-block >}}
 
-## Python クライアント
+## Python client
 
-### HTTP テスト
+### HTTP test
 
 {{< code-block lang="python" disable_copy="false" collapsible="true" >}}
 import os
@@ -404,14 +404,14 @@ from datadog_api_client.v1.api import synthetics_api
 from datadog_api_client.v1.models import *
 from pprint import pprint
 
-// サポートされているすべてのコンフィギュレーションパラメータの一覧は configure.py を参照してください
+// See configuration.py for a list of all supported configuration parameters
 configuration = Configuration(
     host = "https://api.datadoghq.com",
     api_key= {"apiKeyAuth": "<YOUR_API_KEY>","appKeyAuth": "<YOUR_APPLICATION_KEY>"}
 )
 
-// ApiClient 構成に api_client が設定された API クライアントのインスタンスを持つコンテキストを入力します:
-    // API クラスのインスタンスを作成します
+// Enter a context with an instance of the API client where the ApiClient configuration is set as api_client:
+    // Create an instance of the API class
     api_instance = synthetics_api.SyntheticsApi(api_client)
     body = SyntheticsAPITest(
         config=SyntheticsAPITestConfig(
@@ -455,45 +455,45 @@ configuration = Configuration(
             "python-client",
         ],
         type=SyntheticsAPITestType("api"),
-    )  # SyntheticsAPITest | 作成するテストの詳細。
+    )  # SyntheticsAPITest | Details of the test to create.
 
-    // デフォルトが設定されていない必須の値のみを渡す例
+    // example passing only required values which don't have defaults set
     try:
-        // API テストを作成します
+        // Create an API test
         api_response = api_instance.create_synthetics_api_test(body)
         pprint(api_response)
     except ApiException as e:
         print("Exception when calling SyntheticsApi->create_synthetics_api_test: %s\n" % e)
 {{< /code-block >}}
 
-## ダッシュボード  
+## Terraform
 
-### API テスト
+### API tests
 
-[Synthetic テストリソース][7]を使用して、`type` を `api` に設定することで、Terraform で API テストを作成・管理することができます。
+The [synthetic test resource][7], with `type` set to `api`, can be used to create and manage your API tests through Terraform. 
 
-### プライベートロケーション
+### Private locations
 
-カスタムロケーションや保護されたロケーションから Synthetic テストを実行する必要がある場合は、[プライベートロケーションリソース][3]を使用して、テストを実行するプライベートロケーションを作成および管理できます。[プライベートロケーション][4]のページで詳細をご覧ください。
+If you need to run your synthetic tests from custom or secured locations, you can use the [private location resource][3] to create and manage private locations to run your tests from. Learn more on the [private locations][4] page.
 
-### グローバル変数とローカル変数
+### Global and local variables
 
-[Synthetics グローバル変数リソース][5]を使用して、Synthetics グローバル変数を作成・管理します。これはテスト間で安全に共有できる変数です。また、[config_variable][9] でネストされたスキーマを使用して、テスト固有の[組み込みのローカル変数][8]を作成することもできます。
+Use the [synthetics global variable resource][5] to create and manage synthetics global variables, which are variables that can be securely shared across tests. You can also create test-specific [local variables with builtins][8] by defining the [config_variable][9] nested schema with `type = "text"` in your synthetic test resources.
 
-### 同時実行上限
+### Concurrency cap
 
-[Synthetics の同時実行上限リソース][6]を使用すると、並列で実行される Synthetic テストの数を制限することができます。
+The [synthetics concurrency cap resource][6] enables you to limit the number of synthetic tests run in parallel.
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/api/latest/synthetics/#create-an-api-test
+[1]: /api/latest/synthetics/#create-an-api-test
 [2]: https://www.terraform.io/
 [3]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_private_location
-[4]: /ja/synthetics/private_locations
+[4]: /synthetics/private_locations
 [5]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_global_variable
 [6]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_concurrency_cap
 [7]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_test
-[8]: https://docs.datadoghq.com/ja/synthetics/api_tests/http_tests/?tab=requestoptions#create-local-variables
+[8]: https://docs.datadoghq.com/synthetics/api_tests/http_tests/?tab=requestoptions#create-local-variables
 [9]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_test#nested-schema-for-config_variable

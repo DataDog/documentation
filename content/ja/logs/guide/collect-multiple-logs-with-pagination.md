@@ -1,32 +1,33 @@
 ---
-title: ページ区切りで複数のログを収集する
-kind: ガイド
+title: Collect multiple logs with Pagination
+kind: guide
 further_reading:
-  - link: /logs/log_configuration/processors
-    tag: ビデオ
-    text: ログの処理方法について
-  - link: /logs/log_configuration/parsing
-    tag: ビデオ
-    text: パースの詳細
-  - link: /logs/live_tail/
-    tag: ビデオ
-    text: Datadog Live Tail 機能
-  - link: /logs/explorer/
-    tag: ビデオ
-    text: ログの調査方法
-  - link: /logs/logging_without_limits/
-    tag: ビデオ
-    text: 無制限のロギング*
+- link: /logs/log_configuration/processors
+  tag: Documentation
+  text: Discover how to process your logs
+- link: /logs/log_configuration/parsing
+  tag: Documentation
+  text: Learn more about parsing
+- link: /logs/live_tail/
+  tag: Documentation
+  text: Datadog live tail functionality
+- link: /logs/explorer/
+  tag: Documentation
+  text: See how to explore your logs
+- link: /logs/logging_without_limits/
+  tag: Documentation
+  text: Logging without limit*
 ---
-## 概要
 
-[ログ API][1] によって返される最大 1000 個のログ制限より長いログリストを取得するには、ページ区切り機能を使用する必要があります。
+## Overview
+
+To retrieve a log list longer than the maximum 1000 logs limit returned by the [Logs API][1], you must use the Pagination feature.
 
 {{< tabs >}}
 
 {{% tab "V1 API" %}}
 
-まず、クエリを作成して、特定のコンテキスト、たとえば設定されたタイムフレームでの特定のクエリのログを取得します。
+Start by creating a query to retrieve your logs for a given context, for example, for a given query in a set timeframe:
 
 ```bash
 curl -X POST https://api.datadoghq.com/api/v1/logs-queries/list \
@@ -44,7 +45,7 @@ curl -X POST https://api.datadoghq.com/api/v1/logs-queries/list \
     }'
 ```
 
-結果例:
+Example result:
 
 ```json
 {
@@ -55,11 +56,11 @@ curl -X POST https://api.datadoghq.com/api/v1/logs-queries/list \
 }
 ```
 
-`logs` パラメーターは Log オブジェクトの配列であり、最大でクエリの `limit` パラメーターで定義された数のログが含まれます。このパラメーターはデフォルトで `50` ですが、最大 `1000` に設定できます。クエリに一致したログの量が  `limit` より大きい場合、`nextLogId` パラメーターは `null` と等しくなりません。
+The `logs` parameter is an array of Log objects and at maximum it contains as many logs as defined with the `limit` parameter in your query. This parameter equals `50` by default, but can be set up to `1000`. If the amount of logs that matched your query is greater than the `limit`, then the `nextLogId` parameter is not equal to `null`.
 
-**`nextLogId` パラメーターが `null` 以外の値を返す場合、入力したクエリが、返されたものよりも多くのログに一致したことを示します**。
+**When the `nextLogId` parameters returns something other than `null`, it indicates that the query you entered matched more logs than just the one returned**.
 
-ログの次のページを取得するにはクエリを再送信しますが、今回は、前の呼び出しから `nextLogId` 値を取得する `startAt` パラメーターを使用します。
+To retrieve the next page of logs, re-send your query, but this time with the `startAt` parameter that takes the `nextLogId` value from the previous call:
 
 ```bash
 curl -X POST https://api.datadoghq.com/api/v1/logs-queries/list \
@@ -78,7 +79,7 @@ curl -X POST https://api.datadoghq.com/api/v1/logs-queries/list \
     }'
 ```
 
-これは次の結果を返します。
+Which returns these results:
 
 ```json
 {
@@ -89,14 +90,14 @@ curl -X POST https://api.datadoghq.com/api/v1/logs-queries/list \
 }
 ```
 
-ログのすべてのページを見るには、`startAt` パラメーターが前の呼び出しから `nextLogId` 値を取得するクエリを再送信し続けます。`nextLogId` が `null` を返したら、クエリに関連付けられたログのすべてのページが返ったことになります。
+To see every page of your logs, continue to resend your query where the `startAt` parameter takes the `nextLogId` value from the previous call. When the `nextLogId` returns `null`, you have returned all pages of logs associated with your query.
 
-**注**: ページ区切りの結果をより適切に制御するには、絶対的な `time` パラメーターを使用します。`now` キーワードは使用しないでください。
+**Notes**: For better control over pagination results, use an absolute `time` parameter - don't use the`now` keyword.
 
 {{% /tab %}}
 
 {{% tab "V2 API" %}}
-まず、クエリを作成して、特定のコンテキスト、たとえば設定されたタイムフレームでの特定のクエリのログを取得します。
+Start by creating a query to retrieve your logs for a given context, for example, for a given query in a set timeframe:
 
 ```bash
 curl -X POST https://api.datadoghq.com/api/v2/logs/events/search \
@@ -116,7 +117,7 @@ curl -X POST https://api.datadoghq.com/api/v2/logs/events/search \
         }
 }'
 ```
-結果例:
+Example result:
 
 ```json
 {
@@ -137,9 +138,9 @@ curl -X POST https://api.datadoghq.com/api/v2/logs/events/search \
   }
 }
 ```
-`data` パラメーターは Log オブジェクトの配列であり、最大でクエリの `limit` パラメーターで定義された数のログが含まれます。このパラメーターはデフォルトで `50` ですが、最大 `1000` に設定できます。
+The `data` parameter is an array of Log objects and at maximum it contains as many logs as defined with the `limit` parameter in your query. This parameter equals `50` by default, but can be set up to `1000`. 
 
-ログの次のページを見るには、前の呼び出しから `after` 値を取得する `cursor` パラメーターを含めてクエリを再送信し続けます。`data` が `null` を返したら、クエリに関連付けられたログのすべてのページが返ったことになります。
+To see next page of your logs, continue to resend your query but include the `cursor` parameter where it takes the `after` value from the previous call. When you see `data` returns `null`, you have returned all pages of logs associated with your query.
 
 ```bash
 curl -X POST https://api.datadoghq.com/api/v2/logs/events/search \
@@ -160,7 +161,7 @@ curl -X POST https://api.datadoghq.com/api/v2/logs/events/search \
         }
 }'
 ```
-これは次の結果を返します。
+Which returns these results:
 
 ```json
 {
@@ -186,10 +187,10 @@ curl -X POST https://api.datadoghq.com/api/v2/logs/events/search \
 
 {{< /tabs >}}
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-*Logging without Limits は Datadog, Inc. の商標です。
+*Logging without Limits is a trademark of Datadog, Inc.
 
-[1]: /ja/api/v1/logs/#get-a-list-of-logs
+[1]: /api/v1/logs/#get-a-list-of-logs

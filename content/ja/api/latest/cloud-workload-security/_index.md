@@ -1,3 +1,3 @@
 ---
-title: クラウドワークロードセキュリティ
+title: Cloud Workload Security
 ---

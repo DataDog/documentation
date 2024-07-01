@@ -1,197 +1,195 @@
 ---
-description: Datadog にデータを流した後の推奨ステップ。
+title: Delivering value
+description: "Recommended steps after you have data flowing into Datadog."
 private: true
-title: 価値の提供
 ---
 
-データの取り込みを設定した後、さらにいくつかのステップを踏むことで、クライアントにとっての価値を最大化することができます。ここでは、注目すべき主要な領域をいくつか紹介します。
+After you've set up data ingestion, you can take several additional steps to maximize the value for your clients. Here are some key areas to focus on.
 
-## モニターとダウンタイムの設定
+## Setting up monitors and downtimes
 
-モニターとアラートは、検査や介入が必要な特定のシステムやサービスに人間の注意を向けさせます。アラートを生成するために、Datadog は以下を提供します。
-- モニター - アラート条件の定義
-- ダウンタイム - アラートを発生させたり抑制したりする時間帯
+Monitors and alerts draw human attention to particular systems and services that require inspection and intervention. To generate alerts, Datadog offers:
+- Monitors - the definitions for alert conditions
+- Downtimes - time periods when alerts should be raised or suppressed
 
-一般的なモニターの概念に慣れるために、以下の資料を参照してください。
-- [アラート設定][1]
-- [モニター入門 - 重要事項をアラート][2] (ブログ)
-- [モニタリング入門][3] (トレーニング)
+To familiarize yourself with the concept of monitors in general, see the following resources:
+- [Alerting][1]
+- [Monitoring 101 - Alerting on what matters][2] (blog).
+- [Intro to Monitoring][3] (Training).
 
-### モニターの移行
+### Monitor migrations
 
-サービスプロバイダーは、しばしばクライアントを別のモニタリングまたは観測可能性プラットフォームから Datadog に移行する必要があります。このような場合、以前のソリューションのモニターを Datadog で複製することが論理的に思えるかもしれません。このアプローチでは、Datadog の最も有用な機能の多くが使用されないままになってしまうことがよくあります。特に、問題の検出と解決時間を改善したり、アラート疲労を軽減したりする機能は見逃せません。
+Service providers often need to migrate a client from a different monitoring or observability platform to Datadog. In such cases, it might seem logical to replicate any monitor from the previous solution in Datadog. This approach often results in many of Datadog's most useful features going unused. In particular, you don't want to miss features that improve issue detection and resolution times or reduce alert fatigue.
 
-移行プロジェクトを開始する前に、既存のアラートおよびしきい値の定義を確認し、以下の質問に回答してください。
-- メトリクスに時間的な変動がありますか？[異常モニター][4]の方が良いかもしれません。
-- メトリクスに負荷に応じた変動がありますか？メトリクスに負荷を示すメトリクスを組み合わせることで、[演算モニター][5]が最適なアプローチとなるかもしれません。例えば、あるサービスを利用するユーザーが多ければ、システムの負荷は高くなる可能性があります。
-- メトリクスの絶対値は、変化率よりも重要ではないですか？[変化モニター][6]や[予測モニター][7]が最適なアプローチかもしれません。
-- メトリクスの値そのものは、他のホストやエンティティの値と異なるかどうかよりも重要性が低いですか？例えば、クラスター内のあるノードが高いレイテンシーを経験しているのに、他のノードはそうでない場合などです。このようなシナリオでは、[外れ値モニター][8]が最適なアプローチとなります。
-- 複数のメトリクスを組み合わせたものだけが、アクションを起こせる状況を示しますか？[複合条件モニター][9]は、スクリプトを必要としない解決策を提供します。
+Before starting a migration project, review existing alert and threshold definitions to answer the following questions:
+- Does the metric have a time-based variation? An [anomaly monitor][4] might be a better approach.
+- Does the metric have a load-based variation? An [arithmetic monitor][5] might be the best approach by combining a metric with a load-indicating metric. For example, load on the systems might be higher if there are more users using a service.
+- Is the absolute value of the metric less important than the rate of change? A [change monitor][6] or a [forecast monitor][7] might be the best approach.
+- Is the value of the metric itself less important than whether it is different from the value for other hosts or entities? For example, is one node in a cluster experiencing high latency while other nodes are not? The [outlier monitor][8] is the best approach in this scenario.
+- Do only a combination of multiple metrics present an actionable situation? [Composite monitors][9] offer a solution that doesn't require scripting.
 
-### プログラムモニター管理
+### Programmatic monitor management
 
-サービスプロバイダーとして、あなたやクライアントのためのモニターの管理は、次のいずれかの方法でプログラム的に達成するのが最善です。
-- [Datadog モニター API][10]
+As a service provider, management of monitors for you and your clients is best accomplished programmatically through one of the following ways:
+- [Datadog Monitors API][10]
 - Terraform
-  - [Terraform を使った Datadog のリソース管理方法][11] (ビデオ)
-  - [Terraform Datadog Provider を使って監視を自動化する][12] (HashiCorp Tutorial)
+  - [How to Manage Datadog Resources Using Terraform][11] (Video)
+  - [Automate Monitoring with the Terraform Datadog Provider][12] (HashiCorp Tutorial)
 
-大量のモニターを簡単に管理するために、[モニターにタグを付ける][13]ことを徹底してください。
+Ensure that you [tag monitors][13] to make the management of large numbers of monitors easier.
 
-### 推奨モニター
+### Recommended monitors
 
-クライアントが運用するテクノロジーで、自分があまり経験のないものに遭遇することがあります。Datadog は、新しいテクノロジーを迅速かつ自信を持って導入できるように、[推奨モニター][14]を提供しています。
+You might run into technologies your clients operate that you do not have a lot of experience with. Datadog offers [Recommended Monitors][14] to help you onboard new technologies quickly and confidently.
 
-モニターについて詳しくは、こちらをご覧ください。
-- [モニターの管理][15]
-- [モニター][16]
-- [タグ値を使用したダイナミックアラートの作成][17] (ビデオ)
-- [モニター設定の変更が反映されない][18]
+To find out more about monitors, see:
+- [Manage Monitors][15]
+- [Monitors][16]
+- [Creating Dynamic Alerts Using Tag Values][17] (Video)
+- [Monitor settings changes not taking effect][18]
 
-### ダウンタイム
+### Downtimes
 
-モニターやアラートに関する一般的な問題として、アラームや通知の過多によりアラームに対する感覚が鈍るアラート疲労があります。アラート疲労に対処する 1 つの方法は、誤検出アラートの数を制限することです。これは、計画的なシステムのシャットダウン、メンテナンス、アップグレードウィンドウなどの管理された状況において特に適切です。
+A common problem with monitors and alerts is alert fatigue, where an overabundance of alarms or notifications causes desensitization to the alarms. One way to combat alert fatigue is to limit the number of false positive alarms. This is especially pertinent in controlled situations such as planned system shutdowns, maintenance, or upgrade windows.
 
-Datadog のダウンタイムは、計画的 (またはアドホック) なメンテナンス時にモニターをミュートする方法をあなたやクライアントに提供します。
+Datadog's Downtimes offer you and your clients a way to mute monitors during times of planned (or ad hoc) maintenance.
 
-ダウンタイムの管理、特にプログラムによる管理について詳しくは、こちらをご覧ください。
-- [ダウンタイム][19]
-- [計画されたダウンタイムのために Datadog アラートをミュートする][20] (ブログ)
-- [Datadog を Terraform で管理する][21] (ブログ)
-- [ダウンタイム API][22]
-- [ダウンタイムになったモニターからのアラートを防止する][23]
+To find out more about managing downtimes, especially programmatically, see:
+- [Downtime][19]
+- [Mute Datadog Alerts for Planned Downtimes][20] (Blog)
+- [Managing Datadog with Terraform][21] (Blog)
+- [Downtime API][22]
+- [Prevent alerts from Monitors that were in downtime][23]
 
-### 通知
+### Notifications
 
-通知に関する一般的なガイドラインをいくつか紹介します。
-- 自由なアラート、慎重なページ
-- 原因ではなく、症状に関するページ
+Some general guidelines for notifications:
+- Alert liberally; page judiciously
+- Page on symptoms, rather than causes
 
-Datadog は、あなたやクライアントが重要なアラートをユーザーに通知できるよう、様々なチャンネルを提供しています。
+Datadog offers various channels through which you or your clients can notify users about important alerts:
 
-- メール通知
-- 以下などのインテグレーション
+- Email notifications
+- Integrations, such as:
   - [Slack][24]
   - [PagerDuty][25]
   - [Flowdock][26]
   - [ServiceNow][27]
   - [Google Chat][28]
   - [Microsoft Teams][29]
-  - [その他にも多数あります][19]
+  - And [many more][19]
 
-また、汎用的な [Webhooks インテグレーション][30]を使用して、任意の REST API を呼び出すことができます。Webhooks インテグレーションを使用すると、ユーザーに通知するだけでなく、自動的な修復ワークフローをトリガーすることができます。
+You can also invoke any REST API using the generic [Webhooks integration][30]. You use a Webhooks integration to not only notify users, but also to trigger automatic remediation workflows.
 
-通知について詳しくは、こちらをご覧ください。
-- [通知][31]
-- [Webhooks と Twilio で SMS アラートを送る][32] (ブログ)
+To find out more about notifications, see:
+- [Notifications][31]
+- [Send SMS Alerts with Webhooks and Twilio][32] (Blog)
 
-## ダッシュボードを使って視覚化を設定する
+## Setting up visualizations with dashboards
 
-視覚化は、複雑な技術スタックや、収集された大量のメトリクスやイベントをクライアントに明確に伝えるための素晴らしい方法です。ダッシュボードは、あなたやクライアントがモニターから通知された潜在的な問題を調査するための自然な出発点です。
+Visualizations are a great way to give your clients a clear picture of complex tech stacks and the abundance of metrics and events being collected. Dashboards are a natural starting point to investigate a potential issue you or your client was notified about by a monitor.
 
-### すぐに使えるダッシュボード
+### Out-of-the-box dashboards
 
-Datadog は、Agent やクラウドインテグレーションをセットアップした瞬間に、新しく統合されたサービスやテクノロジーに対してすぐに使えるダッシュボードを自動的に有効にし、インサイトを即座に提供します。また、すぐに使えるダッシュボードの複製も可能で、カスタムダッシュボードの出発点として最適です。
+The moment that an Agent or Cloud Integration is set up, Datadog automatically enables out-of-the-box dashboards for the newly integrated service or technology, providing immediate insights. You can also clone an out-of-the-box dashboard, giving you a great starting point for a custom dashboard.
 
-### カスタムダッシュボードの構築
+### Building custom dashboards
 
-さまざまなペルソナに合わせたビジネス中心の視点を提供することで、さらなる価値を提供し、競合他社と差別化することができます。
+You can provide extra value and distinguish yourself from your competitors by providing a business-centric perspective, tailored to different personas.
 
-ここでは、ダッシュボードを構築する際に考慮すべきダッシュボードのベストプラクティスを紹介します。
-- 多すぎるリソースメトリクスよりも、ワークメトリクスに注目します。この違いを理解するには、[モニタリング入門: 正しいデータの収集][33] (ブログ) を参照してください。
-- [イベントオーバーレイ][34]を活用し、メトリクスとイベントの関連付けを行います。
-- ダッシュボードには、どのようなデータが表示され、ダッシュボードが問題を示している場合にどうすればよいか、[フリーテキスト情報][35]で注釈を付けます。
+Here are some dashboard best practices to take into consideration when building your dashboards:
+- Focus on work metrics rather than too many resource metrics. To understand the difference, see [Monitoring 101: Collecting the right data][33] (blog).
+- Make use of [event overlays][34] to correlate metrics and events.
+- Annotate the dashboards with [free text information][35] on what data is shown and what to do in case the dashboard indicates an issue.
 
-ダッシュボードについて詳しくは、こちらをご覧ください。
-- [より良いダッシュボードの構築][36] (トレーニング)
-- [Datadog ノートブック][37]機能を使って探索的にデータを集め、ダッシュボードを起草する
-- [Datadog でデータセンターとネットワークを監視する][38] (ブログ)
-- [関連するテンプレート変数を使う][39] (ブログ)
-- [Datadog ダッシュボード API][40]
-- [Terraform と Datadog で観測可能性をコードで構成する][41] (HashiCorp ウェビナー)
+To find out more about Dashboards, see:
+- [Building Better Dashboards][36] (Training)
+- Use the [Datadog Notebooks][37] feature to gather data in an exploratory fashion and draft dashboards
+- [Monitor Datacenters and Networks with Datadog][38] (Blog)
+- [Use Associated Template Variables][39] (Blog)
+- [The Datadog Dashboard API][40]
+- [Configure Observability as Code with Terraform & Datadog][41] (HashiCorp webinar)
 
-### Datadog にアクセスできないユーザー向けの視覚化
+### Visualizations for users without Datadog access
 
-ビジネスモデルによっては、クライアント自身が Datadog にアクセスする必要がない場合があります。しかし、クライアントに Datadog の視覚化を提供したい場合があります。Datadog の視覚化を提供するには、次のオプションがあります。
-- [ダッシュボードの共有][42]: 読み取り専用のダッシュボードへの公開 URL を共有することで、クライアントにステータスページを提供したり、個々のメールアドレスを使用してダッシュボードを非公開で共有することができます。
-  - サービスプロバイダーとして、ビジネスはスケーラブルであることが必要です。[Datadog の API を使用した共有ダッシュボードの管理][40]は、最も効率的なアプローチです。
-- 埋め込み可能なグラフ: クライアントポータルで Datadog の情報を表示する場合、埋め込み可能なグラフが有効です。パラメーターを使用すると、ニーズに合わせてデータをフィルターすることができます。詳細については、以下を参照してください。
-  - [埋め込み可能なグラフ API][43]
-  - [テンプレート変数による埋め込み可能なグラフ][44]
+Depending on your business model, your clients might not require access to Datadog themselves. However, you might still want to provide Datadog visualizations to your clients. You have the following options for providing Datadog visualizations:
+- [Dashboard sharing][42]: Provide a status page to your clients by sharing a public URL to a read-only dashboard, or share the dashboard privately using an individual email address.
+  - As a service provider, your business needs to be able to scale. [Managing shared dashboards using Datadog's APIs][40] is the most efficient approach.
+- Embeddable graphs: If you have a client portal in which you want to present Datadog information, embeddable graphs are the way to go. Using parameters, you can filter data according to your needs. For more information, see:
+  - [Embeddable Graphs API][43]
+  - [Embeddable Graphs with Template Variables][44]
 
-### サービスレベル目標の設定
+### Setting up service-level objectives
 
-クライアントに対して、サービスの品質やレベルを透明性のある形で継続的に提示することは、良いことです。サービスレベル目標 (SLO) は、クライアントに代わってサービス品質を監視・視覚化し、またクライアントが社内でサービスレベルに基づくレポーティングを実施する際にも有効な手段です。
+It is a good idea to continually present the quality and level of your services to your clients in a transparent way. Service-level objectives (SLOs) are a great way to monitor and visualize the service quality on behalf of your clients, and also help your clients implement service level-based reporting internally.
 
-SLO を設定・管理する際には、以下の資料が参考になるかと思われます。
-- まずは、[サービスレベル目標入門: 効果的な SLO の確立][45] (ブログ) をご覧ください。
-- [SLO チェックリスト][46]
-- [Datadog で SLO を管理するためのベストプラクティス][47] (ブログ)
-- [Datadog ですべての SLO のステータスを追跡する][48] (ブログ)
-- [Datadog SLO API][49]
+The following material might be helpful for you when setting up and managing SLOs:
+- To get started, see [Service Level Objectives 101: Establishing Effective SLOs][45] (Blog).
+- [SLO Checklist][46]
+- [Best practices for managing your SLOs with Datadog][47] (Blog)
+- [Track the status of all your SLOs in Datadog][48] (Blog)
+- [The Datadog SLO API][49]
 
-## Watchdog の使用
+## Using Watchdog
 
-Watchdog は、アプリケーションやインフラストラクチャーの潜在的な問題を自動的に検出するアルゴリズム機能です。
+Watchdog is an algorithmic feature that automatically detects potential application and infrastructure issues.
 
-Watchdog が新たな不正を検出したときに通知を受け取ることができる Watchdog モニターを、自社のスタッフやクライアントのために設定します。
+Set up a Watchdog Monitor for your own staff or your client with a notification whenever Watchdog has detected a new irregularity.
 
-詳しくは、[Watchdog][50] をご覧ください。
+For more information, see [Watchdog][50].
 
-## 次のステップ
+## What's next?
 
-複数組織のアカウント設定において、Datadog プラットフォームの個々のクライアントおよび集計使用量を監視する方法を、[請求と使用量報告][51]でご確認ください。
+Find out how to monitor individual client and aggregate usage of the Datadog platform in multi-organization account setups with [Billing and Usage Reporting][51].
 
-
-
-[1]: /ja/monitors
+[1]: /monitors
 [2]: https://www.datadoghq.com/blog/monitoring-101-alerting/
 [3]: https://learn.datadoghq.com/courses/introduction-to-observability
-[4]: /ja/monitors/create/types/anomaly/
-[5]: /ja/monitors/guide/monitor-arithmetic-and-sparse-metrics/
-[6]: /ja/monitors/create/types/metric/?tab=change
-[7]: /ja/monitors/create/types/forecasts/?tab=linear
-[8]: /ja/monitors/create/types/outlier/?tab=dbscan
-[9]: /ja/monitors/create/types/composite/
-[10]: /ja/api/latest/monitors/
+[4]: /monitors/types/anomaly/
+[5]: /monitors/guide/monitor-arithmetic-and-sparse-metrics/
+[6]: /monitors/types/metric/?tab=change
+[7]: /monitors/types/forecasts/?tab=linear
+[8]: /monitors/types/outlier/?tab=dbscan
+[9]: /monitors/types/composite/
+[10]: /api/latest/monitors/
 [11]: https://www.youtube.com/watch?v=Ell_kU4gEGI
 [12]: https://learn.hashicorp.com/tutorials/terraform/datadog-provider
 [13]: https://www.datadoghq.com/blog/tagging-best-practices-monitors/
 [14]: https://www.datadoghq.com/blog/datadog-recommended-monitors/
-[15]: /ja/monitors/manage/
-[16]: /ja/monitors/create/
+[15]: /monitors/manage/
+[16]: /monitors/
 [17]: https://www.youtube.com/watch?v=Ma5pr-u9bjk
-[18]: /ja/monitors/guide/why-did-my-monitor-settings-change-not-take-effect/
-[19]: /ja/monitors/notify/downtimes/
+[18]: /monitors/guide/why-did-my-monitor-settings-change-not-take-effect/
+[19]: /monitors/downtimes/
 [20]: https://www.datadoghq.com/blog/mute-datadog-alerts-planned-downtime/
 [21]: https://www.datadoghq.com/blog/managing-datadog-with-terraform/
-[22]: /ja/api/latest/downtimes/
-[23]: /ja/monitors/guide/prevent-alerts-from-monitors-that-were-in-downtime/
-[24]: /ja/integrations/slack/?tab=slackapplication
-[25]: /ja/integrations/pagerduty/
-[26]: /ja/integrations/flowdock/
-[27]: /ja/integrations/servicenow/
-[28]: /ja/integrations/google_hangouts_chat/
-[29]: /ja/integrations/microsoft_teams/
-[30]: /ja/integrations/webhooks/
-[31]: /ja/monitors/notify/
+[22]: /api/latest/downtimes/
+[23]: /monitors/guide/prevent-alerts-from-monitors-that-were-in-downtime/
+[24]: /integrations/slack/?tab=slackapplication
+[25]: /integrations/pagerduty/
+[26]: /integrations/flowdock/
+[27]: /integrations/servicenow/
+[28]: /integrations/google_hangouts_chat/
+[29]: /integrations/microsoft_teams/
+[30]: /integrations/webhooks/
+[31]: /monitors/notify/
 [32]: https://www.datadoghq.com/blog/send-alerts-sms-customizable-webhooks-twilio/
 [33]: https://www.datadoghq.com/blog/monitoring-101-collecting-data/
-[34]: /ja/dashboards/widgets/timeseries/
-[35]: /ja/dashboards/widgets/free_text/
+[34]: /dashboards/widgets/timeseries/
+[35]: /dashboards/widgets/free_text/
 [36]: https://learn.datadoghq.com/courses/building-better-dashboards
-[37]: /ja/notebooks/
+[37]: /notebooks/
 [38]: https://www.datadoghq.com/blog/network-device-monitoring/
 [39]: https://www.datadoghq.com/blog/template-variable-associated-values/
-[40]: /ja/api/latest/dashboards/
+[40]: /api/latest/dashboards/
 [41]: https://www.hashicorp.com/resources/configure-observability-as-code-with-terraform-and-datadog
-[42]: /ja/dashboards/sharing/
-[43]: /ja/api/latest/embeddable-graphs/
-[44]: /ja/dashboards/guide/embeddable-graphs-with-template-variables/
+[42]: /dashboards/sharing/
+[43]: /api/latest/embeddable-graphs/
+[44]: /dashboards/guide/embeddable-graphs-with-template-variables/
 [45]: https://www.datadoghq.com/blog/establishing-service-level-objectives/
-[46]: /ja/monitors/guide/slo-checklist/
+[46]: /service_management/service_level_objectives/guide/slo-checklist
 [47]: https://www.datadoghq.com/blog/define-and-manage-slos/
 [48]: https://www.datadoghq.com/blog/slo-monitoring-tracking/
-[49]: /ja/api/latest/service-level-objectives/
-[50]: /ja/monitors/create/types/watchdog/
-[51]: /ja/partners/billing-and-usage-reporting/
+[49]: /api/latest/service-level-objectives/
+[50]: /monitors/types/watchdog/
+[51]: /partners/billing-and-usage-reporting/

@@ -1,6 +1,6 @@
 ---
+title: Intelligent Retention Filter
 core_product:
-- apm
-title: インテリジェント保持フィルター
+  - apm
 ---
-Datadog のデフォルトの保持フィルターで、常にアクティブで、代表的な割合のトレース、真の高レイテンシー、多様なエラートレースを保持し、アプリケーションの健全性を監視するのに役立ちます。ランダムではないため、インテリジェント保持によってのみ保持されるトレースは、トレースメトリクスに含まれません。
+A Datadog default retention filter that is always active, keeping a representative proportion of traces, true high latency, and diverse error traces to help you monitor the health of your applications. It is not random, and so traces only retained by Intelligent Retention are not included in trace metrics.

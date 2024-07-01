@@ -1,21 +1,22 @@
 ---
-aliases:
-- /ja/serverless/troubleshooting/serverless_tracing_and_webpack
+title: Node.js Lambda Tracing and Webpack Compatibility 
+kind: documentation
 further_reading:
 - link: /serverless/installation/nodejs
-  tag: ドキュメント
-  text: Node.js アプリケーションのインスツルメンテーション
-title: Node.js Lambda トレースと Webpack の互換性
+  tag: Documentation
+  text: Instrumenting Node.js Applications
+aliases:
+    - /serverless/troubleshooting/serverless_tracing_and_webpack
 ---
 
-## 概要
+## Overview
 
-Datadog のトレーシングライブラリ (`dd-trace`) は、条件付きインポートの使用やその他の問題により、[Webpack][1] などのバンドラーと互換性がないことが知られています。Webpack は `dd-trace` をビルドできませんが、アプリケーションは、ビルド済みの Datadog Lambda レイヤーによって提供される `dd-trace` および `datadog-lambda-js` ライブラリを引き続き使用できます。以下の手順に従ってください。
+Datadog's tracing libraries (`dd-trace`) are known to be not compatible with bundlers like [webpack][1] due to the use of conditional imports and other issues. While webpack cannot build `dd-trace`, your application can still use the `dd-trace` and `datadog-lambda-js` libraries provided by the prebuilt Datadog Lambda layer. Follow the instructions below.
 
-## Webpack
-1. [Node.js のインストール手順][2]に従い、Node.js の Datadog Lambda レイヤーが Lambda 関数に追加されていることを確認します。
-2. `package.json` とビルドプロセスから `datadog-lambda-js` と `dd-trace` を削除します。
-3. [externals][3] として `datadog-lambda-js` と `dd-trace` をマークします。これは、Datadog Lambda レイヤーによって提供される Lambda ランタイムですでに利用可能であるため、依存関係としてのビルドをスキップするようにバンドラーに指示します。
+## webpack
+1. Follow the [installation instructions for Node.js][2] and ensure the Datadog Lambda layer for Node.js is added to your Lambda function.
+2. Remove `datadog-lambda-js` and `dd-trace` from your `package.json` and the build process.
+3. Mark `datadog-lambda-js` and `dd-trace` as [externals][3]. This tells the bundler to skip building them as dependencies, since they are already available in the Lambda runtime provided by the Datadog Lambda layer.
 
     **webpack.config.js**
 
@@ -29,7 +30,7 @@ Datadog のトレーシングライブラリ (`dd-trace`) は、条件付きイ�
     };
     ```
 
-4. `serverless-webpack` を使用していて、オプション `includeModules` に `false` 以外の値を設定している場合、serverless-webpack は自動的に [node_modules 以下に外部モジュールをパックします][5]。そのため、`datadog-lambda-js` と `dd-trace` を強制的に除外する必要があります。`serverless-webpack` を使用しない場合、または serverless.yml に `includeModules` オプションがない場合は、このステップをスキップしてください。
+4. If you are using the `serverless-webpack` and have the option `includeModules` set to any value other than `false`, serverless-webpack automatically [packs external modules under node_modules][5]. Therefore, you must force exclude `datadog-lambda-js` and `dd-trace`. Skip this step if you don't use `serverless-webpack` or you don't have the `includeModules` option in your serverless.yml.
 
     **serverless.yml**
 
@@ -49,12 +50,12 @@ Datadog のトレーシングライブラリ (`dd-trace`) は、条件付きイ�
     ```
 
 ## esbuild
-1. [Node.js のインストール手順][2]に従い、Node.js の Datadog Lambda レイヤーが Lambda 関数に追加されていることを確認します。
-2. `package.json` とビルドプロセスから `datadog-lambda-js` と `dd-trace` を削除します。
-3. [externals][4] として `datadog-lambda-js` と `dd-trace` をマークします。これは、Datadog Lambda レイヤーによって提供される Lambda ランタイムですでに利用可能であるため、依存関係としてのビルドをスキップするようにバンドラーに指示します。
-4. [Esbuild サポート][6]のページの手順に従って、Datadog の Esbuild プラグインを使用します。これにより、バンドルされた依存関係のインスツルメンテーションが可能になります。
+1. Follow the [installation instructions for Node.js][2] and ensure the Datadog Lambda layer for Node.js is added to your Lambda function.
+2. Remove `datadog-lambda-js` and `dd-trace` from your `package.json` and the build process.
+3. Mark `datadog-lambda-js` and `dd-trace` as [externals][4]. This tells the bundler to skip building them as dependencies, since they are already available in the Lambda runtime provided by the Datadog Lambda layer.
+4. Follow the steps on the [Esbuild support][6] page to use Datadog's Esbuild plugin. This enables instrumentation of bundled dependencies.
 
-    **esbuild.config.js (esbuild-config を使用している場合)**
+    **esbuild.config.js (if using esbuild-config)**
 
     ```
     {
@@ -62,7 +63,7 @@ Datadog のトレーシングライブラリ (`dd-trace`) は、条件付きイ�
     }
     ```
 
-    **serverless.yml (serverless-esbuild を使用している場合)**
+    **serverless.yml (if using serverless-esbuild)**
 
     ```
     custom:
@@ -70,13 +71,13 @@ Datadog のトレーシングライブラリ (`dd-trace`) は、条件付きイ�
         exclude: ["dd-trace", "datadog-lambda-js", "aws-sdk"] # aws-sdk is needed because it is the default value for `exclude`
     ```
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://webpack.js.org
-[2]: /ja/serverless/installation/nodejs
+[2]: /serverless/installation/nodejs
 [3]: https://webpack.js.org/configuration/externals/
 [4]: https://esbuild.github.io/api/#external
 [5]: https://github.com/serverless-heaven/serverless-webpack#node-modules--externals
-[6]: /ja/tracing/trace_collection/dd_libraries/nodejs/?tab=containers#esbuild-support
+[6]: /tracing/trace_collection/dd_libraries/nodejs/?tab=containers#esbuild-support

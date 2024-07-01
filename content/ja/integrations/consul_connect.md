@@ -1,149 +1,149 @@
 ---
-app_id: consul-connect
-app_uuid: 580ac585-9e97-4b4f-ba56-34dba5050e06
-assets:
-  integration:
-    auto_install: true
-    configuration: {}
-    events:
-      creates_events: false
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 10174
-    source_type_name: Consul Connect
-  logs:
-    source: envoy
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com (日本語対応)
-  support_email: help@datadoghq.com
-categories:
+"app_id": "consul-connect"
+"app_uuid": "580ac585-9e97-4b4f-ba56-34dba5050e06"
+"assets":
+  "integration":
+    "auto_install": true
+    "configuration": {}
+    "events":
+      "creates_events": false
+    "service_checks":
+      "metadata_path": assets/service_checks.json
+    "source_type_id": !!int "10174"
+    "source_type_name": Consul Connect
+  "logs":
+    "source": envoy
+"author":
+  "homepage": "https://www.datadoghq.com"
+  "name": Datadog
+  "sales_email": info@datadoghq.com
+  "support_email": help@datadoghq.com
+"categories":
 - network
-- ログの収集
+- log collection
 - containers
-dependencies:
-- https://github.com/DataDog/integrations-core/blob/master/consul_connect/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: consul_connect
-integration_id: consul-connect
-integration_title: Consul Connect
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: 2.0.0
-name: consul_connect
-public_title: Consul Connect
-short_description: Consul Connect Envoy サイドカープロキシを監視します。
-supported_os:
+"custom_kind": "integration"
+"dependencies":
+- "https://github.com/DataDog/integrations-core/blob/master/consul_connect/README.md"
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "consul_connect"
+"integration_id": "consul-connect"
+"integration_title": "Consul Connect"
+"integration_version": ""
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "consul_connect"
+"public_title": "Consul Connect"
+"short_description": "Monitor Consul Connect Envoy sidecar proxies."
+"supported_os":
 - linux
 - macos
 - windows
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Network
-  - Category::Log Collection
-  - Category::Containers
-  configuration: README.md#Setup
-  description: Consul Connect Envoy サイドカープロキシを監視します。
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Consul Connect
+"tile":
+  "changelog": CHANGELOG.md
+  "classifier_tags":
+  - "Supported OS::Linux"
+  - "Supported OS::macOS"
+  - "Supported OS::Windows"
+  - "Category::Network"
+  - "Category::Log Collection"
+  - "Category::Containers"
+  "configuration": "README.md#Setup"
+  "description": Monitor Consul Connect Envoy sidecar proxies.
+  "media": []
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": Consul Connect
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## 概要
+## Overview
 
-[Datadog Envoy インテグレーション][2]で、[Consul Connect][1] Envoy サイドカープロキシを監視します。Consul Connect インテグレーションは [Envoy で構成された Consul Connect][3]のみをサポートしています。
+Monitor your [Consul Connect][1] Envoy sidecar proxies with the [Datadog Envoy Integration][2]. The Consul Connect integration only supports [Consul Connect configured with Envoy][3]. 
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-Consul Connect を実行しているサービスで [Datadog Agent][4] をインストールし、適切な環境の[コンフィギュレーション](#configuration)手順に従います。
+Install the [Datadog Agent][4] on your services running Consul Connect and follow the [Configuration](#configuration) instructions for your appropriate environment.
 
-### ブラウザトラブルシューティング
-ホストで実行中の Agent でこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[コンテナ化](#コンテナ化)セクションを参照してください。
+### Configuration
+Follow the instructions below to configure this check for an Agent running on a host. For containerized environments, see the [Containerized](#containerized) section.
 
 {{< tabs >}}
-{{% tab "ホスト" %}}
+{{% tab "Host" %}}
 
-#### メトリクスベース SLO
+#### Host
 
-ホストで実行中の Agent に対してこのチェックを構成するには
+To configure this check for an Agent running on a host:
 
-##### メトリクスの収集
-1. Consul Connect でコンフィグオプション [`-admin-bind`][1] を有効にし、Envoy Admin API が公開されるポートを構成します。
+##### Metric collection
+1. In Consul Connect, enable the config option [`-admin-bind`][1] to configure the port where the Envoy Admin API is exposed.
 
-2. [Envoy インテグレーション][2]を有効にしてメトリクスの収集を有効にします。
+2. Enable the [Envoy integration][2] to configure metric collection.
 
-##### 収集データ
+##### Log collection
 
-[Envoy ホスト][3]の手順に従いログ収集を構成します。
+Follow the [Envoy host][3] instructions to configure log collection.  
 
 [1]: https://www.consul.io/commands/connect/envoy#admin-bind
-[2]: https://docs.datadoghq.com/ja/integrations/envoy/?tab=host#metric-collection
-[3]: https://docs.datadoghq.com/ja/integrations/envoy/?tab=host#log-collection
+[2]: https://docs.datadoghq.com/integrations/envoy/?tab=host#metric-collection
+[3]: https://docs.datadoghq.com/integrations/envoy/?tab=host#log-collection
 {{% /tab %}}
-{{% tab "コンテナ化" %}}
+{{% tab "Containerized" %}}
 
-#### コンテナ化
+#### Containerized
 
-[Envoy コンテナ化手順][1]に従い、Datadog Agent を Envoy 用に構成します。
+Follow the [Envoy containerized instructions][1] to configure your Datadog Agent for Envoy. 
 
-##### メトリクスの収集
+##### Metric collection
 
-1. Consul Connect でコンフィグオプション [`envoy_stats_bind_addr`][2] を有効にし、公開ネットワークで `/stats` エンドポイントが公開されるようにします。
+1. In Consul Connect, enable the config option [`envoy_stats_bind_addr`][2] to ensure the `/stats` endpoint is exposed on the public network.
 
- 2. [Envoy インテグレーションをコンテナ化環境用][3]に構成し、メトリクスの収集を開始します。
+ 2. Configure the [Envoy integration for containerized environments][3] to start collecting metrics. 
 
-##### 収集データ
+##### Log collection
 
-[Envoy コンテナ化手順][4]に従いログ収集を構成します。
+Follow the [Envoy containerized instructions][4] to configure log collection.
 
-[1]: https://docs.datadoghq.com/ja/integrations/envoy/?tab=containerized#containerized
+[1]: https://docs.datadoghq.com/integrations/envoy/?tab=containerized#containerized
 [2]: https://www.consul.io/docs/connect/proxies/envoy#envoy_stats_bind_addr
-[3]: https://docs.datadoghq.com/ja/integrations/envoy/?tab=containerized#metric-collection
-[4]: https://docs.datadoghq.com/ja/integrations/envoy/?tab=containerized#log-collection
+[3]: https://docs.datadoghq.com/integrations/envoy/?tab=containerized#metric-collection
+[4]: https://docs.datadoghq.com/integrations/envoy/?tab=containerized#log-collection
 {{% /tab %}}
 {{< /tabs >}}
 
-### 検証
+### Validation
 
-[Agent の status サブコマンドを実行][5]し、Checks セクションで `envoy` を探します。
+[Run the Agent's status subcommand][5] and look for `envoy` under the Checks section.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 
-収集されたメトリクスのリストについては、[Envoy インテグレーションドキュメント][6]を参照してください。
+See the [Envoy Integration documentation][6] for a list of metrics collected. 
 
-### ヘルプ
+### Service Checks
 
-収集されたサービスチェックのリストについては、[Envoy インテグレーションドキュメント][7]を参照してください。
+See the [Envoy Integration documentation][7] for the list of service checks collected. 
 
-### ヘルプ
+### Events
 
-Consul Connect には、イベントは含まれません。
+Consul Connect does not include any events.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
+Need help? Contact [Datadog support][8].
 
 
 [1]: https://www.consul.io/docs/connect#connect
-[2]: https://docs.datadoghq.com/ja/integrations/envoy/
+[2]: https://docs.datadoghq.com/integrations/envoy/
 [3]: https://www.consul.io/docs/connect/proxies/envoy#envoy-integration
 [4]: https://app.datadoghq.com/account/settings/agent/latest
-[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/?#agent-status-and-information
-[6]: https://docs.datadoghq.com/ja/integrations/envoy/?tab=host#metrics
-[7]: https://docs.datadoghq.com/ja/integrations/envoy/?tab=host#service-checks
-[8]: https://docs.datadoghq.com/ja/help/
+[5]: https://docs.datadoghq.com/agent/guide/agent-commands/?#agent-status-and-information
+[6]: https://docs.datadoghq.com/integrations/envoy/?tab=host#metrics
+[7]: https://docs.datadoghq.com/integrations/envoy/?tab=host#service-checks
+[8]: https://docs.datadoghq.com/help/

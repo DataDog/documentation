@@ -1,111 +1,115 @@
 ---
-app_id: gremlin
-app_uuid: 451a4863-1767-4c11-8831-d196ae4643d0
-assets:
-  integration:
-    auto_install: true
-    configuration: {}
-    events:
-      creates_events: true
-    metrics:
-      check: []
-      metadata_path: metadata.csv
-      prefix: gremlin.
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 10031
-    source_type_name: Gremlin
-author:
-  homepage: https://github.com/DataDog/integrations-extras
-  name: Gremlin
-  sales_email: support@gremlin.com
-  support_email: support@gremlin.com
-categories:
-- 問題追跡
-dependencies:
-- https://github.com/DataDog/integrations-extras/blob/master/gremlin/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: gremlin
-integration_id: gremlin
-integration_title: Gremlin
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: 2.0.0
-name: gremlin
-public_title: Gremlin
-short_description: Gremlin で発生したイベントを Datadog に送信
-supported_os:
+"app_id": "gremlin"
+"app_uuid": "451a4863-1767-4c11-8831-d196ae4643d0"
+"assets":
+  "integration":
+    "auto_install": true
+    "configuration": {}
+    "events":
+      "creates_events": true
+    "metrics":
+      "check": []
+      "metadata_path": metadata.csv
+      "prefix": gremlin.
+    "service_checks":
+      "metadata_path": assets/service_checks.json
+    "source_type_id": !!int "10031"
+    "source_type_name": Gremlin
+"author":
+  "homepage": "https://github.com/DataDog/integrations-extras"
+  "name": Gremlin
+  "sales_email": support@gremlin.com
+  "support_email": support@gremlin.com
+"categories":
+- issue tracking
+"custom_kind": "integration"
+"dependencies":
+- "https://github.com/DataDog/integrations-extras/blob/master/gremlin/README.md"
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "gremlin"
+"integration_id": "gremlin"
+"integration_title": "Gremlin"
+"integration_version": ""
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "gremlin"
+"public_title": "Gremlin"
+"short_description": "Send events occurring in Gremlin to Datadog"
+"supported_os":
 - linux
 - windows
 - macos
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Issue Tracking
-  - Supported OS::Linux
-  - Supported OS::Windows
-  - Supported OS::macOS
-  configuration: README.md#Setup
-  description: Gremlin で発生したイベントを Datadog に送信
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Gremlin
+"tile":
+  "changelog": CHANGELOG.md
+  "classifier_tags":
+  - "Category::Issue Tracking"
+  - "Supported OS::Linux"
+  - "Supported OS::Windows"
+  - "Supported OS::macOS"
+  "configuration": "README.md#Setup"
+  "description": Send events occurring in Gremlin to Datadog
+  "media": []
+  "overview": "README.md#Overview"
+  "resources":
+  - "resource_type": blog
+    "url": "https://www.datadoghq.com/blog/gremlin-datadog/"
+  "support": "README.md#Support"
+  "title": Gremlin
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
-## 概要
+## Overview
 
-Gremlin の攻撃の表示、再実行、停止を Datadog から直接行うことができます。
+View, rerun, and halt Gremlin attacks directly from Datadog!
 
-Gremlin を Datadog の[イベント][1]と組み合わせると、Datadog のワークフローに障害テストのコンテキストを効果的に追加できます。
+Pairing Gremlin with Datadog's [Events][1] is an effective way to add failure-testing context to your Datadog workflows.
 
-- ダッシュボードに攻撃イベントを重ねて表示することで、Gremlin がメトリクスにいつどのように影響しているかを正確に特定できます。
-- Datadog の[イベントストリーム][2]から Gremlin の攻撃を表示、再実行、停止できます。
+- Overlay attack events on top of your dashboards to pinpoint exactly how and when Gremlin is impacting your metrics.
+- Show, Rerun, and Halt Gremlin attacks from your Datadog [Event Stream][2]
 
-![スナップショット][3]
+![snapshot][3]
 
-## 計画と使用
+## Setup
 
-### ブラウザトラブルシューティング
+### Configuration
 
-このインテグレーションを有効にするには、Gremlin に Datadog API キーを渡す必要があります。それには、[インテグレーションページ][4]で、**Datadog** の行にある **Add** ボタンをクリックします。**Datadog API キー**の入力を求められます。キーを入力すると、インテグレーションが初期化されます。
+To activate this integration, you need to pass your Datadog API key to Gremlin. This is done on the [Integrations Page][4], by clicking the **Add** button on the row for **Datadog**. You are prompted for your **Datadog API key**. Once entered, the integration is initialized.
 
-- API キー: <span class="hidden-api-key">\${api_key}</span>
+- API key: <span class="hidden-api-key">\${api_key}</span>
 
-これで、このインテグレーションからのイベントが[イベントストリーム][2]に表示されるようになります。
+You should start seeing events from this integration in your [Event Stream][2].
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 
-Gremlin インテグレーションは、メトリクスを提供しません。
+The Gremlin integration does not provide any metrics.
 
-### ヘルプ
+### Events
 
-Gremlin で攻撃が開始または停止されると、Gremlin インテグレーションがイベントを [Datadog のイベントストリーム][4]に送信します。
+The Gremlin integration sends events to your [Datadog Event Stream][4] when attacks are started or stopped on Gremlin.
 
-### ヘルプ
+### Service Checks
 
-Gremlin インテグレーションには、サービスのチェック機能は含まれません。
+The Gremlin integration does not include any service checks.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
+Need help? Contact [Datadog support][5].
 
-## その他の参考資料
+## Further Reading
 
-お役に立つドキュメント、リンクや記事:
+Additional helpful documentation, links, and articles:
 
-- [Gremlin が Datadog を使用して自社の Chaos Engineering サービスを監視する方法][6]
+- [How Gremlin monitors its own Chaos Engineering service with Datadog][6]
 
-[1]: https://docs.datadoghq.com/ja/getting_started/#events
+[1]: https://docs.datadoghq.com/getting_started/#events
 [2]: https://app.datadoghq.com/event/stream
 [3]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/gremlin/images/events-overlay.png
 [4]: https://app.gremlin.com/settings/integrations
-[5]: https://docs.datadoghq.com/ja/help/
+[5]: https://docs.datadoghq.com/help/
 [6]: https://www.datadoghq.com/blog/gremlin-datadog/
+

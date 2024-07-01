@@ -1,3 +1,3 @@
 ---
-title: ログ制限クエリ
+title: Logs Restriction Queries
 ---

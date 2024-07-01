@@ -1,71 +1,72 @@
 ---
-categories:
+"categories":
 - cloud
 - aws
-- ログの収集
-dependencies: []
-description: Amazon EC2 スポットのキーメトリクスを追跡
-doc_link: https://docs.datadoghq.com/integrations/amazon_ec2_spot/
-draft: false
-git_integration_title: amazon_ec2_spot
-has_logo: true
-integration_id: ''
-integration_title: Amazon EC2 スポット
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: '1.0'
-name: amazon_ec2_spot
-public_title: Datadog-Amazon EC2 スポットインテグレーション
-short_description: Amazon EC2 スポットのキーメトリクスを追跡
-version: '1.0'
+- log collection
+"custom_kind": "integration"
+"dependencies": []
+"description": "Track key Amazon EC2 Spot metrics."
+"doc_link": "https://docs.datadoghq.com/integrations/amazon_ec2_spot/"
+"draft": false
+"git_integration_title": "amazon_ec2_spot"
+"has_logo": true
+"integration_id": ""
+"integration_title": "Amazon EC2 Spot"
+"integration_version": ""
+"is_public": true
+"manifest_version": "1.0"
+"name": "amazon_ec2_spot"
+"public_title": "Datadog-Amazon EC2 Spot Integration"
+"short_description": "Track key Amazon EC2 Spot metrics."
+"version": "1.0"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-## 概要
+## Overview
 
-Amazon EC2 スポットインスタンスを使用すると、AWS クラウド内の使用されていない EC2 容量を活用できます。
+Amazon EC2 Spot Instances let you take advantage of unused EC2 capacity in the AWS cloud.
 
-このインテグレーションを有効にすると、Datadog にすべての EC2 Spot [Fleet メトリクス][1]を表示できます。
+Enable this integration to see all your EC2 Spot [Fleet metrics][1] in Datadog.
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-[Amazon Web Services インテグレーション][2]をまだセットアップしていない場合は、最初にセットアップします。
+If you haven't already, set up the [Amazon Web Services integration][2] first.
 
-### メトリクスの収集
+### Metric collection
 
-1. [AWS インテグレーションページ][3]で、`Metric Collection` タブの下にある `EC2 Spot` が有効になっていることを確認します。
-2. [Datadog - Amazon EC2 Spot インテグレーション][4]をインストールします。
+1. In the [AWS integration page][3], ensure that `EC2 Spot` is enabled under the `Metric Collection` tab.
+2. Install the [Datadog - Amazon EC2 Spot integration][4].
 
-### 収集データ
+### Log collection
 
-[Datadog Agent][5] または [Rsyslog][6] のような別のログシッパーを使用して、Datadog にログを送信します。
+Use the [Datadog Agent][5] or another log shipper like [Rsyslog][6] to send your logs to Datadog.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "amazon_ec2_spot" >}}
 
 
-### ヘルプ
+### Events
 
-Amazon EC2 Spot インテグレーションには、イベントは含まれません。
+The Amazon EC2 Spot integration does not include any events.
 
-### ヘルプ
+### Service Checks
 
-Amazon EC2 Spot インテグレーションには、サービスのチェック機能は含まれません。
+The Amazon EC2 Spot integration does not include any service checks.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
+Need help? Contact [Datadog support][8].
 
 [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-fleet-cloudwatch-metrics.html
-[2]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
+[2]: https://docs.datadoghq.com/integrations/amazon_web_services/
 [3]: https://app.datadoghq.com/integrations/amazon-web-services
 [4]: https://app.datadoghq.com/integrations/amazon-ec2-spot
-[5]: https://docs.datadoghq.com/ja/agent/logs/
-[6]: https://docs.datadoghq.com/ja/integrations/rsyslog/
+[5]: https://docs.datadoghq.com/agent/logs/
+[6]: https://docs.datadoghq.com/integrations/rsyslog/
 [7]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_ec2_spot/amazon_ec2_spot_metadata.csv
-[8]: https://docs.datadoghq.com/ja/help/
+[8]: https://docs.datadoghq.com/help/
+

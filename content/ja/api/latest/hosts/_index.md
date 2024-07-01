@@ -1,3 +1,3 @@
 ---
-title: ホスト
+title: Hosts
 ---

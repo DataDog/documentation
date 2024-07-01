@@ -1,61 +1,83 @@
 ---
+title: Monitor Settings
 further_reading:
 - link: /monitors/
-  tag: ドキュメント
-  text: モニターの作成
+  tag: Documentation
+  text: Create monitors
 - link: /monitors/notify/
-  tag: ドキュメント
-  text: モニター通知
-title: モニタータグポリシー
+  tag: Documentation
+  text: Monitor Notifications
+- link: "https://www.datadoghq.com/blog/tagging-best-practices-monitors/"
+  tag: Blog
+  text: Best practices for tagging your monitors
 ---
 
-## 概要
+## Overview
 
-モニタータグポリシーにより、Datadog モニターのタグとタグ値に対するデータの検証を実行することができます。これにより、アラートが、トリアージと処理のための正しいダウンストリームシステムおよびワークフローに送信されることが保証されます。
+On the [Monitor Settings page][1], you can access and control the following topics:
 
-<div class="alert alert-warning">セットアップ後、タグポリシーは<strong>すべての</strong> Datadog モニターに適用されます</div>
+* [Tag Policies](#tag-policies)
+* [Deleted Monitors](#deleted-monitors)
 
-- 新規に作成するタグは、組織のタグポリシーに準拠していなければなりません。
-- 既存のモニターが組織のタグポリシーに違反している場合、引き続きアラートと通知は提供されますが、その他の設定を変更する前に、既存のモニターを更新してタグポリシーに合致させる必要があります。
 
-## モニタータグポリシーの構成
+## Tag policies
 
-1. **Monitors** > **Settings** ページに移動します。
-2. タグポリシーを構成します。タグポリシーを通じて実行されるデータ検証ルールは 3 種類存在します。
-    - タグと指定された値が必要
-    - タグのみ必要
-    - オプションのタグと指定された値
-3. 緑色のチェックマークをクリックして、ポリシーを保存します。
+Monitor tag policies allow you to enforce data validation on tags and tag values on your Datadog monitors. This ensures that alerts are sent to the correct downstream systems and workflows for triage and processing.
 
-{{< img src="/monitors/settings/tag_policies.png" alt="モニターのタグポリシー設定ページ" style="width:100%;" >}}
+<div class="alert alert-warning">After set up, tag policies apply to <strong>all</strong> Datadog monitors</div>
 
-### タグと指定された値が必要
+- To create a new monitor, it must adhere to your organization's tag policies.
+- Existing monitors that violate your organization's tag policies continue to provide alerts and notifications, but must be updated to match the tag policies before you can modify other settings.
 
-必須タグを強制する場合、**Required** チェックボックスを選択して、タグのキーと値を両方指定します。この例では、モニターには `cost_center` タグが追加されていなければなりません。値は `cc1`、`cc2`、または `cc3` に設定する必要があります。
+### Configure monitor tag policies
 
-{{< img src="monitors/settings/monitor_tag_enforcement_key_and_value.png" alt="必須のタグと値に関するタグポリシーが表示されているモニター設定ページ" >}}
+1. Navigate to the [**Monitors Settings**][1] page.
+2. Open the "Tag policies" tab. There are three data validation rules that are enforced through tag policies:
+    - Require tags with mandatory values
+    - Require tags only
+    - Optional tags with mandatory values
+3. Click the green checkmark to save the policy.
 
-### タグのみ必要
+{{< img src="/monitors/settings/tag_policies.png" alt="Monitor setting tag policies page" style="width:100%;" >}}
 
-タグを必須にする一方、ユーザーが独自の値を指定することを許可することができます。この例では、モニターには `product_id` タグが追加されていなければなりません。値は、ユーザーが指定するどんな値でも構いません。
+### Require tags with mandatory values
 
-{{< img src="monitors/settings/monitor_tag_enforcement_key_only.png" alt="タグのみが必須のタグポリシーが表示されているモニター設定ページ" >}}
+To enforce mandatory tags, select the **Required** check box and specify both the tag key and values. In this example, monitors are required to have the `cost_center` tag. The value must be set to `cc1`, `cc2`, or `cc3`.
 
-### オプションのタグと指定された値
+{{< img src="monitors/settings/monitor_tag_enforcement_key_and_value.png" alt="The Monitors Settings page displaying a tag policy for a required tag with mandatory values" >}}
 
-タグをオプションにする一方、そのタグが追加されたモニターでは指定された値を使用することを必須にする場合、**Values** フィールドにタグの値を入力します。この例では、`env` タグはオプションですが、モニターがこのタグを使用する場合、値は `dev`、`staging`、または `prod` に設定する必要があります。
+### Require tags only
 
-{{< img src="monitors/settings/monitor_tag_enforcement_optional_key_with_values.png" alt="オプションのタグと指定された値に関するタグポリシーが表示されているモニター設定ページ" >}}
+You can require a tag but allow users to specify their own values. In this example, monitors are required to have the `product_id` tag. The value can be anything specified by the user.
 
-## アクセス許可
+{{< img src="monitors/settings/monitor_tag_enforcement_key_only.png" alt="The Monitors Settings page displaying a tag policy in which only the tag is required" >}}
 
-モニターのタグポリシーを構成するには、`MONITOR_CONFIG_POLICY_WRITE_PERMISSION` の権限を持つロールを割り当てられている必要があります。
+### Optional tag with mandatory values
 
-詳しくは、[ロールベースアクセスコントロール][1]および[ロール権限][2]を参照してください。
+To make a tag optional but require that monitors with the tag use specific values, enter the values for the tag in the **Values** field. In this example, the `env` tag is optional. However, if a monitor uses this tag, the value must be set to `dev`, `staging`, or `prod`.
 
-## その他の参考資料
+{{< img src="monitors/settings/monitor_tag_enforcement_optional_key_with_values.png" alt="The Monitors Settings page displaying a tag policy for an optional tag with mandatory values" >}}
+
+### Permissions
+
+To configure monitor tag policies, you must be assigned a role with the `MONITOR_CONFIG_POLICY_WRITE_PERMISSION` permission.
+
+For more information, see [Role Based Access Control][2] and [Role Permissions][3].
+
+
+## Deleted monitors
+Monitors are retained for 7 days before being permanently deleted. To restore recently deleted Datadog monitors:
+1. Navigate to the [**Monitors** > **Settings**][1] page.
+1. Open the **Deleted Monitors** tab.
+1. Select the monitor(s) you want to restore.
+1. Click the **Restore** button at the top of the table.
+
+{{< img src="monitors/settings/recently_deleted.png" alt="Restore deleted monitor" style="width:100%;">}}
+
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/account_management/rbac/
-[2]: /ja/account_management/rbac/permissions/
+[1]: https://app.datadoghq.com/monitors/settings
+[2]: /account_management/rbac/
+[3]: /account_management/rbac/permissions/

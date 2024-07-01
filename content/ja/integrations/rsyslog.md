@@ -1,49 +1,49 @@
 ---
-aliases:
-- /ja/logs/log_collection/rsyslog
+title: Rsyslog
+name: rsyslog
+custom_kind: integration
+description: 'Configure Rsyslog to gather logs from your host, containers, & services.'
+short_description: 'Configure Rsyslog to gather logs from your host, containers, & services.'
 categories:
-- ログの収集
-dependencies:
-- https://github.com/DataDog/documentation/blob/master/content/en/integrations/rsyslog.md
-description: Rsyslog を構成して、ホスト、コンテナ、サービスからログを収集
+    - log collection
 doc_link: /integrations/rsyslog/
+aliases:
+    - /logs/log_collection/rsyslog
 has_logo: true
-integration_id: rsyslog
 integration_title: rsyslog
 is_public: true
-kind: インテグレーション
-name: rsyslog
-public_title: Datadog-Rsyslog インテグレーション
-short_description: Rsyslog を構成して、ホスト、コンテナ、サービスからログを収集
+dependencies:
+    ["https://github.com/DataDog/documentation/blob/master/content/en/integrations/rsyslog.md"]
+public_title: Datadog-Rsyslog Integration
 supported_os:
-- linux
-title: Rsyslog
+    - linux
+integration_id: "rsyslog"
 ---
 
-## 概要
+## Overview
 
-Rsyslog を構成して、ホスト、コンテナ、サービスからログを収集します。
+Configure Rsyslog to gather logs from your host, containers, and services.
 
-## セットアップ
+## Setup
 
-### ログの収集
+### Log collection
 
-#### Rsyslog バージョン 8 以上 
+#### Rsyslog version >=8
 
 {{< tabs >}}
 
-{{% tab "Ubuntu と Debian" %}}
-1. 特定のログファイルを監視するために `imfile` モジュールを有効にします。`imfile` モジュールを追加するには、`rsyslog.conf` に以下を追加します。
+{{% tab "Ubuntu and Debian" %}}
+1. Activate the `imfile` module to monitor specific log files. To add the `imfile` module, add the following to your `rsyslog.conf`:
 
     ```conf
     module(load="imfile" PollingInterval="10") #needs to be done just once
     ```
 
-2. `/etc/rsyslog.d/datadog.conf` ファイルを作成します。
+2. Create an `/etc/rsyslog.d/datadog.conf` file.
 
 {{< site-region region="us,eu" >}}
 
-3. `/etc/rsyslog.d/datadog.conf` に以下の構成を追加し、`<site_url>` を **{< region-param key="dd_site" >}** に、`<API_KEY>` を自分の Datadog API キーに置き換えます。監視したいログファイルごとに、別の `input` 行を記述する必要があります。
+3. In `/etc/rsyslog.d/datadog.conf`, add the following configuration and replace `<site_url>` with **{{< region-param key="dd_site" >}}** and `<API_KEY>` with your Datadog API key. You must include a separate `input` line for each log file you want to monitor:
 
    ```conf
    ## For each file to send
@@ -61,7 +61,7 @@ Rsyslog を構成して、ホスト、コンテナ、サービスからログを
 
 {{< site-region region="us3,us5,ap1,gov" >}}
 
-3. `/etc/rsyslog.d/datadog.conf` に以下の構成を追加します。`<site_url>` を **{< region-param key="dd_site" >}** に、`<API_KEY>` を自分の Datadog API キーに置き換えます。監視したいログファイルごとに、別の `input` 行を記述する必要があります。
+3. In `/etc/rsyslog.d/datadog.conf`, add the following configuration. Replace `<site_url>` with **{{< region-param key="dd_site" >}}** and `<API_KEY>` with your Datadog API key. You must include a separate `input` line for each log file you want to monitor:
 
    ```conf
    ## For each file to send
@@ -73,61 +73,61 @@ Rsyslog を構成して、ホスト、コンテナ、サービスからログを
    # include the omhttp module
    module(load="omhttp")
 
-   ruleset(name="infiles") { 
+   ruleset(name="infiles") {
       action(type="omhttp" server="http-intake.logs.<site_url>" serverport="443" restpath="api/v2/logs" template="test_template" httpheaders=["DD-API-KEY: <API_KEY>", "Content-Type: application/json"])
    }
    ```
 {{< /site-region >}}
 
-4. Rsyslog を再起動します。新しいログが Datadog アカウントへ直接転送されます。
+4. Restart Rsyslog. Your new logs are forwarded directly to your Datadog account.
    ```shell
    sudo systemctl restart rsyslog
    ```
 
-5. ログをホストのメトリクスおよびタグと関連付けます。
+5. Associate your logs with the host metrics and tags.
 
-   ログを Datadog アカウント内の同一のホストのメトリクスおよびタグと関連付けるには、 `rsyslog.conf` で Datadog メトリクスのホスト名と一致するように `HOSTNAME` を設定します。
-   - `datadog.conf` または `datadog.yaml` でホスト名を指定している場合は、`rsyslog.conf` の `%HOSTNAME%` をホスト名に合わせて置き換えます。
-   - `datadog.conf` または `datadog.yaml` でホスト名を指定していない場合は、何も変更する必要はありません。
+   To make sure that your logs are associated with the metrics and tags from the same host in your Datadog account, set the `HOSTNAME` in your `rsyslog.conf` to match the hostname of your Datadog metrics.
+   - If you specified a hostname in `datadog.conf` or `datadog.yaml`, replace the `%HOSTNAME%` value in `rsyslog.conf` to match your hostname.
+   - If you did not specify a hostname in `datadog.conf` or `datadog.yaml`, you do not need to change anything.
 
-6. Datadog でログを最大限に活用するために、ログのソースを設定します。
-   - [Datadog Agent にログを転送する][1]場合、Agent のコンフィギュレーションファイルでソースを設定することができます。
-   - Datadog Agent にログを転送しない場合は、`/etc/rsyslog.d/` に各ソース用の個別のコンフィギュレーションファイルを作成します。
+6. To get the best use out of your logs in Datadog, set a source for the logs.
+   - If you [forward your logs to the Datadog Agent][1], you can set the source in the Agent configuration file.
+   - If you're not forwarding your logs to the Datadog Agent, create a distinct configuration file for each source in `/etc/rsyslog.d/`.
 
-     ソースを設定するには、以下の形式を使用します (ソースが複数ある場合は、ファイルごとに形式の名前を変えてください)。
+     To set the source, use the following format (if you have several sources, change the name of the format in each file):
 
      ```conf
      $template DatadogFormat,"<DATADOG_API_KEY> <%pri%>%protocol-version% %timestamp:::date-rfc3339% %HOSTNAME% %app-name% - - [metas ddsource=\"<MY_SOURCE_NAME>\"] %msg%\n"
      ```
 
-     `ddtags` 属性を使用してカスタムタグを追加することができます。
+     You can add custom tags with the `ddtags` attribute:
 
      ```conf
      $template DatadogFormat,"<DATADOG_API_KEY> <%pri%>%protocol-version% %timestamp:::date-rfc3339% %HOSTNAME% %app-name% - - [metas ddsource=\"<MY_SOURCE_NAME>\" ddtags=\"env:dev,<KEY:VALUE>\"] %msg%\n"
      ```
 
-7. (任意) Datadog は、非アクティブな状態が一定時間続くと、非アクティブな接続を切断します。Rsyslog の一部のバージョンは、必要に応じて再接続を行うことができません。この問題を軽減するには、タイムマーカーを使用して、接続が切断されないようにします。
+7. (Optional) Datadog cuts inactive connections after a period of inactivity. Some versions of Rsyslog are not able to reconnect when necessary. To mitigate this issue, use time markers so the connection never stops:
 
-   1. Rsyslog のコンフィギュレーションファイルに以下の行を追加します。
+   1. Add the following lines to your Rsyslog configuration file:
 
       ```conf
       $ModLoad immark
       $MarkMessagePeriod 20
       ```
 
-   2. Rsyslog サービスを再起動します。
+   2. Restart the Rsyslog service:
 
       ```shell
       sudo systemctl restart rsyslog
       ```
 
 {{% site-region region="us" %}}
-8. (オプション) Rsyslog から Datadog アカウントに送信されるログに TLS Encryption を追加します。
-   1. `rsyslog-gnutls` と `ca-certificates` パッケージをインストールします。
+8. (Optional) Add TLS Encryption to logs sent from Rsyslog to your Datadog account.
+   1. Install the `rsyslog-gnutls` and `ca-certificates` packages:
       ```shell
       sudo apt-get install rsyslog-gnutls ca-certificates
       ```
-   2. 以下の行を `/etc/rsyslog.d/datadog.conf` ファイルの末尾に追加します。
+   2. Add the following line to the bottom of your `/etc/rsyslog.d/datadog.conf` file:
       ```conf
       ## Define the destination for the logs
       $DefaultNetstreamDriverCAFile /etc/ssl/certs/ca-certificates.crt
@@ -135,7 +135,7 @@ Rsyslog を構成して、ホスト、コンテナ、サービスからログを
           action(type="omfwd" protocol="tcp" target="intake.logs.datadoghq.com" port="10516" template="DatadogFormat" StreamDriver="gtls" StreamDriverMode="1" StreamDriverAuthMode="x509/name" StreamDriverPermittedPeers="*.logs.datadoghq.com" )
       }
       ```
-   3. Rsyslog サービスを再起動します。
+   3. Restart the Rsyslog service:
 
       ```shell
       sudo systemctl restart rsyslog
@@ -143,13 +143,13 @@ Rsyslog を構成して、ホスト、コンテナ、サービスからログを
 {{% /site-region %}}
 {{% site-region region="eu" %}}
 
-8. (オプション) Rsyslog から Datadog アカウントに送信されるログに TLS Encryption を追加します。
-   1. `rsyslog-gnutls` と `ca-certificates` パッケージをインストールします。
+8. (Optional) Add TLS Encryption to logs sent from Rsyslog to your Datadog account.
+   1. Install the `rsyslog-gnutls` and `ca-certificates` packages:
       ```shell
       sudo apt-get install rsyslog-gnutls ca-certificates
       ```
 
-   2. 以下の行を `/etc/rsyslog.d/datadog.conf` ファイルの末尾に追加します。
+   2. Add the following line to the bottom of your `/etc/rsyslog.d/datadog.conf` file:
       ```conf
       ## Define the destination for the logs
       $DefaultNetstreamDriverCAFile /etc/ssl/certs/ca-certificates.crt
@@ -157,28 +157,28 @@ Rsyslog を構成して、ホスト、コンテナ、サービスからログを
           action(type="omfwd" protocol="tcp" target="tcp-intake.logs.datadoghq.eu" port="443" template="DatadogFormat" StreamDriver="gtls" StreamDriverMode="1" StreamDriverAuthMode="x509/name" StreamDriverPermittedPeers="*.logs.datadoghq.eu" )
       }
        ```
-   3. Rsyslog サービスを再起動します。
+   3. Restart the Rsyslog service:
 
       ```shell
       sudo systemctl restart rsyslog
       ```
 {{% /site-region %}}
 
-[1]: /ja/agent/logs/
+[1]: /agent/logs/
 {{% /tab %}}
 
-{{% tab "Amazon Linux、CentOS、Red Hat" %}}
-1. 特定のログファイルを監視するために `imfile` モジュールを有効にします。`imfile` モジュールを追加するには、`rsyslog.conf` に以下を追加します。
+{{% tab "Amazon Linux, CentOS, and Red Hat" %}}
+1. Activate the `imfile` module to monitor specific log files. To add the `imfile` module, add the following to your `rsyslog.conf`:
 
     ```conf
     module(load="imfile" PollingInterval="10") #needs to be done just once
     ```
 
-2. `/etc/rsyslog.d/datadog.conf` ファイルを作成します。
+2. Create an `/etc/rsyslog.d/datadog.conf` file.
 
 {{< site-region region="us,eu" >}}
 
-3. `/etc/rsyslog.d/datadog.conf` に以下の構成を追加し、`<site_url>` を **{< region-param key="dd_site" >}** に、`<API_KEY>` を自分の Datadog API キーに置き換えます。監視したいログファイルごとに、別の `input` 行を記述する必要があります。
+3. In `/etc/rsyslog.d/datadog.conf`, add the following configuration and replace `<site_url>` with **{{< region-param key="dd_site" >}}** and `<API_KEY>` with your Datadog API key. You must include a separate `input` line for each log file you want to monitor:
 
    ```conf
    ## For each file to send
@@ -196,7 +196,7 @@ Rsyslog を構成して、ホスト、コンテナ、サービスからログを
 
 {{< site-region region="us3,us5,ap1,gov" >}}
 
-3. `/etc/rsyslog.d/datadog.conf` に以下の構成を追加します。`<site_url>` を **{< region-param key="dd_site" >}** に、`<API_KEY>` を自分の Datadog API キーに置き換えます。監視したいログファイルごとに、別の `input` 行を記述する必要があります。
+3. In `/etc/rsyslog.d/datadog.conf`, add the following configuration. Replace `<site_url>` with **{{< region-param key="dd_site" >}}** and `<API_KEY>` with your Datadog API key. You must include a separate `input` line for each log file you want to monitor:
 
    ```conf
    ## For each file to send
@@ -208,61 +208,61 @@ Rsyslog を構成して、ホスト、コンテナ、サービスからログを
    # include the omhttp module
    module(load="omhttp")
 
-   ruleset(name="infiles") { 
+   ruleset(name="infiles") {
       action(type="omhttp" server="http-intake.logs.<site_url>" serverport="443" restpath="api/v2/logs" template="test_template" httpheaders=["DD-API-KEY: <API_KEY>", "Content-Type: application/json"])
    }
    ```
 {{< /site-region >}}
 
-4. Rsyslog を再起動します。新しいログが Datadog アカウントへ直接転送されます。
+4. Restart Rsyslog. Your new logs are forwarded directly to your Datadog account.
    ```shell
    sudo systemctl restart rsyslog
    ```
 
-5. ログをホストのメトリクスおよびタグと関連付けます。
+5. Associate your logs with the host metrics and tags:
 
-   ログを Datadog アカウント内の同一のホストのメトリクスおよびタグと関連付けるには、 `rsyslog.conf` で Datadog メトリクスのホスト名と一致するように `HOSTNAME` を設定します。
-   - `datadog.conf` または `datadog.yaml` でホスト名を指定している場合は、`rsyslog.conf` の `%HOSTNAME%` をホスト名に合わせて置き換えます。
-   - `datadog.conf` または `datadog.yaml` でホスト名を指定していない場合は、何も変更する必要はありません。
+   To make sure that your logs are associated with the metrics and tags from the same host in your Datadog account, set the `HOSTNAME` in your `rsyslog.conf` to match the hostname of your Datadog metrics.
+   - If you specified a hostname in `datadog.conf` or `datadog.yaml`, replace the `%HOSTNAME%` value in `rsyslog.conf` to match your hostname.
+   - If you did not specify a hostname in `datadog.conf` or `datadog.yaml`, you do not need to change anything.
 
-6. Datadog でログを最大限に活用するために、ログのソースを設定します。
-   - [Datadog Agent にログを転送する][1]場合、Agent のコンフィギュレーションファイルでソースを設定することができます。
-   - Datadog Agent にログを転送しない場合は、`/etc/rsyslog.d/` に各ソース用の個別のコンフィギュレーションファイルを作成します。
+6. To get the best use out of your logs in Datadog, set a source for the logs.
+   - If you [forward your logs to the Datadog Agent][1], you can set the source in the Agent configuration file.
+   - If you're not forwarding your logs to the Datadog Agent, create a distinct configuration file for each source in `/etc/rsyslog.d/`:
 
-     ソースを設定するには、以下の形式を使用します (ソースが複数ある場合は、ファイルごとに形式の名前を変えてください)。
+     To set the source, use the following format (if you have several sources, change the name of the format in each file):
 
      ```conf
      $template DatadogFormat,"<DATADOG_API_KEY> <%pri%>%protocol-version% %timestamp:::date-rfc3339% %HOSTNAME% %app-name% - - [metas ddsource=\"<MY_SOURCE_NAME>\"] %msg%\n"
      ```
 
-     `ddtags` 属性を使用してカスタムタグを追加することができます。
+     You can add custom tags with the `ddtags` attribute:
 
      ```conf
      $template DatadogFormat,"<DATADOG_API_KEY> <%pri%>%protocol-version% %timestamp:::date-rfc3339% %HOSTNAME% %app-name% - - [metas ddsource=\"<MY_SOURCE_NAME>\" ddtags=\"env:dev,<KEY:VALUE>\"] %msg%\n"
      ```
 
-7. (任意) Datadog は、非アクティブな状態が一定時間続くと、非アクティブな接続を切断します。Rsyslog の一部のバージョンは、必要に応じて再接続を行うことができません。この問題を軽減するには、タイムマーカーを使用して、接続が切断されないようにします。
+7. (Optional) Datadog cuts inactive connections after a period of inactivity. Some versions of Rsyslog are not able to reconnect when necessary. To mitigate this issue, use time markers so the connection never stops:
 
-   1. Rsyslog のコンフィギュレーションファイルに以下の 2 行を追加します。
+   1. Add the following two lines to your Rsyslog configuration file:
 
       ```conf
       $ModLoad immark
       $MarkMessagePeriod 20
       ```
 
-   2. Rsyslog サービスを再起動します。
+   2. Restart the Rsyslog service:
 
       ```shell
       sudo systemctl restart rsyslog
       ```
 
 {{% site-region region="us" %}}
-8. (オプション) Rsyslog から Datadog アカウントに送信されるログに TLS Encryption を追加します。
-   1. `rsyslog-gnutls` と `ca-certificates` パッケージをインストールします。
+8. (Optional) Add TLS Encryption to logs sent from Rsyslog to your Datadog account.
+   1. Install the `rsyslog-gnutls` and `ca-certificates` packages:
       ```shell
       sudo yum install rsyslog-gnutls ca-certificates
       ```
-   2. 以下の行を `/etc/rsyslog.d/datadog.conf` ファイルの末尾に追加します。
+   2. Add the following line to the bottom of your `/etc/rsyslog.d/datadog.conf` file:
       ```conf
       ## Define the destination for the logs
       $DefaultNetstreamDriverCAFile /etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem
@@ -270,7 +270,7 @@ Rsyslog を構成して、ホスト、コンテナ、サービスからログを
           action(type="omfwd" protocol="tcp" target="intake.logs.datadoghq.com" port="10516" template="DatadogFormat" StreamDriver="gtls" StreamDriverMode="1" StreamDriverAuthMode="x509/name" StreamDriverPermittedPeers="*.logs.datadoghq.com" )
       }
       ```
-   3. Rsyslog サービスを再起動します。
+   3. Restart the Rsyslog service:
 
       ```shell
       sudo systemctl restart rsyslog
@@ -279,13 +279,13 @@ Rsyslog を構成して、ホスト、コンテナ、サービスからログを
 
 {{% site-region region="eu" %}}
 
-8. (オプション) Rsyslog から Datadog アカウントに送信されるログに TLS Encryption を追加します。
-   1. `rsyslog-gnutls` と `ca-certificates` パッケージをインストールします。
+8. (Optional) Add TLS Encryption to logs sent from Rsyslog to your Datadog account:
+   1. Install the `rsyslog-gnutls` and `ca-certificates` packages:
       ```shell
       sudo yum install rsyslog-gnutls ca-certificates
       ```
 
-   2. 以下の行を `/etc/rsyslog.d/datadog.conf` ファイルの末尾に追加します。
+   2. Add the following line to the bottom of your `/etc/rsyslog.d/datadog.conf` file:
       ```conf
       ## Define the destination for the logs
       $DefaultNetstreamDriverCAFile /etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem
@@ -293,29 +293,29 @@ Rsyslog を構成して、ホスト、コンテナ、サービスからログを
           action(type="omfwd" protocol="tcp" target="tcp-intake.logs.datadoghq.eu" port="443" template="DatadogFormat" StreamDriver="gtls" StreamDriverMode="1" StreamDriverAuthMode="x509/name" StreamDriverPermittedPeers="*.logs.datadoghq.eu" )
       }
        ```
-   3. Rsyslog サービスを再起動します。
+   3. Restart the Rsyslog service:
 
       ```shell
       sudo systemctl restart rsyslog
       ```
 {{% /site-region %}}
 
-[1]: /ja/agent/logs/
+[1]: /agent/logs/
 {{% /tab %}}
 
 {{% tab "Fedora" %}}
-1. 特定のログファイルを監視するために `imfile` モジュールを有効にします。`imfile` モジュールを追加するには、`rsyslog.conf` に以下を追加します。
+1. Activate the `imfile` module to monitor specific log files. To add the `imfile` module, add the following to your `rsyslog.conf`:
 
     ```conf
     module(load="imfile" PollingInterval="10") #needs to be done just once
     ```
 
-2. `/etc/rsyslog.d/datadog.conf` ファイルを作成します。
+2. Create an `/etc/rsyslog.d/datadog.conf` file.
 
 
 {{< site-region region="us,eu" >}}
 
-3. `/etc/rsyslog.d/datadog.conf` に以下の構成を追加し、`<site_url>` を **{< region-param key="dd_site" >}** に、`<API_KEY>` を自分の Datadog API キーに置き換えます。監視したいログファイルごとに、別の `input` 行を記述する必要があります。
+3. In `/etc/rsyslog.d/datadog.conf`, add the following configuration and replace `<site_url>` with **{{< region-param key="dd_site" >}}** and `<API_KEY>` with your Datadog API key. You must include a separate `input` line for each log file you want to monitor:
 
    ```conf
    ## For each file to send
@@ -333,7 +333,7 @@ Rsyslog を構成して、ホスト、コンテナ、サービスからログを
 
 {{< site-region region="us3,us5,ap1,gov" >}}
 
-3. `/etc/rsyslog.d/datadog.conf` に以下の構成を追加します。`<site_url>` を **{< region-param key="dd_site" >}** に、`<API_KEY>` を自分の Datadog API キーに置き換えます。監視したいログファイルごとに、別の `input` 行を記述する必要があります。
+3. In `/etc/rsyslog.d/datadog.conf`, add the following configuration. Replace `<site_url>` with **{{< region-param key="dd_site" >}}** and `<API_KEY>` with your Datadog API key. You must include a separate `input` line for each log file you want to monitor:
 
    ```conf
    ## For each file to send
@@ -345,61 +345,61 @@ Rsyslog を構成して、ホスト、コンテナ、サービスからログを
    # include the omhttp module
    module(load="omhttp")
 
-   ruleset(name="infiles") { 
+   ruleset(name="infiles") {
       action(type="omhttp" server="http-intake.logs.<site_url>" serverport="443" restpath="api/v2/logs" template="test_template" httpheaders=["DD-API-KEY: <API_KEY>", "Content-Type: application/json"])
    }
    ```
 {{< /site-region >}}
 
-4. Rsyslog を再起動します。新しいログが Datadog アカウントへ直接転送されます。
+4. Restart Rsyslog. Your new logs are forwarded directly to your Datadog account.
    ```shell
    sudo systemctl restart rsyslog
    ```
 
-5. ログをホストのメトリクスおよびタグと関連付けます。
+5. Associate your logs with the host metrics and tags:
 
-   ログを Datadog アカウント内の同一のホストのメトリクスおよびタグと関連付けるには、 `rsyslog.conf` で Datadog メトリクスのホスト名と一致するように `HOSTNAME` を設定します。
-   - `datadog.conf` または `datadog.yaml` でホスト名を指定している場合は、`rsyslog.conf` の `%HOSTNAME%` をホスト名に合わせて置き換えます。
-   - `datadog.conf` または `datadog.yaml` でホスト名を指定していない場合は、何も変更する必要はありません。
+   To make sure that your logs are associated with the metrics and tags from the same host in your Datadog account, set the `HOSTNAME` in your `rsyslog.conf` to match the hostname of your Datadog metrics.
+   - If you specified a hostname in `datadog.conf` or `datadog.yaml`, replace the `%HOSTNAME%` value in `rsyslog.conf` to match your hostname.
+   - If you did not specify a hostname in `datadog.conf` or `datadog.yaml`, you do not need to change anything.
 
-6. Datadog でログを最大限に活用するために、ログのソースを設定します。
-   - [Datadog Agent にログを転送する][1]場合、Agent のコンフィギュレーションファイルでソースを設定することができます。
-   - Datadog Agent にログを転送しない場合は、`/etc/rsyslog.d/` に各ソース用の個別のコンフィギュレーションファイルを作成します。
+6. To get the best use out of your logs in Datadog, set a source for the logs.
+   - If you [forward your logs to the Datadog Agent][1], you can set the source in the Agent configuration file.
+   - If you're not forwarding your logs to the Datadog Agent, create a distinct configuration file for each source in `/etc/rsyslog.d/`:
 
-     ソースを設定するには、以下の形式を使用します (ソースが複数ある場合は、ファイルごとに形式の名前を変えてください)。
+     To set the source, use the following format (if you have several sources, change the name of the format in each file):
 
      ```conf
      $template DatadogFormat,"<DATADOG_API_KEY> <%pri%>%protocol-version% %timestamp:::date-rfc3339% %HOSTNAME% %app-name% - - [metas ddsource=\"<MY_SOURCE_NAME>\"] %msg%\n"
      ```
 
-     `ddtags` 属性を使用してカスタムタグを追加することができます。
+     You can add custom tags with the `ddtags` attribute:
 
      ```conf
      $template DatadogFormat,"<DATADOG_API_KEY> <%pri%>%protocol-version% %timestamp:::date-rfc3339% %HOSTNAME% %app-name% - - [metas ddsource=\"<MY_SOURCE_NAME>\" ddtags=\"env:dev,<KEY:VALUE>\"] %msg%\n"
      ```
 
-7. (任意) Datadog は、非アクティブな状態が一定時間続くと、非アクティブな接続を切断します。Rsyslog の一部のバージョンは、必要に応じて再接続を行うことができません。この問題を軽減するには、タイムマーカーを使用して、接続が切断されないようにします。
+7. (Optional) Datadog cuts inactive connections after a period of inactivity. Some versions of Rsyslog are not able to reconnect when necessary. To mitigate this issue, use time markers so the connection never stops:
 
-   1. Rsyslog のコンフィギュレーションファイルに以下の 2 行を追加します。
+   1. Add the following two lines to your Rsyslog configuration file:
 
       ```conf
       $ModLoad immark
       $MarkMessagePeriod 20
       ```
 
-   2. Rsyslog サービスを再起動します。
+   2. Restart the Rsyslog service:
 
       ```shell
       sudo systemctl restart rsyslog
       ```
 
 {{% site-region region="us" %}}
-8. (オプション) Rsyslog から Datadog アカウントに送信されるログに TLS Encryption を追加します。
-   1. `rsyslog-gnutls` と `ca-certificates` パッケージをインストールします。
+8. (Optional) Add TLS Encryption to logs sent from Rsyslog to your Datadog account.
+   1. Install the `rsyslog-gnutls` and `ca-certificates` packages:
       ```shell
       sudo dnf install rsyslog-gnutls ca-certificates
       ```
-   2. 以下の行を `/etc/rsyslog.d/datadog.conf` ファイルの末尾に追加します。
+   2. Add the following line to the bottom of your `/etc/rsyslog.d/datadog.conf` file:
       ```conf
       ## Define the destination for the logs
       $DefaultNetstreamDriverCAFile /etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem
@@ -407,7 +407,7 @@ Rsyslog を構成して、ホスト、コンテナ、サービスからログを
           action(type="omfwd" protocol="tcp" target="intake.logs.datadoghq.com" port="10516" template="DatadogFormat" StreamDriver="gtls" StreamDriverMode="1" StreamDriverAuthMode="x509/name" StreamDriverPermittedPeers="*.logs.datadoghq.com" )
       }
       ```
-   3. Rsyslog サービスを再起動します。
+   3. Restart the Rsyslog service:
 
       ```shell
       sudo systemctl restart rsyslog
@@ -416,13 +416,13 @@ Rsyslog を構成して、ホスト、コンテナ、サービスからログを
 
 {{% site-region region="eu" %}}
 
-8. (オプション) Rsyslog から Datadog アカウントに送信されるログに TLS Encryption を追加します。
-   1. `rsyslog-gnutls` と `ca-certificates` パッケージをインストールします。
+8. (Optional) Add TLS Encryption to logs sent from Rsyslog to your Datadog account.
+   1. Install the `rsyslog-gnutls` and `ca-certificates` packages:
       ```shell
       sudo dnf install rsyslog-gnutls ca-certificates
       ```
 
-   2. 以下の行を `/etc/rsyslog.d/datadog.conf` ファイルの末尾に追加します。
+   2. Add the following line to the bottom of your `/etc/rsyslog.d/datadog.conf` file:
       ```conf
       ## Define the destination for the logs
       $DefaultNetstreamDriverCAFile /etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem
@@ -430,21 +430,21 @@ Rsyslog を構成して、ホスト、コンテナ、サービスからログを
           action(type="omfwd" protocol="tcp" target="tcp-intake.logs.datadoghq.eu" port="443" template="DatadogFormat" StreamDriver="gtls" StreamDriverMode="1" StreamDriverAuthMode="x509/name" StreamDriverPermittedPeers="*.logs.datadoghq.eu" )
       }
        ```
-   3. Rsyslog サービスを再起動します。
+   3. Restart the Rsyslog service:
 
       ```shell
       sudo systemctl restart rsyslog
       ```
 {{% /site-region %}}
 
-[1]: /ja/agent/logs/
+[1]: /agent/logs/
 {{% /tab %}}
 
 {{< /tabs >}}
 
-## トラブルシューティング
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][1]までお問合せください。
+Need help? Contact [Datadog support][1].
 
 
-[1]: /ja/help/
+[1]: /help/

@@ -1,159 +1,160 @@
 ---
-app_id: yugabytedb-managed
-app_uuid: c5cf1ad4-fa3f-4835-9f3b-f467288b382a
-assets:
-  dashboards:
-    yugabytedb_managed_overview: assets/dashboards/yugabytedb_managed_overview.json
-  integration:
-    auto_install: true
-    configuration: {}
-    events:
-      creates_events: false
-    metrics:
-      check: ybdb.up
-      metadata_path: metadata.csv
-      prefix: ybdb.
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 10408
-    source_type_name: YugabyteDB Managed
-author:
-  homepage: https://yugabyte.com/
-  name: YugabyteDB
-  sales_email: sales@yugabyte.com
-  support_email: support@yugabyte.com
-categories:
+"app_id": "yugabytedb-managed"
+"app_uuid": "c5cf1ad4-fa3f-4835-9f3b-f467288b382a"
+"assets":
+  "dashboards":
+    "yugabytedb_managed_overview": assets/dashboards/yugabytedb_managed_overview.json
+  "integration":
+    "auto_install": true
+    "configuration": {}
+    "events":
+      "creates_events": false
+    "metrics":
+      "check": ybdb.up
+      "metadata_path": metadata.csv
+      "prefix": ybdb.
+    "service_checks":
+      "metadata_path": assets/service_checks.json
+    "source_type_id": !!int "10408"
+    "source_type_name": YugabyteDB Managed
+"author":
+  "homepage": "https://yugabyte.com/"
+  "name": YugabyteDB
+  "sales_email": sales@yugabyte.com
+  "support_email": support@yugabyte.com
+"categories":
 - data stores
-- クラウド
-- AWS
-- Azure
-- Google Cloud
-- モニター
-dependencies:
-- https://github.com/DataDog/integrations-extras/blob/master/yugabytedb_managed/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: yugabytedb_managed
-integration_id: yugabytedb-managed
-integration_title: YugabyteDB Managed
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: 2.0.0
-name: yugabytedb_managed
-public_title: YugabyteDB Managed
-short_description: YugabyteDB Managed クラスターのメトリクスを Datadog にエクスポートする
-supported_os:
+- cloud
+- aws
+- azure
+- google cloud
+- metrics
+"custom_kind": "integration"
+"dependencies":
+- "https://github.com/DataDog/integrations-extras/blob/master/yugabytedb_managed/README.md"
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "yugabytedb_managed"
+"integration_id": "yugabytedb-managed"
+"integration_title": "YugabyteDB Managed"
+"integration_version": ""
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "yugabytedb_managed"
+"public_title": "YugabyteDB Managed"
+"short_description": "Export YugabyteDB Managed cluster metrics to Datadog"
+"supported_os":
 - linux
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Data Stores
-  - Supported OS::Linux
-  - Category::Cloud
-  - Category::AWS
-  - Category::Azure
-  - Category::Google Cloud
-  - Category::Metrics
-  - Submitted Data Type::Metrics
-  configuration: README.md#Setup
-  description: YugabyteDB Managed クラスターのメトリクスを Datadog にエクスポートする
-  media:
-  - caption: YugabyteDB Managed 概要ダッシュボード
-    image_url: images/overview.png
-    media_type: image
-  - caption: YSQL メトリクスを監視するグラフ
-    image_url: images/ysql.png
-    media_type: image
-  - caption: YCQL メトリクスを監視するグラフ
-    image_url: images/ycql.png
-    media_type: image
-  - caption: ノード/インフラストラクチャーのメトリクスを監視するグラフ
-    image_url: images/infrastructure.png
-    media_type: image
-  - caption: マスターサーバーのメトリクスを監視するグラフ
-    image_url: images/master.png
-    media_type: image
-  - caption: タブレットサーバーのメトリクスを監視するグラフ
-    image_url: images/tserver.png
-    media_type: image
-  overview: README.md#Overview
-  support: README.md#Support
-  title: YugabyteDB Managed
-  uninstallation: README.md#Uninstallation
+"tile":
+  "changelog": CHANGELOG.md
+  "classifier_tags":
+  - "Category::Data Stores"
+  - "Supported OS::Linux"
+  - "Category::Cloud"
+  - "Category::AWS"
+  - "Category::Azure"
+  - "Category::Google Cloud"
+  - "Category::Metrics"
+  - "Submitted Data Type::Metrics"
+  "configuration": "README.md#Setup"
+  "description": Export YugabyteDB Managed cluster metrics to Datadog
+  "media":
+  - "caption": The YugabyteDB Managed Overview dashboard
+    "image_url": images/overview.png
+    "media_type": image
+  - "caption": Graphs to monitor YSQL metrics
+    "image_url": images/ysql.png
+    "media_type": image
+  - "caption": Graphs to monitor YCQL metrics
+    "image_url": images/ycql.png
+    "media_type": image
+  - "caption": Graphs to monitor node/infrastructure metrics
+    "image_url": images/infrastructure.png
+    "media_type": image
+  - "caption": Graphs to monitor master server metrics
+    "image_url": images/master.png
+    "media_type": image
+  - "caption": Graphs to monitor tablet-server metrics
+    "image_url": images/tserver.png
+    "media_type": image
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": YugabyteDB Managed
+  "uninstallation": "README.md#Uninstallation"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
-## 概要
+## Overview
 
-[YugabyteDB][1] は、PostgreSQL と API 互換性のあるクラウドネイティブな分散データベースです。
+[YugabyteDB][1] is a cloud-native, distributed database that is API compatible with PostgreSQL.
 
-[YugabyteDB Managed][2] は、YugabyteDB のフルマネージド DBaaS (Database-as-a-service) です。このインテグレーションを使用すると、クラスターのメトリクスを Datadog に送信して、YugabyteDB Managed クラスターの健全性とパフォーマンスを視覚化することができます。このインテグレーションには、すぐに使えるダッシュボードが付属しており、以下のような YugabyteDB Managed クラスターの健全性とパフォーマンスの監視に必要な最も重要なメトリクスをすべて視覚化します。
-- ノードのリソース使用状況 (ディスク、メモリ、CPU、ネットワークなど)。
-- 読み取り/書き込み操作のスループットとレイテンシー (YSQL と YCQL の両方)。
-- 高度なマスターとタブレットサーバーのテレメトリー (例えば、内部 RPC スループット/レイテンシー、WAL 読み取り/書き込みスループット)。
+[YugabyteDB Managed][2] is YugabyteDB's fully-managed Database-as-a-service (DBaaS). With this integration, you can send your cluster metrics to Datadog for visibility into the health and performance of your YugabyteDB Managed clusters. This integration comes with an out-of-the-box dashboard to provide visibility into all the most important metrics needed to monitor the health and performance of a YugabyteDB Managed cluster such as:
+- Node resource usage (disk, memory, CPU, networking, and more).
+- Read/write operation throughput and latencies (both YSQL and YCQL).
+- Advanced Master and Tablet Server telemetry (for example, internal RPC throughput/latencies and WAL read/write throughput).
 
-## 計画と使用
-**注**: この機能は [Sandbox Clusters][3] では使用できません。
+## Setup
+**Note**: This feature is not available for [Sandbox Clusters][3].
 
-### インフラストラクチャーリスト
+### Installation
 
-YugabyteDB Managed と Datadog のインテグレーションを有効にするには
+To enable the YugabyteDB Managed integration with Datadog:
 
-#### 構成の作成
-1. YugabyteDB Managedで 、**Integrations > Metrics** タブに移動します。
-2. **Create Export Configuration** または **Add Export Configuration** をクリックします。
-3. **Datadog** プロバイダーを選択します。
-4. **API key** と **Site** フィールドに対応する値を入力します。詳細は、[Datadog API とアプリケーションキー][4]および [Datadog サイト URL][5] のドキュメントを参照してください。
-5. 構成を確認するには、**Test Configuration** をクリックします。
-6. **Create Configuration** をクリックします。
+#### Create a configuration
+1. In YugabyteDB Managed, navigate to the **Integrations > Metrics** tab.
+2. Click **Create Export Configuration** or **Add Export Configuration**.
+3. Select the **Datadog** provider.
+4. Fill in the **API key** and **Site** fields with the corresponding values. For more information, see the [Datadog API and Application Keys][4] and [Datadog Site URL][5] documentation.
+5. Click **Test Configuration** to validate the configuration.
+6. Click **Create Configuration**.
 
-#### クラスターへの構成の関連付け
-1. YugabyteDB Managedで 、**Integrations > Metrics** タブに移動します。
-2. **Export Metrics by Cluster** テーブルでクラスターを見つけます。
-3. **Export Configuration** ドロップダウンメニューから必要な構成を選択します。
-4. **Export Status** が `Active` と表示されるのを待ちます。
+#### Associate a configuration to a cluster
+1. In YugabyteDB Managed, navigate to the **Integrations > Metrics** tab.
+2. Find your cluster in the **Export Metrics by Cluster** table.
+3. Select the desired configuration from the **Export Configuration** dropdown menu.
+4. Wait for the **Export Status** to show `Active`.
 
-**注**: クラスターは、一時停止中または別の操作が進行中の場合、構成を関連付けることはできません。
+**Note**: Your cluster cannot associate a configuration when paused or when another operation is in progress.
 
-セットアップの詳細については、[YugabyteDB ドキュメント][6]を参照してください。
+For more information on setup, see the [YugabyteDB documentation][6].
 
-## アンインストール
+## Uninstallation
 
-Datadog にエクスポートされるメトリクスを無効にするには
-1. YugabyteDB Managedで 、**Integrations > Metrics** タブに移動します。
-2. **Export Metrics by Cluster** テーブルでクラスターを見つけます。
-3. **Export Configuration** ドロップダウンでクラスターのドロップダウンを開き、`None` を選択します。
-4. **Export Status** が `-` と表示されるのを待ちます。
+To disable metrics being exported to Datadog:
+1. In YugabyteDB Managed, navigate to the **Integrations > Metrics** tab.
+2. Find your cluster in the **Export Metrics by Cluster** table.
+3. Open the dropdown for your cluster under the **Export Configuration** dropdown and select `None`.
+4. Wait for the **Export Status** to show `-`.
 
-**注**: クラスターは、一時停止中または別の操作が進行中の場合、構成を関連付けることはできません。
+**Note**: Your cluster cannot associate a configuration when paused or when another operation is in progress.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "yugabytedb_managed" >}}
 
 
-### ヘルプ
+### Service Checks
 
-YugabyteDB Managed には、サービスのチェック機能は含まれません。
+YugabyteDB Managed does not include any service checks.
 
-### ヘルプ
+### Events
 
-YugabyteDB Managed には、イベントは含まれません。
+YugabyteDB Managed does not include any events.
 
-## Agent
+## Support
 
-ご不明な点は、[YugabyteDB のサポートチーム][8]までお問い合わせください。
+Need help? Contact [YugabyteDB support][8].
 
 
 [1]: https://yugabyte.com/
 [2]: https://www.yugabyte.com/managed/
 [3]: https://docs.yugabyte.com/preview/yugabyte-cloud/cloud-basics/create-clusters/create-clusters-free/
-[4]: https://docs.datadoghq.com/ja/account_management/api-app-keys/#add-an-api-key-or-client-token
-[5]: https://docs.datadoghq.com/ja/getting_started/site/
+[4]: https://docs.datadoghq.com/account_management/api-app-keys/#add-an-api-key-or-client-token
+[5]: https://docs.datadoghq.com/getting_started/site/
 [6]: https://docs.yugabyte.com/preview/yugabyte-cloud/cloud-monitor/metrics-export/#datadog
 [7]: https://github.com/DataDog/integrations-extras/blob/master/yugabytedb_managed/metadata.csv
 [8]: https://support.yugabyte.com/hc/en-us/requests/new
+

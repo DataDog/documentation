@@ -1,3 +1,3 @@
 ---
-title: イベント
+title: Events
 ---

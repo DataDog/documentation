@@ -1,17 +1,18 @@
 ---
-aliases:
-- /ja/tracing/advanced/runtime_metrics/
-- /ja/tracing/runtime_metrics/
-description: アプリケーションのパフォーマンスに関する詳細情報を、トレースに紐づくランタイムメトリクスと共に取得します。
-title: ランタイムメトリクス
+title: Runtime Metrics
+kind: documentation
 type: multi-code-lang
+aliases:
+  - /tracing/advanced/runtime_metrics/
+  - /tracing/runtime_metrics/
+description: "Gain additional insights into an application's performance with the runtime metrics associated to your traces."
 ---
 
-{{< img src="tracing/runtime_metrics/jvm_runtime_trace.png" alt="JVM ランタイムトレース" >}}
+{{< img src="tracing/runtime_metrics/jvm_runtime_trace.png" alt="JVM Runtime Trace" >}}
 
-トレースクライアントでランタイムメトリクス収集を有効にすると、アプリケーションのパフォーマンスに関する詳細情報を得られます。ランタイムメトリクスは、[サービス][1]のコンテクストで表示することが可能で、要求された時点でのトレースビューに関連付けられ、プラットフォームのあらゆる場所で使用できます。下記から言語を選択して、ランタイムメトリクスを自動で収集する方法をご確認ください。
+Enable runtime metrics collection in the tracing client to gain additional insights into an application's performance. Runtime metrics can be viewed in the context of a [service][1], correlated in the Trace View at the time of a given request, and utilized anywhere in the platform. Select your language below to learn how to automatically collect your runtime metrics:
 
 {{< partial name="apm/apm-runtime-metrics.html" >}}
 <br>
 
-[1]: /ja/tracing/glossary/#services
+[1]: /tracing/glossary/#services

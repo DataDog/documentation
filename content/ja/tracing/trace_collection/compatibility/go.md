@@ -1,89 +1,93 @@
 ---
+title: Go Compatibility Requirements
+kind: documentation
+description: 'Compatibility Requirements for the Go tracer'
 aliases:
-- /ja/tracing/compatibility_requirements/go
-- /ja/tracing/setup_overview/compatibility_requirements/go
+  - /tracing/compatibility_requirements/go
+  - /tracing/setup_overview/compatibility_requirements/go
 code_lang: go
-code_lang_weight: 30
-description: Go トレーサーの互換性要件です。
-further_reading:
-- link: tracing/trace_collection/dd_libraries/go
-  tag: ドキュメント
-  text: アプリケーションのインスツルメンテーション
-title: Go 互換性要件
 type: multi-code-lang
+code_lang_weight: 30
+further_reading:
+    - link: tracing/trace_collection/dd_libraries/go
+      tag: Documentation
+      text: Instrument Your Application
 ---
 
-## 互換性
+## Compatibility
 
-Go Datadog Trace ライブラリはオープンソースです。詳細については、[GitHub リポジトリ][1]をご覧ください。
+The Go Datadog Trace library is open source. View the [GitHub repository][1] for more information.
 
-Go Datadog トレースライブラリは、Go のバージョンに対して[バージョンサポートポリシー][2]が定義されています。Go の 2 つの最新リリースは完全にサポートされ、3 つ目の最新リリースは[メンテナンス][3]中と見なされています。古いバージョンも機能しますが、デフォルトではサポートは提供されません。特別なリクエストは、[サポートに連絡][4]してください。
+The Go Datadog Trace Library has a [version support policy][2] defined for Go versions. The two latest releases of Go are fully supported, while the third newest release is considered in [maintenance][3]. Older versions may function, but no support is provided by default. For special requests, [contact support][4]. 
 
-Datadog Agent v5.21.1+ を実行している必要があります。
+### Requirements
 
-### インテグレーション
+- Datadog Agent v5.21.1+.
+- [Add and initialize the Datadog Go tracer][77] before configuring integrations.
 
-#### フレームワークの互換性
+### Integrations
 
-次のヘルパーパッケージのいずれかを使用して、Go トレーサーと次のリストのウェブフレームワークを統合します。
+#### Framework compatibility
 
-**注**: [インテグレーションドキュメント][5]は、サポートされているパッケージとその API の詳細な概要を使用例とともに提供します。
+Integrate the Go tracer with the following list of web frameworks using one of the following helper packages.
 
-| フレームワーク         | サポートの種類    | GoDoc Datadog ドキュメント                                              |
+**Note**: The [integrations documentation][5] provides a detailed overview of the supported packages and their APIs, along with usage examples.
+
+| Framework         | Support Type    | GoDoc Datadog Documentation                                              |
 |-------------------|-----------------|--------------------------------------------------------------------------|
-| [Gin][6]          | 完全対応 | [gopkg.in/DataDog/dd-trace-go.v1/contrib/gin-gonic/gin][7]               |
-| [Gorilla Mux][8] | 完全対応 | [gopkg.in/DataDog/dd-trace-go.v1/contrib/gorilla/mux][9]                |
-| [gRPC][10]        | 完全対応 | [gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/grpc][11]     |
-| [gRPC v1.2][10]   | 完全対応 | [gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/grpc.v12][12] |
-| [chi][13]         | 完全対応 | [gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi][14] |
-| [echo v4][15]     | 完全対応 | [gopkg.in/DataDog/dd-trace-go.v1/contrib/labstack/echo.v4][16]           |
-| [echo v3][15]     | 完全対応 | [gopkg.in/DataDog/dd-trace-go.v1/contrib/labstack/echo][17]              |
-| [Fiber][18]     | 完全対応 | [gopkg.in/DataDog/dd-trace-go.v1/contrib/gofiber/fiber.v2][19]              |
+| [Gin][6]          | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/gin-gonic/gin][7]               |
+| [Gorilla Mux][8] | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/gorilla/mux][9]                |
+| [gRPC][10]        | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/grpc][11]     |
+| [gRPC v1.2][10]   | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/grpc.v12][12] |
+| [chi][13]         | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi][14] |
+| [echo v4][15]     | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/labstack/echo.v4][16]           |
+| [echo v3][15]     | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/labstack/echo][17]              |
+| [Fiber][18]     | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/gofiber/fiber.v2][19]              |
 
-#### ライブラリの互換性
+#### Library compatibility
 
-Go トレーサーには、次のデータストアとライブラリのサポートが含まれています。
+The Go tracer includes support for the following data stores and libraries.
 
-| ライブラリ                 | サポートの種類    | 例とドキュメント                                                      |
+| Library                 | Support Type    | Examples and Documentation                                                      |
 |-------------------------|-----------------|---------------------------------------------------------------------------------|
-| [AWS SDK][20]           | 完全対応 | [gopkg.in/DataDog/dd-trace-go.v1/contrib/aws/aws-sdk-go/aws][21]                |
-| [AWS SDK v2][75]        | 完全対応 | [gopkg.in/DataDog/dd-trace-go.v1/contrib/aws/aws-sdk-go-v2/aws][76]                |
-| [Elasticsearch][22]     | 完全対応 | [gopkg.in/DataDog/dd-trace-go.v1/contrib/olivere/elastic][23]                   |
-| [Cassandra][24]         | 完全対応 | [gopkg.in/DataDog/dd-trace-go.v1/contrib/gocql/gocql][25]                       |
-| [GraphQL][26]           | 完全対応 | [gopkg.in/DataDog/dd-trace-go.v1/contrib/graph-gophers/graphql-go][27]          |
-| [HTTP][28]              | 完全対応 | [gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http][29]                          |
-| [HTTP router][30]       | 完全対応 | [gopkg.in/DataDog/dd-trace-go.v1/contrib/julienschmidt/httprouter][31]          |
-| [Redis (go-redis)][32]  | 完全対応 | [gopkg.in/DataDog/dd-trace-go.v1/contrib/go-redis/redis][33]                    |
-| [Redis (go-redis-v8)][34]| 完全対応 | [gopkg.in/DataDog/dd-trace-go.v1/contrib/go-redis/redis.v8][35]                |
-| [Redis (redigo)][36]    | 完全対応 | [gopkg.in/DataDog/dd-trace-go.v1/contrib/garyburd/redigo][37]                   |
-| [Redis (new redigo)][38]| 完全対応 | [gopkg.in/DataDog/dd-trace-go.v1/contrib/gomodule/redigo][39]                   |
-| [SQL][40]               | 完全対応 | [gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql][41]                      |
-| [SQLx][42]              | 完全対応 | [gopkg.in/DataDog/dd-trace-go.v1/contrib/jmoiron/sqlx][43]                      |
-| [MongoDB][44]           | 完全対応 | [gopkg.in/DataDog/dd-trace-go.v1/contrib/go.mongodb.org/mongo-driver/mongo][45] |
-| [MongoDB (mgo)[73]      | 完全対応 | [gopkg.in/DataDog/dd-trace-go.v1/contrib/globalsign/mgo][46]                    |
-| [BuntDB][47]            | 完全対応 | [gopkg.in/DataDog/dd-trace-go.v1/contrib/tidwall/buntdb][48]                    |
-| [LevelDB][49]           | 完全対応 | [gopkg.in/DataDog/dd-trace-go.v1/contrib/syndtr/goleveldb/leveldb][50]          |
-| [miekg/dns][51]         | 完全対応 | [gopkg.in/DataDog/dd-trace-go.v1/contrib/miekg/dns][52]                         |
-| [Kafka (confluent)][53] | 完全対応 | [gopkg.in/DataDog/dd-trace-go.v1/contrib/confluentinc/confluent-kafka-go][54]   |
-| [Kafka (sarama)][55]    | 完全対応 | [gopkg.in/DataDog/dd-trace-go.v1/contrib/Shopify/sarama][56]                    |
-| [Google API][57]        | 完全対応 | [gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/api][58]             |
-| [go-restful][59]        | 完全対応 | [gopkg.in/DataDog/dd-trace-go.v1/contrib/emicklei/go-restful][60]               |
-| [Twirp][61]             | 完全対応 | [gopkg.in/DataDog/dd-trace-go.v1/contrib/twitchtv/twirp][62]                    |
-| [Vault][63]             | 完全対応 | [gopkg.in/DataDog/dd-trace-go.v1/contrib/hashicorp/vault][64]                   |
-| [Consul][65]            | 完全対応 | [gopkg.in/DataDog/dd-trace-go.v1/contrib/hashicorp/consul][66]                  |
-| [Gorm][67]              | 完全対応 | [gopkg.in/DataDog/dd-trace-go.v1/contrib/jinzhu/gorm][68]                       |
-| [Gorm v2][69]           | 完全対応 | [gopkg.in/DataDog/dd-trace-go.v1/contrib/gorm.io/gorm.v1][70]                   |
-| [Kubernetes][71]        | 完全対応 | [gopkg.in/DataDog/dd-trace-go.v1/contrib/k8s.io/client-go/kubernetes][72]       |
-| [Memcache][73]          | 完全対応 | [gopkg.in/DataDog/dd-trace-go.v1/contrib/bradfitz/gomemcache/memcache][74]      |
+| [AWS SDK][20]           | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/aws/aws-sdk-go/aws][21]                |
+| [AWS SDK v2][75]        | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/aws/aws-sdk-go-v2/aws][76]                |
+| [Elasticsearch][22]     | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/olivere/elastic][23]                   |
+| [Cassandra][24]         | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/gocql/gocql][25]                       |
+| [GraphQL][26]           | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/graph-gophers/graphql-go][27]          |
+| [HTTP][28]              | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http][29]                          |
+| [HTTP router][30]       | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/julienschmidt/httprouter][31]          |
+| [Redis (go-redis)][32]  | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/go-redis/redis][33]                    |
+| [Redis (go-redis-v8)][34]| Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/go-redis/redis.v8][35]                |
+| [Redis (redigo)][36]    | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/garyburd/redigo][37]                   |
+| [Redis (new redigo)][38]| Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/gomodule/redigo][39]                   |
+| [SQL][40]               | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql][41]                      |
+| [SQLx][42]              | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/jmoiron/sqlx][43]                      |
+| [MongoDB][44]           | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/go.mongodb.org/mongo-driver/mongo][45] |
+| [MongoDB (mgo)[73]      | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/globalsign/mgo][46]                    |
+| [BuntDB][47]            | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/tidwall/buntdb][48]                    |
+| [LevelDB][49]           | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/syndtr/goleveldb/leveldb][50]          |
+| [miekg/dns][51]         | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/miekg/dns][52]                         |
+| [Kafka (confluent)][53] | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/confluentinc/confluent-kafka-go][54]   |
+| [Kafka (sarama)][55]    | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/Shopify/sarama][56]                    |
+| [Google API][57]        | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/api][58]             |
+| [go-restful][59]        | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/emicklei/go-restful][60]               |
+| [Twirp][61]             | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/twitchtv/twirp][62]                    |
+| [Vault][63]             | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/hashicorp/vault][64]                   |
+| [Consul][65]            | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/hashicorp/consul][66]                  |
+| [Gorm][67]              | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/jinzhu/gorm][68]                       |
+| [Gorm v2][69]           | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/gorm.io/gorm.v1][70]                   |
+| [Kubernetes][71]        | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/k8s.io/client-go/kubernetes][72]       |
+| [Memcache][73]          | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/bradfitz/gomemcache/memcache][74]      |
 
 
-次でパッケージをインポートする必要があります。
+Packages must be imported with:
 
 ```go
-import "gopkg.in/DataDog/dd-trace-go.v1/contrib/<パッケージディレクトリ>/<パッケージ名>"
+import "gopkg.in/DataDog/dd-trace-go.v1/contrib/<PACKAGE_DIR>/<PACKAGE_NAME>"
 ```
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -163,3 +167,4 @@ import "gopkg.in/DataDog/dd-trace-go.v1/contrib/<パッケージディレクト�
 [74]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/bradfitz/gomemcache/memcache
 [75]: https://aws.github.io/aws-sdk-go-v2/docs/
 [76]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/aws/aws-sdk-go-v2/aws
+[77]: /tracing/trace_collection/library_config/go/

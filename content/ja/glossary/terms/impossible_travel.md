@@ -1,6 +1,6 @@
 ---
+title: impossible travel
 core_product:
-- cloud siem
-title: 不可能移動
+  - cloud siem
 ---
-不可能移動は、さまざまな場所からのアクセスイベントを特定する検出手法で、場所間の距離が 2 つのアクセスイベントの間に経過した時間内で人間が移動できる距離よりも大きい場合を対象としています。
+Impossible travel is a detection method that identifies access events from different locations, where the distance between the locations is greater than the distance a human can travel in the time elapsed between the two access events.

@@ -1,3 +1,3 @@
 ---
-title: スパンメトリクス
+title: Spans Metrics
 ---

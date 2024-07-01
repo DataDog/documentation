@@ -1,102 +1,108 @@
 ---
-algolia:
-  subcategory: Marketplace インテグレーション
-app_id: rapdev-snmp-trap-logs
-app_uuid: 754df420-1cf8-4742-b98c-9d3a76f83c41
-assets:
-  dashboards:
-    RapDev SNMP Trap Logs: assets/dashboards/rapdev_snmp_trap_logs_dashboard.json
-author:
-  homepage: https://www.rapdev.io
-  name: RapDev
-  sales_email: ddsales@rapdev.io
-  support_email: support@rapdev.io
-  vendor_id: rapdev
-categories:
-- マーケットプレイス
-- ネットワーク
+"algolia":
+  "subcategory": Marketplace Integrations
+"app_id": "rapdev-snmp-trap-logs"
+"app_uuid": "754df420-1cf8-4742-b98c-9d3a76f83c41"
+"assets":
+  "dashboards":
+    "RapDev SNMP Trap Logs": assets/dashboards/rapdev_snmp_trap_logs_dashboard.json
+"author":
+  "homepage": "https://www.rapdev.io"
+  "name": RapDev
+  "sales_email": ddsales@rapdev.io
+  "support_email": support@rapdev.io
+  "vendor_id": rapdev
+"categories":
+- marketplace
+- network
 - snmp
-dependencies: []
-display_on_public_website: true
-draft: false
-git_integration_title: rapdev_snmp_trap_logs
-integration_id: rapdev-snmp-trap-logs
-integration_title: SNMP Trap Logs
-integration_version: ''
-is_public: true
-custom_kind: integration
-legal_terms:
-  eula: assets/EULA.pdf
-manifest_version: 2.0.0
-name: rapdev_snmp_trap_logs
-pricing:
-- billing_type: flat_fee
-  includes_assets: true
-  product_id: snmp-trap-logs
-  short_description: このインテグレーションの定額料金
-  unit_price: 1000
-public_title: SNMP Trap Logs
-short_description: SNMP トラップメッセージの Datadog ログへの変換
-supported_os:
+"custom_kind": "integration"
+"dependencies": []
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "rapdev_snmp_trap_logs"
+"integration_id": "rapdev-snmp-trap-logs"
+"integration_title": "SNMP Trap Logs"
+"integration_version": ""
+"is_public": true
+"legal_terms":
+  "eula": assets/EULA.pdf
+"manifest_version": "2.0.0"
+"name": "rapdev_snmp_trap_logs"
+"pricing":
+- "billing_type": flat_fee
+  "includes_assets": true
+  "product_id": snmp-trap-logs
+  "short_description": Flat fee for this integration
+  "unit_price": !!int "1000"
+"public_title": "SNMP Trap Logs"
+"short_description": "Convert SNMP trap messages into Datadog logs"
+"supported_os":
 - linux
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Marketplace
-  - Category::Network
-  - Category::SNMP
-  - Supported OS::Linux
-  - Submitted Data Type::Logs
-  configuration: README.md#Setup
-  description: SNMP トラップメッセージの Datadog ログへの変換
-  media:
-  - caption: RapDev SNMP Trap Logs
-    image_url: images/1.png
-    media_type: image
-  - caption: SNMP トラップログメッセージ
-    image_url: images/2.png
-    media_type: image
-  - caption: パースされた SNMP トラップ
-    image_url: images/3.png
-    media_type: image
-  - caption: SNMP Trap Log ダッシュボード
-    image_url: images/4.png
-    media_type: image
-  overview: README.md#Overview
-  support: README.md#Support
-  title: SNMP Trap Logs
-  uninstallation: README.md#Uninstallation
+"tile":
+  "changelog": CHANGELOG.md
+  "classifier_tags":
+  - "Category::Marketplace"
+  - "Category::Network"
+  - "Category::SNMP"
+  - "Supported OS::Linux"
+  - "Submitted Data Type::Logs"
+  "configuration": "README.md#Setup"
+  "description": Convert SNMP trap messages into Datadog logs
+  "media":
+  - "caption": RapDev SNMP Trap Logs
+    "image_url": images/1.png
+    "media_type": image
+  - "caption": SNMP Trap Log Messages
+    "image_url": images/2.png
+    "media_type": image
+  - "caption": Parsed SNMP Trap
+    "image_url": images/3.png
+    "media_type": image
+  - "caption": SNMP Trap Log Dashboard
+    "image_url": images/4.png
+    "media_type": image
+  "overview": "README.md#Overview"
+  "resources":
+  - "resource_type": blog
+    "url": "https://www.datadoghq.com/blog/diagnose-network-performance-with-snmp-trap-monitoring/"
+  "support": "README.md#Support"
+  "title": SNMP Trap Logs
+  "uninstallation": "README.md#Uninstallation"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/marketplace -->
-## 概要
-RapDev SNMP Trap Logs パッケージは、何千もの異なる SNMP デバイスの SNMP Trap メッセージを Datadog Logs に変換することが可能です。できるだけ多くの MIB ファイルを収集し、SNMP トラップを人間が読めるログメッセージに翻訳できるような形式に変換しています。
+## Overview
+The RapDev SNMP Trap Logs package enables converting SNMP Trap messages into Datadog Logs for thousands of different
+SNMP devices. We have collected as many MIB files as we could find, and have converted them to a format allowing for
+the translation of SNMP traps into human-readable log messages.
 
-このパッケージには、Logstash を SNMP トラップレシーバーとして設定するためのインストールスクリプトが付属しており、適切な構成と MIB ファイルを使用してメッセージを翻訳し、Datadog 内のネットワークイベントにアラートすることができます。
+This package comes with an install script to setup Logstash as an SNMP trap receiver, with the proper configurations
+and MIB files to translate your messages, allowing you to alert on network events within Datadog.
 
-本パッケージに含まれる全 MIB の一覧は、[mib_yamls.txt ファイル][4]をご参照ください。
+For a list of all MIBs that are included with this package, see the [mib_yamls.txt file][4].
 
-## Agent
+## Support
 
-サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから RapDev.io にお問い合わせください。
+For support or feature requests, contact RapDev.io through the following channels:
 
-- メール: [support@rapdev.io][7]
-- チャット: [rapdev.io][3]
-- 電話: 855-857-0222
+- Email: [support@rapdev.io][7]
+- Chat: [rapdev.io][3]
+- Phone: 855-857-0222
 
-### その他の参考資料
+### Further Reading
 
-お役に立つドキュメント、リンクや記事:
+Additional helpful documentation, links, and articles:
 
-- [SNMP トラップによるネットワークパフォーマンスの問題の監視と診断][8]
+- [Monitor and diagnose network performance issues with SNMP Traps][8]
 
 ---
-ボストンより ❤️ を込めて
+Made with ❤️ in Boston
 
-*お探しのインテグレーションが見つかりませんか？組織に役立つ重要なツールの導入をお考えですか？RapDev へ[お問い合わせ](mailto:support@rapdev.io)ください！導入のサポートをいたします。*
+*This isn't the integration you're looking for? Missing a critical feature for your organization? Drop RapDev a [note](mailto:support@rapdev.io), and we'll build it!!*
 
-[1]: https://docs.datadoghq.com/ja/logs/guide/enrichment-tables
-[2]: https://docs.datadoghq.com/ja/logs/log_configuration/processors/?tab=ui#log-message-remapper
+[1]: https://docs.datadoghq.com/logs/guide/enrichment-tables
+[2]: https://docs.datadoghq.com/logs/log_configuration/processors/?tab=ui#log-message-remapper
 [3]: https://www.rapdev.io/#Get-in-touch
 [4]: https://files.rapdev.io/datadog/configs/mib_yamls.txt
 [5]: mailto:sales@rapdev.io
@@ -104,4 +110,4 @@ RapDev SNMP Trap Logs パッケージは、何千もの異なる SNMP デバイ�
 [7]: mailto:support@rapdev.io
 [8]: https://www.datadoghq.com/blog/diagnose-network-performance-with-snmp-trap-monitoring/
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/rapdev-snmp-trap-logs" target="_blank">こちらをクリック</a>してください。
+This application is made available through the Marketplace and is supported by a Datadog Technology Partner. <a href="https://app.datadoghq.com/marketplace/app/rapdev-snmp-trap-logs" target="_blank">Click Here</a> to purchase this application.

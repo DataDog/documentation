@@ -1,7 +1,9 @@
 ---
+title: time aggregation
+core_product:
+  - metrics
 synonyms:
-- rollup
-title: 時間集計
+  - rollup
 ---
-時間集計は、Datadog がデータポイントを時間バケットに結合する方法です。集計オプションは、sum、min、max、avg、count の 5 つがあります。
-詳細は、<a href="/metrics/#time-aggregation">ドキュメントを参照してください</a>。
+Time aggregation is how Datadog combines data points into time buckets. There are five aggregation options: sum, min, max, avg, and count. 
+For more information, <a href="/metrics/#time-aggregation">see the documentation</a>.

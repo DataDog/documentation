@@ -1,169 +1,164 @@
 ---
+title: Ingestion Controls
+kind: documentation
 aliases:
-- /ja/tracing/trace_ingestion/control_page
-- /ja/tracing/trace_ingestion/ingestion_control_page
-- /ja/account_management/billing/usage_control_apm/
-- /ja/tracing/app_analytics/
-- /ja/tracing/guide/ingestion_control_page/
-- /ja/tracing/trace_ingestion/ingestion_controls
-description: APM で取り込み率を制御する方法。
+    - /tracing/trace_ingestion/control_page
+    - /tracing/trace_ingestion/ingestion_control_page
+    - /account_management/billing/usage_control_apm/
+    - /tracing/app_analytics/
+    - /tracing/guide/ingestion_control_page/
+    - /tracing/trace_ingestion/ingestion_controls
+description: "Learn how to control Ingestion rates with APM."
 further_reading:
 - link: /tracing/trace_pipeline/ingestion_mechanisms/
-  tag: ドキュメント
-  text: 取り込みのメカニズム
+  tag: Documentation
+  text: Ingestion Mechanisms
 - link: /tracing/trace_pipeline/metrics/
-  tag: ドキュメント
-  text: 使用量メトリクス
-title: Ingestion Controls
+  tag: Documentation
+  text: Usage Metrics
 ---
 
-{{< img src="tracing/apm_lifecycle/ingestion_sampling_rules.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="取り込みサンプリングルール" >}}
+{{< img src="tracing/apm_lifecycle/ingestion_sampling_rules.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Ingestion Sampling Rules" >}}
 
-Ingestion controls により、アプリケーションから Datadog へ送信されるトレースが決定します。[APM メトリクス][1]は、常にすべてのトレースに基づき算出されるため、Ingestion controls による影響を受けません。
+Ingestion controls affect what traces are sent by your applications to Datadog. [APM metrics][1] are always calculated based on all traces, and are not impacted by ingestion controls.
 
-Ingestion Control ページは、アプリケーションとサービスの取り込み構成について、Agent とトレースライブラリレベルで可視性を提供します。[Ingestion Control 構成ページ][2]からは、以下のことができます。
-- サービスレベルの取り込み構成を可視化し、高スループットのサービス用にトレースサンプリング速度を調整します。
-- どの取り込みメカニズムがトレースの多くをサンプリングしているかを理解します。
-- 取り込み構成の潜在的な問題 (Agent の CPU または RAM リソースの制限など) を調査し、対処します。
+The Ingestion Control page provides visibility at the Agent and tracing libraries level into the ingestion configuration of your applications and services. From the [ingestion control configuration page][2], you can:
+- Gain visibility on your service-level ingestion configuration and adjust trace sampling rates for high throughput services.
+- Understand which ingestion mechanisms are responsible for sampling most of your traces.
+- Investigate and act on potential ingestion configuration issues, such as limited CPU or RAM resources for the Agent.
 
-{{< img src="tracing/trace_indexing_and_ingestion/ingestion_controls_page.png" style="width:100%;" alt="Ingestion Control ページ概要" >}}
+{{< img src="tracing/trace_indexing_and_ingestion/ingestion_controls_page.png" style="width:100%;" alt="Ingestion Control Page Overview" >}}
 
-このページで使用されているすべてのメトリクスは、**過去 1 時間**のライブトラフィックデータに基づいています。Agent やライブラリの構成変更はすべてこのページに反映されます。
+All metrics used in the page are based on live traffic data of the **past 1 hour**. Any Agent or library configuration change is reflected in the page.
 
-## すべての環境の概要
+## Summary across all environments
 
-過去 1 時間の総取り込みデータの概要と、アクティブな APM のインフラストラクチャー (ホスト、Fargateタスク、サーバーレス関数) で計算した、月間割り当てに対する月間使用量の推定値を得ることができます。
+Get an overview of the total ingested data over the past hour, and an estimation of your monthly usage against your monthly allocation, calculated with the active APM infrastructure (hosts, Fargate tasks, and serverless functions).
 
-月間使用量が `100%` 以下であれば、取り込まれるデータの予測値が[月間割り当て][3]に収まることを意味します。月間使用量が `100%` 以上であれば、取り込みデータが月間割り当てを超えると予測されます。
+If the monthly usage is under `100%`, the projected ingested data fits in your [monthly allotment][3]. A monthly usage value over `100%` means that the monthly ingested data is projected to be over your monthly allotment.
 
-## Agent レベルで全サービスの取り込みを管理
+## Managing ingestion for all services at the Agent level
 
-トレーシングライブラリでサービスの取り込み構成に入る前に、Datadog Agent から取り込みボリュームのシェアが制御可能です。
+Click **Remotely Configure Agent Ingestion** to manage ingestion sampling for your services globally. You can remotely configure Agent sampling parameters if you are using Agent version [7.42.0][13] or higher. Read [How Remote Configuration Works][14] for information about enabling remote configuration in your Agents.
 
-**Manage Agent Ingestion** をクリックすると、Agent のサンプリングコントロールの構成方法が表示されます。
+{{< img src="tracing/trace_indexing_and_ingestion/agent_level_configurations_modal.png" style="width:70%;" alt="Agent Level Configuration Modal" >}}
 
-{{< img src="tracing/trace_indexing_and_ingestion/agent_level_configurations_modal.png" style="width:70%;" alt="Agent レベル構成モーダル" >}}
+Three ingestion sampling mechanisms are controllable from the Datadog Agent:
+- **[Head-based Sampling][4]**: When no sampling rules are set for a service, the Datadog Agent automatically computes sampling rates to be applied for your services, targeting **10 traces per second per Agent**. Change this target number of traces in Datadog, or set `DD_APM_MAX_TPS` locally at the Agent level.
+-  **[Error Spans Sampling][5]**: For traces not caught by head-based sampling, the Datadog Agent catches local error traces **up to 10 traces per second per Agent**. Change this target number of traces in Datadog, or set `DD_APM_ERROR_TPS` locally at the Agent level.
+-  **[Rare Spans Sampling][6]**: For traces not caught by head-based sampling, the Datadog Agent catches local rare traces **up to 5 traces per second per Agent**. This setting is disabled by default. Enable the collection of rare traces in Datadog, or set `DD_APM_ENABLE_RARE_SAMPLER` locally at the Agent level.
 
-Datadog Agent でサンプリングを構成することで、3 つの取り込みメカニズムを制御することができます。
-- **[ヘッドベースサンプリング][4]**: サービスにサンプリングルールが設定されていない場合、Datadog Agent はライブラリで適用するサンプリングレートを自動的に計算し、Agent あたり 1 秒間に 10 件のトレースを目標とします。`DD_APM_MAX_TPS` の設定により、1 秒あたりの目標トレース数を変更することができます。
--  **[エラースパンサンプリング][5]**: ヘッドベースのサンプリングで捕捉されないトレースについて、Datadog Agent は、Agent ごとに最大で毎秒 10 トレースのローカルエラートレースを捕捉します。`DD_APM_ERROR_TPS` の設定により、1 秒あたりの目標トレース数を変更することができます。
--  **[レアスパンサンプリング][6]**: ヘッドベースのサンプリングで捕捉されないトレースについて、Datadog Agent は、Agent ごとに最大で毎秒 5 トレースのローカルレアレースを捕捉します。この設定は、デフォルトでは無効になっています。`DD_APM_ENABLE_RARE_SAMPLER` は、レアトレースの収集を有効にすることができます。
+With remote configuration, you don't have to restart the Agent to update these parameters. Click `Apply` to save the configuration changes, and the new configuration takes effect immediately.
 
-**注**: 円グラフの `Other Ingestion Reasons` (グレー) セクションは、Datadog Agent レベルで_構成不可能_なその他の取り込み理由を表します。
+**Note**: The `Other Ingestion Reasons` (gray) section of the pie chart represents other ingestion reasons which _are not configurable_ at the Datadog Agent level.
 
-### Agent の取り込み設定をリモートで構成する
+**Note**: Remotely configured parameters take precedence over local configurations such as environment variables and `datadog.yaml` configuration.
 
-<div class="alert alert-warning"> 取り込み構成のためのリモート構成はベータ版です。アクセスリクエストは <a href="/help/">Datadog サポート</a>にご連絡ください。</div>
+## Managing ingestion for an individual service at the library level
 
-Agent のバージョン [7.42.0][13] 以降を使用している場合、これらのパラメーターをリモートで構成することができます。Agent でリモート構成を有効にする方法については、[リモート構成の仕組み][14]をお読みください。
-
-リモート構成では、Agent を再起動することなくパラメーターを変更することができます。`Apply` をクリックして構成の変更を保存すると、新しい構成が直ちに有効になります。
-
-**注**: リモートで構成されたパラメーターは、環境変数や `datadog.yaml` の構成など、ローカルでの構成よりも優先されます。
-
-## ライブラリレベルで個別サービスの取り込みを管理
-
-サービステーブルには、取り込まれたボリュームと取り込みの構成に関する情報が、サービスごとに分類されて表示されます。
+The service table contains information about the ingested volumes and ingestion configuration, broken down by service:
 
 Type
-: サービスの種類: Web サービス、データベース、キャッシュ、ブラウザなど...
+: The service type: web service, database, cache, browser, etc...
 
 Name
-: Datadog にトレースを送信している各サービスの名前。このテーブルには、過去 1 時間にデータが取り込まれたルートサービスと非ルートサービスが含まれています。
+: The name of each service sending traces to Datadog. The table contains root and non-root services for which data was ingested in the past one hour.
 
 Ingested Traces/s
-: 過去 1 時間にサービスから取り込まれた 1 秒あたりの平均トレース数。
+: Average number of traces per second ingested starting from the service over the past one hour.
 
 Ingested Bytes/s
-: 過去 1 時間にサービスのために Datadog に取り込まれた 1 秒あたりの平均バイト数。
+: Average number of bytes per second ingested into Datadog for the service over the past one hour.
 
 Downstream Bytes/s
-: サービスが*サンプリング判定を行った*、取り込んだ 1 秒あたりの平均バイト数。これには、トレースの先頭で行われた判定に続く、下流のすべての子スパンのバイトと、[Error sampler][5]、[Rare sampler][6]、[App Analytics][7] のメカニズムで捕捉されたスパンが含まれます。
+: Average number of bytes per second ingested for which the service *makes the sampling decision*. This includes the bytes of all downstream child spans that follow the decision made at the head of the trace, as well as spans caught by the [Error sampler][5], the [Rare sampler][6], and the [App Analytics][7] mechanism.
 
 Traffic Breakdown
-: サービスを起点としたトレースについて、サンプリングされたトラフィックとサンプリングされていないトラフィックの詳細な内訳。詳細は、[トラフィックの内訳](#traffic-breakdown)を参照してください。
+: A detailed breakdown of traffic sampled and unsampled for traces starting from the service. See [Traffic breakdown](#traffic-breakdown) for more information.
 
 Ingestion Configuration
-: Agent からの[デフォルトのヘッドベースのサンプリングメカニズム][4]が適用される場合、`Automatic` と表示されます。トレーシングライブラリで[トレースサンプリングルール][8]を使って取り込みを構成した場合、そのサービスは `Configured` と表示されます。サービスの取り込み構成についての詳細は、[デフォルトの取り込み率を変更する](#configure-the-service-ingestion-rate)を参照してください。
+: Shows `Automatic` if the [default head-based sampling mechanism][4] from the Agent applies. If the ingestion was configured in the tracing libraries with [trace sampling rules][8], the service is marked as `Configured`. For more information about configuring ingestion for a service, read about [changing the default ingestion rate](#configure-the-service-ingestion-rate).
 
 Infrastructure
-: サービスが実行しているホスト、コンテナ、および関数。
+: Hosts, containers, and functions on which the service is running.
 
 Service status
-: Datadog Agent が [その構成で][9]設定された CPU や RAM の限界に達したために一部のスパンがドロップされた場合は `Limited Resource`、一部のスパンがレガシーの[App Analytics メカニズム][7]を通じて取り込まれた場合は `Legacy Setup`、それ以外は `OK` と表示されます。
+: Shows `Limited Resource` when some spans are dropped due to the Datadog Agent reaching CPU or RAM limits set [in its configuration][9], `Legacy Setup` when some spans are ingested through the legacy [App Analytics mechanism][7], or `OK` otherwise.
 
-環境、構成、ステータスでページを絞り込み、対策が必要なサービスを表示します。グローバルな取り込み量を減らすために、テーブルを`Downstream Bytes/s` 列でソートして、取り込み量の最も大きな割合を占めるサービスを表示します。
+Filter the page by environment, configuration, and status to view services for which you need to take an action. To reduce the global ingestion volume, sort the table by the `Downstream Bytes/s` column to view services responsible for the largest share of your ingestion.
 
-**注**: このテーブルは、[使用量メトリクス][10] `datadog.estimated_usage.apm.ingested_spans` と `datadog.estimated_usage.apm.ingested_bytes` によって提供されます。これらのメトリクスは `service`、`env`、`ingestion_reason` でタグ付けされています。
+**Note**: The table is powered by the [usage metrics][10] `datadog.estimated_usage.apm.ingested_spans` and `datadog.estimated_usage.apm.ingested_bytes`. These metrics are tagged by `service`, `env` and `ingestion_reason`.
 
-### トラフィックの内訳
+### Traffic breakdown
 
-Traffic Breakdown の列は、サービスを起点とするすべてのトレースの行き先を分解して表示します。これにより、トラフィックがどのような理由で取り込まれ、どのような理由でドロップされたかを推定することができます。
+The Traffic Breakdown column breaks down the destination of all traces originating from the service. It gives you an estimate of the share of traffic that is ingested and dropped, and for which reasons.
 
-{{< img src="tracing/trace_indexing_and_ingestion/service_traffic_breakdown.png" style="width:100%;" alt="トレース取り込みのトラフィック内訳" >}}
+{{< img src="tracing/trace_indexing_and_ingestion/service_traffic_breakdown.png" style="width:100%;" alt="Traffic breakdown of trace ingestion" >}}
 
-詳細は、以下の部分に分かれています。
+The breakdown is composed of the following parts:
 
-- **Complete traces ingested** (青色): Datadog により取り込まれたトレースの割合。
-- **Complete traces not retained** (グレー): Agent またはトレーシングライブラリにより、意図的に Datadog へ転送されなかったトレースの割合。コンフィギュレーションによって、以下の 2 つの理由のいずれかにより発生します。
+- **Complete traces ingested** (blue): The percentage of traces that have been ingested by Datadog.
+- **Complete traces not retained** (gray): The percentage of traces that have intentionally not been forwarded to Datadog by the Agent or the tracing library. This can happen for one of two reasons depending on your configuration:
 
-    1. デフォルトでは、Agent はサービスのトラフィックに応じて、サービスに[取り込み率を配分][4]しています。
-    2. トレースライブラリレベルで一定の割合のトレースを取り込むよう、サービスを手動で[構成][8]した場合。
+    1. By default, the [Agent distributes an ingestion rate][4] to services depending on service traffic.
+    2. When the service is manually [configured][8] to ingest a certain percentage of traces at the tracing library level.
 
-- **Complete traces dropped by the tracer rate limiter** (オレンジ色): トレースサンプリングルールでサービスの取り込み率を手動で設定することを選択した場合、デフォルトで 100 トレース/秒に設定されているレートリミッターが自動的に有効になっています。このレートを構成で設定するには、[レートリミッター][8]のドキュメントを参照してください。
+- **Complete traces dropped by the tracer rate limiter** (orange): When you choose to manually set the service ingestion rate as a percentage with trace sampling rules, a rate limiter is automatically enabled, set to 100 traces per second by default. See the [rate limiter][8] documentation to manually configure this rate.
 
-- **Traces dropped due to the Agent CPU or RAM limit** (赤色): このメカニズムにより、スパンが削除され、不完全なトレースが作成される場合があります。この問題を解決するには、Agent が実行されるインフラストラクチャーの CPU とメモリの割り当てを増やします。
+- **Traces dropped due to the Agent CPU or RAM limit** (red): This mechanism may drop spans and create incomplete traces. To fix this, increase the CPU and memory allocation for the infrastructure that the Agent runs on.
 
-## サービス取り込みの概要
+## Service ingestion summary
 
-サービスの行をクリックすると、サービスの取り込み構成に関する実用的な洞察を提供する詳細なビューである、Service Ingestion Summary が表示されます。
+Click on any service row to view the Service Ingestion Summary, a detailed view providing actionable insights on the ingestion configuration of the service.
 
 {{< img src="tracing/trace_indexing_and_ingestion/service_ingestion_summary.png" style="width:100%;" alt="Service Ingestion Summary" >}}
 
-**Ingestion reasons breakdown** で、どのメカニズムがサービスの取り込みを担っているかを確認します。各取り込みの理由は、1 つの特定の[取り込みメカニズム][11]に関連しています。サービス取り込み構成を変更した後、過去 1 時間の取り込みデータに基づき、この時系列グラフで取り込まれたバイトとスパンの増減を観察することができます。
+Explore the **Ingestion reasons breakdown** to see which mechanisms are responsible for your service ingestion. Each ingestion reason relates to one specific [ingestion mechanism][11]. After changing your service ingestion configuration, you can observe the increase or decrease of ingested bytes and spans in this timeseries graph based on the past hour of ingested data.
 
-サービス取り込み量のほとんどが上流サービスによる決定である場合、**Sampling decision makers** トップリストの詳細を調査してください。たとえば、サービスが非ルート (トレースのサンプリングを**決定しない**) の場合、非ルートサービスの取り込みに関与するすべての上流サービスを調査してください。上流のルートサービスを構成して、全体的な取り込み量を減らすことができます。
+If most of your service ingestion volume is due to decisions taken by upstream services, investigate the detail of the **Sampling decision makers** top list. For example, if your service is non-root, (meaning that it **never decides** to sample traces), observe all upstream services responsible for your non-root service ingestion. Configure upstream root services to reduce your overall ingestion volume.
 
-[APM Trace - Estimated Usage Dashboard][12] は、グローバルな取り込み情報と、`service`、`env`、`ingestion reason` 別の内訳グラフを提供し、さらなる調査を行うことができます。
+For further investigations, use the [APM Trace - Estimated Usage Dashboard][12], which provides global ingestion information as well as breakdown graphs by `service`, `env` and `ingestion reason`.
 
-### Agent とトレーシングライブラリのバージョン
+### Agent and tracing library versions
 
-サービスが使用している **Datadog Agent およびトレーシングライブラリのバージョン**を確認してください。使用中のバージョンを最新のリリースされたバージョンと比較し、最新かつ最新の Agent とライブラリを実行していることを確認してください。
+See the **Datadog Agent and tracing library versions** your service is using. Compare the versions in use to the latest released versions to make sure you are running recent and up-to-date Agents and libraries.
 
-{{< img src="tracing/trace_indexing_and_ingestion/agent_tracer_version.png" style="width:90%;" alt="Agent とトレーシングライブラリのバージョン" >}}
+{{< img src="tracing/trace_indexing_and_ingestion/agent_tracer_version.png" style="width:90%;" alt="Agent and tracing library versions" >}}
 
-**注**: バージョン情報を報告するためには、Agent を v6.34 または v7.34 にアップグレードする必要があります。
+**Note**: You need to upgrade the Agent to v6.34 or v7.34 for the version information to be reported.
 
-### サービス取り込み率を構成する
+### Configure the service ingestion rate
 
-**Manage Ingestion Rate** をクリックすると、サービスの取り込み率の構成についての説明が表示されます。
+<div class="alert alert-info"><strong>Remotely configured sampling rules are in Beta</strong>. Request access to the feature via this <a href="https://forms.gle/WCG57yTCG27BCBB67">link</a> to be able to dynamically set this configuration from the Datadog UI without having to redeploy your service. Follow the instructions in the <a href="/tracing/guide/resource_based_sampling">Resource-based sampling guide</a> to get started.</div>
 
-{{< img src="tracing/trace_indexing_and_ingestion/service_ingestion_rate_config.png" style="width:100%;" alt="サービス取り込み率の変更" >}}
+Click **Manage Ingestion Rate** to get instructions on how to configure your service ingestion rate.
 
-サービスのトラフィックの特定の割合を送信するように指定するには、そのサービスのトレーシングライブラリ構成に環境変数または生成されたコードスニペットを追加します。
+{{< img src="tracing/trace_indexing_and_ingestion/service_ingestion_rate_config.png" style="width:100%;" alt="Change the Service Ingestion Rate" >}}
 
-1. 取り込まれたスパンのパーセントを変更するサービスを選択します。
-2. サービス言語を選択します。
-3. 必要な取り込み率を選択します。
-4. これらの選択肢から生成された適切な構成を、該当するサービスに適用し、サービスを再デプロイしてください。**注**: サービス名の値は、大文字と小文字が区別されます。サービス名の大文字と小文字を一致させる必要があります。
-5. Ingestion Control ページで、新しい割合が適用されたことを、適用されたサンプリングレートを表示する Traffic Breakdown 列を見ることで確認します。サービスの取り込み理由は、`ingestion_reason:rule` として表示されます。
+To specify a specific percentage of a service's traffic to be sent, add an environment variable or a generated code snippet to your tracing library configuration for that service.
+
+1. Select the service you want to change the ingested span percent for.
+2. Choose the service language.
+3. Choose the desired ingestion percentage.
+4. Apply the appropriate configuration generated from these choices to the indicated service and redeploy the service. **Note**: The service name value is case sensitive. It should match the case of your service name.
+5. Confirm on the Ingestion Control Page that your new percentage has been applied by looking at the Traffic Breakdown column, which surfaces the sampling rate applied. The ingestion reason for the service is shown as `ingestion_reason:rule`.
 
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/tracing/metrics/metrics_namespace/
+[1]: /tracing/metrics/metrics_namespace/
 [2]: https://app.datadoghq.com/apm/traces/ingestion-control
 [3]: https://www.datadoghq.com/pricing/?product=apm--continuous-profiler#apm--continuous-profiler
-[4]: /ja/tracing/trace_pipeline/ingestion_mechanisms/#in-the-agent
-[5]: /ja/tracing/trace_pipeline/ingestion_mechanisms/#error-traces
-[6]: /ja/tracing/trace_pipeline/ingestion_mechanisms/#rare-traces
-[7]: /ja/tracing/trace_pipeline/ingestion_mechanisms/#single-spans-app-analytics
-[8]: /ja/tracing/trace_pipeline/ingestion_mechanisms/#in-tracing-libraries-user-defined-rules
-[9]: /ja/tracing/troubleshooting/agent_rate_limits/#maximum-cpu-percentage
-[10]: /ja/tracing/trace_pipeline/metrics
-[11]: /ja/tracing/trace_pipeline/ingestion_mechanisms/
+[4]: /tracing/trace_pipeline/ingestion_mechanisms/#in-the-agent
+[5]: /tracing/trace_pipeline/ingestion_mechanisms/#error-traces
+[6]: /tracing/trace_pipeline/ingestion_mechanisms/#rare-traces
+[7]: /tracing/trace_pipeline/ingestion_mechanisms/#single-spans-app-analytics
+[8]: /tracing/trace_pipeline/ingestion_mechanisms/#in-tracing-libraries-user-defined-rules
+[9]: /tracing/troubleshooting/agent_rate_limits/#maximum-cpu-percentage
+[10]: /tracing/trace_pipeline/metrics
+[11]: /tracing/trace_pipeline/ingestion_mechanisms/
 [12]: https://app.datadoghq.com/dash/integration/30337/app-analytics-usage
 [13]: https://github.com/DataDog/datadog-agent/releases/tag/7.42.0
-[14]: /ja/agent/guide/how_remote_config_works/#enabling-remote-configuration
+[14]: /agent/remote_config/#enabling-remote-configuration

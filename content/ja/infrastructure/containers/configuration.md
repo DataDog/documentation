@@ -1,41 +1,42 @@
 ---
+title: Configure Containers View
+kind: documentation
 aliases:
-- /ja/infrastructure/livecontainers/configuration
+  - /infrastructure/livecontainers/configuration
 further_reading:
 - link: /infrastructure/hostmap/
   tag: Documentation
-  text: インフラストラクチャーマップですべてのホスト/コンテナを確認する
+  text: See all of your hosts/containers with the Infrastructure Map
 - link: /infrastructure/process/
   tag: Documentation
-  text: システムのあらゆるレベルの事象の把握
-title: コンテナビューの構成
+  text: Understand what is going on at any level of your system
 ---
 
-このページでは、Datadog の [Containers][1] ページの構成オプションについて説明します。Containers ページとその機能の詳細については、[コンテナビュー][2]ドキュメントを参照してください。
+This page lists configuration options for the [Containers][1] page in Datadog. To learn more about the Containers page and its capabilities, see [Containers View][2] documentation.
 
-## コンフィギュレーションオプション
+## Configuration options
 
-### コンテナを対象に入れる/除外する
+### Include or exclude containers
 
-コンテナは、リアルタイム収集の対象に入れたり、除外したりすることができます。
+Include and exclude containers from real-time collection:
 
-- メインコンフィギュレーションファイル  `datadog.yaml` に環境変数 `DD_CONTAINER_EXCLUDE` を渡すか、`container_exclude:` を追加することで、コンテナを対象から除外することができます。
-- メインコンフィギュレーションファイル `datadog.yaml` に環境変数 `DD_CONTAINER_INCLUDE` を渡すか、`container_include:` を追加することで、コンテナを対象に入れることができます。
+- Exclude containers either by passing the environment variable `DD_CONTAINER_EXCLUDE` or by adding `container_exclude:` in your `datadog.yaml` main configuration file.
+- Include containers either by passing the environment variable `DD_CONTAINER_INCLUDE` or by adding `container_include:` in your `datadog.yaml` main configuration file.
 
-どちらの引数も値は**イメージ名**になります。正規表現もサポートされています。
+Both arguments take an **image name** as value. Regular expressions are also supported.
 
-たとえば、名前が frontend で始まるコンテナ以外のすべての Debian イメージを除外するには、`datadog.yaml` ファイルに次の 2 つの構成行を追加します。
+For example, to exclude all Debian images except containers with a name starting with *frontend*, add these two configuration lines in your `datadog.yaml` file:
 
 ```yaml
 container_exclude: ["image:debian"]
 container_include: ["name:frontend.*"]
 ```
 
-**注**: Agent 5 の場合は、これをメインの `datadog.conf` 構成ファイルに追加する代わりに、`datadog.yaml` ファイルを明示的に `/etc/datadog-agent/` に追加してください。プロセス Agent は、ここにすべての構成オプションがあることを前提とするためです。この構成は、コンテナをリアルタイム収集から除外するだけで、オートディスカバリーからは**除外しません**。
+**Note**: For Agent 5, instead of including the above in the `datadog.conf` main configuration file, explicitly add a `datadog.yaml` file to `/etc/datadog-agent/`, as the Process Agent requires all configuration options here. This configuration only excludes containers from real-time collection, **not** from Autodiscovery.
 
-### 機密情報のスクラビング
+### Scrubbing sensitive information
 
-機密データの漏洩を防ぐために、コンテナ YAML ファイル内のセンシティブワードをスクラブすることができます。Helm チャートではコンテナスクラビングがデフォルトで有効になっており、いくつかのデフォルトのセンシティブワードが提供されています。
+To prevent the leaking of sensitive data, you can scrub sensitive words in container YAML files. Container scrubbing is enabled by default for Helm charts, and some default sensitive words are provided:
 
 - `password`
 - `passwd`
@@ -49,11 +50,11 @@ container_include: ["name:frontend.*"]
 - `credentials`
 - `stripetoken`
 
-環境変数 `DD_ORCHESTRATOR_EXPLORER_CUSTOM_SENSITIVE_WORDS` に単語のリストを与えることで、追加のセンシティブワードを設定することができます。これはデフォルトの単語に追加され、上書きされることはありません。
+You can set additional sensitive words by providing a list of words to the environment variable `DD_ORCHESTRATOR_EXPLORER_CUSTOM_SENSITIVE_WORDS`. This adds to, and does not overwrite, the default words.
 
-**注**: Agent はテキストを小文字のパターンと比較するため、追加のセンシティブワードは小文字でなければなりません。つまり、`password`は `MY_PASSWORD` を `MY_*******` にスクラブしますが、`PASSWORD` はスクラブしません。
+**Note**: The additional sensitive words must be in lowercase, as the Agent compares the text with the pattern in lowercase. This means `password` scrubs `MY_PASSWORD` to `MY_*******`, while `PASSWORD` does not.
 
-以下の Agent では、この環境変数を設定する必要があります。
+You need to setup this environment variable for the following agents:
 
 - process-agent
 - cluster-agent
@@ -64,7 +65,7 @@ env:
       value: "customword1 customword2 customword3"
 ```
 
-例えば、`password` はセンシティブワードなので、スクラバーは以下のいずれかの `<MY_PASSWORD>` をアスタリスクの文字列、`***********` に変更します。
+For example, because `password` is a sensitive word, the scrubber changes `<MY_PASSWORD>` in any of the following to a string of asterisks, `***********`:
 
 ```text
 password <MY_PASSWORD>
@@ -73,51 +74,51 @@ password: <MY_PASSWORD>
 password::::== <MY_PASSWORD>
 ```
 
-ただし、スクラバーはセンシティブワードを含むパスのスクラビングは行いません。例えば、`secret` がセンシティブワードであっても、 `/etc/vaultd/secret/haproxy-crt.pem` を `/etc/vaultd/******/haproxy-crt.pem` に上書きすることはありません。
+However, the scrubber does not scrub paths that contain sensitive words. For example, it does not overwrite `/etc/vaultd/secret/haproxy-crt.pem` with `/etc/vaultd/******/haproxy-crt.pem` even though `secret` is a sensitive word.
 
-## オーケストレーターエクスプローラーの構成
+## Configure Orchestrator Explorer
 
-### リソース収集の互換性マトリックス
+### Resource collection compatibility matrix
 
-次の表は、収集されたリソースと、それぞれに対する最低限の Agent、Cluster Agent、Helm チャートのバージョンをリストで示したものです。
+The following table presents the list of collected resources and the minimal Agent, Cluster Agent, and Helm chart versions for each.
 
-| Resource | 最低限必要な Agent のバージョン | 最低限必要な Cluster Agent のバージョン* | 最低限必要な Helm チャートのバージョン | Kubernetes の最小バージョン |
+| Resource | Minimal Agent version | Minimal Cluster Agent version* | Minimal Helm chart version | Minimal Kubernetes version |
 |---|---|---|---|---|
 | ClusterRoleBindings | 7.33.0 | 1.19.0 | 2.30.9 | 1.14.0 |
 | ClusterRoles | 7.33.0 | 1.19.0 | 2.30.9 | 1.14.0 |
-| クラスター | 7.33.0 | 1.18.0 | 2.10.0 | 1.17.0 |
+| Clusters | 7.33.0 | 1.18.0 | 2.10.0 | 1.17.0 |
 | CronJobs | 7.33.0 | 7.40.0 | 2.15.5 | 1.16.0 |
 | DaemonSets | 7.33.0 | 1.18.0 | 2.16.3 | 1.16.0 |
-| デプロイ | 7.33.0 | 1.18.0 | 2.10.0 | 1.16.0 |
+| Deployments | 7.33.0 | 1.18.0 | 2.10.0 | 1.16.0 |
 | HorizontalPodAutoscalers | 7.33.0 | 7.51.0 | 2.10.0 | 1.1.1 |
 | Ingresses | 7.33.0 | 1.22.0 | 2.30.7 | 1.21.0 |
-| ジョブ | 7.33.0 | 1.18.0 | 2.15.5 | 1.16.0 |
-| ネームスペース | 7.33.0 | 7.41.0 | 2.30.9 | 1.17.0 |
-| ノード | 7.33.0 | 1.18.0 | 2.10.0 | 1.17.0 |
+| Jobs | 7.33.0 | 1.18.0 | 2.15.5 | 1.16.0 |
+| Namespaces | 7.33.0 | 7.41.0 | 2.30.9 | 1.17.0 |
+| Nodes | 7.33.0 | 1.18.0 | 2.10.0 | 1.17.0 |
 | PersistentVolumes | 7.33.0 | 1.18.0 | 2.30.4 | 1.17.0 |
 | PersistentVolumeClaims | 7.33.0 | 1.18.0 | 2.30.4 | 1.17.0 |
-| ポッド | 7.33.0 | 1.18.0 | 3.9.0 | 1.17.0 |
-| ReplicaSet | 7.33.0 | 1.18.0 | 2.10.0 | 1.16.0 |
+| Pods | 7.33.0 | 1.18.0 | 3.9.0 | 1.17.0 |
+| ReplicaSets | 7.33.0 | 1.18.0 | 2.10.0 | 1.16.0 |
 | RoleBindings | 7.33.0 | 1.19.0 | 2.30.9 | 1.14.0 |
-| ロール | 7.33.0 | 1.19.0 | 2.30.9 | 1.14.0 |
+| Roles | 7.33.0 | 1.19.0 | 2.30.9 | 1.14.0 |
 | ServiceAccounts | 7.33.0 | 1.19.0 | 2.30.9 | 1.17.0 |
-| サービス | 7.33.0 | 1.18.0 | 2.10.0 | 1.17.0 |
+| Services | 7.33.0 | 1.18.0 | 2.10.0 | 1.17.0 |
 | Statefulsets | 7.33.0 | 1.15.0 | 2.20.1 | 1.16.0 |
 | VerticalPodAutoscalers | 7.33.0 | 7.46.0 | 3.6.8 | 1.16.0 |
 
-**注**: バージョン 1.22 以降、Cluster Agent のバージョン番号は、バージョン 7.39.0 以降、Agent のリリース番号に従います。
+**Note**: After version 1.22, Cluster Agent version numbering follows Agent release numbering, starting with version 7.39.0.
 
-### カスタムタグをリソースに追加
+### Add custom tags to resources
 
-カスタムタグを Kubernetes リソースに追加すると、Kubernetes リソースビュー内のフィルタリングが容易になります。
+You can add custom tags to Kubernetes resources to ease filtering inside the Kubernetes resources view.
 
-追加タグは、`DD_ORCHESTRATOR_EXPLORER_EXTRA_TAGS` 環境変数を通して追加されます。
+Additional tags are added through the `DD_ORCHESTRATOR_EXPLORER_EXTRA_TAGS` environment variable.
 
-**注**: これらのタグは、Kubernetes リソースビューでのみ表示されます。
+**Note**: These tags only show up in the Kubernetes resources view.
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
-`datadog-agent.yaml` に `agents.containers.processAgent.env` と `clusterAgent.env` を設定し、Process Agent と Cluster Agent の両方で環境変数を追加します。
+Add the environment variable on both the Process Agent and the Cluster Agent by setting `agents.containers.processAgent.env` and `clusterAgent.env` in `datadog-agent.yaml`.
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -147,7 +148,7 @@ spec:
           value: "tag1:value1 tag2:value2"
 ```
 
-次に、新しい構成を適用します。
+Then, apply the new configuration:
 
 ```bash
 kubectl apply -n $DD_NAMESPACE -f datadog-agent.yaml
@@ -156,7 +157,7 @@ kubectl apply -n $DD_NAMESPACE -f datadog-agent.yaml
 {{% /tab %}}
 {{% tab "Helm" %}}
 
-[公式の Helm チャート][1]を使用している場合、[values.yaml][2] に `agents.containers.processAgent.env` および `clusterAgent.env` を設定して Process Agent と Cluster Agent の両方に環境変数を追加します。
+If you are using the [official Helm chart][1], add the environment variable on both the Process Agent and the Cluster Agent by setting `agents.containers.processAgent.env` and `clusterAgent.env` in [values.yaml][2].
 
 ```yaml
 agents:
@@ -171,7 +172,7 @@ clusterAgent:
       value: "tag1:value1 tag2:value2"
 ```
 
-次に、Helm チャートをアップグレードします。
+Then, upgrade your Helm chart.
 
 [1]: https://github.com/DataDog/helm-charts
 [2]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
@@ -179,7 +180,7 @@ clusterAgent:
 {{% /tab %}}
 {{% tab "DaemonSet" %}}
 
-Process Agent と Cluster Agent の両コンテナに環境変数を設定します。
+Set the environment variable on both the Process Agent and Cluster Agent containers:
 
 ```yaml
 - name: DD_ORCHESTRATOR_EXPLORER_EXTRA_TAGS
@@ -189,9 +190,11 @@ Process Agent と Cluster Agent の両コンテナに環境変数を設定しま
 {{% /tab %}}
 {{< /tabs >}}
 
-## その他の参考資料
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/containers
-[2]: /ja/infrastructure/containers
+[2]: /infrastructure/containers
+
+

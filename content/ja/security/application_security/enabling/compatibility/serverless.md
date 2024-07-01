@@ -1,48 +1,49 @@
 ---
-code_lang: サーバーレス
-code_lang_weight: 90
-title: サーバーレス互換性要件
+title: Serverless Compatibility Requirements 
+kind: documentation
+code_lang: serverless
 type: multi-code-lang
+code_lang_weight: 90
 ---
 
-ASM は以下のプラットフォームとライブラリに対してサーバーレス機能を提供します。
+Application Security provides serverless capability for the following platforms and libraries:
 
 {{< partial name="security-platform/appsec-libraries-serverless.html" >}}</br>
 
-## APM に Datadog Agent を構成する
-**注**: リモート構成による Threat Protection はサポートされていません。[WAF][6] で IP をブロックするには、[ワークフロー][5]を使用してください。
+## AWS Lambda
+**Note**: Threat Protection through Remote Configuration is not supported. Use [Workflows][5] to block IPs in your [WAF][6].
 
-|タイプ               | Threat Detection  |  Software Composition Analysis (SCA)  | コードセキュリティ     |
+|Type               | Threat Detection  |  Software Composition Analysis (SCA)  | Code Security     |
 | ---       |   ---                     |           ----                    |           ----                            |
-| テスト結果          | {{< X >}}             |                               |                       |
-| ステップの高度なオプション      | {{< X >}}             |                                   |                       |
+| Java          | {{< X >}}             |                               |                       |
+| .NET      | {{< X >}}             |                                   |                       |
 | Node      | {{< X >}}             | beta                          |                       |
-| ブラウザテスト    | {{< X >}}             | beta                          |                       |
-| 構成      | {{< X >}}             |                               |                       |
-| ディメンショニング       |                   |                           |                       |
-| プライベートロケーション        | {{< X >}}             |                           |                       |
+| Python    | {{< X >}}             | beta                          |                       |
+| Ruby      | {{< X >}}             |                               |                       |
+| PHP       |                   |                           |                       |
+| Go        | {{< X >}}             |                           |                       |
 
-### 対応するトリガータイプ
-ASM Threat Detection は、HTTP リクエストを関数の入力としてのみサポートします。これは、攻撃者がサーバーレスアプリケーションを悪用する可能性が最も高いチャンネルだからです。HTTP リクエストは通常、次のような AWS サービスからやってきます。
+### Supported trigger types
+Threat Detection supports HTTP requests as function input only, as that channel has the highest likelihood of attackers exploiting a serverless application. HTTP requests typically come from AWS services such as:
 - Application Load Balancer (ALB)
 - API Gateway v1 (Rest API)
 - API Gateway v2 (HTTP API)
-- 関数 URL
+- Function URL
 
-<div class="alert alert-info">サポートされていない機能のサポート追加をご希望の場合は、こちらの<a href="https://forms.gle/gHrxGQMEnAobukfn7">フォーム</a>にご記入の上、フィードバックをお送りください。</div>
+<div class="alert alert-info">If you would like to see support added for any of the unsupported capabilities, fill out this <a href="https://forms.gle/gHrxGQMEnAobukfn7">form</a> to send feedback.</div>
 
 
-### 言語固有の互換性に関する追加情報
+### Additional language specific compatibility information
 
 Node.js
-: webpack や esbuild を使ってバンドルしている場合は、[特定のバンドラーの指示に従ってください][4]。
+: If you are bundling using webpack or esbuild, [follow the specific bundler instructions][4].
 
 Python
 : 
 
 Java
-: 分散型トレーシングでサーバーレスアプリケーションを完全にインスツルメントするには、Java Lambda 関数が Java 8 Corretto (`java8.al2`)、Java 11 (`java11`) または Java 17 (`java17`) ランタイムを使用し、少なくとも 1024MB のメモリを搭載している必要があります。
-: Datadog Lambda レイヤーの `dd-trace-java:4` (またはそれ以前) と `Datadog-Extension:24` (またはそれ以前) を使用する場合、[Java Lambda 関数のインスツルメンテーションのアップグレード][3]の手順に従ってください。
+: To fully instrument your serverless application with distributed tracing, your Java Lambda functions must use the Java 8 Corretto (`java8.al2`), Java 11 (`java11`) or Java 17 (`java17`) runtimes with at least 1024MB of memory.
+: If you use the Datadog Lambda layers `dd-trace-java:4` (or older) and `Datadog-Extension:24` (or older), follow the instructions in [Upgrade Instrumentation for Java Lambda Functions][3].
 
 Go
 : 
@@ -51,42 +52,42 @@ Go
 : 
 
 
-## Kubernetes Resource Utilization
+## Google Cloud Run
 
-<div class="alert alert-info">ASM サーバーレスの Google Cloud Run サポートはベータ版です</a>。</div>
+<div class="alert alert-info">Google Cloud Run support for Application Security serverless is in beta</a>.</div>
 
-**注**: リモート構成による Threat Protection はサポートされていません。[WAF][6] で IP をブロックするには、[ワークフロー][5]を使用してください。
+**Note**: Threat Protection through Remote Configuration is not supported. Use [Workflows][5] to block IPs in your [WAF][6].
 
-|タイプ               | Threat Detection  |  OSS の脆弱性管理 | コードレベルの脆弱性管理   |
+|Type               | Threat Detection  |  Software Composition Analysis    | Code Security     |
 | ---       |   ---                     |           ----                    |           ----                            |
-| テスト結果          | beta          | beta                              |                       |
-| モニタリング      | beta          | beta                                  |                       |
+| Java          | beta          | beta                              |                       |
+| .NET      | beta          | beta                                  |                       |
 | Node      | beta          | beta                          |                       |
-| プライベートロケーション    | beta          | beta                          |                       |
-| ステップの記録      | beta          |  beta                             |                       |
-| テスト結果       |             |                         |                       |
-| ブラウザテスト        | beta          | beta                          |                       |
+| Python    | beta          | beta                          |                       |
+| Ruby      | beta          |  beta                             |                       |
+| PHP       |             |                         |                       |
+| Go        | beta          | beta                          |                       |
 
 
-## インフラストラクチャーリスト
+## Azure App Service
 
-サポートされるのは *Web アプリケーション*のみです。Azure 関数は、ASM ではサポートされていません。
+Only *web applications* are supported. Azure Functions are not supported.
 
-**注**: リモート構成による Threat Protection はサポートされていません。[WAF][6] で IP をブロックするには、[ワークフロー][5]を使用してください。
+**Note**: Threat Protection through Remote Configuration is not supported. Use [Workflows][5] to block IPs in your [WAF][6].
 
-|タイプ       | OS                 |Threat Detection  |  OSS の脆弱性管理  | コードレベルの脆弱性管理  |
+|Type       | OS                 |Threat Detection  |  Software Composition Analysis     | Code Security    |
 |-----------|--------------------|------------------|------------------------------------|------------------------------------------|
-| GRPC      | Windows、Linux     | {{< X >}}        | {{< X >}}                          | beta                                     |
-| モニタリング      | Windows、Linux     | {{< X >}}        | {{< X >}}                          |                                          |
+| Java      | Windows, Linux     | {{< X >}}        | {{< X >}}                          | beta                                     |
+| .NET      | Windows, Linux     | {{< X >}}        | {{< X >}}                          |                                          |
 | Node      | Linux              | {{< X >}}        | {{< X >}}                          | beta                                     |
-| プライベートロケーション    | Linux              | {{< X >}}        | {{< X >}}                          |                                          |
-| ステップの記録      | Linux              | {{< X >}}        | {{< X >}}                          |                                          |
-| テスト結果       | Linux              |                  | {{< X >}}                          |                                          |
+| Python    | Linux              | {{< X >}}        | {{< X >}}                          |                                          |
+| Ruby      | Linux              | {{< X >}}        | {{< X >}}                          |                                          |
+| PHP       | Linux              |                  | {{< X >}}                          |                                          |
 
 
-[1]: /ja/serverless/distributed_tracing/
-[2]: /ja/serverless/guide/datadog_forwarder_python
-[3]: /ja/serverless/guide/upgrade_java_instrumentation
-[4]: /ja/serverless/guide/serverless_tracing_and_bundlers/
-[5]: /ja/service_management/workflows/
-[6]: /ja/security/application_security/threats/inapp_waf_rules/
+[1]: /serverless/distributed_tracing/
+[2]: /serverless/guide/datadog_forwarder_python
+[3]: /serverless/guide/upgrade_java_instrumentation
+[4]: /serverless/guide/serverless_tracing_and_bundlers/
+[5]: /service_management/workflows/
+[6]: /security/application_security/threats/inapp_waf_rules/

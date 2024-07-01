@@ -1,5 +1,7 @@
 ---
 title: query
+core_product:
+  - metrics
 ---
-クエリは、メトリクス名、時間集計、空間集計、スコープから構成されます。
-詳細は、<a href="/metrics/#querying-metrics">ドキュメントを参照してください</a>。
+A query is composed of the metric name, the time aggregator, the space aggregator, and the scope.
+For more information, <a href="/metrics/#querying-metrics">see the documentation</a>.

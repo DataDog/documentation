@@ -1,35 +1,37 @@
 ---
-kind: ガイド
-title: SQL ステートメントのタグ付け
+title: Tagging SQL Statements
+kind: guide
 ---
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">データベースモニタリングはこのサイトでサポートされていません。</div>
-{{< /site-region >}}
 
-このガイドでは、[Database Monitoring][1] を構成していることを前提にしています。
+This guide assumes that you have configured [Database Monitoring][1].
 
-[Datadog Database Monitoring (DBM)][1] では、データベースホスト上で実行されている実行計画やクエリサンプルを表示することができます。このガイドでは、データベースクエリに SQL コメントとしてタグを追加する方法を説明します。
+[Datadog Database Monitoring (DBM)][1] allows you to view explain plans and query samples running on your database hosts. This guide shows you how to add tags as SQL comments to your database queries, which can then be surfaced and leveraged in DBM.
 
-## はじめに
+## Before you begin
 
-対応データベース
-: Postgres、MySQL、SQL Server
+Supported databases
+: Postgres, MySQL, SQL Server
 
-サポート対象の Agent バージョン
+Supported Agent versions
 : 7.36.1+
 
-対応タグ形式
-: [sqlcommenter][2]、[marginalia][3]
+Supported tagging formats
+: [sqlcommenter][2], [marginalia][3]
 
 
-## 手動タグ挿入
-SQL ステートメントの実行をサポートする任意のデータベース API を使用して、[sqlcommenter][2] または [marginalia][3] 形式でフォーマットされたタグでステートメントにコメントを追加します。
+## Manual tag injection
+Using any database API supporting execution of SQL statements, add a comment in your statement with tags formatted as per the [sqlcommenter][2] or [marginalia][3] formats.
 
 ```sql
 /*key='val'*/ SELECT * from FOO
 ```
 
-完全な例:
+Separate multiple tags with commas:
+```sql
+/*key1='val1',key2='val2'*/ SELECT * from FOO
+```
+
+Full example:
 ```go
 import (
     "database/sql"      
@@ -41,7 +43,7 @@ func main() {
         log.Fatal(err)
     }
 
-    // key:val で SQL ステートメントをタグ付けします
+    // Tag SQL statement with key:val
     rows, err := db.Query("/*key='val'*/ SELECT * from FOO")
     if err != nil {
         log.Fatal(err)
@@ -50,21 +52,21 @@ func main() {
 }
 ```
 
-## DBM でタグを探る
+## Explore the tags in DBM
 
-[**DBM > Samples**][4] ページで、**Explain Plans** および **Query Samples** ビューをカスタムタグでフィルターします。
+On the [Samples page][4], filter the **Explain Plans** and **Query Samples** views by custom tag.
 
-{{< img src="database_monitoring/dbm_filter_explain_plans_by_custom_tag.png" alt="カスタムタグで実行計画をフィルターします。">}}
+{{< img src="database_monitoring/dbm_filter_explain_plans_by_custom_tag.png" alt="Filter explain plans by custom tag.">}}
 
-また、タグでフィルターした実行計画コストの時系列を表示することもできます。
+You can also view a timeseries of explain plan costs filtered by tag.
 
-{{< img src="database_monitoring/dbm_timeseries_by_custom_tag.png" alt="カスタムタグによる実行計画コスト。">}}
+{{< img src="database_monitoring/dbm_timeseries_by_custom_tag.png" alt="Explain plan cost by custom tag.">}}
 
-クエリを選択すると、カスタムタグは **Sample Details** ページの Propagated Tags に表示されます。
+When you select a query, the custom tags are shown on the **Sample Details** page under Propagated Tags.
 
-{{< img src="database_monitoring/dbm_explain_plan_with_custom_tags.png" alt="実行計画のカスタムタグを表示します。">}}
+{{< img src="database_monitoring/dbm_explain_plan_with_custom_tags.png" alt="View custom tags on explain plans.">}}
 
-[1]: /ja/database_monitoring/#getting-started
+[1]: /database_monitoring/#getting-started
 [2]: https://google.github.io/sqlcommenter
 [3]: https://github.com/basecamp/marginalia
-[4]: /ja/database_monitoring/query_samples/
+[4]: https://app.datadoghq.com/databases/samples

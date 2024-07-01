@@ -1,103 +1,103 @@
 ---
-app_id: lighthouse
-app_uuid: e61bdb03-995f-4f46-8b14-afd59e35453b
-assets:
-  integration:
-    auto_install: true
-    configuration: {}
-    events:
-      creates_events: false
-    metrics:
-      check: lighthouse.performance
-      metadata_path: metadata.csv
-      prefix: lighthouse.
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 10199
-    source_type_name: Lighthouse
-author:
-  homepage: https://github.com/DataDog/integrations-extras
-  name: コミュニティ
-  sales_email: mustin.eric@gmail.com
-  support_email: mustin.eric@gmail.com
-categories:
+"app_id": "lighthouse"
+"app_uuid": "e61bdb03-995f-4f46-8b14-afd59e35453b"
+"assets":
+  "integration":
+    "auto_install": true
+    "configuration": {}
+    "events":
+      "creates_events": false
+    "metrics":
+      "check": lighthouse.performance
+      "metadata_path": metadata.csv
+      "prefix": lighthouse.
+    "service_checks":
+      "metadata_path": assets/service_checks.json
+    "source_type_id": !!int "10199"
+    "source_type_name": Lighthouse
+"author":
+  "homepage": "https://github.com/DataDog/integrations-extras"
+  "name": Community
+  "sales_email": mustin.eric@gmail.com
+  "support_email": mustin.eric@gmail.com
+"categories":
 - developer tools
-dependencies:
-- https://github.com/DataDog/integrations-extras/blob/master/lighthouse/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: lighthouse
-integration_id: lighthouse
-integration_title: Lighthouse
-integration_version: 2.2.0
-is_public: true
-kind: インテグレーション
-manifest_version: 2.0.0
-name: lighthouse
-public_title: Lighthouse
-short_description: Google Lighthouse 監査統計
-supported_os:
+"custom_kind": "integration"
+"dependencies":
+- "https://github.com/DataDog/integrations-extras/blob/master/lighthouse/README.md"
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "lighthouse"
+"integration_id": "lighthouse"
+"integration_title": "Lighthouse"
+"integration_version": "2.2.0"
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "lighthouse"
+"public_title": "Lighthouse"
+"short_description": "Google Lighthouse Audit Stats"
+"supported_os":
 - linux
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Developer Tools
-  - Supported OS::Linux
-  configuration: README.md#Setup
-  description: Google Lighthouse 監査統計
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Lighthouse
+"tile":
+  "changelog": CHANGELOG.md
+  "classifier_tags":
+  - "Category::Developer Tools"
+  - "Supported OS::Linux"
+  "configuration": "README.md#Setup"
+  "description": Google Lighthouse Audit Stats
+  "media": []
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": Lighthouse
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
-## 概要
+## Overview
 
-[Google Chrome Lighthouse][1] からリアルタイムにメトリクスを取得して、
+Get metrics from [Google Chrome Lighthouse][1] in real time to:
 
-- Lighthouse 統計を視覚化および監視できます。
-- Web サイトのアクセシビリティ、ベストプラクティス、パフォーマンス、PWA、および SEO 監査スコアを追跡および監査できます。
+- Visualize and monitor Lighthouse stats.
+- Track and audit scores for your websites accessibility, best practices, performance, PWA, and SEO audit scores.
 
-## 計画と使用
+## Setup
 
-Lighthouse チェックは [Datadog Agent][2] パッケージに含まれていないため、お客様自身でインストールする必要があります。
+The Lighthouse check is not included in the [Datadog Agent][2] package, so you need to install it.
 
-### インフラストラクチャーリスト
+### Installation
 
-Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Lighthouse チェックをホストにインストールします。Docker Agent または 上記バージョン以前の Agent でインストールする場合は、[コミュニティインテグレーションの使用][3]をご参照ください。
+For Agent v7.21+ / v6.21+, follow the instructions below to install the Lighthouse check on your host. See [Use Community Integrations][3] to install with the Docker Agent or earlier versions of the Agent.
 
-1. 以下のコマンドを実行して、Agent インテグレーションをインストールします。
+1. Run the following command to install the Agent integration:
 
    ```shell
    datadog-agent integration install -t datadog-lighthouse==<INTEGRATION_VERSION>
    ```
 
-2. コアの[インテグレーション][4]と同様にインテグレーションを構成します。
+2. Configure your integration similar to core [integrations][4].
 
-### ブラウザトラブルシューティング
+### Configuration
 
-1. Lighthouse の[メトリクス](#metrics)の収集を開始するには、[Agent のコンフィギュレーションディレクトリ][5]のルートにある `conf.d/` フォルダーの `lighthouse.d/conf.yaml` ファイルを編集します。
-   使用可能なすべてのコンフィギュレーションオプションについては、[lighthouse.d/conf.yaml のサンプル][6]を参照してください。
+1. Edit the `lighthouse.d/conf.yaml` file in the `conf.d/` folder at the root of your [Agent's configuration directory][5] to start collecting your Lighthouse [metrics](#metrics).
+   See the [sample lighthouse.d/conf.yaml][6] for all available configuration options.
 
-2. [Agent を再起動します][7]。
+2. [Restart the Agent][7]
 
-### 要件
+### Requirements
 
-1. Node.js LTS (8.9 以降)。
-   - Node.js と npm がインストールされているかどうかを確認します。
+1. Node.js LTS (8.9+). 
+   - Check if Node.js and npm installed:
 
    ```shell
    node -v
    npm -v
    ```
 
-   - インストールされていない場合は、[Node.js と npm をインストールします][8]。
+   - If not, [install Node.js and npm][8].
 
 2. [Lighthouse][9]:
-   - インストールされているかどうかを確認します。
+   - Check if installed.
 
    ```shell
    # example
@@ -105,13 +105,13 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Lighthouse チ
    |_ lighthouse@5.6.0
    ```
 
-   - インストールされていない (上記のコマンドからの出力なし) 場合はインストールします。
+   - Install if not (no output from above command):
    ```shell
    npm install -g lighthouse
    ```
 
 
-3. Google Chrome/Chromium または Puppeteer。
+3. Either Google Chrome/Chromium or Puppeteer.
 
    - [Chromium][10]
       + Debian/Ubuntu
@@ -128,10 +128,10 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Lighthouse チ
       sudo yum install -y chromium
       ```
 
-      **注**: このインテグレーションでは、Chrome/Chromium がヘッドレスモードで実行されます。Chrome/Chromium では、ヘッドレスモードが適切に機能するために、RHEL/CentOS でカーネル 4.4 以降が必要になる場合があります。
+      **Note**: This integration runs Chrome/Chromium in headless mode. Chrome/Chromium may require kernel 4.4+ on RHEL/CentOS for the headless mode to work properly.
 
    - [Puppeteer][11]
-      + インストールされているかどうかを確認します。
+      + Check if installed.
 
       ```shell
       # example
@@ -139,51 +139,52 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Lighthouse チ
       |_ puppeteer@1.12.2
       ```
 
-      + インストールされていない (上記のコマンドからの出力なし) 場合はインストールします。
+      + Install if not (no output from above command):
 
       ```shell
       npm install -g puppeteer --unsafe-perm=true
       ```
 
-4. `dd-agent` ユーザーが lighthouse cli を実行できるかどうかを確認します。
+4. Verify if `dd-agent` user is able to run the lighthouse cli.
 
    ```shell
    sudo -u dd-agent lighthouse <WEB_URL> --output json --quiet --chrome-flags='--headless'
    ```
 
-### 検証
+### Validation
 
-[Agent の status サブコマンドを実行][12]し、Checks セクションで `lighthouse` を探します。
+[Run the Agent's status subcommand][12] and look for `lighthouse` under the Checks section.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "lighthouse" >}}
 
 
-### ヘルプ
+### Events
 
-Lighthouse インテグレーションには、イベントは含まれません。
+The Lighthouse integration does not include any events.
 
-### ヘルプ
+### Service Checks
 
-Lighthouse インテグレーションには、サービスのチェック機能は含まれません。
+The Lighthouse integration does not include any service checks.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][14]までお問合せください。
+Need help? Contact [Datadog support][14].
 
 [1]: https://developers.google.com/web/tools/lighthouse
 [2]: https://app.datadoghq.com/account/settings/agent/latest
-[3]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/
-[4]: https://docs.datadoghq.com/ja/getting_started/integrations/
-[5]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
+[3]: https://docs.datadoghq.com/agent/guide/use-community-integrations/
+[4]: https://docs.datadoghq.com/getting_started/integrations/
+[5]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
 [6]: https://github.com/DataDog/integrations-extras/blob/master/lighthouse/datadog_checks/lighthouse/data/conf.yaml.example
-[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[7]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [8]: https://nodejs.org/en/download
 [9]: https://github.com/GoogleChrome/lighthouse
 [10]: https://www.chromium.org/
 [11]: https://github.com/GoogleChrome/puppeteer
-[12]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[12]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
 [13]: https://github.com/DataDog/integrations-extras/blob/master/lighthouse/datadog_checks/lighthouse/metadata.csv
-[14]: https://docs.datadoghq.com/ja/help/
+[14]: https://docs.datadoghq.com/help/
+

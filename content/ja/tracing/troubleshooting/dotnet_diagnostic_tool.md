@@ -1,49 +1,50 @@
 ---
-title: トラブルシューティングのための .NET 診断ツールの使用について
+title: Using the .NET diagnostic tool for troubleshooting
+kind: documentation
 ---
 
-.NET トレーサーをインストールした後、アプリケーションが期待通りにトレースを生成しない場合、基本的なトラブルシューティングのために、このページで説明されている診断ツール `dd-dotnet` を実行してください。環境変数が足りない、インストールが不完全、Agent に到達できないなど、セットアップの問題を特定するのに役立ちます。
+If your application does not produce traces as expected after installing the .NET tracer, run the diagnostic tool `dd-dotnet` described on this page for basic troubleshooting. It can help you determine issues with your setup, such as missing environment variables, incomplete installation, or an unreachable Agent.
 
-診断ツール `dd-dotnet` は、バージョン 2.42.0 以降のトレーシングライブラリにバンドルされています。これはトレーシングライブラリのインストールフォルダにあり、自動的にシステムの `PATH` に追加され、どこからでも呼び出すことができます。
+The diagnostic tool  `dd-dotnet` is bundled with the tracing library starting with version 2.42.0. It is located in the tracing library's installation folder, and automatically added to the system `PATH` to be invoked from anywhere.
 
-## `dd-trace` のインストール
+## Installing `dd-trace`
 
-**このセクションは、バージョン 2.42.0 よりも古いトレーサーのバージョンに対応しています。**
+**This section is for versions of the tracer older than 2.42.0.**
 
-トレーサーの古いバージョンには、`dd-dotnet` ツールが含まれていませんでした。代わりに `dd-trace` ツールをインストールすることができます。機能と構文は `dd-dotnet` に似ています。
+Older versions of the tracer did not include the `dd-dotnet` tool. You can install the `dd-trace` tool instead. Its features and syntax are similar to `dd-dotnet`.
 
-`dd-trace` は以下のいずれかの方法でインストールできます。
+You can install `dd-trace` in one of the following ways:
 
-- 以下のコマンドを実行して、.NET SDK を使用する。
+- Using the .NET SDK by running the command:
    ```
    dotnet tool install -g dd-trace
    ```
-- 適切なバージョンをダウンロードする。
+- By downloading the appropriate version:
     * Win-x64: [https://dtdg.co/dd-trace-dotnet-win-x64][1]
     * Linux-x64: [https://dtdg.co/dd-trace-dotnet-linux-x64][2]
     * Linux-musl-x64 (Alpine): [https://dtdg.co/dd-trace-dotnet-linux-musl-x64][3]
 
-- または、[github のリリースページより][4]ダウンロードする。
+- Or by downloading [from the github release page][4].
 
-次のセクションのコマンドを呼び出すときは、必ず `dd-dotnet` を `dd-trace` に置き換えてください。
+When invoking the commands in the next sections, make sure to replace `dd-dotnet` with `dd-trace`.
 
-## プロセス診断
+## Process diagnostics 
 
-ほとんどのアプリケーションでは、プロセス診断で問題を見つけることができます。
+For most applications, use the process diagnostics to find the problem. 
 
-1. アプリケーションが動作していることを確認し、プロセス ID (pid) を取得します。
+1. Ensure the application is running, and get the process ID (pid). 
 
-   Windows プロセスの pid を取得するには、タスクマネージャーを開き、**詳細**タブを開き、PID 列を探します。また、`tasklist /FI "IMAGENAME eq target.exe"` (ここで `target.exe` はプロセスの名前) というコマンドを実行することもできます。
+   To get the pid of a Windows process, open Task Manager, open the **Details** tab, and look for the PID column. You can also run the command `tasklist /FI "IMAGENAME eq target.exe"`where `target.exe` is the name of the process.
 
-   Linux でプロセスの pid を取得するには、`ps aux | grep target` (ここで `target` はプロセスの名前) というコマンドを実行します (Docker コンテナで実行している場合、pid は通常 `1` です)。
+   To get the pid of a process on Linux, run the command `ps aux | grep target` where `target` is the name of the process (the pid is typically `1` when running in a Docker container).
 
-2. pid を dd-dotnet ツールに渡します。
+2. Pass the pid into the dd-dotnet tool:
    ```
    dd-dotnet check process <pid>
    ```
-   基本的な構成チェックを行い、問題が見つかった場合は推奨事項を表示します。
+   This runs basic configuration checks and displays recommendations if any issues are found.
 
-問題がない出力例:
+Example output with no issues:
 ```bash
 $ dd-dotnet check process 35888
 
@@ -83,7 +84,7 @@ Detected agent version 7.48.0
  [SUCCESS]: No issue found with the target process.
 ```
 
-問題がある出力例:
+Example output with issues:
 ```bash
 $ dd-dotnet check process 4464
 
@@ -119,35 +120,35 @@ missing. If using the MSI, make sure the installation was completed correctly tr
  ```
 
 
-## IIS 診断
+## IIS diagnostics
 
-IIS アプリケーションの場合、以下のコマンドを使用することで、より詳細な診断を受けることができます。`<FULL SITE NAME>` は IIS のサイト名で、その後にアプリケーションの名前が続きます。
+For an IIS application, you can get more thorough diagnostics by using the following command, where `<FULL SITE NAME>` is the name of the site in IIS followed by the name of the application:
 
 ```
 dd-dotnet check iis "<FULL SITE NAME>"
 ```
 
-IIS ではアプリケーションプールが遅延して開始されるため、コマンドを実行する前に、サイトが少なくとも 1 つのリクエストを受信していることを確認してください。
+Because application pools are started lazily in IIS, make sure that the site has received at least one request before you run the command.
 
-**名前にスペースがある場合は、引用符で囲むことを忘れないでください。**
+**Remember to enclose the name in quotation marks if it has spaces in it.**
 
-例えば、以下に示すアプリケーションの完全なサイト名は、`Default Web Site/WebApplication1` です。
+For example, the full site name for the application shown below is `Default Web Site/WebApplication1`:
 
-{{< img src="tracing/troubleshooting/IISManager.png" alt="IIS マネージャー">}}
+{{< img src="tracing/troubleshooting/IISManager.png" alt="IIS manager">}}
 
-このアプリケーションで IIS の診断を実行するコマンドは、
+The command to run IIS diagnostics on this application is:
 ```
 dd-dotnet check iis "Default Web Site/WebApplication1"
 ```
 
-サイトのルートアプリケーションをインスツルメントするには、以下を実行します。
+To instrument the root application of the site, run:
 ```
 dd-dotnet check iis "Default Web Site"
 ```
 
-`check iis` コマンドはプロセス診断を含むので、基本的な構成チェックを行い、問題が見つかった場合は推奨事項を表示します。
+The `check iis` command includes process diagnostics, so it runs basic configuration checks and displays recommendations if any issues are found.
 
-問題がない出力例:
+Example output without issues:
 ```bash
 $ dd-dotnet check iis "Default Web Site/WebFormsTestApp"
 
@@ -187,7 +188,7 @@ Found Datadog.Trace version 2.42.0.0 in the GAC
  [SUCCESS]: No issue found with the IIS site.
 ```
 
-問題がある出力例:
+Example output with issues:
 ```bash
 $ dd-dotnet check iis "Default Web Site/WebFormsTestApp"
 
@@ -227,16 +228,16 @@ Detected agent version 7.48.0
 with the MSI.
 ```
 
-## Agent の接続性診断
+## Agent connectivity diagnostics
 
-特定のアプリケーションのチェックを実行するのではなく、Agent への接続をテストしたいだけの場合は、以下を実行します。
+If you don't want to run checks for a specific application but just want to test the connection to the Agent, run:
 ```
 dd-dotnet check agent <url>
 ```
 
-このコマンドは、Agent にリクエストを送信し、エラーを探します。オプションの `url` パラメーターが省略された場合は、環境変数から Agent の場所を決定します。サポートされているプロトコルは `http://` または `unix://` (ドメインソケットの場合) です。
+This command sends a request to the Agent and looks for errors. If the optional `url` parameter is omitted, then the location of the Agent is determined from the environment variables. The supported protocols are `http://` or `unix://` (for domain sockets).
 
-問題がない出力例:
+Example output without issues:
 ```bash
 $ dd-dotnet check agent
 
@@ -246,7 +247,7 @@ Detected agent version 7.48.0
  [SUCCESS]: Connected successfully to the Agent.
 ```
 
-問題がある出力例:
+Example output with issues:
 ```bash
 $ dd-dotnet check agent
 
@@ -256,11 +257,11 @@ Connecting to Agent at endpoint http://127.0.0.1:8126/ using HTTP
 could be made because the target machine actively refused it. (127.0.0.1:8126)
 ```
 
-Agent の接続に関する問題については、[接続エラー][5]をお読みください。
+Read [Connection Errors][5] for more information about Agent connectivity issues.
 
 
 [1]: https://dtdg.co/dd-trace-dotnet-win-x64
 [2]: https://dtdg.co/dd-trace-dotnet-linux-x64
 [3]: https://dtdg.co/dd-trace-dotnet-linux-musl-x64
 [4]: https://github.com/DataDog/dd-trace-dotnet/releases
-[5]: /ja/tracing/troubleshooting/connection_errors/?code-lang=dotnet#
+[5]: /tracing/troubleshooting/connection_errors/?code-lang=dotnet#

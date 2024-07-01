@@ -1,33 +1,34 @@
 ---
-description: ログからブラウザやモバイルのエラーを追跡する方法について説明します。
-further_reading:
-- link: https://www.datadoghq.com/blog/error-tracking/
-  tag: GitHub
-  text: Datadog Error Tracking で、アプリケーションの問題を解明
-- link: /logs/error_tracking/explorer/
-  tag: ドキュメント
-  text: エラートラッキングエクスプローラーについて
+title: Track Browser and Mobile Errors
+kind: documentation
+description: Learn how to track browser and mobile errors from your logs.
 is_beta: true
-title: ブラウザとモバイルのエラーの追跡
+further_reading:
+  - link: "https://www.datadoghq.com/blog/error-tracking/"
+    tag: Blog
+    text: Make sense of application issues with Datadog Error Tracking
+  - link: /logs/error_tracking/explorer/
+    tag: Documentation
+    text: Learn about the Error Tracking Explorer
 ---
 
-## 概要
+## Overview
 
-エラートラッキングは、ブラウザやモバイルの Datadog SDK から収集されたエラーを処理します。スタックトレースを含むエラーが収集されると、エラー追跡はそれを処理し、類似したエラーのグループ化である_問題_の下にグループ化します。
+Error Tracking processes errors collected from browser and mobile Datadog SDKs. Whenever an error containing a stack trace is collected, Error Tracking processes and groups it under an _issue_, which is a grouping of similar errors.
 
-ログのエラーに不可欠な属性は、ログの `error.stack` にあるスタックトレースです。もし、スタックトレースを Datadog に送信しているが、`error.stack` にない場合、[ジェネリックログリマッパー][6]をセットアップして、スタックトレースを Datadog の正しい属性にリマップすることが可能です。
+An essential attribute for log errors is the stack trace in a log's `error.stack`. If you are sending stack traces to Datadog but they are not in `error.stack`, you can set up a [generic log remapper][6] to remap the stack trace to the correct attribute in Datadog.
 
-クラッシュレポートは [**Error Tracking**][2] に表示されます。
+Your crash reports appear in [**Error Tracking**][2].
 
-## セットアップ
+## Setup
 
 {{< tabs >}}
-{{% tab "ブラウザ" %}}
+{{% tab "Browser" %}}
 
-Datadog ブラウザ SDK をまだセットアップしていない場合は、[アプリ内セットアップ手順][1]に従うか、[ブラウザログの設定ドキュメント][2]をご覧ください。
+If you have not set up the Datadog Browser SDK yet, follow the [in-app setup instructions][1] or see the [Browser Logs setup documentation][2].
 
-1. Logs Browser SDK の最新版をダウンロードしてください。エラー追跡には、少なくとも `v4.36.0` が必要です。
-2. [SDK の初期化][3]の際に、アプリケーションの `version`、`env`、`service` を構成します。例えば、NPM で
+1. Download the latest version of the Logs Browser SDK. Error Tracking requires at least `v4.36.0`.
+2. Configure your application's `version`, `env`, and `service` when [initializing the SDK][3]. For example, with NPM:
 
    ```javascript
    import { datadogLogs } from '@datadog/browser-logs'
@@ -42,7 +43,7 @@ Datadog ブラウザ SDK をまだセットアップしていない場合は、[
    })
    ```
 
-3. キャッチした例外を自分でログに残すには、[オプションのエラーパラメーター][4]を使用することができます。
+3. To log a caught exception yourself, you may use [the optional error parameter][4]:
 
    ```javascript
    try {
@@ -52,21 +53,21 @@ Datadog ブラウザ SDK をまだセットアップしていない場合は、[
    }
    ```
 
-**注**: エラー追跡は、`Error` のインスタンスであるエラーのみを考慮します。
+**Note**: Error Tracking only considers errors that are instances of `Error`.
 
 [1]: https://app.datadoghq.com/logs/onboarding/client
-[2]: /ja/logs/log_collection/javascript/#setup
-[3]: /ja/logs/log_collection/javascript/#choose-the-right-installation-method
-[4]: /ja/logs/log_collection/javascript/#error-tracking
+[2]: /logs/log_collection/javascript/#setup
+[3]: /logs/log_collection/javascript/#choose-the-right-installation-method
+[4]: /logs/log_collection/javascript/#error-tracking
 
 {{% /tab %}}
 {{% tab "Android" %}}
 
-Datadog Android SDK をまだセットアップしていない場合は、[アプリ内セットアップ手順][1]に従うか、[Android ログの設定ドキュメント][2]をご覧ください。
+If you have not set up the Datadog Android SDK yet, follow the [in-app setup instructions][1] or see the [Android Logs setup documentation][2].
 
-1. [Datadog Android SDK for Logs][3] の最新版をダウンロードします。
-2. [SDK の初期化][4]の際に、アプリケーションの `version`、`env`、`service` を構成します。
-3. キャッチした例外を自分でログに残すには、オプションで以下を使用できます。
+1. Download the latest version of the [Datadog Android SDK for Logs][3].
+2. Configure your application's `version`, `env`, and `service` when [initializing the SDK][4].
+3. To log a caught exception yourself, you may optionally use:
 
    ```java
    try {
@@ -77,18 +78,18 @@ Datadog Android SDK をまだセットアップしていない場合は、[ア�
    ```
 
 [1]: https://app.datadoghq.com/logs/onboarding/client
-[2]:/ja/logs/log_collection/android/#setup
+[2]: /logs/log_collection/android/#setup
 [3]: https://github.com/Datadog/dd-sdk-android
-[4]: /ja/logs/log_collection/android/?tab=kotlin#setup
+[4]: /logs/log_collection/android/?tab=kotlin#setup
 
 {{% /tab %}}
 {{% tab "iOS" %}}
 
-Datadog iOS SDK をまだセットアップしていない場合は、[アプリ内セットアップ手順][1]に従うか、[iOS ログの設定ドキュメント][2]をご覧ください。
+If you have not setup the Datadog iOS SDK yet, follow the [in-app setup instructions][1] or see the [iOS Logs setup documentation][2].
 
-1. [Datadog iOS SDK for Logs][3] の最新版をダウンロードします。
-2. [SDK の初期化][4]の際に、アプリケーションの `version`、`env`、`service` を構成します。
-3. キャッチした例外を自分でログに残すには、オプションで以下を使用できます。
+1. Download the latest version of the [Datadog iOS SDK for Logs][3].
+2. Configure your application's `version`, `env`, and `service` when [initializing the SDK][4].
+3. To log a caught exception yourself, you may optionally use:
 
    ```java
    do {
@@ -99,19 +100,19 @@ Datadog iOS SDK をまだセットアップしていない場合は、[アプリ
    ```
 
 [1]: https://app.datadoghq.com/logs/onboarding/client
-[2]: /ja/logs/log_collection/ios/#setup
+[2]: /logs/log_collection/ios/#setup
 [3]: https://github.com/Datadog/dd-sdk-ios
-[4]: /ja/logs/log_collection/ios/?tab=cocoapods#setup
+[4]: /logs/log_collection/ios/?tab=cocoapods#setup
 
 {{% /tab %}}
 {{< /tabs >}}
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [2]: https://app.datadoghq.com/logs/error-tracking
 [3]: https://app.datadoghq.com/logs/onboarding/client
-[4]: /ja/logs/log_collection/javascript/#setup
-[5]: /ja/logs/log_collection/javascript/#choose-the-right-installation-method
-[6]: /ja/logs/log_configuration/processors/?tab=ui#remapper
+[4]: /logs/log_collection/javascript/#setup
+[5]: /logs/log_collection/javascript/#choose-the-right-installation-method
+[6]: /logs/log_configuration/processors/?tab=ui#remapper

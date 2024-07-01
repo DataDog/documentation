@@ -1,141 +1,141 @@
 ---
-app_id: algorithmia
-app_uuid: 09ef6f74-1555-4082-a69e-b5cf21ec4512
-assets:
-  dashboards:
-    Algorithmia: assets/dashboards/algorithmia.json
-  integration:
-    auto_install: true
-    configuration: {}
-    events:
-      creates_events: false
-    metrics:
-      check: algorithmia.duration_milliseconds
-      metadata_path: metadata.csv
-      prefix: algorithmia.
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 10128
-    source_type_name: Algorithmia
-  monitors:
-    Algorithmia: assets/monitors/algorithm_duration.json
-author:
-  homepage: https://github.com/DataDog/integrations-extras
-  name: Algorithmia
-  sales_email: support@algorithmia.io
-  support_email: support@algorithmia.io
-categories:
-- メトリクス
+"app_id": "algorithmia"
+"app_uuid": "09ef6f74-1555-4082-a69e-b5cf21ec4512"
+"assets":
+  "dashboards":
+    "Algorithmia": assets/dashboards/algorithmia.json
+  "integration":
+    "auto_install": true
+    "configuration": {}
+    "events":
+      "creates_events": false
+    "metrics":
+      "check": algorithmia.duration_milliseconds
+      "metadata_path": metadata.csv
+      "prefix": algorithmia.
+    "service_checks":
+      "metadata_path": assets/service_checks.json
+    "source_type_id": !!int "10128"
+    "source_type_name": Algorithmia
+  "monitors":
+    "Algorithmia": assets/monitors/algorithm_duration.json
+"author":
+  "homepage": "https://github.com/DataDog/integrations-extras"
+  "name": Algorithmia
+  "sales_email": support@algorithmia.io
+  "support_email": support@algorithmia.io
+"categories":
+- metrics
 - ai/ml
-dependencies:
-- https://github.com/DataDog/integrations-extras/blob/master/algorithmia/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: algorithmia
-integration_id: algorithmia
-integration_title: Algorithmia
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: 2.0.0
-name: algorithmia
-public_title: Algorithmia
-short_description: 本番環境の機械学習モデルのメトリクスを監視
-supported_os:
+"custom_kind": "integration"
+"dependencies":
+- "https://github.com/DataDog/integrations-extras/blob/master/algorithmia/README.md"
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "algorithmia"
+"integration_id": "algorithmia"
+"integration_title": "Algorithmia"
+"integration_version": ""
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "algorithmia"
+"public_title": "Algorithmia"
+"short_description": "Monitor metrics for machine learning models in production"
+"supported_os":
 - linux
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Metrics
-  - Category::AI/ML
-  - Supported OS::Linux
-  configuration: README.md#Setup
-  description: 本番環境の機械学習モデルのメトリクスを監視
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Algorithmia
+"tile":
+  "changelog": CHANGELOG.md
+  "classifier_tags":
+  - "Category::Metrics"
+  - "Category::AI/ML"
+  - "Supported OS::Linux"
+  "configuration": "README.md#Setup"
+  "description": Monitor metrics for machine learning models in production
+  "media": []
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": Algorithmia
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
-## 概要
+## Overview
 
-[Algorithmia][1] は、本番環境で機械学習をはじめとする確率モデルをデプロイ、
-管理、制御し、セキュリティを確保するための機能を含む、データサイエンティスト、
-アプリ開発者、IT オペレーターのための MLOps プラットフォームです。
+[Algorithmia][1] is an MLOps platform that includes capabilities for data
+scientists, application developers, and IT operators to deploy, manage, govern,
+and secure machine learning and other probabilistic models in production.
 
-![Datadog で Algorithmia Insights を利用][2]
+![Algorithmia Insights in Datadog][2]
 
-Algorithmia Enterprise の機能のひとつである Algorithmia Insights は、
-機械学習モデルをインスツルメントして計測、監視するために使用される
-メトリクスのパイプラインを提供します。機械学習モデルからの推論関連の
-メトリクスの監視ユースケースには、モデルドリフトの検出、データドリフト、
-モデルバイアスなどがあります。
+Algorithmia Insights is a feature of Algorithmia Enterprise and provides a
+metrics pipeline that can be used to instrument, measure, and monitor your
+machine learning models. Use cases for monitoring inference-related metrics from
+machine learning models include detecting model drift, data drift, model bias,
+etc.
 
-このインテグレーションにより、運用メトリクスのほか、ユーザー定義に
-よる推論関連のメトリクスを Algorithmia から Kafka へ、さらに Datadog の
-メトリクス API へストリーミングすることができます。
+This integration allows you to stream operational metrics as well as
+user-defined, inference-related metrics from Algorithmia to Kafka to the metrics
+API in Datadog.
 
-## 計画と使用
+## Setup
 
-1. Algorithmia インスタンスから、Algorithmia Insights を構成して
-   Kafka Broker (Algorithmia の外部) へ接続します。
+1. From your Algorithmia instance, configure Algorithmia Insights to connect to
+   a Kafka broker (external to Algorithmia).
 
-2. [Algorithmia インテグレーションリポジトリ][3]をご覧ください
-   して、このインテグレーションに使用される Datadog のメッセージ転送サービスをインストール、構成、起動してください。
-   Kafka トピックからのメトリクスが
-   Datadog のメトリクス API へ転送されます。
+2. See the [Algorithmia Integrations repository][3]
+   to install, configure, and start the Datadog message forwarding service used
+   in this integration, which forwards metrics from a Kafka topic to the
+   metrics API in Datadog.
 
 
-### 検証
+### Validation
 
-1. Algorithmia で、Insights が有効化されたアルゴリズムのクエリを実行します。
-2. Datadog インターフェイスで、**Metrics** サマリーページを開きます。
-3. 次でフィルタリングし、Insights からのメトリクスが Datadog に存在することを確認します。
-   `algorithmia`
+1. From Algorithmia, query an algorithm that has Insights enabled.
+2. In the Datadog interface, navigate to the **Metrics** summary page.
+3. Verify that the metrics from Insights are present in Datadog by filtering for
+   `algorithmia`.
 
-### メトリクスのストリーミング
+### Streaming metrics
 
-このインテグレーションでは、Insights が有効になっているモデルにクエリが
-実行されると、Algorithmia からメトリクスがストリーミングされます。
-各ログエントリには、運用メトリクスと推論関連メトリクスが含まれます。
+This integration streams metrics from Algorithmia when a model that has Insights
+enabled is queried. Each log entry includes operational metrics and
+inference-related metrics.
 
-`duration_milliseconds` メトリクスは、Algorithmia からのデフォルトのペイロードに
-含まれる運用メトリクスのひとつです。スムーズにご利用を開始いただけるよう、
-インテグレーションにはのデフォルトのメトリクス用ダッシュボードおよび
-モニターも含まれています。
+The `duration_milliseconds` metric is one of the operational metrics that is
+included in the default payload from Algorithmia. To help you get started, this
+integration also includes a dashboard and monitor for this default metric.
 
-その他のメトリクスには、アルゴリズム開発者による Algorithmia 特有の
-ユーザー定義の推論関連メトリクスもあります。ユーザー定義のメトリクスは、
-ご使用の機械学習フレームワークおよびユースケースによりますが、
-scikit-learn の回帰モデルからの予測可能性、TensorFlow の画像認識における
-信頼度スコア、または受信した API リクエストの入力データなどの値が
-含まれます。**注**: このインテグレーションで提供されるメッセージ転送
-スクリプトには、Datadog でユーザー定義のメトリクスに `algorithmia.` の
-プレフィックスが追加されます。
+Additional metrics can include any user-defined, inference-related metrics that
+are specified in Algorithmia by the algorithm developer. User-defined metrics
+depend on your specific machine learning framework and use case, but might
+include values such as prediction probabilities from a regression model in
+scikit-learn, confidence scores from an image classifier in TensorFlow, or input
+data from incoming API requests. **Note**: The message forwarding script
+provided in this integration prefixes user-defined metrics with
+`algorithmia.` in Datadog.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "algorithmia" >}}
 
 
-### ヘルプ
+### Service Checks
 
-Algorithmia チェックには、サービスのチェック機能は含まれません。
+The Algorithmia check does not include any service checks.
 
-### ヘルプ
+### Events
 
-Algorithmia チェックには、イベントは含まれません。
+The Algorithmia check does not include any events.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Algorithmia サポートチーム][5]までお問い合わせください。
+Need help? Contact [Algorithmia support][5].
 
 [1]: https://algorithmia.com/
 [2]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/algorithmia/images/algorithmia-insights-datadog.png
 [3]: https://github.com/algorithmiaio/integrations
 [4]: https://github.com/DataDog/integrations-extras/blob/master/algorithmia/metadata.csv
 [5]: https://algorithmia.com/contact
+

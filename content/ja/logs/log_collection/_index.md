@@ -1,304 +1,305 @@
 ---
+title: Log Collection and Integrations
+kind: Documentation
+description: "Configure your environment to gather logs from your host, containers, and services."
 aliases:
-- /ja/logs/faq/how-to-send-logs-to-datadog-via-external-log-shippers
-- /ja/logs/languages
-- /ja/integrations/windows_event_log/
-description: 環境を設定して、ホスト、コンテナ、およびサービスからログを収集します。
+  - /logs/faq/how-to-send-logs-to-datadog-via-external-log-shippers
+  - /logs/languages
+  - /integrations/windows_event_log/
 further_reading:
-- link: https://www.datadoghq.com/blog/log-file-control-with-logrotate/
-  tag: ブログ
-  text: Logrotate を使ったログファイルの管理方法
-- link: /agent/logs/advanced_log_collection
-  tag: Documentation
-  text: 高度なログ収集の構成
-- link: /logs/log_configuration/processors
-  tag: Documentation
-  text: ログの処理方法について
-- link: /logs/log_configuration/parsing
-  tag: Documentation
-  text: パースの詳細
-- link: /logs/live_tail/
-  tag: Documentation
-  text: Datadog Live Tail 機能
-- link: /logs/explorer/
-  tag: Documentation
-  text: ログの調査方法
-- link: /logs/logging_without_limits/
-  tag: Documentation
-  text: Logging Without Limits*
-title: ログの収集とインテグレーション
+- link: "https://www.datadoghq.com/blog/log-file-control-with-logrotate/"
+  tag: "Blog"
+  text: "How to manage log files using Logrotate"
+- link: "/agent/logs/advanced_log_collection"
+  tag: "Documentation"
+  text: "Advanced log collection configurations"
+- link: "/logs/log_configuration/processors"
+  tag: "Documentation"
+  text: "Discover how to process your logs"
+- link: "/logs/log_configuration/parsing"
+  tag: "Documentation"
+  text: "Learn more about parsing"
+- link: "/logs/live_tail/"
+  tag: "Documentation"
+  text: "Datadog live tail functionality"
+- link: "/logs/explorer/"
+  tag: "Documentation"
+  text: "See how to explore your logs"
+- link: "/logs/logging_without_limits/"
+  tag: "Documentation"
+  text: "Logging Without Limits*"
 ---
 
-## 概要
+## Overview
 
-以下のコンフィギュレーションオプションを選択して、ログの取り込みを開始します。すでに log-shipper デーモンを使用している場合は、[Rsyslog][1]、[Syslog-ng][2]、[NXlog][3]、[FluentD][4]、または [Logstash][5] の専用ドキュメントを参照してください。
+Choose a configuration option below to begin ingesting your logs. If you are already using a log-shipper daemon, refer to the dedicated documentation for [Rsyslog][1], [Syslog-ng][2], [NXlog][3], [FluentD][4], or [Logstash][5].
 
-ログを Datadog に直接送信する場合は、[使用可能な Datadog ログ収集エンドポイントのリスト](#logging-endpoints)を参照してください。
+Consult the [list of available Datadog log collection endpoints](#logging-endpoints) if you want to send your logs directly to Datadog.
 
-**注**: ログを JSON 形式で Datadog に送信する場合は、Datadog 内にある特定の予約属性を使用します。詳細については、[予約属性セクション](#attributes-and-tags)をご覧ください。
+**Note**: When sending logs in a JSON format to Datadog, there is a set of reserved attributes that have a specific meaning within Datadog. See the [Reserved Attributes section](#attributes-and-tags) to learn more.
 
-## セットアップ
+## Setup
 
 {{< tabs >}}
 {{% tab "Host" %}}
 
-1. [Datadog Agent][1] をインストールします。
-2. ログ収集を有効にするには、Agent のメインコンフィギュレーションファイル (`datadog.yaml`) で `logs_enabled: false` を `logs_enabled: true` に変更します。より詳細な情報と例については、[ホスト Agent ログ収集のドキュメント][5]を参照してください。
-3. Datadog Agent を有効にすると、[ログファイルの尾行または UDP/TCP 経由で送信されるログのリスニング][2]、[ログのフィルタリングまたは機密データのスクラビング][3]、[複数行ログの集約][4]を構成することができるようになります。
+1. Install the [Datadog Agent][1].
+2. To enable log collection, change `logs_enabled: false` to `logs_enabled: true` in your Agent's main configuration file (`datadog.yaml`). See the [Host Agent Log collection documentation][5] for more information and examples.
+3. Once enabled, the Datadog Agent can be configured to [tail log files or listen for logs sent over UDP/TCP][2], [filter out logs or scrub sensitive data][3], and [aggregate multi-line logs][4].
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest
-[2]: /ja/agent/logs/#custom-log-collection
-[3]: /ja/agent/logs/advanced_log_collection/#filter-logs
-[4]: /ja/agent/logs/advanced_log_collection/#multi-line-aggregation
-[5]: /ja/agent/logs/
-{{< /tabs >}}
+[2]: /agent/logs/#custom-log-collection
+[3]: /agent/logs/advanced_log_collection/#filter-logs
+[4]: /agent/logs/advanced_log_collection/#multi-line-aggregation
+[5]: /agent/logs/
+{{% /tab %}}
 
-{{% tab "アプリケーション" %}}
+{{% tab "Application" %}}
 
-1. [Datadog Agent][1] をインストールします。
-2. ログ収集を有効にするには、Agent のメインコンフィギュレーションファイル (`datadog.yaml`) で `logs_enabled: false` を `logs_enabled: true` に変更します。より詳細な情報と例については、[ホスト Agent ログ収集のドキュメント][2]を参照してください。
-3. アプリケーション言語のインストール手順に従い、ロガーを構成し、ログの生成を開始します。
+1. Install the [Datadog Agent][1].
+2. To enable log collection, change `logs_enabled: false` to `logs_enabled: true` in your Agent's main configuration file (`datadog.yaml`). See the [Host Agent Log collection documentation][2] for more information and examples.
+3. Follow your application language installation instructions to configure a logger and start generating logs:
 
 {{< partial name="logs/logs-languages.html" >}}
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest
-[2]: /ja/agent/logs/
-{{< /tabs >}}
+[2]: /agent/logs/
+{{% /tab %}}
 
-{{% tab "コンテナ" %}}
+{{% tab "Container" %}}
 
-コンテナまたはオーケストレーターのプロバイダーを選択し、そのプロバイダー専用のログ収集手順に従います。
+Choose a container or orchestrator provider and follow their dedicated log collection instructions:
 
 {{< partial name="logs/logs-containers.html" >}}
 
-**注**:
+**Notes**:
 
-- Datadog Agent では、ロギングドライバーを使用することなく、[コンテナの stdout/stderr からログを直接収集][1]できます。Agent の Docker チェックが有効にされていると、コンテナとオーケストレーターのメタデータがタグとしてログに自動的に追加されます。
+- The Datadog Agent can [collect logs directly from container stdout/stderr][1] without using a logging driver. When the Agent's Docker check is enabled, container and orchestrator metadata are automatically added as tags to your logs.
 
-- すべてのコンテナからログを収集することも、[コンテナイメージ、ラベル、または名前でフィルタリングされたサブセットのみ][2]を収集することも可能です。
+- It is possible to collect logs from all your containers or [only a subset filtered by container image, label, or name][2].
 
-- オートディスカバリーは、[コンテナラベルで直接ログ収集を構成する][3]ために使用することもできます。
+- Autodiscovery can also be used to [configure log collection directly in the container labels][3].
 
-- Kubernetes 環境では [daemonSet][4] も活用できます。
+- In Kubernetes environments, you can also leverage [the daemonset installation][4].
 
-[1]: /ja/agent/docker/log/
-[2]: /ja/agent/guide/autodiscovery-management/
-[3]: /ja/agent/kubernetes/integrations/
-[4]: /ja/agent/basic_agent_usage/kubernetes/#log-collection-setup
+[1]: /agent/docker/log/
+[2]: /agent/guide/autodiscovery-management/
+[3]: /agent/kubernetes/integrations/
+[4]: /agent/basic_agent_usage/kubernetes/#log-collection-setup
 {{% /tab %}}
 
-{{% tab "サーバーレス" %}}
+{{% tab "Serverless" %}}
 
-環境から Datadog にログを送信する AWS Lambda 関数である Datadog Forwarder を使用します。AWS サーバーレス環境でログ収集を有効にするには、[Datadog Forwarder のドキュメント][1]を参照してください。
+Use the Datadog Forwarder, an AWS Lambda function that ships logs from your environment to Datadog. To enable log collection in your AWS serverless environment, refer to the [Datadog Forwarder documentation][1].
 
-[1]: /ja/serverless/forwarder
-{{< /tabs >}}
+[1]: /serverless/forwarder
+{{% /tab %}}
 
-{{% tab "クラウド/インテグレーション" %}}
+{{% tab "Cloud/Integration" %}}
 
-以下からクラウドプロバイダーを選択すると、ログを自動的に収集して Datadog に転送する方法を確認できます。
+Select your Cloud provider below to see how to automatically collect your logs and forward them to Datadog:
 
 {{< partial name="logs/logs-cloud.html" >}}
 
-Datadog のインテグレーションとログ収集は連携しています。インテグレーションのデフォルト構成ファイルを使用すると、Datadog で専用の[プロセッサー][1]、[パース][2]、および[ファセット][3]を有効にできます。インテグレーションでログ収集を開始するには:
+Datadog integrations and log collection are tied together. You can use an integration's default configuration file to enable dedicated [processors][1], [parsing][2], and [facets][3] in Datadog. To begin log collection with an integration:
 
-1. [インテグレーションページ][6]からインテグレーションを選択し、セットアップの指示に従います。
-2. インテグレーションが提供するログ収集の手順に従ってください。このセクションでは、そのインテグレーションの `conf.yaml` ファイルにある logs セクションのコメントを解除し、環境に合わせて構成する方法について説明します。
+1. Select an integration from the [Integrations page][6] and follow the setup instructions.
+2. Follow the integration's log collection instructions. This section covers how to uncomment the logs section in that integration's `conf.yaml` file and configure it for your environment.
 
-[1]: /ja/logs/log_configuration/processors
-[2]: /ja/logs/log_configuration/parsing
-[3]: /ja/logs/explorer/facets/
-[4]: /ja/agent/kubernetes/log/#autodiscovery
-[5]: /ja/agent/docker/log/#log-integrations
-[6]: /ja/integrations/#cat-log-collection
+[1]: /logs/log_configuration/processors
+[2]: /logs/log_configuration/parsing
+[3]: /logs/explorer/facets/
+[4]: /agent/kubernetes/log/#autodiscovery
+[5]: /agent/docker/log/#log-integrations
+[6]: /integrations/#cat-log-collection
 {{% /tab %}}
 {{< /tabs >}}
 
-## 追加のコンフィギュレーションオプション
+## Additional configuration options
 
-### ログのエンドポイント
+### Logging endpoints
 
-Datadog では、SSL で暗号化された接続と暗号化されていない接続の両方にログのエンドポイントが提供されます。可能な場合は常に、暗号化されたエンドポイントを使用してください。Datadog Agent では、暗号化されたエンドポイントを使用して、ログが Datadog に送信されます。詳細は、[Datadog のセキュリティに関するドキュメント][6]で確認できます。
+Datadog provides logging endpoints for both SSL-encrypted connections and unencrypted connections. Use the encrypted endpoint when possible. The Datadog Agent uses the encrypted endpoint to send logs to Datadog. More information is available in the [Datadog security documentation][6].
 
-#### サポートされるエンドポイント
+#### Supported endpoints
 
-ページの右側にある[サイト][13]セレクターのドロップダウンを使用して、Datadog サイトごとにサポートされているエンドポイントを確認できます。
+Use the [site][13] selector dropdown on the right side of the page to see supported endpoints by Datadog site.
 
 {{< site-region region="us" >}}
 
-| サイト | タイプ        | エンドポイント                                                                  | ポート         | 説明                                                                                                                                                                 |
+| Site | Type        | Endpoint                                                                  | Port         | Description                                                                                                                                                                 |
 |------|-------------|---------------------------------------------------------------------------|--------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| US   | HTTPS       | `http-intake.logs.datadoghq.com`                                          | 443   | HTTPS 経由で JSON またはプレーンテキスト形式のログを送信するためにカスタムフォワーダーが使用。[Logs HTTP API のドキュメント][1]参照。                                                    |
-| US   | HTTPS       | `agent-http-intake-pci.logs.datadoghq.com`                                | 443   | Agent が PCI DSS コンプライアンスを有効にした組織へ HTTPS でログを送信するために使用します。詳しくは、[ログ管理のための PCI DSS コンプライアンス][3]を参照してください。                 |
-| US   | HTTPS       | `agent-http-intake.logs.datadoghq.com`                                    | 443   | HTTPS 経由で JSON 形式のログを送信するために Agent が使用。[ホスト Agent ログ収集のドキュメント][2]参照。                                                             |
-| US   | HTTPS       | `lambda-http-intake.logs.datadoghq.com`                                   | 443   | HTTPS 経由で未加工、Syslog、または JSON 形式のログを送信するために Lambda 関数が使用。                                                                                            |
-| US   | HTTPS       | `logs.`{{< region-param key="browser_sdk_endpoint_domain" code="true" >}} | 443   | Browser SDK が HTTPS で JSON 形式のログを送信するために使用します。                                                                                                             |
-| US   | TCP         | `agent-intake.logs.datadoghq.com`                                         | 10514 | Agent が TLS を使わずにログを送信するために使用します。
-| US   | TCP と TLS | `agent-intake.logs.datadoghq.com`                                         | 10516 | Agent が TLS を使ってログを送信するために使用します。
-| US   | TCP と TLS | `intake.logs.datadoghq.com`                                               | 443   | SSL で暗号化された TCP 接続を介してカスタムフォワーダーが生ログ、Syslog、または JSON 形式のログを送信する際に使用されます。                                                                 |
-| US   | TCP と TLS | `functions-intake.logs.datadoghq.com`                                     | 443   | SSL で暗号化された TCP 接続を介して Azure 関数が生ログ、Syslog、または JSON 形式のログを送信する際に使用されます。**注**: 他のクラウドプロバイダーもこのエンドポイントを使用できます。 |
-| US   | TCP と TLS | `lambda-intake.logs.datadoghq.com`                                        | 443   | SSL で暗号化された TCP 接続を介して Lambda 関数が生ログ、Syslog、または JSON 形式のログを送信する際に使用されます。                                                                  |
+| US   | HTTPS       | `http-intake.logs.datadoghq.com`                                          | 443   | Used by custom forwarder to send logs in JSON or plain text format over HTTPS. See the [Logs HTTP API documentation][1].                                                    |
+| US   | HTTPS       | `agent-http-intake-pci.logs.datadoghq.com`                                | 443   | Used by the Agent to send logs over HTTPS to an org with PCI DSS compliance enabled. See [PCI DSS compliance for Log Management][3] for more information.                 |
+| US   | HTTPS       | `agent-http-intake.logs.datadoghq.com`                                    | 443   | Used by the Agent to send logs in JSON format over HTTPS. See the [Host Agent Log collection documentation][2].                                                             |
+| US   | HTTPS       | `lambda-http-intake.logs.datadoghq.com`                                   | 443   | Used by Lambda functions to send logs in raw, Syslog, or JSON format over HTTPS.                                                                                            |
+| US   | HTTPS       | `logs.`{{< region-param key="browser_sdk_endpoint_domain" code="true" >}} | 443   | Used by the Browser SDK to send logs in JSON format over HTTPS.                                                                                                             |
+| US   | TCP         | `agent-intake.logs.datadoghq.com`                                         | 10514 | Used by the Agent to send logs without TLS.
+| US   | TCP and TLS | `agent-intake.logs.datadoghq.com`                                         | 10516 | Used by the Agent to send logs with TLS.
+| US   | TCP and TLS | `intake.logs.datadoghq.com`                                               | 443   | Used by custom forwarders to send logs in raw, Syslog, or JSON format over an SSL-encrypted TCP connection.                                                                 |
+| US   | TCP and TLS | `functions-intake.logs.datadoghq.com`                                     | 443   | Used by Azure functions to send logs in raw, Syslog, or JSON format over an SSL-encrypted TCP connection. **Note**: This endpoint may be useful with other cloud providers. |
+| US   | TCP and TLS | `lambda-intake.logs.datadoghq.com`                                        | 443   | Used by Lambda functions to send logs in raw, Syslog, or JSON format over an SSL-encrypted TCP connection.                                                                  |
 
-[1]: /ja/api/latest/logs/#send-logs
-[2]: /ja/agent/logs/#send-logs-over-https
-[3]: /ja/data_security/logs/#pci-dss-compliance-for-log-management
+[1]: /api/latest/logs/#send-logs
+[2]: /agent/logs/#send-logs-over-https
+[3]: /data_security/logs/#pci-dss-compliance-for-log-management
 {{< /site-region >}}
 
 {{< site-region region="eu" >}}
 
-| サイト | タイプ        | エンドポイント                                                                  | ポート | 説明                                                                                                                                                                 |
+| Site | Type        | Endpoint                                                                  | Port | Description                                                                                                                                                                 |
 |------|-------------|---------------------------------------------------------------------------|------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| EU   | HTTPS       | `http-intake.logs.datadoghq.eu`                                           | 443  | HTTPS 経由で JSON またはプレーンテキスト形式のログを送信するためにカスタムフォワーダーが使用。[Logs HTTP API のドキュメント][1]参照。                                                    |
-| EU   | HTTPS       | `agent-http-intake.logs.datadoghq.eu`                                     | 443  | HTTPS 経由で JSON 形式のログを送信するために Agent が使用。[ホスト Agent ログ収集のドキュメント][2]参照。                                                             |
-| EU   | HTTPS       | `lambda-http-intake.logs.datadoghq.eu`                                    | 443  | HTTPS 経由で未加工、Syslog、または JSON 形式のログを送信するために Lambda 関数が使用。                                                                                            |
-| EU   | HTTPS       | `logs.`{{< region-param key="browser_sdk_endpoint_domain" code="true" >}} | 443  | Browser SDK が HTTPS で JSON 形式のログを送信するために使用します。                                                                                                             |
-| EU   | TCP と TLS | `agent-intake.logs.datadoghq.eu`                                          | 443  | SSL で暗号化された TCP 接続を介して Agent が protobuf 形式のログを送信する際に使用されます。                                                                                     |
-| EU   | TCP と TLS | `functions-intake.logs.datadoghq.eu`                                      | 443  | SSL で暗号化された TCP 接続を介して Azure 関数が生ログ、Syslog、または JSON 形式のログを送信する際に使用されます。**注**: 他のクラウドプロバイダーもこのエンドポイントを使用できます。 |
-| EU   | TCP と TLS | `lambda-intake.logs.datadoghq.eu`                                         | 443  | SSL で暗号化された TCP 接続を介して Lambda 関数が生ログ、Syslog、または JSON 形式のログを送信する際に使用されます。                                                                  |
+| EU   | HTTPS       | `http-intake.logs.datadoghq.eu`                                           | 443  | Used by custom forwarder to send logs in JSON or plain text format over HTTPS. See the [Logs HTTP API documentation.][1]                                                    |
+| EU   | HTTPS       | `agent-http-intake.logs.datadoghq.eu`                                     | 443  | Used by the Agent to send logs in JSON format over HTTPS. See the [Host Agent Log collection documentation][2].                                                             |
+| EU   | HTTPS       | `lambda-http-intake.logs.datadoghq.eu`                                    | 443  | Used by Lambda functions to send logs in raw, Syslog, or JSON format over HTTPS.                                                                                            |
+| EU   | HTTPS       | `logs.`{{< region-param key="browser_sdk_endpoint_domain" code="true" >}} | 443  | Used by the Browser SDK to send logs in JSON format over HTTPS.                                                                                                             |
+| EU   | TCP and TLS | `agent-intake.logs.datadoghq.eu`                                          | 443  | Used by the Agent to send logs in protobuf format over an SSL-encrypted TCP connection.                                                                                     |
+| EU   | TCP and TLS | `functions-intake.logs.datadoghq.eu`                                      | 443  | Used by Azure functions to send logs in raw, Syslog, or JSON format over an SSL-encrypted TCP connection. **Note**: This endpoint may be useful with other cloud providers. |
+| EU   | TCP and TLS | `lambda-intake.logs.datadoghq.eu`                                         | 443  | Used by Lambda functions to send logs in raw, Syslog, or JSON format over an SSL-encrypted TCP connection.                                                                  |
 
-[1]: /ja/api/latest/logs/#send-logs
-[2]: /ja/agent/logs/#send-logs-over-https
+[1]: /api/latest/logs/#send-logs
+[2]: /agent/logs/#send-logs-over-https
 {{< /site-region >}}
 
 {{< site-region region="us3" >}}
 
-| サイト | タイプ  | エンドポイント                                                                  | ポート | 説明                                                                                                              |
+| Site | Type  | Endpoint                                                                  | Port | Description                                                                                                              |
 |------|-------|---------------------------------------------                              |------|--------------------------------------------------------------------------------------------------------------------------|
-| US3  | HTTPS | `http-intake.logs.us3.datadoghq.com`                                      | 443  | HTTPS 経由で JSON またはプレーンテキスト形式のログを送信するためにカスタムフォワーダーが使用。[Logs HTTP API のドキュメント][1]参照。 |
-| US3  | HTTPS | `lambda-http-intake.logs.us3.datadoghq.com`                               | 443  | HTTPS 経由で未加工、Syslog、または JSON 形式のログを送信するために Lambda 関数が使用。                                         |
-| US3  | HTTPS | `agent-http-intake.logs.us3.datadoghq.com`                                | 443  | HTTPS 経由で JSON 形式のログを送信するために Agent が使用。[ホスト Agent ログ収集のドキュメント][2]参照。          |
-| US3  | HTTPS | `logs.`{{< region-param key="browser_sdk_endpoint_domain" code="true" >}} | 443  | Browser SDK が HTTPS で JSON 形式のログを送信するために使用します。                                                          |
+| US3  | HTTPS | `http-intake.logs.us3.datadoghq.com`                                      | 443  | Used by custom forwarder to send logs in JSON or plain text format over HTTPS. See the [Logs HTTP API documentation][1]. |
+| US3  | HTTPS | `lambda-http-intake.logs.us3.datadoghq.com`                               | 443  | Used by Lambda functions to send logs in raw, Syslog, or JSON format over HTTPS.                                         |
+| US3  | HTTPS | `agent-http-intake.logs.us3.datadoghq.com`                                | 443  | Used by the Agent to send logs in JSON format over HTTPS. See the [Host Agent Log collection documentation][2].          |
+| US3  | HTTPS | `logs.`{{< region-param key="browser_sdk_endpoint_domain" code="true" >}} | 443  | Used by the Browser SDK to send logs in JSON format over HTTPS.                                                          |
 
-[1]: /ja/api/latest/logs/#send-logs
-[2]: /ja/agent/logs/#send-logs-over-https
+[1]: /api/latest/logs/#send-logs
+[2]: /agent/logs/#send-logs-over-https
 
 {{< /site-region >}}
 
 {{< site-region region="us5" >}}
 
-| サイト | タイプ  | エンドポイント                                                                  | ポート | 説明                                                                                                              |
+| Site | Type  | Endpoint                                                                  | Port | Description                                                                                                              |
 |------|-------|---------------------------------------------------------------------------|------|--------------------------------------------------------------------------------------------------------------------------|
-| US5  | HTTPS | `http-intake.logs.us5.datadoghq.com`                                      | 443  | HTTPS 経由で JSON またはプレーンテキスト形式のログを送信するためにカスタムフォワーダーが使用。[Logs HTTP API のドキュメント][1]参照。 |
-| US5  | HTTPS | `lambda-http-intake.logs.us5.datadoghq.com`                               | 443  | HTTPS 経由で未加工、Syslog、または JSON 形式のログを送信するために Lambda 関数が使用。                                         |
-| US5  | HTTPS | `agent-http-intake.logs.us5.datadoghq.com`                                | 443  | HTTPS 経由で JSON 形式のログを送信するために Agent が使用。[ホスト Agent ログ収集のドキュメント][2]参照。          |
-| US5  | HTTPS | `logs.`{{< region-param key="browser_sdk_endpoint_domain" code="true" >}} | 443  | Browser SDK が HTTPS で JSON 形式のログを送信するために使用します。                                                          |
+| US5  | HTTPS | `http-intake.logs.us5.datadoghq.com`                                      | 443  | Used by custom forwarder to send logs in JSON or plain text format over HTTPS. See the [Logs HTTP API documentation][1]. |
+| US5  | HTTPS | `lambda-http-intake.logs.us5.datadoghq.com`                               | 443  | Used by Lambda functions to send logs in raw, Syslog, or JSON format over HTTPS.                                         |
+| US5  | HTTPS | `agent-http-intake.logs.us5.datadoghq.com`                                | 443  | Used by the Agent to send logs in JSON format over HTTPS. See the [Host Agent Log collection documentation][2].          |
+| US5  | HTTPS | `logs.`{{< region-param key="browser_sdk_endpoint_domain" code="true" >}} | 443  | Used by the Browser SDK to send logs in JSON format over HTTPS.                                                          |
 
-[1]: /ja/api/latest/logs/#send-logs
-[2]: /ja/agent/logs/#send-logs-over-https
+[1]: /api/latest/logs/#send-logs
+[2]: /agent/logs/#send-logs-over-https
 
 {{< /site-region >}}
 
 {{< site-region region="ap1" >}}
 
-| サイト | タイプ  | エンドポイント                                                                  | ポート | 説明                                                                                                              |
+| Site | Type  | Endpoint                                                                  | Port | Description                                                                                                              |
 |------|-------|---------------------------------------------------------------------------|------|--------------------------------------------------------------------------------------------------------------------------|
-| AP1  | HTTPS | `http-intake.logs.ap1.datadoghq.com`                                      | 443  | HTTPS 経由で JSON またはプレーンテキスト形式のログを送信するためにカスタムフォワーダーが使用。[Logs HTTP API のドキュメント][1]参照。 |
-| AP1  | HTTPS | `lambda-http-intake.logs.ap1.datadoghq.com`                               | 443  | HTTPS 経由で未加工、Syslog、または JSON 形式のログを送信するために Lambda 関数が使用。                                         |
-| AP1  | HTTPS | `agent-http-intake.logs.ap1.datadoghq.com`                                | 443  | HTTPS 経由で JSON 形式のログを送信するために Agent が使用。[ホスト Agent ログ収集のドキュメント][2]参照。          |
-| AP1  | HTTPS | `logs.`{{< region-param key="browser_sdk_endpoint_domain" code="true" >}} | 443  | Browser SDK が HTTPS で JSON 形式のログを送信するために使用します。                                                          |
+| AP1  | HTTPS | `http-intake.logs.ap1.datadoghq.com`                                      | 443  | Used by custom forwarder to send logs in JSON or plain text format over HTTPS. See the [Logs HTTP API documentation][1]. |
+| AP1  | HTTPS | `lambda-http-intake.logs.ap1.datadoghq.com`                               | 443  | Used by Lambda functions to send logs in raw, Syslog, or JSON format over HTTPS.                                         |
+| AP1  | HTTPS | `agent-http-intake.logs.ap1.datadoghq.com`                                | 443  | Used by the Agent to send logs in JSON format over HTTPS. See the [Host Agent Log collection documentation][2].          |
+| AP1  | HTTPS | `logs.`{{< region-param key="browser_sdk_endpoint_domain" code="true" >}} | 443  | Used by the Browser SDK to send logs in JSON format over HTTPS.                                                          |
 
-[1]: /ja/api/latest/logs/#send-logs
-[2]: /ja/agent/logs/#send-logs-over-https
+[1]: /api/latest/logs/#send-logs
+[2]: /agent/logs/#send-logs-over-https
 
 {{< /site-region >}}
 
 {{< site-region region="gov" >}}
 
-| サイト    | タイプ  | エンドポイント                                                                  | ポート | 説明                                                                                                              |
+| Site    | Type  | Endpoint                                                                  | Port | Description                                                                                                              |
 |---------|-------|---------------------------------------------------------------------------|------|--------------------------------------------------------------------------------------------------------------------------|
-| US1-FED | HTTPS | `http-intake.logs.ddog-gov.com`                                          | 443  | HTTPS 経由で JSON またはプレーンテキスト形式のログを送信するためにカスタムフォワーダーが使用。[Logs HTTP API のドキュメント][1]参照。 |
-| US1-FED | HTTPS | `lambda-http-intake.logs.ddog-gov.datadoghq.com`                          | 443  | HTTPS 経由で未加工、Syslog、または JSON 形式のログを送信するために Lambda 関数が使用。                                         |
-| US1-FED | HTTPS | `agent-http-intake.logs.ddog-gov.datadoghq.com`                           | 443  | HTTPS 経由で JSON 形式のログを送信するために Agent が使用。[ホスト Agent ログ収集のドキュメント][2]参照。          |
-| US1-FED | HTTPS | `logs.`{{< region-param key="browser_sdk_endpoint_domain" code="true" >}} | 443  | Browser SDK が HTTPS で JSON 形式のログを送信するために使用します。                                                          |
+| US1-FED | HTTPS | `http-intake.logs.ddog-gov.com`                                          | 443  | Used by custom forwarder to send logs in JSON or plain text format over HTTPS. See the [Logs HTTP API documentation][1]. |
+| US1-FED | HTTPS | `lambda-http-intake.logs.ddog-gov.datadoghq.com`                          | 443  | Used by Lambda functions to send logs in raw, Syslog, or JSON format over HTTPS.                                         |
+| US1-FED | HTTPS | `agent-http-intake.logs.ddog-gov.datadoghq.com`                           | 443  | Used by the Agent to send logs in JSON format over HTTPS. See the [Host Agent Log collection documentation][2].          |
+| US1-FED | HTTPS | `logs.`{{< region-param key="browser_sdk_endpoint_domain" code="true" >}} | 443  | Used by the Browser SDK to send logs in JSON format over HTTPS.                                                          |
 
-[1]: /ja/api/latest/logs/#send-logs
-[2]: /ja/agent/logs/#send-logs-over-https
+[1]: /api/latest/logs/#send-logs
+[2]: /agent/logs/#send-logs-over-https
 
 {{< /site-region >}}
 
-### カスタムログ転送
+### Custom log forwarding
 
-**TCP** または **HTTP** 経由でログを転送できるカスタムプロセスまたはロギングライブラリを、Datadog ログと共に使用​​できます。
+Any custom process or logging library able to forward logs through **TCP** or **HTTP** can be used in conjunction with Datadog Logs.
 
 {{< tabs >}}
 {{% tab "HTTP" %}}
 
-HTTP 経由で Datadog プラットフォームにログを送信できます。開始するには、[Datadog ログ HTTP API ドキュメント][1]を参照してください。
+You can send logs to Datadog platform over HTTP. Refer to the [Datadog Log HTTP API documentation][1] to get started.
 
-[1]: /ja/api/latest/logs/#send-logs
+[1]: /api/latest/logs/#send-logs
 {{% /tab %}}
 {{% tab "TCP" %}}
 
 {{< site-region region="us" >}}
 
-OpenSSL、GnuTLS、または他の SSL/TLS クライアントを使用して、接続を手動でテストすることができます。GnuTLS の場合は、以下のコマンドを実行します。
+You can manually test your connection using OpenSSL, GnuTLS, or another SSL/TLS client. For GnuTLS, run the following command:
 
 ```shell
 gnutls-cli intake.logs.datadoghq.com:10516
 ```
 
-OpenSSL の場合、以下のコマンドを実行します。
+For OpenSSL, run the following command:
 
 ```shell
 openssl s_client -connect intake.logs.datadoghq.com:10516
 ```
 
-ログエントリの前に必ず [Datadog API キー][1]を付けて、ペイロードを追加する必要があります。
+You must prefix the log entry with your [Datadog API Key][1] and add a payload.
 
 ```
 <DATADOG_API_KEY> Log sent directly using TLS
 ```
 
-ペイロード、または例で書かれている `Log sent directly using TLS` (TCP 経由で直接送信されたログ) は、raw、Syslog、または JSON 形式にすることができます。ペイロードが JSON 形式の場合、Datadog は自動的にその属性をパースします。
+Your payload, or `Log sent directly using TLS` as written in the example, can be in raw, Syslog, or JSON format. If your payload is in JSON format, Datadog automatically parses its attributes.
 
 ```text
 <DATADOG_API_KEY> {"message":"json formatted log", "ddtags":"env:my-env,user:my-user", "ddsource":"my-integration", "hostname":"my-hostname", "service":"my-service"}
 
-[1]: /ja/account_management/api-app-keys/#api-keys
+[1]: /account_management/api-app-keys/#api-keys
 
 {{< /site-region >}}
 
 {{< site-region region="eu" >}}
 
-OpenSSL、GnuTLS、または他の SSL/TLS クライアントを使用して、手動で接続をテストすることができます。GnuTLS の場合は、以下のコマンドを実行します。
+You can manually test your connection using OpenSSL, GnuTLS, or another SSL/TLS client. For GnuTLS, run the following command:
 
 ```shell
 gnutls-cli tcp-intake.logs.datadoghq.eu:443
 ```
 
-OpenSSL の場合、以下のコマンドを実行します。
+For OpenSSL, run the following command:
 
 ```shell
 openssl s_client -connect tcp-intake.logs.datadoghq.eu:443
 ```
 
-ログエントリの前に必ず [Datadog API キー][1]を付けて、ペイロードを追加する必要があります。
+You must prefix the log entry with your [Datadog API Key][1] and add a payload.
 
 ```
 <DATADOG_API_KEY> Log sent directly using TLS
 ```
 
-ペイロード、または例で書かれている `Log sent directly using TLS` (TCP 経由で直接送信されたログ) は、raw、Syslog、または JSON 形式にすることができます。ペイロードが JSON 形式の場合、Datadog は自動的にその属性をパースします。
+Your payload, or `Log sent directly using TLS` as written in the example, can be in raw, Syslog, or JSON format. If your payload is in JSON format, Datadog automatically parses its attributes.
 
 ```text
 <DATADOG_API_KEY> {"message":"json formatted log", "ddtags":"env:my-env,user:my-user", "ddsource":"my-integration", "hostname":"my-hostname", "service":"my-service"}
 ```
 
-[1]: /ja/account_management/api-app-keys/#api-keys
+[1]: /account_management/api-app-keys/#api-keys
 
 {{< /site-region >}}
 
 {{< site-region region="us3" >}}
-TCP エンドポイントは、このサイトでは推奨していません。詳しくは[サポート][1]にお問い合わせください。
+The TCP endpoint is not recommended for this site. Contact [support][1] for more information.
 
-[1]: /ja/help
+[1]: /help
 {{< /site-region >}}
 
 {{< site-region region="gov,us5,ap1" >}}
 
-このサイトでは、TCP エンドポイントはサポートされていません。
+The TCP endpoint is not supported for this site.
 
-[1]: /ja/help
+[1]: /help
 {{< /site-region >}}
 
 
@@ -307,62 +308,62 @@ TCP エンドポイントは、このサイトでは推奨していません。�
 {{% /tab %}}
 {{< /tabs >}}
 
-**注**:
+**Notes**:
 
-* HTTPS API は、最大で 1MB のサイズのログをサポートします。ただし、最適なパフォーマンスには各ログが 25K バイトを超えないことをおすすめします。ログ作成に Datadog Agent を使用する場合、ログは 256kB (256000 バイト) に分割されるよう構成されています。
-* 1 つのログイベントが持つことができるタグは 100 個以下です。1 日あたり最大 1,000 万個の一意のタグに対して、各タグは 256 文字を超えてはなりません。
-* JSON 形式に変換されたログイベントが保持できる属性は 256 未満です。これらの各属性のキーは 50 文字未満、連続するネストのレベルは 10 未満、 それぞれの値は (ファセットに昇格した場合) 1024 文字未満となります。
-* ログイベントは、過去 18 時間までの[タイムスタンプ][14]で送信可能です。
+* The HTTPS API supports logs of sizes up to 1MB. However, for optimal performance, it is recommended that an individual log be no greater than 25K bytes. If you use the Datadog Agent for logging, it is configured to split a log at 256kB (256000 bytes).
+* A log event should not have more than 100 tags, and each tag should not exceed 256 characters for a maximum of 10 million unique tags per day.
+* A log event converted to JSON format should contain less than 256 attributes. Each of those attribute's keys should be less than 50 characters, nested in less than 10 successive levels, and their respective value should be less than 1024 characters if promoted as a facet.
+* Log events can be submitted with a [timestamp][14] that is up to 18h in the past.
 
-上の制限に準拠しないログイベントは、システムによって変換されるか、切り詰められます。または、所定のタイムレンジ外の場合はインデックス化されません。ただし、Datadog はユーザーデータを可能な限り維持するよう全力を尽くします。
+Log events that do not comply with these limits might be transformed or truncated by the system or not indexed if outside the provided time range. However, Datadog tries to preserve as much user data as possible.
 
-### 属性とタグ
+### Attributes and tags
 
-属性は、ログエクスプローラーでのフィルタリングと検索に使用される[ログファセット][9]を規定します。予約済み属性および標準属性のリストと、ログ属性とエイリアス設定を使用した命名規則のサポート方法については、専用の[属性とエイリアス設定][10]ドキュメントをご参照ください。
+Attributes prescribe [logs facets][9], which are used for filtering and searching in Log Explorer. See the dedicated [attributes and aliasing][10] documentation for a list of reserved and standard attributes and to learn how to support a naming convention with logs attributes and aliasing.
 
-#### スタックトレースの属性
+#### Attributes for stack traces
 
-スタックトレースをログに記録するに当たっては、Datadog アプリケーション内に専用の UI 表示を持つ特別な属性があります。ロガー名、現在のスレッド、エラーの種類、スタックトレース自体などです。
+When logging stack traces, there are specific attributes that have a dedicated UI display within your Datadog application such as the logger name, the current thread, the error type, and the stack trace itself.
 
-{{< img src="logs/log_collection/stack_trace.png" style="width:80%;" alt="パースされたスタックトレースの属性" >}}
+{{< img src="logs/log_collection/stack_trace.png" style="width:80%;" alt="Attributes for a parsed stack trace" >}}
 
-この機能を使用するには、以下の属性名を使用します。
+To enable these functionalities use the following attribute names:
 
-| 属性            | 説明                                                             |
+| Attribute            | Description                                                             |
 |----------------------|-------------------------------------------------------------------------|
-| `logger.name`        | ロガーの名前                                                      |
-| `logger.thread_name` | 現在のスレッドの名前                                              |
-| `error.stack`        | 実際のスタックトレース                                                      |
-| `error.message`      | スタックトレースに含まれるエラーメッセージ                              |
-| `error.kind`         | エラーのタイプまたは「種類」("Exception" や "OSError" など) |
+| `logger.name`        | Name of the logger                                                      |
+| `logger.thread_name` | Name of the current thread                                              |
+| `error.stack`        | Actual stack trace                                                      |
+| `error.message`      | Error message contained in the stack trace                              |
+| `error.kind`         | The type or "kind" of an error (for example, "Exception", or "OSError") |
 
-**注**: インテグレーションパイプラインは、デフォルトのログライブラリパラメーターをこれらの属性に再マップし、スタックトレースをパースまたはトレースバックして、自動的に `error.message` と `error.kind` を抽出しようとします。
+**Note**: By default, integration Pipelines attempt to remap default logging library parameters to those specific attributes and parse stack traces or traceback to automatically extract the `error.message` and `error.kind`.
 
-詳しくは、[ソースコードと属性ドキュメント][11]をご覧ください。
+For more information, see the complete [source code attributes documentation][11].
 
-## 次のステップ
+## Next steps
 
-ログが収集されて取り込まれると、**ログエクスプローラー**で利用できるようになります。ログエクスプローラーでは、ログのアラートを検索、強化、表示できます。[ログエクスプローラー][12]のドキュメントを参照してログデータの分析を開始するか、以下の追加のログ管理ドキュメントを参照してください。
+Once logs are collected and ingested, they are available in **Log Explorer**. Log Explorer is where you can search, enrich, and view alerts on your logs. See the [Log Explorer][12] documentation to begin analyzing your log data, or see the additional log management documentation below.
 
-{{< img src="logs/explore.png" alt="ログエクスプローラーに表示されるログ" style="width:100%" >}}
+{{< img src="logs/explore.png" alt="Logs appearing in the Log Explorer" style="width:100%" >}}
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 <br>
-\*Logging without Limits は Datadog, Inc. の商標です。
+\*Logging without Limits is a trademark of Datadog, Inc.
 
-[1]: /ja/integrations/rsyslog/
-[2]: /ja/integrations/syslog_ng/
-[3]: /ja/integrations/nxlog/
-[4]: /ja/integrations/fluentd/#log-collection
-[5]: /ja/integrations/logstash/#log-collection
-[6]: /ja/data_security/logs/#information-security
-[7]: /ja/agent/logs/#send-logs-over-https
-[8]: /ja/api/v1/logs/#send-logs
-[9]: /ja/logs/explorer/facets/
-[10]: /ja/logs/log_configuration/attributes_naming_convention
-[11]: /ja/logs/log_configuration/attributes_naming_convention/#source-code
-[12]: /ja/logs/explore/
-[13]: /ja/getting_started/site/
-[14]: /ja/logs/log_configuration/pipelines/?tab=date#date-attribute
+[1]: /integrations/rsyslog/
+[2]: /integrations/syslog_ng/
+[3]: /integrations/nxlog/
+[4]: /integrations/fluentd/#log-collection
+[5]: /integrations/logstash/#log-collection
+[6]: /data_security/logs/#information-security
+[7]: /agent/logs/#send-logs-over-https
+[8]: /api/v1/logs/#send-logs
+[9]: /logs/explorer/facets/
+[10]: /logs/log_configuration/attributes_naming_convention
+[11]: /logs/log_configuration/attributes_naming_convention/#source-code
+[12]: /logs/explore/
+[13]: /getting_started/site/
+[14]: /logs/log_configuration/pipelines/?tab=date#date-attribute

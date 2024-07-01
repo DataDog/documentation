@@ -1,66 +1,66 @@
 ---
-description: RUM サンプリングのためのガイドです。
+title: Best Practices for RUM Sampling
+kind: guide
+description: Guide for RUM sampling.
 further_reading:
 - link: /monitors/create/types/real_user_monitoring/
-  tag: ドキュメント
-  text: RUM モニターについて
-kind: ガイド
-title: RUM サンプリングのベストプラクティス
+  tag: Documentation
+  text: Learn about RUM Monitors
 ---
 
-## 概要
+## Overview
 
-Datadog のリアルユーザーモニタリング製品のサンプリングでは、ユーザートラフィックの一定割合からデータを収集することができます。
+Sampling in Datadog's Real User Monitoring product enables you to collect data from a certain percentage of user traffic.
 
-このガイドでは、RUM サンプリングのベストプラクティスを説明し、モニタリングのニーズに基づいてセッションをキャプチャし、データを収集できるようにします。RUM の[セッションの定義][9]方法についてはこちらをご覧ください。
+This guide walks you through best practices for RUM sampling so you can capture sessions and collect data based on your monitoring needs. Learn more about how [sessions are defined][9] in RUM.
 
-## サンプリング構成
+## Sampling configuration
 
-### SDK バージョンに対応する変数名の構成
+### Configure the variable names that correspond with the SDK version
 
-セッションは、[SDK 構成][1]に記載されているパーセンテージに基づいてランダムにサンプリングされます。そのため、使用する SDK のバージョンに適した構成変数名を使用してください。
+Sessions are randomly sampled based on the percentage listed in the [SDK configuration][1]. To that end, make sure to use the correct configuration variable names for the SDK version being used.
 
-### サンプリングレートの構成
-各新規ユーザーセッションの前に、SDK は 0 と 1 の間のランダムな浮動小数点数を描画し、これが SDK 構成で設定された値と比較されます。この乱数が SDK 構成で設定された値より小さい場合、セッションは保持され、イベントの収集が開始されます。乱数の方が大きい場合、セッションは保持されず、セッションが終了するまでイベントは収集されません。
+### Configure the sampling rate
+Before each new user session, the SDK draws a random floating-point number between 0 and 1, which is then compared to the value set in the SDK configuration. If the random number is lower than the value set in the SDK configuration, the session is kept and events start being collected. If the value is higher, the session is not kept and events are not collected until the end of the session.
 
-SDK ([Browser][2]、[Android][3]、[iOS][4]、[React Native][5]、[Flutter][6]、[Roku][7]) でサンプリングレートを設定し、アプリケーションコードにデプロイすることができます。
+You can set the sampling rate with the SDK ([Browser][2], [Android][3], [iOS][4], [React Native][5], [Flutter][6], [Roku][7]), then deploy it in the application code.
 
-RUM で利用できるのは、サンプリングされたセッションのみです。例えば、サンプリングレートが 60% に設定されている場合、すべてのセッションとメトリクス (コアウェブバイタルや使用数など) の 60% が RUM で表示されます。
+Only sessions that are sampled are available in RUM. For example, if the sampling rate is set to 60%, then 60% of all sessions and metrics (such as Core Web Vitals and usage numbers) are visible in RUM.
 
-ランダムサンプリングはユーザーごとではなく、セッションごとに行われます。
+The random sampling is by session, not by user.
 
-### RUM で利用可能なデータとメトリクスに対するサンプリングの効果
-RUM メトリクス (コアウェブバイタルや使用数など) は、サンプリングされたセッションに基づいて計算されます。例えば、サンプリングレートがセッションの 60% をキャプチャするように設定されている場合、コアウェブバイタルと総セッション数はこれらのセッションの 60% に基づいて計算されます。
+### The effect of sampling on data and metrics that are available in RUM
+RUM metrics (such as Core Web Vitals and usage numbers) are calculated based on sessions that are sampled. For example, if the sampling rate is set to capture 60% of sessions, then the Core Web Vitals and total number of sessions are calculated based on 60% of those sessions. 
 
-### 推奨サンプリングレート
-理想的なサンプリングレートの設定に関しては、トラフィック量と求めるデータによって異なります。Datadog では、予算と推定トラフィックに基づいて納得のいくサンプリングレートから始め、必要なデータに基づいて調整することを推奨しています。
+### Recommended sampling rate
+In terms of setting an ideal sampling rate, it depends on the amount of traffic you see and the data you are looking for. Datadog recommends starting with a sampling rate you are comfortable with based on your budget and estimated traffic, then tweaking it based on the data you need. 
 
-### 特定の属性に基づくサンプリング
-エラーのあるセッションを 100% サンプリングし、それ以外は 5% サンプリングする、またはチェックアウトフローを通過したセッションのみをサンプリングするなど、特定の属性に基づいてサンプリングを構成することはサポートされていません。この機能がビジネスニーズに欠かせない場合は、[Datadog サポート][8]でチケットを作成してください。
+### Sampling based on specific attributes
+Configuring sampling based on specific attributes, such as sampling 100% of sessions with errors and 5% otherwise, or only sampling sessions that go through the checkout flow, is not supported. If this feature is critical for your business needs, create a ticket with [Datadog Support][8].
 
-### Datadog RUM UI でのサンプリングレートの変更
-Datadog RUM UI でサンプリングレートを変更することはサポートされていません。この機能がビジネスニーズに欠かせない場合は、[Datadogサポート][8]でチケットを作成してください。
+### Changing the sampling rate in the Datadog RUM UI
+Changing the sampling rate in the Datadog RUM UI is not supported. If this feature is critical for your business needs, create a ticket with [Datadog Support][8].
 
-### ライブ障害時のサンプリングの調整
+### Adjusting sampling during live outages
 
-バグやインシデントが発生した場合、サンプリングを増やしてブラウザユーザーのトラフィックを 100% 収集し、セッションの見逃しがないようにすることができます。このためには、コード変更をデプロイする必要があります。
+If a bug or incident occurs, you can increase sampling to collect 100% of your browser user traffic to ensure no session is missed. You need to deploy a code change to achieve this.
 
-**注**: この機能は、リリースサイクルが長いため、モバイルおよび Roku アプリケーションには適用されません。
+**Note**: This capability does not apply to mobile or Roku applications due to the long release cycle.
 
-### モバイルデバイスがオフラインまたはクラッシュしたときの対応
+### Accounting for mobile devices that go offline or crash
 
-RUM では、ユーザーのデバイスがオフラインのときのデータも確実に利用できます。ネットワークの状態が悪いエリアにいる場合やデバイスのバッテリーが非常に少ないなどの場合でも、すべての RUM イベントは最初にローカルデバイスにバッチで格納されます。ネットワークが利用可能になると、RUM SDK がエンドユーザーのエクスペリエンスに影響を与えない程度にバッテリーの残量が十分にあれば、バッチはすぐに送信されます。アプリケーションがフォアグラウンドにあるときにネットワークが利用できない場合、またはデータのアップロードが失敗した場合、バッチは正常に送信されるまで保持されます。
+RUM ensures availability of data when user devices are offline. In low-network areas, or when the device battery is too low, all RUM events are first stored on the local device in batches. They are sent as soon as the network becomes available, and the battery is high enough to ensure the RUM SDK does not impact the end user's experience. If the network is not available while your application is in the foreground, or if an upload of data fails, the batch is kept until it can be sent successfully.
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/real_user_monitoring/guide/sampling-browser-plans/#overview
-[2]: /ja/real_user_monitoring/guide/sampling-browser-plans/#overview
-[3]: /ja/real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/?tab=kotlin#initialization-parameters
-[4]: /ja/real_user_monitoring/ios/advanced_configuration/?tab=swift#sample-rum-sessions
-[5]: /ja/real_user_monitoring/reactnative/#initialize-the-library-with-application-context
-[6]: /ja/real_user_monitoring/mobile_and_tv_monitoring/setup/flutter/advanced_configuration/#sample-rum-sessions
-[7]: /ja/real_user_monitoring/mobile_and_tv_monitoring/setup/roku/#initialize-the-library
-[8]: /ja/help
-[9]: /ja/real_user_monitoring/guide/understanding-the-rum-event-hierarchy/#sessions
+[1]: /real_user_monitoring/guide/sampling-browser-plans/#overview
+[2]: /real_user_monitoring/guide/sampling-browser-plans/#overview
+[3]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/?tab=kotlin#initialization-parameters
+[4]: /real_user_monitoring/ios/advanced_configuration/?tab=swift#sample-rum-sessions
+[5]: /real_user_monitoring/reactnative/#initialize-the-library-with-application-context
+[6]: /real_user_monitoring/mobile_and_tv_monitoring/setup/flutter/advanced_configuration/#sample-rum-sessions
+[7]: /real_user_monitoring/mobile_and_tv_monitoring/setup/roku/#initialize-the-library
+[8]: /help
+[9]: /real_user_monitoring/guide/understanding-the-rum-event-hierarchy/#sessions

@@ -1,79 +1,80 @@
 ---
-categories:
-- languages
-- network
-- oracle
-- tracing
-dependencies: []
-description: Yammer メトリクスライブラリを使用して、アプリケーションからカスタムメトリクスを収集。
-doc_link: https://docs.datadoghq.com/integrations/java/
-draft: false
-further_reading:
-- link: https://docs.datadoghq.com/integrations/faq/i-have-a-matching-bean-for-my-jmx-integration-but-nothing-on-collect
-  tag: よくあるご質問
-  text: JMX インテグレーションに一致する Bean がありますが、データが収集できません。
-- link: https://docs.datadoghq.com/integrations/faq/view-jmx-data-in-jconsole-and-set-up-your-jmx-yaml-to-collect-them/
-  tag: よくあるご質問
-  text: jConsole で JMX データを表示し、jmx.yaml でデータの収集をセットアップする
-- link: https://docs.datadoghq.com/integrations/faq/jmx-yaml-error-include-section/
-  tag: よくあるご質問
-  text: 'jmx.yaml error: Include Section'
-- link: https://docs.datadoghq.com/integrations/faq/collecting-composite-type-jmx-attributes/
-  tag: よくあるご質問
-  text: 複合型の JMX 属性を収集する
-- link: https://docs.datadoghq.com/integrations/guide/running-jmx-commands-in-windows/
-  tag: ガイド
-  text: Windows で JMX コマンドを実行する
-- link: https://docs.datadoghq.com/integrations/guide/use-bean-regexes-to-filter-your-jmx-metrics-and-supply-additional-tags/
-  tag: ガイド
-  text: Bean 正規表現を使用して JMX メトリクスをフィルタリングし、追加のタグを提供する
-git_integration_title: java
-has_logo: true
-integration_id: java
-integration_title: JMX
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: '1.0'
-name: java
-public_title: Datadog-JMX インテグレーション
-short_description: Yammer メトリクスライブラリを使用して、アプリケーションからカスタムメトリクスを収集。
-version: '1.0'
+"categories":
+- "languages"
+- "network"
+- "oracle"
+- "tracing"
+"custom_kind": "integration"
+"dependencies": []
+"description": "Collect custom metrics from your applications using the Yammer Metrics library."
+"doc_link": "https://docs.datadoghq.com/integrations/java/"
+"draft": false
+"further_reading":
+- "link": "https://docs.datadoghq.com/integrations/faq/i-have-a-matching-bean-for-my-jmx-integration-but-nothing-on-collect"
+  "tag": "FAQ"
+  "text": "I Have a Matching Bean for my JMX integration but nothing on Collect!"
+- "link": "https://docs.datadoghq.com/integrations/faq/view-jmx-data-in-jconsole-and-set-up-your-jmx-yaml-to-collect-them/"
+  "tag": "FAQ"
+  "text": "View JMX data in jConsole and set up your jmx.yaml to collect them"
+- "link": "https://docs.datadoghq.com/integrations/faq/jmx-yaml-error-include-section/"
+  "tag": "FAQ"
+  "text": "jmx.yaml error: Include Section"
+- "link": "https://docs.datadoghq.com/integrations/faq/collecting-composite-type-jmx-attributes/"
+  "tag": "FAQ"
+  "text": "Collecting Composite type JMX attributes"
+- "link": "https://docs.datadoghq.com/integrations/guide/running-jmx-commands-in-windows/"
+  "tag": "Guide"
+  "text": "Running JMX commands in Windows"
+- "link": "https://docs.datadoghq.com/integrations/guide/use-bean-regexes-to-filter-your-jmx-metrics-and-supply-additional-tags/"
+  "tag": "Guide"
+  "text": "Use Bean regexes to filter your JMX metrics and supply additional tags"
+"git_integration_title": "java"
+"has_logo": true
+"integration_id": "java"
+"integration_title": "JMX"
+"integration_version": ""
+"is_public": true
+"manifest_version": "1.0"
+"name": "java"
+"public_title": "Datadog-JMX Integration"
+"short_description": "Collect custom metrics from your applications using the Yammer Metrics library."
+"version": "1.0"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-## 概要
+## Overview
 
-Java インテグレーションを利用して、Java アプリケーションからメトリクス、トレース、ログを収集できます。
+The Java integration allows you to collect metrics, traces, and logs from your Java application.
 
-## 計画と使用
+## Setup
 
-### メトリクスの収集
+### Metric collection
 <div class="alert alert-warning">
-JMX チェックには、インスタンスあたり 350 メトリクスの制限が設けられています。<a href="/integrations/java/?tab=host#configuration-options">構成オプション</a>を参照してください。メトリクスの追加が必要な場合は、<a href="https://docs.datadoghq.com/help/">Datadog のサポートチーム</a>にお問い合わせください。</div>
+JMX checks have a limit of 350 metrics per instance. See <a href="/integrations/java/?tab=host#configuration-options">configuration options</a>. If you require additional metrics, contact <a href="https://docs.datadoghq.com/help/">Datadog support.</a>
+</div>
 
-アプリケーションで [JMX][1] メトリクスが公開されている場合、Datadog Agent から軽量の Java プラグインである JMXFetch (Java 1.7 以上とのみ互換) が呼び出され、MBean サーバーに接続してアプリケーションのメトリクスを収集します。また、監視対象のインスタンスのステータスを報告するサービスチェックを送信することも可能です。このプラグインは、Agent 内で稼働する [DogStatsD][2] サーバーを使用して Datadog Agent にメトリクスを送信します。このインテグレーションでは以下の JMX メトリクスも同様に使用されます。
+If your application exposes [JMX][1] metrics, a lightweight Java plugin named JMXFetch (only compatible with Java >= 1.7.) is called by the Datadog Agent to connect to the MBean Server and collect your application metrics. It also sends service checks that report on the status of your monitored instances. This plugin sends metrics to the Datadog Agent using the [DogStatsD][2] server running within the Agent. These integrations also use the JMX metrics:
 
-- ActiveMQ 
+- ActiveMQ
 - Cassandra
 - Solr
 - Tomcat
 - Kafka
 
-**注**: DogStatsD を介して RATE メトリクスタイプを送信する場合、メトリクスは異なる Agent 間で適切な比較ができるようにアプリ内に GAUGE として表示されます。詳しくは[メトリクスの送信: DogStatsD のドキュメント][3]を参照してください。
+**Note**: When submitting a RATE metric type through DogStatsD, the metric appears as a GAUGE in-app to ensure relevant comparison across different Agents. For more information, see the [Metric Submission: DogStatsD documentation][3].
 
-#### インフラストラクチャーリスト
+#### Installation
 
-[JMX リモート接続を開く][4]ことができるかをご確認ください。Datadog Agent が JVM に接続するためには、両者が同じホスト上にある場合でもリモート接続が必要です。セキュリティ上の理由から、リスニングアドレスには `0.0.0.0` を使用しないことをお勧めします。同じ場所に配置された JVM と Agent には `com.sun.management.jmxremote.host=127.0.0.1` を使用することをお勧めします。
+Make sure [you can open a JMX remote connection][4]. A remote connection is required for the Datadog Agent to connect to the JVM, even when the two are on the same host. For security reasons, it is recommended not to use `0.0.0.0` for the listening address, and using `com.sun.management.jmxremote.host=127.0.0.1` for a colocated JVM and Agent is recommended.
 
-#### ブラウザトラブルシューティング
+#### Configuration
 
-Agent をホスト上のバイナリとして実行している場合は、[他の Agent インテグレーション][5]同様に JMX チェックを構成します。Agent を Kubernetes の DaemonSet として実行している場合は、[オートディスカバリー][6]を使用して JMX チェックを構成します。
+If running the Agent as a binary on a host, configure your JMX check as any [other Agent integrations][5]. If running the Agent as a DaemonSet in Kubernetes, configure your JMX check using [auto-discovery][6].
 
 {{< tabs >}}
-{{% tab "ホスト" %}}
+{{% tab "Host" %}}
 
-- JMX に接続するように Agent を構成します。[Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `jmx.d/conf.yaml` を編集します。使用可能なすべてのコンフィギュレーションオプションについては、以下の[コンフィギュレーションオプション](#configuration-options) または [init_config][2] と [instance][3] テンプレートを参照してください。
+- Configure the Agent to connect to JMX. Edit `jmx.d/conf.yaml` in the `conf.d/` folder at the root of your [Agent’s configuration directory][1]. Reference the [configuration options](#configuration-options) below or see the [init_config][2] and [instance][3] templates for all available configuration options.
 
     ```yaml
       init_config:
@@ -90,23 +91,23 @@ Agent をホスト上のバイナリとして実行している場合は、[他�
           name: jmx_instance_name
     ```
 
-- [Agent を再起動します][4]。
+- [Restart the Agent][4]
 
-**注**: 複数の JMX チェックを実行するには、コンフィギュレーションファイルを `jmx_<INDEX>.d/conf.yaml` の形式で作成します (`jmx_1.d/conf.yaml`、`jmx_2.d/conf.yaml` など)。各フォルダーは、`conf.d` ディレクトリに保存し、コンフィギュレーションファイルに、`is_jmx` を `true` に設定したオプションを含める必要があります。
+**Note**: To run more than one JMX check, create configuration files with the format `jmx_<INDEX>.d/conf.yaml`, for example:`jmx_1.d/conf.yaml`, `jmx_2.d/conf.yaml`, etc. Each folder should be stored in the `conf.d` directory. with the `is_jmx` option set to `true` in the configuration file.
 
 
-[1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
+[1]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/datadog_checks_dev/datadog_checks/dev/tooling/templates/configuration/init_config/jmx.yaml
 [3]: https://github.com/DataDog/integrations-core/blob/master/datadog_checks_dev/datadog_checks/dev/tooling/templates/configuration/instances/jmx.yaml
-[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[4]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
 {{% tab "Docker" %}}
 
-[Datadog Agent コンテナ][1]を実行するための標準 `gcr.io/datadoghq/agent:latest` イメージには JMX がインストールされていません。**`gcr.io/datadoghq/agent:latest-jmx` イメージ**を使用してください。このイメージは `gcr.io/datadoghq/agent:latest` に基づいていますが、Agent が [jmxfetch][2] を実行するために必要な JVM が含まれています。
+The standard `gcr.io/datadoghq/agent:latest` image for running the [Datadog Agent container][1] does not have JMX installed. **Use the `gcr.io/datadoghq/agent:latest-jmx` image**, this image is based on `gcr.io/datadoghq/agent:latest`, but it includes a JVM, which the Agent needs to run [jmxfetch][2].
 
-いずれかのコンテナで JMX チェックを実行するには、以下の手順を実行します。
+To run a JMX Check against one of your container:
 
-1. JMX チェック構成ファイルを作成します。それには、[ホスト](?tab=host)を参照するか、Datadog が公式にサポートしている以下の JMX インテグレーションの JMX チェック構成ファイルを使用します。
+1. Create a JMX check configuration file by referring to the [Host](?tab=host), or by using a JMX check configuration file for one of Datadog officially supported JMX integration:
 
     - [ActiveMQ][2]
     - [Cassandra][3]
@@ -114,9 +115,9 @@ Agent をホスト上のバイナリとして実行している場合は、[他�
     - [Tomcat][5]
     - [Kafka][6]
 
-2. `-v <HOST_FOLDER_PATH>:/conf.d` を使用して、Datadog Agent の `conf.d/` フォルダー内にファイルをマウントします。詳細は、[チェックテンプレートの設定][7]ドキュメントを参照してください。
+2. Mount this file inside the `conf.d/` folder of your Datadog Agent: `-v <HOST_FOLDER_PATH>:/conf.d`. See the [Setting up Check Templates][7] documentation to learn more.
 
-**注**: `%%port%%` を使用すると問題が多いことがわかっています。問題が発生した場合の最善の回避策は、`%%port%%` の代わりに、JMX ポートをハードコーディングすることです。
+**Note**: Using `%%port%%` has proven problematic in practice. If you experience an issue, the best workaround is to replace `%%port%%` with a hard-coded JMX port.
 
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest?platform=docker
@@ -125,71 +126,71 @@ Agent をホスト上のバイナリとして実行している場合は、[他�
 [4]: https://github.com/DataDog/integrations-core/blob/master/solr/datadog_checks/solr/data/conf.yaml.example
 [5]: https://github.com/DataDog/integrations-core/blob/master/tomcat/datadog_checks/tomcat/data/conf.yaml.example
 [6]: https://github.com/DataDog/integrations-core/blob/master/kafka/datadog_checks/kafka/data/conf.yaml.example
-[7]: https://docs.datadoghq.com/ja/agent/docker/integrations/?tab=file#configuration
+[7]: https://docs.datadoghq.com/agent/docker/integrations/?tab=file#configuration
 {{% /tab %}}
 {{< /tabs >}}
 
-##### コンフィギュレーションオプション
+##### Configuration options
 
-| オプション                                        | 必須 | 説明                                                                                                                                                                                                                                                                                                                                                                                                             |
+| Option                                        | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                             |
 |-----------------------------------------------|----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `custom_jar_paths`                            | いいえ       | Agent の JVM のクラスパスに追加されるカスタムの jar を指定できます。                                                                                                                                                                                                                                                                                                                                       |
-| `jmx_url`                                     | いいえ       | Agent がデフォルト以外の JMX URL に接続する必要がある場合は、ホストとポートの代わりにここで指定します。これを使用する場合は、`name` などを指定する必要があります。                                                                                                                                                                                                                                                      |
-| `is_jmx`                                      | いいえ       | 1 つの長い JMX ファイルを使用する代わりに、各アプリケーションの各構成ファイルを作成できます。[構成](#configuration)セクションの注で説明したように、各構成ファイルにオプションを含めます。                                                                                                                                                                                   |
-| `collect_default_jvm_metrics`                 | いいえ       | デフォルトの JVM メトリクス (`jvm.*`) を収集するようにインテグレーションに指示します。デフォルトは true です。 </br>      **注**: JMX 固有のメトリクスを必要としないインテグレーションを使用している場合は、`collect_default_jvm_metrics: false` を設定します                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-| `collect_default_metrics`                     | いいえ       | 各インテグレーションには、収集するデフォルトの Bean のリストが記載された `metrics.yaml` ファイルが含まれています。これを `True` に設定すると、明示的に yaml ファイルに追加しなくても、これらのメトリクスが自動的に収集されます。通常、これを Autodiscovery とのセットアップに使用するには、コンフィギュレーションオブジェクトのサイズを小さくします。[JMX メトリクスを Java トレースエージェントで][7]収集する場合は、適用されません。 |
-| `java_bin_path`                               | いいえ       | Agent がJava 実行可能ファイルまたはバイナリを検出できない場合、パスを指定します（たとえば `C:/path/to/java.exe` または `/etc/alternatives/java`）                                                                                                                                                                                                                                                                          |
-| `java_options`                                | いいえ       | Java JVM オプション                                                                                                                                                                                                                                                                                                                                                                                                        |
-| `name`                                        | いいえ       | `jmx_url` とともに構成で使用されます。                                                                                                                                                                                                                                                                                                                                                                                     |
-| `new_gc_metrics`                              | いいえ       | ガベージコレクションメトリクスに、より適したメトリクス名を使用するには true に設定します。デフォルトは `false` です                                                                                                                                                                                                                                                                                                                               |
-| `process_name_regex`                          | いいえ       | ホストとポートまたは `jmx_url` を指定する代わりに、Agent は接続 API を使用して接続できます。これには、JDK をインストールして `tools.jar` のパスを設定する必要があります。                                                                                                                                                                                                                                            |
-| `refresh_beans`                               | いいえ       | 一致する MBeans リストを更新する更新期間。デフォルトは 600 秒です。この値を小さくすると、CPU 使用率が増加する場合があります。                                                                                                                                                                                                                                                                                |
-| `refresh_beans_initial`                       | いいえ       | 一致する MBeans リストを初期化直後に更新する更新期間。デフォルト値は `refresh_beans`。                                                                                                                                                                                                                                                                                        |
-| `rmi_connection_timeout`                      | いいえ       | `host` と `port` または `jmx_url` を使用して JVM に接続するときの接続タイムアウト (ミリ秒単位)。                                                                                                                                                                                                                                                                                                               |
-| `rmi_client_timeout`                          | いいえ       | 接続された JVM からの応答がない期間をミリ秒単位で指定します。その後、Agent は既存の接続を放棄して再試行します。                                                                                                                                                                                                                                                                      |
-| `service`                                     | いいえ       | このインテグレーショにより送信されるすべてのメトリクス、イベント、サービスチェックに `service:<SERVICE>` タグをアタッチします。                                                                                                                                                                                                                                                                                                                 |
-| `service_check_prefix`                        | いいえ       | サービスチェックのカスタムプレフィックス。たとえば `my_prefix` は、`my_prefix.can_connect` というサービスチェックを取得します。設定しない場合は、インテグレーション名がデフォルトで使用されます。                                                                                                                                                                                                                                                                |
-| `tools_jar_path`                              | いいえ       | `process_name_regex` が設定される場合に設定されます。                                                                                                                                                                                                                                                                                                                                                                             |
-| `trust_store_path` および `trust_store_password` | いいえ       | SSL が有効な場合に設定する必要があります。                                                                                                                                                                                                                                                                                                                                                                                        |
+| `custom_jar_paths`                            | No       | Allows specifying custom jars that are added to the classpath of the Agent's JVM.                                                                                                                                                                                                                                                                                                                                       |
+| `jmx_url`                                     | No       | If the Agent needs to connect to a non-default JMX URL, specify it here instead of a host and port. If you use this you need to specify a `name` for the instance.                                                                                                                                                                                                                                                      |
+| `is_jmx`                                      | No       | Allows creating different configuration files for each application rather than using a single long JMX file. Include the option in each configuration file as explained in the note from the [Configuration](#configuration) section.                                                                                                                                                                                   |
+| `collect_default_jvm_metrics`                 | No       | Instructs the integration to collect the default JVM metrics (`jvm.*`). Default is true. </br>      **Note**: If you are using an integration that doesn't need JMX specific metrics, set `collect_default_jvm_metrics: false`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| `collect_default_metrics`                     | No       | Each integration contains a `metrics.yaml` file that contains a list of default beans to collect. Setting this to `True` automatically collects those metrics without explicitly adding them to the yaml file. This is typically used for setting up the configuration with Autodiscovery to reduce the size of the configuration object. This is not applicable to collecting [JMX metrics with the Java Tracing Agent][7]. |
+| `java_bin_path`                               | No       | Specify the path to your Java executable or binary if the Agent cannot find it, for example: `C:/path/to/java.exe` or `/etc/alternatives/java`                                                                                                                                                                                                                                                                          |
+| `java_options`                                | No       | Java JVM options                                                                                                                                                                                                                                                                                                                                                                                                        |
+| `name`                                        | No       | Used in conjunction with `jmx_url`.                                                                                                                                                                                                                                                                                                                                                                                     |
+| `new_gc_metrics`                              | No       | Set to true to use better metric names for garbage collection metrics. Default is `false`                                                                                                                                                                                                                                                                                                                               |
+| `process_name_regex`                          | No       | Instead of specifying a host and port or `jmx_url`, the Agent can connect using the attach API. This requires the JDK to be installed and the path to `tools.jar` to be set.                                                                                                                                                                                                                                            |
+| `refresh_beans`                               | No       | Refresh period for refreshing the matching MBeans list. Default is 600 seconds. Decreasing this value may result in increased CPU usage.                                                                                                                                                                                                                                                                                |
+| `refresh_beans_initial`                       | No       | Refresh period for refreshing the matching MBeans list immediately post initialization. Default is the value of `refresh_beans`.                                                                                                                                                                                                                                                                                        |
+| `rmi_connection_timeout`                      | No       | The connection timeout, in milliseconds, when connecting to a JVM using `host` and `port` or a `jmx_url`.                                                                                                                                                                                                                                                                                                               |
+| `rmi_client_timeout`                          | No       | Specify the duration without reply from the connected JVM, in milliseconds, after which the Agent gives up on an existing connection and retries.                                                                                                                                                                                                                                                                      |
+| `service`                                     | No       | Attach a `service:<SERVICE>` tag to every metric, event, and service check emitted by this integration.                                                                                                                                                                                                                                                                                                                 |
+| `service_check_prefix`                        | No       | Custom service check prefix, for example `my_prefix` to get a service check called `my_prefix.can_connect`. Integration name is used as the default if not set.                                                                                                                                                                                                                                                                |
+| `tools_jar_path`                              | No       | To be set when `process_name_regex` is set.                                                                                                                                                                                                                                                                                                                                                                             |
+| `trust_store_path` and `trust_store_password` | No       | Should be set if SSL is enabled.                                                                                                                                                                                                                                                                                                                                                                                        |
 
-`conf` パラメーターは、辞書のリストです。この辞書では、次の 2 つのキーのみが許可されます。
+The `conf` parameter is a list of dictionaries. Only 2 keys are allowed in this dictionary:
 
-| キー       | 必須 | 説明                                                                                                                                |
+| Key       | Required | Description                                                                                                                                |
 |-----------|----------|--------------------------------------------------------------------------------------------------------------------------------------------|
-| `include` | はい      | フィルターの辞書 - これらのフィルターに一致する属性は、"exclude" フィルターにも一致している場合を除き、収集されます (以下を参照)。 |
-| `exclude` | いいえ       | フィルターの辞書 - これらのフィルターと一致する属性は収集されません。                                                           |
+| `include` | Yes      | A dictionary of filters - any attribute that matches these filters are collected unless it also matches the "exclude" filters (see below). |
+| `exclude` | No       | A dictionary of filters - attributes that match these filters are not collected.                                                           |
 
-タグは実際の MBean 名に基づいてメトリクスに自動的に追加されます。明示的に補足タグを指定できます。たとえば、次の MBean が監視対象のアプリケーションで公開されているとします。
+Tags are automatically added to metrics based on the actual MBean name. You can explicitly specify supplementary tags. For instance, assuming the following MBean is exposed by your monitored application:
 
 ```text
 mydomain:attr0=val0,attr1=val1
 ```
 
-`mydomain` というメトリクス (または Bean 内の属性によるそのバリエーション) をタグ `attr0:val0、attr1:val1、domain:mydomain、simple:val0、raw_value:my_chosen_value、multiple:val0-val1` で作成します。
+It would create a metric called `mydomain` (or some variation depending on the attribute inside the bean) with tags: `attr0:val0, attr1:val1, domain:mydomain, simple:val0, raw_value:my_chosen_value, multiple:val0-val1`.
 
-`include` キー内の指定したエイリアスが_キャメルケース_として書式設定されている場合、_スネークケース_に変換されます。たとえば `MyMetricName` は、Datadog では `my_metric_name` と表示されます。
+If you specify an alias in an `include` key that is formatted as _camel case_, it is converted to _snake case_. For example, `MyMetricName` is shown in Datadog as `my_metric_name`.
 
-##### フィルターの説明
+##### Description of the filters
 
-各 `include` または `exclude` 辞書は次のキーをサポートします。
+Each `include` or `exclude` dictionary supports the following keys:
 
-| キー                   | 説明                                                                                                                                                                                                             |
+| Key                   | Description                                                                                                                                                                                                             |
 |-----------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `domain`              | ドメイン名またはドメイン名のリスト (例: `java.lang`)。                                                                                                                                                        |
-| `domain_regex`        | ドメイン名に一致する正規表現のパターンまたはパターンリスト (例: `java\.lang.*`)。                                                                                                                              |
-| `bean` または `bean_name` | Bean 名または完全な Bean 名のリスト (例: `java.lang:type=Compilation`)。                                                                                                                                      |
-| `bean_regex`          | 完全な Bean名に一致する正規表現のパターンまたはパターンリスト (例: `java\.lang.*[,:]type=Compilation.*`)。正規表現でキャプチャグループを使用して、タグ値として指定できます。上記のコンフィギュレーション例を参照してください。 |
-| `class`               | クラス名のリストのクラス (例: `org.datadog.jmxfetch.SimpleTestJavaApp`)。                                                                                                                                  |
-| `class_regex`         | クラス名に一致する正規表現のパターンまたはパターンリスト (例: `org\.datadog\.jmxfetch\.SimpleTestJavaApp`)。                                                                                                 |
-| `exclude_tags`        | 最終メトリクスから削除するタグキーのリスト。メトリクスタグの粒度の向上に使用します (例: `["attr1", "id", "partition-id"]`)。                                                            |
-| `attribute`           | 属性名のリストまたは辞書 (詳細については以下を参照)。                                                                                                                                                 |
+| `domain`              | A domain name or list of domain names, for example: `java.lang`.                                                                                                                                                        |
+| `domain_regex`        | A regex pattern or list of patterns matching the domain name, for example: `java\.lang.*`.                                                                                                                              |
+| `bean` or `bean_name` | A bean name or list of full bean names, for example: `java.lang:type=Compilation`.                                                                                                                                      |
+| `bean_regex`          | A regex pattern or list of patterns matching the full bean names, for example: `java\.lang.*[,:]type=Compilation.*`. You can use capture groups in your regex to supply as tag values. See example configuration above. |
+| `class`               | A class of list of class names, for example: `org.datadog.jmxfetch.SimpleTestJavaApp`.                                                                                                                                  |
+| `class_regex`         | A regex pattern or list of patterns matching the class names, for example: `org\.datadog\.jmxfetch\.SimpleTestJavaApp`.                                                                                                 |
+| `exclude_tags`        | A list of tag keys to remove from the final metrics. This can be used to improve the metric tag cardinality, for example: `["attr1", "id", "partition-id"]`.                                                            |
+| `attribute`           | A list or a dictionary of attribute names (see below for more details).                                                                                                                                                 |
 
-**注**:
+**Notes**:
 
-- `domain_regex` および `bean_regex` で定義された正規表現は、[Java の正規表現形式][8]に従う必要があります。このフィルターはバージョン 5.5.0 で追加されました。
-- 正規表現のパターン以外のすべての値では、大文字と小文字が区別されます。
+- The regexes defined in `domain_regex` and `bean_regex` must conform to [Java's regular expression format][8]. These filters were added in version 5.5.0.
+- Except for regex patterns, all values are case sensitive.
 
-これらのパラメーターに加えて、フィルターは Bean パラメーターで絞り込むことができる「カスタム」キーをサポートします。たとえば、Cassandra キャッシュに関するメトリクスを収集する場合は、`type: - Caches` フィルターを使用することが考えられます。
+On top of these parameters, the filters support "custom" keys which allows you to filter by bean parameters. For example, if you want to collect metrics regarding the Cassandra cache, you could use the `type: - Caches` filter:
 
 ```yaml
 conf:
@@ -199,11 +200,11 @@ conf:
               - Caches
 ```
 
-#### 属性フィルター
+#### Attribute filter
 
-`attribute` フィルターは、次の 2 種類の値を受け入れます。
+The `attribute` filter can accept two types of values:
 
-- キーが、ターゲット属性の名前と一致する辞書:
+- A dictionary whose keys match the target attribute names:
 
     ```yaml
     conf:
@@ -220,10 +221,10 @@ conf:
                       metric_type: counter
     ```
 
-    - Datadog でメトリクス名になる属性の `alias` を指定できます。
-    - また、メトリクスタイプ（`gauge`、`histogram`、`counter`/`rate`、`monotonic_count`）も指定できます。`counter` を選択すると、メトリクスに対して 1 秒あたりの `rate` が計算され、`gauge` として送信されます。
+    - You can specify an `alias` for the attribute that becomes the metric name in Datadog. 
+    - You can also specify the metric type: `gauge`, `histogram`, `counter`/`rate`, or `monotonic_count`. If you choose `counter`, a `rate` per second is computed for the metric and it is sent as a `gauge`.
 
-- ターゲット属性名のリスト:
+- A list of target attribute names:
 
     ```yaml
     conf:
@@ -241,10 +242,10 @@ conf:
                   - RecentHitRate
     ```
 
-    - メトリクスタイプはデフォルトで gauge です。
-    - メトリクス名は `jmx.<DOMAIN_NAME>.<ATTRIBUTE_NAME>` です。
+    - The metric type defaults to a gauge.
+    - The metric name is `jmx.<DOMAIN_NAME>.<ATTRIBUTE_NAME>`.
 
-これは別のフィルタリングの例です。
+Here is another filtering example:
 
 ```yaml
 instances:
@@ -263,29 +264,29 @@ init_config:
                   - 99thPercentile
 ```
 
-#### 検証
+#### Validation
 
-[Agent の status サブコマンドを実行][9]し、JMXFetch セクションの JMX チェックを探します。
+[Run the Agent's status subcommand][9] and look for your JMX check under the JMXFetch section.
 
-さらに、JMX チェックには、JMX アプリケーションからメトリクスを収集するデフォルトのコンフィギュレーションがあります。[Metrics Explorer][10] で `jvm.heap_memory`、`jvm.non_heap_memory`、`jvm.gc.cms.count` をチェックします。
+Additionally, JMX checks have a default configuration that collect metrics from your JMX application. Check the [Metrics Explorer][10] for: `jvm.heap_memory`, `jvm.non_heap_memory`, or `jvm.gc.cms.count`.
 
-### 収集データ
+### Log collection
 
-_Agent v6.0 以上で使用可能_
+_Available for Agent v6.0+_
 
-[Java のログコレクションをセットアップ][11]して Datadog にログを送信するには、 個別のドキュメントを参照してください。
+See the dedicated documentation on how to [setup Java log collection][11] to forward your logs to Datadog.
 
-### トレースの収集
+### Trace collection
 
-[Agent でトレースコレクションを有効化][12]した後、[Java アプリケーションのインスツルメンテーション][13]に関するドキュメントを参照して Datadog にトレースを送信します。
+After [enabling trace collection with your Agent][12], see the dedicated documentation for [instrumenting your Java application][13] to send its traces to Datadog.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 
 {{< get-metrics-from-git >}}
 
-**注**: [jmx.d/conf.yaml][14] で `new_gc_metrics: true` と設定すると、次のメトリクスが置き換えられます。
+**Note**: Set `new_gc_metrics: true` in your [jmx.d/conf.yaml][14] to replace the following metrics:
 
 ```text
 jvm.gc.cms.count   => jvm.gc.minor_collection_count
@@ -294,31 +295,32 @@ jvm.gc.parnew.time => jvm.gc.minor_collection_time
                       jvm.gc.major_collection_time
 ```
 
-### ヘルプ
+### Service Checks
 {{< get-service-checks-from-git "java" >}}
 
 
-## ヘルプ
+## Troubleshooting
 
-[JMX トラブルシューティングのコマンドと FAQ ][16]のリストを参照してください。
+Consult the list of [JMX troubleshooting commands and FAQs][16].
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: http://www.oracle.com/technetwork/java/javase/tech/javamanagement-140525.html
-[2]: https://docs.datadoghq.com/ja/developers/dogstatsd
-[3]: https://docs.datadoghq.com/ja/metrics/custom_metrics/dogstatsd_metrics_submission/
+[2]: https://docs.datadoghq.com/developers/dogstatsd
+[3]: https://docs.datadoghq.com/metrics/custom_metrics/dogstatsd_metrics_submission/
 [4]: https://docs.oracle.com/en/java/javase/14/management/monitoring-and-management-using-jmx-technology.html
-[5]: https://docs.datadoghq.com/ja/getting_started/integrations/#setting-up-an-integration
-[6]: https://docs.datadoghq.com/ja/containers/guide/autodiscovery-with-jmx/?tab=operator
-[7]: https://docs.datadoghq.com/ja/tracing/setup_overview/setup/java/#ddjmxfetchconfigdir-and-ddjmxfetchconfig
+[5]: https://docs.datadoghq.com/getting_started/integrations/#setting-up-an-integration
+[6]: https://docs.datadoghq.com/containers/guide/autodiscovery-with-jmx/?tab=operator
+[7]: https://docs.datadoghq.com/tracing/setup_overview/setup/java/#ddjmxfetchconfigdir-and-ddjmxfetchconfig
 [8]: http://docs.oracle.com/javase/6/docs/api/java/util/regex/Pattern.html
-[9]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[10]: https://docs.datadoghq.com/ja/metrics/explorer/
-[11]: https://docs.datadoghq.com/ja/logs/log_collection/java/
-[12]: https://docs.datadoghq.com/ja/tracing/send_traces/
-[13]: https://docs.datadoghq.com/ja/tracing/setup/java/
+[9]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
+[10]: https://docs.datadoghq.com/metrics/explorer/
+[11]: https://docs.datadoghq.com/logs/log_collection/java/
+[12]: https://docs.datadoghq.com/tracing/send_traces/
+[13]: https://docs.datadoghq.com/tracing/setup/java/
 [14]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/dist/conf.d/jmx.d/conf.yaml.example
 [15]: https://github.com/DataDog/dogweb/blob/prod/integration/java/service_checks.json
-[16]: https://docs.datadoghq.com/ja/integrations/faq/troubleshooting-jmx-integrations/
+[16]: https://docs.datadoghq.com/integrations/faq/troubleshooting-jmx-integrations/
+

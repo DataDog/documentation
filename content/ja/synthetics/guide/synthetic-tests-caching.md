@@ -1,27 +1,33 @@
 ---
-title: Synthetic テストでキャッシュの問題を回避する
-kind: ガイド
+title: Avoid Cache Issues In Synthetic Tests
+kind: guide
 further_reading:
-  - link: synthetics/browser_tests
-    tag: ドキュメント
-    text: ブラウザテストの設定
-  - link: /synthetics/api_tests/http_tests
-    tag: ドキュメント
-    text: HTTP テストを構成する
+    - link: synthetics/browser_tests
+      tag: Documentation
+      text: Configure a Browser Test
+    - link: /synthetics/api_tests/http_tests
+      tag: Documentation
+      text: Configure an HTTP test
+
 ---
-## ブラウザテスト
 
-ブラウザはそれぞれのテスト実行後に終了します。こうすることで、ブラウザテストでクライアントサイドのキャッシュ関連の問題が発生するのを回避することができます。
+## Overview
 
-## API テスト
+This guide describes how you can avoid caching issues while using Synthetic tests.
 
-### HTTP テスト
+## API tests
 
-[ローカル変数][1]を利用し、ランダムな文字列を生成してペイロードを送信したり、[HTTP テスト][2]がキャッシュシステムを使用していないことを確認できます。
+### HTTP tests
 
-## その他の参考資料
+You can leverage [local variables][1] to generate a random string and send it with your payload to ensure your [HTTP tests][2] do not use your caching systems.
+
+## Browser tests
+
+Browsers are killed after every test execution, which ensures that your browser tests do not experience cache-related issues on the client side.
+
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/synthetics/api_tests/http_tests?tab=requestoptions#create-local-variables
-[2]: /ja/synthetics/api_tests/http_tests
+[1]: /synthetics/api_tests/http_tests?tab=requestoptions#create-local-variables
+[2]: /synthetics/api_tests/http_tests

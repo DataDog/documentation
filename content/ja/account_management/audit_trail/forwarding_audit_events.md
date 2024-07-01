@@ -1,54 +1,62 @@
 ---
+title: Forwarding Audit Events to Custom Destinations
 disable_toc: false
 further_reading:
 - link: /account_management/audit_trail/
-  tag: ドキュメント
-  text: 監査証跡について
-title: カスタム宛先への監査イベントの転送
+  tag: Documentation
+  text: Learn more about Audit Trail
 ---
 
-<div class="alert alert-warning">監査イベントの転送はベータ版です。 </div>
+{{% site-region region="gov" %}}
+<div class="alert alert-warning">
+Audit Event Forwarding is not available in the US1-FED site.
+</div>
+{{% /site-region %}}
 
-## 概要
+{{% site-region region="US,US3,US5,EU,AP1" %}}
+<div class="alert alert-warning">Audit Event Forwarding is in beta. </div>
+{{% /site-region %}}
 
-監査イベントの転送機能により、Datadog から Splunk、Elasticsearch、およびHTTPエンドポイントなどのカスタムの宛先に監査イベントを送信することができます。監査イベントは JSON 形式で転送されます。各 Datadog 組織には最大で 3 つの宛先を追加することができます。
+## Overview
 
-{{< img src="/account_management/audit_logs/audit_events_forwarding.png" alt="カスタム宛先セクションに、過去 24 時間の監査イベントの推定ボリュームが 10.4 MB で、@action:login をフィルタリング用クエリとして使用する Login-Event-to-SIEM のアクティブな宛先が表示されている様子。" >}}
+Audit Event Forwarding allows you to send audit events from Datadog to custom destinations like Splunk, Elasticsearch, and HTTP endpoints. Audit events are forwarded in JSON format. You can add up to three destinations for each Datadog org.
 
-**注**: `audit_trail_write` 権限を持つ Datadog ユーザーのみ、監査イベント転送用のカスタム宛先を作成、編集、削除することができます。
+{{< img src="/account_management/audit_logs/audit_events_forwarding.png" alt="The Custom Destinations section showing an active Login-Event-to-SIEM destination with 10.4 MB of estimated audit events volume in the last 24 hours and @action:login as query to filter." >}}
 
-## カスタム宛先への監査イベント転送設定
+**Note**: Only Datadog users with the `audit_trail_write` permission can create, edit, or delete custom destinations for forwarding audit events.
 
-1. 必要に応じて、[IP 範囲リスト][1]から Webhook の IP を許可リストに追加します。
-2. [Audit Trail Settings][2] に移動します。
-3. **Audit Event Forwarding** セクションの **Add Destination** をクリックします。
-4. 転送する監査イベントのフィルタリングに使用するクエリを入力します。例えば、ログインイベントのみを SIEM またはカスタム宛先に転送したい場合は、`@action:login` をフィルタリング用のクエリとして追加します。詳細については、[検索構文][3]を参照してください。
-5. **Destination Type** を選択します。
+## Set up audit event forwarding to custom destinations
+
+1. Add webhook IPs from the [IP ranges list][1] to the allowlist if necessary.
+2. Navigate to [Audit Trail Settings][2].
+3. Click **Add Destination** in the **Audit Event Forwarding** section.
+4. Enter the query to filter your audit events for forwarding. For example, add `@action:login` as the query to filter if you only want to forward login events to your SIEM or custom destination. See [Search Syntax][3] for more information.
+5. Select the **Destination Type**.
 
 {{< tabs >}}
 {{% tab "HTTP" %}}
 
-6. 宛先の名前を入力します。
-7. **Define endpoint** フィールドで、ログを送信するエンドポイントを入力します。エンドポイントは、`https://` で始まる必要があります。
-    - 例えば、Sumo Logic にログを送信する場合、[ログとメトリクスのための HTTP ソースの構成ドキュメント][1] に従って HTTP Source Address URL を取得し、コレクターにデータを送信します。HTTP Source Address URL を **Define endpoint** フィールドに入力します。
-8. **Configure Authentication** セクションで、以下の認証タイプのいずれかを選択し、関連する詳細を入力します。
-    - Basic Authentication: ログの送信先となるアカウントのユーザー名とパスワードを入力します。
-    - Request Header: ヘッダー名と値を指定します。例えば、Authorization ヘッダーを使用し、ログを送信するアカウントのユーザー名が `myaccount` で、パスワードが `mypassword` の場合:
-        - **Header Name** に `Authorization` を入力します。
-        - ヘッダーの値は `Basic username:password` の形式であり、`username:password` は base64 でエンコードされています。この例では、ヘッダー値は `Basic bXlhY2NvdW50Om15cGFzc3dvcmQ=` となります。
-  9. **Save** をクリックします。
+6. Enter a name for the destination.
+7. In the **Define endpoint** field, enter the endpoint to which you want to send the logs. The endpoint must start with `https://`.
+    - For example, if you want to send logs to Sumo Logic, follow their [Configure HTTP Source for Logs and Metrics documentation][1] to get the HTTP Source Address URL to send data to their collector. Enter the HTTP Source Address URL in the **Define endpoint** field.
+8. In the **Configure Authentication** section, select one of the following authentication types and provide the relevant details:
+    - Basic Authentication: Provide the username and password for the account to which you want to send logs.
+    - Request Header: Provide the header name and value. For example, if you use the Authorization header and the username for the account to which you want to send logs is `myaccount` and the password is `mypassword`:
+        - Enter `Authorization` for the **Header Name**.
+        - The header value is in the format of `Basic username:password`, where `username:password` is encoded in base64. For this example, the header value is `Basic bXlhY2NvdW50Om15cGFzc3dvcmQ=`. 
+  9. Click **Save**.
 
 [1]: https://help.sumologic.com/docs/send-data/hosted-collectors/http-source/logs-metrics/
 {{% /tab %}}
 
 {{% tab "Splunk" %}}
 
-6. 宛先の名前を入力します。
-7. **Configure Destination** セクションで、ログを送信するエンドポイントを入力します。エンドポイントは、`https://` で始まる必要があります。例えば、`https://<your_account>.splunkcloud.com:8088`と入力します。**注**: エンドポイントには `/services/collector/event` が自動的に付加されます。
-8. **Configure Authentication** セクションで、Splunk HEC トークンを入力します。Splunk HEC トークンの詳細については、[HTTP Event Collector のセットアップと使用][1]を参照してください。
-9. **Save** をクリックします。
+6. Enter a name for the destination.
+7. In the **Configure Destination** section, enter the endpoint to which you want to send the logs. The endpoint must start with `https://`. For example, enter `https://<your_account>.splunkcloud.com:8088`. **Note**: `/services/collector/event` is automatically appended to the endpoint.
+8. In the **Configure Authentication** section, enter the Splunk HEC token. See [Set up and use HTTP Event Collector][1] for more information about the Splunk HEC token.
+9. Click **Save**.
 
-**注**: [インデクサの確認][2]は無効にする必要があります。
+**Note**: The [indexer acknowledgment][2] needs to be disabled.
 
 [1]: https://docs.splunk.com/Documentation/Splunk/9.0.1/Data/UsetheHTTPEventCollector
 [2]: https://docs.splunk.com/Documentation/Splunk/9.0.3/Data/AboutHECIDXAck
@@ -56,25 +64,25 @@ title: カスタム宛先への監査イベントの転送
 
 {{% tab "Elasticsearch" %}}
 
-6. 宛先の名前を入力します。
-7. **Configure Destination** セクションで、以下の内容を入力します。
+6. Enter a name for the destination.
+7. In the **Configure Destination** section, enter the following details:
 
-    a. ログを送信するエンドポイント。エンドポイントは `https://` で始まらなければなりません。Elasticsearch のエンドポイント例: `https://<your_account>.us-central1.gcp.cloud.es.io`
+   a. The endpoint to which you want to send the logs. The endpoint must start with `https://`. An example endpoint for Elasticsearch: `https://<your_account>.us-central1.gcp.cloud.es.io`.
 
-    b. ログを送信する宛先インデックスの名前。 
+   b. The name of the destination index where you want to send the logs.
 
-    c. オプションで、新しいインデックスを作成する頻度を示すインデックスローテーションを選択します。`No Rotation`、`Every Hour`、`Every Day`、`Every Week`、または `Every Month` です。デフォルトは `No Rotation` です。
+   c. Optionally, select the index rotation for how often you want to create a new index: `No Rotation`, `Every Hour`, `Every Day`, `Every Week`, or `Every Month`. The default is `No Rotation`.
 
-8. **Configure Authentication** セクションで、Elasticsearch アカウントのユーザー名とパスワードを入力します。
-9. **Save** をクリックします。
+8. In the **Configure Authentication** section, enter the username and password for your Elasticsearch account.
+9. Click **Save**.
 
 {{% /tab %}}
 {{< /tabs >}}
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://ip-ranges.datadoghq.com/
 [2]: https://app.datadoghq.com/organization-settings/audit-trail-settings
-[3]: /ja/logs/explorer/search_syntax/
+[3]: /logs/explorer/search_syntax/

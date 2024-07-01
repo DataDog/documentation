@@ -1,81 +1,82 @@
 ---
+title: Span Tag Semantics
+kind: documentation
 further_reading:
-- link: logs/log_configuration/attributes_naming_convention
-  tag: ドキュメント
-  text: ログ管理の標準属性の詳細はこちら
-- link: /real_user_monitoring/browser/data_collected
-  tag: ドキュメント
-  text: RUM ブラウザ用に収集したデータ
-- link: /tracing/trace_explorer/query_syntax/
-  tag: ドキュメント
-  text: トレースの調査方法
-title: スパンタグのセマンティクス
+    - link: logs/log_configuration/attributes_naming_convention
+      tag: Documentation
+      text: Learn more about standard attributes for Log Management
+    - link: /real_user_monitoring/browser/data_collected
+      tag: Documentation
+      text: Data collected for RUM Browser
+    - link: /tracing/trace_explorer/query_syntax/
+      tag: Documentation
+      text: Learn how to explore your traces
 ---
 
-## 概要
+## Overview
 
-[Datadog トレーシングライブラリ][1]は、様々なライブラリのインスツルメンテーションをすぐに利用できるようサポートしています。
-これらのインスツルメンテーションは、分散システムにおける作業の論理的な単位を表すスパンを生成します。
-各スパンは[スパンタグ][2]を含み、システムで発生している作業単位に関する追加情報を提供します。命名規則では、スパンイベントで使用できる名前と内容を記述しています。
+[Datadog tracing libraries][1] provide out-of-the-box support for instrumenting a variety of libraries.
+These instrumentations generate spans to represent logical units of work in distributed systems.
+Each span consists of [span tags][2] to provide additional information on the unit of work happening in the system. Naming conventions describe the name and content that can be used in span events.
 
-<div class="alert alert-info">すべてのスパンタグ、予約属性、命名規則の包括的なリストは、<a href="/standard-attributes/?product=apm">デフォルトの標準属性</a>を参照してください。</div>
+<div class="alert alert-info">To find a comprehensive list of all span tags, reserved attributes, and naming conventions, see <a href="/standard-attributes/?product=apm">Default Standard Attributes.</a></div>
 
-## スパンタグの命名規則
+## Span tag naming conventions
 
-システムで行われている作業を記述するために、さまざまなスパンタグがあります。例えば、以下のドメインを記述するスパンタグがあります。
+There are a variety of span tags to describe work happening in the system. For example, there are span tags to describe the following domains:
 
-- **Reserved**: すべてのスパンに常に存在する属性。
-- **Core**: 使用されるインスツルメンテーションと操作の種類。
-- **Network communications**: ネットワーク通信に対応した作業単位。
-- **HTTP requests**: HTTPクライアントとサーバーのスパン。
-- **Database**: データベースのスパン。
-- **Message queue**: メッセージングシステムのスパン。
-- **Remote procedure calls**: RMI や gRPC などのリモートプロシージャコールに対応するスパン。
-- **Errors**: スパンに関連するエラー。
+- **Reserved**: Attributes that are always present on all spans.
+- **Core**: Instrumentation used and the kind of operation.
+- **Network communications**: Work units corresponding to network communications.
+- **HTTP requests**: HTTP client and server spans.
+- **Database**: Database spans.
+- **Message queue**: Messaging system spans.
+- **Remote procedure calls**: Spans corresponding to remote procedure calls such as RMI or gRPC.
+- **Errors**: Errors associated with spans.
 
-詳しくは[デフォルト標準属性][6]を参照してください。
+For more information, see [Default Standard Attributes][6].
 
-## スパンタグとスパン属性
+## Span tags and span attributes
 
-スパンタグとスパン属性は似ていますが異なる概念です。
+Span tags and span attributes are similar but distinct concepts:
 
-- [スパンタグ](#span-tags)は、スパン周辺のコンテキストです。
-- [スパン属性](#span-attributes)は、スパンの内容です。
+- [Span tags](#span-tags) are the context around the span.
+- [Span attributes](#span-attributes) are the content of the span.
 
-### スパンタグ
+### Span tags
 
-スパンタグは、スパン周辺のコンテキストです。例えば、以下のようなものがあります。
+Span tags are the context around the span. Some examples include:
 
-- **ホストタグ**: `hostname`、`availability-zone`、`cluster-name`
-- **コンテナタグ**: `container_name`、`kube_deployment`、`pod_name`
+- **Host tags**: `hostname`, `availability-zone`, `cluster-name`
+- **Container tags**: `container_name`, `kube_deployment`, `pod_name`
 
-タグは通常、ホスト、コンテナ、サービスカタログから取得したタグなど、他のデータソースから補完されます。これらのタグは、コンテキストを記述するためにスパンに追加されます。例えば、タグは、スパンの出所であるホストやコンテナのプロパティや、スパンが発信されるサービスのプロパティを記述します。
+Tags are usually enriched from other data sources like tags sourced from host, container, or service catalog. These tags are added to the span to describe the context. For example, tags might describe the properties of the host and the container the span is coming from, or the properties of the services the span is emitted from.
 
-Datadog でスパンタグを見つけるには、Trace サイドパネルの **Infrastructure** タブに移動します。
+To find span tags in Datadog, go to the **Infrastructure** tab in the Trace side panel:
 
-{{< img src="/tracing/attributes/span-tags.png" alt="Infrastructure タブのスパンタグ。" style="width:100%;" >}}
+{{< img src="/tracing/attributes/span-tags.png" alt="Span tags on Infrastructure tab." style="width:100%;" >}}
 
-### スパン属性
+### Span attributes
 
-スパン属性は、スパンの内容です。例えば、以下のようなものがあります。
+Span attributes are the content of the span. Some example include:
 
 - `http.url`
 - `http.status_code`
 - `error.message`
 
-スパン属性をクエリするには、検索ボックスで `@` 文字の後に属性名を続けます。例えば、`@http.url` です。
+To query span attributes, use the the `@` character followed by the attribute name in the search box. For example, `@http.url`.
 
-Datadog でスパン属性を見つけるには、Trace サイドパネルの **Info** タブに移動します。
+To find span attributes in Datadog, go to the **Info** tab in the Trace side panel:
 
-{{< img src="/tracing/attributes/span-attributes.png" alt="Info タブのスパン属性。" style="width:100%;" >}}
+{{< img src="/tracing/attributes/span-attributes.png" alt="Span attributes on Info tab." style="width:100%;" >}}
 
-## その他の参考資料
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/tracing/setup_overview/
-[2]: /ja/glossary/#span-tag
+[1]: /tracing/setup_overview/
+[2]: /glossary/#span-tag
 [3]: https://opentelemetry.io/docs/reference/specification/trace/api/#spankind
-[4]: /ja/tracing/setup_overview/configure_data_security/
-[5]: /ja/tracing/trace_collection/library_config/
-[6]: /ja/standard-attributes/?product=apm
+[4]: /tracing/setup_overview/configure_data_security/
+[5]: /tracing/trace_collection/library_config/
+[6]: /standard-attributes/?product=apm

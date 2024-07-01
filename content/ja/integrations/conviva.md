@@ -1,79 +1,80 @@
 ---
-categories:
-- メトリクス
-dependencies: []
-description: 動画配信プラットフォームの Conviva Quality Insights メトリクスを監視します。
-doc_link: https://docs.datadoghq.com/integrations/conviva/
-draft: false
-git_integration_title: conviva
-has_logo: true
-integration_id: ''
-integration_title: Conviva
-integration_version: ''
-is_public: true
-custom_kind: integration
-manifest_version: '1.0'
-name: conviva
-public_title: Datadog-Conviva インテグレーション
-short_description: Conviva Quality Metriclens メトリクスを収集。
-team: web-integrations
-version: '1.0'
+"categories":
+- metrics
+"custom_kind": "integration"
+"dependencies": []
+"description": "Monitor Conviva Quality Insights metrics for video streaming platforms."
+"doc_link": "https://docs.datadoghq.com/integrations/conviva/"
+"draft": false
+"git_integration_title": "conviva"
+"has_logo": true
+"integration_id": ""
+"integration_title": "Conviva"
+"integration_version": ""
+"is_public": true
+"manifest_version": "1.0"
+"name": "conviva"
+"public_title": "Datadog-Conviva Integration"
+"short_description": "Collects Conviva Quality Metriclens metrics."
+"team": "web-integrations"
+"version": "1.0"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-## 概要
+## Overview
 
-Datadog と Conviva アカウントを接続して、エクスペリエンスの品質 (QoE) MetricLens メトリクスを確認します。
+Connect Datadog with your Conviva account to see your quality of experience (QoE) MetricLens metrics.
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-Datadog の [Conviva インテグレーションタイル][1]を使用して、インテグレーションをインストールします。
+Install the integration with the Datadog [Conviva integration tile][1].
 
-### ブラウザトラブルシューティング
-1. Datadog [Conviva インテグレーションタイル][1]内のコンフィギュレーションタブに移動します。
-2. **Add New Credentials** をクリックして、Conviva API キーと API シークレットを入力します。Datadog で、この認証情報に紐づけされたアカウントが検索されます。
-3. 認証情報に関連付けられたアカウントが Datadog に見つかったら、_MetricLens_ を追加して Datadog に取り込むメトリクスを決定します。MetricLens の名前と、_フィルター_および_ディメンション_を指定します。名前は、その指定した MetricLens に自動的にタグ付けされます。
-4. オプションで、特定の MetricLens またはアカウントにタグを追加します、タグをアカウントに追加する場合、タグはそのアカウントに紐づけられたすべての MetricLens に適用されます。
-5. **Add New** をクリックしてその後の手順に従い、さらに _MetricLens_ を追加します。
-6. **Add New Credentials** ボタンを使用して、追加の Conviva 認証方法でこのステップを繰り返します。
+### Configuration
+1. Go to the configuration tab inside the Datadog [Conviva integration tile][1].
+2. Click **Add New Credentials** and input your Conviva API Key and API Secret. Datadog searches for accounts associated with those credentials.
+3. After Datadog finds the accounts associated with your credentials, add a _MetricLens_ to determine which metrics are be ingested into Datadog. Specify a name for the MetricLens along with a _Filter_ and _Dimension_. The name is automatically tagged for that specific MetricLens.
+4. Optionally, add tags to specific MetricLenses or to accounts. When you add a tag to an account, the tag is applied to all MetricLenses associated with that account.
+5. Add more _MetricLenses_ by clicking **Add New** and following the instructions.
+6. Repeat these steps with any additional Conviva credentials using the **Add New Credentials** button.
 
-### ダッシュボード  
-インテグレーションの構成後、すぐに使える Conviva ダッシュボードを使用して MetricLens メトリクスの概要を取得します。デフォルトでは、すべての MetricLens で収集されたすべてのメトリクスが表示されます。
+### Dashboard
+After configuring the integration, use the out-of-the box Conviva dashboard to obtain an overview of MetricLens metrics. By default, all metrics collected across all MetricLenses are displayed.
 
-{{< img src="integrations/conviva/conviva_dashboard.png" alt="Conviva インテグレーションのすぐに使えるダッシュボード" popup="true" style="width:100%" >}}
+{{< img src="integrations/conviva/conviva_dashboard.png" alt="The out-of-the-box dashboard for the Conviva integration" popup="true" style="width:100%" >}}
 
-`metriclens` でフィルタリングすることで、各タイルに設定された MetricLens ごとにメトリクスの内訳を表示できます。さらに、`dimension` のフィルターで絞り込むと、単一のディメンションエンティティ別にメトリクスを確認できます。
+Filter by `metriclens` to view the breakdown of the metrics by each corresponding MetricLens configured on the tile. Drill down further by filtering by `dimension` to view metrics by a single dimension entity. 
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "conviva" >}}
 
 
-### ヘルプ
+### Events
 
-Conviva インテグレーションは [Datadog イベントストリーム][3]にアラートを送信します。
+The Conviva integration sends alerts to your [Datadog event stream][3].
 
-{{< img src="integrations/conviva/conviva_eventstream.png" alt="Datadog Conviva イベントストリームの監視アラート" popup="true" style="width:100%" >}}
+{{< img src="integrations/conviva/conviva_eventstream.png" alt="Monitor alerts in the Datadog Conviva Event Stream" popup="true" style="width:100%" >}}
 
-### ヘルプ
+### Service Checks
 
-Conviva インテグレーションには、サービスのチェック機能は含まれません。
+The Conviva integration does not include any service checks.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
+Need help? Contact [Datadog support][4].
 
-## その他の参考資料
+## Further Reading
 
-お役に立つドキュメント、リンクや記事:
+Additional helpful documentation, links, and articles:
 
-- [Datadog で Conviva を監視する][5]
+- [Monitor Conviva with Datadog][5]
 
 [1]: https://app.datadoghq.com/integrations/conviva
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/conviva/conviva_metadata.csv
-[3]: https://docs.datadoghq.com/ja/events/
-[4]: https://docs.datadoghq.com/ja/help/
+[3]: https://docs.datadoghq.com/events/
+[4]: https://docs.datadoghq.com/help/
 [5]: https://www.datadoghq.com/blog/video-streaming-performance-monitoring-conviva/
+

@@ -1,82 +1,88 @@
 ---
-app_id: twingate
-app_uuid: c88bd253-18da-4224-af14-7854ce8ae6ed
-assets:
-  dashboards:
-    Twingate Dashboard: assets/dashboards/twingate_overview.json
-  integration:
-    configuration: {}
-    events:
-      creates_events: true
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_name: Twingate
-author:
-  homepage: https://www.twingate.com/?utm_source=datadog&utm_medium=partner&utm_campaign=integrations
-  name: Twingate
-  sales_email: sales@twingate.com
-  support_email: support@twingate.com
-categories:
-- ネットワーク
-- セキュリティ
-dependencies:
-- https://github.com/DataDog/integrations-extras/blob/master/twingate/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: twingate
-integration_id: twingate
-integration_title: Twingate
-integration_version: ''
-is_public: true
-custom_kind: integration
-manifest_version: 2.0.0
-name: twingate
-public_title: Twingate
-short_description: Twingate は、企業内 VPN に代わる最新のゼロトラストサービスを提供します。
-supported_os:
+"app_id": "twingate"
+"app_uuid": "c88bd253-18da-4224-af14-7854ce8ae6ed"
+"assets":
+  "dashboards":
+    "Twingate Dashboard": assets/dashboards/twingate_overview.json
+  "integration":
+    "auto_install": true
+    "configuration": {}
+    "events":
+      "creates_events": true
+    "service_checks":
+      "metadata_path": assets/service_checks.json
+    "source_type_id": !!int "10338"
+    "source_type_name": Twingate
+"author":
+  "homepage": "https://www.twingate.com/?utm_source=datadog&utm_medium=partner&utm_campaign=integrations"
+  "name": Twingate
+  "sales_email": sales@twingate.com
+  "support_email": support@twingate.com
+"categories":
+- network
+- security
+"custom_kind": "integration"
+"dependencies":
+- "https://github.com/DataDog/integrations-extras/blob/master/twingate/README.md"
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "twingate"
+"integration_id": "twingate"
+"integration_title": "Twingate"
+"integration_version": ""
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "twingate"
+"public_title": "Twingate"
+"short_description": "Twingate provides a modern, Zero Trust alternative to corporate VPNs"
+"supported_os":
 - linux
 - windows
 - macos
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Network
-  - Category::Security
-  - Offering::Integration
-  - Supported OS::Linux
-  - Supported OS::Windows
-  - Supported OS::macOS
-  configuration: README.md#Setup
-  description: Twingate は、企業内 VPN に代わる最新のゼロトラストサービスを提供します。
-  media:
-  - caption: Twingate アクティビティログ
-    image_url: images/twingate_activity_log.png
-    media_type: image
-  - caption: Twingate リアルタイムアクティビティダッシュボード
-    image_url: images/dashboard.png
-    media_type: image
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Twingate
+"tile":
+  "changelog": CHANGELOG.md
+  "classifier_tags":
+  - "Category::Network"
+  - "Category::Security"
+  - "Offering::Integration"
+  - "Supported OS::Linux"
+  - "Supported OS::Windows"
+  - "Supported OS::macOS"
+  "configuration": "README.md#Setup"
+  "description": Twingate provides a modern, Zero Trust alternative to corporate VPNs
+  "media":
+  - "caption": Twingate Activity Log
+    "image_url": images/twingate_activity_log.png
+    "media_type": image
+  - "caption": Twingate Real-Time Activity Dashboard
+    "image_url": images/dashboard.png
+    "media_type": image
+  "overview": "README.md#Overview"
+  "resources":
+  - "resource_type": blog
+    "url": "https://www.datadoghq.com/blog/monitor-network-access-with-twingate/"
+  "support": "README.md#Support"
+  "title": Twingate
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
-## 概要
+## Overview
 
-[Twingate][1] は、急成長する企業が迅速かつ容易に AWS 環境への安全なアクセスを提供できる、ゼロトラストのネットワークアクセスプラットフォームです。NAT トラバーサル、QUIC、プライベートプロキシ、スプリットトンネリングなどの最新技術を組み込むことで、Twingate はユーザーパフォーマンスと全体的なセキュリティを向上しながら、従来の VPN やクラウド VPN を置き換えることができます。
+[Twingate][1] is a zero trust network access platform that allows fast growing companies to quickly and easily provide secure access to their AWS environment. By incorporating modern technologies such as NAT traversal, QUIC, private proxies, and split tunneling, Twingate can replace a traditional or cloud VPN while improving user performance and overall security.
 
-このインテグレーションにより、企業はユーザーのリソースアクセスアクティビティをリアルタイムで監視することができます。
+This integration allows organizations to monitor a user's resource access activities in real time.
 
-## セットアップ
-### 前提条件
-1. Twingate Connector サーバーに Datadog Agent がインストールされていること。そのホストに接続し、Agent と YAML インテグレーション構成を構成するためのファイルを編集できる必要があります。Datadog Agent をインストールするには、[Agent の概要][2]を参照してください。
-2. Twingate Connector をデプロイする必要があります。リアルタイムの接続ログを有効にするには、[Twingate ドキュメント][3]を参照してください。
+## Setup
+### Prerequisites
+1. You have the Datadog Agent installed on the Twingate Connector server. You must be able to connect to that host and edit the files to configure the Agent and YAML Integration Configs. To install the Datadog Agent, see [Getting Started with the Agent][2].
+2. You must deploy the Twingate Connector. To enable real-time connection logs, see the [Twingate documentation][3].
 
-### Datadog Agent の構成
+### Configure the Datadog Agent
 #### Systemd Connector
-1. [Datadog journald インテグレーション][4]を設定します。
-2. `journald.d/conf.yaml` を以下の構成に置き換えます。
+1. Set up [Datadog journald integration][4].
+2. Replace `journald.d/conf.yaml` with the following configuration:
    ```yaml
     logs:
       - type: journald
@@ -94,14 +100,14 @@ tile:
           replace_placeholder: ""
           pattern: "ANALYTICS "
    ```
-3. `usermod -a -G systemd-journal dd-agent` を使って `dd-agent` ユーザーを `systemd-journal` グループに追加します。
-4. `service datadog-agent restart` を実行して、Datadog Agent を再起動します。
-5. [ログエクスプローラー][5]に Twingate Analytic のログが表示されることを確認します。
+3. Add the `dd-agent` user to the `systemd-journal` group by using `usermod -a -G systemd-journal dd-agent`.
+4. Restart the Datadog Agent by running `service datadog-agent restart`.
+5. Confirm that the Twingate Analytic log appears in the [Log Explorer][5].
 
 
 #### Docker Connector
-##### Host Agent の Datadog Docker インテグレーションを設定する
-コンフィレーションファイル `datadog.yaml` に以下の行を追加します。
+##### Set up Datadog Docker integration for the Host Agent
+Add the following lines to the `datadog.yaml` configuration file:
 ```yaml
 logs_enabled: true
 listeners:
@@ -114,11 +120,11 @@ container_collect_all: true
 container_exclude: ["image:.*"]
 container_include: ["image:twingate/connector"]
 ```
-- `usermod -a -G docker dd-agent` で `dd-agent` ユーザーを `docker` グループに追加します。
-- `service datadog-agent restart` を実行して、Datadog Agent を再起動します。
+- Add the `dd-agent` user to the `docker` group by using `usermod -a -G docker dd-agent`.
+- Restart the Datadog Agent by running `service datadog-agent restart`.
 
-##### Container Agent の Datadog Docker インテグレーションを設定する
-docker run コマンドに追加パラメーター `-e DD_CONTAINER_EXCLUDE="image:.*"` と `-e DD_CONTAINER_INCLUDE="image:twingate/connector"` を追加します。
+##### Set up Datadog Docker integration for the Container Agent
+Add additional parameters `-e DD_CONTAINER_EXCLUDE="image:.*"` and `-e DD_CONTAINER_INCLUDE="image:twingate/connector"` in the docker run command.
 ```shell
 docker run -d --name datadog-agent \
            --cgroupns host \
@@ -136,8 +142,8 @@ docker run -d --name datadog-agent \
            gcr.io/datadoghq/agent:latest
 ```
 
-##### Docker パラメーターを追加して Twingate Connector を設定する
-Twingate Connector の docker run コマンドに、`com.datadoghq.ad.logs` ラベルを追加します。
+##### Set up Twingate Connector with additional docker parameters
+Add the label `com.datadoghq.ad.logs` to the Twingate Connector docker run command:
 ```shell
 docker run -d --sysctl net.ipv4.ping_group_range="0 2147483647" \
   -l "com.datadoghq.ad.logs"='[{"service":"Twingate Connection","source":"Twingate","log_processing_rules":[{"type":"include_at_match","name":"analytics","pattern":"ANALYTICS"},{"type":"mask_sequences","name":"remove_analytics","replace_placeholder":"","pattern":"ANALYTICS "}]}]' \
@@ -149,26 +155,27 @@ docker run -d --sysctl net.ipv4.ping_group_range="0 2147483647" \
   --restart=unless-stopped \
   $(docker run --help | grep -- --pull >/dev/null && echo "--pull=always") twingate/connector:1
 ```
-**注**: 新しいラベルを追加するには、Twingate Connector コンテナを再作成する必要があります。
+**Note**: The Twingate Connector container needs to be recreated to add the new label 
 
-### Twingate Analytics ダッシュボード
-1. Datadog の[ダッシュボードリスト][6]に移動します。
-2. Twingate Analytics ダッシュボードを検索します。
+### Twingate Analytics Dashboard
+1. Go to the Datadog [Dashboard List][6].
+2. Search for the Twingate Analytics dashboard.
 
-## トラブルシューティング
-ご不明な点は、[Twingate のサポートチーム][7]までお問い合わせください。
+## Troubleshooting
+Need help? Contact [Twingate Support][7].
 
-## その他の参考資料
+## Further Reading
 
-お役に立つドキュメント、リンクや記事:
+Additional helpful documentation, links, and articles:
 
-- [Datadog Marketplace の Twingate の製品を使ってネットワークアクセスを監視する][8]
+- [Monitor network access with Twingate's offering in the Datadog Marketplace][8]
 
 [1]: https://www.twingate.com/
-[2]: https://docs.datadoghq.com/ja/getting_started/agent/
+[2]: https://docs.datadoghq.com/getting_started/agent/
 [3]: https://docs.twingate.com/docs/connector-real-time-logs
-[4]: https://docs.datadoghq.com/ja/agent/logs/?tab=journald
+[4]: https://docs.datadoghq.com/agent/logs/?tab=journald
 [5]: https://app.datadoghq.com/logs
 [6]: https://app.datadoghq.com/dashboard/lists
 [7]: https://help.twingate.com/hc/en-us
 [8]: https://www.datadoghq.com/blog/monitor-network-access-with-twingate/
+

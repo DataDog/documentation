@@ -1,83 +1,83 @@
 ---
-app_id: concourse-ci
-app_uuid: eb83d03f-e1d6-4718-8e54-922f4d2528b1
-assets:
-  integration:
-    auto_install: true
-    configuration: {}
-    events:
-      creates_events: false
-    metrics:
-      check: concourse.ci.goroutines
-      metadata_path: metadata.csv
-      prefix: concourse.ci.
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 10041
-    source_type_name: Concourse CI
-author:
-  homepage: https://github.com/DataDog/integrations-extras
-  name: コミュニティ
-  sales_email: help@datadoghq.com
-  support_email: help@datadoghq.com
-categories:
-- 自動化
-dependencies:
-- https://github.com/DataDog/integrations-extras/blob/master/concourse_ci/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: concourse_ci
-integration_id: concourse-ci
-integration_title: Concourse-CI
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: 2.0.0
-name: concourse_ci
-public_title: Concourse-CI
-short_description: Concourse CI から送信されるメトリクスを収集
-supported_os:
+"app_id": "concourse-ci"
+"app_uuid": "eb83d03f-e1d6-4718-8e54-922f4d2528b1"
+"assets":
+  "integration":
+    "auto_install": true
+    "configuration": {}
+    "events":
+      "creates_events": false
+    "metrics":
+      "check": concourse.ci.goroutines
+      "metadata_path": metadata.csv
+      "prefix": concourse.ci.
+    "service_checks":
+      "metadata_path": assets/service_checks.json
+    "source_type_id": !!int "10041"
+    "source_type_name": Concourse CI
+"author":
+  "homepage": "https://github.com/DataDog/integrations-extras"
+  "name": Community
+  "sales_email": help@datadoghq.com
+  "support_email": help@datadoghq.com
+"categories":
+- automation
+"custom_kind": "integration"
+"dependencies":
+- "https://github.com/DataDog/integrations-extras/blob/master/concourse_ci/README.md"
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "concourse_ci"
+"integration_id": "concourse-ci"
+"integration_title": "Concourse-CI"
+"integration_version": ""
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "concourse_ci"
+"public_title": "Concourse-CI"
+"short_description": "Collect metrics emitted from Concourse CI."
+"supported_os":
 - linux
 - windows
 - macos
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Automation
-  - Supported OS::Linux
-  - Supported OS::Windows
-  - Supported OS::macOS
-  configuration: README.md#Setup
-  description: Concourse CI から送信されるメトリクスを収集
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Concourse-CI
+"tile":
+  "changelog": CHANGELOG.md
+  "classifier_tags":
+  - "Category::Automation"
+  - "Supported OS::Linux"
+  - "Supported OS::Windows"
+  - "Supported OS::macOS"
+  "configuration": "README.md#Setup"
+  "description": Collect metrics emitted from Concourse CI.
+  "media": []
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": Concourse-CI
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
-## 概要
+## Overview
 
-Concourse CI で Datadog メトリクスエミッターを構成すると、以下のことができます。
+Configure the Datadog Metric Emitter in Concourse CI to:
 
-- パイプラインの処理時間、コンテナの数、およびマウントされたワーカーボリュームを可視化できます。
-- 低速なリクエストを識別してルートを構築できます。
+- Visualize the duration of pipelines, number of containers and mounted volumes of workers.
+- Identify slow requests to build routes.
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-Concourse CI には Datadog メトリクスエミッターが付属しています。起動時にメトリクスを送信するように [ATC][1] を構成するには、[Datadog Agent][2] がインストールされていることが前提条件です。
+Concourse CI comes bundled with a Datadog metrics emitter. A prerequisite to configuring [ATC][1] to emit metrics on start is to have a [Datadog Agent][2] installed.
 
-### ブラウザトラブルシューティング
+### Configuration
 
-以下のオプションを設定して、Datadog エミッターを使用するように ATC を構成します。[カスタムメトリクス][3]を送信しないように、`concourse.ci` というプレフィックスを使用することが重要です。
+Configure ATC to use the Datadog emitter by setting the following options. It is important to use a prefix of `concourse.ci` to avoid emitting [custom metrics][3].
 
-### メトリクスエミッターオプション
+### Metric emitter options
 
-詳しくは、Concourse CI のドキュメントの [Configuring Metrics][4] を参照してください。
+See [Configuring Metrics][4] in the Concourse CI documentation for more information.
 
 ```text
 Metric Emitter (Datadog):
@@ -86,27 +86,28 @@ Metric Emitter (Datadog):
     --datadog-prefix=           Prefix for all metrics to easily find them in Datadog [$CONCOURSE_DATADOG_PREFIX]
 ```
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "concourse_ci" >}}
 
 
-### ヘルプ
+### Events
 
-このインテグレーションは、イベントをサポートしていません。
+This integration does not support events.
 
-### サービス
+### Service
 
-このインテグレーションは、サービスチェックを収集しません。
+This integration does not collect service checks.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
+Need help? Contact [Datadog support][6].
 
 [1]: https://concourse-ci.org/concepts.html
 [2]: https://app.datadoghq.com/account/settings/agent/latest
-[3]: https://docs.datadoghq.com/ja/developers/metrics/custom_metrics/
+[3]: https://docs.datadoghq.com/developers/metrics/custom_metrics/
 [4]: https://concourse-ci.org/metrics.html#configuring-metrics
 [5]: https://github.com/DataDog/integrations-extras/blob/master/concourse_ci/metadata.csv
-[6]: https://docs.datadoghq.com/ja/help/
+[6]: https://docs.datadoghq.com/help/
+

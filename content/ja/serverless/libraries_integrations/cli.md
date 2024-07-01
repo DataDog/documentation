@@ -1,18 +1,19 @@
 ---
 aliases:
-- /ja/serverless/datadog_lambda_library/
-- /ja/serverless/serverless_integrations/cli/
+- /serverless/datadog_lambda_library/
+- /serverless/serverless_integrations/cli/
 dependencies:
-- https://github.com/DataDog/datadog-ci/blob/master/src/commands/lambda/README.md
-title: Datadog サーバーレス CLI
+- "https://github.com/DataDog/datadog-ci/blob/master/src/commands/lambda/README.md"
+kind: documentation
+title: Datadog Serverless CLI
 ---
-CLI を使って、AWS Lambda 関数を Datadog でインスツルメントすることができます。CLI は既存の Lambda 関数のコンフィギュレーションを変更することでインスツルメンテーションを可能にするため、再デプロイは*必要ありません*。Datadog のサーバーレスモニタリングをはじめるにはこの方法が最速です。
+You can use the CLI to instrument your AWS Lambda functions with Datadog. The CLI enables instrumentation by modifying existing Lambda functions' configuration and hence does *not* require redeployment. It is the quickest way to get started with Datadog serverless monitoring.
 
-CI/CD パイプラインにコマンドを追加して*すべて*のサーバーレスアプリケーションにインスツルメンテーションを有効化することも可能です。Datadog CLI コマンドによる変更が上書きされないよう、通常のサーバーレスアプリケーションのデプロイ*後*にコマンドを実行します。
+You can also add the command to your CI/CD pipelines to enable instrumentation for *all* your serverless applications. Run the command *after* your normal serverless application deployment, so that changes made by the Datadog CLI command do not get overridden.
 
-## インストール
+## Installation
 
-`datadog-ci lambda instrument` コマンドを使用して Lambda 関数をインスツルメントするには、以下に示す特定のランタイム用の手順に従います。
+To instrument your Lambda functions using the `datadog-ci lambda instrument` command, follow the instructions for a specific runtime listed below:
 
 - [.NET](https://docs.datadoghq.com/serverless/installation/dotnet/?tab=datadogcli)
 - [Go](https://docs.datadoghq.com/serverless/installation/go/?tab=datadogcli)
@@ -21,120 +22,120 @@ CI/CD パイプラインにコマンドを追加して*すべて*のサーバー
 - [Python](https://docs.datadoghq.com/serverless/installation/python/?tab=datadogcli)
 - [Ruby](https://docs.datadoghq.com/serverless/installation/ruby/?tab=datadogcli)
 
-## コマンド
+## Commands
 
 ### `instrument`
 
-`datadog-ci lambda instrument` を実行して 、Datadog インスツルメンテーションを Lambda に適用します。このコマンドは、Datadog Lambda ライブラリおよび/または Datadog Lambda 拡張機能を Lambda レイヤーとして、インスツルメントされた Lambda 関数に追加し、そのコンフィギュレーションを変更します。
+Run `datadog-ci lambda instrument` to apply Datadog instrumentation to a Lambda. This command adds the Datadog Lambda Library and/or the Datadog Lambda Extension as Lambda Layers to the instrumented Lambda functions and modifies their configurations.
 
 ```bash
 
 datadog-ci lambda instrument -f <function-name> -f <another-function-name> -r us-east-1 -v 81 -e 49
 
-# フル ARN で指定された複数の関数をインスツルメントする
+# Instrument multiple functions specified by full ARNs
 datadog-ci lambda instrument -f <lambda-arn> -f <another-lambda-arn> -f <a-third-lambda-arn> -v 81 -e 49
 
-# インタラクティブモードで関数をインスツルメントする
+# Instrument function(s) in interactive mode
 datadog-ci lambda instrument -i
 
-# 正規表現パターンにマッチする複数の関数をインスツルメントする
+# Instrument multiple functions that match a regex pattern
 datadog-ci lambda instrument --functions-regex <valid-regex-pattern> -r us-east-1 -v 81 -e 49
 
-# すべてのアップデートのドライラン
+# Dry run of all updates
 datadog-ci lambda instrument -f <function-name> -f <another-function-name> -r us-east-1 -v 81 -e 49 --dry-run
 ```
 
 ### `uninstrument`
 
-`datadog-ci lambda uninstrument` を実行すると、Lambda 内の Datadog インスツルメンテーションを元に戻すことができます。このコマンドは、Datadog Lambda ライブラリや Datadog Lambda 拡張機能レイヤーなど、datadog-ci によって適用された Datadog の構成を自動的に削除してくれます。
+Run `datadog-ci lambda uninstrument` to revert Datadog instrumentation in a Lambda. This command automatically removes the Datadog configuration, such as the Datadog Lambda Library and the Datadog Lambda Extension layers, as well as other configurations applied by the datadog-ci.
 
 ```bash
-# 名前で指定された複数の関数をアンインスツルメントする
+# Uninstrument multiple functions specified by names
 datadog-ci lambda uninstrument -f <function-name> -f <another-function-name> -r us-east-1
 
-# インタラクティブモードで関数をアンインスツルメントする
+# Uninstrument function(s) in interactive mode
 datadog-ci lambda uninstrument -i
 
-# 正規表現にマッチする複数の関数をアンインスツルメントする
+# Uninstrument multiple functions that match a regex pattern
 datadog-ci lambda uninstrument --functions-regex <valid-regex-pattern> -r us-east-1
 
-# すべてのアップデートのドライラン
+# Dry run of all updates
 datadog-ci lambda uninstrument -f <function-name> -f <another-function-name> -r us-east-1 --dry-run
 ```
 
-コンフィギュレーションセクションでその設定を確認します。
+See the configuration section for additional settings.
 
-## コンフィギュレーション
+## Configuration
 
-### AWS 資格情報
+### AWS Credentials
 
-`datadog-ci lambda` コマンドを実行する Lambda と CloudWatch サービスへのアクセスが構成された有効な [AWS 資格情報][1]が必要です。
+You must have valid [AWS credentials][1] configured with access to the Lambda and CloudWatch services where you are running any `datadog-ci lambda` command.
 
-### 環境変数
+### Environment variables
 
-これらの環境変数は、`datadog-ci lambda instrument` を実行している環境で公開する必要があります。
+You must expose these environment variables in the environment where you are running `datadog-ci lambda instrument`:
 
-| 環境変数         | 説明                                                                                                                                                                                                                                                                                                                                          | 例                                                            |
+| Environment Variable         | Description                                                                                                                                                                                                                                                                                                                                          | Example                                                            |
 | ---------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------ |
-| `DATADOG_API_KEY`            | Datadog API キー。Lambda 関数の構成に `DD_API_KEY` 環境変数を設定します。Datadog API キーの取得の詳細については、[API キーのドキュメント][5]を参照してください。                                                                                                                                                         | `export DATADOG_API_KEY=<API_KEY>`                                 |
-| `DATADOG_API_KEY_SECRET_ARN` | AWS Secrets Manager に Datadog の API キーを格納するシークレットの ARN です。Lambda 関数の構成に `DD_API_KEY_SECRET_ARN` を設定します。注: `DD_KMS_API_KEY` が設定されている場合、 `DD_API_KEY_SECRET_ARN` は無視されます。Lambda の実行ロールに `secretsmanager:GetSecretValue` 権限を追加してください。                                           | `export DATADOG_API_KEY_SECRET_ARN=<SECRETS_MANAGER_RESOURCE_ARN>` |
-| `DATADOG_KMS_API_KEY`        | KMS を使用して暗号化された Datadog API キー。Lambda 関数のコンフィギュレーションに `DD_KMS_API_KEY` 環境変数を設定します。注: `DD_KMS_API_KEY` が設定されている場合、`DD_API_KEY` は無視されます。                                                                                                                                                               | `export DATADOG_KMS_API_KEY=<KMS_ENCRYPTED_API_KEY>`               |
-| `DATADOG_SITE`               | データを送信する Datadog サイトを設定します。Datadog Lambda Extension を使用する場合にのみ必要です。可能な値は、`datadoghq.com`、`datadoghq.eu`、`us3.datadoghq.com`、`us5.datadoghq.com`、`ap1.datadoghq.com`、`ddog-gov.com` です。デフォルトは `datadoghq.com` です。Lambda 関数設定に `DD_SITE` 環境変数を設定します。 | `export DATADOG_SITE="datadoghq.com"`                              |
+| `DATADOG_API_KEY`            | Datadog API Key. Sets the `DD_API_KEY` environment variable on your Lambda function configuration. For more information about getting a Datadog API key, see the [API key documentation][5].                                                                                                                                                         | `export DATADOG_API_KEY=<API_KEY>`                                 |
+| `DATADOG_API_KEY_SECRET_ARN` | The ARN of the secret storing the Datadog API key in AWS Secrets Manager. Sets the `DD_API_KEY_SECRET_ARN` on your Lambda function configuration. Notes: `DD_API_KEY_SECRET_ARN` is ignored when `DD_KMS_API_KEY` is set. Add the `secretsmanager:GetSecretValue` permission to the Lambda execution role.                                           | `export DATADOG_API_KEY_SECRET_ARN=<SECRETS_MANAGER_RESOURCE_ARN>` |
+| `DATADOG_KMS_API_KEY`        | Datadog API Key encrypted using KMS. Sets the `DD_KMS_API_KEY` environment variable on your Lambda function configuration. Note: `DD_API_KEY` is ignored when `DD_KMS_API_KEY` is set.                                                                                                                                                               | `export DATADOG_KMS_API_KEY=<KMS_ENCRYPTED_API_KEY>`               |
+| `DATADOG_SITE`               | Set which Datadog site to send data. Only needed when using the Datadog Lambda Extension. Possible values are  `datadoghq.com` , `datadoghq.eu` , `us3.datadoghq.com`, `us5.datadoghq.com`, `ap1.datadoghq.com`, and `ddog-gov.com`. The default is `datadoghq.com`. Sets the `DD_SITE` environment variable on your Lambda function configurations. | `export DATADOG_SITE="datadoghq.com"`                              |
 
 
-### 引数
+### Arguments
 
-コンフィギュレーションは、コマンドライン引数または JSON コンフィギュレーションファイル (次のセクションを参照) を使って行うことができます。
+Configuration can be done using command-line arguments or a JSON configuration file (see the next section).
 
 #### `instrument`
-以下の引数を `instrument` に渡してその行動を指定します。引数は、コンフィギュレーションファイルに設定されている値がある場合、これを上書きします。
+You can pass the following arguments to `instrument` to specify its behavior. These arguments will override the values set in the configuration file, if any.
 
-| 引数                       | 省略形 | 説明                                                                                                                                                                                                                                                                                                                                   | デフォルト |
+| Argument                       | Shorthand | Description                                                                                                                                                                                                                                                                                                                                   | Default |
 | ------------------------------ | --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
-| `--function`                   | `-f`      | **インスツルメント**する Lambda 関数の ARN、または Lambda 関数の名前 (`--region` を定義する必要があります)。                                                                                                                                                                                                                       |         |
-| `--functions-regex`            |           | Lambda 関数名とマッチする正規表現パターン。                                                                                                                                                                                                                                                                                       |         |
-| `--interactive`                | `-i`      | 関数がどのようにインスツルメントされるかを、ユーザーが対話的に選択できるようにします。インタラクティブモードを使用する場合は、代わりに情報の入力を求められるため、他のフラグを指定する必要はありません。                                                                                                                       |         |
-| `--region`                     | `-r`      | `--function` が ARN ではなく関数名で指定されている場合に使用するデフォルトのリージョン。                                                                                                                                                                                                                                                |         |
-| `--service`                    |           | 類似のワークロードに属する関連関数をグループ化するには、`--service` を使用します。`service` タグについて詳しくは、[こちら][8]を参照してください。                                                                                                                                                                                                                      |         |
-| `--version`                    |           | `—version` タグを追加して、遅延、負荷、エラーのスパイクを新しいバージョンに関連付けることができます。`version` タグについて詳しくは [こちら][7]を参照してください。                                                                                                                                                                                                         |         |
-| `--env`                        |           | ステージング環境、開発環境、本番環境を分けるには、`—env` を使用します。`env` タグについて詳しくは [こちら][6]を参照してください。                                                                                                                                                                                                                 |         |
-| `--extra-tags`                 |           | Datadog の Lambda 関数にカスタムタグを追加します。`layer:api,team:intake` のようなカンマで区切られた `<key>:<value>` のリストである必要があります。                                                                                                                                                                                                   |         |
-| `--profile`                    |           | インスツルメンテーションに使用する AWS 名前付きプロファイルの資格情報を指定します。AWS 名前付きプロファイルの詳細は[こちら][11]を参照してください。                                                                                                                                                                                                                               |         |
-| `--layer-version`              | `-v`      | 適用する Datadog Lambda ライブラリレイヤーのバージョン。これはランタイムによって異なります。最新のレイヤーバージョンを確認するには、[JS][2] または [python][3] datadog-lambda-layer リポジトリのリリースノートを確認してください。                                                                                                                                                 |         |
-| `--extension-version`          | `-e`      | 適用する Datadog Lambda Extension レイヤーのバージョン。`extension-version` が設定されている場合は、お使いの環境でも必ず `DATADOG_API_KEY` (または暗号化されている場合は `DATADOG_KMS_API_KEY` または `DATADOG_API_KEY_SECRET_ARN`) をエクスポートしてください。`extension-version` を使用する場合は、`forwarder` を省略します。Lambda Extension の詳細は[こちら][4]。 |         |
-| `--tracing`                    |           | Lambda で dd-trace トレースを有効にするかどうか。                                                                                                                                                                                                                                                                                            | `true`  |
-| `--merge-xray-traces`          |           | dd-trace トレースを AWS X-Ray トレースに結合するかどうか。API ゲートウェイスパンのトレースに役立ちます。                                                                                                                                                                                                                                                    | `false` |
-| `--flush-metrics-to-logs`      |           | Datadog Forwarder 経由でメトリクスを[非同期で][10]送信するかどうか。このパラメーターを無効にすると、`DATADOG_API_KEY` (暗号化されている場合は `DATADOG_KMS_API_KEY` または `DATADOG_API_KEY_SECRET_ARN`) をエクスポートする必要があります。                                                                                                                    | `true`  |
-| `--capture-lambda-payload`     |           | Lambda 呼び出しのペイロードとレスポンスをキャプチャして保存するかどうか。                                                                                                                                                                                                                                                                 | `false` |
-| `--forwarder`                  |           | この関数の LogGroup をアタッチする [datadog forwarder][9] の ARN。                                                                                                                                                                                                                                                                  |         |
-| `--dry-run`                    | `-d`      | コマンドを実行している変更のプレビューが適用されます。                                                                                                                                                                                                                                                                                                  | `false` |
-| `--log-level`                  |           | Datadog Lambda ライブラリおよび/または Lambda 拡張機能から追加の出力をトラブルシューティングのために確認するには、`debug` を設定します。                                                                                                                                                                                                                 |         |
-| `--source-code-integration`    | `-s`      | [Datadog ソースコードインテグレーション][12]を有効にするかどうか。これにより、Lambda に Git リポジトリの URL と、現在のローカルディレクトリの最新のコミットハッシュがタグ付けされます。**注**: Git リポジトリはリモートより先に存在してはいけませんし、ダーティであってはいけません。                                                                                     | `true`  |
-| `--no-source-code-integration` |           | Datadog ソースコードインテグレーションを無効にします。                                                                                                                                                                                                                                                                                                     |         |
-| `--upload-git-metadata`        | `-u`      | ソースコードインテグレーションの一部として、Git メタデータのアップロードを有効にするかどうか。Git メタデータのアップロードは、Datadog Github インテグレーションをインストールしていない場合のみ必要です。                                                                                                                                                           | `true`  |
-| `--no-upload-git-metadata`     |           | ソースコードインテグレーションの一部として、Git メタデータのアップロードを無効にします。Datadog Github インテグレーションをインストールしている場合、このフラグを使用すると、Git メタデータのアップロードが不要になります。                                                                                                                                                  |         |
-| `--apm-flush-deadline`         |           | タイムアウトが発生する前にスパンを送信するタイミングをミリ秒単位で決定するために使用されます。AWS Lambda の呼び出しの残り時間が設定された値よりも小さい場合、トレーサーは、現在のアクティブなスパンとすべての終了したスパンの送信を試みます。NodeJS と Python でサポートされています。デフォルトは `100` ミリ秒です。                              |         |
+| `--function`                   | `-f`      | The ARN of the Lambda function to be **instrumented**, or the name of the Lambda function (`--region` must be defined).                                                                                                                                                                                                                       |         |
+| `--functions-regex`            |           | A regex pattern to match with the Lambda function name.                                                                                                                                                                                                                                                                                       |         |
+| `--interactive`                | `-i`      | Allows the user to interactively choose how their function gets instrumented. There is no need to provide any other flags if you choose to use interactive mode since you will be prompted for the information instead.                                                                                                                       |         |
+| `--region`                     | `-r`      | Default region to use, when `--function` is specified by the function name instead of the ARN.                                                                                                                                                                                                                                                |         |
+| `--service`                    |           | Use `--service` to group related functions belonging to similar workloads. Learn more about the `service` tag [here][8].                                                                                                                                                                                                                      |         |
+| `--version`                    |           | Add the `--version` tag to correlate spikes in latency, load or errors to new versions. Learn more about the `version` tag [here][7].                                                                                                                                                                                                         |         |
+| `--env`                        |           | Use `--env` to separate out your staging, development, and production environments. Learn more about the `env` tag [here][6].                                                                                                                                                                                                                 |         |
+| `--extra-tags`                 |           | Add custom tags to your Lambda function in Datadog. Must be a list of `<key>:<value>` separated by commas such as: `layer:api,team:intake`.                                                                                                                                                                                                   |         |
+| `--profile`                    |           | Specify the AWS named profile credentials to use to instrument. Learn more about AWS named profiles [here][11].                                                                                                                                                                                                                               |         |
+| `--layer-version`              | `-v`      | Version of the Datadog Lambda Library layer to apply. This varies between runtimes. To see the latest layer version check the [JS][2] or [python][3] datadog-lambda-layer repo release notes.                                                                                                                                                 |         |
+| `--extension-version`          | `-e`      | Version of the Datadog Lambda Extension layer to apply. When `extension-version` is set, make sure to export `DATADOG_API_KEY` (or if encrypted, `DATADOG_KMS_API_KEY` or `DATADOG_API_KEY_SECRET_ARN`) in your environment as well. While using `extension-version`, leave out `forwarder`. Learn more about the Lambda Extension [here][4]. |         |
+| `--tracing`                    |           | Whether to enable dd-trace tracing on your Lambda.                                                                                                                                                                                                                                                                                            | `true`  |
+| `--merge-xray-traces`          |           | Whether to join dd-trace traces to AWS X-Ray traces. Useful for tracing API Gateway spans.                                                                                                                                                                                                                                                    | `false` |
+| `--flush-metrics-to-logs`      |           | Whether to send metrics via the Datadog Forwarder [asynchronously][10]. If you disable this parameter, it's required to export `DATADOG_API_KEY` (or if encrypted, `DATADOG_KMS_API_KEY` or `DATADOG_API_KEY_SECRET_ARN`).                                                                                                                    | `true`  |
+| `--capture-lambda-payload`     |           | Whether to capture and store the payload and response of a lambda invocation.                                                                                                                                                                                                                                                                 | `false` |
+| `--forwarder`                  |           | The ARN of the [datadog forwarder][9] to attach this function's LogGroup to.                                                                                                                                                                                                                                                                  |         |
+| `--dry-run`                    | `-d`      | Preview changes running command would apply.                                                                                                                                                                                                                                                                                                  | `false` |
+| `--log-level`                  |           | Set to `debug` to see additional output from the Datadog Lambda Library and/or Lambda Extension for troubleshooting purposes.                                                                                                                                                                                                                 |         |
+| `--source-code-integration`    | `-s`      | Whether to enable [Datadog Source Code Integration][12]. This will tag your lambda(s) with the Git repository URL and the latest commit hash of the current local directory. **Note**: Git repository must not be ahead of remote, and must not be dirty.                                                                                     | `true`  |
+| `--no-source-code-integration` |           | Disables Datadog Source Code Integration.                                                                                                                                                                                                                                                                                                     |         |
+| `--upload-git-metadata`        | `-u`      | Whether to enable Git metadata uploading, as a part of source code integration. Git metadata uploading is only required if you don't have the Datadog Github Integration installed.                                                                                                                                                           | `true`  |
+| `--no-upload-git-metadata`     |           | Disables Git metadata uploading, as a part of source code integration. Use this flag if you have the Datadog Github Integration installed, as it renders Git metadata uploading unnecessary.                                                                                                                                                  |         |
+| `--apm-flush-deadline`         |           | Used to determine when to submit spans before a timeout occurs, in milliseconds. When the remaining time in an AWS Lambda invocation is less than the value set, the tracer attempts to submit the current active spans and all finished spans. Supported for NodeJS and Python. Defaults to `100` milliseconds.                              |         |
 <br />
 
 #### `uninstrument`
-以下の引数を `uninstrument` に渡してその行動を指定します。引数は、コンフィギュレーションファイルに設定されている値がある場合、これを上書きします。
+The following arguments are passed to `uninstrument` to specify its behavior. These arguments will override the values set in the configuration file, if any.
 
-必要であれば、より早くアンインスツルメントできるように、`instrument` テーブルに記述された他の引数は無視されます。
+Any other argument stated on the `instrument` table, but not below, will be ignored, this to allow you to uninstrument quicker, if needed.
 
-| 引数            | 省略形 | 説明                                                                                                               | デフォルト |
+| Argument            | Shorthand | Description                                                                                                               | Default |
 | ------------------- | --------- | ------------------------------------------------------------------------------------------------------------------------- | ------- |
-| `--function`        | `-f`      | **アンインスツルメント**する Lambda 関数の ARN、または Lambda 関数の名前 (`--region` を定義する必要があります)。 |         |
-| `--functions-regex` |           | **アンインスツルメント**する Lambda 関数名とマッチする正規表現パターン。                                          |         |
-| `--region`          | `-r`      | `--function` が ARN ではなく関数名で指定されている場合に使用するデフォルトのリージョン。                            |         |
-| `--profile`         |           | アンインスツルメンテーションに使用する AWS 名前付きプロファイルの資格情報を指定します。AWS 名前付きプロファイルの詳細は[こちら][11]を参照してください。         |         |
-| `--forwarder`       |           | この関数から削除する [datadog forwarder][9] の ARN。                                                       |         |
-| `--dry-run`         | `-d`      | コマンドを実行している変更のプレビューが適用されます。                                                                              | `false` |
+| `--function`        | `-f`      | The ARN of the Lambda function to be **uninstrumented**, or the name of the Lambda function (`--region` must be defined). |         |
+| `--functions-regex` |           | A regex pattern to match with the Lambda function name to be **uninstrumented**.                                          |         |
+| `--region`          | `-r`      | Default region to use, when `--function` is specified by the function name instead of the ARN.                            |         |
+| `--profile`         |           | Specify the AWS named profile credentials to use to uninstrument. Learn more about AWS named profiles [here][11].         |         |
+| `--forwarder`       |           | The ARN of the [datadog forwarder][9] to remove from this function.                                                       |         |
+| `--dry-run`         | `-d`      | Preview changes running command would apply.                                                                              | `false` |
 
 <br/>
 
-### 構成ファイル
+### Configuration file
 
-引数を指定する代わりに、プロジェクト内にコンフィギュレーションファイルを作成し、各デプロイで `datadog-ci lambda {instrument|uninstrument} --config datadog-ci.json` コマンドを実行します。`--config` 引数を使って `datadog-ci.json` を指定し、このコンフィギュレーションファイルの構造を使用します。
+Instead of supplying arguments, you can create a configuration file in your project and simply run the `datadog-ci lambda {instrument|uninstrument} --config datadog-ci.json` command on each deployment. Specify the `datadog-ci.json` using the `--config` argument, and use this configuration file structure:
 
 ```json
 {
@@ -157,53 +158,53 @@ datadog-ci lambda uninstrument -f <function-name> -f <another-function-name> -r 
 }
 ```
 
-## Lambda インスツルメンテーションのトラブルシューティング
+## Troubleshooting Lambda Instrumentation
 
-Lambda 関数の Datadog モニタリングで発生した問題をトラブルシューティングするには、プロジェクトディレクトリの root で `datadog-ci lambda flare` コマンドを実行します。このコマンドは、環境変数やコンフィギュレーションファイルなど、Lambda 関数に関する重要なデータを収集します。これらのファイルは、提供された Zendesk のケース ID に一致するチケットを介して Datadog サポートに送信されます。
+To troubleshoot issues you encounter with Datadog monitoring on your Lambda functions, run the `datadog-ci lambda flare` command in the root of your project directory. This command collects important data about the Lambda function, such as environment variables and the config file. These files will be submitted to Datadog support via a ticket matching the provided Zendesk case ID.
 
-**注**: このコマンドは `datadog-ci lambda instrument` を使用して Lambda 関数をインスツルメントしてもしなくても動作します。
+**Note**: This command works whether or not your Lambda functions were instrumented using `datadog-ci lambda instrument`.
 
-**例**
+**Examples**
 ```bash
-# Datadog サポートに単一関数でファイルを収集・送信する
+# Collect and send files to Datadog support for a single function
 datadog-ci lambda flare -f <function-arn> -c <case-id> -e <email-on-case-id>
 
-# 最近の CloudWatch ログを含める
+# Include recent CloudWatch logs
 datadog-ci lambda flare -f <function-name> -r <AWS region> -c <case-id> -e <email-on-case-id> --with-logs
 
-# ドライラン: データを収集するが、Datadog サポートには送信しない
+# Dry run: collect data, but don't send to Datadog support
 datadog-ci lambda flare -f <function-arn> -c <case-id> -e <email-on-case-id> --with-logs --dry-run
 ```
 
-**引数**
+**Arguments**
 
-| 引数              | 省略形 | 説明                                                                                                                           | デフォルト |
+| Argument              | Shorthand | Description                                                                                                                           | Default |
 | --------------------- | --------- | ------------------------------------------------------------------------------------------------------------------------------------- | ------- |
-| `--function`          | `-f`      | データを収集する Lambda 関数の ARN、または Lambda 関数の名前 (`--region` が定義されている必要があります)。                   |         |
-| `--region`            | `-r`      | `--function` が ARN ではなく関数名で指定されている場合に使用するデフォルトのリージョン。                                        |         |
-| `--case-id`           | `-c`      | ファイル送信先の Datadog ケース ID。                                                                                             |         |
-| `--email`             | `-e`      | 指定されたケース ID に関連付けられたメールアドレス。                                                                                      |         |
-| `--with-logs`         |           | 指定した関数の最近の CloudWatch ログを収集します。                                                                            | `false` |
-| `--start` および `--end` |           | 時間範囲内のログのみを収集します (`--with-logs` を含める必要があります)。どちらの引数も Unix Epoch からのミリ秒単位です。 |         |
-| `--dry-run`           | `-d`      | Datadog サポートに送信される収集データをプレビューします。                                                                        | `false` |
+| `--function`          | `-f`      | The ARN of the Lambda function to gather data for, or the name of the Lambda function (`--region` must be defined).                   |         |
+| `--region`            | `-r`      | Default region to use, when `--function` is specified by the function name instead of the ARN.                                        |         |
+| `--case-id`           | `-c`      | The Datadog case ID to send the files to.                                                                                             |         |
+| `--email`             | `-e`      | The email associated with the specified case ID.                                                                                      |         |
+| `--with-logs`         |           | Collect recent CloudWatch logs for the specified function.                                                                            | `false` |
+| `--start` and `--end` |           | Only gather logs within the time range (`--with-logs` must be included.) Both arguments are numbers in milliseconds since Unix Epoch. |         |
+| `--dry-run`           | `-d`      | Preview collected data which would be sent to Datadog support.                                                                        | `false` |
 
 
-## コミュニティ
+## Community
 
-製品のフィードバックや質問については、[Slack の Datadog コミュニティ](https://chat.datadoghq.com/)の `#serverless` チャンネルに参加してください。
+For product feedback and questions, join the `#serverless` channel in the [Datadog community on Slack](https://chat.datadoghq.com/).
 
 [1]: https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/setting-credentials-node.html
 [2]: https://github.com/DataDog/datadog-lambda-layer-js/releases
 [3]: https://github.com/DataDog/datadog-lambda-layer-python/releases
-[4]: https://docs.datadoghq.com/ja/serverless/datadog_lambda_library/extension
-[5]: https://docs.datadoghq.com/ja/account_management/api-app-keys/#api-keys
-[6]: https://docs.datadoghq.com/ja/serverless/troubleshooting/serverless_tagging/#the-env-tag
-[7]: https://docs.datadoghq.com/ja/serverless/troubleshooting/serverless_tagging/#the-version-tag
-[8]: https://docs.datadoghq.com/ja/serverless/troubleshooting/serverless_tagging/#the-service-tag
-[9]: https://docs.datadoghq.com/ja/serverless/forwarder/
-[10]: https://docs.datadoghq.com/ja/serverless/custom_metrics?tab=python#enabling-asynchronous-custom-metrics
+[4]: https://docs.datadoghq.com/serverless/datadog_lambda_library/extension
+[5]: https://docs.datadoghq.com/account_management/api-app-keys/#api-keys
+[6]: https://docs.datadoghq.com/serverless/troubleshooting/serverless_tagging/#the-env-tag
+[7]: https://docs.datadoghq.com/serverless/troubleshooting/serverless_tagging/#the-version-tag
+[8]: https://docs.datadoghq.com/serverless/troubleshooting/serverless_tagging/#the-service-tag
+[9]: https://docs.datadoghq.com/serverless/forwarder/
+[10]: https://docs.datadoghq.com/serverless/custom_metrics?tab=python#enabling-asynchronous-custom-metrics
 [11]: https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html#using-profiles
-[12]: https://docs.datadoghq.com/ja/integrations/guide/source-code-integration
+[12]: https://docs.datadoghq.com/integrations/guide/source-code-integration
 
 <!--
   This page is single-sourced:

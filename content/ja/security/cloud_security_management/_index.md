@@ -1,111 +1,116 @@
 ---
-algolia:
-  tags:
-  - 受信トレイ
-aliases:
-- /ja/security_platform/cloud_security_management/
-cascade:
-  algolia:
-    subcategory: 検索構文
-further_reading:
-- link: https://app.datadoghq.com/release-notes?category=Security%20%26%20Compliance
-  tag: リリースノート
-  text: Datadog セキュリティコンプライアンスの新機能を見る
-- link: /security/misconfigurations/setup
-  tag: ドキュメント
-  text: CSM Misconfigurations で誤構成の追跡を開始
-- link: /security/threats/setup
-  tag: ドキュメント
-  text: CSM Threats でカーネルレベルの脅威を解明する
-- link: https://www.datadoghq.com/blog/cyber-attack-simulation-with-stratus-red-team/
-  tag: GitHub
-  text: Stratus Red Team で AWS の脅威検出を高度化する
-- link: https://www.datadoghq.com/blog/kubernetes-security-best-practices/
-  tag: GitHub
-  text: Kubernetes アプリケーションを保護するためのベストプラクティス
-- link: https://www.datadoghq.com/blog/workload-security-evaluator/
-  tag: GitHub
-  text: Datadog の Workload Security Evaluator を使用したコンテナ環境での Atomic Red Team 検出テストの実行
-- link: https://www.datadoghq.com/blog/security-context-with-datadog-cloud-security-management/
-  tag: GitHub
-  text: Datadog Cloud Security Management による観測可能性データへのセキュリティコンテキストの追加
-- link: https://www.datadoghq.com/blog/security-labs-ruleset-launch/
-  tag: GitHub
-  text: Datadog Security Labs Ruleset で一般的なクラウドセキュリティリスクを修正する
-- link: https://www.datadoghq.com/blog/securing-cloud-native-applications/
-  tag: ブログ
-  text: クラウドネイティブ環境におけるアプリケーションセキュリティのベストプラクティス
-- link: https://www.datadoghq.com/blog/custom-detection-rules-with-datadog-cloud-security-management/
-  tag: ブログ
-  text: Datadog Cloud Security Management でクラウドの誤構成を検出するルールをカスタマイズする
-- link: https://www.datadoghq.com/blog/building-security-coverage-for-cloud-environments/
-  tag: ブログ
-  text: クラウド環境に対する十分なセキュリティカバレッジの構築
-- link: https://www.datadoghq.com/blog/cloud-security-study-learnings/
-  tag: ブログ
-  text: State of Cloud Security 調査から得られたキーポイント
 title: Cloud Security Management
+aliases:
+  - /security_platform/cloud_security_management/
+further_reading:
+  - link: "https://app.datadoghq.com/release-notes?category=Security%20%26%20Compliance"
+    tag: Release Notes
+    text: See What's New in Datadog Security Compliance
+  - link: /security/cloud_security_management/misconfigurations/
+    tag: Documentation
+    text: Start tracking misconfigurations with CSM Misconfigurations
+  - link: /security/threats/setup
+    tag: Documentation
+    text: Uncover kernel-level threats with CSM Threats
+  - link: "https://www.datadoghq.com/blog/cyber-attack-simulation-with-stratus-red-team/"
+    tag: Blog
+    text: Elevate AWS threat detection with Stratus Red Team
+  - link: "https://www.datadoghq.com/blog/kubernetes-security-best-practices/"
+    tag: Blog
+    text: Best practices for securing Kubernetes applications
+  - link: "https://www.datadoghq.com/blog/workload-security-evaluator/"
+    tag: Blog
+    text: Run Atomic Red Team detection tests in container environments with Datadog’s Workload Security Evaluator
+  - link: "https://www.datadoghq.com/blog/security-context-with-datadog-cloud-security-management/"
+    tag: Blog
+    text: Add security context to observability data with Datadog Cloud Security Management
+  - link: "https://www.datadoghq.com/blog/security-labs-ruleset-launch/"
+    tag: Blog
+    text: Fix common cloud security risks with the Datadog Security Labs Ruleset
+  - link: "https://www.datadoghq.com/blog/securing-cloud-native-applications/"
+    tag: Blog
+    text: Best practices for application security in cloud-native environments
+  - link: "https://www.datadoghq.com/blog/custom-detection-rules-with-datadog-cloud-security-management/"
+    tag: Blog
+    text: Customize rules for detecting cloud misconfigurations with Datadog Cloud Security Management
+  - link: "https://www.datadoghq.com/blog/building-security-coverage-for-cloud-environments/"
+    tag: Blog
+    text: Build sufficient security coverage for your cloud environment
+  - link: "https://www.datadoghq.com/blog/cloud-security-study-learnings/"
+    tag: Blog
+    text: Key learnings from the State of Cloud Security study
+  - link: "https://www.datadoghq.com/blog/cloud-security-malware-detection/"
+    tag: Blog
+    text: Detect malware in your containers with Datadog Cloud Security Management
+  - link: "https://www.datadoghq.com/blog/security-posture-csm/"
+    tag: Blog
+    text: Report on changes to your security posture with Cloud Security Management
+algolia:
+  tags: [inbox]
+cascade:
+    algolia:
+        subcategory: Cloud Security Management
 ---
 
+Datadog Cloud Security Management (CSM) delivers real-time threat detection and continuous configuration audits across your entire cloud infrastructure, all in a unified view for seamless collaboration and faster remediation. Powered by observability data, security teams can determine the impact of a threat by tracing the full attack flow and identify the resource owner where a vulnerability was triggered.
+
+CSM leverages the Datadog Agent and platform-wide cloud integrations and includes:
+
+- [**Threats**][1]: Monitors file, network, and process activity across your environment to detect real-time threats to your infrastructure.
+- [**Misconfigurations**][2]: Tracks the security hygiene and compliance posture of your production environment, automates audit evidence collection, and enables you to remediate misconfigurations that leave your organization vulnerable to attacks.
+- [**Identity Risks**][8]: Provides in-depth visibility into your organization's AWS IAM risks and enables you to detect and resolve identity risks on an ongoing basis.
+- [**Vulnerabilities**][9]: Leverages infrastructure observability to detect, prioritize, and manage vulnerabilities in your organization's containers and hosts.
+
+{{< img src="security/csm/csm_overview_2.png" alt="Cloud Security Management in Datadog" width="100%">}}
+
+## Track your organization's health
+
+Available for [CSM Misconfigurations][2], the [security posture score][5] helps you track your organization's overall health. The score represents the percentage of your environment that satisfies all of your active out-of-the-box cloud and infrastructure compliance rules.
+
+Improve your organization's score by remediating misconfigurations, either by resolving the underlying issue or by muting the misconfiguration.
+
+{{< img src="security/csm/health_scores.png" alt="The posture score on the CSM overview page tracks your organization's overall health" width="100%">}}
+
+## Explore and remediate issues
+
+Use the [Explorers][7] to review and remediate your organization's security detections. View detailed information about a detection, including guidelines and remediation steps. [Send real-time notifications][6] when a threat is detected in your environment, and use tags to identify the owner of an impacted resource.
+
+{{< img src="security/csm/explorers_page.png" alt="CSM Explorers page" width="100%">}}
+
+## Investigate resources
+
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">選択した <a href="/getting_started/site">Datadog サイト</a> ({{< region-param key="dd_site_name" >}}) では、Cloud Security Management Misconfigurations はサポートされていません。</div>
+<div class="alert alert-warning">Resource Catalog is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-Datadog Cloud Security Management (CSM) は、クラウドインフラストラクチャー全体にわたるリアルタイムの脅威検出と継続的な構成監査を、シームレスなコラボレーションと迅速な修復のための統合ビューで実現します。観測可能性データを活用することで、セキュリティチームは、攻撃フロー全体をトレースして脅威の影響を特定し、脆弱性がトリガーされたリソース所有者を特定することができます。
+<div class="alert alert-info">Resource Catalog is in beta.</div>
 
-CSM は、Datadog Agent とプラットフォーム全体のクラウドインテグレーションを活用し、次の機能を備えています。
+Use the [Resource Catalog][12] to view specific misconfigurations and threats that have been reported on the hosts and resources in your environments. See [Resource Catalog][13] for more information.
 
-- [**Threats**][1]: 環境全体にわたるファイル、ネットワーク、プロセスのアクティビティを監視し、インフラストラクチャーに対するリアルタイムの脅威を検出します。
-- [**Misconfigurations**][2]: 本番環境のセキュリティ衛生とコンプライアンスポスチャを追跡し、監査証拠の収集を自動化し、攻撃に対して脆弱な誤構成を修正することを可能にします。
-- [**Identity Risks**][8]: 組織の AWS IAM リスクに対する詳細な可視性を提供し、継続的にアイデンティティリスクを検出して解決できるようにします。
-- [**Vulnerabilities**][9]: インフラストラクチャーの観測可能性を活用して、組織のコンテナとホストの脆弱性を検出、優先順位付け、管理します。
+{{< img src="infrastructure/resource_catalog/resource_catalog_infra.png" alt="Resource Catalog map view displaying host and cloud resources grouped by category and misconfigurations." style="width:100%;" >}}
 
-{{< img src="security/csm/csm_overview_2.png" alt="Datadog の Cloud Security Management" width="100%">}}
+## Subscribe to weekly digest reports
 
-## 組織の健全性の追跡
+Receive a weekly summary of Cloud Security Management activity over the past week, including important new security issues discovered in the last seven days. Subscriptions to the weekly digest report are managed on a per user basis. To [subscribe to the weekly digest report][11], you must have the `security_monitoring_signals_read` permission.
 
-[CSM Misconfigurations][2] で利用可能な[セキュリティポスチャスコア][5]は、組織の全体的な健全性を追跡するのに役立ちます。このスコアは、すぐに使えるアクティブなクラウドおよびインフラストラクチャーコンプライアンスルールをすべて満たしている環境の割合を示します。
+## Next steps
 
-根本的な問題を解決するか、誤構成をミュートすることによって誤構成を修正し、組織のスコアを向上させます。
+To get started with CSM, navigate to the [**Cloud Security Management Setup**][3] page in Datadog, which has detailed steps on how to set up and configure CSM. For more information, see [Setting Up Cloud Security Management][10].
 
-{{< img src="security/csm/health_scores.png" alt="CSM の概要ページに表示されるポスチャスコアは、組織の全体的な健全性を追跡します" width="100%">}}
-
-## 問題の調査と対応
-
-[Explorers][7] を利用して、組織のセキュリティ検出をレビューし、対応を行います。ガイドラインや修復ステップなど、検出に関する詳細情報を確認できます。環境で脅威が検出されると、[リアルタイム通知を送信][6]し、タグを使用して影響を受けるリソースの所有者を特定します。
-
-{{< img src="security/csm/explorers_page.png" alt="CSM Explorers ページ" width="100%">}}
-
-## リソースの調査
-
-<div class="alert alert-info">Resource Catalog はベータ版です。</div>
-
-[Resource Catalog][12] を使用すると、環境内のホストやリソースで報告された特定の誤構成や脅威を確認できます。詳細については、[Resource Catalog][13] を参照してください。
-
-{{< img src="infrastructure/resource_catalog/resource_catalog_infra.png" alt="カテゴリーと誤構成ごとにグループ化されたホストとクラウドのリソースを表示する Resource Catalog マップビュー。" style="width:100%;" >}}
-
-## ウィークリーダイジェストレポートのサブスクライブ
-
-過去 1 週間の Cloud Security Management アクティビティについて、直近 7 日間で発見された重要な新規セキュリティ問題を含むウィークリーサマリーを受け取ります。ウィークリーダイジェストレポートのサブスクリプションは、ユーザー単位で管理されます。[ウィークリーダイジェストレポートにサブスクライブする][11]には、`security_monitoring_signals_read` 権限が必要です。
-
-## 次のステップ
-
-CSM を開始するには、Datadog の [**Security** > **Setup**][3] セクションに移動し、CSM のセットアップと構成方法に関する詳細な手順を参照してください。詳しくは、[Cloud Security Management の設定][10]を参照してください。
-
-## その他の参考資料
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/security/threats/
-[2]: /ja/security/misconfigurations/
-[3]: https://app.datadoghq.com/security/configuration
+[1]: /security/threats/
+[2]: /security/cloud_security_management/misconfigurations/
+[3]: https://app.datadoghq.com/security/configuration/csm/setup
 [4]: https://app.datadoghq.com/security/csm
-[5]: /ja/glossary/#posture-score
-[6]: /ja/security/notifications/
+[5]: /glossary/#posture-score
+[6]: /security/notifications/
 [7]: https://app.datadoghq.com/security/compliance
-[8]: /ja/security/identity_risks/
-[9]: /ja/security/vulnerabilities/
-[10]: /ja/security/cloud_security_management/setup/
+[8]: /security/cloud_security_management/identity_risks/
+[9]: /security/cloud_security_management/vulnerabilities/
+[10]: /security/cloud_security_management/setup/
 [11]: https://app.datadoghq.com/security/configuration/reports
 [12]: https://app.datadoghq.com/infrastructure/catalog
-[13]: /ja/infrastructure/resource_catalog
+[13]: /infrastructure/resource_catalog

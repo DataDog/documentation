@@ -1,36 +1,57 @@
 ---
-description: .
+title: Correlate APM Data with Other Telemetry
+kind: documentation
+description: Learn how to connect APM data with telemetry collected by additional Datadog products.
 further_reading:
-- link: /logs/guide/ease-troubleshooting-with-cross-product-correlation/
-  tag: Documentation
-  text: クロスプロダクト相関で容易にトラブルシューティング
-title: APM データと他のテレメトリーとの接続
+  - link: /logs/guide/ease-troubleshooting-with-cross-product-correlation/
+    tag: Documentation
+    text: Ease troubleshooting with cross-product correlation
+  - link: "https://www.datadoghq.com/blog/link-dbm-and-apm/"
+    tag: Blog
+    text: Seamlessly correlate DBM and APM telemetry to understand end-to-end query performance
 ---
 
-Datadog の様々な製品によるデータの相関付けは、数クリックでビジネスインパクトを推定し、問題の根本原因を見つけるのに役立つコンテキストを提供します。受信データ間の接続を設定することで、エクスプローラーやダッシュボードでの迅速な行き来を促します。
+Correlating data by various Datadog products gives context to help estimate the business impact and find the root cause of an issue in a few clicks. Set up connections between incoming data to facilitate quick pivots in your explorers and dashboards.
 
-## ログとトレースの接続
+## Correlate Database Monitoring and traces
 
-トレース ID をログに挿入し、統合サービスタグ付けを活用して、特定のサービスやバージョンに関連する正確なログ、または観測されたトレースに関連するすべてのログを検索することができます。[ログとトレースの接続][1]を参照し、設定してください。
+Inject trace IDs into DBM data collection to correlate the two data sources. View database information in APM and APM information in DBM to see a comprehensive, unified view of your system's performance. See [Connect DBM and Traces][4] to set it up.
 
-{{< img src="tracing/index/ConnectLogsWithTraces.png" alt="ログとトレースをつなげる" style="width:100%;">}}
+{{< img src="database_monitoring/dbm_filter_by_calling_service.png" alt="Filter your database hosts by the APM services that call them.">}}
 
-## RUM とトレースの接続
 
-[RUM とトレースの接続][2]により、フロントエンドのビューで収集したデータをバックエンドのトレースやスパンと相関付けることができます。スタックのあらゆる場所で問題を特定し、ユーザーが経験していることを理解することができます。
+## Correlate logs and traces
 
-{{< img src="tracing/index/RumTraces.png" alt="RUM セッションとトレースを接続する" style="width:100%;">}}
+Inject trace IDs into logs, and leverage unified service tagging to find the exact logs associated with a specific service and version, or all logs correlated to an observed trace. See [Connect Logs and Traces][1] to set it up.
 
-##  Synthetics とトレースの接続
+{{< img src="tracing/index/ConnectLogsWithTraces.png" alt="Connect Logs And Traces" style="width:100%;">}}
 
-失敗した Synthetic テストのデータを、関連するトレースを掘り下げることで、根本原因まで直接たどることができます。[Synthetic とトレースの接続][3]で、コードのトラブルシューティングをスピードアップさせます。
+## Correlate RUM and traces
 
-{{< img src="tracing/index/Synthetics.png" alt="Synthetic テスト" style="width:100%;">}}
+Correlate data collected in front end views with trace and spans on the back end by [Connecting RUM and Traces][2]. Pinpoint issues anywhere in your stack and understand what your users are experiencing. 
 
-## その他の参考資料
+{{< img src="tracing/index/RumTraces.png" alt="Connect RUM sessions and traces" style="width:100%;">}}
+
+## Correlate synthetic tests and traces
+
+Follow the data from failing synthetic tests directly through to the root causes by digging into related traces. [Connect Synthetics and Traces][3] to speed up troubleshooting your code.
+
+{{< img src="tracing/index/Synthetics.png" alt="Synthetic tests" style="width:100%;">}}
+
+## Correlate profiles and traces
+
+Performance data for application code that has both tracing and profiling enabled is automatically correlated, letting you move between the two types of analysis to troubleshoot and problem solve. You can move directly from span information to profiling data on the Code Hotspots tab, and find specific lines of code related to performance issues. Similarly, you can debug slow and resource-consuming endpoints directly in the Profiling UI. 
+
+Read [Investigate Slow Traces or Endpoints][5] for more information.
+
+{{< img src="profiler/code_hotspots_tab-2.mp4" alt="Code Hotspots tab shows profiling information for a APM trace span" video=true >}}
+
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/tracing/other_telemetry/connect_logs_and_traces/
-[2]: /ja/real_user_monitoring/connect_rum_and_traces/
-[3]: /ja/synthetics/apm/
+[1]: /tracing/other_telemetry/connect_logs_and_traces/
+[2]: /real_user_monitoring/platform/connect_rum_and_traces/
+[3]: /synthetics/apm/
+[4]: /database_monitoring/connect_dbm_and_apm/
+[5]: /profiler/connect_traces_and_profiles/

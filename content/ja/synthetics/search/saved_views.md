@@ -1,53 +1,54 @@
 ---
+title: Saved Views
+kind: documentation
 further_reading:
 - link: /synthetics/search/
-  tag: ドキュメント
-  text: Synthetic テストを検索・管理する方法を説明します
-title: 保存ビュー
+  tag: Documentation
+  text: Learn how to search and manage your Synthetic tests
 ---
 
-## 概要
+## Overview
 
-保存ビューにより、 [Synthetic Tests ページ][1]の**検索と管理**の状態を保存し、スコープ付きクエリ、関連ファセット、[テストカバレッジウィジェット][3]、および時間範囲にすばやくアクセスできるため、効果的なトラブルシューティングを行うことができます。
+Saved views allow you to save the state of the **Search and Manage** [Synthetic Tests page][1]. They enable effective troubleshooting by providing you with quick access to scoped queries, relevant facets, [test coverage widgets][3], and the time range. 
 
-また、保存ビューを使用して、チームメイトと共通のクエリや構成を共有することもできます。
+You can also use saved views to share common queries and configurations with your teammates.
 
-## 保存ビューの作成
+## Create a saved view
 
-保存ビューにアクセスするには、[Synthetic Tests ページ][1]の **Synthetic Monitoring & Continuous Testing** の左にある **> Views** を展開します。保存ビューを作成するには、Synthetic テストを検索し、**+ Create a New Saved View** をクリックします。 
+To access your saved views, expand **> Views** to the left of **Synthetic Monitoring & Continuous Testing** in the [Synthetic Tests page][1]. To create a saved view, search through your Synthetic tests and click **+ Save new view as**. 
 
-{{< img src="synthetics/search/create_a_new_saved_view.png" alt="Synthetic Tests ページで新規の保存ビューを作成する" style="width:100%" >}}
+{{< img src="synthetics/search/create_a_new_saved_view_2.png" alt="Create a new saved view in the Synthetic Tests page" style="width:100%" >}}
 
-[デフォルトビュー](#default-views)を除き、保存ビューはすべて、ユーザーが作成したいカスタム保存ビューも含め、組織全体で共有されます。これらの保存ビューは組織内の誰でも編集可能で、ビューを作成したユーザーアバターが表示されます。Synthetic Tests ページの現行のコンテンツから保存ビューを作成するには、名前を入力して **Save** をクリックします。
+All saved views except for the [default view](#default-views) are shared across the organization, including custom saved views created by users. These are editable by anyone in your organization and display the user's avatar who created the view. Enter a name and click **Save** to create a saved view from the current content in the Synthetic Tests page.
 
-以下が可能です。
+You can: 
 
-- 保存ビューをロードまたはリロード
-- 保存ビューを現在のビューの構成で更新
-- 保存ビューの名前を変更または削除
-- ショートリンクを使用して保存ビューを共有
-- 保存ビューをお気に入りに登録し、ナビゲーションメニューからアクセスできる Saved Views リストに追加
+- Load or reload a saved view
+- Update a saved view with the current view's configuration
+- Rename or delete a saved view
+- Share a saved view through a short link
+- Favorite a saved view to add it to your Saved Views list accessible in the navigation menu
 
-<div class="alert alert-info">更新、名前の変更、削除の操作は、読み取り専用ユーザーには無効です。</div>
+<div class="alert alert-info">Update, rename, and delete actions are disabled for read-only users.</div>
 
-## デフォルトビュー
+## Default views
 
-[Synthetic Tests ページ][2]では、[保存ビュー](#create-a-saved-view)をデフォルトのランディングページに設定することができます。デフォルトビューはユーザーごとに設定され、組織には影響がありません。
+You can set a [saved view](#create-a-saved-view) to be your default landing page in the [Synthetic Tests page][2]. Default views are set per user and have no impact on your organization. 
 
-デフォルトの保存ビューを一時的に上書きするには、検索クエリのファセットを追加して、**Update your default view** をクリックします。新規の保存ビューを作成するには、**+ Create a New Saved View** ボタンをクリックします。
+Temporarily override your default saved view by adding facets to your search query and clicking **Update your default view**. To create a new saved view, Click the **+ Save new view as** button.
 
-{{< img src="synthetics/search/update_your_default_view.png" alt="Synthetic Tests ページでデフォルトビューを更新する" style="width:100%" >}}
+{{< img src="synthetics/search/update_your_default_view_2.png" alt="Update your default view in the Synthetic Tests page" style="width:100%" >}}
 
-**Views** パネルのデフォルトビューエントリでは、以下のアクションが可能です。
+In the default view entry in the **Views** panel, you can:
 
-- エントリをクリックして、デフォルトビューをリロード
-- 現在のパラメーターでデフォルトビューを更新
-- デフォルトビューをデフォルト設定にリセットして、再起動
+- Click on the entry to reload your default view
+- Update your default view with the current parameters
+- Reset your default view back to the default setting for a fresh restart
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/synthetics/tests
-[2]: /ja/synthetics/search/
-[3]: /ja/synthetics/test_coverage/
+[2]: /synthetics/search/
+[3]: /synthetics/test_coverage/

@@ -1,36 +1,37 @@
 ---
+title: Agent Rate Limits
+kind: Documentation
 aliases:
-- /ja/tracing/troubleshooting/apm_rate_limits
-title: Agent 率制限
+  - /tracing/troubleshooting/apm_rate_limits
 ---
 
-## 最大接続制限
+## Maximum connection limit
 
-Agent ログに以下のエラーメッセージが表示される場合、デフォルトの APM 接続制限である 2000 を超えています。
+If you encounter the following error message in your Agent logs, the default APM connection limit of 2000 has been exceeded:
 
 ```
 ERROR | (pkg/trace/logutil/throttled.go:38 in log) | http.Server: http: Accept error: request has been rate-limited; retrying in 80ms
 ```
 
-Agent の APM 接続制限を増やすには、Agent のコンフィギュレーションファイル (`apm_config:` セクションの下) 内で `connection_limit` 属性を構成します。コンテナ化されたデプロイメント (Docker、Kubernetes など) の場合は、`DD_APM_CONNECTION_LIMIT` 環境変数を使用します。
+To increase the APM connection limit for the Agent, configure the `connection_limit` attribute within the Agent's configuration file (underneath the `apm_config:` section). For containerized deployments (for example, Docker or Kubernetes), use the `DD_APM_CONNECTION_LIMIT` environment variable.
 
-## 最大メモリ制限
+## Maximum memory limit
 
-Agent のログに以下のエラーメッセージが表示された場合、Agent の最大メモリ使用量が 150% を超えたことを意味します。
+If you encounter the following error message in your Agent logs, it means the Agent has exceeded the max memory usage by 150%:
 
 ```
 CRITICAL | (pkg/trace/api/api.go:703 in watchdog) | Killing process. Memory threshold exceeded: 8238.08M / 715.26M
 CRITICAL | (pkg/trace/osutil/file.go:39 in Exitf) | OOM
 ```
 
-Agent の最大メモリ制限を増やすには、Agent のコンフィギュレーションファイルの `apm_config` セクションで `max_memory` 属性を構成します。コンテナ型のデプロイメント (例えば、Docker や Kubernetes) の場合は、環境変数 `DD_APM_MAX_MEMORY` を使用します。
+To increase the max memory limit for the Agent, configure the `max_memory` attribute in the `apm_config` section of the Agent's configuration file. For containerized deployments (for example, Docker or Kubernetes), use the `DD_APM_MAX_MEMORY` environment variable.
 
-Kubernetes などのオーケストレーターでメモリ制限を処理したい場合、Datadog Agent 7.23.0 以降、この制限を `0` に設定することで無効にすることができます。
+If you'd like your orchestrator (such as Kubernetes) to handle your memory limits, this limit can be disabled by setting it to `0` since Datadog Agent 7.23.0.
 
-## 最大 CPU 使用率
+## Maximum CPU percentage
 
-この設定は、APM Agent が使用する最大 CPU パーセントを定義します。Kubernetes 以外の環境では、デフォルトで 50 に設定されており、これは 0.5 コアに相当します (100 = 1 コア)。この制限に達すると、CPU 使用量が再び制限を下回るまでペイロードは拒否されます。これは `datadog.trace_agent.receiver.ratelimit` によって反映され、現在ドロップされているペイロードの割合を表します (値が 1 の場合は、トレースがドロップされていないことを意味します)。これは、[Service Table View][1] で、`Limited Resource` という警告として表示されることもあります。
+This setting defines the maximum CPU percentage that the APM agent should be using. In non-Kubernetes environments it defaults to 50, which is equivalent to 0.5 cores (100 = 1 core). After this limit is reached, payloads will be refused until the CPU usage goes below the limit again. This is reflected by the `datadog.trace_agent.receiver.ratelimit` which represents the percentage of payloads that are currently being dropped (a value of 1 meaning that no traces are being dropped). This may also be visible in the [Service Table View][1] as a `Limited Resource` warning.
 
-オーケストレーター (または外部サービス) に Datadog Agent のリソース制限を管理させたい場合、Datadog では環境変数 `DD_APM_MAX_CPU_PERCENT` を `0` に設定してこれを無効にすることを推奨します (Datadog Agent 7.23.0 からサポートされるようになりました)。
+If you want your orchestrator (or an external service) to manage resource limitations for the Datadog Agent, Datadog recommends disabling this by setting the environment variable `DD_APM_MAX_CPU_PERCENT` to `0` (supported since Datadog Agent 7.23.0).
 
-[1]: /ja/tracing/trace_pipeline/ingestion_controls/#service-table-view
+[1]: /tracing/trace_pipeline/ingestion_controls/#service-table-view

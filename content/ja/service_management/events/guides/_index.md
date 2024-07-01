@@ -1,43 +1,48 @@
 ---
-aliases:
-- /ja/developers/events/
-- /ja/event/guides/
-- /ja/events/guides/
-cascade:
-  algolia:
-    category: ガイド
-    rank: 20
-    subcategory: イベントガイド
+title: Events Guides
+kind: documentation
+private: true
 disable_toc: true
+aliases:
+- /developers/events/
+- /event/guides/
+- /events/guides/
 further_reading:
 - link: /service_management/events/explorer/
   tag: Documentation
-  text: Datadog イベントエクスプローラー
+  text: Datadog Events Explorer
 - link: /monitors/types/event/
   tag: Documentation
-  text: イベントモニター
-private: true
-title: イベントガイド
+  text: Event Monitors
+cascade:
+    algolia:
+        rank: 20
+        category: Guide
+        subcategory: Events Guides
 ---
 
-イベントは、エンジニア (開発、運用、セキュリティ) が注目すべきアクティビティの記録です。
+An event represents any record of activity noteworthy for engineers (devs, ops, and security). 
 
-{{< whatsnext desc="カスタムイベントを Datadog に送信します。">}}
-    {{< nextlink href="/service_management/events/guides/agent/" >}}カスタム Agent チェック{{< /nextlink >}}
+{{< whatsnext desc="Send your custom events to Datadog:">}}
+    {{< nextlink href="/service_management/events/guides/agent/" >}}Custom Agent Check{{< /nextlink >}}
     {{< nextlink href="/service_management/events/guides/dogstatsd/" >}}DogStatsD{{< /nextlink >}}
-    {{< nextlink href="/service_management/events/guides/email/" >}}メール{{< /nextlink >}}
+    {{< nextlink href="/service_management/events/guides/email/" >}}Email{{< /nextlink >}}
     {{< nextlink href="/api/v1/events/#post-an-event" >}}Datadog API{{< /nextlink >}}
 {{< /whatsnext >}}
 
-{{< whatsnext desc="イベントには必ずタグを付けてください。">}}
-{{< nextlink href="/service_management/events/guides/recommended_event_tags/" >}}イベントへのタグ付けのベストプラクティス{{< /nextlink >}}
+{{< whatsnext desc="Ensure your events are tagged:">}}
+    {{< nextlink href="/service_management/events/guides/recommended_event_tags/" >}}Best Practices for Tagging Events{{< /nextlink >}}
 {{< /whatsnext >}}
 
-{{< whatsnext desc="その他のガイド:">}}
-    {{< nextlink href="/service_management/events/guides/migrating_to_new_events_features/" >}}新しいイベント機能への移行{{< /nextlink >}}
+{{< whatsnext desc="Learn more about Event Management use cases:">}}
+    {{< nextlink href="/service_management/events/guides/usage" >}}Use cases for events{{< /nextlink >}}
+{{< /whatsnext >}}
+
+{{< whatsnext desc="Other guides:">}}
+    {{< nextlink href="/service_management/events/guides/migrating_to_new_events_features/" >}}Migrating to the New Events Features{{< /nextlink >}}
 {{< /whatsnext >}}
 
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

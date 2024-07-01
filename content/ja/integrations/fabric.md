@@ -1,58 +1,58 @@
 ---
-categories:
-- orchestration
-dependencies: []
-description: Datadog イベントストリームで Fabric タスクを参照および検索。
-doc_link: https://docs.datadoghq.com/integrations/fabric/
-draft: false
-git_integration_title: fabric
-has_logo: true
-integration_id: fabric
-integration_title: Fabric
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: '1.0'
-name: fabric
-public_title: Datadog-Fabric インテグレーション
-short_description: Datadog イベントストリームで Fabric タスクを参照および検索。
-version: '1.0'
+"categories":
+- "orchestration"
+"custom_kind": "integration"
+"dependencies": []
+"description": "See and search on Fabric tasks in your Datadog event stream."
+"doc_link": "https://docs.datadoghq.com/integrations/fabric/"
+"draft": false
+"git_integration_title": "fabric"
+"has_logo": true
+"integration_id": "fabric"
+"integration_title": "Fabric"
+"integration_version": ""
+"is_public": true
+"manifest_version": "1.0"
+"name": "fabric"
+"public_title": "Datadog-Fabric Integration"
+"short_description": "See and search on Fabric tasks in your Datadog event stream."
+"version": "1.0"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-## 概要
+## Overview
 
-**警告**: このインテグレーションは非推奨になりました。今後、積極的な開発は行われません。
+**Warning**: This integration has been deprecated and is not being actively developed anymore.
 
-Fabric を Datadog に接続すると、以下のことができます。
+Connect Fabric to Datadog in order to:
 
-- イベントストリームでデプロイイベントをキャプチャおよび検索できます。
-- デプロイイベントをダッシュボード上のメトリクスの変化と関連付けることができます。
+- Capture and search for deploy events in the event stream.
+- Correlate deploy events with metric changes on dashboards.
 
-## 計画と使用
+## Setup
 
-### ブラウザトラブルシューティング
+### Configuration
 
-1. dogapi パッケージをインストールします。
+1. Install the dogapi package:
 
     ```shell
     sudo easy_install --upgrade dogapi
     ```
 
-    または
+    or:
 
     ```shell
     sudo pip install dogapi
     ```
 
-2. dogapi をインポートし、API キーを設定します。
+2. Import dogapi and configure your API key:
 
     ```python
     from dogapi.fab import setup, notify
     setup("<YOUR_DATADOG_API_KEY")
     ```
 
-3. Datadog に接続する各タスクに notify デコレータを追加します。@notify は必ず @task のすぐ上に記述してください
+3. Add the notify decorator to each task you want to connect to Datadog. Make sure @notify occurs just above @task
 
     ```python
     @notify
@@ -61,22 +61,23 @@ Fabric を Datadog に接続すると、以下のことができます。
         # do things
     ```
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 
-Fabric インテグレーションには、メトリクスは含まれません。
+The Fabric integration does not include any metric.
 
-### ヘルプ
+### Events
 
-Fabric インテグレーションには、イベントは含まれません。
+The Fabric integration does not include any events.
 
-### ヘルプ
+### Service Checks
 
-Fabric インテグレーションには、サービスのチェック機能は含まれません。
+The Fabric integration does not include any service checks.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][1]までお問合せください。
+Need help? Contact [Datadog support][1].
 
-[1]: https://docs.datadoghq.com/ja/help/
+[1]: https://docs.datadoghq.com/help/
+

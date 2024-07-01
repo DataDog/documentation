@@ -1,29 +1,29 @@
 ---
+title: Increase the Number of Log Files Tailed by the Agent
+kind: guide
 aliases:
-- /ja/logs/faq/how-to-increase-the-number-of-log-files-tailed-by-the-agent
+  - /logs/faq/how-to-increase-the-number-of-log-files-tailed-by-the-agent
 further_reading:
 - link: /logs/faq/how-to-send-logs-to-datadog-via-external-log-shippers/
-  tag: よくあるご質問
-  text: 外部ログシッパーを経由して Datadog にログを送信するには？
+  tag: FAQ
+  text: How to Send Logs to Datadog via External Log Shippers?
 - link: /logs/log_configuration/parsing
-  tag: ドキュメント
-  text: パースの詳細
+  tag: Documentation
+  text: Learn more about parsing
 - link: /logs/faq/how-to-investigate-a-log-parsing-issue/
-  tag: よくあるご質問
-  text: ログのパースに関する問題を調査する方法
-kind: ガイド
-title: Agent によって追跡されるログファイルの数を増やす
+  tag: FAQ
+  text: How to investigate a log parsing issue?
 ---
 
-デフォルトでは、Agent は Windows と MacOS で最大 200 ログファイル、その他の OS で最大 500 ログファイルを追跡することができます。この制限は、巨大なディレクトリにワイルドカードが設定された場合のパフォーマンスの問題を回避するために設定されています。
+By default the Agent can tail up to 200 log files on Windows and MacOS, and 500 log files on other operating systems. This limit is set to avoid performances issue when wildcards are set on huge directories.
 
-この制限を増やすには、Agent のコンフィギュレーションファイル (`/etc/datadog-agent/datadog.yaml`) の `logs_config` セクションで `open_files_limit` の値を設定します。
+To increase this limit, set the value of `open_files_limit` in the Agent's configuration file (`/etc/datadog-agent/datadog.yaml`) in the `logs_config` section:
 
 ```yaml
 logs_config:
   open_files_limit: 500
 ```
 
-コンテナ環境では、`DD_LOGS_CONFIG_OPEN_FILES_LIMIT` 環境変数を設定することができます。
+For containerized environments you can set the `DD_LOGS_CONFIG_OPEN_FILES_LIMIT` environment variable.
 
-**注**: 追跡されるログファイルの制限を増やすと、Agent のリソース消費量が増加する場合があります。
+**Note**: Increasing the tailed logs files limit might increase the resource consumption of the Agent.

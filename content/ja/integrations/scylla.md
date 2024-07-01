@@ -1,102 +1,103 @@
 ---
-app_id: Scylla
-app_uuid: 1d655820-3010-4ae3-8273-a3798321d4d4
-assets:
-  dashboards:
-    Scylla Overview: assets/dashboards/overview.json
-  integration:
-    configuration:
-      spec: assets/configuration/spec.yaml
-    events:
-      creates_events: false
-    metrics:
-      check: scylla.node.operation_mode
-      metadata_path: metadata.csv
-      prefix: Scylla.
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_name: Scylla
-  logs:
-    source: Scylla
-  monitors:
-    '[Scylla] Server is shutting down': assets/monitors/instance_down.json
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com (日本語対応)
-  support_email: help@datadoghq.com
-categories:
-- キャッシュ
-- data store
-- ログの収集
-dependencies:
-- https://github.com/DataDog/integrations-core/blob/master/scylla/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: Scylla
-integration_id: Scylla
-integration_title: Scylla
-integration_version: 2.3.0
-is_public: true
-kind: インテグレーション
-manifest_version: 2.0.0
-name: Scylla
-public_title: Scylla
-short_description: クラスターのリソース、レイテンシー、健全性などを追跡
-supported_os:
+"app_id": "scylla"
+"app_uuid": "1d655820-3010-4ae3-8273-a3798321d4d4"
+"assets":
+  "dashboards":
+    "Scylla Overview": assets/dashboards/overview.json
+  "integration":
+    "auto_install": true
+    "configuration":
+      "spec": assets/configuration/spec.yaml
+    "events":
+      "creates_events": false
+    "metrics":
+      "check": scylla.node.operation_mode
+      "metadata_path": metadata.csv
+      "prefix": scylla.
+    "service_checks":
+      "metadata_path": assets/service_checks.json
+    "source_type_id": !!int "10087"
+    "source_type_name": Scylla
+  "monitors":
+    "[Scylla] Server is shutting down": assets/monitors/instance_down.json
+"author":
+  "homepage": "https://www.datadoghq.com"
+  "name": Datadog
+  "sales_email": info@datadoghq.com
+  "support_email": help@datadoghq.com
+"categories":
+- caching
+- data stores
+- log collection
+"custom_kind": "integration"
+"dependencies":
+- "https://github.com/DataDog/integrations-core/blob/master/scylla/README.md"
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "scylla"
+"integration_id": "scylla"
+"integration_title": "Scylla"
+"integration_version": "2.7.1"
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "scylla"
+"public_title": "Scylla"
+"short_description": "Track cluster resources, latencies, health, and much more."
+"supported_os":
 - linux
 - windows
 - macos
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Caching
-  - Category::Data Store
-  - Category::Log Collection
-  - Supported OS::Linux
-  - Supported OS::Windows
-  - Supported OS::macOS
-  configuration: README.md#Setup
-  description: クラスターのリソース、レイテンシー、健全性などを追跡
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Scylla
+"tile":
+  "changelog": CHANGELOG.md
+  "classifier_tags":
+  - "Category::Caching"
+  - "Category::Data Stores"
+  - "Category::Log Collection"
+  - "Supported OS::Linux"
+  - "Supported OS::Windows"
+  - "Supported OS::macOS"
+  "configuration": "README.md#Setup"
+  "description": Track cluster resources, latencies, health, and much more.
+  "media": []
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": Scylla
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## 概要
+## Overview
 
-Datadog-[Scylla][1] のインテグレーションは、デフォルトで公開されたメトリクスの大部分を収集します。その際、ユーザー特有のニーズを基づいて追加のグループをカスタマイズすることもできます。
+This Datadog-[Scylla][1] integration collects a majority of the exposed metrics by default, with the ability to customize additional groups based on specific user needs.
 
-Scylla は「ドロップインの Apache Cassandra 代替」として使用できる、オープンソースの NoSQL データストアです。Cassandra モデルを最新のハードウェアに対応するように再設計し、必要なクラスターのサイズを減らしながら理想的なスループットとパフォーマンスを向上させています。
+Scylla is an open-source NoSQL data store that can act as "a drop-in Apache Cassandra alternative." It has rearchitected the Cassandra model tuned for modern hardware, reducing the size of required clusters while improving theoretical throughput and performance.
 
-## セットアップ
+## Setup
 
-以下の手順に従って、このチェックをインストールし、ホストで実行中の Agent に対して構成します。
+Follow the instructions below to install and configure this check for an Agent running on a host.
 
-### インストール
+### Installation
 
-Scylla チェックは [Datadog Agent][2] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
+The Scylla check is included in the [Datadog Agent][2] package. No additional installation is needed on your server.
 
-### コンフィギュレーション
+### Configuration
 
-1. Scylla のパフォーマンスデータを収集するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `scylla.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル scylla.d/conf.yaml][3] を参照してください。
+1. Edit the `scylla.d/conf.yaml` file, in the `conf.d/` folder at the root of your Agent's configuration directory to start collecting your scylla performance data. See the [sample scylla.d/conf.yaml][3] for all available configuration options. If you previously implemented this integration, see the [legacy example][4].
 
-2. [Agent を再起動します][4]。
+2. [Restart the Agent][5].
 
-##### ログの収集
+##### Log collection
 
-Scylla には複数の出力モードがあり、実行中の環境に応じて異なります。アプリケーションによるログ生成の詳細は、[Scylla ドキュメント][5]を参照してください。
+Scylla has different modes of outputting logs depending on the environment it's running in. See the [Scylla documentation][6] for more specifics on how the application generates logs.
 
-1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
+1. Collecting logs is disabled by default in the Datadog Agent, enable it in your `datadog.yaml` file:
 
       ```yaml
        logs_enabled: true
      ```
 
-2. `scylla.d/conf.yaml` ファイルのコメントを解除して、ログコンフィギュレーションブロックを編集します。環境に基づいて、 `type`、`path`、`service` パラメーターの値を変更してください。使用可能なすべての構成オプションの詳細については、[サンプル scylla.d/conf.yaml][3] を参照してください。
+2. Uncomment and edit the logs configuration block in your `scylla.d/conf.yaml` file. Change the `type`, `path`, and `service` parameter values based on your environment. See the [sample scylla.d/conf.yaml][3] for all available configuration options.
 
       ```yaml
        logs:
@@ -111,40 +112,42 @@ Scylla には複数の出力モードがあり、実行中の環境に応じて�
            #    name: new_log_start_with_date
      ```
 
-3. [Agent を再起動します][4]。
+3. [Restart the Agent][5].
 
-Kubernetes 環境のログを有効にするには、[Kubernetes ログ収集][6]を参照してください。
+To enable logs for Kubernetes environments, see [Kubernetes Log Collection][7].
 
-### 検証
+### Validation
 
-[Agent の status サブコマンドを実行][7]し、Checks セクションで `scylla` を探します。
+[Run the Agent's status subcommand][8] and look for `scylla` under the Checks section.
 
-## 収集データ
+## Data Collected
 
-### メトリクス
+### Metrics
 {{< get-metrics-from-git "scylla" >}}
 
 
-### イベント
+### Events
 
-Scylla チェックには、イベントは含まれません。
+The Scylla check does not include any events.
 
-### サービスのチェック
+### Service Checks
 {{< get-service-checks-from-git "scylla" >}}
 
 
-## トラブルシューティング
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
+Need help? Contact [Datadog support][11].
 
 
 [1]: https://scylladb.com
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://github.com/DataDog/integrations-core/blob/master/scylla/datadog_checks/scylla/data/conf.yaml.example
-[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[5]: https://docs.scylladb.com/getting-started/logging/
-[6]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
-[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[8]: https://github.com/DataDog/integrations-core/blob/master/scylla/metadata.csv
-[9]: https://github.com/DataDog/integrations-core/blob/master/scylla/assets/service_checks.json
-[10]: https://docs.datadoghq.com/ja/help/
+[4]: https://github.com/DataDog/integrations-core/blob/7.50.x/scylla/datadog_checks/scylla/data/conf.yaml.example
+[5]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[6]: https://docs.scylladb.com/getting-started/logging/
+[7]: https://docs.datadoghq.com/agent/kubernetes/log/
+[8]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
+[9]: https://github.com/DataDog/integrations-core/blob/master/scylla/metadata.csv
+[10]: https://github.com/DataDog/integrations-core/blob/master/scylla/assets/service_checks.json
+[11]: https://docs.datadoghq.com/help/
+

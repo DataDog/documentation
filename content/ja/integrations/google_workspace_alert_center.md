@@ -1,92 +1,101 @@
 ---
-categories:
-- ログの収集
+"categories":
+- log collection
 - security
-dependencies: []
-description: Google Workspace Alert Center からログを収集します。
-doc_link: https://docs.datadoghq.com/integrations/google_workspace_alert_center/
-draft: false
-further_reading:
-- link: https://www.datadoghq.com/blog/google-workspace-monitoring
-  tag: ブログ
-  text: Datadog を使用して Google Workspace を監視する
-git_integration_title: google_workspace_alert_center
-has_logo: true
-integration_id: ''
-integration_title: Google Workspace Alert Center
-integration_version: ''
-is_public: true
-custom_kind: integration
-manifest_version: '1.0'
-name: google_workspace_alert_center
-public_title: Google Workspace Alert Center
-short_description: Google Workspace Alert Center からログを収集します。
-team: web-integrations
-version: '1.0'
+"custom_kind": "integration"
+"dependencies": []
+"description": "Collects logs from Google Workspace Alert Center."
+"doc_link": "https://docs.datadoghq.com/integrations/google_workspace_alert_center/"
+"draft": false
+"further_reading":
+- "link": "https://www.datadoghq.com/blog/google-workspace-monitoring"
+  "tag": Blog
+  "text": Monitor Google Workspace with Datadog
+"git_integration_title": "google_workspace_alert_center"
+"has_logo": true
+"integration_id": ""
+"integration_title": "Google Workspace Alert Center"
+"integration_version": ""
+"is_public": true
+"manifest_version": "1.0"
+"name": "google_workspace_alert_center"
+"public_title": "Google Workspace Alert Center"
+"short_description": "Collects logs from Google Workspace Alert Center."
+"team": "web-integrations"
+"version": "1.0"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-## 概要
+## Overview
 
-Alert Center は、Google Workspace 全体にわたる重要なセキュリティ関連の通知、アラート、アクションの包括的なビューを提供します。Google Workspace Alert Center を Datadog と統合すると、次のことが可能になります。
+Alert Center provides a comprehensive view of essential security-related notifications, alerts,
+and actions across all of Google Workspace. Integrate the Google Workspace Alert Center with
+Datadog to:
 
-- [Datadog のログ製品][1]を使用してアラートログを表示およびパースする。
-- Google Workspace ドメインの[イベント][3]に[モニター][2]を設定する。
-- Datadogの[セキュリティプラットフォーム][4]を活用して、Google Workspace ドメインに対する脅威を監視および検知する。
+- View and parse your alert logs using [Datadog's Logs product][1].
+- Set [monitors][2] on [events][3] from your Google Workspace domain.
+- Leverage the Datadog [Security Platform][4] to monitor and detect threats across your Google Workspace domain.
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-Datadog Google Workspace Alert Center インテグレーションは、サービスアカウントを使用して Google と Datadog の間の API 接続を作成します。以下では、サービスアカウントを作成し、Datadog にサービスアカウント認証情報を提供して、自動的に API 呼び出しを開始するための手順を説明します。
+The Datadog Google Workspace Alert Center integration uses service accounts to create
+an API connection between Google and Datadog. Below are instructions for creating a service
+account and providing Datadog with service account credentials to begin making API calls on
+your behalf.
 
-1. [サービスアカウントの作成と承認の手順][5]に従ってください。
-   これらの手順を完了するためには、スーパー管理者アクセスが必要です。そのプロセスの一環として、プライベートキー JSON ファイルを保存するロケーションに注意してください。説明したように、サービスアカウントにドメイン全体の権限を委譲し、その過程で `https://www.googleapis.com/auth/apps.alerts` スコープを付与します。
- 1. GCP コンソールの `Service account details` ページから、`Advanced settings` セクションの一番下にある `Create Google Workspace Marketplace-Compatible OAuth Client` ボタンをクリックします。
-2. [Datadog Google Workspace Alert Center インテグレーションタイル][6]に移動します。
-3. **Configuration** タブで、_Upload Private Key File_ を選択してこのプロジェクトを Datadogと統合します。
-   最初のステップで保存した秘密鍵 JSON ファイルを選択します。
-4. 件名のメールを入力します。これは、アラートセンターにアクセスできるユーザーまたはロボットアカウントのメールアドレスです。
-   サービスアカウント自体に関連付けられているメールアドレスは使用しないでください。
-   インテグレーションは、API 呼び出しを行うときにこのユーザーになりすます。
+1. Follow the [service account creation and authorization instructions][5]. You need
+   super-admin access in order to complete these steps. Note the location where you save the private key JSON file as part of that process. Delegate domain-wide authority to the service account as described, granting the `https://www.googleapis.com/auth/apps.alerts` scope in the process. 
+ 1. From the `Service account details` page in your GCP console, click the `Create Google Workspace Marketplace-Compatible OAuth Client` button at the bottom of the `Advanced settings` section.
+2. Navigate to the [Datadog Google Workspace Alert Center Integration tile][6].
+3. On the **Configuration** tab, select _Upload Private Key File_ to integrate this project
+   with Datadog. Select the private key JSON file you saved in the first step.
+4. Enter the Subject Email, which is the email address for a user or robot account with
+   Alert Center access. Do not use the email address associated with the service account itself. 
+   The integration impersonates this user when making API calls.
 
-複数のプロジェクトを監視する場合は、上記のプロセスを繰り返して、複数のサービスアカウントを使用できます。
+If you want to monitor multiple projects, you can repeat the process above to use multiple
+   service accounts.
 
-### ブラウザトラブルシューティング
+### Configuration
 
-プロジェクトごとにカスタムタグを指定することもできます。これらのタグは、Datadog 内のそのプロジェクトのすべてのログイベントに追加されます。
+Custom tags can also be specified per project. These tags are added to every log event
+for that project in Datadog.
 
-### 結果
+### Results
 
-ソース `google.workspace.alert.center` の下に[ログ][1]が入るまで、少なくとも 5 分待ちます。ご使用の環境で Alert Center のアラートが頻繁に生成されない場合は、さらに長く待機する必要があります。
+Wait at least five minutes to see [logs][1] coming in under the source `google.workspace.alert.center`. You may have to wait
+longer if your environment generates Alert Center alerts infrequently.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 
-この Google Workspace Alert Center には、メトリクスデータは含まれません。
+This Google Workspace Alert Center does not include metrics data.
 
-### ヘルプ
+### Events
 
-ログイベントの一覧については、[Google Workspace Alert Center のドキュメント][7]を参照してください。
+For the full list of log events, see the [Google Workspace Alert Center documentation][7].
 
-### ヘルプ
+### Service Checks
 
-Google Workspace Alert Center インテグレーションには、サービスのチェック機能は含まれません。
+The Google Workspace Alert Center integration does not include any service checks.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
+Need help? Contact [Datadog support][8].
 
-## その他の参考資料
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/logs/
-[2]: /ja/monitors/monitor_types/
-[3]: /ja/events/
-[4]: /ja/security_platform/
+[1]: /logs/
+[2]: /monitors/monitor_types/
+[3]: /events/
+[4]: /security_platform/
 [5]: https://developers.google.com/identity/protocols/oauth2/service-account
 [6]: http://app.datadoghq.com/integrations/google-workspace-alert-center
 [7]: https://support.google.com/a/answer/9104586?hl=en&ref_topic=9105077
-[8]: https://docs.datadoghq.com/ja/help/
+[8]: https://docs.datadoghq.com/help/
+

@@ -1,65 +1,66 @@
 ---
+title: Java Log Collection
+kind: documentation
 aliases:
-- /ja/logs/languages/java
+  - /logs/languages/java
 further_reading:
 - link: /logs/log_configuration/processors
   tag: Documentation
-  text: ログの処理方法
+  text: Learn how to process your logs
 - link: /logs/log_configuration/parsing
   tag: Documentation
-  text: パースの詳細
+  text: Learn more about parsing
 - link: /logs/explorer/
   tag: Documentation
-  text: ログの調査方法
-- link: /logs/explorer/#visualize
+  text: Learn how to explore your logs
+- link: "/logs/explorer/#visualize"
   tag: Documentation
-  text: ログ分析の実行
+  text: Perform Log Analytics
 - link: /tracing/other_telemetry/connect_logs_and_traces/java/
   tag: Documentation
-  text: ログとトレースの接続
+  text: Connect Logs and Traces
 - link: /logs/faq/log-collection-troubleshooting-guide/
-  tag: よくあるご質問
-  text: ログ収集のトラブルシューティングガイド
-- link: https://www.datadoghq.com/blog/java-logging-guide/
-  tag: ブログ
-  text: Java ログの収集、カスタマイズ、標準化方法
-- link: /glossary/#tail
-  tag: 用語集
-  text: 用語集 "テール" の項目
-title: Java ログ収集
+  tag: FAQ
+  text: Log Collection Troubleshooting Guide
+- link: "https://www.datadoghq.com/blog/java-logging-guide/"
+  tag: Blog
+  text: How to collect, customize, and standardize Java logs
+- link: "/glossary/#tail"
+  tag: Glossary
+  text: Glossary entry for "tail"
 ---
 
-ログを Datadog に送信するには、ファイルにログを記録し、そのファイルを Datadog Agent で[テール][14]します。
+To send your logs to Datadog, log to a file and [tail][14] that file with your Datadog Agent.
 
-一般的な Java ログのスタックトレースは複数の行に分割されているため、元のログイベントに関連付けることが困難です。例:
+Stack traces from typical Java logs are split into multiple lines, which makes them difficult to associate to the original log event. For example:
 
 ```java
-//1 つのはずのイベントに、4 つのイベントが生成される
+//4 events generated when only one is expected!
 Exception in thread "main" java.lang.NullPointerException
         at com.example.myproject.Book.getTitle(Book.java:16)
         at com.example.myproject.Author.getBookTitles(Author.java:25)
         at com.example.myproject.Bootstrap.main(Bootstrap.java:14)
 ```
 
-この問題を解決するには、ログを JSON 形式で生成するようにログライブラリを構成します。JSON にログすると、次のことができます。
+To address this issue, configure your logging library to produce your logs in JSON format. By logging to JSON, you:
 
-* スタックトレースがログイベントに適切にラップされることを確実にします。
-* すべてのログイベント属性 (重大度、ロガー名、スレッド名など) が適切に抽出されることを確実にします。
-* [マップされた診断コンテキスト (MDC)][1] 属性にアクセスできます。この属性は、任意のログイベントにアタッチできます。
-* [カスタムパースルール][2]が不要になります。
+* Ensure that the stack trace is properly wrapped into the log event.
+* Ensure that all log event attributes (such as severity, logger name, and thread name) are properly extracted.
+* Gain access to [Mapped Diagnostic Context (MDC)][1] attributes, which you can attach to any log event.
+* Avoid the need for [custom parsing rules][2].
 
-次の手順は、Log4j、Log4j 2、および Logback ログライブラリのセットアップ例を示しています。
+The following instructions show setup examples for the Log4j, Log4j 2, and Logback logging libraries.
 
-## ロガーの構成
+## Configure your logger
 
-### JSON 形式
+### JSON format
 
 {{< tabs >}}
 {{% tab "Log4j" %}}
 
-Log4j の場合、SLF4J モジュール [log4j-over-slf4j][1] を Logback と組み合わせて使用して JSON 形式でログします。`log4j-over-slf4j` は、アプリケーションの Log4j を完全に置き換えるため、コードを変更する必要はありません。これを使用するには
+For Log4j, log in JSON format by using the SLF4J module [log4j-over-slf4j][1] combined with Logback. `log4j-over-slf4j` cleanly replaces Log4j in your application so you do not have to make any code changes. To use it:
 
-1. `pom.xml` ファイルで、`log4j.jar` 依存関係を `log4j-over-slf4j.jar` 依存関係に置き換え、Logback 依存関係を追加します。
+1. In your `pom.xml` file, replace the `log4j.jar` dependency with a `log4j-over-slf4j.jar` dependency, and add the Logback dependencies:
     ```xml
     <dependency>
       <groupId>org.slf4j</groupId>
@@ -77,9 +78,9 @@ Log4j の場合、SLF4J モジュール [log4j-over-slf4j][1] を Logback と組
       <version>6.6</version>
     </dependency>
     ```
-2. `logback.xml` の JSON レイアウトを使用してアペンダーを構成します。
+2. Configure an appender using the JSON layout in `logback.xml`:
 
-   ファイル:
+    For file:
 
     ```xml
     <configuration>
@@ -94,7 +95,7 @@ Log4j の場合、SLF4J モジュール [log4j-over-slf4j][1] を Logback と組
     </configuration>
     ```
 
-   コンソール:
+    For console:
 
     ```xml
     <configuration>
@@ -113,11 +114,11 @@ Log4j の場合、SLF4J モジュール [log4j-over-slf4j][1] を Logback と組
 {{% /tab %}}
 {{% tab "Log4j 2" %}}
 
-Log4j 2 には JSON レイアウトが含まれています。
+Log4j 2 includes a JSON layout.
 
-1. `log4j2.xml` の JSON レイアウトを使用してアペンダーを構成します。
+1. Configure an appender using the JSON layout in `log4j2.xml`:
 
-   ファイルアペンダー:
+    For a file appender:
 
     ```xml
     <?xml version="1.0" encoding="UTF-8"?>
@@ -136,7 +137,7 @@ Log4j 2 には JSON レイアウトが含まれています。
     </Configuration>
     ```
 
-   コンソールアペンダー:
+    For a console appender:
 
     ```xml
     <?xml version="1.0" encoding="UTF-8"?>
@@ -157,7 +158,7 @@ Log4j 2 には JSON レイアウトが含まれています。
     </Configuration>
     ```
 
-2. JSON レイアウトの依存関係を `pom.xml` に追加します。
+2. Add the JSON layout dependencies to your `pom.xml`:
     ```xml
     <dependency>
         <groupId>org.apache.logging.log4j</groupId>
@@ -184,9 +185,9 @@ Log4j 2 には JSON レイアウトが含まれています。
 {{% /tab %}}
 {{% tab "Logback" %}}
 
-Logback の JSON 形式のログには、[logstash-logback-encoder][1] を使用します。
+Use the [logstash-logback-encoder][1] for JSON formatted logs in Logback.
 
-1. `logback.xml` の JSON レイアウトを使用してファイルアペンダーを構成します。
+1. Configure a file appender using the JSON layout in `logback.xml`:
 
     ```xml
     <configuration>
@@ -201,7 +202,7 @@ Logback の JSON 形式のログには、[logstash-logback-encoder][1] を使用
     </configuration>
     ```
 
-2. Logstash エンコーダの依存関係を `pom.xml` ファイルに追加します。
+2. Add the Logstash encoder dependency to your `pom.xml` file:
 
     ```xml
     <dependency>
@@ -220,10 +221,10 @@ Logback の JSON 形式のログには、[logstash-logback-encoder][1] を使用
 {{% /tab %}}
 {{% tab "Tinylog" %}}
 
-[Tinylog 公式ドキュメント][1]に基づいて、JSON ライターの構成を作成します。
+Create a JSON writer configuration based on the [official Tinylog documentation][1].
 
 
-`tinylog.properties` ファイルには以下のフォーマットを使用します。
+Use the following format in a `tinylog.properties` file:
 
 ```properties
 writer                     = json
@@ -244,16 +245,16 @@ writer.field.dd.env        = {context: dd.env}
 {{% /tab %}}
 {{< /tabs >}}
 
-#### ログへのトレース ID の挿入
+#### Inject trace IDs into your logs
 
-このアプリケーションで APM が有効になっている場合は、トレース ID インジェクションを有効にすることで、ログとトレースを相互に関連付けることができます。詳細については、[Java ログとトレースの接続][3]を参照してください。
+If APM is enabled for this application, you can correlate logs and traces by enabling trace ID injection. See [Connecting Java Logs and Traces][3] for more information.
 
-### 未加工の形式
+### Raw format
 
 {{< tabs >}}
 {{% tab "Log4j" %}}
 
-`log4j.xml` でファイルアペンダーを構成します。
+Configure a file appender in `log4j.xml`:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -280,7 +281,7 @@ writer.field.dd.env        = {context: dd.env}
 {{% /tab %}}
 {{% tab "Log4j 2" %}}
 
-`log4j2.xml` でファイルアペンダーを構成します。
+Configure a file appender in `log4j2.xml`:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -302,7 +303,7 @@ writer.field.dd.env        = {context: dd.env}
 {{% /tab %}}
 {{% tab "Logback" %}}
 
-`logback.xml` でファイルアペンダーを構成します。
+Configure a file appender in `logback.xml`:
 
 ```xml
 <configuration>
@@ -325,10 +326,10 @@ writer.field.dd.env        = {context: dd.env}
 {{% /tab %}}
 {{% tab "Tinylog" %}}
 
-[Tinylog 公式ドキュメント][1]に基づいて、ファイルに出力するライターの構成を作成します。
+Create a writer configuration outputting to a file based on the [official Tinylog documentation][1].
 
 
-`tinylog.properties` ファイルには以下のフォーマットを使用します。
+Use the following format in a `tinylog.properties` file:
 
 ```properties
 writer          = file
@@ -341,19 +342,19 @@ writer.file     = log.txt
 {{% /tab %}}
 {{< /tabs >}}
 
-#### ログへのトレース ID の挿入
+#### Inject trace IDs into your logs
 
-このアプリケーションで APM が有効になっている場合は、トレース ID インジェクションを有効にすることで、ログとトレースを相互に関連付けることができます。[Java ログとトレースの接続][3]を参照してください。
+If APM is enabled for this application, you can correlate logs and traces by enabling trace ID injection. See [Connecting Java Logs and Traces][3].
 
-ログとトレースを相関させていない場合は、上記の構成例に含まれているログパターンから MDC プレースホルダー (`%X{dd.trace_id} %X{dd.span_id}`) を削除できます。
+If you are _not_ correlating logs and traces, you can remove the MDC placeholders (`%X{dd.trace_id} %X{dd.span_id}`) from the log patterns included in the above configuration examples.
 
 
-## Datadog Agent の構成
+## Configure the Datadog Agent
 
-[ログ収集が有効][4]になったら、ログファイルを追跡して Datadog に送信する[カスタムログ収集][5]を設定します。
+Once [log collection is enabled][4], set up [custom log collection][5] to tail your log files and send them to Datadog.
 
-1. `java.d/` フォルダーを `conf.d/` [Agent 構成ディレクトリ][6]に作成します。
-2. `java.d/` に以下の内容で `conf.yaml` ファイルを作成します。
+1. Create a `java.d/` folder in the `conf.d/` [Agent configuration directory][6].
+2. Create a `conf.yaml` file in `java.d/` with the following content:
 
     ```yaml
     #Log section
@@ -371,30 +372,30 @@ writer.file     = log.txt
         #    pattern: \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
     ```
 
-3. [Agent を再起動します][7]。
-4. [Agent の status サブコマンド][8]を実行し、`Checks` セクションで `java` を探し、ログが Datadog に正常に送信されることを確認します。
+3. [Restart the Agent][7].
+4. Run the [Agent's status subcommand][8] and look for `java` under the `Checks` section to confirm logs are successfully submitted to Datadog.
 
-ログが JSON 形式の場合、Datadog は自動的にログメッセージを[パース][9]し、ログ属性を抽出します。[ログエクスプローラー][10]を使用して、ログを表示し、トラブルシューティングを行うことができます。
+If logs are in JSON format, Datadog automatically [parses the log messages][9] to extract log attributes. Use the [Log Explorer][10] to view and troubleshoot your logs.
 
-## エージェントレスのログ収集
+## Agentless logging
 
-アクセスできない、またはファイルにログを記録できないマシンでアプリケーションが実行されている例外的なケースでは、ログを Datadog または Datadog Agent に直接ストリーミングすることができます。アプリケーションが接続の問題を処理する必要があるため、これは推奨される設定ではありません。
+In the exceptional case where your application is running on a machine that cannot be accessed or cannot log to a file, it is possible to stream logs to Datadog or to the Datadog Agent directly. This is not the recommended setup, because it requires that your application handles connection issues.
 
-ログを Datadog に直接ストリーミングするには
+To stream logs directly to Datadog:
 
-1. Logback ログライブラリをコードに追加するか、**現在のロガーを Logback にブリッジ**します。
-2. **Logback を構成**して Datadog にログを送信します。
+1. Add the Logback logging library to your code, or **bridge your current logger to Logback**.
+2. **Configure Logback** to send logs to Datadog.
 
-### Java ロギングライブラリから Logback へのブリッジ
+### Bridge from Java logging libraries to Logback
 
-まだ Logback を使用していない場合、ほとんどの一般的なログライブラリは Logback にブリッジすることができます。
+If you are not already using Logback, most common logging libraries can be bridged to Logback.
 
 {{< tabs >}}
 {{% tab "Log4j" %}}
 
-SLF4J モジュール [log4j-over-slf4j][1] を Logback とともに使用して、ログを別のサーバーに送信します。`log4j-over-slf4j` は、アプリケーションの Log4j を完全に置き換えるため、コードを変更する必要はありません。これを使用するには
+Use the SLF4J module [log4j-over-slf4j][1] with Logback to send logs to another server. `log4j-over-slf4j` cleanly replaces Log4j in your application so that you do not have to make any code changes. To use it:
 
-1. `pom.xml` ファイルで、`log4j.jar` 依存関係を `log4j-over-slf4j.jar` 依存関係に置き換え、Logback 依存関係を追加します。
+1. In your `pom.xml` file, replace the `log4j.jar` dependency with a `log4j-over-slf4j.jar` dependency, and add the Logback dependencies:
     ```xml
     <dependency>
       <groupId>org.slf4j</groupId>
@@ -412,9 +413,9 @@ SLF4J モジュール [log4j-over-slf4j][1] を Logback とともに使用して
       <version>6.6</version>
     </dependency>
     ```
-2. Logback を構成します。
+2. Configure Logback.
 
-**注:** この変更の結果、Log4j コンフィギュレーションファイルは使用されなくなります。[Log4j トランスレーター][2] を使用して `log4j.properties` ファイルを `logback.xml` に移行してください。
+**Note:** As a result of this change, Log4j configuration files will no longer be picked up. Migrate your `log4j.properties` file to `logback.xml` with the [Log4j translator][2].
 
 
 [1]: http://www.slf4j.org/legacy.html#log4j-over-slf4j
@@ -423,9 +424,9 @@ SLF4J モジュール [log4j-over-slf4j][1] を Logback とともに使用して
 
 {{% tab "Log4j 2" %}}
 
-Log4j 2 では、リモートホストへのログ記録が可能ですが、ログの前に API キーを付ける機能はありません。このため、SLF4J モジュール [log4j-over-slf4j][1] と Logback を使用してください。`log4j-to-slf4j.jar` は、アプリケーションの Log4j 2 を完全に置き換えるため、コードを変更する必要はありません。これを使用するには
+Log4j 2 allows logging to a remote host, but it does not offer the ability to prefix the logs with an API key. Because of this, use the SLF4J module [log4j-over-slf4j][1] and Logback. `log4j-to-slf4j.jar` cleanly replaces Log4j 2 in your application so that you do not have to make any code changes. To use it:
 
-1. `pom.xml` ファイルで、`log4j.jar` 依存関係を `log4j-over-slf4j.jar` 依存関係に置き換え、Logback 依存関係を追加します。
+1. In your `pom.xml` file, replace the `log4j.jar` dependency with a `log4j-over-slf4j.jar` dependency, and add the Logback dependencies:
     ```xml
     <dependency>
         <groupId>org.apache.logging.log4j</groupId>
@@ -444,12 +445,12 @@ Log4j 2 では、リモートホストへのログ記録が可能ですが、ロ
     </dependency>
 
     ```
-2. Logback を構成します。
+2. Configure Logback.
 
-**注:**
+**Notes:**
 
-- https://logging.apache.org/log4j/log4j-2.2/log4j-to-slf4j/index.html で説明されているように、`log4j-slf4j-impl.jar` が**使用されていない**ことを確認します。
-- この移行の結果、Log4j 2 コンフィギュレーションファイルは使用されなくなります。[Log4j トランスレーター][2] を使用して `log4j.properties` ファイルを `logback.xml` に移行してください。
+- Make sure that `log4j-slf4j-impl.jar` is **not** used as described here: https://logging.apache.org/log4j/log4j-2.2/log4j-to-slf4j/index.html
+- As a result of this migration, Log4j 2 configuration files will no longer be picked up. Migrate your `log4j.properties` file to `logback.xml` with the [Log4j translator][2].
 
 [1]: http://www.slf4j.org/legacy.html#log4j-over-slf4j
 [2]: http://logback.qos.ch/translator
@@ -457,11 +458,11 @@ Log4j 2 では、リモートホストへのログ記録が可能ですが、ロ
 
 {{< /tabs >}}
 
-### Logback を構成する
+### Configure Logback
 
-[logstash-logback-encoder][11] ログライブラリを Logback と一緒に使用して、ログを Datadog に直接ストリーミングします。
+Use the [logstash-logback-encoder][11] logging library along with Logback to stream logs directly to Datadog.
 
-1. `logback.xml` ファイルに TCP アペンダーを構成します。この構成では、API キーは環境変数 `DD_API_KEY` から取得されます。あるいは、コンフィギュレーションファイルに直接 API キーを挿入することもできます。
+1. Configure a TCP appender in your `logback.xml` file. With this configuration, your api key is retrieved from the `DD_API_KEY` environment variable. Alternatively, you can insert your api key directly into the configuration file:
 
     {{< site-region region="us,us3,us5,ap1" >}}
 
@@ -524,12 +525,12 @@ Log4j 2 では、リモートホストへのログ記録が可能ですが、ロ
     {{< /site-region >}}
 
     {{< site-region region="gov" >}}
-  サポートされていません。
+  Not supported.
     {{< /site-region >}}
 
-   **注:** XML コンフィギュレーションで空白が削除されるため、`%mdc{keyThatDoesNotExist}` が追加されます。プレフィックスパラメータの詳細については、[Logback ドキュメント][12]を参照してください。
+    **Note:** `%mdc{keyThatDoesNotExist}` is added because the XML configuration trims whitespace. For more information about the prefix parameter, see the [Logback documentation][12].
 
-2. Logstash エンコーダの依存関係を `pom.xml` ファイルに追加します。
+2. Add the Logstash encoder dependency to your `pom.xml` file:
 
     ```xml
     <dependency>
@@ -544,29 +545,29 @@ Log4j 2 では、リモートホストへのログ記録が可能ですが、ロ
     </dependency>
     ```
 
-## 補足説明
+## Getting further
 
-ログイベントをコンテキスト属性で補完することができます。
+Enrich your log events with contextual attributes.
 
-### キー値パーサーの使用
+### Using the key value parser
 
-[キー値パーサー][13]は、ログイベント内で認識された `<KEY>=<VALUE>` パターンを抽出します。
+The [key value parser][13] extracts any `<KEY>=<VALUE>` pattern recognized in any log event.
 
-Java のログイベントを補完するには、コードでメッセージを書き直し、`<キー>=<値>` のシーケンスを挿入します。
+To enrich your log events in Java, you can re-write messages in your code and introduce `<KEY>=<VALUE>` sequences.
 
-たとえば、次のメッセージがあるとします。
+For instance if you have:
 
 ```java
 logger.info("Emitted 1001 messages during the last 93 seconds for customer scope prod30");
 ```
 
-これを次のように変更します。
+You can change it to:
 
 ```java
 logger.info("Emitted quantity=1001 messages during the last durationInMs=93180 ms for customer scope=prod30");
 ```
 
-キー値パーサーを有効にすると、各ペアが JSON から抽出されます。
+With the key value parser enabled, each pair is extracted from the JSON:
 
 ```json
 {
@@ -577,13 +578,13 @@ logger.info("Emitted quantity=1001 messages during the last durationInMs=93180 m
 }
 ```
 
-これで、scope をフィールド、durationInMs と quantity をログメジャーとして利用できます。
+So you can exploit *scope* as a field, and *durationInMs* and *quantity* as log measures.
 
 ### MDC
 
-ログを補完するもう 1 つの方法として、Java の [マップされた診断コンテキスト (MDC)][1] の利用があります。
+Another option to enrich your logs is to use Java's [Mapped Diagnostic Contexts (MDC)][1].
 
-SLF4J を使用する場合は、次の Java コードを使用してください。
+If you use SLF4J, use the following Java code:
 
 ```java
 ...
@@ -592,32 +593,32 @@ logger.info("Emitted 1001 messages during the last 93 seconds");
 ...
 ```
 
-この JSON を生成するには
+To generate this JSON:
 
 ```json
 {
-  "message": "過去 93 秒間に 1001 メッセージを送信",
+  "message": "Emitted 1001 messages during the last 93 seconds",
   "scope": "prod30"
 }
 ```
 
-**注:** MDC は文字列タイプのみを許可するため、数値メトリクスには使用しないでください。
+**Note:** MDC allows only string types, so don't use them for numerical value metrics.
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: http://logback.qos.ch/manual/mdc.html
-[2]: /ja/logs/log_configuration/parsing
-[3]: /ja/tracing/other_telemetry/connect_logs_and_traces/java/
-[4]: /ja/agent/logs/?tab=tailfiles#activate-log-collection
-[5]: /ja/agent/logs/?tab=tailfiles#custom-log-collection
-[6]: /ja/agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
-[7]: /ja/agent/configuration/agent-commands/?tab=agentv6v7#restart-the-agent
-[8]: /ja/agent/configuration/agent-commands/?tab=agentv6v7#agent-status-and-information]
-[9]: /ja/logs/log_configuration/parsing/?tab=matchers
-[10]: /ja/logs/explorer/#overview
+[2]: /logs/log_configuration/parsing
+[3]: /tracing/other_telemetry/connect_logs_and_traces/java/
+[4]: /agent/logs/?tab=tailfiles#activate-log-collection
+[5]: /agent/logs/?tab=tailfiles#custom-log-collection
+[6]: /agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
+[7]: /agent/configuration/agent-commands/?tab=agentv6v7#restart-the-agent
+[8]: /agent/configuration/agent-commands/?tab=agentv6v7#agent-status-and-information]
+[9]: /logs/log_configuration/parsing/?tab=matchers
+[10]: /logs/explorer/#overview
 [11]: https://github.com/logstash/logstash-logback-encoder
 [12]: https://github.com/logstash/logstash-logback-encoder#prefixsuffixseparator
-[13]: /ja/logs/log_configuration/parsing/#key-value-or-logfmt
-[14]: /ja/glossary/#tail
+[13]: /logs/log_configuration/parsing/#key-value-or-logfmt
+[14]: /glossary/#tail

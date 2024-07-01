@@ -1,29 +1,29 @@
 ---
+title: Connect Session Replay To Your Third-Party Tools
+kind: guide
 further_reading:
-- link: /real_user_monitoring/session_replay/
+- link: /real_user_monitoring/session_replay/browser/
   tag: Documentation
-  text: セッションリプレイについて
-kind: ガイド
-title: セッションリプレイとサードパーティツールの接続
+  text: Learn about Session Replay
 ---
 
-## 概要
+## Overview
 
-セッションリプレイは、ユーザー分析データを補完する視覚的なインサイトを提供します。カスタマーエクスペリエンス、Web サイト分析などのためにサードパーティツールを使用している場合、それらをセッションリプレイに接続することができます。このガイドでは、インテグレーションで使用するセッションリプレイの URL に、セッションが行われているブラウザからライブでアクセスする方法を説明します。
+Session Replay provides visual insights to complement user analytics data. If you are using third-party tools for customer experience, website analytics, and more, you can connect them to Session Replay. This guide walks you through how to access the Session Replay URL to use in integrations, live from the browser where the session is taking place. 
 
-## ユースケース
+## Use cases
 
-以下のようなユーザーエクスペリエンス指標をより包括的に表示するために、サードパーティーのツールをセッションリプレイと接続するとよいでしょう。
+You may want to connect a third-party tool with Session Replay for a more comprehensive view of user experience indicators such as the following:
 
-- フォームアンケート結果
-- カスタマーエクスペリエンスツール
-- データ分析
+- Form survey results
+- Customer experience tools
+- Data analytics
 
-## セッションリプレイリンクを取得する
+## Get the Session Replay link
 
-現在のユーザーセッションのレコーディングの URL を取得するには、RUM をセットアップするために使用したインストール方法に応じて、次のスニペットを使用します。
+To fetch the URL for the current user session's recording, use the following snippet, depending on the installation method you used to set up RUM:
 
-**注**: ユーザーセッションのレコーディング URL を取得する際に `subdomain` の値を指定することはオプションですが、カスタムサブドメインを通して Datadog にアクセスし、返される URL にカスタムドメインを表示したい場合は、必ず指定する必要があります。
+**Note**: Providing a value for `subdomain` when fetching the user session's recording URL is optional, but must be provided if you're accessing Datadog through a custom subdomain and want to see the custom domain in the URL that gets returned.
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -33,59 +33,59 @@ import { datadogRum } from '@datadog/browser-rum';
 
 datadogRum.init({
     ...,
-    // オプション。カスタムドメイン名を使用する場合のみ必要です
+    // optional, only needed if using a custom domain name
     subdomain: ''
     ...
 });
 
-const url = datadogRum.getSessionReplayUrl();
+const url = datadogRum.getSessionReplayLink();
 ```
 
 {{% /tab %}}
 
-{{% tab "CDN 非同期" %}}
+{{% tab "CDN async" %}}
 
 ```javascript
 window.DD_RUM.onReady(function() {
     window.DD_RUM.init({
         ...,
-        // オプション。カスタムドメイン名を使用する場合のみ必要です
+        // optional, only needed if using a custom domain name
         subdomain: ''
         ...
     })
-    const url = DD_RUM.getSessionReplayUrl();
+    const url = DD_RUM.getSessionReplayLink();
 })
 
 ```
 
 {{% /tab %}}
 
-{{% tab "CDN 同期" %}}
+{{% tab "CDN sync" %}}
 
 ```javascript
 window.DD_RUM &&
     window.DD_RUM.init({
         ...,
-         // オプション。カスタムドメイン名を使用する場合のみ必要です
+         // optional, only needed if using a custom domain name
         subdomain: ''
         ...
     });
-const url = DD_RUM && DD_RUM.getSessionReplayUrl();
+const url = DD_RUM && DD_RUM.getSessionReplayLink();
 ```
 
 {{% /tab %}}
 
 {{< /tabs >}}
 
-## サードパーティツールへのリンクを送信する
+## Send link to a third-party tool
 
-上記のスニペットでリンクを取得した後、サードパーティツールが提供するオプションに応じて、データを渡す方法がいくつかあります。
+Once you retrieve the link through the snippet above, you have a few different ways to pass the data, depending on what option(s) your third-party tool offers:
 
-- 隠しフォームフィールドとして。
-- JSON フィールドとして。
-- URL パラメーターを通して。
-- JavaScript で選択したインテグレーションに直接。
+- As a hidden form field.
+- As a JSON field.
+- Through a URL parameter.
+- Directly in your integration of choice in JavaScript.
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

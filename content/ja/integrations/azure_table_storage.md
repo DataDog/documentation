@@ -1,59 +1,61 @@
 ---
-categories:
+"categories":
 - azure
-- クラウド
-- data store
-dependencies: []
-description: Azure Table Storage のキーメトリクスを追跡
-doc_link: https://docs.datadoghq.com/integrations/azure_table_storage/
-draft: false
-git_integration_title: azure_table_storage
-has_logo: true
-integration_id: azure-table-storage
-integration_title: Microsoft Azure Table Storage
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: '1.0'
-name: azure_table_storage
-public_title: Datadog-Microsoft Azure Table Storage インテグレーション
-short_description: Azure Table Storage のキーメトリクスを追跡
-version: '1.0'
+- cloud
+- data stores
+"custom_kind": "integration"
+"dependencies": []
+"description": "Track key Azure Table Storage metrics."
+"doc_link": "https://docs.datadoghq.com/integrations/azure_table_storage/"
+"draft": false
+"git_integration_title": "azure_table_storage"
+"has_logo": true
+"integration_id": "azure-table-storage"
+"integration_title": "Microsoft Azure Table Storage"
+"integration_version": ""
+"is_public": true
+"manifest_version": "1.0"
+"name": "azure_table_storage"
+"public_title": "Datadog-Microsoft Azure Table Storage Integration"
+"short_description": "Track key Azure Table Storage metrics."
+"version": "1.0"
 ---
 
-## 概要
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
+## Overview
 
-Azure Table Storage は、大量の半構造化データセットを使用して迅速な開発を行うための NoSQL key-value ストアです。
+Azure Table Storage is a NoSQL key-value store for rapid development using massive semi-structured datasets
 
-Azure Table Storage からメトリクスを取得すると、以下のことができます。
+Get metrics from Azure Table Storage to:
 
-- テーブルストレージのパフォーマンスを視覚化できます。
-- テーブルストレージのパフォーマンスをアプリケーションと関連付けることができます。
+- Visualize the performance of your Table Storage.
+- Correlate the performance of your Table Storage with your applications.
 
-## セットアップ
+## Setup
 
-### インストール
+### Installation
 
-[Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。これ以外に必要なインストール手順はありません。
+If you haven't already, set up the [Microsoft Azure integration][1] first. There are no other installation steps that need to be performed.
 
-## 収集データ
+## Data Collected
 
-### メトリクス
+### Metrics
 {{< get-metrics-from-git "azure_table_storage" >}}
 
 
-### イベント
+### Events
 
-Azure Table Storage インテグレーションには、イベントは含まれません。
+The Azure Table Storage integration does not include any events.
 
-### サービスのチェック
+### Service Checks
 
-Azure Table Storage インテグレーションには、サービスのチェック機能は含まれません。
+The Azure Table Storage integration does not include any service checks.
 
-## トラブルシューティング
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
+Need help? Contact [Datadog support][3].
 
-[1]: https://docs.datadoghq.com/ja/integrations/azure/
+[1]: https://docs.datadoghq.com/integrations/azure/
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_table_storage/azure_table_storage_metadata.csv
-[3]: https://docs.datadoghq.com/ja/help/
+[3]: https://docs.datadoghq.com/help/
+

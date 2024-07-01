@@ -1,221 +1,136 @@
 ---
-aliases:
-- /ja/tracing/getting_further/metrics_namespace
-- /ja/tracing/guide/metrics_namespace
+title: Trace Metrics
+kind: documentation
 further_reading:
-- link: tracing/trace_collection/
-  tag: ドキュメント
-  text: アプリケーションで APM トレースをセットアップする方法
-- link: tracing/services/services_list/
-  tag: ドキュメント
-  text: Datadog に報告するサービスの一覧
-- link: tracing/services/service_page
-  tag: ドキュメント
-  text: Datadog のサービスについて
-- link: tracing/services/resource_page
-  tag: ドキュメント
-  text: リソースのパフォーマンスとトレースの詳細
-- link: tracing/trace_explorer/trace_view/
-  tag: ドキュメント
-  text: Datadog トレースの読み方を理解する
-title: トレースメトリクス
+    - link: tracing/trace_collection/
+      tag: Documentation
+      text: Learn how to setup APM tracing with your application
+    - link: tracing/service_catalog/
+      tag: Documentation
+      text: Discover and catalog the services reporting to Datadog
+    - link: tracing/services/service_page
+      tag: Documentation
+      text: Learn more about services in Datadog
+    - link: tracing/services/resource_page
+      tag: Documentation
+      text: Dive into your resource performance and traces
+    - link: tracing/trace_explorer/trace_view/
+      tag: Documentation
+      text: Understand how to read a Datadog Trace
+aliases:
+    - /tracing/getting_further/metrics_namespace
+    - /tracing/guide/metrics_namespace
+algolia:
+  tags: [trace metrics]
 ---
 
-## 概要
+## Overview
 
-[トレース収集の有効化とアプリケーションのインスツルメント][1]を行うと、トレースアプリケーションメトリクスが収集されます。
+Tracing application metrics are collected after you [enable trace collection and instrument your application][1].
 
-{{< img src="tracing/apm_lifecycle/trace_metrics.png" style="width:70%; background:none; border:none; box-shadow:none;" alt="トレースメトリクス" >}}
+{{< img src="tracing/apm_lifecycle/trace_metrics.png" style="width:70%; background:none; border:none; box-shadow:none;" alt="Trace Metrics" >}}
 
-これらのメトリクスは、リクエスト回数、エラー回数、およびレイテンシーの測定値をキャプチャします。これらは、[トレース取り込みサンプリング][2]の構成に関係なく、アプリケーションの 100% のトラフィックに基づいて計算されます。これらのメトリクスを使用して、サービスやリソースの潜在的なエラーを発見し、ダッシュボード、モニター、SLO を作成することで、アプリケーションのトラフィックを完全に可視化することができます。
+These metrics capture request counts, error counts, and latency measures. They are calculated based on 100% of the application's traffic, regardless of any [trace ingestion sampling][2] configuration. Ensure that you have full visibility into your application's traffic by using these metrics to spot potential errors on a service or a resource, and by creating dashboards, monitors, and SLOs.
 
-**注**: アプリケーションやサービスが OpenTelemetry ライブラリでインスツルメンテーションされ、SDK レベルやコレクターレベルでサンプリングを設定した場合、APM メトリクスはサンプリングされたデータセットに基づいて計算されます。
+**Note**: If your applications and services are instrumented with OpenTelemetry libraries and you set up sampling at the SDK level and/or at the collector level, APM metrics are calculated based on the sampled set of data.
 
-トレースメトリクスは、インテグレーション言語によって、サービスエントリースパンや特定のオペレーションに対して生成されます。例えば、Django インテグレーションでは、様々な操作を表すスパン (Django リクエスト用のルートスパン 1 つ、各ミドルウェア用のスパン 1 つ、ビュー用のスパン 1 つ) からトレースメトリクスを生成しています。
+Trace metrics are generated for service entry spans and certain operations depending on integration language. For example, the Django integration produces trace metrics from spans that represent various operations (1 root span for the Django request, 1 for each middleware, and 1 for the view).
 
-[トレースメトリクス][3]のネームスペースは、次のようなフォーマットになっています。
+The [trace metrics][3] namespace is formatted as:
 
-- `trace.<スパン名>.<メトリクスサフィックス>`
-- `trace.<スパン名>.<メトリクスサフィックス>.<第 2 プライマリタグ>_service`
+- `trace.<SPAN_NAME>.<METRIC_SUFFIX>`
 
-次の定義と組み合わせます。
+With the following definitions:
 
 `<SPAN_NAME>`
-: 操作の名前または `span.name`（例: `redis.command`、`pylons.request`、`rails.request`、`mysql.query`）。
+: The name of the operation or `span.name` (examples: `redis.command`, `pylons.request`, `rails.request`, `mysql.query`).
 
 `<METRIC_SUFFIX>`
-: メトリクスの名前（例: `duration`、`hits`、`span_count`）。以下のセクションを参照してください。
-
-`<2ND_PRIM_TAG>`
-: メトリクス名が [第 2 プライマリタグ][4]を考慮する場合、このタグはメトリクス名の一部です。
+: The name of the metric (examples: `hits`, `errors`, `apdex`, `duration`). See the section below.
 
 `<TAGS>`
-: トレースメトリクスタグ、可能なタグは、`env`、`service`、`version`、`resource`、`sublayer_type`、`sublayer_service`、`http.status_code`、`http.status_class`、Datadog Agent タグ（ホストと第 2 プライマリタグを含む）です。**注:** スパンに設定されたタグは数に含められず、トレースメトリクスのタグとして利用できません。
+: Trace metrics tags, possible tags are: `env`, `service`, `version`, `resource`, `http.status_code`, `http.status_class`, and Datadog Agent tags (including the host and second primary tag). 
+**Note:** Other tags set on spans are not available as tags on traces metrics.
 
-## メトリクスサフィックス
+## Metric suffix
 
 ### Hits
 
 `trace.<SPAN_NAME>.hits`
-: **前提条件:** このメトリクスは、すべての APM サービスに存在します。
-<br>
-**説明:** 特定のスパンのヒット数を表します。<br>
-**メトリクスタイプ:** [COUNT][5]。<br>
-**タグ:** `env`、`service`、`version`、`resource`、`resource_name`、`http.status_code`、Datadog Host Agent からのすべてのホストタグ、[第 2 プライマリタグ][4]。
+: **Prerequisite:** This metric exists for any APM service.<br>
+**Description:** Represent the count of spans created with a specific name (for example, `redis.command`, `pylons.request`, `rails.request`, or `mysql.query`).<br>
+**Metric type:** [COUNT][5].<br>
+**Tags:** `env`, `service`, `version`, `resource`, `resource_name`, `http.status_code`, all host tags from the Datadog Host Agent, and [the second primary tag][4].
 
 `trace.<SPAN_NAME>.hits.by_http_status`
-: **前提条件:** このメトリクスは、http メタデータが存在する場合 HTTP/WEB APM サービスに存在します。
-<br>
-**説明:** 特定のスパンのブレイクダウンの HTTP ステータスコード別ヒット数を表します。<br>
-**メトリクスタイプ:** [COUNT][5]。<br>
-**タグ:** `env`、`service`、`version`、`resource`、`resource_name`、`http.status_class`、`http.status_code`、Datadog Host Agent からのすべてのホストタグ、[第 2 プライマリタグ][4]。
+: **Prerequisite:** This metric exists for HTTP/WEB APM services if http metadata exists.<br>
+**Description:** Represent the count of hits for a given span break down by HTTP status code.<br>
+**Metric type:** [COUNT][5].<br>
+**Tags:** `env`, `service`, `version`, `resource`, `resource_name`, `http.status_class`, `http.status_code`, all host tags from the Datadog Host Agent, and [the second primary tag][4].
 
-### レイテンシー分布
+### Latency distribution
 
 `trace.<SPAN_NAME>`
-: **前提条件:** このメトリクスは、どの APM サービスにも存在します。<br>
-**説明:** 異なる環境と第 2 プライマリタグにまたがるすべてのサービス、リソース、およびバージョンのレインテンシー分布を表現します。<br>
-**メトリクスタイプ:** [DISTRIBUTION][6]。<br>
-**タグ:** `env`、`service`、`resource`、`resource_name`、`version`、`synthetics`、[第 2 プライマリタグ][4]。
+: **Prerequisite:** This metric exists for any APM service.<br>
+**Description:** Represent the latency distribution for all services, resources, and versions across different environments and second primary tags.<br>
+**Metric type:** [DISTRIBUTION][6].<br>
+**Tags:** `env`, `service`, `resource`, `resource_name`, `version`, `synthetics`, and [the second primary tag][4].
 
-
-### エラー
+### Errors
 
 `trace.<SPAN_NAME>.errors`
-: **前提条件:** このメトリクスは、すべての APM サービスに存在します。
-<br>
-**説明:** 特定のスパンのエラー数を表します。<br>
-**メトリクスタイプ:** [COUNT][5]。<br>
-**タグ:** `env`、`service`、`version`、`resource`、`resource_name`、`http.status_code`、Datadog Host Agent からのすべてのホストタグ、[第 2 プライマリタグ][4]。
+: **Prerequisite:** This metric exists for any APM service.<br>
+**Description:** Represent the count of errors for a given span.<br>
+**Metric type:** [COUNT][5].<br>
+**Tags:** `env`, `service`, `version`, `resource`, `resource_name`, `http.status_code`, all host tags from the Datadog Host Agent, and [the second primary tag][4].
 
 `trace.<SPAN_NAME>.errors.by_http_status`
-: **前提条件:** このメトリクスは、すべての APM サービスに存在します。
-<br>
-**説明:** 特定のスパンのエラー数を表します。<br>
-**メトリクスタイプ:** [COUNT][5]。<br>
-**タグ:** `env`、`service`、`version`、`resource`、`http.status_class`、`http.status_code`、Datadog Host Agent からのすべてのホストタグ、[第 2 プライマリタグ][4]。
-
-
-### スパン数
-
-**注**: これは非推奨のネームスペースです。
-
-`trace.<SPAN_NAME>.span_count`
-: **前提条件:** このメトリクスは、すべての APM サービスに存在します。
-<br>
-**説明:** 特定のインターバルで収集されたスパンの量を表します。<br>
-**メトリクスタイプ:** [COUNT][5]。<br>
-**タグ:** `env`、`service`、`resource`、Datadog Host Agent からのすべてのホストタグ、[第 2 プライマリタグ][4]。
-
-`trace.<SPAN_NAME>.span_count.by_http_status`
-: **前提条件:** このメトリクスは、http メタデータが存在する場合 HTTP/WEB APM サービスに存在します。
-<br>
-**説明:** 特定のインターバルブレイクダウンで収集されたスパンの量を HTTP ステータスコード別に表します。<br>
-**メトリクスタイプ:** [COUNT][5]。<br>
-**タグ:** `env`、`service`、`resource`、`http.status_class`、`http.status_code`、Datadog Host Agent からのすべてのホストタグ、[第 2 プライマリタグ][4]。
-
-
-### Duration
-
-<div class="alert alert-warning">Datadogでは、代わりに <a href="/tracing/guide/ddsketch_trace_metrics/">DDSketch を使用して分散メトリクスをトレース</a>することを推奨しています。</div>
-
-`trace.<SPAN_NAME>.duration`
-: **前提条件:** このメトリクスは、すべての APM サービスに存在します。<br>
-**説明:**  収集サービスで見られる子スパンを含む、時間間隔内のスパンのコレクションの合計時間を測定します。Datadog では、ほぼすべてのユースケースにおいて、平均レイテンシーまたはパーセンタイルの計算に[レイテンシー分布](#latency-distribution)を使用することが推奨されています。ホストタグフィルターを使用して平均レイテンシーを計算するには、このメトリクスを次の式で使用することができます。 <br>
-`sum:trace.<SPAN_NAME>.duration{<FILTER>}.rollup(sum).fill(zero) / sum:trace.<SPAN_NAME>.hits{<FILTER>}` <br>
-このメトリクスは、パーセンタイル集計をサポートしていません。詳細については、[レイテンシー分布](#latency-distribution)セクションをご覧ください。
-**メトリクスタイプ:** [GAUGE][7].<br>
-**タグ:** `env`、`service`、`resource`、`http.status_code`、Datadog Host Agent からのすべてのホストタグ、[第 2 プライマリタグ][4]。
-
-### 継続時間
-
-<div class="alert alert-warning">このトレースメトリクスの使用方法は時代遅れです。代わりに、<a href="/tracing/guide/ddsketch_trace_metrics/">DDSketch を使用してディストリビューションメトリクスをトレースする</a>ことが推奨されます。</div>
-
-`trace.<SPAN_NAME>.duration.by_http_status`
-: **前提条件:** このメトリクスは、http メタデータが存在する場合 HTTP/WEB APM サービスに存在します。
-<br>
-**説明:** 各 HTTP ステータスのスパンの収集にかかる合計時間を計測します。具体的には、1 回のインターバルおよび特定の HTTP ステータスで、すべてのスパンにかかった相対時間（子処理を待機していた時間を含む）です。<br>
-**メトリクスタイプ:** [GAUGE][7]。<br>
-**タグ:** `env`、`service`、`resource`、`http.status_class`、`http.status_code`、Datadog Host Agent からのすべてのホストタグ、[第 2 プライマリタグ][4]。
-
-`trace.<SPAN_NAME>.duration.by_service`
-: **前提条件:** このメトリクスは、すべての APM サービスに存在します。
-<br>
-**説明:** 各サービスで実際にかかった総処理時間を計測します（子処理を待機していた時間は除外されます）。<br>
-**メトリクスタイプ:** [GAUGE][7]。<br>
-**タグ:** `env`、`service`、`resource`、`sublayer_service`、`http.status_code`、Datadog Host Agent からのすべてのホストタグ、[第 2 プライマリタグ][4]。
-
-`trace.<SPAN_NAME>.duration.by_type`
-: **前提条件:** このメトリクスは、すべての APM サービスに存在します。
-<br>
-**説明:** 各[サービスタイプ][8]で実際にかかる処理の合計時間を計測します。<br>
-**メトリクスタイプ:** [GAUGE][7]。<br>
-**タグ:** `env`、`service`、`resource`、`sublayer_type`、`http.status_code`、Datadog Host Agent からのすべてのホストタグ、[第 2 プライマリタグ][4]。
-
-`trace.<SPAN_NAME>.duration.by_type.by_http_status`
-: **前提条件:** このメトリクスは、http メタデータが存在する場合 HTTP/WEB APM サービスに存在します。
-<br>
-**説明:** 各[サービスタイプ][8]および HTTP ステータスコードで実際にかかった処理の合計時間を計測します。<br>
-**メトリクスタイプ:** [GAUGE][7]。<br>
-**タグ:** `env`、`service`、`resource`、`sublayer_type`、`http.status_class`、`http.status_code`、Datadog Host Agent からのすべてのホストタグ、[第 2 プライマリタグ][4]。
-
-`trace.<SPAN_NAME>.duration.by_service.by_http_status`
-: **前提条件:** このメトリクスは、http メタデータが存在する場合 HTTP/WEB APM サービスに存在します。
-<br>
-**説明:** 各[サービス][9]および HTTP ステータスコードで実際にかかった処理の合計時間を計測します。<br>
-**メトリクスタイプ:** [GAUGE][7]。<br>
-**タグ:** `env`、`service`、`resource`、`sublayer_service`、`http.status_class`、`http.status_code`、Datadog Host Agent からのすべてのホストタグ、[第 2 プライマリタグ][4]。
+: **Prerequisite:** This metric exists for any APM service.<br>
+**Description:** Represent the count of errors for a given span.<br>
+**Metric type:** [COUNT][5].<br>
+**Tags:** `env`, `service`, `version`, `resource`, `http.status_class`, `http.status_code`, all host tags from the Datadog Host Agent, and [the second primary tag][4].
 
 ### Apdex
 
 `trace.<SPAN_NAME>.apdex`
-: **前提条件:** このメトリクスは、すべての HTTP/WEB APM サービスに存在します。
-<br>
-**説明:** 各ウェブサービスの [Apdex][10] スコアを計測します。<br>
-**メトリクスタイプ:** [GAUGE][7]。<br>
-**タグ:** `env`、`service`、`resource` / `resource_name`、`version`、`synthetics`、[第 2 プライマリタグ][4]。
+: **Prerequisite:** This metric exists for any HTTP or web-based APM service.<br>
+**Description:** Measures the [Apdex][10] score for each web service.<br>
+**Metric type:** [GAUGE][7].<br>
+**Tags:** `env`, `service`, `resource` / `resource_name`, `version`, `synthetics`, and [the second primary tag][4].
 
-**次のレガシー apdex メトリクスは非推奨になりました。**
+### Duration
 
-`trace.<SPAN_NAME>.apdex.by.resource_<2ND_PRIM_TAG>_service`
-: **前提条件:** このメトリクスは、すべての HTTP/WEB APM サービスに存在します。
-<br>
-**説明:** リソース、[第 2 プライマリタグ][4]、サービスのすべての組み合わせの [Apdex][10] スコアを表します。<br>
-**メトリクスタイプ:** [GAUGE][7]。<br>
-**タグ:** `env`、`service`、`resource` / `resource_name`、[第 2 プライマリタグ][4]。
+<div class="alert alert-warning">Datadog recommends <a href="/tracing/guide/ddsketch_trace_metrics/">tracing distribution metrics using DDSketch</a>.</div>
 
-`trace.<SPAN_NAME>.apdex.by.resource_service`
-: **前提条件:** このメトリクスは、すべての HTTP/WEB APM サービスに存在します。
-<br>
-**説明:** リソースとウェブサービスの各組み合わせの [Apdex][10] スコアを計測します。<br>
-**メトリクスタイプ:** [GAUGE][7]。<br>
-**タグ:** `env`、`service`、`resource` / `resource_name`。
+`trace.<SPAN_NAME>.duration`
+: **Prerequisite:** This metric exists for any APM service.<br>
+**Description:** Measure the total time for a collection of spans within a time interval, including child spans seen in the collecting service. For most use cases, Datadog recommends using the [Latency Distribution](#latency-distribution) for calculation of average latency or percentiles. To calculate the average latency with host tag filters, you can use this metric with the following formula: <br>
+`sum:trace.<SPAN_NAME>.duration{<FILTER>}.rollup(sum).fill(zero) / sum:trace.<SPAN_NAME>.hits{<FILTER>}` <br>
+This metric does not support percentile aggregations. Read the [Latency Distribution](#latency-distribution) section for more information.
+**Metric type:** [GAUGE][7].<br>
+**Tags:** `env`, `service`, `resource`, `http.status_code`, all host tags from the Datadog Host Agent, and [the second primary tag][4].
 
-`trace.<SPAN_NAME>.apdex.by.<2ND_PRIM_TAG>_service`
-: **前提条件:** このメトリクスは、すべての HTTP/WEB APM サービスに存在します。
-<br>
-**説明:** [第 2 プライマリタグ][4]とウェブサービスの各組み合わせの [Apdex][10] スコアを計測します。<br>
-**メトリクスタイプ:** [GAUGE][7]。<br>
-**タグ:** `env`、`service`、[第 2 プライマリタグ][4]。
+### Duration by
 
-`trace.<SPAN_NAME>.apdex.by.service`
-: **前提条件:** このメトリクスは、すべての HTTP/WEB APM サービスに存在します。
-<br>
-**説明:** 各ウェブサービスの [Apdex][10] スコアを計測します。<br>
-**メトリクスタイプ:** [GAUGE][7]。<br>
-**タグ:** `env`、`service`。
+<div class="alert alert-warning">Datadog recommends <a href="/tracing/guide/ddsketch_trace_metrics/">tracing distribution metrics using DDSketch</a>.</div>
 
-## その他の参考資料
+`trace.<SPAN_NAME>.duration.by_http_status`
+: **Prerequisite:** This metric exists for HTTP/WEB APM services if http metadata exists.<br>
+**Description:** Measure the total time for a collection of spans for each HTTP status. Specifically, it is the relative share of time spent by all spans over an interval and a given HTTP status - including time spent waiting on child processes.<br>
+**Metric type:** [GAUGE][7].<br>
+**Tags:** `env`, `service`, `resource`, `http.status_class`, `http.status_code`, all host tags from the Datadog Host Agent, and [the second primary tag][4].
+
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/tracing/trace_collection/
-[2]: /ja/tracing/trace_pipeline/ingestion_mechanisms
-[3]: /ja/tracing/glossary/#trace-metrics
-[4]: /ja/tracing/guide/setting_primary_tags_to_scope/#add-a-second-primary-tag-in-datadog
-[5]: /ja/metrics/types/?tab=count#metric-types
-[6]: /ja/metrics/types/?tab=distribution#metric-types
-[7]: /ja/metrics/types/?tab=gauge#metric-types
-[8]: /ja/tracing/services/services_list/#services-types
-[9]: /ja/tracing/glossary/#services
-[10]: /ja/tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm/
+[1]: /tracing/trace_collection/
+[2]: /tracing/trace_pipeline/ingestion_mechanisms
+[3]: /tracing/glossary/#trace-metrics
+[4]: /tracing/guide/setting_primary_tags_to_scope/#add-a-second-primary-tag-in-datadog
+[5]: /metrics/types/?tab=count#metric-types
+[6]: /metrics/types/?tab=distribution#metric-types
+[7]: /metrics/types/?tab=gauge#metric-types
+[8]: /tracing/service_catalog/#services-types
+[9]: /tracing/glossary/#services
+[10]: /tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm/

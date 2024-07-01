@@ -1,81 +1,82 @@
 ---
 aliases:
-- /ja/serverless/datadog_lambda_library/extension
+- /serverless/datadog_lambda_library/extension
 dependencies:
-- https://github.com/DataDog/datadog-lambda-extension/blob/main/README.md
-title: Datadog Lambda 拡張機能
+- "https://github.com/DataDog/datadog-lambda-extension/blob/main/README.md"
+kind: documentation
+title: Datadog Lambda Extension
 ---
 [![Slack](https://chat.datadoghq.com/badge.svg?bg=632CA6)](https://chat.datadoghq.com/)
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue)](https://github.com/DataDog/datadog-agent/blob/master/LICENSE)
 
-**注:** このリポジトリには、Datadog Lambda 拡張機能に関連するリリースノート、問題、説明、スクリプトが含まれています。この拡張機能は、Datadog Agent の特別なビルドです。ソースコードは[ここ](https://github.com/DataDog/datadog-agent/tree/main/cmd/serverless)にあります。
+**Note:** This repository contains release notes, issues, instructions, and scripts related to the Datadog Lambda Extension. The extension is a special build of the Datadog Agent. The source code can be found [here](https://github.com/DataDog/datadog-agent/tree/main/cmd/serverless). 
 
-Datadog Lambda 拡張機能は、AWS Lambda 関数の実行中に非同期にカスタムメトリクス、トレース、ログを送信することをサポートする AWS Lambda 拡張機能です。
+The Datadog Lambda Extension is an AWS Lambda Extension that supports submitting custom metrics, traces, and logs asynchronously while your AWS Lambda function executes.
 
-## インストール
+## Installation
 
-[インストール手順](https://docs.datadoghq.com/serverless/installation)に従って、Datadog で関数の拡張メトリクス、トレース、ログを表示します。
+Follow the [installation instructions](https://docs.datadoghq.com/serverless/installation), and view your function's enhanced metrics, traces and logs in Datadog.
 
-## アップグレード
-アップグレードするには、Lambda 層の構成または Dockerfile (コンテナイメージとしてデプロイされた Lambda 関数の場合) の Datadog 拡張機能のバージョンを更新してください。アップグレードする前に、最新の[リリース](https://github.com/DataDog/datadog-lambda-extension/releases)と対応する変更ログをご覧ください。
+## Upgrading
+To upgrade, update the Datadog Extension version in your Lambda layer configurations or Dockerfile (for Lambda functions deployed as container images). View the latest [releases](https://github.com/DataDog/datadog-lambda-extension/releases) and corresponding changelogs before upgrading.
 
-## 構成
+## Configurations
 
-[構成手順](https://docs.datadoghq.com/serverless/configuration)に従って、テレメトリーにタグを付け、リクエスト/レスポンスペイロードをキャプチャし、ログやトレースから機密情報をフィルタリングまたはスクラブする、などの操作を行います。
+Follow the [configuration instructions](https://docs.datadoghq.com/serverless/configuration) to tag your telemetry, capture request/response payloads, filter or scrub sensitive information from logs or traces, and more.
 
-## オーバーヘッド
+## Overhead
 
-Datadog Lambda 拡張機能を初期化する際には、Lambda 関数のコールドスタート (init の実行時間が増加) に多少のオーバーヘッドが発生します。Datadog は Lambda 拡張機能のパフォーマンスを継続的に最適化しているため、常に最新のリリースを使用することをお勧めします。
+The Datadog Lambda Extension introduces a small amount of overhead to your Lambda function's cold starts (that is, the higher init duration), as the Extension needs to initialize. Datadog is continuously optimizing the Lambda extension performance and recommend always using the latest release.
 
-Lambda 関数の報告期間 (`aws.lambda.duration` または `aws.lambda.enhanced.duration`) が長くなっていることに気づくかもしれません。これは、Datadog Lambda 拡張機能が Datadog API にデータをフラッシュバックする必要があるためです。拡張機能がデータをフラッシュするのに費やした時間は、期間の一部として報告されますが、それは AWS が関数の応答をクライアントに返した*後*に行われます。言い換えれば、追加された期間は、Lambda 関数を*遅くすることはありません*。技術的な情報については、こちらの [AWS ブログポスト](https://aws.amazon.com/blogs/compute/performance-and-functionality-improvements-for-aws-lambda-extensions/)を参照してください。Datadog 拡張機能によって追加された期間を除外して関数の実際のパフォーマンスを監視するには、 `aws.lambda.enhanced.runtime_duration` というメトリクスを使用します。
+You may notice an increase of your Lambda function's reported duration (`aws.lambda.duration` or `aws.lambda.enhanced.duration`). This is because the Datadog Lambda Extension needs to flush data back to the Datadog API. Although the time spent by the extension flushing data is reported as part of the duration, it's done *after* AWS returns your function's response back to the client. In other words, the added duration *does not slow down* your Lambda function. See this [AWS blog post](https://aws.amazon.com/blogs/compute/performance-and-functionality-improvements-for-aws-lambda-extensions/) for more technical information. To monitor your function's actual performance and exclude the duration added by the Datadog extension, use the metric `aws.lambda.enhanced.runtime_duration`.
 
-デフォルトでは、拡張機能は各呼び出しの最後にデータを Datadog にフラッシュします (例えば、コールドスタートは常にフラッシュをトリガーします)。これにより、トラフィックの少ないアプリケーション、cron ジョブ、および手動テストからの散発的な呼び出しに対するデータ到着の遅延を回避できます。拡張機能が安定した頻繁な呼び出しパターン (1 分に 1 回以上) を検出すると、複数の呼び出しからデータをバッチ処理し、期限が来た呼び出しの最初に定期的にフラッシュを行います。これは、*関数が頻繁に呼び出されるようになるほど、呼び出しごとの平均実行時間のオーバーヘッドが低くなる*ことを意味します。言い換えれば、低トラフィックのアプリケーションでは、持続時間のオーバーヘッドが顕著になる一方で、関連するコストのオーバーヘッドは通常無視できます。高トラフィックのアプリケーションでは、持続時間のオーバーヘッドはほとんど気にならないでしょう。Datadog 拡張機能がデータをフラッシュするために使用する持続期間のオーバーヘッドを理解するには、メトリクス `aws.lambda.post_runtime_extensions_duration` または `aws.lambda.enhanced.post_runtime_duration` を使用します。
+By default, the Extension flushes data back to Datadog at the end of each invocation (for example, cold starts always trigger flushing). This avoids delays of data arrival for sporadic invocations from low-traffic applications, cron jobs, and manual tests. Once the Extension detects a steady and frequent invocation pattern (more than once per minute), it batches data from multiple invocations and flushes periodically at the beginning of the invocation when it's due. This means that *the busier your function is, the lower the average duration overhead per invocation*. In other words, for low-traffic applications, the duration overhead would be noticeable while the associated cost overhead is typically negligible; for high-traffic applications, the duration overhead would be barely noticeable. To understand the duration overhead that is used by the Datadog extension to flush data, use the metric `aws.lambda.post_runtime_extensions_duration` or `aws.lambda.enhanced.post_runtime_duration`. 
 
-Datadog サイトから遠く離れた地域にデプロイされた Lambda 関数の場合、例えば US1 の Datadog サイトにデータを報告する eu-west-1 にデプロイされた Lambda 関数は、ネットワークのレイテンシーに起因する高い持続期間 (したがってコスト) のオーバーヘッドを観測することができます。オーバーヘッドを減らすには、拡張機能を構成して、データをフラッシュする頻度を少なく (例えば毎分: `DD_SERVERLESS_FLUSH_STRATEGY=periodically,60000`) します。
+For Lambda functions deployed in a region that is far from the Datadog site, for example, a Lambda function deployed in eu-west-1 reporting data to the US1 Datadog site, can observe a higher duration (and therefore, cost) overhead due to the network latency. To reduce the overhead, configure the extension to flush data less often, such as every minute `DD_SERVERLESS_FLUSH_STRATEGY=periodically,60000`.
 
-非常に短いタイムアウトが構成されている場合 (_短い_の定義はランタイムに依存します)、まれに Lambda ハンドラーコードが次の呼び出しで実行されないことがあります。これは、最初の呼び出しがタイムアウトし、次の呼び出しで `INIT` [フェーズ](https://docs.aws.amazon.com/lambda/latest/dg/runtimes-extensions-api.html#runtimes-extensions-api-lifecycle)を再度開始する必要がある場合に発生します。次の呼び出しで `INIT` フェーズが完了する前に関数がタイムアウトした場合、関数は Lambda によって終了され、ハンドラーコードは実行されません。このような失敗は `INIT_REPORT` [ログ](https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtime-environment.html#runtimes-lifecycle-init-errors)を使って特定できます。Datadog では、このような現象が確認された Lambda 関数のタイムアウトを増やすことを推奨しています。
+In some rare cases where a very short timeout is configured (the definition of what is _short_ depends on the runtime), it is possible to notice that the Lambda handler code may not get run on subsequent invocations. This is a possibility when the first invocation times out, requiring the `INIT` [phase](https://docs.aws.amazon.com/lambda/latest/dg/runtimes-extensions-api.html#runtimes-extensions-api-lifecycle) to be started again in the next invocation. In the subsequent invocation, should the function time out before the `INIT` phase is completed, the function is terminated by Lambda and the handler code is not run. You can identify these failures using `INIT_REPORT` [logs](https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtime-environment.html#runtimes-lifecycle-init-errors). Datadog recommends increasing the timeout for a Lambda function where this has been identified.
 
-## 問題を開く
+## Opening Issues
 
-このパッケージでバグが発生した場合は、お知らせください。新しい問題を開く前に、重複を避けるために既存の問題を検索してください。
+If you encounter a bug with this package, we want to hear about it. Before opening a new issue, search the existing issues to avoid duplicates.
 
-問題を開くときは、拡張機能のバージョン、および取得できる場合はスタックトレースを含めてください。さらに、必要に応じて再現手順を含めてください。
+When opening an issue, include the Extension version, and stack trace if available. In addition, include the steps to reproduce when appropriate.
 
-機能リクエストの問題を開くこともできます。
+You can also open an issue for a feature request.
 
-## 寄稿
+## Contributing
 
-このパッケージに問題が見つかり、修正された場合は、[手順](https://github.com/DataDog/datadog-agent/blob/master/docs/dev/contributing.md)に従ってプルリクエストを開いてください。
+If you find an issue with this package and have a fix, please feel free to open a pull request following the [procedures](https://github.com/DataDog/datadog-agent/blob/master/docs/dev/contributing.md).
 
-## テスト
+## Testing
 
-Google Cloud Run で Datadog Serverless-Init の変更をテストするには
+To test a change to the Datadog Serverless-Init in Google Cloud Run:
 
-1. このリポジトリと [Datadog Agent リポジトリ](https://github.com/DataDog/datadog-agent)を同じ親ディレクトリに複製します。
-2. このリポジトリで `VERSION=0 SERVERLESS_INIT=true ./scripts/build_binary_and_layer_dockerized.sh` を実行して、serverless-init バイナリをビルドします。
-3. [ここに説明されているように](https://cloud.google.com/run/docs/quickstarts/build-and-deploy/go) "Hello World" サーバーレスアプリケーションを作成します。
-4. [公開されている手順](https://docs.datadoghq.com/serverless/google_cloud_run)に従って、サーバーレスアプリケーションに Serverless-Init を追加します。
-5. ビルドしたバイナリファイルを Dockerfile と同じ場所にコピーします。
+1. Clone this repo and [the Datadog Agent repo](https://github.com/DataDog/datadog-agent) into the same parent directory.
+2. Run `VERSION=0 SERVERLESS_INIT=true ./scripts/build_binary_and_layer_dockerized.sh` in this repo to build the serverless-init binary.
+3. Create a "Hello World" serverless application [as described here](https://cloud.google.com/run/docs/quickstarts/build-and-deploy/go).
+4. Follow [the public instructions](https://docs.datadoghq.com/serverless/google_cloud_run) to add the Serverless-Init to your serverless application.
+5. Copy the binary file that you built to the same location as your Dockerfile:
 ```
 cp datadog-lambda-extension/.layers/datadog_extension-amd64/extensions/datadog-agent ~/hello-world-app/datadog-init
 ```
-6. Dockerfile で、
+6. In your Dockerfile, replace
 ```
 COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
 ```
-を以下に置き換えます。
+with
 ```
 COPY datadog-init /app/datadog-init
 ```
 
-サーバーレスアプリケーションをデプロイすると、コードへの変更を含むバージョンの Serverless-Init で実行されます。
+Deploy your serverless application, and it will run with a version of the Serverless-Init that includes your changes to the code.
 
-## コミュニティ
+## Community
 
-製品のフィードバックや質問については、[Slack の Datadog コミュニティ](https://chat.datadoghq.com/)の `#serverless` チャンネルに参加してください。
+For product feedback and questions, join the `#serverless` channel in the [Datadog community on Slack](https://chat.datadoghq.com/).
 
-## ライセンス
+## License
 
-特に明記されていない限り、このリポジトリ内のすべてのファイルは、Apache License Version 2.0 の下でライセンスされます。
+Unless explicitly stated otherwise all files in this repository are licensed under the Apache License Version 2.0.
 
-この製品には、Datadog(https://www.datadoghq.com/) で開発されたソフトウェアが含まれています。Copyright 2021 Datadog, Inc.
+This product includes software developed at Datadog (https://www.datadoghq.com/). Copyright 2021 Datadog, Inc.

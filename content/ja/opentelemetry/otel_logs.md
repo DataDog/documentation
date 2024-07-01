@@ -1,40 +1,40 @@
 ---
+title: Send Logs from OpenTelemetry to Datadog
 aliases:
-- /ja/logs/log_collection/opentelemetry/
+- /logs/log_collection/opentelemetry/
 further_reading:
-- link: tracing/glossary/
-  tag: OpenTelemetry
-  text: Collectorドキュメント
-- link: https://www.datadoghq.com/blog/ingest-opentelemetry-traces-metrics-with-datadog-exporter/
-  tag: ブログ
-  text: OpenTelemetry コレクターを使用して Datadog エクスポーター経由で Datadog にメトリクス、トレース、ログを送信する
+- link: "https://opentelemetry.io/docs/collector/"
+  tag: External Site
+  text: Collector documentation
+- link: "https://www.datadoghq.com/blog/ingest-opentelemetry-traces-metrics-with-datadog-exporter/"
+  tag: Blog
+  text: Send metrics, traces, and logs from OpenTelemetry Collector to Datadog using Datadog Exporter
 - link: /tracing/other_telemetry/connect_logs_and_traces/opentelemetry/?tab=python
   tag: Documentation
-  text: OpenTelemetry トレースとログに接続
-title: OpenTelemetry から Datadog にログを送信する
+  text: Connect OpenTelemetry Traces and Logs
 ---
 
-<div class="alert alert-warning"><a href="https://opentelemetry.io/docs/reference/specification/logs/">OpenTelemetry のロギング</a>と Datadog Exporter の Datadog にログを送信する機能は、アルファ版です。</div>
+<div class="alert alert-warning"><a href="https://opentelemetry.io/docs/reference/specification/logs/">OpenTelemetry logging</a> and Datadog Exporter's feature for sending logs to Datadog are in alpha.</div>
 
-## 概要
+## Overview
 
-[OpenTelemetry][1] は、オープンソースの観測可能性フレームワークで、IT チームにテレメトリーデータを収集しルーティングするための標準化されたプロトコルとツールを提供します。Cloud Native Computing Foundation][2] (CNCF) によってインキュベータープロジェクトとして作成された OpenTelemetry は、アプリケーションテレメトリーデータ (メトリクス、ログ、トレースなど) をインスツルメント、生成、収集、エクスポートし、分析および洞察するための監視プラットフォームに対して一貫したフォーマットを提供するものです。
+[OpenTelemetry][1] is an open source observability framework that provides IT teams with standardized protocols and tools for collecting and routing telemetry data. Created as an incubator project by the [Cloud Native Computing Foundation][2] (CNCF), OpenTelemetry provides a consistent format for instrumenting, generating, gathering, and exporting application telemetry data—namely metrics, logs, and traces—to monitoring platforms for analysis and insight.
 
-OpenTelemetry Collector は、あらゆるベンダーに対応するエージェントプロセスで、さまざまなプロセスにより送信されたテレメトリデータを収集、エクスポートします。Datadog には、OpenTelemetry Collector で使える [Exporter][3] があり、OpenTelemetry から Datadog にトレース、メトリクス、ログデータを転送することができます。
+The OpenTelemetry Collector is a vendor-agnostic agent process for collecting and exporting telemetry data emitted by many processes. Datadog has an [Exporter][3] available for the OpenTelemetry Collector which allows you to forward traces, metrics, and logs data from OpenTelemetry to Datadog. 
 
-ログを収集する場合、Datadog は Collector の [filelog レシーバー][4]の使用を推奨しています。filelog レシーバーは、指定したログファイルを追跡します。その後、Datadog Exporter (Collector で設定) がログデータを Datadog に送信します。
+For collecting logs, Datadog recommends using the Collector's [filelog receiver][4]. The filelog receiver tails the log files that you specify. Then the Datadog Exporter (set up in the Collector) sends the log data to Datadog. 
 
-{{< img src="logs/log_collection/otel_collector_logs.png" alt="データを送信するホスト、コンテナ、アプリケーション、コレクター内の filelog レシーバー、コレクター内の Datadog Exporter が Datadog バックエンドにデータを送信する様子を示した図" style="width:100%;">}}
+{{< img src="logs/log_collection/otel_collector_logs.png" alt="A diagram showing the host, container, or application sending data the filelog receiver in the collector and the Datadog Exporter in the collector sending the data to the Datadog backend" style="width:100%;">}}
 
-## セットアップ
+## Setup
 
-アプリケーションやサービスが [OpenTelemetry][4] ライブラリでインスツルメンテーションされている場合、OpenTelemetry Collector と Datadog Exporter を使用して、ログデータを Datadog バックエンドに送信します。
+If your applications and services are instrumented with [OpenTelemetry][4] libraries, send the logs data to the Datadog backend by using the OpenTelemetry Collector with the Datadog Exporter.
 
-[ログを OpenTelemetry コレクターに送信し、Datadog エクスポーターで Datadog に転送する][5]
+[Send logs to the OpenTelemetry collector, and use the Datadog exporter to forward them to Datadog][5]
 
-詳しくは [OpenTelemetry][6] をお読みください。
+Read [OpenTelemetry][6] for more information.
 
-## その他の参考資料
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -42,5 +42,5 @@ OpenTelemetry Collector は、あらゆるベンダーに対応するエージ�
 [2]: https://www.cncf.io/
 [3]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/exporter/datadogexporter
 [4]: https://opentelemetry.io/docs/reference/specification/logs/overview/#third-party-application-logs
-[5]: /ja/opentelemetry/otel_collector_datadog_exporter/?tab=onahost#4-configure-the-logger-for-your-application
-[6]: /ja/tracing/other_telemetry/connect_logs_and_traces/opentelemetry/?tab=python
+[5]: /opentelemetry/otel_collector_datadog_exporter/?tab=onahost#step-4---configure-the-logger-for-your-application
+[6]: /tracing/other_telemetry/connect_logs_and_traces/opentelemetry/?tab=python

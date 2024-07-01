@@ -1,18 +1,19 @@
 ---
-title: Docker ログ収集のトラブルシューティングガイド
+title: Docker Log Collection Troubleshooting Guide
+kind: documentation
 ---
 
-コンテナ Agent、またはローカルにインストールされたホスト Agent で Datadog に新しいコンテナ ログを送信する際に、よく障害となる問題がいくつかあります。新しいログを Datadog に送信する際に問題が発生した場合は、このガイドをトラブルシューティングにお役立てください。それでも問題が解決しない場合は、[Datadog サポートチーム][1]までお問い合わせください。
+There are a number of common issues that can get in the way when sending new container logs to Datadog with the Container Agent or with a locally installed Host Agent. If you experience issues sending new logs to Datadog, this guide helps you troubleshoot. If you continue to have trouble, [contact our support team][1] for further assistance.
 
-## Agent のステータスのチェック
+## Check the Agent status
 
-1. ロギング Agent に問題があるか確認するには、以下のコマンドを実行します。
+1. To see if the logging Agent is experiencing any issues, run the following command:
 
     ```
     docker exec -it <CONTAINER_NAME> agent status
     ```
 
-2. すべてがスムーズに稼働している場合は、以下のようなステータスが表示されるはずです。　
+2. If everything is running smoothly, you should see something like the following status:
 
     ```
     ==========
@@ -28,15 +29,15 @@ title: Docker ログ収集のトラブルシューティングガイド
         Inputs: 497f0cc8b673397ed31222c0f94128c27a480cb3b2022e71d42a8299039006fb
     ```
 
-3. ログ Agent のステータスが上記とは異なる場合、以下のセクションにあるトラブルシューティングのヒントを参照してください。
+3. If the Logs Agent Status doesn't look like the above, refer to the troubleshooting tips in the following sections.
 
-4. 上記のようなステータスが表示されるが、ログを受信できない場合は、[ステータス: エラーなし](#status-no-errors)のセクションを参照してください。
+4. If you see a status like the above example and you still aren't receiving logs, see the [Status: no errors](#status-no-errors) section.
 
-## ログ Agent
+## Logs Agent
 
-### ステータス: 停止中
+### Status: not running
 
-Agent のステータスコマンドを実行すると以下のメッセージが表示される場合:
+If you see the following message when you run the Agent status command:
 
 ```text
 ==========
@@ -46,13 +47,13 @@ Logs Agent
   Logs Agent is not running
 ```
 
-これは、Agent でロギングが有効になっていないことを意味します。
+This means that you did not enable logging in the Agent.
 
-コンテナ Agent のロギングを有効にするには、環境変数 `DD_LOGS_ENABLED=true` を設定します。
+To enable logging for the Container Agent, set the following environment variable: `DD_LOGS_ENABLED=true`.
 
-### 処理済みまたは送信済みのログはありません
+### No logs processed or sent
 
-ログ Agent のステータスにインテグレーションが表示されず、`LogsProcessed: 0 and LogsSent: 0` と表示されることがあります。
+If the Logs Agent Status shows no integrations and you see `LogsProcessed: 0 and LogsSent: 0`:
 
 ```text
 ==========
@@ -62,20 +63,20 @@ Logs Agent
     LogsSent: 0
 ```
 
-この場合、ログは有効になっていますが、Agent がログを収集するコンテナが指定されていません。
+This status means that logs are enabled but you haven't specified which containers the Agent should collect from.
 
-1. 設定した環境変数をチェックするには、`docker inspect <AGENT_CONTAINER>` コマンドを実行します。
+1. To check what environment variables you've set, run the command `docker inspect <AGENT_CONTAINER>`.
 
-2. Agent が他のコンテナからログを収集するように構成するには、`DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL` 環境変数を `true` に設定してください。
+2. To configure the Agent to collect from other containers, set the `DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL` environment variable to `true`.
 
 
-## ファイルからの Docker ログ収集の問題
+## Docker log collection from file issues
 
-ディスクのログファイルが Agent によりアクセス可能であれば、Agent はバージョン 6.33.0/7.33.0 以降ではデフォルトでディスクのログファイルから Docker ログを収集します。この行動を無効にするには、`DD_LOGS_CONFIG_DOCKER_CONTAINER_USE_FILE` を `false` に設定します。
+The Agent collects Docker logs from the log files on disk by default in versions 6.33.0/7.33.0+ so long as the log files on disk are accessible by the Agent. `DD_LOGS_CONFIG_DOCKER_CONTAINER_USE_FILE` can be set to `false` to disable this behavior.
 
-ログファイルパスにアクセスできない場合、Agent は Docker socket からコンテナを追跡します。Agent が Docker socket を使用して特定のコンテナからログを収集した場合、ログの重複送信を避けるため、それを継続します (Agent の再起動後も)。Agent にファイルからのログ収集を強制するには、`DD_LOGS_CONFIG_DOCKER_CONTAINER_FORCE_USE_FILE` を `true` に設定します。この設定は、ログが Datadog に重複して表示される原因になる場合があります。
+The Agent tails containers from the Docker socket if it cannot access the logs file path. If the Agent ever collected logs from a particular container using the Docker socket, it will continue to do so (including after Agent restarts) in order to avoid sending duplicate logs. To force the Agent to collect logs from file, set `DD_LOGS_CONFIG_DOCKER_CONTAINER_FORCE_USE_FILE` to `true`. This setting may cause duplicate logs to appear in Datadog.
 
-Docker コンテナのログをファイルから収集する際、Docker コンテナのログが保存されているディレクトリ (Linux では `/var/lib/docker/containers`) から読み込めない場合、Agent は Docker ソケットからの収集に頼ります。状況によっては、Datadog Agent でファイルからのログ収集ができない場合があります。この診断には、ログ Agent のステータスをチェックして、下記に類似するエラーを示すファイルタイプのエントリを探します。
+When collecting Docker container logs from file, the Agent falls back on collection from the Docker socket if it cannot read from the directory where Docker container logs are stored (`/var/lib/docker/containers` on Linux). In some circumstances, the Datadog Agent may fail to collect logs from file. To diagnose this, check the Logs Agent status and look for a file type entry showing an error similar to the following:
 
 ```text
     - Type: file
@@ -84,17 +85,17 @@ Docker コンテナのログをファイルから収集する際、Docker コン
       Status: Error: file /var/lib/docker/containers/ce0bae54880ad75b7bf320c3d6cac1ef3efda21fc6787775605f4ba8b6efc834/ce0bae54880ad75b7bf320c3d6cac1ef3efda21fc6787775605f4ba8b6efc834-json.log does not exist
 ```
 
-このステータスは、Agent が指定されたコンテナのログファイルを見つけられないことを意味します。この問題を解決するには、Docker コンテナログを含むフォルダーが Datadog Agent コンテナに正しく公開されていることを確認します。Linux では、Agent コンテナを起動するコマンドラインの `-v /var/lib/docker/containers:/var/lib/docker/containers:ro` に該当します。Windows では `-v c:/programdata/docker/containers:c:/programdata/docker/containers:ro` です。基底のホストに相対的なディレクトリは、Docker Daemon の特定のコンフィギュレーションのため、異なる場合があることにご留意ください。これは、正しい Docker ボリュームのマッピングが保留となる問題ではありません。たとえば、Docker のデータディレクトリの場所が基底のホストで `/data/docker` に変わった場合は、`-v /data/docker/containers:/var/lib/docker/containers:ro` を使用します。
+This status means that the Agent is unable to find a log file for a given container. To resolve this issue, check that the folder containing Docker container logs is correctly exposed to the Datadog Agent container. On Linux, it corresponds to  `-v /var/lib/docker/containers:/var/lib/docker/containers:ro` on the command line starting the Agent container, whereas on Windows it corresponds to `-v c:/programdata/docker/containers:c:/programdata/docker/containers:ro`. Note that the directory relative to the underlying host may be different due to specific configuration of the Docker daemon—this is not an issue pending a correct Docker volume mapping. For example, use `-v /data/docker/containers:/var/lib/docker/containers:ro` if the Docker data directory has been relocated to `/data/docker` on the underlying host.
 
-収集されたログの単一行が分かれている場合は、Docker Daemon が [JSON ロギングドライバ](#your-containers-are-not-using-the-json-logging-driver)を使用していることを確認します。
+If logs are collected but single lines appear to be split, check that the Docker daemon is using the [JSON logging driver](#your-containers-are-not-using-the-json-logging-driver).
 
-**注:** ホストに Agent をインストールする際、Agent には `/var/lib/docker/containers` へのアクセス権限がありません。したがって、ホストにインストールされた時、Agent は Docker socket からのログを収集します。
-
-
-### ステータス: 保留中
+**Note:** When you install the Agent on the host, the Agent does not have permission to access `/var/lib/docker/containers`. Therefore, the Agent collects logs from the Docker socket when it is installed on the host. 
 
 
-ログ Agent のステータスに "Status: Pending" と表示されることがあります。
+### Status: pending
+
+
+If the Logs Agent Status shows `Status: Pending`:
 
 ```text
 ==========
@@ -109,15 +110,15 @@ Logs Agent
     Status: Pending
 ```
 
-この場合、ログ Agent は稼働していますが、コンテナログの収集を開始していません。それには以下の理由が考えられます。
+This status means that the Logs Agent is running but it hasn't started collecting container logs. There can be a few reasons for this:
 
-#### ホスト Agent の後に Docker Daemon が開始
+#### Docker Daemon started after the host Agent
 
-Agent のバージョンが 7.17 よりも古い場合で、ホスト Agent が稼働してから Docker デーモンを開始した場合は、Agent を再起動して、コンテナの収集をトリガーし直してください。
+For Agent version prior to 7.17, if the Docker Daemon starts while the host Agent is already running, restart the Agent to retrigger container collection.
 
-#### Docker ソケットがマウントされていません
+#### Docker socket not mounted
 
-コンテナ Agent が Docker コンテナからログを収集するには、Docker ソケットへのアクセスが許可されている必要があります。アクセスできない場合は、以下のログが `agent.log` に表示されます。
+In order for the Container Agent to collect logs from Docker containers, it needs to have access to the Docker socket. If it doesn't have access, the following logs appear in `agent.log`:
 
 ```text
 2019-10-09 14:10:58 UTC | CORE | INFO | (pkg/logs/input/container/launcher.go:51 in NewLauncher) | Could not setup the docker launcher: Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?
@@ -125,44 +126,44 @@ Agent のバージョンが 7.17 よりも古い場合で、ホスト Agent が�
 2019-10-09 14:10:58 UTC | CORE | INFO | (pkg/logs/input/container/launcher.go:61 in NewLauncher) | Container logs won't be collected
 ```
 
-Docker ソケットへのアクセスを可能にするには、`-v /var/run/docker.sock:/var/run/docker.sock:ro` のオプションを使用して Agent コンテナを再起動します。
+Relaunch the Agent container with the following option: `-v /var/run/docker.sock:/var/run/docker.sock:ro` to allow access to the Docker socket.
 
-### ステータス: エラーなし
+### Status: no errors
 
-ログ Agent のステータスが [Agent のステータスのチェック](#check-the-agent-status)の例のように表示されるものの、ログが Datadog プラットフォームに到達しない場合は、次のいずれかの問題が考えられます。
+If the Logs Agent status looks like the example in [Check the Agent status](#check-the-agent-status) but your logs still aren't reaching the Datadog platform, there could be a problem with one of the following:
 
-* Datadog へのログの送信に必要なポート (10516) がブロックされる。
-* Agent が予期するものとは異なるロギングドライバーが、コンテナに使用されている。
+* The required port (10516) for sending logs to Datadog is being blocked.
+* Your container is using a different logging driver than the Agent expects.
 
-#### ポート 10516 のアウトバウンドトラフィックがブロックされる
+#### Outbound traffic on port 10516 is blocked
 
-Datadog Agent は、ポート 10516 を使って TCP で Datadog にログを送信します。この接続が使用できない場合、ログは送信に失敗し、それを示すエラーが `agent.log` ファイルに記録されます。
+The Datadog Agent sends its logs to Datadog over TCP using port 10516. If that connection is not available, logs fail to be sent and an error is recorded in the `agent.log` file to that effect.
 
-OpenSSL、GnuTLS、または他の SSL/TLS クライアントを使用して、接続を手動でテストすることができます。OpenSSL の場合は、以下のコマンドを実行します。
+You can manually test your connection using OpenSSL, GnuTLS, or another SSL/TLS client. For OpenSSL, run the following command:
 
 ```shell
 openssl s_client -connect intake.logs.datadoghq.com:10516
 ```
 
-GnuTLS の場合、以下のコマンドを実行します。
+For GnuTLS, run the following command:
 
 ```shell
 gnutls-cli intake.logs.datadoghq.com:10516
 ```
 
-さらに、次のようなログを送信します。
+And then by sending a log like the following:
 
 ```text
-<API_KEY> これはテストメッセージです
+<API_KEY> this is a test message
 ```
 
-ポート 10516 を開くことを選択できない場合は、`DD_LOGS_CONFIG_USE_HTTP` 環境変数を `true` に設定して、Datadog Agent が HTTPS 経由でログを送信するよう構成することができます。
+If opening the port 10516 is not an option, it is possible to configure the Datadog Agent to send logs through HTTPS by setting the `DD_LOGS_CONFIG_USE_HTTP` environment variable to `true`:
 
-#### コンテナに JSON ロギングドライバーが使用されていない
+#### Your containers are not using the JSON logging driver
 
-Docker のデフォルトのロギングドライバーは json-file であり、コンテナ Agent はまずこのドライバーから読み取ろうとします。コンテナが別のロギングドライバーを使用するように設定されている場合、ログ Agent はコンテナを見つけることはできますが、ログを収集することができません。コンテナ Agent は、journald ロギングドライバーから読み取るように構成することもできます。
+Docker's default is the json-file logging driver so the Container Agent tries to read from this first. If your containers are set to use a different logging driver, the Logs Agent indicates that it is able to successfully find your containers but it isn't able to collect their logs. The Container Agent can also be configured to read from the journald logging driver.
 
-1. どのロギングドライバーがコンテナに使用されているかわからない場合は、`docker inspect <コンテナ名>`を使用して、設定されているロギングドライバーを確認してください。コンテナに JSON ロギングドライバーが使用されている場合は、次のコードブロックが表示されます。
+1. If you're unsure of which logging driver your containers are using, use `docker inspect <CONTAINER_NAME>` to see what logging driver you have set. The following block appears in the Docker Inspect when the container is using the JSON logging driver:
 
     ```text
     "LogConfig": {
@@ -171,7 +172,7 @@ Docker のデフォルトのロギングドライバーは json-file であり�
     },
     ```
 
-2. コンテナに journald Dockerロギングドライバーが使用されている場合は、次のコードブロックが表示されます。
+2. If the container is set to the journald logging driver the following block appears in the Docker Inspect:
 
     ```text
     "LogConfig": {
@@ -180,27 +181,27 @@ Docker のデフォルトのロギングドライバーは json-file であり�
     },
     ```
 
-3. journald ロギングドライバーからログを収集するには、[Datadog-Journald のドキュメントに従って][2] journald インテグレーションを設定してください。
+3. To collect logs from the journald logging driver, set up the journald integration [following the Datadog-Journald documentation][2].
 
-4. [Docker Agent のドキュメント][3]の説明に従って、YAML ファイルをコンテナにマウントする必要があります。Docker コンテナへのログドライバーの設定について詳しくは、[こちらのドキュメント][4]を参照してください。
+4. Mount the YAML file into your container following the instructions in the [Docker Agent documentation][3]. For more information on setting log drivers for Docker containers, [see this documentation][4].
 
-## Agent は、大量のログ (> 1GB) を保持しているコンテナからログを送信しません
+## Agent doesn't send logs from containers that have persisted a large volume of logs (> 1GB)
 
-Docker デーモンは、ディスクに大きなログファイルがすでに格納されているコンテナのログを取得しようとしているときに、パフォーマンスの問題が発生する可能性があります。これにより、Datadog Agent が Docker デーモンからコンテナのログを収集しているときに、読み取りタイムアウトが発生する可能性があります。
+The Docker daemon can have performances issues while it is trying to retrieve logs for containers for which it has already stored large logs files on disk. This could lead to read timeouts when the Datadog Agent is gathering the containers' logs from the Docker daemon. 
 
-これが発生すると、Datadog Agent は、30 秒ごとに特定のコンテナに対して `Restarting reader after a read timeout` を含むログを出力し、実際にはメッセージをログに記録している間、そのコンテナからのログの送信を停止します。
+When it occurs, the Datadog Agent outputs a log containing `Restarting reader after a read timeout` for a given container every 30 seconds and stops sending logs from that container while it is actually logging messages.
 
-デフォルトの読み取りタイムアウトは 30 秒に設定されています。この値を大きくすると、Docker デーモンが Datadog Agent に応答するための時間が長くなります。この値は、`logs_config.docker_client_read_timeout` パラメーターを使用するか、環境変数 `DD_LOGS_CONFIG_DOCKER_CLIENT_READ_TIMEOUT` を使用して、`datadog.yaml` で設定できます。この値は秒単位の継続時間です。以下の例では 60 秒に増やしています。
+The default read timeout is set to 30 seconds, increasing this value gives more time to the Docker daemon to reply to the Datadog Agent. This value can be set in `datadog.yaml` using the `logs_config.docker_client_read_timeout` parameter or by using the environment variable `DD_LOGS_CONFIG_DOCKER_CLIENT_READ_TIMEOUT`. This value is a duration in seconds, find below an example increasing it to 60 seconds:
 
 ```yaml
 logs_config:
   docker_client_read_timeout: 60
 ```
 
-## ホスト Agent
-### Docker グループの Agent ユーザー
+## Host Agent
+### Agent user in the Docker group
 
-ホスト Agent を使用している場合、Docker ソケットからの読み取り許可を得るにはユーザー `dd-agent` を Docker グループに追加する必要があります。`agent.log` ファイルに以下のエラーログが表示される場合、
+If you're using the Host Agent, the user `dd-agent` needs to be added to the Docker group to have permission to read from the Docker socket. If you see the following error logs in the `agent.log` file:
 
 ```text
 2019-10-11 09:17:56 UTC | CORE | INFO | (pkg/autodiscovery/autoconfig.go:360 in initListenerCandidates) | docker listener cannot start, will retry: temporary failure in dockerutil, will retry later: could not determine docker server API version: Got permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Get http://%2Fvar%2Frun%2Fdocker.sock/version: dial unix /var/run/docker.sock: connect: permission denied
@@ -208,9 +209,9 @@ logs_config:
 2019-10-11 09:17:56 UTC | CORE | ERROR | (pkg/autodiscovery/config_poller.go:123 in collect) | Unable to collect configurations from provider docker: temporary failure in dockerutil, will retry later: could not determine docker server API version: Got permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Get http://%2Fvar%2Frun%2Fdocker.sock/version: dial unix /var/run/docker.sock: connect: permission denied
 ```
 
-ホスト Agent を Docker ユーザーグループに追加するには、`usermod -a -G docker dd-agent` のコマンドを実行します。
+To add the host Agent to the Docker user group, perform the following command: `usermod -a -G docker dd-agent`.
 
-[1]: /ja/help/
-[2]: /ja/integrations/journald/#setup
-[3]: /ja/agent/docker/?tab=standard#mounting-conf-d
+[1]: /help/
+[2]: /integrations/journald/#setup
+[3]: /agent/docker/?tab=standard#mounting-conf-d
 [4]: https://docs.docker.com/config/containers/logging/journald/

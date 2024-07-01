@@ -1,108 +1,109 @@
 ---
-description: AWS 組織の Datadog AWS インテグレーションを設定するためのステップ
+title: AWS Integration Multi-Account setup for AWS Organizations
+kind: guide
+description: "Steps for setting up the Datadog AWS Integration for an AWS Organization"
 further_reading:
-- link: https://docs.datadoghq.com/integrations/guide/aws-integration-troubleshooting/
-  tag: ガイド
-  text: AWS インテグレーションのトラブルシューティング
-- link: https://www.datadoghq.com/blog/aws-monitoring/
-  tag: ブログ
-  text: AWS 監視のための主要なメトリクス
-- link: https://www.datadoghq.com/blog/cloud-security-posture-management/
-  tag: ブログ
-  text: Datadog クラウドセキュリティポスチャ管理
-- link: https://www.datadoghq.com/blog/datadog-workload-security/
-  tag: ブログ
-  text: Datadog クラウドワークロードセキュリティでリアルタイムにインフラストラクチャーを保護する
-- link: https://www.datadoghq.com/blog/announcing-cloud-siem/
-  tag: ブログ
-  text: Datadog セキュリティモニタリングが新登場
-kind: ガイド
-title: AWS 組織向け AWS インテグレーションマルチアカウント設定
+- link: "https://docs.datadoghq.com/integrations/guide/aws-integration-troubleshooting/"
+  tag: Guide
+  text: Troubleshooting the AWS integration 
+- link: "https://www.datadoghq.com/blog/aws-monitoring/"
+  tag: Blog
+  text: Key metrics for AWS monitoring
+- link: "https://www.datadoghq.com/blog/cloud-security-posture-management/"
+  tag: Blog
+  text: Introducing Datadog Cloud Security Posture Management
+- link: "https://www.datadoghq.com/blog/datadog-workload-security/"
+  tag: Blog
+  text: Secure your infrastructure in real time with Datadog Cloud Workload Security
+- link: "https://www.datadoghq.com/blog/announcing-cloud-siem/"
+  tag: Blog
+  text: Announcing Datadog Security Monitoring
+
 ---
 
-## 概要
+## Overview
 
-このガイドでは、AWS 組織内の複数のアカウントで [AWS インテグレーション][8]を設定するためのプロセスの概要を説明します。
+This guide provides an overview of the process for setting up the [AWS Integration][8] with multiple accounts within an AWS Organization.
 
-Datadog が提供する CloudFormation StackSet テンプレートは、組織または組織単位 (OU) 下のすべての AWS アカウントに必要な IAM ロールと関連ポリシーを自動作成し、Datadog 内でアカウントを構成するため、手動で設定する必要がありません。セットアップが完了すると、インテグレーションは自動的に AWS メトリクスとイベントの収集を開始し、インフラストラクチャーの監視を開始することができます。
+The CloudFormation StackSet template provided by Datadog automates the creation of the required IAM role and associated policies in every AWS account under an Organization or Organizational Unit (OU), and configures the accounts within Datadog, eliminating the need for manual setup. Once set up, the integration automatically starts collecting AWS metrics and events for you to start monitoring your infrastructure.
 
-Datadog CloudFormation StackSet は、以下のステップを実行します。
+The Datadog CloudFormation StackSet performs the following steps:
 
-1. AWS 組織または組織単位の下にあるすべてのアカウントで Datadog AWS CloudFormation Stack をデプロイします。
-2. 対象アカウントに必要な IAM ロールとポリシーを自動作成します。
-3. アカウント内の AWS リソースから、AWS CloudWatch のメトリクスやイベントの取り込みを自動的に開始します。
-4. オプションで、AWS インフラストラクチャーのメトリクス収集を無効にします。これは、Cloud Cost Management (CCM) または Cloud Security Management Misconfigurations (CSM Misconfigurations) 固有のユースケースに有用です。
-5. オプションで、CSM Misconfigurations を構成して、AWS アカウントのリソース誤構成を監視します。
+1. Deploys the Datadog AWS CloudFormation Stack in every account under an AWS Organization or Organizational Unit.
+2. Automatically creates the necessary IAM role and policies in the target accounts.
+3. Automatically initiates ingestion of AWS CloudWatch metrics and events from the AWS resources in the accounts.
+4. Optionally disables metric collection for the AWS infrastructure. This is useful for Cloud Cost Management (CCM) or Cloud Security Management Misconfigurations (CSM Misconfigurations) specific use cases.
+5. Optionally configures CSM Misconfigurations to monitor resource misconfigurations in your AWS accounts.
 
-**注**: StackSet では、AWS アカウントでのログ転送は設定されません。ログを設定するには、[ログ収集][2]のガイドの手順に従ってください。
-
-
-## 前提条件
-
-1. **Access to the management account**: AWS ユーザーは AWS 管理アカウントにアクセスできる必要があります。
-2. **An account administrator has enabled Trusted Access with AWS Organizations**: [AWS 組織との信頼されたアクセスを有効にする][3]を参照し、StackSet と組織間の信頼されたアクセスを有効にし、サービス管理権限を使用してスタックを作成およびデプロイします。
-
-## セットアップ
-
-まずは Datadog の [AWS インテグレーション構成ページ][1]から、**AWS Account(s)** -> **Add Multiple AWS Accounts** -> **CloudFormation StackSet** をクリックします。
-
-**Launch CloudFormation StackSet** をクリックします。これで AWS Console が開き、新しい CloudFormation StackSet がロードされます。AWS の `Service-managed permissions` のデフォルト選択のままにしておきます。
-
-AWS コンソールで以下の手順で StackSet を作成し、デプロイします。
-
-1. **テンプレートを選択する**  
-Datadog AWS インテグレーション構成ページから Template URL をコピーし、StackSet の `Specify Template` パラメーターで使用します。
+**Note**: The StackSet does not set up log forwarding in the AWS accounts. To set up logs, follow the steps in the [Log Collection][2] guide.
 
 
-2. **StackSet の詳細を指定する**
-    - Datadog AWS インテグレーション構成ページで Datadog API キーを選択し、StackSet の `DatadogApiKey` パラメーターに使用します。
-    - Datadog AWS インテグレーション構成ページで Datadog APP キーを選択し、StackSet の `DatadogAppKey` パラメーターに使用します。
+## Prerequisites
 
-    - *オプションで:*  
-       a. [Cloud Security Management Misconfigurations][5] (CSM Misconfigurations) を有効にして、クラウド環境、ホスト、コンテナをスキャンし、誤構成やセキュリティリスクを検出します。
-        b. AWS インフラストラクチャーを監視したくない場合は、メトリクス収集を無効にします。これは、[Cloud Cost Management][6] (CCM) または [CSM Misconfigurations][5] 固有のユースケースにのみ推奨されます。
+1. **Access to the management account**: Your AWS user needs to be able to access the AWS management account.
+2. **An account administrator has enabled Trusted Access with AWS Organizations**: Refer to [Enable trusted access with AWS Organizations][3] to enable trusted access between StackSets and Organizations, to create and deploy stacks using service-managed permissions.
 
-3. **StackSet オプションを構成する**
-StackSet が一度に 1 つの操作を実行するように、**Execution configuration** オプションを `Inactive` にしておきます。
+## Setup
 
-4. **デプロイオプションを設定する**
-    - `Deployment targets` は、組織全体または 1 つ以上の組織単位に Datadog インテグレーションをデプロイするように設定することができます。
+To get started, go to the [AWS Integration configuration page][1] in Datadog and click on **Add AWS Account(s)** -> **Add Multiple AWS Accounts** -> **CloudFormation StackSet**.
 
+Click **Launch CloudFormation StackSet**. This opens the AWS Console and loads a new CloudFormation StackSet. Keep the default choice of `Service-managed permissions` on AWS.  
 
-    - 組織や OU に追加された新しいアカウントに Datadog AWS Integration を自動的にデプロイするために、`Automatic deployment` を有効にしておきます。
+Follow the steps below on the AWS console to create and deploy your StackSet:
 
-    - **Specify regions** で、各 AWS アカウントでインテグレーションをデプロイするリージョンを 1 つ選択します。 
-      **注**: StackSet は、リージョンに依存しないグローバルな IAM リソースを作成します。このステップで複数のリージョンが選択された場合、デプロイは失敗します。
-
-    - **Deployment options** のデフォルト設定を sequential にすることで、StackSets の操作は一度に 1 つのリージョンにデプロイされるようになります。
-
-5. **レビュー**  
-   **Review** ページに移動し、**Submit** をクリックします。これで、Datadog StackSet の作成プロセスが開始されます。これは、インテグレーションが必要なアカウントの数に応じて、数分かかる場合があります。StackSet がすべてのリソースを正常に作成したことを確認してから次に進みます。
-
-   &nbsp;スタックが作成されたら、Datadog の AWS インテグレーション構成ページに戻り、**Done** をクリックします。新しくインテグレーションされた AWS アカウントからのメトリクスやイベントレポートが表示されるまで、数分かかる場合があります。
+1. **Choose a Template**  
+Copy the Template URL from the Datadog AWS integration configuration page to use in the `Specify Template` parameter in the StackSet.
 
 
-## 個々の AWS サービスに対するインテグレーションを有効にする
+2. **Specify StackSet details**
+    - Select your Datadog API key on Datadog AWS integration configuration page and use it in the `DatadogApiKey` parameter in the StackSet.
+    - Select your Datadog APP key on Datadog AWS integration configuration page and use it in the `DatadogAppKey` parameter in the StackSet.
 
-監視対象の各 AWS アカウントで有効化できる利用可能なサブインテグレーションの全リストは、[インテグレーションページ][4]を参照してください。Datadog にデータを送信するサブインテグレーションは、インテグレーションからデータが受信されると自動的にインストールされます。
+    - *Optionally:*  
+        a. Enable [Cloud Security Management Misconfigurations][5] (CSM Misconfigurations) to scan your cloud environment, hosts, and containers for misconfigurations and security risks.  
+        b. Disable metric collection if you do not want to monitor your AWS infrastructure. This is recommended only for [Cloud Cost Management][6] (CCM) or [CSM Misconfigurations][5] specific use cases.
 
-## ログを送信する
+3. **Configure StackSet options**  
+Keep the **Execution configuration** option as `Inactive` so the StackSet performs one operation at a time.
 
-StackSet では、AWS アカウントでのログ転送は設定されません。ログを設定するには、[ログ収集][2]のガイドの手順に従ってください。
+4. **Set deployment options**
+    - You can set your `Deployment targets` to either deploy the Datadog integration across an Organization or one or more Organizational Units.
 
-## AWS インテグレーションのアンインストール
 
-組織内のすべての AWS アカウントおよびリージョンから AWS インテグレーションをアンインストールするには、まずすべての StackInstances を削除し、次に StackSet を削除します。[スタックセットの削除][7]で説明した手順で、作成した StackInstance と StackSet を削除します。
+    - Keep `Automatic deployment` enabled in order to automatically deploy the Datadog AWS Integration in new accounts that are added to the Organization or OU.
 
-## その他の参考資料
+    - Under **Specify regions**, select a single region in which you'd like to deploy the integration in each AWS account.   
+      **NOTE**: The StackSet creates global IAM resources that are not region specific. If multiple regions are selected in this step, the deployment fails. 
+
+    - Set the default settings under **Deployment options** to be sequential, so StackSets operations are deployed into one region at a time.
+
+5. **Review**  
+    Go to the **Review** page and click **Submit**. This launches the creation process for the Datadog StackSet. This could take several minutes depending on how many accounts need to be integrated. Ensure that the StackSet successfully creates all resources before proceeding.
+
+    After the stacks are created, go back to the AWS integration config page in Datadog and click **Done**. It may take a few minutes to see metrics and events reporting from your newly integrated AWS accounts.
+
+
+## Enable integrations for individual AWS services
+
+See the [Integrations page][4] for a full listing of the available sub-integrations that can be enabled on each monitored AWS account. Any sub-integration sending data to Datadog is automatically installed when data is received from the integration.
+
+## Send logs
+
+The StackSet does not set up log forwarding in the AWS accounts. To set up logs, follow the steps in the [Log Collection][2] guide.
+
+## Uninstall AWS Integration
+
+To uninstall the AWS integration from all AWS accounts and regions in an Organization, first delete all StackInstances and then the StackSet. Follow the steps outlined in [Delete a stack set][7] to delete the created StackInstances and StackSet. 
+
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/integrations/amazon-web-services/
-[2]: /ja/integrations/amazon_web_services/#log-collection
+[2]: /integrations/amazon_web_services/#log-collection
 [3]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-enable-trusted-access.html
-[4]: /ja/integrations/#cat-aws
-[5]: /ja/security/misconfigurations/setup/
-[6]: https://docs.datadoghq.com/ja/cloud_cost_management/?tab=aws
+[4]: /integrations/#cat-aws
+[5]: /security/cloud_security_management/setup/
+[6]: https://docs.datadoghq.com/cloud_cost_management/?tab=aws
 [7]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-delete.html
-[8]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
+[8]: https://docs.datadoghq.com/integrations/amazon_web_services/

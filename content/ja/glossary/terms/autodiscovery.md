@@ -1,6 +1,6 @@
 ---
+title: Autodiscovery
 core_product:
-- datadog agent
-title: オートディスカバリー
+  - datadog agent
 ---
-Datadog では、オートディスカバリーは、コンテナ上で動作しているサービスを自動的に識別する機能です。これにより、Agent チェックの構成テンプレートを定義し、各チェックが適用されるべきコンテナを指定することができます。
+In Datadog, Autodiscovery is a feature that automatically identifies the services running on containers. This enables you to define configuration templates for Agent checks and specify which containers each check should apply.

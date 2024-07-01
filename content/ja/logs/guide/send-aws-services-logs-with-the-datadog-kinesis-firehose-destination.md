@@ -1,75 +1,75 @@
 ---
+title: Send AWS Services Logs with the Datadog Amazon Data Firehose Destination
+kind: documentation
 further_reading:
 - link: /logs/explorer/
   tag: Documentation
-  text: ログの調査方法
-- link: /logs/explorer/#visualize
+  text: Learn how to explore your logs
+- link: "/logs/explorer/#visualize"
   tag: Documentation
-  text: ログ分析の実行
+  text: Perform Log Analytics
 - link: /logs/log_configuration/processors
   tag: Documentation
-  text: ログの処理方法
-- link: https://www.datadoghq.com/blog/send-amazon-vpc-flow-logs-to-data-firehose-and-datadog/
-  tag: GitHub
-  text: Amazon VPC フローログを Amazon Kinesis Data Firehose と Datadog に送信する
-kind: ドキュメント
-title: Datadog Amazon Data Firehose Destination を使用して AWS サービスログを送信する
+  text: Learn how to process your logs
+- link: "https://www.datadoghq.com/blog/send-amazon-vpc-flow-logs-to-data-firehose-and-datadog/"
+  tag: Blog
+  text: Send Amazon VPC flow logs to Amazon Kinesis Data Firehose and Datadog
 ---
 
-## 概要
+## Overview
 
-CloudWatch Log グループに格納された AWS サービスログを Amazon Kinesis データストリームに転送し、その後 Amazon Data Firehose を通じて 1 つまたは複数の宛先に送信することが可能です。Datadog は、Amazon Data Firehose 配信ストリームのデフォルトの宛先の 1 つです。
+You can forward your AWS service logs stored in CloudWatch Log groups to an Amazon Kinesis Data Stream, for subsequent delivery through Amazon Data Firehose to one or multiple destinations. Datadog is one of the default destinations for Amazon Data Firehose Delivery streams. 
 
-AWS は Amazon Data Firehose を完全に管理しているため、ログをストリーミングするための追加のインフラストラクチャーや転送構成を維持する必要はありません。AWS Firehose コンソールで Amazon Data Firehose 配信ストリームを設定するか、CloudFormation テンプレートを使って自動的に転送先を設定することができます。
+AWS fully manages Amazon Data Firehose, so you don't need to maintain any additional infrastructure or forwarding configurations for streaming logs. You can set up an Amazon Data Firehose delivery stream in the AWS Firehose console, or automatically set up the destination using a CloudFormation template.
 
-## セットアップ
+## Setup
 
 {{< tabs >}}
-{{% tab "Amazon Data Firehose 配信ストリーム" %}}
+{{% tab "Amazon Data Firehose Delivery stream" %}}
 
-Datadog は、Amazon Data Firehose で Datadog の宛先を使用する場合、入力として Kinesis データストリームを使用することをお勧めします。Datadog がログの唯一のコンシューマーではない場合に備えて、ログを複数の宛先に転送する機能が用意されています。Datadog がログの唯一の宛先である場合、またはすでにログを含む Kinesis データストリームを持っている場合、ステップ 1 を無視することができます。
+Datadog recommends using a Kinesis Data Stream as input when using the Datadog destination with Amazon Data Firehose. It gives you the ability to forward your logs to multiple destinations, in case Datadog is not the only consumer for those logs. If Datadog is the only destination for your logs, or if you already have a Kinesis Data Stream with your logs, you can ignore step one.
 
-1. オプションとして、AWS の Amazon Kinesis Data Streams 開発者ガイドの[データストリームの作成][1]セクションを使用して、新しい Kinesis データストリームを作成します。ストリームには `DatadogLogStream` のような分かりやすい名前を付けます。
-2. [Amazon Data Firehose][2] に移動します。  
-3. **Create Firehose stream** をクリックします。
-   a. ソースを設定します。
-      - ログが Kinesis データストリームから取得されている場合は、`Amazon Kinesis Data Streams`
-      - ログが CloudWatch のロググループから直接送られてくる場合は、`Direct PUT`
+1. Optionally, use the [Create a Data Stream][1] section of the Amazon Kinesis Data Streams developer guide in AWS to create a new Kinesis data stream. Name the stream something descriptive, like `DatadogLogStream`.
+2. Go to [Amazon Data Firehose][2].  
+3. Click **Create Firehose stream**.
+   a. Set the source: 
+      - `Amazon Kinesis Data Streams` if your logs are coming from a Kinesis Data Stream
+      - `Direct PUT` if your logs are coming directly from a CloudWatch log group
 
-   b. 宛先を `Datadog` にします。 
-   c. 配信ストリームの名前を指定します。
-   d. **Destination settings** で、[Datadog サイト][5]に対応する `Datadog logs` HTTP エンドポイント URL を選択します。 
-   e. API キーを **API key** フィールドに貼り付けます。API キーは、[Datadog API Keys ページ][3]から取得または作成できます。 
-   f. オプションとして、**Retry duration**、バッファの設定を構成するか、またはログにタグとしてアタッチされる **Parameters** を追加することができます。 
-   **注**: Datadog は、ログが 1 行のメッセージである場合、**Buffer size** を `2 MiB` に設定することを推奨します。
-   g. **Backup settings** で、再試行期間を超える失敗したイベントを受け取る S3 バックアップバケットを選択します。 
-   **注**: 配信ストリームで失敗したすべてのログが引き続き Datadog に送信されるようにするには、この S3 バケットから[ログを転送][4]するように Datadog Forwarder Lambda 関数を設定します。
-   h. **Create Firehose stream** をクリックします。
+   b. Set the destination as `Datadog`.  
+   c. Provide a name for the delivery stream.  
+   d. In the **Destination settings**, choose the `Datadog logs` HTTP endpoint URL that corresponds to your [Datadog site][5].  
+   e. Paste your API key into the **API key** field. You can get or create an API key from the [Datadog API Keys page][3].  
+   f. Optionally, configure the **Retry duration**, the buffer settings, or add **Parameters**, which are attached as tags to your logs.  
+   **Note**: Datadog recommends setting the **Buffer size** to `2 MiB` if the logs are single line messages.  
+   g. In the **Backup settings**, select an S3 backup bucket to receive any failed events that exceed the retry duration.  
+     **Note**: To ensure any logs that fail through the delivery stream are still sent to Datadog, set the Datadog Forwarder Lambda function to [forward logs][4] from this S3 bucket.  
+   h. Click **Create Firehose stream**.
 
 [1]: https://docs.aws.amazon.com/streams/latest/dev/tutorial-stock-data-kplkcl-create-stream.html
 [2]: https://console.aws.amazon.com/firehose/
 [3]: https://app.datadoghq.com/organization-settings/api-keys
-[4]: /ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=automaticcloudformation#collecting-logs-from-s3-buckets
-[5]: /ja/getting_started/site/
+[4]: /logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=automaticcloudformation#collecting-logs-from-s3-buckets
+[5]: /getting_started/site/
 {{% /tab %}}
 
 {{% tab "CloudFormation template" %}}
 
-[Kinesis CloudFormation テンプレート][1]を完全にカスタマイズして、AWS コンソールからインストールします。
+Customize the full [Kinesis CloudFormation template][1] and install it from the AWS Console. 
 
 [1]: /resources/json/kinesis-logs-cloudformation-template.json
 {{% /tab %}}
 {{< /tabs >}}
 
-## AWS ログを Firehose ストリームに送信する
+## Send AWS logs to your Firehose stream
 
-CloudWatch ログは、どちらのアプローチを採用するかによって、Kinesis データストリームか Amazon Data Firehose 配信ストリームにデータを入れる権限を必要とします。[IAM ロールとポリシーを作成](#create-an-iam-role-and-policy)します。次に、Datadog に取り込みたい CloudWatch ロググループに、新しい Kinesis ストリームまたは Amazon Data Firehose 配信ストリームを サブスクライブします。サブスクリプションは、[AWS コンソール](#console)または [CLI](#cli) を通じて作成することができます。  
-   **注**: 各 CloudWatch ロググループに許可されるサブスクリプションは 2 つのみです。
+CloudWatch Logs needs permission to put data into your Kinesis Data Stream or Amazon Data Firehose delivery stream, depending on which approach you're using. [Create an IAM role and policy](#create-an-iam-role-and-policy). Then subscribe your new Kinesis stream or Amazon Data Firehose delivery stream to the CloudWatch log groups you want to ingest into Datadog. Subscriptions can be created through the [AWS console](#console) or [CLI](#cli).  
+   **Note**: Each CloudWatch Log group can only have two subscriptions.
 
-### IAM ロールとポリシーの作成
+### Create an IAM role and policy
 
-CloudWatch Log が Kinesis ストリームにデータを入れることができるように、IAM ロールと権限ポリシーを作成します。
-  1. ロールの **Trust relationships** で `logs.amazonaws.com` または `logs.<region>.amazonaws.com` がサービスプリンシパルとして構成されていることを確認してください。例:
+Create an IAM role and permissions policy to enable CloudWatch Logs to put data into your Kinesis stream. 
+  1. Ensure that `logs.amazonaws.com` or `logs.<region>.amazonaws.com` is configured as the service principal in the role's **Trust relationships**. For example:
 
 ```
 {
@@ -86,8 +86,8 @@ CloudWatch Log が Kinesis ストリームにデータを入れることがで�
   ]
 }
 ```
-  2. ロールのアタッチされた権限ポリシーで、`firehose:PutRecord`、`firehose:PutRecordBatch`、`kinesis:PutRecord`、`kinesis:PutRecords` の各アクションが許可されていることを確認してください。Kinesis データストリームを使用している場合は、**Resource** フィールドでその ARN を指定します。データストリームを使用して**いない**場合は、**Resource** フィールドで Amazon Data Firehose ストリームの ARN を指定してください。
-  例:
+  2. Ensure that the role's attached permissions policy allows the `firehose:PutRecord` `firehose:PutRecordBatch`, `kinesis:PutRecord`, and `kinesis:PutRecords` actions. If you're using a Kinesis Data Stream, specify its ARN in the **Resource** field. If you're **not** using a Kinesis Data Stream, specify the ARN of your Amazon Data Firehose stream in the **Resource** field.  
+  For example:
 
 ```
 {
@@ -106,53 +106,53 @@ CloudWatch Log が Kinesis ストリームにデータを入れることがで�
   ]
 }
 ```
-AWS CLI で設定する例としては、[Kinesis データストリームを使ったサブスクリプションフィルター][2]の例 (ステップ 3～6) を使用します。
+Use the [Subscription filters with Kinesis Data Streams][2] example (steps 3 to 6) for an example of setting this up with the AWS CLI.
 
-### サブスクリプションフィルターの作成
+### Create a subscription filter
 
 #### CLI
 
-以下の例では、AWS CLI でサブスクリプションフィルターを作成しています。
+The following example creates a subscription filter through the AWS CLI:
 
 ```
   aws logs put-subscription-filter \
     --log-group-name "<MYLOGGROUPNAME>" \
     --filter-name "<MyFilterName>" \
     --filter-pattern "" \
-    --destination-arn "<DESTINATIONARN> (データストリームまたは配信ストリーム)" \
+    --destination-arn "<DESTINATIONARN> (data stream or delivery stream)" \
     --role-arn "<MYROLEARN>"
 ```
 
-#### コンソール
+#### Console
 
-以下の手順に従って、次のまた、AWS コンソールからサブスクリプションフィルターを作成します。
+Follow these steps to create a subscription filter through the AWS console. 
 
-1. [CloudWatch][1] のロググループに移動し、**Subscription filters** タブをクリックし、**Create** をクリックします。
-   - Kinesis データストリームでログを送信する場合、`Create Kinesis subscription filter` を選択します。
-   - ロググループから Amazon Data Firehose 配信ストリームに直接ログを送信する場合、`Create Amazon Data Firehose subscription filter` を選択します。
+1. Go to your log group in [CloudWatch][1] and click on the **Subscription filters** tab, then **Create**.
+   - If you are sending logs through a Kinesis Data Stream, select `Create Kinesis subscription filter`.
+   - If you are sending logs directly from your log group to your Amazon Data Firehose delivery stream, select `Create Amazon Data Firehose subscription filter`.
 
-2. データストリームまたは Firehose 配信ストリームを選択し、以前に作成した [IAM ロール](#create-an-iam-role-and-policy)も同様に選択します。
+2. Select the data stream or Firehose delivery stream as applicable, as well as the [IAM role](#create-an-iam-role-and-policy) previously created.
 
-3. サブスクリプションフィルターの名前を入力し、**Start streaming** をクリックします。
+3. Provide a name for the subscription filter, and click **Start streaming**.
 
-**重要**: [Amazon CloudWatch Logs API Reference][3] で説明されているように、サブスクリプションフィルターの宛先はロググループと同じアカウントである必要があります。
+**Important note**: The destination of the subscription filter must be in the same account as the log group, as described in the [Amazon CloudWatch Logs API Reference][3].
 
-### 検証
+### Validation
 
-[CloudWatch][1] のロググループの詳細ページの **Subscription filters** 田部井をチェックして、新しい Kinesis ストリームまたは Amazon Data Firehose ストリームがロググループをサブスクライブしているかを確認します。
+Check the **Subscription filters** tab of your log group's detail page in [CloudWatch][1] to confirm that the new Kinesis stream or Amazon Data Firehose stream is subscribed to your log group.
 
-### Datadog でログを確認する
+### Find your logs in Datadog
 
-Amazon Data Firehose 配信ストリームを設定した後、Datadog で配信ストリームにサブスクライブされたログを分析できます。
+After you have set up the Amazon Data Firehose delivery stream, you can analyze the logs subscribed to your delivery stream in Datadog. 
 
-ARN ですべてのログにデータを入力するには
+To populate all logs by ARN:
 
-1. Datadog で [Log Explorer][5] に移動します。
-2. 検索バーに `@aws.firehose.arn:"<ARN>"` と入力し、`<ARN>` を Amazon Data Firehose ARN に置き換えて、**Enter** を押すと、サブスクライブされたログがすべて表示されます。
+1. Go to the [Log Explorer][5] in Datadog.
+2. In the search bar, type `@aws.firehose.arn:"<ARN>"`, replace `<ARN>` with your Amazon Data Firehose ARN, and press **Enter** to see all of your subscribed logs.
 
-**注**: 1 つの Kinesis ペイロードは、65,000 以上のログメッセージであってはなりません。この制限を超えたログメッセージは削除されます。
+**Note**: A single Kinesis payload must not be be more than 65,000 log messages. Log messages after that limit are dropped.
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -160,4 +160,4 @@ ARN ですべてのログにデータを入力するには
 [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs//SubscriptionFilters.html#DestinationKinesisExample
 [3]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutSubscriptionFilter.html
 [4]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/SubscriptionFilters.html#FirehoseExample
-[5]: /ja/logs/explorer/
+[5]: /logs/explorer/

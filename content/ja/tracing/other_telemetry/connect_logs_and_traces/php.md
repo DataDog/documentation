@@ -1,53 +1,54 @@
 ---
+title: Correlating PHP Logs and Traces
+kind: documentation
+description: 'Connect your PHP logs and traces to correlate them in Datadog.'
 aliases:
-- /ja/tracing/connect_logs_and_traces/php
+  - /tracing/connect_logs_and_traces/php
 code_lang: php
-code_lang_weight: 70
-description: PHP ログとトレースを接続して Datadog で関連付けます。
-further_reading:
-- link: tracing/trace_collection/custom_instrumentation
-  tag: ドキュメント
-  text: アプリケーションを手動でインストルメントしてトレースを作成します。
-- link: tracing/glossary/
-  tag: ドキュメント
-  text: サービス、リソース、トレースの詳細
-- link: https://www.datadoghq.com/blog/request-log-correlation/
-  tag: GitHub
-  text: 自動的にリクエストログとトレースに相関性を持たせる
-- link: /logs/guide/ease-troubleshooting-with-cross-product-correlation/
-  tag: ガイド
-  text: クロスプロダクト相関で容易にトラブルシューティング。
-title: PHP ログとトレースの相関付け
 type: multi-code-lang
+code_lang_weight: 70
+further_reading:
+    - link: tracing/trace_collection/custom_instrumentation
+      tag: Documentation
+      text: Manually instrument your application to create traces.
+    - link: tracing/glossary/
+      tag: Documentation
+      text: Explore your services, resources, and traces
+    - link: "https://www.datadoghq.com/blog/request-log-correlation/"
+      tag: Blog
+      text: Correlate request logs with traces automatically
+    - link: /logs/guide/ease-troubleshooting-with-cross-product-correlation/
+      tag: Guide
+      text: Ease troubleshooting with cross product correlation.
 ---
 
-## 自動挿入
+## Automatic injection
 
-バージョン `0.89.0` から、PHP トレーサーはトレース相関識別子を自動的にアプリケーションログに挿入するようになりました。自動挿入を有効にするには、環境変数 `DD_LOGS_INJECTION` (INI 設定 `datadog.logs_injection`) を `true` に設定します。
+Starting in version `0.89.0`, the PHP tracer automatically injects trace correlation identifiers into application logs. To enable automatic injection, set the environment variable `DD_LOGS_INJECTION` (INI setting `datadog.logs_injection`) to `true`.
 
-PHP トレーサーは、[Monolog][4] や [Laminas Log][5] のような PSR-3 準拠のロガーをサポートしています。
+The PHP tracer supports PSR-3 compliant loggers, such as [Monolog][4] or [Laminas Log][5].
 
 <div class="alert alert-warning">
-  <strong>注</strong>: JSON フォーマットでログを生成するように、ロギングライブラリを設定してください。これにより、
+  <strong>Note</strong>: Set up your logging library to produce logs in JSON format so that:
   <ul>
-    <li><a href="/logs/log_configuration/parsing">カスタムパースルール</a>は必要なくなります。</li>
-    <li>スタックトレースがログイベントに適切にラップされるようになります。</li>
+    <li>You don't need <a href="/logs/log_configuration/parsing">custom parsing rules</a>.</li>
+    <li>Stack traces are properly wrapped into the log event.</li>
   </ul>
 </div>
 
-### ログへの挿入の構成
+### Configure injection in logs
 
-まだの場合は、PHP トレーサーを `DD_ENV`、`DD_SERVICE`、`DD_VERSION` で構成します。これは、ログに `env`、`service` および `version` を追加する際に最適です (詳細は[統合サービスタグ付け][6]を参照)。
+If you haven't done so already, configure the PHP tracer with `DD_ENV`, `DD_SERVICE`, and `DD_VERSION`. This provides the best experience for adding `env`, `service`, and `version` to your logs (see [Unified Service Tagging][6] for more details).
 
-PHP トレーサーは、トレース相関識別子をログに挿入するためのさまざまな構成方法を提供します。
-- [トレース相関識別子をログコンテキストに追加する](#add-the-trace-correlation-identifiers-to-the-log-context)
-- [メッセージにプレースホルダーを使用する](#use-placeholders-in-your-message)
+The PHP tracer provides various ways to configure the injection of trace correlation identifiers into your logs:
+- [Add the trace correlation identifiers to the log context](#add-the-trace-correlation-identifiers-to-the-log-context)
+- [Use placeholders in your message](#use-placeholders-in-your-message)
 
-#### トレース相関識別子をログコンテキストに追加する {#add-the-trace-correlation-identifiers-to-the-log-context}
+#### Add the trace correlation identifiers to the log context {#add-the-trace-correlation-identifiers-to-the-log-context}
 
-PHP トレーサーのデフォルトの動作は、トレース相関識別子をログコンテキストに追加することです。
+The default behavior of the PHP tracer is to add the trace correlation identifiers to the log context.
 
-例えば、以下のように Laravel アプリケーションで [Monolog][4] ライブラリを使用している場合
+For example, if you are using the [Monolog][4] library in a Laravel application as follows:
 
 ```php
 use Illuminate\Support\Facades\Log;
@@ -55,26 +56,26 @@ use Illuminate\Support\Facades\Log;
 Log::debug('Hello, World!');
 ```
 
-PHP トレーサーは、利用可能なトレース相関識別子をログコンテキストに追加します。上のログメッセージは、次のように変換できます。
+The PHP tracer adds the available trace correlation identifiers to the log context. The logged message above could be transformed into:
 
 ```
 [2022-12-09 16:02:42] production.DEBUG: Hello, World! {"dd.trace_id":"1234567890abcdef","dd.span_id":"1234567890abcdef","dd.service":"laravel","dd.version":"8.0.0","dd.env":"production","status":"debug"}
 ```
 
-**注**: メッセージ内にプレースホルダーがある場合、あるいはメッセージ内に既にトレース ID が存在する場合、PHP トレーサーはトレース相関 ID をログコンテキストに追加しません。
+**Note**: If there is a placeholder in your message or if a trace ID is already present in the message, the PHP tracer does **not** add the trace correlation identifiers to the log context.
 
-#### メッセージにプレースホルダーを使用する {#use-placeholders-in-your-message}
+#### Use placeholders in your message {#use-placeholders-in-your-message}
 
-メッセージでプレースホルダーを使用すると、トレース相関識別子を自動的にログに挿入することができます。PHP トレーサーは、以下のプレースホルダーをサポートしています。
-- `%dd.trace_id%`: トレース ID
-- `%dd.span_id%`: スパン ID
-- `%dd.service%`: サービス名
-- `%dd.version%`: サービスバージョン
-- `%dd.env%`: サービス環境
+You can use placeholders in your message to automatically inject trace correlation identifiers into your logs. The PHP tracer supports the following placeholders:
+- `%dd.trace_id%`: the trace ID
+- `%dd.span_id%`: the span ID
+- `%dd.service%`: the service name
+- `%dd.version%`: the service version
+- `%dd.env%`: the service environment
 
-プレースホルダーは大文字と小文字を区別し、`%` 文字で囲む必要があります。
+Placeholders are case-sensitive and must be enclosed in `%` characters.
 
-例えば、Laravel アプリケーションで [Monolog][4] ライブラリを使用している場合、以下のようにログメッセージへの挿入を構成することができます。
+For example, if you are using the [Monolog][4] library in a Laravel application, you can configure the injection into a log message as follows:
 
 ```php
 use Illuminate\Support\Facades\Log;
@@ -82,25 +83,26 @@ use Illuminate\Support\Facades\Log;
 Log::info('Hello, World! [%dd.trace_id% %dd.span_id% %status%]');
 ```
 
-PHP トレーサーは、プレースホルダーを対応する値に置き換えます。例えば、上記のログメッセージは次のように変換されます。
+The PHP tracer replaces the placeholders with the corresponding values. For example, the logged message above could be transformed into:
 
 ```
 [2022-12-09 16:02:42] production.INFO: Hello, World! [dd.trace_id="1234567890abcdef" dd.span_id="1234567890abcdef" status="info"]
 ```
 
-**注**: 括弧は、PHP の[ログパイプライン][7]で提供されているデフォルトのパースルールを使用する場合には必須です。独自のパースルールを使用する場合は、 必要に応じて括弧を省略することができます。
+**Note**: The brackets are mandatory if you plan on using the default parsing rules provided in the PHP [log pipeline][7]. If you are using a custom parsing rule, you can omit the brackets if needed.
 
 
-## 手動挿入
+## Manual injection
 
 <div class="alert alert-warning">
-<strong>注:</strong> 関数 <code>\DDTrace\current_context()</code> は、バージョン <a href="https://github.com/DataDog/dd-trace-php/releases/tag/0.61.0">0.61.0</a> で導入され、10 進数のトレース識別子を返します。</div>
+<strong>Note:</strong> The function <code>\DDTrace\current_context()</code> has been introduced in version <a href="https://github.com/DataDog/dd-trace-php/releases/tag/0.61.0">0.61.0</a> and returns decimal trace identifiers.
+</div>
 
-ログとトレースを一緒に接続するには、ログに、それぞれトレース ID とスパン ID を含む `dd.trace_id` 属性と `dd.span_id` 属性が含まれている必要があります。
+To connect your logs and traces together, your logs must contain the `dd.trace_id` and `dd.span_id` attributes that respectively contain your trace ID and your span ID.
 
-[Datadog ログインテグレーション][1]を使ってログをパースしていない場合は、カスタムログパースルールによって `dd.trace_id` と `dd.span_id` が文字列としてパースされ、[トレースリマッパー][2]のおかげで再マップされていることを確実にする必要があります。詳細については、[関連するログがトレースIDパネルに表示されない][3]を参照してください。
+If you are not using a [Datadog Log Integration][1] to parse your logs, custom log parsing rules need to ensure that `dd.trace_id` and `dd.span_id` are being parsed as strings and remapped thanks to the [Trace Remapper][2]. More information can be found in [Correlated Logs Not Showing Up in the Trace ID Panel][3].
 
-たとえば、次でこの 2 つの属性をログに追加します。
+For instance, you would append those two attributes to your logs with:
 
 ```php
   <?php
@@ -113,7 +115,7 @@ PHP トレーサーは、プレースホルダーを対応する値に置き換�
 ?>
 ```
 
-ロガーが [**monolog/monolog** ライブラリ][4]を実装する場合、`Logger::pushProcessor()` を使ってすべてのログメッセージに識別子を自動的に付加します。monolog v1 の場合、以下の構成を追加します。
+If the logger implements the [**monolog/monolog** library][4], use `Logger::pushProcessor()` to automatically append the identifiers to all log messages. For monolog v1, add the following configuration:
 
 ```php
 <?php
@@ -128,7 +130,7 @@ PHP トレーサーは、プレースホルダーを対応する値に置き換�
 ?>
 ```
 
-monolog v2 の場合、以下の構成を追加します。
+For monolog v2, add the following configuration:
 
 ```php
 <?php
@@ -142,7 +144,7 @@ monolog v2 の場合、以下の構成を追加します。
   ?>
 ```
 
-アプリケーションが JSON ログ形式を使用している場合、ログメッセージに `trace_id` と `span_id` を追加する代わりに、`trace_id` と `span_id` を含む第 1 レベルのキー `dd` を追加することができます。
+If your application uses JSON logs format, you can add a first-level key `dd` that contains the `trace_id` and `span_id`, instead of appending `trace_id` and `span_id` to the log message:
 
 ```php
 <?php
@@ -157,7 +159,7 @@ monolog v2 の場合、以下の構成を追加します。
 ?>
 ```
 
-monolog v3 の場合、以下の構成を追加します。
+For monolog v3, add the following configuration:
 
 ```php
 <?php
@@ -171,17 +173,17 @@ monolog v3 の場合、以下の構成を追加します。
 ?>
 ```
 
-ログを JSON として取り込んでいる場合は、[JSON ログの前処理][8]に進み、**Trace Id Attributes** フィールドに `extra.dd.trace_id` を追加します。
+If you are ingesting your logs as JSON, go to [Preprocessing for JSON logs][8] and add `extra.dd.trace_id` to the **Trace Id Attributes** field.
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/logs/log_collection/php/
-[2]: /ja/logs/log_configuration/processors/#trace-remapper
-[3]: /ja/tracing/troubleshooting/correlated-logs-not-showing-up-in-the-trace-id-panel/?tab=custom
+[1]: /logs/log_collection/php/
+[2]: /logs/log_configuration/processors/#trace-remapper
+[3]: /tracing/troubleshooting/correlated-logs-not-showing-up-in-the-trace-id-panel/?tab=custom
 [4]: https://github.com/Seldaek/monolog
 [5]: https://github.com/laminas/laminas-log
-[6]: /ja/getting_started/tagging/unified_service_tagging
-[7]: /ja/logs/log_configuration/pipelines
+[6]: /getting_started/tagging/unified_service_tagging
+[7]: /logs/log_configuration/pipelines
 [8]: https://app.datadoghq.com/logs/pipelines/remapping

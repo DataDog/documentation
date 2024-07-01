@@ -1,102 +1,141 @@
 ---
+title: Getting Started with Cloud SIEM
+kind: documentation
 aliases:
-- /ja/cloud-siem/getting_started/
-- /ja/security_monitoring/getting_started/
-- /ja/security_platform/security_monitoring/
-- /ja/security_platform/security_monitoring/getting_started
-- /ja/security_platform/getting_started/
-- /ja/security_platform/cloud_siem/getting_started/
-- /ja/security/cloud_siem/getting_started/
+    - /cloud-siem/getting_started/
+    - /security_monitoring/getting_started/
+    - /security_platform/security_monitoring/
+    - /security_platform/security_monitoring/getting_started
+    - /security_platform/getting_started/
+    - /security_platform/cloud_siem/getting_started/
+    - /security/cloud_siem/getting_started/
 further_reading:
-- link: https://learn.datadoghq.com/courses/intro-to-cloud-siem
-  tag: ラーニングセンター
-  text: Cloud SIEM 入門コース
-- link: https://www.datadoghq.com/blog/automate-security-tasks-with-workflows-and-cloud-siem/
-  tag: ブログ
-  text: Datadog Workflows と Cloud SIEM で、一般的なセキュリティタスクを自動化し、脅威の先を行く
-- link: https://app.datadoghq.com/workflow/blueprints?selected_category=SECURITY
-  tag: App
-  text: Workflows のセキュリティ設計図で応答を自動化する
-- link: /security/cloud_siem/guide/aws-config-guide-for-cloud-siem/
-  tag: Documentation
-  text: Cloud SIEM の AWS 構成ガイド
-- link: /security/cloud_siem/guide/google-cloud-config-guide-for-cloud-siem/
-  tag: Documentation
-  text: Cloud SIEM のための Google Cloud 構成ガイド
-- link: /security/cloud_siem/guide/azure-config-guide-for-cloud-siem/
-  tag: Documentation
-  text: Cloud SIEM の Azure 構成ガイド
-- link: /security/notifications/variables/
-  tag: Documentation
-  text: 通知をカスタマイズするための通知変数について
-- link: https://dtdg.co/fe
-  tag: Foundation Enablement
-  text: セキュリティと脅威検出を高めるインタラクティブなセッションに参加できます
-- link: https://securitylabs.datadoghq.com/
-  tag: Security Labs
-  text: Datadog の Security Labs でセキュリティ関連のトピックを読む
-title: Cloud SIEM の概要
+    - link: "https://learn.datadoghq.com/courses/intro-to-cloud-siem"
+      tag: Learning Center
+      text: Introduction to Cloud SIEM course
+    - link: "https://www.datadoghq.com/blog/automate-security-tasks-with-workflows-and-cloud-siem/"
+      tag: Blog
+      text: Automate common security tasks and stay ahead of threats with Datadog Workflows and Cloud SIEM
+    - link: "https://app.datadoghq.com/workflow/blueprints?selected_category=SECURITY"
+      tag: App
+      text: Automate responses with Workflows security blueprints
+    - link: /security/cloud_siem/guide/aws-config-guide-for-cloud-siem/
+      tag: Documentation
+      text: AWS configuration guide for Cloud SIEM
+    - link: /security/cloud_siem/guide/google-cloud-config-guide-for-cloud-siem/
+      tag: Documentation
+      text: Google Cloud configuration guide for Cloud SIEM
+    - link: /security/cloud_siem/guide/azure-config-guide-for-cloud-siem/
+      tag: Documentation
+      text: Azure configuration guide for Cloud SIEM
+    - link: /security/notifications/variables/
+      tag: Documentation
+      text: Learn more about notification variables to customize notifications
+    - link: "https://dtdg.co/fe"
+      tag: Foundation Enablement
+      text: Join an interactive session to elevate your security and threat detection
+    - link: "https://securitylabs.datadoghq.com/"
+      tag: Security Labs
+      text: Read about security-related topics on Datadog's Security Labs
+    - link: "https://www.datadoghq.com/blog/content-packs/"
+      tag: Blog
+      text: Easily ingest and monitor security logs with Cloud SIEM Content Packs
 ---
 
-## 概要
+## Overview
 
-[Datadog Cloud SIEM][1] は、アプリケーションやインフラストラクチャーに対する脅威をリアルタイムに検出します。これらの脅威には、標的型攻撃、脅威情報が記載された IP がシステムと通信している場合、または安全でない構成が含まれる場合があります。検出されるとシグナルが生成され、チームに通知することができます。
+[Datadog Cloud SIEM][1] detects real-time threats to your application and infrastructure. These threats can include a targeted attack, a threat intel listed IP communicating with your systems, or an insecure configuration. Once detected, a signal is generated and a notification can be sent out to your team.
 
-このガイドでは、Cloud SIEM を使い始めるためのベストプラクティスを説明します。
+This guide walks you through best practices for getting started with Cloud SIEM.
 
-## フェーズ 1: セットアップ
+## Phase 1: Setup
 
-1. [ログ取り込み][2]を構成して、ソースからログを収集します。[ログ管理のベストプラクティス][3]を確認してください。
+1. Configure [log ingestion][2] to collect logs from your sources. Review [Best Practices for Log Management][3].
 
-   [すぐに使えるインテグレーションパイプライン][4]を使って {{< translate key="integration_count" >}} 以上のインテグレーションのログを収集したり、[カスタムログパイプラインを作成][5]して以下を送信したりすることができます。
+    You can use [out-of-the-box integration pipelines][4] to collect logs for more than {{< translate key="integration_count" >}} integrations, or [create custom log pipelines][5] to send:
 
-    - [クラウド監査ログ][6]。
-    - [ID プロバイダーログ][7]
-    - SaaS と Workspace のログ
-    - サードパーティセキュリティインテグレーション (例: Amazon GuardDuty)
+    - [Cloud Audit logs][6]
+    - [Identity Provider logs][7]
+    - SaaS and Workspace logs
+    - Third-party security integrations (for example, Amazon GuardDuty)
 
-2. [Cloud SIEM][8] を有効にします。
+2. Enable [Cloud SIEM][8].
+3. Select and configure [Content Packs][9], which provide out-of-the-box content for critical security log sources.
+4. Select and configure [additional log sources][10] you want Cloud SIEM to analyze.
+5. Click **Activate**. A custom Cloud SIEM log index (`cloud-siem-xxxx`) is created.
+6. If the Cloud SIEM setup page shows the warning "The Cloud SIEM index is not in the first position", follow the steps in the [Reorder the Cloud SIEM index](#reorder-the-cloud-siem-index) section.
 
-## フェーズ 2: シグナルの確認
+### Reorder the Cloud SIEM index
 
-1. [すぐに使える検出ルール][9]を確認し、お使いの環境における脅威の検出を開始します。検出ルールは、処理されたすべてのログに適用され、検出範囲を最大化します。詳細については、[検出ルール][10]のドキュメントを参照してください。
+{{< img src="getting_started/cloud_siem/cloud-siem-setup-warning.png" alt="A yellow warning box saying that the index configuration needs attention" style="width:80%;">}}
 
-2. [セキュリティシグナル][11]を確認します。検出ルールで脅威が検出されると、セキュリティシグナルが生成されます。詳しくは、[セキュリティシグナル][12]のドキュメントをご覧ください。
+1. Click **Reorder index in Logs Configuration**.
 
-    - [通知ルールの設定][13]を行い、シグナルが発生した際にアラートを出します。Slack、Jira、メール、Webhook、および他のインテグレーションを使用してアラートを出すことができます。詳しくは[通知ルール][14]のドキュメントを参照してください。
+2. Confirm the modal title says "Move cloud-siem-xxxx to..." and that the `cloud-siem-xxxx` text in the index column is light purple.
 
-## フェーズ 3: 調査
+{{< img src="getting_started/cloud_siem/move-index-modal.png" alt="The Move cloud-siem-xxxx modal showing the list of indexes with cloud-siem-xxxx index as the last index" style="width:60%;">}}
 
-1. より迅速な修復のために、[Investigator][15] を確認します。詳しくは [Investigator][16] のドキュメントをご覧ください。
-2. 調査、レポート、モニタリングには、[すぐに使えるダッシュボード][17]を使用するか、または[独自のダッシュボードを作成][18]します。
+3. To select the new placement of your index, click the top line of the index where you want `cloud-siem-xxxx` to go. For example, if you want to make the `cloud-siem-xxxx` index the first index, click on the line *above* the current first index. The new position is highlighted with a thick blue line.
 
-## フェーズ 4: カスタマイズ
+{{< img src="getting_started/cloud_siem/move-index-highlight.png" alt="The Move cloud-siem-xxxx modal showing a blue line at the top of the first index" style="width:65%;">}}
 
-1. [抑制ルール][19]を設定し、ノイズを低減します。
-2. [カスタム検出ルール][20]を作成します。[検出ルールを作成するためのベストプラクティス][21]を確認します。
+4. The text confirms the position selected: "Select the new placement of your index: Position 1". Click **Move**.
 
-## その他の参考資料
+5. Review the warning text. If you are satisfied with the change, click **Reorder**.
+
+6. Review the index order and confirm that the `cloud-siem-xxxx` index is where you want it. If you want to move the index, click the **Move to** icon and follow steps 3 to 5.
+
+7. Navigate back to the [Cloud SIEM setup page][11].
+
+The Cloud SIEM index should be in the first index position now. If the setup page still displays a warning about the index position, wait a few minutes and refresh the browser.
+
+After the index is moved to the first index position, review the settings and statuses for the [Content Packs][11] and [other log sources][11]. For each integration that shows a warning or an error, click on the integration and follow the instructions to fix it.
+
+## Phase 2: Signal exploration
+
+1. Review the [out-of-the-box detection rules][12] that begin detecting threats in your environment immediately. Detection rules apply to all processed logs to maximize detection coverage. See the [detection rules][13] documentation for more information.
+
+2. Explore [security signals][14]. When a threat is detected with a detection rule, a security signal is generated. See the [security signals][15] documentation for more information.
+
+    - [Set up notification rules][16] to alert when signals are generated. You can alert using Slack, Jira, email, webhooks, and other integrations. See the [notification rules][17] documentation for more information.
+    - Subscribe to the weekly [threat digest][18] reports to begin investigation and remediation of the most important security threats discovered in the last seven days.
+
+## Phase 3: Investigation
+
+1. Explore the [Investigator][19] for faster remediation. See the [Investigator][20] documentation for more information.
+2. Use [out-of-the-box-dashboards][21] or [create your own dashboards][22] for investigations, reporting, and monitoring.
+
+## Phase 4: Customization
+
+1. Set up [suppression rules][23] to reduce noise. 
+2. Create [custom detection rules][24]. Review [Best Practices for Creating Detection Rules][25].
+
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/security/cloud_siem/
-[2]: https://app.datadoghq.com/security/configuration
-[3]: /ja/logs/guide/best-practices-for-log-management/
-[4]: /ja/integrations/
-[5]: /ja/logs/log_configuration/pipelines/
+[1]: /security/cloud_siem/
+[2]: https://app.datadoghq.com/security/configuration/siem/log-sources
+[3]: /logs/guide/best-practices-for-log-management/
+[4]: /integrations/
+[5]: /logs/log_configuration/pipelines/
 [6]: https://www.datadoghq.com/blog/monitoring-cloudtrail-logs/
 [7]: https://www.datadoghq.com/blog/how-to-monitor-authentication-logs/
-[8]: https://app.datadoghq.com/security/getting-started
-[9]: /ja/security/default_rules/#cat-cloud-siem-log-detection
-[10]: /ja/security/detection_rules/
-[11]: https://app.datadoghq.com/security?query=%40workflow.rule.type%3A%28%22Log%20Detection%22%20OR%20%22Signal%20Correlation%22%29&column=time&order=desc&product=siem&view=signal&viz=stream&start=1676321431953&end=1676407831953&paused=false
-[12]: /ja/security/explorer
-[13]: https://app.datadoghq.com/security/configuration/notification-rules
-[14]: /ja/security/notifications/rules/
-[15]: https://app.datadoghq.com/security/investigator/
-[16]: /ja/security/cloud_siem/investigator
-[17]: https://app.datadoghq.com/dashboard/lists/preset/100
-[18]: /ja/dashboards/#overview
-[19]: /ja/security/cloud_siem/log_detection_rules/?tab=threshold#advanced-options
-[20]: /ja/security/cloud_siem/log_detection_rules/
-[21]: https://www.datadoghq.com/blog/writing-datadog-security-detection-rules/
+[8]: https://app.datadoghq.com/security/landing
+[9]: https://app.datadoghq.com/security/content-packs
+[10]: https://app.datadoghq.com/security/configuration/siem/log-sources
+[11]: https://app.datadoghq.com/security/configuration/siem/setup
+[12]: /security/default_rules/#cat-cloud-siem-log-detection
+[13]: /security/detection_rules/
+[14]: https://app.datadoghq.com/security?query=%40workflow.rule.type%3A%28%22Log%20Detection%22%20OR%20%22Signal%20Correlation%22%29&column=time&order=desc&product=siem&view=signal&viz=stream&start=1676321431953&end=1676407831953&paused=false
+[15]: /security/cloud_siem/investigate_security_signals
+[16]: https://app.datadoghq.com/security/configuration/notification-rules
+[17]: /security/notifications/rules/
+[18]: https://app.datadoghq.com/security/configuration/reports
+[19]: https://app.datadoghq.com/security/investigator/
+[20]: /security/cloud_siem/investigator
+[21]: https://app.datadoghq.com/dashboard/lists/preset/100
+[22]: /dashboards/#overview
+[23]: /security/cloud_siem/log_detection_rules/?tab=threshold#advanced-options
+[24]: /security/cloud_siem/log_detection_rules/
+[25]: https://www.datadoghq.com/blog/writing-datadog-security-detection-rules/

@@ -1,179 +1,191 @@
 ---
-app_id: meraki
-app_uuid: c34bd865-7ddf-4336-9cf2-02e1a2f05bbd
-assets:
-  dashboards:
-    meraki: assets/dashboards/meraki_overview.json
-  integration:
-    auto_install: false
-    metrics:
-      check:
+"app_id": "meraki"
+"app_uuid": "c34bd865-7ddf-4336-9cf2-02e1a2f05bbd"
+"assets":
+  "dashboards":
+    "meraki": assets/dashboards/meraki_overview.json
+  "integration":
+    "auto_install": false
+    "metrics":
+      "check":
       - meraki.port.usageInKb.recv
       - snmp.devStatus
-      metadata_path: metadata.csv
-      prefix: ''
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 602
-    source_type_name: Meraki
-  monitors:
-    '[Meraki] A Meraki Device Uplink is Failing': assets/monitors/uplink_device_is_failing.json
-    '[Meraki] A Meraki Device is in an Alerting State': assets/monitors/device_is_in_alert_state.json
-    '[Meraki] Abnormally High Latency on a Meraki Uplink': assets/monitors/high_latency_on_uplink.json
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com (日本語対応)
-  support_email: help@datadoghq.com
-categories:
-- ネットワーク
-- ログの収集
+      "metadata_path": metadata.csv
+      "prefix": meraki.
+    "service_checks":
+      "metadata_path": assets/service_checks.json
+    "source_type_id": !!int "602"
+    "source_type_name": Meraki
+  "monitors":
+    "[Meraki] A Meraki Device Uplink is Failing": assets/monitors/uplink_device_is_failing.json
+    "[Meraki] A Meraki Device is in an Alerting State": assets/monitors/device_is_in_alert_state.json
+    "[Meraki] Abnormally High Latency on a Meraki Uplink": assets/monitors/high_latency_on_uplink.json
+"author":
+  "homepage": "https://www.datadoghq.com"
+  "name": Datadog
+  "sales_email": info@datadoghq.com
+  "support_email": help@datadoghq.com
+"categories":
+- network
+- log collection
 - security
 - snmp
-dependencies: []
-display_on_public_website: true
-draft: false
-git_integration_title: meraki
-integration_id: meraki
-integration_title: Cisco Meraki
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: 2.0.0
-name: meraki
-public_title: Cisco Meraki
-short_description: Network Device Monitoring、ログ、Cloud SIEM を使用して Cisco Meraki 環境を監視する
-supported_os:
+"custom_kind": "integration"
+"dependencies": []
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "meraki"
+"integration_id": "meraki"
+"integration_title": "Cisco Meraki"
+"integration_version": ""
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "meraki"
+"public_title": "Cisco Meraki"
+"short_description": "Monitor your Cisco Meraki Environment with Network Device Monitoring, Logs, and Cloud SIEM"
+"supported_os":
 - linux
 - windows
 - macos
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Network
-  - Category::Log Collection
-  - Category::Security
-  - Category::SNMP
-  - Submitted Data Type::Logs
-  - Submitted Data Type::Metrics
-  - Supported OS::Linux
-  - Supported OS::Windows
-  - Supported OS::macOS
-  configuration: README.md#Setup
-  description: Network Device Monitoring、ログ、Cloud SIEM を使用して Cisco Meraki 環境を監視する
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Cisco Meraki
+"tile":
+  "changelog": CHANGELOG.md
+  "classifier_tags":
+  - "Category::Network"
+  - "Category::Log Collection"
+  - "Category::Security"
+  - "Category::SNMP"
+  - "Submitted Data Type::Logs"
+  - "Submitted Data Type::Metrics"
+  - "Supported OS::Linux"
+  - "Supported OS::Windows"
+  - "Supported OS::macOS"
+  "configuration": "README.md#Setup"
+  "description": Monitor your Cisco Meraki Environment with Network Device Monitoring, Logs, and Cloud SIEM
+  "media": []
+  "overview": "README.md#Overview"
+  "resources":
+  - "resource_type": documentation
+    "url": "https://docs.datadoghq.com/network_monitoring/devices/"
+  - "resource_type": blog
+    "url": "https://www.datadoghq.com/blog/monitor-meraki/"
+  "support": "README.md#Support"
+  "title": Cisco Meraki
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
-## 概要
+<div class="alert alert-info">The Cisco Meraki integration is in public beta.</div>
 
-このインテグレーションは、[Network Device Monitoring][1]、Network Event Logs、および [Cloud SIEM][2] の Security Event Logs のメトリクスを収集することで、Cisco Meraki 環境の包括的な可視性を提供します。
+## Overview
 
-**ネットワークデバイスモニタリング**
+This integration provides comprehensive visibility into your Cisco Meraki Enviroment by collecting metrics for [Network Device Monitoring][1], Network Event Logs, and Security Event Logs for [Cloud SIEM][2].
 
-[Network Device Monitoring][1] は、潜在的なボトルネックやデバイスの構成エラーを特定することで、ネットワークインフラストラクチャーの全体的な健全性が標準に達していることを確認するのに役立ちます。
+**Network Device Monitoring**
 
-このインテグレーションは、以下のデバイスのメトリクスを収集します。
+[Network Device Monitoring][1] helps ensure the overall health of network infrastructure is up to standard by identifying potential bottlenecks and device configuration errors.
 
-* _MR (ワイヤレスアクセスポイント):_ クライアント数、接続ステータス、スループットなどのメトリクスを追跡します。
-* _MS (スイッチ):_ ポートステータス、トラフィック、エラーレートなどのスイッチパフォーマンスメトリクスを監視します。
-* _MX (セキュリティアプライアンス):_ VPN のステータス、ファイアウォールルール、デバイス全体のパフォーマンスに関するメトリクスを収集します。
+This integration collects metrics for the following devices:
 
-このインテグレーションは Meraki 環境からデバイスタグとメタデータを動的に取り込み、特定のデバイスグループ、ロケーション、デバイスタイプを簡単にドリルダウンします。
+* _MR (Wireless Access Points):_ Track metrics like client count, connection status, and throughput.
+* _MS (Switches):_ Monitor switch performance metrics such as port status, traffic, and error rates.
+* _MX (Security Appliances):_ Collect metrics on VPN status, firewall rules, and overall device performance.
 
-**セキュリティイベントログ**
+This integration dynamically pulls in device tags and metadata from Meraki environments to easily drill down into specific device groups, locations, or device types.
 
-[Security Event Logs][3] は、侵入検出、ファイアウォールルール違反、マルウェア脅威の検出などのイベントに関するアラートを出力し、潜在的なセキュリティ脅威の特定と対応を支援します。
+**Security Event Logs**
 
-独自のルールを作成したり、[すぐに使える Cloud SIEM ルール][4]を活用して、リアルタイムの脅威検出とインシデント対応を実現します。
+[Security Event Logs][3] alert on events such as intrusion detections, firewall rule violations, and malware threat detections to helpy identify and respond to potential security threats.
 
-**ネットワークイベントログ**
+Create your own rules or leverage the [out-of-the-box Cloud SIEM rules][4] for real-time threat detection and incident response.
 
-[Network Event Logs][5] は、ネットワーク管理者が過去のネットワークイベントを分析し、問題を効率的にトラブルシューティングするのに役立ちます。
+**Network Event Logs**
 
-これらのログは以下のトピックを追跡します。
+[Network Event Logs][5] help network administrators analyze historical network events and troubleshoot issues efficiently.
 
-* _構成変更:_ ネットワーク構成の変更を追跡し、コンプライアンスを確保し、接続の問題をトラブルシューティングします。
-* _クライアントアソシエーション:_ ワイヤレスアクセスポイントとのクライアントアソシエーションを監視し、ユーザーの接続性を把握します。
-* _ネットワーク健全性イベント:_ 特定のスイッチでパケットロスが多いなど、ネットワークの健全性に影響する問題を特定し、対処します。
+These logs track the following topics:
+
+* _Configuration Changes:_ Track changes in network configurations to ensure compliance and troubleshoot connection issues.
+* _Client Associations:_ Monitor client associations with wireless access points for user connectivity insights.
+* _Network Health Events:_ Identify and address issues affecting network health, such as high packet loss on specific switches.
 
 <br />
 
-このインテグレーションに含まれる推奨モニターに加えて、重要なイベントを管理者に通知する追加モニターを構成することができ、プロアクティブなネットワーク管理が可能になります。
+In addition to the recommended monitors included with this integration, additional monitors can be configured to notify administrators of critical events, allowing for proactive network management.
 
-Meraki Cloud Controller からメトリクスを収集するには、Meraki Profile で [SNMP インテグレーション][6]を構成します。
+To collect metrics from your Meraki Cloud Controller, configure the [SNMP integration][6] with the Meraki Profile.
 
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-1. アプリで [Meraki インテグレーションタイル][7]を開きます。
-1. **+ Add Account** をクリックします。
-1. Meraki アカウントの名前を選択します。
-1. Meraki API キーを追加します。Meraki API キーの生成方法については、[Cisco Meraki Dashboard API][8] の手順を参照してください。
+1. In the app, open the [Meraki integration tile][7].
+1. Click **+ Add Account**.
+1. Choose a name for your Meraki account.
+1. Add a Meraki API key. Find instructions on how to generate a Meraki API key in the [Cisco Meraki Dashboard API][8].
 
-### Meraki API キーを生成する
+### Generate the Meraki API key
 
-1. Meraki のダッシュボードを開きます。
-2. Organization > Settings > Dashboard API access で API アクセスを有効化します。
-3. Meraki ダッシュボードの My Profile ページを開いてキーを生成します。
+1. Go to the Meraki Dashboard.
+2. Enable API access by going to Organization > Settings > Dashboard API access.
+3. Go to the My Profile page on the Meraki dashboard to generate the key.
 
-### メトリクスの収集
+### Metric collection
 
-NDM メトリクスの収集を構成するには、Meraki の API キーが必要です。
+To configure collection of NDM Metrics, an API key is required from Meraki.
 
-#### デバイスタグフィルター
+#### Device Tag Filters
 
-デバイスタグフィルターでは、NDM 内で監視するデバイスを指定できます。カンマで区切って複数のタグを指定できます。タグを指定しない場合は、すべてのデバイスが監視されます。
+Device Tag Filters allow you to specify which devices to monitor
+within NDM. You can specify multiple tags by separating them
+with a comma. If no tags are specified, all devices will be
+monitored.
 
-### 収集データ
+### Log collection
 
-ネットワークイベントログとセキュリティイベントログの収集を構成するには、Meraki の API キーが必要です。
+To configure collection of network event logs and security event logs, an API key is required from Meraki.
 
-詳細については、[Cisco Meraki Dashboard API][9] を参照してください。
+For more information, see the [Cisco Meraki Dashboard API][9].
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 
-<div class="alert alert-info">ネットワークデバイスモニタリングの Meraki デバイス (MR、MS、MX) のデータ (ネットワークレベル、デバイスレベル、アップリンクレベル、インターフェイス (スイッチポート) レベルのメトリクスとタグを含む) はベータ版です。</div>
+<div class="alert alert-info">Data for Meraki devices (MR, MS, MX) in Network Device Monitoring—including network level, device level, uplink level, and interface (switch port) level metrics and tags—are in beta.</div>
 
-Meraki デバイスからメトリクスを収集できるよう、Meraki プロファイルで [SNMP インテグレーション][6]を構成します。
+Configure the [SNMP integration][6] with the Meraki Profile to collect metrics from your Meraki devices.
 
 {{< get-metrics-from-git "meraki" >}}
 
-### ヘルプ
+### Events
 
-Meraki インテグレーションには、イベントは含まれません。
+The Meraki integration does not include any events.
 
-### ヘルプ
+### Service Checks
 
-Meraki インテグレーションには、サービスのチェック機能は含まれません。
+The Meraki integration does not include any service checks.
 
-## ヘルプ
+## Troubleshooting
+Datadog sometimes encounters issues accessing Meraki from its servers. Add Datadog's IPs to your IP address allow list to ensure that crawling works as expected.
 
-ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
+Need help? Contact [Datadog support][10].
 
-## その他の参考資料
+## Further Reading
 
-お役に立つドキュメント、リンクや記事:
+Additional helpful documentation, links, and articles:
 
-- [ネットワークデバイスモニタリング][11]
-- [Datadog で Cisco Meraki を監視する][12]
+- [Network Device Monitoring][11]
+- [Monitor Cisco Meraki with Datadog][12]
 
 [1]: https://app.datadoghq.com/devices
 [2]: https://app.datadoghq.com/security/home
 [3]: https://developer.cisco.com/meraki/api/get-network-appliance-security-events/
 [4]: https://app.datadoghq.com/logs/pipelines?search=meraki
 [5]: https://developer.cisco.com/meraki/api/get-network-events/
-[6]: https://docs.datadoghq.com/ja/integrations/snmp/
+[6]: https://docs.datadoghq.com/integrations/snmp/
 [7]: https://app.datadoghq.com/integrations/meraki
 [8]: https://documentation.meraki.com/zGeneral_Administration/Other_Topics/The_Cisco_Meraki_Dashboard_API
 [9]: https://documentation.meraki.com/General_Administration/Other_Topics/Cisco_Meraki_Dashboard_API#Enable_API_access
-[10]: https://docs.datadoghq.com/ja/help/
-[11]: https://docs.datadoghq.com/ja/network_monitoring/devices/
+[10]: https://docs.datadoghq.com/help/
+[11]: https://docs.datadoghq.com/network_monitoring/devices/
 [12]: https://www.datadoghq.com/blog/monitor-meraki/
+

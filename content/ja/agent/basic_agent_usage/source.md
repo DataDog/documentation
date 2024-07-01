@@ -1,95 +1,97 @@
 ---
-aliases:
-- /ja/guides/basic_agent_usage/source/
-further_reading:
-- link: /logs/
-  tag: Documentation
-  text: ログの収集
-- link: /infrastructure/process/
-  tag: Documentation
-  text: プロセスの収集
-- link: /tracing/
-  tag: Documentation
-  text: トレースの収集
-- link: /agent/basic_agent_usage/#agent-architecture
-  tag: Documentation
-  text: Agent のアーキテクチャを詳しく見る
-- link: /agent/guide/network#configure-ports
-  tag: Documentation
-  text: インバウンドポートの構成
+title: Basic Agent Usage for Source Installation
 platform: Source
-title: Source Installation 用 Agent の基本的な使用方法
+aliases:
+    - /guides/basic_agent_usage/source/
+further_reading:
+- link: "/logs/"
+  tag: "Documentation"
+  text: "Collect your logs"
+- link: "/infrastructure/process/"
+  tag: "Documentation"
+  text: "Collect your processes"
+- link: "/tracing/"
+  tag: "Documentation"
+  text: "Collect your traces"
+- link: "/agent/basic_agent_usage/#agent-architecture"
+  tag: "Documentation"
+  text: "Find out more about the Agent's architecture"
+- link: "/agent/configuration/network#configure-ports"
+  tag: "Documentation"
+  text: "Configure inbound ports"
+algolia:
+  tags: ['uninstall', 'uninstalling']
 ---
-## 概要
+## Overview
 
-このページでは、Datadog Agent の基本的な機能について説明します。Agent をまだインストールしていない場合は、[Datadog Agent インテグレーションのページ][1]で手順を参照してください。
+This page outlines the basic features of the Datadog Agent. If you haven't installed the Agent yet, instructions can be found [in the Datadog Agent Integration page][1].
 
-デフォルトでは、Agent は `~/.datadog-agent` にある独自のサンドボックスにインストールされます。このフォルダーは、任意の場所に移動できます。ただし、ここでは、Agent がデフォルトの場所にインストールされていることを前提としているため、場所を移動した場合は、それに応じて手順を変更してください。
+By default, your Agent is installed in its own sandbox at `~/.datadog-agent`. You're free to move this folder anywhere. However, this article assumes that the Agent is installed in its default location, so be sure to modify the instructions accordingly if you decide to move them.
 
-## コマンド
+## Commands
 
-Datadog Agent に含まれるコマンドのうち、`start`/`stop`/`restart`/`status` などの_ライフサイクルコマンド_だけは `sudo` で実行する必要があります。
+Datadog Agent has some commands and only the _lifecycle commands_, such as `start`/`stop`/`restart`/`status`, should be run with `sudo`.
 
 {{< tabs >}}
 {{% tab "Agent v6 & v7" %}}
 
-| 説明                   | コマンド                                 |
+| Description                   | Command                                 |
 | ----------------------------- | --------------------------------------- |
-| Agent の起動                   | `sudo ./bin/agent/agent start`          |
-| Agent の停止                    | `sudo ./bin/agent/agent stop`          |
-| 実行中の Agent のステータスページ  | `sudo ./bin/agent/agent info`          |
-| フレアの送信                    | `sudo ./bin/agent/agent flare`         |
-| コマンドの使用方法の表示         | `sudo ./bin/agent/agent help`          |
+| Start Agent                   | `sudo ./bin/agent/agent start`          |
+| Stop Agent                    | `sudo ./bin/agent/agent  stop`          |
+| Status page of running Agent  | `sudo ./bin/agent/agent  info`          |
+| Send flare                    | `sudo ./bin/agent/agent  flare`         |
+| Display command usage         | `sudo ./bin/agent/agent  help`          |
 
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
-| 説明                   | コマンド                                 |
+| Description                   | Command                                 |
 | ----------------------------- | --------------------------------------- |
-| Agent の起動                   | `sudo ~/.datadog-agent/bin/agent start` |
-| Agent の停止                    | `sudo ~/.datadog-agent/bin/agent stop`  |
-| 実行中の Agent のステータスページ  | `sudo ~/.datadog-agent/bin/agent info`  |
-| フレアの送信                    | `sudo ~/.datadog-agent/bin/agent flare` |
-| コマンドの使用方法の表示         | `sudo ~/.datadog-agent/bin/agent help`  |
+| Start Agent                   | `sudo ~/.datadog-agent/bin/agent start` |
+| Stop Agent                    | `sudo ~/.datadog-agent/bin/agent stop`  |
+| Status page of running Agent  | `sudo ~/.datadog-agent/bin/agent info`  |
+| Send flare                    | `sudo ~/.datadog-agent/bin/agent flare` |
+| Display command usage         | `sudo ~/.datadog-agent/bin/agent help`  |
 
 {{% /tab %}}
 {{< /tabs >}}
 
-## コンフィギュレーション
+## Configuration
 
 {{< tabs >}}
 {{% tab "Agent v6 & v7" %}}
-Agent の構成ファイルおよびフォルダーの場所:
+The configuration files and folders for the Agent are located in:
 
 * `/etc/datadog-agent/datadog.yaml`
 
-[インテグレーション][1]用構成ファイルの場所
+Configuration files for [Integrations][1]:
 
 * `/etc/datadog-agent/conf.d/`
 
-[1]: /ja/integrations/
+[1]: /integrations/
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
-Agent の構成ファイルおよびフォルダーの場所
+The configuration files and folders for the Agent are located in:
 
 * `/etc/dd-agent/datadog.conf`
 
-[インテグレーション][1]用構成ファイルの場所
+Configuration files for [Integrations][1]:
 
 * `/etc/dd-agent/conf.d/`
 
-[1]: /ja/integrations/
+[1]: /integrations/
 {{% /tab %}}
 {{< /tabs >}}
 
-## トラブルシューティング
+## Troubleshooting
 
-[Agent のトラブルシューティングに関するドキュメント][2]を参照してください。
+See the [Agent Troubleshooting documentation][2].
 
-
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/account/settings#agent/source
-[2]: /ja/agent/troubleshooting/
+[1]: https://app.datadoghq.com/account/settings/agent/latest?platform=source
+[2]: /agent/troubleshooting/

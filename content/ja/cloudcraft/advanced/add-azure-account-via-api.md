@@ -1,27 +1,27 @@
 ---
-title: Cloudcraft API による Azure アカウントの追加
+title: Add Azure accounts via the Cloudcraft API
 ---
 
-Cloudcraft は現在、Web インターフェイスを使用して複数の Azure アカウントを一度に追加する方法を提供していませんが、これは [API][1] を介して可能です。
+Cloudcraft currently doesn't offer a way to add multiple Azure accounts at once using the web interface, but you can do so via [the API][1].
 
-<div class="alert alert-info">Azure アカウントの追加とスキャン、および Cloudcraft の開発者 API の使用は、Pro 契約者のみが利用できます。詳しくは <a href="https://www.cloudcraft.co/pricing">Cloudcraft の料金ページ</a>をご覧ください。</div>
+<div class="alert alert-info">The ability to add and scan Azure accounts, as well as to use Cloudcraft's developer API, is only available to Pro subscribers. Check out <a href="https://www.cloudcraft.co/pricing">Cloudcraft's pricing page</a> for more information.</div>
 
-## 前提条件
+## Prerequisites
 
-始める前に、以下があることを確認してください。
+Before you begin, make sure you have the following:
 
-- [オーナーまたは管理者ロール][2]を持つ Cloudcraft ユーザー。
-- 有効な [Cloudcraft Pro サブスクリプション][3]。
-- 適切な権限を持つ Azure アカウント。
-- cURL がインストールされた Linux、macOS、または Windows 上の WSL など、Unix ライクな環境。
-- コマンドラインインターフェイスの基本的な理解。
-- API の使い方の基本的な理解。
+- A Cloudcraft user with the [Owner or Administrator role][2].
+- An active [Cloudcraft Pro subscription][3].
+- An Azure account with proper permissions.
+- A Unix-like environment, such as Linux, macOS, or WSL on Windows with cURL installed.
+- A basic understanding of the command-line interface.
+- A basic understanding of how to use APIs.
 
-また、Azure アカウントの **Application ID**、**Directory ID**、**Subscription ID**、**Client secret** が必要です。これらの値の場所については、[Cloudcraft で Azure アカウントを接続する][4]を参照してください。
+You must also have the **Application ID**, **Directory ID**, **Subscription ID**, and **Client secret** for your Azure account. For help locating these values, see [Connect your Azure account with Cloudcraft][4].
 
-## Azure アカウントの追加
+## Adding an Azure account
 
-Cloudcraft に Azure アカウントを追加するには、コマンドラインを開き、以下の cURL コマンドを入力します。
+To add your Azure account to Cloudcraft, open the command line and enter the following cURL command:
 
 {{< code-block lang="shell" >}}
 curl \
@@ -34,11 +34,11 @@ curl \
   --data-raw '{"name":"AZURE_ACCOUNT_NAME","applicationId": "APPLICATION_ID","directoryId": "DIRECTORY_ID","subscriptionId": "SUBSCRIPTION_ID","clientSecret": "CLIENT_SECRET"}'
 {{< /code-block >}}
 
-`_AZURE_ACCOUNT_NAME_` は Cloudcraft で設定したいアカウント名に、その他の値は実際の値に置き換えます。`_API_KEY_` は API キーに置き換えます。
+Replace `_AZURE_ACCOUNT_NAME_` with the name you want the account to have in Cloudcraft and the other values with the actual values. Replace `_API_KEY_` with your API key.
 
-アカウントの追加に成功したら、同じコマンドを使用して Cloudcraft に他のアカウントを追加できます。
+After you successfully add the account, you can use the same command to add additional accounts to Cloudcraft.
 
 [1]: https://developers.cloudcraft.co/
-[2]: /ja/cloudcraft/account-management/roles-and-permissions/
+[2]: /cloudcraft/account-management/roles-and-permissions/
 [3]: https://www.cloudcraft.co/pricing
-[4]: /ja/cloudcraft/getting-started/connect-azure-account-with-cloudcraft/
+[4]: /cloudcraft/getting-started/connect-azure-account-with-cloudcraft/

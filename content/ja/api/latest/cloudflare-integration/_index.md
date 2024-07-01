@@ -1,3 +1,3 @@
 ---
-title: Cloudflare インテグレーション
+title: Cloudflare Integration
 ---

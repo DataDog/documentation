@@ -1,6 +1,6 @@
 ---
+title: orchestrator
 core_product:
-- infrastructure monitoring
-title: オーケストレーター
+  - infrastructure monitoring
 ---
-コンテナ化されたインフラストラクチャーでは、オーケストレーターがコンテナの管理を自動化します。これには、コンテナのプロビジョニング、デプロイ、スケーリング、ネットワーキングが含まれます。
+In a containerized infrastructure, an orchestrator automates the management of containers. This includes the provisioning, deploying, scaling, and networking of containers.

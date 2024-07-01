@@ -1,53 +1,58 @@
 ---
+title: SLO Type Comparison
+kind: Guide
 further_reading:
 - link: /service_management/service_level_objectives/
-  tag: ドキュメント
-  text: サービスレベル目標の概要
+  tag: Documentation
+  text: Overview of Service Level Objectives
 - link: /service_management/service_level_objectives/metric/
-  tag: ドキュメント
-  text: 接続
+  tag: Documentation
+  text: Metric-based SLOs
 - link: /service_management/service_level_objectives/monitor/
-  tag: ドキュメント
-  text: アクションの保存と再利用
+  tag: Documentation
+  text: Monitor-based SLOs
 - link: /service_management/service_level_objectives/time_slice/
-  tag: ドキュメント
-  text: APM
-kind: ガイド
-title: SLO タイプの比較
+  tag: Documentation
+  text: Time Slice SLOs
 ---
 
-## 概要
+## Overview
 
-SLO を作成する際、以下のタイプから選択できます。
-- **メトリクスベースの SLO**: SLI をカウントベースで計算したい場合に使用でき、SLI は優良イベントの合計を全イベントの合計で割った値として計算されます。
-- **モニターベースの SLO**: SLI を時間ベースで計算したい場合に使用でき、SLI はモニターのアップタイムを基にしています。モニターベースの SLO は新規または既存の Datadog モニターに基づく必要があり、調整はそのモニターに対して行う必要があります (SLO の作成時にはできません)。
-- **タイムスライス SLO**: SLI を時間ベースで計算したい場合に使用でき、SLI はカスタムアップタイム定義 (システムが正常な動作を示した時間を合計時間で割ったもの) に基づきます。タイムスライス SLO は、Datadog モニターを必要とせず、さまざまなメトリクスフィルターとしきい値を試して、SLO 作成中にダウンタイムを即座に調査することができます。
+When creating SLOs, you can choose from the following types:
+- **Metric-based SLOs**: can be used when you want the SLI calculation to be count-based, the SLI is calculated as the sum of good events divided by the sum of total events.
+- **Monitor-based SLOs**: can be used when you want the SLI calculation to be time-based, the SLI is based on the Monitor's uptime. Monitor-based SLOs must be based on a new or existing Datadog monitor, any adjustments must be made to the underlying monitor (cannot be done through SLO creation).
+- **Time Slice SLOs**: can be used when you want the SLI calculation to be time-based, the SLI is based on your custom uptime definition (amount of time your system exhibits good behavior divided by the total time). Time Slice SLOs do not require a Datadog monitor, you can try out different metric filters and thresholds and instantly explore downtime during SLO creation.
 
-## 比較チャート
+<div class="alert alert-info">The supported history duration for Metric-based and Time Slice SLOs matches your account's metric duration (by default, this is 15 months).</div>
 
-|                                                                       | **メトリクスベースの SLO**                                                                                                                      | **モニターベースの SLO**                                                                                                                                               | **タイムスライス SLO**                                                                   |
+## Comparison chart
+
+|                                                                       | **Metric-based SLO**                                                                                                                      | **Monitor-based SLO**                                                                                                                                               | **Time Slice SLO**                                                                   |
 |-----------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------|
-| **サポートされるデータタイプ**                                              | カウント、レート、またはディストリビューションタイプのメトリクス                                                                                         | メトリクスモニターのタイプ、Synthetic モニター、サービスチェック                                                                                                        | すべてのメトリクスタイプ (ゲージメトリクスを含む)                                           |
-| **グループによる SLO の機能**                                               | すべてのグループに基づいて計算された SLO<br><br>SLO サイドパネルで全グループを、SLO サマリーウィジェットで最大 20 グループを表示できます                                                                                                                  | 単一のマルチアラートモニターを持つ SLO のサポート<br><br>**オプション 1:** すべてのグループに基づいて計算された SLO (SLO サイドパネルと SLO サマリーウィジェットでワースト 5 グループを表示できます)<br>**オプション 2:** 最大 20 個の選択されたグループに基づいて計算された SLO (SLO サイドパネルと SLO サマリーウィジェットで選択されたすべてのグループを表示できます)                                                                                                                                | すべてのグループに基づいて計算された SLO<br><br>SLO サイドパネルで全グループを、SLO サマリーウィジェットで最大 20 グループを表示できます                                                           |
-| **SLO 詳細サイドパネル (最大 90 日間の履歴データ)** | SLO 情報を表示するためのカスタムタイムウィンドウを設定できます                                                                                              | SLO 情報を表示するためのカスタムタイムウィンドウを設定できません (7 日、30 日、90 日の履歴は表示できます)                                                                                                                     | SLO 情報を表示するためのカスタムタイムウィンドウを設定できます                                         |
-| **SLO アラート ([エラーバジェット][1]または[バーンレート][2]アラート)**         | 利用可能                                                                                                      | メトリクスモニタータイプに基づく SLO にのみ利用可能 (Synthetic モニターやサービスチェックの場合は利用できません)                                                      | 利用不可                                                    |
-| [**SLO ステータスの修正**][3]                                       | 修正期間は SLO ステータスの計算から無視されます                                                              | 修正期間は SLO ステータスの計算から無視されます                                                                                        | 修正期間は SLO ステータス計算のアップタイムとしてカウントされます |
-| **[SLO ウィジェット][4] (最大 90 日間の履歴データ)**                                                  | 利用可能                                                                                                           | 利用可能                                                                                                                           | 利用可能                                                        |
-| [**SLO データソース**][5]                                              | 利用可能 (最大 15 か月の履歴データあり)                                                                | 利用不可                                                                                                                                     | 利用不可                                                |
-| **SLO 計算における欠落データの処理**                      | SLO ステータスおよびエラーバジェットの計算では、欠落データは無視されます                                                                       | 欠落データは、[基礎となるモニターの構成][6]に基づいて処理されます                                                                                        | SLO ステータスおよびエラーバジェットの計算では、欠落データはアップタイムとして扱われます        |
-| **アップタイムの計算**                                          |  N/A                                                                                  |  アップタイムの計算は基礎となるモニターに基づいて行われます<br><br>グループが存在する場合、全体のアップタイムには*すべての*グループがアップタイムであることが求められます| [アップタイム][7]はローリングタイムウィンドウではなく、個別のタイムチャンクを見て計算されます<br><br>グループが存在する場合、全体のアップタイムには*すべての*グループがアップタイムであることが求められます |
-| **SLO 管理ページのカレンダー表示**                                   | 利用可                                                                                                                                | 利用不可                                                                                                                                                      | 利用可                                                                            |
-| **公開 [API][8] と Terraform のサポート**                                   | 利用可                                                                                                                                 | 利用可                                                                                                                                                     | 利用可能                                                                            |
+| **Supported data types**                                              | Metrics with type of count, rate, or distribution                                                                                         | Metric Monitor types, Synthetic Monitors, and Service Checks                                                                                                        | All metric types (including gauge metrics)                                           |
+| **Functionality for SLO with Groups**                                               | SLO calculated based on all groups<br><br>Can view all groups in SLO side panel and SLO widget                                                                                                                  | Supported for SLOs with a single multi alert Monitor<br><br>**Option 1:** SLO calculated based on all groups (can view all groups in SLO side panel and SLO widget)<br>**Option 2:** SLO calculated based on up to 20 selected groups (can view all selected groups in SLO side panel and SLO widget)                                                                                                                                | SLO calculated based on all groups<br><br>Can view all groups in SLO side panel and SLO widget                                                           |
+| **SLO side panel** | Can set custom time windows to view up to 15 months of SLO history                                                                                                | Can set custom time windows to view up to 3 months of SLO history                                                                                                                     | Can set custom time windows to view up to 15 months of SLO history                                         |
+| **SLO alerting ([Error Budget][1] or [Burn Rate][2] Alerts)**         | Available                                                                                                      | Available for SLOs based on Metric Monitor types only (not available for Synthetic Monitors or Service Checks)                                                      | Available                                                    |
+| [**SLO Status Corrections**][3]                                       | Correction periods are ignored from SLO status calculation                                                              | Correction periods are ignored from SLO status calculation                                                                                        | Correction periods are counted as uptime in SLO status calculation |
+| **SLO widgets ([SLO List widget][10] or [SLO widget][9])**                                                  | Can view up to 15 months of historical data with the SLO widget                                                                                                           | Can view up to 3 months of historical data with the SLO widget                                                                                                                           | Can view up to 15 months of historical data with the SLO widget                                                         |
+| **[SLO Data Source][5] (up to 15 months of historical data)**                                              | Available                                                                | Not available                                                                                                                                     | Available                                                |
+| **Handling missing data in the SLO calculation**                      | Missing data is ignored in SLO status and error budget calculations                                                                       | Missing data is handled based on the [underlying Monitor's configuration][6]                                                                                        | Missing data is treated as uptime in SLO status and error budget calculations        |
+| **Uptime Calculations**                                          |  N/A                                                                                  |  Uptime calculations are based on the underlying Monitor <br><br>If groups are present, overall uptime requires *all* groups to have uptime| [Uptime][7] is calculated by looking at discrete time chunks, not rolling time windows<br><br>If groups are present, overall uptime requires *all* groups to have uptime |
+| **[Calendar View][11] on SLO Manage Page**                                   | Available                                                                                                                                | Not available                                                                                                                                                      | Available                                                                            |
+| **Public [APIs][8] and Terraform Support**                                   | Available                                                                                                                                 | Available                                                                                                                                                     | Available                                                                            |
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/ja/service_management/service_level_objectives/error_budget/
-[2]: https://docs.datadoghq.com/ja/service_management/service_level_objectives/burn_rate/
-[3]: https://docs.datadoghq.com/ja/service_management/service_level_objectives/#slo-status-corrections
-[4]: https://docs.datadoghq.com/ja/service_management/service_level_objectives/#slo-widgets
-[5]: https://docs.datadoghq.com/ja/dashboards/guide/slo_data_source/
-[6]: https://docs.datadoghq.com/ja/service_management/service_level_objectives/monitor/#missing-data
-[7]: /ja/service_management/service_level_objectives/time_slice/#uptime-calculations
-[8]: https://docs.datadoghq.com/ja/api/latest/service-level-objectives/
+[1]: https://docs.datadoghq.com/service_management/service_level_objectives/error_budget/
+[2]: https://docs.datadoghq.com/service_management/service_level_objectives/burn_rate/
+[3]: https://docs.datadoghq.com/service_management/service_level_objectives/#slo-status-corrections
+[4]: https://docs.datadoghq.com/service_management/service_level_objectives/#slo-widgets
+[5]: https://docs.datadoghq.com/dashboards/guide/slo_data_source/
+[6]: https://docs.datadoghq.com/service_management/service_level_objectives/monitor/#missing-data
+[7]: /service_management/service_level_objectives/time_slice/#uptime-calculations
+[8]: https://docs.datadoghq.com/api/latest/service-level-objectives/
+[9]: https://docs.datadoghq.com/dashboards/widgets/slo/
+[10]: https://docs.datadoghq.com/dashboards/widgets/slo_list/
+[11]: https://docs.datadoghq.com/service_management/service_level_objectives/#slo-calendar-view

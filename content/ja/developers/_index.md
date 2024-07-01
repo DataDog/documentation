@@ -1,135 +1,136 @@
 ---
+title: Developers
+kind: documentation
+description: Learn how to develop an integration on Datadog.
 aliases:
-- /ja/developers/faq/how-to-monitor-logs-with-loggly-live-tail-and-datadog
-cascade:
-  algolia:
-    rank: 70
-description: Datadog でインテグレーションを開発する方法を説明します。
+- /developers/faq/how-to-monitor-logs-with-loggly-live-tail-and-datadog
 further_reading:
-- link: /api/latest/
-  tag: Documentation
-  text: Datadog API について
-- link: https://datadoghq.dev/integrations-core/guidelines/dashboards/#best-practices
-  tag: ベストプラクティス
-  text: 優れたインテグレーションダッシュボードを作成する
-- link: https://www.datadoghq.com/blog/engineering/druids-the-design-system-that-powers-datadog/
-  tag: ブログ
-  text: Datadog を支えるデザインシステム、DRUIDS
-- link: https://www.datadoghq.com/blog/introducing-open-source-hub/
-  tag: ブログ
-  text: Datadog Open Source Hub のご紹介
-title: 開発者
+- link: "/api/latest/"
+  tag: "Documentation"
+  text: "Learn about the Datadog API"
+- link: "https://datadoghq.dev/integrations-core/guidelines/dashboards/#best-practices"
+  tag: "Best Practices"
+  text: "Create great integration dashboards"
+- link: "https://www.datadoghq.com/blog/engineering/druids-the-design-system-that-powers-datadog/"
+  tag: "Blog"
+  text: "DRUIDS, the design system that powers Datadog"
+- link: "https://www.datadoghq.com/blog/introducing-open-source-hub/"
+  tag: "Blog"
+  text: "Introducing the Datadog Open Source Hub"
+cascade:
+    algolia:
+        rank: 70
 ---
 
-## 概要
+## Overview
 
-開発者セクションには、Datadog で開発するための参考資料が含まれています。表示されていない製品に表示したいデータがある場合は、Datadog で開発することをお勧めします。この場合、Datadog は必要なテクノロジーをすでにサポートしている可能性があります。[一般的に要求されるテクノロジー](#commonly-requested-technologies)の表を参照して、ニーズを満たす可能性のある製品またはインテグレーションを見つけてください。
+The Developers section contains reference materials for developing on Datadog. You may want to develop on Datadog if there is data you want to see in the product that you are not seeing. If this is the case, Datadog may already support the technology you need. See the table of [commonly requested technologies](#commonly-requested-technologies) to find the product or integration that may fulfill your needs.
 
-## 一般的に要求されるテクノロジー
+## Commonly requested technologies
 
-現在表示されていない Datadog で監視したいデータがある場合は、カスタムを作成する前に、次の Datadog 製品とインテグレーションを検討してください。
+If there is data you want to monitor with Datadog that you are not seeing, before building something custom, consider the following Datadog products and integrations:
 
 {{< partial name="requests.html" links="requests" >}}
 
-必要なソリューションが本当に利用できない場合は、[Datadog サポート][1]に連絡して機能をリクエストできます。このセクションの参考資料を使用して、[独自のソリューションを作成する](#creating-your-own-solution)こともできます。
+If the solution you require is truly unavailable, you can contact [Datadog Support][1] to request a feature. You may also wish to [create your own solution](#creating-your-own-solution) by using the reference materials in this section.
 
-### パートナーと Datadog マーケットプレイス
+### Partners and the Datadog Marketplace
 
-また、Datadog を基盤として、[Datadog Marketplace][10] や Datadog のコミュニティ[インテグレーション][6]に貢献したいパートナーである場合もあります。
+You may also be a partner who wants to build on Datadog and contribute to the [Datadog Marketplace][10] or to Datadog's community [integrations][6]. 
 
-{{< whatsnext desc="製品を開発するには、適切なドキュメントを参照してください。" >}}
-    {{< nextlink href="/developers/integrations/agent_integration" >}}Agent ベースのインテグレーションの作成{{< /nextlink >}}
-    {{< nextlink href="/developers/integrations/api_integration" >}}API インテグレーションの作成{{< /nextlink >}}
-    {{< nextlink href="/developers/integrations/log_integration" >}}ログインテグレーションの作成{{< /nextlink >}}
-    {{< nextlink href="/developers/integrations/marketplace_offering" >}}マーケットプレイス製品の構築{{< /nextlink >}}
+{{< whatsnext desc="To develop an offering, see the appropriate documentation:" >}}
+    {{< nextlink href="/developers/integrations/agent_integration" >}}Create an Agent-based Integration{{< /nextlink >}}
+    {{< nextlink href="/developers/integrations/api_integration" >}}Create an API Integration{{< /nextlink >}}
+    {{< nextlink href="/developers/integrations/log_integration" >}}Create a Log Integration{{< /nextlink >}}
+    {{< nextlink href="/developers/integrations/marketplace_offering" >}}Build a Marketplace Offering{{< /nextlink >}}
 {{< /whatsnext >}}
 
-Datadog パートナーになるための詳細は、[Datadog パートナーネットワーク][2]をご覧ください。
+For more information about becoming a Datadog partner, navigate to the [Datadog Partner Network][2]. 
 
-## 独自のソリューションを作成する
+## Creating your own solution
 
-必要な種類のデータがまだ表示されていませんか？開発者には、サポートされていないデータを Datadog に送信するための選択肢がいくつかあります。
+Still not seeing the type of data that you need? Developers have several choices for sending unsupported data to Datadog.
 
-- [**DogStatsD**][3] は、カスタムメトリクス、イベント、サービスチェックを受け入れるメトリクス集計サービスです。
+- [**DogStatsD**][3] is a metrics aggregation service that accepts custom metrics, events, and service checks.
 
-- [**カスタムチェック**][4]を使用すると、カスタムアプリケーションまたはシステムからメトリクスを収集できます。[カスタム Agent チェック][4]は多くのニーズに適しています。メトリクスの前処理などのより高度な要件については、[OpenMetrics][5] チェックを作成するという選択肢があります。
+- [**Custom checks**][4] enable you to collect metrics from custom applications or systems. [Custom Agent checks][4] are suitable for many needs. For more advanced requirements like metrics preprocessing, you may choose to write an [OpenMetrics][5] check.
 
-- [**インテグレーション**][6]を使用すると、カスタムアプリケーションまたはシステムからメトリクス、イベント、サービスチェックを収集することもできます。インテグレーションは再利用可能です。インテグレーションは非公開に保つことも、他の開発者が使用できるように Datadog の[コミュニティインテグレーションのリポジトリ][7]に貢献する公開インテグレーションを作成することもできます。
+- [**Integrations**][6] also enable you to collect metrics, events, and service checks from custom applications or systems. Integrations are reusable. You may keep your integration private, or write a public integration contributing to Datadog's [repository of community integrations][7] to be used by other developers.
 
 
-### カスタムチェックとインテグレーション
+### Custom check versus integration
 
-カスタムチェックとインテグレーションの主な違いは、インテグレーションは Datadog のエコシステムの一部になることができる再利用可能なコンポーネントであるということです。これは通常、より多くの労力 (開発にかかる時間) を要し、アプリケーションフレームワーク、オープンソースプロジェクト、または一般的に使用されるソフトウェアなどの一般的なユースケースに最適です。チームや組織の外部で広く使用されていない監視サービスなど、よりユニークなシナリオでは、カスタムチェックを作成するのが最も効率的なオプションです。
+The primary difference between custom checks and integrations is that integrations are reusable components that can become part of the Datadog's ecosystem. They generally take more effort (time to develop) and are best suited for general use-cases such as application frameworks, open source projects, or commonly used software. For more unique scenarios, such as monitoring services that are not widely used outside your team or organization, writing a custom check may be the most efficient option. 
 
-ただし、特定のユースケースでソリューションを Python ホイール (`.whl`) として公開およびデプロイする必要がある場合は、カスタムチェックの代わりにインテグレーションを作成することを選択できます。カスタムチェックを通じて発行されたメトリクスはカスタムメトリクスと見なされ、サブスクリプションプランに基づいてコストが関連付けられます。しかし、インテグレーションが Datadog エコシステムに受け入れられると、それが発行するメトリクスはカスタムメトリクスとは見なされなくなり、カスタムメトリクス数にカウントされなくなります。これがコストに与える影響の詳細については、[Datadog の料金][8]を参照してください。
+However, you may choose to write an integration instead of a custom check if your particular use case requires you to publish and deploy your solution as a Python wheel (`.whl`). Metrics emitted through custom checks are considered custom metrics, which have a cost associated based on your subscription plan. However, once an integration gets accepted into the Datadog ecosystem, metrics that it emits are no longer considered custom metrics, and do not count against your custom metric count. For more information about how this might impact cost, see [Datadog Pricing][8].
 
-### インテグレーションを作成するには？
+### How do I create an integration? 
 
-公開インテグレーション (つまり、Datadog のエコシステムの一部であり、`datadog-agent integration` コマンドでインストールでき、Datadog の [integrations-extras][7] または [integrations-core][9] リポジトリに受け入れられるインテグレーション) を作成するには、非公開インテグレーションよりも多くの作業が必要になることに注意してください。このインテグレーションは、すべての `ddev validate` ステップに合格し、使用可能なテストを行い、コードレビューを受ける必要があります。コード作成者であるあなたには、インテグレーションの保守管理者として、その機能を保証する責任があります。
+Writing a public integration (that is, one that is part of Datadog's ecosystem, can be installed with the `datadog-agent integration` command, and is accepted into Datadog's [integrations-extras][7] or [integrations-core][9] repositories) requires more work than a private integration. These integrations must pass all `ddev validate` steps, have usable tests, and undergo code review. You, as the code author, are the active maintainer of the integration and are responsible for ensuring its functionality.
 
-初期目標は、小規模なコードを生成して信頼できる方法で希望するメトリクスを収集し、基本的なインテグレーションフレームワークを構築することです。カスタムチェックとして基本機能のコードを記述し、[Agent インテグレーションの作成][13]からフレームワークの詳細を入力してください。
+The initial goal is to generate some code that collects the desired metrics in a reliable way, and to ensure that the general integration framework is in place. Start by writing the basic functionality as a custom Check, then fill in the framework details from [Create an Agent Integration][13].
 
-次に、[`integrations-extras` リポジトリ][7]に対してプルリクエストを開いてください。これにより、コードレビューの準備が整ったことが Datadog に通知されます。テストや Datadog 内部の仕組み、その他の点について不明点がある場合は、Datadog Ecosystems チームがサポートしますのでご安心ください。プルリクエストを通じて効率的に懸念点を振り返ることができます。
+Next, open a pull request against the [`integrations-extras` repository][7]. This signals to Datadog that you're ready to start reviewing code together. Don't worry if you have questions about tests, Datadog internals, or other topics—the Datadog Ecosystems team is ready to help, and the pull request is a good place to go over those concerns. 
 
-インテグレーションは、機能性、フレームワークへの準拠、一般的なコード品質が検証されると、`integrations-extras` にマージされ、Datadog エコシステムの一部となります。
+Once the integration has been validated for functionality, framework compliance, and general code quality, it is merged into `integrations-extras` where it becomes part of the Datadog ecosystem. 
 
-サポートされていないデータを Datadog に送信する方法を決定する際の主な考慮事項は、労力 (開発にかかる時間) と予算 (カスタムメトリクスのコスト) です。Datadog がサポートしていないデータを表示しようとしている場合は、まずはデータの送信を開始するのに最も適切な方法を決定してください。
+When deciding how to send unsupported data to Datadog, the main considerations are effort (time to develop) and budget (cost of custom metrics). If you are trying to see data that Datadog doesn't support, start by deciding which method makes the most sense to start sending data:
 
-| タイプ                | 工数 | カスタムメトリクス | 言語 |
+| Type                | Effort | Custom Metrics | Language |
 |---------------------|--------|----------------|----------|
-| DogStatsD           | 最小 | はい            | 任意      |
-| カスタムチェック        | 小    | はい            | Python   |
-| プライベートインテグレーション | 中 | はい            | Python   |
-| パブリックインテグレーション  | 大   | いいえ             | Python   |
+| DogStatsD           | Lowest | Yes            | Any      |
+| Custom check        | Low    | Yes            | Python   |
+| Private integration | Medium | Yes            | Python   |
+| Public integration  | High   | No             | Python   |
 
-### インテグレーション作成のメリット
+### Why create an integration?
 
-不定期にレポートを作成したい場合、またデータソースが特殊または非常に限られているなどの場合は[カスタムチェック][1]が有用です。アプリケーションのフレームワーク、オープンソースプロジェクト、一般的に使用されるソフトウェアなど、これよりも汎用的なユースケースに関してはインテグレーションを作成することをお勧めします。
+[Custom Checks][1] are great for occasional reporting, or in cases where the data source is either unique or very limited. For more general use cases - such as application frameworks, open source projects, or commonly-used software - it makes sense to write an integration.
 
-許容されたインテグレーションから報告されるメトリクスは、カスタムメトリクスとしてはカウントされません、そのため、これがカスタムメトリクスの割り当てに影響することはありません。(ほぼ無制限にメトリクスを生成するインテグレーションは「カスタム」とみなされる場合があります。) Datadog によるネイティブサポートを実施することで、適応時の問題を緩和し、自社製品、サービス、プロジェクトのユーザー利用を促進することができます。また、Datadog エコシステムの一員として取り上げられることで認知度の飛躍的な向上も期待できます。
+Metrics reported from accepted integrations are not counted as custom metrics, and therefore don't impact your custom metric allocation. (Integrations that emit potentially unlimited metrics may still be considered custom.) Ensuring native support for Datadog reduces friction to adoption, and incentivizes people to use your product, service, or project. Also, being featured within the Datadog ecosystem is a great avenue for added visibility.
 
-### カスタムチェックとサービスチェックの違いは何ですか？
+### What's the difference between a custom check and a service check?
 
-[カスタムチェック][11]は、カスタム Agent チェックとも呼ばれるもので、これを使うと内部サービスデータを Datadog に送信することができます。[サービスチェック][12]はこれよりもはるかにシンプルなもので、これを使うと特定のサービスのアップまたはダウンステータスを監視することができます。これらは両方ともチェックですが、機能が異なり、監視のニーズに基づいて個別に、または一緒に使用できます。それぞれの詳細については、[カスタムチェック][11]および[サービスチェック][12]のドキュメントセクションを参照してください。
+A [custom check][11], also know as a custom Agent check, lets you send internal service data to Datadog. A [service check][12] is much simpler and lets you monitor the up or down status of the specific service. Even though these are both checks, they have different functionality and can be used separately and together based on your monitoring needs. For more information about each, see the [custom check][11], and [service check][12] documentation sections.
 
-### インテグレーションタイプ別のメトリクス送信
+### Sending metrics by integration types
 
-{{< whatsnext desc="Datadog に独自のメトリクスを送信する方法を説明します。" >}}
-    {{< nextlink href="/developers/dogstatsd" >}}<u>DogStatsD</u>: セットアップ、データグラム形式、データ送信など、DogStatsD の機能の概要を説明します。{{< /nextlink >}}
-    {{< nextlink href="/developers/write_agent_check" >}}<u>カスタム Agent チェック</u>: カスタムチェックで、メトリクス、イベント、およびサービスチェックを報告する方法を説明します。{{< /nextlink >}}
-    {{< nextlink href="/developers/prometheus" >}}<u>カスタム OpenMetrics チェック</u>: 専用のカスタム Agent チェックで OpenMetrics チェックを報告する方法を説明します。{{< /nextlink >}}
-    {{< nextlink href="/developers/integrations/" >}}<u>インテグレーション</u>: より複雑なタスクのために、パブリックまたはプライベートな Datadog インテグレーションを作成します。パブリックなインテグレーションはコミュニティと共有できます。{{< /nextlink >}}
+{{< whatsnext desc="Learn how to send your own metrics to Datadog:" >}}
+    {{< nextlink href="/developers/dogstatsd" >}}<u>DogStatsD</u>: Overview of the features of DogStatsD, including setup, datagram format, and data submission.{{< /nextlink >}}
+    {{< nextlink href="/developers/write_agent_check" >}}<u>Custom Agent Check</u>: Learn how to report metrics, events, and service checks with your own custom check.{{< /nextlink >}}
+    {{< nextlink href="/developers/prometheus" >}}<u>Custom OpenMetrics Check</u>: Learn how to report your OpenMetrics check with a dedicated custom Agent Check.{{< /nextlink >}}
+    {{< nextlink href="/developers/integrations/" >}}<u>Integrations</u>: For more complex tasks, build a public or private Datadog integration. Public integrations can be shared with the community.{{< /nextlink >}}
 {{< /whatsnext >}}
 
-### データタイプ別のデータ送信
+### Sending data by data types
 
-{{< whatsnext desc="Datadog に送信できるデータのタイプとその送信方法について説明します。" >}}
-    {{< nextlink href="/metrics" >}}<u>カスタムメトリクス</u>: Datadog のカスタムメトリクスについて掘り下げて説明します。メトリクスのタイプや、それぞれのタイプが表すもの、送信方法、および Datadog 全体でどのように使用されるかを、このセクションで説明します。{{< /nextlink >}}
-    {{< nextlink href="service_management/events/guides/" >}}<u>イベント</u>: カスタム Agent チェック、DogStatsD、または Datadog API を使用して、Datadog にイベントを送信する方法について説明します。{{< /nextlink >}}
-    {{< nextlink href="/developers/service_checks" >}}<u>サービスチェック</u>: 特定のサービスのアップまたはダウンステータスを Datadog に送信する方法について説明します。{{< /nextlink >}}
+{{< whatsnext desc="Learn about the types of data you can submit to Datadog and how to submit them:" >}}
+    {{< nextlink href="/metrics" >}}<u>Custom Metrics</u>: A deep-dive into custom metrics at Datadog. This section explains metrics types, what they represent, how to submit them, and how they are used throughout Datadog.{{< /nextlink >}}
+    {{< nextlink href="service_management/events/guides/" >}}<u>Events</u>: Explore how to submit events to Datadog with custom Agent checks, DogStatsD, or the Datadog API.{{< /nextlink >}}
+    {{< nextlink href="/developers/service_checks" >}}<u>Service Checks</u>: Explore how to submit the up or down status of a specific service to Datadog.{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## 開発者コミュニティとの連携
+## Engage with the developer community
 
-{{< whatsnext desc="Datadog 開発者コミュニティへの参加方法を説明します。" >}}
-    {{< nextlink href="/developers/libraries" >}}<u>ライブラリ</u>: Datadog API、DogStatsD クライアント、APM トレースと Continuous Profiler、および広範なプラットフォームを外部からサポートするコミュニティインテグレーションの、公式/コミュニティ寄稿のライブラリ一覧。{{< /nextlink >}}
-    {{< nextlink href="/developers/guide/" >}}<u>ガイド</u>: 詳しい技術情報やコードサンプル、その他の参考資料など、便利な記事をお読みください。{{< /nextlink >}}
+{{< whatsnext desc="Learn how to get involved with the Datadog developer community:" >}}
+    {{< nextlink href="/developers/libraries" >}}<u>Libraries</u>: A list of official and community-contributed libraries for the Datadog API, DogStatsD client, APM & Continuous Profiler, and externally-supported community integrations for a wide variety of platforms.{{< /nextlink >}}
+    {{< nextlink href="/developers/guide/" >}}<u>Guides</u>: Read helpful articles covering technical details, code examples, and reference documentation.{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/help/
+[1]: /help/
 [2]: https://www.datadoghq.com/partner/
-[3]: /ja/developers/dogstatsd/
-[4]: /ja/developers/custom_checks/write_agent_check/
-[5]: /ja/developers/custom_checks/prometheus/
-[6]: /ja/developers/integrations/
+[3]: /developers/dogstatsd/
+[4]: /developers/custom_checks/write_agent_check/
+[5]: /developers/custom_checks/prometheus/
+[6]: /developers/integrations/
 [7]: https://github.com/DataDog/integrations-extras
 [8]: https://www.datadoghq.com/pricing/
 [9]: https://github.com/DataDog/integrations-core
-[10]: /ja/developers/integrations/marketplace_offering
-[11]: /ja/developers/custom_checks/
-[12]: /ja/developers/service_checks/
-[13]: /ja/developers/integrations/agent_integration
+[10]: /developers/integrations/marketplace_offering
+[11]: /developers/custom_checks/
+[12]: /developers/service_checks/
+[13]: /developers/integrations/agent_integration

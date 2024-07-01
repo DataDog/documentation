@@ -1,109 +1,110 @@
 ---
+title: Service Map
+kind: documentation
+description: "The Service Map visualizes data that is being collected by Datadog APM."
 aliases:
-- /ja/tracing/servicemap
-- /ja/tracing/visualization/services_map/
-description: サービスマップは、Datadog APM により収集されるデータを視覚化したものです。
+  - /tracing/servicemap
+  - /tracing/visualization/services_map/
 further_reading:
 - link: /tracing/trace_collection/
   tag: Documentation
-  text: アプリケーションで APM トレースをセットアップする方法
-- link: https://www.datadoghq.com/blog/service-map/
-  tag: ブログ
-  text: Datadog のサービスマップの紹介
-- link: https://www.datadoghq.com/videos/dash-keynote-creating-context-with-service-maps/
-  tag: ブログ
-  text: サービスマップ（Datadog + Airbnb）を使用してコンテキストを作成
-title: サービスマップ
+  text: Learn how to setup APM tracing with your application
+- link: "https://www.datadoghq.com/blog/service-map/"
+  tag: Blog
+  text: Introducing the Service Map in Datadog
+- link: "https://www.datadoghq.com/videos/dash-keynote-creating-context-with-service-maps/"
+  tag: Blog
+  text: Creating context with service maps (Datadog + Airbnb)
 ---
 
-サービスマップは、アプリケーションをすべてのコンポーネント[サービス][1]に分解し、サービス間の依存関係をリアルタイムにグラフで表示したものです。ユーザーはボトルネックを特定し、アーキテクチャ内のデータの流れを把握できます。
+The Service Map decomposes your application into all its component [services][1] and draws the observed dependencies between these services in real time, so you can identify bottlenecks and understand how data flows through your architecture.
 
-{{< img src="tracing/visualization/services_map/service_map_overview_3.png" alt="サービスマップの概要" >}}
+{{< img src="tracing/visualization/services_map/service_map_overview_3.png" alt="Service Map Overview" >}}
 
-## セットアップ
+## Setup
 
-サービスマップには、Datadog APM および RUM により収集されたデータが視覚的に表示されます。[サービス][1]を表示するためにセットアップをする必要はありません。
+The Service Map visualizes data collected by Datadog APM and RUM. Setup is not required to view [services][1].
 
-## 使い方
+## Ways to use it
 
-サービスマップでは、サービスとその正常性を概要的に確認できます。ノイズを除去し、問題のある領域を特定することができます。このビューから、Datadog で収集された他のテレメトリに直接アクセスすることも可能です。
+The Service Map provides an overview of your services and their health. This cuts through the noise and isolates problem areas. Also, you can access other telemetry collected by Datadog directly from this view.
 
-## サービスの依存関係の特定
+## Identifying a service's dependencies
 
-サービスマップは、異なる環境も含めたサービスの依存関係の全体像を提供します。例えば、サービスが `prod` 環境にしかデプロイされていなくても、マップは `staging` (および他の環境) のサービスとの接続を明らかにします。
+The service map provides a complete picture of a service's dependencies, including those in different environments. For example, even if your service is only deployed in environment `prod`, the map reveals its connections to services in `staging` (and other environments). 
 
-## チームまたはアプリケーションによるグループ化
+## Grouping by Team or Application
 
-サービスマップはチームやアプリケーションごとにグループ化でき、サービスの所有権やアプリケーションの依存関係を明確に把握できます。これにより、複雑なマイクロサービスアーキテクチャをより詳細なレベルで視覚化できるため、組織が必要な情報にすばやく到達できるようになります。
+The Service Map can be grouped by team or application to create a clear picture of service ownership and application dependencies. This is particularly useful as it enables visualization of complex microservice architecture on a more granular level to help organizations quickly reach the information they need. 
 
-## フィルタリングとスコープの変更
+## Filtering versus changing scopes
 
-サービスマップは、ファセットまたはサービス名のあいまい文字列マッチを使用してフィルタリングすることができます。ファセットとは、Datadog が自動的にサービスデータに適用するタグで、サービスタイプ (Web サーバ、データベース、キャッシュなど)、最終デプロイ時間、モニターステータスなどが含まれます。フィルタリングは、数百、数千のノードが存在するマイクロサービス環境で特に有効です。また、サービスは、インシデントステータスでフィルターして、進行中または解決済みのインシデントに関与しているものを特定し、関連するサービス詳細画面から、インシデントデータ、リソース、Datadog チーム情報などのキー情報を抽出することもできます。さらに、サービスマップを特定の時間範囲にスコープすることができ、進化するアーキテクチャを追跡するのに役立ちます。
+The Service Map can be filtered using facets or a fuzzy string match on service names. Facets are tags that Datadog automatically applies to service data, and include service type (for example, web server, database, cache), last deploy time, or monitor status. Filtering is particularly useful in a microservices environment with hundreds or thousands of nodes. Services can also be filtered by incident status to identify those involved in an ongoing or resolved incident and extract key information from the associated Service Page including incident data, resources, and Datadog Teams information. In addition, you can scope the Service Map to a specific time range, which helps keep track of your evolving architecture.
 
-サービスのスコープは、 `env` または [2 番目のプライマリタグ][3]によっても決定されます。ドロップダウンリストから別のスコープを選択すると、そのスコープ内にあるサービスで構成される全く異なるマップが表示されます。これらのサービスが他の環境のサービスを呼び出したり、他の環境のサービスがこれらのサービスを呼び出したりすることはできません。
+Services are also scoped by `env`, and optionally a [Second Primary Tag][3]. Using the dropdowns to select a different scope draws an entirely different map consisting of the services within that scope. These services cannot call or be called by services in other environments.
 
-## 検査
+## Inspection
 
-サービスにマウスポインターを合わせると、そのサービスが強調表示されます。また、サービスのリクエストトラフィックはその方向が動く点線で表示されます。
+Mousing over a service highlights it and shows its request traffic as animated lines to better emphasize directionality.
 
-{{< img src="tracing/visualization/services_map/servicemap-anim.mp4" alt="サービスマップ" video="true" width="90%" >}}
+{{< img src="tracing/visualization/services_map/servicemap-anim.mp4" alt="Service Map" video="true" width="90%" >}}
 
-サービスをクリックすると、そのサービスを検査するオプションが提供されます。対象サービスのみをピックアップして、他のサービスからのリクエストソースと、このサービスから他のサービスに送信されたデータに対するリクエストを表示します。一般的に、左側にはユーザー側に近いサービスが、右側には根本原因となるサービスが表示されます。
+Clicking a service offers you the option to inspect that service. This isolates the service, displays the source of requests from other services, and the requests for data sent by this service to other services. Generally, the services on the left are closer to your customers, and the ones on the right are more likely root causes.
 
-検査ページでは、各ノードを検査してサービスマップの依存関係を 1 つずつ確認できます。
+On the inspection page, each node can be inspected allowing you to pivot around the Service Map one dependency at a time.
 
-{{< img src="tracing/visualization/services_map/servicemap.png" alt="サービスマップ" style="width:90%;">}}
+{{< img src="tracing/visualization/services_map/servicemap.png" alt="Service Map" style="width:90%;">}}
 
-フィルターに含まれない 1 つまたは複数のサービスによって接続されているサービスがフィルターに 2 つ含まれる場合 (検索バーまたはファセットで適用)、ノードは折りたたまれます。
+A node is collapsed when there are two services in the filter (applied through the search bar or facets) that are connected by one or more services which are not in the filter.
 
-{{< img src="tracing/visualization/services_map/service_map_collapsed.png" alt="サービスマップの折りたたみノード" style="width:50%;">}}
+{{< img src="tracing/visualization/services_map/service_map_collapsed.png" alt="Service Map Collapsed Node" style="width:50%;">}}
 
-## "service" タグ
+## The "service" tag
 
-サービスをクリックすると、さらに絞り込みが可能です。
+Clicking on a service reveals further filtering options:
 
-{{< img src="tracing/visualization/services_map/service_map_inspect_menu_2.png" alt="サービスマップタグ" style="width:40%;">}}
+{{< img src="tracing/visualization/services_map/service_map_inspect_menu_2.png" alt="Service Map tag" style="width:40%;">}}
 
-Datadog で特別な意味を持つサービスタグは、APM サービスを識別して製品の他の部分にリンクするのに使用されます。
+The service tag has a special meaning in Datadog, and is used both to identify APM services and to link them to other parts of the product.
 
-次のスクリーンショットは、`service:fse-auto-process` のダッシュボードクエリを示しています。これは、APM によって自動的にタグ付けされます。
+The following screenshot shows a dashboard query for `service:fse-auto-process`. This is tagged automatically by APM.
 
-{{< img src="tracing/visualization/services_map/servicedash.png" alt="サービスマップのダッシュボード" style="width:90%;">}}
+{{< img src="tracing/visualization/services_map/servicedash.png" alt="Service Map dashboard" style="width:90%;">}}
 
-ホストマップまたは同じキーを持つログでこのタグを使用すると、Datadog がログ、インフラストラクチャー、またはカスタムビジネスのメトリクスにアプリケーションを結合することができます。上記の視覚化メニューの各オプションを使用して、`service` スコープ内で収集されたデータの適切なビューを開きます。
+Using this tag on your Host Map or logs with the same key allows Datadog to join applications to logs, infrastructure, or custom business metrics. On the visualization menu shown above, each option pivots to the appropriate view of the collected data scoped to your `service`.
 
-{{< img src="tracing/visualization/services_map/servicemaptags.png" alt="サービスマップのタグ" style="width:80%;">}}
+{{< img src="tracing/visualization/services_map/servicemaptags.png" alt="Service Map tags" style="width:80%;">}}
 
-また、**Say what's happening** セクションで、モニターをサービス別にタグ付けすることができます。カスタムメトリクスなど、任意のメトリクスのモニターをサービスに関連付けることができます。モニターのステータスは、サービスマップに直接表示されます。
+Additionally, monitors can be tagged by service in the **Say what's happening** section. This allows you to associate monitors for any metric, including custom business metrics, with your services. The status of monitors is exposed directly on the Service Map.
 
-{{< img src="tracing/visualization/services_map/servicemon.png" alt="サービスマップのモニター" style="width:90%;">}}
+{{< img src="tracing/visualization/services_map/servicemon.png" alt="Service Map monitor" style="width:90%;">}}
 
-## データの鮮度と意味
+## Data freshness and meaning
 
-### ノードとエッジ
+### Nodes and edges
 
-ノードは、サービスを APM でインスツルメントされたとおりに表し、[サービスカタログ][4]のサービスと一致します。エッジは、あるサービスから別のサービスへの aggregate 呼び出しを表します。これらの相互作用は、各[トレース][5]のフレームグラフに表示されます。
+Nodes represent services exactly as instrumented in APM and match those in your [Service Catalog][4]. Edges represent aggregate calls from one service to another. These interactions are shown on the flame graph for each individual [trace][5].
 
-インスツルメントされた新しいサービスや接続は即時に表示され、30 日間対応するトレースが見られないと、古いものになります。これは、機能頻度が低くてもシステム機能の重要な部分であるサービスを考慮しています。
+New services or connections appear within moments of being instrumented and age out if there are no corresponding traces seen for 30 days. This takes into account services that do work infrequently, but are an important part of a functioning system.
 
-{{< img src="tracing/visualization/services_map/servicenodes.mp4" alt="サービスマップのノード" video="true" width="90%">}}
+{{< img src="tracing/visualization/services_map/servicenodes.mp4" alt="Service Map nodes" video="true" width="90%">}}
 
-### 色
+### Color
 
-サービスに対して有効になっているモニターは、そのモニターのステータスに応じて緑色、黄色、赤色、または灰色の円で表示されます。複数のモニターが定義されている場合、最も重大な状態のモニターのステータスが使用されます。
+If a monitor is enabled for a service, the circumference has a weighted border colored with green, yellow, red, or grey, based on the status of that monitor. If multiple monitors are defined, the status of the monitor in the most severe state is used.
 
-上記のサービスタグを使用して、APM モニターのみならずあらゆるモニターをサービスに関連付けることができます。
+Monitors are not constrained to APM monitors. The service tag, described above, can be used to associate any monitor type with a service.
 
-### 可用性
+### Availability
 
-サービスマップは、root スパンを含む完全なトレースに基づいてレンダリングされます。指定したクエリウィンドウの間にいくつかのスパンが見つからない場合、その期間はマップビューを利用できないことがあります。これは、[APM 接続エラー][6]が発生し、スパンがドロップされた場合に発生する可能性があります。
+The Service Map is rendered based on complete traces that include the root spans. When some spans are missing during the query window you specify, the map view may be unavailable for that time period. This may happen when [APM connection errors][6] occur and spans get dropped.
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/tracing/glossary/#services
-[3]: /ja/tracing/guide/setting_primary_tags_to_scope/#add-a-second-primary-tag-in-datadog
+[1]: /tracing/glossary/#services
+[3]: /tracing/guide/setting_primary_tags_to_scope/#add-a-second-primary-tag-in-datadog
 [4]: https://app.datadoghq.com/services
-[5]: /ja/tracing/glossary/#trace
-[6]: /ja/tracing/troubleshooting/connection_errors
+[5]: /tracing/glossary/#trace
+[6]: /tracing/troubleshooting/connection_errors

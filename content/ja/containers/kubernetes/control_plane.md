@@ -1,98 +1,58 @@
 ---
+title: Kubernetes Control Plane Monitoring
 aliases:
-- /ja/agent/kubernetes/control_plane
+- /agent/kubernetes/control_plane
 further_reading:
-- link: agent/kubernetes/log
-  tag: ドキュメント
-  text: アプリケーションログの収集
-- link: agent/kubernetes/host_setup
-  tag: ドキュメント
-  text: アプリケーショントレースの収集
-- link: /agent/kubernetes/prometheus
-  tag: ドキュメント
-  text: Prometheus メトリクスの収集
-- link: /agent/kubernetes/integrations
-  tag: ドキュメント
-  text: アプリケーションのメトリクスとログを自動で収集
-- link: /agent/guide/autodiscovery-management
-  tag: ドキュメント
-  text: データ収集をコンテナのサブセットのみに制限
-- link: /agent/kubernetes/tag
-  tag: ドキュメント
-  text: コンテナから送信された全データにタグを割り当て
-title: Kubernetes Control Plane モニタリング
+    - link: agent/kubernetes/log
+      tag: Documentation
+      text: Collect your application logs
+    - link: /agent/kubernetes/apm
+      tag: Documentation
+      text: Collect your application traces
+    - link: /agent/kubernetes/prometheus
+      tag: Documentation
+      text: Collect your Prometheus metrics
+    - link: /agent/kubernetes/integrations
+      tag: Documentation
+      text: Collect automatically your application metrics and logs
+    - link: /agent/guide/autodiscovery-management
+      tag: Documentation
+      text: Limit data collection to a subset of containers only
+    - link: /agent/kubernetes/tag
+      tag: Documentation
+      text: Assign tags to all data emitted by a container
 ---
 
-## 概要
+## Overview
 
-このセクションの目的は、特異性を文書化し、Kubernetes Control Plane を監視するための適切な基本コンフィギュレーションを提供することです。次に、このコンフィギュレーションをカスタマイズして、Datadog 機能を追加できます。
+This section aims to document specificities and to provide good base configurations for monitoring the Kubernetes Control Plane. You can then customize these configurations to add any Datadog feature.
 
-[API サーバー][1]、[Etcd][2]、[Controller Manager][3]、[Scheduler][4] の Datadog インテグレーションにより、Kubernetes Control Plane の 4 つのコンポーネントすべてから主要なメトリクスを収集できます。
+With Datadog integrations for the [API server][1], [Etcd][2], [Controller Manager][3], and [Scheduler][4], you can collect key metrics from all four components of the Kubernetes Control Plane.
 
-* [Kubernetes と Kubeadm](#Kubeadm)
-* [Amazon EKS で Kubernetes を使用](#EKS)
-* [OpenShift 4 上の Kubernetes](#OpenShift4)
-* [OpenShift 3 上の Kubernetes](#OpenShift3)
-* [Rancher Kubernetes Engine (v2.5+) 上の Kubernetes](#RKE)
-* [Rancher Kubernetes Engine (\<v2.5) 上の Kubernetes](#RKEBefore2_5)
-* [マネージドサービス (AKS、GKE) で Kubernetes を使用](#ManagedServices)
+* [Kubernetes with Kubeadm](#Kubeadm)
+* [Kubernetes on Amazon EKS](#EKS)
+* [Kubernetes on OpenShift 4](#OpenShift4)
+* [Kubernetes on OpenShift 3](#OpenShift3)
+* [Kubernetes on Rancher Kubernetes Engine (v2.5+)](#RKE)
+* [Kubernetes on Rancher Kubernetes Engine (\<v2.5)](#RKEBefore2_5)
+* [Kubernetes on Managed Services (AKS, GKE)](#ManagedServices)
 
-## Kubernetes と Kubeadm {#Kubeadm}
+## Kubernetes with Kubeadm {#Kubeadm}
 
-次のコンフィギュレーションは、Kubernetes `v1.18+` でテストされています。
+The following configurations are tested on Kubernetes `v1.18+`.
 
-### API サーバー
+### API server
 
-API サーバーインテグレーションは自動的に構成されます。Datadog Agent はこれを自動的に検出します。
+The API server integration is automatically configured. The Datadog Agent discovers it automatically.
 
 ### Etcd
 
-ホストにある Etcd 証明書への読み取りアクセスを提供することにより、Datadog Agent チェックは Etcd と通信し、Etcd メトリクスの収集を開始できます。
+By providing read access to the Etcd certificates located on the host, the Datadog Agent check can communicate with Etcd and start collecting Etcd metrics.
 
 {{< tabs >}}
-{{% tab "Helm" %}}
+{{% tab "Datadog Operator" %}}
 
-カスタム `values.yaml`:
-
-```yaml
-datadog:
-  apiKey: <DATADOG_API_KEY>
-  appKey: <DATADOG_APP_KEY>
-  clusterName: <CLUSTER_NAME>
-  kubelet:
-    tlsVerify: false
-  ignoreAutoConfig:
-  - etcd
-  confd:
-    etcd.yaml: |-
-      ad_identifiers:
-        - etcd
-      instances:
-        - prometheus_url: https://%%host%%:2379/metrics
-          tls_ca_cert: /host/etc/kubernetes/pki/etcd/ca.crt
-          tls_cert: /host/etc/kubernetes/pki/etcd/server.crt
-          tls_private_key: /host/etc/kubernetes/pki/etcd/server.key
-agents:
-  volumes:
-    - hostPath:
-        path: /etc/kubernetes/pki/etcd
-      name: etcd-certs
-  volumeMounts:
-    - name: etcd-certs
-      mountPath: /host/etc/kubernetes/pki/etcd
-      readOnly: true
-  tolerations:
-  - effect: NoSchedule
-    key: node-role.kubernetes.io/master
-    operator: Exists
-```
-
-{{% /tab %}}
-{{% tab "Operator" %}}
-
-DatadogAgent Kubernetes Resource:
-
-```yaml
+{{< code-block lang="yaml" filename="datadog-agent.yaml" >}}
 kind: DatadogAgent
 apiVersion: datadoghq.com/v2alpha1
 metadata:
@@ -148,27 +108,12 @@ data:
         tls_ca_cert: /host/etc/kubernetes/pki/etcd/ca.crt
         tls_cert: /host/etc/kubernetes/pki/etcd/server.crt
         tls_private_key: /host/etc/kubernetes/pki/etcd/server.key
-```
+{{< /code-block >}}
 
 {{% /tab %}}
-{{< /tabs >}}
-
-### Controller Manager と Scheduler
-
-#### 安全でないポート
-
-Controller Manager インスタンスと Scheduler インスタンスの安全でないポートが有効になっている場合、Datadog Agent はインテグレーションを検出し、追加のコンフィギュレーションなしでメトリクスの収集を開始します。
-
-#### 安全なポート
-
-安全なポートにより、認証と承認が可能になり、Control Plane コンポーネントを保護できます。Datadog Agent は、安全なポートをターゲットにすることで、Controller Manager と Scheduler のメトリクスを収集できます。
-
-{{< tabs >}}
 {{% tab "Helm" %}}
 
-カスタム `values.yaml`:
-
-```yaml
+{{< code-block lang="yaml" filename="datadog-values.yaml" >}}
 datadog:
   apiKey: <DATADOG_API_KEY>
   appKey: <DATADOG_APP_KEY>
@@ -177,8 +122,6 @@ datadog:
     tlsVerify: false
   ignoreAutoConfig:
   - etcd
-  - kube_scheduler
-  - kube_controller_manager
   confd:
     etcd.yaml: |-
       ad_identifiers:
@@ -188,20 +131,6 @@ datadog:
           tls_ca_cert: /host/etc/kubernetes/pki/etcd/ca.crt
           tls_cert: /host/etc/kubernetes/pki/etcd/server.crt
           tls_private_key: /host/etc/kubernetes/pki/etcd/server.key
-    kube_scheduler.yaml: |-
-      ad_identifiers:
-        - kube-scheduler
-      instances:
-        - prometheus_url: https://%%host%%:10259/metrics
-          ssl_verify: false
-          bearer_token_auth: true
-    kube_controller_manager.yaml: |-
-      ad_identifiers:
-        - kube-controller-manager
-      instances:
-        - prometheus_url: https://%%host%%:10257/metrics
-          ssl_verify: false
-          bearer_token_auth: true
 agents:
   volumes:
     - hostPath:
@@ -215,14 +144,26 @@ agents:
   - effect: NoSchedule
     key: node-role.kubernetes.io/master
     operator: Exists
-```
+{{< /code-block >}}
 
 {{% /tab %}}
-{{% tab "Operator" %}}
 
-DatadogAgent Kubernetes Resource:
+{{< /tabs >}}
 
-```yaml
+### Controller Manager and Scheduler
+
+#### Insecure ports
+
+If the insecure ports of your Controller Manager and Scheduler instances are enabled, the Datadog Agent discovers the integrations and starts collecting metrics without any additional configuration. 
+
+#### Secure ports
+
+Secure ports allow authentication and authorization to protect your Control Plane components. The Datadog Agent can collect Controller Manager and Scheduler metrics by targeting their secure ports.
+
+{{< tabs >}}
+{{% tab "Datadog Operator" %}}
+
+{{< code-block lang="yaml" filename="datadog-agent.yaml" >}}
 kind: DatadogAgent
 apiVersion: datadoghq.com/v2alpha1
 metadata:
@@ -300,15 +241,68 @@ data:
       - prometheus_url: https://%%host%%:10257/metrics
         ssl_verify: false
         bearer_token_auth: true
-```
+{{< /code-block >}}
 
 {{% /tab %}}
+{{% tab "Helm" %}}
+
+{{< code-block lang="yaml" filename="datadog-values.yaml" >}}
+datadog:
+  apiKey: <DATADOG_API_KEY>
+  appKey: <DATADOG_APP_KEY>
+  clusterName: <CLUSTER_NAME>
+  kubelet:
+    tlsVerify: false
+  ignoreAutoConfig:
+    - etcd
+    - kube_scheduler
+    - kube_controller_manager
+  confd:
+    etcd.yaml: |-
+      ad_identifiers:
+        - etcd
+      instances:
+        - prometheus_url: https://%%host%%:2379/metrics
+          tls_ca_cert: /host/etc/kubernetes/pki/etcd/ca.crt
+          tls_cert: /host/etc/kubernetes/pki/etcd/server.crt
+          tls_private_key: /host/etc/kubernetes/pki/etcd/server.key
+    kube_scheduler.yaml: |-
+      ad_identifiers:
+        - kube-scheduler
+      instances:
+        - prometheus_url: https://%%host%%:10259/metrics
+          ssl_verify: false
+          bearer_token_auth: true
+    kube_controller_manager.yaml: |-
+      ad_identifiers:
+        - kube-controller-manager
+      instances:
+        - prometheus_url: https://%%host%%:10257/metrics
+          ssl_verify: false
+          bearer_token_auth: true
+agents:
+  volumes:
+    - hostPath:
+        path: /etc/kubernetes/pki/etcd
+      name: etcd-certs
+  volumeMounts:
+    - name: etcd-certs
+      mountPath: /host/etc/kubernetes/pki/etcd
+      readOnly: true
+  tolerations:
+  - effect: NoSchedule
+    key: node-role.kubernetes.io/master
+    operator: Exists
+{{< /code-block >}}
+
+{{% /tab %}}
+
 {{< /tabs >}}
 
-**注:**
+**Notes:**
 
-- 自己署名証明書を使用する場合は、`kube_controller_manager` および `kube_scheduler` コンフィギュレーションの `ssl_verify` フィールドを `false` に設定する必要があります。
-- 安全なポートをターゲットにする場合、Controller Manager および Scheduler コンフィギュレーションの `bind-address` オプションは、Datadog Agent から到達可能である必要があります。例:
+- The `ssl_verify` field in the `kube_controller_manager` and `kube_scheduler` configuration needs to be set to `false` when using self-signed certificates.
+- When targeting secure ports, the `bind-address` option in your Controller Manager and Scheduler configuration must be reachable by the Datadog Agent. Example:
 
 ```yaml
 apiVersion: kubeadm.k8s.io/v1beta2
@@ -321,9 +315,9 @@ scheduler:
     bind-address: 0.0.0.0
 ```
 
-## Amazon EKS で Kubernetes を使用 {#EKS}
+## Kubernetes on Amazon EKS {#EKS}
 
-Amazon Elastic Kubernetes Service (EKS) では、[API サーバーメトリクスが公開されています][5]。これにより、Datadog Agent は [Kubernetes API サーバーメトリクスチェックに関するドキュメント][1]に記載されているように、エンドポイントチェックを使用して API サーバーメトリクスを取得することができます。チェックを設定するには、以下のアノテーションを `default/kubernetes` サービスに追加します。
+On Amazon Elastic Kubernetes Service (EKS), [API server metrics are exposed][5]. This allows the Datadog Agent to obtain API server metrics using endpoint checks as described in the [Kubernetes API server metrics check documentation][1]. To configure the check, add the following annotations to the `default/kubernetes` service:
 
 ```yaml
 annotations:
@@ -333,23 +327,23 @@ annotations:
     '[{ "prometheus_url": "https://%%host%%:%%port%%/metrics", "bearer_token_auth": "true" }]'
 ```
 
-その他の Control Plane コンポーネントは EKS で公開されていないため、監視することはできません。
+Other control plane components are not exposed in EKS and cannot be monitored.
 
 
-## OpenShift 4 上の Kubernetes {#OpenShift4}
+## Kubernetes on OpenShift 4 {#OpenShift4}
 
-OpenShift 4 では、エンドポイントチェックを使用してすべてのコントロールプレーン コンポーネントを監視できます。
+On OpenShift 4, all control plane components can be monitored using endpoint checks.
 
-### 前提条件
+### Prerequisites
 
-1. Datadog [Cluster Agent][6] の有効化
-1. [Cluster チェック][7]の有効化
-1. [Endpoint チェック][8]の有効化
-1. サービスの編集およびシークレットの作成には、ログイン済みで十分な権限を保持していることをご確認ください。
+1. Enable the Datadog [Cluster Agent][6]
+1. Enable [Cluster checks][7]
+1. Enable [Endpoint checks][8]
+1. Ensure that you are logged in with sufficient permissions to edit services and create secrets.
 
-### API サーバー
+### API server
 
-API サーバーは、`default` ネームスペースで `kubernetes` サービスの背面で動作します。このサービスを `kube_apiserver_metrics` コンフィギュレーションでアノテーションします。
+The API server runs behind the service `kubernetes` in the `default` namespace. Annotate this service with the `kube_apiserver_metrics` configuration:
 
 ```shell
 oc annotate service kubernetes -n default 'ad.datadoghq.com/endpoints.check_names=["kube_apiserver_metrics"]'
@@ -359,7 +353,7 @@ oc annotate service kubernetes -n default 'ad.datadoghq.com/endpoints.resolve=ip
 
 ```
 
-最後のアノテーション `ad.datadoghq.com/endpoints.resolve` は、サービスが静的ポッドの前面にあるため必要となります。Datadog Cluster Agent では、チェックをエンドポイントチェックとしてスケジュールし、クラスターチェックランナーにディスパッチします。実行しているノードは、以下で識別されます。
+The last annotation `ad.datadoghq.com/endpoints.resolve` is needed because the service is in front of static pods. The Datadog Cluster Agent schedules the checks as endpoint checks and dispatches them to Cluster Check Runners. The nodes they are running on can be identified with:
 
 ```shell
 oc exec -it <datadog cluster agent pod> -n <datadog ns> -- agent clusterchecks
@@ -368,42 +362,22 @@ oc exec -it <datadog cluster agent pod> -n <datadog ns> -- agent clusterchecks
 
 ### Etcd
 
-Etcd サービスと通信するには証明書が必要で、これは `openshift-monitoring` ネームスペースのシークレット `kube-etcd-client-certs` にあります。Datadog Agent にこの証明書へのアクセスを許可するには、Datadog Agent が実行しているのと同じネームスペースにこれをコピーします。
+Certificates are needed to communicate with the Etcd service, which can be found in the secret `kube-etcd-client-certs` in the `openshift-monitoring` namespace. To give the Datadog Agent access to these certificates, first copy them into the same namespace the Datadog Agent is running in:
 
 ```shell
 oc get secret kube-etcd-client-certs -n openshift-monitoring -o yaml | sed 's/namespace: openshift-monitoring/namespace: <datadog agent namespace>/'  | oc create -f -
 
 ```
 
-これらの証明書は、以下のように volumes および volumeMounts を追加してクラスターチェックランナーポッドにマウントする必要があります。
+These certificates should be mounted on the Cluster Check Runner pods by adding the volumes and volumeMounts as below.
 
-**注**: またマウントは、Agent にパッケージ化されている Etcd チェックの自動コンフィギュレーションファイルを無効化するために含まれています。
+**Note**: Mounts are also included to disable the Etcd check autoconfiguration file packaged with the agent.
 
 
 {{< tabs >}}
-{{% tab "Helm" %}}
+{{% tab "Datadog Operator" %}}
 
-```yaml
-...
-clusterChecksRunner:
-  volumes:
-    - name: etcd-certs
-      secret:
-        secretName: kube-etcd-client-certs
-    - name: disable-etcd-autoconf
-      emptyDir: {}
-  volumeMounts:
-    - name: etcd-certs
-      mountPath: /host/etc/etcd
-      readOnly: true
-    - name: disable-etcd-autoconf
-      mountPath: /etc/datadog-agent/conf.d/etcd.d
-```
-
-{{% /tab %}}
-{{% tab "Operator" %}}
-
-```yaml
+{{< code-block lang="yaml" filename="datadog-agent.yaml" >}}
 kind: DatadogAgent
 apiVersion: datadoghq.com/v2alpha1
 metadata:
@@ -425,13 +399,34 @@ spec:
             secretName: kube-etcd-client-certs
         - name: disable-etcd-autoconf
           emptyDir: {}
-```
+{{< /code-block >}}
 
 {{% /tab %}}
+{{% tab "Helm" %}}
+
+{{< code-block lang="yaml" filename="datadog-values.yaml" >}}
+...
+clusterChecksRunner:
+  volumes:
+    - name: etcd-certs
+      secret:
+        secretName: kube-etcd-client-certs
+    - name: disable-etcd-autoconf
+      emptyDir: {}
+  volumeMounts:
+    - name: etcd-certs
+      mountPath: /host/etc/etcd
+      readOnly: true
+    - name: disable-etcd-autoconf
+      mountPath: /etc/datadog-agent/conf.d/etcd.d
+{{< /code-block >}}
+
+{{% /tab %}}
+
 {{< /tabs >}}
 
 
-次に、Etcd の前で実行しているサービスをアノテーションします。
+Then, annotate the service running in front of Etcd:
 
 ```shell
 oc annotate service etcd -n openshift-etcd 'ad.datadoghq.com/endpoints.check_names=["etcd"]'
@@ -442,12 +437,12 @@ oc annotate service etcd -n openshift-etcd 'ad.datadoghq.com/endpoints.resolve=i
 
 ```
 
-Datadog Cluster Agent では、チェックをエンドポイントチェックとしてスケジュールし、クラスターチェックランナーにディスパッチします。
+The Datadog Cluster Agent schedules the checks as endpoint checks and dispatches them to Cluster Check Runners.
 
 
 ### Controller Manager
 
-Controller Manager は、`openshift-kube-controller-manager` ネームスペースで `kube-controller-manager` サービスの背面で実行します。サービスをチェックコンフィギュレーションでアノテーションします。
+The Controller Manager runs behind the service `kube-controller-manager` in the `openshift-kube-controller-manager` namespace. Annotate the service with the check configuration:
 
 
 ```shell
@@ -458,13 +453,13 @@ oc annotate service kube-controller-manager -n openshift-kube-controller-manager
 
 ```
 
-Datadog Cluster Agent では、チェックをエンドポイントチェックとしてスケジュールし、クラスターチェックランナーにディスパッチします。
+The Datadog Cluster Agent schedules the checks as endpoint checks and dispatches them to Cluster Check Runners.
 
 
 
 ### Scheduler
 
-Scheduler は、`openshift-kube-scheduler` ネームスペースで `scheduler` サービスの背面で実行します。サービスをチェックコンフィギュレーションでアノテーションします。
+The Scheduler runs behind the service `scheduler` in the `openshift-kube-scheduler` namespace. Annotate the service with the check configuration:
 
 
 ```shell
@@ -475,23 +470,23 @@ oc annotate service scheduler -n openshift-kube-scheduler 'ad.datadoghq.com/endp
 
 ```
 
-Datadog Cluster Agent では、チェックをエンドポイントチェックとしてスケジュールし、クラスターチェックランナーにディスパッチします。
+The Datadog Cluster Agent schedules the checks as endpoint checks and dispatches them to Cluster Check Runners.
 
 
-## OpenShift 3 上の Kubernetes {#OpenShift3}
+## Kubernetes on OpenShift 3 {#OpenShift3}
 
-OpenShift 3 では、エンドポイントチェックを使用してすべてのコントロールプレーン コンポーネントを監視できます。
+On OpenShift 3, all control plane components can be monitored using endpoint checks.
 
-### 前提条件
+### Prerequisites
 
-1. Datadog [Cluster Agent][6] の有効化
-1. [Cluster チェック][7]の有効化
-1. [Endpoint チェック][8]の有効化
-1. サービスの作成および編集には、ログイン済みで十分な権限を保持していることをご確認ください。
+1. Enable the Datadog [Cluster Agent][6]
+1. Enable [Cluster checks][7]
+1. Enable [Endpoint checks][8]
+1. Ensure that you are logged in with sufficient permissions to create and edit services.
 
-### API サーバー
+### API server
 
-API サーバーは、`default` ネームスペースで `kubernetes` サービスの背面で動作します。このサービスを `kube_apiserver_metrics` コンフィギュレーションでアノテーションします。
+The API server runs behind the service `kubernetes` in the `default` namespace. Annotate this service with the `kube_apiserver_metrics` configuration:
 
 ```shell
 oc annotate service kubernetes -n default 'ad.datadoghq.com/endpoints.check_names=["kube_apiserver_metrics"]'
@@ -501,7 +496,7 @@ oc annotate service kubernetes -n default 'ad.datadoghq.com/endpoints.resolve=ip
 
 ```
 
-最後のアノテーション `ad.datadoghq.com/endpoints.resolve` は、サービスが静的ポッドの前面にあるため必要となります。Datadog Cluster Agent では、チェックをエンドポイントチェックとしてスケジュールし、クラスターチェックランナーにディスパッチします。実行しているノードは、以下で識別されます。
+The last annotation `ad.datadoghq.com/endpoints.resolve` is needed because the service is in front of static pods. The Datadog Cluster Agent schedules the checks as endpoint checks and dispatches them to Cluster Check Runners. The nodes they are running on can be identified with:
 
 ```shell
 oc exec -it <datadog cluster agent pod> -n <datadog ns> -- agent clusterchecks
@@ -510,34 +505,14 @@ oc exec -it <datadog cluster agent pod> -n <datadog ns> -- agent clusterchecks
 
 ### Etcd
 
-Etcd サービスと通信するには証明書が必要で、これはホストにあります。これらの証明書は、以下のように volumes および volumeMounts を追加してクラスターチェックランナーポッドにマウントする必要があります。
+Certificates are needed to communicate with the Etcd service, which are located on the host. These certificates should be mounted on the Cluster Check Runner pods by adding the volumes and volumeMounts as below.
 
-**注**: またマウントは、Agent にパッケージ化されている Etcd チェックの自動コンフィギュレーションファイルを無効化するために含まれています。
+**Note**: Mounts are also included to disable the Etcd check autoconfiguration file packaged with the agent.
 
 {{< tabs >}}
-{{% tab "Helm" %}}
+{{% tab "Datadog Operator" %}}
 
-```yaml
-...
-clusterChecksRunner:
-  volumes:
-    - hostPath:
-        path: /etc/etcd
-      name: etcd-certs
-    - name: disable-etcd-autoconf
-      emptyDir: {}
-  volumeMounts:
-    - name: etcd-certs
-      mountPath: /host/etc/etcd
-      readOnly: true
-    - name: disable-etcd-autoconf
-      mountPath: /etc/datadog-agent/conf.d/etcd.d
-```
-
-{{% /tab %}}
-{{% tab "Operator" %}}
-
-```yaml
+{{< code-block lang="yaml" filename="datadog-agent.yaml" >}}
 kind: DatadogAgent
 apiVersion: datadoghq.com/v2alpha1
 metadata:
@@ -559,19 +534,39 @@ spec:
             path: /etc/etcd
         - name: disable-etcd-autoconf
           emptyDir: {}
-```
+{{< /code-block >}}
+
+{{% /tab %}}
+{{% tab "Helm" %}}
+
+{{< code-block lang="yaml" filename="datadog-values.yaml" >}}
+...
+clusterChecksRunner:
+  volumes:
+    - hostPath:
+        path: /etc/etcd
+      name: etcd-certs
+    - name: disable-etcd-autoconf
+      emptyDir: {}
+  volumeMounts:
+    - name: etcd-certs
+      mountPath: /host/etc/etcd
+      readOnly: true
+    - name: disable-etcd-autoconf
+      mountPath: /etc/datadog-agent/conf.d/etcd.d
+{{< /code-block >}}
 
 {{% /tab %}}
 {{< /tabs >}}
 
-このサービスに直接行った編集は永続的ではないため、Etcd サービスのコピーを作成します。
+Direct edits of this service are not persisted, so make a copy of the Etcd service:
 
 ```shell
 oc get service etcd -n kube-system -o yaml | sed 's/name: etcd/name: etcd-copy/'  | oc create -f -
 
 ```
 
-チェックコンフィギュレーションでコピーしたサービスをアノテーションします。
+Annotate the copied service with the check configuration:
 
 ```shell
 oc annotate service etcd-copy -n openshift-etcd 'ad.datadoghq.com/endpoints.check_names=["etcd"]'
@@ -582,19 +577,19 @@ oc annotate service etcd-copy -n openshift-etcd 'ad.datadoghq.com/endpoints.reso
 
 ```
 
-Datadog Cluster Agent では、チェックをエンドポイントチェックとしてスケジュールし、クラスターチェックランナーにディスパッチします。
+The Datadog Cluster Agent schedules the checks as endpoint checks and dispatches them to Cluster Check Runners.
 
 
-### Controller Manager と Scheduler
+### Controller Manager and Scheduler
 
-Controller Manager および Scheduler は、同じサービス、つまり `kube-system` ネームスペースの `kube-controllers` の背面で実行します。サービスに直接行った編集は永続的ではないため、このサービスのコピーを作成します。
+The Controller Manager and Scheduler run behind the same service, `kube-controllers` in the `kube-system` namespace. Direct edits of the service are not persisted, so make a copy of the service:
 
 ```shell
 oc get service kube-controllers -n kube-system -o yaml | sed 's/name: kube-controllers/name: kube-controllers-copy/'  | oc create -f -
 
 ```
 
-チェックコンフィギュレーションでコピーしたサービスをアノテーションします。
+Annotate the copied service with the check configurations:
 
 ```shell
 oc annotate service kube-controllers-copy -n kube-system 'ad.datadoghq.com/endpoints.check_names=["kube_controller_manager", "kube_scheduler"]'
@@ -606,22 +601,22 @@ oc annotate service kube-controllers-copy -n kube-system 'ad.datadoghq.com/endpo
 
 ```
 
-Datadog Cluster Agent では、チェックをエンドポイントチェックとしてスケジュールし、クラスターチェックランナーにディスパッチします。
+The Datadog Cluster Agent schedules the checks as endpoint checks and dispatches them to Cluster Check Runners.
 
 
 
-## [Rancher Kubernetes Engine (v2.5+) 上の Kubernetes] {#RKE}
+## Kubernetes on Rancher Kubernetes Engine (v2.5+) {#RKE}
 
-Rancher v2.5 は、[PushProx][9] に依存してコントロールプレーンのメトリクスエンドポイントを公開し、これにより Datadog Agent はコントロールプレーンチェックを実行しメトリクスを収集することができます。
+Rancher v2.5 relies on [PushProx][9] to expose control plane metric endpoints, this allows the Datadog Agent to run control plane checks and collect metrics.
 
-### 前提条件
+### Prerequisites
 
-1. [rancher-monitoring チャート][10]で Datadog Agent をインストールします。
-2. `pushprox` DaemonSets は `rancher-monitoring` でデプロイされ、`cattle-monitoring-system` ネームスペースで実行しています。
+1. Install the Datadog Agent with the [rancher-monitoring chart][10].
+2. The `pushprox` daemonsets are deployed with `rancher-monitoring` and running in the `cattle-monitoring-system` namespace.
 
-### API サーバー
+### API server
 
-`kube_apiserver_metrics` チェックを続行するには、以下のアノテーションを `default/kubernetes` サービスに追加します。
+To configure the `kube_apiserver_metrics` check, add the following annotations to the `default/kubernetes` service:
 
 ```yaml
 annotations:
@@ -630,11 +625,11 @@ annotations:
   ad.datadoghq.com/endpoints.instances: '[{ "prometheus_url": "https://%%host%%:%%port%%/metrics", "bearer_token_auth": "true" }]'
 ```
 
-### Kubernetes サービスを追加し自動ディスカバリーチェックを構成します
+### Add Kubernetes services to configure Autodiscovery checks
 
-ヘッドレス Kubernetes サービスを追加してチェックのコンフィギュレーションを定義することで、Datadog Agent は `pushprox` ポッドをターゲットとしてメトリクスを収集できます。
+By adding headless Kubernetes services to define check configurations, the Datadog Agent is able to target the `pushprox` pods and collect metrics.
 
-`rancher-control-plane-services.yaml` を適用します。
+Apply `rancher-control-plane-services.yaml`:
 
 ```yaml
 apiVersion: v1
@@ -707,44 +702,12 @@ spec:
     k8s-app: pushprox-kube-etcd-client
 ```
 
-以下のコンフィギュレーションに基づき、マニフェストで Datadog Agent をデプロイします。
+Deploy the Datadog Agent with manifests based on the following configurations:
 
 {{< tabs >}}
-{{% tab "Helm" %}}
+{{% tab "Datadog Operator" %}}
 
-カスタム `values.yaml`:
-
-```yaml
-datadog:
-  apiKey: <DATADOG_API_KEY>
-  appKey: <DATADOG_APP_KEY>
-  clusterName: <CLUSTER_NAME>
-  kubelet:
-    tlsVerify: false
-agents:
-  volumes:
-    - hostPath:
-        path: /opt/rke/etc/kubernetes/ssl
-      name: etcd-certs
-  volumeMounts:
-    - name: etcd-certs
-      mountPath: /host/opt/rke/etc/kubernetes/ssl
-      readOnly: true
-  tolerations:
-  - effect: NoSchedule
-    key: node-role.kubernetes.io/controlplane
-    operator: Exists
-  - effect: NoExecute
-    key: node-role.kubernetes.io/etcd
-    operator: Exists
-```
-
-{{% /tab %}}
-{{% tab "Operator" %}}
-
-DatadogAgent Kubernetes Resource:
-
-```yaml
+{{< code-block lang="yaml" filename="datadog-agent.yaml" >}}
 kind: DatadogAgent
 apiVersion: datadoghq.com/v2alpha1
 metadata:
@@ -779,21 +742,49 @@ spec:
         - key: node-role.kubernetes.io/etcd
           operator: Exists
           effect: NoExecute
-```
+{{< /code-block >}}
+
+{{% /tab %}}
+{{% tab "Helm" %}}
+
+{{< code-block lang="yaml" filename="datadog-values.yaml" >}}
+datadog:
+  apiKey: <DATADOG_API_KEY>
+  appKey: <DATADOG_APP_KEY>
+  clusterName: <CLUSTER_NAME>
+  kubelet:
+    tlsVerify: false
+agents:
+  volumes:
+    - hostPath:
+        path: /opt/rke/etc/kubernetes/ssl
+      name: etcd-certs
+  volumeMounts:
+    - name: etcd-certs
+      mountPath: /host/opt/rke/etc/kubernetes/ssl
+      readOnly: true
+  tolerations:
+    - effect: NoSchedule
+      key: node-role.kubernetes.io/controlplane
+      operator: Exists
+    - effect: NoExecute
+      key: node-role.kubernetes.io/etcd
+      operator: Exists
+{{< /code-block >}}
 
 {{% /tab %}}
 {{< /tabs >}}
 
 
-## Rancher Kubernetes Engine (v2.5 より前) 上の Kubernetes {#RKEBefore2_5}
+## Kubernetes on Rancher Kubernetes Engine (before v2.5) {#RKEBefore2_5}
 
-### API Server、Controller Manager、Scheduler
+### API Server, Controller Manager, and Scheduler
 
-[rancher-monitoring チャート][10]で Datadog Agent をインストールします。
+Install the Datadog Agent with the [rancher-monitoring chart][10].
 
-コントロールプレーンのコンポーネントは、Kubernetes の外の Docker 上で実行されます。Kubernetes 内では、`default` ネームスペースにある `kubernetes` サービスがコントロールプレーンノードの IP をターゲットにしています。これは `$ kubectl describe endpoints kubernetes` を実行することで確認することができます。
+The control plane components run on Docker outside of Kubernetes. Within Kubernetes, the `kubernetes` service in the `default` namespace targets the control plane node IP(s). You can confirm this by running `$ kubectl describe endpoints kubernetes`.
 
-このサービスにエンドポイントチェック (Datadog Cluster Agent で管理) をアノテーションすることで、API Server、Controller Manager、Scheduler を監視することが可能です。
+You can annotate this service with endpoint checks (managed by the Datadog Cluster Agent) to monitor the API Server, Controller Manager, and Scheduler:
 
 ```shell
 kubectl edit service kubernetes
@@ -812,11 +803,11 @@ metadata:
 
 ### Etcd
 
-Etcd は Kubernetes 外の Docker で実行され、Etcd サービスとの通信には証明書が必要です。Etcd モニタリングのセットアップに推奨される手順では、Etcd を実行しているコントロールプレーンノードへの SSH アクセスが必要です。
+Etcd is run in Docker outside of Kubernetes, and certificates are required to communicate with the Etcd service. The suggested steps to set up Etcd monitoring require SSH access to a control plane node running Etcd.
 
-1. [Rancher ドキュメント][9]に従って、コントロールプレーンノードに SSH 接続します。Docker コンテナで Etcd が起動していることを `$ docker ps` で確認し、`$ docker inspect etcd` で実行コマンド (`"Cmd"`) で使用した証明書の場所と、マウントのホストパスを確認します。
+1. SSH into the control plane node by following the [Rancher documentation][9]. Confirm that Etcd is running in a Docker container with `$ docker ps`, and then use `$ docker inspect etcd` to find the location of the certificates used in the run command (`"Cmd"`), as well as the host path of the mounts.
 
-コマンドで探すのは、3 つのフラグです。
+The three flags in the command to look for are:
 
 ```shell
 --trusted-ca-file
@@ -824,47 +815,15 @@ Etcd は Kubernetes 外の Docker で実行され、Etcd サービスとの通�
 --key-file
 ```
 
-2. `$ docker inspect etcd` の出力にあるマウント情報を使って、Datadog Agent のコンフィギュレーションに `volumes` と `volumeMounts` を設定します。また、Datadog Agent がコントロールプレーンノードで実行できるように、許容範囲も含めてください。
+2. Using the mount information available in the `$ docker inspect etcd` output, set `volumes` and `volumeMounts` in the Datadog Agent configuration. Also include tolerations so that the Datadog Agent can run on the control plane nodes.
 
-以下は、Helm と Datadog Operator で Datadog Agent を構成する例です。
+The following are examples of how to configure the Datadog Agent with Helm and the Datadog Operator:
 
 
 {{< tabs >}}
-{{% tab "Helm" %}}
+{{% tab "Datadog Operator" %}}
 
-カスタム `values.yaml`:
-
-```yaml
-datadog:
-  apiKey: <DATADOG_API_KEY>
-  appKey: <DATADOG_APP_KEY>
-  clusterName: <CLUSTER_NAME>
-  kubelet:
-    tlsVerify: false
-agents:
-  volumes:
-    - hostPath:
-        path: /opt/rke/etc/kubernetes/ssl
-      name: etcd-certs
-  volumeMounts:
-    - name: etcd-certs
-      mountPath: /host/opt/rke/etc/kubernetes/ssl
-      readOnly: true
-  tolerations:
-  - effect: NoSchedule
-    key: node-role.kubernetes.io/controlplane
-    operator: Exists
-  - effect: NoExecute
-    key: node-role.kubernetes.io/etcd
-    operator: Exists
-```
-
-{{% /tab %}}
-{{% tab "Operator" %}}
-
-DatadogAgent Kubernetes Resource:
-
-```yaml
+{{< code-block lang="yaml" filename="datadog-agent.yaml" >}}
 kind: DatadogAgent
 apiVersion: datadoghq.com/v2alpha1
 metadata:
@@ -899,13 +858,41 @@ spec:
         - key: node-role.kubernetes.io/etcd
           operator: Exists
           effect: NoExecute
-```
+{{< /code-block >}}
+
+{{% /tab %}}
+{{% tab "Helm" %}}
+
+{{< code-block lang="yaml" filename="datadog-values.yaml" >}}
+datadog:
+  apiKey: <DATADOG_API_KEY>
+  appKey: <DATADOG_APP_KEY>
+  clusterName: <CLUSTER_NAME>
+  kubelet:
+    tlsVerify: false
+agents:
+  volumes:
+    - hostPath:
+        path: /opt/rke/etc/kubernetes/ssl
+      name: etcd-certs
+  volumeMounts:
+    - name: etcd-certs
+      mountPath: /host/opt/rke/etc/kubernetes/ssl
+      readOnly: true
+  tolerations:
+    - effect: NoSchedule
+      key: node-role.kubernetes.io/controlplane
+      operator: Exists
+    - effect: NoExecute
+      key: node-role.kubernetes.io/etcd
+      operator: Exists
+{{< /code-block >}}
 
 {{% /tab %}}
 {{< /tabs >}}
 
 
-3. Etcd が動作しているノードで Etcd チェックを実行するために、pause コンテナを持つ DaemonSet をセットアップします。この DaemonSet は、Etcd サービスにアクセスできるように、ホストネットワーク上で実行されます。また、コントロールプレーンノードで実行するために必要なチェックの設定と許容範囲も備えています。マウントされた証明書ファイルのパスがインスタンスで設定したものと一致していることを確認し、それに応じて `<...>` の部分を置き換えてください。
+3. Set up a DaemonSet with a pause container to run the Etcd check on the nodes running Etcd. This DaemonSet runs on the host network so that it can access the Etcd service. It also has the check configuration and the tolerations needed to run on the control plane node(s). Make sure that the mounted certificate file paths match what you set up on your instance, and replace the `<...>` portion accordingly.
 
 ```yaml
 apiVersion: apps/v1
@@ -947,25 +934,25 @@ spec:
         operator: Exists
 ```
 
-DaemonSet とチェックコンフィギュレーションをデプロイするには、以下を実行します。
+To deploy the DaemonSet and the check configuration, run
 
 ```shell
 kubectl apply -f <filename>
 ```
 
 
-## マネージドサービス (AKS、GKE) で Kubernetes を使用 {#ManagedServices}
+## Kubernetes on managed services (AKS, GKE) {#ManagedServices}
 
-Azure Kubernetes Service (AKS) や Google Kubernetes Engine (GKE) などのその他のマネージドサービスでは、ユーザーは Control Plane コンポーネントにアクセスできません。そのため、これらの環境では `kube_apiserver`、`kube_controller_manager`、`kube_scheduler`、または `etcd` チェックを実行することができません。
+On other managed services, such as Azure Kubernetes Service (AKS) and Google Kubernetes Engine (GKE), the user cannot access the control plane components. As a result, it is not possible to run the `kube_apiserver`, `kube_controller_manager`, `kube_scheduler`, or `etcd` checks in these environments.
 
 
-[1]: https://docs.datadoghq.com/ja/integrations/kube_apiserver_metrics/
-[2]: https://docs.datadoghq.com/ja/integrations/etcd/?tab=containerized
-[3]: https://docs.datadoghq.com/ja/integrations/kube_controller_manager/
-[4]: https://docs.datadoghq.com/ja/integrations/kube_scheduler/
+[1]: https://docs.datadoghq.com/integrations/kube_apiserver_metrics/
+[2]: https://docs.datadoghq.com/integrations/etcd/?tab=containerized
+[3]: https://docs.datadoghq.com/integrations/kube_controller_manager/
+[4]: https://docs.datadoghq.com/integrations/kube_scheduler/
 [5]: https://aws.github.io/aws-eks-best-practices/reliability/docs/controlplane/#monitor-control-plane-metrics
-[6]: https://docs.datadoghq.com/ja/agent/cluster_agent/setup
-[7]: https://docs.datadoghq.com/ja/agent/cluster_agent/clusterchecks/
-[8]: https://docs.datadoghq.com/ja/agent/cluster_agent/endpointschecks/
+[6]: https://docs.datadoghq.com/agent/cluster_agent/setup
+[7]: https://docs.datadoghq.com/agent/cluster_agent/clusterchecks/
+[8]: https://docs.datadoghq.com/agent/cluster_agent/endpointschecks/
 [9]: https://rancher.com/docs/rancher/v2.0-v2.4/en/cluster-admin/nodes
 [10]: https://github.com/DataDog/helm-charts/blob/main/examples/datadog/agent_on_rancher_values.yaml

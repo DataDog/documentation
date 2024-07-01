@@ -1,66 +1,66 @@
 ---
-aliases:
-- /ja/integrations/awscloudtrail/
-- /ja/integrations/faq/i-think-i-m-missing-some-of-my-cloudtrail-events/
-categories:
-- aws
-- cloud
-- log collection
-- security
-dependencies: []
-description: 不審な AWS アカウントアクティビティを警告。
-doc_link: https://docs.datadoghq.com/integrations/amazon_cloudtrail/
-draft: false
-git_integration_title: amazon_cloudtrail
-has_logo: true
-integration_id: amazon-cloudtrail
-integration_title: AWS CloudTrail
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: '1.0'
-name: amazon_cloudtrail
-public_title: Datadog-AWS CloudTrail インテグレーション
-short_description: 不審な AWS アカウントアクティビティを警告。
-version: '1.0'
+"aliases":
+- "/integrations/awscloudtrail/"
+- "/integrations/faq/i-think-i-m-missing-some-of-my-cloudtrail-events/"
+"categories":
+- "aws"
+- "cloud"
+- "log collection"
+- "security"
+"custom_kind": "integration"
+"dependencies": []
+"description": "Alert on suspicious AWS account activity."
+"doc_link": "https://docs.datadoghq.com/integrations/amazon_cloudtrail/"
+"draft": false
+"git_integration_title": "amazon_cloudtrail"
+"has_logo": true
+"integration_id": "amazon-cloudtrail"
+"integration_title": "AWS CloudTrail"
+"integration_version": ""
+"is_public": true
+"manifest_version": "1.0"
+"name": "amazon_cloudtrail"
+"public_title": "Datadog-AWS CloudTrail Integration"
+"short_description": "Alert on suspicious AWS account activity."
+"version": "1.0"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-## 概要
+## Overview
 
 <div class="alert alert-warning">
-AWS CloudTrail for Cloud SIEM を設定する場合は、<a href="https://docs.datadoghq.com/security_platform/cloud_siem/guide/aws-config-guide-for-cloud-siem/">AWS Configuration for Cloud SIEM</a> を参照してください。
+See <a href="https://docs.datadoghq.com/security_platform/cloud_siem/guide/aws-config-guide-for-cloud-siem/">AWS Configuration for Cloud SIEM</a> if you are setting up AWS CloudTrail for Cloud SIEM.
 </div>
 
-AWS CloudTrail は、AWS アカウントの監査証跡を提供します。Datadog は、この監査証跡を読み取ってイベントを作成します。Datadog のイベントエクスプローラーでイベントを検索し、ダッシュボードでの関連付けに使用します。次に CloudTrail イベントの例を示します。
+AWS CloudTrail provides an audit trail for your AWS account. Datadog reads this audit trail and creates events. Search your Datadog events explorer for these events or use them for correlation on your dashboards. Here is an example of a CloudTrail event:
 
-{{< img src="integrations/amazon_cloudtrail/cloudtrail_event.png" alt="Cloudtrail イベント" popup="true">}}
+{{< img src="integrations/amazon_cloudtrail/cloudtrail_event.png" alt="cloudtrail event" popup="true">}}
 
-他の AWS サービスについては、[Amazon Web Services インテグレーションのページ][1]を参照してください
+For information on other AWS services, see the [Amazon Web Services integration page][1]
 
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-[Amazon Web Services インテグレーション][2]をまだセットアップしていない場合は、最初にセットアップします。
+If you haven't already, set up the [Amazon Web Services integration][2] first.
 
-### イベント収集
+### Event collection
 
-**注**: Datadog CloudTrail インテグレーションでは、CloudTrail バケットにイベントを収集する必要があります。
+**Note**: The Datadog CloudTrail integration requires events to be collected in a CloudTrail bucket.
 
-1. AWS Cloudtrail のイベントを収集するには、次のアクセス許可を Datadog IAM ポリシーに追加します。CloudTrail ポリシーの詳細については、[AWS CloudTrail API リファレンス][3]を参照してください。CloudTrail の証跡にアクセスするには、S3 のアクセス許可もいくつか必要です。**このアクセス許可は CloudTrail バケットでのみ必要です**。Amazon S3 ポリシーの詳細については、[Amazon S3 API リファレンス][4]を参照してください。
+1. Add the following permissions to your Datadog IAM policy to collect AWS CloudTrail events. For more information on CloudTrail policies, see the [AWS CloudTrail API Reference][3]. CloudTrail also requires some S3 permissions to access the trails. **These are required on the CloudTrail bucket only**. For more information on Amazon S3 policies, see the [Amazon S3 API Reference][4].
 
-    | AWS アクセス許可              | 説明                                                     |
+    | AWS Permission              | Description                                                     |
     | --------------------------- | --------------------------------------------------------------- |
-    | `cloudtrail:DescribeTrails` | 証跡と、証跡が格納される S3 バケットをリストします。      |
-    | `cloudtrail:GetTrailStatus` | 非アクティブな証跡をスキップします。                                        |
-    | `s3:ListBucket`             | CloudTrail バケット内のオブジェクトをリストして、有効な証跡を取得します。|
-    | `s3:GetBucketLocation`      | 証跡をダウンロードするバケットのリージョンを取得します。               |
-    | `s3:GetObject`              | 有効な証跡を取得します。                                     |
-    | `organizations:DescribeOrganization` | アカウントのオーガニゼーションについての情報を返します (org trail に必須)。 |
+    | `cloudtrail:DescribeTrails` | Lists trails and the s3 bucket the trails are stored in.        |
+    | `cloudtrail:GetTrailStatus` | Skips inactive trails.                                          |
+    | `s3:ListBucket`             | Lists objects in the CloudTrail bucket to get available trails. |
+    | `s3:GetBucketLocation`      | Obtains the bucket's region to download trails.                 |
+    | `s3:GetObject`              | Fetches available trails.                                       |
+    | `organizations:DescribeOrganization` | Returns information about an account's organization (required for org trails). |
 
-    このポリシーを Datadog IAM の既存のメインポリシーに追加します。
+    Add this policy to your existing main Datadog IAM policy:
 
     ```json
     {
@@ -77,41 +77,41 @@ AWS CloudTrail は、AWS アカウントの監査証跡を提供します。Data
     }
     ```
 
-    **注**: プリンシパル ARN は、[メイン AWS インテグレーションのインストールプロセス中][5]にリストされる ARN です。CloudTrail リソース ARN の詳細については、[AWS CloudTrail が IAM と連携する方法][5]の Resources セクションを参照してください。(新しいポリシーを追加するのではなく) ポリシーを更新する場合、`SID` または `Principal` は必要ありません。
+    **Note**: The principal ARN is the one listed during the installation process for the main AWS integration. See the Resources section of [How AWS CloudTrail works with IAM][5] for more information on CloudTrail resource ARNs. If you are updating your policy (as opposed to adding a new one), you don't need the `SID` or the `Principal`.
 
-2. [Datadog - AWS CloudTrail インテグレーション][6]をインストールします。
-   インテグレーションページで、Datadog のイベントエクスプローラーに標準の優先度 (デフォルトのフィルター) で表示するイベントのタイプを選択します。Amazon Web Services ページで構成したアカウントもここに表示されます。ここに記載されていないイベントの確認を希望する場合は、[Datadog のサポートチーム][7]までお問い合わせください。
+2. Install the [Datadog - AWS CloudTrail integration][6]:
+   On the integration page, choose the types of events to show as normal priority (the default filter) in the Datadog events explorer. The accounts you configured in the Amazon Web Services page are also shown here. If you would like to see other events that are not mentioned here, contact [Datadog support][7].
 
-### 収集データ
+### Log collection
 
-#### ログの有効化
+#### Enable logging
 
-AWS CloudTrail で [Trail の作成][8]を行い、ログを書き込む S3 バケットを選択します。
+In AWS CloudTrail, [create a Trail][8] and select an S3 bucket to write the logs in.
 
-#### ログを Datadog に送信する方法
+#### Send logs to Datadog
 
-1. AWS アカウントで [Datadog Forwarder Lambda 関数][9]をまだセットアップしていない場合は、セットアップします。
-2. 設定したら、Datadog Forwarder Lambda 関数に移動します。Function Overview セクションで、**Add Trigger** をクリックします。
-3. Trigger Configuration で **S3** トリガーを選択します。
-4. CloudTrail のログが格納されている S3 バケットを選択します。
-5. イベントの種類は `All object create events` のままにしておきます。
-6. **Add** をクリックすると、Lambda にトリガーが追加されます。
+1. If you haven't already, set up the [Datadog Forwarder Lambda function][9] in your AWS account.
+2. Once set up, go to the Datadog Forwarder Lambda function. In the Function Overview section, click **Add Trigger**. 
+3. Select the **S3** trigger for the Trigger Configuration.
+4. Select the S3 bucket that contains your CloudTrail logs.
+5. Leave the event type as `All object create events`.
+6. Click **Add** to add the trigger to your Lambda.
 
-[ログエクスプローラー][10]に移動して、ログを確認します。
+Go to the [Log Explorer][10] to start exploring your logs.
 
-AWS Services のログを収集する方法については、[Datadog Lambda 関数で AWS Services のログを送信する][11]を参照してください。
+For more information on collecting AWS Services logs, see [Send AWS Services Logs with the Datadog Lambda Function][11].
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 
-AWS CloudTrail インテグレーションには、メトリクスは含まれません。
+The AWS CloudTrail integration does not include any metrics.
 
-### ヘルプ
+### Events
 
-AWS CloudTrail インテグレーションは、AWS CloudTrail の監査証跡に基づいて多種多様なイベントを作成します。すべてのイベントは、Datadog の[イベントエクスプローラー][12]で `#cloudtrail` でタグ付けされます。インテグレーションコンフィギュレーションで、優先度を設定できます。
+The AWS CloudTrail integration creates many different events based on the AWS CloudTrail audit trail. All events are tagged with `#cloudtrail` in your Datadog [events explorer][12]. You can set their priority in the integration configuration.
 
-優先度を標準に設定された CloudTrail イベント (デフォルトのフィルターのイベントエクスプローラーに表示されます):
+CloudTrail events that can be set to a normal priority (they appear in the Event Explorer under the default filter):
 
 * apigateway 
 * autoscaling 
@@ -144,26 +144,27 @@ AWS CloudTrail インテグレーションは、AWS CloudTrail の監査証跡�
 * signin 
 * ssm
 
-### ヘルプ
+### Service Checks
 
-AWS CloudTrail インテグレーションには、サービスのチェック機能は含まれません。
+The AWS CloudTrail integration does not include any service checks.
 
-## ヘルプ
+## Troubleshooting
 
-### CloudTrail タイルがないか、アカウントがリストされません
+### The CloudTrail tile is missing or there are no accounts listed
 
-まず [Amazon Web Services][13] インテグレーションを構成する必要があります。その後、CloudTrail タイルを構成することができます。
+You need to first configure the [Amazon Web Services][13] integration. Then the CloudTrail tile can be configured.
 
-[1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
+[1]: https://docs.datadoghq.com/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
 [3]: https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_Operations.html
 [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_Operations.html
 [5]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/security_iam_service-with-iam.html#security_iam_service-with-iam-id-based-policies-resources
 [6]: https://app.datadoghq.com/integrations/amazon-cloudtrail
-[7]: https://docs.datadoghq.com/ja/help/
+[7]: https://docs.datadoghq.com/help/
 [8]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-create-and-update-a-trail.html
-[9]: https://docs.datadoghq.com/ja/logs/guide/forwarder/
+[9]: https://docs.datadoghq.com/logs/guide/forwarder/
 [10]: https://app.datadoghq.com/logs
-[11]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/
-[12]: https://docs.datadoghq.com/ja/events/
-[13]: https://docs.datadoghq.com/ja/integrations/aws/
+[11]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/
+[12]: https://docs.datadoghq.com/events/
+[13]: https://docs.datadoghq.com/integrations/aws/
+

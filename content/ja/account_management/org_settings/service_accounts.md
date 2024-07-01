@@ -1,106 +1,108 @@
 ---
+title: Service Accounts
 further_reading:
-- link: https://docs.datadoghq.com/api/latest/service-accounts/
-  tag: ドキュメント
-  text: サービスアカウント API リファレンス
-title: サービスアカウント
+    - link: "https://docs.datadoghq.com/api/latest/service-accounts/"
+      tag: Documentation
+      text: Service accounts API reference
 ---
 
-## 概要
+## Overview
 
-サービスアカウントは、チーム全体で共有されるアプリケーションキーやその他のリソースを所有するために使用できる非インタラクティブなアカウントです。サービスアカウントのアプリケーションキーは、キーを作成した本人が一度だけ閲覧することができます。
+Service accounts are non-interactive accounts you can use to own application keys and other resources that are shared across your teams. Service account application keys can only be viewed once by the individual who created the key.
 
-あなたの会社の社員が、個人のアプリケーションキーを使って Datadog API にリクエストを送信する自動スクリプトをセットアップしたとします。その社員が退社すると、その社員の Datadog アカウントを無効化し、そのアプリケーションキーは機能しなくなります。自動化されたスクリプトも、誰かが有効なアプリケーションキーで更新するまで、動作しなくなります。Datadog API への自動リクエストに個人のアプリケーションキーの代わりにサービスアカウントのアプリケーションキーを使用することで、この問題を回避することができます。
+Suppose an employee at your company sets up an automated script to send requests to the Datadog API, using their personal application key. When that employee leaves the company, you deactivate their Datadog account, and their application key stops working. The automated script also stops working, until someone updates it with a valid application key. Using a service account application key instead of a personal application key for automated requests to the Datadog API avoids this problem.
 
-## ナビゲーション
+## Navigation
 
-サービスアカウントは、[組織の設定][1]に存在します。
+Service accounts exist in [Organization Settings][1]. 
 
-UI でサービスアカウントにアクセスするには
+To access service accounts in the UI:
 
-1. アカウントメニューから、**Organization Settings** に移動します。
-2. **Accounts** の下で、**Service Accounts** を選択します。
+1. Navigate to **Organization Settings** from your account menu.
+2. Under **Accounts**, select **Service Accounts**.
 
-[Service Accounts ページ][2]には、組織内のすべてのサービスアカウントのリストが含まれています。Datadog Admin Role を持つユーザーを含む、Service Account Write 権限を持つユーザーは、サービスアカウントを作成することができます。サービス アカウントの書き込み権限を持たないユーザーには、読み取り専用のビューが表示されます。
+The [Service Accounts page][2] contains a list of all service accounts in your organization. Users with the Service Account Write permission, including users with the Datadog Admin Role, may create service accounts. Users without the Service Account Write permission see a read-only view.
 
-### サービスアカウントを表示する
+### View service accounts
 
-デフォルトでは、Service Accounts ページはアクティブなサービスアカウントのみを表示します。無効なサービスアカウントを下のリストに含めるには、**Disabled** を選択します。
+By default, the Service Accounts page shows only active service accounts. To include disabled service accounts in the list below, select **Disabled**.
 
-ページ上部にある検索ボックスを使用して、サービスアカウントをフィルターします。フィルターは、名前、メール、ロールのフィールドを検索します。
+Use the search box at the top of the page to filter service accounts. The filter searches name, email, and role fields.
 
-アカウントをクリックすると、以下の情報を含む詳細なサイドパネルビューにアクセスできます。
+Click on an account to access a detailed side panel view with the following information: 
 
-- ステータス (有効または無効)
-- 作成日および最終修正日
-- ロール
-- アプリケーションキー
-- アクセス許可
+- Status (active or disabled)
+- Created and last modified dates
+- Roles
+- Application keys
+- Permissions
 
-### サービスアカウントを作成する
+### Create service account
 
-サービスアカウントを作成するには、次の手順を実行します。
+To create a service account, perform the following steps:
 
-1. **New Service Account** をクリックします。ダイアログボックスが表示されます。
-2. サービスアカウントの名前とメールアドレスを入力します。
-3. **Assign Roles** ドロップダウンメニューを使用して、サービスアカウントに 1 つ以上のロールを選択します。
-4. 保存するには、**Create Service Account** をクリックします。
+1. Click **New Service Account**. A dialog box appears.
+2. Enter a name and email address for your service account.
+3. Use the **Assign Roles** dropdown menu to choose one or more roles for your service account.
+4. To save, click **Create Service Account**.
 
-Datadog ユーザーのメールアドレスとは異なり、サービスアカウントのメールアドレスは、組織全体で一意である必要はありません。
+Unlike the email addresses for Datadog users, service account email addresses do not need to be unique across an organization.
 
-### サービスアカウントを編集する
+### Edit service account
 
-サービスアカウントを変更するには、サービスアカウント一覧でクリックします。
+To modify a service account, click on one in the service accounts list. 
 
-1. サイドパネルで、サービスアカウント名の横にある **Edit** をクリックします。ダイアログボックスが表示されます。
-2. 変更したいフィールドを更新します。名前、メールアドレス、ステータス、ロールを編集することができます。
-3. **保存**をクリックします。
+1. In the side panel, click **Edit** next to the service account name. A dialog box appears.
+2. Update any fields you would like to change. You can edit the name, email address, status, and roles.
+3. Click **Save**.
 
-サービスアカウントを無効にするには、上記の手順でサービスアカウントを編集し、ステータスを **Disabled** に設定します。
+To disable a service account, the user must have the User Manage Access permission in addition to Service Account Write.
 
-### アプリケーションキーの作成・失効
+To disable a service account, follow the previous procedure to edit the service account and set the status to **Disabled**.
 
-サービスアカウントのアプリケーションキーを作成または失効させるには、サービスアカウント一覧からアカウントを選択します。サービスアカウントのサイドパネルが表示されます。
+### Create or revoke application keys
 
-アプリケーションキーを新規に作成する場合は、以下の手順で行います。
+To create or revoke service account application keys, select an account from the service account list. The service account's side panel appears.
 
-- **New Key** をクリックします。ダイアログボックスが表示されます。
-- キーにわかりやすい名前をつけます。
-- **Create Key** をクリックします。
+To create a new application key, follow the steps below:
 
-ダイアログボックスが更新され、キーが表示されます。キーをコピーして、任意の場所に貼り付けます。ダイアログボックスを閉じた後、キーの値を取得することはできません。
+- Click **New Key**. A dialog box appears.
+- Give the key a descriptive name.
+- Click **Create Key**. 
 
-アプリケーションキーを失効させるには、サービスアカウント詳細表示のサイドパネルでキーを探し、キーにカーソルを合わせます。右側に鉛筆とゴミ箱のアイコンが表示されます。ゴミ箱をクリックすると、キーが失効されます。キーを失効させたら、**Confirm** をクリックします。
+The dialog box refreshes, showing you the key. Copy and paste the key into your desired location. After you close the dialog box, you cannot retrieve the value of the key.
+
+To revoke an application key, find the key in the service account detailed view side panel and hover over it. Pencil and trash can icons appear on the right. Click the trash can to revoke the key. After the key is revoked, click **Confirm**.
 
 ### API
 
-Datadog API でサービスアカウントを利用する場合は、[サービスアカウント API リファレンス][3]を参照してください。
+See the [Service accounts API reference][3] to use service accounts through the Datadog API.
 
-## サービスアカウントのアプリケーションキー
+## Service account application keys
 
-サービスアカウントのアプリケーションキーは、作成直後に一度だけ閲覧することができます。アプリケーションキーへのアクセスを制限することで、他のユーザーがそのキーにアクセスしたときに発生する可能性のある問題を防ぐことができます。サービスアカウントのキーを紛失したり、忘れたりした場合は、キーを失効させて新しいキーを作成してください。
+You can view a service account applications key exactly once, immediately after you create it. Limiting the access to the application key prevents any problems that may occur when another user accesses the key. If you lose or forget a service account key, revoke it and create a new one.
 
-## アクセス許可
+## Permissions
 
-サービスアカウントを作成することで、自分に代わって Datadog と対話するアクターが作成されます。サービスアカウントページでの機能は、Datadog のロールと権限によって異なります。
+By creating a service account, you create an actor that interacts with Datadog on your behalf. Your capabilities on the Service Accounts page vary depending on your Datadog roles and permissions.
 
-サービスアカウントを作成するには、サービスアカウント書き込み権限が必要です。Datadog Admin ロールは、Service Account Write を含むので、Datadog Admin ロールを持つ人は誰でもサービスアカウントを作成することができます。
+Creating a service account requires the Service Account Write permission. The Datadog Admin role includes Service Account Write, so anyone with the Datadog Admin role can create service accounts.
 
-サービスアカウントを作成するとき、自分が持っているロールと権限の任意のサブセットを与えることができます。ただし、User Access Manage 権限を持っている場合は例外で、事実上、Datadog で何でもできる管理者権限が付与されます。User Access Manage 権限を持つ Datadog アカウントは、サービスアカウントに割り当てることができるロールと権限に制限がありません。
-
-
-## 通知
-
-Datadog は、以下のアクションが発生すると、サービスアカウントに関連付けられたメールアドレスに通知を送信します。
-- アプリケーションキーの作成
-- アプリケーションキーの失効
-- サービスアカウントの無効化
+When creating a service account, you can give it any subset of the roles and permissions that you have. The exception is if you have the User Access Manage permission, which effectively gives you administrator access to do anything in Datadog. Datadog accounts with the User Access Manage permission have no restrictions on the roles and permissions they can assign to service accounts.
 
 
-## その他の参考資料
+## Notifications
+
+Datadog sends a notification to the email address associated with the service account when the following actions occur:
+- Create an application key
+- Revoke an application key
+- Disable the service account
+
+
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/account_management/org_settings/
+[1]: /account_management/org_settings/
 [2]: https://app.datadoghq.com/organization-settings/service-accounts
-[3]: /ja/api/latest/service-accounts/
+[3]: /api/latest/service-accounts/

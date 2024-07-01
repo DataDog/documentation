@@ -1,121 +1,126 @@
 ---
+title: Monitoring Kafka Queues
+kind: guide
 further_reading:
 - link: /tracing/trace_collection
-  tags: ドキュメント
-  text: トレース収集の設定
+  tag: Documentation
+  text: Set up trace collection
 - link: /integrations/kafka
-  tags: ドキュメント
-  text: Kafka インテグレーション
+  tag: Documentation
+  text: Kafka integration
 - link: /data_streams/
-  tags: ドキュメント
-  text: データストリーム モニタリング
-kind: ガイド
-title: Kafka キューの監視
+  tag: Documentation
+  text: Data Streams Monitoring
 ---
 
-## 概要
+## Overview
 
-イベント駆動型パイプラインでは、Kafka のようなキューイングやストリーミングの技術は、システムの正常な演算子として不可欠です。このような環境では、多くのテクノロジーやチームが関与しているため、メッセージの信頼性とサービス間の迅速な伝達を確保することが困難な場合があります。Datadog Kafka インテグレーションと APM は、インフラストラクチャーとパイプラインの健全性と効率性を監視することを可能にします。
+In event-driven pipelines, queuing and streaming technologies such as Kafka are essential to the successful operation of your systems. Ensuring that messages are being reliably and quickly conveyed between services can be difficult due to the many technologies and teams involved in such an environment. The Datadog Kafka integration and APM enable your team to monitor the health and efficiency of your infrastructure and pipelines.
 
-### Kafka インテグレーション
+### The Kafka integration
 
-[Datadog Kafka インテグレーション][1]を使用して、クラスターのパフォーマンスをリアルタイムで視覚化し、Kafka のパフォーマンスを他のアプリケーションと相関させることができます。Datadog は、[MSK インテグレーション][2]も提供しています。
+Visualize the performance of your cluster in real time and correlate the performance of Kafka with the rest of your applications by using [the Datadog Kafka integration][1]. Datadog also provides a [MSK integration][2].
 
-{{< img src="tracing/guide/monitor_kafka_queues/kafka_dashboard.png" alt="Kafka ダッシュボード">}}
+{{< img src="tracing/guide/monitor_kafka_queues/kafka_dashboard.png" alt="Kafka Dashboard">}}
 
 ### Data Stream Monitoring
 
-[Datadog Data Streams Monitoring][3] は、パイプラインの健全性と、システムを通過するイベントのエンドツーエンドのレイテンシーを測定するための標準的な方法を提供します。Data Streams Monitoring が提供する深い可視性により、パイプラインの遅延や遅れを引き起こしている不良のプロデューサー、コンシューマー、またはキューを正確に特定することが可能になります。ブロックされたメッセージ、ホットパーティション、オフラインのコンシューマーなど、デバッグが困難なパイプラインの問題を発見することができます。また、関連するインフラストラクチャーやアプリのチーム間でシームレスに連携することができます。
+[Datadog Data Streams Monitoring][3] provides a standardized method for your teams to measure pipeline health and end-to-end latencies for events traversing your system. The deep visibility offered by Data Streams Monitoring enables you to pinpoint faulty producers, consumers, or queues driving delays and lag in the pipeline. You can discover hard-to-debug pipeline issues such as blocked messages, hot partitions, or offline consumers. And you can collaborate seamlessly across relevant infrastructure or app teams.
 
-{{< img src="tracing/guide/monitor_kafka_queues/dash-2022-data-streams-compressed-blurb.mp4" alt="Data Streams Monitoring のデモ" video="true">}}
+{{< img src="tracing/guide/monitor_kafka_queues/dash-2022-data-streams-compressed-blurb2.mp4" alt="Data Streams Monitoring Demo" video="true">}}
 
-### 分散型トレース
+### Distributed traces
 
-APM の分散型トレーシングは、リクエスト量とレイテンシーを測定することにより、サービスのパフォーマンスに対する可視性を拡大します。グラフやアラートを作成して APM データを監視し、下図のようなフレームグラフで 1 つのリクエストのアクティビティを視覚化して、レイテンシーやエラーの原因をより深く理解することができます。
+APM's distributed tracing gives you expanded visibility into the performance of your services by measuring request volume and latency. Create graphs and alerts to monitor your APM data, and visualize the activity of a single request in a flame graph, like the one shown below, to better understand the sources of latency and errors.
 
-{{< img src="tracing/guide/monitor_kafka_queues/kafka_trace.png" alt="Kafka コンシューマースパン" >}} 
+{{< img src="tracing/guide/monitor_kafka_queues/kafka_trace.png" alt="A Kafka consumer span" >}}
 
-APM は、Kafka クライアントとのリクエストを自動的にトレースすることができます。これは、ソースコードを変更することなくトレースを収集できることを意味します。Datadog は、プロデューサーからコンシューマーにトレースのコンテキストを伝播するように、Kafka メッセージのヘッダーを挿入します。
+APM can automatically trace requests to and from Kafka clients. This means you can collect traces without modifying your source code. Datadog injects headers in the Kafka messages so as to propagate the context of the trace from the producer to the consumer.
 
-対応する Kafka ライブラリは、[互換性ページ][4]でご確認ください。
+Check which Kafka libraries are supported in our [compatibility pages][4].
 
-#### セットアップ
+#### Setup
 
-Kafka アプリケーションをトレースするために、Datadog は Kafka SDK 内のプロデュースおよびコンシューマーコールをトレースします。そのため、Kafka を監視するためには、サービス上で APM をセットアップする必要があるだけです。APM と分散型トレーシングを始めるためのガイダンスとして、[APM トレース収集ドキュメント][5]を参照してください。
+To trace Kafka applications, Datadog traces the producing and consuming calls within the Kafka SDK. So to monitor Kafka, you just have to setup APM on your services. See [the APM trace collection documentation][5] for guidance on getting started with APM and distributed tracing.
 
-## APM でアプリケーションを監視する
+## Monitor your application in APM
 
-古典的な Kafka のセットアップでは、プロデューサースパン、および子としてコンシューマースパンを持つトレースが表示されます。消費側でトレースを生成するすべての作業は、コンシューマースパンの子スパンによって表現されます。各スパンは `messaging` というプレフィックスを持つタグのセットを持っています。次の表は、Kafka スパンで見つけることができるタグを説明しています。
+A classic Kafka setup shows a trace with a producer span, and as a child, a consumer span. Any work that generates a trace in the consumption side is represented by child spans of the consumer span. Each span has a set of tags with the `messaging` prefix. The following table describes the tags you can find on Kafka spans.
 
 <div class="alert alert-info">
   <div class="alert-info">
-    <div>Datadog のスパンメタデータをよりグローバルに理解するには、<a href="/tracing/trace_collection/tracing_naming_convention">スパンタグのセマンティクス</a>をお読みください</strong>。</div>
+    <div>To get a more global understanding of spans metadata in Datadog, read <a href="/tracing/trace_collection/tracing_naming_convention">Span Tags Semantics</a></strong>.</div>
   </div>
 </div>
 
-| **名前**                         | **型** | **説明**                                                                                                     |
+| **Name**                         | **Type** | **Description**                                                                                                     |
 |----------------------------------|----------|---------------------------------------------------------------------------------------------------------------------|
 | `messaging.system`               | `string` | `Kafka`                                                                                                             |
-| `messaging.destination`          | `string` | メッセージの送信先となるトピック。                                                                                   |
+| `messaging.destination`          | `string` | The topic the message is sent to.                                                                                   |
 | `messaging.destination_kind`     | `string` | `Queue`                                                                                                             |
-| `messaging.protocol`             | `string` | トランスポートプロトコルの名前。                                                                                 |
-| `messaging.protocol_version`     | `string` | トランスポートプロトコルのバージョン。                                                                              |
-| `messaging.url`                  | `string` | メッセージングシステムへの接続文字列。                                                                      |
-| `messaging.message_id`           | `string` | メッセージングシステムがメッセージの識別子として使用する値で、文字列として表される。                     |
-| `messaging.conversation_id`      | `string` | メッセージが属する会話の ID で、文字列として表現される。             |
-| `messaging.message_payload_size` | `number` | 圧縮されていないメッセージペイロードのサイズ (バイト数)。                                                              |
-| `messaging.operation`            | `string` | 消費メッセージの種類を示す文字列。 <br>例: `send` (プロデューサーに送るメッセージ)、`receive` (コンシューマーが受け取るメッセージ)、または `process` (以前に受け取ったメッセージをコンシューマーが処理する)。                                                                |
-| `messaging.consumer_id`          | `string` | 両方が存在する場合は `{messaging.kafka.consumer_group} - {messaging.kafka.client_id}`。<br>両方が存在しない場合は `messaging.kafka.consumer_group`。                                                                                                                                                                |
-| `messaging.kafka.message_key`    | `string` |  Kafka のメッセージキーは、同じメッセージをグループ化し、同じパーティションで処理されるようにするために使用されます。<br>メッセージキーは `messaging.message_id` とは異なり、一意ではありません。                                                                                                             |
-| `messaging.kafka.consumer_group` | `string` |  メッセージを処理する Kafka コンシューマーグループの名前。コンシューマーにのみ適用され、プロデューサーには適用されない。
-| `messaging.kafka.client_id`      | `string` |  メッセージを処理するコンシューマーまたはプロデューサーのクライアント ID。                                               |
-| `messaging.kafka.partition`      | `string` |  メッセージの送信先となるパーティション。                                                                                  |
-| `messaging.kafka.tombstone`      | `string` |  メッセージが tombstone である場合に真となるブール値。                                                              |
-| `messaging.kafka.client_id`      | `string` |  メッセージを処理するコンシューマーまたはプロデューサーのクライアント ID。                                               |
+| `messaging.protocol`             | `string` | The name of the transport protocol.                                                                                 |
+| `messaging.protocol_version`     | `string` | The version of the transport protocol.                                                                              |
+| `messaging.url`                  | `string` | The connection string to the messaging system.                                                                      |
+| `messaging.message_id`           | `string` | A value used by the messaging system as an identifier for the message, represented as a string.                     |
+| `messaging.conversation_id`      | `string` | The conversation ID for the conversation that the message belongs to, represented as a string.             |
+| `messaging.message_payload_size` | `number` | The size of the uncompressed message payload in bytes.                                                              |
+| `messaging.operation`            | `string` | A string identifying the kind of message consumption. <br>Examples: `send` (a message sent to a producer), `receive` (a message is received by a consumer), or `process` (a message previously received is processed by a consumer).                                                                |
+| `messaging.consumer_id`          | `string` | `{messaging.kafka.consumer_group} - {messaging.kafka.client_id}` if both are present.<br>`messaging.kafka.consumer_group` if not.                                                                                                                                                                |
+| `messaging.kafka.message_key`    | `string` |  Message keys in Kafka are used for grouping alike messages to ensure they're processed on the same partition.<br> They differ from `messaging.message_id` in that they're not unique.                                                                                                             |
+| `messaging.kafka.consumer_group` | `string` |  Name of the Kafka Consumer Group that is handling the message. Only applies to consumers, not producers.
+| `messaging.kafka.client_id`      | `string` |  Client ID for the Consumer or Producer that is handling the message.                                               |
+| `messaging.kafka.partition`      | `string` |  Partition the message is sent to.                                                                                  |
+| `messaging.kafka.tombstone`      | `string` |  A Boolean that is true if the message is a tombstone.                                                              |
+| `messaging.kafka.client_id`      | `string` |  Client ID for the Consumer or Producer that is handling the message.                                               |
 
-## 特殊な使用例
+## Special use cases
 
 {{< tabs >}}
 
 {{% tab "Java" %}}
 
-Datadog Kafka インテグレーションは、Header API をサポートする Kafka バージョン 0.11+ で動作します。この API は、トレースコンテキストの挿入と抽出に使用されます。バージョンが混在する環境を実行する場合、Kafka ブローカーは、Kafka の新しいバージョンを誤って報告することがあります。これは、トレーサーがローカルプロデューサーによってサポートされていないヘッダーを挿入しようとしたときに問題が発生します。さらに、ヘッダーが存在するため、古いコンシューマーはメッセージを消費することができません。これらの問題を防ぐには、0.11 より古いバージョンの Kafka が混在する環境を実行する場合、環境変数 `DD_KAFKA_CLIENT_PROPAGATION_ENABLED=false` でコンテキストの伝搬を無効化します。
+See [Java's tracer documentation][7] for configuration of Kafka.
 
-{{< /tabs >}}
+[7]: /tracing/trace_collection/compatibility/java/#networking-framework-compatibility
+
+{{% /tab %}}
 
 {{% tab ".NET" %}}
 
-[Kafka .NET Client ドキュメント][1]によると、典型的な Kafka コンシューマーアプリケーションは、Consume ループが中心で、Consume メソッドを繰り返し呼び出してレコードを 1 つずつ取得するとあります。`Consume` メソッドは、システムに対してメッセージをポーリングします。したがって、デフォルトでは、コンシューマースパンはメッセージが返されたときに作成され、次のメッセージを消費する前に終了します。スパンの長さは、あるメッセージを消費してから次のメッセージを消費するまでの計算を代表するものです。
+The [Kafka .NET Client documentation][9] states that a typical Kafka consumer application is centered around a consume loop, which repeatedly calls the Consume method to retrieve records one-by-one. The `Consume` method polls the system for messages. Thus, by default, the consumer span is created when a message is returned and closed before consuming the next message. The span duration is then representative of the computation between one message consumption and the next.
 
-メッセージを完全に処理してから次のメッセージを消費する場合、あるいは複数のメッセージを一度に消費する場合、消費するアプリケーションで `DD_TRACE_KAFKA_CREATE_CONSUMER_SCOPE_ENABLED` を `false` に設定することができます。この設定が `false` の場合、コンシューマースパンが作成され、すぐに閉じられます。トレースする子スパンがある場合は、[.NET カスタムインストルメンテーションのヘッダー抽出と挿入のドキュメント][2]に従って、トレースコンテキストを抽出してください。
+When a message is not processed completely before consuming the next one, or when multiple messages are consumed at once, you can set `DD_TRACE_KAFKA_CREATE_CONSUMER_SCOPE_ENABLED` to `false` in your consuming application. When this setting is `false`, the consumer span is created and immediately closed. If you have child spans to trace, follow [the headers extraction and injection documentation for .NET custom instrumentation][10] to extract the trace context.
 
-.NET トレーサーは [v1.27.0][3] から Confluent.Kafka をトレースできるようになりました。トレースコンテキスト伝搬 API は [v2.7.0][4] から利用可能です。
+The .NET tracer allows tracing Confluent.Kafka since [v1.27.0][11]. The trace context propagation API is available since [v2.7.0][12].
 
-[1]: https://docs.confluent.io/kafka-clients/dotnet/current/overview.html#the-consume-loop
-[2]: /ja/tracing/trace_collection/custom_instrumentation/dotnet/#headers-extraction-and-injection
-[3]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v1.27.0
-[4]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v2.7.0
-{{< /tabs >}}
+[9]: https://docs.confluent.io/kafka-clients/dotnet/current/overview.html#the-consume-loop
+[10]: /tracing/trace_collection/custom_instrumentation/dotnet/#headers-extraction-and-injection
+[11]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v1.27.0
+[12]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v2.7.0
+
+{{% /tab %}}
 
 {{% tab "Ruby" %}}
 
-Kafka インテグレーションでは、`ruby-kafka` gem のトレーシング機能を提供しています。[Ruby のトレーサードキュメント][1]に従って有効化してください。
+The Kafka integration provides tracing of the `ruby-kafka` gem. Follow [Ruby's tracer documentation][8] to enable it.
 
-[1]: /ja/tracing/trace_collection/dd_libraries/ruby/#kafka
+[8]: /tracing/trace_collection/dd_libraries/ruby/#kafka
+
+{{% /tab %}}
+
 {{< /tabs >}}
 
-{{< /tabs >}}
+### Disable tracing for Kafka
 
-### Kafka のトレースを無効にする
+If you want to disable Kafka tracing on an application, set the appropriate [language-specific configuration][6].
 
-アプリケーションの Kafka トレースを無効にしたい場合は、`DD_TRACE_KAFKA_ENABLED` 設定を `false` に設定します。
-
-## その他の参考資料
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/integrations/kafka
-[2]: /ja/integrations/amazon_msk/
+[1]: /integrations/kafka
+[2]: /integrations/amazon_msk/
 [3]: https://app.datadoghq.com/data-streams/onboarding
-[4]: /ja/tracing/trace_collection/compatibility/
-[5]: /ja/tracing/trace_collection/
+[4]: /tracing/trace_collection/compatibility/
+[5]: /tracing/trace_collection/
+[6]: /tracing/trace_collection/library_config/

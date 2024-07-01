@@ -1,106 +1,107 @@
 ---
-description: Synthetic API およびマルチステップ API テストでアプリケーションにログインできるようにする方法について説明します。
+title: Use Authentication In API And Multistep API Tests
+kind: guide
+description: Learn how to ensure your Synthetic API and multistep API tests can log in to your applications. 
 further_reading:
 - link: /data_security/synthetics
-  tag: ドキュメント
-  text: Synthetics データセキュリティについて
+  tag: Documentation
+  text: Learn about Synthetics Data Security
 - link: /synthetics/api_tests
-  tag: ドキュメント
-  text: API テストの作成
+  tag: Documentation
+  text: Create an API test
 - link: /synthetics/multistep
-  tag: ドキュメント
-  text: マルチステップ API テストを作成する
-kind: ガイド
-title: API およびマルチステップ API テストでの認証使用
+  tag: Documentation
+  text: Create a multistep API test
 ---
 
-## 概要
+## Overview
 
-[API テスト][1]では、アプリケーションの API エンドポイントにリクエストを送信し、レスポンスタイム、期待されるステータスコード、ヘッダー、本文の内容など、定義された条件とレスポンスを検証することができます。[マルチステップ API テスト][2]を使用すると、リクエストを連鎖させて、重要なサービス上での複雑なジャーニーを積極的に監視し、それらがいつでも、管理されたロケーションやプライベートロケーションからアクセス可能であることを保証できます。
+[API tests][1] allow you to send requests to your applications' API endpoints to verify responses and defined conditions, such as overall response time, expected status code, header, or body content. [Multistep API tests][2] allow you to chain requests to proactively monitor sophisticated journeys on your key services, and ensure they are available at any time and from any managed or private location.
 
-このガイドでは、Synthetic API およびマルチステップ API テストで利用可能なさまざまな認証プロトコルに ついて説明します。ブラウザテストにおける認証の詳細については、[認証が必要なアプリケーションでテストを実行する][3]を参照してください。
+This guide discusses the various authentication protocols available for Synthetic API and multistep API tests. For more information about authentication in browser tests, see [Running Tests On An Application That Requires Authentication][3].
 
-## 認証方法
+## Authentication methods
 
-エンドポイントで認証が必要な場合、[API の作成][4]または[マルチステップ API テスト][5]の際に資格情報を追加することができます。API およびマルチステップ API テストは、基本アクセス認証、ダイジェストアクセス認証、OAuth2.0、NTLM、AWS Sigv4、クライアント証明書の認証プロトコルをサポートしています。
+If your endpoint requires authentication, you can add your credentials when [creating an API][4] or [multistep API test][5]. API and multistep API tests support the following authentication protocols: Basic Access Authentication, Digest Access Authentication, OAuth2.0, NTLM, AWS Sigv4, and client certificates. 
 
-**Define the request** セクションで、**Advanced Options** > **Authentication** をクリックし、認証方法を選択します。
+In the **Define the request** section, click **Advanced Options** > **Authentication** and select an authentication method: 
 
 {{< tabs >}}
-{{% tab "基本アクセス" %}}
+{{% tab "Basic Access" %}}
 
-**HTTP Basic Auth** をクリックし、ユーザー名とパスワードを入力します。[HTTP テスト][1]、[マルチステップ API テスト][2]、[WebSocket テスト][3]では、基本アクセス認証がサポートされています。
+Click **HTTP Basic Auth** and enter a username and password. Basic access authentication is supported in [HTTP tests][1], [multistep API tests][2], and [WebSocket tests][3].
 
-[1]: /ja/synthetics/api_tests/http_tests/
-[2]: /ja/synthetics/multistep/
-[3]: /ja/synthetics/api_tests/websocket_tests/
+[1]: /synthetics/api_tests/http_tests/
+[2]: /synthetics/multistep/
+[3]: /synthetics/api_tests/websocket_tests/
 {{% /tab %}}
-{{% tab "ダイジェストアクセス" %}}
+{{% tab "Digest Access" %}}
 
-**Digest Auth** をクリックし、ユーザー名とパスワードを入力します。[HTTP テスト][1]と[マルチステップ API テスト][2]では、ダイジェストアクセス認証がサポートされています。
+Click **Digest Auth** and enter a username and password. Digital access authentication is supported in [HTTP tests][1] and [multistep API tests][2].
 
-[1]: /ja/synthetics/api_tests/http_tests/
-[2]: /ja/synthetics/multistep/
+[1]: /synthetics/api_tests/http_tests/
+[2]: /synthetics/multistep/
 {{% /tab %}}
 {{% tab "OAuth 2.0" %}}
 
-**OAuth 2.0** をクリックし、グラントタイプ (**Client Credentials** または **Resource Password**) を選択し、Access Token URL、クライアント ID、およびクライアントシークレットを含めます。トークン API 認証方法 (**Send as Basic Auth header** または **Send client credentials in body**) を選択し、オプションでオーディエンス、リソース、およびスコープを含めます。OAuth 2.0 認証は、[HTTP テスト][1]と[マルチステップ API テスト][2]でサポートされています。
+Click **OAuth 2.0**, select a grant type (**Client Credentials** or **Resource Password**), and include an Access Token URL, Client ID, and Client Secret. Select a token API authentication method (**Send as Basic Auth header** or **Send client credentials in body**) and optionally, include an audience, resource, and scope. OAuth 2.0 authentication is supported in [HTTP tests][1] and [multistep API tests][2].
 
-[1]: /ja/synthetics/api_tests/http_tests/
-[2]: /ja/synthetics/multistep/
+[1]: /synthetics/api_tests/http_tests/
+[2]: /synthetics/multistep/
 {{% /tab %}}
 {{% tab "NTLM" %}}
 
-**NTLM** をクリックし、ユーザー名とパスワード、そしてオプションでドメインとワークステーションを入力します。NTLM 認証は、[HTTP テスト][1]と[マルチステップ API テスト][2]でサポートされています。
+Click **NTLM**, enter a username and password, and optionally, a domain and work station. NTLM authentication is supported in [HTTP tests][1] and [multistep API tests][2].
 
-[1]: /ja/synthetics/api_tests/http_tests/
-[2]: /ja/synthetics/multistep/
+[1]: /synthetics/api_tests/http_tests/
+[2]: /synthetics/multistep/
 {{% /tab %}}
 {{% tab "AWS Signature" %}}
 
-**AWS Signature** をクリックし、Access Key ID と Secret Access Key、オプションでリージョン、サービス名、セッショントークンを入力します。AWS Signature 認証は、[HTTP テスト][1]と[マルチステップ API テスト][2]でサポートされています。
+Click **AWS Signature**, enter an Access Key ID and Secret Access Key, and optionally, a region, service name, and session token. AWS Signature authentication is supported in [HTTP tests][1] and [multistep API tests][2].
 
-[1]: /ja/synthetics/api_tests/http_tests/
-[2]: /ja/synthetics/multistep/
+[1]: /synthetics/api_tests/http_tests/
+[2]: /synthetics/multistep/
 {{% /tab %}}
-{{% tab "クライアント証明書" %}}
+{{% tab "Client Certificate" %}}
 
-秘密鍵ファイルと証明書ファイルをアップロードするには、**Upload File** をクリックしてください。クライアント証明書は、[HTTP テスト][1]、[マルチステップ API テスト][2]、[SSL テスト][3]、[gRPC テスト][4]でサポートされています。
+Click **Upload File** to upload a private key file and a certificate file. Client 
+Certificate authentication is supported in [HTTP tests][1], [multistep API tests][2], [SSL tests][3], and [gRPC tests][4].
 
-[1]: /ja/synthetics/api_tests/http_tests/
-[2]: /ja/synthetics/multistep/
-[3]: /ja/synthetics/api_tests/ssl_tests/
-[4]: /ja/synthetics/api_tests/grpc_tests/
+[1]: /synthetics/api_tests/http_tests/
+[2]: /synthetics/multistep/
+[3]: /synthetics/api_tests/ssl_tests/
+[4]: /synthetics/api_tests/grpc_tests/
 {{% /tab %}}
 {{< /tabs >}}
 
-## アカウントのセキュリティ
+## Account security
 
-テスト結果や構成からユーザー資格情報を隠したい場合は、[API の作成][4]や[マルチステップ API テスト][5]の際に、グローバル変数やローカル変数を使用することができます。
+If you want to hide user credentials from your test results and configuration, you can use global and local variables when [creating an API][4] or [multistep API test][5].
 
-### グローバル変数
+### Global variables
 
-資格情報をグローバル変数として保存することで、以下のことが可能になります。
+By storing your credentials as global variables, you can:
 
-- 複数のテストに簡単に再利用する。
-- **Hide and obfuscate variable value** を選択して、テスト結果や構成からその値を隠す。
-- [カスタムロール][6]を使用して、組織のユーザーのサブセットにアクセスを制限する。
+- Easily reuse them across multiple tests.
+- Hide their values from test results and configurations by selecting **Hide and obfuscate variable value**.
+- Restrict their access to a subset of your organization's users by using [custom roles][6].
 
-### ローカル変数
+### Local variables
 
-資格情報をローカル変数として保存することで、資格情報は一意のテストにスコープされます。テスト結果や構成からその値を隠すには、**Hide and obfuscate variable value** を選択します。
+By storing your credentials as local variables, your credentials are scoped to a unique test. In order to hide their values from test results and configurations, select **Hide and obfuscate variable value**.
 
-データセキュリティについては、[Synthetic モニタリングのデータセキュリティ][7]を参照してください。
+For more information about data security, see [Synthetic Monitoring Data Security][7].
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/synthetics/api_tests/http_tests/
-[2]: /ja/synthetics/multistep/
-[3]: /ja/synthetics/guide/app-that-requires-login/
+[1]: /synthetics/api_tests/http_tests/
+[2]: /synthetics/multistep/
+[3]: /synthetics/guide/app-that-requires-login/
 [4]: https://app.datadoghq.com/synthetics/create?subtype=http
 [5]: https://app.datadoghq.com/synthetics/multi-step/create
-[6]: /ja/account_management/rbac/?tab=datadogapplication#create-a-custom-role
-[7]: /ja/data_security/synthetics
-[8]: /ja/synthetics/api_tests/grpc_tests
+[6]: /account_management/rbac/?tab=datadogapplication#create-a-custom-role
+[7]: /data_security/synthetics
+[8]: /synthetics/api_tests/grpc_tests

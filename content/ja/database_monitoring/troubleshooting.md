@@ -1,43 +1,44 @@
 ---
-description: データベースモニタリングセットアップのトラブルシューティング
-title: データベースモニタリングのトラブルシューティング
+title: Troubleshooting Database Monitoring
+description: Troubleshoot Database Monitoring setup
+
 ---
 
-このページでは、データベースモニタリングのセットアップおよび使用に関する一般的な問題と、その解決方法について詳しく説明します。Agent のバージョンリリースにより内容が変更となる可能性があるため、最新の安定した Agent バージョンを使用し、最新の[セットアップドキュメント][1]に従っていただくことをお勧めします。
+This page details database agnostic common issues with setting up and using Database Monitoring, and how to resolve them. Datadog recommends staying on the latest stable Agent version and adhering to the latest [setup documentation][1], as it can change with agent version releases.
 
-特定のデータベースセットアップに関するトラブルシューティングは、対応するトラブルシューティングページをご利用ください。
+For specific database setup troubleshooting, use the corresponding troubleshooting page:
 
-* [MySQL セットアップのトラブルシューティング][2]
-* [Oracle セットアップのトラブルシューティング][8]
-* [Postgres セットアップのトラブルシューティング][3]
-* [SQL Server セットアップのトラブルシューティング][4]
+* [Troubleshooting MySQL Setup][2]
+* [Troubleshooting Oracle Setup][8]
+* [Troubleshooting Postgres Setup][3]
+* [Troubleshooting SQL Server Setup][4]
 
-## 一般的な問題の診断
-### クエリのバインドパラメータが表示されない
+## Diagnosing common problems
+### Query bind parameters cannot be viewed
 
-現時点では、クエリサンプルおよび実行計画における生のクエリバインドパラメータは難読化され、`?` に置き換えられます。将来的なリリースでは、難読化されていないクエリバインドパラメータを公開する設定が予定されています。
-
-
-### DBM ホスト制限
-
-モニタリングしているデータベースの複雑性によっては、1 つの Agent に対する DBM ホストが多すぎると Agent に過負荷がかかり、データ収集に遅延が発生する原因となり得ます。Agent に過負荷がかかると、`Job loop stopping due to check inactivity in the Agent logs` のような警告が表示されます。
-
-1 つの Datadog Agent モニターには、最大で 10 DBM ホストが推奨されています。10 DBM ホスト以上ある場合は、複数の Datadog  Agent に分散させることをご検討ください。
+At this time, the raw query bind parameters are obfuscated for Query Samples and Explain Plans, and are replaced with a `?` character.
 
 
-### Datadog で DBM のデータが表示されません。接続の問題でしょうか？
+### DBM host limit
 
-設定が正しいと思っても、DBM ページにデータが表示されない場合、Agent が Datadog のデータ収集エンドポイントにデータを送信できていない可能性があります。接続の問題を診断するには、Agent を実行している場所から、以下の接続トラブルシューティングの手順を実行します。
+Depending on how complex the databases being monitored are, too many DBM hosts on one Agent could overload the Agent and cause data collection to be delayed. If the Agent is overloaded, you may see warnings like `Job loop stopping due to check inactivity in the Agent logs`.
 
-1. DBM 収集エンドポイントの TCP 接続をテストします。
+It is recommended to have a single Datadog Agent monitor at most 10 DBM hosts. If you have more than 10 DBM hosts then you should consider spreading them over multiple Datadog Agents.
+
+
+### No DBM data visible in Datadog: Connection Issues?
+
+If you think that your setup is correct, but you're not seeing data in your DBM pages, it's possible that your Agent is not able to send data to Datadog's data collection endpoints. To diagnose connection issues, perform the following connection troubleshooting steps from the location where the Agent is running.
+
+1. Test TCP connectivity on DBM collection endpoints:
 
 ```
 telnet dbm-metrics-intake.datadoghq.com 443
 telnet dbquery-intake.datadoghq.com 443
 ```
 
-2. 両方の DBM エンドポイントで、無効な API キーを持つ空のペイロードの投稿をテストします。
-これらのコマンドは HTTP コード `403: Forbidden` で失敗するはずです。
+2. Test posting an empty payload with an invalid API key on both DBM endpoints. 
+These commands should fail with HTTP code `403: Forbidden`. 
 
 ```
 curl -vvv -X POST "https://dbm-metrics-intake.datadoghq.com/api/v2/databasequery" \
@@ -53,19 +54,19 @@ curl -vvv -X POST "https://dbquery-intake.datadoghq.com/api/v2/databasequery" \
 -d "[{}]"
 ```
 
-リクエストの送信に成功し、レスポンスを受け取った場合、レスポンスには `{"status":"error","code":403,"errors":["Forbidden"],...}` が含まれなければなりません。
+The responses should contain `{"status":"error","code":403,"errors":["Forbidden"],...}` if requests were successfully sent and a response was received.
 
-接続障害の一般的な原因には、Datadog のエンドポイントへのアウトバウンドトラフィックを行う[プロキシ設定][7]やファイアウォールなどがあります。プロキシやファイアウォールを使用している場合は、DBM エンドポイント用の IP アドレスが許可されていることを確認します。これらのアドレスは APM ブロックの `https://ip-ranges.`{{< region-param key="dd_site" code="true" >}} で確認できます。
+Some common causes of connection failure include [proxy setups][7] and firewalls, which outbound traffic to Datadog's endpoints. If you have a proxy or firewall, make sure the IP addresses for the DBM endpoints are allowed. These addresses can be found in the APM block at `https://ip-ranges.`{{< region-param key="dd_site" code="true" >}}.
 
-## さらにサポートが必要ですか？
+## Need more help?
 
-問題が解決しない場合は、[Datadog サポート][5]までお問い合わせください。
+If you are still experiencing problems, contact [Datadog Support][5] for help.
 
 
-[1]: /ja/database_monitoring/#getting-started
-[2]: /ja/database_monitoring/setup_mysql/troubleshooting/
-[3]: /ja/database_monitoring/setup_postgres/troubleshooting/
-[4]: /ja/database_monitoring/setup_sql_server/troubleshooting/
-[5]: /ja/help/
-[7]: /ja/agent/configuration/proxy/?tab=linux
-[8]: /ja/database_monitoring/setup_oracle/troubleshooting/
+[1]: /database_monitoring/#getting-started
+[2]: /database_monitoring/setup_mysql/troubleshooting/
+[3]: /database_monitoring/setup_postgres/troubleshooting/
+[4]: /database_monitoring/setup_sql_server/troubleshooting/
+[5]: /help/
+[7]: /agent/configuration/proxy/?tab=linux
+[8]: /database_monitoring/setup_oracle/troubleshooting/

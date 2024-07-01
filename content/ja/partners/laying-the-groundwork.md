@@ -1,179 +1,179 @@
 ---
-description: どのように始めればよいのか、また、最初の段階でどのような重要な決定をすればよいのか。
+title: Laying the groundwork
+description: "How to get started and which key decisions you should make at the very beginning."
 private: true
-title: 基礎固め
 ---
 
-このパートでは、Datadog マネージドサービスプロバイダーとしての旅の最初の段階で行うべき重要な決定事項について説明します。
+This part of the guide covers the key decisions you should make at the very beginning of your journey as a Datadog Managed Service Provider.
 
-## マネージドサービスプロバイダーが考慮すべき主な事項
+## Key considerations for managed service providers
 
-サービスプロバイダーとして Datadog を使い始める方法は、ビジネスモデルや運用モデルによって異なります。
+The way you as a service provider get started with Datadog depends on your business model and your operational model:
 
-- **ビジネスモデル**: クライアントが Datadog にアクセスできるようにするかどうかが、重要なポイントになります。クライアントに Datadog へのアクセスを提供する場合、複数組織のアカウントを設定し、クライアントデータを分離して非公開にします。
-- **運用モデル**: もう 1 つの重要な考慮点は、クライアントベースが多くの同種のクライアントで構成されており、見た目が似ている多くの Datadog 組織のプログラム管理がより重要であるか、またはクライアントの数が少ないか、異種であるかということです。
+- **Business model**: A key question to answer is whether you are planning on giving your clients their own access to Datadog or not. If you do choose to give clients access to Datadog, set up a multi-organization account to keep client data separate and private.
+- **Operational model**: Another key consideration is whether your client base consists of many homogeneous clients, where programmatic management of many similar-looking Datadog organizations is more important, or whether your clients are fewer or more heterogeneous.
 
-以上を踏まえて、Datadog による MSP のセットアップの基礎が整ったことになります。
+Having considered the above, you are ready to lay the groundwork for your MSP setup with Datadog.
 
-## 前提条件
+## Prerequisites
 
-サービスプロバイダーとして Datadog の導入に取り組む前に、DPN ポータルで  [Datadog テクニカルスペシャリストトレーニング][16]を修了しておくことをお勧めします。
+Before working on implementing Datadog as a service provider, it is recommended that you complete the [Datadog Technical Specialist training][16] in the DPN portal.
 
-トレーニングや認定資格の取得により、次の章で取り上げる多くのトピックに慣れ、すぐに始めることができるようになります。
+The training and certification familiarize you with many of the topics covered in the next chapters, enabling you to get started immediately.
 
-## 組織の設定
+## Organization setup
 
-サービスプロバイダーが行うべき重要な決定の 1 つは、「組織」と呼ばれるクライアントの Datadog アカウントをどのように設定するかということです。ユーザーは複数の組織に関連付けることができますが、監視されるリソースは 1 つの組織に結びつきます。最初から正しい組織構造を選択することで、自社とクライアントの価値を迅速に創出することができます。
+One of the key decisions for a service provider to make is how to set up client Datadog accounts, called "organizations" (or "orgs" for short). While users can be associated with more than one organization, monitored resources are tied to a single organization. Choosing the right organization structure from the beginning helps to quickly create value for you and your clients.
 
-### 単一組織または複数組織
+### Single-organization or multiple-organization
 
-Datadog は、1 つの親組織から複数の子組織を管理することが可能です。これは、クライアントが互いのデータにアクセスできないようにするために、MSP が使用する典型的なデプロイモデルです。複数組織の設定では、各クライアントのために 1 つの子組織が作成され、クライアントは自分の子組織にのみアクセスできます。詳しくは、[クライアントの組織のプロビジョニングオプション](#client-org-provisioning-options)を参照してください。
+Datadog offers the possibility of managing multiple child organizations from one parent organization. This is the typical deployment model used by MSPs to prevent clients from having access to each others' data. In a multi-org setup, one child organization is created for each client, and the client is restricted to their own child organization. See [Client org provisioning options](#client-org-provisioning-options) for more information.
 
-クライアントに Datadog へのアクセスを提供する予定がなく、クライアントデータを分離するための厳格な要件がない場合は、単一組織設定を使用します。
+Use a single-org setup if you have no plans to give your clients access to Datadog and do not have a strict requirement to separate client data.
 
-組織管理の詳細については、[複数組織アカウントの管理][1]のドキュメントを参照してください。
+For more information about organization management, see the [Managing Multiple Organization Accounts][1] documentation.
 
-### 開発、テスト、本番で組織を分ける？
+### Separate orgs for dev, test and production?
 
-MSP パートナーからのよくある質問は、開発、テスト、本番環境のリソースを管理するために、Datadog の組織を別々に設定する必要があるかというものです。
+A common question from MSP partners is whether separate Datadog orgs should be set up to manage development, test, and production resources in environments.
 
-Datadog では、開発、テスト、本番のリソースを分けることは推奨していません。推奨されるアプローチは、全てのリソースを同じ Datadog 組織で管理し、タグで環境を区切ることです。詳細については、[タグ付け戦略][20]を参照してください。
+Datadog does not recommend separating development, test, and production resources. The recommended approach is to manage all resources in the same Datadog organization and delineate the environments through tags. For more information, see [Tagging strategy][20].
 
-## クライアントの組織のプロビジョニングオプション
+## Client org provisioning options
 
-クライアントの Datadog 組織を管理している場合、組織のプロビジョニングプロセスを制御し、新規ユーザーのプロビジョニング、アクセス方法の設定、ロールベースのアクセス定義、クライアントの使用管理など、組織内の管理機能を実行したいと思うかもしれません。
+If you are managing your clients' Datadog org(s), you may want to control the org provisioning process and carry out administrative functions in the org such as provisioning new users, setting up access methods, defining role-based access, and managing client usage.
 
-そのためには、以下の作業を行います。
+To do so:
 
-1. [親アカウントの下に子組織を作成する。](#create-a-child-organization-under-your-parent-account)
-2. [新しい子組織の組織 ID を取得する。](#retrieve-the-new-client-orgs-org-id)
-3. [新しい子組織を親アカウントから切り離す。](#separate-the-new-child-organization-from-your-parent-account)
-4. [新しいクライアントの情報を DPN ポータルに登録する。](#register-the-new-client-details-in-the-dpn-portal)
-5. [上のステップ 1 で作成した組織の下に子組織を作成する。](#create-a-new-child-organization-under-the-organization-created-in-step-1-above)
+1. [Create a child organization under your parent account.](#create-a-child-organization-under-your-parent-account)
+2. [Retrieve the new child organization's Org ID.](#retrieve-the-new-client-orgs-org-id)
+3. [Separate the new child organization from your parent account.](#separate-the-new-child-organization-from-your-parent-account)
+4. [Register the new client details in the DPN portal.](#register-the-new-client-details-in-the-dpn-portal)
+5. [Create a child organization under the organization created in Step 1 above.](#create-a-new-child-organization-under-the-organization-created-in-step-1-above)
 
-結果は以下のようになります。
+As a result:
 
-- 新しい親組織が、新しいクライアントの 1 つまたは複数の子組織を管理する目的で作成されます。
-- 新しい親組織とクライアントの子組織が登録され、請求契約に添付されます。
-- 新規ユーザーのプロビジョニング、アクセス方法の構成、ロールベースのアクセス定義、新しいクライアント子組織の使用管理が可能になります。
+- A new parent organization is created for the purpose of managing one or more child organizations for your new client.
+- The new parent organization and client child organization is registered and attached to a billing contract.
+- You can provision new users, configure their access methods, define role-based access, and manage the usage for your new client child organization.
 
-### 親アカウントの下に子組織を作成する
+### Create a child organization under your parent account
 
-このステップには 2 つのオプションがあります。
+There are two options for this step:
 
-- UI を使用する: [複数組織アカウントの管理][1]で説明されているように、[New Organization]をクリックします。
-- APIを使用する: [子組織を作成][18]するためのエンドポイントを使用します。
+- Use the UI: Click "New Organization" as described in [Managing Multiple Organization Accounts][1].
+- Use the API: Use the [Create a child organization][18] endpoint.
 
-### 新しいクライアント組織の組織 ID を取得する
+### Retrieve the new client org's org ID
 
-ブラウザの JavaScript コンソールを開き、次のように入力すれば、ログインしている Datadog 組織の ID を取得できますす。
+You can retrieve the ID of the Datadog org you are logged into by opening the browser's JavaScript console and typing the following:
 
 ```javascript
 JSON.parse(document.querySelector('#_current_user_json').value).org.id
 ```
 
-また、次の JavaScript 関数 を含む `Get Datadog OrgId` という名前のブックマークを作成することもできます。
+You can also create a bookmark named `Get Datadog OrgId` which contains the following JavaScript function:
 
 ```javascript
 javascript:(function() {var orgId = JSON.parse(document.querySelector('#_current_user_json').value).org.id; alert("Datadog OrgId is " + orgId);})();
 ```
 
-これで、Datadog のページにいるときにブックマークをクリックすると、ブラウザのアラートボックスに現在の組織 ID が表示されます。
+Then, when you are on a Datadog page, click on the bookmark to display the current org ID in a browser alert box.
 
-### 新しい子組織を親アカウントから切り離す
+### Separate the new child organization from your parent account
 
-このステップには 2 つのオプションがあります。
-    - セルフサービス: [子組織のスピンオフ][19]のための API エンドポイントを使用して、新しい組織を単独の親組織にする。
-    - サポートを依頼する: パートナーセールスマネージャーに連絡して、親アカウントから新組織を切り離してもらいます。
+There are two options for this step:
+    - Self-service: Use the [Spin-off Child Organization][19] API endpoint to make the new organization a standalone parent org.
+    - Assisted: Contact your Partner Sales Manager to remove the new organization from your parent account.
 
-### 新しいクライアントの情報を DPN ポータルに登録する
+### Register the new client details in the DPN portal
 
-- [DPN ポータル][16]にログインし、商談ダッシュボードの `+Register Deal` をクリックします。
+- Log in to the [DPN portal][16] and click `+Register Deal` on the Deal Dashboard.
 
-- 新しいクライアントの情報 (組織 ID など) を入力して、新しいクライアント組織を登録します。
+- Enter the new client details including the new client organization's Org ID to register the new client org.
 
-### 上のステップ 1 で作成した組織の下に新しい子組織を作成する
+### Create a new child organization under the organization created in Step 1 above
 
-1. [上のステップ 1](#create-a-child-organization-under-your-parent-account) で作成した組織に切り替えます。
-2. [上のステップ 1](#create-a-child-organization-under-your-parent-account) の指示に従って、クライアントの子組織を作成します。
+1. Switch to the org created in [Step 1 above](#create-a-child-organization-under-your-parent-account).
+2. Create a client child organization following the instructions in [Step 1 above](#create-a-child-organization-under-your-parent-account).
 
-## カスタムサブドメイン
+## Custom subdomains
 
-多数の組織を扱う際に Datadog の使用感を向上させるには、カスタムサブドメイン機能を使用します。
+To improve your Datadog experience when handling a large number of organizations, use the custom subdomain feature.
 
-デフォルトでは、どの Datadog 組織も Datadog のアクセスページ、[https://app.datadoghq.com][2] と [https://app.datadoghq.eu][3] からアクセスされるようになっています。ただし、カスタムサブドメインを使用することで、各サブ組織に一意の URL を付与することができます (例: `https://account-a.datadoghq.com`)。
+By default, any Datadog organization is accessed through Datadog's access pages, [https://app.datadoghq.com][2] and [https://app.datadoghq.eu][3]. However, custom subdomains can provide a unique URL for each sub-organization. For example, `https://account-a.datadoghq.com`.
 
-詳しくは、[カスタムサブドメイン][4]をご覧ください。
+For more information, see [Custom sub-domains][4].
 
-## ユーザーロールとカスタムロールベースアクセスコントロール (RBAC)
+## User roles and custom role-based access control (RBAC)
 
-経験上、MSP 内部のユーザーとクライアントのユーザーの両方は、しばしば 3 つの [Datadog のデフォルトロール][5]のいずれかに明確に分類されないことがあります。特定の分野でユーザー権限を制限するには、カスタムロールを作成するのが望ましいです。
+Experience shows that both MSP-internal and client users often do not fall clearly into one of the three [Datadog default roles][5]. It's a good practice to create custom roles to limit user permissions in certain areas.
 
-詳しくは、こちらをご覧ください。
+For more information, see:
 
-- [カスタムロール][6]
-- [ロールベースアクセスコントロール][7]
+- [Custom roles][6]
+- [Role Based Access Control][7]
 
-## シングルサインオン (SSO) に関する考慮点
+## Single sign-on (SSO) considerations
 
-サービスプロバイダーのコンテキストでは、シングルサインオン (SSO) について 2 つの考慮事項があります。
+In a service provider context, you have two considerations for single sign-on (SSO):
 
-- 組織のためのシングルサインオン
-- クライアントのためのシングルサインオン
+- Single sign-on for your organization
+- Single sign-on for your clients
 
-統一された認証メカニズムという明白な利点のほかに、SAML シングルサインオンを使用すると、ユーザのプロビジョニングプロセスが大幅に簡略化されます。SAML を使用すると、ジャストインタイム (JiT) ユーザープロビジョニングを使用できるため、手動またはプログラムによるユーザ作成が不要になります。
+Besides the obvious advantage of a unified authentication mechanism, using SAML Single Sign-On also vastly simplifies the user provisioning process. Using SAML allows you to use just-in-time (JiT) user provisioning, eliminating the need to manually or programmatically create users.
 
-SAML 認証は、Datadog の組織またはサブ組織で有効になります。つまり、サブ組織ごとに異なる SAML プロバイダーを持つことができるのです。しかし、これは、異なる SAML プロバイダーを持つユーザーの 2 つのグループがある場合、それらのユーザーは別々の組織にいなければならないことも意味します。複数組織の設定を計画する際には、SAML 認証について考えておくようにしましょう。
+SAML authentication is enabled on a Datadog organization or sub-org, meaning you can have different SAML providers for different sub-orgs. However, this also means that if you have two groups of users with different SAML providers, those users have to be in separate orgs. Make sure you think about SAML authentication when planning your multi-organization setup.
 
-詳しくは、こちらをご覧ください。
+For more information, see:
 
-- 複数組織アカウントに [SAML を設定する][8]
-- [SAML によるシングルサインオン][9]
+- [Set up SAML][8] for multiple-organization accounts
+- [Single sign-on with SAML][9]
 
-## ユーザーの管理
+## Managing users
 
-### ユーザーの作成
+### User creation
 
-Datadog は、各組織のユーザーを迅速にプロビジョニングするための複数の方法を提供しています。
+Datadog offers multiple ways to quickly provision users for their respective organizations:
 
-- [UI によるユーザーの一括追加][10]
-- [API によるユーザー作成][11]
-- SAML のような認証サービスと[ジャストインタイム (JiT) プロビジョニング][12]を併用する
+- [Add batches of users through the UI][10]
+- [Create users through the API][11]
+- Use an authentication service like SAML together with [Just-in-Time (JiT) provisioning][12]
 
-### ユーザートレーニング
+### User training
 
-Datadog の目標は、簡単で直感的に使えるサービスを提供することです。経験上、ほとんどのユーザーが快適に製品を操作し、学びながら進めています。
+Datadog's goal is to provide a service that is easy and intuitive to use. Experience shows that most users feel comfortable working with the product, and learning as they go along.
 
-ここでは、製品の最も重要な点に関するトレーニングを希望するユーザーにとって有用なリソースを紹介します。
+Here are some useful resources for users that prefer to have training on the most important aspects of the product:
 
-- [Datadog の YouTube チャンネル][13]: Datadog の YouTube チャンネルでは、新機能がリリースされるたびに紹介ビデオが投稿され、ヒントとコツやベストプラクティスに関するビデオもあり、ハイレベルなトレーニングに最適なソースとなっています。
-- [Datadog ラーニングセンター][14]: Datadog ラーニングセンターは、ユーザーがプラットフォームを深く知るための素晴らしい方法です。ラーニングセンターに登録すると、Datadog のサンドボックス環境が自動的に無料でプロビジョニングされ、ユーザーは何かを壊す心配なく製品を使いこなすことができるようになります。
-- [Datadog ブログ][15]: 700 以上のエントリーがあるこのブログは、クライアント環境における主要なサービス、ツール、テクノロジーを監視するための Datadog の使い方や、最新の製品リリースに関する情報を提供する重要な情報源となっています。
-- [Datadog Partner Network (DPN) Enablement Center][16]: DPN を通じて、Datadog のパートナーは、サービスプロバイダーの営業担当者や技術専門家向けの一連のビデオコースにアクセスすることができます。
+- [Datadog's YouTube channel][13]: With introduction videos posted whenever new features are released as well as videos on Tips & Tricks and Best Practices, Datadog's YouTube channel is a great source for high-level training.
+- [Datadog Learning Center][14]: The Datadog Learning Center is a great way for users to get to know the platform in-depth. When signing up for the Learning Center, a Datadog sandbox environment is automatically provisioned free of charge, allowing users to play around with the product without fear of breaking anything.
+- [The Datadog Blog][15]: With over 700 entries, the blog is a key source of information on how to use Datadog to monitor key services, tools, and technologies in your client environments, as well as information on the latest product releases.
+- [Datadog Partner Network (DPN) Enablement Center][16]: Through the DPN, Datadog partners have access to a series of video courses for service provider salespeople and technical professionals.
 
-クライアント向けに独自のトレーニング教材を作成する予定がある場合や、どのようなコンテンツが有用かについて推奨がある場合は、Datadog パートナーの担当者にお問い合わせください。
+Reach out to your Datadog partner representative if you plan on building your own training material for your clients and have any recommendations on what content would be helpful.
 
-## 次のステップ
+## What's next?
 
-次のパート、[データの取り込み][17]では、Datadog にデータを送り込むことに焦点を当てます。
+The next part of the guide, [Data Intake][17], focuses on feeding data into Datadog.
 
-[1]: /ja/account_management/multi_organization/
+[1]: /account_management/multi_organization/
 [2]: https://app.datadoghq.com
 [3]: https://app.datadoghq.eu
-[4]: /ja/account_management/multi_organization/#custom-sub-domains
-[5]: /ja/account_management/rbac/?tab=datadogapplication#datadog-default-roles
-[6]: /ja/account_management/rbac/?tab=datadogapplication#custom-roles
-[7]: /ja/account_management/rbac/
-[8]: /ja/account_management/multi_organization/#set-up-saml
-[9]: /ja/account_management/saml/
-[10]: /ja/account_management/users/#add-new-members-and-manage-invites
-[11]: /ja/api/latest/users/#create-a-user
-[12]: /ja/account_management/saml/#just-in-time-jit-provisioning
+[4]: /account_management/multi_organization/#custom-sub-domains
+[5]: /account_management/rbac/?tab=datadogapplication#datadog-default-roles
+[6]: /account_management/rbac/?tab=datadogapplication#custom-roles
+[7]: /account_management/rbac/
+[8]: /account_management/multi_organization/#set-up-saml
+[9]: /account_management/saml/
+[10]: /account_management/users/#add-new-members-and-manage-invites
+[11]: /api/latest/users/#create-a-user
+[12]: /account_management/saml/#just-in-time-jit-provisioning
 [13]: https://www.youtube.com/user/DatadogHQ
 [14]: https://learn.datadoghq.com/
 [15]: https://www.datadoghq.com/blog/
 [16]: https://partners.datadoghq.com/
-[17]: /ja/partners/data-intake/
-[18]: /ja/api/latest/organizations/#create-a-child-organization
-[19]: /ja/api/latest/organizations/#spin-off-child-organization
-[20]: /ja/partners/data-intake/#tagging-strategy
+[17]: /partners/data-intake/
+[18]: /api/latest/organizations/#create-a-child-organization
+[19]: /api/latest/organizations/#spin-off-child-organization
+[20]: /partners/data-intake/#tagging-strategy

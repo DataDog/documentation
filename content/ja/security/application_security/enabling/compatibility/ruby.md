@@ -1,57 +1,60 @@
 ---
+title: Ruby Compatibility Requirements
+kind: documentation
 code_lang: ruby
-code_lang_weight: 30
-title: Ruby 互換性要件
 type: multi-code-lang
+code_lang_weight: 30
 ---
 
-## ASM の機能サポート
+## Application Security capabilities support
 
-Ruby ライブラリでは、指定されたトレーサーのバージョンで、以下の ASM 機能がサポートされています。
+The following application security capabilities are supported in the Ruby library, for the specified tracer version:
 
-| ASM の機能                   | Ruby トレーサーの最小バージョン |
+| Application Security capability  | Minimum Ruby tracer version |
 | -------------------------------- | ----------------------------|
 | Threat Detection  | 1.9.0  |
 | Threat Protection | 1.11.0 |
-| オープンソースソフトウェア (OSS) の脆弱性管理 | 非対応 |
-| コードレベルの脆弱性管理 (ベータ版) | 非対応 |
+| Customize response to blocked requests | 1.15.0 |
+| Software Composition Analysis (SCA) | 1.11.0 |
+| Code Security        | not supported |
+| Automatic user activity event tracking | 1.14.0 |
+| API Security | 1.15.0 |
 
-Ruby でサポートされるすべての ASM 機能を得るためのトレーサーの最小バージョンは 1.11.0 です。
+The minimum tracer version to get all supported application security capabilities for Ruby is 1.15.0.
 
-<div class="alert alert-info">サポートされていない機能または Ruby フレームワークのサポート追加を希望される場合は、お知らせください！<a href="https://forms.gle/gHrxGQMEnAobukfn7">この短いフォーム</a>に必要事項を記入して、詳細を送信してください。</div>
+<div class="alert alert-info">If you would like to see support added for any of the unsupported capabilities, or for your Ruby framework, let us know! Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send details</a>.</div>
 
-### サポートされるデプロイメントタイプ
-|タイプ | 脅威検知のサポート | OSSの脆弱性管理のサポート |
-| ---   |   ---             |           ----        |
-| Docker | {{< X >}}  |  |
-| Kubernetes | {{< X >}}  | | 
-| AWS ECS | {{< X >}}  | |
-| AWS Fargate | {{< X >}}  | |
-| AWS Lambda |  | | 
+### Supported deployment types
+| Type        | Threat Detection support | Software Composition Analysis |
+|-------------|--------------------------|-------------------------------|
+| Docker      | {{< X >}}                |                               |
+| Kubernetes  | {{< X >}}                |                               |
+| Amazon ECS  | {{< X >}}                |                               |
+| AWS Fargate | {{< X >}}                |                               |
+| AWS Lambda  |                          |                               |
 
-## 言語とフレームワークの互換性
+## Language and framework compatibility
 
 
-**サポートされる Ruby インタプリター**
-Datadog Ruby ライブラリは、以下の Ruby インタプリターの最新 gem をサポートしています。
+**Supported Ruby interpreters**
+The Datadog Ruby library supports the latest gem for the following Ruby interpreters:
 
-- [MRI][2] バージョン 2.1～3.1
+- [MRI][2] versions 2.1 to 3.1
 
-これらは、以下のアーキテクチャでサポートされています。
-- Linux (GNU) x86-64、aarch64
-- Alpine Linux (musl) x86-64、aarch64
-- macOS (Darwin) x86-64、arm64
+These are supported on the following architectures:
+- Linux (GNU) x86-64, aarch64
+- Alpine Linux (musl) x86-64, aarch64
+- macOS (Darwin) x86-64, arm64
 
-### サポートされる Web サーバー
-- 攻撃元の HTTP リクエストの詳細
-- HTTP リクエスト用のタグ (ステータスコード、メソッドなど)
-- アプリケーション内の攻撃フローを確認するための分散トレーシング
+### Supported web servers
+- Attacker source HTTP request details
+- Tags for the HTTP request (status code, method, etc)
+- Distributed Tracing to see attack flows through your applications
 
-##### ASM の機能に関する備考
-- **Vulnerability Management for OSS** はサポートされていません
-- **Vulnerability Management for Code** はサポートされていません
+##### Application Security Capability Notes
+- **Code Security** is not supported
 
-| フレームワーク                | 脅威検知のサポートの有無 | 脅威保護のサポートの有無 |
+| Framework                | Threat Detection supported? | Threat Protection supported? |
 | ------------------------ | ----------- | --------------- |
 | Rack          |  {{< X >}} |  {{< X >}} |
 | Rails         |  {{< X >}} |  {{< X >}} |
@@ -60,44 +63,42 @@ Datadog Ruby ライブラリは、以下の Ruby インタプリターの最新 
 | Unicorn       |  {{< X >}} |  {{< X >}} |
 | Passenger     |  {{< X >}} |  {{< X >}} |
 
-| Framework Web Server    | フレームワークの最小バージョン   |
+| Framework Web Server    | Minimum Framework Version   |
 | ----------------------- | --------------------------- |
 | Rack                    | 1.1                         |
-| Rails                   | 3.2 (Ruby のバージョンにも依存します) |
+| Rails                   | 3.2 (also depends on Ruby version) |
 | Sinatra                 | 1.4                         |
 
-### ネットワーキングフレームワークの互換性
+### Networking framework compatibility
 
-**ネットワーキングのトレーシングでは以下の確認が可能です**
+**Networking tracing provides:**
 
-- アプリケーションの分散トレーシング
-- リクエストベースのブロッキング
+- Distributed tracing through your applications
+- Request-based blocking
 
-##### ASM の機能に関する備考
-- **Vulnerability Management for OSS** はサポートされていません
-- **Vulnerability Management for Code-level** はサポートされていません
+##### Application Security Capability Notes
+- **Code Security** is not supported
 
-| フレームワーク         | 脅威検知のサポートの有無    | 脅威保護のサポートの有無                                              |
+| Framework         | Threat Detection supported?    | Threat Protection supported?                                              |
 |-------------------|-----------------|--------------------------------------------------------------------------|
 | Rack         | {{< X >}} | {{< X >}}  |
 
-<div class="alert alert-info">ご希望のフレームワークが掲載されていない場合は、お知らせください！<a href="https://forms.gle/gHrxGQMEnAobukfn7">この短いフォーム</a>に必要事項を記入して、詳細を送信してください。</div>
+<div class="alert alert-info">If you don't see your framework of choice listed, let us know! Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send details</a>.</div>
 
 
-### データストアの互換性
+### Data store compatibility
 
-**データストアのトレーシングでは以下の確認が可能です**
+**Datastore tracing provides:**
 
-- SQL 攻撃の検知
-- クエリ情報 (サニタイジングされたクエリ文字列など)
-- エラーとスタックトレースの取得
+- SQL attack detection
+- query info (for example, a sanitized query string)
+- error and stacktrace capturing
 
-##### ASM の機能に関する備考
-- **Vulnerability Management for OSS** はサポートされていません
-- **Vulnerability Management for Code-level** はサポートされていません
-- **Threat Protection** は HTTP リクエスト (input) レイヤーでも機能するため、下表に掲載されていなくても、デフォルトですべてのデータベースで機能します。
+##### Application Security Capability Notes
+- **Code Security** is not supported
+- **Threat Protection** also works at the HTTP request (input) layer, and so works for all databases by default, even those not listed in the table below.
 
-| フレームワーク         | 脅威検知のサポートの有無    | 脅威保護のサポートの有無                                              |
+| Framework         | Threat Detection supported?    | Threat Protection supported?                                              |
 |-------------------|-----------------|--------------------------------------------------------------------------|
 | MongoDB        | {{< X >}} |   {{< X >}}    |
 | Active Record        | {{< X >}} |   {{< X >}}    |
@@ -107,6 +108,16 @@ Datadog Ruby ライブラリは、以下の Ruby インタプリターの最新 
 | Sequel        | {{< X >}} |   {{< X >}}    |
 | Elasticsearch     | {{< X >}} |   {{< X >}}    |
 
+### User Authentication Frameworks compatibility
 
-[1]: /ja/tracing/trace_collection/compatibility/ruby/
+**Integrations to User Authentication Frameworks provide:**
+
+- User login events, including the user IDs
+- Account Takeover detection monitoring for user login events
+
+| Framework         | Minimum Framework Version   |
+|-------------------| --------------------------- |
+| Devise            | 3.2.1
+
+[1]: /tracing/trace_collection/compatibility/ruby/
 [2]: https://www.ruby-lang.org/

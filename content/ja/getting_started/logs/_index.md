@@ -1,38 +1,39 @@
 ---
+title: Getting Started with Logs
+kind: documentation
 further_reading:
-- link: https://learn.datadoghq.com/courses/intro-to-log-management
-  tag: ラーニングセンター
-  text: ログ管理の紹介
-- link: https://learn.datadoghq.com/courses/going-deeper-with-logs-processing
-  tag: ラーニングセンター
-  text: ログ処理を極める
-- link: /logs/log_collection/
-  tag: Documentation
-  text: ログの収集とインテグレーション
-- link: /getting_started/tagging/unified_service_tagging
-  tag: ドキュメント
-  text: 統合サービスタグ付けの構成方法を学ぶ
-- link: https://dtdg.co/fe
-  tag: Foundation Enablement
-  text: ログ管理を最適化するためのインタラクティブなセッションに参加できます
-title: ログの使用を開始する
+    - link: "https://learn.datadoghq.com/courses/intro-to-log-management"
+      tag: Learning Center
+      text: Introduction to Log Management
+    - link: "https://learn.datadoghq.com/courses/going-deeper-with-logs-processing"
+      tag: Learning Center
+      text: Going Deeper with Logs Processing
+    - link: /logs/log_collection/
+      tag: Documentation
+      text: Log Collection & Integrations
+    - link: /getting_started/tagging/unified_service_tagging
+      tag: Documentation
+      text: Learn how to configure unified service tagging
+    - link: "https://dtdg.co/fe"
+      tag: Foundation Enablement
+      text: Join an interactive session to optimize your Log Management
 ---
 
-## 概要
+## Overview
 
-Datadog のログ管理 (ログとも呼ばれます) を使用して、サーバー、コンテナ、クラウド環境、アプリケーション、既存のログプロセッサやフォワーダーなど、複数のロギングソースにまたがるログを収集します。従来のロギングでは、コスト効率を維持するために分析・保持するログを選択する必要がありました。Datadog Logging without Limits* では、ログの収集、処理、アーカイブ、探索、監視をログの制限なく行うことができます。
+Use Datadog Log Management, also called logs, to collect logs across multiple logging sources, such as your server, container, cloud environment, application, or existing log processors and forwarders. With conventional logging, you have to choose which logs to analyze and retain to maintain cost-efficiency. With Datadog Logging without Limits*, you can collect, process, archive, explore, and monitor your logs without logging limits.
 
-このページでは、Datadog でログ管理を始めるための方法を説明します。まだお持ちでない方は、[Datadog アカウント][1]を作成してください。
+This page shows you how to get started with Log Management in Datadog. If you haven't already, create a [Datadog account][1].
 
-## ロギングソースを構成する
+## Configure a logging source
 
-ログ管理では、ログエクスプローラーでデータを分析・探索したり、[トレーシング][2]や[メトリクス][3]を接続して Datadog 全体で有益なデータを関連付けたり、取り込んだログを Datadog [Cloud SIEM][4] で使用したりすることができます。Datadog 内でのログのライフサイクルは、ログソースからログを取り込むところから始まります。
+With Log Management, you can analyze and explore data in the Log Explorer, connect [Tracing][2] and [Metrics][3] to correlate valuable data across Datadog, and use ingested logs for Datadog [Cloud SIEM][4]. The lifecycle of a log within Datadog begins at ingestion from a logging source.
 
-{{< img src="/getting_started/logs/getting-started-overview.png" alt="様々なタイプのログコンフィギュレーション">}}
+{{< img src="/getting_started/logs/getting-started-overview.png" alt="Different types of log configurations">}}
 
-### サーバー
+### Server
 
-サーバーから Datadog にログを転送する際には、いくつかの[インテグレーション][5]を使用することができます。インテグレーションは、サーバーから Datadog にログを転送するために、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダの `conf.yaml` ファイル内のログコンフィギュレーションブロックを使用します。
+There are several [integrations][5] available to forward logs from your server to Datadog. Integrations use a log configuration block in their `conf.yaml` file, which is available in the `conf.d/` folder at the root of your Agent's configuration directory, to forward logs to Datadog from your server.
 
 ```yaml
 logs:
@@ -43,115 +44,115 @@ logs:
     sourcecategory: http_web_access
 ```
 
-サーバーからログの収集を開始するには
+To begin collecting logs from a server:
 
-1. まだインストールしていない場合は、お使いのプラットフォームに応じた [Datadog Agent][6] をインストールしてください。
+1. If you haven't already, install the [Datadog Agent][6] based on your platform.
 
-    **注意**: ログ収集には Datadog Agent v6 以降が必要です。
+    **Note**: Log collection requires Datadog Agent v6+.
 
-2. Datadog Agent では、ログの収集はデフォルトで**有効になっていません**。ログ収集を有効にするには、`datadog.yaml` ファイルで `logs_enabled` を `true` に設定してください。
+2. Collecting logs is **not enabled** by default in the Datadog Agent. To enable log collection, set `logs_enabled` to `true` in your `datadog.yaml` file.
 
     {{< agent-config type="log collection configuration" filename="datadog.yaml" collapsible="true">}}
 
-3. [Datadog Agent を再起動][7]します。
+3. Restart the [Datadog Agent][7].
 
-4. Datadog サイトのインテグレーション[起動手順][8]またはカスタムファイルのログ収集手順に従ってください。
+4. Follow the integration [activation steps][8] or the custom files log collection steps on the Datadog site.
 
-    **注**: カスタムファイルからログを収集していて、テールファイル、TCP/UDP、journald、Windows Events の例が必要な場合は、[カスタムログ収集][9]を参照してください。
+    **Note**: If you're collecting logs from custom files and need examples for tail files, TCP/UDP, journald, or Windows Events, see [Custom log collection][9].
 
-### コンテナ
+### Container
 
-Datadog Agent v6 では、Agent がコンテナからログを収集することができるようになりました。それぞれのコンテナ化サービスには、Agent をどこにデプロイまたは実行するか、ログをどのようにルーティングするかなどに関する特定のコンフィギュレーション手順があります。
+As of Datadog Agent v6, the Agent can collect logs from containers. Each containerization service has specific configuration instructions based where the Agent is deployed or run, or how logs are routed.
 
-例えば、[Docker][10] では、Agent を Docker 環境の外部に設置するお客様のホスト上でのインストールと、コンテナ化された Agent を Docker 環境にデプロイするという 2 つの異なるタイプが用意されています。
+For example, [Docker][10] has two different types of Agent installation available: on your host, where the Agent is external to the Docker environment, or deploying a containerized version of the Agent in your Docker environment.
 
-[Kubernetes][11] では、Kubernetes クラスター内で Datadog Agent を動作させる必要があります。ログ収集の設定は DaemonSet spec、Helm チャート、または Datadog Operator を使用して行います。
+[Kubernetes][11] requires that the Datadog Agent run in your Kubernetes cluster, and log collection can be configured using a DaemonSet spec, Helm chart, or with the Datadog Operator.
 
-コンテナサービスからのログ収集を開始するには、[アプリ内の手順][12]に従ってください。
+To begin collecting logs from a container service, follow the [in-app instructions][12].
 
-### クラウド
+### Cloud
 
-AWS、Azure、Google Cloud など、複数のクラウドプロバイダーのログを Datadog に転送することができます。各クラウドプロバイダーにより、それぞれコンフィギュレーション手順が異なります。
+You can forward logs from multiple cloud providers, such as AWS, Azure, and Google Cloud, to Datadog. Each cloud provider has its own set of configuration instructions.
 
-例えば、AWS サービスのログは通常、S3 バケットや CloudWatch ロググループに保存されています。これらのログを購読し、Amazon Kinesis ストリームに転送して、1 つまたは複数の宛先に転送することができます。Datadog は、Amazon Kinesis 配信ストリームのデフォルトの転送先の1つです。
+For example, ​AWS service logs are usually stored in S3 buckets or CloudWatch Log groups. You can subscribe to these logs and forward them to an Amazon Kinesis stream to then forward them to one or multiple destinations. Datadog is one of the default destinations for Amazon Kinesis Delivery streams.​
 
-クラウドサービスからのログ収集を開始するには、[アプリ内の手順][13]に従ってください。
+To begin collecting logs from a cloud service, follow the [in-app instructions][13].
 
-### クライアント
+### Client
 
-Datadog では、SDK やライブラリを使ってクライアントからログを収集することができます。たとえば、`datadog-logs` SDKを使用して、JavaScript クライアントから Datadog にログを送信します。
+Datadog permits log collection from clients through SDKs or libraries. For example, use the `datadog-logs` SDK to send logs to Datadog from JavaScript clients.
 
-クライアントからのログ収集を開始するには、[アプリ内の手順][14]に従ってください。
+To begin collecting logs from a client, follow the [in-app instructions][14].
 
-### その他
+### Other
 
-rsyslog、FluentD、Logstash などの既存のログサービスやユーティリティを使用している場合は、Datadog のプラグインやログ転送オプションをご利用いただけます。
+If you're using existing logging services or utilities such as rsyslog, Fluentd, or Logstash, Datadog offers plugins and log forwarding options.
 
-インテグレーションが表示されない場合は、*other integrations* ボックスに入力すると、そのインテグレーションが利用可能になったときに通知を受け取ることができます。
+If you don't see your integration, you can type it in the *other integrations* box and get notifications for when the integration is available.
 
-クラウドサービスからのログ収集を開始するには、[アプリ内の手順][15]に従ってください。
+To begin collecting logs from a cloud service, follow the [in-app instructions][15].
 
-## ログの探索
+## Explore your logs
 
-ロギングソースを構成すると、ログを[ログエクスプローラー][16]で確認できます。ここでログをフィルタリング・集約・可視化することができます。
+Once a logging source is configured, your logs are available in the [Log Explorer][16]. This is where you can filter, aggregate, and visualize your logs.
 
-例えば、あるサービスから流れてくるログをさらに調査するには、`service` でフィルタリングします。さらに、`ERROR` などの `status` などでフィルタリングし、[パターン別集計][17]を選択すると、サービスのどの部分で最も多くのエラーが記録されているかを確認することができます。
+For example, if you have logs flowing in from a service that you wish to examine further, filter by `service`. You can further filter by `status`, such as `ERROR`, and select [Aggregate by Patterns][17] to see which part of your service is logging the most errors.
 
-{{< img src="/getting_started/logs/error-pattern.png" alt="ログエクスプローラーでのエラーパターンによるフィルタリング">}}
+{{< img src="/getting_started/logs/error-pattern.png" alt="Filtering in the Log Explorer by error pattern">}}
 
-`Source` の `Field` でログを集計し、**トップリスト**の表示オプションに切り替えると、上位のログサービスを確認することができます。`error` のようなソースを選択し、ドロップダウンメニューから **View Logs** を選択します。サイドパネルにはエラーに基づくログが表示されるため、注意が必要なホストやサービスをすぐに確認することができます。
+Aggregate your logs by `Field` of `Source` and switch to the **Top List** visualization option to see your top logging services. Select a source, such as `error`, and select **View Logs** from the dropdown menu. The side panel populates logs based on error, so you quickly see which host and services require attention.
 
-{{< img src="/getting_started/logs/top-list-view.png" alt="ログエクスプローラーのトップリスト">}}
+{{< img src="/getting_started/logs/top-list-view.png" alt="A top list in the Log Explorer">}}
 
-## 次のステップ
+## What's next?
 
-ログソースが設定され、ログがログエクスプローラーに表示されるようになったら、ログ管理の他のいくつかのエリアの探索をはじめることができます。
+Once a logging source is configured, and your logs are available in the Log Explorer, you can begin to explore a few other areas of log management.
 
-### ログコンフィギュレーション
+### Log configuration
 
-* [属性とエイリアス][18]を設定して、ログ環境を統一します。
-* [パイプライン][19]や[プロセッサー][20]を使って、ログの処理方法をコントロールすることができます。
-* Logging without Limits* では、ログの取り込みとインデックス処理を分離しているため、インデックス化するもの、保持するもの、アーカイブするものを選択して[ログを構成[21]することができます。
+* Set [attributes and aliasing][18] to unify your logs environment.
+* Control how your logs are processed with [pipelines][19] and [processors][20].
+* As Logging without Limits* decouples log ingestion and indexing, you can [configure your logs][21] by choosing which to index, retain, or archive.
 
-### ログの相関付け
+### Log correlation
 
-* [ログとトレースを接続][2]して、特定の `env`、`service,`、または `version` に関連する正確なログを表示します。
-* Datadog ですでにメトリクスを使用している場合は、[ログとメトリクスを相関付ける][3]ことで、問題のコンテキストを取得することができます。
+* [Connect logs and traces][2] to exact logs associated with a specific `env`, `service,` or `version`.
+* If you're already using metrics in Datadog, you can [correlate logs and metrics][3] to gain context of an issue.
 
-### ガイド
+### Guides
 
-* [ログ管理のベストプラクティス][22]
-* [Logging without Limits*][23] の詳細
-* [RBAC 設定][24]による機密ログデータの管理
+* [Best practices for Log Management][22]
+* Dive further into [Logging without Limits*][23]
+* Manage sensitive log data with [RBAC settings][24]
 
-## その他の参考資料
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 <br>
-*Logging without Limits は Datadog, Inc. の商標です。
+*Logging without Limits is a trademark of Datadog, Inc.
 
 [1]: https://www.datadoghq.com
-[2]: /ja/tracing/other_telemetry/connect_logs_and_traces/
-[3]: /ja/logs/guide/correlate-logs-with-metrics/
-[4]: /ja/security/cloud_siem/
-[5]: /ja/getting_started/integrations/
-[6]: /ja/agent/
+[2]: /tracing/other_telemetry/connect_logs_and_traces/
+[3]: /logs/guide/correlate-logs-with-metrics/
+[4]: /security/cloud_siem/
+[5]: /getting_started/integrations/
+[6]: /agent/
 [7]: https://github.com/DataDog/datadog-agent/blob/main/docs/agent/changes.md#cli
 [8]: https://app.datadoghq.com/logs/onboarding/server
-[9]: /ja/agent/logs/?tab=tailfiles#custom-log-collection
-[10]: /ja/agent/docker/log/?tab=containerinstallation
-[11]: /ja/agent/kubernetes/log/?tab=daemonset
+[9]: /agent/logs/?tab=tailfiles#custom-log-collection
+[10]: /agent/docker/log/?tab=containerinstallation
+[11]: /agent/kubernetes/log/?tab=daemonset
 [12]: https://app.datadoghq.com/logs/onboarding/container
 [13]: https://app.datadoghq.com/logs/onboarding/cloud
 [14]: https://app.datadoghq.com/logs/onboarding/client
 [15]: https://app.datadoghq.com/logs/onboarding/other
-[16]: /ja/logs/explorer/
-[17]: /ja/logs/explorer/#patterns
-[18]: /ja/logs/log_configuration/attributes_naming_convention/
-[19]: /ja/logs/log_configuration/pipelines/
-[20]: /ja/logs/log_configuration/processors/
-[21]: /ja/logs/log_configuration/
-[22]: /ja/logs/guide/best-practices-for-log-management/
-[23]: /ja/logs/guide/getting-started-lwl/
-[24]: /ja/logs/guide/logs-rbac/
+[16]: /logs/explorer/
+[17]: /logs/explorer/#patterns
+[18]: /logs/log_configuration/attributes_naming_convention/
+[19]: /logs/log_configuration/pipelines/
+[20]: /logs/log_configuration/processors/
+[21]: /logs/log_configuration/
+[22]: /logs/guide/best-practices-for-log-management/
+[23]: /logs/guide/getting-started-lwl/
+[24]: /logs/guide/logs-rbac/

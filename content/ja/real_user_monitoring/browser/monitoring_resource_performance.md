@@ -1,84 +1,85 @@
 ---
+title: Monitoring Resource Performance
+kind: documentation
 further_reading:
-- link: https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/
-  tag: ブログ
-  text: リアルユーザーモニタリング
-- link: /real_user_monitoring/explorer/
-  tag: Documentation
-  text: Datadog でビューを検索する
-- link: /real_user_monitoring/explorer/visualize/
-  tag: Documentation
-  text: イベントへの視覚化の適用
-- link: /real_user_monitoring/platform/dashboards/
-  tag: Documentation
-  text: RUM ダッシュボード
-title: リソースパフォーマンスの監視
+  - link: "https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/"
+    tag: Blog
+    text: Real User Monitoring
+  - link: /real_user_monitoring/explorer/
+    tag: Documentation
+    text: Explore your views within Datadog
+  - link: /real_user_monitoring/explorer/visualize/
+    tag: Documentation
+    text: Apply visualizations on your events
+  - link: /real_user_monitoring/platform/dashboards/
+    tag: Documentation
+    text: RUM Dashboards
 ---
 
-RUM ブラウザ SDK は、すべての RUM ビュー (ページの読み込み) のリソースとアセットを収集します。[XMLHttpRequest][1] (XHR) と Fetch リクエストだけでなく、画像、CSS ファイル、JavaScript アセット、フォントファイルも収集します。RUM リソースイベントは、詳細なタイミングとメタデータとともに、それぞれに対して生成されます。
+The RUM Browser SDK collects resources and assets for every RUM view (page load): [XMLHttpRequest][1] (XHRs) and Fetch requests, but also images, CSS files, JavaScript assets, and font files. A RUM Resource event is generated for each one of them, with detailed timings and metadata.
 
-RUM リソースは、収集時にアクティブな RUM ビューに関連するすべてのコンテキストから継承します。
+RUM Resources inherit from all the context related to the active RUM View at the time of collection.
 
-## RUM リソースを APM トレースにリンクする
+## Link RUM Resources to APM traces
 
-リクエストがスタックのレイヤー間を移動するときに、リクエストをさらに完全にエンドツーエンドで可視化するには、RUM データを対応するバックエンドトレースに接続します。これにより、次のことが可能になります。
+To get even more complete, end-to-end visibility into requests as they move across layers of your stack, connect your RUM data with corresponding backend traces. This enables you to:
 
-* ユーザーが直面するエラーの原因となったバックエンドの問題を特定する。
-* スタック内の問題によってユーザーが影響を受ける範囲を特定する。
-* フレームグラフで完全なエンドツーエンドのリクエストを確認する。これにより、RUM と APM の間をシームレスにナビゲートし、正確なコンテキストで戻ることができます。
+* Locate backend problems that resulted in a user-facing error.
+* Identify the extent to which users are affected by an issue within your stack.
+* See complete end-to-end requests on the flame graphs, allowing you to seamlessly navigate between RUM and APM and back with precise context.
 
-この機能の設定については、[RUM とトレースの接続][2]を参照してください。
+See [Connect RUM and Traces][2] for information about setting up this feature.
 
-{{< img src="real_user_monitoring/browser/resource_performance_graph.png" alt="RUM リソースの APM トレース情報" >}}
+{{< img src="real_user_monitoring/browser/resource_performance_graph.png" alt="APM Trace information for a RUM Resource" >}}
 
-## リソースタイミングとメトリクス
+## Resource timing and metrics
 
-リソースの詳細なネットワークタイミングデータは、Fetch および XHR ネイティブブラウザメソッドと [Performance Resource Timing API][3] から収集されます。
+Detailed network timing data for resources is collected from the Fetch and XHR native browser methods and from the [Performance Resource Timing API][3].
 
-| 属性                              | タイプ           | 説明                                                                                                                               |
+| Attribute                              | Type           | Description                                                                                                                               |
 |----------------------------------------|----------------|-------------------------------------------------------------------------------------------------------------------------------------------|
-| `duration`                             | 数値         | リソースのロードにかかった全時間。                                                                                                   |
-| `resource.size`                | 数値（バイト） | リソースのサイズ。                                                                                                                            |
-| `resource.connect.duration`    | 数値（ns）    | サーバーへの接続が確立されるまでにかかった時間 (connectEnd - connectStart)。                                                           |
-| `resource.ssl.duration`        | 数値（ns）    | TLS ハンドシェイクにかかった時間。最後のリクエストが HTTPS 経由ではなかった場合、このメトリクスは収集されません (connectEnd - secureConnectionStart)。|
-| `resource.dns.duration`        | 数値（ns）    | 最後のリクエストの DNS 名が解決されるまでにかかった時間 (domainLookupEnd - domainLookupStart)。                                              |
-| `resource.redirect.duration`   | 数値（ns）    | 後続の HTTP リクエストにかかった時間 (redirectEnd - redirectStart)。                                                                     |
-| `resource.first_byte.duration` | 数値（ns）    | 応答の最初のバイトを受信するまでにかかった時間 (responseStart - RequestStart)。                                           |
-| `resource.download.duration`   | 数値（ns）    | 応答のダウンロードにかかった時間 (responseEnd - responseStart)。                                                                        |
+| `duration`                             | number         | Entire time spent loading the resource.                                                                                                   |
+| `resource.size`                | number (bytes) | Resource size.                                                                                                                            |
+| `resource.connect.duration`    | number (ns)    | Time spent establishing a connection to the server (connectEnd - connectStart).                                                           |
+| `resource.ssl.duration`        | number (ns)    | Time spent for the TLS handshake. If the last request is not over HTTPS, this metric does not appear (connectEnd - secureConnectionStart).|
+| `resource.dns.duration`        | number (ns)    | Time spent resolving the DNS name of the last request (domainLookupEnd - domainLookupStart).                                              |
+| `resource.redirect.duration`   | number (ns)    | Time spent on subsequent HTTP requests (redirectEnd - redirectStart).                                                                     |
+| `resource.first_byte.duration` | number (ns)    | Time spent waiting for the first byte of response to be received (responseStart - RequestStart).                                           |
+| `resource.download.duration`   | number (ns)    | Time spent downloading the response (responseEnd - responseStart).                                                                        |
 
-**注**: 一部のリソースの詳細なタイミングの収集に問題がある場合は、[リソースタイミングと CORS](#resource-timing-and-cors) を参照してください。
+**Note**: If you are having trouble collecting detailed timing for some resources, see [Resource timing and CORS](#resource-timing-and-cors).
 
-## リソースの属性
+## Resource attributes
 
-| 属性                      | タイプ   | 説明                                                                             |
+| Attribute                      | Type   | Description                                                                             |
 |--------------------------------|--------|-----------------------------------------------------------------------------------------|
-| `resource.type`                | 文字列 | 収集されるリソースのタイプ (`css`、`javascript`、`media`、`XHR`、`image` など)。           |
-| `resource.method`                | 文字列 | HTTP メソッド (`POST`、`GET` など)。           |
-| `resource.status_code`             | 数値 | 応答ステータスコード。                                                               |
-| `resource.url`                     | 文字列 | リソースの URL。                                                                       |
-| `resource.url_host`        | 文字列 | URL のホスト部分。                                                          |
-| `resource.url_path`        | 文字列 | URL のパス部分。                                                          |
-| `resource.url_query` | オブジェクト | クエリパラメーターの key/value 属性として分解された、URL のクエリ文字列部分。 |
-| `resource.url_scheme`      | 文字列 | URL のプロトコル名 (HTTP または HTTPS)。                                            |
-| `resource.provider.name`      | 文字列 | リソースプロバイダー名。デフォルトは `unknown` となります。                                            |
-| `resource.provider.domain`      | 文字列 | リソースプロバイダーのドメイン。                                            |
-| `resource.provider.type`      | 文字列 | リソースプロバイダーのタイプ (`first-party`、`cdn`、`ad`、`analytics` など)。                                            |
+| `resource.type`                | string | The type of resource being collected (for example, `css`, `javascript`, `media`, `XHR`, `image`).           |
+| `resource.method`                | string | The HTTP method (for example `POST`, `GET`).           |
+| `resource.status_code`             | number | The response status code.                                                               |
+| `resource.url`                     | string | The resource URL.                                                                       |
+| `resource.url_host`        | string | The host part of the URL.                                                          |
+| `resource.url_path`        | string | The path part of the URL.                                                          |
+| `resource.url_query` | object | The query string parts of the URL decomposed as query params key/value attributes. |
+| `resource.url_scheme`      | string | The protocol name of the URL (HTTP or HTTPS).                                            |
+| `resource.provider.name`      | string | The resource provider name. Default is `unknown`.                                            |
+| `resource.provider.domain`      | string | The resource provider domain.                                            |
+| `resource.provider.type`      | string | The resource provider type (for example `first-party`, `cdn`, `ad`, `analytics`).                                            |
 
-## サードパーティのリソースを特定する
+## Identify third-party resources
 
-RUM は、リソース URL ホスト部分からリソースプロバイダーの名前とカテゴリを推測します。リソース URL ホストが現在のページ URL ホストと一致する場合、カテゴリは `first party` に設定されます。それ以外の場合、カテゴリは、たとえば `cdn`、`analytics`、または `social` になります。
+RUM infers the name and category of the resource provider from the resource URL host part. If the resource URL host matches the current page URL host, the category is set to `first party`. Otherwise, the category will be `cdn`, `analytics`, or `social` for example.
 
-## リソースタイミングと CORS
+## Resource timing and CORS
 
-[Resource Timing API][3] は、RUM リソースのタイミングを収集するために使用されます。これは、ブラウザがスクリプトに適用するクロスオリジンセキュリティ制限の対象となります。たとえば、Web アプリケーションが `www.example.com` でホストされており、`images.example.com` を介して画像をロードする場合、デフォルトでは、`www.example.com` でホストされてロードされたリソースのタイミングのみが取得されます。 
+The [Resource Timing API][3] is used to collect RUM resource timing. It is subject to the cross-origin security limitations that browsers enforce on scripts. For example, if your web application is hosted on `www.example.com` and it loads your images via `images.example.com`, you will only get timing for resources loaded hosted on `www.example.com` by default.
 
-これを解決するには、クロスオリジンリソースに `Timing-Allow-Origin` HTTP 応答ヘッダーを追加して、CORS の対象となるリソースの拡張データ収集を有効にします。たとえば、任意のオリジンにリソースタイミングへのアクセスを許可するには、`Timing-Allow-Origin: *` を使用します。CORS の詳細については、[MDN Web ドキュメント][4]をご覧ください。
+To resolve this, enable extended data collection for resources subject to CORS by adding the `Timing-Allow-Origin` HTTP response header to your cross-origin resources. For example, to grant access to the resource timing to any origin, use `Timing-Allow-Origin: *`. Find more about CORS on the [MDN Web Docs][4]
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
-[2]: /ja/real_user_monitoring/platform/connect_rum_and_traces
+[2]: /real_user_monitoring/platform/connect_rum_and_traces
 [3]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceResourceTiming
 [4]: https://developer.mozilla.org/en-US/docs/Web/API/Resource_Timing_API/Using_the_Resource_Timing_API#Coping_with_CORS

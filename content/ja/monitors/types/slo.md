@@ -1,45 +1,60 @@
 ---
-aliases:
-- /ja/monitors/create/types/slo/
-title: SLO アラート
+title: SLO Alerts
+aliases :
+  - /monitors/create/types/slo/
+further_reading:
+- link: /service_management/service_level_objectives/burn_rate
+  tag: Documentation
+  text: Burn Rate Alerts
+- link: /service_management/service_level_objectives/error_budget
+  tag: Documentation
+  text: Error Budget Alerts
 ---
 
-## 概要
+<div class="alert alert-info">
+This monitor is available for the Metric-based SLOs, Time Slice SLOs, and Monitor-based SLOs composed of Metric Monitor types (Metric, Integration, APM Metric, Anomaly, Forecast, or Outlier Monitors).
+</div>
 
-[サービスレベル目標][1] (SLO) は、サイト信頼性エンジニアリングツールキットの重要な要素です。SLO を使用し、アプリケーションのパフォーマンスに明確なターゲットを定義するためのフレームワークを整えることで、一貫したカスタマーエクスペリエンを提供したり、プラットフォームの安定性を保ちつつ機能を開発したり、内部および外部ユーザーとのコミュニケーションを改善するために役立てることができます。
+## Overview
 
-## モニターの作成
+[Service Level Objectives][1], or SLOs, are a key part of the site reliability engineering toolkit. SLOs provide a framework for defining clear targets around application performance, which ultimately help teams provide a consistent customer experience, balance feature development with platform stability, and improve communication with internal and external users.
 
-Datadog で [SLO アラート][2]を作成するには、メインナビゲーションで *Monitors --> New Monitor --> SLO* の順に進みます。
+## Monitor creation
 
-### SLO を選択
+To create an [SLO alert][2] in Datadog, use the main navigation: *Monitors --> New Monitor --> SLO*.
 
-[サービスレベル目標][1]を選択します。
+### Select SLO
 
-### アラートの条件を設定する
+Select a [Service Level Objective][1].
 
-2 種類のアラートが用意されています。
+### Set alert conditions
 
-[エラーバジェットアラート][3]は、SLO のエラーバジェットが一定の割合で消費された場合に通知されます。
+Two types of alerts are available:
 
-[バーンレートアラート][4] は、SLO エラーバジェットの消費率が、指定したしきい値を超え、一定期間継続した場合に通知されます。
+[Error budget alerts][3] notify you when a certain percentage of your SLO's error budget has been consumed.
 
-### 通知
+[Burn rate alerts][4] notify you when the rate of consumption of your SLO error budget has exceeded your specified threshold and is sustained for a certain period of time.
 
-**Say what's happening** と **Notify your team** のセクションに関する詳しい説明は、[通知][5] のページを参照してください。
+### Notifications
 
-すべてのモニタータイプで利用可能な[標準テンプレート変数][6]に加えて、SLO アラートは以下の変数もサポートします。
+For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][5] page.
 
-| 変数   | 説明   |
+In addition to the [standard template variables][6] available across all monitor types, SLO alerts also support the following variables: 
+
+| Variable   | Description   |
 | ---------- | ------------- |
-| `{{timeframe}}` | SLO のタイムウィンドウ (7 日、30 日、90 日)。 |
-| `{{value}}` | エラーバジェットの消費割合 (エラーバジェットアラートのみ)。 |
-| `{{short_window_burn_rate}}` | ショートウィンドウで観測可能なバーンレート値 (バーンレートアラートのみ)。 |
-| `{{long_window_burn_rate}}` | ロングウィンドウで観測可能なバーンレート値 (バーンレートアラートのみ)。 |
+| `{{timeframe}}` | The time window of the SLO (7, 30, 90 days). |
+| `{{value}}` | The percentage of error budget consumed (error budget alerts only). |
+| `{{short_window_burn_rate}}` | The burn rate value observed by the short window (burn rate alerts only). |
+| `{{long_window_burn_rate}}` | The burn rate value observed by the long window (burn rate alerts only). |
 
-[1]: /ja/service_management/service_level_objectives/
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /service_management/service_level_objectives/
 [2]: https://app.datadoghq.com/monitors/create/slo
-[3]: /ja/service_management/service_level_objectives/error_budget/
-[4]: /ja/service_management/service_level_objectives/burn_rate/
-[5]: /ja/monitors/notify/#overview
-[6]: /ja/monitors/notify/variables/?tab=is_alert#template-variables
+[3]: /service_management/service_level_objectives/error_budget/
+[4]: /service_management/service_level_objectives/burn_rate/
+[5]: /monitors/notify/#overview
+[6]: /monitors/notify/variables/?tab=is_alert#template-variables

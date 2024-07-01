@@ -1,101 +1,102 @@
 ---
+title: Search RUM Events
+kind: documentation
 further_reading:
 - link: /real_user_monitoring/explorer/group/
-  tag: ドキュメント
-  text: クエリ RUM イベントのグループ化
+  tag: Documentation
+  text: Group queried RUM events
 - link: /real_user_monitoring/explorer/visualize/
-  tag: ドキュメント
-  text: イベントへの視覚化の適用
-title: RUM イベントの検索
+  tag: Documentation
+  text: Apply visualizations on your events
 ---
 
-## 概要
+## Overview
 
-右上の時間範囲を適用した後、RUM エクスプローラーで`key:value`のペアと全文検索でイベントを見つけることができます。
+After applying a time range on the top right, you can find events with `key:value` pairs and a full-text search in the RUM Explorer.
 
-## イベントタイプ
+## Event types
 
-RUM は自動的にイベントをキャプチャしますが、自分でイベントをキャプチャすることも可能です。自動キャプチャされたイベントとカスタムイベントはすべて、[ブラウザ][1]、[iOS][2]、[Android][3]、[React Native][4] アプリケーション用の 6 つのイベントタイプに保存され、インデックス化されて検索可能になります。
+While RUM automatically captures events, you can also capture your own events. All auto-captured and custom events are stored into six event types for [browser][1], [iOS][2], [Android][3], and [React Native][4] applications and indexed to become searchable.
 
-| イベントタイプ | 保存期間 | 説明                                                                                                                                                                                                                                                               |
+| Event Type | Retention | Description                                                                                                                                                                                                                                                               |
 |------------|-----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| セッション    | 30 日   | ユーザーセッションは、ユーザーが Web アプリケーションの閲覧を始めると開始されます。これには、ユーザーに関する高レベルの情報 (ブラウザー、デバイス、ジオロケーションなど) が含まれています。これは、ユーザージャーニー中に収集されたすべての RUM イベントを一意の `session.id` 属性で集約します。 |
-| ビュー       | 30 日   | ビューイベントは、ユーザーが Web アプリケーションのページにアクセスするたびに生成されます。ユーザーが同じページにいる間、リソース、ロングタスク、エラー、アクションのイベントは、`view.id` 属性を使用して関連する RUM ビューにリンクされます。                                   |
-| アクション     | 30 日   | RUM アクションイベントは、ユーザージャーニー中のユーザーインタラクションを追跡し、カスタムユーザーアクションを監視するために手動で送信することができます。                                                                                                                                                  |
-| エラー      | 30 日   | RUM は、ブラウザによって発行されたすべてのフロントエンドエラーを収集します。                                                                                                                                                                                                                 |
-| Resource   | 15 日   | リソースイベントは、Web ページにロードされた画像、XHR、Fetch、CSS、または JS ライブラリに対して生成されます。詳細なロードタイミング情報が含まれています。                                                                                                                          |
-| ロングタスク  | 15 日   | ロングタスクイベントは、メインスレッドを 50 ミリ秒以上ブロックするブラウザ内のすべてのタスクに対して生成されます。                                                                                                                                                                |
+| Session    | 30 days   | A user session begins when a user starts browsing the web application. It contains high-level information about the user (such as browser, device, and geolocation). It aggregates all RUM events collected during the user journey with a unique `session.id` attribute. |
+| View       | 30 days   | A view event is generated each time a user visits a page of the web application. While the user remains on the same page, resource, long-task, error, and action events are linked to the related RUM view with the `view.id` attribute.                                   |
+| Action     | 30 days   | RUM action events track user interactions during a user journey and can be manually sent to monitor custom user actions.                                                                                                                                                  |
+| Error      | 30 days   | RUM collects every frontend error emitted by the browser.                                                                                                                                                                                                                 |
+| Resource   | 15 days   | A resource event is generated for images, XHR, Fetch, CSS, or JS libraries loaded on a webpage. It includes detailed loading timing information.                                                                                                                          |
+| Long Task  | 15 days   | A long task event is generated for any task in the browser that blocks the main thread for more than 50ms.                                                                                                                                                                |
 
-RUM イベントを検索するには、検索バーの左側にあるドロップダウンメニューから、イベントタイプを選択します。
+To search through your RUM events, select an event type from the dropdown menu to the left of the search bar. 
 
-{{< img src="real_user_monitoring/explorer/search/rum-explorer-search-4.png" alt="RUM エクスプローラー" style="width:100%;">}}
+{{< img src="real_user_monitoring/explorer/search/rum-explorer-search-4.png" alt="RUM Explorer" style="width:100%;">}}
 
-## 検索クエリ
+## Search query
 
-特定のアプリケーションで過去 1 日間に実際のユーザーによって生成されたセッションをフィルタリングするには、トップナビゲーションからアプリケーションセレクタを使用し、それから `@session.type:user` のようなカスタムクエリを作成し、時間範囲を `1d` に設定します。
+To filter on sessions produced by a specific application by real users over the past day, use the application selector from the top navigation, then create a custom query such as `@session.type:user` and set the time range to `1d`.
 
-**注:** クエリにファセットを含める場合は、必ず最初にファセットを作成してください。
+**Note:** If you are including a facet in your query, be sure to create the facet first.
 
-### 検索構文
+### Search syntax
 
-RUM イベントの検索とタイムフレームの使用については、[検索構文][5]と[カスタムタイムフレーム][6]を参照してください。
+For more information about searching for RUM events and using time frames, see [Search Syntax][5] and [Custom Time Frames][6].
 
-## ファセットとメジャーの設定
+## Setup facets and measures
 
-すべての RUM イベントには、RUM SDK によって自動的に収集される属性と、[イベントサイドパネル][7]に表示されるユーザー独自の属性が含まれています。
+All RUM events contain attributes, which are automatically collected by the RUM SDKs, and your custom attributes, which are displayed on the [event side panel][7]. 
 
-自動的に収集された属性のほとんどはインデックス化およびファセット化されていますが、カスタムイベントの属性はデフォルトではインデックス化およびファセット化されていません。ファセットまたはメジャーを作成してこれらの属性をインデックス化し、検索や[視覚化][8]でアクセスできるようにします。
+While most automatically collected attributes are indexed and faceted, your custom event attributes are not indexed and faceted by default. Index these attributes by creating a facet or measure to be able to access them in your search and [visualizations][8].
 
-### ファセット
+### Facets
 
-ファセットには、1 つの属性またはタグの個別メンバーがすべて表示されると共に、表示された RUM イベントの数などの基本的な分析が提供されます。ファセットを使用すると、特定の属性に基づきデータセットの絞り込みや切り口の切り替えができます。値を選択すると、検索バーでフィルターが適用されます。
+A facet displays all distinct members of an attribute or tag and provides basic analytics, such as the number of RUM events represented. Facets allow you to pivot or filter your datasets based on a given attribute. Selecting a value applies a filter in the search bar.
 
-{{< img src="real_user_monitoring/explorer/rum-facet-3.png" alt="イベントリストの左側にあるファセットのリスト" style="width:90%;">}}
+{{< img src="real_user_monitoring/explorer/rum-facet-3.png" alt="List of facets to the left of the events list" style="width:90%;">}}
 
-ファセットを作成するには、[イベントサイドパネル][7]で属性を探してクリックします。これにより、サイドパネルの値の属性のセクション ("Country subdivision" など) が作成されます。
+To create a facet, find and click on an attribute in the [event side panel][7]. This creates a section of attributes for the values in the side panel, such as "Country subdivision".
 
-{{< img src="real_user_monitoring/explorer/create_facet.png" alt="ファセットの作成" style="width:40%;">}}
+{{< img src="real_user_monitoring/explorer/create_facet.png" alt="Create a facet" style="width:40%;">}}
 
-また、左側のパネルから **+ Add** をクリックし、ファセットへのパスを入力または選択することで、セッションのメタデータをファセットにすることができます (例: Virginia)。
+You can also take metadata from a session and turn it into a facet (Virginia, for example) by clicking **+ Add** from the left side panel, then entering or selecting a path to the facet.
 
-{{< img src="real_user_monitoring/explorer/create-facet-3.png" alt="ファセット一覧から +Add ボタンでファセットを作成します" style="width:40%;">}}
+{{< img src="real_user_monitoring/explorer/create-facet-3.png" alt="Create a facet using the +Add button from the facet list" style="width:40%;">}}
 
-**Advanced options** をクリックすると、表示名、タイプ、グループ、説明など、ファセットをさらにカスタマイズすることができます。
+You can click **Advanced options** to customize the facet further, such as providing a different display name, type, group, or description.
 
-{{< img src="real_user_monitoring/explorer/create-facet-2.png" alt="新しいファセットの高度なオプション" style="width:40%;">}}
+{{< img src="real_user_monitoring/explorer/create-facet-2.png" alt="Advanced options for the new facet" style="width:40%;">}}
 
-この属性の値は、新しいすべてのビューに保存されます。これらの属性は、検索バー、**Facets** パネル、および[視覚化][8]でアクセスすることができます。
+The value for the attribute is stored across all new views. You can access these attributes in the search bar, the **Facets** panel, and your [visualizations][8].
 
-### メジャー
+### Measures
 
-メジャーは、RUM イベントに含まれる数値を持つ属性です。
+A measure is an attribute with a numerical value contained in your RUM events.
 
-メジャーを作成するには、[イベントサイドパネル][7]で数値属性を見つけてクリックします。
+To create a measure, find and click on a numerical attribute in the [event side panel][7].
 
-{{< img src="real_user_monitoring/explorer/create_measure.png" alt="メジャーの作成" style="width:40%;">}}
+{{< img src="real_user_monitoring/explorer/create_measure.png" alt="Create a measure" style="width:40%;">}}
 
-この属性の値は、新しいすべての RUM イベントに保存されます。これらの属性は、検索バー、**Facets** パネル、および[視覚化][8]でアクセスすることができます。
+The value of this attribute is stored across all new RUM events. You can access these attributes in the search bar, the **Facets** panel, and your [visualizations][8].
 
-{{< img src="real_user_monitoring/explorer/edit_measure.png" alt="メジャーの編集" style="width:40%;">}}
+{{< img src="real_user_monitoring/explorer/edit_measure.png" alt="Edit a measure" style="width:40%;">}}
 
-すべてのメジャーには単位があり、[RUM エクスプローラー][9]および[可視化][8]の列で表示されます。
+Every measure has a unit that is displayed in a column of the [RUM Explorer][9] and in [your visualizations][8]. 
 
-## ファセット検索
+## Search for facets
 
-特定の属性を検索するには、[ファセットとして追加](#facets)し、検索クエリに `@` と入力してください。これは、ファセットを検索することを指定します。
+To search for a specific attribute, [add it as a facet](#facets) and enter `@` in your search query. This specifies that you are searching for a facet.
 
-たとえば、ファセット名が **url** で、**url** の値 `www.datadoghq.com` で絞り込む場合は、`@url:www.datadoghq.com` と入力します。
+For example, if your facet name is **url** and you want to filter on the **url** value `www.datadoghq.com`, enter `@url:www.datadoghq.com`.
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/real_user_monitoring/browser/data_collected/
-[2]: /ja/real_user_monitoring/android/data_collected/
-[3]: /ja/real_user_monitoring/ios/data_collected/
-[4]: /ja/real_user_monitoring/reactnative/
-[5]: /ja/real_user_monitoring/explorer/search_syntax/
-[6]: /ja/dashboards/guide/custom_time_frames
-[7]: /ja/real_user_monitoring/explorer/events/
-[8]: /ja/real_user_monitoring/explorer/visualize#timeseries
-[9]: /ja/real_user_monitoring/explorer/
+[1]: /real_user_monitoring/browser/data_collected/
+[2]: /real_user_monitoring/android/data_collected/
+[3]: /real_user_monitoring/ios/data_collected/
+[4]: /real_user_monitoring/reactnative/
+[5]: /real_user_monitoring/explorer/search_syntax/
+[6]: /dashboards/guide/custom_time_frames
+[7]: /real_user_monitoring/explorer/events/
+[8]: /real_user_monitoring/explorer/visualize#timeseries
+[9]: /real_user_monitoring/explorer/

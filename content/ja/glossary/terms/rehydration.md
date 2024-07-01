@@ -1,6 +1,6 @@
 ---
+title: Rehydration
 core_product:
-- log management
-title: リハイドレート
+  - log management
 ---
-リハイドレートとは、アーカイブされたログが Datadog に呼び戻されることです。
+Rehydration is when archived logs are recalled back into Datadog.

@@ -1,8 +1,8 @@
 ---
+title: finding
 core_product:
-- security
-- cspm
-title: 診断結果
+  - security
+  - csm
 ---
 
-診断結果は、リソースに対するルール評価の主要なプリミティブです。リソースがルールに対して評価されるたびに、**合格**または**不合格**のステータスで結果が生成されます。
+A finding is the primary primitive for a rule evaluation against a resource. Every time a resource is evaluated against a rule, a finding is generated with a **pass** or **fail** status.

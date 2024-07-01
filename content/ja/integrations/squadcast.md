@@ -1,113 +1,113 @@
 ---
-app_id: Squadcast
-app_uuid: cfa65726-33af-42bf-8be3-7abb43147a47
-assets:
-  integration:
-    auto_install: true
-    configuration: {}
-    events:
-      creates_events: false
-    metrics:
-      check: []
-      metadata_path: metadata.csv
-      prefix: Squadcast.
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 10090
-    source_type_name: Squadcast
-author:
-  homepage: https://github.com/DataDog/integrations-extras
-  name: Squadcast
-  sales_email: it@squadcast.com
-  support_email: it@squadcast.com
-categories:
-- アラート設定
-- コラボレーション
-- インシデント
-- 問題追跡
+"app_id": "squadcast"
+"app_uuid": "cfa65726-33af-42bf-8be3-7abb43147a47"
+"assets":
+  "integration":
+    "auto_install": true
+    "configuration": {}
+    "events":
+      "creates_events": false
+    "metrics":
+      "check": []
+      "metadata_path": metadata.csv
+      "prefix": squadcast.
+    "service_checks":
+      "metadata_path": assets/service_checks.json
+    "source_type_id": !!int "10090"
+    "source_type_name": Squadcast
+"author":
+  "homepage": "https://github.com/DataDog/integrations-extras"
+  "name": Squadcast
+  "sales_email": it@squadcast.com
+  "support_email": it@squadcast.com
+"categories":
+- alerting
+- collaboration
+- incidents
+- issue tracking
 - notifications
-dependencies:
-- https://github.com/DataDog/integrations-extras/blob/master/squadcast/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: Squadcast
-integration_id: Squadcast
-integration_title: Squadcast
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: 2.0.0
-name: Squadcast
-public_title: Squadcast
-short_description: Datadog アラートの通知を受け取り Squadcast でアクションを実行します。
-supported_os:
+"custom_kind": "integration"
+"dependencies":
+- "https://github.com/DataDog/integrations-extras/blob/master/squadcast/README.md"
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "squadcast"
+"integration_id": "squadcast"
+"integration_title": "Squadcast"
+"integration_version": ""
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "squadcast"
+"public_title": "Squadcast"
+"short_description": "Get notified of your Datadog alerts & take actions using Squadcast."
+"supported_os":
 - linux
 - windows
 - macos
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Alerting
-  - Category::Collaboration
-  - Category::Incidents
-  - Category::Issue Tracking
-  - Category::Notifications
-  - Supported OS::Linux
-  - Supported OS::Windows
-  - Supported OS::macOS
-  configuration: README.md#Setup
-  description: Datadog アラートの通知を受け取り Squadcast でアクションを実行します。
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Squadcast
+"tile":
+  "changelog": CHANGELOG.md
+  "classifier_tags":
+  - "Category::Alerting"
+  - "Category::Collaboration"
+  - "Category::Incidents"
+  - "Category::Issue Tracking"
+  - "Category::Notifications"
+  - "Supported OS::Linux"
+  - "Supported OS::Windows"
+  - "Supported OS::macOS"
+  "configuration": "README.md#Setup"
+  "description": Get notified of your Datadog alerts & take actions using Squadcast.
+  "media": []
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": Squadcast
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
-## 概要
+## Overview
 
-Datadog-Squadcast インテグレーションを使用して Datadog アラートまたはインシデントを Squadcast に送り、これらに対してのアクションを Squadcast 内で実行します。
+Use the Datadog-Squadcast integration to send Datadog alerts or incidents to Squadcast and seamlessly take actions on them within Squadcast.
 
-Squadcast を Datadog に接続すると、以下のことができます。
-- Datadog からのアラートまたはインシデントのトリガー、ルート、解決
-- アラートまたはインシデントに取り組み、エスカレーションの発生時にポリシーを設定
-- オンコールスケジュールを定義し、オンコールの担当者に関するカスタマイズ可能なリマインダーを設定
+Connect Squadcast to Datadog in order to:
+- Trigger, route, and resolve alerts or incidents from Datadog
+- Tackle alerts or incidents and set up escalation policies as they occur
+- Define on-call schedules and set up customizable reminders of who is on-call
 
-## 計画と使用
+## Setup
 
-**注**: チームレベルの適切な権限を持つ Squadcast ユーザーのみが、Squadcast でサービスを構成できます。サービスを追加するには、Escalation Policy を最低1つ設定する必要があります。
+**Note**: Only Squadcast users with the correct team-level privileges can configure services in Squadcast. At least one escalation policy must be configured before a service can be added.
 
 ### Squadcast
 
-Squadcast で以下の手順に従います。
+Follow these steps in Squadcast:
 
-1. 上部のチームピッカーで **Team** を選択します。
+1. Choose the **Team** from the team-picker on the top.
 
-2. 左側のメインナビゲーションバーから **Services** ページを開きます。
+2. Open the **Services** page from the primary navigation bar on the left.
 
-3. 既存のサービスを選択するか、**Add Service** ボタンをクリックして新しいサービスを作成します。
+3. Choose an existing service, or create a new service by clicking on **Add Service**.
 
-4. **Alert Sources** をクリックして、ドロップダウンメニューから **Datadog** を選択します。
+4. Click on **Alert Sources** and select **Datadog** from the drop-down.
 
-5. 表示された **Datadog Webhook URL** をコピーし、**Done** をクリックします。
+5. Copy the **Datadog Webhook URL** shown and click **Done**.
 
-### Ruby
+### Datadog
 
-Datadog で以下の手順に従います。
+Follow these steps in Datadog:
 
-1. サイドバーから **Integrations** ページを開きます。
+1. Open the **Integrations** page from the sidebar.
 
-2. 検索バーで "webhooks" を検索します。
+2. Use the search bar to search for "webhooks".
 
-3. **Webhooks** タイルが表示されたら、カーソルを合わせて **Install** をクリックします。
+3. Once the **Webhooks** tile appears, hover and click on **Install**.
 
-4. **Configuration** タブに移動し、ページの一番下までスクロールします。
+4. Navigate to the **Configuration** tab and scroll to the bottom of the page.
 
-5. (a) **Name** フィールドで Webhook に名前を付けます。
+5. (a) Give the Webhook a name in the **Name** field.
 
-   (b) **URL** フィールドに Squadcast により提供された **Datadog Webhook URL** を貼り付けます。
+   (b) Paste the **Datadog Webhook URL** provided by Squadcast in the **URL** field.
 
-   (c) 次の JSON をコピーして、**Payload** セクションの下のテキストボックスに貼り付けます。
+   (c) Copy-paste the following JSON in the text box under the **Payload** section.
 
 ![Squadcast Webhook][1]
 
@@ -147,29 +147,30 @@ Datadog で以下の手順に従います。
    }
 ```
 
-6. **Save** をクリックしてサービスのインテグレーションを完了します。
+6. Click on **Save** to complete the service integration.
 
-    詳細については、[Squadcast に関するドキュメント][2]を参照してください。
+    See the [Squadcast documentation][2] for more details.
 
-**注**: Squadcast 用に Webhook を構成したら、Datadog モニターのコンフィギュレーションの **Notify your team** で Webhook をチャンネルとして選択します。
+**Note**: Once the Webhook for Squadcast is configured, select the same as a channel under **Notify your team** in the Datadog monitor's configuration.
 
-## リアルユーザーモニタリング
-### データセキュリティ
+## Data Collected
+### Metrics
 
-Squadcast インテグレーションには、メトリクスは含まれません。
+Squadcast integration does not include any metrics.
 
-### ヘルプ
+### Events
 
-トリガーおよび解決された Squadcast イベントが Squadcast プラットフォームダッシュボードに表示されます。
+Your Squadcast triggered and resolved events display in your Squadcast platform dashboard.
 
-### ヘルプ
+### Service Checks
 
-Squadcast インテグレーションには、サービスのチェック機能は含まれません。
+Squadcast integration does not include any service checks.
 
-## ヘルプ
-ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
+## Troubleshooting
+Need help? Contact [Datadog Support][3].
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/squadcast/images/datadog-webhook.png
 [2]: https://support.squadcast.com/docs/datadog
-[3]: https://docs.datadoghq.com/ja/help/
+[3]: https://docs.datadoghq.com/help/
+

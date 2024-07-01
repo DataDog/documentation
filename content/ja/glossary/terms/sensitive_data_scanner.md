@@ -1,4 +1,4 @@
 ---
-title: センシティブ データ スキャナー
+title: Sensitive Data Scanner
 ---
-機密データスキャナーは、ストリームベースのパターンマッチングサービスで、機密データを識別し、タグ付けし、オプションで冗長化またはハッシュ化することができます。
+The Sensitive Data Scanner is a stream-based, pattern matching service to identify, tag, and optionally redact or hash sensitive data. 

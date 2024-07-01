@@ -1,39 +1,39 @@
 ---
+title: Upgrade the RUM Browser SDK
+kind: guide
 further_reading:
 - link: /real_user_monitoring/explorer
-  tag: ドキュメント
-  text: RUM データを Explorer で確認
-- link: https://www.datadoghq.com/blog/session-replay-datadog/
-  tag: ブログ
-  text: Datadog Session Replay を使用してユーザージャーニーをリアルタイムで表示
-kind: ガイド
-title: RUM ブラウザ SDK のアップグレード
+  tag: Documentation
+  text: Visualize your RUM data in the Explorer
+- link: "https://www.datadoghq.com/blog/session-replay-datadog/"
+  tag: Blog
+  text: Use Datadog Session Replay to view real-time user journeys
 ---
 
-## 概要
+## Overview
 
-Browser RUM SDK および Browser Logs SDK のメジャーバージョン間で移行するには、このガイドに従ってください。SDK の特徴と機能の詳細については、[SDK ドキュメント][26]を参照してください。
+Follow this guide to migrate between major versions of the Browser RUM and Browser Logs SDKs. See [the SDK documentation][26] for details on its features and capabilities.
 
-## v4 から v5 へ
+## From v4 to v5
 
-V5 には、以下の変更点などがあります。
+V5 introduces the following changes and more:
 
-- セッションリプレイの新しい構成とプライバシーのデフォルト
-- フラストレーションシグナルの自動収集
-- パフォーマンスメトリクスの更新
-- SDK パラメーターと API の更新
+- New configurations and privacy defaults for Session Replay
+- Automatic collection of frustration signals
+- Updated performance metrics
+- Updated SDK parameters and APIs
 
-SDK をアップグレードする際には、以下の重大な変更点にご注意ください。変更点は、影響範囲ごとに分類されています。
+Take notice of the below breaking changes as you upgrade your SDK. Changes are grouped by area of impact.
 
-### 一般
+### General
 
-#### SDK 初期化パラメーター
+#### SDK initialization parameters
 
-**実行するアクション**: 非推奨のパラメーターを v5 の新しい同等のパラメーターに置き換えてください。古いパラメーター名は v5 では使用できなくなりました。
+**Action to take**: Replace the deprecated parameters with the new equivalent parameters in v5. The old parameter names are no longer available in v5.
 
-| 非推奨のパラメーター名 (v4 以前) | 新しいパラメーター名 (v5) |
+| Deprecated parameter name (v4 or earlier) | New parameter name (v5) |
 |-------------------------------------------|-------------------------|
-| proxyUrl | プロキシ |
+| proxyUrl | proxy |
 | sampleRate | sessionSampleRate |
 | allowedTracingOrigins | allowedTracingUrls |
 | tracingSampleRate | traceSampleRate |
@@ -41,11 +41,11 @@ SDK をアップグレードする際には、以下の重大な変更点にご�
 | premiumSampleRate | sessionReplaySampleRate |
 | replaySampleRate | sessionReplaySampleRate |
 
-#### 公開 API
+#### Public APIs
 
-**実行するアクション**: 非推奨の API を新しい同等の API に置き換えてください。古いAPIは v5 では使用できなくなりました。
+**Action to take**: Replace the deprecated APIs with the new equivalent APIs. The old APIs are no longer available in v5.
 
-| 非推奨のパラメーター名 (v4 以前) | 新しいパラメーター名 (v5) |
+| Deprecated parameter name (v4 or earlier) | New parameter name (v5) |
 |-------------------------------------------|-------------------------|
 | DD_RUM.removeUser | [DD_RUM.clearUser][7] |
 | DD_RUM.addRumGlobalContext | [DD_RUM.setGlobalContextProperty][8] |
@@ -59,12 +59,12 @@ SDK をアップグレードする際には、以下の重大な変更点にご�
 | logger.addContext | [logger.setContextProperty][14] |
 | logger.removeContext | [logger.removeContextProperty][15] |
 
-#### インテークドメイン
-V5 は、以前のバージョンとは異なるインテークドメインにデータを送信します。
+#### Intake domains
+V5 sends data to different intake domains than previous versions.
 
-**実行するアクション**: [Content Security Policy (CSP)][18] の `connect-src` エントリを更新して、新しいドメインを使用するようにします。
+**Action to take**: Update any [Content Security Policy (CSP)][18] `connect-src` entries to use the new domain.
 
-| Datadog サイト | ドメイン |
+| Datadog site | Domain |
 |--------------|--------|
 | US1 | `connect-src https://browser-intake-datadoghq.com` |
 | US3 | `connect-src https://browser-intake-us3-datadoghq.com` |
@@ -73,10 +73,10 @@ V5 は、以前のバージョンとは異なるインテークドメインに�
 | US1-FED | `connect-src https://browser-intake-ddog-gov.com` |
 | AP1 | `connect-src https://browser-intake-ap1-datadoghq.com` |
 
-#### 信頼できるイベント
-誤ったまたは不正なデータの収集を避けるため、v5 はユーザーのアクションによって生成されたイベントのみをリッスンし、スクリプトによって作成されたイベントは無視します。詳細は[信頼できるイベント][19]を参照してください。
+#### Trusted events
+To avoid collecting incorrect or illegitimate data, v5 only listens to events generated by user actions, ignoring events created by scripts. See [trusted events][19] for more details.
 
-**実行するアクション**: プログラムによるイベントに依存しており、SDK にこれを考慮させたい場合は、以下のように `__ddIsTrusted` 属性を追加します。
+**Action to take**: If you rely on any programmatic events and want them to be taken into account by the SDK, add the `__ddIsTrusted` attribute to them, like below:
 
 ```javascript
 const click = new Event('click')
@@ -84,158 +84,157 @@ click.__ddIsTrusted = true
 document.dispatchEvent(click)
 ```
 
-**実行するアクション**: 例えば自動化された UI テスト環境のように、プログラムによるイベントに大きく依存している場合、`allowUntrustedEvents: true` を設定することで、すべての信頼できないイベントを許可することができます。
+**Action to take**: If you rely heavily on programmatic events, such as in an automated UI test environment, for example, you can allow all untrusted events by setting `allowUntrustedEvents: true`.
 
-#### `beforeSend` の戻り値型
-`beforeSend` コールバック関数はブール値を返すはずです。
+#### `beforeSend` return type
+`beforeSend` callback functions should return a boolean value:
 
 ```javascript
 beforeSend(event: any, context?: any) => boolean
 ```
 
-実装は変更されていません。値が返されない場合でも、イベントは破棄されません。
+The implementation has not changed. If no value is returned, the event is not discarded.
 
-**実行するアクション**: `beforeSend` が `true` を返すとイベントは保持され、`false` を返すと破棄されるようにします。これにより、関連する TypeScript のコンパイルエラーが解決されます。
+**Action to take**: Ensure that `beforeSend` returns `true` to keep the event and `false` to discard it. This resolves related TypeScript compilation errors.
 
-### セッションリプレイ
+### Session Replay
 
-#### セッションリプレイマスキング
+#### Session Replay masking
 
-セッションリプレイのデフォルトのマスキング設定 `defaultPrivacyLevel` が `mask-user-input` から `mask` に変更されました。これにより、セッションリプレイの記録のすべてのデータがデフォルトで隠され、記録の閲覧が安全になります。詳細については、[セッションリプレイブラウザのプライバシーオプション][20]を参照してください。
+The default Session Replay masking setting `defaultPrivacyLevel` has been changed from `mask-user-input` to `mask`. This hides all data in Session Replay recordings by default, making recordings less sensitive to view. For more information, see [Session Replay Browser Privacy Options][20].
 
-**実行するアクション**: センシティブでない HTML コンテンツやユーザーが入力したテキストなど、より多くのマスクされていないデータをセッションリプレイで確認したい場合は、`defaultPrivacyLevel` を `mask-user-input` または `allow` に設定してください。
+**Action to take**: If you want to see more unmasked data in Session Replay, like non-sensitive HTML content or user-entered text, set `defaultPrivacyLevel` to `mask-user-input` or `allow`.
 
-#### セッションリプレイ用にサンプリングされたセッションの自動記録
-[`sessionReplaySampleRate`][21] を使ってセッションリプレイ用にサンプリングされたセッションは、セッションの開始時に自動的に記録されます。これは、[`startSessionReplayRecording()`][22] メソッドを呼び出して記録をキャプチャする必要がないことを意味します。つまり、誤って記録を見逃すことがなくなります。
+#### Automatic recording of sessions sampled for Session Replay
+Sessions that are sampled for Session Replay using [`sessionReplaySampleRate`][21] are automatically recorded at the start of the session. This means that you don't have to call the [`startSessionReplayRecording()`][22] method to capture a recording. In other words, you won't accidentally miss any recordings.
 
-**実行するアクション**: 従来の記録動作を使い続け、記録開始のタイミングをカスタマイズしたい場合、`startSessionReplayRecordingManually` を `true` に設定してください。
+**Action to take**: If you want to continue using the old recording behavior and customize when your recording starts, set `startSessionReplayRecordingManually` to `true`.
 
-#### セッションが記録をキャプチャした場合のみ、セッションリプレイの料金が生じる
-以前のバージョンの SDK では、セッションはサンプリングメカニズムによってセッションリプレイセッションと判断されています。v5 では、セッション中に記録がキャプチャされた場合のみ、セッションはセッションリプレイセッションとしてカウントされます。これにより、セッションリプレイの使用量を追跡しやすくなりました。
+#### Only pay for Session Replay when the session captures a recording
+In previous SDK versions, sessions are determined to be Session Replay sessions through the sampling mechanism. In v5, sessions are only counted as Session Replay sessions if a recording is captured during the session. This makes it easier to track your Session Replay usage.
 
-**アクション不要**: この動作は v5 で自動的に有効になります。
+**No action needed**: This behavior automatically takes effect in v5.
 
-#### セッションリプレイのデフォルトサンプリングレート
-v5 ではデフォルトの `sessionReplaySampleRate` は 100 ではなく 0 です。サンプリングレートを指定しない場合、リプレイは記録されません。
+#### Default Session Replay sampling rate
+In v5, the default `sessionReplaySampleRate` is 0 instead of 100. If you don't include a sampling rate, no replays are recorded.
 
-**実行するアクション**: セッションリプレイを使うには、`sessionReplaySampleRate: 100` (または他のサンプリングレート) で明示的にサンプリングレートを設定してください。
+**Action to take**: To use Session Replay, set a sampling rate explicitly with `sessionReplaySampleRate: 100` (or another sampling rate).
 
 ### RUM
 
-### APM インテグレーション
+### APM integration
 
-OpenTelemetry のサポートと利用を促進するために、デフォルトのプロパゲータタイプは `datadog` に加えて `tracecontext` を含むように変更されました。
+To promote the support and usage of OpenTelemetry, the default propagator types have been changed to include `tracecontext` in addition to `datadog`.
 
-**取るべきアクション**: まだ `allowedTracingUrls` の初期化パラメーターで希望するプロパゲータを指定していない場合は、サーバーの Access-Control-Allow-Headers を構成して `traceparent` ヘッダーも受け付けるようにしてください。詳細は [RUM とトレースの接続][25]を参照してください。
+**Action to take**: If you are not already specifying the desired propagator on the `allowedTracingUrls` initialization parameter, configure your server Access-Control-Allow-Headers to also accept the `traceparent` header. For more information, see [connect RUM and Traces][25].
 
-### セッションプランフィールド
+### Session plan field
 
-セッションリプレイの変更に関連して、`session.plan` フィールドはセッションイベントでのみ使用可能です。
+In relation to Session Replay changes, the `session.plan` field is only available for session events.
 
-**実行するアクション**: セッション以外のイベントに対して、`session.plan` フィールドを除外するように、保存してあるモニターやダッシュボードのクエリを更新してください。
+**Action to take**: Update any monitor or dashboard queries you have saved to exclude the `session.plan` field for non-session events.
 
-#### フラストレーションシグナルを自動収集
-フラストレーションシグナルを含むすべてのユーザーインタラクションを収集するのに、`trackUserInteractions: true` を設定するだけでよくなりました。もう `trackFrustrations` パラメーターを個別に設定する必要はありません。
+#### Frustration signals are collected automatically
+You only need to set `trackUserInteractions: true` to collect all user interactions, including frustration signals. You no longer need to set the `trackFrustrations` parameter separately.
 
-**実行するアクション**: フラストレーションシグナルを追跡するには、`trackUserInteractions: true` を設定します。`trackFrustrations` パラメーターは削除できます。
+**Action to take**: To track frustration signals, set `trackUserInteractions: true`. The `trackFrustrations` parameter can be removed.
 
-#### フリーズしたページでは、リソースの継続時間が省略される
-リソース収集は、例えば、ページがロードされている間にユーザーが別のタブをクリックした場合など、ページがバックグラウンドになったために延長されたリソースの継続時間を省略します。
+#### Resource durations are omitted for frozen pages
+Resource collection omits durations of resources that were extended due to the page going into the background, for example, when the user clicks on a separate tab while the page is loading.
 
-**アクション不要**: この動作は v5 で自動的に有効になります。
+**No action needed**: This behavior automatically takes effect in v5.
 
-#### リソースとロングタスクの追跡
-`replaySampleRate` または `premiumSampleRate` (どちらも非推奨) の代わりに `sessionReplaySampleRate` を使用する場合は、リソースとロングタスクを明示的に構成する必要があります。
+#### Resources and long task tracking
+When using `sessionReplaySampleRate` instead of `replaySampleRate` or `premiumSampleRate` (both deprecated), you must configure resources and long tasks explicitly.
 
-**実行するアクション**: これらのイベントを収集するには、`trackResources` と `trackLongTasks` が `true` に設定されていることを確認してください。
+**Action to take**: To collect these events, ensure that `trackResources` and `trackLongTasks` are set to `true`.
 
-#### リソースメソッド名は大文字
-大文字/小文字 (POST と post) によって同じメソッド名でも異なる値になることを避けるため、メソッド名は一貫して大文字で送信されるようになりました。
+#### Resource method names are in uppercase
+In order to avoid having different values for the same method name depending on the case (POST vs post), method names are now consistently sent in uppercase.
 
-**実行するアクション**: `resource.method` フィールドに大文字の値を使用するように、モニターまたはダッシュボードのクエリを更新してください。
+**Action to take**: Update monitor or dashboard queries to use the `resource.method` field with uppercase values.
 
-#### `beforeSend` アクションイベント
-`beforeSend` API は、収集したイベントのコンテキスト情報へのアクセスを可能にします ([RUM データのリッチ化と制御][23]を参照)。
+#### `beforeSend` action event
+The `beforeSend` API allows access to contextual information of the collected events (see [Enrich and control RUM data][23]).
 
-フラストレーションシグナルの導入により、アクションイベントは複数の DOM イベントに関連付けることができます。
+With the introduction of frustration signals, an action event can be associated with several DOM events.
 
-この更新に伴い、`context.event` 属性は削除され、`context.events` 属性が使用されるようになりました。
+Along with this update, the `context.event` attribute has been removed in favor of the `context.events` attribute.
 
-**実行するアクション**: `beforeSend` コードを更新し、`context.event` の代わりに `context.events` を使用するようにしてください。
+**Action to take**: Update `beforeSend` code to use `context.events` instead of `context.event`.
 
 ```javascript
 beforeSend: (event, context) => {
   if (event.type === 'action' && event.action.type === 'click') {
-    // アクションイベントに関連するブラウザイベントへのアクセス
-    // 更新前、単一のイベント: context.event
-    // 更新後、複数のイベント: context.events
+    // accessing browser events related to the action event
+    // before, single event: context.event
+    // now, multiple events: context.events
   }
 }
 ```
 
-#### フォアグラウンド期間の `beforeSend`
-`view.in_foreground_periods` 属性は SDK から送信されるのではなく、バックエンドから直接計算されます。
+#### `beforeSend` in foreground periods
+The `view.in_foreground_periods` attribute is computed directly from the backend, not sent by the SDK.
 
-**実行するアクション**: 
-`view.in_foreground_periods` を `beforeSend` コードから削除してください。特定のユースケースでこの属性に依存していた場合は、[サポート][24]にお問い合わせください。
+**Action to take**: Remove `view.in_foreground_periods` from `beforeSend` code. If you were relying on this attribute for a specific use case, reach out to [Support][24] for assistance.
 
-#### `beforeSend` パフォーマンスエントリ
-`beforeSend` コンテキストの `performanceEntry` 属性が JSON 表現から更新され、パフォーマンスエントリオブジェクトを直接含むようになりました。
+#### `beforeSend` performance entry
+The `beforeSend` context `performanceEntry` attribute has been updated from the JSON representation to include the performance entry object directly.
 
-エクスポートされた `PerformanceEntryRepresentation` 型は削除され、標準の `PerformanceEntry` 型が使用されるようになりました。
+The exported `PerformanceEntryRepresentation` type has been removed in favor of the standard `PerformanceEntry` type.
 
-**実行するアクション**: `beforeSend` コードでは、`PerformanceEntryRepresentation` 型の代わりに `PerformanceEntry` 型を直接使用してください。
+**Action to take**: In `beforeSend` code, use the `PerformanceEntry` type directly instead of the `PerformanceEntryRepresentation` type.
 
-### ログ
-#### コンソールエラーのプレフィックスを削除
-ログメッセージ中の "`console error:`" プレフィックスが削除されました。この情報は `origin` 属性にあります。
+### Logs
+#### Remove console error prefix
+The "`console error:`" prefix in log messages has been removed. This information can be found in the `origin` attribute.
 
-**実行するアクション**: `"console error:"` プレフィックスを使用しているモニターやダッシュボードのクエリを更新し、代わりに `@origin:console` を使用するようにしてください。
+**Action to take**: Update monitor or dashboard queries using the `"console error:"` prefix to use `@origin:console` instead.
 
-#### `error.origin` の削除
+#### Remove `error.origin`
 
-すべてのログに `origin` 属性が導入されたため、`error.origin` は冗長になり削除されました。
+Since the introduction of the `origin` attribute on all logs, `error.origin` was redundant and has been removed.
 
-**実行するアクション**: `error.origin` を使用しているモニターやダッシュボードのクエリを更新し、代わりに `origin` を使用するようにしてください。
+**Action to take**: Update monitor or dashboard queries using `error.origin` to use `origin` instead.
 
-#### メインロガーの切り離し
-SDK が実行時エラーやネットワーク、レポート、またはコンソールログを収集するとき、SDK はメインロガー (`DD_LOGS.logger`) に固有のコンテキストを追加せず、そのロガーに設定されたレベルやハンドラーを使用しません。
+#### Decouple main logger
+When the SDK collects runtime errors or network, report, or console logs, it does not append the context specific to the main logger (`DD_LOGS.logger`), and it does not use the level or handler set for that logger.
 
-**実行するアクション**: ロガー以外のログを除外するためにメインのロガーレベルに依存していた場合は、代わりに専用の初期化パラメーターを使用してください。
+**Action to take**: If you relied on the main logger level to exclude non-logger logs, use dedicated initialization parameters instead.
 
-**実行するアクション**: ロガー以外のログにコンテキストを追加するためにメインロガーコンテキストに依存していた場合は、代わりにグローバル コンテキストを使用してください。
+**Action to take**: If you relied on the main logger context to add context to non-logger logs, use global context instead.
 
-## v3〜v4
+## From v3 to v4
 
-v4 では、RUM と Logs Browser SDK にいくつかの重大な変更が加えられました。
+Several breaking changes were made to the RUM and Logs Browser SDK with the v4 version.
 
-### 変更
+### Changes
 
-#### 取込先 URL
+#### Intake URLs
 
-RUM Browser SDK のデータ送信先 URL が変更になりました。[コンテンツセキュリティポリシーが最新である][1]ことを確認してください。
+The URLs for where the RUM Browser SDK data is sent has changed. Ensure that your [Content Security Policy is up to date][1].
 
-#### 最小限の Typescript のバージョンサポート
+#### Minimal Typescript version support
 
-RUM Browser SDK v4 は、v3.8.2 より前の TypeScript と互換性がありません。TypeScript を使用する場合は、バージョンが v3.8.2 以上であることを確認してください。
+The RUM Browser SDK v4 is not compatible with TypeScript earlier than v3.8.2. If you use TypeScript, ensure that the version is at least v3.8.2.
 
-#### タグの構文
+#### Tags syntax
 
-`version`、`env`、`service`の初期化パラメーターは、Datadog にタグとして送信されます。RUM Browser SDK は、複数のタグが生成されないように、それらをわずかにサニタイズし、それらの値がタグの要件構文に適合しない場合は警告を表示します。
+The `version`, `env`, and `service` initialization parameters are sent as tags to Datadog. The RUM Browser SDK slightly sanitizes them to ensure that they don't generate multiple tags, and prints a warning if those values don't meet the tag requirements syntax.
 
-#### 初期化パラメーターの型の厳格化
+#### Stricter initialization parameters typing
 
-TypeScript の初期化パラメーターを表す型はより厳しくなっており、以前受け取ったサポートされていないパラメーターは拒否されることがあります。もし型チェックのエラーが発生した場合は、サポートされている初期化パラメーターを指定していることを確認してください。
+TypeScript types representing initialization parameters are stricter and may reject previously accepted unsupported parameters. If you get type-checking errors, ensure you are providing supported initialization parameters.
 
-#### プライバシーオプションの優先順位
+#### Privacy options precedence
 
-複数のプライバシーオプションが同じ要素に指定されている場合、Datadog は最も制限の厳しいオプションを適用し、機密データの予期せぬ漏えいを回避します。例えば、同じ要素に `dd-privacy-allow` と `dd-privacy-hidden` の両方のクラスが指定されている場合、allow の代わりに hidden が適用されます。
+When multiple privacy options are specified on the same element, Datadog applies the most restrictive option to avoid unexpectedly leaking sensitive data. For example, if both `dd-privacy-allow` and `dd-privacy-hidden` classes are specified on the same element, it is hidden instead of allowed.
 
-#### アクション名計算
+#### Action names computation
 
-RUM Browser SDK は、アクション名を計算する際に、`data-dd-action-name` 属性を持つ子要素のテキストを内側のテキストから削除しています。
+When computing action names, the RUM Browser SDK removes text of child elements with the `data-dd-action-name` attribute from inner text.
 
-例えば、次の `container` 要素の場合、以前は計算されるアクション名は `Container sensitive data` でしたが、v4 では計算されるアクション名は `Container` になります。
+For example, for the following `container` element, where previously the computed action name would be `Container sensitive data`, in v4, the computed action name is `Container`:
 ```html
 <div id="container">
   Container
@@ -243,35 +242,35 @@ RUM Browser SDK は、アクション名を計算する際に、`data-dd-action-
 </div>
 ```
 
-### 削除
+### Removals
 
-#### XHR `_datadog_xhr` フィールド
+#### XHR `_datadog_xhr` field
 
-RUM Browser SDK は、以前は `XMLHttpRequest` オブジェクトの内部状態を表す `_datadog_xhr` プロパティを使用していました。このプロパティは、外部で使用されることを想定していなかったため、代替することなく削除されました。
+The RUM Browser SDK previously used a `_datadog_xhr` property on `XMLHttpRequest` objects representing its internal state. This property has been removed without replacement as it wasn't intended to be used externally.
 
-#### `proxyHost` 初期化パラメーター
+#### `proxyHost` initialization parameter
 
-初期化パラメーター `proxyHost` は削除されました。代わりに初期化パラメーター `proxyUrl` を使用してください。
+The `proxyHost` initialization parameter has been removed. Use the `proxyUrl` initialization parameter instead.
 
-#### プライバシーオプション対応
+#### Privacy options support
 
-プライバシーオプションの `input-ignored` と `input-masked` はもはや有効ではありません。代わりに、`mask-user-input` プライバシーオプションを使用してください。
+The privacy options `input-ignored` and `input-masked` are no longer valid. Instead, use the `mask-user-input` privacy option.
 
-具体的には、以下のように置き換えてください。
+Specifically, replace:
 
-* `dd-privacy-input-ignored` および `dd-privacy-input-masked` クラス名を `dd-privacy-mask-user-input` に置き換えます。
-* `dd-privacy="input-masked"` および `dd-privacy="input-ignored"` 属性値を `dd-privacy="mask-user-input"` に置き換えます。
+* `dd-privacy-input-ignored` and `dd-privacy-input-masked` class names with `dd-privacy-mask-user-input`
+* `dd-privacy="input-masked"` and `dd-privacy="input-ignored"` attribute values with `dd-privacy="mask-user-input"`
 
-## v2〜v3
+## From v2 to v3
 
-Browser SDK v3 に [Session Replay][2] が新登場。この大きなバージョンアップデートにより、RUM および Logs Browser SDK が大きく変わります。
+The Browser SDK v3 introduces [Session Replay][2]. With this major version update, several breaking changes were made to the RUM and Logs Browser SDKs.
 
-### 変更
-#### RUM エラー
+### Changes
+#### RUM errors
 
-RUM Browser SDK では、失敗した XHR および Fetch 呼び出しに対する [RUM エラー][3]が作成されなくなります。このような失敗したネットワークリクエストは、依然として [RUM リソース][4]として収集され、ステータスコード属性を含みます。
+The RUM Browser SDK no longer issues [RUM errors][3] for failed XHR and Fetch calls. These failed network requests are still collected as [RUM resources][4], which contain the status code attribute.
 
-引き続き、失敗したネットワークリクエストを RUM エラーとして表示するには、Datadog では [beforeSend API][5] を使用したリソースの傍受、`status_code` プロパティのチェック、そして [addError API][6] を使用したエラーの手動送信をおすすめします。
+To continue seeing the failed network requests as RUM errors, Datadog recommends intercepting the resource with the [beforeSend API][5], checking the `status_code` property, and manually sending an error with the [addError API][6].
 
 ```javascript
 beforeSend: (event) => {
@@ -281,60 +280,60 @@ beforeSend: (event) => {
 }
 ```
 
-#### RUM エラーソース属性
+#### RUM error source attribute
 
-RUM Browser SDK では、[addError API][6] で収集されたエラーのソースの特定ができなくなります。この API で収集されたすべてのエラーは、ソース属性が `custom` に設定されます。[addError API][6] は、コンテキストオブジェクトをその 2 番目のパラメーターとして受容し、エラーに関する追加コンテキストを渡すために使用されます。
+The RUM Browser SDK no longer lets you specify the source of an error collected with the [addError API][6]. All errors collected with this API have their source attribute set to `custom`. The [addError API][6] accepts a context object as its second parameter, which should be used to pass extra context about the error.
 
-### 削除
+### Removals
 #### RUM API
 
-| 旧 API       | 新 API   |
+| Old API       | New API   |
 | ------------- | --------- |
 | addUserAction | addAction |
 
-#### 初期化オプション
+#### Initialization options
 
-| 旧オプション        | 新オプション |
+| Old options        | New options |
 | ------------------ | ----------- |
 | publicApiKey       | clientToken |
 | datacenter         | site        |
-| resourceSampleRate | なし        |
+| resourceSampleRate | NONE        |
 
-#### TypeScript タイプ
+#### TypeScript types
 
-| 旧タイプ                    | 新タイプ                    |
+| Old types                    | New types                    |
 | ---------------------------- | ---------------------------- |
 | RumUserConfiguration         | RumInitConfiguration         |
 | RumRecorderUserConfiguration | RumRecorderInitConfiguration |
 | LogsUserConfiguration        | LogsInitConfiguration        |
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/real_user_monitoring/faq/content_security_policy
-[2]: /ja/real_user_monitoring/session_replay
-[3]: /ja/real_user_monitoring/browser/collecting_browser_errors/
-[4]: /ja/real_user_monitoring/browser/monitoring_resource_performance/
-[5]: /ja/real_user_monitoring/browser/advanced_configuration/?tab=npm#enrich-and-control-rum-data
-[6]: /ja/real_user_monitoring/browser/collecting_browser_errors/?tab=npm#collect-errors-manually
-[7]: /ja/real_user_monitoring/browser/advanced_configuration/?tab=npm#clear-user-session-property
-[8]: /ja/real_user_monitoring/browser/advanced_configuration/?tab=npm#add-global-context-property
-[9]: /ja/real_user_monitoring/browser/advanced_configuration/?tab=npm#remove-global-context-property
-[10]: /ja/real_user_monitoring/browser/advanced_configuration/?tab=npm#read-global-context
-[11]: /ja/real_user_monitoring/browser/advanced_configuration/?tab=npm#replace-global-context
-[12]: /ja/api/latest/rum/
-[13]: /ja/api/latest/rum/
-[14]: /ja/api/latest/rum/
-[15]: /ja/api/latest/rum/
-[16]: /ja/api/latest/rum/
-[17]: /ja/api/latest/rum/
-[18]: /ja/integrations/content_security_policy_logs/?tab=firefox#use-csp-with-real-user-monitoring-and-session-replay
+[1]: /real_user_monitoring/faq/content_security_policy
+[2]: /real_user_monitoring/session_replay
+[3]: /real_user_monitoring/browser/collecting_browser_errors/
+[4]: /real_user_monitoring/browser/monitoring_resource_performance/
+[5]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#enrich-and-control-rum-data
+[6]: /real_user_monitoring/browser/collecting_browser_errors/?tab=npm#collect-errors-manually
+[7]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#clear-user-session-property
+[8]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#add-global-context-property
+[9]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#remove-global-context-property
+[10]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#read-global-context
+[11]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#replace-global-context
+[12]: /api/latest/rum/
+[13]: /api/latest/rum/
+[14]: /api/latest/rum/
+[15]: /api/latest/rum/
+[16]: /api/latest/rum/
+[17]: /api/latest/rum/
+[18]: /integrations/content_security_policy_logs/?tab=firefox#use-csp-with-real-user-monitoring-and-session-replay
 [19]: https://developer.mozilla.org/en-US/docs/Web/API/Event/isTrusted
-[20]: /ja/real_user_monitoring/session_replay/browser/privacy_options/#configuration
-[21]: /ja/real_user_monitoring/guide/sampling-browser-plans/#setup
-[22]: /ja/real_user_monitoring/session_replay/browser/#usage
-[23]: /ja/real_user_monitoring/browser/advanced_configuration/?tab=npm#enrich-and-control-rum-data
-[24]: /ja/help/
-[26]: /ja/real_user_monitoring/browser/
-[25]: /ja/real_user_monitoring/platform/connect_rum_and_traces#opentelemetry-support
+[20]: /real_user_monitoring/session_replay/browser/privacy_options/#configuration
+[21]: /real_user_monitoring/guide/sampling-browser-plans/#setup
+[22]: /real_user_monitoring/session_replay/browser/#usage
+[23]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#enrich-and-control-rum-data
+[24]: /help/
+[26]: /real_user_monitoring/browser/
+[25]: /real_user_monitoring/platform/connect_rum_and_traces#opentelemetry-support

@@ -1,47 +1,48 @@
 ---
-title: データをクエリしてテキストファイルにするまでの手順
-kind: ガイド
+title: Query data to a text file, step by step
+kind: guide
 aliases:
-  - /ja/developers/faq/query-data-to-a-text-file-step-by-step
+  - /developers/faq/query-data-to-a-text-file-step-by-step
 ---
-この記事では、Datadog API を最大限に活用するための環境のセットアップ方法と、[Datadog のパブリック API][1] からローカルファイルにイベント、メトリクス、モニターをプルまたはプッシュする方法について説明します。
 
-前提条件: Python および `pip` がローカルホストにインストールされている必要があります。Windows の場合は、[Windows の Python 2 インストール][2]を参照してください。
+This article explains how to set up an environment to make the most of the Datadog API and includes how to pull or push events, metrics, and monitors from [Datadog's public API][1] to a local file.
 
-1. ターミナルを開きます。
-2. macOS では `pwd`、Windows では `dir` を使用してディレクトリを確認します。
-3. `mkdir <NAME_OF_THE_FOLDER>` で新しいフォルダーを作成します。
-4. `cd <NAME_OF_THE_FOLDER>` でそのフォルダーに移動します。
-5. 手順 3 で作成したフォルダーにスクリプト [api_query_data.py][3] をダウンロードし、以下のように編集します。
+Prerequisite: Python and `pip` installed on your localhost. Windows users see [Installing Python 2 on Windows][2].
 
-    a. `<YOUR_DD_API_KEY>` と `<YOUR_DD_APP_KEY>` を [Datadog API キーとアプリケーションキー][4]に置き換えます。
+1. Open a terminal.
+2. Verify the directory: `pwd` on macOS, `dir` on Windows.
+3. Create a new folder: `mkdir <NAME_OF_THE_FOLDER>`.
+4. Enter the folder: `cd <NAME_OF_THE_FOLDER>`.
+5. Download the script [api_query_data.py][3] to the folder created in step 3 and edit it:
 
-    b. `system.cpu.idle` を、取得するメトリクスに置き換えます。メトリクスのリストは [Datadog メトリクスサマリー][5]に表示されます。
+    a. Replace `<YOUR_DD_API_KEY>` and `<YOUR_DD_APP_KEY>` with your [Datadog API and app keys][4].
 
-    c. オプションで、`*` をホストに置き換えて、データを絞り込みます。ホストのリストは [Datadog インフラストラクチャーリスト][6]に表示されます。
+    b. Replace `system.cpu.idle` with a metric you want to fetch. A list of your metrics is displayed in the [Datadog Metric Summary][5].
 
-    d. オプションで、データを収集する期間を変更します。現在の設定は 3600 秒 (1 時間) です。**注**: この期間をあまり長くし過ぎると、[Datadog API 制限][7]に達してしまう可能性があります。
+    c. Optionally, replace `*` with a host to filter the data. A list of your hosts is displayed in the [Datadog Infrastructure List][6].
 
-    e. ファイルを保存し、場所を確認します。
+    d. Optionally, change the time period to collect the data. The current setting is 3600 seconds (one hour). **Note**: If you run this too aggressively, you may reach the [Datadog API limits][7].
 
-これらの設定が完了したら、以下の手順に従います。
+    e. Save your file and confirm its location.
 
-1. ベストプラクティスとして、Python パッケージをインストールする仮想環境を作成することをお勧めします。仮想環境マネージャーとしては [virtualenv][8] があります。
-2. `virtualenv venv` を実行して、先ほど作成したディレクトリに新しい仮想環境を作成します。
-3. `source venv/bin/activate` (Mac/Linux) または `> \path\to\env\Scripts\activate` (Windows) を実行して、環境を有効化します。
-4. `pip install datadog` を実行して [Datadog API パッケージ][9]をインストールします。これで、Python ファイルが Datadog API とやり取りできるようになります。
-5. ターミナルで、スクリプト `python api_query_data.py` を実行します。
+Once the above is complete:
 
-正常に終了するとターミナルにデータが表示され、`out.txt` という名前のファイルがフォルダーに作成されます。
+1. It is best practice to create a virtual environment to install Python packages into. One virtual environment manager is [virtualenv][8].
+2. Create a new virtual environment in the directory you created earlier by running `virtualenv venv`.
+3. Activate the environment by running `source venv/bin/activate` (Mac/Linux) or `> \path\to\env\Scripts\activate` (Windows).
+4. Run `pip install datadog` to install the [Datadog API package][9]. This enables the Python file to interact with the Datadog API.
+5. In the terminal, run the script: `python api_query_data.py`.
 
-その他の例については、[Datadog API ドキュメント][1]を参照してください。
+If successful, your data displays in the terminal and a file is created in your folder named `out.txt`.
 
-[1]: /ja/api/
+See additional examples in the [Datadog API documentation][1].
+
+[1]: /api/
 [2]: http://docs.python-guide.org/en/latest/starting/install/win
 [3]: /resources/python/api_query_data.py
 [4]: https://app.datadoghq.com/organization-settings/api-keys
 [5]: https://app.datadoghq.com/metric/summary
 [6]: https://app.datadoghq.com/infrastructure
-[7]: /ja/api/#rate-limiting
+[7]: /api/latest/rate-limits/
 [8]: https://virtualenv.pypa.io/en/stable
 [9]: https://pypi.org/project/datadog

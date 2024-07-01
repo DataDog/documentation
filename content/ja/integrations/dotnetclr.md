@@ -1,107 +1,108 @@
 ---
-app_id: dotnetclr
-app_uuid: 2147d078-2742-413e-83eb-58400657de56
-assets:
-  integration:
-    auto_install: true
-    configuration:
-      spec: assets/configuration/spec.yaml
-    events:
-      creates_events: false
-    metrics:
-      check: dotnetclr.memory.time_in_gc
-      metadata_path: metadata.csv
-      prefix: dotnetclr.
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 10069
-    source_type_name: .NET CLR
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com
-  support_email: help@datadoghq.com
-categories:
-- languages
-dependencies:
-- https://github.com/DataDog/integrations-core/blob/master/dotnetclr/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: dotnetclr
-integration_id: dotnetclr
-integration_title: .NET CLR
-integration_version: 2.1.0
-is_public: true
-kind: インテグレーション
-manifest_version: 2.0.0
-name: dotnetclr
-public_title: .NET CLR
-short_description: Dotnetclr の状態を視覚化および監視
-supported_os:
-- windows
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Supported OS::Windows
-  - Category::言語
-  configuration: README.md#Setup
-  description: Dotnetclr の状態を視覚化および監視
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: .NET CLR
+"app_id": "dotnetclr"
+"app_uuid": "2147d078-2742-413e-83eb-58400657de56"
+"assets":
+  "integration":
+    "auto_install": true
+    "configuration":
+      "spec": "assets/configuration/spec.yaml"
+    "events":
+      "creates_events": false
+    "metrics":
+      "check": "dotnetclr.memory.time_in_gc"
+      "metadata_path": "metadata.csv"
+      "prefix": "dotnetclr."
+    "service_checks":
+      "metadata_path": "assets/service_checks.json"
+    "source_type_id": !!int "10069"
+    "source_type_name": ".NET CLR"
+"author":
+  "homepage": "https://www.datadoghq.com"
+  "name": "Datadog"
+  "sales_email": "info@datadoghq.com"
+  "support_email": "help@datadoghq.com"
+"categories":
+- "languages"
+"custom_kind": "integration"
+"dependencies":
+- "https://github.com/DataDog/integrations-core/blob/master/dotnetclr/README.md"
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "dotnetclr"
+"integration_id": "dotnetclr"
+"integration_title": ".NET CLR"
+"integration_version": "2.1.0"
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "dotnetclr"
+"public_title": ".NET CLR"
+"short_description": "Visualize and monitor Dotnetclr states"
+"supported_os":
+- "windows"
+"tile":
+  "changelog": "CHANGELOG.md"
+  "classifier_tags":
+  - "Supported OS::Windows"
+  - "Category::Languages"
+  "configuration": "README.md#Setup"
+  "description": "Visualize and monitor Dotnetclr states"
+  "media": []
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": ".NET CLR"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## 概要
+## Overview
 
-.NET CLR サービスからメトリクスをリアルタイムに取得して、以下のことができます。
+Get metrics from the .NET CLR service in real time to:
 
-- .NET CLR の状態を視覚化および監視できます。
-- .NET CLR のフェイルオーバーとイベントの通知を受けることができます。
+- Visualize and monitor .NET CLR states.
+- Be notified about .NET CLR failovers and events.
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-.NET CLR チェックは [Datadog Agent][1] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
+The .NET CLR check is included in the [Datadog Agent][1] package. No additional installation is needed on your server.
 
-### ブラウザトラブルシューティング
+### Configuration
 
-1. .NET CLR のパフォーマンスデータの収集を開始するには、[Agent の構成ディレクトリ][2]のルートにある `conf.d/` フォルダーの `dotnetclr.d/conf.yaml` ファイルを編集します。使用可能なすべての構成オプションの詳細については、[サンプル dotnetclr.d/conf.yaml][3] を参照してください。
-2. [Agent を再起動します][4]。
+1. Edit the `dotnetclr.d/conf.yaml` file, in the `conf.d/` folder at the root of your [Agent's configuration directory][2] to start collecting your .NET CLR performance data. See the [sample dotnetclr.d/conf.yaml][3] for all available configuration options.
+2. [Restart the Agent][4].
 
-**注**: このチェックのバージョン 1.10.0 以降では、メトリクスの収集に新しい実装を使用し、これには Python 3 が必要です。Python 3 の使用が不可能なホストの場合や、このチェックのレガシーバージョンを使用する場合は、以下の[コンフィグ][5]を参照してください。
+**Note**: Versions 1.10.0 or later of this check use a new implementation for metric collection, which requires Python 3. For hosts that are unable to use Python 3, or if you would like to use a legacy version of this check, refer to the following [config][5].
 
-## 検証
+## Validation
 
-[Agent の status サブコマンドを実行][6]し、Checks セクションで `dotnetclr` を探します。
+[Run the Agent's status subcommand][6] and look for `dotnetclr` under the Checks section.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "dotnetclr" >}}
 
 
-### ヘルプ
+### Service Checks
 
-.NET CLR チェックには、サービスのチェック機能は含まれません。
+The .NET CLR check does not include any service checks.
 
-### ヘルプ
+### Events
 
-.NET CLR チェックには、イベントは含まれません。
+The .NET CLR check does not include any events.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
+Need help? Contact [Datadog support][8].
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest
-[2]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
+[2]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
 [3]: https://github.com/DataDog/integrations-core/blob/master/dotnetclr/datadog_checks/dotnetclr/data/conf.yaml.example
-[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[4]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [5]: https://github.com/DataDog/integrations-core/blob/7.33.x/dotnetclr/datadog_checks/dotnetclr/data/conf.yaml.example
-[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[6]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
 [7]: https://github.com/DataDog/integrations-core/blob/master/dotnetclr/metadata.csv
-[8]: https://docs.datadoghq.com/ja/help/
+[8]: https://docs.datadoghq.com/help/
+

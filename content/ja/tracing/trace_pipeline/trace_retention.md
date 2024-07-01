@@ -1,156 +1,157 @@
 ---
+title: Trace Retention
+kind: documentation
+description: "Learn how to control trace retention with retention filters."
 aliases:
-- /ja/tracing/trace_retention/
-- /ja/tracing/trace_queries/one_percent_flat_sampling/
-description: 保持フィルターでトレース保持を制御する方法について説明します。
+- /tracing/trace_retention/
+- /tracing/trace_queries/one_percent_flat_sampling/
 further_reading:
 - link: /tracing/trace_pipeline/ingestion_mechanisms
-  tag: ドキュメント
-  text: 取り込みのメカニズム
+  tag: Documentation
+  text: Ingestion Mechanisms
 - link: /tracing/trace_pipeline/ingestion_controls/
-  tag: ドキュメント
+  tag: Documentation
   text: Ingestion Controls
 - link: /tracing/trace_pipeline/metrics/
-  tag: ドキュメント
-  text: 使用量メトリクス
-title: トレースの保持
+  tag: Documentation
+  text: Usage Metrics
 ---
 
-{{< img src="tracing/apm_lifecycle/retention_filters.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="保持フィルター" >}}
+{{< img src="tracing/apm_lifecycle/retention_filters.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Retention filters" >}}
 
-Datadog APM では、[トレースの取り込みと 15 日間の保持][1]を完全にカスタマイズすることができます。
+With Datadog APM, [the ingestion and the retention of traces for 15 days][1] are fully customizable.
 
-取り込まれたデータとインデックス化されたデータの量を追跡または監視するには、[使用量メトリクス][2]のドキュメントを参照してください。
+To track or monitor your volume of ingested and indexed data, see the [Usage Metrics][2] documentation.
 
-## Retention Filters
+## Retention filters
 
-スパンが取り込まれた後、アカウントに設定された保持フィルターに従って、一部は 15 日間保持されます。
+After spans have been ingested, some are kept for 15 days according to the retention filters that have been set on your account.
 
-以下の保持フィルターはデフォルトで有効になっており、すべてのサービスやエンドポイント、エラーや高レイテンシーのトレースを確実に可視化することができます。
-- [インテリジェント保持フィルター](#datadog-intelligent-retention-filter)は、環境、サービス、オペレーション、リソースごとに異なるレイテンシー分布のスパンを保持します。
-- `Error Default` 保持フィルターは `status:error` を持つエラースパンをインデックス化します。保持率とクエリは構成することができます。例えば、本番環境のエラーを取得するには、クエリを `status:error, env:production` に設定します。デフォルトでエラーを捕捉したくない場合は、保持フィルターを無効にしてください。
-- Application Security Management を使用している場合、`Application Security` 保持フィルターが有効になります。このフィルタは、アプリケーションセキュリティの影響 (攻撃の試み) があると識別されたトレース内のすべてのスパンの保持を保証します。
-- Synthetic Monitoring を使用している場合、`Synthetics` 保持フィルターが有効になります。デフォルトでは、Synthetic API と Synthetic ブラウザテストから生成されたトレースが利用可能な状態に保たれます。トレースと Synthetic テストを相関付ける方法など、詳細は [Synthetic APM][15] を参照してください。
+The following retention filters are enabled by default to ensure that you keep visibility over all of your services and endpoints, as well as errors and high-latency traces: 
+- The [Intelligent Retention Filter](#datadog-intelligent-retention-filter) retains spans for every environment, service, operation, and resource for different latency distributions.
+- The `Error Default` retention filter indexes error spans with `status:error`. The retention rate and the query are configurable. For example, to capture production errors, set the query to `status:error, env:production`. Disable the retention filter if you do not want to capture the errors by default.
+- The `Application Security` retention filter is enabled if you are using Application Security Management. It ensures the retention of all spans in traces that have been identified as having an application security impact (an attack attempt).
+- The `Synthetics` retention filter is enabled if you are using Synthetic Monitoring. It ensures that traces generated from synthetic API and browser tests remain available by default. See [Synthetic APM][15] for more information, including how to correlate traces with synthetic tests.
 
 
-これらに加えて、サービスのための[カスタムタグベースの保持フィルター](#create-your-own-retention-filter)をいくつでも追加作成し、ビジネスにとって最も重要なデータをキャプチャすることが可能です。
+In addition to these, you can create any number of additional [custom tag-based retention filters](#create-your-own-retention-filter) for your services, to capture the data that matters the most to your business.
 
-**注**: 保持フィルターの作成、削除、変更、有効化、無効化には `apm_retention_filter_write` 権限が必要です。
+**Note**: The permission `apm_retention_filter_write` is required to create, delete, modify, enable, or disable retention filters.
 
-{{< img src="tracing/trace_indexing_and_ingestion/retention_filters/retention_filters.png" style="width:100%;" alt="保持フィルターページ" >}}
+{{< img src="tracing/trace_indexing_and_ingestion/retention_filters/retention_filters.png" style="width:100%;" alt="Retention Filters Page" >}}
 
-Datadog では、[Retention Filters タブ][3]で、すべての保持フィルターのリストを見ることができます。
+In Datadog, on the [Retention Filters tab][3], you can see a list of all retention filters:
 
 Filter Name
-: スパンをインデックス化するために使用される各保持フィルターの名前。
+: The name of each retention filter used to index spans.
 
 Filter Query
-: 各フィルターのタグベースのクエリ。
+: The tag-based query for each filter.
 
 Retention Rate
-: インデックス化されるマッチングスパンの数の 0～100% のパーセンテージを指定します。保持されるスパンは、フィルタークエリに一致するスパンの中から一律に選ばれます。
+: A percentage from 0 to 100% of how many matching spans are indexed. The retained spans are uniformly chosen from among spans that match the filter query.
 
 Spans Indexed
-: 選択した期間中にフィルターによってインデックス化されたスパンの数。
+: The number of spans indexed by the filter over the selected time period.
 
 Last Updated
-: 最後に保持フィルターを変更したユーザーとその日付。
+: The date and user who last modified the retention filter.
 
 Enabled toggle
-: フィルターのオンとオフを切り替えることができます。
+: Allows filters to be turned on and off.
 
-**注**: 保持フィルターリストの順序は、インデックスの動作を変更します。スパンがリストの早い段階で保持フィルタに一致した場合、そのスパンは保持されるか削除されるかのどちらかです。リストの下位にある一致する保持フィルターは、すでに処理されたスパンを捕らえません。
+**Note**: The order of the retention filter list changes indexing behavior. If a span matches a retention filter early in the list, the span is either kept or dropped. Any matching retention filter lower on the list does not catch the already-processed span.
 
-各保持フィルターの `Spans Indexed` 列は、 `datadog.estimated_usage.apm.indexed_spans` メトリクスによって提供され、これを使用してインデックス化されたスパンの使用量を追跡することが可能です。詳細については、[使用量メトリクス][2]を読むか、アカウントで利用できる[ダッシュボード][4]を参照してください。
+The `Spans Indexed` column for each retention filter is powered by the `datadog.estimated_usage.apm.indexed_spans` metric, which you can use to track your indexed span usage. For more information, read [Usage Metrics][2], or see the [dashboard][4] available in your account.
 
-<div class="alert alert-info"><strong>注</strong>: 保持フィルターは、Agent によって収集され、Datadog に送信される (「取り込まれる」) トレースには影響しません。取り込まれるトレースデータの量を変更する唯一の方法は、<a href="/tracing/trace_ingestion/mechanisms">取り込みコントロール</a>を使用することです。</div>
+<div class="alert alert-info"><strong>Note</strong>: Retention filters do not affect what traces are collected by the Agent and sent to Datadog ("ingested"). The only way to change how much tracing data is ingested is through <a href="/tracing/trace_ingestion/mechanisms">ingestion controls</a>.</div>
 
-### Datadog インテリジェント保持フィルター
+### Datadog intelligent retention filter
 
-Datadog のインテリジェント保持フィルターは、サービスに対して常にアクティブであり、何十ものカスタム保持フィルターを作成する必要なく、代表的なトレースの選択を保持します。これは以下で構成されます。
-- [多様性サンプリング](#diversity-sampling)
-- [1% フラットサンプリング](#one-percent-flat-sampling)
+The Datadog intelligent retention filter is always active for your services, and it keeps a representative selection of traces without requiring you to create dozens of custom retention filters. It is composed of: 
+- [Diversity sampling](#diversity-sampling)
+- [One percent flat sampling](#one-percent-flat-sampling)
 
-**注:** [Trace Queries][11] は、インテリジェント保持フィルターによってインデックス化されたデータに基づいています。
+**Note:** [Trace Queries][11] are based on the data indexed by the Intelligent Retention filter.
 
-インテリジェント保持フィルターによってインデックス化されたスパン (多様性サンプリングと 1% フラットサンプリング) は、インデックス化されたスパンの**使用量にカウントされない**ため、**請求に影響を与えません**。
+Spans indexed by the Intelligent retention filter (diversity sampling and 1% flat sampling) are **not counted towards the usage** of indexed spans, and so **do not impact your bill**.
 
-インテリジェント保持フィルターが保持するスパンよりも多くインデックス化したい特定のタグや属性がある場合、[独自の保持フィルターを作成](#create-your-own-retention-filter)してください。
+If there are specific tags or attributes for which you want to index more spans than what the Intelligent Retention filter retains, then [create your own retention filter](#create-your-own-retention-filter).
 
-#### 多様性サンプリング
+#### Diversity sampling
 
-多様性サンプリングは**サービスエントリースパン**をスキャンして、以下を 30 日間保持します。
+Diversity sampling scans through the **service entry spans** and retains for 30 days:
 
-- 環境、サービス、オペレーション、リソースの各組み合わせについて、最大 15 分ごとに少なくとも 1 つのスパン (および関連するトレース)。これにより、トラフィックの少ないエンドポイントでも、[サービス][9]と[リソース][10]のページに常にトレース例を見つけることができるようになっています。
-- 環境、サービス、オペレーション、リソースの組み合わせごとに、`p75`、`p90`、`p95` のパーセンタイルスパン (および関連するトレース) の高レイテンシースパン。
-- エラーの代表的な選択。これにより、エラーの多様性を保証します (たとえば、応答ステータスコード 400、500)。
+- At least one span (and the associated trace) for each combination of environment, service, operation, and resource every 15 minutes at most, to ensure that you can always find example traces in [service][9] and [resource][10] pages, even for low traffic endpoints.
+- High latency spans for the `p75`, `p90`, and `p95` percentile spans (and the associated trace) for each combination of environment, service, operation, and resource.
+- A representative selection of errors, ensuring error diversity (for example, response status code 400s, 500s).
 
-多様性サンプリングでキャプチャされたデータセットは、一様にサンプリングされていません (つまり、全トラフィックを比例的に代表していません)。エラーやレイテンシーの高いトレースに偏ります。
+The set of data captured by diversity sampling is not uniformly sampled (that is, it is not proportionally representative of the full traffic). It is biased towards errors and high latency traces. 
 
-#### 1% フラットサンプリング
+#### One percent flat sampling
 
-フラット 1% サンプリングは[取り込まれたスパン][12]の**均一な 1% サンプル**です。これは `trace_id` に基づいて適用され、同じトレースに属するすべてのスパンが同じサンプリング決定を共有することを意味します。
+The flat 1% sampling is a **uniform 1% sample** of [ingested spans][12]. It is applied based on the `trace_id`, meaning that all spans belonging to the same trace share the same sampling decision.
 
-このサンプリングメカニズムは均一であり、取り込まれたトラフィック全体を比例的に代表します。その結果、短い時間枠でフィルタリングすると、トラフィックの少ないサービスやエンドポイントがそのデータセットから欠落する可能性があります。
+This sampling mechanism is uniform, and it is proportionally representative of the full ingested traffic. As a result, low-traffic services and endpoints might be missing from that dataset if you filter on a short time frame.
 
-### 独自の Retention Filter を作成
+### Create your own retention filter
 
-タグに基づく追加フィルターの作成、変更、無効化により、どのスパンをインデックス化し、15 日間保持するかを決定することができます。各フィルターに一致するスパンの保持する割合を設定します。保持されたスパンは、対応するトレースも保存され、[トレースエクスプローラー][7]で表示すると、完全なトレースが利用可能です。
+Decide which spans are indexed and retained for 15 days by creating, modifying, and disabling additional filters based on tags. Set a percentage of spans matching each filter to be retained. Any span that is retained has its corresponding trace saved as well, and when it is viewed in the [Trace Explorer][7], the complete trace is available.
 
-**注: ** トレースエクスプローラーでタグによる検索を行うには、検索対象のタグを直接含むスパンが保持フィルターによってインデックス化されている必要があります。
+**Note:** In order for you to search by tag in the Trace Explorer, the span that directly contains the searched-upon tag must have been indexed by a retention filter.
 
-{{< img src="tracing/trace_indexing_and_ingestion/retention_filters/create_retention_filter.png" style="width:90%;" alt="保持フィルターの作成">}}
+{{< img src="tracing/trace_indexing_and_ingestion/retention_filters/create_retention_filter.png" style="width:90%;" alt="Create Retention Filter">}}
 
-1. 任意のスパンタグを追加して、保持クエリを定義します。定義されたタグを持つ_すべてのスパン_を保持するか、_[サービスエントリスパン][5]_のみを保持するか (デフォルトで選択)、または_[トレースルートスパン][8]_のみを保持するかを選択します。
-2. インデックス化するこれらのタグに一致するスパンの割合を設定します。
-3. フィルターに名前を付けます。
-4. 新しいフィルターを保存します。
+1. Define the retention query by adding any span tag. Choose to retain _all spans_ with the defined tags, only _[service entry spans][5]_ (selected by default), or only _[trace root spans][8]_.
+2. Set a percentage of spans matching these tags to be indexed.
+3. Name the filter.
+4. Save the new filter.
 
-新しいフィルターを作成したり、既存のフィルターの保持率を編集すると、Datadog はグローバルインデックスボリュームの変化率の推定値を表示します。
+When you create a new filter or edit the retention rate of an existing filter, Datadog displays an estimate of the percentage change in global indexing volume.
 
-フィルターは直列に保持されます。上流フィルターで `resource:POST /hello_world` というタグのスパンを保持している場合、同じタグのスパンを検索する下流フィルターの **Edit** ウィンドウには、上流フィルターによって保持されているため、それらのスパンは表示されません。
+Filters are retained in a serial order. If you have an upstream filter that retains spans with the `resource:POST /hello_world` tag, those spans do not show up in the **Edit** window of a downstream filter that searches for spans with the same tag because they have been retained by the upstream filter.
 
-たとえば、フィルターを作成し、以下のすべてのトレースを保持することができます。
+For example, you can create filters to keep all traces for:
 
-- $100 以上のクレジットカード取引。
-- SaaS ソリューションのミッションクリティカルな機能を使用中の最重要顧客。
-- オンラインのデリバリーサービスアプリケーションの特定バージョン。
+- Credit card transactions over $100.
+- High-priority customers using a mission-critical feature of your SaaS solution.
+- Specific versions of an online delivery service application.
 
-## インデックス化されたスパンのトレース検索と分析
+## Trace search and analytics on indexed spans
 
-### トレースエクスプローラーで
+### In the Trace Explorer
 
-デフォルトでは、カスタム保持フィルター**および**インテリジェント保持フィルターによってインデックス化されたスパンは、トレースエクスプローラーの[集計ビュー][6] (時系列、トップリスト、テーブル) に含まれます。
+By default, spans indexed by custom retention filters **and** the intelligent retention filter are included in the Trace Explorer [aggregated views][6] (timeseries, toplist, table).
 
-しかし、ダイバーシティサンプリングされたデータセットは、**一様にサンプリングされていない** (つまり、全トラフィックを比例して代表していない) ため、エラーや高レイテンシーのトレースに偏っているので、クエリに `-retained_by:diversity_sampling` クエリパラメーターを追加すれば、これらのスパンをこれらの表示から除外することができます。
+However, because the diversity-sampled set of data is **not uniformly sampled** (that is, not proportionally representative of the full traffic) and is biased towards errors and high latency traces, you can choose to exclude these spans from these views by adding `-retained_by:diversity_sampling` query parameter to the query.
 
-`retained_by` 属性は、すべての保持されたスパンに存在します。その値は次の通りです。
-- スパンがダイバーシティサンプリング ([インテリジェント保持フィルター](#datadog-intelligent-retention-filter)の一部) によってキャプチャされた場合は `retained_by:diversity_sampling`。
-- スパンが 1% フラットサンプリングでインデックス化された場合は、`retained_by:flat_sampled`。
-- スパンが、`Error Default` や `Application Security Default` などの[タグベースの保持フィルター](#create-your-own-retention-filter)によってキャプチャされていた場合は、`retained_by:retention_filter`。
+The `retained_by` attribute is present on all retained spans. Its value is: 
+- `retained_by:diversity_sampling` if the span was captured by [diversity sampling] (part of the [Intelligent retention filter](#datadog-intelligent-retention-filter)).
+- `retained_by:flat_sampled` if the span was indexed by the 1% flat sampling.
+- `retained_by:retention_filter` if the span was captured by any [tag-based retention filter](#create-your-own-retention-filter), including the `Error Default` and `Application Security Default` retention filters.
 
-{{< img src="tracing/trace_indexing_and_ingestion/retention_filters/trace_analytics.png" style="width:100%;" alt="ファセットで保持" >}}
+{{< img src="tracing/trace_indexing_and_ingestion/retention_filters/trace_analytics.png" style="width:100%;" alt="Retained By facet" >}}
 
-### ダッシュボード、ノートブック、モニターで
+### In dashboards, notebooks, and monitors
 
-上記の理由により、インテリジェント保持フィルターによってインデックス化されたスパンは、ダッシュボードやノートブックに表示される APM クエリから**除外**され、トレース分析モニター評価から**除外**されます。
+For the reasons explained above, spans indexed by the intelligent retention filter are **excluded** from APM queries that appear in dashboards and notebooks, and also **excluded** from trace analytics monitor evaluation.
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/tracing/trace_pipeline/
-[2]: /ja/tracing/trace_pipeline/metrics
+[1]: /tracing/trace_pipeline/
+[2]: /tracing/trace_pipeline/metrics
 [3]: https://app.datadoghq.com/apm/traces/retention-filters
 [4]: https://app.datadoghq.com/dash/integration/30337/app-analytics-usage
-[5]: /ja/tracing/glossary/#service-entry-span
-[6]: /ja/tracing/trace_explorer/?tab=timeseriesview#indexed-spans-search-with-15-day-retention
-[7]: /ja/tracing/trace_explorer/?tab=listview#indexed-spans-search-with-15-day-retention
-[8]: /ja/tracing/glossary/#trace-root-span
-[9]: /ja/tracing/services/service_page/
-[10]: /ja/tracing/services/resource_page/
-[11]: /ja/tracing/trace_explorer/trace_queries
-[12]: /ja/tracing/trace_pipeline/ingestion_controls/
-[13]: /ja/tracing/trace_explorer/
-[14]: /ja/monitors/types/apm/?tab=traceanalytics
-[15]: /ja/synthetics/apm/
+[5]: /tracing/glossary/#service-entry-span
+[6]: /tracing/trace_explorer/?tab=timeseriesview#indexed-spans-search-with-15-day-retention
+[7]: /tracing/trace_explorer/?tab=listview#indexed-spans-search-with-15-day-retention
+[8]: /tracing/glossary/#trace-root-span
+[9]: /tracing/services/service_page/
+[10]: /tracing/services/resource_page/
+[11]: /tracing/trace_explorer/trace_queries
+[12]: /tracing/trace_pipeline/ingestion_controls/
+[13]: /tracing/trace_explorer/
+[14]: /monitors/types/apm/?tab=traceanalytics
+[15]: /synthetics/apm/

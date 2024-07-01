@@ -1,133 +1,133 @@
 ---
+title: APM Monitor
+description: "Compare an APM metric to a user defined threshold"
 aliases:
-- /ja/monitors/monitor_types/app_analytics
-- /ja/monitors/monitor_types/trace_search
-- /ja/tracing/guide/resource_monitor/
-- /ja/monitors/monitor_types/apm
-- /ja/monitors/create/types/apm/
-description: APM メトリクスをユーザー定義しきい値と比較する
+  - /monitors/monitor_types/app_analytics
+  - /monitors/monitor_types/trace_search
+  - /tracing/guide/resource_monitor/
+  - /monitors/monitor_types/apm
+  - /monitors/create/types/apm/
 further_reading:
 - link: /monitors/notify/
-  tag: ドキュメント
-  text: モニター通知の設定
+  tag: Documentation
+  text: Configure your monitor notifications
 - link: /monitors/downtimes/
-  tag: ドキュメント
-  text: モニターをミュートするダウンタイムのスケジュール
+  tag: Documentation
+  text: Schedule a downtime to mute a monitor
 - link: /monitors/manage/status/
-  tag: ドキュメント
-  text: モニターステータスを確認
-title: APM モニター
+  tag: Documentation
+  text: Check your monitor status
 ---
 
-## 概要
+## Overview
 
-APM メトリクスモニターは、通常の[メトリクスモニター][1]と同様に機能しますが、APM 専用に作られたコントロールを備えています。このモニターを使用して、サービスレベルのヒット数、エラー数、そしてさまざまなレイテンシー測定値についてアラートを受信します。
+APM metric monitors work like regular [metric monitors][1], but with controls tailored specifically to APM. Use these monitors to receive alerts at the service level on hits, errors, and a variety of latency measures.
 
-Analytics モニターを使用すると、APM データを経時的に視覚化し、Indexed Span に基づきアラート設定を行えます。たとえば、Analytics モニターを使用して、リクエストの遅延急増に関するアラートを受信できます。
+Analytics monitors allow you to visualize APM data over time and set up alerts based on Indexed Spans. For example, use an Analytics monitor to receive alerts on a spike in slow requests.
 
-## モニターの作成
+## Monitor creation
 
-Datadog で [APM モニター][2]を作成するには、メインナビゲーションで *Monitors --> New Monitor --> APM* の順に進みます。
+To create an [APM monitor][2] in Datadog, use the main navigation: *Monitors --> New Monitor --> APM*.
 
-**APM Metrics** または **Trace Analytics** モニターのいずれかを選択します。
+Choose between an **APM Metrics** or a **Trace Analytics** monitor:
 
 {{< tabs >}}
 {{% tab "APM Metrics" %}}
 
-### モニタースコープを選択
+### Select monitor scope
 
-ドロップダウンメニューで[プライマリタグ][1]、[サービス][2]、[リソース][3]を選択します。
+Choose your [primary tags][1], [service][2], and [resource][3] from the dropdown menus.
 
-### アラートの条件を設定する
+### Set alert conditions
 
-**しきい値**または**異常検知**アラートを選択します。
+Choose a **Threshold** or **Anomaly** alert:
 
-#### しきい値アラート
+#### Threshold alert
 
-メトリクスがしきい値を超えるとアラートがトリガーされます。
+An alert is triggered whenever a metric crosses a threshold.
 
-* `Requests per second`、`Errors per second`、`Apdex`、`Error rate`、`Avg latency`、`p50 latency`、`p75 latency`、`p90 latency`、または `p99 latency` 
-* が `above`、`above or equal to`、`below`、または `below or equal to` の時にアラートを作成
-* アラートのしきい値 `<数値>`
-* 警告のしきい値 `<数値>`
-* 過去 `5 minutes`、`15 minutes`、`1 hour` など、または `custom` に 1 分～48 時間の値を設定します。
+* Alert when `Requests per second`, `Errors per second`, `Apdex`, `Error rate`, `Avg latency`, `p50 latency`,  `p75 latency`,  `p90 latency`, or  `p99 latency`
+* is `above`, `above or equal to`, `below`, or `below or equal to`
+* Alert threshold `<NUMBER>`
+* Warning threshold `<NUMBER>`
+* over the last `5 minutes`, `15 minutes`, `1 hour`, etc. or `custom` to set a value between 1 minute and 48 hours.
 
-#### 異常検知アラート
+#### Anomaly alert
 
-メトリクスが予想されるパターンから逸脱するとアラートがトリガーされます。
+An alert is triggered whenever a metric deviates from an expected pattern.
 
-* `Requests per second`、`Errors per second`、`Apdex`、`Error rate`、`Avg latency`, `p50 latency`、  `p75 latency`、 `p90 latency`、または `p99 latency` の場合
-* `<ALERT_THRESHOLD>`%, `<WARNING_THRESHOLD>`% の時にアラート
-* 値が`<数値>`偏差、`above or below`、`above`、または`below`
-* 過去 `5 minutes`、`15 minutes`、`1 hour` などの間の予測、または `custom` に 1 分～48 時間の値を設定します。
+* For `Requests per second`, `Errors per second`, `Apdex`, `Error rate`, `Avg latency`, `p50 latency`,  `p75 latency`,  `p90 latency`, or  `p99 latency`
+* Alert when `<ALERT_THRESHOLD>`%, `<WARNING_THRESHOLD>`%
+* of values are `<NUMBER>` deviations `above or below`, `above`, or `below`
+* the prediction during the past `5 minutes`, `15 minutes`, `1 hour`, etc. or `custom` to set a value between 1 minute and 48 hours.
 
-#### 高度なアラート条件
+#### Advanced alert conditions
 
-高度なアラートオプション (データなし、評価遅延など) の詳細な手順については、[モニターコンフィギュレーション][4]ページを参照してください。メトリクス固有のオプションのフルデータウィンドウについては、[メトリクスモニター][5]ページを参照してください。
+For detailed instructions on the advanced alert options (no data, evaluation delay, etc.), see the [Monitor configuration][4] page. For the metric-specific option full data window, see the [Metric monitor][5] page.
 
-[1]: /ja/tracing/guide/setting_primary_tags_to_scope/#environment
-[2]: /ja/tracing/services/service_page/
-[3]: /ja/tracing/services/resource_page/
-[4]: /ja/monitors/configuration/#advanced-alert-conditions
-[5]: /ja/monitors/types/metric/#data-window
+[1]: /tracing/guide/setting_primary_tags_to_scope/#environment
+[2]: /tracing/services/service_page/
+[3]: /tracing/services/resource_page/
+[4]: /monitors/configuration/#advanced-alert-conditions
+[5]: /monitors/types/metric/#data-window
 {{% /tab %}}
 {{% tab "Trace Analytics" %}}
 
-<div class="alert alert-info"><strong>注</strong>: デフォルトでは、1 アカウントあたり 1000 トレース分析モニターという制限があります。この制限に引っかかっている場合、<a href="/monitors/configuration/?tab=thresholdalert#alert-grouping">マルチアラート</a>の使用を検討するか、<a href="/help/">サポートにお問い合わせ</a>ください。</div>
+<div class="alert alert-info"><strong>Note</strong>: There is a default limit of 1000 Trace Analytics monitors per account. If you are encountering this limit, consider using <a href="/monitors/configuration/?tab=thresholdalert#alert-grouping">multi alerts</a>, or <a href="/help/">Contact Support</a>.</div>
 
-### 検索クエリを定義する
+### Define the search query
 
-1. [トレース検索][1]と同じロジックを使用して検索クエリを構築します。
-2. トレース数、[ファセット][2]、または[計測][3]のモニタリングを選択します。
-    * **Monitor over a trace count**: 検索バーを使用し（任意）、ファセットまたはメジャーを選択**しません**。選択されたタイムフレームで Datadog がログ数を評価し、それをしきい値の条件と比較します。
-    * **Monitor over a facet or measure**: ファセットが選択されている場合、モニターはファセットの `Unique value count` でアラートを作成します。計測が選択されている場合は、メトリクスモニターと同様、集計を選択する必要があります（`min`、`avg`、`sum`、`median`、`pc75`、`pc90`、 `pc95`、`pc98`、`pc99`、または `max`）。
-3. 複数のディメンションでトレースをグループ化する (オプション):
-   クエリに一致するすべてのトレースは、最大 4 つのファセットの値に基づいてグループに集約されます。
-4. アラート設定のグループ化方法を構成します（任意）:
-    * **シンプルアラート**: すべての報告元ソースを集計します。集計値が設定条件を満たすと、アラートを 1 件受信します。</br>
-    クエリに `group by` があり、シンプルアラートモードを選択した場合、1 つまたは複数のグループの値がしきい値に違反すると **1 つ**のアラートが表示されます。この戦略を選択すると、通知ノイズを減らすことができます。
-    * **Multi-Alert**: グループパラメーターに従い、複数のアラートを各ソースに適用します。アラートイベントは、設定された条件を満たすと各グループに生成されます。たとえば、クエリを `@resource.name` でグループ化すると、スパンのエラー率が高い場合にリソースごとに個別のアラートを受信することができます。
+1. Construct a search query using the same logic as a [trace search][1].
+2. Choose to monitor over a trace count, [facet][2], or [measure][3]:
+    * **Monitor over a trace count**: Use the search bar (optional) and do **not** select a facet or measure. Datadog evaluates the number of traces over a selected time frame and then compares it to the threshold conditions.
+    * **Monitor over a facet or measure**: If a facet is selected, the monitor alerts over the `Unique value count` of the facet. If a measure is selected, then it's similar to a metric monitor, and aggregation needs to be selected (`min`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, `pc98`, `pc99`, or `max`).
+3. Group traces by multiple dimensions (optional):
+    All traces matching the query are aggregated into groups based on the value of up to four facets.
+4. Configure the alerting grouping strategy (optional):
+    * **Simple alert**: Simple alerts aggregate over all reporting sources. You receive one alert when the aggregated value meets the set conditions.</br>
+    If the query has a `group by` and you select simple alert mode, you get **one** alert when one or multiple groups' values breach the threshold. This strategy may be selected to reduce notification noise.
+    * **Multi alert**: Multi alerts apply the alert to each source according to your group parameters. An alerting event is generated for each group that meets the set conditions. For example, you could group a query by `@resource.name` to receive a separate alert for each resource when a span's error rate is high.
 
-{{< img src="monitors/monitor_types/apm/define-the-search-query.png" alt="検索クエリの定義" style="width:80%;" >}}
+{{< img src="monitors/monitor_types/apm/define-the-search-query.png" alt="Define the search query" style="width:80%;" >}}
 
-**注:*** Analytics モニターは、[カスタム保持フィルター][6]によって保持されたスパンに基づいてのみ作成できます (インテリジェント保持フィルターではありません)。
+**Note:** Analytics monitors can only be created based on spans retained by [custom retention filters][6] (not the intelligent retention filter).
 
-### アラート条件を選択
+### Select alert conditions
 
-* クエリ結果が `above`、`above or equal to`、`below`、`below or equal to` の場合にトリガーします。
-* 過去 `5 minutes`、`15 minutes`、`1 hour` のしきい値、または `custom` に 5 分～48 時間の値を設定します。
-* アラートのしきい値: `<数値>`
-* 警告のしきい値: `<数値>`
+* Trigger when the query result is `above`, `above or equal to`, `below`, or `below or equal to`.
+* The threshold during the last `5 minutes`, `15 minutes`, `1 hour`, or `custom` to set a value between 5 minutes and 48 hours.
+* Alert threshold: `<NUMBER>`
+* Warning threshold: `<NUMBER>`
 
-#### データなしと下限のアラート
+#### No data and below alerts
 
-特定のクエリにマッチするグループがスパンの送信を停止したときに通知を受け取るには、条件を `1` より下に設定します。これは、グループに対して定義された評価期間内にモニタークエリに一致するスパンがない場合に通知されます。
+To receive a notification when a group matching a specific query stops sending spans, set the condition to below `1`. This notifies you when no spans match the monitor query in the defined evaluation period for the group.
 
-#### 高度なアラート条件
+#### Advanced alert conditions
 
-高度なアラートオプション (評価遅延など) の詳細な手順については、[モニターコンフィギュレーション][5]ページを参照してください。
+For detailed instructions on the advanced alert options (evaluation delay, etc.), see the [Monitor configuration][5] page.
 
-[1]: /ja/tracing/trace_explorer/query_syntax/#search-bar
-[2]: /ja/tracing/trace_explorer/query_syntax/#facet-search
-[3]: /ja/tracing/trace_explorer/query_syntax/#numerical-values
-[4]: /ja/tracing/glossary/#indexed-span
-[5]: /ja/monitors/configuration/#advanced-alert-conditions
-[6]: /ja/tracing/trace_pipeline/trace_retention/#create-your-own-retention-filter
+[1]: /tracing/trace_explorer/query_syntax/#search-bar
+[2]: /tracing/trace_explorer/query_syntax/#facet-search
+[3]: /tracing/trace_explorer/query_syntax/#numerical-values
+[4]: /tracing/glossary/#indexed-span
+[5]: /monitors/configuration/#advanced-alert-conditions
+[6]: /tracing/trace_pipeline/trace_retention/#create-your-own-retention-filter
 {{% /tab %}}
 {{< /tabs >}}
 
-### 通知
+### Notifications
 
-**Say what's happening** と **Notify your team** のセクションに関する詳しい説明は、[通知][3]のページを参照してください。
+For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][3] page.
 
-**注**: サービスレベルモニターについては[サービスカタログ][4]および[サービスマップ][5]で、リソースレベルモニターについては個々のリソースページで確認できます (サービス詳細ページに記載されている特定のリソースをクリックすると、アクセスできます)。
+**Note**: Find service level monitors on the [Service Catalog][4] and on the [Service Map][5], and find resource level monitors on the individual resource pages (you can get there by clicking on the specific resource listed on the a service details page).
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/monitors/types/metric/
+[1]: /monitors/types/metric/
 [2]: https://app.datadoghq.com/monitors#create/apm
-[3]: /ja/monitors/notify/
+[3]: /monitors/notify/
 [4]: https://app.datadoghq.com/services
 [5]: https://app.datadoghq.com/apm/map

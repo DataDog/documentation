@@ -1,128 +1,128 @@
 ---
+title: Create a Dashboard to track and correlate APM metrics
+kind: guide
 further_reading:
 - link: /tracing/guide/alert_anomalies_p99_database/
-  tag: 3 分
-  text: データベースサービスの異常な p99 レイテンシーに関するアラート
+  tag: 3 mins
+  text: Alert on anomalous p99 latency of a database service
 - link: /tracing/guide/week_over_week_p50_comparison/
-  tag: 2 分
-  text: サービスのレイテンシーを前週と比較する
+  tag: 2 mins
+  text: Compare a service's latency to the previous week
 - link: /tracing/guide/slowest_request_daily/
-  tag: 3 分
-  text: ウェブサービスの最も遅いエンドポイントで最も遅いトレースをデバッグする
+  tag: 3 mins
+  text: Debug the slowest trace on the slowest endpoint of a web service
 - link: /tracing/guide/
-  tag: ''
-  text: すべてのガイド
-kind: ガイド
-title: ダッシュボードを作成して、APM メトリクスを追跡、関連付ける
+  tag: ""
+  text: All guides
 ---
 
-_4 分で読了_
+_4 minutes to complete_
 
-{{< img src="tracing/guide/apm_dashboard/dashboard_7_cropped.mp4" alt="ダッシュボード 7" video="true" style="width:90%;">}}
+{{< img src="tracing/guide/apm_dashboard/dashboard_7_cropped.mp4" alt="dashboard 7" video="true" style="width:90%;">}}
 
-Datadog APM では、ビジネスの優先順位と重要なメトリクスに基づいてダッシュボードを作成できます。
-このダッシュボードにウィジェットを作成して、従来のインフラストラクチャー、ログ、およびホストメモリ使用量などのカスタムメトリクスを、スループット、レイテンシー、相関のエラー率に基づく重要な APM メトリクスとともに追跡できます。
-また、主要顧客のユーザーエクスペリエンスや最大のトランザクションを追跡したり、ブラックフライデーのような主要イベントに先駆けてメインウェブサーバーのスループットを追跡したりできます。
+Datadog APM allows you to create dashboards based on your business priorities and metrics important to you:
+You can create widgets on these dashboards to keep track of any traditional infrastructure, logs and custom metrics like host memory usage alongside critical APM metrics based on throughput, latency, and error rate for correlation.
+Next to these you can track latency of the user experience of your top customers or largest transactions and alongside these keep track of the throughput of your main web server ahead of any major events like Black Friday.
 
-このガイドでは、トレースメトリクスをダッシュボードに追加し、それをインフラストラクチャーメトリクスと関連付けてから、Analytics クエリをエクスポートする方法について説明します。このガイドでは、以下の 3 つの方法でダッシュボードにウィジェットを追加する方法について説明します。
+This guides walks you through adding trace metrics to a dashboard, correlating them with infrastructure metrics and then how to export an Analytics query. This guide covers adding widgets to the dashboard in three ways:
 
-* 既存の APM グラフをコピーする_（ステップ 1.、2.、3.）_
-* 手動で作成する。_（ステップ 4.、5.）_
-* Analytics クエリをエクスポートする。_（ステップ 7.）_
+* Copying an existing APM graph _( Step 1. 2. & 3.)_
+* Creating it manually. _(Step 4. & 5. )_
+* Exporting an Analytics query. _(Step 7.)_
 
-1. **[サービスカタログ][1]**を開き、`web-store` サービスを選択します。
+1. **Open the [Service Catalog][1]** and choose the `web-store` service.
 
-2. **Total Requests グラフを見つけ**、右上の `export` ボタンをクリックして `Export to Dashboard` を選択します。**`New Timeboard` をクリックします**。
+2. **Find the Total Requests Graph** and click on the `export` button on the top right to choose `Export to Dashboard`. **Click `New Timeboard`**.
 
-    {{< img src="tracing/guide/apm_dashboard/dashboard_2_cropped.png" alt="ダッシュボード 2" style="width:90%;">}}
+    {{< img src="tracing/guide/apm_dashboard/dashboard_2_cropped.png" alt="dashboard 2" style="width:90%;">}}
 
-3. 成功メッセージの **`View Dashboard` をクリック**します。
+3. **Click on `View Dashboard`** in the success message.
 
-   新しいダッシュボードでは、`web-store` サービスの `Hit/error count on service` グラフが利用可能になりました。このサービスのスループット全体とエラーの合計量が表示されます。
+    In the new dashboard, the `Hit/error count on service` graph for the `web-store` service is now available. It shows the entire throughput of this service as well as its total amount of errors.
 
-    {{< img src="tracing/guide/apm_dashboard/dashboard_3_cropped.png" alt="ダッシュボード 3" style="width:90%;">}}
+    {{< img src="tracing/guide/apm_dashboard/dashboard_3_cropped.png" alt="dashboard 3" style="width:90%;">}}
 
-   **注**: 鉛筆アイコンをクリックするとこのグラフを編集し、使用されている正確なメトリクスを確認できます。
+    **Note**: You can click on the pencil icon to edit this graph and see what precise metrics are being used.
 
-4. ダッシュボードスペースの **`Add graph` プレースホルダータイルをクリック**してから、**このスペースに `Timeseries` をドラッグ**します。
+4. **Click on the `Add graph` placeholder tile** on the dashboard space and then **Drag a `Timeseries` to this space**.
 
-   これは、ダッシュボードウィジェットの編集画面です。ここでは、利用可能なすべてのメトリクスに対してあらゆるタイプの視覚化を作成できます。詳細については、[時系列ウィジェットのドキュメント][2]をご覧ください。
+    This is the dashboard widget edit screen. It empowers you to create any type of visualization across all of the metrics available to you. See the [Timeseries widget documentation][2] to learn more.
 
-5. **`system.cpu.user` ボックスをクリック**して、関連するメトリクスとパラメーターを選択します。この例では以下の通りです。
+5. **Click on the `system.cpu.user` box** and choose the metric and parameters relevant to you, in this example:
 
-    | パラメーター | 値                         | 説明                                                                                                          |
+    | Parameter | Value                         | Description                                                                                                          |
     | ------    | -----                         | -----                                                                                                                |
-    | `metric`  | `trace.rack.requests.errors` | Ruby Rack の誤ったリクエストの合計セット。                                                                       |
-    | `from`    | `service:web-store`           | このサンプルスタックのメインサービス。これは Ruby サービスであり、チャート内のすべての情報はここから取得されます。 |
-    | `sum by`  | `http.status_code`            | http ステータスコードによるチャートの分類。                                                                        |
+    | `metric`  | `trace.rack.requests.errors` | The Ruby Rack total set of erroneous requests.                                                                       |
+    | `from`    | `service:web-store`           | The main service in this example stack, it is a Ruby service and all the information in the chart with come from it. |
+    | `sum by`  | `http.status_code`            | Breaking down the chart by http status codes.                                                                        |
 
-    {{< img src="tracing/guide/apm_dashboard/dashboard_4.mp4" video="true" alt="ダッシュボード 4" style="width:90%;">}}
+    {{< img src="tracing/guide/apm_dashboard/dashboard_4.mp4" video="true" alt="dashboard 4" style="width:90%;">}}
 
-   この具体的な内訳は、選択できる多くの一例にすぎません。`trace.` で始まるメトリクスには APM 情報が含まれることに注意することが重要です。[詳細については、APM メトリクスのドキュメント][3]を参照してください。
+    This specific breakdown is just one example of the many can choose. It is important to note that any metric that starts with `trace.` contains APM information. See the [APM metric documentation to learn more][3].
 
-6. **別の時系列をプレースホルダータイルにドラッグします**
+6. **Drag another timeseries to the placeholder tile**
 
-   この例では、`trace.*` と `runtime.*` という 2 種類のメトリクスがグラフに追加されます。これらのメトリクスを組み合わせることで、リクエストとコードランタイムパフォーマンス間の情報を関連付けることができます。具体的には、レイテンシーの急上昇はスレッドカウントの増加に伴って発生する可能性があることがわかっているため、スレッドカウントの横にサービスのレイテンシーが表示されます。
+    In this example two different types of metrics are added to a graph, a `trace.*` and a `runtime.*` one. Combined, these metrics allow you to correlate information between requests and code runtime performances. Specifically, the latency of a service is displayed next to the thread count, knowing that latency spikes might be associated with an increase in the thread count:
 
-    1. まず、ウィジェットに `trace.rack.requests.errors` メトリクスを追加します。
+    1. First, add `trace.rack.requests.errors` metric into the widget:
 
-        | パラメーター | 値                                        | 説明                                                                                                          |
+        | Parameter | Value                                        | Description                                                                                                          |
         | ------    | -----                                        | -----                                                                                                                |
-        | `metric`  | `trace.rack.request.duration.by.service.99p` | サービスのリクエストのレイテンシーの 99 パーセンタイル。                                                           |
-        | `from`    | `service:web-store`                          | このサンプルスタックのメインサービス。これは Ruby サービスであり、チャート内のすべての情報はここから取得されます。 |
+        | `metric`  | `trace.rack.request.duration.by.service.99p` | The 99th percentile of latency of requests in our service.                                                           |
+        | `from`    | `service:web-store`                          | The main service in this example stack, it is a Ruby service and all the information in the chart with come from it. |
 
-    2. 次に、`Graph additional: Metrics` をクリックして、チャートに別のメトリクスを追加します。
+    2. Then click on the `Graph additional: Metrics` to add another metric to the chart:
 
-        | パラメーター | 値                       | 説明                                                                                                          |
+        | Parameter | Value                       | Description                                                                                                          |
         | ------    | -----                       | -----                                                                                                                |
-        | `metric`  | `runtime.ruby.thread_count` | Ruby ランタイムメトリクスから取得したスレッドカウント。                                                                    |
-        | `from`    | `service:web-store`           | このサンプルスタックのメインサービス。これは Ruby サービスであり、チャート内のすべての情報はここから取得されます。 |
+        | `metric`  | `runtime.ruby.thread_count` | Thread count taken from the Ruby runtime metrics.                                                                    |
+        | `from`    | `service:web-store`         | The main service in this example stack, it is a Ruby service and all the information in the chart with come from it. |
 
         {{< img src="tracing/guide/apm_dashboard/dashboard_5.mp4" alt="dashboard_5" video="true" style="width:90%;">}}
 
-    このセットアップでは、レイテンシーの急上昇が Ruby スレッドカウントの急上昇に関連しているかどうかを示すことができ、レイテンシーの原因をすぐに特定することで迅速な解決が可能になります。
+    This setup can show whether a spike in latency is associated with a spike in the ruby thread count, immediately pointing out the cause for latency allowing for fast resolution.
 
-7. **[Analytics][4] に移動します**。
+7. **Go to [Analytics][4]**.
 
-   この例では、サンプルアプリケーション全体のレイテンシーをクエリする方法を示します。プラットフォーム上のマーチャント別に分類し、レイテンシーが最も高い上位 10 マーチャントを表示します。Analytics 画面から、グラフをダッシュボードにエクスポートしてそこでこれを表示します。
+    This example shows how to query the latency across the example application: breaking it down by merchants on the platform and view the top-10 merchants with highest latency. From the Analytics screen, export the graph to the dashboard and view it there:
 
-    {{< img src="tracing/guide/apm_dashboard/dashboard_6_cropped.mp4" video="true" alt="ダッシュボード 6" style="width:90%;">}}
+    {{< img src="tracing/guide/apm_dashboard/dashboard_6_cropped.mp4" video="true" alt="dashboard 6" style="width:90%;">}}
 
-8. **ダッシュボードに戻ります**。
+8. **Return to your dashboard**.
 
-   複数のウィジェットが見られるようになり、技術的な観点とビジネス上の観点の両方からサンプルアプリケーションを深く観察できるようになりました。しかし、インフラストラクチャーメトリクスの追加、複数の種類の視覚化の使用、計算と予測の追加など、できることはまだまだあります。
+    Multiple widgets can now be seen providing deep observability into the example application from both a technical perspective and a business one. But this is only the start of what you can do: add infrastructure metrics, use multiple types of visualizations and add calculations and projections.
 
-   ダッシュボードを使用すれば、関連するイベントを調べることもできます。
+    With the dashboard you can also explore related events.
 
-9. **`Search Events or Logs` ボタンをクリック**して、関連するイベントエクスプローラーの検索を追加します。**注**: この例では Ansible が使用されていますが、[イベントエクスプローラー][5]は異なる場合があります。
+9. **Click on the `Search Events or Logs`** button and add search for a relevant event explorer. **Note**: in this example Ansible is used, your [event explorer][5] might be different.
 
-    {{< img src="tracing/guide/apm_dashboard/dashboard_1_cropped.png" alt="ダッシュボード 1" style="width:90%;">}}
+    {{< img src="tracing/guide/apm_dashboard/dashboard_1_cropped.png" alt="dashboard 1" style="width:90%;">}}
 
-   ここでは、ダッシュボードのビューとともに、デプロイ、タスクの完了、モニターアラートなど、（Datadog または Ansible、Chef などの外部サービスで）発生した最近のイベントを確認できます。これらのイベントは、ダッシュボードで設定されたメトリクスで起こっていることと関連付けることができます。
+    Here, alongside the view of our dashboard, recent events that have happened (in datadog or in external services like Ansible, Chef, etc.) can be seen such as: deployments, task completions, or monitors alerting. These events can then be correlated to what is happening to the metrics setup in the dashboard.
 
-   最後に、テンプレート変数を必ず使用してください。これは、すべてのユーザーがウィジェット自体を編集しなくても使用できるダッシュボード上のウィジェットを動的に制御する一連の値です。詳しくは、[テンプレート変数][6]のドキュメントを参照してください。
+    Finally, make sure to use template variables. These are a set of values that dynamically control the widgets on the dashboards that every user can use without having to edit the widgets themselves. For more information, see the [Template Variable][6] documentation.
 
-10. ヘッダーの **Add Variable** をクリックします。変数が制御するタグを選択し、その名前、デフォルト値、または利用可能な値を構成します。
+10. Click on **Add Variable** in the header. Choose the tag that the variable will control, and configure its name, default value, or available values.
 
-    この例では、ダッシュボードが 2 つの主要な操作領域である `us-east1` と `europe-west-4` でどのように動作するかを確認するために、`Region` のテンプレート変数が追加されています。
+    In this example a template variable for `Region` is added to see how the dashboard behaves across `us-east1` and `europe-west-4`, out two primary areas of operation.
 
-    {{< img src="tracing/guide/apm_dashboard/dashboard_add_template_variable_cropped.png" alt="変数名と変数タグを追加するフィールドオプションを表示する Add Variable ポップオーバー" style="width:90%;">}}
+    {{< img src="tracing/guide/apm_dashboard/dashboard_add_template_variable_cropped.png" alt="Add Variable popover showing field options to add variable name and variable tags" style="width:90%;">}}
 
-    これで、このテンプレート変数を各グラフに追加できます。
+    You can now add this template variable to each of the graphs:
 
-    {{< img src="tracing/guide/apm_dashboard/dashboard_dynamic_template_variable.png" alt="クエリに動的テンプレート変数を追加します。この例では、'$RG' を地域テンプレート変数に動的にスコープしています" style="width:90%;">}}
+    {{< img src="tracing/guide/apm_dashboard/dashboard_dynamic_template_variable.png" alt="Add dynamic template variables to your query, this example shows '$RG' to dynamically scope to the region template variable" style="width:90%;">}}
 
-    テンプレート変数値を選択すると、ダッシュボードの該当するウィジェットですべての値が更新されます。
+    When you select template variable values, all values update in the applicable widgets of the dashboard.
 
-    使用可能なメトリクスをすべて確認し、Datadog の可観測性の 3 本の柱を最大限に活用してください。この基本的なダッシュボードは、組織の監視と可観測性のためのワンストップショップである強力なツールに変換できます。
+    Be sure to explore all the metrics available to you and take full advantage of the Datadog 3 pillars of observability. You can turn this basic dashboard into a powerful tool that is a one-stop-shop for monitoring and observability in your organization.
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/services
-[2]: /ja/dashboards/widgets/timeseries/
-[3]: /ja/tracing/metrics/metrics_namespace/
+[2]: /dashboards/widgets/timeseries/
+[3]: /tracing/metrics/metrics_namespace/
 [4]: https://app.datadoghq.com/apm/traces?viz=timeseries
-[5]: /ja/events/
-[6]: /ja/dashboards/template_variables/
+[5]: /events/
+[6]: /dashboards/template_variables/

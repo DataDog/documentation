@@ -1,49 +1,54 @@
 ---
+title: Monitor Types
+description: "Monitor Types"
 aliases:
-- /ja/monitors/monitor_types/
-- /ja/monitors/create/types/
-- /ja/monitors/create/#monitor-types
-description: モニターの種類
+  - /monitors/monitor_types/
+  - /monitors/create/types/
+  - "/monitors/create/#monitor-types"
+  - /monitors/create/
 further_reading:
 - link: /monitors/notify/
-  tag: ドキュメント
-  text: モニター通知
+  tag: Documentation
+  text: Monitor notifications
 - link: /monitors/manage/
-  tag: ドキュメント
-  text: モニターの管理
-- link: https://www.datadoghq.com/blog/datadog-github-deployment-protection-rules/
-  tag: ブログ
-  text: GitHub Deployment Protection Rules と Datadog で品質チェックの失敗を検出する
-title: モニターの種類
+  tag: Documentation
+  text: Manage monitors
+- link: "https://www.datadoghq.com/blog/datadog-github-deployment-protection-rules/"
+  tag: Blog
+  text: Detect failed quality checks with GitHub Deployment Protection Rules and Datadog
 ---
 
-{{< whatsnext desc="モニタータイプを選択します:">}}
-{{< nextlink href="/monitors/types/host" >}}<strong>Host</strong>: 1 つ以上のホストが Datadog にレポートされているかどうかを確認します。{{< /nextlink >}}
-{{< nextlink href="/monitors/types/metric" >}}<strong>Metric</strong>: メトリクスの値をユーザー定義のしきい値と比較します。{{< /nextlink >}}
-{{< nextlink href="/monitors/types/anomaly" >}}<strong>Anomaly</strong>: 過去のデータに基づいて、メトリクスの異常な動作を検出します。{{< /nextlink >}}
-{{< nextlink href="/monitors/types/apm" >}}<strong>APM</strong>:APM メトリクスの監視やクエリのトレースを行います。{{< /nextlink >}}
-{{< nextlink href="/monitors/types/audit_trail" >}}<strong>Audit Trail</strong>: 指定した種類の監査ログが、一定期間内にユーザー定義のしきい値を超えた場合にアラートを発します。{{< /nextlink >}}
-{{< nextlink href="/monitors/types/ci" >}}<strong>CI</strong>: Datadog で収集した CI パイプラインとテストのデータを監視します。{{< /nextlink >}}
-{{< nextlink href="/monitors/types/cloud_cost" >}}<strong>Cloud Cost</strong>: クラウドプラットフォームに関連するコストの変化を監視します。{{< /nextlink >}}
-{{< nextlink href="/monitors/types/composite" >}}<strong>Composite</strong>: 複数のモニターを組み合わせた式でアラートを発します。{{< /nextlink >}}
-{{< nextlink href="/monitors/types/database_monitoring" >}}<strong>データベースモニタリング</strong>: Datadog が収集したクエリ実行と実行計画データを監視します。{{< /nextlink >}}
-{{< nextlink href="/monitors/types/error_tracking" >}}<strong>Error Tracking</strong>: Datadog で収集したアプリケーションの問題を監視します。{{< /nextlink >}}
-{{< nextlink href="/monitors/types/event" >}}<strong>Event</strong>: Datadog が収集したイベントを監視します。{{< /nextlink >}}
-{{< nextlink href="/monitors/types/forecasts" >}}<strong>Forecast</strong>: あるメトリクスがしきい値を超えると予測される場合にアラートを発します。{{< /nextlink >}}
-{{< nextlink href="/monitors/types/integration" >}}<strong>Integration</strong>: 特定のインテグレーションからメトリクス値やヘルスステータスをモニターします。{{< /nextlink >}}
-{{< nextlink href="/monitors/types/process" >}}<strong>Live Process</strong>: ホスト上で 1 つまたは複数のプロセスが実行されているかどうかを確認します。{{< /nextlink >}}
-{{< nextlink href="/monitors/types/log" >}}<strong>Logs</strong>: 指定した種類のログが、一定期間内にユーザー定義のしきい値を超えた場合にアラートを発します。{{< /nextlink >}}
-{{< nextlink href="/monitors/types/network" >}}<strong>Network</strong>: TCP/HTTP エンドポイントのステータスを確認します。{{< /nextlink >}}
-{{< nextlink href="/monitors/types/outlier" >}}<strong>Outlier</strong>: あるグループのメンバーが他のメンバーとは異なる行動をとった場合に警告を発します。{{< /nextlink >}}
-{{< nextlink href="/monitors/types/process_check" >}}<strong>Process Check</strong>: process.up のサービスチェックで生成されるステータスを見ます。{{< /nextlink >}}
-{{< nextlink href="/monitors/types/real_user_monitoring" >}}<strong>Real User Monitoring</strong>: Datadog で収集した実ユーザーのデータを監視します。{{< /nextlink >}}
-{{< nextlink href="/monitors/types/service_check" >}}<strong>Service Check</strong>: 任意のカスタムチェックのステータスを監視します。{{< /nextlink >}}
-{{< nextlink href="/monitors/types/slo" >}}<strong>SLO Alerts</strong>: SLO のエラーバジェットとバーンレートを監視します。{{< /nextlink >}}
-{{< nextlink href="/synthetics/guide/synthetic-test-monitors" >}}<strong>Synthetic Monitoring</strong>: Synthetic テスト実行からメトリクスの値やテストのステータスを監視します。{{< /nextlink >}}
-{{< nextlink href="/monitors/types/watchdog" >}}<strong>Watchdog</strong>: Watchdog が異常な動作を検出した際に通知を受けます。{{< /nextlink >}}
+{{< whatsnext desc="Choose your monitor type:">}}
+{{< nextlink href="/monitors/types/host" >}}<strong>Host</strong>: Check if one or more hosts are reporting to Datadog.{{< /nextlink >}}
+{{< nextlink href="/monitors/types/metric" >}}<strong>Metric</strong>: Compare values of a metric with a user-defined threshold.{{< /nextlink >}}
+{{< nextlink href="/monitors/types/anomaly" >}}<strong>Anomaly</strong>: Detect anomalous behavior for a metric based on historical data.{{< /nextlink >}}
+{{< nextlink href="/monitors/types/apm" >}}<strong>APM</strong>: Monitor APM metrics or trace queries.{{< /nextlink >}}
+{{< nextlink href="/monitors/types/audit_trail" >}}<strong>Audit Trail</strong>: Alert when a specified type of audit log exceeds a user-defined threshold over a given period of time.{{< /nextlink >}}
+{{< nextlink href="/monitors/types/change-alert" >}}<strong>Change Alert</strong>: Alert when the absolute or relative value changes against a user-defined threshold over a given period of time.{{< /nextlink >}}
+{{< nextlink href="/monitors/types/ci" >}}<strong>CI</strong>: Monitor CI pipelines and tests data gathered by Datadog.{{< /nextlink >}}
+{{< nextlink href="/monitors/types/cloud_cost" >}}<strong>Cloud Cost</strong>: Monitor cost changes associated with cloud platforms.{{< /nextlink >}}
+{{< nextlink href="/monitors/types/composite" >}}<strong>Composite</strong>: Alert on an expression combining multiple monitors.{{< /nextlink >}}
+{{< nextlink href="/monitors/types/database_monitoring" >}}<strong>Database Monitoring</strong>: Monitor query execution and explain plan data gathered by Datadog.{{< /nextlink >}}
+{{< nextlink href="/monitors/types/error_tracking" >}}<strong>Error Tracking</strong>: Monitor issues in your applications gathered by Datadog.{{< /nextlink >}}
+{{< nextlink href="/monitors/types/event" >}}<strong>Event</strong>: Monitor events gathered by Datadog.{{< /nextlink >}}
+{{< nextlink href="/monitors/types/forecasts" >}}<strong>Forecast</strong>: Alert when a metric is projected to cross a threshold.{{< /nextlink >}}
+{{< nextlink href="/monitors/types/integration" >}}<strong>Integration</strong>: Monitor metric values or health status from a specific integration.{{< /nextlink >}}
+{{< nextlink href="/monitors/types/process" >}}<strong>Live Process</strong>: Check if one or more processes are running on a host.{{< /nextlink >}}
+{{< nextlink href="/monitors/types/log" >}}<strong>Logs</strong>: Alert when a specified type of log exceeds a user-defined threshold over a given period of time.{{< /nextlink >}}
+{{< nextlink href="/monitors/types/network" >}}<strong>Network</strong>: Check the status of TCP/HTTP endpoints.{{< /nextlink >}}
+{{< nextlink href="/monitors/types/network_performance" >}}<strong>Network Performance</strong>: Set alerts on your network traffic.{{< /nextlink >}}
+{{< nextlink href="/monitors/types/netflow" >}}<strong>NetFlow</strong>: Monitor flow records from your NetFlow-enabled devices.{{< /nextlink >}}
+{{< nextlink href="/monitors/types/outlier" >}}<strong>Outlier</strong>: Alert on members of a group behaving differently than the others.{{< /nextlink >}}
+{{< nextlink href="/monitors/types/process_check" >}}<strong>Process Check</strong>: Watch the status produced by the process.up service check.{{< /nextlink >}}
+{{< nextlink href="/monitors/types/real_user_monitoring" >}}<strong>Real User Monitoring</strong>: Monitor real user data gathered by Datadog.{{< /nextlink >}}
+{{< nextlink href="/monitors/types/service_check" >}}<strong>Service Check</strong>: Monitor the status of arbitrary custom checks.{{< /nextlink >}}
+{{< nextlink href="/monitors/types/slo" >}}<strong>SLO Alerts</strong>: Monitor your SLO's error budget and burn rate.{{< /nextlink >}}
+{{< nextlink href="/synthetics/guide/synthetic-test-monitors" >}}<strong>Synthetic Monitoring</strong>: Monitor metric values or test status from Synthetic test runs.{{< /nextlink >}}
+{{< nextlink href="/monitors/types/watchdog" >}}<strong>Watchdog</strong>: Get notified when Watchdog detects anomalous behavior.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+

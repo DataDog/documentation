@@ -1,114 +1,132 @@
 ---
-algolia:
-  tags:
-  - Software Composition Analysis
-  - 収集データ
-  - SCA
-  - AVM
+title: Software Composition Analysis
 aliases:
-- /ja/security/application_security/risk_management/
-- /ja/security/application_security/vulnerability_management/
+  - /security/application_security/risk_management/
+  - /security/application_security/vulnerability_management/
 further_reading:
 - link: /getting_started/application_security/software_composition_analysis
-  tag: ガイド
-  text: Software Composition Analysis を始める
-- link: https://www.datadoghq.com/blog/datadog-software-composition-analysis/
-  tag: ブログ
-  text: Datadog Software Composition Analysis でサードパーティライブラリの脆弱性を軽減する
-- link: https://www.datadoghq.com/blog/iast-datadog-application-vulnerability-management/
-  tag: ブログ
-  text: Application Vulnerability Management で本番環境のアプリケーションセキュリティを強化する
+  tag: Guide
+  text: Getting started with Software Composition Analysis
 - link: /security/application_security/code_security
-  tag: ドキュメント
-  text: サービスのコードセキュリティ脆弱性検出を有効にする
+  tag: documentation
+  text: Enable code security vulnerability detection on your services
 - link: /code_analysis/software_composition_analysis/
-  tag: ドキュメント
-  text: CI パイプラインで Software Composition Analysis をセットアップする
-title: Software Composition Analysis
+  tag: documentation
+  text: Setup Software Composition Analysis on your CI pipelines
+- link: "https://www.datadoghq.com/blog/datadog-software-composition-analysis/"
+  tag: Blog
+  text: Mitigate vulnerabilities from third-party libraries with Datadog Software Composition Analysis 
+- link: "https://www.datadoghq.com/blog/iast-datadog-application-vulnerability-management/"
+  tag: Blog
+  text: Enhance application security in production with Application Vulnerability Management  
+- link: "https://securitylabs.datadoghq.com/articles/guarddog-identify-malicious-pypi-packages/"
+  tag: Blog
+  text: "Finding malicious PyPI packages through static code analysis: Meet GuardDog"
+- link: "https://www.datadoghq.com/blog/sca-prioritize-vulnerabilities/"
+  tag: Blog
+  text: Prioritize vulnerability remediation with Datadog SCA
+algolia:
+  tags: [Software Composition Analysis, Vulnerability Management, SCA, AVM, GuardDog]
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">選択した <a href="/getting_started/site">Datadog サイト</a> ({{< region-param key="dd_site_name" >}}) では Application Security Management はサポートされていません。</div>
+<div class="alert alert-warning">Application Security Management is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-## 概要
+## Overview
 
-Datadog Software Composition Analysis (SCA) は、オープンソースを自信を持って活用できるようにサポートします。SCA の機能には、脆弱性の検出、ビジネスリスク (ライブラリのインベントリとライセンス情報)、サービス内のオープンソースライブラリの品質評価などがあります。Datadog SCA を特徴付ける主要な差別化要因は、開発者がコミットするコードから、既に Datadog デプロイメントで実行中の本番アプリケーションに至るまで、ソフトウェア開発ライフサイクル全体をエンドツーエンドでカバーすることです。
+Datadog Software Composition Analysis (SCA) helps you leverage open source with confidence. The capabilities of SCA include vulnerability detection, business risk (library inventory and licensing information), and quality evaluation of the open source libraries in your services. 
 
-[ASM の互換性][6]を確認し、ご利用のサービスが対応しているかどうかをご確認ください。
+What makes Datadog SCA unique is its end-to-end coverage of your software development lifecycle: from the code that your developers commit, to the production applications already running in your Datadog deployment.
 
-## ライブラリインベントリ
+Datadog SCA uses a curated proprietary database. The database is sourced from Open Source Vulnerabilities (OSV), National Vulnerability Database (NVD), GitHub advisories, and other language ecosystem advisories. Additionally, the Datadog Security research team evaluates vulnerabilities and malware findings. For more information, see the [GuardDog][13] GitHub project.
 
-Datadog SCA ライブラリインベントリは、アプリケーションを構成するライブラリとそのバージョンのリストを把握するのに役立ちます。ライブラリエクスプローラー にアクセスするには、[**Security** > **Application Security** > **Catalog** > **Library Explorer**][8] に移動します。
 
-Datadog SCA がソフトウェア開発ライフサイクルを始めから終わりまでカバーしているため、アプリケーションのライフサイクル全体にわたってライブラリが検出されます。ライブラリインベントリには、ライブラリの名前やバージョン、さらにライセンスや品質といったリスク要因に関する必要なすべての情報が含まれています。
+Check [ASM Compatibility][6] to see if your service is supported.
 
-{{< img src="/security/application_security/software_composition_analysis/asm_library_explorer.png" alt="ライブラリの脆弱性をライブラリごとに分類して表示している Software Composition Analysis (SCA) のライブラリエクスプローラーページ。" style="width:100%;" >}}
 
-## SCA の脆弱性の調査と管理
 
-[Vulnerability Explorer][3] は、Datadog SCA が検出したオープンソースライブラリの完全なリストを表示し、それらに関連するセキュリティ脆弱性をレポートします。Datadog SCA は、サービスを分析するために、リポジトリの静的コード分析 (静的視点) と、デプロイされたサービスのランタイム分析 (ランタイム視点) という 2 つの手法を活用します。この 2 つの技術を組み合わせることで、オープンソースライブラリは、リポジトリへのコードコミット (静的視点) から本番環境で実行されるアプリケーション (ランタイム視点) まで、エンドツーエンドで監視されます。
+## Library Inventory
 
-コードリポジトリのコミット視点に切り替えるには、**Static** ボタンをクリックします。静的ビューでは、リポジトリ内の_ソースコード_からの脆弱性が表示されます。すでに実行中のアプリケーションの_リアルタイム_視点に切り替えるには、**Runtime** ボタンをクリックします。ランタイムビューは、Datadog によって監視されているサービスのライブビューです。
+The Datadog SCA Library Inventory helps you understand the list of libraries and its versions that compose your application. To access the Library Explorer, navigate to [**Security** > **Application Security** > **Catalog** > **Libraries**][8].
 
-{{< img src="/security/application_security/software_composition_analysis/asm_sca_vulnerabilities_2.png" alt="脆弱性を静的またはランタイムでソートして表示している Software Composition Analysis (SCA) エクスプローラーページ。" style="width:100%;" >}}
+Since Datadog SCA covers your software development lifecycle end-to-end, the libraries are detected throughout the entire lifecycle of the application. The library inventory contains everything you need to know about the libraries, including name and version, and other risk aspects such as licenses and quality aspects. 
 
-特定の脆弱性を選択すると、影響を受けるサービス、重大度の内訳スコア、推奨される修復ステップなどの詳細を確認できます。Details Explorer では、影響を受けるインフラストラクチャーを表示し、全体的な攻撃エクスポー ジャーをより深く理解することもできます。
+{{< img src="/security/application_security/software_composition_analysis/asm_library_explorer.png" alt="Software Composition Analysis (SCA) library explorer page showing library vulnerabilities grouped by library." style="width:100%;" >}}
 
-ASM 内では、脆弱性の重大度は、攻撃の有無や脆弱性が検出された環境のビジネス上の機密性を考慮し、基本スコアから修正されます。例えば、本番環境が検出されない場合は、重大度が軽減されます。
+## Explore and manage SCA vulnerabilities
 
-調整後の脆弱性スコアは、各サービスの完全なコンテキストを含んでいます。
+<div class="alert alert-info">Datadog Software Composition Analysis can find vulnerable libraries across the software development lifecycle (SDLC). Application Security summarizes results found in the default branches of your repositories and in your running services. To view vulnerabilities found in different branches and commits, see <a href="/code_analysis/software_composition_analysis" target="_blank">Code Analysis</a> for more details.</div>
 
-- 元の脆弱性の重大度
-- 不審なリクエストの証拠
-- 機密性の高い環境、インターネットに接続された環境
+The [Vulnerability Explorer][3] shows a complete list of the open source libraries detected by Datadog SCA and reports security vulnerabilities associated with them. 
 
-{{< img src="security/application_security/vulnerability-score-modified_3.png" alt="変更された重大度スコアを表示する脆弱性詳細ページ" style="width:100%;" >}}
+Datadog SCA leverages two techniques to analyze your services: 
 
-調整後の脆弱性スコアの詳細については、[Software Composition Analysis を始める][7]を参照してください。
+- Static code analysis in your repositories (static point of view)
+- Runtime analysis in your deployed services (runtime point of view)
 
-## 修復
+Combining both techniques monitors open source libraries end-to-end, from the code repository commit (static point of view), to the applications running in production (runtime point of view).
 
-Vulnerability Explorerでは検出された脆弱性に対する改善勧告が表示され、脆弱性のステータスを変更したり、チームメンバーに割り当てて検討させたり、追跡のために Jira 課題を作成したりすることができます。また、各脆弱性の背景を理解するのに役立つ Web サイトや情報源へのリンクやリファレンスのコレクションも含まれています。
+To switch to the code repository commit point of view, select **Static**. The static view shows vulnerabilities from the _source code_ in your repositories. 
 
-**注**: SCA の脆弱性の Jira 課題を作成するには、Jira インテグレーションを構成し、 `manage_integrations` 権限を持っている必要があります。詳細な手順については、[Jira インテグレーション][11]のドキュメント、および[ロールベースのアクセス制御][10]のドキュメントを参照してください。
+To switch to the _real-time_ point of view for the applications already running, select **Runtime**. The runtime view is the live view of the services monitored by Datadog.
 
-{{< img src="getting_started/appsec/appsec-vuln-remediation_3.png" alt="Application Vulnerability Management の脆弱性の詳細ページでは、影響を受けるサービス、インフラストラクチャーへのリンク、推奨される改善策、および詳細情報へのリンクが表示されます。" style="width:100%;" >}}
+{{< img src="/security/application_security/software_composition_analysis/asm_sca_vulnerabilities.png" alt="Software Composition Analysis (SCA) explorer page showing vulnerabilities sorted by static or runtime." style="width:100%;" >}}
 
-## Code Analysis の構成
+Select a specific vulnerability to see its details, including the affected services, severity breakdown score, and recommended remediation steps. 
 
-{{< callout url="#" btn_hidden="true" header="ベータ版をお試しください！" >}}
-Code Analysis は公開ベータ版です。
-{{< /callout >}}
+On the Details Explorer for a vulnerability, you can view impacted infrastructure. This view gives you better insights to your overall attack exposure.
 
-Software Composition Analysis には、[Code Analysis][9] を使って CI パイプラインの脆弱性をスキャンできる機能が追加されています。SCA for Code Analysis を使えば、コードベースにインポートされた脆弱なオープンソースライブラリを特定することができます。
+Within ASM, the vulnerability severity base score is modified using existing attacks and the business sensitivity of the environment where the vulnerability is detected. For example, if no production environment is detected, the severity is reduced.
 
-CI パイプラインで脆弱性を構成するには、[Security -> Configuration -> Application Security -> Setup][12] に移動します。
-**Get Started** をクリックして、ソースコードの Static Analysis のための Software Composition Analysis を有効にし、CI/CD プロバイダを選択して構成します。
+The adjusted vulnerability score includes the full context of each service:
 
-より詳細な手順については、[Software Composition Analysis を始める][7]を参照してください。
+- The original vulnerability severity
+- Evidence of suspicious requests
+- Sensitive or internet-exposed environments
 
-{{< img src="getting_started/appsec/asm_sca_ci_setup.png" alt="CI セットアップを示す Software Composition Analysis のセットアップページ。" style="width:100%;" >}}
+{{< img src="security/application_security/vulnerability-score-modified_3.png" alt="Vulnerability details page showing a modified severity score" style="width:100%;" >}}
 
-## APM ビューにおけるリスク情報
+See [Getting Started with Software Composition Analysis][7] for more information on the adjusted vulnerability score.
 
-Software Composition Analysis は、APM がすでに収集している情報をリッチ化し、現在の脆弱性勧告と一致するライブラリにフラグを立てます。潜在的に脆弱なサービスは、[APM サービスカタログ][2]に組み込まれた **Security** ビューで直接ハイライト表示されます。
+## Remediation
 
-{{< img src="security/application_security/threats/threats-on-svc-cat_3.png" alt="APM サービスカタログに表示される脆弱性情報" style="width:100%;" >}}
+The Vulnerability Explorer offers remediation recommendations for detected vulnerabilities. Recommendations enable you to change the status of a vulnerability, assign it to a team member for review, and create a Jira issue for tracking. They also include a collection of links and references to websites or information sources to help you understand the context behind each vulnerability.
 
-## その他の参考資料
+**Note**: To create Jira issues for SCA vulnerabilities, you must configure the Jira integration, and have the `manage_integrations` permission. For detailed instructions, see the [Jira integration][11] documentation, as well as the [Role Based Access Control][10] documentation.
+
+{{< img src="getting_started/appsec/appsec-vuln-remediation_3.png" alt="Application Vulnerability Management vulnerability details page showing affected services, links to infrastructure, suggested remediation, and links to more information." style="width:100%;" >}}
+
+## Configure Software Composition Analysis
+
+Software Composition Analysis (SCA) contains additional capabilities to allow you to scan for vulnerabilities in your CI pipelines by using [Code Analysis][9]. With SCA for Code Analysis, you can identify vulnerable open source libraries that have been imported into your codebase.
+
+To configure vulnerabilities in your CI pipelines, navigate to [Security -> Application Security -> Settings][12].
+
+In **Software Composition Analysis (SCA)**, click **Get Started** to enable Software Composition Analysis, and select your repositories and services.
+
+See [Getting Started with Software Composition Analysis][7] for more detailed instructions.
+
+## Risk information in APM views
+
+Software Composition Analysis enriches the information APM is already collecting, and flags libraries that match with current vulnerability advisories. Potentially vulnerable services are highlighted directly in the **Security** view embedded in the [APM Service Catalog][2].
+
+{{< img src="security/application_security/threats/threats-on-svc-cat_3.png" alt="Vulnerability information shown in the APM Service Catalog" style="width:100%;" >}}
+
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/help/
+[1]: /help/
 [2]: https://app.datadoghq.com/services?lens=Security
 [3]: https://app.datadoghq.com/security/appsec/vm
 [4]: https://app.datadoghq.com/security/appsec
 [5]: https://app.datadoghq.com/security/appsec/landing
-[6]: /ja/security/application_security/enabling/compatibility
-[7]: /ja/getting_started/application_security/software_composition_analysis
+[6]: /security/application_security/enabling/compatibility
+[7]: /getting_started/application_security/software_composition_analysis
 [8]: https://app.datadoghq.com/security/appsec/inventory/libraries
-[9]: /ja/code_analysis/software_composition_analysis/setup/?tab=githubactions
-[10]: /ja/account_management/rbac/permissions/#integrations
-[11]: /ja/integrations/jira/
+[9]: /code_analysis/software_composition_analysis/setup/?tab=githubactions
+[10]: /account_management/rbac/permissions/#integrations
+[11]: /integrations/jira/
 [12]: https://app.datadoghq.com/security/configuration/asm/setup
+[13]: https://github.com/DataDog/guarddog

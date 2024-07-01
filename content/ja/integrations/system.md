@@ -1,79 +1,79 @@
 ---
-integration_title: System チェック
+integration_title: System Check
 name: system
 newhlevel: true
-kind: インテグレーション
+custom_kind: integration
 git_integration_title: system
 updated_for_agent: 5.8.5
-description: システムリソース (CPU、メモリ、ディスク、ファイルシステム) の使用状況を追跡。
+description: 'Track system resource usage: CPU, memory, disk, filesystem, and more.'
 is_public: true
-public_title: Datadog-System インテグレーション
-short_description: システムリソース (CPU、メモリ、ディスク、ファイルシステム) の使用状況を追跡。
+public_title: Datadog-System Integration
+short_description: 'Track system resource usage: CPU, memory, disk, filesystem, and more.'
 categories:
-  - os & system
-  - configuration & deployment
-ddtype: check
+    - os & system
+    - configuration & deployment
 aliases:
-  - /ja/integrations/system_swap/
-  - /ja/integrations/system_core/
+    - /integrations/system_swap/
+    - /integrations/system_core/
 supported_os:
-  - linux
-  - mac_os
-  - windows
+    - linux
+    - mac_os
+    - windows
 dependencies:
-  - https://github.com/DataDog/documentation/blob/master/content/en/integrations/system.md
-integration_id: システム
+    ['https://github.com/DataDog/documentation/blob/master/content/en/integrations/system.md']
+integration_id: "system"
 ---
-## 概要
 
-ベースシステムから CPU、IO、負荷、メモリ、スワップ、アップタイムなどに関するメトリクスを取得します。以下のチェックもシステムに関連しています。
+## Overview
 
-- [Directory チェック][1] - 指定したディレクトリのファイルからメトリクスをキャプチャします。
-- [Disk チェック][2] - ディスクに関するメトリクスをキャプチャします。
-- [Process チェック][3] - システムで実行されている特定のプロセスからメトリクスをキャプチャします。
+Get metrics from your base system about the CPU, IO, load, memory, swap, and uptime. The following checks are also system-related:
 
-## セットアップ
+- [Directory Check][1] - Capture metrics from the files in given directories.
+- [Disk Check][2] - Capture metrics about the disk
+- [Process check][3] - Capture metrics from specific running processes on a system.
 
-### インストール
+## Setup
 
-System チェックは [Datadog Agent][4] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
+### Installation
 
-## 収集データ
+The System check is included in the [Datadog Agent][4] package. No additional installation is needed on your server.
 
-### メトリクス
+## Data Collected
+
+### Metrics
 
 {{< get-metrics-from-git "system" "system.cpu system.fs system.io system.load system.mem system.proc. system.swap system.uptime" >}}
 
-### イベント
+### Events
 
-System チェックには、イベントは含まれません。
+The System check does not include any events.
 
-### サービスチェック
+### Service checks
 
-System チェックには、サービスのチェック機能は含まれません。
+The System check does not include any service checks.
 
-### タグ
+### Tags
 
-すべてのシステムメトリクスは、自動的に `host:<HOST_NAME>` でタグ付けされます。また、以下のネームスペースは `device:<DEVICE_NAME>` でタグ付けされます。
+All system metrics are automatically tagged with `host:<HOST_NAME>`. Additionally, the following namespaces are tagged with `device:<DEVICE_NAME>`.
 
 - `system.disk.*`
 - `system.fs.inodes.*`
 - `system.io.*`
 - `system.net.*`
 
-## System コア
+## System Core
 
-このチェックは、ホスト上の CPU コアの数と CPU 時間 (システム、ユーザー、アイドル時間など) を収集します。
+This check collects the number of CPU cores on a host and CPU times, such as system, user, idle, etc.
 
-### セットアップ
+### Setup
 
-#### インストール
+#### Installation
 
-システムコアチェックは [Datadog Agent][4] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
+The system core check is included in the [Datadog Agent][4] package. No additional installation is needed on your server.
 
-#### コンフィギュレーション
+#### Configuration
 
-1. [Agent の構成ディレクトリ][5]のルートにある `conf.d/` フォルダーの `system_core.d/conf.yaml` ファイルを編集します。使用可能な全構成オプションの詳細については、[サンプル system_core.d/conf.yaml][6] を参照してください。**注**: チェックを有効にするには、`instances` に少なくとも 1 つのエントリが必要です。例:
+1. Edit the `system_core.d/conf.yaml` file in the `conf.d/` folder at the root of your [Agent's configuration directory][5]. See the [sample system_core.d/conf.yaml][6] for all available configuration options. **Note**: At least one entry is required under `instances` to enable the check, for example:
 
     ```yaml
     init_config:
@@ -83,67 +83,67 @@ System チェックには、サービスのチェック機能は含まれませ�
             - key:value
     ```
 
-2. [Agent を再起動します][7]。
+2. [Restart the Agent][7].
 
-#### 検証
+#### Validation
 
-[Agent のステータスサブコマンドを実行][4]し、Checks セクションで `system_core` を探します。
+[Run the Agent's status subcommand][4] and look for `system_core` under the Checks section.
 
-### 収集データ
+### Data Collected
 
-#### メトリクス
+#### Metrics
 
 {{< get-metrics-from-git "system_core" >}}
 
-プラットフォームによっては、このチェックは他の CPU 時間メトリクスも収集します。たとえば、Windows では `system.core.interrupt` が、Linux では `system.core.iowait` が収集されます。
+Depending on the platform, the check may collect other CPU time metrics, such as `system.core.interrupt` on Windows, `system.core.iowait` on Linux, etc.
 
-#### イベント
+#### Events
 
-System コアチェックには、イベントは含まれません。
+The System Core check does not include any events.
 
-#### サービスチェック
+#### Service checks
 
 {{< get-service-checks-from-git "system_core" >}}
 
-## System スワップ
+## System Swap
 
-このチェックは、ホストがスワップイン/スワップアウトしたバイト数を監視します。
+This check monitors the number of bytes a host has swapped in and out.
 
-### セットアップ
+### Setup
 
-#### インストール
+#### Installation
 
-システムのスワップチェックは [Datadog Agent][4] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
+The system swap check is included in the [Datadog Agent][4] package. No additional installation is needed on your server.
 
-#### コンフィギュレーション
+#### Configuration
 
-1. [Agent の構成ディレクトリ][5]のルートにある `conf.d/` フォルダーの `system_swap.d/conf.yaml` ファイルを編集します。使用可能なすべての構成オプションの詳細については、[サンプル system_swap.d/conf.yaml][8] を参照してください。**注**: このチェックは初期コンフィギュレーションを受け取りません。
+1. Edit the `system_swap.d/conf.yaml` file in the `conf.d/` folder at the root of your [Agent's configuration directory][5]. See the [sample system_swap.d/conf.yaml][8] for all available configuration options. **Note**: This check takes no initial configuration.
 
-2. [Agent を再起動します][7]。
+2. [Restart the Agent][7].
 
-#### 検証
+#### Validation
 
-[Agent のステータスサブコマンドを実行][4]し、Checks セクションで `system_swap` を探します。
+[Run the Agent's status subcommand][4] and look for `system_swap` under the Checks section.
 
-### 収集データ
+### Data Collected
 
-#### メトリクス
+#### Metrics
 
 {{< get-metrics-from-git "system_swap" >}}
 
-#### イベント
+#### Events
 
-System スワップチェックには、イベントは含まれません。
+The System Swap check does not include any events.
 
-#### サービスチェック
+#### Service checks
 
-System スワップチェックには、サービスのチェック機能は含まれません。
+The System Swap check does not include any service checks.
 
-[1]: /ja/integrations/directory/
-[2]: /ja/integrations/disk/
-[3]: /ja/integrations/process/
-[4]: /ja/agent/guide/agent-commands/#agent-status-and-information
-[5]: /ja/agent/guide/agent-configuration-files/#agent-configuration-directory
+[1]: /integrations/directory/
+[2]: /integrations/disk/
+[3]: /integrations/process/
+[4]: /agent/guide/agent-commands/#agent-status-and-information
+[5]: /agent/guide/agent-configuration-files/#agent-configuration-directory
 [6]: https://github.com/DataDog/integrations-core/blob/master/system_core/datadog_checks/system_core/data/conf.yaml.example
-[7]: /ja/agent/guide/agent-commands/#start-stop-restart-the-agent
+[7]: /agent/guide/agent-commands/#start-stop-restart-the-agent
 [8]: https://github.com/DataDog/integrations-core/blob/master/system_swap/datadog_checks/system_swap/data/conf.yaml.example

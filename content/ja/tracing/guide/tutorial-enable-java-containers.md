@@ -1,72 +1,72 @@
 ---
+title: Tutorial - Enabling Tracing for a Java Application and Datadog Agent in Containers
+kind: guide
 further_reading:
 - link: /tracing/trace_collection/library_config/java/
-  tags: ドキュメント
-  text: トレーシングライブラリの追加構成オプション
+  tag: Documentation
+  text: Additional tracing library configuration options
 - link: /tracing/trace_collection/dd_libraries/java/
-  tags: ドキュメント
-  text: トレーシングライブラリの詳細設定手順
+  tag: Documentation
+  text: Detailed tracing library setup instructions
 - link: /tracing/trace_collection/compatibility/java/
-  tags: ドキュメント
-  text: 自動インスツルメンテーションのためにサポートされている Java フレームワーク
+  tag: Documentation
+  text: Supported Java frameworks for automatic instrumentation
 - link: /tracing/trace_collection/custom_instrumentation/java/
-  tags: ドキュメント
-  text: トレースとスパンを手動で構成する
-- link: https://github.com/DataDog/dd-trace-java
-  tags: GitHub
-  text: トレーシングライブラリオープンソースコードリポジトリ
-kind: ガイド
-title: チュートリアル - コンテナ内の Java アプリケーションと Datadog Agent のトレースを有効にする
+  tag: Documentation
+  text: Manually configuring traces and spans
+- link: "https://github.com/DataDog/dd-trace-java"
+  tag: Source Code
+  text: Tracing library open source code repository
 ---
 
-## 概要
+## Overview
 
-このチュートリアルでは、コンテナにインストールされたサンプル Java アプリケーションでトレースを有効にするための手順を説明します。このシナリオでは、Datadog Agent はコンテナにもインストールされています。
+This tutorial walks you through the steps for enabling tracing on a sample Java application installed in a container. In this scenario, the Datadog Agent is also installed in a container.
 
-ホスト上のアプリケーションと Agent、コンテナ内のアプリケーションとホスト上の Agent、クラウドインフラストラクチャー上のアプリケーションと Agent、他の言語で書かれたアプリケーションなど、他のシナリオについては、その他の[トレース有効化のチュートリアル][1]を参照してください。
+For other scenarios, including the application and Agent on a host, the application in a container and Agent on a host, the application and Agent on cloud infrastructure, and on applications written in other languages, see the other [Enabling Tracing tutorials][1].
 
-Java の一般的なトレース設定ドキュメントについては、[Java アプリケーションのトレース][2]を参照してください。
+See [Tracing Java Applications][2] for general comprehensive tracing setup documentation for Java.
 
-### 前提条件
+### Prerequisites
 
-- Datadog のアカウントと[組織の API キー][3]
-- Git 
+- A Datadog account and [organization API key][3]
+- Git
 - Docker
 - Curl
 
-## Docker 化されたサンプル Java アプリケーションのインストール
+## Install the sample Dockerized Java application
 
-このチュートリアルのコードサンプルは、GitHub の [github.com/DataDog/apm-tutorial-java-host][9] にあります。まずは、このリポジトリを複製してください。
+The code sample for this tutorial is on GitHub, at [github.com/DataDog/apm-tutorial-java-host][9]. To get started, clone the repository:
 
 {{< code-block lang="sh" >}}
 git clone https://github.com/DataDog/apm-tutorial-java-host.git
 {{< /code-block >}}
 
-このリポジトリには、Docker コンテナ内で実行できるようにあらかじめ構成されたマルチサービスの Java アプリケーションが含まれています。サンプルアプリは、データの追加や変更を行うための REST API を備えた基本的なノートアプリです。`docker-compose` の YAML ファイルは `docker` ディレクトリに配置されます。
+The repository contains a multi-service Java application pre-configured to be run within Docker containers. The sample app is a basic notes app with a REST API to add and change data. The `docker-compose` YAML files are located in the `docker` directory.
 
-このチュートリアルでは、アプリケーションと Datadog Agent の両方のコンテナをビルドする `all-docker-compose.yaml` ファイルを使用します。
+This tutorial uses the `all-docker-compose.yaml` file, which builds containers for both the application and the Datadog Agent.
 
-`notes` と `calendar` の各ディレクトリには、アプリケーションをビルドするための Dockerfile が、Maven と Gradle の 2 つのセットで用意されています。このチュートリアルでは Maven を使用しますが、Gradle に慣れている場合は、ビルドコマンドを変更することで、Maven の代わりに Gradle を使用することができます。
+In each of the `notes` and `calendar` directories, there are two sets of Dockerfiles for building the applications, either with Maven or with Gradle. This tutorial uses the Maven build, but if you are more familiar with Gradle, you can use it instead with the corresponding changes to build commands.
 
-### サンプルアプリケーションの起動と実行
+### Starting and exercising the sample application
 
-1. アプリケーションのコンテナを構築するには、`/docker` ディレクトリの中から以下を実行します。
+1. Build the application's container by running the following from inside the `/docker` directory:
 
    {{< code-block lang="sh" >}}
 docker-compose -f all-docker-compose.yaml build notes
 {{< /code-block >}}
 
-   ビルドに失敗した場合は、`Ctrl+C` で終了し、コマンドを再実行してください。
+   If the build gets stuck, exit with `Ctrl+C` and re-run the command.
 
-2. コンテナを起動します。
+2. Start the container:
 
    {{< code-block lang="sh" >}}
 docker-compose -f all-docker-compose.yaml up notes
 {{< /code-block >}}
 
-   `docker ps` コマンドで実行中のコンテナを表示することで、実行されていることを確認することができます。
+   You can verify that it's running by viewing the running containers with the `docker ps` command.
 
-3. 別のターミナルを開いて、アプリを行使するために API リクエストを送信します。ノートアプリケーションは、同じコンテナで実行されているメモリ内 H2 データベースにデータを保存する REST API です。これにいくつかのコマンドを送信します。
+3. Open up another terminal and send API requests to exercise the app. The notes application is a REST API that stores data in an in-memory H2 database running on the same container. Send it a few commands:
 
 `curl localhost:8080/notes`
 : `[]`
@@ -80,42 +80,42 @@ docker-compose -f all-docker-compose.yaml up notes
 `curl localhost:8080/notes`
 : `[{"id":1,"description":"hello"}]`
 
-### アプリケーションを停止します。
+### Stop the application
 
-アプリケーションの実行を確認したら、それを停止して、トレースを有効にします。
+After you've seen the application running, stop it so that you can enable tracing on it.
 
-1. コンテナを停止します。
+1. Stop the containers:
    {{< code-block lang="sh" >}}
 docker-compose -f all-docker-compose.yaml down
 {{< /code-block >}}
 
-2. コンテナを削除します。
+2. Remove the containers:
    {{< code-block lang="sh" >}}
 docker-compose -f all-docker-compose.yaml rm
 {{< /code-block >}}
 
-## トレースを有効にする
+## Enable tracing
 
-Java アプリケーションが動作するようになったので、トレースを有効にするための構成を行います。
+Now that you have a working Java application, configure it to enable tracing.
 
-1. Java tracing パッケージをプロジェクトに追加します。Agent はコンテナで動作するため、Dockerfile が適切に構成されていることを確認し、何もインストールする必要はありません。`notes/dockerfile.notes.maven` ファイルを開き、`dd-java-agent` をダウンロードする行のコメントを解除します。
+1. Add the Java tracing package to your project. Because the Agent runs in a container, ensure that the Dockerfiles are configured properly, and there is no need to install anything. Open the `notes/dockerfile.notes.maven` file and uncomment the line that downloads `dd-java-agent`:
 
    ```
-   RUN curl -Lo dd-java-agent.jar https://dtdg.co/latest-java-tracer
+   RUN curl -Lo dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
    ```
 
-2. 同じ `notes/dockerfile.notes.maven` ファイル内で、トレースなしで実行するための `ENTRYPOINT` 行をコメントアウトしてください。次に、トレースを有効にしてアプリケーションを実行する `ENTRYPOINT` 行のコメントを解除します。
+2. Within the same `notes/dockerfile.notes.maven` file, comment out the `ENTRYPOINT` line for running without tracing. Then uncomment the `ENTRYPOINT` line, which runs the application with tracing enabled:
 
    ```
    ENTRYPOINT ["java" , "-javaagent:../dd-java-agent.jar", "-Ddd.trace.sample.rate=1", "-jar" , "target/notes-0.0.1-SNAPSHOT.jar"]
    ```
 
-   これにより、アプリケーションは自動的に Datadog のサービスにインスツルメンテーションされます。
+   This automatically instruments the application with Datadog services.
 
-   <div class="alert alert-warning"><strong>注</strong>: これらのサンプルコマンドのフラグ、特にサンプルレートは、このチュートリアル以外の環境では、必ずしも適切ではありません。実際の環境で何を使うべきかについては、<a href="#tracing-configuration">トレース構成</a>を読んでください。</div>
+   <div class="alert alert-warning"><strong>Note</strong>: The flags on these sample commands, particularly the sample rate, are not necessarily appropriate for environments outside this tutorial. For information about what to use in your real environment, read <a href="#tracing-configuration">Tracing configuration</a>.</div>
 
-3. 異なるバージョンやデプロイ環境間でトレースされたサービスを識別する[統合サービスタグ][10]により、Datadog 内で相関が取れるようになり、検索やフィルターに利用できるようになります。統合サービスタグ付けに使用する環境変数は、`DD_SERVICE`、`DD_ENV`、`DD_VERSION` の 3 つです。Docker でデプロイされたアプリケーションの場合、これらの環境変数を Dockerfile または `docker-compose` ファイル内に追加することができます。
-   このチュートリアルでは、`all-docker-compose.yaml` ファイルにこれらの環境変数がすでに定義されています。
+3. [Universal Service Tags][10] identify traced services across different versions and deployment environments so that they can be correlated within Datadog, and so you can use them to search and filter. The three environment variables used for Unified Service Tagging are `DD_SERVICE`, `DD_ENV`, and `DD_VERSION`. For applications deployed with Docker, these environment variables can be added within the Dockerfile or the `docker-compose` file.
+   For this tutorial, the `all-docker-compose.yaml` file already has these environment variables defined:
 
    ```yaml
      environment:
@@ -124,7 +124,7 @@ Java アプリケーションが動作するようになったので、トレー
        - DD_VERSION=0.0.1
    ```
 
-4. また、同じユニバーサルサービスタグの `service`、`env`、`version` の値に対する Docker ラベルが Dockerfile に設定されていることがわかります。これにより、アプリケーションを起動したら Docker メトリクスを取得することもできます。
+4. You can also see that Docker labels for the same Universal Service Tags `service`, `env`, and `version` values are set in the Dockerfile. This allows you also to get Docker metrics once your application is running.
 
    ```yaml
      labels:
@@ -133,11 +133,11 @@ Java アプリケーションが動作するようになったので、トレー
        - com.datadoghq.tags.version="0.0.1"
    ```
 
-## Agent コンテナの追加
+## Add the Agent container
 
-`all-docker-compose.yaml` ファイルのサービスセクションに Datadog Agent を追加し、ビルドに Agent を追加します。
+Add the Datadog Agent in the services section of your `all-docker-compose.yaml` file to add the Agent to your build:
 
-1. Agent の構成のコメントを解除し、自分の [Datadog API キー][3]と[サイト][6]を指定します。
+1. Uncomment the Agent configuration, and specify your own [Datadog API key][3] and [site][6]:
    ```yaml
      datadog-agent:
        container_name: datadog-agent
@@ -151,17 +151,17 @@ Java アプリケーションが動作するようになったので、トレー
        volumes:
          - /var/run/docker.sock:/var/run/docker.sock
          - /proc/:/host/proc/:ro
-         - /sys/fs/cgroup:/host/sys/fs/cgroup:ro 
+         - /sys/fs/cgroup:/host/sys/fs/cgroup:ro
    ```
 
-3. `notes` コンテナ内の `datadog-agent` の `depends_on` フィールドのコメントを解除してください。
+3. Uncomment the `depends_on` fields for `datadog-agent` in the `notes` container.
 
-2. `notes` サービスセクションで、`DD_AGENT_HOST` 環境変数に Agent コンテナのホスト名が設定されていることに注目してください。`notes` コンテナセクションはこのようになります。
+2. Observe that in the `notes` service section, the `DD_AGENT_HOST` environment variable is set to the hostname of the Agent container. Your `notes` container section looks like this:
    ```yaml
    notes:
      container_name: notes
      restart: always
-     build: 
+     build:
        context: ../
        dockerfile: notes/dockerfile.notes.maven
      ports:
@@ -180,23 +180,23 @@ Java アプリケーションが動作するようになったので、トレー
      # - calendar
        - datadog-agent
    ```
-   このチュートリアルの後半で、`calendar` セクションと変数を構成することになります。
+   You'll configure the `calendar` sections and variables later in this tutorial.
 
 
-## 自動トレースを見るためにコンテナを起動する
+## Launch the containers to see automatic tracing
 
-トレーシングライブラリがインストールされたので、アプリケーションを再起動し、トレースの受信を開始します。以下のコマンドを実行します。
+Now that the Tracing Library is installed, restart your application and start receiving traces. Run the following commands:
 
 ```
 docker-compose -f all-docker-compose.yaml build notes
 docker-compose -f all-docker-compose.yaml up notes
 ```
 
-Agent が動作しているかどうかは、ターミナルで連続出力を観察するか、Datadog の[イベントエクスプローラー][8]を開いて Agent の開始イベントを確認することで分かります。
+You can tell the Agent is working by observing continuous output in the terminal, or by opening the [Events Explorer][8] in Datadog and seeing the start event for the Agent:
 
-{{< img src="tracing/guide/tutorials/tutorial-python-container-agent-start-event.png" alt="イベントエクスプローラーに表示される Agent の開始イベント" style="width:100%;" >}}
+{{< img src="tracing/guide/tutorials/tutorial-python-container-agent-start-event.png" alt="Agent start event shown in Events Explorer" style="width:100%;" >}}
 
-アプリケーションを起動した状態で、いくつかの curl リクエストを送信します。
+With the application running, send some curl requests to it:
 
 `curl localhost:8080/notes`
 : `[]`
@@ -210,45 +210,45 @@ Agent が動作しているかどうかは、ターミナルで連続出力を�
 `curl localhost:8080/notes`
 : `[{"id":1,"description":"hello"}]`
 
-しばらく待って、Datadog の [**APM > Traces**][11] にアクセスすると、API 呼び出しに対応するトレースの一覧が表示されます。
+Wait a few moments, and go to [**APM > Traces**][11] in Datadog, where you can see a list of traces corresponding to your API calls:
 
-{{< img src="tracing/guide/tutorials/tutorial-java-container-traces.png" alt="APM トレースエクスプローラーのサンプルアプリのトレース" style="width:100%;" >}}
+{{< img src="tracing/guide/tutorials/tutorial-java-container-traces2.png" alt="Traces from the sample app in APM Trace Explorer" style="width:100%;" >}}
 
-`h2` はこのチュートリアルのために埋め込まれたインメモリデータベースで、`notes` は Spring Boot アプリケーションです。トレースリストには、すべてのスパン、いつ開始したか、どのリソースがスパンで追跡されたか、どれくらいの時間がかかったか、が表示されます。
+The `h2` is the embedded in-memory database for this tutorial, and `notes` is the Spring Boot application. The traces list shows all the spans, when they started, what resource was tracked with the span, and how long it took.
 
-もし、数分待ってもトレースが表示されない場合は、Traces Search フィールドのフィルターをクリアしてください (使用していない `ENV` などの環境変数にフィルターをかけている場合があります)。
+If you don't see traces after several minutes, clear any filter in the Traces Search field (sometimes it filters on an environment variable such as `ENV` that you aren't using).
 
-### トレースの検証
+### Examine a trace
 
-Traces ページで、`POST /notes` トレースをクリックすると、各スパンにかかった時間や、あるスパンが完了する前に他のスパンが発生したことを示すフレームグラフが表示されます。グラフの上部にあるバーは、前の画面で選択したスパンです (この場合、ノートアプリケーションへの最初のエントリポイントです)。
+On the Traces page, click on a `POST /notes` trace to see a flame graph that shows how long each span took and what other spans occurred before a span completed. The bar at the top of the graph is the span you selected on the previous screen (in this case, the initial entry point into the notes application).
 
-バーの幅は、それが完了するまでにかかった時間を示します。低い深さのバーは、高い深さのバーの寿命の間に完了するスパンを表します。
+The width of a bar indicates how long it took to complete. A bar at a lower depth represents a span that completes during the lifetime of a bar at a higher depth.
 
-`POST` トレースのフレームグラフは次のようになります。
+The flame graph for a `POST` trace looks something like this:
 
-{{< img src="tracing/guide/tutorials/tutorial-java-container-post-flame.png" alt="POST トレースのフレームグラフ。" style="width:100%;" >}}
+{{< img src="tracing/guide/tutorials/tutorial-java-container-post-flame.png" alt="A flame graph for a POST trace." style="width:100%;" >}}
 
-`GET /notes` トレースは次のようになります。
+A `GET /notes` trace looks something like this:
 
-{{< img src="tracing/guide/tutorials/tutorial-java-container-get-flame.png" alt="GET トレースのフレームグラフ。" style="width:100%;" >}}
+{{< img src="tracing/guide/tutorials/tutorial-java-container-get-flame.png" alt="A flame graph for a GET trace." style="width:100%;" >}}
 
-### トレーシングのコンフィギュレーション
+### Tracing configuration
 
-Java トレーシングライブラリは、Java のビルトイン Agent とモニタリングのサポートを利用します。Dockerfile のフラグ `-javaagent:../dd-java-agent.jar` は、JVM が Java Agent として実行できるように、Java トレーシングライブラリをどこで見つけるかを指示します。Java Agent については、[https://www.baeldung.com/java-instrumentation][7] で詳しく説明されています。
+The Java tracing library uses Java's built-in agent and monitoring support. The flag `-javaagent:../dd-java-agent.jar` in the Dockerfile tells the JVM where to find the Java tracing library so it can run as a Java Agent. Learn more about Java Agents at [https://www.baeldung.com/java-instrumentation][7].
 
-`dd.trace.sample.rate` フラグは、このアプリケーションのサンプルレートを設定します。Dockerfile の ENTRYPOINT コマンドでは、この値を `1` に設定しています。これは、`notes` サービスに対する全てのリクエストの 100% が、分析と表示のために Datadog のバックエンドに送信されることを意味します。低容量のテストアプリケーションの場合、これは問題ありません。実稼働時や大量のデータを扱う環境では、このようなことはしないでください。代わりに、リクエストの一部をサンプリングします。例えば、`-Ddd.trace.sample.rate=0.1` とすると、リクエストの 10% 分のトレースが Datadog に送信されます。[トレース構成設定][14]と[サンプリング機構][15]について詳しくお読みください。
+The `dd.trace.sample.rate` flag sets the sample rate for this application. The ENTRYPOINT command in the Dockerfile sets its value to `1`, which means that 100% of all requests to the `notes` service are sent to the Datadog backend for analysis and display. For a low-volume test application, this is fine. Do not do this in production or in any high-volume environment, because this results in a very large volume of data. Instead, sample some of your requests. Pick a value between 0 and 1. For example, `-Ddd.trace.sample.rate=0.1` sends traces for 10% of your requests to Datadog. Read more about [tracing configuration settings][14] and [sampling mechanisms][15].
 
-このコマンドのサンプリングレートフラグは `-jar` フラグの前に表示されていることに注意してください。これは、このフラグがアプリケーションではなく、Java Virtual Machine のパラメーターだからです。アプリケーションに Java Agent を追加するときは、このフラグを正しい場所に指定するようにしてください。
+Notice that the sampling rate flag in the command appears _before_ the `-jar` flag. That's because this is a parameter for the Java Virtual Machine, not your application. Make sure that when you add the Java Agent to your application, you specify the flag in the right location.
 
-## Java アプリケーションに手動インスツルメンテーションを追加する
+## Add manual instrumentation to the Java application
 
-自動インスツルメンテーションは便利ですが、より細かいスパンが欲しい場合もあります。Datadog の Java DD Trace API では、アノテーションやコードを使用してコード内のスパンを指定することができます。
+Automatic instrumentation is convenient, but sometimes you want more fine-grained spans. Datadog's Java DD Trace API allows you to specify spans within your code using annotations or code.
 
-次のステップでは、コードにアノテーションを追加して、いくつかのサンプルメソッドをトレースする方法を説明します。
+The following steps walk you through adding annotations to the code to trace some sample methods.
 
-1. `/notes/src/main/java/com/datadog/example/notes/NotesHelper.java` を開きます。このサンプルには、コードにカスタムトレースを設定するさまざまな方法を示す、コメントアウトされたコードがすでに含まれています。
+1. Open `/notes/src/main/java/com/datadog/example/notes/NotesHelper.java`. This example already contains commented-out code that demonstrates the different ways to set up custom tracing on the code.
 
-2. 手動トレーシングをサポートするためのライブラリをインポートしている行のコメントを解除します。
+2. Uncomment the lines that import libraries to support manual tracing:
 
    ```java
    import datadog.trace.api.Trace;
@@ -262,14 +262,14 @@ Java トレーシングライブラリは、Java のビルトイン Agent とモ
    import java.io.StringWriter
    ```
 
-3. 2 つのパブリックプロセスを手動でトレースしている行のコメントを解除します。これらは、`@Trace` アノテーションを使用して、`operationName` や `resourceName` などのアスペクトをトレースで指定することを示しています。
+3. Uncomment the lines that manually trace the two public processes. These demonstrate the use of `@Trace` annotations to specify aspects such as `operationName` and `resourceName` in a trace:
    ```java
    @Trace(operationName = "traceMethod1", resourceName = "NotesHelper.doLongRunningProcess")
    // ...
    @Trace(operationName = "traceMethod2", resourceName = "NotesHelper.anotherProcess")
    ```
 
-4. また、アプリケーション内の特定のコードブロックに対して、別のスパンを作成することもできます。スパン内には、サービスやリソース名のタグ、エラー処理タグを追加します。これらのタグは、Datadog の視覚化でスパンとメトリクスを表示するフレームグラフになります。プライベートメソッドを手動でトレースする行のコメントを解除します。
+4. You can also create a separate span for a specific code block in the application. Within the span, add service and resource name tags and error handling tags. These tags result in a flame graph showing the span and metrics in Datadog visualizations. Uncomment the lines that manually trace the private method:
 
    ```java
            Tracer tracer = GlobalTracer.get();
@@ -279,12 +279,12 @@ Java トレーシングライブラリは、Java のビルトイン Agent とモ
                .withTag(DDTags.RESOURCE_NAME, "privateMethod1")
                .start();
            try (Scope scope = tracer.activateSpan(span)) {
-               // Tags can also be set after creation 
+               // Tags can also be set after creation
                span.setTag("postCreationTag", 1);
                Thread.sleep(30);
                Log.info("Hello from the custom privateMethod1");
    ```
-   また、エラー時にタグを設定する行も:
+   And also the lines that set tags on errors:
    ```java
         } catch (Exception e) {
             // Set error on span
@@ -301,53 +301,53 @@ Java トレーシングライブラリは、Java のビルトイン Agent とモ
         }
    ```
 
-5. `notes/pom.xml` を開き、手動トレースの依存関係を構成する行のコメントを解除して、Maven ビルドを更新します。`dd-trace-api` ライブラリは `@Trace` アノテーションに使用され、`opentracing-util` と `opentracing-api` は手動でスパンを作成するために使用されます。
+5. Update your Maven build by opening `notes/pom.xml` and uncommenting the lines configuring dependencies for manual tracing. The `dd-trace-api` library is used for the `@Trace` annotations, and `opentracing-util` and `opentracing-api` are used for manual span creation.
 
-6. コンテナを再構築します。
+6. Rebuild the containers:
 
    ```sh
    docker-compose -f all-docker-compose.yaml build notes
    docker-compose -f all-docker-compose.yaml up notes
    ```
 
-7. いくつかの HTTP リクエスト、特にいくつかの `GET` リクエストを再送します。
-8. トレースエクスプローラーで、新しい `GET` リクエストの 1 つをクリックすると、次のようなフレームグラフが表示されます。
+7. Resend some HTTP requests, specifically some `GET` requests.
+8. On the Trace Explorer, click on one of the new `GET` requests, and see a flame graph like this:
 
-   {{< img src="tracing/guide/tutorials/tutorial-java-container-custom-flame.png" alt="カスタムインスツルメンテーションを用いた GET トレースのフレームグラフ。" style="width:100%;" >}}
+   {{< img src="tracing/guide/tutorials/tutorial-java-container-custom-flame.png" alt="A flame graph for a GET trace with custom instrumentation." style="width:100%;" >}}
 
-   `getAll` 関数にカスタムトレースが追加され、スタックトレースがより詳細になったことに注意してください。
+   Note the higher level of detail in the stack trace now that the `getAll` function has custom tracing.
 
-   手動でスパンを作成した `privateMethod` は、他のコールとは別のブロックとして表示され、別の色でハイライトされています。`@Trace` アノテーションを使用した他のメソッドは、`GET` リクエスト (`notes` アプリケーション) と同じサービス、同じ色で表示されます。カスタムインスツルメンテーションは、ハイライトして監視する必要があるコードの重要な部分がある場合に有効です。
+   The `privateMethod` around which you created a manual span now shows up as a separate block from the other calls and is highlighted by a different color. The other methods where you used the `@Trace` annotation show under the same service and color as the `GET` request, which is the `notes` application. Custom instrumentation is valuable when there are key parts of the code that need to be highlighted and monitored.
 
-詳しくは、[カスタムインストルメンテーション][12]をご覧ください。
+For more information, read [Custom Instrumentation][12].
 
-## 分散型トレーシングを見るために 2 つ目のアプリケーションを追加する
+## Add a second application to see distributed traces
 
-単一のアプリケーションをトレースすることは素晴らしいスタートですが、トレースの本当の価値は、リクエストがサービスを通じてどのように流れるかを見ることです。これは、_分散型トレーシング_と呼ばれています。
+Tracing a single application is a great start, but the real value in tracing is seeing how requests flow through your services. This is called _distributed tracing_.
 
-サンプルプロジェクトには `calendar` という 2 番目のアプリケーションが含まれており、呼び出されるたびにランダムな日付を返します。Notes アプリケーションの `POST` エンドポイントには、`add_date` という名前の 2 つ目のクエリパラメーターがあります。このパラメータが `y` に設定されると、Notes はカレンダーアプリケーションを呼び出して、ノートに追加する日付を取得します。
+The sample project includes a second application called `calendar` that returns a random date whenever it is invoked. The `POST` endpoint in the Notes application has a second query parameter named `add_date`. When it is set to `y`, Notes calls the calendar application to get a date to add to the note.
 
-1. ノートアプリと同様に、Dockerfile の起動コマンドに `dd-java-agent` を追加して、トレース用のカレンダーアプリの構成を確認します。`calendar/Dockerfile.calendar.maven` を開き、すでに `dd-java-agent` がダウンロードされていることを確認します。
+1. Configure the calendar app for tracing by adding `dd-java-agent` to the startup command in the Dockerfile, like you previously did for the notes app. Open `calendar/Dockerfile.calendar.maven` and see that it is already downloading `dd-java-agent`:
 
    ```
-   RUN curl -Lo dd-java-agent.jar https://dtdg.co/latest-java-tracer
+   RUN curl -Lo dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
    ```
 
-2. 同じ `calendar/dockerfile.calendar.maven` ファイル内で、トレースなしで実行するための `ENTRYPOINT` 行をコメントアウトしてください。次に、トレースを有効にしてアプリケーションを実行する `ENTRYPOINT` 行のコメントを解除します。
+2. Within the same `calendar/dockerfile.calendar.maven` file, comment out the `ENTRYPOINT` line for running without tracing. Then uncomment the `ENTRYPOINT` line, which runs the application with tracing enabled:
 
    ```
    ENTRYPOINT ["java" , "-javaagent:../dd-java-agent.jar", "-Ddd.trace.sample.rate=1", "-jar" , "target/calendar-0.0.1-SNAPSHOT.jar"]
    ```
 
-   <div class="alert alert-warning"><strong>注</strong>: 繰り返しになりますが、フラグ、特にサンプルレートは、このチュートリアル以外の環境では、必ずしも適切ではありません。実際の環境で何を使うべきかについては、<a href="#tracing-configuration">トレース構成</a>を読んでください。</div>
+   <div class="alert alert-warning"><strong>Note</strong>: Again, the flags, particularly the sample rate, are not necessarily appropriate for environments outside this tutorial. For information about what to use in your real environment, read <a href="#tracing-configuration">Tracing configuration</a>.</div>
 
-3. `docker/all-docker-compose.yaml` を開き、`calendar` サービス用の環境変数のコメントを解除して、アプリ用の Agent ホストと Docker 用の統合サービスタグをセットアップします。
+3. Open `docker/all-docker-compose.yaml` and uncomment the environment variables for the `calendar` service to set up the Agent host and Unified Service Tags for the app and for Docker:
 
    ```yaml
      calendar:
        container_name: calendar
        restart: always
-       build: 
+       build:
          context: ../
          dockerfile: calendar/dockerfile.calendar.maven
        labels:
@@ -365,7 +365,7 @@ Java トレーシングライブラリは、Java のビルトイン Agent とモ
         - datadog-agent
    ```
 
-4. `notes` サービスセクションで、`CALENDAR_HOST` 環境変数と `depends_on` の `calendar` エントリのコメントを解除して、2 つのアプリの間で必要な接続を行います。
+4. In the `notes` service section, uncomment the `CALENDAR_HOST` environment variable and the `calendar` entry in `depends_on` to make the needed connections between the two apps:
 
    ```yaml
      notes:
@@ -381,47 +381,47 @@ Java トレーシングライブラリは、Java のビルトイン Agent とモ
          - datadog-agent
    ```
 
-5. コンテナを再起動し、マルチサービスアプリケーションを構築します。まず、実行中のコンテナをすべて停止します。
+5. Build the multi-service application by restarting the containers. First, stop all running containers:
    ```
    docker-compose -f all-docker-compose.yaml down
    ```
 
-   その後、以下のコマンドを実行して起動します。
+   Then run the following commands to start them:
    ```
    docker-compose -f all-docker-compose.yaml build
    docker-compose -f all-docker-compose.yaml up
    ```
 
-6. すべてのコンテナが立ち上がった後、`add_date` パラメーターを指定して POST リクエストを送信します。
+6. After all the containers are up, send a POST request with the `add_date` parameter:
 
 `curl -X POST 'localhost:8080/notes?desc=hello_again&add_date=y'`
 : `{"id":1,"description":"hello_again with date 2022-11-06"}`
 
 
-7. トレースエクスプローラーで、この最新のトレースをクリックすると、2 つのサービス間の分散型トレーシングが表示されます。
+7. In the Trace Explorer, click this latest trace to see a distributed trace between the two services:
 
-   {{< img src="tracing/guide/tutorials/tutorial-java-container-distributed.png" alt="分散型トレーシングのフレームグラフ。" style="width:100%;" >}}
+   {{< img src="tracing/guide/tutorials/tutorial-java-container-distributed.png" alt="A flame graph for a distributed trace." style="width:100%;" >}}
 
-`notes` アプリケーションでは何も変更していないことに注意してください。Datadog は `notes` から `calendar` への HTTP コールに使用される `okHttp` ライブラリと、`notes` と `calendar` の HTTP リクエストをリッスンするために使用する Jetty ライブラリの両方を自動的にインスツルメントします。これにより、トレース情報を 1 つのアプリケーションから他のアプリケーションに渡すことができ、分散型トレースをキャプチャすることができます。
+Note that you didn't change anything in the `notes` application. Datadog automatically instruments both the `okHttp` library used to make the HTTP call from `notes` to `calendar`, and the Jetty library used to listen for HTTP requests in `notes` and `calendar`. This allows the trace information to be passed from one application to the other, capturing a distributed trace.
 
-## トラブルシューティング
+## Troubleshooting
 
-もし、期待通りのトレースが受信できない場合は、Java トレーサーのでデバッグモードを設定してください。詳しくは[デバッグモードの有効化][13]を読んでください。
-## その他の参考資料
+If you're not receiving traces as expected, set up debug mode for the Java tracer. Read [Enable debug mode][13] to find out more.
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/tracing/guide/#enabling-tracing-tutorials
-[2]: /ja/tracing/trace_collection/dd_libraries/java/
-[3]: /ja/account_management/api-app-keys/
-[4]: /ja/tracing/trace_collection/compatibility/java/
-[6]: /ja/getting_started/site/
+[1]: /tracing/guide/#enabling-tracing-tutorials
+[2]: /tracing/trace_collection/dd_libraries/java/
+[3]: /account_management/api-app-keys/
+[4]: /tracing/trace_collection/compatibility/java/
+[6]: /getting_started/site/
 [8]: https://app.datadoghq.com/event/explorer
 [7]: https://www.baeldung.com/java-instrumentation
 [9]: https://github.com/DataDog/apm-tutorial-java-host
-[10]: /ja/getting_started/tagging/unified_service_tagging/
+[10]: /getting_started/tagging/unified_service_tagging/
 [11]: https://app.datadoghq.com/apm/traces
-[12]: /ja/tracing/trace_collection/custom_instrumentation/java/
-[13]: /ja/tracing/troubleshooting/tracer_debug_logs/#enable-debug-mode
-[14]: /ja/tracing/trace_collection/library_config/java/
-[15]: /ja/tracing/trace_pipeline/ingestion_mechanisms/?tab=java
+[12]: /tracing/trace_collection/custom_instrumentation/java/
+[13]: /tracing/troubleshooting/tracer_debug_logs/#enable-debug-mode
+[14]: /tracing/trace_collection/library_config/java/
+[15]: /tracing/trace_pipeline/ingestion_mechanisms/?tab=java

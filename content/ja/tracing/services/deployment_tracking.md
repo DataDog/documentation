@@ -1,201 +1,206 @@
 ---
+title: Deployment  Tracking
+kind: documentation
+description: 'Use Datadog to track your deployments through version tags'
 aliases:
-- /ja/tracing/version_tracking
-- /ja/tracing/deployment_tracking/
-description: Datadog を使用して、バージョンタグによりデプロイメントを追跡
+    - /tracing/version_tracking
+    - /tracing/deployment_tracking/
 further_reading:
-- link: getting_started/tagging/unified_service_tagging/
-  tag: ドキュメント
-  text: 統合サービスタグ付けと予約済みタグについて学ぶ
-- link: tracing/app_analytics
-  tag: ドキュメント
-  text: App Analytics クエリでディメンションとしてバージョンを使用する
-title: デプロイメントの追跡
+    - link: getting_started/tagging/unified_service_tagging/
+      tag: Documentation
+      text: Learn about Unified Service Tagging and reserved tags
+    - link: tracing/app_analytics
+      tag: Documentation
+      text: Use version as a dimension in your App Analytics queries
 ---
-## Version タグ
+## The version tag
 
-`version` タグは、統合サービスタグ付け内に予約され、インフラストラクチャーメトリクス（ホスト、コンテナ、プロセス、NPM チェック）、トレースメトリクス、トレース、プロファイル、ログに適用されます。
+The `version` tag is reserved within Unified Service Tagging. It's applied to infrastructure metrics (host, container, process, and NPM checks), trace metrics, traces, profiles, and logs.
 
-`version` タグを使用して、ソフトウェアのデプロイメントストラテジーと併せてデプロイメントおよびサービス動作の監視を行うことができます。
+You can use the `version` tag to monitor deployments and service behavior in support of your software deployment strategy.
 
-まだ `version` タグをセットアップしていない場合は、[統合サービスタグ付けのドキュメント][1]で詳細をご確認ください。
+If you have not set up the `version` tag refer to the [Unified Service Tagging documentation][1] for setup information.
 
-## サービス詳細画面での version タグの使用
+## Using version tags on the Service page
 
-{{< img src="tracing/deployment_tracking/ServicePageRequestsErrorsByVersion.png" alt="サービス詳細画面のバージョン" style="width:100%;">}}
+{{< img src="tracing/deployment_tracking/ServicePageRequestsErrorsByVersion.png" alt="Versions on the Service page" style="width:100%;">}}
 
-サービス詳細画面で、`version` タグが使用可能な場合、リクエストウィジェットのスコープを次のいずれかに設定できます。
+On the Service page, if the `version` tag is available, you can scope the Requests widget to:
 
-- バージョン別の合計リクエスト数、または
-- バージョン別 1 秒あたりのリクエスト数
+- Total Requests by Version, or
+- Requests Per Second by Version
 
-エラーウィジェットのスコープを次のいずれかに設定できます。
+You can scope the errors widget to:
 
-- バージョンごとの合計エラー数
-- バージョン別 1 秒あたりのエラー数、または
-- バージョン別のエラー率
+- Total Errors by Version
+- Errors Per Second by Version, or
+- % Error Rate by Version
 
-リクエストおよびエラーのウィジェットは、ダッシュボードとモニターにエクスポートできます。
+Requests and Errors widgets can both be exported to dashboards and monitors.
 
-## バージョンタグを使った欠陥のあるデプロイの自動検出
+## Using version tags for automatic faulty deployment detection
 
-`version` タグでサービスを構成することで、[欠陥のあるデプロイの自動検出][4]が可能になります。
+Configuring your services with the `version` tag enables [Automatic Faulty Deployment Detection][4]. 
 
-モニターを設定して、潜在的な欠陥のあるすべてのデプロイについて自動的に通知 を受けることができます。これを行うには、New Monitors ページに移動して Events を選択し、モニターを定義する検索クエリに `tags:deployment_analysis` を含めます。
+You can set up a monitor to get automatically notified on all potentially faulty deployments. To do so, navigate to the New Monitors page and choose Events, and include `tags:deployment_analysis` in the search query defining the monitor.
 
 
-## デプロイ済みのバージョン
+## Versions deployed
 
-`version` タグで構成されたサービスには、サービス健全性を示すメインのグラフの下のサービス詳細画面にバージョンセクションがあります。バージョンセクションには、選択した時間間隔にアクティブだったサービスのすべてのバージョンが表示されます（上部にはアクティブなサービスが表示）。
+A service configured with `version` tags has a version section on its Service page, below the main service health graphs. The version section shows all versions of the service that were active during the selected time interval, with active services at the top.
 
-デフォルトで、以下が表示されます。
+By default you will see:
 
-- タイムフレーム中にこのサービスにデプロイされたバージョン名。
-- このバージョンに対応するトレースが確認された最初および最後の時間。
-- 各バージョンに出現した、直前バージョンでは出現しなかったエラータイプの回数を表示するエラータイプインジケーター。
+- The version names deployed for this service over the timeframe.
+- The times at which traces that correspond to this version were first and last seen.
+- An Error Types indicator, which shows how many types of errors appear in each version that did not appear in the immediately previous version.
 
-    > **注:** ここには、前バージョンのトレースでは見られなかったエラーが表示されますが、このバージョンがこのようなエラーを発生させることを意味するものではありません。新しいエラータイプを確認することは、エラー調査を始める良い方法です。
+    > **Note:** This indicator shows errors that were not seen in traces from the previous version. It doesn't mean that this version necessarily introduced these errors. Looking into new error types can be a great way to begin investigating errors.
 
-- 1 秒あたりのリクエスト数。
-- 合計リクエスト数のパーセンテージとしてのエラー率。
+- Requests per second.
+- Error rate as a percentage of total requests.
 
 
-この概要テーブルに列を追加またはテーブルから列を削除することができます。選択はすべて保存されます。利用可能な列は以下のとおりです。
+You can add columns to or remove columns from this overview table and your selections will be saved. The additional available columns are:
 
-- 前バージョンに存在しなかったバージョンでアクティブなエンドポイント。
-- アクティブな時間。このバージョンで Datadog に送信された最初のトレースから最後のトレースまでの時間を表示。
-- リクエスト総数。
-- エラー総数。
-- p50、p75、p90、p95、p99、または最大で計測されたレイテンシー。
+- Endpoints that are active in a version that were not in the previous version.
+- Time active, showing the length of time from the first trace to the last trace sent to Datadog for that version.
+- Total number of Requests.
+- Total number of Errors.
+- Latency measured by p50, p75, p90, p95, p99, or max.
 
-{{< img src="tracing/deployment_tracking/VersionComparison.png" alt="サービス詳細画面のバージョン" style="width:100%;">}}
+{{< img src="tracing/deployment_tracking/VersionComparison.png" alt="Versions on the Service Page" style="width:100%;">}}
 
-**注:** バージョンセクションは、ページ上部で選択された時間間隔の間に報告するバージョンが 1 つ以上ある場合にのみ表示されます。
+**Note:** The version section appears only if there is more than one version reporting during the time interval that is selected at the top of the page.
 
-## デプロイメントの比較
+## Deployment comparison
 
-バージョン概要テーブルで任意のバージョンの行をクリックすると、バージョンの比較ページが開き、同じサービスの 2 つのバージョンを比較できます。デフォルトでは、選択したバージョンが直前のバージョンと比較されますが、過去 30 日以内のあらゆる 2 バージョンに変更して比較することが可能です。
+Click on any version row in the version summary table to open a version comparison page, allowing you to compare two versions of the same service. By default, the selected version will be compared to the immediately previous version but you can change it to compare any two versions within the past 30 days.
 
-バージョンの比較ページでは、以下の情報を確認できます。
+You can find the following information on version comparison page:
 
-- [比較グラフ](#comparison-graphs): サービスへのリクエストおよびエラーが視覚化されているため、様々なタイプの[デプロイメント](#deployment-strategies)を確認できます。
-- [エラー比較](#error-comparison): バージョンにより導入された、または解決されたエラー。
-- [エンドポイント比較](#endpoint-comparison): 各バージョンでのエンドポイントレイテンシーおよびエラー率。
+- [Comparison Graphs](#comparison-graphs): A visualization of requests and errors to services, useful for watching various types of [deployments](#deployment-strategies).
+- [Error Comparison](#error-comparison): Errors that may have been introduced or solved by a version.
+- [Endpoint Comparison](#endpoint-comparison): How endpoint latency and error rates perform in each version.
 
-### 比較グラフ
+### Comparison graphs
 
-サービス詳細画面のグラフと同様、リクエストおよびエラーのグラフにはデプロイメントのロールアウト概要およびエラー率の急上昇を示します。このページでは、比較のため選択されたバージョンがグラフ上でハイライトされ、コンテキストとして他のすべてのバージョンはグレー表示されます。
+Similar to the graphs on the Service page, Requests and Errors graphs show an overview of a deployment rollout or spikes in error rates. On this page, the graphs highlight the selected versions for comparison and leave all other versions in gray for additional context.
 
-{{< img src="tracing/deployment_tracking/ComparisonGraphs.png" alt="デプロイメント比較グラフ" style="width:100%;">}}
+{{< img src="tracing/deployment_tracking/ComparisonGraphs.png" alt="Deployment Comparison Graphs" style="width:100%;">}}
 
-### エラー比較
+If [Continuous Profiler is enabled][5], you also see comparisons of key performance metrics, such as CPU Time or Allocated Memory, broken down per APM resource. From there, you can pivot to the [Profile Comparison Page][6]:
 
-このセクションには、それぞれの 2 バージョンで検出されたエラータイプの違いが、以下をハイライトしてリストアップされます。
+{{< img src="tracing/deployment_tracking/DeploymentTrackingProfileComparison.png" alt="Deployment Profiling Comparison Graphs" style="width:100%;">}}
 
- - ソースバージョンにのみ見られたエラータイプ（トラブルシューティングに役立ちます）
- - ソースバージョンに見られなくなったエラータイプ（修正の有効性の確認に役立ちます）
- - 両方でアクティブなエラータイプ。
+### Error comparison
 
-このテーブルから、選択したエラーに対応する現在および過去のトレースにピボットして、さらに調査をすることができます。
+This section lists differences in error types detected for each the two versions, highlighting:
 
-**注:** エラー比較は、_観察された_ エラータイプに基づいています。珍しいエラータイプは、_まだ_ 確認されていないという理由だけで、「出現しなくなった」と検出される可能性があります。
+ - Error types appearing only in the source version, useful for troubleshooting it;
+ - Error types no longer appearing in the source version, useful for validating fixes; and
+ - Error types active in both.
 
-{{< img src="tracing/deployment_tracking/ErrorComparison.mp4" alt="エラー比較" video=true style="width:100%;">}}
+From this table, you can pivot into live or historical traces corresponding to the selected error for further investigation.
 
-### エンドポイント比較
+**Note:** Error comparison is based on _observed_ error types. If an error type is rare, it might be listed as no longer appearing only because it has not been seen _yet_.
 
-このセクションでは、サービスの各エンドポイントのパフォーマンス（リクエスト、レイテンシー、エラー）を比較できます。値別にテーブルをソートして、デプロイ後に最高スループットのエンドポイントが引き続き正常であることを確認したり、パーセンテージの変化でソートして、レイテンシーまたはエラー率における大きな変化を確認したりできます。
+{{< img src="tracing/deployment_tracking/ErrorComparison.mp4" alt="Error Comparison" video=true style="width:100%;">}}
 
-{{< img src="tracing/deployment_tracking/EndpointComparison.png" alt="エンドポイント比較" style="width:100%;">}}
+### Endpoint comparison
 
-## デプロイ戦略
+This section lets you compare the performance (requests, latency, and errors) of each endpoint in the service. Sort the table by Value to validate that the highest-throughput endpoints are still healthy following a deploy, or by % Change to spot large changes in latency or error rates.
 
-Datadog のデプロイ追跡により、以下のデプロイ戦略 (またはその他) の使用時にデプロイされたコードのパフォーマンスを可視化して不良コードのデプロイを検出し、変更の影響を抑え、インシデントにより迅速に対応することができます。
+{{< img src="tracing/deployment_tracking/EndpointComparison.png" alt="Endpoint Comparison" style="width:100%;">}}
 
-### ローリングデプロイ
+## Deployment strategies
 
-ローリングデプロイでは、新しいバージョンをホストまたはコンテナに 1 つずつデプロイしながら、トラフィックを他のインスタンスに転送することにより、ダウンタイムをゼロにできます。
+Datadog's deployment tracking gives you visibility into the performance of deployed code when you are using the following deployment strategies (or others) to detect bad code deployments, contain the impact of changes, and respond faster to incidents.
 
-Datadog を使用して、ローリングデプロイを監視し、エラーの増加を検出できます。
+### Rolling deploys
 
-{{< img src="tracing/deployment_tracking/rolling.png" alt="ローリングデプロイメント" style="width:100%;">}}
+Rolling deploys provide zero-downtime by directing traffic to other instances while deploying a new version to hosts or containers one-by-one.
 
-### ブルーおよびグリーンデプロイ
+Using Datadog, you can monitor your rolling deploys and detect any resulting error increases.
 
-ブルーおよびグリーン (または他の色の組み合わせ) デプロイでは、どちらもトラフィックを受け入れる 2 つのサービスのクラスターを実行するか、一方をスタンバイ状態にして、もう一方に問題がある場合にアクティブ化できるようにすることで、ダウンタイムを削減します。
+{{< img src="tracing/deployment_tracking/rolling.png" alt="Rolling Deployment" style="width:100%;">}}
 
-これらのサービスの `version` タグを設定して表示すると、リクエストとエラーを比較し、クラスターの 1 つが他のクラスターよりもエラー率が高い場合、クラスターが SLO を満たしていない場合、トラフィックを受信することが想定されていないクラスターである場合を検出することができます。
+### Blue and green deploys
 
-{{< img src="tracing/deployment_tracking/BlueGreenDeploy.png" alt="ブルー/グリーンデプロイメント" style="width:100%;">}}
+Blue and green (or other color combination) deployments reduce downtime by running two clusters of services that are both accepting traffic, or by keeping one on standby, ready to be activated if there are problems with the other.
 
-### カナリアデプロイ
+Setting and viewing the `version` tags for these services lets you compare requests and errors to detect if one of the clusters has an error rate higher than the other cluster, if a cluster is not meeting SLOs, or if a cluster that is not supposed to be receiving traffic is.
 
-カナリアデプロイでは、サービスを限られた数のホストまたは一部の顧客にデプロイして、影響を制限しながら新しいデプロイをテストします。
+{{< img src="tracing/deployment_tracking/BlueGreenDeploy.png" alt="Blue/Green Deployment" style="width:100%;">}}
 
-Datadog 内で `version` タグを使用すると、カナリアデプロイのエラー率、トレース、サービスの動作を比較できます。
+### Canary deploys
 
-たとえば、次の画像では、カナリアバージョンがデプロイされ、いくつかのエラーがあり、削除されたことがわかります。そのバージョンに対応するトレースは、さらに影響を与えることなく調査に利用できます。
+With canary deploys, a service is deployed on a limited number of hosts or for a fraction of customers, to test a new deployment with limited impact.
 
-{{< img src="tracing/deployment_tracking/canarydeployment.png" alt="カナリアデプロイメント" style="width:100%;">}}
+Using `version` tags within Datadog allows you to compare error rates, traces, and service behavior for the canary deployment.
 
-### シャドウデプロイ
+For example, you can see in the following image that a canary version was deployed, had a few errors, and was removed, with traces corresponding to that version available for investigation without any further impact.
 
-シャドウデプロイでは、リリース候補バージョンが本番バージョンと一緒にデプロイされ、着信トラフィックが両方のサービスに送信されます。ユーザーには本番からの結果のみが表示されますが、両方からデータを収集することができます。
+{{< img src="tracing/deployment_tracking/canarydeployment.png" alt="Canary Deployment" style="width:100%;">}}
 
-シャドウデプロイを使用すると、実際の本番トラフィックに対して潜在的なリリースをテストできます。シャドウに `version` タグをタグ付けすると、2 つのバージョン間のエラー率、トレース、サービスの動作を比較して、シャドウバージョンをリリースする必要があるかどうかを判断できます。
+### Shadow deploys
 
-## Datadog 内での Version タグの使用
+In a shadow deployment, a release candidate version is deployed alongside the production version, and incoming traffic is sent to both services, with users seeing the results only from production, but letting you collect data from both.
 
-`version` タグは、検索ビューを特定のバージョンにフィルターするか、異なるバージョンのメトリクスを比較するために、Datadog 内の任意の場所で使用できます。
+Shadow deploys allow you to test a potential release against real production traffic. Tagging shadows with a `version` tag lets you compare error rates, traces, and service behavior between the two versions to determine if the shadow version should be released.
 
-### リソースステータス画面
+## Using version tags elsewhere within Datadog
 
-{{< img src="tracing/deployment_tracking/ResourcePage.png" alt="リソースステータス画面のバージョン" style="width:100%;">}}
+The `version` tag can be used anywhere within Datadog, whether to filter a search view to a specific version, or to compare metrics from different versions.
 
-リソースステータス画面で、version タグが使用可能な場合、リクエストウィジェットのスコープは次のいずれかに設定できます。
+### Resource page
 
-- バージョンごとの合計リクエスト数
-- バージョンごとの 1 秒あたりのリクエスト数
+{{< img src="tracing/deployment_tracking/ResourcePage.png" alt="Versions on the Resource Page" style="width:100%;">}}
 
-エラーウィジェットは、`version` タグを含む 3 つのオプションのいずれかにスコープを設定できます。
+On the Resource page, if the version tag is available, the requests widget can be scoped to either of:
 
-- バージョンごとの合計エラー数
-- バージョンごとの 1 秒あたりのエラー数
-- バージョンごとのエラー率
+- Total Requests by Version
+- Requests per second by Version
 
-これらはすべてダッシュボードとモニターにエクスポートできます。
+The errors widget can be scoped to one of three options that involve the `version` tag:
 
-### トレース検索と分析
+- Total Errors by Version
+- Errors per second by Version
+- % Error rate by Version
 
-{{< img src="tracing/deployment_tracking/AnalyticsErrorsByVersion.mp4" alt="App Analytics のバージョン" video=true style="width:100%;">}}
+All of these can be exported to dashboards and monitors.
 
-使用可能な場合、`version` はトレース検索と分析の両方のタグとして使用することで、ライブ検索モードとインデックス化されたトレースをフィルタリングするか、分析クエリをフィルタリングまたはグループ化することができます。
+### Trace search and analytics
 
-`version` タグでのフィルタリングを含む分析は、ダッシュボードとモニターにエクスポートできます。
+{{< img src="tracing/deployment_tracking/AnalyticsErrorsByVersion.mp4" alt="Version in App Analytics" video=true style="width:100%;">}}
 
-### バージョン別プロファイル
+When available, `version` can be used as a tag for both Trace Search and Analytics, either to filter the live search mode and indexed traces, or to filter or group analytics queries.
 
-特定のバージョンに対応するプロファイルを検索できます。[デプロイメント比較](#deployment-comparison) ページ右上の **View Profiles** をクリックして、比較しているバージョンのいずれかにスコープした継続的プロファイラーを開くことも可能です。
+Analytics, including filtering on the `version` tag, can be exported to dashboards and monitors.
 
-{{< img src="tracing/deployment_tracking/VersionProfiler.png" alt="バージョン別にプロファイルをフィルター" style="width:100%;">}}
+### Profiles by version
+
+You can search for profiles that correspond to a particular version. You can also click **View Profiles** on the top right of the [Deployment Comparison](#deployment-comparison) page to open the Continuous Profiler scoped to either version being compared.
+
+{{< img src="tracing/deployment_tracking/VersionProfiler.png" alt="Filter Profiles by Version" style="width:100%;">}}
 
 <br>
 
-## デプロイメント間の時間メトリクス
+## The time between deployments metric
 
-サービスの新しいデプロイが検出されるたびに、Deployment Tracking は `time_between_deployments` メトリクスの値を計算し、新しいデプロイとその前の最新バージョンのデプロイの間の秒数として計算されます。
+Every time a new deployment of a service is detected, Deployment Tracking calculates a value for the `time_between_deployments` metric, calculated as the duration in seconds between the new deployment and the deployment of the most recent version prior to that. 
 
-### メトリクス定義
+### Metric definition
 
 `datadog.service.time_between_deployments{env, service, second_primary_tag}`
-: **前提条件:** このメトリクスは、[統合サービスタグ付け][1]によってバージョンタグ付けが有効になっているすべての APM サービスに存在します。<br>
-**説明:** サービスのデプロイメントと、それ以前の最新バージョンのデプロイメントとの間の経過時間 (秒)。<br>
-**メトリクスタイプ:** [ディストリビューション][2]<br>
-**タグ:** メトリクスには、サービスの `env`、`service`、および [2 番目のプライマリタグ][3]がタグ付けされます。
+: **Prerequisite:** This metric exists for any APM service with version tagging enabled through [Unified Service Tagging][1].<br>
+**Description:** The time in seconds elapsed between a deployment of a service and the deployment of the most recent version prior to that.<br>
+**Metric type:** [Distribution][2]<br>
+**Tags:** The metric is tagged with the service's `env`, `service`, and [second primary tag][3].
 
-### 例
+### Examples
 
-もし、バージョン A を time = 0 で、バージョン B を time = 10 でデプロイするサービスがあれば、`datadog.service.time_between_deployments` のメトリクス値は 10 になります。
+If you have a service that deploys version A at time = 0 and version B at time = 10, then the value of the metric `datadog.service.time_between_deployments` is 10:
 
 Time = 0
 : `{service: foo, env: prod, cluster-name: dev-shopist, version: A}`
@@ -203,11 +208,11 @@ Time = 0
 Time = 10
 : `{service: foo, env: prod, cluster_name: dev-shopist, version: B}`
 
-デプロイメント間の時間
+Time between deployments
 : `datadog.service.time_between_deployments{env: prod, cluster_name: dev-shopist} = 10`
 
 
-クラスター `dev-shopist` に time = 20 でバージョン X を、クラスター `us-staging` に time = 30 でバージョン Y を、クラスター `dev-shopist` に time = 45 で再びバージョン Y をデプロイすると、任意のクラスターにおけるメトリクス `datadog.service.time_between_deployments` の `max` 値は 25 (最新の Y から最後の X を引いた時間) になります。
+If you deploy version X at time = 20 on cluster `dev-shopist`, version Y at time = 30 on cluster `us-staging`, and version Y again at time = 45 on cluster `dev-shopist`, the `max` value of the metric `datadog.service.time_between_deployments` for any cluster is 25 (the time of the most recent Y minus the last X): 
 
 Time = 20
 : `{service: foo, env: staging, cluster-name: dev-shopist, version: X}`
@@ -218,16 +223,18 @@ Time = 30
 Time = 45
 : `{service: foo, env: dev-shopist, cluster-name: us-staging, version: Y}`
 
-デプロイメント間の最大時間:
+Max time between deployments:
 : `max:datadog.service.time_between_deployments{env: staging, cluster-name: *} = 25`
 
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /ja/getting_started/tagging/unified_service_tagging/
-[2]: /ja/metrics/types/?tab=distribution#metric-types
-[3]: /ja/tracing/guide/setting_primary_tags_to_scope/#add-a-second-primary-tag-in-datadog
-[4]: /ja/watchdog/faulty_deployment_detection/
+[1]: /getting_started/tagging/unified_service_tagging/
+[2]: /metrics/types/?tab=distribution#metric-types
+[3]: /tracing/guide/setting_primary_tags_to_scope/#add-a-second-primary-tag-in-datadog
+[4]: /watchdog/faulty_deployment_detection/
+[5]: /profiler/enabling/
+[6]: /profiler/compare_profiles

@@ -1,3 +1,3 @@
 ---
-title: Fastly インテグレーション
+title: Fastly Integration
 ---

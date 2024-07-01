@@ -1,142 +1,142 @@
 ---
+title: Getting Started with Tags
+kind: documentation
+description: 'Learn how to assign and use tags in Datadog.'
 aliases:
-- /ja/getting_started/getting_started_with_tags
-- /ja/guides/getting_started/tagging/
-- /ja/developers/getting_started/tagging/
-- /ja/tagging
-- /ja/guides/tagging/
-- /ja/faq/when-i-query-can-i-use-wildcards-in-metric-names-and-events/
-description: Datadog でタグを割り当て、使用する方法について説明します。
+    - /getting_started/getting_started_with_tags
+    - /guides/getting_started/tagging/
+    - /developers/getting_started/tagging/
+    - /tagging
+    - /guides/tagging/
+    - /faq/when-i-query-can-i-use-wildcards-in-metric-names-and-events/
 further_reading:
-- link: /getting_started/tagging/assigning_tags/
-  tag: Documentation
-  text: タグの割り当て方法
-- link: /getting_started/tagging/unified_service_tagging/
-  tag: Documentation
-  text: 統合サービスタグ付けの構成方法を学ぶ
-- link: /getting_started/tagging/using_tags/
-  tag: Documentation
-  text: タグの使用方法について
-- link: https://dtdg.co/fe
-  tag: Foundation Enablement
-  text: Datadog を使った効果的なタグ付けに関するインタラクティブなセッションに参加できます
-kind: ドキュメント
-title: タグの使用を開始する
+    - link: /getting_started/tagging/assigning_tags/
+      tag: Documentation
+      text: Learn how to assign tags
+    - link: /getting_started/tagging/unified_service_tagging/
+      tag: Documentation
+      text: Learn how to configure unified service tagging
+    - link: /getting_started/tagging/using_tags/
+      tag: Documentation
+      text: Learn how to use tags
+    - link: "https://dtdg.co/fe"
+      tag: Foundation Enablement
+      text: Join an interactive session on effective tagging with Datadog
 ---
 
-## 概要
+## Overview
 
-タグは、Datadog テレメトリーにディメンションを追加する方法のひとつで、Datadog の可視化機能によって絞り込み、集計、比較できます。[タグを使用][1]すると、複数のホストの集計パフォーマンスを観察でき、必要に応じて、特定の要素に基づいて設定をさらに絞り込むこともできます。つまり、タグ付けは集計データポイントを観察する手段です。
+Tags are a way of adding dimensions to Datadog telemetries so they can be filtered, aggregated, and compared in Datadog visualizations. [Using tags][1] enables you to observe aggregate performance across several hosts and (optionally) narrow the set further based on specific elements. In summary, tagging is a method to observe aggregate data points.
 
-タグ付けにより、Datadog のさまざまなデータ タイプをバインドし、メトリクス、トレース、ログの間でアクションを関連付け、呼び出すことができます。この操作は、**専用**タグ キーで実行できます。
+Tagging binds different data types in Datadog, allowing for correlation and call to action between metrics, traces, and logs. This is accomplished with **reserved** tag keys. 
 
-| タグ キー   | 可能な操作                                                            |
+| Tag Key   | Allows for                                                            |
 | --------- | --------------------------------------------------------------------- |
-| `host`    | メトリクス、トレース、プロセス、ログの間の関連付け。              |
-| `device`  | デバイスまたはディスクごとのメトリクス、トレース、プロセス、ログの分離。 |
-| `source`  | ログ管理のためのスパンの絞り込みと自動パイプライン。     |
-| `service` | メトリクス、トレース、ログにおけるアプリケーション固有データのスコーピング。 |
-| `env`     | メトリクス、トレース、ログにおけるアプリケーション固有データのスコーピング。 |
-| `version` | メトリクス、トレース、ログにおけるアプリケーション固有データのスコーピング。 |
+| `host`    | Correlation between metrics, traces, processes, and logs.              |
+| `device`  | Segregation of metrics, traces, processes, and logs by device or disk. |
+| `source`  | Span filtering and automated pipeline creation for Log Management.     |
+| `service` | Scoping of application specific data across metrics, traces, and logs. |
+| `env`     | Scoping of application specific data across metrics, traces, and logs. |
+| `version` | Scoping of application specific data across metrics, traces, and logs. |
 
-Datadog は、集計の `サービス` レベルでコンテナー、VM、クラウドインフラストラクチャーに注目することを推奨しています。たとえば、サーバー A とサーバー B で個別に CPU 使用率を確認するよりも、サービスを表すホストのコレクション全体で CPU 使用率を見ます。
+Datadog recommends looking at containers, VMs, and cloud infrastructure at the `service` level in aggregate. For example, look at CPU usage across a collection of hosts that represents a service, rather than CPU usage for server A or server B separately.
 
-コンテナやクラウド環境では、定期的にホストが入れ替わるため、タグを使用してメトリクスを集計することが重要です。
+Because containers and cloud environments regularly churn through hosts, using tags is important to aggregate your metrics.
 
-## タグの定義
+## Define tags
 
-以下は、Datadog のタグ付け要件です。
+Below are Datadog's tagging requirements:
 
-1. タグの**先頭は文字にする**必要があり、その後は以下の文字を使用できます。
+1. Tags must **start with a letter** and after that may contain the characters listed below:
 
-    - 英数字
-    - アンダースコア
-    - マイナス
-    - コロン
-    - ピリオド
-    - スラッシュ
+    - Alphanumerics
+    - Underscores
+    - Minuses
+    - Colons
+    - Periods
+    - Slashes
 
-    その他の特殊文字は、アンダースコアに変換されます。
+    Other special characters are converted to underscores.
 
-2. タグの長さは**最大 200 文字**で、Unicode 文字 (日本語などの言語を含むほとんどの文字セットを含む) をサポートします。
-3. タグは小文字に変換されます。そのため、`CamelCase (キャメル ケース)` 形式のタグは推奨されません。認証 (クローラー) ベースのインテグレーションでは、タグのキャメル ケース部分はアンダースコアに変換されます。たとえば、`TestTag` は `test_tag` となります。
-4. タグは `value` または `<KEY>:<VALUE>` の形式にすることができます。よく使用されるタグ キーは、`env`、`instance`、`name` です。キーの後ろには常に、グローバルタグ定義の最初のコロンが付きます。例:
+2. Tags can be **up to 200 characters** long and support Unicode letters (which includes most character sets, including languages such as Japanese).
+3. Tags are converted to lowercase. Therefore, `CamelCase` tags are not recommended. Authentication (crawler) based integrations convert camel case tags to underscores, for example `TestTag` --> `test_tag`.
+4. A tag can be in the format `value` or `<KEY>:<VALUE>`. Commonly used tag keys are `env`, `instance`, and `name`. The key always precedes the first colon of the global tag definition, for example:
 
-   | タグ                | キー           | 値          |
+    | Tag                | Key           | Value          |
     | ------------------ | ------------- | -------------- |
-   | `env:staging:east` | `env`         | `staging:east` |
-   | `env_staging:east` | `env_staging` | `east`         |
+    | `env:staging:east` | `env`         | `staging:east` |
+    | `env_staging:east` | `env_staging` | `east`         |
 
-5. タグは、EPOCH タイムスタンプ、ユーザー ID、リクエスト ID などのバインドされていないソースをベースにすることはできません。実行すると、組織の[メトリクス数が無限に増加][2]し、請求に問題が発生します。
-6. 制限 (ダウンケースなど) はメトリクスタグにのみ適用され、ログ属性やスパンタグには適用されません。
+5. Tags should not originate from unbounded sources, such as epoch timestamps, user IDs, or request IDs. Doing so may infinitely [increase the number of metrics][2] for your organization and impact your billing.
+6. Limitations (such as downcasing) only apply to metric tags, not log attributes or span tags.
 
-## タグ付けの方法
+## Assign tags
 
-### タグ付けの方法
+### Tagging methods
 
-タグ付けは、次のいずれか (またはすべて) の方法を使用して実行できます。
+Tags may be assigned using any (or all) of the following methods.
 
-| メソッド                   | タグ付けの方法                                                     |
+| Method                   | Assign tags                                                     |
 | ------------------------ | --------------------------------------------------------------- |
-| [コンフィギュレーションファイル][3] | メインの Agent またはインテグレーションのコンフィギュレーションファイルで手動で行います。 |
-| [UI][4]                  | Datadog サイトで。                                             |
-| [API][5]                 | Datadog の API を使用するとき。                                        |
-| [DogStatsD][6]           | DogStatsD でメトリクスを送信するとき。                          |
+| [Configuration Files][3] | Manually in your main Agent or integration configuration files. |
+| [UI][4]                  | In the Datadog site.                                             |
+| [API][5]                 | When using Datadog's API.                                        |
+| [DogStatsD][6]           | When submitting metrics with DogStatsD.                          |
 
-詳しくは、[タグの付け方][7]をご覧ください。
-#### 統合サービスタグ付け
+For more information, see [Assigning Tags][7].
+#### Unified service tagging
 
-Datadog では、タグを付ける際のベストプラクティスとして、統合サービスタグ付けを使用することをおすすめしています。統合サービスタグ付けは、`env`、`service`、`version` の 3 つの標準タグを使用して Datadog テレメトリーと結合します。ご使用環境で統合タグ付けを構成する方法に関する詳細は、[統合サービスタグ付け][8]をご参照ください。
+As a best practice, Datadog recommends using unified service tagging when assigning tags. Unified service tagging ties Datadog telemetry together through the use of three standard tags: `env`, `service`, and `version`. To learn how to configure your environment with unified tagging, see [Unified Service Tagging][8].
 
-## 使用方法
+## Usage
 
-ホストと[インテグレーション][9] レベルで[タグを割り当てた][7]後、メトリクス、トレース、ログを絞り込みグループ化するためにタグの使用を開始します。タグは、Datadog プラットフォームの次の領域で使用されます。
+After you have [assigned tags][7] at the host and [integration][9] level, start using them to filter and group your metrics, traces, and logs. Tags are used in the following areas of your Datadog platform. 
 
-| 領域                 | タグを使用して実行すること                                                                                      |
+| Area                 | Use Tags to                                                                                      |
 | -------------------- | ------------------------------------------------------------------------------------------------ |
-| [イベント][10]         | イベントストリームの絞り込み。                                                                          |
-| [ダッシュボード][11]     | グラフでのメトリクスの絞り込みおよびグループ化。                                                               |
-| [インフラストラクチャー][12] | ホストマップ、インフラストラクチャー リスト、ライブ コンテナ、ライブプロセス ビューの絞り込みとグループ化。 |
-| [モニター][13]       | モニターの管理、モニターの作成、ダウンタイムの管理。                                             |
-| [メトリクス][14]        | メトリクスエクスプローラーでの絞り込みとグループ化。                                                        |
-| [インテグレーション][15]   | AWS、Google Cloud、Azure のメトリクスをオプションで制限。                                        |
-| [APM][16]            | サービス、トレース、プロファイルをフィルターにかける。サービスマップを使って他のエリアに移動する。           |
-| [RUM & セッションリプレイ][17] | RUM エクスプローラーで、イベント検索、分析、パターン、リプレイ、問題をフィルターにかける。        |
-| [Synthetic Monitoring & Continuous Testing][18]     | Synthetic Monitoring & Testing Results Explorer を使用して、Synthetic テストや CI パイプラインで実行中のテストをフィルタリングおよびグループ化します。   |
-| [ノートブック][19]      | グラフでのメトリクスの絞り込みおよびグループ化。                                                               |
-| [ログ][20]           | ログ検索、分析、パターン、Live Tail、パイプラインの絞り込み。                                |
-| [SLO][21]           | SLO、グループ化されたメトリクスベース SLO、グループ化されたモニターベース SLO の検索。                       |
-| [開発者][22]     | API を使用して情報を取得、または UI のさまざまな領域をセットアップ。                                 |
-| [請求][23]        | 3 つのタグを選択することで Datadog の使用量を報告します。たとえば、`env`、`team`、`account_id` のように選択できます。 |
-| [CI Visibility][24]  | CI Visibility Explorer を使用して、テスト実行またはパイプライン実行をフィルタリングおよびグループ化します。 |
+| [Events][10]         | Filter the event stream.                                                                          |
+| [Dashboards][11]     | Filter and group metrics on graphs.                                                               |
+| [Infrastructure][12] | Filter and group on the host map, infrastructure list, live containers, and live processes views. |
+| [Monitors][13]       | Manage monitors, create monitors, or manage downtime.                                             |
+| [Metrics][14]        | Filter and group with the Metric Explorer.                                                        |
+| [Integrations][15]   | Optionally limit metrics for AWS, Google Cloud, and Azure.                                        |
+| [APM][16]            | Filter services, traces, and profiles, or navigate to other areas with the Service Map.           |
+| [RUM & Session Replay][17] | Filter event search, analytics, patterns, replays, and issues with the RUM Explorer.        |
+| [Synthetic Monitoring & Continuous Testing][18]     | Filter and group Synthetic tests or tests running in CI pipelines with the Synthetic Monitoring & Testing Results Explorer.   |
+| [Notebooks][19]      | Filter and group metrics on graphs.                                                               |
+| [Logs][20]           | Filter logs search, analytics, patterns, live tail, and pipelines.                                |
+| [SLOs][21]           | Search for SLOs, grouped metric-based SLOs, and grouped monitor-based SLOs.                       |
+| [Developers][22]     | Pull information or setup different areas in the UI with the API.                                 |
+| [Billing][23]        | Report on Datadog usage by choosing up to three tags, for example: `env`, `team`, and `account_id`. |
+| [CI Visibility][24]  | Filter and group test runs or pipeline executions with the CI Visibility Explorer. |
 
-詳しくは、[タグの使用方法][1]をご覧ください。
+For more information, see [Using Tags][1].
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/getting_started/tagging/using_tags/
-[2]: /ja/metrics/
-[3]: /ja/getting_started/tagging/assigning_tags/#configuration-files
-[4]: /ja/getting_started/tagging/assigning_tags/#ui
-[5]: /ja/getting_started/tagging/assigning_tags/#api
-[6]: /ja/getting_started/tagging/assigning_tags/#dogstatsd
-[7]: /ja/getting_started/tagging/assigning_tags/
-[8]: /ja/getting_started/tagging/unified_service_tagging
-[9]: /ja/integrations/
-[10]: /ja/getting_started/tagging/using_tags/#events
-[11]: /ja/getting_started/tagging/using_tags/#dashboards
-[12]: /ja/getting_started/tagging/using_tags/#infrastructure
-[13]: /ja/getting_started/tagging/using_tags/#monitors
-[14]: /ja/getting_started/tagging/using_tags/#metrics
-[15]: /ja/getting_started/tagging/using_tags/#integrations
-[16]: /ja/getting_started/tagging/using_tags/#apm
-[17]: /ja/getting_started/tagging/using_tags/#rum--session-replay
-[18]: /ja/getting_started/tagging/using_tags/#synthtics
-[19]: /ja/getting_started/tagging/using_tags/#notebooks
-[20]: /ja/getting_started/tagging/using_tags/#logs
-[21]: /ja/getting_started/tagging/using_tags/?tab=manageslos#service-level-objectives
-[22]: /ja/getting_started/tagging/using_tags/#developers
-[23]: /ja/account_management/billing/usage_attribution/
-[24]: /ja/getting_started/tagging/using_tags/#ci-visibility
+[1]: /getting_started/tagging/using_tags/
+[2]: /metrics/
+[3]: /getting_started/tagging/assigning_tags/#configuration-files
+[4]: /getting_started/tagging/assigning_tags/#ui
+[5]: /getting_started/tagging/assigning_tags/#api
+[6]: /getting_started/tagging/assigning_tags/#dogstatsd
+[7]: /getting_started/tagging/assigning_tags/
+[8]: /getting_started/tagging/unified_service_tagging
+[9]: /integrations/
+[10]: /getting_started/tagging/using_tags/#events
+[11]: /getting_started/tagging/using_tags/#dashboards
+[12]: /getting_started/tagging/using_tags/#infrastructure
+[13]: /getting_started/tagging/using_tags/#monitors
+[14]: /getting_started/tagging/using_tags/#metrics
+[15]: /getting_started/tagging/using_tags/#integrations
+[16]: /getting_started/tagging/using_tags/#apm
+[17]: /getting_started/tagging/using_tags/#rum--session-replay
+[18]: /getting_started/tagging/using_tags/#synthtics
+[19]: /getting_started/tagging/using_tags/#notebooks
+[20]: /getting_started/tagging/using_tags/#logs
+[21]: /getting_started/tagging/using_tags/?tab=manageslos#service-level-objectives
+[22]: /getting_started/tagging/using_tags/#developers
+[23]: /account_management/billing/usage_attribution/
+[24]: /getting_started/tagging/using_tags/#ci-visibility

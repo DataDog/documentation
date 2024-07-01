@@ -1,114 +1,115 @@
 ---
-app_id: gsuite
-app_uuid: a1ec70d4-dbe1-4e76-8e40-062df1fff1a5
-assets:
-  integration:
-    auto_install: false
-    events:
-      creates_events: false
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 601
-    source_type_name: Google Workspace
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com (日本語対応)
-  support_email: help@datadoghq.com
-categories:
-- ログの収集
-- コラボレーション
-- セキュリティ
-dependencies: []
-display_on_public_website: true
-draft: false
-git_integration_title: gsuite
-integration_id: gsuite
-integration_title: Google Workspace
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: 2.0.0
-name: gsuite
-public_title: Google Workspace
-short_description: Google Workspace の監査およびセキュリティログを Datadog へインポート
-supported_os: []
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Log Collection
-  - Category::Collaboration
-  - Category::Security
-  configuration: README.md#Setup
-  description: Google Workspace の監査およびセキュリティログを Datadog へインポート
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Google Workspace
+"app_id": "gsuite"
+"app_uuid": "a1ec70d4-dbe1-4e76-8e40-062df1fff1a5"
+"assets":
+  "integration":
+    "auto_install": false
+    "events":
+      "creates_events": false
+    "service_checks":
+      "metadata_path": assets/service_checks.json
+    "source_type_id": !!int "601"
+    "source_type_name": Google Workspace
+"author":
+  "homepage": "https://www.datadoghq.com"
+  "name": Datadog
+  "sales_email": info@datadoghq.com
+  "support_email": help@datadoghq.com
+"categories":
+- log collection
+- collaboration
+- security
+"custom_kind": "integration"
+"dependencies": []
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "gsuite"
+"integration_id": "gsuite"
+"integration_title": "Google Workspace"
+"integration_version": ""
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "gsuite"
+"public_title": "Google Workspace"
+"short_description": "Import your Google Workspace audit and security logs into Datadog"
+"supported_os": []
+"tile":
+  "changelog": CHANGELOG.md
+  "classifier_tags":
+  - "Category::Log Collection"
+  - "Category::Collaboration"
+  - "Category::Security"
+  "configuration": "README.md#Setup"
+  "description": Import your Google Workspace audit and security logs into Datadog
+  "media": []
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": Google Workspace
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
-## 概要
+## Overview
 
-Google Workspace のセキュリティログを Datadog へインポートします。このインテグレーションを有効にすると、以下の Google Workspace サービスに対しログが自動的に Datadog に取り込まれます。
+Import your Google Workspace security logs in Datadog. Upon enabling this integration, Datadog automatically starts pulling in logs for the following Google Workspace services:
 
-|サービス|説明|
+|Service|Description|
 |---------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|アクセスの透明性|Google Workspace アクセスの透明性アクティビティレポートは、さまざまな種類のアクセスの透明性アクティビティイベントの情報を返します。|
-|管理者|管理者コンソールアプリケーションのアクティビティレポートは、さまざまな種類の管理者アクティビティイベントのアカウント情報を返します。|
-|カレンダー|Google カレンダーアプリケーションのアクティビティレポートは、カレンダーのさまざまなアクティビティイベントの情報を返します。|
-|Chrome|Chrome アクティビティ レポートは、アカウントの全ユーザーの ChromeOS アクティビティに関する情報を返します。各レポートは基本的なエンドポイントリクエストを使用し、ログイン、ユーザーの追加または削除、安全でない閲覧イベントなど、レポート固有のパラメーターを提供します。|
-|コンテキストアウェアアクセス|コンテキストアウェアアクセスアクティビティレポートは、アカウントのユーザーに対するアプリケーションアクセスの拒否に関する情報を返します。基本的なレポートエンドポイントリクエストを使用し、デバイス ID やアクセスが拒否されたアプリケーションなどの特定のパラメーターを提供します。|
-|ドライブ|Google ドライブアプリケーションのアクティビティレポートは、さまざまな種類の Google ドライブイベントの情報を返します。このアクティビティレポートは、Google Workspace Business をご利用のお客様のみ使用可能です。|
-|Google Chat|Chat アクティビティレポートは、アカウントのユーザーが Spaces をどのように使用および管理しているかについての情報を返します。各レポートは、アップロードやメッセージ操作などのレポート固有のパラメーターを持つ基本的なエンドポイントリクエストを使用します。|
-|ガイド|Google Cloud アクティビティレポートは、Cloud OS Login API に関連する様々なアクティビティイベントに関する情報を返します。|
-|Google Keep|Keep アクティビティレポートは、アカウントのユーザーがノートをどのように管理および変更したかに関する情報を返します。各レポートは、添付ファイルのアップロード情報やノート操作などのレポート固有のパラメーターを持つ基本的なエンドポイントリクエストを使用します。|
-|Google Meet|Meet アクティビティレポートは、コールイベントの様々な側面に関する情報を返します。各レポートは、不正使用レポートデータやライブストリーム視聴データなどのレポート固有のパラメーターを持つ基本的なエンドポイントリクエストを使用します。|
-|Gplus|Google+ アプリケーションのアクティビティレポートは、Google+ アクティビティのさまざまなイベントの情報を返します。|
-|グループ|Google グループアプリケーションのアクティビティレポートは、グループアクティビティのさまざまなイベントの情報を返します。|
-|Enterprise グループ|Enterprise グループのアクティビティレポートは、Enterprise グループのさまざまなアクティビティイベントの情報を返します。|
-|Jamboard|Jamboard アクティビティレポートは、Jamboard デバイス設定の変更に関する情報を返します。各レポートは、ライセンスやデバイスのペアリング設定などのレポート固有のパラメーターを持つ基本的なエンドポイントリクエストを使用します。|
-|ログイン|ログインアプリケーションのアクティビティレポートは、さまざまな種類のログインアクティビティイベントのアカウント情報を返します。|
-|送信 - DogStatsD|モバイル監査アクティビティレポートは、さまざまな種類のモバイル監査アクティビティイベントの情報を返します。|
-|ブラウザテスト|ルールアクティビティレポートは、さまざまな種類のルールアクティビティイベントの情報を返します。|
-|トークン|トークンアプリケーションのアクティビティレポートは、さまざまな種類のトークンアクティビティイベントのアカウント情報を返します。|
-|SAML|SAML アクティビティレポートは、SAML ログインの試行結果に関する情報を返します。各レポートは、失敗のタイプや SAML アプリケーション名などのレポート固有のパラメーターを持つ基本的なエンドポイントリクエストを使用します。|
-|ユーザーアカウント|ユーザーアカウントアプリケーションのアクティビティレポートは、さまざまな種類のユーザーアカウントアクティビティイベントのアカウント情報を返します。|
+|Access Transparency|The Google Workspace Access Transparency activity reports return information about different types of Access Transparency activity events.|
+|Admin|The Admin console application's activity reports return account information about different types of administrator activity events.|
+|Calendar|The Google Calendar application's activity reports return information about various Calendar activity events.|
+|Chrome|The Chrome activity report returns information about the ChromeOS activity of all of your account's users. Each report uses the basic endpoint request and provides report-specific parameters such as logins, adding or removing users, or unsafe browsing events.|
+|Context-Aware Access|The context-aware access activity report returns information about denials of application access to your account's users. It uses the basic report endpoint request and provides specific parameters such as device ID and the application to which access was denied.|
+|Drive|The Google Drive application's activity reports return information about various Google Drive activity events. The Drive activity report is only available for Google Workspace Business customers.|
+|Google Chat|The Chat activity report returns information about how your account's users use and manage Spaces. Each report uses the basic endpoint request with report-specific parameters such as uploads or message operations.|
+|Google Cloud|The Google Cloud activity report returns information about various activity events related to the Cloud OS Login API.|
+|Google Keep|The Keep activity report returns information about how your account's users manage and modify their notes. Each report uses the basic endpoint request with report-specific parameters such as attachment upload information or note operations.|
+|Google Meet|The Meet activity report returns information about various aspects of call events. Each report uses the basic endpoint request with report-specific parameters such as abuse report data or livestream watch data.|
+|Gplus|The Google+ application's activity reports return information about various Google+ activity events.|
+|Groups|The Google Groups application's activity reports return information about various Groups activity events.|
+|Enterprise Groups|The Enterprise Groups activity reports return information about various Enterprise group activity events.|
+|Jamboard|The Jamboard activity report returns information about changes to Jamboard device settings. Each report uses the basic endpoint request with report-specific parameters such as licensing or device pairing settings.|
+|Login|The Login application's activity reports return account information about different types of Login activity events.|
+|Mobile|The Mobile Audit activity reports return information about different types of Mobile Audit activity events.|
+|Rules|The Rules activity reports return information about different types of Rules activity events.|
+|Token|The Token application's activity reports return account information about different types of Token activity events.|
+|SAML|The SAML activity report returns information about the results of SAML login attempted. Each report uses the basic endpoint request with report-specific parameters such as the failure type and SAML application name.|
+|User Accounts|The User Accounts application's activity reports return account information about different types of User Accounts activity events|
 
-## 計画と使用
-### インフラストラクチャーリスト
+## Setup
+### Installation
 
-Datadog と Google Workspace のインテグレーションを構成する前に、Google Workspace Admin SDK [Reports API: Prerequisites][1] のドキュメントに従ってください。
+Follow the Google Workspace Admin SDK [Reports API: Prerequisites][1] documentation before configuring the Datadog-Google Workspace integration.
 
-**注**: セットアップには特定の OAuth スコープが必要になる場合があります。Google Workspace Admin SDK [Authorize Requests][2] のドキュメントをご覧ください。
+**Note**: Certain OAuth scopes may be required for setup. See the Google Workspace Admin SDK [Authorize Requests][2] documentation.
 
-Datadog と Google Workspace のインテグレーションを構成するには、[Datadog-Google Workspace インテグレーションタイル][3]で *Connect a new Google Workspace domain* ボタンをクリックし、Datadog に Google Workspace 管理者 API へのアクセスを許可します。
+To configure the Datadog Google Workspace integration, click on the *Connect a new Google Workspace domain* button in your [Datadog-Google Workspace integration tile][3] and authorize Datadog to access the Google Workspace Admin API.
 
-## リアルユーザーモニタリング
-### ワークフローの自動化
+## Data Collected
+### Logs
 
-収集されたログとそのコンテンツの全リストは、[Google Workspace 管理者 SDK ドキュメント][4]を参照してください。
+See the [Google Workspace Admin SDK documentation][4] for the full list of collected logs and their content.
 
-**注**: Groups、Enterprise Groups、Login、Token、Calendar のログは、Google のログポーリング頻度に制限があるため 90 分のクローリングとなっています。このインテグレーションのログは、1.5～2 時間おきに転送されます。
+**Note**: The Groups, Enterprise Groups, Login, Token, and Calendar logs are on a 90 minute crawler because of a limitation in how often Google polls these logs on their side. Logs from this integration are only forwarded every 1.5-2 hours.
 
-### データセキュリティ
+### Metrics
 
-Google Workspace インテグレーションには、メトリクスは含まれません。
+The Google Workspace integration does not include any metrics.
 
-### ヘルプ
+### Events
 
-Google Workspace インテグレーションには、イベントは含まれません。
+The Google Workspace integration does not include any events.
 
-### ヘルプ
+### Service Checks
 
-Google Workspace インテグレーションには、サービスのチェック機能は含まれません。
+The Google Workspace integration does not include any Service Checks.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
+Need help? Contact [Datadog support][5].
 
 [1]: https://developers.google.com/admin-sdk/reports/v1/guides/prerequisites
 [2]: https://developers.google.com/admin-sdk/reports/v1/guides/authorizing#OAuth2Authorizing
 [3]: https://app.datadoghq.com/account/settings#integrations/gsuite
 [4]: https://developers.google.com/admin-sdk/reports/v1/reference/activities/list
-[5]: https://docs.datadoghq.com/ja/help/
+[5]: https://docs.datadoghq.com/help/
+

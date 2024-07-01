@@ -1,87 +1,88 @@
 ---
-categories:
-- automation
-- configuration & deployment
-- developer tools
-- orchestration
-- provisioning
-dependencies: []
-description: デプロイをキャプチャおよび検索し、主要メトリクスのグラフに重ねて表示。
-doc_link: https://docs.datadoghq.com/integrations/capistrano/
-draft: false
-git_integration_title: capistrano
-has_logo: true
-integration_id: capistrano
-integration_title: Capistrano
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: '1.0'
-name: capistrano
-public_title: Datadog-Capistrano インテグレーション
-short_description: デプロイをキャプチャおよび検索し、主要メトリクスのグラフに重ねて表示。
-version: '1.0'
+"categories":
+- "automation"
+- "configuration & deployment"
+- "developer tools"
+- "orchestration"
+- "provisioning"
+"custom_kind": "integration"
+"dependencies": []
+"description": "Capture and search for deploys, overlay them onto key metrics graphs."
+"doc_link": "https://docs.datadoghq.com/integrations/capistrano/"
+"draft": false
+"git_integration_title": "capistrano"
+"has_logo": true
+"integration_id": "capistrano"
+"integration_title": "Capistrano"
+"integration_version": ""
+"is_public": true
+"manifest_version": "1.0"
+"name": "capistrano"
+"public_title": "Datadog-Capistrano Integration"
+"short_description": "Capture and search for deploys, overlay them onto key metrics graphs."
+"version": "1.0"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-## 概要
+## Overview
 
-[Capistrano][1] は、Ruby で記述されたリモートサーバー自動化およびデプロイツールです。
+[Capistrano][1] is a remote server automation and deployment tool written in Ruby.
 
-Capistrano Datadog インテグレーションをインストールすると、以下のことができます。
+Install the Capistrano Datadog integration to:
 
-- イベントストリームでデプロイイベントをキャプチャおよび検索できます。
-- ダッシュボード内で他のメトリクスにデプロイイベントを重ねて表示して、どのデプロイがアプリケーションのパフォーマンスに影響しているかを特定できます。
+- Capture and search for deploy events in your event stream
+- Overlay deploy events with other metrics within dashboards to identify which deploys affect your application's performance
 
-特定の `Capfile` に対してこのインテグレーションを有効にすると、完了した Capistrano タスクがイベントとして Datadog に送信されます。ロール情報とログ出力も送信されます。
+Once you enable this integration for a given `Capfile`, each Capistrano task that completes is submitted as an event to Datadog. Role information and logging output are submitted too.
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-`dogapi` Ruby gem をインストールします。
+Install the `dogapi` Ruby gem:
 
 ```shell
 sudo gem install dogapi --version ">=1.10.0"
 ```
 
-### ブラウザトラブルシューティング
+### Configuration
 
-Datadog に送信したいタスクを持つ `Capfile` の先頭に以下を追加します。
+Add the following to the beginning of any `Capfile` whose tasks you want to send to Datadog:
 
 ```text
 require "capistrano/datadog"
-set :datadog_api_key, "${独自の_API_キー}"
+set :datadog_api_key, "${your_api_key}"
 ```
 
-### 検証
+### Validation
 
-`Capfile` を構成し、Capistrano タスクを少なくとも 1 回実行したら、以下を行います。
+After you've configured your `Capfile` and have run at least one Capistrano task:
 
-1. [イベントストリーム][2]に移動します。
-2. 検索バーに `sources:capistrano` を入力するか、左側のインテグレーションの FROM リストで 'Capistrano' をクリックします。
-3. 検索バーに `priority:all` を入力するか、左側の PRIORITY リストで 'All' をクリックします。Capistrano タスクは、デフォルトでは Low 優先度で送信されます。そのため、デフォルトのイベントストリームビュー（Normal 優先度）を使用すると表示されません。
+1. Navigate to your [events stream][2].
+2. Either enter `sources:capistrano` in the Search bar, or click 'Capistrano' in the FROM list of integrations on the left.
+3. Either enter `priority:all` in the Search bar, or click 'All' in the PRIORITY list on the left. Capistrano tasks are submitted with Low priority by default, so they do not display using the default events stream view (Normal priority).
 
 {{< img src="integrations/capistrano/capistranoevents.mp4" video="true" >}}
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 
-Capistrano インテグレーションには、メトリクスは含まれません。
+The Capistrano integration does not include any metric.
 
-### ヘルプ
+### Events
 
-Capistrano インテグレーションには、イベントは含まれません。
+The Capistrano integration does not include any events.
 
-### ヘルプ
+### Service Checks
 
-Capistrano インテグレーションには、サービスのチェック機能は含まれません。
+The Capistrano integration does not include any service checks.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
+Need help? Contact [Datadog support][3].
 
 [1]: http://capistranorb.com
 [2]: https://app.datadoghq.com/event/stream
-[3]: https://docs.datadoghq.com/ja/help/
+[3]: https://docs.datadoghq.com/help/
+

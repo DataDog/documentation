@@ -1,25 +1,25 @@
 ---
-aliases:
-- /ja/tracing/trace_collection/otel_instrumentation/
-- /ja/opentelemetry/otel_tracing/
-- /ja/tracing/guide/add_span_md_and_graph_it/
-description: OpenTelemetry API を介したカスタムインスツルメンテーションから、Datadog のトレーシングライブラリまでスパンを送信します。
-further_reading:
-- link: /opentelemetry/
-  tag: ドキュメント
-  text: Datadog の OpenTelemetry
-- link: /tracing/glossary/
-  tag: ドキュメント
-  text: APM の用語を理解する
-- link: /opentelemetry/guide/otel_api_tracing_interoperability
-  tag: ドキュメント
-  text: OpenTelemetry API と Datadog でインスツルメントされたトレースの相互運用性
-- link: https://www.datadoghq.com/blog/opentelemetry-instrumentation/
-  tag: ブログ
-  text: Datadog および OpenTelemetry のイニシアティブのイニシアティブについて
-kind: ドキュメント
-title: OpenTelemetry API を使ったカスタムインスツルメンテーション
+title: Custom Instrumentation with the OpenTelemetry API
+kind: documentation
 type: multi-code-lang
+description: 'Sending spans from custom instrumentation through the OpenTelemetry API to the Datadog tracing libraries.'
+aliases:
+- /tracing/trace_collection/otel_instrumentation/
+- /opentelemetry/otel_tracing/
+- /tracing/guide/add_span_md_and_graph_it/
+further_reading:
+    - link: /opentelemetry/
+      tag: Documentation
+      text: OpenTelemetry in Datadog
+    - link: /tracing/glossary/
+      tag: Documentation
+      text: Understand APM terminology
+    - link: /opentelemetry/guide/otel_api_tracing_interoperability
+      tag: Documentation
+      text: Interoperability of OpenTelemetry API and Datadog instrumented traces
+    - link: "https://www.datadoghq.com/blog/opentelemetry-instrumentation/"
+      tag: Blog
+      text: Learn More about Datadog and the OpenTelemetry initiative
 ---
 
 
@@ -31,6 +31,7 @@ type: multi-code-lang
 
 <br>
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+

@@ -1,149 +1,149 @@
 ---
-app_id: buoyant-cloud
-app_uuid: dee4b74f-34b7-457e-98b1-7bb8306f2c18
-assets:
-  dashboards:
-    Buoyant Cloud: assets/dashboards/buoyant_cloud_overview.json
-  integration:
-    auto_install: true
-    configuration: {}
-    events:
-      creates_events: true
-    metrics:
-      check:
+"app_id": "buoyant-cloud"
+"app_uuid": "dee4b74f-34b7-457e-98b1-7bb8306f2c18"
+"assets":
+  "dashboards":
+    "Buoyant Cloud": assets/dashboards/buoyant_cloud_overview.json
+  "integration":
+    "auto_install": true
+    "configuration": {}
+    "events":
+      "creates_events": true
+    "metrics":
+      "check":
       - buoyant_cloud.cp_workload.inbound_response.rate1m
-      metadata_path: metadata.csv
-      prefix: buoyant_cloud.
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 10320
-    source_type_name: Buoyant Cloud
-  oauth: assets/oauth_clients.json
-author:
-  homepage: https://buoyant.io/cloud
-  name: Buoyant
-  sales_email: cloud@buoyant.io
-  support_email: cloud@buoyant.io
-categories:
-- クラウド
-- ネットワーク
-- セキュリティ
-dependencies:
-- https://github.com/DataDog/integrations-extras/blob/master/buoyant_cloud/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: buoyant_cloud
-integration_id: buoyant-cloud
-integration_title: Buoyant Cloud
-integration_version: ''
-is_public: true
-custom_kind: integration
-manifest_version: 2.0.0
-name: buoyant_cloud
-public_title: Buoyant Cloud
-short_description: Buoyant Cloud は、お客様のクラスター上でフルマネージド Linkerd を提供します。
-supported_os:
+      "metadata_path": metadata.csv
+      "prefix": buoyant_cloud.
+    "service_checks":
+      "metadata_path": assets/service_checks.json
+    "source_type_id": !!int "10320"
+    "source_type_name": Buoyant Cloud
+  "oauth": assets/oauth_clients.json
+"author":
+  "homepage": "https://buoyant.io/cloud"
+  "name": Buoyant
+  "sales_email": cloud@buoyant.io
+  "support_email": cloud@buoyant.io
+"categories":
+- cloud
+- network
+- security
+"custom_kind": "integration"
+"dependencies":
+- "https://github.com/DataDog/integrations-extras/blob/master/buoyant_cloud/README.md"
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "buoyant_cloud"
+"integration_id": "buoyant-cloud"
+"integration_title": "Buoyant Cloud"
+"integration_version": ""
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "buoyant_cloud"
+"public_title": "Buoyant Cloud"
+"short_description": "Buoyant Cloud provides fully managed Linkerd, right on your cluster."
+"supported_os":
 - linux
 - windows
 - macos
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Cloud
-  - Category::Network
-  - Category::Security
-  - Offering::Integration
-  - Supported OS::Linux
-  - Supported OS::Windows
-  - Supported OS::macOS
-  configuration: README.md#Setup
-  description: Buoyant Cloud は、お客様のクラスター上でフルマネージド Linkerd を提供します。
-  media:
-  - caption: 'Buoyant Cloud: Datadog ダッシュボード'
-    image_url: images/bcloud_datadog_dashboard.png
-    media_type: image
-  - caption: 'Buoyant Cloud: 概要ページ'
-    image_url: images/bcloud_01.png
-    media_type: image
-  - caption: 'Buoyant Cloud: Linkerd 健全性ビュー'
-    image_url: images/bcloud_02.png
-    media_type: image
-  - caption: 'Buoyant Cloud: マネージド Linkerd イベント'
-    image_url: images/bcloud_03.png
-    media_type: image
-  - caption: 'Buoyant Cloud: トラフィックページ'
-    image_url: images/bcloud_04.png
-    media_type: image
-  - caption: 'Buoyant Cloud: トポロジーページ'
-    image_url: images/bcloud_05.png
-    media_type: image
-  - caption: 'Buoyant Cloud: メトリクスページ'
-    image_url: images/bcloud_06.png
-    media_type: image
-  - caption: 'Buoyant Cloud: ワークロード詳細ページ'
-    image_url: images/bcloud_07.png
-    media_type: image
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Buoyant Cloud
-  uninstallation: README.md#Uninstallation
+"tile":
+  "changelog": CHANGELOG.md
+  "classifier_tags":
+  - "Category::Cloud"
+  - "Category::Network"
+  - "Category::Security"
+  - "Offering::Integration"
+  - "Supported OS::Linux"
+  - "Supported OS::Windows"
+  - "Supported OS::macOS"
+  "configuration": "README.md#Setup"
+  "description": Buoyant Cloud provides fully managed Linkerd, right on your cluster.
+  "media":
+  - "caption": "Buoyant Cloud: Datadog dashboard"
+    "image_url": images/bcloud_datadog_dashboard.png
+    "media_type": image
+  - "caption": "Buoyant Cloud: Overview page"
+    "image_url": images/bcloud_01.png
+    "media_type": image
+  - "caption": "Buoyant Cloud: Linkerd health view"
+    "image_url": images/bcloud_02.png
+    "media_type": image
+  - "caption": "Buoyant Cloud: Managed Linkerd event"
+    "image_url": images/bcloud_03.png
+    "media_type": image
+  - "caption": "Buoyant Cloud: Traffic page"
+    "image_url": images/bcloud_04.png
+    "media_type": image
+  - "caption": "Buoyant Cloud: Topology page"
+    "image_url": images/bcloud_05.png
+    "media_type": image
+  - "caption": "Buoyant Cloud: Metrics page"
+    "image_url": images/bcloud_06.png
+    "media_type": image
+  - "caption": "Buoyant Cloud: Workload Detail page"
+    "image_url": images/bcloud_07.png
+    "media_type": image
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": Buoyant Cloud
+  "uninstallation": "README.md#Uninstallation"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
-## 概要
+## Overview
 
-[Buoyant Cloud][1] は、Linkerd の健全性とデプロイメントを監視するために、お客様のクラスター上でフルマネージド Linkerd を提供します。このインテグレーションにより、Linkerd の健全性、ワークロードのトラフィック、ロールアウトのイベント、メトリクスを監視し、アラートを受け取ることができます。
+[Buoyant Cloud][1] provides fully managed Linkerd on your cluster to monitor the health of Linkerd and deployments. With this integration, you can monitor and be alerted on Linkerd's health, workload traffic, rollout events, and metrics.
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-このインテグレーションを使用するには、[Buoyant Cloud][1] にアカウントが必要です。また、Datadog マーケットプレイスで Buoyant Cloud にサインアップすることができます。
+You need to have an account at [Buoyant Cloud][1] to use this integration. You can also sign up for Buoyant Cloud in the Datadog Marketplace.
 
-### ブラウザトラブルシューティング
+### Configuration
 
-1. タイルの **Connect Accounts** ボタンをクリックし、OAuth フローを完了します。
-2. [Buoyant Cloud Notifications][2] ページを参照します。
-3. **Events** または **Metrics** でルールを追加または編集します。
-4. **Destinations** セクションに移動し、Datadog アカウントを選択すると、通知ルールに一致するすべてのイベントまたはメトリクスが Datadog に送信されます。
+1. Click the **Connect Accounts** button on the tile to complete the OAuth flow.
+2. Browse to the [Buoyant Cloud Notifications][2] page.
+3. Add or edit a rule under **Events** or **Metrics**.
+4. Go to the **Destinations** section and select your Datadog account to send all events or metrics matching the notification rule to Datadog.
 
-### 検証
+### Validation
 
-Buoyant Cloud がイベントを作成すると、Datadog の[イベントエクスプローラー][3]にイベントが表示されます。メトリクスは、Datadog の[メトリクスエクスプローラー][4]に表示されます。
+As Buoyant Cloud creates events, they appear in the Datadog [event explorer][3]. Metrics appear in the Datadog [metrics explorer][4].
 
-## アンインストール
+## Uninstallation
 
-1. [Buoyant Cloud Settings][5] ページを参照します。
-2. Datadog 組織の右側にあるケバブメニューをクリックします。
-3. **Remove** をクリックします。
+1. Browse to the [Buoyant Cloud Settings][5] page.
+2. Click the kebab menu to the right of your Datadog org.
+3. Click **Remove**.
 
-また、[API Keys ページ][6]でインテグレーション名を検索して、このインテグレーションに紐付けられた全ての API キーが無効になったことを確認してください。
+Additionally, ensure that all API keys associated with this integration have been disabled by searching for the integration name on the [API Keys page][6].
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### ヘルプ
+### Events
 
-Buoyant Cloud は Datadog に[イベント][3]を送信します。これには以下が含まれます。
+Buoyant Cloud sends [events][3] to Datadog, including:
 
-- Linkerd ヘルスアラート
-- Linkerd 構成アラート
-- ワークロードトラフィックアラート
-- ワークロードロールアウト
-- 手動イベント
+- Linkerd health alerts
+- Linkerd configuration alerts
+- Workload traffic alerts
+- Workload rollouts
+- Manual events
 
-### データセキュリティ
+### Metrics
 
-このインテグレーションによって提供されるメトリクスのリストについては、[metadata.csv][7] を参照してください。
+See [metadata.csv][7] for a list of metrics provided by this integration.
 
-## ヘルプ
+## Troubleshooting
 
-ヘルプが必要ですか？次のようなサポートを受けることができます。
+Need help? Get support from the following sources:
 
-- [Buoyant Cloud のドキュメント][8]を参照する
-- [Linkerd Slack][9] で声をかける
-- [Buoyant Cloud チームにメールする][10]
+- Browse the [Buoyant Cloud docs][8]
+- Reach out in [Linkerd Slack][9]
+- [Email the Buoyant Cloud team][10]
 
 [1]: https://buoyant.io/cloud
 [2]: https://buoyant.cloud/notifications
@@ -155,3 +155,4 @@ Buoyant Cloud は Datadog に[イベント][3]を送信します。これには�
 [8]: https://docs.buoyant.cloud
 [9]: https://slack.linkerd.io
 [10]: mailto:cloud@buoyant.io
+

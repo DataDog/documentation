@@ -1,61 +1,62 @@
 ---
+title: Watchdog RCA
+kind: documentation
 further_reading:
 - link: /watchdog/faq/root-cause-not-showing/
-  tag: ドキュメント
-  text: 根本原因が表示されない
-- link: https://www.datadoghq.com/blog/datadog-watchdog-automated-root-cause-analysis/
-  tag: ブログ
-  text: 根本原因の自動分析
-title: Watchdog RCA
+  tag: Documentation
+  text: Root cause not showing
+- link: "https://www.datadoghq.com/blog/datadog-watchdog-automated-root-cause-analysis/"
+  tag: Blog
+  text: Automated root cause analysis
 ---
 
-## 概要
+## Overview
 
-Watchdog Root Cause Analysis (RCA) は、インシデントのトリアージにおける予備調査を自動化することにより、平均復旧時間 (MTTR) の短縮を支援します。Watchdog の AI エンジンは、アプリケーションパフォーマンスの異常と関連するコンポーネント間の相互依存性を識別し、症状間の因果関係を導き出します。Watchdog は APM の異常を見つけると、その異常の原因や影響についてより深い洞察を得るために根本原因の分析を開始します。
+Watchdog Root Cause Analysis (RCA) helps you reduce mean time to recovery (MTTR) by automating preliminary investigations during incident triage. The Watchdog AI engine identifies interdependencies between application performance anomalies and related components to draw causal relationships between symptoms. Whenever Watchdog finds an APM anomaly, it starts a root cause analysis in an attempt to provide deeper insight into the cause and/or effects of the anomaly.
 
-Watchdog RCA は [APM][1] を使用する必要があります。Watchdog が影響を受けるサービスに対して、関連する全ての Datadog テレメトリーをフルに活用するために、Datadog は[統合タグ付け][2]を設定することを推奨しています。
+Watchdog RCA requires the use of [APM][1]. In order for Watchdog to take full advantage of all relevant Datadog telemetry for impacted services, Datadog recommends that you set up [unified tagging][2]. 
 
-Watchdog RCA は、分析に際して以下のデータソースを考慮します。
+Watchdog RCA considers the following sources of data in its analysis:
 
-* APM エラー率、遅延、およびヒット率のメトリクス
-* APM デプロイ追跡
-* APM トレース
-* CPU 使用率、メモリ使用率、ディスク使用率など、Agent ベースのインフラストラクチャーメトリクス
-* AWS インスタンスステータスチェックメトリクス
-* ログパターンの異常
+* APM error rate, latency, and hit rate metrics
+* APM deployment tracking
+* APM traces
+* Agent based infrastructure metrics, including CPU usage, memory usage, and disk usage
+* AWS instance status check metrics
+* Log pattern anomalies
 
-## Watchdog Root Cause Analysis の要素
+## Components of a Watchdog Root Cause Analysis
 
-{{< img src="watchdog/rca/root_cause.png" alt="根本原因、重大な障害、影響を示す Watchdog Root Cause Analysis">}}
+{{< img src="watchdog/rca/root_cause_cropped.png" alt="Watchdog Root Cause Analysis showing Root Cause, Critical Failure, and Impact">}}
 
-Watchdog Root Cause Analysis には、根本原因、重大な障害、影響という 3 つの要素が含まれます。
+A Watchdog Root Cause Analysis includes three components: root cause, critical failure, and impact.
 
-### 根本原因
+### Root cause
 
-根本原因とは、アプリケーションのパフォーマンス問題につながる状態の変化のことです。考えられる状態の変化には、インフラストラクチャーの可用性の違い、トラフィックの急増、またはコードのデプロイが含まれます。
+A root cause is a state change that leads to application performance issues. Possible state changes include a difference in infrastructure availability, a traffic spike, or code deployment.
 
-Watchdog は、4 種類の根本原因をサポートしています。
+Watchdog supports four types of root causes:
 
-* APM Deployment Tracking で取得されたバージョンの変更
-* APM でインスツルメントされたサービスのヒット率メトリクスで取得されたトラフィックの増加
-* Amazon EC2 のインテグレーションメトリクスでキャプチャされた AWS インスタンスの障害
-* Datadog Agent のシステムメトリクスで取得されたディスク容量の不足
+* Version changes, as captured by APM Deployment Tracking
+* Traffic increases, as captured by hit rate metrics on your APM-instrumented services
+* AWS instance failures, as captured by Amazon EC2 integration metrics
+* Running out of disk space, as captured by system metrics from the Datadog agent
 
-Watchdog は、レイテンシーの増加や新たなエラーなど、アプリケーションパフォーマンスの低下をインシデントの根本原因として分類することはありません。Datadog では、アプリケーションパフォーマンスの低下という初期症状を、以下に示すように**重大な障害**と呼んでいます。
+Watchdog never classifies degraded application performance, such as higher latency or new errors, as the root cause of an incident. Datadog calls an initial symptom of degraded application performance a **critical failure**, as described below. 
 
-### 重大な障害
+### Critical failure
 
-Critical Failure セクションでは、根本原因が最初に (そして最も直接的に) アプリケーションパフォーマンスの低下を引き起こす場所と方法を強調します。重大な障害には、常にレイテンシーまたはエラー率の増加が含まれます。
+The Critical Failure section highlights where and how the root cause first (and most directly) causes degraded application performance. Critical failures always include a latency or error rate increase.
 
-### 影響
+### Impact
 
-Watchdog RCA は、根本原因によって間接的に影響を受けるサービスも特定します。Impact にリストされたパフォーマンスの低下は、重大な障害が解決されれば回復すると予想されます。RUM ユーザーの場合、Watchdog はどのビューパスとユーザーがパフォーマンス異常の影響を受けたかも自動的に評価します。
+Watchdog RCA also identifies services indirectly affected by the root cause. Any performance degradation listed in Impact is expected to recover once the Critical Failure is resolved. For RUM users, Watchdog also automatically assesses which view paths and users were affected by the performance anomalies.
 
-{{< img src="watchdog/rca/views_impacted.png" alt="Watchdog Root Cause Analysis の詳細画面 (影響を受けたビューのポップアップを表示)">}}
+{{< img src="watchdog/rca/views_impacted.png" alt="Screenshot of Watchdog Root Cause Analysis detail showing Views impacted pop-up">}}
 
-## その他の参考資料
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/tracing/
-[2]: /ja/getting_started/tagging/unified_service_tagging
+[1]: /tracing/
+[2]: /getting_started/tagging/unified_service_tagging

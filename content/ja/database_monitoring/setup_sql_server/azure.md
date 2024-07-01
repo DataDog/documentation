@@ -1,61 +1,63 @@
 ---
-description: Azure 上で管理される SQL Server 用のデータベースモニタリングをインストールし、構成します。
+title: Setting Up Database Monitoring for Azure SQL Server
+description: Install and configure Database Monitoring for SQL Server managed on Azure.
 further_reading:
 - link: /integrations/sqlserver/
-  tag: ドキュメント
-  text: 基本的な SQL Server インテグレーション
+  tag: Documentation
+  text: Basic SQL Server Integration
 - link: /database_monitoring/troubleshooting/?tab=sqlserver
-  tag: ドキュメント
-  text: よくある問題のトラブルシューティング
-title: Azure SQL Server のデータベースモニタリングの設定
+  tag: Documentation
+  text: Troubleshoot Common Issues
+
+
 ---
 
-データベースモニタリングは、クエリメトリクス、クエリサンプル、実行計画、データベースの状態、フェイルオーバー、イベントを公開することで、Microsoft SQL Server データベースを詳細に可視化します。
+Database Monitoring provides deep visibility into your Microsoft SQL Server databases by exposing query metrics, query samples, explain plans, database states, failovers, and events.
 
-データベースでデータベースモニタリングを有効にするには、以下の手順を実行します。
+Do the following steps to enable Database Monitoring with your database:
 
-1. [Agent にデータベースへのアクセスを付与する](#grant-the-agent-access)
-2. [Agent をインストールする](#install-the-agent)
-3. [Azure インテグレーションをインストールする](#install-the-azure-integration)
+1. [Grant the Agent access to the database](#grant-the-agent-access)
+2. [Install and configure the Agent](#install-and-configure-the-agent)
+3. [Install the Azure integration](#install-the-azure-integration)
 
-## はじめに
+## Before you begin
 
-サポートされている SQL Server バージョン
-: 2014、2016、2017、2019、2022
+Supported SQL Server versions
+: 2014, 2016, 2017, 2019, 2022
 
 {{% dbm-sqlserver-before-you-begin %}}
 
-## Agent にアクセスを付与する
+## Grant the Agent access
 
-Datadog Agent が統計やクエリを収集するためには、データベースサーバーへの読み取り専用のアクセスが必要となります。
+The Datadog Agent requires read-only access to the database server to collect statistics and queries.
 
 {{< tabs >}}
 
 {{% tab "Azure SQL Database" %}}
 
-サーバーに接続するための読み取り専用ログインを作成し、必要な [Azure SQL Roles][1] を付与します。
+Create a read-only login to connect to your server and grant the required [Azure SQL Roles][1]:
 ```SQL
 CREATE LOGIN datadog WITH PASSWORD = '<PASSWORD>';
 CREATE USER datadog FOR LOGIN datadog;
 ALTER SERVER ROLE ##MS_ServerStateReader## ADD MEMBER datadog;
 ALTER SERVER ROLE ##MS_DefinitionReader## ADD MEMBER datadog;
--- Log Shipping Monitoring (Agent v7.50 以降で利用可能) を使用するには、次の 3 行のコメントを外します。
+-- To use Log Shipping Monitoring (available in Agent v7.50+), uncomment the next three lines:
 -- USE msdb;
 -- CREATE USER datadog FOR LOGIN datadog;
 -- GRANT SELECT to datadog;
 ```
 
-このサーバー上の追加の Azure SQL Database それぞれへのアクセスを Agent に付与します。
+Grant the Agent access to each additional Azure SQL Database on this server:
 
 ```SQL
 CREATE USER datadog FOR LOGIN datadog;
 ```
 
-**注:** Microsoft Entra ID マネージドアイデンティティ認証もサポートされています。Azure SQL DB インスタンスの構成方法については、[ガイド][3]を参照してください。
+**Note:** Microsoft Entra ID managed identity authentication is also supported. Please see [the guide][3] on how to configure this for your Azure SQL DB instance.
 
-Datadog Agent を構成する場合、特定の Azure SQL DB サーバーにあるアプリケーションデータベースごとに 1 つのチェックインスタンスを指定します。`master` やその他の[システムデータベース][2]は含めないでください。各データベースは分離された計算環境で実行されているため、Datadog Agent は Azure SQL DB の各アプリケーションデータベースに直接接続する必要があります。これは、`database_autodiscovery` が Azure SQL DB では機能しないことも意味するので、有効化してはいけません。
+When configuring the Datadog Agent, specify one check instance for each application database located on a given Azure SQL DB server. Do not include `master` and other [system databases][2]. The Datadog Agent must connect directly to each application database in Azure SQL DB because each database is running in an isolated compute environment. This also means that `database_autodiscovery` does not work for Azure SQL DB, so it should not be enabled.
 
-**注:** Azure SQL Database は、分離されたネットワークでデータベースをデプロイします。各データベースは単一のホストとして扱われます。つまり、Azure SQL Database をエラスティックプールで実行した場合、プール内の各データベースは個別のホストとして扱われます。
+**Note:** Azure SQL Database deploys a database in an isolated network; each database is treated as a single host. This means that if you run Azure SQL Database in an elastic pool, each database in the pool is treated as a separate host.
 
 ```yaml
 init_config:
@@ -64,7 +66,7 @@ instances:
     database: '<DATABASE_1>'
     username: datadog
     password: '<PASSWORD>'
-    # プロジェクトとインスタンスを追加した後、CPU、メモリなどの追加のクラウドデータをプルするために Datadog Azure インテグレーションを構成します。
+    # After adding your project and instance, configure the Datadog Azure integration to pull additional cloud data such as CPU, Memory, etc.
     azure:
       deployment_type: 'sql_database'
       fully_qualified_domain_name: '<SERVER_NAME>.database.windows.net'
@@ -73,24 +75,24 @@ instances:
     database: '<DATABASE_2>'
     username: datadog
     password: '<PASSWORD>'
-    # プロジェクトとインスタンスを追加した後、CPU、メモリなどの追加のクラウドデータをプルするために Datadog Azure インテグレーションを構成します。
+    # After adding your project and instance, configure the Datadog Azure integration to pull additional cloud data such as CPU, Memory, etc.
     azure:
       deployment_type: 'sql_database'
       fully_qualified_domain_name: '<SERVER_NAME>.database.windows.net'
 ```
 
-Datadog Agent のインストールと構成の詳細については、[Agent のインストール](#install-the-agent)を参照してください。
+See [Install the Agent](#install-the-agent) for more detailed instructions on how to install and configure the Datadog Agent.
 
 [1]: https://docs.microsoft.com/en-us/azure/azure-sql/database/security-server-roles
 [2]: https://docs.microsoft.com/en-us/sql/relational-databases/databases/system-databases
-[3]: /ja/database_monitoring/guide/managed_authentication
+[3]: /database_monitoring/guide/managed_authentication
 {{% /tab %}}
 
 {{% tab "Azure SQL Managed Instance" %}}
 
-サーバーに接続するための読み取り専用ログインを作成し、必要な権限を付与します。
+Create a read-only login to connect to your server and grant the required permissions:
 
-#### SQL Server バージョン 2014+ の場合
+#### For SQL Server versions 2014+
 
 ```SQL
 CREATE LOGIN datadog WITH PASSWORD = '<PASSWORD>';
@@ -98,37 +100,37 @@ CREATE USER datadog FOR LOGIN datadog;
 GRANT CONNECT ANY DATABASE to datadog;
 GRANT VIEW SERVER STATE to datadog;
 GRANT VIEW ANY DEFINITION to datadog;
--- Log Shipping Monitoring (Agent v7.50 以降で利用可能) を使用するには、次の 3 行のコメントを外します。
+-- To use Log Shipping Monitoring (available in Agent v7.50+), uncomment the next three lines:
 -- USE msdb;
 -- CREATE USER datadog FOR LOGIN datadog;
 -- GRANT SELECT to datadog;
 ```
 
-**注:** Azure マネージドアイデンティティ認証もサポートされています。Azure SQL DB インスタンスの構成方法については、[ガイド][1]を参照してください。
+**Note:** Azure managed identity authentication is also supported. Please see [the guide][1] on how to configure this for your Azure SQL DB instance.
 
-[3]: /ja/database_monitoring/guide/managed_authentication
+[3]: /database_monitoring/guide/managed_authentication
 {{% /tab %}}
 
-{{% tab "Windows Azure VM の SQL Server" %}}
+{{% tab "SQL Server on Windows Azure VM" %}}
 
-[Windows Azure VM の SQL Server][1] の場合は、[セルフホスティングの SQL Server のデータベースモニタリングを設定する][2]のドキュメントに従って、Windows Server ホスト VM に直接 Datadog Agent をインストールしてください。
+For [SQL Server on Windows Azure VM][1] follow the [Setting Up Database Monitoring for self-hosted SQL Server][2] documentation to install the Datadog Agent directly on the Windows Server host VM.
 
 [1]: https://docs.microsoft.com/en-us/azure/azure-sql/virtual-machines/windows/sql-server-on-azure-vm-iaas-what-is-overview
-[2]: /ja/database_monitoring/setup_sql_server/selfhosted/
+[2]: /database_monitoring/setup_sql_server/selfhosted/
 {{% /tab %}}
 
 {{< /tabs >}}
 
-## Agent のインストール
+## Install and configure the Agent
 
-Azure はホストへの直接アクセスを許可しないため、Datadog Agent は SQL Server ホストと通信可能な別のホストにインストールする必要があります。Agent のインストールと実行には、いくつかのオプションがあります。
+Because Azure does not grant direct host access, the Datadog Agent must be installed on a separate host where it is able to talk to the SQL Server host. There are several options for installing and running the Agent.
 
 {{< tabs >}}
 {{% tab "Windows Host" %}}
 
-Oracle テレメトリーの収集を開始するには、まず [Datadog Agent をインストール][1]します。
+To start collecting SQL Server telemetry, first [install the Datadog Agent][1].
 
-SQL Server Agent のコンフィギュレーションファイル `C:\ProgramData\Datadog\conf.d\sqlserver.d\conf.yaml` を作成します。使用可能なすべての構成オプションは、[サンプルコンフィギュレーションファイル][2]を参照してください。
+Create the SQL Server Agent conf file `C:\ProgramData\Datadog\conf.d\sqlserver.d\conf.yaml`. See the [sample conf file][2] for all available configuration options.
 
 ```yaml
 init_config:
@@ -138,70 +140,70 @@ instances:
     username: datadog
     password: '<PASSWORD>'
     connector: adodbapi
-   adoprovider: MSOLEDBSQL
-    tags:  # オプション
+    adoprovider: MSOLEDBSQL
+    tags:  # Optional
       - 'service:<CUSTOM_SERVICE>'
       - 'env:<CUSTOM_ENV>'
-    # プロジェクトとインスタンスを追加した後、CPU、メモリなどの追加のクラウドデータをプルするために Datadog Azure インテグレーションを構成します。
+    # After adding your project and instance, configure the Datadog Azure integration to pull additional cloud data such as CPU, Memory, etc.
     azure:
       deployment_type: '<DEPLOYMENT_TYPE>'
       fully_qualified_domain_name: '<AZURE_INSTANCE_ENDPOINT>'
 ```
 
-`deployment_type` と `name` フィールドの設定に関する追加情報は、[SQL Server インテグレーション仕様][3]を参照してください。
+See the [SQL Server integration spec][3] for additional information on setting `deployment_type` and `name` fields.
 
-[Windows 認証][4]を利用する場合は、`connection_string: "Trusted_Connection=yes"` と設定し、`username` と `password` フィールドを省略します。
+To use [Windows Authentication][4], set `connection_string: "Trusted_Connection=yes"` and omit the `username` and `password` fields.
 
-`service` と `env` タグを使用して、共通のタグ付けスキームでデータベースのテレメトリーを他のテレメトリーにリンクします。これらのタグが Datadog 全体でどのように使用されるかについては、[統合サービスタグ付け][5]を参照してください。
+Use the `service` and `env` tags to link your database telemetry to other telemetry through a common tagging scheme. See [Unified Service Tagging][5] on how these tags are used throughout Datadog.
 
-### 対応ドライバー
+### Supported Drivers
 
 #### Microsoft ADO
 
-推奨する [ADO][6] プロバイダーは、[Microsoft OLE DB Driver][7] です。Agent が動作しているホストにドライバーがインストールされていることを確認してください。
+The recommended [ADO][6] provider is [Microsoft OLE DB Driver][7]. Ensure the driver is installed on the host where the agent is running.
 ```yaml
 connector: adodbapi
-adoprovider: MSOLEDBSQL19  # バージョン 18 以下の MSOLEDBSQL に置き換えます
+adoprovider: MSOLEDBSQL19  # Replace with MSOLEDBSQL for versions 18 and lower
 ```
 
-他の 2 つのプロバイダー、`SQLOLEDB` と `SQLNCLI` は、Microsoft によって非推奨とされており、もはや使用するべきではありません。
+The other two providers, `SQLOLEDB` and `SQLNCLI`, are considered deprecated by Microsoft and should no longer be used.
 
 #### ODBC
 
-推奨される ODBC ドライバーは [Microsoft ODBC Driver][8] です。Agent 7.51 以降、SQL Server 用 ODBC Driver 18 が Linux 用 Agent に含まれています。Windows の場合は、Agent を実行するホストにドライバーがインストールされていることを確認してください。
+The recommended ODBC driver is [Microsoft ODBC Driver][8]. Starting with Agent 7.51, ODBC Driver 18 for SQL Server is included in the agent for Linux. For Windows, ensure the driver is installed on the host where the Agent is running.
 
 ```yaml
 connector: odbc
 driver: '{ODBC Driver 18 for SQL Server}'
 ```
 
-すべての Agent の構成が完了したら、[Datadog Agent を再起動][9]します。
+Once all Agent configuration is complete, [restart the Datadog Agent][9].
 
-### UpdateAzureIntegration
+### Validate
 
-[Agent の status サブコマンドを実行][10]し、**Checks** セクションで `sqlserver` を探します。Datadog の[データベース][11]のページへ移動して開始します。
+[Run the Agent's status subcommand][10] and look for `sqlserver` under the **Checks** section. Navigate to the [Databases][11] page in Datadog to get started.
 
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest?platform=windows
 [2]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/datadog_checks/sqlserver/data/conf.yaml.example
 [3]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/assets/configuration/spec.yaml#L353-L383
 [4]: https://docs.microsoft.com/en-us/sql/relational-databases/security/choose-an-authentication-mode
-[5]: /ja/getting_started/tagging/unified_service_tagging
+[5]: /getting_started/tagging/unified_service_tagging
 [6]: https://docs.microsoft.com/en-us/sql/ado/microsoft-activex-data-objects-ado
 [7]: https://docs.microsoft.com/en-us/sql/connect/oledb/oledb-driver-for-sql-server
 [8]: https://docs.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server
-[9]: /ja/agent/configuration/agent-commands/#start-stop-and-restart-the-agent
-[10]: /ja/agent/configuration/agent-commands/#agent-status-and-information
+[9]: /agent/configuration/agent-commands/#start-stop-and-restart-the-agent
+[10]: /agent/configuration/agent-commands/#agent-status-and-information
 [11]: https://app.datadoghq.com/databases
 {{% /tab %}}
-{{% tab "Linux ホスト" %}}
-SQL Server テレメトリーの収集を開始するには、まず [Datadog Agent をインストール][1]します。
+{{% tab "Linux Host" %}}
+To start collecting SQL Server telemetry, first [install the Datadog Agent][1].
 
-Linux では、Datadog Agent の他に、ODBC SQL Server ドライバー (例えば、[Microsoft ODBC ドライバー][2]) がインストールされていることが必須となります。ODBC SQL Server がインストールされたら、`odbc.ini` と `odbcinst.ini` ファイルを `/opt/datadog-agent/embedded/etc` フォルダーにコピーします。
+On Linux, the Datadog Agent additionally requires an ODBC SQL Server driver to be installed—for example, the [Microsoft ODBC driver][2]. Once an ODBC SQL Server is installed, copy the `odbc.ini` and `odbcinst.ini` files into the `/opt/datadog-agent/embedded/etc` folder.
 
-`odbc` コネクターを使用し、`odbcinst.ini` ファイルに示されているように、適切なドライバーを指定します。
+Use the `odbc` connector and specify the proper driver as indicated in the `odbcinst.ini` file.
 
-SQL Server Agent のコンフィギュレーションファイル `/etc/datadog-agent/conf.d/sqlserver.d/conf.yaml` を作成します。使用可能なすべての構成オプションは、[サンプルコンフィギュレーションファイル][3]を参照してください。
+Create the SQL Server Agent conf file `/etc/datadog-agent/conf.d/sqlserver.d/conf.yaml`. See the [sample conf file][3] for all available configuration options.
 
 ```yaml
 init_config:
@@ -212,41 +214,41 @@ instances:
     password: '<PASSWORD>'
     connector: odbc
     driver: '<Driver from the `odbcinst.ini` file>'
-    tags:  # オプション
+    tags:  # Optional
       - 'service:<CUSTOM_SERVICE>'
       - 'env:<CUSTOM_ENV>'
-    # プロジェクトとインスタンスを追加した後、CPU、メモリなどの追加のクラウドデータをプルするために Datadog Azure インテグレーションを構成します。
+    # After adding your project and instance, configure the Datadog Azure integration to pull additional cloud data such as CPU, Memory, etc.
     azure:
       deployment_type: '<DEPLOYMENT_TYPE>'
       fully_qualified_domain_name: '<AZURE_ENDPOINT_ADDRESS>'
 ```
 
-`deployment_type` と `name` フィールドの設定に関する追加情報は、[SQL Server インテグレーション仕様][4]を参照してください。
+See the [SQL Server integration spec][4] for additional information on setting `deployment_type` and `name` fields.
 
-`service` と `env` タグを使用して、共通のタグ付けスキームでデータベースのテレメトリーを他のテレメトリーにリンクします。これらのタグが Datadog 全体でどのように使用されるかについては、[統合サービスタグ付け][5]を参照してください。
+Use the `service` and `env` tags to link your database telemetry to other telemetry through a common tagging scheme. See [Unified Service Tagging][5] on how these tags are used throughout Datadog.
 
-すべての Agent の構成が完了したら、[Datadog Agent を再起動][6]します。
+Once all Agent configuration is complete, [restart the Datadog Agent][6].
 
-### UpdateAzureIntegration
+### Validate
 
-[Agent の status サブコマンドを実行][7]し、**Checks** セクションで `sqlserver` を探します。Datadog の[データベース][8]のページへ移動して開始します。
+[Run the Agent's status subcommand][7] and look for `sqlserver` under the **Checks** section. Navigate to the [Databases][8] page in Datadog to get started.
 
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://docs.microsoft.com/en-us/sql/connect/odbc/linux-mac/installing-the-microsoft-odbc-driver-for-sql-server
 [3]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/datadog_checks/sqlserver/data/conf.yaml.example
 [4]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/assets/configuration/spec.yaml#L353-L383
-[5]: /ja/getting_started/tagging/unified_service_tagging
-[6]: /ja/agent/configuration/agent-commands/#start-stop-and-restart-the-agent
-[7]: /ja/agent/configuration/agent-commands/#agent-status-and-information
+[5]: /getting_started/tagging/unified_service_tagging
+[6]: /agent/configuration/agent-commands/#start-stop-and-restart-the-agent
+[7]: /agent/configuration/agent-commands/#agent-status-and-information
 [8]: https://app.datadoghq.com/databases
 {{% /tab %}}
 {{% tab "Docker" %}}
-Docker コンテナで動作するデータベースモニタリング Agent を設定するには、Agent コンテナの Docker ラベルとして[オートディスカバリーのインテグレーションテンプレート][1]を設定します。
+To configure the Database Monitoring Agent running in a Docker container, set the [Autodiscovery Integration Templates][1] as Docker labels on your Agent container.
 
-**注**: ラベルのオートディスカバリーを機能させるためには、Agent にDocker ソケットの読み取り権限が必要です。
+**Note**: The Agent must have read permission on the Docker socket for Autodiscovery of labels to work.
 
-アカウントや環境に合わせて、値を置き換えます。利用可能なすべての構成オプションについては、[サンプルコンフィギュレーションファイル][2]を参照してください。
+Replace the values to match your account and environment. See the [sample conf file][2] for all available configuration options.
 
 ```bash
 export DD_API_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
@@ -275,64 +277,77 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
   gcr.io/datadoghq/agent:${DD_AGENT_VERSION}
 ```
 
-`deployment_type` と `name` フィールドの設定に関する追加情報は、[SQL Server インテグレーション仕様][3]を参照してください。
+See the [SQL Server integration spec][3] for additional information on setting `deployment_type` and `name` fields.
 
-`service` と `env` タグを使用して、共通のタグ付けスキームでデータベースのテレメトリーを他のテレメトリーにリンクします。これらのタグが Datadog 全体でどのように使用されるかについては、[統合サービスタグ付け][4]を参照してください。
+Use the `service` and `env` tags to link your database telemetry to other telemetry through a common tagging scheme. See [Unified Service Tagging][4] on how these tags are used throughout Datadog.
 
-### UpdateAzureIntegration
+### Validate
 
-[Agent の status サブコマンドを実行][5]し、**Checks** セクションで `sqlserver` を探します。または、Datadog の[データベース][6]のページへ移動して開始します。
+[Run the Agent's status subcommand][5] and look for `sqlserver` under the **Checks** section. Alternatively, navigate to the [Databases][6] page in Datadog to get started.
 
 
-[1]: /ja/agent/faq/template_variables/
+[1]: /agent/faq/template_variables/
 [2]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/datadog_checks/sqlserver/data/conf.yaml.example
 [3]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/assets/configuration/spec.yaml#L353-L383
-[4]: /ja/getting_started/tagging/unified_service_tagging
-[5]: /ja/agent/configuration/agent-commands/#agent-status-and-information
+[4]: /getting_started/tagging/unified_service_tagging
+[5]: /agent/configuration/agent-commands/#agent-status-and-information
 [6]: https://app.datadoghq.com/databases
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
-Kubernetes クラスターをお使いの場合は、データベースモニタリング用の [Datadog Cluster Agent][1] をご利用ください。
+If you have a Kubernetes cluster, use the [Datadog Cluster Agent][1] for Database Monitoring.
 
-Kubernetes クラスターでクラスターチェックがまだ有効になっていない場合は、指示に従って[クラスターチェックを有効化][2]します。Cluster Agent の構成は、Cluster Agent コンテナにマウントされた静的ファイル、または Kubernetes サービスアノテーションのいずれかを使用することができます。
+If cluster checks are not already enabled in your Kubernetes cluster, follow the instructions to [enable cluster checks][2]. You can configure the Cluster Agent either with static files mounted in the Cluster Agent container, or by using Kubernetes service annotations:
 
-### Helm のコマンドライン
+### Helm
 
-以下の [Helm][3] コマンドを実行して、Kubernetes クラスターに [Datadog Cluster Agent][1] をインストールします。お使いのアカウントや環境に合わせて値を変更してください。
+Complete the following steps to install the [Datadog Cluster Agent][1] on your Kubernetes cluster. Replace the values to match your account and environment.
 
-```bash
-helm repo add datadog https://helm.datadoghq.com
-helm repo update
+1. Complete the [Datadog Agent installation instructions][3] for Helm.
+2. Update your YAML configuration file (`datadog-values.yaml` in the Cluster Agent installation instructions) to include the following:
+    ```yaml
+    clusterAgent:
+      confd:
+        sqlserver.yaml: -|
+          cluster_check: true
+          init_config:
+          instances:
+          - dbm: true
+            host: <HOSTNAME>,1433
+            username: datadog
+            password: '<PASSWORD>'
+            connector: 'odbc'
+            driver: 'ODBC Driver 18 for SQL Server'
+            include_ao_metrics: true  # Optional: For AlwaysOn users
+            tags:  # Optional
+              - 'service:<CUSTOM_SERVICE>'
+              - 'env:<CUSTOM_ENV>'
+            azure:
+              deployment_type: '<DEPLOYMENT_TYPE>'
+              fully_qualified_domain_name: '<AZURE_ENDPOINT_ADDRESS>'
 
-helm install <RELEASE_NAME> \
-  --set 'datadog.apiKey=<DATADOG_API_KEY>' \
-  --set 'clusterAgent.enabled=true' \
-  --set 'clusterChecksRunner.enabled=true' \
-  --set "clusterAgent.confd.sqlserver\.yaml=cluster_check: true
-init_config:
-instances:
-  - dbm: true
-    host: <HOSTNAME>\,1433
-    username: datadog
-    password: '<PASSWORD>'
-    connector: 'odbc'
-    driver: 'ODBC Driver 18 for SQL Server'
-    include_ao_metrics: true  # オプション: AlwaysOn ユーザー向け
-    tags:  # オプション
-      - 'service:<CUSTOM_SERVICE>'
-      - 'env:<CUSTOM_ENV>'
-    azure:
-      deployment_type: '<DEPLOYMENT_TYPE>'
-      fully_qualified_domain_name: '<AZURE_ENDPOINT_ADDRESS>'" \
-  datadog/datadog
-```
+    clusterChecksRunner:
+      enabled: true
+    ```
 
-### マウントされたファイルで構成する
+3. Deploy the Agent with the above configuration file from the command line:
+    ```shell
+    helm install datadog-agent -f datadog-values.yaml datadog/datadog
+    ```
 
-マウントされたコンフィギュレーションファイルを使ってクラスターチェックを構成するには、コンフィギュレーションファイルを Cluster Agent コンテナのパス `/conf.d/sqlserver.yaml` にマウントします。
+<div class="alert alert-info">
+For Windows, append <code>--set targetSystem=windows</code> to the <code>helm install</code> command.
+</div>
+
+[1]: https://app.datadoghq.com/organization-settings/api-keys
+[2]: /getting_started/site
+[3]: /containers/kubernetes/installation/?tab=helm#installation
+
+### Configure with mounted files
+
+To configure a cluster check with a mounted configuration file, mount the configuration file in the Cluster Agent container on the path: `/conf.d/sqlserver.yaml`:
 
 ```yaml
-cluster_check: true  # このフラグを必ず入れてください
+cluster_check: true  # Make sure to include this flag
 init_config:
 instances:
   - dbm: true
@@ -341,18 +356,18 @@ instances:
     password: '<PASSWORD>'
     connector: "odbc"
     driver: "ODBC Driver 18 for SQL Server"
-    tags:  # オプション
+    tags:  # Optional
       - 'service:<CUSTOM_SERVICE>'
       - 'env:<CUSTOM_ENV>'
-    # プロジェクトとインスタンスを追加した後、CPU、メモリなどの追加のクラウドデータをプルするために Datadog Azure インテグレーションを構成します。
+    # After adding your project and instance, configure the Datadog Azure integration to pull additional cloud data such as CPU, Memory, etc.
     azure:
       deployment_type: '<DEPLOYMENT_TYPE>'
       fully_qualified_domain_name: '<AZURE_ENDPOINT_ADDRESS>'
 ```
 
-### Kubernetes サービスアノテーションで構成する
+### Configure with Kubernetes service annotations
 
-ファイルをマウントせずに、インスタンスの構成を Kubernetes サービスとして宣言することができます。Kubernetes 上で動作する Agent にこのチェックを設定するには、Datadog Cluster Agent と同じネームスペースにサービスを作成します。
+Rather than mounting a file, you can declare the instance configuration as a Kubernetes Service. To configure this check for an Agent running on Kubernetes, create a Service in the same namespace as the Datadog Cluster Agent:
 
 
 ```yaml
@@ -372,7 +387,7 @@ metadata:
           "password": "<PASSWORD>",
           "connector": "odbc",
           "driver": "ODBC Driver 18 for SQL Server",
-          "tags": ["service:<CUSTOM_SERVICE>", "env:<CUSTOM_ENV>"],  # オプション
+          "tags": ["service:<CUSTOM_SERVICE>", "env:<CUSTOM_ENV>"],  # Optional
           "azure": {
             "deployment_type": "<DEPLOYMENT_TYPE>",
             "fully_qualified_domain_name": "<AZURE_ENDPOINT_ADDRESS>"
@@ -387,30 +402,30 @@ spec:
     name: sqlserver
 ```
 
-`deployment_type` と `name` フィールドの設定に関する追加情報は、[SQL Server インテグレーション仕様][4]を参照してください。
+See the [SQL Server integration spec][4] for additional information on setting `deployment_type` and `name` fields.
 
-Cluster Agent は自動的にこのコンフィギュレーションを登録し、SQL Server チェックを開始します。
+The Cluster Agent automatically registers this configuration and begins running the SQL Server check.
 
-`datadog` ユーザーのパスワードをプレーンテキストで公開しないよう、Agent の[シークレット管理パッケージ][5]を使用し、`ENC[]` 構文を使ってパスワードを宣言します。
+To avoid exposing the `datadog` user's password in plain text, use the Agent's [secret management package][5] and declare the password using the `ENC[]` syntax.
 
 
-[1]: /ja/agent/cluster_agent
-[2]: /ja/agent/cluster_agent/clusterchecks/
+[1]: /agent/cluster_agent
+[2]: /agent/cluster_agent/clusterchecks/
 [3]: https://helm.sh
 [4]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/assets/configuration/spec.yaml#L353-L383
-[5]: /ja/agent/configuration/secrets-management
+[5]: /agent/configuration/secrets-management
 {{% /tab %}}
 {{< /tabs >}}
 
-## Agent の構成例
+## Example Agent Configurations
 {{% dbm-sqlserver-agent-config-examples %}}
 
-## Azure インテグレーションをインストールする
+## Install the Azure integration
 
-Azure からより包括的なデータベースメトリクスとログを収集するには、[Azure インテグレーション][1]をインストールします。
+To collect more comprehensive database metrics and logs from Azure, install the [Azure integration][1].
 
-## その他の参考資料
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/integrations/azure
+[1]: /integrations/azure

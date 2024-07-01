@@ -1,105 +1,107 @@
 ---
-app_id: vercel
-app_uuid: 3ee4a2db-aea9-4663-93a9-d5758f71ba9d
-assets:
-  dashboards:
-    Vercel: assets/dashboards/vercel_overview.json
-  integration:
-    configuration:
-      spec: assets/configuration/spec.yaml
-    events:
-      creates_events: false
-    metrics:
-      check: []
-      metadata_path: metadata.csv
-      prefix: vercel.
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_name: Vercel
-author:
-  homepage: https://github.com/DataDog/integrations-extras
-  name: Datadog
-  sales_email: help@datadoghq.com
-  support_email: help@datadoghq.com
-categories:
-- クラウド
-- 構成 & デプロイ
-- ネットワーク
-- プロビジョニング
-dependencies:
-- https://github.com/DataDog/integrations-extras/blob/master/vercel/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: vercel
-integration_id: vercel
-integration_title: Vercel
-integration_version: ''
-is_public: true
-custom_kind: integration
-manifest_version: 2.0.0
-name: vercel
-public_title: Vercel
-short_description: Vercel で実行中のサーバーレスアプリケーションを監視する
-supported_os:
+"app_id": "vercel"
+"app_uuid": "3ee4a2db-aea9-4663-93a9-d5758f71ba9d"
+"assets":
+  "dashboards":
+    "Vercel": assets/dashboards/vercel_overview.json
+  "integration":
+    "auto_install": true
+    "configuration":
+      "spec": assets/configuration/spec.yaml
+    "events":
+      "creates_events": false
+    "metrics":
+      "check": vercel.requests
+      "metadata_path": metadata.csv
+      "prefix": vercel.
+    "service_checks":
+      "metadata_path": assets/service_checks.json
+    "source_type_id": !!int "10213"
+    "source_type_name": Vercel
+"author":
+  "homepage": "https://github.com/DataDog/integrations-extras"
+  "name": Datadog
+  "sales_email": help@datadoghq.com
+  "support_email": help@datadoghq.com
+"categories":
+- cloud
+- configuration & deployment
+- network
+- provisioning
+"custom_kind": "integration"
+"dependencies":
+- "https://github.com/DataDog/integrations-extras/blob/master/vercel/README.md"
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "vercel"
+"integration_id": "vercel"
+"integration_title": "Vercel"
+"integration_version": ""
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "vercel"
+"public_title": "Vercel"
+"short_description": "Monitor your serverless applications running on Vercel"
+"supported_os":
 - linux
 - windows
 - macos
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Cloud
-  - Category::Configuration & Deployment
-  - Category::Network
-  - Category::Provisioning
-  - Supported OS::Linux
-  - Supported OS::Windows
-  - Supported OS::macOS
-  configuration: README.md#Setup
-  description: Vercel で実行中のサーバーレスアプリケーションを監視する
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Vercel
+"tile":
+  "changelog": CHANGELOG.md
+  "classifier_tags":
+  - "Category::Cloud"
+  - "Category::Configuration & Deployment"
+  - "Category::Network"
+  - "Category::Provisioning"
+  - "Supported OS::Linux"
+  - "Supported OS::Windows"
+  - "Supported OS::macOS"
+  "configuration": "README.md#Setup"
+  "description": Monitor your serverless applications running on Vercel
+  "media": []
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": Vercel
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
-![Datadog インテグレーション][1]
+![datadog-integration][1]
 
-## 概要
+## Overview
 
-[Vercel][2] は、フロントエンド開発者が高性能のウェブサイトやアプリケーションを構築するためのデプロイおよびコラボレーションプラットフォームです。Vercel は 2016 年に Google や Facebook のエンジニアと共同開発した React フレームワーク「Next.js」の生みの親でもあります。Vercel のユーザーはビルドやレンダリングのプロセスを管理する内蔵のデプロイツールや、サイトをキャッシュして高速検索できる独自の [Edge Network][3] を活用できます。さらに、Vercel は[サーバーレス関数][4]に対応しており、ユーザー認証、フォーム送信、データベースクエリなどバックエンドで不可欠な処理を実現するサーバーレスコードをデプロイすることもできます。
+[Vercel][2] is a deployment and collaboration platform that enables frontend developers to build high-performance websites and applications. Vercel is also the creator of Next.js, a React framework developed in collaboration with engineers at Google and Facebook in 2016. Vercel users can leverage a built-in deployment tool that manages the build and rendering process, as well as a proprietary [Edge Network][3] that caches their sites for fast retrieval. Additionally, Vercel offers [Serverless Functions][4], which allow users to deploy serverless code to accomplish essential backend processes like user authentication, form submission, and database queries.
 
-Vercel を Datadog と統合すると、以下のことができます。
+Integrate Vercel with Datadog to:
 
-- [Datadog のログ管理機能][5]を使用してアプリケーションのログを表示・解析
-- Vercel 上で動作しているサーバーレスアプリケーションや API へのリクエスト数および 4xx/5xx  HTTPエラー数の確認
-- [Datadog Synthetics][6] によるフロントエンドのパフォーマンス監視
+- View and parse your application logs using [Datadog's Log Management][5]
+- See the number of requests and 4xx/5xx HTTP errors to your serverless applications and APIs running on Vercel
+- Monitor frontend performance with [Datadog Synthetics][6]
 
-## セットアップ
+## Setup
 
-- [Datadog API キー][7]の生成
-- [Vercel Marketplace][8]を通じたログインテグレーションの構成
+- [Configure the Vercel integration][7]
 
-## 収集データ
+## Data Collected
 
-### メトリクス
+### Metrics
 
-Vercel インテグレーションには、メトリクスは含まれません。
+The Vercel integration does not include any metrics.
 
-### サービスのチェック
+### Service Checks
 
-Vercel インテグレーションには、サービスのチェック機能は含まれません。
+The Vercel integration does not include any service checks.
 
-### イベント
+### Events
 
-Vercel インテグレーションには、イベントは含まれません。
+The Vercel integration does not include any events.
 
-## トラブルシューティング
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
+Need help? Contact [Datadog support][8].
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -107,7 +109,8 @@ Vercel インテグレーションには、イベントは含まれません。
 [2]: https://vercel.com/
 [3]: https://vercel.com/docs/edge-network/overview
 [4]: https://vercel.com/docs/serverless-functions/introduction
-[5]: /ja/logs/
-[6]: /ja/synthetics/
-[7]: https://app.datadoghq.com/organization-settings/api-keys
-[8]: https://vercel.com/integrations/datadog-logs
+[5]: /logs/
+[6]: /synthetics/
+[7]: https://app.datadoghq.com/setup/vercel
+[8]: /help/
+

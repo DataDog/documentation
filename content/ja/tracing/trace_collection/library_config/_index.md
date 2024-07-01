@@ -1,16 +1,17 @@
 ---
-title: Datadog トレーシングライブラリの構成
+title: Configure the Datadog Tracing Library
+kind: documentation
 type: multi-code-lang
 ---
 
-トレーシングライブラリの構成オプションについては、言語を選択してください。
+For information about configuration options for tracing libraries, choose your language:
 
 {{< partial name="apm/apm-compatibility.html" >}}
 
 <br>
 
-公式ライブラリでまだサポートされていない言語で記述されたアプリケーションを計測する場合は、[コミュニティトレーシングライブラリ][1]のリストを参照してください。
+To instrument an application written in a language that does not yet have official library support, see the list of [community tracing libraries][1].
 
 
 
-[1]: /ja/developers/community/libraries/#apm-tracing-client-libraries
+[1]: /developers/community/libraries/#apm-tracing-client-libraries

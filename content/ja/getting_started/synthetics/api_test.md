@@ -1,173 +1,175 @@
 ---
+title: Getting Started with API Tests
+kind: documentation
 further_reading:
-- link: https://learn.datadoghq.com/courses/intro-to-synthetic-tests
-  tag: ラーニングセンター
-  text: Synthetic テストの紹介
-- link: /api/latest/synthetics/#create-an-api-test
+- link: "https://learn.datadoghq.com/courses/intro-to-synthetic-tests"
+  tag: Learning Center
+  text: Introduction to Synthetic Tests
+- link: "/api/latest/synthetics/#create-an-api-test"
   tag: API
-  text: プログラムによる API テストの作成
+  text: Create an API test programmatically
 - link: /synthetics/api_tests
-  tag: ドキュメント
-  text: シングル API テストの詳細
+  tag: Documentation
+  text: Learn more about single API tests
 - link: /synthetics/multistep
   tag: Documentation
-  text: マルチステップ API テストの詳細
+  text: Learn more about multistep API tests
 - link: /getting_started/synthetics/private_location
-  tag: ドキュメント
-  text: プライベートロケーションの詳細
+  tag: Documentation
+  text: Learn about private locations
 - link: /continuous_testing/cicd_integrations/
-  tag: ドキュメント
-  text: CI/CD パイプラインから Synthetic テストをトリガーする方法を学ぶ
+  tag: Documentation
+  text: Learn how to trigger Synthetic tests from your CI/CD pipeline
 - link: /synthetics/guide/identify_synthetics_bots
-  tag: ドキュメント
-  text: API テスト用の Synthetic ボットを特定する方法を学ぶ
+  tag: Documentation
+  text: Learn how to identify Synthetic bots for API tests
 - link: /synthetics/guide/synthetic-test-monitors
-  tag: ドキュメント
-  text: Synthetic テストモニターについて
-title: API テストの概要
+  tag: Documentation
+  text: Learn about Synthetic test monitors
+
 ---
 
-## 概要
+## Overview
 
-API テストは、**最も重要なサービス**がいつでもどこからでも利用できることを**プロアクティブに監視**します。[シングル API テスト][1]には、システムのさまざまなネットワーク層 (`HTTP`、`SSL`、`DNS`、`WebSocket`、`TCP`、`UDP`、`ICMP`、`gRPC`) に対してリクエストを発行できる 8 つのサブタイプがあります。[マルチステップ API テスト][2]では、API テストを順番に実行して、API レベルで主要なジャーニーのアップタイムを監視できます。
+API tests **proactively monitor** that your **most important services** are available at anytime and from anywhere. [Single API tests][1] come in eight subtypes that allow you to launch requests on the different network layers of your systems (`HTTP`, `SSL`, `DNS`, `WebSocket`, `TCP`, `UDP`, `ICMP`, and `gRPC`). [Multistep API tests][2] enable you to run API tests in sequence to monitor the uptime of key journeys at the API level.
 
-## 単一の API テストを作成する
+## Create a single API test
 
-HTTP テストは、API エンドポイントを監視し、レスポンス遅延が大きい場合や、期待される HTTP ステータスコード、レスポンスヘッダー、レスポンス本文の内容など、定義した条件を満たさない場合に警告を発します。
+HTTP tests monitor your API endpoints and alert you when response latency is high or fail to meet any conditions you define, such as expected HTTP status code, response headers, or response body content.
 
-{{< img src="getting_started/synthetics/api-test.png" alt="Synthetics HTTP テストの概要" style="width:100%;" >}}
+{{< img src="getting_started/synthetics/api-test.png" alt="Overview of a Synthetics HTTP Test" style="width:100%;" >}}
 
-以下の例では、[シングル API テスト][1]のサブタイプである [HTTP テスト][3]を作成する方法を示しています。
+The example below demonstrates how to create an [HTTP test][3], a subtype of [single API tests][1].
 
-### リクエストを定義する
+### Define request
 
-1. Datadog サイトで、**Digital Experience** にカーソルを合わせ、**[Tests][4]** (**Synthetic Monitoring & Testing** の下) を選択します。
-2. **New Test** > **[New API test][5]** をクリックします。
-3. `HTTP` リクエストタイプを選択します。
-4. リクエストを定義します。
+1. In the Datadog site, hover over **Digital Experience** and select **[Tests][4]** (under **Synthetic Monitoring & Testing**).
+2. Click **New Test** > **[New API test][5]**.
+3. Select the `HTTP` request type.
+4. Define your request:
 
-    - 監視するエンドポイントの URL を追加します。何から始めればよいかわからない場合は、テスト用の e コマースウェブアプリケーションである `https://www.shopist.io/` を使用できます。テストするエンドポイントを定義すると、テストの名前が `Test on www.shopist.io` に自動的に入力されます。
-    - **Advanced Options** を選択すると、カスタムリクエストオプション、証明書、認証情報などを設定することができます。
+    - Add the URL of the endpoint you want to monitor. If you don't know what to start with, you can use `https://www.shopist.io/`, a test e-commerce web application. Defining the endpoint to test automatically populates the name of your test to `Test on www.shopist.io`. 
+    - You can select **Advanced Options** to set custom request options, certificates, authentication credentials, and more.  
 
-      **注:** 資格情報を保存するための安全な[グローバル変数][6]を作成し、リクエストペイロードで使用する動的タイムスタンプを生成するための[ローカル変数][7]を作成できます。これらの変数を作成した後、関連するフィールドに `{{` と入力し、変数を選択して、テストオプションにその値を挿入します。
+      **Note:** You can create secure [global variables][6] to store credentials and create [local variables][7] to generate dynamic timestamps to use in your request payload. After creating these variables, type `{{` in any relevant field and select the variable to inject its value in your test options.  
 
-      この例では、特定の詳細オプションは必要ありません。
-    - テストでは、`env:prod` や `app:shopist` などのタグを設定できます。タグを使用すると、テストスイートを整理し、ホームページで興味のあるテストをすばやく見つけることができます。
+      In this example, no specific advanced option is needed.
+    - You can set tags such as `env:prod` and `app:shopist` on your test. Tags allow you to keep your test suite organized and quickly find tests you're interested in on the homepage.
 
-5. **Test URL** をクリックして、サンプルのテスト実行をトリガーします。
+5. Click **Test URL** to trigger a sample test run.
 
-{{< img src="getting_started/synthetics/api-test-config-3.png" alt="API テストコンフィギュレーション" style="width:100%;">}}
+{{< img src="getting_started/synthetics/api-test-config-3.png" alt="API test configuration" style="width:100%;">}}
 
-### アサーションを定義する
+### Define assertions
 
-**Test URL** をクリックすると、エンドポイントの応答に関する基本的なアサーションが自動的に入力されます。アサーションは、成功したテスト実行が何であるかを定義します。
+Clicking **Test URL** automatically populates basic assertions about your endpoint's response. Assertions define what a successful test run is.
 
-この例では、サンプルのテスト実行をトリガーした後、3 つのデフォルトのアサーションが設定されます。
+In this example, three default assertions populate after triggering the sample test run:
 
-{{< img src="getting_started/synthetics/assertions-example-2.png" alt="デフォルトアサーション" style="width:100%;">}}
+{{< img src="getting_started/synthetics/assertions-example-2.png" alt="Default assertions" style="width:100%;">}}
 
-アサーションは完全にカスタマイズ可能です。カスタムアサーションを追加するには、ヘッダーなどの応答プレビューの要素をクリックするか、**New Assertion** をクリックして新しいアサーションを最初から定義します。
+Assertions are fully customizable. To add a custom assertion, click on elements of the response preview such as the headers or click **New Assertion** to define a new assertion from scratch. 
 
-{{< img src="getting_started/synthetics/api-test-configuration-2.mp4" alt="API テストのコンフィギュレーション例" video="true" >}}
+{{< img src="getting_started/synthetics/api-test-configuration-2.mp4" alt="Example API test configuration" video="true" >}}
 
-### ロケーションを選択する
+### Select locations 
 
-テストを実行する 1 つ以上の **Managed Locations** または **Private Locations** を選択します。{{% managed-locations %}}
+Select one or more **Managed Locations** or **Private Locations** to run your test from. {{% managed-locations %}}
 
-Shopist アプリケーションは `https://www.shopist.io/` で公開されているので、管理された任意の場所からテストを実行することができます。内部アプリケーションのテストや、地理的に離れた場所でのユーザーの行動をシミュレートするには、代わりに[プライベートロケーション][8]を使ってください。
+The Shopist application is publicly available at `https://www.shopist.io/`, so you can pick any managed locations to execute your test from. To test internal applications or simulate user behavior in discrete geographic regions, use [private locations][8] instead.
 
-### テストの頻度を指定する
+### Specify test frequency
 
-テストを実行する頻度を選択します。デフォルトの頻度である 1 分のままでも構いません。
+Select the frequency at which you want your test to execute. You can leave the default frequency of 1 minute.
 
-スケジュールに従って Synthetic テストを実行することに加えて、[CI/CD パイプライン][9]から手動または直接トリガーすることができます。
+In addition to running your Synthetic test on a schedule, you can trigger them manually or directly from your [CI/CD pipelines][9]. 
 
-### アラート条件を定義する
+### Define alert conditions
 
-アラート条件を定義して、散発的なネットワークブリップなどのテストがトリガーされないようにすることができます。これにより、エンドポイントに実際の問題が発生した場合にのみアラートが送信されます。
+You can define alert conditions to ensure your test does not trigger for things like a sporadic network blip, so that you only get alerted in case of real issues with your endpoint.
 
-ロケーションが失敗したと見なす前に発生する必要がある連続した失敗の数を指定できます。
+You can specify the number of consecutive failures that should happen before considering a location failed:
 
 ```text
 Retry test 2 times after 300 ms in case of failure
 ```
 
-エンドポイントが特定の時間とロケーションの数だけダウンしたときにのみ通知をトリガーするようにテストを構成することもできます。次の例では、2 つの異なるロケーションでテストが 3 分間失敗した場合に、アラートルールが通知を送信するように設定されています。
+You can also configure your test to only trigger a notification when your endpoint goes down for a certain amount of time and number of locations. In the below example, the alerting rule is set to send a notification if the test fails for three minutes on two different locations:
 
 ```text
 An alert is triggered if your test fails for 3 minutes from any 2 of 13 locations
 ```
 
-### テストモニターを構成する
+### Configure the test monitor
 
-アラートメッセージを設計し、テストでアラートを送信するメールアドレスを追加します。Slack、PagerDuty、Microsoft Teams、Webhook などの[通知インテグレーション][10]を使用することもできます。これらの通知ツールへの Synthetic アラートをトリガーするには、最初に対応する[インテグレーション][11]を設定する必要があります。
+Design your alert message and add any email address you want your test to send alerts to. You can also use [notifications integrations][10] such as Slack, PagerDuty, Microsoft Teams, and webhooks. In order to trigger a Synthetic alert to these notification tools, you first need to set up the corresponding [integration][11].
 
-テストの構成とモニターを保存する準備ができたら、**Create** をクリックします。
+When you're ready to save your test configuration and monitor, click **Create**. 
 
-## マルチステップ API テストを作成する
+## Create a multistep API test
 
-[マルチステップ API テスト][2]では、主要なビジネストランザクションを API レベルで監視することができます。
+[Multistep API tests][2] allow you to monitor key business transactions at the API level. 
 
-{{< img src="getting_started/synthetics/multistep-api-test.png" alt="マルチステップ Synthetics API テストの概要" style="width:100%;" >}}
+{{< img src="getting_started/synthetics/multistep-api-test.png" alt="Overview of a Mulistep Synthetics API Test" style="width:100%;" >}}
 
-[API テスト][3]と同様、マルチステップ API テストは、エンドポイントの反応が遅すぎる場合や定義した条件を満たさない場合に警告を発します。個々のステップ応答から変数を作成し、後続のステップでそれらの値を再注入して、アプリケーションまたはサービスの動作を模倣する方法でステップをチェーン化することもできます。
+Similar to [API tests][3], multistep API tests alert you when your endpoints become too slow or fail to meet any conditions you defined. You can create variables from individual step responses and re-inject their values in subsequent steps, chaining steps together in a way that mimics the behavior of your application or service.
 
-以下のテスト例は、カートへのアイテムの追加を監視するマルチステップ API テストの作成を示しています。このテストには、次の 3 つのステップが含まれます。
+The example test below demonstrates the creation of a multistep API test that monitors the addition of an item to a cart. This test contains three steps: 
 
-- カートを取得する
-- 商品を取得する
-- カートに商品を追加する
+- Getting a cart
+- Getting a product
+- Adding the product to the cart
 
-マルチステップ API テストを作成する API エンドポイントがわからない場合は、以下のエンドポイントの例を使用してください。
+If you don't know which API endpoints to create your multistep API test on, use the example endpoints below. 
 
-新しいマルチステップ API テストを作成するには、**New Test** > **[Multistep API test][12]** をクリックします。`カートに商品を追加する` などのテスト名を追加し、タグを含め、ロケーションを選択します。
+To create a new multistep API test, click **New Test** > **[Multistep API test][12]**. Add a test name such as `Add product to cart`, include tags, and select locations. 
 
-### カートを取得する
+### Get a cart
 
-1. **Define steps** で、**Create Your First Step** をクリックします。
-2. ステップに名前を追加します。例: `カートを取得する`
-3. クエリする HTTP メソッドと URL を指定します。`POST` と `https://api.shopist.io/carts` を入力できます。
-4. **Test URL** をクリックします。これにより、Shopist アプリケーションのバックエンドにカートアイテムが作成されます。
-5. デフォルトのアサーションのままにするか、変更します。
-6. オプションで、実行パラメーターを定義します。
+1. In **Define steps**, click **Create Your First Step**. 
+2. Add a name to your step, for example: `Get a cart`.
+3. Specify the HTTP method and the URL you want to query. You can enter `POST` and `https://api.shopist.io/carts`. 
+4. Click **Test URL**. This creates a cart item in the Shopist application's backend.
+5. Leave the default assertions or modify them.
+6. Optionally, define execution parameters. 
 
-   **Continue with test if this step fails** (このステップが失敗した場合はテストを続行) を選択すると、前のステップの成功または失敗に関係なく、エンドポイントコレクション全体がテストされていること、または最後のクリーンアップステップが実行されていることを確認できます。**Retry** ステップ機能は、API エンドポイントが応答するまでに時間がかかることがわかっている場合に便利です。
+    Selecting **Continue with test if this step fails** is helpful to ensure a whole endpoint collection is tested or to ensure the last cleanup step is executed, regardless of previous steps' success or failure. The **Retry** step feature is handy in situations where you know your API endpoint may take some time before responding. 
 
-   この例では、特定の実行パラメーターは必要ありません。
+    In this example, no specific execution parameter is needed. 
 
-7. `location` ヘッダーの最後にあるカート ID の値から変数を作成するには
-    - **Extract a variable from response content** (応答コンテンツから変数を抽出する) をクリックします。
-    - 変数に `CART_ID` という名前を付けます。
-    - **Response Header** で、`location` を選択します。
-    - **Parsing Regex** フィールドに、`(?:[^\\/](?!(\\|/)))+$` などの正規表現を追加します。
+7. To create a variable out of the value of the cart ID located at the end of the `location` header:
+    - Click **Extract a variable from response content**.
+    - Name your variable as `CART_ID`.
+    - In the **Response Header,** select `location`.
+    - In the **Parsing Regex** field, add a regular expression such as `(?:[^\\/](?!(\\|/)))+$`.
 
-   {{< img src="getting_started/synthetics/multistep-test-extract-variables.png" alt="応答コンテンツから抽出された変数" style="width:100%;" >}}
+   {{< img src="getting_started/synthetics/multistep-test-extract-variables.png" alt="Extracted variable from response content" style="width:100%;" >}}
 
-8. **Save Variable** をクリックします。
-9. このテストステップの作成が完了したら、**Save Step** をクリックします。
+8. Click **Save Variable**.
+9. When you're done creating this test step, click **Save Step**.
 
-### 商品を取得する
+### Get a product
 
-1. **Define another step** (別のステップを定義する) で、**Add Another Step** (別のステップを追加する) をクリックします。デフォルトでは、最大 10 個のステップを作成できます。
-2. ステップに名前を追加します。例: `商品を取得する`
-3. クエリする HTTP メソッドと URL を指定します。 ここでは、`GET` と `https://api.shopist.io/products.json` を追加できます。
-4. **Test URL** をクリックします。これにより、Shopist アプリケーションで購入できる商品のリストが取得されます。
-5. デフォルトのアサーションのままにするか、変更します。
-6. オプションで、実行パラメーターを定義します。この例では、特定の実行パラメーターは必要ありません。
-7. 応答本文にある商品 ID から変数を作成するには、次のようにします。
-    - **Extract a variable from response content** (応答コンテンツから変数を抽出する) をクリックします。
-    - 変数に `PRODUCT_ID` という名前を付けます。
-    - **Response Body** タブをクリックします。
-    - 商品の `$oid` キーをクリックして、`$[0].id['$oid']` などの JSON パスを生成します。
-8. **Save Variable** をクリックします。
-9. このテストステップの作成が完了したら、**Save Step** をクリックします。
+1. In **Define another step**, click **Add Another Step**. By default, you can create up to ten steps.
+2. Add a name to your step, for example: `Get a product`.
+3. Specify the HTTP method and the URL you want to query. Here, you can add: `GET` and `https://api.shopist.io/products.json`. 
+4. Click **Test URL**. This retrieves a list of products available in the Shopist application.
+5. Leave the default assertions or modify them.
+6. Optionally, define execution parameters. In this example, no specific execution parameter is needed.
+7. To create a variable out of the product ID located in the response body:
+    - Click **Extract a variable from response content**
+    - Name your variable as `PRODUCT_ID`.
+    - Click the **Response Body** tab.
+    - Click on the `$oid` key of any product to generate a JSON Path such as `$[0].id['$oid']`.
+8. Click **Save Variable**.
+9. When you're done creating this test step, click **Save Step**.
 
-### カートに商品を追加する
+### Add product to cart
 
-1. **Add Another Step** をクリックして、商品のカートへの追加という最後のステップを追加します。
-2. ステップに名前を追加します。例: `カートに商品を追加する`
-3. クエリする HTTP メソッドと URL を指定します。 ここでは、`POST` と `https://api.shopist.io/add_item.json` を追加できます。
-4. **Request Body** タブで、`application/json` 本文タイプを選択し、以下を挿入します。
+1. Click **Add Another Step** to add the final step, the addition of a product into your cart.
+2. Add a name to your step, for example: `Add product to cart`.
+3. Specify the HTTP method and the URL you want to query. Here, you can add: `POST` and  `https://api.shopist.io/add_item.json`. 
+4. In the **Request Body** tab, choose the `application/json` body type and insert the following:
 
     {{< code-block lang="java" disable_copy="true" collapsible="true" >}}
     {
@@ -180,43 +182,43 @@ An alert is triggered if your test fails for 3 minutes from any 2 of 13 location
     } 
     {{< /code-block >}}
 
-5. **Test URL** をクリックします。これにより、ステップ 2 で抽出した商品が、ステップ 1 で作成したカートに追加され、チェックアウト URL が返されます。
-6. **Add assertions (optional)** で、**Response Body** をクリックし、`url` キーをクリックして、チェックアウト URL を含む応答でジャーニーが終了したことをテストにアサートさせます。
-7. この最後のステップでは、実行パラメーターや変数の抽出は必要ありません。
-10. このテストステップの作成が完了したら、**Save Step** をクリックします。
+5. Click **Test URL**. This adds the product you extracted in Step 2 to the cart you created in Step 1 and returns a checkout URL.
+6. In **Add assertions (optional)**, click **Response Body** and click the `url` key to have your test assert that the journey finished with a response containing the checkout URL.
+7. No execution parameters and variable extractions are needed in this last step.
+10. When you're done creating this test step, click **Save Step**.
 
-{{< img src="getting_started/synthetics/defined-steps.png" alt="作成されたテストステップ" style="width:100%;" >}}
+{{< img src="getting_started/synthetics/defined-steps.png" alt="Created test steps" style="width:100%;" >}}
 
-その後、テスト頻度やアラート条件など、残りのテスト条件やテストモニターを構成します。テストの構成とモニターを保存する準備ができたら、**Create** をクリックします。
+You can then configure the rest of your test conditions such as test frequency and alerting conditions, and the test monitor. When you're ready to save your test configuration and monitor, click **Create**. 
 
-詳しくは、[Synthetic テストモニターの使用][13]をご覧ください。
+For more information, see [Using Synthetic Test Monitors][13].
 
-## テスト結果を確認する
+## Look at test results
 
-**API test** と **Multistep API test detail** ページには、テストコンフィギュレーションの概要、ロケーションごとにテストされたエンドポイントに関連付けられたグローバル稼働時間、応答時間とネットワークタイミングに関するグラフ、およびテスト結果とイベントのリストが表示されます。
+The **API test** and **Multistep API test detail** pages display an overview of the test configuration, the global uptime associated with the tested endpoints by location, graphs about response time and network timings, and a list of test results and events.
 
-失敗したテストのトラブルシューティングを行うには、**Test Results** まで下にスクロールして、失敗したテスト結果をクリックします。失敗したアサーションと、ステータスコード、応答時間、関連するヘッダーと本文などの応答の詳細を確認して、問題を診断します。
+To troubleshoot a failed test, scroll down to **Test Results** and click on a failing test result. Review failed assertions and response details such as status code, response time, and associated headers and body to diagnose the issue.
 
-{{< img src="getting_started/synthetics/api-test-failure-5.png" alt="API テストの失敗" style="width:100%;">}}
+{{< img src="getting_started/synthetics/api-test-failure-5.png" alt="API test failure" style="width:100%;">}}
 
-Datadog の [APM と Synthetic モニタリングのインテグレーション][14]を使用して、**Traces** タブでテスト実行から生成されたトレースを確認して、失敗したテスト実行の根本原因にアクセスします。
+With Datadog's [APM integration with Synthetic Monitoring][14], access the root cause of a failed test run by looking at the trace generated from the test run in the **Traces** tab.
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/synthetics/api_tests/
-[2]: /ja/synthetics/multistep
-[3]: /ja/synthetics/api_tests/http_tests
+[1]: /synthetics/api_tests/
+[2]: /synthetics/multistep
+[3]: /synthetics/api_tests/http_tests
 [4]: https://app.datadoghq.com/synthetics/tests
 [5]: https://app.datadoghq.com/synthetics/create
-[6]: /ja/synthetics/settings/#global-variables
-[7]: /ja/synthetics/api_tests/http_tests#variables
-[8]: /ja/getting_started/synthetics/private_location
-[9]: /ja/synthetics/ci
-[10]: /ja/integrations/#cat-notification
+[6]: /synthetics/settings/#global-variables
+[7]: /synthetics/api_tests/http_tests#variables
+[8]: /getting_started/synthetics/private_location
+[9]: /synthetics/ci
+[10]: /integrations/#cat-notification
 [11]: https://app.datadoghq.com/account/settings
 [12]: https://app.datadoghq.com/synthetics/multi-step/create
-[13]: /ja/synthetics/guide/synthetic-test-monitors
-[14]: /ja/synthetics/apm/
-[15]: /ja/synthetics/api_tests/grpc_tests
+[13]: /synthetics/guide/synthetic-test-monitors
+[14]: /synthetics/apm/
+[15]: /synthetics/api_tests/grpc_tests

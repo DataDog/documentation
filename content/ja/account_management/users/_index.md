@@ -1,74 +1,90 @@
 ---
-title: ユーザー管理
-description: オーガニゼーションのユーザーを追加または削除します。ユーザーのロールを変更します。
+title: User Management
+description: "Add or remove users in your organization. Modify user roles."
 aliases:
-  - /ja/account_management/team/
+ - /account_management/team/
 further_reading:
-  - link: /account_management/saml/
-    tag: ドキュメント
-    text: Datadog アカウントのための SAML の構成
-  - link: /account_management/rbac/
-    tag: ドキュメント
-    text: ロールの作成、更新、削除
-  - link: /account_management/rbac/permissions/
-    tag: ドキュメント
-    text: 利用可能なアクセス許可の一覧
-  - link: /api/v1/users/
-    tag: ドキュメント
-    text: USER API を使用してユーザーを管理する
+- link: /account_management/saml/
+  tag: Documentation
+  text: Configure SAML for your Datadog account
+- link: /account_management/rbac/
+  tag: Documentation
+  text: Learn how to create, update and delete a Role
+- link: /account_management/rbac/permissions/
+  tag: Documentation
+  text: Discover the list of permissions available
+- link: /api/v1/users/
+  tag: Documentation
+  text: Manage your users with the USER API
 ---
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Datadog for Government site では、SAML ログインのみをサポートします。</div>
+<div class="alert alert-warning">The Datadog for Government site only supports SAML login.</div>
 {{< /site-region >}}
 
-Datadog の **Organization Settings** の **User** タブでは、ユーザーとそのユーザーに関連付けられたロールを管理できます。リストビューとグリッドビューを切り替えるには、右側の **List View** または **Grid View** をクリックします。
+Datadog's **User** tab in **Organization Settings** allows you to manage your users and their associated roles. Switch between list and grid views by clicking **List View** or **Grid View** on the right.
 
-## 新しいメンバーの追加と招待の管理
+## Add new members and manage invites
 
-オーガニゼーションにメンバーを追加するには
+To add members to your organization:
 
-1. Organization Settings ページに移動し、**Users** タブをクリックします。
-2. ページ右上隅 **Invite Users** をクリックします。
-3. Datadog アカウントに招待するユーザーのメールアドレスを入力します。
-4. ユーザーに 1 つ以上の[ユーザーロール][1]を割り当てます。
-**注**: Invite User アクセス許可を持つユーザーは、自分が持っているロールにユーザーを招待できます。Invite User と Access Management の両方のアクセス許可を持つユーザーは、ユーザーをあらゆるロールに招待できます。
-5. **Send Invites** をクリックします。
+1. Go to the Organization Settings page, then click the **Users** tab.
+2. Click **Invite Users** in the upper right corner of the page.
+3. Enter the email address of the user you wish to invite to your Datadog account.
+4. Assign one or more [user roles][1] to the users.
+**Note**: Users with the Invite User permission can invite a user to any role they have themselves. Users with both the Invite User and Access Management permissions can invite a user to any role.
+5. Click **Send Invites**.
 
-新規ユーザーにログイン用のリンクが記載されたメールが送信されます。新規ユーザーがログインするまで、ステータスは `Invite Pending` と表示されます。ログインする前に招待をキャンセルするには、リストビューの場合ユーザーの行の右にある、グリッドビューの場合ユーザーボックスにある、**Delete Invite** ボタンを選択します。
+The new user receives an email with a link to log in. The user is marked with the status `Invite Pending` until they log in. To cancel their invite before they log in, click the **Delete Invite** button on the right of the user line in list view, or on the user box in grid view. 
 
-リストビューで招待を再送信するには、ユーザーをクリックしてユーザーサイドパネルを開き、**Resend Invite** をクリックします。または、グリッドビューで、ユーザーボックスにカーソルを合わせ、**Resend Invite** をクリックします。
+To resend an invite in list view, click the user to open the user side panel and click **Resend Invite**. Or in grid view, hover over the user box and click **Resend Invite**.
+
+## Edit a user's roles
+
+Only users with the User Access Management permission, such as users with the Datadog Admin Role, can change another user's role.
+
+To edit a user's roles:
+
+1. Go to the **Users** tab of **Organization Settings**.
+2. Select the **Edit** button on the right of the user line.
+3. Select the new [user roles][2] for this user, or click the 'X' next to an existing role to remove it.
+4. **Save** the new settings.
+
+{{< img src="account_management/users/user_role_update.png" alt="User role update" style="width:80%;">}}
+
+To discover all of the roles available and how to create custom ones, see the [Role Based Access Control documentation][2].
+
+## Edit a user's login methods
+
+Only users with the User Access Management permission, such as users with the Datadog Admin Role, can change another user's login methods.
+
+Default login methods for an organization can be set through the Login Methods page. There you can allow or disallow all users in your organization to use a Datadog username and password, to sign in with Google, or to sign in with SAML. In User Management you can override on a per-user basis to allow a specific user to use one method or multiple methods. This is helpful in circumstances where you want all users to use SAML but need to enable a set of users to log in with username and password in an emergency.
+
+To edit a user's login methods:
+
+1. Go to the **Users** tab of **Organization Settings**.
+2. Click **Edit** on the right of the user line.
+3. Switch the toggle beside **Override Default Login Methods** to enable or disable overrides for the user.
+4. If enabling overrides, choose a set of login methods that the user can use to access Datadog. This can be a single option or all options that are configured for your organization.
+5. Click **Save**.
 
 
-## ユーザーのロールを編集する
+**Note**: Overrides can be set only to valid login methods. If you have not configured SAML, you cannot choose that login method as an override for a user.
 
-Datadog Admin Role などの Access Management アクセス許可を持つユーザーのみが他のユーザーのロールを変更できます。
+## Disable existing members
 
-ユーザーのロールを編集するには
+Only users with the Access Management permission, such as users with the Datadog Admin Role, can disable members. You cannot permanently remove users, as they might have authored dashboards or monitors, and their user ID is used to keep a record of their actions. When a user is disabled, any application keys they had generated are automatically revoked.
 
-1. **Organization Settings** の **Users** タブに移動します。
-2. ユーザーの行の右にある **Edit** ボタンを選択します。
-3. このユーザーの新しい[ユーザーロール][2]を選択するか、既存のロールの横にある 'X' をクリックして削除します。
-4. **Save** をクリックして新しい設定を保存します。
+1. Go to the **Users** tab of **Organization Settings**.
+2. Select the **Edit** button on the right of the user line.
+3. Click on the **Disable** toggle.
+4. **Save** the changes.
+5. Confirm the action.
 
-{{< img src="account_management/users/user_role_update.png" alt="ユーザーロールの更新" style="width:80%;">}}
+**Note**: By default, disabled users are filtered out from the list of users in the User Management Page. If you have the correct permissions, you can filter by users with the status `Disabled` and re-enable them.
 
-使用可能なすべてのロールとカスタムロールの作成方法については、[ロールベースのアクセス制御のドキュメント][2]を参照してください。
-
-## 既存のメンバーを無効にする
-
-メンバーを無効にできるのは、Datadog Admin Role を持つユーザーなど、Access Management アクセス許可を持つユーザーのみです。ユーザーがダッシュボードまたはモニターを作成した可能性があるため、ユーザーを完全に削除することはできません。ユーザー ID は、ユーザーのアクションの記録を保持するために使用されます。ユーザーが無効になると、ユーザーが生成したアプリケーションキーは自動的に取り消されます。
-
-1. **Organization Settings** の **Users** タブに移動します。
-2. ユーザーの行の右にある **Edit** ボタンを選択します。
-3. **Disable** トグルをクリックします。
-4. **Save** をクリックして変更内容を保存します。
-5. アクションを確認します。
-
-**注**: デフォルトでは、無効になっているユーザーは、User Management ページのユーザーのリストから除外されます。正しいアクセス許可がある場合は、ステータスが `Disabled` のユーザーでフィルタリングして、再度有効にすることができます。
-
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/account_management/users/default_roles/
-[2]: /ja/account_management/rbac/
+[1]: /account_management/users/default_roles/
+[2]: /account_management/rbac/

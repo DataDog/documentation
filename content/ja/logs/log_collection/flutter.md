@@ -1,26 +1,28 @@
 ---
-description: Flutter プロジェクトからログデータを収集します。
+title: Flutter Log Collection
+kind: documentation
+description: Collect Logs data from your Flutter projects.
 further_reading:
-- link: https://github.com/DataDog/dd-sdk-flutter
-  tag: GitHub
-  text: dd-sdk-flutter ソースコード
+- link: "https://github.com/DataDog/dd-sdk-flutter"
+  tag: Source Code
+  text: dd-sdk-flutter Source code
 - link: logs/explorer/
-  tag: ドキュメント
-  text: ログの調査方法
-title: Flutter ログ収集
+  tag: Documentation
+  text: Learn how to explore your logs
+
 ---
-[Datadog の flutter プラグイン][1]を使用すると、Flutter アプリケーションから Datadog へログを送信すると共に、次の機能を利用できます。
+Send logs to Datadog from your Flutter applications with [Datadog's flutter plugin][1] and leverage the following features:
 
-* Datadog に JSON 形式でネイティブに記録する。
-* デフォルトを使用し、送信される各ログにカスタム属性を追加する。
-* 実際のクライアント IP アドレスとユーザーエージェントを記録する。
-* 自動一括ポストによって最適化されたネットワークの利用を活用します。
+* Log to Datadog in JSON format natively.
+* Use default and add custom attributes to each log sent.
+* Record real client IP addresses and User-Agents.
+* Leverage optimized network usage with automatic bulk posts.
 
-## セットアップ
+## Setup
 
-Datadog Flutter SDK for Logs を初期化するには、[セットアップ][2]を参照してください。
+To initialize the Datadog Flutter SDK for Logs, see [Setup][2].
 
-Datadog Flutter SDK を `LoggingConfiguration` パラメーターで初期化したら、`DatadogLogger` を作成して、Datadog にログを送信できます。
+Once you have initialized the Datadog Flutter SDK with a `LoggingConfiguration` parameter, you can create a `DatadogLogger` and send logs to Datadog.
 
 ```dart
 final logConfiguration = DatadogLoggerConfiguration(
@@ -35,7 +37,7 @@ logger?.warn("An important warning...");
 logger?.error("An error was met!");
 ```
 
-`createLogger` メソッドを使用して、異なるサービスや名前を持つ追加のロガーを作成することも可能です。
+You can create additional loggers with different services and names using the `createLogger` method as well:
 
 ```dart
 final myLogger = DatadogSdk.instance.logs?.createLogger(
@@ -48,83 +50,83 @@ final myLogger = DatadogSdk.instance.logs?.createLogger(
 myLogger?.info('Info from my additional logger.');
 ```
 
-利用可能なロギングオプションの詳細については、[DatadogLoggerConfiguration クラスのドキュメント][3]を参照してください。
+For more information about available logging options, see the [DatadogLoggerConfiguration class documentation][3].
 
-## タグの管理
+## Manage tags
 
-ロガーに設定されたタグは、各ロガーにローカルです。
+Tags set on loggers are local to each logger.
 
-### タグを追加
+### Add tags
 
-`DatadogLogger.addTag` メソッドを使い、指定されたロガーから送信されるすべてのログにタグを追加します。
+Use the `DatadogLogger.addTag` method to add tags to all logs sent by a specific logger:
 
 ```dart
-// これにより、"build_configuration:debug" タグが追加されます
+// This adds a "build_configuration:debug" tag
 logger.addTag("build_configuration", "debug")
 ```
 
-### タグを削除
+### Remove tags
 
-`DatadogLogger.removeTag` メソッドを使い、指定されたロガーから送信されるすべてのログからタグを削除します。
+Use the `DatadogLogger.removeTag` method to remove tags from all logs sent by a specific logger:
 
 ```dart
-// これにより "build_configuration" で始まるすべてのタグが削除されます
+// This removes any tag that starts with "build_configuration"
 logger.removeTag("build_configuration")
 ```
 
-詳しくは、[タグ入門][4]をご覧ください。
+For more information, see [Getting Started with Tags][4].
 
-## 属性の管理
+## Manage attributes
 
-ロガーに設定された属性は、各ロガーにローカルです。
+Attributes set on loggers are local to each logger.
 
-### デフォルト属性
+### Default attributes
 
-デフォルトで、ロガーにより送信されるすべてのログに次の属性が追加されます。
+By default, the following attributes are added to all logs sent by a logger:
 
-* `http.useragent` と抽出された `device` と `OS` プロパティ
-* `network.client.ip` と抽出された地理的プロパティ (`country`, `city`)
-* `logger.version`、Datadog SDK バージョン
+* `http.useragent` and its extracted `device` and `OS` properties
+* `network.client.ip` and its extracted geographical properties (`country`, `city`)
+* `logger.version`, Datadog SDK version
 * `logger.thread_name`, (`main`, `background`)
-* `version`、`Info.plist` または `application.manifest` のいずれかから抽出されたクライアントのアプリバージョン
-* `environment`、SDK の初期化に使われる環境名
+* `version`, client's app version extracted from either the `Info.plist` or `application.manifest`
+* `environment`, the environment name used to initialize the SDK
 
-### 属性を追加
+### Add attributes
 
-`DatadogLogger.addAttribute` メソッドを使い、指定されたロガーから送信されるすべてのログにカスタム属性を追加します。
+Use the `DatadogLogger.addAttribute` method to add a custom attribute to all logs sent by a specific logger:
 
 ```dart
 logger.addAttribute("user-status", "unregistered")
 ```
 
-`value` には [`StandardMessageCodec` クラス][5]でサポートされているほとんどのタイプを指定することができます。
+The `value` can be most types supported by the [`StandardMessageCodec` class][5].
 
-### 属性を削除
+### Remove attributes
 
-`DatadogLogger.removeAttribute` メソッドを使い、指定されたロガーから送信されるすべてのログからカスタム属性を削除します。
+Use the `DatadogLogger.removeAttribute` method to remove a custom attribute from all logs sent by a specific logger:
 
 ```dart
-// これにより、"user-status" 属性は今後送信されるすべてのログから削除されます。
+// This removes the attribute "user-status" from all logs sent moving forward.
 logger.removeAttribute("user-status")
 ```
 
-## ログ出力のカスタマイズ
+## Customizing log output
 
-デフォルトでは、デバッグ用ビルドの場合、`DatadogLogger` はすべてのログを以下の形式で Flutter コンソールに出力します。
+By default, for debug builds, `DatadogLogger`s print all logs to the Flutter console in the format:
 ```
 [{level}] message
 ```
 
-これは、 `DatadogLoggerConfiguration.customConsoleLogFunction` を設定することでカスタマイズ可能です。一定のレベル以下のログをフィルタリングするには、これを `simpleConsolePrintForLevel` に設定します。
+This can be customized by setting a `DatadogLoggerConfiguration.customConsoleLogFunction`. To filter logs below a certain level, set this to `simpleConsolePrintForLevel`:
 
 ```dart
 final config = DatadogLoggerConfiguration(
-  // その他の構成オプション...
+  // Other configuration options...
   customConsoleLogFunction: simpleConsolePrintForLevel(LogLevel.warn),
 );
 ```
 
-また、カスタム関数を提供することで、Datadog ログを [logger][6] などの他のログパッケージに転送することもできます。
+You can also forward Datadog logs to other log packages, such as [logger][6], by supplying a custom function:
 
 ```dart
 var Logger logger;
@@ -134,26 +136,26 @@ void customDatadogLog(LogLevel level,
   String? errorKind,
   StackTrace? stackTrace,
   Map<String, Object?> attributes,) {
-    // Logger とレベルマッピング用のカスタム関数があると仮定:
+    // Assuming you have a Logger and custom level mapping function:
     logger.log(mapLogLevels(level), message, error: errorKind, stackTrace: stackTrace);
 }
 
 final datadogLogger = DatadogSdk.instance.logs?.createLogger(
   DatadogLoggerConfiguration(
-    // その他の構成オプション...
+    // Other configuration options...
     customConsoleLogFunction: simpleConsolePrintForLevel(LogLevel.warn),
   );
 );
 ```
 
-## その他の参考資料
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 
 [1]: https://pub.dev/packages/datadog_flutter_plugin
-[2]: /ja/real_user_monitoring/flutter/setup
+[2]: /real_user_monitoring/mobile_and_tv_monitoring/setup/flutter
 [3]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/DatadogLoggerConfiguration-class.html
-[4]: /ja/getting_started/tagging/
+[4]: /getting_started/tagging/
 [5]: https://api.flutter.dev/flutter/services/StandardMessageCodec-class.html
 [6]: https://pub.dev/packages/logger

@@ -1,99 +1,100 @@
 ---
-categories:
-- azure
-- cloud
-- configuration & deployment
-- os & system
-dependencies: []
-description: Azure VM のリソース使用状況、ネットワーク統計などを追跡。
-doc_link: https://docs.datadoghq.com/integrations/azure_vm/
-draft: false
-further_reading:
-- link: https://www.datadoghq.com/blog/video-streaming-performance-monitoring-conviva/
-  tag: ブログ
-  text: Datadog で Conviva を監視する
-git_integration_title: azure_vm
-has_logo: true
-integration_id: azure-vm
-integration_title: Microsoft Azure VM
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: '1.0'
-name: azure_vm
-public_title: Datadog-Microsoft Azure VM インテグレーション
-short_description: Azure VM のリソース使用状況、ネットワーク統計などを追跡。
-version: '1.0'
+"categories":
+- "azure"
+- "cloud"
+- "configuration & deployment"
+- "os & system"
+"custom_kind": "integration"
+"dependencies": []
+"description": "Track Azure VM resource usage, network statistics, and more."
+"doc_link": "https://docs.datadoghq.com/integrations/azure_vm/"
+"draft": false
+"further_reading":
+- "link": "https://www.datadoghq.com/blog/video-streaming-performance-monitoring-conviva/"
+  "tag": "Blog"
+  "text": "Monitor Conviva with Datadog"
+"git_integration_title": "azure_vm"
+"has_logo": true
+"integration_id": "azure-vm"
+"integration_title": "Microsoft Azure VM"
+"integration_version": ""
+"is_public": true
+"manifest_version": "1.0"
+"name": "azure_vm"
+"public_title": "Datadog-Microsoft Azure VM Integration"
+"short_description": "Track Azure VM resource usage, network statistics, and more."
+"version": "1.0"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-## 概要
+## Overview
 
-Azure 仮想マシンでは、オンデマンドでスケーリングできる仮想化環境を柔軟に実行できます。
+Azure Virtual Machine allows you to flexibly run virtualized environments with the ability to scale on-demand.
 
-Azure VM からメトリクスを取得すると、以下のことができます。
+Get metrics from Azure VM to:
 
-- VM のパフォーマンスを視覚化。
-- VM のパフォーマンスをアプリケーションと関連付け。
+- Visualize the performance of your VMs.
+- Correlate the performance of your VMs with your applications.
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-[Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
+If you haven't already, set up the [Microsoft Azure integration][1] first.
 
-**ARM** でデプロイされた仮想マシンの場合は、診断をオンにし、収集する仮想マシンのメトリクスを選択する必要があります。手順については、[診断の有効化][2] を参照してください。
+For **ARM** deployed virtual machines, you must turn on Diagnostics and select the VM metrics to collect. See [Enable Diagnostics][2] for instructions.
 
-### モニターの自動ミュート
+### Automuting monitors
 
-Datadog は、[Azure Resource Health API][3] を通じて利用可能な健全性ステータスに基づき、Azure VM のシャットダウンまたは停止に関連するモニターを（シャットダウンが手動でトリガーされたものでも Azure 自動スケーリングによるものでも）事前にミュートすることができます。予期される Azure VM のシャットダウンに対してモニターをミュートにすることで、不必要なアラートによるノイズを軽減できます。
+Datadog can proactively mute monitors related to the shutdown or termination of Azure VMs, whether the shutdown was triggered manually or by Azure autoscaling, based on health statuses available through the [Azure Resource Health API][3]. By silencing monitors for expected Azure VM shutdowns, you can reduce noise from unnecessary alerts. 
 
-**Show automatically muted hosts** を有効にして、[Manage Downtime][4] ページのリストに記載されている仮想マシンを自動ミュートします。自動ミュートが機能するためには、Azure インテグレーションがインストールされている必要があります。
+Automatically muted virtual machines are listed on the [Manage Downtime][4] page by enabling **Show automatically muted hosts**. The Azure integration must be installed for automuting to take effect. 
 
-Azure VM がシャットダウンまたは停止したモニターをミュートにするには、Azure インテグレーションタイルで **Azure automuting** チェックボックスをオンにします。
+To silence monitors for shutdown or terminated Azure VMs, check the **Azure automuting** box in the Azure integration tile.
 
-自動ミュートされるメトリクスモニターを作成するには、必ず `host` タグに基づいてトリガーします。モニターグループで `host` タグを含まないメトリクスモニターは、自動ミュートされません。
+To create metric monitors that can be automatically muted, ensure that you trigger based on the `host` tag. Metric monitors that do not include the `host` tag in the monitored group are not automatically muted.
 
-{{< img src="integrations/azure_vm/azure_vm_automute2.png" alt="host タグを含むクエリにアラートを発生するモニター" >}}
+{{< img src="integrations/azure_vm/azure_vm_automute2.png" alt="A Monitor alerting on a query that includes host tag" >}}
 
-**注:** Datadog Agent を実行している場合、Azure VM の `host` タグは GUID です。目で見てわかりやすい名前も含めるには、通知の返信にメッセージのテンプレート変数 `{{host.name_tag}}` を使用します。
+**Note:** If you are not running the Datadog Agent, the `host` tag on your Azure VM is a GUID. Use the message template variable `{{host.name_tag}}` in the notification response to include the human readable name as well. 
 
-## リアルユーザーモニタリング
+## Data Collected
 
-<div class="alert alert-warning"><code>azure.vm.status</code> メトリクスは非推奨となり、新しく作成された Datadog 組織には入力されなくなりました。既存のユーザーについては、このメトリクスは 2023 年 6 月 1 日に無効化されました。
+<div class="alert alert-warning">The <code>azure.vm.status</code> metric is deprecated and is no longer populated for newly created Datadog organizations. For existing users, this metric was disabled on June 1, 2023.
 
-ご不明な点は、<a href="https://docs.datadoghq.com/help/" target="_blank">Datadog サポート</a>までお問い合わせください。</div>
+For any questions, contact <a href="https://docs.datadoghq.com/help/" target="_blank">Datadog Support</a>.</div>
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "azure_vm" >}}
 
 
-### ヘルプ
+### Events
 
-Azure Virtual Machine インテグレーションには、イベントは含まれません。
+The Azure Virtual Machine integration does not include any events.
 
-### ヘルプ
+### Service Checks
 
-Azure Virtual Machine インテグレーションには、サービスのチェック機能は含まれません。
+The Azure Virtual Machine integration does not include any service checks.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
+Need help? Contact [Datadog support][6].
 
-## その他の参考資料
+## Further Reading
 
-- [Microsoft Azure VM の監視方法][7]
-- [Azure メトリクスの収集方法][8]
-- [Datadog を使用した Azure VM の監視][9]
-- [Datadog で SQL ワークロードの Azure 移行を戦略化する][10]
+- [How to monitor Microsoft Azure VMs][7]
+- [How to collect Azure metrics][8]
+- [Monitor Azure VMs using Datadog][9]
+- [Strategize your Azure migration for SQL workloads with Datadog][10]
 
-[1]: https://docs.datadoghq.com/ja/integrations/azure/
-[2]: https://docs.datadoghq.com/ja/integrations/guide/azure-troubleshooting/#enable-diagnostics
+[1]: https://docs.datadoghq.com/integrations/azure/
+[2]: https://docs.datadoghq.com/integrations/guide/azure-troubleshooting/#enable-diagnostics
 [3]: https://docs.microsoft.com/en-us/rest/api/resourcehealth/
 [4]: https://app.datadoghq.com/monitors/downtimes
 [5]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_vm/azure_vm_metadata.csv
-[6]: https://docs.datadoghq.com/ja/help/
+[6]: https://docs.datadoghq.com/help/
 [7]: https://www.datadoghq.com/blog/how-to-monitor-microsoft-azure-vms
 [8]: https://www.datadoghq.com/blog/how-to-collect-azure-metrics
 [9]: https://www.datadoghq.com/blog/monitor-azure-vms-using-datadog
 [10]: https://www.datadoghq.com/blog/migrate-sql-workloads-to-azure-with-datadog/
+

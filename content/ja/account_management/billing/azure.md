@@ -1,42 +1,42 @@
 ---
-title: Azure インテグレーションの請求
+title: Azure Integration Billing
 ---
 
-## 概要
+## Overview
 
-[Datadog で監視されているすべての Azure 仮想マシン][1]に対して課金が発生します。これらのマシンは、Datadog Agent がインストールされているかどうかにかかわらず、課金対象になります。Azure インテグレーションによって使用される Azure VM で Agent を実行している場合、二重に課金されることはありません。さらに、Datadog は、Azure App Service Plans 内のノードを請求対象のホストとしてカウントします。
+Datadog bills for all [Azure Virtual Machines being monitored in Datadog][1]. These machines are billable regardless of whether the Datadog Agent is installed. You are not billed twice if you are running the Agent on an Azure VM picked up by the Azure integration. Additionally, Datadog counts the nodes inside of Azure App Service Plans as billable hosts.
 
-**注**: Shared、Dynamic、Free ティアの App Service Plans には、関連するノードカウントはなく、Datadog の請求には影響しません。
+**Note**: Shared, Dynamic, and Free tier App Service Plans do not have any associated node counts and do not impact your Datadog bill.
 
-Azure インテグレーションは、その他のすべての Azure リソース (Azure SQL DB、Azure Redis Cache、Azure Load Balancer など) のメトリクスを、毎月の請求に影響を与えることなく収集します。収集されるメトリクスの包括的なリストについては、[Azure Monitor でサポートされるメトリクス][6]を参照してください。
+The Azure integration collects metrics for all other Azure resources (such as Azure SQL DB, Azure Redis Cache, Azure Load Balancer, and others) without any impact on monthly billing. For a comprehensive list of metrics collected, see [Supported metrics with Azure Monitor][6].
 
-## Azure VM の除外
+## Azure VM exclusion
 
-Datadog-Azure インテグレーションタイルを使用して、Datadog によって監視される VM をフィルタリングします。Configuration タブに移動して、既存の App Registration を編集するか、新規追加します。各フィルターは、"Optionally limit metrics collection to hosts with tag:" の設定に基づいて制御されます。
+Use the Datadog-Azure integration tile to filter your VMs monitored by Datadog. Go to the Configuration tab and edit an existing App Registration or add a new one. Each filter is controlled under "Optionally limit metrics collection to hosts with tag:"
 
-インテグレーションタイルで既存の Azure テナントに制限を追加した場合は、それまでに検出された VM がインフラストラクチャーリストに最長 2 時間残る可能性があります。移行時間中、VM のステータスは `???` と表示されます。これは、課金対象に含まれません。
+When adding limits to existing Azure tenants within the integration tile, the previously discovered VMs could stay in the Infrastructure List up to two hours. During the transition period, VMs display a status of `???`. This does not count towards your billing.
 
-Agent が実行されている VM は引き続き表示され、課金対象に含まれます。制限オプションの使用は、Agent が実行されていない VM にのみ適用されます。
+VMs with a running Agent still display and are included in billing. Using the limit option is only applicable to VMs without a running Agent.
 
-## Azure App Service Plan の除外
+## Azure App Service Plan exclusion
 
-Datadog-Azure インテグレーションタイルを使用して、Datadog によって監視される Azure App Service Plan をフィルタリングします。Configuration タブに移動して、既存の App Registration を編集するか、新規追加します。フィルターは、"Optionally limit metrics collection to App Service Plans with tag:" の設定に基づいて制御されます。
+Use the Datadog-Azure integration tile to filter your Azure App Service Plans monitored by Datadog. Go to the Configuration tab and edit an existing App Registration or add a new one. The filter is controlled under "Optionally limit metrics collection to App Service Plans with tag:"
 
-**注**: これは、App Service Plan で実行されているすべてのアプリまたは関数のメトリクスをフィルターします。
+**Note**: This filters the metrics for all Apps or Functions running on the App Service Plan(s).
 
-## App Insights カスタムメトリクス
+## App Insights custom metrics
 
-[カスタムメトリクスの収集を有効にする][5]場合、Datadog は、インテグレーション範囲内の Azure App Insights インスタンスに書き込まれたすべてのカスタムメトリクスを収集します。これらのメトリクスは、Datadog ではカスタムメトリクスとみなされ、コストに影響を与える可能性があります。[カスタムメトリクス請求ガイド][4]を参照してください。
+If you [enable the collecton of custom metrics][5], Datadog collects all custom metrics written to any Azure App Insights instances with the scope of the integration. These metrics are considered custom metrics in Datadog and may impact your costs. See the [custom metrics billing guide][4].
 
-## トラブルシューティング
+## Troubleshooting
 
-技術的な質問については、[Datadog のサポートチーム][2]にお問い合わせください。
+For technical questions, contact [Datadog support][2].
 
-課金に関するご質問は、[カスタマーサクセス][3]マネージャーにお問い合わせください。
+For billing questions, contact your [Customer Success][3] Manager.
 
 [1]: https://app.datadoghq.com/account/settings#integrations/azure
-[2]: /ja/getting_started/tagging/using_tags/#integrations
-[3]: /ja/infrastructure/
-[4]: /ja/account_management/billing/custom_metrics/?tab=countrate
-[5]: /ja/integrations/azure#configuration
-[6]: https://learn.microsoft.com/en-us/azure/azure-monitor/essentials/metrics-supported
+[2]: /getting_started/tagging/using_tags/#integrations
+[3]: /infrastructure/
+[4]: /account_management/billing/custom_metrics/?tab=countrate
+[5]: /integrations/azure#configuration
+[6]: https://learn.microsoft.com/en-us/azure/azure-monitor/essentials/metrics-supported 

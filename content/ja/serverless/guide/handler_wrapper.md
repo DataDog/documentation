@@ -1,15 +1,16 @@
 ---
-title: Lambda ハンドラーをコードでラップする
+title: Wrap Your Lambda Handler in Code
+kind: documentation
 ---
 
-Python や Node.js の Lambda 関数では、個々の呼び出しをインスツルメントするために、Datadog Lambda ライブラリが Lambda ハンドラー関数にラップする必要があります。これは、関数のハンドラーを Datadog のハンドラー関数、例えば `datadog_lambda.handler.handler` に設定し、環境変数 `DD_LAMBDA_HANDLER` に、Datadog ハンドラーから呼ばれるオリジナルのハンドラー関数を設定すれば実現できます。
+For Python and Node.js Lambda functions, in order to instrument individual invocations, the Datadog Lambda library needs to wrap around your Lambda handler function. This is achieved by setting your function's handler to the Datadog handler function, such as `datadog_lambda.handler.handler`, and setting the environment variable `DD_LAMBDA_HANDLER` with your original handler function to be called by the Datadog handler.
 
-Lambda 関数の構成が Datadog ハンドラーのリダイレクトと互換性がない場合、代わりに関数コードで Datadog ラッパーを適用することができます。
+If your Lambda function configuration is incompatible with the Datadog handler redirection, you can apply the Datadog wrapper in your function code instead.
 
-1. [Python][1] または [Node.js][2] の **Custom** インストール手順に従い、Datadog サーバーレスモニタリングをインストールします。
-2. ハンドラー関数を構成するステップをスキップします。
-3. 環境変数 `DD_LAMBDA_HANDLER` を設定するステップをスキップします。
-4. 関数コードで Datadog ラッパーを適用します。
+1. Follow the **Custom** installation instructions for [Python][1] or [Node.js][2] to install the Datadog serverless monitoring.
+2. Skip the step to configure the handler function.
+3. Skip the step to set the environment variable `DD_LAMBDA_HANDLER`.
+4. Apply the Datadog wrapper in your function code:
     ```python
     # for python
     from datadog_lambda.wrapper import datadog_lambda_wrapper
@@ -34,5 +35,5 @@ Lambda 関数の構成が Datadog ハンドラーのリダイレクトと互換�
     });
     ```
 
-[1]: /ja/serverless/installation/python?tab=custom
-[2]: /ja/serverless/installation/nodejs?tab=custom
+[1]: /serverless/installation/python?tab=custom
+[2]: /serverless/installation/nodejs?tab=custom

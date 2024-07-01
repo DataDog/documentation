@@ -1,137 +1,136 @@
 ---
-app_id: kube-scheduler
-app_uuid: 1cf58691-ac6b-4f1d-b410-0132a4590378
-assets:
-  dashboards:
-    kube_scheduler: assets/dashboards/overview.json
-  integration:
-    auto_install: true
-    configuration:
-      spec: assets/configuration/spec.yaml
-    events:
-      creates_events: false
-    metrics:
-      check: kube_scheduler.threads
-      metadata_path: metadata.csv
-      prefix: kube_scheduler.
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 10056
-    source_type_name: Kube_scheduler
-  logs:
-    source: kube_scheduler
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com (日本語対応)
-  support_email: help@datadoghq.com
-categories:
-- コンテナ
+"app_id": "kube-scheduler"
+"app_uuid": "1cf58691-ac6b-4f1d-b410-0132a4590378"
+"assets":
+  "dashboards":
+    "kube_scheduler": assets/dashboards/overview.json
+  "integration":
+    "auto_install": true
+    "configuration":
+      "spec": assets/configuration/spec.yaml
+    "events":
+      "creates_events": false
+    "metrics":
+      "check": kube_scheduler.threads
+      "metadata_path": metadata.csv
+      "prefix": kube_scheduler.
+    "service_checks":
+      "metadata_path": assets/service_checks.json
+    "source_type_id": !!int "10056"
+    "source_type_name": Kube_scheduler
+"author":
+  "homepage": "https://www.datadoghq.com"
+  "name": Datadog
+  "sales_email": info@datadoghq.com
+  "support_email": help@datadoghq.com
+"categories":
+- containers
 - kubernetes
-- ログの収集
+- log collection
 - orchestration
-dependencies:
-- https://github.com/DataDog/integrations-core/blob/master/kube_scheduler/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: kube_scheduler
-integration_id: kube-scheduler
-integration_title: Kubernetes Scheduler
-integration_version: 4.10.0
-is_public: true
-kind: インテグレーション
-manifest_version: 2.0.0
-name: kube_scheduler
-public_title: Kubernetes Scheduler
-short_description: Kubernetes Scheduler の監視
-supported_os:
+"custom_kind": "integration"
+"dependencies":
+- "https://github.com/DataDog/integrations-core/blob/master/kube_scheduler/README.md"
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "kube_scheduler"
+"integration_id": "kube-scheduler"
+"integration_title": "Kubernetes Scheduler"
+"integration_version": "4.10.1"
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "kube_scheduler"
+"public_title": "Kubernetes Scheduler"
+"short_description": "Monitors the Kubernetes Scheduler"
+"supported_os":
 - linux
 - windows
 - macos
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Containers
-  - Category::Kubernetes
-  - Category::Log Collection
-  - Category::Orchestration
-  - Supported OS::Linux
-  - Supported OS::Windows
-  - Supported OS::macOS
-  configuration: README.md#Setup
-  description: Kubernetes Scheduler の監視
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Kubernetes Scheduler
+"tile":
+  "changelog": CHANGELOG.md
+  "classifier_tags":
+  - "Category::Containers"
+  - "Category::Kubernetes"
+  - "Category::Log Collection"
+  - "Category::Orchestration"
+  - "Supported OS::Linux"
+  - "Supported OS::Windows"
+  - "Supported OS::macOS"
+  "configuration": "README.md#Setup"
+  "description": Monitors the Kubernetes Scheduler
+  "media": []
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": Kubernetes Scheduler
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-![Kube Scheduler ダッシュボード][1]
+![Kube Scheduler dashboard][1]
 
-## 概要
+## Overview
 
-このチェックは、Kubernetes Control Plane の一部である [Kubernetes Scheduler][2] を監視します。
+This check monitors [Kubernetes Scheduler][2], part of the Kubernetes control plane.
 
-**注**: サービスが公開されていないため、このチェックは Amazon EKS クラスターのデータを収集しません。
+**Note**: This check does not collect data for Amazon EKS clusters, as those services are not exposed.
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-Kubernetes Scheduler チェックは [Datadog Agent][3] パッケージに含まれています。
-サーバーに追加でインストールする必要はありません。
+The Kubernetes Scheduler check is included in the [Datadog Agent][3] package.
+No additional installation is needed on your server.
 
-### ブラウザトラブルシューティング
+### Configuration
 
-[オートディスカバリーのインテグレーションテンプレート][4]のガイドを参照して、次のパラメーターを適用してください。
+See the [Autodiscovery Integration Templates][4] for guidance on applying the parameters below.
 
-#### メトリクスの収集
+#### Metric collection
 
-1. kube_scheduler のパフォーマンスデータの収集を開始するには、Agent の構成ディレクトリのルートにある `conf.d/` フォルダーの `kube_scheduler.d/conf.yaml` ファイルを編集します。使用可能なすべての構成オプションの詳細については、[サンプル kube_scheduler.d/conf.yaml][5] を参照してください。
+1. Edit the `kube_scheduler.d/conf.yaml` file, in the `conf.d/` folder at the root of your Agent's configuration directory to start collecting your kube_scheduler performance data. See the [sample kube_scheduler.d/conf.yaml][5] for all available configuration options.
 
-2. [Agent を再起動します][6]。
+2. [Restart the Agent][6].
 
-#### 収集データ
+#### Log collection
 
-Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][7]を参照してください。
+Collecting logs is disabled by default in the Datadog Agent. To enable it, see [Kubernetes Log Collection][7].
 
-| パラメーター      | 値                                     |
+| Parameter      | Value                                     |
 |----------------|-------------------------------------------|
-| `<LOG_CONFIG>` | `{"source": "kube_scheduler", "service": "<サービス名>"}` |
+| `<LOG_CONFIG>` | `{"source": "kube_scheduler", "service": "<SERVICE_NAME>"}` |
 
-### 検証
+### Validation
 
-[Agent の status サブコマンドを実行][8]し、Checks セクションで `kube_scheduler` を探します。
+[Run the Agent's status subcommand][8] and look for `kube_scheduler` under the Checks section.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "kube_scheduler" >}}
 
 
-### ヘルプ
+### Events
 
-Kube Scheduler には、イベントは含まれません。
+Kube Scheduler does not include any events.
 
-### ヘルプ
+### Service Checks
 {{< get-service-checks-from-git "kube_scheduler" >}}
 
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][11]までお問合せください。
+Need help? Contact [Datadog support][11].
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/kube_scheduler/images/kube_scheduler_screenshot.jpeg
 [2]: https://kubernetes.io/docs/reference/command-line-tools-reference/kube-scheduler
 [3]: https://app.datadoghq.com/account/settings/agent/latest
-[4]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
+[4]: https://docs.datadoghq.com/agent/kubernetes/integrations/
 [5]: https://github.com/DataDog/integrations-core/blob/master/kube_scheduler/datadog_checks/kube_scheduler/data/conf.yaml.example
-[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#restart-the-agent
-[7]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
-[8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[6]: https://docs.datadoghq.com/agent/guide/agent-commands/#restart-the-agent
+[7]: https://docs.datadoghq.com/agent/kubernetes/log/
+[8]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
 [9]: https://github.com/DataDog/integrations-core/blob/master/kube_scheduler/metadata.csv
 [10]: https://github.com/DataDog/integrations-core/blob/master/kube_scheduler/assets/service_checks.json
-[11]: https://docs.datadoghq.com/ja/help/
+[11]: https://docs.datadoghq.com/help/
+

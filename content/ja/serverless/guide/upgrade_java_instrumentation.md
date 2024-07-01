@@ -1,27 +1,28 @@
 ---
-title: Java Lambda 関数のインスツルメンテーションのアップグレード
+title: Upgrade Instrumentation for Java Lambda Functions
+kind: documentation
 ---
 
-このドキュメントには、Datadog for Java Lambda のインスツルメンテーションをアップグレードするための手順が記載されています。初めてインスツルメンテーションを設定する場合は、代わりに [Java Lambda のインストール手順][1]に従ってください。
+This document contains instructions for upgrading your Datadog for Java Lambda instrumentation. If you are setting up instrumentation for the first time, follow the [Java Lambda installation instructions][1] instead.
 
-Datadog Lambda レイヤーの `dd-trace-java:5` と `Datadog-Extension:25` は、Java Lambda 関数のインスツルメンテーションを設定するプロセスに以下の変更を導入しています。
+Datadog Lambda layers `dd-trace-java:5` and `Datadog-Extension:25` introduce the following changes to the process of setting up instrumentation on Java Lambda functions:
 
-1. [datadog-lambda-java][2] ライブラリは、非推奨で必要ありません。
-2. カスタムインスツルメンテーションを除いて、コードの変更 (`DDLambda` ラッパーなど) は必要ありません。
-3. Datadog の設定は、[Datadog CI][3] と [Datadog Serverless Plugin][4] で行うことができます。
+1. The [datadog-lambda-java][2] library is deprecated and not required.
+2. No code changes (such as the `DDLambda` wrapper) are required, except for custom instrumentation.
+3. You can set up Datadog using the [Datadog CI][3] and the [Datadog Serverless Plugin][4].
 
-### アップグレード
+### Upgrade
 
-1. `build.gradle` または `pom.xml` から `datadog-lambda-java` が不要になったので削除します。
-2. 関数コードから `DDLambda` と import ステートメントを削除します。
-3. 環境変数 `AWS_LAMBDA_EXEC_WRAPPER` を `/opt/datadog_wrapper` に設定します。
-4. `dd-trace-java` のバージョンを `{{< latest-lambda-layer-version layer="dd-trace-java" >}}` に、`Datadog-Extension` を `{{< latest-lambda-layer-version layer="extension" >}}` に増やします。
-5. `DDLambda.metric()` ヘルパー関数を使ってカスタムメトリクスを送信する場合は、標準の [Java 用 DogStatsD クライアント][5]を使い、[サンプルコード][6]に従ってメトリクスの配布を送信してください。なお、[Lambda ではディストリビューションしか使えない][7]ことに注意してください。
+1. Remove `datadog-lambda-java` from `build.gradle` or `pom.xml`, as it is no longer required.
+2. Remove `DDLambda` and the import statement from your function code.
+3. Set environment variable `AWS_LAMBDA_EXEC_WRAPPER` to `/opt/datadog_wrapper`.
+4. Increment the `dd-trace-java` version to `{{< latest-lambda-layer-version layer="dd-trace-java" >}}` and `Datadog-Extension` to `{{< latest-lambda-layer-version layer="extension" >}}`.
+5. If you are submitting custom metrics using the `DDLambda.metric()` helper function, use the standard [DogStatsD client for Java][5] and follow the [sample code][6] to submit a metric as a distribution. Note that [in Lambda, you can only use distributions][7].
 
-[1]: /ja/serverless/installation/java/
+[1]: /serverless/installation/java/
 [2]: https://github.com/DataDog/datadog-lambda-java
-[3]: /ja/serverless/installation/java/?tab=datadogcli
-[4]: /ja/serverless/installation/java/?tab=serverlessframework
-[5]: /ja/developers/dogstatsd/?tab=hostagent&code-lang=java
-[6]: /ja/serverless/custom_metrics/?code-lang=java#with-the-datadog-lambda-extension
-[7]: /ja/serverless/custom_metrics#understanding-distribution-metrics
+[3]: /serverless/installation/java/?tab=datadogcli
+[4]: /serverless/installation/java/?tab=serverlessframework
+[5]: /developers/dogstatsd/?tab=hostagent&code-lang=java
+[6]: /serverless/custom_metrics/?code-lang=java#with-the-datadog-lambda-extension
+[7]: /serverless/custom_metrics#understanding-distribution-metrics

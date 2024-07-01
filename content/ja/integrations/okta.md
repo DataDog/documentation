@@ -1,74 +1,127 @@
 ---
-categories:
-  - ログの収集
-  - security
-ddtype: crawler
-dependencies: []
-description: Okta セキュリティイベントログを Datadog に統合します。
-doc_link: https://docs.datadoghq.com/integrations/okta/
-draft: false
-git_integration_title: okta
-has_logo: true
-integration_id: okta
-integration_title: Okta
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: '1.0'
-name: okta
-public_title: Datadog-Okta インテグレーション
-short_description: Okta セキュリティイベントログを Datadog に統合します。
-version: '1.0'
+"app_id": "okta"
+"app_uuid": "1bbd0367-66bf-41c9-be58-8f3313afd0e5"
+"assets":
+  "dashboards":
+    "Okta-Overview": assets/dashboards/Okta-Overview_dashboard.json
+  "integration":
+    "auto_install": false
+    "events":
+      "creates_events": false
+    "service_checks":
+      "metadata_path": assets/service_checks.json
+    "source_type_id": !!int "236"
+    "source_type_name": Okta
+"author":
+  "homepage": "https://www.datadoghq.com"
+  "name": Datadog
+  "sales_email": info@datadoghq.com
+  "support_email": help@datadoghq.com
+"categories":
+- log collection
+- security
+"custom_kind": "integration"
+"dependencies": []
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "okta"
+"integration_id": "okta"
+"integration_title": "Okta"
+"integration_version": ""
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "okta"
+"public_title": "Okta"
+"short_description": "Integrate your Okta security event logs into Datadog."
+"supported_os": []
+"tile":
+  "changelog": CHANGELOG.md
+  "classifier_tags":
+  - "Category::Log Collection"
+  - "Category::Security"
+  "configuration": "README.md#Setup"
+  "description": Integrate your Okta security event logs into Datadog.
+  "media": []
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": Okta
 ---
-## 概要
 
-Okta を接続して Okta システムイベントログを Datadog Log Management に統合します。
+<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
+## Overview
 
-これらのログにより、すべてのアプリケーションやユーザーなどからのアクセスおよびライフサイクルイベントの可視性が向上します。Datadog Okta インテグレーションにより、アプリケーションへの脅威の検出、ユーザーアクティビティの追跡、認証と承認の問題のデバッグ、規制遵守の監査証跡の作成が可能になります。
+Connect Okta to integrate your Okta system event logs into Datadog Log Management.
 
-Datadog が追跡できるすべての Okta イベントについては、[Okta のドキュメントを参照してください][1]。
+These logs give you greater visibility into access and lifecycle events from all of your applications, users, and more. The Datadog Okta integration enables you to detect threats to your applications, track user activity, debug authentication and authorization issues, and create an audit trail for regulatory compliance.
 
-## SAML を使用した SSO
+See the [Okta Event Types API][1] for all the Okta events that Datadog can track.
 
-シングルサインオンについては、[Okta を SAML IdP として構成する方法][2]を参照してください。
+## SSO with SAML
 
-## セットアップ
+For single sign-on, see [Configuring Okta as a SAML IdP][2].
 
-### コンフィギュレーション
+## Setup
 
-Datadog Okta インテグレーションを有効にするには
+### Configuration
 
-1. Okta で、_Security_ -> _API_ -> _Tokens_ に移動し、Datadog で使用する新しい API トークンを追加します。
-2. Datadog で、[Okta インテグレーションタイル][3]を開きます。
-3. **Configuration** タブで _Add Account_ をクリックし、次の情報を入力します。
+There are two methods to enable the Datadog Okta integration: through OAuth using credentials from the Datadog app on the Okta Integration Network or through an API key.
 
-    | パラメーター    | 説明                                                                                                     |
-    | ------------ | --------------------------------------------------------------------------------------------------------------- |
-    | Account name | Datadog 内で Okta アカウントを識別するために使用されます。英数字とアンダースコアのみを含めることができます。 |
-    | Domain       | Okta アカウントからログを要求するために使用される一意のアカウントドメイン。有効な URL でなければなりません。                  |
-    | API key      | 上記で作成した Okta アカウントの API トークン。                                                             |
+Both methods require the following fields:
 
-4. _Save_ をクリックします。
+| Parameter            | Description                                                                                                                                                      |
+|----------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Account name         | Identifies your Okta account in Datadog. The account name can only contain alphanumeric characters and underscores.                                              |
+| Domain               | The unique account domain used to request logs from your Okta account. The URL must be valid and start with `https://<your_domain>.okta.com`.                    |
+| Authorization method | Specifies a method to receive authorization from Okta. The two methods are: account API key or credentials from the Datadog app on the Okta Integration Network. |
 
-## 収集データ
 
-### メトリクス
+To enable the integration using OAuth:
 
-Okta インテグレーションには、メトリクスは含まれません。
+1. In Okta, navigate to **Applications** > **API Services Integration** > **Add Integration** > **Datadog**.
+2. Upon installation, you will be provided a set of client ID and client secret credentials. Copy these credentials.
+3. In Datadog, open the [Okta integration tile][3].
+4. Under the **Configure** tab, click **Add Account** and enter the following information:
 
-### イベント
+    | Parameter            | Description                                                                                                                                                      |
+    |----------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+    | Client ID            | The client ID provided by Okta.                                                                                                                                  |
+    | Client Secret        | The client secret provided by Okta.                                                                                                                              |
 
-Okta インテグレーションには、イベントは含まれません。
+5. Click **Save**.
 
-### サービスのチェック
 
-Okta インテグレーションには、サービスのチェック機能は含まれません。
+To enable the integration using an API key:
 
-## トラブルシューティング
+1. In Okta, navigate to **Security** > **API** > **Tokens** and add a new API token.
+2. In Datadog, open the [Okta integration tile][3].
+3. Under the **Configure** tab, click **Add Account** and enter the following information:
 
-ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
+    | Parameter | Description                           |
+    |-----------|---------------------------------------|
+    | API key   | The API token from your Okta account. |
+
+4. Click **Save**.
+
+## Data Collected
+
+### Metrics
+
+The Okta integration does not include any metrics.
+
+### Events
+
+The Okta integration does not include any events.
+
+### Service Checks
+
+The Okta integration does not include any service checks.
+
+## Troubleshooting
+
+Need help? Contact [Datadog support][4].
 
 [1]: https://developer.okta.com/docs/reference/api/event-types/
-[2]: https://docs.datadoghq.com/ja/account_management/saml/okta/
+[2]: https://docs.datadoghq.com/account_management/saml/okta/
 [3]: https://app.datadoghq.com/account/settings#integrations/okta
-[4]: https://docs.datadoghq.com/ja/help/
+[4]: https://docs.datadoghq.com/help/
+

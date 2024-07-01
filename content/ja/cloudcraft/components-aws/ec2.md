@@ -1,30 +1,30 @@
 ---
-title: EC2 コンポーネント
+title: "EC2 Component"
 ---
-## 概要
+## Overview
 
-EC2 コンポーネントを使用して、Amazon Web Services アーキテクチャのエラスティックコンピュートインスタンスを表現します。
+Use the EC2 component to represent elastic compute instances from your Amazon Web Services architecture.
 
-{{< img src="cloudcraft/components-aws/ec2/component-ec2-diagram.png" alt="EC2 AWS コンポーネントを示す、等角投影された Cloudcraft 図のスクリーンショット。" responsive="true" style="width:60%;">}}
+{{< img src="cloudcraft/components-aws/ec2/component-ec2-diagram.png" alt="Screenshot of an isometric Cloudcraft diagram showing the EC2 AWS component." responsive="true" style="width:60%;">}}
 
-## ツールバー
+## Toolbar
 
-ツールバーを使用して、コンポーネントの構成とカスタマイズを行います。以下のオプションがあります。
+Use the toolbar to configure and customize the component. The following options are available:
 
-- **Color**: 定義済みの色を選択するか、コンポーネントとそのアクセントカラーの色の 16 進値を入力します。コンポーネントは、2D ビューと 3D ビューの両方に同じ色を使用することも、それぞれに異なる色を使用することもできます。
-- **Transparency**: EC2 ブロックが塗りつぶしか半透明かを選択します。
-- **Platform**: エラスティックコンピュートインスタンスで使用されるプラットフォームを選択します。ライセンス料のかかるプラットフォームを選択すると、そのコスト見積りが手数料に含まれます。
-- **Instance type**: インスタンスのタイプ。インスタンスのタイプを変更すると、ツールバーに表示されるハードウェアの詳細も変更され、ハイパーバイザーによって使用されるものが反映されます。
-- **Size**: インスタンスのサイズ。インスタンスのタイプと同様、ツールバーに表示されるハードウェアの詳細がサイズを反映して変更されます。
-- **Billing option**: ライセンスで使用される価格モデル。現在サポートされているオプションは、オンデマンド、リザーブドインスタンス、スポットインスタンスです。
+- **Color**: Select a predefined color or enter the hexadecimal value of the color for the component and its accent color. The component can use the same color for both the 2D and 3D view, or different colors for each.
+- **Transparency**: Choose if the EC2 block is solid or semi-transparent.
+- **Platform**: Select the platform used in the elastic compute instance. When choosing a platform with a license fee, the cost estimate is included in the fee.
+- **Instance type**: The type of the instance. Changing the instance type changes the hardware details shown in the toolbar to reflect what is used by the hypervisor.
+- **Size**: The size of the instance. As with instance type, the hardware details shown in the toolbar change to reflect the size.
+- **Billing option**: The pricing model used for the instance. Supported options are On-Demand, Reserved Instance, and Spot Instance at the moment.
 
-## ヘルプ
+## API
 
-[Cloudcraft API][1] を使用して、プログラムでアーキテクチャ図にアクセスし、JSON オブジェクトとしてレンダリングします。
+Use the [Cloudcraft API][1] to programmatically access and render your architecture diagrams as JSON objects.
 
-### スキーマ
+### Schema
 
-以下は、EC2 ブロックの JSON の例です。
+The following is an example JSON of a EC2 block:
 
 ```json
 {
@@ -53,61 +53,61 @@ EC2 コンポーネントを使用して、Amazon Web Services アーキテク�
 }
 ```
 
-- **type: ec2**: コンポーネントのタイプ。
-- **id: 文字列**: `uuid` 形式のコンポーネントの一意な識別子。
-- **region: 文字列**: この EC2 インスタンスがデプロイされる AWS リージョン。`cn-` リージョン以外のすべてのグローバルリージョンがサポートされています。
-- **mapPos: [数値, 数値]**: x 座標と y 座標のペアで表される、ブループリント内のコンポーネントの位置。
-- **transparent: ブール値**: `true` の場合、コンポーネントは 3D ビューで半透明になります。2D ビューでは効果はありません。
-- **platform: 文字列**: インスタンスで使用されるプラットフォーム。詳しくは、[プラットフォームで許容される値](#accepted-values-for-the-platform)を参照してください。
-- **instanceType: 文字列**: インスタンスのタイプ。詳しくは [instanceType で許容される値](#accepted-values-for-instancetype)を参照してください。
-- **instanceSize: 文字列**: インスタンスで使用されるサイズ。詳しくは [instanceSize で許容される値](#accepted-values-for-instancesize)を参照してください。
-- **billingOptions: オブジェクト**: AWS でインスタンスで使用される価格モデル。詳しくは [billingOptions で許容される値](#accepted-values-for-billingoptions) を参照してください。
-- **color: オブジェクト**: コンポーネント本体の塗りつぶし色。
-  - **isometric: 文字列**: 3D ビューでのコンポーネントの塗りつぶし色。16 進数で指定します。
-  - **2d: 文字列**: 2D ビューでのコンポーネントの塗りつぶし色。16 進数で指定します。
-- **accentColor: オブジェクト**: ブロック上にコンポーネントロゴを表示するために使用されるアクセントカラー。
-  - **isometric: 文字列**: 3D ビューでのコンポーネントのアクセントカラー。16 進数で指定します。
-  - **2d: 文字列**: 2D ビューでのコンポーネントのアクセントカラー。16 進数で指定します。
-- **link: uri**: コンポーネントを、`blueprint://ID` フォーマットを使用して別の図にリンクするか、`https://LINK` フォーマットを使用して外部の Web サイトにリンクします。
-- **locked: ブール値**: `true` の場合、アプリケーションを使用してコンポーネントに加えられた変更は、ロックが解除されるまで無効になります。
+- **type: ec2**: The type of component.
+- **id: string**: A unique identifier for the component in the `uuid` format.
+- **region: string**: The AWS region this EC2 instance is deployed in. All global regions are supported except `cn-` regions.
+- **mapPos: [number, number]**: The position of the component in the blueprint, expressed as an x- and y-coordinate pair.
+- **transparent: boolean**: If `true`, the component is semi-transparent in the 3D view. It has no effect in the 2D view.
+- **platform: string**: The platform used for the instance. See [Accepted values for the platform](#accepted-values-for-the-platform) for more information.
+- **instanceType: string**: The type of the instance. See [Accepted values for instanceType](#accepted-values-for-instancetype) for more information.
+- **instanceSize: string**: The size used for the instance. See [Accepted values for instanceSize](#accepted-values-for-instancesize) for more information.
+- **billingOptions: object**: The pricing model used for the instance in AWS. See [Accepted values for billingOptions](#accepted-values-for-billingoptions) for more information.
+- **color: object**: The fill color for the component body.
+  - **isometric: string**: The fill color for the component in the 3D view. Must be a hexadecimal color.
+  - **2d: string**: The fill color for the component in the 2D view. Must be a hexadecimal color.
+- **accentColor: object**: The accent color used to display the component logo on top of the block.
+  - **isometric: string**: The accent color for the component in the 3D view. Must be a hexadecimal color.
+  - **2d: string**: The accent color for the component in the 2D view. Must be a hexadecimal color.
+- **link: uri**: Link the component to another diagram using the `blueprint://ID` format or to an external website using the `https://LINK` format.
+- **locked: boolean**. If `true`, changes made to the component using the application are disabled until unlocked.
 
-EC2 コンポーネントは [VPC][2]、[セキュリティグループ][3]、[オートスケーリンググループ][4]、[サブネット][5]に追加することができます。
+The EC2 component can be added to [VPCs][2], [security groups][3], [auto scaling groups][4], and [subnets][5].
 
-## `platform` で許容される値
+## Accepted values for `platform`
 
-`platform` キーは以下の値を受け付けます。
-
-```
-linux、linuxSQL、linuxSQLWeb、linuxSQLEnterprise、rhel、sles、mswin、mswinSQL、mswinSQLWeb、mswinSQLEnterprise
-```
-
-## `instanceType` で許容される値
-
-`instanceType` キーは以下の値を受け付けます。
+The `platform` key accepts the following values:
 
 ```
-a1、c1、c3、c4、c5、c5a、c5ad、c5d、c5n、c6g、c6gd、c6gn、cc2、cr1、d2、d3、d3en、f1、g2、g3、g3s、g4ad、g4dn、h1、hs1、i2、i3、i3en、inf1、m1、m2、m3、m4、m5、m5a、m5ad、m5d、m5dn、m5n、m5zn、m6g、m6gd、p2、p3、p3dn、p4d、r3、r4、r5、r5a、r5ad、r5b、r5d、r5dn、r5n、r6g、r6gd、t1、t2、t3、t3a、t4g、x1、x1e、z1d
+linux, linuxSQL, linuxSQLWeb, linuxSQLEnterprise, rhel, sles, mswin, mswinSQL, mswinSQLWeb, mswinSQLEnterprise
 ```
 
-## `instanceSize` で許容される値
+## Accepted values for `instanceType`
 
-`instanceSize` キーは以下の値を受け付けます。
+The `instanceType` key accepts the following values:
 
 ```
-micro、nano、small、medium、large、xlarge、2xlarge、3xlarge、4xlarge、6xlarge、8xlarge、9xlarge、10xlarge、12xlarge、16xlarge、18xlarge、24xlarge、32xlarge、metal
+a1, c1, c3, c4, c5, c5a, c5ad, c5d, c5n, c6g, c6gd, c6gn, cc2, cr1, d2, d3, d3en, f1, g2, g3, g3s, g4ad, g4dn, h1, hs1, i2, i3, i3en, inf1, m1, m2, m3, m4, m5, m5a, m5ad, m5d, m5dn, m5n, m5zn, m6g, m6gd, p2, p3, p3dn, p4d, r3, r4, r5, r5a, r5ad, r5b, r5d, r5dn, r5n, r6g, r6gd, t1, t2, t3, t3a, t4g, x1, x1e, z1d
 ```
 
-## `billingOptions` で許容される値
+## Accepted values for `instanceSize`
 
-`billingOptions` キーは、Cloudcraftによって認められているすべての請求オプションをサポートしています。
+The `instanceSize` key accepts the following values:
 
-- オンデマンド
-- リザーブドインスタンス
-- スポットインスタンス
+```
+micro, nano, small, medium, large, xlarge, 2xlarge, 3xlarge, 4xlarge, 6xlarge, 8xlarge, 9xlarge,  10xlarge, 12xlarge, 16xlarge, 18xlarge, 24xlarge, 32xlarge, metal
+```
 
-各オプションは、`billingOptions` オブジェクト内では異なる形で表現されています。
+## Accepted values for `billingOptions`
 
-### オンデマンド
+The `billingOptions` key supports all billing options that are accepted by Cloudcraft:
+
+- On-demand
+- Reserved instance
+- Spot instance
+
+Each option is represented differently in the `billingOptions` object.
+
+### On-demand
 
 ```
 {
@@ -118,10 +118,10 @@ micro、nano、small、medium、large、xlarge、2xlarge、3xlarge、4xlarge、6
 }
 ```
 
-- **type: od**: オンデマンドの請求オプションの値は常に `od` です。
-- **utilization: 数値**: 指定された月にインスタンスがどれくらい使用されたかを表す浮動小数点数。
+- **type: od**: The billing option value for on-demand is always `od`.
+- **utilization: number**: A floating number representing how much the instance is used in a given month.
 
-### リザーブドインスタンス
+### Reserved instance
 
 ```
 {
@@ -134,12 +134,12 @@ micro、nano、small、medium、large、xlarge、2xlarge、3xlarge、4xlarge、6
 }
 ```
 
-- **type: ri**: リザーブドインスタンスの請求オプションの値は常に `ri` です。
-- **leaseContractLenght: 数値**: インスタンスが予約されている時間の長さ。許容される値は 12 または 36 です。
-- **purchaseOption: 文字列**: インスタンスの購入オプション。許容される値は `No Upfront`、`Partial Upfront`、および `All Upfront` です。
-- **offeringClass: 文字列**: インスタンスのオファリングクラス。許容される値は `standard` と `convertible` です。
+- **type: ri**: The billing option value for a reserved instance is always `ri`.
+- **leaseContractLenght: number**: The length of time the instance is reserved. Accepted values are 12 or 36.
+- **purchaseOption: string**: The purchase option for the instance. Accepted values are `No Upfront`, `Partial Upfront`, and `All Upfront`.
+- **offeringClass: string**: The offering class for the instance. Accepted values are `standard` and `convertible`.
 
-### スポットインスタンス
+### Spot instance
 
 ```
 {
@@ -150,11 +150,11 @@ micro、nano、small、medium、large、xlarge、2xlarge、3xlarge、4xlarge、6
 }
 ```
 
-- **type: si**: スポットインスタンスの請求オプションの値は常に `si` です。
-- **utilization: 数値**: 指定された月にインスタンスがどれくらい使用されたかを表す浮動小数点数。
+- **type: si**: The billing option value for spot instance is always `si`.
+- **utilization: number**: A floating number representing how much the instance is used in a given month.
 
 [1]: https://developers.cloudcraft.co/
-[2]: /ja/cloudcraft/components-aws/vpc/
-[3]: /ja/cloudcraft/components-aws/security-group/
-[4]: /ja/cloudcraft/components-aws/auto-scaling-group/
-[5]: /ja/cloudcraft/components-aws/subnet/
+[2]: /cloudcraft/components-aws/vpc/
+[3]: /cloudcraft/components-aws/security-group/
+[4]: /cloudcraft/components-aws/auto-scaling-group/
+[5]: /cloudcraft/components-aws/subnet/

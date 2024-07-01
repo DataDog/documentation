@@ -1,3 +1,3 @@
 ---
-title: セキュリティモニタリング
+title: Security Monitoring
 ---

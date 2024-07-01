@@ -1,103 +1,112 @@
 ---
+title: Watchdog Insights for Logs
+kind: documentation
+description: 'Get Insights on where to Start or Follow-Up your Investigations'
 aliases:
-- /ja/logs/explorer/insights
-description: 調査を開始またはフォローアップする地点に関するインサイトを得る
+    - /logs/explorer/insights
 further_reading:
-- link: https://www.datadoghq.com/blog/datadog-watchdog-insights-log-management/
-  tag: ブログ
-  text: Watchdog Insights を使用してログ調査を加速します
-- link: logs/explorer/side_panel
-  tag: Documentation
-  text: ログサイドパネルの詳細情報
-- link: logs/explorer/#list-of-logs
-  tag: Documentation
-  text: ログエクスプローラーの詳細
-title: ログ用 Watchdog Insights
+    - link: "https://www.datadoghq.com/blog/datadog-watchdog-insights-log-management/"
+      tag: Blog
+      text: Accelerate your logs investigations with Watchdog Insights
+    - link: logs/explorer/side_panel
+      tag: Documentation
+      text: More information on the log side panel
+    - link: "logs/explorer/#list-of-logs"
+      tag: Documentation
+      text: Learn more about Log Explorer
+
 ---
 
-## 概要
+## Overview
 
-Datadog Log Management は、ログエクスプローラーでコンテキストに沿ったインサイトを提供し、インシデントの迅速な解決を支援する Watchdog Insights を提供します。Watchdog Insights は、ユーザーのサブセットに影響を与える疑わしい異常値、外れ値、潜在的なパフォーマンスのボトルネックを表面化することにより、専門知識と直感を補完します。
+Datadog Log Management offers Watchdog Insights to help you resolve incidents faster with contextual insights in the Log Explorer. Watchdog Insights complement your expertise and instincts by surfacing suspect anomalies, outliers, and potential performance bottlenecks impacting a subset of users.
 
-{{< img src="logs/explorer/watchdog_insights/insights-for-log-explorer.png" alt="Watchdog Insights のバナーと 5 つのログ異常が表示されたログエクスプローラー" style="width:100%;" >}}
+{{< img src="logs/explorer/watchdog_insights/insights-for-log-explorer.png" alt="The log explorer showing the Watchdog Insights banner with five log anomalies" style="width:100%;" >}}
 
-## ナビゲーション
+## Navigation
 
-Watchdog Insights バナーが[ログエクスプローラー][1]に表示され、現在のクエリに関するインサイトが表示されます。
+The Watchdog Insights banner appears in the [Log Explorer][1] and displays insights about the current query:
 
-{{< img src="logs/explorer/watchdog_insights/banner_collapsed.png" alt="折りたたみ表示時の Watchdog Insights バナー" style="width:100%;" >}}
+{{< img src="logs/explorer/watchdog_insights/banner_collapsed.png" alt="The Watchdog Insights banner in the collapsed view" style="width:100%;" >}}
 
-すべてのインサイトの概要を確認するには、Watchdog Insight バナーを展開します。
+To see an overview of all insights, expand the Watchdog Insight banner:
 
-{{< img src="logs/explorer/watchdog_insights/banner_expanded.png" alt="3 つのエラー外れ値を示す Watchdog Insights バナー" style="width:100%;" >}}
+{{< img src="logs/explorer/watchdog_insights/banner_expanded.png" alt="The Watchdog Insights banner showing three error outliers" style="width:100%;" >}}
 
-Watchdog Insights サイドパネル全体にアクセスするには、**View all** をクリックします。
+To access the full Watchdog Insights side panel, click **View all**:
 
-{{< img src="logs/explorer/watchdog_insights/side_panel.png" alt="Watchdog Insights のサイドパネルに表示されるエラー外れ値に関する詳細な情報" style="width:100%;" >}}
+{{< img src="logs/explorer/watchdog_insights/side_panel.png" alt="The Watchdog Insights side panel showing more details about the error outliers" style="width:100%;" >}}
 
-すべてのインサイトには、インタラクションが埋め込まれ、トラブルシューティング情報が記載されたサイドパネルが付属しています。インサイトインタラクションとサイドパネルは、Watchdog Insights タイプによって異なります。
+Every insight comes with embedded interactions and a side panel with troubleshooting information. The insight interactions and side panel vary based on the Watchdog Insight type.
 
-## インサイトの種類
+## Insight Types
 
-### ログ異常検出
+[Watchdog Insights][8] surfaces anomalies and outliers detected on specific tags, enabling you to investigate the root cause of an issue. [Insights][9] are discovered from APM, Continuous Profiler, Log Management, and infrastructure data that include the `service` tag. The two types of insights specific to Log Management are:
 
-取り込まれたログはインテークレベルで分析され、Watchdog は検出されたパターンと `environment`、`service`、`source`、`status` タグの集計を実行します。
-これらの集計されたログは、以下のような異常な動作がないかスキャンされます。
+- [Log Anomaly Detection](#log-anomaly-detection)
+- [Error Outliers](#error-outliers)
 
-- 警告またはエラーステータスを持つログの出現。
-- 警告やエラーステータスのログの急増。
+### Log Anomaly Detection
+
+Ingested logs are analyzed at the intake level where Watchdog performs aggregations on detected patterns as well as `environment`, `service`, `source` and `status` tags.
+These aggregated logs are scanned for anomalous behaviors, such as the following:
+
+- An emergence of logs with a warning or error status.
+- A sudden increase of logs with a warning or error status.
 
 
-ログは、検索コンテキストとロールに適用される制限に一致する、ログエクスプローラーのインサイトとして表示されます。
+The logs surface as Insights in the Log Explorer, matching the search context and any restrictions applied to your role.
 
-{{< img src="logs/explorer/watchdog_insights/log-anomalies-light.mp4" alt="特定のインサイトの詳細をスクロールしているユーザー" video="true">}}
+{{< img src="logs/explorer/watchdog_insights/log-anomalies-light-cropped.mp4" alt="A user scrolling through the details of a specific insight" video="true">}}
 
-特定のインサイトをクリックすると、検出された異常の詳細な説明と、その異常の原因となるパターンのリストが表示されます。
+Click on a specific insight to see the full description of the detected anomaly as well as the list of patterns contributing to it.
 
-Watchdog が特に重大と判断した異常は、[Watchdog アラートフィード][6]にも表示され、[Watchdog ログモニター][7]を設定することで通知を受けることができます。
-重大な異常は次のように定義されます。
+Anomalies that Watchdog determines to be particularly severe are also surfaced in the [Watchdog alerts feed][6] and can be alerted on by setting up a [Watchdog logs monitor][7].
+A severe anomaly is defined as:
 
-* エラーログが含まれている
-* 10 分以上続いている (一時的なエラーを除外するため)
-* 大幅に増加している (小幅な増加を除外するため)
+* containing error logs
+* lasting at least 10 minutes (to avoid transient errors)
+* having a significant increase (to avoid small increases)
 
-ログエクスプローラーでのログ検索については、[ログ検索構文][2]、[カスタムタイムフレーム][3]を参照してください。
+For more information about searching logs in the Log Explorer, see [Log Search Syntax][2] and [Custom Time Frames][3].
 
-### エラー外れ値
+### Error Outliers
 
-エラー外れ値は、現在のクエリに一致するエラーの特性を含む[ファセットタグまたは属性][4]などのフィールドを表示します。エラー間で統計的に過大評価されている `key:value` ペアは、問題の根本原因へのヒントになります。
+Error outliers display fields such as [faceted tags or attributes][4] containing characteristics of errors that match the current query. Statistically overrepresented `key:value` pairs among errors provide hints into the root cause of problems.
 
-典型的なエラー外れ値の例として、`env:staging`、`docker_image:acme:3.1`、`http.useragent_details.browser.family:curl` が挙げられます。
+Typical examples of error outliers include `env:staging`, `docker_image:acme:3.1`, and `http.useragent_details.browser.family:curl`.
 
-**バナーカード**ビューでは、次のことがわかります。
+In the **banner card** view, you can see:
 
-  * フィールド名。
-  * フィールドが寄与するエラーと全体的なログの割合。
+  * The field name.
+  * The proportion of errors and overall logs that the field contributes to.
 
-{{< img src="logs/explorer/watchdog_insights/error_outlier_s_card.png" alt="エラー全体の 73.3% を占める赤いバーと、8.31% を占める青いバーを示すエラー外れ値カード" style="width:50%;" >}}
+{{< img src="logs/explorer/watchdog_insights/error_outlier_s_card.png" alt="The error outlier card showing a red bar with 73.3% of total errors and a blue bar with 8.31% of total errors" style="width:50%;" >}}
 
-**サイドパネルカード**ビューでは、エラーログのメイン[ログパターン][5]をフィールドで確認できます。
+In the **side panel card** view, you can see the main [log pattern][5] of error logs with the field.
 
-{{< img src="logs/explorer/watchdog_insights/error_outlier_l_card.png" alt="エラー外れ値カード (L)" style="width:100%;" >}}
+{{< img src="logs/explorer/watchdog_insights/error_outlier_l_card.png" alt="Error Outlier card (L)" style="width:100%;" >}}
 
-**フルサイドパネル**ビューでは、次のことがわかります。
+In the **full side panel** view, you can see:
 
-  * フィールドを含むエラーログの時系列。
-  * エラーログに関連付けられることが多いタグ。
-  * [ログパターン][5]の包括的なリスト。
+  * The timeseries of error logs that contain the field.
+  * Tags that are often associated with the error logs.
+  * A comprehensive list of [log patterns][5].
 
-{{< img src="logs/explorer/watchdog_insights/error_outlier_side_panel.png" alt="エラー外れ値サイドパネル" style="width:100%;" >}}
+{{< img src="logs/explorer/watchdog_insights/error_outlier_side_panel.png" alt="Error Outlier side panel" style="width:100%;" >}}
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 
 
 [1]: https://app.datadoghq.com/logs
-[2]: /ja/logs/search-syntax
-[3]: /ja/dashboards/guide/custom_time_frames
-[4]: /ja/logs/explorer/facets/
-[5]: /ja/logs/explorer/analytics/patterns
+[2]: /logs/search-syntax
+[3]: /dashboards/guide/custom_time_frames
+[4]: /logs/explorer/facets/
+[5]: /logs/explorer/analytics/patterns
 [6]: https://app.datadoghq.com/watchdog
-[7]: /ja/monitors/types/watchdog/
+[7]: /monitors/types/watchdog/
+[8]: /watchdog/
+[9]: /watchdog/insights/?tab=logmanagement#outlier-types

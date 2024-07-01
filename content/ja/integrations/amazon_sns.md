@@ -1,70 +1,70 @@
 ---
-aliases:
-- /ja/integrations/awssns/
-categories:
-- cloud
-- notifications
-- aws
-- log collection
-dependencies: []
-description: Amazon SNS メッセージを Datadog に、Datadog アラートを SNS に送信。
-doc_link: https://docs.datadoghq.com/integrations/amazon_sns/
-draft: false
-git_integration_title: amazon_sns
-has_logo: true
-integration_id: ''
-integration_title: Amazon Simple Notification Service (SNS)
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: '1.0'
-name: amazon_sns
-public_title: Datadog-Amazon Simple Notification Service (SNS) インテグレーション
-short_description: Amazon SNS メッセージを Datadog に、Datadog アラートを SNS に送信。
-version: '1.0'
+"aliases":
+- "/integrations/awssns/"
+"categories":
+- "cloud"
+- "notifications"
+- "aws"
+- "log collection"
+"custom_kind": "integration"
+"dependencies": []
+"description": "Send Amazon SNS messages to Datadog, or send Datadog alerts to SNS."
+"doc_link": "https://docs.datadoghq.com/integrations/amazon_sns/"
+"draft": false
+"git_integration_title": "amazon_sns"
+"has_logo": true
+"integration_id": ""
+"integration_title": "Amazon Simple Notification Service (SNS)"
+"integration_version": ""
+"is_public": true
+"manifest_version": "1.0"
+"name": "amazon_sns"
+"public_title": "Datadog-Amazon Simple Notification Service (SNS) Integration"
+"short_description": "Send Amazon SNS messages to Datadog, or send Datadog alerts to SNS."
+"version": "1.0"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-{{< img src="integrations/amazon_sns/snsdashboard.png" alt="SNS ダッシュボード" popup="true">}}
+{{< img src="integrations/amazon_sns/snsdashboard.png" alt="SNS Dashboard" popup="true">}}
 
-## 概要
+## Overview
 
-Amazon Simple Notification Service (SNS) を Datadog に接続すると、次のことが可能になります。
+Connect Amazon Simple Notification Service (SNS) to Datadog in order to:
 
-- SNS メッセージをイベントとしてストリームに表示できます。
-- アラートおよびイベント通知を SNS に送信できます。
+- See SNS messages as events in your Event Explorer
+- Send alert and event notifications to SNS
 
-## セットアップ
+## Setup
 
-### インストール
+### Installation
 
-[Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
+If you haven't already, set up the [Amazon Web Services integration][1] first.
 
-### メトリクスの収集
+### Metric collection
 
-1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `SNS` が有効になっていることを確認します。
+1. In the [AWS integration page][2], ensure that `SNS` is enabled under the `Metric Collection` tab.
 
-2. Amazon SNS のメトリクスを収集するには、次のアクセス許可を [Datadog IAM ポリシー][3]に追加します。詳細については、AWS ウェブサイト上の [SNS ポリシー][4]を参照してください。
+2. Add the following permissions to your [Datadog IAM policy][3] in order to collect Amazon SNS metrics. For more information, see the [SNS policies][4] on the AWS website.
 
-    | AWS アクセス許可   | 説明                                             |
+    | AWS Permission   | Description                                             |
     | ---------------- | ------------------------------------------------------- |
-    | `sns:ListTopics` | 取得可能なトピックを一覧表示するために使用されます。                        |
-    | `sns:Publish`    | 通知 (モニターまたはイベントフィード) を公開するために使用されます。|
+    | `sns:ListTopics` | Used to list available topics.                          |
+    | `sns:Publish`    | Used to publish notifications (monitors or event feed). |
 
-3. [Datadog - Amazon SNS インテグレーション][5]をインストールします。
+3. Install the [Datadog - Amazon SNS integration][5].
 
-### イベント収集
+### Event collection
 
-#### SNS メッセージの受信
+#### Receive SNS messages
 
-Datadog Event Stream の SNS メッセージは、`HTTPS` と `Email` の両方のプロトコルで受け取ることができます。`HTTPS` プロトコルを使用すると、Webhook URL で自動的にサブスクリプションを確認することができます。
+You can receive SNS messages in the Datadog Event Explorer through both the `HTTPS` and `Email` protocols. Using the `HTTPS` protocol allows you to automatically confirm the subscription with a webhook URL. 
 
-`Email` プロトコルを使用する場合、Datadog がこの目的のために自動的に生成したメールアドレスの確認ステップを手動で行う必要があります。詳しくは [Amazon SNS のメールから Datadog のイベントを作成する][6]のガイドをお読みください。
+Using the `Email` protocol requires a manual confirmation step for the email address that Datadog automatically generates for this purpose. Read the [Create Datadog Events from Amazon SNS Emails][6] guide for more information. 
 
-Datadog Event Explorer で SNS メッセージを `HTTPS` で受信するには
+To receive SNS messages in the Datadog Event Explorer through `HTTPS`:
 
-1. SNS マネジメントコンソールの **Topics** セクションで、目的のトピックを選択し、**Create Subscription** をクリックします。
-2. プロトコルとして `HTTPS` を選択し、`<API_KEY>` を有効な Datadog API キーの値に置き換えて、以下の Webhook URL を入力します。
+1. In the **Topics** section of the SNS Management console, select the desired topic and click **Create Subscription**.
+2. Select `HTTPS` as the protocol and enter the following webhook URL, substituting `<API_KEY>` with the value of any valid Datadog API key:
 
     ```text
     ## Datadog US site
@@ -74,57 +74,58 @@ Datadog Event Explorer で SNS メッセージを `HTTPS` で受信するには
     https://app.datadoghq.eu/intake/webhook/sns?api_key=<API_KEY>
     ```
 
-3. **Enable raw message delivery** のチェックは外したままにします。
-4. **Create subscription** をクリックします。
+3. Leave **Enable raw message delivery** unchecked.
+4. Click **Create subscription**.
 
-#### SNS 通知の送信
+#### Send SNS notifications
 
-Datadog から SNS 通知を送信するには
+To send SNS notifications from Datadog:
 
-1. AWS インテグレーションページで、SNS サービスと関連付けられている AWS アカウントを構成します。
-2. [SNS インテグレーション][5]をインストールします。
-3. これで、Datadog は構成された SNS トピックを検出し、@notifications (例: `@sns-topic-name`) を有効にします。
+1. Configure the AWS account that is associated with an SNS service on the AWS integration page.
+2. Install the [SNS integration][5].
+3. Datadog then detects your configured SNS topics and enables @notifications, for example: `@sns-topic-name`.
 
-### ログの収集
+### Log collection
 
-SNS はログを提供しません。SNS に送信されるログとイベントが処理されます。
+SNS does not provide logs. Process logs and events that are transiting through to the SNS.
 
-#### ログを Datadog に送信する方法
+#### Send logs to Datadog
 
-1. 新しい SNS サブスクリプションを構成します。
-2. メッセージの送信元のトピックを選択します。
-3. Protocol には、**AWS Lambda** を選択します。
-4. Endpoint には、Datadog Forwarder Lambda 関数の ARN を入力します。
+1. Configure a new SNS subscription.
+2. Select the topic where messages come from.
+3. For the Protocol, select **AWS Lambda**. 
+4. For the Endpoint, enter the ARN of your Datadog Forwarder Lambda function.
 
-## 収集データ
+## Data Collected
 
-### メトリクス
+### Metrics
 {{< get-metrics-from-git "amazon_sns" >}}
 
 
-AWS から取得される各メトリクスには、ホスト名やセキュリティ グループなど、AWS コンソールに表示されるのと同じタグが割り当てられます。
+Each of the metrics retrieved from AWS is assigned the same tags that appear in the AWS console, including but not limited to host name, security-groups, and more.
 
-### イベント
+### Events
 
-Amazon SNS インテグレーションには、トピックサブスクリプションのイベントが含まれます。下のイベント例を参照してください。
+The Amazon SNS integration includes events for topic subscriptions. See the example event below:
 
-{{< img src="integrations/amazon_sns/aws_sns_event.png" alt="Amazon SNS イベント" >}}
+{{< img src="integrations/amazon_sns/aws_sns_event.png" alt="Amazon SNS Events" >}}
 
-### サービスのチェック
+### Service Checks
 
-Amazon SNS インテグレーションには、サービスのチェック機能は含まれません。
+The Amazon SNS integration does not include any service checks.
 
-## トラブルシューティング
+## Troubleshooting
 
-Datadog では、Datadog から中国のトピックへの SNS 通知をサポートしていません。
+Datadog does not support SNS notifications from Datadog to topics in China.
 
-ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
+Need help? Contact [Datadog support][8].
 
-[1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
+[1]: https://docs.datadoghq.com/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
-[3]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/#installation
+[3]: https://docs.datadoghq.com/integrations/amazon_web_services/#installation
 [4]: https://docs.aws.amazon.com/sns/latest/dg/sns-using-identity-based-policies.html
 [5]: https://app.datadoghq.com/integrations/amazon-sns
-[6]: https://docs.datadoghq.com/ja/integrations/guide/events-from-sns-emails/
+[6]: https://docs.datadoghq.com/integrations/guide/events-from-sns-emails/
 [7]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_sns/amazon_sns_metadata.csv
-[8]: https://docs.datadoghq.com/ja/help/
+[8]: https://docs.datadoghq.com/help/
+

@@ -1,3 +1,3 @@
 ---
-title: ログインデックス
+title: Logs Indexes
 ---

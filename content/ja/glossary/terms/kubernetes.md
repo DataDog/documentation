@@ -1,6 +1,6 @@
 ---
-core_product:
-- infrastructure monitoring
 title: Kubernetes
+core_product:
+  - infrastructure monitoring
 ---
-Kubernetes は、コンテナを管理するためのプラットフォームです。
+Kubernetes is a platform for managing containers.

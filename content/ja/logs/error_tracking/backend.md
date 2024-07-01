@@ -1,52 +1,60 @@
 ---
-description: ログからバックエンドエラーを追跡する方法について説明します。
-further_reading:
-- link: https://www.datadoghq.com/blog/error-tracking/
-  tag: GitHub
-  text: Datadog Error Tracking で、アプリケーションの問題を解明
-- link: /logs/error_tracking/explorer/
-  tag: ドキュメント
-  text: エラートラッキングエクスプローラーについて
+title: Track Backend Errors
+kind: documentation
+description: Learn how to track backend errors from your logs.
 is_beta: true
-title: バックエンドエラーの追跡
+further_reading:
+  - link: "https://www.datadoghq.com/blog/error-tracking/"
+    tag: Blog
+    text: Make sense of application issues with Datadog Error Tracking
+  - link: /logs/error_tracking/explorer/
+    tag: Documentation
+    text: Learn about the Error Tracking Explorer
 ---
 
-## 概要
+## Overview
 
-Datadog でまだログを収集していない場合は、[ログドキュメント][10]を参照してログを設定してください。`source` タグ (言語指定) が適切に構成されていることを確認してください。Datadog では、Agent ベースのログ収集の設定を推奨しています。
+If you aren't already collecting logs with Datadog, see the [Logs documentation][10] to set up logs. Ensure that the `source` tag (specifying language) is properly configured. Datadog recommends setting up Agent-based log collection.
 
-## セットアップ
+## Setup
 
-**Python**、**Java**、**Ruby** などの言語では、ログの `source` タグが正しく設定されていれば、追加の設定は必要ありません。必要な属性は全て自動的にタグ付けされ、Datadog に送信されます。
+For languages such as **Python**, **Java**, and **Ruby**, no additional configuration is needed if the `source` tag in your logs is configured correctly. All required attributes are automatically tagged and sent to Datadog.
 
-**C#**、**.NET**、**Go**、**Node.js** などのバックエンド言語については、各セクションのコード例で、エラーログを適切に構成し、ログの `error.stack` に必要なスタックトレースをアタッチする方法を示しています。
+For backend languages such as **C#**, **.NET**, **Go**, and **Node.js**, the code examples in each section demonstrate how to properly configure an error log and attach the required stack trace in the log's `error.stack`.
 
-もし、スタックトレースを Datadog に送信しているが、`error.stack` にない場合、[ジェネリックログリマッパー][8]をセットアップして、スタックトレースを Datadog の正しい属性にリマップすることが可能です。
+If you are already sending stack traces to Datadog but they are not in `error.stack`, you can set up a [generic log remapper][8] to remap the stack trace to the correct attribute in Datadog.
 
-課題でのインラインコードスニペットを構成するには、[ソースコードインテグレーション][9]を設定します。Error Tracking for Logs でコードスニペットを追加する場合、APM は必要ありません。エンリッチメントタグとリンク先のリポジトリは、どちらも同じです。
+To configure inline code snippets in issues, set up the [source code integration][9]. Adding code snippets in Error Tracking for Logs does not require APM; the enrichment tags and linked repository is the same for both.
 
-#### エラー追跡の属性
+#### Attributes for Error Tracking
 
-Datadog 内には、専用の UI 表示を持つ特定の属性があります。エラー追跡でこれらの関数を有効にするには、以下の属性名を使用します。
+To enable Error Tracking, logs must include both of the following:
 
-| 属性            | 説明                                                             |
+- either an `error.type` or `error.stack` field
+- a status level of `ERROR`, `CRITICAL`, `ALERT`, or `EMERGENCY`
+
+The remaining attributes listed below are optional, but their presence improves error grouping.
+
+Specific attributes have a dedicated UI display within Datadog. To enable these functionalities for Error Tracking, use the following attribute names:
+
+| Attribute            | Description                                                             |
 |----------------------|-------------------------------------------------------------------------|
-| `error.stack`        | 実際のスタックトレース                                                      |
-| `error.message`      | スタックトレースに含まれるエラーメッセージ                              |
-| `error.kind`         | エラーのタイプまたは「種類」("Exception" や "OSError" など) |
+| `error.stack`        | Actual stack trace                                                      |
+| `error.message`      | Error message contained in the stack trace                              |
+| `error.kind`         | The type or "kind" of an error (for example, "Exception", or "OSError") |
 
-**注**: インテグレーションパイプラインは、デフォルトのログライブラリパラメーターをこれらの属性に再マップし、スタックトレースをパースまたはトレースバックして、自動的に `error.message` と `error.kind` を抽出しようとします。
+**Note**: By default, integration Pipelines attempt to remap default logging library parameters to those specific attributes and parse stack traces or traceback to automatically extract the `error.message` and `error.kind`.
 
-詳しくは、[ソースコード属性の完全なドキュメント][11]をご覧ください。
+For more information, see the complete [source code attributes documentation][11].
 
-### C# と .NET
+### C# and .NET
 
 {{< tabs >}}
 {{% tab "Serilog" %}}
 
-C# のログ収集の設定をしていない場合は、[C# ログ収集ドキュメント][1]を参照してください。
+If you have not set up log collection for C#, see the [C# Log Collection documentation][1].
 
-キャッチした例外を自分でログに残すには、オプションで以下を使用できます。
+To log a caught exception yourself, you may optionally use:
 
 ```csharp
 var log = new LoggerConfiguration()
@@ -56,19 +64,19 @@ var log = new LoggerConfiguration()
 try {
   // ...
 } catch (Exception ex) {
-  // log 呼び出しの最初の引数として例外を渡す
+  // pass exception as first argument of log call
   log.Error(ex, "an exception occurred");
 }
 ```
 
-[1]: /ja/logs/log_collection/csharp/?tab=serilog
+[1]: /logs/log_collection/csharp/?tab=serilog
 
 {{% /tab %}}
 {{% tab "NLog" %}}
 
-C# のログ収集の設定をしていない場合は、[C# ログ収集ドキュメント][1]を参照してください。
+If you have not set up log collection for C#, see the [C# Log Collection documentation][1].
 
-キャッチした例外を自分でログに残すには、オプションで以下を使用できます。
+To log a caught exception yourself, you may optionally use:
 
 ```csharp
 private static Logger log = LogManager.GetCurrentClassLogger();
@@ -78,20 +86,20 @@ static void Main(string[] args)
   try {
     // ...
   } catch (Exception ex) {
-    // ログ呼び出しの第二引数として例外を渡す
+    // pass exception as second argument of log call
     log.ErrorException("an exception occurred", ex);
   }
 }
 ```
 
-[1]: /ja/logs/log_collection/csharp/?tab=serilog
+[1]: /logs/log_collection/csharp/?tab=serilog
 
 {{% /tab %}}
 {{% tab "Log4Net" %}}
 
-C# のログ収集の設定をしていない場合は、[C# ログ収集ドキュメント][1]を参照してください。
+If you have not set up log collection for C#, see the [C# Log Collection documentation][1].
 
-キャッチした例外を自分でログに残すには、オプションで以下を使用できます。
+To log a caught exception yourself, you may optionally use:
 
 ```csharp
 class Program
@@ -103,14 +111,14 @@ class Program
     try {
       // ...
     } catch (Exception ex) {
-      // ログ呼び出しの第二引数として例外を渡す
+      // pass exception as second argument of log call
       log.Error("an exception occurred", ex);
     }
   }
 }
 ```
 
-[1]: /ja/logs/log_collection/csharp/?tab=serilog
+[1]: /logs/log_collection/csharp/?tab=serilog
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -119,12 +127,12 @@ class Program
 
 #### Logrus
 
-Go のログ収集の設定をしていない場合は、[Go ログ収集ドキュメント][3]を参照してください。
+If you have not set up log collection for Go, see the [Go Log Collection documentation][3].
 
-キャッチした例外を自分でログに残すには、オプションで以下を使用できます。
+To log a caught exception yourself, you may optionally use:
 
 ```go
-// https://github.com/pkg/errors の場合
+// for https://github.com/pkg/errors
 type stackTracer interface {
     StackTrace() errors.StackTrace
 }
@@ -157,21 +165,21 @@ log.WithFields(log.Fields{
 }).Error("an exception occurred")
 ```
 
-### Java (パース済み)
+### Java (parsed)
 
-Java のログ収集を設定していない場合は、[Java ログ収集ドキュメント][4]を参照してください。ログに `source:java` というタグが付けられていることを確認してください。
+If you have not set up log collection for Java, see the [Java Log Collection documentation][4]. Ensure your logs are tagged with `source:java`.
 
 {{< tabs >}}
 {{% tab "Log4j" %}}
 
-キャッチした例外を自分でログに残すには、オプションで以下を使用できます。
+To log a caught exception yourself, you may optionally use:
 
 ```java
 Logger logger = LogManager.getLogger("HelloWorld");
 try {
   // ...
 } catch (Exception e) {
-  // ログ呼び出しの最後の引数として例外を渡す
+  // pass exception as last argument of log call
   logger.error("an exception occurred", e)
 }
 ```
@@ -179,14 +187,14 @@ try {
 {{% /tab %}}
 {{% tab "SLF4J" %}}
 
-キャッチした例外を自分でログに残すには、オプションで以下を使用できます。
+To log a caught exception yourself, you may optionally use:
 
 ```java
 Logger logger = LoggerFactory.getLogger(NameOfTheClass.class);
 try {
   // ...
 } catch (Exception e) {
-  // ログ呼び出しの最後の引数として例外を渡す
+  // pass exception as last argument of log call
   logger.error("an exception occurred", e)
 }
 ```
@@ -198,9 +206,9 @@ try {
 
 #### Winston (JSON)
 
-Node.js のログ収集の設定をしていない場合は、[Node.js ログ収集ドキュメント][5]を参照してください。
+If you have not set up log collection for Node.js, see the [Node.js Log Collection documentation][5].
 
-キャッチした例外を自分でログに残すには、オプションで以下を使用できます。
+To log a caught exception yourself, you may optionally use:
 
 ```json
 try {
@@ -215,13 +223,33 @@ try {
 }
 ```
 
+### PHP
+
+#### Monolog (JSON)
+
+If you have not set up log collection for PHP, see the [PHP Log Collection documentation][12].
+
+To log a caught exception yourself, you may optionally use:
+
+```php
+try {
+    // ...
+} catch (\Exception $e) {
+    $logger->error('An error occurred', [
+        'error.message' => $e->getMessage(),
+        'error.kind' => get_class($e),
+        'error.stack' => $e->getTraceAsString(),
+    ]);
+}
+```
+
 ### Python
 
-#### ロギング
+#### Logging
 
-Python のログ収集を設定していない場合は、[Python ログ収集ドキュメント][6]を参照してください。ログに `source:python` というタグが付けられていることを確認してください。
+If you have not setup log collection for Python, see the [Python Log Collection documentation][6]. Ensure your logs are tagged with `source:python`.
 
-キャッチした例外を自分でログに残すには、オプションで以下を使用できます。
+To log a caught exception yourself, you may optionally use:
 
 ```python
 try:
@@ -232,11 +260,11 @@ except:
 
 ### Ruby on Rails
 
-#### カスタムロガーフォーマッター
+#### Custom logger formatter
 
-Ruby on Rails のログ収集の設定をしていない場合は、[Ruby on Rails ログ収集ドキュメント][7]を参照してください。
+If you have not set up log collection for Ruby on Rails, see the [Ruby on Rails Log Collection documentation][7].
 
-手動でエラーを記録するには、JSON を使ってフォーマッターを作成し、例外値を正しいフィールドにマッピングします。
+To manually log an error, create a formatter using JSON and map the exception values to the correct fields:
 
 ```ruby
 require 'json'
@@ -267,30 +295,30 @@ class JsonWithErrorFieldFormatter < ::Logger::Formatter
 end
 ```
 
-そして、それをロガーで使用します。
+And use it in your logger:
 ```ruby
 logger = Logger.new(STDOUT)
 logger.formatter = JsonWithErrorFieldFormatter.new
 ```
 
-**Lograge** を使用する場合は、フォーマットされたエラーログを送信するように設定することもできます。
+If you use **Lograge**, you can also set it up to send formatted error logs:
 ``` ruby
 Rails.application.configure do
-    jsonLogger = Logger.new(STDOUT) # STDOUT または Agent の構成に応じたファイル
+    jsonLogger = Logger.new(STDOUT) # STDOUT or file depending on your agent configuration
     jsonLogger.formatter = JsonWithErrorFieldFormatter.new
 
-    # Rails のデフォルトの TaggedLogging ロガーを json フォーマッター付きの新規ロガーに置き換えます。
-    # TaggedLogging はより複雑な json 形式のメッセージと互換性がありません
+    # Replacing Rails default TaggedLogging logger with a new one with the json formatter.
+    # TaggedLogging is incompatible with more complex json format messages
     config.logger = jsonLogger
 
-    # Lograge の構成
+    # Lograge config
     config.lograge.enabled = true
     config.lograge.formatter = Lograge::Formatters::Raw.new
 
-    # ログの着色を無効にします
+    # Disables log coloration
     config.colorize_logging = false
 
-    # 例外のロギングを正しいフィールドに構成します
+    # Configure logging of exceptions to the correct fields
     config.lograge.custom_options = lambda do |event|
         if event.payload[:exception_object]
             return {
@@ -306,18 +334,19 @@ Rails.application.configure do
     end
 end
 ```
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/logs/error-tracking
 [2]: https://app.datadoghq.com/logs/onboarding/client
-[3]: /ja/logs/log_collection/go/
-[4]: /ja/logs/log_collection/java/?tab=log4j
-[5]: /ja/logs/log_collection/nodejs/?tab=winston30
-[6]: /ja/logs/log_collection/python/?tab=jsonlogformatter
-[7]: /ja/logs/log_collection/ruby/
-[8]: /ja/logs/log_configuration/processors/?tab=ui#remapper
+[3]: /logs/log_collection/go/
+[4]: /logs/log_collection/java/?tab=log4j
+[5]: /logs/log_collection/nodejs/?tab=winston30
+[6]: /logs/log_collection/python/?tab=jsonlogformatter
+[7]: /logs/log_collection/ruby/
+[8]: /logs/log_configuration/processors/?tab=ui#remapper
 [9]: https://app.datadoghq.com/source-code/setup/apm
-[10]: /ja/logs/log_collection/
-[11]: /ja/logs/log_configuration/attributes_naming_convention/#source-code
+[10]: /logs/log_collection/
+[11]: /logs/log_configuration/attributes_naming_convention/#source-code
+[12]: /logs/log_collection/php/

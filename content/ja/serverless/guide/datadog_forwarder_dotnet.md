@@ -1,35 +1,35 @@
 ---
-kind: ガイド
-title: Datadog Forwarder を使用した .NET サーバーレスアプリケーションのインスツルメンテーション
+title: Instrumenting .NET Serverless Applications Using the Datadog Forwarder
+kind: guide
 ---
-## 概要
+## Overview
 
 <div class="alert alert-warning">
-Datadog Serverless の新規ユーザーの場合、代わりに <a href="/serverless/installation/dotnet">Datadog Lambda Extension を使用して Lambda 関数をインスツルメントする手順</a>に従ってください。Lambda がすぐに使える機能を提供する前に、Datadog Forwarder で Datadog Serverless をすでにセットアップした場合は、このガイドを使用してインスタンスを維持してください。
+If you are a new user of Datadog Serverless, follow the <a href="/serverless/installation/dotnet">instructions to instrument your Lambda functions using the Datadog Lambda Extension</a> instead. If you have already set up Datadog Serverless with the Datadog Forwarder before Lambda offered out-of-the-box functionality, use this guide to maintain your instance.
 </div>
 
-## 前提条件
+## Prerequisites
 
-[Datadog Forwarder Lambda 関数][1]は、AWS Lambda 拡張メトリクス、カスタムメトリクス、ログの取り込みに必要です。
+The [Datadog Forwarder Lambda function][1] is required to ingest AWS Lambda enhanced metrics, custom metrics, and logs.
 
-## X-Ray トレーシングを有効にする
+## Enable X-Ray tracing
 
-1. Lambda 関数の [AWS X-Ray アクティブトレース][2]を有効にします。
-2. [.NET 向け AWS X-Ray SDK][3] をインストールします。
+1. Enable [AWS X-Ray active tracing][2] for your Lambda function.
+2. Install the [AWS X-Ray SDK for .NET][3].
 
-## Datadog Forwarder をロググループにサブスクライブ
+## Subscribe the Datadog Forwarder to log groups
 
-メトリクス、トレース、ログを Datadog へ送信するには、関数の各ロググループに Datadog Forwarder Lambda 関数を[サブスクライブ][4]します。
+[Subscribe][4] the Datadog Forwarder Lambda function to each of your function's log groups to send metrics, traces, and logs to Datadog.
 
-## 次のステップ
+## What's next?
 
-- [Serverless Homepage][5] でメトリクス、ログ、トレースを見ることができるようになりました。
-- [カスタムビジネスロジックの監視](#monitor-custom-business-logic)のサンプルコードを参照してください。
-- テレメトリーの収集に問題がある場合は、[トラブルシューティングガイド][6]を参照してください。
+- You can now view metrics, logs, and traces on the [Serverless Homepage][5].
+- See the sample code to [monitor custom business logic](#monitor-custom-business-logic).
+- See the [troubleshooting guide][6] if you have trouble collecting the telemetry.
 
-## カスタムビジネスロジックの監視
+## Monitor custom business logic
 
-Datadog Forwarder を使用して[カスタムメトリクス][7]を送信したい場合は、以下のサンプルコードを参照してください。
+If you would like to submit a [custom metric][7] using the Datadog Forwarder, see the sample code below:
 
 ```csharp
 var myMetric = new Dictionary<string, object>();
@@ -41,10 +41,10 @@ LambdaLogger.Log(JsonConvert.SerializeObject(myMetric));
 ```
 
 
-[1]: /ja/serverless/forwarder
+[1]: /serverless/forwarder
 [2]: https://docs.aws.amazon.com/xray/latest/devguide/xray-services-lambda.html
 [3]: https://docs.aws.amazon.com/xray/latest/devguide/xray-sdk-dotnet.html
-[4]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/
+[4]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/
 [5]: https://app.datadoghq.com/functions
-[6]: /ja/serverless/guide/troubleshoot_serverless_monitoring/
-[7]: /ja/serverless/custom_metrics
+[6]: /serverless/guide/troubleshoot_serverless_monitoring/
+[7]: /serverless/custom_metrics

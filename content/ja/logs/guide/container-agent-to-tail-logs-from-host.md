@@ -1,28 +1,28 @@
 ---
+title: Use the Container Agent to Tail Logs from the Host
+kind: guide
 aliases:
-- /ja/logs/faq/how-to-tail-logs-from-host-using-a-container-agent
+  - /logs/faq/how-to-tail-logs-from-host-using-a-container-agent
 further_reading:
 - link: /agent/docker/log
-  tag: ドキュメント
-  text: Docker でログを取る
+  tag: Documentation
+  text: Logging with Docker
 - link: /agent/docker/log/?tab=containerinstallation
-  tag: ドキュメント
-  text: Kubernetes でログを取る
-- link: https://www.datadoghq.com/blog/docker-logging/
-  tag: ブログ
-  text: Docker ロギングのベストプラクティス
-- link: /glossary/#tail
-  tag: 用語集
-  text: 用語集 "テール" の項目
-kind: ガイド
-title: コンテナ Agent を使用してホストからログを追跡する
+  tag: Documentation
+  text: Logging with Kubernetes
+- link: "https://www.datadoghq.com/blog/docker-logging/"
+  tag: Blog
+  text: Docker Logging Best Practices
+- link: "/glossary/#tail"
+  tag: Glossary
+  text: Glossary entry for "tail"
 ---
 
-<div class="alert alert-info">Datadog では、コンテナ・ログの収集に <b>STDOUT/STDERR</b> を使用することを推奨しています。</div>
+<div class="alert alert-info">Datadog recommends using <b>STDOUT/STDERR</b> to collect container logs.</div>
 
-## 概要
+## Overview
 
-ポッド/コンテナは、デフォルトでホストファイルにアクセスできませんが、これは Agent にも適用されます。ホストファイルからログを収集するようにコンテナ Agent を構成しようとすると、以下のようなエラーメッセージが表示されます。
+Pods/containers have no access to host files by default, which also applies to the Agent. If you try to configure your container Agent to collect logs from host files, an error message similar to the one below appears:
 
 ```
   syslog
@@ -33,31 +33,31 @@ title: コンテナ Agent を使用してホストからログを追跡する
 
 ```
 
-コンテナ Agent がホストファイルにアクセスできるようにするには、ファイルまたはそのディレクトリをコンテナ Agent にマウントします。OS に基づいてどのホストファイルとディレクトリをマウントするかは、[Agent コンフィグレーションファイルとディレクトリ][1]のリストを参照してください。
+To give the container Agent access to host files, mount the file or its directory to the container Agent. Review the list of [Agent configuration files and directories][1] for which host file and directory to mount based your OS.
 
-ここでは、Kubernetes と Docker の例を紹介します。
+Here are some examples for Kubernetes and Docker:
 
 {{< tabs >}}
 {{% tab "Kubernetes" %}}
 
-ホストのログファイルを Agent コンテナにマウントするには、Agent マニフェストのボリュームセクションにホストログディレクトリを、`volumeMounts` セクションにコンテナログディレクトリを設定します。
+To mount the log files in your host to the Agent container, set the host log directory in the volumes section of your Agent manifest and the container log directory in `volumeMounts` section:
 
 ```
         volumeMounts:
           - name: customlogs
-            ## Agent コンテナ内の希望するログディレクトリ:
+            ## The desired log directory inside the agent container:
             mountPath: /container/var/test-dir/logs/
 
       volumes:
         - name: customlogs
           hostPath:
-            ## ログファイルを含むホスト内のディレクトリ。
+            ## The directory in your host containing the log files.
             path: /var/test-dir/logs/
 ```
 
-次に、ログ収集のためにファイルを追跡するように Agent を構成します。これを行うには、カスタムログ構成を `/conf.d/` にマウントします。ファイル名は、拡張子が `.yaml` であれば何でも構いません。
+Next, configure the Agent to tail the files for log collection. To do this, you can mount a custom logs config into `/conf.d/`. The file name can be anything, as long as it has a `.yaml` extension.
 
-ホストファイルを直接マウントするよりも、ConfigMap を使用して構成を保存することが望ましいです。以下は、`logs.yaml` ファイルを持つ ConfigMap マニフェストのサンプルです。
+It is preferable to use a ConfigMap to store configurations rather than mounting a host file directly. Here's a sample ConfigMap manifest that has a `logs.yaml` file:
 
 ```
 kind: ConfigMap
@@ -71,17 +71,17 @@ data:
              - type: file
                service: syslog
                source: os
-               ## Agent マニフェストで設定したコンテナログディレクトリを使用する
+               ## Use the container log directory you set in the agent manifest
                path: /container/var/test-dir/logs/*.log
 ```
 
-コマンドで ConfigMap オブジェクトを作成します。
+Create the ConfigMap object using the command:
 
 ```bash
 kubectl create -f <configmap manifest>
 ```
 
-そして、`/conf.d/` の下にマウントします。
+Then, mount it under `/conf.d/`:
 
 ```
         volumeMounts:
@@ -97,13 +97,13 @@ kubectl create -f <configmap manifest>
 {{% /tab %}}
 {{% tab "Docker" %}}
 
-ホストログファイルをマウントするには、Agent の `docker run` コマンドにボリュームパラメーターを追加します。
+To mount the host log file, add a volume parameter in your Agent's `docker run` command:
 
 ```
 -v /<host log directory>/:<container log directory>/
 ```
 
-そして、ローカルでカスタムログの構成を作成します。
+Then, create a custom logs config locally:
 
 ```
 logs:
@@ -113,13 +113,13 @@ logs:
     path: <container log path>/*.log
 ```
 
-次に、それを `/conf.d/` にマウントします。ファイル名は何でも構いません。
+and mount it into `/conf.d/`. The file name can be anything:
 
 ```
 -v <absolute path>/logs.yaml:/conf.d/logs.yaml
 ```
 
-Agent の Docker インストールコマンドは、以下のようになります。
+Your Agent's Docker installation command should look like this:
 
 ```
 docker run -d --name datadog-agent \
@@ -138,9 +138,9 @@ docker run -d --name datadog-agent \
 {{% /tab %}}
 {{< /tabs >}}
 
-## 検証
+## Verification
 
-ここまで設定したら、Agent をデプロイします。`docker exec -it datadog-agent agent status` を実行すると、以下のような画面が表示されるはずです。
+After you have set this all up, you can deploy the Agent. You should be able to see something like the below when you run `docker exec -it datadog-agent agent status`:
 
 ```
 ==========
@@ -165,4 +165,4 @@ Logs Agent
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/agent/guide/agent-configuration-files/?tab=agentv6v7
+[1]: /agent/configuration/agent-configuration-files/?tab=agentv6v7

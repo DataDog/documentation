@@ -1,31 +1,37 @@
 ---
+title: Propagating Node.js Trace Context
+kind: documentation
 code_lang: nodejs
 code_lang_weight: 40
-further_reading:
-- link: https://www.datadoghq.com/blog/monitor-otel-with-w3c-trace-context/
-  tag: ブログ
-  text: W3C Trace Context に対応した OpenTelemetry インスツルメンテーションされたアプリのモニタリング
-title: Node.js トレースコンテキストの伝搬
 type: multi-code-lang
+further_reading:
+    - link: "https://www.datadoghq.com/blog/monitor-otel-with-w3c-trace-context/"
+      tag: Blog
+      text: Monitor OpenTelemetry-instrumented apps with support for W3C Trace Context
+    - link: /opentelemetry/guide/otel_api_tracing_interoperability
+      tag: Documentation
+      text: Interoperability of OpenTelemetry API and Datadog instrumented traces
 ---
 
-Datadog APM トレーサーは、分散型トレーシングのための [B3][5] と [W3C Trace Context][6] のヘッダー抽出と挿入をサポートしています。
+The Datadog APM Tracer supports [B3][5] and [W3C Trace Context][6] header extraction and injection for distributed tracing.
 
-分散ヘッダーの挿入と抽出のスタイルを構成することができます。
+You can configure injection and extraction styles for distributed headers.
 
-Node.js トレーサーは、以下のスタイルをサポートしています。
+The Node.js Tracer supports the following styles:
 
-- Datadog: `Datadog`
-- B3 マルチヘッダー: `b3multi` (`B3` エイリアスは非推奨)
+- Datadog: `datadog`
+- B3 Multi Header: `b3multi` (`B3` alias is deprecated)
 - W3C Trace Context: `tracecontext`
-- B3 シングルヘッダー: `B3 single header`
+- B3 Single Header: `B3 single header`
 
-コンテキスト伝播の設定について、詳しくは [Node.js トレーシングライブラリの構成][1]をお読みください。
+The default setting for both injection and extraction style is `datadog,tracecontext`.
 
-## その他の参考資料
+For more information about the context propagation settings, read [Node.js Tracing Library Configuration][1].
+
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/tracing/trace_collection/library_config/nodejs/#headers-extraction-and-injection
+[1]: /tracing/trace_collection/library_config/nodejs/#headers-extraction-and-injection
 [5]: https://github.com/openzipkin/b3-propagation
 [6]: https://www.w3.org/TR/trace-context/#trace-context-http-headers-format

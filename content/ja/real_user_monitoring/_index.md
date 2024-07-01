@@ -1,114 +1,112 @@
 ---
-algolia:
-  tags:
-  - rum
-  - リアルユーザーモニタリング
-aliases:
-- /ja/real_user_monitoring/installation
-- /ja/real_user_monitoring/faq/
-cascade:
-  algolia:
-    rank: 70
-description: ユーザーから見たフロントエンドアプリケーションのパフォーマンスを視覚化、観察、分析します。
+title: RUM & Session Replay
+kind: documentation
+description: "Visualize, observe, and analyze the performance of your front-end applications as seen by your users."
 disable_sidebar: true
+aliases:
+  - /real_user_monitoring/installation
+  - /real_user_monitoring/faq/
 further_reading:
-- link: https://app.datadoghq.com/release-notes?category=Real%20User%20Monitoring
-  tag: リリースノート
-  text: Datadog RUM の最新リリースをチェック！ (アプリログインが必要です)
-- link: https://dtdg.co/fe
+- link: "https://app.datadoghq.com/release-notes?category=Real%20User%20Monitoring"
+  tag: Release Notes
+  text: Check out the latest Datadog RUM releases! (App login required)
+- link: "https://dtdg.co/fe"
   tag: Foundation Enablement
-  text: リアルユーザーモニタリングによるインサイトを得るためのインタラクティブなセッションに参加できます
-- link: https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/
-  tag: ブログ
-  text: Datadog リアルユーザーモニタリングのご紹介
-- link: https://www.datadoghq.com/blog/datadog-mobile-rum/
-  tag: ブログ
-  text: Datadog Mobile Real User Monitoring で、モバイルでのユーザーエクスペリエンスを向上
-- link: https://www.datadoghq.com/blog/mobile-monitoring-best-practices/
-  tag: ブログ
-  text: モバイルアプリのパフォーマンス監視のためのベストプラクティス
-- link: https://www.datadoghq.com/blog/error-tracking/
-  tag: ブログ
-  text: Datadog Error Tracking で、アプリケーションの問題を解明
-- link: https://www.datadoghq.com/blog/unify-apm-rum-datadog/
-  tag: ブログ
-  text: APMとRUMのデータを統合し、フルスタックの可視性を実現
-- link: https://www.datadoghq.com/blog/datadog-geomaps/
-  tag: ブログ
-  text: ジオマップを使用して、場所ごとにアプリデータを視覚化する
-- link: https://www.datadoghq.com/blog/datadog-rum-react-components/#tune-up-your-react-data-collection
-  tag: ブログ
-  text: カスタム React コンポーネントでより良い RUM データを取得する
-- link: https://www.datadoghq.com/blog/hybrid-app-monitoring/
-  tag: ブログ
-  text: Datadog でハイブリッドモバイルアプリケーションを監視する
-- link: https://www.datadoghq.com/blog/how-datadogs-tech-solutions-team-rum-session-replay/
-  tag: ブログ
-  text: Datadog のテクニカルソリューションチームが RUM、セッションリプレイ、エラー追跡を使用して顧客の問題を解決する方法
-- link: https://www.datadoghq.com/blog/static-web-application-monitoring-best-practices/
-  tag: ブログ
-  text: 静的 Web アプリケーションを監視するためのベストプラクティス
+  text: Join an interactive session to gain insights through Real User Monitoring
+- link: "https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/"
+  tag: Blog
+  text: Introducing Datadog Real User Monitoring
+- link: "https://www.datadoghq.com/blog/datadog-mobile-rum/"
+  tag: Blog
+  text: Improve mobile user experience with Datadog Mobile Real User Monitoring
+- link: "https://www.datadoghq.com/blog/mobile-monitoring-best-practices/"
+  tag: Blog
+  text: Best practices for monitoring mobile app performance
+- link: "https://www.datadoghq.com/blog/error-tracking/"
+  tag: Blog
+  text: Make sense of application issues with Datadog Error Tracking
+- link: "https://www.datadoghq.com/blog/unify-apm-rum-datadog/"
+  tag: Blog
+  text: Unify APM and RUM data for full-stack visibility
+- link: "https://www.datadoghq.com/blog/datadog-geomaps/"
+  tag: Blog
+  text: Use geomaps to visualize your app data by location
+- link: "https://www.datadoghq.com/blog/datadog-rum-react-components/#tune-up-your-react-data-collection"
+  tag: Blog
+  text: Get better RUM data with our custom React components
+- link: "https://www.datadoghq.com/blog/hybrid-app-monitoring/"
+  tag: Blog
+  text: Monitor your hybrid mobile applications with Datadog
+- link: "https://www.datadoghq.com/blog/how-datadogs-tech-solutions-team-rum-session-replay/"
+  tag: Blog
+  text: How Datadog's Technical Solutions team uses RUM, Session Replay, and Error Tracking to resolve customer issues
+- link: "https://www.datadoghq.com/blog/static-web-application-monitoring-best-practices/"
+  tag: Blog
+  text: Best practices for monitoring static web applications
 - link: /real_user_monitoring/browser/data_collected/
-  tag: ドキュメント
-  text: 収集された RUM ブラウザデータ
-title: RUM & セッションリプレイ
+  tag: Documentation
+  text: RUM Browser Data Collected
+algolia:
+  tags: [rum, real user monitoring]
+cascade:
+    algolia:
+        rank: 70
 ---
 
-{{< img src="real_user_monitoring/rum-performance-summary-2.png" alt="RUM ダッシュボード" >}}
+{{< img src="real_user_monitoring/rum-performance-summary-2.png" alt="RUM Dashboard" >}}
 
-## リアルユーザーモニタリングとは？
+## What is Real User Monitoring?
 
-Datadog の*リアルユーザーモニタリング (RUM)* は、個々のユーザーのリアルタイムのアクティビティとエクスペリエンスをエンドツーエンドで可視化します。RUM は Web およびモバイルアプリケーションを監視するための 4 種類のユースケースを解決します。
+Datadog's *Real User Monitoring (RUM)* gives you end-to-end visibility into the real-time activity and experience of individual users. RUM solves four types of use cases for monitoring web and mobile applications:
 
-* **Performance**: Web ページ、モバイルアプリケーション画面、ユーザーアクション、ネットワークリクエスト、フロントエンドコードのパフォーマンスを追跡します。
-* **Error Management**: 進行中のバグと問題を監視し、時間とバージョンにわたってそれを追跡します。
-* **Analytics / Usage**: アプリケーションを使用しているユーザーを理解し (国、デバイス、OS)、個々のユーザージャーニーを監視し、ユーザーによるアプリケーションの操作を分析します (アクセスされた最も一般的なページ、クリック、インタラクション、機能の使用)。
-* **Support**: 1 つのユーザーセッションに関連するすべての情報を取得して、問題をトラブルシューティングします (セッションの継続時間、アクセスしたページ、インタラクション、読み込まれたリソース、エラー)。
+* **Performance**: Track the performance of web pages, mobile application screens, user actions, network requests, and your frontend code.
+* **Error Management**: Monitor the ongoing bugs and issues and track them over time and versions.
+* **Analytics / Usage**: Understand who is using your application (country, device, OS), monitor individual users journeys, and analyze how users interact with your application (most common page visited, clicks, interactions, and feature usage).
+* **Support**: Retrieve all of the information related to one user session to troubleshoot an issue (session duration, pages visited, interactions, resources loaded, and errors).
 
-ユーザーセッションとは、Web アプリケーションまたはモバイルアプリケーションでのユーザーの活動で、最長 4 時間続くものを指します。セッションには通常、ページビューと関連するテレメトリーが含まれます。ユーザーが 15 分間アプリケーションと対話しなかった場合、そのセッションは完了したとみなされます。ユーザーがアプリケーションと再び対話すると、新しいセッションが開始されます。
+A user session is a user journey on your web or mobile application lasting up to four hours. A session usually includes pageviews and associated telemetry. If a user does not interact with an application for 15 minutes, the session is considered complete. A new session starts when the user interacts with the application again.
 
-## セッションリプレイとは
+## What is Session Replay?
 
-Datadog の*セッションリプレイ*は、ユーザーの Web ブラウジング体験をキャプチャし、視覚的に再生することができます。
+Datadog's *Session Replay* allows you to capture and visually replay the web browsing experience of your users.
 
-セッションリプレイを RUM パフォーマンスデータと組み合わせることで、エラーの特定、再現、解決に役立ち、Web アプリケーションの使用パターンや設計上の落とし穴を把握することができます。
+Combined with RUM performance data, Session Replay is beneficial for error identification, reproduction, and resolution, and provides insights into your web application's usage patterns and design pitfalls.
 
-## 詳細はこちら
+## Get started
 
-アプリケーションタイプを選択して、RUM データの収集を開始します。
+Select an application type to start collecting RUM data:
 
 {{< partial name="rum/rum-getting-started.html" >}}
 
 </br>
 
-### 機能とプラットフォームのサポート
+### Capabilities and platform support
 
-**注**: Datadog Flutter SDK は MacOS、Windows、Linux には対応していません。
+**Note**: The Datadog Flutter SDK is not supported for MacOS, Windows, or Linux.
 
-次の表に、各プラットフォームでサポートされている RUM 機能を示します。
+The following table shows which RUM capabilities are supported on each platform:
 
-| 機能                               | ブラウザ | Android | iOS |   Flutter   | React Native | Roku | 注 |
+| Feature                               | Browser | Android | iOS |   Flutter   | React Native | Roku | Notes |
 | ------------------------------------- | --------|---------|---------|---------|--------------|------|-------|
-| ログを Datadog に送信する方法  | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}} |  |
-| ネットワークリクエストの分散型トレーシング | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}} | **Datadog Roku SDK** は、一部の HTTP リクエストのみを追跡することができます。 |
-| ビューとアクションの追跡 (RUM) | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}} | - **Flutter Web** で追跡されるすべてのアクションは `custom` として記録されます <br> - **Roku** は手動アクション追跡のみをサポートしています。 |
-| 機能フラグの追跡とリリースの追跡 | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} |  |  |
-| エラー追跡とソースマッピング | {{< X >}} | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | **React Native** は部分的にサポートされています |
-| クラッシュ追跡、シンボル化、難読化解除 | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}} |  |
-| セッションを停止 (Kiosk Monitoring) | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} |  |  |
-| WebView でイベントを追跡 |  | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} |  |  |
-| プラットフォーム固有のバイタルを監視 | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} |  |  |
-| ログのグローバルコンテキスト/属性追跡  | {{< X >}} |  |  |  |  |  |  |
-| クライアント側のトレース |  | {{< X >}} |  {{< X >}}|  |  |  |  |  |
-| セッションリプレイ | {{< X >}} | {{< X >}} | {{< X >}} |  |  |  | モバイルセッションリプレイは、ネイティブモバイルアプリ向けの公開ベータ版です。 |
-| ヒートマップ | {{< X >}} |  |  |  |  |  |  |
-| フラストレーションシグナル | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | すべての**モバイル**および **Roku** デバイスは部分的にサポートされています |
+| Send logs to Datadog  | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}} |  |
+| Distributed tracing of network requests | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}} | The **Datadog Roku SDK** is only able to track some types of HTTP requests. |
+| Track Views and Actions (RUM) | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}} | - All actions tracked in **Flutter Web** are recorded as `custom` <br> - **Roku** supports only manual action tracking. |
+| Feature Flags tracking and release tracking | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} |  |  |
+| Error tracking and source mapping | {{< X >}} | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | Only partially supported for **React Native** |
+| Crash tracking, symbolication, and deobfuscation | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}} |  |
+| Stop sessions (Kiosk Monitoring) | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} |  |  |
+| Track Events in WebViews |  | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} |  |  |
+| Monitor platform-specific vitals | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} |  |  |
+| Global context/attribute tracking in Logs  | {{< X >}} |  |  |  |  |  |  |
+| Client side tracing |  | {{< X >}} |  {{< X >}}|  |  |  |  |  |
+| Session Replay | {{< X >}} | {{< X >}} | {{< X >}} |  |  |  | Mobile Session Replay is in public beta for native mobile apps. |
+| Frustration signals | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | Only partially supported for all **mobile** and **Roku** devices |
 
-## SDK ドメインでサポートされるエンドポイント
+## Supported endpoints for SDK domains
 
-Datadog SDK のトラフィックはすべて SSL (デフォルト 443) で以下のドメインに送信されます。
+All Datadog SDKs traffic is transmitted over SSL (default 443) to the following domains:
 
-| サイト | サイト URL                                      |
+| Site | Site URL                                      |
 |------|-----------------------------------------------|
 | US1  | `https://browser-intake-datadoghq.com`        |
 | US3  | `https://browser-intake-us3-datadoghq.com`    |
@@ -117,69 +115,69 @@ Datadog SDK のトラフィックはすべて SSL (デフォルト 443) で以�
 | US1-FED  | `https://browser-intake-ddog-gov.com`     |
 | AP1  | `https://browser-intake-ap1-datadoghq.com`    |
 
-## Datadog RUM を探索する
+## Explore Datadog RUM
 
-[**Digital Experience > Performance Summary**][1] に移動して、RUM にアクセスします。
+Access RUM by navigating to [**Digital Experience > Performance Summary**][1].
 
-### すぐに使えるダッシュボード
+### Out-of-the-box dashboards
 
-[すぐに使える RUM ダッシュボード][2]で自動的に収集されたユーザーセッション、パフォーマンス、モバイルアプリケーション、フラストレーションシグナル、ネットワークリソース、エラーに関する情報を分析することができます。
+Analyze information about your user sessions, performance, mobile applications, frustration signals, network resources, and errors collected automatically with [out-of-the-box RUM dashboards][2].
 
-{{< img src="real_user_monitoring/rum-out-of-the-box-dashboard.png" alt="RUM ダッシュボード" >}}
+{{< img src="real_user_monitoring/rum-out-of-the-box-dashboard.png" alt="RUM dashboard" >}}
 
-### RUM エクスプローラーと視覚化
+### RUM Explorer and visualizations
 
-[視覚化][3]を使用して、レイテンシーがプレミアム顧客に影響を与えるタイミングを確認するなど、ユーザーセッションをセグメントで表示します。カスタマイズした検索で、データを探索し、ビューを保存し、[モニター][4]を作成します。
+View user sessions in segments, such as checking when latency impacts your premium customers, with [visualizations][3]. Explore data, save views, and create [monitors][4] on your customized searches.
 
-{{< img src="real_user_monitoring/explorer/analytics/rum_analytics.mp4" alt="RUM 分析" video=true >}}
+{{< img src="real_user_monitoring/explorer/analytics/rum_analytics.mp4" alt="RUM Analytics" video=true >}}
 
-### ログ、APM、プロファイラーとのインテグレーション
+### Integration with logs, APM, and profiler
 
-[バックエンドトレース、ログ、インフラストラクチャーメトリクス][5]を、ユーザーエクスペリエンスと報告された問題に対応して、アプリケーションのパフォーマンスに影響を与えるコードの正確な行まで表示します。
+View your [backend traces, logs, and infrastructure metrics][5] down to the exact line of code impacting your application performance, corresponding to user experiences and reported issues.
 
-{{< img src="real_user_monitoring/connect_rum_and_traces/rum_apm_logs.png" alt="RUM と APM" >}}
+{{< img src="real_user_monitoring/connect_rum_and_traces/rum_apm_logs.png" alt="RUM and APM" >}}
 
-### エラー追跡とクラッシュレポート
+### Error tracking and crash reporting
 
-[エラー追跡][6]を使用して、外れ値およびエラー、タイムアウト、クラッシュのグループに関する自動アラートを取得し、MTTR を大幅に削減します。
+Get automated alerts on outliers and groups of errors, timeouts, and crashes to significantly reduce your MTTR with [Error Tracking][6].
 
-{{< img src="real_user_monitoring/error_tracking/errors_rum.mp4" alt="RUM エラー追跡" video=true >}}
+{{< img src="real_user_monitoring/error_tracking/errors_rum.mp4" alt="RUM error tracking" video=true >}}
 
-### Web とモバイルバイタル
+### Web and mobile vitals
 
-[iOS および tvOS][8] または [Android および Android TV アプリケーション][9]の Core Web Vitals および Mobile Vitals などの[ブラウザアプリケーション][7]のパフォーマンススコアとテレメトリーを表示します。
+View performance scores and telemetry for [browser applications][7] such as Core Web Vitals and Mobile Vitals for [iOS and tvOS][8] or [Android and Android TV applications][9].
 
-### Web ビュー追跡
+### Web view tracking
 
-[iOS と tvOS][10] または [Android と Android TV][11] 用の Web ビュー追跡を使用して、ネイティブ Web アプリケーションから情報を収集し、ハイブリッドビューを調査します。
+Collect information from your native web applications and explore hybrid views with Web View Tracking for [iOS and tvOS][10] or [Android and Android TV][11].
 
-{{< img src="real_user_monitoring/webview_tracking/webview_tracking_light.png" alt="RUM エクスプローラーのユーザーセッションで取得した Web ビュー" >}}
+{{< img src="real_user_monitoring/webview_tracking/webview_tracking_light.png" alt="Web Views captured in a user session in the RUM Explorer" >}}
 
-## Datadog のセッションリプレイを見る
+## Explore Datadog Session Replay
 
-### セッションリプレイ
+### Session replays
 
-Web サイトを利用する実際のユーザーの[ブラウザ記録][12]を見て、組織の[プライバシーコントロール][13]を設定します。
+Watch [browser recordings][12] of real users interacting with your website and set [privacy controls][13] for your organization.
 
-### 開発ツール
+### Developer tools
 
-[ブラウザ開発ツール][14]を使用してアプリケーションの問題をトラブルシューティングする際に、トリガーされたログ、エラー、およびパフォーマンス情報にアクセスできます。
+Access triggered logs, errors, and performance information when troubleshooting application issues using [Browser Dev Tools][14].
 
-## その他の参考資料
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/rum/performance-monitoring
-[2]: /ja/real_user_monitoring/platform/dashboards/
-[3]: /ja/real_user_monitoring/explorer/visualize/
-[4]: /ja/monitors/types/real_user_monitoring/
-[5]: /ja/real_user_monitoring/platform/connect_rum_and_traces/
-[6]: /ja/real_user_monitoring/error_tracking/
-[7]: /ja/real_user_monitoring/browser/monitoring_page_performance/#event-timings-and-core-web-vitals
-[8]: /ja/real_user_monitoring/ios/mobile_vitals/
-[9]: /ja/real_user_monitoring/android/mobile_vitals/
-[10]: /ja/real_user_monitoring/ios/web_view_tracking/
-[11]: /ja/real_user_monitoring/android/web_view_tracking/
-[12]: /ja/real_user_monitoring/session_replay/browser/
-[13]: /ja/real_user_monitoring/session_replay/browser/privacy_options/
-[14]: /ja/real_user_monitoring/session_replay/browser/developer_tools/
+[2]: /real_user_monitoring/platform/dashboards/
+[3]: /real_user_monitoring/explorer/visualize/
+[4]: /monitors/types/real_user_monitoring/
+[5]: /real_user_monitoring/platform/connect_rum_and_traces/
+[6]: /real_user_monitoring/error_tracking/
+[7]: /real_user_monitoring/browser/monitoring_page_performance/#event-timings-and-core-web-vitals
+[8]: /real_user_monitoring/ios/mobile_vitals/
+[9]: /real_user_monitoring/android/mobile_vitals/
+[10]: /real_user_monitoring/ios/web_view_tracking/
+[11]: /real_user_monitoring/android/web_view_tracking/
+[12]: /real_user_monitoring/session_replay/browser/
+[13]: /real_user_monitoring/session_replay/browser/privacy_options/
+[14]: /real_user_monitoring/session_replay/browser/developer_tools/

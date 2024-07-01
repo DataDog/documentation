@@ -1,84 +1,84 @@
 ---
-title: Azure アカウントを Cloudcraft に接続する
+title: Connect your Azure Account with Cloudcraft
 ---
 
-この記事では、Azure アカウントを Cloudcraft に接続する手順を説明します。
+This article walks you through connecting your Azure account to Cloudcraft.
 
-## 要件
+## Requirements
 
-- [オーナーまたは管理者ロール][1]を持つ Cloudcraft ユーザー。
-- 有効な [Cloudcraft Pro サブスクリプション][2]。
-- IAM ロールの作成権限を持つ Azure アカウント。
+- A Cloudcraft user with the [Owner or Administrator role][1].
+- An active [Cloudcraft Pro subscription][2].
+- An Azure account with permission to create IAM roles.
 
-## Azure アカウントの管理
+## Manage Azure accounts
 
-### アカウントの追加
+### Add account
 
-1. Cloudcraft で **User** > **Azure accounts** に移動します。
-2. モーダルの一番下にある **Add Azure Account** をクリックします。
-3. 次のページでは、手順が順を追って表示されます。**左側のサイドバーで "App registrations" を選択**して、Azure で Cloudcraft とのインターフェイスとなる新しいアプリケーションを登録します。
-4. **Azure Active Directory** の **App registrations** ページで、**New registration** をクリックします。
-5. 以下の情報を入力します。
+1. In Cloudcraft, navigate to **User** > **Azure accounts**.
+2. At the bottom of the modal, click **Add Azure Account**.
+3. The next page provides step-by-step instructions. Click **Select "App registrations" in the left sidebar** to register a new application to interface with Cloudcraft in Azure.
+4. On the **App registrations** page in **Azure Active Directory**, click **New registration**.
+5. Enter the following information:
     - **Name**: Cloudcraft
-    - **Supported account types:**: この組織ディレクトリのアカウントのみ (シングルテナント)
-    - **Redirect URI**: このフィールドは空欄のままにします。
-6. **Register** をクリックします。
-7. アプリケーションの詳細ページで、**Application ID** と **Directory ID** をコピーします。
-8. Cloudcraft で **Application ID** と **Directory ID** を貼り付けて、**Next** をクリックします。
+    - **Supported account types**: Accounts in this organizational directory only (Single tenant)
+    - **Redirect URI**: Leave this field blank.
+6. Click **Register**.
+7. On the details page of your application, copy the **Application ID** and **Directory ID**.
+8. In Cloudcraft, paste the  **Application ID** and **Directory ID**, then click **Next**..
 
-{{< img src="cloudcraft/getting-started/connect-azure-account-with-cloudcraft/essential-ids-cloudcraft.png" alt="Azure アカウントを Cloudcraft に追加する手順と、ハイライト表示された Application ID および Directory ID フィールド。" responsive="true" style="width:100%;">}}
+{{< img src="cloudcraft/getting-started/connect-azure-account-with-cloudcraft/essential-ids-cloudcraft.png" alt="Step-by-step instructions for adding an Azure account to Cloudcraft with highlighted Application and Directory ID fields." responsive="true" style="width:100%;">}}
 
-#### クライアントシークレットの作成
+#### Create a client secret
 
-次に、Cloudcraft アプリケーションが Azure の認証サービスに対して自分自身を安全に識別できるように、クライアントシークレットを作成します。
+Next, create a client secret to allow the Cloudcraft application to securely identify itself to Azure's authentication services.
 
-**注**: クライアントシークレットの有効期限は自由に選択できます。シークレットの有効期限が切れると、Cloudcraft で新しいシークレットを登録してアカウントを更新するまで、Azure アカウントをスキャンできなくなるので注意してください。
+**Note**: You can choose your own expiration period for the client secret. Be aware that when the secret expires, you won’t be able to scan your Azure account until you register a new secret and update the account in Cloudcraft.
 
-1. Azure のアプリケーションページで、左サイドバーの **Manage** セクションの中にある **Certificates & secrets** をクリックします。
-2. **Certificates & secrets** セクションで、**New client secret** をクリックします。
-3. 以下の情報を入力します。
+1. On your application page in Azure, under the **Manage** section in the left sidebar, click **Certificates & secrets**.
+2. In the **Certificates & secrets** section, **New client secret**.
+3. Enter the following information:
     - **Description**: Cloudcraft
-    - **Expires**: 730 日 (24 か月)
-4. **Add** をクリックします。
-5. 新しく作成したシークレットの **Value** をコピーします。
-6. Cloudcraft の **Client secret** フィールドにクライアントシークレットを貼り付け、**Next** をクリックします。
+    - **Expires**: 730 days (24 months)
+4. Click **Add**.
+5. Copy the **Value** of your newly created secret.
+6. In Cloudcraft, paste the client secret in the **Client secret** field and click **Next**.
 
-#### Cloudcraft 用の IAM ユーザーの作成
+#### Create an IAM user for Cloudcraft
 
-最後に、Cloudcraft アプリケーションが Azure 環境を読み込めるように IAM ユーザーを作成します。
+Finally, create an IAM user to allow the Cloudcraft application to read your Azure environment.
 
-1. Cloudcraft で、**Open your Azure Subscriptions page** リンクをクリックして、Azure の **Subscriptions** ページを開きます。
-2. Cloudcraft で使用するサブスクリプションを選択します。
-3. サブスクリプションページで、左サイドバーの **Access control (IAM)** を選択します。
-4. **Add** をクリックし、**Add role assignment** を選択します。ロール一覧が新しいページで表示されます。
-5. **Reader** を選択し、**Next** をクリックします。
-6. 次のページで、**User, group or service principal** を選択したままにして、**Select members** をクリックします。**Cloudcraft** を検索して、選択します。
-7. **Review + assign** をクリックします。
-8. Cloudcraft で **Next** をクリックします。
+1. In Cloudcraft, click **Open your Azure Subscriptions page** link to open the **Subscriptions** page in Azure.
+2. Select the subscription you want to use with Cloudcraft.
+3. On subscription page, select **Access control (IAM)** in the left sidebar.
+4. Click **Add** and select **Add role assignment**.  A new page with a list of roles appears.
+5. Select **Reader** and click **Next**.
+6. On the next page, leave **User, group or service principal** selected and click **Select members**. Search for **Cloudcraft** and select it.
+7. Click **Review + assign**.
+8. In Cloudcraft, click **Next**.
 
-#### サブスクリプションの追加
+#### Add subscriptions
 
-アカウントを保存する前に、オプションでチームアクセスを構成することができます。
+Before saving the account, you can optionally configure team access.
 
-1. **Team access** をクリックし、Azure アカウントへのアクセスを共有するチームを選択します。この手順をスキップすると、アカウントは非公開となり、自分だけがアクセスできるようになります。
+1. Click **Team access** and select the teams to share access to the Azure account with. The account will be private and only accessible to you if you skip that step.
 
-{{< img src="cloudcraft/getting-started/connect-azure-account-with-cloudcraft/share-azure-account.png" alt="チーム共有のオプションで Azure アカウントへのアクセスを共有するチームを選択するドロップダウンメニューが表示された Cloudcraft インターフェイス。" responsive="true" style="width:100%;">}}
+{{< img src="cloudcraft/getting-started/connect-azure-account-with-cloudcraft/share-azure-account.png" alt="Cloudcraft interface showing team sharing options with a dropdown menu for selecting teams to share Azure account access." responsive="true" style="width:100%;">}}
 
-2. **Save Account** をクリックします。
+2. Click **Save Account**.
 
-これで Azure アカウントを Cloudcraft で使用する準備が整いました。
+Your Azure account is now ready to use with Cloudcraft.
 
-{{< img src="cloudcraft/getting-started/connect-azure-account-with-cloudcraft/azure-account-added.png" alt="Azure アカウントを管理する Cloudcraft インターフェースでアカウントが追加されている状態のスクリーンショット。" responsive="true" style="width:100%;">}}
+{{< img src="cloudcraft/getting-started/connect-azure-account-with-cloudcraft/azure-account-added.png" alt="Screenshot of Cloudcraft interface for managing Azure accounts with an account added." responsive="true" style="width:100%;">}}
 
-## アカウントの編集
+## Edit account
 
-アカウントを編集するには、編集したいアカウントの左側にあるグレーの鉛筆アイコンをクリックします。名前、ARN、チームアクセスなど、アカウントの詳細情報を変更できます。
+To edit an account, click the gray pencil icon to the left of the account you want to edit. You can change details of the account, such as the name, ARN, and team access.
 
-完了したら、**Save Account** をクリックします。
+When you are done, click **Save Account**.
 
-## アカウントの削除
+## Remove account
 
-アカウントを削除するには、削除したいアカウントの右側にあるゴミ箱アイコンをクリックし、**Remove** をクリックします。
+To remove an account, click the trash can icon to the right of the account you want to remove, then click **Remove**.
 
-[1]: /ja/cloudcraft/account-management/roles-and-permissions/
+[1]: /cloudcraft/account-management/roles-and-permissions/
 [2]: https://www.cloudcraft.co/pricing

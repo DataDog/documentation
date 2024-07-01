@@ -1,168 +1,163 @@
 ---
+title: Timeseries Widget
+widget_type: timeseries
+description: "Display the evolution of one or more metrics, log events, indexed spans, or process metrics over time."
 aliases:
-- /ja/graphing/widgets/timeseries/
-- /ja/dashboards/widgets/network/
-- /ja/graphing/widgets/network/
-description: 1 つ以上のメトリクス、ログイベント、インデックス化スパン、プロセスメトリクスなどの動きを経時的に表示する。
+    - /graphing/widgets/timeseries/
+    - /dashboards/widgets/network/
+    - /graphing/widgets/network/
 further_reading:
-- link: https://www.datadoghq.com/blog/full-screen-graphs
-  tag: GitHub
-  text: 全画面モードでグラフを表示しデータを調べる
-- link: /ja/dashboards/graphing_json/
-  tag: ドキュメント
-  text: JSON を使用したダッシュボードの構築
+- link: "https://www.datadoghq.com/blog/full-screen-graphs"
+  tag: Blog
+  text: Explore your data in full-screen graph mode
+- link: /dashboards/graphing_json/
+  tag: Documentation
+  text: Building Dashboards using JSON
 - link: /dashboards/guide/slo_data_source
-  tag: ガイド
-  text: ダッシュボードで SLO 履歴データをグラフ化する
-title: 時系列ウィジェット
+  tag: Guide
+  text: Graph historical SLO data on Dashboards
 ---
 
-時系列可視化機能を使用すると、1 つ以上のメトリクス、ログイベント、Indexed Span などの動きを経時的に表示できます。タイムウィンドウは、[タイムボード][1]または[スクリーンボード][2]で選択した内容によって異なります。
+The timeseries visualization allows you to display the evolution of one or more metrics, log events, or Indexed Spans over time. The time window depends on what is selected on the [timeboard][1] or [screenboard][2]:
 
-{{< img src="dashboards/widgets/timeseries/timeseries.png" alt="ホストの平均的な system.cpu.user を表示する時系列ウィジェット" style="width:90%;" >}}
+{{< img src="dashboards/widgets/timeseries/timeseries.png" alt="A timeseries widget showing the average system.cpu.user for a host" style="width:90%;" >}}
 
-## セットアップ
+## Setup
 
-### コンフィギュレーション
+### Configuration
 
-{{< img src="dashboards/widgets/timeseries/timeseries_setup.png" alt="時系列のセットアップ" style="width:90%;" >}}
+{{< img src="dashboards/widgets/timeseries/timeseries_setup.png" alt="Timeseries setup" style="width:90%;" >}}
 
-1. グラフ化するデータを選択します。
-   * メトリクス: メトリクスクエリの構成については、[クエリ作成のドキュメント][3]を参照してください。
-   * Indexed Span: Indexed Span クエリの構成については、[トレース検索に関するドキュメント][4]を参照してください。
-   * ログイベント: ログイベントクエリの構成については、[ログ検索に関するドキュメント][5]を参照してください。
+1. Choose the data to graph:
+   * Metric: See the [Querying documentation][3] to configure a metric query.
+   * Indexed Spans: See the [Trace search documentation][4] to configure an Indexed Span query.
+   * Log Events: See the [Log search documentation][5] to configure a log event query.
 
-2. [オプション](#display-options)を使用して、グラフをカスタマイズします。
+2. Customize your graph with the available [options](#display-options).
 
-## 表示オプション
+## Display options
 
-グラフは、折れ線、面積、棒グラフで表示することができます。折れ線グラフには、さらにパラメーターが含まれています。
+Graphs can be displayed as lines, areas, and bars. Line graphs contain additional parameters:
 
-| パラメーター | オプション               |
-|-----------|-----------------------|
-| Style     | 実線、破線、点線 |
-| Stroke    | 標準、細線、太線   |
+| Parameter | Options                  |
+|-----------|--------------------------|
+| Style     | Solid, dashed, or dotted |
+| Stroke    | Normal, thin, or thick   |
 
-### 色
+### Color
 
-Datadog では、どの種類のグラフについても、同じグラフ内に表示された複数のメトリクスを識別できるように、さまざまなカラーオプションを提供しています。
+For all graph types, Datadog offers various color options to differentiate multiple metrics displayed on the same graph:
 
-| パレット     | 説明                                                                                                 |
+| Palette     | Description                                                                                                 |
 |-------------|-------------------------------------------------------------------------------------------------------------|
-| Classic     | 薄い青色、濃い青色、薄い紫色、薄い黄色、黄色 (以降、これの繰り返し) の単色を使用します。    |
-| カテゴリー別 | 16 色のセットを使用して、すべての時系列ウィジェットでデータの各系列に一貫した色を適用します。 |
-| Purple      | 紫色のグラデーション。                                                                   |
-| Cool        | 緑色と青色のグラデーション。                                                           |
-| Warm        | 黄色とオレンジ色のグラデーション。                                                        |
-| Orange      | オレンジ色のグラデーション。                                                                   |
-| Gray        | 灰色のグラデーション。                                                                     |
-| 赤         | 赤色のグラデーション。                                                                      |
-| 緑       | 緑色のグラデーション。                                                                    |
-| 青        | 青色のグラデーション。                                                                     |
+| Classic     | The simple colors light blue, dark blue, light purple, purple, light yellow, and yellow (colors repeat).    |
+| Consistent | Using a set of 16 colors, applies a consistent color for each series of data across all widgets for each tag group. |
 
-折れ線グラフの場合、JSON でクエリを区切ることで、異なるメトリクスに特定のパレットを割り当てることができます。詳しくは、[グラフに適した色を選ぶ][6]のガイドをご覧ください。
+For line graphs, different metrics can be assigned specific palettes by separating the queries in JSON. For more information, see the guide for [Selecting the right colors for your graphs][6].
 
-### メトリクスのエイリアス作成
+### Sorting
 
-任意の[絞り込みタグ][6]を使用して、クエリまたは式ごとにエイリアスを作成できます。エイリアスは、グラフや凡例の表示を上書きし、メトリクス名やフィルターのリストが長い場合に便利です。クエリまたは式の末尾にある **as...** をクリックして、メトリクスのエイリアスを入力します。
+Order the graph by **Tags** or by **Values** to sort timeseries legends and stacked graphs. This only sorts the graph visualization, and does not impact the query. Toggle the **Reverse** option to sort by reverse alphabetical order or by descending values. 
 
-{{< img src="dashboards/widgets/timeseries/metric_alias.png" alt="Timeseries ウィジェットエディターで、検索クエリにエイリアスを追加する" style="width:100%;" >}}
+### Metric aliasing
 
-### イベントオーバーレイ
+Each query or formula, along with any [filtering tags][7], can be aliased. The alias overrides the display on the graph and legend, which is useful for long metric names or long lists of filters. At the end of your query or formula, click on **as...** and enter your metric alias:
 
-イベントオーバーレイは、すべてのデータソースをサポートしています。これにより、ビジネスイベントと Datadog のあらゆるサービスからのデータとの相関を容易にすることができます。
+{{< img src="dashboards/widgets/timeseries/metric_alias.png" alt="Adding an alias to a search query in the Timeseries widget editor" style="width:100%;" >}}
 
-イベントオーバーレイを使えば、組織内のアクションがアプリケーションやインフラストラクチャーのパフォーマンスにどのような影響を与えるかを素早く確認することができます。以下に、使用例をいくつか紹介します。
-- デプロイメントイベントを重ね合わせた RUM のエラーレート
-- 余分なサーバーのプロビジョニングに関連するイベントと CPU 使用率を相関させる
-- egress トラフィックと疑わしいログインアクティビティを相関させる
-- Datadog が適切なアラートで構成されていることを確認するために、あらゆる時系列データとモニターアラートを相関させる
+### Event overlay
 
-{{< img src="/dashboards/querying/event_overlay_example.png" alt="RUM のエラーレートをデプロイイベントと重ね合わせて表示する時系列ウィジェット" style="width:100%;" >}}
+The event overlay supports all data sources. This allows for easier correlation between business events and data from any Datadog service.
 
-GitHub コミット、Jenkins デプロイ、Docker 作成イベントなど、関連システムのイベントを追加して、グラフにコンテキストを追加することができます。**Event Overlays** セクションの **Add Event Overlay** をクリックし、これらのイベントを表示するためのクエリを入力します。
+With the event overlay, you can see how actions within the organization impact application and infrastructure performance. Here are some example use cases:
+- RUM error rates with deployment events overlaid
+- Correlating CPU usage with events related to provisioning extra servers
+- Correlating egress traffic with suspicious login activity
+- Correlating any timeseries data with monitor alerts to ensure that Datadog has been configured with the appropriate alerts
 
-[イベントエクスプローラー][7]と同じクエリ形式を使用します。例:
+{{< img src="/dashboards/querying/event_overlay_example.png" alt="Timeseries widgets showing RUM error rates with deployment events overlaid" style="width:100%;" >}}
 
-| クエリ                       | 説明                                                |
+You can add events from related systems to add more context to your graph, such as GitHub commits, Jenkins deploys, and Docker creation events. Click **Add Event Overlay** in the **Event Overlays** section and enter a query to display those events.
+
+Use the same query format as for the [Event Explorer][8], for example:
+
+| Query                       | Description                                                |
 |-----------------------------|------------------------------------------------------------|
-| `sources:jenkins`           | Jenkins ソースから取得されたすべてのイベントを表示します。                  |
-| `tag:role:web`              | `role:web` タグが付いたすべてのイベントを表示します。                  |
-| `tags:$<TEMPLATE_VARIABLE>` | 選択された[テンプレート変数][8]から取得されたすべてのイベントを表示します。 |
+| `sources:jenkins`           | Shows all events from the Jenkins source.                  |
+| `tag:role:web`              | Shows all events with the `role:web` tag.                  |
+| `tags:$<TEMPLATE_VARIABLE>` | Shows all events from the selected [template variable][9]. |
 
-### マーカー
+### Markers
 
-追加のデータセットにマーカーを追加するには、**Markers** セクションの **Add Marker** をクリックします。
+To add markers for additional data sets, click **Add Marker** in the **Markers** section.
 
-1. Line または Range を選択し、値または値の範囲を入力します。
-2. **Show as** フィールドで、アラートステータス/カラーを選択し、水平線を実線、太線、破線から選択します。
-3. 時系列ウィジェットの左下に表示するラベルを追加するには、Y 軸の値を定義して、**Label** チェックボックスをクリックします。
+1. Select a Line or Range and input a value or a range or values.
+2. In the **Show as** field, select an alerting status/color and choose from a solid, bold, or dashed horizontal line.
+3. To add a label that displays on the bottom left of the timeseries widget, define a value for the Y-Axis and click the **Label** checkbox.
 
-### Y 軸コントロール
+### Y-Axis controls
 
-Y 軸のコントロールは、UIとJSONエディターで利用できます。Y 軸の値や種類を設定することができます。
+Y-axis controls are available in the UI and in the JSON editor. You can set the value and type of the y-axis to:
 
-* Y 軸を特定の範囲にクリップできます。
-* パーセンテージしきい値または絶対しきい値に基づいて Y 軸の境界を自動的に変更できます。このしきい値をグラフの片側または両端 (下側と上側) に適用することで、「外れ値」系列を除外できます。
-* Y 軸の目盛を線形から対数、累乗、または平方根に変更できます。
+* Clip the y-axis to specific ranges.
+* Automatically change y-axis bounds based on an absolute value threshold. This threshold can be applied to one or both ends of the graph (lower and upper) to remove the "outlier" series.
+* Change the y-axis scale from linear to log, pow, or sqrt.
 
-使用できる構成オプションは、次のとおりです。
+The following configuration options are available:
 
-| オプション                | 必須 | 説明                                                                                                                                                                                                               |
+| Option                | Required | Description                                                                                                                                                                                                               |
 |-----------------------|----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `Min`                 | ✕       | Y 軸に表示する最小値を指定します。数値または `Auto` (デフォルト値を使用) を指定します。                                                                                                                |
-| `Max`                 | ✕       | Y 軸に表示する最大値を指定します。数値または `Auto` (デフォルト値を使用) を指定します。                                                                                                                        |
-| `Scale`               | ✕       | 目盛のタイプを指定します。使用可能な値には以下などがあります。<br>- linear: 線形目盛 (デフォルト)。<br>- log: 対数目盛。<br>- pow: 2 の累乗目盛 (2 はデフォルトです。JSON で変更できます)。<br>- sqrt: 平方根目盛。 |
-| `Always include zero` | ✕       | 常に 0 を含めるか、Y 軸をデータの範囲に合わせるかを指定します。デフォルトは、常に 0 を含めます。                                                                                                                             |
+| `Min`                 | No       | Specify the minimum value to show on the y-axis. It takes a number or `Auto` as the default value.                                                                                                                |
+| `Max`                 | No       | Specify the maximum value to show on the y-axis. It takes a number or `Auto` as the default value.                                                                                                                        |
+| `Scale`               | No       | Specifies the scale type. Possible values include:<br>- *linear*: A linear scale (default).<br>- *log*: A logarithmic scale.<br>- *pow*: A Power of 2 scale (2 is default, modify in JSON).<br>- *sqrt*: A square root scale. |
+| `Always include zero` | No       | Always include zero or fit the y-axis to the data range. The default is to always include zero.                                                                                                                             |
 
-対数関数には負の値を適用できないため、Datadog の対数目盛は、値の符号がすべて同じ (すべて正またはすべて負) の場合にのみ機能します。そうでない場合は、空のグラフが返されます。
+Because the mathematical log function does not accept negative values, the Datadog log scale only works if values are of the same sign (everything > 0 or everything < 0). Otherwise, an empty graph is returned.
 
-### 凡例のコンフィギュレーション
+### Legend configuration
 
-スクリーンボードに構成可能な凡例を追加するには、**Legend** セクションで以下のオプションから選択します。
+You can add configurable legends to your screenboards by selecting from the following options in the **Legend** section:
 
-* 自動 (デフォルト)
-* コンパクト
-* 拡張: 構成可能な値、平均、合計、最小、および最大の列
-* なし
+* Automatic (default)
+* Compact
+* Expanded: Configurable columns for value, avg, sum, min, and max
+* None
 
-タイムボードの場合、ダッシュボードが L または XL に設定されると凡例が自動的に表示されます。
+For timeboards, legends display automatically when a dashboard is set to L or XL.
 
-### コンテキストリンク
+### Context links
 
-ダッシュボードウィジェット内をクリックすると表示されるドロップダウンメニューにコンテキストリンクを追加するには、**Context Links** セクションの **Add a Context Link** をクリックします。
+To add a context link in the dropdown menu that appears when you click in a dashboard widget, click **Add a Context Link** in the **Context Links** section.
 
-コンテキストリンクの編集と削除については、[コンテキストリンク][10]を参照してください。
+For more information about editing and deleting context links, see [Context Links][10].
 
-### 全画面
+### Full screen
 
-[標準の全画面オプション][10]のほかに、前回の期間と比較する、Y 軸の目盛を調整する、変更を保存する、新しいグラフとして保存するなどの簡単な関数を適用できます。
+In addition to the [standard full screen options][11], you can apply quick functions, compare to previous time periods, adjust the Y scale, save changes, or save as a new graph.
 
-詳しくは、[フルスクリーングラフモードでデータを探る][11]をご覧ください。
+For more information, see [Explore your data in full-screen graph mode][12].
 
 ## API
 
-このウィジェットは、**ダッシュボード API** とともに使用できます。詳しくは、[ダッシュボード API][3] ドキュメントをご参照ください。
-
-時系列ウィジェットの[ウィジェット JSON スキーマ定義][13]は次のとおりです。
+This widget can be used with the **[Dashboards API][13]**. See the following table for the [widget JSON schema definition][14]:
 
 {{< dashboards-widgets-api >}}
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/dashboards/#timeboards
-[2]: /ja/dashboards/#screenboards
-[3]: /ja/dashboards/querying/
-[4]: /ja/tracing/trace_explorer/query_syntax/#search-bar
-[5]: /ja/logs/search_syntax/
-[6]: /ja/dashboards/guide/widget_colors/
-[7]: /ja/dashboards/querying/#filter
-[8]: /ja/events/
-[9]: /ja/dashboards/template_variables/
-[10]: /ja/dashboards/guide/context-links/
-[11]: /ja/dashboards/widgets/#full-screen
+[1]: /dashboards/#get-started
+[2]: /dashboards/#screenboards
+[3]: /dashboards/querying/
+[4]: /tracing/trace_explorer/query_syntax/#search-bar
+[5]: /logs/search_syntax/
+[6]: /dashboards/guide/widget_colors/
+[7]: /dashboards/querying/#filter
+[8]: /events/
+[9]: /dashboards/template_variables/
+[10]: /dashboards/guide/context-links/
+[11]: /dashboards/widgets/#full-screen
 [12]: https://www.datadoghq.com/blog/full-screen-graphs
-[13]: /ja/api/v1/dashboards/
-[14]: /ja/dashboards/graphing_json/widget_json/
+[13]: /api/latest/dashboards/
+[14]: /dashboards/graphing_json/widget_json/

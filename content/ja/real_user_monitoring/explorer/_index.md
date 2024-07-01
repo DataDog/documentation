@@ -1,60 +1,61 @@
 ---
+title: RUM Explorer
+kind: documentation
 aliases:
-- /ja/real_user_monitoring/rum_explorer
+- /real_user_monitoring/rum_explorer
 further_reading:
 - link: /real_user_monitoring/explorer/search/
-  tag: ドキュメント
-  text: RUM Explorer での検索について
-- link: https://www.datadoghq.com/blog/core-web-vitals-monitoring-datadog-rum-synthetics/#what-are-the-core-web-vitals
-  tag: ブログ
-  text: RUM でウェブに関する主な指標を監視
-- link: https://www.datadoghq.com/blog/modern-frontend-monitoring/
-  tag: ブログ
-  text: シングルページアプリケーションの監視を開始
-title: RUM エクスプローラー
+  tag: Documentation
+  text: Learn more about search in the RUM Explorer
+- link: "https://www.datadoghq.com/blog/core-web-vitals-monitoring-datadog-rum-synthetics/#what-are-the-core-web-vitals"
+  tag: Blog
+  text: Monitor Core Web Vitals with RUM
+- link: "https://www.datadoghq.com/blog/modern-frontend-monitoring/"
+  tag: Blog
+  text: Start monitoring single-page applications
 ---
 
-## 概要
+## Overview
 
-[Real User Monitoring (RUM) エクスプローラー][1]では、アプリケーションから収集したデータや RUM イベントに関する詳細な情報を調べることができます。
+The [Real User Monitoring (RUM) Explorer][1] allows you to examine data collected from your applications and granular information about your RUM events.
 
-以下が可能です。
+You can:
 
-- ユーザーセッションをナビゲートする
-- ビュー、リソース、アクションに影響をおよぼすパフォーマンス問題を調査する
-- アプリケーションのエラーやロングタスクのトラブルシューティング
+- Navigate through user sessions
+- Investigate performance issues affecting views, resources, or actions
+- Troubleshoot application errors and long tasks
 
-{{< img src="real_user_monitoring/explorer/rum-explorer-2.png" alt="RUM エクスプローラー" style="width:95%;" >}}
+{{< img src="real_user_monitoring/explorer/rum-explorer-2.png" alt="RUM Explorer" style="width:95%;" >}}
 
-## アプリケーション別に見る
+## View by application
 
-トップナビゲーションのアプリケーションセレクターを使用して、特定のアプリケーションのすべての RUM データを選択し、表示します。
+Use the application selector in the top navigation to select and view all RUM data for a specific application.
 
-{{< img src="real_user_monitoring/explorer/application-selector-2.png" alt="アプリケーションセレクターをクリックすると、特定のアプリケーションのすべての RUM データが表示されます" style="width:95%;" >}}
+{{< img src="real_user_monitoring/explorer/application-selector-2.png" alt="Click the application selector to view all RUM data for a specific application" style="width:95%;" >}}
 
-## 検索とフィルター
+## Search and filter
 
-検索バーに入力し、[RUM エクスプローラー][1]で視覚化タイプを選択することで、RUM イベントを検索・フィルタリングすることができます。興味のあるイベントのサブセットを絞り込んだり、広げたり、フォーカスを移したりすることができます。
+Search and filter your RUM events by typing in the search bar and selecting a visualization type in the [RUM Explorer][1]. You can narrow down, broaden, and shift your focus on subsets of events you are interested in.
 
-## 認可
+## Group
 
-クエリした RUM イベントを、問題に関する情報を導き出したり統合したりするのに役立つ、より上位のエンティティにグループ化することができます。イベントのパターンを特定し、サブセットでイベントを集計するには、[RUM イベントのグループ化][2]を参照してください。
+Group the RUM events you have queried into higher-level entities that may help you derive or consolidate information about an issue. To identify event patterns and aggregate events by subsets, see [Group RUM Events][2]. 
 
-クエリの作成とファセットの使用については、[検索構文][3]を参照してください。
+To start creating queries and using facets, see [Search Syntax][3]. 
 
-## 視覚化
+## Visualize 
 
-フィルターや集計に視覚化を選択することで、RUM イベントを有用な視点で表示し、決定的な情報を発見することができます。
+Select a visualization for your filters and aggregations that displays your RUM events in a helpful perspective for you to uncover decisive information. 
 
-例えば、RUM イベントをリストで表示したり、RUM データを列で整理したり、RUM テレメトリーを時系列で表示する時系列グラフで確認したりすることができます。
+For example, you can view RUM events in a list, organize RUM data into columns, and see RUM data in a timeseries graph that displays your RUM telemetry over time. 
 
-RUM データを RUM エクスプローラで視覚化するには、[RUM 視覚化の作成][4]を参照してください。
+To start visualizing RUM data in the RUM Explorer, see [Create RUM Visualizations][4].
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/rum/sessions
-[2]: /ja/real_user_monitoring/explorer/group
-[3]: /ja/real_user_monitoring/explorer/search_syntax
-[4]: /ja/real_user_monitoring/explorer/visualize
+[2]: /real_user_monitoring/explorer/group
+[3]: /real_user_monitoring/explorer/search_syntax
+[4]: /real_user_monitoring/explorer/visualize

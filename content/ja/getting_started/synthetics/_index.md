@@ -1,63 +1,63 @@
 ---
-algolia:
-  tags:
-  - 外形監視
+title: Getting Started with Synthetic Monitoring
+kind: documentation
 further_reading:
-- link: https://learn.datadoghq.com/courses/intro-to-synthetic-tests
-  tag: ラーニングセンター
-  text: Synthetic テストの紹介
+- link: "https://learn.datadoghq.com/courses/intro-to-synthetic-tests"
+  tag: Learning Center
+  text: Introduction to Synthetic Tests
 - link: /synthetics/api_tests
-  tag: ドキュメント
-  text: API テストについて
+  tag: Documentation
+  text: Learn more about API tests
 - link: /synthetics/multistep
-  tag: ドキュメント
-  text: マルチステップ API テストの詳細
+  tag: Documentation
+  text: Learn more about multistep API tests
 - link: /synthetics/browser_tests
-  tag: ドキュメント
-  text: ブラウザテストについて
+  tag: Documentation
+  text: Learn more about browser tests
 - link: /synthetics/private_locations
   tag: Documentation
-  text: プライベートロケーションの詳細
+  text: Learn more about private locations
 - link: /continuous_testing/cicd_integrations
-  tag: ドキュメント
-  text: CI パイプラインでの Synthetic テスト実行について学ぶ
-- link: https://dtdg.co/fe
+  tag: Documentation
+  text: Learn about running Synthetic tests in a CI pipeline
+- link: "https://dtdg.co/fe"
   tag: Foundation Enablement
-  text: Synthetic テストの能力を高めるためのインタラクティブなセッションに参加できます
-title: Synthetic モニタリングの概要
+  text: Join an interactive session to enhance your synthetic testing capabilities
+algolia:
+  tags: [synthetics]
 ---
 
-## 概要
+## Overview
 
-Synthetic テストでは、**世界中からのシミュレートされたリクエストとアクション**を使用して、システムとアプリケーションがどのように実行されているかを観察できます。Datadog は、バックエンドからフロントエンドまで、さまざまなネットワークレベル (`HTTP`、`SSL`、`DNS`、`WebSocket`、`TCP`、`UDP`、`ICMP`、`gRPC`) で、制御された安定した方法で Web ページと API のパフォーマンスを追跡します。障害のある動作 (リグレッション、機能の破損、応答時間の長さ、予期しないステータスコードなど) を警告します。
+Synthetic tests allow you to observe how your systems and applications are performing using **simulated requests and actions from around the globe**. Datadog tracks the performance of your webpages and APIs from the backend to the frontend, and at various network levels (`HTTP`, `SSL`, `DNS`, `WebSocket`, `TCP`, `UDP`, `ICMP`, and `gRPC`) in a controlled and stable way, alerting you about faulty behavior such as regressions, broken features, high response times, and unexpected status codes.
 
-{{< img src="getting_started/synthetics/synthetic-monitoring-overview.png" alt="Synthetic モニタリングテスト" style="width:100%;" >}}
+{{< img src="getting_started/synthetics/synthetic-monitoring-overview.png" alt="Synthetic Monitoring Tests" style="width:100%;" >}}
 
-## Synthetic テストタイプ
+## Synthetic test types
 
-Datadog は、**API テスト**、*Multistep API テスト**、*ブラウザテスト**を提供しています。
+Datadog offers **API tests**, **Multistep API tests**, and **Browser tests**.
 
-内部向けアプリケーションを監視するために、管理ロケーションまたはプライベートロケーションからテストを実行します。Synthetic テストは、手動、スケジュール、または CI/CD パイプラインから直接トリガーすることができます。
+To monitor internal-facing applications, run your tests from managed locations or private locations. Synthetic tests can be triggered manually, on a schedule, or directly from your CI/CD pipelines.
 
-## 前提条件
+## Prerequisites
 
-[Datadog アカウント][1]をまだ作成していない場合は作成します。
+If you haven't already, create a [Datadog account][1].
 
-## 初めてテストを構成する場合
+## Configure your first test
 
-Datadog を使用して最初の Synthetic テストを設定するには、次のオプションから選択します。
+To set up your first Synthetic test with Datadog, choose from the following options:
 
-- [API テストを作成][2]して、API エンドポイントのアップタイムの監視を開始します。
-- [マルチステップ API テストを作成][3]して、複数の HTTP リクエストをリンクし、API レベルで主要なワークフローの監視を開始します。
-- [ブラウザテストを作成][4]して、アプリケーションで重要なビジネストランザクションのテストを開始します。
-- [プライベートロケーションを作成][5]して、すべての Synthetic テストタイプを使用して内部アプリケーションを監視し始めます。
+- [Create an API test][2] to start monitoring your API endpoints' uptime.
+- [Create a multistep API test][3] to link several HTTP requests and start monitoring key workflows at the API level.
+- [Create a browser test][4] to start testing critical business transactions on your applications.
+- [Create a private location][5] to start monitoring internal applications using all Synthetic test types.
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://www.datadoghq.com/
-[2]: /ja/getting_started/synthetics/api_test/
-[3]: /ja/getting_started/synthetics/api_test/#create-a-multistep-api-test
-[4]: /ja/getting_started/synthetics/browser_test/
-[5]: /ja/getting_started/synthetics/private_location/
+[2]: /getting_started/synthetics/api_test/
+[3]: /getting_started/synthetics/api_test/#create-a-multistep-api-test
+[4]: /getting_started/synthetics/browser_test/
+[5]: /getting_started/synthetics/private_location/

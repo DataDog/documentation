@@ -1,102 +1,104 @@
 ---
-algolia:
-  tags:
-  - ログメトリクス
-  - メトリクスからログを生成する
+title: Generate Metrics from Ingested Logs
+kind: documentation
 aliases:
-- /ja/logs/processing/logs_to_metrics/
-- /ja/logs/logs_to_metrics/
-description: 取り込んだログからメトリクスを生成します。
+    - /logs/processing/logs_to_metrics/
+    - /logs/logs_to_metrics/
+description: 'Generate Metrics from Ingested Logs.'
 further_reading:
-- link: logs/log_configuration/processors
-  tag: ドキュメント
-  text: ログの処理方法
-- link: https://www.datadoghq.com/blog/cidr-queries-datadog-log-management/
-  tag: ブログ
-  text: CIDR 表記クエリを使用して、ネットワークトラフィックログをフィルターする
-title: 取り込んだログからメトリクスを生成する
+    - link: logs/log_configuration/processors
+      tag: Documentation
+      text: Learn how to process your logs
+    - link: "https://www.datadoghq.com/blog/cidr-queries-datadog-log-management/"
+      tag: Blog
+      text: Use CIDR notation queries to filter your network traffic logs
+algolia:
+  tags: [log metrics, generating logs from metrics]
 ---
 
-## 概要
+## Overview
 
-Datadog の [Logging without Limits][1]\* を使用すると、インデックスに含めるものと除外するものを動的に決定できます。同時に、多くのタイプのログが、長期間にわたり KPI などトレンドの追跡テレメトリーとして使用されます。ログベースのメトリクスは、インジェストストリーム全体からログデータを要約するコスト効率の高い方法です。つまり、[除外フィルター][2]を使用して調査用に保存するアイテムを制限しても、15 か月間のすべてのログデータの傾向と異常を 10 秒の粒度で視覚化できます。
+Datadog's [Logging without Limits][1]\* lets you dynamically decide what to include or exclude from your indexes for storage and query, at the same time many types of logs are meant to be used for telemetry to track trends, such as KPIs, over long periods of time. Log-based metrics are a cost-efficient way to summarize log data from the entire ingest stream. This means that even if you use [exclusion filters][2] to limit what you store for exploration, you can still visualize trends and anomalies over all of your log data at 10s granularity for 15 months.
 
-ログベースのメトリクスを使用すると、クエリや、リクエスト期間のようなログに含まれる数値の[ディストリビューションメトリクス][3]に一致するログの COUNT メトリクスを生成できます。
+With log-based metrics, you can generate a count metric of logs that match a query or a [distribution metric][3] of a numeric value contained in the logs, such as request duration.
 
-**請求について:** 取り込まれたログから生成されたメトリクスは、[カスタムメトリクス][4]として請求されます。
+**Billing Note:** Metrics created from ingested logs are billed as [Custom Metrics][4].
 
-## ログベースのメトリクスを生成する
+## Generate a log-based metric
 
-{{< img src="logs/processing/logs_to_metrics/generate_logs_to_metric.png" alt="ログをメトリクスに生成" style="width:80%;">}}
+{{< img src="logs/processing/logs_to_metrics/generate_logs_to_metric.png" alt="Generate Logs to metric" style="width:80%;">}}
 
-ログベースのメトリクスを新しく生成するには、Datadog アカウントの [Configuration ページ][5]で _[Generate Metrics][6]_ タブを選択し、**New Metric+** ボタンをクリックします。
+To generate a new log-based metric:
 
-Export メニューで "Generate new metric" を選択し、Analytics の検索からメトリクスを作成することも可能です。
+1. Navigate to the [Generate Metrics][5] page.
+1. Select the **Generate Metrics** tab.
+1. Click **+New Metric**.
 
-{{< img src="logs/processing/logs_to_metrics/metrics_from_analytics.jpg" alt="ログからメトリクスを生成" style="width:80%;">}}
+You can also create metrics from an Analytics search by selecting the "Generate new metric" option from the Export menu.
 
-### 新しいログベースのメトリクスを追加
+{{< img src="logs/processing/logs_to_metrics/metrics_from_analytics2.jpg" alt="Generate Logs to metric" style="width:80%;">}}
 
-{{< img src="logs/processing/logs_to_metrics/create_custom_metrics2.png" alt="ログからメトリクスを作成" style="width:80%;">}}
+### Add a new log-based metric
 
-1. **クエリを入力してログストリームを絞り込み**: クエリの構文は[ログエクスプローラーでの検索][7]と同じです。過去 20 分以内のタイムスタンプで取り込まれたログのみが集計の対象となります。
-2. **追跡するフィールドを選択**: `*` を選択してクエリに一致するすべてのログカウントを生成するか、ログ属性 (例: `@network.bytes_written`) を入力して数値を集計し、該当する `count`、`min`、`max`、`sum`、`avg` の集計メトリクスを作成します。ログ属性のファセットが[メジャー][8]の場合、メトリクスの値はログ属性の値になります。
-3. **`group by` にディメンションを追加**: デフォルトでは、明示的に追加しない限り、ログから生成されたメトリクスにタグは付いていません。ログに存在する属性やタグディメンション (例: `@network.bytes_written`、`env`) は、いずれもメトリクス[タグ][9]を作成するために使用できます。メトリクスタグ名は元の属性またはタグ名から @ を抜いたものとなります。
-4. **パーセンタイル集計を追加**: ディストリビューションメトリクスの場合は、オプションでパーセンタイル（p50、p75、p90、p95、p99）で集計できます。パーセンタイルのメトリクスはカスタムメトリクスとしても扱われ、[適宜請求に追加][10]されます。
-5. **メトリクスに命名**: ログベースのメトリクス名は、[カスタムメトリクスの命名規則][11]に従う必要があります。
+{{< img src="logs/processing/logs_to_metrics/create_custom_metrics2.png" alt="Create a Logs to metric" style="width:80%;">}}
 
-**注**: ログベースのメトリクスのデータポイントは、10 秒間隔で生成されます。ログベースのメトリクスに対して[ダッシュボードグラフ][12]を作成する場合、`count unique` パラメーターは 10 秒間隔内の値に基づいています。
+1. **Input a query to filter the log stream**: The query syntax is the same as for the [Log Explorer Search][6]. Only logs ingested with a timestamp within the past 20 minutes are considered for aggregation.
+2. **Select the field you would like to track**: Select `*` to generate a count of all logs matching your query or enter a log attribute (for example, `@network.bytes_written`) to aggregate a numeric value and create its corresponding `count`, `min`, `max`, `sum`, and `avg` aggregated metrics. If the log attribute facet is a [measure][7], the value of the metric is the value of the log attribute.
+3. **Add dimensions to `group by`**: By default, metrics generated from logs do not have any tags unless explicitly added. Any attribute or tag dimension that exists in your logs (for example, `@network.bytes_written`, `env`) can be used to create metric [tags][8]. Metric tags names are equal to the originating attribute or tag name, without the @.
+4. **Add percentile aggregations**: For distribution metrics, you can optionally generate p50, p75, p90, p95, and p99 percentiles. Percentile metrics are also considered custom metrics, and [billed accordingly][9].
+5. **Name your metric**: Log-based metric names must follow the [custom metric naming convention][10].
 
-{{< img src="logs/processing/logs_to_metrics/count_unique.png" alt="count unique クエリパラメーターがハイライトされた時系列グラフの構成ページ" style="width:80%;">}}
+**Note**: Data points for log-based metrics are generated at 10-second intervals. When you create a [dashboard graph][11] for log-based metrics, the `count unique` parameter is based on the values within the 10-second interval.
 
-<div class="alert alert-warning">ログベースのメトリクスは<a href="/metrics/custom_metrics/">カスタムメトリクス</a>と見なされ、それに応じて請求されます。請求への影響を避けるために、タイムスタンプ、ユーザー ID、リクエスト ID、セッション ID などの無制限または非常に高いカーディナリティ属性によるグループ化は避けてください。</div>
+{{< img src="logs/processing/logs_to_metrics/count_unique.png" alt="The timeseries graph configuration page with the count unique query parameter highlighted" style="width:80%;">}}
 
-### ログベースのメトリクスを更新する
+<div class="alert alert-warning">Log-based metrics are considered <a href="/metrics/custom_metrics/">custom metrics</a> and billed accordingly. Avoid grouping by unbounded or extremely high cardinality attributes like timestamps, user IDs, request IDs, or session IDs to avoid impacting your billing.</div>
 
-メトリクスの作成後、以下のフィールドを更新できます。
+### Update a log-based metric
 
-- Stream filter query: メトリクスに集約される一致するログの組み合わせを変更します
-- Aggregation groups: タグを更新するか、生成されたメトリクスのカーディナリティを管理します
-- パーセンタイル選択: **Calculate percentiles** ボックスへのチェックにより、パーセンタイルメトリクスを削除または生成します
+After a metric is created, the following fields can be updated:
 
-メトリクスタイプまたは名前を変更するには、新しいメトリクスを作成する必要があります。
+- Stream filter query: To change the set of matching logs to be aggregated into metrics
+- Aggregation groups: To update the tags or manage the cardinality of the generated metrics
+- Percentile selection: Check or uncheck the **Calculate percentiles** box to remove or generate percentile metrics
 
-## ログ使用メトリクス
+To change the metric type or name, a new metric must be created.
 
-{{< img src="logs/processing/logs_to_metrics/estimated_usage_metrics.png" alt="推奨される使用量メトリクス" style="width:80%;">}}
+## Logs usage metrics
 
-使用量メトリクスは、ほぼリアルタイムによる現在の Datadog 使用量の推定値です。これらにより、以下が可能になります。
+{{< img src="logs/processing/logs_to_metrics/estimated_usage_metrics.png" alt="Recommended Usage Metrics" style="width:80%;">}}
 
-- 推定使用量をグラフ化します。
-- 推定使用量に基づいてモニターを作成します。
-- 使用量の急上昇または低下の即時アラートを取得します。
-- コードの変更が使用量に及ぼす潜在的な影響をほぼリアルタイムで評価します。
+Usage metrics are estimates of your current Datadog usage in near real-time. They enable you to:
 
-ログ管理の使用量メトリクスには、より詳細な監視に使用できる 3 つのタグがあります。
+- Graph your estimated usage.
+- Create monitors around your estimated usage.
+- Get instant alerts about spikes or drops in your usage.
+- Assess the potential impact of code changes on your usage in near real-time.
 
-| タグ                     | 説明                                                           |
+Log Management usage metrics come with three tags that can be used for more granular monitoring:
+
+| Tag                     | Description                                                           |
 | ----------------------- | --------------------------------------------------------------------- |
-|  `datadog_index`        | ログを目的のインデックスに一致させるルーティングクエリを示します。  |
-|  `datadog_is_excluded`  | ログが除外クエリと一致するかどうかを示します。            |
-|  `service`              | ログイベントのサービス属性。                               |
+|  `datadog_index`        | Indicates the routing query that matches a log to an intended index.  |
+|  `datadog_is_excluded`  | Indicates whether or not a log matches an exclusion query.            |
+|  `service`              | The service attribute of the log event.                               |
 
-`datadog.estimated_usage.logs.ingested_events` メトリクスでは、追加の `status` タグを使用して、ログのステータス (`info`、`warning` など) を反映させることができます。
+An extra `status` tag is available on the `datadog.estimated_usage.logs.ingested_events` metric to reflect the log status (`info`, `warning`, etc.).
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 <br>
-\*Logging without Limits は Datadog, Inc. の商標です。
+\*Logging without Limits is a trademark of Datadog, Inc.
 
-[1]: /ja/logs/
-[2]: /ja/logs/indexes/#exclusion-filters
-[3]: /ja/metrics/distributions/#overview
-[4]: /ja/metrics/custom_metrics/
-[5]: https://app.datadoghq.com/logs/pipelines
-[6]: https://app.datadoghq.com/logs/pipelines/generate-metrics
-[7]: /ja/logs/search_syntax/
-[8]: /ja/logs/explorer/facets/#quantitative-facets-measures
-[9]: /ja/getting_started/tagging/
-[10]: /ja/account_management/billing/custom_metrics/?tab=countrategauge
-[11]: /ja/metrics/custom_metrics/#naming-custom-metrics
-[12]: /ja/dashboards/querying/
+[1]: /logs/
+[2]: /logs/indexes/#exclusion-filters
+[3]: /metrics/distributions/#overview
+[4]: /metrics/custom_metrics/
+[5]: https://app.datadoghq.com/logs/pipelines/generate-metrics
+[6]: /logs/search_syntax/
+[7]: /logs/explorer/facets/#quantitative-facets-measures
+[8]: /getting_started/tagging/
+[9]: /account_management/billing/custom_metrics/?tab=countrategauge
+[10]: /metrics/custom_metrics/#naming-custom-metrics
+[11]: /dashboards/querying/

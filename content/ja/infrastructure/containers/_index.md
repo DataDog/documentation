@@ -1,45 +1,49 @@
 ---
+title: Containers View
+kind: documentation
 aliases:
-- /ja/guides/livecontainers
-- /ja/graphing/infrastructure/livecontainers/
-- /ja/infrastructure/livecontainers
+  - /guides/livecontainers
+  - /graphing/infrastructure/livecontainers/
+  - /infrastructure/livecontainers
 further_reading:
 - link: /infrastructure/livecontainers/configuration
   tag: Documentation
-  text: コンテナビューの構成
+  text: Configure Containers View
 - link: /infrastructure/hostmap/
   tag: Documentation
-  text: ホストマップを使用してすべてのホストを 1 画面に表示
+  text: See all of your hosts together on one screen with the hostmap
 - link: /infrastructure/process/
   tag: Documentation
-  text: システムのあらゆるレベルの事象の把握
-- link: https://www.datadoghq.com/blog/monitor-kubernetes-anomalies/
-  tag: ブログ
-  text: Kubernetes Anomalies でインフラストラクチャー調査の迅速化
-- link: https://www.datadoghq.com/blog/rightsize-kubernetes-workloads/
-  tag: ブログ
-  text: Kubernetes のワークロードをライトサイジングするための実践的なヒント
-title: コンテナビュー
+  text: Understand what is going on at any level of your system
+- link: "https://www.datadoghq.com/blog/kubernetes-cpu-requests-limits/"
+  tag: Blog
+  text: A deep dive into CPU requests and limits in Kubernetes
+- link: "https://www.datadoghq.com/blog/monitor-kubernetes-anomalies/"
+  tag: Blog
+  text: Expedite infrastructure investigations with Kubernetes Anomalies
+- link: "https://www.datadoghq.com/blog/rightsize-kubernetes-workloads/"
+  tag: Blog
+  text: Practical tips for rightsizing your Kubernetes workloads
 ---
 
-Datadog の [Containers][1] ページは、環境内のすべてのコンテナをリアルタイムで可視化します。
+In Datadog, the [Containers][1] page provides real-time visibility into all containers across your environment.
 
-htop、ctop、kubectl などの基盤ツールを手本として、Containers ページはユーザーのコンテナインフラストラクチャーを完全にカバーし、解像度 2 秒のリソースメトリクス、ファセット検索、コンテナログストリーミングでテーブルを継続的に更新します。
+Taking inspiration from bedrock tools like *htop*, *ctop*, and *kubectl*, the Containers page gives you complete coverage of your container infrastructure in a continuously updated table with resource metrics at two-second resolution, faceted search, and streaming container logs.
 
-Containers ページは、[Docker][2]、[Kubernetes][3]、[ECS][4] などのコンテナ技術と連動し、動的コンポーネントのタグ付けも組み込まれて、コンテナの健全性、リソース消費、ログ、デプロイなどの詳細な全体像をリアルタイムに提供します。
+Coupled with [Docker][2], [Kubernetes][3], [ECS][4], and other container technologies, plus built-in tagging of dynamic components, the Containers page provides a detailed overview of your containers' health, resource consumption, logs, and deployment in real-time:
 
-{{< img src="infrastructure/livecontainers/live-containers-overview.png" alt="ライブコンテナでサマリーを確認" >}}
+{{< img src="infrastructure/livecontainers/live-containers-overview_2.png" alt="Live containers with summaries" >}}
 
-## セットアップ
+## Setup
 
-コンテナビューにデータを表示するには、プロセス Agent を有効にします。
+To display data on the Containers view, enable the Process Agent.
 
 {{< tabs >}}
 {{% tab "Docker" %}}
 
-`DD_PROCESS_AGENT_ENABLED` 環境変数を `true` に設定します。
+Set the `DD_PROCESS_AGENT_ENABLED` env variable to `true`.
 
-例:
+For example:
 
 ```
 -v /etc/passwd:/etc/passwd:ro
@@ -48,9 +52,9 @@ Containers ページは、[Docker][2]、[Kubernetes][3]、[ECS][4] などのコ�
 {{% /tab %}}
 {{% tab "Datadog Operator" %}}
 
-Datadog Operator では、プロセスが Agent がデフォルトで有効になります。
+The Datadog Operator enables the Process Agent by default. 
 
-検証のため、`datadog-agent.yaml` で`features.liveContainerCollection.enabled` が `true` に設定されていることを確認してください。
+For verification, ensure that `features.liveContainerCollection.enabled` is set to `true` in your `datadog-agent.yaml`:
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -70,7 +74,7 @@ spec:
 {{% /tab %}}
 {{% tab "Helm" %}}
 
-[公式の Helm チャート][1]を使用している場合、[`values.yaml`][2] ファイルで `processAgent.enabled` パラメーターを有効にします。
+If you are using the [official Helm chart][1], enable the `processAgent.enabled` parameter in your [`values.yaml`][2] file:
 
 ```yaml
 datadog:
@@ -79,9 +83,9 @@ datadog:
     enabled: true
 ```
 
-次に、Helm チャートをアップグレードします。
+Then, upgrade your Helm chart.
 
-一部のセットアップでは、Process Agent と Cluster Agent で Kubernetes クラスター名が自動検出されません。この場合、機能は起動せず、Cluster Agent ログで以下のような警告が表示されます。`Orchestrator explorer enabled but no cluster name set: disabling.`。この場合、`datadog.clusterName` を `values.yaml` でクラスター名に設定する必要があります。
+In some setups, the Process Agent and Cluster Agent cannot automatically detect a Kubernetes cluster name. If this happens, the feature does not start, and the following warning displays in the Cluster Agent log: `Orchestrator explorer enabled but no cluster name set: disabling.` In this case, you must set `datadog.clusterName` to your cluster name in `values.yaml`.
 
 ```yaml
 datadog:
@@ -97,7 +101,7 @@ datadog:
 {{% /tab %}}
 {{% tab "Amazon ECS" %}}
 
-以下の環境変数を使用して、タスク定義を更新します。
+Update your Task Definitions with the following environment variable:
 
 ```json
 {
@@ -109,61 +113,61 @@ datadog:
 {{% /tab %}}
 {{< /tabs >}}
 
-### コンフィギュレーション
-コンテナのフィルタリングや機密情報のスクラビングなどの構成オプションについては、[コンテナビューの構成][16]を参照してください。古いバージョンの Agent 用 (Datadog Agent v7.21.1 から v7.27.0 および Cluster Agent v1.9.0 から 1.11.0) にこのページをセットアップするには、[ライブコンテナのレガシー構成][17]を参照してください。
+### Configuration
+For configuration options, like filtering containers and scrubbing sensitive information, see [Configure Containers View][16]. To set up this page for older Agent versions (Datadog Agent v7.21.1 - v7.27.0 and Cluster Agent v1.9.0 - 1.11.0), see [Live Containers legacy configuration][17].
 
-## Kubernetes オーケストレータエクスプローラー
+## Kubernetes Orchestrator Explorer
 
-Containers ページ左上の **Select Resources** ボックスで、**Kubernetes** の見出しを展開表示させると、Kubernetes [オーケストレータエクスプローラー][18]でポッド、クラスター、ネームスペース、その他のリソースを確認することができます。詳細については、[オーケストレータエクスプローラーのドキュメント][19]を参照してください。
+In the **Select Resources** box at the top left of the Containers page, you can expand the **Kubernetes** heading to look at pods, clusters, namespaces, and other resources in the Kubernetes [Orchestrator Explorer][18]. For more information, see the [Orchestrator Explorer documentation][19].
 
-また、[Kubernetes ページ][20]を使用して Kubernetes のリソースの概要を見ることもできます。
+You can also use the [Kubernetes page][20] to see an overview of your Kubernetes resources.
 
-## 検索、フィルタリング、ピボット
+## Searching, filtering, and pivoting
 
-### 文字列検索
+### String search
 
-コンテナは、本質的に極めてカーディナリティの高いオブジェクトです。Datadog の柔軟な文字列検索は、コンテナ名、ID、またはイメージフィールドから一致する部分文字列を見つけます。
+Containers are, by their nature, extremely high cardinality objects. Datadog's flexible string search matches substrings in the container name, ID, or image fields.
 
-複合クエリで複数の文字列検索を組み合わせるには、以下のブール演算子を使用します。
+To combine multiple string searches into a complex query, you can use any of the following Boolean operators:
 
 `AND`
-: **積**: 両方の条件を含むイベントが選択されます（何も追加しなければ、AND がデフォルトです）。<br>**例**: `java AND elasticsearch`
+: **Intersection**: both terms are in the selected events (if nothing is added, AND is taken by default)<br> **Example**: `java AND elasticsearch`
 
 `OR`
-: **和**: いずれかの条件を含むイベントが選択されます。<br> **例**: `java OR python`
+: **Union**: either term is contained in the selected events <br> **Example**: `java OR python`
 
 `NOT` / `!`
-: **排他**: 後続の条件はイベントに含まれません。単語  `NOT` または文字 `!` のどちらを使用しても、同じ演算を行うことができます。<br> **例**: `java NOT elasticsearch` または `java !elasticsearch`
+: **Exclusion**: the following term is NOT in the event. You may use the word `NOT` or `!` character to perform the same operation<br> **Example**: `java NOT elasticsearch` or `java !elasticsearch`
 
-演算子をグループ化するには括弧を使用します。例: `(NOT (elasticsearch OR kafka) java) OR python`。
+Use parentheses to group operators together. For example, `(NOT (elasticsearch OR kafka) java) OR python`.
 
-### フィルタリングとピボット
+### Filtering and pivoting
 
-下のスクリーンショットは、あるシステムがフィルタリングによって 25 のノードからなる 1 つの Kubernetes クラスターに絞り込まれたところを示しています。コンテナの RSS および CPU 使用率をレポートする際に、コンテナに制限がプロビジョニングされている場合は、制限との比較が示されます。ここでは、このクラスターのコンテナがオーバープロビジョニングになっていることは明らかです。制限とビンパッキングを厳しくすれば、リソースの使用率を改善できます。
+The screenshot below displays a system that has been filtered down to a Kubernetes cluster of 25 nodes. RSS and CPU utilization on containers is reported compared to the provisioned limits on the containers, when they exist. Here, it is apparent that the containers in this cluster are over-provisioned. You could use tighter limits and bin packing to achieve better utilization of resources.
 
-{{< img src="infrastructure/livecontainers/filter-by.png" alt="システムを 25 のノードから 1 つの Kubernetes クラスターに絞り込み" style="width:80%;">}}
+{{< img src="infrastructure/livecontainers/filter-by.png" alt="A system that has been filter down to a Kubernetes cluster of 25 nodes" style="width:80%;">}}
 
-コンテナ環境は動的であり、追跡が困難な場合があります。下のスクリーンショットは、`kube_service` と `host` によってピボットされたビューです。システムノイズを減らすために、`kube_namespace:default` に絞り込まれています。どのサービスがどこで実行されているか、キーメトリクスの飽和状態などがわかります。
+Container environments are dynamic and can be hard to follow. The following screenshot displays a view that has been pivoted by `kube_service` and `host`—and, to reduce system noise, filtered to `kube_namespace:default`. You can see what services are running where, and how saturated key metrics are:
 
-{{< img src="infrastructure/livecontainers/hostxservice.png" alt="ホスト x サービス" style="width:80%;">}}
+{{< img src="infrastructure/livecontainers/hostxservice.png" alt="Host x services" style="width:80%;">}}
 
-ECS の `ecs_task_name` や `ecs_task_version` でピボットすると、更新時のリソース使用率の変化を把握できます。
+You could pivot by ECS `ecs_task_name` and `ecs_task_version` to understand changes to resource utilization between updates.
 
-{{< img src="infrastructure/livecontainers/tasksxversion2.png" alt="タスク x バージョン" style="width:80%;">}}
+{{< img src="infrastructure/livecontainers/tasksxversion2.png" alt="Tasks x version" style="width:80%;">}}
 
-## タグ付け
+## Tagging
 
-コンテナは、すべての既存のホストレベルのタグおよび個別のコンテナに関連付けられたメタデータを使用して[タグ付け][6]されます。
+Containers are [tagged][6] with all existing host-level tags, as well as with metadata associated with individual containers.
 
-よく使用されるオーケストレーターとのインテグレーションを含め、すべてのコンテナは `image_name` でタグ付けされます。[ECS][4] と [Kubernetes][3] には、さらにいくつかのコンテナレベルのタグが提供されます。また、各コンテナには Docker、ECS、または Kubernetes のアイコンが付くため、どれがオーケストレーション中であるかが一目でわかります。
+All containers are tagged by `image_name`, including integrations with popular orchestrators, such as [ECS][4] and [Kubernetes][3], which provide further container-level tags. Additionally, each container is decorated with Docker, ECS, or Kubernetes icons so you can tell which are being orchestrated at a glance.
 
-ECS コンテナは以下でタグ付けされます。
+ECS containers are tagged by:
 
 * `task_name`
 * `task_version`
 * `ecs_cluster`
 
-Kubernetes コンテナは以下でタグ付けされます。
+Kubernetes containers are tagged by:
 
 * `pod_name`
 * `kube_pod_ip`
@@ -175,81 +179,81 @@ Kubernetes コンテナは以下でタグ付けされます。
 * `kube_deployment`
 * `kube_cluster`
 
-[統合サービスタグ付け][7]のコンフィギュレーションがある場合、Datadog は自動的に `env`、`service`、`version` のタグを取得します。上記のタグが利用できることで、APM、ログ、メトリクス、コンテナデータを結びつけることができます。
+If you have a configuration for [Unified Service Tagging][7] in place, Datadog automatically picks up `env`, `service`, and `version` tags. Having these tags available lets you tie together APM, logs, metrics, and container data.
 
-## ビュー
+## Views
 
-Containers ページには、[散布図](#scatter-plot)および[時系列][8]ビューと、コンテナ名、ステータス、開始時刻などのフィールドでコンテナデータを整理できるテーブルが含まれています。
+The Containers page includes [Scatter Plot](#scatter-plot) and [Timeseries][8] views, and a table to better organize your container data by fields such as container name, status, and start time.
 
-#### 散布図
+#### Scatter plot
 
-散布図分析を使用すると、2 つのメトリクスを比較してコンテナのパフォーマンスをより的確に把握できます。
+Use the scatter plot analytic to compare two metrics with one another in order to better understand the performance of your containers.
 
-Containers ページの展開可能な **Summary Graphs** セクションで、"Scatter Plot" と "Timeseries" タブを切り替えることができます。
+You can switch between the "Scatter Plot" and "Timeseries" tabs in the collapsible **Summary Graphs** section in the Containers page:
 
-{{< img src="infrastructure/livecontainers/scatterplot_selection.png" alt="Scatter Plot を選択" style="width:80%;">}}
+{{< img src="infrastructure/livecontainers/scatterplot_selection.png" alt="Scatter plot selection" style="width:80%;">}}
 
-デフォルトでは、グラフは `short_image` タグキーでグループ化されます。ドットのサイズは、各グループ内のコンテナの数を表します。ドットをクリックすると、グループに参加しているすべてのコンテナとホストが表示されます。
+By default, the graph groups by the `short_image` tag key. The size of each dot represents the number of containers in that group, and clicking on a dot displays the individual containers and hosts that contribute to the group.
 
-散布図分析の上部にあるクエリを使用して、散布図分析を制御できます。
+The query at the top of the scatter plot analytic allows you to control your scatter plot analytic:
 
-* 表示するメトリクスの選択。
-* 2 つのメトリクスの集計方法の選択。
-* X 軸と Y 軸の目盛の選択 (Linear/Log)。
+* Selection of metrics to display.
+* Selection of the aggregation method for both metrics.
+* Selection of the scale of both X and Y axis (*Linear*/*Log*).
 
 {{< img src="infrastructure/livecontainers/scatterplot.png" alt="Scatter plot" style="width:80%;">}}
 
-#### リアルタイムの監視
+#### Real-time monitoring
 
-コンテナページをアクティブに使用している間、メトリクスは 2 秒の解像度で収集されます。これは、CPU などの揮発性のメトリクスで重要です。バックグラウンドでは、履歴を目的として、10 秒の解像度でメトリクスが収集されます。
+While actively working with the containers page, metrics are collected at a 2-second resolution. This is important for volatile metrics such as CPU. In the background, for historical context, metrics are collected at 10s resolution.
 
-### コンテナログ
+### Container logs
 
-`docker logs -f` や `kubectl logs -f` などのコンテナのストリーミングログを Datadog で表示します。テーブル内のコンテナをクリックして調べることができます。*Logs* タブをクリックすると、[Live Tail][13] からのリアルタイムデータや過去の任意の時間のインデックス化されたログが表示されます。
+View streaming logs for any container like `docker logs -f` or `kubectl logs -f` in Datadog. Click any container in the table to inspect it. Click the *Logs* tab to see real-time data from [live tail][13] or indexed logs for any time in the past.
 
 #### Live tail
 
-Live Tail を使用すると、すべてのコンテナログがストリーミングされます。ストリームを一時停止すると、高速に書き込まれているログを読みやすくなります。一時停止を解除すると、ストリーミングが継続されます。
+With live tail, all container logs are streamed. Pausing the stream helps you read logs that are quickly being written; unpause to continue streaming.
 
-簡単な文字列マッチングでストリーミングログを検索できます。詳細については、[Live Tail][13]を参照してください。
+Streaming logs can be searched with simple string matching. See [Live Tail][13] for more details.
 
-**注**: ストリーミングログは永続化されません。新しい検索を入力するか、ページをリフレッシュすると、ストリームはクリアされます。
+**Note**: Streaming logs are not persisted, and entering a new search or refreshing the page clears the stream.
 
-{{< img src="infrastructure/livecontainers/livecontainerlogssidepanel.mp4" alt="ログサイドパネルのプレビュー" video="true" >}}
+{{< img src="infrastructure/livecontainers/livecontainerlogssidepanel.mp4" alt="Preview Logs Side panel" video="true" >}}
 
-#### インデックス化されたログ
+#### Indexed logs
 
-対応するタイムフレームを選択することで、インデックス化して永続化するように選択したログを表示できます。インデックス化を使用すると、タグやファセットを使用してログをフィルタリングできます。たとえば、Error 状態のログを検索するには、検索ボックスに status:error と入力します。オートコンプリートによって目的のタグが見つけやすくなります。ログの重要な属性が既にタグに保存されているため、必要に応じて検索、フィルタリング、集計を行うことができます。
+You can see indexed logs that you have chosen to index and persist by selecting a corresponding timeframe. Indexing allows you to filter your logs using tags and facets. For example, to search for logs with an Error status, type status:error into the search box. Autocompletion can help you locate the particular tag that you want. Key attributes about your logs are already stored in tags, which enables you to search, filter, and aggregate as needed.
 
-{{< img src="infrastructure/livecontainers/errorlogs.png" alt="ログサイドパネルのプレビュー" style="width:100%;">}}
+{{< img src="infrastructure/livecontainers/errorlogs.png" alt="Preview Logs Side panel" style="width:100%;">}}
 
-## 注意事項と既知の問題
+## Notes and known issues
 
-* リアルタイム (2 秒) データ収集は 30 分後にオフになります。リアルタイム収集を再開するには、ページをリフレッシュします。
-* RBAC 設定によって Kubernetes のメタデータ収集を制限できます。[Datadog Agent の RBAC エンティティ][14]を参照してください。
-* Kubernetes の `health` 値は、コンテナの readiness プローブです。liveness プローブではありません。
+* Real-time (2s) data collection is turned off after 30 minutes. To resume real-time collection, refresh the page.
+* RBAC settings can restrict Kubernetes metadata collection. See the [RBAC entities for the Datadog Agent][14].
+* In Kubernetes the `health` value is the containers' readiness probe, not its liveness probe.
 
-## その他の参考資料
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/containers
-[2]: /ja/integrations/docker_daemon/
-[3]: /ja/agent/kubernetes/
-[4]: /ja/agent/amazon_ecs/
-[5]: /ja/infrastructure/livecontainers/configuration
-[6]: /ja/tagging/assigning_tags?tab=agentv6v7#host-tags
-[7]: /ja/getting_started/tagging/unified_service_tagging
-[8]: /ja/dashboards/widgets/timeseries/
-[9]: /ja/logs
-[10]: /ja/metrics
-[11]: /ja/tracing
-[12]: /ja/events
-[13]: /ja/logs/explorer/live_tail
+[2]: /integrations/docker_daemon/
+[3]: /agent/kubernetes/
+[4]: /agent/amazon_ecs/
+[5]: /infrastructure/livecontainers/configuration
+[6]: /tagging/assigning_tags?tab=agentv6v7#host-tags
+[7]: /getting_started/tagging/unified_service_tagging
+[8]: /dashboards/widgets/timeseries/
+[9]: /logs
+[10]: /metrics
+[11]: /tracing
+[12]: /events
+[13]: /logs/explorer/live_tail
 [14]: https://github.com/DataDog/datadog-agent/blob/7.23.1/Dockerfiles/manifests/cluster-agent/rbac.yaml
 [15]: https://github.com/DataDog/helm-charts/tree/master/charts/datadog
-[16]: /ja/infrastructure/containers/configuration
-[17]: /ja/infrastructure/faq/live-containers-legacy-configuration
+[16]: /infrastructure/containers/configuration
+[17]: /infrastructure/faq/live-containers-legacy-configuration
 [18]: https://app.datadoghq.com/orchestration/overview
-[19]: /ja/infrastructure/containers/orchestrator_explorer/
-[20]: /ja/infrastructure/containers/kubernetes_resources
+[19]: /infrastructure/containers/orchestrator_explorer/
+[20]: /infrastructure/containers/kubernetes_resources

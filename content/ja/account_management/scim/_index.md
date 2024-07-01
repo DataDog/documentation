@@ -1,64 +1,65 @@
 ---
-algolia:
-  tags:
-  - scim
-  - アイデンティティプロバイダー
-  - IdP
+title: User Provisioning with SCIM
 further_reading:
-- link: /account_management/scim/azure/
-  tag: ドキュメント
-  text: Azure Active Directory を使用した SCIM の構成
-- link: observability_pipelines/architecture/preventing_data_loss
-  tag: ドキュメント
-  text: Okta を使用した SCIM の構成
-title: SCIM によるユーザープロビジョニング
+    - link: /account_management/scim/azure/
+      tag: Documentation
+      text: Configure SCIM with Azure Active Directory
+    - link: account_management/scim/okta
+      tag: Documentation
+      text: Configure SCIM with Okta
+algolia:
+  tags: [scim, identity provider, IdP]
 ---
 
-## 概要
+<div class="alert alert-info">
+SCIM is only available for the Enterprise plan.
+</div>
 
-SCIM (System for Cross-domain Identity Management) は、ユーザープロビジョニングの自動化を可能にするオープンスタンダードです。SCIM を使用すると、組織のアイデンティティプロバイダー (IdP) と同期して、Datadog 組織のユーザーを自動的にプロビジョニングおよびデプロビジョニングすることができます。
+## Overview
 
-### サポートされる機能
+The System for Cross-domain Identity Management, or SCIM, is an open standard that allows for the automation of user provisioning. Using SCIM, you can automatically provision and deprovision users in your Datadog organization in sync with your organization's identity provider (IdP).
 
-- Datadog にユーザーを作成する (初回ログイン時にメール確認が必要です。[メール確認][1]を参照してください)
-- アクセスが不要になったユーザーを Datadog から削除する
-- アイデンティティプロバイダーと Datadog 間のユーザー属性の同期を維持する
-- Datadog へのシングルサインオン (推奨)
+### Supported capabilities
 
-Datadog では、Azure Active Directory (Azure AD) と Okta アイデンティティプロバイダーを使用した SCIM がサポートされています。SCIM を構成するには、お使いの IdP のドキュメントを参照してください。
+- Create users in Datadog (Email verification is required for first login, see [email verification][1])
+- Remove users in Datadog when they no longer require access
+- Keep user attributes synchronized between the identity provider and Datadog
+- Single sign-on to Datadog (recommended)
+
+Datadog supports using SCIM with the Azure Active Directory (Azure AD) and Okta identity providers. To configure SCIM, see the documentation for your IdP:
 - [Azure AD][2]
 - [Okta][3]
 
-### 前提条件
+### Prerequisites
 
-Datadog の SCIM は、Enterprise プランに含まれる高度な機能です。
+SCIM in Datadog is an advanced feature included in the Enterprise plan.
 
-このドキュメントは、組織がアイデンティティプロバイダーを使用してユーザーアイデンティティを管理していることを前提としています。
+This documentation assumes your organization manages user identities using an identity provider.
 
-Datadog では、SCIM の構成時にサービスアカウントのアプリケーションキーを使用して、アクセスの中断を回避することを強くお勧めします。詳細については、[SCIM でサービスアカウントを使用する][4]を参照してください。
+Datadog strongly recommends that you use a service account application key when configuring SCIM to avoid any disruption in access. For further details, see [using a service account with SCIM][4].
 
-SAML と SCIM を併用する場合、Datadog は、アクセスの不一致を避けるために、SAML のジャストインタイム (JIT) プロビジョニングを無効にすることを強く推奨します。SCIM だけでユーザープロビジョニングを管理します。
+When using SAML and SCIM together, Datadog strongly recommends disabling SAML just-in-time (JIT) provisioning to avoid discrepancies in access. Manage user provisioning through SCIM only.
 
-## SCIM でサービスアカウントを使用する
+## Using a service account with SCIM
 
-SCIM を有効にするには、[アプリケーションキー][5]を使用してアイデンティティプロバイダーと Datadog アカウント間の接続を保護する必要があります。各アプリケーションキーは特定のユーザーまたはサービスアカウントによって制御されます。
+To enable SCIM, you must use an [application key][5] to secure the connection between your identity provider and your Datadog account. A specific user or service account controls each application key.
 
-SCIM を有効化するためにユーザーに紐付けられているアプリケーションキーを使用し、そのユーザーが組織を離れた場合、そのユーザーの Datadog アカウントはデプロビジョニングされます。ユーザー固有のアプリケーションキーは失効し、SCIM インテグレーションは永久に切断され、組織内のユーザーは Datadog にアクセスできなくなります。
+If you use an application key tied to a user to enable SCIM and that user leaves your organization, their Datadog account becomes deprovisioned. That user-specific application key gets revoked, and you permanently break your SCIM integration, preventing users in your organization from accessing Datadog.
 
-データへのアクセスを失わないために、Datadog は SCIM 専用の[サービスアカウント][6]を作成することを強く推奨します。そのサービスアカウント内で、SCIM インテグレーションで使用するアプリケーションキーを作成します。
+To avoid losing access to your data, Datadog strongly recommends that you create a [service account][6] dedicated to SCIM. Within that service account, create an application key to use in the SCIM integration.
 
-## メール確認
+## Email verification
 
-SCIM で新規ユーザーを作成すると、そのユーザーにメールが送信されます。初めてアクセスする場合は、メールで共有された招待リンクからログインする必要があります。リンクは 2 日間有効です。有効期限が切れた場合は、[ユーザー設定ページ][7]に移動し、ユーザーを選択して招待リンクを再送信してください。
+Creating a new user with SCIM triggers an email to the user. For first time access, you are required to log in through the the invite link shared by email. The link is active for 2 days. If it expires, go to the [user settings page][7] and select a user to resend an invite link.
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/account_management/scim/#email-verification
-[2]: /ja/account_management/scim/azure
-[3]: /ja/account_management/scim/okta
-[4]: /ja/account_management/scim/#using-a-service-account-with-scim
-[5]: /ja/account_management/api-app-keys
-[6]: /ja/account_management/org_settings/service_accounts
+[1]: /account_management/scim/#email-verification
+[2]: /account_management/scim/azure
+[3]: /account_management/scim/okta
+[4]: /account_management/scim/#using-a-service-account-with-scim
+[5]: /account_management/api-app-keys
+[6]: /account_management/org_settings/service_accounts
 [7]: https://app.datadoghq.com/organization-settings/users

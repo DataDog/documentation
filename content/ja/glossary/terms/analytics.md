@@ -1,6 +1,6 @@
 ---
+title: analytics
 core_product:
-- log management
-title: 分析
+  - log management
 ---
-ログ分析は、調査や探索のためにログをクエリし、グループ化し、視覚化するプロセスです。
+Log analytics is the process of querying, grouping, and visualizing logs for investigation and exploration.

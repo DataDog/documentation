@@ -1,49 +1,54 @@
 ---
+title: Error Budget Alerts
+kind: documentation
+description: "Use Monitors to alert off of the error budget consumption of an SLO"
 aliases:
-- /ja/monitors/service_level_objectives/error_budget/
-description: SLO のエラーバジェットの消費を警告するためにモニターを使用する
+- /monitors/service_level_objectives/error_budget/
 further_reading:
 - link: /service_management/service_level_objectives/
   tag: Documentation
-  text: サービスレベル目標の概要
-title: エラー予算アラート
+  text: Overview of Service Level Objectives
 ---
 
-## 概要
+## Overview
 
-SLO エラーバジェットアラートは閾値に基づき、SLO のエラーバジェットの一定の割合が消費されなかったときに通知します。たとえば、対象とする 7 日間でエラーバジェットの 75% が消費されたらアラート、50% が消費されたら警告（オプション）のように設定します。
+SLO error budget alerts are threshold based and notify you when a certain percentage of your SLO's error budget has been consumed. For example, alert me if 75% of the error budget for my 7-day target is consumed. Warn me if 50% is consumed (optional).
 
-**注:** エラーバジェットアラートは、メトリクスモニターの種類（メトリクス、インテグレーション、APM メトリクス、異常検知、予測値、外れ値モニター）のみで構成された[メトリクスベースの SLO][1] または[モニターベースの SLO][2] でのみ利用可能です。
+**Note:** Error budget alerts are available for the following SLO types:
 
-*エラーバジェット*を含む SLO に関する主要な用語の説明については、[サービスレベル目標][3]を参照してください。
+- [Metric-based SLOs][1], 
+- [Monitor-based SLOs][2] that are only composed of Metric Monitor types (Metric, Integration, APM Metric, Anomaly, Forecast, or Outlier Monitors), and
+- [Time Slice SLOs][8]
 
-{{< img src="service_management/service_level_objectives/error_budget_alert_config.png" alt="エラーバジェットアラートのコンフィギュレーション">}}
+For a description of key terminology around SLOs, including *error budgets*, see [Service Level Objectives][3].
 
-## モニターの作成
+{{< img src="service_management/service_level_objectives/slo-error-budget-alert-v2.png" alt="Error budget alert configuration">}}
 
-1. [SLO ステータスページ][4]に移動します。
-2. 新しい SLO を作成、または既存のものを編集し、**Save and Set Alert** ボタンをクリックします。既存の SLO の場合は、SLO 詳細のサイドパネルの **Set up Alerts** ボタンをクリックすると、アラートのコンフィギュレーションに直接アクセスできます。
-3.  **Step 1: Setting alerting conditions** の **Error Budget**  タブを選択
-4. 過去の `target` 日数において、エラーバジェットの消費割合が `threshold` を超えるとアラートをトリガーするタイミングを設定します。
-。
-4. **Say what's happening** セクションと **Notify your team** セクションに、[通知情報][5]を追加します。
-5. SLO コンフィギュレーションページで **Save and Set Alert** ボタンをクリックします。
+## Monitor creation
 
-{{< img src="service_management/service_level_objectives/save_set_alert.png" alt="SLO を保存してエラーバジェットアラートをセットアップ">}}
+1. Navigate to the [SLO status page][4].
+2. Create a new SLO or edit an existing one, then click the **Save and Set Alert** button. For existing SLOs, you can also click the **Set up Alerts** button in the SLO detail side panel to take you directly to the alert configuration.
+3. Select the **Error Budget** tab in **Step 1: Setting alerting conditions**.
+4. Set an alert to trigger when the percentage of the error budget consumed is above the `threshold`.
+over the past `target` number of days.
+4. Add [Notification information][5] in the **Configure notifications and automations** section.
+5. Click the **Create & Set Alert** button on the SLO configuration page.
 
-### API および Terraform
+{{< img src="service_management/service_level_objectives/slo_create_set_alert.png" alt="Create SLO and set up an error budget alert" style="width:80%;">}}
 
-[create-monitor API エンドポイント][6]を使用して、SLO エラーバジェットアラートを作成することができます。以下は、SLO のエラーバジェットの 75% 以上が消費されたときに警告を発する SLO モニターのクエリ例です。*slo_id* をバーンレートアラートを構成する SLO の英数字 ID に置き換え、*time_window* を 7d、30d、または 90d のいずれかに置き換えます (SLO の構成に使用するターゲットによって異なります)。
+### API and Terraform
+
+You can create SLO error budget alerts using the [create-monitor API endpoint][6]. Below is an example query for an SLO monitor, which alerts when more than 75% of the error budget of an SLO is consumed. Replace *slo_id* with the alphanumeric ID of the SLO you wish to configure a burn rate alert on and replace *time_window* with one of 7d, 30d or 90d - depending on which target is used to configure your SLO:
 
 ```
 error_budget("slo_id").over("time_window") > 75
 ```
 
-また、[Terraform の datadog_monitor リソース][7]を使用して SLO エラーバジェットアラートを作成することも可能です。以下は、上記と同じクエリ例を使用して、メトリクスベースの SLO にエラーバジェットアラートを構成する `.tf` の例です。
+In addition, SLO error budget alerts can also be created using the [datadog_monitor resource in Terraform][7]. Below is an example `.tf` for configuring an error budget alert for a metric-based SLO using the same example query as above.
 
-**プロバイダーバージョン v2.7.0 以前と v2.13.0 以降の場合**
+**For provider versions v2.7.0 or earlier and v2.13.0 or later**
 
-**注:** SLO エラーバジェットアラートは、Terraform プロバイダー v2.7.0 以前および v2.13.0 以降のみでサポートされています。v2.7.0 から v2.13.0 の間のバージョンはサポートされていません。
+**Note:** SLO error budget alerts are only supported in Terraform provider v2.7.0 or earlier and in provider v2.13.0 or later. Versions between v2.7.0 and v2.13.0 are not supported.
 
 ```
 resource "datadog_monitor" "metric-based-slo" {
@@ -62,15 +67,16 @@ resource "datadog_monitor" "metric-based-slo" {
 }
 ```
 
-## その他の参考資料
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /ja/service_management/service_level_objectives/metric/
-[2]: /ja/service_management/service_level_objectives/monitor/
-[3]: /ja/service_management/service_level_objectives/#key-terminology
+[1]: /service_management/service_level_objectives/metric/
+[2]: /service_management/service_level_objectives/monitor/
+[3]: /service_management/service_level_objectives/#key-terminology
 [4]: https://app.datadoghq.com/slo
-[5]: /ja/monitors/notify/
-[6]: /ja/api/v1/monitors/#create-a-monitor
+[5]: /monitors/notify/
+[6]: /api/v1/monitors/#create-a-monitor
 [7]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/monitor
+[8]: /service_management/service_level_objectives/time_slice

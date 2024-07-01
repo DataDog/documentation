@@ -1,137 +1,136 @@
 ---
-algolia:
-  tags:
-  - logging without limits
+title: Logging Without LimitsTM Guide
+kind: guide
 further_reading:
 - link: /logs/explorer/
-  tag: ドキュメント
-  text: ログエクスプローラーの詳細
-- link: /logs/explorer/#patterns
-  tag: ドキュメント
-  text: ログパターンビューの概要
+  tag: Documentation
+  text: Learn more about Log Explorer
+- link: "/logs/explorer/#patterns"
+  tag: Documentation
+  text: Get familiar with the Logs pattern view
 - link: /logs/live_tail/
-  tag: ドキュメント
-  text: Live Tail のご紹介
+  tag: Documentation
+  text: Explore Live Tail
 - link: /logs/logs_to_metrics/
-  tag: ドキュメント
-  text: 収集されたログからメトリクスを生成する方法
-kind: ガイド
-title: Logging Without Limits™ ガイド
+  tag: Documentation
+  text: Learn how to generate metrics from ingested logs
+algolia:
+  tags: [logging without limits]
 ---
 
 {{< img src="logs/lwl_marketecture_20231030.png" alt="Logging without LimitsTM" >}}
 
-## 概要
+## Overview
 
-クラウドベースのアプリケーションは、毎分数百万というペースでログを生成できますが。すべてのログに価値があるわけではなく、またその重要度もマチマチです。そこで、Datadog の [Logging without Limits™][1] は、[ログの取り込みとインデックス化][2]を切り離すことで柔軟に対応します。
+Cloud-based applications can generate logs at a rate of millions per minute. But because your logs are not all and equally valuable at any moment, Datadog [Logging without LimitsTM][1] provides flexibility by decoupling [log ingestion and indexing][2].
 
-このガイドでは、ログエクスポローラーを構造化し KPI をモニターするのに役立つ、Logging Without Limits™ の主要な機能、 [パターン](#2-大量のログパターンを識別)、[除外フィルター](#3-除外フィルターログパターンを作成)、[ログベースのカスタムメトリクス](#4-除外されたログを追跡するメトリクスを作成)、 [モニター](#異常検知モニターを作成)を紹介します。
+This guide identifies key components of Logging Without LimitsTM such as [Patterns](#2-identify-high-volume-logging-patterns), [Exclusion Filters](#3-create-a-log-pattern-exclusion-filter), [Custom log-based metrics](#4-generate-metrics-to-track-excluded-logs), and [Monitors](#create-an-anomaly-detection-monitor) that can help you better organize Log Explorer and monitor your KPIs over time.
 
-## 1. 最多ログのサービスステータスを特定
+## 1. Identify your most logged service status
 
-最多ログサービスの中にはさまざまなログがあり、トラブルシューティングに関係のないものもあります。たとえば、大規模な障害時やイベントの際に、400 番台や 500 番台の応答コードログのみを調べる場合、ログエクスポローラーから 200 番台のものを除外することでトラブルシューティングを円滑に進めることができます。最初に対応するサービスを特定することで、最も多くのログを生み出すサービスステータスを特定し、[ログエクスポローラービュー][3]から除外すべきものを判断することができます。
+Your most logged service contains several logs, some of which may be irrelevant for troubleshooting. For example, you may want to investigate every 4xx and 5xx response code log, but excluded every 200 response code log from Log Explorer to expedite troubleshooting during a major outage or event. By identifying the corresponding service first, you can quickly track down which service status produces the most logs and is best to exclude from the [Log Explorer view][3].
 
-{{< img src="logs/guide/getting-started-lwl/identify_logging_service.mp4" alt="最多ログのサービスステータスを特定" video=true style="width:100%;">}}
+{{< img src="logs/guide/getting-started-lwl/identify_logging_service.mp4" alt="Identify a most logging service status" video=true style="width:100%;">}}
 
-**最多ログのサービスステータスを特定するには**:
+**To identify your most logged service status**:
 
-1. ログエクスポローラーで、検索バーの横にある**グラフビュー**を選択。
-2. 検索バーの下で、カウントを `*`、`service`ごとにグループ化、`top 10` に制限と設定。
-3. [コントロールを非表示] の横にあるドロップダウンメニューから **Top List** を選択。
-4. 一番上にあるサービスをクリックし、メニューで **search for** を選択。これによりサービスファセットに基づいた検索が始まり、検索バーで確認できます。
-5. `service` ごとにグループ化を `status` ごとにグループ化に切り替え。これにより、サービスに関するトップステータスリストが作成されます。
-6. 一番上にあるステータスをクリックし、メニューで **search for** を選択。これによりステータスファセットが検索に追加されます。
+1. In Log Explorer, select **graph view** located next to the search bar.
+2. Below the search bar, set count `*` group by `service` and limit to `top 10`.
+3. Select **Top List** from the dropdown menu next to hide controls.
+4. Click on the first listed service and select **search for** in the populated menu. This generates a search, which is visible in the search bar above, based on your service facet.
+5. Switch group by `service` to group by `status`. This generates a top statuses list for your service.
+6. Click on the first listed status and select **search for** in the populated menu. This adds your status facet to the search.
 
-**注**: この手順は、大量のログクエリに適用しトップリストを生成する際に利用できます。グループ化に使えるファセットの一例として、`host`、`network.client.ip` 対 `service`、`status`  などがあります。
+**Note**: These steps are applicable to any high volume logging query to generate a top list. You can group by any facet, such as `host` or `network.client.ip` versus `service` or `status`.
 
-## 2. 大量のログパターンを特定
+## 2. Identify high volume logging patterns
 
-最多ログのサービステータスを特定したら、ログエクスポローラーの左上にあるグラフビューの隣から、[パターンビュー][4]に切り替え、選択したコンテキストの Log Patterns を自動的に表示します。
+Now that you have identified your most logging service status, switch to the [patterns view][4], located next to the graph view in the top left of Log Explorer, to automatically see your log patterns for the selected context.
 
-コンテキストはタイムレンジと検索クエリで構成されます。それぞれのパターンは強調表示されるので、その特徴的な機能を簡単に確認できます。ミニグラフにはログ量の大まかなタイムラインが表示されるため、あるパターンと別のパターンの違いを見ることができます。パターン内で変化するログのセクションは強調表示されるため、ログライン全体での違いを一目で確認できます。
+A context is composed of a time range and a search query. Each pattern comes with highlights to get you straight to its characteristic features. A mini graph displays a rough timeline for the volume of its logs to help you identify how that pattern differs from other patterns. Sections of logs that vary within the pattern are highlighted to help you quickly identify differences across log lines.
 
-除外するログパターンをクリックし、そこに含まれるログのサンプルを表示。
+Click on the log pattern that you would like to exclude to see a sample of underlying logs.
 
-{{< img src="logs/guide/getting-started-lwl/patterns_context_panel.jpg" alt="パターンコンテキスト" style="width:100%;">}}
+{{< img src="logs/guide/getting-started-lwl/patterns_context_panel.jpg" alt="Patterns Context" style="width:100%;">}}
 
-パターンビューは、ノイズの多いパターンを特定しフィルタリングする際に役立ちます。パターンに一致するログ数を、サービスとステータスに分けて表示します。一番上のパターンをクリックすると、ステータスに関連するイベントの詳細なログが表示されます。コンテキストパネルには、最もノイズの多いステータスパターンに関する情報が表示されます。
+The patterns view is helpful when identifying and filtering noisy patterns. It shows the number of logs matching a pattern, split by service and status. Click on the first pattern to view a detailed log of events relating to your status. A contextual panel is populated with information about your noisiest status pattern.
 
-## 3. 除外フィルターログパターンを作成
+## 3. Create a log pattern exclusion filter
 
-パターンのコンテキストパネルには、ログパターンのすべてのインスタンス（イベント）が一覧表示され、選択したパターンに基づいたカスタム検索クエリが作成されます。除外フィルターでこのクエリを使用して、インデックスからこれらのログを削除します。
+The pattern context panel lists every instance (event) of a log pattern and creates a custom search query based on the selected pattern. Use this query in an exclusion filter to remove those logs from your index.
 
-**除外フィルターを作成するには**:
+**To create an exclusion filter**:
 
-1. パターンビューリストにあるパターンをクリック。
-2. 右上の **Add Exclusion Filter** ボタンをクリックします。このパターンのログの半分以下が 1 つのインデックスに該当する場合、このボタンは無効になります。
-3. Log Index Configuration ページが新しいタブで開き、そのパターンのログの大部分が表示されるインデックスの除外フィルターがあらかじめ入力されています。
-4. 除外フィルターには、パターンに関連する自動生成された検索クエリが入力されます。フィルター名を入力し、除外率を設定し、新しい除外フィルターを保存します。
+1. Click on a pattern from the pattern view list.
+2. Click the **Add Exclusion Filter** button in the top right corner. This button is disabled if less than half of the logs in this pattern fall into a single index.
+3. The Log Index Configuration page opens in a new tab with a pre-filled exclusion filter for the index where the majority of the logs for that pattern show up.
+4. The exclusion filter is populated with an automatically generated search query associated with the pattern. Input the filter name and set an exclusion percentage and then save the new exclusion filter.
 
-{{< img src="logs/guide/getting-started-lwl/exclusion_filter_new.mp4" alt="除外フィルター" video=true style="width:100%;">}}
+{{< img src="logs/guide/getting-started-lwl/exclusion_filter_new.mp4" alt="Exclusion Filter" video=true style="width:100%;">}}
 
-**注**: ログが複数の除外フィルターに一致した場合は、最初の除外フィルター規則だけが適用されます。複数の除外フィルターによってログが何度もサンプリングされたり除外されることはありません。
+**Note**: If a log matches several exclusion filters, only the first exclusion filter rule is applied. A log is not sampled or excluded multiple times by different exclusion filters.
 
-この例では、サービス `email-api-py`、ステータス `INFO` パターン `response code from ses 200` が除外フィルターでフィルタリングされています。このような大量のログパターンをログエクスプローラーから削除することで、ノイズを減らし、問題をより早く特定することができます。しかし、これらのログは、インデックス作成から**除外されるだけです**。これらはまだ取り込まれ、[Live Tail][5] で見ることができ、[ログアーカイブ][6]に送ることができ、または[メトリクスの生成][7]に使用することができます。
+In this example, the service `email-api-py`, status `INFO` pattern `response code from ses 200` is filtered with an exclusion filter. Removing any high volume logging pattern similar to this one from Log Explorer helps you reduce noise and identify issues quicker. However, these logs are **only** excluded from indexing. They are still ingested and available to view in [Live Tail][5] and can be sent to [log archives][6] or used to [generate metrics][7].
 
-{{< img src="logs/guide/getting-started-lwl/live_tail.png" alt="ログのリストと時間枠のドロップダウンを表示した Live Tail のページ" style="width:100%;">}}
+{{< img src="logs/guide/getting-started-lwl/live_tail.png" alt="The Live Tail page showing a list of logs and the time frame dropdown" style="width:100%;">}}
 
-除外フィルターは、フィルターの右にある [無効] オプションを切り替えることで無効にできます。修正または削除するには、フィルターの上にカーソルを合わせ、[編集] または [削除] オプションを選択します。
+Exclusion filters can be disabled at any time by toggling the disable option to the right of the filter. They can also be modified and removed by hovering over the filter and selecting the edit or delete option.
 
-## 4. メトリクスを生成し除外されたログを追跡
+## 4. Generate metrics to track excluded logs
 
-ログエクスポローラーからログパターンを除外しても、新しい[ログベースのカスタムメトリクス][8]を作成することで収集レベルで KPI を長期にわたり追跡できます。
+Once a log pattern is excluded from Log Explorer, you can still track KPIs over time at the ingest level by creating a new [custom log-based metric][8].
 
-### 新しいログベースのメトリクスを追加
+### Add a new log-based metric
 
-**ログパターンに基づき新しいログベースのメトリクスを生成するには**:
+**To generate a new log-based metric based on your log pattern**:
 
-1. Datadog アカウントで、メインメニューの **Logs** にカーソルを合わせ、**Generate Metrics** を選択し、右上の **New Metric+** ボタンをクリック。
-2. **Define Query** で、コピーしてパターン除外フィルターに貼り付けた検索クエリを入力します（上のを例とすると、`service:web-store status:info "updating recommendations with customer_id" "url shops"`）。
-3. 追跡するフィールドを選択。`*` を選択し、クエリに一致するすべてのログのカウントを生成するか、メジャー (例、`@duration`) を入力して数値を集計し、集計メトリクスの対応するカウント、最小、最大、合計、平均を作成します。
-4. グループにディメンションを追加。生成されたログベースのメトリクスに適用するログ属性またはタグキーを選択し、 `<KEY>:<VALUE>` 形式に従いタグに変換します。ログベースのメトリクスは、カスタムメトリクスと見なされます。タイムスタンプ、ユーザー ID、リクエスト ID、セッション IDなど、無制限または極めてカーディナリティの高い属性を使うグループ化は避け、請求に影響を与えないようにします。
-5. メトリクスに名前を付ける。ログベースのメトリクスの名前は、メトリクスの命名規則に従う必要があります。
+1. Navigate to the [Generate Metrics][9] page.
+1. Click **New Metric** in the top right corner.
+1. Enter a name for your metric. Log-based metric names must follow the naming metric convention.
+1. Under **Define Query**, input the search query you copied and pasted into the pattern exclusion filter. For example, as per the example above: `service:web-store status:info "updating recommendations with customer_id" "url shops"`.
+1. Select the field you would like to track: Select `*` to generate a count of all logs matching your query or enter a measure (for example, `@duration`) to aggregate a numeric value and create its corresponding count, min, max, sum, and avg aggregated metrics.
+1. Add dimensions to group: Select log attributes or tag keys to apply to the generated log-based metric to transform them into tags following the `<KEY>:<VALUE>` format. Log-based metrics are considered custom metrics. Avoid grouping by unbounded or extremely high cardinality attributes like timestamps, user IDs, request IDs, or session IDs to avoid negatively impacting your billing.
 
-{{< img src="logs/guide/getting-started-lwl/custom_metric.mp4" alt="カスタムメトリクスを生成" video=true style="width:100%;">}}
+### Create an anomaly detection monitor
 
-### 異常検知モニターの作成
+[Anomaly detection][10] is an algorithmic feature that identifies when a metric is behaving differently than it has in the past. Creating an anomaly detection monitor for your excluded logs alerts you of any changes based on your set alert conditions.
 
-[異常検知][9]は、メトリクスが過去とは異なる挙動をしている時を特定するためのアルゴリズム機能です。除外されたログの異常検知モニターを作成すると、設定したアラート条件に基づき必要な際に警告が発せられます。
+**To set an anomaly detection monitor**:
 
-**異常検知モニターを設定するには**:
+1. Navigate to the [New Monitor][11] page.
+1. Select **Anomaly**.
+1. Enter the log-based metric you defined in the previous section.
+1. Set the alert conditions and add any additional information needed to alert yourself and/or your team of what's happening.
+1. Click **Create**.
 
-1. メインのナビゲーションページで次のように移動します：**Monitors -> New Monitor -> Anomaly**.
-2. 前のセクションで定義したログベースのメトリクスを入力。
-3. アラート条件を設定し、ユーザーやユーザーのグループに現状を通知する際に必要な情報を追加します。
-4. モニターを保存。
+When an anomaly is detected, an alert is sent to all who are tagged. This alert can also be found in the [Triggered Monitors][12] page.
 
-{{< img src="logs/guide/getting-started-lwl/anomaly_monitor.mp4" alt="異常検知モニター" video=true style="width:100%;">}}
+## Review
 
-異常が検出されると、タグ付けされている全員にアラートが送信されます。このアラートは、[Monitors -> Triggered Monitors][10] でも確認できます。
+In this guide, you learned how to use Logging without LimitsTM to:
 
-## まとめ
+1. [Identify your most logging service status](#1-identify-your-most-logged-service-status)
+2. [Identify high volume logging patterns](#2-identify-high-volume-logging-patterns)
+3. [Create a log pattern exclusion filter](#3-create-a-log-pattern-exclusion-filter)
+4. [Generate metrics to track excluded logs](#4-generate-metrics-to-track-excluded-logs)
+  * [Add a new log-based metric](#add-a-new-log-based-metric)
+  * [Create an anomaly detection monitor](#create-an-anomaly-detection-monitor)
 
-ここでは、Logging without Limits™ を以下に適用する方法について説明しました。
+To learn more about Logging Without LimitsTM and how to better utilize features like Log Explorer, Live Tail, and Log Patterns, view the links below.
 
-1. [最多ログのサービスステータスを特定](#1-identify-your-most-logged-service-status)
-2. [大量のログパターンを特定](#2-identify-high-volume-logging-patterns)
-3. [除外フィルターログパターンを作成](#3-create-a-log-pattern-exclusion-filter)
-4. [メトリクスを生成し除外されたログを追跡](#4-generate-metrics-to-track-excluded-logs)
-  * [新しいログベースのメトリクスを追加](#add-a-new-log-based-metric)
-  * [異常検知モニターの作成](#create-an-anomaly-detection-monitor)
-
-Logging Without Limits™ の詳細やログエクスポローラー、Live Tail、ログパターンの活用方法については、以下のリンクをご覧ください。
-
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://www.datadoghq.com/blog/logging-without-limits/
-[2]: /ja/logs/
+[2]: /logs/
 [3]: https://app.datadoghq.com/logs
 [4]: https://app.datadoghq.com/logs/patterns
-[5]: /ja/logs/live_tail/
-[6]: /ja/logs/archives/
-[7]: /ja/metrics/
-[8]: /ja/logs/logs_to_metrics/
-[9]: /ja/monitors/types/anomaly/
-[10]: https://app.datadoghq.com/monitors#/triggered
+[5]: /logs/live_tail/
+[6]: /logs/archives/
+[7]: /metrics/
+[8]: /logs/logs_to_metrics/
+[9]: https://app.datadoghq.com/logs/pipelines/generate-metrics
+[10]: /monitors/types/anomaly/
+[11]: https://app.datadoghq.com/monitors/create
+[12]: https://app.datadoghq.com/monitors#/triggered

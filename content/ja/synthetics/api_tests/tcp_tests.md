@@ -1,183 +1,141 @@
 ---
-algolia:
-  category: Documentation
-  rank: 70
-  subcategory: Synthetic API テスト
-  tags:
-  - tcp
-  - tcp テスト
-  - tcp テスト
+title: TCP Testing
+kind: documentation
+description: Simulate TCP connections on your hosts
 aliases:
-- /ja/synthetics/tcp_test
-- /ja/synthetics/tcp_check
-description: ホストで TCP 接続をシミュレートする
+  - /synthetics/tcp_test
+  - /synthetics/tcp_check
 further_reading:
-- link: https://www.datadoghq.com/blog/introducing-synthetic-monitoring/
-  tag: ブログ
-  text: Datadog Synthetic モニタリングの紹介
+- link: "https://www.datadoghq.com/blog/introducing-synthetic-monitoring/"
+  tag: Blog
+  text: Introducing Datadog Synthetic Monitoring
 - link: /getting_started/synthetics/api_test
   tag: Documentation
-  text: API テストの概要
+  text: Get started with API tests
 - link: /synthetics/private_locations
   tag: Documentation
-  text: 内部ホストで TCP テストを実行する
+  text: Run TCP tests on internal hosts
 - link: /synthetics/guide/synthetic-test-monitors
-  tag: ドキュメント
-  text: Synthetic テストモニターについて
-title: TCP テスト
+  tag: Documentation
+  text: Learn about Synthetic test monitors
+algolia:
+  rank: 70
+  category: Documentation
+  subcategory: Synthetic API Tests
+  tags: [tcp, tcp test, tcp tests]
 ---
 
-## 概要
+## Overview
 
-TCP テストを使用すると、特定のホストのポートで低レベルの TCP 接続を確立できるかどうかを監視でき、`SSH` (22)、`SMTP` (25)、`DNS` (53)、VPN over `HTTPS` (443) などのいくつかの主要サービスおよび他のポートに存在するカスタムサービスの可用性を確認できます。組み込みの応答時間データを使って、ネットワークアプリケーションのパフォーマンスを追跡し、予期しない速度低下が発生した場合にアラートを受け取ります。
+TCP tests allow you to monitor whether or not low-level TCP connections can be established on the ports of given hosts, ensuring the availability of several key services such as `SSH` (22), `SMTP` (25), `DNS` (53), VPN over `HTTPS` (443), and any custom services living on other ports. With built-in response time data, track the performance of your network applications and receive alerts in case of unexpected slowness.
 
-TCP テストは、ネットワークの外部または内部からのテストの実行の好みに応じて、[管理ロケーション](#select-locations)と[プライベートロケーション][1]の両方から実行することができます。TCP テストは、スケジュール、オンデマンド、または [CI/CD パイプライン][2]内で直接実行することができます。
+TCP tests can run from both [managed](#select-locations) and [private locations][1] depending on your preference for running the test from outside or inside your network. TCP tests can run on a schedule, on-demand, or directly within your [CI/CD pipelines][2].
 
-## コンフィギュレーション
+## Configuration
 
-`TCP` テストの作成を選択した後、テストのリクエストを定義します。
+After choosing to create a `TCP` test, define your test's request.
 
-### リクエストを定義する
+### Define request
 
-1. テストを実行する **Host** と **Port** を指定します。デフォルトでは、ポートは `443` に設定されています。
-2. **Track number of network hops (TTL) (ネットワークホップ数 (TTL) を追跡する)**かどうかを決定します。このオプションを使用すると、ネットワークホップ数をアサートし、テスト結果で TCP Traceroute にアクセスできます。
-3. テストがタイムアウトするまでの時間を秒単位で指定します (オプション)。
-4. TCP テストに**名前**を付けます。
-5. TCP テストに `env` **タグ**とその他のタグを追加します。次に、これらのタグを使用して、[Synthetic Monitoring ホームページ][3]で Synthetic テストをすばやくフィルタリングできます。
+1. Specify the **Host** and the **Port** to run your test on.
+2. Decide whether or not to **Track number of network hops (TTL)**. This option allows you to assert on the number of network hops and to have access to a TCP Traceroute in your test results.
+3. Specify the amount of time in seconds before the test times out (optional).
+4. **Name** your TCP test.
+5. Add `env` **Tags** as well as any other tag to your TCP test. You can then use these tags to filter through your Synthetic tests on the [Synthetic Monitoring & Continuous Testing page][3].
 
-{{< img src="synthetics/api_tests/tcp_test_config.png" alt="TCP 接続を定義する" style="width:90%;" >}}
+{{< img src="synthetics/api_tests/tcp_test_config.png" alt="Define TCP connection" style="width:90%;" >}}
 
-**Test URL** をクリックして、リクエストのコンフィギュレーションをテストします。画面の右側に応答プレビューが表示されます。
+Click **Test URL** to try out the request configuration. A response preview is displayed on the right side of your screen.
 
-### アサーションを定義する
+### Define assertions
 
-アサーションは、期待されるテスト結果が何であるかを定義します。**Test URL** をクリックすると、`response time` の基本的なアサーションが追加されます。テストで監視するには、少なくとも 1 つのアサーションを定義する必要があります。
+Assertions define what an expected test result is. When you click **Test URL**, basic assertions on `response time` are added. You must define at least one assertion for your test to monitor.
 
-| タイプ          | 演算子                                                                | 値の型     |
+| Type          | Operator                                                                | Value type     |
 |---------------|-------------------------------------------------------------------------|----------------|
-| response time | `is less than`                                                          | 整数 (ms) |
-| ネットワークホップ    | `is less than`、`is less than or equal`、`is`、`is more than`、`is more than or equal` | _integer_        |
-| 接続 | `is`                                                          | `established`、`refused`、`timeout` |
+| response time | `is less than`                                                          | _Integer (ms)_ |
+| network hops    | `is less than`, `is less than or equal`, `is`, `is more than`, `is more than or equal` | _integer_        |
+| connection | `is`                                                          | `established`, `refused`, `timeout` |
 
-**New Assertion** をクリックするか、応答プレビューを直接クリックすることで、API テストごとに最大 20 個のアサーションを作成できます。
+You can create up to 20 assertions per API test by clicking **New Assertion** or by clicking directly on the response preview:
 
-{{< img src="synthetics/api_tests/assertions_tcp.png" alt="TCP テストが成功または失敗するためのアサーションを定義する" style="width:90%;" >}}
+{{< img src="synthetics/api_tests/assertions_tcp.png" alt="Define assertions for your TCP test to succeed or fail on" style="width:90%;" >}}
 
-テストがレスポンス本文にアサーションを含まない場合、本文のペイロードはドロップし、Synthetics Worker で設定されたタイムアウト制限内でリクエストに関連するレスポンスタイムを返します。
+If a test does not contain an assertion on the response body, the body payload drops and returns an associated response time for the request within the timeout limit set by the Synthetics Worker.
 
-テストがレスポンス本文に対するアサーションを含み、タイムアウトの制限に達した場合、`Assertions on the body/response cannot be run beyond this limit` というエラーが表示されます。
+If a test contains an assertion on the response body and the timeout limit is reached, an `Assertions on the body/response cannot be run beyond this limit` error appears.
 
-### ロケーションを選択する
+### Select locations
 
-TCP テストを実行する**ロケーション**を選択します。TCP テストは、ネットワークの外部または内部のどちらから接続を開始するかの好みによって、管理ロケーションと[プライベートロケーション][1]の両方から実行できます。
+Select the **Locations** to run your TCP test from. TCP tests can run from both managed and [private locations][1] depending on your preference for launching the connection from outside or inside your network.
 
 {{% managed-locations %}} 
 
-### テストの頻度を指定する
+### Specify test frequency
 
-TCP テストは次の頻度で実行できます。
+TCP tests can run:
 
-* **On a schedule**: 最も重要なサービスにユーザーが常にアクセスできるようにします。Datadog で TCP テストを実行する頻度を選択します。
-* [**Within your CI/CD pipelines**][2]。
-* **On-demand**: チームにとって最も意味のあるときにいつでもテストを実行します。
+* **On a schedule** to ensure your most important services are always accessible to your users. Select the frequency at which you want Datadog to run your TCP test.
+* [**Within your CI/CD pipelines**][2].
+* **On-demand** to run your tests whenever makes the most sense for your team.
 
-### アラート条件を定義する
-
-アラート条件で、テストが失敗しアラートをトリガーする状況を設定します。
-
-#### アラート設定規則
-
-アラートの条件を `An alert is triggered if your test fails for X minutes from any n of N locations` に設定すると、次の 2 つの条件が当てはまる場合にのみアラートがトリガーされます。
-
-* 直近 *X* 分間に、最低 1 個のロケーションで失敗 (最低 1 つのアサーションが失敗)。
-* 直近 *X* 分間に、ある時点で最低 *n* 個のロケーションで失敗。
-
-#### 高速再試行
-
-テストが失敗した場合、`Y` ミリ秒後に `X` 回再試行することができます。再試行の間隔は、警告の感性に合うようにカスタマイズしてください。
-
-ロケーションのアップタイムは、評価ごとに計算されます (評価前の最後のテスト結果がアップかダウンか)。合計アップタイムは、構成されたアラート条件に基づいて計算されます。送信される通知は、合計アップタイムに基づきます。
-
-### テストモニターを構成する
-
-以前に定義された[アラート条件](#define-alert-conditions)に基づいて、テストによって通知が送信されます。このセクションを使用して、チームに送信するメッセージの方法と内容を定義します。
-
-1. [モニターの構成方法と同様][4]、メッセージに `@notification` を追加するか、ドロップダウンボックスでチームメンバーと接続されたインテグレーションを検索して、通知を受信する**ユーザーやサービス**を選択します。
-
-2. テストの通知**メッセージ**を入力します。このフィールドでは、標準の[マークダウン形式][5]のほか、以下の[条件付き変数][6]を使用できます。
-
-    | 条件付き変数       | 説明                                                         |
-    |----------------------------|---------------------------------------------------------------------|
-    | `{{#is_alert}}`            |テストがアラートを発する場合に表示します。                                          |
-    | `{{^is_alert}}`            |テストがアラートを発しない限り表示します。                                        |
-    | `{{#is_recovery}}`         | テストがアラートから回復したときに表示します。                          |
-    | `{{^is_recovery}}`         | テストがアラートから回復しない限り表示します。                        |
-    | `{{#is_renotify}}`         | モニターが再通知したときに表示します。                                   |
-    | `{{^is_renotify}}`         | モニターが再通知しない限り表示します。                                 |
-    | `{{#is_priority}}`         | モニターが優先順位 (P1～P5) に一致したときに表示します。                  |
-    | `{{^is_priority}}`         | モニターが優先順位 (P1～P5) に一致しない限り表示します。                |
-
-3. テストが失敗した場合に、テストで**通知メッセージを再送信する**頻度を指定します。テストの失敗を再通知しない場合は、`Never renotify if the monitor has not been resolved` オプションを使用してください。
-
-4. **Create** をクリックすると、テストの構成とモニターが保存されます。
-
-詳しくは、[Synthetic テストモニターの使用][7]をご覧ください。
+{{% synthetics-alerting-monitoring %}}
 
 {{% synthetics-variables %}}
 
-### 変数を使用する
+### Use variables
 
-TCP テストの URL、高度なオプション、アサーションで、[**Settings** ページで定義されたグローバル変数][8]を使用することができます。
+You can use the [global variables defined on the **Settings** page][8] in the URL, advanced options, and assertions of your TCP tests.
 
-変数のリストを表示するには、目的のフィールドに `{{` と入力します。
+To display your list of variables, type `{{` in your desired field.
 
-## テストの失敗
+## Test failure
 
-テストが 1 つ以上のアサーションを満たさない場合、またはリクエストが時期尚早に失敗した場合、テストは `FAILED` と見なされます。場合によっては、エンドポイントに対してアサーションをテストすることなくテストが実際に失敗することがあります。
+A test is considered `FAILED` if it does not satisfy one or more assertions or if the request prematurely failed. In some cases, the test can fail without testing the assertions against the endpoint. 
 
-これらの理由には以下が含まれます。
+These reasons include the following:
 
 `CONNRESET`
-: 接続がリモートサーバーによって突然閉じられました。Web サーバーにエラーが発生した、応答中にシステムが停止した、Web サーバーへの接続が失われた、などの原因が考えられます。
+: The connection was abruptly closed by the remote server. Possible causes include the web server encountering an error or crashing while responding, or loss of connectivity of the web server.
 
 `DNS`
-: テスト URL に対応する DNS エントリが見つかりませんでした。テスト URL の構成の誤りまたは DNS エントリの構成の誤りの原因が考えられます。
+: DNS entry not found for the test URL. Possible causes include misconfigured test URL or the wrong configuration of your DNS entries.
 
 `INVALID_REQUEST` 
-: テストのコンフィギュレーションが無効です (URL に入力ミスがあるなど)。
+: The configuration of the test is invalid (for example, a typo in the URL).
 
 `TIMEOUT`
-: リクエストを一定時間内に完了できなかったことを示します。`TIMEOUT` には 2 種類あります。
-  - `TIMEOUT: The request couldn't be completed in a reasonable time.` は、リクエストの持続時間がテスト定義のタイムアウト (デフォルトは 60 秒に設定されています) に当たったことを示します。
-  各リクエストについて、ネットワークウォーターフォールに表示されるのは、リクエストの完了したステージのみです。例えば、`Total response time` だけが表示されている場合、DNS の解決中にタイムアウトが発生したことになります。
-  - `TIMEOUT: Overall test execution couldn't be completed in a reasonable time.`  は、テスト時間 (リクエスト＋アサーション) が最大時間 (60.5s) に達したことを示しています。
+: The request couldn't be completed in a reasonable time. Two types of `TIMEOUT` can happen:
+  - `TIMEOUT: The request couldn't be completed in a reasonable time.` indicates that the request duration hit the test defined timeout (default is set to 60s). 
+  For each request only the completed stages for the request are displayed in the network waterfall. For example, in the case of `Total response time` only being displayed, the timeout occurred during the DNS resolution.
+  - `TIMEOUT: Overall test execution couldn't be completed in a reasonable time.` indicates that the test duration (request + assertions) hits the maximum duration (60.5s).
 
-## アクセス許可
+## Permissions
 
-デフォルトでは、[Datadog 管理者および Datadog 標準ロール][9]を持つユーザーのみが、Synthetic TCP テストを作成、編集、削除できます。Synthetic TCP テストの作成、編集、削除アクセスを取得するには、ユーザーをこれら 2 つの[デフォルトのロール][9]のいずれかにアップグレードします。
+By default, only users with the [Datadog Admin and Datadog Standard roles][9] can create, edit, and delete Synthetic TCP tests. To get create, edit, and delete access to Synthetic TCP tests, upgrade your user to one of those two [default roles][9].
 
-[カスタムロール機能][10]を使用している場合は、`synthetics_read` および `synthetics_write` 権限を含むカスタムロールにユーザーを追加します。
+If you are using the [custom role feature][10], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions.
 
-### アクセス制限
+### Restrict access
 
-アカウントに[カスタムロール][11]を使用しているお客様は、アクセス制限が利用可能です。
+Access restriction is available for customers using [custom roles][11] on their accounts.
 
-組織内の役割に基づいて、TCP テストへのアクセスを制限することができます。TCP テストを作成する際に、(ユーザーのほかに) どのロールがテストの読み取りと書き込みを行えるかを選択します。
+You can restrict access to a TCP test based on the roles in your organization. When creating a TCP test, choose which roles (in addition to your user) can read and write your test. 
 
-{{< img src="synthetics/settings/restrict_access.png" alt="テストのアクセス許可の設定" style="width:70%;" >}}
+{{< img src="synthetics/settings/restrict_access_1.png" alt="Set permissions for your test" style="width:70%;" >}}
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/synthetics/private_locations
-[2]: /ja/synthetics/cicd_integrations
-[3]: /ja/synthetics/search/#search
-[4]: /ja/monitors/notify/#notify-your-team
+[1]: /synthetics/private_locations
+[2]: /synthetics/cicd_integrations
+[3]: /synthetics/search/#search
+[4]: /monitors/notify/#configure-notifications-and-automations
 [5]: https://www.markdownguide.org/basic-syntax/
-[6]: /ja/monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
-[7]: /ja/synthetics/guide/synthetic-test-monitors
-[8]: /ja/synthetics/settings/#global-variables
-[9]: /ja/account_management/rbac/
-[10]: /ja/account_management/rbac#custom-roles
-[11]: /ja/account_management/rbac/#create-a-custom-role
+[6]: /monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
+[7]: /synthetics/guide/synthetic-test-monitors
+[8]: /synthetics/settings/#global-variables
+[9]: /account_management/rbac/
+[10]: /account_management/rbac#custom-roles
+[11]: /account_management/rbac/#create-a-custom-role

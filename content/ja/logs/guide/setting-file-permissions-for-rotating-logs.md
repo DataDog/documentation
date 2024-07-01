@@ -1,29 +1,29 @@
 ---
+title: Setting file permissions for rotating logs (Linux)
+kind: guide
 aliases:
-- /ja/logs/faq/setting-file-permissions-for-rotating-logs
+  - /logs/faq/setting-file-permissions-for-rotating-logs
 further_reading:
 - link: /logs/guide/log-parsing-best-practice/
   tag: FAQ
-  text: ログのパース - ベストプラクティス
+  text: Log Parsing - Best Practice
 - link: /logs/log_configuration/processors
   tag: Documentation
-  text: ログの処理方法
+  text: Learn how to process your logs
 - link: /logs/log_configuration/parsing
   tag: Documentation
-  text: パースの詳細
-kind: ガイド
-title: ログローテーションのためのファイルアクセス許可の設定 (Linux)
+  text: Learn more about parsing
 ---
 
-Datadog Agent は、`dd-agent` ユーザーおよび `dd-agent` グループの下で実行されるため、`/var/log` 内のログにアクセスできません。デフォルトでは、これらのファイルにはルート (または sudo 管理者) しかアクセスできないからです。
+The Datadog Agent runs under the `dd-agent` user and `dd-agent` group. This prevents the Datadog Agent from accessing the logs in `/var/log` as they are only accessible by root (or a sudo admin).
 
-## ACL を使用したアクセス許可の設定
+## Setting permissions using ACLs
 
-`datadog-agent` だけに読み取り専用アクセスを許可するには、[ACL を作成し、logrotate を変更してアクセス許可の変更を永続化します][1]。
+In order to allow read-only access for `datadog-agent` only, [create ACLs and modify logrotate to persist the permissions changes][1].
 
-### システムで ACL が有効かどうかを検証する
+### Verifying ACLs are enabled on your system
 
-この記事で説明する方法を使用してアクセス許可を設定するには、ファイルシステムで [ACL が有効になっている必要があります][2]。ACL が有効になっていることを確認するには、次のように、`getfacl` コマンドと `setfacl` コマンドを使用して、`datadog-agent` ユーザーにテストディレクトリに対するアクセス許可を設定してみます。
+[ACLs needs to be enabled][2] on your file system to set permissions using the methods outlined in this article. Verify ACLs are enabled by using the`getfacl` and `setfacl` commands to set permissions for the `datadog-agent` user on a test directory, for example:
 
 ```shell
 mkdir /var/log/test-dir
@@ -32,29 +32,29 @@ setfacl -m u:dd-agent:rx /var/log/test-dir
 getfacl /var/log/test-dir/
 ```
 
-ACL が有効になっている場合は、`datadog-agent` に設定されたアクセス許可が getfacl の出力に表示されます。
+The permissions set for `datadog-agent` appears in the output of getfacl if ACLs are enabled.
 
-{{< img src="logs/faq/setting_file_permission.png" alt="ファイルアクセス許可の設定" >}}
+{{< img src="logs/faq/setting_file_permission.png" alt="Setting file permission" >}}
 
-### ログディレクトリに対する読み取りおよび実行アクセス許可を dd-agent に付与する
+### Granting dd-agent read and execute permissions on log directories
 
-ACL が有効になっていることを確認したら、適切なログ収集用ディレクトリに対する読み取りおよび実行アクセス許可を `datadog-agent` ユーザーに付与します。たとえば、`/var/log/apache` へのアクセス許可を付与するには、次のコマンドを実行します。
+Once you have verified ACLs are enabled, grant read and execute permissions for the `datadog-agent` user on the appropriate directories for log collection. For example, to grant access to `/var/log/apache` , run:
 
 ```shell
 setfacl -m u:dd-agent:rx /var/log/apache
 ```
 
-[Linux で ACL を構成する方法については、こちらを参照してください][3]。
+[Learn more about how to configure ACLs on linux][3]
 
-### ログファイルローテーションに対応したアクセス許可を設定する
+### Setting permissions for log file rotation
 
-logrotate は ACL の設定を再適用しないため、一度[アクセス許可を設定][4]しても、ログがローテーションすると設定が無効になります。より永続的な解決方法としては、新しいファイルで ACL を再設定する規則を logrotate に追加します。
+[Setting the permissions][4] once will not persist for rotating logs, as logrotate does not re-apply the ACL setting. For a more permanent solution add a rule to logrotate to reset the ACL in a new file:
 
 ```shell
 sudo touch /etc/logrotate.d/dd-agent_ACLs
 ```
 
-ファイル例:
+Example file:
 
 ```text
 /var/log/apache/*.log {
@@ -65,35 +65,35 @@ sudo touch /etc/logrotate.d/dd-agent_ACLs
 }
 ```
 
-次のコマンドで、ファイルの ACL ステータスをチェックします。
+Check the ACL status of a file with:
 
 ```text
 getfacl /var/log/apache/access.log
 ```
 
-**注**: **PostgreSQL v10** 以前の場合、アクセス許可を **0700** に設定します。**PostgreSQL v11** の場合は、**0700** または **0750** を設定します。0700 または 0750 とは異なるアクセス許可を持つ基本データフォルダーでサーバーを起動しようとすると、postmater プロセスが失敗します。
+**Note**: For **PostgreSQL v10** and older, set the permission to **0700**. For **PostgreSQL v11**, set either **0700** or **0750**. Trying to start a server with a base data folder that has permissions different from 0700 or 0750 will result in a failure of the postmater process.
 
-**注**: PostgreSQL のログディレクトリは、ベースとなる PostgreSQL のインストールと同じディレクトリに配置できません。
+**Note**: The PostgreSQL logging directory cannot be located in the same directory as the base PostgreSQL installation.
 
-## ACL がない場合のアクセス許可の設定
+## Setting permissions when ACLs are not present
 
-システムに ACL がない場合は、グループアクセスに基づいてアクセス許可を設定します。
+When ACLs are not present in a system, set your permissions based on group access.
 
-たとえば、MySQL サービスが次の場所にログを記録しているとします。
+For instance, if your MySQL service is logging to the following locations:
 
 ```text
 /var/log/mysql/mysql_error.log
 /var/log/mysql/mysql-slow.log
 ```
 
-これらのアクセス許可は、デフォルトでは、ユーザー 'mysql' とグループ 'mysql' に関連付けられています。このログスキームは、'mysql' グループに属していないユーザーからログファイルへのアクセスを拒否します。通常は、次のように表示されます。
+Their permissions are associated with user 'mysql' and the group 'mysql' by default. This logging scheme denies access to the log file to any user not in the 'mysql' group. Typically you may see something like this:
 
 ```text
 $ ls -l /var/log | grep -i mysql
 drwxr-x--- 2 mysql mysql 4096 Feb 20 06:25 mysql
 ```
 
-この場合の最も簡単な解決方法は、logrotate 構成で、すべての人にファイルへの読み取りアクセス許可を付与することです。
+The easiest path here is to give everyone read access to the file in the logrotate configuration:
 
 ```text
 /var/log/mysql/mysql_error.log /var/log/mysql/mysql-slow.log {
@@ -106,9 +106,9 @@ drwxr-x--- 2 mysql mysql 4096 Feb 20 06:25 mysql
 }
 ```
 
-一般的な市販アプリケーションは、どれもこれに似た方式に依っています。この利点は、個別のアカウントに特権的なアクセスを提供する必要がなく、標準化された方法を使用できる点です。これで、監査規則をシンプルにすることができます。
+Each common off-the-shelf application will follow a similar nomenclature. The advantage is that you avoid providing privileged access to an individual account and use a standardized practice. This keeps your audit rules in check.
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 

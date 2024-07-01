@@ -1,12 +1,12 @@
 ---
+title: Reference
+disable_toc: true
+disable_sidebar: true
+type: reference
 _build:
   render: false
 cascade:
-  disable_sidebar: false
   disable_toc: false
-  type: リファレンス
-disable_sidebar: true
-disable_toc: true
-title: Threat Monitoring and Protection
-type: リファレンス
+  disable_sidebar: false
+  type: reference
 ---

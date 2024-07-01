@@ -1,124 +1,125 @@
 ---
-app_id: kube-controller-manager
-app_uuid: 25d4ccd6-de50-4ef0-849f-b7ab1aea203e
-assets:
-  dashboards:
-    kube_controller_manager: assets/dashboards/overview.json
-  integration:
-    auto_install: true
-    configuration:
-      spec: assets/configuration/spec.yaml
-    events:
-      creates_events: false
-    metrics:
-      check: kube_controller_manager.threads
-      metadata_path: metadata.csv
-      prefix: kube_controller_manager.
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 10055
-    source_type_name: Kubernetes Controller Manager
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com (日本語対応)
-  support_email: help@datadoghq.com
-categories:
-- コンテナ
+"app_id": "kube-controller-manager"
+"app_uuid": "25d4ccd6-de50-4ef0-849f-b7ab1aea203e"
+"assets":
+  "dashboards":
+    "kube_controller_manager": assets/dashboards/overview.json
+  "integration":
+    "auto_install": true
+    "configuration":
+      "spec": assets/configuration/spec.yaml
+    "events":
+      "creates_events": false
+    "metrics":
+      "check": kube_controller_manager.threads
+      "metadata_path": metadata.csv
+      "prefix": kube_controller_manager.
+    "service_checks":
+      "metadata_path": assets/service_checks.json
+    "source_type_id": !!int "10055"
+    "source_type_name": Kubernetes Controller Manager
+"author":
+  "homepage": "https://www.datadoghq.com"
+  "name": Datadog
+  "sales_email": info@datadoghq.com
+  "support_email": help@datadoghq.com
+"categories":
+- containers
 - kubernetes
 - orchestration
-dependencies:
-- https://github.com/DataDog/integrations-core/blob/master/kube_controller_manager/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: kube_controller_manager
-integration_id: kube-controller-manager
-integration_title: Kubernetes Controller Manager
-integration_version: 5.1.0
-is_public: true
-kind: インテグレーション
-manifest_version: 2.0.0
-name: kube_controller_manager
-public_title: Kubernetes Controller Manager
-short_description: Kubernetes Controller Manager の監視
-supported_os:
+"custom_kind": "integration"
+"dependencies":
+- "https://github.com/DataDog/integrations-core/blob/master/kube_controller_manager/README.md"
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "kube_controller_manager"
+"integration_id": "kube-controller-manager"
+"integration_title": "Kubernetes Controller Manager"
+"integration_version": "5.1.1"
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "kube_controller_manager"
+"public_title": "Kubernetes Controller Manager"
+"short_description": "Monitors the Kubernetes Controller Manager"
+"supported_os":
 - linux
 - windows
 - macos
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Containers
-  - Category::Kubernetes
-  - Category::Orchestration
-  - Supported OS::Linux
-  - Supported OS::Windows
-  - Supported OS::macOS
-  configuration: README.md#Setup
-  description: Kubernetes Controller Manager の監視
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Kubernetes Controller Manager
+"tile":
+  "changelog": CHANGELOG.md
+  "classifier_tags":
+  - "Category::Containers"
+  - "Category::Kubernetes"
+  - "Category::Orchestration"
+  - "Supported OS::Linux"
+  - "Supported OS::Windows"
+  - "Supported OS::macOS"
+  "configuration": "README.md#Setup"
+  "description": Monitors the Kubernetes Controller Manager
+  "media": []
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": Kubernetes Controller Manager
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-![Kube Controller Manager ダッシュボード][1]
+![Kube Controller Manager dashboard][1]
 
-## 概要
+## Overview
 
-このチェックは、Kubernetes Control Plane の一部である [Kubernetes Controller Manager][2] を監視します。
+This check monitors the [Kubernetes Controller Manager][2], part of the Kubernetes control plane.
 
-**注**: サービスが公開されていないため、このチェックは Amazon EKS クラスターのデータを収集しません。
+**Note**: This check does not collect data for Amazon EKS clusters, as those services are not exposed.
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-Kubernetes Controller Manager チェックは [Datadog Agent][3] パッケージに含まれているため、
-サーバーに追加でインストールする必要はありません。
+The Kubernetes Controller Manager check is included in the [Datadog Agent][3] package, so you do not
+need to install anything else on your server.
 
-### ブラウザトラブルシューティング
+### Configuration
 
-1. kube_controller_manager のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `kube_controller_manager.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル kube_controller_manager.d/conf.yam][4] を参照してください。
+1. Edit the `kube_controller_manager.d/conf.yaml` file, in the `conf.d/` folder at the root of your Agent's configuration directory to start collecting your kube_controller_manager performance data. See the [sample kube_controller_manager.d/conf.yaml][4] for all available configuration options.
 
-2. [Agent を再起動します][5]。
+2. [Restart the Agent][5]
 
-このインテグレーションは、コントローラーマネージャーのメトリクスエンドポイントにアクセスする必要があります。メトリクスエンドポイントにアクセスできるようにするには、以下が必要です。
+This integration requires access to the controller manager's metric endpoint. To have access to the metric endpoint you should:
 
-* controller-manager プロセスの IP/Port にアクセスできる
-* `get` RBAC 権限で /metrics エンドポイントにアクセスできる (デフォルトの Datadog Helm チャートでは、すでに適切な RBAC ロールとバインディングが追加されています)
+* have access to the IP/Port of the controller-manager process
+* have `get` RBAC permissions to the /metrics endpoint (the default Datadog Helm chart already adds the right RBAC roles and bindings for this)
 
-### 検証
+### Validation
 
-[Agent の `status` サブコマンドを実行][6]し、Checks セクションで `kube_controller_manager` を探します。
+[Run the Agent's `status` subcommand][6] and look for `kube_controller_manager` under the Checks section.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "kube_controller_manager" >}}
 
 
-### ヘルプ
+### Events
 
-Kubernetes Controller Manager チェックには、イベントは含まれません。
+The Kubernetes Controller Manager check does not include any events.
 
-### ヘルプ
+### Service Checks
 {{< get-service-checks-from-git "kube_controller_manager" >}}
 
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
+Need help? Contact [Datadog Support][9].
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/kube_controller_manager/images/screenshot.png
 [2]: https://kubernetes.io/docs/reference/command-line-tools-reference/kube-controller-manager
 [3]: https://app.datadoghq.com/account/settings/agent/latest
 [4]: https://github.com/DataDog/integrations-core/blob/master/kube_controller_manager/datadog_checks/kube_controller_manager/data/conf.yaml.example
-[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[5]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[6]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
 [7]: https://github.com/DataDog/integrations-core/blob/master/kube_controller_manager/metadata.csv
 [8]: https://github.com/DataDog/integrations-core/blob/master/kube_controller_manager/assets/service_checks.json
-[9]: https://docs.datadoghq.com/ja/help/
+[9]: https://docs.datadoghq.com/help/
+

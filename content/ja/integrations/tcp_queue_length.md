@@ -1,111 +1,111 @@
 ---
-app_id: tcp-queue-length
-app_uuid: 2c48a360-9fbb-4cd6-9316-0e9afd9926c8
-assets:
-  integration:
-    auto_install: true
-    configuration: {}
-    events:
-      creates_events: false
-    metrics:
-      check: tcp_queue.read_buffer_max_usage_pct
-      metadata_path: metadata.csv
-      prefix: tcp_queue.
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 10295
-    source_type_name: TCP Queue Length
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com (日本語対応)
-  support_email: help@datadoghq.com
-categories:
+"app_id": "tcp-queue-length"
+"app_uuid": "2c48a360-9fbb-4cd6-9316-0e9afd9926c8"
+"assets":
+  "integration":
+    "auto_install": true
+    "configuration": {}
+    "events":
+      "creates_events": false
+    "metrics":
+      "check": tcp_queue.read_buffer_max_usage_pct
+      "metadata_path": metadata.csv
+      "prefix": tcp_queue.
+    "service_checks":
+      "metadata_path": assets/service_checks.json
+    "source_type_id": !!int "10295"
+    "source_type_name": TCP Queue Length
+"author":
+  "homepage": "https://www.datadoghq.com"
+  "name": Datadog
+  "sales_email": info@datadoghq.com
+  "support_email": help@datadoghq.com
+"categories":
 - developer tools
-- ネットワーク
-dependencies:
-- https://github.com/DataDog/integrations-core/blob/master/tcp_queue_length/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: tcp_queue_length
-integration_id: tcp-queue-length
-integration_title: TCP Queue Length
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: 2.0.0
-name: tcp_queue_length
-public_title: TCP Queue Length
-short_description: Datadog で、TCP バッファのサイズを追跡します。
-supported_os:
+- network
+"custom_kind": "integration"
+"dependencies":
+- "https://github.com/DataDog/integrations-core/blob/master/tcp_queue_length/README.md"
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "tcp_queue_length"
+"integration_id": "tcp-queue-length"
+"integration_title": "TCP Queue Length"
+"integration_version": ""
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "tcp_queue_length"
+"public_title": "TCP Queue Length"
+"short_description": "Track the size of the TCP buffers with Datadog."
+"supported_os":
 - linux
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Developer Tools
-  - Category::Network
-  - Supported OS::Linux
-  configuration: README.md#Setup
-  description: Datadog で、TCP バッファのサイズを追跡します。
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: TCP Queue Length
+"tile":
+  "changelog": CHANGELOG.md
+  "classifier_tags":
+  - "Category::Developer Tools"
+  - "Category::Network"
+  - "Supported OS::Linux"
+  "configuration": "README.md#Setup"
+  "description": Track the size of the TCP buffers with Datadog.
+  "media": []
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": TCP Queue Length
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## 概要
+## Overview
 
-このチェックは、Linux TCP によるキューの送受信の使用方法を監視します。キューを送受信する TCP が個々のコンテナに対して満杯の状態であるかどうかを検知できます。
+This check monitors the usage of the Linux TCP receive and send queues. It can detect if a TCP receive or send queue is full for individual containers.
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-`tcp_queue_length` はコア Agent 6/7 のチェックで、`system-probe` に実装された eBPF パートに依存します。Agent バージョン 7.24.1/6.24.1 以上が必要です。
+`tcp_queue_length` is a core Agent 6/7 check that relies on an eBPF part implemented in `system-probe`. Agent version 7.24.1/6.24.1 or above is required.
 
-`system-probe` により使用される eBPF プログラムはランタイムでコンパイルされ、適切なカーネルヘッダーへのアクセスを必要とします。
+The eBPF program used by `system-probe` is compiled at runtime and requires you to have access to the proper kernel headers.
 
-Debian 系のディストリビューションでは、以下のようにカーネルヘッダーをインストールします。
+On Debian-like distributions, install the kernel headers like this:
 ```sh
 apt install -y linux-headers-$(uname -r)
 ```
 
-RHEL 系のディストリビューションでは、以下のようにカーネルヘッダーをインストールします。
+On RHEL-like distributions, install the kernel headers like this:
 ```sh
 yum install -y kernel-headers-$(uname -r)
 yum install -y kernel-devel-$(uname -r)
 ```
 
-**注**: バージョン 8 以前の Windows および CentOS/RHEL はサポートされません。
+**Note**: Windows and CentOS/RHEL versions earlier than 8 are not supported.
 
-### ブラウザトラブルシューティング
+### Configuration
 
-`tcp_queue_length` インテグレーションを有効にするには、`system-probe` とコアエージェントの両方でコンフィギュレーションオプションを有効化する必要があります。
+Enabling the `tcp_queue_length` integration requires both the `system-probe` and the core agent to have the configuration option enabled.
 
-`system-probe.yaml` コンフィギュレーションファイル内で、以下のパラメーターを必ず設定してください。
+Inside the `system-probe.yaml` configuration file, the following parameters must be set:
 ```yaml
 system_probe_config:
   enable_tcp_queue_length: true
 ```
 
-1. Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `tcp_queue_length.d/conf.yaml` ファイルを編集して、
-   tcp_queue_length パフォーマンスデータの収集を開始します。
-   使用可能なすべてのコンフィギュレーションオプションについては、[サンプル tcp_queue_length.d/conf.yaml][1] を参照してください。
+1. Edit the `tcp_queue_length.d/conf.yaml` file, in the `conf.d/` folder at the root of your
+   Agent's configuration directory to start collecting your tcp_queue_length performance data.
+   See the [sample tcp_queue_length.d/conf.yaml][1] for all available configuration options.
 
-2. [Agent を再起動します][2]。
+2. [Restart the Agent][2].
 
 
-### Helm のインテグレーション
+### Configuration with Helm
 
-[Datadog Helm チャート][3]を使用して、`values.yaml` ファイルで `datadog.systemProbe.enabled` を `true` に設定し、`system-probe` がアクティベートされている必要があります。
-次に、`datadog.systemProbe.enableTCPQueueLength` パラメーターを設定してチェックをアクティベートします。
+With the [Datadog Helm chart][3], the `system-probe` must be activated by setting `datadog.systemProbe.enabled` to `true` in the `values.yaml` file.
+Then, the check can be activated by setting the `datadog.systemProbe.enableTCPQueueLength` parameter.
 
-### Operator (v1.0.0+) による構成
+### Configuration with the Operator (v1.0.0+)
 
-DatadogAgent マニフェストで `features.tcpQueueLength.enabled` パラメーターを設定します。
+Set the `features.tcpQueueLength.enabled` parameter in the DatadogAgent manifest:
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
 kind: DatadogAgent
@@ -117,7 +117,7 @@ spec:
       enabled: true
 ```
 
-**注**: COS (Container Optimized OS) を使用する場合は、ノード Agent で `src` ボリュームをオーバーライドしてください。
+**Note**: When using COS (Container Optimized OS), override the `src` volume in the node Agent:
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
 kind: DatadogAgent
@@ -134,30 +134,31 @@ spec:
         name: src
 ```
 
-### 検証
+### Validation
 
-[Agent の `status` サブコマンドを実行][2]し、Checks セクションで `tcp_queue_length` を探します。
+[Run the Agent's `status` subcommand][2] and look for `tcp_queue_length` under the checks section.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "tcp_queue_length" >}}
 
 
-### ヘルプ
+### Service Checks
 
-TCP Queue Length チェックには、サービスのチェック機能は含まれません。
+The TCP Queue Length check does not include any service checks.
 
-### ヘルプ
+### Events
 
-TCP Queue Length チェックには、イベントは含まれません。
+The TCP Queue Length check does not include any events.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
+Need help? Contact [Datadog support][5].
 
 [1]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/dist/conf.d/tcp_queue_length.d/conf.yaml.example
-[2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[2]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [3]: https://github.com/DataDog/helm-charts
 [4]: https://github.com/DataDog/integrations-core/blob/master/tcp_queue_length/metadata.csv
-[5]: https://docs.datadoghq.com/ja/help/
+[5]: https://docs.datadoghq.com/help/
+

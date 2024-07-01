@@ -1,84 +1,85 @@
 ---
+title: Enable AWS X-Ray Tracing
+kind: documentation
+description: 'Trace your Lambda functions with AWS X-Ray'
 aliases:
-- /ja/tracing/serverless_functions/enable_aws_xray/
-description: AWS X-Ray で Lambda 関数をトレース
-title: AWS X-Ray トレーシングを有効にする
+    - /tracing/serverless_functions/enable_aws_xray/
 ---
-## AWS X-Ray を有効にする
+## Enable AWS X-Ray
 
-**前提条件:** [AWS インテグレーションのインストール][1]。
+**Prerequisite:** [Install the AWS integration][1].
 
-1. 以下のアクセス許可が AWS/Datadog ロールのポリシードキュメントに含まれていることを確認します。
+1. Ensure the following permissions are present in the policy document for your AWS/Datadog Role:
 
 ```text
 xray:BatchGetTraces,
 xray:GetTraceSummaries
 ```
 
-    完全なトレースを返すには、`BatchGetTraces` 許可を使用します。`GetTraceSummaries` 許可は、最近のトレースの要約をリストで取得するために使用します。
+    The `BatchGetTraces` permission is used to return the full traces. The `GetTraceSummaries` permission is used to get a list of summaries of recent traces.
 
-2. [Datadog 内で X-Ray インテグレーションを有効にします][2]。
+2. [Enable the X-Ray integration within Datadog][2].
 
-3. カスタマーマスターキーを使用してトレースを暗号化している場合は、X-Ray に使用されるカスタマーマスターキーがリソースとなっているポリシーに `kms:Decrypt` メソッドを追加してください。
+3. If you are using a Customer Master Key to encrypt traces, add the `kms:Decrypt` method to your policy where the Resource is the Customer Master Key used for X-Ray.
 
-**注:** AWS X-Ray インテグレーションを有効にすると Indexed Span の消費量が増加するため、請求額が増加する場合があります。
+**Note:** Enabling the AWS X-Ray integration increases the amount of consumed Indexed Spans which can increase your bill.
 
-### 関数の AWS X-Ray を有効化する
+### Enabling AWS X-Ray for your functions
 
-AWS X-Ray インテグレーションを最大限活用するには:
+To get the most out of the AWS X-Ray integration:
 
-- Serverless Framework プラグインを使用または手動で、Lambda 関数および API Gateway 上で有効にします。
-- Lambda 関数でトレーシングライブラリをインストールします。
+- Enable it on your Lambda functions and API Gateways, either using the Serverless Framework plugin or manually; and
+- Install the tracing libraries in your Lambda functions.
 
-#### [推奨] Datadog Serverless Framework プラグイン
+#### [Recommended] Datadog Serverless Framework plugin
 
-[Datadog Serverless Framework プラグイン][3]は、Lambda 関数と API Gateway インスタンスの X-Ray を自動的に有効化します。また、このプラグインは [Datadog Lambda レイヤー][4]を Node.js および Python 関数に自動的に追加します。
+The [Datadog Serverless Framework plugin][3] automatically enables X-Ray for your Lambda functions and API Gateway instances. The plugin also automatically adds the [Datadog Lambda Layer][4] to all of your Node.js and Python functions.
 
-[Serverless Framework プラグインの使用を開始][5]するには、[ドキュメントを参考にしてください][3]。
+[Get started with the Serverless Framework plugin][5] and [read the docs][3].
 
-最後に、[X-Ray クライアントライブラリをインストールして Lambda 関数にインポートします](#X-Ray クライアントライブラリのインストール)。
+Lastly, [install and import the X-Ray client library in your Lambda function](#installing-the-x-ray-client-libraries).
 
-#### 手動セットアップ
+#### Manual setup
 
-サーバーレスアプリケーションのデプロイに Serverless Framework を使用しない場合は、以下の方法で手動でセットアップします。
+If you do not use the Serverless Framework to deploy your serverless application, follow these instructions for manual setup:
 
-1. AWS コンソールで、インスツルメントする Lambda 関数に移動します。「デバッグとエラー処理」セクションで、**アクティブトレースを有効にします**の隣のチェックボックスをオンにします。これにより、その関数の X-Ray がオンになります。
-2. [API Gateway コンソール][6]に移動します。API を選択し、次にステージを選択します。
-3. **Logs/Tracing** タブで **Enable X-Ray Tracing** を選択します。
-4. この変更を有効にするには、左のナビゲーションパネルで **Resources** に移動し、**Actions** を選択して **Deploy API** をクリックします。
+1. Navigate to the Lambda function in the AWS console you want to instrument. In the "Debugging and error handling" section, check the box to **Enable active tracing**. This turns on X-Ray for that function.
+2. Navigate to the [API Gateway console][6]. Select your API and then the stage.
+3. On the **Logs/Tracing** tab, select **Enable X-Ray Tracing**.
+4. To make these changes take effect, go to **Resources** in the left navigation panel and select **Actions** and click **Deploy API**.
 
-**注:** Datadog Lambda レイヤーとクライアントライブラリには依存関係として X-Ray SDK が含まれているため、プロジェクトに明示的にインストールする必要はありません。
+**Note:** The Datadog Lambda Layer and client libraries include the X-Ray SDK as a dependency, so you don't need to explicitly install it in your projects.
 
-最後に、[X-Ray クライアントライブラリをインストールして Lambda 関数にインポートします](#X-Ray クライアントライブラリのインストール)。
+Lastly, [install and import the X-Ray client library in your Lambda function](#installing-the-x-ray-client-libraries).
 
-#### X-Ray クライアントライブラリをインストールする
+#### Installing the X-Ray client libraries
 
-X-Ray クライアントライブラリから、API への HTTP リクエストと、DynamoDB、S3、MySQL、PostgreSQL (自己ホスト型、Amazon RDS、Amazon Aurora)、SQS、SNS へのコールに関する洞察を得られます。
+The X-Ray client library offers insights into your HTTP requests to APIs and into calls to DynamoDB, S3, MySQL and PostgreSQL (self-hosted, Amazon RDS, and Amazon Aurora), SQS, and SNS.
 
-ライブラリをインストールして Lambda プロジェクトにインポートし、インスツルメントするサービスにパッチを適用します。
+Install the library, import it into your Lambda projects, and patch the services you wish to instrument.
 
 {{< programming-lang-wrapper langs="nodejs,python,go,ruby,java,.NET" >}}
 
 {{< programming-lang lang="nodejs" >}}
 
-X-Ray トレーシングライブラリをインストールする
+Install the X-Ray tracing library:
 
 ```bash
 
 npm install aws-xray-sdk
 
-# Yarn ユーザー向け
+# for Yarn users
 yarn add aws-xray-sdk
 ```
 
-AWS SDK をインスツルメントするには
+To instrument the AWS SDK:
 
 ```js
 var AWSXRay = require('aws-xray-sdk-core');
 var AWS = AWSXRay.captureAWS(require('aws-sdk'));
 ```
 
-すべてのダウンストリーム HTTP コールをインスツルメントするには
+To instrument all downstream HTTP calls:
 
 ```js
 var AWSXRay = require('aws-xray-sdk');
@@ -86,7 +87,7 @@ AWSXRay.captureHTTPsGlobal(require('http'));
 var http = require('http');
 ```
 
-PostgreSQL クエリをインスツルメントするには
+To instrument PostgreSQL queries:
 
 ```js
 var AWSXRay = require('aws-xray-sdk');
@@ -94,7 +95,7 @@ var pg = AWSXRay.capturePostgres(require('pg'));
 var client = new pg.Client();
 ```
 
-MySQL クエリをインスツルメントするには
+To instrument MySQL queries:
 
 ```js
 var AWSXRay = require('aws-xray-sdk');
@@ -103,20 +104,20 @@ var mysql = AWSXRay.captureMySQL(require('mysql'));
 var connection = mysql.createConnection(config);
 ```
 
-その他のコンフィギュレーション、サブセグメントの作成、アノテーションの記録については、[X-Ray Node.js ドキュメント][1]を参照してください。
+For further configuration, creating subsegments, and recording annotations, see the [X-Ray Node.js docs][1].
 
 [1]: https://docs.aws.amazon.com/en_pv/xray/latest/devguide/xray-sdk-nodejs.html
 {{< /programming-lang >}}
 
 {{< programming-lang lang="python" >}}
 
-X-Ray トレーシングライブラリをインストールする
+Install the X-Ray tracing library:
 
 ```bash
 pip install aws-xray-sdk
 ```
 
-デフォルトで[すべてのライブラリ][1]にパッチを適用するには、Lambda ハンドラーが含まれるファイルに次のコードを追加します。
+To patch [all libraries][1] by default, add the following to the file containing your Lambda handlers:
 
 ```python
 from aws_xray_sdk.core import xray_recorder
@@ -124,9 +125,9 @@ from aws_xray_sdk.core import patch_all
 patch_all()
 ```
 
-`aiohttp` のトレースには[特定のインスツルメンテーション][2]が必要です。
+Note that tracing `aiohttp` requires [specific instrumentation][2].
 
-その他のコンフィギュレーション、サブセグメントの作成、アノテーションの記録については、[X-Ray Python ドキュメント][3]を参照してください。
+For further configuration, creating subsegments, and recording annotations, see the [X-Ray Python docs][3].
 
 
 [1]: https://docs.aws.amazon.com/en_pv/xray/latest/devguide/xray-sdk-python-patching.html
@@ -135,40 +136,40 @@ patch_all()
 {{< /programming-lang >}}
 
 {{< programming-lang lang="go" >}}
-参照:
-- [Go 対応 X-Ray SDK ドキュメント][1]。
+See:
+- [X-Ray SDK for Go docs][1].
 
 [1]: https://docs.aws.amazon.com/en_pv/xray/latest/devguide/xray-sdk-go.html
 {{< /programming-lang >}}
 
 {{< programming-lang lang="ruby" >}}
-参照:
-- [Ruby 対応 X-Ray SDK ドキュメント][1]。
+See:
+- [X-Ray SDK for Ruby docs][1].
 
 [1]: https://docs.aws.amazon.com/en_pv/xray/latest/devguide/xray-sdk-ruby.html
 {{< /programming-lang >}}
 
 {{< programming-lang lang="java" >}}
 
-参照:
-- [Java 対応 X-Ray SDK ドキュメント][1]。
+See:
+- [X-Ray SDK for Java docs][1].
 
 [1]: https://docs.aws.amazon.com/en_pv/xray/latest/devguide/xray-sdk-java.html
 {{< /programming-lang >}}
 
 {{< programming-lang lang=".NET" >}}
 
-参照:
-- [.Net 対応 X-Ray SDK ドキュメント][1]。
+See:
+- [X-Ray SDK for .Net docs][1].
 
 [1]: https://docs.aws.amazon.com/en_pv/xray/latest/devguide/xray-sdk-dotnet.html
 {{< /programming-lang >}}
 
 {{< /programming-lang-wrapper >}}
 
-[1]: /ja/integrations/amazon_web_services/#setup
+[1]: /integrations/amazon_web_services/#setup
 [2]: https://app.datadoghq.com/account/settings#integrations/amazon_xray
 [3]: https://github.com/DataDog/serverless-plugin-datadog
-[4]: https://docs.datadoghq.com/ja/integrations/amazon_lambda/?tab=python#installing-and-using-the-datadog-layer
+[4]: https://docs.datadoghq.com/integrations/amazon_lambda/?tab=python#installing-and-using-the-datadog-layer
 [5]: https://www.datadoghq.com/blog/serverless-framework-plugin
 [6]: https://console.aws.amazon.com/apigateway/

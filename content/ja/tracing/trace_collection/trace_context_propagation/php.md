@@ -1,41 +1,45 @@
 ---
+title: Propagating PHP Trace Context
+kind: documentation
 code_lang: php
+type: multi-code-lang
 code_lang_weight: 40
 further_reading:
-- link: https://www.datadoghq.com/blog/monitor-otel-with-w3c-trace-context/
-  tag: ブログ
-  text: W3C Trace Context に対応した OpenTelemetry インスツルメンテーションされたアプリのモニタリング
-title: PHP トレースコンテキストの伝搬
-type: multi-code-lang
+    - link: "https://www.datadoghq.com/blog/monitor-otel-with-w3c-trace-context/"
+      tag: Blog
+      text: Monitor OpenTelemetry-instrumented apps with support for W3C Trace Context
+    - link: /opentelemetry/guide/otel_api_tracing_interoperability
+      tag: Documentation
+      text: Interoperability of OpenTelemetry API and Datadog instrumented traces
 ---
 
-Datadog APM トレーサーは、分散型トレーシングのための [B3][7] と [W3C Trace Context][10] のヘッダー抽出と挿入をサポートしています。
+The Datadog APM Tracer supports [B3][7] and [W3C Trace Context][10] headers extraction and injection for distributed tracing.
 
-分散ヘッダーの挿入と抽出のスタイルを構成することができます。
+You can configure injection and extraction styles for distributed headers.
 
-PHP トレーサーは、以下のスタイルをサポートしています。
+The PHP Tracer supports the following styles:
 
-- Datadog: `Datadog`
+- Datadog: `datadog`
 - W3C Trace Context: `tracecontext`
-- B3 マルチヘッダー: `b3multi` (`B3` エイリアスは非推奨)
-- B3 シングルヘッダー: `B3 single header`
+- B3 Multi Header: `b3multi` (`B3` alias is deprecated)
+- B3 Single Header: `B3 single header`
 
-以下の環境変数を使用して、PHP トレーシングライブラリの挿入および抽出のスタイルを構成することができます。例:
+You can use the following environment variables to configure the PHP tracing library injection and extraction styles. For instance:
 
-- `DD_TRACE_PROPAGATION_STYLE_INJECT=Datadog,tracecontext,B3 single header`
-- `DD_TRACE_PROPAGATION_STYLE_EXTRACT=Datadog,tracecontext,B3 single header`
+- `DD_TRACE_PROPAGATION_STYLE_INJECT=datadog,tracecontext,B3 single header`
+- `DD_TRACE_PROPAGATION_STYLE_EXTRACT=datadog,tracecontext,B3 single header`
 
-環境変数の値は、挿入または抽出に有効なヘッダースタイルのカンマ区切りのリストです。デフォルトでは、`tracecontext` と `Datadog` の挿入スタイルのみが有効になっています。
+The environment variable values are comma-separated lists of header styles enabled for injection or extraction. The default style setting is `datadog,tracecontext` (for PHP tracer versions prior to v0.98.0, the default setting is `tracecontext,Datadog`).
 
-複数の抽出スタイルが有効な場合、次の順番で抽出が試みられます: `tracecontext` が最優先で、次が `Datadog`、その次が B3。
+If multiple extraction styles are enabled, the extraction attempt is done on the order those styles are configured and first successful extracted value is used.
 
-新しい PHP スクリプトが起動すると、トレーサーは自動的に分散型トレーシングのための Datadog ヘッダーの存在を確認します。
-- `x-datadog-trace-id` (環境変数: `HTTP_X_DATADOG_TRACE_ID`)
-- `x-datadog-parent-id` (環境変数: `HTTP_X_DATADOG_PARENT_ID`)
-- `x-datadog-origin` (環境変数: `HTTP_X_DATADOG_ORIGIN`)
-- `x-datadog-tags` (環境変数: `HTTP_X_DATADOG_TAGS`)
+When a new PHP script is launched, the tracer automatically checks for the presence of Datadog headers for distributed tracing:
+- `x-datadog-trace-id` (environment variable: `HTTP_X_DATADOG_TRACE_ID`)
+- `x-datadog-parent-id` (environment variable: `HTTP_X_DATADOG_PARENT_ID`)
+- `x-datadog-origin` (environment variable: `HTTP_X_DATADOG_ORIGIN`)
+- `x-datadog-tags` (environment variable: `HTTP_X_DATADOG_TAGS`)
 
-新規トレースや既存トレースに対して CLI スクリプトでこの情報を手動で設定するには、関数 `DDTrace\set_distributed_tracing_context(string $trace_id, string $parent_id, ?string $origin = null, ?array $tags = null)` を提供します。
+To manually set this information in a CLI script on new traces or an existing trace, a function `DDTrace\set_distributed_tracing_context(string $trace_id, string $parent_id, ?string $origin = null, ?array $tags = null)` is provided.
 
 ```php
 <?php
@@ -52,7 +56,7 @@ function processIncomingQueueMessage($message) {
 );
 ```
 
-また、バージョン **0.87.0** からは、生のヘッダーが利用できる場合、関数 `DDTrace\consume_distributed_tracing_headers(array|callable $headersOrCallback)` が提供されます。ヘッダー名は小文字でなければならないことに注意してください。
+Alternatively, starting with version **0.87.0**, if the raw headers are available, a function `DDTrace\consume_distributed_tracing_headers(array|callable $headersOrCallback)` is provided. Note that the header names must be in lowercase.
 
 ```php
 $headers = [
@@ -63,16 +67,41 @@ $headers = [
 \DDTrace\consume_distributed_tracing_headers($headers);
 ```
 
-トレースコンテキストをヘッダーとして直接抽出するために、関数 `DDTrace\generate_distributed_tracing_headers(?array $inject = null): array` が提供されます。その唯一のオプション引数は、挿入スタイル名の配列を受け取ります。デフォルトは、構成された挿入スタイルです。
+To extract the trace context directly as headers, a function `DDTrace\generate_distributed_tracing_headers(?array $inject = null): array` is provided. Its sole optional argument accepts an array of injection style names. It defaults to the configured injection style.
 
 ```php
 $headers = DDTrace\generate_distributed_tracing_headers();
-// ヘッダーをどこかに保存し、アウトバウンドリクエストに挿入し、... 
-// また、これらの $headers は、他のプロセスから \DDTrace\consume_distributed_tracing_headers によって読み返すことができます。
+// Store headers somewhere, inject them in an outbound request, ...
+// These $headers can also be read back by \DDTrace\consume_distributed_tracing_headers from another process.
 ```
 
+## RabbitMQ
 
-## その他の参考資料
+Although the PHP tracer supports automatic tracing of the `php-amqplib/php-amqplib` library starting with version **0.87.0**, there are some known cases where your distributed trace can be disconnected. Most notably, when reading messages from a distributed queue using the `basic_get` method while not already in a trace, you would need to add a custom trace surrounding a `basic_get` call and the corresponding message processing.
+
+Here is an example:
+
+```php
+// Create a surrounding trace
+$newTrace = \DDTrace\start_trace_span();
+$newTrace->name = 'basic_get.process';
+$newTrace->service = 'amqp';
+
+
+// basic_get call(s) + message(s) processing
+$msg = $channel->basic_get($queue);
+if ($msg) {
+   $messageProcessing($msg);
+}
+
+
+// Once done, close the span
+\DDTrace\close_span();
+```
+
+Creating this surrounding trace to your consuming-processing logic ensures observability of your distributed queue.
+
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 

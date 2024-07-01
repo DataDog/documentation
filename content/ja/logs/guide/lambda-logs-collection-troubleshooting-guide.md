@@ -1,104 +1,105 @@
 ---
+title: Lambda Function Log Collection Troubleshooting Guide
+kind: documentation
 further_reading:
-- link: https://www.datadoghq.com/blog/aws-lambda-telemetry-api/
-  tag: GitHub
-  text: AWS Lambda テレメトリー API による Datadog Lambda 拡張機能の拡張
-title: Lambda 関数によるログ収集のトラブルシューティングガイド
+    - link: "https://www.datadoghq.com/blog/aws-lambda-telemetry-api/"
+      tag: Blog
+      text: Expanded Datadog Lambda extension capabilities with the AWS Lambda Telemetry API
 ---
 
-ログエクスプローラーに、Datadog Forwarder の Lambda 関数から転送されたログが表示されない場合は、以下のトラブルシューティングを実行してください。それでも問題が解決しない場合は、[Datadog サポート][1]までお問い合わせください。
+If you don't see logs forwarded from a Datadog forwarder Lambda function in the Log Explorer, follow the troubleshooting steps below. If you continue to have trouble after following these steps, [contact Datadog support][1] for further assistance.
 
-## Datadog にログが送信されたかを確認する
+## Are your logs sent to Datadog?
 
-1. [ログエクスプローラーの Live Tail ビュー][2]を開きます。
-2. 検索バーで Live Tail ビューにフィルターを適用し、Lambda 関数経由で送られたログのみを表示します。検索には以下のようなクエリを利用できます。
-    * ソースで検索: ソースは通常 `source:lambda`、`source:aws` または `source:cloudwatch` に設定されています。[Lambda 関数][3]の `parse_event_source` 関数にあるソースも設定可能です。
-    * Forwarder 名で検索: Lambda 関数は転送するすべてのログに対して `forwardername` タグを付加します。このタグを `forwardername:*` または `forwardername:<FORWARDER_FUNCTION_NAME>` で絞り込み、検索できます。
-3. ログエクスプローラーではなく Live Tail にログが表示される場合は、ログインデックスに[除外フィルター][4]が設定されています。このフィルターによりログが除外されているのです。
-4. Live Tail にログが表示されない場合は、ログが Datadog に到達していません。
+1. Navigate to the [Log Explorer's Live Tail view][2].
+2. In the search bar, use a filter to limit the Live Tail view to just the logs coming from your Lambda function. Some common search queries are:
+    * By source: the source is often set to `source:lambda`, `source:aws` or `source:cloudwatch` but you can find other possible sources in the `parse_event_source` function in the [Lambda function][3]. 
+    * By forwarder name: the Lambda function adds a `forwardername` tag to all the logs it forwards. You can filter on this tag by searching for `forwardername:*` or `forwardername:<FORWARDER_FUNCTION_NAME>`.
+3. If you do see the logs in the Live Tail, but not in the Log Explorer, that means your log index has some [exclusion filters][4] set up. These filters are filtering out your logs.
+4. If you don't see the logs in the Live Tail, the logs are not reaching Datadog.
 
-## Lambda 関数の Monitoring タブを確認する
+## Check the Lambda function monitoring tab
 
-[AWS コンソールから][5]
+[From the AWS console][5]
 
-1. Forwarder の Lambda 関数を開きます。
+1. Open your forwarder Lambda function.
 
-2. Monitoring タブをクリックします。
+2. Click the Monitoring tab.
 
-    {{< img src="logs/guide/lambda-monitoring-tab.png" alt="Monitoring タブ" style="width:80%;" >}}
+    {{< img src="logs/guide/lambda-monitoring-tab.png" alt="Monitoring tab" style="width:80%;" >}}
 
-3. Monitoring タブには、Lambda 関数に関する以下の情報を示す一連のグラフが表示されます。
-    * 呼び出し
-    * エラー
+3. The monitoring tab displays a series of graphs indicating the following information about your Lambda function: 
+    * invocations
+    * errors
     * logs
 
-4. **Invocations** グラフにデータポイントが表示されない場合は、関数に対して設定したトリガーに問題が発生している可能性があります。[関数のトリガーを管理する](#関数のトリガーを管理する) を参照してください。Monitoring タブを使用せずに Lambda 関数の呼び出しについてのインサイトを取得する場合は、[Datadog で Lambda メトリクスを表示する](#Datadog で Lambda メトリクスを表示する) をご確認ください。
-5. 「Error count and success rate」グラフにデータポイントが表示されている場合は、[Lambda 関数のログを確認する](#Lambda 関数のログを確認する) で報告されたエラーメッセージの内容を確認してください。
+4. If you don't see any data points on the **Invocations** graph, there may be a problem with the triggers you set for your function. See [Manage Your Function Triggers](#manage-your-function-triggers). To get insight into your Lambda invocations without using the monitoring tab, see [Viewing Lambda metrics in Datadog](#viewing-lambda-metrics-in-datadog).
+5. If you see data points on the "Error count and success rate" graph, [check the Lambda function logs](#check-the-lambda-function-logs) to see what error messages are being reported.
 
-### Datadog で Lambda メトリクスを表示する
+### Viewing Lambda metrics in Datadog
 
-AWS Lambda 関数を有効にすると、Datadog 内での Lambda 関数の呼び出しとエラーに関連するメトリクスを確認することができます。以下のメトリクスはすべて `functionname` でタグ付けされています。
+If you have enabled AWS Lambda metrics, you can view metrics related to Lambda invocations and errors within Datadog. The following metrics are all tagged with the `functionname` tag: 
 
-| メトリクス                        | 説明                                                                                        |
+| Metric                        | Description                                                                                        |
 |-------------------------------|----------------------------------------------------------------------------------------------------|
-| `aws.lambda.invocations `     | Lambda 関数がトリガー/呼び出された回数                                      |
-| `aws.lambda.errors `          | 関数が呼び出された際に起こったエラー数                                        |
-| `aws.lambda.duration `        | Lambda 関数の実行完了までに要した平均時間 (ミリ秒)  |
-| `aws.lambda.duration.maximum` | Lambda 関数の実行完了までに要した最大時間 (ミリ秒)  |
-| `aws.lambda.throttles`        | 呼び出し率が既定の上限を超えたために抑制された呼び出し試行回数 |
+| `aws.lambda.invocations `     | Count of times the Lambda function has been triggered/invoked                                      |
+| `aws.lambda.errors `          | Count of errors that occurred when the function was invoked                                        |
+| `aws.lambda.duration `        | Average amount of time (in milliseconds) that it took for the Lambda function to finish executing  |
+| `aws.lambda.duration.maximum` | Maximum amount of time (in milliseconds) that it took for the Lambda function to finish executing  |
+| `aws.lambda.throttles`        | Count of invocation attempts that were throttled due to invocation rates exceeding customer limits |
 
-これらおよびその他の AWS Lambda メトリクスについては、[AWS Lambda のメトリクス][6]を参照してください。
+For more information on these and other AWS Lambda metrics, see [AWS Lambda Metrics][6].
 
-### 関数のトリガーを管理する
+### Manage your function triggers
 
-ログが転送されるには、Forwarder の Lambda 関数にトリガー (CloudWatch ログまたは S3) が設定されている必要があります。以下のステップに従い、トリガーを正しく設定してください。
+For logs to be forwarded, the forwarder Lambda function needs to have triggers (CloudWatch Logs or S3) set up. Follow the steps below to ensure the triggers are set up correctly.
 
-1. ログのソース (CloudWatch ロググループまたは S3 バケット) が、Forwarder の Lambda コンソールで "Triggers" リストに表示されますか？表示される場合は、有効であることを確認します。表示されない場合は、以下のステップに従い S3 または CloudWatch ロググループコンソールを確認します。Lambda コンソールに表示される "Triggers" リストは包括的でないことがあります。
+1. Does the source of your log (CloudWatch log group or S3 bucket) show up in the "Triggers" list in the forwarder Lambda console? If yes, ensure it's enabled. Otherwise, follow the steps below to check in the S3 or CloudWatch log group console, because the "Triggers" list displayed in the Lambda console is known to be incomprehensive.
 
-2. S3 バケットの場合は、バケットの "Properties" タブへ移動し、スクロールして "Advanced settings" の "Events" タイルを表示するか、以下の AWS CLI コマンドを使用してクエリを作成します。Forwarder の Lambda 関数をトリガーするよう構成されたイベント通知が表示されますか？表示されない場合は、トリガーを構成する必要があります。
+2. For S3 bucket, navigate to the bucket's "Properties" tab and scroll down to the "Advanced settings" and "Events" tile, or make a query using the AWS CLI command below. Do you see any event notification configured to trigger the forwarder Lambda function? If not, you need to configure a trigger.
    ```
    aws s3api get-bucket-notification-configuration --bucket <BUCKET_NAME>
    ```
 
-3. CloudWatch ロググループの場合は、ロググループのコンソールで "Log group details" セクションにある "Subscriptions" フィールドに移動します。または、以下の AWS CLI コマンドを使用してクエリを作成します。ロググループが Forwarder の Lambda 関数によりサブスクライブされていない場合は、トリガーを構成する必要があります。
+3. For CloudWatch log group, navigate to the log group's console's "Subscriptions" field under the "Log group details" section. Alternatively, you can make a query using AWS CLI command below. If the log group is not subscribed by the forwarder Lambda function, you need to configure a trigger.
    ```
    aws logs describe-subscription-filters --log-group-name <LOG_GROUP_NAME>
    ```
 
-4. トリガーを[自動][7]または[手動][8]で設定します。
+4. Set triggers [automatically][7] or [manually][8].
 
-CloudWatch ロググループの場合は、Datadog のプラットフォーム内で以下のメトリクスを使用して、ログがロググループから Forwarder の Lambda 関数へ送信されたことを確認できます。メトリクスを表示する際は、`log_group` タグでデータを絞り込みます。
+For CloudWatch log group, you can use the following metrics within the Datadog platform to confirm whether logs are delivered from the log group to the forwarder Lambda function. Use the `log_group` tag to filter the data when viewing the metrics.
 
-| メトリクス                          | 説明                                                                                        |
+| Metric                          | Description                                                                                        |
 |---------------------------------|----------------------------------------------------------------------------------------------------|
-| `aws.logs.incoming_log_events`  | CloudWatch ログにアップロードされたログイベントの数                                               |
-| `aws.logs.forwarded_log_events` | サブスクリプションの送信先に転送されたログイベントの数                                 |
-| `aws.logs.delivery_errors`      | サブスクリプション先への送信に失敗したログイベントの数                    |
-| `aws.logs.delivery_throttling`  | サブスクリプションの先への送信を制限されたログイベントの数                  |
+| `aws.logs.incoming_log_events`  | The number of log events uploaded to CloudWatch Logs                                               |
+| `aws.logs.forwarded_log_events` | The number of log events forwarded to the subscription destination                                 |
+| `aws.logs.delivery_errors`      | The number of log events failed to be delivered to the subscription destination                    |
+| `aws.logs.delivery_throttling`  | The number of log events throttled for delivering to the subscription destination                  |
 
-## Lambda 関数のログを確認する
+## Check the Lambda function logs
 
-1. Monitoring タブで **View logs in Cloudwatch** をクリックします。
+1. From the monitoring tab, click **View logs in Cloudwatch**.
 
-{{< img src="logs/guide/lambda-logs-cloudwatch.png" alt="Cloudwatch 内での Lambda ログ" style="width:80%;" >}}
+{{< img src="logs/guide/lambda-logs-cloudwatch.png" alt="Lambda logs in Cloudwatch" style="width:80%;" >}}
 
-2. 最新のログストリームを確認。
+2. Find the most recent log stream.
 
-3. エラーが発生した場合は、"?ERROR ?Error ?error" で検索してみてください。
+3. Do you see any errors? Try searching "?ERROR ?Error ?error".
 
-4. Forwarder の Lambda 関数で、環境変数 "DD_LOG_LEVEL" を "debug" に設定してデバッグログを有効にし、さらなるデバッグを実行します。デバッグログは非常に詳細になるため、デバッグが終了したら無効にしましょう。
+4. Set environment variable "DD_LOG_LEVEL" to "debug" on the forwarder Lambda function to enable the debugging logs for further debugging. The debugging logs are quite verbose; remember to disable it after debugging.
 
 
-## その他の参考資料
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: https://docs.datadoghq.com/ja/help
-[2]: https://docs.datadoghq.com/ja/logs/live_tail/#live-tail-view
+[1]: https://docs.datadoghq.com/help
+[2]: https://docs.datadoghq.com/logs/live_tail/#live-tail-view
 [3]: https://github.com/DataDog/datadog-serverless-functions/blob/master/aws/logs_monitoring/lambda_function.py
-[4]: https://docs.datadoghq.com/ja/logs/indexes/#exclusion-filters
+[4]: https://docs.datadoghq.com/logs/indexes/#exclusion-filters
 [5]: https://console.aws.amazon.com/lambda/home
-[6]: https://docs.datadoghq.com/ja/integrations/amazon_lambda/?tab=awsconsole#metrics
-[7]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole#automatically-set-up-triggers
-[8]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole#manually-set-up-triggers
+[6]: https://docs.datadoghq.com/integrations/amazon_lambda/?tab=awsconsole#metrics
+[7]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole#automatically-set-up-triggers
+[8]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole#manually-set-up-triggers

@@ -1,100 +1,98 @@
 ---
-app_id: confluent-platform
-app_uuid: 14e9ea66-bd7c-4c84-b642-a0290166deb4
-assets:
-  dashboards:
-    Confluent Platform Overview: assets/dashboards/overview.json
-  integration:
-    auto_install: true
-    configuration:
-      spec: assets/configuration/spec.yaml
-    events:
-      creates_events: false
-    metrics:
-      check: confluent.kafka.producer.outgoing_byte_rate
-      metadata_path: metadata.csv
-      prefix: confluent.
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 10091
-    source_type_name: Confluent Platform
-  logs:
-    source: confluent_platform
-  monitors:
-    '[Confluent Platform] Unclean leader election': assets/monitors/unclean_leader_election.json
-    '[Confluent Platform] Unused topic partition': assets/monitors/unused_partition.json
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com (日本語対応)
-  support_email: help@datadoghq.com
-categories:
-- ログの収集
-dependencies:
-- https://github.com/DataDog/integrations-core/blob/master/confluent_platform/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: confluent_platform
-integration_id: confluent-platform
-integration_title: Confluent Platform
-integration_version: 1.10.1
-is_public: true
-kind: インテグレーション
-manifest_version: 2.0.0
-name: confluent_platform
-public_title: Confluent Platform
-short_description: Confluent Platform のコンポーネントを監視する。
-supported_os:
+"app_id": "confluent-platform"
+"app_uuid": "14e9ea66-bd7c-4c84-b642-a0290166deb4"
+"assets":
+  "dashboards":
+    "Confluent Platform Overview": assets/dashboards/overview.json
+  "integration":
+    "auto_install": true
+    "configuration":
+      "spec": assets/configuration/spec.yaml
+    "events":
+      "creates_events": false
+    "metrics":
+      "check": confluent.kafka.producer.outgoing_byte_rate
+      "metadata_path": metadata.csv
+      "prefix": confluent.
+    "service_checks":
+      "metadata_path": assets/service_checks.json
+    "source_type_id": !!int "10091"
+    "source_type_name": Confluent Platform
+  "monitors":
+    "[Confluent Platform] Unclean leader election": assets/monitors/unclean_leader_election.json
+    "[Confluent Platform] Unused topic partition": assets/monitors/unused_partition.json
+"author":
+  "homepage": "https://www.datadoghq.com"
+  "name": Datadog
+  "sales_email": info@datadoghq.com
+  "support_email": help@datadoghq.com
+"categories":
+- log collection
+"custom_kind": "integration"
+"dependencies":
+- "https://github.com/DataDog/integrations-core/blob/master/confluent_platform/README.md"
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "confluent_platform"
+"integration_id": "confluent-platform"
+"integration_title": "Confluent Platform"
+"integration_version": "1.10.2"
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "confluent_platform"
+"public_title": "Confluent Platform"
+"short_description": "Monitor Confluent Platform components."
+"supported_os":
 - linux
 - windows
 - macos
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Log Collection
-  - Supported OS::Linux
-  - Supported OS::Windows
-  - Supported OS::macOS
-  configuration: README.md#Setup
-  description: Confluent Platform のコンポーネントを監視する。
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Confluent Platform
+"tile":
+  "changelog": CHANGELOG.md
+  "classifier_tags":
+  - "Category::Log Collection"
+  - "Supported OS::Linux"
+  - "Supported OS::Windows"
+  - "Supported OS::macOS"
+  "configuration": "README.md#Setup"
+  "description": Monitor Confluent Platform components.
+  "media": []
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": Confluent Platform
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## 概要
+## Overview
 
-このチェックは、Datadog Agent を通じて Confluent Platform と Kafka のコンポーネントを監視します。
+This check monitors Confluent Platform and Kafka components through the Datadog Agent.
 
-このインテグレーションは、以下のコンポーネントの JMX メトリクスを収集します。
+This integration collects JMX metrics for the following components:
 
 - Broker
 - Connect
 - Replicator
 - Schema Registry
-- ksqlDB サーバー
+- ksqlDB Server
 - Streams
 - REST Proxy
 
-## 計画と使用
+## Setup
 
 
-### インフラストラクチャーリスト
+### Installation
 
-Confluent Platform チェックは [Datadog Agent][1] パッケージに含まれています。Confluent Platform コンポーネントサーバーに追加でインストールする必要はありません。
+The Confluent Platform check is included in the [Datadog Agent][1] package. No additional installation is needed on your Confluent Platform component server.
 
-**注**: このチェックはメトリクスを JMX を使用して収集するため、Agent が [jmxfetch][2] を実行できるように、各ノード上に JVM が必要です。Oracle 提供の JVM を使用することをお勧めします。
+**Note**: This check collects metrics with JMX. A JVM is required on each node so the Agent can run [jmxfetch][2]. It is recommended to use an Oracle-provided JVM.
 
 
-### ブラウザトラブルシューティング
+### Configuration
 
-1. Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `confluent_platform.d/conf.yaml` ファイルを編集し、Confluent Platform のパフォーマンスデータを収集します。使用可能なすべてのコンフィギュレーションオプションについては、[confluent_platform.d/conf.yaml のサンプル][3]を参照してください。
+1. Edit the `confluent_platform.d/conf.yaml` file, in the `conf.d/` folder at the root of your Agent's configuration directory to collect your Confluent Platform performance data. See the [sample confluent_platform.d/conf.yaml][3] for all available configuration options.
 
-    各コンポーネントに対し、JMX メトリクスを収集するためのインスタンスを個別に作成する必要があります。[`metrics.yaml` ファイル][4]には、デフォルトで収集されるメトリクスのリストが、以下の例のように入力されます。
+    For each component, you need to create a separate instance to collect its JMX metrics. The list of default metrics collected are listed in [`metrics.yaml` file][4], for example:
 
     ```yaml
     instances:
@@ -111,19 +109,19 @@ Confluent Platform チェックは [Datadog Agent][1] パッケージに含ま�
        name: rest_proxy_instance
     ```
 
-2. [Agent を再起動します][5]。
+2. [Restart the Agent][5].
 
-##### 収集データ
+##### Log collection
 
-_Agent バージョン 6.0 以降で利用可能_
+_Available for Agent versions >6.0_
 
-1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` でこれを有効にする必要があります。
+1. Collecting logs is disabled by default in the Datadog Agent, you need to enable it in `datadog.yaml`:
 
    ```yaml
    logs_enabled: true
    ```
 
-2. Confluent Platform コンポーネントのログの収集を開始するには、次のコンフィギュレーションブロックを `confluent_platform.d/conf.yaml` ファイルに追加します。
+2. Add this configuration block to your `confluent_platform.d/conf.yaml` file to start collecting your Confluent Platform components logs:
 
    ```yaml
      logs:
@@ -137,17 +135,17 @@ _Agent バージョン 6.0 以降で利用可能_
              pattern: \[\d{4}\-\d{2}\-\d{2}
    ```
 
-    `path` パラメーターと `service` パラメーターの値を変更し、環境に合わせて構成してください。使用可能なすべてのコンフィギュレーションオプションの詳細については、[confluent_platform.d/conf.yaml のサンプル][3]を参照してください。
+    Change the `path` and `service` parameter values and configure them for your environment. See the [sample confluent_platform.d/conf.yaml][3] for all available configuration options.
 
-3. [Agent を再起動します][6]。
+3. [Restart the Agent][6].
 
-##### メトリクスの収集
+##### Metric collection
 
-コンテナ環境の場合は、[JMX を使用したオートディスカバリー][7]のガイドを参照してください。
+For containerized environments, see the [Autodiscovery with JMX][7] guide.
 
-### 検証
+### Validation
 
-[Agent の status サブコマンドを実行][8]し、**JMXFetch** セクションの `confluent_platform` を探します。
+[Run the Agent's status subcommand][8] and look for `confluent_platform` under the **JMXFetch** section.
 
 ```
     ========
@@ -164,32 +162,33 @@ _Agent バージョン 6.0 以降で利用可能_
           status : OK
 ```
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "confluent_platform" >}}
 
 
-### ヘルプ
+### Events
 
-Confluent Platform チェックには、イベントは含まれません。
+The Confluent Platform check does not include any events.
 
-### ヘルプ
+### Service Checks
 {{< get-service-checks-from-git "confluent_platform" >}}
 
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
+Need help? Contact [Datadog support][10].
 
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://github.com/DataDog/jmxfetch
 [3]: https://github.com/DataDog/integrations-core/blob/master/confluent_platform/datadog_checks/confluent_platform/data/conf.yaml.example
 [4]: https://github.com/DataDog/integrations-core/blob/master/confluent_platform/datadog_checks/confluent_platform/data/metrics.yaml
-[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[5]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [6]: https://github.com/DataDog/integrations-core/blob/master/confluent_platform/metadata.csv
-[7]: https://docs.datadoghq.com/ja/agent/guide/autodiscovery-with-jmx/?tab=containerizedagent
-[8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[7]: https://docs.datadoghq.com/agent/guide/autodiscovery-with-jmx/?tab=containerizedagent
+[8]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
 [9]: https://github.com/DataDog/integrations-core/blob/master/confluent_platform/assets/service_checks.json
-[10]: https://docs.datadoghq.com/ja/help/
+[10]: https://docs.datadoghq.com/help/
+

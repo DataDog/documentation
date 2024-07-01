@@ -1,54 +1,54 @@
 ---
 dependencies:
-  - https://github.com/DataDog/datadog-formula/blob/main/README.md
+- "https://github.com/DataDog/datadog-formula/blob/main/README.md"
 title: SaltStack
 ---
-Datadog SaltStack Formula は、Datadog Agent および Agent ベースのインテグレーション (チェック) のインストールに使用する計算式です。SaltStack Formula について詳しくは、[Salt 計算式のインストールと使用方法][1]を参照してください。
+The Datadog SaltStack formula is used to install the Datadog Agent and the Agent-based integrations (checks). For more details on SaltStack formulas, see the [Salt formulas installation and usage instructions][1].
 
-## セットアップ
+## Setup
 
-### 要件
+### Requirements
 
-Datadog SaltStack Formula は、Debian および RedHat ベースのシステムにのみインストールできます。
+The Datadog SaltStack formula only supports installs on Debian-based and RedHat-based systems.
 
-### インストール
+### Installation
 
-以下の手順で、Datadog Formula を `base` Salt 環境に追加します。別の Salt 環境に追加する場合は、参照先の `base` を お使いの Salt 環境名に変更してください。
+The following instructions add the Datadog formula to the `base` Salt environment. To add it to another Salt environment, change the `base` references to the name of your Salt environment.
 
-#### オプション 1
+#### Option 1
 
-[Datadog Formula][6] を、Salt マスターコンフィギュレーションファイル (デフォルト: `/etc/salt/master`) 内の `gitfs_remotes` オプションを使用して Salt マスターノードのベース環境にインストールします。
+Install the [Datadog formula][6] in the base environment of your Salt master node, using the `gitfs_remotes` option in your Salt master configuration file (defaults to `/etc/salt/master`):
 
 ```text
 fileserver_backend:
-  - roots # デフォルトで有効。次のステップで定義するローカルの Salt ファイルを使用できることが必須
-  - gitfs # gitfs_remotes を使用できるよう、gitfs をファイルサーバーのバックエンドとして追加
+  - roots # Active by default, necessary to be able to use the local salt files we define in the next steps
+  - gitfs # Adds gitfs as a fileserver backend to be able to use gitfs_remotes
 
 gitfs_remotes:
   - https://github.com/DataDog/datadog-formula.git:
     - saltenv:
       - base:
-        - ref: 3.0 # 必要に応じて計算式のバージョンを固定
+        - ref: 3.0 # Pin the version of the formula you want to use
 ```
 
-次に、Salt マスターサービスを再起動してコンフィギュレーションの変更を適用します。
+Then restart your Salt Master service to apply the configuration changes:
 
 ```shell
 systemctl restart salt-master
-# または
+# OR
 service salt-master restart
 ```
 
-#### オプション 2
+#### Option 2
 
-または、Salt マスターノードで Datadog Formula を複製します。
+Alternatively, clone the Datadog formula on your Salt master node:
 
 ```shell
 mkdir -p /srv/formulas && cd /srv/formulas
 git clone https://github.com/DataDog/datadog-formula.git
 ```
 
-次に、複製した Formula をベース環境に追加します。お使いの Salt マスターコンフィギュレーションファイル (デフォルト: `/etc/salt/master`) の `file_roots` 下に追加してください。
+Then, add it to the base environment under `file_roots` of your Salt master configuration file (defaults to `/etc/salt/master`):
 
 ```text
 file_roots:
@@ -57,11 +57,11 @@ file_roots:
     - /srv/formulas/datadog-formula/
 ```
 
-### デプロイ
+### Deployment
 
-ホスト上で Datadog Agent をデプロイするには:
+To deploy the Datadog Agent on your hosts:
 
-1. Datadog Formula をトップファイル (デフォルト: `/srv/salt/top.sls`) に追加します。
+1. Add the Datadog formula to your top file (defaults to `/srv/salt/top.sls`):
 
     ```text
     base:
@@ -69,7 +69,7 @@ file_roots:
         - datadog
     ```
 
-2. ピラーディレクトリ (デフォルト: `/srv/pillar/`) 内に `datadog.sls` を作成します。以下を追加して [Datadog API キー][2]を更新します。
+2. Create `datadog.sls` in your pillar directory (defaults to `/srv/pillar/`). Add the following and update your [Datadog API key][2]:
 
     ```
     datadog:
@@ -79,7 +79,7 @@ file_roots:
         agent_version: <AGENT7_VERSION>
     ```
 
-3. トップのピラーファイル (デフォルト: `/srv/pillar/top.sls`) に `datadog.sls` を追加します。
+3. Add `datadog.sls` to the top pillar file (defaults to `/srv/pillar/top.sls`):
 
     ```text
     base:
@@ -87,35 +87,35 @@ file_roots:
         - datadog
     ```
 
-### 構成
+### Configuration
 
-計算式のコンフィギュレーションはピラーファイルの `datadog` キー内に記述する必要があります。これには `config`、 `install_settings`、`checks` の 3 つが含まれます。
+The formula configuration must be written in the `datadog` key of the pillar file. It contains three parts: `config`, `install_settings`, and `checks`.
 
-#### 構成
+#### Config
 
-`config` の下に、ミニオンの Agent コンフィギュレーションファイル (Agent v6 および v7 の場合は `datadog.yaml`、Agent v5 の場合は `datadog.conf`) に書き込むためのコンフィギュレーションオプションを追加します。
+Under `config`, add the configuration options to write to the minions' Agent configuration file (`datadog.yaml` for Agent v6 & v7, `datadog.conf` for Agent v5).
 
-インストールされている Agent のバージョンに応じてそれぞれオプションを設定します。
+Depending on the Agent version installed, different options can be set:
 
-- Agent v6 & v7: Agent のコンフィギュレーションファイルでサポートされているすべてのオプションを使用できます。
-- Agent v5: `api_key` オプションのみサポートされます。
+- Agent v6 & v7: all options supported by the Agent's configuration file are supported.
+- Agent v5: only the `api_key` option is supported.
 
-以下の例では、Datadog API キーと Datadog サイトを `datadoghq.eu` に設定しています (Agent v6 & v7 で利用可能) 。
+The example below sets your Datadog API key and the Datadog site to `datadoghq.eu` (available for Agent v6 & v7).
 
 ```text
   datadog:
     config:
-      api_key: <DD_API_キー>
+      api_key: <YOUR_DD_API_KEY>
       site: datadoghq.eu
 ```
 
-#### インストール設定
+#### Install settings
 
-`install_settings` 下で、Agent のインストールオプションを構成します。
+Under `install_settings`, configure the Agent installation option:
 
-- `agent_version`: インストールする Agent のバージョンです (デフォルトは最新の Agent v7 となります) 。
+- `agent_version`: The version of the Agent to install (defaults to the latest Agent v7).
 
-以下の例では Agent v6.14.1 のインストールを行います。
+The example below installs Agent v6.14.1:
 
 ```text
   datadog:
@@ -123,24 +123,24 @@ file_roots:
       agent_version: 6.14.1
 ```
 
-#### チェック
+#### Checks
 
-ホストに Agent インテグレーションを追加するには、`checks` 変数とチェックの名前を合わせてキーとして使用します。各チェックに 2 つのオプションが存在します。
+To add an Agent integration to your host, use the `checks` variable with the check's name as the key. Each check has two options:
 
-| オプション    | 説明                                                                                                                                                             |
+| Option    | Description                                                                                                                                                             |
 |-----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `config`  | チェックのコンフィギュレーションファイルに書き込むためのコンフィギュレーションオプションを追加します。<br>Agent v6 & v7: <confd_path>/<check>.d/conf.yaml`<br>Agent v5: `<confd_path>/<check>.yaml` |
-| `version` | Agent v6 & v7 環境でインストールするチェックのバージョン (デフォルトは Agent にバンドルされたバージョンとなります) 。                                                                |
-| `third_party` | Agent v6 と v7（バージョン v6.21.0/v7.21.0 以降のみ）の場合、インストールするインテグレーションがサードパーティインテグレーションであることを示すブール値。`version` オプションとペアで使用する必要があります。                                                                |
+| `config`  | Add the configuration options to write to the check's configuration file:<br>Agent v6 & v7: `<confd_path>/<check>.d/conf.yaml`<br>Agent v5: `<confd_path>/<check>.yaml` |
+| `version` | For Agent v6 & v7, the version of the check to install (defaults to the version bundled with the Agent).                                                                |
+| `third_party` | For Agent v6 & v7 (versions v6.21.0/v7.21.0 and higher only), boolean to indicate that the integration to install is a third-party integration. Must be paired with the `version` option.                                                                |
 
-以下は `/srv/pillar` ディレクトリを監視する[ディレクトリ][3]インテグレーション の v1.4.0 を使用した例です。
+Below is an example to use v1.4.0 of the [Directory][3] integration monitoring the `/srv/pillar` directory:
 
 ```text
 datadog:
   config:
-    api_key: <DD_API_キー>
+    api_key: <YOUR_DD_API_KEY>
   install_settings:
-    agent_version: <AGENT7_バージョン>
+    agent_version: <AGENT7_VERSION>
   checks:
     directory:
       config:
@@ -150,7 +150,7 @@ datadog:
       version: 1.4.0
 ```
 
-以下は、「サードパーティインテグレーション」と名付けられたサンプルのサードパーティインテグレーションの v1.0.0 を使用した例です。
+Below is an example to use v1.0.0 of a sample third-party integration named "third-party-integration":
 
 ```
 datadog:
@@ -167,22 +167,22 @@ datadog:
       third_party: true
 ```
 
-##### ログ
+##### Logs
 
-ログ収集を有効にするには、メインのコンフィギュレーションで `logs_enabled` を `true` に設定します。
+To enable log collection, set `logs_enabled` to `true` in the main configuration:
 ```text
 datadog:
   config:
     logs_enabled: true
 ```
 
-ログを Datadog に送信するには、チェック（インテグレーションにログを設定する既存のチェックまたはカスタムログ収集を設定するカスタムチェック）で `logs` キーを使用します。以下の例では、`system_logs` という名前のカスタムチェックを使用します。
+To send logs to Datadog, use the `logs` key in a check (either an existing check to setup logs for an integration, or a custom check to setup custom log collection). The following example uses a custom check named `system_logs`.
 
-このチェックの `config:` キーのコンテンツは、`/etc/datadog-agent/conf.d/<check_name>.d/conf.yaml` ファイル（この例では `/etc/datadog-agent/conf.d/system_logs.d/conf.yaml`）に書き込まれます。
+The contents of the `config:` key of this check is written to the `/etc/datadog-agent/conf.d/<check_name>.d/conf.yaml` file (in this example: `/etc/datadog-agent/conf.d/system_logs.d/conf.yaml`).
 
-収集するログの一覧を作成するには、カスタムログ収集のコンフィギュレーションファイルの `conf.yaml` への入力と同じ要領で、`config` セクションに入力します（公式ドキュメントの[カスタムログ収集](https://docs.datadoghq.com/agent/logs/?tab=tailfiles#カスタムログ収集) のセクションを参照）。
+To list the logs you want to collect, fill the `config` section the same way you'd fill the `conf.yaml` file of a custom log collection configuration file (see the section on [custom log collection](https://docs.datadoghq.com/agent/logs/?tab=tailfiles#custom-log-collection) in the official docs).
 
-例えば、`/var/log/syslog` および `/var/log/auth.log` からログを収集するには、コンフィギュレーションは以下のようになります。
+For instance, to collect logs from `/var/log/syslog` and `/var/log/auth.log`, the configuration would be:
 
 ```text
 datadog:
@@ -200,23 +200,23 @@ datadog:
 ```
 
 
-## 状態
+## States
 
-Salt Formula には Salt の状態が事前に記述されています。Datadog Formula で利用可能な状態は以下の通りです。
+Salt formulas are pre-written Salt states. The following states are available in the Datadog formula:
 
-| 状態               | 説明                                                                                             |
+| State               | Description                                                                                             |
 |---------------------|---------------------------------------------------------------------------------------------------------|
-| `datadog`           | Datadog Agent サービスをインストール、構成、起動します。                                             |
-| `datadog.install`   | Datadog Agent の適切なリポジトリとインストールを構成します。                                             |
-| `datadog.config`    | Datadog Agent、およびピラーデータを使用したインテグレーション ([pillar.example][4] を参照) を構成します。              |
-| `datadog.service`   | Agent およびチェック用のコンフィギュレーションファイルの変更を監視する Datadog Agent サービスを実行します。 |
-| `datadog.uninstall` | サービスを停止して Datadog Agent をアンインストールします。                                                     |
+| `datadog`           | Installs, configures, and starts the Datadog Agent service.                                             |
+| `datadog.install`   | Configures the correct repo and installs the Datadog Agent.                                             |
+| `datadog.config`    | Configures the Datadog Agent and integrations using pillar data (see [pillar.example][4]).              |
+| `datadog.service`   | Runs the Datadog Agent service, which watches for changes to the config files for the Agent and checks. |
+| `datadog.uninstall` | Stops the service and uninstalls the Datadog Agent.                                                     |
 
-**注**: `datadog.config` を使用して別のマシンで異なるチェックのインスタンスを構成する場合は、Salt マスターコンフィギュレーションまたは Salt ミニオンコンフィギュレーション (マスターなしの場合) の [pillar_merge_lists][5] を必ず `True` に設定してください。
+**NOTE**: When using `datadog.config` to configure different check instances on different machines, [pillar_merge_lists][5] must be set to `True` in the Salt master config or the Salt minion config if running masterless.
 
 [1]: http://docs.saltstack.com/en/latest/topics/development/conventions/formulas.html
 [2]: https://app.datadoghq.com/organization-settings/api-keys
-[3]: https://docs.datadoghq.com/ja/integrations/directory/
+[3]: https://docs.datadoghq.com/integrations/directory/
 [4]: https://github.com/DataDog/datadog-formula/blob/master/pillar.example
 [5]: https://docs.saltstack.com/en/latest/ref/configuration/master.html#pillar-merge-lists
 [6]: https://github.com/DataDog/datadog-formula

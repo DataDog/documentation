@@ -1,167 +1,170 @@
 ---
+title: Frustration Signals
+kind: documentation
 aliases:
-- /ja/real_user_monitoring/frustration_signals
+- /real_user_monitoring/frustration_signals
 further_reading:
-- link: https://www.datadoghq.com/blog/analyze-user-experience-frustration-signals-with-rum/
-  tag: ブログ
-  text: Datadog フラストレーションシグナルによるユーザーのペインポイントの検出
-- link: /real_user_monitoring/dashboards/usage#frustration-signals
-  tag: ドキュメント
-  text: フラストレーションシグナルダッシュボード
+- link: "https://www.datadoghq.com/blog/analyze-user-experience-frustration-signals-with-rum/"
+  tag: Blog
+  text: Detect user pain points with Datadog Frustration Signals
+- link: "/real_user_monitoring/platform/dashboards/usage#frustration-signals"
+  tag: Documentation
+  text: Frustration Signals Dashboard
 - link: /real_user_monitoring/explorer
-  tag: ドキュメント
-  text: RUM エクスプローラーについて
+  tag: Documentation
+  text: Learn about the RUM Explorer
 - link: /real_user_monitoring/session_replay
-  tag: ドキュメント
-  text: セッションリプレイについて
-kind: ドキュメント
-title: コミュニティ
+  tag: Documentation
+  text: Learn about Session Replay
 ---
 
-## 概要
+## Overview
 
-フラストレーションシグナルは、ユーザーがフラストレーションを感じる瞬間を顕在化させることで、アプリケーションの最大の摩擦ポイントを特定するのに役立ちます。
+Frustration signals help you identify your application's highest points of user friction by surfacing moments when users exhibit frustration.
 
-RUM は 3 種類のフラストレーションシグナルを収集します。
+RUM collects three types of frustration signals:
 
-レイジクリック
-: 1 秒間のスライディングウィンドウの中で、ユーザーが 3 回以上要素をクリックした場合。
+Rage Clicks
+: A user clicks on an element more than three times in a one-second sliding window.
 
-デッドクリック
-: ユーザーが静的な要素をクリックしても、そのページでは何のアクションも起こらないこと。
+Dead Clicks
+: A user clicks on a static element that produces no action on the page.
 
-エラークリック
-: JavaScript のエラーが発生する直前に、ユーザーがある要素をクリックした場合。
+Error Clicks
+: A user clicks on an element right before a JavaScript error occurs.
 
-## 要件
+## Requirements
 
-まず、ブラウザ RUM SDK バージョン >=  4.14.0 が必要です。
+First, you need the Browser RUM SDK version >= 4.14.0.
 
-フラストレーションシグナルの収集を開始するには、SDK の構成に以下を追加します。
+To start collecting frustration signals, add the following to your SDK configuration:
 
 <details open>
-  <summary>最新バージョン</summary>
-```
+  <summary>Latest version</summary>
+
+```javascript
 window.DD_RUM.init({
   trackUserInteractions: true,
 })
 ```
+
 </details>
 <details>
-  <summary><code>v5.0.0</code> より前</summary>
-```
+  <summary>Before <code>v5.0.0</code></summary>
+
+```javascript
 window.DD_RUM.init({
   trackUserInteractions: true,
   trackFrustrations: true
 })
 ```
 
-フラストレーションシグナルにはアクションが必要です。`trackFrustrations` を有効にすると、自動的に `trackUserInteractions` が有効になります。
+Frustration signals require actions. Enabling `trackFrustrations` automatically enables `trackUserInteractions`.
 </details>
 
-## API
+## Usage
 
-フラストレーションシグナルは、[**RUM Applications** ページ][1]にユーザーのフラストレーションの原因を表す高レベルのデータポイントとして表示されます。[RUM エクスプローラー][2]にフラストレーションカウントのリストを表示するには、**Options** ボタンをクリックして `@session.frustration.count` の列を追加してください。
+Frustration signals appear as high-level data points representing sources of user frustration on the [**RUM Applications** page][1]. To display a list of frustration counts in the [RUM Explorer][2], click the **Options** button and add a column for `@session.frustration.count`.
 
-### アプリケーションリスト
+### Application list
 
-ブラウザセッションのリストにカーソルを合わせ、セッションをクリックすると、ユーザーのフラストレーションクリックの挙動を観測することができます。または、**Frustrated Sessions** をクリックすると、フラストレーションシグナルのあるセッションにアクセスできます。
+Hover over the list of browser sessions and click on a session to observe a user's frustrated click behavior. Or, click **Frustrated Sessions** to access sessions with a frustration signal.
 
-### フラストレーションシグナルダッシュボードを見る
+### Explore the frustration signals dashboard
 
-**Frustration Signals** ダッシュボードは、アプリケーション全体のフラストレーションレベルの概要を提供し、最もフラストレーションの高いユーザーや、フラストレーションシグナルの数が最も多いページなどのトピックを表示します。
+The **Frustration Signals** dashboard provides an overview of frustration levels across your application, showing you topics like the most frustrated users and pages with the highest number of frustration signals.
 
-このダッシュボードをクローンして、自分のニーズに合わせてカスタマイズすることができます。詳しくは、[フラストレーションシグナルダッシュボード][3]をご覧ください。
+You can clone this dashboard and customize it to fit your needs. For more information, see [Frustration Signals Dashboard][3].
 
-### フラストレーションシグナルを検索する
+### Search for frustration signals
 
-[RUM エクスプローラー][4]で RUM が収集したすべてのデータを検索し、フラストレーションシグナルの傾向を把握したり、より大きな文脈でパターンを分析したり、[ダッシュボード][5]や[モニター][6]にエクスポートしたりすることができます。
+Search through all the data collected by RUM in the [RUM Explorer][4] to surface trends on frustration signals, analyze patterns with greater context, or export them into [dashboards][5] and [monitors][6].
 
-検索クエリにファセットを入力すると、検索が開始されます。利用可能な検索フィールドは以下の通りです。
+Enter a facet in the search query to start your search. Available search fields include:
 
 Frustration Type
-: フラストレーションシグナルを持つアクションを検索します。例えば、レイジクリックがあったアクションを見たい場合、検索クエリに `action.frustration.type:rage_click` を追加します。
+: Find actions with frustration signals. For example, if you want to see any actions that had a rage click, add `action.frustration.type:rage_click` to the search query.
 
 Frustration Count
-: 何らかのフラストレーションシグナルが発生したセッションとビューを検索します。例えば、少なくとも 1 つのフラストレーションシグナルが発生したユーザーセッションまたはビューを検索したい場合、検索クエリに `session.frustration.count:>1` または `view.frustration.count:>1` を追加します。
+: Find sessions and views where any frustration signal occurred. For example, if you want to find any user sessions or views with at least one frustration signal, add `session.frustration.count:>1` or `view.frustration.count:>1` to the search query.
 
-#### セッション
+#### Sessions
 
-**Frustration Count** 列の値があるセッションをクリックすると、検出されたユーザーのフラストレーションを調べることができます。シグナルの種類 (`rage click`、`dead click`、`error click`) と、セッション中に発生したことを示すイベントタイムラインを見ることができます。
+Click on a session with a value in the **Frustration Count** column to examine the user frustration detected. You can see the type of signal (`rage click`, `dead click`, or `error click`) and the event timeline, which shows what occurred during the session.
 
-#### ビュー
+#### Views
 
-ビューをクリックすると、`frustration detected` タグで特定のページでユーザーがフラストレーションを感じたかどうかを特定することができます。
+Click on a view to identify if a user was frustrated on a specific page with the `frustration detected` tag.
 
-{{< img src="real_user_monitoring/frustration_signals/frustration_signals_in_performance_tab.png" alt="パフォーマンスウォーターフォールグラフのイベントドロップダウンメニューのフラストレーションシグナルアクション" style="width:90%;" >}}
+{{< img src="real_user_monitoring/frustration_signals/frustration_signals_in_performance_tab.png" alt="Frustration Signals Actions in the Events dropdown menu in the performance waterfall graph" style="width:90%;" >}}
 
-パフォーマンスウォーターフォールは、フラストレーションシグナルを含むアクションを表示します。
+The performance waterfall displays actions containing frustration signals.
 
-{{< img src="real_user_monitoring/frustration_signals/actions_frustration_signal.png" alt="アクションとして検出されたフラストレーションシグナル" style="width:90%;" >}}
+{{< img src="real_user_monitoring/frustration_signals/actions_frustration_signal.png" alt="Frustration signals detected as an action" style="width:90%;" >}}
 
-#### アクション
+#### Actions
 
-選択したアクションにフラストレーションシグナルが含まれている場合、**Actions** タブに `frustration detected` タグが表示されます。
+The **Actions** tab displays the `frustration detected` tag if the selected action contains a frustration signal.
 
-1 つのアクションで複数のフラストレーションシグナルが発生した場合、アクションパネルの **What Happened** の下に表示されます。
+If multiple frustration signals occur in an action, they are displayed under **What Happened** in the action panel.
 
-{{< img src="real_user_monitoring/frustration_signals/actions_panel_multiple_frustration_signals.png" alt="What Happened のアクションで検出された複数のフラストレーションシグナルの種類" style="width:90%;" >}}
+{{< img src="real_user_monitoring/frustration_signals/actions_panel_multiple_frustration_signals.png" alt="Multiple frustration signal types detected in the action under What Happened" style="width:90%;" >}}
 
-#### CoScreen
+#### Errors
 
-**Errors** タブでエラーをクリックすると、エラーの詳細が表示されたサイドパネルが開きます。フラストレーションシグナルが発生したかどうかを確認することができます。
+Click on an error in the **Errors** tab to open a side panel with error details. You can see if a frustration signal occurred.
 
-{{< img src="real_user_monitoring/frustration_signals/errors_tab.png" alt="Actions サイドパネルの Errors タブ" style="width:90%;" >}}
+{{< img src="real_user_monitoring/frustration_signals/errors_tab.png" alt="Errors Tab in the Actions side panel" style="width:90%;" >}}
 
-## フラストレーションシグナルをセッションリプレイで見る
+## Watch frustration signals in Session Replay
 
-[セッションリプレイ][7]では、実際のユーザーの行動をビデオのように再現して観測することができます。リプレイは、ユーザーがフラストレーションの兆候を示したときに取るアクションの証拠をビデオで提供します。
+In [Session Replay][7], you can observe a video-like replication of real user activity. Replays provide video evidence of the actions users take when they exhibit signs of frustration.
 
-セッションリプレイのユーザージャーニーには、発生したイベントの詳細が時系列で表示されます。イベントにカーソルを合わせると、リプレイ内のその時点に移動します (例えば、デッドクリックが発生した時点など)。
+A session replay's user journey details the events that occur in chronological order. Hover over an event to move to that point in time in the replay: for example, when a dead click occurred.
 
-{{< img src="real_user_monitoring/frustration_signals/session_replay_frustration_signals.png" alt="フラストレーションシグナルがブラウザレコーディングに表示されます" style="width:90%;" >}}
+{{< img src="real_user_monitoring/frustration_signals/session_replay_frustration_signals.png" alt="Frustration signals appear in a browser recording" style="width:90%;" >}}
 
-詳しくは、[セッションリプレイのドキュメント][8]をご覧ください。
+ For more information, see the [Session Replay documentation][8].
 
-## フラストレーションシグナルのアラート作成
+## Create alerts for frustration signals
 
-フラストレーションシグナルのモニターを作成し、アラートを設定することで、アプリケーションの重要なページでフラストレーションシグナルが発生した場合、自身や チームに通知することが可能です。
+You can create monitors and set alerts on frustration signals to notify you or your team if any frustration signals occur on an important page in your application.
 
-例えば、特定のページでフラストレーションシグナルが発生した場合に通知するアラートを設定することができます。
+For example, to set an alert that notifies you if any frustration signals occur on a specific page:
 
-{{< img src="real_user_monitoring/frustration_signals/rum_monitor_frustration_count.png" alt="フラストレーションシグナルの数でアラートを出す RUM モニターを作る" style="width:90%;" >}}
+{{< img src="real_user_monitoring/frustration_signals/rum_monitor_frustration_count.png" alt="Create a RUM Monitor that alerts on the count of frustration signals" style="width:90%;" >}}
 
-詳しくは、[リアルユーザーモニタリングモニターのドキュメント][9]をご覧ください。
+For more information, see the [Real User Monitoring Monitor documentation][9].
 
-## ヘルプ
+## Troubleshooting
 
-### ユーザーがキーボードのキー (Delete など) を押したときに、なぜレイジクリックが作成されないのでしょうか？
+### Why is a rage click not created when a user presses a key (like Delete) on the keyboard?
 
-フラストレーションシグナルは、キーボードのストロークではなく、マウスのクリックによって発生します。
+Frustration signals are generated from mouse clicks, not keyboard strokes.
 
-### サイドパネルに、セッションのフラストレーションシグナルの数がイベントタイムラインと異なることが表示されるのはなぜですか？
+### Why does the side panel show that a session has a different number of frustration signals than in the event timeline?
 
-セッションがライブの場合、情報を取得しているため、バナーにタイムラインと異なる数値が反映されることがあります。
+If a session is live, it is fetching information and may cause the banners to reflect a different number than those in the timeline.
 
-### 追跡するシグナルを選択することはできますか？
+### Can I pick and choose what signals to track?
 
-フラストレーションシグナルを有効にすることで、Datadog はデフォルトで 3 つのシグナルタイプすべてを収集します。詳細については、[カスタマーサクセスマネージャー][10]にお問い合わせください。
+By enabling frustration signals, Datadog collects all three signal types by default. Contact your [Customer Success Manager][10] for more information.
 
 <div class="alert alert-warning">
-フィードバックの提供や機能リクエストの提出は、<a href="/help/">Datadog サポート</a>にご連絡ください。
+To provide feedback or submit a feature request, contact <a href="/help/">Datadog Support</a>.
 </div>
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/rum/list
-[2]: /ja/real_user_monitoring/explorer/
-[3]: /ja/real_user_monitoring/dashboards/usage#frustration-signals
+[2]: /real_user_monitoring/explorer/
+[3]: /real_user_monitoring/platform/dashboards/usage#frustration-signals
 [4]: https://app.datadoghq.com/rum/explorer
-[5]: /ja/dashboards/
-[6]: /ja/monitors/
+[5]: /dashboards/
+[6]: /monitors/
 [7]: https://app.datadoghq.com/rum/replay/sessions/
-[8]: /ja/real_user_monitoring/session_replay/
-[9]: /ja/monitors/types/real_user_monitoring/
+[8]: /real_user_monitoring/session_replay/browser/
+[9]: /monitors/types/real_user_monitoring/
 [10]: mailto:success@datadoghq.com

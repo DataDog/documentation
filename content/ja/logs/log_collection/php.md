@@ -1,52 +1,53 @@
 ---
+title: PHP Log Collection
+kind: documentation
 aliases:
-- /ja/logs/languages/php
+  - /logs/languages/php
 further_reading:
-- link: https://www.datadoghq.com/blog/php-logging-guide
-  tag: ブログ
-  text: PHP ログの収集、カスタマイズ、分析方法
+- link: "https://www.datadoghq.com/blog/php-logging-guide"
+  tag: Blog
+  text: How to collect, customize, and analyze PHP logs
 - link: /logs/log_configuration/processors
   tag: Documentation
-  text: ログの処理方法
+  text: Learn how to process your logs
 - link: /logs/log_configuration/parsing
   tag: Documentation
-  text: パースの詳細
+  text: Learn more about parsing
 - link: /logs/explorer/
   tag: Documentation
-  text: ログの調査方法
-- link: /logs/explorer/#visualize
+  text: Learn how to explore your logs
+- link: "/logs/explorer/#visualize"
   tag: Documentation
-  text: ログ分析の実行
+  text: Perform Log Analytics
 - link: /logs/faq/log-collection-troubleshooting-guide
-  tag: ドキュメント
-  text: ログ収集のトラブルシューティングガイド
-- link: /glossary/#tail
-  tag: 用語集
-  text: 用語集 "テール" の項目
-title: PHP ログ収集
+  tag: Documentation
+  text: Log Collection Troubleshooting Guide
+- link: "/glossary/#tail"
+  tag: Glossary
+  text: Glossary entry for "tail"  
 ---
 
-## 概要
+## Overview
 
-PHP ログを Datadog に送信する場合は、ファイルにログを記録し、Datadog Agent を使用してそのファイルを[テール][14]します。このページでは、[Monolog][8]、[Zend-Log][9] および [Symfony][10] ログライブラリをセットアップする例を詳しく説明します。
+To send your PHP logs to Datadog, log to a file and then [tail][14] that file with your Datadog Agent. This page details setup examples for the [Monolog][8], [Zend-Log][9], and [Symfony][10] logging libraries.
 
-## セットアップ
+## Setup
 
-### インストール
+### Installation
 
 {{< tabs >}}
 {{% tab "PHP Monolog" %}}
 
-このコマンドを実行すると、[Composer][1] を使用して Monolog を依存関係として追加することができます。
+Run this command to use [Composer][1] to add Monolog as a dependency:
 
 ```text
 composer require "monolog/monolog"
 ```
 
-または、以下の方法で Monolog を手動でインストールします。
+Alternatively, install Monolog manually by doing the following:
 
-1. リポジトリから Monolog をダウンロードし、ライブラリに追加します。
-2. アプリケーションのブートストラップ内に以下を追加し、インスタンスを初期化します。
+1. Download Monolog from the repository and include it in the libraries.
+2. Add the following in the application's bootstrap to initialize the instance:
 
     ```php
     <?php
@@ -62,16 +63,16 @@ composer require "monolog/monolog"
 {{% /tab %}}
 {{% tab "PHP Zend-Log" %}}
 
-Zend-Log は、Zend フレームワークの一部です。このコマンドを実行すると、[Composer][1] を使って Zend-Log を追加することができます。
+Zend-Log is a part of the Zend framework. Run this command to use [Composer][1] to add Zend-Log:
 
 ```text
 composer require "zendframework/zend-log"
 ```
 
-または、以下の方法で Zend-Log を手動でインストールします。
+Alternatively, install Zend-Log manually by doing the following:
 
-1. リポジトリからソースをダウンロードし、ライブラリに追加します。
-2. アプリケーションのブートストラップ内に以下を追加し、インスタンスを初期化します。
+1. Download the source from the repository and include it in the libraries.
+2. Add the following the application's bootstrap to initialize the instance:
 
 ```php
 <?php
@@ -86,7 +87,7 @@ composer require "zendframework/zend-log"
 {{% /tab %}}
 {{% tab "PHP Symfony" %}}
 
-以下を追加して、Monolog JSON Formatter をサービスとして宣言します。
+Add the following to declare a Monolog JSON formatter as a service:
 
 ```yaml
 services:
@@ -97,46 +98,43 @@ services:
 {{% /tab %}}
 {{< /tabs >}}
 
-### ロガーの構成
+### Configure your logger
 
 {{< tabs >}}
 {{% tab "PHP Monolog" %}}
 
-以下の構成では、JSON フォーマットを有効にし、ログとイベントを `application-json.log` ファイルに書き込んでいます。コードで、Monolog インスタンスの初期化後に新しいハンドラーを追加します。
+The following configuration enables JSON formatting and writes the logs and events into the `application-json.log` file. In your code, add a new handler after the initialization of the Monolog instance:
 
 ```php
  <?php
   require __DIR__ . '/vendor/autoload.php';
 
-  // Monolog ライブラリをロード
+  // load Monolog library
   use Monolog\Logger;
   use Monolog\Handler\StreamHandler;
   use Monolog\Formatter\JsonFormatter;
 
-  // ログチャネルを作成
+  // create a log channel
   $log = new Logger('channel_name');
 
-  // Json フォーマッタを作成
+  // create a Json formatter
   $formatter = new JsonFormatter();
 
-  // ハンドラーを作成
+  // create a handler
   $stream = new StreamHandler(__DIR__.'/application-json.log', Logger::DEBUG);
   $stream->setFormatter($formatter);
 
-  // バインド
+  // bind
   $log->pushHandler($stream);
 
-  // 例
-  $log->info('Adding a new user', array('username' => 'Seldaek'));```
- 
- 
-
- 
+  // an example
+  $log->info('Adding a new user', array('username' => 'Seldaek'));
+```
 
 {{% /tab %}}
 {{% tab "PHP Zend-Log" %}}
 
-以下の構成では、JSON フォーマットを有効にし、ログとイベントを `application-json.log` ファイルに書き込んでいます。コードで、Zend-Log インスタンスの初期化後に新しいハンドラーを追加します。
+The following configuration enables the JSON formatting and writes the logs and events into the `application-json.log` file. In your code, add a new handler after the initialization of the Zend-Log instance.
 
 ```php
 <?php
@@ -144,23 +142,25 @@ services:
   use Zend\Log\Writer\Stream;
   use Zend\Log\Formatter\JsonFormatter;
 
-  // ロガーを作成
+  // create a logger
   $logger = new Logger();
 
-  // ライターを作成
+  // create a writer
   $writer = new Stream('file://' . __DIR__ . '/application-json.log');
 
-  // Json フォーマッタを作成
+  // create a Json formatter
   $formatter = new JsonFormatter();
   $writer->setFormatter($formatter);
 
-  // バインド
-  $logger->addWriter($writer); Zend\Log\Logger::registerErrorHandler($logger);```
+  // bind
+  $logger->addWriter($writer);
+  Zend\Log\Logger::registerErrorHandler($logger);
+```
 
 {{% /tab %}}
 {{% tab "PHP Symfony" %}}
 
-Monolog 構成でフォーマッタを構成するには、以下のフォーマッタフィールドを宣言します。
+To configure the formatter in your Monolog configuration, declare the formatter field as follows:
 
 ```yaml
  monolog:
@@ -175,19 +175,19 @@ Monolog 構成でフォーマッタを構成するには、以下のフォーマ
 {{% /tab %}}
 {{< /tabs >}}
 
-### Datadog Agent の構成
+### Configure the Datadog Agent
 
-[ログ収集が有効][11]になったら、以下を行ってログファイルを追跡して新しいログを Datadog に送信する[カスタムログ収集][12]を設定します。
+Once [log collection is enabled][11], do the following to set up [custom log collection][12] to tail your log files and send new logs to Datadog.
 
-1. `php.d/` フォルダーを `conf.d/` [Agent 構成ディレクトリ][13]に作成します。
-2. `php.d/` に以下の内容で `conf.yaml` ファイルを作成します。
+1. Create a `php.d/` folder in the `conf.d/` [Agent configuration directory][13].
+2. Create a `conf.yaml` file in `php.d/` with the following content:
 
 ```yaml
 init_config:
 
 instances:
 
-## Log セクション
+## Log section
 logs:
 
   - type: file
@@ -197,29 +197,29 @@ logs:
     sourcecategory: sourcecode
 ```
 
-## ログとトレースにおけるサービスを接続
+## Connect your services across logs and traces
 
-このアプリケーションで APM が有効になっている場合、[APM PHP ロギングの指示に従って][2]ログにトレース ID とスパン ID を自動的に追加することで、アプリケーションログとトレース間の相関関係を改善できます。
+If APM is enabled for this application, the correlation between application logs and traces can be improved by following the [APM PHP logging instructions][2] to automatically add trace and span IDs in your logs.
 
-## ログにコンテキストを追加する
+## Add more context to logs
 
 {{< tabs >}}
 {{% tab "PHP Monolog" %}}
 
-ログやイベントに追加のコンテキストを追加すると便利なことがあります。Monolog は、スレッドローカルコンテキストを設定するメソッドを提供し、すべてのイベントと共に自動的に送信されます。例えば、コンテキストデータを含むイベントをログに記録するには
+It can be useful to add additional context to your logs and events. Monolog provides methods for setting thread-local context that is then submitted automatically with all events. For example, to log an event with contextual data:
 
 ```php
 <?php
   $logger->info('Adding a new user', array('username' => 'Seldaek'));
 ```
 
-Monolog のプリプロセッサーには、単純なコールバックで、設定できるメタデータ (例えば、セッション ID やリクエスト ID など) でイベントをリッチ化する機能があります。
+Monolog's pre-processor has a feature that is a simple callback and enriches your events with metadata you can set (for example, the session ID, or the request id):
 
 ```php
  <?php
   $log->pushProcessor(function ($record) {
 
-      // 現在のユーザーを記録
+      // record the current user
       $user = Acme::getCurrentUser();
       $record['context']['user'] = array(
           'name' => $user->getName(),
@@ -227,34 +227,36 @@ Monolog のプリプロセッサーには、単純なコールバックで、設
           'email' => $user->getEmail(),
       );
 
-      // さまざまなタグを追加
+      // Add various tags
       $record['ddtags'] = array('key' => 'value');
 
-      // さまざまな汎用コンテキストを追加
+      // Add various generic context
       $record['extra']['key'] = 'value';
 
-      return $record; });```
+      return $record;
+  });
+```
 
 {{% /tab %}}
 {{% tab "PHP Zend-Log" %}}
 
-ログやイベントに追加のコンテキストを追加すると便利なことがあります。Zend-Log は、スレッドローカルコンテキストを設定するメソッドを提供し、すべてのイベントと共に自動的に送信されます。例えば、コンテキストデータを含むイベントをログに記録するには
+It can be useful to add additional context to your logs and events. Zend-Log provides methods to set thread-local context that is then submitted automatically with all events. For example, to log an event with contextual data:
 
 ```php
 <?php
   $logger->info('Adding a new user', array('username' => 'Seldaek'));
 ```
 
-ログに追加情報を与える方法については、 [Zend のプロセッサーのドキュメント][1]を参照してください。
+See [Zend's Processor documentation][1] for more information on providing additional information to your logs.
 
 [1]: https://docs.zendframework.com/zend-log/processors
 {{% /tab %}}
 {{% tab "PHP Symfony" %}}
 
-セッションプロセッサーを使用してログに変数コンテキストを追加するには、以下の手順に従います。
+Follow these steps to add variable context in your logs using a session processor.
 
-1. セッションプロセッサーを実装します。
-  次の例では、プロセッサーは現在のセッションを知っており、`requestId`、`sessionId` などの情報でログレコードの内容をリッチ化しています。
+1. Implement your session processor:
+  In the following example, the processor knows the current session and enriches the content of the log record with information such as the `requestId`, `sessionId`, and so on.
 
     ```php
     <?php
@@ -325,7 +327,7 @@ Monolog のプリプロセッサーには、単純なコールバックで、設
       }
     ```
 
-2. 以下を追加して、プロセッサーを Symfony とインテグレーションします。
+2. Integrate the processor with Symfony by adding the following:
 
     ```yaml
       services:
@@ -336,14 +338,14 @@ Monolog のプリプロセッサーには、単純なコールバックで、設
                   - { name: monolog.processor, method: processRecord }
     ``` 
 
-3. 生成された JSON ファイルを Datadog に[ストリーミング](#configure-the-datadog-agent)します。
+3. [Stream](#configure-the-datadog-agent) the generated JSON file to Datadog.
 
 {{% /tab %}}
 {{< /tabs >}}
 
-## Monolog フレームワークのインテグレーション
+## Monolog framework integration
 
-Monolog は、以下のフレームワークで使用することができます。
+Monolog can be used with the following frameworks:
 
 * [Symfony v2+/v3+][3]
 * [PPI][4]
@@ -351,16 +353,16 @@ Monolog は、以下のフレームワークで使用することができます
 * [Silex][6]
 * [Lumen][7]
 
-Monolog をフレームワークとインテグレーションするために、以下を追加します。
+To integrate Monolog with your framework, add the following:
 
 ```php
  <?php
-  // Monolog ライブラリのロードが正常か確認
+  // Check if the Monolog library is well loaded
   //use Monolog\Logger;
   //use Monolog\Handler\StreamHandler;
   //use Monolog\Formatter\JsonFormatter;
 
-  // monolog インスタンスを含む
+  // with the monolog instance
   $monolog = ...
 
   ///// Log shipper configuration
@@ -373,18 +375,18 @@ Monolog をフレームワークとインテグレーションするために、
   return $r;
 ```
 
-次に、Monolog 用のロガーを構成します。
+Then, configure your logger for Monolog.
 
 {{< tabs >}}
 {{% tab "Symfony v2+/v3+" %}}
 
-構成ディレクトリ `/path/to/config/directory/` にある `config_dev.yml` と `config_prod.yml` に以下を追加してください。開発環境と本番環境に合わせた構成になるように、サンプルを修正します。
+In your configuration directory `/path/to/config/directory/`, add the following to the `config_dev.yml` and `config_prod.yml`. Modify the example to configure it for your development and production environments.
 
 ```yaml
 # app/config/config.yml
 monolog:
 
-# プロセッサーを使用する場合はこのセクションのコメントを解除
+# Uncomment this section, if you want to use a Processor
 #       Processor :
 #           session_processor:
 #               class: Acme\Bundle\MonologBundle\Log\SessionRequestProcessor
@@ -397,36 +399,36 @@ monolog:
 
     handlers:
 
-        # ログシッパーのコンフィギュレーション
+        # Log shipper configuration
         to_json_files:
-            # lvar/logs/(environment).log に記録
+            # log to var/logs/(environment).log
             type: stream
             path: "%kernel.logs_dir%/%kernel.environment%.log"
-            # 全チャネル (ドクトリン、エラーなど) を含む
+            # includes all channels (doctrine, errors, and so on)
             channels: ~
-            # json フォーマッタを使用
+            # use json formatter
             formatter: monolog.json_formatter
-            # ログレベルを設定します (例: debug、error、alert)
+            # set the log level (for example: debug, error, or alert)
             level: debug
 ```
 
 {{% /tab %}}
 {{% tab "PPI" %}}
 
-構成ディレクトリ `/path/to/config/directory/` にある `config_dev.yml` と `config_prod.yml` に以下を追加してください。開発環境と本番環境に合わせた構成になるように、サンプルを修正します。
+In your configuration directory `/path/to/config/directory/`, add the following to the `config_dev.yml` and `config_prod.yml`. Modify the example to configure it for your development and production environments.
 
 ```yaml
 monolog:
     handlers:
 
-        # ログシッパー構成
+        # Log shipper configuration
         to_json_files:
-            # var/logs/(environment).log にログを記録します
+            # log to var/logs/(environment).log
             type: stream
             path: "%kernel.logs_dir%/%kernel.environment%.log"
-            # JSON フォーマッタを使用します
+            # use json formatter
             formatter: monolog.json_formatter
-            # ログレベルを設定します (例: debug、error、alert)
+            # set the log level (for example: debug, error, or alert)
             level: debug
 ```
 
@@ -434,10 +436,10 @@ monolog:
 {{% tab "Laravel" %}}
 
 <div class="alert alert-warning">
-関数 <code>\DDTrace\current_context()</code> は、バージョン <a href="https://github.com/DataDog/dd-trace-php/releases/tag/0.61.0">0.61.0</a> で導入されています。
+The function <code>\DDTrace\current_context()</code> has been introduced in version <a href="https://github.com/DataDog/dd-trace-php/releases/tag/0.61.0">0.61.0</a>.
 </div>
 
-以下を追加します。
+Add the following:
 
 ```php
 <?php
@@ -455,13 +457,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        // Monolog インスタンスを取得
+        // Get the Monolog instance
         $monolog = logger()->getLogger();
         if (!$monolog instanceof \Monolog\Logger) {
             return;
         }
 
-        // オプション: JSON 形式を使用
+        // Optional: Use JSON formatting
         $useJson = false;
         foreach ($monolog->getHandlers() as $handler) {
             if (method_exists($handler, 'setFormatter')) {
@@ -470,7 +472,7 @@ class AppServiceProvider extends ServiceProvider
             }
         }
 
-        // トレースおよびスパン ID を挿入してログエントリを APM トレースと接続
+        // Inject the trace and span ID to connect the log entry with the APM trace
         $monolog->pushProcessor(function ($record) use ($useJson) {
             $context = \DDTrace\current_context();
             if ($useJson === true) {
@@ -504,14 +506,14 @@ class AppServiceProvider extends ServiceProvider
 {{% /tab %}}
 {{% tab "Silex" %}}
 
-以下を追加します。
+Add the following: 
 
 ```php
 <?php
   // file: bootstrap
   $app->extend('monolog', function($monolog, $app) {
       $monolog->pushHandler(...);
-      // 下記にロガーを構成
+      // configure your logger below
       return $monolog;
   });
 ```
@@ -519,14 +521,14 @@ class AppServiceProvider extends ServiceProvider
 {{% /tab %}}
 {{% tab "Lumen" %}}
 
-以下を追加します。
+Add the following: 
 
 ```php
 <?php
   //file: bootstrap/app.php
   $app->configureMonologUsing(function($monolog) {
       $monolog->pushHandler(...);
-      // 下記にロガーを構成
+      // configure your logger below
   });
 
   return $app;
@@ -535,11 +537,11 @@ class AppServiceProvider extends ServiceProvider
 {{< /tabs >}}
 {{< /tabs >}}
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[2]: /ja/tracing/other_telemetry/connect_logs_and_traces/php/
+[2]: /tracing/other_telemetry/connect_logs_and_traces/php/
 [3]: https://symfony.com/doc/current/logging.html#monolog
 [4]: https://github.com/ppi/ppi-monolog-module
 [5]: https://laravel.com/docs/9.x/logging#introduction
@@ -548,7 +550,7 @@ class AppServiceProvider extends ServiceProvider
 [8]: https://seldaek.github.io/monolog/
 [9]: https://framework.zend.com/
 [10]: https://symfony.com/
-[11]: /ja/agent/logs/?tab=tailfiles#activate-log-collection
-[12]: /ja/agent/logs/?tab=tailfiles#custom-log-collection
-[13]: /ja/agent/guide/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
-[14]: /ja/glossary/#tail
+[11]: /agent/logs/?tab=tailfiles#activate-log-collection
+[12]: /agent/logs/?tab=tailfiles#custom-log-collection
+[13]: /agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
+[14]: /glossary/#tail

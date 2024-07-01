@@ -1,37 +1,37 @@
 ---
-description: Synthetic ブラウザテストでカスタム JavaScript アサーションを使用する方法について説明します。
+title: Use Custom JavaScript Assertions In Browser Tests
+kind: guide
+description: Learn how to use custom JavaScript assertions in your Synthetic browser tests.
 further_reading:
 - link: /synthetics/browser_tests/actions/
-  tag: ドキュメント
-  text: ブラウザテストステップについて
+  tag: Documentation
+  text: Learn about browser test steps
 - link: /synthetics/browser_tests/advanced_options/
-  tag: ドキュメント
-  text: テストステップの高度なオプションを構成する方法を学ぶ
-- link: /synthetics/guide/popup/#moving-popups
-  tag: ドキュメント
-  text: 不明な時間にトリガーされるポップアップの処理方法について
-kind: ガイド
-title: ブラウザテストでカスタム JavaScript アサーションを使用する
+  tag: Documentation
+  text: Learn how to configure advanced options for test steps
+- link: "/synthetics/guide/popup/#moving-popups"
+  tag: Documentation
+  text: Learn how to handle pop-ups triggered at unknown times
 ---
 
-## 概要
+## Overview
 
-このガイドでは、[ブラウザテスト][1]でカスタム JavaScript を使用してユーザーインターフェイス (UI) をテストする方法について説明します。JavaScript のアサーションは、同期と非同期のコードをサポートします。
+This guide describes how you can test a user interface (UI) using custom JavaScript in a [browser test][1]. JavaScript assertions support synchronous and asynchronous code.
 
-カスタム JavaScript を使用してアサーションを作成するには
+To create an assertion using custom JavaScript:
 
-1. **Assertion** をクリックし、**Test your UI with custom JavaScript** を選択します。
-2. アサーションの本文を記述します。
-3. オプションで、UI でターゲットとなる要素を選択します。
-4. **Apply** をクリックします。
+1. Click **Assertion** and select **Test your UI with custom JavaScript**.
+2. Write the body of your assertion.
+3. Optionally, select a target element in the UI. 
+4. Click **Apply**.
 
-アサーションについては、[ブラウザテストステップ][2]を参照してください。
+For more information about assertions, see [Browser Test Steps][2].
 
-## ある要素がページ上に存在しないことをアサートする
+## Assert that an element is not on the page
 
-特定の ID を持つ要素がページ上に*ない*ことを確認するには、`return !document.getElementById("<ELEMENT_ID>");` を使用します。
+To verify that an element with a specific ID is *not* on the page, use `return !document.getElementById("<ELEMENT_ID>");`.
 
-ページ上に要素が*ない*ことを確認し、コンソールエラーで要素の数を返すには、本文のアサーションに以下を追加します。
+To verify that elements are *not* on the page and return the number of elements in the console error, add the following in the body assertion:
 
 {{< code-block lang="javascript" >}}
 var element = document.querySelectorAll("<SELECTORS>");
@@ -41,40 +41,40 @@ if ( element.length > 0 ){
 return element.length === 0;
 {{< /code-block >}}
 
-ブラウザテストの結果には、`console.error` のログが含まれます。
+Your browser test results contain `console.error` logs.
 
-{{< img src="synthetics/guide/custom-javascript-assertion/step_results.png" alt="テストステップのサイドパネルの Errors & Warnings タブにコンソールのエラーログが表示される" style="width:80%;" >}}
+{{< img src="synthetics/guide/custom-javascript-assertion/step_results.png" alt="Console error logs appearing in the Errors & Warnings tab on the test step side panel" style="width:80%;" >}}
 
-## ラジオボタンがチェックされたことをアサートする
+## Assert that a radio button is checked
 
-ラジオボタンがチェックされていることを確認するには、本文アサーションで `return document.querySelector("<SELECTORS>").checked = true;` を使用します。
+To verify that a radio button is checked, use `return document.querySelector("<SELECTORS>").checked = true;` in the body assertion.
 
-## 指定されたローカルストレージの値を設定する
+## Set the value of a specified local storage item
 
-指定したローカルストレージの値を設定するには、本文アサーションに以下を追加します。
+To set the value of a specified local storage item, add the following in the body assertion:
 
 {{< code-block lang="javascript" >}}
 localStorage.setItem(keyName, keyValue);
 return true
 {{< /code-block >}}
 
-例えば、1970 年 1 月 1 日 00 時 00 分 00 秒 (UTC) から経過したミリ秒数を "mytime" に設定するには
+For example, to set the number of milliseconds elapsed since January 1, 1970, 00:00:00 UTC to "mytime":
 
 {{< code-block lang="javascript" >}}
 localStorage.setItem("mytime", Date.now());
 return true
 {{< /code-block >}}
 
-## レンダリングされた PDF に含まれるテキストに対するアサート
+## Assert on text contained in a rendered PDF
 
-外部ライブラリを使って、レンダリングされた PDF の内容をテストすることができます。
+You can use an external library to test the content of a rendered PDF. 
 
-外部ライブラリを読み込むには、本文アサーションで promise を使用します。
+To load external libraries, use a promise in the body assertion:
 
 {{< code-block lang="javascript" filename="Custom JavaScript" collapsible="true" >}}
 const script = document.createElement('script');
 script.type = 'text/javascript';
-//外部ライブラリの読み込み
+//load external library
 script.src = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.min.js";
 const promise = new Promise((r) => script.onload = r)
 document.head.appendChild(script)
@@ -91,9 +91,9 @@ return await loadingTask.promise.then(function(pdf) {
 });
 {{< /code-block >}}
 
-## その他の参考資料
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/synthetics/browser_tests/
-[2]: /ja/synthetics/browser_tests/actions/?tab=testanelementontheactivepage#assertion
+[1]: /synthetics/browser_tests/
+[2]: /synthetics/browser_tests/actions/?tab=testanelementontheactivepage#assertion

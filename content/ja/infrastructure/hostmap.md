@@ -1,72 +1,73 @@
 ---
+title: Host and Container Maps
+kind: documentation
 aliases:
-- /ja/graphing/infrastructure/hostmap/
-- /ja/infrastructure/containermap/
-- /ja/guides/hostmap
+  - /graphing/infrastructure/hostmap/
+  - /infrastructure/containermap/
+  - /guides/hostmap
 further_reading:
 - link: /infrastructure/livecontainers/
-  tag: グラフ
-  text: 環境内のすべてのコンテナのリアルタイム表示
+  tag: Documentation
+  text: Get real-time visibility of all of the containers across your environment
 - link: /infrastructure/process/
-  tag: グラフ
-  text: システムのあらゆるレベルの事象の把握
-title: ホストとコンテナマップ
+  tag: Documentation
+  text: Understand what is going on at any level of your system
 ---
 
-## 概要
+## Overview
 
-インフラストラクチャーマップ ([ホストマップ][4]、[コンテナマップ][5]) は、ホストとコンテナを一画面で視覚化し、メトリクスを色や形で理解できるようにするものです。
+Infrastructure Maps ([Host Maps][4] and [Container Maps][5]) help you to visualize hosts and containers on one screen, with metrics made comprehensible through color and shape.
 
-{{< img src="infrastructure/containermap/containermap.png" alt="コンテナマップ。コンテナを AWS アベイラビリティゾーンごとにグループ化した長方形で表示しています。" style="width:80%;">}}
+{{< img src="infrastructure/containermap/containermap.png" alt="A Container Map, showing containers as rectangles grouped by AWS availability zone." style="width:80%;">}}
 
-左上のドロップダウンセレクタを使用して、ホストとコンテナを切り替えます。
+Use the drop-down selector in the upper left to switch between hosts and containers.
 
-## インストール
+## Installation
 
-[Agent][6] をデプロイしたら、それ以上の設定は不要です。[Docker Agent][7] ではなく標準インストールで Docker コンテナ情報を収集するには、`dd-agent` ユーザーが `docker.sock` へのアクセス許可を持つ必要があります。アクセス許可は `dd-agent` を `docker` グループに追加することにより付与されます。
+After deploying the [Agent][6], no other configuration is necessary. For collecting Docker container information in the standard install rather than with the [Docker Agent][7], the `dd-agent` user needs to have permissions to access `docker.sock`. Permission can be given by adding `dd-agent` to the `docker` group.
 
-## 使用方法
+## Usage
 
-### フィルター
+### Filter
 
-**Filter** 入力ボックスを使用して、インフラストラクチャーマップをインフラストラクチャーの特定のサブセットに制限します。左上のフィルター入力バーでは、Datadog が提供する属性だけでなく、タグによるインフラストラクチャーマップのフィルタリングも可能です。
+Use the **Filter** input box to limit an Infrastructure Map to a specific subset of an infrastructure. The filter input bar in the top left enables filtering of the Infrastructure Map by tags as well as Datadog-provided attributes.
 
-フィルター入力バーが空の場合は、選択されたメトリクスを Datadog にレポートしているすべてのホスト/コンテナがマップに表示されます。
+If the filter input bar is empty, the map displays all hosts/containers that are reporting the selected metric to Datadog.
 
-たとえば、ホストが置かれている環境に基づいてホストにタグ付けする場合は、'production' でフィルタリングすることで、ステージングなどの他の環境内のホストをマップから除外できます。稼働中のホストを 1 つのロール以外すべて除外する場合は、そのロールもフィルターに追加します。フィルターは `AND` で結合されます。
+For example, if you tag your hosts by the environment they are in, you can filter by 'production' to remove hosts in your staging and other environments from the map. If you want to eliminate all but one host role in production, then add that role to the filter, too—the filters are `AND`ed together.
 
-**注**: `tag:value` と `"tag:value"` のフィルタリングは異なります。`tag:value` のフィルタリングは厳密にそのタグとの一致を検索しますが、`"tag:value"` のフィルタリングはそのテキストを検索します。
+**Note**: There is a distinction between filtering for `tag:value` and `"tag:value"`. Filtering for `tag:value` strictly matches the tag, while filtering for `"tag:value"` performs a search on that text.
 
-### グループ
+### Group
 
-**Group** 入力ボックスを使用すると、ホスト/コンテナをグループとして空間的に配置できます。グループ内のホスト/コンテナは、グループ化したタグを共有します。 
+Use the **Group** input box to spatially arrange your hosts/containers into groups. Any host/container in a group shares the tag or tags you group by.  
 
-たとえば、ホストを AWS アベイラビリティーゾーンでグループ化することができます。2 つ目のグループ化タグ (たとえば、インスタンスタイプ) を追加すると、ホストはさらにいくつかのグループに再分割されます。つまり、以下に示すように、まずアベイラビリティゾーンで分割され、次にインスタンスタイプで分割されます。
+For example, you can group your hosts by AWS availability zone. If you add a second grouping tag, such as instance type, then the hosts are further subdivided into groups: first by availability zone and then by instance type, as seen below.
 
-{{< img src="infrastructure/hostmap/hostmappart2image2.png" alt="ホスト (六角形で表される) をアベイラビリティゾーンごとに 2 つのグループに分けたホストマップ。各アベイラビリティゾーンの中で、ホストはインスタンスタイプごとに細分化されています。" >}}
+{{< img src="infrastructure/hostmap/hostmappart2image2.png" alt="A Host Map where hosts (represented by hexagons) are split into two groups, by availability zone. Within each availability zone grouping, the hosts are then subdivided by instance type." >}}
 
-### 塗りつぶしとサイズ
+### Fill and size
 
-デフォルトでは、各ホストの色はそのホスト/コンテナの CPU 使用率を表すように設定されており、緑 (0% 使用) からオレンジ (100% 使用) の範囲で表示されます。**Fill** セレクターで別のメトリクスを選択できます。
+By default, the color of each host is set to represent the percentage of CPU usage on that host/container, where the color ranges from green (0% utilized) to orange (100% utilized). You can select different metrics from **Fill** selector.  
 
-インフラストラクチャーマップは、六角形または長方形のサイズで、追加のオプションのメトリクスを伝えることもできます。このメトリクスは、**Size** セレクターで選択できます。
+Infrastructure Maps can also communicate an additional, optional metric with the size of the hexagon or rectangle. You can select this metric from the **Size** selector. 
 
-**注**: CPU Utilization メトリクスは、Datadog Agent からレポートされているか、AWS または vSphere から直接レポートされているかにかかわらず、最も信頼性が高い最新の CPU 使用率の計測値を使用します。
+**Note**: The CPU Utilization metric uses the most reliable and up-to-date measurement of CPU utilization, whether it is being reported by the Datadog Agent, or directly by AWS or vSphere.
 
-### タグ
+### Tags
 
-[タグ][1]は手動で適用することも、[インテグレーション][2]を使って自動的に適用することも可能です。そして、これらのタグを使ってホストやコンテナをフィルターすることができます。
+You can apply [tags][1] manually, or use [integrations][2] to automatically apply them. You can then use these tags to filter your hosts or containers.
 
-たとえば、一部のホストが AWS 上で動作している場合、以下の AWS 固有のタグを利用できます。
+For example, if some of your hosts are running on AWS, the following AWS-specific tags are available to you:
 
 * `availability-zone`
 * `region`
 * `image`
 * `instance-type`
 * `security-group`
-* 使用している EC2 タグ (`name` など)
+* any EC2 tags you might use, such as `name`
 
-Datadog Agent では、ホストメタデータおよびアプリケーション情報も収集されます。この一部は、フィルターまたはグループ化のための語句として使用できます。そのようなフィールドには以下が含まれます。
+The Datadog Agent also collects host metadata and application information, some of which can be used as a filter or for grouping terms. Those fields include:
 
 - `field:metadata_agent_version`
 - `field:metadata_platform`
@@ -74,65 +75,65 @@ Datadog Agent では、ホストメタデータおよびアプリケーション
 - `field:metadata_machine`
 - `field:apps`
 
-### ズームイン
+### Zoom in
 
-調査したいホストまたはコンテナを特定したら、クリックすると詳細が表示されます。ホストにズームインし、そのホストからのメトリクスをレポートするインテグレーションが最大 6 つ表示されます。インテグレーションが 6 つより多い場合は、下のスクリーンショットに表示されているように、ホストの詳細ペインの **Apps** ヘッダーの下にリストされます。
+When you've identified a host or container that you want to investigate, click it for details. It zooms in and displays up to six integrations reporting metrics from that host. If there are more than six integrations, they are listed under the **Apps** header in the host's detail pane, as shown in the screenshot below.
 
-インテグレーションの名前をクリックすると、そのインテグレーションのメトリクスがコンパクトなダッシュボードに表示されます。下のスクリーンショットでは「system」がクリックされ、CPU 使用率、メモリ使用量、ディスクのレイテンシーなどのシステムメトリクスが取得されています。
+Click the name of an integration for a condensed dashboard of metrics for that integration. In the screenshot below, "system" has been clicked to get system metrics such as CPU usage, memory usage, disk latency, etc.
 
-{{< img src="infrastructure/hostmap/blog-host-maps-01.png" alt="ユーザーが特定のホストをクリックしたときに表示されるビュー。下部に情報パネルが表示され、各種アプリのほか、メトリクスやステータスを確認するためのセクションが表示されます。" style="width:75%;" >}}
+{{< img src="infrastructure/hostmap/blog-host-maps-01.png" alt="A view of what is displayed when a user clicks on a particular host. An information panel is displayed at the bottom and lists various apps, as well as a sections for metrics and status checks." style="width:75%;" >}}
 
-### Agent がインストールされていないホストのホストマップ表示
+### Display hosts on the Host Map that don't have an Agent installed
 
-デフォルトでは、選択されたメトリクスをレポートしているホストだけがホストマップに表示されます。これを使用して、グリッド内の個別の六角形の色またはサイズを設定できます。
+By default, the Host Map only shows hosts that are reporting the selected metric, which can then be used to set a color or size for the individual hexagon within the grid.
 
-### データの鮮度と意味
+### Data freshness and meaning
 
-ホストマップのデータは、マップを継続的に操作していない限り、約 1 分に 1 回の割合でリフレッシュされます。画面の左下に、データが最後に更新された日時が表示されます。
+Data in the Host Map is refreshed about once a minute—unless you are continuously interacting with the map. The bottom left of the screen tells you when data was last updated.
 
-## ユースケース
+## Use cases
 
-### リソースの最適化
+### Resource optimization
 
-通常、AWS ユーザーはさまざまなインスタンスタイプを使用しています。メモリが最適化されたインスタンスもあれば、計算用に最適化されたインスタンスもあります。小さなインスタンスもあれば、大きなインスタンスもあります。
+If you are an AWS user, you probably use a variety of instance types. Some instances are optimized for memory, some for compute, some are small, some are big.  
 
-AWS の費用を削減したいのであれば、高価なインスタンスが何に使用されているのかを明らかにすることから始めます。まず `instance-type` でグループ化し、次に `role` や `name` でグループ化します。**c3.8xlarge** などの高価なインスタンスタイプに注目します。CPU が十分に活用されていないホスト役割はありませんか。もしあれば、各ホストにズームインして、この数か月間にそのコンピューティング能力が必要であったかどうか、そのホストグループを安価なインスタンスタイプに移行すべきかどうかを確認します。
+If you want to reduce your AWS spend, you might start by figuring out what the expensive instances are used for. First, group by `instance-type` and then group by `role` or `name`. Take a look at your expensive instance types, such as **c3.8xlarge**. Are there any host roles whose CPU is underutilized? If so, zoom in to individual hosts and see whether all that computational power has been needed in the last several months, or whether this group of hosts is a candidate for migrating to a cheaper instance type.  
 
-以下は、Datadog のインフラストラクチャーの一部です。**c3.2xlarge** インスタンスに大きな負荷がかかっていることがわかります。
+Below is a subset of Datadog's infrastructure. As you can see, **c3.2xlarge** instances are heavily loaded.
 
-{{< img src="infrastructure/hostmap/hostmappart1image2.png" alt="インスタンスタイプ別に m3.large、c3.2xlarge、m1.xlarge に分類された、六角形で表された多数のホストを表示したもの。m3.large と m1.xlarge のほとんどのホストは CPU 使用率が低いことを示す緑色で表示されていますが、c3.2xlarge のホストは CPU 使用率が高いことを示すオレンジ色で表示されています。" style="width:80%;">}}
+{{< img src="infrastructure/hostmap/hostmappart1image2.png" alt="A view of a number of hosts, represented by hexagons, that have been grouped by instance type: m3.large, c3.2xlarge, and m1.xlarge. Most hosts in m3.large and m1.xlarge are colored green to signify low CPU utlization, but the hosts in c3.2xlarge are orange, signifying high CPU utilization." style="width:80%;">}}
 
-この c3.2xlarge グループをクリックしてロールでサブグループ化すると (以下)、一部のロールにのみ負荷がかかり、他のロールはほぼアイドル状態であることがわかります。この 7 つの緑色のノードを c3.xlarge にダウングレードすれば、年間 $13,000 ドル近くの節約になります。(ホスト 1 台につき 1 時間で $0.21 の節約 x 24 時間/日 * 365 日/年 * 7 ホスト = $12,877.20 / 年)
+If you click on the c3.2xlarge group and then sub-group by role (shown below), you can find that only some of the roles are loaded, while others are nearly idling. If you downgraded these seven green nodes to a c3.xlarge, you would save almost $13K per year. ($0.21 saved per hour per host x 24 hr/day * 365 days/year * 7 hosts = $12,877.20 / year)
 
-{{< img src="infrastructure/hostmap/hostmappart1image3.png" alt="前に示した c3.2xlarge のグループを、ロール別にサブグループ化したもの。オレンジ色で統一されているグループもありますが、緑色で統一されているグループもあります。" style="width:80%;">}}
+{{< img src="infrastructure/hostmap/hostmappart1image3.png" alt="The previously shown c3.2xlarge group, now sub-grouped by role. Some groups are uniformly orange, but some groups are all green." style="width:80%;">}}
 
-### アベイラビリティーゾーンの配置
+### Availability zone placement
 
-ホストマップを使用すると、各アベイラビリティゾーン (AZ) 内のマシンの分布を表示できます。目的のホストをフィルタリングし、AZ ごとにグループ化すると、リソースの再バランスが必要かどうかがすぐにわかります。
+Host Maps enable you to see distributions of machines in each of your availability zones (AZ). Filter for the hosts you are interested in, group by AZ, and you can immediately see whether resources need rebalancing. 
 
-以下の例では、`role:daniels` を持つホストがいくつかのアベイラビリティーゾーンに不均等に分布しています。(Daniels は内部アプリケーションの名前です。)
+In the example seen below, there is an uneven distribution of hosts with `role:daniels` across availability zones. (Daniels is the name of an internal application.)
 
-{{< img src="infrastructure/hostmap/hostmappart1image4.png" alt="ホストマップを role:daniels でフィルターし、アベイラビリティゾーンでグループ化したもの。3 つのグループのホストが表示されています。" style="width:80%;" >}}
+{{< img src="infrastructure/hostmap/hostmappart1image4.png" alt="Host Map filtered by role:daniels and grouped by availability zone. Three groups of hosts are displayed." style="width:80%;" >}}
 
-### 問題の調査
+### Problem investigation
 
-稼働中に何らかの問題が発生したとします。一部のホストで CPU がペギングされ、応答時間が長くなることもあります。ホストマップは、負荷がかかっているホストとかかっていないホストの違いを迅速に把握するのに役立ちます。調査したいディメンションに基づいてすばやくグループ化を行い、問題のあるサーバーがどのグループに属しているかを視覚的に判断できます。
-たとえば、AZ、リージョン、インスタンスタイプ、イメージ、またはシステムで使用しているタグでグループ化を行うことができます。
+Imagine you are having a problem in production. Maybe the CPUs on some of your hosts are pegged, which is causing long response times. Host Maps can help you quickly see whether there is anything different about the loaded and not-loaded hosts. You can rapidly group by dimensions you would like to investigate, and visually determine whether the problem servers belong to a certain group.  
+For example, you can group by AZ, region, instance type, image, or any tags that you use within your system. 
 
-以下のスクリーンショットでは、一部のホストでは、同じクラスターに属しているにもかかわらず、他のホストより使用可能なメモリが少なくなっています。マシンイメージごとにグループ化することで、使用されているイメージが 2 種類あり、その 1 つが過負荷であることがわかりました。
+In the screenshot below, some hosts have much less usable memory than others, despite being part of the same cluster. Grouping by machine image reveals that there were two different images in use, and one of them is overloaded.
 
-{{< img src="infrastructure/hostmap/hostmappart1image5.png" alt="Datadog ホストマップ - 2 メモリの使用帯域" style="width:80%;" >}}
+{{< img src="infrastructure/hostmap/hostmappart1image5.png" alt="Datadog Host Maps Two Memory Usage Bands" style="width:80%;" >}}
 
-{{< img src="infrastructure/hostmap/hostmappart1image6.png" alt="Datadog ホストマップ - 2 つのイメージグループ" style="width:80%;">}}
+{{< img src="infrastructure/hostmap/hostmappart1image6.png" alt="Datadog Host Maps Two Image Groups" style="width:80%;">}}
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/getting_started/tagging/
-[2]: /ja/integrations/
-[3]: /ja/infrastructure/hostmap/
+[1]: /getting_started/tagging/
+[2]: /integrations/
+[3]: /infrastructure/hostmap/
 [4]: https://app.datadoghq.com/infrastructure/map?node_type=host
 [5]: https://app.datadoghq.com/infrastructure/map?node_type=container
-[6]: /ja/agent/
-[7]: /ja/agent/docker/
+[6]: /agent/
+[7]: /agent/docker/

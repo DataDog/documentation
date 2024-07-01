@@ -1,28 +1,28 @@
 ---
+title: Tracing ECS Applications
 aliases:
-- /ja/agent/amazon_ecs/apm
+  - /agent/amazon_ecs/apm
 further_reading:
-- link: /agent/amazon_ecs/logs/
-  tag: ドキュメント
-  text: アプリケーションログの収集
-- link: /agent/amazon_ecs/tags/
-  tag: ドキュメント
-  text: コンテナから送信された全データにタグを割り当て
-title: ECS アプリケーションのトレース
+    - link: /agent/amazon_ecs/logs/
+      tag: Documentation
+      text: Collect your application logs
+    - link: /agent/amazon_ecs/tags/
+      tag: Documentation
+      text: Assign tags to all data emitted by a container
 ---
 
-## 概要
+## Overview
 
-ECS コンテナからトレースを収集するには、以下の説明に従って、Agent とアプリケーションコンテナの両方のタスク定義を更新してください。
+To collect traces from your ECS containers, update the Task Definitions for both your Agent and your application container as described below.
 
-そのためには、以前使用していた[タスク定義ファイル][4]を修正し、[更新したタスク定義を登録する][5]という方法があります。また、Amazon Web UI から直接タスク定義を編集することも可能です。
+One option for doing this is to modify the previously used [Task Definition file][4] and [register your updated Task Definition][5]. Alternatively, you can edit the Task Definition directly from the Amazon Web UI.
 
-Datadog Agent コンテナを有効にすると、自身と同じホスト上の他のアプリケーションコンテナから発せられるトレースを収集することができます。
+Once enabled, the Datadog Agent container collects the traces emitted from the other application containers on the same host as itself.
 
-## トレースを受け取るように Datadog Agent を構成する
-1. 実行中の ECS コンテナからすべてのトレースを収集するには、[オリジナルの ECS セットアップ][6]の Agent のタスク定義を以下の構成に更新してください。
+## Configure the Datadog Agent to accept traces
+1. To collect all traces from your running ECS containers, update your Agent's Task Definition from the [original ECS Setup][6] with the configuration below.
 
-   &nbsp;必要な基本構成は、[datadog-agent-ecs-apm.json][3] を参照します。Datadog Agent コンテナのタスク定義で、ホストの `portMappings` をコンテナのポート `8126` に設定し、プロトコル `tcp` を設定します。
+    Use [datadog-agent-ecs-apm.json][3] as a reference point for the required base configuration. In the Task Definition for Datadog Agent container, set the `portMappings` for a host to container port on `8126` with the protocol `tcp`.
 
     ```json
     {
@@ -46,7 +46,7 @@ Datadog Agent コンテナを有効にすると、自身と同じホスト上の
     }
     ```
 
-2. **Agent v7.17 以下**の場合、以下の環境変数を追加します。
+2. For **Agent v7.17 or lower**, add the following environment variables:
     ```json
     "environment": [
       (...)
@@ -61,28 +61,28 @@ Datadog Agent コンテナを有効にすると、自身と同じホスト上の
     ]
     ```
 
-3. Agent のタスク定義のローカルファイルを更新する場合、[更新したタスク定義の登録][5]を行います。これにより、新しいリビジョンが作成されます。Datadog Agent のデーモンサービスで、この更新されたリビジョンを参照することができます。
+3. If you are updating a local file for your Agent's Task Definition, [register your updated Task Definition][5]. This creates a new revision. You can then reference this updated revision in the daemon service for the Datadog Agent.
 
-## Datadog Agent にトレースを送信するためのアプリケーションコンテナの構成
+## Configure your application container to submit traces to Datadog Agent
 
-### トレーシングライブラリをインストールする
-アプリケーションの言語に合わせて、[Datadog トレーシングライブラリのインストール方法][2]に従ってください。ECS の場合、トレーサーをアプリケーションのコンテナイメージにインストールします。
+### Install the tracing library
+Follow the [setup instructions for installing the Datadog tracing library][2] for your application's language. For ECS install the tracer into your application's container image.
 
-### EC2 インスタンスのプライベート IP アドレスを提供する
-アプリケーションコンテナが稼働している EC2 インスタンスのプライベート IP アドレスをトレーサーに提供します。このアドレスは、トレーサーエンドポイントのホスト名となります。同じホスト上の Datadog Agent コンテナ (ホストポートが有効になっている) は、これらのトレースを受信します。
+### Provide the private IP address for the EC2 instance
+Provide the tracer with the private IP address of the underlying EC2 instance that the application container is running on. This address is the hostname of the tracer endpoint. The Datadog Agent container on the same host (with the host port enabled) receives these traces.
 
-以下のいずれかの方法で、プライベート IP アドレスを動的に取得します。
+Use one of the following methods to dynamically get the private IP address:
 
 {{< tabs >}}
-{{% tab "EC2 メタデータエンドポイント" %}}
+{{% tab "EC2 metadata endpoint" %}}
 
-[Amazon の EC2 メタデータエンドポイント (IMDSv1)][1] を使用すると、プライベート IP アドレスを検出できます。各ホストのプライベート IP アドレスを取得するには、次の URL をカールします。
+The [Amazon's EC2 metadata endpoint (IMDSv1)][1] allows discovery of the private IP address. To get the private IP address for each host, curl the following URL:
 
 {{< code-block lang="curl" >}}
 curl http://169.254.169.254/latest/meta-data/local-ipv4
 {{< /code-block >}}
 
-[Instance Metadata Service (IMDSv2)] の Version 2 を使用している場合[2]
+If you are using Version 2 of the [Instance Metadata Service (IMDSv2)][2]:
 
 {{< code-block lang="curl" >}}
 TOKEN=$(curl -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600")
@@ -92,9 +92,9 @@ curl http://169.254.169.254/latest/meta-data/local-ipv4 -H "X-aws-ec2-metadata-t
 [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html
 [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-service.html
 {{% /tab %}}
-{{% tab "ECS コンテナメタデータファイル" %}}
+{{% tab "ECS container metadata file" %}}
 
-[Amazon の ECS コンテナメタデータファイル][1]を使用すると、プライベート IP アドレスを検出できます。各ホストのプライベート IP アドレスを取得するには、次のコマンドを実行します。
+The [Amazon's ECS container metadata file][1] allows discovery of the private IP address. To get the private IP address for each host, run the following command:
 
 {{< code-block lang="curl" >}}
 cat $ECS_CONTAINER_METADATA_FILE | jq -r .HostPrivateIPv4Address
@@ -104,20 +104,20 @@ cat $ECS_CONTAINER_METADATA_FILE | jq -r .HostPrivateIPv4Address
 {{% /tab %}}
 {{< /tabs >}}
 
-トレースを送信するアプリケーションコンテナごとに `DD_AGENT_HOST` 環境変数を設定し、このリクエストの結果をトレーサーに提供します。
+Provide the result of this request to the tracer by setting the `DD_AGENT_HOST` environment variable for each application container that sends traces.
 
-### トレース Agent のエンドポイントを構成する
+### Configure the Trace Agent endpoint
 
-ECS アプリケーションの変数が起動時に設定される場合 (Java、.NET、PHP)、上記のいずれかの方法でトレーサーエンドポイントのホスト名を環境変数として `DD_AGENT_HOST` で設定する**必要があります**。以下の例では、IMDSv1 メタデータエンドポイントを使用していますが、必要に応じて構成を変更することができます。エントリーポイントとしてスタートアップスクリプトを使用している場合は、スクリプトの一部としてこの呼び出しを含めます。そうでない場合は、ECS タスク定義の `entryPoint` に追加します。
+In cases where variables on your ECS application are set at launch time (Java, .NET, and PHP), you **must** set the hostname of the tracer endpoint as an environment variable with `DD_AGENT_HOST` using one of the above methods. The examples below use the IMDSv1 metadata endpoint, but the configuration can be interchanged if needed. If you have a startup script as your entry point, include this call as part of the script, otherwise add it to the ECS Task Definition's `entryPoint`.
 
-その他の言語 (Python、JavaScript、Ruby、Go) については、アプリケーションのソースコードでホスト名を設定することもできます。
+For other supported languages (Python, JavaScript, Ruby, and Go) you can alternatively set the hostname in your application's source code.
 
 {{< programming-lang-wrapper langs="python,nodeJS,ruby,go,java,.NET,PHP" >}}
 
 {{< programming-lang lang="python" >}}
 
-#### 起動時間の変数
-タスク定義の `entryPoint` を、`<Python Startup Command>` に置き換えて、以下のように更新してください。
+#### Launch time variable
+Update the Task Definition's `entryPoint` with the following, substituting your `<Python Startup Command>`:
 
 ```json
 "entryPoint": [
@@ -126,10 +126,10 @@ ECS アプリケーションの変数が起動時に設定される場合 (Java�
   "export DD_AGENT_HOST=$(curl http://169.254.169.254/latest/meta-data/local-ipv4); <Python Startup Command>"
 ]
 ```
-Python の場合、起動コマンドは一般的に `ddtrace-run python my_app.py` ですが、例えば [uWSGI][1] を使用したり、 [`patch_all` でコードを手動でインスツルメントする][2]など、使用するフレームワークに よって異なる場合があります。
+For Python the startup command is generally `ddtrace-run python my_app.py` but may vary depending on the framework used, for example, using [uWSGI][1] or instrumenting your [code manually with `patch_all`][2].
 
-#### コード
-トレーサーがホスト名を明示的に設定するように、コードを更新することもできます。
+#### Code
+You can alternatively update your code to have the tracer set the hostname explicitly:
 
 ```python
 import requests
@@ -149,8 +149,8 @@ tracer.configure(hostname=get_aws_ip())
 
 {{< programming-lang lang="nodeJS" >}}
 
-#### 起動時間の変数
-タスク定義の `entryPoint` を、`<Node.js Startup Command>` に置き換えて、以下のように更新してください。
+#### Launch time variable
+Update the Task Definition's `entryPoint` with the following, substituting your `<Node.js Startup Command>`:
 ```json
 "entryPoint": [
   "sh",
@@ -159,8 +159,8 @@ tracer.configure(hostname=get_aws_ip())
 ]
 ```
 
-#### コード
-トレーサーがホスト名を明示的に設定するように、コードを更新することもできます。
+#### Code
+You can alternatively update your code to have the tracer set the hostname explicitly:
 
 ```javascript
 const tracer = require('dd-trace').init();
@@ -176,8 +176,8 @@ const axios = require('axios');
 
 {{< programming-lang lang="ruby" >}}
 
-#### 起動時間の変数
-タスク定義の `entryPoint` を、`<Ruby Startup Command>` に置き換えて、以下のように更新してください。
+#### Launch time variable
+Update the Task Definition's `entryPoint` with the following, substituting your `<Ruby Startup Command>`:
 ```json
 "entryPoint": [
   "sh",
@@ -186,11 +186,11 @@ const axios = require('axios');
 ]
 ```
 
-#### コード
-トレーサーがホスト名を明示的に設定するように、コードを更新することもできます。
+#### Code
+You can alternatively update your code to have the tracer set the hostname explicitly:
 
 ```ruby
-require 'ddtrace'
+require 'datadog' # Use 'ddtrace' if you're using v1.x
 require 'net/http'
 
 Datadog.configure do |c|
@@ -202,8 +202,8 @@ end
 
 {{< programming-lang lang="go" >}}
 
-#### 起動時間の変数
-タスク定義の `entryPoint` を、`<Go Startup Command>` に置き換えて、以下のように更新してください。
+#### Launch time variable
+Update the Task Definition's `entryPoint` with the following, substituting your `<Go Startup Command>`:
 
 ```json
 "entryPoint": [
@@ -213,8 +213,8 @@ end
 ]
 ```
 
-#### コード
-トレーサーがホスト名を明示的に設定するように、コードを更新することもできます。
+#### Code
+You can alternatively update your code to have the tracer set the hostname explicitly:
 
 ```go
 package main
@@ -230,9 +230,9 @@ func main() {
     bodyBytes, err := ioutil.ReadAll(resp.Body)
     host := string(bodyBytes)
     if err == nil {
-        // curl コマンドの出力を DD_AGENT_HOST 環境に設定します
+        //set the output of the curl command to the DD_AGENT_HOST env
         os.Setenv("DD_AGENT_HOST", host)
-        // トレース Agent にホスト設定を伝えます
+        // tell the trace agent the host setting
         tracer.Start(tracer.WithAgentAddr(host))
         defer tracer.Stop()
     }
@@ -240,13 +240,12 @@ func main() {
 }
 ```
 
-
 {{< /programming-lang >}}
 
 {{< programming-lang lang="java" >}}
 
-#### 起動時間の変数
-タスク定義の `entryPoint` を、`<Java Startup Command>` に置き換えて、以下のように更新してください。
+#### Launch time variable
+Update the Task Definition's `entryPoint` with the following, substituting your `<Java Startup Command>`:
 
 ```java
 "entryPoint": [
@@ -255,15 +254,15 @@ func main() {
   "export DD_AGENT_HOST=$(curl http://169.254.169.254/latest/meta-data/local-ipv4); <Java Startup Command>"
 ]
 ```
-Java 起動コマンドには、`-javaagent:/path/to/dd-java-agent.jar` を含める必要があります。さらなる例は、[JVM にトレーサーを追加するための Java トレースに関するドキュメント][1]を参照してください。
+The Java startup command should include your `-javaagent:/path/to/dd-java-agent.jar`, see the [Java tracing docs for adding the tracer to the JVM][1] for further examples.
 
-[1]: /ja/tracing/trace_collection/dd_libraries/java/?tab=containers#add-the-java-tracer-to-the-jvm
+[1]: /tracing/trace_collection/dd_libraries/java/?tab=containers#add-the-java-tracer-to-the-jvm
 {{< /programming-lang >}}
 
 {{< programming-lang lang=".NET" >}}
 
-#### 起動時間の変数
-タスク定義の `entryPoint` を次のように更新します。設定されていない場合は、`APP_PATH` を置き換えます。
+#### Launch time variable
+Update the Task Definition's `entryPoint` with the following. Substituting your `APP_PATH` if not set:
 
 ```json
 "entryPoint": [
@@ -277,8 +276,8 @@ Java 起動コマンドには、`-javaagent:/path/to/dd-java-agent.jar` を含�
 
 {{< programming-lang lang="PHP" >}}
 
-#### 起動時間の変数
-タスク定義の `entryPoint` を以下のように更新します。
+#### Launch time variable
+Update the Task Definition's `entryPoint` with the following:
 
 ```json
 "entryPoint": [
@@ -290,7 +289,7 @@ Java 起動コマンドには、`-javaagent:/path/to/dd-java-agent.jar` を含�
 
 #### Apache
 
-VirtualHost またはサーバーコンフィギュレーションファイルの Apache および `mod_php` の場合、`PassEnv` を使用して、`DD_AGENT_HOST` およびその他の環境変数 (次の例のように[統合サービスタグ付け][1]の変数など) を設定します。
+For Apache and `mod_php` in VirtualHost or server configuration file, use `PassEnv` to set `DD_AGENT_HOST` and other environment variables, such as the variables for [Unified Service Tagging][1] like the below example:
 
 ```
 PassEnv DD_AGENT_HOST
@@ -301,7 +300,7 @@ PassEnv DD_VERSION
 
 #### PHP fpm
 
-ini パラメーターが `clear_env=on` に設定されている場合、プールワーカーファイル `www.conf` で、ホストから読み取られるように環境変数も構成する必要があります。これを使用して、`DD_AGENT_HOST` およびその他の環境変数 (次の例のように[統合サービスタグ付け][1]の変数など) も設定します。
+When the ini param is set as `clear_env=on`, in the pool workers file `www.conf` you must also configure environment variables to be read from the host. Use this to also set `DD_AGENT_HOST` and other environment variables, such as the variables for [Unified Service Tagging][1] like the below example:
 
 ```
 env[DD_AGENT_HOST] = $DD_AGENT_HOST
@@ -310,13 +309,13 @@ env[DD_ENV] = $DD_ENV
 env[DD_VERSION] = $DD_VERSION
 ```
 
-[1]: https://docs.datadoghq.com/ja/getting_started/tagging/unified_service_tagging/
+[1]: https://docs.datadoghq.com/getting_started/tagging/unified_service_tagging/
 {{< /programming-lang >}}
 
 {{< /programming-lang-wrapper >}}
 
 #### IMDSv2
-IMDSv2 を使用する場合、同等の `entryPoint` の構成は以下のようになります。上記の例のように、`<Startup Command>` をお使いの言語に基づいた適切なコマンドに置き換えてください。
+When using IMDSv2, the equivalent `entryPoint` configuration looks like the following. Substitute `<Startup Command>` with the appropriate command based on your language, as in the examples above.
 
 ```json
 "entryPoint": [
@@ -326,13 +325,13 @@ IMDSv2 を使用する場合、同等の `entryPoint` の構成は以下のよ�
 ]
 ```
 
-## その他の参考資料
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/container/amazon_ecs/
-[2]: /ja/tracing/trace_collection/
+[1]: /container/amazon_ecs/
+[2]: /tracing/trace_collection/
 [3]: /resources/json/datadog-agent-ecs-apm.json
-[4]: /ja/containers/amazon_ecs/?tab=awscli#managing-the-task-definition-file
-[5]: /ja/containers/amazon_ecs/?tab=awscli#registering-the-task-definition
-[6]: /ja/containers/amazon_ecs/?tab=awscli#setup
+[4]: /containers/amazon_ecs/?tab=awscli#managing-the-task-definition-file
+[5]: /containers/amazon_ecs/?tab=awscli#registering-the-task-definition
+[6]: /containers/amazon_ecs/?tab=awscli#setup

@@ -1,47 +1,48 @@
 ---
-title: JMX インテグレーションの作成
-kind: ガイド
+title: Creating a JMX integration
+kind: guide
 ---
-このガイドでは、[Developer Toolkit][1] を使用して JMX インテグレーションを作成する方法を説明します。
 
-## セットアップ
-### JMX インテグレーションの足場を作る
+This guide describes the creation of a JMX integration using the [Developer Toolkit][1].
+
+## Setup
+### Create a JMX integration scaffolding
 
 ```bash
 ddev create --type jmx MyJMXIntegration
 ```
 
-JMX インテグレーションには、特定の init および instance コンフィギュレーションが含まれています。
+The JMX integration contains specific init and instance configs:
 
 ```yaml
 init_config:
-    is_jmx: true                   # インテグレーションタイプが JMX であることを識別します。
-    collect_default_metrics: true  # `metrics.yaml` で宣言されたメトリクスを収集します。
+    is_jmx: true                   # Identifies the integration type as JMX.
+    collect_default_metrics: true  # Collect metrics declared in `metrics.yaml`.
 
 instances:
-  - host: <HOST>                   # JMX ホスト名
-    port: <PORT>                   # JMX ポート
+  - host: <HOST>                   # JMX hostname
+    port: <PORT>                   # JMX port
     ...
 ```
 
-その他の `init` および `instance` のコンフィギュレーションについては、[JMX インテグレーションのドキュメント][2]を参照してください。
+See the [JMX integration documentation][2] for more `init` and `instance` configs.
 
-### 収集するメトリクスを定義する
+### Define the metrics to collect
 
-JMX から収集したいメトリクスを選択します。利用可能なメトリクスについては、監視するサービスのドキュメントを参照してください。
+Select the metrics you want to collect from JMX. See the documentation for the service you want to monitor to find available metrics.
 
-また、[VisualVM][3]、[JConsole][4]、[jmxterm](#jmxterm) などのツールを使って、利用できる JMX ビーンとその説明文を調べることができます。
+You can also use tools like [VisualVM][3], [JConsole][4], or [jmxterm](#jmxterm) to explore the available JMX beans and their descriptions.
 
 
-### メトリクスフィルターを定義する
+### Define metrics filters
 
-`metrics.yaml` を編集し、メトリクスを収集するためのフィルターを定義します。
+Edit the `metrics.yaml` to define the filters for collecting metrics.
 
-メトリクスフィルターのフォーマットについては、[JMX インテグレーション][5]を参照してください。
+See the [JMX integration][5] for details on the metrics filters format.
 
-[JMXFetch のテストケース][6]は、メトリクスフィルターがどのように機能するかの例を示しています。 
+[JMXFetch test cases][6] provide examples of how metrics filters work.  
 
-`metrics.yaml` の例:
+Example of `metrics.yaml`:
 
 ```yaml
 jmx_metrics:
@@ -57,11 +58,11 @@ jmx_metrics:
           metric_type: gauge
 ```
 
-#### テスト
+#### Testing
 
-[`ddev`][7] を使用し、 `tests/conftest.py` で `dd_environment` を指定すると、JMX サービスに対するテストを行うことができます。
+Using [`ddev`][7], you can test against the JMX service by providing a `dd_environment` in `tests/conftest.py`.
 
-例:
+For example:
 
 ```python
 @pytest.fixture(scope="session")
@@ -77,7 +78,7 @@ def dd_environment():
         yield CHECK_CONFIG, {'use_jmx': True}
 ```
 
-`e2e` テスト例:
+`e2e` test example:
 
 ```python
 
@@ -93,14 +94,14 @@ def test(dd_agent_check):
     aggregator.assert_metrics_using_metadata(get_metadata_metrics(), exclude=JVM_E2E_METRICS)
 ```
 
-実例:
+Real examples of:
 
 - [JMX dd_environment][8]
-- [JMX e2e テスト][9]
+- [JMX e2e test][9]
 
-## JMX ツール {#jmxterm}
+## JMX tools {#jmxterm}
 
-### JMXTerm を使用した JMX Bean のリストアップ
+### List JMX beans using JMXTerm
 
 ```
 curl -L https://github.com/jiaqi/jmxterm/releases/download/v1.0.1/jmxterm-1.0.1-uber.jar -o /tmp/jmxterm-1.0.1-uber.jar
@@ -109,7 +110,7 @@ domains
 beans
 ```
 
-結果出力例:
+Example output:
 
 ```
 $ curl -L https://github.com/jiaqi/jmxterm/releases/download/v1.0.1/jmxterm-1.0.1-uber.jar -o /tmp/jmxterm-1.0.1-uber.jar
@@ -127,14 +128,14 @@ jmx4perl
 jolokia
 org.apache.activemq
 $>beans
-#ドメイン = JMImplementation:
+#domain = JMImplementation:
 JMImplementation:type=MBeanServerDelegate
-#ドメイン = com.sun.management:
+#domain = com.sun.management:
 com.sun.management:type=DiagnosticCommand
 com.sun.management:type=HotSpotDiagnostic
-#ドメイン = io.fabric8.insight:
+#domain = io.fabric8.insight:
 io.fabric8.insight:type=LogQuery
-#ドメイン = java.lang:
+#domain = java.lang:
 java.lang:name=Code Cache,type=MemoryPool
 java.lang:name=CodeCacheManager,type=MemoryManager
 java.lang:name=Compressed Class Space,type=MemoryPool
@@ -154,9 +155,9 @@ java.lang:type=Threading
 [...]
 ```
 
-### JMXTerm と追加 jar を使用した JMX Bean のリストアップ
+### List JMX beans using JMXTerm with extra jars
 
-以下の例では、追加 jar は `jboss-client.jar` です。
+In the example below, the extra jar is `jboss-client.jar`.
 
 ```
 curl -L https://github.com/jiaqi/jmxterm/releases/download/v1.0.1/jmxterm-1.0.1-uber.jar -o /tmp/jmxterm-1.0.1-uber.jar
@@ -167,10 +168,10 @@ beans
 
 
 [1]: https://github.com/DataDog/integrations-core/tree/master/datadog_checks_dev
-[2]: /ja/integrations/java
+[2]: /integrations/java
 [3]: https://visualvm.github.io/
 [4]: https://docs.oracle.com/javase/7/docs/technotes/guides/management/jconsole.html
-[5]: /ja/integrations/java/?tab=host#description-of-the-filters
+[5]: /integrations/java/?tab=host#description-of-the-filters
 [6]: https://github.com/DataDog/jmxfetch/tree/master/src/test/resources
 [7]: https://datadoghq.dev/integrations-core/ddev/cli/
 [8]: https://github.com/DataDog/integrations-core/blob/master/activemq/tests/conftest.py

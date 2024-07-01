@@ -1,61 +1,61 @@
 ---
+title: Getting Started with Workflow Automation
+kind: documentation
 further_reading:
-- link: https://www.datadoghq.com/blog/automate-end-to-end-processes-with-datadog-workflows/
-  tag: ブログ
-  text: Datadog Workflows でエンドツーエンドプロセスを自動化し、イベントに迅速に対応する
-- link: /service_management/workflows/access/
-  tag: ドキュメント
-  text: アクセスと認証
-- link: /security/cloud_security_management/workflows/
-  tag: ドキュメント
-  text: セキュリティワークフローの自動化
-kind: ドキュメント
-title: Workflow Automation を始める
+    - link: "https://www.datadoghq.com/blog/automate-end-to-end-processes-with-datadog-workflows/"
+      tag: Blog
+      text: Automate end-to-end processes and quickly respond to events with Datadog Workflows
+    - link: /service_management/workflows/access/
+      tag: Documentation
+      text: Access and authentication
+    - link: /security/cloud_security_management/workflows/
+      tag: Documentation
+      text: Automate security workflows
 ---
 
-## 概要
+## Overview
 
-Workflow Automation を使用すると、Datadog のアラートやセキュリティシグナルに対応してエンドツーエンドのプロセスを自動化することができます。Workflow Automation は、リアルタイムの観測可能性データによって駆動されるため、問題を迅速に解決し、システムの可用性とセキュリティをプロアクティブに維持することができます。
+With Workflow Automation, you can automate end-to-end processes in response to Datadog alerts and security signals. Workflow Automation is powered by real-time observability data, enabling you to resolve issues faster and proactively maintain the availability and security of your systems.
 
-このガイドに従って、モニターアラートによってトリガーされるカスタムワークフローを作成します。トリガーされると、ワークフローは Jira でタスクを作成し、Jira チケットへのリンクを含む通知を Slack に送信します。このガイドでは、ワークフローのあるステップから別のステップへのデータの渡し方、ワークフローの保存と公開、ワークフローの実行履歴の表示について説明します。
+Follow this guide to create a custom workflow triggered by a monitor alert. When it is triggered, the workflow creates a task in Jira and sends a notification to Slack with a link to the Jira ticket. This guide covers passing data from one step in your workflow to another step, saving and publishing your workflow, and viewing the workflow's run history.
 
-## 前提条件
+## Prerequisites
 
-始める前に、[Datadog アカウント][1]に Jira と Slack のインテグレーションをインストールする必要があります。インストール手順については、[Slack][2] と [Jira インテグレーション][3]のドキュメントを参照してください。
+Before getting started, you need the Jira and Slack integrations installed on your [Datadog account][1]. For installation instructions, see the [Slack][2] and [Jira integration][3] documentation.
 
-Jira と Slack のインテグレーションタイルでセットアップしたアカウント資格情報と認証は、Workflow Automation の Jira と Slack のアクションに自動的に反映されます。インテグレーションによっては、認証のための追加構成が必要です。詳細については、[接続][4] を参照してください。
+Account credentials and authentication that you set up in the Jira and Slack integration tiles automatically propagate to the Jira and Slack actions in Workflow Automation. Some integrations require additional configuration for authentication. For more information, see [Connections][4].
 
-## ワークフローの構築
+## Build the workflow
 
-### モニタートリガーによるワークフローの作成
-ワークフローのトリガーは、モニターやセキュリティシグナルなどのアラート、 スケジュール、または手動で行うことができます。この場合、モニタートリガーによるワークフローを作成します。
+### Create a workflow with a monitor trigger
+You can trigger a workflow from an alert, such as a monitor or security signal, from a schedule, or manually. In this case, create a workflow with a monitor trigger.
 
-ワークフローを作成します。
-1. **[Workflow Automation][5]** ページから、**New Workflow** をクリックします。
-1. ワークフローの名前と説明を入力します。ワークフローの例では、以下の名前と説明を使用しています。<br>
-   名前: `Create a Jira Ticket`<br>
-   説明: `Create a Jira issue and Slack notification when there is a monitor alert`
+Create a workflow:
+1. From the **[Workflow Automation][5]** page, click **New Workflow**.
+1. Enter a name and description for the workflow. The example workflow uses the following name and description:<br>
+   Name: `Create a Jira Ticket`.<br>
+   Description: `Create a Jira issue and Slack notification when there is a monitor alert`.
 
-モニターを追加して構成します。
-1. ワークフローキャンバスで、**Add Trigger** をクリックし、**Monitor, Incident, or Security Signal** を選択します。
-1. **Configure** タブの `@workflow-` の横に、ワークフローの一意の ID `Create-Jira-Ticket` を入力します。<br>
-   ワークフローハンドルは常に `@workflow-` で始まります。後で、このハンドルを使用して、ワークフローをモニター通知に接続します。
-1. **Save** をクリックして、ワークフローを保存します。
+Add and configure the monitor:
+1. On the workflow canvas, click **Add Trigger** and select **Monitor, Incident, or Security Signal**.
+1. In the **Configure** tab, next to `@workflow-`, enter a unique ID for your workflow: `Create-Jira-Ticket`.<br>
+   Workflow handles always begin with `@workflow-`. Later, you use this handle to connect the workflow to a monitor notification.
+1. Click **Save** to save your workflow.
 
-{{< img src="/getting_started/workflow_automation/trigger1.png" alt="ワークフローのトリガー">}}
+{{< img src="/getting_started/workflow_automation/trigger1.png" alt="Trigger for Workflows">}}
 
-### Jira と Slack のアクションを追加する
-Jira ステップを追加して構成します。
-1. ワークフローキャンバスで、**+** アイコンをクリックします。
-1. Jira アクションを検索し、**Create issue** を選択します。
-1. ワークフローキャンバスで、**Create issue** ステップをクリックします。
-1. **Configure** タブで、**Jira Account** を選択します。アカウントは、Jira インテグレーションタイルの **Accounts** セクションにある Jira URL に対応している必要があります。
-1. ワークフローが作成する Jira 課題の **Project** と **Issue type** を入力します。
-1. ワークフローのトリガーとなるモニターからのデータを渡すためにコンテキスト変数を使用して、Jira 課題の **Summary** と **Description** を入力します。二重中括弧 (`{{`) で囲むことで、ステップ内のコンテキスト変数にアクセスできます。<br><br>
-   以下の記述例では、ソース、トリガー、ワークフロー変数を使用して、以下を伝達します。
-   - モニターアラートのトリガーとなったソース
-   - 影響を受けたモニターへのリンク
-   - ワークフロー名、ワークフロー ID
+### Add the Jira and Slack actions
+Add and configure the Jira step:
+1. On the workflow canvas, click the **+** icon.
+1. Search for the Jira action and select **Create issue**.
+1. On the workflow canvas, click the **Create issue** step.
+1. In the **Configure** tab, select a **Jira Account**. The account should correspond to the Jira URL found in the **Accounts** section of the Jira integration tile.
+1. Enter the **Project** and **Issue type** for the Jira issue that the workflow creates.
+1. Enter a **Summary** and **Description** for the Jira issue, using context variables to pass in data from the monitor that triggers the workflow. You can access a context variable in a step by enclosing it in double braces (`{{`).<br><br>
+   The following example description uses the source, trigger, and workflow variables to pass along:
+   - the source that triggered the monitor alert
+   - a link to the affected monitor
+   - the workflow name, and the workflow ID
 
    ```
    The CPU usage is above the 95% threshold for {{ Trigger.hostname }}
@@ -69,17 +69,17 @@ Jira ステップを追加して構成します。
    The monitor that triggered the workflow can be found here: {{ Source.url }}
    ```
 
-   コンテキスト変数の詳細については、**[コンテキスト変数][6]**を参照してください。
+   For more information on context variables, see **[Context variables][6]**.
 
-1. Jira アクションをテストするには、**Configure** タブの **Test** をクリックします。アクションをテストすると、実際の Jira チケットが作成されます。
-1. **Save** をクリックして、ワークフローを保存します。
+1. Test the Jira action by clicking **Test** in the **Configure** tab. Testing the action creates a real Jira ticket.
+1. Click **Save** to save your workflow.
 
-次に、Slack のステップを追加します。
-1. ワークフローキャンバスのプラスアイコンをクリックして、別のステップを追加します。
-1. Slack を検索し、**Send message** を選択します。
-1. **Slack Workspace name** を入力します。
-1. **Slack Channel name** を入力します。
-1. より便利な Slack 通知を行うには、ステップ出力変数を使用します。ステップ出力変数を使用すると、ワークフローの Jira ステップから Slack ステップにデータを渡すことができます。次のメッセージテキストを使用して、Slack メッセージに Jira 課題キー、モニター名、Jira 課題を含めます。
+Next, add the Slack step:
+1. Click the plus icon on the workflow canvas to add another step.
+1. Search for Slack and select **Send message**.
+1. Enter the **Slack Workspace name**.
+1. Enter the **Slack Channel name**.
+1. For a more useful Slack notification, use step output variables. Step output variables allow you to pass data from the Jira step to the Slack step in your workflow. Use the following message text to include the Jira issue key, the monitor name, and the Jira issue in the Slack message:
 
    ```
    The monitor named {{ Source.monitor.name }} triggered and created a new Jira issue
@@ -88,76 +88,78 @@ Jira ステップを追加して構成します。
    The workflow that created this Jira issue is {{ WorkflowName }}
    ```
 
-1. アクションをテストするには、**Configure** タブの **Test** をクリックします。アクションをテストすると、実際の Slack メッセージが作成されます。
-1. モニターの通知ドロップダウンにワークフローの名前を表示するには、ワークフローを保存して公開します。ワークフローのページから **Publish** をクリックします。
+1. To test the action, click **Test** in the **Configure** tab. Testing an action creates a real Slack message.
+1. To view your workflow's name in the monitor's notification dropdown, save and publish your workflow. Click **Publish** from the workflow's page.
 
-## ワークフローのテストと公開
+## Test and publish the workflow
 
-<div class="alert alert-info">アクティブな Slack と Jira のアカウントに接続されたワークフローをテストすると、実際の Slack メッセージと Jira チケットが作成されます。</div>
+<div class="alert alert-info">Testing a workflow connected to active Slack and Jira accounts creates actual Slack messages and Jira tickets.</div>
 
-**Save** をクリックし、ワークフローに変更を適用します。次に、手動でワークフローをトリガーしてテストします。
+Click **Save** to apply your changes to the workflow. Next, manually trigger the workflow to test it.
 
-ワークフローを手動でトリガーするには、ワークフローページから **Run** をクリックし、トリガー変数の値を入力します。
+To trigger the workflow manually, click **Run** from the workflow page, and enter the values for the trigger variables.
 
-{{< img src="/getting_started/workflow_automation/run_workflow.png" alt="ワークフローの手動トリガー" style="width:90%;" >}}
+{{< img src="/getting_started/workflow_automation/run_workflow.png" alt="Trigger a workflow manually" style="width:90%;" >}}
 
-ワークフローを実行すると、Jira チケットが作成され、Slack メッセージが送信されることを確認します。
+Confirm that running the workflow creates a Jira ticket and sends a Slack message.
 
-スケジュールおよびトリガーによるワークフローは、公開するまで自動的にトリガーされません。ワークフローを公開するには、ワークフローのページから **Publish** をクリックします。
+Scheduled and triggered workflows don't trigger automatically until you publish them. To publish the workflow, click **Publish** from the workflow's page.
 
-## ワークフローをトリガーするモニターの更新
+## Update the monitor that triggers your workflow
 
-1. Datadog の [Monitors ページ][7]に移動します。
-1. ワークフローのトリガーに使用するモニターを検索して編集するか、新しいモニターを作成します。
-1. メッセージセクションで、アラート通知にワークフローの完全なメンション名を追加します。メンション名は `@workflow-` で始まります。例えば、`@workflow-Create-Jira-Ticket` です。
-    - ワークフローにトリガー変数を渡すには、`@workflow-name(key=value, key=value)` という構文のカンマ区切りリストを使用します。例えば、`@workflow-Create-Jira-Ticket(hostname={{host.name}})` のようになります。
-1. ワークフローとこのモニターのすべての通知をテストするには、**Test Notifications** をクリックします。
-1. モニターを保存。
+1. Navigate to the [Monitors page][7] in Datadog.
+1. Find the monitor you'd like to use to trigger the workflow and edit it, or create a new monitor.
+1. In the message section, add the full workflow mention name to an alert notification. The mention name starts with `@workflow-`. For example, `@workflow-Create-Jira-Ticket`.
+    - You can pass trigger variables into the workflow by using a comma-separated list with the syntax `@workflow-name(key=value, key=value)`. For example, `@workflow-Create-Jira-Ticket(hostname={{host.name}})`.
+1. Click **Test Notifications** to test the workflow and all of this monitor's notifications.
+1. Save the monitor.
 
-{{< img src="/getting_started/workflow_automation/monitor_trigger.png" alt="モニターからワークフローをトリガー">}}
+{{< img src="/getting_started/workflow_automation/monitor_trigger.png" alt="Trigger a workflow from a Monitor">}}
 
-モニターのしきい値に達するたびに、モニターはワークフローの実行をトリガーします。
+Each time the monitor threshold is hit, the monitor triggers a workflow run.
 
-## 実行履歴
+## Run history
 
-ワークフローをトリガーした後、**Run History** ビューで進捗状況を確認したり、失敗したステッ プをデバッグすることができます。実行されたステップを選択すると、入力、出力、実行コンテキスト、エラーメッセージを確認できます。以下の例は、無効な Jira 構成のために失敗したステップを示しています。
+After you trigger the workflow, you can watch its progress and debug failed steps in the **Run History** view. Select an executed step to see the inputs, outputs, execution context, and error messages. The example below shows a step that failed due to an invalid Jira configuration.
 
-{{< img src="/getting_started/workflow_automation/testing_the_workflow.mp4" alt="ワークフローテストのプレビュー" style="width:100%" video=true >}}
+{{< img src="/getting_started/workflow_automation/testing_the_workflow.mp4" alt="Preview of Workflow Testing" style="width:100%" video=true >}}
 
-ワークフローを編集するには、**Configuration** をクリックします。実行履歴ビューに戻るには、**Run History** をクリックします。
+To make edits to your workflow, click **Configuration**. To get back to the run history view, click **Run History**.
 
-以前のワークフロー実行のリストや、各実行の成功・失敗を確認するには、初期の実行履歴ビューを使用します。ワークフローキャンバスをクリックすることで、いつでも初期の実行履歴に戻ることができます。
+To view a list of previous workflow executions and whether each execution succeeded or failed, use the initial run history view. Return to the initial execution history at any time by clicking on the workflow canvas.
 
-## 考察
+## Conclusion
 
-モニターがワークフローをトリガーすると、エンジニアリングチームがレビューできるように Jira 課題が作成されます。以下に Jira 課題の例を示します。
+When the monitor triggers the workflow, it creates a Jira issue for your engineering team to review. Here is an example Jira issue:
 
-{{< img src="/getting_started/workflow_automation/jira_ticket.png" alt="ワークフローから生成される Jira チケット">}}
+{{< img src="/getting_started/workflow_automation/jira_ticket.png" alt="Jira ticket that is generated from the workflow">}}
 
-ワークフローは、Jira 課題とモニターアラートをチームに通知する Slack メッセージも作成します。以下は Slack の通知例です。
+The workflow also creates a Slack message to notify your team of the Jira issue and monitor alert. Here is an example Slack notification:
 
-{{< img src="/getting_started/workflow_automation/slack-message.png" alt="ワークフローから生成される Slack メッセージ">}}
+{{< img src="/getting_started/workflow_automation/slack-message.png" alt="Slack message that is generated from the workflow">}}
 
-## 次のステップ
+## What's next?
 
-* [アクションカタログ][8]で、利用可能なすべてのワークフローアクションのリストを確認する。
-* すぐに使える[ブループリント][9]からワークフローを構築する。
-* [HTTP アクション][10]を使用して、任意のエンドポイントにリクエストを行う。
-* [データ変換][11]アクションを実装して、ワークフローを流れる情報に対して必要な処理を実行する。
+* Explore the list of all available workflow actions in the [Actions Catalog][8]. 
+* Build a workflow from an out of the box [blueprint][9].
+* Use the [HTTP action][10] to make a request to any endpoint.
+* Implement [data transformation][11] actions to perform necessary operations on the information flowing through your workflow.
 
-## その他の参考資料
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 
 [1]: https://www.datadoghq.com/free-datadog-trial/
-[2]: /ja/integrations/slack/
-[3]: /ja/integrations/jira/
-[4]: /ja/service_management/workflows/connections/
+[2]: /integrations/slack/
+[3]: /integrations/jira/
+[4]: /service_management/workflows/connections/
 [5]: https://app.datadoghq.com/workflow
-[6]: /ja/workflows/build/#context-variables
+[6]: /workflows/build/#context-variables
 [7]: https://app.datadoghq.com/monitors/manage
-[8]: /ja/service_management/workflows/actions_catalog/
-[9]: /ja/workflows/build
-[10]: /ja/service_management/workflows/actions_catalog/generic_actions/#http
-[11]: /ja/service_management/workflows/actions_catalog/generic_actions/#data-transformation
+[8]: /service_management/workflows/actions_catalog/
+[9]: /workflows/build
+[10]: /service_management/workflows/actions_catalog/generic_actions/#http
+[11]: /service_management/workflows/actions_catalog/generic_actions/#data-transformation
+
+

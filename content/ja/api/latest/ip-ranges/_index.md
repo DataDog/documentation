@@ -1,3 +1,3 @@
 ---
-title: IP 範囲
+title: IP Ranges
 ---

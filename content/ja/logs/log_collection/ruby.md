@@ -1,33 +1,34 @@
 ---
+title: Ruby on Rails Log Collection
+kind: documentation
 aliases:
-- /ja/logs/languages/ruby
+  - /logs/languages/ruby
 further_reading:
-- link: https://github.com/roidrage/lograge
-  tag: Github
-  text: Lograge ドキュメント
+- link: "https://github.com/roidrage/lograge"
+  tag: Source Code
+  text: Lograge Documentation
 - link: /logs/log_configuration/processors
   tag: Documentation
-  text: ログの処理方法
+  text: Learn how to process your logs
 - link: /logs/faq/log-collection-troubleshooting-guide/
-  tag: よくあるご質問
-  text: ログ収集のトラブルシューティングガイド
-- link: https://www.datadoghq.com/blog/managing-rails-application-logs/
-  tag: ブログ
-  text: Rails アプリケーションログを収集、カスタマイズ、管理する方法
-- link: https://www.datadoghq.com/blog/log-file-control-with-logrotate/
-  tag: ブログ
-  text: logrotate を使ったログファイルの管理方法
-- link: /glossary/#tail
-  tag: 用語集
-  text: 用語集 "テール" の項目
-title: Ruby on Rails ログ収集
+  tag: FAQ
+  text: Log Collection Troubleshooting Guide
+- link: "https://www.datadoghq.com/blog/managing-rails-application-logs/"
+  tag: Blog
+  text: How to collect, customize, and manage Rails application logs
+- link: "https://www.datadoghq.com/blog/log-file-control-with-logrotate/"
+  tag: Blog
+  text: How to manage log files using logrotate
+- link: "/glossary/#tail"
+  tag: Glossary
+  text: Glossary entry for "tail"  
 ---
 
-## 概要
+## Overview
 
-Datadog にログを送信する際は、[`Lograge`][1] を適用したファイルにログを記録し、Datadog Agent でそのファイルを[テール][11]します。Ruby でロギングのセットアップを行う際は、[予約済み属性][2]に注意してください。
+To send your logs to Datadog, log to a file with [`Lograge`][1] and [tail][11] this file with your Datadog Agent. When setting up logging with Ruby, keep in mind the [reserved attributes][2].
 
-Lograge を使えば、この例のように、テキストベースの標準的なログ形式を、
+Using Lograge, you can transform the standard text-based log format, like in this example:
 
 ```text
 Started GET "/" for 127.0.0.1 at 2012-03-10 14:28:14 +0100
@@ -40,7 +41,7 @@ Processing by HomeController#index as HTML
 Completed 200 OK in 79ms (Views: 78.8ms | ActiveRecord: 0.0ms)
 ```
 
-より多くの構造を提供する以下の JSON 形式のログに変換することができます。
+To the following JSON format of the log, which provides more structure:
 
 ```json
 {
@@ -59,16 +60,16 @@ Completed 200 OK in 79ms (Views: 78.8ms | ActiveRecord: 0.0ms)
 }
 ```
 
-## ロガーのインストールと構成
+## Install and configure your logger
 
 {{< tabs >}}
 {{% tab "Lograge" %}}
 
-1. プロジェクトに `lograge` gem を追加します。
+1. Add the `lograge` gem to your project:
     ```ruby
     gem 'lograge'
     ```
-2. コンフィギュレーションファイルで、以下を設定し、Lograge を構成します。
+2. In your configuration file, set the following to configure Lograge:
     ```ruby
     # Lograge config
     config.lograge.enabled = true
@@ -89,16 +90,16 @@ Completed 200 OK in 79ms (Views: 78.8ms | ActiveRecord: 0.0ms)
         }
     end
     ```
-   **注**: Lograge はコンテキスト情報をログに追加することも可能です。詳細は [Lograge ドキュメント][1]を参照してください。
+    **Note**: Lograge can also add contextual information to your logs. See the [Lograge documentation][1] for more details.
 
-この設定の詳細な例については、[Rails アプリケーションのログを収集、カスタマイズ、管理する方法][2]を参照してください。
+For a more in-depth example of this setup, see [How to collect, customize, and manage Rails application logs][2].
 
 ### RocketPants
 
-Lograge を `rocket_pants` コントローラに構成するには、`config/initializers/lograge_rocketpants.rb` ファイル (場所はプロジェクトによって異なる場合があります) を作成します。
+To configure Lograge for `rocket_pants` controllers, in the `config/initializers/lograge_rocketpants.rb` file (the location can vary depending on your project):
 
 ```ruby
-# 参照:
+# Come from here:
 #   https://github.com/Sutto/rocket_pants/issues/111
 app = Rails.application
 if app.config.lograge.enabled
@@ -117,12 +118,12 @@ end
 {{% /tab %}}
 {{% tab "Grape" %}}
 
-1. プロジェクトに `grape_logging` gem を追加します。
+1. Add the `grape_logging` gem to your project:
 
     ```ruby
     gem 'grape_logging'
     ```
-2. 追加の構成を Grape に追加します。
+2. Add the additional configuration to Grape:
 
     ```ruby
     use GrapeLogging::Middleware::RequestLogger,
@@ -130,7 +131,7 @@ end
           include: [ GrapeLogging::Loggers::Response.new,
                     GrapeLogging::Loggers::FilterParameters.new ]
     ```
-3. `config/initializers/instrumentation.rb` ファイルを作成し、次の構成を追加します。
+3. Create the `config/initializers/instrumentation.rb` file and add the following configuration:
 
     ```ruby
     # Subscribe to grape request and log with a logger dedicated to Grape
@@ -142,17 +143,17 @@ end
 
 {{% /tab %}}
 {{< /tabs >}}
-## Datadog Agent の構成
+## Configure the Datadog Agent
 
-[ログ収集が有効][3]になったら、以下を行ってログファイルを追跡して Datadog に送信する[カスタムログ収集][4]を設定します。
+Once [log collection is enabled][3], do the following to set up [custom log collection][4] to tail your log files and send them to Datadog.
 
-1. `ruby.d/` フォルダーを `conf.d/` [Agent 構成ディレクトリ][5]に作成します。
-2. `ruby.d/` に以下の内容で `conf.yaml` ファイルを作成します。
+1. Create a `ruby.d/` folder in the `conf.d/` [Agent configuration directory][5]. 
+2. Create a `conf.yaml` file in `ruby.d/` with the following content:
     ```yaml
       logs:
         - type: file
           path: "<RUBY_LOG_FILE_PATH>.log"
-          service: ruby
+          service: <SERVICE_NAME>
           source: ruby
           sourcecategory: sourcecode
           ## Uncomment the following processing rule for multiline logs if they
@@ -162,27 +163,27 @@ end
           #    name: new_log_start_with_date
           #    pattern: \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
     ```
-4. [Agent を再起動します][6]。
-5. [Agent の status サブコマンド][8]を実行し、`Checks` セクションで `ruby` を探し、ログが Datadog に正常に送信されることを確認します。
+4. [Restart the Agent][6].
+5. Run the [Agent's status subcommand][8] and look for `ruby` under the `Checks` section to confirm that logs are successfully submitted to Datadog.
 
-ログが JSON 形式の場合、Datadog は自動的にログメッセージを[パース][9]し、ログ属性を抽出します。[ログエクスプローラー][10]を使用して、ログを表示し、トラブルシューティングを行うことができます。
+If logs are in JSON format, Datadog automatically [parses the log messages][9] to extract log attributes. Use the [Log Explorer][10] to view and troubleshoot your logs.
 
-## ログとトレースの接続
+## Connect logs and traces
 
-このアプリケーションで APM が有効になっている場合、[APM Ruby のロギング手順][7]に従うことでアプリケーションログとトレースの関連性を高め、ログにトレースとスパン ID を自動的に追加することが可能です。
+If APM is enabled for this application, you can improve the connection between application logs and traces by following the [APM Ruby logging instructions][7] to automatically add trace and span IDs in your logs.
 
-## ベストプラクティス
+## Best practices
 
-可能な限り、ログに追加のコンテキスト (ユーザー、セッション、アクション、メトリクス) を追加します。
+Add additional context (user, session, action, and metrics) to your logs when possible.
 
-単純な文字列メッセージのログの代わりに、次の例に示すようにログのハッシュを使用することができます。
+Instead of logging simple string messages, you can use log hashes as shown in the following example:
 
 ```ruby
 my_hash = {'user' => '1234', 'button_name'=>'save','message' => 'User 1234 clicked on button saved'};
 logger.info(my_hash);
 ```
 
-ハッシュは JSON に変換され、`user` と `button_name` の分析を実行することができます。
+The hash is converted into JSON and you can carry out analytics for `user` and `button_name`:
 
 ```json
 {
@@ -196,18 +197,18 @@ logger.info(my_hash);
   }
 }
 ```
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/roidrage/lograge
-[2]: /ja/logs/log_configuration/attributes_naming_convention/#reserved-attributes
-[3]: /ja/agent/logs/?tab=tailfiles#activate-log-collection
-[4]: /ja/agent/logs/?tab=tailfiles#custom-log-collection
-[5]: /ja/agent/guide/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
-[6]: /ja/agent/guide/agent-commands/#restart-the-agent
-[7]: /ja/tracing/other_telemetry/connect_logs_and_traces/ruby/
-[8]: /ja/agent/guide/agent-commands/?tab=agentv6v7#agent-status-and-information
-[9]: /ja/logs/log_configuration/parsing
-[10]: /ja/logs/explorer/
-[11]: /ja/glossary/#tail
+[2]: /logs/log_configuration/attributes_naming_convention/#reserved-attributes
+[3]: /agent/logs/?tab=tailfiles#activate-log-collection
+[4]: /agent/logs/?tab=tailfiles#custom-log-collection
+[5]: /agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
+[6]: /agent/configuration/agent-commands/#restart-the-agent
+[7]: /tracing/other_telemetry/connect_logs_and_traces/ruby/
+[8]: /agent/configuration/agent-commands/?tab=agentv6v7#agent-status-and-information
+[9]: /logs/log_configuration/parsing
+[10]: /logs/explorer/
+[11]: /glossary/#tail

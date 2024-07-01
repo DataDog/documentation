@@ -1,148 +1,148 @@
 ---
-app_id: ably
-app_uuid: 4596cd59-d3f2-4921-8133-3a448ccaea61
-assets:
-  dashboards:
-    Ably: assets/dashboards/ably.json
-  integration:
-    auto_install: true
-    configuration: {}
-    events:
-      creates_events: false
-    metrics:
-      check:
+"app_id": "ably"
+"app_uuid": "4596cd59-d3f2-4921-8133-3a448ccaea61"
+"assets":
+  "dashboards":
+    "Ably": assets/dashboards/ably.json
+  "integration":
+    "auto_install": true
+    "configuration": {}
+    "events":
+      "creates_events": false
+    "metrics":
+      "check":
       - ably.channels.mean
       - ably.channels.min
       - ably.channels.peak
       - ably.connections.all.mean
       - ably.connections.all.min
       - ably.connections.all.peak
-      metadata_path: metadata.csv
-      prefix: ably.
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 10340
-    source_type_name: Ably
-  oauth: assets/oauth_clients.json
-author:
-  homepage: https://ably.com
-  name: Ably
-  sales_email: sales@ably.com
-  support_email: support@ably.com
-categories:
-- クラウド
-- メトリクス
-dependencies:
-- https://github.com/DataDog/integrations-extras/blob/master/ably/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: ably
-integration_id: ably
-integration_title: Ably
-integration_version: ''
-is_public: true
-custom_kind: integration
-manifest_version: 2.0.0
-name: ably
-public_title: Ably
-short_description: Ably メトリクスの収集とグラフ化
-supported_os:
+      "metadata_path": metadata.csv
+      "prefix": ably.
+    "service_checks":
+      "metadata_path": assets/service_checks.json
+    "source_type_id": !!int "10340"
+    "source_type_name": Ably
+  "oauth": assets/oauth_clients.json
+"author":
+  "homepage": "https://ably.com"
+  "name": Ably
+  "sales_email": sales@ably.com
+  "support_email": support@ably.com
+"categories":
+- cloud
+- metrics
+"dependencies":
+- "https://github.com/DataDog/integrations-extras/blob/master/ably/README.md"
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "ably"
+"integration_id": "ably"
+"integration_title": "Ably"
+"integration_version": ""
+"is_public": true
+"kind": "integration"
+"manifest_version": "2.0.0"
+"name": "ably"
+"public_title": "Ably"
+"short_description": "Collect and graph Ably metrics"
+"supported_os":
 - linux
 - windows
 - macos
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::Windows
-  - Supported OS::macOS
-  - Category::Cloud
-  - Category::Metrics
-  - Submitted Data Type::Metrics
-  - Offering::Integration
-  configuration: README.md#Setup
-  description: Ably メトリクスの収集とグラフ化
-  media:
-  - caption: Ably - ダッシュボード
-    image_url: images/ably-dashboard.png
-    media_type: image
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Ably
-  uninstallation: README.md#Uninstallation
+"tile":
+  "changelog": CHANGELOG.md
+  "classifier_tags":
+  - "Supported OS::Linux"
+  - "Supported OS::Windows"
+  - "Supported OS::macOS"
+  - "Category::Cloud"
+  - "Category::Metrics"
+  - "Submitted Data Type::Metrics"
+  - "Offering::Integration"
+  "configuration": "README.md#Setup"
+  "description": Collect and graph Ably metrics
+  "media":
+  - "caption": Ably - Dashboard
+    "image_url": images/ably-dashboard.png
+    "media_type": image
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": Ably
+  "uninstallation": "README.md#Uninstallation"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
-## 概要
-[Ably][1] プラットフォームは、世界中の拡張性の高い Web およびモバイルアプリケーションで、マルチプレイ、チャット、データ同期、データ放送、通知などのリアルタイムのユースケースを実現するために使用されています。Ably の API を利用することで、エンジニアはサーバーやクラウドインフラストラクチャーの準備や保守をする必要がなく、コア機能の構築に集中することができます。
+## Overview
+The [Ably][1] platform is used to power real-time use cases such as multiplayer, chat, data synchronization, data broadcast, and notifications for highly scalable web and mobile applications around the world. Using our APIs, engineers are free to focus on building core functionality, rather than having to provision and maintain servers and cloud infrastructure.
 
-Ably Datadog インテグレーションは、[Ably 統計][2]メトリクスを Datadog アカウントに直接送信します。
+The Ably Datadog Integration sends [Ably statistics][2] metrics directly to your Datadog account.
 
-Ably の Datadog インテグレーションを使用すると、次のことができます。
-- [Ably 統計][2]を Datadog の他のキーメトリクスと並べて使う
-- Ably メッセージ、チャンネル、接続の使用状況を相関させ、Datadog ダッシュボードで共同分析を行う
-- Datadog で Ably の利用統計を表示・追跡する
+Using Ably's Datadog Integration, you can:
+- Use [Ably statistics][2] alongside other key metrics in Datadog
+- Correlate Ably message, channel, and connection usage for collaborative analysis in Datadog dashboards
+- View and track Ably usage statistics in Datadog
 
-## 計画と使用
+## Setup
 
-- **Datadog で**: **Integrations** に移動し、Ably タイルを選択し、**Install Integration** をクリックします。
+- **In Datadog**: Go to **Integrations**, select the Ably tile and click **Install Integration**.
 
-- **Connect Accounts** をクリックし、このインテグレーションの認可を開始します。[Ably][1] にリダイレクトされます。
+- Click **Connect Accounts** to begin authorization of this integration. You will be redirected to [Ably][1].
 
-- **Ably で**: ログインして、**Your Apps** に移動します。
+- **In Ably**: Log in and navigate to **Your Apps**.
 
-![Ably のスクリーンショット][3]
+![Ably Screenshot][3]
 
-- **Datadog Integration** を設定したい **Ably App** を選択し、**Integrations** をクリックします。
+- Select the **Ably App** you would like to set up the **Datadog Integration** for and click **Integrations**.
 
-![Ably のスクリーンショット][4]
+![Ably Screenshot][4]
 
-- **Connect to Datadog** ボタンをクリックし、このインテグレーションの認可を開始します。
+- Click the **Connect to Datadog** button to begin authorization of this integration.
 
-- Datadog の認可ページにリダイレクトされます。
+- You will be redirected to the Datadog authorization page.
 
-- **Authorise** ボタンをクリックすると、設定が完了し、Ably のサイトに戻ります。
+- Click the **Authorise** button to complete setup and be redirected back to the Ably site.
 
-![Ably のスクリーンショット][5]
+![Ably Screenshot][5]
 
-Ably App の統計情報が Datadog に表示されるようになりました。
+Your Ably App statistics now appear in Datadog.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-Ably 統計の詳細については、[アプリケーション統計ドキュメント][2]をお読みください。
+For further details on the Ably statistics, read the [Application Statistics documentation][2].
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "ably" >}}
 
 
-### ヘルプ
+### Events
 
-Ably インテグレーションには、イベントは含まれません。
+The Ably integration does not include any events.
 
-### ヘルプ
+### Service Checks
 
-Ably インテグレーションには、サービスのチェック機能は含まれません。
+The Ably integration does not include any service checks.
 
-## アンインストール
+## Uninstallation
 
-- **Ably で**: https://ably.com にアクセスし、ログインして、**Your Apps** に移動します。
+- **In Ably**: Go to https://ably.com, log in and navigate to **Your Apps**.
 
-- **Datadog Integration** をアンインストールしたい Ably App を選択します。
+- Select the Ably App you would like to uninstall the **Datadog Integration** for.
 
-- **Datadog Integration** セクションの **Remove** ボタンをクリックします。
+- Click the **Remove** button in the **Datadog Integration** section.
 
-![Ably のスクリーンショット][7]
+![Ably Screenshot][7]
 
-Ably App の統計情報は Datadog に送信されなくなりました。
+Your Ably App statistics are no longer sent to Datadog.
 
-- **Datadog で**: **Integrations** に移動し、Ably タイルを選択し、**Uninstall Integration** をクリックします。
+- **In Datadog**: Go to **Integrations**, select the Ably tile and click **Uninstall Integration**.
 
-このインテグレーションをアンインストールすると、それ以前に与えられた認可は全て取り消されます。
+Once this integration has been uninstalled, any previous authorizations are revoked.
 
-また、[API Keys ページ][8]でインテグレーション名を検索して、このインテグレーションに紐付けられた全ての API キーが無効になったことを確認してください。
+Additionally, ensure that all API keys associated with this integration have been disabled by searching for the integration name on the [API Keys page][8].
 
-## Agent
-ご不明な点は、[Ably のサポートチーム][9]までお問い合わせください。
+## Support
+Need help? Contact [Ably support][9].
 
 [1]: https://ably.com
 [2]: https://ably.com/docs/general/statistics
@@ -153,3 +153,4 @@ Ably App の統計情報は Datadog に送信されなくなりました。
 [7]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/ably/images/uninstall-integration.png
 [8]: https://app.datadoghq.com/organization-settings/api-keys?filter=Ably
 [9]: https://ably.com/support
+

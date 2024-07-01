@@ -1,45 +1,46 @@
 ---
 categories:
-  - ログの収集
-description: Stunnel プロキシからログを収集して Datadog に送信。
+    - log collection
+description: Gather your logs from your Stunnel proxy and send them to Datadog.
 has_logo: true
 integration_title: Stunnel
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 name: Stunnel
-public_title: Datadog-Stunnel インテグレーション
-short_description: Stunnel プロキシからログを収集して Datadog に送信。
+public_title: Datadog-Stunnel Integration
+short_description: Gather your logs from your Stunnel proxy and send them to Datadog.
 dependencies:
-  - https://github.com/DataDog/documentation/blob/master/content/en/integrations/stunnel.md
-integration_id: stunnel
+    ["https://github.com/DataDog/documentation/blob/master/content/en/integrations/stunnel.md"]
+integration_id: "stunnel"
 ---
-## 概要
 
-Stunnel は、既存のクライアントおよびサーバーに、プログラムコードの変更なしで TLS 暗号化機能を追加できるよう設計されたプロキシです。
+## Overview
 
-Datadog - Stunnel のプロキシインテグレーションを使用して、ネットワーク上の潜在的な問題や DDoS 攻撃を監視することができます。
+Stunnel is a proxy designed to add TLS encryption functionality to existing clients and servers without any changes in the programs' code.
 
-## セットアップ
+Use the Datadog - Stunnel proxy integration to monitor potential network issues or DDoS attacks.
 
-### インストール
+## Setup
 
-Stunnel を稼働するには、サーバーに [Datadog Agent のインストール][1]が必要です。
+### Installation
 
-### コンフィギュレーション
+You must [install the Datadog Agent][1] on the server running Stunnel.
 
-Stunnel プロキシログの収集を開始するには、[Agent のコンフィギュレーションディレクトリ][2]のルートにある `conf.d/` フォルダーに `stunnel.d/conf.yaml` ファイルを作成します。
+### Configuration
 
-#### ログの収集
+Create a `stunnel.d/conf.yaml` file in the `conf.d/` folder at the root of your [Agent's configuration directory][2] to start collecting your Stunnel Proxy logs.
 
-_Agent バージョン 6.0 以降で利用可能_
+#### Log collection
 
-1. Datadog Agent でのログ収集は、デフォルトで無効になっています。以下のように、`datadog.yaml` ファイルで有効にしてください。
+_Available for Agent versions >v6.0_
+
+1. Collecting logs is disabled by default in the Datadog Agent. You must enable it in the `datadog.yaml` file:
 
     ```yaml
     logs_enabled: true
     ```
 
-2. Stunnel のログの収集を開始するには、次のコンフィギュレーションブロックを `stunnel.d/conf.yaml` ファイルに追加します。
+2. Add this configuration block to your `stunnel.d/conf.yaml` file to start collecting Stunnel Logs:
 
     ```yaml
     logs:
@@ -50,15 +51,15 @@ _Agent バージョン 6.0 以降で利用可能_
           sourcecategory: proxy
     ```
 
-   `path` パラメーターと `service` パラメーターの値を変更し、環境に合わせて構成してください。
+     Change the `path` and `service` parameter values and configure them for your environment.
 
-3. [Agent を再起動します][3]。
+3. [Restart the Agent][3]
 
-### 検証
+### Validation
 
-[Agent の `status` サブコマンドを実行][4]し、Checks セクションで `stunnel` を検索します。
+[Run the Agent's `status` subcommand][4] and look for `stunnel` under the Checks section.
 
-[1]: https://app.datadoghq.com/account/settings#agent
-[2]: /ja/agent/guide/agent-configuration-files/#agent-configuration-directory
-[3]: /ja/agent/guide/agent-commands/#start-stop-restart-the-agent
-[4]: /ja/agent/guide/agent-commands/#agent-status-and-information
+[1]: https://app.datadoghq.com/account/settings/agent/latest
+[2]: /agent/guide/agent-configuration-files/#agent-configuration-directory
+[3]: /agent/guide/agent-commands/#start-stop-restart-the-agent
+[4]: /agent/guide/agent-commands/#agent-status-and-information

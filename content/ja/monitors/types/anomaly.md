@@ -1,198 +1,211 @@
 ---
+title: Anomaly Monitor
 aliases:
-- /ja/guides/anomalies
-- /ja/monitors/monitor_types/anomaly
-- /ja/monitors/create/types/anomaly/
-description: メトリクスの異常動作を履歴データに基づいて検出する
+    - /guides/anomalies
+    - /monitors/monitor_types/anomaly
+    - /monitors/create/types/anomaly/
+description: "Detects anomalous behavior for a metric based on historical data"
 further_reading:
 - link: /monitors/notify/
-  tag: ドキュメント
-  text: モニター通知の設定
+  tag: Documentation
+  text: Configure your monitor notifications
 - link: /monitors/downtimes/
-  tag: ドキュメント
-  text: モニターをミュートするダウンタイムのスケジュール
+  tag: Documentation
+  text: Schedule a downtime to mute a monitor
 - link: /monitors/manage/status/
-  tag: ドキュメント
-  text: モニターステータスの参照
-- link: dashboards/functions/algorithms/#anomalies
-  tag: ドキュメント
-  text: 異常関数
-title: 異常検知モニター
+  tag: Documentation
+  text: Consult your monitor status
+- link: "dashboards/functions/algorithms/#anomalies"
+  tag: Documentation
+  text: Anomalies function
+algolia:
+  rank: 70
+  tags: [anomaly, anomaly monitor]
 ---
 
-## 概要
+## Overview
 
-異常検知は、傾向や、季節的な曜日や時間帯のパターンを考慮しながらメトリクスの挙動が過去のものとは異なる期間を認識するアルゴリズム機能です。これは、しきい値ベースのアラート設定では監視することが困難な強い傾向や反復パターンを持つメトリクスに適しています。
+Anomaly detection is an algorithmic feature that identifies when a metric is behaving differently than it has in the past, taking into account trends, seasonal day-of-week, and time-of-day patterns. It is suited for metrics with strong trends and recurring patterns that are hard to monitor with threshold-based alerting.
 
-たとえば、 ある平日のウェブトラフィック量が夜間帯は通常であるにもかかわらず、午後は異常に低い時間帯を見つけることができます。また、確実にアクセス数が伸びているサイトへのログイン数を測定するメトリクスを考慮できます。 なぜなら、ログイン数が日々増加すると、しきい値が古くなってしまいますが、ログインシステムの潜在的な問題を示唆する予想外の激減が見られた場合、異常検知が警告してくれるからです。
+For example, anomaly detection can help you discover when your web traffic is unusually low on a weekday afternoon&mdash;even though that same level of traffic is normal later in the evening. Or consider a metric measuring the number of logins to your steadily-growing site. Because the number increases daily, any threshold would be outdated, whereas anomaly detection can alert you if there is an unexpected drop&mdash;potentially indicating an issue with the login system.
 
-## モニターの作成
+## Monitor creation
 
-Datadog で[異常検知モニター][1]を作成するには、メインナビゲーション画面で*Monitors --> New Monitor --> Anomaly* の順に移動します。
+To create an [anomaly monitor][1] in Datadog, use the main navigation: *Monitors --> New Monitor --> Anomaly*.
 
-### メトリクスを定義する
+### Define the metric
 
-Datadog にレポートが送信されるメトリクスはすべて、モニターに使用できます。詳細については、[メトリクスモニター][2]ページをご確認ください。
-**注**: `anomalies` 関数は過去のデータを使用して今後の予想を立てるため、新しいメトリクスで使用するとあまり正確な結果が得られないことがあります。
+Any metric reporting to Datadog is available for monitors. For more information, see the [Metric Monitor][2] page.
+**Note**: The `anomalies` function uses the past to predict what is expected in the future, so using it on a new metric may yield poor results.
 
-メトリクスを定義すると、異常検知モニターにより作成された 2 種のグラフがエディターに表示されます。
-{{< img src="monitors/monitor_types/anomaly/context.png" alt="時系列表示" style="width:80%;">}}
+After defining the metric, the anomaly detection monitor provides two preview graphs in the editor:
+{{< img src="monitors/monitor_types/anomaly/context.png" alt="historical context" style="width:80%;">}}
 
-* **Historical View** では、監視クエリをさまざまな時間単位で観察することができるため、 データが異常または正常とみなされる理由をより深く理解できます。
-* **Evaluation Preview** は、アラート設定よりもウィンドウが長く、範囲を計算する際に異常検知アルゴリズムが考慮すべき事項に関して洞察を提供します。
+* The **Historical View** allows you to explore the monitored query at different time scales to better understand why data may be considered anomalous or non-anomalous.
+* The **Evaluation Preview** is longer than the alerting window and provides insight on what the anomalies algorithm takes into account when calculating the bounds.
 
-### アラートの条件を設定する
+### Set alert conditions
 
-直近`15 minutes`、`1 hour` などの値が範囲を `above or below`、`above`、`below` 場合、または `custom` に設定した 15 分〜24 時間の値で、アラートをトリガーします。
-値が少なくとも `15 minutes`、`1 hour` などの範囲内にある場合は回復するか、`custom` に 15 分〜24 時間の値を設定します。
+Trigger an alert if the values have been `above or below`, `above`, or `below` the bounds for the last `15 minutes`, `1 hour`, etc. or `custom` to set a value between 15 minutes and 24 hours. Recover if the values are within the bounds for at least `15 minutes`, `1 hour`, etc. or `custom` to set a value between 15 minutes and 24 hours.
 
-異常検知
-: デフォルト (`above or below`) では、メトリクスが灰色の異常検知帯の外にある場合、異常とみなされます。帯の `above` または `below` にある場合のみを異常とみなすよう任意で指定することもできます。
+Anomaly detection
+: With the default option (`above or below`) a metric is considered to be anomalous if it is outside of the gray anomaly band. Optionally, you can specify whether being only `above` or `below` the bands is considered anomalous.
 
-トリガーウィンドウ
-: メトリクスの異常が検知されアラートを発するまでに必要な時間。**注意**: アラート設定ウィンドウがあまりに短いと、疑似ノイズにより不正アラームが発せられることがあります。
+Trigger window
+: How much time is required for the metric to be anomalous before the alert triggers. **Note**: If the alert window is too short, you might get false alarms due to spurious noise.
 
-リカバリウィンドウ
-: メトリクスを異常とみなさないでアラートをリカバリするために必要な時間。
+Recovery window
+: The amount of time required for the metric to no longer be considered anomalous, allowing the alert to recover. It is recommended to set the **Recovery Window** to the same value as the **Trigger Window**. 
 
-### 高度なオプション
+**Note**: The range of accepted values for the **Recovery Window** depends on the **Trigger Window** and the **Alert Threshold** to ensure the monitor can't both satisfy the recovery and the alert condition at the same time.
+Example:
+* `Threshold`: 50%
+* `Trigger window`: 4h
+The range of accepted values for the recovery window is between 121 minutes (`4h*(1-0.5) +1 min = 121 minutes`) and 4 hours. Setting a recovery window below 121 minutes could lead to a 4 hour timeframe with both 50% of anomalous points and the last 120 minutes with no anomalous points.
 
-Datadog は、選択したメトリクスを自動的に分析して、複数のパラメーターを設定しますが、**Advanced Options** に、編集可能なオプションがあります。
+Another example:
+* `Threshold`: 80%
+* `Trigger window`: 4h
+The range of accepted values for the recovery window is between 49 minutes (`4h*(1-0.8) +1 min = 49 minutes`) and 4 hours.
 
-{{< img src="monitors/monitor_types/anomaly/advanced_options.png" alt="Anomaly monitor configuration ページの Advanced Options メニューで、アジャイルアルゴリズムによる異常検出と予測データからの異常 2 乖離を 1 週間ごとの季節性で行い、サマータイムを適用し、ロールアップ間隔を 60 秒に設定した場合" style="width:80%;">}}
+### Advanced options
+
+Datadog automatically analyzes your chosen metric and sets several parameters for you. However, the options are available for you to edit under **Advanced Options**.
+
+{{< img src="monitors/monitor_types/anomaly/advanced_options.png" alt="The Advanced Options menu in the Anomaly monitor configuration page with the configuration set to detect anomalies 2 deviations from the predicted data using the agile algorithm with weekly seasonality, to take daylight savings into effect, and to use a rollup interval of 60 seconds" style="width:80%;">}}
 
 
-偏差 
-: 灰色の帯の幅。[異常検知関数][3]で使用される範囲のパラメータに相当。
+Deviations
+: The width of the gray band. This is equivalent to the bounds parameter used in the [anomalies function][3].
 
-アルゴリズム
-: [異常検知アルゴリズム](#anomaly-detection-algorithms) (`basic`、`agile`、`robust`)。
+Algorithm
+: The [anomaly detection algorithm](#anomaly-detection-algorithms) (`basic`, `agile`, or `robust`).
 
-季節性 
-: メトリクスを分析する `agile` または `robust` アルゴリズムの[季節性](#seasonality) (`hourly`、`daily`、`weekly`) サイクル。
+Seasonality
+: The [seasonality](#seasonality) (`hourly`, `daily`, or `weekly`) of the cycle for the `agile` or `robust` algorithm to analyze the metric.
 
-夏時間
-:  `agile` または `robust` の異常検知で季節性に `weekly` または `daily` を使用する場合に利用可能。詳細については、[異常検知とタイムゾーン][4]を参照。
+Daylight savings
+: Available for `agile` or `robust` anomaly detection with `weekly` or `daily` seasonality. For more information, see [Anomaly Detection and Time Zones][4].
 
-rollup  
-: [rollup の間隔][5]。
+Rollup
+: The [rollup interval][5].
 
-しきい値
-: アラート、警告、リカバリを設定するために異常として判断する基準となるパーセンテージ。
+Thresholds
+: The percentage of points that need to be anomalous for alerting, warning, and recovery.
 
-### 季節性
+### Seasonality
 
 Hourly
-: このアルゴリズムは、毎時の特定の分が過去の同じ分と同様に挙動すると想定します。たとえば、5:15 の挙動が 4:15 や 3:15 と同じだと想定します。
+: The algorithm expects the same minute after the hour behaves like past minutes after the hour, for example 5:15 behaves like 4:15, 3:15, etc.
 
 Daily
-: このアルゴリズムは、今日の特定の時間が過去の同じ時間と同様に挙動すると想定します。たとえば、今日の午後 5 時の挙動が前日の午後 5 時と同じだと想定します。
+: The algorithm expects the same time today behaves like past days, for example 5pm today behaves like 5pm yesterday.
 
 Weekly
-: このアルゴリズムは、特定の曜日が過去の同じ曜日と同様に挙動すると想定します。たとえば、今週の火曜の挙動が過去の火曜と同じだと想定します。
+: The algorithm expects that a given day of the week behaves like past days of the week, for example this Tuesday behaves like past Tuesdays.
 
-**異常検出アルゴリズムに必要なデータ履歴**: 機械学習アルゴリズムは、ベースラインを計算するために、選択された季節性時間の少なくとも 3 倍の履歴データ時間を必要とします。
-例:
+**Required data history for Anomaly Detection algorithm**: Machine learning algorithms require at least three time as much historical data time as the chosen seasonality time to compute the baseline.
+For example:
 
-* _週ごと_の季節性には少なくとも 3 週間のデータが必要
-* _日ごと_の季節性には少なくとも 3 日間のデータが必要
-* _時間ごと_の季節性には少なくとも 3 時間のデータが必要
+* _weekly_ seasonality requires at least three weeks of data
+* _daily_ seasonality requires at least three days of data
+* _hourly_ seasonality requires at least three hours of data
 
-季節性アルゴリズムはすべて、メトリクスの挙動の正常範囲を予測する際に、最大で 6 週間分の履歴データを使用します。過去データを大量に使用することで、通常とは異なる挙動が最近発生していた場合、アルゴリズムはこれを重視しません。
+All of the seasonal algorithms may use up to six weeks of historical data when calculating a metric's expected normal range of behavior. By using a significant amount of past data, the algorithms avoid giving too much weight to abnormal behavior that might have occurred in the recent past.
 
-### 異常検知アルゴリズム
+### Anomaly detection algorithms
 Basic
-: メトリクスに反復する季節性パターンがない場合に使用します。Basic は遅延の繰り返しの分位数を計算して予測値の範囲を決定します。データをほとんど使用せず、状況の変化にすばやく対応しますが、季節的な挙動や長期的な傾向は認識できません。
+: Use when metrics have no repeating seasonal pattern. Basic uses a simple lagging rolling quantile computation to determine the range of expected values. It uses little data and adjusts quickly to changing conditions but has no knowledge of seasonal behavior or longer trends.
 
 Agile
-: メトリクスが季節的なものでシフトが見込まれる場合に使用します。アルゴリズムはメトリクスのレベルシフトにすばやく対応します。[SARIMA][6] アルゴリズムの安定版。直近のデータを予測に組み込むことで、レベルシフトに合わせてすばやく更新できますが、最近の長期的な異常検知に対する安定性は低下します。
+: Use when metrics are seasonal and expected to shift. The algorithm quickly adjusts to metric level shifts. A robust version of the [SARIMA][6] algorithm, it incorporates the immediate past into its predictions, allowing quick updates for level shifts at the expense of being less robust to recent, long-lasting anomalies.
 
 Robust
-: 安定性が期待できる季節性メトリクスの緩やかなレベルシフトを異常値と見なした場合に使用されます。[季節的傾向分解][7]アルゴリズムの 1 つ。安定性が高く、異常が長期的に続いても予測は一定していますが、意図的なレベルシフトへの対応にはやや時間がかかります (コード変更によってメトリクスのレベルがシフトした場合など)。
+: Use when seasonal metrics expected to be stable, and slow, level shifts are considered anomalies. A [seasonal-trend decomposition][7] algorithm, it is stable and predictions remain constant even through long-lasting anomalies at the expense of taking longer to respond to intended level shifts (for example, if the level of a metric shifts due to a code change.)
 
-## 例
-下記のグラフでは、これら 3 つのアルゴリズムがいつどのように異なる挙動を示すか表しています。
+## Examples
+The graphs below illustrate how and when these three algorithms behave differently from one another.
 
-#### 1 時間ごとの季節性を考慮した異常検出の比較
-この例では、`basic` は正常値範囲を超えてスパイクする異常値を正しく特定していますが、反復的な季節的パターンが予測値範囲に含まれていません。対照的に、`robust` と `agile` は、どちらも季節的パターンを認識し、メトリクスが最小値付近で平坦な線になった場合など、より繊細な異常値を検知しています。トレンドも 1 時間ごとのパターンを示しているので、この場合は 1 時間ごとの季節性が最も効果的です。
+#### Anomaly detection comparison for hourly seasonality
+In this example, `basic` successfully identifies anomalies that spike out of the normal range of values, but it does not incorporate the repeating, seasonal pattern into its predicted range of values. By contrast, `robust` and `agile` both recognize the seasonal pattern and can detect more nuanced anomalies, for example if the metric was to flat-line near its minimum value. The trend also shows an hourly pattern, so the hourly seasonality works best in this case.
 
-{{< img src="monitors/monitor_types/anomaly/alg_comparison_1.png" alt="1 日ごとの季節性による異常検出アルゴリズムの比較" style="width:90%;">}}
+{{< img src="monitors/monitor_types/anomaly/alg_comparison_1.png" alt="anomaly detection algorithm comparison with daily seasonality" style="width:90%;">}}
 
-#### 1 週間ごとの季節性を考慮した異常検出の比較
-この例では、メトリクスが突然のレベルシフトを示しています。`Agile` は `robust` よりも早くレベルシフトに対応しています。さらに、レベルシフト以降、`robust` の範囲はより大きな不確実性を反映して広がっていますが、`Agile` の範囲に変化は見られません。また、メトリクスが週単位の強い季節性パターンを示すシナリオでは、`Basic` が適していないことは明らかです。
+#### Anomaly detection comparison for weekly seasonality
+In this example, the metric exhibits a sudden level shift. `Agile` adjusts more quickly to the level shift than `robust`. Also, the width of `robust`'s bounds increases to reflect greater uncertainty after the level shift; the width of `agile`'s bounds remains unchanged. `Basic` is clearly a poor fit for this scenario, where the metric exhibits a strong weekly seasonal pattern.
 
-{{< img src="monitors/monitor_types/anomaly/alg_comparison_2.png" alt="1 週間ごとの季節性による異常検出アルゴリズムの比較" style="width:90%;">}}
+{{< img src="monitors/monitor_types/anomaly/alg_comparison_2.png" alt="anomaly detection algorithm comparison with weekly seasonality" style="width:90%;">}}
 
-#### 変化に対するアルゴリズム反応の比較
-この例では、1 時間にわたる異常値に対してアルゴリズムがどのように反応するかを示しています。 `Robust` は、急激な変化に対する反応が遅いため、このシナリオでは異常値の境界を調整しません。他のアルゴリズムは、この異常値があたかも新しい正常値であるかのように振る舞い始めます。`Agile` は、メトリクスが元のレベルに戻ったことも異常値として認識しています。
+#### Comparison of algorithm reactions to change
+This example shows how the algorithms react to an hour-long anomaly. `Robust` does not adjust the bounds for the anomaly in this scenario since it reacts more slowly to abrupt changes. The other algorithms start to behave as if the anomaly is the new normal. `Agile` even identifies the metric's return to its original level as an anomaly.
 
-{{< img src="monitors/monitor_types/anomaly/alg_comparison_3.png" alt="1 時間ごとの季節性による異常検出アルゴリズムの比較" style="width:90%;">}}
+{{< img src="monitors/monitor_types/anomaly/alg_comparison_3.png" alt="anomaly detection algorithm comparison with hourly seasonality" style="width:90%;">}}
 
-#### スケールに対するアルゴリズム反応の比較
-これらのアルゴリズムはスケールの扱いも異なります。`Basic` と `robust` はスケールの影響を受けませんが、`agile` は影響を受けます。下の左側のグラフでは、`agile` と `robust` がレベルシフトを異常としてマークしています。右側のグラフで、同じメトリクスに 1000 を加算したところ、`agile` ではレベルシフトを異常とみなすコールアウトは見られなくなりますが、`robust` では引き続き見られます。
+#### Comparison of algorithm reactions to scale
+The algorithms deal with scale differently. `Basic` and `robust` are scale-insensitive, while `agile` is not. The graphs on the left below show `agile` and `robust` mark the level-shift as being anomalous. On the right, 1000 is added to the same metric, and `agile` no longer calls out the level-shift as being anomalous whereas `robust` continues do so.
 
-{{< img src="monitors/monitor_types/anomaly/alg_comparison_scale.png" alt="アルゴリズムの比較 (スケール)" style="width:90%;">}}
+{{< img src="monitors/monitor_types/anomaly/alg_comparison_scale.png" alt="algorithm comparison scale" style="width:90%;">}}
 
-#### 新しいメトリクスによる異常検出の比較
-この例では、各アルゴリズムが新しいメトリクスをどのように処理するか示しています。 `Robust` と `agile` では、最初の数日は範囲がまったく表示されていません (週単位)。`Basic` では、メトリクスが最初に表示された直後から範囲が表示されています。
+#### Anomaly detection comparison for new metrics
+This example shows how each algorithm handles a new metric. `Robust` and `agile` does not show any bounds during the first few seasons (weekly). `Basic` starts showing bounds shortly after the metric first appears.
 
-{{< img src="monitors/monitor_types/anomaly/alg_comparison_new_metric.png" alt="アルゴリズムの比較 (新しいメトリクス)" style="width:90%;">}}
+{{< img src="monitors/monitor_types/anomaly/alg_comparison_new_metric.png" alt="algorithm comparison new metric" style="width:90%;">}}
 
-## 高度なアラート条件
+## Advanced alert conditions
 
-高度なアラートオプション (自動解決、評価遅延など) の詳細な手順については、[モニターコンフィギュレーション][8]ページを参照してください。メトリクス固有のオプションのフルデータウィンドウについては、[メトリクスモニター][9]ページを参照してください。
+For detailed instructions on the advanced alert options (auto resolve, evaluation delay, etc.), see the [Monitor configuration][8] page. For the metric-specific option full data window, see the [Metric monitor][9] page.
 
-## 通知
+## Notifications
 
-**Say what's happening** と **Notify your team** のセクションに関する詳しい説明は、[通知][10]のページを参照してください。
+For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][10] page.
 
 ## API
 
-エンタープライズレベルのお客様は、[モニターの作成 API エンドポイント][11]を使用して異常検知モニターを作成できます。Datadog では、[モニターの JSON をエクスポート][12]して API のクエリを作成することを**強く推奨**しています。Datadog の[モニター作成ページ][1]を使用することで、顧客はプレビューグラフと自動パラメーター調整の恩恵を受け、不適切に構成されたモニターを回避できます。
+Customers on an enterprise plan can create anomaly detection monitors using the [create-monitor API endpoint][11]. Datadog **strongly recommends** [exporting a monitor's JSON][12] to build the query for the API. By using the [monitor creation page][1] in Datadog, customers benefit from the preview graph and automatic parameter tuning to help avoid a poorly configured monitor.
 
-**注**: 異常検知モニターは、エンタープライズレベルのお客様専用のサービスです。プロレベルのお客様で、異常検知モニターのご利用を希望される場合は、カスタマーサクセス担当者にお問い合わせいただくか、[Datadog 請求担当チーム][13]にメールでお問い合わせください。
+**Note**: Anomaly detection monitors are only available to customers on an enterprise plan. Customers on a pro plan interested in anomaly detection monitors should reach out to their customer success representative or email the [Datadog billing team][13].
 
-異常モニターは、他のモニターと[同じ API][14] を使用して管理されます。これらのフィールドは、異常モニターに固有です。
+Anomaly monitors are managed using the [same API][14] as other monitors. These fields are unique for anomaly monitors:
 
 ### `query`
 
-リクエストの本文の `query` プロパティには、次の形式のクエリ文字列を含める必要があります。
+The `query` property in the request body should contain a query string in the following format:
 
 ```text
 avg(<query_window>):anomalies(<metric_query>, '<algorithm>', <deviations>, direction='<direction>', alert_window='<alert_window>', interval=<interval>, count_default_zero='<count_default_zero>' [, seasonality='<seasonality>']) >= <threshold>
 ```
 
 `query_window`
-: A timeframe like `last_4h` や `last_7d` などのタイムフレーム。通知のグラフに表示される時間ウィンドウ。少なくとも `alert_window` と同じ大きさでなければならず、`alert_window` の約 5 倍にすることをお勧めします。
+: A timeframe like `last_4h` or `last_7d`. The time window displayed in graphs in notifications. Must be at least as large as the `alert_window` and is recommended to be around 5 times the `alert_window`.
 
 `metric_query`
-: 標準の Datadog メトリクスクエリ (例:`sum:trace.flask.request.hits{service:web-app}.as_count()`)。
+: A standard Datadog metric query (for example, `sum:trace.flask.request.hits{service:web-app}.as_count()`).
 
 `algorithm`
-: `basic`、`agile`、または`robust`。
+: `basic`, `agile`, or `robust`.
 
 `deviations`
-: 正の数。異常検知の感度を制御します。
+: A positive number; controls the sensitivity of the anomaly detection.
 
 `direction`
-: アラートをトリガーする異常の方向性。`above`、`below`、または`both`。
+: The directionality of anomalies that should trigger an alert: `above`, `below`, or `both`.
 
 `alert_window`
-: 異常をチェックするタイムフレーム (例: `last_5m`、`last_1h`)。
+: The timeframe to be checked for anomalies (for example, `last_5m`, `last_1h`).
 
 `interval`
-: ロールアップ間隔の秒数を表す正の整数。これは `alert_window` 期間の 5 分の 1 以下でなければなりません。
+: A positive integer representing the number of seconds in the rollup interval. It should be smaller or equal to a fifth of the `alert_window` duration.
 
 `count_default_zero`
-: ほとんどのモニターでは `true` を使用します。値の欠如をゼロとして解釈してはならないカウントメトリクスを送信する場合にのみ、`false` に設定します。
+: Use `true` for most monitors. Set to `false` only if submitting a count metric in which the lack of a value should _not_ be interpreted as a zero.
 
 `seasonality`
-: `hourly`、`daily`、または`weekly`。 `basic` アルゴリズムを使用するときはこのパラメーターを除外します。
+: `hourly`, `daily`, or `weekly`. Exclude this parameter when using the `basic` algorithm.
 
 `threshold`
-: 1 以下の正の数。クリティカルアラートをトリガーするために異常である必要がある `alert_window` 内のポイントの割合。
+: A positive number no larger than 1. The fraction of points in the `alert_window` that must be anomalous in order for a critical alert to trigger.
 
-下記の例は、異常検知モニターのクエリを示したものです。Cassandra ノードの平均 CPU が直近 5 分間で通常値を上回る 3 つの標準偏差である場合にアラートを発します。
+Below is an example query for an anomaly detection monitor, which alerts when the average Cassandra node's CPU is three standard deviations above the ordinary value over the last 5 minutes:
 
 ```text
 avg(last_1h):anomalies(avg:system.cpu.system{name:cassandra}, 'basic', 3, direction='above', alert_window='last_5m', interval=20, count_default_zero='true') >= 1
@@ -200,16 +213,16 @@ avg(last_1h):anomalies(avg:system.cpu.system{name:cassandra}, 'basic', 3, direct
 
 ### `options`
 
-`thresholds` と `threshold_windows` を除いて、リクエスト本文の `options` にあるほとんどのプロパティは、他のクエリアラートと同じです。
+Most of the properties under `options` in the request body are the same as for other query alerts, except for `thresholds` and `threshold_windows`.
 
 `thresholds`
-: 異常検知モニターは、`critical`、`critical_recovery`、`warning`、`warning_recovery` のしきい値をサポートします。しきい値は 0 から 1 までの数値で表され、異常である関連ウィンドウの割合として解釈されます。たとえば、`critical` のしきい値が `0.9` の場合、`trigger_window` （以下で説明）のポイントの少なくとも 90％ に異常があると、クリティカルアラートがトリガーされます。または、`warning_recovery` の値が 0 の場合、`recovery_window` のポイントの 0％ が異常である場合にのみ、モニターが警告状態から回復します。
-: `critical` `threshold` は、`query` で使用される `threshold` と一致する必要があります。
+: Anomaly monitors support `critical`, `critical_recovery`, `warning`, and `warning_recovery` thresholds. Thresholds are expressed as numbers from 0 to 1, and are interpreted as the fraction of the associated window that is anomalous. For example, an `critical` threshold value of `0.9` means that a critical alert triggers when at least 90% of the points in the `trigger_window` (described below) are anomalous. Or, a `warning_recovery` value of 0 means that the monitor recovers from the warning state only when 0% of the points in the `recovery_window` are anomalous.
+: The `critical` `threshold` should match the `threshold` used in the `query`.
 
 `threshold_windows`
-: 異常検知モニターでは、`options` に `threshold_windows` プロパティがあります。`threshold_windows` には、`trigger_window` と `recovery_window` の 2 つのプロパティの両方を含める必要があります。これらのウィンドウは、`last_10m` や `last_1h` などのタイムフレーム文字列として表現されます。`trigger_window` は、`query` の `alert_window` と一致する必要があります。`trigger_window` は、モニターをトリガーする必要があるかを評価する際に異常について分析する時間範囲です。`recovery_window` は、トリガーされたモニターを回復する必要があるかを評価する際に異常について分析する時間範囲です。
+: Anomaly monitors have a `threshold_windows` property in `options`. `threshold_windows` must include both two properties—`trigger_window` and `recovery_window`. These windows are expressed as timeframe strings, such as `last_10m` or `last_1h`. The `trigger_window` must match the `alert_window` from the `query`. The `trigger_window` is the time range which is analyzed for anomalies when evaluating whether a monitor should trigger. The `recovery_window` is the time range that analyzed for anomalies when evaluating whether a triggered monitor should recover.
 
-しきい値としきい値ウィンドウの標準コンフィギュレーションは次のようになります。
+A standard configuration of thresholds and threshold window looks like:
 
 ```json
 "options": {
@@ -225,30 +238,30 @@ avg(last_1h):anomalies(avg:system.cpu.system{name:cassandra}, 'basic', 3, direct
 }
 ```
 
-## トラブルシューティング
+## Troubleshooting
 
-* [異常検知モニターに関する FAQ][15]
-* [異常モニターのタイムゾーンを更新する][16]
-* [Datadog サポートへのお問い合わせ][17]
+* [Anomaly Monitor FAQ][15]
+* [Update anomaly monitor timezone][16]
+* [Contact Datadog support][17]
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/monitors#create/anomaly
-[2]: /ja/monitors/types/metric/#define-the-metric
-[3]: /ja/dashboards/functions/algorithms/#anomalies
-[4]: /ja/monitors/guide/how-to-update-anomaly-monitor-timezone/
-[5]: /ja/dashboards/functions/rollup/
+[2]: /monitors/types/metric/#define-the-metric
+[3]: /dashboards/functions/algorithms/#anomalies
+[4]: /monitors/guide/how-to-update-anomaly-monitor-timezone/
+[5]: /dashboards/functions/rollup/
 [6]: https://en.wikipedia.org/wiki/Autoregressive_integrated_moving_average
 [7]: https://en.wikipedia.org/wiki/Decomposition_of_time_series
-[8]: /ja/monitors/configuration/#advanced-alert-conditions
-[9]: /ja/monitors/types/metric/#data-window
-[10]: /ja/monitors/notify/
-[11]: /ja/api/v1/monitors/#create-a-monitor
-[12]: /ja/monitors/manage/status/#settings
+[8]: /monitors/configuration/#advanced-alert-conditions
+[9]: /monitors/types/metric/#data-window
+[10]: /monitors/notify/
+[11]: /api/v1/monitors/#create-a-monitor
+[12]: /monitors/manage/status/#settings
 [13]: mailto:billing@datadoghq.com
-[14]: /ja/api/v1/monitors/
-[15]: /ja/monitors/guide/anomaly-monitor/
-[16]: /ja/monitors/guide/how-to-update-anomaly-monitor-timezone/
-[17]: /ja/help/
+[14]: /api/v1/monitors/
+[15]: /monitors/guide/anomaly-monitor/
+[16]: /monitors/guide/how-to-update-anomaly-monitor-timezone/
+[17]: /help/

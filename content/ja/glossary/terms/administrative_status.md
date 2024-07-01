@@ -1,6 +1,6 @@
 ---
+title: administrative status
 synonyms:
-- 管理ステータス
-title: 管理ステータス
+  - admin status
 ---
-ポートの管理ステータス (up/down) とは、そのポートが無効になっているかどうかのことです。
+The administrative status of a port (up/down) refers to whether the port is disabled.

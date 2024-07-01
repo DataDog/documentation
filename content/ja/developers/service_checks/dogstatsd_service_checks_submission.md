@@ -1,38 +1,39 @@
 ---
-description: データタイプ、タグ付けなど、DogStatsD の機能の概要
+title: "Service Checks Submission: DogStatsD"
+kind: documentation
+description: Overview of the features of DogStatsD, including data types and tagging.
 further_reading:
 - link: /developers/dogstatsd/
-  tag: ドキュメント
-  text: DogStatsD 入門
+  tag: Documentation
+  text: Introduction to DogStatsD
 - link: /developers/community/libraries/
-  tag: ドキュメント
-  text: 公式/コミュニティ作成の API および DogStatsD クライアントライブラリ
-title: 'サービスチェックの送信: DogStatsD'
+  tag: Documentation
+  text: Official and Community created API and DogStatsD client libraries
 ---
 
-StatsD がメトリクスのみを受け付けるのに対して、DogStatsD は、Datadog の主要な 3 種類のデータタイプ、すなわちメトリクス、イベント、サービスチェックをすべて受け付けます。ここでは、サービスチェックの一般的な使用例をコード例を用いて説明します。
+While StatsD accepts only metrics, DogStatsD accepts all three of the major Datadog data types: metrics, events, and service checks. This section shows typical use cases for service checks with code examples.
 
-## 関数
+## Function
 
-[DogStatsD をインストール][1]した後、次の関数を使用して Datadog へサービスチェックを送信できます。
+After [installing DogStatsD][1], you can send service checks to Datadog with the following function:
 
 ```text
 service_check(<SERVICE_CHECK_NAME>, <STATUS>, <TAGS>, <HOSTNAME>, <MESSAGE>)
 ```
 
-サービスチェック関数パラメーター：
+Service check function parameters:
 
-| パラメーター              | タイプ            | 必須 | デフォルト値 | 説明                                                                                                |
+| Parameter              | Type            | Required | Default Value | Description                                                                                                |
 |------------------------|-----------------|----------|---------------|------------------------------------------------------------------------------------------------------------|
-| `<SERVICE_CHECK_NAME>` | 文字列          | はい      | -             | サービスチェックの名前。                                                                             |
-| `<STATUS>`             | Int             | はい      | -             | サービスのステータスを説明する定数: OK には `0`、WARN には `1`、CRITICAL には `2`、UNKNOWN には `3`。 |
-| `<タグ>`               | key:value ペアのリスト | いいえ       | -             | サービスチェックに関連付けられているタグのリスト                                                        |
-| `<ホスト名>`           | 文字列          | いいえ       | 現在のホスト  | サービスチェックに関連付けられているホスト名                                                          |
-| `<MESSAGE>`            | 文字列          | いいえ       | -             | このステータスが発生した補足情報や説明                                        |
+| `<SERVICE_CHECK_NAME>` | String          | Yes      | -             | The name of the service check.                                                                             |
+| `<STATUS>`             | Int             | Yes      | -             | A constant describing the service status: `0` for OK, `1` for WARN, `2` for CRITICAL, and `3` for UNKNOWN. |
+| `<TAGS>`               | List of key:value pairs | No       | -             | A list of tags to associate with the service check.                                                        |
+| `<HOSTNAME>`           | String          | No       | Current host  | The hostname to associate with the service check.                                                          |
+| `<MESSAGE>`            | String          | No       | -             | Additional information or a description of why the status occurred.                                        |
 
-### コード例
+### Code examples
 
-次のコードを実行して、DogStatsD を通じて Datadog にサービスチェックを送信します。必要がなくなったら、クライアントを `フラッシュする`/`閉じる` ことを忘れないでください。
+Run the following code to submit a service check through DogStatsD to Datadog. Remember to `flush`/`close` the client when it is no longer needed.
 
 {{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php" >}}
 
@@ -161,11 +162,11 @@ $statsd->service_check('Service.check.name', 0);
 
 {{< /programming-lang-wrapper >}}
 
-サービスチェックが報告されたら、それを使用して[サービスチェックモニター][2]をトリガーできます。
+After a service check is reported, use it to trigger a [service check monitor][2].
 
-## その他の参考資料
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/developers/dogstatsd/
-[2]: /ja/monitors/types/service_check/
+[1]: /developers/dogstatsd/
+[2]: /monitors/types/service_check/

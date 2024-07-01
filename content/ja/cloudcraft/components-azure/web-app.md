@@ -1,27 +1,27 @@
 ---
-title: Web アプリコンポーネント
+title: "Web app Component"
 ---
 
-## 概要
+## Overview
 
-Web アプリコンポーネントを使用すると、Azure 環境の Web アプリケーションを表現して視覚化できます。
+You can use the Web App component to represent and visualize web applications from your Azure environment.
 
-{{< img src="cloudcraft/components-azure/web-app/component-web-app-diagram.png" alt="相互接続された Azure Web アプリコンポーネントを示す、等角投影された Cloudcraft 図のスクリーンショット。" responsive="true" style="width:60%;">}}
+{{< img src="cloudcraft/components-azure/web-app/component-web-app-diagram.png" alt="Screenshot of an isometric Cloudcraft diagram showing interconnected Azure web app components." responsive="true" style="width:60%;">}}
 
-## ツールバー
+## Toolbar
 
-ツールバーを使用して、コンポーネントの構成とカスタマイズを行います。以下のオプションがあります。
+Use the toolbar to configure and customize the component. The following options are available:
 
-- **Color**: 3D ビューでコンポーネント本体のアクセントカラーと塗りつぶしカラーを選択します。
-- **Platform**: Web アプリケーションのプラットフォームを選択します。サポートされているオプションは Windows と Linux です。
-- **Tier**: Web アプリケーションのサービスレベル階層を選択します。
-- **Instance**: Web アプリケーションのインスタンスタイプを選択します。
+- **Color**: Select accent and fill colors for the body of the component in 3D view.
+- **Platform**: Select the platform for your web application. Supported options are Windows and Linux.
+- **Tier**: Select the service level tier for your web application.
+- **Instance**: Select an instance type for your web application.
 
-## ヘルプ
+## API
 
-[Cloudcraft API][1] を使用して、プログラムでアーキテクチャ図にアクセスし、JSON オブジェクトとしてレンダリングします。以下は、Web アプリコンポーネントの JSON オブジェクトの例です。
+Use [the Cloudcraft API][1] to programmatically access and render your architecture diagrams as JSON objects. The following is an example JSON object of a Web app component:
 
-### スキーマ
+### Schema
 
 ```json
 {
@@ -46,34 +46,34 @@ Web アプリコンポーネントを使用すると、Azure 環境の Web ア�
 }
 ```
 
-- **type: 文字列**: コンポーネントのタイプ。このコンポーネントの値 `azurewebapp` の文字列でなければなりません。
-- **id: 文字列、uuid**: コンポーネントの一意な識別子。API は内部的に UUID v4 を使用しますが、任意の一意な文字列を受け付けます。
-- **resourceId: 文字列**: Azure 内のコンポーネントのグローバルに一意な識別子。
-- **region: 文字列**: コンポーネントの Azure リージョン。API は、中国を除くすべてのグローバルリージョンをサポートしています。
-- **mapPos: 配列**: ブループリント内のコンポーネントの位置。API では、一意の X 座標と Y 座標のペアを使用して位置を表現します。
-- **platform: 文字列**: Web アプリケーションのプラットフォーム。`Windows` または `Linux` のどちらかを指定します。デフォルトは `Linux` です。
-- **tier: 文字列**: Web アプリケーションのサービスレベル階層。[詳細は以下を参照してください](#accepted-values-for-tier)。デフォルトは `Basic` です。
-- **instance: 文字列**: Web アプリケーションのインスタンスタイプ。[詳細は以下を参照してください](#accepted-values-for-instance)。デフォルトは `B1` です。
-- **color: オブジェクト**: コンポーネント本体の塗りつぶし色。
-  - **isometric: 文字列**: 3D ビューでのコンポーネント本体の 16 進数カラー。デフォルトは `#ececed` です。
-  - **2d: 文字列**: 2D ビューでのコンポーネント本体の 16 進数カラー。デフォルトは `null` です。
-- **accentColor: オブジェクト**: コンポーネントロゴのアクセントカラー。
-  - **isometric: 文字列**: 3D ビューでのコンポーネントロゴの 16 進数カラー。デフォルトは `#4286c5` です。
-  - **2d: 文字列**: 2D ビューでのコンポーネントロゴの 16 進数カラー。デフォルトは `null` です。
-- **link: 文字列、uri**: コンポーネントを別の図や外部の Web サイトにリンクする URI。`blueprint://` または `https://` の 2 つの形式のどちらかを指定します。
-- **locked: ブール値**: Web インターフェイスを通してコンポーネントの位置の変更を許可するかどうか。デフォルトは `false` です。
+- **type: string**: The type of component. Must be a string of value `azurewebapp` for this component.
+- **id: string, uuid**: The unique identifier for the component. The API uses a UUID v4 internally but accepts any unique string.
+- **resourceId: string**: The globally unique identifier for the component within Azure.
+- **region: string**: The Azure region for the component. The API supports all global regions, except China.
+- **mapPos: array**: The position of the component in the blueprint. The API uses a unique X and Y coordinate pair to express positioning.
+- **platform: string**: The platform for the web application. Accepts one of two values, `Windows` or `Linux`. Defaults to `Linux`.
+- **tier: string**: The service level tier for the web application. [See below for more information](#accepted-values-for-tier). Defaults to `Basic`.
+- **instance: string**: The instance type for the web application. [See below for more information](#accepted-values-for-instance). Defaults to `B1`.
+- **color: object**: The fill color for the component body.
+  - **isometric: string**: A hexadecimal color for the component body in 3D view. Defaults to `#ececed`.
+  - **2d: string**: A hexadecimal color for the component body in 2D view. Defaults to `null`.
+- **accentColor: object**: The accent color for the component logo.
+  - **isometric: string**: A hexadecimal color for the component logo in 3D view. Defaults to `#4286c5`.
+  - **2d: string**: A hexadecimal color for the component logo in 2D view. Defaults to `null`.
+- **link: string, uri**: A URI that links the component to another diagram or an external website. Accepts one of two formats, `blueprint://` or `https://`.
+- **locked: boolean**: Whether to allow changes to the position of the component through the web interface. Defaults to `false`.
 
-## tier で許容される値
+## Accepted values for tier
 
-`tier` キーは以下の値を受け付けます。
+The `tier` key accepts the following values:
 
 ```
 Basic, Free, Isolated, "Isolated v2", "Premium v2", "Premium v3", Shared, Standard
 ```
 
-## instance で許容される値
+## Accepted values for instance
 
-`instance` キーは以下の値を受け付けます。
+The `instance` key accepts the following values:
 
 ```
 B1, B2, B3, F1, I1, I2, I3, "I1 v2", "I2 v2", "I3 v2", "I4 v2", "I5 v2",
@@ -81,13 +81,13 @@ B1, B2, B3, F1, I1, I2, I3, "I1 v2", "I2 v2", "I3 v2", "I4 v2", "I5 v2",
 P2mv3, "P3 v3", P3mv3, P4mv3, P5mv3, D1, S1, S2, S3
 ```
 
-## tier と instance の有効な組み合わせ
+## Valid combinations for tier and instance
 
-`tier` キーと `instance` キーは連携してアプリケーションに割り当てられるリソースを定義しますが、有効な値の組み合わせを提供する必要があります。
+The `tier` and `instance` keys work together to define the resources allocated to an application, but a valid combination of values must be provided.
 
-次の表は、どの組み合わせが有効かを示しています。
+The following table shows which combinations are valid.
 
-tier        | インスタンス
+tier        | instance
 ----------- | ---------
 Basic       | B1, B2, B3
 Free        | F1
@@ -96,6 +96,6 @@ Isolated v2 | I1 v2, I2 v2, I3 v2, I4 v2, I5 v2, I6 v2
 Premium v2  | P1 v2, P2 v2, P3 v2
 Premium v3  | P0v3, P1 v3, P1mv3, P2 v3, P2mv3, P3 v3, P3mv3, P4mv3, P5mv3
 Shared      | D1
-標準的な方法    | S1, S2, S3
+Standard    | S1, S2, S3
 
 [1]: https://developers.cloudcraft.co/

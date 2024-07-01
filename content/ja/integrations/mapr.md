@@ -1,176 +1,174 @@
 ---
-app_id: mapr
-app_uuid: 96cb179f-2a53-424b-95ce-302610f155eb
-assets:
-  dashboards:
-    MapR - Overview: assets/dashboards/mapr_overview.json
-  integration:
-    auto_install: true
-    configuration:
-      spec: assets/configuration/spec.yaml
-    events:
-      creates_events: false
-    metrics:
-      check: mapr.metrics.submitted
-      metadata_path: metadata.csv
-      prefix: mapr.
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 10073
-    source_type_name: MapR
-  logs:
-    source: mapr
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com (日本語対応)
-  support_email: help@datadoghq.com
-categories:
+"app_id": "mapr"
+"app_uuid": "96cb179f-2a53-424b-95ce-302610f155eb"
+"assets":
+  "dashboards":
+    "MapR - Overview": assets/dashboards/mapr_overview.json
+  "integration":
+    "auto_install": true
+    "configuration":
+      "spec": assets/configuration/spec.yaml
+    "events":
+      "creates_events": false
+    "metrics":
+      "check": mapr.metrics.submitted
+      "metadata_path": metadata.csv
+      "prefix": mapr.
+    "service_checks":
+      "metadata_path": assets/service_checks.json
+    "source_type_id": !!int "10073"
+    "source_type_name": MapR
+"author":
+  "homepage": "https://www.datadoghq.com"
+  "name": Datadog
+  "sales_email": info@datadoghq.com
+  "support_email": help@datadoghq.com
+"categories":
 - data stores
-- ログの収集
-dependencies:
-- https://github.com/DataDog/integrations-core/blob/master/mapr/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: mapr
-integration_id: mapr
-integration_title: MapR
-integration_version: 1.11.0
-is_public: true
-kind: インテグレーション
-manifest_version: 2.0.0
-name: mapr
-public_title: MapR
-short_description: MapR で利用可能な作成済みのモニタリングメトリクスを収集します。
-supported_os:
+- log collection
+"custom_kind": "integration"
+"dependencies":
+- "https://github.com/DataDog/integrations-core/blob/master/mapr/README.md"
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "mapr"
+"integration_id": "mapr"
+"integration_title": "MapR"
+"integration_version": "1.11.0"
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "mapr"
+"public_title": "MapR"
+"short_description": "Collect the monitoring metrics made available by MapR."
+"supported_os":
 - linux
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Data Stores
-  - Category::Log Collection
-  - Supported OS::Linux
-  configuration: README.md#Setup
-  description: MapR で利用可能な作成済みのモニタリングメトリクスを収集します。
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: MapR
+"tile":
+  "changelog": CHANGELOG.md
+  "classifier_tags":
+  - "Category::Data Stores"
+  - "Category::Log Collection"
+  - "Supported OS::Linux"
+  "configuration": "README.md#Setup"
+  "description": Collect the monitoring metrics made available by MapR.
+  "media": []
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": MapR
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## 概要
+## Overview
 
-このチェックは、Datadog Agent を通して [MapR][1] 6.1 以降を監視します。
+This check monitors [MapR][1] 6.1+ through the Datadog Agent.
 
-## 計画と使用
+## Setup
 
-以下の手順に従って、このチェックをインストールし、ホストで実行中の Agent に対して構成します。
+Follow the instructions below to install and configure this check for an Agent running on a host.
 
-### インフラストラクチャーリスト
+### Installation
 
-MapR チェックは [Datadog Agent][2] パッケージに含まれていますが、追加のセットアップが必要です。
+The MapR check is included in the [Datadog Agent][2] package but requires additional setup operations.
 
-#### 前提条件
+#### Prerequisites
 
-- [MapR モニタリング][3]が問題なく実行されている。
-- `/var/mapr/mapr.monitoring/metricstreams` ストリームで 'consume' を許可された利用可能な [MapR ユーザー][4] (ユーザー名、パスワード、UID、GID あり) がある。既存のユーザーの場合と、新規作成ユーザーの場合があります。
-- **非セキュアクラスター**: [クラスターセキュリティを使用しないなりすましの構成][5]に従い、`dd-agent` ユーザーがこの MapR ユーザーを偽装できるようにします。
-- **セキュアなクラスター**: `dd-agent` ユーザーが読み出せるこのユーザー専用の[長期的なサービスチケット][6]を生成します。
+- [MapR monitoring][3] is running correctly.
+- You have an available [MapR user][4] (with name, password, UID, and GID) with the 'consume' permission on the `/var/mapr/mapr.monitoring/metricstreams` stream. This may be an already existing user or a newly created user.
+- **On a non-secure cluster**: Follow [Configuring Impersonation without Cluster Security][5] so that the `dd-agent` user can impersonate this MapR user.
+- **On a secure cluster**: Generate a [long-lived service ticket][6] for this user that is readable by the `dd-agent` user.
 
-ノード別インストールステップ
+Installation steps for each node:
 
-1. [Agent をインストールします][2]。
-2. _mapr-streams-library_ が必要とする _librdkafka_ ライブラリを、[以下の手順][7]に従ってインストールします。
-3. 次のコマンドを使用して、ライブラリ _mapr-streams-library_ をインストールします。
+1. [Install the Agent][2].
+2. Install the _librdkafka_ library, required by _mapr-streams-library_, by following [these instructions][7].
+3. Install the library _mapr-streams-library_ with the following command:
 
     `sudo -u dd-agent /opt/datadog-agent/embedded/bin/pip install --global-option=build_ext --global-option="--library-dirs=/opt/mapr/lib" --global-option="--include-dirs=/opt/mapr/include/" mapr-streams-python`.
 
-    Python 3 で Agent v7 を使用されている場合は、`pip` を `pip3` に置き換えます。
+    If you use Python 3 with Agent v7, replace `pip` with `pip3`.
 
-4. `/etc/ld.so.conf` (または `/etc/ld.so.conf.d/` 内のファイル) に `/opt/mapr/lib/` を追加します。これは、Agent が使用する _mapr-streams-library_ で MapR 共有ライブラリを探すために必要です。
-5. `sudo ldconfig` を実行してライブラリを再読み込みします。
-6. チケットのロケーションを指定して、インテグレーションを構成します。
+4. Add `/opt/mapr/lib/` to your `/etc/ld.so.conf` (or a file in `/etc/ld.so.conf.d/`). This is required for the _mapr-streams-library_ used by the Agent to find the MapR shared libraries.
+5. Reload the libraries by running `sudo ldconfig`.
+6. Configure the integration by specifying the ticket location.
 
-#### 補足
+#### Additional notes
 
-- クラスターで「セキュリティ」が有効化されていない場合は、チケットがなくても続行できます。
-- 本番環境で gcc (mapr-streams-library の構築に必要) などのコンパイルツールを利用できない場合は、環境インスタンスでライブラリのコンパイル済み Wheel を生成して、本番ホストに配布できます。開発ホストと本番ホストは、双方でコンパイル済み Wheel を使用できるよう、同様である必要があります。`sudo -u dd-agent /opt/datadog-agent/embedded/bin/pip wheel --global-option=build_ext --global-option="--library-dirs=/opt/mapr/lib" --global-option="--include-dirs=/opt/mapr/include/" mapr-streams-python` を実行して、開発マシンで Wheel  ファイルを作成できます。次に、本番マシンで `sudo -u dd-agent /opt/datadog-agent/embedded/bin/pip install <WHEEL_ファイル>` を実行します。
-- Python 3 で Agent v7 を使用されている場合は、_mapr-streams-library_ をインストールする際に、必ず `pip` を `pip3` に置き換えてください。
+- If you don't have "security" enabled in the cluster, you can continue without a ticket.
+- If your production environment does not allow compilation tools like gcc (required to build the mapr-streams-library), it is possible to generate a compiled wheel of the library on a development instance and distribute the compiled wheel to the production hosts. The development and production hosts have to be similar enough for the compiled wheel to be compatible. You can run `sudo -u dd-agent /opt/datadog-agent/embedded/bin/pip wheel --global-option=build_ext --global-option="--library-dirs=/opt/mapr/lib" --global-option="--include-dirs=/opt/mapr/include/" mapr-streams-python` to create the wheel file on the development machine. Then, `sudo -u dd-agent /opt/datadog-agent/embedded/bin/pip install <THE_WHEEL_FILE>` on the production machine.
+- If you use Python 3 with Agent v7, make sure to replace `pip` with `pip3` when installing the _mapr-streams-library_
 
-### ブラウザトラブルシューティング
+### Configuration
 
-#### メトリクスの収集
+#### Metric collection
 
-1. Agent コンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーで `mapr.d/conf.yaml` ファイルを編集し、MapR パフォーマンスデータを収集します。利用可能なコンフィギュレーションオプションについては、[mapr.d/conf.yaml のサンプル][8]を参照してください。
-2. 作成済みの長期チケットのパスに対するコンフィグに `ticket_location` パラメーターを設定します。
-3. [Agent を再起動します][9]。
+1. Edit the `mapr.d/conf.yaml` file, in the `conf.d/` folder at the root of your Agent's configuration directory to collect your MapR performance data. See the [sample mapr.d/conf.yaml][8] for all available configuration options.
+2. Set the `ticket_location` parameter in the config to the path of the long-lived ticket you created.
+3. [Restart the Agent][9].
 
-#### 収集データ
+#### Log collection
 
-MapR はログに fluentD を使用します。[fluentD Datadog プラグイン][10]を使用して、MapR ログを収集します。下記のコマンドを使用して、プラグインをダウンロードし、適切なディレクトリにインストールします。
+MapR uses fluentD for logs. Use the [fluentD datadog plugin][10] to collect MapR logs. The following command downloads and installs the plugin into the right directory.
 
 `curl https://raw.githubusercontent.com/DataDog/fluent-plugin-datadog/master/lib/fluent/plugin/out_datadog.rb -o /opt/mapr/fluentd/fluentd-<VERSION>/lib/fluentd-<VERSION>-linux-x86_64/lib/app/lib/fluent/plugin/out_datadog.rb`
 
-次に、下記のセクションを使用して `/opt/mapr/fluentd/fluentd-<VERSION>/etc/fluentd/fluentd.conf` をアップデートします。
+Then update the `/opt/mapr/fluentd/fluentd-<VERSION>/etc/fluentd/fluentd.conf` with the following section.
 
 ```text
 <match *>
   @type copy
-  <store> # デフォルトではこのセクションの位置はここです。このセクションから Kibana の ElasticCach にログを送信します。
+  <store> # This section is here by default and sends the logs to ElasticCache for Kibana.
     @include /opt/mapr/fluentd/fluentd-<VERSION>/etc/fluentd/es_config.conf
     include_tag_key true
     tag_key service_name
   </store>
-  <store> # また、このセクションはすべてログを Datadog に転送します:
+  <store> # This section also forwards all the logs to Datadog:
     @type datadog
     @id dd_agent
     include_tag_key true
     dd_source mapr  # Sets "source: mapr" on every log to allow automatic parsing on Datadog.
     dd_tags "<KEY>:<VALUE>"
-    service <サービス名>
-    api_key <API_キー>
+    service <YOUR_SERVICE_NAME>
+    api_key <YOUR_API_KEY>
   </store>
 ```
 
-使用可能なオプションの詳細については、[fluent_datadog_plugin][10] を参照してください。
+See the [fluent_datadog_plugin][10] for more details about the options you can use.
 
-### 検証
+### Validation
 
-[Agent の status サブコマンド][11]を実行し、Checks セクションで `mapr` を探します。
+Run the [Agent's status subcommand][11] and look for `mapr` under the Checks section.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "mapr" >}}
 
 
-### イベント
+### Events
 
-MapR チェックには、イベントは含まれません。
+The MapR check does not include any events.
 
-### サービスのチェック
+### Service Checks
 {{< get-service-checks-from-git "mapr" >}}
 
 
-## トラブルシューティング
+## Troubleshooting
 
-- **MapR インテグレーションを構成してから、Agent のクラッシュループ状態が続いている**。
+- **The Agent is on a crash loop after configuring the MapR integration**
 
-  アクセス許可に問題があり、_mapr-streams-python_ 内の C ライブラリがセグメンテーション障害を起こすケースがいくつか発生しています。`dd-agent` ユーザーがチケットファイルでアクセス許可を読み込み、`MAPR_TICKETFILE_LOCATION` 環境変数がチケットを指定しているときに `dd-agent` ユーザーが `maprcli` コマンドを実行できることを確認してください。
+  There have been a few cases where the C library within _mapr-streams-python_ segfaults because of permissions issues. Ensure the `dd-agent` user has read permission on the ticket file, that the `dd-agent` user is able to run `maprcli` commands when the `MAPR_TICKETFILE_LOCATION` environment variable points to the ticket.
 
-- **インテグレーションは正しく動作しているように思えるが、メトリクスがまったく送信されない**。
+- **The integration seems to work correctly but doesn't send any metric**.
 
-  インテグレーションがトピックからデータをプルし、MapR がデータをトピックにプッシュする必要があるため、必ず Agent を最低でも数分間実行してください。
-  それでも問題が解決されず、`sudo` を使用してAgent を手動で実行するとデータが表示される場合は、アクセス許可に問題があります。すべてを再度ご確認ください。`dd-agent` Linux ユーザーは、ユーザー X  (`dd-agent` 自身である場合とそうでない場合があります) として MapR に対してクエリを実行できるでけでなく、ローカルに保存されたチケットを使用できるはずです。さらに、ユーザー X には `consume` permission on the `/var/mapr/mapr.monitoring/metricstreams` ストリームが必要です。
+  Make sure to let the Agent run for at least a couple of minutes, because the integration pulls data from a topic and MapR needs to push data into that topic.
+  If that doesn't help, but running the Agent manually with `sudo` shows data, this is a problem with permissions. Double check everything. The `dd-agent` Linux user should be able to use a locally stored ticket, allowing it to run queries against MapR as user X (which may or may not be `dd-agent` itself). Additionally, user X needs to have the `consume` permission on the `/var/mapr/mapr.monitoring/metricstreams` stream.
 
-- **`confluent_kafka was not imported correctly ...` というメッセージが表示される**。
+- **You see the message `confluent_kafka was not imported correctly ...`**
 
-  このメッセージは、Agent 埋め込み環境で、コマンド `import confluent_kafka` を実行できなかったときに表示され、_mapr-streams-library_ が埋め込み環境内にインストールされていないか、mapr-core ライブラリが見つからないことを意味します。エラーメッセージに詳細が記述されています。
+  The Agent embedded environment was not able to run the command `import confluent_kafka`. This means that either the _mapr-streams-library_ was not installed inside the embedded environment, or that it can't find the mapr-core libraries. The error message should give more details.
 
-ご不明な点は、[Datadog サポート][14]までお問い合わせください。
+Need more help? Contact [Datadog support][14].
 
 
 [1]: https://mapr.com
@@ -181,9 +179,10 @@ MapR チェックには、イベントは含まれません。
 [6]: https://mapr.com/docs/61/SecurityGuide/GeneratingServiceTicket.html
 [7]: https://github.com/confluentinc/librdkafka#installing-prebuilt-packages
 [8]: https://github.com/DataDog/integrations-core/blob/master/mapr/datadog_checks/mapr/data/conf.yaml.example
-[9]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[9]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [10]: https://www.rubydoc.info/gems/fluent-plugin-datadog
-[11]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[11]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
 [12]: https://github.com/DataDog/integrations-core/blob/master/mapr/metadata.csv
 [13]: https://github.com/DataDog/integrations-core/blob/master/mapr/assets/service_checks.json
-[14]: https://docs.datadoghq.com/ja/help/
+[14]: https://docs.datadoghq.com/help/
+

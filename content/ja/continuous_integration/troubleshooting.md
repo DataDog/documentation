@@ -1,69 +1,69 @@
 ---
+title: CI Visibility Troubleshooting
 further_reading:
-- link: /continuous_integration/tests
-  tag: Documentation
-  text: CI テストの監視方法
-- link: /continuous_integration/pipelines
-  tag: Documentation
-  text: CI パイプラインの監視方法
-- link: /continuous_integration/intelligent_test_runner
-  tag: Documentation
-  text: Intelligent Test Runner について
-title: CI Visibility のトラブルシューティング
+  - link: /continuous_integration/tests
+    tag: Documentation
+    text: Learn how to monitor your CI tests
+  - link: /continuous_integration/pipelines
+    tag: Documentation
+    text: Learn how to monitor your CI pipelines
+  - link: /continuous_integration/intelligent_test_runner
+    tag: Documentation
+    text: Learn about the Intelligent Test Runner
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">選択したサイト ({{< region-param key="dd_site_name" >}}) では現在 CI Visibility は利用できません。</div>
+<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
-## 概要
+## Overview
 
-このページでは、CI Visibility に関する問題のトラブルシューティングに役立つ情報を提供します。さらにヘルプが必要な場合は、[Datadog サポート][2]にお問い合わせください。
+This page provides information to help you troubleshot issues with CI Visibility. If you need additional help, contact [Datadog Support][2].
 
-## Jenkins インスタンスがインスツルメントされていますが、Datadog にデータが表示されていません
+## Your Jenkins instance is instrumented, but Datadog isn't showing any data
 
-1. 1 つ以上のパイプラインが実行を完了していることを確認します。パイプラインの実行情報は、パイプラインが完了しないと送信されません。
-2. Datadog Agent ホストが適切に構成されており、Datadog プラグインから到達可能であることを確認してください。Jenkins プラグインコンフィギュレーション UI の **Check connectivity with the Datadog Agent** (Datadog Agent との接続を確認する) ボタンをクリックすると、接続をテストできます。
-3. Jenkins のログにエラーがないか確認します。Datadog プラグインのデバッグレベルのログを有効にするには、[`logging.properties` ファイルを作成][1]して、`org.datadog.level = ALL` という行を追加します。
+1. Make sure that at least one pipeline has finished executing. Pipeline execution information is only sent after the pipeline has finished.
+2. Make sure the Datadog Agent host is properly configured and is reachable by the Datadog Plugin. You can test connectivity by clicking on the **Check connectivity with the Datadog Agent** button on the Jenkins plugin configuration UI.
+3. Check for any errors in the Jenkins logs. You can enable debug-level logs for the Datadog plugin by [creating a `logging.properties` file][1] and adding the line: `org.datadog.level = ALL`.
 
-## パイプラインが見つかりません
+## Pipeline not found
 
-[`running` パイプラインをサポートしていない CI プロバイダー][15]では、進行中のパイプラインから送られてくる不完全なデータをクリックすると、「パイプラインが見つかりません」というメッセージが表示されます。ステージ、ジョブ、カスタムコマンドのデータは、順次受信されます。パイプラインが終了するまで待ち、再度お試しください。
+A "Pipeline not found" message is shown when you click on incomplete data coming from an in-progress pipeline for those [CI providers that do not support `running` pipelines][15]. Data is received progressively for stages, jobs, or custom commands. Wait until the pipeline has finished and try again.
 
-## Pipelines ページにパイプラインが表示されない
+## Missing pipelines on the Pipelines page
 
-パイプラインページには、Git 情報がないパイプライン、または Git 情報があり Git リポジトリのデフォルトブランチに属するパイプラインのみが表示されます。
+The pipeline page only displays pipelines with no Git information, or pipelines with Git information which belong to the default branch of the Git repository.
 
-## サマリーテーブルにステージやジョブがない
+## Missing stages or jobs in summary tables
 
-_Pipeline Details_ ページでステージやジョブが見つからないのは、構成が間違っている可能性があります。ステージまたはジョブの実行に保存されているパイプライン名が、その親パイプラインの**同じ**名前と一致していることを確認してください。カスタムパイプラインを使用している場合は、[公開 API エンドポイント仕様][15]を参照してください。
+Missing stages or jobs in the _Pipeline Details_ page might be due to a wrong configuration. Make sure that the pipeline name stored in the stage or job executions matches the **same** name of their parent pipeline. If you are using custom pipelines, refer to the [public API endpoint specification][15].
 
-### 実行中のパイプラインの制限
+### Limitations on running pipelines
 
-#### Webhook イベントの配信は、CI プロバイダーによって保証されていない
+#### Delivery of webhook events is not guaranteed by CI providers
 
-実行中のパイプラインのサポートは、実行ステータスを示す CI プロバイダーから送信されるデータに依存しています。このデータが利用できない場合、Datadog で `Running` とマークされた実行はすでに終了している可能性があります。
+Running pipelines support relies on data sent from CI providers indicating execution status. If this data is not available, executions marked as `Running` in Datadog may have already finished. 
 
-#### パイプライン実行の最大期間
+#### Maximum duration for a pipeline execution
 
-パイプライン実行は、最大 3 日間 `Running` ステータスを維持できます。それ以降も実行されている場合、パイプライン実行は CI Visibility に表示されません。パイプライン実行が 3 日後に終了した場合、終了したパイプライン実行は、対応する最終ステータス (`Success`、`Error`、`Canceled`、`Skipped`) と正しい期間とともに CI Visibility に表示されます。
+A pipeline execution can maintain `Running` status for a maximum of three days. If it is still running after that time, the pipeline execution does not appear in CI Visibility. If a pipeline execution finishes after three days, the finished pipeline execution appears in CI Visibility with its correspondent final status (`Success`, `Error`, `Canceled`, `Skipped`) and with the correct duration.
 
-## その他の参考資料
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://www.jenkins.io/doc/book/system-administration/viewing-logs/
-[2]: /ja/help/
-[3]: /ja/continuous_integration/tests/
+[2]: /help/
+[3]: /continuous_integration/tests/
 [4]: https://app.datadoghq.com/ci/test-runs
 [5]: https://app.datadoghq.com/ci/test-services
-[6]: /ja/tracing/troubleshooting/tracer_debug_logs
-[7]: /ja/continuous_integration/tests/containers/
-[8]: /ja/continuous_integration/tests/junit_upload/?tabs=linux#collecting-environment-configuration-metadata
+[6]: /tracing/troubleshooting/tracer_debug_logs
+[7]: /continuous_integration/tests/containers/
+[8]: /continuous_integration/tests/junit_upload/?tabs=linux#collecting-environment-configuration-metadata
 [9]: https://app.datadoghq.com/ci/settings/repository
-[10]: /ja/continuous_integration/intelligent_test_runner/
+[10]: /continuous_integration/intelligent_test_runner/
 [11]: https://developer.harness.io/kb/continuous-integration/articles/using_git_credentials_from_codebase_connector_in_ci_pipelines_run_step/
 [12]: https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/syncing-a-fork#syncing-a-fork-branch-from-the-web-ui
-[13]: /ja/api/latest/ci-visibility-pipelines/#send-pipeline-event
-[14]: /ja/continuous_integration/tests/#supported-features
-[15]: /ja/continuous_integration/pipelines/#supported-features
+[13]: /api/latest/ci-visibility-pipelines/#send-pipeline-event
+[14]: /continuous_integration/tests/#supported-features
+[15]: /continuous_integration/pipelines/#supported-features

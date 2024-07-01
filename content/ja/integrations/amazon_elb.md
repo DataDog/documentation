@@ -1,103 +1,104 @@
 ---
-app_id: amazon-elb
-app_uuid: 1ef7e818-51bc-4935-89b3-c418908c5e69
-assets:
-  dashboards:
-    aws_alb: assets/dashboards/aws_alb_overview.json
-    aws_elb: assets/dashboards/aws_elb_overview.json
-    aws_nlb: assets/dashboards/aws_nlb_overview.json
-  integration:
-    auto_install: false
-    events:
-      creates_events: false
-    metrics:
-      check:
-      - aws.elb.request_count
-      metadata_path: metadata.csv
-      prefix: aws.elb
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 119
-    source_type_name: Amazon ELB
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com
-  support_email: help@datadoghq.com
-categories:
-- aws
-- metrics
-- cloud
-dependencies: []
-display_on_public_website: true
-draft: false
-git_integration_title: amazon_elb
-integration_id: amazon-elb
-integration_title: Amazon Elastic Load Balancing
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: 2.0.0
-name: amazon_elb
-public_title: Amazon Elastic Load Balancing
-short_description: Amazon ELB は自動的に複数の EC2 インスタンスにトラフィックを分散します。
-supported_os: []
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::AWS
-  - Category::Metrics
-  - Category::クラウド
-  configuration: README.md#Setup
-  description: Amazon ELB は自動的に複数の EC2 インスタンスにトラフィックを分散します。
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Amazon Elastic Load Balancing
+"app_id": "amazon-elb"
+"app_uuid": "1ef7e818-51bc-4935-89b3-c418908c5e69"
+"assets":
+  "dashboards":
+    "aws_alb": "assets/dashboards/aws_alb_overview.json"
+    "aws_elb": "assets/dashboards/aws_elb_overview.json"
+    "aws_nlb": "assets/dashboards/aws_nlb_overview.json"
+  "integration":
+    "auto_install": false
+    "events":
+      "creates_events": false
+    "metrics":
+      "check":
+      - "aws.elb.request_count"
+      "metadata_path": "metadata.csv"
+      "prefix": "aws.elb"
+    "service_checks":
+      "metadata_path": "assets/service_checks.json"
+    "source_type_id": !!int "119"
+    "source_type_name": "Amazon ELB"
+"author":
+  "homepage": "https://www.datadoghq.com"
+  "name": "Datadog"
+  "sales_email": "info@datadoghq.com"
+  "support_email": "help@datadoghq.com"
+"categories":
+- "aws"
+- "metrics"
+- "cloud"
+"custom_kind": "integration"
+"dependencies": []
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "amazon_elb"
+"integration_id": "amazon-elb"
+"integration_title": "Amazon Elastic Load Balancing"
+"integration_version": ""
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "amazon_elb"
+"public_title": "Amazon Elastic Load Balancing"
+"short_description": "Amazon ELB automatically distributes traffic across multiple EC2 instances."
+"supported_os": []
+"tile":
+  "changelog": "CHANGELOG.md"
+  "classifier_tags":
+  - "Category::AWS"
+  - "Category::Metrics"
+  - "Category::Cloud"
+  "configuration": "README.md#Setup"
+  "description": "Amazon ELB automatically distributes traffic across multiple EC2 instances."
+  "media": []
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": "Amazon Elastic Load Balancing"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
-## 概要
+## Overview
 
-Amazon Elastic Load Balancing は、クラウド上の複数の Amazon EC2 インスタンスに受信アプリケーションのトラフィックを自動的に分散します。
+Amazon Elastic Load Balancing automatically distributes incoming application traffic across multiple Amazon EC2 instances in the cloud.
 
-Datadog は、AWS が提供する 3 種類の Elastic Load Balancer (Application (ALB)、Classic (ELB)、Network Load Balancers (NLB)) からメトリクスとメタデータを収集します。
+Datadog collects metrics and metadata from all three flavors of Elastic Load Balancers that AWS offers: Application (ALB), Classic (ELB), and Network Load Balancers (NLB).
 
-このインテグレーションを有効にすると、Datadog にすべての Elastic Load Balancing メトリクスを表示できます。
+Enable this integration to see in Datadog all your Elastic Load Balancing metrics.
 
-注: このインテグレーションでは、'ec2:describe**' と 'elasticloadbalancing:describe*' の権限が完全に有効になっている必要があります。
+Note: This integration requires the permissions 'ec2:describe*\*' and 'elasticloadbalancing:describe\*' to be fully enabled.
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-[Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
+If you haven't already, set up the [Amazon Web Services integration][1] first.
 
-### メトリクスの収集
+### Metric collection
 
-1. [AWS インテグレーションページ][2]で、`ApplicationELB`、`ELB`、`NetworkELB` が `Metric Collection` タブで有効になっていることを確認します。
-2. [Datadog - Amazon ELB インテグレーション][3]をインストールします。
+1. In the [AWS integration page][2], ensure that `ApplicationELB`, `ELB`, and `NetworkELB` are enabled under the `Metric Collection` tab.
+2. Install the [Datadog - Amazon ELB integration][3].
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "amazon_elb" >}}
 
 
-### ヘルプ
+### Events
 
-Amazon Elastic Load Balancing インテグレーションには、イベントは含まれません。
+The Amazon Elastic Load Balancing integration does not include any events.
 
-### ヘルプ
+### Service Checks
 
-Amazon Elastic Load Balancing インテグレーションには、サービスのチェック機能は含まれません。
+The Amazon Elastic Load Balancing integration does not include any service checks.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
+Need help? Contact [Datadog support][5].
 
-[1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
+[1]: https://docs.datadoghq.com/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
 [3]: https://app.datadoghq.com/integrations/amazon-elb
 [4]: https://github.com/DataDog/integrations-internal-core/blob/main/amazon_elb/metadata.csv
-[5]: https://docs.datadoghq.com/ja/help/
+[5]: https://docs.datadoghq.com/help/
+

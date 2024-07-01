@@ -1,95 +1,94 @@
 ---
+title: Anomaly Monitors
 aliases:
-- /ja/monitors/faq/anomaly-monitor.md
-kind: ガイド
-title: 異常検知モニター
+- /monitors/faq/anomaly-monitor.md
 ---
 
-### あらゆるものに対して異常検知を使用した方がいいですか。
+### Should I use anomaly detection for everything?
 
-いいえ。異常検知は、予測可能なパターンを持つメトリクスを視覚化し、監視するのに役立ちます。例えば、`my_site.page_views{*}` は、ユーザーのトラフィックによって駆動し、時間帯や曜日によって予測可能に変化します。そのため、異常検知に適しています。
+No. Anomaly detection assists with visualizing and monitoring metrics that have predictable patterns. For example, `my_site.page_views{*}` is driven by user traffic and varies predictably by time of day and day of week. Therefore, it is well suited for anomaly detection.
 
-**注**: 異常検知が適切な予測を行うには履歴データが必要です。数時間や数日分のメトリクスしか収集されていない場合、異常検知は役に立ちません。
+**Note**: Anomaly detection requires historical data to make good predictions. If you have only been collecting a metric for a few hours or days, anomaly detection won't be useful.
 
-### ダッシュボードで複数のグループに異常検知を使用できないのはなぜですか。
+### Why can't I use anomaly detection over groups in the dashboard?
 
-1 つのグラフに独立した多数の時系列を追加すると[スパゲッティ化][1]することがあり、これに異常検知の視覚化を追加すると事態が悪化します。
+Adding many separate timeseries in a single graph can lead to [spaghettification][1], and the problem gets worse when the anomaly detection visualization is added:
 
-{{< img src="monitors/monitor_types/anomaly/spaghetti.png" alt="スパゲッティ化" style="width:80%;">}}
+{{< img src="monitors/monitor_types/anomaly/spaghetti.png" alt="Spaghettification" style="width:80%;">}}
 
-ただし、1 つのグラフに複数の系列を一度に 1 つ追加することは可能です。マウスを重ねたときにのみ、灰色の帯が表示されます。
+However, it is possible to add multiple series to a single graph one at a time. The gray band only shows up on mouseover:
 
-{{< img src="monitors/monitor_types/anomaly/anomaly_multilines.png" alt="異常多発線" style="width:80%;" >}}
+{{< img src="monitors/monitor_types/anomaly/anomaly_multilines.png" alt="anomaly multi lines" style="width:80%;" >}}
 
-### 過去の異常値は現在の予測に影響しますか。
+### Do past anomalies affect the current predictions?
 
-`basic` を除くすべてのアルゴリズムは、膨大な量の履歴データを使用しているため、ほとんどの異常に対して堅牢です。最初のグラフでは、メトリクスが 0 になった後も灰色の帯が 400K 付近に留まっています。
+All the algorithms except `basic` use extensive amounts of historical data, so they are robust to most anomalies. In the first graph, the gray band stays around 400K even after the metric has dropped to 0.
 
 {{< img src="monitors/monitor_types/anomaly/anomalous_history.png" alt="anomalous_history" style="width:80%;">}}
 
-2 つ目のグラフは、1 日後の同じメトリクスを示しています。帯の計算には前日のデータも使用されていますが、以前に発生した異常値には影響されていません。
+The second graph shows the same metric a day later. Even though it uses the previous day in the calculation of the band, it is unaffected by the anomaly that occurred previously.
 
-{{< img src="monitors/monitor_types/anomaly/no_effect.png" alt="無効" style="width:80%;">}}
+{{< img src="monitors/monitor_types/anomaly/no_effect.png" alt="no effect" style="width:80%;">}}
 
-### ズームインすると異常値が「消える」のはなぜですか。
+### Why does an anomaly "disappear" when I zoom in?
 
-ズームレベルが異なると、同じクエリでも特性が異なる時系列になる可能性があります。表示する期間が長いほど、各ポイントは、さらに粒度が細かい多数のポイントの集計値を表すことになります。したがって、粒度が細かいポイントでは、観察されるノイズがこれらの集計ポイントによって隠される可能性があります。たとえば、1 週間を表示するチャートが 10 分間を表示するチャートより滑らかに (ノイズが少なく) 表示されることはよくあります。
+At different zoom levels, the same query can result in timeseries with different characteristics. When looking at longer time periods, each point represents the aggregate of many more-granular points. Therefore, each of these aggregate points may hide noise observed in the more granular points. For example, charts that show one week often appear smoother (less noisy) than charts that show just 10 minutes.
 
-異常監視を正確に行うためには、灰色の帯の幅が重要です。通常のノイズがほとんど帯の中に入ってしまい、異常として表示されないような帯の幅である必要があります。しかし、通常のノイズを含むほど帯が広いと、特に短いタイムウィンドウを表示する場合、いくつかの異常が隠れるほど帯が広くなってしまうことがあります。
+The width of the gray band is key to accurate anomaly monitoring. The band must be wide enough that ordinary noise is mostly inside the band and doesn't appear as anomalous. Unfortunately, when the band is wide enough to include ordinary noise, it might also be wide enough to hide some anomalies, especially when viewing short time windows.
 
-例えば、`app.requests` というメトリクスはノイズが多いが、平均値は常に 8 です。ある日、9 時から 10 分間異常な時間があり、その間の平均値は 10 です。以下のグラフは、1 日のタイムウィンドウを持つ系列を示し、グラフの各ポイントは 5 分を要約したものです。
+For example, the metric `app.requests` is noisy but has a constant average value of 8. On one day, there is a 10-minute anomalous period, starting a 9:00, during which the metric has an average value of 10. The graph below shows a series with a one-day time window; each point in the graph summarizes 5 minutes.
 
-{{< img src="monitors/monitor_types/anomaly/disappearing_day.png" alt="消えた日" style="width:70%;" >}}
+{{< img src="monitors/monitor_types/anomaly/disappearing_day.png" alt="disappearing day" style="width:70%;" >}}
 
-この灰色の帯は適切なものだと言えます。時系列内のノイズが収まるだけの十分な幅があり、しかも、幅が広すぎることがないので 9:00 の異常値が目立つようになっています。次のチャートは、30 分のタイムウィンドウにズームインしたビューで、上の 10 分間の異常値が含まれています。グラフの各ポイントは 10 秒間の集計値です。
+The gray band here makes sense. It is wide enough to capture the noise in the timeseries, yet narrow enough that the anomaly at 9:00 stands out clearly. The next chart shows a zoomed-in view of a half-hour time window that includes the 10-minute anomaly; each point in the graph summarizes 10 seconds.
 
-{{< img src="monitors/monitor_types/anomaly/disappearing_half_hour.png" alt="消えた 30 分" style="width:70%;" >}}
+{{< img src="monitors/monitor_types/anomaly/disappearing_half_hour.png" alt="disappearing half hour" style="width:70%;" >}}
 
-ここでも、帯は合理的にサイズ変更されています。8:50 ～ 9:00 と 9:10 ～ 9:20 の正常なデータが帯の中にあるからです。これよりも帯が狭くなると、通常のデータが異常と見なされるようになってしまいます。このグラフの帯が、前のグラフより 8 倍近く広くなっていることに注目してください。9:00 ～ 9:10 の異常期間は系列の他の部分とは違って見えますが、帯の外側に出るほど極端ではありません。
+Again, the band seems to be reasonably sized, because the non-anomalous data from 8:50 - 9:00 and from 9:10 - 9:20 is inside the band. A band any narrower would start to highlight normal data as anomalous. Notice the band in this graph is ~8x wider than the one in the previous graph. The anomalous period from 9:00 - 9:10 looks different from the rest of the series, but it is not extreme enough to fall outside of the band.
 
-一般に、ズームインしたときに異常値が消えても、それが異常値ではないという意味ではありません。つまり、ズームインしたビューでの個別のポイントは個々の異常として切り分けられなくても、同時に発生している普通とは少し違う多数のポイントが異常ということになります。
+In general, if an anomaly disappears when you zoom in, this doesn't mean that it's not an anomaly. It means, while the individual points in the zoomed-in view are not anomalous in isolation, many slightly unusual points occurring together is anomalous.
 
-### 一部の関数を異常検知と組み合わせようとするとクエリパースエラーが発生するのはなぜですか。
+### Why do I get a query parsing error when trying to combine some functions with anomaly detection?
 
-`anomalies()` 関数の呼び出しの中にすべての関数をネストできるわけではありません。特に、`cumsum()`、`integral()`、`outliers()`、`piecewise_constant()`、`robust_trend()`、`trend_line()` の各関数は、異常検知モニターまたはダッシュボードクエリに組み込めません。
+Not all functions may be nested inside of calls to the `anomalies()` function. In particular, you may not include any of the following functions in an anomaly detection monitor or dashboard query: `cumsum()`, `integral()`, `outliers()`, `piecewise_constant()`, `robust_trend()`, or `trend_line()`.
 
-異常検知は、履歴データを使用して系列の正常な挙動のベースラインを確立します。上記の関数は、クエリウィンドウの配置に影響されます。あるタイムスタンプでの系列の値は、それがクエリウィンドウ内のどこにあるかによって大幅に変化する可能性があります。この不安定性のため、異常検知機能は安定した系列のベースラインを決定できなくなります。
+Anomaly detection uses historical data to establish a baseline of normal behavior for a series. The functions above are sensitive to the placement of the query window. The value of the series at a single timestamp can change significantly based upon where it falls within the query window. This sensitivity prevents anomaly detection from determining a consistent baseline for the series.
 
-### adaptive アルゴリズムはどうなったのですか？
+### What happened to the adaptive algorithm?
 
-Datadog はアルゴリズムを進化させ、adaptive アルゴリズムを使用しないようにしました。`adaptive` アルゴリズムを使用する既存のモニターはそのままで、引き続き動作します。
+Datadog has evolved our algorithms to no longer use the adaptive algorithm. Existing monitors that use the `adaptive` algorithm are untouched and continue to work.
 
-### count_default_zero 引数とは何ですか？
+### What is the count_default_zero argument?
 
-以前は、Datadog はカウントメトリクスをゲージとして扱い、報告されたポイント間を補間していました。しかし、レガシーモニターでは、`count_default_zero` 引数を使用することで、以前の動作が保持されます。
+Previously, Datadog treated count metrics as gauges, and thus interpolated between reported points. Anomalies are no longer interpolating between counts, but for legacy monitors, the old behavior is preserved using the `count_default_zero` argument.
 
-### カウントメトリクスをゲージとして扱いたい場合はどうすればよいですか？
+### What if I want my count metric treated as a gauge?
 
-エラーのようなカウントメトリクスを使用する場合、カウントの間を補間しないことは理にかなっています。しかし、1 時間ごとに発生する定期的なジョブがある場合、実行の間にメトリクスが 0.0 の値を報告しない方がより理にかなっているかもしれません。これを実現するには、2 つの異なる方法があります。
+Not interpolating between counts makes sense if your count metric is something like errors. However, if you have regularly scheduled jobs that happen every hour, it might make more sense if the metric is not reporting a value of 0.0 between runs. There are two different ways to accomplish this:
 
-1. ロールアップ (高度なオプションのセクションにあります) を 1 時間に設定します。
-2. API を使って明示的に `count_default_zero='false'` を設定します。
+1. Set the rollup (found in the advanced options section) to be one hour.
+2. Explicitly set `count_default_zero='false'` using the API.
 
-### "Advanced Options" でロールアップ期間を設定する方法と、.rollup() を使用してクエリで設定する方法では、どのような違いがありますか？
+### How does setting the rollup interval in "Advanced Options" differ from setting it on the query using .rollup()?
 
-ロールアップをクエリで明示的に設定すると、異常値モニターのロールアップ期間オプションが無視されます。
+If the rollup is set explicitly on the query, the rollup interval option for the anomaly monitor is ignored.
 
-### メトリクスの値が X 未満の場合は異常でもかまいません。このような異常値を無視する方法はありますか。
+### I don't care if my metric is anomalous if its value is less than X, can I somehow ignore those anomalies?
 
-範囲を超える値をアラートする異常値モニター **A** を作成し、さらにしきい値アラートを使用して X より大きい値でトリガーする別の[メトリクスモニター][2] **B** を作成します。続いて **A && B** の[複合条件モニター][3]を作成します。
+Create **A**: an anomaly monitor to alert on values above the bounds; and **B**: a separate [metric monitor][2] with a threshold alert to trigger on values greater than X. Then create a [composite monitor][3] on **A && B**.
 
-### モニターを保存しようとしたら、"alert and alert recovery criteria are such that the monitor can be simultaneously in alert and alert recovery states" (アラートとアラートリカバリの基準が、モニターが同時にアラート状態およびアラートリカバリ状態になり得る内容です) というメッセージが表示され、保存できませんでした。どうしてですか？
+### Why am I prevented from saving a monitor with the message "alert and alert recovery criteria are such that the monitor can be simultaneously in alert and alert recovery states"?
 
-アラート期間とアラートリカバリ期間に異なるウィンドウを設定すると、あいまいな状態になる可能性があります。アラートとアラートリカバリのウィンドウサイズは、両方が同時に満たされないように設定する必要があります。たとえば、2 時間のウィンドウに対してアラートしきい値 50% を設定し (つまり、異常が 1 時間続けばアラートをトリガーする)、10 分間のウィンドウに対して[リカバリしきい値][4] 50% を設定すると (つまり、非異常が 5 分間続けば回復する)、アラート状態とアラートリカバリ状態が同時にトリガーされる可能性があります。たとえば、最後の 5 分間が異常ではなく、1 時間前が異常だった場合は、アラートとアラートリカバリの両方がトリガーされます。
+Setting different windows for the alert and alert recovery periods might lead to an ambiguous state. The alert and alert recovery window sizes should be set such that both cannot be satisfied at the same time. For example, setting an alert threshold at 50% for a 2-hour window (as in, 1 hour has to be anomalous to trigger the alert) and the [recovery threshold][4] at 50% for a 10-minute window (as in, 5 minutes have to be non-anomalous to recover) might result in triggering the alert and the alert recovery states simultaneously. If the last 5 minutes are not anomalous but the 1 hour before _was_ anomalous, both the alert and the alert recovery are triggered.
 
-### 夏時間は異常検知モニターにどのように影響しますか？
+### How does daylight savings affect anomaly detection monitors?
 
-Datadog のモニターは UTC 時間を使用し、デフォルトではローカルタイムゾーンを考慮しません。ユーザーアクティビティは、ユーザーのローカルタイムに対して変わらないことが普通なので、UTC 時間からは相対的にシフトします。これが予期しない異常値として検出される可能性があります。
+Datadog monitors use UTC time and by default are agnostic to local time zones. User activity is shifted relative to UTC time because activity typically remains the same for the user's local time. This could be detected as an unexpected anomaly. 
 
-Datadog では、タイムシフトに対して自動的に修正が行われるタイムゾーンを異常検知モニターごとに構成することができます。詳細については、[ローカルタイムゾーンを考慮した異常検知モニターの更新方法][5]を参照してください。
+Datadog allows you to configure a timezone for each anomaly detection monitor that automatically corrects for the time shift. For more details, see [How to update an anomaly detection monitor to account for local timezone][5].
 
 [1]: https://www.datadoghq.com/blog/anti-patterns-metric-graphs-101
-[2]: /ja/monitors/create/types/metric/
-[3]: /ja/monitors/create/types/composite/
-[4]: /ja/monitors/guide/recovery-thresholds/
-[5]: /ja/monitors/guide/how-to-update-anomaly-monitor-timezone/
+[2]: /monitors/types/metric/
+[3]: /monitors/types/composite/
+[4]: /monitors/guide/recovery-thresholds/
+[5]: /monitors/guide/how-to-update-anomaly-monitor-timezone/

@@ -1,153 +1,156 @@
 ---
-algolia:
-  tags:
-  - ワークフロー
-  - tracing_otel_inst_java
-  - ワークフローの自動化
+title: Access and Authentication
+kind: documentation
+description: Access and authentication for Workflow Automation
 aliases:
-- /ja/workflows/access
-- /ja/workflows/service_accounts
-description: Workflow Automation へのアクセスおよび認証
+- /workflows/access
+- /workflows/service_accounts
+algolia:
+  tags: [workflow, workflows, workflow automation]
 disable_toc: false
 further_reading:
 - link: /getting_started/workflow_automation/
   tag: Documentation
-  text: Workflow Automation を始める
+  text: Getting Started with Workflow Automation
 - link: /integrations/
   tag: Documentation
-  text: インテグレーションについて
+  text: Learn about integrations
 - link: /service_management/workflows/actions_catalog
-  tag: ドキュメント
-  text: ワークフローアクションの一覧を見る
-title: アクセス・認証
+  tag: Documentation
+  text: See the list of workflow actions
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">選択した <a href="/getting_started/site">Datadog サイト</a> ({{< region-param key="dd_site_name" >}}) では Workflow Automation はサポートされていません。</div>
+<div class="alert alert-warning">Workflow Automation is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-ワークフローとそのコンポーネントへのアクセスや認証を制御するツールがいくつかあります。
+A few tools control access and authentication for workflows and their components.
 
-## ワークフロー ID
+## Workflow identity
 
-ワークフローは、ワークフローの所有者、またはワークフローに関連するサービスアカウントの ID を使用して実行することができます。デフォルトでは、ワークフローはその作成者の Datadog ユーザー ID を使用します。
+A workflow can run using the identity of the owner of the workflow, or a service account associated with the workflow. By default, a workflow uses the Datadog user identity of its author.
 
-### サービスアカウントを使用する
+### Use a service account
 
-サービスアカウントは、ワークフローに関連付けられ、ワークフロー実行時の ID として機能することができます。サービスアカウントは、以下のことが可能です。
-- ワークフローアクションで定義された接続を、実行時に解決する
-- ワークフロー実行のための ID を提供する
-- ワークフロー[監査証跡][1]のための ID を提供する
+A service account can be associated with a workflow and act as the identity of the workflow when it runs. A service account can:
+- resolve the connections defined in the workflow actions at runtime
+- provide an identity for workflow executions
+- provide an identity for workflow [audit trails][1]
 
-ワークフローのサービスアカウントを作成するには、Datadog の管理者ロール、または **Service Account Write** 権限を持つカスタムロールのいずれかを持っている必要があります。作成したサービスアカウントは、あなたの役割と権限を採用します。サービスアカウントと権限の詳細については、 [サービスアカウント][2]または[ロールベースのアクセス制御][3]を参照してください。
+To create a service account for a workflow, you must have either the Datadog admin role, or a custom role with the **Service Account Write** permission. The service account you create adopts your role and permissions. For more information on service accounts and permissions, see [Service accounts][2] or [Role based access control][3].
 
-#### サービスアカウントとワークフローの関連付け
+#### Associate a service account with a workflow
 
-[自動トリガーを追加する][4]際に、ワークフローのサービスアカウントを動的に作成することができます。
+You can dynamically create a service account for your workflow when you [add an automatic trigger][4].
 
-1. 歯車 (**Settings**) アイコンをクリックします。
-1. **Create a service account** をクリックします。
-1. サービスアカウントのユーザーのロールを選択します。
-1. サービスアカウントを保存するには、**Create** をクリックします。
-1. ワークフローを保存して、変更を適用します。 
+1. Click the cog (**Settings**) icon.
+1. Click **Create a service account**.
+1. Select a role for your service account user.
+1. Click **Create** to save the service account.
+1. Save your workflow to apply the changes.
 
-ワークフローを実行する際、ワークフローアクションで定義された接続をサービスアカウントユーザーが解決します。そのため、サービスアカウントユーザーは `connections_resolve` 権限を必要とします。Datadog Admin Role と Datadog Standard Role は、`connections_resolve` 権限を含んでいます。
+When you run a workflow, the service account user resolves the connections defined in the workflow actions. Therefore, the service account user needs the `connections_resolve` permission. The Datadog Admin Role and the Datadog Standard Role include the `connections_resolve` permission.
 
-#### サービスアカウント詳細の表示
+#### View service account details
 
-1. 歯車 (**Settings**) アイコンをクリックします。
-1. ドロップダウンメニューからサービスアカウントを選択します。
+1. Click the cog (**Settings**) icon.
+1. Select your service account from the dropdown menu.
 
-#### ワークフローに関連付けられたサービスアカウントを削除する
+#### Remove a service account associated with workflow
 
-1. 歯車 (**Settings**) アイコンをクリックします。
-1. ドロップダウンメニューからサービスアカウントを選択します。
-1. **Remove service account** をクリックします。
+1. Click the cog (**Settings**) icon.
+1. Select your service account from the dropdown menu.
+1. Click **Remove service account**.
 
-## アクションの資格情報
+## Action credentials
 
-ワークフローの[アクション][5]は、外部のソフトウェアシステムと接続するため、対応するインテグレーションに対して、Datadog アカウントの認証が必要になる場合があります。ワークフローは、認証を必要とするすべてのワークフローアクションが Datadog アカウントの身元を確認できる場合にのみ、正常に実行することができます。
+Because workflow [actions][5] connect with external software systems, you may need to authenticate your Datadog account to the corresponding integration. A workflow can run successfully only if every workflow action that requires authentication can verify the identity of your Datadog account.
 
-ワークフローアクションは、2 つの方法で認証することができます。
-- インテグレーションタイルで構成された資格情報および権限
-- 接続の資格情報
+Workflow actions can be authenticated in two ways:
+- Credentials and permissions configured in the integration tile
+- Connection credentials
 
-資格情報の構成については、[接続][6]を参照してください。
+For more information on configuring credentials, see [Connections][6].
 
-## ワークフロー権限
+## Workflow permissions
 
-[ロールベースのアクセス制御 (RBAC)][3] を使用して、ワークフローと接続へのアクセスを制御します。ワークフローや接続に適用される権限の一覧は、[Datadog のロール権限][7]を参照してください。
+Use [role-based access control (RBAC)][3] to control access to your workflows and connections. To see the list of permissions that apply to workflows and connections, see [Datadog Role Permissions][7].
 
-### 特定の接続へのアクセスを制限する
+By default, the author of a workflow or connection is the only user who receives **Editor** access. The rest of the Datadog organization receives **Viewer** access to the workflow or connection.
 
-各接続に権限を設定して、変更を制限したり、使用を制限したりします。詳細な権限には、**Viewer**、*Resolver**、*Editor** があります。
+### Restrict access on a specific connection
+
+Set permissions on each connection to limit modifications or restrict their use. The granular permissions include **Viewer**, **Resolver**, and **Editor**. By default, only the author of the connection receives **Editor** access. The author can choose to grant access to additional users, roles, or teams.
 
 Viewer
-: 接続の表示が可能
+: Can view the connection
 
 Resolver
-: 接続の解決、表示が可能
+: Can resolve and view the connection
 
 Editor
-: 接続の編集、解決、表示が可能
+: Can edit, resolve, and view the connection
 
-接続の解決には、ステップに割り当てられた接続オブジェクトを取得し、それに関連するシークレットを取得することが含まれます。
+Resolving a connection includes getting the connection object assigned to a step and retrieving the secret associated with it.
 
-特定の接続の権限を変更するには、以下の手順に従います。
+Follow the steps below to modify the permissions on a specific connection:
 
-1. [Workflow Automation ページ][8]に移動します。
-1. 右上の **Connections** をクリックします。接続の一覧が表示されます。
-1. 詳細な権限を設定したい接続にカーソルを合わせます。右側に、**Edit**、**Permissions**、**Delete** のアイコンが表示されます。
-1. 南京錠 (** Permissions**) のアイコンをクリックします。
-1. **Restrict Access** を選択します。
-1. ドロップダウンメニューからロールを選択します。**Add** をクリックします。選択したロールがダイアログボックスの下部に表示されます。
-1. ロール名の横にある、ドロップダウンメニューから必要な権限を選択します。
-1. ロールからアクセスを削除したい場合は、ロール名の右側にあるゴミ箱のアイコンをクリックします。
-1. **Save** をクリックします。
+1. Navigate to the [Workflow Automation page][8].
+1. Click **Connections** in the upper right. A list of connections appears.
+1. Hover over the connection on which you would like to set granular permissions. **Edit**, **Permissions**, and **Delete** icons appear on the right.
+1. Click the padlock (**Permissions**) icon.
+1. Select **Restrict Access**.
+1. Select a role from the dropdown menu. Click **Add**. The role you selected populates into the bottom of the dialog box.
+1. Next to the role name, select your desired permission from the dropdown menu.
+1. If you would like to remove access from a role, click the trash can icon to the right of the role name.
+1. Click **Save**.
 
-### 特定のワークフローへのアクセスを制限する
+### Restrict access on a specific workflow
 
-各ワークフローに権限を設定し、ワークフローの変更や使用を制限します。詳細な権限には、**Viewer**、**Runner**、*Editor** があります。
+Set permissions on each workflow to restrict modifications or usage of the workflow. The granular permissions include **Viewer**, **Runner**, and **Editor**. By default, only the author of the workflow receives **Editor** access. The author can choose to grant access to additional users, roles, or teams.
 
 Viewer
-: ワークフローの表示が可能
+: Can view the workflow
 
 Runner
-: ワークフローの実行、表示が可能
+: Can run and view the workflow
 
 Editor
-: ワークフローの編集、実行、表示が可能
+: Can edit, run, and view the workflow
 
-特定のワークフローへのアクセスは、ワークフローリストページまたはワークフローを編集中のキャンバスから制限できます。
+You can restrict access on a specific workflow either from the workflow list page or from the workflow canvas while editing the workflow.
 
-**ワークフローリストページからの権限の制限**
-1. [Workflow Automation ページ][8]に移動します。
-1. 詳細な権限を設定したいワークフローにカーソルを合わせます。右側に、**Edit**、**Permissions**、**Delete** のアイコンが表示されます。
-1. 南京錠 (** Permissions**) のアイコンをクリックします。
-1. **Restrict Access** を選択します。
-1. ドロップダウンメニューからロールを選択します。**Add** をクリックします。選択したロールがダイアログボックスの下部に表示されます。
-1. ロール名の横にある、ドロップダウンメニューから必要な権限を選択します。
-1. ロールからアクセスを削除したい場合は、ロール名の右側にあるゴミ箱のアイコンをクリックします。
-1. **Save** をクリックします。
+**Restricting permissions from the workflow list page**
+1. Navigate to the [Workflow Automation page][8].
+1. Hover over the workflow on which you would like to set granular permissions. **Edit**, **Permissions**, and **Delete** icons appear on the right.
+1. Click the padlock (**Permissions**) icon.
+1. Select **Restrict Access**.
+1. Select a role from the dropdown menu. Click **Add**. The role you selected populates into the bottom of the dialog box.
+1. Next to the role name, select your desired permission from the dropdown menu.
+1. If you would like to remove access from a role, click the trash can icon to the right of the role name.
+1. Click **Save**.
 
-**ワークフローエディターからの権限の制限**
-1. ワークフローエディターで歯車 (**Settings**) アイコンをクリックします。
-1. ドロップダウンから、**Edit Permissions** を選択します。
-1. **Restrict Access** を選択します。
-1. ドロップダウンメニューからロールを選択します。**Add** をクリックします。選択したロールがダイアログボックスの下部に表示されます。
-1. ロール名の横にある、ドロップダウンメニューから必要な権限を選択します。
-1. ロールからアクセスを削除したい場合は、ロール名の右側にあるゴミ箱のアイコンをクリックします。
-1. **Save** をクリックします。
+**Restricting permissions from the workflow editor**
+1. In the workflow editor click on the cog (**Settings**) icon.
+1. Select **Edit Permissions** from the dropdown.
+1. Select **Restrict Access**.
+1. Select a role from the dropdown menu. Click **Add**. The role you selected populates into the bottom of the dialog box.
+1. Next to the role name, select your desired permission from the dropdown menu.
+1. If you would like to remove access from a role, click the trash can icon to the right of the role name.
+1. Click **Save**.
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/account_management/audit_trail/#overview
-[2]: /ja/account_management/org_settings/service_accounts/
-[3]: /ja/account_management/rbac/
-[4]: /ja/service_management/workflows/trigger/
-[5]: /ja/service_management/workflows/actions_catalog/
-[6]: /ja/service_management/workflows/connections/
-[7]: /ja/account_management/rbac/permissions/#workflow-automation
+<br>Do you have questions or feedback? Join the **#workflows** channel on the [Datadog Community Slack][9].
+
+[1]: /account_management/audit_trail/#overview
+[2]: /account_management/org_settings/service_accounts/
+[3]: /account_management/rbac/
+[4]: /service_management/workflows/trigger/
+[5]: /service_management/workflows/actions_catalog/
+[6]: /service_management/workflows/connections/
+[7]: /account_management/rbac/permissions/#workflow-automation
 [8]: https://app.datadoghq.com/workflow
+[9]: https://datadoghq.slack.com/

@@ -1,120 +1,123 @@
 ---
+title: Connections
+kind: documentation
+description: Workflow connections
+further_reading:
+- link: /getting_started/workflow_automation/
+  tag: Documentation
+  text: Getting Started with Workflow Automation
+algolia:
+  tags: [workflow, workflows, workflow automation]
 aliases:
-- /ja/workflows/connections
-- /ja/workflows/setup
-description: ワークフロー接続
+- /workflows/connections
+- /workflows/setup
 disable_toc: false
-title: 接続
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">選択した <a href="/getting_started/site">Datadog サイト</a> ({{< region-param key="dd_site_name" >}}) では Workflow Automation はサポートされていません。</div>
+<div class="alert alert-warning">Workflow Automation is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-ワークフローのアクションは、外部のソフトウェアシステムと接続するため、対応するインテグレーションに対して、Datadog アカウントの認証が必要になる場合があります。ワークフローは、認証を必要とするすべてのワークフローアクションが Datadog アカウントの身元を確認できる場合にのみ、正常に実行することができます。Datadog に権限を付与する際には、セキュリティのベストプラクティスに従い、ワークフローの実行に必要な権限のみを付与するようにします。
+Because workflow actions connect with external software systems, you may need to authenticate your Datadog account to the corresponding integration. A workflow can run successfully only if every workflow action that requires authentication can verify the identity of your Datadog account. When granting permissions to Datadog, ensure that you're following security best practice and only granting the permissions necessary for a workflow to run.
 
-ワークフローアクションは、2 つの方法で認証することができます。
-- インテグレーションタイルで構成された資格情報および権限
-- 接続の資格情報
+Workflow actions can be authenticated in two ways:
+- Credentials and permissions configured in the integration tile
+- Connection credentials
 
-## インテグレーションタイルの資格情報
+## Integration tile credentials
 
-以下の Datadog インテグレーションタイルで設定した資格情報やアカウント認証は、Workflow Automation の対応するアクションに自動的に伝搬されます。
+Credentials and account authentication that you set up in the following Datadog integration tiles automatically propagate to the corresponding actions in Workflow Automation:
 - Jira
 - PagerDuty
 - Slack
 - GitHub
 
-[Datadog インテグレーション][6]の説明に従って、インテグレーションタイルを構成します。
+Configure the integration tiles by following instructions in [Datadog Integrations][6].
 
-設定する必要があるインテグレーションが上記に記載されていない場合は、接続資格情報を設定します。
+If the integration you need to set up is not listed above, set up connection credentials.
 
-## 接続の資格情報
+## Connection credentials
 
-ワークフロー接続は、インストールされているインテグレーションを拡張し、ワークフローステップの認証を制御できるようにします。[汎用アクション][8]、またはインテグレーションタイルが認証を提供しないアクションを認証するために、接続資格情報を使用します。認証のためにインテグレーションタイルを使用するインテグレーションのリストについては、[インテグレーションタイルの資格情報](#integration-tile-credentials)セクションを参照してください。接続資格情報は、Workflow Automation 製品内でのみ使用可能です。
+Workflow connections extend your installed integrations to give you control over workflow step authentication. Use connection credentials to authenticate a [generic action][8] or any action for which the integration tile does not offer authentication. For a list of integrations that use the integration tile for authentication, see the [Integration tile credentials](#integration-tile-credentials) section. Connection credentials are only available for use within the Workflow Automation and App Builder products.
 
-接続は、以下のユースケース例に対応しています。
-- 必要なインテグレーションが、ビルトイン接続では利用でない場合。
-- カスタムアクションを認証したい場合。例えば、独自のサービスで HTTP アクションを使用する必要があります。
-- インテグレーションでサポートされていない権限が必要な場合、例えば AWS の書き込み権限など。
-- 特定のワークフローへのユーザーのアクセスを制限するなど、きめ細かなアクセス制御を行いたい場合。
+Connections support the following example use cases:
+- The integration you need is not available as a built-in connection.
+- You wish to authenticate a custom action. For instance, you need to use the HTTP action with your own service.
+- The permissions needed are not supported by the integration, such as write permissions on AWS.
+- You want granular access control, for example restricting user access to certain workflows.
 
-### 接続セキュリティへの配慮
+### Connection security considerations
 
-接続を作成する前に、必要なタスクを実行するために必要な権限を考え、そのタスクを実行するために必要な権限のみを接続に付与します。さらに、接続は、その接続を使用する必要がある人だけに制限される必要があります。
+Before you create a connection, think about the permissions needed to fulfill the required task and grant the connection only the necessary permissions to fulfill that task. In addition, the connection should be restricted to only the people who need to use it.
 
-可能であれば、異なるワークフローに対して粒度の細かい接続を使用します。例えば、Amazon S3 バケットに書き込むワークフローと、Amazon EC2 インスタンスを終了させるワークフローがある場合、両方のワークフローに同じ接続を使用しないでください。代わりに、それぞれが範囲を限定した IAM ロールに対応する、2 つの接続をそれぞれ作成します。
+Where possible, use granular connections for different workflows. For example, if you have a workflow that writes to an Amazon S3 bucket, and a workflow that terminates Amazon EC2 instances, do not use the same connection for both workflows. Instead, create two respective connections, each corresponding to an IAM role with limited scope.
 
-## 接続の使用
+## Work with connections
 
-### 接続の表示
+### View connections
 
-1. [Workflow Automation ページ][2]から、右上の **Connections** をクリックします。[接続リスト][3]が表示されます。
-1. 一行をクリックすると、接続の詳細が表示されます。
+1. From the [Workflow Automation page][2], click **Connections** in the upper right. The [connections list][3] opens.
+1. Click on a single line to view connection details.
 
-### 接続の作成
+### Create a connection
 
-接続を確立するためには、以下の情報が必要です。
-- 接続先 (製品名、URL など)
-- 認証方法 (API キー、ユーザー名/パスワード、oauth など)
+Establishing a connection requires the following information:
+- What to connect to (for example, product name, URL)
+- How to authenticate (for example, API key, username/password, oauth)
 
-接続を作成するには
-1. [接続リスト][3]に移動します。
-1. 右上の **New Connection** ボタンをクリックします。**New Connection** ダイアログボックスが表示されます。
-1. アイコンをクリックして、インテグレーションスキーマを選択します。
-1. 該当するフィールドを入力します。**Create** をクリックします。
+To create a connection:
+1. Navigate to the [connections list][3].
+1. Click the **New Connection** button in the upper right. The **New Connection** dialog box appears.
+1. Click on an icon to choose an integration schema.
+1. Fill in the appropriate fields. Click **Create**.
 
-または、ワークフローページから接続を追加します。
-1. [Workflow Automation リスト][9]に移動します。
-1. 資格情報を追加する必要があるアクションを含むワークフローを選択します。ワークフロービルダーが表示されます。
-1. ワークフローの視覚化で、資格情報を追加する必要のあるアクションをクリックします。右側のパネルには、アクションの詳細が表示されます。
-1. **Configure** タブの下にある **Connection** のドロップダウンを探し、**+** のアイコンをクリックします。
-1. **New Connection** ダイアログボックスで、接続に名前を付け、必要な認証の詳細を入力します。
-1. **Save** をクリックします。
+Alternatively, add a connection from the workflow page:
+1. Navigate to the [Workflow Automation list][9].
+1. Select the workflow containing the action to which you need to add a credential. The workflow builder appears.
+1. In the workflow visualization, click the action to which you need to add a credential. The right side panel populates with the action details.
+1. Under the **Configure** tab, look for the **Connection** dropdown and click the **+** icon.
+1. In the **New Connection** dialog box, name the connection and enter the required authentication details.
+1. Click **Save**.
 
-以下の例では、AWS 接続の **New Connection** ダイアログボックスを表示しています。各接続では、異なる認証情報が必要です。AWS 接続では、有効な AWS IAM Account ID と Role Name が必要です。
+The example below shows the **New Connection** dialog box for the OpenAI connection. Each connection requires different authentication information. The OpenAI connection requires a valid Connection Name and API Token.
 
-{{< img src="service_management/workflows/new-connection.png" alt="AWS 接続の New Connection ダイアログボックス" >}}
+{{< img src="service_management/new-connection.png" alt="The New Connection dialog box for the OpenAI connection" >}}
 
-### 接続の編集
+### Edit a connection
 
-1. [接続リスト][3]に移動します。
-1. 編集したい接続にカーソルを合わせます。右側に、**Edit**、**Permissions**、**Delete** のアイコンが表示されます。
-1. 鉛筆 (**Edit**) アイコンをクリックします。ダイアログボックスが表示されます。
-1. 変更したいフィールドを更新します。
-1. **Save** をクリックします。
+1. Navigate to the [connections list][3].
+1. Hover over the connection you would like to edit. **Edit**, **Permissions**, and **Delete** icons appear on the right.
+1. Click the pencil (**Edit**) icon. A dialog box appears.
+1. Update the fields you would like to change.
+1. Click **Save**.
 
-### 接続の削除
+### Delete a connection
 
-1. [接続リスト][3]に移動します。
-1. 削除したい接続にカーソルを合わせます。右側に、**Edit**、**Permissions**、**Delete** のアイコンが表示されます。
-1. ゴミ箱 (**Delete**) のアイコンをクリックします。"Are you sure?” のテキストが表示されます。
-1. **Delete** を選択します。
+1. Navigate to the [connections list][3].
+1. Hover over the connection you would like to delete. **Edit**, **Permissions**, and **Delete** icons appear on the right.
+1. Click the trash can (**Delete**) icon. "Are you sure?" text appears.
+1. Select **Delete**.
 
-### 接続の利用を制限する
+### Restrict connection use
 
-接続の利用を制限する方法については、［アクセス・認証］[4]を参照してください。
+To learn how to restrict connection use, see [Access and Authentication][4].
 
-## HTTP 接続
+## HTTP connection
 
-任意のサービスに接続するには、HTTP 接続タイプを使用し、2 つの認証オプションから選択します。
-- トークンベース認証
-- ユーザー名とパスワードの組み合わせ
+To connect to an arbitrary service, use the HTTP connection type. For authentication options and setup instructions, see [HTTP action][10].
 
-### HTTP 接続の作成
+## Further reading
 
-1. [接続リスト][3]に移動します。
-1. **New Connection** を選択します。ダイアログボックスが表示されます。
-1. **HTTP Connection** を選択します。ダイアログボックスが更新され、HTTP 接続パラメーターが表示されます。
-1. **Base URL** を入力します。
-1. 必要に応じて、**Add +** ボタンを使用して、ヘッダーや URL パラメーターを追加します。
-1. 接続の種類を選択します。**Token Auth** または **Basic Auth** を選択します。適切なパラメーターを入力します。
-1. HTTP 接続を保存するには、**Create** をクリックします。
+{{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/service_management/workflows/actions_catalog/generic_actions/
+<br>Do you have questions or feedback? Join the **#workflows** channel on the [Datadog Community Slack][11].
+
+[1]: /service_management/workflows/actions_catalog/generic_actions/
 [2]: https://app.datadoghq.com/workflow
 [3]: https://app.datadoghq.com/workflow/connections
-[4]: /ja/service_management/workflows/access/#restrict-connection-use
-[6]: /ja/integrations/
-[8]: /ja/service_management/workflows/actions_catalog/generic_actions/
+[4]: /service_management/workflows/access/#restrict-connection-use
+[6]: /integrations/
+[8]: /service_management/workflows/actions_catalog/generic_actions/
 [9]: https://app.datadoghq.com/workflow
+[10]: /service_management/workflows/actions/http/
+[11]: https://datadoghq.slack.com/

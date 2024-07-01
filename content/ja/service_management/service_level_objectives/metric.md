@@ -1,74 +1,73 @@
 ---
+title: Metric-based SLOs
+kind: documentation
+description: "Use metrics to define a Service Level Objective"
 aliases:
-- /ja/monitors/service_level_objectives/event/
-- /ja/monitors/service_level_objectives/metric/
-description: メトリクスを使用してサービスレベル目標 (SLO) を定義する
+- /monitors/service_level_objectives/event/
+- /monitors/service_level_objectives/metric/
 further_reading:
 - link: /metrics/
   tag: Documentation
-  text: メトリクスの詳細
+  text: More information about metrics
 - link: /service_management/service_level_objectives/
   tag: Documentation
-  text: SLO の概要、構成、計算
-title: メトリクスベース SLO
+  text: SLO overview, configuration, and calculation
 ---
 
-## 概要
+## Overview
 
-メトリクスベースの SLO は、計数ベースのデータストリームでイベントの良し悪しを判断する場合に有用です。メトリクスクエリは良質なイベントの合計を同様の時間軸におけるイベント総数で割り、サービスレベル指標 (SLI) を算出します。SLO の作成には、[APM スパン][1]、[RUM イベント][2]、[ログ][3]から生成されるカスタムメトリクスを含め、あらゆるメトリクスを使用することができます。SLO の構成と計算方法については、[サービスレベル目標][4]のページを参照してください。
+Metric-based SLOs are useful for a count-based stream of data where you are differentiating good and bad events. A metric query uses the sum of the good events divided by the sum of total events over time to calculate a Service Level Indicator (or SLI). You can use any metric to create SLOs, including custom metrics generated from [APM spans][1], [RUM events][2], and [logs][3]. For an overview on how SLOs are configured and calculated, see the [Service Level Objective][4] page.
 
-{{< img src="service_management/service_level_objectives/metric-based-slo-example.png" alt="メトリクスベース SLO の例" >}}
+{{< img src="service_management/service_level_objectives/metric_slo_side_panel.png" alt="example metric-based SLO" >}}
 
-## セットアップ
+## Setup
 
-[SLO ステータスページ][5]で、**New SLO +** を選択します。その後、[**Metric**][6] をクリックします。
+On the [SLO status page][5], click **+ New SLO**. Then select, [**By Count**][6].
 
-### クエリの定義
+### Define queries
 
-1. 定義するクエリは 2 つあります。分子クエリは良好なイベントの合計を定義し、分母クエリは総イベントの合計を定義します。SLO 計算が正しく動作するように、クエリでは COUNT、RATE、またはパーセンタイル対応の DISTRIBUTION メトリクスを使用する必要があります。詳しくは[クエリ][9]のドキュメントをご覧ください。
-1. タグを使用して特定のグループを含めるか除外するには、`FROM` フィールドを使用します。
-1. パーセンタイル対応の DISTRIBUTION メトリクスでは、`count values...` アグリゲーターを使用して、メトリクスがカウントする数値のしきい値を指定する必要があります。この機能はしきい値クエリと呼ばれ、数値のしきい値に一致する生の値の数をカウントして、分子と分母のカウントを生成することができます。詳しくは、[しきい値クエリ][7]を参照してください。
-1. オプションとして、パーセンタイル対応の DISTRIBUTION メトリクススでは、`count values...` アグリゲーターのすぐ右にあるドロップダウンを使用して、SLI を特定のグループごとに分割することができます。
-1. オプションとして、COUNT または RATE のメトリクスでは、`sum by` アグリゲーターを使用して、SLI を特定のグループごとに分割することができます。
+1. There are two queries to define. The numerator query defines the sum of the good events, while the denominator query defines the sum of the total events. Your queries must use COUNT, RATE, or percentile-enabled DISTRIBUTION metrics to ensure the SLO calculation behaves correctly. For more information, see [Querying][9] documentation. 
+1. Use the `FROM` field to include or exclude specific groups using tags.
+1. For percentile-enabled DISTRIBUTION metrics, you must use the `count values...` aggregator to specify a numerical threshold for the metric to count. This feature is called Threshold Queries and allows you to count the number of raw values that match a numerical threshold to produce counts for your numerator and denominator. For more information, see [Threshold Queries][7].
+1. Optionally, for percentile-enabled DISTRIBUTION metrics, use the dropdown immediately to the right of the `count values..` aggregator to break your SLI out by specific groups.
+1. Optionally, for COUNT or RATE metrics, use the `sum by` aggregator to break your SLI out by specific groups.
 
-**例:** HTTP のリターンコードを追跡しており、メトリクスに `code:2xx OR code:3xx OR code:4xx` などのタグが含まれている場合の例。良好なイベントの合計は `sum:httpservice.hits{code:2xx} + sum:httpservice.hits{code:4xx}` です。イベント自体の合計を表す `total` は `sum:httpservice.hits{!code:3xx}` となります。
+**Example:** If you are tracking HTTP return codes, and your metric includes a tag like `code:2xx OR code:3xx OR code:4xx`. The sum of good events would be `sum:httpservice.hits{code:2xx} + sum:httpservice.hits{code:4xx}`. And the `total` events would be `sum:httpservice.hits{!code:3xx}`.
 
-`HTTP 3xx` を省いた理由は、これらは一般的にリダイレクトされるもので、SLI として、または SLl に対してカウントされるべきではないためです。一方、3xx ベースでないエラーコードは合計に含める必要があります。`total` には `HTTP 3xx` を除いたすべてのタイプのデータを、また `numerator` には `OK` タイプのステータスコードのみを充当します。
+Why is `HTTP 3xx` excluded? - These are typically redirects and should not count for or against the SLI, but other non-3xx based error codes should. In the `total` case, you want all types minus `HTTP 3xx`, in the `numerator`, you only want `OK` type status codes.
 
-#### メトリクスベース SLI のマルチグループ
+#### Multi-group for metric-based SLIs
 
-メトリクスベース SLI を使用すると、SLI の最も重要な属性に集中できます。エディターでメトリクスベース SLI にグループを追加するには、`datacenter`、`partition`、`availability-zone`、`resource` などのタグ、またはその他の関連グループを使用します。
+Metric-based SLIs allow you to focus on the most important attributes of your SLIs. You can add groups to your metric-based SLIs in the editor by using tags like `datacenter`, `env`, `availability-zone`, `resource`, or any other relevant group:
 
-{{< img src="service_management/service_level_objectives/metric_editor.png" alt="グループ化されたメトリクスベース SLO エディター" >}}
+{{< img src="service_management/service_level_objectives/metric_slo_creation.png" alt="grouped metric-based SLO editor" >}}
 
-これらの SLI をグループ化すると、個々のグループのステータス、適切なリクエスト数、残りのエラーバジェットを詳細パネルで視覚化できます。
+By grouping these SLIs you can visualize each individual group's status, good request counts, and remaining error budget on the detail panel:
 
-{{< img src="service_management/service_level_objectives/metric_results.png" alt="メトリクスベースの SLO グループ結果" >}}
+{{< img src="service_management/service_level_objectives/metric_slo_history_groups.png" alt="metric-based SLO group results" >}}
 
-デフォルトで、棒グラフは SLO 全体の正しい/正しくない要求すべての全体数を表示します。テーブルの該当する行をクリックすると、個別のグループの正しい/正しくない要求の棒グラフを詳しく確認できます。さらに、棒グラフの下にある凡例でオプションを選択し、正しいまたは正しくない要求の数を表示/非表示にすることも可能です。
+By default, the bar graph shows the overall counts of good and bad requests for the entire SLO. You can scope the bar graph down to an individual group's good and bad requests counts by clicking on its corresponding row in the table. In addition, you can also choose to show or hide good request counts or bad request counts by selecting the appropriate option in the legend directly below the bar graph. 
 
-**注**: モニターベース SLI を使用している場合は、[モニターグループを表示][8]することもできます。
+### Set your SLO targets
 
-### SLO ターゲットの設定
+An SLO target is comprised of the target percentage and the time window. When you set a target for a metric-based SLO the target percentage specifies what portion of the total events specified in the denominator of the SLO should be good events, while the time window specifies the rolling time period over which the target should be tracked.
 
-SLO ターゲットは、ターゲットパーセンテージとタイムウィンドウで構成されます。メトリクスベース SLO のターゲットを設定する場合、ターゲットパーセンテージは SLO の分母で示されたイベント合計のうち良質なイベントであるべき部分を指定し、タイムウィンドウは、ターゲットが追跡される必要があるローリング期間を指定します。
+Example: `99% of requests should be error-free over the past 7 days`.
 
-例: `リクエストの 99% は、過去 7 日間でエラーが生じていないこと`。
+While the SLO remains above the target percentage, the SLO's status will be displayed in green font. When the target percentage is violated, the SLO's status will be displayed in red font. You can also optionally include a warning percentage that is greater than the target percentage to indicate when you are approaching an SLO breach. When the warning percentage is violated (but the target percentage is not violated), the SLO status will be displayed in yellow font.
 
-SLO がターゲットパーセンテージを上回っている間、SLO のステータスは緑色のフォントで表示されます。ターゲットパーセンテージに違反すると、SLO のステータスは赤色のフォントで表示されます。オプションで、ターゲットパーセンテージより大きい警告パーセンテージを含めて、SLO 違反に近づいていることを示すこともできます。警告パーセンテージに違反している場合 (ただし、ターゲットパーセンテージには違反していない場合)、SLO ステータスは黄色のフォントで表示されます。
+**Note:** Up to three decimal places are allowed for metric-based SLO targets. The precision shown in the details UI of the SLO will be up to `num_target_decimal_places + 1 = 4 decimal places`. The exact precision shown will be dependent on the magnitude of the values in your denominator query. The higher the magnitude of the denominator, the higher the precision that can be shown up to the four decimal place limit.
 
-**注:** メトリクスベースの SLO ターゲットには小数第 3 位まで使用できます。SLO の詳細 UI に表示される精度は `num_target_decimal_places + 1 = 小数第 4 位` までです。正確な精度は、分母クエリ内の値の大きさにより異なります。分母が大きいほど、小数第 4 位の上限まで精度を表示できます。
-
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/ja/tracing/generate_metrics/
-[2]: https://docs.datadoghq.com/ja/real_user_monitoring/generate_metrics
-[3]: https://docs.datadoghq.com/ja/logs/log_configuration/logs_to_metrics/#overview
-[4]: /ja/service_management/service_level_objectives
+[1]: https://docs.datadoghq.com/tracing/generate_metrics/
+[2]: https://docs.datadoghq.com/real_user_monitoring/platform/generate_metrics
+[3]: https://docs.datadoghq.com/logs/log_configuration/logs_to_metrics/#overview
+[4]: /service_management/service_level_objectives
 [5]: https://app.datadoghq.com/slo
 [6]: https://app.datadoghq.com/slo/new/metric
-[7]: /ja/metrics/distributions/#threshold-queries
-[8]: /ja/service_management/service_level_objectives/monitor/
-[9]: https://docs.datadoghq.com/ja/dashboards/querying/#advanced-graphing
+[7]: /metrics/distributions/#threshold-queries
+[8]: /service_management/service_level_objectives/monitor/
+[9]: https://docs.datadoghq.com/dashboards/querying/#advanced-graphing

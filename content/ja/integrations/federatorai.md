@@ -1,222 +1,222 @@
 ---
-app_id: federatorai
-app_uuid: c9192d7c-101d-44b2-8ddf-c5fcbe5c5306
-assets:
-  dashboards:
-    ProphetStor Federator.ai Application Overview: assets/dashboards/application-overview.json
-    ProphetStor Federator.ai Cluster Overview: assets/dashboards/cluster-overview.json
-    ProphetStor Federator.ai Cost Analysis Overview: assets/dashboards/cost-analysis-overview.json
-    ProphetStor Federator.ai Cost Management - Cluster: assets/dashboards/cost-management-cluster-overview.json
-    ProphetStor Federator.ai Cost Management - Namespace: assets/dashboards/cost-management-namespace-overview.json
-    ProphetStor Federator.ai Cost Management - Node: assets/dashboards/cost-management-node-overview.json
-    ProphetStor Federator.ai Kafka Overview: assets/dashboards/overview.json
-  integration:
-    auto_install: true
-    configuration: {}
-    events:
-      creates_events: false
-    metrics:
-      check: federatorai.integration.status
-      metadata_path: metadata.csv
-      prefix: federatorai.
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 10104
-    source_type_name: Federator.ai
-  monitors:
-    Node CPU Load Prediction in Next 24 Hours is High: assets/monitors/federatorai_node_cpu_prediction.json
-    Node Memory Usage Prediction in Next 24 Hours is High: assets/monitors/federatorai_node_mem_prediction.json
-author:
-  homepage: https://github.com/DataDog/integrations-extras
-  name: ProphetStor
-  sales_email: support@prophetstor.com
-  support_email: support@prophetstor.com
-categories:
-- コンテナ
+"app_id": "federatorai"
+"app_uuid": "c9192d7c-101d-44b2-8ddf-c5fcbe5c5306"
+"assets":
+  "dashboards":
+    "ProphetStor Federator.ai Application Overview": assets/dashboards/application-overview.json
+    "ProphetStor Federator.ai Cluster Overview": assets/dashboards/cluster-overview.json
+    "ProphetStor Federator.ai Cost Analysis Overview": assets/dashboards/cost-analysis-overview.json
+    "ProphetStor Federator.ai Cost Management - Cluster": assets/dashboards/cost-management-cluster-overview.json
+    "ProphetStor Federator.ai Cost Management - Namespace": assets/dashboards/cost-management-namespace-overview.json
+    "ProphetStor Federator.ai Cost Management - Node": assets/dashboards/cost-management-node-overview.json
+    "ProphetStor Federator.ai Kafka Overview": assets/dashboards/overview.json
+  "integration":
+    "auto_install": true
+    "configuration": {}
+    "events":
+      "creates_events": false
+    "metrics":
+      "check": federatorai.integration.status
+      "metadata_path": metadata.csv
+      "prefix": federatorai.
+    "service_checks":
+      "metadata_path": assets/service_checks.json
+    "source_type_id": !!int "10104"
+    "source_type_name": Federator.ai
+  "monitors":
+    "Node CPU Load Prediction in Next 24 Hours is High": assets/monitors/federatorai_node_cpu_prediction.json
+    "Node Memory Usage Prediction in Next 24 Hours is High": assets/monitors/federatorai_node_mem_prediction.json
+"author":
+  "homepage": "https://github.com/DataDog/integrations-extras"
+  "name": ProphetStor
+  "sales_email": support@prophetstor.com
+  "support_email": support@prophetstor.com
+"categories":
+- containers
 - kubernetes
 - ai/ml
-- オーケストレーション
-dependencies:
-- https://github.com/DataDog/integrations-extras/blob/master/federatorai/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: federatorai
-integration_id: federatorai
-integration_title: Federator.ai
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: 2.0.0
-name: federatorai
-public_title: Federator.ai
-short_description: ProphetStor Federator.ai とのインテグレーションでアプリケーションのパフォーマンスを最適化します
-supported_os:
+- orchestration
+"custom_kind": "integration"
+"dependencies":
+- "https://github.com/DataDog/integrations-extras/blob/master/federatorai/README.md"
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "federatorai"
+"integration_id": "federatorai"
+"integration_title": "Federator.ai"
+"integration_version": ""
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "federatorai"
+"public_title": "Federator.ai"
+"short_description": "Integration with ProphetStor Federator.ai to optimize application performance"
+"supported_os":
 - linux
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Containers
-  - Category::Kubernetes
-  - Category::AI/ML
-  - Category::Orchestration
-  - Supported OS::Linux
-  configuration: README.md#Setup
-  description: ProphetStor Federator.ai とのインテグレーションでアプリケーションのパフォーマンスを最適化します
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Federator.ai
+"tile":
+  "changelog": CHANGELOG.md
+  "classifier_tags":
+  - "Category::Containers"
+  - "Category::Kubernetes"
+  - "Category::AI/ML"
+  - "Category::Orchestration"
+  - "Supported OS::Linux"
+  "configuration": "README.md#Setup"
+  "description": Integration with ProphetStor Federator.ai to optimize application performance
+  "media": []
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": Federator.ai
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
-## 概要
+## Overview
 
 
-[ProphetStor Federator.ai][1] は、Kubernetes と仮想マシン (VM) クラスターの計算リソース管理を強化するために設計された AI ベースのソリューションです。IT 運用の全体的な可観測性、特にマルチテナントの大規模言語モデル (LLM) のトレーニングを含むことで、ミッションクリティカルなアプリケーションのリソース、ネームスペース、ノード、クラスターを効率的に割り当て、最小限のリソース消費で KPI を効果的に達成できます。
+[ProphetStor Federator.ai][1] is an AI-based solution designed to enhance computing resource management for Kubernetes and Virtual Machine (VM) clusters. With its holistic observability of IT operations, including multi-tenant Large Language Model (LLM) training, resources for mission-critical applications, namespaces, nodes, and clusters can be efficiently allocated, and KPIs can be effectively achieved with minimum resource wastage.
 
-高度な機械学習アルゴリズムを使用して、アプリケーションのワークロードを予測します。Federator.ai の主な機能は次の通りです。
-* Kubernetes クラスター内のコンテナ化されたアプリケーション、ならびに VMware クラスター、Amazon Web Services (AWS) Elastic Compute Cloud (EC2)、Azure Virtual Machine、Google Compute Engine 内の VM における AI ベースのワークロード予測
-* ワークロード予測、アプリケーション、Kubernetes などの関連するメトリクスに基づくリソースの提案
-* 一般的な Kubernetes アプリケーションのコントローラー / ネームスペース向け CPU / メモリーの自動プロビジョニング
-* Kubernetes アプリケーションコンテナ、Kafka Consumer Group、NGINX Ingress アップストリームサービスのオートスケーリング
-* Kubernetes クラスターと VM クラスターのワークロード予測に基づくマルチクラウドコスト分析と推奨
-* クラスター、Kubernetes アプリケーション、VM、Kubernetes ネームスペースの提案に基づく実際のコストと潜在的な節約
-* パフォーマンスの妥協なしに行えるマルチテナント LLM トレーニングの可観測性と実行可能なリソース最適化
+Using advanced machine learning algorithms to predict application workloads, Federator.ai offers:
+* AI-based workload prediction for containerized applications in Kubernetes clusters, as well as VMs in VMware clusters, Amazon Web Services (AWS) Elastic Compute Cloud (EC2), Azure Virtual Machine, and Google Compute Engine
+* Resource recommendations based on workload prediction, application, Kubernetes, and other related metrics
+* Automatic provisioning of CPU/memory for generic Kubernetes application controllers/namespaces
+* Automatic scaling of Kubernetes application containers, Kafka consumer groups, and NGINX Ingress upstream services
+* Multicloud cost analysis and recommendations based on workload predictions for Kubernetes clusters and VM clusters
+* Actual cost and potential savings based on recommendations for clusters, Kubernetes applications, VMs, and Kubernetes namespaces
+* MultiTenant LLM training observability and actionable resource optimizations without performance compromise
 
-[ProphetStor Federator.ai][1] は、Datadog Agent と統合された API を通じて、LLM トレーニングを含むアプリケーションレベルのワークロードからクラスターレベルのリソース消費までのフルスタックの可観測性を提供します。このインテグレーションにより、リアルタイムモニタリングと予測分析の間のダイナミックなループが促進され、リソース管理を継続的に改善し、コストを最適化し、アプリケーションの効率的な運用を保証します。Kubernetes のコンテナ、ネームスペース、クラスターノードのリソース使用状況を容易に追跡・予測し、コストがかかる過剰プロビジョニングやパフォーマンスに影響を与える過小プロビジョニングを防ぐための正しい推奨を行うことができます。CI/CD パイプラインへの簡単なインテグレーションにより、Federator.ai は Kubernetes クラスターにデプロイされた際のコンテナの継続的な最適化を可能にします。アプリケーションワークロードの予測を使用して、Federator.ai は適切なタイミングでアプリケーションコンテナを自動的にスケーリングし、Kubernetes HPA や [Datadog Watermark Pod Autoscaling (WPA)][2] を介して、適切な数のコンテナレプリカでパフォーマンスを最適化します。
+[ProphetStor Federator.ai][1] provides full-stack observability through its APIs integrated with Datadog Agents, from application-level workloads, including LLM training, to cluster-level resource consumption. This integration fosters a dynamic loop between live monitoring and predictive analytics, continuously improving resource management, optimizing costs, and ensuring efficient application operation. You can easily track and predict the resource usages of Kubernetes containers, namespaces, and cluster nodes to make the right recommendations to prevent costly over-provisioning or performance-impacting under-provisioning. With easy integration to CI/CD pipeline, Federator.ai enables continuous optimization of containers whenever they are deployed in a Kubernetes cluster. Using application workload predictions, Federator.ai auto-scales application containers at the right time and optimizes performance with the right number of container replicas through Kubernetes HPA or [Datadog Watermark Pod Autoscaling (WPA)][2].
 
-Federator.ai について詳しくは、[ProphetStor Federator.ai 機能デモ][3]および [Datadog 向け ProphetStor Federator.ai][4]のビデオをご覧ください。
-
-
-**ProphetStor Federator.ai クラスターの概要**
-
-![ProphetStor Federator.ai クラスターの概要][5]
-
-* クラスターのリソース使用量予測と推奨
-   - この表は、クラスターのリソース計画のための、CPU メモリの負荷予測の最大値、最小値、平均値、および Federator.ai からの CPU メモリリソースの推奨使用量を示しています。
-
-* クラスターノードのリソース使用量予測と推奨
-   - この表は、ノードのリソース計画のための、CPU メモリの負荷予測の最大値、最小値、平均値、および Federator.ai からの CPU メモリリソースの推奨使用量を示しています。
-
-* ノードの現在/予測メモリ使用量 (日次)
-   - このグラフは、Federator.ai からの予測メモリ使用量とノードのメモリ使用量（日次）を示しています。
-
-* ノードの現在/予測メモリ使用量 (週次)
-   - このグラフは、Federator.ai からの予測メモリ使用量とノードのメモリ使用量（週次）を示しています。
-
-* ノードの現在/予測メモリ使用量 (月次)
-   - このグラフは、Federator.ai からの予測メモリ使用量とノードのメモリ使用量（月次）を示しています。
-
-* ノードの現在/予測 CPU 使用量 (日次)
-   - このグラフは、Federator.ai からの予測 CPU 使用量とノードの CPU 使用量（日次）を示しています。
-
-* ノードの現在/予測 CPU 使用量 (週次)
-   - このグラフは、Federator.ai からの予測 CPU 使用量とノードの CPU 使用量（週次）を示しています。
-
-* ノードの現在/予測 CPU 使用量 (月次)
-   - このグラフは、Federator.ai からの予測 CPU 使用量とノードの CPU 使用量（月次）を示しています。
+For additional information on Federator.ai, see the [ProphetStor Federator.ai Feature Demo][3] and [ProphetStor Federator.ai for Datadog][4] videos.
 
 
-**ProphetStor Federator.ai アプリケーションの概要**
+**ProphetStor Federator.ai Cluster Overview**
 
-![アプリケーション概要ダッシュボード][6]
+![ProphetStor Federator.ai Cluster Overview][5]
 
-* 今後 24 時間の負荷予測
-   - この表は、コントローラーのリソース計画のための、今後 24 時間の CPU メモリの負荷予測の最大値、最小値、平均値、および Federator.ai からの CPU メモリリソースの推奨使用量を示しています。
+* Cluster Resource Usage Predictions and Recommendations
+   - This table shows the maximum, minimum, and average value of the CPU memory workload prediction and the recommended CPU memory resource usage from Federator.ai for cluster resource planning.
 
-* 今後 7 日間の負荷予測
-   - この表は、コントローラーのリソース計画のための、今後 7 日の CPU メモリの負荷予測の最大値、最小値、平均値、および Federator.ai からの CPU メモリリソースの推奨使用量を示しています。
+* Cluster Node Resource Usage Predictions and Recommendations
+   - This table shows the maximum, minimum, and average value of the CPU memory workload prediction and the recommended CPU memory resource usage from Federator.ai for node resource planning.
 
-* 今後 30 日間の負荷予測
-   - この表は、コントローラーのリソース計画のための、今後 30 日の CPU メモリの負荷予測の最大値、最小値、平均値、および Federator.ai からの CPU メモリリソースの推奨使用量を示しています。
+* Node Current/Predicted Memory Usage (Daily)
+   - This graph shows daily predicted memory usage from Federator.ai and the memory usage of the nodes.
 
-* 現在/予測 CPU 使用量 (日次)
-   - このグラフは、Federator.ai からの予測 CPU 使用量とコントローラーの CPU 使用量（日次）を示しています。
+* Node Current/Predicted Memory Usage (Weekly)
+   - This graph shows weekly predicted memory usage from Federator.ai and the memory usage of the nodes.
 
-* 現在/予測 CPU 使用量 (週次)
-   - このグラフは、Federator.ai からの予測 CPU 使用量とコントローラーの CPU 使用量（週次）を示しています。
+* Node Current/Predicted Memory Usage (Monthly)
+   - This graph shows monthly predicted memory usage from Federator.ai and the memory usage of the nodes.
 
-* 現在/予測 CPU 使用量 (月次)
-   - このグラフは、Federator.ai からの予測 CPU 使用量とコントローラーの CPU 使用量（月次）を示しています。
+* Node Current/Predicted CPU Usage (Daily)
+   - This graph shows daily predicted CPU usage from Federator.ai and the CPU usage of the nodes.
 
-* 現在/予測メモリ使用量 (日次)
-   - このグラフは、Federator.ai からの予測メモリ使用量とコントローラーのメモリ使用量（日次）を示しています。
+* Node Current/Predicted CPU Usage (Weekly)
+   - This graph shows weekly predicted CPU usage from Federator.ai and the CPU usage of the nodes.
 
-* 現在/予測メモリ使用量 (週次)
-   - このグラフは、Federator.ai からの予測メモリ使用量とコントローラーのメモリ使用量（週次）を示しています。
-
-* 現在/予測メモリ使用量 (月次)
-   - このグラフは、Federator.ai からの予測メモリ使用量とコントローラーのメモリ使用量（月次）を示しています。
-
-* 現在/理想/推奨のレプリカ
-   - このグラフは、Federator.ai からの推奨レプリカと、コントローラーの理想的なレプリカおよび現在のレプリカを示しています。
-
-* メモリの使用量/リクエスト/上限 vs 推奨メモリ上限
-   - このグラフは、Federator.ai からの推奨メモリ上限と、コントローラーの現在のメモリ使用量、要求された使用量、および制限された使用量を示しています。
-
-* CPU 使用量/リクエスト/上限 vs 推奨 CPU 上限
-   - このグラフは、Federator.ai からの推奨 CPU 上限と、コントローラーの現在の CPU 使用量、要求された使用量、および制限された使用量を示しています。
-
-* CPU 使用量/使用率上限
-   - このグラフは、コントローラーの CPU 使用率と、CPU 使用率が上限を上回っている/下回っていることを視覚的にを示しています。
+* Node Current/Predicted CPU Usage (Monthly)
+   - This graph shows monthly predicted CPU usage from Federator.ai and the CPU usage of the nodes.
 
 
-**ProphetStor Federator.ai Kafka の概要**
+**ProphetStor Federator.ai Application Overview**
 
-![ダッシュボード概要][7]
+![Application Overview Dashboard][6]
 
-* 推奨レプリカと現在/理想的なレプリカ
-   - この時系列グラフは、Federator.ai からの推奨レプリカと、システム内の必要なレプリカと現在のレプリカを示しています。
+* Workload Prediction for Next 24 Hours
+   - This table shows the maximum, minimum, and average value of the CPU memory workload prediction and the recommended CPU memory resource usage from Federator.ai for the controller resource planning in the next 24 hours.
 
-* 生成と消費と生成予測
-   - この時系列グラフは、Kafka メッセージの生成率と消費率、および Federated.ai によって予測された生成率を示しています。
+* Workload Prediction for Next 7 Days
+   - This table shows the maximum, minimum, and average value of the CPU memory workload prediction and the recommended CPU memory resource usage from Federator.ai for the controller resource planning in the next 7 days.
 
-* Kafka コンシューマーラグ
-   - この時系列グラフは、すべてのパーティションからのコンシューマーラグの合計を示しています。
+* Workload Prediction for Next 30 Days
+   - This table shows the maximum, minimum, and average value of the CPU memory workload prediction and the recommended CPU memory resource usage from Federator.ai for the controller resource planning in the next 30 days.
 
-* コンシューマーキューレイテンシー (ミリ秒)
-   - この時系列グラフは、コンシューマーが受信するまでのメッセージキュー内のメッセージの平均レイテンシーを示しています。
+* Current/Predicted CPU Usage (Daily)
+   - This graph shows daily predicted CPU usage from Federator.ai and the CPU usage of the controllers.
 
-* デプロイメモリ使用量
-   - この時系列グラフは、コンシューマーのメモリ使用量を示しています。
+* Current/Predicted CPU Usage (Weekly)
+   - This graph shows weekly predicted CPU usage from Federator.ai and the CPU usage of the controllers.
 
-* デプロイ CPU 使用量
-   - この時系列グラフは、コンシューマーの CPU 使用量を示しています。
+* Current/Predicted CPU Usage (Monthly)
+   - This graph shows monthly predicted CPU usage from Federator.ai and the CPU usage of the controllers.
 
+* Current/Predicted Memory Usage (Daily)
+   - This graph shows daily predicted memory usage from Federator.ai and the memory usage of the controllers.
 
-**ProphetStor Federator.ai マルチクラウドコスト分析の概要**
+* Current/Predicted Memory Usage (Weekly)
+   - This graph shows weekly predicted memory usage from Federator.ai and the memory usage of the controllers.
 
-![マルチクラウドコスト分析の概要][8]
+* Current/Predicted Memory Usage (Monthly)
+   - This graph shows monthly predicted memory usage from Federator.ai and the memory usage of the controllers.
 
-* 現在のクラスターコストおよび現在のクラスターコンフィギュレーション
-   - この表は、クラスターの現在のコストと環境コンフィギュレーションを示しています。
+* Current/Desired/Recommended Replicas
+   - This graph shows the recommended replicas from Federator.ai and the desired and current replicas of the controllers.
 
-* 推奨クラスター - AWS および推奨クラスターコンフィギュレーション - AWS
-   - この表は、Federator.ai からの推奨 AWS インスタンスコンフィギュレーションと、推奨 AWS インスタンスのコストを示しています。
+* Memory Usage/Request/Limit vs Rec Memory Limit
+   - This graph shows the recommended memory limit from Federator.ai and the requested, limited and current memory usage of the controllers.
 
-* 推奨クラスター - Azure および推奨クラスターコンフィギュレーション - Azure
-   - この表は、Federator.ai からの推奨 Azure インスタンスコンフィギュレーションと、推奨 Azure インスタンスのコストを示しています。
+* CPU Usage/Request/Limit vs Rec CPU Limit
+   - This graph shows the recommended CPU limit from Federator.ai and the requested, limited and current CPU usage of the controllers.
 
-* 推奨クラスター - GCP および推奨クラスターコンフィギュレーション - GCP
-   - この表は、Federator.ai からの推奨 GCP インスタンスコンフィギュレーションと、推奨 GCP インスタンスのコストを示しています。
-
-* 最高コストのネームスペース ($/日)
-   - このグラフは、現在のクラスターのネームスペースの最高コスト（日次）を示しています。
-
-* 最高予測コストのネームスペース ($/月)
-   - このグラフは、現在のクラスターのネームスペースの最高予測コスト（月次）を示しています。
+* CPU Usage/Limit Utilization
+   - This graph shows the CPU utilization of the controller and visualizes if the CPU utilization is over the limit or under the limit.
 
 
-## 計画と使用
+**ProphetStor Federator.ai Kafka Overview**
 
-* 以下の手順に従って、Federator.ai をダウンロードおよび設定してください。
+![Dashboard Overview][7]
 
-### インフラストラクチャーリスト
+* Recommended Replicas vs Current/Desired Replicas
+   - This timeseries graph shows the recommended replicas from Federator.ai and the desired and current replicas in the system.
 
-1. OpenShift/Kubernetes クラスターにログインします
-2. 次のコマンドで OpenShift/Kubernetes 用の Federator.ai をインストールします
+* Production vs Consumption vs Production Prediction
+   - This timeseries graph shows the Kafka message production rate and consumption rate and the production rate predicted by Federator.ai.
+
+* Kafka Consumer Lag
+   - This timeseries graph shows the sum of consumer lags from all partitions.
+
+* Consumer Queue Latency (msec)
+   - This timeseries graph shows the average latency of a message in the message queue before it is received by a consumer.
+
+* Deployment Memory Usage
+   - This timeseries graph shows the memory usage of consumers.
+
+* Deployment CPU Usage
+   - This timeseries graph shows the CPU usage of consumers.
+
+
+**ProphetStor Federator.ai Multi-Cloud Cost Analysis Overview**
+
+![Multi-Cloud Cost Analysis Overview][8]
+
+* Current Cluster Cost and Current Cluster Configuration
+   - These tables show the current cost and the environment configuration of the clusters.
+
+* Recommended Cluster - AWS and Recommended Cluster Configuration - AWS
+   - These tables show the recommended AWS instances configuration from Federator.ai and the cost of the recommended AWS instances.
+
+* Recommended Cluster - Azure and Recommended Cluster Configuration - Azure
+   - These tables show the recommended Azure instances configuration from Federator.ai and the cost of the recommended Azure instances.
+
+* Recommended Cluster - GCP and Recommended Cluster Configuration - GCP
+   - These tables show the recommended GCP instances configuration from Federator.ai and the cost of the recommended GCP instances.
+
+* Namespace with Highest Cost ($/day)
+   - This graph shows the highest daily cost of the namespaces in the current cluster.
+
+* Namespace with Highest Predicted Cost ($/month)
+   - This graph shows the highest predicted monthly cost of the namespaces in the current cluster.
+
+
+## Setup
+
+* Follow the instructions below to download and set up Federator.ai.
+
+### Installation
+
+1. Log in to your OpenShift/Kubernetes cluster
+2. Install Federator.ai for OpenShift/Kubernetes with the following command:
 
    ```shell
    $ curl https://raw.githubusercontent.com/containers-ai/prophetstor/master/deploy/federatorai-launcher.sh | bash
@@ -285,45 +285,45 @@ Federator.ai について詳しくは、[ProphetStor Federator.ai 機能デモ][
    Downloaded files are located under /opt/federatorai/repo/v4.5.1-b1562
    ```
 
-3. Federator.ai ポッドが正しく実行されていることを確認します。
+3. Verify Federator.ai pods are running properly.
 
    ```shell
    $ kubectl get pod -n federatorai
    ```
-4. Federator.ai GUI にログインします。URL とログイン資格情報は、ステップ 2 の出力で確認できます。
+4. Log in to Federator.ai GUI, URL and login credential could be found in the output of Step 2.
 
 
-### ブラウザトラブルシューティング
+### Configuration
 
-1. お使いのアカウントで Datadog にログインし、Datadog API を使用するための [API キーとアプリケーションキー][9]を取得します。
+1. Log in to Datadog with your account and get an [API key and application key][9] for using the Datadog API.
 
-2. クラスターごとのメメトリクスデータソース用に Federator.ai を構成します。
-    - Federator.ai GUI を起動 -> Configuration -> Clusters -> "Add Cluster" をクリックします
-    - API キーとアプリケーションキーを入力します
+2. Configure Federator.ai for the metrics data source per cluster.
+    - Launch Federator.ai GUI->Configuration->Clusters->Click "Add Cluster"
+    - Enter API key and application key
 
-    ![クラスターウィンドウを追加する][10] 
+    ![Add Cluster Window][10] 
 
-3. 詳細については、[Federator.ai - インストールおよびコンフィギュレーションガイド][11]および[ユーザーガイド][12]を参照してください。
+3. See the [Federator.ai - Installation and Configuration Guide][11] and [User Guide][12] for more details. 
 
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "federatorai" >}}
 
 
 
-### ヘルプ
+### Service Checks
 
-Federator.ai には、サービスのチェック機能は含まれません。
+Federator.ai does not include any service checks.
 
-### ヘルプ
+### Events
 
-Federator.ai には、イベントは含まれません。
+Federator.ai does not include any events.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Federator.ai - インストールおよびコンフィギュレーションガイド][11]をご覧いただくか、[Datadog サポート][14]までお問い合わせください。
+Need help? Read the [Federator.ai - Installation and Configuration Guide][11] or contact [Datadog support][14].
 
 [1]: https://prophetstor.com/federator_ai/
 [2]: https://github.com/DataDog/watermarkpodautoscaler
@@ -333,9 +333,10 @@ Federator.ai には、イベントは含まれません。
 [6]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/federatorai/images/application_overview_dashboard.png
 [7]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/federatorai/images/dashboard_overview.png
 [8]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/federatorai/images/cost_analysis_overview.png
-[9]: https://docs.datadoghq.com/ja/account_management/api-app-keys/
+[9]: https://docs.datadoghq.com/account_management/api-app-keys/
 [10]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/federatorai/images/add_cluster_window.png
 [11]: https://prophetstor.com/wp-content/uploads/documentation/Federator.ai/Latest%20Version/ProphetStor%20Federator.ai%20Installation%20Guide.pdf
 [12]: https://prophetstor.com/wp-content/uploads/documentation/Federator.ai/Latest%20Version/ProphetStor%20Federator.ai%20User%20Guide.pdf
 [13]: https://github.com/DataDog/integrations-extras/blob/master/federatorai/metadata.csv
-[14]: https://docs.datadoghq.com/ja/help/
+[14]: https://docs.datadoghq.com/help/
+

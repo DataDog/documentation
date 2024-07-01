@@ -1,103 +1,103 @@
 ---
-app_id: zabbix
-app_uuid: 9b7022c4-95c7-4872-83b6-7eaba2cc9d88
-assets:
-  integration:
-    auto_install: true
-    configuration:
-      spec: assets/configuration/spec.yaml
-    events:
-      creates_events: false
-    metrics:
-      check: zabbix.system.uptime
-      metadata_path: metadata.csv
-      prefix: zabbix.
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 10166
-    source_type_name: Zabbix (コミュニティバージョン)
-author:
-  homepage: https://github.com/DataDog/integrations-extras
-  name: コミュニティ
-  sales_email: KosukeKamiya@users.noreply.github.com
-  support_email: KosukeKamiya@users.noreply.github.com
-categories:
-- ネットワーク
-dependencies:
-- https://github.com/DataDog/integrations-extras/blob/master/zabbix/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: zabbix
-integration_id: zabbix
-integration_title: zabbix
-integration_version: 1.1.1
-is_public: true
-custom_kind: integration
-manifest_version: 2.0.0
-name: zabbix
-public_title: zabbix
-short_description: Zabbix API によりアイテムの履歴を収集し、メトリクスとして Datadog にレポート。
-supported_os:
+"app_id": "zabbix"
+"app_uuid": "9b7022c4-95c7-4872-83b6-7eaba2cc9d88"
+"assets":
+  "integration":
+    "auto_install": true
+    "configuration":
+      "spec": assets/configuration/spec.yaml
+    "events":
+      "creates_events": false
+    "metrics":
+      "check": zabbix.system.uptime
+      "metadata_path": metadata.csv
+      "prefix": zabbix.
+    "service_checks":
+      "metadata_path": assets/service_checks.json
+    "source_type_id": !!int "10166"
+    "source_type_name": Zabbix (Community Version)
+"author":
+  "homepage": "https://github.com/DataDog/integrations-extras"
+  "name": Community
+  "sales_email": KosukeKamiya@users.noreply.github.com
+  "support_email": KosukeKamiya@users.noreply.github.com
+"categories":
+- network
+"custom_kind": "integration"
+"dependencies":
+- "https://github.com/DataDog/integrations-extras/blob/master/zabbix/README.md"
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "zabbix"
+"integration_id": "zabbix"
+"integration_title": "zabbix"
+"integration_version": "1.1.1"
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "zabbix"
+"public_title": "zabbix"
+"short_description": "Collect item history by the Zabbix API and report them to Datadog as metrics."
+"supported_os":
 - linux
 - windows
 - macos
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Network
-  - Supported OS::Linux
-  - Supported OS::Windows
-  - Supported OS::macOS
-  configuration: README.md#Setup
-  description: Zabbix API によりアイテムの履歴を収集し、メトリクスとして Datadog にレポート。
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: zabbix
+"tile":
+  "changelog": CHANGELOG.md
+  "classifier_tags":
+  - "Category::Network"
+  - "Supported OS::Linux"
+  - "Supported OS::Windows"
+  - "Supported OS::macOS"
+  "configuration": "README.md#Setup"
+  "description": Collect item history by the Zabbix API and report them to Datadog as metrics.
+  "media": []
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": zabbix
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
-## 概要
+## Overview
 
-Zabbix に接続して
+Connect to Zabbix to:
 
-- Datadog Agent を介して [Zabbix][1] を監視します。
-- Zabbix アラートを Datadog に送信して、アラートを Datadog イベントストリームのイベントとして表示します。
+- Monitor [Zabbix][1] through the Datadog Agent.
+- Send Zabbix alerts to Datadog to see the alerts as events in your Datadog event stream.
 
-## 計画と使用
+## Setup
 
-Zabbix チェックは [Datadog Agent][2] パッケージに含まれていないため、お客様自身でインストールする必要があります。
+The Zabbix check is not included in the [Datadog Agent][2] package, so you need to install it.
 
-### インフラストラクチャーリスト
+### Installation
 
-Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Zabbix チェックをホストにインストールします。Docker Agent または 上記バージョン以前の Agent でインストールする場合は、[コミュニティインテグレーションの使用][3]をご参照ください。
+For Agent v7.21+ / v6.21+, follow the instructions below to install the Zabbix check on your host. See [Use Community Integrations][3] to install with the Docker Agent or earlier versions of the Agent.
 
-1. 以下のコマンドを実行して、Agent インテグレーションをインストールします。
+1. Run the following command to install the Agent integration:
 
    ```shell
    datadog-agent integration install -t datadog-zabbix==<INTEGRATION_VERSION>
    ```
 
-2. コアの[インテグレーション][4]と同様にインテグレーションを構成します。
+2. Configure your integration similar to core [integrations][4].
 
-### ブラウザトラブルシューティング
+### Configuration
 
-1. Zabbix サーバーのタイムゾーンが UTC に設定されていることを確認してください。Zabbix のタイムゾーンの詳細については、[Zabbix ドキュメント][5]を参照してください。
+1. Make sure that your Zabbix server timezone is set to UTC. More information about Zabbix time zones can be found on the [Zabbix documentation][5].
 
-2. Zabbix のパフォーマンスデータを収集するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `zabbix.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル zabbix.d/conf.yaml][6] を参照してください。
+2. Edit the `zabbix.d/conf.yaml` file, in the `conf.d/` folder at the root of your Agent's configuration directory to start collecting your Zabbix performance data. See the [sample zabbix.d/conf.yaml][6] for all available configuration options.
 
-3. [Agent を再起動します][7]。
+3. [Restart the Agent][7].
 
-#### イベント収集
+#### Event collection
 
-##### Datadog メディアタイプを作成する
+##### Create Datadog media type 
 
-1. *Administration > Media Types > Create Media Type* に移動します。
-2. Zabbix テンプレート変数を使用して、Webhook にパラメータを追加します。Datadog の api_key と以下の Zabbix テンプレート変数をパラメータとして追加します。
+1. Navigate to *Administration > Media Types > Create Media Type*.
+2. Add parameters to the webhook using Zabbix template variables. Add your Datadog api_key and the following Zabbix template variables as parameters:
 
-| パラメーター            | 値                                |
+| Parameter            | Value                                |
 | -------------------- | ------------------------------------ |
 | `api_key`            | `Your Datadog API key`               |
 | `event_date`         | `{EVENT.DATE}`                       |
@@ -111,7 +111,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Zabbix チェ�
 | `alert_subject`      | `{ALERT.SUBJECT}`                    |
 
 
-3. **Name** を `Datadog` に、**Type** を `Webhook` に設定し、次のコードを **Script** として入力します。
+3. Set **Name** to `Datadog`, **Type** to `Webhook`, and input the following code as the **Script**:
 ``` 
     try {
         Zabbix.Log(4, '[datadog webhook] received value=' + value);
@@ -133,54 +133,55 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Zabbix チェ�
     return JSON.stringify({});
 
 ```
-4. "Test" ボタンを使用して、Webhook が正しく設定されていることを確認します。
+4. Validate the Webhook is set up correctly by using the "Test" button.
 
-##### Webhook メディアを既存のユーザーに割り当てます
+##### Assign Webhook media to an existing user
 
-1. Webhook メディアタイプを設定した後、*Administration > Users* に移動し、Webhook を表す専用の Zabbix ユーザーを作成します。たとえば、Datadog Webhook のエイリアス `Datadog` を使用します。このユーザーは Zabbix にログインしないため、メディアを除くすべての設定をデフォルトのままにしておくことができます。
-2. ユーザープロファイルで、**Media** タブに移動し、必要な連絡先情報を含む Webhook を追加します。Webhook が送信先フィールドを使用しない場合は、サポートされている文字の任意の組み合わせを入力して、検証要件をバイパスします。
-3. このユーザーに、アラートを送信する必要があるすべてのホストに少なくとも読み取りアクセス許可を付与します。
+1. After configuring the Webhook media type, navigate to *Administration > Users* and create a dedicated Zabbix user to represent the Webhook. For example, use the alias `Datadog` for the Datadog Webhook. All settings, except media, can be left at their defaults as this user does not log in to Zabbix.
+2. In the user profile, go to a **Media** tab and add a Webhook with the required contact information. If the Webhook does not use a send to field, enter any combination of supported characters to bypass validation requirements.
+3. Grant this user at least read permissions to all hosts for which it should send the alerts.
 
-##### Webhook のアラートアクションを構成します
+##### Configure an alert action for the Webhook
 
-1. *Configuration > Actions* に移動します。
-2. ページタイトルのドロップダウンから、必要なアクションタイプを選択します。
-3. **Create Action** をクリックします。
-4. アクションに名前を付けます。
-5. 操作を実行する条件を選択します。
-6. 実行する操作を選択します。
+1. Navigate to *Configuration > Actions*.
+2. From the page title dropdown, select the required action type.
+3. Click on **Create Action**.
+4. Name the action.
+5. Choose conditions upon which operations are carried out.
+6. Choose the operations to carry out.
 
-### 検証
+### Validation
 
-[Agent のステータスサブコマンド][8]を実行し、Checks セクションで `zabbix` を探します。
+Run the [Agent's status subcommand][8] and look for `zabbix` under the Checks section.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "zabbix" >}}
 
 
-### ヘルプ
+### Events
 
-Zabbix アラートは Datadog イベントストリームのイベントとして収集されます。
+Zabbix alerts are collected as events in the Datadog event stream.
 
-### ヘルプ
+### Service Checks
 {{< get-service-checks-from-git "zabbix" >}}
 
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][11]までお問合せください。
+Need help? Contact [Datadog support][11].
 
 
 [1]: https://www.zabbix.com/
 [2]: https://app.datadoghq.com/account/settings/agent/latest
-[3]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/
-[4]: https://docs.datadoghq.com/ja/getting_started/integrations/
+[3]: https://docs.datadoghq.com/agent/guide/use-community-integrations/
+[4]: https://docs.datadoghq.com/getting_started/integrations/
 [5]: https://www.zabbix.com/documentation/current/en/manual/web_interface/time_zone
 [6]: https://github.com/DataDog/integrations-extras/blob/master/zabbix/datadog_checks/zabbix/data/conf.yaml.example
-[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[7]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[8]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
 [9]: https://github.com/DataDog/integrations-extras/blob/master/zabbix/metadata.csv
 [10]: https://github.com/DataDog/integrations-extras/blob/master/zabbix/assets/service_checks.json
-[11]: https://docs.datadoghq.com/ja/help/
+[11]: https://docs.datadoghq.com/help/
+

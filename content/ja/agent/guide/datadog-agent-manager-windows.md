@@ -1,26 +1,26 @@
 ---
+title: Datadog Agent Manager for Windows
 further_reading:
 - link: /agent/basic_agent_usage/windows/
-  tag: ドキュメント
-  text: Windows Agent の基本的なエージェントの利用方法
-title: Windows 用 Datadog Agent Manager
+  tag: Documentation
+  text: Basic Agent Usage for the Windows Agent
 ---
 
-## 概要
+## Overview
 
-Datadog Agent Manager GUI はブラウザベースです。GUI が実行されるポートは `datadog.yaml` ファイルで構成できます。ポートを `-1` に設定すると、GUI が無効になります。 デフォルトでは、Windows と Mac ではポート 5002 で有効になっており、Linux では無効になっています。
+The Datadog Agent Manager GUI is browser-based. The port the GUI runs on can be configured in your `datadog.yaml` file. Setting the port to `-1` disables the GUI. By default it is enabled on port 5002 for Windows and Mac and is disabled on Linux.
 
-### 要件
+### Requirements
 
-1. cookie をブラウザーで有効にする必要があります。GUI は、GUI サーバーとのすべての通信を認証するために使用されるトークンを生成し、ブラウザーに保存します。
+1. Cookies must be enabled in your browser. The GUI generates and saves a token in your browser which is used for authenticating all communications with the GUI server.
 
-2. GUI は、GUI を起動するユーザーが正しいユーザーアクセス許可を持つ場合にのみ起動されます。`datadog.yaml` を開くことができれば、GUI を使用できます。
+2. The GUI is only launched if the user launching it has the correct user permissions. If you are able to open `datadog.yaml`, you are able to use the GUI.
 
-3. セキュリティ上の理由から、GUI はローカルネットワークインターフェイス (localhost/127.0.0.1) からのみアクセスできます。そのため、Agent を同じホストで実行する必要があります。したがって、Agent を VM やコンテナーで実行してホストマシンからアクセスすることはできません。
+3. For security reasons, the GUI can only be accessed from the local network interface (localhost/127.0.0.1), so you must be on the same host that the Agent is running to use it. In other words, you can't run the Agent on a VM or container and access it from the host machine.
 
-#### サポートされるブラウザ
+#### Supported browsers
 
-| ブラウザ       | サポートされるバージョン (以降) | コメント                 |
+| Browser       | Supported version (or later) | Comment                 |
 |---------------|------------------------------|-------------------------|
 | IE            | 11                           |                         |
 | Edge          | 12                           |  Pre-Chromium Edge |
@@ -30,49 +30,49 @@ Datadog Agent Manager GUI はブラウザベースです。GUI が実行され�
 | Safari        | 8                            |                         |
 | iOS           | 12                           |  Mobile Safari          |
 
-### Datadog Agent Manager を起動する
+### Start the Datadog Agent Manager
 
-Agent を Windows ホストに[インストール][1]した後、Datadog Agent Manager を起動して Agent をグラフィカルに管理します。
+After the Agent is [installed][1] on your Windows host, start the Datadog Agent Manager to manage the Agent graphically.
 
-Windows のスタートメニューから
+From the Windows start menu:
 
-* Datadog フォルダーをクリックします。
-* Datadog Agent Manager を右クリックします。
-* `Run as Administrator` を選びます。
+* Click on the Datadog folder.
+* Right click on Datadog Agent Manager.
+* Choose `Run as Administrator`.
 
-管理者特権の PowerShell プロンプトから
+From an elevated PowerShell prompt:
 ```powershell
 & "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" launch-gui
 ```
 
-Datadog Agent Manager がデフォルトのウェブブラウザで起動します。ウェブアドレスは `http://127.0.0.1:5002` です。
+The Datadog Agent Manager launches in your default web browser. The web address is `http://127.0.0.1:5002`.
 
-## オプション
+## Options
 
-次のセクションでは、左側のナビゲーションバーのオプションについて説明します。
+The following sections provide information on the options in the left navigation bar.
 
-### ステータス
+### Status
 
-#### 一般
+#### General
 
-Datadog Agent Manager を起動すると、デフォルトで一般ステータスページが表示されます。次のセクションが含まれます。
+The general status page displays by default when launching the Datadog Agent Manager. It contains the following sections:
 
-| セクション     | 説明                                                                     |
+| Section     | Description                                                                     |
 |-------------|---------------------------------------------------------------------------------|
-| Agent Info  | バージョン、ログレベル、ファイルパスなどの Agent に関する情報を提供します。 |
-| System Info | システム時間、ntp オフセット、Go、Python バージョンに関する情報が含まれています。       |
-| ホスト情報   | OS、プラットフォーム、プロシージャ、稼働時間などのホストに関する情報を提供します。     |
-| ホスト名   | Agent が検出したホスト名とホストタグを表示します。                        |
-| JMX Status  | JMX チェックのリストとそのステータス。                                         |
-| Forwarder   | API キーのステータスなど、Agent の Forwarder に関する情報。       |
-| エンドポイント   | Agent が使用中のエンドポイント。                                                  |
-| ログ Agent  | Logs Agent に関する情報（有効な場合）。                                     |
-| Aggregator  | Agent のデータ Aggregator に関する情報。                                     |
-| DogStatsD   | DogStatsD で送信されたデータの統計。                                         |
+| Agent Info  | Provides information on the Agent including version, log level, and file paths. |
+| System Info | Includes information on system time, ntp offset, Go, and Python versions.       |
+| Host Info   | Provides information on the host including OS, platform, procs, and uptime.     |
+| Hostnames   | Displays the hostnames and host tags found by the Agent.                        |
+| JMX Status  | A list of JMX checks with their status.                                         |
+| Forwarder   | Information on the Agent's forwarder including the status of your API key.      |
+| Endpoints   | Endpoints in use by the Agent.                                                  |
+| Logs Agent  | Information on the Logs Agent (if enabled).                                     |
+| Aggregator  | Information on the Agent's data aggregator.                                     |
+| DogStatsD   | Statistics on data sent with DogStatsD.                                         |
 
-#### コレクター
+#### Collector
 
-コレクターのステータスページには、Agent の実行中のチェックに関する詳細が表示されます。例:
+The collector status page displays details on the Agent's running checks, for example:
 
 ```text
 cpu
@@ -84,9 +84,9 @@ cpu
    Average Execution Time: 4ms
 ```
 
-### ログ
+### Log
 
-ログページには、`agent.log` に出力される Agent ログが表示されます。ログは、最新のものまたは古いものから順にソートできます。
+The log page displays the Agent logs being output to `agent.log`. Logs can be sorted by most recent or oldest first.
 
 ```text
 2019-07-10 17:46:04 EDT | INFO | (runner.go:246 in work) | Running check cpu
@@ -110,38 +110,38 @@ cpu
 2019-07-10 17:48:02 EDT | INFO | (transaction.go:114 in Process) | Successfully posted payload to "https://6-2-1-app.agent.datadoghq.com/api/v1/check_run?api_key=*************************12345"
 ```
 
-### 設定
+### Settings
 
-設定ページには、Agent のメイン構成ファイル `datadog.yaml` の内容が表示されます。このファイルは、Datadog Agent Manager から直接編集できます。変更を行った後、右上の **Save** をクリックし、[Agent を再起動](#restart-agent)します。
+The settings page displays the contents of the Agent's main configuration file `datadog.yaml`. You can edit this file directly from the Datadog Agent Manager. After making a change, click **Save** in the upper right then [restart the Agent](#restart-agent).
 
-使用可能なすべての構成オプションの詳細については、[サンプル config_template.yaml][2] を参照してください。
+See the [sample config_template.yaml][2] for all available configuration options.
 
-### チェック
+### Checks
 
-#### チェックの管理
+#### Manage checks
 
-チェックの管理ページには、有効なチェック構成ファイルの内容が表示されます。このファイルは、Datadog Agent Manager から直接編集できます。変更を行った後、右上の **Save** をクリックし、[Agent を再起動](#restart-agent)します。
+The manage checks page displays the contents of enabled check configuration files. You can edit these files directly from the Datadog Agent Manager. After making a change, click **Save** in the upper right then [restart the Agent](#restart-agent).
 
-チェックを追加するには、ドロップダウンメニューで **Add a Check** を選択します。これにより、インストール可能なチェックのリストが表示されます。構成の詳細については、特定のチェックの[インテグレーション][3]ページを参照してください。
+To add a check, select **Add a Check** in the dropdown menu. This displays a list of available checks to install. Reference the specific check's [integration][3] page for configuration details.
 
-#### チェック内容のサマリー
+#### Checks summary
 
-チェック内容のサマリーページには、実行中のチェックのリスト、各チェックのインスタンス数、チェックのステータスが表示されます。
+The checks summary page displays a list of the checks running, number of instances for each check, and the check's status.
 
-### フレア
+### Flare
 
-Agent に問題がある場合、フレアページは [Datadog サポート][4]チームとトラブルシューティングする際に役立ちます。チケット番号（任意）とメールアドレスを入力して、**Submit** をクリックします。これにより、Agent ログと構成ファイルのコピーが Datadog サポートに送信されます。フレアの詳細については、[Agent フレア][5]のドキュメントをご覧ください。
+If you are having issues with the Agent, the flare page assists you with troubleshooting with the [Datadog support][4] team. Enter your ticket number (optional) and email address then click **Submit**. This transmits a copy of your Agent logs and config files to Datadog support. More information on flares is available in the [Agent Flare][5] documentation.
 
-### Agent の再起動
+### Restart Agent
 
-左側のナビゲーションバーで **Restart Agent** をクリックすると、Agent が即座に再起動します。ページや確認プロンプトはありません。Agent を再起動すると、[一般ステータス](#general)ページに転送されます。
+Clicking **Restart Agent** from the left navigation bar restarts the Agent immediately. There is no page or confirmation prompt. After restarting the Agent, you are forwarded to the [general status](#general) page.
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/agent/basic_agent_usage/windows/#installation
+[1]: /agent/basic_agent_usage/windows/#installation
 [2]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
-[3]: /ja/integrations/
-[4]: /ja/help/
-[5]: /ja/agent/troubleshooting/send_a_flare/
+[3]: /integrations/
+[4]: /help/
+[5]: /agent/troubleshooting/send_a_flare/

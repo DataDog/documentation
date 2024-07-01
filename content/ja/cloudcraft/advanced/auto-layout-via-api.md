@@ -1,29 +1,29 @@
 ---
-title: Cloudcraft API によるクラウドアカウントのスナップショットの自動化
+title: Automate Snapshots of Cloud Accounts via the Cloudcraft API
 ---
 
-## 概要
+## Overview
 
-Web アプリケーションからアクセスできる Cloudcraft の **Auto Layout** 機能は、AWS 環境の図を自動生成する強力なツールです。この機能により、ドキュメント作成プロセスが大幅に効率化され、新しいチームメンバーのオンボーディングが容易になります。
+Cloudcraft's **Auto Layout** feature, accessible through the web application, is a powerful tool for automatically generating diagrams of your AWS environment. This functionality can significantly streamline documentation processes and facilitate the onboarding of new team members.
 
-このガイドでは、一般的なコマンドラインユーティリティと Cloudcraft 開発者 API を使用してこの機能を利用するための詳しいアプローチを説明します。
+This guide provides a step-by-step approach to utilizing this feature via common command-line utilities and the Cloudcraft developer API.
 
-<div class="alert alert-info">AWS アカウントと Azure アカウントの追加とスキャン、および Cloudcraft の開発者 API の使用は、Pro 契約者のみが利用できます。詳しくは <a href="https://www.cloudcraft.co/pricing">Cloudcraft の料金ページ</a>をご覧ください。</div>
+<div class="alert alert-info">The ability to add and scan AWS and Azure accounts, as well as to use Cloudcraft's developer API, is only available to Pro subscribers. Check out <a href="https://www.cloudcraft.co/pricing">Cloudcraft's pricing page</a> for more information.</div>
 
-## 前提条件
+## Prerequisites
 
-- 有効な [Cloudcraft Pro サブスクリプション][1]。
-- 読み書き権限を持つ API キー。
-- スキャンしたい AWS または Azure アカウントのアカウント ID。
-- Unix ライクな環境 (Linux、macOS、Windows Subsystem for Linux) へのアクセス。
-- コマンドライン操作に精通していること。
-- API 利用に関する基本的な知識。
+- An active [Cloudcraft Pro subscription][1].
+- An API key with read-write permissions.
+- The account ID of the AWS or Azure account you wish to scan.
+- Access to a Unix-like environment (Linux, macOS, or Windows Subsystem for Linux).
+- Familiarity with command-line operations.
+- Basic knowledge of API usage.
 
-## アカウントのスナップショットを取得する
+## Take a snapshot of the account
 
-まずは、[Snapshot AWS account][2] または [Snapshot Azure account][3] エンドポイントを使用して、AWS または Azure アカウントのスナップショットを作成します。このプロセスは、Cloudcraft UI の **Scan Now** ボタンの機能を反映し、スナップショットを JSON 形式で出力します。
+Start by creating a snapshot of your AWS or Azure account using the [Snapshot AWS account][2] or [Snapshot Azure account][3] endpoints. This process mirrors the functionality of the **Scan Now** button in the Cloudcraft UI and outputs the snapshot in JSON format.
 
-ターミナルで以下のコマンドを実行します。
+Execute the following command in your terminal:
 
 {{< code-block lang="shell" >}}
 curl \
@@ -34,9 +34,9 @@ curl \
   --header "Authorization: Bearer API_KEY"
 {{< /code-block >}}
 
-`PROVIDER` は例えば `azure` や `aws` などのクラウドプロバイダー、`ACCOUNT_ID` は Cloudcraft の AWS または Azure アカウントの ID、`REGION` は希望のスキャンリージョン、`API_KEY` は Cloudcraft API キーに置き換えます。
+Replace `PROVIDER` with the cloud provider, for example, `azure` or `aws`, `ACCOUNT_ID` with the ID of your AWS or Azure account in Cloudcraft, `REGION` with your desired scan region, and `API_KEY` with your Cloudcraft API key.
 
-コマンドを実行すると、AWS アカウントスナップショットの JSON 表現が表示されます。この出力を直接ファイルに保存するには、以下のコマンドを使用します。
+After executing the command, the JSON representation of your AWS account snapshot is displayed. To save this output directly to a file, use the following command:
 
 {{< code-block lang="shell" >}}
 curl \
@@ -47,13 +47,13 @@ curl \
   --header "Authorization: Bearer API_KEY" > '/tmp/account-infra.json'
 {{< /code-block >}}
 
-スナップショットは一時ディレクトリに `account-infra.json` というファイル名で保存されます。
+The snapshot is saved with the filename `account-infra.json` in your temporary directory.
 
-## 新しいブループリントを生成する
+## Generate a new blueprint
 
-次に、[Create blueprint][4] API エンドポイントを使用して、Cloudcraft アカウントで新しいブループリントを作成します。保存されたスナップショットデータは、このリクエストのペイロードとして機能します。
+Next, create a new blueprint in your Cloudcraft account using the [Create blueprint][4] API endpoint. The saved snapshot data serves as the payload for this request.
 
-ターミナルで以下のコマンドを実行します。
+Execute the following command in your terminal:
 
 {{< code-block lang="shell" >}}
 curl \
@@ -67,14 +67,14 @@ curl \
   --data '@/tmp/account-infra.json'
 {{< /code-block >}}
 
-`API_KEY` は実際の Cloudcraft API キーに置き換えてください。
+Remember to replace `API_KEY` with your actual Cloudcraft API key.
 
-完了すると、クラウドインフラストラクチャーを反映した新しいブループリントが Cloudcraft アカウントに作成され、手動で **Scan Now** ボタンと **Auto Layout** ボタンを使用した場合の効果が再現されます。
+Upon completion, a new blueprint reflecting your cloud infrastructure is created in your Cloudcraft account, replicating the effect of manually using the **Scan Now** and **Auto Layout** buttons.
 
-ご不明な点やトラブルがございましたら、[Cloudcraft のサポートチームまでご連絡ください][5]。
+If you have any questions or trouble with the process, [contact Cloudcraft's support team][5].
 
 [1]: https://www.cloudcraft.co/pricing
-[2]: /ja/cloudcraft/api/aws-accounts/#snapshot-aws-account
-[3]: /ja/cloudcraft/api/azure-accounts/#snapshot-an-azure-account
-[4]: /ja/cloudcraft/api/blueprints/#create-a-blueprint
+[2]: /cloudcraft/api/aws-accounts/#snapshot-aws-account
+[3]: /cloudcraft/api/azure-accounts/#snapshot-an-azure-account
+[4]: /cloudcraft/api/blueprints/#create-a-blueprint
 [5]: https://app.cloudcraft.co/app/support

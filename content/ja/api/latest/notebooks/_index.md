@@ -1,3 +1,3 @@
 ---
-title: ノートブック
+title: Notebooks
 ---

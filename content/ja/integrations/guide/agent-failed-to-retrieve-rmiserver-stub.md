@@ -1,15 +1,15 @@
 ---
-
-title: Agent が RMIServer スタブの取得に失敗します
+title: Agent failed to retrieve RMIServer stub
+kind: faq
 ---
 
 ```text
 instance #kafka-localhost-<PORT_NUM> [ERROR]: 'Cannot connect to instance localhost:<PORT_NUM>. java.io.IOException: Failed to retrieve RMIServer stub
 ```
 
-Datadog Agent が、RMI プロトコルで公開された mBeans からメトリクスを取得するために、Kafka インスタンスに接続することができません。
+The Datadog Agent is unable to connect to the Kafka instance to retrieve metrics from the exposed mBeans over the RMI protocol.
 
-この問題を解決するには、Kafka インスタンスを起動する際に、次の JVM 引数を含めます *(Producer、Consumer、Broker はすべて個別の Java インスタンスであるため、必須)*
+Include the following JVM arguments when starting the Kafka instance to solve resolve this issue *(required for Producer, Consumer, and Broker as they are all separate Java instances)*
 
 ```text
 -Dcom.sun.management.jmxremote.port=<PORT_NUM> -Dcom.sun.management.jmxremote.rmi.port=<PORT_NUM>

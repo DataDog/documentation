@@ -1,6 +1,6 @@
 ---
+title: trace
 core_product:
-- apm
-title: トレース
+  - apm
 ---
-トレースは、リクエストの処理に費やされた時間と、このリクエストのステータスを追跡します。各トレースは 1 つまたは複数のスパンから構成されます。
+A trace tracks the time spent processing a request, and the status of this request. Each trace consists of one or more spans.

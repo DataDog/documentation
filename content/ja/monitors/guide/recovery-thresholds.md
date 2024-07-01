@@ -1,44 +1,43 @@
 ---
-aliases:
-- /ja/monitors/faq/what-are-recovery-thresholds
+title: Recovery thresholds
 further_reading:
 - link: /monitors/types/metric/
-  tag: ドキュメント
-  text: メトリクスモニター
-kind: ガイド
-title: 回復しきい値
+  tag: Documentation
+  text: Metric monitor
+aliases:
+- /monitors/faq/what-are-recovery-thresholds
 ---
 
-## 定義
+## Definition
 
-回復しきい値は、アラートまたは警告状態からモニターが回復するための追加条件を示すために、モニターに追加されるオプションのしきい値です。
+Recovery thresholds are optional thresholds added to a monitor to indicate an additional condition to a monitor's recovery from alert or warning states.
 
-## 動作
+## Behavior
 
-回復しきい値は、モニターの回復に条件を追加し、回復しきい値を**超えた**場合にのみ回復状態に移行するようにします。回復しきい値が設定されていない場合、モニターはアラート条件が満たされなくなると回復します。
+The recovery threshold adds a condition to the monitor's recovery such that it only enters recovered state once it has **passed** the recovery threshold. If no recovery threshold is set, the monitor recovers whenever the alert conditions are no longer met.
 
-回復条件が満たされることで、回復しきい値が満たされます。回復条件は、アラート条件により異なります。
+The recovery threshold is satisfied with the recovery condition is met. The recovery condition varies based on the alert condition:
 
-| アラート条件    | 回復条件          |
+| Alert condition    | Recovery condition          |
 |--------------------|-----------------------------|
-| > アラートしきい値  | <= アラート回復しきい値 |
-| >= アラートしきい値 | < アラート回復しきい値  |
-| < アラートしきい値  | >= アラート回復しきい値 |
-| <= アラートしきい値 | > アラート回復しきい値  |
+| > alert threshold  | <= alert recovery threshold |
+| >= alert threshold | < alert recovery threshold  |
+| < alert threshold  | >= alert recovery threshold |
+| <= alert threshold | > alert recovery threshold  |
 
-## 使用例
+## Use case
 
-回復しきい値は、不規則なモニター動作のノイズを低減します。これにより、回復時にアラートのメトリクスが回復し、問題が解決されたという確信を得ることができます。
+Recovery thresholds reduce noise of a flapping monitor. This can increase confidence that upon recovery, the alerting metric has recovered and the issue is resolved.
 
-## 回復しきい値を設定する方法は？
+## How to set up recovery thresholds?
 
-### Web サイト UI
+### Website UI
 
-モニター作成時に、**Set alert conditions** > **Advanced Options** で、アラートまたは警告回復しきい値を設定します。
+Set the alert or warning recovery threshold when creating a monitor under **Set alert conditions** > **Advanced Options**.
 
 ### API
 
-[API でモニターを作成/編集][1]する場合、JSON モニターの `options.thresholds` 属性で `critical_recovery` と `warning_recovery` の属性を使用します。
+When you [create/edit a monitor via the API][1], use the attributes `critical_recovery` and `warning_recovery` in the `options.thresholds` attribute of your JSON monitor:
 
 ```text
 "thresholds": {
@@ -49,8 +48,8 @@ title: 回復しきい値
               }
 ```
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/api/v1/monitors/
+[1]: /api/v1/monitors/

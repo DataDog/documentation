@@ -1,58 +1,59 @@
 ---
-aliases:
-- /ja/integrations/azure_streamanalytics
-categories:
+"aliases":
+- /integrations/azure_streamanalytics
+"categories":
 - cloud
 - azure
-dependencies: []
-description: Azure Stream Analytics のキーメトリクスを追跡
-doc_link: https://docs.datadoghq.com/integrations/azure_stream_analytics/
-draft: false
-git_integration_title: azure_stream_analytics
-has_logo: true
-integration_id: azure-streamanalytics
-integration_title: Microsoft Azure Stream Analytics
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: '1.0'
-name: azure_stream_analytics
-public_title: Datadog-Microsoft Azure Stream Analytics インテグレーション
-short_description: Azure Stream Analytics のキーメトリクスを追跡
-version: '1.0'
+"custom_kind": "integration"
+"dependencies": []
+"description": "Track key Azure Stream Analytics metrics."
+"doc_link": "https://docs.datadoghq.com/integrations/azure_stream_analytics/"
+"draft": false
+"git_integration_title": "azure_stream_analytics"
+"has_logo": true
+"integration_id": "azure-streamanalytics"
+"integration_title": "Microsoft Azure Stream Analytics"
+"integration_version": ""
+"is_public": true
+"manifest_version": "1.0"
+"name": "azure_stream_analytics"
+"public_title": "Datadog-Microsoft Azure Stream Analytics Integration"
+"short_description": "Track key Azure Stream Analytics metrics."
+"version": "1.0"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-## 概要
+## Overview
 
-Azure Stream Analytics は、デバイスからの大量のデータストリーミングを調べることができるイベント処理エンジンです。
+Azure Stream Analytics is an event-processing engine that allows you to examine high volumes of data streaming from devices.
 
-Datadog Azure インテグレーションを使用して、Azure Stream Analytics からメトリクスを収集できます。
+Use the Datadog Azure integration to collect metrics from Azure Stream Analytics.
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-[Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
+If you haven't already, set up the [Microsoft Azure integration][1] first. There are no other installation steps.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "azure_stream_analytics" >}}
 
 
-### ヘルプ
+### Events
 
-Azure Stream Analytics インテグレーションには、イベントは含まれません。
+The Azure Stream Analytics integration does not include any events.
 
-### ヘルプ
+### Service Checks
 
-Azure Stream Analytics インテグレーションには、サービスのチェック機能は含まれません。
+The Azure Stream Analytics integration does not include any service checks.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
+Need help? Contact [Datadog support][3].
 
-[1]: https://docs.datadoghq.com/ja/integrations/azure/
+[1]: https://docs.datadoghq.com/integrations/azure/
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_stream_analytics/azure_stream_analytics_metadata.csv
-[3]: https://docs.datadoghq.com/ja/help/
+[3]: https://docs.datadoghq.com/help/
+

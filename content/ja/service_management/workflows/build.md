@@ -1,196 +1,241 @@
 ---
-aliases:
-- /ja/workflows/build
+title: Build workflows
+kind: documentation
 disable_toc: false
+aliases:
+- /workflows/build
+algolia:
+  tags: [workflow, workflows, workflow automation]
 further_reading:
+- link: /getting_started/workflow_automation/
+  tag: Documentation
+  text: Getting Started with Workflow Automation
 - link: /service_management/workflows/actions_catalog
   tag: Documentation
-  text: アクションカタログで利用可能なアクションを参照する
-title: ワークフローの構築
+  text: Browse the available actions in the Actions Catalog
+- link: /security/cloud_security_management/workflows
+  tag: Documentation
+  text: Automate Security Workflows with Workflow Automation
 ---
 
-Datadog の [**Workflow Automation** ページ][1]からワークフローを作成したり、既存のワークフローを編集したりすることができます。Workflow Automation ページには、既存のワークフロー、各ワークフローの作成者、各ワークフローの最終修正日および実行日が一覧表示されます。
-- ワークフローにカーソルを合わせると、ワークフローの削除や複製を行うことができます。
-- 自分が作成したワークフローだけを表示したい場合は、**My workflows** をトグルします。
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Workflow Automation is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
 
-## ブループリントからワークフローを構築
+You can create workflows or edit existing workflows from the [Workflow Automation][1] page. The page lists information about existing workflows, such as the workflow's owner, the trigger type, the dates that each workflow was last modified and executed, and whether the workflow is published or not.
+- Hover over a workflow for the options to delete, clone, or edit the permissions for the workflow.
+- Toggle **My workflows** if you want to see only workflows that you created.
 
-1. **Blueprints** タブをクリックします。
-1. 必要に応じて、検索バーを使用して、名前、カテゴリー、インテグレーションでブループリントのリストを絞り込むことができます。
-1. 使用したいブループリントを探し、クリックします。ワークフローキャンバスが表示されます。
-1. 鉛筆アイコン (**Edit**) をクリックして、ワークフロー名を更新します。必要であれば、テキストボックスに新しい名前を入力し、**Save** をクリックします。
-1. 更新が必要なワークフローステップには、感嘆符のアイコンが表示されます。
-1. 変更したいワークフローの各ステップをクリックし、**Configure** タブの空欄に必要事項を入力します。
-1. ワークフローの修正が完了したら、**Create From Blueprint** をクリックします。ワークフローキャンバスが更新され、新しく作成されたワークフローが表示されます。
+## Build a workflow from a blueprint
 
-## カスタムワークフローの作成
+1. Click the [**Blueprints**][5] tab.
+1. If desired, use the search bar to narrow the list of blueprints by name, category, or integration.
+1. Find the blueprint you'd like to use, and click on it. The workflow canvas appears.
+1. Click **Create From Blueprint**. The workflow canvas updates to show your newly created workflow.
+1. Enter a new name and description for the workflow.
+1. Optionally, select or enter tags you'd like to apply to the workflow. For more information on Datadog tags, see [Getting Started with Tags][7].
+1. Optionally, select any related [services][8] to apply to the workflow.
+1. Optionally, select [teams][9] to associate with the workflow. If a team doesn't exist, you can enter a name to create it.
+1. Click **Save** to apply your changes.
+1. Workflow steps that require updates are marked with exclamation marks. Click on each workflow step you'd like to modify and fill in any empty fields on the **Configure** tab.
+1. When you are finished modifying the workflow, Click **Run** to test your workflow.
+1. When you're ready to publish your workflow, click **Publish**. Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][4].
 
-ワークフローを作成するには
-1. **New workflow** をクリックします。
-1. ワークフローの名前を入力し、**Create** をクリックします。
-1. **Add a step to get started** をクリックし、ワークフローにステップを追加します。また、JSON エディターを使用してワークフローを構築する場合は、**Edit JSON Spec** をクリックします。
+## Create a workflow with AI
 
-### ワークフロービルダーでワークフローを構築する
+{{< callout url="https://docs.google.com/forms/d/14Heybl3cLHuyxl1XpsGrEoWvc1TPA2DVLeS7S0wgIRI" btn_hidden="false" header="Join the beta!">}}
+AI functionality for Workflow Automation is in private beta.
+{{< /callout >}}
 
-1. **Add a step to get started** をクリックして、ワークフローに最初のステップを追加します。
-1. 検索バーを使ってアクションを検索するか、インテグレーションとその関連アクションをブラウズして、探しているアクションを見つけます。アクションをクリックすると、ワークフローキャンバスのステップに追加されます。
-{{< img src="service_management/workflows/workflow-builder2.mp4" alt="ワークフローキャンバスにステップをドラッグする" video="true" >}}
-1. ワークフローキャンバスでステップをクリックすると、そのステップを構成したり、出力やコンテキスト変数を表示したりすることができます。出力やコンテキスト変数の詳細については、[コンテキスト変数](#context-variables)を参照してください。
-1. ステップの構成が完了したら、プラス (`+`) アイコンをクリックして別のステップを追加するか、ワークフローを保存してください。
+If you're not sure where to start, you can automatically generate a workflow with AI. To generate a workflow:
 
-ワークフロー上のステップをクリックすることで、いつでも編集することができます。ワークフロー上のステップをクリックしてドラッグすると、ステップを並べ替えることができます。
+1. From the [Workflow Automation][1] page, click **New Workflow**.
+1. Click **Auto Generate**.
+1. Enter a detailed description for your workflow. Specify the integrations and actions you'd like to use.
+1. Click the up arrow (**↑**) to create your app.
 
-### JSON でワークフローを構築する
+## Create a custom workflow
 
-ワークフローのページで **Edit JSON Spec** をクリックすると、JSON でワークフローを構築または編集することができます。また、JSON エディターでは、以下のことが可能です。
-- **Format JSON**: JSON を美しくします。
-- **Export JSON**: ワークフローをダウンロードします。
+To create a workflow, click **New workflow** on the [Workflow Automation][1] page.
 
-典型的なワークフローは、3 つのトップレベルのキーを含んでいます。
-- `"steps"`: 「step」オブジェクトの配列。各ステップはワークフローのステップを定義し、名前、アクション ID、ステップパラメーターを含みます。また、`steps` オブジェクトには、アウトバウンド接続データのキーが含まれます。
-- `"startStepName"`: ワークフローの最初のステップの名前。
-- `"connectionEnvs"`: 接続データと環境変数。
+To configure your workflow:
+1. In the workflow configuration panel, enter a **Name** for your workflow.
+1. Optionally, select or enter tags you'd like to apply to the workflow. For more information on Datadog tags, see [Getting Started with Tags][7].
+1. Optionally, select any related [services][8] to apply to the workflow.
+1. Optionally, select [teams][9] to associate with the workflow. If a team doesn't exist, you can enter a name to create it.
+1. Enter input or output parameters if your workflow uses them.
+1. Click **Save** to apply your changes.
 
-ワークフローの例として、`#workflows-test` という名前の Slack チャンネルにメッセージを送信するステップを 1 つだけ持つワークフローを紹介します。
+If you're not sure about your workflow configuration, you can return to the panel later by clicking anywhere on the workflow canvas.
 
-{{< code-block lang="json" collapsible="true" filename="Example workflow" >}}
-{
-    "steps": [
-        {
-            "outboundConnections": [],
-            "name": "Send_message",
-            "actionId": "com.datadoghq.slack.send_simple_message",
-            "parameters": [
-                {
-                    "name": "teamId",
-                    "value": "ABC1234"
-                },
-                {
-                    "name": "channel",
-                    "value": "#workflows-test"
-                },
-                {
-                    "name": "mentionTargets",
-                    "value": [
-                        "@Bits"
-                    ]
-                },
-                {
-                    "name": "text",
-                    "value": "Hello world!"
-                }
-            ]
-        }
-    ],
-    "startStepName": "Send_message",
-    "connectionEnvs": [
-        {
-            "env": "default",
-            "connections": []
-        }
-    ]
-}
-{{< /code-block >}}
+### Build a workflow with the workflow builder
 
-## コンテキスト変数
+1. If your workflow requires a trigger, click **Add Trigger**. For more information, see [Trigger a Workflow][3].
+1. Click **Add Step** to start adding steps to your workflow.
+1. Search for an action using the search bar or browse through the integrations and their related actions to find the action you're looking for. Click an action to add it as a step on your workflow canvas.
+1. Click on the step in the workflow canvas to configure it or view its outputs or context variables. For more information on outputs and context variables, see [Context variables](#context-variables).
+1. After you've configured the step, click the plus (`+`) icon to add another step, or save the workflow if you're done.
+1. When you're ready to publish your workflow, click **Publish**. Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][4].
 
-有用なワークフローを作成するためには、あるステップから別のステップにデータを渡したり、ワークフローのトリガーソースからのデータで動作するステップを構成することが必要になることがあります。このようなデータ補間は、コンテキスト変数で行うことができます。
+You can edit a step in the workflow at any time by clicking on it. Click and drag steps on your workflow to rearrange them.
 
-コンテキスト変数には、以下の種類があります。
-- 標準的な**ワークフロー変数**の小さなコレクションは、すべてのワークフローに存在します。
-- 一部のステップには**ステップ出力変数**が組み込まれており、そのステップからワークフロー内の後続のステップにデータを渡すことができるようになっています。
-- **トリガー変数**は、トリガーとなるイベントによってワークフローに渡されます。
-- **ソースオブジェクト変数**は、トリガーとなるイベントによってワークフローに渡されます。
+## Test a step
 
-各ステップの **Context Variables** タブには、そのステップで利用可能なすべてのコンテキスト変数のマップが表示されます。
+To ensure a step functions as desired without having to run the entire workflow, you can test the step independently.
 
-{{< img src="service_management/workflows/context-variables4.png" alt="Context Variables タブ" >}}
+To test a workflow step:
+1. Click **Test** in the step **Inputs** section.
+1. Optionally, adjust the step configuration. If your step uses output variables from a previous step, enter some hardcoded test data for the step to use.
+1. Click **Test** to test the action.
+1. When you're finished testing the step, click **Use in configuration** to use your new configuration in the workflow, or close the screen to return to the workflow without saving your test configuration.
 
-二重中括弧 (`{{`) で囲んで、ステップ内のコンテキスト変数にアクセスします。コンテキスト変数内のフィールドにアクセスするには、[ハンドルバー式構文][2]を使います。
+Testing is not available for branching and logic actions. To test a JavaScript function or expression action that uses output variables from a previous step, comment out the variables in your code and replace them with test data. For more information, see [Testing expressions and functions][6].
 
-### ワークフロー変数
+## Publish a workflow
 
-すべてのワークフローには、3 つの標準変数があります。
-- `WorkflowName`: ワークフローの名前。`{{ WorkflowName }}` でアクセスします。
-- `WorkflowId`: ワークフロー ID。`{{ WorkflowId }}` でアクセスします。
-- `InstanceId`: 各ワークフローは一意のインスタンス ID を受け取ります。インスタンス ID には `{{ InstanceId }}` でアクセスします。
+Scheduled and triggered workflows don't trigger automatically until you've published them. To publish the workflow, click **Publish** from the workflow's page.
 
-### ステップ出力変数
+Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][4].
 
-ステップによっては、ワークフロー内の後続のステップで利用可能な出力を作成するものもあります。構文 `Steps.<step_name>.<variable>` を使ってステップ変数にアクセスします。例えば、GitHub のプルリクエストステータスステップ (`Get_pull_request_status`) からプルリクエストステータス変数 (`state`) を取得するには、次のコンテキスト変数を使用します。
+## Context variables
+
+Creating useful workflows sometimes necessitates passing data from one step to another, or configuring steps that act on data from the workflow's trigger source. You can perform this kind of data interpolation with context variables.
+
+- **Workflow variables** give you information about the current workflow:
+    - `WorkflowName`: The name of the workflow.
+    - `WorkflowId`: The ID of the workflow.
+    - `InstanceId`: The ID of the execution instance of the workflow.
+- Some steps come with built-in **step output variables** that allow you to pass data from that step to a subsequent step in your workflow.
+- **Trigger variables** are passed into the workflow by the triggering event.
+- **Source object variables** are passed into the workflow by the triggering event.
+
+The **Context Variables** tab for each step provides a map of all context variables available to that step.
+
+{{< img src="service_management/workflows/context-variables4.png" alt="The Context Variables tab" >}}
+
+Access a context variable in a step by enclosing it in double braces (`{{`). To access fields within context variables, use [Handlebars expression syntax][2].
+
+### Step output variables
+
+Some steps create outputs that are available to subsequent steps in a workflow. Access a step variable with the syntax: `Steps.<step_name>.<variable>`. For example, to retrieve the pull request status variable (`state`) from the GitHub pull request status step (`Get_pull_request_status`), you'd use the following context variable:
 
 ```
 {{ Steps.Get_pull_request_status.state }}
 ```
 
-探している変数がわからない場合、Datadog は入力中に既存のステップを提案します。また、[Context Variables](#context-variables) タブで利用可能な変数のリストを参照することもできます。
+If you're not sure what variable you're looking for, Datadog suggests existing step outputs as you type. Alternatively, you can consult the [Context Variables](#context-variables) tab for a list of available variables.
 
-### 入力パラメーター
+{{< img src="service_management/workflows/step-outputs1.png" alt="Datadog suggests existing step outputs as you type." style="width:100%;" >}}
 
-入力パラメーターを使用して、ワークフローにデータを渡します。入力パラメーターは、以下のようなワークフローで使用することができます。
-- ダッシュボードなどから手動でトリガーされる。
-- モニターやセキュリティシグナル通知ルールなどのメンショントリガーを使用する。
+### Input parameters
 
-入力パラメーターを追加するには
-1. ワークフローキャンバスをクリックします。
-1. **Input Parameters** の横にある **+** アイコンをクリックします。
-1. パラメーターのパラメーター名、データタイプ、説明を追加します。表示名はパラメーター名から自動的に生成されます。カスタマイズする場合は、**Use custom display name** ボックスをチェックします。表示名はパラメーターの読みやすい名前であり、パラメーター名はワークフローのステップでパラメーターを参照するために使用されます。
-1. オプションで、パラメーターのデフォルト値を追加します。デフォルト値を追加した場合、パラメーターは実行時にオプションとなります。
+Use input parameters to pass data into a workflow. You can use input parameters in workflows that:
+- are triggered manually, such as from a Dashboard.
+- use mention triggers, such as Monitors and Security Signal Notification Rules.
 
-ステップ内の入力パラメーターを参照するには、`{{ Trigger.<parameter name>}}` という構文を使用します。例えば、`user` という名前の入力パラメーターを参照するには、`{{Trigger.user}}` を使用します。
+To add an input parameter:
+1. Click on the workflow canvas.
+1. Click the **+** icon next to **Input Parameters**.
+1. Add a parameter name, data type, and description for the parameter. The display name is generated automatically from the parameter name. Check the **Use custom display name** box to customize it. The display name is a human readable name for the parameter, while the parameter name is used to reference the parameter in your workflow steps.
+1. Optionally, add a default value for the parameter. If you add a default value, the parameter is optional at runtime.
 
-{{< img src="service_management/workflows/input-parameter2.png" alt="入力パラメーターをステップに追加すると、自動的にワークフローに追加される" style="width:100%;">}}
+To reference the input parameter in a step, use the syntax `{{ Trigger.<parameter name>}}`. For example, to reference an input parameter named `user`, use `{{Trigger.user}}`.
 
-**Input Parameters** セクションには、既存のすべての入力パラメーターの名前とカウンターが表示されます。カウンターにカーソルを合わせると、そのパラメーターを使用しているステップを確認できます。
+{{< img src="service_management/workflows/input-parameter2.png" alt="Adding an input parameter to a step automatically adds it to the workflow" style="width:100%;">}}
 
-暗黙の入力パラメーター (ワークフロー内に存在しないパラメーター) を追加するには、ワークフローのステップに `{{ Trigger.<parameter name> }}` 構文を使用して入力します。次にワークフローを保存すると、パラメーターを明示的パラメーターに変換するためのダイアログが表示されます。ワークフローのトリガーについて詳しくは、[ワークフローのトリガー][3]を参照してください。
+The **Input Parameters** section displays the names of all existing input parameters together with a counter. Hover over a counter to see which steps are using the parameter.
 
-既存の入力パラメーターを探している場合は、`{{ Trigger.` と入力して、候補として表示されるかどうかを確認します。また、[Context Variables](#context-variables) タブで利用可能なパラメーターの一覧を確認することもできます。
+You can add an implicit input parameter (a parameter that doesn't already exist in the workflow) by typing it into a workflow step using the `{{ Trigger.<parameter name> }}` syntax. The next time you save the workflow, a dialog appears allowing you to convert the parameter to an explicit parameter. For more information on triggering workflows, see [Trigger a workflow][3].
 
-### ソースオブジェクト変数
+If you're looking for an existing input parameter, start typing `{{ Trigger.` to see if it appears as a suggestion. Alternatively, consult the [Context Variables](#context-variables) tab for a list of available parameters.
 
-ソースオブジェクト変数は、トリガーイベントのプロパティで、実行時に解決されます。ワークフローで利用可能な変数は、ワークフローインスタンスを開始したトリガーのタイプに依存します。例えば、ワークフローインスタンスがモニターによってトリガーされた場合、モニター ID 変数は `{{Source.monitor.id}}` を使って利用することができます。もし、ワークフローがセキュリティシグナル検出または通知ルールによってトリガーされた場合、シグナル ID は `{{Source.securitySignal.id}}` を使用して利用可能です。
+### Source object variables
 
-ソースオブジェクトのすべての変数が Context Variables タブに表示されます。
+Source object variables are properties of the triggering event that are resolved at execution. The variables available in the workflow depend on the type of trigger that initiated the workflow instance. For example, if the workflow instance is triggered by a monitor, the monitor ID variable is available using `{{Source.monitor.id}}`. If the workflow is triggered by a security signal detection or notification rule, the signal ID is available using `{{Source.securitySignal.id}}`.
 
-{{< img src="service_management/workflows/context-variables-tab-source-object-variables.png" alt="Context Variables タブのソースオブジェクト変数" >}}
+All the variables of the Source object are visible in the Context Variables tab.
 
-## エラー処理とフォールバック
+{{< img src="service_management/workflows/context-variables-tab-source-object-variables.png" alt="The Source object variables in the Context Variables tab" >}}
 
-ステップに失敗した場合、ワークフローがステップを再試行する回数と間隔を指定して、オプションのフォールバックステップに移行することができます。フォールバックステップを指定しない場合、ワークフローはすべての再試行が終了した後、終了します。
+## Workflow notifications
 
-ステップのエラー処理を構成するには
-1. ワークフローキャンバスのステップをクリックします。
-1. **Error Handling & Retries** セクションの横にある **+** アイコンをクリックします。
-1. **Interval** と **Max retries** の値を調整します。
-1. オプションで、[フォールバックステップを追加](#add-a-fallback)します。
-1. ワークフローを保存して、変更を適用します。 
+You can configure your workflow to send you a notification on success or failure. The following integrations are supported:
+- Slack
+- Microsoft Teams
+- PagerDuty
+- Email
 
-{{< img src="service_management/workflows/error-handling1.png" alt="エラー処理と再試行のセクション" style="width:100%;" >}}
+To add a notification:
+1. In the workflow configuration panel, scroll down to the **Notifications** section.
+1. To add a notification if the workflow succeeds:
+   1. Click the plus (`+`) icon next to **Notify on success**.
+   1. Select the integration that you want to use for notifications.
+   1. Complete the required fields for the specified integration.
+   1. Click **Save** to save your workflow.
+1. To add a notification if the workflow fails:
+   1. Click the plus (`+`) icon next to **Notify on failure**.
+   1. Select the integration that you want to use for notifications.
+   1. Complete the required fields for the specified integration.
+   1. Click **Save** to save your workflow.
 
-### フォールバックを追加する
+## Error handling
 
-ステップの失敗を処理するために、**Fallback** ドロップダウンメニューから選択することで、ダウンストリームのワークフローのステップをフォールバックとして追加することができます。
+You can specify the number of times you want your workflow to retry a failed step, and at what interval, before moving on to an optional error path. If no error path is present, the workflow terminates after all retries are exhausted.
 
-また、メインのワークフローツリーから分岐するフォールバックステップを作成することも可能です。
-1. **Fallback** ドロップダウンメニューから、**Add a new fallback** を選択します。ワークフローキャンバスがフォールバックツリーに置き換わります。
-1. フォールバックツリー上の **+** アイコンをクリックして、ステップを追加します。
-1. [ワークフロービルダーを使ってステップを追加](#build-a-workflow-with-the-workflow-builder)します。フォールバックツリーには、必要な数のステップを追加することができます。
-1. フォールバックステップの構成が完了したら、**Save** をクリックして変更を適用します。
+### Retries
 
-メインのワークフローキャンバスに戻るには、フォールバックツリーの上にある **Main** をクリックします。ワークフローキャンバスから、フォールバックがあるステップの横にフォールバックアイコンが表示されます。アイコンをクリックし、フォールバックステップを選択すると、フォールバックツリーが表示されます。または、ステップの **Error Handling & Retries** セクションの **Edit Fallback Tree** をクリックして、フォールバックツリーにアクセスすることもできます。**Edit Fallback Tree** ボタンは、フォールバックステップがメインワークフローの既存のダウンストリームステップでない場合にのみ表示されます。
+To configure retries for a step:
+1. Click on the step in the workflow canvas.
+1. In the **Retries** section, adjust the **Interval** and **Max retries** values.
+1. Save your workflow to apply the changes.
 
-{{< img src="service_management/workflows/fallback-icon2.png" alt="フォールバックのあるステップ" style="width:60%;" >}}
+### Add an error path
 
-### フォールバックを削除する
+You can add an error path for the workflow to follow if it encounters an error.
 
-1. メインワークフローキャンバスから、削除したいフォールバックを持つステップをクリックします。
-1. **Error Handling &amp; Retries** セクションで、**Clear** をクリックします。
+To add an error path:
+1. Hover over the step where you'd like to add an error path.
+1. Click and drag the **Error path** icon to place a new error path on the canvas.
+1. Select a workflow step to add to the error path.
+1. After configuring your step, you can add more steps to an error path and even merge your error path back into the main workflow path.
+1. When you're done configuring your error path steps, click **Save** to apply your changes.
 
-## その他の参考資料
+{{< img src="service_management/workflows/error-path1.mp4" alt="Add an error path to your workflow" video=true >}}
+
+## Wait until condition
+
+Some actions allow you to add a condition that must be met before a workflow can mark a step as complete and continue.
+
+To add a condition:
+1. Click on the step in the workflow canvas.
+1. In the **Wait until condition** section, use the dropdown to select a preconfigured condition, or select **Configure custom wait condition** and build your own conditional.
+   - The list of available preconfigured conditions depends on the action.
+   - Conditional statement variables can be either a String, a Number, a Boolean, or a step output variable.
+   - Only the current step's output variables can be used in a custom conditional statement.
+1. Enter a maximum wait time for the workflow. If the condition is not met in time, the step fails.
+
+{{< img src="service_management/workflows/wait-until-condition.png" alt="An example of wait until condition" style="width:100%;" >}}
+
+## Edit a workflow with JSON
+
+Edit a workflow in JSON by clicking **Edit JSON Spec** on your workflow page. The JSON editor also allows you to:
+- **Format JSON**: Beautify your JSON.
+- **Export JSON**: Download the workflow.
+
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+<br>Do you have questions or feedback? Join the **#workflows** channel on the [Datadog Community Slack][10].
+
 [1]: https://app.datadoghq.com/workflow
 [2]: https://handlebarsjs.com/guide/expressions.html#expressions
-[3]: /ja/service_management/workflows/trigger
+[3]: /service_management/workflows/trigger
+[4]: https://www.datadoghq.com/pricing/?product=workflow-automation#products
+[5]: https://app.datadoghq.com/workflow/blueprints
+[6]: /service_management/workflows/actions_catalog/generic_actions/#testing-expressions-and-functions
+[7]: /getting_started/tagging/
+[8]: /glossary/#service
+[9]: /account_management/teams/
+[10]: https://datadoghq.slack.com/
+

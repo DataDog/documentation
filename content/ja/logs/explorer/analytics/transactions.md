@@ -1,59 +1,60 @@
 ---
-description: クエリされたログをトランザクションにグループ化します。
+title: Grouping Logs Into Transactions
+kind: documentation
+description: 'Group queried logs into transactions.'
 further_reading:
 - link: logs/explorer/
   tag: Documentation
-  text: ログエクスプローラーについて
+  text: Learn about the Log Explorer
 - link: logs/explorer/analytics
   tag: Documentation
-  text: ログの分析方法
-title: ログをトランザクションにグループ化する
+  text: Learn how to analyze your logs
 ---
 
-## 概要
+## Overview
 
-トランザクションは、ユーザーセッションや複数のマイクロサービス間で処理されるリクエストなど、一連のイベントのインスタンスに従ってインデックス化されたログを集計します。
+Transactions aggregate indexed logs according to instances of a sequence of events, such as a user session or a request processed across multiple microservices.
 
-トランザクションの集計は、クエリに一致するログだけでなく、関連するトランザクションに属するすべてのログも含まれるという意味で、自然なグループの集計とは異なります。
+The transaction aggregation differs from the natural group aggregation, in the sense that resulting aggregates not only include logs matching the query, but also all logs belonging to the related transactions.
 
-トランザクションに関する以下の情報を利用して、検索クエリーをカスタマイズすることができます。
+You can use the following information about transactions to customize your search query:
 
-期間
-: トランザクションの最後のログと最初のログのタイムスタンプの差。_このメジャーは自動的に追加されます_。
+Duration
+: The difference of timestamps for the last and first log in the transaction. _This measure is automatically added_.
 
-最大重大度
-: トランザクションのログで見つかります。_このメジャーは自動的に追加されます_。
+Maximum Severity
+: Found in logs in the transaction. _This measure is automatically added_.
 
-重要な項目の検索
-: 文字列値を持つ任意の `facet` について、`count unique`、`latest`、`earliest`、`most frequent` の操作を使用して、特定のログ情報を計算します。
+Find Key Items
+: For any `facet` with string values, calculate specific log information using the `count unique`, `latest`, `earliest`, and `most frequent` operations.
 
-統計の取得
-: 任意の `measure` について、`min`、`max`、`avg`、`sum`、`median`、`pc75`、`pc90`、`pc95`、`pc99` の操作を使用して統計情報を計算します。
+Get Statistics
+: For any `measure`, calculate statistical information using the `min`, `max`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, and `pc99` operations.
 
-開始条件と終了条件の設定
-: トランザクションの開始と終了を個別のクエリで指定し、トランザクションの境界をカスタマイズできます。
+Set Start And End Conditions
+: Customize transaction boundaries by specifying the start and end of the transaction using distinct queries.
 
-例えば、e コマースサイトでは、カタログ検索、カートに入れる、チェックアウトなどの様々なユーザーアクションのログをグループ化し、`requestId` や `orderId` などの共通の属性を使用して **Transactions** ビューを構築します。
+For example, an e-commerce website groups logs across various user actions, such as catalog search, add to cart, and checkout, to build a **Transactions** view using a common attribute such as `requestId` or `orderId`.
 
-{{< img src="logs/explorer/aggregations_transactions.jpg" alt="ログをトランザクション別に分類して表示するログエクスプローラー" style="width:100%;" >}}
+{{< img src="logs/explorer/aggregations_transactions.jpg" alt="The logs explorer showing logs grouped by transactions" style="width:100%;" >}}
 
-トランザクションは、[リスト集計][1]の視覚化をサポートします。リスト内のトランザクションをクリックすると、トランザクションのサイドパネルが開き、次のことができます。
+Transactions support the [List Aggregates][1] visualization. Clicking a transaction in the list opens the transaction side panel from which you can:
 
-- そのトランザクション内のすべてのログにアクセスする
-- そのトランザクション内の特定のログを検索する
+- Access all logs within that transaction
+- Search specific logs within that transaction
 
-{{< img src="logs/explorer/transactions_side_panel.png" alt="選択したトランザクション内のログを表示するトランザクションログパネル" style="width:80%;" >}}
+{{< img src="logs/explorer/transactions_side_panel.png" alt="The transaction log panel showing logs within the selected transaction" style="width:80%;" >}}
 
-開始条件または終了条件を使用してトランザクションを定義する場合、リスト内のトランザクショングループをクリックすると、トランザクショングループのサイドパネルが表示され、以下の操作が可能です。
+When a start or end condition is used to define a transaction, click on a transaction group in the list to open the transaction group side panel, from which you can:
 
-- そのトランザクショングループ内のトランザクションに順番にアクセスする
-- 各トランザクション内のすべてのログにアクセスする
-- 各トランザクションの統計情報とトランザクショングループ全体の統計情報のサマリーを表示する
+- Access the transactions within that transaction group in sequence
+- Access all logs within each transaction
+- View statistics for each transaction and summary statistics for the entire transaction group
 
-{{< img src="logs/explorer/transaction_group_side_panel.png" alt="選択されたグループ内のトランザクションを順番に表示するトランザクショングループパネル" style="width:80%;" >}}
+{{< img src="logs/explorer/transaction_group_side_panel.png" alt="The transaction group panel showing transactions within the selected group in sequence" style="width:80%;" >}}
 
-## その他の参考資料
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/logs/explorer/visualize/#list-aggregates-of-logs
+[1]: /logs/explorer/visualize/#list-aggregates-of-logs

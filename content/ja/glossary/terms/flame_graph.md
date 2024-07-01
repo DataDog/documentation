@@ -1,6 +1,9 @@
 ---
+title: flame graph
 core_product:
-- apm
-title: フレームグラフ
+  - apm
+  - continuous profiler
 ---
-フレームグラフはトレースを視覚化したもので、棒グラフはスパンを表し、スパンの実行時間や、そのスパンを呼び出したもの、呼び出されたものを表示します。フレームグラフはプロファイルを表すのにも使われます。
+A flame graph is a visualization of a trace, where bars represent spans and show the span's execution time as well as what called it and what calls it made. 
+
+A flame graph is also the <a href="/profiler/profile_visualizations/#flame-graph">default visualization</a> for Continuous Profiler. It shows resource consumption (such as CPU usage) per method, and how each method was called.

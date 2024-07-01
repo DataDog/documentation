@@ -1,73 +1,98 @@
 ---
+title: Getting Started with Monitors
+kind: documentation
 aliases:
-- /ja/getting_started/application/monitors
+  - /getting_started/application/monitors
 further_reading:
-- link: https://www.datadoghq.com/blog/monitoring-101-alerting/
-  tag: ブログ
-  text: モニター入門 重要事項をアラート
+- link: "https://www.datadoghq.com/blog/monitoring-101-alerting/"
+  tag: Blog
+  text: "Monitoring 101: Alerting on what matters"
+- link: "https://learn.datadoghq.com/courses/introduction-to-observability"
+  tag: Learning Center
+  text: Introduction to Observability
 - link: /monitors/types/metric/
-  tag: ドキュメント
-  text: メトリクスモニター
+  tag: Documentation
+  text: Metric Monitors
 - link: /monitors/notify/
-  tag: ドキュメント
-  text: モニター通知
-- link: https://www.datadoghq.com/blog/datadog-github-deployment-protection-rules/
-  tag: ブログ
-  text: GitHub Deployment Protection Rules と Datadog で品質チェックの失敗を検出する
-- link: https://dtdg.co/fe
+  tag: Documentation
+  text: Monitor Notifications
+- link: "https://dtdg.co/fe"
   tag: Foundation Enablement
-  text: 効果的なモニターの作成に関するインタラクティブなセッションに参加できます
-title: モニターの概要
+  text: Join an interactive session on creating effective monitors
 ---
 
-## 概要
+## Overview
 
-[メトリクスモニター][1]は、メトリクスがしきい値を超えた、あるいは下回ったときにアラートと通知を行います。このページでは、ディスク容量不足のアラートが発生するようにメトリクスモニターをセットアップする手順を説明します。
+With Datadog alerting, you have the ability to create monitors that actively check metrics, integration availability, network endpoints, and more. Use monitors to draw attention to the systems that require observation, inspection, and intervention.
 
-## 前提条件
+This page is an introduction to monitors and outlines instructions for setting up a metric monitor. A [metric monitor][1] provides alerts and notifications if a specific metric is above or below a certain threshold. For example, a metric monitor can alert you when disk space is low. 
 
-作業を開始する前に、[Datadog Agent][3] がインストールされているホストに [Datadog アカウント][2]をリンクする必要があります。検証するには、Datadog の[インフラストラクチャーリスト][4]を確認してください。
+This guide covers:
+- Monitor creation and configuration
+- Setting up monitor alerts
+- Customizing notification messages
+- Monitor permissions
 
-## セットアップ
+## Prerequisites
 
-Datadog で[メトリクスモニター][5]を作成するには、メインナビゲーションを使用して次のように移動します: Monitors --> New Monitor --> Metric。
+Before getting started, you need a Datadog account linked to a host with the Datadog Agent installed. To learn more about the Agent, see the [Getting started with the Agent guide][2], or navigate to **[Integrations > Agent][3]** to view installation instructions.
 
-### 検出方法を選択します。
+To verify that the Datadog Agent is running, check that your [Infrastructure List][4] in Datadog is populated.
 
-メトリクスモニターを作成すると、検出方法として **Threshold Alert (しきい値アラート)** が自動的に選択されます。しきい値アラートは、メトリクス値をユーザー定義のしきい値と比較します。このモニターの目的は静的なしきい値に基づいてアラートを生成することなので、変更は必要ありません。
+## Create a monitor
 
-### メトリクスを定義する
+To create a monitor, navigate to **[Monitors > New Monitor][5]** and select **Metric**.
 
-ディスク容量不足のアラートを取得するには、[Disk インテグレーション][6]から `system.disk.in_use` メトリクスを使用して、`host` と `device` のメトリクスの平均を計算します。
+## Configure
 
-{{< img src="getting_started/application/metric_query.png" alt="アラートのセットアップ" >}}
+The main components of monitor configuration are:
 
-これを設定すると、メトリクスを報告している `host` と `device` ごとに個別のアラートをトリガーする `Multi Alert` がモニターによって自動的に更新されます。
+- **Choose the detection method**: How are you measuring what will be alerted on? Are you concerned about a metric value crossing a threshold, a change in a value crossing a threshold, an anomalous value, or something else?
+- **Define the metric**: What value are you monitoring to alert? The disk space in your system? The number of errors encountered for logins?
+- **Set the alert conditions**: When does an engineer need to be woken up? 
+- **Configure notifications and automations**: What information needs to be in the alert?
+- **Define permissions and audit notifications**: Who has access to these alerts, and who should be notified if the alert is modified?
 
-### アラートの条件を設定する
+### Choose the detection method
 
-[Disk インテグレーションのドキュメント][6]によると、`system.disk.in_use` は、使用中のディスク容量が全体に占める割合を示します。したがって、このメトリクスが報告している値が `0.7` ならば、デバイスは 70% 使用されています。
+When you create a metric monitor, **Threshold Alert** is automatically selected as the detection method. A threshold alert compares metric values against user-defined thresholds. The goal for this monitor is to alert on a static threshold, so no change is necessary.
 
-ディスク容量不足のアラートを発生させるには、メトリクスがしきい値を`超えた`ときにモニターをトリガーする必要があります。しきい値はオプションで設定します。このメトリクスの場合、適切な値の範囲は `0` から `1` です。
+### Define the metric
 
-{{< img src="getting_started/application/monitor_configuration.png" alt="Create Monitor ページ内のメトリクスモニター構成設定、Multi Alert を選択し、メトリクスを報告している各ホストとデバイスの過去 5 分間のクエリの平均でアラートを出すように構成されています。Set alert conditions セクションは、評価された値が任意のホストまたはデバイスのしきい値を超えたときにトリガーするように構成されており、Alert しきい値は 0.9 に、Warning しきい値は 0.8 に設定され、データが不足している場合は通知しないようにモニターが構成されています" >}}
+To get an alert on low disk space, use the `system.disk.in_use` metric from the [Disk integration][6] and average the metric over `host` and `device`:
 
-この例では、このセクションの他の設定はデフォルトのままになっています。詳細については、[メトリクスモニター][7]のドキュメントを参照してください。
+{{< img src="getting_started/monitors/monitor_query.png" alt="Define the metric for system.disk.in_use avg by host and device" style="width:100%" >}}
 
-### Say what's happening
+### Set alert conditions
 
-モニターを保存するには、タイトルとメッセージが必要です。
+According to the [Disk integration documentation][6], `system.disk.in_use` is *the amount of disk space in use as a fraction of the total*. So, when this metric is reporting a value of `0.7`, the device is 70% full.
 
-#### タイトル
+To alert on low disk space, the monitor should trigger when the metric is `above` the threshold. The threshold values are based on your preference. For this metric, values between `0` and `1` are appropriate:
 
-タイトルはモニターごとに一意である必要があります。これはマルチアラートモニターなので、メッセージテンプレート変数を使用してグループ要素 (`host` と `device`) ごとに名前を付けることができます。
+Set the following thresholds:
+```
+Alert threshold: > 0.9
+Warning threshold: > 0.8
+```
+
+For this example, leave the other settings in this section on the defaults. For more details, see the [Metric Monitors][7] documentation.
+
+{{< img src="getting_started/monitors/monitor_alerting_conditions.png" alt="Set the alert and warning thresholds for the monitor to trigger alerts" style="width:80%" >}}
+
+### Notifications and automations
+
+When this monitor is triggered to alert, a notification message is sent. In this message, you can include conditional values, instructions for resolution, or a summary of what the alert is. At a minimum, a notification must have a title and message.
+
+#### Title
+
+The title must be unique for each monitor. Since this is a multi alert monitor, names are available for each group element (`host` and `device`) with message template variables:
 ```text
 Disk space is low on {{device.name}} / {{host.name}}
 ```
 
-#### メッセージ
+#### Message
 
-次の例のように、メッセージを使用して問題の解決方法をチームに伝達します。
+Use the message to tell your team how to resolve the issue, for example:
 ```text
 Steps to free up disk space:
 1. Remove unused packages
@@ -76,41 +101,49 @@ Steps to free up disk space:
 4. Remove duplicate files
 ```
 
-アラートや警告しきい値に基づくさまざまなメッセージについては、[通知][8]に関するドキュメントを参照してください。
+To add conditional messages based on alert vs. warning thresholds, see the available [Notification Variables][8] you can include in your message.
 
-### チームへの通知
+#### Notify your services and your team members
 
-電子メール、Slack、PagerDuty などを使用してチームに通知を送信するには、このセクションを使用してください。ドロップダウンボックスから、チームメンバーおよび接続済みアカウントを検索できます。このボックスに `@notification` が追加されている場合、通知は自動的にメッセージボックスに追加されます。
+Send notifications to your team through email, Slack, PagerDuty, and more. You can search for team members and connected accounts with the dropdown box. 
 
-{{< img src="getting_started/application/message_notify.png" alt="メッセージと通知" style="width:70%;" >}}
+{{< img src="getting_started/monitors/monitor_notification.png" alt="Add a monitor message and automations to your alert notification" style="width:100%;" >}}
 
-片方のセクションから `@notification` を削除すると、両方のセクションから削除されます。
+To add a workflow from [Workflow Automation][14] or a case from [Case Management][15] to the alert notification, click **Add Workflow** or **Add Case**. You can also tag [Datadog Team][16] members by using the `@team` handle.
 
-### アクセス許可
+Leave the other sections as-is. For more information on what each configuration option does, see the [Monitor configuration][9] documentation.
 
-{{< img src="getting_started/monitors/monitor_rbac_restricted.jpg" alt="RBAC 制限付きモニター" style="width:90%;" >}}
+### Permissions
 
-このオプションを使用して、モニターの編集をその作成者と組織内の特定のロールに制限します。ロールの詳細については、[ロールベースアクセスコントロール][9]を参照してください。
+Click **Edit Access** to restrict the editing of your monitor to its creator and to specific roles in your org. Optionally, select `Notify` to be alerted when the monitor is modified.
 
-## モバイルでモニターとトリアージアラートを見る
+{{< img src="getting_started/monitors/monitor_permissions.png" alt="Set access permissions for a monitor and options for audit notifications" style="width:80%;" >}}
 
-[Apple App Store][11] および [Google Play Store][12] で入手できる [Datadog モバイルアプリ][10]をダウンロードすれば、モバイルのホーム画面からモニター保存ビューを閲覧したり、モニターの表示やミュートを行うことができます。これは、ラップトップやデスクトップから離れているときのトリアージに役立ちます。
+For more information about roles, see [Role Based Access Control][10].
 
-{{< img src="monitors/monitors_mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="モバイルアプリでのインシデント">}}
+## View Monitors and Triage Alerts on Mobile
 
-## その他の参考資料
+You can view Monitor Saved Views from your mobile home screen or view and mute monitors by downloading the [Datadog Mobile App][11], available on the [Apple App Store][12] and [Google Play Store][13]. This helps with triaging when you are away from your laptop or desktop.
+
+{{< img src="monitors/monitors_mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Incidents on Mobile App">}}
+
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/monitors/types/metric/
-[2]: https://www.datadoghq.com
-[3]: https://app.datadoghq.com/account/settings#agent
+[1]: /monitors/types/metric/
+[2]: /getting_started/agent/
+[3]: https://app.datadoghq.com/account/settings/agent/latest
 [4]: https://app.datadoghq.com/infrastructure
 [5]: https://app.datadoghq.com/monitors#create/metric
-[6]: /ja/integrations/disk/
-[7]: /ja/monitors/types/metric/?tab=threshold#set-alert-conditions
-[8]: /ja/monitors/notify/#conditional-variables
-[9]: /ja/account_management/rbac/
-[10]: /ja/service_management/mobile/
-[11]: https://apps.apple.com/app/datadog/id1391380318
-[12]: https://play.google.com/store/apps/details?id=com.datadog.app
+[6]: /integrations/disk/
+[7]: /monitors/types/metric/?tab=threshold#set-alert-conditions
+[8]: /monitors/notify/variables/
+[9]: /monitors/configuration/?tab=thresholdalert#alert-grouping
+[10]: /account_management/rbac/
+[11]: /service_management/mobile/
+[12]: https://apps.apple.com/app/datadog/id1391380318
+[13]: https://play.google.com/store/apps/details?id=com.datadog.app
+[14]: /service_management/workflows/
+[15]: /service_management/case_management/
+[16]: /account_management/teams/

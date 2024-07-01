@@ -1,144 +1,143 @@
 ---
-algolia:
-  tags:
-  - service catalog
+title: Datadog Service Catalog
+kind: documentation
 aliases:
-- /ja/tracing/faq/service_catalog/
-- /ja/tracing/services/services_list/
-- /ja/tracing/visualization/services_list/
-- /ja/tracing/service_catalog/
+  - /tracing/faq/service_catalog/
+  - /tracing/services/services_list/
+  - /tracing/visualization/services_list/
+  - /tracing/service_catalog/
 further_reading:
 - link: /tracing/service_catalog/service_definition_api/
-  tag: ドキュメント
-  text: Service Definition API によるサービスの登録
-- link: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_definition_yaml
-  tag: インテグレーション
-  text: Terraform によるサービス定義の作成と管理
+  tag: Documentation
+  text: Registering Services with the Service Definition API
+- link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_definition_yaml"
+  tag: External Site
+  text: Create and manage service definitions with Terraform
 - link: /tracing/service_catalog/guides/understanding-service-configuration
-  tag: ガイド
-  text: サービス構成を理解する
+  tag: Guide
+  text: Understanding Your Service Configuration
 - link: /tracing/service_catalog/guides/upstream-downstream-dependencies
-  tag: ガイド
-  text: アクティブインシデント時の上流と下流の依存関係を見る
-- link: https://www.datadoghq.com/blog/manage-service-catalog-categories-with-service-definition-json-schema/
-  tag: ブログ
-  text: サービス定義 JSON スキーマによるサービスカタログエントリーの管理
-- link: https://www.datadoghq.com/blog/apm-security-view/
-  tag: ブログ
-  text: APM セキュリティビューでリスク、脆弱性、攻撃を視覚化する
-- link: https://www.datadoghq.com/blog/service-catalog-setup/
-  tag: ブログ
-  text: サービスカタログの設定を簡素化することで、サービスにタグやメタデータを簡単に追加できます
-- link: https://www.datadoghq.com/blog/github-actions-service-catalog/
-  tag: ブログ
-  text: 私は GitHub Actions を Datadog のサービスカタログに使っています。あなたもそうするべきですよ
-- link: https://www.datadoghq.com/blog/shift-left-datadog-service-catalog/
-  tag: ブログ
-  text: Datadog サービスカタログを使って、シフトレフトの可観測性を向上させる
-- link: https://www.datadoghq.com/blog/service-ownership-best-practices-datadog/
-  tag: ブログ
-  text: Datadog サービスカタログを使ったエンドツーエンドのサービス所有権管理のベストプラクティス
-kind: ドキュメント
-title: Datadog サービスカタログ
+  tag: Guide
+  text: See Upstream and Downstream Dependencies During an Active Incident
+- link: "https://www.datadoghq.com/blog/manage-service-catalog-categories-with-service-definition-json-schema/"
+  tag: Blog
+  text: Manage Service Catalog entries with the Service Definition JSON Schema
+- link: "https://www.datadoghq.com/blog/apm-security-view/"
+  tag: Blog
+  text: Gain visibility into risks, vulnerabilities, and attacks with APM Security View
+- link: "https://www.datadoghq.com/blog/service-catalog-setup/"
+  tag: Blog
+  text: Easily add tags and metadata to your services using the simplified Service Catalog setup
+- link: "https://www.datadoghq.com/blog/github-actions-service-catalog/"
+  tag: Blog
+  text: I use GitHub Ac­tions for Data­dog's Service Catalog, and you should, too
+- link: "https://www.datadoghq.com/blog/shift-left-datadog-service-catalog/"
+  tag: Blog
+  text: Improve your shift-left observability with the Datadog Service Catalog
+- link: "https://www.datadoghq.com/blog/service-ownership-best-practices-datadog/"
+  tag: Blog
+  text: Best practices for end-to-end service ownership with Datadog Service Catalog
+algolia:
+  tags: [service catalog]
 ---
 
-{{< img src="tracing/service_catalog/service_catalog_updated.mp4" video=true alt="サービスカタログのナビゲーション" style="width:100%;" >}}
+{{< img src="tracing/service_catalog/service_catalog_updated.mp4" video=true alt="Navigating around the Service Catalog" style="width:100%;" >}}
 
-## 概要
+## Overview
 
-Datadog [サービスカタログ][1]は、オーナーシップのメタデータ、パフォーマンスインサイト、セキュリティ分析、コスト割り当てなどを組み合わせた、サービスの統合ビューを提供します。これにより組織は、スケールに合わせてエンドツーエンドのサービスオーナーシップを実現し、リアルタイムでパフォーマンスの洞察を得ることができ、信頼性とセキュリティのリスクを検出・対処し、アプリケーションの依存関係を一か所で管理することが容易になります。
+Datadog [Service Catalog][1] provides a consolidated view of your services, combining ownership metadata, performance insights, security analysis, cost allocation, and much more. It makes it easy for organizations to achieve end-to-end service ownership at scale, get real-time performance insights, detect and address reliability and security risks, and manage application dependencies all in one place. 
 
-### ユースケース
+### Use cases
 
-#### サービスの発見
-- Datadog サービスカタログには、デフォルトで APM、USM、RUM から検出されたすべてのサービスが含まれます。これらの製品のいずれかを使用している場合、カタログにはエントリが事前に入力されています。
-- 環境内のさまざまなアプリケーションをインスツルメントすると、それらは自動的にサービスカタログに追加されます。
+#### Service discovery
+- Datadog Service Catalog includes all discovered services from APM, USM, and RUM by default. If you are using any of these products, your catalog is pre-populated with entries.
+- As you instrument more applications across your environments, they are automatically added to the Service Catalog.
 
-#### 依存関係のマッピングと管理
-- APM、USM、RUM によって収集されたアプリケーションのテレメトリーにより、アップストリームとダウンストリームのすべての依存関係を自動的に文書化し、追跡する。
-- コンポーネント間の依存関係を手動で宣言する ([メタデータスキーマ v3.0][8]で利用可能)。
-- チーム間およびサービス間のパフォーマンス影響を理解し、評価する。
+#### Dependencies mapping and management 
+- Document and track all of your upstream and downstream dependencies automatically with application telemetries collected by APM, USM, and RUM.
+- Manually declare dependency relationships across components (available through [metadata schema v3.0][8]).
+- Understand and assess performance impacts across teams and services.
 
-#### ガバナンスと最適化
-- [サービススコアカード][9]を通じて、エンジニアリング担当の幹部社員に、チームやサービス全体のベストプラクティスの概要を提供する。
-- サービスの依存関係の中に存在する既知のセキュリティ脆弱性を見つけて修正することで、アプリケーションのリスクを低減する。
-- トレンドを理解し、サービス関連コストの非効率性を特定する。
+#### Governance and optimization
+- Providing engineering leadership with a high-level view of best practices across teams and services through [Service Scorecards][9].
+- Reducing application risks by finding and fixing known security vulnerabilities in the dependencies of your services.
+- Understanding trends and identifying inefficiencies in the costs related to your services.
 
-#### 知識の共有 
-- 数多くのリポジトリ、チャンネル、ドキュメントページを探し回ることなく、情報を見つける。
-- 新しいチームメンバーのオンボーディング時にランブックや wiki ページの検索時間を短縮する。
-- リアルタイムで自動生成されるトポロジーマップを活用して、システムのアーキテクチャを理解する。
+#### Knowledge sharing 
+- Locate information without navigating through numerous repos, channels, or documentation pages.
+- Save time searching for runbooks or wiki pages when onboarding new team members.
+- Leverage real-time, automatically-generated topology maps to understand system architecture.
 
-#### 監視範囲の評価
-- 可観測性データを報告していないサービスや、そのデータを監視していないサービスを検出する。
-- [タグ付けのベストプラクティス][6]を促進し、[クロステレメトリーの洞察][7]を最適化するための推奨セットアップ構成をチェックする。
-- SLO、モニター、オーナーシップのないサービスなどの問題を発見する。
+#### Evaluate monitoring coverage  
+- Detecting which services aren’t reporting observability data or having that data monitored.
+- Facilitating [tagging best practices][6] and checking for recommended setup configurations to optimize [cross-telemetry insights][7].
+- Spotting issues like missing SLOs, monitors, or services without ownership.
 
-#### インシデント発生中のコラボレーションをスムーズに
-- 正しい所有者情報とコミュニケーションチャンネルを確立し、モニタリングとトラブルシューティングの詳細へのアクセスを合理化することで、すべての人のオンコール経験を向上させる。
-- エンジニアが既に使用している可観測性ツールに、ランブックやドキュメントなどのソリューションやトラブルシューティングツールへのリンクを直接埋め込む。
-- 信頼性を高め、上流と下流のサービスや依存関係の所有者を簡単に特定することで、インシデントの復旧をスピードアップする。
+#### Streamline collaboration during incidents
+- Improving the on-call experience for everyone by establishing correct ownership information and communication channels, alongside streamlined access to monitoring and troubleshooting details.
+- Embedding links to solutions and troubleshooting tools such as runbooks and documentation directly in the observability tooling engineers are already using.
+- Speeding incident recovery by increasing confidence and simplifying locating owners of upstream and downstream services and dependencies.
 
 
-## はじめに
+## Getting started
 
-{{< whatsnext desc="サービスカタログの提供内容をご確認ください。" >}}
-    {{< nextlink href="/service_catalog/navigating/" >}}サービスカタログの操作{{< /nextlink >}}
-    {{< nextlink href="/service_catalog/investigating" >}}サービスの調査{{< /nextlink >}}
+{{< whatsnext desc="Explore what Service Catalog has to offer:" >}}
+    {{< nextlink href="/service_catalog/navigating/" >}}Navigating the Service Catalog{{< /nextlink >}}
+    {{< nextlink href="/service_catalog/investigating" >}}Investigating a service{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## ロールベースアクセスおよび権限
+## Role based access and permissions
 
-一般的な情報は、[ロールベースアクセスコントロール][2]および[ロール権限][3]を参照してください。
-### 読み取り権限
+For general information, see [Role Based Access Control][2] and [Role Permissions][3].
+### Read permission
 
-サービスカタログの読み取り権限により、サービスカタログのデータを読み取ることができ、以下の機能が有効になります。
-- サービスカタログ一覧
+The Service Catalog read permission allows a user to read service catalog data, which enables the following features:
+- Service Catalog list
 - Discover UI
-- サービス定義エンドポイント: `/api/v2/services/definition/<service_name>`
+- Service Definition endpoint: `/api/v2/services/definition/<service_name>`
 
-この権限は、**Datadog Read Only Role** および **Datadog Standard Role** でデフォルトで有効になっています。
+The permission is enabled by default in the **Datadog Read Only Role** and **Datadog Standard Role**.
 
-### 書き込み権限
+### Write permission
 
-サービスカタログの書き込み権限は、ユーザーがサービスカタログのデータを変更することを許可します。書き込み権限は、以下の機能に対して必要です。
-- `POST /api/v2/services/definitions` エンドポイントを使ったサービス定義の挿入または更新
-- `DELETE /api/v2/services/definition/<service_name>` エンドポイントを使ったサービス定義の削除
-- Discover Services UI でオンボーディングプロセスを完了する
-- UI でのサービスメタデータの更新
+The Service Catalog write permission allows a user to modify service catalog data. The write permission is required for the following features:
+- Inserting or Updating a Service Definition with the `POST /api/v2/services/definitions` endpoint
+- Deleting a Service Definition with the `DELETE /api/v2/services/definition/<service_name>` endpoint
+- Completing the onboarding process in the Discover Services UI
+- Updating service metadata in the UI
 
-この権限は、**Datadog Admin Role** および **Datadog Standard Role** でデフォルトで有効になっています。
+The permission is enabled by default in the **Datadog Admin Role** and **Datadog Standard Role**.
 
-## サービスタイプ
+## Services types
 
-監視されるすべてのサービスは、特定のタイプに関連付けられています。Datadog は、受信するスパンデータに関連付けられた `span.type` 属性に基づいて、このタイプを自動的に決定します。このタイプは、Datadog Agent が統合しているアプリケーションやフレームワークの名前を指定します。
+Every monitored service is associated with a type. Datadog automatically determines this type based on the `span.type` attribute attached to incoming spans data. The type specifies the name of the application or framework that the Datadog Agent is integrating with.
 
-たとえば、Flask の公式インテグレーションを使用している場合は、`Type` が "Web" にセットされ、カスタムアプリケーションを監視している場合は、`Type` が "Custom" にセットされます。
+For example, if you use the official Flask Integration, the `Type` is set to "Web". If you are monitoring a custom application, the `Type` appears as "Custom".
 
-サービスのタイプは次のいずれかに設定されます。
+The type of the service can be one of:
 
 *  Cache
-*  カスタム
+*  Custom
 *  DB
-*  サーバーレス関数
+*  Serverless function
 *  Web
 
-いくつかのインテグレーションは、タイプのエイリアスになります。例えば、Postgres、MySQL、Cassandraは "DB" というタイプに対応します。Redis と Memcache のインテグレーションは、"Cache" というタイプにマッピングされます。
+Some integrations alias to types. For example, Postgres, MySQL, and Cassandra map to the type "DB". Redis and Memcache integrations map to the type "Cache".
 
-## データ保持
-**サービスリスト**と**サービスページ**のサービスとリソースの統計、およびスパンのサマリーは、最大で 30 日間保持されます。APM トレースメトリクスをカスタムクエリするには、メトリクスエクスプローラーを使用してください。[APM のデータ保持の詳細はこちら][4]。
+## Data retention
+The services and resources statistics, and span summaries on the **Service List** and **Service Page** are retained for up to 30 days. For customized queries on APM trace metrics, use Metric Explorer. [Learn more about data retention for APM][4].
 
 
-## その他の参考資料
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/services
-[2]: /ja/account_management/rbac/
-[3]: /ja/account_management/rbac/permissions/
-[4]: /ja/developers/guide/data-collection-resolution-retention/
-[5]: /ja/tracing/service_catalog/adding_metadata#service-definition-schema-v22
+[2]: /account_management/rbac/
+[3]: /account_management/rbac/permissions/
+[4]: /developers/guide/data-collection-resolution-retention/
+[5]: /tracing/service_catalog/adding_metadata#service-definition-schema-v22
 [6]: https://www.datadoghq.com/blog/tagging-best-practices/#assign-owners-to-services-with-tags
-[7]: /ja/tracing/other_telemetry/
-[8]: /ja/service_catalog/add_metadata#metadata-schema-v30-beta
-[9]: /ja/service_catalog/scorecards/
+[7]: /tracing/other_telemetry/
+[8]: /service_catalog/add_metadata#metadata-schema-v30-beta
+[9]: /service_catalog/scorecards/

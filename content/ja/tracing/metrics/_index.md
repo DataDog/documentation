@@ -1,43 +1,45 @@
 ---
-description: APM データから生成できる有用なメトリクスをご紹介します。
+title: APM Metrics
+kind: documentation
+description: 'Learn about useful metrics you can generate from APM data.'
 further_reading:
-- link: tracing/trace_pipeline/
-  tag: ドキュメント
-  text: トレースの取り込みをカスタマイズし、重要なトレースを保持します。
-- link: tracing/trace_collection/
-  tag: ドキュメント
-  text: サービスのインスツルメンテーションと Agent でのトレースデータ収集のセットアップ
-- link: monitors/
-  tag: ドキュメント
-  text: モニターを作成し、管理することで、重要なときにチームに通知することができます。
-title: APM メトリクス
+    - link: tracing/trace_pipeline/
+      tag: Documentation
+      text: Customize trace ingestion and retain important traces.
+    - link: tracing/trace_collection/
+      tag: Documentation
+      text: Instrument your services and set up trace data collection in the Agent
+    - link: monitors/
+      tag: Documentation
+      text: Create and manage monitors to notify your teams when it matters.
 ---
 
-## トレースメトリクス
+## Trace metrics
 
-[トレースアプリケーションメトリクス][1]は、トレース収集を有効にし、アプリケーションをインスツルメントした後に収集されます。これらのメトリクスは、ダッシュボードやモニターで利用することができます。
-これらのメトリクスは、**リクエスト**カウント、**エラー**カウント、および**レイテンシー**の測定をキャプチャします。これらは、[トレース取り込みサンプリング][2]の構成に関係なく、アプリケーションのトラフィックの 100% に基づいて計算されます。
+[Tracing application metrics][1] are collected after enabling trace collection and instrumenting your application. These metrics are available for dashboards and monitors.
+These metrics capture **request** counts, **error** counts, and **latency** measures. They are calculated based on 100% of the application's traffic, regardless of any [trace ingestion sampling][2] configuration.
+
+By default, these metrics are calculated in the Datadog Agent based on the traces sent from an instrumented application to the Agent.
+
+Ingested span and traces are kept for 15 minutes. Indexed spans and traces that retention filters keep are stored in Datadog for 15 days. But if you generate custom metrics from ingested data, the metrics are retained for 15 months.
+
+## Runtime metrics
+
+Enable [runtime metrics collection][3] in supported tracing libraries to gain insights into an application's performance. These metrics are sent to the Datadog Agent over the configured DogStatsD port.
 
 
-取り込まれたスパンとトレースは、15 分間保持されます。保持フィルターが保持するインデックスされたスパンおよびトレースは、Datadog に 15 日間保存されます。しかし、取り込まれたデータからカスタムメトリクスを生成した場合、そのメトリクスは 15 ヶ月間保持されます。
+## Next steps
 
-## ランタイムメトリクス
-
-サポートされているトレースライブラリで[ランタイムメトリクス収集][3]を有効にし、アプリケーションのパフォーマンスに関する洞察を得ることができます。
-
-
-## 次のステップ
-
-{{< whatsnext desc="設定したものを使用する:" >}}
-    {{< nextlink href="tracing/guide/apm_dashboard" >}}APM メトリクスを追跡・相関させるダッシュボードの作成{{< /nextlink >}}
-    {{< nextlink href="monitors/create/types/apm/" >}}想定外のことが起きたときに警告・通知する APM モニターの作成{{< /nextlink >}}
+{{< whatsnext desc="Use what you set up:" >}}
+    {{< nextlink href="tracing/guide/apm_dashboard" >}}Create a Dashboard to track and correlate APM metrics{{< /nextlink >}}
+    {{< nextlink href="monitors/create/types/apm/" >}}Create APM Monitors that alert and notify you when something is unexpected{{< /nextlink >}}
 {{< /whatsnext >}}
 
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/tracing/metrics/metrics_namespace/
-[2]: /ja/tracing/trace_pipeline/ingestion_mechanisms
-[3]: /ja/tracing/metrics/runtime_metrics/
+[1]: /tracing/metrics/metrics_namespace/
+[2]: /tracing/trace_pipeline/ingestion_mechanisms
+[3]: /tracing/metrics/runtime_metrics/

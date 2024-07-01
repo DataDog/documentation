@@ -1,6 +1,6 @@
 ---
+title: span
 core_product:
-- apm
-title: スパン
+  - apm
 ---
-スパンは、特定の期間における分散システムの論理的な作業単位です。複数のスパンでトレースが構成されます。
+A span is a logical unit of work in a distributed system for a given period. Multiple spans construct a trace.

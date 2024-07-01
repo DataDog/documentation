@@ -1,298 +1,325 @@
 ---
+title: Log Detection Rules
+type: documentation
 aliases:
-- /ja/security_platform/detection_rules/cloud_siem
-- /ja/security_platform/detection_rules/security_monitoring
-- /ja/security_platform/detection_rules/create_a_new_rule
-- /ja/security_platform/cloud_siem/log_detection_rules/
-- /ja/cloud_siem/detection_rules/security_monitoring/
-- /ja/security/detection_rules/cloud_siem/
-- /ja/security/detection_rules/security_monitoring
-- /ja/security/detection_rules/create_a_new_rule
+ - /security_platform/detection_rules/cloud_siem
+ - /security_platform/detection_rules/security_monitoring
+ - /security_platform/detection_rules/create_a_new_rule
+ - /security_platform/cloud_siem/log_detection_rules/
+ - /cloud_siem/detection_rules/security_monitoring/
+ - /security/detection_rules/cloud_siem/
+ - /security/detection_rules/security_monitoring
+ - /security/detection_rules/create_a_new_rule
 further_reading:
 - link: /cloud_siem/default_rules/
-  tag: ドキュメント
-  text: デフォルトの Cloud SIEM 検出ルールの構成
+  tag: Documentation
+  text: Configure default Cloud SIEM detection rules
 - link: /cloud_siem/explorer/
-  tag: ドキュメント
-  text: セキュリティシグナルエクスプローラーについて学ぶ
-- link: https://www.datadoghq.com/blog/detect-unauthorized-third-parties-aws/
-  tag: GitHub
-  text: AWS アカウントの不正な第三者を検出する
-- link: https://www.datadoghq.com/blog/anomaly-detection-rules-datadog/
-  tag: GitHub
-  text: 異常検出ルールによるセキュリティ脅威の検出
+  tag: Documentation
+  text: Learn about the Security Signals Explorer
+- link: "https://www.datadoghq.com/blog/detect-unauthorized-third-parties-aws/"
+  tag: Blog
+  text: Detect unauthorized third parties in your AWS account
+- link: "https://www.datadoghq.com/blog/anomaly-detection-rules-datadog/"
+  tag: Blog
+  text: Detect security threats with anomaly detection rules
 - link: /security/notifications/variables/
-  tag: ドキュメント
-  text: セキュリティ通知変数について
-title: ログ検出ルール
-type: documentation
+  tag: Documentation
+  text: Learn more about Security notification variables
+- link: "https://www.datadoghq.com/blog/monitor-cloudflare-zero-trust/"
+  tag: Blog
+  text: Monitor Cloudflare Zero Trust with Datadog Cloud SIEM
+- link: "https://www.datadoghq.com/blog/monitor-1password-datadog-cloud-siem/"
+  tag: Blog
+  text: Monitor 1Password with Datadog Cloud SIEM
 ---
 
-## 概要
+## Overview
 
-Datadog でログ検出ルールを作成するには、[検出ルールページ][1]に移動し、**New Rule** をクリックします。
+To create a log detection rule in Datadog, navigate to the [Detection Rules page][1] and click **New Rule**.
 
-## ルールタイプ
+## Rule Type
 
-Cloud SIEM (Security Information and Event Management) の場合、取り込んだログをリアルタイムに分析するために、**Log Detection** を選択します。
+For Cloud SIEM (Security Information and Event Management), select **Log Detection** to analyze ingested logs in real-time.
 
-## 検出方法
+## Detection methods
 
-### しきい値
+### Threshold
 
-イベントがユーザー定義のしきい値を超えるタイミングを定義します。たとえば、しきい値が `>10` のトリガーを作成すると、条件が満たされたときにセキュリティシグナルが発生します。
+Define when events exceed a user-defined threshold. For example, if you create a trigger with a threshold of `>10`, a security signal occurs when the condition is met.
 
-### 新しい値
+### New value
 
-属性が新しい値に変更されたことを検出します。たとえば、`country` や `IP address` などの特定の属性に基づいてトリガーを作成すると、これまでに見られなかった新しい値が見られるたびにセキュリティシグナルが生成されます。
+Detect when an attribute changes to a new value. For example, if you create a trigger based on a specific attribute, such as `country` or `IP address`, a security signal will be generated whenever a new value is seen which has not been seen before.
 
-### 異常検知
+### Anomaly
 
-特定のしきい値を構成することができない場合、代わりに異常検出ルールを定義することができます。異常検出では、イベントの過去の観測可能性から動的なしきい値が自動的に導き出されます。
+When configuring a specific threshold isn't an option, you can define an anomaly detection rule instead. With anomaly detection, a dynamic threshold is automatically derived from the past observations of the events.
 
-### 不可能移動
+### Impossible Travel
 
-不可能移動は、2 つのアクセスイベントの間に人間が移動できる距離よりも大きい距離の異なる場所からのアクセスを検出します。
+Impossible travel detects access from different locations whose distance is greater than the distance a human can travel in the time between the two access events.
 
 ### Third Party
 
-Third Party では、外部のベンダーやアプリケーションからのアラートを転送することができます。抑制クエリやシグナル発生時の通知先を設定してルールを更新することができます。
+Third Party allows you to forward alerts from an outside vendor or application. You can update the rule with suppression queries and who to notify when a signal is generated.
 
-## 検索クエリを定義する
-
-{{< tabs >}}
-{{% tab "Threshold" %}}
-
-### 検索クエリ
-
-{{< img src="security/security_monitoring/detection_rules/threshold.png" alt="検索クエリを定義する" style="width:80%;" >}}
-
-[ログエクスプローラーでの検索][1]と同じロジックを使用して検索クエリを作成します。
-
-オプションで、一意のカウントとシグナルのグループ化を定義します。特定の時間枠で属性に対して観測された一意の値の数をカウントします。定義されたグループ化は、値ごとに各グループ化のシグナルを生成します。 通常、グループ化はエンティティ (ユーザーや IP など) です。グループ化は、[クエリを結合する](#joining-queries)ためにも使用されます。
-
-別のクエリを追加する場合は Add Query ボタンをクリックします。
-
-**注**: このクエリはすべての Datadog イベントと、インデックス作成を必要としない取り込み済みログに適用されます。
-
-## 抑制クエリで良性アクティビティを除外する
-
-**Only generate a signal if there is a match** フィールドでは、クエリを入力することで、値が一致したときのみトリガーが発生するようにするオプションがあります。
-
-**This rule will not generate a signal if there is a match** (このルールは、一致するものがある場合、シグナルを生成しない) フィールドには、抑制クエリを入力するオプションがあり、値が一致した場合にトリガーが生成されないようにすることができます。例えば、`john.doe`というユーザーがシグナルをトリガーしているが、そのアクションは良性であり、このユーザーからシグナルをトリガーさせたくない場合、`@user.username: john.doe` を除外するログクエリを入力します。
-
-#### クエリを結合する
-
-タイムフレームをまたぐログを結合すると、セキュリティシグナルの信頼性と重大度を強化することができます。たとえば、ブルートフォースアタックを検出するためには、成功した場合と失敗した場合の認証ログをユーザーと関連付ける必要があります。
-
-{{< img src="security/security_monitoring/detection_rules/joining_queries_define.png" alt="検索クエリを定義する" style="width:90%;" >}}
-
-検出ルールはグループ化の値をもとにログを結合します。グループ化の値は通常エンティティ (例えば、IP アドレスやユーザー) となりますが、必要に応じてすべての属性を使用できます。
-
-{{< img src="security/security_monitoring/detection_rules/group_by.png" alt="グループ化" style="width:30%;" >}}
-
-検出ルールケースは、グループ化の値に基づいてこれらのクエリを結合します。一致するケースと値が同じでなければならないため、グループ化属性には通常同じ属性が設定されます。グループ化の値が存在しない場合、ケースが一致することはありません。セキュリティシグナルはケースが一致した場合のみ、一意のグループ化値に対して生成されます。
-
-{{< img src="security/security_monitoring/detection_rules/set_rule_case3.png" alt="failed_login が 5 以上、successful_login が 0 以上の場合、重大度の高いシグナルをトリガーするように設定されたセットルールケースセクション" style="width:55%;" >}}
-
-以下の例は、同じ `@usr.name` で 5 回を超えてログインに失敗した場合、および 1 回ログインに成功した場合のケースです。この場合、最初のケースに一致した場合はセキュリティシグナルが生成されます。
-
-[1]: /ja/logs/search_syntax/
-{{% /tab %}}
-
-{{% tab "新しい値" %}}
-
-### 検索クエリ
-
-{{< img src="security/security_monitoring/detection_rules/new_term.png" alt="検索クエリを定義する" style="width:80%;" >}}
-
-同じロジックを使用して、[ログエクスプローラー検索][1]で検索クエリを構築します。各クエリには ASCII の小文字でラベルが付与されます。クエリ名を ASCII 文字から変更する場合は、鉛筆アイコンをクリックします。
-
-**注**: このクエリはすべての Datadog イベントと、インデックス作成を必要としない取り込み済みログに適用されます。
-
-#### 学習済みの値
-
-{{< img src="security/security_monitoring/detection_rules/learning_duration.png" alt="学習済みの値を定義する" style="width:80%;" >}}
-
-検出する値 (複数可) を選択し、期間を学習し、オプションでシグナルのグループ化を定義します。定義されたグループ化は、値ごとに各グループ化のシグナルを生成します。通常、グループ化はエンティティ (ユーザーや IP など) です。
-
-たとえば、ユーザー認証を成功させるためのクエリを作成し、**Detect new value** を `country` に設定し、グループ化を `user` に設定します。学習期間を `7 days` に設定します。構成が完了すると、今後 7 日間に受信されるログは、設定された値で評価されます。学習期間の後にログに新しい値が入力されると、シグナルが生成され、新しい値が学習されて、この値で将来のシグナルが発生するのを防ぎます。
-
-また、1 つのクエリで複数の値を使用して、ユーザーやエンティティを識別することができます。例えば、ユーザーが新しいデバイスからサインインしたときや、今までサインインしたことのない国からサインインしたときに検出したい場合は、`device_id` と `country_name` を **Detect new value** に追加します。
-
-## 抑制クエリで良性アクティビティを除外する
-
-**Only generate a signal if there is a match** フィールドでは、クエリを入力することで、値が一致したときのみトリガーが発生するようにするオプションがあります。
-
-**This rule will not generate a signal if there is a match** (このルールは、一致するものがある場合、シグナルを生成しない) フィールドには、抑制クエリを入力するオプションがあり、値が一致した場合にトリガーが生成されないようにすることができます。例えば、`john.doe`というユーザーがシグナルをトリガーしているが、そのアクションは良性であり、このユーザーからシグナルをトリガーさせたくない場合、`@user.username: john.doe` を除外するログクエリを入力します。
-
-[1]: /ja/logs/search_syntax/
-{{% /tab %}}
-
-{{% tab "異常" %}}
-
-ログエクスプローラーでの検索と同じロジックを使用して検索クエリを作成します。
-
-オプションで、一意のカウントとシグナルのグループ化を定義します。特定の時間枠で属性に対して観測された一意の値の数をカウントします。定義されたグループ化は、値ごとに各グループ化のシグナルを生成します。 通常、グループ化はエンティティ (ユーザーや IP など) です。
-
-異常検出は、`group by` 属性が過去にどのような振る舞いをしたかを検査します。group by 属性が初めて見られ (例えば、ある IP が初めてシステムと通信したとき)、異常である場合、異常検出アルゴリズムには判断材料となる過去のデータがないため、セキュリティシグナルは生成されません。
-
-**注**: このクエリはすべての Datadog イベントと、インデックス作成を必要としない取り込み済みログに適用されます。
-
-{{% /tab %}}
-
-{{% tab "不可能移動" %}}
-
-### 検索クエリ
-
-[ログエクスプローラー検索][1]と同じロジックで検索クエリを構築します。このクエリをマッチするすべてのログは、不可能移動の可能性を分析されます。現在のクエリにマッチするログを見るには、`preview` セクションを使うことができます。
-
-#### ユーザー属性
-
-`user attribute` には、解析したログのうち、ユーザー ID を含むフィールドを選択します。これは、メールアドレス、ユーザー名、またはアカウント識別子などの識別子にすることができます。
-
-#### 位置情報属性
-
-`location attribute` は、ログの地理情報を保持するフィールドを指定します。唯一サポートされている値は `@network.client.geoip` で、これは [GeoIP パーサー][2]によって強化され、クライアントの IP アドレスに基づくログの位置情報を提供します。
-
-#### ベースラインユーザーの位置
-
-シグナルをトリガーする前に、Datadog に通常のアクセス場所を学習させたい場合は、チェックボックスをクリックします。
-
-選択すると、最初の 24 時間はシグナルが抑制されます。その間に Datadog はユーザーの通常のアクセス場所を学習します。これは、ノイズを減らし、VPN の使用や資格情報による API アクセスを推論するのに役立ちます。
-
-不可能移動の行動をすべて Datadog に検出させたい場合は、チェックボックスをクリックしないでください。
-
-## 抑制クエリで良性アクティビティを除外する
-
-**Only generate a signal if there is a match** フィールドでは、クエリを入力することで、値が一致したときのみトリガーが発生するようにするオプションがあります。
-
-**This rule will not generate a signal if there is a match** (このルールは、一致するものがある場合、シグナルを生成しない) フィールドには、抑制クエリを入力するオプションがあり、値が一致した場合にトリガーが生成されないようにすることができます。例えば、`john.doe`というユーザーがシグナルをトリガーしているが、そのアクションは良性であり、このユーザーからシグナルをトリガーさせたくない場合、`@user.username: john.doe` を除外するログクエリを入力します。
-
-[1]: /ja/logs/search_syntax/
-[2]: /ja/logs/log_configuration/processors#geoip-parser
-{{% /tab %}}
-{{< /tabs >}}
-
-## ルールケースを設定する
+## Define a search query
 
 {{< tabs >}}
 {{% tab "Threshold" %}}
 
-### トリガー
+### Search query
 
-{{< img src="security/security_monitoring/detection_rules/define_rule_case2.png" alt="デフォルトの設定を示すセットルールケースセクション" style="width:80%;" >}}
+{{< img src="security/security_monitoring/detection_rules/threshold.png" alt="Define the search query" style="width:80%;" >}}
 
-例 (クエリ A が発生し、次にクエリ B が発生した場合) のシグナルをトリガーしたい場合は、**Create rules cases with Then operator** を有効にしてください。`then` 演算子は、1 つのルールケースにのみ使用できます。
+Construct a search query using the same logic as a [log explorer search][1].
 
-すべてのルールケースは、case ステートメントとして評価されます。したがって、最初にマッチしたケースがシグナルを生成します。ルールケースをクリックしてドラッグすると、その順序を操作することができます。ルールケースの例として、`a > 3` があります。
+Optionally, define a unique count and signal grouping. Count the number of unique values observed for an attribute in a given timeframe. The defined group-by generates a signal for each group by value. Typically, the group by is an entity (like user, or IP). The group-by is also used to [join the queries together](#joining-queries).
 
-ルールケースには、過去に定義されたクエリのイベント数に基づいてシグナルを生成すべきかを判断するための論理演算 (`>、>=、&&、||`) が含まれます。ここで ASCII 小文字の [クエリラベル](#define-a-search-query)が参照されます。
+Click **Add Query** to add additional queries.
 
-**注**: クエリラベルは演算子に先行しなければなりません。たとえば、`a > 3` は使用できますが、`3 < a` は許容されません。
+**Note**: The query applies to all ingested logs.
 
-各ルールケースにつき、「ケース 1」のような**名前**を付与します。シグナルの生成時には、この名前がルールの名称に追加されます。
+#### Joining queries
 
-### 重大度および通知
+Joining together logs that span a timeframe can increase the confidence or severity of the Security Signal. For example, to detect a successful brute force attack, both successful and unsuccessful authentication logs must be correlated for a user.
+
+{{< img src="security/security_monitoring/detection_rules/joining_queries_define.png" alt="Define search queries" style="width:90%;" >}}
+
+The Detection Rules join the logs together using a group by value. The group by values are typically entities (for example, IP address or user), but can be any attribute.
+
+{{< img src="security/security_monitoring/detection_rules/group_by.png" alt="Group by" style="width:30%;" >}}
+
+The Detection Rule cases join these queries together based on their group by value. The group by attribute is typically the same attribute because the value must be the same for the case to be met. If a group by value doesn't exist, the case will never be met. A Security Signal is generated for each unique group by value when a case is matched.
+
+{{< img src="security/security_monitoring/detection_rules/set_rule_case4.png" alt="The set rule cases section set to trigger a high severity signal when failed_login is greater than five and successful_login is greater than zero" style="width:90%;" >}}
+
+In this example, when greater than five failed logins and a successful login exist for the same `@usr.name`, the first case is matched, and a Security Signal is generated.
+
+[1]: /logs/search_syntax/
+{{% /tab %}}
+
+{{% tab "New Value" %}}
+
+### Search query
+
+{{< img src="security/security_monitoring/detection_rules/new_term.png" alt="Define the search query" style="width:80%;" >}}
+
+Construct a search query using the same logic as a [log explorer search][1]. Each query has a label, which is a lowercase ASCII letter. The query name can be changed from an ASCII letter by clicking the pencil icon.
+
+**Note**: The query applies to all ingested logs.
+
+#### Learned value
+
+{{< img src="security/security_monitoring/detection_rules/learning_duration.png" alt="Define the learned value" style="width:80%;" >}}
+
+Select the value or values to detect, the learning duration, and, optionally, define a signal grouping. The defined group-by generates a signal for each group-by value. Typically, the group-by is an entity (like user or IP).
+
+For example, create a query for successful user authentication and set **Detect new value** to `country` and group by to `user`. Set a learning duration of `7 days`. Once configured, logs coming in over the next 7 days are evaluated with the set values. If a log comes in with a new value after the learning duration, a signal is generated, and the new value is learned to prevent future signals with this value.
+
+You can also identify users and entities using multiple values in a single query. For example, if you want to detect when a user signs in from a new device and from a country that they've never signed in from before, add `device_id` and `country_name` to **Detect new value**.
+
+[1]: /logs/search_syntax/
+{{% /tab %}}
+
+{{% tab "Anomaly" %}}
+
+### Search query
+
+Construct a search query using the same logic as a log explorer search.
+
+Optionally, define a unique count and signal grouping. Count the number of unique values observed for an attribute in a given timeframe. The defined group-by generates a signal for each group by value. Typically, the group by is an entity (like user, or IP).
+
+Anomaly detection inspects how the `group by` attribute has behaved in the past. If a group by attribute is seen for the first time (for example, the first time an IP is communicating with your system) and is anomalous, it will not generate a security signal because the anomaly detection algorithm has no historical data to base its decision on.
+
+**Note**: The query applies to all ingested logs.
+
+{{% /tab %}}
+
+{{% tab "Impossible Travel" %}}
+
+### Search query
+
+Construct a search query using the same logic as a [log explorer search][1]. All logs matching this query are analyzed for a potential impossible travel. You can use the `preview` section to see which logs are matched by the current query.
+
+#### User attribute
+
+For the `user attribute`, select the field in the analyzed log that contains the user ID. This can be an identifier like an email address, user name, or account identifier.
+
+#### Location attribute
+
+The `location attribute` specifies which field holds the geographic information for a log. The only supported value is `@network.client.geoip`, which is enriched by the [GeoIP parser][2] to give a log location information based on the client's IP address.
+
+#### Baseline user locations
+
+Click the checkbox if you'd like Datadog to learn regular access locations before triggering a signal.
+
+When selected, signals are suppressed for the first 24 hours. In that time, Datadog learns the user's regular access locations. This can be helpful to reduce noise and infer VPN usage or credentialed API access.
+
+Do not click the checkbox if you want Datadog to detect all impossible travel behavior.
+
+[1]: /logs/search_syntax/
+[2]: /logs/log_configuration/processors#geoip-parser
+{{% /tab %}}
+
+{{% tab "Third Party" %}}
+
+### Root query
+
+Construct a search query using the same logic as a [log explorer search][1]. The trigger defined for each new attribute generates a signal for each new value of that attribute over a 24-hour roll-up period.
+
+Click **Add Query** to add additional queries.
+
+**Note**: The query applies to all ingested logs.
+
+[1]: /logs/search_syntax/
+{{% /tab %}}
+{{< /tabs >}}
+
+## Set a rule case
+
+{{< tabs >}}
+{{% tab "Threshold" %}}
+
+### Trigger
+
+{{< img src="security/security_monitoring/detection_rules/define_rule_case2.png" alt="The set rule case section showing the default settings" style="width:80%;" >}}
+
+Enable **Create rules cases with the Then operator** if you want to trigger a signal for the example: If query A occurs and then query B occurs. The `then` operator can only be used on a single rule case.
+
+All rule cases are evaluated as case statements. Thus, the order of the cases affects which notifications are sent because the first case to match generates the signal. Click and drag your rule cases to change their ordering. 
+
+A rule case contains logical operations (`>, >=, &&, ||`) to determine if a signal should be generated based on the event counts in the previously defined queries. The ASCII lowercase [query labels](#define-a-search-query) are referenced in this section. An example rule case for query `a` is `a > 3`.
+
+**Note**: The query label must precede the operator. For example, `a > 3` is allowed; `3 < a` is not allowed.
+
+Provide a **name**, for example "Case 1", for each rule case. This name is appended to the rule name when a signal is generated.
+
+### Severity and notification
 
 {{% security-rule-severity-notification %}}
 
-### タイムウィンドウ
+### Time windows
 
 {{% security-rule-time-windows %}}
 
-ケースを追加する場合は、**Add Case** をクリックします。
+Click **Add Case** to add additional cases.
 
-**注**: この `evaluation window` は、`keep alive` および `maximum signal duration` 以下でなければなりません。
-
-{{% /tab %}}
-
-{{% tab "新しい値" %}}
-
-{{< img src="security/security_monitoring/detection_rules/new_term_rule_case.png" alt="ルールケースを定義する" style="width:80%;" >}}
-
-### 重大度および通知
-
-{{% security-rule-severity-notification %}}
-
-### 価値を忘れる
-
-一定期間表示されない場合に値を忘れるには、ドロップダウンメニューからオプションを選択します。
-
-### 同じシグナルを更新する
-
-設定された時間枠内に新しい値が検出された場合にシグナルを更新し続ける最大期間を設定します。 たとえば、`1 hour` 以内に新しい値が検出されると、同じシグナルが更新されます。最大期間は `24 hours` です。
-
-**注**: 新しい値ごとに一意のシグナルが必要な場合は、この値を `0 minutes` に構成してください。
+**Note**: The `evaluation window` must be less than or equal to the `keep alive` and `maximum signal duration`.
 
 {{% /tab %}}
 
-{{% tab "異常" %}}
+{{% tab "New Value" %}}
 
-### 重大度および通知
+{{< img src="security/security_monitoring/detection_rules/new_term_rule_case.png" alt="Define the rule case" style="width:80%;" >}}
+
+### Severity and notification
 
 {{% security-rule-severity-notification %}}
 
-### タイムウィンドウ
+### Forget value
 
-Datadog は、データの季節性を自動的に検出し、異常と判断された場合にセキュリティシグナルを生成します。
+To forget a value if it is not seen over a period of time, select an option from the dropdown menu.
 
-一度シグナルが発生すると、データが異常な状態のまま、最終更新のタイムスタンプが異常な期間更新された場合、シグナルは「オープン」のままとなります。
+### Update the same signal
 
-異常が残っているかどうかにかかわらず、時間が最大シグナル継続時間を超えると、シグナルは「クローズ」します。この時間は、最初に見たタイムスタンプから計算されます。
+Set a maximum duration to keep updating a signal if new values are detected within a set time frame. For example, the same signal will update if any new value is detected within `1 hour`, for a maximum duration of `24 hours`.
+
+**Note**: If a unique signal is required for every new value, configure this value to `0 minutes`.
 
 {{% /tab %}}
 
-{{% tab "不可能移動" %}}
+{{% tab "Anomaly" %}}
 
-不可能移動検出方式は、ルールケースの設定を必要としません。
-
-### 重大度および通知
+### Severity and notification
 
 {{% security-rule-severity-notification %}}
 
-### タイムウィンドウ
+### Time windows
+
+Datadog automatically detects the seasonality of the data and generates a security signal when the data is determined to be anomalous.
+
+Once a signal is generated, the signal remains "open" if the data remains anomalous and the last updated timestamp is updated for the anomalous duration.
+
+A signal "closes" once the time exceeds the maximum signal duration, regardless of whether or not the anomaly is still anomalous. This time is calculated from the first seen timestamp.
+
+{{% /tab %}}
+
+{{% tab "Impossible Travel" %}}
+
+The impossible travel detection method does not require setting a rule case.
+
+### Severity and notification
+
+{{% security-rule-severity-notification %}}
+
+### Time windows
 
 {{% security-rule-time-windows %}}
+
+{{% /tab %}}
+
+{{% tab "Third Party" %}}
+
+### Trigger
+
+All rule cases are evaluated as case statements. Thus, the order of the cases affects which notifications are sent because the first case to match generates the signal. Click and drag your rule cases to change their ordering. 
+
+A rule case contains logical operations (`>, >=, &&, ||`) to determine if a signal should be generated based on the event counts in the previously defined queries. The ASCII lowercase [query labels](#define-a-search-query) are referenced in this section. An example rule case for query `a` is `a > 3`.
+
+**Note**: The query label must precede the operator. For example, `a > 3` is allowed; `3 < a` is not allowed.
+
+### Severity and notification
+
+{{% security-rule-severity-notification %}}
+
+Click **Add Case** to add additional cases.
 
 {{% /tab %}}
 {{< /tabs >}}
 
-### 非本番重大度の低減
+### Decreasing non-production severity
 
-信号のノイズを減らす方法の 1 つは、非本番環境の信号よりも本番環境の信号を優先させることです。`Decrease severity for non-production environments` チェックボックスを選択すると、非本番環境のシグナルの重大度を、ルールケースで定義されたものから 1 レベル下げることができます。
+One way to decrease signal noise is to prioritize production environment signals over non-production environment signals. Select the `Decrease severity for non-production environments` checkbox to decrease the severity of signals in non-production environments by one level from what is defined by the rule case.
 
-| 本番環境におけるシグナルの重大度| 非本番環境におけるシグナルの重大度|
+| Signal Severity in Production Environment| Signal Severity in Non-production Environment|
 | ---------------------------------------- | -------------------------------------------- |
-| クリティカル                                 | 大                                         |
-| 大                                     | 中                                       |
-| 中                                   | 情報                                         |
-| 情報                                     | 情報                                         |
+| Critical                                 | High                                         |
+| High                                     | Medium                                       |
+| Medium                                   | Info                                         |
+| Info                                     | Info                                         |
 
-重大度の減少は、環境タグが `staging`、`test` または `dev` で始まっているシグナルに適用されます。
+The severity decrement is applied to signals with an environment tag starting with `staging`, `test`, or `dev`.
 
 ## Say what's happening
 
 {{% security-rule-say-whats-happening %}}
 
-シグナルにタグを追加するには、**Tag resulting signals** ドロップダウンメニューを使用します。例えば、`security:attack` や `technique:T1110-brute-force` のようになります。
+Use the **Tag resulting signals** dropdown menu to add tags to your signals. For example, `security:attack` or `technique:T1110-brute-force`.
 
-**注**: `security` タグはセキュリティシグナルの分類に用いられる特殊なタグです。`attack`、`threat-intel`、`compliance`、`anomaly`、`data-leak` など他のタグの使用を推奨します。
+**Note**: the tag `security` is special. This tag is used to classify the security signal. The recommended options are: `attack`, `threat-intel`, `compliance`, `anomaly`, and `data-leak`.
 
-## ルール非推奨
+## Suppression rules
 
-すべてのすぐに使える検出ルールの定期的な監査を行い、忠実なシグナル品質を維持します。非推奨のルールは、改良されたルールに置き換えられます。
+Optionally, add a suppression rule to prevent a signal from getting generated. For example, if a user `john.doe` is triggering a signal, but their actions are benign and you do not want signals triggered from this user, add the following query into the **Add a suppression query** field: `@user.username:john.doe`.
 
-ルール非推奨のプロセスは以下の通りです。
+Additionally, in the suppression rule, you can add a log exclusion query to exclude logs from being analyzed. These queries are based on **log attributes**. **Note**: The legacy suppression was based on log exclusion queries, but it is now included in the suppression rule's **Add a suppression query** step.
 
-1. ルールに非推奨の日付が書かれた警告が表示されています。UI では、警告が以下に表示されます。
-    - シグナルサイドパネルの **Rule Details > Playbook** セクション
-    - その特定のルールの[ルールエディター][2]
-2. ルールが非推奨になると、ルールが削除されるまでに 15 か月の期間があります。これは、シグナルの保持期間が 15 か月であるためです。この間、UI で[ルールの複製][2]を行うと、ルールを再び有効にすることができます。
-3. 一度削除されたルールは、複製して再度有効にすることはできません。
+## Rule deprecation
 
-## その他の参考資料
+Regular audits of all out-of-the-box detection rules are performed to maintain high fidelity signal quality. Deprecated rules are replaced with an improved rule.
+
+The rule deprecation process is as follows:
+
+1. There is a warning with the deprecation date on the rule. In the UI, the warning is shown in the:
+    - Signal side panel's **Rule Details > Playbook** section
+    - [Rule editor][2] for that specific rule
+2. Once the rule is deprecated, there is a 15 month period before the rule is deleted. This is due to the signal retention period of 15 months. During this time, you can re-enable the rule by [cloning the rule][2] in the UI.
+3. Once the rule is deleted, you can no longer clone and re-enable it.
+
+## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/security/configuration/siem/rules
-[2]: /ja/security/detection_rules/#rule-and-generated-signal-options
+[2]: /security/detection_rules/#clone-a-rule

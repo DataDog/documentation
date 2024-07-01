@@ -1,55 +1,55 @@
 ---
-title: APM 使用量の表示とアラート
+title: View and Alert on APM Usage
 ---
 
-Datadog では、お客様のニーズに合うさまざまな料金プランを用意しています。詳細については、[料金プランのページ][1]を参照してください。
-APM および分散型トレーシングの請求の仕組みについては、[APM 料金][2]の APM ドキュメントをお読みください。
+Datadog has many pricing plans to fit your needs. For more information, see the [Pricing page][1].
+Read APM documentation on [APM Billing][2] to understand how billing works for APM and Distributed Tracing.
 
-## 使用量ページ
+## Usage page
 
-アカウントの管理者である場合、24 時間ごとに更新される[使用量ページ][3]を使用して、アカウントの使用量を表示できます。
+If you are an admin of your account, you can view your account usage using the [Usage Page][3] which gets updated every 24 hours.
 
-| ディメンション          | 説明                                                                                    |
+| Dimension          | Description                                                                                    |
 |--------------------|------------------------------------------------------------------------------------------------|
-| APM ホスト          | 当月全時間のすべての個別 APM ホストの 99 パーセンタイル値を表示します。       |
-| APM Fargate Tasks  | 当月の 5 分間における個別 Fargate タスクの平均を表示します。   |
-| Ingested Span     | 当月に取り込まれたスパンからの取り込みバイトの合計を表示します。                      |
-| Indexed Span      | 当月にインデックス化されたスパンの合計を表示します。                                   |
+| APM Hosts          | Shows the 99th percentile of all distinct APM hosts over all hours in the current month.       |
+| APM Fargate Tasks  | Shows the average of distinct Fargate tasks over 5-minute time periods in the current month.   |
+| Ingested Spans     | Shows the sum of Ingested Bytes from spans ingested in the current month.                      |
+| Indexed Spans      | Shows the sum of Indexed Spans indexed in the current month.                                   |
 
-各 APM ホストと APM Fargate タスクは、取り込まれたボリュームとインデックス化されたボリュームの割り当てを付与します。
-- 取り込みスパン: APM ホストあたり 150 GB の取り込みスパン、APM Fargate タスクあたり 10 GB の取り込みスパン。
-- インデックス化スパン: APM ホストあたり 1M のインデックス化スパン、APM Fargate タスクあたり 65k スパンのインデックス化スパン。
+Each APM host and APM Fargate task grants you an allotment of ingested and indexed volume: 
+- Ingested spans: 150 GB ingested spans per APM host and 10 GB ingested spans per APM Fargate task.
+- Indexed spans: 1M indexed spans per APM host and 65k spans indexed spans per APM Fargate task.
 
-## 取り込み/インデックス化されたボリュームに基づくアラートの設定
+## Set alerts based on ingested/indexed volumes
 
-### 取り込みバイトのアラート設定
+### Set alerts on ingested bytes
 
-取り込みスパンの使用量が APM ホストや APM Fargate タスクから付与される割り当ての範囲内に収まるように、月間の使用量が割り当てに近づいたときにアラートが出るようにモニターを設定します。
+To ensure that your ingested spans usage remains within the allocation that APM hosts and APM Fargate tasks grants you, set up monitors to alert when your monthly usage is close to your allocation.
 
-1. [メトリクスの監視][8]を作成します。
-2. メトリクスクエリに `datadog.estimated_usage.apm.ingested_bytes` を入力します。
-3. モニターの評価ウィンドウを `current month (MTD)` と定義します。これにより、モニターは月単位の使用量を見ることができるようになります。累積タイムウィンドウについては、[モニター][9]のドキュメントで詳しく説明しています。
-4. 取り込みボリュームが割り当ての 80% または 90% に達したときに警告するための **Alert threshold** とオプションの **Warning threshold** を定義します。
-5. モニターの名前を入力します。取り込みボリュームが多くなったときに、チームにアラートを送るための通知を定義します。
+1. Create a [metric monitor][8].
+2. Enter `datadog.estimated_usage.apm.ingested_bytes`for the metric query.
+3. Define the monitor's evaluation window to `current month (MTD)`. This ensures that the monitor is looking at the month-to-date usage. Read more about cumulative time windows in the [monitors][9] documentation.
+4. Define the **Alert threshold** and an optional **Warning threshold** to alert when the ingested volume reaches 80% or 90% of your allotment. 
+5. Enter a name for the monitor. Define the notification to send an alert to your team when the ingested volumes are too high.
 
-{{< img src="account_management/billing/monitor_usage_apm.png" alt="メトリクスクエリとして datadog.estimated_usage.apm.ingested_bytes を表示するメトリクスモニターの構成ページ" width="80%" >}}
+{{< img src="account_management/billing/monitor_usage_apm.png" alt="A metric monitor configuration page showing the datadog.estimated_usage.apm.ingested_bytes as the metric query" width="80%" >}}
 
-取り込みボリュームを効果的に減らすには、この[ガイド][7]または[取り込みの仕組み][10]のドキュメントを参照してください。
+To effectively reduce your ingested volumes, see this [guide][7] or the [ingestion mechanisms][10] documentation.
 
-### インデックス化スパンのアラート設定
+### Set alerts on indexed spans
 
-同様に、インデックス化スパンの予算が一定の範囲内に収まるようにアラートを設定することもできます。`datadog.estimated_usage.apm.indexed_spans` メトリクスを使用してメトリクスモニターを作成し、月間のインデックス化スパンボリュームが定義されたしきい値を超えたときにアラートを受け取ることができます。
+Similarly, you can set alerts to ensure that your budget for you indexed spans remains within certain limits. Create a metric monitor using the `datadog.estimated_usage.apm.indexed_spans` metric to get alerted when your month-to-date indexed spans volume goes over a defined threshold.
 
-インデックス化スパンの数を減らすには、保持フィルターの構成を確認してください。保持フィルターについては、[トレース保持][11]のドキュメントで詳しく説明しています。
+To reduce the number of indexed spans, check your configuration for retention filters. Read more about retention filters in the [trace retention][11] documentation.
 
 [1]: https://www.datadoghq.com/pricing
-[2]: /ja/account_management/billing/apm_distributed_tracing/
+[2]: /account_management/billing/apm_distributed_tracing/
 [3]: https://app.datadoghq.com/account/usage
 [4]: https://app.datadoghq.com/monitors#create/metric
-[5]: /ja/monitors/types/apm/?tab=traceanalytics#monitor-creation
+[5]: /monitors/types/apm/?tab=traceanalytics#monitor-creation
 [6]: https://app.datadoghq.com/apm/traces?viz=timeseries
-[7]: /ja/tracing/guide/trace_ingestion_volume_control/
+[7]: /tracing/guide/trace_ingestion_volume_control/
 [8]: https://app.datadoghq.com/monitors/create/metric
-[9]: /ja/monitors/configuration/?tab=thresholdalert#cumulative-time-windows
-[10]: /ja/tracing/trace_pipeline/ingestion_mechanisms/
-[11]: /ja/tracing/trace_pipeline/trace_retention/
+[9]: /monitors/configuration/?tab=thresholdalert#cumulative-time-windows
+[10]: /tracing/trace_pipeline/ingestion_mechanisms/
+[11]: /tracing/trace_pipeline/trace_retention/

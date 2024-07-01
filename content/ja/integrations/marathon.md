@@ -1,101 +1,99 @@
 ---
-app_id: marathon
-app_uuid: fe9a038e-3948-4646-9a1c-ea1f1cc59977
-assets:
-  dashboards:
-    marathon-overview: assets/dashboards/marathon-overview_dashboard.json
-  integration:
-    auto_install: true
-    configuration:
-      spec: assets/configuration/spec.yaml
-    events:
-      creates_events: false
-    metrics:
-      check: marathon.apps
-      metadata_path: metadata.csv
-      prefix: marathon.
-    process_signatures:
-    - start --master mesos marathon
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 82
-    source_type_name: Marathon
-  logs:
-    source: marathon
-  saved_views:
-    marathon_processes: assets/saved_views/marathon_processes.json
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com
-  support_email: help@datadoghq.com
-categories:
-- configuration & deployment
-- containers
-- log collection
-dependencies:
-- https://github.com/DataDog/integrations-core/blob/master/marathon/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: marathon
-integration_id: marathon
-integration_title: Marathon
-integration_version: 2.3.0
-is_public: true
-kind: インテグレーション
-manifest_version: 2.0.0
-name: marathon
-public_title: Marathon
-short_description: 必要なメモリとディスク、インスタンス数などのアプリケーションメトリクスを追跡。
-supported_os:
-- linux
-- macos
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Category::構成 & デプロイ
-  - Category::コンテナ
-  - Category::ログの収集
-  configuration: README.md#Setup
-  description: 必要なメモリとディスク、インスタンス数などのアプリケーションメトリクスを追跡。
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Marathon
+"app_id": "marathon"
+"app_uuid": "fe9a038e-3948-4646-9a1c-ea1f1cc59977"
+"assets":
+  "dashboards":
+    "marathon-overview": "assets/dashboards/marathon-overview_dashboard.json"
+  "integration":
+    "auto_install": true
+    "configuration":
+      "spec": "assets/configuration/spec.yaml"
+    "events":
+      "creates_events": false
+    "metrics":
+      "check": "marathon.apps"
+      "metadata_path": "metadata.csv"
+      "prefix": "marathon."
+    "process_signatures":
+    - "start --master mesos marathon"
+    "service_checks":
+      "metadata_path": "assets/service_checks.json"
+    "source_type_id": !!int "82"
+    "source_type_name": "Marathon"
+  "saved_views":
+    "marathon_processes": "assets/saved_views/marathon_processes.json"
+"author":
+  "homepage": "https://www.datadoghq.com"
+  "name": "Datadog"
+  "sales_email": "info@datadoghq.com"
+  "support_email": "help@datadoghq.com"
+"categories":
+- "configuration & deployment"
+- "containers"
+- "log collection"
+"custom_kind": "integration"
+"dependencies":
+- "https://github.com/DataDog/integrations-core/blob/master/marathon/README.md"
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "marathon"
+"integration_id": "marathon"
+"integration_title": "Marathon"
+"integration_version": "2.3.1"
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "marathon"
+"public_title": "Marathon"
+"short_description": "Track application metrics: required memory and disk, instance count, and more."
+"supported_os":
+- "linux"
+- "macos"
+"tile":
+  "changelog": "CHANGELOG.md"
+  "classifier_tags":
+  - "Supported OS::Linux"
+  - "Supported OS::macOS"
+  - "Category::Configuration & Deployment"
+  - "Category::Containers"
+  - "Category::Log Collection"
+  "configuration": "README.md#Setup"
+  "description": "Track application metrics: required memory and disk, instance count, and more."
+  "media": []
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": "Marathon"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## 概要
+## Overview
 
-Agent の Marathon チェックを使用して、以下のことができます。
+The Agent's Marathon check lets you:
 
-- すべてのアプリケーションの状態と健全性を追跡し、構成されているメモリ、ディスク、CPU、インスタンスを確認し、正常および異常なタスクの数を監視できます。
-- キューに置かれたアプリケーションの数やデプロイの数を監視できます。
+- Track the state and health of every application: see configured memory, disk, cpu, and instances; monitor the number of healthy and unhealthy tasks
+- Monitor the number of queued applications and the number of deployments
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-Marathon チェックは [Datadog Agent][1] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
+The Marathon check is included in the [Datadog Agent][1] package. No additional installation is needed on your server.
 
-### ブラウザトラブルシューティング
+### Configuration
 
-ホストで実行中の Agent でこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[コンテナ化](#コンテナ化)セクションを参照してください。
+Follow the instructions below to configure this check for an Agent running on a host. For containerized environments, see the [Containerized](#containerized) section.
 
 {{< tabs >}}
-{{% tab "ホスト" %}}
+{{% tab "Host" %}}
 
-#### メトリクスベース SLO
+#### Host
 
-ホストで実行中の Agent に対してこのチェックを構成するには
+To configure this check for an Agent running on a host:
 
-##### メトリクスの収集
+##### Metrics collection
 
-1. [Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `marathon.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル marathon.d/conf.yaml][2] を参照してください。
+1. Edit the `marathon.d/conf.yaml` file, in the `conf.d/` folder at the root of your [Agent's configuration directory][1]. See the [sample marathon.d/conf.yaml][2] for all available configuration options:
 
    ```yaml
    init_config:
@@ -113,24 +111,24 @@ Marathon チェックは [Datadog Agent][1] パッケージに含まれていま
        password: "<PASSWORD>"
    ```
 
-   `username` と `password` の関数は `acs_url` を構成するかどうかに依存します。構成した場合、Agent はこれらを使用して ACS に認証トークンを要求し、それを使用して Marathon API に対する認証を行います。構成しない場合、Agent は `username` と `password` を使用して直接 Marathon API に対する認証を行います。
+   The function of `username` and `password` depends on whether or not you configure `acs_url`. If you do, the Agent uses them to request an authentication token from ACS, which it then uses to authenticate to the Marathon API. Otherwise, the Agent uses `username` and `password` to directly authenticate to the Marathon API.
 
-2. [Agent を再起動します][3]。
+2. [Restart the Agent][3].
 
-##### 収集データ
+##### Log collection
 
-_Agent バージョン 6.0 以降で利用可能_
+_Available for Agent versions >6.0_
 
-1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
+1. Collecting logs is disabled by default in the Datadog Agent, enable it in your `datadog.yaml` file:
 
    ```yaml
    logs_enabled: true
    ```
 
-2. Marathon は logback を使用するため、カスタムログ形式を指定できます。Datadog では、Marathon から提供されるデフォルトの形式と Datadog 推奨の形式の 2 つの形式がサポートされ、すぐに使用できます。次の例のように、ファイルアペンダーを構成に追加し、`$PATTERN$` を選択した形式に置き換えます。
+2. Because Marathon uses logback, you can specify a custom log format. With Datadog, two formats are supported out of the box: the default one provided by Marathon and the Datadog recommended format. Add a file appender to your configuration as in the following example and replace `$PATTERN$` with your selected format:
 
-   - Marathon のデフォルト形式: `[%date] %-5level %message \(%logger:%thread\)%n`
-   - Datadog の推奨形式: `%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n`
+   - Marathon default: `[%date] %-5level %message \(%logger:%thread\)%n`
+   - Datadog recommended: `%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n`
 
    ```xml
      <?xml version="1.0" encoding="UTF-8"?>
@@ -162,7 +160,7 @@ _Agent バージョン 6.0 以降で利用可能_
      </configuration>
    ```
 
-3. Marathon のログの収集を開始するには、次の構成ブロックを `marathon.d/conf.yaml` ファイルに追加します。
+3. Add this configuration block to your `marathon.d/conf.yaml` file to start collecting your Marathon logs:
 
    ```yaml
    logs:
@@ -172,65 +170,65 @@ _Agent バージョン 6.0 以降で利用可能_
        service: "<SERVICE_NAME>"
    ```
 
-4. [Agent を再起動します][3]。
+4. [Restart the Agent][3].
 
-[1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
+[1]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/marathon/datadog_checks/marathon/data/conf.yaml.example
-[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[3]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
-{{% tab "コンテナ化" %}}
+{{% tab "Containerized" %}}
 
-#### コンテナ化
+#### Containerized
 
-コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
+For containerized environments, see the [Autodiscovery Integration Templates][1] for guidance on applying the parameters below.
 
-##### メトリクスの収集
+##### Metric collection
 
-| パラメーター            | 値                                  |
+| Parameter            | Value                                  |
 | -------------------- | -------------------------------------- |
 | `<INTEGRATION_NAME>` | `marathon`                             |
-| `<INIT_CONFIG>`      | 空白または `{}`                          |
+| `<INIT_CONFIG>`      | blank or `{}`                          |
 | `<INSTANCE_CONFIG>`  | `{"url": "https://%%host%%:%%port%%"}` |
 
-##### 収集データ
+##### Log collection
 
-_Agent バージョン 6.0 以降で利用可能_
+_Available for Agent versions >6.0_
 
-Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][2]を参照してください。
+Collecting logs is disabled by default in the Datadog Agent. To enable it, see [Kubernetes Log Collection][2].
 
-| パラメーター      | 値                                                 |
+| Parameter      | Value                                                 |
 | -------------- | ----------------------------------------------------- |
 | `<LOG_CONFIG>` | `{"source": "marathon", "service": "<SERVICE_NAME>"}` |
 
-[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[2]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
+[1]: https://docs.datadoghq.com/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/agent/kubernetes/log/
 {{% /tab %}}
 {{< /tabs >}}
 
-### 検証
+### Validation
 
-[Agent の status サブコマンドを実行][2]し、Checks セクションで `marathon` を探します。
+[Run the Agent's status subcommand][2] and look for `marathon` under the Checks section.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "marathon" >}}
 
 
-### ヘルプ
+### Events
 
-Marathon チェックには、イベントは含まれません。
+The Marathon check does not include any events.
 
-### ヘルプ
+### Service Checks
 {{< get-service-checks-from-git "marathon" >}}
 
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
+Need help? Contact [Datadog support][3].
 
 
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest
-[2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[3]: https://docs.datadoghq.com/ja/help/
+[2]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
+[3]: https://docs.datadoghq.com/help/

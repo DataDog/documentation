@@ -1,59 +1,62 @@
 ---
+title: Setup Data Streams Monitoring for Java
 further_reading:
-- link: /integrations/kafka/
-  tag: ドキュメント
-  text: Kafka インテグレーション
-- link: /tracing/service_catalog/
-  tag: ドキュメント
-  text: サービスカタログ
-title: Data Streams Monitoring for Java のセットアップ
+    - link: /integrations/kafka/
+      tag: Documentation
+      text: Kafka Integration
+    - link: /tracing/service_catalog/
+      tag: Documentation
+      text: Service Catalog
 ---
 
 {{< site-region region="ap1" >}}
-<div class="alert alert-info">Data Streams Monitoring は、AP1 リージョンではサポートされていません。</a></div>
+<div class="alert alert-info">Data Streams Monitoring is not supported in the AP1 region.</a></div>
 {{< /site-region >}}
 
-### 前提条件
+### Prerequisites
 
-Data Streams Monitoring を開始するには、Datadog Agent と Java ライブラリの最新バージョンが必要です。
-* [Datadog Agent v7.34.0 以降][1]
-* [Java Agent で APM を有効にする][2]
-  * Kafka および RabbitMQ: v1.9.0 以降
-  * Amazon SQS: v1.27.0 以降
+To start with Data Streams Monitoring, you need recent versions of the Datadog Agent and Java libraries:
+* [Datadog Agent v7.34.0 or later][1]
+* [APM enabled with the Java Agent][2]
+  * Kafka and RabbitMQ: v1.9.0 or later
+  * Amazon SQS: v1.27.0 or later
 
-### インフラストラクチャーリスト
+### Installation
 
-Java は自動インスツルメンテーションを使用して、Data Streams Monitoring がエンドツーエンドのレイテンシーやキューとサービス間の関係を測定するために必要な追加のメタデータを挿入し抽出します。Data Streams Monitoring を有効にするには、Kafka または RabbitMQ にメッセージを送信する (またはメッセージを消費する) サービス上で `DD_DATA_STREAMS_ENABLED` 環境変数を `true` に設定します。
+Java uses auto-instrumentation to inject and extract additional metadata required by Data Streams Monitoring for measuring end-to-end latencies and the relationship between queues and services. To enable Data Streams Monitoring, set the `DD_DATA_STREAMS_ENABLED` environment variable to `true` on services sending messages to (or consuming messages from) Kafka, SQS or RabbitMQ.
 
-例:
+Also, set the `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED` variable to `true` so that `DD_SERVICE` is used as the service name in traces.
+
+For example:
 ```yaml
 environment:
   - DD_DATA_STREAMS_ENABLED: "true"
+  - DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED: "true"
 ```
 
-代わりに、Java アプリケーションの起動時に以下を実行して、`-Ddd.data.streams.enabled=true` システムプロパティを設定することも可能です。
+As an alternative, you can set the `-Ddd.data.streams.enabled=true` system property by running the following when you start your Java application:
 
 ```bash
-java -javaagent:/path/to/dd-java-agent.jar -Ddd.data.streams.enabled=true -jar path/to/your/app.jar
+java -javaagent:/path/to/dd-java-agent.jar -Ddd.data.streams.enabled=true -Ddd.trace.remove.integration.service.names.enabled=true -jar path/to/your/app.jar
 ```
 
-### ワンクリックインストール
-サービスを再起動することなく Datadog UI から Data Streams Monitoring をセットアップするには、[Configuration at Runtime][5] を使用します。APM サービスページに移動して、DSM を有効にします。
+### One-Click Installation
+To set up Data Streams Monitoring from the Datadog UI without needing to restart your service, use [Configuration at Runtime][5]. Navigate to the APM Service Page and `Enable DSM`.
 
-{{< img src="data_streams/enable_dsm_service_catalog.png" alt="APM サービスページの Dependencies セクションから Data Streams Monitoring を有効にします" >}}
+{{< img src="data_streams/enable_dsm_service_catalog.png" alt="Enable the Data Streams Monitoring from the Dependencies section of the APM Service Page" >}}
 
-### サポートされるライブラリ
-Data Streams Monitoring は、[confluent-kafka ライブラリ][3]をサポートしています。
+### Supported libraries
+Data Streams Monitoring supports the [confluent-kafka library][3].
 
-### SQS パイプラインの監視
-Data Streams Monitoring は、1 つの[メッセージ属性][4]を使用して、SQS キューを通過するメッセージの経路を追跡します。Amazon SQS は、メッセージごとに許可されるメッセージ属性の上限が 10 個であるため、データパイプラインを通じてストリーミングされるすべてのメッセージには、9 個以下のメッセージ属性が設定されている必要があり、残りの属性は Data Streams Monitoring に使用できます。
+### Monitoring SQS pipelines
+Data Streams Monitoring uses one [message attribute][4] to track a message's path through an SQS queue. As Amazon SQS has a maximum limit of 10 message attributes allowed per message, all messages streamed through the data pipelines must have 9 or fewer message attributes set, allowing the remaining attribute for Data Streams Monitoring.
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/agent
-[2]: /ja/tracing/trace_collection/dd_libraries/java/
+[1]: /agent
+[2]: /tracing/trace_collection/dd_libraries/java/
 [3]: https://pypi.org/project/confluent-kafka/
 [4]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-metadata.html
-[5]: /ja/agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration
+[5]: /agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration

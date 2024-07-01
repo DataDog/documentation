@@ -1,58 +1,60 @@
 ---
-aliases:
-- /ja/integrations/azure_datalakeanalytics
-categories:
+"aliases":
+- /integrations/azure_datalakeanalytics
+"categories":
 - azure
-- クラウド
-- data store
-dependencies: []
-description: Azure Data Lake Analytics のキーメトリクスを追跡
-doc_link: https://docs.datadoghq.com/integrations/azure_data_lake_analytics/
-draft: false
-git_integration_title: azure_data_lake_analytics
-has_logo: true
-integration_id: azure-datalakeanalytics
-integration_title: Microsoft Azure Data Lake Analytics
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: '1.0'
-name: azure_data_lake_analytics
-public_title: Datadog-Microsoft Azure Data Lake Analytics インテグレーション
-short_description: Azure Data Lake Analytics のキーメトリクスを追跡
-version: '1.0'
+- cloud
+- data stores
+"custom_kind": "integration"
+"dependencies": []
+"description": "Track key Azure Data Lake Analytics metrics."
+"doc_link": "https://docs.datadoghq.com/integrations/azure_data_lake_analytics/"
+"draft": false
+"git_integration_title": "azure_data_lake_analytics"
+"has_logo": true
+"integration_id": "azure-datalakeanalytics"
+"integration_title": "Microsoft Azure Data Lake Analytics"
+"integration_version": ""
+"is_public": true
+"manifest_version": "1.0"
+"name": "azure_data_lake_analytics"
+"public_title": "Datadog-Microsoft Azure Data Lake Analytics Integration"
+"short_description": "Track key Azure Data Lake Analytics metrics."
+"version": "1.0"
 ---
 
-## 概要
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
+## Overview
 
-Azure Data Lake Analytics は、ビッグデータを簡略化するオンデマンド分析ジョブサービスです。
+Azure Data Lake Analytics is an on-demand analytics job service that simplifies big data.
 
-Datadog Azure インテグレーションを使用して、Data Lake Analytics からメトリクスを収集できます。
+Use the Datadog Azure integration to collect metrics from Data Lake Analytics.
 
-## セットアップ
+## Setup
 
-### インストール
+### Installation
 
-[Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
+If you haven't already, set up the [Microsoft Azure integration][1] first. There are no other installation steps.
 
-## 収集データ
+## Data Collected
 
-### メトリクス
+### Metrics
 {{< get-metrics-from-git "azure_data_lake_analytics" >}}
 
 
-### イベント
+### Events
 
-Azure Data Lake Analytics インテグレーションには、イベントは含まれません。
+The Azure Data Lake Analytics integration does not include any events.
 
-### サービスのチェック
+### Service Checks
 
-Azure Data Lake Analytics インテグレーションには、サービスのチェック機能は含まれません。
+The Azure Data Lake Analytics integration does not include any service checks.
 
-## トラブルシューティング
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
+Need help? Contact [Datadog support][3].
 
-[1]: https://docs.datadoghq.com/ja/integrations/azure/
+[1]: https://docs.datadoghq.com/integrations/azure/
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_data_lake_analytics/azure_data_lake_analytics_metadata.csv
-[3]: https://docs.datadoghq.com/ja/help/
+[3]: https://docs.datadoghq.com/help/
+

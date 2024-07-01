@@ -1,76 +1,77 @@
 ---
-categories:
-- notifications
-dependencies: []
-description: 複数のアプリケーションのエラー率を一元的に追跡。
-doc_link: https://docs.datadoghq.com/integrations/bugsnag/
-draft: false
-git_integration_title: bugsnag
-has_logo: true
-integration_id: bugsnag
-integration_title: Bugsnag
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: '1.0'
-name: bugsnag
-public_title: Datadog-Bugsnag インテグレーション
-short_description: 複数のアプリケーションのエラー率の変化を一元的に追跡。
-team: web-integrations
-version: '1.0'
+"categories":
+- "notifications"
+"custom_kind": "integration"
+"dependencies": []
+"description": "Centrally track error rates across your applications."
+"doc_link": "https://docs.datadoghq.com/integrations/bugsnag/"
+"draft": false
+"git_integration_title": "bugsnag"
+"has_logo": true
+"integration_id": "bugsnag"
+"integration_title": "Bugsnag"
+"integration_version": ""
+"is_public": true
+"manifest_version": "1.0"
+"name": "bugsnag"
+"public_title": "Datadog-Bugsnag Integration"
+"short_description": "Centrally track error rates across your applications as they rise and fall."
+"team": "web-integrations"
+"version": "1.0"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-## 概要
+## Overview
 
-Bugsnag は、Web およびモバイルアプリケーション用の自動クラッシュ検出プラットフォームをソフトウェアチームに提供します。Bugsnag は、発生したエラーを自動的にキャプチャしてアラートを生成します。Datadog を Bugsnag と統合すると、エラー通知が Datadog のイベントストリームに送信されます。
+Bugsnag provides software teams with an automated crash detection platform for their web and mobile applications. Bugsnag automatically captures and alerts you of errors as they happen. Integrate Datadog with Bugsnag to send error notifications to your Datadog event stream.
 
-このインテグレーションを使用すると、以下のことができます。
+With this integration:
 
-- Datadog イベントストリームでエラーのサマリーを取得できます。
-- プロジェクトのエラー率が急上昇したときに通知を受けることができます。
-- 重大度やリリース段階で通知を絞り込むことができます。
+- Get a summary of the error in your Datadog event stream
+- Get notified when a project has a spike in error rates
+- Filter notifications by severity and release stage
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-インストールは必要ありません。
+No installation is required.
 
-### ブラウザトラブルシューティング
+### Configuration
 
-Bugsnag を Datadog と統合するには、以下の手順に従います。
+To integrate Bugsnag with Datadog:
 
-1. [Bugsnag][1] で、Datadog に通知を送信するように設定するプロジェクトの **Settings** に移動します。
-2. **Team Notifications** を選択し、次に **Datadog** を選択します。
-3. エラー通知トリガーを選択して、Datadog に表示する通知をカスタマイズします。
-   {{< img src="integrations/bugsnag/bugsnag_1.png" alt="bugsnag_通知設定" popup="true">}}
+1. Go to **Settings** in [Bugsnag][1] for the project you would like to configure to send notifications to Datadog.
+2. Select **Team Notifications** and then **Datadog**.
+3. Customize the notifications seen in Datadog by selecting error notification triggers.
+   {{< img src="integrations/bugsnag/bugsnag_1.png" alt="bugsnag_notification_setting" popup="true">}}
 
-4. 特定のリリース段階や重大度のエラーを表示するには、通知トリガーにカスタムフィルターを適用します。
-   {{< img src="integrations/bugsnag/bugsnag_2.png" alt="bugsnag_フィルター設定" popup="true">}}
+4. Apply custom filters to your notification triggers to see errors from specific release stages and severities.
+   {{< img src="integrations/bugsnag/bugsnag_2.png" alt="bugsnag_filters_setting" popup="true">}}
 
-5. Datadog API キーを入力します。
-6. **Test Notification** を選択してコンフィギュレーションをテストします。Bugsnag からのテストエラーが Datadog に表示されるはずです。
-7. 設定を保存します。
-8. 別の通知条件セットに基づいてエラーイベントを表示するには、同じプロジェクトからのストリームを追加します。
+5. Enter your Datadog API key.
+6. Select **Test Notification** to test the configuration. A test error from Bugsnag should appear in Datadog.
+7. Save your settings.
+8. Add more streams from the same project to see error events based on a different set of notification criteria.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 
-Bugsnag インテグレーションには、メトリクスは含まれません。
+The Bugsnag integration does not include metrics.
 
-### ヘルプ
+### Events
 
-Bugsnag インテグレーションは、設定された Bugsnag のエラーとアラートを Datadog のイベントストリームにプッシュします。
+The Bugsnag integration pushes configured Bugsnag errors and alerts to your Datadog event stream.
 
-### ヘルプ
+### Service Checks
 
-Bugsnag インテグレーションには、サービスのチェック機能は含まれません。
+The Bugsnag integration does not include any service checks.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][2]までお問合せください。
+Need help? Contact [Datadog support][2].
 
 [1]: https://bugsnag.com
-[2]: https://docs.datadoghq.com/ja/help/
+[2]: https://docs.datadoghq.com/help/
+

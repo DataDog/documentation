@@ -1,63 +1,65 @@
 ---
-aliases:
-- /ja/tracing/connect_logs_and_traces/python
+title: Correlating Python Logs and Traces
+kind: documentation
+description: "Connect your Python logs and traces to correlate them in Datadog."
 code_lang: python
+type: multi-code-lang
 code_lang_weight: 20
-description: Python ログとトレースを接続して Datadog で関連付けます。
+aliases:
+  - /tracing/connect_logs_and_traces/python
 further_reading:
 - link: /tracing/manual_instrumentation/
-  tag: ドキュメント
-  text: 手動でアプリケーションのインスツルメンテーションを行いトレースを作成します。
+  tag: Documentation
+  text: Instrument manually your application to create traces.
 - link: /tracing/opentracing/
-  tag: ドキュメント
-  text: アプリケーション全体に Opentracing を実装します。
+  tag: Documentation
+  text: Implement Opentracing across your applications.
 - link: /tracing/glossary/
-  tag: ドキュメント
-  text: サービス、リソース、トレースの詳細
-- link: https://www.datadoghq.com/blog/request-log-correlation/
-  tag: GitHub
-  text: 自動的にリクエストログとトレースに相関性を持たせる
+  tag: Documentation
+  text: Explore your services, resources, and traces
+- link: "https://www.datadoghq.com/blog/request-log-correlation/"
+  tag: Blog
+  text: Correlate request logs with traces automatically
 - link: /logs/guide/ease-troubleshooting-with-cross-product-correlation/
-  tag: ガイド
-  text: クロスプロダクト相関で容易にトラブルシューティング。
-title: Python ログとトレースの相関付け
-type: multi-code-lang
+  tag: Guide
+  text: Ease troubleshooting with cross product correlation.
 ---
 
-## 挿入可否
+## Injection
 
-### 標準ライブラリロギング
+### Standard library logging
 
-[トレース][1]とログを相関付けるには、以下の手順を実行します。
+To correlate your [traces][1] with your logs, complete the following steps:
 
-  1. [自動インスツルメンテーションを有効にする](#step-1---activate-automatic-instrumentation).
-  2. [ログレコードから必要な属性を含める](#step-2---include-required-attributes).
+  1. [Activate automatic instrumentation](#step-1---activate-automatic-instrumentation).
+  2. [Include required attributes from the log record](#step-2---include-required-attributes).
 
-#### ステップ 1 - 自動インスツルメンテーションを有効にする
+#### Step 1 - Activate automatic instrumentation
 
-以下のいずれかのオプションを使用して、自動インスツルメンテーションを有効にします。
+Activate automatic instrumentation using one of the following options:
 
-オプション 1: [ライブラリインジェクション][5]:
-  1. アプリケーションの `deployment/manifest` ファイルで環境変数 `DD_LOGS_INJECTION=true` を設定します。
-  2. [ライブラリインジェクション][5]の手順に従って、トレーシングを設定します。
+Option 1: [Library Injection][5]:
+  1. Set the environment variable `DD_LOGS_INJECTION=true` in the application `deployment/manifest` file.
+  2. Follow the instructions in [Library Injection][5] to set up tracing.
 
-オプション 2: `ddtrace-run`:
-  1. アプリケーションを実行している環境で環境変数 `DD_LOGS_INJECTION=true` を設定します。
-  2. **ddtrace** をアプリケーションにインポートします。
-  3. `ddtrace-run` でアプリケーションを実行します (例: `ddtrace-run python appname.py`)。
+Option 2: `ddtrace-run`:
+  1. Set the environment variable `DD_LOGS_INJECTION=true` in the environment where the application is running.
+  2. Import **ddtrace** into the application.
+  3. Run the application with `ddtrace-run` (for example, `ddtrace-run python appname.py`).
 
-オプション 3: `patch`:
-  1. **ddtrace** をアプリケーションにインポートします。
-  2. `ddtrace.patch(logging=True)` をアプリケーションコードの先頭に追加します。
+Option 3: `patch`:
+  1. Import **ddtrace** into the application.
+  2. Add `ddtrace.patch(logging=True)` to the start of the application code.
 
-#### ステップ 2 - 必要な属性を含める
+#### Step 2 - Include required attributes
 
-ログレコードから必要な属性を含むように、ログフォーマットを更新します。
+Update your log format to include the required attributes from the log record.
 
 
-ログレコードの ``dd.env``、``dd.service``、``dd.version``、``dd.trace_id``、``dd.span_id`` 属性を、フォーマット文字列に含めます。
+Include the ``dd.env``, ``dd.service``, ``dd.version``, ``dd.trace_id`` and
+``dd.span_id`` attributes for your log record in the format string.
 
-以下は、`logging.basicConfig` を使用して、ログ挿入の構成を行う例です。
+Here is an example using `logging.basicConfig` to configure the log injection:
 
 ``` python
 import logging
@@ -77,11 +79,11 @@ def hello():
 hello()
 ```
 
-ログインジェクションの詳細については、[ddtrace のドキュメント][6]をお読みください。
+To learn more about logs injection, read the [ddtrace documentation][6].
 
-### 標準ライブラリロギングなし
+### No standard library logging
 
-標準ライブラリの `logging` モジュールを使用していない場合は、以下のコードスニペットを使用してトレーサー情報をログに挿入することができます。
+If you are not using the standard library `logging` module, you can use the following code snippet to inject tracer information into your logs:
 
 ```python
 from ddtrace import tracer
@@ -89,7 +91,7 @@ from ddtrace import tracer
 span = tracer.current_span()
 correlation_ids = (str((1 << 64) - 1 & span.trace_id), span.span_id) if span else (None, None)
 ```
-以下の例では、ログ出力にトレーサーフィールドを追加するために、`structlog` 内で *processor* として関数を定義しています。
+As an illustration of this approach, the following example defines a function as a *processor* in `structlog` to add tracer fields to the log output:
 
 ``` python
 import ddtrace
@@ -98,15 +100,15 @@ from ddtrace import tracer
 import structlog
 
 def tracer_injection(logger, log_method, event_dict):
-    # 現在のトレーサーコンテキストから相関 ID を取得
+    # get correlation ids from current tracer context
     span = tracer.current_span()
     trace_id, span_id = (str((1 << 64) - 1 & span.trace_id), span.span_id) if span else (None, None)
 
-    # structlog イベントの辞書に ID を追加
+    # add ids to structlog event dictionary
     event_dict['dd.trace_id'] = str(trace_id or 0)
     event_dict['dd.span_id'] = str(span_id or 0)
 
-    # トレーサー用に構成された env、service、version を追加
+    # add the env, service, and version configured for the tracer
     event_dict['dd.env'] = ddtrace.config.env or ""
     event_dict['dd.service'] = ddtrace.config.service or ""
     event_dict['dd.version'] = ddtrace.config.version or ""
@@ -122,24 +124,24 @@ structlog.configure(
 log = structlog.get_logger()
 ```
 
-ロガーが構成されたら、イベントのログを取るトレースされた関数を実行すると、挿入されたトレーサー情報が得られます:
+Once the logger is configured, executing a traced function that logs an event yields the injected tracer information:
 
 ```text
 >>> traced_func()
 {"event": "In tracer context", "dd.trace_id": 9982398928418628468, "dd.span_id": 10130028953923355146, "dd.env": "dev", "dd.service": "hello", "dd.version": "abc123"}
 ```
 
-**注**: [Datadog ログインテグレーション][2]を使ってログをパースしていない場合は、カスタムログパースルールによって `dd.trace_id` と `dd.span_id` が文字列としてパースされ、[トレースリマッパー][3]を使って再マップされていることを確実にする必要があります。詳細については、[関連するログがトレース ID パネルに表示されない][4]を参照してください。
+**Note**: If you are not using a [Datadog Log Integration][2] to parse your logs, custom log parsing rules need to ensure that `dd.trace_id` and `dd.span_id` are being parsed as strings and remapped using the [Trace Remapper][3]. For more information, see [Correlated Logs Not Showing Up in the Trace ID Panel][4].
 
-[Python ロギングのドキュメントを参照][2]して Python ログインテグレーションを適切に構成し、Python ログが自動的にパースされるようにしてください。
+[See the Python logging documentation][2] to ensure that the Python Log Integration is properly configured so that your Python logs are automatically parsed.
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/tracing/glossary/#trace
-[2]: /ja/logs/log_collection/python/#configure-the-datadog-agent
-[3]: /ja/logs/log_configuration/processors/#trace-remapper
-[4]: /ja/tracing/troubleshooting/correlated-logs-not-showing-up-in-the-trace-id-panel/?tab=custom
-[5]: /ja/tracing/trace_collection/library_injection_local/
+[1]: /tracing/glossary/#trace
+[2]: /logs/log_collection/python/#configure-the-datadog-agent
+[3]: /logs/log_configuration/processors/#trace-remapper
+[4]: /tracing/troubleshooting/correlated-logs-not-showing-up-in-the-trace-id-panel/?tab=custom
+[5]: /tracing/trace_collection/library_injection_local/
 [6]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#logs-injection

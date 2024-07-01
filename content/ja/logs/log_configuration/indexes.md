@@ -1,191 +1,192 @@
 ---
+title: Indexes
+kind: documentation
+description: Control the volume of logs indexed by Datadog
 aliases:
-- /ja/logs/dynamic_volume_control
-- /ja/logs/indexes/
-description: Datadog でインデックス化するログの量を制御する
+  - /logs/dynamic_volume_control
+  - /logs/indexes/
 further_reading:
-- link: /logs/explorer/#visualize
-  tag: ドキュメント
-  text: ログ分析の実行
+- link: "/logs/explorer/#visualize"
+  tag: Documentation
+  text: Perform Log Analytics
 - link: /logs/log_configuration/processors
-  tag: ドキュメント
-  text: ログの処理方法
+  tag: Documentation
+  text: Learn how to process your logs
 - link: /logs/log_configuration/parsing
-  tag: ドキュメント
-  text: パースの詳細
-- link: https://www.datadoghq.com/blog/logging-without-limits/
-  tag: ブログ
+  tag: Documentation
+  text: Learn more about parsing
+- link: "https://www.datadoghq.com/blog/logging-without-limits/"
+  tag: Blog
   text: Logging without Limits*
-title: インデックス
 ---
 
-ログインデックスでは、さまざまな保持、割り当て、使用状況の監視、および課金のためにデータを値グループにセグメント化できるようにすることで、ログ管理予算をきめ細かく制御できます。インデックスは、[Configuration ページ][1]の Indexes セクションにあります。インデックスをダブルクリックするか、*Edit* ボタンをクリックすると、過去 3 日間にインデックス化されたログの数とそれらの保存期間に関する情報が表示されます。
+Log Indexes provide fine-grained control over your Log Management budget by allowing you to segment data into value groups for differing retention, quotas, usage monitoring, and billing. Indexes are located on the [Configuration page][1] in the Indexes section. Double click on them or click on the *edit* button to see more information about the number of logs that were indexed in the past 3 days, as well as the retention period for those logs:
 
-{{< img src="logs/indexes/index_details.jpg" alt="インデックスの詳細" style="width:70%;">}}
+{{< img src="logs/indexes/index_details.jpg" alt="index details" style="width:70%;">}}
 
-インデックス化されたログは、[ファセット検索][2]、[パターン][3]、[分析][4]、および[監視][6]に使用できます。
+You can use indexed logs for [faceted searching][2], [patterns][3], [analytics][4], and [monitoring][6].
 
-## 複数のインデックス
+## Multiple indexes
 
-デフォルトでは、新しい各アカウントは、すべてのログのモノリシックセットを表す単一のインデックスを取得します。Datadog では、次が必要な場合に複数のインデックスを使用することを推奨します。
+By default, each new account gets a single index representing a monolithic set of all your logs. Datadog recommends using multiple indexes if you require:
 
-* 複数の[保持期間](#ログ保持期間の更新) 
-* [1日の割り当て](#日別の割り当てを設定する)を複数使用して、バジェットをより細かく管理したい場合。
+* Multiple [retention periods](#update-log-retention)
+* Multiple [daily quotas](#set-daily-quota), for finer budget control.
 
-Log Explorer は、[複数のインデックスにわたるクエリ][7]をサポートしています。
+The Log Explorer supports [queries across multiple indexes][7].
 
-### インデックスを追加
+### Add indexes
 
-"New Index” ボタンを使って、新しいインデックスを作成します。各アカウントで作成できるインデックスの最大数は決まっており、デフォルトでは 100 に設定されています。
+Use the "New Index" button to create a new index. There is a maximum number of indexes you can create for each account, set to 100 by default.
 
-{{< img src="logs/indexes/add-index.png" alt="インデックスを追加" style="width:70%;">}}
+{{< img src="logs/indexes/add-index.png" alt="Add index" style="width:70%;">}}
 
-**注**: インデックス名は文字で始まる必要があり、小文字、数字、または '-' のみを含めることができます。
+**Note**: Index names must start with a letter and can only contain lowercase letters, numbers, or the '-' character.
 
 <div class="alert alert-info">
-アカウントの最大インデックス数を増やす必要がある場合は、<a href="/help">Datadog サポートにお問い合わせ</a>ください。
+<a href="/help">Contact Datadog support</a> if you need to increase the maximum number of indexes for your account.
 </div>
 
-### インデックスの削除
+### Delete indexes
 
-組織からインデックスを削除するには、インデックスのアクショントレイにある「削除アイコン」を使用します。このオプションは、`Logs delete data` の権限を持つユーザーのみ使用することができます。
+To delete an index from your organization, use the "Delete icon" in the index action tray. Only users with the `Logs delete data` permission can use this option.
 
-{{< img src="logs/indexes/delete-index.png" alt="インデックスを削除" style="width:70%;">}}
+{{< img src="logs/indexes/delete-index.png" alt="Delete index" style="width:70%;">}}
 
 <div class="alert alert-warning">
-削除されたインデックスと同じ名前のインデックスを再作成することはできません。 
+You cannot recreate an index with the same name as the deleted one. 
 </div>
 
-**注:** 削除されたインデックスは、今後新しい受信ログを受け付けません。削除されたインデックス内のログは、クエリに使用できなくなります。適用される保持期間に従ってすべてのログがエージングアウトした後、そのインデックスはインデックスページに表示されなくなります。
+**Note:** The deleted index will no longer accept new incoming logs. The logs in the deleted index are no longer available for querying. After all logs have aged out according to the applicable retention period, the index will no longer show up in the Index page.
 
 
 
-## インデックスフィルター
+## Indexes filters
 
-インデックスフィルターを使用すると、どのログをどのインデックスに流し入れるかを動的に管理できます。たとえば、最初のインデックスは `status:notice` 属性で絞り込まれるように設定し、2 つめのインデックスは `status:error` 属性で絞り込まれるように設定し、最後のインデックスはフィルターなしで作成した場合 (`*` と同じ)、`status:notice` ログはすべて最初のインデックスに、`status:error` ログはすべて 2 つめのインデックスに、その他のログは最後のインデックスに入ります。
+Index filters allow dynamic control over which logs flow into which indexes. For example, if you create a first index filtered on the `status:notice` attribute, a second index filtered to the `status:error` attribute, and a final one without any filter (the equivalent of `*`), all your `status:notice` logs would go to the first index, all your `status:error` logs to the second index, and the rest would go to the final one.
 
-{{< img src="logs/indexes/multi_index.png" alt="複数インデックス" style="width:70%;">}}
+{{< img src="logs/indexes/multi_index.png" alt="Multi indexes" style="width:70%;">}}
 
-**注**: ログは、フィルターに一致する最初のインデックスに保存されます。ドラッグアンドドロップを使用し、リストにあるインデックスの順番を用途に合わせて変更することができます。
+**Note**: **Logs enter the first index whose filter they match on**, use drag and drop on the list of indexes to reorder them according to your use-case.
 
-## 除外フィルター
+## Exclusion filters
 
-デフォルトでは、ログインデックスに除外フィルターは設定されません。つまり、インデックスフィルターに一致するログがすべてインデックス化されます。
+By default, logs indexes have no exclusion filter: that is to say all logs matching the Index Filter are indexed.
 
-ですが、すべてのログに同等の価値があるわけではないため、インデックスに流し入れたログの中でどれを削除するかを、除外フィルターを使用して制御することができます。除外したログはインデックスから破棄されますが、[Livetail][8] には残るので、[メトリクスの生成][9]や[アーカイブ][10]に使用できます。
+But because your logs are not all and equally valuable, exclusion filters control which logs flowing in your index should be removed. Excluded logs are discarded from indexes, but still flow through the [Livetail][8] and can be used to [generate metrics][9] and [archived][10].
 
-除外フィルターを追加するには
+To add an exclusion filter:
 
-1. [ログインデックス][11]に移動します。
-2. 除外フィルターを追加するパイプラインを展開します。
-3. **Add an Exclusion Filter** をクリックします。
+1. Navigate to [Log Indexes][11].
+2. Expand the pipeline for which you want to add an exclusion filter. 
+3. Click **Add an Exclusion Filter**.
 
-除外フィルターは、クエリ、サンプリング規則、および active/inactive のトグルで定義します。
+Exclusion filters are defined by a query, a sampling rule, and an active/inactive toggle:
 
-* デフォルトの**クエリ**は `*` です。つまり、インデックスに入るすべてのログが除外されます。[ログクエリを使用][12]して、一部のログだけが除外されるように除外フィルターを設定します。
-* デフォルトの**サンプリング規則**は `Exclude 100% of logs` であり、クエリに一致する 100% のログが除外されます。サンプリングレートを 0% から 100% の間で調節し、さらに、そのサンプリングレートを個々のログに適用するか、それとも属性の一意の値によって定義されるロググループに適用するかを決めます。
-* デフォルトの**トグル**は active であり、インデックスに入れられたログが、除外フィルターのコンフィギュレーションに従って実際に破棄されます。このトグルを inactive にすると、インデックスに新しく入れられるログに対して除外フィルターが無視されます。
+* Default **query** is `*`, meaning all logs flowing in the index would be excluded. Scope down exclusion filter to only a subset of logs [with a log query][12].
+* Default **sampling rule** is `Exclude 100% of logs` matching the query. Adapt sampling rate from 0% to 100%, and decide if the sampling rate applies on individual logs, or group of logs defined by the unique values of any attribute.
+* Default **toggle** is active, meaning logs flowing in the index are actually discarded according to the exclusion filter configuration. Toggle this to inactive to ignore this exclusion filter for new logs flowing in the index.
 
-**注**: ログのインデックスフィルターは、最初に一致した **active** な除外フィルターだけを処理します。ログが除外フィルターに一致すると、(たとえサンプルとして抽出されなくても) その後の一連の除外フィルターがすべて無視されます。
+**Note**: Index filters for logs are only processed with the first **active** exclusion filter matched. If a log matches an exclusion filter (even if the log is not sampled out), it ignores all following exclusion filters in the sequence.
 
-ドラッグアンドドロップを使用し、リストにある除外フィルターの順番を用途に合わせて変更することができます。
+Use drag and drop on the list of exclusion filters to reorder them according to your use case.
 
-{{< img src="logs/indexes/reorder_index_filters.png" alt="インデックスフィルターの順序変更" style="width:80%;">}}
+{{< img src="logs/indexes/reorder_index_filters.png" alt="reorder index filters" style="width:80%;">}}
 
-### 例
+### Examples
 
-#### オンとオフを切り替える
+#### Switch off, switch on
 
-プラットフォームにインシデントが発生するまでデバッグログが必要ないこともあれば、クリティカルバージョンのアプリケーションのデプロイを注意深く監視したいこともあります。`status:DEBUG` に 100% の除外フィルターをセットアップすると、Datadog の UI から、あるいは必要なら [API][13] を使用して、トグルのオンとオフを切り替えることができます。
+You might not need your DEBUG logs until you actually need them when your platform undergoes an incident, or want to carefully observe the deployment of a critical version of your application. Setup a 100% exclusion filter on the `status:DEBUG`, and toggle it on and off from Datadog UI or through the [API][13] when required.
 
-{{< img src="logs/indexes/enable_index_filters.png" alt="インデックスフィルターを有効にする" style="width:80%;">}}
+{{< img src="logs/indexes/enable_index_filters.png" alt="enable index filters" style="width:80%;">}}
 
-#### 傾向を注視する
+#### Keep an eye on trends
 
-Web アクセスサーバーリクエストからのすべてのログを保持するのではなく、3xx、4xx、5xx のログをすべてインデックス化し、2xx のログの 95% を除外したい場合は、`source:nginx AND http.status_code:[200 TO 299]` を設定することで全体の傾向を追跡できます。
-**ヒント**: [ログから生成されるメトリクス][9]を使用し、リクエストの数をカウントして、ステータスコード、[ブラウザ][14]、[国][15]でタグ付けすることにより、Web アクセスログを有益な KPI に変換することができます。
+What if you don't want to keep all logs from your web access server requests? You could choose to index all 3xx, 4xx, and 5xx logs, but exclude 95% of the 2xx logs: `source:nginx AND http.status_code:[200 TO 299]` to keep track of the trends.
+**Tip**: Transform web access logs into meaningful KPIs with a [metric generated from your logs][9], counting number of requests and tagged by status code, [browser][14] and [country][15].
 
-{{< img src="logs/indexes/sample_200.png" alt="インデックスフィルターを有効にする" style="width:80%;">}}
+{{< img src="logs/indexes/sample_200.png" alt="enable index filters" style="width:80%;">}}
 
-#### 高レベルなエンティティを一貫してサンプリングする
+#### Sampling consistently with higher-level entities
 
-1 日に何百万というユーザーが Web サイトにアクセスするとします。すべてのユーザーを監視する必要はないが、一部のユーザーから全体像を把握しておきたい場合は、すべてのプロダクションログ (`env:production`) に対して除外フィルターをセットアップし、`@user.email` のログの 90% を除外します。
+You have millions of users connecting to your website everyday. And although you don't need observability on every single user, you still want to keep the full picture for some. Set up an exclusion filter applying to all production logs (`env:production`) and exclude logs for 90% of the `@user.email`:
 
-{{< img src="logs/indexes/sample_user_id.png" alt="インデックスフィルターを有効にする" style="width:80%;">}}
+{{< img src="logs/indexes/sample_user_id.png" alt="enable index filters" style="width:80%;">}}
 
-[トレース ID をログに挿入][16]できるので、APM をログと併用することができます。ユーザーに関するログをすべて保持する必要はありませんが、ログによってトレースに必要な全体像を常に入手できるようにしておくことが、トラブルシューティングのために非常に重要です。
-計測するサービスからのログ (`service:my_python_app`) に適用される除外フィルターをセットアップし、`Trace ID` の 50% のログを除外してください。[トレース ID リマッパー][17]をパイプラインのアップストリームで必ず使用してください。
+You can use APM in conjunction with Logs, thanks to [trace ID injection in logs][16]. As for users, you don't need to keep all your logs but making sure logs always give the full picture to a trace is critical for troubleshooting.
+Set up an exclusion filter applied to logs from your instrumented service (`service:my_python_app`) and exclude logs for 50% of the `Trace ID` - make sure to use the [trace ID remapper][17] upstream in your pipelines.
 
-{{< img src="logs/indexes/sample_trace_id.png" alt="インデックスフィルターを有効にする" style="width:80%;">}}
+{{< img src="logs/indexes/sample_trace_id.png" alt="enable index filters" style="width:80%;">}}
 
-複数のインデックスにおけるサンプリング一貫性を確保するには:
+To ensure sampling consistency across multiple indexes:
 
-1. 各インデックスに除外ルールを一つ作成。
-2. すべての除外ルールに、より高レベルのエンティティを定義する、**同じサンプリングレート**と**同じ属性**を使用。
-3. 除外ルール、**フィルター**、**該当順序**を再確認 (ログは、最初に一致する除外ルールでのみ渡されます)。
+1. Create one exclusion rule in each index.
+2. Use the **same sampling rate** and the **same attribute** defining the higher level entity for all exclusion rules.
+3. Double-check exclusion rules, **filters**, and **respective order** (logs only pass through the first matching exclusion rule).
 
-以下の例では、
+In the following example:
 
-{{< img src="logs/indexes/cross-index_sampling.png" alt="インデックスフィルターを有効にする" style="width:80%;">}}
+{{< img src="logs/indexes/cross-index_sampling.png" alt="enable index filters" style="width:80%;">}}
 
-* 一般的に、特定の `request_id` を持つすべてのログは、保持または除外されます（50% の確立)。
-* `threat:true` または `compliance:true` タグを持つログは、`request_id` にかかわらず保持されます。
-* `DEBUG` ログは、`request_id` サンプリングルールで一貫してインデックス化されます。ただし、デバッグログ除外フィルターが適用されている場合は、サンプリングされます。
-* 実際の `request_id` を持つ `2XX` ウェブアクセスログの 50% は、保持されます。その他の `2XX` ウェブアクセスログは、90% 除外フィルタールールに基づき、すべてサンプリングされます。
+* In general, all logs with a specific `request_id` are either kept or excluded (with 50% probability).
+* Logs with a `threat:true` or `compliance:true` tag are kept regardless of the `request_id`.
+* `DEBUG` logs are indexed consistently with the `request_id` sampling rule, unless the debug logs exclusion filter is enabled in which case they are sampled.
+* 50% of the `2XX` web access logs with an actual `request_id` are kept. All other `2XX` web access logs are sampled based on the 90% exclusion filter rule.
 
-## ログの保持を更新
+## Update log retention
 
-インデックス保持設定は、ログが Datadog に保存され、検索できる期間を決定します。保持は、アカウント構成で許可されている任意の値に設定できます。
+The index retention setting determines how long logs are stored and searchable in Datadog. You can set the retention to any value allowed in your account configuration.
 
-現在の契約に含まれていない追加の保持期間を設定するには、カスタマーサクセス (`success@datadoghq.com`) までご連絡ください。追加保持を有効にした後、インデックスの保持期間を更新する必要があります。
+To enable adding additional retentions that are not in your current contract, contact Customer Success at: `success@datadoghq.com`. After additional retentions have been enabled, you need to update the retention periods for your indexes.
 
-{{< img src="logs/indexes/log_retention.png" alt="インデックスの詳細" style="width:70%;">}}
+{{< img src="logs/indexes/log_retention.png" alt="index details" style="width:70%;">}}
 
-**注**: 現在の契約にない保持を使用するには、組織の設定で管理者が[オプション][21]を有効にする必要があります。
+**Note**: To use retentions which are not in your current contract, [the option][21] must be enabled by an admin in your organisation settings.
 
-## 日別の割り当てを設定する
+## Set daily quota
 
-1 日の割り当てを設定して、インデックスに格納されるログの数を日別に制限することができます。この割り当ては、格納されるべき (除外フィルターが適用された後など) すべてのログに対して適用されます。
-1 日の割り当て数に到達したら、ログはインデックス化されなくなりますが、[livetail][18] では利用できるほか、[アーカイブにも送信][10]されるので、[ログからメトリクスを生成する][9]ために使用できます。
+You can set a daily quota to hard-limit the number of logs that are stored within an Index per day. This quota is applied for all logs that should have been stored (such as after exclusion filters are applied).
+After the daily quota is reached, logs are no longer indexed but are still available in the [livetail][18], [sent to your archives][10], and used to [generate metrics from logs][9].
 
-この割り当ては、インデックスの編集時にいつでも構成または削除できます。
-- 1 日の割り当てを数百万ログ単位で設定
-- (オプション) カスタムリセット時間を設定します。デフォルトでは、インデックスの 1 日の割り当ては [2:00pm UTC][19] に自動的にリセットされます
-- (オプション) 警告しきい値を 1 日の割り当てに対するパーセンテージで設定します (最低 50%)
+You can configure or remove this quota at any time when editing the Index:
+- Set a daily quota in millions of logs
+- (Optional) Set a custom reset time; by default, index daily quotas reset automatically at [2:00pm UTC][19]
+- (Optional) Set a warning threshold as a percentage of the daily quota (minimum 50%)
 
-**注**: 1 日の割り当てと警告のしきい値の変更は直ちに有効になります。
+**Note**: Changes to daily quotas and warning thresholds take effect immediately.
 
-{{< img src="logs/indexes/daily_quota_config.png" alt="インデックスの詳細" style="width:70%;">}}
+{{< img src="logs/indexes/daily_quota_config.png" alt="index details" style="width:70%;">}}
 
-1 日の割り当てまたは警告のしきい値に達すると、イベントが生成されます。
+An event is generated when either the daily quota or the warning threshold is reached:
 
-{{< img src="logs/indexes/index_quota_event.png" alt="インデックスの割り当て数通知" style="width:70%;">}}
+{{< img src="logs/indexes/index_quota_event.png" alt="index quota notification" style="width:70%;">}}
 
-使用量を監視してアラートを出す方法については、[ログの使用量を監視する][20]を参照してください。
+See [Monitor log usage][20] on how to monitor and alert on your usage.
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 <br>
-*Logging without Limits は Datadog, Inc. の商標です。
+*Logging without Limits is a trademark of Datadog, Inc.
 
 [1]: https://app.datadoghq.com/logs/pipelines/
-[2]: /ja/logs/explorer/#visualization
-[3]: /ja/logs/explorer/patterns/
-[4]: /ja/logs/explorer/analytics/
-[6]: /ja/monitors/types/log/
-[7]: /ja/logs/explorer/facets/#the-index-facet
-[8]: /ja/logs/live_tail/
-[9]: /ja/logs/logs_to_metrics/
-[10]: /ja/logs/archives/
+[2]: /logs/explorer/#visualization
+[3]: /logs/explorer/patterns/
+[4]: /logs/explorer/analytics/
+[6]: /monitors/types/log/
+[7]: /logs/explorer/facets/#the-index-facet
+[8]: /logs/live_tail/
+[9]: /logs/logs_to_metrics/
+[10]: /logs/archives/
 [11]: https://app.datadoghq.com/logs/pipelines/indexes
-[12]: /ja/logs/search_syntax/
-[13]: /ja/api/v1/logs-indexes/#update-an-index
-[14]: /ja/logs/log_configuration/processors/#user-agent-parser
-[15]: /ja/logs/log_configuration/processors/#geoip-parser
-[16]: /ja/tracing/other_telemetry/connect_logs_and_traces/
-[17]: /ja/logs/log_configuration/processors/#trace-remapper
-[18]: /ja/logs/live_tail/#overview
+[12]: /logs/search_syntax/
+[13]: /api/v1/logs-indexes/#update-an-index
+[14]: /logs/log_configuration/processors/#user-agent-parser
+[15]: /logs/log_configuration/processors/#geoip-parser
+[16]: /tracing/other_telemetry/connect_logs_and_traces/
+[17]: /logs/log_configuration/processors/#trace-remapper
+[18]: /logs/live_tail/#overview
 [19]: https://www.timeanddate.com/worldclock/converter.html
-[20]: /ja/logs/guide/best-practices-for-log-management/#monitor-log-usage
-[21]: /ja/account_management/org_settings/#out-of-contract-retention-periods-for-log-indexes
+[20]: /logs/guide/best-practices-for-log-management/#monitor-log-usage
+[21]: /account_management/org_settings/#out-of-contract-retention-periods-for-log-indexes

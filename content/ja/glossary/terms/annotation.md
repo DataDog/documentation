@@ -1,6 +1,6 @@
 ---
+title: Annotation
 core_product:
-- infrastructure monitoring
-title: アノテーション
+  - infrastructure monitoring
 ---
-Kubernetes では、アノテーションは Kubernetes のオブジェクトにメタデータを付加するためのキー/値マップです。
+In Kubernetes, annotations are key/value maps that can be used to attach metadata to Kubernetes objects.

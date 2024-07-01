@@ -1,105 +1,106 @@
 ---
-categories:
-- Source Control
-- Collaboration
-- issue tracking
-dependencies: []
-description: サービス全体のパフォーマンスに影響するコミットやプルリクエストを確認。
-doc_link: https://docs.datadoghq.com/integrations/bitbucket/
-draft: false
-further_reading:
-- link: https://www.datadoghq.com/blog/understand-code-changes-impact-system-performance-bitbucket-datadog/
-  tag: ブログ
-  text: 'Bitbucket + Datadog: コード変更のインフラストラクチャーへの影響の確認方法'
-git_integration_title: bitbucket
-has_logo: true
-integration_id: bitbucket
-integration_title: Bitbucket
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: '1.0'
-name: bitbucket
-public_title: Datadog-Bitbucket インテグレーション
-short_description: サービス全体のパフォーマンスに影響するコミットやプルリクエストを確認。
-team: web-integrations
-version: '1.0'
+"categories":
+- "Source Control"
+- "Collaboration"
+- "issue tracking"
+"custom_kind": "integration"
+"dependencies": []
+"description": "See which commits and pull requests affect performance across your services."
+"doc_link": "https://docs.datadoghq.com/integrations/bitbucket/"
+"draft": false
+"further_reading":
+- "link": "https://www.datadoghq.com/blog/understand-code-changes-impact-system-performance-bitbucket-datadog/"
+  "tag": "Blog"
+  "text": "Bitbucket + Datadog: See how code changes impact your infrastructure"
+"git_integration_title": "bitbucket"
+"has_logo": true
+"integration_id": "bitbucket"
+"integration_title": "Bitbucket"
+"integration_version": ""
+"is_public": true
+"manifest_version": "1.0"
+"name": "bitbucket"
+"public_title": "Datadog-Bitbucket Integration"
+"short_description": "See which commits and pull requests affect performance across your services."
+"team": "web-integrations"
+"version": "1.0"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-{{< img src="integrations/bitbucket/integrations-bitbucket.mp4" alt="インテグレーションビットバケット" video="true" >}}
+{{< img src="integrations/bitbucket/integrations-bitbucket.mp4" alt="integrations bitbucket" video="true" >}}
 
-## 概要
+## Overview
 
-Bitbucket Cloud または Bitbucket Server からコミットイベントとプルリクエストイベントを直接取得すると、以下のことができます。
+Capture commits and pull requests events directly from Bitbucket Cloud or Server to:
 
-- コードの変更をリアルタイムに追跡できます。
-- すべてのダッシュボードにコード変更マーカーを追加できます。
-- コードの変更についてチームで議論できます。
+- Keep track of code changes in real time
+- Add code change markers on all of your dashboards
+- Discuss code changes with your team
 
-インテグレーションのセットアップが完了すると、選択した項目 (コミット、プルリクエスト、またはその両方) が Datadog イベントストリームに表示されます。
+Once the integration is set up, items you select (commits and/or pull requests) populate in your Datadog Event Stream.
 
-**例**:
+**Examples**:
 
-- コミットがいつ行われたか
-- プルリクエストがいつ作成されたか
-- プルリクエストでコメントがいつ作成/削除されたか
+- When commits are made.
+- When a PR is created.
+- When a comment is made/deleted on a PR.
 
-## セットアップ
+## Setup
 
-### インストール
+### Installation
 
-Bitbucket のドキュメントを参照して、Datadog で追跡する Bitbucket の挙動に対応する [Webhook を管理][1]します。Webhook の URL は、以下のように設定してください。
+See Bitbucket's documentation to [Manage webhooks][1] for any Bitbucket behaviors you want to track in Datadog. Set the webhook URL to:
 
 ```text
 https://app.datadoghq.com/intake/webhook/bitbucket?api_key=<YOUR_DATADOG_API_KEY>
 ```
 
-Bitbucket のドキュメント [IP アドレスの管理][2]を参照し、イベントが期待通りに受信されるように、発信接続用に正しい IP 範囲が許可リストに登録されていることを確認してください。
+See Bitbucket's documentation to [Manage IP addresses][2] ensure you have the correct IP ranges allow-listed for outgoing connections so events are received as expected. 
 
-### ブラウザトラブルシューティング
+### Configuration
 
-インテグレーションタイルから [Bitbucket インテグレーション][3]を構成します。
+The [Bitbucket integration][3] is configured through the integration tile.
 
-1. 監視する各リポジトリの完全名を入力します。たとえば、リポジトリの URL が `https://bitbucket.org/groupname/reponame` の場合は、**Repository** テキストボックスに `groupname/reponame` と入力します。
-2. Datadog に送信するイベントの種類を選択します。
+1. Enter the full name of each repository you want to monitor. If the URL for your repository is `https://bitbucket.org/groupname/reponame`, then enter `groupname/reponame` in the **Repository** textbox.
+2. Select the type of events to send to Datadog:
 
-    - Bitbucket Cloud: すべてのトリガーのリスト (Commits、Pull Requests、または Issues) から選択します。
-    - Bitbucket Server: Commits または Pull Requests を選択します。
+    - Bitbucket Cloud: choose from the full list of triggers (Commits, Pull Requests, or Issues).
+    - Bitbucket Server: select Commits or Pull Requests.
 
-3. **Update Configuration** をクリックします。
+3. Click **Update Configuration**.
 
-### 検証
+### Validation
 
-インテグレーションタイル内の各エントリは、入力時に検証されます。
+Each entry in the integration tile is validated when you enter it.
 
-## 使用例
+## Use case
 
-左上の検索バーに `sources:bitbucket` と入力することで、Bitbucket のイベントをダッシュボードグラフに重ねて表示できます。このページの上部にあるサンプル GIF を参照してください。
+Overlay Bitbucket events on your dashboard graphs by typing `sources:bitbucket` in the top left search bar. See the example GIF at the top of this page.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 
-Bitbucket インテグレーションには、メトリクスは含まれません。
+The Bitbucket integration does not include any metric.
 
-### ヘルプ
+### Events
 
-Bitbucket Cloud と Bitbucket Server の両方からのコミットとプルリクエストを含む Bitbucket イベントは、Datadog に転送されます。
+Bitbucket events, including commits and pull requests from both Bitbucket Cloud and Server, are forwarded to Datadog.
 
-### ヘルプ
+### Service Checks
 
-Bitbucket インテグレーションには、サービスのチェック機能は含まれません。
+The Bitbucket integration does not include any service checks.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
+Need help? Contact [Datadog support][4].
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://confluence.atlassian.com/bitbucket/manage-webhooks-735643732.html
 [2]: https://support.atlassian.com/organization-administration/docs/ip-addresses-and-domains-for-atlassian-cloud-products/
 [3]: https://app.datadoghq.com/integrations/bitbucket
-[4]: https://docs.datadoghq.com/ja/help/
+[4]: https://docs.datadoghq.com/help/
+

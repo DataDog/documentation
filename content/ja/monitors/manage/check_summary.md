@@ -1,42 +1,42 @@
 ---
+title: Check Summary
+description: "See the list of all your checks reporting to Datadog."
 aliases:
-- /ja/monitors/check_summary/
-description: Datadog に報告されているすべてのチェックをリストします。
+- /monitors/check_summary/
 further_reading:
 - link: /monitors/
-  tag: ドキュメント
-  text: モニターの作成方法
+  tag: Documentation
+  text: Learn how to create a monitor
 - link: /monitors/notify/
-  tag: ドキュメント
-  text: モニター通知の設定
+  tag: Documentation
+  text: Configure your monitor notifications
 - link: /monitors/manage/
-  tag: ドキュメント
-  text: モニターの管理
-title: チェック内容のサマリー
+  tag: Documentation
+  text: Manage your monitors
 ---
 
-## 概要
+## Overview
 
-Datadog チェックの実行ごとにステータスを報告します。過去 24 時間に報告されたチェックが[チェックのサマリーページ][1]に表示されます。報告されるステータスには以下の 4 つがあります。
+Datadog checks report a status on each run. The [check summary page][1] displays your checks reported in the past day. Potential statuses are:
 
 - `OK`
 - `WARNING`
 - `CRITICAL`
 - `UNKNOWN`
 
-## 検索
+## Search
 
-特定のチェックを探すには、サマリーページで `filter checks` 検索ボックスを使用します。チェック名をクリックして、そのチェックに紐づくステータスとタグを確認します。一覧をさらに絞り込むには、チェックパネル内の `filter checks` 検索ボックスを使用します。
+To find a specific check, use the `filter checks` search box on the check summary page. Click on a check name to see the statuses and tags associated with the check. Filter the list further by using the `filter checks` search box inside the check panel:
 
-{{< img src="monitors/check_summary/check_search.png" alt="チェック詳細" style="width:100%;">}}
+{{< img src="monitors/check_summary/check_search.png" alt="Check details" style="width:100%;">}}
 
-## ダッシュボード  
+## Dashboards
 
-ダッシュボードにチェックステータスを表示するには、[チェックステータスウィジェット][2]を使用します。
+To view your check status on a dashboard, utilize the [Check Status Widget][2].
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/check/summary
-[2]: /ja/dashboards/widgets/check_status/
+[2]: /dashboards/widgets/check_status/

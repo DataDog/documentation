@@ -1,8 +1,8 @@
 ---
+title: tail
 core_product:
-- log management
-title: テール
+  - log management
 ---
-_テール_という用語は Unix や Linux オペレーティングシステムの `tail` コマンドに由来しています。テールとは、ファイルの内容全体を表示することの代替手段です。ファイルをテールすると、ファイルの最後の数行をターミナルに表示します。テールは、プロセスやサービスに対して最近ログに記録されたイベントを見つけるために、ログファイルで一般的に使用されます。Datadog Agent は、ログファイルをテールするように設定することができます。詳細については、 [カスタムログ収集][1]を参照してください。
+The term _tail_ is derived from the `tail` command in Unix and Linux operating systems. Tailing is an alternative to printing the entire contents of a file. When you tail a file, you print the last few lines of the file to the terminal. Tailing is commonly used with log files to find the most recently logged events for a process or service. You can set the Datadog Agent up to tail a log file. For more information see [Custom log collection][1].
 
-[1]: /ja/agent/logs/?tab=tailfiles#custom-log-collection
+[1]: /agent/logs/?tab=tailfiles#custom-log-collection

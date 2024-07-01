@@ -1,4 +1,4 @@
 ---
-title: API キー
+title: API key
 ---
-API キーは、ユーザーまたはアプリケーションを認証するために使用されるトークンです。Datadog Agent は、Datadog にメトリクスやイベントを送信するために API キーが必要です。
+An API key is a token used to authenticate a user or an application. The Datadog Agent requires an API key to submit metrics and events to Datadog.

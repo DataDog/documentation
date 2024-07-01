@@ -1,74 +1,76 @@
 ---
-title: 保存ビュー
-description: 保存ビューを使用してログエクスプローラーを自動構成する
+title: Saved Views
+kind: documentation
+description: 'Use Saved Views to automatically configure your Log Explorer.'
 further_reading:
-  - link: logs/explorer/analytics
-    tag: Documentation
-    text: ログ分析の実行
-  - link: /logs/log_configuration/processors
-    tag: Documentation
-    text: ログの処理方法
+    - link: logs/explorer/analytics
+      tag: Documentation
+      text: Perform Log Analytics
+    - link: /logs/log_configuration/processors
+      tag: Documentation
+      text: Learn how to process your logs
 ---
-## 概要
 
-効率的にトラブルシューティングするには、原因などを探索できるようデータが適切な**スコープ**にあること、有意義な情報を表面化できるようデータに**表示オプション**へのアクセスがあること、そして分析に利用できる関連**[ファセット][1]**がリストアップされていること、が必要です。
+## Overview
 
-トラブルシューティングには、コンテキストが重要です。保存ビューを使用すると、チームにとってさまざまなトラブルシューティングのコンテキストの切り替えが簡単になります。保存ビューには、[ログエクスプローラー][2]の左上からアクセスできます。
+Efficient troubleshooting requires your data to be in the proper **scope** to permit exploration, have access to **visualization options** to surface meaningful information, and have relevant **[facets][1]** listed to enable analysis.
 
-{{< img src="logs/explorer/saved_views/overview.mp4" alt="保存ビューの選択" video=true style="width:90%;" >}}
+Troubleshooting is contextual, and Saved Views make it easier for you and your teammates to switch between different troubleshooting contexts. You can access Saved Views in the upper left corner of the [Log Explorer][2].
 
-保存ビューでは、以下を追跡します。
+{{< img src="logs/explorer/saved_views/overview.mp4" alt="Saved Views selection" video=true style="width:90%;" >}}
 
-- [検索クエリ][3]とそのタイムレンジ。**注**: 保存ビューは、ライブのタイムレンジ（過去 1 時間、先週など）の追跡を意図したもので、固定期間は保存時に変換されます。
-- デフォルト表示のカスタマイズ（[ログストリーム][4]、[ログパターン][5]、[ログ分析][6]、およびそれぞれの表示プロパティ）。
-- ファセットリストに表示されるよう[選択したファセットのサブセット][1]。
+Technically, a Saved View keeps track of:
 
-## デフォルトのビュー
+- A [search query][3] along with its time range. **Note**: Saved View is meant to track live time ranges (such as past hour, or past week) and fixed time ranges are converted as such on save. 
+- A customized default visualization ([log stream][4], [log patterns][5], or [log analytics][6] along with their specific visualization properties).
+- A [selected subset of facets][1] to be displayed in the facet list.
 
-{{< img src="logs/explorer/saved_views/default.png" alt="デフォルトビュー" style="width:50%;" >}}
+## Default view
 
-既存のログエクスプローラービューが、デフォルトの保存ビューになります。このコンフィギュレーションは、ユーザー本人のみがアクセスし表示できます。このコンフィギュレーションを更新しても、組織には何の影響もありません。
+{{< img src="logs/explorer/saved_views/default.png" alt="Default view" style="width:50%;" >}}
 
-デフォルトの保存ビューは、UI でアクションを完了するか、別のコンフィギュレーションが埋め込まれたログエクスプローラーへのリンクを開くことで、**一時的に**上書きすることが可能です。
+Your existing Log Explorer view is your default saved view. This configuration is only accessible and viewable to you and updating this configuration does not have any impact on your organization.
 
-Views パネルのデフォルト保存ビューエントリからは、いつでも以下のアクションが可能です。
+You can **temporarily** override your default saved view by completing any action in the UI or when opening links to the Log Explorer that embed a different configuration.
 
-* エントリをクリックして、デフォルトビューを**リロード**。
-* 現在のパラメーターでデフォルトビューを**更新**。
-* デフォルトビューを Datadog のデフォルトに**リセット**して再起動。
+At any moment, from the default view entry in the Views panel:
 
-## 保存済みビュー
+* **Reload** your default view by clicking on the entry.
+* **Update** your default view with the current parameters.
+* **Reset** your default view to Datadog's defaults for a fresh restart.
 
-{{< img src="logs/explorer/saved_views/custom.png" alt="組織全体の保存ビュー" style="width:50%;" >}}
+## Saved views
 
-デフォルトの保存ビュー以外のすべての保存ビューは、組織全体で共有されます。
+{{< img src="logs/explorer/saved_views/custom.png" alt="Saved views across organizations" style="width:50%;" >}}
 
-* Datadog の[ログ管理インテグレーション][7] のほとんどには、すぐに使用できる**インテグレーション保存ビュー**が含まれています。これは読み取り専用で、インテグレーションのロゴで識別されます。
-* **カスタム保存ビュー** は、ユーザーにより作成されます。組織内のユーザーが誰でも編集でき（[読み取り専用ユーザー][8]を除く）、作成したユーザーのアバターで識別されます。エクスプローラーの既存のコンテンツからカスタム保存ビューを新規作成するには、**save** ボタンをクリックします。
+All saved views, that are not your default saved view, are shared across your organization:
 
-{{< img src="logs/explorer/saved_views/save.png" alt="ログ -- 保存" style="width:30%;" >}}
+* **Integration saved views** come out-of-the-box with most Datadog [Log Management Integrations][7]. These are read-only, and identified by the logo of the integration.
+* **Custom saved views** are created by users. They are editable by any user in your organization (excepting [Read Only users][8]), and identified with the avatar of the user who created it. Click the **save** button to create a new custom saved view from the current content of your explorer.
 
-Views パネルの保存ビューエントリからは、いつでも以下のアクションが可能です。
+{{< img src="logs/explorer/saved_views/save.png" alt="Logs -- Save" style="width:30%;" >}}
 
-* 保存ビューを**ロード**または**リロード** 
-* 現在のビューのコンフィギュレーションで保存ビューを**更新**。
-* 保存ビューの**名前を変更**または**削除**。
-* ショートリンクを使用して保存ビューを**共有**。
-* 保存ビューに**スター**を付けて、保存ビューリストの先頭に表示。ナビゲーションメニューから直接アクセス可能になります。
+At any moment, from the saved view entry in the Views panel:
 
-{{< img src="logs/explorer/saved_views/star.png" alt="スター付きビュー" style="width:50%;" >}}
+* **Load** or **reload** a saved view.
+* **Update** a saved view with the configuration of the current view.
+* **Rename** or **delete** a saved view.
+* **Share** a saved view through a short-link.
+* **Star** (turn into a favorite) a saved view so that it appears on top of your saved view list, and is accessible directly from the navigation menu.
 
-*注*: インテグレーションの保存ビューおよび[読み取り専用ユーザー][8]には、アクションの更新、名前変更、および削除は無効になっています。
+{{< img src="logs/explorer/saved_views/star.png" alt="Starred views" style="width:50%;" >}}
 
-## その他の参考資料
+*Note*: Update, rename, and delete actions are disabled for integration saved views and [Read Only users][8].
+
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/logs/explorer/facets/
-[2]: /ja/logs/explorer
-[3]: /ja/logs/explorer/search/
-[4]: /ja/logs/explorer/?tab=logstream#visualization
-[5]: /ja/logs/explorer/patterns/
-[6]: /ja/logs/explorer/analytics/
-[7]: /ja/integrations/#cat-log-collection
-[8]: /ja/account_management/rbac/permissions?tab=ui#general-permissions
+[1]: /logs/explorer/facets/
+[2]: /logs/explorer
+[3]: /logs/explorer/search/
+[4]: /logs/explorer/?tab=logstream#visualization
+[5]: /logs/explorer/patterns/
+[6]: /logs/explorer/analytics/
+[7]: /integrations/#cat-log-collection
+[8]: /account_management/rbac/permissions?tab=ui#general-permissions

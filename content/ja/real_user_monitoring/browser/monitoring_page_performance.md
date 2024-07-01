@@ -1,155 +1,156 @@
 ---
+title: Monitoring Page Performance
+kind: documentation
 further_reading:
-- link: https://learn.datadoghq.com/courses/core-web-vitals-lab
-  tag: ラーニングセンター
-  text: 'インタラクティブラボ: コアウェブバイタル'
-- link: https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/
-  tag: ブログ
-  text: リアルユーザーモニタリング (RUM)
-- link: https://www.datadoghq.com/blog/core-web-vitals-monitoring-datadog-rum-synthetics/
-  tag: ブログ
-  text: Datadog RUM および Synthetic モニタリングでウェブに関する主な指標を監視
-- link: /real_user_monitoring/explorer/
-  tag: Documentation
-  text: Datadog でビューを検索する
-- link: /real_user_monitoring/explorer/visualize/
-  tag: ドキュメント
-  text: イベントへの視覚化の適用
-- link: /real_user_monitoring/platform/dashboards/
-  tag: Documentation
-  text: RUM ダッシュボードについて
-title: ページのパフォーマンスの監視
+  - link: "https://learn.datadoghq.com/courses/core-web-vitals-lab"
+    tag: Learning Center
+    text: "Interactive Lab: Core Web Vitals"
+  - link: "https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/"
+    tag: Blog
+    text: Real User Monitoring
+  - link: "https://www.datadoghq.com/blog/core-web-vitals-monitoring-datadog-rum-synthetics/"
+    tag: Blog
+    text: Monitor Core Web Vitals with Datadog RUM and Synthetic Monitoring
+  - link: /real_user_monitoring/explorer/
+    tag: Documentation
+    text: Explore your views within Datadog
+  - link: /real_user_monitoring/explorer/visualize/
+    tag: Documentation
+    text: Apply visualizations on your events
+  - link: /real_user_monitoring/platform/dashboards/
+    tag: Documentation
+    text: Learn about RUM Dashboards
 ---
 
-## 概要
+## Overview
 
-RUM のビューイベントは、各ページビューについて広範囲のパフォーマンスメトリクスを収集します。アプリケーションのページビューを監視し、ダッシュボードや RUM エクスプローラーでパフォーマンスメトリクスを確認することができます。
+RUM view events collect extensive performance metrics for every pageview. Monitor your application's pageviews and explore performance metrics in dashboards and the RUM Explorer.
 
-{{< img src="real_user_monitoring/browser/waterfall-4.png" alt="RUM エクスプローラーの RUM ビューの Performance タブに表示されるウォーターフォールグラフ" style="width:100%;" >}}
+{{< img src="real_user_monitoring/browser/waterfall-4.png" alt="A waterfall graph on the Performance tab of a RUM view in the RUM Explorer" style="width:100%;" >}}
 
-以下で、ビューのパフォーマンスメトリクスにアクセスできます。
+You can access performance metrics for your views in:
 
-- すぐに使える [RUM ダッシュボード][1]。これは、アプリケーションのパフォーマンスの概要を表示するものです。例えば、RUM が収集した[デフォルト属性][2]にフィルターをかけて、[パフォーマンス概要ダッシュボード][3]でユーザーのサブセットに影響を与える問題を浮き彫りにすることができます。また、このダッシュボードを複製してニーズに合わせてカスタマイズし、ダッシュボードのクエリで任意の [RUM パフォーマンスメトリクス](#all-performance-metrics)を使用することができます。
-- [RUM エクスプローラー][4]の各 RUM ビューイベントでアクセスできるパフォーマンスウォーターフォール。ここでは、特定のページビューのパフォーマンスのトラブルシューティングを行うことが可能です。Web サイトのアセットやリソース、ロングタスク、フロントエンドエラーが、エンドユーザーのページレベルのパフォーマンスにどのような影響を与えるかが表示されます。
+- Out-of-the-box [RUM dashboards][1], which provide a high-level view of your application's performance. For example, you can filter on [default attributes][2] collected by RUM to surface issues impacting a subset of users in the [Performance Overview dashboard][3]. You can also clone this dashboard, customize it to your needs, and use any [RUM performance metrics](#all-performance-metrics) in the dashboard's query.
+- A performance waterfall, accessible for every RUM view event in the [RUM Explorer][4], which enables you to troubleshoot the performance of a specific page view. It displays how your website assets and resources, long tasks, and frontend errors affect the page-level performance for your end users.
 
-## イベントのタイミングとコア Web バイタル
+## Event timings and core web vitals
 
 <div class="alert alert-warning">
-Datadog の Core Web Vitals メトリクスは、<a href="https://github.com/DataDog/browser-sdk">@datadog/browser-rum</a> パッケージ v2.2.0 以降から入手できます。
+  Datadog's Core Web Vitals metrics are available from the <a href="https://github.com/DataDog/browser-sdk">@datadog/browser-rum</a> package v2.2.0+.
 </div>
 
-[Google のウェブに関する主な指標][5]は、サイトのユーザーエクスペリエンスを監視するために設計された 3 つのメトリクスのセットです。これらのメトリクスは、負荷パフォーマンス、対話性、視覚的安定性のビューを提供することに重点を置いています。各メトリクスには、優れたユーザーエクスペリエンスにつながる値の範囲に関するガイダンスが付属しています。Datadog では、このメトリクスの 75 パーセンタイルの監視をおすすめしています。
+[Google's Core Web Vitals][5] are a set of three metrics designed to monitor a site's user experience. These metrics focus on giving you a view of load performance, interactivity, and visual stability. Each metric comes with guidance on the range of values that translate to good user experience. Datadog recommends monitoring the 75th percentile for these metrics.
 
-{{< img src="real_user_monitoring/browser/core-web-vitals.png" alt="コアウェブバイタルの概要の視覚化" >}}
+{{< img src="real_user_monitoring/browser/core-web-vitals.png" alt="Core Web Vitals summary visualization" >}}
 
-- バックグラウンドで開かれたページの First Input Delay および Largest Contentful Paint は収集されません（たとえば、新規タブや焦点のないウィンドウ）。
-- 実際のユーザーのページビューから収集されたメトリクスは、[Synthetic ブラウザテスト][6]などの固定され制御された環境で読み込まれたページに対して計算されたものと異なる場合があります。Synthetic Monitoring では、Largest Contentful Paint と Cumulative Layout Shift を実際のメトリクスではなく、ラボメトリクスとして表示します。
+- First Input Delay and Largest Contentful Paint are not collected for pages opened in the background (for example, in a new tab or a window without focus).
+- Metrics collected from your real users' pageviews may differ from those calculated for pages loaded in a fixed, controlled environment such as a [Synthetic browser test][6]. Synthetic Monitoring displays Largest Contentful Paint and Cumulative Layout Shift as lab metrics, not real metrics.
 
-| メトリクス                   | 焦点            | 説明                                                                                           | 対象値 |
+| Metric                   | Focus            | Description                                                                                           | Target value |
 |--------------------------|------------------|-------------------------------------------------------------------------------------------------------|--------------|
-| [Largest Contentful Paint][7] | ロードパフォーマンス | ビューポート内の最大の DOM オブジェクト (つまり、画面に表示される) がレンダリングされるページ読み込みタイムラインの瞬間。         | 2.5秒以下       |
-| [First Input Delay][8]        | インタラクティブなアクティビティ    | ユーザーがページを最初に操作してからブラウザが応答するまでの経過時間。             | 100ms以下      |
-| [Cumulative Layout Shift][9]  | ビジュアルの安定性 | 動的に読み込まれるコンテンツ (サードパーティの広告など) による予期しないページ移動を定量化します。0 はシフトが発生していないことを意味します。 | 0.1以下        |
-| [Interaction To Next Paint][19]| インタラクティブなアクティビティ    | ユーザーがページを操作してから次の描画までの最長の所要時間。RUM SDK v5.1.0 が必要です。 | <200ms        |
+| [Largest Contentful Paint][7] | Load performance | Moment in the page load timeline in which the largest DOM object in the viewport (as in, visible on screen) is rendered.         | <2.5s       |
+| [First Input Delay][8]        | Interactivity    | Time elapsed between a user's first interaction with the page and the browser's response.             | <100ms      |
+| [Cumulative Layout Shift][9]  | Visual stability | Quantifies unexpected page movement due to dynamically loaded content (for example, third-party ads) where 0 means that no shifts are happening. | <0.1        |
+| [Interaction To Next Paint][19]| Interactivity    | Longest duration between a user's interaction with the page and the next paint. Requires RUM SDK v5.1.0. | <200ms        |
 
-### コア Web バイタルのターゲット要素
+### Core web vitals target elements
 
-高いコア Web バイタルメトリクスのトリガーとなった要素を特定することは、根本的な原因を理解し、パフォーマンスを改善するための第一歩です。
-RUM は、各コア Web バイタルインスタンスに関連付けられている要素をレポートします。
+Identifying what element triggered a high Core Web Vitals metric is the first step in understanding the root cause and being able to improve performance.
+RUM reports the element that is associated with each Core Web Vital instance:
 
-- Largest Contentful Paint では、RUM は最大のコンテンツ描画に対応する要素の CSS セレクタをレポートします。
-- Interaction to Next Paint では、RUM は次の描画までの最長のインタラクションに関連する要素の CSS セレクタをレポートします。
-- First Input Delay では、RUM はユーザーが最初に操作した要素の CSS セレクタをレポートします。
-- Cumulative Layout Shift では、RUM は CLS に最も影響を与えるシフトした要素の CSS セレクタをレポートします。
+- For Largest Contentful Paint, RUM reports the CSS Selector of the element corresponding to the largest contentful paint.
+- For Interaction to Next Paint, RUM reports the CSS selector of the element associated with the longest interaction to the next paint.
+- For First Input Delay, RUM reports the CSS selector of the first element the user interacted with.
+- For Cumulative Layout Shift, RUM reports the CSS selector of the most shifted element contributing to the CLS.
 
-## すべてのパフォーマンスメトリクス
+## All performance metrics
 
-| 属性                       | タイプ        | 説明                                                                                                                                                                                                                      |
+| Attribute                       | Type        | Description                                                                                                                                                                                                                      |
 |---------------------------------|-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `view.time_spent`               | 数値 (ns) | 現在のビューで過ごした時間。                                                                                                                                                                                                  |
-| `view.first_byte`               | 数値 (ns) | ビューの 1 バイト目を受信した時点までの経過時間。                                                                                                |
-| `view.largest_contentful_paint` | 数値 (ns) | ページの読み込みタイムラインにおいて、ビューポート内で最大の DOM オブジェクトがレンダリングされて画面上に表示される瞬間。                                                                                                               |
-| `view.largest_contentful_paint_target_selector` | 文字列 (CSS セレクタ) | 最大のコンテンツ描画に対応する要素の CSS セレクタ。                                                                                     |
-| `view.first_input_delay`        | 数値 (ns) | ユーザーがページを最初に操作してからブラウザが応答するまでの経過時間。                                                                                                                                        |
-| `view.first_input_delay_target_selector`      | 文字列 (CSS セレクタ) | ユーザーが最初に操作した要素の CSS セレクタ。                                                                                                                |
-| `view.interaction_to_next_paint`| 数値 (ns) | ユーザーがページを操作してから次の描画までの最長の所要時間。                                                                                                                              |
-| `view.interaction_to_next_paint_target_selector`| 文字列 (CSS セレクタ) | 次の描画までの最長のインタラクションに関連する要素の CSS セレクタ。                                                                                                          |
-| `view.cumulative_layout_shift`  | 数値      | 動的に読み込まれるコンテンツ (サードパーティの広告など) による予期せぬページの移動を定量化します。0 は移動が発生していないことを意味します。                                                                                      |
-| `view.cumulative_layout_shift_target_selector`  | 文字列 (CSS セレクタ) | ページの CLS に最も影響を与えるシフトした要素の CSS セレクタ。                                           |
-| `view.loading_time`             | 数値 (ns) | ページの準備が整い、ネットワークリクエストまたは DOM ミューテーションが現在発生していない状態になるまでの時間。詳しくは[ページパフォーマンスの監視][10]をご覧ください。                                                                          |
-| `view.first_contentful_paint`   | 数値 (ns) | ブラウザによりテキスト、画像（背景画像を含む）、白以外のキャンバス、または SVG が最初にレンダリングする時間。ブラウザのレンダリングの詳細については、[w3c 定義][11]を参照してください。                                         |
-| `view.dom_interactive`          | 数値 (ns) | パーサーによりメインドキュメントの作業が終了する瞬間。詳しくは、[MDN ドキュメント][12]を参照してください。                                                                                                        |
-| `view.dom_content_loaded`       | 数値 (ns) | 最初の HTML ドキュメントがレンダリング以外のブロッキングスタイルシート、画像、サブフレームの読み込み完了を待たずに完全に読み込まれ解析される際に発生するイベント。詳しくは、[MDN ドキュメント][13]を参照してください。 |
-| `view.dom_complete`             | 数値 (ns) | ページとすべてのサブリソースの準備が完了。ユーザー側では、ローディングスピナーの回転が停止。詳しくは、[MDN ドキュメント][14]を参照してください。                                                                     |
-| `view.load_event`               | 数値 (ns) | ページが完全に読み込まれた際に発生するイベント。通常は追加のアプリケーションロジックのトリガー。詳しくは、[MDN ドキュメント][15]を参照してください。                                                                            |
-| `view.error.count`              | 数値      | このビューについて収集されたすべてのエラーの数。                                                                                                                                                                                     |
-| `view.long_task.count`          | 数値      | このビューについて収集されたすべてのロングタスクの数。                                                                                                                                                                                 |
-| `view.resource.count`           | 数値      | このビューについて収集されたすべてのリソースの数。                                                                                                                                                                                  |
-| `view.action.count`             | 数値      | このビューについて収集されたすべてのアクションの数。                                                                                                                                                                                    |
+| `view.time_spent`               | number (ns) | Time spent on the current view.                                                                                                                                                                                                  |
+| `view.first_byte`               | number (ns) | Time elapsed until the first byte of the view has been received.                                                                                                |
+| `view.largest_contentful_paint` | number (ns) | The moment in the page load timeline when the largest DOM object in the viewport renders and is visible on screen.                                                                                                               |
+| `view.largest_contentful_paint_target_selector` | string (CSS selector) | CSS Selector of the element corresponding to the largest contentful paint.                                                                                     |
+| `view.first_input_delay`        | number (ns) | Time elapsed between a user's first interaction with the page and the browser's response.                                                                                                                                        |
+| `view.first_input_delay_target_selector`      | string (CSS selector) | CSS selector of the first element the user interacted with.                                                                                                                |
+| `view.interaction_to_next_paint`| number (ns) | Longest duration between a user's interaction with the page and the next paint.                                                                                                                              |
+| `view.interaction_to_next_paint_target_selector`| string (CSS selector) | CSS selector of the element associated with the longest interaction to the next paint.                                                                                                          |
+| `view.cumulative_layout_shift`  | number      | Quantifies unexpected page movement due to dynamically loaded content (for example, third-party ads) where 0 means no shifts are happening.                                                                                      |
+| `view.cumulative_layout_shift_target_selector`  | string (CSS selector) | CSS selector of the most shifted element contributing to the page CLS.                                           |
+| `view.loading_time`             | number (ns) | Time until the page is ready and no network request or DOM mutation is currently happening. For more information, see [Monitoring Page Performance][10].                                                                          |
+| `view.first_contentful_paint`   | number (ns) | Time when the browser first renders any text, image (including background images), non-white canvas, or SVG. For more information about browser rendering, see the [w3c definition][11].                                         |
+| `view.dom_interactive`          | number (ns) | The moment when the parser finishes its work on the main document. For more information, see the [MDN documentation][12].                                                                                                        |
+| `view.dom_content_loaded`       | number (ns) | Event fired when the initial HTML document is completely loaded and parsed, without waiting for non-render blocking stylesheets, images, and subframes to finish loading. For more information, see the [MDN documentation][13]. |
+| `view.dom_complete`             | number (ns) | The page and all the sub-resources are ready. For the user, the loading spinner has stopped spinning. For more information, see the [MDN documentation][14].                                                                     |
+| `view.load_event`               | number (ns) | Event fired when the page is fully loaded. Usually a trigger for additional application logic. For more information, see the [MDN documentation][15].                                                                            |
+| `view.error.count`              | number      | Count of all errors collected for this view.                                                                                                                                                                                     |
+| `view.long_task.count`          | number      | Count of all long tasks collected for this view.                                                                                                                                                                                 |
+| `view.resource.count`           | number      | Count of all resources collected for this view.                                                                                                                                                                                  |
+| `view.action.count`             | number      | Count of all actions collected for this view.                                                                                                                                                                                    |
 
-## シングルページアプリケーション (SPA) の監視
+## Monitoring single page applications (SPA)
 
-シングルページアプリケーション (SPA) の場合、RUM ブラウザ SDK は、`loading_type` 属性を使用して、`initial_load` ナビゲーションと `route_change` ナビゲーションを区別します。ウェブページを操作すると、ページが完全に更新されずに異なる URL に移動する場合、RUM SDK は、`loading_type:route_change` を使用して新しいビューイベントを開始します。RUM は、[履歴 API][16] を使用して URL の変更を追跡します。
+For single page applications (SPAs), the RUM Browser SDK differentiates between `initial_load` and `route_change` navigation with the `loading_type` attribute. If an interaction on your web page leads to a different URL without a full refresh of the page, the RUM SDK starts a new view event with `loading_type:route_change`. RUM tracks URL changes using the [History API][16].
 
-Datadog は、ページの読み込みに必要な時間を計算する独自のパフォーマンスメトリクス、`loading_time` を提供します。このメトリクスは、`initial_load` と `route_change` の両方のナビゲーションで機能します。
+Datadog provides a unique performance metric, `loading_time`, which calculates the time needed for a page to load. This metric works for both `initial_load` and `route_change` navigation.
 
-### ロード時間の計算方法
+### How loading time is calculated
 
-最新のウェブアプリケーションを考慮するために、読み込み時間はネットワークリクエストと DOM のミューテーションを監視します。
+To account for modern web applications, loading time watches for network requests and DOM mutations.
 
-- **Initial Load**: 読み込み時間は、次の_どちらか長い方_になります。
+- **Initial Load**: Loading Time is equal to _whichever is longer_:
 
-  - `navigationStart` と `loadEventEnd` の差、または
-  - `navigationStart` とページで初めてアクティビティがなくなる時間との差。詳しくは、[ページアクティビティの計算方法](#how-page-activity-is-calculated)をご覧ください。
+  - The difference between `navigationStart` and `loadEventEnd`, or
+  - The difference between `navigationStart` and the first time the page has no activity. Read [How page activity is calculated](#how-page-activity-is-calculated) for details.
 
-- **SPA Route Change**: ロード時間は、URL が変わってから、そのページに初めてアクティビティが発生するまでの差に相当します。詳しくは、[ページアクティビティの計算方法](#how-page-activity-is-calculated)をご覧ください。
+- **SPA Route Change**: Loading Time is equal to the difference between the URL change and the first time the page has no activity. Read [How page activity is calculated](#how-page-activity-is-calculated) for details.
 
-### ページアクティビティの計算方法
+### How page activity is calculated
 
-RUM ブラウザ SDK は、インターフェイスが再び安定するまでの時間を推定するために、ページのアクティビティを追跡します。ページは、以下の場合にアクティビティがあるとみなされます。
+The RUM Browser SDK tracks the page activity to estimate the time until the interface is stable again. The page is considered to have activity when:
 
-- `xhr` または `fetch` リクエストが進行中です。
-- ブラウザは、パフォーマンスリソースのタイミングエントリ (JS や CSS などの読み込み終了) を発行します。
-- ブラウザは DOM のミューテーションを発行します。
+- `xhr` or `fetch` requests are in progress.
+- The browser emits performance resource timing entries (loading end of JS, CSS, etc.).
+- The browser emits DOM mutations.
 
-ページのアクティビティは、100ms 間アクティビティがなかった場合に終了したと判断されます。
+The page activity is considered to have ended when it hasn't had any activity for 100ms.
 
-**注**: SDK の初期化後に発生したアクティビティのみを考慮します。
+**Note**: Only activity occurring after the SDK initialization is taken into account.
 
-**注意事項:**
+**Caveats:**
 
-最後のリクエストまたは DOM 変異から 100ms という基準は、以下のシナリオではアクティビティの正確な判断にならないかもしれません。
+The criteria of 100ms since last request or DOM mutation might not be an accurate determination of activity in the following scenarios:
 
-- アプリケーションは、定期的またはクリックごとに API へのリクエストを送信することで分析を収集します。
-- アプリケーションは "[comet][17]" の技術 (つまり、ストリーミングやロングポーリング) を使用しており、リクエストは不定時間保留されたままです。
+- The application collects analytics by sending requests to an API periodically or after every click.
+- The application uses "[comet][17]" techniques (that is, streaming or long polling), and the request stays on hold for an indefinite time.
 
-このような場合のアクティビティ判定の精度を向上させるには、`excludedActivityUrls` を指定します。これは、ページアクティビティを計算する際に RUM ブラウザ SDK が除外するリソースのリストです。
+To improve the accuracy of activity determination in these cases, specify `excludedActivityUrls`, a list of resources for the RUM Browser SDK to exclude when computing the page activity:
 
 ```javascript
 window.DD_RUM.init({
     ...
     excludedActivityUrls: [
-        // 正確な URL を除外する
+        // Exclude exact URLs
         'https://third-party-analytics-provider.com/endpoint',
 
-        // /comet で終わる URL を除外する
+        // Exclude any URL ending with /comet
         /\/comet$/,
 
-        // 関数が true を返す URL を除外する
+        // Exclude any URLs for which the function return true
         (url) => url === 'https://third-party-analytics-provider.com/endpoint',
     ]
 })
 ```
 
-### Hash SPA ナビゲーション
+### Hash SPA navigation
 
-RUM SDK は、ハッシュ (`#`) ナビゲーションに依存するフレームワークを自動的に監視します。SDK は `HashChangeEvent` を監視し、新しいビューを表示します。現在のビューのコンテキストに影響しない HTML アンカータグからくるイベントは無視されます。
+The RUM SDK automatically monitors frameworks that rely on hash (`#`) navigation. The SDK watches for `HashChangeEvent` and issues a new view. Events coming from an HTML anchor tag which do not affect the current view context are ignored.
 
-## 独自のパフォーマンスタイミングを追加
+## Add your own performance timing
 
-RUM のデフォルトのパフォーマンスタイミングに加えて、アプリケーションで時間がかかっている場所をより柔軟に計測することが可能です。`addTiming` API を使用すると、パフォーマンスタイミングを簡単に追加できます。
+On top of RUM's default performance timing, you may measure where your application is spending its time with greater flexibility. The `addTiming` API provides you with a simple way to add extra performance timing.
 
-たとえば、ヒーロー画像が表示されたときのタイミングを追加します。
+For example, you can add a timing when your hero image has appeared:
 
 ```html
 <html>
@@ -159,27 +160,27 @@ RUM のデフォルトのパフォーマンスタイミングに加えて、ア�
 </html>
 ```
 
-または、ユーザーが初めてスクロールしたとき:
+Or when users first scroll:
 
 ```javascript
 document.addEventListener("scroll", function handler() {
-    //1度だけトリガーするよう、イベントリスナーを削除
+    //Remove the event listener so that it only triggers once
     document.removeEventListener("scroll", handler);
     window.DD_RUM.addTiming('first_scroll');
 });
 ```
 
-タイミングが送信されると、タイミングはナノ秒単位で `@view.custom_timings.<timing_name>` (たとえば `@view.custom_timings.first_scroll`) としてアクセス可能になります。RUM エクスプローラーまたはダッシュボードで視覚化を作成する前に、[メジャーを作成][18]する必要があります。
+Once the timing is sent, the timing is accessible in nanoseconds as `@view.custom_timings.<timing_name>`, for example: `@view.custom_timings.first_scroll`. You must [create a measure][18] before creating a visualization in the RUM Explorer or in your dashboards.
 
-シングルページアプリケーションの場合、`addTiming` API により現在の RUM ビューの開始の相対的なタイミングが発行されます。たとえば、ユーザーがアプリケーションを表示し（初期ロード）、次に別のページを 5 秒間表示して（ルート変更）、8 秒後に `addTiming` をトリガーした場合、タイミングは `8-5 = 3` 秒となります。
+For single-page applications, the `addTiming` API issues a timing relative to the start of the current RUM view. For example, if a user lands on your application (initial load), then goes on a different page after 5 seconds (route change) and finally triggers `addTiming` after 8 seconds, the timing is equal to `8-5 = 3` seconds.
 
-非同期セットアップを使用している場合は、2 番目のパラメーターとして自分のタイミング (UNIX エポックタイムスタンプ) を指定できます。
+If you are using an asynchronous setup, you can provide your own timing (as a UNIX epoch timestamp) as a second parameter.
 
-例:
+For example:
 
 ```javascript
 document.addEventListener("scroll", function handler() {
-    //1 度だけトリガーするよう、イベントリスナーを削除 
+    //Remove the event listener so that it only triggers once
     document.removeEventListener("scroll", handler);
 
     const timing = Date.now()
@@ -190,20 +191,20 @@ document.addEventListener("scroll", function handler() {
 
 ```
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/real_user_monitoring/platform/dashboards/
-[2]: /ja/real_user_monitoring/browser/data_collected/#default-attributes
-[3]: /ja/real_user_monitoring/platform/dashboards/performance
-[4]: /ja/real_user_monitoring/explorer/
+[1]: /real_user_monitoring/platform/dashboards/
+[2]: /real_user_monitoring/browser/data_collected/#default-attributes
+[3]: /real_user_monitoring/platform/dashboards/performance
+[4]: /real_user_monitoring/explorer/
 [5]: https://web.dev/vitals/
-[6]: /ja/synthetics/browser_tests/
+[6]: /synthetics/browser_tests/
 [7]: https://web.dev/lcp/
 [8]: https://web.dev/fid/
 [9]: https://web.dev/cls/
-[10]: /ja/real_user_monitoring/browser/monitoring_page_performance/#how-loading-time-is-calculated
+[10]: /real_user_monitoring/browser/monitoring_page_performance/#how-loading-time-is-calculated
 [11]: https://www.w3.org/TR/paint-timing/#sec-terminology
 [12]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceTiming/domInteractive
 [13]: https://developer.mozilla.org/en-US/docs/Web/API/Document/DOMContentLoaded_event
@@ -211,5 +212,5 @@ document.addEventListener("scroll", function handler() {
 [15]: https://developer.mozilla.org/en-US/docs/Web/API/Window/load_event
 [16]: https://developer.mozilla.org/en-US/docs/Web/API/History
 [17]: https://en.wikipedia.org/wiki/Comet_&#40;programming&#41;
-[18]: /ja/real_user_monitoring/explorer/search/#setup-facets-and-measures
+[18]: /real_user_monitoring/explorer/search/#setup-facets-and-measures
 [19]: https://web.dev/inp/

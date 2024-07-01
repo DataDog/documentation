@@ -1,36 +1,40 @@
 ---
+title: Install Serverless Monitoring for AWS Step Functions
+kind: documentation
 further_reading:
-- link: /serverless/configuration/
-  tag: ドキュメント
-  text: サーバーレスモニタリングの構成
-- link: /integrations/amazon_lambda/
-  tag: ドキュメント
-  text: AWS Lambda インテグレーション
-title: AWS Step Functions のサーバーレスモニタリングのインストール
+    - link: /serverless/configuration/
+      tag: Documentation
+      text: Configure Serverless Monitoring
+    - link: /integrations/amazon_lambda/
+      tag: Documentation
+      text: AWS Lambda Integration
 ---
 
-### 要件
-* Step Function の実行時間は、フルトレースで 15 分未満でなければなりません。
-* リンクされた Lambda トレースは、Node.js (レイヤー v94+) と Python (レイヤー v75+) のランタイムでサポートされています。
+### Requirements
+* The full Step Function execution length must be less than 90 minutes for full traces.
+* Linked Lambda traces are supported for Node.js (layer v94+) and Python (layer v75+) runtimes.
 
-### セットアップ
+### How it works
+Datadog AWS Step Functions Monitoring collects logs and integration metrics from the AWS integration and uses ingested logs from AWS Step Functions to generate enhanced metrics and traces for your Step Function executions.
+
+### Setup
 
 {{< tabs >}}
 {{% tab "Serverless Framework" %}}
 
-[Serverless Framework][4] を使用してサーバーレスアプリケーションをデプロイする開発者には、Datadog Serverless Framework Plugin を使用します。
+For developers using [Serverless Framework][4] to deploy serverless applications, use the Datadog Serverless Framework Plugin.
 
-1. まだインストールしていない場合は、[Datadog Serverless Framework Plugin][1] v5.40.0+ をインストールします。
+1. If you have not already, install the [Datadog Serverless Framework Plugin][1] v5.40.0+:
 
     ```shell
     serverless plugin install --name serverless-plugin-datadog
     ```
 
-2. AWS から Datadog にログを転送する Lambda 関数の [Datadog Lambda Forwarder][2] をデプロイし、v3.74.0+ を使用していることを確認してください。[Forwarder を更新][5]する必要があるかもしれません。
+2. Ensure you have deployed the [Datadog Lambda Forwarder][2], a Lambda function that ships logs from AWS to Datadog, and that you are using v3.74.0+. You may need to [update your Forwarder][5].
 
-   Forwarder の ARN をメモしてください。
+   Take note of your Forwarder's ARN.
 
-3. 以下を `serverless.yml` に追加します。
+3. Add the following to your `serverless.yml`:
 
     ```yaml
     custom:
@@ -39,84 +43,93 @@ title: AWS Step Functions のサーバーレスモニタリングのインスト
         apiKeySecretArn: <DATADOG_API_KEY_SECRET_ARN>
         forwarderArn: <FORWARDER_ARN>
         enableStepFunctionsTracing: true
+        propagateUpstreamTrace : true
     ```
-    - `<DATADOG_SITE>` を {{< region-param key="dd_site" code="true" >}} に置き換えます。(右側で正しい SITE が選択されていることを確認してください)。
-    - `<DATADOG_API_KEY_SECRET_ARN>` を、[Datadog API キー][3]が安全に保存されている AWS シークレットの ARN に置き換えます。キーはプレーンテキスト文字列として保存する必要があります (JSON blob ではありません)。また、`secretsmanager:GetSecretValue`権限が必要です。迅速なテストのために、代わりに `apiKey` を使用して、Datadog API キーをプレーンテキストで設定することができます。
-    - `<FORWARDER_ARN>` は、前述のように Datadog Lambda Forwarder の ARN に置き換えます。
+    - Replace `<DATADOG_SITE>` with {{< region-param key="dd_site" code="true" >}} (ensure the correct SITE is selected on the right).
+    - Replace `<DATADOG_API_KEY_SECRET_ARN>` with the ARN of the AWS secret where your [Datadog API key][3] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can instead use `apiKey` and set the Datadog API key in plaintext.
+    - Replace `<FORWARDER_ARN>` with the ARN of your Datadog Lambda Forwarder, as noted previously.
+    - `propagateUpstreamTrace`: Optional. Set to `true` to inject Step Function context into downstream Lambda and Step Function invocations
 
-    その他の設定については、[Datadog Serverless Framework Plugin - 構成パラメーター][7]を参照してください。
+    For additional settings, see [Datadog Serverless Framework Plugin - Configuration parameters][7].
 
-4. Node.js と Python のランタイムでは、`serverless.yaml` ファイルで `mergeStepFunctionAndLambdaTraces:true` を設定します。これにより、Step Function のトレースと Lambda のトレースがリンクされます。Lambda 関数をインスツルメンテーションしてトレースを送信していない場合は、[お好みのランタイム用の Lambda レイヤーを追加する手順に従ってください][8]。
+4. For Node.js and Python runtimes, set `mergeStepFunctionAndLambdaTraces:true` in your `serverless.yaml` file. This links your Step Function traces with Lambda traces. If you have not instrumented your Lambda functions to send traces, you can [follow the steps to add the Lambda layer for your preferred runtime][8].
 
-[1]: https://docs.datadoghq.com/ja/serverless/libraries_integrations/plugin/
-[2]: /ja/logs/guide/forwarder/
+[1]: https://docs.datadoghq.com/serverless/libraries_integrations/plugin/
+[2]: /logs/guide/forwarder/
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: https://www.serverless.com/
-[5]: /ja/logs/guide/forwarder/?tab=cloudformation#upgrade-to-a-new-version
+[5]: /logs/guide/forwarder/?tab=cloudformation#upgrade-to-a-new-version
 [6]: logs/guide/forwarder/?tab=cloudformation#installation
-[7]: serverless/libraries_integrations/plugin/#configuration-parameters
-[8]: /ja/serverless/installation/#installation-instructions
+[7]: https://github.com/datadog/serverless-plugin-datadog?tab=readme-ov-file#configuration-parameters
+[8]: /serverless/installation/#installation-instructions
 {{% /tab %}}
 {{% tab "Datadog CLI" %}}
-1. まだインストールしていない場合は、[Datadog CLI][1] v2.18.0+ をインストールします。
+1. If you have not already, install the [Datadog CLI][1] v2.18.0+.
 
    ```shell
    npm install -g @datadog/datadog-ci
    ```
-2. AWS から Datadog にログを転送する Lambda 関数の [Datadog Lambda Forwarder][2] をデプロイし、v3.74.0+ を使用していることを確認してください。[Forwarder を更新][3]する必要があるかもしれません。
+2. Ensure you have deployed the [Datadog Lambda Forwarder][2], a Lambda function that ships logs from AWS to Datadog, and that you are using v3.74.0+. You may need to [update your Forwarder][3].
 
-   Forwarder の ARN をメモしてください。
-3. Step Function をインスツルメンテーションします。
+   Take note of your Forwarder's ARN.
+3. Instrument your Step Function.
 
    ```shell
-   datadog-ci stepfunctions instrument --step-function <STEP_FUNCTION_ARN> --forwarder <FORWARDER_ARN>
+   datadog-ci stepfunctions instrument \
+    --step-function <STEP_FUNCTION_ARN> \
+    --forwarder <FORWARDER_ARN> \
+    --env <ENVIRONMENT> \
+    --propagate-upstream-trace
+
    ```
-   - `<STEP_FUNCTION_ARN>` を Step Function の ARN に置き換えます。
-   - `<FORWARDER_ARN>` は、前述のように Datadog Lambda Forwarder の ARN に置き換えます。
+   - Replace `<STEP_FUNCTION_ARN>` with the ARN of your Step Function. Repeat the `--step-function` flag for each Step Function you wish to instrument.
+   - Replace `<FORWARDER_ARN>` with the ARN of your Datadog Lambda Forwarder, as noted previously.
+   - Replace `<ENVIRONMENT>` with the environment tag you would like to apply to your Step Functions.
+   - `--propagate-upstream-trace` is optional, and updates your Step Function definitions to inject Step Function context into any downstream Step Function or Lambda invocations.
 
-   `datadog-ci stepfunctions` コマンドの詳細については、[Datadog CLI ドキュメント][5]を参照してください。
+   For more information about the `datadog-ci stepfunctions` command, see the [Datadog CLI documentation][5].
 
-4. Node.js と Python のランタイムでは、datadog-ci コマンドにフラグ `--merge-step-function-and-lambda-traces` を追加します。これにより、Step Function のトレースと Lambda のトレースがリンクされます。まだ Lambda 関数をインスツルメンテーションしてトレースを送信していない場合は、[お好みのランタイム用の Lambda レイヤーを追加する手順に従ってください][6]。
+4. For Node.js and Python runtimes, add the flag `--merge-step-function-and-lambda-traces` in your datadog-ci command. This links your Step Function traces with Lambda traces. If you have not yet instrumented your Lambda functions to send traces, you can [follow the steps to add the Lambda layer for your preferred runtime][6].
 
-[1]: /ja/serverless/libraries_integrations/cli/
-[2]: /ja/logs/guide/forwarder/
-[3]: /ja/logs/guide/forwarder/?tab=cloudformation#upgrade-to-a-new-version
+[1]: /serverless/libraries_integrations/cli/
+[2]: /logs/guide/forwarder/
+[3]: /logs/guide/forwarder/?tab=cloudformation#upgrade-to-a-new-version
 [4]: logs/guide/forwarder/?tab=cloudformation#installation
 [5]: https://github.com/DataDog/datadog-ci/blob/master/src/commands/stepfunctions/README.md
-[6]: /ja/serverless/installation/#installation-instructions
+[6]: /serverless/installation/#installation-instructions
 {{% /tab %}}
 {{% tab "Custom" %}}
 
-1. Step Function のすべてのログを有効にします。AWS コンソールで、ステートマシンを開きます。*Edit* をクリックし、Logging セクションを見つけます。そこで、*Log level* を `ALL` に設定し、*Include execution data* チェックボックスを有効にします。
-   {{< img src="serverless/step_functions/aws_log.png" alt="AWS の UI、ログセクション、ログレベルが ALL に設定されています。" style="width:100%;" >}}
+1. Enable all logging for your Step Function. In your AWS console, open your state machine. Click *Edit* and find the Logging section. There, set *Log level* to `ALL` and enable the *Include execution data* checkbox.
+   {{< img src="serverless/step_functions/aws_log.png" alt="AWS UI, Logging section, showing log level set to ALL." style="width:100%;" >}}
 
-2. AWS から Datadog にログを転送する Lambda 関数の [Datadog Lambda Forwarder][1] をデプロイし、v3.74.0+ を使用していることを確認してください。[Forwarder を更新][2]する必要があるかもしれません。
+2. Ensure you have deployed the [Datadog Lambda Forwarder][1], a Lambda function that ships logs from AWS to Datadog, and that you are using v3.74.0+. You may need to [update your Forwarder][2].
 
-   Forwarder の ARN をメモしてください。
+   Take note of your Forwarder's ARN.
 
-3. CloudWatch のログを Datadog Lambda Forwarder にサブスクライブします。これには 2 つのオプションがあります。
-   - **Datadog-AWS インテグレーション** (推奨)
-     1. [Datadog-AWS インテグレーション][4]が設定されていることを確認します。
-     2. Datadog で [AWS インテグレーションタイル][5]を開き、* Configuration* タブを表示します。
-     3. 左側で、Step Function が実行されている AWS アカウントを選択します。*Log Collection* タブを開きます。
-     4. *Log Autosubscription* セクションの *Autosubscribe Forwarder Lambda Functions* に、前述のように Datadog Lambda Forwarder の ARN を入力します。*Add* をクリックします。
-     5. *Step Functions CloudWatch Logs* をトグルします。変更が有効になるまで 15 分かかります。
+3. Subscribe CloudWatch logs to the Datadog Lambda Forwarder. To do this, you have two options:
+   - **Datadog-AWS integration** (recommended)
+     1. Ensure that you have set up the [Datadog-AWS integration][4].
+     2. In Datadog, open the [AWS integration tile][5], and view the *Configuration* tab.
+     3. On the left, select the AWS account where your Step Function is running. Open the *Log Collection* tab.
+     4. In the *Log Autosubscription* section, under *Autosubscribe Forwarder Lambda Functions*, enter the ARN of your Datadog Lambda Forwarder, as noted previously. Click *Add*.
+     5. Toggle on *Step Functions CloudWatch Logs*. Changes take 15 minutes to take effect.
 
-     **注**: Log Autosubscription では、Lambda Forwarder と Step Function が同じリージョンにある必要があります。
+     **Note**: Log Autosubscription requires your Lambda Forwarder and Step Function to be in the same region.
 
-   - **手動**
-     1. ロググループ名のプレフィックスが `/aws/vendedlogs/states` であることを確認してください。
-     2. AWS コンソールを開き、Datadog Lambda Forwarder に移動します。*Function overview* セクションで、*Add trigger* をクリックします。
-     3. *Add trigger* で、*Trigger configuration* セクションで、*Select a source* ドロップダウンを使用して、`CloudWatch Logs` を選択します。
-     4. *Log group* で、ステートマシンのロググループを選択します。例: `/aws/vendedlogs/states/my-state-machine`
-     5. フィルター名を入力します。"empty filter" という名前を選択し、*Filter pattern* ボックスを空白のままにすることもできます。
+   - **Manual**
+     1. Ensure that your log group name has the prefix `/aws/vendedlogs/states`. 
+     2. Open your AWS console and go to your Datadog Lambda Forwarder. In the *Function overview* section, click on *Add trigger*.
+     3. Under *Add trigger*, in the *Trigger configuration* section, use the *Select a source* dropdown to select `CloudWatch Logs`.
+     4. Under *Log group*, select the log group for your state machine. For example, `/aws/vendedlogs/states/my-state-machine`.
+     5. Enter a filter name. You can choose to name it "empty filter" and leave the *Filter pattern* box blank.
 
-<div class="alert alert-warning">Serverless Framework や datadog-ci などの異なるインスツルメンテーション方法を使用している場合、自動サブスクリプションを有効にするとログが重複して作成される可能性があります。この動作を避けるために、1 つの構成方法を選択してください。</a></div>
+<div class="alert alert-warning"> If you are using a different instrumentation method such as Serverless Framework or datadog-ci, enabling autosubscription may create duplicated logs. Choose one configuration method to avoid this behavior.</a>.</div>
 
-
-4. `DD_TRACE_ENABLED` タグを追加して、Step Function のトレースを有効にします。値を `true` に設定します。
-5. タグを設定します。AWS コンソールを開き、Step Function のステートマシンに移動します。*Tags* セクションを開き、`env:<ENV_NAME>` タグと `service:<SERVICE_NAME>` タグを追加します。`env` タグは Datadog でトレースを見るために必要で、デフォルトは `dev` です。`service` タグのデフォルトはステートマシンの名前です。
-6. Node.js と Python のランタイムでは、Step Function のトレースを Lambda のトレースにリンクすることができます。Lambda Task で `Parameters` キーを以下のように設定します。
+4. Enable enhanced metrics on your Step Function by adding a `DD_ENHANCED_METRICS` tag. Set the value to `true`. 
+5. Enable tracing on your Step Function by adding a `DD_TRACE_ENABLED` tag. Set the value to `true`.
+6. Set up tags. Open your AWS console and go to your Step Functions state machine. Open the *Tags* section and add `env:<ENV_NAME>` and `service:<SERVICE_NAME>` tags. The `env` tag is required to see traces in Datadog, and it defaults to `dev`. The `service` tag defaults to the state machine's name.
+7. For Node.js and Python runtimes, you can link your Step Function traces to Lambda traces. On the Lambda Task, set the `Parameters` key with the following: 
 
    ```json
    "Parameters": {
@@ -125,9 +138,9 @@ title: AWS Step Functions のサーバーレスモニタリングのインスト
    }
    ```
 
-   `JsonMerge` [組み込み関数][6]は [Step 関数コンテキストオブジェクト][7] (`$$`) と元の Lambda の入力ペイロード (`$`) をマージします。元のペイロードのフィールドは、キーが同じ場合、Step Functions コンテキストオブジェクトを上書きします。
+   The `JsonMerge` [intrinsic function][6] merges the [Step Functions context object][7] (`$$`) with the original Lambda's input payload (`$`). Fields of the original payload overwrite the Step Functions context object if their keys are the same.
 
-**例**:
+**Example**:
 
 {{< highlight json "hl_lines=4-7" >}}
 "Lambda Read From DynamoDB": {
@@ -141,7 +154,7 @@ title: AWS Step Functions のサーバーレスモニタリングのインスト
     }
 {{< /highlight >}}
 
-また、ペイロードにビジネスロジックが定義されている場合は、以下のようにすることもできます。
+Alternatively, if you have business logic defined in the payload, you could also use the following:
 
 {{< highlight json "hl_lines=8-10" >}}
 "Lambda Read From DynamoDB": {
@@ -160,12 +173,12 @@ title: AWS Step Functions のサーバーレスモニタリングのインスト
     }
 {{< /highlight >}}
 
-Lambda 関数をインスツルメンテーションしてトレースを送信していない場合は、[お好みのランタイム用の Lambda レイヤーを追加する手順に従ってください][3]。
+If you have not yet instrumented your Lambda functions to send traces, you can [follow the steps to add the Lambda layer for your preferred runtime][3].
 
-[1]: /ja/logs/guide/forwarder/
-[2]: /ja/logs/guide/forwarder/?tab=cloudformation#upgrade-to-a-new-version
-[3]: /ja/logs/guide/forwarder/?tab=cloudformation#installation
-[4]: /ja/getting_started/integrations/aws/
+[1]: /logs/guide/forwarder/
+[2]: /logs/guide/forwarder/?tab=cloudformation#upgrade-to-a-new-version
+[3]: /logs/guide/forwarder/?tab=cloudformation#installation
+[4]: /getting_started/integrations/aws/
 [5]: https://app.datadoghq.com/integrations/aws
 [6]: https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-intrinsic-functions.html#asl-intrsc-func-json-manipulate
 [7]: https://docs.aws.amazon.com/step-functions/latest/dg/input-output-contextobject.html
@@ -174,14 +187,14 @@ Lambda 関数をインスツルメンテーションしてトレースを送信�
 
 
 
-## Step Function のメトリクス、ログ、トレースを Datadog で確認する
+## See your Step Function metrics, logs, and traces in Datadog
 
-ステートマシンを起動したら、Datadog の [**Serverless app**][2] にアクセスします。`service:<YOUR_STATE_MACHINE_NAME>` を検索すると、そのステートマシンに関連するメトリクス、ログ、トレースが表示されます。ステートマシンの `service` タグをカスタム値に設定した場合は、`service:<CUSTOM_VALUE>` で検索します。
+After you have invoked your state machine, go to the [**Serverless app**][2] in Datadog. Search for `service:<YOUR_STATE_MACHINE_NAME>` to see the relevant metrics, logs, and traces associated with that state machine. If you set the `service` tag on your state machine to a custom value, search for `service:<CUSTOM_VALUE>`.
 
-{{< img src="serverless/step_functions/overview1.png" alt="AWS Step Functions のサイドパネルビュー。" style="width:100%;" >}}
+{{< img src="serverless/step_functions/overview1.png" alt="An AWS Step Function side panel view." style="width:100%;" >}}
 
-トレースが表示されない場合は、[トラブルシューティング][5]を参照してください。
+If you cannot see your traces, see [Troubleshooting][5].
 
 [2]: https://app.datadoghq.com/functions?search=&cloud=aws&entity_view=step_functions
-[3]: /ja/serverless/installation/#installation-instructions
-[5]: /ja/serverless/step_functions/troubleshooting
+[3]: /serverless/installation/#installation-instructions
+[5]: /serverless/step_functions/troubleshooting

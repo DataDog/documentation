@@ -1,41 +1,55 @@
 ---
+title: Enable Dynamic Instrumentation for Java
 aliases:
-- /ja/tracing/dynamic_instrumentation/enabling/java/
+    - /tracing/dynamic_instrumentation/enabling/java/
+is_beta: false
+private: false
 code_lang: java
+type: multi-code-lang
 code_lang_weight: 10
 further_reading:
-- link: agent
-  tag: ドキュメント
-  text: Datadog Agent の概要
-is_beta: true
-private: false
-title: Java のダイナミックインスツルメンテーションを有効にする
-type: multi-code-lang
+    - link: agent
+      tag: Documentation
+      text: Getting Started with Datadog Agent
 ---
 
-ダイナミックインスツルメンテーションは、Datadog のトレーシングライブラリをサポートする機能です。すでに [APM を使用してアプリケーションのトレースを収集][1]している場合は、Agent とトレーシングライブラリが必要なバージョンであることを確認し、ステップ 4 のダイナミックインスツルメンテーションの有効化に直接進みます。
+Dynamic Instrumentation is a feature of supporting Datadog tracing libraries. If you are already using [APM to collect traces][1] for your application, ensure your Agent and tracing library are on the required version, and go directly to enabling Dynamic Instrumentation in step 4.
 
-## 要件
+## Requirements
 
-Datadog ダイナミックインスツルメンテーションライブラリは、JDK バージョン 8 以降でサポートされています。
+The Datadog Dynamic Instrumentation library is supported in JDK version 8 and above.
 
-## インストール
+## Installation
 
-1. Agent のバージョン[7.44.0][2] 以上をインストールするか、アップグレードします。
-2. まだ APM を有効にしていない場合は、Agent の構成で `DD_APM_ENABLED` 環境変数を `true` に設定し、ポート `8126/TCP` をリッスンします。
+1. Install or upgrade your Agent to version [7.44.0][2] or higher.
+2. If you don't already have APM enabled, in your Agent configuration, set the `DD_APM_ENABLED` environment variable to `true` and listening to the port `8126/TCP`.
 
-3. `dd-java-agent.jar` をダウンロードします。
-
+3. Download `dd-java-agent.jar`:
+ {{< tabs >}}
+ {{% tab "Wget" %}}
    ```shell
    wget -O dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
    ```
-   **注**: ダイナミックインスツルメンテーションは、バージョン 1.15.0 以降の `dd-java-agent.jar` ライブラリで利用可能です。
+{{% /tab %}}
+{{% tab "cURL" %}}
+   ```shell
+   curl -Lo dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
+   ```
+{{% /tab %}}
+{{% tab "Dockerfile" %}}
+   ```dockerfile
+   ADD 'https://dtdg.co/latest-java-tracer' dd-java-agent.jar
+   ```
+{{% /tab %}}
+{{< /tabs >}}
 
-3. `-Ddd.dynamic.instrumentation.enabled` フラグ、または `DD_DYNAMIC_INSTRUMENTATION_ENABLED` 環境変数を `true` に設定し、ダイナミックインスツルメンテーションを有効にしてサービスを稼働させます。`dd.service`、`dd.env`、`dd.version` の統合サービスタグを指定すると、プローブをフィルターしたりグループ化したり、アクティブなクライアントをこれらの次元でターゲットにすることができるようになります。
+   **Note**: Dynamic Instrumentation is available in the `dd-java-agent.jar` library in versions 1.24.0 and later.
+
+3. Run your service with Dynamic Instrumentation enabled by setting `-Ddd.dynamic.instrumentation.enabled` flag or `DD_DYNAMIC_INSTRUMENTATION_ENABLED` environment variable to `true`. Specify `dd.service`, `dd.env`, and `dd.version` Unified Service Tags so you can filter and group your probes and target active clients across these dimensions.
    {{< tabs >}}
-{{% tab "コマンド引数" %}}
+{{% tab "Command arguments" %}}
 
-サービス起動コマンドの例:
+Example service startup command:
 ```shell
 java \
     -javaagent:dd-java-agent.jar \
@@ -46,7 +60,7 @@ java \
     -jar <YOUR_SERVICE>.jar <YOUR_SERVICE_FLAGS>
 ```
 {{% /tab %}}
-{{% tab "環境変数" %}}
+{{% tab "Environment variables" %}}
 
 ```shell
 export DD_SERVICE=<YOUR_SERVICE>
@@ -60,40 +74,40 @@ java \
 {{% /tab %}}
 {{< /tabs >}}
 
-**注**: `-javaagent` 引数は `-jar` ファイルより前にあり、アプリケーション引数ではなく JVM オプションとして追加される必要があります。詳しくは、[Oracle ドキュメント][3]を参照してください。
+   **Note**: The `-javaagent` argument needs to be before `-jar`, adding it as a JVM option rather than an application argument. For more information, see the [Oracle documentation][3]:
 
    ```shell
-   # 良い:
+   # Good:
    java -javaagent:dd-java-agent.jar ... -jar my-service.jar -more-flags
-   # 悪い:
+   # Bad:
    java -jar my-service.jar -javaagent:dd-java-agent.jar ...
    ```
 
-4. ダイナミックインスツルメンテーションを有効にした状態でサービスを起動すると、[APM > ダイナミックインスツルメンテーションページ][4]でダイナミックインスツルメンテーションの利用を開始することができます。
+4. After starting your service with Dynamic Instrumentation enabled, you can start using Dynamic Instrumentation on the [APM > Dynamic Instrumentation page][4].
 
-## コンフィギュレーション
+## Configuration
 
-以下の環境変数を使用してダイナミックインスツルメンテーションを構成します。
+Configure Dynamic Instrumentation using the following environment variables:
 
-| 環境変数                             | タイプ          | 説明                                                                                                               |
+| Environment variable                             | Type          | Description                                                                                                               |
 | ------------------------------------------------ | ------------- | ------------------------------------------------------------------------------------------------------------------------- |
-| `DD_DYNAMIC_INSTRUMENTATION_ENABLED`             | Boolean       | 引数 `-Ddd.dynamic.instrumentation.enabled` の代替。ダイナミックインスツルメンテーションを有効にするには、`true` に設定します。           |
-| `DD_SERVICE`                                     | 文字列        | [サービス][5]名 (例: `web-backend`)。                                                                        |
-| `DD_ENV`                                         | 文字列        | [環境][5]名 (例: `production`)。                                                                     |
-| `DD_VERSION`                                     | 文字列        | サービスの[バージョン][5]。                                                                                         |
-| `DD_TAGS`                                        | 文字列        | 生成されたデータに適用するタグ。タグは `<key>:<value>` をカンマで区切ったリストである必要があります。例: `layer:api,team:intake`   |
+| `DD_DYNAMIC_INSTRUMENTATION_ENABLED`             | Boolean       | Alternate for `-Ddd.dynamic.instrumentation.enabled` argument. Set to `true` to enable Dynamic Instrumentation.           |
+| `DD_SERVICE`                                     | String        | The [service][5] name, for example, `web-backend`.                                                                        |
+| `DD_ENV`                                         | String        | The [environment][5] name, for example: `production`.                                                                     |
+| `DD_VERSION`                                     | String        | The [version][5] of your service.                                                                                         |
+| `DD_TAGS`                                        | String        | Tags to apply to produced data. Must be a list of `<key>:<value>` separated by commas such as: `layer:api,team:intake`.   |
 
-## 次にやるべきこと
+## What to do next
 
-スナップショットやメトリクスプローブの設定、データの参照やインデックス作成については、[ダイナミックインスツルメンテーション][6]を参照してください。
+See [Dynamic Instrumentation][6] for information about setting snapshot and metric probes and browsing and indexing the data.
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/tracing/trace_collection/
-[2]: https://app.datadoghq.com/account/settings#agent/overview
+[1]: /tracing/trace_collection/
+[2]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
 [3]: https://docs.oracle.com/javase/7/docs/technotes/tools/solaris/java.html
 [4]: https://app.datadoghq.com/dynamic-instrumentation
-[5]: /ja/getting_started/tagging/unified_service_tagging
-[6]: /ja/tracing/dynamic_instrumentation/
+[5]: /getting_started/tagging/unified_service_tagging
+[6]: /tracing/dynamic_instrumentation/

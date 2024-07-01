@@ -1,7 +1,7 @@
 ---
+title: runtime application self-protection (RASP)
 core_product:
-- security
-- appsec
-title: ランタイムアプリケーションセルフプロテクション (RASP)
+  - security
+  - appsec
 ---
-RASP は、リアルタイムに攻撃を検知・防御するセキュリティ技術です。
+RASP is a security technology that detects and prevents attacks in real time.

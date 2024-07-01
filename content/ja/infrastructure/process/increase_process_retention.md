@@ -1,80 +1,81 @@
 ---
+title: Increase Process Retention
+kind: documentation
 aliases:
-- /ja/infrastructure/process/generate_process_metrics/
-- /ja/processes/processing/process_to_metrics/
-- /ja/infrastructure/generate_process_metrics/
-description: プロセスからメトリクスを生成します。
+    - /infrastructure/process/generate_process_metrics/
+    - /processes/processing/process_to_metrics/
+    - /infrastructure/generate_process_metrics/
+description: Generate metrics from processes.
 further_reading:
-- link: metrics/distributions/
-  tag: Documentation
-  text: ディストリビューションメトリクス
-- link: monitors/monitor_types/metric/?tab=threshold
-  tag: Documentation
-  text: メトリクスモニターの作成
-- link: https://www.datadoghq.com/blog/rightsize-kubernetes-workloads/
-  tag: ブログ
-  text: Kubernetes のワークロードをライトサイジングするための実践的なヒント
-title: プロセスの保持を増やす
+    - link: metrics/distributions/
+      tag: Documentation
+      text: Distribution Metrics
+    - link: monitors/monitor_types/metric/?tab=threshold
+      tag: Documentation
+      text: Create a Metrics monitor
+    - link: "https://www.datadoghq.com/blog/rightsize-kubernetes-workloads/"
+      tag: Blog
+      text: Practical tips for rightsizing your Kubernetes workloads
 ---
 
-## 概要
+## Overview
 
-ライブプロセスのデータは 36 時間保管されますが、プロセスからグローバルかつパーセンタイルのディストリビューションメトリクスを生成し、リソースの消費量を長期的に監視することもできます。プロセスベースのメトリクスはその他の Datadog のメトリクスと同じく 15 か月間保管されるため、以下のような操作を行う場合に役立ちます。
+While Live Processes data is stored for 36 hours, you can generate global and percentile distribution metrics from your processes to monitor your resource consumption long-term. Process-based metrics are stored for 15 months like any other Datadog metric. This can help you:
 
-- 過去および現行のインフラストラクチャーの問題をデバッグする
-- クリティカルな作業におけるリソース消費の傾向を特定する
-- 負荷またはストレステストの前後でシステムの健全性を分析する
-- 基底のホストまたはコンテナの健全性に基づき、ソフトウェアデプロイの効果を追跡する
+- Debug past and ongoing infrastructure issues
+- Identify trends in the resource consumption of your critical workloads
+- Assess the health of your system before and after load or stress tests
+- Track the effect of software deployments on the health of your underlying hosts or containers
 
-{{< img src="infrastructure/process/process2metrics_overview_2.png" alt="プロセスベースのメトリクスを生成" style="width:80%;">}}
+{{< img src="infrastructure/process/process2metrics_overview_2.png" alt="Generate process-based metrics" style="width:80%;">}}
 
-## プロセスベースのメトリクスを生成
+## Generate a process-based metric
 
-[**Live Processes** ページ][2]、または [**Manage Metrics** タブ][1]で、**+ New Metric** をクリックすると、クエリから新しいプロセスベースのメトリクスを直接生成できます。
+You can generate a new process-based metric directly from queries in the [**Live Processes** page][2], or in the [**Manage Metrics** tab][1], by clicking **+ New Metric**.
 
-### 新しいプロセスベースのメトリクスを追加
+### Add a new process-based metric
 
-{{< img src="infrastructure/process/process2metrics_create.png" alt="プロセスベースのメトリクスを作成" style="width:80%;">}}
+{{< img src="infrastructure/process/process2metrics_create.png" alt="Create a process-based metric" style="width:80%;">}}
 
-1. **タグを選択してクエリにフィルターを適用**: クエリ構文は[ライブプロセス][2]と同じです。フィルターのスコープに一致するプロセスのみが集計対象と認識されます。テキスト検索フィルターはライブプロセスページのみでサポートされています。
-2. **追跡するメジャーを選択**: `Total CPU %` などのメジャーを入力して数値を集計し、対応する `count`、`min`、`max`、`sum`、`avg` の集計メトリクスを作成します。
-3. **`group by` にタグを追加**: 選択したタグをディメンションとしてメトリクスに追加し、フィルターの適用、集計、および比較を行います。デフォルトでは、プロセスから生成されたメトリクスに (明示的に追加しない限り) タグは付与されません。ライブプロセスのクエリに対して利用可能なタグは、すべてこのフィールドで使用することができます。
-4. **メトリクスに名前を付与**: メトリクスの名前を入力します。プロセスベースのメトリクスには常にプレフィックス _proc._ とサフィックス _[measure_selection]_ が付与されます。
-5. **パーセンタイル集計を追加**: _Include percentile aggregations_ チェックボックスを選択して、p50、p75、p90、p95、p99 パーセンタイルを生成します。パーセンタイルのメトリクスはカスタマーメトリクスとしても扱われ、適宜請求に追加されます。
+1. **Select tags to filter your query**: The query syntax is the same as for [Live Processes][2]. Only processes matching the scope of your filters are considered for aggregation. Text search filters are supported only on the Live Processes page.
+2. **Select the measure you would like to track**: Enter a measure such as `Total CPU %` to aggregate a numeric value and create its corresponding `count`, `min`, `max`, `sum`, and `avg` aggregated metrics.
+3. **Add tags to `group by`**: Select tags to be added as dimensions to your metrics, so they can be filtered, aggregated, and compared. By default, metrics generated from processes do not have any tags unless explicitly added. Any tag available for Live Processes queries can be used in this field.
+4. **Name your metric**: Fill in the name of your metric. Process-based metrics always have the prefix _proc._ and suffix _[measure_selection]_.
+5. **Add percentile aggregations**: Select the _Include percentile aggregations_ checkbox to generate p50, p75, p90, p95, and p99 percentiles. Percentile metrics are also considered customer metrics, and billed accordingly.
 
-メトリクス作成モーダルの一番下にある **Create Another** チェックボックスを選択することで、同じクエリを使用して複数のメトリクスを作成できます。このボックスを選択すると、モーダルはメトリクスが作成された後も開いたままの状態となり、フィルターと集計グループが事前に入力されます。
+You can create multiple metrics using the same query by selecting the **Create Another** checkbox at the bottom of the metric creation modal. When selected, the modal remains open after your metric has been created, with the filters and aggregation groups already filled in.
 
-**注**: プロセスベースのメトリクスのデータポイントは 10 秒間隔で生成されます。そのため、メトリクスが作成または更新されてから最初のデータポイントが報告されるまでに最大 3 分の遅延が生じる場合があります。
+**Note**: Data points for process-based metrics are generated at ten second intervals. There may be up to a 3-minute delay from the moment the metric is created or updated, to the moment the first data point is reported.
 
-<div class="alert alert-warning">プロセスベースのメトリクスは<a href="/metrics/custom_metrics/">カスタムメトリクス</a>と見なされ、それに応じて請求されます。請求への影響を避けるために、<code>command</code> や <code>user</code> などの無制限または非常に高いカーディナリティタグによるグループ化は避けてください。</div>
+<div class="alert alert-warning">Process-based metrics are considered <a href="/metrics/custom_metrics/">custom metrics</a> and billed accordingly. Avoid grouping by unbounded or extremely high cardinality tags like <code>command</code> and <code>user</code> to avoid impacting your billing.</div>
 
-### プロセスベースのメトリクスを更新
+### Update a process-based metric
 
-{{< img src="infrastructure/process/process2metrics_update.png" alt="ディストリビューションメトリクスを更新" style="width:80%;">}}
+{{< img src="infrastructure/process/process2metrics_update.png" alt="Updating distribution metrics" style="width:80%;">}}
 
-メトリクスの作成後、以下のフィールドを更新できます。
+After a metric is created, the following fields can be updated:
 
-- フィルタークエリ: 'Filter by' フィールドからタグを追加または削除し、メトリクスが生成されたマッチングプロセスのセットを変更します。
-- 集計グループ: 'Group by' フィールドからタグを追加または削除し、メトリクスを異なる方法で分割、またはそれらのカーディナリティを管理します。
-- パーセンタイルの選定: 'Include percentile aggregations' ボックスをチェックまたはチェックを外すことで、パーセンタイルメトリクスを削除または生成します。
+- Filter query: Add or remove tags from the 'Filter by' field to change the set of matching processes for which metrics are generated.
+- Aggregation groups: Add or remove tags from the 'Group by' field to break down your metrics in different ways, or manage their cardinality.
+- Percentile selection: Check or uncheck the 'Include percentile aggregations' box to remove or generate percentile metrics.
 
-メトリクスタイプまたは名前を変更するには、新しいメトリクスを作成する必要があります。
+To change the metric type or name, a new metric must be created.
 
-## Datadog プラットフォームにおけるプロセスメトリクスの活用
+## Leverage process metrics across the Datadog platform
 
-{{< img src="infrastructure/process/process2metrics_dashboard_widget.png" alt="ダッシュボードでプロセスディストリビューションメトリクスのグラフを表示" style="width:80%;">}}
+{{< img src="infrastructure/process/process2metrics_dashboard_widget.png" alt="Graphing process distribution metrics in dashboards" style="width:80%;">}}
 
-作成後は、Datadog の他のメトリクスと同様に、プロセスディストリビューション集計およびパーセンタイルメトリクスを使用することができます。例は以下の通りです。
+Once created, you can use process distribution aggregate and percentile metrics like any other in Datadog. For instance:
 
-- ダッシュボードとノートブックでプロセスベースのメトリクスをグラフ化し、重要な作業におけるリソース消費の履歴を追跡
-- プロセスベースのメトリクスにしきい値または異常値ベースのモニターを作成し、CPU または RSS メモリーの予期せぬ低下や急上昇を検知
-- [メトリクス相関][4]を使用して、内部およびサードパーティーソフトウェアのパフォーマンスに対してリソース消費の変化のコンテキストを取得
+- Graph process-based metrics in dashboards and notebooks to track the historical resource consumption of important workloads
+- Create threshold or anomaly-based monitors on top of process-based metrics to detect when CPU or RSS memory dips or spikes unexpectedly
+- Use [Metric Correlations][4] to contextualize changes in resource consumption against internal and third-party software performance
 
-## その他の参考資料
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/process?view=metrics
 [2]: https://app.datadoghq.com/process
-[3]: /ja/metrics/custom_metrics/
-[4]: /ja/dashboards/correlations/
+[3]: /metrics/custom_metrics/
+[4]: /dashboards/correlations/

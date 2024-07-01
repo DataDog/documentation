@@ -1,51 +1,51 @@
 ---
-aliases:
-- /ja/agent/faq/agent-5-autodiscovery
+title: Autodiscovery with Agent v5
 private: true
-title: Agent v5 を使用したオートディスカバリー
+aliases:
+  - /agent/faq/agent-5-autodiscovery
 ---
 
 <div class="alert alert-info">
-オートディスカバリーは、これまでのサービスディスカバリーのことです。Agent のコード内や一部の構成オプションでは、引き続きサービスディスカバリーと呼びます。
+Autodiscovery was previously called Service Discovery. It's still called Service Discovery throughout the Agent's code and in some configuration options.
 </div>
 
-Docker は[急速に導入が進んでいます][1]。Docker Swarm、Kubernetes、Amazon ECS などのオーケストレーションプラットフォームは、複数のホスト間のオーケストレーションとレプリケーションを管理することで、Docker 化されたサービスの実行を容易にし、回復性を高めます。しかし、監視はより困難になっています。ホスト間を予測不可能に移動するサービスを、どうすれば高い信頼性で監視できるでしょうか。
+Docker is being [adopted rapidly][1]. Orchestration platforms like Docker Swarm, Kubernetes, and Amazon ECS make running Dockerized services easier and more resilient by managing orchestration and replication across hosts. But all of that makes monitoring more difficult. How can you reliably monitor a service which is unpredictably shifting from one host to another?
 
-Datadog Agent は、オートディスカバリー機能を使用して、どのサービスがどこで実行されているかを自動的に追跡できます。オートディスカバリーを使用すると、Agent チェックの構成テンプレートを定義し、各チェックをどのコンテナに適用するかを指定できます。
+The Datadog Agent can automatically track which services are running where, thanks to its Autodiscovery feature. Autodiscovery lets you define configuration templates for Agent checks and specify which containers each check should apply to.
 
-Agent は、コンテナの状態が移り変わるにしたがって、静的チェック構成を有効化、無効化、またはテンプレートから再生成します。たとえば、NGINX コンテナが 10.0.0.6 から 10.0.0.17 に移動すると、Agent は、オートディスカバリー機能を利用して、NGINX チェック構成を新しい IP アドレスに更新します。このため、ユーザー側から操作をせずに、NGINX メトリクスを収集し続けることができます。
+The Agent enables, disables, and regenerates static check configurations from the templates as containers come and go. When your NGINX container moves from 10.0.0.6 to 10.0.0.17, Autodiscovery helps the Agent update its NGINX check configuration with the new IP address so it can keep collecting NGINX metrics without any action on your part.
 
-## 概要
+## Overview
 
-従来の非コンテナ環境では、Datadog Agent の設定は、その環境と同じく静的です。Agent は、起動時にディスクからチェック構成を読み取り、実行中に構成されているすべてのチェックを継続的に実行します。
+In a traditional non-container environment, Datadog Agent configuration is—like the environment in which it runs—static. The Agent reads check configurations from disk when it starts, and as long as it's running, it continuously runs every configured check.
 
-構成ファイルは静的です。構成ファイル内で構成されているネットワーク関連オプションは、10.0.0.61:6379 の Redis インスタンスなどの監視対象サービスインスタンスを特定するために使用されます。Agent チェックが目的のサービスに接続できない場合、ユーザーによって問題が解決されるまで、メトリクスは提供されません。Agent チェックは、管理者が監視対象サービスを回復させるか、チェックの構成を修正するまで、失敗した接続を再試行します。
+The configuration files are static, and any network-related options configured within them serve to identify specific instances of a monitored service, for example: a Redis instance at 10.0.0.61:6379. When an Agent check cannot connect to such a service, metrics are missing until you troubleshoot the issue. The Agent check retries its failed connection attempts until an administrator revives the monitored service or fixes the check's configuration.
 
-オートディスカバリーを有効にした場合、Agent は異なる方法でチェックを実行します。
+With Autodiscovery enabled, the Agent runs checks differently.
 
-### 異なるコンフィギュレーション
+### Different configuration
 
-静的構成ファイルは、常に変化するネットワークエンドポイントからデータを収集するチェックには適していません。そこでオートディスカバリーは、チェック構成に**テンプレート**を使用します。Agent は、各テンプレートで 2 つのテンプレート変数 `%%host%%` および `%%port%%` を探します。これらは、通常はハードコードされるネットワークオプションの代わりに置かれています。たとえば、Agent の [Go Expvar チェック][2]のテンプレートには、オプション `expvar_url: http://%%host%%:%%port%%` が含まれます。複数の IP アドレスまたは公開ポートを持つコンテナの場合は、オートディスカバリーが[テンプレート変数インデックス](#supported-template-variables)を使用して正しいアドレス/ポートを選択するように指示することができます。
+Static configuration files aren't suitable for checks that collect data from ever-changing network endpoints, so Autodiscovery uses **templates** for check configuration. In each template, the Agent looks for two template variables—`%%host%%` and `%%port%%`—to appear in place of any normally-hardcoded network options. For example: a template for the Agent's [Go Expvar check][2] contains the option `expvar_url: http://%%host%%:%%port%%`. For containers that have more than one IP address or exposed port, you can direct Autodiscovery to pick the right ones by using [template variable indexes](#supported-template-variables).
 
-テンプレートは監視対象サービスのインスタンス (どの `%%host%%` のどの `%%port%%` か) を特定しないため、オートディスカバリーは、テンプレートに代入する IP とポートを判断できるように、テンプレートごとに 1 つ以上の**コンテナ識別子**を必要とします。Docker の場合、コンテナ識別子はイメージ名またはコンテナラベルです。
+Because templates don't identify specific instances of a monitored service—which `%%host%%`? which `%%port%%`?—Autodiscovery needs one or more **container identifiers** for each template so it can determine which IP(s) and port(s) to substitute into the templates. For Docker, container identifiers are image names or container labels.
 
-最後に、オートディスカバリーは、チェックテンプレートをディスク以外の場所からロードできます。他の**テンプレートソース**としては、Consul などの key-value ストアや、Kubernetes で実行されている場合はポッドアノテーションがあります。
+Finally, Autodiscovery can load check templates from places other than disk. Other possible **template sources** include key-value stores like Consul, and, when running on Kubernetes, Pod annotations.
 
-### 異なる実行方法
+### Different execution
 
-オートディスカバリーを有効にして Agent を起動すると、Agent は、[いずれかの](#template-source-precedence)ではなく、使用可能なすべてのテンプレートソースから、チェックテンプレートをテンプレートのコンテナ識別子と共にロードします。従来の Agent 設定とは異なり、Agent は常にすべてのチェックを実行するわけではありません。Agent は、Agent として同じホスト上で実行されているすべてのコンテナを調査して、有効にするチェックを決定します。
+When the Agent starts with Autodiscovery enabled, it loads check templates from all available template sources—[not just one or another](#template-source-precedence)—along with the templates' container identifiers. Unlike in a traditional Agent setup, the Agent doesn't run all checks all the time; it decides which checks to enable by inspecting all containers running on the same host as the Agent.
 
-Agent は、実行中のコンテナを調査する際に、ロードしたいずれかのテンプレートのいずれかのコンテナ識別子にそのコンテナが一致するかどうかをチェックします。そして、一致するごとに、そのコンテナの IP アドレスとポートを代入した静的チェック構成を生成します。さらに、その静的構成を使用してチェックを有効にします。
+As the Agent inspects each running container, it checks if the container matches any of the container identifiers from any loaded templates. For each match, the Agent generates a static check configuration by substituting the matching container's IP address and port. Then it enables the check using the static configuration.
 
-Agent は、Docker のイベント (コンテナの作成、廃棄、起動、停止) を監視し、イベント発生時に静的チェック構成を有効化、無効化、または再生成します。
+The Agent watches for Docker events-container creation, destruction, starts, and stops—and enables, disables, and regenerates static check configurations on such events.
 
-## 設定方法
+## How to set it up
 
-### Agent コンテナの実行
+### Running the Agent container
 
-どのコンテナオーケストレーションプラットフォームを使用する場合でも、クラスター内の各ホストで、初めに 1 つの [docker-dd-agent コンテナ][3]を実行します。Kubernetes を使用している場合、docker-dd-agent の実行手順については、[Kubernetes インテグレーションのページ][4]を参照してください。Amazon ECS を使用している場合は、[Amazon ECS インテグレーションのページ][5]を参照してください。
+No matter what container orchestration platform you use, run a single [docker-dd-agent container][3] on every host in your cluster first. If you use Kubernetes, see the [Kubernetes integration page][4] for instructions on running docker-dd-agent. If you use Amazon ECS, see [its integration page][5].
 
-Docker Swarm を使用する場合は、マネージャーノードのいずれかで以下のコマンドを実行します。
+If you use Docker Swarm, run the following command on one of your manager nodes:
 
     docker service create \
       --name dd-agent \
@@ -57,22 +57,22 @@ Docker Swarm を使用する場合は、マネージャーノードのいずれ�
       -e SD_BACKEND=docker \
       gcr.io/datadoghq/docker-dd-agent:latest
 
-その他の場合は、docker-dd-agent ドキュメントで詳細な手順およびサポートされている[環境変数][6]の一覧を参照してください。
+Otherwise, see the docker-dd-agent documentation for detailed instructions and a comprehensive list of supported [environment variables][6].
 
-**Agent で JMX ベースのチェックを自動検出するには**
+**If you want the Agent to auto-discover JMX-based checks**:
 
-1. `gcr.io/datadoghq/docker-dd-agent:latest-jmx` イメージを使用します。このイメージは `latest` に基づいていますが、Agent が [jmxfetch][7] を実行するために必要な JVM を含んでいます。
-2. `gcr.io/datadoghq/docker-dd-agent:latest-jmx` の起動時に、環境変数 `SD_JMX_ENABLE=yes` を渡します。
+1. Use the `gcr.io/datadoghq/docker-dd-agent:latest-jmx` image. This image is based on `latest`, but it includes a JVM, which the Agent needs in order to run [jmxfetch][7].
+2. Pass the environment variable `SD_JMX_ENABLE=yes` when starting `gcr.io/datadoghq/docker-dd-agent:latest-jmx`.
 
-## チェックテンプレート
+## Check templates
 
-以下の各**テンプレートソース**セクションで、チェックテンプレートとそのコンテナ識別子を構成する方法を示します。
+Each **Template Source** section below shows a different way to configure check templates and their container identifiers.
 
-### ファイル (Auto-conf)
+### Files (auto-conf)
 
-テンプレートをローカルファイルとして保存するには、外部サービスやオーケストレーションプラットフォームを必要としません。この方法の欠点は、テンプレートを変更、追加、または削除するたびに、Agent コンテナを再起動する必要がある点です。
+Storing templates as local files doesn't require an external service or a specific orchestration platform. The downside is that you have to restart your Agent containers each time you change, add, or remove templates.
 
-Agent は、自分の `conf.d/auto_conf` ディレクトリでオートディスカバリーテンプレートを探します。以下のチェックのデフォルトテンプレートはここに置かれます。
+The Agent looks for Autodiscovery templates in its `conf.d/auto_conf` directory, which contains default templates for the following checks:
 
 - [Apache][8]
 - [Consul][9]
@@ -87,15 +87,15 @@ Agent は、自分の `conf.d/auto_conf` ディレクトリでオートディス
 - [Redis][18]
 - [Riak][19]
 
-基本的にはこれらのテンプレートで十分ですが、その他のチェックオプションを有効にする場合、複数のコンテナ識別子を使用する場合、[テンプレート変数インデックス](#supported-template-variables)を使用する場合などは、カスタム Agent チェック構成を使用する必要があります。その際、独自の auto-conf ファイルを記述します。このファイルは、以下の方法で提供できます。
+These templates may suit you in basic cases, but if you need to use custom Agent check configurations—say you want to enable extra check options, use different container identifiers, or use [template variable indexing](#supported-template-variables))—you need to write your own auto-conf files. You can provide those in a few ways:
 
-1. docker-dd-agent を実行する各ホストにファイルを追加し、docker-dd-agent コンテナの起動時にコンテナに[そのファイルを含むディレクトリをマウント][20]する
-2. docker-dd-agent に基づいて独自の Docker イメージをビルドし、カスタムテンプレートを `/etc/dd-agent/conf.d/auto_conf` に追加する
-3. Kubernetes で、ConfigMap を使用してファイルを追加する
+1. Add them to each host that runs docker-dd-agent and [mount the directory that contains them][20] into the docker-dd-agent container when starting it
+2. Build your own docker image based on docker-dd-agent, adding your custom templates to `/etc/dd-agent/conf.d/auto_conf`
+3. On Kubernetes, add them using ConfigMaps
 
-### Apache チェック
+### Apache check
 
-以下に、docker-dd-agent を使用してパッケージ化された `apache.yaml` テンプレートを示します。
+Here's the `apache.yaml` template packaged with docker-dd-agent:
 
 ```yaml
 docker_images:
@@ -107,48 +107,48 @@ instances:
   - apache_status_url: http://%%host%%/server-status?auto
 ```
 
-これは、最小の [Apache チェック構成][21]とほぼ同じですが、`docker_images` オプションがあることがわかります。この必須オプションを使用して、コンテナ識別子を指定できます。オートディスカバリーは、同じホスト上で `httpd` イメージを実行するすべてのコンテナにこのテンプレートを適用します。
+It looks like a minimal [Apache check configuration][21], but notice the `docker_images` option. This required option lets you provide container identifiers. Autodiscovery applies this template to any containers on the same host that run an `httpd` image.
 
-_すべての_ `httpd` イメージです。あるコンテナが `library/httpd:latest` を実行し、別のコンテナが `<YOUR_USERNAME>/httpd:v2` を実行しているとします。オートディスカバリーは、上記のテンプレートを両方のコンテナに適用します。オートディスカバリーは、auto-conf ファイルをロードする際に、ソースが異なる、またはタグが異なる同じ名前のイメージを区別できません。**コンテナイメージには、`library/httpd:latest` ではなく `httpd` などの短い名前を指定する必要があります**。
+_Any_ `httpd` image. Suppose you have one container running `library/httpd:latest` and another running `<YOUR_USERNAME>/httpd:v2`. Autodiscovery applies the above template to both containers. When it's loading auto-conf files, Autodiscovery cannot distinguish between identically-named images from different sources or with different tags, and **you have to provide short names for container images**, for example: `httpd`, NOT `library/httpd:latest`.
 
-この制限が問題になる場合、つまり同じイメージを実行する複数のコンテナにそれぞれ異なるチェック構成を適用する必要がある場合は、ラベルを使用してコンテナを特定します。各コンテナに異なるラベルを指定し、各ラベルをテンプレートファイルの `docker_images` リストに追加します。`docker_images` は、イメージに限らず、すべての種類のコンテナ識別子を配置する場所です。
+If this is too limiting—if you need to apply different check configurations to different containers running the same image—use labels to identify the containers. Label each container differently, then add each label to any template file's `docker_images` list (yes, `docker_images` is where to put _any_ kind of container identifier, not just images).
 
-### key-value ストア
+### Key-value store
 
-オートディスカバリーは、Consul、etcd、および Zookeeper をテンプレートソースとして使用できます。key-value ストアを使用するには、`datadog.conf` で構成するか、docker-dd-agent コンテナに渡される環境変数で構成する必要があります。
+Autodiscovery can use Consul, etcd, and Zookeeper as template sources. To use a key-value store, you must configure it in `datadog.conf` or in environment variables passed to the docker-dd-agent container.
 
-#### datadog.conf での構成
+#### Configure in datadog.conf
 
-`datadog.conf` ファイルで、`sd_config_backend`、`sd_backend_host`、および `sd_backend_port` オプションをそれぞれ、key-value ストアの種類 (`etcd`、`consul`、または `zookeeper`)、IP アドレス、およびポートに設定します。
+In the `datadog.conf` file, set the `sd_config_backend`, `sd_backend_host`, and `sd_backend_port` options to, respectively, the key-value store type-`etcd`, `consul`, or `zookeeper`-and the IP address and port of your key-value store:
 
 ```conf
-# 現時点では Docker のみがサポートされているため、この行のみコメント解除してください。
+# For now only Docker is supported so you just need to un-comment this line.
 service_discovery_backend: docker
 
-# コンフィギュレーションテンプレートの検索に使用する key/value ストアを定義します。
-# デフォルト値は etcd です。 Consul もサポートされています。
+# Define which key/value store must be used to look for configuration templates.
+# Default is etcd. Consul is also supported.
 sd_config_backend: etcd
 
-# バックエンドに接続するための設定です。以下はデフォルト値です。異なる構成を使用する場合は編集してください。
+# Settings for connecting to the backend. These are the default, edit them if you run a different config.
 sd_backend_host: 127.0.0.1
 sd_backend_port: 4001
 
-# デフォルトでは、Agent はバックエンドの `/datadog/check_configs` キー下で
-コンフィギュレーションテンプレートを検索します。
-# これを変更する場合は、次のオプションをコメント解除し、値を変更してください。
+# By default, the Agent looks for the configuration templates under the
+# `/datadog/check_configs` key in the back-end.
+# If you wish otherwise, uncomment this option and modify its value.
 # sd_template_dir: /datadog/check_configs
 
-# Consul ストアによりサービスディスカバリーのトークン認証が求められる場合は、ここでトークンを定義できます。
+# If you Consul store requires token authentication for service discovery, you can define that token here.
 # consul_token: f45cbd0b-5022-samp-le00-4eaa7c1f40f1
 ```
 
-Consul を使用し、Consul クラスターが認証を要求する場合は、`consul_token` を設定します。
+If you're using Consul and the Consul cluster requires authentication, set `consul_token`.
 
-[Agent を再起動][22]して、構成の変更を適用します。
+[Restart the Agent][22] to apply the configuration change.
 
-#### 環境変数での構成
+#### Configure in environment variables
 
-環境変数を使用する場合は、コンテナの起動時に、同じオプションをコンテナに渡します。
+If you prefer to use environment variables, pass the same options to the container when starting it:
 
 ```shell
 docker service create \
@@ -165,27 +165,27 @@ docker service create \
   gcr.io/datadoghq/docker-dd-agent:latest
 ```
 
-**注**: オートディスカバリーを有効にするためのオプションの名前は、`datadog.conf` では `service_discovery_backend` ですが、環境変数では `SD_BACKEND` です。
+**Note**: The option to enable Autodiscovery is called `service_discovery_backend` in `datadog.conf`, but it's called just `SD_BACKEND` as an environment variable.
 
 ---
 
-key-value ストアがテンプレートソースとして有効になっている場合、Agent はキー `/datadog/check_configs` の下でテンプレートを探します。オートディスカバリーは、以下のような key-value 階層を前提とします。
+With the key-value store enabled as a template source, the Agent looks for templates under the key `/datadog/check_configs`. Autodiscovery expects a key-value hierarchy like this:
 
 ```text
 /datadog/
   check_configs/
-    docker_image_1/                 # コンテナ識別子 (httpd など)
-      - check_names: [<CHECK_NAME>] # apache など
+    docker_image_1/                 # container identifier, for example, httpd
+      - check_names: [<CHECK_NAME>] # for example, apache
       - init_configs: [<INIT_CONFIG>]
       - instances: [<INSTANCE_CONFIG>]
     ...
 ```
 
-各テンプレートは、チェック名、`init_config`、`instances` の 3 つが組になっています。ここでは、前のセクションのようにオートディスカバリーにコンテナ識別子を指定するための `docker_images` オプションは必要ありません。key-value ストアの場合は、コンテナ識別子が `check_config` の最初のレベルのキーになります。(また、前のセクションで説明したファイルベースのテンプレートでは、この例のようなチェック名は必要なく、Agent はチェック名をファイル名から推測していました。)
+Each template is a 3-tuple: check name, `init_config`, and `instances`. The `docker_images` option from the previous section, which provided container identifiers to Autodiscovery, is not required here. For key-value stores, container identifiers appear as first-level keys under `check_config`. (Also note, the file-based template in the previous section didn't need a check name like this example does; there, the Agent inferred the check name from the file name.)
 
-#### Apache チェック
+#### Apache check
 
-以下の etcd コマンドを実行すると、前のセクションの例と同等の Apache チェックテンプレートが作成されます。
+The following etcd commands create an Apache check template equivalent to that from the previous section's example:
 
 ```text
 etcdctl mkdir /datadog/check_configs/httpd
@@ -194,13 +194,13 @@ etcdctl set /datadog/check_configs/httpd/init_configs '[{}]'
 etcdctl set /datadog/check_configs/httpd/instances '[{"apache_status_url": "http://%%host%%/server-status?auto"}]'
 ```
 
-3 つの値がそれぞれリストであることに注目してください。オートディスカバリーは、共有リストインデックスに基づいて、リスト項目をチェック構成に集約します。この例の場合は、`check_names[0]`、`init_configs[0]`、および `instances[0]` から最初 (かつ唯一) のチェック構成が作成されます。
+Notice that each of the three values is a list. Autodiscovery assembles list items into check configurations based on shared list indexes. In this case, it composes the first (and only) check configuration from `check_names[0]`, `init_configs[0]` and `instances[0]`.
 
-auto-conf ファイルとは異なり、**key-value ストアの場合は、コンテナ識別子として短いイメージ名 (`httpd` など) も長いイメージ名 (`library/httpd:latest` など) も使用できます**。以下の例では、長いイメージ名が使用されています。
+Unlike auto-conf files, **key-value stores may use the short OR long image name as container identifiers**, for example: `httpd` OR `library/httpd:latest`. The next example uses a long name.
 
-#### Web サイトの可用性を監視する Apache チェック
+#### Apache check with website availability monitoring
 
-以下の etcd コマンドを実行すると、同じ Apache テンプレートが作成され、Apache コンテナによって作成された Web サイトが使用可能かどうかを監視する [HTTP チェック][23]テンプレートが追加されます。
+The following etcd commands create the same Apache template and add an [HTTP check][23] template to monitor whether the website created by the Apache container is available:
 
 ```text
 etcdctl set /datadog/check_configs/library/httpd:latest/check_names '["apache", "http_check"]'
@@ -208,13 +208,13 @@ etcdctl set /datadog/check_configs/library/httpd:latest/init_configs '[{}, {}]'
 etcdctl set /datadog/check_configs/library/httpd:latest/instances '[{"apache_status_url": "http://%%host%%/server-status?auto"},{"name": "My service", "url": "http://%%host%%", timeout: 1}]'
 ```
 
-ここでも、各リストの順番が重要です。Agent は、構成の各部分が 3 つのリストの同じインデックスにある場合にのみ、HTTP チェック構成を正しく生成します (この例では、同じインデックス 1)。
+Again, the order of each list matters. The Agent can only generate the HTTP check configuration correctly if all parts of its configuration have the same index across the three lists (they do-the index is 1).
 
-### Kubernetes ポッドアノテーション
+### Kubernetes Pod annotations
 
-バージョン 5.12 以降の Datadog Agent では、チェックテンプレートを Kubernetes ポッドアノテーションに保存できます。オートディスカバリーが有効な場合、Agent は、Kubernetes 上で実行されているかどうかを検出し、実行されている場合はすべてのポッドアノテーションから自動的にチェックテンプレートを検索します。key-value ストアの場合のように、テンプレートソースとして Kubernetes を (`SD_CONFIG_BACKEND` で) 構成する必要はありません。
+As of version 5.12 of the Datadog Agent, you can store check templates in Kubernetes Pod annotations. With Autodiscovery enabled, the Agent detects if it's running on Kubernetes and automatically searches all Pod annotations for check templates if so; you don't need to configure Kubernetes as a template source with `SD_CONFIG_BACKEND` as you do with key-value stores.
 
-オートディスカバリーは、以下のようなアノテーションを前提とします。
+Autodiscovery expects annotations to look like this:
 
 ```text
 annotations:
@@ -223,16 +223,16 @@ annotations:
   service-discovery.datadoghq.com/<container identifier>.instances: '[<INSTANCE_CONFIG>]'
 ```
 
-形式は、key-value ストアの形式に似ています。異なる点は以下のとおりです。
+The format is similar to that for key-value stores. The differences are:
 
-* アノテーションの先頭には `service-discovery.datadoghq.com/` が必要です (key-value ストアの場合、先頭は `/datadog/check_configs/`)。
-* アノテーションの場合、オートディスカバリーは、コンテナをイメージではなく**名前**で識別します (auto-conf ファイルおよび key-value ストアの場合と同様)。つまり、`<container identifier>` は `.spec.containers[0].image` ではなく `.spec.containers[0].name` と比較されます。
+* Annotations must begin with `service-discovery.datadoghq.com/` (for key-value stores, the starting indicator is `/datadog/check_configs/`).
+* For Annotations, Autodiscovery identifies containers by _name_, NOT image (as it does for auto-conf files and key-value stores). That is, it looks to match `<container identifier>` to `.spec.containers[0].name`, not `.spec.containers[0].image`.
 
-Kubernetes ポッドを直接定義する (`kind: Pod`) 場合は、各ポッドアノテーションをその `metadata` セクションの直下に追加します (以下の最初の例を参照)。ポッドを Replication Controller、Replica Set、または Deployment を介して**間接的に**定義する場合は、ポッドアノテーションを `.spec.templates.metadata` の下に追加します (以下の 2 つめの例を参照)。
+If you define your Kubernetes Pods directly (`kind: Pod`), add each Pod's annotations directly under its `metadata` section (see the first example below). If you define Pods _indirectly_ with Replication Controllers, Replica Sets, or Deployments, add Pod annotations under `.spec.templates.metadata` (see the second example below).
 
-#### Web サイトの可用性を監視する Apache チェック
+#### Apache check with website availability monitoring
 
-以下のポッドアノテーションは、`apache` コンテナ用の 2 つのテンプレート (前のセクションの最後のテンプレートと同等) を定義します。
+The following Pod annotation defines two templates-equivalent to those from the end of the previous section-for `apache` containers:
 
 ```yaml
 apiVersion: v1
@@ -246,19 +246,19 @@ metadata:
     name: apache
 spec:
   containers:
-    - name: apache # これがアノテーションでコンテナ識別子として使用されます
-      image: httpd # これで無く
+    - name: apache # use this as the container identifier in your annotations
+      image: httpd # NOT this
       ports:
         - containerPort: 80
 ```
 
-#### Apache チェックと HTTP チェック
+#### Apache and HTTP checks
 
-Deployment からポッドを定義する場合は、テンプレートアノテーションを Deployment のメタデータに追加しないでください。Agent はこれを参照しません。以下のように指定して、アノテーションを追加します。
+If you define pods with Deployments, don't add template annotations to the Deployment metadata; the Agent doesn't look there. Add them like this:
 
 ```yaml
 apiVersion: apps/v1beta1
-metadata: # ここにテンプレートを追加しないでください
+metadata: # Don't add templates here
   name: apache-deployment
 spec:
   replicas: 2
@@ -272,17 +272,17 @@ spec:
         service-discovery.datadoghq.com/apache.instances: '[{"apache_status_url": "http://%%host%%/server-status?auto"},{"name": "My service", "url": "http://%%host%%", timeout: 1}]'
     spec:
       containers:
-      - name: apache # これがアノテーションでコンテナ識別子として使用されます
-        image: httpd # これで無く
+      - name: apache # use this as the container identifier in your annotations
+        image: httpd # NOT this
         ports:
         - containerPort: 80
 ```
 
-### Docker ラベルアノテーション
+### Docker label annotations
 
-バージョン 5.17 以降の Datadog Agent では、チェックテンプレートを Docker ラベルに保存できます。オートディスカバリーが有効な場合、Agent は、Docker 上で実行されているかどうかを検出し、すべてのラベルから自動的にチェックテンプレートを検索します。key-value ストアの場合のように、テンプレートソースを (`SD_CONFIG_BACKEND` で) 構成する必要はありません。
+Since version 5.17 of the Datadog Agent, you can store check templates in Docker labels. With Autodiscovery enabled, the Agent detects if it's running on Docker and automatically searches all labels for check templates; you don't need to configure a template source with `SD_CONFIG_BACKEND` as you do with key-value stores.
 
-オートディスカバリーは、ファイルの種類に応じて、ラベルが以下の例のようになっていることを前提とします。
+Autodiscovery expects labels to look like these examples, depending on the file type:
 
 **Dockerfile**
 
@@ -301,7 +301,7 @@ labels:
   com.datadoghq.ad.instances: '[<INSTANCE_CONFIG>]'
 ```
 
-**docker run コマンド**
+**docker run command**
 
 ```text
 -l com.datadoghq.ad.check_names='[<CHECK_NAME>]' -l com.datadoghq.ad.init_configs='[<INIT_CONFIG>]' -l com.datadoghq.ad.instances='[<INSTANCE_CONFIG>]'
@@ -309,7 +309,7 @@ labels:
 
 #### NGINX Dockerfile
 
-以下の Dockerfile は、オートディスカバリーを有効にして NGINX コンテナを起動します。
+The following Dockerfile launches an NGINX container with Autodiscovery enabled:
 
 ```text
 FROM nginx
@@ -321,46 +321,46 @@ LABEL "com.datadoghq.ad.init_configs"='[{}]'
 LABEL "com.datadoghq.ad.instances"='[{"nginx_status_url": "http://%%host%%:%%port%%/nginx_status"}]'
 ```
 
-## リファレンス
+## Reference
 
-### サポートされているテンプレート変数
+### Supported template variables
 
-以下のテンプレート変数が Agent によって処理されます。
+The following template variables are handled by the Agent:
 
-- コンテナ IP: `host`
-  - `%%host%%`: ネットワークを自動検出します。存在する場合は、`bridge` ネットワーク IP を返します。**ソートされた**最後のネットワークの IP にフォールバックします。
-  - `%%host_<NETWORK NAME>%%`: 複数のネットワークにアタッチされている場合に、`%%host_bridge%%`、`%%host_swarm%%` など使用するネットワーク名を指定します。指定されたネットワーク名が見つからない場合は、`%%host%%` と同様に動作します。
+- Container IP: `host`
+  - `%%host%%`: auto-detect the network. Returns the `bridge` network IP if present; falls back to the last **sorted** network's IP.
+  - `%%host_<NETWORK NAME>%%`: specify the network name to use when attached to multiple networks, for example `%%host_bridge%%`, `%%host_swarm%%`, etc; behaves like `%%host%%` if network name specified was not found.
 
-- コンテナポート: `port`
-  - `%%port%%`: 公開ポートを**数値として昇順にソート**した場合に最大のポートが使用されます (例えば、ポート 80、443、8443 を公開しているコンテナの場合は、ポート 8443 が使用されます)
-  - `%%port_0%%`: ポートを**数値として昇順にソート**した場合に最初のポートが使用されます。前述のコンテナの場合、`%%port_0%%` はポート 80、`%%port_1%%` はポート 443 を表します。
-  - 使用するポートが変わらない場合、Datadog では`port` 変数を使用しないでポートを直接指定することをお勧めしています。
+- Container port: `port`
+  - `%%port%%`: use the highest exposed port **sorted numerically and in ascending order** (For example, 8443 for a container that exposes ports 80, 443, and 8443)
+  - `%%port_0%%`: use the first port **sorted numerically and in ascending order** (for the same container, `%%port_0%%` refers to port 80, `%%port_1%%` refers to 443
+  - If your target port is constant, Datadog recommends you directly specify it, without using the `port` variable.
 
-- コンテナ PID: `pid` (5.15.x で追加)
-  - `%%pid%%`: `docker inspect --format '{{.State.Pid}}' <CONTAINER>` から返されたコンテナプロセス ID を取得します。
+- Container PID: `pid` (Added in 5.15.x)
+  - `%%pid%%`: retrieves the container process ID as returned by `docker inspect --format '{{.State.Pid}}' <CONTAINER>`
 
-- コンテナ名: `container_name` (5.15.x で追加)
-  - `%%container_name%%`: コンテナ名を取得します。
+- Container name: `container_name` (Added in 5.15.x)
+  - `%%container_name%%`: retrieves the container name.
 
-### ラベル
+### Labels
 
-コンテナは、コンテナの名前やイメージではなく、ラベルで識別できます。それには、コンテナに `com.datadoghq.sd.check.id: <SOME_LABEL>` というラベルを付け、通常はコンテナの名前やイメージを置く場所に `<SOME_LABEL>` を置きます。たとえば、コンテナに `com.datadoghq.sd.check.id: special-container` というラベルを付けた場合、オートディスカバリーは、`docker_images` リストに `special-container` を含む auto-conf テンプレートをそのコンテナに適用します。
+You can identify containers by label rather than container name or image. Just label any container `com.datadoghq.sd.check.id: <SOME_LABEL>`, and then put `<SOME_LABEL>` anywhere you'd normally put a container name or image. For example, if you label a container `com.datadoghq.sd.check.id: special-container`, Autodiscovery applies to that container any auto-conf template that contains `special-container` in its `docker_images` list.
 
-オートディスカバリーは、各コンテナをラベルまたはイメージ/名前 (のいずれか) でのみ識別し、ラベルが優先されます。`com.datadoghq.sd.check.id: special-nginx` というラベルが付き、`nginx` イメージを実行するコンテナに対して、Agent は、コンテナ識別子として `nginx` のみを含むテンプレートを適用しません。
+Autodiscovery can only identify each container by label OR image/name-not both-and labels take precedence. For a container that has a `com.datadoghq.sd.check.id: special-nginx` label and runs the `nginx` image, the Agent DOESN'T apply templates that include only `nginx` as a container identifier.
 
-### テンプレートソースの優先度
+### Template source precedence
 
-複数のテンプレートソースから同じチェックタイプのテンプレートを提供する場合、Agent は、以下の順番でテンプレートを検索し、最初に見つかったテンプレートを使用します。
+If you provide a template for the same check type through multiple template sources, the Agent looks for templates in the following order (using the first one it finds):
 
-* Kubernetes アノテーション
-* key-value ストア
-* ファイル
+* Kubernetes annotations
+* Key-value stores
+* Files
 
-したがって、`redisdb` テンプレートを Consul 内で構成し、かつファイル (`conf.d/auto_conf/redisdb.yaml`) としても構成した場合、Agent は Consul のテンプレートを使用します。
+So if you configure a `redisdb` template both in Consul and as a file (`conf.d/auto_conf/redisdb.yaml`), the Agent uses the template from Consul.
 
-## トラブルシューティング
+## Troubleshooting
 
-オートディスカバリーで、構成したチェックのいくつかがロードされているかどうかが不明な場合は、Agent の `configcheck` 初期化スクリプトコマンドを使用します。たとえば、Redis テンプレートがデフォルトの `auto_conf/redisdb.yaml` ファイルではなく、Kubernetes アノテーションからロードされていることを確認するには、次のようにします。
+When you're not sure if Autodiscovery is loading certain checks you've configured, use the Agent's `configcheck` init script command. For example, to confirm that your Redis template is being loaded from a Kubernetes annotation—not the default `auto_conf/redisdb.yaml` file:
 
 ```text
 # docker exec -it <AGENT_CONTAINER_NAME> /etc/init.d/datadog-agent configcheck
@@ -372,7 +372,7 @@ Check "redisdb":
   config --> {'instances': [{u'host': u'10.244.1.32', u'port': u'6379', 'tags': [u'image_name:kubernetes/redis-slave', u'kube_namespace:guestbook', u'app:redis', u'role:slave', u'docker_image:kubernetes/redis-slave:v2', u'image_tag:v2', u'kube_replication_controller:redis-slave']}], 'init_config': {}}
 ```
 
-オートディスカバリーが JMX ベースのチェックをロードしているかどうかを確認するには、次のようにします。
+To check whether Autodiscovery is loading JMX-based checks:
 
 ```text
 # docker exec -it <AGENT_CONTAINER_NAME> cat /opt/datadog-agent/run/jmx_status.yaml
@@ -387,8 +387,8 @@ checks:
 [1]: https://www.datadoghq.com/docker-adoption
 [2]: https://github.com/DataDog/integrations-core/blob/master/go_expvar/datadog_checks/go_expvar/data/conf.yaml.example
 [3]: https://gcr.io/datadoghq/docker-dd-agent
-[4]: /ja/agent/kubernetes/
-[5]: /ja/integrations/amazon_ecs/#installation
+[4]: /agent/kubernetes/
+[5]: /integrations/amazon_ecs/#installation
 [6]: https://github.com/DataDog/docker-dd-agent#environment-variables
 [7]: https://github.com/DataDog/jmxfetch
 [8]: https://github.com/DataDog/integrations-core/blob/master/apache/datadog_checks/apache/data/auto_conf.yaml
@@ -405,5 +405,5 @@ checks:
 [19]: https://github.com/DataDog/integrations-core/blob/master/riak/datadog_checks/riak/data/auto_conf.yaml
 [20]: https://github.com/DataDog/docker-dd-agent#configuration-files
 [21]: https://github.com/DataDog/integrations-core/blob/master/apache/datadog_checks/apache/data/conf.yaml.example
-[22]: /ja/agent/configuration/agent-commands/#start-stop-restart-the-agent
+[22]: /agent/configuration/agent-commands/#start-stop-restart-the-agent
 [23]: https://github.com/DataDog/integrations-core/blob/master/http_check/datadog_checks/http_check/data/conf.yaml.example

@@ -1,128 +1,127 @@
 ---
-algolia:
-  tags:
-  - apm
-  - application performance monitoring
-  - distributed tracing
-aliases:
-- /ja/tracing/faq/terminology
-- /ja/tracing/guide/terminology
-- /ja/tracing/guide/distributed_tracing/
-- /ja/tracing/advanced/
-- /ja/tracing/api
-- /ja/tracing/faq/distributed-tracing/
-cascade:
-  algolia:
-    rank: 70
-description: パフォーマンス向上のためにコードを操作する
-further_reading:
-- link: https://app.datadoghq.com/release-notes?category=APM
-  tag: リリースノート
-  text: Datadog APM の最新リリースをご覧ください！ (アプリへのログインが必要です)
-- link: https://www.datadoghq.com/blog/span-based-metrics/
-  tag: ブログ
-  text: スパンベースのメトリクスを生成し、アプリケーションパフォーマンスの過去の傾向を追跡
-- link: https://www.datadoghq.com/blog/apm-security-view/
-  tag: ブログ
-  text: APM セキュリティビューでリスク、脆弱性、攻撃を視覚化する
-- link: https://www.datadoghq.com/blog/monitor-azure-app-service-linux/
-  tag: ブログ
-  text: Datadog で Azure App Service 上の Linux Web アプリを監視する
-- link: https://www.datadoghq.com/blog/monitor-apis-datadog-api-catalog/
-  tag: ブログ
-  text: Datadog API カタログで API のパフォーマンス、セキュリティ、所有権を管理する
-- link: https://dtdg.co/fe
-  tag: 基盤の活用
-  text: APM の理解を深めるためのインタラクティブなセッションにご参加ください
 title: APM
+kind: documentation
+description: Instrument your code to improve performance
+further_reading:
+  - link: "https://app.datadoghq.com/release-notes?category=APM"
+    tag: "Release Notes"
+    text: "Check out the latest Datadog APM releases! (App login required)"
+  - link: "https://www.datadoghq.com/blog/span-based-metrics/"
+    tag: "Blog"
+    text: "Generate span-based metrics to track historical trends in application performance"
+  - link: "https://www.datadoghq.com/blog/apm-security-view/"
+    tag: "Blog"
+    text: "Gain visibility into risks, vulnerabilities, and attacks with APM Security View"
+  - link: "https://www.datadoghq.com/blog/monitor-azure-app-service-linux/"
+    tag: "Blog"
+    text: "Monitor your Linux web apps on Azure App Service with Datadog"
+  - link: "https://www.datadoghq.com/blog/monitor-apis-datadog-api-catalog/"
+    tag: "Blog"
+    text: "Manage API performance, security, and ownership with Datadog API Catalog"
+  - link: "https://dtdg.co/fe"
+    tag: "Foundation Enablement"
+    text: "Join an interactive session to boost your APM understanding"  
+
+aliases:
+  - /tracing/faq/terminology
+  - /tracing/guide/terminology
+  - /tracing/guide/distributed_tracing/
+  - /tracing/advanced/
+  - /tracing/api
+  - /tracing/faq/distributed-tracing/
+algolia:
+  tags: ['apm', 'application performance monitoring', 'distributed tracing']
+cascade:
+    algolia:
+        rank: 70
 ---
 
 {{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/381554158/rendition/1080p/file.mp4?loc=external&signature=e19b4e64632c3b1a42b11cb27fca2682dfadecd4690774c005ba2f5079b6a416" poster="/images/poster/tracing.png" >}}
 
 </br>
 
-## 概要
+## Overview
 
-Datadog アプリケーションパフォーマンス監視機能 (APM) は、アプリケーションの深いところまで可視化し、パフォーマンスのボトルネックの特定、問題のトラブルシューティング、サービスの最適化を可能にします。分散型トレーシング、すぐに使えるパフォーマンスダッシュボード、その他のテレメトリーデータとのシームレスな相関付けにより、Datadog APM はアプリケーションで最高のパフォーマンスとユーザーエクスペリエンスを実現するのに役立ちます。
+Datadog Application Performance Monitoring (APM) provides deep visibility into your applications, enabling you to identify performance bottlenecks, troubleshoot issues, and optimize your services. With distributed tracing, out-of-the-box dashboards, and seamless correlation with other telemetry data, Datadog APM helps ensure the best possible performance and user experience for your applications.
 
-Datadog APM で使用される用語の紹介は、[APM の用語と概念][1]を参照してください。
+For an introduction to terminology used in Datadog APM, see [APM Terms and Concepts][1].
 
-## はじめに
+## Getting started
 
-Datadog APM の利用を開始する場合は、シングルステップのインスツルメンテーションを利用するのが最も簡単です。この方法であれば、Datadog Agent のインストールとアプリケーションのインスツルメンテーションをワンステップで行うことができ、追加の構成手順は必要ありません。詳しくは、[シングルステップのインスツルメンテーション][27]をご覧ください。
+The simplest way to start with Datadog APM is with Single Step Instrumentation. This approach installs the Datadog Agent and instruments your application in one step, with no additional configuration steps required. To learn more, read [Single Step Instrumentation][27].
 
-よりカスタマイズが必要なセットアップに対応するため、Datadog は Datadog トレーシングライブラリを使ったカスタムインスツルメンテーションをサポートしています。詳しくは、[アプリケーションのインスツルメンテーション][2]をご覧ください。
+For setups that require more customization, Datadog supports custom instrumentation with Datadog tracing libraries. To learn more, read [Application Instrumentation][2].
 
-## ユースケース
+## Use cases
 
-Datadog APM がそれぞれのユースケースにどのように対応できるか、いくつかの例をご紹介します。
+Discover some ways Datadog APM can help support your use cases:
 
-| 実現したいこと| Datadog APM の活用方法 |
+| You want to...| How Datadog APM can help |
 | ----------- | ----------- |
-| リクエストがシステム内をどのように流れるかを理解する。 | [トレースエクスプローラー][21]を使用して、分散サービス全体を対象にクエリを実行して、エンドツーエンドのトレースを視覚化します。 |
-| 個別サービスの健全性とパフォーマンスを監視する。 | [サービス詳細ページ][26]と[リソースページ][28]を使用し、パフォーマンスメトリクスの分析、デプロイメントの追跡、問題のあるリソースの特定を通じてサービスの健全性を評価します。 |
-| トレースをDBM、RUM、ログ、Synthetics、プロファイルと相関付ける。 | [APM データとその他のテレメトリーとの相関付け][20]を行い、データにコンテキストを付与して、より包括的な分析を可能にします。 |
-| Datadog へのデータの流れを制御する。 | [取り込み制御][6]を使用して、サービスやリソースごとの取り込みの構成とサンプリングレートを調整します。[保持フィルター][7]を使用して、どのスパンを 15 日間保持するかを選択します。 |
+| Understand how requests flow through your system. | Use the [Trace Explorer][21] to query and visualize end-to-end traces across distributed services. |
+| Monitor service health and performance of individual services. | Use the [service][26] and [resource pages][28] to assess service health by analyzing performance metrics, tracking deployments, and identifying problematic resources. |
+| Correlate traces with DBM, RUM, logs, synthetics, and profiles. | [Correlate APM Data with Other Telemetry][20] to give context to your data for more comprehensive analysis. |
+| Control how data flows into Datadog. | Use [Ingestion Controls][6] to adjust ingestion configuration and sampling rates by service and resource. Use [Retention filters][7] to choose which spans to retain for 15 days. |
 
-### トレースエクスプローラー
+### Trace Explorer
 
-[トレースエクスプローラー][21]を使用すると、トレースをリアルタイムで検索・分析することができます。パフォーマンスのボトルネックの特定、エラーのトラブルシューティング、関連ログやメトリクスへのピボットにより、問題を取り巻くコンテキストを完全に理解することができます。
+The [Trace Explorer][21] allows you search and analyze your traces in real-time. Identify performance bottlenecks, troubleshoot errors, and pivot to related logs and metrics to understand the full context around any issue.
 
-{{< img src="/tracing/trace_explorer/trace_explorer.png" alt="トレースエクスプローラーの画面。" style="width:100%;" >}}
+{{< img src="/tracing/trace_explorer/trace_explorer.png" alt="Trace explorer view." style="width:100%;" >}}
 
-### サービス詳細画面
+### Service page
 
-[サービス詳細ページ][26]は、サービスのパフォーマンスを監視し、[デプロイ中にバージョン間の比較][15]を行うのに役立ちます。
+The [service page][26] helps you monitor service performance and [compare between versions during deployments][15].
 
-{{< img src="tracing/deployment_tracking/VersionComparison.png" alt="サービス詳細画面のバージョン" style="width:100%;">}}
+{{< img src="tracing/deployment_tracking/VersionComparison.png" alt="Versions on the Service Page" style="width:100%;">}}
 
-### トレースを他のテレメトリーと相関付ける
+### Correlating traces with other telemetry
 
-Datadog APM は、ログ、リアルユーザーモニタリング (RUM)、Synthetic モニタリングなどとシームレスに連携します。
+Datadog APM integrates seamlessly with logs, real user monitoring (RUM), synthetic monitoring, and more:
 
-- [アプリケーションログをトレースと並べて表示する][9]ことで、特定のリクエスト、サービス、バージョンに関するログを見つけることができます。
-- [RUM セッションをバックエンドのトレースと関連付ける][10]ことで、バックエンドのパフォーマンスがユーザーエクスぺリンスに与える影響を理解できます。
-- [Synthetic テストをトレースと関連付ける][11]ことで、フロントエンドとバックエンドの両方のリクエストに関して、障害のトラブルシューティングを行うことができます。
+- [View your application logs side-by-side with traces][9] to find logs for specific requests, services, or versions.
+- [Associate RUM sessions with backend traces][10] to understand how backend performance affects user experience.
+- [Associate synthetic tests with traces][11] to troubleshoot failures across frontend and backend requests.
 
-{{< img src="tracing/index/ConnectLogsWithTraces.png" alt="ログとトレースをつなげる" style="width:100%;">}}
+{{< img src="tracing/index/ConnectLogsWithTraces.png" alt="Connect Logs And Traces" style="width:100%;">}}
 
-### 取り込み制御と保持フィルター
+### Ingestion controls and retention filters
 
-トレースはインスツルメンツされたアプリケーションで開始され、Datadog に取り込まれます。
+Traces start in your instrumented applications and flow into Datadog.
 
-Datadog APM は、トレースデータの量と保持を管理するためのツールを提供します。[取り込み制御][6]を使用して、サンプリングレートと[保持フィルター][7]を調整することで、どのスパンを保持するかを制御することができます。
+Datadog APM provides tools to manage the volume and retention of your trace data. Use [Ingestion Controls][6] to adjust sampling rates and [retention filters][7] to control which spans are are stored.
 
-{{< img src="/tracing/apm_lifecycle/apm_lifecycle_0.png" alt="Datadog APM を通したデータの流れ。" style="width:100%;" >}}
+{{< img src="/tracing/apm_lifecycle/apm_lifecycle_0.png" alt="Flow of data through Datadog APM." style="width:100%;" >}}
 
-## その他の参考資料
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/tracing/glossary/
-[2]: /ja/tracing/trace_collection/
-[3]: /ja/tracing/trace_collection/proxy_setup/
-[4]: /ja/serverless/distributed_tracing
-[5]: /ja/tracing/trace_collection/otel_instrumentation/
-[6]: /ja/tracing/trace_pipeline/ingestion_controls/
-[7]: /ja/tracing/trace_pipeline/trace_retention/#retention-filters
-[8]: /ja/tracing/trace_pipeline/generate_metrics/
-[9]: /ja/tracing/other_telemetry/connect_logs_and_traces/
-[10]: /ja/real_user_monitoring/platform/connect_rum_and_traces
-[11]: /ja/synthetics/apm/
-[12]: /ja/tracing/trace_explorer/#live-search-for-15-minutes
-[13]: /ja/tracing/services/services_map/
-[14]: /ja/tracing/services/service_page/
-[15]: /ja/tracing/services/deployment_tracking/
-[16]: /ja/profiler/
-[17]: /ja/tracing/trace_collection/automatic_instrumentation/
-[18]: /ja/tracing/trace_collection/custom_instrumentation/
-[19]: /ja/tracing/metrics/
-[20]: /ja/tracing/other_telemetry/
-[21]: /ja/tracing/trace_explorer/
-[22]: /ja/tracing/trace_collection/automatic_instrumentation/single-step-apm/
-[23]: /ja/agent/
-[24]: /ja/tracing/metrics/metrics_namespace/
-[25]: /ja/tracing/metrics/runtime_metrics/
-[26]: /ja/tracing/services/service_page/
-[27]: /ja/tracing/trace_collection/single-step-apm/
-[28]: /ja/tracing/services/resource_page/
+[1]: /tracing/glossary/
+[2]: /tracing/trace_collection/
+[3]: /tracing/trace_collection/proxy_setup/
+[4]: /serverless/distributed_tracing
+[5]: /tracing/trace_collection/otel_instrumentation/
+[6]: /tracing/trace_pipeline/ingestion_controls/
+[7]: /tracing/trace_pipeline/trace_retention/#retention-filters
+[8]: /tracing/trace_pipeline/generate_metrics/
+[9]: /tracing/other_telemetry/connect_logs_and_traces/
+[10]: /real_user_monitoring/platform/connect_rum_and_traces
+[11]: /synthetics/apm/
+[12]: /tracing/trace_explorer/#live-search-for-15-minutes
+[13]: /tracing/services/services_map/
+[14]: /tracing/services/service_page/
+[15]: /tracing/services/deployment_tracking/
+[16]: /profiler/
+[17]: /tracing/trace_collection/automatic_instrumentation/
+[18]: /tracing/trace_collection/custom_instrumentation/
+[19]: /tracing/metrics/
+[20]: /tracing/other_telemetry/
+[21]: /tracing/trace_explorer/
+[22]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/
+[23]: /agent/
+[24]: /tracing/metrics/metrics_namespace/
+[25]: /tracing/metrics/runtime_metrics/
+[26]: /tracing/services/service_page/
+[27]: /tracing/trace_collection/single-step-apm/
+[28]: /tracing/services/resource_page/

@@ -1,162 +1,165 @@
 ---
+title: Organization Settings
 further_reading:
-- link: /account_management/api-app-keys/
-  tag: Documentation
-  text: API キーとアプリケーションキー
-- link: /account_management/users/
-  tag: Documentation
-  text: ユーザー管理
-title: オーガニゼーションの設定
+    - link: "/account_management/api-app-keys/"
+      tag: "Documentation"
+      text: "API and application keys"
+    - link: "/account_management/users/"
+      tag: "Documentation"
+      text: "User management"
 ---
-## 概要
-左ナビゲーションの下部にあるアカウントメニューで **Organization Settings** をクリックするか、Personal Settings ページの上部にあるドロップダウンで **Organization Settings** を選択すると、[管理者][1]はオーガニゼーションの設定セクションにアクセスできます。
+## Overview
+The Organization Settings section is available to [Administrators][1] by clicking **Organization Settings** from the account menu in the bottom of the left side navigation or by selecting **Organization Settings** from the header dropdown at the top of the Personal Settings page.
 
-オーガニゼーションの設定では、ユーザー、グループ、RBAC、キー、トークンの管理ができます。このページで、各セクションと **オーガニゼーションの設定** で確認できる特定のタスクに関するドキュメントについて概要を説明します。
+{{< img src="account_management/org_settings/nav.png" alt="Navigate to your Organization Settings in Datadog" style="width:80%;" >}}
 
-## アイデンティティとアカウント
+Organization Settings allow you to manage users, groups, RBAC, keys, and tokens. This page outlines every section and where in the documentation you can learn about specific tasks in **Organization Settings**.
 
-### ユーザー
+## Identity & Accounts
 
-ユーザーの追加、編集、無効化については、[ユーザー管理][2]ドキュメントをお読みください。
+### Users
 
-### チーム
+Read the [user management][2] documentation to add, edit, and disable users.
 
-Datadog 内でアセットを整理するためのチームを管理するには、[Teams][3] のドキュメントをお読みください。
+### Teams
 
-### サービスアカウント
+Read the [Teams][3] documentation to manage teams for organizing your assets within Datadog.
+
+### Service accounts
 
 
-[サービスアカウント][4]は、チーム全体で共有されるアプリケーションキーやその他のリソースを所有するために使用できる非インタラクティブなアカウントです。サービスアカウントのアプリケーションキーは、キーを作成した本人が一度だけ閲覧することができます。サービスアカウントを使用すると、アプリケーションやスクリプトを特定の人物と関連付けることなく、Datadog の API にアクセスすることができます。
+[Service accounts][4] are non-interactive accounts that you can use to own application keys and other resources that are shared across your teams. Service account application keys can only be viewed once by the individual who created the key. You can use service accounts to access Datadog APIs without associating your application or script with a particular person.
 
 ## Authentication
 
-### ログイン方法
+### Login methods
 
 
-**Login Methods** タブには、パスワード、Google、SAML 認証の設定が表示されます。**Enabled by Default** ドロップダウンでそれぞれを切り替えることができます。"SAML 限定" または他のタイプのログインに限定するには、他のログイン方法タイプを無効にします。User Management タブでユーザーごとの上書きを許可して、必要に応じてユーザーが別のログイン方法でログインできるようにすることができます。
+The **Login Methods** tab shows password, Google, and SAML authentication settings. You can toggle each with the **Enabled by Default** dropdowns. In order to be "SAML Strict" or strict for any other type of login, disable the other login method types. You can allow per-user overrides in the User Management tab to allow users to login with another login method if needed.
 
-[ログイン方法の構成][5]のドキュメントを読んで、Datadog の組織にログインするユーザーを認証してください。
+Read the [Configuring Login Methods][5] documentation to authenticate users to log into your Datadog organization.
 
-#### SAML 設定
+#### SAML settings
 
-SAML の構成については、[SAML によるシングルサインオンのドキュメント][6]をご参照ください。
+To learn how to configure SAML, read the [Single sign on with SAML documentation][6].
 
-### SAML グループマッピング
+### SAML group mappings
 
-有効にすると、Datadog アカウントに SAML でログインするユーザーは、現在のロールが永久に剥奪され、新しいロールに再割り当てされます。ID プロバイダーから渡された SAML アサーションと、作成したマッピングによって、各ユーザーの新しいロールが決定されます。
+When enabled, users logging in with SAML to your Datadog account are permanently stripped of their current roles and reassigned to new roles. The SAML assertion passed on from the Identity Provider and the mappings you create determine each user's new roles.
 
-SAML でログインし、Datadog のロールに対応する値を持っていないユーザーは、すべてのロールが永久に剥奪されます。そのユーザーは、今後ログインすることができなくなります。
-マッピングの作成と設定方法については、[SAML 属性のマッピングドキュメント][7]をお読みください。
+Users who log in with SAML and do not have values that map to a Datadog role are permanently stripped of all roles. That user may no longer log in.
+To learn how to create and set mappings, read the [Mapping SAML attributes documentation][7].
 
-## アクセス
+## Access
 
-### API キー
+### API keys
 
-このセクションでは、リスト内のあらゆる API キーの表示、コピー、無効化ができます。API キーは、オーガニゼーションに対して一意です。Datadog へメトリクスおよびイベントを送信する場合、Datadog Agent により API キーが求められます。キーの作成、編集、無効化に関する詳細は、[API キーのドキュメント][8]をお読みください。
+This section allows you to view, copy, and revoke any API key in the list. Your API keys are unique to your organization. An API key is required by the Datadog Agent to submit metrics and events to Datadog. Read the [API keys documentation][8] for more information on creating, editing, and revoking keys.
 
-### アプリケーションキー
+### Application keys
 
-アプリケーションキーは、名前、ID、またはオーナーで絞り込むか、**Only My Keys** のトグルボタンをクリックして所有するアプリケーションキーのみを表示することができます。キーの追加と削除については、[アプリケーションキーのドキュメント][8]をお読みください。
+You can filter application keys by name, ID, or owner, or click the **Only My Keys** toggle to only view application keys you own. Read the [Application keys documentation][8] for more information on adding and removing keys.
 
-### ロール
+### Roles
 
-Datadog のデフォルトおよびカスタムロールについては、[ロールベースのアクセス制御ドキュメント][9]をお読みください。
+To learn about default and custom roles in Datadog, read the [Role Based Access Control documentation][9].
 
-### リモート構成
+### Remote Configuration
 
-動作やインフラストラクチャーにデプロイされた Datadog コンポーネントをリモートで構成する方法については、[リモート構成の仕組み][10]をお読みください。
+To learn how to remotely configure the behavior or Datadog components deployed in your infrastructure, read [How Remote Configuration Works][10].
 
-### クライアントトークン
+### Client tokens
 
-クライアントトークンは、ユーザーの Web およびモバイルアプリケーションからイベントとログを送信するために使用します。RUM アプリケーションにリンクされているクライアントトークンを削除すると、RUM アプリケーションのレポート機能が停止する原因となります。[クライアントトークンの作成プロセス][11]は、API キーやアプリケーションキーの場合と同様です。
+Client tokens are used to send events and logs from your user's web and mobile applications. They are unique to your organization. Deleting a client token that is linked to a RUM Application causes your RUM Application to stop reporting. The [process to create client tokens][11] is similar to that for API and application keys.
 
-### イベントの API メール
+### Events API emails
 
-ご利用のアプリケーションに現在の Datadog インテグレーションが含まれておらず、カスタム Agent チェックの作成を希望されない場合は、イベントをメールで送信できます。イベントの API メールを設定する方法について、詳しくは[メールによるイベント送信ガイド][12]をお読みください。
+If your application does not have an existing Datadog integration, and you don't want to create a custom Agent check, you can send events with email. To learn how to set up events API emails, read the [Events with email guide][12].
 
-## 製品
+## Products
 
-### ログ管理
-
-
-##### ログインデックスの契約外保持期間
-
-`Org Management` 権限を持つユーザーは、ログインデックスの契約外保持期間機能を有効にすることができます。この機能は組織単位で有効化されます。つまり、ユーザーが親組織でこの機能を有効にした場合、すべての子組織でこの機能が自動的に有効になるわけではありません。
-
-{{< img src="account_management/out-of-contract-retention.png" alt="ログインデックスの契約外保持期間の設定が有効になっています。" style="width:70%;" >}}
-
-この機能を有効にすると、`Modify Index` 権限を持つユーザーは、たとえ契約にない期間であっても、3 日、7 日、15 日、30 日、45 日、60 日のいずれかの保持期間を選択することができるようになります。これは、長期にわたる潜在的な問題のトラブルシューティングや、顧客が現在の契約の一部ではない、より高い保持期間を必要とするコンプライアンス要件に対応する際に有用となります。
-
-**注**: 契約外保持期間を使用すると、オンデマンド料金が発生します。契約外保持期間を頻繁に使用する場合、Datadog では、アカウントマネージャーに連絡して契約に追加してもらうことを推奨しています。
-
-### アラート設定
-
-#### モニタータイムゾーンプリファレンス
+### Logs
 
 
-`Org Management` 権限を持つユーザーは、モニターのアラート通知内のアラートグラフスナップショットで使用するタイムゾーンをカスタマイズすることができます。
+##### Out-of-contract retention periods for log indexes
 
-{{< img src="account_management/monitors-time-zone-preference.png" alt="モニタータイムゾーンプリファレンス" style="width:70%;" >}}
+Users with `Org Management` permission can enable the out-of-contract retention periods feature for log indexes. This feature is enabled on a per-org basis. This means that if a user enables the feature on a parent org, the feature is not automatically enabled for all child orgs.
 
-この設定は、組織全体の設定であるため、**すべての**モニターアラート通知に適用されます。
+{{< img src="account_management/out-of-contract-retention.png" alt="The out-of-contract retention periods for log indexes setting showing enabled." style="width:70%;" >}}
 
-### Synthetic テスト
+When enabled, users with `Modify Index` permission can choose any of the 3-, 7-, 15-, 30-, 45-, and 60-day retention periods, even if it is not in the contract. This can be useful when troubleshooting a potential long standing issue or meeting compliance requirements for which customers need a higher retention period that is not part of the current contract.
 
-[Synthetic モニタリング設定][13]へのアクセス方法と制御方法について説明します。
+**Note**: Using out-of-contract retention periods incur on-demand charges. If an out-of-contract retention period is often used, Datadog recommends that customers contact their account manager to have it added to their contract.
 
-## セキュリティ
+### Monitors
+
+#### Monitors time zone preference
+
+
+Users with the `Org Management` permission can customize the time zone used in alert graph snapshots within Monitor alert notifications.
+
+{{< img src="account_management/monitors-time-zone-preference.png" alt="Monitors Time Zone Preferences" style="width:70%;" >}}
+
+The setting applies to **all** Monitor alert notifications, as it's an org-wide setting.
+
+### Synthetic tests
+
+Learn how to access and control [Synthetic Monitoring Settings][13].
+
+## Security
 
 ### Safety Center
 
-**Safety Center** ページには、組織内で確認すべきセキュリティアラート、警告、および推奨事項が含まれています。また、**Configuration** をクリックし、メールアドレスを 2 つまで入力し、**Save** ボタンをクリックすることで、組織のセキュリティ通知を受け取る **Security Contacts** を設定することができます。
+The [**Safety Center**][14] page contains security alerts, warnings, and recommendations to review in your organization.
 
-### 公開共有
+### Public sharing
 
-**Public Sharing** タブには、共有ダッシュボードおよび共有グラフのリストが含まれています。**Enabled** ボタンをクリックして共有設定を編集することも可能です。
+The **Public Sharing** tab contains lists of shared dashboards and shared graphs. You can also edit your sharing settings by clicking the **Enabled** toggles.
 
-### ヘルプ
+### OAuth Apps
 
-[**OAuth Apps**][14] ページでは、組織内の OAuth アプリケーションを表示または管理することができます。
+The [**OAuth Apps**][15] page allows you to view or manage OAuth applications in your organization.
 
-## コンプライアンス
+## Compliance
 
-### Audit trail（監査証跡）
+### Audit trail
 
-オーガニゼーションの設定ページの **Audit Trail** タブを選択すると、監査イベントエクスプローラーが新しいタブで開きます。
+The **Audit Trail** tab in the Organization Settings page opens a new tab to the Audit Events Explorer.
 
-### 監査証跡設定
+### Audit trail settings
 
-**Audit Trail Settings** タブを使用して、監査証跡の保持期間の設定や、他のクラウドストレージサービスのアーカイブの有効化ができます。
+The **Audit Trail Settings** tab allows you to set the retention period of audit trails and enable archiving to other cloud storage services.
 
-## 一般
+## General
 
-### 設定
+### Preferences
 
-#### 組織名
+#### Organization name
 
-組織の名前を変更するには、**Organization Settings** の **Preferences** タブにある **Edit** ボタンをクリックし、新しい名前を入力し、**Save** ボタンをクリックします。
+To rename your organization, click the **Edit** button in the **Preferences** tab of **Organization Settings**, enter the new name, then click the **Save** button.
 
-**注**: 組織名は 32 文字以内にしてください。
+**Note**: Your organization name must not exceed 32 characters.
 
-#### Datadog ホームページ
+#### Datadog homepage
 
-組織のホームページをダッシュボードリストに設定するか、個別のダッシュボードに設定するかは、選択可能です。
+You can choose to set your organization homepage to a Dashboard List or an individual dashboard.
 
-## その他の参考資料
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/account_management/users/default_roles/
-[2]: /ja/account_management/users/
-[3]: /ja/account_management/teams/?s=login%20methods
-[4]: /ja/account_management/org_settings/service_accounts
-[5]: /ja/account_management/login_methods/
-[6]: /ja/account_management/saml/
-[7]: /ja/account_management/saml/mapping
-[8]: /ja/account_management/api-app-keys/
-[9]: /ja/account_management/rbac/
-[10]: /ja/agent/remote_config/?tab=configurationyamlfile#how-it-works
-[11]: /ja/account_management/api-app-keys/#client-tokens
-[12]: /ja/service_management/events/guides/email/
-[13]: /ja/synthetics/settings/?tab=specifyvalue#overview
-[14]: /ja/account_management/org_settings/oauth_apps
+[1]: /account_management/users/default_roles/
+[2]: /account_management/users/
+[3]: /account_management/teams/?s=login%20methods
+[4]: /account_management/org_settings/service_accounts
+[5]: /account_management/login_methods/
+[6]: /account_management/saml/
+[7]: /account_management/saml/mapping
+[8]: /account_management/api-app-keys/
+[9]: /account_management/rbac/
+[10]: /agent/remote_config/?tab=configurationyamlfile#how-it-works
+[11]: /account_management/api-app-keys/#client-tokens
+[12]: /service_management/events/guides/email/
+[13]: /synthetics/settings/?tab=specifyvalue#overview
+[14]: /account_management/safety_center
+[15]: /account_management/org_settings/oauth_apps

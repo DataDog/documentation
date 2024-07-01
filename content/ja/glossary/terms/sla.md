@@ -1,6 +1,6 @@
 ---
+title: Service Level Agreement (SLA)
 core_product:
-- slos
-title: サービスレベル契約 (SLA)
+  - slos
 ---
-SLA とは、クライアントとサービス提供者の間で交わされる明示または暗黙の契約で、クライアントが期待する信頼性と、それを満たさない場合のサービス提供者の対応について規定したものです。
+An SLA is an explicit or implicit agreement between a client and service provider stipulating the client's reliability expectations and the service provider's consequences for not meeting them. 

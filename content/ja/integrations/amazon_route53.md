@@ -1,129 +1,130 @@
 ---
-aliases:
-- /ja/integrations/awsroute53/
-categories:
-- aws
-- cloud
-- log collection
-- network
-- notifications
-dependencies: []
-description: Route 53 メトリクスを追跡し、健全性チェックを監視。
-doc_link: https://docs.datadoghq.com/integrations/amazon_route53/
-draft: false
-git_integration_title: amazon_route53
-has_logo: true
-integration_id: ''
-integration_title: Amazon Route 53
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: '1.0'
-name: amazon_route53
-public_title: Datadog-Amazon Route 53 インテグレーション
-short_description: Route 53 メトリクスを追跡し、健全性チェックを監視。
-version: '1.0'
+"aliases":
+- "/integrations/awsroute53/"
+"categories":
+- "aws"
+- "cloud"
+- "log collection"
+- "network"
+- "notifications"
+"custom_kind": "integration"
+"dependencies": []
+"description": "Track Route53 metrics, and monitor health checks."
+"doc_link": "https://docs.datadoghq.com/integrations/amazon_route53/"
+"draft": false
+"git_integration_title": "amazon_route53"
+"has_logo": true
+"integration_id": ""
+"integration_title": "Amazon Route 53"
+"integration_version": ""
+"is_public": true
+"manifest_version": "1.0"
+"name": "amazon_route53"
+"public_title": "Datadog-Amazon Route 53 Integration"
+"short_description": "Track Route53 metrics, and monitor health checks."
+"version": "1.0"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-{{< img src="integrations/amazon_route53/route53_graph.png" alt="route53 グラフ" popup="true">}}
+{{< img src="integrations/amazon_route53/route53_graph.png" alt="route53 graph" popup="true">}}
 
-## 概要
+## Overview
 
-Amazon Route 53 は DNS 管理およびトラフィック管理に加え、健全性チェックによる可用性とパフォーマンスの監視を提供します。Datadog に健全性チェック情報を表示して、環境内の他のメトリクスやイベントとの関連性を提供できます。Route 53 の健全性チェックステータスグラフのダッシュボードの例を挙げます。
+Amazon Route 53 provides DNS and traffic management along with availability and performance monitoring through health checks. You can view the health check information in Datadog to provide context around other metrics and events in your environments. Here's an example dashboard of Route 53's health check status graph:
 
-その他の AWS サービスの詳細については、[AWS タイル][1]を参照してください。
+For information about the rest of the AWS services, see the [AWS tile][1]
 
-## セットアップ
+## Setup
 
-### インストール
+### Installation
 
-[Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
+If you haven't already, set up the [Amazon Web Services integration first][1].
 
-### メトリクスの収集
+### Metric collection
 
-1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `Route53` が有効になっていることを確認します。
-2. Amazon Route 53 のメトリクスを収集するため、次の権限を [Datadog IAM ポリシー][3]に追加します。
+1. In the [AWS integration page][2], ensure that `Route53` is enabled under the `Metric Collection` tab.
+2. Add those permissions to your [Datadog IAM policy][3] in order to collect Amazon Route 53 metrics:
 
-    - `route53:listHealthChecks`: 使用できる健全性チェックを一覧表示します。
-    - `route53:listTagsForResources`: Route53 CloudWatch メトリクスにタグを追加します。
+    - `route53:listHealthChecks`: List available health checks.
+    - `route53:listTagsForResources`: Add custom tags on Route53 CloudWatch metrics.
 
-    詳細については、AWS ウェブサイト上の [Route53 ポリシー][4]を参照してください。
+    For more information, see the [Route53 policies][4] on the AWS website.
 
-3. [Datadog - Amazon Route53 インテグレーション][5]をインストールします。
+3. Install the [Datadog - Amazon Route53 integration][5].
 
-**注**: CloudWatch を使用して Amazon Route 53 メトリクスを取得するには、US East (N. Virginia) をリージョンとして選択する必要があります。他のリージョンを選択した場合、Amazon Route 53 メトリクスは使用できません。詳細は、[健全性チェックステータスのモニタリングと通知の受信][6]を参照してください。
+**Note**: To get Amazon Route 53 metrics using CloudWatch, you must choose US East (N. Virginia) as the region. Amazon Route 53 metrics are not available if you select any other region. See [Monitoring health check status and getting notifications][6] for more information.
 
-### ログの収集
+### Log collection
 
-Route 53 が受信する以下のようなクエリに関する情報をログに記録するように、Amazon Route 53 を構成します。
+Configure Amazon Route 53 to log information about the queries that Route 53 receives, such as the following:
 
-- リクエストされたドメインまたはサブドメイン
-- リクエストの日時
-- DNS レコードタイプ (A、AAAA など)
-- DNS クエリに応答した Route 53 エッジの場所
-- DNS 応答コード (NoError、ServFail など)
-- VPC 用リゾルバークエリのログ
+- The domain or subdomain that was requested
+- The date and time of the request
+- The DNS record type (such as A or AAAA)
+- The Route 53 edge location that responded to the DNS query
+- The DNS response code, such as NoError or ServFail
+- Resolver Query logs for you VPC
 
-#### Route53 DNS クエリのログの有効化
+#### Enable Route53 DNS query logging
 
-1. Route 53 の AWS コンソールにアクセスし、**Hosted zones** をクリックします。
-2. ログを構成するホストゾーンのラジオボタンをクリックします。
-3. **View Details** をクリックします。
-4. **Configure query logging** をクリックします。
-5. CloudWatch ロググループを選択するか、ログの送信先になる新しいロググループを作成します。ロググループ名には「route53」を入れてください。
+1. Go to your Route 53 AWS console and click **Hosted zones**. 
+2. Click the radio button for the hosted zone you want to configure logs for.
+3. Click **View Details**.
+4. Click **Configure query logging**.
+5. Select the CloudWatch log group or create a new one to send the logs to. Make sure “route53” is included in the log group name.
 
-#### Route53 Resolver クエリのログの有効化
+#### Enable Route53 resolver query logging
 
-1. 左側の Route 53 の設定ペインで、Resolver の下にある **Query Logging** を選択します。
-2. **Configure Query Logging** をクリックします。
-3. Resolver クエリの名前を入力します。
-4. Resolver がクエリログを送信する CloudWatch ロググループを選択します。ロググループ名には「route53」を入れてください。
-5. Resolver のクエリを記録する VPC を追加します。
-6. オプションで、タグを追加します。
-7. **Configure query logging** をクリックします。
+1. In the Route 53 settings pane on the left, select **Query Logging** under Resolver.
+2. Click **Configure Query Logging**. 
+3. Enter a name for your Resolver query. 
+4. Select the CloudWatch Logs group you want the Resolver to send the query logs to. Make sure “route53” is included in the log group name.
+5. Add the VPCs that you want to log Resolver queries for. 
+6. Optionally, add tags. 
+7. Click **Configure query logging**.
 
-#### ログを Datadog に送信する方法
+#### Send logs to Datadog
 
-1. AWS アカウントで [Datadog Forwarder Lambda 関数][7] をまだセットアップしていない場合は、セットアップします。
-2. 設定したら、Datadog Forwarder Lambda 関数に移動します。Function Overview セクションで、**Add Trigger** をクリックします。
-3. Trigger Configuration で **CloudWatch Logs** トリガーを選択します。
-4. Route53 のログを含む CloudWatch のロググループを選択します。
-5. フィルターの名前を入力します。
-6. **Add** をクリックすると、Lambda にトリガーが追加されます。
+1. If you haven't already, set up the [Datadog Forwarder Lambda function][7] in your AWS account.
+2. Once set up, go to the Datadog Forwarder Lambda function. In the Function Overview section, click **Add Trigger**. 
+3. Select the **CloudWatch Logs** trigger for the Trigger Configuration. 
+4. Select the CloudWatch log group that contains your Route53 logs.
+5. Enter a name for the filter.
+6. Click **Add** to add the trigger to your Lambda.
 
-[ログエクスプローラー][8]に移動して、ログを確認します。
+Go to the [Log Explorer][8] to start exploring your logs.
 
-AWS Services のログを収集する方法については、[Datadog Lambda 関数で AWS Services のログを送信する][9]を参照してください。
+For more information on collecting AWS Services logs, see [Send AWS Services Logs with the Datadog Lambda Function][9].
 
-## 収集データ
+## Data Collected
 
-### メトリクス
+### Metrics
 {{< get-metrics-from-git "amazon_route53" >}}
 
 
-AWS から取得される各メトリクスには、ホスト名やセキュリティ グループなど、AWS コンソールに表示されるのと同じタグが割り当てられます。
+Each of the metrics retrieved from AWS are assigned the same tags that appear in the AWS console, including but not limited to host name, security-groups, and more.
 
-### イベント
+### Events
 
-Amazon Route 53 インテグレーションには、イベントは含まれません。
+The Amazon Route 53 integration does not include any events.
 
-### サービスのチェック
+### Service Checks
 
-Amazon Route 53 インテグレーションには、サービスのチェック機能は含まれません。
+The Amazon Route 53 integration does not include any service checks.
 
-## トラブルシューティング
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][11]までお問合せください。
+Need help? Contact [Datadog support][11].
 
-[1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
+[1]: https://docs.datadoghq.com/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
-[3]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/#installation
+[3]: https://docs.datadoghq.com/integrations/amazon_web_services/#installation
 [4]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/auth-and-access-control.html
 [5]: https://app.datadoghq.com/integrations/amazon-route53
 [6]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/health-checks-monitor-view-status.html#monitoring-health-checks
-[7]: https://docs.datadoghq.com/ja/logs/guide/forwarder/
+[7]: https://docs.datadoghq.com/logs/guide/forwarder/
 [8]: https://app.datadoghq.com/logs
-[9]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/
+[9]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/
 [10]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_route53/amazon_route53_metadata.csv
-[11]: https://docs.datadoghq.com/ja/help/
+[11]: https://docs.datadoghq.com/help/
+

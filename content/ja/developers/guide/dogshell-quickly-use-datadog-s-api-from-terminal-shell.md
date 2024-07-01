@@ -1,52 +1,52 @@
 ---
-aliases:
-- /ja/developers/faq/dogshell-quickly-use-datadog-s-api-from-terminal-shell
-description: ターミナルまたはシェルから Datadog API を使用
-kind: ガイド
 title: Dogshell
+description: "Use Datadog's API from Terminal or Shell"
+kind: guide
+aliases:
+  - /developers/faq/dogshell-quickly-use-datadog-s-api-from-terminal-shell
 ---
 
-`dogshell` というラッパーを使用して、ターミナル/シェルから Datadog API を使用できます。
+You can use the Datadog API straight from terminal/shell by using a wrapper called `dogshell`.
 
-## セットアップ
+## Setup:
 
-Dogshell には、公式にサポートされた [datadogpy Python ライブラリ][1]が付属しており、[DogStatsD][2] で Datadog にデータを送信するためによく使用されます。インストール方法については、 [datadogpy GitHub リポジトリ][3]を参照してください。
+Dogshell comes with the officially supported [datadogpy Python library][1], often used to send data to Datadog with [DogStatsD][2]. See the [datadogpy GitHub repo][3] for installation instructions.
 
-このライブラリをインストールすると、ターミナル/シェルで `dog` コマンドを使用できるようになりますが、その際に「初期化」が必要です。初期化するには、このコマンドに API キーとアプリケーションキーを提供することで、アカウントとの間でデータを送受信できるようになります。初めて `dog` コマンドを実行しようとすると、初期化が必要と認識され、2 つのステップからなるプロセスが実行されます。
+Once you have that library installed, you have the `dog` command available to you in your terminal/shell, but it still needs to be "initialized". To initialize it, provide it with an API and application key so that it can be used to send and receive data to and from your account. When you first try running a `dog` command, it recognizes that it needs to be initialized, and walks you through the 2-step process.
 
-初期化セットアップがトリガーされる `dog` コマンドの例として (古い dog コマンドでも機能します)、以下を実行します。
+As one example of a `dog` command that would trigger the initialization setup (although any old dog command would work), you can run the following:
 
 ```text
 dog metric post test_metric 1
 ```
 
-`.dogrc` ファイルがまだ作成されていない (dogshell が初期化されていない) 場合は、以下のような応答が返されます。
+If your `.dogrc` file has not yet been created (as in, the dogshell has not yet been initialized), it returns something like the following:
 
 ```text
 ~/.dogrc does not exist. Would you like to create it? [Y/n]
 ```
 
-「Y」を入力します。次の応答があります。
+Submit "Y". It then responds:
 
 ```text
 What is your api key? (Get it here: https://app.datadoghq.com/organization-settings/api-keys)
 ```
 
-API キーを貼り付け、次に進みます。
+You can paste your API key, and then:
 
 ```text
 What is your application key? (Generate one here: https://app.datadoghq.com/organization-settings/api-keys)
 ```
 
-アプリケーションキーを貼り付けます。以下のように終了します。
+You can paste your application key. It finishes with:
 
 ```text
 Wrote ~/.dogrc.
 ```
 
-次に、ターミナル/シェルからすばやく Datadog API を使用できるよう `dog` コマンドを使用します。`dog` コマンドの詳細なヘルプと情報については、`dog -h` を実行してください。
+Next, use your `dog` commands to quickly use the Datadog API from your terminal/shell. For further help and information on the `dog` commands, run `dog -h`.
 
-もし、自分で `.dogrc` ファイルを書きたい場合は、このファイルの内容は次のようになります。
+If you would rather write the `.dogrc` file yourself, the content of this file should be as follows:
 
 {{< site-region region="us" >}}
 ```text
@@ -91,15 +91,15 @@ api_host = https://ap1.datadoghq.com
 ```
 {{< /site-region >}}
 
-これは、プログラム的に多くのサーバーにファイルをプッシュし、どのサーバーからでも `dog` コマンドを実行できるようにしたい場合に便利です。
+This is useful if you'd like to push the file to many of your servers programmatically so that you can run `dog` commands from any of your servers.
 
-## Dogshell コマンド
+## Dogshell commands
 
-リファレンスは、[Dogshell のコードを参照してください][4]。Dogshell をインストールして初期化したら、以下のコマンドに `-h` オプションを追加すると、それぞれの Dogshell の使用方法を表示できます。
+For reference, [find the code for Dogshell][4]. But once you have Dogshell installed and initialized, you can append the `-h` option to the following commands to get more information on specific Dogshell usage:
 
 * `dog metric`
 * `dog event`
-* `dog status_check`
+* `dog service_check`
 * `dog monitor`
 * `dog downtime`
 * `dog timeboard`
@@ -110,23 +110,23 @@ api_host = https://ap1.datadoghq.com
 * `dog search`
 * `dog comment`
 
-**注**: `dogshell` コマンドは、デフォルトで Datadog US1 にデータを送信します。他のサイトにデータを送信する必要がある場合は、`—api_host` オプションを使用するか、`.dogrc` ファイルに api_host を指定することで実行できます。
+**Note**: The `dogshell` command sends data to the Datadog US1 by default. If you need to send data to another site you can do so using the `--api_host` option or by specificying an api_host in your `.dogrc` file.
 
-### 実際の Dogshell
+### Dogshell in use
 
-以下を使用して、Datadog アカウントにメトリクスをポストできます。
+You can post metrics to your Datadog account by using:
 
 ```text
 dog metric post <METRIC_NAME> <METRIC_VALUE> --tags "<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_KEY_2>:<TAG_VALUE_2>"
 ```
 
-たとえば、次のコマンドは、`test_dogshell_metric` という名前のメトリクスに値 1.0 とタグ `test:one` および `another_test` を指定してアカウントに送信します。
+For example, the following command sends a metric named `test_dogshell_metric` to your account with a value of 1.0 and the tags `test:one` and `another_test`:
 
 ```text
 dog metric post test_dogshell_metric 1.0 --tags "test:one,another_test"
 ```
 
-Dogshell からメトリクスを送信する方法の詳細を表示するには、次のコマンドを実行します。
+Find more details on sending metrics from Dogshell by running:
 
 ```text
 dog metric post -h
@@ -135,6 +135,6 @@ dog metric post -h
 {{< img src="developers/faq/dogshell_test.png" alt="dogshell_test" >}}
 
 [1]: https://github.com/DataDog/datadogpy
-[2]: /ja/metrics/custom_metrics/dogstatsd_metrics_submission/
+[2]: /metrics/custom_metrics/dogstatsd_metrics_submission/
 [3]: https://github.com/DataDog/datadogpy#installation
 [4]: https://github.com/DataDog/datadogpy/tree/master/datadog/dogshell

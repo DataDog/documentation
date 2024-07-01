@@ -1,6 +1,6 @@
 ---
+title: container runtime
 core_product:
-- infrastructure monitoring
-title: コンテナランタイム
+  - infrastructure monitoring
 ---
-コンテナランタイムとは、コンテナエンジンの中で、コンテナのマウントやコンテナ化の停止・開始を行う部分です。
+A container runtime is the part of a container engine that mounts the container and stops/starts containerization.

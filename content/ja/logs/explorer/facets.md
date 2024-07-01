@@ -1,255 +1,264 @@
 ---
+title: Log Facets
+kind: documentation
+description: 'Log Facets and Facet Panel'
 aliases:
-- /ja/logs/facets
-description: ログファセットとファセットパネル
+    - /logs/facets
 further_reading:
-- link: logs/explorer/analytics
-  tag: ドキュメント
-  text: ログ分析の実行
-- link: logs/explorer/patterns
-  tag: ドキュメント
-  text: ログ内のパターン検出
-- link: /logs/log_configuration/processors
-  tag: ドキュメント
-  text: ログの処理方法
-- link: logs/explorer/saved_views
-  tag: ドキュメント
-  text: ログエクスプローラーの自動構成
-title: ログファセット
+    - link: logs/explorer/analytics
+      tag: Documentation
+      text: Perform Log Analytics
+    - link: logs/explorer/patterns
+      tag: Documentation
+      text: Detect patterns inside your logs
+    - link: /logs/log_configuration/processors
+      tag: Documentation
+      text: Learn how to process your logs
+    - link: logs/explorer/saved_views
+      tag: Documentation
+      text: Automatically configure your Log Explorer
 ---
 
-{{< img src="logs/explorer/facet/facets_in_explorer.mp4" alt="エクスプローラーファセットのファセット" video=true style="width:100%;">}}
+{{< img src="logs/explorer/facet/facets_in_explorer.mp4" alt="Facets in Explorer Facet" video=true style="width:100%;">}}
 
-## 概要
+## Overview
 
-ファセットは、インデックス付きログのユーザー定義のタグと属性です。これらは、定性的または定量的なデータ分析を目的としています。そのため、ログエクスプローラーでこれらを使用して、次のことができます。
+Facets are user-defined tags and attributes from your indexed logs. They are meant for either qualitative or quantitative data analysis. As such, you can use them in your Log Explorer to:
 
-- [ログを検索する][1]
-- [ログパターンを定義する][2]
-- [ログ分析を実行する][3]
+- [Search upon your logs][1]
+- [Define log patterns][2]
+- [Perform Log analytics][3]
 
-ファセットを使用すると、[ログモニター][4]のログ、[ダッシュボード][5]のログウィジェット、[ノートブック][6]を操作することもできます。
+Facets also allow you to manipulate your logs in your [log monitors][4], log widgets in [dashboards][5], and [notebooks][6].
 
-**注**: [ログ処理][7]、[ライブテイル検索][8]、[ログエクスプローラー検索][30]、ログからの[メトリクス生成][10]、[アーカイブ][11]転送、または[リハイドレート][12]をサポートするためのファセットは必要ありません。また、フィルターを使用して[パイプライン][13]および[インデックス][14]にログをルーティングするためのファセットや、[除外フィルター][15]を使用してインデックスからログを除外またはサンプリングするためのファセットも必要ありません。
+**Note**: You do not need facets to support [log processing][7], [livetail search][8], [log explorer search][30], [metric generation][10] from logs, [archive][11] forwarding, or [rehydration][12]. You also do not need facets for routing logs through to [Pipelines][13] and [Indexes][14] with filters, or excluding or sampling logs from indexes with [exclusion filters][15]. 
 
-これらすべてのコンテキストで、オートコンプリート機能は既存のファセットに依存しますが、入力ログに一致する入力はすべて機能します。
+In all these contexts, autocomplete capabilities rely on existing facets, but any input matching incoming logs would work.
 
-### 定性的ファセット
+### Qualitative facets
 
-#### ディメンション
+#### Dimensions
 
-次が必要な場合は、定性的ファセットを使用します。
+Use qualitative facets when you need:
 
-- 値の**相対的なインサイトを取得**する。たとえば、`http.network.client.geoip.country.iso_code` のファセットを作成して、[NGINX][16] ウェブアクセスログの 5XX エラーの数ごとに最も影響を受ける上位の国を確認し、Datadog [GeoIP Processor][17] で加工します。
-- **一意の値をカウント**する。たとえば、[Kong][18] ログから `user.email` のファセットを作成して、ウェブサイトに毎日接続しているユーザー数を把握します。
-- 特定の値に対してログを頻繁に**フィルタリング**する。たとえば、`environment` [タグ][19]のファセットを作成して、トラブルシューティングを開発、ステージング、または本番環境にまで絞り込みます。
+- To **get relative insights** for values. For instance, create a facet on `http.network.client.geoip.country.iso_code` to see the top countries most impacted per number of 5XX errors on your [NGINX][16] web access logs, enriched with the Datadog [GeoIP Processor][17].
+- To **count unique values**. For instance, create a facet on `user.email` from your [Kong][18] logs to know how many users connect every day to your website.
+- To frequently **filter** your logs against particular values. For instance, create a facet on an `environment` [tag][19] to scope troubleshooting down to development, staging, or production environments.
 
-**注**: 属性の値に対してフィルタリングするためのファセットの作成は必須ではありませんが、調査でよく使用する属性に対し定義しておくと、解決の時間を削減できます。
+**Note**: Although it is not required to create facets to filter on attribute values, defining them on attributes that you often use during investigations can help reduce your time to resolution.
 
-#### 種類
+#### Types
 
-定性的ファセットには、文字列または数値（整数）型を指定できます。文字列型をディメンションに割り当てるとすべてのケースで機能しますが、ディメンションで整数型を使用すると、前述のすべての機能に加えて範囲フィルタリングが有効になります。たとえば、`http.status_code:[200 TO 299]` は整数型のディメンションで使用する有効なクエリです。参考として[検索構文][1]を参照してください。
+Qualitative facets can have a string or numerical (integer) type. While assigning string type to a dimension works in all case, using integer types on a dimension enables range filtering on top of all aforementioned capabilities. For instance, `http.status_code:[200 TO 299]` is a valid query to use on a integer-type dimension. See [search syntax][1] for reference.
 
-### 定量的ファセット
-#### メジャー
+### Quantitative facets
+#### Measures
 
-次が必要な場合は、メジャーを使用します。
+Use measures when you need:
 
-- 複数のログから**値を集計**する。たとえば、マップサーバーの [Varnish キャッシュ][20]が提供するタイルのサイズのメジャーを作成し、1 日の**平均**スループット、またはリクエストされたタイルサイズの**合計**ごとに最上位の参照元を追跡します。
-- ログを**範囲フィルター**する。たとえば、[Ansible][21] タスクの実行時間のメジャーを作成し、10 秒以上かかった実行が最も多いサーバーのリストを確認します。
-- その値に対して**ログを並べ替える**。たとえば、[Python][22] マイクロサービスで実行された支払い額のメジャーを作成します。その後、最も金額の高いログから順に、すべてのログを検索できます。
+- To **aggregate values** from multiple logs. For instance, create a measure on the size of tiles served by the [Varnish cache][20] of a map server and keep track of the **average** daily throughput, or top-most referrers per **sum** of tile size requested.
+- To **range filter** your logs. For instance, create a measure on the execution time of [Ansible][21] tasks, and see the list of servers having the most runs taking more than 10s.
+- To **sort logs** against that value. For instance, create a measure on the amount of payments performed with your [Python][22] microservice. You can then search all the logs, starting with the one with the highest amount.
 
-#### 種類
+#### Types
 
-メジャーには、同等の機能のために、（長）整数またはダブル値が付属しています。
+Measures come with either a (long) integer or double value, for equivalent capabilities.
 
-#### 単位
+#### Units
 
-メジャーは、クエリ時間と表示時間の桁数を簡単に処理するための**時間**または**サイズ**の単位をサポートします。
+Measures support units in **time** or **size** for easier handling of orders of magnitude at query time and display time.
 
-| type        | 単位                                                                                                                                                                                                                                                                                                                    |
+| type        | unit(s)                                                                                                                                                                                                                                                                                                                    |
 |-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| バイト       | bit / byte / kibibyte / mebibyte / gibibyte / tebibyte / pebibyte / exbibyte                                                                                                                                                                                                                                               |
-| 時間        | nanosecond / microsecond / millisecond / second / minute / hour / day / week                                                                                                                                                                                                                                               |
+| BYTES       | bit / byte / kibibyte / mebibyte / gibibyte / tebibyte / pebibyte / exbibyte                                                                                                                                                                                                                                               |
+| TIME        | nanosecond / microsecond / millisecond / second / minute / hour / day / week                                                                                                                                                                                                                                               |
 
-単位は、フィールドではなく、メジャー自体のプロパティです。たとえば、ナノ秒単位の `duration` メジャーを考えてみます。`duration:1000` が 1000 ミリ秒を表す `service:A` からのログと、`duration:500` が 500 マイクロ秒を表す `service:B` からの他のログがあるとします。
+Unit is a property of the measure itself, not of the field. For example, consider a `duration` measure in nanoseconds: you have logs from `service:A` where `duration:1000` stands for 1000 milliseconds, and other logs from `service:B` where `duration:500` stands for 500 microseconds:
 
-1. [算術演算プロセッサー][23]で流入するすべてのログの期間をナノ秒にスケーリングします。`service:A` のログには `*1000000` 乗数を使用し、`service:B` のログには `*1000` 乗数を使用します。
-2. `duration:>20ms`（[検索構文][1]を参照）を使用して、両方のサービスから一度に一貫してログにクエリを実行し、最大 `1 min` の集計結果を確認します。
+1. Scale duration into nanoseconds for all logs flowing in with the [arithmetic processor][23]. Use a `*1000000` multiplier on logs from `service:A`, and a `*1000` multiplier on logs from `service:B`.
+2. Use `duration:>20ms` (see [search syntax][1] for reference) to consistently query logs from both services at once, and see an aggregated result of max `1 min`.
 
-## ファセットパネル
+## Facet panel
 
-検索バーを使うと、包括的かつインタラクティブにデータをフィルタリングしグループ化することができます。ただし、ほとんどの場合は、ファセットパネルを使った方がよりわかりやすくデータに移動できます。ファセットを開くと、現在のクエリのスコープのコンテンツのサマリーが表示されます
+The search bar provides the most comprehensive set of interactions to filter and group your data. However, for most cases, the facet panel is likely to be a more straightforward way to navigate into your data. Open a facet to see a summary of its content for the scope of the current query.
 
-**ファセット（定性的）**には、一意の値の上位リストと、それぞれに一致するログの数が用意されています。
+**Facets (qualitative)** come with a top list of unique values, and a count of logs matching each of them:
 
-{{< img src="logs/explorer/facet/dimension_facet.png" alt="ディメンションファセット" style="width:30%;">}}
+{{< img src="logs/explorer/facet/dimension_facet.png" alt="Dimension Facet" style="width:30%;">}}
 
-いずれかの値をクリックして、検索クエリのスコープを設定します。値をクリックすると、この一意の値とすべての値の検索が切り替わります。チェックボックスをクリックすると、この特定の値がすべての値のリストに追加または削除されます。また、その内容を検索することもできます。
+Scope the search query clicking on either value. Clicking on a value toggles the search on this unique value and all values. Clicking on checkboxes adds or removes this specific value from the list of all values, you can also search upon its content:
 
-{{< img src="logs/explorer/facet/dimension_facet_wildcard.png" alt="ファセットのオートコンプリート" style="width:30%;">}}
+{{< img src="logs/explorer/facet/dimension_facet_wildcard.png" alt="Facet Autocomplete" style="width:30%;">}}
 
-**メジャー**には、最小値と最大値を示すスライダーが付いています。スライダーを使用するか、数値を入力して、検索クエリを別の範囲に絞り込みます。
+**Measures** come with a slider indicating minimum and maximum values. Use the slider, or input numerical values, to scope the search query to different bounds.
 
-{{< img src="logs/explorer/facet/measure_facet.png" alt="メジャーファセット" style="width:30%;">}}
+{{< img src="logs/explorer/facet/measure_facet.png" alt="Measures facet" style="width:30%;">}}
 
-### ファセットを非表示にする
+### Hide facets
 
-ログを使用するすべてのチームのあらゆるユースケースに対処する必要があるため、組織が持つファセットは膨大になるものです。しかし、特定のトラブルシューティングのコンテキストで必要となるのは、こうしたファセットの一部のみであることが大半でしょう。トラブルシューティングセッションで最も関連性の高いファセットのみを保持するために、必要のないファセットを定期的に非表示にします。
+Your organization has a whole collection of facets to address its comprehensive set of use cases across all different teams using logs. Most likely, however, only a subset of these facets is valuable to you in a specific troubleshooting context. Hide facets you don't need on a routine basis, to keep only the most relevant facets for your troubleshooting sessions.
 
-{{< img src="logs/explorer/facet/hide_facet.png" alt="ファセットを非表示にする" style="width:30%;">}}
+{{< img src="logs/explorer/facet/hide_facet.png" alt="Hide Facet" style="width:30%;">}}
 
-必要に応じて、ファセットは非表示にしてもファセット検索に表示されます（[ファセットのフィルター](#filter-facets)セクションを参照）。そこから非表示のファセットを再表示します。
+Hidden facets are still visible in the facet search (see the [Filter Facet](#filter-facets) section) in case you need it. Unhide hidden facets from there.
 
-{{< img src="logs/explorer/facet/unhide_facet.png" style="width:50%;" alt="ファセットを再表示" style="width:30%;">}}
+{{< img src="logs/explorer/facet/unhide_facet.png" style="width:50%;" alt="Unhide Facet" style="width:30%;">}}
 
-非表示のファセットは、検索バーのオートコンプリートと、ログエクスプローラーの分析のドロップダウン（メジャー、グループ化など）からも非表示になります。ただし、ファセットは非表示にしても検索クエリでは有効です（たとえば、ログエクスプローラーのリンクをコピーして貼り付けた場合）。
+Hidden facets are also hidden from auto-complete in the search bar, and dropdowns (such as measure, group-by) in analytics for the Log Explorer. However, hidden facets are still valid for search queries (in case you copy-paste a log-explorer link for instance).
 
-非表示のファセットはログエクスプローラー以外には影響を与えません（例: Live Tail、モニター、ダッシュボードのウィジェットの定義）。
+Hidden facets have no impact aside from the log explorer (for instance: live tail, monitors, or widget definitions in dashboards).
 
-#### 非表示のファセットとチームメイト
+#### Hidden facets and teammates
 
-ファセットの非表示は、自身のトラブルシューティングコンテキストに固有の操作で、[保存ビュー][24]を更新しない限り、チームメイトのビューには影響を与えません。非表示のファセットは、保存ビューに保存されたコンテキストの一部です。
+Hiding facets is specific to your own troubleshooting context and does not impact your teammates' view, unless you update a [Saved View][24]. Hidden facets is part of the context saved in a saved view.
 
-### ファセットをグループ化
+### Group facets
 
-ファセットは、ファセットリスト内のナビゲーションを容易にするために、意味のあるテーマにグループ化されます。ファセットグループの割り当てや再割り当て（[ファセットの管理](#manage-facets)方法を参照）は、ファセットリストの表示に関する問題に過ぎず、検索や分析機能には影響しません。
+Facets are grouped into meaningful themes to ease navigation in the facet list. Assigning or reassigning a group for a facet only affects the display in the facet list and has no impact on search and analytics capabilities.
 
-{{< img src="logs/explorer/facet/group_facets.png" alt="ファセットをグループ化" style="width:30%;">}}
+{{< img src="logs/explorer/facet/group_facets.png" alt="Group Facet" style="width:30%;">}}
 
-### ファセットをフィルター
+To group facets:
 
-ファセットの検索ボックスを使用して、ファセットリスト全体を絞り込み、操作する必要があるものにすばやく移動することができます。ファセット検索では、ファセット表示名とファセットフィールド名の両方を使用して、結果の範囲を絞り込みます。
+1. Click the cog for the facet.
+2. Select **Edit facet**.
+3. Click the **Advanced options** section to expand it.
+4. In the **Group** field, enter the name of the group that you want the facet to be in.
+5. Click **Update**.
 
-{{< img src="logs/explorer/facet/search_facet.png" alt="ファセットを検索" style="width:30%;">}}
+### Filter facets
 
-### エイリアスが設定されたファセット
+Use the search box on facets to scope down the whole facet list and navigate more quickly to the one you need to interact with. Facet search uses both facet display name and facet field name to scope results.
 
-一部のファセットにはエイリアスが設定されている場合があります（[ファセットのエイリアス設定](#alias-facets)セクションを参照）。ファセットはエイリアスが設定されても分類できますが、組織では非推奨と見なされます。
+{{< img src="logs/explorer/facet/search_facet.png" alt="Search Facet" style="width:30%;">}}
 
-{{< img src="logs/explorer/facet/aliased_facet.png" alt="エイリアス設定されたファセット" style="width:30%;">}}
+### Aliased facets
 
-トラブルシューティングを行う場合、_エイリアス設定された_ファセットではなく_標準_ファセットで他のチームのコンテンツを（自分のチームのコンテンツと共に）見つけることが多いでしょう。これにより、さまざまな発信元からのコンテンツの関連付けがより簡単になります。
+Some facets may have been aliased (see the [alias facet](#alias-facets) section). Aliased facets are still valid for slicing and dicing, but are considered deprecated by your organization:
 
-ファセットリストにエイリアス設定されたファセットが表示される場合は、**switch to alias** メニュー項目をクリックして、_標準_ファセットを使用することを検討してください。この操作により、エイリアス設定されたファセットが非表示になり、標準ファセットが再表示されます。この時に保存ビューを更新する場合は、保存ビューを保存して、この保存ビューを使用するすべてのユーザーにエイリアス設定が適用されるようにすることを検討してください。
+{{< img src="logs/explorer/facet/aliased_facet.png" alt="Aliased Facet" style="width:30%;">}}
 
-{{< img src="logs/explorer/facet/switch_facet.png" alt="ファセットの切り替え" style="width:30%;">}}
+When troubleshooting, it is more likely for you to find content from other teams (alongside content from your team) in the _standard_ facet rather than the _aliased_ facet. This makes correlation on content from diverse origins more straightforward.
 
-古いコンテンツに対するトラブルシューティングを行う場合は、ファセットの非標準の_エイリアス設定された_バージョンを保持することをお勧めします（このファセットのエイリアス設定が組織によってセットアップされる前）。
+If you see an aliased facet in your facet list, consider using the _standard_ facet instead by clicking the **switch to alias** menu item. This action hides the aliased facet and unhides the standard facet. If doing so makes you update a saved view, consider saving the saved view so that the aliasing applies to everyone using this saved view.
 
-## ファセットを管理
+{{< img src="logs/explorer/facet/switch_facet.png" alt="Switch Facet" style="width:30%;">}}
 
-### すぐに使えるファセット
+You may wish to keep the non-standard _aliased_ version of the facet if you are troubleshooting against old content (before the aliasing for this facet has been setup by your organization).
 
-`Host` や `Service` などの最も一般的なファセットはすぐに使用できるため、ログがログインデックスに流れたら即座にトラブルシューティングを開始できます。
+## Manage facets
 
-[予約済み属性][25]およびほとんどの[標準属性][26]のファセットがデフォルトで使用可能です。
+### Out-of-the-box facets
 
-### インデックスファセット
+Most common facets such as `Host` and `Service` come out-of-the-box, so you can start troubleshooting right away once your logs are flowing into log indexes.
 
-インデックスファセットは、組織に[複数のインデックス][27]がある場合や、アクティブな[履歴ビュー][28]がある場合にのみ表示される特定のファセットです。クエリのスコープをインデックスのサブセットに絞り込む場合は、このファセットを使用します。
+Facets on [Reserved Attributes][25] and most [Standard Attributes][26] are available by default.
 
-{{< img src="logs/explorer/facet/index_facet_.png" alt="ファセットを作成" style="width:30%;">}}
+### Index facet
 
-### ファセットを作成
+The index facet is a specific facet that appears only if your organization has [multiple indexes][27], and/or if you have active [historical views][28]. Use this facet if you want to scope down your query to a subset of your indexes.
 
-新しいファセットを作成するのではなく、常に既存のファセットを使用することを習慣にすると良いでしょう（[ファセットのエイリアス設定](#alias-facets)セクションを参照）。類似した性質の情報に一意のファセットを使用すると、チーム間のコラボレーションが促されます。
+{{< img src="logs/explorer/facet/index_facet_.png" alt="Create Facet" style="width:30%;">}}
 
-JSON オブジェクトの配列にファセットを作成するには、まず [grok パーサー][29]を使って属性を抽出し、その属性のファセットを作成します。
+### Create facets
 
-**注**: ファセットが作成されると、そのコンテンツは**どちらか**のインデックスに流れる**すべての新しいログに対して**入力されます。ログ管理ソリューションを最適な形で利用するため、Datadog では最大 1000 ファセットで使用することをおすすめしています。
+As a matter of good practice, always consider using an existing facet rather than creating a new one (see the [alias facets](#alias-facets) section). Using a unique facet for information of a similar nature fosters cross-team collaboration.
 
-#### ログサイドパネル
+To create a facet on an array of JSON objects, first use a [grok parser][29] to extract the attribute and then create a facet for that attribute.
 
-ファセットを作成する最も簡単な方法は、ログのサイドパネルから追加することです。フィールド名や基底のデータのタイプなど、ファセットの詳細のほとんどは事前に入力されており、再確認するだけで済みます。[ログエクスプローラー][1]で、ファセットを作成するフィールドを持つ関心のあるログに移動します。このログのサイドパネルを開き、対応するフィールド（タグまたは属性内）をクリックして、そこからファセットを作成します。
+**Note**: Once a facet is created, its content is populated **for all new logs**. For an optimal usage of the Log Management solution, Datadog recommends using at most 1000 facets.
 
-- フィールドに文字列値がある場合、ファセットの作成のみが可能です。
-- フィールドに数値がある場合、ファセットとメジャーの両方を作成できます。
+#### Log side panel
 
-{{< img src="logs/explorer/facet/create_facet_from_attribute.png" alt="属性からファセットを作成" style="width:30%;">}}
+The easiest way to create a facet is to add it from the log side panel, where most of the facet details—such as the field name or the underlying type of data—are pre-filled and it's only a matter of double-checking. Navigate in the [Log Explorer][1] to whichever log of interest bearing the field to create a facet on. Open the side-panel for this log, click on the corresponding field (either in tags or in attributes) and create a facet from there:
 
-**注**: ベストプラクティスとして、1000 ファセット以下で使用することが推奨されます。
+- If the field has a string value, only facet creation is available.
+- If the field has a numerical value, both facet and measure creation are available.
 
-#### ファセットリスト
+{{< img src="logs/explorer/facet/create_facet_from_attribute.png" alt="Create Facet from attribute" style="width:30%;">}}
 
-一致するログを見つけることができない場合は、_ファセットの追加_ボタンを使用して、ファセットパネルから直接新しいファセットを作成します。
+**Note**: As a best practice, it is recommended to use no more than 1000 facets.
 
-このファセットの基底のフィールド（キー）名を定義します。
+#### Facet list
 
-- タグにはタグキー名を使用します。
-- プレフィックス `@` がある、属性の属性パスを使用します。
+In case finding a matching log is not an option, create a new facet directly from the facet panel using the _add facet_ button.
 
-現在のビューのログの内容に基づいてオートコンプリート機能が働くためは、適切なフィールド名を定義しやすくなっています。ただしここでは、特にインデックスに一致するログがまだ流れていない場合は、実際はどんな値でも使用できます。
+Define the underlying field (key) name for this facet:
 
-{{< img src="logs/explorer/facet/create_facet_from_scratch.png" alt="一からファセットを作成する" style="width:30%;">}}
+- Use tag key name for tags.
+- Use the attribute path for attributes, with `@` prefix.
 
-### エイリアスが設定されたファセット
+Autocomplete based on the content in logs of the current views helps you to define the proper field name. But you can use virtually any value here, specifically in the case that you don't yet have matching logs flowing in your indexes.
 
-一意のファセットで類似するコンテンツを収集すると、チーム間の分析が可能になり、チーム間のトラブルシューティングが容易になります。[命名規則][26]を参照してください。
+{{< img src="logs/explorer/facet/create_facet_from_scratch.png" alt="Create Facet from scratch" style="width:30%;">}}
 
-オプションとしてエイリアス設定を使用すると、一貫性のない命名規則に依存するチームをスムーズに再編成できます。エイリアス設定を使用すると、組織に出現する標準ファセットを使用してそれらすべてを使用できます。
+### Alias facets
 
-#### ファセットのファセットへのエイリアス設定
+Gathering similar content under a unique facet enables cross-team analytics and eases cross-team troubleshooting—see [Naming Convention][26] for reference.
 
-これは、組織内の複数のチームが類似するコンテンツに対して複数のファセットを既に作成している場合に最適なオプションです。
+Use aliasing as an option to smoothly realign teams that rely on inconsistent naming conventions. With aliasing, you can have them all using the standard facet emerging for your organization.
 
-_エイリアス設定された_ファセットを_標準_ファセットにエイリアス設定する場合
+#### Aliasing facet to facet
 
-- ユーザーは、トラブルシューティングにエイリアス設定されたファセットと標準ファセットのどちらかを使用できます。多様で、場合によっては異種のソースから流れるコンテンツの相関が容易になる標準ファセットの方が好ましいかもしれません。
-- ユーザーは、エイリアス設定されたファセットの代わりに標準ファセットを使用するように促されます。
+This is the best option if multiple teams in your organization already created multiple facets for similar content.
 
-ファセットを標準ファセットにエイリアス設定するには、ファセットメニューの `Alias to...` アクション項目を選択します。組織に存在するすべての[標準][14]ファセットから宛先ファセットを選択します。
+When aliasing an _aliased_ facet towards a _standard_ facet:
 
-{{< img src="logs/explorer/facet/alias_modal.png" alt="エイリアスモーダル" style="width:30%;">}}
+- Users can use either aliased and standard facets for troubleshooting. You may prefer the standard one, which eases correlation of content flowing from diverse and possibly heterogeneous sources.
+- Users are nudged to use the standard facet in place of the aliased one.
 
-#### 属性のファセットへのエイリアス設定
+To alias a facet towards a standard one, select the `Alias to...` action item in the facet menu. Pick the destination facets from all the [standard][14] ones existing for your organization.
 
-これは、新しいソースから流れるログをオンボードする場合に最適なオプションです。このログの一部のフィールドにファセットを作成するのではなく、標準ファセットにエイリアス設定してこのファセットを非推奨にした直後に、フィールドを既存のファセットに直接エイリアス設定します。
+{{< img src="logs/explorer/facet/alias_modal.png" alt="alias modal" style="width:30%;">}}
 
-{{< img src="logs/explorer/facet/alias_facet_from_attribute.png" alt="属性からファセットをエイリアス設定する" style="width:30%;">}}
+#### Aliasing attribute to facet
 
-## ファセットを削除する
+This is the best option if you onboard logs flowing from new sources. Rather than creating a facet for some field on those logs, and right after deprecating this facet by aliasing it to a standard facet, alias the field directly to an existing facet:
 
-<div class="alert alert-danger">インデックス、モニター、ダッシュボード、制限クエリ、または他のチームで使用されているファセットを削除すると、構成が壊れることがあります。</div>
+{{< img src="logs/explorer/facet/alias_facet_from_attribute.png" alt="Alias facet from attribute" style="width:30%;">}}
 
-ファセットを削除するには、次の手順に従います。
+## Delete a facet
 
-- ファセットパネルの上部にある **Showing xx of xx** をクリックします。
-- ファセットを検索します。
-- ファセットの鉛筆アイコンをクリックします。
-- **Delete** をクリックします。
+<div class="alert alert-danger">Deleting a facet that is being used in indexes, monitors, dashboards, restriction queries, or by other teams can cause configurations to break.</div>
 
-## その他の参考資料
+To delete a facet, follow these steps:
+
+- Click **Showing xx of xx** at the top of the facet panel.
+- Search for your facet.
+- Click the pencil icon for your facet.
+- Click **Delete**.
+
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/logs/search_syntax/
-[2]: /ja/logs/explorer/patterns/
-[3]: /ja/logs/explorer/analytics/
-[4]: /ja/monitors/types/log/
-[5]: /ja/dashboards/widgets/
-[6]: /ja/notebooks/
-[7]: /ja/logs/log_configuration/processors
-[8]: /ja/logs/live_tail/
-[9]: /ja/logs/log_configuration/attributes_naming_convention/#standard-attributes
-[10]: /ja/logs/logs_to_metrics/
-[11]: /ja/logs/archives/
-[12]: /ja/logs/archives/rehydrating/
-[13]: /ja/logs/log_configuration/pipelines
-[14]: /ja/logs/indexes/#indexes-filters
-[15]: /ja/logs/indexes/#exclusion-filters
-[16]: /ja/integrations/nginx/
-[17]: /ja/logs/log_configuration/processors/#geoip-parser
-[18]: /ja/integrations/kong/
-[19]: /ja/getting_started/tagging/assigning_tags/
-[20]: /ja/integrations/varnish/
-[21]: /ja/integrations/ansible/
-[22]: /ja/integrations/python/
-[23]: /ja/logs/log_configuration/processors/#arithmetic-processor
-[24]: /ja/logs/explorer/saved_views/
-[25]: /ja/logs/log_configuration/attributes_naming_convention/#reserved-attributes
-[26]: /ja/logs/log_configuration/attributes_naming_convention
-[27]: /ja/logs/indexes/#indexes
-[28]: /ja/logs/log_configuration/rehydrating
-[29]: /ja/logs/log_configuration/parsing/?tab=matchers#nested-json
-[30]: /ja/logs/explorer/
+[1]: /logs/search_syntax/
+[2]: /logs/explorer/patterns/
+[3]: /logs/explorer/analytics/
+[4]: /monitors/types/log/
+[5]: /dashboards/widgets/
+[6]: /notebooks/
+[7]: /logs/log_configuration/processors
+[8]: /logs/live_tail/
+[9]: /logs/log_configuration/attributes_naming_convention/#standard-attributes
+[10]: /logs/logs_to_metrics/
+[11]: /logs/archives/
+[12]: /logs/archives/rehydrating/
+[13]: /logs/log_configuration/pipelines
+[14]: /logs/indexes/#indexes-filters
+[15]: /logs/indexes/#exclusion-filters
+[16]: /integrations/nginx/
+[17]: /logs/log_configuration/processors/#geoip-parser
+[18]: /integrations/kong/
+[19]: /getting_started/tagging/assigning_tags/
+[20]: /integrations/varnish/
+[21]: /integrations/ansible/
+[22]: /integrations/python/
+[23]: /logs/log_configuration/processors/#arithmetic-processor
+[24]: /logs/explorer/saved_views/
+[25]: /logs/log_configuration/attributes_naming_convention/#reserved-attributes
+[26]: /logs/log_configuration/attributes_naming_convention
+[27]: /logs/indexes/#indexes
+[28]: /logs/log_configuration/rehydrating
+[29]: /logs/log_configuration/parsing/?tab=matchers#nested-json
+[30]: /logs/explorer/

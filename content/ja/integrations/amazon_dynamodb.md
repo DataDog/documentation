@@ -1,102 +1,103 @@
 ---
-aliases:
-- /ja/integrations/awsdynamo/
-categories:
-- cloud
-- data stores
-- aws
-- log collection
-dependencies: []
-description: テーブルサイズ、読み取り/書き込み容量、リクエストレイテンシーなどの追跡。
-doc_link: https://docs.datadoghq.com/integrations/amazon_dynamodb/
-draft: false
-git_integration_title: amazon_dynamodb
-has_logo: true
-integration_id: ''
-integration_title: Amazon DynamoDB
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: '1.0'
-name: amazon_dynamodb
-public_title: Datadog-Amazon DynamoDB インテグレーション
-short_description: テーブルサイズ、読み取り/書き込み容量、リクエストレイテンシーなどの追跡。
-version: '1.0'
+"aliases":
+- "/integrations/awsdynamo/"
+"categories":
+- "cloud"
+- "data stores"
+- "aws"
+- "log collection"
+"custom_kind": "integration"
+"dependencies": []
+"description": "Track table size, read/write capacity, request latency, and more."
+"doc_link": "https://docs.datadoghq.com/integrations/amazon_dynamodb/"
+"draft": false
+"git_integration_title": "amazon_dynamodb"
+"has_logo": true
+"integration_id": ""
+"integration_title": "Amazon DynamoDB"
+"integration_version": ""
+"is_public": true
+"manifest_version": "1.0"
+"name": "amazon_dynamodb"
+"public_title": "Datadog-Amazon DynamoDB Integration"
+"short_description": "Track table size, read/write capacity, request latency, and more."
+"version": "1.0"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-{{< img src="integrations/amazon_dynamodb/dynamodb.png" alt="DynamoDB のデフォルトダッシュボード" popup="true">}}
+{{< img src="integrations/amazon_dynamodb/dynamodb.png" alt="DynamoDB default dashboard" popup="true">}}
 
-## 概要
+## Overview
 
-Amazon DynamoDB は、AWS ポートフォリオに含まれる、フルマネージド型 NoSQL データベースクラウドサービスです。スケーリングが高速かつ容易で、大量のデータを扱う場合でもレイテンシーを極めて短く抑える必要があるアプリケーションに対応することができます。ドキュメントストアモデルと key-value ストアモデルの両方をサポートし、データベースと分散ハッシュテーブルの特長を兼ね備えています。
+Amazon DynamoDB is a fully managed NoSQL database cloud service, part of the AWS portfolio. Fast and easily scalable, it is meant to serve applications which require very low latency, even when dealing with large amounts of data. It supports both document and key-value store models, and has properties of both a database and a distributed hash table.
 
-## セットアップ
+## Setup
 
-### インストール
+### Installation
 
-[Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
+If you haven't already, set up the [Amazon Web Services integration first][1].
 
-### メトリクスの収集
+### Metric collection
 
-1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `DynamoDB` が有効になっていることを確認します。
-2. Amazon DynamoDB のメトリクスを収集するために、次のアクセス許可を [Datadog IAM ポリシー][3]に追加します。
+1. In the [AWS integration page][2], ensure that `DynamoDB` is enabled under the `Metric Collection` tab.
+2. Add these permissions to your [Datadog IAM policy][3] in order to collect Amazon DynamoDB metrics:
 
-    - `dynamodb:ListTables`: 使用できる DynamoDB テーブルをリストするために使用されます。
-    - `dynamodb:DescribeTable`: テーブルサイズとアイテムカウントに関するメトリクスを追加するために使用されます。
-    - `dynamodb:ListTagsOfResource`: DynamoDB リソースのすべてのタグを収集します。
+    - `dynamodb:ListTables`: Used to list available DynamoDB tables.
+    - `dynamodb:DescribeTable`: Used to add metrics on a table size and item count.
+    - `dynamodb:ListTagsOfResource`: Used to collect all tags on a DynamoDB resource.
 
-    詳細については、AWS ウェブサイト上の [DynamoDB ポリシー][4]を参照してください。
+    For more information, see the [DynamoDB policies][4] on the AWS website.
 
-3. [Datadog - Amazon DynamoDB インテグレーション][5]をインストールします。
+3. Install the [Datadog - Amazon DynamoDB integration][5].
 
-### ログの収集
+### Log collection
 
-#### ログの有効化
+#### Enable logging
 
-AWS CloudTrail で [Trail の作成][6]を行い、ログを書き込む S3 バケットを選択します。
+In AWS CloudTrail, [create a Trail][6] and select an S3 bucket to write the logs in.
 
-#### ログを Datadog に送信する方法
+#### Send logs to Datadog
 
-1. AWS アカウントで [Datadog Forwarder Lambda 関数][7] をまだセットアップしていない場合は、セットアップします。
-2. 設定したら、Datadog Forwarder Lambda 関数に移動します。Function Overview セクションで、**Add Trigger** をクリックします。
-3. Trigger Configuration で **S3** トリガーを選択します。
-4. Amazon DynamoDB のログが格納されている S3 バケットを選択します。
-5. イベントの種類は `All object create events` のままにしておきます。
-6. **Add** をクリックすると、Lambda にトリガーが追加されます。
+1. If you haven't already, set up the [Datadog Forwarder Lambda function][7] in your AWS account. 
+2. Once set up, go to the Datadog Forwarder Lambda function. In the Function Overview section, click **Add Trigger**. 
+3. Select the **S3** trigger for the Trigger Configuration.
+4. Select the S3 bucket that contains your Amazon DynamoDB logs.
+5. Leave the event type as `All object create events`.
+6. Click **Add** to add the trigger to your Lambda.
 
-[ログエクスプローラー][8]に移動して、ログを確認します。
+Go to the [Log Explorer][8] to start exploring your logs.
 
-AWS Services のログを収集する方法については、[Datadog Lambda 関数で AWS Services のログを送信する][9]を参照してください。
+For more information on collecting AWS Services logs, see [Send AWS Services Logs with the Datadog Lambda Function][9].
 
-## 収集データ
+## Data Collected
 
-### メトリクス
+### Metrics
 {{< get-metrics-from-git "amazon_dynamodb" >}}
 
 
-AWS から取得される各メトリクスには、ホスト名やセキュリティ グループなど、AWS コンソールに表示されるのと同じタグが割り当てられます。
+Each of the metrics retrieved from AWS are assigned the same tags that appear in the AWS console, including but not limited to host name, security-groups, and more.
 
-### イベント
+### Events
 
-Amazon DynamoDB インテグレーションには、イベントは含まれません。
+The Amazon DynamoDB integration does not include any events.
 
-### サービスのチェック
+### Service Checks
 
-Amazon DynamoDB インテグレーションには、サービスのチェック機能は含まれません。
+The Amazon DynamoDB integration does not include any service checks.
 
-## トラブルシューティング
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][11]までお問合せください。
+Need help? Contact [Datadog support][11].
 
-[1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
+[1]: https://docs.datadoghq.com/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
-[3]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/#installation
+[3]: https://docs.datadoghq.com/integrations/amazon_web_services/#installation
 [4]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/authentication-and-access-control.html
 [5]: https://app.datadoghq.com/integrations/amazon-dynamodb
 [6]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-create-and-update-a-trail.html
-[7]: https://docs.datadoghq.com/ja/logs/guide/forwarder/
+[7]: https://docs.datadoghq.com/logs/guide/forwarder/
 [8]: https://app.datadoghq.com/logs
-[9]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/
+[9]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/
 [10]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_dynamodb/amazon_dynamodb_metadata.csv
-[11]: https://docs.datadoghq.com/ja/help/
+[11]: https://docs.datadoghq.com/help/
+

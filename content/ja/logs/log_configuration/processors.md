@@ -1,86 +1,87 @@
 ---
+title: Processors
+kind: documentation
+description: "Parse your logs using the Grok Processor"
 aliases:
-- /ja/logs/processing/processors/
-description: Grok プロセッサーを使用してログをパースする
+  - /logs/processing/processors/
 further_reading:
 - link: /logs/log_configuration/pipelines
-  tag: ドキュメント
-  text: Datadog のパイプライン
+  tag: Documentation
+  text: Discover Datadog Pipelines
 - link: /logs/logging_without_limits/
-  tag: ドキュメント
+  tag: Documentation
   text: Logging without Limits*
 - link: /logs/explorer/
-  tag: ドキュメント
-  text: ログの調査方法
-title: プロセッサー
+  tag: Documentation
+  text: Learn how to explore your logs
 ---
 
-## 概要
+## Overview
 
-プロセッサーは[パイプライン][1]の中で実行され、データ構造化アクションを完了し、ログを豊かにする属性を生成します。
+A processor executes within a [Pipeline][1] to complete a data-structuring action and generate attributes to enrich your logs.
 
-{{< img src="logs/log_configuration/processor/processor_overview.png" alt="プロセッサー" style="width:100%" >}}
+{{< img src="logs/log_configuration/processor/processor_overview.png" alt="Processors" style="width:100%" >}}
 
-[ログコンフィギュレーション設定][1]で、[Grok パーサー](#grok-parser) や [日付リマッパー](#remapper) などの処理系を設定して、ログの属性を抽出・作成・再マッピングし、ファセット検索を充実させることが可能です。
+In [log configuration settings][1], you can configure processors such as the [Grok parser](#grok-parser) or [date remapper](#remapper) to help extract, create, and remap attributes to enrich your logs and enhance faceted search.
 
-**注**:
+**Notes**:
 
-- 構造化ログは有効な形式で送信する必要があります。構造にパースに無効な文字が含まれている場合は、[mask_sequences][2] 機能を使用して、これらを Agent レベルで削除する必要があります。
+- Structured logs should be shipped in a valid format. If the structure contains invalid characters for parsing, these should be stripped at the Agent level using the [mask_sequences][2] feature.
 
-- ベストプラクティスとして、パイプライン毎のプロセッサー数は最大 20 で使用することが推奨されます。
+- As a best practice, it is recommended to use at most 20 processors per pipeline.
 
-## Grok パーサー
+## Grok parser
 
-メッセージ全体や未加工のイベントの特定の属性をパースするためのカスタム Grok ルールを作成できます。詳細については、[パースのセクション][2]を参照してください。ベストプラクティスとして、Grok プロセッサー毎のパース規則は最大 10 で使用することが推奨されます。
+Create custom grok rules to parse the full message or a specific attribute of your raw event. For more information, see the [parsing section][2]. As a best practice, it is recommended to use at most 10 parsing rules within a grok processor.
 
 {{< tabs >}}
 {{% tab "UI" %}}
 
-[**Pipelines** ページ][1]で Grok プロセッサーを定義します。
+Define the Grok processor on the [**Pipelines** page][1]:
 
 {{< img src="logs/log_configuration/processor/grok_parser.png" alt="Grok Parser" style="width:80%;" >}}
 
-**Parse my logs** をクリックして、基底のパイプラインを流れるログの 3 つのパースルールのセットを始動させます。そこから属性の名前を絞り込み、必要に応じて他のタイプのログに新しいルールを追加します。この機能を使用するには、対応するログがインデックス化され、実際に流入している必要があります。除外フィルターを一時的に無効にするか、サンプリングして、これを機能させることができます。
+Click **Parse my logs** to kickstart a set of three parsing rules for the logs flowing through the underlying pipeline. Refine attribute naming from there, and add new rules for other type of logs if needed. This feature requires that the corresponding logs are being indexed, and actually flowing in—you can temporarily deactivate or sample down exclusion filters to make this work for you.
 
-サンプルをクリックして選択すると、パースルールに対する評価が開始され、結果が画面の下に表示されます。
+Select a sample by clicking on it to trigger its evaluation against the parsing rule and display the result at the bottom of the screen.
 
-プロセッサーには最大 5 つのサンプルを保存できます。各サンプルの長さは最大 5000 文字となります。すべてのサンプルについて、Grok パーサーのパース規則のいずれかがそのサンプルに一致するかどうかのステータス (`match` または `no match`) を確認することができます。
+Up to five samples can be saved with the processor, and each sample can be up to 5000 characters in length. All samples show a status (`match` or `no match`), which highlights if one of the parsing rules of the grok parser matches the sample.
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
 {{% tab "API" %}}
 
-次の Grok パーサー JSON ペイロードで [Datadog ログパイプライン API エンドポイント][1]を使用します。
+Use the [Datadog Log Pipeline API endpoint][1] with the following Grok parser JSON payload:
 
 ```json
 {
   "type": "grok-parser",
-  "name": "ログメッセージをパース",
+  "name": "Parsing Log message",
   "is_enabled": true,
   "source": "message",
   "samples": ["sample log 1", "sample log 2"],
-  "grok": {"support_rules": "<サポート規則>", "match_rules": "<照合規則>"}
+  "grok": {"support_rules": "<SUPPORT_RULES>", "match_rules": "<MATCH_RULES>"}
 }
 ```
 
-| パラメーター            | タイプ             | 必須 | 説明                                             |
+| Parameter            | Type             | Required | Description                                             |
 |----------------------|------------------|----------|---------------------------------------------------------|
-| `type`               | 文字列           | はい      | プロセッサーのタイプ。                                  |
-| `name`               | 文字列           | ✕       | プロセッサーの名前。                                  |
-| `is_enabled`         | Boolean          | ✕       | プロセッサーが有効になっているかどうか。デフォルト: `false`。  |
-| `source`             | 文字列           | はい      | パースするログ属性の名前。デフォルト: `message`。 |
-| `samples`            | 文字列の配列 | ✕       | この Grok パーサーのサンプルログのリストです（最大 5）。     |
-| `grok.support_rules` | 文字列           | はい      | grok パーサーのサポート規則のリスト。             |
-| `grok.match_rules`   | 文字列           | はい      | grok パーサーの照合規則のリスト。               |
+| `type`               | String           | Yes      | Type of the processor.                                  |
+| `name`               | String           | No       | Name of the processor.                                  |
+| `is_enabled`         | Boolean          | No       | If the processors is enabled or not. Default: `false`.  |
+| `source`             | String           | Yes      | Name of the log attribute to parse. Default: `message`. |
+| `samples`            | Array of strings | No       | List of (up to 5) sample logs for this grok parser.     |
+| `grok.support_rules` | String           | Yes      | List of Support rules for your grok parser.             |
+| `grok.match_rules`   | String           | Yes      | List of Match rules for your grok parser.               |
 
 
-[1]: /ja/api/v1/logs-pipelines/
+[1]: /api/v1/logs-pipelines/
 {{% /tab %}}
 {{< /tabs >}}
 
-## ログ日付リマッパー
+## Log date remapper
 
-Datadog はログを受信すると、以下のデフォルトの属性のいずれかの値を使用してタイムスタンプを付けます。
+As Datadog receives logs, it timestamps them using the value(s) from any of these default attributes:
 
 * `timestamp`
 * `date`
@@ -89,224 +90,224 @@ Datadog はログを受信すると、以下のデフォルトの属性のいず
 * `eventTime`
 * `published_date`
 
-ログにこのリストにない属性の日付がある場合は、ログ日付リマッパープロセッサーを使用して、その日付属性を公式のログタイムスタンプとして定義してください。
+If your logs have dates in an attribute that are not in this list, use the log date remapper processor to define their date attribute as the official log timestamp:
 
 <div class="alert alert-info">
-認識される日付の形式は、<a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO8601</a>、<a href="https://en.wikipedia.org/wiki/Unix_time">UNIX (ミリ秒エポック形式)</a>、および <a href="https://www.ietf.org/rfc/rfc3164.txt">RFC3164</a> です。
+The recognized date formats are: <a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO8601</a>, <a href="https://en.wikipedia.org/wiki/Unix_time">UNIX (the milliseconds EPOCH format)</a>, and <a href="https://www.ietf.org/rfc/rfc3164.txt">RFC3164</a>.
 </div>
 
-ログに上記の形式に準拠したタイムスタンプがない場合、grok プロセッサーを使用してタイムスタンプからエポックタイムを抽出し、新しい属性に変換します。日付リマッパーは新しく定義された属性を使用します。
+If your logs don't have a timestamp that conforms to the formats listed above, use the grok processor to extract the epoch time from the timestamp to a new attribute. The date remapper uses the newly defined attribute.
 
-Datadog でカスタム日付と時間形式をパースする方法については、[日付のパース][3]を参照してください。
+To see how a custom date and time format can be parsed in Datadog, see [Parsing dates][3].
 
-**注**:
+**Notes**:
 
-* ログイベントは過去 18 時間、未来の 2 時間まで送信が可能です。
-* ISO 8601-1:2019 では、基本フォーマットは `T[hh][mm][ss]`、拡張フォーマットは `T[hh]:[mm]:[ss]` です。それ以前のバージョンでは、どちらのフォーマットでも T (時刻を表す) が省略されています。
-* ログにデフォルトの属性が含まれず、独自の日付属性も定義していない場合、Datadog は、ログを受信した日付をタイムスタンプとします。
-* 複数のログ日付リマッパープロセッサーがパイプライン内の特定のログに適用された場合は、(パイプラインの順序で) 最後のプロセッサーが考慮されます。
+* Log events can be submitted up to 18 hours in the past and two hours in the future.
+* As of ISO 8601-1:2019, the basic format is `T[hh][mm][ss]` and the extended format is `T[hh]:[mm]:[ss]`. Earlier versions omitted the T (representing time) in both formats.
+* If your logs don't contain any of the default attributes and you haven't defined your own date attribute, Datadog timestamps the logs with the date it received them.
+* If multiple log date remapper processors are applied to a given log within the pipeline, the last one (according to the pipeline's order) is taken into account.
 
 {{< tabs >}}
 {{% tab "UI" %}}
 
-[**Pipelines** ページ][1]でログ日付リマッパープロセッサーを定義します。
+Define the log date remapper processor on the [**Pipelines** page][1]:
 
-{{< img src="logs/log_configuration/processor/date_remapper.png" alt="日付属性の定義" style="width:80%;" >}}
+{{< img src="logs/log_configuration/processor/date_remapper.png" alt="Define a date attribute" style="width:80%;" >}}
 
-{{< img src="logs/log_configuration/processor/date_remapper_example.png" alt="ログエクスプローラーのサイドパネルに表示される日付と時間" style="width:80%;" >}}
+{{< img src="logs/log_configuration/processor/date_remapper_example.png" alt="Date and time in the Log Explorer side panel" style="width:80%;" >}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
 {{% tab "API" %}}
 
-次のログ日付リマッパー JSON ペイロードで [Datadog ログパイプライン API エンドポイント][1]を使用します。
+Use the [Datadog Log Pipeline API endpoint][1] with the following log date remapper JSON payload:
 
 ```json
 {
-    "type": "date-remapper",
-    "name": "<ソース属性> を公式のログ日付として定義",
-    "is_enabled": false,
-    "sources": ["<ソース属性_1>"]
+  "type": "date-remapper",
+  "name": "Define <SOURCE_ATTRIBUTE> as the official Date of the log",
+  "is_enabled": false,
+  "sources": ["<SOURCE_ATTRIBUTE_1>"]
 }
 ```
 
-| パラメーター    | タイプ             | 必須 | 説明                                           |
+| Parameter    | Type             | Required | Description                                           |
 |--------------|------------------|----------|-------------------------------------------------------|
-| `type`       | 文字列           | はい      | プロセッサーのタイプ。                                |
-| `name`       | 文字列           | いいえ       | プロセッサーの名前。                                |
-| `is_enabled` | Boolean          | いいえ       | プロセッサーが有効になっているかどうか。デフォルト: `false`。 |
-| `sources`    | 文字列の配列 | はい      | ソース属性の配列。                           |
+| `type`       | String           | Yes      | Type of the processor.                                |
+| `name`       | String           | no       | Name of the processor.                                |
+| `is_enabled` | Boolean          | no       | If the processors is enabled or not. Default: `false`. |
+| `sources`    | Array of strings | Yes      | Array of source attributes.                           |
 
-[1]: /ja/api/v1/logs-pipelines/
+[1]: /api/v1/logs-pipelines/
 {{% /tab %}}
 {{< /tabs >}}
 
-## ログステータスリマッパー
+## Log status remapper
 
-ログに公式なステータスとして属性を割り当てるには、ステータスリマッパープロセッサーを使用します。例えば、ステータスリマッパーを使用して、ログに重大度レベルを追加します。
+Use the status remapper processor to assign attributes as an official status to your logs. For example, add a log severity level to your logs with the status remapper.
 
-{{< img src="logs/processing/processors/log_post_severity_bis.png" alt="リマップ後のログの重大度" style="width:40%;" >}}
+{{< img src="logs/processing/processors/log_post_severity_bis.png" alt="Log severity after remapping" style="width:40%;" >}}
 
-受信したステータス値は、次のようにマップされます。
+Each incoming status value is mapped as follows:
 
-* 整数値 (0 から 7) は、[Syslog の重大度標準][4]にマップされます
-* **emerg** または **f** で始まる文字列 (大文字と小文字の区別なし) は、**emerg (0)** にマップされます
-* **a** で始まる文字列 (大文字と小文字の区別なし) は、**alert (1)** にマップされます
-* **c** で始まる文字列 (大文字と小文字の区別なし) は、**critical (2)** にマップされます
-* **e** で始まる文字列 (大文字と小文字の区別なし) で `emerg` に一致しないものは、**error (3)** にマップされます
-* **w** で始まる文字列 (大文字と小文字の区別なし) は、**warning (4)** にマップされます
-* **n** で始まる文字列 (大文字と小文字の区別なし) は、**notice (5)** にマップされます
-* **i** で始まる文字列 (大文字と小文字の区別なし) は、**info (6)** にマップされます
-* **d**、**trace**、または **verbose** で始まる文字列 (大文字と小文字の区別なし) は、**debug (7)** にマップされます
-* **o** または **s** で始まる文字列または **OK** か **Success**に一致する文字列 (大文字と小文字の区別なし) は、**OK** にマップされます
-* 他はすべて、**info (6)** にマップされます
+* Integers from 0 to 7 map to the [Syslog severity standards][4]
+* Strings beginning with **emerg** or **f** (case-insensitive) map to **emerg (0)**
+* Strings beginning with **a** (case-insensitive) map to **alert (1)**
+* Strings beginning with **c** (case-insensitive) map to **critical (2)**
+* Strings beginning with **e** (case-insensitive)—that do not match `emerg`—map to **error (3)**
+* Strings beginning with **w** (case-insensitive) map to **warning (4)**
+* Strings beginning with **n** (case-insensitive) map to **notice (5)**
+* Strings beginning with **i** (case-insensitive) map to **info (6)**
+* Strings beginning with **d**, **t**, **v**, **trace**, or **verbose** (case-insensitive) map to **debug (7)**
+* Strings beginning with **o** or **s**, or matching **OK** or **Success** (case-insensitive) map to **OK**
+* All others map to **info (6)**
 
-**注**: 複数のログステータスリマッパープロセッサーがパイプライン内の特定のログに適用された場合は、(パイプラインの順序で) 最初のプロセッサーだけが考慮されます。
+**Note**: If multiple log status remapper processors are applied to a given log within the pipeline, only the first one (according to the pipeline's order) is taken into account.
 
 {{< tabs >}}
 {{% tab "UI" %}}
 
-[**Pipelines** ページ][1]でログステータスリマッパープロセッサーを定義します。
+Define the log status remapper processor on the [**Pipelines** page][1]:
 
-{{< img src="logs/log_configuration/processor/severity_remapper.png" alt="ログ重大度リマッピング" style="width:60%;" >}}
+{{< img src="logs/log_configuration/processor/severity_remapper.png" alt="Log severity remapping" style="width:60%;" >}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
 {{% tab "API" %}}
 
-次のログステータスリマッパー JSON ペイロードで [Datadog ログパイプライン API エンドポイント][1]を使用します。
+Use the [Datadog Log Pipeline API endpoint][1] with the following log status remapper JSON payload:
 
 ```json
 {
-   "type": "status-remapper",
-   "name": " <ソース属性> を公式のログ日付として定義",
-   "is_enabled": true,
-   "sources": ["<ソース属性>"]
+  "type": "status-remapper",
+  "name": "Define <SOURCE_ATTRIBUTE> as the official status of the log",
+  "is_enabled": true,
+  "sources": ["<SOURCE_ATTRIBUTE>"]
 }
 ```
 
-| パラメーター    | タイプ             | 必須 | 説明                                           |
+| Parameter    | Type             | Required | Description                                           |
 |--------------|------------------|----------|-------------------------------------------------------|
-| `type`       | 文字列           | はい      | プロセッサーのタイプ。                                |
-| `name`       | 文字列           | ✕       | プロセッサーの名前。                                |
-| `is_enabled` | Boolean          | ✕       | プロセッサーが有効になっているかどうか。デフォルト: `false`。 |
-| `sources`    | 文字列の配列 | はい      | ソース属性の配列。                           |
+| `type`       | String           | Yes      | Type of the processor.                                |
+| `name`       | String           | No       | Name of the processor.                                |
+| `is_enabled` | Boolean          | No       | If the processors is enabled or not. Default: `false`. |
+| `sources`    | Array of strings | Yes      | Array of source attributes.                           |
 
-[1]: /ja/api/v1/logs-pipelines/
+[1]: /api/v1/logs-pipelines/
 {{% /tab %}}
 {{< /tabs >}}
 
-## サービスリマッパー
+## Service remapper
 
-サービスリマッパープロセッサーは、ログに 1 つまたは複数の属性を正式なサービスとして割り当てます。
+The service remapper processor assigns one or more attributes to your logs as the official service.
 
-**注**: 複数のサービスリマッパープロセッサーがパイプライン内の特定のログに適用された場合は、(パイプラインの順序で) 最初のプロセッサーだけが考慮されます。
+**Note**: If multiple service remapper processors are applied to a given log within the pipeline, only the first one (according to the pipeline's order) is taken into account.
 
 {{< tabs >}}
 {{% tab "UI" %}}
 
-[**Pipelines** ページ][1]でログサービスリマッパープロセッサーを定義します。
+Define the log service remapper processor on the [**Pipelines** page][1]:
 
-{{< img src="logs/log_configuration/processor/service_remapper.png" alt="サービスリマッパープロセッサー" style="width:80%;" >}}
+{{< img src="logs/log_configuration/processor/service_remapper.png" alt="Service remapper processor" style="width:80%;" >}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
 {{% tab "API" %}}
 
-次のログサービスリマッパー JSON ペイロードで [Datadog ログパイプライン API エンドポイント][1]を使用します。
+Use the [Datadog Log Pipeline API endpoint][1] with the following log service remapper JSON payload:
 
 ```json
 {
-   "type": "service-remapper",
-   "name": "<ソース属性> を公式のログサービスとして定義",
-   "is_enabled": true,
-   "sources": ["<ソース属性>"]
+  "type": "service-remapper",
+  "name": "Define <SOURCE_ATTRIBUTE> as the official log service",
+  "is_enabled": true,
+  "sources": ["<SOURCE_ATTRIBUTE>"]
 }
 ```
 
-| パラメーター    | タイプ             | 必須 | 説明                                           |
+| Parameter    | Type             | Required | Description                                           |
 |--------------|------------------|----------|-------------------------------------------------------|
-| `type`       | 文字列           | はい      | プロセッサーのタイプ。                                |
-| `name`       | 文字列           | ✕       | プロセッサーの名前。                                |
-| `is_enabled` | Boolean          | ✕       | プロセッサーが有効になっているかどうか。デフォルト: `false`。 |
-| `sources`    | 文字列の配列 | はい      | ソース属性の配列。                           |
+| `type`       | String           | Yes      | Type of the processor.                                |
+| `name`       | String           | No       | Name of the processor.                                |
+| `is_enabled` | Boolean          | No       | If the processors is enabled or not. Default: `false`. |
+| `sources`    | Array of strings | Yes      | Array of source attributes.                           |
 
-[1]: /ja/api/v1/logs-pipelines/
+[1]: /api/v1/logs-pipelines/
 {{% /tab %}}
 {{< /tabs >}}
 
-## ログメッセージリマッパー
+## Log message remapper
 
-`message` は、Datadog のキー属性です。その値はログエクスプローラーの **Content** 列に表示され、ログのコンテキストを提供します。検索バーを使って、ログメッセージでログを見つけることができます。
+`message` is a key attribute in Datadog. Its value is displayed in the **Content** column of the Log Explorer to provide context on the log. You can use the search bar to find a log by the log message. 
 
-ログメッセージリマッパープロセッサーを使用して、1 つまたは複数の属性を公式ログメッセージとして定義します。属性が存在しない可能性があり、代替が可能な場合には、複数の属性を定義します。例えば、定義されたメッセージの属性が `attribute1`、`attribute2`、`attribute3` で、`attribute1` が存在しない場合は `attribute2` が使用されます。同様に、`attribute2` が存在しない場合、`attribute3` が使用されます。
+Use the log message remapper processor to define one or more attributes as the official log message. Define more than one attribute for cases where the attributes might not exist and an alternative is available. For example, if the defined message attributes are `attribute1`, `attribute2`, and `attribute3`, and `attribute1` does not exist, then `attribute2` is used. Similarly, if `attribute2` does not exist, then `attribute3` is used.
 
-メッセージ属性を定義するには、まず[ストリングビルダープロセッサー](#string-builder-processor)を使用して、使用したい属性ごとに新しい文字列属性を作成します。次に、ログメッセージリマッパーを使用して、文字列属性をメッセージとして再マッピングします。
+To define message attributes, first use the [string builder processor](#string-builder-processor) to create a new string attribute for each of the attributes you want to use. Then, use the log message remapper to remap the string attributes as the message.
 
-**注**: 複数のログメッセージリマッパープロセッサーがパイプライン内の特定のログに適用された場合は、(パイプラインの順序で) 最初のプロセッサーだけが考慮されます。
+**Note**: If multiple log message remapper processors are applied to a given log within the pipeline, only the first one (according to the pipeline order) is taken into account.
 
 {{< tabs >}}
 {{% tab "UI" %}}
 
-[**Pipelines** ページ][1]でログメッセージリマッパープロセッサーを定義します。
+Define the log message remapper processor on the [**Pipelines** page][1]:
 
-{{< img src="logs/log_configuration/processor/message_processor.png" alt="メッセージプロセッサー" style="width:80%;">}}
+{{< img src="logs/log_configuration/processor/message_processor.png" alt="Message processor" style="width:80%;">}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
 {{% tab "API" %}}
 
-次のログメッセージリマッパー JSON ペイロードで [Datadog ログパイプライン API エンドポイント][1] を使用します。
+Use the [Datadog Log Pipeline API endpoint][1] with the following log message remapper JSON payload:
 
 ```json
 {
-   "type": "message-remapper",
-   "name": "<ソース属性> を公式のログメッセージとして定義",
-   "is_enabled": true,
-   "sources": ["msg"]
+  "type": "message-remapper",
+  "name": "Define <SOURCE_ATTRIBUTE> as the official message of the log",
+  "is_enabled": true,
+  "sources": ["msg"]
 }
 ```
 
-| パラメーター    | タイプ             | 必須 | 説明                                           |
+| Parameter    | Type             | Required | Description                                           |
 |--------------|------------------|----------|-------------------------------------------------------|
-| `type`       | 文字列           | はい      | プロセッサーのタイプ。                                |
-| `name`       | 文字列           | ✕       | プロセッサーの名前。                                |
-| `is_enabled` | Boolean          | ✕       | プロセッサーが有効になっているかどうか。デフォルト: `false`。 |
-| `sources`    | 文字列の配列 | はい      | ソース属性の配列。デフォルト: `msg`。            |
+| `type`       | String           | Yes      | Type of the processor.                                |
+| `name`       | String           | No       | Name of the processor.                                |
+| `is_enabled` | Boolean          | No       | If the processors is enabled or not. Default: `false`. |
+| `sources`    | Array of strings | Yes      | Array of source attributes. Default: `msg`.            |
 
-[1]: /ja/api/v1/logs-pipelines/
+[1]: /api/v1/logs-pipelines/
 {{% /tab %}}
 {{< /tabs >}}
 
-## リマッパー
+## Remapper
 
-リマッパープロセッサーは、任意のソース属性やタグを、別のターゲット属性やタグにリマップします。例えば、`user` を `firstname` にリマップして、ログエクスプローラーのログをターゲットにすることができます。
+The remapper processor remaps any source attribute(s) or tags to another target attribute or tag. For example, remap `user` by `firstname` to target your logs in the Log Explorer:
 
-{{< img src="logs/processing/processors/attribute_post_remapping.png" alt="リマップ後の属性" style="width:60%;">}}
+{{< img src="logs/processing/processors/attribute_post_remapping.png" alt="Attribute after remapping" style="width:60%;">}}
 
-タグ/属性名の制約については、[属性とタグのドキュメント][5]に説明があります。いくつかの追加の制約は、`:` や `,` として適用され、ターゲットタグ/属性名では許可されません。
+Constraints on the tag/attribute name are explained in the [attributes and tags documentation][5]. Some additional constraints, applied as `:` or `,`, are not allowed in the target tag/attribute name.
 
-リマッパーのターゲットが属性の場合、リマッパーは値を新しい型（`String`、`Integer`、`Double`）への変換を試みることができます。型変換できない場合、元の型が保持されます。
+If the target of the remapper is an attribute, the remapper can also try to cast the value to a new type (`String`, `Integer` or `Double`). If the cast is not possible, the original type is kept.
 
-**注**: `Double` の小数点以下の桁数は `.` である必要があります。
+**Note**: The decimal separator for `Double` need to be `.`.
 
 {{< tabs >}}
 {{% tab "UI" %}}
 
-[**Pipelines** ページ][1]で、リマッパープロセッサーを定義します。たとえば、`user` を `user.firstname` に再マップします。
+Define the remapper processor on the [**Pipelines** page][1]. For example, remap `user` to `user.firstname`.
 
-{{< img src="logs/log_configuration/processor/remapper.png" alt="属性リマッパープロセッサー" style="width:80%;" >}}
+{{< img src="logs/log_configuration/processor/remapper.png" alt="Attribute remapper processor" style="width:80%;" >}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
 {{% tab "API" %}}
 
-次のリマッパー JSON ペイロードで [Datadog ログパイプライン API エンドポイント][1]を使用します。
+Use the [Datadog Log Pipeline API endpoint][1] with the following Remapper JSON payload:
 
 ```json
 {
   "type": "attribute-remapper",
-  "name": "<SOURCE_ATTRIBUTE> を <TARGET_ATTRIBUTE> へ再マップ",
+  "name": "Remap <SOURCE_ATTRIBUTE> to <TARGET_ATTRIBUTE>",
   "is_enabled": true,
   "source_type": "attribute",
   "sources": ["<SOURCE_ATTRIBUTE>"],
@@ -318,35 +319,35 @@ Datadog でカスタム日付と時間形式をパースする方法について
 }
 ```
 
-| パラメーター              | タイプ             | 必須 | 説明                                                                    |
+| Parameter              | Type             | Required | Description                                                                    |
 |------------------------|------------------|----------|--------------------------------------------------------------------------------|
-| `type`                 | 文字列           | はい      | プロセッサーのタイプ。                                                         |
-| `name`                 | 文字列           | ✕      | プロセッサーの名前。                                                         |
-| `is_enabled`           | Boolean          | ✕      | プロセッサーが有効になっているかどうか。デフォルト: `false`。                          |
-| `source_type`          | 文字列           | ✕      | ソースがログの `attribute` または `tag` のどちらであるかを定義します。デフォルト: `attribute`。 |
-| `sources`              | 文字列の配列 | はい      | ソース属性またはタグの配列。                                             |
-| `target`               | 文字列           | はい      | ソースの再マップ先になる最終的な属性またはタグの名前。                           |
-| `target_type`          | 文字列           | ✕      | ターゲットがログの `attribute` または `tag` のどちらであるかを定義します。デフォルト: `attribute`。    |
-| `target_format`        | 文字列           | ✕      | 属性値を別の型にキャストするかを定義します。可能な値には、`auto`、`string`、`integer` があり、デフォルトは `auto` です。`auto` に設定するとキャストは適用されません。  |
-| `preserve_source`      | Boolean          | ✕      | 再マップされたソース要素を削除または維持します。デフォルト: `false`。               |
-| `override_on_conflict` | Boolean          | ✕      | ターゲット要素が既に設定されている場合に上書きするかどうか。デフォルト: `false`。            |
+| `type`                 | String           | Yes      | Type of the processor.                                                         |
+| `name`                 | String           | No      | Name of the processor.                                                         |
+| `is_enabled`           | Boolean          | No      | If the processors is enabled or not. Default: `false`.                          |
+| `source_type`          | String           | No      | Defines if the sources are from log `attribute` or `tag`. Default: `attribute`. |
+| `sources`              | Array of strings | Yes      | Array of source attributes or tags                                             |
+| `target`               | String           | Yes      | Final attribute or tag name to remap the sources to.                           |
+| `target_type`          | String           | No      | Defines if the target is a log `attribute` or a `tag`. Default: `attribute`.    |
+| `target_format`        | String           | No      | Defines if the attribute value should be cast to another type. Possible values: `auto`, `string`, or `integer`. Default: `auto`. When set to `auto`, no cast is applied.  |
+| `preserve_source`      | Boolean          | No      | Remove or preserve the remapped source element. Default: `false`.               |
+| `override_on_conflict` | Boolean          | No      | Override or not the target element if already set. Default: `false`.            |
 
-[1]: /ja/api/v1/logs-pipelines/
+[1]: /api/v1/logs-pipelines/
 {{% /tab %}}
 {{< /tabs >}}
 
-## URL パーサー
+## URL parser
 
-URL パーサープロセッサーは URL からクエリパラメーターなどの重要なパラメーターを抽出します。これをセットアップすると、次の属性が生成されます。
+The URL parser processor extracts query parameters and other important parameters from a URL. When setup, the following attributes are produced:
 
-{{< img src="logs/processing/processors/url_processor.png" alt="URL プロセッサー" style="width:80%;" >}}
+{{< img src="logs/processing/processors/url_processor.png" alt="Url Processor" style="width:80%;" >}}
 
 {{< tabs >}}
 {{% tab "UI" %}}
 
-[**Pipelines** ページ][1]で URL パーサープロセッサーを定義します。
+Define the URL parser processor on the [**Pipelines** page][1]:
 
-{{< img src="logs/processing/processors/url_processor.png" alt="URL プロセッサータイル" style="width:80%;" >}}
+{{< img src="logs/processing/processors/url_processor.png" alt="Url Processor Tile" style="width:80%;" >}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
@@ -354,197 +355,197 @@ URL パーサープロセッサーは URL からクエリパラメーターな�
 
 ```json
 {
-    "type": "url-parser",
-    "name": "http.url 属性から URL をパース",
-    "is_enabled": true,
-    "sources": ["http.url"],
-    "target": "http.url_details"
+  "type": "url-parser",
+  "name": "Parse the URL from http.url attribute.",
+  "is_enabled": true,
+  "sources": ["http.url"],
+  "target": "http.url_details"
 }
 ```
 
-| パラメーター    | タイプ             | 必須 | 説明                                                                                                          |
+| Parameter    | Type             | Required | Description                                                                                                          |
 |--------------|------------------|----------|----------------------------------------------------------------------------------------------------------------------|
-| `type`       | 文字列           | はい      | プロセッサーのタイプ。                                                                                               |
-| `name`       | 文字列           | ✕       | プロセッサーの名前。                                                                                               |
-| `is_enabled` | Boolean          | ✕       | プロセッサーが有効になっているかどうか。デフォルト: `false`。                                                                |
-| `sources`    | 文字列の配列 | ✕       | ソース属性の配列。デフォルト: `http.url`。                                                                      |
-| `target`     | 文字列           | はい      | `sources` から抽出されたすべての詳細を含む親属性の名前。デフォルト: `http.url_details`。 |
+| `type`       | String           | Yes      | Type of the processor.                                                                                               |
+| `name`       | String           | No       | Name of the processor.                                                                                               |
+| `is_enabled` | Boolean          | No       | If the processors is enabled or not. Default: `false`.                                                                |
+| `sources`    | Array of strings | No       | Array of source attributes. Default: `http.url`.                                                                      |
+| `target`     | String           | Yes      | Name of the parent attribute that contains all the extracted details from the `sources`. Default: `http.url_details`. |
 
 {{% /tab %}}
 {{< /tabs >}}
 
-## ユーザーエージェントパーサー
+## User-Agent parser
 
-ユーザーエージェントパーサープロセッサーは `useragent` 属性を受け取り、OS、ブラウザ、デバイス、およびその他のユーザーデータを抽出します。設定されると、以下のような属性が生成されます。
+The user-agent parser processor takes a `useragent` attribute and extracts OS, browser, device, and other user data. When set up, the following attributes are produced:
 
-{{< img src="logs/processing/processors/useragent_processor.png" alt="ユーザーエージェントプロセッサー" style="width:80%;">}}
+{{< img src="logs/processing/processors/useragent_processor.png" alt="Useragent Processor" style="width:80%;">}}
 
-**注**: エンコードされたユーザーエージェントがログに含まれている場合 (IIS ログなど) は、パースの前に **URL をデコードする**ようにプロセッサーを構成してください。
+**Note**: If your logs contain encoded user-agents (for example, IIS logs), configure this Processor to **decode the URL** before parsing it.
 
 {{< tabs >}}
 {{% tab "UI" %}}
 
-[**Pipelines** ページ][1]でユーザーエージェントプロセッサーを定義します。
+Define the user-agent processor on the [**Pipelines** page][1]:
 
-{{< img src="logs/log_configuration/processor/useragent_processor.png" alt="ユーザーエージェントプロセッサータイル" style="width:80%;" >}}
+{{< img src="logs/log_configuration/processor/useragent_processor.png" alt="Useragent Processor tile" style="width:80%;" >}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
 {{% tab "API" %}}
 
-次のユーザーエージェントパーサー JSON ペイロードで [Datadog ログパイプライン API エンドポイント][1]を使用します。
+Use the [Datadog Log Pipeline API endpoint][1] with the following user-agent parser JSON payload:
 
 ```json
 {
-    "type": "user-agent-parser",
-    "name": "<ソース属性> をパースしてすべてのユーザーエージェント情報を抽出",
-    "is_enabled": true,
-    "sources": ["http.useragent"],
-    "target": "http.useragent_details",
-    "is_encoded": false
+  "type": "user-agent-parser",
+  "name": "Parses <SOURCE_ATTRIBUTE> to extract all its User-Agent information",
+  "is_enabled": true,
+  "sources": ["http.useragent"],
+  "target": "http.useragent_details",
+  "is_encoded": false
 }
 ```
 
-| パラメーター    | タイプ             | 必須 | 説明                                                                                                                 |
+| Parameter    | Type             | Required | Description                                                                                                                 |
 |--------------|------------------|----------|-----------------------------------------------------------------------------------------------------------------------------|
-| `type`       | 文字列           | はい      | プロセッサーのタイプ。                                                                                                      |
-| `name`       | 文字列           | ✕       | プロセッサーの名前。                                                                                                      |
-| `is_enabled` | Boolean          | ✕       | プロセッサーが有効になっているかどうか。デフォルト: `false`。                                                                      |
-| `sources`    | 文字列の配列 | ✕       | ソース属性の配列。デフォルト: `http.useragent`。                                                                      |
-| `target`     | 文字列           | はい      | `sources` から抽出されたすべての詳細を含む親属性の名前。デフォルト: `http.useragent_details`。 |
-| `is_encoded` | Boolean          | ✕       | ソース属性が URL エンコードされているかどうかを定義します。デフォルト: `false`。                                                     |
+| `type`       | String           | Yes      | Type of the processor.                                                                                                      |
+| `name`       | String           | No       | Name of the processor.                                                                                                      |
+| `is_enabled` | Boolean          | No       | If the processors is enabled or not. Default: `false`.                                                                      |
+| `sources`    | Array of strings | No       | Array of source attributes. Default: `http.useragent`.                                                                      |
+| `target`     | String           | Yes      | Name of the parent attribute that contains all the extracted details from the `sources`. Default: `http.useragent_details`. |
+| `is_encoded` | Boolean          | No       | Define if the source attribute is url encoded or not. Default: `false`.                                                     |
 
-[1]: /ja/api/v1/logs-pipelines/
+[1]: /api/v1/logs-pipelines/
 {{% /tab %}}
 {{< /tabs >}}
 
-## カテゴリプロセッサー
+## Category processor
 
-指定された検索クエリに一致するログに、新しい属性 (新しい属性の名前にはスペースまたは特殊文字を含まない) を追加するには、カテゴリプロセッサーを使用します。次に、複数のカテゴリを使用すると、1 つの分析ビューに複数のグループが作成されます (複数の URL グループ、マシングループ、環境、応答時間バケットなど)。
+Use the category processor to add a new attribute (without spaces or special characters in the new attribute name) to a log matching a provided search query. Then, use categories to create groups for an analytical view (for example, URL groups, machine groups, environments, and response time buckets).
 
-**注**:
+**Notes**:
 
-* このクエリの構文は[ログエクスプローラー][6]検索バーで使用されているものです。このクエリはファセットか否かに関わらず、任意のログ属性またはタグで実行できます。クエリ内でワイルドカードを使用することも可能です。
-* ログは、プロセッサークエリのいずれかと一致した時点で停止します。1 つのログが複数のクエリに一致する可能性がある場合は、クエリが正しい順序になっていることを確認してください。
-* カテゴリ名は一意でなければなりません。
-* カテゴリプロセッサーを定義したら、[ログステータスリマッパー](#log-status-remapper)を使用してカテゴリをログステータスにマップします。
+* The syntax of the query is the one in the [Logs Explorer][6] search bar. This query can be done on any log attribute or tag, whether it is a facet or not. Wildcards can also be used inside your query.
+* Once the log has matched one of the processor queries, it stops. Make sure they are properly ordered in case a log could match several queries.
+* The names of the categories must be unique.
+* Once defined in the category processor, you can map categories to log status using the [log status remapper](#log-status-remapper).
 
 {{< tabs >}}
 {{% tab "UI" %}}
 
-[**Pipelines** ページ][1]で、カテゴリプロセッサーを定義します。たとえば、Web アクセスログをステータスコード範囲に基づいて分類 (応答コード 200 ～ 299 の場合は「OK」、応答コード 300 ～ 399 の場合は「通知」など) するには、次のプロセッサーを追加します。
+Define the category processor on the [**Pipelines** page][1]. For example, to categorize your web access logs based on the status code range value (`"OK" for a response code between 200 and 299, "Notice" for a response code between 300 and 399, ...`) add this processor:
 
-{{< img src="logs/log_configuration/processor/category_processor.png" alt="カテゴリプロセッサー" style="width:80%;" >}}
+{{< img src="logs/log_configuration/processor/category_processor.png" alt="category processor" style="width:80%;" >}}
 
-このプロセッサーは、次のような結果をもたらします。
+This processor produces the following result:
 
-{{< img src="logs/log_configuration/processor/category_processor_result.png" alt="カテゴリプロセッサー結果" style="width:80%;" >}}
+{{< img src="logs/log_configuration/processor/category_processor_result.png" alt="category processor result" style="width:80%;" >}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
 {{% tab "API" %}}
 
-次のカテゴリプロセッサー JSON ペイロードで [Datadog ログパイプライン API エンドポイント][1]を使用します。
+Use the [Datadog Log Pipeline API endpoint][1] with the following category processor JSON payload:
 
 ```json
 {
   "type": "category-processor",
-  "name": "<ターゲット属性> 属性にカスタム値を割り当て",
+  "name": "Assign a custom value to the <TARGET_ATTRIBUTE> attribute",
   "is_enabled": true,
   "categories": [
-    {"filter": {"query": "<クエリ_1>"}, "name": "<割り当て値_1>"},
-    {"filter": {"query": "<クエリ_2>"}, "name": "<割り当て値_2>"}
+    {"filter": {"query": "<QUERY_1>"}, "name": "<VALUE_TO_ASSIGN_1>"},
+    {"filter": {"query": "<QUERY_2>"}, "name": "<VALUE_TO_ASSIGN_2>"}
   ],
-  "target": "<ターゲット属性>"
+  "target": "<TARGET_ATTRIBUTE>"
 }
 ```
 
-| パラメーター    | タイプ            | 必須 | 説明                                                                                                |
+| Parameter    | Type            | Required | Description                                                                                                |
 |--------------|-----------------|----------|------------------------------------------------------------------------------------------------------------|
-| `type`       | 文字列          | はい      | プロセッサーのタイプ。                                                                                     |
-| `name`       | 文字列          | ✕       | プロセッサーの名前。                                                                                     |
-| `is_enabled` | Boolean         | ✕       | プロセッサーが有効になっているかどうか。デフォルト: `false`                                                      |
-| `categories` | オブジェクトの配列 | はい      | フィルターと名前の配列。フィルターはログに一致するかどうかを識別し、名前はログにカスタム値を割り当てるために使用されます。 |
-| `target`     | 文字列          | はい      | 一致するカテゴリによって値が定義されるターゲット属性の名前。                              |
+| `type`       | String          | Yes      | Type of the processor.                                                                                     |
+| `name`       | String          | No       | Name of the processor.                                                                                     |
+| `is_enabled` | Boolean         | No       | If the processors is enabled or not. Default: `false`                                                      |
+| `categories` | Array of Object | Yes      | Array of filters to match or not a log and their corresponding `name` to assign a custom value to the log. |
+| `target`     | String          | Yes      | Name of the target attribute which value is defined by the matching category.                              |
 
-[1]: /ja/api/v1/logs-pipelines/
+[1]: /api/v1/logs-pipelines/
 {{% /tab %}}
 {{< /tabs >}}
 
-## 算術演算プロセッサー
+## Arithmetic processor
 
-ログに、指定された式の結果を含む新しい属性 (新しい属性の名前にはスペースまたは特殊文字を含まない) を追加するには、算術演算プロセッサーを使用します。これにより、異なる単位を持つ異なる時間属性を 1 つの属性に再マップしたり、同じログ内の複数の属性に対して演算を行ったりします。
+Use the arithmetic processor to add a new attribute (without spaces or special characters in the new attribute name) to a log with the result of the provided formula. This remaps different time attributes with different units into a single attribute, or compute operations on attributes within the same log.
 
-算術演算プロセッサー式には、括弧および基本的な算術演算子 `-`、`+`、`*`、`/` を使用できます。
+An arithmetic processor formula can use parentheses and basic arithmetic operators: `-`, `+`, `*`, `/`.
 
-デフォルトでは、属性がない場合は計算がスキップされます。*Replace missing attribute by 0* を選択すると、属性値がない場合は自動的に 0 を挿入して、常に計算が行われます。
+By default, a calculation is skipped if an attribute is missing. Select *Replace missing attribute by 0* to automatically populate missing attribute values with 0 to ensure that the calculation is done.
 
-**注**:
+**Notes**:
 
-* ログの属性にない場合、または数値に変換できない場合、属性が見つからないと表示されることがあります。
-* 演算子 `-` は、属性名にも使用されるため、式内ではスペースで区切る必要があります。
-* ターゲット属性が既に存在している場合は、式の結果で上書きされます。
-* 結果は小数第 9 位に丸められます。たとえば、式の結果が `0.1234567891` の場合、実際に属性に格納される値は `0.123456789` になります。
-* 測定単位の拡張が必要な場合は、スケールフィルターを使用してください。
+* An attribute may be listed as missing if it is not found in the log attributes, or if it cannot be converted to a number.
+* When using the operator `-`, add spaces around it because attribute names like `start-time` may contain dashes. For example, the following formula must include spaces around the `-` operator: `(end-time - start-time) / 1000`.
+* If the target attribute already exists, it is overwritten by the result of the formula.
+* Results are rounded up to the 9th decimal. For example, if the result of the formula is `0.1234567891`, the actual value stored for the attribute is `0.123456789`.
+* If you need to scale a unit of measure, use the scale filter.
 
 {{< tabs >}}
 {{% tab "UI" %}}
 
-[**Pipelines** ページ][1]で算術演算プロセッサーを定義します。
+Define the arithmetic processor on the [**Pipelines** page][1]:
 
-{{< img src="logs/log_configuration/processor/arithmetic_processor.png" alt="算術演算プロセッサー" style="width:80%;">}}
+{{< img src="logs/log_configuration/processor/arithmetic_processor.png" alt="Arithmetic Processor" style="width:80%;">}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
 {{% tab "API" %}}
 
-次の算術演算プロセッサー JSON ペイロードで [Datadog ログパイプライン API エンドポイント][1]を使用します。
+Use the [Datadog Log Pipeline API endpoint][1] with the following arithmetic processor JSON payload:
 
 ```json
 {
-    "type": "arithmetic-processor",
-    "name": "<プロセッサー名>",
-    "is_enabled": true,
-    "expression": "<算術演算>",
-    "target": "<ターゲット属性>",
-    "is_replace_missing": false
+  "type": "arithmetic-processor",
+  "name": "<PROCESSOR_NAME>",
+  "is_enabled": true,
+  "expression": "<ARITHMETIC_OPERATION>",
+  "target": "<TARGET_ATTRIBUTE>",
+  "is_replace_missing": false
 }
 ```
 
-| パラメーター            | タイプ    | 必須 | 説明                                                                                                                                  |
+| Parameter            | Type    | Required | Description                                                                                                                                  |
 |----------------------|---------|----------|----------------------------------------------------------------------------------------------------------------------------------------------|
-| `type`               | 文字列  | はい      | プロセッサーのタイプ。                                                                                                                       |
-| `name`               | 文字列  | ✕       | プロセッサーの名前。                                                                                                                       |
-| `is_enabled`         | Boolean | ✕       | プロセッサーが有効になっているかどうか。デフォルト: `false`。                                                                                       |
-| `expression`         | 文字列  | はい      | 1 つ以上のログ属性間の算術演算。                                                                                     |
-| `target`             | 文字列  | はい      | 算術演算の結果を格納する属性の名前。                                                                  |
-| `is_replace_missing` | Boolean | ✕       | `true` の場合は、`expression` 内の欠落している属性をすべて 0 に置き換えます。`false` の場合は、属性が欠落していると演算をスキップします。デフォルト: `false`。 |
+| `type`               | String  | Yes      | Type of the processor.                                                                                                                       |
+| `name`               | String  | No       | Name of the processor.                                                                                                                       |
+| `is_enabled`         | Boolean | No       | If the processors is enabled or not. Default: `false`.                                                                                       |
+| `expression`         | String  | Yes      | Arithmetic operation between one or more log attributes.                                                                                     |
+| `target`             | String  | Yes      | Name of the attribute that contains the result of the arithmetic operation.                                                                  |
+| `is_replace_missing` | Boolean | No       | If `true`, it replaces all missing attributes of `expression` by 0, `false` skip the operation if an attribute is missing. Default: `false`. |
 
-[1]: /ja/api/v1/logs-pipelines/
+[1]: /api/v1/logs-pipelines/
 {{% /tab %}}
 {{< /tabs >}}
 
-## ストリングビルダープロセッサー
+## String builder processor
 
-ログに、指定されたテンプレートの結果を含む新しい属性 (スペースまたは特殊文字を含まない) を追加するには、ストリングビルダープロセッサーを使用します。これを使用して、異なる属性や生文字列を 1 つの属性に集約することができます。
+Use the string builder processor to add a new attribute (without spaces or special characters) to a log with the result of the provided template. This enables aggregation of different attributes or raw strings into a single attribute.
 
-このテンプレートは生テキストとブロックに `%{attribute_path}` 構文を組み合わせた形で定義されます。
+The template is defined by both raw text and blocks with the syntax `%{attribute_path}`.
 
-**注**:
+**Notes**:
 
-* このプロセッサーでは、ブロック内に値または値の配列を持つ属性のみしか使用できません (以下の UI セクションの例をご参照ください)。
-* 属性 (オブジェクトまたはオブジェクトの配列) が使用できない場合、その属性を空の文字列に置換するか、操作自体をスキップするかを選択することができます。
-* ターゲット属性が既に存在する場合、その属性はテンプレートの結果で上書きされます。
-* テンプレートの結果は 256 文字以内に収める必要があります。
+* This processor only accepts attributes with values or an array of values in the block (see examples in the UI section below.
+* If an attribute cannot be used (object or array of object), it is replaced by an empty string or the entire operation is skipped depending on your selection.
+* If a target attribute already exists, it is overwritten by the result of the template.
+* Results of a template cannot exceed 256 characters.
 
 {{< tabs >}}
 {{% tab "UI" %}}
 
-[**Pipelines** ページ][1]でストリングビルダープロセッサーを定義します。
+Define the string builder processor on the [**Pipelines** page][1]:
 
-{{< img src="logs/log_configuration/processor/stringbuilder_processor.png" alt="ストリングビルダープロセッサー" style="width:80%;">}}
+{{< img src="logs/log_configuration/processor/stringbuilder_processor.png" alt="String builder processor" style="width:80%;">}}
 
-以下のようなログがある場合、テンプレート `Request %{http.method} %{http.url} was answered with response %{http.status_code}` を使って、結果を返します。例:
+With the following log, use the template `Request %{http.method} %{http.url} was answered with response %{http.status_code}` to returns a result. For example:
 
 
 ```json
@@ -562,21 +563,21 @@ URL パーサープロセッサーは URL からクエリパラメーターな�
 }
 ```
 
-以下を返します。
+Returns the following:
 
 ```text
-リクエスト GET https://app.datadoghq.com/users に対する応答 200
+Request GET https://app.datadoghq.com/users was answered with response 200
 ```
 
-**注**: `http` はオブジェクトであり、ブロック内で使用することはできません (`%{http}` は失敗します)。一方、`%{http.method}`、`%{http.status_code}`、または `%{http.url}` は、対応する値を返します。ブロックは、値の配列や配列内の特定の属性に対して使用することができます。
+**Note**: `http` is an object and cannot be used in a block (`%{http}` fails), whereas `%{http.method}`, `%{http.status_code}`, or `%{http.url}` returns the corresponding value. Blocks can be used on arrays of values or on a specific attribute within an array. 
 
-* 例えば、 `%{array_ids}` というブロックを追加すると、以下のような値が返されます。
+* For example, adding the block `%{array_ids}` returns:
 
    ```text
    123,456,789
    ```
 
-* `%{array_users}` はオブジェクトリストのため戻り値はありません。しかし、`%{array_users.first_name}` は次のように配列に含まれる `first_name` のリストを返します:
+* `%{array_users}` does not return anything because it is a list of objects. However, `%{array_users.first_name}` returns a list of `first_name`s contained in the array:
 
   ```text
   John,Jack
@@ -586,188 +587,188 @@ URL パーサープロセッサーは URL からクエリパラメーターな�
 {{% /tab %}}
 {{% tab "API" %}}
 
-次のストリングビルダープロセッサー JSON ペイロードで [Datadog ログパイプライン API エンドポイント][1]を使用します。
+Use the [Datadog Log Pipeline API endpoint][1] with the following string builder processor JSON payload:
 
 ```json
 {
-    "type": "string-builder-processor",
-    "name": "<プロセッサー名>",
-    "is_enabled": true,
-    "template": "<ストリングビルダーテンプレート>",
-    "target": "<ターゲット属性>",
-    "is_replace_missing": true
+  "type": "string-builder-processor",
+  "name": "<PROCESSOR_NAME>",
+  "is_enabled": true,
+  "template": "<STRING_BUILDER_TEMPLATE>",
+  "target": "<TARGET_ATTRIBUTE>",
+  "is_replace_missing": true
 }
 ```
 
-| パラメーター            | タイプ    | 必須 | 説明                                                                                                                                       |
+| Parameter            | Type    | Required | Description                                                                                                                                       |
 |----------------------|---------|----------|---------------------------------------------------------------------------------------------------------------------------------------------------|
-| `type`               | 文字列  | 〇      | プロセッサーのタイプ。                                                                                                                            |
-| `name`               | 文字列  | ✕       | プロセッサーの名前。                                                                                                                            |
-| `is_enabled`         | Boolean | ✕       | プロセッサーが有効になっているかどうかを示します。デフォルトは `false` です。                                                                                          |
-| `template`           | 文字列  | 〇      | 1 つまたは複数の属性と生テキストを使用した数式です。                                                                                               |
-| `target`             | 文字列  | 〇      | テンプレートの結果を含む属性名です。                                                                               |
-| `is_replace_missing` | Boolean | ✕       | `true` の場合は、`template` 内の欠落している属性をすべて空の文字列に置き換えます。`false` の場合は、属性が欠落していると演算をスキップします。デフォルト: `false`。 |
+| `type`               | String  | Yes      | Type of the processor.                                                                                                                            |
+| `name`               | String  | No       | Name of the processor.                                                                                                                            |
+| `is_enabled`         | Boolean | No       | If the processor is enabled or not, defaults to `false`.                                                                                          |
+| `template`           | String  | Yes      | A formula with one or more attributes and raw text.                                                                                               |
+| `target`             | String  | Yes      | The name of the attribute that contains the result of the template.                                                                               |
+| `is_replace_missing` | Boolean | No       | If `true`, it replaces all missing attributes of `template` by an empty string. If `false`, skips the operation for missing attributes. Default: `false`. |
 
-[1]: /ja/api/v1/logs-pipelines/
+[1]: /api/v1/logs-pipelines/
 {{% /tab %}}
 {{< /tabs >}}
 
-## GeoIP パーサー
+## GeoIP parser
 
-geoIP パーサーは、IP アドレスの属性を受け取り、対象の属性パスに大陸、国、小区域、または都市情報 (利用可能な場合) を抽出します。
+The geoIP parser takes an IP address attribute and extracts continent, country, subdivision, or city information (if available) in the target attribute path.
 
 {{< tabs >}}
 {{% tab "UI" %}}
 
-{{< img src="logs/log_configuration/processor/geoip_processor.png" alt="GeoIP プロセッサー" style="width:80%;">}}
+{{< img src="logs/log_configuration/processor/geoip_processor.png" alt="GeoIP Processor" style="width:80%;">}}
 
-ほとんどの要素は `name` と `iso_code` (大陸の場合は `code`) 属性を含んでいます。`subdivision` は国が使用する最初のレベルの細分化で、アメリカ合衆国の場合は "States"、フランスの場合は "Departments" となります。
+Most elements contain a `name` and `iso_code` (or `code` for continent) attribute. `subdivision` is the first level of subdivision that the country uses such as "States" for the United States or "Departments" for France.
 
-例えば、geoIP パーサーは `network.client.ip` 属性から位置を抽出し、それを `network.client.geoip` 属性に格納します。
+For example, the geoIP parser extracts location from the `network.client.ip` attribute and stores it into the `network.client.geoip` attribute:
 
-{{< img src="logs/log_configuration/processor/geoip_example_blurred.png" alt="GeoIP 例" style="width:60%;">}}
+{{< img src="logs/log_configuration/processor/geoip_example_blurred.png" alt="GeoIP example" style="width:60%;">}}
 
 {{% /tab %}}
 {{% tab "API" %}}
 
-次の geoIP パーサー JSON ペイロードで [Datadog ログパイプライン API エンドポイント][1]を使用します。
+Use the [Datadog Log Pipeline API endpoint][1] with the following geoIP parser JSON payload:
 
 ```json
 {
-    "type": "geo-ip-parser",
-    "name": "network.client.ip 属性から位置情報のエレメントをパース",
-    "is_enabled": true,
-    "sources": ["network.client.ip"],
-    "target": "network.client.geoip"
+  "type": "geo-ip-parser",
+  "name": "Parse the geolocation elements from network.client.ip attribute.",
+  "is_enabled": true,
+  "sources": ["network.client.ip"],
+  "target": "network.client.geoip"
 }
 ```
 
-| パラメーター    | タイプ             | 必須 | 説明                                                                                                               |
+| Parameter    | Type             | Required | Description                                                                                                               |
 |--------------|------------------|----------|---------------------------------------------------------------------------------------------------------------------------|
-| `type`       | 文字列           | はい      | プロセッサーのタイプ。                                                                                                    |
-| `name`       | 文字列           | ✕       | プロセッサーの名前。                                                                                                    |
-| `is_enabled` | Boolean          | ✕       | プロセッサーが有効になっているかどうか。デフォルト: `false`。                                                                     |
-| `sources`    | 文字列の配列 | ✕       | ソース属性の配列。デフォルト: `network.client.ip`。                                                                  |
-| `target`     | 文字列           | はい      | `sources` から抽出されたすべての詳細を含む親属性の名前。デフォルト:  `network.client.geoip`。  |
+| `type`       | String           | Yes      | Type of the processor.                                                                                                    |
+| `name`       | String           | No       | Name of the processor.                                                                                                    |
+| `is_enabled` | Boolean          | No       | If the processors is enabled or not. Default: `false`.                                                                     |
+| `sources`    | Array of strings | No       | Array of source attributes. Default: `network.client.ip`.                                                                  |
+| `target`     | String           | Yes      | Name of the parent attribute that contains all the extracted details from the `sources`. Default: `network.client.geoip`.  |
 
-[1]: /ja/api/v1/logs-pipelines/
+[1]: /api/v1/logs-pipelines/
 {{% /tab %}}
 {{< /tabs >}}
 
-## ルックアッププロセッサー
+## Lookup processor
 
-ルックアッププロセッサーを使用して、ログ属性と [Reference Table][7] またはプロセッサーマッピングテーブルに保存された人間が読める値との間のマッピングを定義することができます。
+Use the lookup processor to define a mapping between a log attribute and a human readable value saved in a [Reference Table][7] or the processors mapping table.
 
-たとえば、ルックアッププロセッサーで内部のサービス ID をマップし、読んで意味の通るサービス名を割り当てることができます。また、このプロセッサーで本番環境に接続を試みた MAC アドレスと盗難に遭ったマシンのリストを照合し、接続元をチェックすることが可能です。
+For example, you can use the lookup processor to map an internal service ID into a human readable service name. Alternatively, you can use it to check if the MAC address that just attempted to connect to the production environment belongs to your list of stolen machines.
 
 {{< tabs >}}
 {{% tab "UI" %}}
 
-ルックアッププロセッサーは、以下の動作を行います。
+The lookup processor performs the following actions:
 
-* 現在のログにソース属性が含まれていないかを確認する。
-* ソース属性の値がマッピングテーブルに存在するかをチェックする。
-  * 存在する場合、テーブルにターゲット属性を作成し、対応する値を割り当てる。
-  * オプションとして、マッピングテーブルで値が見つからなかった場合、`fallbackValue` フィールドにデフォルトのフォールバック値を設定したターゲット属性を作成します。**Manual Mapping** タブでは、`source_key,target_value` ペアのリストを手動で入力するか、CSV ファイルをアップロードすることができます。
+* Looks if the current log contains the source attribute.
+* Checks if the source attribute value exists in the mapping table.
+  * If it does, creates the target attribute with the corresponding value in the table.
+  * Optionally, if it does not find the value in the mapping table, it creates a target attribute with the default fallback value set in the `fallbackValue` field. You can manually enter a list of `source_key,target_value` pairs or upload a CSV file on the **Manual Mapping** tab. 
 
-    {{< img src="logs/log_configuration/processor/lookup_processor_manual_mapping.png" alt="ルックアッププロセッサー" style="width:80%;">}}
+    {{< img src="logs/log_configuration/processor/lookup_processor_manual_mapping.png" alt="Lookup processor" style="width:80%;">}}
 
-    マッピングテーブルのサイズ上限は 100Kb です。この制限はプラットフォーム上のすべてのルックアッププロセッサーに適用されます。しかし、Reference Table はより大容量のファイルサイズをサポートしています。
+    The size limit for the mapping table is 100Kb. This limit applies across all Lookup Processors on the platform. However, Reference Tables support larger file sizes.
 
-  * オプションとして、マッピングテーブルで値が見つからない場合は、リファレンステーブルの値でターゲット属性を作成します。[Reference Table][101] の値は、**Reference Table** タブで選択できます。
+  * Optionally, if it does not find the value in the mapping table, it creates a target attribute with the value of the reference table. You can select a value for a [Reference Table][101] on the **Reference Table** tab.
 
-    {{< img src="logs/log_configuration/processor/lookup_processor_reference_table.png" alt="ルックアッププロセッサー" 
+    {{< img src="logs/log_configuration/processor/lookup_processor_reference_table.png" alt="Lookup processor" 
     style="width:80%;">}}
 
 
-[101]: /ja/integrations/guide/reference-tables/
+[101]: /integrations/guide/reference-tables/
 
 {{% /tab %}}
 {{% tab "API" %}}
 
-次のルックアッププロセッサー JSON ペイロードで [Datadog ログパイプライン API エンドポイント][1]を使用します。
+Use the [Datadog Log Pipeline API endpoint][1] with the following lookup processor JSON payload:
 
 ```json
 {
   "type": "lookup-processor",
-  "name": "<プロセッサー名>",
+  "name": "<PROCESSOR_NAME>",
   "is_enabled": true,
-  "source": "<ソース属性>",
-  "target": "<ターゲット属性>",
+  "source": "<SOURCE_ATTRIBUTE>",
+  "target": "<TARGET_ATTRIBUTE>",
   "lookup_table": ["key1,value1", "key2,value2"],
-  "default_lookup": "<デフォルトターゲット値>"
+  "default_lookup": "<DEFAULT_TARGET_VALUE>"
 }
 ```
 
-| パラメーター        | タイプ             | 必須 | 説明                                                                                                                                                              |
+| Parameter        | Type             | Required | Description                                                                                                                                                              |
 |------------------|------------------|----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `type`           | 文字列           | はい      | プロセッサーのタイプ。                                                                                                                                                   |
-| `name`           | 文字列           | ✕       | プロセッサーの名前。                                                                                                                                                   |
-| `is_enabled`     | Boolean          | はい      | プロセッサーが有効になっているかどうか。デフォルト: `false`。                                                                                                                     |
-| `source`         | 文字列           | はい      | ルックアップを実行する際に使用したソース属性です。                                                                                                                             |
-| `target`         | 文字列           | はい      | マッピングリスト内 (マッピングリスト内で見つからない場合は `default_lookup` ) の対応する値を含む属性名です。                                |
-| `lookup_table`   | 文字列の配列 | はい      | ソース属性値とそれに関連するターゲット属性値のマッピングテーブルです。[ "source_key1,target_value1", "source_key2,target_value2" ] のような形式で示されます。 |
-| `default_lookup` | 文字列           | ✕       | リスト上にソースの値がない場合、ターゲット属性に設定する値です。                                                                                          |
+| `type`           | String           | Yes      | Type of the processor.                                                                                                                                                   |
+| `name`           | String           | No       | Name of the processor.                                                                                                                                                   |
+| `is_enabled`     | Boolean          | Yes      | If the processor is enabled or not. Default: `false`.                                                                                                                     |
+| `source`         | String           | Yes      | Source attribute used to perform the lookup.                                                                                                                             |
+| `target`         | String           | Yes      | Name of the attribute that contains the corresponding value in the mapping list or the `default_lookup` if not found in the mapping list.                                |
+| `lookup_table`   | Array of strings | Yes      | Mapping table of values for the source attribute and their associated target attribute values, formatted as [ "source_key1,target_value1", "source_key2,target_value2" ]. |
+| `default_lookup` | String           | No       | Value to set the target attribute if the source value is not found in the list.                                                                                          |
 
-[1]: /ja/api/v1/logs-pipelines/
+[1]: /api/v1/logs-pipelines/
 {{% /tab %}}
 {{< /tabs >}}
 
-## トレースリマッパー
+## Trace remapper
 
-アプリケーショントレースとログの間の関連付けを改善する方法は 2 つあります。
+There are two ways to improve correlation between application traces and logs:
 
-1. [トレース ID をアプリケーションログに挿入する方法][8]のドキュメントを参照してください。セットアップの大半は、ログのインテグレーションによってデフォルトで行われます。
+1. Follow the documentation on [how to inject a Trace ID in the application logs][8]. Log integrations take care of all the rest of the setup by default.
 
-2. トレースリマッパープロセッサーを使用して、トレース ID として関連付けられるログ属性を定義します。
+2. Use the trace remapper processor to define a log attribute as its associated trace ID.
 
 {{< tabs >}}
 {{% tab "UI" %}}
 
-[**Pipelines** ページ][1]で、トレースリマッパープロセッサーを定義します。次のように、プロセッサータイルでトレース ID 属性パスを入力します。
+Define the trace remapper processor on the [**Pipelines** page][1]. Enter the Trace ID attribute path in the processor tile as follows:
 
-{{< img src="logs/log_configuration/processor/trace_processor.png" alt="トレース ID プロセッサー" style="width:80%;">}}
+{{< img src="logs/log_configuration/processor/trace_processor.png" alt="Trace ID processor" style="width:80%;">}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
 {{% tab "API" %}}
 
-次のトレースリマッパー JSON ペイロードで [Datadog ログパイプライン API エンドポイント][1]を使用します。
+Use the [Datadog Log Pipeline API endpoint][1] with the following trace remapper JSON payload:
 
 ```json
 {
-   "type": "trace-id-remapper",
-   "name": "dd.trace_id を、このログに関連する公式のトレース ID として定義",
-   "is_enabled": true,
-   "sources": ["dd.trace_id"]
+  "type": "trace-id-remapper",
+  "name": "Define dd.trace_id as the official trace id associate to this log",
+  "is_enabled": true,
+  "sources": ["dd.trace_id"]
 }
 ```
 
-| パラメーター    | タイプ             | 必須 | 説明                                            |
+| Parameter    | Type             | Required | Description                                            |
 |--------------|------------------|----------|--------------------------------------------------------|
-| `type`       | 文字列           | はい      | プロセッサーのタイプ。                                 |
-| `name`       | 文字列           | ✕       | プロセッサーの名前。                                 |
-| `is_enabled` | Boolean          | ✕       | プロセッサーが有効になっているかどうか。デフォルト: `false`。 |
-| `sources`    | 文字列の配列 | ✕       | ソース属性の配列。デフォルト: `dd.trace_id`。    |
+| `type`       | String           | Yes      | Type of the processor.                                 |
+| `name`       | String           | No       | Name of the processor.                                 |
+| `is_enabled` | Boolean          | No       | If the processors is enabled or not. Default: `false`. |
+| `sources`    | Array of strings | No       | Array of source attributes. Default: `dd.trace_id`.    |
 
-[1]: /ja/api/v1/logs-pipelines/
+[1]: /api/v1/logs-pipelines/
 {{% /tab %}}
 {{< /tabs >}}
 
-**注**: ログまたは UI のログ属性には、トレース ID およびスパン ID は表示されません。
+**Note**: Trace IDs and span IDs are not displayed in your logs or log attributes in the UI.
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 <br>
-*Logging without Limits は Datadog, Inc. の商標です。
+*Logging without Limits is a trademark of Datadog, Inc.
 
-[1]: /ja/logs/log_configuration/pipelines/
-[2]: /ja/logs/log_configuration/parsing/
-[3]: /ja/logs/log_configuration/parsing/?tab=matchers#parsing-dates
+[1]: /logs/log_configuration/pipelines/
+[2]: /logs/log_configuration/parsing/
+[3]: /logs/log_configuration/parsing/?tab=matchers#parsing-dates
 [4]: https://en.wikipedia.org/wiki/Syslog#Severity_level
-[5]: /ja/logs/log_collection/?tab=host#attributes-and-tags
-[6]: /ja/logs/search_syntax/
-[7]: /ja/integrations/guide/reference-tables/
-[8]: /ja/tracing/other_telemetry/connect_logs_and_traces/
+[5]: /logs/log_collection/?tab=host#attributes-and-tags
+[6]: /logs/search_syntax/
+[7]: /integrations/guide/reference-tables/
+[8]: /tracing/other_telemetry/connect_logs_and_traces/

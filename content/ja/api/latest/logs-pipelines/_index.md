@@ -1,3 +1,3 @@
 ---
-title: ログパイプライン
+title: Logs Pipelines
 ---

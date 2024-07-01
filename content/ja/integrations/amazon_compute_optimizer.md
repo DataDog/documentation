@@ -1,81 +1,83 @@
 ---
-aliases:
-- /ja/integrations/aws-compute-optimizer
-- /ja/integrations/aco
-categories:
-- クラウド
-- AWS
-dependencies: []
-description: ユーザーのワークロードを適正化するためのリソース構成に関する推奨を提供します。
-doc_link: https://docs.datadoghq.com/integrations/amazon_compute_optimizer/
-draft: false
-git_integration_title: amazon_compute_optimizer
-has_logo: true
-integration_id: amazon-compute-optimizer
-integration_title: AWS Compute Optimizer
-integration_version: ''
-is_public: true
-custom_kind: integration
-manifest_version: '1.0'
-name: amazon_compute_optimizer
-public_title: Datadog-AWS Compute Optimizer
-short_description: ユーザーのワークロードを適正化するためのリソース構成に関する推奨を提供します。
-version: '1.0'
+"aliases":
+- /integrations/aws-compute-optimizer
+- /integrations/aco
+"categories":
+- cloud
+- aws
+"custom_kind": "integration"
+"dependencies": []
+"description": "provide resource configuration recommendations to help users rightsize their workloads."
+"doc_link": "https://docs.datadoghq.com/integrations/amazon_compute_optimizer/"
+"draft": false
+"git_integration_title": "amazon_compute_optimizer"
+"has_logo": true
+"integration_id": "amazon-compute-optimizer"
+"integration_title": "AWS Compute Optimizer"
+"integration_version": ""
+"is_public": true
+"manifest_version": "1.0"
+"name": "amazon_compute_optimizer"
+"public_title": "Datadog-AWS Compute Optimizer"
+"short_description": "provide resource configuration recommendations to help users rightsize their workloads."
+"version": "1.0"
 ---
 
-## 概要
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
+## Overview
 
-AWS Compute Optimizer は、ユーザーのワークロードを適正化するためのリソース構成に関する推奨を提供する Web サービスです。
+AWS Compute Optimizer is a web service that provides resource configuration recommendations to help users rightsize their workloads.
 
-このインテグレーションにより、Datadog Agent からのメモリ使用率データを使用して、AWS Compute Optimizer でより良い EC2 インスタンスタイプの推奨を得ることができるようになります。Compute Optimizer の詳細については、AWS ドキュメントの [What is AWS Compute Optimizer?][1] を参照してください。
+This integration enables you to get better EC2 instance type recommendations in AWS Compute Optimizer using memory utilization data from the Datadog Agent. For more information on Compute Optimizer, read [What is AWS Compute Optimizer?][1] in the AWS documentation.
 
-## セットアップ
+## Setup
 
-### インストール
+### Installation
 
 #### AWS
-1. AWS Compute Optimizer のコンソールで、**Accounts** ページに移動し、外部メトリクス取り込みのアカウントレベルのプリファレンスを `Datadog` に設定してください。
-2. 推奨を強化したい各 AWS アカウントについて、ステップ 1 を繰り返します。
+1. In the AWS Compute Optimizer console, go to the **Accounts** page and set your account-level preferences for external metrics ingestion to `Datadog`.
+2. Repeat step #1 for each AWS account you wish to get enhanced recommendations for.
 
 #### Datadog
-3. まだの場合は、希望する AWS アカウントごとに[まず Amazon Web Services インテグレーション][2]を設定します。
-4. Compute Optimizer からの改善された推奨に含めるために、EC2 インスタンスに [Datadog Agent][3] をインストールします。
-5. [Datadog - AWS Compute Optimizer インテグレーション][4]をインストールします。
+3. If you haven't already, set up the [Amazon Web Services integration first][2] for each desired AWS account.
+4. Install the [Datadog Agent][3] on any EC2 instances to include in the improved recommendations from Compute Optimizer.
+5. Install the [Datadog - AWS Compute Optimizer integration][4].
 
-すべてのステップが完了した後、AWS Compute Optimizer の推奨が Datadog からのメモリ使用率データを使用するために、**最大 30 時間**かかる場合があります。
+After all steps are completed, it may take **up to 30 hours** for the recommendations in AWS Compute Optimizer to use the memory utilization data from Datadog.
 
-#### 検証
-EC2 インスタンスのリファレンステーブルで、Datadog が `External metrics source` として参照されていることを確認します。
+#### Validation
+Confirm that Datadog is referenced as an `External metrics source` in the recommendations table for EC2 instances:
 
-{{< img src="integrations/amazon_compute_optimizer/compute_optimizer.png" alt="Compute Optimizer の推奨の AWS ダッシュボードには、3 つのインスタンスが表示され、各インスタンスの外部メトリクスソース列の下に Datadog のリンクがあります" popup="true">}}
+{{< img src="integrations/amazon_compute_optimizer/compute_optimizer.png" alt="The AWS dashboard for Compute Optimizer Recommendations with three instances listed and a Datadog link under the external metrics source column for each instance" popup="true">}}
 
-## オートディスカバリーの動作
+## How it Works
 
-[Datadog の AWS インテグレーション][2]と [Datadog Agent][3] の両方で監視されているすべての EC2 インスタンスについて、Datadog は Agent から AWS Compute Optimizer にメモリ使用率データを送信し、コスト削減につながる可能性のあるインスタンスの推奨を向上させています。
+For all EC2 instances monitored by both [Datadog's AWS Integration][2] and the [Datadog Agent][3], Datadog sends memory utilization data from the Agent to AWS Compute Optimizer to provide enhanced instance recommendations that can potentially lead to cost savings.
 
-**注:** Datadog のメモリ使用率メトリクスは、AWS アカウントではなく、AWS Compute Optimizer サービスと直接インテグレーションされています。Datadog は AWS アカウントと直接対話しないので、このインテグレーションに追加の IAM 権限は必要ありません。
+**Note:** The Datadog memory utilization metrics are integrated directly with the AWS Compute Optimizer service and not your AWS account. No additional IAM permissions are needed for this integration since Datadog is not interacting with your AWS account directly.
 
 
-## 収集データ
+## Data Collected
 
-### メトリクス
+### Metrics
 
-Amazon Compute Optimizer インテグレーションには、メトリクスは含まれません。
+The AWS Compute Optimizer integration does not include any metrics.
 
-### イベント
+### Events
 
-Amazon Compute Optimizer インテグレーションには、イベントは含まれません。
+The AWS Compute Optimizer integration does not include any events.
 
-### サービスのチェック
+### Service Checks
 
-Amazon Compute Optimizer インテグレーションには、サービスのチェック機能は含まれません。
+The AWS Compute Optimizer integration does not include any service checks.
 
-## トラブルシューティング
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
+Need help? Contact [Datadog support][5].
 
 [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/what-is-compute-optimizer.html
-[2]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
-[3]: https://docs.datadoghq.com/ja/agent/
+[2]: https://docs.datadoghq.com/integrations/amazon_web_services/
+[3]: https://docs.datadoghq.com/agent/
 [4]: https://app.datadoghq.com/integrations/amazon-compute-optimizer/
-[5]: https://docs.datadoghq.com/ja/help/
+[5]: https://docs.datadoghq.com/help/
+

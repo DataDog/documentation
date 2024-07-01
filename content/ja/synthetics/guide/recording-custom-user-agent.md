@@ -1,27 +1,31 @@
 ---
-title: カスタムユーザーエージェントで手順を記録
-description: カスタムユーザーエージェント文字列でブラウザテストの手順を記録
+title: Record Steps With A Custom User-Agent
+kind: documentation
+description: Record browser test steps with a custom User-Agent string 
 further_reading:
-  - link: /synthetics/browser_tests/actions
-    tag: ドキュメント
-    text: ブラウザテストのステップについて
-  - link: /synthetics/browser_tests/advanced_options/
-    tag: ドキュメント
-    text: ステップに高度なオプションを構成する
+- link: /synthetics/browser_tests/actions
+  tag: Documentation
+  text: Learn about steps for browser tests
+- link: /synthetics/browser_tests/advanced_options/
+  tag: Documentation
+  text: Configure advanced options for steps
 ---
-一部の実装では、特定の `User-Agent` 文字列を使用した時のみ（たとえば、`User-Agent` を使用しているとき）アプリケーションがレンダリングされます。この場合、アプリケーションでブラウザテストの手順を記録できるよう `User-Agent` ヘッダーをカスタム文字列に設定する必要があります。
 
-1. ブラウザテストレコーダーの **Open in Popup** をクリックして、アプリケーションをポップアップで開きます。
-2. Chrome デベロッパーツールを開きます。
-3. 三点リーダーのメニューボタンをクリックします。
-4. **More tools - Network conditions** オプションを選択します。
-5. **Network conditions** タブで **Select automatically** オプションを無効にします。
-6. **Custom** を選択し、対象の `User-Agent` 文字列を入力します。
+## Overview
 
-**注:** テストコンフィギュレーションでヘッダーとして追加することで、[デフォルトの `User-Agent` 文字列][1]をテスト実行時に上書きできます。
+Some implementations lead applications to render a certain way only when using a specific `User-Agent` string (for example, when using a mobile `User-Agent`). In these cases, you need to set the `User-Agent` header to a custom string to be able to record your browser tests' steps in your application. To do so:
 
-## その他の参考資料
+1. Open your application in a pop-up by clicking on **Open in Popup** in your browser test recorder.
+2. Open your Chrome Developer Tools.
+3. Click on the menu button with the three vertical dots.
+4. Select the **More tools - Network conditions** option.
+5. Go to the **Network conditions** tab and disable the **Select automatically** option.
+6. Choose **Custom** and enter the `User-Agent` string of interest.
+
+**Note:** You can override the [default `User-Agent` string][1] at test execution time by adding it as a header in your test configuration. 
+
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/synthetics/guide/identify_synthetics_bots/?tab=apitests#default-headers
+[1]: /synthetics/guide/identify_synthetics_bots/?tab=apitests#default-headers

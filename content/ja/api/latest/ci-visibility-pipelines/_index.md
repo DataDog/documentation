@@ -1,3 +1,3 @@
 ---
-title: CI Visibility パイプライン
+title: CI Visibility Pipelines
 ---

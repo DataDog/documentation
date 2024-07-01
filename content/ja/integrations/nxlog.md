@@ -1,37 +1,37 @@
 ---
-aliases:
-- /ja/logs/log_collection/nxlog
+title: NXLog
+name: nxlog
+custom_kind: integration
+description: 'Configure NXLog to gather logs from your host, containers, & services.'
+short_description: 'Configure NXLog to gather logs from your host, containers, & services.'
 categories:
-- ログの収集
-dependencies:
-- https://github.com/DataDog/documentation/blob/master/content/en/integrations/nxlog.md
-description: NXLog を構成して、ホスト、コンテナ、サービスからログを収集
+    - log collection
 doc_link: /integrations/nxlog/
+aliases:
+    - /logs/log_collection/nxlog
 has_logo: true
-integration_id: nxlog
 integration_title: nxlog
 is_public: true
-kind: インテグレーション
-name: nxlog
-public_title: Datadog-NXlog インテグレーション
-short_description: NXLog を構成して、ホスト、コンテナ、サービスからログを収集
+dependencies:
+    ["https://github.com/DataDog/documentation/blob/master/content/en/integrations/nxlog.md"]
+public_title: Datadog-NXlog Integration
 supported_os:
-- windows
-title: NXLog
+    - windows
+integration_id: "nxlog"
 ---
 
-## 概要
+## Overview
 
-NXLog を構成して、ホスト、コンテナ、サービスからログを収集
+Configure NXLog to gather logs from your host, containers, & services.
 
-## セットアップ
+## Setup
 
-### ログの収集
+### Log collection
 
 {{< tabs >}}
 {{% tab "Datadog US site" %}}
 
-1. Configure NXLog を構成してログを Datadog プラットフォームに送信し、`C:\Program Files\nxlog\conf` のファイル全体を以下の内容に書き換えます。
+1. Configure NXLog to send your logs to your Datadog platform, replace the whole file in `C:\Program Files\nxlog\conf` by the following:
 
     ```conf
     ## Set the ROOT to the folder your nxlog was installed into,
@@ -75,9 +75,9 @@ NXLog を構成して、ホスト、コンテナ、サービスからログを�
     </Route>
     ```
 
-     上の `<DATADOG_API_KEY>` を忘れずに置き換えてください。
+     Do not forget to replace `<DATADOG_API_KEY>` in the format.
 
-2. 監視するファイルごとに NXLog 監視モジュールを有効にし、出力セクションの前に以下を追加します。
+2. Activate NXLog watchfile module for each file you want to monitor, add the following before the output section:
 
     ```conf
     ##Module to watch a file
@@ -92,7 +92,7 @@ NXLog を構成して、ホスト、コンテナ、サービスからログを�
     </Input>
     ```
 
-3. それらのファイルを出力セクションに接続します。
+3. Make sure those files are plugged in the output section
 
     ```conf
     <Route file1>
@@ -100,24 +100,24 @@ NXLog を構成して、ホスト、コンテナ、サービスからログを�
     </Route>
     ```
 
-4. NXLog を再起動します。サービス管理ツールを開きます。
+4. Restart NXLog. Open the service administrative tool:
 
     ```text
     C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Administrative Tools\Services.lnk
     ```
 
-5. （任意）追加のパラメーターまたはタグを設定します。NXLog 構成ファイルの各入力セクションで、ログに任意の属性を追加します。たとえば、ログの送信元のインテグレーションを識別するために Datadog で使用されるソースを指定するには、以下のようにします。
+5. (Optional) Set extra parameters or tags. Add any specific attribute to your logs in each input section of your NXLog configuration file. For instance, to specify the source that is used in Datadog to identify the integration the logs come from, use:
 
     ```conf
     Exec        $ddsource = 'mysourcevalue';
     Exec        $ddtags = 'env:test,<KEY>:<VALUE>';
     ```
 
-### NXLog の TLS 暗号化
+### NXLog TLS encryption
 
-1. [CA 証明書][1]をダウンロードします。
+1. Download the [CA certificate][1]
 
-2. NXLog 構成に `om_ssl` モジュールを追加して、ポート 10516 上での安全な転送を有効にします。
+2. Add the `om_ssl` module in your NXLog configuration to enable secure transfer over port 10516:
 
     ```conf
     <Output out>
@@ -136,7 +136,7 @@ NXLog を構成して、ホスト、コンテナ、サービスからログを�
 {{% /tab %}}
 {{% tab "Datadog EU site" %}}
 
-1. Configure NXLog を構成してログを Datadog プラットフォームに送信し、`C:\Program Files\nxlog\conf` のファイル全体を以下の内容に書き換えます。
+1. Configure NXLog to send your logs to your Datadog platform, replace the whole file in `C:\Program Files\nxlog\conf` by the following:
 
     ```conf
     ## Set the ROOT to the folder your nxlog was installed into,
@@ -180,9 +180,9 @@ NXLog を構成して、ホスト、コンテナ、サービスからログを�
     </Route>
     ```
 
-     上の `<DATADOG_API_KEY>` を忘れずに置き換えてください。
+     Do not forget to replace `<DATADOG_API_KEY>` in the format.
 
-2. 監視するファイルごとに NXLog 監視モジュールを有効にし、出力セクションの前に以下を追加します。
+2. Activate NXLog watchfile module for each file you want to monitor, add the following before the output section:
 
     ```conf
     ##Module to watch a file
@@ -197,7 +197,7 @@ NXLog を構成して、ホスト、コンテナ、サービスからログを�
     </Input>
     ```
 
-3. それらのファイルを出力セクションに接続します。
+3. Make sure those files are plugged in the output section:
 
     ```conf
     <Route file1>
@@ -205,24 +205,24 @@ NXLog を構成して、ホスト、コンテナ、サービスからログを�
     </Route>
     ```
 
-4. NXLog を再起動します。サービス管理ツールを開きます。
+4. Restart NXLog. Open the service administrative tool:
 
     ```text
     C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Administrative Tools\Services.lnk
     ```
 
-5. （任意）追加のパラメーターまたはタグを設定します。NXLog 構成ファイルの各入力セクションで、ログに任意の属性を追加します。たとえば、ログの送信元のインテグレーションを識別するために Datadog で使用されるソースを指定するには、以下のようにします。
+5. (Optional) Set extra parameters or tags. Add any specific attribute to your logs in each input section of your NXLog configuration file. For instance, to specify the source that is used in Datadog to identify the integration the logs come from, use:
 
     ```conf
     Exec        $ddsource = 'mysourcevalue';
     Exec        $ddtags = 'env:test,<KEY>:<VALUE>';
     ```
 
-### NXLog の TLS 暗号化
+### NXLog TLS encryption
 
-1. [CA 証明書][1]をダウンロードします。
+1. Download the [CA certificate][1]
 
-2. NXLog 構成に `om_ssl` モジュールを追加して、ポート 443 上での安全な転送を有効にします。
+2. Add the `om_ssl` module in your NXLog configuration to enable secure transfer over port 443:
 
     ```conf
     <Output out>
@@ -241,8 +241,8 @@ NXLog を構成して、ホスト、コンテナ、サービスからログを�
 {{% /tab %}}
 {{< /tabs >}}
 
-## トラブルシューティング
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][1]までお問合せください。
+Need help? Contact [Datadog support][1].
 
-[1]: /ja/help/
+[1]: /help/

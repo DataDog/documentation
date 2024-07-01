@@ -1,40 +1,41 @@
 ---
-description: セルフホスト SQL Server のデータベースモニタリングをインストールして構成します
+title: Setting Up Database Monitoring for self-hosted SQL Server
+description: Install and configure Database Monitoring for self-hosted SQL Server
 further_reading:
 - link: /integrations/sqlserver/
-  tag: ドキュメント
-  text: 基本的な SQL Server インテグレーション
+  tag: Documentation
+  text: Basic SQL Server Integration
 - link: /database_monitoring/troubleshooting/?tab=sqlserver
-  tag: ドキュメント
-  text: よくある問題のトラブルシューティング
-- link: https://www.datadoghq.com/blog/migrate-sql-workloads-to-azure-with-datadog/
-  tag: ブログ
-  text: Datadog で SQL ワークロードの Azure 移行を戦略化する
-- link: https://www.datadoghq.com/blog/datadog-monitoring-always-on/
-  tag: ブログ
-  text: Datadog Database Monitoring で AlwaysOn のアベイラビリティグループを監視する
-title: セルフホスト SQL Server のデータベースモニタリングの設定
+  tag: Documentation
+  text: Troubleshoot Common Issues
+- link: "https://www.datadoghq.com/blog/migrate-sql-workloads-to-azure-with-datadog/"
+  tag: Blog
+  text: Strategize your Azure migration for SQL workloads with Datadog
+- link: "https://www.datadoghq.com/blog/datadog-monitoring-always-on/"
+  tag: Blog
+  text: Monitor your AlwaysOn availability groups with Datadog Database Monitoring
+
 ---
 
-データベースモニタリングは、クエリメトリクス、クエリサンプル、実行計画、データベースの状態、フェイルオーバー、イベントを公開することで、Microsoft SQL Server データベースを詳細に可視化します。
+Database Monitoring provides deep visibility into your Microsoft SQL Server databases by exposing query metrics, query samples, explain plans, database states, failovers, and events.
 
-データベースでデータベースモニタリングを有効にするには、以下の手順を実行します。
+Do the following steps to enable Database Monitoring with your database:
 
-1. [Agent にアクセスを付与する](#grant-the-agent-access)
-1. [Agent をインストールする](#install-the-agent)
+1. [Grant the Agent access](#grant-the-agent-access)
+1. [Install the Agent](#install-the-agent)
 
-## はじめに
+## Before you begin
 
-サポートされている SQL Server バージョン
-: 2012、2014、2016、2017、2019、2022
+Supported SQL Server versions
+: 2012, 2014, 2016, 2017, 2019, 2022
 
 {{% dbm-sqlserver-before-you-begin %}}
 
-## Agent にアクセスを付与する
+## Grant the Agent access
 
-Datadog Agent が統計やクエリを収集するためには、データベース サーバーへの読み取り専用のアクセスが必要となります。
+The Datadog Agent requires read-only access to the database server in order to collect statistics and queries.
 
-サーバーに接続するための読み取り専用ログインを作成し、必要な権限を付与します。
+Create a read-only login to connect to your server and grant the required permissions:
 
 {{< tabs >}}
 {{% tab "SQL Server 2014+" %}}
@@ -45,7 +46,7 @@ CREATE USER datadog FOR LOGIN datadog;
 GRANT CONNECT ANY DATABASE to datadog;
 GRANT VIEW SERVER STATE to datadog;
 GRANT VIEW ANY DEFINITION to datadog;
--- Log Shipping Monitoring (Agent v7.50 以降で利用可能) を使用するには、次の 3 行のコメントを外します。
+-- To use Log Shipping Monitoring (available in Agent v7.50+), uncomment the next three lines:
 -- USE msdb;
 -- CREATE USER datadog FOR LOGIN datadog;
 -- GRANT SELECT to datadog;
@@ -58,13 +59,13 @@ CREATE LOGIN datadog WITH PASSWORD = '<PASSWORD>';
 CREATE USER datadog FOR LOGIN datadog;
 GRANT VIEW SERVER STATE to datadog;
 GRANT VIEW ANY DEFINITION to datadog;
--- Log Shipping Monitoring (Agent v7.50 以降で利用可能) を使用するには、次の 3 行のコメントを外します。
+-- To use Log Shipping Monitoring (available in Agent v7.50+), uncomment the next three lines:
 -- USE msdb;
 -- CREATE USER datadog FOR LOGIN datadog;
 -- GRANT SELECT to datadog;
 ```
 
-追加した各アプリケーションデータベースに `datadog` ユーザーを作成します。
+Create the `datadog` user in each additional application database:
 ```SQL
 USE [database_name];
 CREATE USER datadog FOR LOGIN datadog;
@@ -72,9 +73,9 @@ CREATE USER datadog FOR LOGIN datadog;
 {{% /tab %}}
 {{< /tabs >}}
 
-## Agent のインストール
+## Install the Agent
 
-Agent を SQL Server ホストに直接インストールすることをお勧めします。そうすることで、SQL Server 固有のテレメトリーに加え、様々なシステムテレメトリー (CPU、メモリ、ディスク、ネットワーク) を収集することができるからです。
+It's recommended to install the agent directly on the SQL Server host as that enables the agent to collect a variety of system telemetry (CPU, memory, disk, network) in addition to SQL Server specific telemetry.
 
 {{< tabs >}}
 {{% tab "Windows Host" %}}
@@ -95,9 +96,9 @@ Agent を SQL Server ホストに直接インストールすることをお勧�
 {{% /tab %}}
 {{< /tabs >}}
 
-## Agent の構成例
+## Example Agent Configurations
 {{% dbm-sqlserver-agent-config-examples %}}
 
-## その他の参考資料
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}

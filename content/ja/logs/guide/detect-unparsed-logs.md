@@ -1,73 +1,73 @@
 ---
+title: Monitor and query for unparsed logs
+kind: guide
 further_reading:
-- link: /logs/explorer/
-  tag: Documentation
-  text: ログの調査方法
-- link: /logs/faq/log-parsing-best-practice
-  tag: Documentation
-  text: ログのパース - ベストプラクティス
-kind: ガイド
-title: パースされていないログの監視とクエリ
+  - link: /logs/explorer/
+    tag: Documentation
+    text: See how to explore your logs
+  - link: /logs/faq/log-parsing-best-practice
+    tag: Documentation
+    text: Log Parsing - Best Practices
 ---
 
-## 概要
-パースされたログは、クエリ、監視、集計、機密データスキャナーなど自動エンリッチメントなど、Datadog ログ管理を最大限に活用するのに必要なものです。
-ログの量をスケーリングする際、パイプラインでパースされないログのパターンを特定して修正するのが難しい場合があります。
+## Overview
+Parsed logs are central to be able to use Datadog Log Management to its full capacity, for queries, monitors, aggregations or automatic enrichments such as sensitive data scanner.
+When you are scaling your volume of logs it can be challenging to identify and fix logs patterns that are not parsed by your pipelines.
 
-組織内のパースされていないログの量を特定して制御する方法
+To identify and control the volume of unparsed logs in your organization:
 
-1. [パースされていないログを検出する](#detect-unparsed-logs)
-2. [パースされていないログを照会する](#query-for-unparsed-logs)
-3. [パースされていないログを追跡するためのメトリクスを作成する](#create-a-metric-to-track-for-unparsed-logs)
-4. [パースされていないログの量を監視する](#monitor-the-volume-of-unparsed-logs)
-
-
-## パースされていないログの検出
-特定のログがパイプラインでパースされたかを判断するには、ログを開き [イベントの属性] パネルを確認します。ログがパースされていない場合、パネルにはログから抽出された属性ではなく、属性が抽出されなかった旨のメッセージが表示されます。
-
-{{< img src="logs/guide/unparsed-logs/unparsed-log.jpg" alt="パースされていないログの詳細" style="width:90%;">}}
+1. [Detect unparsed logs](#detect-unparsed-logs)
+2. [Query for unparsed logs](#query-for-unparsed-logs)
+3. [Create a metric to track for unparsed logs](#create-a-metric-to-track-for-unparsed-logs)
+4. [Monitor the volume of unparsed logs](#monitor-the-volume-of-unparsed-logs)
 
 
-パースされていないログをパースするには、[カスタムパイプライン][1]を作成するか[ログインテグレーション][2]をログのソースとして使いパイプラインの自動設定を利用します。
+## Detect unparsed logs
+To determine if a specific log has been parsed by your pipelines, open the log and check the Event Attributes panel. If the log is unparsed, instead of showing attributes extracted from your log, the panel shows a message saying that no attributes were extracted:
 
-## パースされていないログのクエリ
-ログの数が多く、1 つずつチェックができない場合は、[ログエクスプローラー][3]で  `datadog.pipelines:false` フィルターを使い、パースされていないログをクエリできます。
+{{< img src="logs/guide/unparsed-logs/unparsed-log.jpg" alt="Unparsed log details" style="width:90%;">}}
 
-{{< img src="logs/guide/unparsed-logs/datadog-pipeline-false-log-explorer.jpg" alt="パースされていないログをクエリする" style="width:90%;">}}
 
-このフィルターは、パイプライン処理の後、カスタム属性を持たないすべてのインデックス化されたログを返します。
-[パターン集約][4]は、パースされていないログに共通するパターンを集約したビューを表示するため、カスタムパイプラインの作成を促進します。
+You can start parsing and unparsed log by creating [custom pipelines][1] or using a [log integration][2] as the source of the log to take advantage of the automatic pipeline setup.
 
-## パースされていないログを追跡するメトリクスを作成します
-パースされていないログをクエリすると、パースされていない _インデックス化された_ ログを選択できます。また、[アーカイブ][5]の内容が構造化されるように、インデックス化しないログでもパースすることをお勧めします。
+## Query for unparsed logs
+If you have many logs, making one-by-one checking unviable, you can instead query for unparsed logs by using the filter `datadog.pipelines:false` in the [Log Explorer][3]:
 
-パースされていないログのメトリクスを作成するには、`datadog.pipelines:false` クエリを使用して[カスタムメトリクス][6]を作成します。
+{{< img src="logs/guide/unparsed-logs/datadog-pipeline-false-log-explorer.jpg" alt="Query unparsed logs" style="width:90%;">}}
 
-{{< img src="logs/guide/unparsed-logs/logs-unparsed-metric.jpg" alt="logs.unparsed メトリクスを生成" style="width:90%;">}}
+This filter returns all indexed logs without custom attributes after the pipeline processing.
+[Pattern aggregation][4] shows an aggregated view of the common patterns in the unparsed logs, which can kickstart your creation of custom pipelines.
 
-他のログベースのメトリクスは、`group by` フィールドでディメンションを追加できます。上の例では、`service` および `team` でグループ化しています。ログの所有権を定義するために使用するディメンションでグループ化する必要があります。
-## パースされていないログの量を監視します
-組織内のログのパースを確実に制御するには、パースされていないログの量に割り当てを設定します。このアプローチは、インデックスの [1 日の割り当て][7]で提案されているものに似ています。
+## Create a metric to track for unparsed logs
+Querying for unparsed logs lets you select the unparsed _indexed_ logs. It's also a good practice to ensure that even the logs that you do not index are parsed, so that the content of your [archives][5] are structured.
 
-パースされていないログの量を監視する
-1. [メトリクスの監視][8]を作成します。
-2. 事前に作成した `logs.unparsed` メトリクスを使用します。
-3. `team` ごとの割り当てを設定します。
-4. [アラートの条件][9]がアラートを受け取りたい時に一致することを確認します。
+To create a metric for unparsed logs, create a [custom metric][6] using the `datadog.pipelines:false` query:
 
-{{< img src="logs/guide/unparsed-logs/monitor-unparsed-logs-team.jpg" alt="パースされていないログをクエリする" style="width:90%;">}}
+{{< img src="logs/guide/unparsed-logs/logs-unparsed-metric.jpg" alt="Generate logs.unparsed metric" style="width:90%;">}}
 
-## その他の参考資料
+As for any log-based metric, you can add dimensions in the `group by` field. The example above shows grouping by `service` and `team`. You should group by the dimensions that you are using to define the ownership of a log.
+## Monitor the volume of unparsed logs
+To ensure that the logs parsing in your organization is kept under control, apply a quota for the unparsed logs volume. This approach is close to what is proposed with [daily quotas][7] for indexes.
+
+To monitor the volume of unparsed logs:
+1. Create a [metric monitor][8].
+2. Use the previously created `logs.unparsed` metric.
+3. Define the quota per `team`.
+4. Ensure that the [alert conditions][9] fit when you want to be alerted.
+
+{{< img src="logs/guide/unparsed-logs/monitor-unparsed-logs-team.jpg" alt="Query unparsed logs" style="width:90%;">}}
+
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /ja/logs/log_configuration/pipelines
-[2]: /ja/integrations/#cat-log-collection
-[3]: /ja/logs/explorer/
-[4]: /ja/logs/explorer/#patterns
-[5]: /ja/logs/archives/?tab=awss3
-[6]: /ja/logs/logs_to_metrics/
-[7]: /ja/logs/indexes#set-daily-quota
-[8]: /ja/monitors/types/metric/?tab=threshold#overview
-[9]: /ja/monitors/types/metric/?tab=threshold#set-alert-conditions
+[1]: /logs/log_configuration/pipelines
+[2]: /integrations/#cat-log-collection
+[3]: /logs/explorer/
+[4]: /logs/explorer/#patterns
+[5]: /logs/archives/?tab=awss3
+[6]: /logs/logs_to_metrics/
+[7]: /logs/indexes#set-daily-quota
+[8]: /monitors/types/metric/?tab=threshold#overview
+[9]: /monitors/types/metric/?tab=threshold#set-alert-conditions

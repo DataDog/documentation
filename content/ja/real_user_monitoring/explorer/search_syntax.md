@@ -1,70 +1,71 @@
 ---
+title: Search Syntax
+kind: documentation
 further_reading:
 - link: /real_user_monitoring/explorer/search/
-  tag: ドキュメント
-  text: イベント検索
-title: 検索構文
+  tag: Documentation
+  text: Search for your events
 ---
 
-## 概要
+## Overview
 
-クエリは条件と演算子で構成されます。
+A query is composed of terms and operators.
 
-条件には 2 種類あります。
+There are two types of terms:
 
-* **単一条件**は、1 つの単語です (`test`、`hello` など)。
+* A **single term** is a single word such as `test` or `hello`.
 
-* **シーケンス**は、二重引用符で囲まれた単語のグループです (`"hello dolly"` など)。
+* A **sequence** is a group of words surrounded by double quotes, such as `"hello dolly"`.
 
-複合クエリで複数の条件を組み合わせるには、以下のブール演算子を使用します。
+To combine multiple terms into a complex query, you can use any of the following Boolean operators:
 
-| **演算子** | **説明**                                                                                       |
+| **Operator** | **Description**                                                                                       |
 |--------------|-------------------------------------------------------------------------------------------------------|
-| `AND`        | **積**: 選択されたビューから両方の条件を含む結果を検索します (何も追加しない場合は AND がデフォルトで採用されます)。 |
-| `OR`         | **和**: 選択されたビューからいずれかの条件を含む結果を検索します。                                             |
-| `-`          | **除外**: ビューからこの条件を除いた結果を検索します。                                                  |
+| `AND`        | **Intersection**: Both terms are in the selected views (if nothing is added, AND is taken by default). |
+| `OR`         | **Union**: Either term is contained in the selected views.                                             |
+| `-`          | **Exclusion**: The following term is not in the view.                                                  |
 
-## オートコンプリート
+## Autocomplete
 
-検索バーのオートコンプリート機能を使用すると、既存の値でクエリを完成させることができます。
+Use the search bar's autocomplete functionality to complete your queries with existing values.
 
-{{< img src="real_user_monitoring/explorer/search/search_bar_autocomplete2.png" alt="検索バーのオートコンプリート" style="width:90%;" >}}
+{{< img src="real_user_monitoring/explorer/search/search_bar_autocomplete2.png" alt="Search bar autocomplete" style="width:90%;" >}}
 
-## 特殊文字のエスケープ
+## Escape special characters
 
-特殊文字を含むファセット値を検索する場合は、エスケープ処理または二重引用符の追加が必要です。`?`、`>`、`<`、`:`、`=`、`"`、`~`、`/`、`\` は特殊文字とみなされるため、`\` でエスケープする必要があります。
+Searching on a facet value that contains special characters requires escaping or double quotes. The following characters are considered special: `?`, `>`, `<`, `:`, `=`,`"`, `~`, `/`, and `\` requires escaping with the `\` character.
 
-ビューファセット名の中にスペースがある場合も、同じ論理が適用されます。ビューファセットにスペースが含まれていてはいけませんが、含まれている場合はスペースをエスケープしなければなりません。
+The same logic is applied to spaces within views facet names. Views facets should not contain spaces, but if they do, spaces must be escaped. 
 
-例えば、ファセット名が `user.first name` である場合、 `@user.first\ name:myvalue` とスペースをエスケープしてファセット検索を実行します。
+For example, if a facet is named `user.first name`, perform a facet search by escaping the space: `@user.first\ name:myvalue`.
 
-## ワイルドカード
+## Wildcards
 
-マルチバイト文字のワイルドカード検索を行う場合は、`*` 記号を使用します。たとえば、`@http.url:https:\/\/*` で検索すると、`https://` で始まる URL を含むすべてのビューが返されます。 
+To perform a multi-character wildcard search, use the `*` symbol. For example, `@http.url:https:\/\/*` matches every view that has a URL starting with `https://`.
 
-## 数値
+## Numerical values
 
-数値属性で検索する場合は、`<`、`>`、`<=`、`>=` を使用します。例えば、5 つ以上のエラーを持つすべてのセッションを取得する場合は、`@session.error.count:>5` です。
+Use `<`,`>`, `<=`, or `>=` to perform a search on numerical attributes. For example, retrieve all sessions with more than five errors: `@session.error.count:>5`.
 
-数値属性を特定の範囲内で検索することができます。例えば、エラー回数が 3 回から 10 回のセッションをすべて取得する場合は、`@session.error.count:[3 TO 10]` です。
+You can search for a numerical attribute within a specific range. For example, retrieve all sessions with an error count between three and ten: `@session.error.count:[3 TO 10]`.
 
-## 検索例
+## Search examples
 
 `@view.url_path:"/department/sofas"`
-: 属性 `@view.path` に `/department/sofas` を含むすべてのビューを検索します。
+: Searches all views containing `/department/sofas` in the attribute `@view.path`.
 
 `@view.url_path:\/department\/sofas\/*`
-: `view.path` 属性に `/department/sofas/` で始まる値を持つすべてのビューを検索します。
+: Searches all views containing a value in `view.path` attribute that start with `/department/sofas/`.
 
 `@view.loading_time:[1s TO 3s] @view.url_path:\/department\/sofas\/*`
-: `loading_time` が 1 秒から 3 秒の間にあり、 `@view.url_path` 属性の値が `/department/sofas/` で始まっているビューを全て検索します。
+: Searches all views with a `loading_time` between one and three seconds with a value in the `@view.url_path` attribute that starts with `/department/sofas/`.
 
-## 検索の保存
+## Saved searches
 
-[保存ビュー][1]には、検索クエリ、列、ソート順、時間範囲、ファセットが含まれます。
+[Saved Views][1] contain your search query, columns, sort order, time range, and facets.
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/real_user_monitoring/explorer/saved_views
+[1]: /real_user_monitoring/explorer/saved_views

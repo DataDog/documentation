@@ -1,173 +1,138 @@
 ---
-app_id: gke
-app_uuid: 66d0227c-6e8f-4639-a0d9-aefb147da71d
-assets:
-  integration:
-    configuration:
-      spec: assets/configuration/spec.yaml
-    events:
-      creates_events: false
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_name: Google Kubernetes Engine
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com (日本語対応)
-  support_email: help@datadoghq.com
-categories:
+"app_id": "gke"
+"app_uuid": "66d0227c-6e8f-4639-a0d9-aefb147da71d"
+"assets":
+  "integration":
+    "configuration":
+      "spec": assets/configuration/spec.yaml
+    "events":
+      "creates_events": false
+    "service_checks":
+      "metadata_path": assets/service_checks.json
+    "source_type_name": Google Kubernetes Engine
+"author":
+  "homepage": "https://www.datadoghq.com"
+  "name": Datadog
+  "sales_email": info@datadoghq.com
+  "support_email": help@datadoghq.com
+"categories":
 - containers
 - orchestration
-dependencies:
-- https://github.com/DataDog/integrations-core/blob/master/gke/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: gke
-integration_id: gke
-integration_title: Google Kubernetes Engine, Agent
-integration_version: ''
-is_public: true
-custom_kind: integration
-manifest_version: 2.0.0
-name: gke
-public_title: Google Kubernetes Engine, Agent インテグレーション
-short_description: GKE は、コンテナ化されたアプリケーションを実行およびオーケストレーションするためのプラットフォームです。
-supported_os:
+"custom_kind": "integration"
+"dependencies":
+- "https://github.com/DataDog/integrations-core/blob/master/gke/README.md"
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "gke"
+"integration_id": "gke"
+"integration_title": "Google Kubernetes Engine, Agent"
+"integration_version": ""
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "gke"
+"public_title": "Google Kubernetes Engine, Agent Integration"
+"short_description": "GKE is a platform for running and orchestrating containerized applications."
+"supported_os":
 - linux
 - macos
 - windows
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Containers
-  - Category::Orchestration
-  configuration: README.md#Setup
-  description: GKE は、コンテナ化されたアプリケーションを実行およびオーケストレーションするためのプラットフォームです。
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Google Kubernetes Engine, Agent インテグレーション
+"tile":
+  "changelog": CHANGELOG.md
+  "classifier_tags":
+  - "Supported OS::Linux"
+  - "Supported OS::macOS"
+  - "Supported OS::Windows"
+  - "Category::Containers"
+  - "Category::Orchestration"
+  "configuration": "README.md#Setup"
+  "description": GKE is a platform for running and orchestrating containerized applications.
+  "media": []
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": Google Kubernetes Engine, Agent Integration
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## 概要
+## Overview
 
-Google Cloud Platform (GCP) のサービスである Google Kubernetes Engine (GKE) は、コンテナ化されたアプリケーションを実行およびオーケストレーションするためのホスト型プラットフォームです。Amazon の Elastic Container Service (ECS) と同様に、GKE はマシンのクラスターにデプロイされた Docker コンテナを管理します。ただし、ECS とは異なり、GKE は Kubernetes を使用します。
+Google Kubernetes Engine (GKE), a service on the Google Cloud Platform (GCP), is a hosted platform for running and orchestrating containerized applications. Similar to Amazon's Elastic Container Service (ECS), GKE manages Docker containers deployed on a cluster of machines. However, unlike ECS, GKE uses Kubernetes.
 
-## 計画と使用
+## Setup
 
-### 前提条件
+### Prerequisites
 
-1. [GCP プロジェクト][1]でのロールに、GKE を使用するための適切なアクセス許可があることを確認してください。
+1. Ensure that your role in your [GCP project][1] has the proper permissions to use GKE. 
 
-2. プロジェクトで [Google Container Engine API][2] を有効にします。
+2. Enable the [Google Container Engine API][2] for your project. 
 
-3. [Google Cloud SDK][3] と `kubectl` コマンドラインツールをローカルマシンにインストールします。[Cloud SDK を GCP アカウントとペアリング][4]すると、`kubectl` を使用してローカルマシンから直接クラスターを制御できます。
+3. Install the [Google Cloud SDK][3] and the `kubectl` command line tool on your local machine. Once you [pair the Cloud SDK with your GCP account][4], you can control your clusters directly from your local machine using `kubectl`.
 
-4. 次のコマンドを実行して、クラウドデータストアにアクセスできる `doglib` という名前の小さな GKE クラスターを作成します。
+4. Create a small GKE cluster named `doglib` with the ability to access the Cloud Datastore by running the following command:
 
 ```
 $  gcloud container clusters create doglib --num-nodes 3 --zone "us-central1-b" --scopes "cloud-platform"
 ```
 
-### GCE インテグレーションを設定する
+### Set up the GCE integration 
 
-[Google Cloud Platform][5] インテグレーションをインストールします。
+Install the [Google Cloud Platform][5] integration.
 
-その後、ディスク I/O、CPU 使用率、ネットワークトラフィックなどのメトリクスが表示される、すぐに使用できる [Google Compute Engine ダッシュボード][6]にアクセスできます。
+You can then access an out-of-the-box [Google Compute Engine dashboard][6] that displays metrics like disk I/O, CPU utilization, and network traffic.
 
-### GKE インテグレーションを設定する
+### Set up the GKE integration
 
-動作モードを選択します。*動作モード*とは、クラスターに対する柔軟性、責任、制御のレベルを指します。GKE には、次の 2 つの動作モードがあります。
+Choose a mode of operation. A *mode of operation* refers to the level of flexibility, responsibility, and control that you have over your cluster. GKE offers two modes of operation:
 
-- **Standard**: クラスターの基盤となるインフラを管理し、ノードの構成を柔軟に変更することができます。
+- **Standard**: You manage the cluster's underlying infrastructure, giving you node configuration flexibility.
 
-- **Autopilot**: Google は、ノードやノードプールなどクラスターの基盤となるインフラストラクチャー全体のプロビジョニングおよび管理を行い、最適なクラスターを提供します。
+- **Autopilot**: Google provisions and manages the entire cluster's underlying infrastructure, including nodes and node pools, giving you an optimized cluster with a hands-off experience.
 
 {{< tabs >}}
-{{% tab "標準" %}}
+{{% tab "Standard" %}}
 
-#### 標準的な方法
+#### Standard
 
-[コンテナ化されたバージョンの Datadog Agent][1] を Kubernetes クラスターにデプロイします。[Kubernetes に Datadog Agent をインストールする][2]を参照してください。
+Deploy a [containerized version of the Datadog Agent][1] on your Kubernetes cluster. See [Install the Datadog Agent on Kubernetes][2].
 
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest?platform=kubernetes
-[2]: https://docs.datadoghq.com/ja/containers/kubernetes/installation?tab=operator
+[2]: https://docs.datadoghq.com/containers/kubernetes/installation?tab=operator
 {{% /tab %}}
 {{% tab "Autopilot" %}}
 
 #### Autopilot
 
-1. Helm をインストールします。
+Follow the instructions in the GKE [Autopilot section][1] of the Kubernetes distributions page.
 
-2. Datadog リポジトリを Helm リポジトリに追加します。
+#### Admission Controller
 
-  ```bash
-  helm repo add datadog https://helm.datadoghq.com
-  helm repo update
-  ```
+To use [Admission Controller][2] with Autopilot, set the [`configMode`][3] of the Admission Controller to either `service` or `hostip`. 
 
-3. 次のコマンドを使用して、Autopilot に Datadog Agent と Cluster Agent をデプロイします。
-
-  ```bash
-  helm install <RELEASE_NAME> \
-      --set datadog.apiKey=<DATADOG_API_KEY> \
-      --set datadog.appKey=<DATADOG_APP_KEY> \
-      --set clusterAgent.enabled=true \
-      --set clusterAgent.metricsProvider.enabled=true \
-      --set providers.gke.autopilot=true \
-      datadog/datadog
-  ```
-
-  **注**: ログやトレースも有効にしたい場合は、このコマンドに `datadog.logs.enabled` (ログ用) と `datadog.apm.portEnabled` (トレース用) を true に設定する行を追加してください。例:
-
-  ```bash
-  helm install --name <RELEASE_NAME> \
-      --set datadog.apiKey=<DATADOG_API_KEY> \
-      --set datadog.appKey=<DATADOG_APP_KEY> \
-      --set clusterAgent.enabled=true \
-      --set clusterAgent.metricsProvider.enabled=true \
-      --set providers.gke.autopilot=true \
-      --set datadog.logs.enabled=true \
-      --set datadog.apm.portEnabled=true \
-      datadog/datadog
-  ```
-
-  構成可能な値の一覧は、[Datadog `helm-charts` リポジトリ][1]を参照してください。
-
-#### ダッシュボード  
-
-[Admission Controller][2] を Autopilot で使用するには、Admission Controller の [`configMode`][3] を `service` または `hostip` に設定します。
-
-Autopilot では `socket` モードが許可されていないため、Datadog はコントローラーにより堅牢な抽象化レイヤーを提供するため `service` (フォールバックオプションとして `hostip`) の使用を推奨します。
+Because Autopilot does not allow `socket` mode, Datadog recommends using `service` (with `hostip` as a fallback) to provide a more robust layer of abstraction for the controller. 
 
 
 
-[1]: https://github.com/DataDog/helm-charts/tree/master/charts/datadog#values
-[2]: https://docs.datadoghq.com/ja/containers/cluster_agent/admission_controller/?tab=operator
+[1]: https://docs.datadoghq.com/containers/kubernetes/distributions/?tab=helm#autopilot
+[2]: https://docs.datadoghq.com/containers/cluster_agent/admission_controller/?tab=operator
 [3]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/values.yaml#L1046
 {{% /tab %}}
 {{< /tabs >}}
 
-## その他の参考資料
+## Further Reading
 
-- [Datadog を使用した GKE Autopilot の監視][7]
-- [Datadog を使用した GKE の監視][8]
-- [Datadog を使用した T2A による GKE ワークロードの監視][9]
-- [新しい GKE ダッシュボードとメトリクスによる、環境の視覚化の向上][10]
+- [Monitor GKE Autopilot with Datadog][7]
+- [Monitor GKE with Datadog][8]
+- [Monitor your T2A-powered GKE workloads with Datadog][9]
+- [New GKE dashboards and metrics provide deeper visibility into your environment][10]
 
 
 [1]: https://cloud.google.com/resource-manager/docs/creating-managing-projects
 [2]: https://console.cloud.google.com/apis/api/container.googleapis.com
 [3]: https://cloud.google.com/sdk/docs/
 [4]: https://cloud.google.com/sdk/docs/initializing
-[5]: /ja/integrations/google_cloud_platform/
+[5]: /integrations/google_cloud_platform/
 [6]: https://app.datadoghq.com/screen/integration/gce
 [7]: https://www.datadoghq.com/blog/gke-autopilot-monitoring/
 [8]: https://www.datadoghq.com/blog/monitor-google-kubernetes-engine/

@@ -1,109 +1,109 @@
 ---
+title: Serverless
+kind: documentation
 aliases:
-- /ja/graphing/infrastructure/cloudfunctions
-- /ja/graphing/infrastructure/serverless_functions
-- /ja/graphing/infrastructure/serverless/
-- /ja/infrastructure/serverless/
-- /ja/tracing/serverless_functions/datadog_apm
-- /ja/integrations/amazon_lambda/docs.datadoghq.com/serverless/
-cascade:
-  algolia:
-    rank: 70
+  - /graphing/infrastructure/cloudfunctions
+  - /graphing/infrastructure/serverless_functions
+  - /graphing/infrastructure/serverless/
+  - /infrastructure/serverless/
+  - /tracing/serverless_functions/datadog_apm
+  - /integrations/amazon_lambda/docs.datadoghq.com/serverless/
 further_reading:
-- link: https://app.datadoghq.com/release-notes?category=Serverless
-  tag: リリースノート
-  text: Serverless の最新リリースをチェック！ (アプリログインが必要です)。
-- link: https://www.datadoghq.com/state-of-serverless
-  tag: ブログ
-  text: サーバーレスの状態
+- link: "https://app.datadoghq.com/release-notes?category=Serverless"
+  tag: Release Notes
+  text: Check out the latest Serverless releases! (App login required).
+- link: "https://www.datadoghq.com/state-of-serverless"
+  tag: Blog
+  text: The State of Serverless
 - link: /serverless/installation/
-  tag: ドキュメント
-  text: サーバーレスモニタリングのインストール
-- link: https://www.datadoghq.com/blog/azure-container-apps/
-  tag: ブログ
-  text: Datadog で Azure Container Apps を監視する
-- link: https://dtdg.co/fe
+  tag: Documentation
+  text: Installing Serverless monitoring
+- link: "https://www.datadoghq.com/blog/azure-container-apps/"
+  tag: Blog
+  text: Monitor Azure Container Apps with Datadog
+- link: "https://dtdg.co/fe"
   tag: Foundation Enablement
-  text: サーバーレスモニタリングについて詳しく知ることができるインタラクティブなセッションに参加できます
-kind: ドキュメント
-title: サーバーレス
+  text: Join an interactive session to learn more about serverless monitoring
+cascade:
+    algolia:
+        rank: 70
 ---
 
 {{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/543362476/rendition/1080p/file.mp4?loc=external&signature=4927d13b131aea1e3b4f77efca5af49bb509f5e7f1d6ca06a5267ba02a8c194a" poster="/images/poster/serverless.png" >}}
 
 <br/>
 
-<div class="alert alert-info"><a href="https://chat.datadoghq.com/">Datadog Slack コミュニティー</a>の <a href="https://datadoghq.slack.com/archives/CFDPB83M4">#serverless</a> チャンネルで交わされるディスカッションを必ずチェックしましょう。</div>
+<div class="alert alert-info">Make sure to check out discussions going on in the <a href="https://datadoghq.slack.com/archives/CFDPB83M4">#serverless</a> channel in the <a href="https://chat.datadoghq.com/">Datadog Slack community</a>.</div>
 
-[Datadog サーバーレスモニタリング][1]は、コンピューティングからのリアルタイムメトリクス、ログ、トレースおよび関連するフルマネージド API、キュー、ストリーム、データストアを収集することで、サーバーレスアプリケーションを稼働させるすべてのマネージドサービスに関する完全な可視性を提供します。
+[Datadog Serverless Monitoring][1] provides full visibility into all of the managed services that power your serverless applications by bringing together real-time metrics, logs and traces from your serverless compute as well as related fully-managed APIs, queues, streams and data stores.
 
-Datadog は、[AWS Lambda](#aws-lambda)、[Azure App Service](#azure-app-service)、[Azure Container Apps](#azure-container-apps)、[Google Cloud Run](#google-cloud-run) をモニタリングするためのソリューションを提供しています。
+Datadog provides solutions for monitoring [AWS Lambda](#aws-lambda), [Azure App Service](#azure-app-service), [Azure Container Apps](#azure-container-apps), and [Google Cloud Run](#google-cloud-run).
 
 ### AWS Lambda
 
-[AWS Lambda のサーバーレスモニタリング][2]を使用すると、AWS リソースからの高レベルメトリクスを Lambda 関数のメトリクスと関連付けられるため、問題をすばやく発見し調査を開始することができます。
+[Serverless Monitoring for AWS Lambda][2] enables you to correlate high-level metrics from AWS resources with those of Lambda functions, so you can quickly spot issues and start your investigation.
 
-[高度な Lambda メトリクス][3]は、Datadog で `aws.lambda.enhanced` のプレフィックスで表示され、秒単位の粒度で、ほぼリアルタイムで利用できます。高度な Lambda メトリクスは、すべての Lambda 関数におけるコールドスタート、推定 AWS コスト、タイムアウト、メモリ不足エラー、そしてメモリ使用量に関するアラートや SLO に使用できます。
+[Enhanced Lambda metrics][3], which appear in Datadog with the prefix `aws.lambda.enhanced`, are available at second granularity and in near real time. You can use enhanced Lambda metrics for alerts or SLOs on cold starts, estimated AWS costs, timeouts, out-of-memory errors, and memory usage across all of your Lambda functions.
 
-ログやトレースからメトリクスを生成したり、Datadog Lambda 拡張機能を使用したり、Datadog Forwarder Lambda を使用することで、Lambda 関数から [カスタムメトリクス][4]を送信できます。
+You can send [custom metrics][4] from a Lambda function by generating metrics from logs and traces, using the Datadog Lambda Extension, or using the Datadog Forwarder Lambda.
 
-[分散型トレーシング][5]なら、サーバーレストレースをメトリクスに接続することで、アプリケーションのパフォーマンスに関する豊富な情報を入手できます。Datadog Python、Node.js、Ruby、Go、Java、.NET トレーシングライブラリは、AWS Lambda の分散型トレーシングをサポートしています。
+With [Distributed Tracing][5], you can connect your serverless traces to metrics for a context-rich picture of your application's performance. The Datadog Python, Node.js, Ruby, Go, Java, and .NET tracing libraries support distributed tracing for AWS Lambda.
 
-[デプロイ追跡][6]なら、サーバーレスコード、コンフィギュレーション、そしてデプロイメントの変更をメトリクス、トレース、そして関数からのログと関連付け、リアルタイムのインサイトによりこのような変更がアプリケーションの正常性やパフォーマンスに与える影響を確認できます。
+[Deployment Tracking][6] helps you to correlate serverless code, configuration, and deployment changes with metrics, traces, and logs from your functions for real-time insight into how these changes may affect the health and performance of your applications.
 
-### AWS Step Functions (公開ベータ版)
+### AWS Step Functions (Public Beta)
 
-AWS Step Functions は、サーバーレスのオーケストレーションサービスで、開発者は AWS でマルチステップのアプリケーションワークフローを作成し、管理することができます。 
+AWS Step Functions is a serverless orchestration service that lets developers create and manage multi-step application workflows in AWS. 
 
-[AWS Step Functions インテグレーション][13]から取得したメトリクスやログを監視し、Serverless アプリビュー内でクラウドネイティブなテレメトリーを表示できます。
+Monitor metrics and logs from the [AWS Step Functions Integration][13] to view cloud-native telemetry within the Serverless app view.
 
-[実行トレース][14]でバグやボトルネックを特定できます。ステップ関数のトレースは、Step Function ログから生成でき、ステートマシンの実行パス、各ステップの入出力、ステップの実行時間を含む、詳細な実行情報を提供します。
+Identify bugs and bottlenecks with [execution traces][14]. Traces for step functions can be generated from Step Function logs and provide granular execution information, including the state machine execution path, inputs and outputs for each step, and step execution length.
 
-Step Function の拡張メトリクスは、`aws.states.enhanced` のプレフィックス付きで Datadog に表示され、秒単位の粒度で利用でき、Datadog 内で直接生成されます。
+Enhanced Step Function metrics, which appear in Datadog with the prefix `aws.states.enhanced`, are available at second granularity and generated directly within Datadog.
 
 ### Azure App Service
 
-[Datadog の Azure App Service 向け拡張機能][7]は、Azure Web Apps のトレーシングもサポートしています。
+The [Datadog extension for Azure App Service][7] provides tracing capabilities for Azure Web Apps. 
 
-[Azure App Service ビュー][8]を使用すると、次のことができます。
+Use the [Azure App Service view][8] to:
 
-- レイテンシーやエラーの多いアプリをすばやく特定
+- Quickly identify apps with high latency or errors
 
-- Web App、Function App、App Service Plan の使用量を追跡
+- Track the utilization of your Web Apps, Function Apps, and App Service Plans
 
-- アクティブなインスタンスの数を視覚化し、Datadog にトレースまたはログを送信している実行中のアプリを確認することで、App Service Plan のコストに関する洞察を取得
+- Get insights into the costs of your App Service Plans by visualizing the number of active instances and seeing which are running apps that are submitting traces or logs to Datadog
 
-- App Service Plan で実行されているアプリをマッピングして、コストやパフォーマンスに影響を与える可能性のあるアプリを特定
+- Map the apps running on your App Service Plans to identify apps that may be impacting costs or performance
 
-Datadog の Azure App Service 向け拡張機能は、Azure Web Apps のトレースもサポートしています。Azure のトレーシング設定について詳しくは、[Azure App Service][7] を参照してください。
+The Datadog extension for Azure App Service provides tracing capabilities for Azure Web Apps. For more information about setting up tracing in Azure, see [Azure App Service][7].
 
 ### Azure Container Apps
 
-Azure Container Apps は、コンテナベースのアプリケーションをデプロイし、スケーリングするためのフルマネージドサーバーレスプラットフォームです。Datadog は、[Azure インテグレーション][9]を通して Container Apps のモニタリングとログ収集を提供しています。
+Azure Container Apps is a fully managed serverless platform for deploying and scaling container-based applications. Datadog provides monitoring and log collection for Container Apps through the [Azure integration][9]. 
 
-また、Datadog は現在ベータ版として、トレース、カスタムメトリクス、直接ログ収集を可能にする専用 Agent で [Container Apps アプリケーションをインスツルメントする][10]ソリューションも提供しています。
+Datadog also provides a solution, now in beta, for [instrumenting your Container Apps applications][10] with a purpose-built Agent to enable tracing, custom metrics, and direct log collection.
 
 ### Google Cloud Run
 
-Google Cloud Run は、単一目的の小規模な関数を作成できる、軽量、イベントベース、かつ非同期のコンピューティングソリューションです。Google Cloud Platform で実行中のサーバーレス関数を監視するには、[Google Cloud Platform インテグレーション][11]を有効にします。
+Google Cloud Run is a lightweight, event-based, asynchronous compute solution that allows you to create small, single-purpose functions. To monitor serverless functions running on Google Cloud Platform, enable the [Google Cloud Platform integration][11].
 
-また、Datadog は現在公開ベータ版として、トレース、カスタムメトリクス、直接ログ収集を可能にする専用 Agent で [Container Run アプリケーションをインスツルメントする][12]ソリューションも提供しています。
+Datadog also provides a solution, now in public beta, for [instrumenting your Cloud Run applications][12] with a purpose-built Agent to enable tracing, custom metrics, and direct log collection.
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: http://app.datadoghq.com/functions
-[2]: /ja/serverless/aws_lambda
-[3]: /ja/serverless/enhanced_lambda_metrics
-[4]: /ja/serverless/custom_metrics
-[5]: /ja/serverless/distributed_tracing
-[6]: /ja/serverless/deployment_tracking
-[7]: /ja/infrastructure/serverless/azure_app_services/#overview
+[2]: /serverless/aws_lambda
+[3]: /serverless/enhanced_lambda_metrics
+[4]: /serverless/custom_metrics
+[5]: /serverless/distributed_tracing
+[6]: /serverless/deployment_tracking
+[7]: /infrastructure/serverless/azure_app_services/#overview
 [8]: https://app.datadoghq.com/functions?cloud=azure&config_serverless-azure-app=true&group=service
-[9]: /ja/integrations/azure/#log-collection
-[10]: /ja/serverless/azure_container_apps
-[11]: /ja/integrations/google_cloud_platform/
-[12]: /ja/serverless/google_cloud_run
-[13]: /ja/integrations/amazon_step_functions
-[14]: /ja/serverless/step_functions/installation
+[9]: /integrations/azure/#log-collection
+[10]: /serverless/azure_container_apps
+[11]: /integrations/google_cloud_platform/
+[12]: /serverless/google_cloud_run
+[13]: /integrations/amazon_step_functions
+[14]: /serverless/step_functions/installation

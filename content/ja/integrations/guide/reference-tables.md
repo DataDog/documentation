@@ -1,69 +1,64 @@
 ---
-aliases:
-- /ja/logs/guide/enrichment-tables/
-- /ja/logs/guide/reference-tables/
+title: Add Custom Metadata with Reference Tables
+kind: guide
 beta: true
+aliases:
+  - /logs/guide/enrichment-tables/
+  - /logs/guide/reference-tables/
 further_reading:
 - link: /logs/log_configuration/processors
-  tag: ドキュメント
-  text: ルックアッププロセッサを使用して、リファレンステーブルからログをリッチ化する
-- link: /logs/explorer/analytics/#filter-logs-based-on-reference-tables
-  tag: ドキュメント
-  text: リファレンステーブルに基づくログのフィルター
-- link: /cloud_cost_management/tag_pipelines/#map-multiple-tags
-  tag: ドキュメント
-  text: リファレンステーブルを使用して、コストデータに複数のタグを追加する
-- link: https://www.datadoghq.com/blog/add-context-with-reference-tables/
-  tag: ブログ
-  text: リファレンステーブルを使用してログにさらにコンテキストを追加する
-kind: ガイド
-title: リファレンステーブルでカスタムメタデータを追加する
+  tag: Documentation
+  text: Use the lookup processor to enrich logs from a Reference Table
+- link: "/logs/explorer/advanced_search#filter-logs-based-on-reference-tables"
+  tag: Documentation
+  text: Filter logs based on Reference Tables
+- link: "/cloud_cost_management/tag_pipelines/#map-multiple-tags"
+  tag: Documentation
+  text: Use Reference Tables to add multiple tags to cost data
+- link: "https://www.datadoghq.com/blog/add-context-with-reference-tables/"
+  tag: Blog
+  text: Add more context to your logs with Reference Tables
 ---
 
-<div class="alert alert-warning">
-リファレンステーブル機能は現在公開ベータ版です。リファレンステーブルを定義したりクエリを作成したりしても、請求内容には影響しません。詳細については、<a href="https://docs.datadoghq.com/help/">Datadog サポート</a>にお問い合わせください。
-ベータ版期間中は、1 アカウントにつき 100 個のリファレンステーブルという制限があります。
-</div>
+## Overview
 
-## 概要
+Reference Tables allow you to combine metadata with information already in Datadog. You can define new entities like customer details, service names and information, or IP addresses by uploading a CSV file containing a table of information. The entities are represented by a primary key in a Reference Table and the associated metadata. 
 
-リファレンステーブルを使用すると、Datadog にすでにある情報にメタデータを結合することができます。情報のテーブルを含む CSV ファイルをアップロードすることで、顧客の詳細、サービス名と情報、または IP アドレスなどの新しいエンティティを定義することができます。エンティティは、リファレンステーブルの主キーと関連するメタデータによって表現されます。
+{{< img src="integrations/guide/reference-tables/reference-table.png" alt="A reference table with data populated in the columns for org id, org name, parent org, account owner, and csm" style="width:100%;">}}
 
-{{< img src="integrations/guide/reference-tables/reference-table.png" alt="org id、org name、parent org、account owner、csm の列にデータが格納されたリファレンステーブル" style="width:100%;">}}
+## Validation rules
 
-## 検証ルール
+Reference Table names and column headers are validated using the following naming conventions and automatically updated or normalized, if necessary.
 
-リファレンステーブルの名前と列のヘッダーは、以下の命名規則で検証され、必要に応じて自動的に更新または正規化されます。
-
-| ルール     | 正規化 |
+| Rule     | Normalization |
 | ----------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
-| 名前とヘッダーは重複できません。                                          | 重複した名前は列挙されます。例えば、`fileid` が名前として 2 回使用された場合、最初のインスタンスは `fileid1` に、2 番目のインスタンスは `fileid2` になります。名前またはヘッダーを列挙した際に、56 文字を超える場合は拒否され、名前を変更する必要があります。 |
-| 名前とヘッダーに大文字を含めることはできません。                               | 大文字で書かれた名前は、小文字に変換されます。この変換の結果、名前が重複することがありますが、その場合は列挙されます。例えば、`Fileid` と `FileID` は両方とも `fileid` となり、それぞれ `fileid1` と `fileid2` に列挙されます。 |
-| 名前とヘッダーにスペースを含めることはできません。                                          | 先頭と末尾のスペース以外のスペースは、アンダースコア `_` 文字に置き換えられます。先頭と末尾のスペースは削除されます。例えば、`customer names` は `customer_names` に置き換えられます。 |
-| 名前とヘッダーは小文字で始める必要があります。                             | 大文字は小文字に変換されます。文字以外の先頭の文字は削除されます。例えば、`23Two_three` は `two_three` となります。   |
-| 名前とヘッダーは、小文字のアルファベットと数字、および `_` 文字のみをサポートします。 | サポートされていない文字は、上記のルールのいずれかを破らない限り、アンダースコア `_` 文字に置き換えられます。その場合、サポートされていない文字は、それぞれのルールによって正規化されます。               |
-| 名前とヘッダーは 56 文字以内にする必要があります。                                  | 正規化は行われません。56 文字以上の名前とヘッダーは拒否され、名前を変更する必要があります。 |
+| Names and headers can not be duplicated.                                          | Duplicated names are enumerated. For example, if `fileid` is used twice as a name, the first instance becomes `fileid1` and the second instance becomes `fileid2`. If a name or header is enumerated and it exceeds the 56 characters, it is rejected and needs to be renamed. |
+| Names and headers cannot contain uppercase letters.                               | Names with uppercase letters are converted to lowercase. This conversion may result in duplicate names, which are then enumerated. For example, `Fileid` and `FileID` both become `fileid` and are enumerated to `fileid1` and `fileid2` respectively. |
+| Names and headers cannot contain spaces.                                          | Spaces other than leading and trailing spaces are replaced with underscore `_` characters. Leading and trailing spaces are removed. For example, `customer names` is replaced with `customer_names`. |
+| Names and headers must start with a lowercase letter.                             | Uppercase characters are converted to lowercase. Non-letter leading characters are removed. For example, `23Two_three` becomes `two_three`.   |
+| Names and headers support only lowercase letters, numbers, and the `_` character. | Unsupported characters are replaced with the underscore `_` character, unless it breaks one of the rules above. In that case, the unsupported characters are normalized by the respective rule.               |
+| Names and headers must be 56 characters or less.                                  | No normalization is done. Names and headers that have more than 56 characters are rejected and need to be renamed. |
 
-## リファレンステーブルを作成する
+## Create a Reference Table
 
 {{< tabs >}}
-{{% tab "手動アップロード" %}}
+{{% tab "Manual upload" %}}
 
-**New Reference Table +** をクリックしてから、CSV ファイルをアップロードし、適切な列に名前を付けて、ルックアップのプライマリキーを定義します。
+Click **New Reference Table +**, then upload a CSV file, name the appropriate columns, and define the primary key for lookups.
 
-{{< img src="integrations/guide/reference-tables/enrichment-table-setup.png" alt="Define the Schema セクションで、org_id を主キーとするテーブルと、org id、org name、parent org、account owner、および csm のデータを持つ列を表示しています " style="width:100%;">}}
+{{< img src="integrations/guide/reference-tables/enrichment-table-setup.png" alt="The Define the Schema section showing a table with org_id marked as the primary key and columns with data for org id, org name, parent org, account owner, and csm " style="width:100%;">}}
 
-**注**: CSV の手動アップロードは、4MB までのファイルをサポートしています。
+**Note**: The manual CSV upload method supports files up to 4MB.
 
 {{% /tab %}}
 
 {{% tab "Amazon S3" %}}
 
-リファレンステーブルは、Amazon S3 バケットから CSV ファイルを自動的にプルして、データを最新の状態に保つことができます。インテグレーションでは、S3 で CSV ファイルへの変更が検索され、ファイルが更新されると、リファレンステーブルが新しいデータに置き換えられます。これにより、初期リファレンステーブルが構成されると、S3 API を使用した API 更新も可能になります。
+Reference Tables can automatically pull a CSV file from an Amazon S3 bucket to keep your data up to date. The integration looks for changes to the CSV file in S3, and when the file is updated it replaces the Reference Table with the new data. This also enables API updating with the S3 API once the initial Reference Table is configured.
 
-S3 からリファレンステーブルを更新するために、Datadog は [AWS インテグレーション][1]用に構成した AWS アカウントの IAM ロールを使用します。このロールをまだ作成していない場合は、[こちらの手順][2]で作成してください。このロールがリファレンステーブルを更新できるようにするには、次のアクセス許可ステートメントを IAM ポリシーに追加します。バケット名は、環境に合わせて編集します。
+To update Reference Tables from S3, Datadog uses the IAM role in your AWS account that you configured for the [AWS integration][1]. If you have not yet created that role, [follow these steps][2] to do so. To allow that role to update your Reference Tables, add the following permission statement to its IAM policies. Be sure to edit the bucket names to match your environment.
 
-**注**: サーバーサイドの暗号化を使用する場合、Amazon S3 が管理するキー (SSE-S3) で暗号化されたリファレンステーブルのみをアップロードすることができます。
+**Note**: If using server-side encryption, you can only upload Reference Tables encrypted with Amazon S3-managed keys (SSE-S3).
 
 ```json
 {
@@ -84,117 +79,117 @@ S3 からリファレンステーブルを更新するために、Datadog は [A
     "Version": "2012-10-17"
 }
 ```
-### テーブルを定義する
+### Define the table
 
-**New Reference Table +** をクリックしてから、名前を追加し、Amazon S3 を選択し、すべてのフィールドに入力し、インポートをクリックして、ルックアップのプライマリキーを定義します。
+Click **New Reference Table +**, then add a name, select Amazon S3, fill out all fields, click import, and define the primary key for lookups.
 
-{{< img src="integrations/guide/reference-tables/configure-s3-reference-table.png" alt="Amazon S3 タイルを選択し、AWS Account、Bucket、Path のデータを記入した upload your data セクション" style="width:100%;">}}
+{{< img src="integrations/guide/reference-tables/configure-s3-reference-table.png" alt="The upload your data section with the Amazon S3 tile selected and data filled in for AWS Account, Bucket, and Path" style="width:100%;">}}
 
-**注**: S3 バケットからのアップロードは、200MB までのファイルをサポートしています。
+**Note**: The upload from an S3 bucket method supports files up to 200MB.
 
 [1]: https://app.datadoghq.com/account/settings#integrations/amazon-web-services
-[2]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=automaticcloudformation#installation
+[2]: https://docs.datadoghq.com/integrations/amazon_web_services/?tab=automaticcloudformation#installation
 {{% /tab %}}
 
-{{% tab "Azure ストレージ" %}}
+{{% tab "Azure storage" %}}
 
-1. まだの場合は、リファレンステーブルをインポートするストレージアカウントを保持するサブスクリプション内で、[Azure インテグレーション][1]をセットアップしてください。これには、[Datadog がインテグレーションできるアプリ登録の作成][2]を伴います。
-2. Azure Portal で、リファレンステーブルファイルを保存するストレージアカウントを選択します。
-3. ストレージアカウント内で、**Access Control (IAM)** に移動し、**Add** > **Add Role Assignment** を選択します。
-4. **Storage Blob Data Reader** ロールを入力し、選択します。[Storage Blob Data Reader ロール][3]は、Datadog がストレージコンテナや Blob を読み込んで一覧表示できるようにするものです。
-5. **Members** タブで、**+ Select members** をクリックします。ステップ 1 で作成したアプリ登録を選択します。
+1. If you haven't already, set up the [Azure integration][1] within the subscription that holds the storage account from which you want to import your Reference Table. This involves [creating an app registration that Datadog can][2] integrate with.
+2. In the Azure Portal, select the storage account that stores your Reference Table files.
+3. Within your storage account, navigate to **Access Control (IAM)** and select **Add** > **Add Role Assignment**.
+4. Input and select the **Storage Blob Data Reader** Role. The [Storage Blob Data Reader role][3] allows Datadog to read and list storage containers and blobs.
+5. In the **Members** tab, click **+ Select members**. Select the app registration you created in Step 1.
 
-   {{< img src="integrations/guide/reference-tables/add_members.png" alt="Azure Portal の Members セクションで、メンバーが選択され、Name、Object ID、Type にデータが入力された状態" style="width:85%;">}}
+   {{< img src="integrations/guide/reference-tables/add_members.png" alt="The Members section in the Azure Portal where a member is selected and data filled in for the Name, Object ID, and Type" style="width:85%;">}}
 
-ロールの確認と割り当てが完了したら、Azure からリファレンステーブルにインポートすることができます。Datadog で Azure の構成が更新されるまで、数分かかる場合があります。
+After reviewing and assigning the role, you can import into Reference Tables from Azure. It may take a few minutes for your Azure configuration to update in Datadog.
 
-{{< img src="integrations/guide/reference-tables/azure_storage.png" alt="新規リファレンステーブルのワークフローの Upload or import data セクションにある Azure Storage タイル" style="width:80%;">}}
+{{< img src="integrations/guide/reference-tables/azure_storage.png" alt="An Azure Storage tile in the Upload or import data section of a new reference table workflow" style="width:80%;">}}
 
-詳しくは、[Azure インテグレーションドキュメント][4]を参照してください。
+For more information, see the [Azure integration documentation][4]. 
 
-**注**: クラウドオブジェクトストレージからのアップロードは、200MB までのファイルをサポートしています。
+**Note**: The upload from cloud object storage supports files up to 200MB.
 
 [1]: https://app.datadoghq.com/integrations/azure
-[2]: /ja/integrations/azure/?tab=azurecliv20#integrating-through-the-azure-portal
+[2]: /integrations/azure/?tab=azurecliv20#integrating-through-the-azure-portal
 [3]: https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles#storage-blob-data-reader
-[4]: /ja/integrations/azure/
+[4]: /integrations/azure/
 
 {{% /tab %}}
 
-{{% tab "Google Cloud ストレージ" %}}
+{{% tab "Google Cloud storage" %}}
 
-1. Datadog で Google Cloud インテグレーションをセットアップしていない場合、またはレガシー Google プロジェクト ID ファイル (レガシープロジェクトであることは GCP インテグレーションタイルに表示されています) を使用している場合は、[Google Cloud Platform インテグレーション][1]のセットアップ手順に従ってください。これには、[Google Cloud サービスアカウント][2]を作成する必要があります。
+1. If you have not set up a Google Cloud integration with Datadog or you are using legacy Google project ID files (legacy projects are indicated in your GCP integration tile), follow the instructions for setting up the [Google Cloud Platform integration][1]. This involves creating a [Google Cloud service account][2].
 
-1. Google Cloud コンソールから、**Cloud Storage** ページに移動します。
+1. From the Google Cloud console, navigate to the **Cloud Storage** page.
 
-1. アクセス権を与えたいバケットを見つけてクリックします。
+1. Find the bucket you'd like to grant access to and click on it.
 
-1. **Permissions** タブをクリックします。"View By Principals" の下にある **Grant Access** ボタンをクリックします。
+1. Click on the **Permissions** tab. Under "View By Principals", click the **Grant Access** button.
 
-1. 表示されるウィンドウで、"New principals" フィールドの下に、ステップ 1 で作成して GCP タイルに追加したサービスアカウントのメールアドレスを入力します。"Assign roles" の下で、**Storage Object Viewer** ロールを選択します。**Save** をクリックします。
+1. In the window that appears, under the "New principals" field, enter the service account email that you created and added to the GCP tile in Step 1. Under "Assign roles", select the **Storage Object Viewer** role. Click **Save**.
 
 
-{{< img src="integrations/guide/reference-tables/grant_access.png" alt="アクセスを許可する構成を示す Google Cloud コンソール" style="width:100%;" >}}
+{{< img src="integrations/guide/reference-tables/grant_access.png" alt="Google Cloud console showing the configuration to grant access" style="width:100%;" >}}
 
-ロールの確認と割り当てが完了したら、Google Cloud からリファレンステーブルにインポートすることができます。Datadog で構成が更新されるまで、数分かかる場合があります。
+After reviewing and assigning the role, you can import into Reference Tables from Google Cloud. It may take a few minutes for your configuration to update in Datadog.
 
-{{< img src="integrations/guide/reference-tables/gcp_upload_import_ui.png" alt="新しいリファレンステーブルを作成する際に、データのアップロードまたはインポートで GCP ストレージを選択します" style="width:100%;" >}}
+{{< img src="integrations/guide/reference-tables/gcp_upload_import_ui.png" alt="Select GCP Storage in Upload or import data when creating a new reference table" style="width:100%;" >}}
 
-**注**: クラウドオブジェクトストレージからのアップロードは、200MB までのファイルをサポートしています。
+**Note**: The upload from cloud object storage supports files up to 200MB.
 
-[1]: /ja/integrations/google_cloud_platform/#setup
-[2]: /ja/integrations/google_cloud_platform/#1-create-your-google-cloud-service-account
+[1]: /integrations/google_cloud_platform/#setup
+[2]: /integrations/google_cloud_platform/#1-create-your-google-cloud-service-account
 
 {{% /tab %}}
 {{< /tabs >}}
 
-このリファレンステーブルを使用して、[Lookup Processor][1] でログに属性を追加できます。
+This Reference Table can be used to add additional attributes to logs with the [Lookup Processor][1].
 
-## リファレンステーブルを変更する
+## Modify a Reference Table
 
-既存のリファレンステーブルを新しいデータで変更するには、テーブルを選択し、右上の **Update Config** をクリックします。
-選択した CSV がテーブルにアップサートされます。つまり、
+To modify an existing Reference Table with new data, select a table and click **Update Config** on the top right corner.
+The selected CSV is upserted into the table, meaning that:
 
-* 同じ主キーを持つ既存の行はすべて更新される
-* すべての新しい行が追加される
-* 新しいファイルに含まれない古い行はすべて削除される
+* All existing rows with the same primary key are updated
+* All new rows are added
+* All old rows that are not in the new file are deleted
 
-テーブルが保存されると、アップサートされた行は非同期で処理され、プレビューで更新されます。更新が完了するまでには、最大で 10 分かかる場合があります。
+Once the table is saved, the upserted rows are processed asynchronously and updated in the preview. It may take up to 10 minutes for the update to complete. 
 
-## リファレンステーブルを削除する
+## Delete a Reference Table
 
-リファレンステーブルを削除するには、テーブルを選択し、右上の歯車アイコンをクリックし、 **Delete Table** をクリックします。
-テーブルと関連するすべての行が削除されます。
+To delete a Reference Table, select a table, click the gear icon in the top right corner, and then click **Delete Table**.
+The table and all associated rows is deleted.
 
-リファレンステーブルを使用している Lookup Processor がある場合、ログエンリッチメントが停止します。エンリッチメントが停止するまで、最大で 10 分かかる場合があります。
+If there is a Lookup Processor using a Reference Table for Log enrichment, then the enrichment stops. It may take up to 10 minutes for the enrichment to stop.
 
-## リファレンステーブルアクティビティの監視
+## Monitor Reference Table Activity
 
-[監査証跡][2]または[変更イベント][3]でリファレンステーブルのアクティビティを監視することができます。特定のリファレンステーブルの監査証跡と変更イベントを表示するには、そのテーブルを選択し、**Update Config** の隣にある設定アイコンをクリックします。監査証跡を表示するには、組織の管理権限が必要です。
+You can monitor reference table activity with [Audit Trail][2] or [Change Events][3]. To view the audit trail and change events for a specific reference table, select the table and click the Settings icon next to **Update Config**. You need org management permissions to view the audit trail.
 
-### 監査証跡
+### Audit Trail
 
-リファレンステーブルの監査証跡を使用して、ユーザーをトリガーとするアクションを追跡することができます。監査証跡イベントは、ユーザーが最初に CSV ファイルをアップロードまたはインポートしたとき、またはユーザーがリファレンステーブルを作成、変更、または削除したときに送信されます。
+Use the audit trail for reference tables to track user-triggered actions. Audit trail events are sent when a user initially uploads or imports a CSV file, or when a user creates, modifies, or deletes a reference table. 
 
-`reference_table_file` アセットタイプはインポート/アップロードのイベントを表示し、`reference_table` アセットタイプはリファレンステーブルのイベントを表示します。監査証跡は、リファレンステーブルの内容の観測可能性を提供します。
+The `reference_table_file` Asset Type displays import/upload events and the `reference_table` Asset Type displays reference table events. The audit trail provides observability into the content of a reference table.
 
-### 変更イベント
+### Change Events
 
-リファレンステーブルの変更イベントを使用して、自動化またはユーザートリガーによるアクションを追跡します。イベントは、クラウドファイルがユーザーまたは自動更新からインポートされたときに送信されます。イベントはユーザートリガーのアクションを追跡できますが、主にリファレンステーブルが自動的に新しい CSV ファイルを取り込む際のトリガーインポートを追跡するために使用されます。
+Use change events for reference tables to track automated or user-triggered actions. They are sent when a cloud file is imported from a user or automatic refresh. While events can track user-triggered actions, they are mainly used to track triggered imports when a reference table automatically pulls a new CSV file. 
 
-イベントには、インポートの成功ステータス、パス、テーブル名に関する情報が含まれます。エラーが発生した場合は、エラーの種類に関する情報が提供されます。
+Events contain information about the success status, path, and table name of the import. If an error occurs, information about the error type is provided.
 
-### アラート設定
+### Alerting
 
-インポート中に発生したエラーについてアラートを受けるには、リファレンステーブルの変更イベントに [イベントモニター][4] を使用します。リファレンステーブルの変更イベントは `reference_tables` ソースから送信されます。
+To be alerted on errors encountered during imports, use [Event Monitors][4] for reference table change events. Reference table change events are sent from the `reference_tables` source. 
 
-**Monitors** タブからモニターを作成するか、**New Reference Table +** の横にある設定アイコンをクリックすると、あらかじめ入力されたモニターを生成することができます。
+You can create monitors from the **Monitors** tab, or click on the Settings icon next to **New Reference Table +** to generate a pre-filled monitor.
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/logs/log_configuration/processors/#lookup-processor
-[2]: /ja/account_management/audit_trail/
-[3]: /ja/events/
-[4]: /ja/monitors/types/event/
+[1]: /logs/log_configuration/processors/#lookup-processor
+[2]: /account_management/audit_trail/
+[3]: /events/
+[4]: /monitors/types/event/

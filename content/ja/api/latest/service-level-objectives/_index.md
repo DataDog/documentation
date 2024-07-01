@@ -1,3 +1,3 @@
 ---
-title: サービスレベル目標
+title: Service Level Objectives
 ---

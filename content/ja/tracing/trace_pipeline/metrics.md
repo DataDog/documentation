@@ -1,89 +1,91 @@
 ---
+title: Usage Metrics
+kind: documentation
 aliases:
-- /ja/tracing/trace_retention_and_ingestion/usage_metrics/
-- /ja/tracing/trace_retention/usage_metrics/
-- /ja/tracing/trace_ingestion/usage_metrics/
-description: APM の使用量を監視する方法を学びます。
+    - /tracing/trace_retention_and_ingestion/usage_metrics/
+    - /tracing/trace_retention/usage_metrics/
+    - /tracing/trace_ingestion/usage_metrics/
+description: "Learn how to monitor your APM usage."
 further_reading:
 - link: /tracing/trace_pipeline/ingestion_controls/
   tag: Documentation
-  text: トレースの取り込み
+  text: Trace Ingestion
 - link: /tracing/trace_pipeline/trace_retention/
   tag: Documentation
-  text: トレースの保持
-title: 使用量メトリクス
+  text: Trace Retention
 ---
 
-## 概要
+## Overview
 
-以下のアプリ内構成ページでは、APM の取り込み量とインデックス化量を設定することができます。
-- **[Ingestion Control ページ][1]**を使用して、取り込まれるスパンの量を制御します。
-- インデックス化されるスパンの数を制御するには、**[Retention Filters ページ][2]**を使用します。
+The following in-app configuration pages allow you to set ingested and indexed volumes for APM:
+- Use the **[Ingestion Control Page][1]** to control ingested span volume.
+- Use the **[Retention Filters page][2]** to control the number of indexed spans.
 
-どちらのページも、**使用量メトリクス**を利用しています。
+Both pages are powered by **usage metrics**.
 
-アカウントで利用できるメトリクスは次のとおりです。
+The following metrics are available in your account:
 
- - `datadog.estimated_usage.apm.ingested_bytes` (請求対象のディメンション)
+ - `datadog.estimated_usage.apm.ingested_bytes` (billed dimension)
  - `datadog.estimated_usage.apm.ingested_spans`
  - `datadog.estimated_usage.apm.ingested_traces`
- - `datadog.estimated_usage.apm.indexed_spans` (請求対象のディメンション)
+ - `datadog.estimated_usage.apm.indexed_spans` (billed dimension)
 
 
-これらのメトリクスをダッシュボードやモニターで活用することで、使用量を視覚化し、管理することができます。これらのメトリクスを使用して、すぐに使える 2 つのダッシュボードが構築されています。これらのダッシュボードは、APM の使用量や、取り込まれたスパンの量とインデックス化されたスパンの量を監視するのに役立ちます。
+Leverage these metrics in dashboards and monitors to visualize and control your usage. Two out-of-the box dashboards are built with these metrics. These dashboards help
+ monitor your APM usage as well as your ingested and indexed span volumes.
 
-Datadog APM のプランには、インデックス化されたスパンと取り込まれたスパンが含まれています。詳細は、[価格設定ページ][3]またはいくつかの[価格設定例シナリオ][4]をご覧ください。
+Datadog APM plans come with indexed and ingested spans included. For more information, see the [Pricing page][3] or some [pricing example scenarios][4].
 
-### 取り込まれたスパンの量
+### Ingested spans volume
 
-取り込まれたスパンの使用量に関連するメトリクスは以下のとおりです。
+The following metrics are associated with ingested spans usage:
 
  - `datadog.estimated_usage.apm.ingested_bytes`
  - `datadog.estimated_usage.apm.ingested_spans`
  - `datadog.estimated_usage.apm.ingested_traces`
 
-使用量は `datadog.estimated_usage.apm.ingested_bytes` で制御します。取り込みはスパンやトレース数ではなく、量として計測されます。このメトリクスは `env` と `service` によってタグ付けされているので、どの環境とサービスが取り込み量に寄与しているかを特定することができます。
+Control the usage with `datadog.estimated_usage.apm.ingested_bytes`. Ingestion is metered as a volume, not as a number of spans or traces. This metric is tagged by `env` and `service` so you can spot which environments and services are contributing to the ingestion volume.
 
-このメトリクスはまた、`ingestion_reason` によってタグ付けされ、Datadog にスパンを送信する責任がある[取り込みメカニズム][5]を反映させることができます。これらのメカニズムは、Datadog Agent のトレーシングライブラリの中にネストされています。このディメンションの詳細については、[取り込み理由ダッシュボード][6]を参照してください。
+This metric is also tagged by `ingestion_reason`, reflecting which [ingestion mechanisms][5] are responsible for sending spans to Datadog. These mechanisms are nested in the tracing libraries of the Datadog Agent. For more information about this dimension, see the [Ingestion Reasons dashboard][6].
 
-`datadog.estimated_usage.apm.ingested_traces` メトリクスは、1 秒間にサンプリングされるリクエスト数を計測し、[ヘッドベースサンプリング][7]によってサンプリングされたトレースのみをカウントします。このメトリクスは `env` と `service` によってタグ付けされているので、どのサービスが最も多くのトレースを開始しているのかを特定することもできます。
+The `datadog.estimated_usage.apm.ingested_traces` metric measures the number of requests sampled per second, and only counts traces sampled by [head-based sampling][7]. This metric is also tagged by `env` and `service` so you can spot which services are starting the most traces.
 
-### Indexed Span
+### Indexed spans
 
-`datadog.estimated_usage.apm.indexed_spans` メトリクスを使用して、[タグベースの保持フィルター][2]でインデックス化されるスパン数を制御します。
+Use the `datadog.estimated_usage.apm.indexed_spans` metric to control the number of spans indexed by [tag-based retention filters][2].
 
-このメトリクスは `env` と `service` によってタグ付けされているので、どの環境とサービスがインデックス化の使用量に寄与しているのかを特定することができます。
+This metric is tagged by `env` and `service` so you can spot which environments and services are contributing to the indexing usage.
 
-## APM Traces Estimated Usage ダッシュボード
+## APM Traces Estimated Usage dashboard
 
-[APM Traces Usage ダッシュボード][8]には、大まかな KPI と追加の使用情報を表示する複数のウィジェットグループが含まれています。
+The [APM Traces Usage dashboard][8] contains several widget groups displaying high-level KPIs and additional usage information.
 
-{{< img src="tracing/trace_indexing_and_ingestion/usage_metrics/dashboard_apm_usage.png" style="width:100%;" alt="APM Estimated Usage ダッシュボード" >}}
+{{< img src="tracing/trace_indexing_and_ingestion/usage_metrics/dashboard_apm_usage.png" style="width:100%;" alt="APM Estimated Usage Dashboard" >}}
 
-このダッシュボードでは、以下の情報を見ることができます。
+In this dashboard, you can find information about:
 
-- グローバル使用量メトリクス
-- ホスト、Fargate、AWS Lambda など、APM が有効なインフラストラクチャー
-- `service`、`env`、`ingestion_reason` で区切られた取り込み量
-- `service` と `env` で区切られたインデックス化量
+- Global usage metrics
+- Infrastructure with APM enabled, including hosts, Fargate, and AWS Lambda
+- Ingestion volumes separated by `service`, `env`, and `ingestion_reason`
+- Indexing volumes separated by `service` and `env`
 
-## APM 取り込み理由ダッシュボード
+## APM Ingestion Reasons dashboard
 
-[APM 取り込み理由ダッシュボード][6]は、取り込み量の各ソースに関する洞察を提供します。各取り込み使用量メトリクスには、`ingestion_reason` ディメンションが付与されており、どの構成オプション (Datadog Agent 構成やトレーシングライブラリ構成) や製品 (RUM や Synthetic Testing など) が、最も多くの APM データを生成しているかを確認することができます。
+The [APM Ingestion Reasons dashboard][6] provides insights on each source of ingestion volume. Each ingestion usage metric is tagged with an `ingestion_reason` dimension, so you can see which configuration options (Datadog Agent configuration or tracing library configuration) and products (such as RUM or Synthetic Testing) are generating the most APM data.
 
-{{< img src="tracing/trace_indexing_and_ingestion/usage_metrics/dashboard_ingestion_reasons.png" style="width:100%;" alt="APM 取り込み理由ダッシュボード" >}}
+{{< img src="tracing/trace_indexing_and_ingestion/usage_metrics/dashboard_ingestion_reasons.png" style="width:100%;" alt="APM Ingestion Reasons Dashboard" >}}
 
-取り込みの理由ごとに、どの環境やサービスが全体のボリュームに最も影響を与えているかを知ることができます。
+For each ingestion reason, you can find out which environments and services are contributing the most to the overall volume.
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/tracing/trace_pipeline/ingestion_controls
-[2]: /ja/tracing/trace_pipeline/trace_retention/#retention-filters
+[1]: /tracing/trace_pipeline/ingestion_controls
+[2]: /tracing/trace_pipeline/trace_retention/#retention-filters
 [3]: https://www.datadoghq.com/pricing/?product=apm#apm
-[4]: /ja/account_management/billing/apm_tracing_profiler/
-[5]: /ja/tracing/trace_pipeline/ingestion_mechanisms/
+[4]: /account_management/billing/apm_tracing_profiler/
+[5]: /tracing/trace_pipeline/ingestion_mechanisms/
 [6]: https://app.datadoghq.com/dash/integration/apm_ingestion_reasons
-[7]: /ja/tracing/trace_pipeline/ingestion_mechanisms//#head-based-sampling
+[7]: /tracing/trace_pipeline/ingestion_mechanisms/#head-based-sampling
 [8]: https://app.datadoghq.com/dash/integration/apm_estimated_usage

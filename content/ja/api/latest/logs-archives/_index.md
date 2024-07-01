@@ -1,3 +1,3 @@
 ---
-title: ログアーカイブ
+title: Logs Archives
 ---

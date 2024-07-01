@@ -1,210 +1,211 @@
 ---
+title: Assigning Tags
+kind: documentation
+description: 'Learn how to assign tags in Datadog.'
 aliases:
-- /ja/agent/tagging
-- /ja/tagging/assigning_tags/
-description: Datadog でタグを割り当てる方法について説明します。
+    - /agent/tagging
+    - /tagging/assigning_tags/
 further_reading:
 - link: /getting_started/tagging/
   tag: Documentation
-  text: タグの概要
+  text: Getting started with tags
 - link: /getting_started/tagging/using_tags/
   tag: Documentation
-  text: Datadog でのタグの使用方法
-kind: ドキュメント
-title: タグの付け方
+  text: Learn how to use tags in Datadog
 ---
 
-## 概要
+## Overview
 
-タグ付けは、監視するマシンとメトリクスにクエリを実行するために Datadog 全体で使用されます。タグに基づく割り当てと絞り込みの機能がないと、環境内の問題を発見し、絞り込んで根本的な原因を見つけることが難しくなります。先に進む前に、Datadog での[タグの定義][1]方法を学習してください。
+Tagging is used throughout Datadog to query the machines and metrics you monitor. Without the ability to assign and filter based on tags, finding problems in your environment and narrowing them down enough to discover the true causes could be difficult. Learn how to [define tags][1] in Datadog before going further.
 
-タグはさまざまな方法で構成することができます。
+Tags can be configured in several different ways:
 
-- Datadog Agent [コンフィギュレーションファイル](#コンフィギュレーションファイル) または各インテグレーションのコンフィギュレーションファイル
-- Datadog [UI](#ui) 経由
-- Datadog [API](#api)
-- [DogStatsD](#dogstatsd)
+- In the Datadog Agent [configuration file](#configuration-file) or each individual integration configuration file
+- Through the Datadog [UI](#ui)
+- With the Datadog [API](#api)
+- With the [DogStatsD](#dogstatsd)
 
 {{< tabs >}}
-{{% tab "非コンテナ化環境" %}}
-非コンテナ化環境では、Agent が自動で[ホストタグ](#ホストタグ)を割り当て、インテグレーションからタグを継承します。これらのタグは、手動でタグ付け可能なその他のタグと同様に、[Datadog Agent コンフィギュレーションファイル](#コンフィギュレーションファイル)で構成可能です。{{% /tab %}}
+{{% tab "Non-containerized environments" %}}
+In non-containerized environments, the Agent automatically assigns the [host tag](#host-tags) and inherits tags from integrations. These tags, along with additional tags that you can manually add, are configured in the [Datadog Agent configuration file](#configuration-file).
+{{% /tab %}}
 
-{{% tab "コンテナ化環境" %}}
-コンテナ化環境では、Datadog で[オートディスカバリー][1]を使用することを推奨します。[統合サービスタグ付け][2]が可能となるため、すべての Datadog テレメトリーのコンフィギュレーションを管理する単体ポイントとして機能します。
+{{% tab "Containerized environments" %}}
+In containerized environments, Datadog recommends using [Autodiscovery][1] as it allows for [unified service tagging][2], the recommended way to achieve a single point of configuration across all of your Datadog telemetry.
 
-オートディスカバリーの目的は、任意のコンテナに対する Agent チェックの実行中に Datadog インテグレーションのコンフィギュレーションを適用することです。オートディスカバリーを使用すると、Datadog Agent は新しいコンテナで実行されているサービスを自動で識別し、対応するモニタリングのコンフィギュレーションを検索してメトリクスの収集を開始します。タグはその後、オートディスカバリーの[コンフィギュレーションテンプレート][3]内で構成することができます。
+The goal of Autodiscovery is to apply a Datadog integration configuration when running an Agent check against a given container. When using Autodiscovery, the Datadog Agent automatically identifies which services are running on this new container, looks for corresponding monitoring configuration, and starts to collect metrics. Tags can then be configured from within the Autodiscovery [configuration template][3].
 
-オートディスカバリーを使用しない場合、Agent は自動で[ホストタグ](#ホストタグ)を割り当て、非コンテナ化環境の場合と同様にインテグレーションからタグを継承します。これらのタグは、手動で追加されたタグと併せて、[Datadog Agent のコンフィギュレーションファイル](#コンフィギュレーションファイル)内で構成が可能です。
+If Autodiscovery is not in use, the Agent automatically assigns the [host tag](#host-tags) and inherits tags from integrations the same as within a non-containerized environments. These tags, along with manually added tags are configured in the [Datadog Agent configuration file](#configuration-file).
 
 
-[1]: /ja/getting_started/agent/autodiscovery/
-[2]: /ja/getting_started/tagging/unified_service_tagging
-[3]: /ja/getting_started/agent/autodiscovery/?tab=docker#integration-templates
+[1]: /getting_started/agent/autodiscovery/
+[2]: /getting_started/tagging/unified_service_tagging
+[3]: /getting_started/agent/autodiscovery/?tab=docker#integration-templates
 {{% /tab %}}
 {{< /tabs >}}
 
-## タグの割り当て方法
+## Methods to assign tags
 
-### 構成ファイル
+### Configuration file
 
 {{< tabs >}}
 {{% tab "Agent v6 & v7" %}}
 
-#### ファイルの場所
+#### File location
 
-Agent コンフィギュレーションファイル (`datadog.yaml`) は、Datadog Agent によって転送されるすべてのメトリクス、トレース、ログに適用されるホストタグの設定に使用されます。
+The Agent configuration file (`datadog.yaml`) is used to set host tags which apply to all metrics, traces, and logs forwarded by the Datadog Agent.
 
-Agent とともにインストールされる[インテグレーション][1]のタグは、Agent インストールの **conf.d** ディレクトリにある YAML ファイルで構成されます。コンフィギュレーションファイルの場所については、[Agent コンフィギュレーションファイル][2]を参照してください。
+Tags for the [integrations][1] installed with the Agent are configured with YAML files located in the **conf.d** directory of the Agent install. To locate the configuration files, see [Agent configuration files][2].
 
-#### YAML 形式
+#### YAML format
 
-YAML ファイルでは、`tags` キーの下の文字列のリストを使用してタグのリストを割り当てます。YAML では、リストは 2 つの異なるが機能的に同等の形式で定義されます。
+In YAML files, use a list of strings under the `tags` key to assign a list of tags. In YAML, lists are defined with two different yet functionally equivalent forms:
 
 ```yaml
-tags: ["<キー_1>:<値_1>", "<キー_2>:<値_2>", "<キー_3>:<値_3>"]
+tags: ["<KEY_1>:<VALUE_1>", "<KEY_2>:<VALUE_2>", "<KEY_3>:<VALUE_3>"]
 ```
 
-または
+or
 
 ```yaml
 tags:
-    - "<キー_1>:<値_1>"
-    - "<キー_2>:<値_2>"
-    - "<キー_3>:<値_3>"
+    - "<KEY_1>:<VALUE_1>"
+    - "<KEY_2>:<VALUE_2>"
+    - "<KEY_3>:<VALUE_3>"
 ```
 
-タグは `<キー>:<値>` のペアで割り当てることをお勧めしますが、キー（`<キー>`）のみで構成されるタグも使用できます。詳細については、[タグの定義][3]を参照してください。
+It is recommended to assign tags as `<KEY>:<VALUE>` pairs, but tags only consisting of keys (`<KEY>`) are also accepted. See [defining tags][3] for more details.
 
-#### ホストタグ
+#### Host tags
 
-ホスト名 (タグキー `host`) は、Datadog Agent によって[自動的に割り当てられます][4]。ホスト名をカスタマイズするには、Agent コンフィギュレーションファイル `datadog.yaml` を使用します。
+The hostname (tag key `host`) is [assigned automatically][4] by the Datadog Agent. To customize the hostname, use the Agent configuration file, `datadog.yaml`:
 
 ```yaml
-# ホスト名を設定します (デフォルト: 自動検出)
-# RFC-1123 に準拠する必要があり、以下のみが許可されます。
-# "A" ～ "Z"、"a" ～ "z"、"0" ～ "9"、ハイフン (-)
+# Set the hostname (default: auto-detected)
+# Must comply with RFC-1123, which permits only:
+# "A" to "Z", "a" to "z", "0" to "9", and the hyphen (-)
 hostname: mymachine.mydomain
 ```
 
-##### ホスト名の変更
+##### Changing the hostname
 
-* 古いホスト名は 2 時間にわたって UI に残存しますが、新しいメトリクスは表示されません。
-* 古いホスト名を持つホストからのデータは、API でクエリを実行できます。
-* 古いホスト名と新しいホスト名のグラフ メトリクスを 1 つのグラフに表示するには、[2 メトリクス間の数式][5]を使用します。
+* The old hostname remains in the UI for two hours but does not show new metrics.
+* Any data from hosts with the old hostname can be queried with the API.
+* To graph metrics with the old and new hostname in one graph, use [arithmetic between two metrics][5].
 
 
-[1]: /ja/getting_started/integrations/
-[2]: /ja/agent/configuration/agent-configuration-files/
-[3]: /ja/getting_started/tagging/#define-tags
-[4]: /ja/metrics/custom_metrics/dogstatsd_metrics_submission/#host-tag-key
-[5]: /ja/dashboards/querying/#arithmetic-between-two-metrics
+[1]: /getting_started/integrations/
+[2]: /agent/configuration/agent-configuration-files/
+[3]: /getting_started/tagging/#define-tags
+[4]: /metrics/custom_metrics/dogstatsd_metrics_submission/#host-tag-key
+[5]: /dashboards/querying/#arithmetic-between-two-metrics
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
-#### ファイルの場所
+#### File location
 
-Agent コンフィギュレーションファイル (`datadog.conf`) は、Datadog Agent によって転送されるすべてのメトリクス、トレース、ログに適用されるホストタグの設定に使用されます。
+The Agent configuration file (`datadog.conf`) is used to set host tags which apply to all metrics, traces, and logs forwarded by the Datadog Agent.
 
-Agent とともにインストールされる[インテグレーション][1]のタグは、Agent インストールの **conf.d** ディレクトリにある YAML ファイルで構成されます。コンフィギュレーションファイルの場所については、[Agent コンフィギュレーションファイル][2]を参照してください。
+Tags for the [integrations][1] installed with the Agent are configured with YAML files located in the **conf.d** directory of the Agent install. To locate the configuration files, see [Agent configuration files][2].
 
-#### YAML 形式
+#### YAML format
 
-YAML ファイルでは、`tags` キーの下の文字列のリストを使用してタグのリストを割り当てます。YAML では、リストは 2 つの異なるが機能的に同等の形式で定義されます。
+In YAML files, use a list of strings under the `tags` key to assign a list of tags. In YAML, lists are defined with two different yet functionally equivalent forms:
 
 ```yaml
-tags: <キー_1>:<値_1>, <キー_2>:<値_2>, <キー_3>:<値_3>
+tags: <KEY_1>:<VALUE_1>, <KEY_2>:<VALUE_2>, <KEY_3>:<VALUE_3>
 ```
 
-タグは `<キー>:<値>` のペアで割り当てることをお勧めしますが、キー（`<キー>`）のみで構成されるタグも使用できます。詳細については、[タグの定義][3]を参照してください。
+It is recommended to assign tags as `<KEY>:<VALUE>` pairs, but tags only consisting of keys (`<KEY>`) are also accepted. See [defining tags][3] for more details.
 
-#### ホストタグ
+#### Host tags
 
-ホスト名 (タグキー `host`) は、Datadog Agent によって[自動的に割り当てられます][4]。ホスト名をカスタマイズするには、Agent コンフィギュレーションファイル `datadog.conf` を使用します。
+The hostname (tag key `host`) is [assigned automatically][4] by the Datadog Agent. To customize the hostname, use the Agent configuration file, `datadog.conf`:
 
 ```yaml
-# ホスト名を設定します (デフォルト: 自動検出)
-# RFC-1123 に準拠する必要があり、以下のみが許可されます。
-# "A" ～ "Z"、"a" ～ "z"、"0" ～ "9"、ハイフン (-)
+# Set the hostname (default: auto-detected)
+# Must comply with RFC-1123, which permits only:
+# "A" to "Z", "a" to "z", "0" to "9", and the hyphen (-)
 hostname: mymachine.mydomain
 ```
 
-##### ホスト名の変更
+##### Changing the hostname
 
-* 古いホスト名は 2 時間 UI に残りますが、新しいメトリクスは表示されません。
-* 古いホスト名を持つホストからのデータは、API でクエリを実行できます。
-* 古いホスト名と新しいホスト名のグラフ メトリクスを 1 つのグラフに表示するには、[2 メトリクス間の数式][5]を使用します。
+* The old hostname remains in the UI for 2 hours, but does not show new metrics.
+* Any data from hosts with the old hostname can be queried with the API.
+* To graph metrics with the old and new hostname in one graph, use [arithmetic between two metrics][5].
 
 
-[1]: /ja/getting_started/integrations/
-[2]: /ja/agent/configuration/agent-configuration-files/
-[3]: /ja/getting_started/tagging/#define-tags
-[4]: /ja/metrics/custom_metrics/dogstatsd_metrics_submission/#host-tag-key
-[5]: /ja/dashboards/querying/#arithmetic-between-two-metrics
+[1]: /getting_started/integrations/
+[2]: /agent/configuration/agent-configuration-files/
+[3]: /getting_started/tagging/#define-tags
+[4]: /metrics/custom_metrics/dogstatsd_metrics_submission/#host-tag-key
+[5]: /dashboards/querying/#arithmetic-between-two-metrics
 {{% /tab %}}
 {{< /tabs >}}
 
-#### インテグレーションの継承
+#### Integration inheritance
 
-タグの付け方で最も効率的な方法は、インテグレーションの継承に依存することです。AWS インスタンス、Chef レシピ、およびその他のインテグレーションに割り当てるタグは、Datadog に送信するホストとメトリクスによって自動的に継承されます。
+The most efficient method for assigning tags is to rely on integration inheritance. Tags you assign to your AWS instances, Chef recipes, and other integrations are automatically inherited by hosts and metrics you send to Datadog.
 
-コンテナ化環境では、[統合サービスタグ付け][2]のドキュメントに従って、すべての Datadog テレメトリーのコンフィギュレーションを管理する単一ポイントを構築することをお勧めします。
+For containerized environments, it is recommended to follow the [unified service tagging][2] documentation to achieve a single point of configuration across all of your Datadog telemetry.
 
-##### クラウドインテグレーション
+##### Cloud integrations
 
-[クラウドインテグレーション][3]は認証ベースです。Datadog では、メインのクラウドインテグレーションタイル（AWS、Azure、Google Cloud など）を使用し、可能な場合は [Agent をインストール][4]することを推奨しています。**注**: Agent のみの使用を選択した場合、一部のインテグレーションタグは利用できません。
+[Cloud integrations][3] are authentication based. Datadog recommends using the main cloud integration tile (AWS, Azure, Google Cloud, etc.) and [installing the Agent][4] where possible. **Note**: If you choose to use the Agent only, some integration tags are not available.
 
-##### ウェブインテグレーション
+##### Web integrations
 
-[ウェブインテグレーション][5]は認証ベースです。メトリクスは API 呼び出しで収集されます。**注**: `CamelCase` タグは、Datadog によってアンダースコアに変換されます（例: `TestTag` --> `test_tag`）。
+[Web integrations][5] are authentication based. Metrics are collected with API calls. **Note**: `CamelCase` tags are converted to underscores by Datadog, for example `TestTag` --> `test_tag`.
 
-#### 環境変数
+#### Environment variables
 
-コンテナ化された Datadog Agent をインストールしたら、Agent のメインコンフィギュレーションファイルにある環境変数 `DD_TAGS を使用してホストタグを設定します。
+After installing the containerized Datadog Agent, you can set your host tags using the environment variable `DD_TAGS` in your Agents main configuration file.
 
-Datadog は [Docker、Kubernetes、ECS、Swarm、Mesos、Nomad、Rancher][6] から一般的なタグを自動的に収集します。さらに多くのタグを抽出するには、次のオプションを使用します。
+Datadog automatically collects common tags from [Docker, Kubernetes, ECS, Swarm, Mesos, Nomad, and Rancher][6]. To extract even more tags, use the following options:
 
-| 環境変数               | 説明                                                                                             |
+| Environment Variable               | Description                                                                                             |
 |------------------------------------|---------------------------------------------------------------------------------------------------------|
-| `DD_CONTAINER_LABELS_AS_TAGS`      | コンテナラベルを抽出します。この環境は、古い `DD_DOCKER_LABELS_AS_TAGS` 環境と同等です。             |
-| `DD_CONTAINER_ENV_AS_TAGS`         | コンテナ環境変数を抽出します。この環境は、古い `DD_DOCKER_ENV_AS_TAGS` 環境と同等です。 |
-| `DD_KUBERNETES_POD_LABELS_AS_TAGS` | ポッドラベルを抽出します                                                                                      |
-| `DD_CHECKS_TAG_CARDINALITY`        | チェックメトリクスにタグを追加 (低、オーケストレーター、高)                                                     |
-| `DD_DOGSTATSD_TAG_CARDINALITY`     | カスタムメトリクスにタグを追加 (低、オーケストレーター、高)                                                    |
+| `DD_CONTAINER_LABELS_AS_TAGS`      | Extract container labels. This env is equivalent to the old `DD_DOCKER_LABELS_AS_TAGS` env.             |
+| `DD_CONTAINER_ENV_AS_TAGS`         | Extract container environment variables. This env is equivalent to the old `DD_DOCKER_ENV_AS_TAGS` env. |
+| `DD_KUBERNETES_POD_LABELS_AS_TAGS` | Extract pod labels                                                                                      |
+| `DD_CHECKS_TAG_CARDINALITY`        | Add tags to check metrics (low, orchestrator, high)                                                     |
+| `DD_DOGSTATSD_TAG_CARDINALITY`     | Add tags to custom metrics (low, orchestrator, high)                                                    |
 
-**例:**
+**Examples:**
 
 ```bash
 DD_KUBERNETES_POD_LABELS_AS_TAGS='{"app":"kube_app","release":"helm_release"}'
 DD_CONTAINER_LABELS_AS_TAGS='{"com.docker.compose.service":"service_name"}'
 ```
 
-`DD_KUBERNETES_POD_LABELS_AS_TAGS` を使用する場合、次の形式のワイルドカードを使用できます。
+When using `DD_KUBERNETES_POD_LABELS_AS_TAGS`, you can use wildcards in the format:
 
 ```text
 {"foo": "bar_%%label%%"}
 ```
 
-たとえば、`{"app*", "kube_%%label%%"}` は、ラベル `application` のタグ名 `kube_application` に解決されます。さらに、`{"*": "kube_%%label%%"}` は、すべてのポッドラベルを `kube_` で始まるタグとして追加します。
+For example, `{"app*": "kube_%%label%%"}` resolves to the tag name `kube_application` for the label `application`. Further, `{"*": "kube_%%label%%"}` adds all pod labels as tags prefixed with `kube_`.
 
-Docker Swarm `docker-compose.yaml` ファイル内で `DD_CONTAINER_LABELS_AS_TAGS` 変数を使用する場合は、次の例のように、アポストロフィーを削除します。
+When using the `DD_CONTAINER_LABELS_AS_TAGS` variable within a Docker Swarm `docker-compose.yaml` file, remove the apostrophes, for example:
 
 ```yaml
 - DD_CONTAINER_LABELS_AS_TAGS={"com.docker.compose.service":"service_name"}
 ```
 
-Docker コンテナにラベルを追加する際は、`docker-compose.yaml` ファイル内で `labels:` キーワードをどこに配置するかが重要となります。スムーズに設定が進むよう、[Docker の統合サービスタグ付け][2]に関するドキュメントを参照してください。
+When adding labels to Docker containers, the placement of the `labels:` keyword inside the `docker-compose.yaml` file is important. To avoid issues, follow the [Docker unified service tagging][2] documentation.
 
- このコンフィギュレーションの外部でコンテナにラベル付けを行う必要がある場合は、`labels:` キーワードを `services:` セクションの **内部**に配置します。`deploy:` セクション内に**含めない**よう注意してください。`labels:` キーワードを `deploy:` セクション内に配置するのは、サービスに対してラベル付けが必要な場合のみです。この配置が正しくないと、Datadog Agent はコンテナからラベルを抽出することができません。
+ If the container needs to be labeled outside of this configuration, place the `labels:` keyword **inside** the `services:` section **not** inside the `deploy:` section. Place the `labels:` keyword inside the `deploy:` section only when the service needs to be labeled. The Datadog Agent does not have any labels to extract from the containers without this placement.
 
-以下は `docker-compose.yaml` ファイル内でこの設定を行う場合のサンプルです。この例では `myapplication:` セクション、`my.custom.label.project`、`my.custom.label.version` のそれぞれに固有の値が割り振られます。`datadog:` セクションの `DD_CONTAINER_LABELS_AS_TAGS` 環境変数を使用してラベルを抽出し、`myapplication` コンテナ用のタグを生成します。
+Below is a sample, working `docker-compose.yaml` file that shows this. In the example below, the labels in the `myapplication:` section, `my.custom.label.project` and `my.custom.label.version` each have unique values. Using the `DD_CONTAINER_LABELS_AS_TAGS` environment variable in the `datadog:` section extracts the labels and produces these tags for the `myapplication` container:
 
-`myapplication` コンテナ内のラベル: `my.custom.label.project` `my.custom.label.version`
+Inside the `myapplication` container the labels are: `my.custom.label.project` and `my.custom.label.version`
 
-Agent がコンテナからラベルを抽出すると、タグは次のようになります。
+After the Agent extracts the labels from the container the tags are:
 `projecttag:projectA`
 `versiontag:1`
 
-**サンプル docker-compose.yaml:**
+**Sample docker-compose.yaml:**
 
 ```yaml
 services:
@@ -235,85 +236,85 @@ services:
       replicas: 1
 ```
 
-変数は、カスタムの `datadog.yaml` で定義するか、環境変数で JSON マップとして設定します。マップキーはソース (`label/envvar`) 名、マップ値は Datadog タグ名です。
+Either define the variables in your custom `datadog.yaml`, or set them as JSON maps in these environment variables. The map key is the source (`label/envvar`) name, and the map value is the Datadog tag name.
 
-##### タグカーディナリティ
+##### Tags cardinality
 
-タグカーディナリティを設定する環境変数は、`DD_CHECKS_TAG_CARDINALITY` と `DD_DOGSTATSD_TAG_CARDINALITY` の 2 つあります。DogStatsD の料金設定が異なるため、それに応じて DogStatsD タグカーディナリティも細かく構成できるように分けられています。それ以外は、これらの変数は同じように機能します。使用できる値は、`low`、`orchestrator`、または `high` です。どちらもデフォルトは `low` で、ホストレベルのタグを取り込みます。
+There are two environment variables that set tag cardinality: `DD_CHECKS_TAG_CARDINALITY` and `DD_DOGSTATSD_TAG_CARDINALITY`. Because DogStatsD is priced differently, the DogStatsD tag cardinality setting is separated to provide the opportunity for finer configuration. Otherwise, these variables function the same way: they can have values `low`, `orchestrator`, or `high`. They both default to `low`, which pulls in host-level tags.
 
-カーディナリティによって、[Kubernetes と OpenShift][7] と [Docker、Rancher、Mesos][8] では異なるタグがすぐに使えるように用意されています。ECS と Fargate では、変数を `orchestrator` に設定すると、`task_arn` タグが追加されます。
+Depending on the cardinality, there is a different set of out-of-the box tags for [Kubernetes and OpenShift][7], and for [Docker, Rancher, and Mesos][8]. For ECS and Fargate, setting the variable to `orchestrator` adds the `task_arn` tag.
 
-#### トレース
+#### Traces
 
-Datadog トレーサーは環境変数、システムプロパティ、またはコード内のコンフィギュレーションを通じて構成することができます。 各トレーサーのタグ付けオプションとコンフィギュレーションの情報は、[Datadog トレーシング設定][9]に関するドキュメントを参照してください。[統合サービスタグ付け][2]のドキュメントでも、統合サービスタグ付け用のトレーサーを構成する方法をご覧いただけます。
+The Datadog tracer can be configured with environment variables, system properties, or through configuration in code. The [Datadog tracing setup][9] documentation has information on tagging options and configuration for each tracer. You can also follow the [unified service tagging][2] documentation to configure your tracer for unified service tagging.
 
-使用するトレーサーの種類に関わらず、スパンメタデータはタイプ化された 3 つの構造を考慮する必要があります。ツリーの各ノードは `.` で分割され、各ノードのタイプは 1 つのみとなります。
+Regardless of the tracer used, span metadata must respect a typed tree structure. Each node of the tree is split by a `.` and is of a single type.
 
-たとえば、ノードをオブジェクト (およびサブノード) と文字列の両方に設定することはできません。
+For instance, a node can't be both an object (with sub-nodes) and a string:
 ```json
 {
   "key": "value",
   "key.subkey": "value_2"
 }
 ```
-上記のスパンメタデータは、`key` の値が文字列 (`"value"`) を参照できないこと、またサブツリー (`{"subkey": "value_2"}`) であることから無効となります。
+The span metadata above is invalid since the value of `key` cannot reference a string (`"value"`) and also a subtree (`{"subkey": "value_2"}`).
 
 ### UI
 
 {{< tabs >}}
 {{% tab "Host Map" %}}
 
-[Host Map ページ][1]を使って UI でホストタグを割り当てます。ページの下部にホストオーバーレイを表示するには、六角形（ホスト）をクリックします。次に、*User* セクションで **Add Tags** ボタンをクリックします。タグをカンマで区切って入力し、**Save Tags** をクリックします。UI で行ったホストタグの変更が適用されるまで最大 5 分かかることがあります。
+Assign host tags in the UI using the [Host Map page][1]. Click on any hexagon (host) to show the host overlay on the bottom of the page. Then, under the *User* section, click the **Add Tags** button. Enter the tags as a comma separated list, then click **Save Tags**. Changes made to host tags in the UI may take up to five minutes to apply.
 
-{{< img src="tagging/assigning_tags/host_add_tags.png" alt="ホストの詳細情報が開かれ、Add Tags ボタンがハイライト表示されているホストマップ" style="width:80%;">}}
+{{< img src="tagging/assigning_tags/host_add_tags.png" alt="Host map with an host details opened highlighting Add Tags button" style="width:80%;">}}
 
 
-[1]: /ja/infrastructure/hostmap/
+[1]: /infrastructure/hostmap/
 {{% /tab %}}
 {{% tab "Infrastructure List" %}}
 
-[Infrastructure List ページ][1]を使って UI でホストタグを割り当てます。ページの右にホストオーバーレイを表示するには、ホストをクリックします。次に、*User* セクションで **Add Tags** ボタンをクリックします。タグをカンマ区切りリストで入力し、**Save Tags** をクリックします。UI でホストタグに加えた変更は、適用されるまでに最大 5 分かかる場合があります。タグを追加したら、タグが UI に表示されていることを確認してから、さらにタグを追加してください。
+Assign host tags in the UI using the [Infrastructure List page][1]. Click on any host to show the host overlay on the right of the page. Then, under the *User* section, click the **Add Tags** button. Enter the tags as a comma separated list, then click **Save Tags**. Changes made to host tags in the UI may take up to five minutes to apply. After you add tags, ensure they are visible in the UI before attempting to add more tags.
 
-{{< img src="tagging/assigning_tags/infrastructure_add_tags.png" alt="インフラストラクチャーの詳細パネルが開かれ、Add Tags ボタンがハイライト表示されているインフラストラクチャーリスト" style="width:80%;">}}
+{{< img src="tagging/assigning_tags/infrastructure_add_tags.png" alt="Infrastructure List with an Infrastructure details panel opened highlighting Add Tags button" style="width:80%;">}}
 
 
-[1]: /ja/infrastructure/
+[1]: /infrastructure/
 {{% /tab %}}
 {{% tab "Monitors" %}}
 
-[Manage Monitors][1] ページで、各モニターの隣にあるチェックボックスをオンにしてタグを追加します (1 つ以上のモニターを選択します)。**Edit Tags** ボタンをクリックします。タグを入力するか、以前に使用したタグを選択します。次に **Add Tag `tag:name`** または **Apply Changes** をクリックします。以前にタグを追加してある場合は、タグチェックボックスを使用して一度に複数のタグを割り当てることができます。詳しくは、[モニターの管理ドキュメント][2]を参照してください。
+From the [Manage Monitors][1] page, select the checkbox next to each monitor to add tags (select one or multiple monitors). Click the **Edit Tags** button. Enter a tag or select one used previously. Then click **Add Tag `tag:name`** or **Apply Changes**. If tags were added previously, multiple tags can be assigned at once using the tag checkboxes. For more information, see the [Manage Monitors documentation][2].
 
-モニターを作成する場合は、ステップ 4 *Say what's happening* または *Notify your Team* でモニタータグを割り当てます。
+When creating a monitor, assign monitor tags under step 4 *Say what's happening* or *Notify your Team*:
 
-{{< img src="monitors/notifications/notifications_add_required_tags.png" alt="ポリシータグ構成の表示。'Policy tags' の下には、'Select value' のドロップダウンの横に、cost_center、product_id、env の 3 つのタグの例が示されています。" style="width:80%;" >}}
+{{< img src="monitors/notifications/notifications_add_required_tags.png" alt="View of policy tag configuration. Underneath 'Policy tags' are three example tags, cost_center, product_id, and env, next to a 'Select value' dropdown." style="width:80%;" >}}
 
 [1]: https://app.datadoghq.com/monitors/manage
-[2]: /ja/monitors/manage/
+[2]: /monitors/manage/
 {{% /tab %}}
 {{% tab "Distribution Metrics" %}}
 
-最大 10 個のタグの許可リストをメトリクスに適用することにより、[Distribution Metrics][1] 内でパーセンタイル集計を作成します。これにより、タグ値の潜在的にクエリ可能な組み合わせの時系列が作成されます。ディストリビューションメトリクスから出力されるカスタムメトリクスと時系列のカウントの詳細については、[カスタムメトリクス][2]を参照してください。
+Create percentile aggregations within [Distribution Metrics][1] by applying an allow list of up to ten tags to a metric. This creates a timeseries for every potentially queryable combination of tag values. For more information on counting custom metrics and timeseries emitted from distribution metrics, see [Custom Metrics][2].
 
-**最大 10 個のタグを適用します。除外タグは使用できません**。
+**Apply up to ten tags. Exclusionary tags are not accepted**:
 
-{{< img src="tagging/assigning_tags/global_metrics_selection.png" alt="モニタータグを作成" style="width:80%;">}}
+{{< img src="tagging/assigning_tags/global_metrics_selection.png" alt="Create Monitor Tags" style="width:80%;">}}
 
-[1]: /ja/metrics/distributions/
-[2]: /ja/metrics/custom_metrics/
+[1]: /metrics/distributions/
+[2]: /metrics/custom_metrics/
 {{% /tab %}}
 {{% tab "Integrations" %}}
 
-[AWS][1] インテグレーション タイルでは、アカウント レベルですべてのメトリクスに追加のタグを割り当てることができます。`<KEY>:<VALUE>` の形式で、タグのカンマ区切りのリストを使用します。
+The [AWS][1] integration tile allows you to assign additional tags to all metrics at the account level. Use a comma separated list of tags in the form `<KEY>:<VALUE>`.
 
-{{< img src="tagging/assigning_tags/integrationtags.png" alt="AWS タグ" style="width:80%;">}}
+{{< img src="tagging/assigning_tags/integrationtags.png" alt="AWS Tags" style="width:80%;">}}
 
-[1]: /ja/integrations/amazon_web_services/
+[1]: /integrations/amazon_web_services/
 {{% /tab %}}
-{{% tab "サービスレベル目標" %}}
+{{% tab "Service Level Objectives" %}}
 
-SLO を作成する場合は、ステップ 3 *Add name and tags* でタグを割り当てます。
+When creating an SLO, assign tags under step 3 *Add name and tags*:
 
-{{< img src="tagging/assigning_tags/slo_individual_tags.png" alt="SLO タグを作成" style="width:80%;">}}
+{{< img src="tagging/assigning_tags/slo_individual_tags.png" alt="Create SLO Tags" style="width:80%;">}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -323,52 +324,52 @@ SLO を作成する場合は、ステップ 3 *Add name and tags* でタグを�
 {{< tabs >}}
 {{% tab "Assignment" %}}
 
-[Datadog API][1] では、タグはさまざまな方法で割り当てることができます。これらのセクションへのリンクは、以下のリストを参照してください。
+Tags can be assigned in various ways with the [Datadog API][1]. See the list below for links to those sections:
 
-* [チェック実行のポスト][1]
-* [イベントのポスト][2]
-* [AWS インテグレーション][3]
-* [時系列ポイントのポスト][4]
-* モニターの[作成][5]または[編集][6]
-* ホストタグの[追加][7]または[更新][8]
-* [トレースの送信][9]
-* サービスレベル目標の[作成][10]または[更新][11]
+* [Post a check run][1]
+* [Post an event][2]
+* [AWS Integration][3]
+* [Post timeseries point][4]
+* [Create][5] or [Edit][6] a monitor
+* [Add][7] or [Update][8] host tags
+* [Send traces][9]
+* [Create][10] or [Update][11] a Service Level Objective
 
-[1]: /ja/api/v1/service-checks/#submit-a-service-check
-[2]: /ja/api/v1/events/#post-an-event
-[3]: /ja/api/v1/aws-integration/
-[4]: /ja/api/v1/metrics/#submit-metrics
-[5]: /ja/api/v1/monitors/#create-a-monitor
-[6]: /ja/api/v1/monitors/#edit-a-monitor
-[7]: /ja/api/v1/tags/#add-tags-to-a-host
-[8]: /ja/api/v1/tags/#update-host-tags
-[9]: /ja/tracing/guide/send_traces_to_agent_by_api/
-[10]: /ja/api/v1/service-level-objectives/#create-a-slo-object
-[11]: /ja/api/v1/service-level-objectives/#update-a-slo
+[1]: /api/v1/service-checks/#submit-a-service-check
+[2]: /api/v1/events/#post-an-event
+[3]: /api/v1/aws-integration/
+[4]: /api/v1/metrics/#submit-metrics
+[5]: /api/v1/monitors/#create-a-monitor
+[6]: /api/v1/monitors/#edit-a-monitor
+[7]: /api/v1/tags/#add-tags-to-a-host
+[8]: /api/v1/tags/#update-host-tags
+[9]: /tracing/guide/send_traces_to_agent_by_api/
+[10]: /api/v1/service-level-objectives/#create-a-slo-object
+[11]: /api/v1/service-level-objectives/#update-a-slo
 {{% /tab %}}
 {{% tab "Example" %}}
 
-Datadog 内でのタグ付けは、メトリクスを収集する強力な方法です。簡単な例として、Web サイト (example.com) の次のメトリクスの合計を探しているとします。
+Tagging within Datadog is a powerful way to gather your metrics. For a quick example, perhaps you're looking for a sum of the following metrics coming from your website (example.com):
 
 ```text
 Web server 1: api.metric('page.views', [(1317652676, 100), ...], host="example_prod_1")
 Web server 2: api.metric('page.views', [(1317652676, 500), ...], host="example_prod_2")
 ```
 
-Datadog は、タグ `domain:example.com` を追加し、ホスト名を省略することをお勧めします（Datadog API がホスト名を自動的に決定します）。
+Datadog recommends adding the tag `domain:example.com` and leaving off the hostname (the Datadog API determines the hostname automatically):
 
 ```text
 Web server 1: api.metric('page.views', [(1317652676, 100), ...], tags=['domain:example.com'])
 Web server 2: api.metric('page.views', [(1317652676, 500), ...], tags=['domain:example.com'])
 ```
 
-`domain:example.com` タグで、複数のホストのページビューを合計できます。
+With the `domain:example.com` tag, the page views can be summed across hosts:
 
 ```text
 sum:page.views{domain:example.com}
 ```
 
-ホストによって分割するには、次のようにします。
+To get a breakdown by host, use:
 
 ```text
 sum:page.views{domain:example.com} by {host}
@@ -379,35 +380,35 @@ sum:page.views{domain:example.com} by {host}
 
 ### DogStatsD
 
-[DogStatsD][9] に送信したタグをメトリクス、イベント、サービスチェックに追加します。たとえば、アルゴリズムのバージョンでタイマー メトリクスをタグ付けして、2 つのアルゴリズムのパフォーマンスを比較します。
+Add tags to any metric, event, or service check you send to [DogStatsD][9]. For example, compare the performance of two algorithms by tagging a timer metric with the algorithm version:
 
 ```python
 
 @statsd.timed('algorithm.run_time', tags=['algorithm:one'])
 def algorithm_one():
-    # 何らかの処理 ...
+    # Do fancy things here ...
 
 @statsd.timed('algorithm.run_time', tags=['algorithm:two'])
 def algorithm_two():
-    # 何らかの処理 (速度を比較) ...
+    # Do fancy things (maybe faster?) here ...
 ```
 
-**注**: タグ付けは、StatsD の [Datadog 固有の拡張機能][10]です。
+**Note**: Tagging is a [Datadog-specific extension][10] to StatsD.
 
-`host` タグを DogStatsD メトリクスに割り当てる場合は、特別な考慮事項が必要です。ホスト タグ キーの詳細については、[DogStatsD セクション][11]を参照してください。
+Special consideration is necessary when assigning the `host` tag to DogStatsD metrics. For more information on the host tag key, see the [DogStatsD section][11].
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/getting_started/tagging/#define-tags
-[2]: /ja/getting_started/tagging/unified_service_tagging
-[3]: /ja/integrations/#cat-cloud
-[4]: /ja/getting_started/agent/#setup
-[5]: /ja/integrations/#cat-web
-[6]: /ja/agent/docker/?tab=standard#tagging
-[7]: /ja/agent/kubernetes/tag/?tab=containerizedagent#out-of-the-box-tags
-[8]: /ja/agent/docker/tag/?tab=containerizedagent#out-of-the-box-tagging
-[9]: /ja/tracing/setup/
-[10]: /ja/developers/dogstatsd/
-[11]: /ja/developers/community/libraries/
+[1]: /getting_started/tagging/#define-tags
+[2]: /getting_started/tagging/unified_service_tagging
+[3]: /integrations/#cat-cloud
+[4]: /getting_started/agent/#setup
+[5]: /integrations/#cat-web
+[6]: /agent/docker/?tab=standard#tagging
+[7]: /agent/kubernetes/tag/?tab=containerizedagent#out-of-the-box-tags
+[8]: /agent/docker/tag/?tab=containerizedagent#out-of-the-box-tagging
+[9]: /tracing/setup/
+[10]: /developers/dogstatsd/
+[11]: /developers/community/libraries/

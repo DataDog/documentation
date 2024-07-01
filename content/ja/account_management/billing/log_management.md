@@ -1,43 +1,44 @@
 ---
-title: ログ管理の請求
+title: Log Management Billing
 ---
-## 料金
 
-月末に、インデックス化されたログイベントの総数が Datadog により計算されます。
+## Pricing
 
-- 総数が契約量以下の場合、請求額は変わりません。
-- 契約量を超過した場合は、契約量を差し引いた**オンデマンドの使用量**に対して 50% 増の料金が請求されます。
+At the end of the month, Datadog computes the total number of log events that have been indexed:
 
-### オンデマンド
+- If you are below commitment, your bill stays the same.
+- If you over-consume, the committed amount is subtracted and **on demand usage** is charged with a 50% premium.
 
-Datadog ログ管理を使用するお客様は、インデックス化されたログイベントについて 1 か月の契約量を定めます。ただし、トラブルが発生している間は、ログ数が急増し、契約量を上回る可能性があります。インフラストラクチャーの健全性を常に可視化しておくことが重要なため、1 か月の契約量の制限は受けません。
+### On demand
 
-契約量は月単位なので、1 日だけログイベントが過剰に生成されても、月平均の 1 日のログ消費量が契約の予想量と変わらない場合、使用量の超過は発生しません。
+With Datadog log management, you define a monthly commitment on indexed log events. However, during troubling times the number of logs can spike and you may go above your commitment. Because it's important to keep visibility on your infrastructure health, you are not limited to your monthly commitment.
 
-## ログイベントの追跡
+Since commitments are monthly, if you over-generate log events for 1 day it may not cause overuse if your average daily log consumption is close to expectations for your commitment.
 
-Datadog に送信されたログイベントの数は、複数箇所で確認できます。
+## Tracking log events
 
-1. [使用量ページ][1]には、月間累計と `Indexed Logs` という名前のグラフがあり、インデックス付きログイベントの 1 時間ごとの数が示されます。
+There are several places where you can see the number of log events you have sent to Datadog.
 
-2. [構成ページ][2]では、インデックスをダブルクリックすると、この 2 日間にインデックス化されたログイベントの数が表示されます。
+1. On the [Usage page][1], there is a Month-to-Date and a graph named `Indexed Logs` and which shows the hourly number of indexed log events:
 
-    {{< img src="account_management/billing/log-events02.png" alt="ログイベント" >}}
+2. On the [Configuration page][2], double-click on an index to see the number of log events that were indexed in the past couple days.
 
-3. [ログエクスプローラー][3]では、タイムフレームを変更すると、リストの先頭でログイベントの数をチェックできます。
+    {{< img src="account_management/billing/log-events02.png" alt="Log Events" >}}
 
-    {{< img src="account_management/billing/log-events03.png" alt="ログイベント" >}}
+3. In the [Log Explorer][3], change the time-frame and check the count at the top of the list:
 
-ファセットを使用して、ログイベントによって定義された属性別またはタグ別にログ数を確認することもできます。これは、多数のデータを生成しているホスト、サービス、エンドポイントなどを特定するのに役立ちます。
+    {{< img src="account_management/billing/log-events03.png" alt="Log Events" >}}
 
-## トラブルシューティング
+You can also use facets to see log count by any attribute or tag defined by your log events. This helps to identify which host, service, endpoint, etc., generate the most data.
 
-技術的な質問については、[Datadog のサポートチーム][4]にお問い合わせください。
+## Troubleshooting
 
-課金に関するご質問は、[カスタマーサクセス][5]マネージャーにお問い合わせください。
+For technical questions, contact [Datadog support][4].
+
+For billing questions, contact your [Customer Success][5] Manager.
 
 [1]: https://app.datadoghq.com/account/usage/hourly
 [2]: https://app.datadoghq.com/logs/pipelines
 [3]: https://app.datadoghq.com/logs
-[4]: /ja/help/
+[4]: /help/
 [5]: mailto:success@datadoghq.com

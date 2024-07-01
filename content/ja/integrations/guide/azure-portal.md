@@ -1,323 +1,323 @@
 ---
+title: Managing the Azure Native Integration
+kind: guide
 further_reading:
-- link: /integrations/azure/
-  tag: ドキュメント
-  text: Azure インテグレーション
-- link: https://www.datadoghq.com/blog/azure-datadog-partnership
-  tag: ブログ
-  text: Microsoft とのパートナーシップにより、Datadog を Azure Portal でネイティブに利用可能に
-- link: https://www.datadoghq.com/blog/monitor-enterprise-azure-environments-with-datadog/
-  tag: ブログ
-  text: Datadog でエンタープライズ規模の Azure 環境の監視を数分で可能にします
-kind: ガイド
-title: Azure Native インテグレーションの管理
+  - link: /integrations/azure/
+    tag: Documentation
+    text: Azure integration
+  - link: "https://www.datadoghq.com/blog/azure-datadog-partnership"
+    tag: Blog
+    text: Microsoft partnership embeds Datadog natively in the Azure portal
+  - link: "https://www.datadoghq.com/blog/monitor-enterprise-azure-environments-with-datadog/"
+    tag: Blog
+    text: Enable monitoring for enterprise-scale Azure environments in minutes with Datadog
 ---
 
 <div class="alert alert-warning">
-  本ガイドは、Datadog リソースと Azure Native のインテグレーションを管理するためのものです。
+  This guide is for managing the Azure Native integration with the Datadog resource.
 </div>
 
-このガイドは、Datadog リソースを使用して Azure ポータルで Azure と Datadog のインテグレーションを管理するためのものです。Azure の Datadog リソースは、Datadog 組織と Azure 環境の間の接続を表します。Datadog リソースは、監視したい数のサブスクリプションをリンクするように構成することができます。このガイドに進む前に、Azure で [Datadog リソースを作成][1]してください。
+This guide is for managing the integration between Azure and Datadog in the Azure portal using the Datadog resource. The Datadog resource in Azure represents the connection between your Datadog organization and your Azure environment. You can configure a Datadog resource to link as many subscriptions as you wish to monitor. [Create a Datadog resource][1] in Azure before proceeding with this guide.
 
-Datadog リソースを使用すると、関連付けられた Azure サブスクリプション内で以下を管理できます。
-- Datadog リソースのスコープを表示または変更し、監視するサブスクリプションを含める
-- Azure メトリクスとプラットフォームログのコレクションを構成します
-- メトリクスとログを送信する Azure リソースを確認します
-- API キーを表示し、Datadog リソース Agent のデプロイのキーのデフォルトを設定します
-- Datadog VM Agent を Azure VM にデプロイし、実行中の Agent に関する詳細を表示します
-- Datadog .NET 拡張機能を Azure Web Apps にデプロイし、インストールされている拡張機能の詳細を表示します
-- シングルサインオンを再構成します
-- Datadog オーガニゼーションの請求プランを変更します (Azure Marketplace のみ)
-- Azure インテグレーションを有効または無効にします
-- Datadog リソースを削除します
+With the Datadog resource, you can manage the following within the associated Azure subscription:
+- View or modify the scope of the Datadog resource to include the subscriptions to monitor
+- Configure the collection of Azure metrics and platform logs
+- Verify the Azure resources sending metrics and logs
+- View API keys and set the key default for your Datadog resource Agent deployments
+- Deploy the Datadog VM Agent to your Azure VMs and view details about running Agents
+- Deploy the Datadog .NET extension to your Azure Web Apps and view details about installed extensions
+- Reconfigure single sign-on
+- Change the billing plan for your Datadog organization (Azure Marketplace only)
+- Enable or disable the Azure integration
+- Delete the Datadog resource
 
-このページでは、Azure Portal の体験について説明します。CLI を使用する場合は、[Datadog 用 Azure CLI][2] を参照してください。
+This page describes the Azure Portal experience. If you prefer to use CLI, see the [Azure CLI for Datadog][2].
 
-## 概要
+## Overview
 
-左側のサイドバーで **Overview** を選択して、Datadog リソースの情報を表示します。
+Select **Overview** in the left sidebar to view information for your Datadog resource.
 
-{{< img src="integrations/guide/azure_portal/resource-overview.png" alt="左のナビバーで Overview がハイライトされた Azure ポータル" responsive="true" style="width:100%;">}}
+{{< img src="integrations/guide/azure_portal/resource-overview.png" alt="The Azure portal with Overview highlighted in the left nav bar" responsive="true" style="width:100%;">}}
 
-### 重要な情報
+### Essentials
 
-概要ページには、リソースグループ名、場所 (地域)、サブスクリプション、タグ、Datadog 組織リンク、ステータス、料金プラン、請求期間など、Datadog リソースに関する重要な情報が表示されます。
+The overview page displays essential information about your Datadog resource including: resource group name, location (region), subscriptions, tags, Datadog organization link, status, pricing plan, and billing term.
 
-**注**: SSO が有効になっている場合、Datadog オーガニゼーションリンクは SAML リンクです。Datadog オーガニゼーションが Azure マーケットプレイスで作成された場合は、このリンクを初めて使用するときにパスワードを設定します。
+**Note**: The Datadog organization link is a SAML link if SSO is enabled. If the Datadog organization was created with the Azure marketplace, set a password the first time you use this link.
 
-### リンク
+### Links
 
-概要ページには、Datadog ダッシュボード、ログ、ホストマップを表示するためのリンクがあります。
+The overview page provides links to view Datadog dashboards, logs, and host maps.
 
-### リソースサマリー
+### Resource summary
 
-概要ページには、ログとメトリクスを Datadog に送信するリソースのサマリーテーブルが表示されます。このテーブルには、次の列が含まれています。
+The overview page provides a summary table of the resources sending logs and metrics to Datadog. This table includes the following columns:
 
-| 列             | 説明                                                               |
+| Column             | Description                                                               |
 |--------------------|---------------------------------------------------------------------------|
-| Resource type      | Azure リソースタイプ                                                   |
-| Total resources    | リソースタイプのすべてのリソースの数                          |
-| Logs to Datadog    | インテグレーションを通じて Datadog にログを送信するリソースの数    |
-| Metrics to Datadog | インテグレーションを通じて Datadog にメトリクスを送信するリソースの数 |
+| Resource type      | The Azure resource type                                                   |
+| Total resources    | The count of all resources for the resource type                          |
+| Logs to Datadog    | The count of resources sending logs to Datadog through the integration    |
+| Metrics to Datadog | The count of resources sending metrics to Datadog through the integration |
 
 ### Disable
 
-Azure から Datadog へのログとメトリクスの送信を停止するには、概要ページで **Disable** を選択し、**OK** をクリックします。
+To stop sending logs and metrics from Azure to Datadog, select **Disable** on the overview page, then click **OK**.
 
-{{< img src="integrations/guide/azure_portal/disable.png" alt="Azure ポータル内の Datadog リソースページでは、左のナビバーで Overview が選択され、Disable タブがハイライトされ、OK ボタンがハイライトされています" responsive="true" style="width:100%;">}}
+{{< img src="integrations/guide/azure_portal/disable.png" alt="The Datadog resource page within the Azure portal with Overview selected on the left nav bar, the Disable tab highlighted, and the OK button highlighted" responsive="true" style="width:100%;">}}
 
-**注**: Datadog リソースを無効にすると、関連付けられたサブスクリプションの Datadog へのメトリクスとプラットフォームログの送信が停止します。Agent または拡張機能を介して Datadog に直接データを送信するサブスクリプション内のリソースは影響を受けません。
+**Note**: Disabling the Datadog resource stops the submission of metrics and platform logs to Datadog for the associated subscriptions. Any resources in the subscriptions submitting data directly to Datadog through the Agent or extension are unaffected.
 
 ### Enable
 
-Azure から Datadog へのログとメトリクスの送信を開始するには、概要ページで **Enable** を選択し、**OK** をクリックします。ログとメトリクスの以前のコンフィギュレーションが取得され、有効になります。
+To start sending logs and metrics from Azure to Datadog, select **Enable** on the overview page, then click **OK**. Any previous configuration for logs and metrics is retrieved and enabled.
 
-{{< img src="integrations/guide/azure_portal/enable.png" alt="Azure ポータル内の Datadog リソースページでは、左のナビバーで Overview が選択され、Enable タブがハイライトされ、OK ボタンがハイライトされています" responsive="true" style="width:100%;">}}
+{{< img src="integrations/guide/azure_portal/enable.png" alt="The Datadog resource page within the Azure portal, with Overview selected in the left nav bar,the Enable tab highlighted, and the OK button highlighted" responsive="true" style="width:100%;">}}
 
-### 削除
+### Delete
 
-Datadog リソースを削除するには、概要ページで **Delete** を選択します。`yes` と入力して削除を確認し、**Delete** をクリックします。
+To delete the Datadog resource, select **Delete** on the overview page. Confirm deletion by typing `yes`, then click **Delete**.
 
-{{< img src="integrations/guide/azure_portal/delete.png" alt="Azure ポータル内の Datadog リソースページでは、左のナビバーで Overview が選択され、Delete タブがハイライトされ、削除を確認するフィールドがあります" responsive="true" style="width:100%;">}}
+{{< img src="integrations/guide/azure_portal/delete.png" alt="The Datadog resource page within the Azure portal, with Overview selected in the left nav bar, the Delete tab highlighted, and a field to confirm deletion" responsive="true" style="width:100%;">}}
 
-Azure Marketplace を通じて請求される Datadog オーガニゼーションの場合
-- 削除された Datadog リソースが関連する Datadog オーガニゼーションにマップされた唯一の Datadog リソースである場合、ログとメトリクスは Datadog に送信されなくなり、Azure を介した Datadog のすべての請求が停止します。アカウントの次のステップを確認するために Datadog サポートがご連絡します。
-- 関連する Datadog オーガニゼーションにマップされた追加の Datadog リソースがある場合、Datadog リソースを削除すると、関連する Azure サブスクリプションのログとメトリクスの送信のみが停止します。
+For Datadog organizations billed through the Azure Marketplace:
+- If the deleted Datadog resource is the only Datadog resource mapped to its associated Datadog organization, logs and metrics are no longer sent to Datadog and all billing stops for Datadog through Azure. Datadog support will reach out to confirm next steps with your account.
+- If there are additional Datadog resources mapped to the associated Datadog organization, deleting a Datadog resource only stops sending logs and metrics for its associated Azure subscription.
 
-Datadog 組織が Azure Marketplace を通じて請求**されない**場合、Datadog リソースを削除すると、その Azure サブスクリプションのインテグレーションが削除されるだけです。
+If your Datadog organization is **not** billed through the Azure Marketplace, deleting a Datadog resource just removes the integration for that Azure subscription.
 
 ### Change plan
 
-Datadog の請求プランを変更するには、概要ページで **Change Plan** を選択します。
+Select **Change Plan** on the overview page to change your Datadog billing plan.
 
-{{< img src="integrations/guide/azure_portal/change-plan1.png" alt="Azure ポータル内の Datadog リソースページでは、左のナビバーで Overview が選択され、Change Plan タブがハイライトされています" responsive="true" style="width:100%;">}}
+{{< img src="integrations/guide/azure_portal/change-plan1.png" alt="The Datadog resource page within the Azure portal, with Overview selected along the left nav bar and the Change Plan tab highlighted" responsive="true" style="width:100%;">}}
 
-ポータルは、プライベートオファーなど、テナントで利用可能なすべての Datadog プランを取得します。適切なプランを選択し、**Change Plan** をクリックします。
+The portal retrieves all the available Datadog plans for your tenant, including any private offers. Select the appropriate plan and click **Change Plan**.
 
 ## Datadog org configurations
 
-### 監視対象サブスクリプション
+### Monitored subscriptions
 
-左サイドバーの **Monitored Subscriptions** を選択し、Datadog リソースのスコープを表示または変更します。現在監視しているサブスクリプションのリストが表示されます。このビューを使用して、Datadog リソースのスコープを構成し、必要な数のサブスクリプションを監視します。Datadog リソースを持つサブスクリプションは、スコープに含まれている必要があります。
+Select **Monitored Subscriptions** in the left sidebar to view or modify the scope of the Datadog resource. A list of currently monitored subscriptions appears. Use this view to configure the scope of the Datadog resource to monitor as many subscriptions as desired. The subscription with the Datadog resource must be included in the scope.
 
-{{< img src="integrations/guide/azure_portal/azure-portal-multiple-subscriptions.png" alt="Azure ポータルの Datadog リソースで、Datadog 組織の構成セクションで Monitored Subscriptions が選択され、2 つのサブスクリプションが表示されています" responsive="true" style="width:100%;">}}
+{{< img src="integrations/guide/azure_portal/azure-portal-multiple-subscriptions.png" alt="The Datadog resource in the Azure portal with Monitored Subscriptions selected in the Datadog organization configurations section and two subscriptions displayed" responsive="true" style="width:100%;">}}
 
-   - サブスクリプションをモニターに追加するには、`+ Add Subscriptions` をクリックします。利用可能なサブスクリプションのリストには、`Owner` ロールが割り当てられているサブスクリプションのみが含まれています。監視したいサブスクリプションを選択し、`Add` をクリックします。
-   - Datadog で監視しているサブスクリプションを削除するには、削除したいサブスクリプションを選択し、`Remove Subscriptions` をクリックします。サブスクリプションを削除できるのは、`Owner` ロールを持つユーザーのみです。
+   - To add subscriptions to monitor, click `+ Add Subscriptions`. The list of subscriptions available only includes subscriptions to which you have the `Owner` role assigned. Select the subscriptions you wish to monitor and click `Add`. 
+   - To remove subscriptions from being monitored with Datadog, select the subscriptions you wish to remove and click `Remove Subscriptions`. Only users with the `Owner` role can remove subscriptions.
 
-**注**: 同じ設定 (ホストフィルターやログ収集ルールなど) は、スコープ内のすべてのサブスクリプションで適用されます。異なるサブスクリプションに異なる設定を適用するには、異なる Datadog リソースを作成します。
+**Note**: The same settings (such as host filters and log collection rules) are applied across all subscriptions in scope. To apply different settings to different subscriptions, create different Datadog resources.
 
 ### Metrics and logs
 
-左サイドバーの **Metrics and logs** を選択すると、メトリクスとログの構成ルールを変更することができます。リソースが追加されたり、タグが変更されたりすると、すべてのルールがサブスクリプション全体に動的に適用されます。
+Select **Metrics and logs** in the left sidebar to change the configuration rules for metrics and logs. All rules are applied dynamically across the entire subscription as resources are added or tags change.
 
-メトリクスまたはログの構成設定の変更は、数分以内に有効になります。
+Changes to metric or log configuration settings should take effect within a few minutes.
 
-#### メトリクスの収集
-デフォルトでは、Datadog はリンクされたサブスクリプション内のすべての Azure リソースのメトリクスを自動的に収集します。
+#### Metric collection
+By default, Datadog automatically collects metrics for all Azure resources within any linked subscriptions.
 
-オプションで、リソースにアタッチされた Azure タグを使用して、Azure VM および App Service Plans のメトリクス収集を制限します。
+Optionally, limit metric collection for Azure VMs and App Service Plans using Azure tags attached to your resources. 
 
-##### メトリクスの送信のタグルール
+##### Tag rules for sending metrics
 
- * 仮想マシン、仮想マシンのスケーリングセット、`include` タグの付いた App Service Plans は Datadog にメトリクスを送信します。
- * 仮想マシン、仮想マシンのスケーリングセット、`exclude` タグの付いた App Service Plans は Datadog にメトリクスを送信しません。
- * 包含および除外ルールの間で競合がある場合は、除外が優先されます。
- * 他のリソースタイプのメトリクス収集を制限するオプションはありません。
+ * Virtual machines, virtual machine scale sets, and App Service Plans with `include` tags send metrics to Datadog.  
+ * Virtual machines, virtual machine scale sets, and App Service Plans with `exclude` tags don't send metrics to Datadog.  
+ * If there's a conflict between inclusion and exclusion rules, exclusion takes priority.  
+ * There is no option to limit metric collection for other resource types.
 
-#### ログの収集
+#### Log collection
 
-Datadog リソースを使用して Azure から Datadog に出力できるログは 3 種類あります。
+There are three types of logs that can be emitted from Azure to Datadog using the Datadog resource.
 
-1. [アクティビティログ](#activity-logs)
-2. [リソースログ](#resource-logs)
-3. [Azure Active Directory ログ](#azure-active-directory-logs)
+1. [Activity logs](#activity-logs)
+2. [Resource logs](#resource-logs)
+3. [Azure Active Directory logs](#azure-active-directory-logs)
 
-##### アクティビティログ
+##### Activity logs
 
-サブスクリプションレベルのログは、[コントロールプレーン][3]におけるリソースの運用に関するインサイトを提供します。アクティビティログを使用して、書き込み作業の何、誰、いつを決定します (`PUT`、`POST`、`DELETE`)。
+Subscription level logs provide insight into the operations on your resources at the [control plane][3]. Updates on service health events are also included. Use the activity log to determine the what, who, and when for any write operations (`PUT`, `POST`, `DELETE`).
 
-サブスクリプションレベルのログを Datadog に送信するには、**Send subscription activity logs** を選択します。このオプションを有効にしない場合、サブスクリプションレベルのログは Datadog に送信されません。
+To send subscription level logs to Datadog, select **Send subscription activity logs**. If this option is left unchecked, none of the subscription level logs are sent to Datadog.
 
-##### リソースログ
+##### Resource logs
 
-Azure リソースログは、[データプレーン][3]における Azure リソースの運用に関するインサイトを提供します。たとえば、Key Vault からシークレットを取得する、データベースへのリクエストを作成する、などはデータプレーンの運用です。リソースログのコンテンツは、Azure のサービスおよびリソースタイプにより異なります。
+Azure resource logs provide insight into operations taken on Azure resources at the [data plane][3]. For example, getting a secret from a key vault or making a request to a database are data plane operations. The content of resource logs varies by the Azure service and resource type.
 
-Azure リソースログを Datadog に送信するには、**Send Azure resource logs for all defined resources** を選択します。Azure リソースログの種類は、[Azure 監視リソースログのカテゴリー][4]に一覧があります。このオプションが有効な場合、リンクされたサブスクリプションで作成された新しいリソースを含むすべてのリソースログが Datadog に送信されます。
+To send Azure resource logs to Datadog, select **Send Azure resource logs for all defined resources**. The types of Azure resource logs are listed in the [Azure Monitor Resource Log categories][4]. When this option is selected, all resource logs are sent to Datadog, including any new resources created in the linked subscriptions.
 
-オプションで、Azure リソースタグを使用して Datadog にログを送信する Azure リソースを絞り込むことができます。
+You can optionally filter the set of Azure resources sending logs to Datadog using Azure resource tags.
 
-###### ログ送信のタグルール
+###### Tag rules for sending logs
 
-* `include` タグのある Azure リソースは Datadog にログを送信します。
-* `exclude` タグのある Azure リソースは Datadog にログを送信しません。
-* 包含および除外ルールの間で競合がある場合は、除外が優先されます。
+* Azure resources with `include` tags send logs to Datadog.
+* Azure resources with `exclude` tags don't send logs to Datadog.
+* If there's a conflict between inclusion and exclusion rules, exclusion takes priority.
 
-例えば、以下のスクリーンショットは、`Datadog = True` でタグ付けされた仮想マシン、仮想マシンのスケールセット、アプリのサービスプランだけが Datadog にメトリクスを送信するタグルールを示しています。`Datadog = True` のタグが付けられたリソース (すべてのタイプ) は、Datadog にログを送信します。
+For example, the screenshot below shows a tag rule where only virtual machines, virtual machine scale sets, and app service plans tagged with `Datadog = True` send metrics to Datadog. Resources (of all types) tagged with `Datadog = True` send logs to Datadog.
 
-{{< img src="integrations/guide/azure_portal/metrics-and-logs-tag-rules.png" alt="仮想マシン、仮想マシンのスケールセット、アプリのサービスプランに Datadog=true というメトリクスのタグルールが設定されているスクリーンショット。ログセクションにも Datadog=true のタグルールが構成されています" responsive="true" style="width:100%;">}}
+{{< img src="integrations/guide/azure_portal/metrics-and-logs-tag-rules.png" alt="A screenshot showing a metric tag rule of Datadog=true set for virtual machines, virtual machine scale sets, and app service plans. The logs section is also configured with tag rule of Datadog=true" responsive="true" style="width:100%;">}}
 
-##### Azure Active Directory ログ
+##### Azure Active Directory logs
 
-Azure Active Directory (Azure AD) のログには、特定のテナントのサインインアクティビティの履歴と、Azure AD で行われた変更の監査証跡が含まれています。Azure AD ログを送信するには
+Azure Active Directory (Azure AD) logs contain the history of sign-in activity and an audit trail of changes made in Azure AD for a particular tenant. To send Azure AD Logs:
 
-1. Azure の Azure Active Directory に移動し、左側のナビゲーションバーから **Diagnostic Settings** を選択します。
-2. **Add diagnostic setting** をクリックします。
-3. Datadog に送信するログカテゴリーを選択します。Datadog は全てのカテゴリーを送信することを推奨しています。
-4. **Destination details** で、**Send to a partner solution** を選択します。
-5. サブスクリプションを選択します。**Destination** ドロップダウンで Datadog リソースを選択します。
+1. Navigate to Azure Active Directory in Azure, and select **Diagnostic Settings** in the left navigation bar.
+2. Click **Add diagnostic setting**.
+3. Select the log categories you want to send to Datadog. Datadog recommends sending all categories.
+4. In **Destination details**, select **Send to a partner solution**.
+5. Select a subscription. Select a Datadog resource in the **Destination** dropdown.
 
-テナントからのすべての Azure AD ログは、選択した Datadog リソースにリンクされている Datadog 組織に送信されます。同じ Datadog 組織にサブスクリプションをリンクしている複数の Datadog リソースがある場合、どの Datadog リソースが選択されているかは関係ありません。この設定は、Azure テナントごとに 1 回だけ行う必要があります。
+All Azure AD logs from the tenant are sent to the Datadog organization linked to the Datadog resource selected. For cases where you have more than one Datadog resource that links subscriptions to the same Datadog organization, it does not matter which Datadog resource is selected. You only need to set this up once for each Azure tenant.
 
 ### Monitored resources
 
-左側のサイドバーで **Monitored Resources** を選択して、Datadog にログとメトリクスを送信するリソースのリストを表示します。検索を使用して、リソース名、タイプ、グループ、場所、Datadog へのログ、または Datadog へのメトリクスでリストをフィルタリングします。
+Select **Monitored Resources** in the left sidebar to see a list of resources emitting logs and metrics to Datadog. Use the search to filter the list by resource name, type, group, location, logs to Datadog, or metrics to Datadog.
 
-{{< img src="integrations/guide/azure_portal/monitored-resources.png" alt="Azure ポータル内の Datadog リソースページでは、Datadog 組織の構成の下に Monitored Resources がハイライトされています" responsive="true" style="width:100%;">}}
+{{< img src="integrations/guide/azure_portal/monitored-resources.png" alt="The Datadog resource page in the Azure portal with Monitored Resources highlighted under Datadog org configurations" responsive="true" style="width:100%;">}}
 
-リソースが Datadog にログを送信している場合、**Logs to Datadog** 列には `Sending` と表示されます。それ以外の場合、このフィールドはログが送信されない理由として以下を示します。
+The **Logs to Datadog** column displays `Sending` if the resource is sending logs to Datadog. Otherwise, this field indicates why logs aren't being sent. Possible reasons:
 
-| 理由                                    | 説明                                                                                                             |
+| Reason                                    | Description                                                                                                             |
 |-------------------------------------------|-------------------------------------------------------------------------------------------------------------------------|
-| Resource doesn't support sending logs     | Datadog にログを送信するように構成できるのは、モニタリングログカテゴリを持つリソースタイプのみです。                           |
-| Limit of five diagnostic settings reached | 各 Azure リソースには、最大 5 つの診断設定を設定できます。詳細については、[診断設定][5]を参照してください。 |
-| Error                                     | リソースは Datadog にログを送信するように構成されていますが、エラーによってブロックされています。                                         |
-| Logs not configured                       | Datadog にログを送信するように構成されているのは、適切なリソースタグを持つ Azure リソースのみです。                             |
-| Region not supported                      | Azure リソースは、Datadog へのログの送信をサポートしていないリージョンにあります。                                         |
-| Datadog Agent not configured              | Datadog Agent がインストールされていない仮想マシンは、Datadog にログを発行しません。                                        |
+| Resource doesn't support sending logs     | Only resource types with monitoring log categories can be configured to send logs to Datadog.                           |
+| Limit of five diagnostic settings reached | Each Azure resource can have a maximum of five diagnostic settings. For more information, see [diagnostic settings][5]. |
+| Error                                     | The resource is configured to send logs to Datadog, but is blocked by an error.                                         |
+| Logs not configured                       | Only Azure resources with appropriate resource tags are configured to send logs to Datadog.                             |
+| Region not supported                      | The Azure resource is in a region that doesn't support sending logs to Datadog.                                         |
+| Datadog Agent not configured              | Virtual machines without the Datadog Agent installed don't emit logs to Datadog.                                        |
 
-### Datadog Agent 拡張機能
+### Datadog Agent extensions
 
 {{< tabs >}}
-{{% tab "VM 拡張機能" %}}
+{{% tab "VM Extension" %}}
 
-サブスクリプション内の仮想マシン (VM) のリストを表示するには、左側のサイドバーで **Virtual machine agent** を選択します。このページでは、拡張機能として Datadog Agent を VM にインストールできます。
+To see a list of virtual machines (VMs) in the subscription, select **Virtual machine agent** in the left sidebar. On this page, you can install the Datadog Agent on a VM as an extension.
 
-{{< img src="integrations/guide/azure_native_manual_setup/azure_native_vm_extension.png" alt="Azure の Datadog リソース (Virtual machine Agent が選択され、Install extension オプションが強調表示されています)" responsive="true" style="width:90%;">}}
+{{< img src="integrations/guide/azure_native_manual_setup/azure_native_vm_extension.png" alt="The Datadog resource in Azure with Virtual machine agent selected and the Install extension option highlighted" responsive="true" style="width:90%;">}}
 
-VM ごとに、次の情報が表示されます。
+For each VM, the following information is displayed:
 
-| 列               | 説明                                                                                                                                                    |
+| Column               | Description                                                                                                                                                    |
 |----------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Resource name        | VM の名前                                                                                                                                                  |
-| Resource status      | VM が停止しているか実行しているか。Datadog Agent は、実行中の VM にのみインストールできます。VM が停止している場合、Datadog Agent のインストールは無効になります。 |
-| Agent バージョン        | Datadog Agent のバージョン番号                                                                                                                               |
-| Agent のステータス         | Datadog Agent が VM で実行されているかどうか。                                                                                                                |
-| Integrations enabled | Datadog Agent で有効なインテグレーションによって収集される主要なメトリクス。                                                                                  |
-| Install method       | Chef、Azure VM 拡張機能など、Datadog Agent のインストールに使用される特定のツール。                                                                    |
-| Sending logs         | Datadog Agent が Datadog にログを送信しているかどうか。                                                                                                          |
+| Resource name        | The VM's name                                                                                                                                                  |
+| Resource status      | Whether the VM is stopped or running. The Datadog Agent can only be installed on a running VM. If the VM is stopped, installing the Datadog Agent is disabled. |
+| Agent version        | The Datadog Agent version number                                                                                                                               |
+| Agent status         | Whether the Datadog Agent is running on the VM.                                                                                                                |
+| Integrations enabled | The key metrics being collected by enabled integrations in the Datadog Agent.                                                                                  |
+| Install method       | The specific tool used to install the Datadog Agent, such as Chef, Azure VM extension, etc.                                                                    |
+| Sending logs         | Whether the Datadog Agent is sending logs to Datadog.                                                                                                          |
 
-#### インストール
+#### Install
 
-VM 拡張機能を利用して Azure で直接 Datadog Agent をインストールできます。Datadog Agent のインストール方法は以下の通りです。
+You can install the Datadog Agent directly in Azure with the VM Extension. To install the Datadog Agent: 
 
-1. 適切な VM を選択します。
-2. **Install Extension** をクリックします。
-3. ポータルで、デフォルトのキーを使用して Agent をインストールすることの確認が求められます。**OK** を選択してインストールを開始します。Agent がインストールされてプロビジョニングされるまで、Azure はステータスを `Installing` (インストール中) と表示します。Datadog Agent がインストールされると、ステータスが `Installed` (インストール済み) に変わります。
+1. Select the appropriate VM.
+2. Click **Install Extension**. 
+3. The portal asks for confirmation to install the Agent with the default key. Select **OK** to begin installation. Azure shows the status as `Installing` until the Agent is installed and provisioned. After the Datadog Agent is installed, the status changes to `Installed`.
 
-##### アンインストール
+##### Uninstall
 
-Datadog Agent が Azure VM 拡張機能でインストールされた場合
+If the Datadog Agent was installed with the Azure VM extension:
 
-1. 適切な VM を選択します。
-2. **Uninstall Agent** をクリックします。
+1. Select the appropriate VM.
+2. Click **Uninstall Agent**.
 
-Agent が別の方法でインストールされている場合、Datadog リソースを使って Agent をデプロイまたは削除することはできませんが、このページには引き続き Agent に関する情報が表示されます。
+If the Agent was installed using a different method, you cannot use the Datadog resource to deploy or remove the Agent, but information about the Agent is still reflected on this page.
 
 {{% /tab %}}
-{{% tab "AKS クラスター拡張機能" %}}
+{{% tab "AKS Cluster Extension" %}}
 
-Datadog AKS クラスター拡張機能を使用すると、Azure AKS 内に Datadog Agent をネイティブにデプロイできるため、サードパーティの管理ツールの複雑さを回避できます。
+The Datadog AKS Cluster Extension allows you to deploy the Datadog Agent natively within Azure AKS, avoiding the complexity of third-party management tools. 
 
-#### インストール
+#### Install
 
-AKS クラスター拡張機能を使って Datadog Agent をインストールするには
+To install the Datadog Agent with the AKS Cluster Extension: 
 
-1. 左サイドバーの **Monitored Resources** セクションにある AKS クラスターをクリックします。
-2. AKS クラスターの左サイドバーから、**Settings** の下にある **Extensions + applications** を選択します。
-3. `Datadog AKS Cluster Extension` を検索して選択します。
-4. **Create** をクリックし、表示される指示に従って [Datadog の資格情報][1]と [Datadog のサイト][2]を使用してください。
+1. Click on your AKS cluster in the **Monitored Resources** section in the left sidebar.
+2. From the left sidebar of the AKS cluster, select **Extensions + applications** under **Settings**.
+3. Search for and select the `Datadog AKS Cluster Extension`.
+4. Click **Create**, and follow the instructions in the tile using your [Datadog credentials][1] and [Datadog site][2].
 
-#### アンインストール
+#### Uninstall
 
-1. 左サイドバーの **Monitored Resources** セクションにある AKS クラスターをクリックします。
-2. AKS クラスターの左サイドバーから、**Settings** の下にある **Extensions + applications** を選択します。
-3. Datadog AKS クラスター拡張機能 (その **Type** は `Datadog.AKSExtension`) を選択します。
-4. **Uninstall** をクリックします。
+1. Click on your AKS cluster in the **Monitored Resources** section in the left sidebar.
+2. From the left sidebar of the AKS cluster, select **Extensions + applications** under **Settings**.
+3. Select the Datadog AKS Cluster Extension (its **Type** is `Datadog.AKSExtension`).
+4. Click **Uninstall**.
 
-[1]: /ja/account_management/api-app-keys/
-[2]: /ja/getting_started/site/
+[1]: /account_management/api-app-keys/
+[2]: /getting_started/site/
 {{% /tab %}}
 {{< /tabs >}}
 
 ### App Service extension
 
-サブスクリプション内のアプリサービスのリストを表示するには、左側のサイドバーで **App Service extension** を選択します。このページでは、Azure App Service に Datadog 拡張機能をインストールして、APM トレースとカスタムメトリクスを有効にすることができます。
+Select **App Service extension** in the left sidebar to see a list of app services in the subscription. On this page, you can install the Datadog extension on Azure App Service to enable APM tracing and custom metrics.
 
-アプリサービスごとに、次の情報が表示されます。
+For each app service, the following information is displayed:
 
-| 列            | 説明                                                                                                                                                                  |
+| Column            | Description                                                                                                                                                                  |
 |-------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Resource name     | アプリ名                                                                                                                                                                 |
-| Resource status   | アプリサービスが停止しているか実行しているか。インストールを開始するには、アプリサービスが実行されている必要があります。アプリサービスが停止している場合、Datadog Agent のインストールは無効になります。 |
-| App service plan  | アプリサービス用に構成された特定のプラン                                                                                                                             |
-| Extension version | Datadog 拡張機能バージョン番号                                                                                                                                         |
+| Resource name     | The app name                                                                                                                                                                 |
+| Resource status   | Whether the app service is stopped or running. The app service must be running to initiate install. If the app service is stopped, installing the Datadog Agent is disabled. |
+| App service plan  | The specific plan configured for the app service                                                                                                                             |
+| Extension version | The Datadog extension version number                                                                                                                                         |
 
-#### インストール
+#### Install
 
-[Datadog 拡張機能][6]をインストールするには、適切なアプリを選択し、**Install Extension** をクリックします。ポータルで、拡張機能をインストールすることの確認が求められます。**OK** を選択してインストールを開始します。これにより、アプリが再起動し、次の設定が追加されます。
+To install the [Datadog extension][6], select the appropriate app, then click **Install Extension**. The portal asks for confirmation to install the extension. Select **OK** to begin installation. This restarts your app and adds the following settings:
 
 - `DD_API_KEY:<DEFAULT_API_KEY>`
 - `DD_SITE:us3.datadoghq.com`
 - `DD_LOGS_INJECTION:true`
 
-Agent がインストールされてプロビジョニングされるまで、Azure はステータスを `Installing` (インストール中) と表示します。 Datadog Agent がインストールされると、ステータスが `Installed` (インストール済み) に変わります。
+Azure shows the status as `Installing` until the Agent is installed and provisioned. After the Datadog Agent is installed, the status changes to `Installed`.
 
-**注**: [サポートされているランタイム][7]でアプリに拡張機能を追加していることを確認してください。Datadog リソースは、アプリのリストを制限またはフィルタリングしません。
+**Note**: Ensure you are adding the extension to apps with [supported runtimes][7]. The Datadog resource does not limit or filter the list of apps.
 
-#### アンインストール
+#### Uninstall
 
-Datadog 拡張機能をアンインストールするには、適切なアプリを選択し、**Uninstall Extension** をクリックします。
+To uninstall the Datadog extension, select the appropriate app, then click **Uninstall Extension**.
 
-## 設定
+## Settings
 ### Single sign-on
 
-シングルサインオンを再構成するには、左側のサイドバーで **Single sign-on** を選択します。
+Select **Single sign-on** in the left sidebar to reconfigure single sign-on.
 
-Azure Active Directory を介してシングルサインオンをアクティブ化するには、**Enable single sign-on** を選択します。ポータルは、Azure Active Directory から適切な Datadog アプリケーションを取得します。アプリ名は、インテグレーションをセットアップするときに選択したエンタープライズアプリ名です。以下に示すように、Datadog アプリケーション名を選択します。
+To activate single sign-on through Azure Active Directory, select **Enable single sign-on**. The portal retrieves the appropriate Datadog application from Azure Active Directory. The app name is the enterprise app name you chose when setting up the integration. Select the Datadog application name as shown below.
 
-{{< img src="integrations/guide/azure_portal/sso.png" alt="Azure アクティブディレクトリによるシングルサインオンを有効にした Azure ポータル" responsive="true" style="width:100%;">}}
+{{< img src="integrations/guide/azure_portal/sso.png" alt="The Azure portal with Enable Single sign-on through Azure active directory enabled" responsive="true" style="width:100%;">}}
 
-### API キー
+### API keys
 
-左側のサイドバーで **Keys** を選択して、Datadog リソースの API キーのリストを表示します。
+Select **Keys** in the left sidebar to view a list of API keys for your Datadog resource.
 
-{{< img src="integrations/guide/azure_portal/api-keys.png" alt="1 つの API キーを表示した Azure ポータル内の Keys ビュー" responsive="true" style="width:100%;">}}
+{{< img src="integrations/guide/azure_portal/api-keys.png" alt="The Keys view within the Azure portal displaying one API key" responsive="true" style="width:100%;">}}
 
-Azure ポータルは、API キーの読み取り専用ビューを提供します。キーを管理するには、"Datadog portal" リンクを選択します。Datadog で変更を加えた後、Azure ポータルビューを更新します。
+The Azure portal provides a read-only view of the API keys. To manage the keys, select the "Datadog portal" link. After making changes in Datadog, refresh the Azure portal view.
 
-Azure Datadog インテグレーションにより、Datadog Agent を VM またはアプリサービスにインストールできます。デフォルトのキーが選択されていない場合、Datadog Agent のインストールは失敗します。
+The Azure Datadog integration allows you to install the Datadog Agent on a VM or app service. If there is no default key selected, a Datadog Agent installation fails.
 
 ### Cloud Security Management Misconfigurations
 
-左サイドバーの `Cloud Security Posture Management` を選択し、[Cloud Security Management Misconfigurations (CSM Misconfigurations)][8] の構成を行います。
+Select `Cloud Security Posture Management` in the left sidebar to configure [Cloud Security Management Misconfigurations (CSM Misconfigurations)][8].
 
-デフォルトでは、CSM Misconfigurations は有効になっていません。CSM Misconfigurations を有効にするには、`Enable Datadog Cloud Security Posture Management` を選択し、**Save** をクリックします。これにより、Datadog リソースに関連するすべてのサブスクリプションに対して Datadog CSM Misconfigurations が有効になります。
+By default, CSM Misconfigurations is not enabled. To enable CSM Misconfigurations, select `Enable Datadog Cloud Security Posture Management` and click **Save**. This enables Datadog CSM Misconfigurations for any subscriptions associated with the Datadog resource.
 
-無効にする場合は、チェックを外して **Save** をクリックします。
+To disable, uncheck the box and click **Save**.
 
-{{< img src="integrations/guide/azure_portal/enable-CSPM.png" alt="Settings タブで Cloud Security Posture Management を選択した Azure Portal のページ" responsive="true" style="width:100%;">}}
+{{< img src="integrations/guide/azure_portal/enable-CSPM.png" alt="The Azure Portal page with Cloud Security Posture Management selected under the Settings tab" responsive="true" style="width:100%;">}}
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: https://docs.datadoghq.com/ja/integrations/azure/?tab=link&site=us3#create-datadog-resource
+[1]: https://docs.datadoghq.com/integrations/azure/?tab=link&site=us3#create-datadog-resource
 [2]: https://docs.microsoft.com/en-us/cli/azure/datadog?view=azure-cli-latest
 [3]: https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/control-plane-and-data-plane
 [4]: https://docs.microsoft.com/en-us/azure/azure-monitor/essentials/resource-logs-categories
 [5]: https://docs.microsoft.com/en-us/azure/azure-monitor/essentials/diagnostic-settings
-[6]: /ja/serverless/azure_app_services
-[7]: /ja/serverless/azure_app_services/#requirements
-[8]: /ja/security/cloud_security_management/misconfigurations/
+[6]: /serverless/azure_app_services
+[7]: /serverless/azure_app_services/#requirements
+[8]: /security/cloud_security_management/misconfigurations/

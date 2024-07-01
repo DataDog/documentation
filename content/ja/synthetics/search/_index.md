@@ -1,117 +1,114 @@
 ---
-description: Synthetic テストを検索・管理する方法を説明します。
+title: Search and Manage Synthetic Tests
+kind: documentation
+description: Learn how to search and manage your Synthetic tests.
 further_reading:
-- link: https://www.datadoghq.com/blog/test-creation-best-practices/
-  tag: ブログ
-  text: エンドツーエンドテスト作成のベストプラクティス
-- link: https://www.datadoghq.com/blog/test-maintenance-best-practices/
-  tag: ブログ
-  text: エンドツーエンドテスト維持のベストプラクティス
+- link: "https://www.datadoghq.com/blog/test-creation-best-practices/"
+  tag: Blog
+  text: Best practices for creating end-to-end tests
+- link: "https://www.datadoghq.com/blog/test-maintenance-best-practices/"
+  tag: Blog
+  text: Best practices for maintaining end-to-end tests
 - link: /synthetics/search/saved_views
-  tag: ドキュメント
-  text: 保存ビューについて
+  tag: Documentation
+  text: Learn about Saved Views
 - link: /continuous_testing/explorer
-  tag: ドキュメント
-  text: Synthetic Monitoring &amp; Continuous Testing Explorer について
+  tag: Documentation
+  text: Learn about the Synthetic Monitoring & Testing Results Explorer
 - link: /service_management/events/explorer
-  tag: ドキュメント
-  text: イベントエクスプローラーについて
-title: Synthetic テストの検索と管理
+  tag: Documentation
+  text: Learn about the Events Explorer
 ---
 
-## 概要
+## Overview
 
-[Synthetic Tests ページ][1]では、すべてのテストへのアクセス、[検索](#search-for-tests)、[管理](#manage-tests)が可能です。
+You can access, [search](#search-for-tests), and [manage](#manage-tests) all of your tests on the [Synthetic Tests page][1]. 
 
-{{< img src="synthetics/search/synthetic_tests_page.png" alt="Synthetic Monitoring Tests ページ" style="width:100%" >}}
+{{< img src="synthetics/search/synthetic_tests_page_2.png" alt="Synthetic Monitoring Tests page" style="width:100%" >}}
 
-[ファセット](#facets-and-tags)を使うことで、以下のアクションを実現できます。
+By using [facets](#facets-and-tags), you can accomplish the following actions:
 
-- 特定の Synthetic テストを検索する
-- すべての CI/CD ジョブの実行を調査して、失敗したテスト実行を特定してトラブルシューティングします
-- CI/CD パイプラインでのテストの進行状況を追跡します
-- 修正する不安定なテストを特定します
-- 一括アクションでテストを管理する
-- Synthetic Monitoring の構成に対する変更を追跡するためのイベントを監視する
+- Search for specific Synthetic tests
+- Manage your tests with bulk actions
 
-## テストを検索する
+## Search for tests
 
-### ファセットとタグ
+### Facets and tags
 
-左側の **Synthetics Filters** パネルには、テストの検索に使用できるデフォルトのファセットが表示されます。
+The **Synthetics Filters** panel on the left lists default facets you can use to search for your tests. 
 
-デフォルトのファセットは以下の通りです。
+The default facets include the following:
 
-| ファセット          | 説明                                                                   |
+| Facet          | Description                                                                   |
 |----------------|-------------------------------------------------------------------------------|
-| `Type`         | Synthetic テストの種類: `browser`、`api`、`api-multi`、`api-websocket`、`api-ssl`、`api-dns`、`api-tcp`、`api-udp`、`api-icmp`、または `api-grpc` |
-| `Status`       | Synthetic テストのステータス: `OK`、`Alert`、または `No Data`                       |
-| `Creator`      | Synthetic テストの作成者                                            |
-| `Region`       | Synthetic テストが実行されている管理およびプライベートロケーション         |
-| `State`        | Synthetic テストの状態: `live` または `paused`                          |
-| `Notification` | 通知の Synthetic テストで使用されるハンドル                      |
-| `Env`          | Synthetic テストが実行されている環境                             |
-| `CI/CD Execution Rule` | テスト実行のステータス: `Blocking`、`Non-blocking`、または `Skipped` |
+| `Type`         | The type of Synthetic test: `browser`, `api`, `api-multi`, `api-websocket`, `api-ssl`, `api-dns`, `api-tcp`, `api-udp`, `api-icmp`, or `api-grpc`. |
+| `Status`       | The Synthetic test status: `OK`, `Alert`, or `No Data`.                       |
+| `Creator`      | The creator of the Synthetic test.                                            |
+| `Team`         | The team responsible for responding to the Synthetic test.                    |
+| `Region`       | The managed and private locations the Synthetic test is running from.         |
+| `State`        | The state of the Synthetic test: `live` or `paused`.                          |
+| `Notification` | The handle used by the Synthetic test for notifications.                      |
+| `Env`          | The environment the Synthetic test is running on.                             |
+| `CI/CD Execution Rule` | The status of the test run: `Blocking`, `Non-blocking`, or `Skipped`. |
 
-**Synthetic Filters** の下にある **Tags** パネルには、テストを識別するために使用できるデフォルトのタグがいくつか表示されます。
+The **Tags** panel below **Synthetic Filters** lists several default tags you can use to identify your tests. 
 
-デフォルトのタグは以下の通りです。
+The default tags include the following:
 
-| タグ          | 説明                                                                     |
+| Tag          | Description                                                                     |
 |----------------|-------------------------------------------------------------------------------|
-| `Team`         | Synthetic テストへの対応を担当するチーム                    |
-| `Tag`          | Synthetic テストに割り当てられたタグ                                       |
-| `Service`      | Synthetic テストが実行されているサービス                                 |
-| `Private Locations`| プライベートロケーションを有効にするかどうか: `true` または `false`          |
+| `Tag`          | The tag assigned to the Synthetic test.                                       |
+| `Service`      | The service the Synthetic test is running on.                                 |
+| `Private Locations`| Whether or not private locations are enabled: `true` or `false`.          |
 
-詳しくは、[タグの使用方法][4]をご覧ください。
+For more information, see [Using Tags][4].
 
-### 検索クエリを作成する
+### Create a search query
 
-左側のファセットをクリックするか、検索バーで独自のカスタムクエリを記述して、テストを検索します。クエリを編集すると、検索結果がリアルタイムで更新されます。
+Search for tests by clicking on the facets to the left or by writing your own custom query in the search bar. As you edit the query, your search results update in real time.
 
-ファセットの選択・解除を行うと、検索バーにも自動的に変更が反映されます。同様に、検索バーのクエリを変更したり、検索バーに一からクエリを書いて、左側のファセットの選択と非選択を行うことも可能です。
+When you select and deselect facets, the search bar automatically reflects your changes. Similarly, you can modify the search bar query or write a query from scratch in the search bar to select and deselect the facets on the left. 
 
-* **フリーテキストで検索**: テキストを検索バーに入力して、テスト名で検索します。
-* **単一のファセットで検索**: ファセット値をクリックして、そのファセット値のみを含む検索クエリを作成します。たとえば、`type:api` です。同じファセットの別の値を検索に追加するには、追加の値のチェックボックスをクリックします。また、`OR` ブール演算子を使用して追加の値を追加し、値を引用符と括弧で囲むこともできます。たとえば、`type:("api" OR "api-ssl")` です。
-* **複数のファセットとテキストで検索**: 異なるファセットタイプからファセットの値をクリックして、複数のファセットをフィルタリングする検索クエリをカスタマイズします。たとえば、`type:api region:aws:us-east-2` です。ファセットとテキストを混在させることもできます。たとえば、`checkout type:browser` です。非表示ですが、複数の用語を検索する場合は `AND` ブール演算子が適用されます。
-* **メッセージで検索**: [テストモニター][5]で構成されたテストの通知メッセージにフィルターをかける検索クエリを作成するために、メッセージを追加してください。例えば、`message:testcontent` とします。
-* **ファセットまたはテキストを除外する**: 既に入力済みチェックボックスをクリックしてファセット値の選択を解除するか、用語の前に `-` を付けて検索クエリから除外します。例: `-state:paused`
-* **カスタムマッチを実行する**: ワイルドカード (`*`) を使用します。たとえば、`valid*` です。
+* **Search on free text**: Enter your text in the search bar to search on a test name.
+* **Search on a single facet**: Click a facet value to create a search query that includes only that facet value. For example, `type:api`. To add another value of the same facet to your search, click on an additional value's checkbox. You can also add the additional value with an `OR` Boolean operator and wrap the values using quotes and parentheses. For example, `type:("api" OR "api-ssl")`.
+* **Search on multiple facets and text**: Click on facet values from different facet types to customize a search query that filters for multiple facets. For example, `type:api region:aws:us-east-2`. You can also mix facets and text. For example, `checkout type:browser`. Although invisible, the `AND` Boolean operator is applied when searching on multiple terms.
+* **Search on message**: Add a message to create a search query that filters on your tests' notification messages configured in the [test monitor][5]. For example, `message:testcontent`.
+* **Exclude facets or text**: Click on an already-filled checkbox to deselect a facet value or prepend a term with `-` to exclude it from the search query. For example, `-state:paused`.
+* **Perform custom matches**: Use wildcards (`*`). For example, `valid*`.
 
-Synthetics テストの種類を検索するには、**Type** ファセットでテストの種類を選択します。
+To search on a type of Synthetics test, select the test type under the **Type** facet.
 
-{{< img src="synthetics/search/facet_search.mp4" alt="Tests ページでファセットを使ってテストを検索する" video=true >}}
+{{< img src="synthetics/search/facet_search_2.mp4" alt="Search for tests using facets in the Tests page" video=true >}}
 
-## テストの管理
+## Manage tests
 
-### 一括アクション
+### Bulk actions
 
-[Synthetic Tests ページ][1]で 1 つまたは複数のテストを選択し、**Edit Tags**、**Run Tests Now**、**Delete** をクリックして、Synthetic テストを一括で管理します。
+Manage your Synthetic tests in bulk by selecting one or more tests on the [Synthetic Tests page][1] and clicking **Edit Tags**, **Run Tests Now**, or **Delete**. 
 
-{{< img src="synthetics/search/edit_tags.mp4" alt="Synthetic テストの一括タグ編集" video=true >}}
+{{< img src="synthetics/search/edit_tags_2.mp4" alt="Edit bulk tags of Synthetic tests" video=true >}}
 
-### テストアクション
+### Test actions
 
-テストにカーソルを合わせると、右側に `Pause`、`Run Test Now`、`Edit`、`Clone`、`Delete` などのオプションアイコンが表示されます。ブラウザテストでは、`Edit Recording` オプションを使用することができます。
+Clicking on the kebab menu to the right of a test populates option icons such as `Pause`, `Run Test Now`, `Edit Test`, `Clone`, and `Delete`. The `Edit Recording` option is available for browser tests.
 
-{{< img src="synthetics/search/manage_test_options.mp4" alt="Synthetic テストにカーソルを合わせると表示されるアクショントレイオプション" video="true" width="100%">}}
+{{< img src="synthetics/search/test_option_2.mp4" alt="Options appear when you click on the kebab menu to the right of a Synthetic test" video="true" width="100%">}}
 
-### イベントの追跡
+### Track events
 
-Synthetic テスト、グローバル変数、プライベートロケーションを作成、追加、削除すると、[イベントエクスプローラー][6]にイベントが発生します。イベントには、発生した変更が記述され、その変更を行ったユーザーが表示されます。
+Creating, adding, and deleting Synthetic tests, global variables, and private locations generates events in the [Events Explorer][6]. Events describe changes that occurred and display the users who performed the changes.
 
-{{< img src="synthetics/search/synthetic_events.png" alt="イベントエクスプローラーの Synthetic テストアラート" style="width:100%" >}}
+{{< img src="synthetics/search/synthetic_events_2.png" alt="Synthetic test alerts in the Events Explorer" style="width:100%" >}}
 
-テストモニターのアラートを検索バーで検索するか、**Event** テンプレート変数でイベントの種類を選択して、Synthetic 関連のすべての変更を検索します。例えば、`Event Type:synthetics_alert` です。
+Find all Synthetics-related changes by searching for your test monitors' alerts in the search bar, or by selecting an event type under the **Event** template variable. For example, `Event Type:synthetics_alert`.
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/synthetics/list
-[2]: /ja/synthetics/metrics/
-[3]: /ja/synthetics/dashboards/
-[4]: /ja/getting_started/tagging/using_tags/#synthetics
-[5]: /ja/synthetics/guide/synthetic-test-monitors/
+[2]: /synthetics/metrics/
+[3]: /synthetics/dashboards/
+[4]: /getting_started/tagging/using_tags/#synthetics
+[5]: /synthetics/guide/synthetic-test-monitors/
 [6]: https://app.datadoghq.com/event/explorer

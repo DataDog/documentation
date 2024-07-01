@@ -1,118 +1,121 @@
 ---
-app_id: ngrok
-app_uuid: 3b096ceb-d7a5-4bb5-bf0a-3a07d308d56a
-assets:
-  dashboards:
-    ngrok_http_events: assets/dashboards/ngrok_http_events.json
-  integration:
-    auto_install: true
-    configuration: {}
-    events:
-      creates_events: false
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 10397
-    source_type_name: ngrok
-author:
-  homepage: https://ngrok.com
-  name: ngrok
-  sales_email: sales@ngrok.com
-  support_email: support@ngrok.com
-categories:
+"app_id": "ngrok"
+"app_uuid": "3b096ceb-d7a5-4bb5-bf0a-3a07d308d56a"
+"assets":
+  "dashboards":
+    "ngrok_http_events": assets/dashboards/ngrok_http_events.json
+  "integration":
+    "auto_install": true
+    "configuration": {}
+    "events":
+      "creates_events": false
+    "service_checks":
+      "metadata_path": assets/service_checks.json
+    "source_type_id": !!int "10397"
+    "source_type_name": ngrok
+"author":
+  "homepage": "https://ngrok.com"
+  "name": ngrok
+  "sales_email": sales@ngrok.com
+  "support_email": support@ngrok.com
+"categories":
 - developer tools
-- クラウド
-dependencies:
-- https://github.com/DataDog/integrations-extras/blob/master/ngrok/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: ngrok
-integration_id: ngrok
-integration_title: ngrok
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: 2.0.0
-name: ngrok
-public_title: ngrok
-short_description: ngrok HTTP イベントで貴重なアプリケーションインサイトを視覚化
-supported_os:
+- cloud
+"custom_kind": "integration"
+"dependencies":
+- "https://github.com/DataDog/integrations-extras/blob/master/ngrok/README.md"
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "ngrok"
+"integration_id": "ngrok"
+"integration_title": "ngrok"
+"integration_version": ""
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "ngrok"
+"public_title": "ngrok"
+"short_description": "Visualize valuable application insights with ngrok HTTP events"
+"supported_os":
 - linux
 - windows
 - macos
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Developer Tools
-  - Category::Cloud
-  - Submitted Data Type::Logs
-  - Supported OS::Linux
-  - Supported OS::Windows
-  - Supported OS::macOS
-  - Queried Data Type::Logs
-  configuration: README.md#Setup
-  description: ngrok HTTP イベントで貴重なアプリケーションインサイトを視覚化
-  media:
-  - caption: ngrok HTTP リクエストイベント概要ダッシュボード
-    image_url: images/dashboard.png
-    media_type: image
-  - caption: ngrok サービスプラットフォーム
-    image_url: images/diag1.png
-    media_type: image
-  - caption: ngrok + datadog
-    image_url: images/diag2.png
-    media_type: image
-  overview: README.md#Overview
-  support: README.md#Support
-  title: ngrok
+"tile":
+  "changelog": CHANGELOG.md
+  "classifier_tags":
+  - "Category::Developer Tools"
+  - "Category::Cloud"
+  - "Submitted Data Type::Logs"
+  - "Supported OS::Linux"
+  - "Supported OS::Windows"
+  - "Supported OS::macOS"
+  - "Queried Data Type::Logs"
+  "configuration": "README.md#Setup"
+  "description": Visualize valuable application insights with ngrok HTTP events
+  "media":
+  - "caption": ngrok HTTP request events overview dashboard
+    "image_url": images/dashboard.png
+    "media_type": image
+  - "caption": ngrok services platform
+    "image_url": images/diag1.png
+    "media_type": image
+  - "caption": ngrok + datadog
+    "image_url": images/diag2.png
+    "media_type": image
+  "overview": "README.md#Overview"
+  "resources":
+  - "resource_type": other
+    "url": "https://ngrok.com/solutions"
+  "support": "README.md#Support"
+  "title": ngrok
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
-## 概要
+## Overview
 
-ngrok は、認証、ロードバランシング、およびその他の重要な制御を備えたグローバルなプレゼンスポイントを使用して、あらゆるクラウド、プライベートネットワーク、またはデバイスにあるアプリケーションに即座にイングレスを提供します。
+ngrok delivers instant ingress to your applications in any cloud, private network, or devices with authentication, load balancing, and other critical controls using our global points of presence.
 
-ngrok プラットフォームには、Datadog イベント宛先インテグレーションが含まれています。ngrok HTTP イベントを使用すると、HTTP ステータスコードの内訳、トップクライアント IP、最もリクエストの多いリソースなど、Datadog ログ管理を使用して貴重なアプリケーションインサイトを視覚化できます。Datadog HTTPS ロギングエンドポイントを使用して、[ngrok ダッシュボード UI][1] でインテグレーションを設定できます。
-
-
-
-## 計画と使用
-
-ngrok イベントを Datadog に転送するには、2 つの構成が必要です。
-
-- ngrok Event Subscription: 転送されるイベントを含みます
-- ngrok Event Destination: Event Subscriptionで定義されたイベントの転送先の構成。
-
-以下の例では、HTTP リクエストイベント用の Datadog Event Destination で Event Subscription を構成する方法を示します。ステップバイステップの手順については、[ngrok Datadog Event Destination ドキュメント][2]を参照してください。
-
-**ステップ 1: ngrok Event Subscription を作成する**
-
-1. ngrok Dashboard Console で、Events ページに移動します。
-2. "New Subscription" を選択します。
-3. Description for Subscription を入力し、"Add Source" を選択します。
-4. リストから "http_request_complete.v0" を選択し、Add Event Source を選択します。
+The ngrok platform includes a Datadog event destination integration. With ngrok HTTP events, you can visualize valuable application insights using Datadog Log Management including HTTP status code breakdown, top client IPs and most requested resources. You can use the Datadog HTTPS logging endpoint to set up the integration on the [ngrok dashboard UI][1].
 
 
 
-**ステップ 2: Event Destination プロパティを構成する**
+## Setup
 
-手順は、以前に作成した Event Subscription 構成内で実行されます。
+To forward ngrok events for consumption into Datadog, you need to make two configurations.
 
-1. "Event Destination" タブに移動し、"Add Destination" を選択します。
-2. ドロップダウンメニューから Datadog を選択し、正しい情報を入力します。
-    a. データに適した [Datadog サイト][3]を選択します。\
-    b. Datadog に移動し、組織設定内で [API キーの作成][4]を行います。 \
-    c. API キーをコピーし、API Key フィールドに貼り付けます。\
-    d. オプションで、Service Name を定義します。これはイベントデータのキーとして **service:value** として追加されます。\
-    e. オプションで、DD タグを定義します。DD タグはイベントデータに Datadog タグとして追加される `key:value` のペアです。\
-    f. オプションで、説明を定義します。これはローカルで重要であり、Datadog Event Destination を識別するのに役立ちます。
-3. "Send Test Event" を選択します。
-4. 成功のメッセージが表示されたら、 "Done" を選択します。 エラーが表示された場合は、Datadog サイトと API キーが正しいことを確認します。
+- ngrok Event Subscription: Contains which events to be forwarded
+- ngrok Event Destination: The configuration for where the events defined in the Event Subscription are forwarded to.
+
+The following example demonstrates how to configure an Event Subscription with a Datadog Event Destination for HTTP request events. For step-by-step instructions, see the [ngrok Datadog Event Destination documentation][2].
+
+**Step 1: Create a ngrok Event Subscription**
+
+1. In the ngrok Dashboard Console, navigate to Events page.
+2. Select "New Subscription".
+3. Provide a Description for Subscription and select "Add Source".
+4. From the list, select "http_request_complete.v0" and select Add Event Source.
 
 
-**ステップ 3: Datadog ログファセットを作成する**
-ログが届き始めたら、データ分析とダッシュボード視覚化のために[ログファセット][5]を作成します。ログファセットの作成の詳細については、[ログファセットのドキュメント][6]を参照してください。
 
-以下のフィールドに対してファセットを作成します。
+**Step 2: Configure Event Destination properties**
+
+The steps are performed within the previously created Event Subscription configuration:
+
+1. Navigate to the "Event Destination" tab and select "Add Destination".
+2. From the dropdown menu, select Datadog and input the correct information:
+    a. Select the correct [Datadog site][3] for your data.\
+    b. Navigate to Datadog and [create an API key][4] within the organization settings.\
+    c. Copy the API key and paste into the API Key field.\
+    d. Optionally, define a Service Name, this be added as a key to the event data as **service:value**.\
+    e. Optionally, define DD Tags, these are `key:value` pairs to be added as Datadog tags to the event data.\
+    f. Optional, define a description, this is locally significant and helps identify the Datadog Event Destination.
+3. Select "Send Test Event".
+4. If presented with a Success message, select "Done".  If an error is presented, validate that the Datadog site and API key are correct.
+
+
+**Step 3: Create Datadog Log Facets**
+Once logs begin to arrive, create [log facets][5] for data analysis and dashboard visualization. For more information about creating log facets, see the [Log Facets documentation][6]. 
+
+Create facets for the following fields:
 
 - event_type
 - object.conn.server_name
@@ -121,20 +124,21 @@ ngrok イベントを Datadog に転送するには、2 つの構成が必要で
 - object.http.request.method
 - object.http.request.url.path
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[ngrok サポート][7] に連絡するか、[ngrok ドキュメント][8]を参照してください。
+Need help? Contact [ngrok Support][7] or reference the [ngrok documentation][8].
 
-## その他の参考資料
+## Further Reading
 
-[ngrok][9] の詳細をご覧ください。
+Learn more about [ngrok][9].
 
 [1]: https://dashboard.ngrok.com
 [2]: https://ngrok.com/docs/integrations/datadog/event-destination/
-[3]: https://docs.datadoghq.com/ja/getting_started/site/
-[4]: https://docs.datadoghq.com/ja/account_management/api-app-keys/
-[5]: https://docs.datadoghq.com/ja/logs/explorer/facets/
-[6]: https://docs.datadoghq.com/ja/logs/explorer/facets/#create-facets
+[3]: https://docs.datadoghq.com/getting_started/site/
+[4]: https://docs.datadoghq.com/account_management/api-app-keys/
+[5]: https://docs.datadoghq.com/logs/explorer/facets/
+[6]: https://docs.datadoghq.com/logs/explorer/facets/#create-facets
 [7]: mailto:support@ngrok.com
 [8]: https://ngrok.com/docs/integrations/datadog/
 [9]: https://ngrok.com/solutions
+

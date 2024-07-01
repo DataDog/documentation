@@ -1,9 +1,9 @@
 ---
-kind: ガイド
-title: PostgreSQL 15 以上へのアップグレード
+title: Upgrading to PostgreSQL 15 and higher
+kind: guide
 ---
 
-各データベースホストでこのコマンドを実行して、`datadog` ユーザーに必要な追加権限を有効にします。
+Run this command on each database host to enable the additional permission needed for the `datadog` user:
 
 ```SQL
 ALTER ROLE datadog INHERIT;
@@ -11,22 +11,22 @@ ALTER ROLE datadog INHERIT;
 
 {{< tabs >}}
 {{% tab "RDS" %}}
-`7.49` より前のバージョンの Agent では、構成を変更しないと PostgreSQL RDS インスタンスに接続できないことがあります。新しい RDS インスタンスの `rds.force_ssl` パラメーターのデフォルト値は `1` です。`7.49` より前のバージョンの Agent では、Agent がクエリを発行しようとするとこれにより以下のエラーが発生します。
+Agent versions prior to `7.49` may be unable to connect to PostgreSQL RDS instances without a configuration change. New RDS instances have a default value of `1` for the `rds.force_ssl` parameter. In Agent versions prior to `7.49`, this causes the following error when the Agent tries to issue queries:
 
 ```
 FATAL:  no pg_hba.conf entry for host "HOSTNAME", user "datadog", database "postgres", no encryption
 ```
 
-Agent に SSL 接続を許可するには、`host` と `port` が指定されている各インスタンス設定に以下の設定を追加します。
+To allow the Agent to connect with SSL, add the following setting to each instance config where `host` and `port` are specified:
 
 ```yaml
 ssl: allow
 ```
 
-この変更を適用した後、Agent を再起動します。
+Restart the agent after applying this change.
 {{% /tab %}}
 {{% tab "Google Cloud SQL" %}}
-`7.50` より前のバージョンの Agent は `cloudsqladmin` データベースに接続しようとすることがあります。これにより、データベースにエラーログが発生し、Agent にも警告ログが出る可能性があります。これらのログを停止するには、`cloudsqladmin` を [ignore_databases][1] リストに追加します。
+Agent versions prior to `7.50` may attempt to connect to the `cloudsqladmin` database. This can cause error logs on the database as well as warning logs in the Agent. In order to silence those logs, add `cloudsqladmin` to the [ignore_databases][1] list:
 
 ```yaml
 ignore_databases:
@@ -36,7 +36,7 @@ ignore_databases:
   - cloudsqladmin
 ```
 
-[データベースのオートディスカバリー][2]を使用している場合は、[除外されるデータベース][3]に `cloudsqladmin` も追加します。
+If using [database autodiscovery][2], also add `cloudsqladmin` to [excluded databases][3]:
 
 ```yaml
   exclude:

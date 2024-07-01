@@ -1,74 +1,74 @@
 ---
+title: How Intelligent Test Runner Works in Datadog
+kind: documentation
 further_reading:
-- link: https://www.datadoghq.com/blog/streamline-ci-testing-with-datadog-intelligent-test-runner/
-  tag: ブログ
-  text: Datadog Intelligent Test Runner による CI テストの効率化
-- link: https://www.datadoghq.com/blog/monitor-ci-pipelines/
-  tag: ブログ
-  text: Datadog によるすべての CI パイプラインの監視
-- link: /intelligent_test_runner
-  tag: ドキュメント
-  text: Intelligent Test Runner について
-- link: /tests
-  tag: ドキュメント
-  text: Test Visibility について
-kind: ドキュメント
-title: Datadog における Intelligent Test Runner の仕組み
+  - link: "https://www.datadoghq.com/blog/streamline-ci-testing-with-datadog-intelligent-test-runner/"
+    tag: Blog
+    text: Streamline CI testing with Datadog Intelligent Test Runner
+  - link: "https://www.datadoghq.com/blog/monitor-ci-pipelines/"
+    tag: Blog
+    text: Monitor all your CI pipelines with Datadog
+  - link: /intelligent_test_runner
+    tag: Documentation
+    text: Learn about Intelligent Test Runner
+  - link: /tests
+    tag: Documentation
+    text: Learn about Test Visibility
 ---
 
-## 概要
+## Overview
 
-Intelligent Test Runner は、Datadog のテスト影響度分析ソリューションです。テスト影響度分析は、過去数十年にわたって人気を博してきた手法です。しかし、その実装は一般的に難しく、時間がかかります。Intelligent Test Runner は、この複雑さを簡素化します。
+Intelligent Test Runner is Datadog's test impact analysis solution. Test impact analysis is a technique that has gained popularity over the past few decades. However, it's typically hard and time-consuming to implement. Intelligent Test Runner simplifies this complexity.
 
-テスト影響度分析では、各テストを、そのテストが使用するリポジトリ内のコードファイル群にマップします (テストコードカバレッジごとに)。その目的は、コード変更の影響を受けないテストをスキップすることです。これは、CI でテストに費やす時間の直接的な短縮につながります。
+Test impact analysis maps each test to the set of code files in your repository that the test uses (per test code coverage). Its goal is to skip tests not affected by the code changes. This leads to a direct reduction in time spent testing in CI.
 
-極端な例として、README ファイルのタイポを修正するだけのプルリクエストがあります。この PR では、すべてのテストを実行しても何の価値もありません。それどころか、テストが不安定だと CI が失敗し、マージする前に何度もパイプラインを再試行しなければならなくなるかもしれません。これは開発者にとっても CI にとっても時間の無駄です。Intelligent Test Runner では、PR が README ファイルを変更すると、すべてのテストがスキップされます。
+An extreme example is a pull request that only changes a typo in a README file. For that PR, running all tests doesn't provide any value. On the contrary, flaky tests might make your CI fail, forcing you to retry the pipeline, potentially multiple times, before merging. This is a waste of both developer and CI time. With Intelligent Test Runner, a PR changing a README file would skip all tests.
 
-## 他との違い
+## What sets it apart
 
-テスト選択ソリューションの中には、コードカバレッジデータに頼らず機械学習を使用することでそれを補うものもあります。このようなシステムでは、どのテストが関連性があるのかを確率的に推測します。そのため、関連性のあるテストを見逃してデフォルトブランチのビルドに失敗してしまう可能性があります。また、機械学習ベースのテクニックは、通常、動作するまでに長時間のデータ収集を必要とします。Intelligent Test Runner は、コードカバレッジのベースラインが収集されると、すぐに機能し始めます。
+Some test selection solutions don't rely on code coverage data and make up for it by using machine learning. These systems infer which tests are relevant in a probabilistic fashion and might miss tests that were relevant, leading to build failures in your default branch. Machine learning based techniques also typically require longer periods of data collection before they're able to work. Intelligent Test Runner begins working immediately after a baseline of code coverage is gathered.
 
-他のテストソリューションもコードカバレッジを使用してテスト影響度分析を計算しますが、どのテストを実行するかを評価する際には、最後のコミットの差分のみを考慮します。例えば、GitHub のプルリクエストでは、最新のコミットの CI ステータスのみを考慮してマージを行っています。その結果、すべてのコミットを CI で実行しなければなりません。そうしなければ、実行すべきテストをスキップするリスクが生じます。
+While other test solutions calculate test impact analysis using code coverage too, they only consider the last commit diff when evaluating which tests to run. As an example, this is a problem with GitHub's pull requests, which only take into account the CI status of the latest commit to allow merging. As a result, you must run all commits through CI or risk skipping tests that should have run.
 
-Intelligent Test Runner は、[Test Visibility][1] のデータとともにテストごとのコードカバレッジ情報を活用し、 関連するすべての過去のコミットにおける以前のテストを検索します。Intelligent Test Runner の構成は、ほとんどの言語でワンクリックで行うことができ、結果は正確で他の方法よりも精度が高いです。
+Intelligent Test Runner leverages per-test code coverage information along with data from [Test Visibility][1] to search previous tests in all relevant past commits. Configuration of Intelligent Test Runner is a one-click operation in most languages, and the results are accurate and more precise than other methods.
 
 
-## テスト選択の仕組み
+## How test selection works
 
-Intelligent Test Runner を有効にすると、テストごと (フレームワークによってはスイートごと) のコードカバレッジが透過的に収集され、Datadog に送信されます。
+When you enable Intelligent Test Runner, per-test (or per-suite, depending on the framework) code coverage is transparently collected and sent to Datadog.
 
-Datadog のバックエンドは、その情報を使って以前のテスト実行を検索し、あるテストがスキップ可能かどうかを判断します。もし Datadog が、カバーファイルと[追跡ファイル][2]が現在のコミットと同一であるコミットでテストをパスした記録を持っていれば、そのテストはスキップされます。これは、コードの変更がテストに影響を与えなかったという証拠として使われます。
+The Datadog backend uses that information to search through previous test runs to determine if a given test can be skipped. If Datadog has a record of the test passing in a commit where the covered and [tracked files][2] are identical to the current commit, the test is skipped. This is used as evidence that the code change didn't impact the test.
 
-{{< img src="continuous_integration/itr_test_selection_diagram.png" alt="Intelligent Test Runner のテスト選択プロセスにおいて、何がテストをスキップ可能にするかを説明するベン図" style="width:80%;">}}
+{{< img src="continuous_integration/itr_test_selection_diagram.png" alt="A Venn diagram explaining what makes a test skippable in the test selection process for Intelligent Test Runner" style="width:80%;">}}
 
-次に Datadog ライブラリは、スキップ可能なテストリストから、ソース中でスキップ不可とマークされたテストを削除します。そしてテストの実行を進めますが、 スキップ可能なテストリストに残っているテストはスキップするようにテストフレームワークに指示します。
+The Datadog library then removes tests marked as unskippable in source from the skippable tests list. It then proceeds to run the tests, but directs the test framework to skip those that remain in the skippable test list.
 
-{{< img src="continuous_integration/itr_skipped_test_run.png" alt="Intelligent Test Runner によるテストのスキップ" style="width:80%;">}}
+{{< img src="continuous_integration/itr_skipped_test_run.png" alt="A skipped test by Intelligent Test Runner" style="width:80%;">}}
 
-具体的な例を見てみましょう。
+Let's take a look at a specific example:
 
-{{< img src="continuous_integration/itr_example_2.png" alt="メインブランチとフィーチャーブランチへの複数のコミットを含むプルリクエストが、追跡ファイルによってどのように異なる結果になるかを説明する図" style="width:80%;">}}
+{{< img src="continuous_integration/itr_example_2.png" alt="A diagram explaining how a pull request with multiple commits to main and feature branches can have different results with tracked files" style="width:80%;">}}
 
-上の図は、`main` から分岐した開発者ブランチで、いくつかのコミットがあることを示しています。それぞれのコミットにおいて、CI は 2 つのテスト (A と B) を実行し、それぞれ異なる結果を得ています。
+The diagram above shows a developer branch that branches out from `main` and has several commits. On each commit, the CI has been running two tests (A and B) with different results.
 
-- **コミット 1** は両方のテストを実行しました。このコミットには、追跡ファイルと、A と B の両方のカバーファイルに影響した変更が含まれています。
-- **コミット 2** は両方のテストを再度実行しました。
-  - このコミットはテスト A には影響しませんでしたが (追跡ファイルやカバーファイルに変更はなかったため)、テスト A が以前にパスしたテスト実行がないため、テスト A を実行する必要があります。今回、テストがパスしたことから、これは不安定なテストであることがわかります。
-  - テスト B が実行されたのは、このテストに成功した以前のテスト実行がないからであり、またコミット 2 がこのテストに影響するファイルを変更したからです。
-- **コミット 3** は、追跡ファイルが変更されたため、すべてのテストを実行します。
-- **コミット 4** はすべてのテストを実行します。
-  - すべての基準を満たす以前のテスト実行がないため、テスト A は実行されます。コミット 1 と 3 のテスト実行は失敗したため使用できず、コミット 2 のテスト実行はコミット 2 からコミット 4 まで追跡ファイルが変更されているため使用できません。
-  - すべての基準を満たす以前のテスト実行がないため、テスト B も実行されます。コミット 1 と 2 のテスト実行は失敗したため使用できず、コミット 3 のテスト実行は、コミット 3 と 4 の間にテスト B 用のカバーファイルが変更されたため使用できません。
-- **コミット 5** はテストを 1 つスキップすることができました。
-  - コミット 4 のテスト実行により、テスト A はスキップすることができました。このテスト実行は必要な条件をすべて満たしています。追跡ファイルはコミット 4 と 5 の間で変更されていませんし、テスト A の影響ファイルもありません。そして、テスト A はコミット 4 でパスされました。したがって、テストを実行してもコミット 4 と同じコードパスを実行することになり、CI に新しい情報を提供することはありません。この場合、テスト A をスキップすることには 2 つの利点があります。テストを実行しないことによるパフォーマンス/コストの利点と、テスト A が不安定であることによる CI の信頼性の向上です。
-  - コミット 5 でカバーファイルが変更されたため、テスト B は実行される必要がありました。
-- **コミット 6** は両方のテストをスキップすることができました。
-  - コミット 4 のテスト実行のおかげで、テスト A をスキップすることができました。
-  - コミット 5 のテスト実行のおかげで、テスト B をスキップすることができました。
+- **Commit 1** ran both tests. This commit contained changes that affected the tracked files, and the covered files of both A and B.
+- **Commit 2** ran both tests again:
+  - Test A has to be run because, although this commit did not affect test A (no changes in tracked files or covered files), there are no previous test runs that passed for Test A. Since Intelligent Test Runner cannot guarantee a passing status if it were run, it doesn't skip it. This time, the test passes, which indicates this is a flaky test.
+  - Test B was run both because there is no previous successful test run for this test, and also because commit 2 changes files that affect it.
+- **Commit 3** runs all tests because a tracked file was changed.
+- **Commit 4** runs all tests:
+  - Test A is run because there is no previous test run that meets all criteria: test runs from commits 1 and 3 cannot be used because they failed, and the test run from commit 2 cannot be used because tracked files have been changed since commit 2 until commit 4.
+  - Test B is also run because there is no previous test run that meets all criteria: test runs from commit 1 and 2 cannot be used because they failed, and the test run from commit 3 cannot be used because covered files for test B were modified between commits 3 and 4.
+- **Commit 5** was able to skip one test:
+  - Test A could be skipped thanks to the test run in commit 4. This test run meets all of the necessary criteria: tracked files haven't been changed between commits 4 and 5, neither have the impacted files for test A, and test A passed in commit 4. Therefore, if the test were run it would exercise the same code paths as in commit 4, and it would not provide any new information in the CI. In this case, skipping Test A has two benefits: there's the performance/cost benefit of not running the test as well as the increased reliability of the CI since Test A is flaky.
+  - Test B had to run because its covered files changed in commit 5.
+- **Commit 6** was able to skip both tests:
+  - Test A could be skipped thanks to the test run in commit 4.
+  - Test B could be skipped thanks to the test run in commit 5.
 
-## その他の参考資料
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/tests/
-[2]: /ja/intelligent_test_runner/#tracked-files
+[1]: /tests/
+[2]: /intelligent_test_runner/#tracked-files

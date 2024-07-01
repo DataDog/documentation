@@ -1,201 +1,201 @@
 ---
+title: Downtimes
+description: "Schedule downtimes for your Datadog monitors to prevent alerts during specific time periods"
 aliases:
-- /ja/monitors/notify/downtimes/
-description: ダウンタイムをスケジューリングすることで、Datadog モニターが一定期間アラートを出さないようにします。
+- /monitors/notify/downtimes/
 further_reading:
 - link: /monitors/guide/suppress-alert-with-downtimes
-  tag: ガイド
-  text: ダウンタイム時のアラートを停止する
+  tag: Guide
+  text: Suppress alerts with downtimes
 - link: /monitors/guide/scoping_downtimes
-  tag: ガイド
-  text: ダウンタイムスケジュールのスコープ
+  tag: Guide
+  text: Scoping downtimes schedules
+- link: /monitors/quality/
+  tag: Documentation
+  text: View monitors that are muted over an extended period
 - link: /monitors/
   tag: Documentation
-  text: モニターの作成
+  text: Create monitors
 - link: /monitors/notify/
   tag: Documentation
-  text: モニター通知
-title: ダウンタイム
+  text: Monitor notifications
+cascade:
+  algolia:
+    subcategory: Downtimes
+    tags: [downtimes, mute monitors]
 ---
 
-## 概要
+## Overview
 
-モニターをトリガーせずに、システムのシャットダウン、オフラインメンテナンス、またはアップグレードのダウンタイムをスケジュールします。ダウンタイムはすべてのモニターのアラートと通知を無音にしますが、モニターの状態遷移を妨げることはありません。
+Schedule downtimes for system shutdowns, off-line maintenance, or upgrades without triggering your monitors. Downtimes silence all monitors' alerts and notifications, but do not prevent monitor states transitions.
 
-## ダウンタイムスケジュールの新規作成
+{{< img src="/monitors/downtimes/downtime_overview.png" alt="Example of a downtime" style="width:100%;" >}}
 
-Datadog で[モニターのダウンタイム][1]のスケジューリングを行うには、_Monitors > Manage Downtimes_ の順に移動します。その後、画面右上の **Schedule Downtime** ボタンをクリックしてください。
+## Setup
 
-個々のモニターをミュートするには、モニターステータスページの上部にある **Mute** ボタンをクリックします。これにより、その特定のモニターのダウンタイムスケジュールが作成されます。
+### Create a downtime schedule
 
-## サイレントにする対象を選択
+To schedule a monitor downtime in Datadog navigate to the [**Manage Downtimes**][1] page. Then, click the **Schedule Downtime** button in the upper right.
 
-[モニター名](#by-monitor-name)によって特定のモニターに、またはモニター[タグ](#by-monitor-tags)によって広範囲のモニターにダウンタイムスケジュールを適用します。[*Group scope*](#downtime-scope) で追加のフィルターを適用します。**Preview affected monitors** をクリックすると、対象となるモニターが表示されます。その他の例や使用例については、[ダウンタイムスケジュールのスコープ][2]を参照してください。
+To mute an individual monitor, click the **Mute** button at the top of the monitor status page. This creates a downtime schedule for that particular monitor.
 
-**注**: ダウンタイムがスケジュールされた後に作成または編集されたモニターは、スコープに一致する場合、自動的にダウンタイムに含まれます。
+### Choose what to silence
 
-### モニター名で
+Apply downtime schedules to specific monitors by name or to a broad range of monitors by monitor tags. Apply additional filters through the [*Group scope*](#downtime-scope). Click **Preview affected monitors** to see the monitors included. For more examples and use cases see  [Scoping downtimes schedules][2].
 
-検索するか、ドロップダウンメニューを利用してサイレントにしたいモニターを選択します。フィールドを空欄にすると、すべてのモニターがデフォルトでサイレント状態に設定されます。スコープを選択して、特定のホストやデバイス、任意のタグに限定したダウンタイムを設定することもできます。**選択されたすべてのスコープ**に紐付くモニターのみがサイレントに設定されます。
+**Note**: Any monitor created or edited after the downtime is scheduled is automatically included in the downtime if it matches the scope.
 
-### モニタータグで
+{{< tabs >}}
+{{% tab "By Monitor Name" %}}
 
-1 つまたは複数の[モニタータグ][3]に基づいて、ダウンタイムをスケジュールします。1 つのダウンタイムに選択できるタグの最大数は 32 です。各タグの長さは最大 256 文字です。**選択したすべてのタグ**を持つモニターだけがサイレントになります。追加の制約のためにスコープを選択することもできます。
+Search or use the dropdown menu to choose which monitors to silence. If the field is left empty, all monitors are silenced by default. You can also select a scope to constrain your downtime to a specific host, device, or arbitrary tag. Only monitors that have **ALL selected scopes** are silenced.
+{{% /tab %}}
+{{% tab "By Monitor Tags" %}}
 
-### ダウンタイムスコープ
-グループスコープを使用して、ダウンタイムに追加のフィルターを適用し、どのモニターをミュートにするかをよりコントロールすることができます。ダウンタイムのグループスコープは、モニター固有の対象の**後に**マッチします。モニタータグを使用して複数のモニターを対象にする場合、グループスコープに一致させる前にタグ付けされたモニターを見つけます。
+Schedule a downtime based on one or more [monitor tags][3]. The maximum number of tags that can be selected for a single downtime is 32. Each tag can be at most 256 characters long. Only monitors that have **ALL selected tags** are silenced. You can also select scopes for additional constraints.
 
-ダウンタイムのスコープは、モニターのクエリフィルターまたはモニターのグループ名という 2 つの潜在的なターゲットと一致します。
+[3]: /monitors/manage/#monitor-tags
+{{% /tab %}}
+{{% /tabs %}}
 
-#### モニターグループ名のスコープ
-グループスコープを適用することで、どのモニターをミュートするかをよりコントロールすることができます。例えば、あるモニターがすべてのサービスの平均レイテンシーを監視しているとします。あなたは `web-store` サービスのアップグレードの実行を計画しており、リクエストの遅延と潜在的なエラーを予測しています。
+#### Downtime scope
+Use group scope to apply additional filters to your downtime and have more control over which monitors to mute. The group scope of a downtime is matched after the monitor specific target. If you target multiple monitors by using monitor tags, it finds monitors that are tagged before it matches the group scope.
 
-{{< img src="monitors/downtimes/downtime_examplebyname1_monitor.png" alt="グループ service:web-store のダウンタイムを示すステータスグラフ" style="width:90%;">}}
+For instance, you have a monitor that looks at the average latency of all your services. You are planning on running an upgrade on the `web-store` service and are anticipating slow requests and potential errors.
 
-あなたは `service:web-store` 関連の通知はミュートされ、残りのサービスのその他の重要なアラートは通常通り配信されるようにしたいと思います。モニター対象を選択した後、ダウンタイムのグループスコープに `service:web-store` と入力します。
+You would like to make sure that `service:web-store` related notifications are muted and other critical alerts for the remaining services are delivered as usual. Enter `service:web-store` in the Downtime's group scope after selecting the monitor targets.
 
-**注**: これは `service` や `host` など、複数のディメンションを持つグループでも動作します。`service:web-store` にダウンタイムを作成すると、例えば `service:web-store,host:a` や `service:web-store,host:b` のように、そのサービスを含むすべてのグループをミュートします。
+**Note**: this also works with groups that have multiple dimensions, for example `service` and `host`. Creating a Downtime on `service:web-store` would mute all groups that include said service, for example `service:web-store,host:a` or `service:web-store,host:b`.
 
-#### モニタークエリフィルターのスコープ
-モニタークエリをフィルターして、気になるディメンションだけを見ることができます。特定のディメンションを対象とするダウンタイムを作成できるので、グループ化を追加する必要はありません。
+#### Downtime scope syntax
+The Downtime scope query follows the same common [Search Syntax][3] that many other products across the platform support. To include all groups in the scope of a Downtime, type `*` for the `Group scope`. Further examples of group scopes include:
 
-{{< img src="/monitors/downtimes/downtime_scope_query.png" alt="モニターのクエリフィルターの例" style="width:100%;" >}}
-
-上記のモニターは、モニター固有の対象に一致し、`env:prod` によってスコープされたダウンタイムによってミュートされます。
-
-#### ダウンタイムスコープ構文
-ダウンタイムスコープクエリは、プラットフォーム全体の他の多くの製品がサポートしている共通の[検索構文][19]に従っています。ダウンタイムのスコープにすべてのグループを含めるには、`Group scope` に `*` と入力します。グループスコープの他の例:
-
-| ダウンタイムグループスコープ | 説明 |
+| Downtime group scope | Explanation |
 | ------------------- | ---------------------- |
-| `service:web-store`       | `web-store` サービスに関するすべての通知をミュートします。 |
-| `service:web-store AND env:dev`       | `dev` 環境で実行している `web-store` サービスに関するすべての通知をミュートします。 |
-| `env:(dev OR staging)`       | `dev` または `staging` 環境に関連するすべての通知をミュートします。 |
-| `service:web-store AND env:(dev OR staging)`       | `dev` または `staging` 環境で実行している `web-store` サービスに関連するすべての通知をミュートします。 |
-| `host:authentication-*`       | 名前のプレフィックスが `authentication-` であるホストに関連するすべての通知をミュートします。 |
-| `host:*-prod-cluster`       | 名前のサフィックスが  `-prod-cluster` であるホストに関連するすべての通知をミュートします。 |
-| `host:*-prod-cluster`       | 名前のサフィックスが  `-prod-cluster` であるホストに関連するすべての通知をミュートします。 |
-| `service:webstore AND -env:prod`       | `prod` 環境で**実行していない** `web-store` サービスに関するすべての通知をミュートします。 |
+| `service:web-store`       | Mutes all notifications about the `web-store` service. |
+| `service:web-store AND env:dev`       | Mutes all notifications about the `web-store` service running on the `dev` environment. |
+| `env:(dev OR staging)`       | Mutes any notification related to either the `dev` or `staging` environment. |
+| `service:web-store AND env:(dev OR staging)`       | Mutes any notification related to the `web-store` service running in either the `dev` or `staging` environment. |
+| `host:authentication-*`       | Mutes any notification that relates to a host whose name is prefixed with `authentication-`. |
+| `host:*-prod-cluster`       | Mutes any notification that relates to a host whose name is suffixed with `-prod-cluster`. |
+| `host:*-prod-cluster`       | Mutes any notification that relates to a host whose name is suffixed with `-prod-cluster`. |
+| `service:webstore AND -env:prod`       | Mutes any notification about the `web-store` service that is **not** running on the `prod` environment. |
 
-#### ダウンタイムスコープの制限
-**サポートされていない**制限がいくつかあります。
+#### Downtime scope limitations
+There are a few limitations that are **not supported** which include:
 
-* 例えば、`team:app AND (service:auth OR (service:graphics-writer AND (env:prod OR (type:metric AND status:ok))))` のような 2 つを超えるレベルの入れ子はサポートされていません。ダウンタイムは最大で 2 つのレベルの入れ子にすることができます。ロジックを分解するには、別々のダウンタイムを使用してください。
-* 否定はキー/値のペアと `OR` を持つタグに対してのみサポートされます。例えば、`-key:value` や `-key(A OR B)` などです。`service:(A AND B)`、`service:(-A OR -B)`、`service(A B)` などのスコープはサポートされていません。
-* 例えば、`service:A OR host:X` のように、トップレベルの OR はサポートされていません。この場合、2 つの別々のダウンタイムが必要になります。
-* `prod AND service:(A or B)` や `prod` のようなキーなしのタグはサポートされていません。タグにはキーが必要で、この場合は例えば `env:prod` です。
-* 疑問符のワイルドカード `service:auth?` はサポートされていません。ワイルドカードを使用する必要がある場合は、代わりに `*` を使用してください。
-* キー内の無効な文字 `en&v:prod` は有効なダウンタイムスコープではないため、拒否されます。
+* More than two levels of nesting, such as `team:app AND (service:auth OR (service:graphics-writer AND (env:prod OR (type:metric AND status:ok))))`, are not supported. At most, Downtimes accept two levels of nesting. Use separate Downtimes instead to break down the logic.
+* Negation is only supported for key/value pairs and tags with `OR`. For example, `-key:value` and `-key(A OR B)`. Scopes such as `-service:(A AND B)`, `service:(-A OR -B)`, or `-service(A B)` are not supported.
+* Top level ORs are not supported, for example, `service:A OR host:X`. This requires two separate Downtimes.
+* Keyless tags, such as `prod AND service:(A or B)` or just `prod`, aren't supported. Tags need to have a key, in this case for example `env:prod`.
+* Question mark wildcards: `service:auth?` are not supported. Use `*` instead if you need to use wildcards.
+* Invalid characters within the key: `en&v:prod` is not a valid Downtime scope and will be rejected.
 
-## ダウンタイムスケジュールの設定
+### Set a downtime schedule
 
-### 1 回限り
+#### One Time
 
-開始日時とタイムゾーンを指定して 1 回のみのダウンタイムを設定します。オプションで終了日時を設定することもできます。
+Set a one time downtime by entering the start date, time, and time zone. Optionally, set an end date and time.
 
-{{< img src="monitors/downtimes/downtime_onetime.jpg" alt="1 回限りのダウンタイムをスケジュールするためのフィールド" style="width:90%;">}}
+{{< img src="monitors/downtimes/downtime_onetime.jpg" alt="fields for scheduling one time downtime" style="width:90%;">}}
 
- ### 繰り返し
+#### Recurring
 
-定期的なメンテナンスなどには繰り返しのダウンタイム設定が便利です。開始日時、タイムゾーン、繰り返し条件、期間を指定して繰り返しのダウンタイムを設定します。オプションで終了日や繰り返し回数を指定することもできます。
+Recurring downtimes are useful for recurring maintenance windows. Set a recurring downtime by entering the start date, time, time zone, repeat, and duration. Optionally, specify an end date or number of occurrences.
 
-繰り返しのダウンタイムの 1 つのダウンタイムが終了すると、1 つのダウンタイムはキャンセルされ、同じ制約と更新された開始時刻と終了時刻で新しいダウンタイムが作成されます。<br>
-**注**: 元の作成者は、新しく作成されたすべてのダウンタイムに関連付けられます。
+When a single downtime of a recurring downtime ends, the single downtime is cancelled and a new downtime is created with the same constraints and updated start and end times. <br>
+**Note**: The original creator is associated with all the newly created downtimes.
 
-{{< img src="monitors/guide/downtime_business_hour_weekend.png" alt="営業時間外や週末にアラートをミュートする繰り返しのスケジュールを使用したダウンタイムの構成" style="width:100%;" >}}
+{{< img src="monitors/guide/downtime_business_hour_weekend.png" alt="Downtimes configuration using recurring schedule to mute alerts over the outside of business hours and during the weekend" style="width:100%;" >}}
 
-ダウンタイムのスケジュールを定義するには、[繰り返しルール][6] (RRULE) を使用します。公式の [RRULE ジェネレーター][7]を、繰り返しルールを生成するツールとして使用してください。一般的なユースケースは、RRULES を使用して、例えば毎月第 3 月曜日など、月の特定の日にダウンタイムを定義することです。繰り返しに関するその他の使用例については、[ダウンタイムによるアラートの抑制][8]のガイドを参照してください。
+Use [recurrence rules][4] (RRULEs) to define downtimes schedules. Use the official [RRULE generator][5] as a tool to generate recurring rules. A common use case is to use RRULES to define downtimes on specific days of the month, for example, on the third Monday of each month. For more use cases on recurrence, see the guide to [Suppress alerts with Downtimes][6].
 
-**注**: RRULE で期間を指定する属性はサポートされません（例: `DTSTART`、`DTEND`、`DURATION`）。
+**Note**: Attributes specifying the duration in RRULE are not supported (for example, `DTSTART`, `DTEND`, `DURATION`).
 
-## Multistep API テスト
-### メッセージの追加
+## Notifications
+### Add a message
 
-このダウンタイムについてチームに通知するメッセージをフィールドに入力します。標準のマークダウン形式および Datadog の `@-notification` 構文での入力が可能です。フォーマットオプションの詳細については、[通知ページ][9]を参照してください。
+Enter a message to alert your team about this downtime. The message field allows standard markdown formatting and Datadog's `@-notification` syntax. See the [Notifications page][7] for more information on formatting options.
 
-### チームへの通知
+### Configure notifications and automations
 
-チームメンバーを指定して通知したり、サービス[インテグレーション][10]にメッセージを送信します。Datadog は、ダウンタイムがスケジュール、開始、キャンセル、または期限切れになるたびに、指定した宛先に通知を送信します。これらの監査通知により、あなたのチームはシステムのダウンタイムを認識することができます。
+Configure notifications and automations by specifying team members or sending the message to a service [integration][8]. Datadog sends notifications to the specified destinations whenever the downtime is scheduled, started, cancelled, or expired. These audit notifications allows your team to be aware of the downtimes in your system.
 
-### 最初の回復通知を無効にする
+### Disable first recovery notification
 
-デフォルトでは、Datadog はダウンタイム**前に**トリガーし、ダウンタイム**中に**回復するモニターに対して回復通知を送信します。これは、サードパーティのインテグレーションを使用して、開いたインシデントを自動的にクローズする場合に便利です。チェックボックスを選択すると、これらの通知がミュートされます。
+By default, Datadog sends a recovery notification for monitors that trigger **before** a downtime and end up recovering **during** a downtime. This is useful when using third party integrations to automatically close opened incidents. Selecting the checkbox mutes these notifications.
 
-{{< img src="monitors/downtimes/downtime_first_recovery.png" alt="最初の回復通知をミュートする" style="width:80%;">}}
+{{< img src="monitors/downtimes/downtime_first_recovery.png" alt="mute first recovery notification" style="width:80%;">}}
 
-最初の回復通知を無効にするオプションは、複数のダウンタイム間で加算されます。例えば、複数のダウンタイムが重なって同じモニターをミュートする場合、**少なくとも 1 つ**のダウンタイムが無効化オプションをチェックすると、最初の回復通知がミュートされます。
+The option to disable the first recovery notification is additive between multiple downtimes. For example, if multiple downtimes overlap and mute the same monitor, the first recovery notification is muted if **at least one** downtime checked the option to disable it.
 
-**注**: このオプションは、**最初の**回復通知をミュートします。ダウンタイム中にモニターがトリガーして再び回復する場合、このオプションの設定に関係なく、対応する通知は常にミュートされます。
+**Note**: This option mutes the **first** recovery notification. If a monitor proceeds to trigger and recover again during a downtime, then the corresponding notifications are always muted, regardless of this option's settings.
 
-## 管理
+## Manage
 
-[Manage Downtimes ページ][11]には、アクティブなダウンタイムとスケジュールされたダウンタイムのリストが表示されます。ダウンタイムを選択して、詳細を表示、編集、または削除します。詳細には、作成者、スコープ、適用されるモニターのリストが含まれます。
-ファセットパネルと検索バーを使用して、`Creator`、`Scope`、`Monitor Tags`、または `Active`、`Automuted`、`Recurring` パラメーターのリストをフィルタリングします。
+The [Manage Downtimes page][1] displays the list of active and scheduled downtimes. Select a downtime to view details, edit, or delete it. Details include its creator, its scope, and a list of the monitors it applies to.
+Use the facets panel and the search bar to filter the list on the `Creator`, the `Scope`, `Monitor Tags`, or `Active`, `Automuted`, `Recurring` parameters.
 
-{{< img src="monitors/downtimes/downtime_manage.png" alt="Manage Downtime ページ" style="width:100%;">}}
+{{< img src="monitors/downtimes/downtime_manage.png" alt="manage downtime page" style="width:100%;">}}
 
-### 履歴
+### History
 
-ダウンタイムの履歴は、[Monitor Status][12] ページでグループ移行履歴に重ねて見ることができます。また、[イベントエクスプローラー][13]では、`tags:audit downtime`、または `tags:audit downtime_id:<DOWNTIME_ID>` で ID による特定のダウンタイムを検索することで見ることができます。
+Downtime history is viewable on the [Monitor Status][9] page as overlaid on the group transition history, and the [Events explorer][10] by searching for `tags:audit downtime`, or a specific downtime by ID with `tags:audit downtime_id:<DOWNTIME_ID>`.
 
-### ミュート設定
+### Muting
 
-モニターは、`ALERT`、`WARNING`、`RESOLVED`、`NO DATA` 間でステータスが切り替わる際にイベントをトリガーします。モニターがミュートまたはダウンタイムによってサイレント状態になっている時は、`RESOLVED` から別の状態に変わっても、イベントや通知は**トリガーされません**。
+Monitors trigger events when they change between possible states: `ALERT`, `WARNING`, `RESOLVED`, and `NO DATA`. When a monitor is muted or has a scheduled downtime, transitions from `RESOLVED` to another state do **not** trigger events or notifications.
 
-{{< img src="monitors/downtimes/downtime_on_alert.png" alt="ダウンタイム中にアラートへの状態遷移を示すモニターステータスグラフは、アラートイベントを作成しません" style="width:80%;">}}
+{{< img src="monitors/downtimes/downtime_on_alert.png" alt="Monitor status graph showing state transition to alert during downtime, will not create an alert event" style="width:80%;">}}
 
-**注**: モニターのステータスページからモニターをミュートまたはミュート解除しても、そのモニターに関してスケジュールされたダウンタイムは削除されません。ダウンタイムを編集または削除するには、[Manage Downtimes][1] ページから設定を変更するか、[API][14] を使用する必要があります。
+**Note**: Muting or un-muting a monitor from the monitor status page does not delete scheduled downtimes associated with the monitor. To edit or delete a downtime, use the [Manage Downtimes][1] page or the [API][11].
 
-### 有効期限
+### Expiration
 
-デフォルトでは、ダウンタイムの期限が切れたときにモニターのステータスがアラート対象 (`ALERT`、`WARNING`、`NO DATA`) の場合、モニターは新しい通知をトリガーします。これは、ダウンタイム中にモニターの状態が (たとえば `OK` から `ALERT`、`WARNING`、または `NO DATA` に) 変わったモニターおよび、ダウンタイムが始まる時点で既にアラート対象の状態であるモニターに適用されます。ダウンタイムが手動でキャンセルされた場合、モニターがアラート対象の状態に入っていても、通知は送信されません。
+By default, if a monitor is in an alert-worthy state (`ALERT`, `WARNING`, or `NO DATA`) when a downtime expires, the monitor triggers a new notification. This applies to monitors that change state during downtime (such as from `OK` to `ALERT`, `WARNING`, or `NO DATA`), and to monitors that already have an alert-worthy state when downtime begins. If a downtime is manually canceled, notifications are not sent, even if the monitor has entered an alert-worthy state.
 
-デフォルトの動作をオーバーライドするには、"Notify Your Team" セクションのオプションを使用して、ダウンタイムの終了時に送信する通知を指定します。API で作成されたダウンタイムの場合、デフォルトの動作で `is_cancelled` オプションが除外されます。
+To override the default behavior, specify which notifications should be sent at the end of downtimes with the options in the **Configure notifications and automations** section. For downtimes created with the API, the default behavior is to exclude the `Is cancelled` option.
 
-{{< img src="monitors/downtimes/downtime_cancel_expire_notification.png" alt="特定のダウンタイム条件を持つモニターの Notify your team section セクションを構成する" style="width:100%;">}}
+{{< img src="monitors/downtimes/downtime_cancel_expire_notification.png" alt="The Configure notifications and automations section of a monitor with specific downtime conditions" style="width:100%;">}}
 
-**例 1:** モニターがダウンタイムの開始*前に*アラートの状態で、ダウンタイム中も*継続*した場合:
-1. ダウンタイム中、このアラートの通知は停止されます。
-2. モニターはアラートの状態です（依然として条件が満たされているため）。
-3. ダウンタイムが終了します。
-4. アラート条件が依然として満たされるため、通知が送信されます。
+**Example 1:** If a monitor is in an alert state *before* downtime starts and *continues* for the duration of downtime:
+1. During downtime, notifications for this alert are suppressed.
+2. The monitor remains in an alert state (because the conditions are still met).
+3. The downtime ends.
+4. The alert conditions are still met, so a notification is sent.
 
-**例 2:** モニターがダウンタイムの開始*前に*アラートの状態で、ダウンタイム*中に*リカバリした場合:
-1. `ALERT` 状態から `OK` に移行します。
-2. ダウンタイム中にリカバリ通知が送信されます（ダウンタイム中最初のリカバリのみ）。
+**Example 2:** If a monitor is in an alert state *before* a downtime commences and recovers *during* that downtime:
+1. The state transitions from `ALERT` to `OK`.
+2. The recovery notification is sent during the downtime, but only for the first recovery during that downtime.
 
-### モニターレポート
+### Monitor report
 
-[週間モニターレポート][15]には、ダウンタイム時を含むすべてのアラートのステータスが含まれます。
+All alerted states are included on the [weekly monitor report][12] even if the monitor is in a downtime.
 
-## オートミュート
+## Auto-muting
 
-Datadog は、特定のクラウドワークロードの手動シャットダウンに関連するモニターをプロアクティブにミュートすることができます。シャットダウンの自動ミュートには、以下のシナリオがサポートされています。
+Datadog can proactively mute monitors related to the manual shutdown of certain cloud workloads. The following scenarios of auto-muting for shutdown are supported:
 
-- **[Amazon EC2 インスタンス][16]**と、CloudWatch API からのホストステータスに基づく AWS オートスケールによるインスタンスの終了。
-- **[Google Compute Engine (GCE)][17]** インスタンスおよび、GCE API からのホストステータスに基づいて GCE オートスケーリングによってトリガーされるインスタンスの終了。
-- シャットダウンが手動または Azure オートスケーリングによってトリガーされたかにかかわらず、Azure Resource Health API を通じて利用できるヘルスステータスに基づく、**[Azure VM][18]**。
+- **[Amazon EC2 instances][13]** and instance termination by AWS autoscaling based on host statuses from the CloudWatch API.
+- **[Google Compute Engine (GCE)][14]** instances and instance termination triggered by GCE autoscaling based on host statuses from the GCE API.
+- **[Azure VMs][15]**, whether the shutdown was triggered manually or by Azure autoscaling, based on health statuses available through the Azure Resource Health API.
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/monitors/downtimes
-[2]: /ja/monitors/guide/scoping_downtimes
-[3]: /ja/monitors/manage/#monitor-tags
-[4]: /ja/monitors/manage/search/
-[5]: /ja/monitors/configuration/?tab=thresholdalert#alert-grouping
-[6]: https://icalendar.org/iCalendar-RFC-5545/3-8-5-3-recurrence-rule.html
-[7]: https://icalendar.org/rrule-tool.html
-[8]: /ja/monitors/guide/suppress-alert-with-downtimes/
-[9]: /ja/monitors/notify/#overview
-[10]: /ja/integrations/#cat-notification
-[11]: https://app.datadoghq.com/monitors/downtimes
-[12]: /ja/monitors/manage/status/
-[13]: /ja/service_management/events/explorer
-[14]: /ja/api/latest/downtimes/#cancel-a-downtime
-[15]: /ja/account_management/#preferences
-[16]: /ja/integrations/amazon_ec2/#ec2-automuting
-[17]: /ja/integrations/google_compute_engine/#gce-automuting
-[18]: /ja/integrations/azure_vm/#automuting-monitors
-[19]: /ja/logs/explorer/search_syntax/
+[2]: /monitors/guide/scoping_downtimes
+[3]: /logs/explorer/search_syntax/
+[4]: https://icalendar.org/iCalendar-RFC-5545/3-8-5-3-recurrence-rule.html
+[5]: https://icalendar.org/rrule-tool.html
+[6]: /monitors/guide/suppress-alert-with-downtimes/
+[7]: /monitors/notify/#overview
+[8]: /integrations/#cat-notification
+[9]: /monitors/manage/status/
+[10]: /service_management/events/explorer
+[11]: /api/latest/downtimes/#cancel-a-downtime
+[12]: /account_management/#preferences
+[13]: /integrations/amazon_ec2/#ec2-automuting
+[14]: /integrations/google_compute_engine/#gce-automuting
+[15]: /integrations/azure_vm/#automuting-monitors

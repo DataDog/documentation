@@ -1,66 +1,66 @@
 ---
+title: Tutorial - Enabling Tracing for a Java Application on the Same Host as the Datadog Agent
+kind: guide
 further_reading:
 - link: /tracing/trace_collection/library_config/java/
-  tags: ドキュメント
-  text: トレーシングライブラリの追加構成オプション
+  tag: Documentation
+  text: Additional tracing library configuration options
 - link: /tracing/trace_collection/dd_libraries/java/
-  tags: ドキュメント
-  text: トレーシングライブラリの詳細設定手順
+  tag: Documentation
+  text: Detailed tracing library setup instructions
 - link: /tracing/trace_collection/compatibility/java/
-  tags: ドキュメント
-  text: 自動インスツルメンテーションのためにサポートされている Java フレームワーク
+  tag: Documentation
+  text: Supported Java frameworks for automatic instrumentation
 - link: /tracing/trace_collection/custom_instrumentation/java/
-  tags: ドキュメント
-  text: トレースとスパンを手動で構成する
-- link: https://github.com/DataDog/dd-trace-java
-  tags: GitHub
-  text: トレーシングライブラリオープンソースコードリポジトリ
-kind: ガイド
-title: チュートリアル - Datadog Agent と同じホスト上の Java アプリケーションのトレースを有効にする
+  tag: Documentation
+  text: Manually configuring traces and spans
+- link: "https://github.com/DataDog/dd-trace-java"
+  tag: Source Code
+  text: Tracing library open source code repository
 ---
 
-## 概要
+## Overview
 
-このチュートリアルでは、ホスト上にインストールされたサンプル Java アプリケーションでトレースを有効にするための手順を説明します。このシナリオでは、アプリケーションと同じホスト上に Datadog Agent をインストールします。
+This tutorial walks you through the steps for enabling tracing on a sample Java application installed on a host. In this scenario, you install a Datadog Agent on the same host as the application.
 
-コンテナ内またはクラウドインフラストラクチャーのアプリケーション、コンテナ内の Agent、異なる言語で書かれたアプリケーションなど、その他のシナリオについては、その他の[トレース有効化のチュートリアル][1]を参照してください。
+For other scenarios, including applications in containers or on cloud infrastructure, Agent in a container, and applications written in different languages, see the other [Enabling Tracing tutorials][1].
 
-Java の一般的なトレース設定ドキュメントについては、[Java アプリケーションのトレース][2]を参照してください。
+See [Tracing Java Applications][2] for general comprehensive tracing setup documentation for Java.
 
-### 前提条件
+### Prerequisites
 
-- Datadog のアカウントと[組織の API キー][3]
+- A Datadog account and [organization API key][3]
 - Git
 - Curl
-- sudo を使用する場合、root 権限を持つ物理または仮想 Linux ホスト
-- ホスト上の Java 11 互換の JDK (単なる JRE ではありません)。このチュートリアルでは、同じマシン上でビルドし、同じマシンにデプロイしています。
+- A physical or virtual Linux host with root access when using sudo
+- Java 11-compatible JDK (not just a JRE) on the host. In this tutorial, you're building on and deploying to the same machine.
 
-## Agent のインストール
+## Install the Agent
 
-Datadog Agent をマシンにインストールしていない場合は、[**Integrations > Agent**][5] にアクセスし、お使いの OS を選択してください。例えば、ほとんどの Linux プラットフォームでは、`<YOUR_API_KEY>` を [Datadog API キー][3]に置き換えて、以下のスクリプトを実行することで Agent をインストールすることができます。
+If you haven't installed a Datadog Agent on your machine, go to [**Integrations > Agent**][5] and select your operating system. For example, on most Linux platforms, you can install the Agent by running the following script, replacing `<YOUR_API_KEY>` with your [Datadog API key][3]:
 
 {{< code-block lang="shell" >}}
 DD_AGENT_MAJOR_VERSION=7 DD_API_KEY=<YOUR_API_KEY> DD_SITE="datadoghq.com" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script.sh)"
 {{< /code-block >}}
 
-`datadoghq.com` 以外の Datadog サイトにデータを送信するには、`DD_SITE` 環境変数を [Datadog サイト][6]に置き換えてください。
+To send data to a Datadog site other than `datadoghq.com`, replace the `DD_SITE` environment variable with [your Datadog site][6].
 
-[**Events &gt; Explorer**][8] を開き、オプションで `Datadog` ソースファセットでフィルタリングし、ホストへの Agent インストールを確認するイベントを探して、Agent が実行されており、Datadog にデータを送信していることを確認します。
+Verify that the Agent is running and sending data to Datadog by going to [**Events > Explorer**][8], optionally filtering by the `Datadog` Source facet, and looking for an event that confirms the Agent installation on the host:
 
-{{< img src="tracing/guide/tutorials/tutorial-python-host-agent-verify.png" alt="Agent がホストにインストールされたことを示す Datadog からのメッセージを表示するイベントエクスプローラー。" style="width:70%;" >}}
+{{< img src="tracing/guide/tutorials/tutorial-python-host-agent-verify.png" alt="Event Explorer showing a message from Datadog indicating the Agent was installed on a host." style="width:70%;" >}}
 
-<div class="alert alert-info">数分後、Datadog にホストが表示されない場合 (<strong>Infrastructure > Host map</strong>)、<a href="https://app.datadoghq.com/organization-settings/api-keys"><strong>Organization Settings > API Keys</strong></a> にある組織の正しい API キーを使用したことを確認してください。</div>
+<div class="alert alert-info">If after a few minutes you don't see your host in Datadog (under <strong>Infrastructure > Host map</strong>), ensure you used the correct API key for your organization, available at <a href="https://app.datadoghq.com/organization-settings/api-keys"><strong>Organization Settings > API Keys</strong></a>.</div>
 
 
-## サンプル Java アプリケーションのインストールと実行
+## Install and run a sample Java application
 
-次に、トレースするためのサンプルアプリケーションをインストールします。このチュートリアルのコードサンプルは [github.com/DataDog/apm-tutorial-java-host][9] で見ることができます。以下を実行することで git リポジトリの複製を行います。
+Next, install a sample application to trace. The code sample for this tutorial can be found at [github.com/DataDog/apm-tutorial-java-host][9]. Clone the git repository by running:
 
 {{< code-block lang="shell" >}}
 git clone https://github.com/DataDog/apm-tutorial-java-host.git
 {{< /code-block >}}
 
-Maven または Gradle のどちらか使いやすい方を使用して、サンプルアプリをビルドします。`apm-tutorial-java-host` 内の `notes` ディレクトリに移動して、以下のいずれかを実行してください。
+Build the sample app using either Maven or Gradle, whichever you are more comfortable with. Navigate to the `notes` directory within `apm-tutorial-java-host` and run one of the following:
 
 {{< tabs >}}
 
@@ -70,7 +70,7 @@ Maven または Gradle のどちらか使いやすい方を使用して、サン
 ./mvnw clean package
 ```
 
-{{< /tabs >}}
+{{% /tab %}}
 
 {{% tab "Gradle" %}}
 
@@ -78,13 +78,13 @@ Maven または Gradle のどちらか使いやすい方を使用して、サン
 ./gradlew clean bootJar
 ```
 
-これは、Spring Boot Jar プラグインを使用して、Java アプリケーションを実行するために必要なすべてのファイルを含む単一の Jar ファイルを作成するものです。
+This uses the Spring Boot Jar plugin to create a single Jar file that contains all the necessary files to run the Java application.
+
+{{% /tab %}}
 
 {{< /tabs >}}
 
-{{< /tabs >}}
-
-以下を実行することでアプリケーションを起動します。
+Start the application by running:
 
 {{< tabs >}}
 
@@ -94,7 +94,7 @@ Maven または Gradle のどちらか使いやすい方を使用して、サン
 java -jar target/notes-0.0.1-SNAPSHOT.jar
 ```
 
-{{< /tabs >}}
+{{% /tab %}}
 
 {{% tab "Gradle" %}}
 
@@ -102,11 +102,11 @@ java -jar target/notes-0.0.1-SNAPSHOT.jar
 java -jar build/libs/notes-0.0.1-SNAPSHOT.jar
 ```
 
-{{< /tabs >}}
+{{% /tab %}}
 
 {{< /tabs >}}
 
-また、OS がサポートしていれば、`scripts` ディレクトリに用意されている以下のスクリプトを使って、アプリケーションをビルドして実行することもできます。
+Alternatively, if your operating system supports it, you can build and run the application using the following scripts provided in the `scripts` directory:
 
 {{< tabs >}}
 
@@ -116,7 +116,7 @@ java -jar build/libs/notes-0.0.1-SNAPSHOT.jar
 sh ./scripts/mvn_run.sh
 ```
 
-{{< /tabs >}}
+{{% /tab %}}
 
 {{% tab "Gradle" %}}
 
@@ -124,84 +124,84 @@ sh ./scripts/mvn_run.sh
 sh ./scripts/gradle_run.sh
 ```
 
-{{< /tabs >}}
+{{% /tab %}}
 
 {{< /tabs >}}
 
-サンプルの `notes_app` アプリケーションは、インメモリデータベースにデータを保存する基本的な REST API です。別のターミナルを開き、`curl` を使っていくつかの API リクエストを送信します。
+The sample `notes_app` application is a basic REST API that stores data in an in-memory database. Open another terminal and use `curl` to send a few API requests:
 
 `curl localhost:8080/notes`
-: まだデータベースに何もないので `[]` を返します
+: Returns `[]` because there is nothing in the database yet
 
 `curl -X POST 'localhost:8080/notes?desc=hello'`
-: ノートに `hello` という説明と `1` という ID 値を追加します。`{"id":1,"description":"hello"}` を返します。
+: Adds a note with the description `hello` and an ID value of `1`. Returns `{"id":1,"description":"hello"}`.
 
 `curl localhost:8080/notes/1`
-: `id` の値が `1` であるノートを返します: `{"id":1,"description":"hello"}`
+: Returns the note with `id` value of `1`: `{"id":1,"description":"hello"}`
 
 `curl -X POST 'localhost:8080/notes?desc=otherNote'`
-: ノートに `otherNote` という説明と `2` という ID 値を追加します。`{"id":2,"description":"otherNote"}` を返します。
+: Adds a note with the description `otherNote` and an ID value of `2`. Returns `{"id":2,"description":"otherNote"}`
 
 `curl localhost:8080/notes`
-: データベースの内容を返します: `[{"id":1,"description":"hello"},{"id";2,"description":"otherNote"}]`
+: Returns the contents of the database: `[{"id":1,"description":"hello"},{"id";2,"description":"otherNote"}]`
 
-さらに API コールを実行し、アプリケーションのアクションを確認します。終了したら、Ctrl+C でアプリケーションを停止します。
+Run more API calls to see the application in action. When you're done, type Ctrl+C to stop the application.
 
-## Datadog トレーシングのインストール
+## Install Datadog tracing
 
-次に、Java トレーシングライブラリ (Java Agent と呼ばれることもあります) をダウンロードします。`apm-tutorial-java-host` ディレクトリから、以下を実行します。
+Next, download the Java tracing library (sometimes called the Java Agent). From your `apm-tutorial-java-host` directory, run:
 
 {{< code-block lang="sh" >}}
-curl -Lo dd-java-agent.jar https://dtdg.co/latest-java-tracer
+curl -Lo dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
 {{< /code-block >}}
 
-お使いの OS が curl をサポートしていない場合は、直接 `https://dtdg.co/latest-java-tracer ` にアクセスして `dd-java-agent.jar` ファイルをダウンロードすることができます。
+If your operating system does not support curl, you can go directly to `'https://dtdg.co/latest-java-tracer' ` to download the `dd-java-agent.jar` file.
 
-## 自動インスツルメンテーションによる Java アプリケーションの起動
+## Launch the Java application with automatic instrumentation
 
-トレースの生成と収集を開始するには、Datadog にトレースデータを送信させるフラグを追加してサンプルアプリケーションを再起動します。
+To start generating and collecting traces, restart the sample application with additional flags that cause tracing data to be sent to Datadog.
 
-<div class="alert alert-warning"><strong>注</strong>: これらのサンプルコマンドのフラグ、特にサンプルレートは、このチュートリアル以外の環境では、必ずしも適切ではありません。実際の環境で何を使うべきかについては、<a href="#tracing-configuration">トレース構成</a>を読んでください。</div>
+<div class="alert alert-warning"><strong>Note</strong>: The flags on these sample commands, particularly the sample rate, are not necessarily appropriate for environments outside this tutorial. For information about what to use in your real environment, read <a href="#tracing-configuration">Tracing configuration</a>.</div>
 
 
 {{< tabs >}}
 
 {{% tab "Maven" %}}
 
-`notes` ディレクトリから、以下を実行します。
+From the `notes` directory, run:
 
 ```sh
 java -javaagent:../dd-java-agent.jar -Ddd.trace.sample.rate=1 -Ddd.service=notes -Ddd.env=dev -jar -Ddd.version=0.0.1 target/notes-0.0.1-SNAPSHOT.jar
 ```
 
-または、提供されたスクリプトを使用します。
+Or use the provided script:
 
 ```sh
 sh ./scripts/mvn_instrumented_run.sh
 ```
 
-{{< /tabs >}}
+{{% /tab %}}
 
 {{% tab "Gradle" %}}
 
-`notes` ディレクトリから、以下を実行します。
+From the `notes` directory, run:
 
 ```sh
 java -javaagent:../dd-java-agent.jar -Ddd.trace.sample.rate=1 -Ddd.service=notes -Ddd.env=dev -jar -Ddd.version=0.0.1 build/libs/notes-0.0.1-SNAPSHOT.jar
 ```
 
-または、提供されたスクリプトを使用します。
+Or use the provided script:
 
 ```sh
 sh ./scripts/gradle_instrumented_run.sh
 ```
 
-{{< /tabs >}}
+{{% /tab %}}
 
 {{< /tabs >}}
 
 
-再びアプリケーションにリクエストを送るには、`curl` を使用します。
+Use `curl` to again send requests to the application:
 
 `curl localhost:8080/notes`
 : `[]`
@@ -215,49 +215,49 @@ sh ./scripts/gradle_instrumented_run.sh
 `curl localhost:8080/notes`
 : `[{"id":1,"description":"hello"}]`
 
-しばらく待って、Datadog の UI を見てみてください。[**APM > Traces**][11] に移動します。Traces リストには、次のように表示されます。
+Wait a few moments, and take a look at your Datadog UI. Navigate to [**APM > Traces**][11]. The Traces list shows something like this:
 
-{{< img src="tracing/guide/tutorials/tutorial-java-host-traces.png" alt="Traces ビューには、ホストから入ってくるトレースデータが表示されます。" style="width:100%;" >}}
+{{< img src="tracing/guide/tutorials/tutorial-java-host-traces_cropped.png" alt="Traces view shows trace data coming in from host." style="width:100%;" >}}
 
-`h2` はこのチュートリアルのために埋め込まれたメモリ内データベースで、`notes` は Spring Boot アプリケーションです。トレースリストには、すべてのスパン、いつ開始したか、どのリソースがスパンで追跡されたか、どれくらいの時間がかかったか、が表示されます。
+The `h2` is the embedded in-memory database for this tutorial, and `notes` is the Spring Boot application. The traces list shows all the spans, when they started, what resource was tracked with the span, and how long it took.
 
-もし、トレースが表示されない場合は、Traces Search フィールドのフィルターをクリアしてください (使用していない `ENV` などの環境変数にフィルターをかけている場合があります)。
+If you don't see traces, clear any filter in the Traces Search field (sometimes it filters on an environment variable such as `ENV` that you aren't using).
 
-### トレースの検証
+### Examine a trace
 
-Traces ページで、`POST /notes` トレースをクリックすると、各スパンにかかった時間や、あるスパンが完了する前に他のスパンが発生したことを示すフレームグラフが表示されます。グラフの上部にあるバーは、前の画面で選択したスパンです (この場合、ノートアプリケーションへの最初のエントリポイントです)。
+On the Traces page, click on a `POST /notes` trace, and you'll see a flame graph that shows how long each span took and what other spans occurred before a span completed. The bar at the top of the graph is the span you selected on the previous screen (in this case, the initial entry point into the notes application).
 
-バーの幅は、それが完了するまでにかかった時間を示します。低い深さのバーは、高い深さのバーの寿命の間に完了するスパンを表します。
+The width of a bar indicates how long it took to complete. A bar at a lower depth represents a span that completes during the lifetime of a bar at a higher depth.
 
-`POST` トレースのフレームグラフは次のようになります。
+The flame graph for a `POST` trace looks something like this:
 
-{{< img src="tracing/guide/tutorials/tutorial-java-host-post-flame.png" alt="POST トレースのフレームグラフ。" style="width:100%;" >}}
+{{< img src="tracing/guide/tutorials/tutorial-java-host-post-flame.png" alt="A flame graph for a POST trace." style="width:100%;" >}}
 
-`GET /notes` トレースは次のようになります。
+A `GET /notes` trace looks something like this:
 
-{{< img src="tracing/guide/tutorials/tutorial-java-host-get-flame.png" alt="GET トレースのフレームグラフ。" style="width:100%;" >}}
-
-
-### トレーシングのコンフィギュレーション
-
-Java トレーシングライブラリは、Java のビルトイン Agent とモニタリングのサポートを利用します。フラグ `-javaagent:../dd-java-agent.jar` は、JVM が Java Agent として実行できるように、Java トレーシングライブラリをどこで見つけるかを指示します。Java Agent については、[https://www.baeldung.com/java-instrumentation][7] で詳しく説明されています。
-
-Java Agent を有効にする `javaagent` フラグに加え、起動コマンドでは、Datadog 内でアプリケーションを一意に識別するための 3 つの[統合サービスタグ付け][10]の設定を指定します。監視するアプリケーションには、必ず `env`、`service`、`version` タグを指定してください。
-
-そして最後に、`dd.trace.sample.rate` フラグは、このアプリケーションのサンプルレートを設定します。上記の起動コマンドでは、この値を `1` に設定しています。これは、`notes` サービスに対する全てのリクエストの 100% が、分析と表示のために Datadog のバックエンドに送信されることを意味します。低容量のテストアプリケーションの場合、これは問題ありません。実稼働時や大量のデータを扱う環境では、このようなことはしないでください。代わりに、リクエストの一部をサンプリングします。例えば、`-Ddd.trace.sample.rate=0.1` とすると、リクエストの 10% 分のトレースが Datadog に送信されます。[トレース構成設定][14]と[サンプリング機構][15]について詳しくお読みください。
-
-このコマンドのフラグは `-jar` フラグの前に表示されていることに注意してください。これは、このフラグがアプリケーションではなく、Java Virtual Machine のパラメーターだからです。アプリケーションに Java Agent を追加するときは、このフラグを正しい場所に指定するようにしてください。
+{{< img src="tracing/guide/tutorials/tutorial-java-host-get-flame.png" alt="A flame graph for a GET trace." style="width:100%;" >}}
 
 
-## Java アプリケーションに手動インスツルメンテーションを追加する
+### Tracing configuration
 
-自動インスツルメンテーションは便利ですが、より細かいスパンが欲しい場合もあります。Datadog の Java DD Trace API では、アノテーションやコードを使用してコード内のスパンを指定することができます。
+The Java tracing library uses Java's built-in agent and monitoring support. The flag `-javaagent:../dd-java-agent.jar` tells the JVM where to find the Java tracing library so it can run as a Java Agent. Learn more about Java Agents at [https://www.baeldung.com/java-instrumentation][7].
 
-次のステップでは、コードにアノテーションを追加して、いくつかのサンプルメソッドをトレースする方法を説明します。
+In addition to the `javaagent` flag, which enables the Java Agent, the launch commands specify three [Unified Service Tagging][10] settings to uniquely identify your application within Datadog. Always specify `env`, `service`, and `version` tags for every monitored application.
 
-1. `/notes/src/main/java/com/datadog/example/notes/NotesHelper.java` を開きます。このサンプルには、コードにカスタムトレースを設定するさまざまな方法を示す、コメントアウトされたコードがすでに含まれています。
+And finally, the `dd.trace.sample.rate` flag sets the sample rate for this application. The launch commands above set its value to `1`, which means that 100% of all requests to the `notes` service are sent to the Datadog backend for analysis and display. For a low-volume test application, this is fine. Do not do this in production or in any high-volume environment, because this results in a very large volume of data. Instead, sample some of your requests. Pick a value between 0 and 1. For example, `-Ddd.trace.sample.rate=0.1` sends traces for 10% of your requests to Datadog. Read more about [tracing configuration settings][14] and [sampling mechanisms][15].
 
-2. 手動トレーシングをサポートするためのライブラリをインポートしている行のコメントを解除します。
+Notice that the flags in the commands appear _before_ the `-jar` flag. That's because these are parameters for the Java Virtual Machine, not your application. Make sure that when you add the Java Agent to your application, you specify the flags in the right location.
+
+
+## Add manual instrumentation to the Java application
+
+Automatic instrumentation is convenient, but sometimes you want more fine-grained spans. Datadog's Java DD Trace API allows you to specify spans within your code using annotations or code.
+
+The following steps walk you through adding annotations to the code to trace some sample methods.
+
+1. Open `/notes/src/main/java/com/datadog/example/notes/NotesHelper.java`. This example already contains commented-out code that demonstrates the different ways to set up custom tracing on the code.
+
+2. Uncomment the lines that import libraries to support manual tracing:
 
    ```java
    import datadog.trace.api.Trace;
@@ -271,14 +271,14 @@ Java Agent を有効にする `javaagent` フラグに加え、起動コマン�
    import java.io.StringWriter
    ```
 
-3. 2 つのパブリックプロセスを手動でトレースしている行のコメントを解除します。これらは、`@Trace` アノテーションを使用して、`operationName` や `resourceName` などのアスペクトをトレースで指定することを示しています。
+3. Uncomment the lines that manually trace the two public processes. These demonstrate the use of `@Trace` annotations to specify aspects such as `operationName` and `resourceName` in a trace:
    ```java
    @Trace(operationName = "traceMethod1", resourceName = "NotesHelper.doLongRunningProcess")
    // ...
    @Trace(operationName = "traceMethod2", resourceName = "NotesHelper.anotherProcess")
    ```
 
-4. また、アプリケーション内の特定のコードブロックに対して、別のスパンを作成することもできます。スパン内には、サービスやリソース名のタグ、エラー処理タグを追加します。これらのタグは、Datadog の視覚化でスパンとメトリクスを表示するフレームグラフになります。プライベートメソッドを手動でトレースする行のコメントを解除します。
+4. You can also create a separate span for a specific code block in the application. Within the span, add service and resource name tags and error handling tags. These tags result in a flame graph showing the span and metrics in Datadog visualizations. Uncomment the lines that manually trace the private method:
 
    ```java
            Tracer tracer = GlobalTracer.get();
@@ -293,7 +293,7 @@ Java Agent を有効にする `javaagent` フラグに加え、起動コマン�
                Thread.sleep(30);
                Log.info("Hello from the custom privateMethod1");
    ```
-   また、エラー時にタグを設定する行も:
+   And also the lines that set tags on errors:
    ```java
         } catch (Exception e) {
             // Set error on span
@@ -310,14 +310,14 @@ Java Agent を有効にする `javaagent` フラグに加え、起動コマン�
         }
    ```
 
-5. ビルドスクリプトの構成を更新し、アプリケーションをビルドします。
+5. Update your build script configuration, and build the application:
 {{< tabs >}}
 
 {{% tab "Maven" %}}
 
-a. `notes/pom.xml` を開き、手動トレースの依存関係を構成する行のコメントを解除します。`dd-trace-api` ライブラリは `@Trace` アノテーションに使用され、`opentracing-util` と `opentracing-api` は手動でスパンを作成するために使用されます。
+a. Open `notes/pom.xml` and uncomment the lines configuring dependencies for manual tracing. The `dd-trace-api` library is used for the `@Trace` annotations, and `opentracing-util` and `opentracing-api` are used for manual span creation.
 
-b. 以下を実行します。
+b. Run:
 
    ```sh
    ./mvnw clean package
@@ -325,58 +325,58 @@ b. 以下を実行します。
    java -javaagent:../dd-java-agent.jar -Ddd.trace.sample.rate=1 -Ddd.service=notes -Ddd.env=dev -jar -Ddd.version=0.0.1 target/notes-0.0.1-SNAPSHOT.jar
    ```
 
-またはスクリプトを使用します。
+   Or use the script:
 
    ```sh
    sh ./scripts/mvn_instrumented_run.sh
    ```
 
-{{< /tabs >}}
+{{% /tab %}}
 
 {{% tab "Gradle" %}}
 
-a. `notes/build.gradle` を開き、手動トレースの依存関係を構成する行のコメントを解除します。`dd-trace-api` ライブラリは `@Trace` アノテーションに使用され、`opentracing-util` と `opentracing-api` は手動でスパンを作成するために使用されます。
+a. Open `notes/build.gradle` and uncomment the lines configuring dependencies for manual tracing. The `dd-trace-api` library is used for the `@Trace` annotations, and `opentracing-util` and `opentracing-api` are used for manual span creation.
 
-b. 以下を実行します。
+b. Run:
    ```sh
    ./gradlew clean bootJar
 
    java -javaagent:../dd-java-agent.jar -Ddd.trace.sample.rate=1 -Ddd.service=notes -Ddd.env=dev -jar -Ddd.version=0.0.1 build/libs/notes-0.0.1-SNAPSHOT.jar
    ```
 
-またはスクリプトを使用します。
+   Or use the script:
 
    ```sh
    sh ./scripts/gradle_instrumented_run.sh
    ```
 
-{{< /tabs >}}
+{{% /tab %}}
 
 {{< /tabs >}}
 
-6. いくつかの HTTP リクエスト、特にいくつかの `GET` リクエストを再送します。
-7. トレースエクスプローラーで、新しい `GET` リクエストの 1 つをクリックすると、次のようなフレームグラフが表示されます。
+6. Resend some HTTP requests, specifically some `GET` requests.
+7. On the Trace Explorer, click on one of the new `GET` requests, and see a flame graph like this:
 
-   {{< img src="tracing/guide/tutorials/tutorial-java-host-custom-flame.png" alt="カスタムインスツルメンテーションを用いた GET トレースのフレームグラフ。" style="width:100%;" >}}
+   {{< img src="tracing/guide/tutorials/tutorial-java-host-custom-flame.png" alt="A flame graph for a GET trace with custom instrumentation." style="width:100%;" >}}
 
-   `getAll` 関数にカスタムトレースが追加され、スタックトレースがより詳細になったことに注意してください。
+   Note the higher level of detail in the stack trace now that the `getAll` function has custom tracing.
 
-   手動でスパンを作成した `privateMethod` は、他のコールとは別のブロックとして表示され、別の色でハイライトされています。`@Trace` アノテーションを使用した他のメソッドは、`GET` リクエスト (`notes` アプリケーション) と同じサービス、同じ色で表示されます。カスタムインスツルメンテーションは、ハイライトして監視する必要があるコードの重要な部分がある場合に有効です。
+   The `privateMethod` around which you created a manual span now shows up as a separate block from the other calls and is highlighted by a different color. The other methods where you used the `@Trace` annotation show under the same service and color as the `GET` request, which is the `notes` application. Custom instrumentation is valuable when there are key parts of the code that need to be highlighted and monitored.
 
-詳しくは、[カスタムインストルメンテーション][12]をご覧ください。
+For more information, read [Custom Instrumentation][12].
 
-## 分散型トレーシングを見るために 2 つ目のアプリケーションを追加する
+## Add a second application to see distributed traces
 
-単一のアプリケーションをトレースすることは素晴らしいスタートですが、トレースの本当の価値は、リクエストがサービスを通じてどのように流れるかを見ることです。これは、_分散型トレーシング_と呼ばれています。
+Tracing a single application is a great start, but the real value in tracing is seeing how requests flow through your services. This is called _distributed tracing_.
 
-サンプルプロジェクトには `calendar` という 2 番目のアプリケーションが含まれており、呼び出されるたびにランダムな日付を返します。Notes アプリケーションの `POST` エンドポイントには、`add_date` という名前の 2 つ目のクエリパラメーターがあります。このパラメータが `y` に設定されると、Notes はカレンダーアプリケーションを呼び出して、ノートに追加する日付を取得します。
+The sample project includes a second application called `calendar` that returns a random date whenever it is invoked. The `POST` endpoint in the Notes application has a second query parameter named `add_date`. When it is set to `y`, Notes calls the calendar application to get a date to add to the note.
 
-1. サンプルリポジトリの `/calendar` ディレクトリに移動し、カレンダーアプリをビルドして実行します。
+1. Navigate to the `/calendar` directory in the sample repo and build and run the calendar app:
 {{< tabs >}}
 
 {{% tab "Maven" %}}
 
-次を実行します。
+Run:
 
 ```sh
 ./mvnw clean package
@@ -384,68 +384,68 @@ b. 以下を実行します。
 java -javaagent:../dd-java-agent.jar -Ddd.trace.sample.rate=1 -Ddd.service=calendar -Ddd.env=dev -jar -Ddd.version=0.0.1 target/calendar-0.0.1-SNAPSHOT.jar
 ```
 
-またはスクリプトを使用します。
+Or use the script:
 
 ```sh
 sh ./scripts/mvn_instrumented_run.sh
 ```
 
-{{< /tabs >}}
+{{% /tab %}}
 
 {{% tab "Gradle" %}}
 
-次を実行します。
+Run:
 ```sh
 ./gradlew bootJar
 
 java -javaagent:../dd-java-agent.jar -Ddd.trace.sample.rate=1 -Ddd.service=calendar -Ddd.env=dev -jar -Ddd.version=0.0.1 build/libs/calendar-0.0.1-SNAPSHOT.jar
 ```
 
-またはスクリプトを使用します。
+Or use the script:
 
 ```sh
 sh ./scripts/gradle_instrumented_run.sh
 ```
 
-{{< /tabs >}}
+{{% /tab %}}
 
 {{< /tabs >}}
 
 
-2. `add_date` パラメーターを指定して、POST リクエストを送信します。
+2. Send a POST request with the `add_date` parameter:
 
 `curl -X POST 'localhost:8080/notes?desc=hello_again&add_date=y'`
 : `{"id":1,"description":"hello_again with date 2022-11-06"}`
 
 
-3. トレースエクスプローラーで、この最新の `notes` トレースをクリックすると、2 つのサービス間の分散型トレーシングが表示されます。
+3. In the Trace Explorer, click this latest `notes` trace to see a distributed trace between the two services:
 
-   {{< img src="tracing/guide/tutorials/tutorial-java-host-distributed.png" alt="分散型トレーシングのフレームグラフ。" style="width:100%;" >}}
+   {{< img src="tracing/guide/tutorials/tutorial-java-host-distributed.png" alt="A flame graph for a distributed trace." style="width:100%;" >}}
 
-`notes` アプリケーションでは何も変更していないことに注意してください。Datadog は `notes` から `calendar` への HTTP コールに使用される `okHttp` ライブラリと、`notes` と `calendar` の HTTP リクエストをリッスンするために使用する Jetty ライブラリの両方を自動的にインスツルメントします。これにより、トレース情報を 1 つのアプリケーションから他のアプリケーションに渡すことができ、分散型トレースをキャプチャすることができます。
-
-
-## トラブルシューティング
-
-もし、期待通りのトレースが受信できない場合は、Java トレーサーのでデバッグモードを設定してください。詳しくは[デバッグモードの有効化][13]を読んでください。
+Note that you didn't change anything in the `notes` application. Datadog automatically instruments both the `okHttp` library used to make the HTTP call from `notes` to `calendar`, and the Jetty library used to listen for HTTP requests in `notes` and `calendar`. This allows the trace information to be passed from one application to the other, capturing a distributed trace.
 
 
-## その他の参考資料
+## Troubleshooting
+
+If you're not receiving traces as expected, set up debug mode for the Java tracer. Read [Enable debug mode][13] to find out more.
+
+
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/tracing/guide/#enabling-tracing-tutorials
-[2]: /ja/tracing/trace_collection/dd_libraries/java/
-[3]: /ja/account_management/api-app-keys/
-[4]: /ja/tracing/trace_collection/compatibility/java/
-[5]: https://app.datadoghq.com/account/settings#agent/overview
-[6]: /ja/getting_started/site/
+[1]: /tracing/guide/#enabling-tracing-tutorials
+[2]: /tracing/trace_collection/dd_libraries/java/
+[3]: /account_management/api-app-keys/
+[4]: /tracing/trace_collection/compatibility/java/
+[5]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
+[6]: /getting_started/site/
 [7]: https://www.baeldung.com/java-instrumentation
 [8]: https://app.datadoghq.com/event/explorer
 [9]: https://github.com/DataDog/apm-tutorial-java-host
-[10]: /ja/getting_started/tagging/unified_service_tagging/#non-containerized-environment
+[10]: /getting_started/tagging/unified_service_tagging/#non-containerized-environment
 [11]: https://app.datadoghq.com/apm/traces
-[12]: /ja/tracing/trace_collection/custom_instrumentation/java/
-[13]: /ja/tracing/troubleshooting/tracer_debug_logs/#enable-debug-mode
-[14]: /ja/tracing/trace_collection/library_config/java/
-[15]: /ja/tracing/trace_pipeline/ingestion_mechanisms/?tab=java
+[12]: /tracing/trace_collection/custom_instrumentation/java/
+[13]: /tracing/troubleshooting/tracer_debug_logs/#enable-debug-mode
+[14]: /tracing/trace_collection/library_config/java/
+[15]: /tracing/trace_pipeline/ingestion_mechanisms/?tab=java

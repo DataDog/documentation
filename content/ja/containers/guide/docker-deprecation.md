@@ -1,32 +1,32 @@
 ---
+title: Docker Deprecation in Kubernetes
 aliases:
-- /ja/agent/guide/docker-deprecation
-title: Kubernetes における Docker の廃止
+ - /agent/guide/docker-deprecation
 ---
 
-Kubernetes は、バージョン 1.20 以降ランタイムとしての Docker を廃止します。また一部のクラウドプロバイダーは、画像において Docker を廃止しました。
+Kubernetes is deprecating Docker as a runtime starting after version 1.20, and some cloud providers have deprecated Docker in their images. 
 
-- AKS 1.19 は [Docker を廃止し、デフォルトで containerd を使用します][1]。
+- AKS 1.19 [deprecated Docker and uses containerd by default][1].
 
-- GKE 1.19 は [Docker を廃止し、新しいノードにデフォルトで containerd を使用します][2]。
+- GKE 1.19 [deprecated Docker and uses containerd by default, on new nodes][2].
 
-- EKS 1.22 では [Docker が非推奨となり、デフォルトで containerd が使用されます][3]。
+- EKS 1.22 [deprecated Docker and uses containerd by default][3].
 
-- OKE 1.20 では [Docker が非推奨となり、デフォルトで CRI-O が使用されます][4]。
+- OKE 1.20 [deprecated Docker and uses CRI-O by default][4].
 
-Docker がすでに廃止されているバージョンの Kubernetes を実行している場合、Docker ソケットが存在しないか、Kubernetes により実行しているコンテナに関する情報がなく、Docker チェックが機能しません。Docker ランタイムに関する詳細は、[kubernetes.io][5] で確認できます。つまり、使用しているコンテナのランタイムに基づき [containerd][6] または [CRI-O][7] チェックを有効にする必要があります。新しいコンテナのランタイムから収集されたコンテナのメトリクスは、Docker メトリクスと置換されます。
+If you are running a version of Kubernetes where Docker has been deprecated, the Docker socket is no longer present, or has no information about the containers running by Kubernetes, and the Docker check does not work. You can find details about Docker runtime on [kubernetes.io][5]. This means that you must enable either the [containerd][6] or the [CRI-O][7] check depending on the container runtime you are using. The container metrics collected from the new container runtime replace the Docker metrics.
 
-Datadog Agent のバージョン 7.27 以降の場合は、実行している環境が自動的に Agent で検出されるため、コンフィギュレーションを変更する必要はありません。
+With version 7.27+ of the Datadog Agent, the Agent automatically detects the environment you are running, and you do not need to make any configuration changes.
 
-**Agent v7.27 以前を使用している場合、コンテナのランタイムソケットパスを指定する必要があります。**
+**If you are using Agent < v7.27, you must specify your container runtime socket path:**
 
-**注**: メトリクス名が変更されるため（たとえば `docker.*` から `containerd.*` へ）、既存のモニター、ダッシュボード、および SLO を更新する必要がある場合があります。
+**Note**: You may need to update your existing monitors, dashboards, and SLOs because metrics names change—for example, from `docker.*` to `containerd.*`.
 
 {{< tabs >}}
 {{% tab "Helm" %}}
-[Helm チャート][1]で、コンテナのランタイムソケットへのパスを `datadog.criSocketPath` パラメーターで設定します。
+Set the path to your container runtime socket with the `datadog.criSocketPath` parameter in the [Helm chart][1].
 
-例:
+For example:
 
 ```
 criSocketPath:  /var/run/containerd/containerd.sock
@@ -36,9 +36,9 @@ criSocketPath:  /var/run/containerd/containerd.sock
 {{% /tab %}}
 {{% tab "DaemonSet" %}}
 
-Docker ソケットへのすべての参照と、Docker ソケットのボリュームマウントを削除します。
+Remove any references to the Docker socket, as well as any Docker socket volume mounts.
 
-環境変数 `DD_CRI_SOCKET_PATH` を使用して、コンテナのランタイムソケットパスにポイントします。専用コンテナを使用する場合は、すべての Agent コンテナに設定します。
+Use the environment variable `DD_CRI_SOCKET_PATH` to point to your container runtime socket path. Set on all Agent containers if using dedicated containers:
 
 ```
 env:
@@ -46,7 +46,7 @@ env:
     value: /var/run/containerd/containerd.sock
 ```
 
-ホストから Agent コンテナへソケットをマウントします。
+Mount the socket from your host to the Agent container:
 
 ```
 volumeMounts:
@@ -72,5 +72,5 @@ volumes:
 [3]: https://aws.amazon.com/blogs/containers/amazon-eks-1-21-released/
 [4]: https://docs.oracle.com/en-us/iaas/releasenotes/changes/52d34150-0cb8-4a0f-95f3-924dec5a3c83/
 [5]: https://kubernetes.io/docs/tasks/administer-cluster/migrating-from-dockershim/check-if-dockershim-deprecation-affects-you/#role-of-dockershim
-[6]: /ja/integrations/containerd/
-[7]: /ja/integrations/crio/
+[6]: /integrations/containerd/
+[7]: /integrations/crio/

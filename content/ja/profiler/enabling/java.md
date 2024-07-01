@@ -1,89 +1,108 @@
 ---
-aliases:
-- /ja/tracing/profiler/enabling/java/
+title: Enabling the Java Profiler
 code_lang: java
+type: multi-code-lang
 code_lang_weight: 10
 further_reading:
-- link: getting_started/profiler
-  tag: ドキュメント
-  text: プロファイラーの概要
-- link: profiler/profile_visualizations
-  tag: ドキュメント
-  text: 使用可能なプロファイルの視覚化の詳細
-- link: profiler/profiler_troubleshooting/java
-  tag: ドキュメント
-  text: プロファイラの使用中に発生する問題を修正
-title: Java プロファイラーの有効化
-type: multi-code-lang
+    - link: getting_started/profiler
+      tag: Documentation
+      text: Getting Started with Profiler
+    - link: profiler/profile_visualizations
+      tag: Documentation
+      text: Learn more about available profile visualizations
+    - link: profiler/profiler_troubleshooting/java
+      tag: Documentation
+      text: Fix problems you encounter while using the profiler
+aliases:
+  - /tracing/profiler/enabling/java/
 ---
 
-プロファイラーは、Datadog トレースライブラリ内で送信されます。アプリケーションですでに [APM を使用してトレースを収集][1]している場合は、ライブラリのインストールをスキップして、プロファイラーの有効化に直接進むことができます。
+The profiler is shipped within Datadog tracing libraries. If you are already using [APM to collect traces][1] for your application, you can skip installing the library and go directly to enabling the profiler.
 
-## 要件
+## Requirements
 
-dd-trace-java バージョン 1.0.0 では、Java アプリケーションの CPU プロファイルデータを生成するエンジンとして、2 つのオプションがあります。[Java Flight Recorder (JFR)][2] または Datadog Profiler です。バージョン 1.7.0 以降では、Datadog プロファイラーがデフォルトとなっています。それぞれのプロファイラーエンジンには、異なる副作用、要件、利用可能な構成、および制限があり、このページでは、それぞれについて説明します。どちらか一方、または両方のエンジンを有効にすることができます。両方を有効にすると、両方のプロファイルタイプが同時にキャプチャされます。
+For a summary of the minimum and recommended runtime and tracer versions across all languages, read [Supported Language and Tracer Versions][13].
+
+As of dd-trace-java 1.0.0, you have two options for the engine that generates profile data for Java applications: [Java Flight Recorder (JFR)][2] or the Datadog Profiler. As of dd-trace-java 1.7.0, Datadog Profiler is the default. Each profiler engine has different side effects, requirements, available configurations, and limitations, and this page describes each. You can enable either one or both engines. Enabling both captures both profile types at the same time.
 
 {{< tabs >}}
 {{% tab "Datadog Profiler" %}}
 
-JDK の最小バージョン:
+Supported operating systems:
+- Linux
 
-- OpenJDK 8u352+、11.0.17+、17.0.5+ (その上に構築された Amazon Corretto、Azul Zulu その他のビルドを含む)
-- Oracle JDK 8u352+、11.0.17+、17.0.5+
-- OpenJ9 JDK 8u372+、11.0.18+、17.0.6+
+Minimum JDK versions:
+- OpenJDK 8u352+, 11.0.17+, 17.0.5+ (including builds on top of it: Amazon Corretto, Azul Zulu, and others)
+- Oracle JDK 8u352+, 11.0.17+, 17.0.5+
+- OpenJ9 JDK 8u372+, 11.0.18+, 17.0.6+ (used on Eclipse OpenJ9, IBM JDK, IBM Semeru Runtime). The profiler is disabled by default for OpenJ9 due to the possibility of crashing JVM caused by a subtle bug in JVTMI implementation. If you are not experiencing any crashes, you can enable the profiler by adding `-Ddd.profiling.ddprof.enabled=true`.
+- Azul Platform Prime 23.05.0.0+ (formerly Azul Zing)
 
-Datadog Profiler は JVMTI の `AsyncGetCallTrace` 関数を使用しており、JDK リリース 17.0.5 以前ではこの関数に[既知の問題][1]が存在しました。この修正は 11.0.17 と 8u352 にバックポートされています。プロファイラーがデプロイされる JVM にこの修正がない限り、Datadog Profiler は有効ではありません。Datadog Profiler を使用するには、少なくとも 8u352、11.0.17、17.0.5、または最新の非 LTS JVM バージョンにアップグレードしてください。
+The Datadog Profiler uses the JVMTI `AsyncGetCallTrace` function, in which there is a [known issue][1] prior to JDK release 17.0.5. This fix was backported to 11.0.17 and 8u352. The Datadog Profiler is not enabled unless the JVM the profiler is deployed into has this fix. Upgrade to at least 8u352, 11.0.17, 17.0.5, or the latest non-LTS JVM version to use the Datadog Profiler.
 
 [1]: https://bugs.openjdk.org/browse/JDK-8283849
 {{% /tab %}}
 
 {{% tab "JFR" %}}
 
-JDK の最小バージョン:
-- OpenJDK 11+
-- Oracle JDK 11+
-- [OpenJDK 8 (バージョン 1.8.0.262/8u262+)][3]
-- Azul Zulu 8 (バージョン 1.8.0.212/8u212+)。
+Supported operating systems:
+- Linux
+- Windows
 
-OpenJ9 では、JFR はサポートされていません。
+Minimum JDK versions:
+- OpenJDK [1.8.0.262/8u262+][3], 11+ (including builds on top of it: Amazon Corretto, and others)
+- Oracle JDK 11+ (Enabling the JFR may require a commercial license from Oracle. Reach out to your Oracle representative to confirm whether this is part of your license)
+- Azul Zulu 8 (version 1.8.0.212/8u212+), 11+
+- GraalVM 17+ - both, JIT and AOT (native-image) versions
 
-**注**: Java Flight Recorder for OracleJDK を有効にするには、Oracle からの商用ライセンスが必要な場合があります。これがライセンスの一部であるかどうかを確認するには、Oracle の担当者にお問い合わせください。
+Because non-LTS JDK versions may not contain stability and performance fixes related to the Datadog Profiler library, use versions 8, 11, and 17 of the Long Term Support JDK.
 
-LTS 以外の JDK バージョンには、Datadog Profiler ライブラリに関連する安定性とパフォーマンスの修正が含まれていない可能性があるため、Long Term Support JDK のバージョン8、11、17 を使用してください。
+Additional requirements for profiling [Code Hotspots][12]:
+ - OpenJDK 11+ and `dd-trace-java` version 0.65.0+
+ - OpenJDK 8 8u282+ and `dd-trace-java` version 0.77.0+
 
-[Code Hotspots][11] のプロファイリングに関する追加要件:
- - OpenJDK 11+ および `dd-trace-java` バージョン 0.65.0+、または
- - OpenJDK 8 8u282+ および `dd-trace-java` バージョン 0.77.0+。
-
-[3]: /ja/profiler/profiler_troubleshooting/#java-8-support
-[11]: /ja/profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
+[3]: /profiler/profiler_troubleshooting/java/#java-8-support
+[12]: /profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
 
 {{% /tab %}}
 {{< /tabs >}}
 
-Java、Scala、Groovy、Kotlin、Clojure など、すべての JVM ベースの言語をサポートしています。
+All JVM-based languages, such as Java, Scala, Groovy, Kotlin, and Clojure are supported.
 
-Continuous Profiler は、AWS Lambda などのサーバーレスプラットフォームには対応していません。
+Continuous Profiler is not supported on serverless platforms, such as AWS Lambda.
 
-## インストール
+## Installation
 
-アプリケーションのプロファイリングを開始するには
+To begin profiling applications:
 
-1. すでに Datadog を使用している場合は、Agent をバージョン [7.20.2][4] 以降または [6.20.2][5] 以降にアップグレードしてください。まだ APM を有効にしていない場合で Datadog にデータを送信するようにアプリケーションを設定するには、ご利用中の Agent で `DD_APM_ENABLED` 環境変数を `true` に設定し、ポート `8126/TCP` をリッスンします。
+1. Ensure Datadog Agent v6+ is installed and running. Datadog recommends using [Datadog Agent v7+][4]. If you don't have APM enabled to set up your application to send data to Datadog, in your Agent, set the `DD_APM_ENABLED` environment variable to `true` and listening to the port `8126/TCP`.
 
-2. Java Agent クラスファイルを含む `dd-java-agent.jar` をダウンロードします。
+2. Download `dd-java-agent.jar`, which contains the Java Agent class files:
 
-    ```shell
-    wget -O dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
-    ```
-
-   **注**: Profiler は、0.55 以降のバージョンの `dd-java-agent.jar` ライブラリで利用できます。
-
-3. `Ddd.profiling.enabled` フラグまたは `DD_PROFILING_ENABLED` 環境変数を `true` に設定し、プロファイラーを有効にします。`dd.service`、`dd.env`、`dd.version` を指定して、プロファイルをこれらの次元でフィルタリングしたりグループ化したりできるようにします。
    {{< tabs >}}
-{{% tab "コマンド引数" %}}
+   {{% tab "Wget" %}}
+   ```shell
+   wget -O dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
+   ```
+   {{% /tab %}}
+   {{% tab "cURL" %}}
+   ```shell
+   curl -Lo dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
+   ```
+   {{% /tab %}}
+   {{% tab "Dockerfile" %}}
+   ```dockerfile
+   ADD 'https://dtdg.co/latest-java-tracer' dd-java-agent.jar
+   ```
+   {{% /tab %}}
+   {{< /tabs >}}
 
-サービスを呼び出します。
+   **Note**: Profiler is available in the `dd-java-agent.jar` library in versions 0.55+.
+
+3. Enable the profiler by setting `-Ddd.profiling.enabled` flag or `DD_PROFILING_ENABLED` environment variable to `true`. Specify `dd.service`, `dd.env`, and `dd.version` so you can filter and group your profiles across these dimensions:
+   {{< tabs >}}
+{{% tab "Command arguments" %}}
+
+Invoke your service:
 ```diff
 java \
     -javaagent:dd-java-agent.jar \
@@ -96,7 +115,7 @@ java \
 ```
 
 {{% /tab %}}
-{{% tab "環境変数" %}}
+{{% tab "Environment variables" %}}
 
 ```diff
 export DD_SERVICE=<YOUR_SERVICE>
@@ -112,48 +131,57 @@ java \
 {{% /tab %}}
 {{< /tabs >}}
 
-    **注**: `javaagent` 引数は `-jar` の前に置く必要があり、アプリケーションの引数ではなく、JVM のオプションとして追加されます。詳細については、[Oracleドキュメント][6]を参照してください。
+{{% collapse-content title="(Optional) Build and run native-image" level="h4" %}}
 
-    ```shell
-    # 良い:
-    java -javaagent:dd-java-agent.jar ... -jar my-service.jar -more-flags
-    # 悪い:
-    java -jar my-service.jar -javaagent:dd-java-agent.jar ...
-    ```
+Follow the [Tracer Setup Instructions][14] to build your native image with the Datadog Java Profiler.
 
-4. 1〜2 分後、[Datadog APM > Profiling ページ][7]でプロファイルを視覚化することができます。
+When the service binary is built, you can use environment variables to enable and configure the Datadog Java Profiler:
 
-### CPU プロファイラーエンジンオプションの有効化
+   ```shell
+   DD_PROFILING_ENABLED=true DD_PROFILING_DIRECTALLOCATION_ENABLED=true ./my_service
+   ```
 
-dd-trace-java バージョン 1.5.0 以降、使用する CPU プロファイラーに Datadog と Java Flight Recorder (JFR) の 2 つのオプションがあります。バージョン 1.7.0 以降では、Datadog がデフォルトですが、オプションで CPU プロファイリングに対して JFR を有効にすることもできます。どちらか一方、または両方のエンジンを有効にすることができます。両方を有効にすると、両方のプロファイルタイプが同時にキャプチャされます。
+**Note**: Only JFR-based profiling is supported for the GraalVM native-image applications. None of the <code>DDPROF</code> related configuration options are effective.
+{{% /collapse-content %}}
 
-Datadog Profiler は、すべてのサンプルでアクティブスパンを記録し、コードホットスポットおよびエンドポイントプロファイリング機能の忠実度を向上させることができます。このエンジンを有効にすることで、APM トレースとのインテグレーションをより良くすることができます。
+   **Note**: The `-javaagent` argument needs to be before `-jar`. This adds it as a JVM option rather than an application argument. For example, `java -javaagent:dd-java-agent.jar ... -jar my-service.jar -more-flags`. For more information, see the [Oracle documentation][6].
 
-Datadog Profiler は、CPU、ウォールクロック、アロケーション、メモリリークプロファイラーなど、複数のプロファイリングエンジンで構成されています。
+4. Optional: Set up [Source Code Integration][7] to connect your profiling data with your Git repositories.
+
+5. After a minute or two, you can visualize your profiles on the [Datadog APM > Profiling page][8].
+
+### Enabling CPU profiler engine options
+
+Since dd-trace-java version 1.5.0, you have two options for the CPU profiler used, Datadog or Java Flight Recorder (JFR). Since version 1.7.0, Datadog is the default, but you can also optionally enable JFR for CPU profiling. You can enable either one or both engines. Enabling both captures both profile types at the same time.
+
+The Datadog profiler records the active span on every sample, which improves the fidelity of the Code Hotspots and Endpoint profiling features. Enabling this engine supports much better integration with APM tracing.
+
+The Datadog profiler consists of several profiling engines, including CPU, wallclock, allocation, and memory leak profilers.
 
 
 {{< tabs >}}
 {{% tab "Datadog Profiler" %}}
+_Requires JDK 11+._
 
-dd-trace-java バージョン 1.7.0+ では、Datadog Profiler がデフォルトで有効になっています。Datadog CPU プロファイリングは perf イベントを通してスケジュールされ、JFR CPU プロファイリングよりも正確です。CPU プロファイリングを有効にするには
+The Datadog profiler is enabled by default in dd-trace-java versions 1.7.0+. Datadog CPU profiling is scheduled through perf events and is more accurate than JFR CPU profiling. To enable CPU profiling:
 
 ```
-export DD_PROFILING_DDPROF_ENABLED=true # これは v1.7.0+ のデフォルトです
+export DD_PROFILING_DDPROF_ENABLED=true # this is the default in v1.7.0+
 export DD_PROFILING_DDPROF_CPU_ENABLED=true
 ```
 
-または
+or:
 
 ```
--Ddd.profiling.ddprof.enabled=true # これは v1.7.0+ のデフォルトです
+-Ddd.profiling.ddprof.enabled=true # this is the default in v1.7.0+
 -Ddd.profiling.ddprof.cpu.enabled=true
 ```
 
-JDK Mission Control (JMC) ユーザーにとって、Datadog の CPU サンプルイベントは `datadog.ExecutionSample` となります。
+For JDK Mission Control (JMC) users, the Datadog CPU sample event is `datadog.ExecutionSample`.
 
-#### Linux の設定
+#### Linux settings
 
-CPU エンジンはほとんどのシステムで動作しますが、 `/proc/sys/kernel/perf_event_paranoid` の値が `3` に設定されていると、プロファイラーは CPU サンプリングのスケジューリングに perf イベントを使用することができません。この結果、プロファイルの品質が低下し、`itimer` を使用するようになります。以下のコマンドで `/proc/sys/kernel/perf_event_paranoid` を `2` 以下に設定してください。
+The CPU engine works on most systems, but if the value of `/proc/sys/kernel/perf_event_paranoid` is set to `3`, the profiler can't use perf events to schedule CPU sampling. This results in degraded profile quality, falling back to using `itimer`. Set `/proc/sys/kernel/perf_event_paranoid` to `2` or lower with the following command:
 
 ```
 sudo sh -c 'echo 2 >/proc/sys/kernel/perf_event_paranoid'
@@ -163,142 +191,169 @@ sudo sh -c 'echo 2 >/proc/sys/kernel/perf_event_paranoid'
 
 {{% tab "JFR" %}}
 
-バージョン 1.7.0 以降では、デフォルトの Datadog から JFR の CPU プロファイリングに切り替えるには
+For version 1.7.0+, to switch from the default Datadog to JFR CPU profiling:
 
 ```
 export DD_PROFILING_DDPROF_CPU_ENABLED=false
 ```
-または
+or:
 ```
 -Ddd.profiling.ddprof.cpu.enabled=false
 ```
-JDK Mission Control (JMC) ユーザーにとって、JFR の CPU サンプルイベントは `jdk.ExecutionSample` となります。
+For JDK Mission Control (JMC) users, the JFR CPU sample event is `jdk.ExecutionSample`.
 
 {{% /tab %}}
 {{< /tabs >}}
 
 
-### Datadog Profiler ウォールクロックエンジン
+### Datadog profiler wallclock engine
 
-ウォールクロックプロファイリングエンジンは、レイテンシーのプロファイリングに有効で、APM トレースと緊密にインテグレーションされています。このエンジンは、アクティブなトレースアクティビティを持つ、オンまたはオフ CPU のすべてのスレッドをサンプリングし、トレースまたはスパンレイテンシーの診断に使用することができます。このエンジンは 1.7.0 以降、デフォルトで有効になっています。
-
-または
+The wallclock profiling engine is useful for profiling latency and integrates tightly with APM tracing. The engine samples all threads, on- or off-CPU, with active tracing activity and can be used to diagnose trace or span latency. The engine has been enabled by default since 1.7.0.
 
 ```
--Ddd.profiling.ddprof.enabled=true # これは v1.7.0+ のデフォルトです
+-Ddd.profiling.ddprof.enabled=true # this is the default in v1.7.0+
 -Ddd.profiling.ddprof.wall.enabled=true
 ```
 
-バージョン 1.7.0 以降では、ウォールクロックプロファイラーを無効にするには
+For version 1.7.0+, to disable the wallclock profiler:
 
 ```
 export DD_PROFILING_DDPROF_WALL_ENABLED=false
 ```
-または
+or:
 ```
 -Ddd.profiling.ddprof.wall.enabled=false
 ```
 
-JMC ユーザーの場合、ウォールクロックのサンプルに対して `datadog.MethodSample` イベントが発行されます。
+For JMC users, the `datadog.MethodSample` event is emitted for wallclock samples.
 
-ウォールクロックエンジンは `/proc/sys/kernel/perf_event_paranoid` の設定に依存しません。
+The wallclock engine does not depend on the `/proc/sys/kernel/perf_event_paranoid` setting.
 
-### Datadog Profiler アロケーションエンジン
+### Profiler allocation engine
 
-Datadog のアロケーションプロファイリングエンジンは、アロケーションプロファイルをコンテキスト化し、エンドポイントでフィルターされたアロケーションプロファイルをサポートします。
-v1.17.0 よりも前の dd-java-agent ではデフォルトで無効になっていますが、次のようにして有効にすることができます。
-
-```
-export DD_PROFILING_DDPROF_ENABLED=true # これは v1.7.0+ のデフォルトです
-export DD_PROFILING_DDPROF_ALLOC_ENABLED=true # これは v1.17.0+ のデフォルトです
-```
-
-または
+{{< tabs >}}
+{{% tab "JFR" %}}
+The JFR based allocation profiling engine is enabled by default since JDK 16.
+The reason it's not enabled by default for JDK 8 and 11, is that an allocation intensive
+application can lead to high overhead and large recording sizes.
+To enable it for JDK 8 and 11, add the following:
 
 ```
--Ddd.profiling.ddprof.enabled=true # これは v1.7.0+ のデフォルトです
--Ddd.profiling.ddprof.alloc.enabled=true # これは v1.17.0+ のデフォルトです
+export DD_PROFILING_ENABLED_EVENTS=jdk.ObjectAllocationInNewTLAB,jdk.ObjectAllocationOutsideTLAB
 ```
 
-JMC ユーザーの場合、Datadog アロケーションイベントは `datadog.ObjectAllocationInNewTLAB` と `datadog.ObjectAllocationOutsideTLAB` になります。
+or:
 
-アロケーションプロファイラーエンジンは `/proc/sys/kernel/perf_event_paranoid` の設定に依存しません。
+```
+-Ddd.profiling.enabled.events=jdk.ObjectAllocationInNewTLAB,jdk.ObjectAllocationOutsideTLAB
+```
+{{% /tab %}}
 
-### ライブヒーププロファイラーエンジン
+{{% tab "Datadog Profiler" %}}
 
-_v1.17.0 以降_
+The Datadog allocation profiling engine contextualizes allocation profiles, which supports allocation profiles filtered by endpoint.
+In dd-java-agent earlier than v1.28.0 it is **disabled** by default. The allocation profiler relies on JVMTI APIs which could crash before OpenJDK 21.0.3 and is disabled on older JDK versions. Enable it 
+with:
 
-ライブヒーププロファイラーエンジンは、サービスの全体的なメモリ使用量を調査し、潜在的なメモリリークを特定する際に役立ちます。
-このエンジンはアロケーションのサンプリングを行い、それらのサンプルが直近のガベージコレクションサイクルで生存したかどうかを追跡します。生存したサンプルの数は、ヒープ内のライブオブジェクト数の推定に用いられます。
-追跡対象とするサンプル数は、プロファイラーのメモリ使用量が際限なく増えてしまわないように制限されます。
+```
+export DD_PROFILING_DDPROF_ENABLED=true # this is the default in v1.7.0+
+export DD_PROFILING_DDPROF_ALLOC_ENABLED=true # this is the default in v1.28.0+ on OpenJDK 21.0.3+
+```
 
-このエンジンはデフォルトで無効になっていますが、次の方法で有効にできます。
+or:
+
+```
+-Ddd.profiling.ddprof.enabled=true # this is the default in v1.7.0+
+-Ddd.profiling.ddprof.alloc.enabled=true # this is the default in v1.17.0+
+```
+
+For JMC users, the Datadog allocation events are `datadog.ObjectAllocationInNewTLAB` and `datadog.ObjectAllocationOutsideTLAB`.
+
+The allocation profiler engine does not depend on the `/proc/sys/kernel/perf_event_paranoid` setting.
+{{% /tab %}}
+
+{{< /tabs >}}
+
+### Live-heap profiler engine (alpha)
+
+_Since: v1.17.0. Requires JDK 11+._
+
+<div class="alert alert-warning">This is an alpha feature, it is not recommended to enable this feature in production environments.</a></div>
+
+The live-heap profiler engine is useful for investigating the overall memory usage of your service and identifying potential memory leaks.
+The engine samples allocations and keeps track of whether those samples survived the most recent garbage collection cycle. The number of surviving samples is used to estimate the number of live objects in the heap.
+The number of tracked samples is limited to avoid unbounded growth of the profiler's memory usage.
+
+The engine is disabled by default, but you can enable it with:
 
 ```
 export DD_PROFILING_DDPROF_LIVEHEAP_ENABLED=true
 ```
 
-または
+or:
 
 ```
 -Ddd.profiling.ddprof.liveheap.enabled=true
 ```
 
-JMC ユーザーの場合、Datadog のライブヒープイベントは `datadog.HeapLiveObject` になります。
+For JMC users, the Datadog live-heap event is `datadog.HeapLiveObject`.
 
-アロケーションエンジンは `/proc/sys/kernel/perf_event_paranoid` の設定に依存しません。
+The allocation engine does not depend on the `/proc/sys/kernel/perf_event_paranoid` setting.
 
-### ネイティブスタックトレースの収集
+### Collecting native stack traces
 
-Datadog Profiler CPU またはウォールクロックエンジンが有効になっている場合、ネイティブスタックトレースを収集することができます。ネイティブスタックトレースには、JVM 内部、アプリケーションや JVM で使用されるネイティブライブラリ、およびシステムコールなどが含まれます。
+If the Datadog profiler CPU or wallclock engines are enabled, you can collect native stack traces. Native stack traces include things like JVM internals, native libraries used by your application or the JVM, and syscalls.
 
-<div class="alert alert-warning">ネイティブスタックトレースはデフォルトで収集されません。これは、通常、アクションにつながる洞察が得られず、ネイティブスタックを操作するとアプリケーションの安定性に影響を与える可能性があるためです。この設定は、実運用環境で使用する前に、非実運用環境でテストしてください。</a></div>
+<div class="alert alert-warning">Native stack traces are not collected by default because usually they do not provide actionable insights and walking native stacks can potentially impact application stability. Test this setting in a non-production environment before you try using it in production.</a></div>
 
-ネイティブのスタックトレース収集を有効にするには、アプリケーションを不安定にする可能性があることを理解した上で、以下を設定します。
+To enable native stack trace collection, understanding that it can destabilize your application, set:
 
 ```
-export DD_PROFILING_DDPROF_ENABLED=true # これは v1.7.0+ のデフォルトです
+export DD_PROFILING_DDPROF_ENABLED=true # this is the default in v1.7.0+
 export DD_PROFILING_DDPROF_CSTACK=dwarf
 ```
 
-または
+or:
 
 ```
--Ddd.profiling.ddprof.enabled=true # これは v1.7.0+ のデフォルトです
+-Ddd.profiling.ddprof.enabled=true # this is the default in v1.7.0+
 -Ddd.profiling.ddprof.cstack=dwarf
 ```
 
 
 
-## 構成
+## Configuration
 
-次の環境変数を使用してプロファイラーを構成できます。
+You can configure the profiler using the following environment variables:
 
-| 環境変数                             | タイプ          | 説明                                                                                      |
+| Environment variable                             | Type          | Description                                                                                      |
 | ------------------------------------------------ | ------------- | ------------------------------------------------------------------------------------------------ |
-| `DD_PROFILING_ENABLED`                           | Boolean       | `-Ddd.profiling.enabled` 引数の代替。`true` に設定してプロファイラーを有効にします。               |
-| `DD_PROFILING_ALLOCATION_ENABLED`                | Boolean       | `-Ddd.profiling.allocation.enabled` 引数の代わりになります。割り当てプロファイラーを有効にするには、`true` に設定します。プロファイラーがすでに有効になっている必要があります。 |
-| `DD_ENV`                                         | 文字列        | [環境][9]名 (例: `production`)。 |
-| `DD_SERVICE`                                     | 文字列        | [サービス][9]名 (例: `web-backend`)。 |
-| `DD_VERSION`                                     | 文字列        | サービスの[バージョン][9]。 |
-| `DD_TAGS`                                        | 文字列        | アップロードされたプロファイルに適用するタグ。`<key>:<value>` のように、カンマ区切り形式のリストである必要があります（例、`layer:api, team:intake`）。  |
+| `DD_PROFILING_ENABLED`                           | Boolean       | Alternate for `-Ddd.profiling.enabled` argument. Set to `true` to enable profiler.               |
+| `DD_PROFILING_ALLOCATION_ENABLED`                | Boolean       | Alternate for `-Ddd.profiling.allocation.enabled` argument. Set to `true` to enable the allocation profiler. It requires the profiler to be enabled already. |
+| `DD_ENV`                                         | String        | The [environment][10] name, for example: `production`. |
+| `DD_SERVICE`                                     | String        | The [service][10] name, for example, `web-backend`. |
+| `DD_VERSION`                                     | String        | The [version][10] of your service. |
+| `DD_TAGS`                                        | String        | Tags to apply to an uploaded profile. Must be a list of `<key>:<value>` separated by commas such as: `layer:api, team:intake`.  |
 
-## 次のステップ
+## Not sure what to do next?
 
-[プロファイラーの概要][10]ガイドでは、パフォーマンスの問題があるサンプルサービスを例に、Continuous Profiler を使用して問題を理解し修正する方法を確認します。
+The [Getting Started with Profiler][11] guide takes a sample service with a performance problem and shows you how to use Continuous Profiler to understand and fix the problem.
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/tracing/trace_collection/
+[1]: /tracing/trace_collection/
 [2]: https://docs.oracle.com/javacomponents/jmc-5-4/jfr-runtime-guide/about.htm
-[3]: /ja/profiler/profiler_troubleshooting/#java-8-support
+[3]: /profiler/profiler_troubleshooting/#java-8-support
 [4]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
 [5]: https://app.datadoghq.com/account/settings/agent/6?platform=overview
 [6]: https://docs.oracle.com/javase/7/docs/technotes/tools/solaris/java.html
-[7]: https://app.datadoghq.com/profiling
-[8]: /ja/profiler/profiler_troubleshooting/#enabling-the-allocation-profiler
-[9]: /ja/getting_started/tagging/unified_service_tagging
-[10]: /ja/getting_started/profiler/
-[11]: /ja/profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
+[7]: /integrations/guide/source-code-integration/?tab=java
+[8]: https://app.datadoghq.com/profiling
+[9]: /profiler/profiler_troubleshooting/#enabling-the-allocation-profiler
+[10]: /getting_started/tagging/unified_service_tagging
+[11]: /getting_started/profiler/
+[12]: /profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
+[13]: /profiler/enabling/supported_versions/
+[14]: /tracing/trace_collection/compatibility/java/?tab=graalvm#setup

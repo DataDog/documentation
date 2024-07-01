@@ -1,62 +1,63 @@
 ---
-aliases:
-- /ja/integrations/azure_dbformysql
-categories:
+"aliases":
+- /integrations/azure_dbformysql
+"categories":
 - azure
-- クラウド
+- cloud
 - data stores
-dependencies: []
-description: Azure DB for MySQL のキーメトリクスを追跡
-doc_link: https://docs.datadoghq.com/integrations/azure_db_for_mysql/
-draft: false
-git_integration_title: azure_db_for_mysql
-has_logo: true
-integration_id: azure-db-for-mysql
-integration_title: Microsoft Azure DB for MySQL
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: '1.0'
-name: azure_db_for_mysql
-public_title: Datadog-Microsoft Azure DB for MySQL インテグレーション
-short_description: Azure DB for MySQL のキーメトリクスを追跡
-version: '1.0'
+"custom_kind": "integration"
+"dependencies": []
+"description": "Track key Azure DB for MySQL metrics."
+"doc_link": "https://docs.datadoghq.com/integrations/azure_db_for_mysql/"
+"draft": false
+"git_integration_title": "azure_db_for_mysql"
+"has_logo": true
+"integration_id": "azure-db-for-mysql"
+"integration_title": "Microsoft Azure DB for MySQL"
+"integration_version": ""
+"is_public": true
+"manifest_version": "1.0"
+"name": "azure_db_for_mysql"
+"public_title": "Datadog-Microsoft Azure DB for MySQL Integration"
+"short_description": "Track key Azure DB for MySQL metrics."
+"version": "1.0"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-## 概要
+## Overview
 
-Azure Database for MySQL は、サービスとしてエンタープライズ対応のフルマネージド型コミュニティ MySQL データベースを提供します。
+Azure Database for MySQL provides fully managed, enterprise-ready community MySQL database as a service.
 
-Azure Database for MySQL からメトリクスを取得すると、以下のことができます。
+Get metrics from Azure Database for MySQL to:
 
-- MySQL データベースのパフォーマンスを視覚化できます。
-- MySQL データベースのパフォーマンスをアプリケーションと関連付けることができます。
+- Visualize the performance of your MySQL databases.
+- Correlate the performance of your MySQL databases with your applications.
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-[Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。これ以外に必要なインストール手順はありません。
+If you haven't already, set up the [Microsoft Azure integration][1] first. There are no other installation steps that need to be performed.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "azure_db_for_mysql" >}}
 
 
-### ヘルプ
+### Events
 
-Azure Database for MySQL インテグレーションには、イベントは含まれません。
+The Azure Database for MySQL integration does not include any events.
 
-### ヘルプ
+### Service Checks
 
-Azure Database for MySQL インテグレーションには、サービスのチェック機能は含まれません。
+The Azure Database for MySQL integration does not include any service checks.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
+Need help? Contact [Datadog support][3].
 
-[1]: https://docs.datadoghq.com/ja/integrations/azure/
+[1]: https://docs.datadoghq.com/integrations/azure/
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_db_for_mysql/azure_db_for_mysql_metadata.csv
-[3]: https://docs.datadoghq.com/ja/help/
+[3]: https://docs.datadoghq.com/help/
+

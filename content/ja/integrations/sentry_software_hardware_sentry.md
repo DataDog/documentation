@@ -1,176 +1,173 @@
 ---
-algolia:
-  subcategory: Marketplace インテグレーション
-app_id: hardware-sentry
-app_uuid: daade024-2095-4a73-afe5-35afbe9e2b12
-assets:
-  dashboards:
-    Hardware Sentry - Host: assets/dashboards/host.json
-    Hardware Sentry - Main: assets/dashboards/main.json
-    Hardware Sentry - Site: assets/dashboards/site.json
-  integration:
-    auto_install: false
-    configuration: {}
-    events:
-      creates_events: false
-    metrics:
-      check: hardware_sentry.agent.info
-      metadata_path: metadata.csv
-      prefix: hardware_sentry.
-    service_checks:
-      metadata_path: service_checks.json
-    source_type_id: 10286
-    source_type_name: Hardware Sentry
-  logs: {}
-  monitors:
-    Hardware Sentry - Agent-NoData: assets/monitors/agent-nodata.json
-    Hardware Sentry - Connector Failed: assets/monitors/connector-failed.json
-    Hardware Sentry - Critical Fan Speed: assets/monitors/critical-fan-speed.json
-    Hardware Sentry - Critical Temperature: assets/monitors/critical-temperature.json
-    Hardware Sentry - Errors: assets/monitors/errors.json
-    Hardware Sentry - High Temperature: assets/monitors/high-temperature.json
-    Hardware Sentry - High Voltage: assets/monitors/high-voltage.json
-    Hardware Sentry - Intrusion: assets/monitors/intrusion.json
-    Hardware Sentry - Link Down: assets/monitors/network-link-down.json
-    Hardware Sentry - Low Battery: assets/monitors/low-battery.json
-    Hardware Sentry - Low Fan Speed: assets/monitors/low-fan-speed.json
-    Hardware Sentry - Low Fan Speed %: assets/monitors/low-fan-speed-percent.json
-    Hardware Sentry - Low Voltage: assets/monitors/low-voltage.json
-    Hardware Sentry - Lun Multipathing: assets/monitors/lun-multipathing.json
-    Hardware Sentry - Missing Device: assets/monitors/missing-device.json
-    Hardware Sentry - Network Errors: assets/monitors/errors-network.json
-    Hardware Sentry - Power Capacity: assets/monitors/power-capacity.json
-    Hardware Sentry - Predicted Failure: assets/monitors/predicted-failure.json
-    Hardware Sentry - Status Degraded: assets/monitors/status-degraded.json
-    Hardware Sentry - Status Failed: assets/monitors/status-failed.json
-    Hardware Sentry - Tape Drive Cleaning: assets/monitors/tape-drive-cleaning.json
-author:
-  homepage: https://sentrysoftware.com
-  name: Sentry Software
-  sales_email: datadog@sentrysoftware.com
-  support_email: support@sentrysoftware.com
-  vendor_id: sentry-software
-categories:
-- コスト管理
-- マーケットプレイス
-- ネットワーク
-dependencies: []
-display_on_public_website: true
-draft: false
-git_integration_title: sentry_software_hardware_sentry
-integration_id: hardware-sentry
-integration_title: Hardware Sentry
-integration_version: ''
-is_public: true
-custom_kind: integration
-legal_terms:
-  eula: assets/EULA.pdf
-manifest_version: 2.0.0
-name: sentry_software_hardware_sentry
-pricing:
-- billing_type: tag_count
-  includes_assets: true
-  metric: hardware_sentry.host.configured
-  product_id: hardware-sentry
-  short_description: 月額サブスクリプションの価格は、Hardware Sentry OpenTelemetry Collector で監視するホストの台数によって決まります。サブスクリプションは、Sentry
-    Desk が提供するサポートサービスへのアクセスを許可します。
-  tag: ホスト
-  unit_label: 監視ホスト
-  unit_price: 8
-public_title: Hardware Sentry
-short_description: サーバー、ネットワーク、ストレージのハードウェアとその二酸化炭素排出量の監視
-supported_os:
+"algolia":
+  "subcategory": Marketplace Integrations
+"app_id": "hardware-sentry"
+"app_uuid": "daade024-2095-4a73-afe5-35afbe9e2b12"
+"assets":
+  "dashboards":
+    "Hardware Sentry - Host": assets/dashboards/host.json
+    "Hardware Sentry - Main": assets/dashboards/main.json
+    "Hardware Sentry - Site": assets/dashboards/site.json
+  "integration":
+    "auto_install": false
+    "configuration": {}
+    "events":
+      "creates_events": false
+    "metrics":
+      "check": hardware_sentry.agent.info
+      "metadata_path": metadata.csv
+      "prefix": hardware_sentry.
+    "service_checks":
+      "metadata_path": service_checks.json
+    "source_type_id": !!int "10286"
+    "source_type_name": Hardware Sentry
+  "logs": {}
+  "monitors":
+    "Hardware Sentry - Agent-NoData": assets/monitors/agent-nodata.json
+    "Hardware Sentry - Connector Failed": assets/monitors/connector-failed.json
+    "Hardware Sentry - Critical Fan Speed": assets/monitors/critical-fan-speed.json
+    "Hardware Sentry - Critical Temperature": assets/monitors/critical-temperature.json
+    "Hardware Sentry - Errors": assets/monitors/errors.json
+    "Hardware Sentry - High Temperature": assets/monitors/high-temperature.json
+    "Hardware Sentry - High Voltage": assets/monitors/high-voltage.json
+    "Hardware Sentry - Intrusion": assets/monitors/intrusion.json
+    "Hardware Sentry - Link Down": assets/monitors/network-link-down.json
+    "Hardware Sentry - Low Battery": assets/monitors/low-battery.json
+    "Hardware Sentry - Low Fan Speed": assets/monitors/low-fan-speed.json
+    "Hardware Sentry - Low Fan Speed %": assets/monitors/low-fan-speed-percent.json
+    "Hardware Sentry - Low Voltage": assets/monitors/low-voltage.json
+    "Hardware Sentry - Lun Multipathing": assets/monitors/lun-multipathing.json
+    "Hardware Sentry - Missing Device": assets/monitors/missing-device.json
+    "Hardware Sentry - Network Errors": assets/monitors/errors-network.json
+    "Hardware Sentry - Power Capacity": assets/monitors/power-capacity.json
+    "Hardware Sentry - Predicted Failure": assets/monitors/predicted-failure.json
+    "Hardware Sentry - Status Degraded": assets/monitors/status-degraded.json
+    "Hardware Sentry - Status Failed": assets/monitors/status-failed.json
+    "Hardware Sentry - Tape Drive Cleaning": assets/monitors/tape-drive-cleaning.json
+"author":
+  "homepage": "https://sentrysoftware.com"
+  "name": Sentry Software
+  "sales_email": datadog@sentrysoftware.com
+  "support_email": support@sentrysoftware.com
+  "vendor_id": sentry-software
+"categories":
+- cost management
+- marketplace
+- network
+"custom_kind": "integration"
+"dependencies": []
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "sentry_software_hardware_sentry"
+"integration_id": "hardware-sentry"
+"integration_title": "Hardware Sentry"
+"integration_version": ""
+"is_public": true
+"legal_terms":
+  "eula": assets/EULA.pdf
+"manifest_version": "2.0.0"
+"name": "sentry_software_hardware_sentry"
+"pricing":
+- "billing_type": tag_count
+  "includes_assets": true
+  "metric": hardware_sentry.host.configured
+  "product_id": hardware-sentry
+  "short_description": The price of the monthly subscription is based on the number of hosts monitored with Hardware Sentry OpenTelemetry Collector. The subscription grants access to the support services provided by Sentry Desk.
+  "tag": host
+  "unit_label": monitored host
+  "unit_price": !!int "8"
+"public_title": "Hardware Sentry"
+"short_description": "Hardware & sustainability metrics for 100+ systems (Cisco, Dell EMC, HPE, Hitachi, Lenovo, NetApp, NVIDIA, Pure, etc.)"
+"supported_os":
 - linux
 - windows
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Cost Management
-  - Category::Marketplace
-  - Category::Network
-  - Offering::Integration
-  - Supported OS::Linux
-  - Supported OS::Windows
-  - Submitted Data Type::Metrics
-  - Submitted Data Type::Logs
-  configuration: README.md#Setup
-  description: サーバー、ネットワーク、ストレージのハードウェアとその二酸化炭素排出量の監視
-  media:
-  - caption: Hardware Sentry のメインダッシュボードでは、すべてのデータセンターとサーバールームのエネルギー使用量と二酸化炭素排出量の概要が表示されます。これは、Hardware
-      Sentry OpenTelemetry Collector によって収集されたメトリクスを活用したものです。
-    image_url: images/dashboard-main.png
-    media_type: image
-  - caption: 'アーキテクチャ図: Hardware Sentry OpenTelemetry Collector はオンプレミスで動作し、サーバー、スイッチ、ストレージシステムを監視し、Datadog
-      環境にメトリクスをプッシュします。'
-    image_url: images/architecture.png
-    media_type: image
-  - caption: Hardware Sentry は、監視対象ホストごとに、その電子部品 (CPU、メモリ、ディスク、NIC、センサーなど)、電力消費量、二酸化炭素排出量を監視しています。
-    image_url: images/dashboard-host.png
-    media_type: image
-  - caption: 各サイト (データセンター、サーバールーム) において、1 日、1 か月、1 年間のエネルギーと二酸化炭素排出量を試算しています。1 年間の省エネ効果を考慮した最適な温度を提案します。
-    image_url: images/dashboard-site.png
-    media_type: image
-  - caption: すべてのハードウェアの問題 (ディスク、メモリーモジュール、NIC、電源など) は、特定のモニターで監視され、詳細なメッセージが表示されます。
-    image_url: images/events-explorer.png
-    media_type: image
-  - caption: Hardware Sentry インテグレーションには、インフラストラクチャーにおけるハードウェアの問題を報告するための推奨モニターのコレクションが付属しています。
-    image_url: images/triggered-monitors.png
-    media_type: image
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Hardware Sentry
-  uninstallation: README.md#Uninstallation
+"tile":
+  "changelog": CHANGELOG.md
+  "classifier_tags":
+  - "Category::Cost Management"
+  - "Category::Marketplace"
+  - "Category::Network"
+  - "Offering::Integration"
+  - "Supported OS::Linux"
+  - "Supported OS::Windows"
+  - "Submitted Data Type::Metrics"
+  - "Submitted Data Type::Logs"
+  "configuration": "README.md#Setup"
+  "description": Hardware & sustainability metrics for 100+ systems (Cisco, Dell EMC, HPE, Hitachi, Lenovo, NetApp, NVIDIA, Pure, etc.)
+  "media":
+  - "caption": The main Hardware Sentry dashboard provides an overview of the energy usage and carbon emissions of all data centers and server rooms. It leverages the metrics collected by Hardware Sentry OpenTelemetry Collector.
+    "image_url": images/dashboard-main.png
+    "media_type": image
+  - "caption": "Architecture diagram: Hardware Sentry OpenTelemetry Collector runs on-prem, monitors your servers, switches and storage systems, and pushes metrics to your Datadog environment."
+    "image_url": images/architecture.png
+    "media_type": image
+  - "caption": For each monitored host, Hardware Sentry monitors its electronic components (CPUs, memory, disks, NICs, sensors, etc.), its power consumption, and carbon emissions.
+    "image_url": images/dashboard-host.png
+    "media_type": image
+  - "caption": For each site (data center or server room), energy and carbon emissions are estimated for 1 day, 1 month and 1 year. Recommendation of optimal temperature is made with its potential energy savings over a year.
+    "image_url": images/dashboard-site.png
+    "media_type": image
+  - "caption": All hardware problems (disks, memory modules, NICs, power supplies, etc.) are monitored with specific monitors, with detailed messages.
+    "image_url": images/events-explorer.png
+    "media_type": image
+  - "caption": The Hardware Sentry integration comes with a collection of recommended monitors to report hardware problems in your infrastructure.
+    "image_url": images/triggered-monitors.png
+    "media_type": image
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": Hardware Sentry
+  "uninstallation": "README.md#Uninstallation"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
-## 概要
+## Overview
 
-**[Hardware Sentry][1]** は、データセンター内のサーバー、ネットワークスイッチ、ストレージシステムのハードウェアコンポーネントの監視に特化した Agent で、Datadog 用のダッシュボードやモニターのコレクションとパッケージ化されています。
+**[Hardware Sentry][1]** is an agent specialized in the monitoring of the hardware components of any server, network switch, or storage system in your data center, packaged with a collection of dashboards and monitors for Datadog.
 
-### ハードウェアの監視
+### Hardware monitoring
 
-**Hardware Sentry** は、サーバー、ネットワークスイッチ、ストレージシステムの物理的な健全性を報告することができる監視 Agent です。定期的にメトリクスを収集し、各プロセッサ、コントローラ、ディスク、電源の状態、温度、ファンの回転数、ネットワークカードのリンク状態や速度などを報告します。
+**Hardware Sentry** is a monitoring agent capable of reporting the physical health of servers, network switches, and storage systems. It collects metrics periodically to report the status of each processor, controller, disk, or power supply, the temperatures, the speed of the fans, the link status and speed of the network cards, and more.
 
-* **リモート**: SNMP、WBEM、WMI、SSH、IPMI、REST API などを通じて、1 つの Agent で数百のシステムを監視することができます。
-* **マルチプラットフォーム**: 100 以上のプラットフォームを 250 以上のコネクターでサポート済み (Cisco、Dell EMC、HP、Huawei、IBM、Lenovo、NetApp、Oracle、Pure など。対応プラットフォームの全リストは、[Hardware Sentry ドキュメント][2]を参照してください。
-* **シンプル**: システムの監視は、ホスト名または IP アドレスと認証情報を指定する最小限の構成作業で済みます。**Hardware Sentry** は、利用可能なインスツルメンテーションを自動的に検出し、すぐに監視を開始します。
-* **正規化**: 必要な情報はすべて、Datadog の標準化されたメトリクスを通じて報告されます。例えば、同じ `hw.temperature` メトリクスは、NetApp ファイラー、HP BladeSystem、Windows を実行している Dell PowerEdge、Linux を実行している Cisco UCS、またはその他のプラットフォームの温度を表すために使用されています。これらのメトリクスは、[OpenTelemetry のセマンティック規約][3]に従っています。
+* **Remote**: One agent to monitor hundreds of systems, through SNMP, WBEM, WMI, SSH, IPMI, REST APIs, and more.
+* **Multi-platform**: 100+ platforms already supported with 250+ connectors (Cisco, Dell EMC, HP, Huawei, IBM, Lenovo, NetApp, Oracle, Pure, and more. For the full list of supported platforms, see the [Hardware Sentry documentation][2].
+* **Simple**: Monitoring a system requires minimal configuration effort to specify the hostname or IP address and credentials. **Hardware Sentry** will automatically detect the available instrumentation and start the monitoring right away.
+* **Normalized**: All the necessary information is reported through standardized metrics in Datadog. The same `hw.temperature` metric, for example, is used to represent the temperature in a NetApp filer, an HP BladeSystem, a Dell PowerEdge running Windows, a Cisco UCS running Linux, or any other platform. These metrics follow [OpenTelemetry's semantic conventions][3].
 
-**Hardware Sentry** は、プロセッサ、メモリモジュール、ディスク、ネットワークカード、コントローラ、電源、ファン、温度センサーなどの障害を検出・予測するための定義済みモニターを搭載しています。
+**Hardware Sentry** comes with predefined monitors to detect and even predict failures in processors, memory modules, disks, network cards, controllers, power supplies, fans, temperature sensors, and more.
 
-### エネルギー使用量とカーボンフットプリントレポート
+### Energy usage and carbon footprint reports
 
-物理的な健全性の監視に加え、**Hardware Sentry** は各監視対象システムのエネルギー使用量も報告します。電気料金や炭素濃度を表すメトリクスと組み合わせて、提供されるダッシュボードは、インフラストラクチャーの電気使用量を kWh で、炭素フットプリントを CO2 トン単位で報告します。
+In addition to physical health monitoring, **Hardware Sentry** also reports the energy usage of each monitored system. Combined with metrics representing the electricity cost and the carbon density, the provided dashboards report the electricity usage of your infrastructure in kWh and its carbon footprint in tons of CO2.
 
-**100% ソフトウェア開発**: 電力センサーを内蔵していないシステムでも、スマート PDU は不要です。
+**100% Software**: No smart PDUs required, even for systems that are not equipped with an internal power sensor!
 
-### ライブラリ
+### Dashboards
 
-このインテグレーションには、**[Hardware Sentry OpenTelemetry Collector][4]** が収集したメトリクスを活用するダッシュボードのセットが付属しています。
+This integration comes with a set of dashboards that leverage the metrics collected by **[Hardware Sentry OpenTelemetry Collector][4]**:
 
-| ダッシュボード   | 説明 |
+| Dashboard | Description |
 |---|---|
-| Hardware Sentry - メイン | サステナビリティを重視した監視対象全ホストの概要 |
-| Hardware Sentry - サイト | 1 つの*サイト* (データセンターまたはサーバールーム) とその監視対象*ホスト*に関連するメトリクス |
-| Hardware Sentry - ホスト | 1 つの*ホスト*とその内部デバイスに関連するメトリクス |
+| Hardware Sentry - Main | Overview of all monitored hosts, with a focus on sustainability |
+| Hardware Sentry - Site | Metrics associated to one *site* (a data center or a server room) and its monitored *hosts* |
+| Hardware Sentry - Host | Metrics associated to one *host* and its internal devices |
 
-## Agent
+## Support
 
-Datadog Marketplace を通じた **Hardware Sentry** のサブスクリプションにより、[Sentry Desk][12] が提供するすべてのサービスにアクセスすることができるようになります。
+A subscription to **Hardware Sentry** through the Datadog Marketplace grants access to all services provided by [Sentry Desk][12]:
 
-* [Jira Service Management][13] によるテクニカルサポート
-* ナレッジベース
-* パッチ
+* Technical Support through [Jira Service Management][13]
+* Knowledge Base
+* Patches
 
-ご契約後、お客様の組織に *Sentry Desk* のアカウント管理のための招待状が届きます。
+Upon subscription, your organization will receive an invitation to manage your *Sentry Desk* account.
 
-### その他の参考資料:
+### Further Reading:
 
-お役に立つドキュメント、リンクや記事:
+Additional helpful documentation, links, and articles:
 
-- [Datadog Marketplace で Hardware Sentry の製品を使って二酸化炭素排出量を追跡する][14]
+- [Track your carbon footprint with Hardware Sentry’s offering in the Datadog Marketplace][14]
 
 [1]: https://www.sentrysoftware.com/products/hardware-sentry.html
 [2]: https://www.sentrysoftware.com/docs/hws-doc/latest/platform-requirements.html
@@ -187,4 +184,4 @@ Datadog Marketplace を通じた **Hardware Sentry** のサブスクリプショ
 [13]: https://sentrydesk.atlassian.net/servicedesk/customer/portals
 [14]: https://www.datadoghq.com/blog/sustainability-monitoring-carbon-footprint-hardware-sentry-datadog/
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/hardware-sentry" target="_blank">こちらをクリック</a>してください。
+This application is made available through the Marketplace and is supported by a Datadog Technology Partner. <a href="https://app.datadoghq.com/marketplace/app/hardware-sentry" target="_blank">Click Here</a> to purchase this application.

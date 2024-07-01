@@ -1,4 +1,5 @@
 ---
+title: Windows Containers Issues
 further_reading:
 - link: /agent/docker/?tab=windows
   tag: Documentation
@@ -7,48 +8,47 @@ further_reading:
   tag: Documentation
   text: Kubernetes Agent
 - link: /agent/troubleshooting/
-  tag: Agent のトラブルシューティング
-  text: Agent のトラブルシューティング
-title: Windows コンテナ問題
+  tag: Documentation
+  text: Agent Troubleshooting
 ---
 
-このページでは、Containerized Windows Applications Monitoring の既知の未解決の問題について説明します。
+This page describes known and open issues for Containerized Windows Applications Monitoring.
 
-## 一般的な問題
+## Common issues
 
-Containerized Windows Applications Monitoring には、Datadog Agent 7.19+ が必要です。
+Containerized Windows Applications Monitoring requires Datadog Agent 7.19+.
 
-対応する OS のバージョンは以下の通りです。
+The supported OS versions are:
 - Windows Server 2019 (LTSC / 1809)
-- Windows Server 2019 1909 (Agent 7.39 まで、Microsoft がサポートしなくなったため)
-- Windows Server 2019 2004 または 20H1 (Agent 7.39 まで、Microsoft がサポートしなくなったため)
-- Windows Server 2019 20H2 (Agent 7.33〜7.39、Microsoft がサポートしなくなったため)
+- Windows Server 2019 1909 (until Agent 7.39, as not supported by Microsoft anymore)
+- Windows Server 2019 2004 or 20H1 (until Agent 7.39, as not supported by Microsoft anymore)
+- Windows Server 2019 20H2 (Agent 7.33 to 7.39, as not supported by Microsoft anymore)
 - Windows Server 2022 LTSC (Agent >=7.34)
 
-Hyper-V 分離モードはサポートされていません。
+Hyper-V isolation mode is not supported.
 
-ディスク、IO、およびネットワークのホストメトリクスは無効になっています。これらは Windows Server ではサポートされていないため、Agent チェックはデフォルトで無効になっています。
+Host metrics for disk, IO, and network are disabled. They are not supported by Windows Server, hence the Agent Checks are disabled by default.
 
-## Docker の問題
+## Docker issues
 
-ライブプロセスはコンテナに表示されません (Datadog Agent を除く)。
+Live processes do not appear in containers (except for the Datadog Agent).
 
-## Kubernetes の問題
+## Kubernetes issues
 
-ライブプロセスはコンテナに表示されません (Datadog Agent を除く)。
+Live processes do not appear in containers (except for the Datadog Agent).
 
-### 複合クラスター (Linux + Windows)
+### Mixed clusters (Linux + Windows)
 
-複合クラスターに Datadog Agent をデプロイするには、Helm チャートの 2 つのインストールを異なる `targetSystem` で実行することが推奨されます。
+The recommended way of deploying the Datadog Agent on a mixed cluster is to perform two installations of the Helm chart with different `targetSystem`s. 
 
-Datadog Agent は `nodeSelector` を使用して、`targetSystem` に基づき Linux または Windows ノードを自動的に選択します。
+The Datadog Agent uses a `nodeSelector` to automatically select Linux or Windows nodes based on `targetSystem`.
 
-ただし、Kube State メトリクス (デフォルトでインストール済み) が Windows ノードにスケジュールできない状況につながるような場合は、この限りではありません。
+However it's not the case for Kube State Metrics (which is installed by default), leading to situations where Kube State Metrics cannot be scheduled on Windows nodes.
 
-この問題を回避するには、3 つのオプションがあります。
+Three options are available to avoid this issue:
 
-* Windows ノードに taint を適用します。Windows では、Agent は常に `node.kubernetes.io/os=windows:NoSchedule` taint を許可します。
-* Datatog Helm チャート `values.yaml` を使用して、Kube State メトリクスノードセレクタを設定します。
+* Taint your Windows nodes. On Windows, the Agent always allows the `node.kubernetes.io/os=windows:NoSchedule` taint.
+* Set Kube State Metrics node selector through Datatog Helm chart `values.yaml`:
 
 ```
 kube-state-metrics:
@@ -57,78 +57,78 @@ kube-state-metrics:
     kubernetes.io/os: linux // Kubernetes >= 1.14
 ```
 
-* `datadog.kubeStateMetricsEnabled` を `false` に設定し、Kube State メトリクスを別途デプロイします。
+* Deploy Kube State Metrics yourself separately by setting `datadog.kubeStateMetricsEnabled` to `false`.
 
-**注**: 2 つの Datadog インストール (`targetSystem: linux`、`targetSystem: windows`) を使用する場合、2 つ目のインストールで `datadog.kubeStateMetricsEnabled` を必ず `false` に設定してください。Kube State メトリクスのインスタンスを 2 つデプロイしないようにするためです。
+**Note**: When using two Datadog installations (one with `targetSystem: linux`, one with `targetSystem: windows`), make sure the second one has `datadog.kubeStateMetricsEnabled` set to `false` to avoid deploying two instances of Kube State Metrics.
 
-#### Datadog Cluster Agent によるクラスターの混在
+#### Mixed clusters with the Datadog Cluster Agent
 
-Cluster Agent v1.18+ では、Datadog Cluster Agent でクラスターが混在する構成がサポートされます。
+With Cluster Agent v1.18+, a configuration with mixed clusters is supported by the Datadog Cluster Agent.
 
-Windows ノードにデプロイされた Agent と Cluster Agent 間の通信を構成するには、次の `values.yaml` ファイルを使用します。
+Use the following `values.yaml` file to configure communication between Agents deployed on Windows nodes and the Cluster Agent.
 
 ```yaml
 targetSystem: windows
 existingClusterAgent:
   join: true
-  serviceName: "<EXISTING_DCA_SERVICE_NAME>" # Datadog Helm の最初のチャートから
-  tokenSecretName: "<EXISTING_DCA_SECRET_NAME>" # Datadog Helm の最初のチャートから
+  serviceName: "<EXISTING_DCA_SERVICE_NAME>" # from the first Datadog Helm chart
+  tokenSecretName: "<EXISTING_DCA_SECRET_NAME>" # from the first Datadog Helm chart
 
-# datadogMetrics は最初のチャートで既にデプロイされているはずなので、デプロイを無効にします。
+# Disable datadogMetrics deployment since it should have been already deployed with the first chart.
 datadog-crds:
   crds:
     datadogMetrics: false
-# kube-state-metrics のデプロイメントを無効にします
+# Disable kube-state-metrics deployment
 datadog:
   kubeStateMetricsEnabled: false
 ```
 
-#### Windows デプロイでは構成オプションが制限される
+#### Limited configuration options for Windows deployments
 
-Windows では、一部の構成オプションが使用できません。以下は、**サポートされていない**オプションのリストです。
+Some configuration options are not available on Windows. The following is a list of **unsupported** options:
 
-| パラメーター                      | 理由 |
+| Parameter                      | Reason |
 | --- | ----------- |
-| `datadog.dogstatsd.useHostPID` |  Windows コンテナではホスト PID がサポートされていません |
-| `datadog.dogstatsd.useSocketVolume` | Windows では Unix ソケットはサポートされていません |
-| `datadog.dogstatsd.socketPath` |  Windows では Unix ソケットはサポートされていません |
-| `datadog.processAgent.processCollection` |  ホスト/他のコンテナプロセスにアクセスできません |
-| `datadog.systemProbe.seccomp` | システムプローブは Windows では使用できません |
-| `datadog.systemProbe.seccompRoot` | システムプローブは Windows では使用できません |
-| `datadog.systemProbe.debugPort` | システムプローブは Windows では使用できません |
-| `datadog.systemProbe.enableConntrack` | システムプローブは Windows では使用できません |
-| `datadog.systemProbe.bpfDebug` |  システムプローブは Windows では使用できません |
-| `datadog.systemProbe.apparmor` |  システムプローブは Windows では使用できません |
-| `agents.useHostNetwork` | Windows コンテナではホストネットワークがサポートされていません |
+| `datadog.dogstatsd.useHostPID` |  Host PID not supported on Windows containers |
+| `datadog.dogstatsd.useSocketVolume` | Unix sockets not supported on Windows |
+| `datadog.dogstatsd.socketPath` |  Unix sockets not supported on Windows |
+| `datadog.processAgent.processCollection` |  Unable to access host/other containers processes |
+| `datadog.systemProbe.seccomp` | System probe is not available for Windows |
+| `datadog.systemProbe.seccompRoot` | System probe is not available for Windows |
+| `datadog.systemProbe.debugPort` | System probe is not available for Windows |
+| `datadog.systemProbe.enableConntrack` | System probe is not available for Windows |
+| `datadog.systemProbe.bpfDebug` |  System probe is not available for Windows |
+| `datadog.systemProbe.apparmor` |  System probe is not available for Windows |
+| `agents.useHostNetwork` | Host network not supported by Windows Containers |
 
-### APM または DogStatsD の HostPort 
+### HostPort for APM or DogStatsD
 
-`HostPort` は、基となる OS バージョンおよび CNI プラグインにより、Kubernetes で一部サポートされています。
-`HostPort` が正常に動作するための要件は以下のとおりです。
+`HostPort` is partially supported on Kubernetes, depending on the underlying OS version and CNI plugin.
+Requirements to have `HostPort` working are the following:
 
-* Windows Server バージョン 1909 以降
-* CNI プラグインが `portMappings` 機能に対応
+* Windows Server version must be >= 1909
+* CNI plugin must support `portMappings` capability
 
-現在、少なくとも 2 つの CNI プラグインがこの機能に対応しています。
+Currently, at least two CNI plugins support this capability:
 
-* `win-bridge` 公式プラグイン (バージョン 0.8.6 以降) - GKE が使用
-* Azure CNI プラグイン - AKS が使用
+* Official `win-bridge` plugin (version >= 0.8.6) - used by GKE
+* Azure CNI Plugin - used by AKS
 
-セットアップがこの要件を満たさない場合、APM および DogStatsD はトレーサーと Agent の間にポッドツーポッドネットワーキングが構成されている場合にのみ機能します。
+If your setup does not meet these requirements, APM and DogStatsD will only work when pod-to-pod networking is configured between the Tracer and the Agent.
 
-### Kubelet チェック
+### Kubelet check
 
-ご使用の Kubernetes バージョンによっては、Kubelet メトリクスの一部をご利用いただけない (または Kubelet チェックがタイムアウトする) ことがあります。
-最適にご利用いただくため、以下をご使用ください。
+Depending on your Kubernetes version, some Kubelet metrics might not be available (or Kubelet check might timeout).
+For optimal experience, please use any of the following:
 
-* Kubelet 1.16.13 以降 (GKE では 1.16.11)
-* Kubelet 1.17.9 以降 (GKE では 1.17.6)
-* Kubelet 1.18.6 以降
-* Kubelet 1.19 以降
+* Kubelet >= 1.16.13 (1.16.11 on GKE)
+* Kubelet >= 1.17.9 (1.17.6 on GKE)
+* Kubelet >= 1.18.6
+* Kubelet >= 1.19
 
-Agent バージョン 7.19.2 以降
+With Agent version >= 7.19.2
 
-Windows では、ご利用いただけない `kubernetes.*` があります。以下のリストでご利用可能なものをご確認ください。
+Please note that not all `kubernetes.*` are available on Windows, you can find the list of available ones below:
 
 * `kubernetes.cpu.usage.total`
 * `kubernetes.containers.restarts`

@@ -1,57 +1,57 @@
 ---
+title: AWS Integration and CloudWatch FAQ
+kind: guide
 aliases:
-- /ja/integrations/faq/do-you-believe-you-re-seeing-a-discrepancy-between-your-data-in-cloudwatch-and-datadog
-- /ja/integrations/faq/aws-integration-and-cloudwatch-faq
-kind: ガイド
-title: AWS インテグレーションと CloudWatch の FAQ
+  - /integrations/faq/do-you-believe-you-re-seeing-a-discrepancy-between-your-data-in-cloudwatch-and-datadog
+  - /integrations/faq/aws-integration-and-cloudwatch-faq
 ---
 
-### インテグレーションで AWS カスタムメトリクスを収集することは可能ですか？
+### Can I collect AWS custom metrics through the integration?
 
-はい。[AWS インテグレーションページ][1]の **Metric Collection** タブで、**Collect Custom Metrics** を有効化します。
+Yes. Enable **Collect Custom Metrics** under the **Metric Collection** tab on the [AWS integration page][1].
 
-### Datadog が公式にインテグレーションしていないサービスからメトリクスを収集するにはどうすればよいですか？
+### How do I collect metrics from a service for which Datadog doesn't have an official integration?
 
-`Collect custom metrics` オプションを有効にすると、公式のインテグレーションがない `AWS/<namespace>` から来る AWS メトリクスもカスタムネームスペースの下に取り込まれます。[Set an AWS tag filter][2] API でカスタムネームスペースのフィルター文字列を使用すれば、これらのメトリクスをフィルタリングして、必要なメトリクスだけを残すことができます。
+AWS metrics coming from an `AWS/<namespace>` for which there is no official integration are also brought in under the custom namespace when the `Collect custom metrics` option is enabled. You can filter these metrics out and only keep the metrics you want by using the filter string under custom namespace with the [Set an AWS tag filter][2] API.
 
-### Datadog の AWS インテグレーションは、どのように CloudWatch を使用していますか？
+### How does the Datadog AWS integration use CloudWatch?
 
-Datadog は CloudWatch モニタリング API を使用して、AWS リソースを監視しています。これらの API の主な使用方法は、`GetMetricData` エンドポイントを通じて生のメトリクスデータを収集することです。
+Datadog uses the CloudWatch monitoring APIs to monitor your AWS resources. Our main use of these APIs is to gather raw metrics data through the `GetMetricData` endpoint.
 
-その他の API は、メトリクスデータを充実させるために使用されます。いくつかの例を挙げます。
+Other APIs are used to enrich metrics data. Some examples include:
 
- * メトリクスに追加するカスタムメトリクスタグを収集する
+ * Gathering custom tags to add to metrics
 
- * 自動ミュートなど、リソースのステータスや 健全性に関する情報を収集する
+ * Gathering information about the status or health of resources, such as automuting
 
- * ログストリームを収集する
+ * Gathering log streams
 
-### API リクエストの回数と、CloudWatch の使用量はどのように把握できますか？
+### How many API requests are made and how can I monitor my CloudWatch usage?
 
-Datadog は、インストールした各 AWS サブインテグレーションについて、利用可能なメトリクスを 10 分ごとに収集します。特定のサブインテグレーション (SQS、ELB、DynamoDB、AWS カスタムメトリクス) に対して多数の AWS リソースを持っている場合、AWS CloudWatch の請求に影響を与える可能性があります。
+Datadog gathers the available metrics every 10 minutes for each AWS sub-integration you have installed. If you have a large number of AWS resources for a particular sub-integration (SQS, ELB, DynamoDB, AWS Custom metrics), this can impact your AWS CloudWatch bill.
 
-[AWS Billing インテグレーション][3]を利用して、CloudWatch API の使用量を監視することができます。
+You can monitor your CloudWatch API usage using the [AWS Billing integration][3].
 
-### CloudWatch のメトリクスを Datadog に受信する際の遅延を減らすにはどうしたらよいですか？
+### How can I reduce the delay of receiving my CloudWatch metrics to Datadog?
 
-デフォルトでは、Datadog は 10 分ごとに AWS メトリクスを収集します。詳細は、[Cloud Metric Delay][4] を参照してください。レイテンシーを小さくする必要がある場合は、[Datadog サポート][5]にお問い合わせください。CloudWatch のメトリクスを 2-3 分のレイテンシーでより速く Datadog に取り込むには、[Amazon CloudWatch Metric Streams と Amazon Kinesis Data Firehose][6] を使用することをお勧めします。
+By default, Datadog collects AWS metrics every 10 minutes. See [Cloud Metric Delay][4] for more information. If you need to reduce the latency, contact [Datadog support][5] for assistance. To get CloudWatch metrics into Datadog faster with a 2-3 minute latency we recommend using the [Amazon CloudWatch Metric Streams and Amazon Data Firehose][6]. 
 
 
-### なぜカスタム AWS/Cloudwatch メトリクスの平均値しか表示されないのでしょうか？
+### Why am I only seeing the average values of my custom AWS/Cloudwatch metrics?
 
-デフォルトでは、Datadog はカスタム AWS/Cloudwatch メトリクスの平均値のみを収集します。しかし、[Datadog サポート][5]に連絡することで、追加の値を利用することができます。これらは、(利用可能な場合) 最小値、最大値、合計値、サンプルカウントを含みます。
+By default, Datadog only collects the average values of your custom AWS/Cloudwatch metrics. However, additional values are available by contacting [Datadog support][5]. These include (where available) the min, max, sum, and sample count.
 
-### CloudWatch と Datadog のデータの間に矛盾がありますか？
+### Is there a discrepancy between my data in CloudWatch and Datadog?
 
-いくつかの重要な区別に注意する必要があります。
+Some important distinctions to be aware of:
 
-- Datadog は、Datadog の同等の CloudWatch メトリクスに対して、単一の CloudWatch 統計を収集します。CloudWatch の `Sum` と Datadog の `Average` を比較すると、不一致が発生します。一部の CloudWatch メトリクスでは、複数の統計が有用な場合があり、Datadog では同じ CloudWatch メトリクスに対して異なる統計で異なるメトリクス名を作成します。例えば、`aws.elb.latency` と `aws.elb.latency.maximum` のようにです。
-- AWS のカウンターでは、`sum` `1 minute` に設定したグラフは、その時点までの 1 分間の発生回数の合計 (1 分当たりの割合) を表示します。Datadog は、AWS で選択したタイムフレームに関係なく、AWS からの生データを 1 秒あたりの値に正規化して表示しています。そのため、Datadog ではより低い値が表示される可能性があります。
-- 全体として、`min`、`max`、`avg` は AWS 内で異なる意味を持ちます。AWS は、平均レイテンシー、最小レイテンシー、最大レイテンシーを明確に収集します。AWS CloudWatch からメトリクスを取得する場合、Datadog は ELB ごとに単一のタイムシリーズとして平均レイテンシーを受け取るだけです。Datadog では、`min`、`max`、`avg` を選択すると、複数のタイムシリーズがどのように結合されるかを制御することができます。例えば、`system.cpu.idle` をフィルターなしでリクエストすると、そのメトリクスを報告している各ホストの 1 つの系列が返されます。Datadog は、これらの時系列を[空間集計][7]を使用して結合します。そうでない場合、1 つのホストから `system.cpu.idle` をリクエストすると、集計は必要なく、`avg` と `max` を切り替えても同じ結果が得られます。
+- Datadog collects a single CloudWatch statistic for the equivalent CloudWatch metric in Datadog. Comparing the `Sum` in CloudWatch to the `Average` in Datadog results in discrepancies. For some CloudWatch metrics, multiple statistics can be useful and Datadog creates different metric names for the same CloudWatch metric with different statistics. For example, `aws.elb.latency` and `aws.elb.latency.maximum`.
+- In AWS for counters, a graph set to `sum` `1 minute` shows the total number of occurrences in one minute leading up to that point (the rate per one minute). Datadog is displaying the raw data from AWS normalized to per second values, regardless of the timeframe selected in AWS. Therefore, you might see a lower value in Datadog.
+- Overall, `min`, `max`, and `avg` have different meanings within AWS. AWS distinctly collects average latency, minimum latency, and maximum latency. When pulling metrics from AWS CloudWatch, Datadog only receives the average latency as a single timeseries per ELB. Within Datadog, when you select `min`, `max`, or `avg`, you are controlling how multiple timeseries are combined. For example, requesting `system.cpu.idle` without any filter returns one series for each host reporting that metric. Datadog combines these timeseries using [space aggregation][7]. Otherwise, if you requested `system.cpu.idle` from a single host, no aggregation is necessary and switching between `avg` and `max` yields the same result.
 
-### Datadog 上のデータを CloudWatch に表示されるデータと一致させるためには、どのように調整すればよいでしょうか？
+### How do I adjust my data on Datadog to match the data displayed in CloudWatch?
 
-AWS CloudWatch は、1 分単位のデータに正規化された 1 分粒度のメトリクスをレポートします。Datadog は、秒単位のデータに正規化された 1 分粒度のメトリクスをレポートします。Datadog のデータを調整するには、60 倍してください。 また、メトリクスの統計値が同じであることを確認します。例えば、`IntegrationLatency` というメトリクスは、多くの異なる統計情報 (平均、最大、最小、パーセンタイル) を取得します。Datadog では、これらの統計はそれぞれ独自のメトリクスとして表現されます。
+AWS CloudWatch reports metrics at one-minute granularity normalized to per-minute data. Datadog reports metrics at one-minute granularity normalized to per-second data. To adjust the data in Datadog, multiply by 60.  Also make sure the statistic of the metric is the same. For example, the metric `IntegrationLatency` fetches a number of different statistics": Average, Maximum, Minimum, as well as percentiles. In Datadog, these statistics are each represented as their own metrics:
   ```
 aws.apigateway.integration_latency (average)
 aws.apigateway.integration_latency.maximum
@@ -60,14 +60,14 @@ aws.apigateway.integration_latency.p50
   ```
 
 
-#### rollup() でデータを調整することはできますか？
+#### Will a rollup() adjust my data?
 
-ロールアップでは同様の結果は表示されません。`rollup(sum, 60)` のロールアップコールでは、サーバーはすべてのデータポイントを分ビンでグループ化し、各ビンの合計をデータポイントとして返します。しかし、AWS メトリクスの粒度は 1 分であるため、1 ビンあたり 1 つのデータポイントしかなく、変化がありません。
+Rollups don't display similar results. For a rollup call of `rollup(sum, 60)`, the server groups all data points in minute bins and returns the sum of each bin as a datapoint. However, the granularity of AWS metrics is one minute, so there is only one datapoint per bin leading to no change.
 
 [1]: https://app.datadoghq.com/integrations/amazon-web-services
-[2]: https://docs.datadoghq.com/ja/api/latest/aws-integration/#set-an-aws-tag-filter
-[3]: /ja/integrations/amazon_billing/
-[4]: /ja/integrations/guide/cloud-metric-delay/
-[5]: /ja/help/
-[6]: https://docs.datadoghq.com/ja/integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/
-[7]: /ja/metrics/introduction/#space-aggregation
+[2]: https://docs.datadoghq.com/api/latest/aws-integration/#set-an-aws-tag-filter
+[3]: /integrations/amazon_billing/
+[4]: /integrations/guide/cloud-metric-delay/
+[5]: /help/
+[6]: https://docs.datadoghq.com/integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/
+[7]: /metrics/introduction/#space-aggregation

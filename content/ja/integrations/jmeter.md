@@ -1,148 +1,147 @@
 ---
-app_id: jmeter
-app_uuid: be62a333-998e-4fea-b0e4-dd4a45b859b4
-assets:
-  dashboards:
-    JMeter Overview: assets/dashboards/JMeterOverview.json
-  integration:
-    auto_install: true
-    configuration: {}
-    events:
-      creates_events: false
-    metrics:
-      check: jmeter.responses_count
-      metadata_path: metadata.csv
-      prefix: jmeter.
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 10164
-    source_type_name: JMeter
-  logs:
-    source: jmeter
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com (日本語対応)
-  support_email: help@datadoghq.com
-categories:
-- ログの収集
-- テスト
-dependencies:
-- https://github.com/DataDog/integrations-core/blob/master/jmeter/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: jmeter
-integration_id: jmeter
-integration_title: JMeter
-integration_version: ''
-is_public: true
-custom_kind: integration
-manifest_version: 2.0.0
-name: jmeter
-public_title: JMeter
-short_description: Apache JMeter 用 Datadog プラグイン
-supported_os:
+"app_id": "jmeter"
+"app_uuid": "be62a333-998e-4fea-b0e4-dd4a45b859b4"
+"assets":
+  "dashboards":
+    "JMeter Overview": assets/dashboards/JMeterOverview.json
+  "integration":
+    "auto_install": true
+    "configuration": {}
+    "events":
+      "creates_events": false
+    "metrics":
+      "check": jmeter.responses_count
+      "metadata_path": metadata.csv
+      "prefix": jmeter.
+    "service_checks":
+      "metadata_path": assets/service_checks.json
+    "source_type_id": !!int "10164"
+    "source_type_name": JMeter
+"author":
+  "homepage": "https://www.datadoghq.com"
+  "name": Datadog
+  "sales_email": info@datadoghq.com
+  "support_email": help@datadoghq.com
+"categories":
+- log collection
+- testing
+"custom_kind": "integration"
+"dependencies":
+- "https://github.com/DataDog/integrations-core/blob/master/jmeter/README.md"
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "jmeter"
+"integration_id": "jmeter"
+"integration_title": "JMeter"
+"integration_version": ""
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "jmeter"
+"public_title": "JMeter"
+"short_description": "A Datadog plugin for Apache JMeter"
+"supported_os":
 - linux
 - macos
 - windows
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Log Collection
-  - Category::Testing
-  configuration: README.md#Setup
-  description: Apache JMeter 用 Datadog プラグイン
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: JMeter
+"tile":
+  "changelog": CHANGELOG.md
+  "classifier_tags":
+  - "Supported OS::Linux"
+  - "Supported OS::macOS"
+  - "Supported OS::Windows"
+  - "Category::Log Collection"
+  - "Category::Testing"
+  "configuration": "README.md#Setup"
+  "description": A Datadog plugin for Apache JMeter
+  "media": []
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": JMeter
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## 概要
+## Overview
 
-Datadog Backend Listener for Apache JMeter は、テスト結果を Datadog プラットフォームに送信するために使用される、オープンソースの JMeter プラグインです。これにより、レイテンシー、送受信されるバイト数などのテストメトリクスをリアルタイムで報告できます。また、完全なテスト結果をログエントリとして Datadog へ送信することも可能です。
+Datadog Backend Listener for Apache JMeter is an open source JMeter plugin used to send test results to the Datadog platform. It provides real-time reporting of test metrics like latency, the number of bytes sent and received, and more. You can also send to Datadog complete test results as log entries.
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-Datadog Backend Listener プラグインは手動でインストールする必要があります。[GitHub リポジトリ][1]の最新リリースと最新のインストール手順を参照してください。
+The Datadog Backend Listener plugin needs to be installed manually. See the latest release and more up-to-date installation instructions on its [GitHub repository][1].
 
-#### 手動インストール
+#### Manual installation
 
-1. [リリースページ][2]から Datadog プラグイン JAR ファイルをダウンロードします。
-2. JMeter インストール内の `lib/ext` ディレクトリに JAR を配置します。
-3. JMeter を起動します (またはアプリケーションを終了し、再度開きます)。
+1. Download the Datadog plugin JAR file from the [release page][2]
+2. Place the JAR in the `lib/ext` directory within your JMeter installation.
+3. Launch JMeter (or quit and re-open the application).
 
-#### JMeter Plugins Manager
+#### JMeter plugins Manager
 
-1. まだ構成されていない場合は、[JMeter Plugins Manager JAR][3] をダウンロードします。
-2. ダウンロードが完了したら、JMeter インストール内の `lib/ext` ディレクトリに `.jar` を配置します。
-3. JMeter を起動します (またはアプリケーションを終了し、再度開きます)。
-4. `Options > Plugins Manager > Available Plugins` に移動します。
-5. "Datadog Backend Listener" を検索します。
-6. Datadog Backend Listener プラグインの横のチェックボックスをクリックします。
-7. "Apply Changes and Restart JMeter" をクリックします。
+1. If not already configured, download the [JMeter Plugins Manager JAR][3].
+2. Once you've completed the download, place the `.jar` in the `lib/ext` directory within your JMeter installation. 
+3. Launch JMeter (or quit and re-open the application). 
+4. Go to `Options > Plugins Manager > Available Plugins`. 
+5. Search for "Datadog Backend Listener".
+6. Click the checbox next to the Datadog Backend Listener plugin.
+7. Click "Apply Changes and Restart JMeter".
 
-### ブラウザトラブルシューティング
+### Configuration
 
-Datadog にメトリクスの報告を開始するには
+To start reporting metrics to Datadog:
 
-1. Datadog にメトリクスを送信したいスレッドグループまたはテストプランを右クリックします。
-2. `Add > Listener > Backend Listener` に移動します。
-3. `Backend Listener Implementation` を修正し、ドロップダウンから `org.datadog.jmeter.plugins.DatadogBackendClient` を選択します。
-4. 変数 `apiKey` に [Datadog API キー][4]を設定します。
-5. テストを実行し、メトリクスが Datadog に表示されたことを確認します。
+1. Right click on the thread group or the test plan for which you want to send metrics to Datadog. 
+2. Go to `Add > Listener > Backend Listener`.
+3. Modify the `Backend Listener Implementation` and select `org.datadog.jmeter.plugins.DatadogBackendClient` from the drop-down. 
+4. Set the `apiKey` variable to [your Datadog API key][4].
+5. Run your test and validate that metrics have appeared in Datadog.
 
-プラグインには以下のコンフィギュレーションオプションがあります。
+The plugin has the following configuration options:
 
-| 名前       | 必須 | デフォルト値 | 説明|
+| Name       | Required | Default value | description|
 |------------|:--------:|---------------|------------|
-|apiKey | true | NA | Datadog API キー。|
-|datadogUrl | false | https://api.datadoghq.com/api/ | Datadog インスタンスが EU にある場合は、異なるエンドポイントを構成する（例: https://api.datadoghq.eu/api/）ことができます|
-|logIntakeUrl | false | https://http-intake.logs.datadoghq.com/v1/input/ | Datadog インスタンスが EU にある場合は、異なるエンドポイントを構成する（例: https://http-intake.logs.datadoghq.eu/v1/input/）ことができます。|
-|metricsMaxBatchSize|false|200|メトリクスは、`metricsMaxBatchSize` サイズのバッチ内で 10 秒ごとに送信されます。|
-|logsBatchSize|false|500|ログは、`logsBatchSize` のサイズに到達するとすぐにバッチ内で送信されます。|
-|sendResultsAsLogs|false|false|デフォルトでは、メトリクスのみが Datadog に報告されます。個別のテスト結果をログイベントとして報告するには、このフィールドを `true` に設定します。|
-|includeSubresults|false|false|Subresult は、たとえば個別の HTTP リクエストがリダイレクトに従わなければならない時に使用されます。デフォルトで、subresult は無視されます。|
-|excludeLogsResponseCodeRegex|false|`""`| `sendResultsAsLogs` を設定すると、デフォルトですべての結果をログとして Datadog に送信します。このオプションを使用すると、レスポンスコードが指定した正規表現に一致する結果を除外することができます。例えば、`[123][0-5][0-9]` と設定すると、エラーだけを送信することができます。|
-|samplersRegex|false|.*|監視するサンプラーをフィルターするための任意の正規表現。|
-|customTags|false|`""`|すべてのメトリクスに追加するタグのカンマ区切りリスト
+|apiKey | true | NA | Your Datadog API key.|
+|datadogUrl | false | https://api.datadoghq.com/api/ | You can configure a different endpoint, for instance https://api.datadoghq.eu/api/ if your datadog instance is in the EU|
+|logIntakeUrl | false | https://http-intake.logs.datadoghq.com/v1/input/ | You can configure a different endpoint, for instance https://http-intake.logs.datadoghq.eu/v1/input/ if your datadog instance is in the EU.|
+|metricsMaxBatchSize|false|200|Metrics are submitted every 10 seconds in batches of size `metricsMaxBatchSize`.|
+|logsBatchSize|false|500|Logs are submitted in batches of size `logsBatchSize` as soon as this size is reached.|
+|sendResultsAsLogs|false|false|By default only metrics are reported to Datadog. To report individual test results as log events, set this field to `true`.|
+|includeSubresults|false|false|A subresult is for instance when an individual HTTP request has to follow redirects. By default subresults are ignored.|
+|excludeLogsResponseCodeRegex|false|`""`| Setting `sendResultsAsLogs` will submit all results as logs to Datadog by default. This option lets you exclude results whose response code matches a given regex. For example, you may set this option to `[123][0-5][0-9]` to only submit errors.|
+|samplersRegex|false|.*|An optional regex to filter the samplers to monitor.|
+|customTags|false|`""`|Comma-separated list of tags to add to every metric
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "jmeter" >}}
 
 
-### ヘルプ
+### Service Checks
 
-JMeter には、サービスのチェック機能は含まれません。
+JMeter does not include any service checks.
 
-### ヘルプ
+### Events
 
-JMeter には、イベントは含まれません。
+JMeter does not include any events.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
+Need help? Contact [Datadog support][6].
 
-## その他の参考資料
+## Further Reading
 
-お役に立つドキュメント、リンクや記事:
+Additional helpful documentation, links, and articles:
 
-  - [Datadog で JMeter テスト結果を監視する][7]
+  - [Monitor JMeter test results with Datadog][7]
 
 [1]: https://github.com/DataDog/jmeter-datadog-backend-listener
 [2]: https://github.com/DataDog/jmeter-datadog-backend-listener/releases
 [3]: https://jmeter-plugins.org/wiki/PluginsManager/
 [4]: https://app.datadoghq.com/account/settings#api
 [5]: https://github.com/DataDog/integrations-core/blob/master/jmeter/metadata.csv
-[6]: https://docs.datadoghq.com/ja/help/
+[6]: https://docs.datadoghq.com/help/
 [7]: https://www.datadoghq.com/blog/monitor-jmeter-test-results-datadog/
+

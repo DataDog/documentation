@@ -1,6 +1,6 @@
 ---
-core_product:
-- real user monitoring
 title: view
+core_product:
+  - real user monitoring
 ---
-Datadog RUM では、ビューはイベントの一種です。ビューイベントは、ユーザーが Web アプリケーションのページを訪問するたびに生成されます。
+In Datadog RUM, a view is a type of event. A view event is generated each time a user visits a web application page.

@@ -1,98 +1,98 @@
 ---
-algolia:
-  subcategory: Marketplace インテグレーション
-app_id: komodor-komodor
-app_uuid: d62310ba-c7a8-4c5b-ab9f-60bb46527f1b
-assets: {}
-author:
-  homepage: https://komodor.com
-  name: Komodor
-  sales_email: datadogsales@komodor.com
-  support_email: support@komodor.com
-  vendor_id: komodor
-categories:
-- 構成 & デプロイ
-- コンテナ
-- 問題追跡
+"algolia":
+  "subcategory": Marketplace Integrations
+"app_id": "komodor-komodor"
+"app_uuid": "d62310ba-c7a8-4c5b-ab9f-60bb46527f1b"
+"assets": {}
+"author":
+  "homepage": "https://komodor.com"
+  "name": Komodor
+  "sales_email": datadogsales@komodor.com
+  "support_email": support@komodor.com
+  "vendor_id": komodor
+"categories":
+- configuration & deployment
+- containers
+- issue tracking
 - kubernetes
-- マーケットプレイス
-dependencies: []
-display_on_public_website: true
-draft: false
-git_integration_title: komodor_license
-integration_id: komodor-komodor
-integration_title: Komodor
-integration_version: ''
-is_public: true
-custom_kind: integration
-legal_terms:
-  eula: assets/EULA.pdf
-manifest_version: 2.0.0
-name: komodor_license
-pricing:
-- billing_type: tag_count
-  includes_assets: true
-  metric: datadog.marketplace.komodor.komodor
-  product_id: komodor
-  short_description: ノードのボリュームに応じた価格帯の設定
-  tag: ノード
-  unit_label: 監視されるノード
-  unit_price: 30.0
-public_title: Komodor
-short_description: Kubernetes トラブルシューティングプラットフォーム
-supported_os:
+- marketplace
+"custom_kind": "integration"
+"dependencies": []
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "komodor_license"
+"integration_id": "komodor-komodor"
+"integration_title": "Komodor"
+"integration_version": ""
+"is_public": true
+"legal_terms":
+  "eula": assets/EULA.pdf
+"manifest_version": "2.0.0"
+"name": "komodor_license"
+"pricing":
+- "billing_type": tag_count
+  "includes_assets": true
+  "metric": datadog.marketplace.komodor.komodor
+  "product_id": komodor
+  "short_description": Pricing tiers based on node volume
+  "tag": node
+  "unit_label": Node monitored
+  "unit_price": !!float "30.0"
+"public_title": "Komodor"
+"short_description": "Kubernetes Troubleshooting Platform"
+"supported_os":
 - linux
 - windows
 - macos
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Configuration & Deployment
-  - Category::Containers
-  - Category::Issue Tracking
-  - Category::Kubernetes
-  - Category::Marketplace
-  - Offering::Software License
-  - Supported OS::Linux
-  - Supported OS::Windows
-  - Supported OS::macOS
-  configuration: README.md#Setup
-  description: Kubernetes トラブルシューティングプラットフォーム
-  media:
-  - caption: Komodor のメインサービスビューと全ワークロードの可視化
-    image_url: images/Komodor_screen_01.png
-    media_type: image
-  - caption: 複数のサービス間の関連付けを行い、1 つのタイムライン上でイベントの連鎖をつなぎ合わせることができる
-    image_url: images/Komodor_screen_02.png
-    media_type: image
-  - caption: Kubernetes マニフェストの変更と Komodor による構成変更を簡単に比較できる
-    image_url: images/Komodor_screen_03.png
-    media_type: image
-  - caption: ポッドの状態やログを kubectl コマンド一つで深堀りできる
-    image_url: images/Komodor_screen_04.png
-    media_type: image
-  - caption: Datadog のアラート、Kubernetes のイベント、可用性の問題を 1 つのシンプルなビューで接続できる
-    image_url: images/Komodor_screen_06.png
-    media_type: image
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Komodor
-  uninstallation: README.md#Uninstallation
+"tile":
+  "changelog": CHANGELOG.md
+  "classifier_tags":
+  - "Category::Configuration & Deployment"
+  - "Category::Containers"
+  - "Category::Issue Tracking"
+  - "Category::Kubernetes"
+  - "Category::Marketplace"
+  - "Offering::Software License"
+  - "Supported OS::Linux"
+  - "Supported OS::Windows"
+  - "Supported OS::macOS"
+  "configuration": "README.md#Setup"
+  "description": Kubernetes Troubleshooting Platform
+  "media":
+  - "caption": Komodor's main service view and full workload visibility
+    "image_url": images/Komodor_screen_01.png
+    "media_type": image
+  - "caption": Correlate between several services and piece together the chain of events on a single timeline
+    "image_url": images/Komodor_screen_02.png
+    "media_type": image
+  - "caption": Easily compare changes in the Kubernetes manifest and config changes through Komodor
+    "image_url": images/Komodor_screen_03.png
+    "media_type": image
+  - "caption": Deep dive into Pod status and logs without a single kubectl command
+    "image_url": images/Komodor_screen_04.png
+    "media_type": image
+  - "caption": Connect Datadog alerts, Kubernetes events, and availability issues in one simple view
+    "image_url": images/Komodor_screen_06.png
+    "media_type": image
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": Komodor
+  "uninstallation": "README.md#Uninstallation"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
-## 概要
+## Overview
 
-Komodor は、K8s スタック全体の変更を追跡し、その波及効果を分析し、効率的かつ独立したトラブルシューティングに必要なコンテキストを提供します。Komodor は、Kubernetes のデプロイメントを、何が変更され、どのコードがプッシュされ、誰がプッシュしたかといった関連情報とともに、タイムライン上で把握することが可能です。また、Git、構成マップ、インフラストラクチャー、アラート、Datadog などの他のツールからのデータを一元化して分かりやすく表示することができます。
+Komodor tracks changes across your entire K8s stack, analyzes their ripple effects, and provides you with the context you need to troubleshoot efficiently and independently. Komodor gives you insight into your Kubernetes deployments on a timeline with relevant information such as what changed, what code was pushed, and who pushed it. You can also view data from Git, config maps, your infrastructure, alerting, and other tools such as Datadog, in one centralized and easy-to-understand display. 
 
-Datadog マーケットプレイスでのご提供には、Komodor プラットフォームへのアクセスが含まれています。すでに Komodor をご利用で、インスタンスを Datadog に接続する必要があるお客様は、[インテグレーションをセットアップ][1]してください。
+This offering in the Datadog Marketplace provides access to the Komodor platform. If you are already a Komodor customer and need to connect your instance to Datadog, [set up the integration][1].
 
-## Agent
-Komodor では、お客様の成功に必要なツールと情報の提供をお約束します。そのため、必要なときに必要なサポートを受けられるよう、以下のとおり複数の方法をご用意しています。Komodor アプリケーション内（右下のお問い合わせボタン）からメッセージを送信、ドキュメントで必要な情報を見つける、あるいは [support@komodor.com](mailto:support@komodor.com) までメールを送信しサポートチケットを作成してください。
+## Support
+At Komodor, we're committed to giving you the tools and information you need to be successful. So, we offer multiple ways to get the help you need, when you need it. You can send us messages from inside the Komodor application (the communication button in the bottom right), use the Docs and FAQs to find information, or open a ticket with support by sending an email to [support@komodor.com](mailto:support@komodor.com).
 
 
-[1]: /ja/integrations/komodor
+[1]: /integrations/komodor
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/komodor-komodor" target="_blank">こちらをクリック</a>してください。
+This application is made available through the Marketplace and is supported by a Datadog Technology Partner. <a href="https://app.datadoghq.com/marketplace/app/komodor-komodor" target="_blank">Click Here</a> to purchase this application.

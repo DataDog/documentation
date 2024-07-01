@@ -1,59 +1,60 @@
 ---
-categories:
+"categories":
 - azure
-- クラウド
-- コスト管理
-- ネットワーク
-dependencies: []
-description: Azure の各サブスクリプションリソース (コンピューティング、ネットワーク、ストレージ) について、事前に構成された上限に照らして使用状況を追跡します
-doc_link: https://docs.datadoghq.com/integrations/azure_usage_and_quotas/
-draft: false
-git_integration_title: azure_usage_and_quotas
-has_logo: true
-integration_id: azure-usage-and-quotas
-integration_title: Microsoft Azure Usage and Quotas
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: '1.0'
-name: azure_usage_and_quotas
-public_title: Datadog-Microsoft Azure Usage and Quotas インテグレーション
-short_description: Azure の使用状況を、事前に構成された上限に照らして追跡。
-version: '1.0'
+- cloud
+- cost management
+- network
+"custom_kind": "integration"
+"dependencies": []
+"description": "Track usage against preconfigured limits on Azure compute, network, and storage resources for your subscription"
+"doc_link": "https://docs.datadoghq.com/integrations/azure_usage_and_quotas/"
+"draft": false
+"git_integration_title": "azure_usage_and_quotas"
+"has_logo": true
+"integration_id": "azure-usage-and-quotas"
+"integration_title": "Microsoft Azure Usage and Quotas"
+"integration_version": ""
+"is_public": true
+"manifest_version": "1.0"
+"name": "azure_usage_and_quotas"
+"public_title": "Datadog-Microsoft Azure Usage and Quotas Integration"
+"short_description": "Track usage against preconfigured limits on Azure."
+"version": "1.0"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-## 概要
+## Overview
 
-Azure では、サブスクリプションリソースに対して事前に構成された上限を設定しています。予期せぬプロビジョニングの失敗を防ぐには、この上限を念頭に置いて Azure 環境の設計やスケーリングを行ってください。Azure Usage and Quotas からメトリクスを取得して、以下を行うことができます。
+Azure places preconfigured limits on resources for your subscription. To avoid unexpected provisioning failures, keep these limits in mind as you design and scale your Azure environment. Get metrics from Azure Usage and Quotas to:
 
-- リソース (コンピューティング、ネットワーク、ストレージ) の使用状況を割り当てに照らして視覚化。
-- 割り当てが上限に達したこと把握し、プロビジョニングの失敗を予防。
+- Visualize utilization of computer, network, and storage resources against your quota.
+- Understand and prevent provisioning failures from hitting quota limits.
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-[Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。これ以外に必要なインストール手順はありません。
+If you haven't already, set up the [Microsoft Azure integration first][1]. There are no other installation steps that need to be performed.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "azure_usage_and_quotas" >}}
 
 
-### ヘルプ
+### Events
 
-Azure Quota インテグレーションには、イベントは含まれません。
+The Azure Quota integration does not include any events.
 
-### ヘルプ
+### Service Checks
 
-Azure Quota インテグレーションには、サービスのチェック機能は含まれません。
+The Azure Quota integration does not include any service checks.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
+Need help? Contact [Datadog support][3].
 
-[1]: https://docs.datadoghq.com/ja/integrations/azure/
+[1]: https://docs.datadoghq.com/integrations/azure/
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_usage_and_quotas/azure_usage_and_quotas_metadata.csv
-[3]: https://docs.datadoghq.com/ja/help/
+[3]: https://docs.datadoghq.com/help/
+

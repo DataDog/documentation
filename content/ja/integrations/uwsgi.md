@@ -1,58 +1,57 @@
 ---
+title: uWSGI
+name: uwsgi
+custom_kind: integration
+description: 'Collect uWSGI logs in order to track requests per second, bytes served, request status, and more.'
+short_description: 'Collect logs to track requests per second, bytes served, request status, and more.'
 categories:
-- ログの収集
-- web
-dependencies:
-- https://github.com/DataDog/documentation/blob/master/content/en/integrations/uwsgi.md
-description: uWSGI のログを収集して、毎秒のリクエスト数、処理バイト数、リクエストステータスなどを追跡
+  - log collection
+  - web
 doc_link: /integrations/uwsgi/
-git_integration_title: uwsgi
+dependencies: ["https://github.com/DataDog/documentation/blob/master/content/en/integrations/uwsgi.md"]
 has_logo: true
-integration_id: uwsgi
 integration_title: uWSGI
 is_public: true
-kind: インテグレーション
-name: uwsgi
-public_title: Datadog-uWSGI インテグレーション
-short_description: ログを収集して、毎秒のリクエスト数、処理バイト数、リクエストステータスなどを追跡できます。
+public_title: Integration Datadog-uWSGI
+git_integration_title: uwsgi
 supported_os:
 - linux
 - mac_os
 - windows
-title: uWSGI
+integration_id: "uwsgi"
 ---
 
-## 概要
+## Overview
 
-uWSGI のログを収集して、毎秒のリクエスト数、処理バイト数、リクエストステータス (2xx、3xx、4xx、5xx)、サービスのアップタイム、速度低下などを追跡できます。
+Collect uWSGI logs in order to track requests per second, bytes served, request status (2xx, 3xx, 4xx, 5xx), service uptime, slowness, and more.
 
-## セットアップ
+## Setup
 
-### インストール
+### Installation
 
-uWSGI サーバーが実行されているインスタンス上に [Agent をインストール][1]します。
+[Install the agent][1] on the instance that runs the uWSGI server.
 
-### 構成
+### Configuration
 
-uWSGI サーバーは、デフォルトでログを stdout に記録します。ファイルへのログ記録を開始するには、以下のコマンドを実行するか、[ファイルへのログ記録に関する uWSGI の説明][2]に従います。
+By default uWSGI server logs to stdout. Run the following command to start logging to a file or follow [uWSGI instructions to log to a file][2]:
 
 ```text
 uwsgi --socket :3031 --logger file:logfile=/var/log/uwsgi/uwsgi.log,maxsize=2000000
 ```
 
-Agent の構成ディレクトリのルートに `uwsgi.d/conf.yaml` ファイルを作成します。
+Create the `uwsgi.d/conf.yaml` file in the root of your Agent's configuration directory.
 
-#### ログの収集
+#### Log collection
 
-_Agent バージョン 6.0 以降で利用可能_
+_Available for Agent versions >6.0_
 
-Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
+Collecting logs is disabled by default in the Datadog Agent. Enable it in your `datadog.yaml` file with:
 
 ```yaml
 logs_enabled: true
 ```
 
-続いて、次の構成ブロックを `uwsgi.d/conf.yaml` ファイルに追加して、ログの収集を開始します。
+Then add this configuration block to your `uwsgi.d/conf.yaml` file to start collecting your logs:
 
 ```yaml
 logs:
@@ -62,17 +61,17 @@ logs:
       source: uwsgi
 ```
 
-最後に、[Agent を再起動][3]します。
+Finally, [restart the agent][3].
 
-Datadog-uWSGI インテグレーションは、デフォルトで、[uWSGI のデフォルトのログ形式][4]と [Apache のような結合形式][5]をサポートします。
+By default the Datadog-uWSGI integration supports the [default uWSGI log format][4] and the [Apache-like combined format][5].
 
-## トラブルシューティング
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
+Need help? Contact [Datadog Support][6].
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://uwsgi-docs.readthedocs.io/en/latest/Logging.html#logging-to-files
-[3]: /ja/agent/guide/agent-commands/#start-stop-restart-the-agent
+[3]: /agent/guide/agent-commands/#start-stop-restart-the-agent
 [4]: https://uwsgi-docs.readthedocs.io/en/latest/LogFormat.html#uwsgi-default-logging
 [5]: https://uwsgi-docs.readthedocs.io/en/latest/LogFormat.html#apache-style-combined-request-logging
-[6]: /ja/help/
+[6]: /help/

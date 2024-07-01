@@ -1,69 +1,70 @@
 ---
-categories:
+"categories":
 - collaboration
 - notifications
-dependencies: []
-description: Datadog のアラートとグラフをチームの DingTalk Group に送信
-doc_link: https://docs.datadoghq.com/integrations/dingtalk/
-draft: false
-git_integration_title: dingtalk
-has_logo: true
-integration_id: dingtalk
-integration_title: DingTalk
-integration_version: ''
-is_public: true
-custom_kind: integration
-manifest_version: '1.0'
-name: dingtalk
-public_title: Datadog-DingTalk インテグレーション
-short_description: Datadog のアラートとグラフをチームの DingTalk Group に送信
-version: '1.0'
+"custom_kind": "integration"
+"dependencies": []
+"description": "Send Datadog alerts and graphs to your team's DingTalk Group."
+"doc_link": "https://docs.datadoghq.com/integrations/dingtalk/"
+"draft": false
+"git_integration_title": "dingtalk"
+"has_logo": true
+"integration_id": "dingtalk"
+"integration_title": "DingTalk"
+"integration_version": ""
+"is_public": true
+"manifest_version": "1.0"
+"name": "dingtalk"
+"public_title": "Datadog-DingTalk Integration"
+"short_description": "Send Datadog alerts and graphs to your team's DingTalk Group."
+"version": "1.0"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-## 概要
+## Overview
 
-DingTalk と統合して、以下のことができます。
+Integrate with DingTalk to:
 
--   DingTalk で Datadog アラートとイベントの通知を受けることができます。
--   メッセージやグラフを DingTalk グループと共有できます。
+-   Be notified of Datadog alerts and events in DingTalk
+-   Share messages and graphs with your DingTalk group
 
-## インフラストラクチャーリスト
+## Installation
 
-DingTalk インテグレーションは、Datadog の [DingTalk インテグレーションタイル][1]でインストールされます。
+The DingTalk integration is installed with the Datadog [DingTalk integration tile][1].
 
-## 計画と使用
+## Setup
 
-Datadog と DingTalk グループを統合するには、以下の手順に従ってください。
+To integrate Datadog with a DingTalk group:
 
-1. DingTalk アプリで _Messages_ に移動し、Datadog インテグレーションを追加するグループをクリックします。
-2. 右上隅の _Group Settings_ アイコン (省略符に似たアイコン) をクリックし、_Group Robot_ を選択します。
-3. Group Robot メニューで Datadog を選択し、`Add` をクリックします。
-4. ロボットの名前を入力し、`Finished` をクリックします。これによって Webhook アドレスが返されます。
-5. Webhook アドレスをコピーし、`Finished` をクリックします。
-6. DingTalk [インテグレーションタイル][1]で、_Group Name_ フィールドに Datadog インテグレーションを追加した DingTalk グループを入力し、_Group Robot Webhook_ フィールドに Webhook アドレスを貼り付けます。グループ名には、文字、数字、およびアンダースコアを使用できます。
-7. _Install Configuration_ (または _Update Configuration_) をクリックします。
+1. In the DingTalk app, navigate to _Messages_, and then click on the group where you want to add a Datadog integration.
+2. In the top right corner, click the _Group Settings_ icon (it looks like an ellipsis) and choose _Group Robot_.
+3. On the Group Robot menu, select Datadog and click `Add`.
+4. Enter a name for the robot and click `Finished`. This returns a webhook address.
+5. Copy the webhook address and then click `Finished`.
+6. On the DingTalk [integration tile][1], enter the DingTalk group where you added the Datadog integration into the _Group Name_ field and paste the webhook address into the _Group Robot Webhook_ field. Group names can contain letters, digits, and underscores.
+7. Click _Install Configuration_ (or _Update Configuration_).
 
-インテグレーションをインストールまたは更新したら、DingTalk グループ名で [`@-notification` 機能][2]を使用できるようになります。
+After installing or updating the integration, you can use the [`@-notification` feature][2] with your DingTalk group name.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 
-DingTalk インテグレーションは、メトリクスを提供しません。
+The DingTalk integration does not provide any metrics.
 
-### ヘルプ
+### Events
 
-DingTalk インテグレーションには、イベントは含まれません。
+The DingTalk integration does not include any events.
 
-### ヘルプ
+### Service Checks
 
-DingTalk インテグレーションには、サービスのチェック機能は含まれません。
+The DingTalk integration does not include any service checks.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
+Need help? Contact [Datadog support][3].
 
 [1]: https://app.datadoghq.com/integrations/dingtalk
-[2]: https://docs.datadoghq.com/ja/monitors/notifications/#notification
-[3]: https://docs.datadoghq.com/ja/help/
+[2]: https://docs.datadoghq.com/monitors/notifications/#notification
+[3]: https://docs.datadoghq.com/help/
+

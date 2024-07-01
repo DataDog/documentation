@@ -1,92 +1,92 @@
 ---
+title: Process Check Monitor
+description: "Check if a process is running on a host"
 aliases:
-- /ja/monitors/monitor_types/process_check
-- /ja/monitors/create/types/process_check/
-description: ホストでプロセスが実行されているかをチェックする
+- /monitors/monitor_types/process_check
+- /monitors/create/types/process_check/
 further_reading:
 - link: /monitors/notify/
-  tag: ドキュメント
-  text: モニター通知の設定
+  tag: Documentation
+  text: Configure your monitor notifications
 - link: /monitors/downtimes/
-  tag: ドキュメント
-  text: モニターをミュートするダウンタイムのスケジュール
+  tag: Documentation
+  text: Schedule a downtime to mute a monitor
 - link: /monitors/manage/status/
-  tag: ドキュメント
-  text: モニターステータスを確認
-title: プロセスチェックモニター
+  tag: Documentation
+  text: Check your monitor status
 ---
 
-## 概要
+## Overview
 
-プロセスチェックモニターは、Agent チェック `process.up` が生成するステータスを監視します。Agent レベルで、一致するプロセスの数に基づいて[チェックしきい値を構成][1]できます。
+A process check monitor watches the status produced by the Agent check `process.up`. At the Agent level you can [configure your check thresholds][1] based on the number of matching processes.
 
-## モニターの作成
+## Monitor creation
 
-Datadog で[プロセスチェックモニター][2]を作成するには、メインナビゲーションを使用して次のように移動します: Monitors --> New Monitor --> Process Check。
+To create a [process check monitor][2] in Datadog, use the main navigation: *Monitors --> New Monitor --> Process Check*.
 
-### プロセスを選択する
+### Pick a process
 
-ドロップダウンリストから、監視するプロセスを選択します。検索条件を入力してリストをフィルターします。
+From the dropdown list, select a process to monitor. Filter the list by entering your search criteria.
 
-### モニターのスコープを選択
+### Pick monitor scope
 
-ホスト名、タグ、または `All Monitored Hosts` を選択して、監視するホストを決定します。選択したプロセスのステータスを報告するホストまたはタグのみが表示されます。特定のホストを除外する必要がある場合は、2 番目のフィールドに名前やタグをリストアップします。
+Select the hosts to monitor by choosing host names, tags, or choose `All Monitored Hosts`. Only hosts or tags reporting a status for the selected process are displayed. If you need to exclude certain hosts, use the second field to list names or tags.
 
-* インクルードフィールドでは `AND` ロジックを使用します。リストアップされたすべてのホスト名とタグが存在するホストがスコープに含まれます。
-* エクスクルードフィールドでは `OR` ロジックを使用します。リストアップされた名前やタグを持つホストはスコープから除外されます。
+* The include field uses `AND` logic. All listed host names and tags must be present on a host for it to be included.
+* The exclude field uses `OR` logic. Any host with a listed name or tag is excluded.
 
-### アラートの条件を設定する
+### Set alert conditions
 
 {{< tabs >}}
 {{% tab "Check Alert" %}}
 
-チェックアラートは、チェックグループごとに送信されたステータスを連続的にトラックし、しきい値と比較します。プロセスチェックモニターの場合、グループは静的です（`host` と `process`）。
+A check alert tracks consecutive statuses submitted per check grouping and compares it to your thresholds. For process check monitors, the groups are static: `host` and `process`.
 
-チェックアラートをセットアップする
+Set up the check alert:
 
-1. 何回連続して失敗したらアラートをトリガーするか、回数 `<数値>` を選択します。
+1. Trigger the alert after selected consecutive failures: `<NUMBER>`
 
-    各チェックは `OK`、`WARN`、`CRITICAL` のいずれか 1 つのステータスを送信します。`WARN` と `CRITICAL` ステータスが連続して何回送信されたら通知をトリガーするか選択します。たとえば、プロセスで接続に失敗する異常が 1 回発生したとします。値を `> 1` に設定した場合、この異常は無視されますが、2 回以上連続で失敗した場合は通知をトリガーします。
+    Each check run submits a single status of `OK`, `WARN`, or `CRITICAL`. Choose how many consecutive runs with the `WARN` and `CRITICAL` status trigger a notification. For example, your process might have a single blip where connection fails. If you set this value to `> 1`, the blip is ignored but a problem with more than one consecutive failure triggers a notification.
 
-2. 何回連続して成功したらアラートを解決するか、回数 `<数値>` を選択します。
+2. Resolve the alert after selected consecutive successes: `<NUMBER>`
 
-    何回連続して `OK` ステータスが送信されたらアラートを解決するか、回数を選択します。
+    Choose how many consecutive runs with the `OK` status resolves the alert.
 
 {{% /tab %}}
 {{% tab "Cluster Alert" %}}
 
-クラスターアラートは、既定のステータスでプロセスチェックの割合を計算し、しきい値と比較します。
+A cluster alert calculates the percent of process checks in a given status and compares it to your thresholds.
 
-クラスターアラートをセットアップする
+Set up a cluster alert:
 
-1. タグによりプロセスチェックをグループ化するかどうか決定します。`Ungrouped` はすべてのソースでステータスのパーセンテージを計算します。`Grouped` は各グループごとのステータスのパーセンテージを計算します。
+1. Decide whether or not to group your process checks according to a tag. `Ungrouped` calculates the status percentage across all sources. `Grouped` calculates the status percentage on a per group basis.
 
-2. アラートと警告のしきい値の割合を選択します。1 つの設定（アラートまたは警告）のみ必須です。
+2. Select the percentage for alert and warn thresholds. Only one setting (alert or warn) is required.
 
-タグの個別の組み合わせでタグ付けされた各チェックは、クラスター内の個別のチェックと見なされます。タグの各組み合わせの最後のチェックのステータスのみが、クラスターのパーセンテージの計算で考慮されます。
+Each check tagged with a distinct combination of tags is considered to be a distinct check in the cluster. Only the status of the last check of each combination of tags is taken into account in the cluster percentage calculation.
 
-{{< img src="monitors/monitor_types/process_check/cluster_check_thresholds.png" alt="クラスターチェックのしきい値" style="width:90%;">}}
+{{< img src="monitors/monitor_types/process_check/cluster_check_thresholds.png" alt="Cluster Check Thresholds" style="width:90%;">}}
 
-たとえば、環境ごとにグループ化されたクラスターチェックモニターは、いずれかの環境のチェックの 70% 以上が `CRITICAL` ステータスを送信した場合にアラートし、いずれかの環境のチェックの70% 以上が `WARN` ステータスを送信した場合に警告できます。
+For example, a cluster check monitor grouped by environment can alert if more that 70% of the checks on any of the environments submit a `CRITICAL` status, and warn if more that 70% of the checks on any of the environments submit a `WARN` status.
 {{% /tab %}}
 {{< /tabs >}}
 
-#### 高度なアラート条件
+#### Advanced alert conditions
 
-[データなし][4]、[自動解決][5]、[新しいグループ遅延][6]の各オプションに関する情報は、[モニターコンフィギュレーション][3]ドキュメントを参照してください。
+See the [Monitor configuration][3] documentation for information on [No data][4], [Auto resolve][5], and [New group delay][6] options.
 
-### 通知
+### Notifications
 
-**Say what's happening** と **Notify your team** のセクションに関する詳しい説明は、[通知][7] のページを参照してください。
+For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][7] page.
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/integrations/process/
+[1]: /integrations/process/
 [2]: https://app.datadoghq.com/monitors#create/process
-[3]: /ja/monitors/configuration/#advanced-alert-conditions
-[4]: /ja/monitors/configuration/#no-data
-[5]: /ja/monitors/configuration/#auto-resolve
-[6]: /ja/monitors/configuration/#new-group-delay
-[7]: /ja/monitors/notify/
+[3]: /monitors/configuration/#advanced-alert-conditions
+[4]: /monitors/configuration/#no-data
+[5]: /monitors/configuration/#auto-resolve
+[6]: /monitors/configuration/#new-group-delay
+[7]: /monitors/notify/

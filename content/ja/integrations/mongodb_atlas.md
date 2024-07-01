@@ -1,120 +1,126 @@
 ---
-app_id: mongodb-atlas
-app_uuid: d7f734da-a1f7-4e3f-a590-ea154018a8d8
-assets:
-  dashboards:
-    MongoDB-Atlas-Overview: assets/dashboards/MongoDB-Atlas-Overview_dashboard.json
-  integration:
-    auto_install: true
-    configuration: {}
-    events:
-      creates_events: true
-    metrics:
-      check: mongodb.atlas.connections.current
-      metadata_path: metadata.csv
-      prefix: mongodb.atlas.
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 230
-    source_type_name: MongoDB Atlas
-  monitors:
-    '[MongoDB Atlas] CPU usage is higher than average on host: {{host.name}}': assets/monitors/high_cpu.json
-    '[MongoDB Atlas] Efficiency of queries is degrading': assets/monitors/query_efficiency.json
-    '[MongoDB Atlas] Memory usage is higher than average on host: {{host.name}}': assets/monitors/memory.json
-    '[MongoDB Atlas] Read Latency is higher than average for host: {{host.name}}': assets/monitors/read_latency.json
-    '[MongoDB Atlas] Write Latency is higher than average for host: {{host.name}}': assets/monitors/write_latency.json
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com (日本語対応)
-  support_email: help@datadoghq.com
-categories:
-- メトリクス
-dependencies:
-- https://github.com/DataDog/integrations-extras/blob/master/mongodb_atlas/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: mongodb_atlas
-integration_id: mongodb-atlas
-integration_title: MongoDB Atlas
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: 2.0.0
-name: mongodb_atlas
-public_title: MongoDB Atlas
-short_description: MongoDB Atlas
-supported_os:
+"app_id": "mongodb-atlas"
+"app_uuid": "d7f734da-a1f7-4e3f-a590-ea154018a8d8"
+"assets":
+  "dashboards":
+    "MongoDB-Atlas-Overview": assets/dashboards/MongoDB-Atlas-Overview_dashboard.json
+  "integration":
+    "auto_install": true
+    "configuration": {}
+    "events":
+      "creates_events": true
+    "metrics":
+      "check": mongodb.atlas.connections.current
+      "metadata_path": metadata.csv
+      "prefix": mongodb.atlas.
+    "service_checks":
+      "metadata_path": assets/service_checks.json
+    "source_type_id": !!int "230"
+    "source_type_name": MongoDB Atlas
+  "monitors":
+    "[MongoDB Atlas] CPU usage is higher than average on host: {{host.name}}": assets/monitors/high_cpu.json
+    "[MongoDB Atlas] Efficiency of queries is degrading": assets/monitors/query_efficiency.json
+    "[MongoDB Atlas] Memory usage is higher than average on host: {{host.name}}": assets/monitors/memory.json
+    "[MongoDB Atlas] Read Latency is higher than average for host: {{host.name}}": assets/monitors/read_latency.json
+    "[MongoDB Atlas] Write Latency is higher than average for host: {{host.name}}": assets/monitors/write_latency.json
+"author":
+  "homepage": "https://www.datadoghq.com"
+  "name": Datadog
+  "sales_email": info@datadoghq.com
+  "support_email": help@datadoghq.com
+"categories":
+- metrics
+"custom_kind": "integration"
+"dependencies":
+- "https://github.com/DataDog/integrations-extras/blob/master/mongodb_atlas/README.md"
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "mongodb_atlas"
+"integration_id": "mongodb-atlas"
+"integration_title": "MongoDB Atlas"
+"integration_version": ""
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "mongodb_atlas"
+"public_title": "MongoDB Atlas"
+"short_description": "MongoDB Atlas"
+"supported_os":
 - linux
 - windows
 - macos
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::Windows
-  - Supported OS::macOS
-  - Category::Metrics
-  configuration: README.md#Setup
-  description: MongoDB Atlas
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: MongoDB Atlas
+"tile":
+  "changelog": CHANGELOG.md
+  "classifier_tags":
+  - "Supported OS::Linux"
+  - "Supported OS::Windows"
+  - "Supported OS::macOS"
+  - "Category::Metrics"
+  "configuration": "README.md#Setup"
+  "description": MongoDB Atlas
+  "media": []
+  "overview": "README.md#Overview"
+  "resources":
+  - "resource_type": blog
+    "url": "https://www.datadoghq.com/blog/monitor-atlas-performance-metrics-with-datadog/"
+  - "resource_type": other
+    "url": "https://www.mongodb.com/products/platform/atlas-for-government"
+  "support": "README.md#Support"
+  "title": MongoDB Atlas
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
-## 概要
+## Overview
 
-MongoDB Atlas は、算出メトリクスを Datadog にプッシュして、以下のことができます。
+MongoDB Atlas can push calculated metrics into Datadog to:
 
-- MongoDB Atlas のキーメトリクスを視覚化できます。
-- MongoDB Atlas のパフォーマンスをアプリケーションの他の部分と関連付けることができます。
+- Visualize key MongoDB Atlas metrics.
+- Correlate MongoDB Atlas performance with the rest of your applications.
 
-このインテグレーションには、すぐに使えるモニターとダッシュボードが含まれており、Atlas の健全性およびパフォーマンスのメトリクスの表示、スループットメトリクスの監視、読み取りおよび書き込み操作の平均レイテンシーの経時的な追跡、現在の接続数が上限に近づいた場合にアラートを出すモニターの作成が可能です。
+The integration includes out-of-the-box monitors and dashboard that enable you to view Atlas health and performance metrics, monitor throughput metrics, track the average latency of read and write operations over time, and create monitors that alert you when the number of current connections is approaching the maximum limit.
 
-**注**: MongoDB Atlas インテグレーションは M10+ クラスターでのみ利用可能です。
+**Note**: The MongoDB Atlas integration is only available on M10+ clusters.
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-MongoDB Atlas インテグレーションは、Atlas ポータルにログインすることによってインストールできます。
+You can install the MongoDB Atlas integration by logging in to your Atlas portal.
 
-### ブラウザトラブルシューティング
+### Configuration
 
-1. Datadog [API キー][1]を取得または作成します。
-2. [Atlas ポータル][2]の **Integrations** -> **Datadog Settings** で、Datadog API キーを入力します。
+1. Retrieve or create a Datadog [API key][1].
+2. In the [Atlas portal][2], enter a Datadog API key under **Integrations** -> **Datadog Settings**.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "mongodb_atlas" >}}
 
 
-### ヘルプ
+### Events
 
-MongoDB Atlas は、Datadog に[アラート][4]をイベントとしてプッシュできます。
+MongoDB Atlas can push [alerts][4] to Datadog as events.
 
-### ヘルプ
+### Service Checks
 
-MongoDB Atlas インテグレーションには、サービスのチェック機能は含まれません。
+The MongoDB Atlas integration does not include any service checks.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
+Need help? [Contact Datadog Support][5]
 
-## その他の参考資料
+## Further Reading
 
-お役に立つドキュメント、リンクや記事:
+Additional helpful documentation, links, and articles:
 
-- [Datadog を使用した MongoDB Atlas の監視][6]
+- [Monitor MongoDB Atlas with Datadog][6]
 - [MongoDB Atlas for Government][7]
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: https://docs.atlas.mongodb.com/tutorial/monitoring-integrations/#procedure
 [3]: https://github.com/DataDog/integrations-extras/blob/master/mongodb_atlas/metadata.csv
 [4]: https://www.mongodb.com/docs/atlas/configure-alerts/#std-label-notification-options
-[5]: https://docs.datadoghq.com/ja/help/
+[5]: https://docs.datadoghq.com/help/
 [6]: https://www.datadoghq.com/blog/monitor-atlas-performance-metrics-with-datadog/
 [7]: https://www.mongodb.com/products/platform/atlas-for-government
+

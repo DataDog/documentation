@@ -1,87 +1,100 @@
 ---
-aliases:
-- /ja/monitors/monitor_types/event
-- /ja/monitors/create/types/event/
-description: Datadog によって収集されたイベントを監視する
+title: Event Monitor
+description: "Monitor events gathered by Datadog"
+aliases :
+    - /monitors/monitor_types/event
+    - /monitors/create/types/event/
 further_reading:
+- link: /service_management/events/
+  tag: Documentation
+  text: Event Management Overview
 - link: /monitors/notify/
-  tag: ドキュメント
-  text: モニター通知の設定
+  tag: Documentation
+  text: Configure your monitor notifications
 - link: /monitors/downtimes/
-  tag: ドキュメント
-  text: モニターをミュートするダウンタイムのスケジュール
+  tag: Documentation
+  text: Schedule a downtime to mute a monitor
 - link: /monitors/manage/status/
-  tag: ドキュメント
-  text: モニターステータスを確認
-title: イベントモニター
+  tag: Documentation
+  text: Check your monitor status
 ---
 
-## 概要
+## Overview
 
-イベントモニターを使用すると、検索クエリと一致するイベントが発生したときにアラートを生成できます。
+Datadog automatically creates events from various products including monitors, Watchdog, and Error Tracking. You can also track events generated from the Agent and installed integrations and ingest events from sources, including alert events from third parties, change requests, deployments, configuration changes.
 
-## モニターの作成
+Event monitors alert on ingested events that match a search query, allowing you to focus attention on the events that matter most to your team.
 
-Datadog で[イベントモニター][1]を作成するには、**Monitors** > **New Monitor** > **Event** に移動します。
+## Monitor creation
 
-<div class="alert alert-info"><strong>注</strong>: デフォルトでは、1 アカウントあたり 1000 イベントモニターという制限があります。この制限に引っかかっている場合、<a href="/monitors/configuration/?tab=thresholdalert#alert-grouping">マルチアラート</a>の使用を検討するか、<a href="/help/">サポートにお問い合わせ</a>ください。</div>
+To create an [event monitor][1] in Datadog, navigate to **Monitors** > **New Monitor** > **Event**.
 
-### 検索クエリを定義する
+<div class="alert alert-info"><strong>Note</strong>: There is a default limit of 1000 Event monitors per account. If you are encountering this limit, consider using <a href="/monitors/configuration/?tab=thresholdalert#alert-grouping">multi alerts</a>, or <a href="/help/">Contact Support</a>.</div>
 
-検索クエリを定義すると、上部のグラフが更新されます。
+### Define the search query
 
-1. [イベントエクスプローラーの検索構文][2]を使って検索クエリを作成します。
-2. イベント数またはファセットのモニタリングを選択します。
-    * **Monitor over an event count**: 検索バーを使用し (任意)、ファセットを選択**しません**。選択されたタイムフレームで Datadog がイベント数を評価し、それをしきい値の条件と比較します。
-    * **Monitor over a facet**: ファセットが選択されていると、モニターはファセットのユニークな値のカウントに対してアラートを作成します。
-3. アラートのグループ化方法を構成します（任意）:
-    * **Simple alert**: すべてのソースをまとめて集計します。集計値が設定条件を満たすと、1 件のアラートを受け取ります。これは、単一のホストから受け取るメトリクスまたは多くのホストからの合計メトリクスを監視する場合に最適です。通知件数を減らしたい場合にこの方法を選択します。
-    * **Multi Alert**: グループパラメーターに従い、複数のアラートを各ソースに適用します (最大 1000 件の一致するグループ)。アラートイベントは、設定された条件を満たすと各グループに生成されます。例えば、`host` でグループ化し、各ホストに対して別々のアラートを受信することができます。
+As you define the search query, the top graph updates.
 
-### アラートの条件を設定する
+1. Construct a search query using the [Event Explorer search syntax][2].
+2. Choose to monitor over an event count or facet:
+    * **Monitor over an event count**: Use the search bar (optional) and do **not** select a facet. Datadog evaluates the number of events over a selected time frame, then compares it to the threshold conditions.
+    * **Monitor over a facet**: If a facet is selected, the monitor alerts over the unique value count of the facet.
+3. Configure the alert grouping strategy (optional):
+    * **Simple-Alert**: Simple alerts aggregate over all reporting sources. You receive one alert when the aggregated value meets the set conditions. This works best to monitor a metric from a single host or the sum of a metric across many hosts. This strategy may be selected to reduce notification noise.
+    * **Multi Alert**: Multi alerts apply the alert to each source according to your group parameters, up to 1000 matching groups. An alerting event is generated for each group that meets the set conditions. For example, you can group by `host` to receive separate alerts for each host.
 
-* カウントが `above`、`above or equal to`、`below`、または `below or equal to` の時
-* `<しきい値の数>`
-* 過去 `5 minutes`、`15 minutes`、`1 hour` など、または `custom` に 5 分～48 時間の値を設定します。
+4. Group events by multiple dimensions (optional): 
 
-**注**: 一部のプロバイダーでは、イベントが**ポスト**されてから実際に開始されるまでにかなりの遅延が生じます。このような場合、Datadog は発生時刻にまでさかのぼってイベントを記録しますが、これにより現在のモニター評価ウィンドウ外のイベントを認識することがあります。評価ウィンドウを広げると時間差が発生する原因を理解しやすくなります。適切なモニター設定の調整についてサポートが必要な場合は、[Datadog のサポートチーム][3]までお問い合わせください。
+   All events matching the query are aggregated into groups based on the value of up to four event facets. When there are multiple dimensions, the top values are determined according to the first dimension, then according to the second dimension within the top values of the first dimension, and so on up to the last dimension. Dimensions limit depends on the total number of dimensions:
+   * **1 facet**: 1000 top values
+   * **2 facets**: 30 top values per facet (at most 900 groups)
+   * **3 facets**: 10 top values per facet (at most 1000 groups)
+   * **4 facets**: 5 top values per facet (at most 625 groups)
 
-#### 高度なアラート条件
+### Set alert conditions
 
-高度なアラートオプション (自動解決、評価遅延など) の詳細な手順については、[モニターコンフィギュレーション][4]ページを参照してください。
+* The count was `above`, `above or equal to`, `below`, or `below or equal to`
+* `<THRESHOLD_NUMBER>`
+* during the last `5 minutes`, `15 minutes`, `1 hour`, etc. or `custom` to set a value between 5 minutes and 48 hours.
 
-### 通知
+**Note**: Some providers introduce a significant delay between when an event is **posted**, and when the event is initiated. In this case, Datadog back-dates the event to the time of occurrence, which could place an incoming event outside the current monitor evaluation window. Widening your evaluation window can help account for the time difference. If you need help adjusting your monitor settings appropriately, reach out to [Datadog Support][3].
 
-**Say what's happening** と **Notify your team** のセクションに関する詳しい説明は、[通知][5] のページを参照してください。
+#### Advanced alert conditions
 
-#### イベントテンプレート変数
+For detailed instructions on the advanced alert options (auto resolve, evaluation delay, etc.), see the [Monitor configuration][4] page.
 
-イベントモニターには、通知メッセージを入力できる特殊なテンプレート変数があります。
+### Notifications
 
-| テンプレート変数          | 定義                                                                     |
+For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][5] page.
+
+#### Event template variables
+
+Event monitors have specific template variables you can include in the notification message:
+
+| Template variable          | Definition                                                                     |
 |----------------------------|--------------------------------------------------------------------------------|
-| `{{event.id}}`             | イベントの ID。                                                           |
-| `{{event.title}}`          | イベントのタイトル。                                                        |
-| `{{event.text}}`           | イベントのテキスト。                                                         |
-| `{{event.host.name}}`      | イベントを生成したホストの名前。                                 |
-| `{{event.tags}}`           | イベントに関連したタグのリスト                                          |
-| `{{event.tags.<タグ_キー>}}` | イベントに関連した特定のタグキーの値。下記のサンプルを参照してください。 |
+| `{{event.id}}`             | The ID of the event.                                                           |
+| `{{event.title}}`          | The title of the event.                                                        |
+| `{{event.text}}`           | The text of the event.                                                         |
+| `{{event.host.name}}`      | The name of the host that generated the event.                                 |
+| `{{event.tags}}`           | A list of tags attached to the event.                                          |
+| `{{event.tags.<TAG_KEY>}}` | The value for a specific tag key attached to the event. See the example below. |
 
-##### `key:value` 構文のタグ
+##### Tags `key:value` syntax
 
-次のタグ専用: `env:test`、`env:staging`、`env:prod`。
+For the tags `env:test`, `env:staging`, and `env:prod`:
 
-* `env` はタグキーです。
-* `test`、`staging`、`prod` はタグ値です。
+* `env` is the tag key.
+* `test`, `staging`, and `prod` are the tag values.
 
-テンプレート変数は `{{event.tags.env}}` です。このテンプレート変数を使用した場合の結果は、`test`、`staging`、または `prod` です。
+The template variable is `{{event.tags.env}}`. The result of using this template variable is `test`, `staging`, or `prod`.
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/monitors#create/event
-[2]: /ja/service_management/events/explorer/#search-syntax
-[3]: /ja/help/
-[4]: /ja/monitors/configuration/#advanced-alert-conditions
-[5]: /ja/monitors/notify/
+[2]: /service_management/events/explorer/searching
+[3]: /help/
+[4]: /monitors/configuration/#advanced-alert-conditions
+[5]: /monitors/notify/

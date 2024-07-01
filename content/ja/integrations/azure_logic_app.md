@@ -1,61 +1,62 @@
 ---
-categories:
-- cloud
-- configuration & deployment
-- network
-- azure
-dependencies: []
-description: トリガーワークフロー、アクションのレイテンシー、失敗したアクションなどを追跡。
-doc_link: https://docs.datadoghq.com/integrations/azure_logic_app/
-draft: false
-git_integration_title: azure_logic_app
-has_logo: true
-integration_id: azure-logic-app
-integration_title: Microsoft Azure Logic App
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: '1.0'
-name: azure_logic_app
-public_title: Datadog-Microsoft Azure Logic App インテグレーション
-short_description: トリガーワークフロー、アクションのレイテンシー、失敗したアクションなどを追跡。
-version: '1.0'
+"categories":
+- "cloud"
+- "configuration & deployment"
+- "network"
+- "azure"
+"custom_kind": "integration"
+"dependencies": []
+"description": "Track trigger workflows, action latency, failed actions, and more."
+"doc_link": "https://docs.datadoghq.com/integrations/azure_logic_app/"
+"draft": false
+"git_integration_title": "azure_logic_app"
+"has_logo": true
+"integration_id": "azure-logic-app"
+"integration_title": "Microsoft Azure Logic App"
+"integration_version": ""
+"is_public": true
+"manifest_version": "1.0"
+"name": "azure_logic_app"
+"public_title": "Datadog-Microsoft Azure Logic App Integration"
+"short_description": "Track trigger workflows, action latency, failed actions, and more."
+"version": "1.0"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-## 概要
+## Overview
 
-Logic App を使用して、開発者はトリガーと一連の手順で目的を明確化するワークフローを設計できます。
+Logic App allows developers to design workflows that articulate intent through a trigger and series of steps.
 
-Azure Logic App からメトリクスを取得すると、以下のことができます。
+Get metrics from Azure Logic App to:
 
-- Logic App ワークフローのパフォーマンスを視覚化。
-- Logic App ワークフローのパフォーマンスをアプリケーションと関連付け。
+- Visualize the performance of your Logic App workflows.
+- Correlate the performance of your Logic App workflows with your applications.
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-[Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。これ以外に必要なインストール手順はありません。
+If you haven't already, set up the [Microsoft Azure integration first][1]. There are no other installation steps that need to be performed.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "azure_logic_app" >}}
 
 
-### ヘルプ
+### Events
 
-Azure Logic App インテグレーションには、イベントは含まれません。
+The Azure Logic App integration does not include any events.
 
-### ヘルプ
+### Service Checks
 
-Azure Logic App インテグレーションには、サービスのチェック機能は含まれません。
+The Azure Logic App integration does not include any service checks.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
+Need help? Contact [Datadog support][3].
 
-[1]: https://docs.datadoghq.com/ja/integrations/azure/
+[1]: https://docs.datadoghq.com/integrations/azure/
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_logic_app/azure_logic_app_metadata.csv
-[3]: https://docs.datadoghq.com/ja/help/
+[3]: https://docs.datadoghq.com/help/
+

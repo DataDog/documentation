@@ -1,120 +1,120 @@
 ---
+title: Infrastructure List
+kind: documentation
 aliases:
-- /ja/hostnames
-- /ja/graphing/infrastructure/list/
+  - /hostnames
+  - /graphing/infrastructure/list/
 further_reading:
 - link: /infrastructure/hostmap/
-  tag: ドキュメント
+  tag: Documentation
   text: Host Map
 - link: /infrastructure/livecontainers/
-  tag: ドキュメント
-  text: コンテナマップ
+  tag: Documentation
+  text: Container Map
 - link: /infrastructure/process/
-  tag: ドキュメント
-  text: ライブプロセスモニタリング
-title: インフラストラクチャーリスト
+  tag: Documentation
+  text: Live Process Monitoring
 ---
 
-## 概要
+## Overview
 
-インフラストラクチャーリストには、Datadog によって監視されているすべてのホストが、過去 2 時間 (デフォルト) のアクティビティとともに最大 1 週間分表示されます。ホストを検索するか、タグでグループ化します。Datadog で [**Infrastructure > Hosts**][10] に移動してインフラストラクチャーリストを表示します。
+The Infrastructure list shows all of your hosts monitored by Datadog with activity during the last two hours (default) and up to one week. Search your hosts or group them by tags. In Datadog, navigate to [**Infrastructure > Hosts**][10] to view the Infrastructure list.
 
-## ホスト
+## Hosts
 
-ホストのインフラストラクチャーリストに次の情報が表示されます。
+The following information is displayed in the infrastructure list for your hosts:
 
 Hostname
-: 優先ホスト名[エイリアス](#aliases) (オプションメニューを使用してクラウド名またはインスタンス ID を表示します)。
+: The preferred hostname [alias](#aliases) (use the Options menu to view Cloud Name or Instance ID).
 
 Cloud Name
-: ホスト名[エイリアス](#aliases)。
+: A hostname [alias](#aliases).
 
 Instance ID
-: ホスト名[エイリアス](#aliases)。
+: A hostname [alias](#aliases).
 
 Status
-: 予想されるメトリクスが受信されると `ACTIVE` と表示され、メトリクスが受信されないと `INACTIVE` と表示されます。
+: Displays `ACTIVE` when the expected metrics are received and displays `INACTIVE` if no metrics are received.
 
 CPU
-: 使用された CPU の割合（アイドル以外のすべて）。
+: The percent of CPU used (everything but idle).
 
 IOWait
-: IO での待機に費やされた CPU の割合（すべてのプラットフォームでレポートされるわけではありません）。
+: The percent of CPU spent waiting on the IO (not reported for all platforms).
 
 Load 15
-: 過去 15 分間のシステム負荷。
+: The system load over the last 15 minutes.
 
 Apps
-: ホストのメトリクスをレポートする Datadog インテグレーション。
+: The Datadog integrations reporting metrics for the host.
 
 Operating System 
-: 追跡対象のオペレーティングシステム
+: The tracked operating system.
 
 Cloud Platform
-: ホストが実行されているクラウドプラットフォーム。(例: AWS、Google Cloud、Azure など)
+: Cloud platform the host is running on (for example, AWS, Google Cloud, or Azure).
 
 Datadog Agent
-: ホストでデータを収集する Agent のバージョン。
+: Agent version that is collecting data on the host.
 
-### ホスト名
+### Hostname
 
-Datadog Agent は、複数のソースから潜在的なホスト名を収集します。詳細については、[Datadog が Agent ホスト名を決定する方法][1]を参照してください。
+The Datadog Agent collects potential hostnames from several different sources. For more details, see [How does Datadog determine the Agent hostname?][1].
 
-**注**: ホスト名は、Datadog アカウント内で一意である必要があります。そうでない場合、ホストのグラフに不整合が生じる可能性があります。
+**Note**: Hostnames should be unique within a Datadog account, otherwise you may experience some inconsistencies on your host graphs.
 
-### 検査
+### Inspect
 
-ホストをクリックすると、以下の詳細が表示されます。
-- [エイリアス](#aliases)
-- [タグ][2]
-- [メトリクス][3]
-- [コンテナ][4]
-- [ログ][5] (有効な場合)
-- [エージェント構成](#agent-configuration) (有効な場合)
+Click on any host to view more details including:
+- [aliases](#aliases)
+- [tags][2]
+- [metrics][3]
+- [containers][4]
+- [logs][5] (if enabled)
+- [Agent configuration](#agent-configuration) (if enabled)
 
-{{< img src="infrastructure/index/infra-list2.png" alt="インフラストラクチャーリストのホストの詳細" style="width:100%;">}}
+{{< img src="infrastructure/index/infra-list2.png" alt="Infrastructure list host details" style="width:100%;">}}
 
-#### エイリアス
+#### Aliases
 
-Datadog は、1 つのホストに一意に識別可能な名前が複数ある場合、ホスト名のエイリアスを作成します。Agent によって収集されたこれらの名前は、選択された正規名のエイリアスとして追加されます。あたとえば、EC2 で実行している単一のホストは、インスタンス ID (`i-abcd1234`)、ホストの IP アドレスに基づいて EC2 が提供する汎用ホスト名 (`ip-192-0-0-1`)、および内部 DNS サーバーまたは config で管理されるホストファイルが提供するわかりやすいホスト名 (`myhost.mydomain`) を持つ可能性があります。
+Datadog creates aliases for host names when there are multiple uniquely identifiable names for a single host. The names collected by the Agent are added as aliases for the chosen canonical name. For example, a single host running in EC2 might have an instance ID (`i-abcd1234`), a generic hostname provided by EC2 based on the host's IP address (`ip-192-0-0-1`), and a meaningful host name provided by an internal DNS server or a config-managed hosts file (`myhost.mydomain`).
 
-{{< img src="infrastructure/index/infra-list-alias2.png" alt="ホストエイリアス" style="width:100%;">}}
+{{< img src="infrastructure/index/infra-list-alias2.png" alt="Host aliases" style="width:100%;">}}
 
-#### Agent の構成
+#### Agent configuration
 
 {{< callout url="#" btn_hidden="true" >}}
-  Agent 構成ビューは公開ベータ版で、Agent バージョン 7.39/6.39 以降で利用可能です。
+  The Agent configuration view is in public beta and is available in Agent versions >= 7.39/6.39.
 
-  Agent バージョン 7.47/6.47 以降、この機能はデフォルトで有効になっています。
+  Starting with Agent version >= 7.47/6.47, this feature is enabled by default.
 {{< /callout >}}
 
-Agent は、ホスト詳細パネルの `Agent Configuration` セクションに表示されるように、Datadog に自身の構成を送信することができます。
+The Agent can send its own configuration to Datadog to be displayed in the `Agent Configuration` section of the host detail panel.
 
-Agent 構成は、機密情報が取り除かれ、コンフィギュレーションファイルや環境変数を使って設定した構成のみが含まれます。構成の変更は 10 分ごとに更新されます。
+The Agent configuration is scrubbed of any sensitive information and only contains configuration you've set using the configuration file or environment variables. The configuration changes are updated every 10 minutes.
 
-この機能は、Agent バージョン 7.47.0/6.47.0 以降でデフォルトで有効になっています。 
+This feature is enabled by default in Agent version >= 7.47.0/6.47.0.
 
+To modify this behavior, set the value of `inventories_configuration_enabled` in your [Agent configuration file][6] to `true` to send the configuration, or `false` to disable it.
 
-この動作を変更するには、[Agent コンフィギュレーションファイル][6]の `inventories_configuration_enabled` の値を `true` に設定すると構成が送信され、`false` に設定すると無効になります。
+Alternatively, use the `DD_INVENTORIES_CONFIGURATION_ENABLED` environment variable to enable or disable this feature.
 
-あるいは、`DD_INVENTORIES_CONFIGURATION_ENABLED` 環境変数を使って、この機能を有効または無効にすることができます。
+{{< img src="infrastructure/index/infra-list-config3.png" alt="The Agent configuration view" style="width:100%;">}}
 
-{{< img src="infrastructure/index/infra-list-config3.png" alt="Agent 構成ビュー" style="width:100%;">}}
+### Export
 
-### エクスポート
+For a JSON formatted list of your hosts reporting to Datadog, use one of the following:
 
-Datadog にレポートしているホストの JSON 形式のリストについては、次のいずれかを使用します。
+* The **JSON API permalink** at the top of the infrastructure list.
+* The [search hosts API endpoint][7] - see the [developer guide][8] for an example.
 
-* インフラストラクチャーリストの上部にある **JSON API パーマリンク**。
-* [検索ホスト API エンドポイント][7] - 例については、[開発者ガイド][8]を参照してください。
+#### Agent version
 
-#### Agent バージョン
+At times it may also be prove useful to audit your Agent versions to ensure you are running the latest version. To accomplish this, use the [get_host_agent_list script][9], which leverages the JSON permalink to output the current running Agents with version numbers. There is also a `json_to_csv` script to convert the JSON output into a CSV file.
 
-時折、Agent のバージョンを監査して、最新バージョンを実行していることを確認することも役立つ場合があります。この場合、[get_host_agent_list script][9] を使用します。これにより、JSON パーマリンクを利用して、現在実行中の Agent がバージョン番号とともに出力されます。また、JSON 出力を CSV ファイルに変換するための `json_to_csv` スクリプトもあります。
+#### No Agent
 
-#### Agent なし
-
-JSON エクスポートのもう 1 つのユースケースは、Agent がインストールされていない Amazon EC2 (RDS を除く) インスタンスのリストを取得することです。これらのインスタンスは、Datadog AWS インテグレーションタイルで AWS アカウントを設定することにより、インフラストラクチャーリストに表示されます。以下の Python3 スクリプトを参照してください。
+Another use case of the JSON export would be to get a list of Amazon EC2 (excluding RDS) instances with no Agent installed. These instances appear in the infrastructure list by setting up your AWS account in the Datadog AWS integration tile. See the Python3 script below:
 
 ```python
 # 3p
@@ -142,17 +142,17 @@ for host in infra['rows']:
             pass
 ```
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/agent/faq/how-datadog-agent-determines-the-hostname/
-[2]: /ja/getting_started/tagging/
-[3]: /ja/metrics/
-[4]: /ja/infrastructure/livecontainers/?tab=helm#overview
-[5]: /ja/logs/
-[6]: /ja/agent/configuration/agent-configuration-files/
-[7]: /ja/api/v1/hosts/#get-the-total-number-of-active-hosts
-[8]: /ja/developers/guide/query-the-infrastructure-list-via-the-api/
+[1]: /agent/faq/how-datadog-agent-determines-the-hostname/
+[2]: /getting_started/tagging/
+[3]: /metrics/
+[4]: /infrastructure/livecontainers/?tab=helm#overview
+[5]: /logs/
+[6]: /agent/configuration/agent-configuration-files/
+[7]: /api/v1/hosts/#get-the-total-number-of-active-hosts
+[8]: /developers/guide/query-the-infrastructure-list-via-the-api/
 [9]: https://github.com/DataDog/Miscellany/tree/master/get_hostname_agentversion
 [10]: https://app.datadoghq.com/infrastructure

@@ -1,8 +1,8 @@
 ---
-core_product:
-- apm
+title: retention filter
 synonyms:
-- インデックス化
-title: 保持フィルター
+  - indexing
+core_product:
+  - apm
 ---
-15 日間の保存のために保持するトレースを決定する仕組みとルール。Datadog は一定量を保持し (インテリジェント保持)、ユーザーはカスタムフィルターを作成することができます。
+Mechanisms and rules for determining what traces are retained for 15 day storage. Datadog retains a certain amount (Intelligent Retention) and users can create custom filters.

@@ -1,5 +1,5 @@
 ---
-title: ロール
+title: role
 ---
-ロールは、ユーザーのアカウント権限を定義します。Datadog では、3 つのデフォルトのロールがあります。Admin、Standard、および Read-only です。
-詳細は、<a href="/account_management/rbac/?tab=datadogapplication">ドキュメントを参照してください</a>。
+A role defines the account permissions for users. In Datadog, there are three default roles: Admin, Standard, and Read-only.
+For more information, <a href="/account_management/rbac/?tab=datadogapplication">see the documentation</a>.

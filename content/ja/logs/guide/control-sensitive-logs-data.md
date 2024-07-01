@@ -1,143 +1,143 @@
 ---
+title: Control Sensitive Logs Data
+kind: guide
 aliases:
-- /ja/logs/guide/restrict-access-to-sensitive-data-with-rbac
+  - /logs/guide/restrict-access-to-sensitive-data-with-rbac
 further_reading:
-- link: /logs/guide/logs-rbac/
-  tag: Documentation
-  text: ログ管理用のロールベースのアクセス制御 (RBAC) を設定する
-- link: /agent/logs/advanced_log_collection
-  tag: Documentation
-  text: 高度なログの収集を使用してログをフィルタリングおよび編集する
-- link: /agent/guide/autodiscovery-management/
-  tag: Documentation
-  text: オートディスカバリーを使用してログの収集からコンテナを除外する
-- link: https://www.datadoghq.com/blog/compliance-governance-transparency-with-datadog-audit-trail/
-  tag: ブログ
-  text: Datadog Audit Trail で、チーム全体のコンプライアンス、ガバナンス、透明性を構築します
-kind: ガイド
-title: 機密ログデータの管理
+  - link: /logs/guide/logs-rbac/
+    tag: Documentation
+    text: Set up Roles Based Access Controls (RBAC) for Log Management
+  - link: /agent/logs/advanced_log_collection
+    tag: Documentation
+    text: Filter and Redact logs with Advanced Log Collection
+  - link: /agent/guide/autodiscovery-management/
+    tag: Documentation
+    text: Exclude containers from Log Collection with Autodiscovery
+  - link: "https://www.datadoghq.com/blog/compliance-governance-transparency-with-datadog-audit-trail/"
+    tag: Blog
+    text: Build compliance, governance, and transparency across your teams with Datadog Audit Trail
 ---
 
-## 概要
+## Overview
 
-ログには機密データが含まれている可能性があるため、ログの処理方法には特に注意する必要があります。機密データを Datadog に取り込んでいる場合、次のことを検討してください。
+Logs may contain sensitive data, and should be handled carefully. If you are ingesting sensitive data into Datadog, consider the following:
 
-- 正当なトラブルシューティングと監査の目的で機密データを含むようにログを意図的に設定した場合は、「ロールベースのアクセス制御」を使用して適切な制限を設定し、Datadog アカウントにアクセスする権利を持つユーザーのみがこのデータにアクセスできるようにします。詳細については、[ログロールベースのアクセス制御 (RBAC) ユーザーズガイド][1]を参照し、組織に合わせて構成する方法を確認してください。
-- 機密データのログが意図しないものである場合は、将来の懸念に先制的に対処します。詳細はこのガイド読み進めてください。
+- If you have intentionally set up your logs to have sensitive data for legitimate troubleshooting and auditing purposes, use the **Roles Based Access Control** to ensure that you have set up appropriate restrictions so only authorized users who have access to your Datadog account can access this data. For more information, see the [Logs Roles Based Access Control (RBAC) User's Guide][1] to learn how to configure it for your organization.
+- Address any unintentional logging of sensitive data to preemptively address any concerns down the road. Continue with this guide to learn more.
 
-すべてのデータを管理することは、特に大規模なコラボレーションプラットフォームにおいては、困難な場合があります。このガイドでは、Datadog に取り込まれる機密データを発見し、管理するためのさまざまなオプションについて説明します。
+Controlling all of your data can be challenging, especially on a large and collaborative platform. This guide walks you through the different options to discover and manage sensitive data that is ingested into Datadog.
 
-## センシティブ データ スキャナー
+## Sensitive Data Scanner
 
-[機密データスキャナー][2]は、ストリームベースのパターンマッチングサービスであり、機密データを識別、タグ付け、およびオプションで編集またはハッシュするために使用できます。この機能により、セキュリティチームとコンプライアンスチームは、機密データが組織の外部に漏洩するのを防ぐための防衛線を導入できます。機密データスキャナーは、[組織設定][3]で利用できます。
+[Sensitive Data Scanner][2] is a stream-based, pattern matching service that you can use to identify, tag, and optionally redact or hash sensitive data. With this capability, your security and compliance teams can introduce a line of defense in preventing sensitive data from leaking outside your organization. Sensitive Data Scanner is available in your [Organization Settings][3].
 
-機密データを含むログのインデックスを既に作成している場合は、以下の 3 つのステップを実行します。
+If you have already indexed logs that contain sensitive data, then follow these three steps:
 
-1. [送信されるデータの範囲を決定する](#determine-the-scope-of-the-data-being-sent)
-2. [アップストリームのデータのソースを修正する](#fix-the-source-of-the-data-upstream)
-3. [すでに Datadog に送信されたデータを処理する](#handle-data-already-sent-to-and-indexed-in-datadog)
+1. [Determine the scope of the data being sent](#determine-the-scope-of-the-data-being-sent)
+2. [Fix the source of the data upstream](#fix-the-source-of-the-data-upstream)
+3. [Handle data already sent to Datadog](#handle-data-already-sent-to-and-indexed-in-datadog)
 
-## 送信されるデータのスコープを決定する
+## Determine the scope of the data being sent
 
-### どのログクエリが機密データを定義しますか？
+### What log query defines sensitive data?
 
-最初に、機密データを説明するクエリを定義します。このクエリは機密データを含む全てのログを返します。
+First, define a query that outlines the sensitive data. That query will return all logs with sensitive data.
 
-`version:x.y.z source:python status:debug` などのクエリがその期待に一致する可能性があります。より高度な演算子 (ワイルドカードやブール演算子など) が必要な場合は、[ログ検索構文][4]のドキュメントを参照してください。
+Chances are that queries such as `version:x.y.z source:python status:debug` match that expectation. Refer to the [Log Search Syntax][4] documentation if you need to use more advanced operators (wildcards, boolean operators, etc.).
 
-このガイドでは、そのクエリを**機密性の高いアウトラインクエリ**と呼びます。
+This guide refers to this example query as the **sensitive outline query**.
 
-### 機密データは Datadog 内のどこにありますか？
+### Where does sensitive data live in Datadog?
 
-ログにある機密データが Datadog プラットフォームに送信されると、それはさまざまな場所に存在する可能性があります。そのため、次の各項目を必ず確認してください (機密データが含まれている可能性が最も高いものから最も低いものの順に)。
+Once sensitive data in logs is sent to the Datadog platform, it may exist in a number of places. As a result, check each of the following (ordered from most likely to have sensitive data to least likely):
 
-* Datadog [インデックス][5]は、インデックスの保持に従ってログが期限切れになるまで、Datadog とともにログが保存される場所です。他の場所ではコンプライアンスの懸念が少ない可能性があるため、Datadog インデックスに注目してください。[インデックスフィルター][6]と[除外フィルター][7]をチェックして、機密データを含むログにインデックスが付けられているかどうかを確認します。
+* Datadog [Indexes][5] are where logs are stored in Datadog until they age out according to index retention. Focus should be on Datadog Indexes as other locations are less likely to be a compliance concern. Check [indexes filters][6] and [exclusion filters][7] to see if logs with sensitive data are indexed.
 
-* ログ[アーカイブ][8]は、Datadog が送信したログを保存する場所です。アーカイブフィルターを設定して、アーカイブに機密ログが含まれているかどうかを確認します。
+* Log [Archives][8], which is where Datadog sends logs to be stored. Set up Archive Filters to see if your archive contains sensitive logs.
 
-* 集計されたメトリクスを格納する[ログから生成されたメトリクス][9]。このプロセスでは、機密データが破棄されている可能性があります。カスタムメトリクスフィルターをチェックして、機密データを含むログが処理されるかどうかを確認します。
+* [Metrics generated from logs][9], which stores aggregated metrics. Sensitive data may have been discarded with this process. Check custom metrics filters to see if logs with sensitive data are processed.
 
-* [ログサンプル][11]が含まれている場合の[ログモニター][10]通知。機密データが送信されていた期間中にトリガーされたモニターを特に確認してください。
+* [Log Monitors][10] notifications when they include [Log Samples][11]. Check specifically for monitors triggered during the period when sensitive data was being sent.
 
-* [Live Tail][12]では、組織のユーザーがリアルタイムでログを閲覧できます。ブラウザにキャッシュされた 50 ログを超える永続性はなく、より広範なクエリの場合、結果を極端にサンプリングできます。
+* [Live Tail][12], where logs are viewed in real-time by your organization's users. There is no persistence beyond the 50 logs cached in browsers, and for broader queries, the result can be extremely sampled.
 
-## アップストリームのデータのソースを修正する
+## Fix the source of the data upstream
 
-### 機密データスキャナーを使用したストリーミングログの機密データの編集
+### Redact sensitive data in streaming logs using Sensitive Data Scanner
 
-すぐに使えるルールやカスタムルールを使って、ログに残っている[他の種類の機密データを特定し、冗長化します][2]。
+Use out-of-the-box or custom rules to [identify and redact other kinds of sensitive data][2] still coming in your logs.
 
-### 機密ログのインデックス化を停止する
+### Stop indexing sensitive logs
 
-機密データスキャナーを使用していない場合、機密データを含む新しいログを完全にインデックス対象から除外するかどうかを決定します。Datadog ですでにインデックスされた機密データを含むログに対処する必要があります。
+If you're not using Sensitive Data Scanner, determine whether you want to exclude any new logs containing sensitive data from being indexed entirely. You'll still need to address the logs containing sensitive data already indexed in Datadog.
 
-* 機密データを含むログを保持するインデックスを検索します。
-* インデックスごとに、機密性の高いアウトラインクエリに基づいて除外フィルターを追加します。
+* Find which index(es) hold logs with sensitive data.
+* For each index, add an exclusion filter based on the sensitive outline query.
 
-{{< img src="logs/guide/sensitive/sensitive_exclusion-filters.png" alt="機密性の高い除外フィルター" style="width:80%;" >}}
+{{< img src="logs/guide/sensitive/sensitive_exclusion-filters.png" alt="Sensitive Exclusion Filters" style="width:80%;" >}}
 
-### Datadog への機密データの送信を停止する
+### Stop sending sensitive data to Datadog
 
-もし、ある種の機密データが環境から Datadog に取り込まれることが禁止されている場合、ソース収集時にスクラビングルールを追加します。
+If certain kinds of sensitive data are prohibited from leaving your environment and being ingested into Datadog, then add scrubbing rules at source collection.
 
-ロガー自体を変更する方法がある場合、Datadog は、ログ収集に [Datadog Agent][13] を使用する際に、コンプライアンスに敏感なデータがプラットフォームの外部に送信されるのを防ぐためのソリューションを提供します。
+If you have way to change the loggers themselves, Datadog provides you with solutions to prevent compliance-sensitive data from being sent outside of your platform when using the [Datadog Agent][13] for Log Collection:
 
-* Datadog に送信する前に、ログから[機密データをスクラブ][14]します。
-* または、[オートディスカバリー][15]を使い、コンテナのログ収集を細かく制御します。
+* [Scrub sensitive data][14] from your logs before you send them to Datadog.
+* Alternatively, use [Autodiscovery][15] to add fine-grained controls for containers log collection.
 
-[Serverless Forwarder][16] にも同様のスクラブ機能があります。
+Similar scrubbing capabilities exist for the [Serverless Forwarder][16].
 
-## Datadog にすでに送信されインデックス化されているデータの処理
+## Handle data already sent to and indexed in Datadog
 
-コンプライアンス要件に従って、次の手順を実行します。すべての手順を実行する必要はないかもしれません。
+Take the following steps according to your compliance requirements. You might not need to complete all steps.
 
-### 機密ログを Datadog でクエリ不可にする (期限切れになるまで)
+### Make sensitive logs un-queryable in Datadog (until they age-out)
 
-この手順により、機密データを含むログ (すでに送信されたログと流入し続ける可能性のあるログの両方) を Datadog (Explorer、Dashboard、Livetail) でクエリできないようにします。
+This step makes logs with sensitive data, both logs that already sent and logs that might keep flowing in, not queryable in Datadog (Explorer, Dashboards, and Livetail).
 
-[データアクセスコンフィギュレーションページ][17]と機密性の高いアウトラインクエリを使用して、組織内の全員に適用される[制限][18]を定義します。例えば、上記のクエリは、`version:x.y.z source:python status:debug` です。
+Use the [Data Access configuration page][17] and a sensitive outline query to define a [restriction][18] that applies to everyone in your organization. For example, the query mentioned above: `version:x.y.z source:python status:debug`.
 
-**注:** 機密性の高いアウトラインクエリの**否定**を使用すると、一致するログ以外は表示されなくなります。
+**Note:** Using **NOT** in the sensitive outline query restricts users from seeing anything BUT matching logs.
 
-{{< img src="logs/guide/sensitive/sensitive_data_access.png" alt="機密データアクセス" style="width:80%;" >}}
+{{< img src="logs/guide/sensitive/sensitive_data_access.png" alt="Sensitive Data Access" style="width:80%;" >}}
 
-### アーカイブにパッチを適用する
+### Patch your archives
 
-機密データを削除するためにアーカイブにパッチを適用する必要がある場合は、Datadog によって生成された[アーカイブの形式][19]を参照してください。
+If you have to patch your archives to remove sensitive data, refer to the [format of archives][19] generated by Datadog documentation.
 
-## サポート
+## Support
 
-特定のコンプライアンスに関するご質問やサポートについては、Datadog の[サポート][20]までご連絡ください。その際、次の情報をご用意ください。
+If you have a specific compliance questions or need help, contact Datadog [support][20]. When you contact support, it is helpful for you to have the following information available:
 
-* 機密性の高いアウトラインクエリ。または、時間範囲、サービス、環境などの機密データを定義できるあらゆるもの。
-* [機密データスキャナー][21]を使用するかどうか。
-* 機密データがまだ Datadog に送信されているかどうか。
-* 機密データが (どのインデックスで) インデックス化されているかどうか、またはメトリクスに変換されているかどうか。
-* 機密データをクエリ不可にしたかどうか。
+* The sensitive outline query or anything that could define sensitive data such as a timerange, a service, or an environment.
+* Whether you use [Sensitive Data Scanner][21].
+* Whether the sensitive data is still being sent into Datadog.
+* Whether sensitive data has been indexed (in which index(es)) or turned into metrics.
+* Whether you have already made sensitive data unqueryable.
 
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/logs/guide/logs-rbac/
-[2]: /ja/sensitive_data_scanner/
-[3]: /ja/account_management/org_settings/
-[4]: /ja/logs/search_syntax/
-[5]: /ja/logs/indexes
-[6]: /ja/logs/indexes#indexes-filters
-[7]: /ja/logs/indexes#exclusion-filters
-[8]: /ja/logs/archives
-[9]: /ja/logs/logs_to_metrics/
-[10]: /ja/monitors/types/log/
-[11]: /ja/monitors/types/log/#notifications
-[12]: /ja/logs/explorer/live_tail/
-[13]: /ja/agent/
-[14]: /ja/agent/logs/advanced_log_collection/?tab=configurationfile#scrub-sensitive-data-from-your-logs
-[15]: /ja/agent/guide/autodiscovery-management/?tab=containerizedagent
-[16]: /ja/serverless/forwarder#log-forwarding-optional
+[1]: /logs/guide/logs-rbac/
+[2]: /sensitive_data_scanner/
+[3]: /account_management/org_settings/
+[4]: /logs/search_syntax/
+[5]: /logs/indexes
+[6]: /logs/indexes#indexes-filters
+[7]: /logs/indexes#exclusion-filters
+[8]: /logs/archives
+[9]: /logs/logs_to_metrics/
+[10]: /monitors/types/log/
+[11]: /monitors/types/log/#notifications
+[12]: /logs/explorer/live_tail/
+[13]: /agent/
+[14]: /agent/logs/advanced_log_collection/?tab=configurationfile#scrub-sensitive-data-from-your-logs
+[15]: /agent/guide/autodiscovery-management/?tab=containerizedagent
+[16]: /serverless/forwarder#log-forwarding-optional
 [17]: https://app.datadoghq.com/logs/pipelines/data-access
-[18]: /ja/account_management/rbac/permissions/?tab=ui#logs_read_data
-[19]: /ja/logs/archives/?tab=awss3#format-of-the-archives
-[20]: /ja/help/
+[18]: /account_management/rbac/permissions/?tab=ui#logs_read_data
+[19]: /logs/archives/?tab=awss3#format-of-the-archives
+[20]: /help/
 [21]: https://www.datadoghq.com/blog/sensitive-data-scanner/

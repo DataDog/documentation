@@ -1,69 +1,69 @@
 ---
-title: TLS バージョン < 1.2 に関する非推奨のお知らせ
+title: Deprecation notice for TLS version < 1.2
 ---
 
 
-## 概要
+## Overview
 
-TLS (Transport Layer Security) は、Web トラフィックを保護するために使用される重要なセキュリティプロトコルです。これは、情報を交換するクライアントとサーバーの間で転送中のデータの機密性と整合性を提供します。Datadog は、2022 年 6 月 30 日から、パブリック向けの Datadog アプリケーション全体で、1.2 以下の古いバージョンの TLS (SSLv3、TLS v1.0、TLS v1.1) のサポートを無効化します。古いプロトコルが無効になった後、サポートされていないクライアントを使用して Datadog に接続した場合、接続エラーメッセージが表示されます。
+Transport Layer Security (TLS) is a critical security protocol used to protect web traffic. It provides confidentiality and integrity of data in transit between clients and servers exchanging information. Datadog is disabling support for older versions of TLS, below 1.2 (SSLv3, TLS v1.0, TLS v1.1) across public facing Datadog applications, beginning June 30, 2022. If you use unsupported clients to connect to Datadog after the older protocols are disabled, you will receive connection error messages.
 
-### 非推奨の理由
+### Reason for deprecation
 
-これらのプロトコルは、お客様が安全な接続チャンネルを使用して Datadog に接続することを確実にするために、非推奨となっています。これは、2021 年 3 月 25 日をもってこれらのプロトコルを非推奨にするというインターネット技術タスクフォース (IETF) の決定に従っています。([https://datatracker.ietf.org/doc/rfc8996/][1])
+These protocols are being deprecated to ensure that customers connect to Datadog using secure connection channels. This is in accordance with a decision from the Internet Engineering Task Force (IETF) to deprecate these protocols as of March 25, 2021. ([https://datatracker.ietf.org/doc/rfc8996/][1])
 
-## クライアントとの互換性
+## Client compatibility
 
-[How's my SSL? API][2] の説明に従って、選択したクライアントを確認してください。
+Follow [How's my SSL? API][2] instructions to check the client of your choice.
 
-## ブラウザサポート
+## Browser support
 
-最近のブラウザは、以前から TLS v1.2 をサポートしています。「〜を使用できますか」[互換性マトリックス][3]を参照して、お使いの特定のブラウザとバージョンが影響を受けるかどうかを判断してください。
-## Agent サポート
+Modern browsers have had support for TLS v1.2 for a while. See the "Can I use..." [compatibility matrix][3] to determine if your specific browser and version are affected.
+## Agent support
 
-### Agent v6 と v7
+### Agent v6 & v7
 
-Agent v6 と v7 のすべてのバージョンは、TLS v1.2 をサポートしています。
+All versions of Agent v6 & v7 support TLS v1.2.
 
 ### Agent v5
 
-#### パッケージ化またはコンテナ化された Agent v5
+#### Packaged or containerized Agent v5
 
-下記でインストールした Agent v5 の全バージョンで TLS v1.2 をサポートしています。
+All versions of the Agent v5 installed with the following support TLS v1.2:
 
-* DEB/RPM パッケージ
-* Windows MSI インストーラー
-* 公式コンテナイメージ
+* the DEB/RPM packages
+* the Windows MSI installer
+* the official container image
 
 
-#### Agent v5 ソースインストール
+#### Agent v5 source install
 
-[ソースインストールスクリプト][4]でインストールした場合、Agent v5 はシステムの Python と OpenSSL に依存します。したがって、TLS v1.2 のサポートは、システムにインストールされた Python と OpenSSL のバージョンに依存します。
+When installed with the [source install script][4], the Agent v5 relies on the system's Python and OpenSSL. Therefore, support for TLS v1.2 depends on the versions of Python and OpenSSL installed on the system.
 
-システムの Python が TLS v1.2 をサポートしているかどうか (したがって、ソースインストールされた Agent が TLS v1.2 をサポートしているかどうか) を確認するには、システムシェルから次のコマンドを実行します。
+To determine if your system's Python supports TLS v1.2 (and therefore if the source-installed Agent supports TLS v1.2), run this command from a system shell:
 
 `python -c "import json, urllib2; print json.load(urllib2.urlopen('https://www.howsmyssl.com/a/check'))['tls_version']"` 
 
-このコマンドは、TLS v1.2 がサポートされていれば `TLS 1.2` を、そうでなければ古い TLS バージョンかエラーを出力します。TLS v1.2 がサポートされていない場合は、システムの Python と OpenSSL をアップグレードするか、Agent を v7 にアップグレードしてください。
+This command outputs `TLS 1.2` if TLS v1.2 is supported, and an older TLS version or an error otherwise. If TLS v1.2 is not supported, upgrade your system's Python and OpenSSL or upgrade the Agent to v7.
 
-## 対応言語・ツール
+## Languages and tools support
 ### Openssl
 
-OpenSSL は、Python、Ruby、PHP、Curl など多くのツールで使用されている汎用暗号およびセキュア通信のためのライブラリです。TLS v1.2 は OpenSSL 1.0.1 からサポートされています。詳細は [OpenSSL の変更点][5]を参照してください。
+OpenSSL is a library for general-purpose cryptography and secure communication used by many other tools such as Python, Ruby, PHP, amd Curl. TLS v1.2 has been supported since OpenSSL 1.0.1, see the [OpenSSL changelog][5] for more information.
 
 ### Python
 
-TLS v1.2 のサポートは、システムにインストールされている Python と OpenSSL のバージョンに依存します。
+Support for TLS v1.2 depends on the versions of Python and OpenSSL installed on the system:
 
-* 3.x と OpenSSL 1.0.1+ の場合、Python 3.4+
-* 2.x と OpenSSL 1.0.1+ の場合、Python 2.7.9+
+* Python 3.4+ for 3.x with OpenSSL 1.0.1+
+* Python 2.7.9+ for 2.x with OpenSSL 1.0.1+
 
-Python シェルから `python -c "import json, urllib2; print json.load(urllib2.urlopen('https://www.howsmyssl.com/a/check'))['tls_version']"` を実行することが可能です。TLS v1.2 がサポートされていない場合、システムの Python と OpenSSL をアップグレードしてください。
+You can run: `python -c "import json, urllib2; print json.load(urllib2.urlopen('https://www.howsmyssl.com/a/check'))['tls_version']"` from a Python shell. If TLS v1.2 is not supported, upgrade your system's Python and OpenSSL.
 
 ### Golang
 
-新しいバージョンの Go (1.13 以上) を使用している場合、Go はすでにデフォルトで TLS v1.2 をサポートしているので、変更は必要ありません。
+If you are using a newer version of Go (1.13 or above), Go already supports TLS v1.2 by default, so no changes are necessary.
 
-古いバージョンの Go を使用する場合は、TLS クライアント構成の MinVersion を設定して、TLS v1.2 を明示的に使用するようにします。
+When using older versions of Go, set your TLS Client Configuration's MinVersion to explicitly use TLS v1.2:
 
 ```
 TLSClientConfig: &tls.Config{
@@ -73,19 +73,20 @@ TLSClientConfig: &tls.Config{
 
 ### Java
 
-アプリケーションが Java 1.7 または Java 1.6 (update 111 以降) で動作している場合、JVM 起動時に `https.protocols` システムプロパティを設定すると、`HttpsURLConnection` クラスを使用して行う接続に追加プロトコルを有効にすることができます。例えば、`Dhttps.protocols=TLSv1.2` を設定します。
+If your application runs on Java 1.7 or Java 1.6 (update 111 or later), you can set the `https.protocols` system property when starting the JVM to enable additional protocols for connections made using the `HttpsURLConnection` class. For example, by setting
+`Dhttps.protocols=TLSv1.2`.
 
-Update 111 以前の Java 1.6、またはそれ以前のバージョンでアプリケーションを実行する場合、TLS 1.1 および 1.2 はサポートされません。そのため、アプリケーションが動作する Java のバージョンを更新する必要があります。
+If your application runs on Java 1.6 prior to update 111, or earlier, TLS 1.1 and 1.2 are not supported. Therefore, you need to update the version of Java your application runs on.
 
 ### .NET
 
-組み込みの .NET クライアントを使用している場合は、[さまざまなバージョンの .NET フレームワークで TLS v1.2 にアップグレードする方法][6]に関する Microsoft ガイドをお読みください。
+If you are using a built-in .NET client, read the Microsoft guide on [how to upgrade to TLS v1.2 across various versions of .NET framework][6]. 
 
 ### Powershell
 
-TLS v1.2 の Powershell サポートは、システムにインストールされている .NET のバージョンに依存します。正確な要件は、Microsoft の [.NET による TLS のベストプラクティス][7]ガイドをお読みください。
+Powershell support for TLS v1.2 is dependent on the version of .NET installed on your system. Read Microsoft's [TLS best practices with .NET][7] guide to determine exact requirements.
 
-現在のセッションで最近のバージョンの TLS を有効にするには
+To enable recent versions of TLS for the current session:
 
 ```
 [System.Net.ServicePointManager]::SecurityProtocol
@@ -96,19 +97,19 @@ $AllProtocols = [System.Net.SecurityProtocolType]'Ssl3,Tls,Tls11,Tls12'
 Ssl3, Tls, TLs11, Tls12
 ```
 
-また、Github で公開されている[コミュニティ Powershell モジュール][8]には、それを実現するものもあります。
+There's also a [community Powershell module][8] available on Github that can do that for you.
 
-この設定を永続化するには、[Office Online Server の TLS の有効化][9]に関する Microsoft のドキュメントに従って、レジストリを編集します。
+To make this setting persistent, you can edit the registry according to the Microsoft documentation about [enabling TLS in Office Online Server][9].
 
-32 ビット版 .Net Framework (バージョン 4 以上) の場合
+On 32 bit .Net Framework (version 4 and above):
 
 `Set-ItemProperty -Path 'HKLM:\SOFTWARE\Wow6432Node\Microsoft\.NetFramework\v4.0.30319' -Name 'SchUseStrongCrypto' -Value '1' -Type DWord`
 
-64 ビット版 .Net Framework (バージョン 4 以上) の場合
+On a 64 bit .Net Framework (version 4 and above):
 
 `Set-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\.NetFramework\v4.0.30319' -Name 'SchUseStrongCrypto' -Value '1' -Type DWord`
 
-**注:** これを有効にするためには、システムを再起動する必要があります。
+**Note:** You need to reboot the system for this to take effect.
 
 [1]: https://datatracker.ietf.org/doc/rfc8996/
 [2]: https://www.howsmyssl.com/s/api.html

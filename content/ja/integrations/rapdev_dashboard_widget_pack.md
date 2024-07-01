@@ -1,94 +1,95 @@
 ---
-app_id: rapdev-dashboard-widget-pack
-app_uuid: d92a6a54-aff0-41b0-9eef-1f6772ef2fac
-assets:
-  dashboards:
-    RapDev Widgets Pack Dashboard: assets/dashboards/rapdev_dashboard_widgets_pack.json
-author:
-  homepage: https://www.rapdev.io
-  name: RapDev
-  sales_email: ddsales@rapdev.io
-  support_email: support@rapdev.io
-  vendor_id: rapdev
-categories:
-- マーケットプレイス
-dependencies: []
-display_on_public_website: true
-draft: false
-git_integration_title: rapdev_dashboard_widget_pack
-integration_id: rapdev-dashboard-widget-pack
-integration_title: ダッシュボードウィジェットパック
-integration_version: ''
-is_public: true
-custom_kind: integration
-legal_terms:
-  eula: assets/EULA.pdf
-manifest_version: 2.0.0
-name: rapdev_dashboard_widget_pack
-pricing:
-- billing_type: flat_fee
-  includes_assets: true
-  product_id: dashboard-widget-pack
-  short_description: ウィジェットパック定額制
-  unit_price: 49
-public_title: ダッシュボードウィジェットパック
-short_description: データ可視化のための 3 つのカスタムウィジェットを含むダッシュボードウィジェットパック
-supported_os:
+"app_id": "rapdev-dashboard-widget-pack"
+"app_uuid": "d92a6a54-aff0-41b0-9eef-1f6772ef2fac"
+"assets":
+  "dashboards":
+    "RapDev Widgets Pack Dashboard": assets/dashboards/rapdev_dashboard_widgets_pack.json
+"author":
+  "homepage": "https://www.rapdev.io"
+  "name": RapDev
+  "sales_email": ddsales@rapdev.io
+  "support_email": support@rapdev.io
+  "vendor_id": rapdev
+"categories":
+- marketplace
+"dependencies": []
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "rapdev_dashboard_widget_pack"
+"integration_id": "rapdev-dashboard-widget-pack"
+"integration_title": "Dashboard Widget Pack"
+"integration_version": ""
+"is_public": true
+"kind": "integration"
+"legal_terms":
+  "eula": assets/EULA.pdf
+"manifest_version": "2.0.0"
+"name": "rapdev_dashboard_widget_pack"
+"oauth": {}
+"pricing":
+- "billing_type": flat_fee
+  "includes_assets": true
+  "product_id": dashboard-widget-pack
+  "short_description": Flat fee for widget pack
+  "unit_price": !!int "49"
+"public_title": "Dashboard Widget Pack"
+"short_description": "A dashboard widgets pack with 3 custom widgets for data visualizations"
+"supported_os":
 - linux
 - macos
 - windows
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Marketplace
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Offering::UI Extension
-  configuration: README.md#Setup
-  description: データ可視化のための 3 つのカスタムウィジェットを含むダッシュボードウィジェットパック
-  media:
-  - caption: 'ゲージウィジェットは、2 つの数値 (例: 最小値と最大値) の間の値を視覚化するために使用される速度計タイプのウィジェットを表します。'
-    image_url: images/gauge.png
-    media_type: image
-  - caption: ポーラーチャートは、データを極座標で表現します。放射軸に沿った距離は量を表し、極軸の周りの角度は収益を表します。
-    image_url: images/polar_chart.png
-    media_type: image
-  - caption: レーダーチャートは、多変量データを 3 つ以上の量的変数の 2 次元チャートで表示するために使用できます。
-    image_url: images/radar_chart.png
-    media_type: image
-  overview: README.md#Overview
-  support: README.md#Support
-  title: ダッシュボードウィジェットパック
-  uninstallation: README.md#Uninstallation
+"tile":
+  "changelog": CHANGELOG.md
+  "classifier_tags":
+  - "Category::Marketplace"
+  - "Supported OS::Linux"
+  - "Supported OS::macOS"
+  - "Supported OS::Windows"
+  - "Offering::UI Extension"
+  "configuration": "README.md#Setup"
+  "description": A dashboard widgets pack with 3 custom widgets for data visualizations
+  "media":
+  - "caption": The Gauge Widget represents a speedometer type of widget used to visualize a value between two numbers (e.g., a min and a max).
+    "image_url": images/gauge.png
+    "media_type": image
+  - "caption": The Polar Chart represents data as polar coordinates. The distance along the radial axis represents quantity, and the angle around the polar axis represents revenue.
+    "image_url": images/polar_chart.png
+    "media_type": image
+  - "caption": The Radar Chart can be used for displaying multivariate data in the form of a two-dimensional chart of three or more quantitative variables.
+    "image_url": images/radar_chart.png
+    "media_type": image
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": Dashboard Widget Pack
+  "uninstallation": "README.md#Uninstallation"
 ---
 
 
 
-## 概要
+## Overview
 
-この Datadog アプリケーションには 3 つのカスタムウィジェットが含まれており、アカウント内の任意のダッシュボードで使用することができます。
+This Datadog application includes three custom widgets that you can use on any dashboard in your account.
 
-### ウィジェット
+### Widgets
 
 1. Gauge
 
-2. ポーラーチャート
+2. Polar Chart
 
-3. レーダーチャート
+3. Radar Chart
 
-## サポート
+## Support
 
-サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから RapDev.io にお問い合わせください。
+For support or feature requests, contact RapDev.io through the following channels:
 
-- メール: support@rapdev.io
-- チャット: [rapdev.io](https://www.rapdev.io/#Get-in-touch)
-- 電話: 855-857-0222
-
----
-ボストンより ❤️ を込めて
-
-*お探しのインテグレーションが見つかりませんか？組織に役立つ重要なツールの導入をお考えですか？[こちら](mailto:support@rapdev.io)からメッセージをお送りいただければ、導入をサポートいたします！*
+- Email: support@rapdev.io
+- Chat: [rapdev.io](https://www.rapdev.io/#Get-in-touch)
+- Phone: 855-857-0222
 
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/rapdev-dashboard-widget-pack" target="_blank">こちらをクリック</a>してください。
+Made with ❤️ in Boston
+
+*This isn't the integration you're looking for? Missing a critical feature for your organization? Drop us a [note](mailto:support@rapdev.io), and we'll build it!!*
+
+---
+This application is made available through the Marketplace and is supported by a Datadog Technology Partner. <a href="https://app.datadoghq.com/marketplace/app/rapdev-dashboard-widget-pack" target="_blank">Click Here</a> to purchase this application.

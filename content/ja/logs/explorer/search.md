@@ -1,96 +1,97 @@
 ---
+title: Search Logs
+kind: documentation
+description: 'Filter logs to narrow down, broaden, or shift your focus on the subset of logs of current interest.'
 aliases:
-- /ja/logs/search
-description: ログをフィルターして、現在関心のあるログのサブセットに焦点を絞る、拡大する、またはシフトします。
+    - /logs/search
 further_reading:
-- link: logs/explorer/analytics
-  tag: ドキュメント
-  text: ログをグループ化する方法
-- link: logs/explorer/visualize
-  tag: ドキュメント
-  text: ログからビジュアライゼーションを作成する
-- link: /logs/explorer/export
-  tag: ドキュメント
-  text: ログエクスプローラーからビューをエクスポートする
-title: ログを検索
+    - link: logs/explorer/analytics
+      tag: Documentation
+      text: Learn how to group logs
+    - link: logs/explorer/visualize
+      tag: Documentation
+      text: Create visualizations from logs
+    - link: /logs/explorer/export
+      tag: Documentation
+      text: Export views from the Log Explorer
 ---
 
-## 概要
+## Overview
 
-個々のログからの情報はリストとして視覚化すると便利ですが、集計することで価値ある情報にアクセスできる場合もあります。この情報にアクセスするには、[ログエクスプローラー][5]でログを検索し、時系列、トップリスト、ツリーマップ、円グラフまたはテーブルとして表示します。
+While information from individual logs can be useful visualized as a list, sometimes valuable information can be accessed through aggregation. To access this information, search for logs in the [Log Explorer][5] and display them as timeseries, top lists, tree maps, pie charts, or tables.
 
-ログエクスプローラーの検索は、時間範囲と検索クエリからなり、`key:value` 検索と全文検索が混在しています。
+Log Explorer search consists of a time range and a search query, mixing `key:value` and full-text search. 
 
-## 検索クエリ
+## Search query
 
-例えば、過去 15 分間に Web ストアサービスがエラーステータスで生成したログをフィルタリングするには、`service:payment status:error rejected` のようなカスタムクエリを作成し、時間範囲を `Past 15 minutes` に設定します。
+For example, to filter on logs produced by a web store service, with an error status, over the past fifteen minutes, create a custom query like `service:payment status:error rejected` and set the time range to the `Past 15 minutes`:
 
-{{< img src="logs/explorer/search_filter.png" alt="ログエクスプローラーで、Web ストアサービスの支払い拒否のエラーログをフィルターする検索クエリを作成する" style="width:100%;" >}}
+{{< img src="logs/explorer/search_filter.png" alt="Create a search query in the Log Explorer that filters for error logs of rejected payments for a web store service" style="width:100%;" >}}
 
-[インデックス化されたログ][1]は、全文検索と `key:value` 検索クエリの両方をサポートします。
+[Indexed Logs][1] support both full-text search and `key:value` search queries.
 
-**注**: `key:value` クエリでは、事前に[ファセットを宣言][2]する必要が**ありません**。
+**Note**: `key:value` queries **do not** require that you [declare a facet][2] beforehand.
 
-## オートコンプリート
+## Autocomplete
 
-検索バーのオートコンプリート機能を使用すると、以下を使用してクエリを完成させることができます。
-- ログ内の既存のキーと値
-- 自分が行った最近の検索 (他のユーザーが行った最近の検索は表示されません)
-- 保存済みビュー
+Use the search bar's autocomplete feature to complete your query using:
+- Existing keys and values in your logs
+- Your recent searches (recent searches from other users are not displayed)
+- Saved views
 
-{{< img src="logs/explorer/search/log_search_bar_autocomplete.png" alt="クエリとして service: が、オートコンプリートオプションとして emailer、balancer-checker、ad-server、vpc が表示されているログ検索バー" style="width:80%;">}}
+{{< img src="logs/explorer/search/log_search_bar_autocomplete.png" alt="The logs search bar showing service: as the query and emailer, balancer-checker, ad-server, and vpc as autocomplete options" style="width:80%;">}}
 
-### ファセットと値のオートコンプリート
+### Autocomplete facets and values
 
-検索バーは、検索バーに入力された内容に基づきファセットを自動で提案します。これらのファセットは、[ファセットパネル][5]内での位置と同じ順番で表示されます。ファセットの表示名が定義されている場合は、ドロップダウンメニューの右側に表示されます。ファセットパネルに表示されるように設定されていないファセットは、検索時に自動提案されません。
+The search bar autosuggests facets based on your input in the search bar. These facets are displayed in the same order in which they are positioned in the [facet panel][5]. If a facet has a defined display name, it is displayed on the right-hand side of the dropdown menu. Facets that are not configured to be displayed in the facet panel are not autosuggested for a search.
 
-{{< img src="logs/explorer/search/log_facet_autocomplete.png" alt="クエリとして `network` が、オートコンプリートのオプションとしてファセット @network.bytes_written、@network.client.ip、@network.interface が表示されているログ検索バー" style="width:80%;">}}
+{{< img src="logs/explorer/search/log_facet_autocomplete.png" alt="The logs search bar showing `network` as the query and the facets @network.bytes_written, @network.client.ip, and @network.interface as autocomplete options" style="width:80%;">}}
 
-ファセットを選択し、 `:` の文字を入力すると、検索バーが値を自動で提案します。これらの値は、直近の 15 分間でその `facet:value` のペアを含むログの数が多い順に表示されます。その値を含むログの推定数はドロップダウンメニューの右側に表示されます。下の例では、`service` ファセットの自動提案リストの最初に `balance-checker` サービスが表示されており、ログの推定数は `2.66M` で、一番多くなっています。
+After you select a facet and input the `:` character, the search bar autosuggests values. These values are displayed in descending order of how many logs contain that `facet:value` pair in the past 15 minutes. The estimated number of logs containing that value is displayed on the right-hand side of the dropdown menu. For example, the `balance-checker` service is positioned first in the autosuggested list of values for the `service` facet, indicated by the `2.66M`, representing the highest log count:
 
-{{< img src="logs/explorer/search/log_value_autocomplete.png" alt="クエリとして `service:` が、オートコンプリートのオプションとしてbalance-checker、ad-server、fraud-detector、trade-executor の値が表示されているログ検索バー" style="width:80%;">}}
+{{< img src="logs/explorer/search/log_value_autocomplete.png" alt="The logs search bar showing `service:` as the query and the values balance-checker, ad-server, fraud-detector, and trade-executor as autocomplete options" style="width:80%;">}}
 
-### 最近の検索のオートコンプリート
+### Autocomplete recent searches
 
-ログエクスプローラーで行った直近 100 件の検索が保持されます。他のユーザーが行った最近の検索は保持も表示もされません。検索バーは、検索バーに入力された内容に一致する直近の検索 4 件を自動で提案し、最も最近の検索が最初に表示されます。検索バーには、各検索がどのくらい前に実行されたかも表示されます。下の例では、検索バーに `service:web-store status:error` と入力すると、これらの用語を含む直近の検索 4 件が新しい順に表示されており、それぞれの検索で異なるエラーが指定されています。
+Your 100 most recent searches in the Log Explorer are retained. Recent searches from other users are not retained or displayed. The search bar autosuggests the four most recent searches that match your input in the search bar, with the most recent search displayed first. The search bar also shows how long ago each recent search was run. For example, if you input `service:web-store status:error` in the search bar, the four most recent searches containing these terms are displayed in order of recency, each one specifying a different error:
 
-{{< img src="logs/explorer/search/log_recent_searches.png" alt="クエリとして `service:web-store status:error` が、オートコンプリートのオプションとして Web ストアサービスの異なるエラーを対象とした 4 つの検索が表示されているログ検索バー" style="width:80%;">}}
+{{< img src="logs/explorer/search/log_recent_searches.png" alt="The logs search bar showing `service:web-store status:error` as the query and recent searches for different web-store service errors as autocomplete options" style="width:80%;">}}
 
-### 保存ビューのオートコンプリート
+### Autocomplete Saved Views
 
-ログエクスプローラーでは、保存ビューを作成してクエリと追加のコンテキストを保存し、後から一元的にアクセスすることができます。検索バーは、検索バーに入力された内容と一致する保存ビューを自動で提案します。保存ビューは、保存ビューパネル内での位置と同じ順番で表示され、星付きの保存ビューが最初に表示されます。保存ビューの名前、保存されたクエリ、保存ビューを最後に更新したユーザーのプロファイル写真はドロップダウンメニューに表示されます。保存ビューのクエリが長すぎてドロップダウンに表示できない場合は、カーソルを合わせると、クエリの全文がツールチップに表示されます。プロファイル写真にカーソルを合わせれば、保存ビューを最後に更新したユーザーのメールアドレスもツールチップに表示されます。
+You can create Saved Views in the Log Explorer to save queries and additional context for the future and for centralized access. The search bar autosuggests Saved Views that match your input in the search bar. Saved Views are displayed in the same order in which they are positioned in the Saved Views panel, with starred Saved Views displayed first. The Saved View name, saved query, and profile picture of the user who last updated it are displayed in the dropdown menu. If a Saved View query is too long to be displayed in the dropdown, the full query is displayed in a tooltip on hover. The email of the user who last updated a Saved View is also displayed in a tooltip on hover over their profile picture.
 
-{{< img src="logs/explorer/search/log_autocomplete_saved_views.png" alt="クエリとして `service:web-store status:error` が、オートコンプリートのオプションとして Web ストアサービスの異なるエラーを対象とした保存ビューが表示されているログ検索バー " style="width:80%;">}}
+{{< img src="logs/explorer/search/log_autocomplete_saved_views.png" alt="The logs search bar showing `service:web-store status:error` as the query and Saved Views for different web-store service errors as autocomplete options" style="width:80%;">}}
 
-## 検索構文
+## Search syntax
 
-構文のハイライト表示により、キー (例: `@merchant_name` などの属性)、値 (例: 特定のマーチャントの名前)、フリーテキスト (例: `responded 500` などのログメッセージ内のキーワード)、制御文字 (例: 括弧やコロン) などの入力タイプが明確に区別されます。ステータス属性も、`error` はで赤 `info` は青など、それぞれの状態を表す色でハイライト表示されます。
+Syntax highlighting clearly differentiates input types, such as keys (for example, an attribute such as `@merchant_name`), values (for example, the name of a particular merchant), free text (for example, keywords in a log messages such as `responded 500`), and control characters (for example, parentheses and colons). Status attributes are also highlighted in colors representing the status, such as red for `error` and blue for `info`.
 
-{{< img src="logs/explorer/search/log_syntax_highlighting.png" alt="クエリとして `service:auth-dotnet status:error 500 (check-token OR create-user)` が表示され、構文が見やすくハイライト表示されているログ検索バー" style="width:100%;">}}
+{{< img src="logs/explorer/search/log_syntax_highlighting.png" alt="The logs search bar showing `service:auth-dotnet status:error 500 (check-token OR create-user)` as the query with differentiable syntax highlighting" style="width:100%;">}}
 
-明確なエラー状態は、クエリのどの部分に構文エラーがあり、それをどのように修正すればよいかを知らせます。例えば、
-- クエリ `service:` に値がない状態で入力した場合、クエリにカーソルを合わせると "Missing value in key:value pair" というメッセージが表示されます。
-- 範囲クエリ用の角括弧を入力したのに、最高値と最低値を入力しなかった場合は、"Expected term but end of input found" というメッセージが表示されます。
-- `service:(web-store OR auth-dotnet` のように、ログフィールドに複数の値を入力した後に、括弧を閉じるのを忘れた場合は、`Missing closing parenthesis character` というメッセージが表示されます。
+Clear error states inform you which part of the query contains syntax errors and how to remediate them. For example,
+- If you input the query `service:` with no value, the message "Missing value in key:value pair" is displayed when you hover over the query.
+- If you input brackets for a range query, but do not fill in the high and low values, the message "Expected term but end of input found" is displayed.
+- If you input multiple values for a log field but miss the closing parenthesis character, such as  `service:(web-store OR auth-dotnet`, the message `Missing closing parenthesis character` is displayed.
 
-{{< img src="logs/explorer/search/log_error_states.png" alt="クエリとして `service:(web-store OR auth-dotnet` が表示され、`Missing closing parenthesis character`というメッセージが表示されているログ検索バー" style="width:50%;">}}
+{{< img src="logs/explorer/search/log_error_states.png" alt="The logs search bar showing `service:(web-store OR auth-dotnet` as the query with the message `Missing closing parenthesis character`" style="width:50%;">}}
 
-ログエクスプローラーでログの検索やタイムフレームのカスタマイズを始めるには、[検索構文のドキュメント][3]と[カスタムタイムフレームのドキュメント][4]をお読みください。
+To start searching for logs and customizing the time frame in the Log Explorer, read the [Search Syntax documentation][3] and the [Custom Time Frames documentation][4].
 
-## 検索バーのスタイル適用とオートコンプリートを無効にする
+## Disable styling and autocomplete for search bar
 
-検索バーの右側のボタンを切り替えると RAW モードでの検索が可能になり、構文のハイライト表示、検索ピルのスタイル適用、オートコンプリートが無効になります。
+Toggle the button to the right of the search bar to search in raw mode, where syntax highlighting, search pills styling, and autocomplete are removed:
 
-{{< img src="logs/explorer/search/log_raw_search_mode.png" alt="RAW 検索モードのクエリとして `service:auth-dotnet status:error 500 (check-token OR create-user)` が表示されているログ検索バー" style="width:100%;">}}
+{{< img src="logs/explorer/search/log_raw_search_mode.png" alt="The logs search bar showing `service:auth-dotnet status:error 500 (check-token OR create-user)` as the query in raw search mode" style="width:100%;">}}
 
-検索バーは、マウスでもキーボードコマンドでも操作できます。たとえば、テキストの選択には `CMD-A` を、テキストのコピーには `CMD-C` を、テキストの切り取りには `CMD-X` を、テキストの貼り付けには `CMD-V` を使用します。
+You can interact with the search bar with your mouse, as well as by using keyboard commands. For example, use `CMD-A` for selecting text, `CMD-C` for copying text, `CMD-X` for cutting text, and `CMD-V` for pasting text.
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/logs/indexes
-[2]: /ja/logs/explorer/facets/
-[3]: /ja/logs/search-syntax
-[4]: /ja/dashboards/guide/custom_time_frames
-[5]: /ja/logs/explorer/
+[1]: /logs/indexes
+[2]: /logs/explorer/facets/
+[3]: /logs/search-syntax
+[4]: /dashboards/guide/custom_time_frames
+[5]: /logs/explorer/

@@ -1,49 +1,49 @@
 ---
-description: USM メトリクスを使ったモニター、SLO、ダッシュボードの作成方法についてご紹介します。
+title: Using USM Metrics in Monitors, SLOs, and Dashboards
+kind: guide
+description: Learn how to create monitors, SLOs, and dashboards using your USM metrics.
 further_reading:
-- link: https://www.datadoghq.com/blog/universal-service-monitoring-datadog/
-  tag: ブログ
-  text: ユニバーサルサービスモニタリングにより、すべてのサービスを数秒で自動的に検出、マッピング、監視する
+- link: "https://www.datadoghq.com/blog/universal-service-monitoring-datadog/"
+  tag: Blog
+  text: Automatically discover, map, and monitor all your services in seconds with Universal Service Monitoring
 - link: /universal_service_monitoring
   tag: Documentation
-  text: ユニバーサルサービスモニタリングについて
+  text: Learn about Universal Service Monitoring
 - link: /tracing/metrics
   tag: Documentation
-  text: APM メトリクスについて
-kind: ガイド
-title: モニター、SLO、ダッシュボードでの USM メトリクスの活用
+  text: Learn about APM Metrics
 ---
 
-## 概要
+## Overview
 
-[ユニバーサルサービスモニタリング][1]は、一般的なコンテナタグ (`app`、`short_image`、`kube_deployment` など) を使用してサービスを検出し、それらのサービスの[サービスカタログ][2]にエントリーを生成します。
+[Universal Service Monitoring][1] discovers services using popular container tags (such as `app`, `short_image`, and `kube_deployment`) and generates entries in the [Service Catalog][2] for those services. 
 
-Datadog では、ユニバーサルサービスモニタリングで検出されたすべてのサービスのインバウンドとアウトバウンドの両方のトラフィックについて、リクエスト、エラー、および期間のメトリクスにアクセスすることができます。これらのサービス健全性メトリクスは、アラートの作成、[デプロイの追跡][11]、[サービスレベル目標 (SLO)][3] の開始などに役立つため、インフラストラクチャー上で実行されているすべてのサービスを幅広く可視化することが可能です。
+You can access request, error, and duration metrics in Datadog for both inbound and outbound traffic on all services discovered with Universal Service Monitoring. These service health metrics are useful for creating alerts, [tracking deployments][3], and getting started with [service level objectives (SLOs)][4] so you can get broad visibility into all services running on your infrastructure. 
 
-{{< img src="universal_service_monitoring/guide/usm_slo.png" alt="BITSBOUTIQUE のユニバーサルサービスモニタリング SLO" style="width:100%;" >}}
+{{< img src="universal_service_monitoring/guide/usm_slo.png" alt="Universal Service Monitoring SLOs for BITSBOUTIQUE" style="width:100%;" >}}
 
-このガイドでは、`universal.http.*` などの USM メトリクスを検索して、モニター、SLO、ダッシュボードで使用する方法について説明します。
+This guide describes how to search for USM metrics such as `universal.http.*` and use them in your monitors, SLOs, and dashboards.
 
-## USM メトリクスと APM メトリクスの比較
+## USM metrics vs APM metrics
 
-| メトリクス名                 | 単位   | タイプ         | 説明                                       |
+| Metric Name                 | Units   | Type         | Description                                       |
 |-----------------------------|---------|--------------|---------------------------------------------------|
-| universal.http.client       | 秒 | Distribution | アウトバウンドリクエストのレイテンシー、カウント、エラー、およびレート。                |
-| universal.http.client.hits  | Hits    | カウント        | アウトバウンドリクエストとエラーの合計数。                |
-| universal.http.client.apdex | スコア   | Gauge        | このサービスのアウトバウンドリクエストの Apdex スコア。                |
-| universal.http.server       | 秒 | Distribution | インバウンドリクエストのレイテンシー、カウント、エラー、およびレート。  |
-| universal.http.server.hits  | Hits    | カウント        | インバウンドリクエストとエラーの合計数。                 |
-| universal.http.server.apdex | スコア   | Gauge        | この Web サービスの Apdex スコア。             |
+| universal.http.client       | Seconds | Distribution | Outbound request latency, counts, errors, and rates.                |
+| universal.http.client.hits  | Hits    | Count        | Total number of outbound requests and errors.                |
+| universal.http.client.apdex | Score   | Gauge        | The Apdex score of outbound requests for this service.                |
+| universal.http.server       | Seconds | Distribution | Inbound request latency, counts, errors, and rates.  |
+| universal.http.server.hits  | Hits    | Count        | Total number of inbound requests and errors.                 |
+| universal.http.server.apdex | Score   | Gauge        | The Apdex score for this web service.             |
 
-APM メトリクスとは異なり、エラーは別のメトリクスとしてではなく、`error:true` タグの下で利用可能です。
+Unlike APM metrics, errors are available under the `error:true` tag instead of as a separate metric.
 
-**注:** `.hits` メトリクスは、インフラストラクチャータグをすべて持ち、リクエストとエラーカウントをクエリする推奨方法です。また、すべての USM メトリクスに[第 2 プライマリタグ][16]を追加することができます。
+**Note:** The `.hits` metrics have all of your infrastructure tags and are the recommended way to query request and error counts. You can also add [second primary tags][5] to all USM metrics.
 
-### メトリクス構文
+### Metric syntax
 
-USM メトリクスクエリ構文は、`trace.*` を使用する [APM メトリクスクエリ構文][4]と異なります。USM メトリクスは、1 つのディストリビューションメトリクス名に分類されます。
+The USM metric query syntax differs from the [APM metric query syntax][6], which uses `trace.*`. USM Metrics fall under a single distribution metric name. 
 
-例:
+For example:
 
 | APM                                             | USM                                                  |
 |-------------------------------------------------|------------------------------------------------------|
@@ -53,83 +53,84 @@ USM メトリクスクエリ構文は、`trace.*` を使用する [APM メトリ
 | pXX:trace.universal.http.client{*}              | pXX:universal.http.client{*}                         |
 | trace.universal.http.client.apdex{*}            | universal.http.client.apdex{*}                       |
 
-インバウンドトラフィックをキャプチャする `universal.http.server` オペレーションについても同様の翻訳が適用されます。ディストリビューションメトリクスについては、[APM における DDSketch ベースのメトリクス][12]を参照してください。
+The same translations apply for the `universal.http.server` operation that captures inbound traffic. For more information about distribution metrics, see [DDSketch-based Metrics in APM][7].
 
-## 使用方法
+## Usage
 
-[**APM** > **Service Catalog**][5] に移動し、ユニバーサルサービスモニタリングのテレメトリータイプでフィルターをかけて、サービスをクリックします。**Performance** タブには、ヒット、レイテンシー、リクエスト、エラーなどに関するサービスレベルのグラフが表示されます。これらのメトリクスは、[モニター](#create-a-monitor)または [SLO](#create-an-slo) の作成時、あるいは[サービスカタログ][2]の[ダッシュボード](#access-a-defined-dashboard)で確認することもできます。
+Navigate to [**Infrastructure > Universal Service Monitoring**][8], filter by Universal Service Monitoring telemetry type, and click on a service. The **Performance** tab displays service-level graphs on hits, latency, requests, errors, and more. You can also access these metrics when creating a [monitor](#create-a-monitor) or an [SLO](#create-an-slo), or by looking at a [dashboard](#access-a-defined-dashboard) in the [Service Catalog][2].
 
-### モニターの作成
+### Create a monitor
 
-`universal.http.client` などの USM メトリクスがしきい値を超えたり、予想されるパターンから外れたりすると、アラートをトリガーする [**APM Monitor**][8] を作成することができます。
+You can create an [**APM Monitor**][9] to trigger an alert when a USM metric such as `universal.http.client` either crosses a threshold or deviates from an expected pattern.
 
-1. **Monitors** > **New Monitor** の順に移動し、[**APM**][13] をクリックします。
-2. **APM Metrics** を選択し、サービスまたはリソースの `env` とその他の[プライマリタグ][14]を定義します。モニターするサービスまたはリソースを選択し、モニターがクエリを評価する時間間隔を定義します。
-3. **Threshold Alert** を選択し、トリガーするモニターのために `Requests per Second` のような USM メトリクスを選択します。次に、アラートと警告のしきい値を**上**または**下**にするかどうかを定義します。アラートしきい値、およびオプションで警告しきい値に値を入力します。
-4. 通知セクションには、このモニター用にあらかじめ入力されたメッセージが含まれています。アラート名とメッセージをカスタマイズし、このモニターの権限を定義します。
-5. **作成**をクリックします。
+1. Navigate to [**Monitors > New Monitor**][10] and click [**APM**][9].
+2. Select **APM Metrics** and define a service or resource's `env` and any other [primary tags][11]. Select a service or resource to monitor and define time interval for the monitor to evaluate the query over. 
+3. Select **Threshold Alert** and select a USM metric such as `Requests per Second` for the monitor to trigger on. Then, define if the value should be **above** or **below** the alert and warning thresholds. Enter a value for the alert threshold, and optionally, for the warning threshold.
+4. The notification section contains a prepopulated message for the monitor. Customize the alert name and message and define the permissions for this monitor.
+5. Click **Create**.
 
-{{< img src="universal_service_monitoring/guide/usm_monitor.png" alt="BITSBOUTIQUE のユニバーサルサービスモニタリングモニター" style="width:100%;" >}}
+{{< img src="universal_service_monitoring/guide/usm_monitor.png" alt="Universal Service Monitoring Monitor for BITSBOUTIQUE" style="width:100%;" >}}
 
-詳しくは、[APM モニターのドキュメント][6]を参照してください。
+For more information, see the [APM Monitor documentation][12].
 
-### SLO を作成する
+### Create an SLO
 
-サービスごとに [**SLO**][10] を作成することで、USM メトリクスで設定された目標を達成し、時間の経過とともに可用性が向上していることを確認することができます。Datadog では、多くのサービスをカバーするために、[プログラム的に SLO を作成する][9]ことを推奨しています。
+You can create an [**SLO**][13] on a per-service basis to ensure you are meeting objectives set by USM metrics and improving availability over time. Datadog recommends [creating an SLO programmatically][14] to cover a lot of services. 
 
-サービスカタログから SLO を作成するには
+To create an SLO from the Service Catalog:
 
-1. [サービスカタログ][5]の **Reliability** タブに移動します。
-2. **SLOs** 列で、サービスにカーソルを合わせ、**+ Create Availability SLO** または **+ Create Latency SLO** をクリックします。
+1. Navigate to the **Reliability** tab of the [Service Catalog][8].
+2. Under the **SLOs** column, hover over a service and click **+ Create Availability SLO** or **+ Create Latency SLO**.
 
-{{< img src="universal_service_monitoring/guide/service_catalog_slo_setup.png" alt="BITSBOUTIQUE のユニバーサルサービスモニタリング SLO を設定する" style="width:100%;" >}}
+{{< img src="universal_service_monitoring/guide/service_catalog_slo_setup.png" alt="Setting up a Universal Service Monitoring SLO for BITSBOUTIQUE" style="width:100%;" >}}
 
-オプションで、USM メトリクスを使用して SLO を手動で作成するには
+Optionally, to create an SLO manually using USM metrics:
 
-1. **Service Management** > **SLOs** の順に移動し、[**New SLO**][15] をクリックします。
-2. **Metric Based** を選択し、**Good events (numerator)** セクションで 2 つのクエリを作成します。
+1. Navigate to [**Service Management > SLOs**][15] and click [**New SLO**][13].
+2. Select **Metric Based** and create two queries in the **Good events (numerator)** section:
 
-   * クエリ A: `universal.http.server` のような USM メトリクスを入力し、`from` フィールドにプライマリ `service` と `env` タグを追加して特定のサービスにフィルターし、`as` フィールドで `count` を選択します。
-   * クエリ B: `universal.http.server` のような USM メトリクスを入力し、`from` フィールドに `error:true` タグに加えて、プライマリ `service` と `env` タグを追加して特定のサービスにフィルターし、`as` フィールドで `count` を選択します。
+   * Query A: Enter a USM metric such as `universal.http.server`, filter to a specific service by adding primary `service` and `env` tags in the `from` field, and select `count` in the `as` field. 
+   * Query B: Enter a USM metric such as `universal.http.server`, filter to a specific service by adding primary `service` and `env` tags, in addition to an `error:true` tag in the `from` field, and select `count` in the `as` field. 
 
-3. **+ Add Formula** をクリックし、`a-b` と入力します。
-4. **Total events (denominator)** セクションでは、`universal.http.server` のような USM メトリクスを入力し、`from` フィールドにプライマリ `service` と `env` タグを追加して特定のサービスにフィルターし、`as` フィールドで `count` を選択します。
-5. **+ New Target** をクリックすると、以下の設定でターゲットしきい値が作成されます。
+3. Click **+ Add Formula** and enter `a-b`.
+4. In the **Total events (denominator)** section, enter a USM metric such as `universal.http.server`, filter to a specific service by adding primary `service` and `env` tags in the `from` field, and select `count` in the `as` field.
+5. Click **+ New Target** to create a target threshold with the following settings:
 
-   * タイムウィンドウは `7 Days`、ターゲットしきい値は `95%`、警告しきい値は `99.5%` です。Datadog では、すべてのタイムウィンドウで同じターゲットしきい値を設定することを推奨しています。
+   * The time window is `7 Days`, the target threshold is `95%`, and the warning threshold is `99.5%`. Datadog recommends setting the same target threshold across all time windows.
 
-6. この SLO の名前と説明を入力します。`team` タグに加えて、プライマリ `env` と `service` タグを設定します。
-7. **Save and Set Alert** をクリックします。
+6. Enter a name and description for this SLO. Set primary `env` and `service` tags, in addition to the `team` tag.
+7. Click **Save and Set Alert**.
 
-{{< img src="universal_service_monitoring/guide/usm_slo_setup.png" alt="BITSBOUTIQUE のユニバーサルサービスモニタリング SLO を設定する" style="width:100%;" >}}
+{{< img src="universal_service_monitoring/guide/usm_slo_setup.png" alt="Setting up a Universal Service Monitoring SLO for BITSBOUTIQUE" style="width:100%;" >}}
 
-詳しくは、[サービスレベル目標のドキュメント][10]をご覧ください。
+For more information, see the [Service Level Objectives documentation][17].
 
-### 定義されたダッシュボードにアクセスする
+### Access a defined dashboard
 
-[サービスカタログ][2]では、サービス定義ファイルに定義されたダッシュボードを識別し、**Dashboards** タブに一覧表示します。**Manage Dashboards** をクリックすると、GitHub で直接サービス定義にアクセスし編集することができます。
+The [Service Catalog][2] identifies dashboards defined in your service definition file and lists them on the **Dashboards** tab. Click **Manage Dashboards** to access and edit the service definition directly in GitHub. 
 
-{{< img src="universal_service_monitoring/guide/manage_dashboards.png" alt="サービスカタログのサービスの Dashboards タブにある Manage Dashboards ボタン" style="width:90%;" >}}
+{{< img src="universal_service_monitoring/guide/manage_dashboards.png" alt="Manage Dashboards button in the Dashboards tab of a service in the Service Catalog" style="width:90%;" >}}
 
-詳しくは、[ダッシュボードのドキュメント][7]をご覧ください。
+For more information, see the [Dashboards documentation][16].
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/universal_service_monitoring
-[2]: /ja/tracing/service_catalog
-[3]: /ja/monitors/service_level_objectives
-[4]: /ja/tracing/metrics/metrics_namespace
-[5]: https://app.datadoghq.com/services
-[6]: /ja/monitors/create/types/apm
-[7]: /ja/dashboards
-[8]: https://app.datadoghq.com/monitors/create/apm
-[9]: /ja/api/latest/service-level-objectives/
-[10]: https://app.datadoghq.com/slo/new
-[11]: /ja/tracing/services/deployment_tracking/
-[12]: /ja/tracing/guide/ddsketch_trace_metrics/
-[13]: https://app.datadoghq.com/monitors/create/apm
-[14]: /ja/metrics/advanced-filtering/
-[15]: https://app.datadoghq.com/slo/new
-[16]: /ja/tracing/guide/setting_primary_tags_to_scope/?tab=helm#add-a-second-primary-tag-in-datadog
+[1]: /universal_service_monitoring
+[2]: /tracing/service_catalog
+[3]: /tracing/services/deployment_tracking/
+[4]: /service_management/service_level_objectives
+[5]: /tracing/guide/setting_primary_tags_to_scope/?tab=helm#add-a-second-primary-tag-in-datadog
+[6]: /tracing/metrics/metrics_namespace
+[7]: /tracing/guide/ddsketch_trace_metrics/
+[8]: https://app.datadoghq.com/services
+[9]: https://app.datadoghq.com/monitors/create/apm
+[10]: https://app.datadoghq.com/monitors/create
+[11]: /metrics/advanced-filtering/
+[12]: /monitors/create/types/apm
+[13]: https://app.datadoghq.com/slo/new
+[14]: /api/latest/service-level-objectives/
+[15]: https://app.datadoghq.com/slo/manage
+[16]: /dashboards
+[17]: /service_management/service_level_objectives/

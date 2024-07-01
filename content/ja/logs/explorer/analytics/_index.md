@@ -1,125 +1,128 @@
 ---
+title: Log Analytics
+kind: documentation
+description: 'Group queried logs into fields, patterns, and transactions, and create multiple search queries, formulas, and functions for in-depth analysis.'
 aliases:
-- /ja/logs/explorer/group
-- /ja/logs/group
-description: クエリされたログをフィールド、パターン、トランザクションにグループ化し、複数の検索クエリ、計算式、関数を作成して詳細な分析が可能です。
+    - /logs/explorer/group
+    - /logs/group
 further_reading:
-- link: logs/explorer/search
-  tag: Documentation
-  text: ログの絞り込み
-- link: logs/explorer/visualize
-  tag: Documentation
-  text: ログから視覚化を作成する
-- link: /logs/explorer/export
-  tag: Documentation
-  text: ログエクスプローラーのビューをエクスポート
-title: ログ分析
+    - link: logs/explorer/search
+      tag: Documentation
+      text: Filter logs
+    - link: logs/explorer/visualize
+      tag: Documentation
+      text: Create visualizations from logs
+    - link: /logs/explorer/export
+      tag: Documentation
+      text: Export Log Explorer views
+    - link: "https://www.datadoghq.com/blog/add-context-with-reference-tables/"
+      tag: Blog
+      text: Add more context to your logs with Reference Tables
 ---
 
-## 概要
+## Overview
 
-ログは個々のイベントとして価値がある場合がありますが、価値のある情報がイベントのサブセットに存在する場合もあります。
+Logs can be valuable as individual events, but sometimes valuable information lives in a subset of events. 
 
-{{< whatsnext desc="この情報を公開するには、以下にログを集計します。" >}}
-    {{< nextlink href="logs/explorer/analytics/#fields" >}}フィールド{{< /nextlink >}}
-    {{< nextlink href="logs/explorer/analytics/patterns" >}}パターン{{< /nextlink >}}
-    {{< nextlink href="logs/explorer/analytics/transactions" >}}トランザクション{{< /nextlink >}}
+{{< whatsnext desc="In order to expose this information, you can group your logs into:" >}}
+    {{< nextlink href="logs/explorer/analytics/#group-logs-by-fields" >}}Fields{{< /nextlink >}}
+    {{< nextlink href="logs/explorer/analytics/patterns" >}}Patterns{{< /nextlink >}}
+    {{< nextlink href="logs/explorer/analytics/transactions" >}}Transactions{{< /nextlink >}}
 {{< /whatsnext >}}
 
-ログクエリエディターで、クエリしたログの集計を切り替えることができます。ログのグループ化、集計、測定のために選択したフィールドは、異なる表示や集計の種類を切り替えても保存されます。
+Switch between different aggregations of your queried logs with the logs query editor. The fields you select to group, aggregate, and measure your logs are saved as you switch between different visualizations and aggregation types.
 
-{{< img src="logs/explorer/aggregations.jpg" alt="ログを棒グラフで表示し、フィールド、パターン、トランザクションにグループ化するオプションを提供" style="width:100%;" >}}
+{{< img src="logs/explorer/aggregations.jpg" alt="A bar graph displaying logs and the option to group into fields, patterns, and transactions" style="width:100%;" >}}
 
-[複数のクエリ](#multiple-queries)を追加して異なるログを同時に分析したり、クエリに[数式](#formulas)や[関数](#functions)を適用して詳細な分析が可能です。
+You can add [multiple queries](#multiple-queries) to simultaneously analyze different sets of logs, and apply [formulas](#formulas) and [functions](#functions) to your queries for in-depth analysis.
 
-集計は**インデックス化されたログのみ**でサポートされます。インデックス化されていないログで集計を実行する必要がある場合は、[ログベースのメトリクス][2]を生成するか、アーカイブで[リハイドレート][3]を実行して、[除外フィルターを一時的に無効にする][1]ことを検討してください。
+Aggregations are supported for **indexed logs only**. If you need to perform aggregation on non-indexed logs, consider [temporarily disabling exclusion filters][1], generating [log-based metrics][2], and/or running a [rehydration][3] on your archives.
 
-## フィールドによるログのグループ化
+## Group logs by fields
 
-インデックス化されたログを**フィールド**で集計する場合、クエリフィルターに一致するすべてのログは、1 つまたは複数のログファセットの値に基づいてグループに集計されます。
+When aggregating indexed logs by **Fields**, all logs matching your query filter are aggregated into groups based on the query search values. 
 
-これらの集計の上で、次のメジャーを抽出することができます。
+On top of these aggregates, you can extract the following measures:
 
-- グループごとの**ログの数**
-- グループごとのファセットのコード化された値の**一意の数**
-- グループごとのファセットの数値に対する**統計演算** (`min`、`max`、`avg`、`percentiles`)
+- **count of logs** per group
+- **count of unique coded values** for a query search value per group (shown in the UI as `count unique of`)
+- **statistical operations** (`min`, `max`, `avg`, and `percentiles`) on numerical values of a query search value per group
 
-単一のファセットに対して複数の値を持つ個々のログは、その数の集計に属します。たとえば、`team:sre` タグと `team:marketplace` タグを持つログは、`team:sre` 集計で 1 回、`team:marketplace` 集計で 1 回カウントされます。
+Individual logs with multiple query search values belong to that many aggregates. For instance, a log with the `team:sre` and the `team:marketplace` tags are counted once in the `team:sre` aggregate and once in the `team:marketplace` aggregate.
 
-### ロググループを視覚化する
+### Visualize log groups
 
-**フィールド**集計は、[上位リスト][4]の視覚化では 1 次元、[時系列][5]、[テーブル][6]、[ツリーマップ][17]、[パイチャート][18]の視覚化では最大 4 次元までサポートしています。
+The **Fields** aggregation supports one dimension for the [Top List][4] visualization, and up to four dimensions for the [Timeseries][5], [Table][6], [Tree Map][7], and [Pie Chart][8] visualizations. 
 
-複数のディメンションがある場合、上位の値は最初のディメンションに基づき決定されます。その後最初のディメンション内の上位値内の 2 番めのディメンション、次に 2 番目のディメンション内の上位値内の 3 番めのディメンションに基づき決定されます。
+When there are multiple dimensions, the top values are determined according to the first dimension, then according to the second dimension within the top values of the first dimension, then according to the third dimension within the top values of the second dimension.
 
-### 複数のクエリ
+### Multiple queries
 
-[時系列][5]、[テーブル][6]の視覚化で、複数のクエリに対応しました。クエリエディタの横にある `+ Add` ボタンをクリックすることで、複数のクエリを追加できます。新しいクエリを追加すると、直前のクエリとそのグループ化オプションがコピーされます。
+Multiple queries are supported in [Timeseries][5] and [Table][6] visualizations. Add multiple queries by clicking on the `+ Add` button next to the query editor. When you add a new query, it is a copy of the last query and its grouping options:
 
-{{< img src="logs/explorer/group/add_multiple_queries.mp4" alt="クエリエディターで複数のクエリを追加する方法を説明するユーザー" video=true style="width:100%;" >}}
+{{< img src="logs/explorer/group/add_multiple_queries.mp4" alt="A user demonstrating how to add multiple queries in the query editor" video=true style="width:100%;" >}}
 
-クエリエディター内の文字をクリックして、現在の視覚化に表示するクエリを選択または選択解除することができます。
+Select or deselect queries to display in the current visualization by clicking on their letters in the query editor:
 
-{{< img src="logs/explorer/group/select_multiple_queries.jpg" alt="クエリエディターには 2 つのクエリがあり、1 つは A、もう 1 つは B とラベル付けされています" style="width:100%;" >}}
+{{< img src="logs/explorer/group/select_multiple_queries.jpg" alt="The query editor with two queries, one is labeled A and the other is labeled B" style="width:100%;" >}}
 
-デフォルトでは、新しいクエリが追加されると、選択した視覚化で表示するように自動的に選択されます。
+By default, when a new query is added, it is automatically selected to be displayed in the chosen visualization.
 
-タイムラインを表示するには、`Timeline for` ドロップダウンでそのクエリを選択します。`Use facets with` ドロップダウンでクエリを選択し、[ファセットパネル][7]で値をクリックすると、検索クエリの 1 つをスコープすることができます。選択されたクエリのみが、選択されたファセットで更新されます。
+Display the timeline for one of your queries by selecting that query in the `Timeline for` dropdown. Scope one of your search queries by selecting that query in the `Use facets with` dropdown and clicking on values in the [Facet Panel][9]. Only the selected query is updated with the chosen facets.
 
-{{< img src="logs/explorer/group/query_selector.jpg" alt="クエリエディターがセレクタのタイムラインを表示し、クエリ A とクエリ B のドロップダウンオプションがあります" style="width:100%;" >}}
+{{< img src="logs/explorer/group/query_selector.jpg" alt="The query editor showing the timeline for selector with dropdown options for query A and query B" style="width:100%;" >}}
 
-### 関数
+### Functions
 
-関数はすべての視覚化でサポートされています。
+Functions are supported in all visualizations.
 
-クエリエディターで `Fields` 集計をクリックして、ログに関数を適用します。オプションで関数を適用するファセットフィールドを選択し、そのメジャーの横にある `Σ` アイコンをクリックします。選択したログフィールドに適用する関数を選択または検索します。
+Apply functions to your logs by clicking on the `Fields` aggregation in the query editor. Optionally select a faceted field to apply the function to, then click on the `Σ` icon next to that measure. Select or search for a function to apply to the selected log field.
 
-{{< img src="logs/explorer/group/add_function.mp4" alt="クエリエディターを使った関数のカスタマイズを実演するユーザー" video=true style="width:100%;" >}}
+{{< img src="logs/explorer/group/add_function.mp4" alt="A user demonstrating how to customize a function using the query editor" video=true style="width:100%;" >}}
 
-ダッシュボードのグラフエディターでログに使用できるすべての関数は、ログエクスプローラーでログに適用することができます。
+All functions available for logs in the graphing editor in Dashboards can be applied to logs in the Log Explorer:
 
-- [算術演算][8]
-- [補間][9]
-- [タイムシフト][10]
-- [レート][11]
-- [スムーシング][12]
-- [ロールアップ][13]
-- [除外][14]
+- [Arithmetic][10]
+- [Interpolation][11]
+- [Timeshift][12]
+- [Rate][13]
+- [Smoothing][14]
+- [Rollup][15]
+- [Exclusion][16]
 
-これは、[除外関数][14]を適用してログの特定の値を除外する方法の例です。
+Here is an example of how to apply an [Exclusion function][16] to exclude certain values of your logs:
 
-{{< img src="logs/explorer/group/exclusion_function_logs.jpg" alt="カットオフの分除外フィルターを 100 に設定したクエリ" style="width:100%;" >}}
+{{< img src="logs/explorer/group/exclusion_function_logs.jpg" alt="A query with the cutoff min exclusion filter set to 100" style="width:100%;" >}}
 
-### 数式
+### Formulas
 
-クエリエディターの横にある `+ Add` ボタンをクリックして、1 つまたは複数のクエリに数式を適用します。次の例では、式を使用して、`Merchant Tier: Enterprise` / `Merchant Tier: Premium` の顧客のログにある `Cart Id` の一意の数の比率を計算します。
+Apply a formula on one or multiple queries by clicking on the `+ Add` button next to the query editor. In the following example, the formula is used to calculate the ratio of the unique number of `Cart Id` in logs for `Merchant Tier: Enterprise` / `Merchant Tier: Premium` customers:
 
-{{< img src="logs/explorer/group/multiple_query_formula.jpg" alt="クエリ A をクエリ B で割る計算式のあるクエリエディター" style="width:100%;" >}}
+{{< img src="logs/explorer/group/multiple_query_formula.jpg" alt="The query editor with a formula dividing query A by query B" style="width:100%;" >}}
 
-複数のクエリで数式を適用するには、すべてのクエリが同じファセットでグループ化されている必要があります。上記の例では、両方のクエリが `Webstore Store Name` によってグループ化されています。
+To apply formulas with multiple queries, all queries must be grouped by the same query search value. In the example above, both queries are grouped by `Webstore Store Name`.
 
-関数を数式に適用するには、`Σ` アイコンをクリックします。ここでは、全ログに占めるエラーログの割合に[タイムシフト関数][10]を適用し、現在のデータと 1 週間前のデータを比較する例を示します。
+You can apply a function to a formula by clicking on the `Σ` icon. Here is an example of how to apply a [Timeshift function][12] on the proportion of error logs in all logs to compare current data with data from one week before:
 
-{{< img src="logs/explorer/group/timeshift_function_logs.jpg" alt="前週のタイムシフト関数を適用した数式を表示したクエリエディター" style="width:100%;" >}}
+{{< img src="logs/explorer/group/timeshift_function_logs.jpg" alt="The query editor showing a formula with the week before timeshift function applied to it" style="width:100%;" >}}
 
-## その他の参考資料
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/logs/log_configuration/indexes/#switch-off-switch-on
-[2]: /ja/logs/logs_to_metrics
-[3]: /ja/logs/log_configuration/rehydrating/
-[4]: /ja/logs/explorer/visualize/#top-list
-[5]: /ja/logs/explorer/visualize/#timeseries
-[6]: /ja/logs/explorer/visualize/#nested-tables
-[7]: /ja/logs/explorer/facets/#facet-panel
-[8]: /ja/dashboards/functions/arithmetic
-[9]: /ja/dashboards/functions/interpolation
-[10]: /ja/dashboards/functions/timeshift
-[11]: /ja/dashboards/functions/rate
-[12]: /ja/dashboards/functions/smoothing
-[13]: /ja/dashboards/functions/rollup
-[14]: /ja/dashboards/functions/exclusion
-[16]: https://app.datadoghq.com/logs
-[17]: /ja/dashboards/widgets/treemap
-[18]: /ja/dashboards/widgets/pie_chart
+[1]: /logs/log_configuration/indexes/#switch-off-switch-on
+[2]: /logs/logs_to_metrics
+[3]: /logs/log_configuration/rehydrating/
+[4]: /logs/explorer/visualize/#top-list
+[5]: /logs/explorer/visualize/#timeseries
+[6]: /logs/explorer/visualize/#nested-tables
+[7]: /dashboards/widgets/treemap
+[8]: /dashboards/widgets/pie_chart
+[9]: /logs/explorer/facets/#facet-panel
+[10]: /dashboards/functions/arithmetic
+[11]: /dashboards/functions/interpolation
+[12]: /dashboards/functions/timeshift
+[13]: /dashboards/functions/rate
+[14]: /dashboards/functions/smoothing
+[15]: /dashboards/functions/rollup
+[16]: /dashboards/functions/exclusion

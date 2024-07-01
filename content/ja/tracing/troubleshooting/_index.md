@@ -1,176 +1,177 @@
 ---
+title: APM Troubleshooting
+kind: documentation
 aliases:
-- /ja/tracing/faq/my-trace-agent-log-renders-empty-service-error/
+    - /tracing/faq/my-trace-agent-log-renders-empty-service-error/
 further_reading:
 - link: /tracing/troubleshooting/connection_errors
   tag: Documentation
-  text: 接続エラー
+  text: Connection Errors
 - link: /tracing/troubleshooting/tracer_startup_logs/
   tag: Documentation
-  text: Datadog トレーサー起動ログ
+  text: Datadog tracer startup logs
 - link: /tracing/troubleshooting/tracer_debug_logs/
   tag: Documentation
-  text: Datadog トレーサーデバッグログ
+  text: Datadog tracer debug logs
 - link: /tracing/troubleshooting/agent_apm_metrics/
-  tag: ドキュメント
-  text: Datadog Agent によって送信された APM メトリクス
-title: APM トラブルシューティング
+  tag: Documentation
+  text: APM metrics sent by the Datadog Agent
 ---
 
-Datadog APM で予期しない動作が発生した場合に、ご自分で確認できるよくある問題を本ガイドでいくつかご紹介します。問題が解決しない場合は、[Datadog サポート][1] にお問い合わせください。また、各リリースには改善と修正が含まれているため、使用する Datadog トレースライブラリの最新バージョンに定期的に更新することをお勧めします。
+If you experience unexpected behavior with Datadog APM, there are a few common issues you can investigate and this guide may help resolve issues quickly. If you continue to have trouble, reach out to [Datadog support][1] for further assistance. Datadog recommends regularly updating to the latest version of the Datadog tracing libraries you use, as each release contains improvements and fixes.
 
-## トラブルシューティングパイプライン
+## Troubleshooting pipeline
 
-APM データを Datadog に送信する際には、以下のコンポーネントが関与します。
+The following components are involved in sending APM data to Datadog:
 
-{{< img src="tracing/troubleshooting/troubleshooting_pipeline_info_1.png" alt="APM トラブルシューティングパイプライン">}}
+{{< img src="tracing/troubleshooting/troubleshooting_pipeline_info_1.png" alt="APM Troubleshooting Pipeline">}}
 
-トレース (JSON データタイプ) と [Tracing Application Metrics][2] はアプリケーションから生成され、バックエンドに移動する前に Datadog Agent に送信されます。パイプラインの各セクションで、異なるトラブルシューティング情報を収集することができます。重要なのは、Tracer のデバッグログは、アプリケーションのログに書き込まれますが、これは Datadog Agent のフレアとは別のコンポーネントであることです。これらの項目についての詳細は、以下の [Datadog サポートから要求されたデータのトラブルシューティング](#troubleshooting-data-requested-by-datadog-support)で確認することができます。
+Traces (JSON data type) and [Tracing Application Metrics][2] are generated from the application and sent to the Datadog Agent before traveling to the backend. Different troubleshooting information can be collected at each section of the pipeline. Importantly, the Tracer debug logs are written to your application's logs, which is a separate component from the Datadog Agent flare. More information about these items can be seen below in [Troubleshooting data requested by Datadog Support](#troubleshooting-data-requested-by-datadog-support).
 
-## APM のセットアップと APM ステータスの確認
+## Confirm APM setup and Agent status
 
-起動時、Datadog トレースライブラリは、JSON オブジェクトに適用された設定を反映するログおよび発生したエラーを出力します。それには、対応する言語で Agent に到達できるかも含まれます。一部の言語では、この起動ログが環境変数 `DD_TRACE_STARTUP_LOGS=true` で有効化されている必要があります。起動ログについて、詳しくはトラブルシューティング[関連ページ][3]を参照してください。
+During startup, Datadog tracing libraries emit logs that reflect the configurations applied in a JSON object, as well as any errors encountered, including if the Agent can be reached in languages where this is possible. Some languages require these startup logs to be enabled with the environment variable `DD_TRACE_STARTUP_LOGS=true`. For more information on startup logs, see the [dedicated page][3] for troubleshooting.
 
-## 接続エラー
+## Connection errors
 
-トラブルの一般的な原因は、インスツルメントされたアプリケーションが Datadog Agent と通信できないことです。こうした問題を見つけて修正する方法については、[接続エラー][4]を参照してください。
+A common source of trouble is the inability of the instrumented application to communicate with the Datadog Agent. Read about how to find and fix these problems in [Connection Errors][4].
 
-## トレーサーのデバッグログ
+## Tracer debug logs
 
-Datadog トレーサーの詳細をすべて取得するには、`DD_TRACE_DEBUG` 環境変数を使いトレーサーのデバッグモードを有効にします。独自の調査のために有効にしたり、Datadog サポートもトリアージ目的で推奨していることを理由に、有効にしたりできます。ただし、ログのオーバーヘッドが発生するため、デバッグモードを有効のままにはしないでください。
+To capture full details on the Datadog tracer, enable debug mode on your tracer by using the `DD_TRACE_DEBUG` environment variable. You might enable it for your own investigation or because Datadog support recommended it for triage purposes. However, don't leave debug mode always enabled because of the logging overhead it introduces.
 
-これらのログは、インスツルメンテーションエラーやインテグレーション固有のエラーを明らかにすることができます。デバッグログの有効化と取得に関する詳細は、[デバッグモードのトラブルシューティングページ][5]を参照してください。
+These logs can surface instrumentation errors or integration-specific errors. For details on enabling and capturing these debug logs, see the [debug mode troubleshooting page][5].
 
-## データボリュームガイドライン
+## Data volume guidelines
 
-インスツルメント済みのアプリケーションは、現時点から最大過去18時間および未来2時間までのタイムスタンプのスパンを送信できます。
+Your instrumented application can submit spans with timestamps up to 18 hours in the past and two hours in the future from the current time.
 
-Datadog では、以下の文字列が指定された文字数を超えた場合、切り捨てられます。
+Datadog truncates the following strings if they exceed the indicated number of characters:
 
-| 名前         | 文字 |
+| Name         | Characters |
 |--------------|------------|
-| [サービス][6]    |  100       |
-| オペレーション    |  100       |
+| [service][6]    |  100       |
+| operation    |  100       |
 | type         |  100       |
-| [リソース][7]   |  5000      |
-| [タグキー][8]    |  200       |
-| [タグの値][8]  |  5000      |
+| [resource][7]   |  5000      |
+| [tag key][8]    |  200       |
+| [tag value][8]  |  5000      |
 
-また、スパンに存在する[スパンタグ][8]の数が、1024 以上にならないようにしてください。
+Additionally, the number of [span tags][8] present on any span cannot exceed 1024.
 
-指定された 40 分間に、Datadog では以下の組み合わせが許容されます。より大きなボリュームに対応するには、特定のユースケースについて[サポート][1]までお問い合わせください。
+For a given 40 minute interval, Datadog accepts the following combinations. To accommodate larger volumes, contact [support][1] to discuss your use case.
 
-- 5000 件の一意な環境とサービスの組み合わせ
-- 環境ごとに 30 個のユニークな[第 2プライマリタグ][16]値
-- 環境およびサービス当たり100件の一意の操作名
-- 環境、サービス、操作名当たり1000件の一意のリソース
-- 環境およびサービス当たり30件の一意のバージョン
+- 5000 unique environments and service combinations
+- 30 unique [second primary tag][16] values per environment
+- 100 unique operation names per environment and service
+- 1000 unique resources per environment, service, and operation name
+- 30 unique versions per environment and service
 
-## APM レート制限
+## APM rate limits
 
-Datadog Agent ログで、レート制限や 1 秒あたりの最大イベント数に関するエラーメッセージが表示される場合、[以下の手順][9]に従い制限を変更します。ご不明な点は、Datadog [サポートチーム][1]までお問い合わせください。
+Within Datadog Agent logs, if you see error messages about rate limits or max events per second, you can change these limits by following [these instructions][9]. If you have questions, before you change the limits, consult with the Datadog [support team][1].
 
-## APM リソース使用量
+## APM resource usage
 
-トレースコレクションの CPU 使用率の検出と Agent の適切なリソース制限の計算については、[Agent のリソース使用量][10]を参照してください。
+Read about detecting trace collection CPU usage and about calculating adequate resource limits for the Agent in [Agent Resource Usage][10].
 
-## スパンの修正、破棄、難読化
+## Modifying, discarding, or obfuscating spans
 
-Datadog Agent またはトレースクライアント (一部の言語のみ) 内で構成可能なヘルスチェック、またその他不要なトラフィックに関連する機密データのスクラブやトレースの破棄に関しては数々のコンフィギュレーションオプションが用意されています。利用可能なオプションについては、[セキュリティと Agent のカスタマイズ][11]を参照してください。本文では代表的な例をご紹介していますが、これらのオプションをお使いの環境に適用する際にサポートが必要な場合は、[Datadog サポート][1]までお問い合わせください。
+There are a number of configuration options available to scrub sensitive data or discard traces corresponding to health checks or other unwanted traffic that can be configured within the Datadog Agent, or in some languages the Tracing Client. For details on the options available, see [Security and Agent Customization][11]. While this offers representative examples, if you require assistance applying these options to your environment, reach out to [Datadog Support][1].
 
-## サービスの命名規則に関する問題
+## Service naming convention issues
 
-サービス数が[データ量ガイドライン](#data-volume-guidelines)で指定されている数を超える場合は、サービスの命名規則について以下のベストプラクティスを試してみてください。
+If the number of services exceeds what is specified in the [data volume guidelines](#data-volume-guidelines), try following these best practices for service naming conventions.
 
-### サービス名から環境タグの値を除外する
+### Exclude environment tag values from service names
 
-デフォルトでは、環境 (`env`) は [Datadog APM][17] のプライマリタグになります。
+By default, the environment (`env`) is the primary tag for [Datadog APM][17].
 
-{{< img src="/tracing/troubleshooting/troubleshooting-service-naming-convention-issues-3.png" alt="Environment はデフォルトのプライマリタグです" style="width:100%;" >}}
+{{< img src="/tracing/troubleshooting/troubleshooting-service-naming-convention-issues-3.png" alt="Environment is the default primary tag" style="width:100%;" >}}
 
-サービスは通常、`prod`、`staging`、`dev` などの複数の環境にデプロイされます。リクエスト数、レイテンシー、エラー率などのパフォーマンスメトリクスは、さまざまな環境間で異なっています。サービスカタログの環境ドロップダウンを使用すると、**Performance** タブのデータを特定の環境にスコープすることができます。
+A service is typically deployed in multiple environments, such as `prod`, `staging`, and `dev`. Performance metrics like request counts, latency, and error rate differ across various environments. The environment dropdown in the Service Catalog allows you to scope the data in the **Performance** tab to a specific environment.
 
-{{< img src="/tracing/troubleshooting/troubleshooting-service-naming-convention-issues-2.png" alt="サービスカタログの `env` ドロップダウンを使って、特定の環境を選択します" style="width:100%;" >}}
+{{< img src="/tracing/troubleshooting/troubleshooting-service-naming-convention-issues-2.png" alt="Choose a specific environment using the `env` dropdown in the Service Catalog" style="width:100%;" >}}
 
-サービスの数が増えすぎて問題になりがちなのが、サービス名に環境値を含めるパターンです。例えば、`prod-web-store` と `dev-web-store` のように 2 つの環境で動作しているため、1 つではなく 2 つのユニークなサービスがある場合です。
+One pattern that often leads to issues with an overwhelming number of services is including the environment value in service names. For example, you might have two unique services instead of one since they are operating in two separate environments: `prod-web-store` and `dev-web-store`.
 
-Datadog では、サービス名を変更することでインスツルメンテーションを調整することを推奨しています。
+Datadog recommends tuning your instrumentation by renaming your services.
 
-トレースメトリクスはアンサンプリングされるため、インスツルメンテーションされたアプリケーションでは、部分的なデータではなく、すべてのデータが表示されます。また、[ボリュームガイドライン](#data-volume-guidelines)も適用されます。
+Trace metrics are unsampled, which means your instrumented application shows all data instead of subsections of them. The [volume guidelines](#data-volume-guidelines) are also applied.
 
-### メトリクスパーティションを置いたり、変数をサービス名にグループ化する代わりに、第 2 プライマリタグを使用する
+### Use the second primary tag instead of putting metric partitions or grouping variables into service names
 
-第 2 のプライマリタグは、トレースメトリクスのグループ化および集計に使用できる追加タグです。ドロップダウンを使用して、指定されたクラスター名またはデータセンターの値にパフォーマンスデータをスコープすることができます。
+Second primary tags are additional tags that you can use to group and aggregate your trace metrics. You can use the dropdown to scope the performance data to a given cluster name or data center value.
 
-{{< img src="/tracing/troubleshooting/troubleshooting-service-naming-convention-issues-1.png" alt="ドロップダウンメニューを使用して、特定のクラスターまたはデータセンターの値を選択します" style="width:100%;" >}}
+{{< img src="/tracing/troubleshooting/troubleshooting-service-naming-convention-issues-1.png" alt="Use the dropdown menu to select a specific cluster or data center value" style="width:100%;" >}}
 
-第 2 のプライマリタグを適用せず、サービス名にメトリクスパーティションやグループ化変数を含めると、アカウント内のユニークなサービス数が不必要に増加し、遅延やデータ損失の可能性があります。
+Including metric partitions or grouping variables in service names instead of applying the second primary tag unnecessarily inflates the number of unique services in an account and results in potential delay or data loss.
 
-例えば、`web-store` というサービスの代わりに、`web-store-us-1`、`web-store-eu-1`、`web-store-eu-2` という異なるインスタンスの名前を付けて、これらのパーティションのパフォーマンスメトリクスを並べて表示することができます。Datadog では、第 2 プライマリタグとして、**region value** (`us-1`、`eu-1`、`eu-2`) を実装することを推奨しています。
+ For example, instead of the service `web-store`, you might decide to name different instances of a service `web-store-us-1`, `web-store-eu-1`, and `web-store-eu-2` to see performance metrics for these partitions side-by-side. Datadog recommends implementing the **region value** (`us-1`, `eu-1`, `eu-2`) as a second primary tag.
 
-## Datadog サポートが収集するトラブルシューティングのデータ
+## Troubleshooting data requested by Datadog Support
 
-[サポートチケット][1]を作成する際、下記のような情報が必要となる場合がございます。
+When you open a [support ticket][1], our support team may ask for some combination of the following types of information:
 
-1. **問題を確認することはできますか？たとえば、トレース (推奨) やスクリーンショットへのリンクを提供し、何が起こるかサポートまでお聞かせください。**
+1. **How are you confirming the issue? Provide links to a trace (preferably) or screenshots, for example, and tell support what you expect to see.**
 
-   これにより、サポートチームはエラーを確認し、Datadog のテスト環境で問題の再現を試みることができます。
+    This allows Support to confirm errors and attempt to reproduce your issues within Datadog's testing environments.
 
-2. **[トレーサー起動ログ](#confirm-apm-setup-and-agent-status)**
+2. **[Tracer startup logs](#confirm-apm-setup-and-agent-status)**
 
-    起動ログにより、トレーサーの設定ミスやトレーサーがDatadog Agent と通信できていないことが分かります。トレーサーが参照するコンフィギュレーションとアプリケーションやコンテナ内の設定を比べることで、サポートは設定が正しく適用されていない箇所を特定できます。
+    Startup logs are a great way to spot misconfiguration of the tracer, or the inability for the tracer to communicate with the Datadog Agent. By comparing the configuration that the tracer sees to the one set within the application or container, Support can identify areas where a setting is not being properly applied.
 
-3. **[トレーサーデバッグログ](#tracer-debug-logs)**
+3. **[Tracer debug logs](#tracer-debug-logs)**
 
-    トレーサーのデバッグログは起動ログよりさらに深く掘り下げ、トラフィックがアプリケーションを通過するまでチェックしがたい方法でインテグレーションが正しくインスツルメントされているか判断するのに役立ちます。デバッグログはトレーサーが作成するスパンの内容を確認したり、スパンを Agent に送信する際に接続に問題がある場合エラーを表面化させることもできます。トレーサーのデバッグログは、トレーサーの微妙な動作を確認するのに最も有益で信頼性の高いツールです。
+    Tracer debug logs go one step deeper than startup logs, and help to identify if integrations are instrumenting properly in a manner that can't necessarily be checked until traffic flows through the application. Debug logs can be extremely useful for viewing the contents of spans created by the tracer and can surface an error if there is a connection issue when attempting to send spans to the agent. Tracer debug logs are typically the most informative and reliable tool for confirming nuanced behavior of the tracer.
 
-4. **これらのログで探している情報に応じて、[デバッグまたはトレースモード][13]中にトレースが Datadog Agent に送信された期間の代表的なログサンプルをキャプチャする [Datadog Agent フレア][12] (ログおよび構成のスナップショット)**
+4. **A [Datadog Agent flare][12] (snapshot of logs and configs) that captures a representative log sample of a time period when traces are sent to your Datadog Agent while in [debug or trace mode][13] depending on what information you are looking for in these logs.**
 
-   Datadog Agent フレアにより Datadog Agent 内で起きていること (例えば、トレースが拒否または不正な形式にされているか) を確認できます。これはトレースが Datadog Agent に到達していない場合は役に立ちませんが、問題の原因やメトリクスの不一致を特定することはできます。
+    Datadog Agent flares enables you to see what is happening within the Datadog Agent, for example, if traces are being rejected or malformed. This does not help if traces are not reaching the Datadog Agent, but does help identify the source of an issue, or any metric discrepancies.
 
-    ログのレベルを `debug` または `trace` モードに調節する場合は、この操作によりログの量が劇的に増加し、システムリソースの消費量 (主に長期的なストレージスペースの増加) が見込まれることを考慮してください。Datadog は、この操作は一時的なトラブルシューティング目的のみで行い、完了後はレベルを `info` に戻すことを推奨します。 
+    When adjusting the log level to `debug` or `trace` mode, take into consideration that these significantly increase log volume and therefore consumption of system resources (namely storage space over the long term). Datadog recommends these only be used temporarily for troubleshooting purposes and the level be restored to `info` afterward.
 
-    **注**: Datadog Agent v7.19+ および Datadog Helm チャートの[最新版][9]、または Datadog Agent とトレース Agent が別コンテナにある状況で DaemonSet をご利用の場合は、トレース Agent からフレアを取得するために `datadog.yaml` に `log_level: DEBUG` または `log_level: TRACE` を設定した状態で以下のコマンドを実行する必要があります。
+    **Note**: If you are using the Datadog Agent v7.19+ and the Datadog Helm Chart with the [latest version][9], or a DaemonSet where the Datadog Agent and trace-agent are in separate containers, you will need to run the following command with `log_level: DEBUG` or `log_level: TRACE` set in your `datadog.yaml` to get a flare from the trace-agent:
 
     {{< code-block lang="shell" filename="trace-agent.sh" >}}
 kubectl exec -it <agent-pod-name> -c trace-agent -- agent flare <case-id> --local
     {{< /code-block >}}
 
-5. **環境の詳細**
+5. **A description of your environment**
 
-    アプリケーションのデプロイ方法を知ることで、サポートチームはトレーサーと Agent 間の通信の問題や設定ミスにおけるありがちな問題を特定することができます。問題が複雑な場合は、Kubernetes マニフェストや ECS タスク定義などを参照していただく場合もあります。
+    Knowing how your application is deployed helps the Support team identify likely issues for tracer-agent communication problems or misconfigurations. For difficult issues, Support may ask to a see a Kubernetes manifest or an ECS task definition, for example.
 
-6. **トレーサーコンフィギュレーション、[カスタムインスツルメンテーション][14]、スパンタグの追加など、トレーシングライブラリを使用して書かれたカスタムコード**
+6. **Custom code written using the tracing libraries, such as tracer configuration, [custom instrumentation][14], and adding span tags**
 
-   カスタムインスツルメンテーションは強力なツールですが、Datadog 内のトレース可視化に意図しない副作用を与える可能性があります。
+    Custom instrumentation can be a powerful tool, but also can have unintentional side effects on your trace visualizations within Datadog, so support may ask about this to rule it out as a suspect.
 
-   さらに、自動インスツルメンテーションとコンフィギュレーションを尋ねることで、Datadog はトレーサのスタートアップとデバッグログの両方に表示されているものと一致するかどうかを確認することができます。
+    Additionally, asking for your automatic instrumentation and configuration allows Datadog to confirm if this matches what it is seeing in both tracer startup and debug logs.
 
-7. **次のバージョン:**
-   * **インスツルメントされたアプリケーションの構築に使用されるプログラミング言語、フレームワーク、依存関係**
-   * **Datadog トレーサー**
+7. **Versions of the:**
+   * **programming language, frameworks, and dependencies used to build the instrumented application**
+   * **Datadog Tracer**
    * **Datadog Agent**
 
-    使用するバージョンを知ることで、インテグレーションが [互換性要件][15]でサポートされていることを確認したり、既知の問題をチェックしたり、トレーサーや言語のバージョンに問題がある場合はその更新をお勧めすることができます。
+    Knowing what versions are being used allows us to ensure integrations are supported in our [Compatiblity Requirements][15] section, check for known issues, or to recommend a tracer or language version upgrade if it will address the problem.
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/help/
-[2]: /ja/tracing/metrics/metrics_namespace/
-[3]: /ja/tracing/troubleshooting/tracer_startup_logs/
-[4]: /ja/tracing/troubleshooting/connection_errors/
-[5]: /ja/tracing/troubleshooting/tracer_debug_logs/
-[6]: /ja/tracing/glossary/#services
-[7]: /ja/tracing/glossary/#resources
-[8]: /ja/glossary/#span-tag
-[9]: /ja/tracing/troubleshooting/agent_rate_limits
-[10]: /ja/tracing/troubleshooting/agent_apm_resource_usage/
-[11]: /ja/tracing/custom_instrumentation/agent_customization
-[12]: /ja/agent/troubleshooting/send_a_flare/?tab=agentv6v7
-[13]: /ja/agent/troubleshooting/debug_mode/?tab=agentv6v7
-[14]: /ja/tracing/custom_instrumentation/
-[15]: /ja/tracing/compatibility_requirements/
-[16]: /ja/tracing/guide/setting_primary_tags_to_scope/?tab=helm#add-a-second-primary-tag-in-datadog
-[17]: /ja/tracing/guide/setting_primary_tags_to_scope/
+[1]: /help/
+[2]: /tracing/metrics/metrics_namespace/
+[3]: /tracing/troubleshooting/tracer_startup_logs/
+[4]: /tracing/troubleshooting/connection_errors/
+[5]: /tracing/troubleshooting/tracer_debug_logs/
+[6]: /tracing/glossary/#services
+[7]: /tracing/glossary/#resources
+[8]: /glossary/#span-tag
+[9]: /tracing/troubleshooting/agent_rate_limits
+[10]: /tracing/troubleshooting/agent_apm_resource_usage/
+[11]: /tracing/custom_instrumentation/agent_customization
+[12]: /agent/troubleshooting/send_a_flare/?tab=agentv6v7
+[13]: /agent/troubleshooting/debug_mode/?tab=agentv6v7
+[14]: /tracing/custom_instrumentation/
+[15]: /tracing/compatibility_requirements/
+[16]: /tracing/guide/setting_primary_tags_to_scope/?tab=helm#add-a-second-primary-tag-in-datadog
+[17]: /tracing/guide/setting_primary_tags_to_scope/

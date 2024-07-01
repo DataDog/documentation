@@ -1,96 +1,96 @@
 ---
-app_id: aqua
-app_uuid: d3819b09-3e08-492f-b0f8-b0d3f53fbdf5
-assets:
-  dashboards:
-    aqua: assets/dashboards/overview.json
-  integration:
-    auto_install: true
-    configuration: {}
-    events:
-      creates_events: false
-    metrics:
-      check: aqua.running_containers
-      metadata_path: metadata.csv
-      prefix: aqua.
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 10042
-    source_type_name: Aqua
-author:
-  homepage: https://github.com/DataDog/integrations-extras
-  name: Aqua
-  sales_email: oran.moshai@aquasec.com
-  support_email: oran.moshai@aquasec.com
-categories:
-- コンテナ
-- ログの収集
-- セキュリティ
-dependencies:
-- https://github.com/DataDog/integrations-extras/blob/master/aqua/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: aqua
-integration_id: aqua
-integration_title: Aqua
-integration_version: 1.0.0
-is_public: true
-kind: インテグレーション
-manifest_version: 2.0.0
-name: aqua
-public_title: Aqua
-short_description: コンテナおよびクラウドネイティブアプリケーションの開発から運用までをフルカバーするセキュリティソリューション
-supported_os:
+"app_id": "aqua"
+"app_uuid": "d3819b09-3e08-492f-b0f8-b0d3f53fbdf5"
+"assets":
+  "dashboards":
+    "aqua": assets/dashboards/overview.json
+  "integration":
+    "auto_install": true
+    "configuration": {}
+    "events":
+      "creates_events": false
+    "metrics":
+      "check": aqua.running_containers
+      "metadata_path": metadata.csv
+      "prefix": aqua.
+    "service_checks":
+      "metadata_path": assets/service_checks.json
+    "source_type_id": !!int "10042"
+    "source_type_name": Aqua
+"author":
+  "homepage": "https://github.com/DataDog/integrations-extras"
+  "name": Aqua
+  "sales_email": oran.moshai@aquasec.com
+  "support_email": oran.moshai@aquasec.com
+"categories":
+- containers
+- log collection
+- security
+"custom_kind": "integration"
+"dependencies":
+- "https://github.com/DataDog/integrations-extras/blob/master/aqua/README.md"
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "aqua"
+"integration_id": "aqua"
+"integration_title": "Aqua"
+"integration_version": "1.0.0"
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "aqua"
+"public_title": "Aqua"
+"short_description": "Full dev-to-prod security solution for containers and cloud native applications"
+"supported_os":
 - linux
 - windows
 - macos
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Containers
-  - Category::Log Collection
-  - Category::Security
-  - Supported OS::Linux
-  - Supported OS::Windows
-  - Supported OS::macOS
-  configuration: README.md#Setup
-  description: コンテナおよびクラウドネイティブアプリケーションの開発から運用までをフルカバーするセキュリティソリューション
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Aqua
+"tile":
+  "changelog": CHANGELOG.md
+  "classifier_tags":
+  - "Category::Containers"
+  - "Category::Log Collection"
+  - "Category::Security"
+  - "Supported OS::Linux"
+  - "Supported OS::Windows"
+  - "Supported OS::macOS"
+  "configuration": "README.md#Setup"
+  "description": Full dev-to-prod security solution for containers and cloud native applications
+  "media": []
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": Aqua
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
-## 概要
+## Overview
 
-このチェックは [Aqua][1] を監視します。
+This check monitors [Aqua][1].
 
-Aqua チェックは、脆弱性の深刻度が高い場合、あるいは Aqua に登録されていないホスト上でコンテナが実行されている場合に、ユーザーに警告します。Aqua は、実行時にブロックされたイベントに関するデータアラートも送信します。さらに多くの Aqua スキャナが必要な場合は、インフラストラクチャーをスケーリングする Webhook をトリガーすることも可能です。
+The Aqua check alerts the user if total high-severity vulnerability is reached, or if a container is running inside a host not registered by Aqua. Aqua also sends data alerts regarding blocked events in runtime, and it is possible to trigger a webhook to scale infrastructure if more Aqua scanners are required.
 
-## 計画と使用
+## Setup
 
-Aqua チェックは [Datadog Agent][2] パッケージに含まれていないため、お客様自身でインストールする必要があります。
+The Aqua check is not included in the [Datadog Agent][2] package, so you need to install it.
 
-### インフラストラクチャーリスト
+### Installation
 
-Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Aqua チェックをホストにインストールします。Docker Agent または 上記バージョン以前の Agent でインストールする場合は、[コミュニティインテグレーションの使用][3]をご参照ください。
+For Agent v7.21+ / v6.21+, follow the instructions below to install the Aqua check on your host. See [Use Community Integrations][3] to install with the Docker Agent or earlier versions of the Agent.
 
-1. 以下のコマンドを実行して、Agent インテグレーションをインストールします。
+1. Run the following command to install the Agent integration:
 
    ```shell
    datadog-agent integration install -t datadog-aqua==<INTEGRATION_VERSION>
    ```
 
-2. コアの[インテグレーション][4]と同様にインテグレーションを構成します。
+2. Configure your integration similar to core [integrations][4].
 
-### ブラウザトラブルシューティング
+### Configuration
 
-#### メトリクスの収集
+#### Metric collection
 
-1. Aqua の[メトリクス](#metrics)を収集するには、[Agent のコンフィギュレーションディレクトリ][5]のルートにある `conf.d/` フォルダーの `aqua.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル conf.yaml][6] を参照してください。
+1. Edit the `aqua.d/conf.yaml` file in the `conf.d/` folder at the root of your [Agent's configuration directory][5] to start collecting your Aqua [metrics](#metrics). See the [sample conf.yaml][6] for all available configuration options.:
 
    ```yaml
    instances:
@@ -99,28 +99,28 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Aqua チェッ
        password: "<API_USER_PASSWORD>"
    ```
 
-   `api_user` パラメーターと `password` パラメーターの値を変更し、環境に合わせて構成してください。
+    Change the `api_user` and `password` parameter values and configure them for your environment.
 
-2. [Agent を再起動します][7]。
+2. [Restart the Agent][7].
 
-#### 収集データ
+#### Log collection
 
-Aqua によって生成されるログには、次の 2 種類があります。
+There are two types of logs generated by Aqua:
 
-- Aqua 監査ログ
-- Aqua エンフォーサーログ
+- Aqua audit logs
+- Aqua enforcer logs
 
-Aqua 監査ログを収集するには、以下の手順に従います。
+To collect Aqua audit logs:
 
-1. Aqua アカウントに接続します。
-2. `Integration` ページの `Log Management` セクションに移動します。
-3. Webhook インテグレーションをアクティブにします。
-4. これを有効にし、次のエンドポイントを追加します: `{{< region-param key="http_endpoint" code="true" >}}/v1/input/<DATADOG_API_KEY>?ddsource=aqua`
-   - `<DATADOG_API_KEY>` は、ご使用の [Datadog API キー][8]に置き換えます。
+1. Connect to your Aqua account
+2. Go to the `Log Management` Section of the `Integration` Page
+3. Activate the Webhook integration
+4. Enable it and add the following endpoint: `{{< region-param key="http_endpoint" code="true" >}}/v1/input/<DATADOG_API_KEY>?ddsource=aqua`
+   - Replace `<DATADOG_API_KEY>` by your [Datadog API Key][8].
 
-Aqua エンフォーサーログを収集するには、以下のようにします (**Agent 6.0 以上で有効**)。
+For the Aqua Enforcer logs: **Available for Agent >6.0**
 
-5. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、[daemonset コンフィギュレーション][9]でこれを有効にします。
+5. Collecting logs is disabled by default in the Datadog Agent. Enable it in your [daemonset configuration][9]:
 
    ```yaml
      # (...)
@@ -133,44 +133,45 @@ Aqua エンフォーサーログを収集するには、以下のようにしま
      # (...)
    ```
 
-   Docker ソケットを Datadog Agent にマウントします。[マニフェストの例][10]は、Kubernetes のドキュメントを参照してください。
+    Make sure that the Docker socket is mounted to the Datadog Agent. See the Kubernetes documentation for [example manifests][10].
 
-6. [Agent を再起動します][7]。
+6. [Restart the Agent][7].
 
-### 検証
+### Validation
 
-[Agent の `status` サブコマンドを実行][11]し、Checks セクションで `aqua` を探します。
+[Run the Agent's `status` subcommand][11] and look for `aqua` under the Checks section.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "aqua" >}}
 
 
-### ヘルプ
+### Events
 
-Aqua には、イベントは含まれません。
+Aqua does not include any events.
 
-### ヘルプ
+### Service Checks
 {{< get-service-checks-from-git "aqua" >}}
 
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][14]までお問合せください。
+Need help? Contact [Datadog support][14].
 
 
 [1]: https://www.aquasec.com
 [2]: https://app.datadoghq.com/account/settings/agent/latest
-[3]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/
-[4]: https://docs.datadoghq.com/ja/getting_started/integrations/
-[5]: https://docs.datadoghq.com/ja/agent/faq/agent-configuration-files/#agent-configuration-directory
+[3]: https://docs.datadoghq.com/agent/guide/use-community-integrations/
+[4]: https://docs.datadoghq.com/getting_started/integrations/
+[5]: https://docs.datadoghq.com/agent/faq/agent-configuration-files/#agent-configuration-directory
 [6]: https://github.com/DataDog/integrations-extras/blob/master/aqua/datadog_checks/aqua/data/conf.yaml.example
-[7]: https://docs.datadoghq.com/ja/agent/faq/agent-commands/#start-stop-restart-the-agent
+[7]: https://docs.datadoghq.com/agent/faq/agent-commands/#start-stop-restart-the-agent
 [8]: https://app.datadoghq.com/organization-settings/api-keys
-[9]: https://docs.datadoghq.com/ja/agent/kubernetes/daemonset_setup/#log-collection
-[10]: https://docs.datadoghq.com/ja/agent/kubernetes/?tab=daemonset#installation
-[11]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#service-status
+[9]: https://docs.datadoghq.com/agent/kubernetes/daemonset_setup/#log-collection
+[10]: https://docs.datadoghq.com/agent/kubernetes/?tab=daemonset#installation
+[11]: https://docs.datadoghq.com/agent/guide/agent-commands/#service-status
 [12]: https://github.com/DataDog/integrations-extras/blob/master/aqua/metadata.csv
 [13]: https://github.com/DataDog/integrations-extras/blob/master/aqua/assets/service_checks.json
-[14]: https://docs.datadoghq.com/ja/help/
+[14]: https://docs.datadoghq.com/help/
+

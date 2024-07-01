@@ -1,26 +1,28 @@
 ---
 aliases:
-- /ja/synthetics/cicd_integrations/github_actions
+- /synthetics/cicd_integrations/github_actions
 dependencies:
-- https://github.com/DataDog/synthetics-ci-github-action/blob/main/README.md
-title: Continuous Testing と CI GitHub アクション
+- "https://github.com/DataDog/synthetics-ci-github-action/blob/main/README.md"
+title: Continuous Testing and CI GitHub Actions
 ---
-## 概要
+## Overview
 
-[Datadog CI Synthetics コマンド][1]を使って、GitHub のワークフローから Synthetic テストをトリガーすることができます。
+![GitHub Release](https://img.shields.io/github/v/release/DataDog/synthetics-ci-github-action)
 
-## セットアップ
+Trigger Synthetic tests from your GitHub workflows with the [Datadog CI Synthetics command][1].
 
-始めるには
+## Setup
 
-1. Datadog API キーとアプリケーションキーを GitHub リポジトリにシークレットとして追加します。詳しくは、[API とアプリケーションキー][2]を参照してください。
-2. GitHub のワークフローで、`DataDog/synthetics-ci-github-action` を使用します。
+To get started:
 
-ワークフローは、[シンプル](#simple-workflows)または[複雑](#complex-workflows)にすることができます。
+1. Add your Datadog API and Application Keys as secrets to your GitHub repository. For more information, see [API and Application Keys][2].
+2. In your GitHub workflow, use `DataDog/synthetics-ci-github-action`.
 
-## シンプルなワークフロー
+Your workflow can be [simple](#simple-workflows) or [complex](#complex-workflows).
 
-### 公開 ID を使用したワークフロー例
+## Simple workflows
+
+### Example workflow using public IDs
 
 ```yaml
 name: Run Synthetic tests using the test public IDs
@@ -31,14 +33,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Run Datadog Synthetic tests
-        uses: DataDog/synthetics-ci-github-action@v0.17.0
+        uses: DataDog/synthetics-ci-github-action@v1.6.1
         with:
           api_key: ${{secrets.DD_API_KEY}}
           app_key: ${{secrets.DD_APP_KEY}}
           public_ids: 'abc-d3f-ghi, jkl-mn0-pqr'
 ```
 
-### 既存の `synthetics.json` ファイルを使用したワークフロー例
+### Example workflow using an existing `synthetics.json` file
 
 ```yaml
 name: Run Synthetic tests using an existing synthetics.json file
@@ -49,19 +51,19 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Run Datadog Synthetic tests
-        uses: DataDog/synthetics-ci-github-action@v0.17.0
+        uses: DataDog/synthetics-ci-github-action@v1.6.1
         with:
           api_key: ${{secrets.DD_API_KEY}}
           app_key: ${{secrets.DD_APP_KEY}}
 ```
 
-テストファイルの例としては、この [`test.synthetics.json` ファイル][12]を参照してください。
+For an example test file, see this [`test.synthetics.json` file][12].
 
-**注**: デフォルトでは、このワークフローは `{,!(node_modules)/**/}*.synthetics.json` ファイルにリストされたすべてのテストを実行します (`node_modules` フォルダ内のものを除き、`.synthetics.json` で終わるすべてのファイルです)。また、`public_id` を指定するか、検索クエリを使って Synthetic テストのリストをトリガーすることができます。
+**Note**: By default, this workflow runs all the tests listed in `{,!(node_modules)/**/}*.synthetics.json` files (every file ending with `.synthetics.json` except for those in the `node_modules` folder). You can also trigger a list of Synthetic tests by specifying a `public_id` or using a search query.
 
-## 複雑なワークフロー
+## Complex workflows
 
-### `test_search_query` を使用したワークフロー例
+### Example workflow using the `test_search_query`
 
 ```yaml
 name: Run Synthetic tests by test tag
@@ -72,14 +74,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Run Datadog Synthetic tests
-        uses: DataDog/synthetics-ci-github-action@v0.17.0
+        uses: DataDog/synthetics-ci-github-action@v1.6.1
         with:
           api_key: ${{secrets.DD_API_KEY}}
           app_key: ${{secrets.DD_APP_KEY}}
           test_search_query: 'tag:e2e-tests'
 ```
 
-### テスト検索クエリと変数のオーバーライドを使用したワークフロー例
+### Example workflow using a test search query and variable overrides
 
 ```yaml
 name: Run Synthetic tests using search query
@@ -90,7 +92,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Run Datadog Synthetic tests
-        uses: DataDog/synthetics-ci-github-action@v0.17.0
+        uses: DataDog/synthetics-ci-github-action@v1.6.1
         with:
           api_key: ${{secrets.DD_API_KEY}}
           app_key: ${{secrets.DD_APP_KEY}}
@@ -98,9 +100,9 @@ jobs:
           variables: 'START_URL=https://staging.website.com,PASSWORD=stagingpassword'
 ```
 
-### `config_path` によるグローバル構成オーバーライドを使用したワークフロー例
+### Example workflow using a global configuration file with `config_path`
 
-この GitHub Action は、グローバルな `datadog-ci.config.json` ファイルへのパスをオーバーライドします。
+By default, the path to the global configuration file is `datadog-ci.json`. You can override this path with the `config_path` input.
 
 ```yaml
 name: Run Synthetic tests with custom config
@@ -111,87 +113,56 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Run Datadog Synthetic tests
-        uses: DataDog/synthetics-ci-github-action@v0.17.0
+        uses: DataDog/synthetics-ci-github-action@v1.6.1
         with:
           api_key: ${{secrets.DD_API_KEY}}
           app_key: ${{secrets.DD_APP_KEY}}
-          config_path: './synthetics-config.json'
+          config_path: './global.config.json'
 ```
 
-テストファイルの例としては、この [`global.config.json` ファイル][13] をご覧ください。
+For an example of a global configuration file, see this [`global.config.json` file][13].
 
-## 入力
+## Inputs
 
-| 名前                      | タイプ    | 要件 | 説明                                                                                                                                                                                                                                  |
+| Name                      | Type    | Requirement | Description                                                                                                                                                                                                                                  |
 | ------------------------- | ------- | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `api_key`                 | 文字列  | _必須_  | Datadog API キー。このキーは [Datadog 組織][2]によって作成され、[シークレット][3]として保存する必要があります。**デフォルト:** なし。                                                                                                        |
-| `app_key`                 | 文字列  | _必須_  | Datadog アプリケーションキー。このキーは [Datadog 組織][2]によって作成され、[シークレット][3]として保存する必要があります。**デフォルト:** なし。                                                                                                |
-| `public_ids`              | 文字列  | _オプション_  | トリガーしたい Synthetic テストの公開 ID をカンマで区切ったリスト。値を指定しない場合は、`synthetics.json` という名前のファイルを検索します。**デフォルト:** なし。                                                             |
-| `test_search_query`       | 文字列  | _オプション_  | [検索クエリ][5]に対応するトリガーテスト。**デフォルト:** なし。                                                                                                                                                                       |
-| `subdomain`               | 文字列  | _オプション_  | Datadog アプリケーションにアクセスするために設定されたカスタムサブドメインの名前。Datadog にアクセスするための URL が `myorg.datadoghq.com` である場合、サブドメインの値は `myorg` に設定する必要があります。**デフォルト:** `app`。                                     |
-| `files`                   | 文字列  | _オプション_  | Synthetic テストのコンフィギュレーションファイルを検出するための Glob パターン。**デフォルト:** `{,!(node_modules)/**/}*.synthetics.json`。                                                                                                                           |
-| `datadog_site`            | 文字列  | _オプション_  | データ送信先の [Datadog サイト][11]。**デフォルト:** `datadoghq.com`。                                                                                                                                                                        |
-| `config_path`             | 文字列  | _オプション_  | テストを起動するときに使用される[グローバル JSON 構成][4]。詳細は[コンフィギュレーションファイル例][13]を参照してください。**デフォルト:** `datadog-ci.json`。                                                                               |
-| `variables`               | 文字列  | _オプション_  | Synthetic テストに使用するグローバル変数をカンマで区切ったリスト。例: `START_URL=https://example.org,MY_VARIABLE=My title`。**デフォルト:** `[]`。                                                                                   |
-| `junit_report`            | 文字列  | _オプション_  | JUnit レポートを生成したい場合のファイル名。**デフォルト:** なし。                                                                                                                                                              |
-| `tunnel`                  | boolean | _オプション_  | [Continuous Testing Tunnel][9] を使用して、テストバッチを実行します。**デフォルト:** `false`。                                                                                                                                                     |
-| `polling_timeout`         | 数値  | _オプション_  | アクションがテスト結果のポーリングを停止するまでの時間 (ミリ秒単位)。CI レベルでは、この時間以降に完了したテスト結果は失敗とみなされます。**デフォルト:** 30 分。                                            |
-| `fail_on_critical_errors` | boolean | _オプション_  | テストがトリガーされなかったり、Datadog から結果を取得できなかったりした場合に、CI ジョブを失敗させます。**デフォルト:** `false`                                                                                                                              |
-| `fail_on_missing_tests`   | boolean | _オプション_  | パブリック ID (`public_ids` を使用するか、[テストファイル][12]にリストされている) を持つ指定されたテストが少なくとも 1 つ実行中に見つからない場合 (例えば、プログラム上または Datadog サイトで削除された場合)、CI ジョブを失敗させます。**デフォルト:** `false` |
-| `fail_on_timeout`         | boolean | _オプション_  | 少なくとも 1 つのテストがデフォルトのテストタイムアウトを超えた場合、CI ジョブを失敗させます。**デフォルト:** `true`                                                                                                                                                  |
+| `api_key`                 | string  | _required_  | Your Datadog API key. This key is created by your [Datadog organization][2] and should be stored as a [secret][3]. **Default:** none.                                                                                                        |
+| `app_key`                 | string  | _required_  | Your Datadog Application key. This key is created by your [Datadog organization][2] and should be stored as a [secret][3]. **Default:** none.                                                                                                |
+| `public_ids`              | string  | _optional_  | Comma-separated list of public IDs for Synthetic tests you want to trigger. If no value is provided, the action looks for files named with `synthetics.json`. **Default:** none.                                                             |
+| `test_search_query`       | string  | _optional_  | Trigger tests corresponding to a [search query][5]. **Default:** none.                                                                                                                                                                       |
+| `subdomain`               | string  | _optional_  | The name of the custom subdomain set to access your Datadog application. If the URL used to access Datadog is `myorg.datadoghq.com`, the subdomain value needs to be set to `myorg`. **Default:** `app`.                                     |
+| `files`                   | string  | _optional_  | Glob pattern to detect Synthetic test configuration files. **Default:** `{,!(node_modules)/**/}*.synthetics.json`.                                                                                                                           |
+| `datadog_site`            | string  | _optional_  | The [Datadog site][11] to send data to. **Default:** `datadoghq.com`.                                                                                                                                                                        |
+| `config_path`             | string  | _optional_  | The [global JSON configuration][4] to be used when launching tests. See the [example configuration file][13] for more details. **Default:** `datadog-ci.json`.                                                                               |
+| `variables`               | string  | _optional_  | Comma-separated list of global variables to use for Synthetic tests. For example: `START_URL=https://example.org,MY_VARIABLE=My title`. **Default:** `[]`.                                                                                   |
+| `junit_report`            | string  | _optional_  | The filename for a JUnit report if you want to generate one. **Default:** none.                                                                                                                                                              |
+| `tunnel`                  | boolean | _optional_  | Use the [Continuous Testing Tunnel][9] to execute your test batch. **Default:** `false`.                                                                                                                                                     |
+| `polling_timeout`         | number  | _optional_  | The duration (in milliseconds) after which the action stops polling for test results. At the CI level, test results completed after this duration are considered failed. **Default:** 30 minutes.                                            |
+| `fail_on_critical_errors` | boolean | _optional_  | Fail the CI job if no tests were triggered, or results could not be fetched from Datadog. **Default:** `false`.                                                                                                                              |
+| `fail_on_missing_tests`   | boolean | _optional_  | Fail the CI job if at least one specified test with a public ID (using `public_ids` or listed in a [test file][12]) is missing in a run (for example, if it has been deleted programmatically or on the Datadog site). **Default:** `false`. |
+| `fail_on_timeout`         | boolean | _optional_  | Fail the CI job if at least one test exceeds the default test timeout. **Default:** `true`.                                                                                                                                                  |
 
-## 開発
+## Contributing
 
-```bash
+See [CONTRIBUTING.md](./CONTRIBUTING.md)
 
+## Further reading
 
-yarn test
+Additional helpful documentation, links, and articles:
 
-# プロジェクト構築
-yarn build
-
-# プロジェクトとその依存関係をリリース用にコンパイルする
-yarn package
-```
-
-### プロセスのリリース
-
-新しいバージョンの `synthetics-ci-github-action` をリリースするには:
-
-1. バージョンアップのための新しいブランチを作成します。
-2. パッケージのバージョンを更新するには、変更の内容に応じて `yarn version [--patch|--minor|--major]` を使ってください。何をインクリメントする必要があるかは [Semantic Versioning][7] を参照してください。`yarn version` コマンドを実行すると、新しいコミット `vX.Y.Z` と新しいタグが Git ツリーに追加されるはずです。
-3. `README.md` サンプルバージョンを更新し、`yarn build && yarn package` でプロジェクトのビルドとパッケージを行います。
-
-   これらの変更は、必ず **`vX.Y.Z` タグを含む同じコミット**内でコミットするようにしてください。`git commit --amend` または `git rebase -i HEAD~2` を使って、変更を同じコミットにマージすることができます。
-
-4. ブランチをリリースタグ (`git push --tags`) と一緒に上流 (GitHub) にプッシュします。
-
-   説明で紹介した変更点を含むプルリクエストを作成します。このプルリクエストには少なくとも 1 つの承認が必要です。
-
-5. プルリクエストをマージします。
-6. [タグページ][8]から GitHub Release を作成し、変更点を記述してください。
-
-⚠️ リリースバージョンが期待される形式 `vX.Y.Z` に従っていることを確認します。
-
-リリースが作成されると、新しいバージョンの Github Action がワークフローとして利用できるようになります。
-
-## その他の参考資料
-
-お役に立つドキュメント、リンクや記事:
-
-- [Continuous Testing と CI/CD の構成][6]
-- [Datadog を使った継続的テストのベストプラクティス][10]
+- [Continuous Testing and CI/CD Configuration][6]
+- [Best practices for continuous testing with Datadog][10]
 
 [1]: https://github.com/DataDog/datadog-ci
-[2]: https://docs.datadoghq.com/ja/account_management/api-app-keys/
+[2]: https://docs.datadoghq.com/account_management/api-app-keys/
 [3]: https://docs.github.com/en/actions/reference/encrypted-secrets
-[4]: https://docs.datadoghq.com/ja/continuous_testing/cicd_integrations/configuration/?tab=npm#setup-the-client
-[5]: https://docs.datadoghq.com/ja/synthetics/search/#search
-[6]: https://docs.datadoghq.com/ja/continuous_testing/cicd_integrations/configuration
+[4]: https://docs.datadoghq.com/continuous_testing/cicd_integrations/configuration/?tab=npm#setup-the-client
+[5]: https://docs.datadoghq.com/synthetics/search/#search
+[6]: https://docs.datadoghq.com/continuous_testing/cicd_integrations/configuration
 [7]: https://semver.org/#summary
 [8]: https://github.com/DataDog/synthetics-ci-github-action/tags
-[9]: https://docs.datadoghq.com/ja/continuous_testing/testing_tunnel/
+[9]: https://docs.datadoghq.com/continuous_testing/testing_tunnel/
 [10]: https://www.datadoghq.com/blog/best-practices-datadog-continuous-testing/
-[11]: https://docs.datadoghq.com/ja/getting_started/site
-[12]: https://docs.datadoghq.com/ja/continuous_testing/cicd_integrations/configuration/?tab=npm#test-files
+[11]: https://docs.datadoghq.com/getting_started/site
+[12]: https://docs.datadoghq.com/continuous_testing/cicd_integrations/configuration/?tab=npm#test-files
 [13]: https://github.com/DataDog/datadog-ci/blob/master/.github/workflows/e2e/global.config.json

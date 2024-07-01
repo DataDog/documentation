@@ -1,42 +1,46 @@
 ---
-cascade:
-  algolia:
-    category: ガイド
-    rank: 20
-    subcategory: サーバーレスモニタリングガイド
-disable_toc: true
-kind: ガイド
+title: Serverless Monitoring Guides
+kind: guide
 private: true
-title: サーバーレスモニタリングガイド
+disable_toc: true
+cascade:
+    algolia:
+        rank: 20
+        category: Guide
+        subcategory: Serverless Monitoring Guides
 ---
 
-## 一般的なサーバーレスガイド
+## General serverless guides
 
-{{< whatsnext desc="サーバーレスアプリケーションを監視するためのベストプラクティス" >}}
-    {{< nextlink href="/serverless/guide/connect_invoking_resources" >}}Lambda 関数を呼び出すリソースの詳細な視覚化{{< /nextlink >}}
-    {{< nextlink href="/serverless/guide/serverless_warnings" >}}サーバーレスの警告{{< /nextlink >}}
-    {{< nextlink href="/serverless/guide/serverless_tagging" >}}サーバーレスのタグ付け{{< /nextlink >}}
-    {{< nextlink href="/serverless/guide/agent_configuration" >}}Agent 構成{{< /nextlink >}}
-    {{< nextlink href="/serverless/guide/opentelemetry" >}}サーバーレスと OpenTelemetry{{< /nextlink >}}
+{{< whatsnext desc="Best practices for monitoring your serverless applications" >}}
+    {{< nextlink href="/serverless/guide/connect_invoking_resources" >}}Deeper visibility into resources invoking Lambda functions{{< /nextlink >}}
+    {{< nextlink href="/serverless/guide/serverless_warnings" >}}Serverless Warnings{{< /nextlink >}}
+    {{< nextlink href="/serverless/guide/serverless_tagging" >}}Serverless Tagging{{< /nextlink >}}
+    {{< nextlink href="/serverless/guide/agent_configuration" >}}Agent Configuration{{< /nextlink >}}
+    {{< nextlink href="/serverless/guide/opentelemetry" >}}Serverless and OpenTelemetry{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## Datadog Forwarder を使ったインストール
-
-{{< whatsnext desc="Datadog Forwarder を使用して監視するように以前に設定されたアプリケーションのインストール手順" >}}
-    {{< nextlink href="/serverless/guide/datadog_forwarder_node" >}}Datadog Forwarder を使った Node.js サーバーレスアプリケーションのインスツルメンテーション{{< /nextlink >}}
-    {{< nextlink href="/serverless/guide/datadog_forwarder_python" >}}Datadog Forwarder を使った Python サーバーレスアプリケーションのインスツルメンテーション{{< /nextlink >}}
-    {{< nextlink href="/serverless/guide/datadog_forwarder_java" >}}Datadog Forwarder を使った Java サーバーレスアプリケーションのインスツルメンテーション{{< /nextlink >}}
-    {{< nextlink href="/serverless/guide/datadog_forwarder_go" >}}Datadog Forwarder を使った Go サーバーレスアプリケーションのインスツルメンテーション{{< /nextlink >}}
-    {{< nextlink href="/serverless/guide/datadog_forwarder_dotnet" >}}Datadog Forwarder を使った .NET サーバーレスアプリケーションのインスツルメンテーション{{< /nextlink >}}
-    {{< nextlink href="/serverless/guide/extension_motivation" >}}Datadog Lambda 拡張機能への移行を決定する{{< /nextlink >}}
+{{< whatsnext desc="Azure App Service and Container Apps" >}}
+    {{< nextlink href="/serverless/guide/azure_app_service_linux_sidecar" >}}Instrumenting Linux containers on Azure App Service using Azure Sidecar{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## インストール時のトラブルシューティング
+## Install using the Datadog Forwarder
 
-{{< whatsnext desc="インストール時のよくある問題とトラブルシューティングのヒント" >}}
-    {{< nextlink href="/serverless/troubleshooting" >}}サーバーレスモニタリングのトラブルシューティング{{< /nextlink >}}
-    {{< nextlink href="/serverless/guide/serverless_tracing_and_webpack" >}}Node.js の Lambda トレースと Webpack の互換性{{< /nextlink >}}
-    {{< nextlink href="/serverless/guide/serverless_package_too_large" >}}サーバーレスパッケージが大きすぎるエラーのトラブルシューティング{{< /nextlink >}}
-    {{< nextlink href="/serverless/guide/handler_wrapper" >}}Lambda ハンドラーをコードでラップする{{< /nextlink >}}
-    {{< nextlink href="/serverless/guide/layer_not_authorized" >}}レイヤーが認可されていないエラーのトラブルシューティング{{< /nextlink >}}
+{{< whatsnext desc="Installation instructions for applications previously set up to be monitored using the Datadog Forwarder" >}}
+    {{< nextlink href="/serverless/guide/datadog_forwarder_node" >}}Instrumenting Node.js Serverless Applications Using the Datadog Forwarder{{< /nextlink >}}
+    {{< nextlink href="/serverless/guide/datadog_forwarder_python" >}}Instrumenting Python Serverless Applications Using the Datadog Forwarder{{< /nextlink >}}
+    {{< nextlink href="/serverless/guide/datadog_forwarder_java" >}}Instrumenting Java Serverless Applications Using the Datadog Forwarder{{< /nextlink >}}
+    {{< nextlink href="/serverless/guide/datadog_forwarder_go" >}}Instrumenting Go Serverless Applications Using the Datadog Forwarder{{< /nextlink >}}
+    {{< nextlink href="/serverless/guide/datadog_forwarder_dotnet" >}}Instrumenting .NET Serverless Applications Using the Datadog Forwarder{{< /nextlink >}}
+    {{< nextlink href="/serverless/guide/extension_motivation" >}}Deciding to migrate to the Datadog Lambda Extension{{< /nextlink >}}
+{{< /whatsnext >}}
+
+## Troubleshoot your installation
+
+{{< whatsnext desc="Common installation issues and tips for troubleshooting" >}}
+    {{< nextlink href="/serverless/troubleshooting" >}}Troubleshooting Serverless Monitoring{{< /nextlink >}}
+    {{< nextlink href="/serverless/guide/serverless_tracing_and_webpack" >}}Node.js Lambda Tracing and Webpack Compatibility{{< /nextlink >}}
+    {{< nextlink href="/serverless/guide/serverless_package_too_large" >}}Troubleshooting Serverless Package Too Large Errors{{< /nextlink >}}
+    {{< nextlink href="/serverless/guide/handler_wrapper" >}}Wrap Your Lambda Handler in Code{{< /nextlink >}}
+    {{< nextlink href="/serverless/guide/layer_not_authorized" >}}Troubleshooting Layer Not Authorized Errors{{< /nextlink >}}
 {{< /whatsnext >}}

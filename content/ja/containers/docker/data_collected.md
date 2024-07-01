@@ -1,20 +1,20 @@
 ---
+title: Docker Data Collected
 aliases:
-- /ja/agent/docker/data_collected
-title: Docker の収集データ
+- /agent/docker/data_collected
 ---
 
-## Docker インテグレーション
+## Docker integration
 
-### メトリクス
+### Metrics
 
-Docker コンテナにデプロイされた Agent が収集するメトリクス:
+Metrics collected by the Agent when deployed in a Docker container:
 
 {{< get-metrics-from-git "docker_daemon" >}}
 
-### イベント
+### Events
 
-Docker Agent は以下のイベントを生成します。
+The Docker Agent produces the following events:
 
 - Delete Image
 - Die
@@ -27,28 +27,28 @@ Docker Agent は以下のイベントを生成します。
 - Restart Daemon
 - Update
 
-### サービスチェック
+### Service checks
 
 {{< get-service-checks-from-git "docker" >}}
 
-**注**: `docker.exit` を使用するには、Docker `conf.yaml` ファイルに `collect_exit_codes: true` を追加し、Agent を再起動します。
+**Note**: To use `docker.exit`, add `collect_exit_codes: true` in your Docker `conf.yaml` file and restart the Agent.
 
-## コンテナインテグレーション
+## Container integration
 
-### メトリクス
-{{< get-metrics-from-git "コンテナ" >}}
+### Metrics
+{{< get-metrics-from-git "container" >}}
 
-## Containerd インテグレーション
+## Containerd integration
 
-### メトリクス
+### Metrics
 
 {{< get-metrics-from-git "containerd" >}}
 
-### イベント
+### Events
 
-containerd チェックは、イベントを収集できます。`filters` を使用して関連イベントを選択します。詳細については、サンプル [`containerd.d/conf.yaml`][1] を参照してください。
+The containerd check can collect events. Use `filters` to select the relevant events. See the sample [`containerd.d/conf.yaml`][1] for more details.
 
-### サービスチェック
+### Service checks
 
 {{< get-service-checks-from-git "containerd" >}}
 

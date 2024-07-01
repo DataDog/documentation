@@ -1,34 +1,35 @@
 ---
-description: iOS アプリケーションからログを収集する。
+title: iOS Log Collection
+kind: documentation
+description: Collect logs from your iOS applications.
 further_reading:
-- link: https://github.com/DataDog/dd-sdk-ios
-  tag: GitHub
-  text: dd-sdk-ios ソースコード
+- link: "https://github.com/DataDog/dd-sdk-ios"
+  tag: Source Code
+  text: dd-sdk-ios Source code
 - link: logs/explorer
-  tag: ドキュメント
-  text: ログの調査方法
-kind: ドキュメント
-title: iOS ログ収集
+  tag: Documentation
+  text: Learn how to explore your logs
+
 ---
-## 概要
+## Overview
 
-[Datadog の `dd-sdk-ios` クライアント側ロギングライブラリ][1]を使用すると、iOS アプリケーションから Datadog へログを送信すると共に、次の機能を利用できます。
+Send logs to Datadog from your iOS applications with [Datadog's `dd-sdk-ios` client-side logging library][1] and leverage the following features:
 
-* Datadog に JSON 形式でネイティブに記録する。
-* デフォルトを使用し、送信される各ログにカスタム属性を追加する。
-* 実際のクライアント IP アドレスとユーザーエージェントを記録する。
-* 自動一括ポストによって最適化されたネットワークの利用を活用します。
+* Log to Datadog in JSON format natively.
+* Use default and add custom attributes to each log sent.
+* Record real client IP addresses and User-Agents.
+* Leverage optimized network usage with automatic bulk posts.
 
-`dd-sdk-ios` ライブラリは、iOS 11 以降の全バージョンをサポートしています。
+The `dd-sdk-ios` library supports all versions of iOS 11 or later.
 
-## セットアップ
+## Setup
 
-1. パッケージマネージャーに応じてライブラリを依存関係として宣言します。
+1. Declare the library as a dependency depending on your package manager:
 
 {{< tabs >}}
 {{% tab "CocoaPods" %}}
 
-[CocoaPods][6] を使用して、 `dd-sdk-ios`をインストールできます。
+You can use [CocoaPods][6] to install `dd-sdk-ios`:
 ```
 pod 'DatadogCore'
 pod 'DatadogLogs'
@@ -39,12 +40,12 @@ pod 'DatadogLogs'
 {{% /tab %}}
 {{% tab "Swift Package Manager (SPM)" %}}
 
-Apple の Swift Package Manager を使用して統合するには、`Package.swift` に以下を依存関係として追加します。
+To integrate using Apple's Swift Package Manager, add the following as a dependency to your `Package.swift`:
 ```swift
 .package(url: "https://github.com/Datadog/dd-sdk-ios.git", .upToNextMajor(from: "2.0.0"))
 ```
 
-プロジェクトで、以下のライブラリをリンクします。
+In your project, link the following libraries:
 ```
 DatadogCore
 DatadogLogs
@@ -53,12 +54,12 @@ DatadogLogs
 {{% /tab %}}
 {{% tab "Carthage" %}}
 
-[Carthage][7] を使用して、 `dd-sdk-ios`をインストールできます。
+You can use [Carthage][7] to install `dd-sdk-ios`:
 ```
 github "DataDog/dd-sdk-ios"
 ```
 
-Xcode で、以下のフレームワークをリンクします。
+In Xcode, link the following frameworks:
 ```
 DatadogInternal.xcframework
 DatadogCore.xcframework
@@ -70,9 +71,9 @@ DatadogLogs.xcframework
 {{% /tab %}}
 {{< /tabs >}}
 
-2. アプリケーションコンテキストと [Datadog クライアントトークン][2]でライブラリを初期化します。セキュリティ上の理由から、クライアントトークンを使用する必要があります。API キーがクライアント側の iOS アプリケーションの IPA バイトコードで公開されてしまうため、[Datadog API キー][3]を使用して `dd-sdk-ios` ライブラリを構成することはできません。
+2. Initialize the library with your application context and your [Datadog client token][2]. For security reasons, you must use a client token: you cannot use [Datadog API keys][3] to configure the `dd-sdk-ios` library as they would be exposed client-side in the iOS application IPA byte code. 
 
-クライアントトークンのセットアップについて、詳しくは[クライアントトークンに関するドキュメント][2]を参照してください。
+For more information about setting up a client token, see the [client token documentation][2].
 
 {{< site-region region="us" >}}
 {{< tabs >}}
@@ -296,23 +297,23 @@ configuration.site = [DDSite ap1];
 {{< /tabs >}}
 {{< /site-region >}}
 
-GDPR 規定を遵守するため、SDK は初期化時に `trackingConsent` の値を求めます。
-`trackingConsent` は以下のいずれかの値になります。
+To be compliant with the GDPR regulation, the SDK requires the `trackingConsent` value at initialization.
+The `trackingConsent` can be one of the following values:
 
-- `.pending`: - SDK はデータの収集とバッチ処理を開始しますが、Datadog へは送信しません。SDK はバッチ処理が完了したデータをどうするかについての新たな同意値が得られるまで待機します。
-- `.granted`: SDK はデータの収集を開始し、Datadog へ送信します。
-- `.notGranted`: SDK はデータを収集しません。ログ、トレース、RUM イベントは Datadog に送信されません。 
+- `.pending`: The SDK starts collecting and batching the data but does not send it to Datadog. The SDK waits for the new tracking consent value to decide what to do with the batched data.
+- `.granted`: The SDK starts collecting the data and sends it to Datadog.
+- `.notGranted`: The SDK does not collect any data: logs, traces, and RUM events are not sent to Datadog.
 
-SDK の初期化後に追跡同意値を変更するには、`Datadog.set(trackingConsent:)` API 呼び出しを使用します。
+To change the tracking consent value after the SDK is initialized, use the `Datadog.set(trackingConsent:)` API call.
 
-SDK は新しい値に応じて動作を変更します。例えば、現在の追跡に関する同意が `.pending` であった場合:
+The SDK changes its behavior according to the new value. For example, if the current tracking consent is `.pending`:
 
-- `.granted` に変更すると、SDK は現在および今後のすべてのデータを Datadog に送信します。
-- `.notGranted` に変更すると、SDK は現在のデータをすべて消去し、今後のデータ収集を停止します。
+- If changed to `.granted`, the SDK send all current and future data to Datadog;
+- If changed to `.notGranted`, the SDK wipe all current data and stop collecting any future data.
 
-データは Datadog にアップロードされる前に、[アプリケーションサンドボックス][6]のキャッシュディレクトリ (`Library/Caches`) に平文で保存されます。キャッシュディレクトリはデバイスにインストールされた他のアプリからは読み取ることができません。
+Before data is uploaded to Datadog, it is stored in cleartext in the cache directory (`Library/Caches`) of your [application sandbox][6]. The cache directory cannot be read by any other app installed on the device.
 
-アプリケーションを作成する際、開発ログを有効にし、提供されたレベルと同等以上の優先度を持つ SDK のすべての内部メッセージをコンソールにログ出力するようにしてください。
+When writing your application, enable development logs to log to console all internal messages in the SDK with a priority equal to or higher than the provided level. 
 
 {{< tabs >}}
 {{% tab "Swift" %}}
@@ -327,7 +328,7 @@ DDDatadog.verbosityLevel = DDSDKVerbosityLevelDebug;
 {{% /tab %}}
 {{< /tabs >}}
 
-3. `Logger` の構成：
+3. Configure the `Logger`:
 
 {{< tabs >}}
 {{% tab "Swift" %}}
@@ -354,7 +355,7 @@ DDLogger *logger = [DDLogger createWithConfiguration:configuration];
 {{% /tab %}}
 {{< /tabs >}}
 
-4. 次のいずれかのメソッドで、カスタムログエントリを Datadog に直接送信します。
+4. Send a custom log entry directly to Datadog with one of the following methods:
 
 {{< tabs >}}
 {{% tab "Swift" %}}
@@ -379,9 +380,9 @@ logger.critical("Something critical happened!")
 {{% /tab %}}
 {{< /tabs >}}
 
-**注:** 新規作成した RUM ビューにカスタム iOS ログを追加するには、`viewDidAppear` メソッドを使ってログを適用します。`viewDidAppear` が発生する前に `viewDidLoad` などでログを適用する場合、ログはその前の RUM ビューに適用され、厳密にはこれも依然としてアクティブなビューです。
+**Note:** To add a custom iOS log to a newly created RUM view, apply it with the `viewDidAppear` method. If the log is applied before `viewDidAppear` occurs, such as at `viewDidLoad`, the log is applied to the preceding RUM view, which is still technically the active view.
 
-5. (任意) ログメッセージと一緒に `attributes` のマップを提供し、発行されたログに属性を追加します。マップの各エントリーは属性として追加されます。
+5. (Optional) Provide a map of `attributes` alongside your log message to add attributes to the emitted log. Each entry of the map is added as an attribute.
 
 {{< tabs >}}
 {{% tab "Swift" %}}
@@ -396,34 +397,34 @@ logger.info("Clicked OK", attributes: ["context": "onboarding flow"])
 {{% /tab %}}
 {{< /tabs >}}
 
-## 高度なロギング
+## Advanced logging
 
-### 初期化
+### Initialization
 
-ログを Datadog に送信するようにロガーを初期化する際に、`Logger.Configuration` の次のメソッドを使用できます。
+The following methods in `Logger.Configuration` can be used when initializing the logger to send logs to Datadog:
 
-| メソッド | 説明 |
+| Method | Description |
 |---|---|
-| `Logger.Configuration.networkInfoEnabled` | すべてのログに `network.client.*` 属性を追加します。デフォルトで記録されるデータには、`reachability` (`yes`、`no`、`maybe`)、`available_interfaces` (`wifi`、`cellular` など)、`sim_carrier.name` (例: `AT&T - US`)、`sim_carrier.technology` (`3G`、`LTE` など)、`sim_carrier.iso_country` (例: `US`)があります。 |
-| `Logger.Configuration.service` | Datadog に送信されるすべてのログにアタッチされる `service` [標準属性][4]の値を設定します。 |
-| `Logger.Configuration.consoleLogFormat` | デバッガコンソールにログを送信します。 |
-| `Logger.Configuration.remoteSampleRate` | Datadog に送信するログのサンプルレートを設定します。 |
-| `Logger.Configuration.name` | Datadog に送信されるすべてのログにアタッチされる `logger.name` 属性の値を設定します。 |
+| `Logger.Configuration.networkInfoEnabled` | Add `network.client.*` attributes to all logs. The data logged by default is: `reachability` (`yes`, `no`, `maybe`), `available_interfaces` (`wifi`, `cellular`, and more), `sim_carrier.name` (for example: `AT&T - US`), `sim_carrier.technology` (`3G`, `LTE`, and more) and `sim_carrier.iso_country` (for example: `US`). |
+| `Logger.Configuration.service` | Set the value for the `service` [standard attribute][4] attached to all logs sent to Datadog. |
+| `Logger.Configuration.consoleLogFormat` | Send logs to the debugger console. |
+| `Logger.Configuration.remoteSampleRate` | Set the sample rate of logs sent to Datadog. |
+| `Logger.Configuration.name` | Set the value for the `logger.name` attribute attached to all logs sent to Datadog. |
 
-### グローバルコンフィギュレーション
+### Global configuration
 
-以下の方法に従って、指定されたロガーによって送信されるすべてのログにタグと属性を追加または削除します。
+Follow the methods below to add or remove tags and attributes to all logs sent by a given logger.
 
-#### グローバルタグ
+#### Global Tags
 
-##### タグを追加
+##### Add Tags
 
-`addTag(withKey:value:)` メソッドを使い、指定されたロガーから送信されるすべてのログにタグを追加します。
+Use the `addTag(withKey:value:)` method to add tags to all logs sent by a specific logger:
 
 {{< tabs >}}
 {{% tab "Swift" %}}
 ```swift
-// これにより、"build_configuration:debug" タグが追加されます
+// This adds a tag "build_configuration:debug"
 logger.addTag(withKey: "build_configuration", value: "debug")
 ```
 {{% /tab %}}
@@ -434,16 +435,16 @@ logger.addTag(withKey: "build_configuration", value: "debug")
 {{% /tab %}}
 {{< /tabs >}}
 
-`<TAG_VALUE>` は `String` である必要があります。
+The `<TAG_VALUE>` must be a `String`.
 
-##### タグを削除
+##### Remove Tags
 
-`removeTag(withKey:)` メソッドを使い、指定されたロガーから送信されるすべてのログからタグを削除します。
+Use the `removeTag(withKey:)` method to remove tags from all logs sent by a specific logger:
 
 {{< tabs >}}
 {{% tab "Swift" %}}
 ```swift
-// これにより "build_configuration" で始まるすべてのタグが削除されます
+// This removes any tag starting with "build_configuration"
 logger.removeTag(withKey: "build_configuration")
 ```
 {{% /tab %}}
@@ -454,27 +455,27 @@ logger.removeTag(withKey: "build_configuration")
 {{% /tab %}}
 {{< /tabs >}}
 
-詳しくは、[タグ入門][5]をご覧ください。
+For more information, see [Getting Started with Tags][5].
 
-#### グローバル属性
+#### Global Attributes
 
-##### 属性を追加
+##### Add attributes
 
-デフォルトで、ロガーにより送信されるすべてのログに次の属性が追加されます。
+By default, the following attributes are added to all logs sent by a logger:
 
-* `http.useragent` と抽出された `device` と `OS` プロパティ
-* `network.client.ip` と抽出された地理的プロパティ (`country`, `city`)
-* `logger.version`、Datadog SDK バージョン
+* `http.useragent` and its extracted `device` and `OS` properties
+* `network.client.ip` and its extracted geographical properties (`country`, `city`)
+* `logger.version`, Datadog SDK version
 * `logger.thread_name`, (`main`, `background`)
-* `version`、`Info.plist` から抽出されたクライアントのアプリバージョン
-* `environment`、SDK の初期化に使われる環境名
+* `version`, client's app version extracted from `Info.plist`
+* `environment`, the environment name used to initialize the SDK
 
-`addAttribute(forKey:value:)` メソッドを使い、指定されたロガーから送信されるすべてのログにカスタム属性を追加します。
+Use the `addAttribute(forKey:value:)` method to add a custom attribute to all logs sent by a specific logger:
 
 {{< tabs >}}
 {{% tab "Swift" %}}
 ```swift
-// これにより、文字列値を持つ "device-model" 属性が追加されます
+// This adds an attribute "device-model" with a string value
 logger.addAttribute(forKey: "device-model", value: UIDevice.current.model)
 ```
 {{% /tab %}}
@@ -485,16 +486,16 @@ logger.addAttribute(forKey: "device-model", value: UIDevice.current.model)
 {{% /tab %}}
 {{< /tabs >}}
 
-`<ATTRIBUTE_VALUE>` には、`String`、`Date`、カスタム `Codable` データモデルなど、`Encodable` に準拠したものを指定することができます。
+The `<ATTRIBUTE_VALUE>` can be anything conforming to `Encodable` such as `String`, `Date`, custom `Codable` data model, and more.
 
-##### 属性を削除
+##### Remove attributes
 
-`removeAttribute(forKey:)` メソッドを使い、指定されたロガーから送信されるすべてのログからカスタム属性を削除します。
+Use the `removeAttribute(forKey:)` method to remove a custom attribute from all logs sent by a specific logger:
 
 {{< tabs >}}
 {{% tab "Swift" %}}
 ```swift
-// これにより、"device-model" 属性は今後送信されるすべてのログから削除されます。
+// This removes the attribute "device-model" from all further log send.
 logger.removeAttribute(forKey: "device-model")
 ```
 {{% /tab %}}
@@ -505,13 +506,13 @@ logger.removeAttribute(forKey: "device-model")
 {{% /tab %}}
 {{< /tabs >}}
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/dd-sdk-ios
-[2]: /ja/account_management/api-app-keys/#client-tokens
-[3]: /ja/account_management/api-app-keys/#api-keys
-[4]: /ja/logs/processing/attributes_naming_convention/
-[5]: /ja/getting_started/tagging/
+[2]: /account_management/api-app-keys/#client-tokens
+[3]: /account_management/api-app-keys/#api-keys
+[4]: /logs/processing/attributes_naming_convention/
+[5]: /getting_started/tagging/
 [6]: https://support.apple.com/guide/security/security-of-runtime-process-sec15bfe098e/web

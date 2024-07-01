@@ -1,6 +1,6 @@
 ---
+title: Container Agent
 core_product:
-- datadog agent
-title: コンテナ Agent
+  - datadog agent
 ---
-Container Agent は、コンテナ環境上で動作する Datadog Agent のバージョンです。
+The Container Agent is the version of the Datadog Agent that runs on a containerized environment.

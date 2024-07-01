@@ -1,78 +1,86 @@
 ---
-title: Unix ドメインソケット上の DogStatsD
-description: Unix ドメインソケット上の DogStatsD の使用ガイド
+title: DogStatsD over Unix Domain Socket
+kind: documentation
+description: 'Usage documentation for DogStatsD over Unix Domain Sockets'
 aliases:
-  - /ja/metrics/unix_socket/
+    - /developers/metrics/unix_socket/
 further_reading:
-  - link: developers/dogstatsd
-    tag: Documentation
-    text: DogStatsD 入門
-  - link: developers/libraries
-    tag: Documentation
-    text: 公式/コミュニティ作成の API および DogStatsD クライアントライブラリ
-  - link: https://github.com/DataDog/datadog-agent/tree/master/pkg/dogstatsd
-    tag: GitHub
-    text: DogStatsD ソースコード
+    - link: developers/dogstatsd
+      tag: Documentation
+      text: Introduction to DogStatsD
+    - link: developers/libraries
+      tag: Documentation
+      text: Official and Community created API and DogStatsD client libraries
 ---
-バージョン 6.0 以降の Agent は、UDP 転送に代わる手段として、Unix ドメインソケット (UDS) でメトリクスを収集できるようになりました。
 
-UDP は`ローカルホスト`ではたいへんよく機能しますが、コンテナ環境でのセットアップが難しい場合があります。Unix ドメインソケットを使用すると、Datadog Agent コンテナの IP に関係なく、ソケットファイルで接続を確立できます。また、次のような利点もあります。
+Starting with version 6.0, the Agent can ingest metrics with a Unix Domain Socket (UDS) as an alternative to UDP transport.
 
-- ネットワークスタックをバイパスするため、高トラフィック時のパフォーマンスが大幅に改善します。
-- UDP にはエラー処理がありませんが、UDS では Agent をノンブロッキングで使用したまま、パケットの欠落や接続エラーを検出できます。
-- DogStatsD がメトリクスの生成元のコンテナを検出し、それに応じてメトリクスにタグを付けることができます。
+While UDP works great on `localhost`, it can be a challenge to set up in containerized environments. Unix Domain Sockets allow you to establish the connection with a socket file, regardless of the IP of the Datadog Agent container. It also enables the following benefits:
 
-## UDS の仕組み
+- Bypassing the networking stack brings a significant performance improvement for high traffic.
+- While UDP has no error handling, UDS allows the Agent to detect dropped packets and connection errors, while still allowing a non-blocking use.
+- DogStatsD can detect the container from which metrics originated and tag those metrics accordingly.
 
-`IP:port` ペアを使用して接続を確立する代わりに、Unix ドメインソケットは、プレースホルダーソケットファイルを使用します。いったん接続が開かれると、データは UDP と同じ[データグラム形式][1]で転送されます。Agent が再起動した場合、既存のソケットは削除され、新しいソケットに置き換わります。クライアントライブラリはこの変化を検出し、新しいソケットにシームレスに接続します。
+## How it works
 
-**注:**
+Instead of using an `IP:port` pair to establish connections, Unix Domain Sockets use a placeholder socket file. Once the connection is open, data is transmitted in the same [datagram format][1] as for the UDP transport. When the Agent restarts, the existing socket is deleted and replaced by a new one. Client libraries detect this change and connect seamlessly to the new socket.
 
-* UDS は、その目的上、トラフィックがホスト内に制限されます。したがって、メトリクスの送信元となるそれぞれのホストで Datadog Agent を実行する必要があります。
-* UDS はWindows ではサポートされません。
+**Notes:**
 
-## セットアップ
+* By design, UDS traffic is local to the host, which means the Datadog Agent must run on every host you send metrics from.
+* UDS is not supported on Windows.
 
-Unix Domain Socket で DogStatsD をセットアップするには、`dogstatsd_socket` パラメーターを使用して DogStatsD サーバーを有効にします。次に、コードで [DogStatsD クライアント](#dogstatsd-client-configuration) を構成します。
+## Setup
 
-Agent DogStatsD UDS を有効にするには
+To set up DogStatsD with Unix Domain Socket, enable the DogStatsD server through the `dogstatsd_socket` parameter. Then, configure the [DogStatsD client](#dogstatsd-client-configuration) in your code.
+
+To enable the Agent DogStatsD UDS:
 
 {{< tabs >}}
 {{% tab "Host" %}}
 
-1. [Agent のメイン構成ファイル][1]を編集して、DogStatsD がリスニングソケットを作成するパスを `dogstatsd_socket` に設定します。
+1. Create a socket file for DogStatsD to use as a listening socket. For example:
+   ```shell
+   sudo mkdir -p /var/run/datadog/
+   ```
+1. Ensure that the `dd-agent` user has read and write permissions to the socket file:
+   ```shell
+   sudo chown dd-agent:dd-agent /var/run/datadog/
+   ```
+1. Edit the [Agent's main configuration file][1]:
+   1. Set `use_dogstatsd` to `true`.
+   1. Set `dogstatsd_socket` to the path where DogStatsD should create its listening socket:
 
-    ```yaml
-    ## @param dogstatsd_socket - string - optional - default: ""
-    ## Listen for Dogstatsd metrics on a Unix Socket (*nix only).
-    ## Set to a valid and existing filesystem path to enable.
-    #
-    dogstatsd_socket: '/var/run/datadog/dsd.socket'
-    ```
+      ```yaml
+      ## @param dogstatsd_socket - string - optional - default: ""
+      ## Listen for Dogstatsd metrics on a Unix Socket (*nix only).
+      ## Set to a valid and existing filesystem path to enable.
+      #
+      dogstatsd_socket: '/var/run/datadog/dsd.socket'
+      ```
+1. [Restart your Agent][2].
 
-2. [Agent を再起動します][2]。
 
-
-[1]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
-[2]: /ja/agent/guide/agent-commands/
+[1]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
+[2]: /agent/configuration/agent-commands/
 {{% /tab %}}
 {{% tab "Docker" %}}
 
-1. Agent コンテナの環境変数 `DD_DOGSTATSD_SOCKET=<あなたの UDS パス>` でソケットパスを設定します。
+1. Set the socket path with the `DD_DOGSTATSD_SOCKET=<YOUR_UDS_PATH>` environment variable on the Agent container.
 
-2. アプリケーションコンテナ (読み取り専用) と Agent コンテナ (読み書き) の両側でホストディレクトリをマウントし、ソケットファイルをアプリケーションコンテナへアクセスできるようにします。個別のソケットではなく親フォルダーをマウントすることで、DogStatsD が再起動してもソケット通信を維持することができます。
+2. Make the socket file accessible to the application containers by mounting a host directory on both sides (read-only in your application containers and read-write in the Agent container). Mounting the parent folder instead of the individual socket enables socket communication to persist across DogStatsD restarts:
 
-    - `-v /var/run/datadog:/var/run/datadog` で Agent コンテナを起動します。
-    - `-v /var/run/datadog:/var/run/datadog:ro` でアプリケーションコンテナを起動します。
+    - Start the Agent container with `-v /var/run/datadog:/var/run/datadog`
+    - Start your application containers with `-v /var/run/datadog:/var/run/datadog:ro`
 
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-1. Agent コンテナの環境変数 `DD_DOGSTATSD_SOCKET=<YOUR_UDS_PATH>` でソケットパスを設定します (例: `/var/run/datadog/dsd.socket`)。
+1. Set the socket path with the `DD_DOGSTATSD_SOCKET=<YOUR_UDS_PATH>` environment variable on the Agent container (example: `/var/run/datadog/dsd.socket`).
 
-2. アプリケーションコンテナ (読み取り専用) と Agent コンテナ (読み書き) の両側でホストディレクトリをマウントし、ソケットファイルをアプリケーションコンテナへアクセスできるようにします。個別のソケットではなく親フォルダーをマウントすることで、DogStatsD が再起動してもソケット通信を維持することができます。
+2. Make the socket file accessible to the application containers by mounting a host directory on both sides (read-only in your application containers and read-write in the Agent container). Mounting the parent folder instead of the individual socket enables socket communication to persist across DogStatsD restarts.
 
-    - `datadog-agent` コンテナでソケットフォルダーをマウントします。
+    - Mount the socket folder in your `datadog-agent` container:
 
         ```yaml
         volumeMounts:
@@ -85,7 +93,7 @@ Agent DogStatsD UDS を有効にするには
               name: dsdsocket
         ```
 
-    - 同じフォルダーをアプリケーションコンテナで公開します。
+    - Expose the same folder in your application containers:
 
         ```yaml
         volumeMounts:
@@ -99,38 +107,72 @@ Agent DogStatsD UDS を有効にするには
               name: dsdsocket
         ```
 
-      **注**: アプリケーションコンテナでソケットへの書き込みアクセス許可が必要な場合は、 `readOnly: true` を削除してください。
+        **Note**: Remove `readOnly: true` if your application containers need write access to the socket.
+
+{{% /tab %}}
+{{% tab "EKS Fargate" %}}
+
+1. Set the socket path with the `DD_DOGSTATSD_SOCKET=<YOUR_UDS_PATH>` environment variable on the Agent container (example: `/var/run/datadog/dsd.socket`).
+
+2. Make the socket file accessible to the application containers by mounting an empty directory on both sides (read-only in your application containers and read-write in the Agent container). Mounting the parent folder instead of the individual socket enables socket communication to persist across DogStatsD restarts.
+
+    - Mount the empty folder in your pod spec:
+
+        ```yaml
+        volumes:
+            - emptyDir: {}
+              name: dsdsocket
+        ```
+
+    - Mount the socket folder in your `datadog-agent` container:
+
+        ```yaml
+        volumeMounts:
+            - name: dsdsocket
+              mountPath: /var/run/datadog
+        ```
+
+    - Expose the same folder in your application containers:
+
+        ```yaml
+        volumeMounts:
+            - name: dsdsocket
+              mountPath: /var/run/datadog
+              readOnly: true
+        ```
+
+        **Note**: Remove `readOnly: true` if your application containers need write access to the socket.
 
 {{% /tab %}}
 {{< /tabs >}}
 
-### netcat でテスト
+### Test with netcat
 
-シェルスクリプトからメトリクスを送信したり、DogStatsD がソケットでリスニングしているかをテストする場合は、`netcat` を使用します。`netcat` のほとんどの実装 (Debian の `netcat-openbsd`、RHEL の `nmap-ncat` など) は、`-U` フラグで Unix ソケットトラフィックをサポートしています。
+To send metrics from shell scripts, or to test that DogStatsD is listening on the socket, use `netcat`. Most implementations of `netcat`, such as `netcat-openbsd` on Debian or `nmap-ncat` on RHEL, support Unix Socket traffic with the `-U` flag:
 
 ```shell
 echo -n "custom.metric.name:1|c" | nc -U -u -w1 /var/run/datadog/dsd.socket
 ```
 
-### 発信点検出
+### Origin detection
 
-発信点検出により、DogStatsD はコンテナメトリクスとタグメトリクスがどこから発信されたかを自動的に検出します。このモードが有効な場合は、UDS で受信されたすべてのメトリクスがオートディスカバリーメトリクスと同じコンテナタグに基づいてタグ付けされます。
+Origin detection allows DogStatsD to detect where the container metrics come from, and tag metrics automatically. When this mode is enabled, all metrics received by UDS are tagged with the same container tags as Autodiscovery metrics.
 
 {{< tabs >}}
 {{% tab "Host" %}}
 
-1. [Agent のメイン構成ファイル][1]で `dogstatsd_origin_detection` オプションを有効にします。
+1. Enable the `dogstatsd_origin_detection` option in your [Agent's main configuration file][1]:
 
     ```yaml
     ## @param dogstatsd_origin_detection - boolean - optional - default: false
     ## When using Unix Socket, DogStatsD can tag metrics
     ## with container metadata. If running DogStatsD in a container,
-    ## host PID mode (e.g. with --pid=host) is required.
+    ## host PID mode (for example, with --pid=host) is required.
     #
     dogstatsd_origin_detection: true
     ```
 
-2. 任意 - 発信点検出を使用して収集されたメトリクスに[タグカーディナリティ][2]を設定するには、パラメーター `dogstatsd_tag_cardinality` に `low` (デフォルト)、`orchestrator`、または `high` を使用します。
+2. Optional - To configure [tag cardinality][2] for the metrics collected using origin detection, set the parameter `dogstatsd_tag_cardinality` to `low` (default), `orchestrator`, or `high`:
 
     ```yaml
     ## @param dogstatsd_tag_cardinality - string - optional - default: low
@@ -150,28 +192,28 @@ echo -n "custom.metric.name:1|c" | nc -U -u -w1 /var/run/datadog/dsd.socket
     dogstatsd_tag_cardinality: low
     ```
 
-3. [Agent を再起動します][3]。
+3. [Restart your Agent][3].
 
 
-[1]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
-[2]: /ja/getting_started/tagging/assigning_tags/#environment-variables
-[3]: /ja/agent/guide/agent-commands/
+[1]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
+[2]: /getting_started/tagging/assigning_tags/#environment-variables
+[3]: /agent/configuration/agent-commands/
 {{% /tab %}}
 {{% tab "Docker" %}}
 
-1. Agent コンテナの環境変数 `DD_DOGSTATSD_ORIGIN_DETECTION=true` を設定します。
+1. Set the `DD_DOGSTATSD_ORIGIN_DETECTION=true` environment variable for the Agent container.
 
-2. 任意 - 発信点検出を使用して収集されたメトリクスに[タグカーディナリティ][5]を設定するには、環境変数 `DD_DOGSTATSD_TAG_CARDINALITY` に `low` (デフォルト)、`orchestrator`、または `high` を使用します。
+2. Optional - To configure [tag cardinality][1] for the metrics collected using origin detection, set the environment variable `DD_DOGSTATSD_TAG_CARDINALITY` to `low` (default), `orchestrator`, or `high`.
 
-DogStatsD がコンテナ内で実行されている場合、発信点検出を高い信頼性で行うには、DogStatsD をホストの PID ネームスペースで実行する必要があります。そのため、`--pid=host` フラグを用いて Docker で有効にします。**注**: これは、コンテナのタスク定義内の `"pidMode": "host"` パラメーターを使用して、ECS によってサポートされます。このオプションは、Fargate ではサポートされません。詳細については、[PID モード][2]で AWS のドキュメントを参照してください。
+When running inside a container, DogStatsD needs to run in the host's PID namespace for origin detection to work reliably. Enable this in Docker with the `--pid=host` flag. This is supported by ECS with the parameter `"pidMode": "host"` in the task definition of the container. This option is not supported in Fargate. For more information, see the AWS documentation on [PID mode][2].
 
 
-[1]: /ja/getting_started/tagging/assigning_tags/#environment-variables
+[1]: /getting_started/tagging/assigning_tags/#environment-variables
 [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#task_definition_pidmode
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-1. Agent コンテナの環境変数 `DD_DOGSTATSD_ORIGIN_DETECTION を true に設定します。
+1. Set the `DD_DOGSTATSD_ORIGIN_DETECTION` environment variable to true for the Agent container:
 
     ```yaml
     # (...)
@@ -181,7 +223,16 @@ DogStatsD がコンテナ内で実行されている場合、発信点検出を�
           value: 'true'
     ```
 
-2. 任意 - 発信点検出を使用して収集されたメトリクスに[タグカーディナリティ][1]を設定するには、環境変数 `DD_DOGSTATSD_TAG_CARDINALITY` に `low` (デフォルト)、`orchestrator`、または `high` を使用します。
+2. Set `hostPID: true` in the pod template spec:
+
+    ```yaml
+    # (...)
+    spec:
+        # (...)
+        hostPID: true
+    ```
+
+3. Optional - To configure [tag cardinality][1] for the metrics collected using origin detection, set the environment variable `DD_DOGSTATSD_TAG_CARDINALITY` to `low` (default), `orchestrator`, or `high`:
 
     ```yaml
     # (...)
@@ -191,20 +242,52 @@ DogStatsD がコンテナ内で実行されている場合、発信点検出を�
           value: 'low'
     ```
 
+[1]: /getting_started/tagging/assigning_tags/#environment-variables
+{{% /tab %}}
+{{% tab "EKS Fargate" %}}
 
-[1]: /ja/getting_started/tagging/assigning_tags/#environment-variables
+1. Set the `DD_DOGSTATSD_ORIGIN_DETECTION` environment variable to true for the Agent container:
+
+    ```yaml
+    # (...)
+    env:
+        # (...)
+        - name: DD_DOGSTATSD_ORIGIN_DETECTION
+          value: 'true'
+    ```
+
+2. Set `shareProcessNamespace: true` in the pod template spec:
+
+    ```yaml
+    # (...)
+    spec:
+        # (...)
+        shareProcessNamespace: true
+    ```
+
+3. Optional - To configure [tag cardinality][1] for the metrics collected using origin detection, set the environment variable `DD_DOGSTATSD_TAG_CARDINALITY` to `low` (default), `orchestrator`, or `high`:
+
+    ```yaml
+    # (...)
+    env:
+        # (...)
+        - name: DD_DOGSTATSD_TAG_CARDINALITY
+          value: 'low'
+    ```
+
+[1]: /getting_started/tagging/assigning_tags/#environment-variables
 {{% /tab %}}
 {{< /tabs >}}
 
-**注:** `container_id`、`container_name`、`pod_name` タグは、[カスタムメトリクス][2]が多くなりすぎないようにデフォルトでは追加されていません。
+**Note:** `container_id`, `container_name`, and `pod_name` tags are not added by default to avoid creating too many [custom metrics][2].
 
-## DogStatsD クライアントコンフィギュレーション
+## DogStatsD client configuration
 
-### クライアントライブラリ
+### Client libraries
 
-以下の DogStatsD クライアントライブラリは、UDS トラフィックをネイティブでサポートします。UDS トラフィックを有効にする方法については、各ライブラリのドキュメントを参照してください。**注:** UDP と同様に、トラフィックが多い場合は、パフォーマンスを向上させるため、クライアント側のバッファリングを有効にすることを強くお勧めします。
+The following official DogStatsD client libraries natively support UDS traffic. See the library's documentation on how to enable UDS traffic. **Note**: As with UDP, enabling client-side buffering is recommended to improve performance on heavy traffic:
 
-| 言語 | ライブラリ                              |
+| Language | Library                              |
 | -------- | ------------------------------------ |
 | Golang   | [DataDog/datadog-go][3]              |
 | Java     | [DataDog/java-dogstatsd-client][4]   |
@@ -213,22 +296,22 @@ DogStatsD がコンテナ内で実行されている場合、発信点検出を�
 | PHP      | [DataDog/php-datadogstatsd][7]       |
 | C#       | [DataDog/dogstatsd-csharp-client][8] |
 
-### socat プロキシ
+### socat proxy
 
-アプリケーションまたはクライアントライブラリが UDS トラフィックをサポートしていない場合は、`socat` を実行して UDP ポート `8125` でリスニングし、リクエストをソケットにプロキシすることができます。
+If an application or a client library does not support UDS traffic, run `socat` to listen on UDP port `8125` and proxy the requests to the socket:
 
 ```shell
 socat -s -u UDP-RECV:8125 UNIX-SENDTO:/var/run/datadog/dsd.socket
 ```
 
-追加の実装オプションの作成に関するガイドラインについては、[datadog-agent GitHub wiki][9] を参照してください。
+For guidelines on creating additional implementation options, see the [datadog-agent GitHub wiki][9].
 
-## その他の参考資料
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/metrics/dogstatsd_metrics_submission/
-[2]: /ja/metrics/custom_metrics/
+[1]: /metrics/custom_metrics/dogstatsd_metrics_submission/
+[2]: /metrics/custom_metrics/
 [3]: https://github.com/DataDog/datadog-go#unix-domain-sockets-client
 [4]: https://github.com/DataDog/java-dogstatsd-client#unix-domain-socket-support
 [5]: https://github.com/DataDog/datadogpy#instantiate-the-dogstatsd-client-with-uds

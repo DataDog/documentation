@@ -1,201 +1,209 @@
 ---
-algolia:
-  tags:
-  - トレースビュー
+title: Trace View
+kind: documentation
 aliases:
-- /ja/tracing/visualization/trace/
+- /tracing/visualization/trace/
 further_reading:
 - link: /tracing/trace_collection/
-  tag: ドキュメント
-  text: アプリケーションで APM トレースをセットアップする方法
+  tag: Documentation
+  text: Learn how to setup APM tracing with your application
 - link: /tracing/service_catalog/
-  tag: ドキュメント
-  text: Datadog に報告するサービスの発見とカタログ化
+  tag: Documentation
+  text: Discover and catalog the services reporting to Datadog
 - link: /tracing/services/service_page/
-  tag: ドキュメント
-  text: Datadog のサービスについて
+  tag: Documentation
+  text: Learn more about services in Datadog
 - link: /tracing/services/resource_page/
-  tag: ドキュメント
-  text: リソースのパフォーマンスとトレースの詳細
+  tag: Documentation
+  text: Dive into your resource performance and traces
 - link: /tracing/trace_explorer/trace_view/
-  tag: ドキュメント
-  text: Datadog トレースの読み方を理解する
-title: トレースビュー
+  tag: Documentation
+  text: Understand how to read a Datadog Trace
+algolia:
+  tags: [trace view]
 ---
 
-{{< img src="tracing/trace_view/trace_view.png" alt="トレースビュー" style="width:90%;">}}
+{{< img src="tracing/trace_view/trace_view.png" alt="Trace View" style="width:90%;">}}
 
-## 概要
+## Overview
 
-個々の[トレース][1]を表示すると、その[スパン][2]と関連するメタデータをすべて見ることができます。各トレースは、フレームグラフ、スパンリスト、ウォーターフォール、またはマップとして視覚化できます。
+View an individual [trace][1] to see all of its [spans][2] and associated metadata. Each trace can be visualized as either a Flame Graph, Span List, Waterfall, or Map.
 
-トレースヘッダーには、ルートスパンのサービス名、リソース名、トレース ID、エンドツーエンドのトレース期間、トレース開始時刻などの重要なトレース情報が表示されます。トレースへのパーマリンクを取得するには、**Open Full Page** をクリックし、URL を保存します。
+The trace header displays critical trace information, including the root span's service name, resource name, trace ID, end-to-end trace duration, and the trace start time. To get a permalink to the trace, click **Open Full Page** and save the URL.
 
-{{< img src="tracing/trace_view/trace_header.png" alt="トレースヘッダー" style="width:90%;">}}
+{{< img src="tracing/trace_view/trace_header.png" alt="Trace header" style="width:90%;">}}
 
 
-## トレースの視覚化
+## Trace visualizations
 
 {{< tabs >}}
-{{% tab "フレームグラフ" %}}
+{{% tab "Flame Graph" %}}
 
-{{< img src="tracing/trace_view/flamegraph.png" alt="フレームグラフ" style="width:90%;">}}
+{{< img src="tracing/trace_view/flamegraph.png" alt="Flame Graph" style="width:90%;">}}
 
-フレームグラフはデフォルトの視覚化で、トレースから色分けされたすべてのスパンをタイムライン上に表示します。これはリクエストの実行経路や、トレースのどこに時間が費やされたかを理解するのに便利です。
+The Flame Graph is the default visualization that displays all the color-coded spans from a trace on a timeline. This is useful for understanding the execution path of a request and where time was spent over a trace.
 
-グラフを操作するには、スクロールしてズームし、クリックしてドラッグして移動し、ミニマップを使用して選択したスパンにズームインしたり、フルトレースにズームアウトします。
+To navigate the graph, scroll to zoom, click and drag to move around, and use the minimap to zoom into the selected span or zoom out to the full trace.
 
-凡例は、フレームグラフの色分けを詳細に示します。**Service** (デフォルト)、**Host**、または **Container** のいずれかでスパンをグループ化します。グループごとに、トレース実行時間の割合 (**% Exec Time**) またはスパン数 (**Spans**) のいずれかを選択して表示します。トレース内のスパンにエラーが存在する場合は、**Filter Spans** の下にある **Errors** チェックボックスを選択することで、フレームグラフでこれらをハイライトします。
+The legend details the color coding of the flame graph. Group spans by either **Service** (default), **Host**, or **Container**. Choose to display either the percentage of trace execution time (**% Exec Time**) or span count (**Spans**) by group. If errors exist on spans in the trace, highlight them in the flame graph by selecting the **Errors** checkbox under **Filter Spans**.
 
-{{< img src="tracing/trace_view/flamegraph_legend.mp4" alt="フレームグラフの凡例" video="true" style="width:90%;">}}
+{{< img src="tracing/trace_view/flamegraph_legend.mp4" alt="Flame Graph legend" video="true" style="width:90%;">}}
 
-
-{{% /tab %}}
-{{% tab "スパンリスト" %}}
-
-{{< img src="tracing/trace_view/spanlist.png" alt="トレースビュー" style="width:90%;">}}
-
-[リソース][1]をグループ ([サービス][2]がデフォルト) ごとに表示し、スパン数でソートします。この視覚化は、リソースやグループ別にレイテンシー情報をスキャンするのに便利です。
-
-対応するボタンとテキストベースの検索を使用して、リソースをタイプまたはネーミング情報でフィルタリングします。
-
-{{< img src="tracing/trace_view/spanlist_headers.png" alt="スパンリストヘッダー" style="width:90%;">}}
-
-グループは、対応する列のヘッダーをクリックすることでソートできます (**RESOURCE**、**SPANS**、平均期間 (**AVG DURATION**)、実行時間 (**EXEC TIME**)、トレース実行時間の割合 (**% EXEC TIME**))。
-
-[1]: /ja/tracing/glossary/#resources
-[2]: /ja/tracing/glossary/#services
-{{% /tab %}}
-{{% tab "ウォーターフォール (ベータ版)" %}}
-
-<div class="alert alert-info"><strong>ベータ版に参加！</strong><br />
-ウォーターフォールの非公開ベータ版に参加するには、<a href="https://forms.gle/LjJR1ZbF1tNDv5JC6">このフォームにご記入ください</a>。</div>
-
-{{< img src="tracing/trace_view/waterfall.png" alt="ウォーターフォール" style="width:90%;">}}
-
-関連するトレースのすべてのスパンを、個別の行とタイムライン上に色分けして表示します。この視覚化は、トレースの関連する部分を分離して焦点を当てるのに便利です。
-
-各行で (つまりスパンごとに):
-* バー (サービスごとに色分け)。その長さは、トレース全体の期間の割合に対応します
-* サービス名、オペレーション名、リソース名。フォントスタイル: **サービス**オペレーション<span style="color:gray">リソース</span>
-* 絶対および相対スパン期間情報
-* (該当する場合) エラーアイコンまたは HTTP ステータスコード
-
-スパンの子孫を展開または折りたたむには、任意の行のプラスまたはマイナスボタンをクリックします。すべてのスパンを展開するには、タイムスケールの左側にあるプラスボタンをクリックします。
 
 {{% /tab %}}
-{{% tab "マップ" %}}
+{{% tab "Span List" %}}
 
-{{< img src="tracing/trace_view/map.png" alt="マップ" style="width:90%;">}}
+{{< img src="tracing/trace_view/spanlist.png" alt="Trace View" style="width:90%;">}}
 
-トレースに関与するすべてのサービスの代表を表示します。この視覚化は、サービスの依存関係やトランザクションライフサイクルのおおまかな概要をサービスレベルで把握するのに便利です。
+Displays [resources][1] by group ([service][2] by default) and sorts them according to their count of spans. This visualization is useful for scanning latency information by resource or grouping.
 
-サービスにカーソルを合わせると、その親と子がハイライトされます。またこれをクリックすると、サービスエントリスパンにフォーカスします。
+Filter resources by type or naming information using the corresponding buttons and text-based search.
+
+{{< img src="tracing/trace_view/spanlist_headers.png" alt="Span List headers" style="width:90%;">}}
+
+Groups can be sorted by clicking on the corresponding column header: **RESOURCE**, **SPANS**, average duration (**AVG DURATION**), execution time (**EXEC TIME**), or percentage of trace execution time (**% EXEC TIME**).
+
+[1]: /tracing/glossary/#resources
+[2]: /tracing/glossary/#services
+{{% /tab %}}
+{{% tab "Waterfall" %}}
+
+{{< img src="tracing/trace_view/waterfall2.png" alt="Waterfall" style="width:100%;">}}
+
+Displays all spans for a trace on a timeline where each row corresponds to a span. This visualization is useful for isolating and focusing on relevant parts of a trace.
+
+Each row (span) indicates the following:
+
+- **Relative span duration**: The length of the color-coded bar corresponds to the percentage of total trace duration.
+- **Absolute span duration**: The absolute time in milliseconds (ms).
+- **Span details**: The corresponding service name and resource name are displayed.
+- **Statuses**: When applicable, an HTTP status code is displayed.
+- **Color coding**: Spans are color-coded by service (default), host, or container. To change how spans are color-coded, use the **Color by** dropdown.
+
+To expand or collapse span descendants, click the chevron (>) icon on a row. To expand or collapse all spans, click the **Expand all** (+) or **Collapse all** (-) buttons.
+
+{{% /tab %}}
+{{% tab "Map" %}}
+
+{{< img src="tracing/trace_view/map.png" alt="Map" style="width:90%;">}}
+
+Displays a representation of all the services involved in the trace. This visualization is useful for getting a high-level overview of the services' dependencies and transaction lifecycle at a service level.
+
+Hover over a service to highlight its parent and children, and click on it to focus on the service entry span.
 
 {{% /tab %}}
 {{< /tabs >}}
 
-## 詳細
+## More information
 
-トレースビューの高さ調節可能な下部には、選択したスパンとトレース情報が表示されます。
+The height-adjustable bottom of the Trace View shows selected span and trace information. 
 
-スパンヘッダーには、選択したスパンのサービス名、オペレーション名、リソース名、およびレイテンシー情報が含まれます。ネーミングピルをクリックして、プラットフォームの他の部分にピボットしたり、[トレースエクスプローラー][5]検索を絞り込むことができます。
+The span header contains service, operation, and resource names of the selected span as well as latency information. Pivot to other parts of the platform or narrow down your [Trace Explorer][5] search by clicking on the naming pill.
 
-{{< img src="tracing/trace_view/span_header.png" alt="スパンヘッダー" style="width:90%;">}}
+{{< img src="tracing/trace_view/span_header.png" alt="Span header" style="width:90%;">}}
 
 {{< tabs >}}
-{{% tab "スパン情報" %}} 
+{{% tab "Span Info" %}} 
 
-カスタムタグを含む、すべてのスパンのメタデータを表示します。スパンタグをクリックして、トレースエクスプローラーで検索クエリを更新するか、タグの値をクリップボードにコピーします。
+See all span metadata, including custom tags. Click on a span tag to update the search query in the Trace Explorer or copy the tag's value to the clipboard.
 
-以下の情報がさまざまな条件下で表示されます。
-- git 警告メッセージ (CI Test で git 情報が見つからない場合)
-- SQL クエリのマークアップ (SQL クエリ上)
-- RUM コンテキストとメタデータ (RUM スパン上)
-- スパークメトリクス (Spark ジョブスパン上)
+Other information may be displayed under various conditions:
+- A git warning message (when git information is missing on a CI Test)
+- SQL Query markup (on a SQL query)
+- RUM Context and Metadata (on a RUM span)
+- Spark Metrics (on a Spark job span)
 
-{{< img src="tracing/trace_view/info_tab.png" alt="Span Info タブ" style="width:90%;">}}
+{{< img src="tracing/trace_view/info_tab.png" alt="Span Info tab" style="width:90%;">}}
 
-[1]: /ja/tracing/glossary/#trace
+[1]: /tracing/glossary/#trace
 {{% /tab %}}
 {{% tab "Infrastructure" %}}
 
-選択したスパンのインフラストラクチャー情報を、ホストレベルとコンテナレベル (利用可能な場合) の間で切り替えます。
+Toggle between host-level and container-level (when available) infrastructure information for the selected span.
 
-関連するタグや、CPU、メモリ、I/O などの重要なホスト/コンテナのメトリクスグラフを、トレースが発生した日時のオーバーレイとともに確認します。
+See associated tags, as well as critical host/container metrics graphs including CPU, Memory, and I/O with an overlay of when the trace occurred.
 
-{{< img src="tracing/trace_view/infrastructure_tab.png" alt="Infrastructure タブ" style="width:90%;">}}
+{{< img src="tracing/trace_view/infrastructure_tab.png" alt="Infrastructure tab" style="width:90%;">}}
 
 {{% /tab %}}
 {{% tab "Logs" %}}
 
-トレース時にサービスに関連するログを参照します。ログにカーソルを合わせると、そのタイムスタンプを示すラインがトレースフレームグラフに表示されます。ログをクリックすると、[ログエクスプローラー検索][1]が表示されます。
+See logs related to your service at the time of the trace. When you hover over a log, a line showing its timestamp is displayed on the trace flame graph. Clicking on the log brings you to the [log explorer search][1].
 
-{{< img src="tracing/trace_view/logs_tab.png" alt="Logs タブ" style="width:90%;">}}
+{{< img src="tracing/trace_view/logs_tab.png" alt="Logs tab" style="width:90%;">}}
 
 
-[1]: /ja/logs/explorer/search/
+[1]: /logs/explorer/search/
 {{% /tab %}}
 {{% tab "Processes" %}}
 
-サービスのスパンをクリックすると、基礎インフラストラクチャーで実行中のプロセスを確認できます。サービスのスパンプロセスは、リクエスト時にサービスが実行されているホストまたはポッドと相関関係にあります。CPU および RSS メモリなどのプロセスメトリクスをコードレベルのエラーとともに分析することで、アプリケーション特有の問題かインフラストラクチャーの問題かを見分けることができます。プロセスをクリックすると、[ライブプロセス ページ][1]が開きます。スパン固有のプロセスを表示するには、[プロセスの収集][2]を有効にします。現在、関連するプロセスはサーバーレスおよびブラウザのトレースでサポートされていません。
+Click on a service's span to see the processes running on its underlying infrastructure. A service's span processes are correlated with the hosts or pods on which the service runs at the time of the request. You can analyze process metrics such as CPU and RSS memory alongside code-level errors to distinguish between application-specific and wider infrastructure issues. Clicking on a process will bring you to the [Live Processes page][1]. To view span-specific processes, enable [process collection][2]. Related processes are not currently supported for serverless and browser traces. 
 
-{{< img src="tracing/trace_view/processes_tab.png" alt="Processes タブ" style="width:90%;">}}
+{{< img src="tracing/trace_view/processes_tab.png" alt="Processes tab" style="width:90%;">}}
 
-[1]: https://docs.datadoghq.com/ja/infrastructure/process/?tab=linuxwindows
-[2]: https://docs.datadoghq.com/ja/infrastructure/process/?tab=linuxwindows#installation
+[1]: https://docs.datadoghq.com/infrastructure/process/?tab=linuxwindows
+[2]: https://docs.datadoghq.com/infrastructure/process/?tab=linuxwindows#installation
 {{% /tab %}}
 
-{{% tab "ネットワーク" %}}
+{{% tab "Network" %}}
 
-サービスのスパンをクリックして、リクエストを行っているサービスネットワークの依存関係を確認します。特に、コードエラーが生成されない場合には、ボリューム、エラー (TCP 再送)、ネットワークレイテンシー (TCP ラウンドトリップ時間) などの主要なネットワークパフォーマンスのメトリクスを使用して、アプリケーション固有の問題とネットワーク全体の問題の切り分けを行います。たとえば、ネットワークのテレメトリーを使用して、リクエストのレイテンシーが高い理由 (関連するアプリケーションのトラフィックがオーバーロードした、ダウンストリームのポッドやセキュリティグループ、その他のタグ付けされたエンドポイントとの依存関係に問題があったなど) を特定することができます。プロセスをクリックすると [Network Analytics][1] ページが開きます。スパン固有のプロセスを閲覧するには、[ネットワークパフォーマンスモニタリング][2]を有効にしてください。
+Click on a service's span to see network dependencies of the service making the request. Use key network performance metrics such as volume, errors (TCP retransmits), and network latency (TCP round-trip time) to differentiate between application-specific and network-wide issues, especially when no code errors have been generated. For instance, you can use network telemetry to determine if high request latency is due to traffic overloading of the relevant application, or faulty dependencies with a downstream pod, security group, or any other tagged endpoint. Clicking on a process brings you to the [Network Analytics][1] page. To view span-specific processes, enable [Network Performance Monitoring][2].
 
-**注**: 関連するネットワークのテレメトリーは、現在サーバーレスのトレースではサポートされていません。
+**Note**: Related network telemetry is not currently supported for serverless traces.
 
-{{< img src="tracing/trace_view/network_tab.png" alt="Network タブ" style="width:90%;">}}
+{{< img src="tracing/trace_view/network_tab.png" alt="Network tab" style="width:90%;">}}
 
-[1]: /ja/network_monitoring/performance/network_analytics
-[2]: /ja/network_monitoring/performance/setup
+[1]: /network_monitoring/performance/network_analytics
+[2]: /network_monitoring/performance/setup
 {{% /tab %}}
 
-{{% tab "セキュリティ" %}}
+{{% tab "Security" %}}
 
-分散型トレーシングのサービスを対象とした攻撃の試行を確認できます。攻撃者が使用したパターン、攻撃を検出したルール、攻撃者がサービスの脆弱性を発見したかどうかを確認することができます。
+See attack attempts that target the services of the distributed trace. You can see the pattern used by the attacker, the rule that detects the attack, and whether the attacker found a vulnerability in your service.
 
-[Datadog Application Security Management][1] を使用してさらに調査するには、**View in ASM** をクリックします。
+Click **View in ASM** to investigate further using [Datadog Application Security Management][1].
 
-{{< img src="tracing/trace_view/security_tab.png" alt="Security タブ" style="width:90%;">}}
+{{< img src="tracing/trace_view/security_tab.png" alt="Security tab" style="width:90%;">}}
 
-[1]: /ja/security/application_security/how-appsec-works/
+[1]: /security/application_security/how-appsec-works/
 {{% /tab %}}
-{{% tab "スパンリンク (ベータ版)" %}}
+{{% tab "Code Hotspots" %}}
 
-<div class="alert alert-info">スパンリンクのサポートはベータ版です。</div>
+View [Code Hotspots][1] to identify lines of code related to performance issues. The values on the left side represent the time spent in each method call during the selected span.
 
-[スパンリンク][4]は、因果関係はあるが、典型的な親子関係を持たない 1 つ以上のスパンを相関付けます。
+{{< img src="profiler/code_hotspots_tab.png" alt="Code Hotspots tab showing time spent in each method for a selected span" style="width:90%;">}}
 
-フレームグラフのスパンをクリックすると、スパンリンクで接続されたスパンが表示されます。
+[1]: /profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
 
-{{< img src="tracing/span_links/span_links_tab.png" alt="Span Links タブ" style="width:90%;">}}
+{{% /tab %}}
+{{% tab "Span Links (Beta)" %}}
 
-**注**: スパンリンクは、例えば[保持フィルター][1]を使用して、対応するスパンが取り込まれ、インデックス化された場合にのみ表示されます。
+<div class="alert alert-info">Span link support is in beta.</div>
 
-スパンリンクの詳細とカスタムインスツルメンテーションでスパンリンクを追加する方法については、[スパンリンク][4]をお読みください。
+[Span links][4] correlate one or more spans together that are causally related but don't have a typical parent-child relationship.
 
-[1]: /ja/tracing/trace_pipeline/trace_retention/
-[2]: /ja/tracing/trace_collection/custom_instrumentation/php#adding-span-links-beta
-[3]: /ja/tracing/trace_collection/otel_instrumentation/java#requirements-and-limitations
-[4]: /ja/tracing/trace_collection/span_links/
+Click a span in the flame graph to display spans connected with span links:
+
+{{< img src="tracing/span_links/span_links_tab.png" alt="Span Links tab" style="width:90%;">}}
+
+**Note**: Span links only display when the corresponding spans are ingested and indexed, for example, with a [retention filter][1].
+
+To learn more about span links and how to add them with custom instrumentation, read [Span Links][4].
+
+[1]: /tracing/trace_pipeline/trace_retention/
+[2]: /tracing/trace_collection/custom_instrumentation/php#adding-span-links-beta
+[3]: /tracing/trace_collection/otel_instrumentation/java#requirements-and-limitations
+[4]: /tracing/trace_collection/span_links/
 
 {{% /tab %}}
 {{< /tabs >}}
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/tracing/glossary/#trace
-[2]: /ja/tracing/glossary/#spans
-[3]: /ja/tracing/glossary/#services
-[4]: /ja/tracing/glossary/#resources
-[5]: /ja/tracing/trace_explorer
+[1]: /tracing/glossary/#trace
+[2]: /tracing/glossary/#spans
+[3]: /tracing/glossary/#services
+[4]: /tracing/glossary/#resources
+[5]: /tracing/trace_explorer

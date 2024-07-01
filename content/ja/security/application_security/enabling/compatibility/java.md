@@ -1,71 +1,75 @@
 ---
+title: Java Compatibility Requirements
+kind: documentation
 code_lang: java
-code_lang_weight: 0
-title: Java 互換性要件
 type: multi-code-lang
+code_lang_weight: 0
 ---
 
-## ASM の機能
+## Application Security capabilities
 
-Java ライブラリでは、指定されたトレーサーのバージョンで、以下の ASM 機能がサポートされています。
+The following application security capabilities are supported in the Java library, for the specified tracer version:
 
-| ASM の機能                   | Java トレーサーの最小バージョン |
+| Application Security capability  | Minimum Java tracer version |
 | -------------------------------- | ----------------------------|
 | Threat Detection | 1.8.0  |
+| API Security | 1.31.0 |
 | Threat Protection| 1.9.0 |
-| オープンソースソフトウェア (OSS) の脆弱性管理 | 1.1.4 |
-| コードレベルの脆弱性管理 (ベータ版) | 1.15.0|
+| Customize response to blocked requests | 1.11.0 |
+| Software Composition Analysis (SCA) | 1.1.4 |
+| Code Security  | 1.15.0|
+| Automatic user activity event tracking | 1.20.0 |
 
-Java でサポートされるすべての ASM 機能を得るためのトレーサーの最小バージョンは 1.15.0 です。
+The minimum tracer version to get all supported application security capabilities for Java is 1.31.0.
 
-**注**: Threat Protection では、[リモート構成][2]を有効にする必要があり、これは記載のトレーサーの最小バージョンに含まれています。
+**Note**: Threat Protection requires enabling [Remote Configuration][2], which is included in the listed minimum tracer version.
 
-### サポートされるデプロイメントタイプ
-|タイプ           | Threat Detection のサポート |  OSS の脆弱性管理のサポート |
-| ---           |   ---             |           ----            |
-| Docker        | {{< X >}}         | {{< X >}}                 |
-| Kubernetes    | {{< X >}}         | {{< X >}}                 | 
-| AWS ECS       | {{< X >}}         | {{< X >}}                 |
-| AWS Fargate   | {{< X >}}         | {{< X >}}                 |
-| AWS Lambda    | {{< X >}}         |                           |   
-| Azure App Service | {{< X >}}     | {{< X >}}                 |
+### Supported deployment types
+| Type              | Threat Detection support | Software Composition Analysis |
+|-------------------|--------------------------|-------------------------------|
+| Docker            | {{< X >}}                | {{< X >}}                     |
+| Kubernetes        | {{< X >}}                | {{< X >}}                     |
+| Amazon ECS        | {{< X >}}                | {{< X >}}                     |
+| AWS Fargate       | {{< X >}}                | {{< X >}}                     |
+| AWS Lambda        | {{< X >}}                |                               |
+| Azure App Service | {{< X >}}                | {{< X >}}                     |
 
-**注**: Azure App Service は **Web アプリケーションでのみ**サポートされています。ASM は Azure Functions をサポートしていません。
+**Note**: Azure App Service is supported for **web applications only**. Application Security doesn't support Azure Functions.
 
-## 言語とフレームワークの互換性
+## Language and framework compatibility
 
-### サポートされている Java バージョン
-Java トレーサーは、次の Oracle JDK および OpenJDK の JVM ランタイムの自動インスツルメンテーションをサポートします。
+### Supported Java versions
+The Java Tracer supports automatic instrumentation for the following Oracle JDK and OpenJDK JVM runtimes.
 
-| JVM バージョン | オペレーティングシステム                                                               | サポートレベル                       | トレーサーバージョン |
+| JVM versions | Operating Systems                                                               | Support level                       | Tracer version |
 | -------------| ------------------------------------------------------------------------------- | ----------------------------------- | -------------- |
-| 8〜17      | Windows (x86-64)<br>Linux (glibc、musl) (arm64、x86-64)<br>MacOS (arm64、x86-64)               | サポート                | 最新         |
+| 8 to 17      | Windows (x86-64)<br>Linux (glibc, musl) (arm64, x86-64)<br>MacOS (arm64, x86-64)               | Supported                | Latest         |
 
 
-Datadog は、Java の早期アクセスバージョンを公式にサポートしていません。
-
-
-
+Datadog does not officially support any early-access versions of Java.
 
 
 
-### Web フレームワークの互換性
-
-- 攻撃元の HTTP リクエストの詳細
-- HTTP リクエスト用のタグ (ステータスコード、メソッドなど)
-- アプリケーション内の攻撃フローを確認するための分散型トレーシング
-
-##### ASM の機能に関する備考
-- **Vulnerability Management for OSS** はすべてのフレームワークでサポートされています
-- **Vulnerability Management for Code-level** がご利用のフレームワークをサポートしていない場合でも、Weak Cipher、Weak Hashing、Insecure Cookie、Cookie without HttpOnly Flag、Cookie without SameSite Flag の脆弱性は検知します。
 
 
 
-| フレームワーク                  | バージョン   | Threat Detection のサポートの有無 | Threat Detection のサポートの有無 | Vulnerability Management for Code-level のサポートの有無 |
+### Web framework compatibility
+
+- Attacker source HTTP request details
+- Tags for the HTTP request (status code, method, etc)
+- Distributed Tracing to see attack flows through your applications
+
+##### Application Security Capability Notes
+- **Software Composition Analysis** is supported on all frameworks
+- If **Code Security** does not support your framework, it will still detect Weak Cipher, Weak Hashing, Insecure Cookie, Cookie without HttpOnly Flag, and Cookie without SameSite Flag vulnerabilities.
+
+
+
+| Framework                  | Versions   | Threat Detection supported? | Threat Protection supported? |Code Security? |
 | ----------------------- | ---------- | --------------- | ---------------------------------------------- | ---------------------------------------------- |
 | Grizzly                 | 2.0+       |  {{< X >}} |  {{< X >}} |  {{< X >}} |
 | Glassfish               |            |  {{< X >}} |  {{< X >}} |  {{< X >}} |
-| Java Servlet | 2.3+、3.0+ |   {{< X >}} |  {{< X >}} |  {{< X >}} |
+| Java Servlet | 2.3+, 3.0+ |   {{< X >}} |  {{< X >}} |  {{< X >}} |
 | Jetty                   | 7.0-9.x, 10.x    |  {{< X >}} |  {{< X >}} |  {{< X >}} |
 | Spring Boot             | 1.5        |  {{< X >}} |  {{< X >}} |  {{< X >}} |
 | Spring Web (MVC)        | 4.0+       |  {{< X >}} |  {{< X >}} |  {{< X >}} |
@@ -73,64 +77,64 @@ Datadog は、Java の早期アクセスバージョンを公式にサポート�
 | Tomcat                  | 5.5+       |   {{< X >}} |  {{< X >}} |  {{< X >}} |
 | Vert.x                  | 3.4-3.9.x  |   {{< X >}} |  {{< X >}} |  {{< X >}} |
 
-**注:** 多くのアプリケーションサーバーは Servlet 互換でそのインスツルメンテーションによって自動的にカバーされます (Websphere、Weblogic、JBoss)。また、Spring Boot (バージョン 3) のようなフレームワークは、通常、Tomcat、Jetty、Netty など、サポートされた組み込みアプリケーションサーバーを使うため、本質的に機能します。
+**Note**: Many application servers are Servlet compatible and are automatically covered by that instrumentation, such as Websphere, Weblogic, and JBoss. Also, frameworks like Spring Boot (version 3) inherently work because they usually use a supported embedded application server, such as Tomcat, Jetty, or Netty.
 
-<div class="alert alert-info">ご希望のフレームワークが掲載されていない場合は、お知らせください！<a href="https://forms.gle/gHrxGQMEnAobukfn7">この短いフォーム</a>に必要事項を記入して、詳細を送信してください。</div>
+<div class="alert alert-info">If you don't see your framework of choice listed, let us know! Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send details</a>.</div>
 
-### ネットワーキングフレームワークの互換性
+### Networking framework compatibility
 
-`dd-java-agent` には、次のネットワーキングフレームワークの自動トレースのサポートが含まれます。
+`dd-java-agent` includes support for automatically tracing the following networking frameworks.
 
-**ネットワーキングのトレーシングでは以下の確認が可能です**
+**Networking tracing provides:**
 
-- アプリケーションの分散トレーシング
-- リクエストベースのブロッキング
+- Distributed tracing through your applications
+- Request-based blocking
 
-##### ASM の機能に関する備考
-- **Vulnerability Management for OSS** はすべてのフレームワークでサポートされています
-- **Vulnerability Management for Code-level** がご利用のフレームワークをサポートしていない場合でも、Weak Cipher、Weak Hashing、Insecure Cookie、Cookie without HttpOnly Flag、Cookie without SameSite Flag の脆弱性は検知されます。
+##### Application Security Capability Notes
+- **Software Composition Analysis** is supported on all frameworks
+- If **Code Security** does not support your framework, it will still detect Weak Cipher, Weak Hashing, Insecure Cookie, Cookie without HttpOnly Flag, and Cookie without SameSite Flag vulnerabilities.
 
 
-| フレームワーク                | バージョン    | Threat Detection のサポートの有無 | Threat Detection のサポートの有無 | Vulnerability Management for Code-level のサポートの有無 |
+| Framework                | Versions    | Threat Detection supported? | Threat Protection supported? | Code Security? |
 | ------------------------ | ----------- | --------------- | ---------------------------------------------- | ---------------------------------------------- |
-| Apache HTTP クライアント       | 4.0+        |  {{< X >}} |  |  |
+| Apache HTTP Client       | 4.0+        |  {{< X >}} |  |  |
 | gRPC                     | 1.5+        |  {{< X >}} |  |  |
-| HttpURLConnection        | すべて         |  {{< X >}} |  |  |
-| Jax RS クライアント           | 2.0+        |  {{< X >}} |  {{< X >}} |  {{< X >}}  |
-| Jersey サーバー            | 1.9-2.29    |  {{< X >}} |  {{< X >}} |  {{< X >}} |
-| Netty HTTP サーバー        |  3.8+           |  {{< X >}} |    |  |
+| HttpURLConnection        | all         |  {{< X >}} |  |  |
+| Jax RS Clients           | 2.0+        |  {{< X >}} |  {{< X >}} |  {{< X >}}  |
+| Jersey Server            | 1.9-2.29    |  {{< X >}} |  {{< X >}} |  {{< X >}} |
+| Netty HTTP Server        |  3.8+           |  {{< X >}} |    |  |
 | RESTEasy                 |  3.0.x          |  {{< X >}} |    |  |
 | Spring SessionAwareMessageListener     | 3.1+            |  {{< X >}} |  |  |
 
-<div class="alert alert-info">ご希望のフレームワークが掲載されていない場合は、お知らせください！<a href="https://forms.gle/gHrxGQMEnAobukfn7">この短いフォーム</a>に必要事項を記入して、詳細を送信してください。</div>
+<div class="alert alert-info">If you don't see your framework of choice listed, let us know! Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send details</a>.</div>
 
-### データストアの互換性
+### Data store compatibility
 
-`dd-java-agent` には、次のデータベースフレームワーク/ドライバーの自動トレースのサポートが含まれます。
+`dd-java-agent` includes support for automatically tracing the following database frameworks/drivers.
 
-**データストアのトレーシングでは以下の確認が可能です**
+**Datastore tracing provides:**
 
-- リクエストの応答タイミング
-- クエリ情報 (サニタイジングされたクエリ文字列など)
-- エラーとスタックトレースの取得
+- Timing request to response
+- Query info (for example, a sanitized query string)
+- Error and stacktrace capturing
 
-##### ASM の機能に関する備考
-- **Vulnerability Management for OSS** はすべてのフレームワークでサポートされています
-- **Threat Protection** は HTTP リクエスト (input) レイヤーでも機能するため、下表に掲載されていなくても、デフォルトですべてのデータベースで機能します。
-- ご利用のフレームワークが下記でサポートされていない場合、**Vulnerability Management for Code-level** は SQL インジェクションの脆弱性を検知しませんが、[こちら][3]に挙げられている残りの脆弱性タイプは依然として検知します。
+##### Application Security Capability Notes
+- **Software Composition Analysis** is supported on all frameworks
+- **Threat Protection** also works at the HTTP request (input) layer, and so works for all databases by default, even those not listed in the table below.
+- If your framework is not supported below, **Code Security** won’t detect SQL Injection vulnerabilities, but will still detect the rest of vulnerability types listed [here][3].
 
-| データベース                | バージョン | Threat Detection のサポートの有無 |  Vulnerability Management for Code-level のサポートの有無 |
+| Database                | Versions | Threat Detection supported? |  Code Security? |
 | ----------------------- | -------- |  ------------------------| ---------------------------------------------------------------- |
 | Aerospike               | 4.0+     |  {{< X >}} |   |
 | Couchbase               | 2.0+     |  {{< X >}} |   |
 | JDBC                    | N/A      |  {{< X >}} |   {{< X >}} |
 | MongoDB                 | 3.0-4.0+ |  {{< X >}} |   |
 
-`dd-java-agent` は、次を含む一般的な Threat Detection のための JDBC ドライバーとも互換性があります:
+`dd-java-agent` is also compatible with common JDBC drivers for Threat Detection, such as:
 
 - Apache Derby
 - Firebird SQL
-- H2 データベースエンジン
+- H2 Database Engine
 - HSQLDB
 - IBM DB2
 - MariaDB
@@ -140,9 +144,20 @@ Datadog は、Java の早期アクセスバージョンを公式にサポート�
 - Postgres SQL
 - ScalikeJDBC
 
-<div class="alert alert-info">ご希望のフレームワークが掲載されていない場合は、お知らせください！<a href="https://forms.gle/gHrxGQMEnAobukfn7">この短いフォーム</a>に必要事項を記入して、詳細を送信してください。</div>
+<div class="alert alert-info">If you don't see your framework of choice listed, let us know! Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send details</a>.</div>
+
+### User Authentication Frameworks compatibility
+
+**Integrations to User Authentication Frameworks provide:**
+
+- User login events, including the user IDs
+- Account Takeover detection monitoring for user login events
+
+| Framework         | Minimum Framework Version |
+|-------------------|---------------------------|
+| Spring Security   | 5.5+                      |
 
 
-[1]: /ja/tracing/trace_collection/compatibility/java/
-[2]: /ja/agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration
-[3]: security/application_security/vulnerability_management/#detect-custom-code-vulnerabilities
+[1]: /tracing/trace_collection/compatibility/java/
+[2]: /agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration
+[3]: /security/application_security/vulnerability_management/#manage-code-level-vulnerabilities

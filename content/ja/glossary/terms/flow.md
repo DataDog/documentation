@@ -1,9 +1,9 @@
 ---
+title: flow
 core_product:
-- network performance monitoring
-title: フロー
+  - network performance monitoring
 ---
-コンピュータネットワークにおいて、フローとは、あるエンドポイントが別のエンドポイントと通信する際に通る経路のことです。Datadog の[ネットワークマップ][1]は、ネットワークデータのフローを視覚化する機能を提供します。
-詳細は、<a href="/network_monitoring/performance/network_map/">ドキュメントを参照してください</a>。
+In computer networks, a flow is the path taken when one endpoint communicates with another. Datadog's [network map][1] provides a visualization for network data flow.
+For more information, <a href="/network_monitoring/performance/network_map/">see the documentation</a>.
 
-[1]: /ja/network_monitoring/performance/network_map/
+[1]: /network_monitoring/performance/network_map/

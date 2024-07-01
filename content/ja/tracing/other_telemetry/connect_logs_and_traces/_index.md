@@ -1,26 +1,27 @@
 ---
-aliases:
-- /ja/tracing/advanced/connect_logs_and_traces/
-- /ja/tracing/connect_logs_and_traces/
-description: ログとトレースを接続して Datadog で関連付けます。
-title: ログとトレースの接続
+title: Correlate Logs and Traces
+kind: documentation
 type: multi-code-lang
+description: 'Connect your logs and traces to correlate them in Datadog.'
+aliases:
+    - /tracing/advanced/connect_logs_and_traces/
+    - /tracing/connect_logs_and_traces/
+algolia:
+  tags: [logs and traces]
 ---
 
-{{< img src="tracing/connect_logs_and_traces/trace_id_injection.png" alt="トレースのログ" style="width:100%;">}}
+{{< img src="tracing/connect_logs_and_traces/trace_id_injection.png" alt="Logs in Traces" style="width:100%;">}}
 
-Datadog APM と Datadog Log Management の間の相関関係は、ログの属性としてトレース ID、スパン ID、`env`、`service`、`version` を挿入することで改善されています。これらのフィールドを使用すると、特定のサービスとバージョンに関連付けられた正確なログ、または観測された[トレース][1]に関連付けられたすべてのログを見つけることができます。
+The correlation between Datadog APM and Datadog Log Management is improved by the injection of trace IDs, span IDs, `env`, `service`, and `version` as attributes in your logs. With these fields you can find the exact logs associated with a specific service and version, or all logs correlated to an observed [trace][1].
 
-アプリケーションのトレーサを `DD_ENV`、`DD_SERVICE`、`DD_VERSION` で構成することをお勧めします。これは、`env`、`service`、`version` を追加する際のベストプラクティスです。詳細については、[統合サービスタグ付け][2]のドキュメントを参照してください。
+It is recommended to configure your application's tracer with `DD_ENV`, `DD_SERVICE`, and `DD_VERSION`. This will provide the best experience for adding `env`, `service`, and `version`. See the [unified service tagging][2] documentation for more details.
 
-**注**: PHP Tracer は、ログの統合サービスタグ付けのコンフィギュレーションをサポートしていません。
+Before correlating traces with logs, ensure your logs are either sent as JSON, or [parsed by the proper language level log processor][3]. Your language level logs _must_ be turned into Datadog attributes in order for traces and logs correlation to work.
 
-トレースとログに相関性を持たせる前に、ログが JSON として送信されているか、[適切な言語レベルログプロセッサーによってパースされている][3]ことを確認します。トレースとログの相関が機能するためには、言語レベルログが Datadog 属性に変換される_必要があります_。
-
-自動または手動でログをトレースに接続する方法の詳細については、以下から言語を選択してください。
+To learn more about automatically or manually connecting your logs to your traces, select your language below:
 
 {{< partial name="apm/apm-connect-logs-and-traces.html" >}}
 
-[1]: /ja/tracing/glossary/#trace
-[2]: /ja/getting_started/tagging/unified_service_tagging
-[3]: /ja/agent/logs/#enabling-log-collection-from-integrations
+[1]: /tracing/glossary/#trace
+[2]: /getting_started/tagging/unified_service_tagging
+[3]: /agent/logs/#enabling-log-collection-from-integrations

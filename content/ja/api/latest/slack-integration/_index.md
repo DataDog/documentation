@@ -1,3 +1,3 @@
 ---
-title: Slack インテグレーション
+title: Slack Integration
 ---

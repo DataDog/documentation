@@ -1,115 +1,120 @@
 ---
+title: Custom Detection Rules
 aliases:
-- /ja/security_platform/application_security/custom_rules
-- /ja/security/application_security/custom_rules
+  - /security_platform/application_security/custom_rules
+  - /security/application_security/custom_rules
 further_reading:
 - link: /security/application_security/
-  tag: ドキュメント
-  text: Datadog Application Security Management で脅威から守る
+  tag: Documentation
+  text: Protect against threats with Datadog Application Security Management
 - link: /security/application_security/event_rules/
-  tag: ドキュメント
-  text: イベントルールの作成
+  tag: Documentation
+  text: Creating event rules
 - link: /security/application_security/troubleshooting
-  tag: ドキュメント
-  text: Datadog Application Security Management の一般的な問題のトラブルシューティング
+  tag: Documentation
+  text: Troubleshoot common Datadog Application Security Management issues
 - link: /security/notifications/variables/
-  tag: ドキュメント
-  text: セキュリティ通知変数について
+  tag: Documentation
+  text: Learn more about Security notification variables
 - link: /tracing/trace_explorer/query_syntax/
-  tag: ドキュメント
-  text: ASM クエリを定義するための構文
-title: カスタム検出ルール
+  tag: Documentation
+  text: Syntax for defining the ASM query
 ---
 
-## 概要
+## Overview
 
-Application Security Management (ASM) には、本番システムに影響を与える攻撃の試み、攻撃者が見つけた脆弱性、ビジネスロジックの不正使用を捕捉することを目的とした、一連の[すぐに使える検出ルール][1]が付属しています。
+Application Security Management (ASM) comes with a set of [out-of-the-box detection rules][1] which aim to catch attack attempts, vulnerabilities found by attacker, and business logic abuse that impact your production systems.
 
-しかし、環境またはワークロードに基づいてルールをカスタマイズしたい場合もあります。例えば、ビジネスが行われていない地域から機密アクションを実行するユーザーを検出する検出ルールをカスタマイズしたいと思うかもしれません。
+However, there are situations where you may want to customize a rule based on your environment or workload. For example, you may want to customize a detection rule that detects users performing sensitive actions from a geolocation where your business doesn't operate.
 
-他の例としては、内部セキュリティスキャナーを除外するようにルールをカスタマイズすることが挙げられます。ASM は、期待どおりにその活動を検出します。しかし、定期的に発生するスキャンの通知を受けたくない場合があります。
+Another example is customizing a rule to exclude an internal security scanner. ASM detects its activity as expected. However, you may not want to be notified of its regularly occurring scan.
 
-このような場合、カスタム検出ルールを作成することで、そのようなイベントを除外することができます。このガイドでは、ASM のカスタム検出ルールを作成する方法を説明します。
+In these situations, a custom detection rule can be created to exclude such events. This guide shows you how to create a custom detection rule for ASM.
 
-## ビジネスロジック不正使用検出ルール
-ASM は、ビジネスロジックの不正使用 (例えば、ブルートフォースによるパスワードのリセット) を検出するためのルールをすぐに使えるようにしています。これらのルールでは、[トレースにビジネスロジック情報を追加する][7]必要があります。
+## Business logic abuse detection rule
 
-ルールにフィルターをかけ、どのビジネスロジックの追跡を開始するかを特定することができます。さらに、これらのルールを青写真として使用し、独自のビジネスロジックに基づいたカスタムルールを作成することができます。
+ASM offers out of the box rules to detect business logic abuse (for example, resetting a password through brute force). Those rules require [adding business logic information to traces][7].
 
-ルールの構成は、以下のセクションを参照してください。
+Recent Datadog Tracing Libraries attempt to detect and send user login and signup events automatically without needing to modify the code. If needed, you can [opt out of the automatic user activity event tracking][8].
 
-## コンフィギュレーション
+You can filter the rules, and identify which business logic to start tracking. Additionally, you can use these rules as a blueprint to create custom rules based on your own business logic. 
 
-OOTB 検出ルールをカスタマイズするには、まず既存のルールを複製する必要があります。[検出ルール][2]に移動して、ルールを選択します。ルールの下までスクロールして、Clone Rule ボタンをクリックします。これで、既存のルールを編集できるようになります。
+See the section below to see how to configure your rules.
 
-### ASM クエリの定義
+## Configuration
 
-[ASM トレースエクスプローラーと同じクエリ構文][3]を使用して、ASM クエリを構築します。たとえば、米国外からのログイン成功を監視するクエリを作成します: `@appsec.security_activity:business_logic.users.login.success -@actor.ip_details.country.iso_code:US`
+To customize an OOTB detection rule, you must first clone an existing rule. Navigate to your [Detection Rules][2] and select a rule. Scroll to the bottom of the rule and click the Clone Rule button. This now enables you to edit the existing rule.
 
-オプションで、一意のカウントとシグナルのグループ化を定義します。特定の時間枠で属性に対して観測された一意の値の数をカウントします。定義されたグループ化は、値ごとに各グループ化のシグナルを生成します。 通常、グループ化はエンティティ (ユーザー、IP、またはサービスなど) です。グループ化は、[クエリを結合する](#joining-queries)ためにも使用されます。
+### Define an ASM query
 
-プレビューセクションを使用して、検索クエリに一致する ASM トレースを確認します。また、Add Query ボタンでクエリを追加することもできます。
+Construct an ASM query using the [same query syntax as in the ASM Trace Explorer][3]. For example, create a query to monitor login successes from outside of the United States: `@appsec.security_activity:business_logic.users.login.success -@actor.ip_details.country.iso_code:US`.
 
-##### クエリを結合する
+Optionally, define a unique count and signal grouping. Count the number of unique values observed for an attribute in a given timeframe. The defined group-by generates a signal for each group-by value. Typically, the group-by is an entity (like user, IP, or service). The group-by is also used to [join the queries together](#joining-queries).
 
-時間枠にまたがるクエリを結合することで、セキュリティシグナルの信頼度や重大度を高めることができる。例えば、攻撃が成功したことを検知するために、成功したトリガーと失敗したトリガーの両方をサービ スに対して関連付けることができます。
+Use the preview section to see which ASM traces match the search query. You can also add additional queries with the Add Query button.
 
-クエリは `group by` 値を使用して関連付けられます。`group by` 値は通常エンティティ (例えば `IP` や `Service`) ですが、任意の属性を指定することができます。
+##### Joining queries
 
-例えば、同じ `business_logic.users.login.success` アクティビティを検索する反対のクエリを作成し、成功した場合と失敗した場合に反対の HTTP パスクエリを追加します。
+Joining queries to span a timeframe can increase the confidence or severity of the Security Signal. For example, to detect a successful attack, both successful and unsuccessful triggers can be correlated for a service.
 
-クエリ 1: `@appsec.security_activity:business_logic.users.login.success @actor.ip_details.country.iso_code:US`
+Queries are correlated together by using a `group by` value. The `group by` value is typically an entity (for example, `IP` or `Service`), but can be any attribute.
 
-クエリ 2: `@appsec.security_activity:business_logic.users.login.success -@actor.ip_details.country.iso_code:US`
+For example, create opposing queries that search for the same `business_logic.users.login.success` activity, but append opposing HTTP path queries for successful and unsuccessful attempts:
 
-この場合、結合されたクエリは技術的に同じ属性値を保持しています。もし `group by` の値が存在しなければ、ケースに合致することはありません。ケースにマッチすると、一意の `group by` 値ごとにセキュリティシグナルが生成されます。
+Query 1: `@appsec.security_activity:business_logic.users.login.success @actor.ip_details.country.iso_code:US`.
 
-### 抑制クエリで良性アクティビティを除外する
+Query 2: `@appsec.security_activity:business_logic.users.login.success -@actor.ip_details.country.iso_code:US`.
 
-**Only generate a signal if there is a match** (一致した場合のみシグナルを発生させる) フィールドでは、クエリを入力することで、値が一致したときのみトリガーが発生するようにするオプションがあります。
+In this instance, the joined queries technically hold the same attribute value: the value must be the same for the case to be met. If a `group by` value doesn't exist, the case will never be met. A Security Signal is generated for each unique `group by` value when a case is matched.
 
-**This rule will not generate a signal if there is a match** (このルールは、一致するものがある場合、シグナルを生成しない) フィールドには、抑制クエリを入力するオプションがあり、値が一致した場合にトリガーが生成されないようにすることができます。例えば、あるサービスがシグナルをトリガーしているが、そのアクションは良性であり、このサービスからシグナルをトリガーさせたくない場合、`service` を除外するクエリを作成します。
+### Exclude benign activity with suppression queries
 
-### ルールケースを設定する
+In the **Only generate a signal if there is a match** field, you have the option to enter a query so that a trigger is only generated when a value is met.
 
-#### トリガー
+In the **This rule will not generate a signal if there is a match** field, you have the option to enter suppression queries so that a trigger is not generated when the values are met. For example, if a service is triggering a signal, but the action is benign and you no longer want signals triggered from this service, create a query that excludes `service`.
 
-`successful login > 0` のようなルールケースは、ケース文として評価されます。したがって、最初にマッチしたケースがシグナルを発生させます。1 つまたは複数のルールケースを作成し、その横にある灰色の領域をクリックして、ドラッグしてその順序を操作します。
+### Set a rule case
 
-ルールケースには、過去に定義されたクエリのイベント数に基づいてシグナルを生成すべきかを判断するための論理演算 (`>、>=、&&、||`) が含まれます。
+#### Trigger
 
-**注**: クエリラベルは演算子に先行しなければなりません。たとえば、`a > 3` は使用できますが、`3 < a` は許容されません。
+Rule cases, such as `successful login > 0`, are evaluated as case statements. Thus, the first case to match generates the signal. Create one or multiple rule cases, and click on the grey area next to them to drag and manipulate their orderings.
 
-各ルールケースにつき、**名前**を付与します。シグナルの生成時には、この名前がルールの名称に追加されます。
+A rule case contains logical operations (`>, >=, &&, ||`) to determine if a signal should be generated based on the event counts in the previously defined queries.
 
-#### 重大度および通知
+**Note**: The query label must precede the operator. For example, `a > 3` is allowed; `3 < a` is not allowed.
+
+Provide a **name** for each rule case. This name is appended to the rule name when a signal is generated.
+
+#### Severity and notification
 
 {{% security-rule-severity-notification %}}
 
-### タイムウィンドウ
+### Time windows
 
 {{% security-rule-time-windows %}}
 
-ケースを追加する場合は、**Add Case** をクリックします。
+Click **Add Case** to add additional cases.
 
-**注**: この `evaluation window` は、`keep alive` および `maximum signal duration` 以下でなければなりません。
+**Note**: The `evaluation window` must be less than or equal to the `keep alive` and `maximum signal duration`.
 
 ### Say what's happening
 
 {{% security-rule-say-whats-happening %}}
 
-シグナルにタグを追加するには、**Tag resulting signals** ドロップダウンメニューを使用します。例えば、`attack:sql-injection-attempt`のようになります。
+Use the **Tag resulting signals** dropdown menu to add tags to your signals. For example, `attack:sql-injection-attempt`.
 
-**注**: `security` タグはセキュリティシグナルの分類に用いられる特殊なタグです。`attack`、`threat-intel`、`compliance`、`anomaly`、`data-leak` など他のタグの使用を推奨します。
+**Note**: The tag `security` is special. This tag is used to classify the security signal. The recommended options are: `attack`, `threat-intel`, `compliance`, `anomaly`, and `data-leak`.
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/security/default_rules/#cat-application-security
+[1]: /security/default_rules/?category=cat-application-security
 [2]: https://app.datadoghq.com/security/appsec/signals-rules
-[3]: /ja/tracing/trace_explorer/query_syntax/
-[4]: /ja/monitors/notify/?tab=is_alert#integrations
-[5]: /ja/security/notifications/variables/
-[6]: /ja/security/notifications/variables/#template-variables
-[7]: /ja/security/application_security/threats/add-user-info/?tab=set_user#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces
+[3]: /tracing/trace_explorer/query_syntax/
+[4]: /monitors/notify/?tab=is_alert#integrations
+[5]: /security/notifications/variables/
+[6]: /security/notifications/variables/#template-variables
+[7]: /security/application_security/threats/add-user-info/?tab=set_user#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces
+[8]: /security/application_security/threats/add-user-info/?tab=set_user#disabling-automatic-user-activity-event-tracking
+

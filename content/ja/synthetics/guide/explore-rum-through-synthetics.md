@@ -1,77 +1,78 @@
 ---
-aliases: null
-description: RUM を使用しないユーザーが、Synthetic ブラウザのテスト結果から、RUM のデータ、セッション、エラーを追加費用なしでプレビューできるようになりました。
+title: Explore A Preview of RUM Features In Synthetics
+kind: documentation
+description: Users without RUM can now preview RUM data, sessions, and errors from their Synthetic browser test results with no additional cost. 
+aliases:
 further_reading:
-- link: https://docs.datadoghq.com/synthetics/browser_tests/
-  tag: ドキュメント
-  text: ブラウザテストの設定
+- link: "https://docs.datadoghq.com/synthetics/browser_tests/"
+  tag: Documentation
+  text: Configure a Browser Test
 - link: /synthetics/settings/
-  tag: ドキュメント
-  text: Synthetic モニタリングの設定
-title: Synthetic の RUM 機能のプレビューを見る
+  tag: Documentation
+  text: Synthetic Monitoring Settings
 ---
 
-## 概要
+## Overview
 
-<div class="alert alert-info">Real User Monitoring を導入している場合、Synthetic ブラウザテストの実行を通じて RUM、セッションリプレイ、エラートラッキング、および追加のパフォーマンスデータのプレビューにアクセスできます。</div>
+<div class="alert alert-info">If you have Real User Monitoring, you can access a preview of RUM, Session Replay, Error Tracking, and additional performance data from your Synthetic browser test runs.</div>
 
-Synthetic ブラウザテストは、Real User Monitoring SDK を組み込み、以下の確認を可能にします。
+Synthetic browser tests embed the Real User Monitoring SDK, allowing you to explore:
 
-- すべてのテストの[セッションリプレイ][1]。各ステップや [Browser Dev Tools][2] で利用可能なスクリーンショット以外のコンテキストにもアクセスすることができます。
-- [RUM エクスプローラー][3]のセッション。
-- [エラートラッキング][4]を使って、異なるステップ、テスト、テスト実行のエラーを集計します。エラーの影響範囲を把握し、最も深刻な問題の修正に優先順位をつけることができます。
-- RUM の追加リソースとタイミング情報 (検索とモニター機能の追加を含む)。
+- [Session Replay][1] for all tests. You can access additional context beyond screenshots available for each step and [Browser Dev Tools][2].
+- The session in the [RUM Explorer][3].
+- Aggregated errors across your different steps, tests, and test runs with [Error Tracking][4]. You can scope the error impact and prioritize fixing the most severe issues. 
+- Extra resources and timing information from RUM including additional search and monitor capabilities.
 
-## RUM アプリケーションでの Synthetic データの許可
+## Allow Synthetic data on RUM applications
 
 <div class="alert alert-warning">
-ターゲットアプリケーションがすでに RUM でインスツルメンテーションされている場合、予期せぬ動作を引き起こす可能性があるため、Synthetic テストの構成内で RUM データ収集を有効にするべきではありません。</div>
+If the target application is already instrumented with RUM, you should not enable RUM data collection within the synthetic test configuration as this can result in unexpected behavior.</div>
 
-ブラウザテストの記録で、**Start Recording** ボタンの上にある **Collect RUM Data on** をクリックし、データを収集するアプリケーションを選択します。記録とテスト構成を保存すると、RUM はテストデータを収集し、ブラウザテスト実行からセッション記録を生成します。
+In your browser test recording, click **Collect RUM Data on** above the **Start Recording** button and select an application to collect data on. After saving your recording and test configuration, RUM gathers test data and generates session recordings from your browser test runs. 
 
-1. **Digital Experience** > **Settings** (Synthetic Monitoring & Testing の下) > [**Integration Settings**][5] に移動します。
-2. **Synthetic Data RUM Collection** の下で、**Enable Synthetic RUM data collection** をクリックし、Datadog がテスト実行から RUM データを収集することを有効にします。
-3. **Save RUM Data Collection** をクリックします。
-4. **Synthetic Data RUM Applications** の下で、ドロップダウンメニューから、Browser Test Recorder で提案されたデフォルトの RUM アプリケーションを選択します。
-5. **Save RUM Data Applications** をクリックします。
+1. Navigate to **Digital Experience** > **Settings** (under Synthetic Monitoring & Testing) > [**Integration Settings**][5].
+2. Under **Synthetic Data RUM Collection**, click **Enable Synthetic RUM data collection** to enable Datadog to collect RUM data from your test runs.
+3. Click **Save RUM Data Collection**.
+4. Under **Synthetic Data RUM Applications**, select a default RUM application suggested in the Browser Test Recorder from the dropdown menu. 
+5. Click **Save RUM Data Applications**.
 
-オプションで、`Synthetic Tests Default` をクリックし、ドロップダウンメニューから他の RUM アプリケーションを選択します。このアプリケーションは、ブラウザテストの記録に表示されます。
+Optionally, click `Synthetic Tests Default` and select another RUM application from the dropdown menu. This application is displayed in the browser test recording.
 
-詳しくは、[Synthetic モニタリング設定][6]をご覧ください。
+For more information, see [Synthetic Monitoring Settings][6].
 
-## Synthetics から RUM エクスプローラーへ
+## Synthetics to RUM Explorer
 
-[ブラウザテストのリスト][7]に移動し、サンプルテストの実行をクリックします。
+Navigate to your [list of browser tests][7] and click on a sample test run. 
 
-{{< img src="synthetics/guide/rum_in_synthetics/browser_test_step_side_panel.png" alt="テストステップの詳細サイドパネル" style="width:100%;" >}}
+{{< img src="synthetics/guide/rum_in_synthetics/browser_test_step_side_panel.png" alt="Test Step Details Side Panel" style="width:100%;" >}}
 
-ステップの詳細サイドパネルに `This Synthetic test generated data in Real User Monitoring` (この Synthetic テストは Real User Monitoring でデータを生成しました) と表示され、セッション ID と **Go to View in RUM** ボタンが含まれます。
+The step details side panel appears with `This Synthetic test generated data in Real User Monitoring` and includes the session ID and the **Go to the View in RUM** button. 
 
-{{< img src="synthetics/guide/rum_in_synthetics/generated_rum_data.png" alt="Synthetics エクスプローラー" style="width:80%;" >}}
+{{< img src="synthetics/guide/rum_in_synthetics/generated_rum_data.png" alt="Synthetics Explorer" style="width:80%;" >}}
 
-このテストステップのエラー、リソース、およびパフォーマンス データを [RUM エクスプローラー][3]で表示するには、**Go to the View in RUM** をクリックします。または、**Replay Session** ボタンまたは **View all sessions in RUM** をクリックして、ブラウザテストでキャプチャされた利用可能なセッションリプレイを確認します。
+To see this test step's errors, resources, and performance data in the [RUM Explorer][3], click **Go to the View in RUM**. Alternatively, click the **Replay Session** button or **View all sessions in RUM** to explore available session replays captured in your browser test.
 
-## RUM エクスプローラーから Synthetics へ
+## RUM Explorer to Synthetics
 
-RUM エクスプローラーで、[セッションのリスト][8]に移動し、リプレイが利用可能なセッションをクリックします。
+In the RUM Explorer, navigate to your [list of sessions][8] and click on a session with a replay available. 
 
-{{< img src="synthetics/guide/rum_in_synthetics/sessions_details_panel.png" alt="セッションの詳細サイドパネル" style="width:100%;" >}}
+{{< img src="synthetics/guide/rum_in_synthetics/sessions_details_panel.png" alt="Sessions Details Side Panel" style="width:100%;" >}}
 
-セッションパネルには、`This event was generated by a Synthetic test run` (このイベントは Synthetic テストの実行により生成されました) と表示され、テスト ID と **View Synthetic Test Result** ボタンが含まれます。
+The session panel appears with `This event was generated by a Synthetic test run` and includes the test ID and the **View Synthetic Test Result** button.
 
-{{< img src="synthetics/guide/rum_in_synthetics/synthetic_test_session.png" alt="セッションの詳細" style="width:80%;" >}}
+{{< img src="synthetics/guide/rum_in_synthetics/synthetic_test_session.png" alt="Sessions Details" style="width:80%;" >}}
 
-Synthetics とテストの結果に戻るには、**View Synthetic Test Result** をクリックします。
+To navigate back to Synthetics and your test's results, click **View Synthetic Test Result**.
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/real_user_monitoring/session_replay/browser/
-[2]: /ja/real_user_monitoring/session_replay/browser/developer_tools/
-[3]: /ja/real_user_monitoring/explorer/
-[4]: /ja/real_user_monitoring/error_tracking/
+[1]: /real_user_monitoring/session_replay/browser/
+[2]: /real_user_monitoring/session_replay/browser/developer_tools/
+[3]: /real_user_monitoring/explorer/
+[4]: /real_user_monitoring/error_tracking/
 [5]: https://app.datadoghq.com/synthetics/settings/integrations
-[6]: /ja/synthetics/settings
+[6]: /synthetics/settings
 [7]: https://app.datadoghq.com/synthetics/tests?query=type%3A%28browser%29
 [8]: https://app.datadoghq.com/rum/explorer

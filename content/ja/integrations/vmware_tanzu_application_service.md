@@ -1,169 +1,179 @@
 ---
-aliases:
-- /ja/integrations/cloud_foundry/
-- /ja/integrations/pivotal_platform/
-categories:
-- プロビジョニング
-- 構成 & デプロイ
-- ログの収集
-dependencies:
-- https://github.com/DataDog/documentation/blob/master/content/en/integrations/vmware_tanzu_application_service.md
-description: VMware Tanzu Application Service (旧 Pivotal Cloud Foundry) VM とその実行ジョブの健全性を追跡します。
-doc_link: /integrations/vmware_tanzu_application_service/
-further_reading:
-- link: https://www.datadoghq.com/blog/pcf-monitoring-with-datadog/
-  tag: GitHub
-  text: Datadog による Pivotal プラットフォームの監視
-integration_id: pivotal-platform
 integration_title: VMware Tanzu Application Service
-is_public: true
-custom_kind: integration
 name: vmware_tanzu_application_service
+custom_kind: integration
+aliases:
+    - /integrations/cloud_foundry/
+    - /integrations/pivotal_platform/
 newhlevel: true
-public_title: Datadog-VMware Tanzu Application Service (Pivotal Cloud Foundry) インテグレーション
-short_description: VMware Tanzu Application Service VM とその実行ジョブの健全性を追跡します。
 updated_for_agent: 6.0
+description: 'Track the health of your VMware Tanzu Application Service (formerly Pivotal Cloud Foundry) VMs and the jobs they run.'
+is_public: true
+public_title: Datadog-VMware Tanzu Application Service (Pivotal Cloud Foundry) Integration
+short_description: 'Track the health of VMware Tanzu Application Service VMs and the jobs they run.'
+categories:
+    - provisioning
+    - configuration & deployment
+    - log collection
+dependencies:
+    ["https://github.com/DataDog/documentation/blob/master/content/en/integrations/vmware_tanzu_application_service.md"]
+doc_link: /integrations/vmware_tanzu_application_service/
+integration_id: "pivotal-platform"
+further_reading:
+- link: "https://www.datadoghq.com/blog/pcf-monitoring-with-datadog/"
+  tag: Blog
+  text: Pivotal Platform Monitoring with Datadog
+- link: /integrations/guide/application-monitoring-vmware-tanzu/
+  tag: documentation
+  text: Datadog Application Monitoring for VMware Tanzu
+- link: /integrations/guide/cluster-monitoring-vmware-tanzu/
+  tag: documentation
+  text: Datadog Cluster Monitoring for VMware Tanzu
+
 ---
 
-## 概要
+## Overview
 
-VMware Tanzu Application Service (旧称: Pivotal Cloud Foundry、詳細は [VMware 発表][1]を参照) のデプロイは、Datadog にメトリクスとイベントを送信することができます。デプロイメント内のすべてのノードの健全性と可用性を追跡し、それらが実行するジョブを監視し、Loggregator Firehose からメトリクスを収集するなど、さまざまなことが可能です。
+Any VMware Tanzu Application Service (formerly known as Pivotal Cloud Foundry, see the [VMware announcement][1] for more information) deployment can send metrics and events to Datadog. You can track the health and availability of all nodes in the deployment, monitor the jobs they run, collect metrics from the Loggregator Firehose, and more.
 
-VMware Tanzu Application Service および VMware Tanzu Application Service クラスター上のアプリケーションについて、Tanzu Ops Manager を介した監視を自動的にセットアップするには、このページを使用してください。手動でのセットアップ手順については、[VMware Tanzu Application Service 手動セットアップガイド][2]を参照してください。
+For the best experience, use this page to automatically set up monitoring through Tanzu Ops Manager for your application on VMware Tanzu Application Service and your VMware Tanzu Application Service cluster. For manual setup steps, see the [VMware Tanzu Application Service Manual Setup Guide][2].
 
-VMware Tanzu Application Service と Datadog のインテグレーションには、3 つの主要なコンポーネントがあります。まず、ビルドパックは、アプリケーションからカスタムメトリクスを収集するために使用されます。第二に、BOSH リリースは、プラットフォームからメトリクスを収集します。3 つ目は、Loggregator Firehose Nozzle が、インフラストラクチャーから他のすべてのメトリクスを収集します。詳細については、[Datadog VMware Tanzu Application Service アーキテクチャ][3]ガイドをお読みください。
+There are three main components for the VMware Tanzu Application Service integration with Datadog. First, the buildpack is used to collect custom metrics from your applications. Second, the BOSH Release collects metrics from the platform. Third, the Loggregator Firehose Nozzle collects all other metrics from your infrastructure. Read the [Datadog VMware Tanzu Application Service architecture][3] guide for more information.
 
-## アプリケーションを監視する
+## Monitor your applications
 
-[VMware Tanzu のインストールと構成][4]ガイドを使用して、Tanzu Ops Manager を使用してインテグレーションをインストールします。手動セットアップの手順については、手動セットアップガイドの[アプリケーションの監視][5]セクションをお読みください。
+Use the [VMware Tanzu installation and configuration][4] guide to install the integration through the Tanzu Ops Manager. For manual setup steps, read the [Monitor your applications][5] section in the manual setup guide.
 
-### コンフィギュレーション
+### Configuration
 
-#### メトリクスの収集
+#### Metric collection
 
-環境内に API キーを設定してビルドパックを有効にします。
+Set an API Key in your environment to enable the buildpack:
 
 ```shell
-# 環境変数を設定します
-cf set-env <アプリ> DD_API_KEY <DATADOG_API_キー>
-# アプリケーションが新しい環境変数を適用してビルドパックを使用するように、アプリケーションを再ステージングします
-cf restage <アプリ>
+# set the environment variable
+cf set-env <YOUR_APP> DD_API_KEY <DATADOG_API_KEY>
+# restage the application to make it pick up the new environment variable and use the buildpack
+cf restage <YOUR_APP>
 ```
 
-#### トレースとプロファイルの収集
+#### Trace and profile collection
 
-Datadog Trace Agent (APM) はデフォルトで有効になっています。特定の言語でのセットアップの詳細については、[APM のセットアップ][6]と[プロファイリングのセットアップ][7]を参照してください。
+The Datadog Trace Agent (APM) is enabled by default. Learn more about setup for your specific language in [APM setup][6] and [Profiling setup][7].
 
-#### ログの収集
+#### Log collection
 
 {{% site-region region="us3" %}}
 
-ログ収集は、このサイトではサポートされていません。
+Log collection is not supported for this site.
 
 {{% /site-region %}}
 
 {{% site-region region="us,us5,eu,gov,ap1" %}}
 
-##### ログ収集の有効化
+##### Enable log collection
 
-VMware Tanzu Application Service 上のアプリケーションからのログの収集を開始するには、ビルドパックに含まれている Agent をアクティブにし、ログ収集を有効にする必要があります。
+To start collecting logs from your application in VMware Tanzu Application Service, the Agent contained in the buildpack needs to be activated and log collection enabled.
 
 ```shell
 cf set-env <YOUR_APP_NAME> DD_LOGS_ENABLED true
-# Agent コアチェックを無効にしてシステムメトリクス収集を無効にします
+# Disable the Agent core checks to disable system metrics collection
 cf set-env <YOUR_APP_NAME> DD_ENABLE_CHECKS false
-# Container Stdout/Stderr をローカルポートにリダイレクトして、Agent がログを収集するようにします
+# Redirect Container Stdout/Stderr to a local port so the Agent collects the logs
 cf set-env <YOUR_APP_NAME> STD_LOG_COLLECTION_PORT <PORT>
-# 目的のポートからログを収集するように Agent を構成し、ソースとサービスの値を設定します
+# Configure the Agent to collect logs from the wanted port and set the value for source and service
 cf set-env <YOUR_APP_NAME> LOGS_CONFIG '[{"type":"tcp","port":"<PORT>","source":"<SOURCE>","service":"<SERVICE>"}]'
-# アプリケーションが新しい環境変数を適用してビルドパックを使用するように、アプリケーションを再ステージングします
+# restage the application to make it pick up the new environment variable and use the buildpack
 cf restage <YOUR_APP_NAME>
 ```
 
-##### ログ収集の構成
+##### Configure log collection
 
-次の表は、上記のパラメーターと、それらを使用してログ収集を構成する方法について説明しています。
+The following table describes the parameters above, and how they can be used to configure log collection:
 
-| パラメーター                 | 説明                                                                                                                                |
+| Parameter                 | Description                                                                                                                                |
 | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| `DD_LOGS_ENABLED`         | Datadog Agent のログ収集を有効にするには、`true` に設定します。                                                                                      |
-| `DD_ENABLE_CHECKS`        | コアチェックによる Agent のシステムメトリクスの収集を無効にするには、`false` に設定します。                                                       |
-| `STD_LOG_COLLECTION_PORT` | `stdout` または `stderr` からログを収集する場合に使用する必要があります。対応するローカルポート値に `stdout` または `stderr` ストリームをリダイレクトします。 |
-| `LOGS_CONFIG`             | このオプションを使用して、ローカル TCP ポートをリスニングするように Agent を構成し、`service` および `source` パラメーターの値を設定します。          |
+| `DD_LOGS_ENABLED`         | Set to `true` to enable Datadog Agent log collection.                                                                                      |
+| `DD_ENABLE_CHECKS`        | Set to `false` to disable the Agent's system metrics collection through core checks.                                                       |
+| `STD_LOG_COLLECTION_PORT` | Must be used when collecting logs from `stdout` or `stderr`. It redirects the `stdout` or `stderr` stream to the corresponding local port value. |
+| `LOGS_CONFIG`             | Use this option to configure the Agent to listen to a local TCP port and set the value for the `service` and `source` parameters.          |
 
-**例:**
+**Example:**
 
-`app01` という名前の Java アプリケーションが VMware Tanzu Application Service で実行されています。以下の構成は、コンテナ `stdout`/`stderr` をローカルポート `10514` にリダイレクトします。次に、そのポートからログを収集するように Agent を構成し、`service` と `source` に適切な値を設定します。
+A Java application named `app01` is running in VMware Tanzu Application Service. The following configuration redirects the container `stdout`/`stderr` to the local port `10514`. It then configures the Agent to collect logs from that port while setting the proper value for `service` and `source`:
 
 ```shell
-# Stdout/Stderr をポート 10514 にリダイレクトします
+# Redirect Stdout/Stderr to port 10514
 cf set-env app01 STD_LOG_COLLECTION_PORT 10514
-# ポート 10514 をリスニングするように Agent を構成します
+# Configure the Agent to listen to port 10514
 cf set-env app01 LOGS_CONFIG '[{"type":"tcp","port":"10514","source":"java","service":"app01"}]'
 ```
 
-##### プロキシの構成が誤っている場合の通知
+##### Notification in case of misconfigured proxy
 
-Agent バージョン 6.12 以降では、ビルドパックで[プロキシ構成][8]を使用した場合、接続が確立できるかどうかの検証が行われます。このテストの結果に応じて、ログ収集が開始されます。
+For Agent version 6.12 or greater, when using a [proxy configuration][101] with the buildpack, a verification is made to check if the connection can be established. Log collection is started depending on the result of this test.
 
-接続の確立に失敗し、ログ収集が開始されない場合、[イベントエクスプローラー][9]にこのようなイベントが表示されます。これらのイベントを追跡するモニターを設定し、誤構成された Buildpack がデプロイされたときに通知されるようにします。
+If the connection fails to establish and log collection does not start, an event like this appears in the [Events Explorer][102]. Set up a monitor to track these events and be notified when a misconfigured Buildpack is deployed:
 
-{{< img src="integrations/cloud_foundry/logs_misconfigured_proxy.png" alt="Datadog で Log endpoint cannot be reached - Log collection not started というタイトルのイベントと、TCP 接続が確立できなかったというメッセージが表示される" >}}
+{{< img src="integrations/cloud_foundry/logs_misconfigured_proxy.png" alt="An event in Datadog with the title Log endpoint cannot be reached - Log collection not started and a message stating that a TCP connection could not be established" >}}
 
-### タグ
+### Tags
 
-カスタムタグをアプリケーションに追加するには、`manifest.yml` ファイルまたは CF CLI コマンドを使用して `DD_TAGS` 環境変数を設定します。
+In order to add custom tags to your application, set the `DD_TAGS` environment variable through the `manifest.yml` file or the CF CLI command:
 
 ```shell
-# 環境変数を設定します
+# set the environment variable
 cf set-env <YOUR_APP> DD_TAGS key1=value1,key2=value2
-# アプリケーションが新しい環境変数を適用して新しいタグを使用するように、アプリケーションを再ステージングします
+# restage the application to make it pick up the new environment variable and use the new tags
 cf restage <YOUR_APP>
 ```
+
+[101]: /agent/logs/proxy/
+[102]: /events/explorer/
 
 {{% /site-region %}}
 
 ### DogStatsD
 
-[DogStatsD][10] を使用すると、カスタムアプリケーションメトリクスを Datadog に送信することができます。詳しくは[メトリクス送信: DogStatsD][11] を参照してください。様々なアプリケーションと互換性のある [DogStatsD ライブラリ][12]のリストがあります。
+You can use [DogStatsD][10] to send custom application metrics to Datadog. See [Metric Submission: DogStatsD][11] for more information. There is a list of [DogStatsD libraries][12] compatible with a wide range of applications.
 
-## VMware Tanzu Application Service クラスターの監視
+## Monitor your VMware Tanzu Application Service cluster
 
-[VMware Tanzu のインストールと構成][13]ガイドを使用して、Tanzu Ops Manager を使用してインテグレーションをインストールします。手動セットアップの手順については、手動セットアップガイドの [VMware Tanzu Application Service クラスターの監視][14]セクションをお読みください。
+Use the [VMware Tanzu installation and configuration][13] guide to install the integration through the Tanzu Ops Manager. For manual setup steps, read the [Monitor your VMware Tanzu Application Service cluster][14] section in the manual setup guide.
 
-## 収集データ
+## Data Collected
 
-### メトリクス
+### Metrics
 
-以下のメトリクスは、Datadog Firehose Nozzle から送信され、`cloudfoundry.nozzle` がプレフィックスとして付きます。Datadog Agent は、Director のランタイム構成で設定した任意の Agent チェックからメトリクスを送信し、デフォルトで[システム][15]、[ネットワーク][16]、[ディスク][17]、[NTP][18] のメトリクスを送信します。
+The following metrics are sent by the Datadog Firehose Nozzle and are prefixed with `cloudfoundry.nozzle`. The Datadog Agent sends metrics from any Agent checks you configure in the Director runtime configuration, and [system][15], [network][16], [disk][17], and [NTP][18] metrics by default.
 
-Datadog Firehose Nozzle は、CounterEvent (イベントではなくメトリクスとして)、ValueMetrics、および ContainerMetrics のみを収集します。ログメッセージとエラーは無視されます。
+The Datadog Firehose Nozzle only collects CounterEvents (as metrics, not events), ValueMetrics, and ContainerMetrics; it ignores LogMessages and Errors.
 
-メトリクスのリストは、PCF のバージョンおよびデプロイにより異なります。Datadog では、[Loggregator v2 API][19] から送信されるカウンターおよびゲージのメトリクスを収集します。デフォルトで送信されるメトリクスの一覧は、[Cloud Foundry コンポーネント メトリクス][20]を参照してください。
+Your specific list of metrics may vary based on the PCF version and the deployment. Datadog collects counter and gauge metrics emitted from the [Loggregator v2 API][19]. See [Cloud Foundry Component Metrics][20] for a list of metrics emitted by default.
 
-{{< get-metrics-from-git "cloud_foundry" >}}
+{{< get-metrics-from-git "cloud_foundry">}}
 
-## その他の参考資料
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://tanzu.vmware.com/pivotal#:~:text=Pivotal%20Cloud%20Foundry%20%28PCF%29%20is%20now%20VMware%20Tanzu%20Application%20Service
-[2]: /ja/integrations/guide/pivotal-cloud-foundry-manual-setup
-[3]: /ja/integrations/faq/pivotal_architecture
-[4]: https://docs.pivotal.io/partners/datadog-application-monitoring/installing.html
-[5]: /ja/integrations/guide/pivotal-cloud-foundry-manual-setup#monitor-your-applications
-[6]: /ja/tracing/setup/
-[7]: /ja/profiler/enabling/
-[8]: /ja/agent/logs/proxy/
-[9]: /ja/events/explorer/
-[10]: /ja/developers/dogstatsd/
-[11]: /ja/metrics/custom_metrics/dogstatsd_metrics_submission/
-[12]: /ja/libraries/
-[13]: https://docs.pivotal.io/partners/datadog/installing.html
-[14]: /ja/integrations/guide/pivotal-cloud-foundry-manual-setup#monitor-your-pivotal-cloud-foundry-cluster
-[15]: /ja/integrations/system/#metrics
-[16]: /ja/integrations/network/#metrics
-[17]: /ja/integrations/disk/#metrics
-[18]: /ja/integrations/ntp/#metrics
+[2]: /integrations/guide/pivotal-cloud-foundry-manual-setup
+[3]: /integrations/faq/pivotal_architecture
+[4]: /integrations/guide/application-monitoring-vmware-tanzu/
+[5]: /integrations/guide/pivotal-cloud-foundry-manual-setup#monitor-your-applications
+[6]: /tracing/setup/
+[7]: /profiler/enabling/
+[8]: /agent/logs/proxy/
+[9]: /events/explorer/
+[10]: /developers/dogstatsd/
+[11]: /metrics/custom_metrics/dogstatsd_metrics_submission/
+[12]: /libraries/
+[13]: /integrations/guide/cluster-monitoring-vmware-tanzu/#installation
+[14]: /integrations/guide/cloud-foundry-setup/#monitor-your-cloud-foundry-cluster
+[15]: /integrations/system/#metrics
+[16]: /integrations/network/#metrics
+[17]: /integrations/disk/#metrics
+[18]: /integrations/ntp/#metrics
 [19]: https://github.com/cloudfoundry/loggregator-api
 [20]: https://docs.cloudfoundry.org/running/all_metrics.html

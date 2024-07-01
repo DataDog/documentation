@@ -1,4 +1,4 @@
 ---
-title: ユーザー
+title: user
 ---
-ユーザーとは、割り当てられたロールに基づいて Datadog のデータにアクセスできる人のことです。
+A user is someone who has access to data in Datadog based on their assigned role.

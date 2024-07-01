@@ -1,82 +1,82 @@
 ---
+title: Quantization of APM Data
+kind: Documentation
 further_reading:
-- link: /tracing/trace_collection/custom_instrumentation/
-  tag: ドキュメント
-  text: カスタムインスツルメンテーション
-- link: /tracing/configure_data_security/#scrub-sensitive-data-from-your-spans
-  tag: ドキュメント
-  text: スパン内のタグを置換する
-- link: /tracing/trace_collection/library_config/
-  tag: ドキュメント
-  text: トレーシングライブラリの構成
-kind: ドキュメント
-title: APM データの量子化
+  - link: /tracing/trace_collection/custom_instrumentation/
+    tag: Documentation
+    text: Custom Instrumentation
+  - link: "/tracing/configure_data_security/#scrub-sensitive-data-from-your-spans"
+    tag: Documentation
+    text: Replace tags in spans
+  - link: /tracing/trace_collection/library_config/
+    tag: Documentation
+    text: Tracing Library Configuration
 ---
 
-## 概要
+## Overview
 
-Datadog は取り込み時に、[スパン][1]や[リソース][2]の名前に含まれるランダムなグローバルユニーク ID (GUID) や数値 ID、クエリパラメーター値などの APM データに対して_量子化_を適用しています。その結果、正規化により、これらのスパンやリソースは分析目的上同じであるため、グループ化され、これらのランダムなパターンに起因する名前汚染を削減します。
+During ingestion, Datadog applies _quantization_ to APM data such as random globally unique IDs (GUIDs), numeric IDs, and query parameter values in [span][1] or [resource][2] names. The resulting normalization cuts down on name pollution that results from these random patterns by grouping those spans and resources together because they are, for analysis purposes, the same.
 
-リソース名やスパン名に含まれる特定のパターンを、以下の静的文字列に置き換えます。
-- GUID: `{guid}`
-- 数値 ID (英数字以外の文字で囲まれた 6 桁以上の数字、または文字列の末尾にあるもの): `{num}`
-- クエリパラメーター値: `{val}`
+Certain patterns in resource or span names are replaced with the following static strings:
+- GUIDs: `{guid}`
+- Numeric IDs (6+ digit numbers surrounded by non-alphanumeric characters or found at the end of a string): `{num}`
+- Query parameter values: `{val}`
 
-これらの置き換えは以下に影響します。
-- トレースメトリクス名、
-- これらのメトリクスのリソース名タグ、
-- 取り込まれたすべてのスパンのリソース名とスパン名。
+These replacements affect:
+- trace metric names,
+- the resource name tag on those metrics, and
+- the resource and span names for all ingested spans.
 
-### 量子化の例
+### Quantization examples
 
-例えば、_スパン名_が `find_user_2461685a_80c9_4d9e_85e9_a3b0e9e3ea84` の場合、それは `find_user_{guid}` に改名され、結果としてトレースメトリクスは次のようになります。
+For example, if a _span name_ is `find_user_2461685a_80c9_4d9e_85e9_a3b0e9e3ea84`, it is renamed to `find_user_{guid}` and the resulting trace metrics are:
 - `trace.find_user_guid`
 - `trace.find_user_guid.hits`
 - `trace.find_user_guid.errors`
 - `trace.find_user_guid.duration`
-- `trace.find_user_guid.apdex` (サービスに Apdex が構成されている場合)
+- `trace.find_user_guid.apdex` (if Apdex is configured for the service)
 
-トレース検索でこれらのスパンを検索するには、クエリは `operation_name:"find_user_{guid}"` となります。
+To search for these spans in trace search, the query is `operation_name:"find_user_{guid}"`.
 
-もし、_リソース名_が `SELECT ? FROM TABLE temp_128390123` であった場合、それは `SELECT ? FROM TABLE temp_{num}` に改名され、そのメトリクス正規化タグは `resource_name:select_from_table_temp_num` になります。
+If a _resource name_ is `SELECT ? FROM TABLE temp_128390123`, it is renamed to `SELECT ? FROM TABLE temp_{num}` and its metric-normalized tag is `resource_name:select_from_table_temp_num`.
 
-トレース検索でこれらのスパンを検索するには、クエリは `resource_name:"SELECT ? FROM TABLE temp_{num}"` となります。
+To search for these spans in trace search, the query is `resource_name:"SELECT ? FROM TABLE temp_{num}"`.
 
-## デフォルトの量子化を避けるためのインスツルメンテーションの変更
+## Changing instrumentation to avoid default quantization
 
-**注**: インスツルメンテーションまたは Agent の上流でスパンとリソース名を変更すると、新しいメトリクスとタグが生成されます。量子化されたデータに対してクエリを使用する場合、それらのクエリは新しい名前で動作するように更新する必要があります。
+**Note**: Any change to span and resource names upstream in the instrumentation or the Agent produces new metrics and tags. If you use queries on quantized data, those queries must be updated to work with the new names.
 
-### コード内インスツルメンテーション
+### In-code instrumentation
 
-アプリケーションがエージェントレスで動作している場合、またはコード内でより直接的にインスツルメンテーションを変更したい場合は、スパン名とリソース名のカスタム構成を作成する方法について、[アプリケーションのランタイムのトレーサードキュメント][3]を参照してください。
+If your application runs in an agentless setup or if you prefer to make instrumentation changes more directly in your code, see [the tracer documentation of your application's runtime][3] for information on how to create custom configuration for span names and resource names.
 
-### Agent の構成
+### Agent configuration
 
-YAML の構成オプション `replace_tags` を使用すると、Go に準拠した正規表現で独自の置換文字列を設定することができます。
+You can use the `replace_tags` YAML configuration option to set up your own replacement strings through Go-compliant regex:
 
 ```yaml
 apm_config:
   replace_tags:
-    # スパン名の末尾の数値 ID を "x" に置き換える。
+    # Replace tailing numeric IDs in span names with "x":
     - name: "span.name"
       pattern: "get_id_[0-9]+"
       repl: "get_id_x"
-    # リソースパスの数値 ID を置き換える。
+    # Replace numeric IDs in resource paths:
     - name: "resource.name"
       pattern: "/users/[0-9]+/"
       repl: "/users/{user_id}/"
 ```
 
-また、環境変数 `DD_APM_REPLACE_TAGS` に、JSON 文字列を値として指定することもできます。
+Alternatively, you can use the `DD_APM_REPLACE_TAGS` environment variable with a JSON string as its value:
 
 ```bash
 export DD_APM_REPLACE_TAGS = '[{"name": "span.name", "pattern": "get_id_[0-9]+", "repl": "get_id_x"}, {...}, ...]'
 ```
 
-
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/tracing/glossary/#spans
-[2]: /ja/tracing/glossary/#resources
-[3]: /ja/tracing/trace_collection/custom_instrumentation/
+[1]: /tracing/glossary/#spans
+[2]: /tracing/glossary/#resources
+[3]: /tracing/trace_collection/custom_instrumentation/

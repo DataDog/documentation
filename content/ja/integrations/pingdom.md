@@ -1,82 +1,83 @@
 ---
-categories:
-- notifications
-dependencies: []
-description: レガシー Pingdom モニタリングエンドポイントの既存の構成を管理し、移行します。
-doc_link: https://docs.datadoghq.com/integrations/pingdom/
-draft: false
-git_integration_title: pingdom
-has_logo: true
-integration_id: ''
-integration_title: Pingdom Legacy API (V2.1)
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: '1.0'
-name: pingdom
-public_title: Datadog-Pingdom Legacy API (V2.1) インテグレーション
-short_description: レガシー Pingdom モニタリングエンドポイントの既存の構成を管理し、移行します。
-team: web-integrations
-version: '1.0'
+"categories":
+- "notifications"
+"custom_kind": "integration"
+"dependencies": []
+"description": "Manage and migrate existing configuration of legacy Pingdom monitoring endpoints."
+"doc_link": "https://docs.datadoghq.com/integrations/pingdom/"
+"draft": false
+"git_integration_title": "pingdom"
+"has_logo": true
+"integration_id": ""
+"integration_title": "Pingdom Legacy API (V2.1)"
+"integration_version": ""
+"is_public": true
+"manifest_version": "1.0"
+"name": "pingdom"
+"public_title": "Datadog-Pingdom Legacy API (V2.1) Integration"
+"short_description": "Manage and migrate existing configuration of legacy Pingdom monitoring endpoints."
+"team": "web-integrations"
+"version": "1.0"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-## 概要
+## Overview
 
 <div class="alert alert-danger">
-このインテグレーションは非推奨であり、依存する API はいつサポートを失うかわかりません。代わりに <a href="https://docs.datadoghq.com/integrations/pingdom_v3/" class="alert-link">Datadog Pingdom V3 インテグレーション</a>を使用してください。
+This integration is deprecated, and the API it relies on could lose support at any time. Use the <a href="https://docs.datadoghq.com/integrations/pingdom_v3/" class="alert-link">Datadog Pingdom V3 Integration</a> instead.
 </div>
 
-他のイベントやメトリクスに関連付けて、ユーザー中心の Pingdom パフォーマンスメトリクスを Datadog で追跡します。
+Track Pingdom user-centric performance metrics in Datadog, for correlation with other relevant events and metrics.
 
-Datadog は、Pingdom Web サイトで構成されているすべてのサイトの `response_time` メトリクスを追跡します。
+Datadog tracks the `response_time` metric for any sites you configure on the Pingdom website.
 
-[インテグレーションステータスモニター][1]を構成することで、Pingdom イベントを追加できます。
+Pingdom events can be added by configuring the relevant [Integration Status Monitor][1]
 
 <div class="alert alert-info">
-メトリクスのインポートは、Starter レベル以上の Pingdom ユーザーで行うことができます。
+Metrics can only be imported for Pingdom customers at the Starter level or above.
 </div>
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-1. Pingdom インテグレーションタイルを開きます。
-2. Pingdom アカウントのユーザー名とパスワードを入力します (チームアカウントがある場合は、ご自身の認証情報を使用し、チェックの取得元のアカウントを指定できます)。
-3. 一部のチェックをオフにして無視したり、生成されるイベントにタグを追加することもできます。
+1. Open the Pingdom integration tile.
+2. Enter the username and password to your Pingdom account. (If you have a Team account, you can use your own credentials and specify the account you wish to pull checks from.)
+3. You can ignore some checks by unchecking them or add some tags to the events that are going to be generated.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "pingdom" >}}
 
 
-### ヘルプ
+### Events
 
-Pingdom インテグレーションには、イベントは含まれません。
+The Pingdom integration does not include any events.
 
-### ヘルプ
+### Service Checks
 
-Pingdom インテグレーションは、トランザクションチェックを取得し、それをサービスチェックとしてレポートします。
+The Pingdom integration pulls in transaction checks and reports them as service checks.
 
-`pingdom.status` チェックについて、以下の表に、Pingdom トランザクションチェックの結果と Datadog サービスチェックの結果の対応関係を示します。
+For the `pingdom.status` check, the following table explains which Pingdom transaction check results correlate to which Datadog service check results.
 
-| Datadog ステータス | Pingdom ステータス      |
+| Datadog status | Pingdom status      |
 | -------------- | ------------------- |
 | `OK`           | `up`                |
 | `CRITICAL`     | `down`              |
 | `WARNING`      | `unconfirmed_down`  |
-| `UNKNOWN`      | `unknown`、`paused` |
+| `UNKNOWN`      | `unknown`, `paused` |
 
-## ヘルプ
+## Troubleshooting
 
-### ユーザー名またはパスワードの更新時にエラーが発生する
+### Error when updating username or password
 
-Pingdom 認証情報の保存時に以下のエラーが表示されることがあります。
+You may have seen the following error when saving your Pingdom credentials:
 
 `“There was an issue while testing your Pingdom configuration: Not permitted for account type”`.
 
-Pingdom アカウント所有者の電子メールアドレスを **(Optional) Account to query** フィールドに追加し、保存してください。
+Add the email address of your Pingdom account owner in the **(Optional) Account to query** field, then save.
 
 [1]: https://app.datadoghq.com/monitors/create/integration
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/pingdom/pingdom_metadata.csv
+

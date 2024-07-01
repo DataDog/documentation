@@ -1,101 +1,111 @@
 ---
-aliases:
-- /ja/tracing/profiling/
-- /ja/tracing/profiler/
-further_reading:
-- link: /profiler/enabling
-  tag: ドキュメント
-  text: アプリケーションの継続的なプロファイラー有効化
-- link: getting_started/profiler
-  tag: ドキュメント
-  text: Continuous Profiler の概要
-- link: profiler/search_profiles
-  tag: ドキュメント
-  text: 使用可能なプロファイルタイプの詳細
-- link: /developers/guide/data-collection-resolution-retention/
-  tag: ドキュメント
-  text: データ収集、解決、保持
-- link: https://www.datadoghq.com/blog/introducing-datadog-profiling/
-  tag: ブログ
-  text: Datadog に常時接続型の本番環境プロファイリングが登場
-- link: https://www.datadoghq.com/blog/datadog-github-action-vulnerability-analysis/
-  tag: ブログ
-  text: 継続的な脆弱性分析のための Datadog GitHub アクション
-- link: https://www.datadoghq.com/blog/code-optimization-datadog-profile-comparison/
-  tag: ブログ
-  text: Datadog プロファイル比較を使用してコードを比較および最適化します。
-- link: https://www.datadoghq.com/blog/engineering/how-we-optimized-our-akka-application-using-datadogs-continuous-profiler/
-  tag: ブログ
-  text: Datadog の Continuous Profiler を使用して Akka アプリケーションを最適化した方法
-- link: https://www.datadoghq.com/blog/ruby-profiling-datadog-continuous-profiler/
-  tag: ブログ
-  text: Datadog Continuous Profiler で Ruby のコードパフォーマンスを分析
 title: Continuous Profiler
+aliases:
+    - /tracing/profiling/
+    - /tracing/profiler/
+further_reading:
+    - link: /profiler/enabling
+      tag: Documentation
+      text: Enable continuous profiler for your application
+    - link: getting_started/profiler
+      tag: Documentation
+      text: Getting Started with Continuous Profiler
+    - link: profiler/search_profiles
+      tag: Documentation
+      text: Learn more about available profile types
+    - link: /developers/guide/data-collection-resolution-retention/
+      tag: Documentation
+      text: Data collection, resolution, and retention
+    - link: "https://www.datadoghq.com/blog/source-code-preview/"
+      tag: Blog
+      text: Focus on code that matters with source code previews in Continuous Profiler      
+    - link: "https://www.datadoghq.com/blog/introducing-datadog-profiling/"
+      tag: Blog
+      text: Introducing always-on production profiling in Datadog
+    - link: "https://www.datadoghq.com/blog/datadog-github-action-vulnerability-analysis/"
+      tag: Blog
+      text: Datadog GitHub Action for continuous vulnerability analysis
+    - link: "https://www.datadoghq.com/blog/code-optimization-datadog-profile-comparison/"
+      tag: Blog
+      text: Compare and optimize your code with Datadog Profile Comparison.
+    - link: "https://www.datadoghq.com/blog/engineering/how-we-optimized-our-akka-application-using-datadogs-continuous-profiler/"
+      tag: Blog
+      text: How we optimized our Akka application using Datadog's Continuous Profiler
+    - link: "https://www.datadoghq.com/blog/ruby-profiling-datadog-continuous-profiler/"
+      tag: Blog
+      text: Analyze Ruby code performance with Datadog Continuous Profiler
+cascade:
+    algolia:
+        rank: 70
 ---
 
 {{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/441865141/rendition/1080p/file.mp4?loc=external&signature=ebc774b892f062e45922dcae82f4ebff0a906c8ec30f34b9d77494b0051748ad" poster="/images/poster/profiler.png" >}}
 
 </br>
 
-発見した CPU、メモリ、IO のボトルネックをメソッド名、クラス名、行番号で分類して、エンドユーザー側での遅延とインフラストラクチャーにかかるコストを大幅に削減することができます。
+Find CPU, memory, and IO bottlenecks, broken down by method name, class name, and line number, to significantly reduce end-user latency and infrastructure costs.
 
-### 実環境での影響を最小限に
+### Low impact in production
 
-Continuous Profiler は、JDK Flight Recorder などの技術を活用し、すべてのサービスの実環境で実行します。こうすることでホストの CPU とメモリ使用量への影響を最小限に抑えることができます。
+Continuous profiler runs in production across all services by leveraging technologies such as JDK Flight Recorder to have minimal impact on your host's CPU and memory usage.
 
-## はじめに
+## Getting started
 
-お使いのサービスでプロファイリングを行うことで、すべてのスタックトレースを一つの管理画面で可視化することができます。設定方法はとても簡単です。
+Profiling your service to visualize all your stack traces in one place takes just minutes.
 
-### アプリケーションをインスツルメントする
+### Instrument your application
 
 {{< partial name="profiling/profiling-languages.html" >}}
 
-## プロファイラーの使用ガイド
+## Guide to using the profiler
 
-[プロファイラーの概要][1]ガイドでは、パフォーマンスの問題があるサンプルサービスを例に、Continuous Profiler を使用して問題を理解し修正する方法を確認します。
+The [Getting Started with Profiler][1] guide takes a sample service with a performance problem and shows you how to use Continuous Profiler to understand and fix the problem.
 
-## Datadog でのプロファイラー確認
+## Explore Datadog profiler
 
-アプリケーションからプロファイルを Datadog に送信するための構成が完了した後は、コードのパフォーマンスに関するインサイトを確認してみましょう。
+After you configure your application to send profiles to Datadog, start getting insights into your code performance.  
 
-デフォルトでは、プロファイルは 7 日間、プロファイルデータから生成されたメトリクスは 1 か月間保持されます。
+By default, profiles are retained for seven days, and metrics generated from profile data are retained for one month.
 
-### プロファイルタイプ
+{{< learning-center-callout header="Try Diagnose Code Performance Issues in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/continuous-profiler-course">}}
+  The Datadog Learning Center is full of hands-on courses to help you learn about this topic. Enroll at no cost to investigate and improve application code performance in production with Datadog Continuous Profiler.
+{{< /learning-center-callout >}}
 
-対応言語ごとに収集されるプロファイルデータの種類については、[プロファイルのデータタイプ][6]を参照してください。
+### Profile types
 
-{{< img src="profiler/profile-types.png" alt="Java アプリケーションで収集されるプロファイルタイプのリスト" style="width:100%;" >}}
+See [Profile Types][6] for descriptions of the kinds of profile data collected for each supported language.
 
-### タグを使用してプロファイルを検索
+{{< img src="profiler/profile-types.png" alt="The list of profile types collected for Java applications" style="width:100%;" >}}
 
-[タグを使用してプロファイルを検索][2]します。特定のホスト、サービス、バージョン、あるいはいずれかの組み合わせなど、すべてのディメンションのデータを表示させることができます。
+### Search profiles by tags
 
-{{< img src="profiler/search_profiles.mp4" alt="タグによるプロファイルの検索" video=true >}}
+[Use tags to search profiles][2] across any dimension—whether it's a specific host, service, version, or any combination.
 
-### デプロイメントでの機能パフォーマンスを追跡する
+{{< img src="profiler/search_profiles2.mp4" alt="Search profiles by tags" video=true >}}
 
-メソッドごとの主な CPU 使用率、スレッドごとの主なメモリ割り当て状況、バージョンごとの CPU 使用状況など、主要なプロファイリングメトリクスをサービスから取得してダッシュボードを可視化することができます。
+### Track function performance over deployments
 
-{{< img src="profiler/profiling-metric-dashboard.mp4" alt="ダッシュボードにプロファイリングのメトリクスを追加。" video=true >}}
+Obtain key profiling metrics from services such as top CPU usage by method, top memory allocations by thread, and CPU usage by version to visualize in your dashboards.
 
-### プロファイリングデータにトレースを接続する
+{{< img src="profiler/profiling-metric-dashboard.mp4" alt="Add profiling metrics to your dashboards." video=true >}}
 
-[APM 分散型トレーシング][3]と Continuous Profiler の双方が有効化されたアプリケーションプロセスは自動的にリンクされるため、[Code Hotspots タブ][4]でスパン情報からプロファイリングデータを直接開き、パフォーマンスの問題に関連する特定のコード行を見つけることができます。
+### Connect traces to profiling data
 
-{{< img src="profiler/code_hotspots_tab.mp4" alt="Code Hotspots タブで APM トレーススパンのプロファイリング情報を確認" video=true >}}
+Application processes that have both [APM distributed tracing][3] and continuous profiler enabled are automatically linked, so you can move directly from span information to profiling data on the [Code Hotspots tab][4] to find specific lines of code related to performance issues.
 
-### プロファイルの比較により、パフォーマンスにおける変化を発見
+{{< img src="profiler/code_hotspots_tab.mp4" alt="Code Hotspots tab shows profiling information for a APM trace span" video=true >}}
 
-異なる時間、環境、またはデプロイメントの似たようなプロファイルの比較は、パフォーマンスの問題に対する原因や解決策の把握に役立ちます。Datadog プロファイラーでは、 [比較が視覚化][5]されるため、時間枠やスコープされたタグによってなぜプロファイルが異なるか、よく理解できます。
+### Find changes in performance by comparing profiles
 
-## その他の参考資料
+Comparing similar profiles from different times, environments, or deployments can help you understand the possible causes of and solutions to performance problems. The Datadog profiler offers [comparison visualizations][5] to make sense of why profiles are different based on time frames or tags that you scope by. 
+
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/getting_started/profiler/
-[2]: /ja/profiler/search_profiles
-[3]: /ja/tracing/
-[4]: /ja/profiler/connect_traces_and_profiles/
-[5]: /ja/profiler/compare_profiles/
-[6]: /ja/profiler/profile_types/
+[1]: /getting_started/profiler/
+[2]: /profiler/search_profiles
+[3]: /tracing/
+[4]: /profiler/connect_traces_and_profiles/
+[5]: /profiler/compare_profiles/
+[6]: /profiler/profile_types/

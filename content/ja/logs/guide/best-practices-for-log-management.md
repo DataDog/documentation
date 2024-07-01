@@ -1,226 +1,228 @@
 ---
-algolia:
-  tags:
-  - ログの使用
+title: Best Practices for Log Management
+kind: guide
 aliases:
-- /ja/logs/guide/logs-monitors-on-volumes/
+    - /logs/guide/logs-monitors-on-volumes/
 further_reading:
-- link: /logs/log_configuration/processors
-  tag: Documentation
-  text: ログの処理方法
-- link: /logs/log_configuration/parsing
-  tag: Documentation
-  text: パースの詳細
-- link: https://www.datadoghq.com/blog/log-management-policies/
-  tag: ブログ
-  text: ログ管理ポリシーの実装に備える
-kind: ガイド
-title: ログ管理のベストプラクティス
+    - link: /logs/log_configuration/processors
+      tag: Documentation
+      text: Learn how to process your logs
+    - link: /logs/log_configuration/parsing
+      tag: Documentation
+      text: Learn more about parsing
+    - link: "https://www.datadoghq.com/blog/log-management-policies/"
+      tag: Blog
+      text: How to implement log management policies with your teams
+algolia:
+  tags: [log usage]
 ---
 
-## 概要
+## Overview
 
-Datadog ログ管理は、ログの収集、処理、アーカイブ、探索、監視を行うため、システムの問題を可視化することができます。しかし、ログから適切なレベルの可視性を得ることは難しく、また、ログのスループットが大きく変動し、予期せぬリソースの使用を引き起こす可能性があります。
+Datadog Log Management collects, processes, archives, explores, and monitors your logs, so that you have visibility into your system's issues. However, it can be hard to get the right level of visibility from your logs and log throughput can vary highly, creating unexpected resource usage.
 
-したがって、このガイドでは、ガバナンス、使用量属性、および予算管理の柔軟性を提供する、さまざまなログ管理のベストプラクティスおよびアカウント構成を説明します。具体的には、以下の方法を説明します。
+Therefore, this guide walks you through various Log Management best practices and account configurations that provide you flexibility in governance, usage attribution, and budget control. More specifically, how to:
 
-- [複数のインデックスを設定し、ログをセグメント化する](#set-up-multiple-indexes-for-log-segmentation)
-- [長期保存のための複数のアーカイブを設定する](#set-up-multiple-archives-for-long-term-storage)
-- [カスタムロールの RBAC を設定する](#set-up-rbac-for-custom-roles)
+- [Set up multiple indexes to segment your logs](#set-up-multiple-indexes-for-log-segmentation)
+- [Set up multiple archives for long-term storage](#set-up-multiple-archives-for-long-term-storage)
+- [Set up RBAC for custom roles](#set-up-rbac-for-custom-roles)
 
-また、このガイドでは、ログの使用量を監視する方法について、以下のように説明します。
+This guide also goes through how to monitor your log usage by:
 
-- [予期せぬログトラフィックの急増にアラートを出す](#alert-on-unexpected-log-traffic-spikes)
-- [インデックス化されたログに対して、ボリュームがしきい値を超えた場合にアラートを出す](#alert-when-an-indexed-log-volume-passes-a-specified-threshold)
-- [大容量ログの除外フィルターを設定する](#set-up-exclusion-filters-on-high-volume-logs)
+- [Alerting on unexpected log traffic spikes](#alert-on-unexpected-log-traffic-spikes)
+- [Alerting on indexed logs when the volume passes a specified threshold](#alert-when-an-indexed-log-volume-passes-a-specified-threshold)
+- [Setting up exclusion filters on high-volume logs](#set-up-exclusion-filters-on-high-volume-logs)
 
-## ログアカウント構成
+If you want to transform your logs or redact sensitive data in your logs before they leave your environment, see how to [aggregate, process, and transform your log data with Observability Pipelines][29].
 
-### ログセグメンテーションのための複数のインデックスを設定する
+## Log account configuration
 
-異なる保持期間や 1 日の割り当て、使用量の監視、請求のためにログをセグメント化したい場合は、複数のインデックスを設定します。
+### Set up multiple indexes for log segmentation
 
-例えば、7 日間だけ保持する必要があるログと、30 日間保持する必要があるログがある場合、複数のインデックスを使用して、2 つの保持期間ごとにログを分離することができます。
+Set up multiple indexes if you want to segment your logs for different retention periods or daily quotas, usage monitoring, and billing. 
 
-複数のインデックスを設定するには
+For example, if you have logs that only need to be retained for 7 days, while other logs need to be retained for 30 days, use multiple indexes to separate out the logs by the two retention periods.
 
-1. [ログインデックス][1]に移動します。
-2. **New Index** または **Add a new index** をクリックします。
-3. インデックスの名前を入力します。
-4. このインデックスに入れたいログにフィルターをかけるための検索クエリを入力します。
-5. 1 日にインデックス内に保存されるログの数を制限するために、1 日の割り当てを設定します。
-6. これらのログを保持する期間を設定します。
-7. **Save** をクリックします。
+To set up multiple indexes:
 
-インデックスに 1 日の割り当てを設定すると、新しいログソースが追加されたとき、または開発者が意図せずにログレベルをデバッグモードに変更したときに、請求の超過を防止するのに役立ちます。過去 24 時間以内に 1 日の割り当てのパーセンテージに達したときにアラートを発するようにモニターを設定する方法については、[インデックスが 1 日の割り当てに達した場合のアラート(#alert-on-indexes-reaching-their-daily-quota)を参照してください。
+1. Navigate to [Log Indexes][1].
+2. Click **New Index** or **Add a new index**.
+3. Enter a name for the Index.
+4. Enter the search query to filter to the logs you want in this index.
+5. Set the daily quota to limit the number of logs that are stored within an index per day.
+6. Set the retention period to how long you want to retain these logs.
+7. Click **Save**.
 
-### 長期保存のための複数のアーカイブを設定する
+Setting daily quotas on your indexes can help prevent billing overages when new log sources are added or if a developer unintentionally changes the logging levels to debug mode. See [Alert on indexes reaching their daily quota](#alert-on-indexes-reaching-their-daily-quota) on how to set up a monitor to alert when a percentage of the daily quota is reached within the past 24 hours.
 
-ログを長期間保存したい場合は、[ログアーカイブ][2]を設定して、Amazon S3、Azure Storage、Google Cloud Storage などのストレージに最適化されたシステムにログを送信してください。Datadog を使用してこれらのログを分析する場合は、[Log Rehydration][3]™ を使用して Datadog にこれらのログをキャプチャして戻します。複数のアーカイブを使用することで、コンプライアンス上の理由からログをセグメント化し、リハイドレートのコストを抑制することができます。
+### Set up multiple archives for long-term storage
 
-#### 高価なリハイドレートを管理するために最大スキャンサイズを設定する
+If you want to store your logs for longer periods of time, set up [Log Archives][2] to send your logs to a storage-optimized system, such as Amazon S3, Azure Storage, or Google Cloud Storage. When you want to use Datadog to analyze those logs, use [Log Rehydration][3]TM to capture those logs back in Datadog. With multiple archives, you can both segment logs for compliance reasons and keep rehydration costs under control.
 
-一度にリハイドレートできるログの容量の上限を設定します。アーカイブの設定時に、リハイドレートのためにスキャンできるログデータの最大容量を定義することができます。詳しくは、[最大スキャンサイズを定義する][4]を参照してください。
+#### Set up max scan size to manage expensive rehydrations 
 
-### カスタムロールの RBAC を設定する
+Set a limit on the volume of logs that can be rehydrated at one time. When setting up an archive, you can define the maximum volume of log data that can be scanned for Rehydration. See [Define maximum scan size][4] for more information.
 
-[Datadog のデフォルトロール][5]は 3 つあります。Admin、Standard、および Read-only です。また、独自の権限セットを持つカスタムロールを作成することも可能です。例えば、意図しないコスト上昇を避けるために、インデックス保持ポリシーの変更をユーザーに制限するロールを作成することができます。同様に、ログのパース構成を変更できるユーザーを制限して、明確に定義されたログの構造や形式が不要に変更されるのを避けることができます。
+### Set up RBAC for custom roles
 
-権限を持つカスタムロールを設定するには
+There are three [default Datadog roles][5]: Admin, Standard, and Read-only. You can also create custom roles with unique permission sets. For example, you can create a role that restricts users from modifying index retention policies to avoid unintended cost spikes. Similarly, you can restrict who can modify log parsing configurations to avoid unwanted changes to well-defined log structures and formats.
 
-1. [Datadog][6] に Admin としてログインします。
-2. [Organization Settings > Roles][7] に移動します。
-3. カスタムロールを有効にするには、左上の歯車をクリックし、**Enable** をクリックします。
-4. 有効にしたら、**New Role** をクリックします。
-5. 新しいロールの名前を入力します。
-6. ロールの権限を選択します。これにより、ログのリハイドレートやログベースのメトリクス作成など、特定のアクションへのアクセスを制限することができます。詳細については、[ログ管理の権限][8]を参照してください。
-7. **Save** をクリックします。
+To set up custom roles with permissions:
 
-ユースケースの例として、特定の権限を持つロールを設定し、割り当てる方法については、[ログのための RBAC のセットアップ方法][9]を参照してください。
+1. Log in to [Datadog][6] as an Admin.
+2. Navigate to [Organization Settings > Roles][7].
+3. To enable custom roles, click the cog on the top left and then click **Enable**.
+4. Once enabled, click **New Role**.
+5. Enter a name for the new role.
+6. Select the permissions for the role. This allows you to restrict access to certain actions, such as rehydrating logs and creating log-based metrics. See [Log Management Permissions][8] for details.
+7. Click **Save**.
 
-## ログの使用量を監視する
+See [How to Set Up RBAC for Logs][9] for a step-by-step guide on how to set up and assign a role with specific permissions for an example use case.
 
-以下を設定することで、ログの使用量を監視することができます。
+## Monitor log usage
 
-- [予期せぬログトラフィックの急増に対するアラート](#alert-on-unexpected-log-traffic-spikes)
-- [インデックス化されたログボリュームが指定されたしきい値を超えた場合のアラート](#alert-when-an-indexed-log-volume-passes-a-specified-threshold)
+You can monitor your log usage, by setting up the following:
 
-### 予期せぬログトラフィックの急増に対するアラート
+- [Alerts for unexpected log traffic spikes](#alert-on-unexpected-log-traffic-spikes)
+- [Alert when an indexed log volume passes a specified threshold](#alert-when-an-indexed-log-volume-passes-a-specified-threshold)
 
-#### ログ使用量メトリクス
+### Alert on unexpected log traffic spikes
 
-デフォルトで、[ログ使用量メトリクス][10]は取り込まれたログ、取り込まれたバイト数、インデックス化されたログの追跡に利用できます。このメトリクスは無料で利用でき、15 か月間保存できます。
+#### Log usage metrics
+
+By default, [log usage metrics][10] are available to track the number of ingested logs, ingested bytes, and indexed logs. These metrics are free and kept for 15 months:
 
 - `datadog.estimated_usage.logs.ingested_bytes`
 - `datadog.estimated_usage.logs.ingested_events`
 
-使用量メトリクスを使った異常検出モニターの作成手順については、[異常検出モニター][11]を参照してください。
+See [Anomaly detection monitors][11] for steps on how to create anomaly monitors with the usage metrics.
 
-**注**: Datadog では、[メトリクスサマリーページ][12]の `datadog.estimated_usage.logs.ingested_bytes` の単位を `byte` とすることを推奨しています。
+**Note**: Datadog recommends setting the unit to `byte` for the `datadog.estimated_usage.logs.ingested_bytes` in the [metric summary page][12]:
 
-{{< img src="logs/guide/logs_estimated_bytes_unit.png" alt="datadog.estimated_usage.logs.ingested_bytes のサイドパネルで単位がバイトに設定されているメトリクスサマリページ" style="width:70%;">}}
+{{< img src="logs/guide/logs_estimated_bytes_unit.png" alt="The metric summary page showing the datadog.estimated_usage.logs.ingested_bytes side panel with the unit set to byte" style="width:70%;">}}
 
-#### 異常検出モニター
+#### Anomaly detection monitors
 
-異常検出モニターを作成し、予期せぬログのインデックス化の急増にアラートを出します。
+Create an anomaly detection monitor to alert on any unexpected log indexing spikes:
 
-1. [Monitors > New Monitor][13] の順に移動し、**Anomaly** を選択します。
-2. **Define the metric** セクションで、`datadog.estimated_usage.logs.ingested_events` メトリクスを選択します。
-3. **from** フィールドに、`datadog_is_excluded:false` タグを追加し、インデックス化されたログのみを監視し、取り込まれたログは監視しないようにします。
-4. **sum by** フィールドに、`service` と `datadog_index` タグを追加し、特定のサービスが急増したり、いずれかのインデックスでログの送信を停止した場合に通知されるようにします。
-5. アラート条件は、ユースケースに合わせて設定してください。例えば、評価された値が予想される範囲外である場合にアラートを出すようにモニターを設定します。
-6. 通知のタイトルと、アクションを指示するメッセージを追加します。例えば、これはコンテクストリンク付きの通知です。
+1. Navigate to [Monitors > New Monitor][13] and select **Anomaly**.
+2. In the **Define the metric** section, select the `datadog.estimated_usage.logs.ingested_events` metric.
+3. In the **from** field, add the `datadog_is_excluded:false` tag to monitor indexed logs and not ingested ones.
+4. In the **sum by** field, add the `service` and `datadog_index` tags, so that you are notified if a specific service spikes or stops sending logs in any index.
+5. Set the alert conditions to match your use case. For example, set the monitor to alert if the evaluated values are outside of an expected range.
+6. Add a title for the notification and a message with actionable instructions. For example, this is a notification with contextual links:
     ```text
     An unexpected amount of logs has been indexed in the index: {{datadog_index.name}}
 
     1. [Check Log patterns for this service](https://app.datadoghq.com/logs/patterns?from_ts=1582549794112&live=true&to_ts=1582550694112&query=service%3A{{service.name}})
     2. [Add an exclusion filter on the noisy pattern](https://app.datadoghq.com/logs/pipelines/indexes)
     ``` 
-7. **Create** をクリックします。
+7. Click **Create**.
 
-### インデックス化されたログボリュームが指定されたしきい値を超えた場合のアラート
+### Alert when an indexed log volume passes a specified threshold
 
-インフラストラクチャー (例えば、`service`、`availability-zone` など) の任意のスコープでインデックス化されたログボリュームが予期せず増加した場合にアラートを出すようにモニターをセットアップします。
+Set up a monitor to alert if an indexed log volume in any scope of your infrastructure (for example, `service`, `availability-zone`, and so forth) is growing unexpectedly.
 
-1. [ログエクスプローラー][14]に移動します。
-2. 監視したいログボリュームをキャプチャするインデックス名 (例: `index:main`) を含む[検索クエリ][15]を入力します。
-3. **Download as CSV** の横の下矢印をクリックし、**Create monitor** を選択します。
-4. **group by** フィールドにタグ (例：`host`、`services` など) を追加します。
-5. ユースケースに応じた **Alert threshold** を入力します。オプションで、**Warning threshold** を入力します。
-6. 通知のタイトルを追加します。例:
+1. Navigate to the [Log Explorer][14].
+2. Enter a [search query][15] that includes the index name (for example, `index:main`) to capture the log volume you want to monitor.
+3. Click the down arrow next to **Download as CSV** and select **Create monitor**.
+4. Add tags (for example, `host, `services, and so on) to the **group by** field.
+5. Enter the **Alert threshold** for your use case. Optionally, enter a **Warning threshold**.
+6. Add a notification title, for example: 
     ```
     Unexpected spike on indexed logs for service {{service.name}}
     ```
-6. メッセージを追加します。例:
+6. Add a message, for example:
     ```
     The volume on this service exceeded the threshold. Define an additional exclusion filter or increase the sampling rate to reduce the volume.
     ```
-7. **Create** をクリックします。
+7. Click **Create**.
 
-#### 月初からのインデックス化ログ量に関するアラート
+#### Alert on indexed logs volume since the beginning of the month
 
-`datadog_is_excluded:false` でフィルターした `datadog.estimated_usage.logs.ingested_events` メトリクスを活用してインデックス化ログのみをカウントし、[メトリクスモニター累積ウィンドウ][28]で月初からのカウントをモニターします。
+Leverage the `datadog.estimated_usage.logs.ingested_events` metric filtered on `datadog_is_excluded:false` to only count indexed logs and the [metric monitor cumulative window][28] to monitor the count since the beginning of the month. 
 
-{{< img src="logs/guide/monthly_usage_monitor.png" alt="月初以降のインデックス化ログ数をアラートするモニターの設定" style="width:70%;">}}
+{{< img src="logs/guide/monthly_usage_monitor.png" alt="Setup a monitor to alert for the count of indexed logs since the beginning of the month" style="width:70%;">}}
 
-#### インデックスが 1 日の割り当てに達した際のアラート
+#### Alert on indexes reaching their daily quota
 
-インデックスに [1 日の割り当てを設定する][16]ことで、1 日に与えられたログ数以上のインデックス化を防ぐことができます。インデックスに 1 日の割り当てがある場合、Datadog は過去 24 時間以内にこの割り当ての 80% に達したときにアラートを出すように[そのインデックスのボリュームについて通知するモニター](#alert-when-an-indexed-log-volume-passes a-specified-threshold)を設定することをお勧めします。
+[Set up a daily quota][16] on indexes to prevent indexing more than a given number of logs per day. If an index has a daily quota, Datadog recommends that you set the [monitor that notifies on that index's volume](#alert-when-an-indexed-log-volume-passes-a-specified-threshold) to alert when 80% of this quota is reached within the past 24 hours.
 
-1 日の割り当てに達すると、イベントが生成されます。デフォルトでは、これらのイベントはインデックス名を持つ `datadog_index` タグを持っています。したがって、このイベントが生成されたら、`datadog_index` タグに [ファセットを作成][17]して、`datadog_index` を `group by` ステップで使用して、複数アラートモニターをセットアップできるようにします。
+An event is generated when the daily quota is reached. By default, these events have the `datadog_index` tag with the index name. Therefore, when this event has been generated, you can [create a facet][17] on the `datadog_index` tag, so that you can use `datadog_index` in the `group by` step for setting up a multi-alert monitor. 
 
-インデックスの 1 日の割り当てに達した際にアラートを出すモニターを設定するには
+To set up a monitor to alert when the daily quota is reached for an index:
 
-1. [Monitors > New Monitor][13] の順に移動し、**Event** をクリックします。
-2. **Define the search query** セクションに `source:datadog "daily quota reached"` と入力します。
-3. **group by** フィールドに `datadog_index(datadog_index)` を追加します。`datadog_index(datadog_index)` タグは、すでにイベントが生成されている場合のみ利用可能です。
-4. **Set alert conditions** セクションで、`above or equal to` を選択し、**Alert threshold** に `1` を入力します。
-5. **Notify your team** セクションに通知のタイトルとメッセージを追加します。モニターが `datadog_index(datadog_index)` によってグループ化されているため、**Multi Alert** ボタンが自動的に選択されます。
-6. **Save** をクリックします。
+1. Navigate to [Monitors > New Monitor][13] and click **Event**.
+2. Enter: `source:datadog "daily quota reached"` in the **Define the search query** section.
+3. Add `datadog_index` to the **group by** field. It automatically updates to `datadog_index(datadog_index)`. The `datadog_index(datadog_index)` tag is only available when an event has already been generated. 
+4. In the **Set alert conditions** section, select `above or equal to` and enter `1` for the **Alert threshold**.
+5. Add a notification title and message in the **Configure notifications and automations** section. The **Multi Alert** button is automatically selected because the monitor is grouped by `datadog_index(datadog_index)`.
+6. Click **Save**.
 
-これは、Slack での通知の例です。
+This is an example of what the notification looks like in Slack:
 
-{{< img src="logs/guide/daily_quota_notification.png" alt="datadog_index:retention-7 で 1 日の割り当てに達したことの slack 通知" style="width:70%;">}}
+{{< img src="logs/guide/daily_quota_notification.png" alt="A slack notification on the daily quota reached on datadog_index:retention-7" style="width:70%;">}}
 
-### 推定使用量ダッシュボードを確認する
+### Review the estimated usage dashboard
 
-ログの取り込みを開始すると、ログ使用量メトリクスをまとめたすぐに使える[ダッシュボード][5]が自動的にアカウントにインストールされます。
+Once you begin ingesting logs, an out-of-the-box [dashboard][18] summarizing your log usage metrics is automatically installed in your account.
 
-{{< img src="logs/guide/logslight.png" alt="インデックス化され、取り込まれた内訳をウィジェット別に表示するログ推定使用量ダッシュボード" style="width:70%;">}}
+{{< img src="logs/guide/logslight.png" alt="The log estimated usage dashboard showing the breakdown of indexed and ingested in different widgets" style="width:70%;">}}
 
-**注**: このダッシュボードで使用されるメトリクスは推定であるため、正式な請求対象の数値とは異なる場合があります。
+**Note**: The metrics used in this dashboard are estimates and may differ from official billing numbers.
 
-このダッシュボードを見つけるには、**Dashboards > Dashboards List** に移動し、[Log Management - Estimated Usage][19] を検索します。
+To find this dashboard, go to **Dashboards > Dashboards List** and search for [Log Management - Estimated Usage][19].
 
-### 大量ログの除外フィルターを設定する
+### Set up exclusion filters on high-volume logs
 
-使用量モニターがアラートを出す場合、除外フィルターを設定したり、サンプリングレートを上げてボリュームを減らしたりすることができます。設定方法については、[除外フィルター][20]を参照してください。また、[ログパターン][21]を使用して、大量のログをグループ化して識別することができます。次に、ログパターンのサイドパネルで、**Add Exclusion Filter** をクリックして、これらのログのインデックス化を停止するフィルターを追加します。
+When your usage monitors alert, you can set up exclusion filters and increase the sampling rate to reduce the volume. See [Exclusion Filters][20] on how to set them up. You can also use [Log Patterns][21] to group and identify high-volume logs. Then, in the log pattern's side panel, click **Add Exclusion Filter** to add a filter to stop indexing those logs.
 
-{{< img src="logs/guide/patterns_exclusion.png" alt="ログエクスプローラーページのサイドパネルにパターンの詳細が表示され、上部に除外フィルターの追加ボタンがあります" style="width:80%;">}}
+{{< img src="logs/guide/patterns_exclusion.png" alt="The log explorer page showing the side-panel details of a pattern with the add exclusion filter button at the top" style="width:80%;">}}
 
-除外フィルターを使用している場合でも、ログベースのメトリクスを使用して、すべてのログデータの傾向や異常を視覚化することができます。詳しくは、[取り込んだログからメトリクスを生成する][22]を参照してください。
+Even if you use exclusion filters, you can still visualize trends and anomalies over all of your log data using log-based metrics. See [Generate Metrics from Ingested Logs][22] for more information.
 
-### 個人識別情報 (PII) 検出のための機密データスキャナーを有効にする
+### Enable Sensitive Data Scanner for Personally Identifiable Information (PII) detection
 
-データ漏洩を防ぎ、コンプライアンス違反のリスクを抑えるには、機密データスキャナーを使用して、機密データを特定し、タグ付けし、オプションで削除またはハッシュ化することができます。例えば、ログ、APM スパン、RUM イベントに含まれるクレジットカード番号、銀行支店番号、API キーをスキャンできます。スキャンするデータを決定するスキャンルールを設定する方法については、[機密データスキャナー][23]を参照してください。
+If you want to prevent data leaks and limit non-compliance risks, use Sensitive Data Scanner to identify, tag, and optionally redact or hash sensitive data. For example, you can scan for credit card numbers, bank routing numbers, and API keys in your logs, APM spans, and RUM events, See [Sensitive Data Scanner][23] on how to set up scanning rules to determine what data to scan. 
 
-**注**: [機密データスキャナー][24]は、別途課金対象製品です。
+**Note**: [Sensitive Data Scanner][24] is a separate billable product.
 
-### ユーザーのアクティビティを確認するための監査証跡を有効にする
+### Enable Audit Trail to see user activities
 
-インデックスの保持を変更したのは誰か、除外フィルターを修正したのは誰かなど、ユーザーのアクティビティを確認したい場合は、監査証跡を有効にしてこれらのイベントを確認します。利用可能なプラットフォームおよび製品固有のイベントのリストについては、[監査証跡のイベント][25]を参照してください。監査証跡を有効にして構成するには、[監査証跡のドキュメント][26]の手順に従います。
+If you want to see user activities, such as who changed the retention of an index or who modified an exclusion filter, enable Audit Trail to see these events. See [Audit Trail Events][25] for a list of platform and product-specific events that are available. To enable and configure Audit Trail, follow the steps in the [Audit Trail documentation][26].
 
-**注**: [監査証跡][27]は、別途請求される製品です。
+**Note**: [Audit Trail][27] is a separate billable product.
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/logs/pipelines/indexes
-[2]: /ja/logs/log_configuration/archives/
-[3]: /ja/logs/log_configuration/rehydrating/
-[4]: /ja/logs/log_configuration/archives/?tab=awss3#define-maximum-scan-size
-[5]: /ja/account_management/rbac/?tab=datadogapplication#datadog-default-roles
+[2]: /logs/log_configuration/archives/
+[3]: /logs/log_configuration/rehydrating/
+[4]: /logs/log_configuration/archives/?tab=awss3#define-maximum-scan-size
+[5]: /account_management/rbac/?tab=datadogapplication#datadog-default-roles
 [6]: https://app.datadoghq.com/
 [7]: https://app.datadoghq.com/organization-settings/roles
-[8]: /ja/account_management/rbac/permissions/?tab=ui#log-management
-[9]: /ja/logs/guide/logs-rbac/
-[10]: /ja/logs/logs_to_metrics/#logs-usage-metrics
-[11]: /ja/monitors/types/anomaly/
+[8]: /account_management/rbac/permissions/?tab=ui#log-management
+[9]: /logs/guide/logs-rbac/
+[10]: /logs/logs_to_metrics/#logs-usage-metrics
+[11]: /monitors/types/anomaly/
 [12]: https://app.datadoghq.com/metric/summary?filter=datadog.estimated_usage.logs.ingested_bytes&metric=datadog.estimated_usage.logs.ingested_bytes
 [13]: https://app.datadoghq.com/monitors/create
 [14]: https://app.datadoghq.com/logs
-[15]: /ja/logs/explorer/search/
-[16]: /ja/logs/indexes/#set-daily-quota
-[17]: /ja/service_management/events/explorer/#facets
+[15]: /logs/explorer/search/
+[16]: /logs/indexes/#set-daily-quota
+[17]: /service_management/events/explorer/facets
 [18]: https://app.datadoghq.com/dash/integration/logs_estimated_usage
 [19]: https://app.datadoghq.com/dashboard/lists?q=Log+Management+-+Estimated+Usage
-[20]: /ja/logs/log_configuration/indexes/#exclusion-filters
-[21]: /ja/logs/explorer/analytics/patterns
-[22]: /ja/logs/log_configuration/logs_to_metrics/
-[23]: /ja/sensitive_data_scanner/
+[20]: /logs/log_configuration/indexes/#exclusion-filters
+[21]: /logs/explorer/analytics/patterns
+[22]: /logs/log_configuration/logs_to_metrics/
+[23]: /sensitive_data_scanner/
 [24]: https://www.datadoghq.com/pricing/?product=sensitive-data-scanner#sensitive-data-scanner
-[25]: /ja/account_management/audit_trail/events/
-[26]: /ja/account_management/audit_trail/
+[25]: /account_management/audit_trail/events/
+[26]: /account_management/audit_trail/
 [27]: https://www.datadoghq.com/pricing/?product=audit-trail#audit-trail
-[28]: /ja/monitors/configuration/?tab=thresholdalert#evaluation-window
+[28]: /monitors/configuration/?tab=thresholdalert#evaluation-window
+[29]: /observability_pipelines/

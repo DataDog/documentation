@@ -1,4 +1,4 @@
 ---
-title: 親組織
+title: parent org
 ---
-親組織は、複数の子組織の使用量を管理・閲覧することができます。
+A parent org can manage and view the usage of multiple child organizations.

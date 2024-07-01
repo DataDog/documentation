@@ -1,66 +1,73 @@
 ---
-app_id: splunk
-app_uuid: a3e6047c-501a-4a70-a465-19c0f117d1ac
-assets:
-  integration:
-    auto_install: false
-    events:
-      creates_events: true
-    source_type_name: Splunk
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com
-  support_email: help@datadoghq.com
-categories:
-- log collection
-- notification
-dependencies: []
-display_on_public_website: true
-draft: false
-git_integration_title: splunk
-integration_id: splunk
-integration_title: Splunk
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: 2.0.0
-name: splunk
-public_title: Splunk
-short_description: Splunk からイベントをキャプチャして、主要メトリクスのグラフ上に重ねて表示。
-supported_os: []
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::ログの収集
-  - Category::通知
-  configuration: README.md#Setup
-  description: Splunk からイベントをキャプチャして、主要メトリクスのグラフ上に重ねて表示。
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Splunk
+"app_id": "splunk"
+"app_uuid": "a3e6047c-501a-4a70-a465-19c0f117d1ac"
+"assets":
+  "integration":
+    "auto_install": false
+    "events":
+      "creates_events": true
+    "service_checks":
+      "metadata_path": "assets/service_checks.json"
+    "source_type_id": !!int "70"
+    "source_type_name": "Splunk"
+"author":
+  "homepage": "https://www.datadoghq.com"
+  "name": "Datadog"
+  "sales_email": "info@datadoghq.com"
+  "support_email": "help@datadoghq.com"
+"categories":
+- "log collection"
+- "notifications"
+"custom_kind": "integration"
+"dependencies": []
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "splunk"
+"integration_id": "splunk"
+"integration_title": "Splunk"
+"integration_version": ""
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "splunk"
+"public_title": "Splunk"
+"short_description": "Capture events from Splunk and overlay them onto key metrics graphs."
+"supported_os": []
+"tile":
+  "changelog": "CHANGELOG.md"
+  "classifier_tags":
+  - "Category::Log Collection"
+  - "Category::Notifications"
+  "configuration": "README.md#Setup"
+  "description": "Capture events from Splunk and overlay them onto key metrics graphs."
+  "media": []
+  "overview": "README.md#Overview"
+  "resources":
+  - "resource_type": "blog"
+    "url": "https://www.datadoghq.com/blog/integrate-splunk-datadog-put-microscope-application-monitoring/"
+  "support": "README.md#Support"
+  "title": "Splunk"
 ---
 
-## 概要
+<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
+## Overview
 
-Splunk のログモニターを接続して、以下のことができます。
+Connect your Splunk log monitoring to be able to:
 
-- レポートの通知を受けることができます。
-- レポートを他のメトリクスに関連付けることができます。
-- これらのイベントについてチームでコラボレーションできます。
+- Get notified of your reports.
+- Correlate these reports with your other metrics
+- Collaborate with your team on those events
 
-## セットアップ
+## Setup
 
-### APM に Datadog Agent を構成する
+### Installation
 
-Datadog で Splunk からのレポートを受け取るには、Splunk サーバーに `datadog`  Python ライブラリをインストールする必要があります。
+To receive your reports from Splunk into Datadog, you need to have the `datadog` python library installed on your splunk server:
 
 ```bash
 pip install datadog
 ```
 
-インストールが完了したら、[API キーとアプリケーションキーを取得][1]し、以下の `dog-splunk.sh` スクリプトを $SPLUNK_HOME/bin/scripts に追加します。
+Once it is done, [get your api key and an application key][1] and drop the following `dog-splunk.sh` script into \$SPLUNK_HOME/bin/scripts
 
 ```bash
 
@@ -74,17 +81,17 @@ dog --api-key $API_KEY --application-key $APP_KEY event post \
  --aggregation_key $SPLUNK_ARG_3 --type splunk
 ```
 
-スクリプトが実行可能で、その所有者が `splunk` ユーザーおよびグループであることを確認してください。
+Make sure the script is executable and owned by the `splunk` user and group.
 
-スクリプトが完成したら、新しいレポートを作成するか、既存のレポートに移動します。**Edit Schedule** をクリックし、**Schedule the Report** のチェックボックスをオンにします。**Run a Script** オプションまで移動し、Filename テキストボックスに「`dog-splunk.sh` 」と入力します。**Save** をクリックすると、イベントストリームで結果が表示されることを確認できます。
+Once the script is in place, create a new report or navigate to an existing report. Click the **Edit Schedule** and check the checkbox to **Schedule the Report**. When you get to the option to **Run a Script**, enter `dog-splunk.sh` in the Filename textbox. Click **Save** and you should see the results start appearing in your Event Stream.
 
-## トラブルシューティング
+## Troubleshooting
 
-`splunkd.log` で `runshellscript` を実行するたびにエラーコードが表示される場合は、最後のコマンドの末尾に `> dog_splunk_trace.txt 2>&1` を追加します。これにより、`$SPLUNK_HOME/etc/apps/search/bin/dog_splunk_trace.txt` ファイルが作成されます。このファイルから問題の詳細を確認できます。
+If you see an error code on each run of `runshellscript` in `splunkd.log`, try adding `> dog_splunk_trace.txt 2>&1` to the end of the last command. This creates a `$SPLUNK_HOME/etc/apps/search/bin/dog_splunk_trace.txt` file, which provides more detail about the problem.
 
-トレースファイルで、`dog: error: unrecognized arguments: OR failed OR severe` に続いて `dog`  コマンドの使用方法のヘルプのような文字列が含まれている場合は、最後の行の `\$SPLUNK_ARG_3` を単一引用符で囲みます。
+If the trace file has something like the usage help for the `dog` command followed by `dog: error: unrecognized arguments: OR failed OR severe`, add single quotes around `\$SPLUNK_ARG_3` on the last line.
 
-トレースファイルに `pkg_resources.DistributionNotFound` などの文字列で終わるトレースバックが含まれている場合は、`dog-splunk.sh` スクリプトの先頭に 3 つの `unset` を追加します。
+If the trace file includes a Traceback that ends with `pkg_resources.DistributionNotFound` or something similar, add three `unset`s to the top of your `dog-splunk.sh` script:
 
 ```bash
 #!/bin/bash
@@ -101,29 +108,35 @@ dog --api-key $API_KEY --application-key $APP_KEY event post \
  --aggregation_key $SPLUNK_ARG_3 --type splunk
 ```
 
-## その他の参考資料
+## Further Reading
 
-### ナレッジベース
+### Knowledge base
 
-スクリプトファイルでは、Splunk で有効な変数が使用されます。メッセージをカスタマイズする場合は、以下の変数テーブルを参照してください。
+The script file uses variables made available by Splunk. If you would like to customize the message, see the following table of variables:
 
 |                |                                                                             |
 | :------------- | :-------------------------------------------------------------------------- |
-| \$SPLUNK_ARG_0 | スクリプト名                                                                 |
-| \$SPLUNK_ARG_1 | 返されるイベントの数                                                   |
-| \$SPLUNK_ARG_2 | 検索条件                                                                |
-| \$SPLUNK_ARG_3 |  完全修飾クエリ文字列                                                |
-| \$SPLUNK_ARG_4 | 保存した検索の名前                                                        |
-| \$SPLUNK_ARG_5 | トリガー理由 (「The number of events was greater than 1 (イベント数が 2 以上だった)」など)     |
-| \$SPLUNK_ARG_6 | 保存した検索を表示するブラウザ URL                                        |
+| \$SPLUNK_ARG_0 | Script Name                                                                 |
+| \$SPLUNK_ARG_1 | Number of events returned                                                   |
+| \$SPLUNK_ARG_2 | Search terms                                                                |
+| \$SPLUNK_ARG_3 | Fully qualified query string                                                |
+| \$SPLUNK_ARG_4 | Name of saved search                                                        |
+| \$SPLUNK_ARG_5 | Trigger reason (for example, "The number of events was greater than 1")     |
+| \$SPLUNK_ARG_6 | Browser URL to view the saved search                                        |
 | \$SPLUNK_ARG_7 | _option removed in version 3.6_                                             |
-| \$SPLUNK_ARG_8 | この検索の結果が保存されるファイル (未加工の結果を格納) |
+| \$SPLUNK_ARG_8 | File in which the results for this search are stored (contains raw results) |
 
-イベントのテキストを変更できます。たとえば、Datadog の @mention を使用して、これらのレポートをユーザーに通知できます。
+You can modify the text of the events by for example using datadog's @mention to notify people of these reports.
 
 ---
 
-_このドキュメントは、2015 年 10 月 28 日に [AWS 上の Splunk Enterprise AMI][2] を使用して検証されています。_
+## Further reading
+
+- [Correlate metrics and logs with Datadog and Splunk][2]
+
+_This documentation verified on October 28, 2015 using the [Splunk Enterprise AMI on AWS][3]_
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
-[2]: https://aws.amazon.com/marketplace/pp/B00PUXWXNE/ref=sp_mpg_product_title?ie=UTF8&sr=0-3
+[2]: https://www.datadoghq.com/blog/integrate-splunk-datadog-put-microscope-application-monitoring/
+[3]: https://aws.amazon.com/marketplace/pp/B00PUXWXNE/ref=sp_mpg_product_title?ie=UTF8&sr=0-3
+

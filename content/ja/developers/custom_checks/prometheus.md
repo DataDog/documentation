@@ -1,142 +1,179 @@
 ---
-title: カスタム OpenMetrics チェック
+title: Custom OpenMetrics Check
+kind: documentation
 further_reading:
-  - link: /agent/prometheus/
-    tag: ドキュメント
-    text: OpenMetrics チェックの構成
-  - link: /developers/agent_checks/
-    tag: ドキュメント
-    text: カスタムチェックの書き方
-  - link: /developers/integrations/
-    tag: ドキュメント
-    text: 新しいインテグレーションの作成
+- link: /agent/kubernetes/prometheus
+  tag: Documentation
+  text: Configuring an OpenMetrics Check
+- link: /developers/custom_checks/write_agent_check/
+  tag: Documentation
+  text: Write a Custom Check
+- link: /developers/integrations/
+  tag: Documentation
+  text: Introduction to Agent-based Integrations
 aliases:
-  - /ja/developers/openmetrics/
-  - /ja/developers/prometheus/
+  - /developers/openmetrics/
+  - /developers/prometheus/
 ---
-## 概要
 
-ここでは、[Kube DNS][1] からタイミングメトリクスとステータスイベントを収集する簡単なチェックを例に挙げて、`OpenMetricsBaseCheck` インターフェイスの高度な使用方法について説明します。基本的な OpenMetrics チェックの構成について、詳しくは [Kubernetes Prometheus および OpenMetrics メトリクスの収集][2]を参照してください。
+## Overview
 
-## 高度な使用方法: OpenMetrics チェックインターフェイス
+This page dives into the `OpenMetricsBaseCheckV2` interface for more advanced usage, including an example of a simple check that collects timing metrics and status events from [Kong][1]. For details on configuring a basic OpenMetrics check, see [Kubernetes Prometheus and OpenMetrics metrics collection][2].
 
-汎用のチェックより高度なチェック (メトリクスの前処理など) が必要な場合は、カスタム `OpenMetricsBaseCheck` を作成してください。これは汎用チェックの[基本クラス][3]です。Prometheus で公開されるメトリクス、イベント、サービスチェックを収集するための構造とヘルパーを提供します。このクラスに基づいてチェックを構成するには、少なくとも以下が必要です。
+**Note**: `OpenMetricsBaseCheckV2` is available in Agent v`7.26.x`+ and requires Python 3.
 
-- `namespace` と `metrics` マッピングを使用したデフォルトインスタンスの作成。
-- `check()` メソッドの実装および/または
-- 処理される OpenMetric メトリクスの名前を付けたメソッドの作成 (例: `self.prometheus_metric_name`)
+<div class="alert alert-info">
+If you are looking for the legacy implementation or <code>OpenMetricsBaseCheck</code> interface custom check guide, please see <a href="https://docs.datadoghq.com/developers/faq/legacy-openmetrics/">Custom Legacy OpenMetrics Check</a>.
+</div>
 
-## カスタム Prometheus チェックの書き方
+## Advanced usage: OpenMetrics check interface
 
-ここでは、簡単な Kube DNS チェックの記述例を示して、`OpenMetricsBaseCheck` クラスの使用方法について説明します。次の例は、以下の汎用 Prometheus チェックの機能を再現します。
+If you have more advanced needs than the generic check, such as metrics preprocessing, you can write a custom `OpenMetricsBaseCheckV2`. It's the [base class][3] of the generic check, and it provides a structure and some helpers to collect metrics, events, and service checks exposed with Prometheus. The minimal configuration for checks based on this class include:
+
+- Creating a default instance with `namespace` and `metrics` mapping.
+- Implementing the `check()` method AND/OR:
+- Creating a method named after the OpenMetric metric handled (see `self.prometheus_metric_name`).
+
+See this [example in the Kong integration][4] where the Prometheus metric `kong_upstream_target_health` value is used as service check.
+
+## Writing a custom OpenMetrics check
+
+This is a simple example of writing a Kong check to illustrate usage of the `OpenMetricsBaseCheckV2` class. The example below replicates the functionality of the following generic Openmetrics check:
 
 ```yaml
 instances:
-  - prometheus_url: http://localhost:10055/metrics
-    namespace: "kubedns"
+  - openmetrics_endpoint: http://localhost:8001/status/
+    namespace: "kong"
     metrics:
-      - kubedns_kubedns_dns_response_size_bytes: response_size.bytes
-      - kubedns_kubedns_dns_request_duration_seconds: request_duration.seconds
-      - kubedns_kubedns_dns_request_count_total: request_count
-      - kubedns_kubedns_dns_error_count_total: error_count
-      - kubedns_kubedns_dns_cachemiss_count_total: cachemiss_count
+      - kong_bandwidth: bandwidth
+      - kong_http_consumer_status: http.consumer.status
+      - kong_http_status: http.status
+      - kong_latency:
+          name: latency
+          type: counter
+      - kong_memory_lua_shared_dict_bytes: memory.lua.shared_dict.bytes
+      - kong_memory_lua_shared_dict_total_bytes: memory.lua.shared_dict.total_bytes
+      - kong_nginx_http_current_connections: nginx.http.current_connections
+      - kong_nginx_stream_current_connections: nginx.stream.current_connections
+      - kong_stream_status: stream.status
 ```
 
-### コンフィギュレーション
+### Configuration
 
 <div class="alert alert-warning">
-構成とチェックファイルは、名前が一致していなければなりません。チェックが <code>mycheck.py</code> という名前なら、構成ファイルは <code>mycheck.yaml</code> という名前にしなければなりません。
+The names of the configuration and check files must match. If your check is called <code>mycheck.py</code> your configuration file <em>must</em> be named <code>mycheck.yaml</code>.
 </div>
 
-Prometheus チェックのコンフィギュレーションは、標準の [Agent チェック][4]とほぼ同じです。主な違いは、`check.yaml` ファイルに変数 `prometheus_url` を入れることです。`conf.d/kube_dns.yaml` は以下のようになります。
+Configuration for an Openmetrics check is almost the same as a regular [Agent check][5]. The main difference is to include the variable `openmetrics_endpoint` in your `check.yaml` file. This goes into `conf.d/kong.yaml`:
 
 ```yaml
 init_config:
 
 instances:
-    # Prometheus のメトリクスエンドポイントの URL
-  - prometheus_url: http://localhost:10055/metrics
+    # URL of the Prometheus metrics endpoint
+  - openmetrics_endpoint: http://localhost:8001/status/
 ```
 
-### チェックの書き方
+### Writing the check
 
-すべての OpenMetrics チェックは、[`OpenMetricsBaseCheck` クラス][5]を継承します。
+All OpenMetrics checks inherit from the [`OpenMetricsBaseCheckV2` class][6]:
 
 ```python
-from datadog_checks.base import OpenMetricsBaseCheck
+from datadog_checks.base import OpenMetricsBaseCheckV2
 
-class KubeDNSCheck(OpenMetricsBaseCheck):
+class KongCheck(OpenMetricsBaseCheckV2):
 ```
 
-#### メトリクスマッピングの定義
+## Define the integration namespace
+
+The value of `__NAMESPACE__` will prefix all metrics and service checks collected by this integration.
 
 ```python
-from datadog_checks.base import OpenMetricsBaseCheck
+from datadog_checks.base import OpenMetricsBaseCheckV2
 
-class KubeDNSCheck(OpenMetricsBaseCheck):
-    def __init__(self, name, init_config, instances=None):
-        METRICS_MAP = {
-            #kubernetes 1.6.0 でメトリクスの名前が kubedns に変更されました
-            'kubedns_kubedns_dns_response_size_bytes': 'response_size.bytes',
-            'kubedns_kubedns_dns_request_duration_seconds': 'request_duration.seconds',
-            'kubedns_kubedns_dns_request_count_total': 'request_count',
-            'kubedns_kubedns_dns_error_count_total': 'error_count',
-            'kubedns_kubedns_dns_cachemiss_count_total': 'cachemiss_count'
-        }
+class KongCheck(OpenMetricsBaseCheckV2):
+    __NAMESPACE__ = "kong"
+
 ```
 
-#### デフォルトインスタンスの定義
+#### Define a metrics mapping
 
-デフォルトのインスタンスは、チェックに使用される基本コンフィギュレーションです。`namespace`、`metrics`、`prometheus_url` をオーバーライドする必要があります。
-
-**注**: `OpenMetricsBaseCheck` のコンフィギュレーションオプションの一部でデフォルト値がオーバーライドされるため、[Prometheus と Datadog のメトリクスタイプ][6]の間ではメトリクス動作の関連性が増加します。
+The [metrics][7] mapping allows you to rename the metric name and override the native metric type.
 
 ```python
-from datadog_checks.base import OpenMetricsBaseCheck
+from datadog_checks.base import OpenMetricsBaseCheckV2
 
-class KubeDNSCheck(OpenMetricsBaseCheck):
-    def __init__(self, name, init_config, instances=None):
-        METRICS_MAP = {
-            #kubernetes 1.6.0 でメトリクスの名前が kubedns に変更されました
-            'kubedns_kubedns_dns_response_size_bytes': 'response_size.bytes',
-            'kubedns_kubedns_dns_request_duration_seconds': 'request_duration.seconds',
-            'kubedns_kubedns_dns_request_count_total': 'request_count',
-            'kubedns_kubedns_dns_error_count_total': 'error_count',
-            'kubedns_kubedns_dns_cachemiss_count_total': 'cachemiss_count'
-        }
-        super(KubeDNSCheck, self).__init__(
-            name,
-            init_config,
-            instances,
-            default_instances={
-                'kubedns': {
-                    'prometheus_url': 'http://localhost:8404/metrics',
-                    'namespace': 'kubedns',
-                    'metrics': [METRIC_MAP],
-                    'send_histograms_buckets': True,
-                    'send_distribution_counts_as_monotonic': True,
-                    'send_distribution_sums_as_monotonic': True,
-                }
+class KongCheck(OpenMetricsBaseCheckV2):
+    __NAMESPACE__ = "kong"
+
+    def __init__(self, name, init_config, instances):
+        super(KongCheck, self).__init__(name, init_config, instances)
+
+        self.metrics_map =  {
+            'kong_bandwidth': 'bandwidth',
+            'kong_http_consumer_status': 'http.consumer.status',
+            'kong_http_status': 'http.status',
+            'kong_latency': {
+                'name': 'latency',
+                'type': 'counter',
             },
-            default_namespace='kubedns',
-        )
+            'kong_memory_lua_shared_dict_bytes': 'memory.lua.shared_dict.bytes',
+            'kong_memory_lua_shared_dict_total_bytes': 'memory.lua.shared_dict.total_bytes',
+            'kong_nginx_http_current_connections': 'nginx.http.current_connections',
+            'kong_nginx_stream_current_connections': 'nginx.stream.current_connections',
+            'kong_stream_status': 'stream.status',
+        }
+```
+
+#### Define a default instance
+
+A default instance is the basic configuration used for the check. The default instance should override `metrics`, and `openmetrics_endpoint`.
+[Override][8] the `get_default_config` in OpenMetricsBaseCheckV2 with your default instance.
+
+```python
+from datadog_checks.base import OpenMetricsBaseCheckV2
+
+class KongCheck(OpenMetricsBaseCheckV2):
+    __NAMESPACE__ = "kong"
+
+    def __init__(self, name, init_config, instances):
+        super(KongCheck, self).__init__(name, init_config, instances)
+
+        self.metrics_map = {
+            'kong_bandwidth': 'bandwidth',
+            'kong_http_consumer_status': 'http.consumer.status',
+            'kong_http_status': 'http.status',
+            'kong_latency': {
+                'name': 'latency',
+                'type': 'counter',
+            },
+            'kong_memory_lua_shared_dict_bytes': 'memory.lua.shared_dict.bytes',
+            'kong_memory_lua_shared_dict_total_bytes': 'memory.lua.shared_dict.total_bytes',
+            'kong_nginx_http_current_connections': 'nginx.http.current_connections',
+            'kong_nginx_stream_current_connections': 'nginx.stream.current_connections',
+            'kong_stream_status': 'stream.status',
+        }
+
+      def get_default_config(self):
+            return {'metrics': self.metrics_map}
 ```
 
 
-#### check メソッドの実装
+#### Implementing the check method
 
-さらに機能を実装したい場合は、`check()` 関数をオーバーライドします。
+If you want to implement additional features, override the `check()` function.
 
-`instance` から、メトリクスをポーリングするための Prometheus または OpenMetrics のメトリクスエンドポイント `endpoint` を使用します。
+From `instance`, use `endpoint`, which is the Prometheus or OpenMetrics metrics endpoint to poll metrics from:
 
 ```python
 def check(self, instance):
-    endpoint = instance.get('prometheus_url')
+    endpoint = instance.get('openmetrics_endpoint')
 ```
 
-##### 例外
 
-不正なコンフィギュレーション、プログラミングエラー、メトリクスを収集できないなどの理由でチェックを実行できない場合は、わかりやすい例外を生成する必要があります。デバッグが容易になるように、この例外はログに記録され、Agent の[ステータスコマンド][7]に表示されます。以下に例を示します。
+##### Exceptions
+
+If a check cannot run because of improper configuration, a programming error, or because it could not collect any metrics, it should raise a meaningful exception. This exception is logged and is shown in the Agent [status command][9] for debugging. For example:
 
     $ sudo /etc/init.d/datadog-agent info
 
@@ -145,105 +182,101 @@ def check(self, instance):
 
         my_custom_check
         ---------------
-          - instance #0 [ERROR]: Unable to find prometheus_url in config file.
+          - instance #0 [ERROR]: Unable to find openmetrics_endpoint in config file.
           - Collected 0 metrics & 0 events
 
-`ConfigurationError` を使用して `check()` メソッドを補強します。
+Improve your `check()` method with `ConfigurationError`:
 
 ```python
 from datadog_checks.base import ConfigurationError
 
 def check(self, instance):
-    endpoint = instance.get('prometheus_url')
+    endpoint = instance.get('openmetrics_endpoint')
     if endpoint is None:
-        raise ConfigurationError("Unable to find prometheus_url in config file.")
+        raise ConfigurationError("Unable to find openmetrics_endpoint in config file.")
 ```
 
-次に、データを取得するとすぐにフラッシュします。
+Then as soon as you have data available, flush:
 
 ```python
-from datadog_checks.base import ConfigurationError
 
 def check(self, instance):
-    endpoint = instance.get('prometheus_url')
+    endpoint = instance.get('openmetrics_endpoint')
     if endpoint is None:
-        raise ConfigurationError("Unable to find prometheus_url in config file.")
+        raise ConfigurationError("Unable to find openmetrics_endpoint in config file.")
 
-    self.process(instance)
+    super().check(instance)
 ```
 
-### ここまでのまとめ
+### Putting it all together
 
 ```python
-from datadog_checks.base import ConfigurationError, OpenMetricsBaseCheck
+from datadog_checks.base import OpenMetricsBaseCheckV2
+from datadog_checks.base import ConfigurationError
 
-class KubeDNSCheck(OpenMetricsBaseCheck):
-    """
-    Collect kube-dns metrics from Prometheus endpoint
-    """
-    def __init__(self, name, init_config, instances=None):
-        METRICS_MAP = {
-            #kubernetes 1.6.0 でメトリクスの名前が kubedns に変更されました
-            'kubedns_kubedns_dns_response_size_bytes': 'response_size.bytes',
-            'kubedns_kubedns_dns_request_duration_seconds': 'request_duration.seconds',
-            'kubedns_kubedns_dns_request_count_total': 'request_count',
-            'kubedns_kubedns_dns_error_count_total': 'error_count',
-            'kubedns_kubedns_dns_cachemiss_count_total': 'cachemiss_count'
-        }
-        super(KubeDNSCheck, self).__init__(
-            name,
-            init_config,
-            instances,
-            default_instances={
-                'kubedns': {
-                    'prometheus_url': 'http://localhost:8404/metrics',
-                    'namespace': 'kubedns',
-                    'metrics': [METRIC_MAP],
-                    'send_histograms_buckets': True,
-                    'send_distribution_counts_as_monotonic': True,
-                    'send_distribution_sums_as_monotonic': True,
-                }
+class KongCheck(OpenMetricsBaseCheckV2):
+    __NAMESPACE__ = "kong"
+
+    def __init__(self, name, init_config, instances):
+        super(KongCheck, self).__init__(name, init_config, instances)
+
+        self.metrics_map = {
+            'kong_bandwidth': 'bandwidth',
+            'kong_http_consumer_status': 'http.consumer.status',
+            'kong_http_status': 'http.status',
+            'kong_latency': {
+                'name': 'latency',
+                'type': 'counter',
             },
-            default_namespace='kubedns',
-        )
+            'kong_memory_lua_shared_dict_bytes': 'memory.lua.shared_dict.bytes',
+            'kong_memory_lua_shared_dict_total_bytes': 'memory.lua.shared_dict.total_bytes',
+            'kong_nginx_http_current_connections': 'nginx.http.current_connections',
+            'kong_nginx_stream_current_connections': 'nginx.stream.current_connections',
+            'kong_stream_status': 'stream.status',
+        }
 
-    def check(self, instance):
-        endpoint = instance.get('prometheus_url')
-        if endpoint is None:
-            raise ConfigurationError("Unable to find prometheus_url in config file.")
+      def get_default_config(self):
+            return {'metrics': self.metrics_map}
 
-        self.process(instance)
+      def check(self, instance):
+          endpoint = instance.get('openmetrics_endpoint')
+          if endpoint is None:
+              raise ConfigurationError("Unable to find openmetrics_endpoint in config file.")
+
+          super().check(instance)
+
 ```
 
-## さらに改良するには
+## Going further
 
-Prometheus および OpenMetrics の基本インテグレーションに関する詳細は、インテグレーションの[デベロッパ用ドキュメント][8]をご参照ください。
+To read more about Prometheus and OpenMetrics base integrations, see the integrations [developer docs][10].
 
-追加のコンフィギュレーションオプションのデフォルト値を含めることで、OpenMetrics チェックをさらに改良できます。
+To see all configuration options available in Openmetrics, see the [conf.yaml.example][11].
+You can improve your OpenMetrics check by including default values for additional configuration options:
 
-`ignore_metrics`
-: メトリクスの一部は重複していたり、カーディナリティが非常に高くなるという理由で無視されます。このリストに含まれるメトリクスは、ログに `Unable to handle metric` というデバッグ行を残すことなく、暗黙にスキップされます。
+`exclude_metrics`
+: Some metrics are ignored because they are duplicates or introduce a high cardinality. Metrics included in this list are silently skipped without an `Unable to handle metric` debug line in the logs.
+In order to exclude all metrics but the ones matching a specific filter, you can use a negative lookahead regex like: ` - ^(?!foo).*$`
 
-`labels_mapper`
-: `labels_mapper` 辞書が提供されている場合は、ゲージの送信時に、`labels_mapper` 内のメトリクスラベルに対応する値がタグ名として使用されます。
+`share_labels`
+: If the `share_labels` mapping is provided, the mapping allows for the sharing of labels across multiple metrics. The keys represent the
+exposed metrics from which to share labels, and the values are mappings that configure the sharing behavior. Each mapping must have at least one of the following keys: `labels`, `match`, or `values`.
 
 `exclude_labels`
-: `exclude_labels` は、除外するラベルの配列です。除外されるラベルは、メトリクスの送信時にタグとして追加されません。
+: `exclude_labels` is an array of labels to exclude. Those labels are not added as tags when submitting the metric.
 
-`type_overrides`
-: `type_overrides` は、Prometheus または OpenMetrics のメトリクス名をキーとし、メトリクスタイプ (文字列の名前) を値とする辞書です。これが、ペイロードにリストされているタイプの代わりに使用されます。タイプが指定されていないメトリクスにタイプを適用するために使用できます。
-使用可能なタイプは `counter`、`gauge`、`summary`、`untyped`、`histogram` です。
-**注**: この値は基本クラスでは空ですが、最終的なチェックではカスタムメトリクスとしてカウントされないように、オーバーロード/ハードコードする必要があります。
-
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/kube_dns/datadog_checks/kube_dns/kube_dns.py
-[2]: /ja/agent/prometheus/
-[3]: https://github.com/DataDog/dd-agent/blob/master/checks/prometheus_check.py
-[4]: /ja/agent/agent_checks/#configuration
-[5]: https://github.com/DataDog/integrations-core/blob/master/datadog_checks_base/datadog_checks/base/checks/openmetrics/base_check.py
-[6]: https://docs.datadoghq.com/ja/integrations/guide/prometheus-metrics/
-[7]: /ja/agent/guide/agent-commands/#agent-status-and-information
-[8]: https://datadoghq.dev/integrations-core/base/prometheus/
+[2]: /agent/kubernetes/prometheus/
+[3]: https://github.com/DataDog/integrations-core/tree/master/datadog_checks_base/datadog_checks/base/checks/openmetrics/v2
+[4]: https://github.com/DataDog/integrations-core/blob/459e8c12a9c828a0b3faff59df69c2e1f083309c/kong/datadog_checks/kong/check.py#L22-L45
+[5]: /developers/integrations/
+[6]: https://github.com/DataDog/integrations-core/tree/master/datadog_checks_base/datadog_checks/base/checks/openmetrics/v2/base.py
+[7]: https://github.com/DataDog/integrations-core/blob/459e8c12a9c828a0b3faff59df69c2e1f083309c/openmetrics/datadog_checks/openmetrics/data/conf.yaml.example#L65-L104
+[8]: https://github.com/DataDog/integrations-core/blob/459e8c12a9c828a0b3faff59df69c2e1f083309c/datadog_checks_base/datadog_checks/base/checks/openmetrics/v2/base.py#L86-L87
+[9]: /agent/configuration/agent-commands/?tab=agentv6v7#agent-status-and-information
+[10]: https://datadoghq.dev/integrations-core/base/openmetrics/
+[11]: https://github.com/DataDog/integrations-core/blob/master/openmetrics/datadog_checks/openmetrics/data/conf.yaml.example

@@ -1,145 +1,145 @@
 ---
+title: Prometheus and OpenMetrics metrics collection from a host
+kind: documentation
 further_reading:
-- link: logs/log_collection
-  tag: ドキュメント
-  text: ログの収集
-- link: /infrastructure/process
-  tag: ドキュメント
-  text: プロセスの収集
-- link: トレーシング
-  tag: ドキュメント
-  text: トレースの収集
-- link: developers/prometheus
-  tag: ドキュメント
-  text: カスタム Prometheus チェックの記述
-kind: ドキュメント
-title: ホストからの Prometheus および OpenMetrics メトリクスの収集
+    - link: logs/log_collection
+      tag: Documentation
+      text: Collect your logs
+    - link: /infrastructure/process
+      tag: Documentation
+      text: Collect your processes
+    - link: tracing
+      tag: Documentation
+      text: Collect your traces
+    - link: developers/prometheus
+      tag: Documentation
+      text: Write your own custom Prometheus Check
 ---
 
-Datadog Agent と [Datadog-OpenMetrics][1] または [Datadog-Prometheus][2] インテグレーションを併用して、ホストで実行されているアプリケーションから、公開されている Prometheus および OpenMetrics メトリクスを収集します。
+Collect your exposed Prometheus and OpenMetrics metrics from your application running on your hosts using the Datadog Agent, and the [Datadog-OpenMetrics][1] or [Datadog-Prometheus][2] integrations.
 
-## 概要
+## Overview
 
-バージョン 6.5.0 より、Agent には [OpenMetrics][3] および [Prometheus][4] チェックが用意され、Prometheus エンドポイントをスクレイピングできます。Prometheus テキスト形式を効率よくフルにサポートできるため、Datadog では OpenMetrics チェックの 使用をお勧めします。カスタムチェックの記述を含む `OpenMetricsCheck` インターフェイスの高度な使用方法については、[開発ツール][5]のセクションを参照してください。Prometheus チェックは、メトリクスのエンドポイントがテキスト形式をサポートしていない場合にのみ使用してください。
+Starting with version 6.5.0, the Agent includes [OpenMetrics][3] and [Prometheus][4] checks capable of scraping Prometheus endpoints. Datadog recommends using the OpenMetrics check since it is more efficient and fully supports Prometheus text format. For more advanced usage of the `OpenMetricsCheck` interface, including writing a custom check, see the [Developer Tools][5] section. Use the Prometheus check only when the metrics endpoint does not support a text format.
 
-このページでは、これらのチェックの基本的な使用方法について説明します。これにより、Datadog 内のすべての Prometheus 公開メトリクスをインポートできるようになります。
+This page explains the basic usage of these checks, enabling you to import all your Prometheus exposed metrics within Datadog.
 
-## セットアップ
+## Setup
 
-### インストール
+### Installation
 
-[対応するオペレーティングシステムに Datadog Agent をインストールします][6]。OpenMetrics および Prometheus チェックは [Datadog Agent][7] パッケージに含まれています。コンテナまたはホストに追加でインストールする必要はありません。
+[Install the Datadog Agent for your corresponding operating system][6]. OpenMetrics and Prometheus checks are included in the [Datadog Agent][7] package, so you don't need to install anything else on your containers or hosts.
 
-### 構成
+### Configuration
 
-公開されたメトリクスを収集するには
+To collect your exposed metrics:
 
-1. [Agent の構成ディレクトリ][8]のルートにある `conf.d/` フォルダーの `openmetrics.d/conf.yaml` ファイルを編集します。使用可能なすべての構成オプションの詳細については、[サンプル openmetrics.d/conf.yaml][9] を参照してください。これは、インテグレーションを有効にするために必要な最低限の構成です。
+1. Edit the `openmetrics.d/conf.yaml` file in the `conf.d/` folder at the root of your [Agent's configuration directory][8]. See the [sample openmetrics.d/conf.yaml][9] for all available configuration options. This is the minimum required configuration needed to enable the integration:
 
     ```yaml
     init_config:
 
     instances:
-        - prometheus_url: 'localhost:<PORT>/<ENDPOINT>'
+        - openmetrics_endpoint: 'localhost:<PORT>/<ENDPOINT>'
           namespace: '<NAMESPACE>'
           metrics:
               - '<METRIC_TO_FETCH>': '<DATADOG_METRIC_NAME>'
     ```
 
-   次の構成プレースホルダー値を使用します。
+     With the following configuration placeholder values:
 
-    | プレースホルダー             | 説明                                                                                                                                                                                                            |
+    | Placeholder             | Description                                                                                                                                                                                                            |
     | ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-    | `<ポート>`                | Prometheus エンドポイントにアクセスするために接続するポート。                                                                                                                                                         |
-    | `<エンドポイント>`            | コンテナによって提供されるメトリクスの URL（Prometheus 形式）。                                                                                                                                                     |
-    | `<ネームスペース>`           | Datadog で表示するときに、すべてのメトリクスの前にネームスペースをプレフィックスとして設定します。                                                                                                                                                   |
-    | `<フェッチするメトリクス>`     | Prometheus エンドポイントからフェッチされる Prometheus メトリクスキー。                                                                                                                                                     |
-    | `<DATADOG_メトリクス名>` | オプションパラメーター。設定すると、`<フェッチするメトリクス>` メトリクスキーは Datadog の `<DATADOG_メトリクス名>` に変換されます。<br>このオプションを使用しない場合は、`key:value` ペアではなく、文字列のリストを渡します。 |
+    | `<PORT>`                | Port to connect to in order to access the Prometheus endpoint.                                                                                                                                                         |
+    | `<ENDPOINT>`            | URL for the metrics served by the container, in Prometheus format.                                                                                                                                                     |
+    | `<NAMESPACE>`           | Set namespace to be prefixed to every metric when viewed in Datadog.                                                                                                                                                   |
+    | `<METRIC_TO_FETCH>`     | Prometheus metrics key to be fetched from the Prometheus endpoint.                                                                                                                                                     |
+    | `<DATADOG_METRIC_NAME>` | Optional parameter which, if set, transforms the `<METRIC_TO_FETCH>` metric key to `<DATADOG_METRIC_NAME>` in Datadog. <br>If you choose not to use this option, pass a list of strings rather than `key:value` pairs. |
 
-2. [Agent を再起動][10]すると、メトリクスの収集が開始されます。
+2. [Restart the Agent][10] to start collecting your metrics.
 
-### 利用可能なパラメーター
+### Parameters available
 
-`インスタンス`で使用可能なパラメーターを以下にリストします。
+Find below the full list of parameters that can be used for your `instances`:
 
-| 名前                                    | タイプ                                    | 要否 | デフォルト値 | 説明                                                                                                                                                                                                                                                          |
+| Name                                    | Type                                    | Necessity | Default value | Description                                                                                                                                                                                                                                                          |
 | --------------------------------------- | --------------------------------------- | --------- | ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `prometheus_url`                        | 文字列                                  | 必須  | なし          | Prometheus/OpenMetrics がアプリケーションメトリクスを公開する URL。                                                                                                                                                                                        |
-| `namespace`                             | 文字列                                  | 必須  | なし          | すべてのメトリクスネームスペースの前に付加されるネームスペース。メトリクスは、`namespace.metric_name` の形式で収集されます。                                                                                                                                          |
-| `metrics`                               | 文字列リストまたは `key:value` 要素 | 必須  | なし          | Prometheus エンドポイントから取得されるメトリクスの `<フェッチするメトリクス>: <新しいメトリクス名>` ペアのリスト。<br> `<新しいメトリクス名>` はオプションです。設定すると、Datadog での名前が変換されます。このリストには少なくとも 1 つのメトリクスを指定する必要があります。                            |
-| `prometheus_metrics_prefix`             | 文字列                                  | オプション  | なし          | 公開された Prometheus/OpenMetrics メトリクスのプレフィックス。                                                                                                                                                                                                                   |
-| `health_service_check`                  | boolean                                 | オプション  | true          | Prometheus エンドポイントの健全性について報告するサービスチェックを送信します。チェックの名前は `<ネームスペース>.prometheus.health` です。                                                                                                                                         |
-| `label_to_hostname`                     | 文字列                                  | オプション  | なし          | ホスト名を 1 つのラベルの値で上書きします。                                                                                                                                                                                                                   |
-| `label_joins`                           | オブジェクト                                  | オプション  | なし          | label_joins を使用すると、メトリクスを対象として指定して、そのラベルを 1:1 マッピングを介して取得できます。                                                                                                                                                                               |
-| `labels_mapper`                         | key:value 要素のリスト               | オプション  | なし          | labels_mapper を使用すると、一部のラベルの名前を変更できます。形式: `<名前を変更するラベル>: <新しいラベル名>`                                                                                                                                                                    |
-| `type_overrides`                        | key:value 要素のリスト               | オプション  | なし          | type_overrides を使用すると、Prometheus ペイロードのタイプを上書きするか、またはタイプが指定されていないメトリクスにタイプを適用できます (デフォルトでは無視されます)。<br> サポートされている `<メトリクスタイプ>` は、`gauge`、`monotonic_count`、`histogram`、および `summary` です。                                             |
-| `tags`                                  | key:value 要素のリスト               | オプション  | なし          | このインテグレーションによって送信されるすべてのメトリクス、イベント、およびサービスチェックにアタッチされるタグのリスト。<br> [タグ付けについての詳細][5]。                                                                                                                                     |
-| `send_distribution_buckets`             | boolean                                 | オプション  | false         | `send_distribution_buckets` を `true` に設定すると、OpenMetrics ヒストグラムを送信して[ディストリビューションメトリクス][15]に変換できます。<br>`collect_histogram_buckets` は `true` に設定する必要があります (デフォルト値)。<br>**注**: OpenMetrics v2 の場合は、代わりに `collect_counters_with_distributions` を使用してください。                                                                              |
-| `send_distribution_counts_as_monotonic` | boolean                                 | オプション  | false         | `send_distribution_counts_as_monotonic` を `true` に設定し、OpenMetrics のヒストグラム/サマリーカウントを単調カウントとして送信します。                                                                                                                                              |
-| `collect_histogram_buckets`               | boolean                                 | オプション  | true          | `collect_histogram_buckets` を `true` に設定すると、ヒストグラムバケットを送信できます。                                                                                                                                                                                               |
-| `send_monotonic_counter`                | boolean                                 | オプション  | true          | カウントを単調カウントとして送信する方法については、[GitHub の関連事項][9]を参照してください。                                                                                                                                                                                             |
-| `exclude_labels`                        | 文字列のリスト                          | オプション  | なし          | 除外されるラベルのリスト。                                                                                                                                                                                                                                       |
-| `ssl_cert`                              | 文字列                                  | オプション  | なし          | Prometheus エンドポイントがセキュリティ保護されている場合、構成するための設定は以下のとおりです。<br> 設定は、証明書へのパス (秘密キーを指定する必要あり)、または証明書と秘密キーの両方を含むファイルへのパスのいずれかです。 |
-| `ssl_private_key`                       | 文字列                                  | オプション  | なし          | 証明書が秘密キーを含んでいない場合に必要です。<br> **警告**: ローカル証明書への秘密キーは暗号化されていないことが必要です。                                                                                                                          |
-| `ssl_ca_cert`                           | 文字列                                  | オプション  | なし          | カスタム証明書を生成するために使用する、信頼されている CA へのパス。                                                                                                                                                                                                  |
-| `prometheus_timeout`                    | 整数                                 | オプション  | 10            | Prometheus/OpenMetrics クエリのタイムアウトを秒単位で設定します。                                                                                                                                                                                                       |
-| `max_returned_metrics`                  | 整数                                 | オプション  | 2000          | デフォルトで、メトリクスのチェックは 2000 個に制限されます。必要な場合は、この制限を引き上げてください。                                                                                                                                                                                   |
-| `bearer_token_auth`                     | boolean                                 | オプション  | false         | `bearer_token_auth` を `true` に設定して、ベアラートークン認証のヘッダーに追加します。**注**: `bearer_token_path` が設定されていない場合は、`/var/run/secrets/kubernetes.io/serviceaccount/token` がデフォルトのパスとして使われます。                                                       |
-| `bearer_token_path`                     | 文字列                                  | オプション  | なし          | Kubernetes サービスアカウントのベアラートークンファイルへのパス（ファイルが存在し正しくマウントされていることを確認してください）。**注**: `bearer_token_auth` を `true` に設定し、認証のために HTTP ヘッダにトークンを追加できるようにします。                                          |
-| `collect_counters_with_distributions`   | boolean                                 | オプション  | false         | Datadog のディストリビューションメトリクスとしてヒストグラムバケットを送信する際に、`.sum` と `.count` で終わる観測カウンターメトリクスも収集するかどうかを指定します。これは暗黙のうちに `histogram_buckets_as_distributions` オプションを有効にしています。 |
+| `openmetrics_endpoint`                        | string                                  | required  | none          | The URL exposing metrics in the OpenMetrics format.                                                                           |
+| `namespace`                             | string                                  | required  | none          | The namespace to be appended before all metrics namespaces. Your metrics are collected in the form `namespace.metric_name`.                                                                                                                                          |
+| `metrics`                               | list of strings or `key:value` elements | required  | none          | List of `<METRIC_TO_FETCH>: <NEW_METRIC_NAME>` pairs for metrics to be fetched from the Prometheus endpoint.<br> `<NEW_METRIC_NAME>` is optional. It transforms the name in Datadog if set. This list should contain at least one metric.                            |
+| `raw_metric_prefix`             | string                                  | optional  | none          | A prefix that is removed from all exposed metric names, if present.                                                                                                                 |
+| `health_service_check`                  | boolean                                 | optional  | true          | Send a service check reporting on the health of the Prometheus endpoint. The check is named `<NAMESPACE>.prometheus.health`.                                                                                                                                         |
+| `label_to_hostname`                     | string                                  | optional  | none          | Override the hostname with the value of one label.                                                                                                                                                                                                                   |
+| `label_joins`                           | object                                  | optional  | none          | The label join allows you to target a metric and retrieve its label using a 1:1 mapping.                                                                                                                                                                               |
+| `labels_mapper`                         | list of key:value element               | optional  | none          | The label mapper allows you to rename some labels. Format: `<LABEL_TO_RENAME>: <NEW_LABEL_NAME>`.                                                                                                                                                                    |
+| `type_overrides`                        | list of key:value element               | optional  | none          | Type override allows you to override a type in the Prometheus payload or type an untyped metric (they're ignored by default).<br> Supported `<METRIC_TYPE>`s are `gauge`, `monotonic_count`, `histogram`, and `summary`.                                             |
+| `tags`                                  | list of key:value element               | optional  | none          | List of tags to attach to every metric, event, and service check emitted by this integration.<br> [Learn more about tagging][5].                                                                                                                                     |
+| `send_distribution_buckets`             | boolean                                 | optional  | false         | Set `send_distribution_buckets` to `true` to send and convert OpenMetrics histograms to [Distribution metrics][15]. <br>`collect_histogram_buckets` must be set to `true` (default value).<br> **Note**: For OpenMetrics v2, use `collect_counters_with_distributions` instead.                                                                              |
+| `send_distribution_counts_as_monotonic` | boolean                                 | optional  | false         | Set `send_distribution_counts_as_monotonic` to `true` to send OpenMetrics histogram/summary counts as monotonic counts.                                                                                                                                              |
+| `collect_histogram_buckets`               | boolean                                 | optional  | true          | Set `collect_histogram_buckets` to `true` to send the histograms bucket.                                                                                                                                                                                               |
+| `send_monotonic_counter`                | boolean                                 | optional  | true          | o send counts as monotonic counts see the [relevant issue in GitHub][9].                                                                                                                                                                                             |
+| `exclude_labels`                        | list of string                          | optional  | none          | List of labels to be excluded.                                                                                                                                                                                                                                       |
+| `ssl_cert`                              | string                                  | optional  | none          | If your Prometheus endpoint is secured, here are the settings to configure it:<br> Can either be: only the path to the certificate and thus you should specify the private key, or it can be the path to a file containing both the certificate and the private key. |
+| `ssl_private_key`                       | string                                  | optional  | none          | Needed if the certificate does not include the private key.<br> **WARNING**: The private key to your local certificate must be unencrypted.                                                                                                                          |
+| `ssl_ca_cert`                           | string                                  | optional  | none          | The path to the trusted CA used for generating custom certificates.                                                                                                                                                                                                  |
+| `prometheus_timeout`                    | integer                                 | optional  | 10            | Set a timeout in seconds for the Prometheus/OpenMetrics query.                                                                                                                                                                                                       |
+| `max_returned_metrics`                  | integer                                 | optional  | 2000          | The check limits itself to 2000 metrics by default. Increase this limit if needed.                                                                                                                                                                                   |
+| `bearer_token_auth`                     | boolean                                 | optional  | false         | Set `bearer_token_auth` to `true` to add a bearer token authentication header. **Note**: If `bearer_token_path` is not set, `/var/run/secrets/kubernetes.io/serviceaccount/token` is used as the default path.                                                       |
+| `bearer_token_path`                     | string                                  | optional  | none          | The path to a Kubernetes service account bearer token file (make sure the file exists and is mounted correctly). **Note**: Set `bearer_token_auth` to `true` to enable adding the token to HTTP headers for authentication.                                          |
+| `collect_counters_with_distributions`   | boolean                                 | optional  | false         | Whether or not to also collect the observation counter metrics ending in `.sum` and `.count` when sending histogram buckets as Datadog distribution metrics. This implicitly enables the `histogram_buckets_as_distributions` option. |
 
-**注**: `send_distribution_buckets` および `send_distribution_counts_as_monotonic` 以外のすべてのパラメーターは、OpenMetrics チェックと Prometheus チェックの両方でサポートされています。
+**Note**: All parameters but `send_distribution_buckets` and `send_distribution_counts_as_monotonic` are supported by both OpenMetrics check and Prometheus check.
 
-## はじめに
+## Getting started
 
-### シンプルなメトリクスの収集
+### Simple metric collection
 
-Prometheus によって公開されたメトリクスの収集を開始するには、次の手順に従います。
+To get started with collecting metrics exposed by Prometheus, follow these steps:
 
-1. [Prometheus Getting Started][11] のドキュメントに従って、自分自身を監視する Prometheus のローカルバージョンを起動します。
+1. Follow the [Prometheus Getting Started][11] documentation to start a local version of Prometheus that monitors itself.
 
-2. [プラットフォームに Datadog Agent をインストールします][6]。
+2. [Install the Datadog Agent for your platform][6].
 
-3. [Agent の構成ディレクトリ][8]のルートにある `conf.d/` フォルダーの `openmetrics.d/conf.yaml` ファイルを次の内容で編集します。
+3. Edit the `openmetrics.d/conf.yaml` file in the `conf.d/` folder at the root of your [Agent's configuration directory][8] with the following content:
 
     ```yaml
     init_config:
 
     instances:
-        - prometheus_url: http://localhost:9090/metrics
+        - openmetrics_endpoint: http://localhost:9090/metrics
           namespace: 'documentation_example'
           metrics:
               - promhttp_metric_handler_requests_total: prometheus.handler.requests.total
     ```
 
-4. [Agent を再起動します][12]。
+4. [Restart the Agent][12].
 
-5. [メトリクスサマリーページ][13]に移動して、収集されたメトリクスを確認します: `prometheus_target_interval_length_seconds*`
+5. Go into your [Metric summary page][13] to see the collected metrics: `prometheus_target_interval_length_seconds*`
 
-    {{< img src="integrations/guide/prometheus_host/prometheus_collected_metric_host.png" alt="収集された Prometheus メトリクス">}}
+    {{< img src="integrations/guide/prometheus_host/prometheus_collected_metric_host.png" alt="Prometheus metric collected">}}
 
-## カスタムインテグレーションを公式インテグレーションに
+## From custom to official integration
 
-デフォルトでは、汎用の Prometheus チェックによって取得されるすべてのメトリクスが、カスタムメトリクスだと見なされます。既製ソフトウェアを監視されて、公式のインテグレーションにするべきだと思われた場合は、[ぜひご提供をお願いします][5]。
+By default, all metrics retrieved by the generic Prometheus check are considered custom metrics. If you are monitoring off-the-shelf software and think it deserves an official integration, don't hesitate to [contribute][5]!
 
-公式インテグレーションは、それぞれ専用のディレクトリを持ちます。汎用のチェックには、デフォルトの構成とメトリクスメタデータをハードコードするためのデフォルトのインスタンスメカニズムがあります。たとえば、[kube-proxy][14] インテグレーションを参照します。
+Official integrations have their own dedicated directories. There's a default instance mechanism in the generic check to hardcode the default configuration and metrics metadata. For example, reference the [kube-proxy][14] integration.
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/integrations/openmetrics/
-[2]: /ja/integrations/prometheus/
+[1]: /integrations/openmetrics/
+[2]: /integrations/prometheus/
 [3]: https://github.com/DataDog/integrations-core/tree/master/openmetrics
 [4]: https://github.com/DataDog/integrations-core/tree/master/prometheus
-[5]: /ja/developers/custom_checks/prometheus/
-[6]: https://app.datadoghq.com/account/settings#agent
-[7]: /ja/getting_started/tagging/
-[8]: /ja/agent/guide/agent-configuration-files/#agent-configuration-directory
+[5]: /developers/custom_checks/prometheus/
+[6]: https://app.datadoghq.com/account/settings/agent/latest
+[7]: /getting_started/tagging/
+[8]: /agent/guide/agent-configuration-files/#agent-configuration-directory
 [9]: https://github.com/DataDog/integrations-core/blob/master/openmetrics/datadog_checks/openmetrics/data/conf.yaml.example
-[10]: /ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[10]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [11]: https://prometheus.io/docs/prometheus/latest/getting_started/
-[12]: /ja/agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent
+[12]: /agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent
 [13]: https://app.datadoghq.com/metric/summary
 [14]: https://github.com/DataDog/integrations-core/tree/master/kube_proxy
-[15]: /ja/metrics/distributions/
+[15]: /metrics/distributions/

@@ -1,7 +1,7 @@
 ---
+title: Saved Views
 core_product:
-- apm
-- log management
-title: 保存ビュー
+  - apm
+  - log management
 ---
-エクスプローラービューでは、保存ビューによって、さまざまな検索クエリ、カスタマイズされたデフォルトの視覚化、および選択されたファセットのサブセットを追跡できます。保存ビューは、組織全体で共有されます。
+In an Explorer view, saved views keep track of different search queries, customized default visualizations, and a selected subset of facets. Saved views are shared across your organization.

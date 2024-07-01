@@ -1,7 +1,7 @@
 ---
+title: global variable
 core_product:
-- synthetic monitoring
-title: グローバル変数
+  - synthetic monitoring
 ---
-Datadog Synthetic Monitoring において、グローバル変数とは、ユーザーの全ての Synthetic テストからアクセス可能な変数です。
-詳細は、<a href="/synthetics/settings/?tab=specifyvalue#global-variables">ドキュメントを参照してください</a>。
+In Datadog Synthetic Monitoring, a global variable is a variable that is accessible from all of a user's Synthetic tests.
+For more information, <a href="/synthetics/settings/?tab=specifyvalue#global-variables">see the documentation</a>.

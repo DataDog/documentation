@@ -1,45 +1,47 @@
 ---
+title: Injecting Libraries Locally
+kind: documentation
+description: "Inject instrumentation libraries into applications"
 aliases:
-- /ja/tracing/trace_collection/admission_controller/
-- /ja/tracing/trace_collection/library_injection/
-description: インスツルメンテーションライブラリのアプリケーションへの挿入
-title: ライブラリのローカル挿入
+ - /tracing/trace_collection/admission_controller/
+ - /tracing/trace_collection/library_injection/
 ---
 
-## 概要
+## Overview
 
-アプリケーションのインスツルメンテーションを行うには、
-* このページで説明されているように、インスツルメンテーションライブラリをローカル (Agent) で挿入する、または
-* [Datadog からリモートでインスツルメンテーションライブラリを挿入する][5] (ベータ版)、または
-* [アプリケーションでインスツルメンテーションライブラリを手動で追加する][1]。
+To automatically instrument your application, you can:
 
-アプリケーションのコードに全く触れずにライブラリをローカル挿入する方法は、Agent とアプリケーションがインストールされている場所と方法によって異なります。お使いの環境を表すシナリオを選択してください。
+- Use automatic instrumentation with local library injection, as described on this page.
+- Use [Single Step Instrumentation][6].
+- Use [Datadog libraries][7].
+
+For more information, see [Automatic Instrumentation][5].
+
+How to inject the library locally, without touching the application code at all, varies depending on where and how your Agent and application are installed. Select the scenario that represents your environment:
 
 {{< tabs >}}
 {{% tab "Kubernetes" %}}
 
-[Admission Controller][1] のアプローチでは、Agent は Kubernetes Admission Controller を使用して Kubernetes API へのリクエストをインターセプトし、指定されたインスツルメンテーションライブラリを挿入するために新しいポッドを変異させます。
+With the [Admission Controller][1] approach, the Agent uses the Kubernetes Admission Controller to intercept requests to the Kubernetes API and mutate new pods to inject the specified instrumentation library.
 
-<div class="alert alert-warning">ライブラリ挿入は新しいポッドにのみ適用され、実行中のポッドには影響を与えません。</div>
+<div class="alert alert-warning">Library injection is applied on new pods only and does not have any impact on running pods.</div>
 
-Kubernetes Admission Controller の詳細については、[Kubernetes Admission Controllers リファレンス][2]をご覧ください。
+To learn more about Kubernetes Admission Controller, read [Kubernetes Admission Controllers Reference][2].
 
-## 要件
+## Requirements
 
 * Kubernetes v1.14+
-* Java、Python、NodeJS については Datadog [Cluster Agent v7.40+][3]、.NET、Ruby については Datadog [Cluster Agent v7.44+][3]。
-* Datadog Admission Controller が有効になっている。**注**: Helm chart v2.35.0 以降では、Cluster Agent で Datadog Admission Controller がデフォルトでアクティブになります。
-* Python の場合、現時点では uWSGI アプリケーションはサポートされていません。
-* Ruby の場合、ライブラリ挿入のサポートはベータ版です。インスツルメンテーションは、現時点では Ruby on Rails または Hanami アプリケーションに対してのみサポートされています。
-* サポートされているアーキテクチャを持つ Linux 上にデプロイされた Java、JavaScript、Python、.NET、または Ruby のアプリケーション。言語ごとにサポートされているアーキテクチャの完全なリストについては、[対応するコンテナレジストリ](#container-registries)を確認してください。
+* Datadog [Cluster Agent v7.40+][3] for Java, Python, NodeJS, Datadog [Cluster Agent v7.44+][3] for .NET and Ruby.
+* Datadog Admission Controller enabled. **Note**: In Helm chart v2.35.0 and later, Datadog Admission Controller is activated by default in the Cluster Agent.
+* For Python, uWSGI applications are not supported at this time.
+* For Ruby, library injection support is in Beta. Instrumentation is only supported for Ruby on Rails applications with Bundler version greater than 2.3 and without vendored gems (deployment mode or `BUNDLE_PATH`).
+* Applications in Java, JavaScript, Python, .NET, or Ruby deployed on Linux with a supported architecture. Check the [corresponding container registry](#container-registries) for the complete list of supported architectures by language.
 
-## コンテナレジストリ
+## Container registries
 
-<div class="alert alert-warning">2023 年 7 月 10 日、Docker Hub は Datadog の Docker Hub レジストリへのダウンロードレート制限を実施するようになります。これらのレジストリからのイメージのプルは、レート制限割り当てにカウントされます。<br/><br/>
+<div class="alert alert-warning">Docker Hub is subject to image pull rate limits. If you are not a Docker Hub customer, Datadog recommends that you update your Datadog Agent and Cluster Agent configuration to pull from GCR or ECR. For instructions, see <a href="/agent/guide/changing_container_registry">Changing your container registry</a>.</div>
 
-Datadog は、Datadog Agent と Cluster Agent の構成を更新して、レート制限が適用されない他のレジストリからプルすることを推奨しています。手順については、<a href="/agent/guide/changing_container_registry">コンテナレジストリを変更する</a>を参照してください。</div>
-
-Datadog は、インスツルメンテーションライブラリのイメージを gcr.io、Docker Hub、AWS ECR で公開しています。
+Datadog publishes instrumentation libraries images on gcr.io, Docker Hub, and Amazon ECR:
 | Language   | gcr.io                              | hub.docker.com                              | gallery.ecr.aws                            |
 |------------|-------------------------------------|---------------------------------------------|-------------------------------------------|
 | Java       | [gcr.io/datadoghq/dd-lib-java-init][4]   | [hub.docker.com/r/datadog/dd-lib-java-init][5]   | [gallery.ecr.aws/datadog/dd-lib-java-init][6]   |
@@ -48,166 +50,185 @@ Datadog は、インスツルメンテーションライブラリのイメージ
 | .NET       | [gcr.io/datadoghq/dd-lib-dotnet-init][13] | [hub.docker.com/r/datadog/dd-lib-dotnet-init][14] | [gallery.ecr.aws/datadog/dd-lib-dotnet-init][15] |
 | Ruby       | [gcr.io/datadoghq/dd-lib-ruby-init][23] | [hub.docker.com/r/datadog/dd-lib-ruby-init][24] | [gallery.ecr.aws/datadog/dd-lib-ruby-init][25] |
 
-Datadog Cluster Agent の構成にある `DD_ADMISSION_CONTROLLER_AUTO_INSTRUMENTATION_CONTAINER_REGISTRY` 環境変数は、Admission Controller が使用するレジストリを指定します。デフォルト値は、`gcr.io/datadoghq` です。
+The `DD_ADMISSION_CONTROLLER_AUTO_INSTRUMENTATION_CONTAINER_REGISTRY` environment variable in the Datadog Cluster Agent configuration specifies the registry used by the Admission Controller. The default value is `gcr.io/datadoghq`.
 
-ローカルコンテナレジストリでイメージをホストしている場合は、`docker.io/datadog`、`public.ecr.aws/datadog`、または他の URL に変更することで、別のレジストリからトレーシングライブラリを引き出すことができます。
+You can pull the tracing library from a different registry by changing it to `docker.io/datadog`, `public.ecr.aws/datadog`, or another URL if you are hosting the images in a local container registry.
 
-## インスツルメンテーションライブラリの挿入の構成
+## Configure instrumentation libraries injection
 
-Datadog にトレースを送信したい Kubernetes アプリケーションに対して、Java、JavaScript、Python、.NET または Ruby のインスツルメンテーションライブラリを自動的に挿入するように Datadog Admission Controller を構成します。大まかに言うと、これには次の手順が含まれます。詳細は以下で説明します。
+For your Kubernetes applications whose traces you want to send to Datadog, configure the Datadog Admission Controller to inject Java, JavaScript, Python, .NET or Ruby instrumentation libraries automatically. From a high level, this involves the following steps, described in detail below:
 
-1. Datadog Admission Controller を有効にして、ポッドを変異させます。
-2. ポッドにアノテーションを付けて、どのインスツルメンテーションライブラリを挿入するか選択します。
-3. 統合サービスタグ付けにより、ポッドにタグを付け、Datadog のテレメトリーを結び付け、一貫したタグでトレース、メトリクス、ログをシームレスにナビゲートします。
-4. 新しい構成を適用します。
+1. Enable Datadog Admission Controller to mutate your pods.
+2. Annotate your pods to select which instrumentation library to inject.
+3. Tag your pods with Unified Service Tags to tie Datadog telemetry together and navigate seamlessly across traces, metrics, and logs with consistent tags.
+4. Apply your new configuration.
 
-<div class="alert alert-info">ライブラリを挿入するために、新しいアプリケーションイメージを生成する必要はありません。ライブラリの挿入はインスツルメンテーションライブラリの追加で行われるため、アプリケーションイメージの変更は必要ありません。</div>
+<div class="alert alert-info">You do not need to generate a new application image to inject the library. The library injection is taken care of adding the instrumentation library, so no change is required in your application image.</div>
 
-### ステップ 1 - Datadog Admission Controller を有効にして、ポッドを変異させます
+### Step 1 - Enable Datadog Admission Controller to mutate your pods
 
-デフォルトでは、Datadog Admission Controller は、特定のラベルでラベル付けされたポッドのみを変異させます。ポッドの変異を有効にするには、ポッドのスペックにラベル `admission.datadoghq.com/enabled: "true"` を追加します。
+By default, Datadog Admission controller mutates only pods labeled with a specific label. To enable mutation on your pods, add the label `admission.datadoghq.com/enabled: "true"` to your pod spec.
 
-**注**: Datadog Admission Controller で、Cluster Agent で `clusterAgent.admissionController.mutateUnlabelled` (または `DD_ADMISSION_CONTROLLER_MUTATE_UNLABELLED`) を `true` に設定すると、このポッドラベルがなくても挿入設定を有効にすることが可能です。
+**Note**: You can configure Datadog Admission Controller to enable injection config without having this pod label by configuring the Cluster Agent with `clusterAgent.admissionController.mutateUnlabelled` (or `DD_ADMISSION_CONTROLLER_MUTATE_UNLABELLED`) to `true`.
 
-構成方法の詳細については、[Datadog Admission Controller のページ][1]をご覧ください。
+For more details on how to configure, read [Datadog Admission Controller page][1].
 
-例:
+For example:
 
 ```yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    ...
-...
-template:
-  metadata:
-    labels:
-        admission.datadoghq.com/enabled: "true" # Admission Controller を有効にしてこのデプロイメントに含まれる新しいポッドを変異させます
-  containers:
-  -  ...
+    # (...)
+spec:
+  template:
+    metadata:
+      labels:
+        admission.datadoghq.com/enabled: "true" # Enable Admission Controller to mutate new pods part of this deployment
+    spec:
+      containers:
+        - # (...)
 ```
 
-### ステップ 2 - ライブラリ挿入のためにポッドにアノテーションを付ける
+### Step 2 - Annotate your pods for library injection
 
-ライブラリ挿入用のポッドを選択するには、ポッドの仕様で、アプリケーション言語に対応する以下のアノテーションを付けます。
+To select your pods for library injection, use the annotations provided in the following table within your pod spec:
 
-| 言語   | ポッドアノテーション                                              |
-|------------|-------------------------------------------------------------|
+| Language   | Pod annotation                                                        |
+|------------|-----------------------------------------------------------------------|
 | Java       | `admission.datadoghq.com/java-lib.version: "<CONTAINER IMAGE TAG>"`   |
 | JavaScript | `admission.datadoghq.com/js-lib.version: "<CONTAINER IMAGE TAG>"`     |
 | Python     | `admission.datadoghq.com/python-lib.version: "<CONTAINER IMAGE TAG>"` |
 | .NET       | `admission.datadoghq.com/dotnet-lib.version: "<CONTAINER IMAGE TAG>"` |
-| Ruby       | `admission.datadoghq.com/ruby-lib.version: "<CONTAINER IMAGE TAG>"` |
+| Ruby       | `admission.datadoghq.com/ruby-lib.version: "<CONTAINER IMAGE TAG>"`   |
 
-利用可能なライブラリのバージョンは、各コンテナレジストリ、および各言語のトレーサーソースレジストリに記載されています。
+The available library versions are listed in each container registry, as well as in the tracer source repositories for each language:
 - [Java][16]
-- [Javascript][17]
+- [JavaScript][17]
 - [Python][18]
 - [.NET][19]
-  - **注**: .NET ライブラリ挿入の場合、アプリケーションコンテナが musl ベースの Linux ディストリビューション (Alpine など) を使用している場合は、ポッドアノテーションに `-musl` というサフィックスを持つタグを指定する必要があります。例えば、ライブラリバージョン `v2.29.0` を使用する場合は、コンテナタグ `v2.29.0-musl` を指定します。
+  - **Note**: For .NET library injection, if the application container uses a musl-based Linux distribution (such as Alpine), you must specify a tag with the `-musl` suffix for the pod annotation. For example, to use library version `v2.29.0`, specify container tag `v2.29.0-musl`.
 - [Ruby][20]
 
-**注**: ライブラリのバージョン X を使用してインストルメンテーションを行ったアプリケーションで、ライブラリ挿入を使用して同じトレーサーライブラリのバージョン Y を使用してインストルメンテーションを行う場合、トレーサーは中断されません。むしろ、最初にロードされたライブラリのバージョンが使用されます。ライブラリ挿入は実行前にアドミッションコントローラレベルで行われるため、手動で構成されたライブラリよりも優先されます。
+**Note**: If you already have an application instrumented using version X of the library, and then use library injection to instrument using version Y of the same tracer library, the tracer does not break. Rather, the library version loaded first is used. Because library injection happens at the admission controller level prior to runtime, it takes precedence over manually configured libraries.
 
-<div class="alert alert-warning"><strong>注</strong>: <code>最新の</code>タグを使用することはサポートされていますが、主要なライブラリのリリースでは、壊れるような変更が導入されることがあるので、注意して使用してください。</div>
+<div class="alert alert-warning"><strong>Note</strong>: Using the <code>latest</code> tag is supported, but use it with caution because major library releases can introduce breaking changes.</div>
 
-例えば、Java ライブラリを挿入するには
+For example, to inject a Java library:
 
 ```yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    ...
-...
-template:
-  metadata:
-    labels:
-        admission.datadoghq.com/enabled: "true" # Admission Controller を有効にしてこのデプロイメントに含まれる新しいポッドを変異させます
-    annotations:
-        admission.datadoghq.com/java-lib.version: "<CONTAINER IMAGE TAG>"
-  containers:
-  -  ...
-```
-
-### ステップ 3 - 統合サービスタグ付けによるポッドへのタグ付け
-
-[統合サービスタグ付け][21]を使用すると、Datadog のテレメトリーを結びつけ、一貫したタグでトレース、メトリクス、ログをシームレスにナビゲートすることができます。デプロイメントオブジェクトとポッドテンプレートの両方の仕様に、統合サービスタグ付けを設定します。
-以下のラベルを使用して、統合サービスタグを設定します。
-
-```yaml
-...
+    # (...)
+spec:
+  template:
     metadata:
-        labels:
-            tags.datadoghq.com/env: "<ENV>"
-            tags.datadoghq.com/service: "<SERVICE>"
-            tags.datadoghq.com/version: "<VERSION>"
-...
+      labels:
+        admission.datadoghq.com/enabled: "true" # Enable Admission Controller to mutate new pods in this deployment
+      annotations:
+        admission.datadoghq.com/java-lib.version: "<CONTAINER IMAGE TAG>"
+    spec:
+      containers:
+        - # (...)
 ```
 
-**注**: ユニバーサルサービスタグ付けに必要な環境変数 (`DD_ENV`、`DD_SERVICE`、`DD_VERSION`) をポッドテンプレートの仕様で設定する必要はありません。これは、Admission Controller がライブラリにタグ値を挿入する際に環境変数として伝搬させるためです。
+### Step 3 - Tag your pods with Unified Service Tags
 
-例:
+With [Unified Service Tags][21], you can tie Datadog telemetry together and navigate seamlessly across traces, metrics, and logs with consistent tags. Set the Unified Service Tagging on both the deployment object and the pod template specs.
+Set Unified Service tags by using the following labels:
+
+```yaml
+  metadata:
+    labels:
+      tags.datadoghq.com/env: "<ENV>"
+      tags.datadoghq.com/service: "<SERVICE>"
+      tags.datadoghq.com/version: "<VERSION>"
+```
+
+**Note**: It is not necessary to set the _environment variables_ for universal service tagging (`DD_ENV`, `DD_SERVICE`, `DD_VERSION`) in the pod template spec, because the Admission Controller propagates the tag values as environment variables when injecting the library.
+
+For example:
 
 ```yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    tags.datadoghq.com/env: "prod" # 統合サービスタグ - デプロイメント環境タグ
-    tags.datadoghq.com/service: "my-service" # 統合サービスタグ - デプロイメントサービスタグ
-    tags.datadoghq.com/version: "1.1" # 統合サービスタグ - デプロイメントバージョンタグ
-...
-template:
-  metadata:
-    labels:
-        tags.datadoghq.com/env: "prod" # 統合サービスタグ - ポッド環境タグ
-        tags.datadoghq.com/service: "my-service" # 統合サービスタグ - ポッドサービスタグ
-        tags.datadoghq.com/version: "1.1" # 統合サービスタグ - ポッドバージョンタグ
-        admission.datadoghq.com/enabled: "true" # Admission Controller を有効にしてこのデプロイメントに含まれる新しいポッドを変異させます
-    annotations:
+    tags.datadoghq.com/env: "prod" # Unified service tag - Deployment Env tag
+    tags.datadoghq.com/service: "my-service" # Unified service tag - Deployment Service tag
+    tags.datadoghq.com/version: "1.1" # Unified service tag - Deployment Version tag
+  # (...)
+spec:
+  template:
+    metadata:
+      labels:
+        tags.datadoghq.com/env: "prod" # Unified service tag - Pod Env tag
+        tags.datadoghq.com/service: "my-service" # Unified service tag - Pod Service tag
+        tags.datadoghq.com/version: "1.1" # Unified service tag - Pod Version tag
+        admission.datadoghq.com/enabled: "true" # Enable Admission Controller to mutate new pods part of this deployment
+      annotations:
         admission.datadoghq.com/java-lib.version: "<CONTAINER IMAGE TAG>"
-  containers:
-  -  ...
+    spec:
+      containers:
+        - # (...)
 ```
 
-### ステップ 4 - 構成を適用する
+### Step 4 - Apply the configuration
 
-新しい構成が適用されると、ポッドはインスツルメンテーションを受ける準備が整います。
+Your pods are ready to be instrumented when their new configuration is applied.
 
-<div class="alert alert-warning">ライブラリは新しいポッドにのみ挿入され、実行中のポッドには影響を与えません。</div>
+<div class="alert alert-warning">The library is injected on new pods only and does not have any impact on running pods.</div>
 
-## ライブラリ挿入が成功したことを確認する
+## Check that the library injection was successful
 
-ライブラリ挿入は、ポッド内の専用 `init` コンテナの挿入を利用します。
-挿入が成功すると、ポッド内に `datadog-lib-init` という `init` コンテナが作成されるのが確認できます。
+Library injection leverages the injection of a dedicated `init` container in pods.
+If the injection was successful you can see an `init` container called `datadog-lib-init` in your pod:
 
-{{< img src="tracing/trace_collection/datadog-lib-init-container.jpg" alt="ポッド内の init コンテナを表示した Kubernetes 環境の詳細ページ。">}}
+{{< img src="tracing/trace_collection/datadog-lib-init-container.jpg" alt="Kubernetes environment details page showing init container in the pod.">}}
 
-または、`kubectl describe pod <my-pod>` を実行すると、`datadog-lib-init` init コンテナがリストアップされます。
+Or run `kubectl describe pod <my-pod>` to see the `datadog-lib-init` init container listed.
 
-インスツルメンテーションは、Datadog へのテレメトリーの送信も開始します (例えば、[APM][22] へのトレースなど)。
+The instrumentation also starts sending telemetry to Datadog (for example, traces to [APM][22]).
 
-### インストールに関する問題のトラブルシューティング
+### Troubleshooting installation issues
 
-アプリケーションポッドの起動に失敗した場合、`kubectl logs <my-pod> --all-containers` を実行してログを出力し、以下の既知の問題と比較してください。
+If the application pod fails to start, run `kubectl logs <my-pod> --all-containers` to print out the logs and compare them to the known issues below.
 
-#### .NET のインストールに関する問題
+#### .NET installation issues
 ##### `dotnet: error while loading shared libraries: libc.musl-x86_64.so.1: cannot open shared object file: No such file or directory`
 
-- **問題**: dotnet ライブラリバージョンのポッドアノテーションには `-musl` サフィックスが含まれていたが、アプリケーションコンテナは glibc を使用する Linux ディストリビューションで実行されている。
-- **解決策**: dotnet ライブラリのバージョンから `-musl` サフィックスを削除してください。
+- **Problem**: The pod annotation for the dotnet library version included a `-musl` suffix, but the application container runs on a Linux distribution that uses glibc.
+- **Solution**: Remove the `-musl` suffix from the dotnet library version.
 
 ##### `Error loading shared library ld-linux-x86-64.so.2: No such file or directory (needed by /datadog-lib/continuousprofiler/Datadog.Linux.ApiWrapper.x64.so)`
 
-- **問題**: アプリケーションコンテナは musl-libc を使用する Linux ディストリビューション (例えば Alpine) で動作するが、ポッドアノテーションに `-musl` というサフィックスが含まれていない。
-- **解決策**: dotnet ライブラリのバージョンに `-musl` サフィックスを追加してください。
+- **Problem**: The application container runs on a Linux distribution that uses musl-libc (for example, Alpine), but the pod annotation does not include the `-musl` suffix.
+- **Solution**: Add the `-musl` suffix to the dotnet library version.
 
 
-[1]: /ja/containers/cluster_agent/admission_controller/
+#### Python installation issues
+
+##### Noisy library logs
+
+In Python `< 1.20.3`, Python injection logs output to `stderr`. Upgrade to `1.20.3` or above to suppress the logs by default. The logs can be enabled by setting the environment variable `DD_TRACE_DEBUG` to `1`.
+
+
+##### Incompatible Python version
+
+The library injection mechanism for Python only supports injecting the Python library in Python v3.7+.
+
+##### `user-installed ddtrace found, aborting`
+
+- **Problem**: The `ddtrace` library is already installed on the system so the injection logic aborts injecting the library to avoid introducing a breaking change in the application.
+- **Solution**: Remove the installation of `ddtrace` if library injection is desired. Otherwise, use the installed library ([see documentation][26]) instead of library injection.
+
+
+[1]: /containers/cluster_agent/admission_controller/
 [2]: https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/
-[3]: /ja/containers/kubernetes/installation/?tab=helm
+[3]: /containers/kubernetes/installation/?tab=helm
 [4]: http://gcr.io/datadoghq/dd-lib-java-init
 [5]: http://hub.docker.com/r/datadog/dd-lib-java-init
 [6]: http://gallery.ecr.aws/datadog/dd-lib-java-init
@@ -225,96 +246,128 @@ template:
 [18]: https://github.com/DataDog/dd-trace-py/releases
 [19]: https://github.com/DataDog/dd-trace-dotnet/releases
 [20]: https://github.com/DataDog/dd-trace-rb/releases
-[21]: /ja/getting_started/tagging/unified_service_tagging/
+[21]: /getting_started/tagging/unified_service_tagging/
 [22]: https://app.datadoghq.com/apm/traces
 [23]: http://gcr.io/datadoghq/dd-lib-ruby-init
 [24]: http://hub.docker.com/r/datadog/dd-lib-ruby-init
 [25]: http://gallery.ecr.aws/datadog/dd-lib-ruby-init
+[26]: /tracing/trace_collection/dd_libraries/python/
 {{% /tab %}}
 
 {{% tab "Host" %}}
 
-<div class="alert alert-info">ホスト上のトレーシングライブラリ挿入はベータ版です。</a></div>
+<div class="alert alert-info">Tracing Library Injection on a host is in beta.</div>
 
-Agent とお客様のサービスの両方が、現実または仮想のホスト上で実行されている場合、Datadog は `execve` の呼び出しをオーバーライドするプリロードライブラリを使用することで、トレーシングライブラリを挿入します。新しく開始されたプロセスは全て傍受され、指定されたインスツルメンテーションライブラリがサービスに挿入されます。
+When both the Agent and your services are running on a host, real or virtual, Datadog injects the tracing library by using a preload library that overrides calls to `execve`. Any newly started processes are intercepted and the specified instrumentation library is injected into the services.
 
-## 要件
+**Note**: Injection on arm64 is not supported.
 
-- 最近の [Datadog Agent v7][1] のインストール
+## Install both library injection and the Datadog Agent
 
-**注**: arm64 での挿入、Alpine Linux のコンテナイメージでの `musl` による挿入はサポートされていません。
-## プリロードライブラリのインストール
+**Requirements**: A host running Linux.
 
-1. [Agent が実行している][2]ことを確認します。
+If the host does not yet have a Datadog Agent installed, or if you want to upgrade your Datadog Agent installation, use the Datadog Agent install script to install both the injection libraries and the Datadog Agent:
 
-2. 次のコマンド セットのいずれかを使用してライブラリをインストールします。ここで、`<LANG>` は `java`、`js`、`dotnet`、`python` または `all` のいずれかです。
+```shell
+DD_APM_INSTRUMENTATION_ENABLED=host DD_API_KEY=<YOUR KEY> DD_SITE="<YOUR SITE>" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
+```
 
-   **Ubuntu、Debian、またはその他の Debian ベースの Linux ディストリビューションの場合:**
-   ```sh
-   sudo apt-get update
-   sudo apt-get install datadog-apm-inject datadog-apm-library-<LANG>
-   ```
-   **CentOS、RedHat、または yum/RPM を使用するその他のディストリビューションの場合:**
-   ```sh
-   sudo yum makecache
-   sudo yum install datadog-apm-inject datadog-apm-library-<LANG>
-   ```
+By default, running the script installs support for Java, Node.js, Python, Ruby, and .NET. If you want to specify which language support is installed, also set the `DD_APM_INSTRUMENTATION_LANGUAGES` environment variable. The valid values are `java`, `js`, `python`, `ruby`, and `dotnet`. Use a comma-separated list to specify more than one language: 
 
-3. コマンド `dd-host-install` を実行します。
+```shell
+DD_APM_INSTRUMENTATION_LANGUAGES=java,js DD_APM_INSTRUMENTATION_ENABLED=host DD_API_KEY=<YOUR KEY> DD_SITE="<YOUR SITE>" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
+```
 
-4. 終了して新しいシェルを開き、プリロードライブラリを使用します。
+Exit and open a new shell to use the injection library.
 
+## Next steps
 
-## 言語とアプリをインストールする
+If you haven't already, install your app and any supporting languages or libraries it requires. 
 
-1. Java アプリケーションの場合、JDK または JRE がインストールされていることを確認します。
-   ```sh
-   sudo apt install openjdk-17-jdk -y
-   ```
-   NodeJS アプリケーションの場合、NodeJS がインストールされていることを確認します。
-   ```sh
-   curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -
-   sudo apt install nodejs -y
-   ```
-   .NET アプリケーションの場合、[.NET ランタイムがインストールされていること][3]を確認します。
+When an app that is written in a supported language is launched, it is automatically injected with tracing enabled.
 
-   Python アプリケーションの場合、Python がインストールされていることを確認します。
-   ```sh
-   sudo apt install python -y
-   ```
+## Configure the injection
 
-2. まだの場合は、アプリをインストールします。
+Configure host injection in one of the following ways:
+- Set environment variables on the process being launched.
+- Specify host injection configuration in the `/etc/datadog-agent/inject/host_config.yaml` file.
 
-## 挿入の構成
+Values in environment variables override settings in the configuration file on a per-process basis.
 
-以下の環境変数がライブラリの挿入を構成します。これらはコマンドラインから `export` (`export DD_CONFIG_SOURCES=BASIC`) やシェルの構成、あるいは起動コマンドで渡すことができます。
+### Configuration file
+
+| Property name | Purpose | Default value | Valid values | 
+| --------- | ----------- | ------------- | ----------- | 
+|`log_level`  | The logging level|`off`|`off`, `debug`, `info`, `warn`, `error`|
+|`output_paths`|The location where log output is written|`stderr`|`stderr` or a `file://` URL|
+|`env`|The default environment assigned to a process|none|n/a|
+|`config_sources`|The default configuration for a process|`BASIC`|See [Config Sources](#config-sources)|
 
 
-`DD_CONFIG_SOURCES`
-: ライブラリ挿入のオン・オフを切り替え、構成を読み込む場所を指定します。オプションで、複数の値をセミコロンで区切って、複数の可能な場所を示します。エラーにならずに戻ってきた最初の値が使用されます。構成は、構成ソースにまたがってマージされることはありません。有効な値は次のとおりです。
-  - `BLOB:<URL>` - `<URL>` にある Blob ストア (S3 互換) から構成を読み込みます。
-  - `LOCAL:<PATH>` - ローカルファイルシステム上の `<PATH>` にあるファイルから読み込みます。
-  - `BASIC` - エクスポートされた値またはデフォルト値を使用します。
-  - `OFF` - デフォルト。挿入を行いません。<br>
-`BLOB` または `LOCAL` の設定について詳しくは、[構成ソースの供給](#supplying-configuration-source-host)を参照してください。
+#### Example
 
-`DD_LIBRARY_INJECT`
-: `FALSE` に設定すると、ライブラリ挿入を完全にオフにすることができます。<br>
-**デフォルト**: `TRUE`
+```yaml
+---
+log_level: debug
+output_paths:
+  - file:///tmp/host_injection.log
+env: dev
+config_sources: BASIC
+```
 
-`DD_INJECT_DEBUG`
-: デバッグ情報をログに記録する場合は `TRUE` または `1` に設定します。<br>
-**デフォルト**: `FALSE`
+### Environment variables
 
-`DD_OUTPUT_PATHS`
-: デバッグログを書き込む場所をカンマで区切ったリスト。<br>
-**デフォルト**: `stderr`
+The following environment variables configure library injection. You can pass these in by `export` through the command line (`export DD_CONFIG_SOURCES=BASIC`), shell configuration, or launch command.
+
+Each of the fields in the config file corresponds to an environment variable. This environment variable is read from the environment of the process that’s being launched and affects only the process currently being launched. 
+
+|Config file property|Environment Variable|
+| --------- | ----------- |  
+|`log_level`|`DD_APM_INSTRUMENTATION_DEBUG`|
+|`output_paths`|`DD_APM_INSTRUMENTATION_OUTPUT_PATHS`|
+|`env`|`DD_ENV`|
+|`config_sources`|`DD_CONFIG_SOURCES`|
+
+The `DD_APM_INSTRUMENTATION_DEBUG` environment variable is limited to the values `true` and `false` (default value `false`). Setting it to `true` sets `log_level` to `debug` and setting it to `false` (or not setting it at all) uses the `log_level` specified in the configuration file. The environment variable can only set the log level to `debug`, not any other log level values.
+
+The `DD_INSTRUMENT_SERVICE_WITH_APM` environment variable controls whether or not injection is enabled. It defaults to `TRUE`. Set it to `FALSE` to turn off library injection altogether.
+
+### Config sources
+
+By default, the following settings are enabled in an instrumented process:
+- Tracing
+- Log injection, assuming the application uses structured logging (usually JSON). For traces to appear in non-structured logs, you must change your application’s log configuration to include placeholders for trace ID and span ID. See [Connect Logs and Traces][6] for more information.
+- Health metrics
+- Runtime metrics
+
+You can change these settings for all instrumented processes by setting the `config_sources` property in the configuration file or for a single process by setting the `DD_CONFIG_SOURCES` environment variable for the process. The valid settings for config sources are:
+
+|Configuration Source Name|Meaning|
+| --------- | ----------- |  
+|`BASIC`|Apply the configurations specified above. If no configuration source is specified, this is the default.|
+|`LOCAL:PATH`|Apply the configuration at the specified path on the local file system. The format of the configuration file is described below. Example: `LOCAL:/opt/config/my_process_config.yaml`|
+|`BLOB:URL`| Apply the configuration at the specified path in an S3-compatible object store. The connection URL and the format of the configuration file are described below. Example: `BLOB:s3://config_bucket/my_process_config.yaml?region=us-east-1` |
+
+The words `BASIC`, `LOCAL`, and `BLOB` must be uppercase.
+
+Config source values can be separated by semicolons to indicate multiple possible locations. The first configuration that returns without an error is used. Configuration is not merged from multiple configuration sources. The following example checks an S3 bucket for configuration, then checks the local file system, and finally uses the built-in default configuration: 
+
+```yaml
+DD_CONFIG_SOURCES=BLOB:s3://config_bucket/my_process_config.yaml?region=us-east-1;LOCAL:/opt/config/my_process_config.yaml;BASIC
+```
+
+#### Blob storage support
+The supported blob storage solutions are:
+- **Amazon S3** - Set the URL with the `s3://` prefix. If you have authenticated with the AWS CLI, it uses those credentials.
+See [the AWS SDK documentation][7] for information about configuring credentials using environment variables.
+- **GCP GCS** - Set the URL with the `gs://` prefix. It uses Application Default Credentials. Authenticate with `gcloud auth application-default login`. See [the Google Cloud authentication documentation][8] for more information about configuring credentials using environment variables.
+- **Azure Blob** - Set the URL with the `azblob://` prefix, and point to a storage container name. It uses the credentials found in `AZURE_STORAGE_ACCOUNT` (that is, the bucket name) plus at least one of `AZURE_STORAGE_KEY` and `AZURE_STORAGE_SAS_TOKEN`. For more information about configuring `BLOB` or `LOCAL` settings, see [Supplying configuration source](#supplying-configuration-source-host).
 
 <a id="supplying-configuration-source-host"></a>
 
-### 構成ソースの供給
+### Supplying configuration source
 
-`BLOB` または `LOCAL` を構成ソースに指定した場合は、`etc/<APP_NAME>/config.json` または `.yaml` に JSON または YAML ファイルを作成し、JSON として:
+The config file for `LOCAL` and `BLOB` can be formatted as JSON:
 
 ```json
 {
@@ -338,10 +391,10 @@ Agent とお客様のサービスの両方が、現実または仮想のホス�
     "tracing_debug": true,
     "tracing_log_level": "debug",
 }
-
 ```
 
-または YAML として構成を提供します:
+Or as YAML:
+
 ```yaml
 ---
 version: 1
@@ -368,31 +421,31 @@ tracing_debug: true
 tracing_log_level: debug
 ```
 
-このコンフィギュレーションファイルでは、`version` の値は常に `1` です。これは、コンテンツのバージョンではなく、使用する構成スキーマのバージョンを指しています。
+The value of `version` is always `1`. This refers to the configuration schema version in use, not the version of the content.
 
-次の表は、挿入構成値が対応する[トレーシングライブラリ構成オプション][4]にどのように対応するかを示しています。
+The following table shows how the injection configuration values map to the corresponding [tracing library configuration options][4]:
 
-| 挿入可否 | Java トレーサー | NodeJS トレーサー | .NET トレーサー | Python トレーサー |
+| Injection | Java tracer | NodeJS tracer | .NET tracer | Python tracer |
 | --------- | ----------- | ------------- | ----------- | ------------- |
 | `tracing_enabled` | `dd.trace.enabled` | `DD_TRACE_ENABLED` | `DD_TRACE_ENABLED` |  `DD_TRACE_ENABLED` |
 | `log_injection_enabled` | `dd.logs.injection` | `DD_LOGS_INJECTION` | `DD_LOGS_INJECTION` |  `DD_LOGS_INJECTION` |
-| `health_metrics_enabled` | `dd.trace.health.metrics.enabled` |    非該当   |    非該当  | 非該当 |
+| `health_metrics_enabled` | `dd.trace.health.metrics.enabled` |    n/a   |    n/a  | n/a |
 | `runtime_metrics_enabled` | `dd.jmxfetch.enabled` | `DD_RUNTIME_METRICS_ENABLED` | `DD_RUNTIME_METRICS_ENABLED` | `DD_RUNTIME_METRICS_ENABLED` |
 | `tracing_sampling_rate` | `dd.trace.sample.rate` | `DD_TRACE_SAMPLE_RATE` | `DD_TRACE_SAMPLE_RATE` | `DD_TRACE_SAMPLE_RATE`  |
-| `tracing_rate_limit` | 非該当       | `DD_TRACE_RATE_LIMIT` | `DD_TRACE_RATE_LIMIT` | `DD_TRACE_RATE_LIMIT` |
+| `tracing_rate_limit` | `dd.trace.rate.limit`    | `DD_TRACE_RATE_LIMIT` | `DD_TRACE_RATE_LIMIT` | `DD_TRACE_RATE_LIMIT` |
 | `tracing_tags` | `dd.tags` | `DD_TAGS` | `DD_TAGS` | `DD_TAGS` |
 | `tracing_service_mapping` | `dd.service.mapping` | `DD_SERVICE_MAPPING` | `DD_TRACE_SERVICE_MAPPING` | `DD_SERVICE_MAPPING` |
-| `tracing_agent_timeout` | `dd.trace.agent.timeout` |  非該当 | 非該当 | 非該当 |
-| `tracing_header_tags` | `dd.trace.header.tags` |    非該当    | `DD_TRACE_HEADER_TAGS` | `DD_TRACE_HEADER_TAGS` |
-| `tracing_partial_flush_min_spans` | `dd.trace.partial.flush.min.spans` | `DD_TRACE_PARTIAL_FLUSH_MIN_SPANS` | `DD_TRACE_PARTIAL_FLUSH_ENABLED ` | 非該当 |
+| `tracing_agent_timeout` | `dd.trace.agent.timeout` |  n/a | n/a | n/a |
+| `tracing_header_tags` | `dd.trace.header.tags` |    n/a    | `DD_TRACE_HEADER_TAGS` | `DD_TRACE_HEADER_TAGS` |
+| `tracing_partial_flush_min_spans` | `dd.trace.partial.flush.min.spans` | `DD_TRACE_PARTIAL_FLUSH_MIN_SPANS` | `DD_TRACE_PARTIAL_FLUSH_ENABLED ` | n/a |
 | `tracing_debug` | `dd.trace.debug` | `DD_TRACE_DEBUG` | `DD_TRACE_DEBUG` | `DD_TRACE_DEBUG` |
-| `tracing_log_level` | `datadog.slf4j.simpleLogger.defaultLogLevel` | `DD_TRACE_LOG_LEVEL` |   非該当    | 非該当 |
+| `tracing_log_level` | `datadog.slf4j.simpleLogger.defaultLogLevel` | `DD_TRACE_LOG_LEVEL` |   n/a    | n/a |
 
-挿入構成に記載されていないトレーサーライブラリの構成オプションは、プロパティや環境変数を通して、通常の方法で使用することができます。
+Tracer library configuration options that aren't mentioned in the injection configuration are still available for use through properties or environment variables the usual way.
 
-### 基本構成設定
+### Basic configuration settings
 
-構成ソースに `BASIC` を指定した場合、以下の YAML 設定と同等となります。
+`BASIC` configuration settings are equivalent to the following YAML settings:
 
 ```yaml
 ---
@@ -401,124 +454,122 @@ tracing_enabled: true
 log_injection_enabled: true
 health_metrics_enabled: true
 runtime_metrics_enabled: true
-tracing_sampling_rate: 1.0
-tracing_rate_limit: 1
 ```
 
-## サービスの起動
+## Launch your services
 
-起動コマンドでプリロードライブラリの構成を指定し、サービスを起動します。
+Launch your services, indicating the preload library configuration in the launch command. If `DD_CONFIG_SOURCES` is not specified, the value specified for `config_sources` in the `/etc/datadog-agent/inject/host_config.yaml` config file is used. If that is not specified either, `DD_CONFIG_SOURCES` defaults to `BASIC`:
 
-**Java アプリの例**:
+**Java app example**:
 ```sh
-DD_CONFIG_SOURCES=BASIC java -jar <SERVICE_1>.jar &
+java -jar <SERVICE_1>.jar &
 DD_CONFIG_SOURCES=LOCAL:/etc/<SERVICE_2>/config.yaml;BASIC java -jar <SERVICE_2>.jar &
 ```
 
-**Node アプリの例**:
+**Node app example**:
 ```sh
-DD_CONFIG_SOURCES=BASIC node index.js &
+node index.js &
 DD_CONFIG_SOURCES=LOCAL:/etc/<SERVICE_2>/config.yaml;BASIC node index.js &
 ```
 
-**.NET アプリの例**:
+**.NET app example**:
 ```sh
-DD_CONFIG_SOURCES=BASIC dotnet <SERVICE_1>.dll &
+dotnet <SERVICE_1>.dll &
 DD_CONFIG_SOURCES=LOCAL:/etc/<SERVICE_2>/config.yaml;BASIC dotnet <SERVICE_2>.dll &
 ```
-**Python アプリの例**:
+**Python app example**:
 ```sh
-DD_CONFIG_SOURCES=BASIC python <SERVICE_1>.py &
+python <SERVICE_1>.py &
 DD_CONFIG_SOURCES=LOCAL:/etc/<SERVICE_2>/config.yaml;BASIC python <SERVICE_2>.py &
 ```
 
-アプリケーションを実行すると、テレメトリーデータが生成され、[APM のトレース][5]として見ることができます。
+Exercise your application to start generating telemetry data, which you can see as [traces in APM][5].
 
 
-[1]: https://app.datadoghq.com/account/settings#agent/overview
-[2]: /ja/agent/guide/agent-commands/?tab=agentv6v7#start-the-agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
+[2]: /agent/configuration/agent-commands/?tab=agentv6v7#start-the-agent
 [3]: https://learn.microsoft.com/en-us/dotnet/core/install/linux-ubuntu
-[4]: /ja/tracing/trace_collection/library_config/
+[4]: /tracing/trace_collection/library_config/
 [5]: https://app.datadoghq.com/apm/traces
+[6]: /tracing/other_telemetry/connect_logs_and_traces/
+[7]: https://docs.aws.amazon.com/sdk-for-go/api/aws/session/
+[8]: https://cloud.google.com/docs/authentication#service-accounts
 {{% /tab %}}
 
-{{% tab "ホスト上の Agent、コンテナ内のアプリ" %}}
+{{% tab "Agent on host, app in containers" %}}
 
-<div class="alert alert-info">ホストとコンテナ上のトレーシングライブラリ挿入はベータ版です。</a></div>
-
-
-Agent がホスト上で実行しており、サービスがコンテナで実行している場合、Datadog はコンテナ作成を傍受し、Docker コンテナを構成することでトレーシングライブラリを挿入します。
-
-新しく開始されたプロセスはすべて傍受され、指定されたインスツルメンテーションライブラリがサービスに挿入されます。
-
-## 要件
-
-- 最近の [Datadog Agent v7][1] のインストール
-- [Docker Engine][2]
-
-**注**: arm64 での挿入、Alpine Linux のコンテナイメージでの `musl` による挿入はサポートされていません。
-
-## プリロードライブラリのインストール
-
-1. [Agent が実行している][3]ことを確認します。
-
-2. 次のコマンド セットのいずれかを使用してライブラリをインストールします。ここで、`<LANG>` は `java`、`js`、`dotnet`、`python` または `all` のいずれかです。
-
-   **Ubuntu、Debian、またはその他の Debian ベースの Linux ディストリビューションの場合:**
-   ```sh
-   sudo apt-get update
-   sudo apt-get install datadog-apm-inject datadog-apm-library-<LANG>
-   ```
-   **CentOS、RedHat、または yum/RPM を使用するその他のディストリビューションの場合:**
-   ```sh
-   sudo yum makecache
-   sudo yum install datadog-apm-inject datadog-apm-library-<LANG>
-   ```
-
-3. コマンド `dd-host-container-install` を実行します。
+<div class="alert alert-info">Tracing Library Injection on hosts and containers is in beta.</div>
 
 
-## Docker 挿入の構成
+When your Agent is running on a host, and your services are running in containers, Datadog injects the tracing library by intercepting container creation and configuring the Docker container.
 
-`/etc/datadog-agent/inject/docker_config.yaml` を編集し、以下の挿入用の YAML 構成を追加します。
+Any newly started processes are intercepted and the specified instrumentation library is injected into the services.
+
+**Note**: Injection on arm64 is not supported.
+
+## Install both library injection and the Datadog Agent
+
+**Requirements**:
+- A host running Linux.
+- [Docker Engine][2].
+
+If the host does not yet have a Datadog Agent installed, or if you want to upgrade your Datadog Agent installation, use the Datadog Agent install script to install both the injection libraries and the Datadog Agent:
+
+```shell
+DD_APM_INSTRUMENTATION_ENABLED=all DD_API_KEY=<YOUR KEY> DD_SITE="<YOUR SITE>" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
+```
+
+By default, running the script installs support for Java, Node.js, Python, Ruby, and .NET. If you want to specify which language support is installed, also set the `DD_APM_INSTRUMENTATION_LANGUAGES` environment variable. The valid values are `java`, `js`, `python`, `ruby`, and `dotnet`. Use a comma-separated list to specify more than one language: 
+
+```shell
+DD_APM_INSTRUMENTATION_LANGUAGES=java,js DD_APM_INSTRUMENTATION_ENABLED=all DD_API_KEY=<YOUR KEY> DD_SITE="<YOUR SITE>" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
+```
+
+## Configure Docker injection {#configure-docker-injection-2}
+
+If the default configuration doesn't meet your needs, you can edit `/etc/datadog-agent/inject/docker_config.yaml` and add the following YAML configuration for the injection:
 
 ```yaml
 ---
-config_sources: BASIC
-library_inject: true
 log_level: debug
 output_paths:
 - stderr
+config_sources: BASIC
 ```
 
 `config_sources`
-: ライブラリ挿入のオン・オフを切り替え、構成が保存される場所をセミコロンで区切った順序付きリストで指定します。エラーにならずに戻ってきた最初の値が使用されます。構成は、構成ソースにまたがってマージされることはありません。有効な値は次のとおりです。
-  - `BLOB:<URL>` - `<URL>` にある Blob ストア (S3 互換) から構成を読み込みます。
-  - `LOCAL:<PATH>` - ローカルファイルシステム上の `<PATH>` にあるファイルから読み込みます。
-  - `BASIC` - デフォルトのプロパティセットを使用し、追加の構成の検索を停止します。
-  - `OFF` - デフォルト。挿入を行いません。<br>
-`BLOB` または `LOCAL` の設定について詳しくは、[構成ソースの供給](#supplying-configuration-source-hc)を参照してください。
+: Turn on or off library injection and specify a semicolon-separated ordered list of places where configuration is stored. The first value that returns without an error is used. Configuration is not merged across configuration sources. The valid values are:
+  - `BLOB:<URL>` - Load configuration from a blob store (S3-compatible) located at `<URL>`.
+  - `LOCAL:<PATH>` - Load from a file on the local file system at `<PATH>`.
+  - `BASIC` - Use default values. If `config_sources` is not specified, this configuration is used.<br/>
 
-`library_inject`
-: `false` に設定すると、ライブラリの挿入を完全に無効にすることができます。<br>
-**デフォルト**: `true`
+The words `BASIC`, `LOCAL`, and `BLOB` must be uppercase.
+
+Config source values can be separated by semicolons to indicate multiple possible locations. The first configuration that returns without an error is used. Configuration is not merged from multiple configuration sources. The following example checks an S3 bucket for configuration, then checks the local file system, and finally uses the built-in default configuration:
+
+```yaml
+config_sources: BLOB:s3://config_bucket/my_process_config.yaml?region=us-east-1;LOCAL:/opt/config/my_process_config.yaml;BASIC
+```
+
+For more information about configuring `BLOB` or `LOCAL` settings, see [Supplying configuration source](#supplying-configuration-source-hc).
 
 `log_level`
-: 何が起こっているかについての詳細な情報をログに記録する場合は `debug` に、それよりもはるかに少ない情報をログに記録する場合は `info` に設定します。
+: Set to `debug` to log detailed information about what is happening, or `info`, `warn`, or `error` to log far less.<br>
+**Default**: `info`
 
 `output_paths`
-: ログを書き込む 1 つまたは複数の場所のリスト。<br>
-**デフォルト**: `stderr`
+: A list of one or more places to write logs.<br>
+**Default**: `stderr`
 
-オプション: `env`
-: Docker で動作するコンテナ、例えば `dev`、`prod`、`staging` などの `DD_ENV` タグを指定します。 <br>
-**デフォルト** なし。
+Optional: `env`
+: Specifies the `DD_ENV` tag for the containers running in Docker, for example, `dev`, `prod`, `staging`. <br>
+**Default** None.
 
 <a id="supplying-configuration-source-hc"></a>
 
-### 構成ソースの供給
+### Supplying configuration source
 
-`BLOB` または `LOCAL` を構成ソースに指定した場合は、そこに JSON または YAML ファイルを作成し、JSON として:
+If you specify `BLOB` or `LOCAL` configuration source, create a JSON or YAML file there, and provide the configuration either as JSON:
 
 ```json
 {
@@ -545,7 +596,7 @@ output_paths:
 
 ```
 
-または YAML として構成を提供します:
+Or as YAML:
 ```yaml
 ---
 version: 1
@@ -573,31 +624,36 @@ tracing_log_level: debug
 ```
 
 
-このコンフィギュレーションファイルでは、`version` の値は常に `1` です。これは、コンテンツのバージョンではなく、使用する構成スキーマのバージョンを指しています。
+The following table shows how the injection configuration values map to the corresponding [tracing library configuration options][4]:
 
-次の表は、挿入構成値が対応する[トレーシングライブラリ構成オプション][4]にどのように対応するかを示しています。
-
-| 挿入可否 | Java トレーサー | NodeJS トレーサー | .NET トレーサー | Python トレーサー |
+| Injection | Java tracer | NodeJS tracer | .NET tracer | Python tracer |
 | --------- | ----------- | ------------- | ----------- | ------------- |
 | `tracing_enabled` | `dd.trace.enabled` | `DD_TRACE_ENABLED` | `DD_TRACE_ENABLED` |  `DD_TRACE_ENABLED` |
 | `log_injection_enabled` | `dd.logs.injection` | `DD_LOGS_INJECTION` | `DD_LOGS_INJECTION` |  `DD_LOGS_INJECTION` |
-| `health_metrics_enabled` | `dd.trace.health.metrics.enabled` |    非該当   |    非該当  | 非該当 |
+| `health_metrics_enabled` | `dd.trace.health.metrics.enabled` |    n/a   |    n/a  | n/a |
 | `runtime_metrics_enabled` | `dd.jmxfetch.enabled` | `DD_RUNTIME_METRICS_ENABLED` | `DD_RUNTIME_METRICS_ENABLED` | `DD_RUNTIME_METRICS_ENABLED` |
 | `tracing_sampling_rate` | `dd.trace.sample.rate` | `DD_TRACE_SAMPLE_RATE` | `DD_TRACE_SAMPLE_RATE` | `DD_TRACE_SAMPLE_RATE`  |
-| `tracing_rate_limit` | 非該当       | `DD_TRACE_RATE_LIMIT` | `DD_TRACE_RATE_LIMIT` | `DD_TRACE_RATE_LIMIT` |
+| `tracing_rate_limit` | `dd.trace.rate.limit`       | `DD_TRACE_RATE_LIMIT` | `DD_TRACE_RATE_LIMIT` | `DD_TRACE_RATE_LIMIT` |
 | `tracing_tags` | `dd.tags` | `DD_TAGS` | `DD_TAGS` | `DD_TAGS` |
 | `tracing_service_mapping` | `dd.service.mapping` | `DD_SERVICE_MAPPING` | `DD_TRACE_SERVICE_MAPPING` | `DD_SERVICE_MAPPING` |
-| `tracing_agent_timeout` | `dd.trace.agent.timeout` |  非該当 | 非該当 | 非該当 |
-| `tracing_header_tags` | `dd.trace.header.tags` |    非該当    | `DD_TRACE_HEADER_TAGS` | `DD_TRACE_HEADER_TAGS` |
-| `tracing_partial_flush_min_spans` | `dd.trace.partial.flush.min.spans` | `DD_TRACE_PARTIAL_FLUSH_MIN_SPANS` | `DD_TRACE_PARTIAL_FLUSH_ENABLED ` | 非該当 |
+| `tracing_agent_timeout` | `dd.trace.agent.timeout` |  n/a | n/a | n/a |
+| `tracing_header_tags` | `dd.trace.header.tags` |    n/a    | `DD_TRACE_HEADER_TAGS` | `DD_TRACE_HEADER_TAGS` |
+| `tracing_partial_flush_min_spans` | `dd.trace.partial.flush.min.spans` | `DD_TRACE_PARTIAL_FLUSH_MIN_SPANS` | `DD_TRACE_PARTIAL_FLUSH_ENABLED ` | n/a |
 | `tracing_debug` | `dd.trace.debug` | `DD_TRACE_DEBUG` | `DD_TRACE_DEBUG` | `DD_TRACE_DEBUG` |
-| `tracing_log_level` | `datadog.slf4j.simpleLogger.defaultLogLevel` | `DD_TRACE_LOG_LEVEL` |   非該当    | 非該当 |
+| `tracing_log_level` | `datadog.slf4j.simpleLogger.defaultLogLevel` | `DD_TRACE_LOG_LEVEL` |   n/a    | n/a |
 
-挿入構成に記載されていないトレーサーライブラリの構成オプションは、プロパティや環境変数を通して、通常の方法で使用することができます。
+Tracer library configuration options that aren't mentioned in the injection configuration are still available for use through properties or environment variables the usual way.
 
-### 基本構成設定
+#### Blob storage support
+The supported blob storage solutions are:
+- **Amazon S3** - Set the URL with the `s3://` prefix. If you have authenticated with the AWS CLI, it uses those credentials.
+See [the AWS SDK documentation][7] for information about configuring credentials using environment variables.
+- **GCP GCS** - Set the URL with the `gs://` prefix. It uses Application Default Credentials. Authenticate with `gcloud auth application-default login`. See [the Google Cloud authentication documentation][8] for more information about configuring credentials using environment variables.
+- **Azure Blob** - Set the URL with the `azblob://` prefix, and point to a storage container name. It uses the credentials found in `AZURE_STORAGE_ACCOUNT` (that is, the bucket name) plus at least one of `AZURE_STORAGE_KEY` and `AZURE_STORAGE_SAS_TOKEN`. For more information about configuring `BLOB` or `LOCAL` settings, see [Supplying configuration source](#supplying-configuration-source-hc).
 
-構成ソースに `BASIC` を指定した場合、以下の YAML 設定と同等となります。
+### Basic configuration settings
+
+`BASIC` configuration settings are equivalent to the following YAML settings:
 
 ```yaml
 ---
@@ -606,98 +662,63 @@ tracing_enabled: true
 log_injection_enabled: true
 health_metrics_enabled: true
 runtime_metrics_enabled: true
-tracing_sampling_rate: 1.0
-tracing_rate_limit: 1
 ```
 
-## コンテナへの統合サービスタグ付けの指定
+## Specifying Unified Service Tags on containers
 
-環境変数 `DD_ENV`、`DD_SERVICE`、`DD_VERSION` がサービスコンテナイメージで指定されている場合、それらの値はコンテナからのテレメトリーにタグ付けするために使用されます。
+If the environment variables `DD_ENV`, `DD_SERVICE`, or `DD_VERSION` are specified in a service container image, those values are used to tag telemetry from the container.
 
-指定がない場合は、`DD_ENV` は `/etc/datadog-agent/inject/docker_config.yaml` コンフィギュレーションファイルに設定されている `env` 値を使用します (もしある場合)。`DD_SERVICE` と `DD_VERSION` は、Docker イメージの名前から取得します。`my-service:1.0` という名前のイメージは、`DD_SERVICE` が `my-service` で、 `DD_VERSION` が `1.0` でタグ付けされています。
+If they are not specified, `DD_ENV` uses the `env` value set in the `/etc/datadog-agent/inject/docker_config.yaml` config file, if any. `DD_SERVICE` is derived from the name of the Docker image. An image with the name `my-service:1.0` is tagged with `DD_SERVICE` of `my-service`.
 
-## サービスの起動
+## Launch your services
 
-Agent を起動し、通常通りコンテナ化されたサービスを起動します。
+Start your Agent and launch your containerized services as usual.
 
-アプリケーションを実行すると、テレメトリーデータが生成され、[APM のトレース][5]として見ることができます。
+Exercise your application to start generating telemetry data, which you can see as [traces in APM][5].
 
-
-
-[1]: https://app.datadoghq.com/account/settings#agent/overview
+[1]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
 [2]: https://docs.docker.com/engine/install/ubuntu/
-[3]: /ja/agent/guide/agent-commands/?tab=agentv6v7#start-the-agent
-[4]: /ja/tracing/trace_collection/library_config/
+[3]: /agent/configuration/agent-commands/?tab=agentv6v7#start-the-agent
+[4]: /tracing/trace_collection/library_config/
 [5]: https://app.datadoghq.com/apm/traces
+[7]: https://docs.aws.amazon.com/sdk-for-go/api/aws/session/
+[8]: https://cloud.google.com/docs/authentication#service-accounts
+
 {{% /tab %}}
 
-{{% tab "別々のコンテナ内の Agent とアプリ" %}}
+{{% tab "Agent and app in separate containers" %}}
 
-<div class="alert alert-info">コンテナ内のトレーシングライブラリ挿入はベータ版です。</a></div>
+<div class="alert alert-info">Tracing Library Injection in containers is in beta.</div>
 
-Agent とサービスが同じホストの別々の Datadog コンテナで実行している場合、Datadog はコンテナ作成を傍受し、Docker コンテナを構成することでトレーシングライブラリを挿入します。
+When your Agent and services are running in separate Docker containers on the same host, Datadog injects the tracing library by intercepting container creation and configuring the Docker container.
 
-新しく開始されたプロセスはすべて傍受され、指定されたインスツルメンテーションライブラリがサービスに挿入されます。
+Any newly started processes are intercepted and the specified instrumentation library is injected into the services.
 
-## 要件
+**Requirements**:
+- [Docker Engine][1].
 
-- [Docker Engine][1]
+**Note**: Injection on arm64 is not supported.
 
-**注**: arm64 での挿入、Alpine Linux のコンテナイメージでの `musl` による挿入はサポートされていません。
+## Install the preload library
 
-## プリロードライブラリのインストール
+Use the `install_script_docker_injection` shell script to automatically install Docker injection support. Docker must already be installed on the host machine.
 
-**Ubuntu、Debian、またはその他の Debian ベースの Linux ディストリビューションの場合:**
+```shell
+bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_docker_injection.sh)"
+```
 
-1. Datadog の deb リポジトリをシステムにセットアップし、Datadog のアーカイブキーリングを作成します。
-   ```sh
-   sudo sh -c "echo 'deb [signed-by=/usr/share/keyrings/datadog-archive-keyring.gpg] https://apt.datadoghq.com/ stable 7' > /etc/apt/sources.list.d/datadog.list"
-   sudo touch /usr/share/keyrings/datadog-archive-keyring.gpg
-   sudo chmod a+r /usr/share/keyrings/datadog-archive-keyring.gpg
+This installs language libraries for all supported languages. To install specific languages, set the `DD_APM_INSTRUMENTATION_LANGUAGES` variable. The valid values are `java`, `js`, `python`, `ruby`, and `dotnet`:
 
-   curl https://keys.datadoghq.com/DATADOG_APT_KEY_CURRENT.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
-   curl https://keys.datadoghq.com/DATADOG_APT_KEY_382E94DE.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
-   curl https://keys.datadoghq.com/DATADOG_APT_KEY_F14F620E.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
-   ```
-2. ローカルの apt リポジトリを更新し、ライブラリをインストールします。
-   ```sh
-   sudo apt-get update
-   sudo apt-get install datadog-apm-inject datadog-apm-library-<LANG>
-   ```
-   ここで `<LANG>` は `java`、`js`、`dotnet`、`python` または `all` のいずれかです。
+```shell
+DD_APM_INSTRUMENTATION_LANGUAGES=java,js bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_docker_injection.sh)"
+```
 
-3. コマンド `dd-container-install` を実行します。
+## Configure Docker injection
 
-**CentOS、RedHat、または yum/RPM を使用するその他のディストリビューションの場合:**
-
-1. 以下の内容で `/etc/yum.repos.d/datadog.repo` と呼ばれるファイルを作成して、システム上に Datadog の Yum リポジトリをセットアップします。
-   ```
-   [datadog]
-   name = Datadog, Inc.
-   baseurl = https://yum.datadoghq.com/stable/7/x86_64/
-   enabled=1
-   gpgcheck=1
-   repo_gpgcheck=1
-   gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
-   ```
-   **注**: [dnf のバグ][2]により、RedHat/CentOS 8.1 では `1` の代わりに `repo_gpgcheck=0` を設定してください。
-
-2. yum キャッシュを更新して、ライブラリをインストールします。
-   ```sh
-   sudo yum makecache
-   sudo yum install datadog-apm-inject datadog-apm-library-<LANG>
-   ```
-   ここで `<LANG>` は `java`、`js`、`dotnet`、`python` または `all` のいずれかです。
-
-3. コマンド `dd-container-install` を実行します。
-
-## Docker 挿入の構成
-
-`/etc/datadog-agent/inject/docker_config.yaml` を編集し、以下の挿入用の YAML 構成を追加します。
+Edit `/etc/datadog-agent/inject/docker_config.yaml` and add the following YAML configuration for the injection:
 
 ```yaml
 ---
-library_inject: true
 log_level: debug
 output_paths:
 - stderr
@@ -705,33 +726,38 @@ config_sources: BASIC
 ```
 
 `config_sources`
-: ライブラリ挿入のオン・オフを切り替え、構成が保存される場所をセミコロンで区切った順序付きリストで指定します。エラーにならずに戻ってきた最初の値が使用されます。構成は、構成ソースにまたがってマージされることはありません。有効な値は次のとおりです。
-  - `BLOB:<URL>` - `<URL>` にある Blob ストア (S3 互換) から構成を読み込みます。
-  - `LOCAL:<PATH>` - ローカルファイルシステム上の `<PATH>` にあるファイルから読み込みます。
-  - `BASIC` - デフォルトのプロパティセットを使用し、追加の構成の検索を停止します。
-  - `OFF` - デフォルト。挿入を行いません。<br>
-`BLOB` または `LOCAL` の設定について詳しくは、[構成ソースの供給](#supplying-configuration-source-c)を参照してください。
+: Turn on or off library injection and specify a semicolon-separated ordered list of places where configuration is stored. The first value that returns without an error is used. Configuration is not merged across configuration sources. The valid values are:
+  - `BLOB:<URL>` - Load configuration from a blob store (S3-compatible) located at `<URL>`.
+  - `LOCAL:<PATH>` - Load from a file on the local file system at `<PATH>`.
+  - `BASIC` - Use default values. If `config_sources` is not specified, this configuration is used.<br/>
 
-`library_inject`
-: `false` に設定すると、ライブラリの挿入を完全に無効にすることができます。<br>
-**デフォルト**: `true`
+The words `BASIC`, `LOCAL`, and `BLOB` must be uppercase.
+
+Config source values can be separated by semicolons to indicate multiple possible locations. The first configuration that returns without an error is used. Configuration is not merged from multiple configuration sources. The following example checks an S3 bucket for configuration, then checks the local file system, and finally uses the built-in default configuration: 
+
+```yaml
+config_sources: BLOB:s3://config_bucket/my_process_config.yaml?region=us-east-1;LOCAL:/opt/config/my_process_config.yaml;BASIC
+```
+
+
+For more information about configuring `BLOB` or `LOCAL` settings, see [Supplying configuration source](#supplying-configuration-source-c).
 
 `log_level`
-: 何が起こっているかについての詳細な情報をログに記録する場合は `debug` に、それよりもはるかに少ない情報をログに記録する場合は `info` に設定します。
+: Set to `debug` to log detailed information about what is happening, or `info` to log far less.
 
 `output_paths`
-: ログを書き込む 1 つまたは複数の場所のリスト。<br>
-**デフォルト**: `stderr`
+: A list of one or more places to write logs.<br>
+**Default**: `stderr`
 
-オプション: `env`
-: Docker で動作するコンテナ、例えば `dev`、`prod`、`staging` などの `DD_ENV` タグを指定します。 <br>
-**デフォルト** なし。
+Optional: `env`
+: Specifies the `DD_ENV` tag for the containers running in Docker, for example, `dev`, `prod`, `staging`. <br>
+**Default** None.
 
 <a id="supplying-configuration-source-c"></a>
 
-### 構成ソースの供給
+### Supplying configuration source
 
-`BLOB` または `LOCAL` を構成ソースに指定した場合は、そこに JSON または YAML ファイルを作成し、JSON として:
+If you specify `BLOB` or `LOCAL` configuration source, create a JSON or YAML file there, and provide the configuration either as JSON:
 
 ```json
 {
@@ -758,7 +784,7 @@ config_sources: BASIC
 
 ```
 
-または YAML として構成を提供します:
+Or as YAML:
 ```yaml
 ---
 version: 1
@@ -785,31 +811,38 @@ tracing_debug: true
 tracing_log_level: debug
 ```
 
-このコンフィギュレーションファイルでは、`version` の値は常に `1` です。これは、コンテンツのバージョンではなく、使用する構成スキーマのバージョンを指しています。
+In this configuration file, the value of `version` is always `1`. This refers to the configuration schema version in use, not the version of the content.
 
-次の表は、挿入構成値が対応する[トレーシングライブラリ構成オプション][3]にどのように対応するかを示しています。
+The following table shows how the injection configuration values map to the corresponding [tracing library configuration options][3]:
 
-| 挿入可否 | Java トレーサー | NodeJS トレーサー | .NET トレーサー | Python トレーサー |
+| Injection | Java tracer | NodeJS tracer | .NET tracer | Python tracer |
 | --------- | ----------- | ------------- | ----------- | ------------- |
 | `tracing_enabled` | `dd.trace.enabled` | `DD_TRACE_ENABLED` | `DD_TRACE_ENABLED` |  `DD_TRACE_ENABLED` |
 | `log_injection_enabled` | `dd.logs.injection` | `DD_LOGS_INJECTION` | `DD_LOGS_INJECTION` |  `DD_LOGS_INJECTION` |
-| `health_metrics_enabled` | `dd.trace.health.metrics.enabled` |    非該当   |    非該当  | 非該当 |
+| `health_metrics_enabled` | `dd.trace.health.metrics.enabled` |    n/a   |    n/a  | n/a |
 | `runtime_metrics_enabled` | `dd.jmxfetch.enabled` | `DD_RUNTIME_METRICS_ENABLED` | `DD_RUNTIME_METRICS_ENABLED` | `DD_RUNTIME_METRICS_ENABLED` |
 | `tracing_sampling_rate` | `dd.trace.sample.rate` | `DD_TRACE_SAMPLE_RATE` | `DD_TRACE_SAMPLE_RATE` | `DD_TRACE_SAMPLE_RATE`  |
-| `tracing_rate_limit` | 非該当       | `DD_TRACE_RATE_LIMIT` | `DD_TRACE_RATE_LIMIT` | `DD_TRACE_RATE_LIMIT` |
+| `tracing_rate_limit` | `dd.trace.rate.limit`       | `DD_TRACE_RATE_LIMIT` | `DD_TRACE_RATE_LIMIT` | `DD_TRACE_RATE_LIMIT` |
 | `tracing_tags` | `dd.tags` | `DD_TAGS` | `DD_TAGS` | `DD_TAGS` |
 | `tracing_service_mapping` | `dd.service.mapping` | `DD_SERVICE_MAPPING` | `DD_TRACE_SERVICE_MAPPING` | `DD_SERVICE_MAPPING` |
-| `tracing_agent_timeout` | `dd.trace.agent.timeout` |  非該当 | 非該当 | 非該当 |
-| `tracing_header_tags` | `dd.trace.header.tags` |    非該当    | `DD_TRACE_HEADER_TAGS` | `DD_TRACE_HEADER_TAGS` |
-| `tracing_partial_flush_min_spans` | `dd.trace.partial.flush.min.spans` | `DD_TRACE_PARTIAL_FLUSH_MIN_SPANS` | `DD_TRACE_PARTIAL_FLUSH_ENABLED ` | 非該当 |
+| `tracing_agent_timeout` | `dd.trace.agent.timeout` |  n/a | n/a | n/a |
+| `tracing_header_tags` | `dd.trace.header.tags` |    n/a    | `DD_TRACE_HEADER_TAGS` | `DD_TRACE_HEADER_TAGS` |
+| `tracing_partial_flush_min_spans` | `dd.trace.partial.flush.min.spans` | `DD_TRACE_PARTIAL_FLUSH_MIN_SPANS` | `DD_TRACE_PARTIAL_FLUSH_ENABLED ` | n/a |
 | `tracing_debug` | `dd.trace.debug` | `DD_TRACE_DEBUG` | `DD_TRACE_DEBUG` | `DD_TRACE_DEBUG` |
-| `tracing_log_level` | `datadog.slf4j.simpleLogger.defaultLogLevel` | `DD_TRACE_LOG_LEVEL` |   非該当    | 非該当 |
+| `tracing_log_level` | `datadog.slf4j.simpleLogger.defaultLogLevel` | `DD_TRACE_LOG_LEVEL` |   n/a    | n/a |
 
-挿入構成に記載されていないトレーサーライブラリの構成オプションは、プロパティや環境変数を通して、通常の方法で使用することができます。
+Tracer library configuration options that aren't mentioned in the injection configuration are still available for use through properties or environment variables the usual way.
 
-### 基本構成設定
+#### Blob storage support
+The supported blob storage solutions are:
+- **Amazon S3** - Set the URL with the `s3://` prefix. If you have authenticated with the AWS CLI, it uses those credentials.
+See [the AWS SDK documentation][7] for information about configuring credentials using environment variables.
+- **GCP GCS** - Set the URL with the `gs://` prefix. It uses Application Default Credentials. Authenticate with `gcloud auth application-default login`. See [the Google Cloud authentication documentation][8] for more information about configuring credentials using environment variables.
+- **Azure Blob** - Set the URL with the `azblob://` prefix, and point to a storage container name. It uses the credentials found in `AZURE_STORAGE_ACCOUNT` (that is, the bucket name) plus at least one of `AZURE_STORAGE_KEY` and `AZURE_STORAGE_SAS_TOKEN`. For more information about configuring `BLOB` or `LOCAL` settings, see [Supplying configuration source](#supplying-configuration-source-c).
 
-構成ソースに `BASIC` を指定した場合、以下の YAML 設定と同等となります。
+### Basic configuration settings
+
+`BASIC` configuration settings are equivalent to the following YAML settings:
 
 ```yaml
 ---
@@ -818,87 +851,131 @@ tracing_enabled: true
 log_injection_enabled: true
 health_metrics_enabled: true
 runtime_metrics_enabled: true
-tracing_sampling_rate: 1.0
-tracing_rate_limit: 1
 ```
 
-## Agent の構成
+## Configure the Agent
 
-コンテナを起動する Docker コンポーズファイルでは、Agent に以下の設定を使用し、`${DD_API_KEY}` に自分の Datadog API キーをしっかり設定します。
+In the Docker compose file that launches your containers, use the following settings for the Agent, securely setting your own Datadog API key for `${DD_API_KEY}`:
 
 ```yaml
+  dd-agent:
     container_name: dd-agent
     image: datadog/agent:7
     environment:
       - DD_API_KEY=${DD_API_KEY}
       - DD_APM_ENABLED=true
       - DD_APM_NON_LOCAL_TRAFFIC=true
-      - DD_LOG_LEVEL=TRACE
       - DD_DOGSTATSD_NON_LOCAL_TRAFFIC=true
-      - DD_AC_EXCLUDE=name:datadog-agent
-      - DD_SYSTEM_PROBE_ENABLED=true
-      - DD_PROCESS_AGENT_ENABLED=true
       - DD_APM_RECEIVER_SOCKET=/opt/datadog/apm/inject/run/apm.socket
+      - DD_DOGSTATSD_SOCKET=/opt/datadog/apm/inject/run/dsd.socket
     volumes:
       - /opt/datadog/apm:/opt/datadog/apm
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      - /proc/:/host/proc/:ro
-      - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
-      - /sys/kernel/debug:/sys/kernel/debug
-    cap_add:
-      - SYS_ADMIN
-      - SYS_RESOURCE
-      - SYS_PTRACE
-      - NET_ADMIN
-      - NET_BROADCAST
-      - NET_RAW
-      - IPC_LOCK
-      - CHOWN
-    security_opt:
-      - apparmor:unconfined
 ```
 
-## コンテナへの統合サービスタグ付けの指定
+## Specifying Unified Service Tags on containers
 
-環境変数 `DD_ENV`、`DD_SERVICE`、`DD_VERSION` がサービスコンテナイメージで指定されている場合、それらの値はコンテナからのテレメトリーにタグ付けするために使用されます。
+If the environment variables `DD_ENV`, `DD_SERVICE`, or `DD_VERSION` are specified in a service container image, those values are used to tag telemetry from the container.
 
-指定がない場合は、`DD_ENV` は `/etc/datadog-agent/inject/docker_config.yaml` コンフィギュレーションファイルに設定されている `env` 値を使用します (もしある場合)。`DD_SERVICE` と `DD_VERSION` は、Docker イメージの名前から取得します。`my-service:1.0` という名前のイメージは、`DD_SERVICE` が `my-service` で、 `DD_VERSION` が `1.0` でタグ付けされています。
+If they are not specified, `DD_ENV` uses the `env` value set in the `/etc/datadog-agent/inject/docker_config.yaml` config file, if any. `DD_SERVICE` is derived from the name of the Docker image. An image with the name `my-service:1.0` is tagged with `DD_SERVICE` of `my-service`.
 
-##  Docker 上で Agent を起動する
+## Launch the Agent on Docker
 
-`dd-agent` コンテナは、どのサービスコンテナよりも先に起動する必要があります。以下を実行します。
+The `dd-agent` container must be launched before any service containers. Run:
 
 ```sh
 docker-compose up -d dd-agent
 ```
 
-## サービスの起動
+## Launch your services
 
-通常通り、コンテナ化されたサービスを起動します。
+Launch your containerized services as usual.
 
-アプリケーションを実行すると、テレメトリーデータが生成され、[APM のトレース][4]として見ることができます。
+Exercise your application to start generating telemetry data, which you can see as [traces in APM][4].
 
 
 
 [1]: https://docs.docker.com/engine/install/ubuntu/
 [2]: https://bugzilla.redhat.com/show_bug.cgi?id=1792506
-[3]: /ja/tracing/trace_collection/library_config/
+[3]: /tracing/trace_collection/library_config/
 [4]: https://app.datadoghq.com/apm/traces
+[7]: https://docs.aws.amazon.com/sdk-for-go/api/aws/session/
+[8]: https://cloud.google.com/docs/authentication#service-accounts
 {{% /tab %}}
 
 
 {{< /tabs >}}
 
+## Uninstall library injection
 
-## ライブラリの構成
+### Remove instrumentation for specific services
 
-トレーシングライブラリのサポートされる機能や構成オプションは、他のインストール方法と同様に、ライブラリ挿入でも環境変数で設定することが可能です。詳しくは、お使いの言語の [Datadog ライブラリの構成ページ][2]をお読みください。
+To stop producing traces for a specific service, run the following commands and restart the service:
 
-例えば、[Application Security Monitoring][3] や [Continuous Profiler][4] をオンにすることができ、それぞれ請求の影響が出る可能性があります。
+{{< tabs >}}
+{{% tab "Host" %}}
 
-- **Kubernetes** の場合は、`DD_APPSEC_ENABLED` または `DD_PROFILING_ENABLED` コンテナ環境変数に `true` を設定します。
+1. Add the `DD_INSTRUMENT_SERVICE_WITH_APM` environment variable to the service startup command: 
 
-- **ホストとコンテナ**の場合は、`DD_APPSEC_ENABLED` または `DD_PROFILING_ENABLED` コンテナ環境変数を `true` に設定するか、[挿入構成](#supplying-configuration-source)で次の YAML 例のように `additional_environment_variables` セクションを指定します。
+   ```shell
+   DD_INSTRUMENT_SERVICE_WITH_APM=false <service_start_command>
+   ```
+2. Restart the service.
+
+{{% /tab %}}
+
+{{% tab "Agent and app in separate containers" %}}
+
+1. Add the `DD_INSTRUMENT_SERVICE_WITH_APM` environment variable to the service startup command: 
+   ```shell
+   docker run -e DD_INSTRUMENT_SERVICE_WITH_APM=false
+   ```
+2. Restart the service.
+{{% /tab %}}
+
+{{< /tabs >}}
+
+### Remove APM for all services on the infrastructure
+
+To stop producing traces, remove library injectors and restart the infrastructure:
+
+
+{{< tabs >}}
+{{% tab "Host" %}}
+
+1. Run:
+   ```shell
+   dd-host-install --uninstall
+   ```
+2. Restart your host.
+
+{{% /tab %}}
+
+{{% tab "Agent and app in separate containers" %}}
+
+1. Uninstall local library injection:
+   ```shell
+   dd-container-install --uninstall
+   ```
+2. Restart Docker:
+   ```shell
+   systemctl restart docker
+   ```
+   Or use the equivalent for your environment.
+
+{{% /tab %}}
+
+{{< /tabs >}}
+
+## Configuring the library
+
+The supported features and configuration options for the tracing library are the same for library injection as for other installation methods, and can be set with environment variables. Read the [Datadog library configuration page][2] for your language for more details.
+
+For example, you can turn on [Application Security Monitoring][3] or [Continuous Profiler][4], each of which may have billing impact:
+
+- For **Kubernetes**, set the `DD_APPSEC_ENABLED` or `DD_PROFILING_ENABLED` environment variables to `true` in the underlying application pod's deployment file.
+
+- For **hosts and containers**, set the `DD_APPSEC_ENABLED` or `DD_PROFILING_ENABLED` container environment variables to `true`, or in the [injection configuration](#supplying-configuration-source), specify an `additional_environment_variables` section like the following YAML example:
 
   ```yaml
   additional_environment_variables:
@@ -908,11 +985,13 @@ docker-compose up -d dd-agent
     value: true
   ```
 
-  挿入構成ソースの `additional_environment_variables` セクションに設定できるのは、`DD_` で始まる構成キーのみです。
+  Only configuration keys that start with `DD_` can be set in the injection config source `additional_environment_variables` section.
 
 
-[1]: /ja/tracing/trace_collection/
-[2]: /ja/tracing/trace_collection/library_config/
-[3]: /ja/security/application_security/enabling/java/?tab=kubernetes#get-started
-[4]: /ja/profiler/enabling/java/?tab=environmentvariables#installation
-[5]: /ja/tracing/trace_collection/library_injection_remote/
+[1]: /tracing/trace_collection/
+[2]: /tracing/trace_collection/library_config/
+[3]: /security/application_security/enabling/tracing_libraries/threat_detection/java
+[4]: /profiler/enabling/java/?tab=environmentvariables#installation
+[5]: /tracing/trace_collection/automatic_instrumentation/
+[6]: /tracing/trace_collection/single-step-apm
+[7]: /tracing/trace_collection/dd_libraries/

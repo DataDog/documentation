@@ -1,84 +1,84 @@
 ---
-aliases:
-- /ja/tracing/faq/agent-5-tracing-setup
-kind: ガイド
+title: APM & Continuous Profiler with Agent v5
+kind: guide
 private: true
-title: APM & Continuous Profiler と Agent v5
+aliases:
+  - /tracing/faq/agent-5-tracing-setup
 ---
 
-## はじめに
+## Getting started
 
-APM は、Linux および Docker の Agent 用の 1 行のインストールコマンドの一環として Datadog Agent バージョン 5.11 以降でご利用可能です。[Mac][1] ユーザーおよび [Windows][2] ユーザーは、別のインストールプロセスにより APM Agent (別名トレース Agent) を手動でインストールする必要があります。
+APM is available with Datadog Agent versions 5.11+ as part of the one-line installation command for the Linux and Docker Agents. [Mac][1] and [Windows][2] users must perform a manual installation of the APM Agent (also known as Trace Agent) through a separate installation process.
 
-Agent は、[Datadog Agent コンフィギュレーションファイル][3]に次のパラメーターを記述することで有効化できます。
+The Agent can be enabled by including the following in your [Datadog Agent configuration file][3]:
 
 ```conf
 apm_enabled: true
 ```
 
 <div class="alert alert-info">
-APM は、Datadog Agent 5.13 以降 (Linux および Docker の場合) ではデフォルトで有効化されていますが、Datadog Agent コンフィギュレーションファイルにパラメーター <code>apm_enabled: no</code> を追加することで無効化できます。
+APM is enabled by default after Datadog Agent 5.13 (on Linux and Docker), but can be disabled by adding the parameter: <code>apm_enabled: no</code> in your Datadog Agent configuration file.
 </div>
 
-### Agent のインストール
+### Installing the Agent
 
-[トレーシングメトリクス][4]は、Datadog Agent を通して Datadog に送信されます。トレーシングを有効化するには
+[Tracing metrics][4] are sent to the Datadog through the Datadog Agent. To enable tracing:
 
-最新の [Datadog Agent][5]をインストールします (バージョン 5.11.0 以降が必要です) 。
+Install the latest [Datadog Agent][5] (version 5.11.0+ is required).
 
-### Docker で Agent を実行する
+### Running the Agent in Docker
 
-Docker コンテナでアプリケーションをトレースするには、[docker-dd-agent][6] イメージ (バージョン 11.0.5110 以降でタグ付け) を使用し、`DD_APM_ENABLED=true` を環境変数として渡してトレーシングを有効化します。
+To trace applications in Docker containers, use the [docker-dd-agent][6] image (tagged version 11.0.5110+) and enable tracing by passing `DD_APM_ENABLED=true` as an environment variable.
 
-詳細情報については、[Docker ページ][7]を参照してください。
+For additional information, reference [the Docker page][7].
 
-### アプリケーションをインスツルメントする
+### Instrument your application
 
-{{< whatsnext desc="下記のサポート言語を 1 つ選択してください">}}
-    {{< nextlink href="tracing/setup/java" tag="Java" >}}Java 言語のインスツルメンテーション。{{< /nextlink >}}
-    {{< nextlink href="tracing/setup/cpp" tag="C++" >}}C++ 言語のインスツルメンテーション。{{< /nextlink >}}
-    {{< nextlink href="tracing/setup/python" tag="Python" >}}Python 言語のインスツルメンテーション。{{< /nextlink >}}
-    {{< nextlink href="tracing/setup/ruby" tag="Ruby" >}}Ruby 言語のインスツルメンテーション。{{< /nextlink >}}
-    {{< nextlink href="tracing/setup/go" tag="Go" >}}Go 言語のインスツルメンテーション。{{< /nextlink >}}
-    {{< nextlink href="tracing/setup/nodejs" tag="Nodejs" >}}Node.js 言語のインスツルメンテーション。{{< /nextlink >}}
-    {{< nextlink href="tracing/setup/dotnet" tag=".NET" >}}.NET 言語のインスツルメンテーション。{{< /nextlink >}}
-    {{< nextlink href="tracing/setup/php" tag="PHP" >}}PHP 言語のインスツルメンテーション。{{< /nextlink >}}
+{{< whatsnext desc="Select one of the following supported languages:">}}
+    {{< nextlink href="tracing/setup/java" tag="Java" >}}Java language instrumentation.{{< /nextlink >}}
+    {{< nextlink href="tracing/setup/cpp" tag="C++" >}}C++ language instrumentation.{{< /nextlink >}}
+    {{< nextlink href="tracing/setup/python" tag="Python" >}}Python language instrumentation.{{< /nextlink >}}
+    {{< nextlink href="tracing/setup/ruby" tag="Ruby" >}}Ruby language instrumentation{{< /nextlink >}}
+    {{< nextlink href="tracing/setup/go" tag="Go" >}}Go language instrumentation.{{< /nextlink >}}
+    {{< nextlink href="tracing/setup/nodejs" tag="Nodejs" >}}Node.js language instrumentation.{{< /nextlink >}}
+    {{< nextlink href="tracing/setup/dotnet" tag=".NET" >}}.NET language instrumentation.{{< /nextlink >}}
+    {{< nextlink href="tracing/setup/php" tag="PHP" >}}PHP language instrumentation.{{< /nextlink >}}
 {{< /whatsnext >}}
 
-公式ライブラリでまだサポートされていない言語で記述されたアプリケーションをインスツルメントする場合は、[トレーシング API][8] を参照してください。
+To instrument an application written in a language that does not yet have official library support, reference the [Tracing API][8].
 
-## コンフィグレーション
+## Configuration
 
-Datadog Agent では、インフラストラクチャーの監視と APM コンフィギュレーションのオプションの双方にコンフィギュレーションファイルを使用します。
+The Datadog Agent uses the configuration file for both infrastructure monitoring and APM configuration options.
 
-また、コンフィギュレーションオプションの中には環境変数として設定されているものがあります。環境変数として設定されているオプションは、コンフィギュレーションファイルで定義された設定をオーバーライドすることに注意してください。
+Additionally, some configuration options may be set as environment variables. Note that options set as environment variables overrides the settings defined in the configuration file.
 
-| ファイル設定            | 環境変数       | 説明                                                                                                                                                      |
+| File setting            | Environment variable       | Description                                                                                                                                                      |
 |-------------------------|----------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `apm_enabled`           | `DD_APM_ENABLED`           | 値を `true`. に設定すると、Datadog Agent はトレースメトリクスを受け付けます。デフォルトの値は `true` です。                                                            |
-| `receiver_port`         | `DD_RECEIVER_PORT`         | Datadog Agent のトレースレシーバーがリスニングするポート。デフォルト値は `8126` です。                                                                  |
-| `connection_limit`      | `DD_CONNECTION_LIMIT`      | 1 回 30 秒のリース期間で許可するクライアント接続のユニーク数。デフォルト値は `2000` です。                                                 |
-| `resource`              | `DD_IGNORE_RESOURCE`       | トレースをリソース名でフィルタリングするための正規表現の除外リスト。                                                                                  |
+| `apm_enabled`           | `DD_APM_ENABLED`           | The Datadog Agent accepts trace metrics when the value is set to `true`. The default value is `true`.                                                            |
+| `receiver_port`         | `DD_RECEIVER_PORT`         | The port that the Datadog Agent's trace receiver should listen on. The default value is `8126`.                                                                  |
+| `connection_limit`      | `DD_CONNECTION_LIMIT`      | The number of unique client connections to allow during one 30 second lease period. The default value is `2000`.                                                 |
+| `resource`              | `DD_IGNORE_RESOURCE`       | An exclude list of regular expressions to filter out traces by their resource name.                                                                                  |
 
-Datadog Agent の詳細については、[専用ドキュメントページ][9]または [`datadog.conf.example` ファイル][10]を参照してください。
+For more information about the Datadog Agent, see the [dedicated doc page][9] or refer to the [`datadog.conf.example` file][10].
 
-### トレース検索
+### Trace search
 
-トレース検索は Agent 5.25.0 以降でご利用になれます。詳細については主な [APM ドキュメント][11]のセットアップ手順を確認してください。
+Trace search is available for Agent 5.25.0+. For more information, see the set up instructions in the main [APM documentation][11].
 
-## トラブルシューティング
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][12]までお問合せください。
+Need help? Contact [Datadog support][12].
 
 [1]: https://github.com/DataDog/datadog-agent/tree/main/docs/trace-agent#run-on-macos
 [2]: https://github.com/DataDog/datadog-agent/tree/main/docs/trace-agent#run-on-windows
-[3]: /ja/agent/faq/where-is-the-configuration-file-for-the-agent/
-[4]: /ja/tracing/glossary/#trace-metrics
-[5]: https://app.datadoghq.com/account/settings#agent
+[3]: /agent/faq/where-is-the-configuration-file-for-the-agent/
+[4]: /tracing/glossary/#trace-metrics
+[5]: https://app.datadoghq.com/account/settings/agent/latest
 [6]: https://gcr.io/datadoghq/docker-dd-agent
-[7]: /ja/tracing/docker/
-[8]: /ja/tracing/guide/send_traces_to_agent_by_api/
-[9]: /ja/agent/
+[7]: /tracing/docker/
+[8]: /tracing/guide/send_traces_to_agent_by_api/
+[9]: /agent/
 [10]: https://github.com/DataDog/dd-agent/blob/master/datadog.conf.example
-[11]: /ja/tracing/setup/?tab=agent5250#trace-search
-[12]: /ja/help/
+[11]: /tracing/setup/?tab=agent5250#trace-search
+[12]: /help/

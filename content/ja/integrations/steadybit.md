@@ -1,98 +1,98 @@
 ---
-app_id: steadybit
-app_uuid: b1194c36-afd0-47dc-9c0a-11f3ab82f387
-assets:
-  dashboards:
-    Steadybit Chaos Engineering Activity: assets/dashboards/steadybit.json
-  integration:
-    auto_install: true
-    configuration: {}
-    events:
-      creates_events: true
-    metrics:
-      check: []
-      metadata_path: metadata.csv
-      prefix: steadybit.
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 10321
-    source_type_name: Steadybit
-author:
-  homepage: https://steadybit.com/
-  name: Steadybit
-  sales_email: sales@steadybit.com
-  support_email: support@steadybit.com
-categories:
-- インシデント
-- テスト
-dependencies:
-- https://github.com/DataDog/integrations-extras/blob/master/steadybit/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: steadybit
-integration_id: steadybit
-integration_title: Steadybit
-integration_version: ''
-is_public: true
-custom_kind: integration
-manifest_version: 2.0.0
-name: steadybit
-public_title: Steadybit
-short_description: カオスエンジニアリングでシステムの信頼性を即座に向上させる
-supported_os:
+"app_id": "steadybit"
+"app_uuid": "b1194c36-afd0-47dc-9c0a-11f3ab82f387"
+"assets":
+  "dashboards":
+    "Steadybit Chaos Engineering Activity": assets/dashboards/steadybit.json
+  "integration":
+    "auto_install": true
+    "configuration": {}
+    "events":
+      "creates_events": true
+    "metrics":
+      "check": []
+      "metadata_path": metadata.csv
+      "prefix": steadybit.
+    "service_checks":
+      "metadata_path": assets/service_checks.json
+    "source_type_id": !!int "10321"
+    "source_type_name": Steadybit
+"author":
+  "homepage": "https://steadybit.com/"
+  "name": Steadybit
+  "sales_email": sales@steadybit.com
+  "support_email": support@steadybit.com
+"categories":
+- incidents
+- testing
+"custom_kind": "integration"
+"dependencies":
+- "https://github.com/DataDog/integrations-extras/blob/master/steadybit/README.md"
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "steadybit"
+"integration_id": "steadybit"
+"integration_title": "Steadybit"
+"integration_version": ""
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "steadybit"
+"public_title": "Steadybit"
+"short_description": "Immediately improve your systems' reliability with chaos engineering"
+"supported_os":
 - linux
 - windows
 - macos
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Incidents
-  - Category::Testing
-  - Offering::Integration
-  - Supported OS::Linux
-  - Supported OS::Windows
-  - Supported OS::macOS
-  configuration: README.md#Setup
-  description: カオスエンジニアリングでシステムの信頼性を即座に向上させる
-  media:
-  - caption: Datadog API と Steadybit のインテグレーションを実際に動かしているビデオです。
-    image_url: images/steadybit_experiment_editor.png
-    media_type: ビデオ
-    vimeo_id: 782622274
-  - caption: Datadog のモニターステータスは、一度実行されると、実験の動作を制御するために使用されます。
-    image_url: images/steadybit_experiment_execution_run_log.png
-    media_type: image
-  - caption: Datadog の関連するモニターのステータスは、Steadybit 内で時系列に表示されます。
-    image_url: images/steadybit_experiment_execution_monitor_status_over_time.png
-    media_type: image
-  - caption: Steadybit は、Datadog にイベントを報告し、組織全体の認識を高めます。
-    image_url: images/steadybit_events_in_datadog.png
-    media_type: image
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Steadybit
+"tile":
+  "changelog": CHANGELOG.md
+  "classifier_tags":
+  - "Category::Incidents"
+  - "Category::Testing"
+  - "Offering::Integration"
+  - "Supported OS::Linux"
+  - "Supported OS::Windows"
+  - "Supported OS::macOS"
+  "configuration": "README.md#Setup"
+  "description": Immediately improve your systems' reliability with chaos engineering
+  "media":
+  - "caption": A video showing the Datadog API integration with Steadybit in action.
+    "image_url": images/steadybit_experiment_editor.png
+    "media_type": video
+    "vimeo_id": !!int "782622274"
+  - "caption": Once executed, Datadog monitor statuses are used to control an experiment's behavior.
+    "image_url": images/steadybit_experiment_execution_run_log.png
+    "media_type": image
+  - "caption": The status of relevant Datadog monitors is displayed over time within Steadybit.
+    "image_url": images/steadybit_experiment_execution_monitor_status_over_time.png
+    "media_type": image
+  - "caption": Steadybit reports events back to Datadog for organization-wide awareness.
+    "image_url": images/steadybit_events_in_datadog.png
+    "media_type": image
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": Steadybit
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
-## 概要
+## Overview
 
-[Steadybit][1] は、制御された方法で乱流状態をシミュレートし、システムの信頼性を向上させ、組織をより良いインシデント管理へと導くことができるカオスエンジニアリングプラットフォームです。
+[Steadybit][1] is a chaos engineering platform allowing you to simulate turbulent conditions in a controlled way, to improve system reliability and guide your organization to better incident management.
 
-Steadybit インテグレーションは、カオスエンジニアリングの実験内で Datadog モニターのステータスを使用します。このインテグレーションは、実験の環境、開始・終了時間、実験の結果など、カオスエンジニアリングのアクティビティを Datadog のイベントを通じてチームに洞察させるものです。
+The Steadybit integration uses the status of Datadog monitors within chaos engineering experiments. This integration provides your team insight into chaos engineering activity such as the experiment's environment, start and end time, and the result of the experiment through Datadog events.
 
-## 計画と使用
+## Setup
 
-Datadog と Steadybit のインテグレーションは、[Steadybit Datadog 拡張機能][2]を介して行われます。この拡張機能は、Datadog の API と対話し、モニターに関する情報を収集し、Datadog にイベントを報告します。
+The integration between Datadog and Steadybit is done through the [Steadybit Datadog extension][2]. The extension interacts with Datadog's API to gather information about monitors and report events to Datadog.
 
-### 前提条件
+### Prerequisites
 
-Steadybit の[無償または有償ライセンス][3]が必要です。インテグレーションは、Steadybit の SAAS とオンプレミスの提供をサポートしています。
+You need a [free or paid Steadybit license][3]. The integration supports Steadybit's SAAS and on-premises offering.
 
-### インフラストラクチャーリスト
+### Installation
 
-いくつかの[インストール方法がサポートされています][4]。最高の体験を得るためには、以下のように専用の Helm チャートを介して Steadybit Datadog 拡張機能をインストールしてください。`datadog.siteParameter` と `datadog.siteUrl` にサポートされている値については、[Datadog サイト][5]のページを参照してください。
+Several [installation methods are supported][4]. For the best experience, install the Steadybit Datadog extension through the dedicated Helm chart, as shown below. To learn more about the supported values for `datadog.siteParameter` and `datadog.siteUrl`, see the [Datadog sites][5] page.
 
 ```
 helm repo add steadybit https://steadybit.github.io/helm-charts
@@ -111,31 +111,32 @@ helm upgrade steadybit-extension-datadog \
   steadybit/steadybit-extension-datadog
 ```
 
-### 検証
+### Validation
 
-Steadybit Datadog 拡張機能を実行すると、Steadybit の *Landscape* タブ内に Datadog モニターのリストが表示されます。
+Once the Steadybit Datadog extension is running, see a list of Datadog monitors within the *Landscape* tab in Steadybit.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 
-Steadybit には、メトリクスは含まれません。
+Steadybit does not include any metrics.
 
-### ヘルプ
+### Service Checks
 
-Steadybit には、サービスのチェック機能は含まれません。
+Steadybit does not include any service checks.
 
-### ヘルプ
+### Events
 
-Steadybit は、カオスエンジニアリングのアクティビティを示すイベントを Datadog に報告します。そのようなイベントにはすべて `source:steadybit` タグが付きます。
+Steadybit reports events to Datadog indicating chaos engineering activity. All such events carry the `source:steadybit` tag.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Steadybit のサポートチーム][6]までお問い合わせください。
+Need help? Contact [Steadybit's support][6].
 
 [1]: https://steadybit.com/?utm_campaign=datadogintegration&utm_source=datadog&utm_medium=integration-readme
 [2]: https://hub.steadybit.com/extension/com.steadybit.extension_datadog?utm_campaign=datadogintegration&utm_source=datadog&utm_medium=integration-readme
 [3]: https://signup.steadybit.io/?utm_campaign=datadogintegration&utm_source=datadog&utm_medium=integration-readme
 [4]: https://hub.steadybit.com/extension/com.steadybit.extension_datadog?utm_campaign=datadogintegration&utm_source=datadog&utm_medium=integration-readme#content-installation
-[5]: https://docs.datadoghq.com/ja/getting_started/site/#access-the-datadog-site
+[5]: https://docs.datadoghq.com/getting_started/site/#access-the-datadog-site
 [6]: mailto:support@steadybit.com
+

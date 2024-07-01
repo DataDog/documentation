@@ -1,98 +1,98 @@
 ---
-app_id: journald
-app_uuid: 2ee4cbe2-2d88-435b-9ed9-dbe07ca1d059
-assets:
-  integration:
-    auto_install: true
-    configuration:
-      spec: assets/configuration/spec.yaml
-    events:
-      creates_events: false
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 10167
-    source_type_name: journald
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com (日本語対応)
-  support_email: help@datadoghq.com
-categories:
-- ログの収集
-dependencies:
-- https://github.com/DataDog/integrations-core/blob/master/journald/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: journald
-integration_id: journald
-integration_title: journald
-integration_version: 1.2.0
-is_public: true
-kind: インテグレーション
-manifest_version: 2.0.0
-name: journald
-public_title: journald
-short_description: Datadog を使用して systemd-journald ログを監視します。
-supported_os:
+"app_id": "journald"
+"app_uuid": "2ee4cbe2-2d88-435b-9ed9-dbe07ca1d059"
+"assets":
+  "integration":
+    "auto_install": true
+    "configuration":
+      "spec": assets/configuration/spec.yaml
+    "events":
+      "creates_events": false
+    "service_checks":
+      "metadata_path": assets/service_checks.json
+    "source_type_id": !!int "10167"
+    "source_type_name": journald
+"author":
+  "homepage": "https://www.datadoghq.com"
+  "name": Datadog
+  "sales_email": info@datadoghq.com
+  "support_email": help@datadoghq.com
+"categories":
+- log collection
+"custom_kind": "integration"
+"dependencies":
+- "https://github.com/DataDog/integrations-core/blob/master/journald/README.md"
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "journald"
+"integration_id": "journald"
+"integration_title": "journald"
+"integration_version": "1.2.0"
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "journald"
+"public_title": "journald"
+"short_description": "Monitor your systemd-journald logs with Datadog."
+"supported_os":
 - linux
 - macos
 - windows
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Log Collection
-  configuration: README.md#Setup
-  description: Datadog を使用して systemd-journald ログを監視します。
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: journald
+"tile":
+  "changelog": CHANGELOG.md
+  "classifier_tags":
+  - "Supported OS::Linux"
+  - "Supported OS::macOS"
+  - "Supported OS::Windows"
+  - "Category::Log Collection"
+  "configuration": "README.md#Setup"
+  "description": Monitor your systemd-journald logs with Datadog.
+  "media": []
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": journald
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## 概要
+## Overview
 
-Systemd-journald は、ログデータを収集して保管するシステムサービスです。
-さまざまなソースからのログ情報に基づいて、構造化およびインデックス化されたジャーナルを作成し、維持します。
+Systemd-journald is a system service that collects and stores logging data. 
+It creates and maintains structured, indexed journals based on logging information from a variety of sources.
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-journald チェックは [Datadog Agent][1] パッケージに含まれています。
-サーバーに追加でインストールする必要はありません。
+The journald check is included in the [Datadog Agent][1] package.
+No additional installation is needed on your server.
 
-### ブラウザトラブルシューティング
+### Configuration
 
-ジャーナルファイルは、デフォルトでは、systemd-journal システムグループによって所有され、読み取られます。ジャーナルログの収集を開始するには、以下のようにします。
+Journal files, by default, are owned and readable by the systemd-journal system group. To start collecting your journal logs, you need to:
 
-1. ジャーナルを実行しているインスタンスに [Agent をインストールします][2]。
-2. 以下を実行して、`systemd-journal` グループに `dd-agent` ユーザーを追加します。
+1. [Install the Agent][2] on the instance running the journal.
+2. Add the `dd-agent` user to the `systemd-journal` group by running:
     ```text
      usermod -a -G systemd-journal dd-agent
     ```
 
 {{< tabs >}}
-{{% tab "ホスト" %}}
+{{% tab "Host" %}}
 
-ホストで実行中の Agent に対してこのチェックを構成するには
+To configure this check for an Agent running on a host:
 
-ログの収集を開始するには、[Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `journald.d/conf.yaml` ファイルを編集します。
+Edit the `journald.d/conf.yaml` file, in the `conf.d/` folder at the root of your [Agent's configuration directory][1] to start collecting logs.
 
-#### 収集データ
+#### Log collection
 
-Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` でこれを有効にする必要があります。
+Collecting logs is disabled by default in the Datadog Agent, you need to enable it in the `datadog.yaml` with:
 
 ```yaml
 logs_enabled: true
 ```
 
-ログの収集を開始するには、次の構成ブロックを `journald.d/conf.yaml` ファイルに追加します。
+Then add this configuration block to your `journald.d/conf.yaml` file to start collecting your Logs:
 
 ```yaml
 logs:
@@ -100,55 +100,55 @@ logs:
       container_mode: true
 ```
 
-`source` および `service` 属性の値を埋めるために、Agent は `SYSLOG_IDENTIFIER`、`_SYSTEMD_UNIT`、`_COMM` を収集し、最初に検出した空でない値に設定します。インテグレーションのパイプラインを活用するため、Datadog は `systemd` サービスファイルまたは `systemd` サービスオーバーライドファイルに `SyslogIdentifier` パラメーターを直接設定することをおすすめしています。これらの場所はお使いのディストリビューションにより異なりますが、`systemctl show -p FragmentPath <unit_name>` コマンドを使って `systemd` サービスファイルの場所を検索することができます。
+To fill `source` and `service` attributes, the Agent collects `SYSLOG_IDENTIFIER` , `_SYSTEMD_UNIT` and `_COMM`and set them to the first non empty value. To take advantage of the integration pipelines, Datadog recommends setting the `SyslogIdentifier` parameter in the `systemd` service file directly, or in a `systemd` service override file. Their location depends on your distribution, but you can find the location of the `systemd` service file by using the command `systemctl show -p FragmentPath <unit_name>`.
 
-**注**: Agent 7.17 以降では、`container_mode` が `true` に設定されている場合、Docker コンテナに基づいてログのデフォルトの動作変更が行われます。ログの `source` 属性は、単に `docker` ではなく、対応するコンテナの短いイメージ名に自動的に設定されます。
+**Note**: With Agent 7.17+, if `container_mode` is set to `true`, the default behavior changes for logs coming from Docker containers. The `source` attribute of your logs is automatically set to the corresponding short image name of the container instead of simply `docker`.
 
-[Agent を再起動します][2]。
+[Restart the Agent][2].
 
 
-[1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
-[2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[1]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
+[2]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
-{{% tab "コンテナ化" %}}
+{{% tab "Containerized" %}}
 
-コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
+For containerized environments, see the [Autodiscovery Integration Templates][1] for guidance on applying the parameters below.
 
-#### 収集データ
+#### Log collection
 
 
-Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][2]を参照してください。
+Collecting logs is disabled by default in the Datadog Agent. To enable it, see [Kubernetes Log Collection][2].
 
-| パラメーター      | 値                                                  |
+| Parameter      | Value                                                  |
 | -------------- | ------------------------------------------------------ |
 | `<LOG_CONFIG>` | `{"source": "journald", "service": "<YOUR_APP_NAME>"}` |
 
-[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[2]: https://docs.datadoghq.com/ja/agent/kubernetes/log/?tab=containerinstallation#setup
+[1]: https://docs.datadoghq.com/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/agent/kubernetes/log/?tab=containerinstallation#setup
 {{% /tab %}}
 {{< /tabs >}}
 
 
-#### 高度な機能
+#### Advanced features
 
-##### ジャーナルの場所の変更
+##### Change journal location
 
-Agent は、デフォルトで次の場所でジャーナルを探します。
+By default the Agent looks for the journal at the following locations:
 
 - `/var/log/journal`
 - `/run/log/journal`
 
-ジャーナルがこれ以外の場所にある場合は、`path` パラメーターに、対応するジャーナルのパスを追加します。
+If your journal is located elsewhere, add a `path` parameter with the corresponding journal path.
 
-##### ジャーナルユニットの絞り込み
+##### Filter journal units
 
-これらのパラメーターを使用することで、特定の_システムレベル_ユニットをフィルターにかけることができます。
+You can filter specific _system-level_ units by using these parameters:
 
-- `include_units`: 指定されたすべてのシステムレベルユニットを含めます。
-- `exclude_units`: 指定されたすべてのシステムレベルユニットを除外します。
+- `include_units`: Includes all system-level units specified.
+- `exclude_units`: Excludes all system-level units specified.
 
 
-例:
+Example:
 
 ```yaml
 logs:
@@ -159,32 +159,32 @@ logs:
           - sshd.service
 ```
 
-Datadog Agent バージョン `7.37.0`+ では、これらのパラメーターを使用して、_ユーザーレベル_ユニットをフィルターにかけることができます。
+In Datadog Agent version `7.37.0`+, you can filter _user-level_ units by using these parameters:
 
-- `include_user_units`: 指定されたすべてのユーザーレベルユニットを含めます。
-- `exclude_user_units`: 指定されたすべてのユーザーレベルユニットを除外します。
+- `include_user_units`: Includes all user-level units specified.
+- `exclude_user_units`: Excludes all user-level units specified.
 
-**注**: `exclude_units` または `exclude_user_units` でワイルドカード `*` を使用すると、特定の Journald ログを指定できます。ワイルドカード `*` は `include_units` では機能しません。デフォルトでは、システムにもユーザーにもユニットがなく、一致するものが定義されていない場合、すべてのジャーナルログが収集されます。
+**Note**: Use the `*` wildcard in `exclude_units` or `exclude_user_units` to specify a particular Journald log. The `*` wildcard does not work with `include_units`. By default, if there are no units for neither system nor user, and no matches are defined, all journal logs are collected.
 
-例:
+Example:
 
 ```yaml
 logs:
-    # すべてのシステムレベルユニットログを収集します。
+    # Collect all system-level unit logs.
     - type: journald
       exclude_user_units:
           - '*'
 ```
 
-##### ジャーナルメッセージのフィルター
+##### Filter journal messages
 
-Datadog Agent バージョン `7.39.0`+ では、これらのパラメーターを持つキー値ペアを使用して、任意のメッセージをフィルターにかけることができます。
+In Datadog Agent version `7.39.0`+, you can filter arbitrary messages using key-value pairs with these parameters:
 
-- `include_matches`: `key=value` に一致するメッセージを含めます。
-- `exclude_matches`: `key=value` に一致するメッセージを除外します。
+- `include_matches`: Includes messages matching `key=value`
+- `exclude_matches`: Excludes messages matching `key=value`
 
 
-例:
+Example:
 
 ```yaml
 logs:
@@ -194,11 +194,11 @@ logs:
           - _TRANSPORT=kernel
 ```
 
-##### 同じジャーナルを複数回追跡する
+##### Tailing the same journal multiple times
 
-異なるソースタグやサービスタグを持つユニットを報告したい場合、これらは別々の journald 構成に表示する必要があります。
+If you want to report units with different source or service tags, these must appear in separate journald configs.
 
-これを行うには、ジャーナル構成を `config_id` で一意に識別する必要があります (Agent `7.41.0`+ で利用可能)。
+In order to do this you must uniquely identify the journal config with a `config_id` (available in agent `7.41.0`+).
 
 ```yaml
 logs:
@@ -217,38 +217,38 @@ logs:
           - my-app2.service
 ```
 
-##### コンテナタグの収集
+##### Collect container tags
 
-高度に動的なコンテナ環境において情報を見つける際にタグは重要です。Agent が journald ログからコンテナタグを収集できる理由はここにあります。
+Tags are critical for finding information in highly dynamic containerized environments, which is why the Agent can collect container tags in journald logs.
 
-Agent がホストから実行されている場合、これは自動的に機能します。Datadog Agent のコンテナバージョンを使用している場合は、ジャーナルパスと次のファイルをマウントしてください。
+This works automatically when the Agent is running from the host. If you are using the containerized version of the Datadog Agent, mount your journal path and the following file:
 
-- `/etc/machine-id`: これで、Agent は、ホストに格納されたジャーナルに確実に問い合わせることができます。
+- `/etc/machine-id`: this ensures that the Agent can query the journal that is stored on the host.
 
-### 検証
+### Validation
 
-Agent の [status サブコマンド][3]を実行し、ログ Agent セクションで ``journald`` を探します。
+Run the Agent's [status subcommand][3] and look for `journald` under the Logs Agent section.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 
-journald には、メトリクスは含まれません。
+journald does not include any metrics.
 
-### ヘルプ
+### Service Checks
 
-journald には、サービスのチェック機能は含まれません。
+journald does not include any service checks.
 
-### ヘルプ
+### Events
 
-journald には、イベントは含まれません。
+journald does not include any events.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
+Need help? Contact [Datadog support][4].
 
 
-[1]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[1]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [2]: https://app.datadoghq.com/account/settings/agent/latest
-[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[4]: https://docs.datadoghq.com/ja/help/
+[3]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
+[4]: https://docs.datadoghq.com/help/

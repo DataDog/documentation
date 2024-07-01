@@ -1,75 +1,79 @@
 ---
+title: AWS
+aliases:
+- /integrations/awsbilling/
 further_reading:
 - link: /cloud_cost_management/
-  tag: ドキュメント
-  text: クラウドコストマネジメント
+  tag: Documentation
+  text: Cloud Cost Management
 - link: /cloud_cost_management/azure
-  tag: ドキュメント
-  text: Azure の請求に関する洞察を得る
+  tag: Documentation
+  text: Gain insights into your Azure bill
 - link: /cloud_cost_management/google_cloud
-  tag: ドキュメント
-  text: Google Cloud の請求に関する洞察を得る
-title: AWS
+  tag: Documentation
+  text: Gain insights into your Google Cloud bill
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">クラウドコストマネジメントはこのサイトではサポートされていません。</div>
+<div class="alert alert-warning">Cloud Cost Management is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-## 概要
+## Overview
 
-Datadog で Cloud Cost Management をセットアップするには、以下が必要です。
-1. 請求にアクセスできる AWS アカウントを持っていること
-2. Datadog に AWS インテグレーションがインストールされていること
-3. 以下の手順に従って、Cost and Usage レポートを作成すること
+To set up Cloud Cost Management in Datadog, you should:
+1. Have an AWS account with billing access
+2. Have the AWS integration installed in Datadog
+3. Follow the steps below to create a Cost and Usage Report
 
-## 送信 - Agent チェック
+## Setup
 
-### 前提条件: Cost and Usage Report を作成する
+### Prerequisite: generate a Cost and Usage Report
 
-AWS の **Legacy Pages** セクションで Cost and Usage レポートを作成します。現時点では、Cost and Usage レポートのデータエクスポートの作成はサポートされていません。
+[Create a Legacy Cost and Usage Report][1] in AWS under the **Data Exports** section.
 
-以下のコンテンツオプションを選択します。
+Select the Export type **Legacy CUR export**.
 
-* **Include resource IDs** (リソース ID を含む)
-* **Split cost allocation data** (ECS Cost Allocation を有効にします。また、コストエクスプローラーの環境設定で [AWS Split Cost Allocation][10] にオプトインする必要があります)。
+Select the following content options:
+
+* Export type: **Legacy CUR export**
+* **Include resource IDs**
+* **Split cost allocation data** (Enables ECS Cost Allocation. You must also opt in to [AWS Split Cost Allocation][10] in Cost Explorer preferences).
 * **"Refresh automatically"**
 
-以下の Delivery オプションを選択します。
+Select the following delivery options:
 
-* 時間粒度: **Hourly**
-* レポートのバージョン管理: **Create new report version** (新しいレポートのバージョンを作成する)
-* 圧縮タイプ: **GZIP** または **Parquet**
-* フォーマット: `text/csv` または `Parquet`
+* Time granularity: **Hourly**
+* Report versioning: **Create new report version**
+* Compression type: **GZIP** or **Parquet**
 
-### AWS インテグレーションの構成
+### Configure the AWS integration
 
-[Setup & Configuration][7] に移動し、プルダウンメニューからコストをプルする AWS アカウントを選択します。
+Navigate to [Setup & Configuration][7] and select an AWS account from the dropdown menu to pull costs from.
 
-**注**: Datadog では、関連する**メンバーアカウント**のコストを視覚化するために、[AWS **管理アカウント**][2]からコストと使用量のレポートを送信することを推奨しています。AWS **メンバーアカウント**からコストと使用量レポートを送信する場合、**管理アカウント**の[設定][3]で次のオプションが選択されていることを確認してください。
+**Note**: Datadog recommends sending a Cost and Usage Report from an [AWS **management account**][2] for cost visibility into related **member accounts**. If you send a Cost and Usage report from an AWS **member account**, ensure that you have selected the following options in your **management account's** [preferences][3]:
 
-* **リンクされたアカウントへのアクセス**
-* **リンクされたアカウントの払い戻しおよびクレジット**
-* **リンクされたアカウントの割引**
+* **Linked Account Access**
+* **Linked Account Refunds and Credits**
+* **Linked Account Discounts**
 
-これにより、AWS Cost Explorer に対して定期的にコスト計算を行うことができ、完全なコスト精度を確保することができます。
+This ensures complete cost accuracy by allowing periodic cost calculations against the AWS Cost Explorer.
 
-### Cost and Usage Report を探す
+### Locate the Cost and Usage Report
 
-セットアップの前提条件のセクションで作成したレポートから移動してしまった場合は、AWS のドキュメントに従って [Cost and Usage Report の詳細][4]を見つけて表示します。
+If you have navigated away from the report that you created in the prerequisites section, follow AWS documentation to [view your Data Exports][4]. Select the legacy CUR export that you created, then select **Edit** to see the details of the export.
 
-Datadog が Cost and Usage Report を検索できるようにするには、対応する詳細情報をフィールドに入力します。
+To enable Datadog to locate the Cost and Usage Report, complete the fields with their corresponding details:
 
-* **Region**: バケットがあるリージョンです。例: `us-east-1`
-* **Bucket Name**: CUR の保存先となる s3 バケット名です。
-* **Report Path Prefix**: フォルダ名です。AWS の詳細ページから **Report path prefix** を表示する場合、パスの最初のセクションになります。例えば、**Report path prefix** が `cur-report-dir/cost-report` と表示されている場合、`cur-report-dir` と入力することになります。
-* **Report Name**: 前提条件のセクションでレポートを生成したときに入力した名前です。AWS の詳細ページから **Report path prefix** を表示する場合、パスの後半部分となります。例えば、**Report path prefix** が `cur-report-dir/cost-report` と表示されている場合、`cost-report` と入力することになります。
+* **Bucket Name**: This is the name of the **S3 bucket** in the Data export storage settings section.
+* **Bucket Region**: This is the region your bucket is located. For example, `us-east-1`.
+* **Export Path Prefix**: This is the **S3 path prefix** in the Data export storage settings section.
+* **Export Name**: This is the **Export name** in the Export name section.
 
-**注**: Datadog は AWS によって生成された CUR のみをサポートしています。AWS によって生成されたファイルを変更したり移動したり、サードパーティによって生成されたファイルへのアクセスを提供しようとしないでください。
+**Note**: Datadog only supports legacy CURs generated by AWS. Do not modify or move the files generated by AWS, or attempt to provide access to files generated by a 3rd party.
 
-### Cost and Usage Report へのアクセス構成
+### Configure access to the Cost and Usage Report
 
-以下の JSON を使用して[ポリシーを作成][5]することで、Datadog が CUR とそれが格納されている s3 バケットにアクセスする権限を持つように AWS を構成します。
+[Create a policy][5] in AWS to ensure Datadog has permissions to access the CUR and the S3 bucket it is stored in. Use the following JSON:
 
 {{< code-block lang="yaml" collapsible="true" >}}
 {
@@ -120,160 +124,160 @@ Datadog が Cost and Usage Report を検索できるようにするには、対�
 }
 {{< /code-block >}}
 
-**ヒント:** このポリシーのために作成した名前は、次のステップのためにメモしておいてください。
+**Tip:** Make note of the name you created for this policy for next steps.
 
-### Datadog のインテグレーションロールにポリシーをアタッチする
+### Attach the policy to the Datadog integration role
 
-Datadog のインテグレーションロールに新しい S3 ポリシーをアタッチします。
+Attach the new S3 policy to the Datadog integration role.
 
-1. AWS IAM コンソールで **Roles** に移動します。
-2. Datadog インテグレーションで使用されるロールを見つけます。デフォルトでは、 **DatadogIntegrationRole** という名前になっていますが、組織で名前を変更した場合は、名前が異なる場合があります。ロール名をクリックすると、ロールのサマリーページが表示されます。
-3. **Attach policies** をクリックします。
-4. 上記で作成した S3 バケットポリシーの名称を入力します。
-5. **Attach policy** をクリックします。
+1. Navigate to **Roles** in the AWS IAM console.
+2. Locate the role used by the Datadog integration. By default it is named **DatadogIntegrationRole**, but the name may vary if your organization has renamed it. Click the role name to open the role summary page.
+3. Click **Attach policies**.
+4. Enter the name of the S3 bucket policy created above.
+5. Click **Attach policy**.
 
-**注:** Datadog でデータが安定するまでに、セットアップ後最大 48～72 時間かかることがあります。
+**Note:** Data can take up to 48 to 72 hours after setup to stabilize in Datadog.
 
-## コストタイプ
+## Cost types
 
-すぐに使えるコストタイプを使用して、取り込んだデータを視覚化します。コストタイプの主な違いは、割引率、節約プラン、予約に関するレポート方法です。
+Visualize your ingested data using out-of-the-box cost types. The cost types differ mainly in how they report on discount rates, savings plans and reservations.
 
-### オンデマンド
-**オンデマンド**コストとは、AWS が公表している一般的なオンデマンド料金での利用コストです。これは、すべての節約プラン、予約、割引、税金、手数料を除きます。
+### On-demand
+**On-demand** costs are the costs of usage at the public, on-demand rate published by AWS. This excludes all savings plans, reservations, discounts, taxes, and fees.
 
-ほとんどの場合、オンデマンドコストは実際のコストを見積もるための信頼できる情報源ではありません。
+In most cases, on-demand costs are not a reliable source to estimate actual costs.
 
-### 減価償却コストと非混合コスト
-**減価償却**コストメトリクスは、割引期間を通じてコミットメントの節約を分配します。これは「発生主義」とも呼ばれます。予約及び節約プランは、毎月のコミットメントから引き落とされ、使用時に対象の使用量に直接適用されます。使用されなかった残りは料金として記載されます。
+### Amortized and unblended costs
+**Amortized** cost metrics distribute commitment savings throughout the discount term. This is also called _accrual basis_. Reservations and savings plans are drawn down from a monthly commitment and applied directly to covered usage, at the time of usage. Any unused remainder appears as a fee.
 
-対照的に、**非混合**コストメトリクスは、費用が発生したその日のすべての料金を表示します。これは「原価主義」とも呼ばれます。予約および節約プランの料金は、それらが課金された日に表示され、対象となる使用量に直接適用されるわけではありません。月の請求データが確定すると、非混合メトリクスは AWS の請求書と正確に一致します。
+In contrast, **unblended** cost metrics show all charges on the date that they are incurred. This is also called _cost basis_. Reservation and savings plan fees show up on the date they were charged, and are not applied directly to covered usage. After billing data for a month is finalized, unblended metrics match the AWS invoice exactly.
 
-### 正味コスト
-**正味**コストは、使用量に直接非公開割引を適用します。特定のリソースの使用コストは、すべての節約を実現した後の実効コストを表します。
+### Net costs
+**Net** costs apply private discounts directly to usage. The cost of usage for a specific resource represents the effective cost after all savings are realized.
 
-対照的に、他のメトリクスでは、非公開割引は、リソース属性タグのない独立した負の値の行項目として表示されます。これらのメトリクスは、割引を使用量に直接帰属させるのではなく、総コストから割引を差し引きます。
+In contrast, other metrics show private discounts as separate, negative-valued line items with no resource attribution tags. Rather than attributing the discounts directly to usage, those metrics subtract discounts from the total cost.
 
-**正味減価償却**コストは、コスト割り当てのための最も正確な表現を提供し、すべての節約は使用量に直接適用されます。お客様の AWS アカウントに非公開交渉によるエンタープライズ割引がある場合、正味コストメトリクスが利用可能です。アカウントに正味メトリクスがない場合は、代わりに**減価償却**コストを使用してください。
+**Net amortized** costs provide the most accurate representation for cost allocation, with all savings applied directly to usage. Net cost metrics are available if your AWS account has privately negotiated enterprise discounts. If your account doesn't have net metrics available, use **amortized** cost instead.
 
-### コンテナ割り当て
-**コンテナ割り当て**メトリクスには、AWS メトリクスと同じコストがすべて含まれていますが、コンテナワークロードのための追加の内訳と洞察も含まれています。詳細は[コンテナコスト割り当て][11]を参照してください。
+### Container allocation
+**Container allocation** metrics contain all of the same costs as the AWS metrics, but with additional breakdowns and insights for container workloads. See [container cost allocation][11] for more details.
 
-### 例
-次のシナリオは、異なるコストタイプがどのように振る舞うかを示しています。以下を想定してみます。
-- EC2 インスタンスが 1 時間実行され、計算時間あたりのコストは 3 ドル。
-- このインスタンスタイプを計算時間あたり 2 ドルで提供する節約プラン。
-- 他の割引に加え、交渉による 10% の EDP 割引。
+### Example
+The following scenario demonstrates how different cost types behave. Imagine you have:
+- An EC2 instance running for one hour with the cost of $3 per compute-hour.
+- A savings plan which prices this instance type at $2 per compute-hour.
+- A negotiated EDP discount of 10% on top of all other discounts.
 
-インスタンスコスト、節約プランの時間単位のコミットメント、および割引が各コストタイプでどのように表示されるかを示します。
+Here's how the instance cost, savings plan hourly commitment, and discount appear in each cost type:
 
-|コストタイプ |API |節約プラン |割引 | 説明 |
+|Cost type |Usage |Savings Plan |Discount | Explanation |
 |:---------|-|-|-|:------------------------------------------------|
-|オンデマンド |$3.00|||これは一般オンデマンド料金です。|
-|非混合 |$3.00|$2.00|-$0.20|節約プランの定期費用と EDP 割引は、特定のリソースに関連付けられたものではなく、別の行項目です。(**注:** $3 のリソースコストは `SavingsPlanNegation` で相殺されます。) |
-|正味非混合||$1.80||節約プランの定期費用は、割引が適用された行項目として表示されます。特定のリソースに関連したコストではありません。|
-|減価償却 |$2.00||-$0.20|節約プラン割引は、リソースコストに直接適用されます。EDP 割引は別の行項目です。 |
-|正味減価償却 |$1.80|||節約プランと EDP 割引は、リソースコストに直接適用されます。 |
-|正味減価償却 - 共有リソースの割り当て |$1.80|||正味減価償却と同じコストですが、このコストは Kubernetes ディメンションとポッドタグによってさらに細分化できます。 |
+|On Demand |$3.00|||This is the public on-demand rate.|
+|Unblended |$3.00|$2.00|-$0.20|Savings plan recurring fee and EDP discount are separate line items, not associated with a specific resource. (**Note:** the $3 resource cost is offset with `SavingsPlanNegation`.) |
+|Net Unblended||$1.80||Savings plan recurring fee appears as a line item with the discount applied; the cost is not associated with a specific resource.|
+|Amortized |$2.00||-$0.20|Savings plan discount is applied directly to the resource cost. EDP discount is a separate line item. |
+|Net Amortized |$1.80|||Savings plan and EDP discounts are applied directly to resource cost. |
+|Net Amortized - Shared Resources Allocated |$1.80|||The same cost as Net Amortized, but this cost can be further broken down by Kubernetes dimensions and pod tags. |
 
-### コストメトリクスのまとめ
+### Cost metrics summary
 
-一般的に
-- `aws.cost.net.amortized.shared.resources.allocated` は、特定のワークロードやチームに対する最も完全なコスト割り当てを提供します。
-- コンテナコスト割り当てがない場合は、`aws.cost.net.amortized` を使用してください。
-- 正味減価償却コストがない場合は、`aws.cost.amortized.shared.resources.allocated` または `aws.cost.amortized` を使用してください。
+In general:
+- `aws.cost.net.amortized.shared.resources.allocated` provides the most complete cost allocation for specific workloads and teams.
+- If you do not have container cost allocation, use `aws.cost.net.amortized`.
+- If you do not have net amortized costs, use `aws.cost.amortized.shared.resources.allocated` or `aws.cost.amortized`.
 
-| エラー予算アラート               | 説明           |
+| Metric               | Description           |
 | -------------------- | --------------------- |
-| `aws.cost.net.amortized.shared.resources.allocated` | すべての AWS の正味減価償却コストと、コンテナワークロードのための追加の内訳と洞察。[コンテナコスト割り当て][11]が必要です。|
-| `aws.cost.net.amortized` | コンテナコストの内訳を含まない正味減価償却コスト。 |
-| `aws.cost.net.unblended` | コンテナコストの内訳を含まない、正味非混合コスト。AWS の請求書と一致し、使用量コスト内で特別な割引が事前に計算されます。 |
-| `aws.cost.amortized.shared.resources.allocated` | すべての AWS の減価償却コストと、コンテナワークロードのための追加の内訳と洞察。[コンテナコスト割り当て][11]が必要です。|
-| `aws.cost.amortized` | コンテナコストの内訳を含まない減価償却コスト。 |
-| `aws.cost.unblended` | コンテナコストの内訳を含まない、非混合コスト。AWS の請求書と一致します。 |
-| `aws.cost.ondemand`  | コストは AWS が提供するリストレートに基づいており、すべての節約プラン、予約、割引、税金、手数料は含まれていません。 |
+| `aws.cost.net.amortized.shared.resources.allocated` | All of your AWS net amortized costs, with additional breakdowns and insights for container workloads. Requires [container cost allocation][11].|
+| `aws.cost.net.amortized` | Net amortized costs, without container cost breakdowns. |
+| `aws.cost.net.unblended` | Net unblended costs, without container cost breakdowns. Matches the AWS invoice, with specialized discounts pre-calculated within usage costs. |
+| `aws.cost.amortized.shared.resources.allocated` | All of your AWS amortized costs, with additional breakdowns and insights for container workloads. Requires [container cost allocation][11].|
+| `aws.cost.amortized` | Amortized costs, without container cost breakdowns. |
+| `aws.cost.unblended` | Unblended costs, without container cost breakdowns. Matches the AWS invoice. |
+| `aws.cost.ondemand`  | Costs based on the list rate provided by AWS, excluding all savings plans, reservations, discounts, taxes, and fees. |
 
-## タグエンリッチメント
+## Tag enrichment
 
-以下に詳細を示すとおり、Datadog は、多くのソースを使用して取り込んだコストデータにタグを追加します。
+Datadog adds tags to the ingested cost data using many sources, described in detail below.
 
-- Cost and Usage Report 列
-- AWS リソースタグ
-- AWS アカウントタグ
-- AWS インテグレーションタグ
-- すぐに使えるタグ
-- コンテナワークロードタグ
-- タグパイプライン
+- Cost and Usage Report columns
+- AWS Resource tags
+- AWS Account tags
+- AWS Integration tags
+- Out-of-the-box tags
+- Container workload tags
+- Tag pipelines
 
-### Cost and Usage Report 列
+### Cost and Usage Report columns
 
-AWS の [Cost and Usage Report (CUR)][6] のすべての文字列値の列が、コストメトリクスのタグとして追加されます。
+All string-valued columns from the AWS [Cost and Usage Report (CUR)][6] are added as tags on cost metrics.
 
-Datadog は一貫性を確保するために、アンダースコアと小文字を使用してタグキーを正規化します。例えば、CUR 列 `lineItem/ResourceId` はタグキー `line_item/resource_id` にマッピングされます。タグの値は一般的に変更されず、大文字と小文字の区別とほとんどの特殊文字が維持されます。
+To ensure consistency, Datadog normalizes tag keys using underscores and lower case. For example, the CUR column `lineItem/ResourceId` maps to the tag key `line_item/resource_id`. Tag values are generally unmodified - maintaining exact casing and most special characters.
 
-**例:**
+**Examples:**
 
-|CUR 列|CUR 値|クラウドコストタグ|
+|CUR Column|CUR Value|Cloud Cost Tag|
 |---|---|---|
 |lineItem/ResourceId|i-12345678a9b12cd3e|line_item/resource_id:i-12345678a9b12cd3e|
 |product/region|us-east-1|product/region:us-east-1|
 |product/usagetype|DataTransfer-Regional-Bytes|product/usagetype:DataTransfer-Regional-Bytes|
 
-### AWS リソースタグ
+### AWS resource tags
 
-[AWS リソースタグ][12]は、EC2 インスタンスや S3 バケットなど、特定のリソースを表示する際に AWS コンソールに表示されるユーザー定義のタグです。
+[AWS resource tags][12] are user-defined tags that appear in the AWS console when viewing a particular resource, like an EC2 instance or S3 bucket.
 
-Datadog AWS インテグレーションを有効にすると、Datadog は自動的にほとんどの AWS リソースのリソースタグを収集します。これらのタグは、指定されたリソースの CUR で見つかったすべてのコストに適用されます。リソースタグは定期的に取得され、作成または変更された日からコストデータに適用されます。タグが変更されても、過去のタグ値は上書きされません。
+When you enable the Datadog AWS integration, Datadog automatically collects resource tags for most AWS resources. These tags are applied to all costs found in the CUR for a given resource. Resource tags are retrieved regularly and are applied to cost data starting from the day they are created or modified. Historical tag values are not overwritten when tags change.
 
-AWS インテグレーションが有効になっていない場合、AWS 請求の[コスト割り当てタグ][13]をアクティブにすることで、リソースタグのリッチ化を有効にすることができます。これにより、AWS CUR の列として含めるリソースタグキーのサブセットを選択することができます。Datadog は、CUR を処理する際に、これらの列を自動的にタグとして含めます。
+If the AWS integration is not enabled, you can enable resource tag enrichment by activating [cost allocation tags][13] in AWS billing. This allows you to select a subset of resource tag keys to include as columns in the AWS CUR. Datadog automatically includes those columns as tags when processing the CUR.
 
-### AWS の組織とアカウントタグ
-AWS 組織は、組織単位とアカウントに関する[ユーザー定義タグ][14]をサポートしています。Datadog は自動的にこれらのタグを取得し、コストデータに適用します。アカウントタグは、そのアカウントに関連するすべての使用量に適用されます。組織タグは、一致する支払者アカウントのすべての請求データに適用されます。
+### AWS organization and account tags
+AWS Organizations support [user-defined tags][14] on organizational units and accounts. Datadog automatically fetches and applies these tags to cost data. Account tags are applied to all usage associated with those accounts. Organization tags are applied to all billing data for the matching payer account.
 
-_組織アカウントの Datadog AWS インテグレーションが必要です。_
+_Requires the Datadog AWS Integration on the organization account._
 
-### AWS インテグレーションタグ
+### AWS integration tags
 
-AWS インテグレーションタグは、Datadog インテグレーションページの AWS Integration タイルで設定されるタグです。これらは、関連する AWS アカウントの CUR で見つかったすべてのコストに適用されます。
+AWS integration tags are tags set on the AWS Integration tile in the Datadog integrations page. They are applied to all costs found in the CUR for the associated AWS account.
 
-### すぐに使えるタグ
-Datadog は、取り込んだコストデータにすぐに使えるタグを追加し、コストの細分化と割り当てを支援します。これらのタグは、[Cost and Usage Report (CUR)][6] から導き出され、コストデータの発見と理解を容易にします。
+### Out-of-the-box tags
+Datadog adds out-of-the-box tags to ingested cost data to help you further break down and allocate your costs. These tags are derived from your [Cost and Usage Report (CUR)][6] and make it easier to discover and understand cost data.
 
-データのフィルタリングやグループ化には、以下のすぐに使えるタグが利用できます。
+The following out-of-the-box tags are available for filtering and grouping data:
 
-| タグ                          | 説明       |
+| Tag                          | Description       |
 | ---------------------------- | ----------------- |
-| `aws_product`                | 課金対象となる AWS サービス。|
-| `aws_product_family`         | 課金対象となる AWS サービスのカテゴリー (例: Compute、Storage など)。|
-| `aws_management_account_name`| 項目に関連付けられた AWS 管理アカウント名。|
-| `aws_management_account_id`  | 項目に関連付けられた AWS 管理アカウント ID。|
-| `aws_member_account_name`    | 項目に関連付けられた AWS メンバーアカウント名。|
-| `aws_member_account_id`      | 項目に関連付けられた AWS メンバーアカウント ID。|
-| `aws_cost_type`              | この項目で対象となる料金の種類 (例: 使用料、消費税など)。|
-| `aws_pricing_term`           | 予約、スポット、オンデマンドのいずれの利用形態か。|
-| `aws_reservation_arn`        | 項目が恩恵を受けたリザーブドインスタンスの ARN。|
-| `aws_savings_plan_arn`       | 項目が恩恵を受けたセービングプランの ARN。|
-| `aws_usage_type`             | 項目の使用量 (例: BoxUsage:i3.8xlarge)。|
-| `aws_operation`              | 項目に関連する演算子 (例: RunInstances)。|
-| `aws_region`                 | 項目に関連するリージョン。|
-| `aws_availability_zone`      | 項目に関連するアベイラビリティゾーン。|
-| `aws_resource_id`            | 項目に関連するリソース ID。|
-| `aws_instance_type`          | 項目に関連するインスタンスタイプ。|
-| `aws_instance_family`        | 項目に関連するインスタンスファミリー (例: Storage optimized)。|
-| `is_aws_ec2_compute`         | 使用が EC2 コンピュートに関するものかどうか。|
-| `is_aws_ec2_compute_on_demand`| 使用がオンデマンドであるかどうか。|
-| `is_aws_ec2_compute_reservation`| 使用がリザーブドインスタンスと関連しているかどうか。|
-| `is_aws_ec2_capacity_reservation`| 使用が容量予約と関連しているかどうか。|
-| `is_aws_ec2_spot_instance`   | 使用がスポットインスタンスと関連しているかどうか。|
-| `is_aws_ec2_savings_plan`    | 使用がセービングプランと関連しているかどうか。|
+| `aws_product`                | The AWS service being billed.|
+| `aws_product_family`         | The category for the AWS service being billed (for example, Compute or Storage).|
+| `aws_management_account_name`| The AWS management account name associated with the item.|
+| `aws_management_account_id`  | The AWS management account ID associated with the item.|
+| `aws_member_account_name`    | The AWS member account name associated with the item.|
+| `aws_member_account_id`      | The AWS member account ID associated with the item.|
+| `aws_cost_type`              | The type of charge covered by this item (for example, Usage, or Tax).|
+| `aws_pricing_term`           | Whether the usage is Reserved, Spot, or On-Demand.|
+| `aws_reservation_arn`        | The ARN of the Reserved Instance that the item benefited from.|
+| `aws_savings_plan_arn`       | The ARN of the Savings Plan the item benefited from.|
+| `aws_usage_type`             | The usage details of the item (for example, BoxUsage:i3.8xlarge).|
+| `aws_operation`              | The operation associated with the item (for example, RunInstances).|
+| `aws_region`                 | The region associated with the item.|
+| `aws_availability_zone`      | The availability zone associated with the item.|
+| `aws_resource_id`            | The resource ID associated with the item.|
+| `aws_instance_type`          | The instance types associated with your items.|
+| `aws_instance_family`        | The instance family associated with your item (for example, Storage optimized).|
+| `is_aws_ec2_compute`         | Whether the usage is related to EC2 compute.|
+| `is_aws_ec2_compute_on_demand`| Whether the usage is on-demand.|
+| `is_aws_ec2_compute_reservation`| Whether the usage is associated with a Reserved Instance.|
+| `is_aws_ec2_capacity_reservation`| Whether the usage is associated with a Capacity Reservation.|
+| `is_aws_ec2_spot_instance`   | Whether the usage is associated with a Spot Instance.|
+| `is_aws_ec2_savings_plan`    | Whether the usage is associated with a Savings Plan.|
 
-#### コストと観測可能性の相関
+#### Cost and observability correlation
 
-観測可能性データのコンテキストでコストを表示することは、インフラストラクチャーの変更がコストに与える影響を理解し、コストが変化する理由を特定し、コストとパフォーマンスの両方のためにインフラストラクチャーを最適化するために重要です。Datadog は、観測可能性とコストメトリクスの相関を簡素化するために、AWS のトップ製品のコストデータ上のリソースを識別するタグを更新します。
+Viewing costs in context of observability data is important to understand how infrastructure changes impact costs, identify why costs change, and optimize infrastructure for both costs and performance. Datadog updates resource identifying tags on cost data for top AWS products to simplify correlating observability and cost metrics.
 
-例えば、各 RDS データベースのコストと利用率を表示するには、`aws.cost.amortized`、`aws.rds.cpuutilization`、`aws.rds.freeable_memory` (またはその他の RDS メトリクス) でテーブルを作成し、`dbinstanceidentifier` でグループ化します。また、Lambda の使用量とコストを並べて見るには、`aws.lambda.concurrent_executions` と `aws.cost.amortized` を `functionname` でグループ化してグラフ化します。
+For example, to view cost and utilization for each RDS database, you can make a table with `aws.cost.amortized`, `aws.rds.cpuutilization`, and `aws.rds.freeable_memory` (or any other RDS metric) and group by `dbinstanceidentifier`. Or, to see Lambda usage and costs side by side, you can graph `aws.lambda.concurrent_executions` and `aws.cost.amortized` grouped by `functionname`.
 
-以下のすぐに使えるタグが用意されています。
-| AWS 製品                  | タグ       |
+The following out-of-the-box tags are available:
+| AWS Product                  | Tag       |
 | ---------------------------- | ----------------- |
 | ec2                | `instance_id`|
 | s3         | `bucketname`|
@@ -281,47 +285,53 @@ Datadog は、取り込んだコストデータにすぐに使えるタグを追
 | lambda         | `functionname`|
 | dynamodb         | `tablename`|
 | elasticache      | `cacheclusterid`|
-| cloudfront (ディストリビューション)  | `distributionid`|
-| cloudfront (関数)  | `functionname`|
+| cloudfront (distribution)  | `distributionid`|
+| cloudfront (function)  | `functionname`|
 | ec2 natgateway | `natgatewayid`|
 | redshift         | `clusteridentifier`|
 | kinesis         | `streamname`|
 | queue         | `queuename`|
 | sns         | `topicname`|
-| elb (アプリケーション、ゲートウェイ、ネットワーク) | `loadbalancer`|
-| elb (その他すべてのコスト) | `loadbalancername` |
+| elb (application, gateway, network) | `loadbalancer`|
+| elb (all other costs) | `loadbalancername` |
 
-### コンテナオーケストレーター
+### Container orchestrators
 
-コンテナのコスト割り当てでは、コストが発生するワークロードのタグが追加されます。例えば、Kubernetes のポッドやノード、ECS のタスクやコンテナのタグなどです。
+Container cost allocation adds tags from the workloads incurring cost. Examples include tags from Kubernetes pods and nodes and ECS tasks and containers.
 
-_[コンテナコストの割り当て][11]が必要で、`shared.resources.allocated` メトリクスにのみ適用されます。_
+_Requires [container cost allocation][11], and applies only to `shared.resources.allocated` metrics._
 
-### タグパイプライン
+### Tag pipelines
 
-最後に、[タグパイプライン][15]のすべてのルールセットが適用され、インフラストラクチャーのタグ付けが不可能な場合に、完全なコスト割り当てが提供されます。
+Finally, all of your [tag pipeline][15] rulesets are applied, providing complete cost allocation when infrastructure tagging is not possible.
 
 ## Billing conductor
-Billing conductor は、請求レートのカスタマイズ、クレジットや手数料の分配、諸経費の分担など、お客様のご判断で請求書を簡素化することができます。また、CUR に含めるアカウントを選択することもできます。
+[AWS Billing Conductor][16] is a custom billing service for AWS Marketplace Channel Partners (Partners) and organizations that have chargeback requirements.
+Billing Conductor enables customers to create a second, pro forma version of their costs to share with their customers or account owners.
+Billing rates, credits and fees, and overhead costs can be customized at your discretion. You can also select which accounts to include in the CUR.
 
-Billing conductor CUR を作成するには、[AWS Cost and Usage Reports ユーザーガイド][8]に従ってください。CUR が [Datadog の要件][9]を満たしていることを確認します。
-Billing conductor CUR を作成したら、上記のクラウドコストマネジメントの説明に従って、Datadog で設定します。
+_Pro Forma Cost and Usage Reports do not include discounts and taxes, which makes it difficult to compare costs in Datadog to AWS Cost Explorer.
+Additionally, adding accounts to a billing group impacts how Reservations and Savings Plans are shared across AWS accounts._
 
-## その他の参考資料
+To create a billing conductor CUR, follow the [AWS Cost and Usage Reports user guide][8]. Ensure the CUR meets [Datadog's requirements][9].
+After the billing conductor CUR is created, follow the Cloud Cost Management instructions above to set it up in Datadog.
+
+## Further reading
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.aws.amazon.com/cur/latest/userguide/cur-create.html
+[1]: https://docs.aws.amazon.com/cur/latest/userguide/dataexports-create-legacy.html
 [2]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/consolidated-billing.html
 [3]: https://us-east-1.console.aws.amazon.com/cost-management/home?region=us-east-1#/settings
-[4]: https://docs.aws.amazon.com/cur/latest/userguide/view-cur.html
+[4]: https://docs.aws.amazon.com/cur/latest/userguide/dataexports-view.html
 [5]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html
 [6]: https://docs.aws.amazon.com/cur/latest/userguide/data-dictionary.html
 [7]: https://app.datadoghq.com/cost/setup
 [8]: https://docs.aws.amazon.com/cur/latest/userguide/cur-data-view.html
-[9]: https://docs.datadoghq.com/ja/cloud_cost_management/?tab=aws#prerequisite-generate-a-cost-and-usage-report
+[9]: /cloud_cost_management/aws/#prerequisite-generate-a-cost-and-usage-report
 [10]: https://docs.aws.amazon.com/cur/latest/userguide/enabling-split-cost-allocation-data.html
-[11]: https://docs.datadoghq.com/ja/cloud_cost_management/container_cost_allocation/#tags
+[11]: /cloud_cost_management/container_cost_allocation/#applying-tags
 [12]: https://docs.aws.amazon.com/tag-editor/latest/userguide/tagging.html
 [13]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/activating-tags.html
 [14]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_tagging.html
-[15]: https://docs.datadoghq.com/ja/cloud_cost_management/tag_pipelines
+[15]: /cloud_cost_management/tag_pipelines
+[16]: https://docs.aws.amazon.com/billingconductor/latest/userguide/what-is-billingconductor.html

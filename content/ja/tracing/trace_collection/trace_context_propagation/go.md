@@ -1,35 +1,46 @@
 ---
+title: Propagating Go Trace Context
+kind: documentation
 code_lang: go
+type: multi-code-lang
 code_lang_weight: 30
 further_reading:
-- link: https://www.datadoghq.com/blog/monitor-otel-with-w3c-trace-context/
-  tag: ブログ
-  text: W3C Trace Context に対応した OpenTelemetry インスツルメンテーションされたアプリのモニタリング
-title: Go トレースコンテキストの伝搬
-type: multi-code-lang
+    - link: "https://www.datadoghq.com/blog/monitor-otel-with-w3c-trace-context/"
+      tag: Blog
+      text: Monitor OpenTelemetry-instrumented apps with support for W3C Trace Context
+    - link: /opentelemetry/guide/otel_api_tracing_interoperability
+      tag: Documentation
+      text: Interoperability of OpenTelemetry API and Datadog instrumented traces
 ---
 
 
-Datadog APM トレーサーは、分散型トレーシングのために [B3][8] や [W3C Trace Context][10] のヘッダーの抽出と挿入をサポートしています。
+The Datadog APM tracer supports extraction and injection of [B3][8] and [W3C Trace Context][10] headers for distributed tracing.
 
-分散したヘッダーの挿入と抽出は、挿入/抽出スタイルを構成することで制御されます。`tracecontext`、`Datadog`、`B3`、`B3 single header` のスタイルがサポートされています。
+Distributed headers injection and extraction is controlled by
+configuring injection/extraction styles. Supported styles are:
+`tracecontext`, `datadog`, `B3`, and `B3 single header`.
 
-- 環境変数 `DD_TRACE_PROPAGATION_STYLE_INJECT=tracecontext,B3` を用いて挿入スタイルを構成する
-- 環境変数 `DD_TRACE_PROPAGATION_STYLE_EXTRACT=tracecontext,B3` を用いて抽出スタイルを構成する
-- 環境変数 `DD_TRACE_PROPAGATION_STYLE=tracecontext,B3` を用いて挿入スタイルと抽出スタイルの両方を構成する
+- Configure injection styles using the `DD_TRACE_PROPAGATION_STYLE_INJECT=tracecontext,B3` environment variable.
+- Configure extraction styles using the `DD_TRACE_PROPAGATION_STYLE_EXTRACT=tracecontext,B3` environment variable.
+- Configure both injection and extraction styles using the `DD_TRACE_PROPAGATION_STYLE=tracecontext,B3` environment variable.
 
-これらの環境変数の値は、挿入または抽出が有効になっているヘッダースタイルのコンマ区切りリストです。デフォルトでは、`tracecontext,Datadog` スタイルが有効になっています。
+The values of these environment variables are comma-separated lists of
+header styles enabled for injection or extraction. By default,
+the `datadog,tracecontext` styles are enabled.
 
-トレースコンテキストの伝搬を無効にするには、環境変数の値を `none` に設定します。
-- 環境変数 `DD_TRACE_PROPAGATION_STYLE_INJECT=none` を用いて挿入スタイルを無効にする
-- 環境変数 `DD_TRACE_PROPAGATION_STYLE_EXTRACT=none` を用いて抽出スタイルを無効にする
-- 環境変数 `DD_TRACE_PROPAGATION_STYLE=none` を使って、すべてのトレースコンテキストの伝搬を無効にします (挿入と抽出の両方)。
+To disable trace context propagation, set the value of the environment variables to `none`.
+- Disable injection styles using the `DD_TRACE_PROPAGATION_STYLE_INJECT=none` environment variable.
+- Disable extraction styles using the `DD_TRACE_PROPAGATION_STYLE_EXTRACT=none` environment variable.
+- Disable all trace context propagation (both inject and extract) using the `DD_TRACE_PROPAGATION_STYLE=none` environment variable.
 
-複数の環境変数が設定されている場合、`DD_TRACE_PROPAGATION_STYLE_INJECT` と `DD_TRACE_PROPAGATION_STYLE_EXTRACT` は `DD_TRACE_PROPAGATION_STYLE` で指定した値をオーバーライドします。
+If multiple environment variables are set, `DD_TRACE_PROPAGATION_STYLE_INJECT` and `DD_TRACE_PROPAGATION_STYLE_EXTRACT`
+override any value provided in `DD_TRACE_PROPAGATION_STYLE`.
 
-複数の抽出スタイルが有効な場合、それらのスタイルが指定されている順序で抽出が試行されます。最初に正常に抽出された値が使用されます。
+If multiple extraction styles are enabled, extraction attempts are made
+in the order that those styles are specified. The first successfully
+extracted value is used.
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 

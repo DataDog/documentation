@@ -1,5 +1,7 @@
 ---
-title: 空間集計
+title: space aggregation
+core_product:
+  - metrics
 ---
-空間集計は、1 つのメトリクスをホスト、コンテナ、地域などのタグで複数の時系列に分割します。集計オプションは、`sum`、`min`、`max`、`avg` の 4 つあります。
-詳細は、<a href="/metrics/#space-aggregation">ドキュメントを参照してください</a>。
+Space aggregation splits a single metric into multiple timeseries by tags such as host, container, and region. There are four aggregation options: `sum`, `min`, `max`, and `avg`.
+For more information, <a href="/metrics/#space-aggregation">see the documentation</a>.

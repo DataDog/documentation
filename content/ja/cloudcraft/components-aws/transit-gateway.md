@@ -1,28 +1,28 @@
 ---
-title: Transit Gateway コンポーネント
+title: "Transit Gateway Component"
 ---
-## 概要
+## Overview
 
-Transit Gateway コンポーネントを使用して、Amazon Web Services アーキテクチャのトランジットゲートウェイアタッチメントを表現します。
+Use the Transit Gateway component to represent transit gateway attachments from your Amazon Web Services architecture.
 
-{{< img src="cloudcraft/components-aws/transit-gateway/component-transit-gateway-diagram.png" alt="'Transit gateway' AWS コンポーネントを示す、等角投影された Cloudcraft 図のスクリーンショット。" responsive="true" style="width:60%;">}}
+{{< img src="cloudcraft/components-aws/transit-gateway/component-transit-gateway-diagram.png" alt="Screenshot of an isometric Cloudcraft diagram showing the 'Transit gateway' AWS component." responsive="true" style="width:60%;">}}
 
-## ツールバー
+## Toolbar
 
-ツールバーを使用して、コンポーネントの構成とカスタマイズを行います。以下のオプションがあります。
+Use the toolbar to configure and customize the component. The following options are available:
 
-- **Color**: 定義済みの色を選択するか、コンポーネントとそのアクセントの色の 16 進値を入力します。コンポーネントは、2D ビューと 3D ビューの両方に同じ色を使用することも、それぞれに異なる色を使用することもできます。
-- **Connections**: トランジットゲートウェイに接続されているアタッチメントの数。
-- **Data processed**: ひと月に処理されたデータの総量 (ギガバイト単位)。
-- **Rotate**: コンポーネントを回転させ、その方向を変更します。
+- **Color**: Select a predefined color or enter the hexadecimal value of the color for the component and its accent. The component can use the same color for both the 2D and 3D view, or different colors for each.
+- **Connections**: The number of attachments connected to the transit gateway.
+- **Data processed**: The total volume of data processed per month, in gigabytes.
+- **Rotate**: Rotate the component and change its direction.
 
-## ヘルプ
+## API
 
-[Cloudcraft API][1] を使用して、プログラムでアーキテクチャ図にアクセスし、JSON オブジェクトとしてレンダリングします。
+Use the [Cloudcraft API][1] to programmatically access and render your architecture diagrams as JSON objects.
 
-### スキーマ
+### Schema
 
-以下は、Transit Gateway コンポーネントの JSON の例です。
+The following is an example JSON of a Transit Gateway component:
 
 ```json
 {
@@ -46,20 +46,20 @@ Transit Gateway コンポーネントを使用して、Amazon Web Services ア�
 }
 ```
 
-- **type: transitgateway**: コンポーネントのタイプ。
-- **id: 文字列**: `uuid` 形式のコンポーネントの一意な識別子。
-- **region: 文字列**: このゲートウェイがデプロイされる AWS リージョン。`cn-` リージョン以外のすべてのグローバルリージョンがサポートされています。
-- **mapPos: [数値, 数値]**: x 座標と y 座標のペアで表される、ブループリント内のコンポーネントの位置。
-- **connections: 数値**: トランジットゲートウェイに接続されているアタッチメントの数。
-- **dataGb: 数値**: ゲートウェイがひと月に処理するデータ量 (ギガバイト単位)。
-- **color: オブジェクト**: コンポーネント本体の塗りつぶし色。
-  - **isometric: 文字列**: 3D ビューでのコンポーネントの塗りつぶし色。16 進数で指定します。
-  - **2d: 文字列**: 2D ビューでのコンポーネントの塗りつぶし色。16 進数で指定します。
-- **accentColor: オブジェクト**: ブロック上のコンポーネントロゴを表示するために使用されるアクセントカラー。
-  - **isometric: 文字列**: 3D ビューでのコンポーネントのアクセントカラー。16 進数で指定します。
-  - **2d: 文字列**: 2D ビューでのコンポーネントのアクセントカラー。16 進数で指定します。
-- **direction: 文字列**: コンポーネントの回転または方向。`down` または `right` を指定します。デフォルトは `down` です。
-- **link: uri**: コンポーネントを、`blueprint://ID` フォーマットを使用して別の図にリンクするか、`https://LINK` フォーマットを使用して外部の Web サイトにリンクします。
-- **locked: ブール値**: `true` の場合、アプリケーションを使用してコンポーネントに加えられた変更は、ロックが解除されるまで無効になります。
+- **type: transitgateway**: The type of component.
+- **id: string**: A unique identifier for the component in the `uuid` format.
+- **region: string**: The AWS region this gateway is deployed in. All global regions are supported except `cn-` regions.
+- **mapPos: [number, number]**: The position of the component in the blueprint, expressed as an x- and y-coordinate pair.
+- **connections: number**: The number of attachments connected to the transit gateway.
+- **dataGb: number**: The volume of data processed per month by the gateway, in gigabytes.
+- **color: object**: The fill color for the component body.
+  - **isometric: string**: The fill color for the component in the 3D view. Must be a hexadecimal color.
+  - **2d: string**: The fill color for the component in the 2D view. Must be a hexadecimal color.
+- **accentColor: object**: The accent color used to display the component logo on the block.
+  - **isometric: string**: The accent color for the component in the 3D view. Must be a hexadecimal color.
+  - **2d: string**: The accent color for the component in the 2D view. Must be a hexadecimal color.
+- **direction: string**: The rotation or direction of the component. Accepts `down` or `right`. Default is `down`.
+- **link: uri**: Link the component to another diagram using the `blueprint://ID` format or to an external website using the `https://LINK` format.
+- **locked: boolean**: If `true`, changes made to the component using the application are disabled until unlocked.
 
 [1]: https://developers.cloudcraft.co/

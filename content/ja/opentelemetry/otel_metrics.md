@@ -1,41 +1,41 @@
 ---
+title: Send Metrics from OpenTelemetry to Datadog
 aliases:
-- /ja/metrics/open_telemetry/
+- /metrics/open_telemetry/
 further_reading:
-- link: /opentelemetry/
-  tag: ドキュメント
-  text: OpenTelemetry の詳細
-- link: https://www.datadoghq.com/blog/ingest-opentelemetry-traces-metrics-with-datadog-exporter/
-  tag: GitHub
-  text: OpenTelemetry コレクターから Datadog エクスポーター経由で Datadog にメトリクスとトレースを送信する
-title: OpenTelemetry から Datadog にメトリクスを送信する
+    - link: /opentelemetry/
+      tag: Documentation
+      text: Learn more about OpenTelemetry
+    - link: "https://www.datadoghq.com/blog/ingest-opentelemetry-traces-metrics-with-datadog-exporter/"
+      tag: Blog
+      text: Send metrics and traces from OpenTelemetry Collector to Datadog via Datadog Exporter
 ---
 
-## 概要
+## Overview
 
-[OpenTelemetry][1] は、オープンソースの観測可能性フレームワークで、IT チームにテレメトリーデータを収集しルーティングするための標準化されたプロトコルとツールを提供します。Cloud Native Computing Foundation][2] (CNCF) によってインキュベータープロジェクトとして作成された OpenTelemetry は、アプリケーションテレメトリーデータ (メトリクス、ログ、トレースなど) をインスツルメント、生成、収集、エクスポートし、分析および洞察するための監視プラットフォームに対して一貫したフォーマットを提供するものです。
+[OpenTelemetry][1] is an open source observability framework that provides IT teams with standardized protocols and tools for collecting and routing telemetry data. Created as an incubator project by the [Cloud Native Computing Foundation][2] (CNCF), OpenTelemetry provides a consistent format for instrumenting, generating, gathering, and exporting application telemetry data—namely metrics, logs, and traces—to monitoring platforms for analysis and insight.
 
-## セットアップ
+## Setup
 
-OpenTelemetry のメトリクスを Datadog に送信するには、Datadog Agent、または OpenTelemetry コレクターの 2 つのオプションがあります。Datadog Agent を使用すると、すべての [Agent 関数][3]を使用し続けることができます。よりベンダーに依存しないセットアップを行うには、OpenTelemetry コレクターを使用します。
+To send OpenTelemetry metrics to Datadog, you have two options: the Datadog Agent, or the OpenTelemetry Collector. Using the Datadog Agent enables you to keep using all [Agent functionalities][3]. For a more vendor-agnostic setup, use the OpenTelemetry Collector.
 
-アプリケーションやサービスが [OpenTelemetry][4] ライブラリでインスツルメントされている場合、メトリクスデータを Datadog バックエンドに取得するために 2 つの経路から選択することができます。
+If your applications and services are instrumented with [OpenTelemetry][4] libraries, you can choose between two paths for getting the metrics data to the Datadog backend:
 
-1. [メトリクスを OpenTelemetry コレクターに送信し、Datadog エクスポーターで Datadog に転送する][5]、または
+1. [Send metrics to the OpenTelemetry collector, and use the Datadog exporter to forward them to Datadog][5], or
 
-2. [Datadog Agent でメトリクスを取り込み、Datadog のために収集させます][6]。
+2. [Ingest metrics with the Datadog Agent, which collects them for Datadog][6].
 
-詳しくは [OpenTelemetry][7] をお読みください。
+Read [OpenTelemetry][7] for more information.
 
-## すぐに使えるダッシュボード
+## Out-of-the-box dashboards
 
-Datadog は、すぐに使えるダッシュボードを提供しており、コピーしてカスタマイズすることができます。Datadog のすぐに使える OpenTelemetry ダッシュボードを使用するには、**Dashboards** > **Dashboards list** に移動し、`opentelemetry` を検索してください。
+Datadog provides out-of-the-box dashboards that you can copy and customize. To use Datadog's out-of-the-box OpenTelemetry dashboards, go to **Dashboards** > **Dashboards list** and search for `opentelemetry`:
 
-{{< img src="metrics/otel/dashboard.png" alt="ダッシュボードリストには、OpenTelemetry のすぐに使えるダッシュボードが 2 つ (ホストメトリクスとコレクターメトリクス) 表示されています。" style="width:80%;">}}
+{{< img src="metrics/otel/dashboard.png" alt="The Dashboards list, showing two OpenTelemetry out-of-the-box dashboards: Host Metrics and Collector Metrics." style="width:80%;">}}
 
-**Host Metrics** ダッシュボードは、[ホストメトリクスレシーバー][8]から収集されたデータ用です。**Collector Metrics** ダッシュボードは、有効化する[メトリクスレシーバー][9]に応じて収集された他の種類のメトリクス用です。
+The **Host Metrics** dashboard is for data collected from the [host metrics receiver][8]. The **Collector Metrics** dashboard is for any other types of metrics collected, depending on which [metrics receiver][9] you choose to enable.
 
-## その他の参考資料
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -43,8 +43,8 @@ Datadog は、すぐに使えるダッシュボードを提供しており、コ
 [2]: https://www.cncf.io/
 [3]: https://www.datadoghq.com/pricing/?product=infrastructure#infrastructure
 [4]: https://opentelemetry.io/docs/
-[5]: /ja/opentelemetry/otel_collector_datadog_exporter/
-[6]: /ja/opentelemetry/otlp_ingest_in_the_agent/
-[7]: /ja/opentelemetry/
+[5]: /opentelemetry/otel_collector_datadog_exporter/
+[6]: /opentelemetry/otlp_ingest_in_the_agent/
+[7]: /opentelemetry/
 [8]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/hostmetricsreceiver
 [9]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver

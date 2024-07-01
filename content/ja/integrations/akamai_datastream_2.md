@@ -1,106 +1,121 @@
 ---
-app_id: akamai-datastream-2
-app_uuid: 9a772881-d31a-4ffb-92bb-7beef1088a55
-assets:
-  dashboards:
-    Akamai DataStream 2: assets/dashboards/akamai_datastream_2_overview.json
-  integration:
-    configuration: {}
-    events:
-      creates_events: false
-    metrics:
-      check: []
-      metadata_path: metadata.csv
-      prefix: akamai_datastream.
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_name: Akamai DataStream 2
-author:
-  homepage: https://github.com/DataDog/integrations-extras
-  name: Datadog
-  sales_email: help@datadoghq.com
-  support_email: help@datadoghq.com
-categories:
-- キャッシュ
-- ログの収集
-dependencies:
-- https://github.com/DataDog/integrations-extras/blob/master/akamai_datastream_2/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: akamai_datastream_2
-integration_id: akamai-datastream-2
-integration_title: Akamai DataStream 2
-integration_version: ''
-is_public: true
-custom_kind: integration
-manifest_version: 2.0.0
-name: akamai_datastream_2
-public_title: Akamai DataStream 2
-short_description: Akamai DataStream のログを Datadog に送信
-supported_os:
+"app_id": "akamai-datastream-2"
+"app_uuid": "9a772881-d31a-4ffb-92bb-7beef1088a55"
+"assets":
+  "dashboards":
+    "Akamai DataStream 2": assets/dashboards/akamai_datastream_2_overview.json
+  "integration":
+    "auto_install": true
+    "configuration": {}
+    "events":
+      "creates_events": false
+    "metrics":
+      "check": []
+      "metadata_path": metadata.csv
+      "prefix": akamai_datastream.
+    "service_checks":
+      "metadata_path": assets/service_checks.json
+    "source_type_id": !!int "10273"
+    "source_type_name": Akamai DataStream 2
+"author":
+  "homepage": "https://github.com/DataDog/integrations-extras"
+  "name": Datadog
+  "sales_email": help@datadoghq.com
+  "support_email": help@datadoghq.com
+"categories":
+- caching
+- log collection
+"custom_kind": "integration"
+"dependencies":
+- "https://github.com/DataDog/integrations-extras/blob/master/akamai_datastream_2/README.md"
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "akamai_datastream_2"
+"integration_id": "akamai-datastream-2"
+"integration_title": "Akamai DataStream 2"
+"integration_version": ""
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "akamai_datastream_2"
+"public_title": "Akamai DataStream 2"
+"short_description": "Send your Akamai DataStream logs to Datadog"
+"supported_os":
 - linux
 - windows
 - macos
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Caching
-  - Category::Log Collection
-  - Supported OS::Linux
-  - Supported OS::Windows
-  - Supported OS::macOS
-  configuration: README.md#Setup
-  description: Akamai DataStream のログを Datadog に送信
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Akamai DataStream 2
+"tile":
+  "changelog": CHANGELOG.md
+  "classifier_tags":
+  - "Category::Caching"
+  - "Category::Log Collection"
+  - "Supported OS::Linux"
+  - "Supported OS::Windows"
+  - "Supported OS::macOS"
+  "configuration": "README.md#Setup"
+  "description": Send your Akamai DataStream logs to Datadog
+  "media": []
+  "overview": "README.md#Overview"
+  "resources":
+  - "resource_type": blog
+    "url": "https://www.datadoghq.com/blog/monitor-akamai-datastream2/"
+  "support": "README.md#Support"
+  "title": Akamai DataStream 2
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
-## 概要
+## Overview
 
-Akamai DataStream 2 は、配信プロパティのパフォーマンスおよびセキュリティログをキャプチャします。このインテグレーションは、データを Datadog にほぼリアルタイムでストリーミングし、完全なモニタリングを実現します。
+Akamai DataStream 2 captures performance, security, and CDN health logs for your properties on the Akamai Intelligent Edge Platform. This integration streams the data in near real-time to Datadog.
 
-## セットアップ
+You can use Akamai DataStream 2 logs to gain insight into long term trends, resolve performance and security issues, and monitor high-throughput data delivery streams. See the [DataStream 2 documentation][1] for further details and use cases.
 
-### インストール
+## Setup
 
-Akamai DataStream 2 のログとメトリクスを表示するためのプリセットダッシュボードを有効にするには、**Install Integration** をクリックします。
+### Installation
 
-### コンフィギュレーション
+Click **Install Integration** to enable a preset dashboard for viewing Akamai DataStream 2 logs and metrics.
 
-Akamai DataStream 2 が Datadog にログを送信するよう構成するには、[Akamai techdocs サイト上の以下の説明](https://techdocs.akamai.com/datastream2/docs/stream-datadog)に従って、ログソースを `akamai.datastream` に、ログフォーマットを `JSON` に設定することを確認します。
+### Configuration
 
-### 検証
+To configure Akamai DataStream 2 to send logs to Datadog, follow [these instructions on the
+Akamai techdocs site](https://techdocs.akamai.com/datastream2/docs/stream-datadog), make sure to set the log source to `akamai.datastream` and the log format to `JSON`.
 
-このインテグレーションが正しく構成されていることを確認するには、[ソースが `akamai.datastream` のログを検索][1]します。Akamai でデータストリームを構成した後、Datadog でログが表示されるまで数分待つ必要があるかもしれません。
+Ensure that you have the Datadog Site selector on the right of the page set to your [Datadog Site][2], and copy the logs endpoint URL below:  
 
-## 収集データ
+`https://{{< region-param key="http_endpoint" code="true" >}}/v1/input`
 
-### メトリクス
+### Validation
 
-Akamai DataStream 2 には、メトリクスは含まれません。
+To validate that this integration is configured properly, [search for logs with the source `akamai.datastream`][3]. You may have to wait a few minutes after configuring the datastream in Akamai before logs are visible in Datadog.
 
-### サービスのチェック
+## Data Collected
 
-Akamai DataStream 2 には、サービスのチェック機能は含まれません。
+### Metrics
 
-### イベント
+Akamai DataStream 2 does not include any metrics.
 
-Akamai DataStream 2 には、イベントは含まれません。
+### Service Checks
 
-## トラブルシューティング
+Akamai DataStream 2 does not include any service checks.
 
-ご不明な点は、[Datadog のサポートチーム][2]までお問合せください。
+### Events
 
-## その他の参考資料
+Akamai DataStream 2 does not include any events.
 
-お役に立つドキュメント、リンクや記事:
+## Troubleshooting
 
-- [Datadog で Akamai Datastream 2 を監視する][3]
+Need help? Contact [Datadog support][4].
 
-[1]: https://app.datadoghq.com/logs?query=source%3Aakamai.datastream
-[2]: https://docs.datadoghq.com/ja/help/
-[3]: https://www.datadoghq.com/blog/monitor-akamai-datastream2/
+## Further Reading
+
+Additional helpful documentation, links, and articles:
+
+- [Monitor Akamai Datastream 2 with Datadog][2]
+
+[1]: https://techdocs.akamai.com/datastream2/docs
+[2]: https://www.datadoghq.com/blog/monitor-akamai-datastream2/
+[3]: https://app.datadoghq.com/logs?query=source%3Aakamai.datastream
+[4]: https://docs.datadoghq.com/help/
+

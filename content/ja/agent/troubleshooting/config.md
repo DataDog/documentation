@@ -1,17 +1,18 @@
 ---
-title: Agent ランタイムコンフィギュレーション管理
+title: Agent Runtime Configuration Management
 further_reading:
-  - link: /agent/troubleshooting/debug_mode/
-    tag: Agent のトラブルシューティング
-    text: Agent デバッグモード
+- link: /agent/troubleshooting/debug_mode/
+  tag: Documentation
+  text: Agent Debug Mode
 ---
-Agent 6.19+/7.19+ を実行している場合は、コンフィギュレーションの変更を反映するために Agent を再起動する必要はなく、ランタイム時に一部の設定を動的に変更できます。
 
-**注**: 動的に行われた変更は保持されません。Agent を再起動するとすぐに失われます。
+If you are running Agent 6.19+/7.19+, you can dynamically change some settings at runtime without having to restart the Agent to account for the configuration change.
 
-コマンド `config list-runtime` を使用して、ランタイム時に変更できるコンフィギュレーションパラメーターを一覧表示します。各種プラットフォームでの完全なコマンドについては、以下の表を参照してください。
+**Note**: Changes made dynamically do not persist. They are lost as soon as the Agent is restarted.
 
-| プラットフォーム   | コマンド                                                |
+Use the command `config list-runtime` to list configuration parameters that can be changed at runtime. See the table below for the complete command on different platforms.
+
+| Platform   | Command                                                |
 |------------|--------------------------------------------------------|
 | Docker     | `docker exec datadog-agent agent config list-runtime`  |
 | macOS      | `datadog-agent config list-runtime`                    |
@@ -21,26 +22,26 @@ Agent 6.19+/7.19+ を実行している場合は、コンフィギュレーシ�
 | Fedora     | `sudo datadog-agent config list-runtime`               |
 | Redhat     | `sudo datadog-agent config list-runtime`               |
 | Suse       | `sudo datadog-agent config list-runtime`               |
-| ソース     | `sudo datadog-agent config list-runtime`               |
-| Windows    | [Windows][1]に関する個別のドキュメントをご参照ください。       |
+| Source     | `sudo datadog-agent config list-runtime`               |
+| Windows    | Consult the dedicated [Windows documentation][1]       |
 
-ランタイム時に変更できる 1 つのパラメーターは、ログレベルです。これは、コンテナ化された環境でデバッグを行う場合に便利です。この場合、Agent を実行しているコンテナを破棄して再作成する必要がないため、Agent のコンフィギュレーションを変更できません。Kubernetes デプロイメントでデバッグするログレベルを動的に設定するには、次のコマンドを呼び出します。
+One parameter that can be changed at runtime is the log level. It is convenient for debug purposes in a containerized environment, where the Agent configuration cannot be changed without having to destroy then recreate the container running the Agent. To dynamically set the log level to debug on a Kubernetes deployment, invoke the following command:
 
 ```text
-kubectl exec <ポッド名> agent config set log_level debug
+kubectl exec <POD_NAME> agent config set log_level debug
 ```
 
-`config get <設定>` を使用すると、ランタイム編集が可能な設定の現在の値を取得できます。たとえば、Linux システムで現在のログレベルを取得するには、次のコマンドを使用します。
+It is possible to get the current value of runtime-editable settings by using `config get <SETTING>`. For example, to get the current log level on a Linux system, use:
 
 ```text
 sudo datadog-agent config get log_level
 ```
 
-完全なランタイムコンフィギュレーションは、`config` コマンドを使用して表示することもできます。
+The complete runtime configuration can also be show by using the `config` command.
 
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/agent/basic_agent_usage/windows/#agent-v6
+[1]: /agent/basic_agent_usage/windows/#agent-v6

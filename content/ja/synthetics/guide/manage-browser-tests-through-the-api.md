@@ -1,70 +1,70 @@
 ---
+title: Manage Your Browser Tests Programmatically
+kind: guide
 further_reading:
 - link: /api/latest/synthetics
-  tag: ヘルプ
+  tag: API
   text: Synthetics API
-- link: https://www.datadoghq.com/blog/private-synthetic-monitoring/
-  tag: ブログ
-  text: Datadog Synthetic のプライベートロケーションでオンプレミスアプリケーションをテスト
+- link: "https://www.datadoghq.com/blog/private-synthetic-monitoring/"
+  tag: Blog
+  text: Test on-premises applications with Datadog Synthetic private locations
 - link: /synthetics/browser_tests
-  tag: ドキュメント
-  text: ブラウザテストの詳細
-kind: ガイド
-title: プログラムによるブラウザテストの管理
+  tag: Documentation
+  text: Learn about Browser Tests
 ---
 
-## 概要
+## Overview
 
-アプリケーションをエンドツーエンドで監視することは、ユーザーの体験を理解する上で非常に重要です。[Datadog テストレコーダー][1]を使用すると、これらの複雑なテストワークフローのための構成を簡素化することができます。しかし、プログラムで Synthetics リソースを管理し、API や [Terraform][14] を通じてブラウザテストを定義したいと思うかもしれません。
+Monitoring your application end-to-end is crucial to understanding your users' experience. The [Datadog test recorder][1] allows you to simplify configuration for these complex testing workflows. However, you may want to manage your Synthetics resources programmatically and define browser tests with the API or through [Terraform][14].
 
-## API でブラウザテストを管理する
+## Manage your browser tests with the API
 
-Datadog では、まず Datadog UI でブラウザテストを作成し、API でテストコンフィギュレーションを取得することを推奨しています。
+Datadog recommends creating your browser tests in the Datadog UI first and retrieving your tests configurations with the API.
 
-1. [ブラウザテストの作成][2]と[レコーディングの保存][3]を行います。
-2. Synthetics の全テストのリストを取得するには、[全テストエンドポイント一覧の取得][4]を使用します。
-3. `type: browser` でフィルタリングし、API で管理したいブラウザテストの `public_ids` を取得します。
-4. [ブラウザテストエンドポイントの取得][5]を使用して、すべてのブラウザテストのコンフィギュレーションファイルを取得します。
+1. [Create a browser test][2] and [save a recording][3].
+2. Use the [Get the list of all tests endpoint][4] to retrieve the list of all Synthetics tests.
+3. Filter on `type: browser` and retrieve the `public_ids` of the browser tests you want to manage with the API. 
+4. Use the [Get a browser test endpoint][5] to retrieve the configuration files of every browser test.
 
-ブラウザテストのコンフィギュレーションファイルは、後で使用するために保存したり、プログラムによってブラウザテストを複製、更新、削除するために使用することができます。
+You can store the browser test configuration files for later usage or use them to duplicate, update, and delete your browser tests programmatically.
 
-## Terraform でブラウザテストを管理する
+## Manage your browser tests with Terraform
 
-[Datadog Terraform プロバイダー][6]を用いて、Terraform 構成を介してブラウザテストおよび関連する Synthetics リソースをプログラム的に作成・管理できます。また、既存のリソースを Terraform 構成に[インポート][7]したり、既存のリソースを外部の[データソース][9]として参照することもできます。
+You can use the [Datadog Terraform provider][6] to create and manage browser tests and associated synthetics resources programmatically through a Terraform configuration. You can also [import][7] your existing resources into your Terraform configuration, or reference existing resources as external [data sources][9].
 
-### ブラウザテスト
+### Browser tests
 
-[Synthetic テストリソース][8]を使用して、`type` を `browser` に設定することで、Terraform でブラウザテストを作成・管理することができます。
+The [synthetic test resource][8], with `type` set to `browser`, can be used to create and manage your browser tests through Terraform. 
 
-### プライベートロケーション
+### Private locations
 
-カスタムロケーションや保護されたロケーションから Synthetic テストを実行する必要がある場合は、[プライベートロケーションリソース][10]を使用して、テストを実行するプライベートロケーションを作成および管理できます。[プライベートロケーション][11]のページで詳細をご覧ください。
+If you need to run your synthetic tests from custom or secured locations, you can use the [private location resource][10] to create and manage private locations to run your tests from. Learn more on the [private locations][11] page.
 
-### グローバル変数とローカル変数
+### Global and local variables
 
-[Synthetics グローバル変数リソース][12]を使用して、Synthetics グローバル変数を作成・管理します。これはテスト間で安全に共有できる変数です。また、[config_variable][16] でネストされたスキーマを使用して、テスト固有の[組み込みのローカル変数][15]を作成することもできます。
+Use the [synthetics global variable resource][12] to create and manage synthetics global variables, which are variables that can be securely shared across tests. You can also create test-specific [local variables with builtins][15] by defining the [config_variable][16] nested schema with `type = "text"` in your synthetic test resources.
 
-### 同時実行上限
+### Concurrency cap
 
-[Synthetics の同時実行上限リソース][13]を使用すると、並列で実行される Synthetic テストの数を制限することができます。
+The [synthetics concurrency cap resource][13] enables you to limit the number of synthetic tests run in parallel.
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
-[2]: /ja/getting_started/synthetics/browser_test#create-a-browser-test
-[3]: /ja/getting_started/synthetics/browser_test#create-recording
-[4]: /ja/api/latest/synthetics/#get-the-list-of-all-tests
-[5]: /ja/api/latest/synthetics/#get-a-browser-test
+[2]: /getting_started/synthetics/browser_test#create-a-browser-test
+[3]: /getting_started/synthetics/browser_test#create-recording
+[4]: /api/latest/synthetics/#get-the-list-of-all-tests
+[5]: /api/latest/synthetics/#get-a-browser-test
 [6]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs
 [7]: https://developer.hashicorp.com/terraform/cli/import
 [8]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_test
 [9]: https://developer.hashicorp.com/terraform/language/data-sources
 [10]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_private_location
-[11]: /ja/synthetics/private_locations
+[11]: /synthetics/private_locations
 [12]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_global_variable
 [13]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_concurrency_cap
 [14]: https://www.terraform.io/
-[15]: https://docs.datadoghq.com/ja/synthetics/api_tests/http_tests/?tab=requestoptions#create-local-variables
+[15]: https://docs.datadoghq.com/synthetics/api_tests/http_tests/?tab=requestoptions#create-local-variables
 [16]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_test#nested-schema-for-config_variable

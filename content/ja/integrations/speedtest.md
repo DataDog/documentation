@@ -1,128 +1,129 @@
 ---
-app_id: speedtest
-app_uuid: 550862f8-f1d1-4924-b802-185b865e09a4
-assets:
-  dashboards:
-    Speedtest: assets/dashboards/speedtest.json
-  integration:
-    auto_install: true
-    configuration:
-      spec: assets/configuration/spec.yaml
-    events:
-      creates_events: false
-    metrics:
-      check: speedtest.download.bandwidth
-      metadata_path: metadata.csv
-      prefix: speedtest.
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 10119
-    source_type_name: speedtest
-author:
-  homepage: https://github.com/DataDog/integrations-extras
-  name: コミュニティ
-  sales_email: cody.lee@datadoghq.com
-  support_email: cody.lee@datadoghq.com
-categories:
+"app_id": "speedtest"
+"app_uuid": "550862f8-f1d1-4924-b802-185b865e09a4"
+"assets":
+  "dashboards":
+    "Speedtest": assets/dashboards/speedtest.json
+  "integration":
+    "auto_install": true
+    "configuration":
+      "spec": assets/configuration/spec.yaml
+    "events":
+      "creates_events": false
+    "metrics":
+      "check": speedtest.download.bandwidth
+      "metadata_path": metadata.csv
+      "prefix": speedtest.
+    "service_checks":
+      "metadata_path": assets/service_checks.json
+    "source_type_id": !!int "10119"
+    "source_type_name": speedtest
+"author":
+  "homepage": "https://github.com/DataDog/integrations-extras"
+  "name": Community
+  "sales_email": cody.lee@datadoghq.com
+  "support_email": cody.lee@datadoghq.com
+"categories":
 - developer tools
-- ネットワーク
-- テスト
-dependencies:
-- https://github.com/DataDog/integrations-extras/blob/master/speedtest/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: speedtest
-integration_id: speedtest
-integration_title: speedtest
-integration_version: 1.0.0
-is_public: true
-custom_kind: integration
-manifest_version: 2.0.0
-name: speedtest
-public_title: speedtest
-short_description: speedtest-cli を使用して Speedtest の結果を実行します
-supported_os:
+- network
+- testing
+"custom_kind": "integration"
+"dependencies":
+- "https://github.com/DataDog/integrations-extras/blob/master/speedtest/README.md"
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "speedtest"
+"integration_id": "speedtest"
+"integration_title": "speedtest"
+"integration_version": "1.0.0"
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "speedtest"
+"public_title": "speedtest"
+"short_description": "Runs Speedtest results using speedtest-cli"
+"supported_os":
 - linux
 - windows
 - macos
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Developer Tools
-  - Category::Network
-  - Category::Testing
-  - Supported OS::Linux
-  - Supported OS::Windows
-  - Supported OS::macOS
-  configuration: README.md#Setup
-  description: speedtest-cli を使用して Speedtest の結果を実行します
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: speedtest
+"tile":
+  "changelog": CHANGELOG.md
+  "classifier_tags":
+  - "Category::Developer Tools"
+  - "Category::Network"
+  - "Category::Testing"
+  - "Supported OS::Linux"
+  - "Supported OS::Windows"
+  - "Supported OS::macOS"
+  "configuration": "README.md#Setup"
+  "description": Runs Speedtest results using speedtest-cli
+  "media": []
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": speedtest
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
-## 概要
+## Overview
 
-このチェックは、Datadog Agent を通じて [Speedtest][1] を監視します。
+This check monitors [Speedtest][1] through the Datadog Agent.
 
-## 計画と使用
+## Setup
 
-Speedtest チェックは [Datadog Agent][2] パッケージに含まれていないため、お客様自身でインストールする必要があります。
+The Speedtest check is not included in the [Datadog Agent][2] package, so you need to install it.
 
-### インフラストラクチャーリスト
+### Installation
 
-Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Speedtest チェックをホストにインストールします。Docker Agent または 上記バージョン以前の Agent でインストールする場合は、[コミュニティインテグレーションの使用][3]をご参照ください。
+For Agent v7.21+ / v6.21+, follow the instructions below to install the Speedtest check on your host. See [Use Community Integrations][3] to install with the Docker Agent or earlier versions of the Agent.
 
-1. 以下のコマンドを実行して、Agent インテグレーションをインストールします。
+1. Run the following command to install the Agent integration:
 
    ```shell
    datadog-agent integration install -t datadog-speedtest==<INTEGRATION_VERSION>
    ```
 
-2. コアの[インテグレーション][4]と同様にインテグレーションを構成します。
+2. Configure your integration similar to core [integrations][4].
 
-**注**: すべてのホストについて、[Speedtest CLI][1] をインストールし、使用前に Datadog Agent ユーザー (例: `sudo -u dd-agent speedtest`) として契約に同意する必要があります。
+**Note**: For all hosts, you need to install the [Speedtest CLI][1] and accept the agreement as the Datadog Agent user prior to use, for example: `sudo -u dd-agent speedtest`.
 
-### ブラウザトラブルシューティング
+### Configuration
 
-1. Speedtest のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `speedtest.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[speedtest.d/conf.yaml のサンプル][5]を参照してください。
+1. Edit the `speedtest.d/conf.yaml` file, in the `conf.d/` folder at the root of your Agent's configuration directory to start collecting your Speedtest performance data. See the [sample speedtest.d/conf.yaml][5] for all available configuration options.
 
-2. [Agent を再起動します][6]。
+2. [Restart the Agent][6].
 
-### 検証
+### Validation
 
-[Agent の statusサブコマンド][7]を実行し、Checks セクションで `speedtest` を探します。
+Run the [Agent's status subcommand][7] and look for `speedtest` under the Checks section.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "speedtest" >}}
 
 
-### ヘルプ
+### Events
 
-Speedtest チェックには、イベントは含まれません。
+The Speedtest check does not include any events.
 
-### ヘルプ
+### Service Checks
 {{< get-service-checks-from-git "speedtest" >}}
 
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
+Need help? Contact [Datadog support][10].
 
 
 [1]: https://www.speedtest.net/apps/cli
 [2]: https://app.datadoghq.com/account/settings/agent/latest
-[3]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/
-[4]: https://docs.datadoghq.com/ja/getting_started/integrations/
+[3]: https://docs.datadoghq.com/agent/guide/use-community-integrations/
+[4]: https://docs.datadoghq.com/getting_started/integrations/
 [5]: https://github.com/DataDog/integrations-extras/blob/master/speedtest/datadog_checks/speedtest/data/conf.yaml.example
-[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[6]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[7]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
 [8]: https://github.com/DataDog/integrations-extras/blob/master/speedtest/metadata.csv
 [9]: https://github.com/DataDog/integrations-extras/blob/master/speedtest/assets/service_checks.json
-[10]: https://docs.datadoghq.com/ja/help/
+[10]: https://docs.datadoghq.com/help/
+

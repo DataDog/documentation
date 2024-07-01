@@ -1,78 +1,79 @@
 ---
-app_id: システム
-app_uuid: 43bff15c-c943-4153-a0dc-25bb557ac763
-assets:
-  integration:
-    configuration:
-      spec: assets/configuration/spec.yaml
-    events:
-      creates_events: false
-    metrics:
-      check: system.processes.cpu.pct
-      metadata_path: metadata.csv
-      prefix: system.
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_name: プロセス
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com
-  support_email: help@datadoghq.com
-categories:
-- os & system
-dependencies:
-- https://github.com/DataDog/integrations-core/blob/master/process/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: プロセス
-integration_id: システム
-integration_title: プロセス
-integration_version: 3.0.0
-is_public: true
-kind: インテグレーション
-manifest_version: 2.0.0
-name: プロセス
-public_title: プロセス
-short_description: 実行中のプロセスのメトリクスをキャプチャし、ステータスを監視します。
-supported_os:
-- linux
-- macos
-- windows
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::OS & System
-  configuration: README.md#Setup
-  description: 実行中のプロセスのメトリクスをキャプチャし、ステータスを監視します。
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: プロセス
+"app_id": "system"
+"app_uuid": "43bff15c-c943-4153-a0dc-25bb557ac763"
+"assets":
+  "integration":
+    "configuration":
+      "spec": "assets/configuration/spec.yaml"
+    "events":
+      "creates_events": false
+    "metrics":
+      "check": "system.processes.cpu.pct"
+      "metadata_path": "metadata.csv"
+      "prefix": "system."
+    "service_checks":
+      "metadata_path": "assets/service_checks.json"
+    "source_type_name": "Process"
+"author":
+  "homepage": "https://www.datadoghq.com"
+  "name": "Datadog"
+  "sales_email": "info@datadoghq.com"
+  "support_email": "help@datadoghq.com"
+"categories":
+- "os & system"
+"custom_kind": "integration"
+"dependencies":
+- "https://github.com/DataDog/integrations-core/blob/master/process/README.md"
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "process"
+"integration_id": "system"
+"integration_title": "Processes"
+"integration_version": "3.3.0"
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "process"
+"public_title": "Processes"
+"short_description": "Capture metrics and monitor the status of running processes."
+"supported_os":
+- "linux"
+- "macos"
+- "windows"
+"tile":
+  "changelog": "CHANGELOG.md"
+  "classifier_tags":
+  - "Supported OS::Linux"
+  - "Supported OS::macOS"
+  - "Supported OS::Windows"
+  - "Category::OS & System"
+  "configuration": "README.md#Setup"
+  "description": "Capture metrics and monitor the status of running processes."
+  "media": []
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": "Processes"
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## 概要
+## Overview
 
-プロセスチェックを使用して、以下のことができます。
-- 任意のホスト上で実行されている特定プロセスのリソース使用状況メトリクスを収集できます。たとえば、CPU、メモリ、I/O、スレッド数などです。
-- [プロセスモニター][1]を使用して、実行されなければならない特定プロセスのインスタンス数にしきい値を設定し、そのしきい値が満たされない場合にアラートを発行します (下の**サービスのチェック**を参照)。
+The Process Check lets you:
+- Collect resource usage metrics for specific running processes on any host. For example, CPU, memory, I/O, and number of threads.
+- Use [Process Monitors][1] to configure thresholds for how many instances of a specific process should be running and get alerts when the thresholds aren't met (see **Service Checks** below).
 
-## セットアップ
+## Setup
 
-### インストール
+### Installation
 
-プロセスチェックは [Datadog Agent][2] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
+The Process check is included in the [Datadog Agent][2] package, so you don't need to install anything else on your server.
 
-### コンフィギュレーション
+### Configuration
 
-他の多くのチェックとは異なり、デフォルトのプロセスチェックは、特に役立つ監視を行いません。どのプロセスを監視するかを構成する必要があります。
+Unlike many checks, the Process check doesn't monitor anything useful by default. You must configure which processes you want to monitor.
 
-標準的なデフォルトのチェックコンフィギュレーションはありませんが、以下に SSH/SSHD 処理を監視する `process.d/conf.yaml` の例を示します。使用可能なすべての構成オプションの詳細については、[サンプル process.d/conf.yaml][3] を参照してください。
+While there's no standard default check configuration, here's an example `process.d/conf.yaml` that monitors SSH/SSHD processes. See the [sample process.d/conf.yaml][3] for all available configuration options:
 
 ```yaml
 init_config:
@@ -83,69 +84,75 @@ instances:
     - sshd
 ```
 
-**注**: 構成の変更後は、必ず [Agent を再起動][4]してください。
+**Note**: After you make configuration changes, make sure you [restart the Agent][4].
 
-一部のプロセスメトリクスを取得するには、Datadog コレクターを監視対象プロセスのユーザーとして実行するか、特権的なアクセスを与えて実行する必要があります。Unix プラットフォームの  `open_file_descriptors` メトリクスについては、追加の構成オプションがあります。`conf.yaml` ファイルで `try_sudo` を `true` に設定すると、プロセスチェックは `sudo` を使用して `open_file_descriptors` メトリクスの収集を試みることができます。この構成オプションを使用するには、`/etc/sudoers` で適切な sudoers ルールを設定する必要があります。
+Retrieving some process metrics requires the Datadog collector to either run as the monitored process user or with privileged access. For the `open_file_descriptors` metric on Unix platforms, there is an additional configuration option. Setting `try_sudo` to `true` in your `conf.yaml` file allows the Process check to try using `sudo` to collect the `open_file_descriptors` metric. Using this configuration option requires setting the appropriate sudoers rules in `/etc/sudoers`:
 
 ```shell
 dd-agent ALL=NOPASSWD: /bin/ls /proc/*/fd/
 ```
 
-### 検証
+### Validation
 
-[Agent の status サブコマンド][5]を実行し、Checks セクションで `process` を探します。
+Run the [Agent's status subcommand][5] and look for `process` under the Checks section.
 
-### メトリクスに関するメモ
+### Metrics notes
 
-以下のメトリクスは、Linux および macOS では使用できません。
-- Agent が読み取るファイル (`/proc//io`) はプロセスのオーナーのみ読み取り可能であるため、Process I/O メトリクスは Linux または macOS では使用**できません**。詳しくは、[Agent FAQ をご参照ください][6]。
+The following metrics are not available on Linux or macOS:
+- Process I/O metrics are **not** available on Linux or macOS since the files that the Agent reads (`/proc//io`) are only readable by the process's owner. For more information, [read the Agent FAQ][6].
 
-以下のメトリクスは、Windows では使用できません。
+The following metrics are not available on Windows:
 - `system.cpu.iowait`
 - `system.processes.mem.page_faults.minor_faults`
 - `system.processes.mem.page_faults.children_minor_faults`
 - `system.processes.mem.page_faults.major_faults`
 - `system.processes.mem.page_faults.children_major_faults`
 
-**注**: Windows でページフォールトメトリクスを収集するには、[WMI チェック][7]を使用します。
+**Note**: Use a [WMI check][7] to gather page fault metrics on Windows.
 
-すべてのメトリクスは process.yaml で構成された `instance` ごとに収集され、`process_name:<instance_name>` のタグが付きます。
+**Note**: In v6.11+ on Windows, the Agent runs as `ddagentuser` instead of `Local System`. Because of [this][8], it does not have access to the full command line of processes running under other users and to the user of other users' processes. This causes the following options of the check to not work:
+- `exact_match` when set to `false`
+- `user`, which allows selecting processes that belong to a specific user
 
-このチェックにより送信される `system.processes.cpu.pct` メトリクスは、30 秒間以上存在する処理でのみ正確です。
-それ以下の短い処理の場合、その値は正確でない場合があります。
+All metrics are per `instance` configured in process.yaml, and are tagged `process_name:<instance_name>`.
 
-メトリクスの完全なリストについては、[メトリクスセクション](#metrics)を参照してください。
+The `system.processes.cpu.pct` metric sent by this check is only accurate for processes that live for more 
+than 30 seconds. Do not expect its value to be accurate for shorter-lived processes.
 
-## 収集データ
+For the full list of metrics, see the [Metrics section](#metrics).
 
-### メトリクス
+## Data Collected
+
+### Metrics
 {{< get-metrics-from-git "process" >}}
 
 
-### イベント
+### Events
 
-プロセスチェックには、イベントは含まれません。
+The Process Check does not include any events.
 
-### サービスのチェック
+### Service Checks
 {{< get-service-checks-from-git "process" >}}
 
 
-## トラブルシューティング
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
+Need help? Contact [Datadog support][11].
 
-## その他の参考資料
+## Further Reading
 
-プロセスのリソース消費を監視する方法 (または理由) について理解するには、こちらの[ブログ記事][11]を参照してください。
+To get a better idea of how (or why) to monitor process resource consumption with Datadog, check out this [series of blog posts][12] about it.
 
-[1]: https://docs.datadoghq.com/ja/monitors/create/types/process_check/?tab=checkalert
+[1]: https://docs.datadoghq.com/monitors/create/types/process_check/?tab=checkalert
 [2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://github.com/DataDog/integrations-core/blob/master/process/datadog_checks/process/data/conf.yaml.example
-[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[6]: https://docs.datadoghq.com/ja/agent/faq/why-don-t-i-see-the-system-processes-open-file-descriptors-metric/
-[7]: https://docs.datadoghq.com/ja/integrations/wmi_check/
-[8]: https://github.com/DataDog/integrations-core/blob/master/process/metadata.csv
-[9]: https://github.com/DataDog/integrations-core/blob/master/process/assets/service_checks.json
-[10]: https://docs.datadoghq.com/ja/help/
-[11]: https://www.datadoghq.com/blog/process-check-monitoring
+[4]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[5]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
+[6]: https://docs.datadoghq.com/agent/faq/why-don-t-i-see-the-system-processes-open-file-descriptors-metric/
+[7]: https://docs.datadoghq.com/integrations/wmi_check/
+[8]: https://docs.datadoghq.com/agent/guide/windows-agent-ddagent-user/#process-check
+[9]: https://github.com/DataDog/integrations-core/blob/master/process/metadata.csv
+[10]: https://github.com/DataDog/integrations-core/blob/master/process/assets/service_checks.json
+[11]: https://docs.datadoghq.com/help/
+[12]: https://www.datadoghq.com/blog/process-check-monitoring
+

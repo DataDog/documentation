@@ -1,120 +1,137 @@
 ---
-title: Watchdog アラート
+title: Watchdog Alerts
+kind: documentation
 ---
 
-## 概要
+## Overview
 
-Watchdog はシステムおよびアプリケーション上の異常をプロアクティブに探します。そして、異常の発生状況、他のシステムへの影響、根本原因などの情報が [Watchdog アラートエクスプローラー][1]に表示されます。
+Watchdog proactively looks for anomalies on your systems and applications. Each anomaly is then displayed in the [Watchdog Alert Explorer][1] with more information about what happened, the possible impact on other systems, and the root cause.
 
-{{< img src="watchdog/watchdog.png" alt="エラーログの進行中のログ異常アラートが 1 つ、エラーログの解決済みログ異常アラートが 1 つ、根本原因分析によって解決されたエラーレートアラートが 1 つ表示されている Watchdog Alerts ページ" >}}
+{{< img src="watchdog/watchdog.png" alt="The Watchdog Alerts page with one ongoing log anomaly alert for error logs, one resolved log anomaly alert for error logs, and one resolved error rate alert resolved through root cause analysis" >}}
 
-## Watchdog アラートの詳細
+## Watchdog Alert details
 
-アラート概要カードには、以下の項目があります。
+An alert overview card contains the sections below:
 
-{{< img src="watchdog/alerts/alerts_overview.png" alt="sms-service の send-sms エンドポイントにおけるエラーレートの上昇を示す Watchdog アラートカードのスクリーンショット" style="width:100%;">}}
+{{< img src="watchdog/alerts/alerts_overview.png" alt="Screenshot of a Watchdog alert card, showing an elevated error rate on the send-sms endpoint in sms-service" style="width:100%;">}}
 
-1. **Status**: 異常は `ongoing` (進行中)、`resolved` (解決済み)、`expired` (期限切れ) のいずれかになります (48 時間以上継続中の異常は `expired` です)。
-3. **Timeline**: 異常が発生した期間が記述されます。
-4. **Message**: 異常の内容が説明されます。
-5. **Graph**: 異常が視覚的に表現されます。
-6. **Tags**: 異常の範囲が表示されます。
-7. [**Impact**][4] (利用可能な場合): 異常がどのユーザー、ビュー、またはサービスに影響を及ぼすかが説明されます。
+1. **Status**: The anomaly can be `ongoing`, `resolved`, or `expired`. (An anomaly is `expired` if it has been ongoing for over 48 hours.)
+3. **Timeline**: Describes the time period over which the anomaly occurs.
+4. **Message**: Describes the anomaly.
+5. **Graph**: Visually represents the anomaly.
+6. **Tags**: Shows the scope of the anomaly.
+7. [**Impact**][4] (when available): Describes which users, views, or services the anomaly affects.
 
-アラート概要カードの任意の場所をクリックすると、アラートの詳細ペインが表示されます。
+Clicking anywhere on an alert overview card opens the alerts details pane.
 
-アラート概要カードの情報を繰り返すだけでなく、**Overview** タブには、以下のフィールドを 1 つ以上含めることができます。
+In addition to repeating the information in the alert overview card, the **Overview** tab may contain one or more of the following fields:
 
-* **Expected Bounds**: **Show expected bounds** チェックボックスをクリックします。グラフの色が変わり、予想される動作と異常な動作が区別されます。
-* **Suggested Next Steps**: 異常な動作の調査およびトリアージの手順が説明されます。
-* **Monitors**: アラートに関連付けされたモニターがリストされます。表示されるモニターにはそれぞれ、現在のアラートのメトリクスとそのスコープに含まれる関連タグがあります。
+* **Expected Bounds**: Click the **Show expected bounds** checkbox. The graph changes color to differentiate between expected and anomalous behavior.
+* **Suggested Next Steps**: Describes steps for investigation and triage of the anomalous behavior.
+* **Monitors**: Lists monitors associated with your alert. Each monitor displayed has the metric of the current alert and its associated tags included in its scope.
 
-さらに、Watchdog は異常が再発した際に通知するために作成可能な 1 つ以上のモニターを提案します。これらのモニターはまだ存在していないため、テーブルではその状態が `suggested` として記載されています。**Enable Monitor** をクリックして、組織に提案されたモニターを有効にします。一連のアイコンがポップアップ表示され、新しいモニターを開く、編集する、複製する、ミュートする、または削除することができます。
+Additionally, Watchdog suggests one or more monitors you can create to notify you if the anomaly happens again. These monitors do not exist yet, so the table lists their status as `suggested`. Click **Enable Monitor** to enable the suggested monitor for your organization. A series of icons pops up allowing you to open, edit, clone, mute, or delete the new monitor.
 
-## Watchdog アラートエクスプローラー
+## Watchdog Alert Explorer
 
-Watchdog アラートフィードの絞り込みには、タイムレンジ、検索バー、ファセットを使用できます。
+You can use the time range, search bar, or facets to filter your Watchdog Alerts feed.
 
-* **タイムレンジ**: 右上にあるタイムレンジセレクターを使用し、特定の時間範囲内で検出されたアラートを表示します。過去 6 か月までのアラートを表示できます。
-* **検索バー**: **Filter alerts** 検索ボックスにテキストを入力すると、アラートのタイトルを検索できます。
-* **ファセット**: Watchdog アラートフィードの左側には、以下の検索ファセットがあります。対応するボックスにチェックを入れると、アラートをファセットで絞り込むことができます。
+* **Time range**: Use the time range selector in the upper right to view alerts detected in a specific time range. You can view any alert that happened in the last 6 months.
+* **Search bar**: Enter text in the **Filter alerts** search box to search over alert titles.
+* **Facets**: The left side of the Watchdog Alerts feed contains the search facets below. Check the corresponding boxes to filter your alerts by facet.
 
-利用可能なファセット:
+Available facets: 
 
-| すべてのアラートグループ    | 説明                                                                     |
+| All Alerts Group    | Description                                                                     |
 |---------------------|---------------------------------------------------------------------------------|
-| アラートカテゴリ      | すべての `apm`、`infrastructure` または `logs` アラートを表示。                          |
-| アラートタイプ          | APM やインフラストラクチャーインテグレーションのメトリクスを使用してアラートを選択します。            |
-| Alert Status        | ステータス (`ongoing` (進行中)、`resolved` (解決済み)、`expired` (期限切れ)) に基づいてアラートを選択します。     |
-| APM プライマリタグ     | 表示するアラートのある[定義済み APM プライマリタグ][6]。                        |
-| 環境         | 表示するアラートのある環境。`env` タグの詳細については、[統合サービスタグ付け][5]を参照してください。|
-| サービス             | 表示するアラートのあるサービス。`service` タグの詳細については、[統合サービスタグ付け][5]を参照してください。|
-| End User Impacted   | (要 RUM)。Watchdog が影響を受けるエンドユーザーを発見した場合。詳細については、[影響分析][4]を参照してください。 |
-| Root Cause          | (要 APM)。Watchdog が異常または重大な障害の根本原因を発見した場合。詳細は[根本原因分析][9]を参照してください。 |
-| チーム                | 影響を受けるサービスを担当するチーム。[サービスカタログ][7]からリッチ化されます。  |
-| ログ異常の種類    | この種類のログ異常のみ表示します。サポートされている種類は、新しいログパターンと、既存のログパターンの増加です。|
-| ログのソース          | このソースからのログを含むアラートのみ表示します。                           |
-| ログのステータス          | このログステータスのログを含むアラートのみ表示します。                         |
+| Alert Category      | Display all `apm`, `infrastructure`, or `logs` alerts.                          |
+| Alert Type          | Select alerts using metrics from APM or infrastructure integrations.            |
+| Alert Status        | Select alerts based on their status (`ongoing`, `resolved`, or `expired`).     |
+| APM Primary Tag     | The [defined APM primary tag][6] to display alerts from.                        |
+| Environment         | The environment to display alerts from. See [Unified Service Tagging][5] for more information about the `env` tag.|
+| Service             | The service to display alerts from. See [Unified Service Tagging][5] for more information about the `service` tag.|
+| End User Impacted   | (Requires RUM). If Watchdog found any end users impacted. See [Impact Analysis][4] for more information. |
+| Root Cause          | (Requires APM). If Watchdog found the root cause of the anomaly or the critical failure. See [Root Cause Analysis][9] for more information. |
+| Team                | The team owning the impacted services. Enriched from the [Service Catalog][7].  |
+| Log Anomaly Type    | Only display log anomalies of this type. The supported types are new log patterns and increases in existing log patterns.|
+| Log Source          | Only display alerts containing logs from this source.                           |
+| Log Status          | Only display alerts containing logs of this log status.                         |
 
-## Watchdog アラートカバレッジ
+## Watchdog Alerts coverage
 
-Watchdog アラートは、複数のアプリケーションとインフラストラクチャーのメトリクスをカバーしています。
+Watchdog Alerts cover multiple application and infrastructure metrics:
 
 {{< tabs >}}
-{{% tab "ログ管理" %}}
+{{% tab "Log Management" %}}
 
-取り込まれたログはインテークレベルで分析され、Watchdog が検出したパターンと `environment`、`service`、`source`、`status` タグについて集計を行います。
-これらの集計されたログは、以下のような異常な動作がないかスキャンされます。
+Ingested logs are analyzed at the intake level where Watchdog performs aggregations on detected patterns as well as `environment`, `service`, `source`, and `status` tags.
+These aggregated logs are scanned for anomalous behaviors, such as the following:
 
-* 警告またはエラーステータスを持つログの出現。
-* 警告やエラーステータスのログの急増。
+* An emergence of logs with a warning or error status.
+* A sudden increase of logs with a warning or error status.
 
-すべてのログ異常はログエクスプローラーに[インサイト][3]として表示され、検索コンテキストとロールに適用された制限に一致します。
-Watchdog が特に `severe` (重大) と判断したログ異常は [Watchdog アラートエクスプローラー][1]に表示され、[Watchdog ログモニター][2] をセットアップすることでアラートを発することができます。
-`severe` (重大) な異常とは以下のように定義されます。
+All log anomalies are surfaced as [Insights][3] in the Log Explorer, matching the search context and any restrictions applied to your role.
+Log anomalies that Watchdog determines to be particularly `severe` are surfaced in the [Watchdog Alert Explorer][1] and can be alerted on by setting up a [Watchdog logs monitor][2].
+A `severe` anomaly is defined as:
 
-* エラーログが含まれている。
-* 10 分以上続いている (一時的なエラーを除外するため)。
-* 大幅に増加している (小幅な増加を除外するため)。
-* `noise` スコアが低く設定されている (特定のサービスに対して過多なアラートを避けるため)。`noise` スコアはサービスレベルで次のように計算されます。
-    * エラーパターンの数を見る (多いほどノイズが多い)。
-    * パターンが互いにどれだけ近いかを計算する (近いほどノイズが多い)。
+* Containing error logs.
+* Lasting at least 10 minutes (to avoid transient errors).
+* Having a significant increase (to avoid small increases).
+* Having a low `noise` score (to avoid having a lot of alerts for a given service). The `noise` score is calculated at the service level by:
+    * Looking at the number of error patterns (the higher, the noisier).
+    * Computing how close the patterns are to each other (the closer, the noisier).
 
-#### 必要なデータ履歴
+#### Required data history
 
-Watchdog は予想される動作のベースラインを確立するために、ある程度のデータが必要です。ログ異常に関しては、最低限必要な履歴は 24 時間です。
-最低限の履歴が揃った後、Watchdog は異常を検出し始め、履歴が増えるほどに改善されます。最も良いパフォーマンスは 6 週間の履歴で得られます。
+Watchdog requires some data to establish a baseline of expected behavior. For log anomalies, the minimum history is 24 hours. 
+Watchdog starts finding anomalies after the minimum required history is available, and Watchdog improves as history grows. Best performances are obtained with six weeks of history. 
 
-#### ログ異常検出を無効にする
+#### Disabling log anomaly detection
 
-ログ異常検出を無効にするには、[ログ管理パイプラインページ][4]に移動し、Log Anomalies トグルをクリックします。
+To disable log anomaly detection, go to the [Log Management pipeline page][4] and click the Log Anomalies toggle.
 
 [1]: https://app.datadoghq.com/watchdog
-[2]: /ja/monitors/types/watchdog/
-[3]: /ja/watchdog/insights?tab=logmanagement#explore-insights
+[2]: /monitors/types/watchdog/
+[3]: /watchdog/insights?tab=logmanagement#explore-insights
 [4]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
 {{% tab "APM" %}}
 
-Watchdog はすべてのサービスとリソースをスキャンして、以下のメトリクスに異常がないか調べます。
+Watchdog scans all services and resources to look for anomalies on the following metrics:
 
-  * エラー率
-  * レイテンシー
-  * ヒット数（リクエスト率）
+  * Error rate
+  * Latency
+  * Hits (request rate)
 
-Watchdog はほとんど使われていないエンドポイントやサービスを除外することで、ノイズを減らし、少ないトラフィックにおける異常の検出を避けます。また、ヒットレートに異常があってもレイテンシーやエラーレートに影響がなければ、その異常は無視されます。
+Watchdog filters out barely-used endpoints or services to reduce noise and avoid anomalies on small amounts of traffic. Additionally, if an anomaly on hit rate is detected but has no impact on latency or error rate, the anomaly is then ignored. 
 
-#### 必要なデータ履歴
+#### Required data history
 
-Watchdog は予想される動作のベースラインを確立するために、ある程度のデータが必要です。メトリクス異常に関しては、最低限必要な履歴は 2 週間です。
-最低限の履歴が揃った後、Watchdog は異常を検出し始め、履歴が増えるほどに改善されます。最も良いパフォーマンスは 6 週間の履歴で得られます。
+Watchdog requires some data to establish a baseline of expected behavior. For metric anomalies, the minimum history is two weeks. 
+Watchdog starts finding anomalies after the minimum required history is available, and Watchdog improves as history grows. Best performances are obtained with six weeks of history.
+
+{{% /tab %}}
+{{% tab "USM" %}}
+
+Watchdog scans all services and resources to look for anomalies on the following metrics:
+
+  * Error rate
+  * Latency
+  * Hits (request rate)
+
+Watchdog filters out minimally-used endpoints and services to reduce noise and avoid anomalies on small amounts of traffic. Additionally, if an anomaly on hit rate is detected but has no impact on latency or error rate, the anomaly is ignored. 
+
+#### Required data history
+
+Watchdog requires data to establish a baseline of expected behavior. For metric anomalies, the minimum history is two weeks. 
+Watchdog starts finding anomalies after the minimum required history is available, and Watchdog improves as history grows. Best performances are obtained with six weeks of history.
 
 {{% /tab %}}
 {{% tab "Infrastructure" %}}
 
-Watchdog は以下のインテグレーションからインフラストラクチャーメトリクスを調べます。
+Watchdog looks at infrastructure metrics from the following integrations:
 
-  * [システム][1]: ホストレベルのメモリ使用量 (メモリリーク) と TCP 再送率。
+  * [System][1], for host-level memory usage (memory leaks) and TCP retransmit rate.
   * [Redis][2]
   * [PostgreSQL][3]
   * [NGINX][4]
@@ -129,75 +146,75 @@ Watchdog は以下のインテグレーションからインフラストラク�
     * [ECS][11]
     * [Lambda][12]
 
-#### 必要なデータ履歴
+#### Required data history
 
-Watchdog は予想される動作のベースラインを確立するために、ある程度のデータが必要です。メトリクス異常に関しては、最低限必要な履歴は 2 週間です。
-最低限の履歴が揃った後、Watchdog は異常を検出し始め、履歴が増えるほどに改善されます。最も良いパフォーマンスは 6 週間の履歴で得られます。
+Watchdog requires some data to establish a baseline of expected behavior. For metric anomalies, the minimum history is two weeks. 
+Watchdog starts finding anomalies after the minimum required history is available, and Watchdog improves as history grows. Best performances are obtained with six weeks of history.
 
-[1]: /ja/integrations/system/
-[2]: /ja/integrations/redisdb/
-[3]: /ja/integrations/postgres/
-[4]: /ja/integrations/nginx/
-[5]: /ja/integrations/amazon_web_services/
-[6]: /ja/integrations/amazon_s3/
-[7]: /ja/integrations/amazon_elb/
-[8]: /ja/integrations/amazon_cloudfront/
-[9]: /ja/integrations/amazon_dynamodb/
-[10]: /ja/integrations/amazon_rds/
-[11]: /ja/containers/amazon_ecs/?tab=awscli
-[12]: /ja/serverless/
-[13]: /ja/containers/docker/?tab=standard
-[14]: /ja/containers/kubernetes/installation/?tab=operator
+[1]: /integrations/system/
+[2]: /integrations/redisdb/
+[3]: /integrations/postgres/
+[4]: /integrations/nginx/
+[5]: /integrations/amazon_web_services/
+[6]: /integrations/amazon_s3/
+[7]: /integrations/amazon_elb/
+[8]: /integrations/amazon_cloudfront/
+[9]: /integrations/amazon_dynamodb/
+[10]: /integrations/amazon_rds/
+[11]: /containers/amazon_ecs/?tab=awscli
+[12]: /serverless/
+[13]: /containers/docker/?tab=standard
+[14]: /containers/kubernetes/installation/?tab=operator
 {{% /tab %}}
 {{< /tabs >}}
 
-### カスタム異常検出
+### Custom anomaly detection
 
-Watchdog は、モニターやダッシュボードと同じ季節性アルゴリズムを使用しています。他のメトリクスに異常がないか探したり、感度をカスタマイズするには、以下のアルゴリズムが利用可能です。
+Watchdog uses the same seasonal algorithms that power monitors and dashboards. To look for anomalies on other metrics or to customize the sensitivity, the following algorithms are available:
 
-* [異常検知モニター][10]
-* [予測モニター][11]
-* [外れ値モニター][12]
+* [Anomaly monitors][10]
+* [Forecast monitors][11]
+* [Outlier monitors][12]
 
-## Watchdog アラートの入手先
+## Where to find Watchdog Alerts
 
-Datadog 内で Watchdog アラートが表示される場所は以下の通りです。
+Watchdog Alerts appear in the following places within Datadog:
 
-* [Watchdog アラートエクスプローラー][1]
-* 個別の [APM サービス詳細画面][3]
-* [サービスカタログ][7]内
-* [Watchdog Insights パネル][8]内、すべてのエクスプローラーで使用できます
+* The [Watchdog Alert Explorer][1]
+* On any individual [APM Service Page][3]
+* In the [Service Catalog][7]
+* In the [Watchdog Insights panel][8], available on all explorers 
 
-### APM ページの Watchdog 双眼鏡
+### Watchdog binoculars on APM pages
 
-Watchdog が APM メトリクスに異常を検出すると、[APM サービスカタログ][7]の影響を受けるサービスの横にピンクの Watchdog 双眼鏡アイコンが表示されます。
+When Watchdog detects an irregularity in an APM metric, the pink Watchdog binoculars icon appears next to the impacted service in the [APM Service Catalog][7].
 
-{{< img src="watchdog/service_list.png" alt="サービスカタログの画面、5 つのサービスが表示されています。Web ストアのサービス名の後にピンクの双眼鏡のアイコンがついています。" style="width:75%;" >}}
+{{< img src="watchdog/service_list.png" alt="Screenshot of the Service Catalog, showing 5 services. A pink binoculars icon follows the name of the web-store service." style="width:75%;" >}}
 
-[Watchdog Insights][8] カルーセルで[サービス詳細画面][3]のトップに移動すると、メトリクス異常の詳細を確認することができます。
+You can see greater detail about a metric anomaly by navigating to the top of a [Service Page][3] with the [Watchdog Insights][8] carousel.
 
-Watchdog のアイコンは、メトリクスグラフにも表示されます。
+You can also find the Watchdog icon on metric graphs.
 
-{{< img src="watchdog/latency_graph.png" alt="サービスのレイテンシー (秒) をY軸に、時間帯を X 軸にとったグラフ。グラフ全体がピンク色で表示され、上部に「May 2: 13:31 Ongoing」と表示されている" style="width:75%;" >}}
+{{< img src="watchdog/latency_graph.png" alt="A graph showing service latency, in seconds, on the y-axis and the time of day on the x-axis. The entire graph is highlighted in pink, and the words May 2: 13:31 Ongoing appear at the top" style="width:75%;" >}}
 
-双眼鏡のアイコンをクリックすると、詳細が書かれた Watchdog アラートのカードが表示されます。
+Click on the binoculars icon to see a Watchdog Alert card with more details.
 
-## アーカイブされたアラートの管理
+## Manage archived alerts
 
-Watchdog アラートをアーカイブするには、サイドパネルを開き、右上隅のフォルダアイコンをクリックします。アーカイブすると、アラートがエクスプローラーから非表示になり、Datadog の他の場所 (ホームページなど) からも非表示になります。アラートがアーカイブされると、関連するサービスやリソースの横にピンクの Watchdog 双眼鏡アイコンが表示されなくなります。
+To archive a Watchdog Alert, open the side panel and click the folder icon in the upper-right corner. Archiving hides the alert from the explorer, as well as other places in Datadog, like the home page. If an alert is archived, the pink Watchdog binoculars icon does not show up next to the relevant service or resource.
 
-アーカイブされたアラートを見るには、[Watchdog アラートエクスプローラー][1]の左上の *Show _N_ archived alerts** のチェックボックスオプションを選択します。このオプションは、少なくとも 1 つのアラートがアーカイブされている場合にのみ利用可能です。また、各アラートを誰がいつアーカイブしたかを確認したり、アーカイブされたアラートをフィードに復元したりすることができます。
+To see archived alerts, select the checkbox option to **Show _N_ archived alerts** in the top left of the [Watchdog Alert Explorer][1]. The option is only available if at least one alert is archived. You can see who archived each alert and when it was archived, and restore archived alerts to your feed.
 
-**注**: アーカイブ後であっても、Watchdog はサービスやリソースに関連する問題にフラグを立てます。
+**Note**: Archiving does not prevent Watchdog from flagging future issues related to the service or resource.
 
-[1]: /ja/watchdog
-[3]: /ja/tracing/services/service_page/
-[4]: /ja/watchdog/impact_analysis/
-[5]: /ja/getting_started/tagging/unified_service_tagging/
-[6]: /ja/tracing/guide/setting_primary_tags_to_scope/
-[7]: /ja/tracing/service_catalog/
-[8]: /ja/watchdog/insights?tab=logmanagement#explore-insights
-[9]: /ja/watchdog/rca/
-[10]: /ja/monitors/types/anomaly/
-[11]: /ja/monitors/types/forecasts/?tab=linear
-[12]: /ja/monitors/types/outlier/?tab=dbscan
+[1]: /watchdog
+[3]: /tracing/services/service_page/
+[4]: /watchdog/impact_analysis/
+[5]: /getting_started/tagging/unified_service_tagging/
+[6]: /tracing/guide/setting_primary_tags_to_scope/
+[7]: /tracing/service_catalog/
+[8]: /watchdog/insights?tab=logmanagement#explore-insights
+[9]: /watchdog/rca/
+[10]: /monitors/types/anomaly/
+[11]: /monitors/types/forecasts/?tab=linear
+[12]: /monitors/types/outlier/?tab=dbscan

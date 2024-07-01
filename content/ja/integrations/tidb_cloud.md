@@ -1,103 +1,104 @@
 ---
-app_id: tidb-cloud
-app_uuid: 9ed710d3-49d4-41fa-a304-0b27f289bdb7
-assets:
-  dashboards:
-    TiDB Cloud Overview: assets/dashboards/overview.json
-  integration:
-    auto_install: true
-    configuration: {}
-    events:
-      creates_events: true
-    metrics:
-      check: tidb_cloud.db_queries_total
-      metadata_path: metadata.csv
-      prefix: tidb_cloud.
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 10247
-    source_type_name: TiDB Cloud
-author:
-  homepage: https://github.com/DataDog/integrations-extras
-  name: PingCAP
-  sales_email: xuyifan02@pingcap.com
-  support_email: xuyifan02@pingcap.com
-categories:
+"app_id": "tidb-cloud"
+"app_uuid": "9ed710d3-49d4-41fa-a304-0b27f289bdb7"
+"assets":
+  "dashboards":
+    "TiDB Cloud Overview": assets/dashboards/overview.json
+  "integration":
+    "auto_install": true
+    "configuration": {}
+    "events":
+      "creates_events": true
+    "metrics":
+      "check": tidb_cloud.db_queries_total
+      "metadata_path": metadata.csv
+      "prefix": tidb_cloud.
+    "service_checks":
+      "metadata_path": assets/service_checks.json
+    "source_type_id": !!int "10247"
+    "source_type_name": TiDB Cloud
+"author":
+  "homepage": "https://github.com/DataDog/integrations-extras"
+  "name": PingCAP
+  "sales_email": xuyifan02@pingcap.com
+  "support_email": xuyifan02@pingcap.com
+"categories":
 - cloud
 - data stores
-dependencies:
-- https://github.com/DataDog/integrations-extras/blob/master/tidb_cloud/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: tidb_cloud
-integration_id: tidb-cloud
-integration_title: TiDB Cloud
-integration_version: ''
-is_public: true
-custom_kind: integration
-manifest_version: 2.0.0
-name: tidb_cloud
-public_title: TiDB Cloud
-short_description: Datadog による TiDB Cloud クラスターのモニタリング
-supported_os:
+"custom_kind": "integration"
+"dependencies":
+- "https://github.com/DataDog/integrations-extras/blob/master/tidb_cloud/README.md"
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "tidb_cloud"
+"integration_id": "tidb-cloud"
+"integration_title": "TiDB Cloud"
+"integration_version": ""
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "tidb_cloud"
+"public_title": "TiDB Cloud"
+"short_description": "Monitoring TiDB Cloud clusters with Datadog"
+"supported_os":
 - linux
 - macos
 - windows
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Cloud
-  - Category::Data Stores
-  configuration: README.md#Setup
-  description: Datadog による TiDB Cloud クラスターのモニタリング
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: TiDB Cloud
+"tile":
+  "changelog": CHANGELOG.md
+  "classifier_tags":
+  - "Supported OS::Linux"
+  - "Supported OS::macOS"
+  - "Supported OS::Windows"
+  - "Category::Cloud"
+  - "Category::Data Stores"
+  "configuration": "README.md#Setup"
+  "description": Monitoring TiDB Cloud clusters with Datadog
+  "media": []
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": TiDB Cloud
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
-## 概要
+## Overview
 
-[TiDB Cloud][1] は、オープンソースデータベースである TiDB のフルマネージドクラウドサービスです。
+[TiDB Cloud][1] is a fully managed cloud service of TiDB, an open-source database.
 
-TiDB Cloud と Datadog のインテグレーションを使用して、TiDB Cloud クラスターから Datadog にメトリクスをエクスポートします。
+Use the TiDB Cloud Datadog integration to export metrics from TiDB Cloud clusters to Datadog.
 
-> **注:**
+> **Note:**
 >
-> - オンプレミスの TiDB クラスターについては、[TiDB インテグレーション][2]を参照してください。
+> - For TiDB clusters on premises, see the [TiDB Integration][2].
 
-## 計画と使用
+## Setup
 
-クラスターに対して TiDB Cloud と Datadog のインテグレーションを設定するには、Datadog API キーとリージョンを TiDB Cloud に提供します。
+To set up the TiDB Cloud Datadog integration for your cluster, provide a Datadog API key and region to TiDB Cloud.
 
-TiDB Cloud プロジェクトの Datadog インテグレーションを構成するには、[TiDB Cloud Preferences][3] を参照してください。
+See [TiDB Cloud Preferences][3] to configure the Datadog integration for your TiDB Cloud project.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "tidb_cloud" >}}
 
 
-### ヘルプ
+### Service Checks
 
-TiDB Cloud インテグレーションには、サービスのチェック機能は含まれません。
+The TiDB Cloud integration does not include any service checks.
 
-### ヘルプ
+### Events
 
-TiDB Cloud インテグレーションには、イベントは含まれません。
+The TiDB Cloud integration does not include any events.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
+Need help? Contact [Datadog support][5].
 
 [1]: https://tidbcloud.com
-[2]: https://docs.datadoghq.com/ja/integrations/tidb/
+[2]: https://docs.datadoghq.com/integrations/tidb/
 [3]: https://tidbcloud.com/console/preferences
 [4]: https://github.com/DataDog/integrations-extras/blob/master/tidb_cloud/metadata.csv
-[5]: https://docs.datadoghq.com/ja/help/
+[5]: https://docs.datadoghq.com/help/
+

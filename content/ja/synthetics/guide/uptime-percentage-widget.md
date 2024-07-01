@@ -1,72 +1,72 @@
 ---
+title: Monitor Website Uptime With SLOs
+kind: guide
 aliases:
-- /ja/graphing/guide/uptime-percentage-widget
-- /ja/dashboards/guide/uptime-percentage-widget
+    - /graphing/guide/uptime-percentage-widget
+    - /dashboards/guide/uptime-percentage-widget
 further_reading:
-- link: /monitors/monitor_uptime_widget/
-  tag: ドキュメント
-  text: モニターアップタイムウィジェット
-- link: /getting_started/synthetics/
-  tag: ドキュメント
-  text: Synthetic モニタリングの概要
-kind: ガイド
-title: SLO を用いて Web サイトのアップタイムを監視する
+    - link: /monitors/monitor_uptime_widget/
+      tag: Documentation
+      text: Monitor Uptime Widget
+    - link: /getting_started/synthetics/
+      tag: Documentation
+      text: Getting Started with Synthetic Monitoring
 ---
 
-## 概要
+## Overview
 
-外部または内部の顧客とのサービスレベル契約を維持するためには、多くの場合、アップタイム率の測定が必要です。
+Maintaining service level agreements with external or internal customers often requires measuring uptime percentage. 
 
-このガイドでは、Datadog [Synthetic Monitoring][1] と [SLO ウィジェット][2]を使って、Web サイトの例として `http://example.com/` を使ってそれを実現する方法を説明します。
+This guide shows you how to achieve that using Datadog [Synthetic Monitoring][1] and the [SLO widget][2] with an example website, `http://example.com/`.
 
-## Synthetic テストを作成する
+## Create a Synthetics test
 
-`http://example.com/` を使って [Synthetic API テスト][3]を作成するには、[単一の API テストを作成する][4]を参照してください。
+To create a [Synthetic API test][3] with `http://example.com/`, see [Create a single API test][4].
 
-**Test URL** をクリックすると、Web サイトの健全性に関するアサーションが表示されます。SLI に合うようにアサーションを調整します。
+When you click **Test URL**, assertions about your website's health populate. Adjust the assertions to match your SLI.
 
-## SLO ウィジェットを構成する
+## Configure a SLO widget
 
-### SLO を作成する
+### Create your SLO
 
-1. [新しい SLO を作成][5]して、Synthetic テスト結果に基づいてウェブサイトのアップタイムを追跡します。
-2. **Monitor Based** を選択し、Synthetic テスト名を入力します。
+1. [Create a new SLO][5] to track your website's uptime based on your Synthetic test results.
+2. Select **Monitor Based** and enter your Synthetic test name.
 
-    {{< img src="synthetics/guide/uptime_slo/slo_config.png" alt="SLO 構成" >}}
+    {{< img src="synthetics/guide/uptime_slo/slo_config.png" alt="SLO configuration" >}}
 
-3. 達成したいターゲットを定義します。
+3. Define the target you want to achieve.
 
-    {{< img src="synthetics/guide/uptime_slo/slo_target.png" alt="SLO ターゲット" >}}
+    {{< img src="synthetics/guide/uptime_slo/slo_target.png" alt="SLO target" >}}
 
-4. 名前、メッセージ、タグを入力し、SLO の追加情報を指定します。
+4. Enter a name, message, and tags to provide additional details for your SLO.
 
-    {{< img src="synthetics/guide/uptime_slo/slo_notif.png" alt="SLO 通知" >}}
+    {{< img src="synthetics/guide/uptime_slo/slo_notif.png" alt="SLO notification" >}}
 
-5. **保存**をクリックします。
+5. Click **Save**.
 
-### ダッシュボードに SLO をインポートする
+### Import your SLO in your Dashboard
 
-1. [新しいダッシュボードを作成][6]して SLO ウィジェットをホストします。
-2. SLO サマリーウィジェットをボードにドラッグアンドドロップします。
-3. 上記で定義した SLO を選択します。
+1. [Create a new Dashboard][6] to host your SLO widget.
+2. Drag and drop the SLO widget on your board.
+3. Select the SLO that you defined above.
 
-    {{< img src="synthetics/guide/uptime_slo/slo_selection.png" alt="SLO ウィジェット選択" >}}
+    {{< img src="synthetics/guide/uptime_slo/slo_selection.png" alt="SLO widget selection" >}}
 
-4. SLO ウィジェットをニーズに合わせてカスタマイズします。
+4. Customize your SLO widget to match your needs.
 
-    {{< img src="synthetics/guide/uptime_slo/slo_widget_configs.png" alt="SLO ウィジェット構成" >}}
+    {{< img src="synthetics/guide/uptime_slo/slo_widget_configs.png" alt="SLO widget config" >}}
 
-5. ウィジェットの説明的なタイトルを入力し、**Done** をクリックします。
+5. Enter a descriptive title for your widget and click **Done**.
 
-    {{< img src="synthetics/guide/uptime_slo/final_dashboard.png" alt="最終ダッシュボード" >}}
+    {{< img src="synthetics/guide/uptime_slo/final_dashboard.png" alt="Final Dashboard" >}}
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/synthetics/
-[2]: /ja/dashboards/widgets/slo/
+[1]: /synthetics/
+[2]: /dashboards/widgets/slo/
 [3]: https://app.datadoghq.com/synthetics/create
-[4]: /ja/getting_started/synthetics/api_test#define-request
+[4]: /getting_started/synthetics/api_test#define-request
 [5]: https://app.datadoghq.com/slo/new
 [6]: https://app.datadoghq.com/dashboard/lists

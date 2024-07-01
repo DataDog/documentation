@@ -1,23 +1,24 @@
 ---
+title: Java OpenTracing Instrumentation
+kind: documentation
 aliases:
-- /ja/tracing/setup_overview/open_standards/java
-- /ja/tracing/trace_collection/open_standards/java
-- /ja/tracing/trace_collection/opentracing/java/
+- /tracing/setup_overview/open_standards/java
+- /tracing/trace_collection/open_standards/java
+- /tracing/trace_collection/opentracing/java/
+description: 'OpenTracing instrumentation for Java'
 code_lang: java
-code_lang_weight: 0
-description: Java のための OpenTracing インスツルメンテーション
-kind: ドキュメント
-title: Java OpenTracing インスツルメンテーション
 type: multi-code-lang
+code_lang_weight: 0
+
 ---
 
-<div class="alert alert-info">OpenTracing のサポートは、非推奨の仕様に基づくものです。オープンな仕様でコードをインスツルメンテーションしたい場合は、代わりに OpenTelemetry を使用してください。<a href="/tracing/trace_collection/otel_instrumentation/java/">Datadog トレーシングライブラリの OpenTelemetry インスツルメンテーションからのデータを処理する</a>ためのベータサポートをお試しください。</div>
+<div class="alert alert-info">OpenTracing support is based on a deprecated specification. If you want to instrument your code with an open spec, use OpenTelemetry instead. Try the beta support for <a href="/tracing/trace_collection/otel_instrumentation/java/">processing data from OpenTelemetry instrumentation in Datadog Tracing Libraries</a>.</div>
 
-Datadog は [OpenTracing API][1] との連携が可能です。
+Datadog integrates with the [OpenTracing API][1].
 
-## トラブルシューティング
+## Setup
 
-Maven の場合、これを `pom.xml` に追加します。
+For Maven, add this to `pom.xml`:
 ```xml
 <!-- OpenTracing API -->
 <dependency>
@@ -39,7 +40,7 @@ Maven の場合、これを `pom.xml` に追加します。
     <version>${dd-trace-java.version}</version>
 </dependency>
 
-<!-- Datadog OpenTracing ブリッジ (自動インスツルメンテーションに dd-java-agent を使用しない場合にのみ必要) -->
+<!-- Datadog OpenTracing bridge (only needed if you do not use dd-java-agent for autoinstrumentation) -->
 <dependency>
     <groupId>com.datadoghq</groupId>
     <artifactId>dd-trace-ot</artifactId>
@@ -47,19 +48,19 @@ Maven の場合、これを `pom.xml` に追加します。
 </dependency>
 ```
 
-Gradle の場合は、次を追加します:
+For Gradle, add:
 
 ```text
 compile group: 'io.opentracing', name: 'opentracing-api', version: "0.32.0"
 compile group: 'io.opentracing', name: 'opentracing-util', version: "0.32.0"
 compile group: 'com.datadoghq', name: 'dd-trace-api', version: "${dd-trace-java.version}"
-// Datadog OpenTracing ブリッジ (自動インスツルメンテーションに dd-java-agent を使用しない場合にのみ必要)
+// Datadog OpenTracing bridge (only needed if you do not use dd-java-agent for autoinstrumentation)
 compile group: 'com.datadoghq', name: 'dd-trace-ot', version: "${dd-trace-java.version}"
 ```
 
-コンフィギュレーションセクションで説明されているように、環境変数またはシステムプロパティを使用してアプリケーションを構成します。
+Configure your application using environment variables or system properties as discussed in the configuration section.
 
-自動インスツルメンテーションを使用していない場合は、構成済みのトレーサーを `GlobalTracer` に登録する必要があります。そのためには、アプリケーションの起動の早い段階 (例: メインメソッド) で `GlobalTracer.register(DDTracer.builder().build())` を呼び出します。
+If you're not using autoinstrumentation, you must register a configured tracer with `GlobalTracer`. For this, call `GlobalTracer.register(DDTracer.builder().build())` early on in your application startup (for example, main method).
 
 ```java
 import datadog.opentracing.DDTracer;
@@ -70,35 +71,35 @@ public class Application {
     public static void main(String[] args) {
         DDTracer tracer = DDTracer.builder().build();
         GlobalTracer.register(tracer);
-        // 同じトレーサーを Datadog API に登録します
+        // register the same tracer with the Datadog API
         datadog.trace.api.GlobalTracer.registerIfAbsent(tracer);
     }
 }
 ```
 
-環境変数とシステムプロパティの他に、`DDTracer.Builder` インターフェイスの一部として追加のコンフィギュレーションオプションがあります。完全なリストについては、[Javadoc][2] を参照してください。
+Aside from environment variables and system properties, there are additional configuration options as part of the `DDTracer.Builder` interface. Consult the [Javadoc][2] for a full listing. 
 
-**注:** classpath に `dd-java-agent` を追加しないでください。予期せぬ挙動が生じる場合があります。
+**Note:** Never add `dd-java-agent` to your classpath. Doing so can cause unexpected behavior. 
 
-## 非同期トレース
+## Asynchronous traces
 
-非同期トレースは、スパンが 1 つのスレッドで開始され、別のスレッドで終了したときです。この動作をインスツルメントするには、スパンがアクティブな各スレッドで新しいスコープを使用する必要があります。
+An asynchronous trace is when a span is started in one thread and finished in another. To instrument this behavior, a new scope must be used in each thread the span is active.
 ```java
-// ステップ 1: ワーク送信スレッドでスコープ/スパンを開始します
+// Step 1: start the Scope/Span on the work submission thread
 final Tracer tracer = GlobalTracer.get();
 final Span span = tracer.buildSpan("ServicehandlerSpan").start();
 
 try (final Scope scope = tracer.activateSpan(span)) {
-    // 送信スレッド実装...
+    // submission thread impl...
 
     submitAsyncTask(new Runnable() {
         @Override
         public void run() {
-            // ステップ 2: ワーカースレッドでスパンを再アクティブ化します
+            // Step 2: reactivate the Span in the worker thread
             try (final Scope scope = tracer.activateSpan(span)) {
-              // ワーカースレッド実装
+              // worker thread impl
             } finally {
-              // ステップ 3: ワークが完了したらスパンを終了します
+              // Step 3: Finish Span when work is complete
               span.finish();
             }
        }
@@ -106,12 +107,12 @@ try (final Scope scope = tracer.activateSpan(span)) {
 }
 ```
 
-## 分散トレースのコンテキストの挿入と抽出
+## Inject and extract context for distributed tracing
 
-OpenTracing の手動インスツルメンテーションを使用して分散トレースを作成する:
+Create a distributed trace using manual instrumentation with OpenTracing:
 
 ```java
-// ステップ 1: クライアントコードに Datadog ヘッダーを挿入します
+// Step 1: Inject the Datadog headers in the client code
 Span span = tracer.buildSpan("httpClientSpan").start();
 try (Scope scope = tracer.activate(span)) {
     HttpRequest request = /* your code here */;
@@ -120,7 +121,7 @@ try (Scope scope = tracer.activate(span)) {
                   Format.Builtin.HTTP_HEADERS,
                   new MyHttpHeadersInjectAdapter(request));
 
-    // HTTP リクエストの実装...
+    // http request impl...
 } finally {
     span.finish();
 }
@@ -139,21 +140,21 @@ public static class MyHttpHeadersInjectAdapter implements TextMap {
 
     @Override
     public Iterator<Map.Entry<String, String>> iterator() {
-        throw new UnsupportedOperationException("このクラスは、tracer#inject() でのみ使用する必要があります");
+        throw new UnsupportedOperationException("This class should be used only with tracer#inject()");
     }
 }
 
-// Step 2: ステップ 2: サーバーコードで Datadog ヘッダーを抽出します
-HttpRequest request = /* ここにコードを記載 */;
+// Step 2: Extract the Datadog headers in the server code
+HttpRequest request = /* your code here */;
 
 final SpanContext extractedContext =
   GlobalTracer.get().extract(Format.Builtin.HTTP_HEADERS,
                              new MyHttpRequestExtractAdapter(request));
 
-// ステップ 1 の HTTP クライアントスパンの子
+// is a child of http client span in step 1
 Span span = tracer.buildSpan("httpServerSpan").asChildOf(extractedContext).start();
 try (Scope scope = tracer.activateSpan(span)) {
-    // HTTP サーバーの実装...
+    // http server impl...
 } finally {
     span.finish();
 }
@@ -172,12 +173,12 @@ public class MyHttpRequestExtractAdapter implements TextMap {
 
     @Override
     public void put(final String key, final String value) {
-        throw new UnsupportedOperationException("このクラスは、Tracer.extract()! でのみ使用する必要があります");
+        throw new UnsupportedOperationException("This class should be used only with Tracer.extract()!");
     }
 }
 ```
 
-上記の例では OpenTracing クラスのみを使用していることに注意してください。詳細については、[OpenTracing API][1] を確認してください。
+Notice the above examples only use the OpenTracing classes. Check the [OpenTracing API][1] for more details and information.
 
 
 [1]: https://github.com/opentracing/opentracing-java

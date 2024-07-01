@@ -1,71 +1,117 @@
 ---
+title: Mapping Prometheus Metrics to Datadog Metrics
+kind: guide
 aliases:
-- /ja/integrations/faq/how-to-collect-metrics-with-sql-stored-procedure/
+  - /integrations/faq/how-to-collect-metrics-with-sql-stored-procedure/
 further_reading:
-- link: https://www.datadoghq.com/blog/sql-server-metrics/#create-a-stored-procedure-to-generate-and-collect-metrics
-  tag: ブログ
-  text: メトリクスを生成および収集するストアドプロシージャを作成する
-- link: /integrations/mysql/
+- link: /integrations/openmetrics/
   tag: Documentation
-  text: Datadog-MySQL インテグレーション
+  text: Learn about the OpenMetrics integration
 - link: /agent/kubernetes/prometheus/
   tag: Documentation
-  text: Kubernetes Prometheus および OpenMetrics メトリクスの収集
-kind: ガイド
-title: Datadog メトリクスにおける Prometheus メトリクスのマッピング
+  text: Kubernetes Prometheus and OpenMetrics metrics collection
 ---
 
-Datadog の Prometheus または OpenMetrics チェックをお使いの場合に、これらのメトリクスが既存の Datadog メトリクスタイプにどのようにマッピングされるかをご説明します。
+## Overview
 
-詳細は、[Kubernetes Prometheus および OpenMetrics メトリクスの収集][1]を参照してください。
+This page walks you through how Prometheus or OpenMetrics check metrics map to existing Datadog metric types.
 
-## Prometheus および OpenMetrics メトリクスのタイプ
+## Prometheus and OpenMetrics metric types
 
-* `counter`: 単調に増加するカウンターで表される、累積的なメトリクス。値は増加するか、0 にリセットされるかのどちらかとなります。
-* `gauge`: 無作為に増減する単一の数値を表すメトリクス。
-* `histogram`: 観察結果のサンプルを抽出し、構成可能なバケットの中でカウントします。また、観察されたすべての値の合計を提示します。
-* `summary`: histogram と同様に観察結果のサンプルを抽出し、観察されたすべての値の合計を提示します。また、スライド式のタイムウィンドウの中で構成可能な量を計算します。
+* `counter`: A cumulative metric that represents a single monotonically increasing counter, whose value can only increase—or be reset to zero.
+* `gauge`: A metric that represents a single numeric value, which can arbitrarily go up and down.
+* `histogram`: Samples observations and counts them in configurable buckets; also provides a sum of all observed values.
+* `summary`: Similar to `histogram`; samples observations, provides a sum of all observed values, and calculates configurable quantiles over a sliding time window.
 
-## Datadog メトリクスにおける Prometheus/OpenMetrics メトリクスのマッピング方法
+## How Prometheus/OpenMetrics metrics map to Datadog metrics
 
-詳細は、[Datadog メトリクスタイプ][2]を参照してください。
+For more information, see [OpenMetrics Metric Types][2] and [Datadog Metric Types][3].
 
-### Counter
+{{< tabs >}}
+{{% tab "Latest Version" %}}
 
-デフォルトでは、[Prometheus/OpenMetrics の `counter`][3] はDatadog の `monotonic_count` にマッピングされます。
 
-ただし、パラメーター `send_monotonic_counter` が `false` の場合、このメトリクスは `gauge` として送信されます。[単調カウンターの詳細についてはこちらを参照してください][4]。
-
-### Gauge
-
-[Prometheus/OpenMetrics の `gauge`][5] は Datadog の `gauge` にマッピングされます。
+| Metric Type | OpenMetrics | Datadog | 
+| --- | --- | --- |
+| [counter][110] | `counter` | `count` |
+| [gauge][111] | `gauge` | `gauge` |
+| [histogram][112] | `_count`, `_sum`, `_bucket` | The `_count`, `_sum`, and `_bucket` values of the histogram are each mapped to Datadog's `count` type and include a `.count`, `.sum`, and `.bucket` suffix, respectively. |
+| [summary][113] | `_count`, `_sum`, `_created` | The `_count` and `_sum` values are mapped to Datadog's `count` type and include a `.count` and `.sum` suffix in their name, respectively. Quantile samples are mapped to a metric of type `gauge` with the `.quantile` suffix. | 
 
 ### Histogram
 
-[Prometheus/OpenMetrics の `histogram`][6] については、histogram の `_count` と `_sum` の値がそれぞれ Datadog の `gauge` にマッピングされます。
+For [Prometheus/OpenMetrics `histogram`][104], the `_count`, `_sum`, and `_bucket` values of the histogram are each mapped to Datadog's `count` type and include a `.count`, `.sum`, and `.bucket` suffix in their names, respectively.
 
-パラメーター `collect_histogram_buckets` が `true` の場合、それぞれの `_bucket` 値もまた Datadog の `gauge` にマッピングされます。
+If the `histogram_buckets_as_distributions` parameter is `true`, `_bucket` samples are aggregated into a Datadog `distribution`. [Datadog distribution metrics][108] are based on the [DDSketch algorithm][109] and allow for more advanced statistical aggregations such as quantiles. For more information, see the Datadog Engineering Blog [post on OpenMetrics and distribution metrics][105].
 
-パラメーター `send_distribution_buckets` が `true` の場合、それぞれの `_bucket` は Datadog の `distribution` にマッピングされます。Prometheus/OpenMetrics の histogram データは Datadog のディストリビューションメトリクスに変換され、Datadog で Kubernetes のメトリクスをパーセンタイルとして監視できるようになります。Datadog のディストリビューションメトリクスは [DDSketch アルゴリズム][7]に基づいています。詳しくは、関連する Datadog の [OpenMetrics とディストリビューションメトリクスに関するブログ記事][8]を参照してください。
+`collect_counters_with_distributions` can be used to send `_count` and `_sum` values as `count`s alongside the distribution.
 
-**注**: OpenMetrics v2 の場合、代わりに `collect_counters_with_distributions` を使用してください。
-
-パラメーター `send_distribution_counts_as_monotonic` が `true` の場合、`_count` で終わる各メトリクスは `monotonic_count` として送信されます。[単調カウンターについての詳細はこちらを参照してください][4]。
 
 ### Summary
 
-[Prometheus/OpenMetrics の `summary`][9] については、summary の `_count` および `_sum` の値がそれぞれ Datadog の `count` にマッピングされます。
+For [Prometheus/OpenMetrics `summary`][107], `_count` and `_sum` values are mapped to Datadog's `count` type and include a `.count` and `.sum` suffix in their name, respectively. Quantile samples are mapped to a metric of type `gauge` with the `.quantile` suffix.
 
-パラメーター `send_distribution_buckets` が `true` の場合は、histogram がディストリビューションに変換され、それぞれの `_bucket` が `distribution` タグを使用してフェッチされます。
+[101]: https://prometheus.io/docs/concepts/metric_types/#gauge
+[102]: https://prometheus.io/docs/concepts/metric_types/#counter
+[103]: /metrics/custom_metrics/agent_metrics_submission/?tab=count#monotonic_count
+[104]: https://prometheus.io/docs/concepts/metric_types/#histogram
+[105]: https://www.datadoghq.com/blog/whats-next-monitoring-kubernetes/#distribution-metrics
+[107]: https://prometheus.io/docs/concepts/metric_types/#counter
+[108]: /metrics/distributions/
+[109]: https://www.datadoghq.com/blog/engineering/computing-accurate-percentiles-with-ddsketch/
+[110]: https://prometheus.io/docs/concepts/metric_types/#gauge
+[111]: https://prometheus.io/docs/concepts/metric_types/#counter
+[112]: /integrations/guide/prometheus-metrics/?tab=latestversion#histogram
+[113]: /integrations/guide/prometheus-metrics/?tab=latestversion#summary
 
-パラメーター `send_distribution_counts_as_monotonic` が `true` の場合、`_count` で終わる各メトリクスは `monotonic_count` として送信されます。[単調カウンターについての詳細はこちらを参照してください][4]。
+{{% /tab %}}
+{{% tab "Legacy Version" %}}
+### Counter
 
-[1]: /ja/agent/kubernetes/prometheus/
-[2]: /ja/metrics/types/
-[3]: https://prometheus.io/docs/concepts/metric_types/#counter
-[4]: /ja/metrics/custom_metrics/agent_metrics_submission/?tab=count#monotonic-count
-[5]: https://prometheus.io/docs/concepts/metric_types/#gauge
-[6]: https://prometheus.io/docs/concepts/metric_types/#histogram
-[7]: https://www.datadoghq.com/blog/engineering/computing-accurate-percentiles-with-ddsketch/
-[8]: https://www.datadoghq.com/blog/whats-next-monitoring-kubernetes/#distribution-metrics
-[9]: https://prometheus.io/docs/concepts/metric_types/#summary
+By default, [Prometheus/OpenMetrics `counter`][101] maps to Datadog's `count`.
+
+However, if the parameter `send_monotonic_counter` is `false`, then this metric is sent as `gauge`.
+
+### Gauge
+
+[Prometheus/OpenMetrics `gauge`][103] maps to Datadog's `gauge`.
+
+### Histogram
+
+For [Prometheus/OpenMetrics `histogram`][104], the `_count` and `_sum` values of the histogram are each mapped to Datadog's `gauge` type and include a `.count` and `.sum` suffix in their name, respectively.
+
+If the `send_histograms_buckets` parameter is `true`, `_bucket` samples are sent to Datadog with a `.bucket` suffix, and are also mapped to Datadog's `gauge` by default.
+
+Setting the `send_distribution_counts_as_monotonic` parameter to `true` causes the `_count` and `_bucket` metrics to be sent as type `count` instead. Setting `send_distribution_sums_as_monotonic` does the same for `_sum` metrics.
+
+If the `send_distribution_buckets` parameter is `true`, `_bucket` samples are aggregated into a Datadog `distribution`. [Datadog distribution metrics][108] are based on the [DDSketch algorithm][107], and allow for more advanced statistical aggregations such as quantiles. For more information, see the Datadog Engineering Blog [post on OpenMetrics and distribution metrics][106].
+
+
+### Summary
+
+For [Prometheus/OpenMetrics `summary`][105], `_count` and `_sum` values are mapped to Datadog's `gauge` type by default, and include a `.count` and `.sum` suffix in their names, respectively. Quantile samples are mapped to a metric of type `gauge` with the `.quantile` suffix.
+
+Setting the `send_distribution_counts_as_monotonic` parameter to `true` causes the `_count` and `_sum` metrics to be sent as type `count` instead. Setting `send_distribution_sums_as_monotonic` does the same for `_sum` metrics.
+
+[101]: https://prometheus.io/docs/concepts/metric_types/#counter
+[102]: /metrics/custom_metrics/agent_metrics_submission/?tab=count#monotonic_count
+[103]: https://prometheus.io/docs/concepts/metric_types/#gauge
+[104]: https://prometheus.io/docs/concepts/metric_types/#histogram
+[105]: https://prometheus.io/docs/concepts/metric_types/#summary
+[106]: https://www.datadoghq.com/blog/whats-next-monitoring-kubernetes/#distribution-metrics
+[107]: https://www.datadoghq.com/blog/engineering/computing-accurate-percentiles-with-ddsketch/
+[108]: /metrics/distributions/
+
+{{% /tab %}}
+{{< /tabs >}}
+
+<div class="alert alert-info">All <code>count</code> metrics are processed by the Agent as <em>monotonic counts</em>, meaning the Agent actually sends the difference between consecutive raw values. For more information, see <a href="/metrics/custom_metrics/agent_metrics_submission/?tab=count#monotonic_count">Metric Submission: Custom Agent Check</a>.</div>
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /agent/kubernetes/prometheus/
+[2]: https://github.com/OpenObservability/OpenMetrics/blob/main/specification/OpenMetrics.md#metric-types
+[3]: /metrics/types/
+

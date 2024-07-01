@@ -1,99 +1,99 @@
 ---
-title: API の使用
+title: Using the API
 type: api
 ---
 
-{{< h2 >}}API の使用{{< /h2 >}}
+{{< h2 >}}Using the API{{< /h2 >}}
 
-プログラムに従い Datadog のプラットフォームにアクセスするには、Datadog HTTP API を使用します。API を使用して、データを Datadog へ送信し、データの視覚化やアカウントの管理ができます。
+Use the Datadog HTTP API to access the Datadog platform programmatically. You can use the API to send data to Datadog, build data visualizations, and manage your account.
 
-{{< h2 >}}Datadog へデータを送信{{< /h2 >}}
+{{< h2 >}}Send data to Datadog{{< /h2 >}}
 
-API を使用してインテグレーションデータの Datadog への送信を始めます。Agent に追加のセットアップを行うと、API を使用して Synthetic テストデータ、ログ、トレースを Datadog へ送信することも可能です。
+Use the API to begin to send integrations data to Datadog. With some additional setup of the Agent, you can also use the API to send Synthetic test data, Logs, and Traces to Datadog.
 
-**インテグレーションエンドポイント**
+**Integrations endpoints**
 
-利用可能なインテグレーションエンドポイント:
+Available integrations endpoints:
 
-- [AWS インテグレーション][1]
-- [AWS ログインテグレーション][2]
-- [Azure インテグレーション][3]
-- [Google Cloud インテグレーション][4]
-- [Slack インテグレーション][5]
-- [PagerDuty インテグレーション][6]
-- [Webhooks インテグレーション][7]
+- [AWS Integration][1]
+- [AWS Logs Integration][2]
+- [Azure Integration][3]
+- [Google Cloud Integration][4]
+- [Slack Integration][5]
+- [PagerDuty Integration][6]
+- [Webhooks Integration][7]
 
-**プラットフォームエンドポイント**
+**Platform endpoints**
 
-このエンドポイントを使用して、Datadog プラットフォームの他の部分との間でデータを送受信します。
+Use these endpoints to post and fetch data to and from other parts of the Datadog platform: 
 
-- [メトリクス][8]エンドポイントを使用すると、[メトリクス][9]データをポストできるため、Datadog のダッシュボードでグラフ化し、あらゆる期間のメトリクスを問い合わせることができます。
-- [イベント][10]のエンドポイントを使用すると、[Datadog のイベントエクスプローラー][11]との間でイベントを送受信できます。
-- [Synthetic モニタリング][12] エンドポイントを使用して、[Synthetic テスト][13]を作成、開始、終了し結果を確認します。
-- [トレース Agent API][14] を使用して、Datadog Agent にトレースを送信すると、Datadog に転送されます。
+- The [metrics][8] endpoints allow you to post [metrics][9] data so it can be graphed on Datadog's dashboards and query metrics from any time period.
+- The [events][10] endpoints allow you to post and fetch events to and from the [Datadog event explorer][11].
+- Use the [Synthetic Monitoring][12] endpoints to create, start, stop, and see [Synthetic tests][13] results.
+- Use the [Tracing Agent API][14] to send traces to your Datadog Agent, which then forwards them to Datadog.
 
-{{< h2 >}}データの視覚化{{< /h2 >}}
+{{< h2 >}}Visualize your data{{< /h2 >}}
 
-Datadog へのデータ送信が始まると、API を使用してデータの視覚化をプログラムで構築できるようになります。
+Once you are sending data to Datadog, you can use the API to build data visualizations programmatically:
 
-- [ダッシュボード][15] を構築して[ダッシュボードリスト][16]を表示
-- [ホストタグ][17]の管理
-- [埋め込み可能なグラフ][18]を作成
-- [グラフのスナップショット][19]を撮る
-- [サービスの依存関係][20] - APM サービスとその依存関係のリストを確認
-- [モニター][21]の作成
-- [サービスチェック][22] - モニターで使用されるチェックステータスをポスト
-- [ログ][23]、[ログのインデックス][24]、[ログパイプライン][25]の作成および管理
-- 組織の[ホスト][17]情報を取得
-- [サービスレベル目標][26]の作成および管理
-- [セキュリティモニタリング][27]シグナルを生成
+- Build [Dashboards][15] and view [Dashboard Lists][16]
+- Manage [host tags][17]
+- Create [Embeddable Graphs][18]
+- Take a [graph snapshot][19]
+- [Service Dependencies][20] - see a list of your APM services and their dependencies
+- Create [Monitors][21]
+- [Service Checks][22] - post check statuses for use with monitors
+- Create and manage [Logs][23], [Logs Indexes][24], and [Logs Pipelines][25]
+- Get [Host][17] information for your organization
+- Create and manage [Service Level Objectives][26]
+- Generate [Security Monitoring][27] signals
 
-{{< h2 >}}アカウント管理{{< /h2 >}}
+{{< h2 >}}Manage your account{{< /h2 >}}
 
-また、Datadog API を使ってアカウントをプログラムで管理することもできます。
+You can also use the Datadog API to manage your account programmatically:
 
-- [ユーザー][28]管理
-- [ロール][29]管理
-- [組織][30]の管理
-- API とアプリキーを[認証][31]エンドポイントで承認
-- [ログ制限クエリ][32]で特定ログアクセスを許可
-- [Key Management][33] で既存のキーを管理
-- [使用量のメータリング][34]エンドポイントで、Datadog の複数ファセットにおける毎時、日次、月次使用量を把握
-- [IP 範囲][35] で Datadog に属する IP プレフィックスのリストを確認
+- Manage [Users][28]
+- Manage [Roles][29]
+- Manage your [Organization][30]
+- Verify API and app keys with the [Authentication][31] endpoint
+- Grant specific logs access with the [Logs Restriction Queries][32]
+- Manage existing keys with [Key Management][33]
+- Get hourly, daily, and monthly usage across multiple facets of Datadog with the [Usage Metering][34] endpoints
+- See the list of IP prefixes belonging to Datadog with [IP Ranges][35]
 
 
-[1]: /ja/api/v1/aws-integration/
-[2]: /ja/api/v1/aws-logs-integration/
-[3]: /ja/api/v1/azure-integration/
-[4]: /ja/api/v1/gcp-integration/
-[5]: /ja/api/v1/slack-integration/
-[6]: /ja/api/v1/pagerduty-integration/
-[7]: /ja/api/v1/webhooks-integration/
-[8]: /ja/api/v1/metrics/
-[9]: /ja/metrics/introduction/
-[10]: /ja/api/v1/events/
-[11]: /ja/events/
-[12]: /ja/api/v1/synthetics/
-[13]: /ja/synthetics/
-[14]: /ja/tracing/guide/send_traces_to_agent_by_api/
-[15]: /ja/api/v1/dashboards/
-[16]: /ja/api/v1/dashboard-lists/
-[17]: /ja/api/v1/hosts/
-[18]: /ja/api/v1/embeddable-graphs/
-[19]: /ja/api/v1/snapshots/
-[20]: /ja/api/v1/service-dependencies/
-[21]: /ja/api/v1/monitors/
-[22]: /ja/api/v1/service-checks/
-[23]: /ja/api/v1/logs/
-[24]: /ja/api/v1/logs-indexes/
-[25]: /ja/api/v1/logs-pipelines/
-[26]: /ja/api/v1/service-level-objectives/
-[27]: /ja/api/v2/security-monitoring/
-[28]: /ja/api/v1/users/
-[29]: /ja/api/v1/roles/
-[30]: /ja/api/v1/organizations/
-[31]: /ja/api/v1/authentication/
-[32]: /ja/api/v2/logs-restriction-queries/
-[33]: /ja/api/v1/key-management/
-[34]: /ja/api/v1/usage-metering/
-[35]: /ja/api/v1/ip-ranges/
+[1]: /api/v1/aws-integration/
+[2]: /api/v1/aws-logs-integration/
+[3]: /api/v1/azure-integration/
+[4]: /api/v1/gcp-integration/
+[5]: /api/v1/slack-integration/
+[6]: /api/v1/pagerduty-integration/
+[7]: /api/v1/webhooks-integration/
+[8]: /api/v1/metrics/
+[9]: /metrics/introduction/
+[10]: /api/v1/events/
+[11]: /events/
+[12]: /api/v1/synthetics/
+[13]: /synthetics/
+[14]: /tracing/guide/send_traces_to_agent_by_api/
+[15]: /api/v1/dashboards/
+[16]: /api/v1/dashboard-lists/
+[17]: /api/v1/hosts/
+[18]: /api/v1/embeddable-graphs/
+[19]: /api/v1/snapshots/
+[20]: /api/v1/service-dependencies/
+[21]: /api/v1/monitors/
+[22]: /api/v1/service-checks/
+[23]: /api/v1/logs/
+[24]: /api/v1/logs-indexes/
+[25]: /api/v1/logs-pipelines/
+[26]: /api/v1/service-level-objectives/
+[27]: /api/v2/security-monitoring/
+[28]: /api/v1/users/
+[29]: /api/v1/roles/
+[30]: /api/v1/organizations/
+[31]: /api/v1/authentication/
+[32]: /api/v2/logs-restriction-queries/
+[33]: /api/v1/key-management/
+[34]: /api/v1/usage-metering/
+[35]: /api/v1/ip-ranges/

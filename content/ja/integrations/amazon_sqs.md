@@ -1,141 +1,142 @@
 ---
-app_id: amazon-sqs
-app_uuid: 3a036cf4-b953-441a-ad13-a99f2b8a684e
-assets:
-  integration:
-    auto_install: false
-    events:
-      creates_events: false
-    metrics:
-      check:
-      - aws.sqs.sent_message_size
-      metadata_path: metadata.csv
-      prefix: aws.sqs.
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 102
-    source_type_name: Amazon SQS
-  monitors:
-    sqs_message_processing_time: assets/monitors/sqs_message_processing_time.json
-    sqs_message_queue_anomaly: assets/monitors/sqs_message_queue_anomaly.json
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com
-  support_email: help@datadoghq.com
-categories:
-- metrics
-- cloud
-- log collection
-dependencies: []
-display_on_public_website: true
-draft: false
-git_integration_title: amazon_sqs
-integration_id: amazon-sqs
-integration_title: Amazon SQS
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: 2.0.0
-name: amazon_sqs
-public_title: Amazon SQS
-short_description: Amazon Simple Queue Service (SQS) は、高速、高信頼性、スケーラブルなフルマネージド型のメッセージキューサービスです。
-supported_os: []
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Metrics
-  - Category::クラウド
-  - Category::ログの収集
-  configuration: README.md#Setup
-  description: Amazon Simple Queue Service (SQS) は、高速、高信頼性、スケーラブルなフルマネージド型のメッセージキューサービスです。
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Amazon SQS
+"app_id": "amazon-sqs"
+"app_uuid": "3a036cf4-b953-441a-ad13-a99f2b8a684e"
+"assets":
+  "integration":
+    "auto_install": false
+    "events":
+      "creates_events": false
+    "metrics":
+      "check":
+      - "aws.sqs.sent_message_size"
+      "metadata_path": "metadata.csv"
+      "prefix": "aws.sqs."
+    "service_checks":
+      "metadata_path": "assets/service_checks.json"
+    "source_type_id": !!int "102"
+    "source_type_name": "Amazon SQS"
+  "monitors":
+    "sqs_message_processing_time": "assets/monitors/sqs_message_processing_time.json"
+    "sqs_message_queue_anomaly": "assets/monitors/sqs_message_queue_anomaly.json"
+"author":
+  "homepage": "https://www.datadoghq.com"
+  "name": "Datadog"
+  "sales_email": "info@datadoghq.com"
+  "support_email": "help@datadoghq.com"
+"categories":
+- "metrics"
+- "cloud"
+- "log collection"
+"custom_kind": "integration"
+"dependencies": []
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "amazon_sqs"
+"integration_id": "amazon-sqs"
+"integration_title": "Amazon SQS"
+"integration_version": ""
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "amazon_sqs"
+"public_title": "Amazon SQS"
+"short_description": "Amazon Simple Queue Service (SQS) is a fast, reliable, scalable, fully managed message queuing service."
+"supported_os": []
+"tile":
+  "changelog": "CHANGELOG.md"
+  "classifier_tags":
+  - "Category::Metrics"
+  - "Category::Cloud"
+  - "Category::Log Collection"
+  "configuration": "README.md#Setup"
+  "description": "Amazon Simple Queue Service (SQS) is a fast, reliable, scalable, fully managed message queuing service."
+  "media": []
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": "Amazon SQS"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
-{{< img src="integrations/amazon_sqs/sqsdashboard.png" alt="SQS ダッシュボード" popup="true">}}
+{{< img src="integrations/amazon_sqs/sqsdashboard.png" alt="SQS Dashboard" popup="true">}}
 
-## 概要
+## Overview
 
-Amazon Simple Queue Service (SQS) は、高速、高信頼性、スケーラブルなフルマネージド型のメッセージキューサービスです。
+Amazon Simple Queue Service (SQS) is a fast, reliable, scalable, fully managed message queuing service.
 
-このインテグレーションを有効にすると、Datadog にすべての SQS メトリクスを表示できます。
+Enable this integration to see all your SQS metrics in Datadog.
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-[Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
+If you haven't already, set up the [Amazon Web Services integration first][1].
 
-### メトリクスの収集
+### Metric collection
 
-1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `SQS` が有効になっていることを確認します。
-2. Amazon SQS のメトリクスを収集するために、次のアクセス許可を [Datadog IAM ポリシー][3]に追加します。
+1. In the [AWS integration page][2], ensure that `SQS` is enabled under the `Metric Collection` tab.
+2. Add these permissions to your [Datadog IAM policy][3] in order to collect Amazon SQS metrics:
 
-    - `sqs:ListQueues`: 有効なキューを一覧表示するために使用されます。
-    - `tag:GetResources`: SQS のキューに適用されているカスタムタグを取得します。
+    - `sqs:ListQueues`: Used to list alive queues.
+    - `tag:GetResources`: Get custom tags applied to SQS queues.
 
-    詳細については、AWS ウェブサイト上の [SQS ポリシー][4]を参照してください。
+    For more information, see the [SQS policies][4] on the AWS website.
 
-3. [Datadog - Amazon SQS インテグレーション][5]をインストールします。
+3. Install the [Datadog - Amazon SQS integration][5].
 
-### 収集データ
+### Log collection
 
-#### SQS ログの有効化
+#### Enable SQS logging
 
-証跡の構成方法については、[AWS CloudTrail を使用した Amazon SQS API コールのログ記録][6]を参照してください。証跡を定義する場合は、ログの書き込み先となる S3 バケットを選択します。
+See [Logging Amazon SQS API Calls Using AWS CloudTrail][6] to configure your trail. When you define your trails, select a S3 bucket to write the logs in:
 
-{{< img src="integrations/amazon_cloudtrail/cloudtrail_logging.png" alt="CloudTrail ロギング" popup="true" style="width:70%;">}}
+{{< img src="integrations/amazon_cloudtrail/cloudtrail_logging.png" alt="CloudTrail logging" popup="true" style="width:70%;">}}
 
-#### ログを Datadog に送信する方法
+#### Send logs to Datadog
 
-1. [Datadog ログコレクション AWS Lambda 関数][7]をまだセットアップしていない場合は、セットアップします。
-2. Lambda 関数がインストールされたら、AWS コンソールから手動で、Amazon SQS ログを含む S3 バケットにトリガーを追加します。Lambda で、トリガーリストから S3 をクリックします。
-   {{< img src="integrations/amazon_s3/s3_trigger_configuration.png" alt="S3 トリガーコンフィギュレーション" popup="true" style="width:70%;">}}
-   Amazon SQS ログを含む S3 バケットを選択してトリガーを構成し、イベントタイプを `Object Created (All)` に変更して、Add ボタンをクリックします。
-   {{< img src="integrations/amazon_s3/s3_lambda_trigger_configuration.png" alt="S3 Lambda トリガーコンフィギュレーション" popup="true" style="width:70%;">}}
+1. If you haven't already, set up the [Datadog log collection AWS Lambda function][7].
+2. Once the lambda function is installed, manually add a trigger on the S3 bucket that contains your Amazon SQS logs in the AWS console. In your Lambda, click on S3 in the trigger list:
+   {{< img src="integrations/amazon_s3/s3_trigger_configuration.png" alt="S3 trigger configuration" popup="true" style="width:70%;">}}
+   Configure your trigger by choosing the S3 bucket that contains your Amazon SQS logs and change the event type to `Object Created (All)` then click on the add button.
+   {{< img src="integrations/amazon_s3/s3_lambda_trigger_configuration.png" alt="S3 Lambda trigger configuration" popup="true" style="width:70%;">}}
 
-トリガーが追加されたら、[Datadog ログエクスプローラー][8]を使用してログを確認します。
+Once the trigger has been added, use the [Datadog Log Explorer][8] to view your logs.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "amazon_sqs" >}}
 
 
-AWS から取得される各メトリクスには、ホスト名やセキュリティ グループなど、AWS コンソールに表示されるのと同じタグが割り当てられます。
+Each of the metrics retrieved from AWS are assigned the same tags that appear in the AWS console, including, but not limited to, host name, security-groups, and more.
 
-### イベント
+### Events
 
-Amazon SQS インテグレーションには、イベントは含まれません。
+The Amazon SQS integration does not include any events.
 
-### サービスのチェック
+### Service Checks
 
-Amazon SQS インテグレーションには、サービスのチェック機能は含まれません。
+The Amazon SQS integration does not include any service checks.
 
-## すぐに使える監視
+## Out-of-the-box monitoring
 
-Amazon SQS インテグレーションは、パフォーマンスを監視し最適化するために、すぐに使える監視機能を提供します。
+The Amazon SQS integration provides ready-to-use monitoring capabilities to monitor and optimize performance.
 
-- Amazon SQS ダッシュボード: すぐに使える [Amazon SQS ダッシュボード][10]を使用して、SQS キューの包括的な概要を得ることができます。
-- 推奨モニター: [Amazon SQS の推奨モニター][11]を有効にすると、問題をプロアクティブに検出し、タイムリーなアラートを受信することができます。
+- Amazon SQS Dashboard: Gain a comprehensive overview of your SQS queues using the out-of-the-box [Amazon SQS dashboard][10].
+- Recommended Monitors: Enable [recommended Amazon SQS monitors][11] to proactively detect issues and receive timely alerts.
 
-## トラブルシューティング
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][12]までお問合せください。
+Need help? Contact [Datadog support][12].
 
-[1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
+[1]: https://docs.datadoghq.com/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
-[3]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/#installation
+[3]: https://docs.datadoghq.com/integrations/amazon_web_services/#installation
 [4]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-authentication-and-access-control.html
 [5]: https://app.datadoghq.com/integrations/amazon-sqs
 [6]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/logging-using-cloudtrail.html
-[7]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function
+[7]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function
 [8]: https://app.datadoghq.com/logs
 [9]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_sqs/amazon_sqs_metadata.csv
 [10]: https://app.datadoghq.com/dash/integration/6/aws-sqs
 [11]: https://app.datadoghq.com/monitors/recommended
-[12]: https://docs.datadoghq.com/ja/help/
+[12]: https://docs.datadoghq.com/help/
+

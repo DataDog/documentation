@@ -1,63 +1,66 @@
 ---
-aliases:
-- /ja/tracing/profiler/enabling/ruby/
+title: Enabling the Ruby Profiler
 code_lang: ruby
+type: multi-code-lang
 code_lang_weight: 40
 further_reading:
-- link: getting_started/profiler
-  tag: ドキュメント
-  text: プロファイラーの概要
-- link: profiler/search_profiles
-  tag: ドキュメント
-  text: 使用可能なプロファイルタイプの詳細
-- link: profiler/profiler_troubleshooting/ruby
-  tag: ドキュメント
-  text: プロファイラの使用中に発生する問題を修正
-- link: https://www.datadoghq.com/blog/ruby-profiling-datadog-continuous-profiler/
-  tag: ブログ
-  text: Datadog Continuous Profiler で Ruby のコードパフォーマンスを分析
-title: Ruby プロファイラーの有効化
-type: multi-code-lang
+    - link: getting_started/profiler
+      tag: Documentation
+      text: Getting Started with Profiler
+    - link: profiler/profile_visualizations
+      tag: Documentation
+      text: Learn more about available profile visualizations
+    - link: profiler/profiler_troubleshooting/ruby
+      tag: Documentation
+      text: Fix problems you encounter while using the profiler
+    - link: "https://www.datadoghq.com/blog/ruby-profiling-datadog-continuous-profiler/"
+      tag: Blog
+      text: Analyze Ruby code performance with Datadog Continuous Profiler
+aliases:
+  - /tracing/profiler/enabling/ruby/
 ---
 
-プロファイラーは、Datadog トレースライブラリ内で送信されます。アプリケーションですでに [APM を使用してトレースを収集][1]している場合は、ライブラリのインストールをスキップして、プロファイラーの有効化に直接進むことができます。
+The profiler is shipped within Datadog tracing libraries. If you are already using [APM to collect traces][1] for your application, you can skip installing the library and go directly to enabling the profiler.
 
-## 要件
+## Requirements
 
-Datadog プロファイラーには Ruby 2.3+ が必要です (JRuby と TruffleRuby はサポートされていません)。
+For a summary of the minimum and recommended runtime and tracer versions across all languages, read [Supported Language and Tracer Versions][14].
 
-以下の OS、アーキテクチャに対応しています。
-- Linux (GNU libc) x86-64、aarch64
-- Alpine Linux (musl libc) x86-64、aarch64
+The Datadog Profiler requires Ruby 2.5+. JRuby and TruffleRuby are not supported.
 
-また、[`pkg-config`](https://www.freedesktop.org/wiki/Software/pkg-config/) または [`pkgconf`](https://github.com/pkgconf/pkgconf) Linux システムユーティリティのいずれかがインストールされている必要があります。
-このユーティリティは、ほとんどの Linux ディストリビューションのソフトウェアリポジトリで入手できます。例:
+The following operating systems and architectures are supported:
+- Linux (GNU libc) x86-64, aarch64
+- Alpine Linux (musl libc) x86-64, aarch64
 
-- `pkg-config` パッケージは [Homebrew](https://formulae.brew.sh/formula/pkg-config)、[Debian](https://packages.debian.org/search?keywords=pkg-config) および [Ubuntu](https://packages.ubuntu.com/search?keywords=pkg-config) ベースの Linux で利用可能です
-- `pkgconf` パッケージは [Arch](https://archlinux.org/packages/?q=pkgconf) および [Alpine](https://pkgs.alpinelinux.org/packages?name=pkgconf) ベースの Linux で利用可能です
-- `pkgconf-pkg-config` パッケージは [Fedora](https://packages.fedoraproject.org/pkgs/pkgconf/pkgconf-pkg-config/) および [Red-Hat](https://rpmfind.net/linux/rpm2html/search.php?query=pkgconf-pkg-config) ベースの Linux で利用可能です
+You also need either the [`pkg-config`](https://www.freedesktop.org/wiki/Software/pkg-config/) or the [`pkgconf`](https://github.com/pkgconf/pkgconf) system utility installed.
+This utility is available on the software repositories of most Linux distributions. For example:
 
-Continuous Profiler は、AWS Lambda などのサーバーレスプラットフォームには対応していません。
+- The `pkg-config` package is available for [Homebrew](https://formulae.brew.sh/formula/pkg-config), and [Debian](https://packages.debian.org/search?keywords=pkg-config)- and [Ubuntu](https://packages.ubuntu.com/search?keywords=pkg-config)-based Linux
+- The `pkgconf` package is available for [Arch](https://archlinux.org/packages/?q=pkgconf)- and [Alpine](https://pkgs.alpinelinux.org/packages?name=pkgconf)-based Linux
+- The `pkgconf-pkg-config` package is available for [Fedora](https://packages.fedoraproject.org/pkgs/pkgconf/pkgconf-pkg-config/)- and [Red-Hat](https://rpmfind.net/linux/rpm2html/search.php?query=pkgconf-pkg-config)-based Linux
 
-## インストール
+Continuous Profiler is not supported on serverless platforms, such as AWS Lambda.
 
-アプリケーションのプロファイリングを開始するには
+[Single Step Instrumentation](https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/single-step-apm/) is not supported for Linux hosts, VMs, or Docker.
+Single Step Instrumentation is supported for Kubernetes (using the Datadog Helm chart), but you need to manually set the `DD_PROFILING_ENABLED=true` environment variable to enable profiling.
 
-1. すでに Datadog を使用している場合は、Agent をバージョン [7.20.2][2] 以降または [6.20.2][3] 以降にアップグレードしてください。
+## Installation
 
-2. `ddtrace` および `google-protobuf` gem を `Gemfile` または `gems.rb` ファイルに追加します。
+To begin profiling applications:
+
+1. Ensure Datadog Agent v6+ is installed and running. Datadog recommends using [Datadog Agent v7+][2].
+
+2. Add the `datadog` gem to your `Gemfile` or `gems.rb` file:
 
     ```ruby
-    gem 'ddtrace', '~> 1.0'
-    gem 'google-protobuf', '~> 3.0'
+    gem 'datadog', '~> 2.0'
     ```
+3. Install the gems with `bundle install`.
 
-2. `bundle install` で gem をインストールします。
-
-3. プロファイラーを有効にします。
+4. Enable the profiler:
 
    {{< tabs >}}
-{{% tab "環境変数" %}}
+{{% tab "Environment variables" %}}
 
 ```shell
 export DD_PROFILING_ENABLED=true
@@ -78,46 +81,51 @@ Datadog.configure do |c|
 end
 ```
 
- **注**: Rails アプリケーションの場合は、上記のコードコンフィギュレーションで `config/initializers/datadog.rb` ファイルを作成します。
+**Note**: For Rails applications, create a `config/initializers/datadog.rb` file with the code configuration above.
 
 {{% /tab %}}
 {{< /tabs >}}
 
-4. Ruby アプリケーションの起動コマンドに `ddtracerb exec` コマンドを追加します。
+5. Add the `ddprofrb exec` command to your Ruby application start command:
 
     ```shell
-    bundle exec ddtracerb exec ruby myapp.rb
+    bundle exec ddprofrb exec ruby myapp.rb
     ```
 
-    Rails の例:
+    Rails example:
 
     ```shell
-    bundle exec ddtracerb exec bin/rails s
+    bundle exec ddprofrb exec bin/rails s
     ```
 
-    **注**
+    If you're running a version of `ddtrace` older than 1.21.0, replace `ddprofrb exec` with `ddtracerb exec`.
 
-    アプリケーションを `ddtracerb exec` で起動する選択肢がない (Phusion Passenger ウェブサーバーを使用している) 場合、Web アプリケーションの `config.ru` などのアプリケーションエントリポイントに以下を追加してプロファイラーを起動することも可能です。
+    **Note**
+
+    If starting the application with `ddprofrb exec` is not an option (for example, when using the Phusion Passenger web server), you can alternatively start the profiler by adding the following to your application entry point (such as `config.ru`, for a web application):
 
     ```ruby
     require 'datadog/profiling/preload'
     ```
 
+6. Optional: Set up [Source Code Integration][4] to connect your profiling data with your Git repositories.
 
-4. Ruby アプリケーションの起動 1〜2 分後、[Datadog APM > Profiler ページ][4]にプロファイルが表示されます。
+7. A minute or two after starting your Ruby application, your profiles will show up on the [Datadog APM > Profiler page][5].
 
-## 次のステップ
+## Not sure what to do next?
 
-[プロファイラーの概要][5]ガイドでは、パフォーマンスの問題があるサンプルサービスを例に、Continuous Profiler を使用して問題を理解し修正する方法を確認します。
+The [Getting Started with Profiler][6] guide takes a sample service with a performance problem and shows you how to use Continuous Profiler to understand and fix the problem.
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/tracing/trace_collection/
-[2]: https://app.datadoghq.com/account/settings#agent/overview
-[3]: https://app.datadoghq.com/account/settings?agent_version=6#agent
-[4]: https://app.datadoghq.com/profiling
-[5]: /ja/getting_started/profiler/
-[12]: /ja/profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
-[13]: /ja/profiler/connect_traces_and_profiles/#break-down-code-performance-by-api-endpoints
+[1]: /tracing/trace_collection/
+[2]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
+[3]: https://app.datadoghq.com/account/settings/agent/6?platform=overview
+[4]: /integrations/guide/source-code-integration/?tab=ruby
+[5]: https://app.datadoghq.com/profiling
+[6]: /getting_started/profiler/
+[12]: /profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
+[13]: /profiler/connect_traces_and_profiles/#break-down-code-performance-by-api-endpoints
+[14]: /profiler/enabling/supported_versions/

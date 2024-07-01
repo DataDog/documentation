@@ -1,58 +1,59 @@
 ---
-categories:
+"categories":
 - azure
-- クラウド
+- cloud
 - data stores
-dependencies: []
-description: Azure Blob Storage のキーメトリクスを追跡
-doc_link: https://docs.datadoghq.com/integrations/azure_blob_storage/
-draft: false
-git_integration_title: azure_blob_storage
-has_logo: true
-integration_id: azure-blob-storage
-integration_title: Microsoft Azure Blob Storage
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: '1.0'
-name: azure_blob_storage
-public_title: Datadog-Microsoft Azure Blob Storage インテグレーション
-short_description: Azure Blob Storage のキーメトリクスを追跡
-version: '1.0'
+"custom_kind": "integration"
+"dependencies": []
+"description": "Track key Azure Blob Storage metrics."
+"doc_link": "https://docs.datadoghq.com/integrations/azure_blob_storage/"
+"draft": false
+"git_integration_title": "azure_blob_storage"
+"has_logo": true
+"integration_id": "azure-blob-storage"
+"integration_title": "Microsoft Azure Blob Storage"
+"integration_version": ""
+"is_public": true
+"manifest_version": "1.0"
+"name": "azure_blob_storage"
+"public_title": "Datadog-Microsoft Azure Blob Storage Integration"
+"short_description": "Track key Azure Blob Storage metrics."
+"version": "1.0"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-## 概要
+## Overview
 
-Azure Blob Storage は、Microsoft のクラウド用オブジェクトストレージソリューションです。Blob ストレージは、大量の非構造化データを格納できるように最適化されています。Azure Blob Storage からメトリクスを取得すると、以下のことができます。
+Azure Blob Storage is Microsoft's object storage solution for the cloud. Blob storage is optimized for storing massive amounts of unstructured data. Get metrics from Azure Blob Storage to:
 
-- Blob Storage のパフォーマンスを視覚化できます。
-- Blob Storage のパフォーマンスをアプリケーションと関連付けることができます。
+- Visualize the performance of your Blob Storage.
+- Correlate the performance of your Blob Storage with your applications.
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-[Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。これ以外に必要なインストール手順はありません。
+If you haven't already, set up the [Microsoft Azure integration][1] first. There are no other installation steps that need to be performed.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "azure_blob_storage" >}}
 
 
-### ヘルプ
+### Events
 
-Azure Blob Storage インテグレーションには、イベントは含まれません。
+The Azure Blob Storage integration does not include any events.
 
-### ヘルプ
+### Service Checks
 
-Azure Blob Storage インテグレーションには、サービスのチェック機能は含まれません。
+The Azure Blob Storage integration does not include any service checks.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
+Need help? Contact [Datadog support][3].
 
-[1]: https://docs.datadoghq.com/ja/integrations/azure/
+[1]: https://docs.datadoghq.com/integrations/azure/
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_blob_storage/azure_blob_storage_metadata.csv
-[3]: https://docs.datadoghq.com/ja/help/
+[3]: https://docs.datadoghq.com/help/
+

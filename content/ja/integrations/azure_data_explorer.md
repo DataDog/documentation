@@ -1,55 +1,56 @@
 ---
-categories:
+"categories":
 - azure
-- クラウド
-- ネットワーク
-dependencies: []
-description: Azure Data Explorer のキーメトリクスを追跡
-doc_link: https://docs.datadoghq.com/integrations/azure_data_explorer/
-draft: false
-git_integration_title: azure_data_explorer
-has_logo: true
-integration_id: ''
-integration_title: Microsoft Azure Data Explorer
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: '1.0'
-name: azure_data_explorer
-public_title: Datadog-Microsoft Azure Data Explorer インテグレーション
-short_description: Azure Data Explorer のキーメトリクスを追跡
-version: '1.0'
+- cloud
+- network
+"custom_kind": "integration"
+"dependencies": []
+"description": "Track key Azure Data Explorer metrics."
+"doc_link": "https://docs.datadoghq.com/integrations/azure_data_explorer/"
+"draft": false
+"git_integration_title": "azure_data_explorer"
+"has_logo": true
+"integration_id": ""
+"integration_title": "Microsoft Azure Data Explorer"
+"integration_version": ""
+"is_public": true
+"manifest_version": "1.0"
+"name": "azure_data_explorer"
+"public_title": "Datadog-Microsoft Azure Data Explorer Integration"
+"short_description": "Track key Azure Data Explorer metrics."
+"version": "1.0"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-## 概要
+## Overview
 
-Azure Data Explorer は非常にスケーラブルで安全な分析サービスで、構造化されたデータと構造化されていないデータを精査して、即座に詳細な情報を得ることができます。アドホッククエリ用に最適化された Azure Data Explorer は、生データ、構造化データ、半構造化データのデータ探索を可能にし、詳細な情報を獲得するまでの時間を短縮します。Datadog を使用して、Azure Data Explorer のパフォーマンスと使用状況を、他のアプリケーションやインフラストラクチャーとの関連で監視します。
+Azure Data Explorer is a highly scalable and secure analytics service that enables you to do rich exploration of structured and unstructured data for instant insights. Optimized for ad-hoc queries, Azure Data Explorer enables data exploration over raw, structured, and semi-structured data delivering fast time to insight. Use Datadog to monitor your Azure Data Explorer performance and utilization in context with the rest of your applications and infrastructure.
 
-Azure Data Explorer からメトリクスを取得すると、以下のことができます。
+Get metrics from Azure Data Explorer to:
 
-* Data Explorer インスタンスの取り込み、処理、レイテンシーのパフォーマンスを追跡する。
-* Data Explorer のコンピューティング、メモリ、ネットワークリソースの使用状況を監視する。
+* Track ingestion, processing, and latency performance of your Data Explorer instances.
+* Monitor the utilization of your Data Explorer compute, memory, and network resources.
 
-## 計画と使用
-### インフラストラクチャーリスト
+## Setup
+### Installation
 
-[Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
+If you haven't already, set up the [Microsoft Azure integration][1] first. There are no other installation steps.
 
-## リアルユーザーモニタリング
-### データセキュリティ
+## Data Collected
+### Metrics
 {{< get-metrics-from-git "azure_data_explorer" >}}
 
 
-### ヘルプ
-Azure Data Explorer インテグレーションには、イベントは含まれません。
+### Events
+The Azure Data Explorer integration does not include any events.
 
-### ヘルプ
-Azure Data Explorer インテグレーションには、サービスのチェック機能は含まれません。
+### Service Checks
+The Azure Data Explorer integration does not include any service checks.
 
-## ヘルプ
-ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
+## Troubleshooting
+Need help? Contact [Datadog support][3].
 
-[1]: https://docs.datadoghq.com/ja/integrations/azure/
+[1]: https://docs.datadoghq.com/integrations/azure/
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_data_explorer/azure_data_explorer_metadata.csv
-[3]: https://docs.datadoghq.com/ja/help/
+[3]: https://docs.datadoghq.com/help/
+

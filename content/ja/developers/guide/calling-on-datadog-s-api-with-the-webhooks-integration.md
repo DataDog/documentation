@@ -1,38 +1,38 @@
 ---
+title: Calling on Datadog's API with the Webhooks Integration
+kind: guide
 aliases:
-- /ja/developers/faq/calling-on-datadog-s-api-with-the-webhooks-integration
-kind: ガイド
-title: Webhooks インテグレーションを使用した Datadog API の呼び出し
+  - /developers/faq/calling-on-datadog-s-api-with-the-webhooks-integration
 ---
 
-[Webhooks インテグレーション][1]を使用して、Datadog のモニターやイベントから Webhook をトリガーできます。これは、カスタムコミュニケーションツールを使用したり、[モニターアラートをテキストメッセージに転送して][2]、Datadog アカウントからチームに連絡する場合に便利です。
+You can use the [Webhooks integration][1] to trigger webhooks from Datadog monitors and events—this is often useful for having your Datadog account communicate with your team using custom communication tools, or even [forwarding monitor alerts to text messages][2].
 
-さらに、[Datadog の API][3] を呼び出すように Webhook 通知をセットアップすることもできます。たとえば、モニターがトリガーされるたびにメトリクスやイベントを Datadog アカウントに送信できます。
+You can also set up webhook notifications to call on [Datadog's API][3] if, for example, you wanted to submit a metric or event to your Datadog account every time a monitor triggered.
 
-## 使用方法
+## How to do this
 
-Webhook をセットアップするには、名前 (モニターで参照される) と URL (Webhook によって ping される) を指定する必要があります。Datadog API の呼び出しを送信する場合は、「Use custom payload」を選択し、次のフィールドにカスタムペイロードを追加します。
+Each webhook must be set up with a name (to be referenced in monitors) and a URL (to be pinged by the webhook). For submitting a call to the Datadog API, select "Use custom payload" and add your custom payload to the subsequent field.
 
-* **name フィールド**: 他の Webhook 名フィールドと重複しない一意の名前。
+* The **name field**: anything, as long as it is unique among all the other webhook name fields.
 
-* **url フィールド**: API を ping する際に使用される URL。次のようになります。
+* The **url field**: the URL used when pinging the API. It looks like this:
 `https://api.datadoghq.com/api/v1/<API_ENDPOINT>?api_key=<DATADOG_API_KEY>`
 
-* **custom payload フィールド**: API 呼び出しに使用されるすべてのオプションを格納した JSON。API 呼び出しの種類に応じて適切なオプションが決まります。モニターの `$symbol` コンテンツを使用してオプション値の一部に入力することができます。
+* The **custom payload field**: contains the JSON with all the options you want to include in the API call. The type of API call determines the appropriate options. You can sometimes use the monitor's `$symbol` content to fill in parts of the option values.
 
-## 例
+## Example
 
-チームのメンバーが、実行中にそのときどきのカウントを確認したいと思うような一連のモニターがあるとします。知りたいのは、いくつのモニターが OK ステータスで、いくつのモニターが CRITICAL ステータスかということです。そのために、これらのモニターのいずれかがアラート状態、または OK 状態になるたびに「check_run」API 呼び出しを送信する Webhook 通知を追加します。さらに、[スクリーンボード][4]に「Check status」ウィジェットを追加して、任意の時点でこれらのモニターのステータスをチームメンバーに示すことができます。
+Imagine that you have a series of monitors that someone on your team would like to see a running momentary count of. They want this count in terms of how many of these monitors are in an OK vs. a CRITICAL status. You can add a webhook notification to submit a "check_run" API call whenever one of these monitors goes into an alert or OK state; from there you can add a "check status" widget in a [screenboard][4] to show your teammate what the status of all these monitors were at any given moment.
 
-この例では、「mymonitorgroup-alert-check」用と「mymonitorgroup-ok-check」用の 2 つの Webhook が必要です。どちらも同じ API エンドポイントを使用するため、それぞれの名前と URL 値は以下のようになります。
+In that case, you need two separate webhooks, one for "mymonitorgroup-alert-check" and the other for "mymonitorgroup-ok-check". Both use the same API endpoint, so their respective name and URL values are be as follows:
 
-* 名前: mymonitorgroup-alert-check
+* Name: mymonitorgroup-alert-check
     URL: `https://api.datadoghq.com/api/v1/check_run?api_key=<DATADOG_API_KEY>`
 
-* 名前: mymonitorgroup-ok-check
+* Name: mymonitorgroup-ok-check
     URL: `https://api.datadoghq.com/api/v1/check_run?api_key=<DATADOG_API_KEY>`
 
-カスタムペイロードで、check_run の名前とタグを適用します。「アラート」Webhook の場合は、以下のようになります。
+The custom payload is where the name and tags of the check_run are applied. For the "alert" webhook, consider the following:
 
 ```json
 {
@@ -43,24 +43,24 @@ Webhook をセットアップするには、名前 (モニターで参照され�
 }
 ```
 
-このカスタムペイロードを使用した場合は、@webhook-mymonitorgroup-alert-check がモニターによってトリガーされるたびに、「mymonitorgroup.status」という名前のチェックランが送信されます。このチェックランは、CRITICAL 状態をチェックし、モニターの名前と、該当する場合はモニターがトリガーされたホストの名前でもタグ付けされます。
+With this custom payload, every time the @webhook-mymonitorgroup-alert-check is triggered by a monitor, it submits a check run named "mymonitorgroup.status" with a CRITICAL state, tagged by the monitor's name and, if applicable, the name of the host that the monitor is triggered on.
 
-さらに、同じカスタムペイロード値を "mymonitorgroup-ok-check" チェックにも適用できます。ただし、「status」は「2」ではなく、「OK」状態を示す「0」になります。
+You can then apply the same custom payload values for the "mymonitorgroup-ok-check" check, but with a "status" of "0" instead of "2" to indicate an "OK" state.
 
-この 2 つの Webhook セットを作成したら、モニターに移動し (チームメンバーが簡易ステータス表示を行いたいモニター)、以下のように適切な条件付き論理タグの中にネストされた Webhook 通知リファレンスを追加します。
+With both of those webhooks set, you can go to your monitors (the ones your teammate wants a quick status view of) and add the webhook notification references, nested in their appropriate conditional logic tag, like so:
 
 ```text
 {{#is_alert}} @webhook-mymonitorgroup-alert-check {{/is_alert}}
 {{#is_recovery}} @webhook-mymonitorgroup-ok-check {{/is_recovery}}
 ```
 
-モニターを設定してアラートが開始されたら (OK 状態や CRITICAL 状態がステータスカウントに正しく算入されるには、これらのモニターは OK または CRITICAL で少なくとも一度アラートする必要がある)、この例では「monitor」タグによってグループ選択された「mymonitorgroup.check」に対して[スクリーンボード][4]で「Check status」ウィジェットをセットアップできます。
+Once your monitors are set and alerting (they need to alert at least once in either OK or CRITICAL state in order to be included in the complete status count), you can then set up a "check status" widget in a [screenboard][4] over your "mymonitorgroup.check"—grouped out by, in this case, the "monitor" tag.
 
-以下に、そのようなウィジェットの例を挙げます。ただし、このチェックの名前は「composite.status」で、グループ内の 1 つのモニターが「alert」をトリガーし、その後再び「ok」になりました。
+Here's an example of one such widget (although in this example, the check's name was "composite.status" and only one monitor in the group has yet triggered as "alert" and then "ok" again):
 
 {{< img src="developers/faq/check_status_editor.png" alt="check_status_editor" >}}
 
-[1]: /ja/integrations/webhooks/
+[1]: /integrations/webhooks/
 [2]: https://www.datadoghq.com/blog/send-alerts-sms-customizable-webhooks-twilio
-[3]: /ja/api/
-[4]: /ja/dashboards/#screenboards
+[3]: /api/
+[4]: /dashboards/#screenboards

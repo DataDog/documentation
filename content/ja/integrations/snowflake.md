@@ -1,102 +1,97 @@
 ---
-app_id: snowflake
-app_uuid: 23e9084d-5801-4a71-88fe-f62b7c1bb289
-assets:
-  dashboards:
-    Snowflake: assets/dashboards/snowflake.json
-    Snowflake Organization Metrics: assets/dashboards/organization_metrics.json
-  integration:
-    configuration:
-      spec: assets/configuration/spec.yaml
-    events:
-      creates_events: false
-    metrics:
-      check: snowflake.storage.storage_bytes.total
-      metadata_path: metadata.csv
-      prefix: snowflake.
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_name: Snowflake
-  monitors:
-    Snowflake failed logins: assets/recommended_monitors/snowflake_failed_logins.json
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com (日本語対応)
-  support_email: help@datadoghq.com
-categories:
+"app_id": "snowflake"
+"app_uuid": "23e9084d-5801-4a71-88fe-f62b7c1bb289"
+"assets":
+  "dashboards":
+    "Snowflake": assets/dashboards/snowflake.json
+    "Snowflake Organization Metrics": assets/dashboards/organization_metrics.json
+  "integration":
+    "auto_install": true
+    "configuration":
+      "spec": assets/configuration/spec.yaml
+    "events":
+      "creates_events": false
+    "metrics":
+      "check": snowflake.storage.storage_bytes.total
+      "metadata_path": metadata.csv
+      "prefix": snowflake.
+    "service_checks":
+      "metadata_path": assets/service_checks.json
+    "source_type_id": !!int "10123"
+    "source_type_name": Snowflake
+  "monitors":
+    "Snowflake failed logins": assets/monitors/snowflake_failed_logins.json
+"author":
+  "homepage": "https://www.datadoghq.com"
+  "name": Datadog
+  "sales_email": info@datadoghq.com
+  "support_email": help@datadoghq.com
+"categories":
 - cloud
-- data store
-- コスト管理
-dependencies:
-- https://github.com/DataDog/integrations-core/blob/master/snowflake/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: snowflake
-integration_id: snowflake
-integration_title: Snowflake
-integration_version: 4.5.4
-is_public: true
-kind: インテグレーション
-manifest_version: 2.0.0
-name: snowflake
-public_title: Snowflake
-short_description: クレジットの使用状況、ストレージ、クエリ、ユーザー履歴などの主要なメトリクスを監視します。
-supported_os:
+- data stores
+- cost management
+"dependencies":
+- "https://github.com/DataDog/integrations-core/blob/master/snowflake/README.md"
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "snowflake"
+"integration_id": "snowflake"
+"integration_title": "Snowflake"
+"integration_version": "5.6.0"
+"is_public": true
+"kind": "integration"
+"manifest_version": "2.0.0"
+"name": "snowflake"
+"public_title": "Snowflake"
+"short_description": "Monitor key metrics for credit usage, storage, query, user history and more."
+"supported_os":
 - linux
 - macos
 - windows
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Cloud
-  - Category::Data Store
-  - Category::Cost Management
-  configuration: README.md#Setup
-  description: クレジットの使用状況、ストレージ、クエリ、ユーザー履歴などの主要なメトリクスを監視します。
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Snowflake
+"tile":
+  "changelog": CHANGELOG.md
+  "classifier_tags":
+  - "Supported OS::Linux"
+  - "Supported OS::macOS"
+  - "Supported OS::Windows"
+  - "Category::Cloud"
+  - "Category::Data Stores"
+  - "Category::Cost Management"
+  "configuration": "README.md#Setup"
+  "description": Monitor key metrics for credit usage, storage, query, user history and more.
+  "media": []
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": Snowflake
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## 概要
+## Overview
 
-このチェックは、Datadog Agent を通じて [Snowflake][1] を監視します。Snowflake は SaaS 分析データウェアハウスであり、完全にクラウドインフラストラクチャー上で実行されます。
-このインテグレーションにより、クレジットの使用状況、請求、ストレージ、クエリメトリクスなどが監視されます。
+This check monitors [Snowflake][1] through the Datadog Agent. Snowflake is a SaaS-analytic data warehouse and runs completely on cloud infrastructure. 
+This integration monitors credit usage, billing, storage, query metrics, and more.
 
-<div class="alert alert-info"><bold>注</bold>: メトリクスは Snowflake へのクエリとともに収集されます。Datadog インテグレーションによるクエリは、Snowflake によって課金されます。</div>
+<div class="alert alert-info"><bold>Note</bold>: Metrics are collected with queries to Snowflake. Queries made by the Datadog integration are billable by Snowflake.</div>
 
-## セットアップ
+## Setup
 
-以下の手順に従って、このチェックをインストールし、ホストで実行中の Agent に対して構成します。
+Follow the instructions below to install and configure this check for an Agent running on a host.
 
-### インストール
+### Installation
 
-Snowflake チェックは [Datadog Agent][2] パッケージに含まれています。
+The Snowflake check is included in the [Datadog Agent][2] package.
 
-**注**: Python 2 を使用する Datadog Agent v6 では、Snowflake チェックは利用できません。Agent v6 で Snowflake を使用するには、[Datadog Agent v6 で Python 3 を使用する][3]を参照するか、Agent v7 にアップグレードしてください。
+**Note**: The Snowflake check is not available in Datadog Agent v6 using Python 2. To use Snowflake on Agent v6 see [Use Python 3 with Datadog Agent v6][3] or upgrade to Agent v7.
 
-<div class="alert alert-warning"><code>v7.23.0</code> でインテグレーションを構成している場合は、バージョンを <code>2.0.1</code> にアップグレードして最新機能をご利用ください。
-下記の<a href=https://docs.datadoghq.com/agent/guide/integration-management/#install>コマンド</a>を使用してインテグレーションをアップグレードできます。<br>
+### Configuration
+<div class="alert alert-warning">Snowflake recommends granting permissions to an alternate role like `SYSADMIN`. Read more about controlling <a href="https://docs.snowflake.com/en/user-guide/security-access-control-considerations.html#control-the-assignment-of-the-accountadmin-role-to-users">ACCOUNTADMIN role</a> for more information.</div>
 
-```text
-datadog-agent integration install datadog-snowflake==2.0.1
-```
-</div>
+1. Create a Datadog specific role and user to monitor Snowflake. In Snowflake, run the following to create a custom role with access to the ACCOUNT_USAGE schema.
 
-### コンフィギュレーション
-<div class="alert alert-warning">Snowflake は、`SYSADMIN` などの代替ロールにアクセス許可を付与することをお勧めします。詳細については、<a href="https://docs.snowflake.com/en/user-guide/security-access-control-considerations.html#control-the-assignment-of-the-accountadmin-role-to-users">ACCOUNTADMIN ロール</a>の制御の詳細をご覧ください。</div>
-
-1. Snowflake を監視するための Datadog 固有のロールとユーザーを作成します。Snowflake で、以下を実行して、ACCOUNT_USAGE スキーマにアクセスできるカスタムロールを作成します。
-
-   注: デフォルトでは、このインテグレーションは `SNOWFLAKE` データベースと `ACCOUNT_USAGE` スキーマを監視します。`ORGANIZATION_USAGE` スキーマを監視する方法については、"組織データの収集” を参照してください。
-   このデータベースはデフォルトで使用でき、表示できるのは `ACCOUNTADMIN` ロールまたは [ACCOUNTADMIN によって付与されたロール][4]のユーザーのみです。
+    Note: By default, this integration monitors the `SNOWFLAKE` database and `ACCOUNT_USAGE` schema. See "Collecting Organization Data" for information on how to monitor the `ORGANIZATION_USAGE` schema.
+    This database is available by default and only viewable by users in the `ACCOUNTADMIN` role or [any role granted by the ACCOUNTADMIN][4].
 
 
     ```text
@@ -108,17 +103,20 @@ datadog-agent integration install datadog-snowflake==2.0.1
     ```
 
 
-    または、`ACCOUNT_USAGE` にアクセスできる `DATADOG` カスタムロールを作成することもできます。
+    Alternatively, you can create a `DATADOG` custom role with access to `ACCOUNT_USAGE`.
 
 
     ```text
-    -- Snowflake の使用状況を監視することを目的とした新しいロールを作成します。
+    -- Create a new role intended to monitor Snowflake usage.
     create role DATADOG;
 
-    -- SNOWFLAKE データベースに対する権限を新しいロールに付与します。
+    -- Grant privileges on the SNOWFLAKE database to the new role.
     grant imported privileges on database SNOWFLAKE to role DATADOG;
 
-    -- ユーザーを作成します。既存のユーザーを使用している場合は、この手順をスキップしてください。
+    -- Grant usage to your default warehouse to the role DATADOG.
+   grant usage on warehouse <WAREHOUSE> to role DATADOG;
+
+    -- Create a user, skip this step if you are using an existing user.
     create user DATADOG_USER
     LOGIN_NAME = DATADOG_USER
     password = '<PASSWORD>'
@@ -126,12 +124,12 @@ datadog-agent integration install datadog-snowflake==2.0.1
     default_role = DATADOG
     default_namespace = SNOWFLAKE.ACCOUNT_USAGE;
 
-    -- ユーザーにモニターのロールを付与します。
+    -- Grant the monitor role to the user.
     grant role DATADOG to user <USER>;
     ```
 
 
-2. Snowflake のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `snowflake.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル snowflake.d/conf.yaml][5] を参照してください。
+2. Edit the `snowflake.d/conf.yaml` file, in the `conf.d/` folder at the root of your Agent's configuration directory to start collecting your Snowflake performance data. See the [sample snowflake.d/conf.yaml][5] for all available configuration options.
 
     ```yaml
         ## @param account - string - required
@@ -179,22 +177,22 @@ datadog-agent integration install datadog-snowflake==2.0.1
     Snowflake metrics are aggregated by day, you can increase the interval to reduce the number of queries.<br>
     <bold>Note</bold>: Snowflake ACCOUNT_USAGE views have a <a href="https://docs.snowflake.com/en/sql-reference/account-usage.html#data-latency">known latency</a> of 45 minutes to 3 hours.</div>
 
-3. [Agent を再起動します][6]。
+3. [Restart the Agent][6].
 
-#### 組織データの収集
+#### Collecting Organization Data
 
-デフォルトでは、このインテグレーションは `ACCOUNT_USAGE` スキーマを監視しますが、代わりに組織レベルのメトリクスを監視するように設定することができます。
+By default, this integration monitors the `ACCOUNT_USAGE` schema, but it can be set to monitor organization-level metrics instead.
 
-組織メトリクスを収集するには、インテグレーションの構成でスキーマフィールドを `ORGANIZATION_USAGE` に変更し、`min_collection_interval` を 43200 に増やします。ほとんどの組織クエリのレイテンシーが最大 24 時間であるため、これにより Snowflake へのクエリ数を減らすことができます。
+To collect organization metrics, change the schema field to `ORGANIZATION_USAGE` and increase the `min_collection_interval` to 43200 in the integration's configuration. This reduces the number of queries to Snowflake, as most organization queries have a latency of up to 24 hours.
 
-注: 組織のメトリクスを監視するには、`user` が `ORGADMIN` ロールである必要があります。
+Note: To monitor organization metrics, your `user` must have the `ORGADMIN` role.
 
   ```yaml
       - schema: ORGANIZATION_USAGE
         min_collection_interval: 43200
   ```
 
-デフォルトでは、一部の組織メトリクスのみが有効になっています。利用可能なすべての組織メトリクスを収集するには、`metric_groups` 構成オプションを使用します。
+Only some organization metrics are enabled by default. To collect all available organization metrics, utilize the `metric_groups` configuration option:
 
   ```yaml
       metric_groups:
@@ -208,7 +206,7 @@ datadog-agent integration install datadog-snowflake==2.0.1
         - snowflake.organization.data_transfer
   ```
 
-さらに、アカウントと組織の両方のメトリクスを同時に監視することができます。
+Additionally, you can monitor both account and organization metrics at the same time:
 
   ```yaml
       instances:
@@ -229,9 +227,9 @@ datadog-agent integration install datadog-snowflake==2.0.1
         min_collection_interval: 3600
   ```
 
-#### 複数環境のデータ収集
+#### Collecting data for multiple environments
 
-複数の Snowflake 環境のデータを収集したい場合は、`snowflake.d/conf.yaml` ファイルに各環境をインスタンスとして追加します。例えば、`DATADOG_SYSADMIN` と `DATADOG_USER` という 2 つのユーザーのデータを収集する必要がある場合:
+If you want to collect data for multiple Snowflake environments, add each environment as an instance in your `snowflake.d/conf.yaml` file. For example, if you needed to collect data for two users named `DATADOG_SYSADMIN` and `DATADOG_USER`:
 
 ```yaml
 instances:
@@ -248,44 +246,44 @@ instances:
     database: EXAMPLE-INC
 ```
 
-#### プロキシのコンフィギュレーション
+#### Proxy configuration
 
-Snowflake は、[プロキシコンフィギュレーションの環境変数][7]を設定することをお勧めします。
+Snowflake recommends setting [environment variables for proxy configuration][7].
 
-[snowflake.d/conf.yaml][5] の `init_config` の下に `proxy_host`、`proxy_port`、`proxy_user`、`proxy_password` を設定することもできます。
+You can also set the `proxy_host`, `proxy_port`, `proxy_user`, and `proxy_password` under `init_config` in the [snowflake.d/conf.yaml][5].
 
-**注**: Snowflake は、プロキシコンフィギュレーションを自動的にフォーマットし、[標準プロキシ環境変数][8]を設定します。
-これらの変数は、Docker、ECS、Kubernetes などのオーケストレーターを含むインテグレーションからのすべてのリクエストにも影響を与えます。
+**NOTE**: Snowflake automatically formats the proxy configurations and sets [standard proxy environment variables][8]. 
+These variables also impact every requests from integrations, including orchestrators like Docker, ECS, and Kubernetes.
 
-#### Snowflake 構成へのプライベート接続
+#### Private connectivity to Snowflake configuration
 
-Snowflake で[プライベート接続][9] ([AWS PrivateLink][10] など) が有効な場合、`account` 構成オプションを以下の形式に更新することで Snowflake とのインテグレーションを構成することが可能です。
+If [private connectivity][9] (such as [AWS PrivateLink][10]) is enabled in Snowflake, you can configure the Snowflake integration by updating the `account` configuration option to the following format:
 
   ```yaml
         - account: <ACCOUNT>.<REGION_ID>.privatelink
   ```
 
-### Snowflake カスタムクエリ
+### Snowflake custom queries
 
-Snowflake インテグレーションは、カスタムクエリに対応しています。デフォルトで、インテグレーションは共有 `SNOWFLAKE` データベースと `ACCOUNT_USAGE` スキーマに接続します。
+The Snowflake integration supports custom queries. By default, the integration connects to the shared `SNOWFLAKE` database and `ACCOUNT_USAGE` schema. 
 
-カスタムクエリを別のスキーマまたはデータベースで実行するには、別のインスタンスを[サンプル snowflake.d/conf.yaml][5] に追加して `database` および `schema` オプションを指定します。
-ユーザーとロールには、指定したデータベースまたはスキーマへのアクセス権があることを確認します。
+To run custom queries in a different schema or database, add another instance to the [sample snowflake.d/conf.yaml][5] and specify the `database` and `schema` options.
+Ensure the user and role has access to the specified database or schema.
 
-#### コンフィギュレーションオプション
-`custom_queries` には以下のオプションがあります。
+#### Configuration options
+The `custom_queries` option has the following options:
 
-| オプション        | 必須 | 説明                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| Option        | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 |---------------|----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| query         | 〇      | 実行する SQL です。簡単なステートメントにすることも、複数行のスクリプトにすることもできます。結果のすべての行が評価されます。複数行のスクリプトが必要な場合は、パイプを使用します。                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| columns       | 〇      | 列を表すリストです。左から右へ順に並べられます。<br><br>次の 2 つの必須データがあります。<br> - **`name`**: サフィックスとして metric_prefix に付加され、完全な名前を形成します。`type` が `tag` と指定されている場合、この列は、このクエリによって収集されるすべてのメトリクスにタグとして適用されます。<br> - **`type`**: 送信方法 (`gauge`、`count`、`rate` など)。`tag` と設定し、この列のアイテムの名前と値 (`<name>:<row_value>`) で行の各メトリクスにタグ付けすることができます。 |
-| タグ          | ✕       | 各メトリクスに適用する静的タグのリスト。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| query         | Yes      | This is the SQL to execute. It can be a simple statement or a multi-line script. All of the rows of the results are evaluated. Use the pipe if you require a multi-line script.                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| columns       | Yes      | This is a list representing each column ordered sequentially from left to right.<br><br>There are 2 required pieces of data:<br>  - **`name`**: This is the suffix to append to the metric_prefix to form the full metric name. If the `type` is specified as `tag`, the column is instead applied as a tag to every metric collected by this query.<br>  - **`type`**: This is the submission method (`gauge`, `count`, `rate`, etc.). This can also be set to `tag` to tag each metric in the row with the name and value (`<name>:<row_value>`) of the item in this column. |
+| tags          | No       | A list of static tags to apply to each metric.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 
 
-##### 注
-- 定義済みの `columns` のうち最低 1 つは、メトリクスタイプ (`gauge`、`count`、`rate` など) である必要があります。
-- 列内のアイテム数は、クエリで返された列数と同じである必要があります。
-- `columns` のアイテムが定義される順番は、クエリで返された順番と同じである必要があります。
+##### Notes
+- At least one item in defined `columns` should be a metric type (`gauge`, `count`, `rate`, etc).
+- The number of items in columns must equal the number of columns returned in the query.
+- The order in which the items in `columns` are defined must be in the same order returned in the query
 
 ```yaml
 custom_queries:
@@ -301,16 +299,16 @@ custom_queries:
       - test:snowflake
 ```
 
-#### 例
-以下は、データベース、スキーマ、ウェアハウス名でタグ付けされた [`QUERY_HISTORY` ビュー][11]ですべてのクエリをカウントするクエリの例です。
+#### Example
+The following example is a query that counts all queries in the [`QUERY_HISTORY` view][11] tagged by database, schema, and warehouse names.
 
 ```TEXT
 select count(*), DATABASE_NAME, SCHEMA_NAME, WAREHOUSE_NAME from QUERY_HISTORY group by 2, 3, 4;
 ```
 
-##### コンフィギュレーション
+##### Configuration
 
-`instances` のカスタムクエリのコンフィギュレーションは、以下のようになります。
+The custom query configuration in `instances` looks like the following:
 
 ```yaml
 custom_queries:
@@ -328,62 +326,63 @@ custom_queries:
       - test:snowflake
 ```
 
-##### 検証
+##### Validation
 
-結果を確認するには、[メトリクスの概要][12]を使用してメトリクスを検索します。
+To verify the result, search for the metrics using [Metrics Summary][12]:
 
-![Snowflake メトリクスの概要][13]
+![Snowflake Metric Summary][13]
 
 
-### 検証
+### Validation
 
-[Agent の status サブコマンドを実行][14]し、Checks セクションで `snowflake` を探します。
+[Run the Agent's status subcommand][14] and look for `snowflake` under the Checks section.
 
-## 収集データ
+## Data Collected
 
-<div class="alert alert-info"><bold>注</bold>: デフォルトでは、以下のメトリクスグループのメトリクスのみが有効になっています。<code>snowflake.query.*</code>、<code>snowflake.billing.*</code>、<code>snowflake.storage.*</code>、<code>snowflake.logins.*</code>
+<div class="alert alert-info"><bold>Note</bold>: Only metrics from the following metric groups are enabled by default: <code>snowflake.query.*</code>, <code>snowflake.billing.*</code>, <code>snowflake.storage.*</code>, and <code>snowflake.logins.*</code>.
 
-他のメトリクスグループのメトリクスを収集する場合は、<a href="https://github.com/DataDog/integrations-core/blob/master/snowflake/datadog_checks/snowflake/data/conf.yaml.example"></a>でこのインテグレーションのコンフィグファイル例を参照してください。
+If you would like to collect metrics from other metric groups, please refer <a href="https://github.com/DataDog/integrations-core/blob/master/snowflake/datadog_checks/snowflake/data/conf.yaml.example">to the example config file for this integration</a>.
 </div>
 
-### メトリクス
+### Metrics
 {{< get-metrics-from-git "snowflake" >}}
 
 
-### イベント
+### Events
 
-Snowflake には、イベントは含まれません。
+Snowflake does not include any events.
 
-### サービスのチェック
+### Service Checks
 {{< get-service-checks-from-git "snowflake" >}}
 
 
-## トラブルシューティング
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][17]までお問合せください。
+Need help? Contact [Datadog support][17].
 
-## その他の参考資料
+## Further Reading
 
-お役に立つドキュメント、リンクや記事:
+Additional helpful documentation, links, and articles:
 
-- [Datadog で Snowflake を監視する][18]
+- [Monitor Snowflake with Datadog][18]
 
 
 [1]: https://www.snowflake.com/
 [2]: https://app.datadoghq.com/account/settings/agent/latest
-[3]: https://docs.datadoghq.com/ja/agent/guide/agent-v6-python-3/?tab=hostagent
+[3]: https://docs.datadoghq.com/agent/guide/agent-v6-python-3/?tab=hostagent
 [4]: https://docs.snowflake.com/en/sql-reference/account-usage.html#enabling-account-usage-for-other-roles
 [5]: https://github.com/DataDog/integrations-core/blob/master/snowflake/datadog_checks/snowflake/data/conf.yaml.example
-[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[6]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [7]: https://docs.snowflake.com/en/user-guide/python-connector-example.html#using-a-proxy-server
 [8]: https://github.com/snowflakedb/snowflake-connector-python/blob/d6df58f1c338b255393571a08a1f9f3a71d8f7b6/src/snowflake/connector/proxy.py#L40-L41
 [9]: https://docs.snowflake.com/en/user-guide/private-snowflake-service.html
 [10]: https://docs.snowflake.com/en/user-guide/admin-security-privatelink.html
 [11]: https://docs.snowflake.com/en/sql-reference/account-usage/query_history.html
-[12]: https://docs.datadoghq.com/ja/metrics/summary/
+[12]: https://docs.datadoghq.com/metrics/summary/
 [13]: https://raw.githubusercontent.com/DataDog/integrations-core/master/snowflake/images/custom_query.png
-[14]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[14]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
 [15]: https://github.com/DataDog/integrations-core/blob/master/snowflake/metadata.csv
 [16]: https://github.com/DataDog/integrations-core/blob/master/snowflake/assets/service_checks.json
-[17]: https://docs.datadoghq.com/ja/help/
+[17]: https://docs.datadoghq.com/help/
 [18]: https://www.datadoghq.com/blog/snowflake-monitoring-datadog/
+

@@ -1,91 +1,110 @@
 ---
+title: Python Compatibility Requirements
+kind: documentation
 code_lang: python
-code_lang_weight: 50
-title: Python 互換性要件
 type: multi-code-lang
+code_lang_weight: 50
 ---
-## ASM の機能サポート
+## Application Security capabilities support
 
-Python ライブラリでは、指定されたトレーサーのバージョンで、以下の ASM 機能がサポートされています。
+The following application security capabilities are supported in the Python library, for the specified tracer version:
 
-| ASM の機能                   | Python トレーサーの最小バージョン |
+| Application Security capability  | Minimum Python tracer version |
 | -------------------------------- | ----------------------------|
 | Threat Detection | 1.9.0   |
 | Threat Protection | 1.10.0  |
-| オープンソースソフトウェア (OSS) の脆弱性管理 | 1.5.0  |
-| コードレベルの脆弱性管理 (ベータ版)  |  非公開ベータ版  |
+| Customize response to blocked requests | 1.19.0 |
+| Software Composition Analysis (SCA) | 1.5.0  |
+| Code Security         |  private beta  |
+| Automatic user activity event tracking | 1.17.0 |
+| API Security | 2.6.0 |
 
-**注**: Threat Protection では、[リモート構成][2]を有効にする必要があり、これは記載のトレーサーの最小バージョンに含まれています。
+**Note**: Threat Protection requires enabling [Remote Configuration][2], which is included in the listed minimum tracer version.
 
-### サポートされるデプロイメントタイプ
-|タイプ | 脅威検知のサポート | OSSの脆弱性管理のサポート |
-| ---           |   ---             |           ----            |
-| Docker        | {{< X >}}         | {{< X >}}                 |
-| Kubernetes    | {{< X >}}         | {{< X >}}                 |
-| AWS ECS       | {{< X >}}         | {{< X >}}                 |
-| AWS Fargate   | {{< X >}}         | {{< X >}}                 |
-| AWS Lambda    | {{< X >}}         |                           |
+### Supported deployment types
+| Type        | Threat Detection support | Software Composition Analysis |
+|-------------|--------------------------|-------------------------------|
+| Docker      | {{< X >}}                | {{< X >}}                     |
+| Kubernetes  | {{< X >}}                | {{< X >}}                     |
+| Amazon ECS  | {{< X >}}                | {{< X >}}                     |
+| AWS Fargate | {{< X >}}                | {{< X >}}                     |
+| AWS Lambda  | {{< X >}}                |                               |
 
 
-## 言語とフレームワークの互換性
+## Language and framework compatibility
 
-### サポート対象の Python バージョン
+### Supported Python versions
 
-Python ASM クライアントライブラリは，ライブラリと Python ランタイムの異なるバージョンに対するサポートレベルを指定する[バージョニングポリシー][3]に従っています。
+The Python Application Security Client library follows a [versioning policy][3] that specifies the support level for the different versions of the library and Python runtime.
 
-2 つのリリースブランチに対応しています。
+Two release branches are supported:
 
-| リリース    | サポートレベル        |
+| Release    | Support level        |
 |------------|----------------------|
-| `<1`       | メンテナンス           |
-| `>=1.0,<2` | 一般提供 |
+| `<1`       | Maintenance           |
+| `>=1.0,<2` | General Availability |
 
-また、このライブラリは以下のランタイムをサポートしています。
+And the library supports the following runtimes:
 
-| OS      | CPU                   | ランタイム | ランタイムバージョン | ddtrace のバージョンに対応 |
+| OS      | CPU                   | Runtime | Runtime version | Support ddtrace versions |
 |---------|-----------------------|---------|-----------------|--------------------------|
-| Linux   | x86-64、i686、AArch64 | CPython | 2.7、3.5-3.11   | `<2`                     |
-| MacOS   | Intel、Apple Silicon  | CPython | 2.7、3.5-3.11   | `<2`                     |
-| Windows | 64bit、32bit          | CPython | 2.7、3.5-3.11   | `<2`                     |
+| Linux   | x86-64, i686, AArch64 | CPython | 2.7, 3.5-3.11   | `<2`                     |
+| MacOS   | Intel, Apple Silicon  | CPython | 2.7, 3.5-3.11   | `<2`                     |
+| Windows | 64bit, 32bit          | CPython | 2.7, 3.5-3.11   | `<2`                     |
 
 
-### Web フレームワークの互換性
+### Web framework compatibility
 
-- 攻撃元の HTTP リクエストの詳細
-- HTTP リクエスト用のタグ (ステータスコード、メソッドなど)
-- アプリケーション内の攻撃フローを確認するための分散トレーシング
+- Attacker source HTTP request details
+- Tags for the HTTP request (status code, method, etc)
+- Distributed Tracing to see attack flows through your applications
 
-##### ASM の機能に関する備考
-- **Vulnerability Management for OSS** はすべてのフレームワークでサポートされています
+##### Application Security Capability Notes
+- **Software Composition Analysis** is supported on all frameworks
 
-### サポートされているフレームワーク
+### Supported frameworks
 
 
-| フレームワーク                | バージョン    | 脅威検知のサポートの有無 | 脅威保護のサポートの有無 |
+| Framework                | Versions    | Threat Detection supported? | Threat Protection supported? |
 | ------------------------ | ----------- | --------------- | ---------------------------------------------- |
 | Django    | 1.8   |  {{< X >}} | {{< X >}}  |
 | Flask     | 0.10  |  {{< X >}} | {{< X >}}  |
 
-Flask では、クエリ文字列のサポートはありません。
+Support for query strings is not available for Flask.
 
-<div class="alert alert-info">ご希望のフレームワークが掲載されていない場合は、お知らせください！<a href="https://forms.gle/gHrxGQMEnAobukfn7">この短いフォーム</a>に必要事項を記入して、詳細を送信してください。</div>
+<div class="alert alert-info">If you don't see your framework of choice listed, let us know! Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send details</a>.</div>
 
-### データストアの互換性
+### Data store compatibility
 
 
-**データストアのトレーシングでは以下の確認が可能です**
+**Datastore tracing provides:**
 
-- リクエストの応答タイミング
-- クエリ情報 (サニタイジングされたクエリ文字列など)
-- エラーとスタックトレースの取得
+- timing request to response
+- query info (for example, a sanitized query string)
+- error and stacktrace capturing
 
-##### ASM の機能に関する備考
-- **OSS の脆弱性管理** はすべてのフレームワークでサポートされています。
-- **脅威保護** は HTTP リクエスト (input) レイヤーでも機能するため、下表に掲載されていなくても、デフォルトですべてのデータベースで機能します。
+##### Application Security Capability Notes
+- **Software Composition Analysis** is supported on all frameworks.
+- **Threat Protection** also works at the HTTP request (input) layer, and so works for all databases by default, even those not listed in the table below.
 -
-Python ライブラリは[データベース API 仕様][4]をサポートしており、すべての汎用 SQL データベースをサポートしています。これには SQLite、Mysql、Postgres、MariaDB などのデータベースが含まれます。
+The Python library supports the [database API specifications][4] and supports all generic SQL databases. This includes databases such as SQLite, Mysql, Postgres and MariaDB.
 
-[1]: /ja/tracing/trace_collection/compatibility/python/
-[2]: /ja/agent/remote_config/#enabling-remote-configuration
+### User Authentication Frameworks compatibility
+
+**Integrations to User Authentication Frameworks provide:**
+
+- User login events, including the user IDs
+- Account Takeover detection monitoring for user login events
+
+| Framework         | Framework Versions   |
+|-------------------| --------------------------- |
+| Django            | 1.11, 2.2, 3.2, >= 4.0
+
+[1]: /tracing/trace_collection/compatibility/python/
+[2]: /agent/remote_config/#enabling-remote-configuration
 [3]: https://ddtrace.readthedocs.io/en/stable/versioning.html
 [4]: https://peps.python.org/pep-0249/
+
+
+
+

@@ -1,110 +1,112 @@
 ---
+title: Network Performance Monitoring Setup
+description: Collect your Network Data with the Agent.
 aliases:
-- /ja/network_performance_monitoring/installation/
-description: Agent を使用したネットワークデータの収集
+    - /network_performance_monitoring/installation/
 further_reading:
-- link: https://www.datadoghq.com/blog/network-performance-monitoring
-  tag: ブログ
-  text: ネットワークパフォーマンスモニタリング
-- link: https://www.datadoghq.com/blog/monitor-containers-with-npm/
-  tag: ブログ
-  text: コンテナとサービスメッシュネットワークを備えた Datadog NPM
-- link: /network_monitoring/devices
-  tag: Documentation
-  text: ネットワークデバイスモニタリング
-- link: https://www.datadoghq.com/blog/monitor-consul-with-datadog-npm/
-  tag: ブログ
-  text: Datadog NPM が Consul ネットワーキングに対応
-title: ネットワークパフォーマンスモニタリングのセットアップ
+    - link: "https://www.datadoghq.com/blog/network-performance-monitoring"
+      tag: Blog
+      text: Network Performance Monitoring
+    - link: "https://www.datadoghq.com/blog/monitor-containers-with-npm/"
+      tag: Blog
+      text: Datadog NPM with containers and service-meshed networks
+    - link: /network_monitoring/devices
+      tag: Documentation
+      text: Network Device Monitoring
+    - link: "https://www.datadoghq.com/blog/monitor-consul-with-datadog-npm/"
+      tag: Blog
+      text: Datadog NPM now supports Consul networking
 ---
 
-Datadog の ネットワークパフォーマンスモニタリング (NPM) は Datadog 内のサービス、コンテナ、アベイラビリティゾーン、およびその他あらゆるタグ間のネットワークトラフィックを可視化することができます。これは次のような場合に役立ちます。
+Datadog Network Performance Monitoring (NPM) gives you visibility into your network traffic between services, containers, availability zones, and any other tag in Datadog so you can:
 
-- 予期しない、または潜在的なサービスの依存関係を特定。
-- クロスリージョンやマルチクラウドなど、高コストの通信を最適化。
-- クラウドプロバイダーのリージョンやサードパーティーツールの機能停止を特定。
-- DNS サーバーメトリクスに関するサービスディスカバリーの不具合のトラブルシューティングを実施。
+- Pinpoint unexpected or latent service dependencies.
+- Optimize costly cross-regional or multi-cloud communication.
+- Identify outages of cloud provider regions and third-party tools.
+- Troubleshoot faulty service discovery with DNS server metrics.
 
-ネットワークパフォーマンスモニタリングには [Datadog Agent v6.14 以降][1]が必要です。メトリクスは Agent の上位バージョンで自動的に収集されるため、DNS モニタリングを構成するには[メトリクス設定セクション][2]を参照してください。
+Network Performance Monitoring requires [Datadog Agent v6.14+][1]. Because metrics are automatically collected in higher versions of the Agent, see the [metrics setup section][2] to configure DNS Monitoring.
 
-## サポート対象のプラットフォーム
+## Supported platforms
 
-### オペレーティングシステム
+### Operating systems
 
 #### Linux OS
 
-データ収集は eBPF を使用して行われるため、Datadog は最低限、基底の Linux カーネルバージョン 4.4.0 以降または eBPF 機能のバックポートを備えたプラットフォームを必要とします。NPM は以下の Linux ディストリビューションをサポートしています。
+Data collection is done using eBPF, so Datadog minimally requires platforms that have underlying Linux kernel versions of 4.4.0+ or have eBPF features backported. NPM supports the following Linux distributions:
 
-- Ubuntu 16.04 以降
-- Debian 9 以降
-- Fedora 26 以上
-- SUSE 15 以降
-- Amazon AMI 2016.03 以降
+- Ubuntu 16.04+
+- Debian 9+
+- Fedora 26+
+- SUSE 15+
+- Amazon AMI 2016.03+
 - Amazon Linux 2
-- CentOS/RHEL 7.6 以降
+- CentOS/RHEL 7.6+
 
-**注:** [CentOS/RHEL 7.6 以降][3]の要件は、kernel 4.4.0 以降では適用外です。[DNS 解決][4]機能は CentOS/RHEL 7.6 ではサポートされていません。
+**Note:** There is an exception to the 4.4.0+ kernel requirement for [CentOS/RHEL 7.6+][3]. The [DNS Resolution][4] feature is not supported on CentOS/RHEL 7.6.
 
 #### Windows OS
 
-データ収集はネットワークカーネルデバイスドライバーを使用して行われます。Datadog Agent バージョン 7.27.1、Windows バージョン 2012 R2 (および Windows 10 を含む同等のデスクトップ OS) 以降でサポートされます。
+Data collection is done using a network kernel device driver. Support is available as of Datadog Agent version 7.27.1, for Windows versions 2012 R2 (and equivalent desktop OSs, including Windows 10) and up.
 
 #### macOS
 
-Datadog ネットワークパフォーマンスモニタリングは macOS プラットフォームをサポートしていません。
+Datadog Network Performance Monitoring does not support macOS platforms.
 
-### コンテナ
+### Containers
 
-NPM は [Docker][5]、[Kubernetes][6]、[ECS][7] およびその他のコンテナ技術をサポートしており、コンテナ化およびオーケストレーションされた環境のアーキテクチャとパフォーマンスの可視化に役立ちます。Datadog のコンテナインテグレーションでは、コンテナ、タスク、ポッド、クラスター、デプロイなど目で見て分かりやすいエンティティごとに、システムに内蔵されたタグ (`container_name`、`task_name`、`kube_service` など) を使用してトラフィックを集約することができます。
+NPM helps you visualize the architecture and performance of your containerized and orchestrated environments, with support for [Docker][5], [Kubernetes][6], [ECS][7], and other container technologies. Datadog's container integrations enable you to aggregate traffic by meaningful entities--such as containers, tasks, pods, clusters, and deployments--with out-of-the-box tags such as `container_name`, `task_name`, and `kube_service`.
 
-### ネットワークルーティングツール
+NPM is not supported for Google Kubernetes Engine (GKE) Autopilot.
+
+### Network routing tools
 
 #### Istio
 
-NPM ではコンテナ、ポッド、サービス間のネットワークコミュニケーションを、Istio のサービスメッシュでマッピングすることができます。
+With NPM, you can map network communication between containers, pods, and services over the Istio service mesh.
 
-Datadog は、Istio 環境のあらゆる側面を監視するため、以下のことも実現できます。
+Datadog monitors every aspect of your Istio environment, so you can also:
 
-- [ログ][8]を使用して、Envoy および Istio の Control Plane の健全性を評価。
-- リクエスト、帯域幅、リソース消費の[メトリクス][8]でサービスメッシュのパフォーマンスを詳しく確認。
-- [APM][9] でメッシュを実行してアプリケーションの分散型トレースを調べます。
+- Assess the health of Envoy and the Istio control plane with [logs][8].
+- Break down the performance of your service mesh with request, bandwidth, and resource consumption [metrics][8].
+- Examine distributed traces for applications transacting over the mesh with [APM][9].
 
-NPM は Istio v1.6.4 以降および [Datadog Agent v7.24.1 以降][1] でサポートされています。
+NPM supports Istio v1.6.4+ with [Datadog Agent v7.24.1+][1].
 
-Datadog を使用した Istio 環境の監視について、詳しくは [Istio ブログ][10]を参照してください。
+To learn more about monitoring your Istio environment with Datadog, [see the Istio blog][10].
 
 #### Cilium
 
-ネットワークパフォーマンスモニタリングは、次の要件が満たされている場合、**Cilium** インストールと互換性があります。
-1) Cilium バージョン 1.6 以降、および
-2) カーネルバージョン 5.1.16 以降、または 4.19.x カーネルの場合は 4.19.57 以降
+Network Performance Monitoring is compatible with **Cilium** installations, provided the following requirements are met:
+1) Cilium version 1.6 and above, and
+2) Kernel version 5.1.16 and above, or 4.19.57 and above for 4.19.x kernels
 
-### プロビジョニングシステム
+### Provisioning systems
 
-ネットワークパフォーマンスモニタリングは次のプロビジョニングシステムの使用をサポートしています。
+Network Performance Monitoring supports use of the following provisioning systems:
 
-- Daemonset / Helm 1.38.11 以降: [Datadog Helm チャート][11]を参照してください
-- Chef 12.7 以降: [Datadog Chef レシピ][12]を参照してください
-- Ansible 2.6 以降: [Datadog Ansible ロール][13]を参照してください
+- Daemonset / Helm 1.38.11+: See the [Datadog Helm chart][11]
+- Chef 12.7+: See the [Datadog Chef recipe][12]
+- Ansible 2.6+: See the [Datadog Ansible role][13]
 
-## セットアップ
+## Setup
 
-このツールの狙いと強みが、ネットワークエンドポイント間のトラフィック分析とネットワークの依存関係のマッピングであるため、価値を最大化するために、インフラストラクチャーの重要なサブセット、そして**_少なくとも 2 つのホスト_**にインストールすることが推奨されます。
+Given this tool's focus and strength is in analyzing traffic _between_ network endpoints and mapping network dependencies, it is recommended to install it on a meaningful subset of your infrastructure and a **_minimum of 2 hosts_** to maximize value.
 
 {{< tabs >}}
 {{% tab "Agent (Linux)" %}}
 
-Datadog Agent を使用してネットワークパフォーマンスのモニタリングを有効化するには、次のコンフィギュレーションを使用します。
+To enable network performance monitoring with the Datadog Agent, use the following configurations:
 
-1. **v6.14+ 以降のバージョンの Agent を使用されている場合は**、先に[ライブプロセスの収集][1]を有効化し、このステップは飛ばします。
+1. **If you are using an agent older than v6.14+**, enable [live process collection][1] first, otherwise skip this step.
 
-2. 下記のシステムプローブのコンフィギュレーションの例をコピーします。
+2. Copy the system-probe example configuration:
 
     ```shell
     sudo -u dd-agent install -m 0640 /etc/datadog-agent/system-probe.yaml.example /etc/datadog-agent/system-probe.yaml
     ```
 
-3. `/etc/datadog-agent/system-probe.yaml` を編集し、有効フラグを `true` に設定します。
+3. Edit `/etc/datadog-agent/system-probe.yaml` to set the enable flag to `true`:
 
     ```yaml
     network_config:   # use system_probe_config for Agent's older than 7.24.1
@@ -114,122 +116,131 @@ Datadog Agent を使用してネットワークパフォーマンスのモニタ
       enabled: true
     ```
 
-4. **v6.18 または 7.18 より古い Agent を実行している場合は**、システムプローブを手動で起動しブート時に有効化します (v6.18 および v7.18 以降では、Agent 起動時にシステムプローブが自動的に起動します)。
+4. **If you are running an Agent older than v6.18 or 7.18**, manually start the system-probe and enable it to start on boot (since v6.18 and v7.18 the system-probe starts automatically when the Agent is started):
 
     ```shell
     sudo systemctl start datadog-agent-sysprobe
     sudo systemctl enable datadog-agent-sysprobe
     ```
 
-    **注**: システムで `systemctl` コマンドを利用できない場合は、代わりに `sudo service datadog-agent-sysprobe start` のコマンドで実行し、`datadog-agent` が起動する前にブート時に実行開始されるよう設定します。
+    **Note**: If the `systemctl` command is not available on your system, start it with following command instead: `sudo service datadog-agent-sysprobe start` and then set it up to start on boot before `datadog-agent` starts.
 
-5. [Agent を再起動します][2]。
+5. [Restart the Agent][2].
 
     ```shell
     sudo systemctl restart datadog-agent
     ```
 
-    **注**: システムで `systemctl` コマンドを利用できない場合は、代わりに次のコマンドを実行します: `sudo service datadog-agent restart`。
+    **Note**: If the `systemctl` command is not available on your system, run the following command instead: `sudo service datadog-agent restart`
 
-### SELinux 対応のシステム
+### SELinux-enabled systems
 
-SELinux が有効化されたシステムでは、システムプローブのバイナリで eBPF 機能を使用するための特殊なアクセス許可が必要です。
+On systems with SELinux enabled, the system-probe binary needs special permissions to use eBPF features.
 
-CentOS ベースのシステム向けの Datadog Agent RPM パッケージには、システムプローブバイナリに必要なアクセス許可を付与する [SELinux ポリシー][3]がバンドルされています。
+The Datadog Agent RPM package for CentOS-based systems bundles an [SELinux policy][3] to grant these permissions to the system-probe binary.
 
-SELinux を有効にしたその他のシステムでネットワークパフォーマンスモニタリングを使用する場合は、次の手順に従ってください。
+If you need to use Network Performance Monitoring on other systems with SELinux enabled, do the following:
 
-1. ベースとなる [SELinux ポリシー][3]を、お使いの SELinux コンフィギュレーションに合わせて修正します。
-    お使いのシステムによっては、タイプや属性が存在しない (または名前が異なる) 場合があります。
+1. Modify the base [SELinux policy][3] to match your SELinux configuration.
+    Depending on your system, some types or attributes may not exist (or have different names).
 
-2. ポリシーをモジュールにコンパイルします。ポリシーのファイル名が `system_probe_policy.te` の場合は以下のようになります。
+2. Compile the policy into a module; assuming your policy file is named `system_probe_policy.te`:
 
     ```shell
     checkmodule -M -m -o system_probe_policy.mod system_probe_policy.te
     semodule_package -o system_probe_policy.pp -m system_probe_policy.mod
     ```
 
-3. モジュールを SELinux システムに適用します。
+3. Apply the module to your SELinux system:
 
     ```shell
     semodule -v -i system_probe_policy.pp
     ```
 
-4. システムプローブバイナリのタイプを、ポリシーで定義されたもののいずれかに変更します。Agent のインストールディレクトリ名が `/opt/datadog-agent` の場合は以下のようになります。
+4. Change the system-probe binary type to use the one defined in the policy; assuming your Agent installation directory is `/opt/datadog-agent`:
 
     ```shell
     semanage fcontext -a -t system_probe_t /opt/datadog-agent/embedded/bin/system-probe
     restorecon -v /opt/datadog-agent/embedded/bin/system-probe
     ```
 
-5. [Agent を再起動します][2]。
+5. [Restart the Agent][2].
 
-**注**: 上記の手順では、システムに複数の SELinux ユーティリティ (`checkmodule`、`semodule`、`semodule_package`、`semanage`、`restorecon`) をインストールする必要があります。これらは標準ディストリビューション (Ubuntu、Debian、RHEL、CentOS、SUSE) のほとんどで利用可能です。インストール方法について、詳しくはお使いのディストリビューションを確認してください。
+**Note**: these instructions require to have some SELinux utilities installed on the system (`checkmodule`, `semodule`, `semodule_package`, `semanage` and `restorecon`) that are available on most standard distributions (Ubuntu, Debian, RHEL, CentOS, SUSE). Check your distribution for details on how to install them.
 
-お使いのディストリビューション内にこれらのユーティリティが存在しない場合は、現在のディストリビューションで利用可能なユーティリティを使って同じ手順を実行してください。
+If these utilities do not exist in your distribution, follow the same procedure but using the utilities provided by your distribution instead.
 
 
-[1]: /ja/infrastructure/process/?tab=linuxwindows#installation
-[2]: /ja/agent/guide/agent-commands/#restart-the-agent
+[1]: /infrastructure/process/?tab=linuxwindows#installation
+[2]: /agent/configuration/agent-commands/#restart-the-agent
 [3]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/selinux/system_probe_policy.te
 {{% /tab %}}
 {{% tab "Agent (Windows)" %}}
 
-Windows のデータ収集は、ネットワークデータ収集用のフィルタードライバに依存します。
+Data collection for Windows relies on a filter driver for collecting network data.
 
-Windows ホストのネットワークパフォーマンスモニタリングを有効にするには
+To enable Network Performance Monitoring for Windows hosts:
 
-1. [Datadog Agent][1]（バージョン 7.27.1 以降）をインストールし、ネットワークドライバコンポーネントを有効にします。
+1. Install the [Datadog Agent][1] (version 7.27.1 or above) with the network driver component enabled.
 
-   [非推奨] _(バージョン 7.44 以下)_ インストール時に `ADDLOCAL="MainApplication,NPM"` を `msiexec` コマンドに渡すか、Agent のインストールを GUI で実行する際に "Network Performance Monitoring" を選択します。
+   [DEPRECATED] _(version 7.44 or below)_ During installation pass `ADDLOCAL="MainApplication,NPM"` to the `msiexec` command, or select "Network Performance Monitoring" when running the Agent installation through the GUI.
 
-1. `C:\ProgramData\Datadog\system-probe.yaml` を編集し、有効フラグを `true` に設定します。
+1. Edit `C:\ProgramData\Datadog\system-probe.yaml` to set the enabled flag to `true`:
 
     ```yaml
     network_config:
         enabled: true
     ```
-3. [Agent を再起動します][2]。
+3. [Restart the Agent][2].
 
-   PowerShell (`powershell.exe`) の場合: 
+    For PowerShell (`powershell.exe`):
     ```shell
     restart-service -f datadogagent
     ```
-   コマンドプロンプト (`cmd.exe`) の場合:
+    For Command Prompt (`cmd.exe`):
     ```shell
     net /y stop datadogagent && net start datadogagent
     ```
-**注**: ネットワークパフォーマンスモニタリングは、Windows ホストのみを監視し、Windows コンテナは監視しません。
+**Note**: Network Performance Monitoring monitors Windows hosts only, and not Windows containers.
 
 
-[1]: /ja/agent/basic_agent_usage/windows/?tab=commandline
-[2]: /ja/agent/guide/agent-commands/#restart-the-agent
+[1]: /agent/basic_agent_usage/windows/?tab=commandline
+[2]: /agent/configuration/agent-commands/#restart-the-agent
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-Kubernetes で Helm を使用してネットワークパフォーマンスのモニタリングを新規で有効化するには、
+To enable Network Performance Monitoring with Kubernetes using Helm, add the following to your `values.yaml` file.</br>
+**Helm chart v2.4.39+ is required**. For more information, see the [Datadog Helm Chart documentation][1].
 
   ```yaml
   datadog:
     networkMonitoring:
       enabled: true
   ```
-を values.yaml に追加します。**Helm チャート v2.4.39+ が必要です**。詳細については、[Datadog Helm チャートのドキュメント][1]を参照してください。
 
-Helm をお使いでない場合は、Kubernetes を使用してネットワークパフォーマンスモニタリングを新規で有効化することができます。
+**Note**: If you receive a permissions error when configuring NPM on your Kubernetes environment: `Error: error enabling protocol classifier: permission denied`, add the following to your `values.yaml` (Reference this [section][5] in the Helm chart):
 
-1. [datadog-agent.yaml マニフェスト][2]テンプレートをダウンロードします。
-2. `<DATADOG_API_KEY>` を、ご使用の [Datadog API キー][3]に置き換えます。
-3. 任意 - **Datadog サイトを設定**。Datadog EU サイトをご利用中の場合、`datadog-agent.yaml` マニフェストで `DD_SITE` 環境変数を `datadoghq.eu` に設定します。
-4. 次のコマンドで **DaemonSet をデプロイ**します。
+  ```yaml
+  agents:
+    podSecurity:
+      apparmor:
+        enabled: true
+  ```
+
+If you are not using Helm, you can enable Network Performance Monitoring with Kubernetes from scratch:
+
+1. Download the [datadog-agent.yaml manifest][2] template.
+2. Replace `<DATADOG_API_KEY>` with your [Datadog API key][3].
+3. Optional - **Set your Datadog site**. If you are using the Datadog EU site, set the `DD_SITE` environment variable to `datadoghq.eu` in the `datadog-agent.yaml` manifest.
+4. **Deploy the DaemonSet** with the command:
 
     ```shell
     kubectl apply -f datadog-agent.yaml
     ```
 
-すでに [マニフェストを適用して Agent を稼働させている][4]場合
+If you already have the [Agent running with a manifest][4]:
 
-1. `datadog-agent` テンプレートにアノテーション `container.apparmor.security.beta.kubernetes.io/system-probe: unconfined` を追加します。
+1. Add the annotation `container.apparmor.security.beta.kubernetes.io/system-probe: unconfined` on the `datadog-agent` template:
 
     ```yaml
     spec:
@@ -245,7 +256,7 @@ Helm をお使いでない場合は、Kubernetes を使用してネットワー�
                     container.apparmor.security.beta.kubernetes.io/system-probe: unconfined
     ```
 
-2. Agent DaemonSet で次の環境変数を使用して、プロセス収集とシステムプローブを有効にします。Agent プロセスごとにコンテナを実行している場合は、次の環境変数を Process Agent コンテナに追加します。それ以外の場合は、環境変数を Agent コンテナに追加します。
+2. Enable process collection and the system probe with the following environment variables in the Agent DaemonSet. If you are running a container per Agent process, add the following environment variables to the Process Agent container; otherwise, add them to the Agent container.
 
     ```yaml
       # (...)
@@ -261,7 +272,7 @@ Helm をお使いでない場合は、Kubernetes を使用してネットワー�
                             value: /var/run/sysprobe/sysprobe.sock
     ```
 
-3. 以下の追加ボリュームを `datadog-agent` コンテナにマウントします。
+3. Mount the following extra volumes into the `datadog-agent` container:
 
     ```yaml
      # (...)
@@ -284,7 +295,7 @@ Helm をお使いでない場合は、Kubernetes を使用してネットワー�
                         mountPath: /var/run/sysprobe
     ```
 
-4. 新しいシステムプローブを Agent のサイドカーとして追加します。
+4. Add a new system-probe as a side car to the Agent:
 
     ```yaml
      # (...)
@@ -333,7 +344,7 @@ Helm をお使いでない場合は、Kubernetes を使用してネットワー�
                             mountPath: /var/run/sysprobe
     ```
 
-5. 最後に、お使いのマニフェストに以下のボリュームを追加します。
+5. Finally, add the following volumes to your manifest:
 
     ```yaml
                 volumes:
@@ -348,14 +359,15 @@ Helm をお使いでない場合は、Kubernetes を使用してネットワー�
 [1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/README.md#enabling-system-probe-collection
 [2]: /resources/yaml/datadog-agent-npm.yaml
 [3]: https://app.datadoghq.com/organization-settings/api-keys
-[4]: /ja/agent/kubernetes/
+[4]: /agent/kubernetes/
+[5]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/values.yaml#L1519-L1523
 {{% /tab %}}
 {{% tab "Operator" %}}
-<div class="alert alert-warning">Datadog Operator は `1.0.0` バージョンで一般公開されており、DatadogAgent Custom Resource のバージョン `v2alpha1` と照合しています。 </div>
+<div class="alert alert-warning">The Datadog Operator is Generally Available with the `1.0.0` version, and it reconciles the version `v2alpha1` of the DatadogAgent Custom Resource. </div>
 
-[Datadog Operator][1] は Kubernetes や OpenShift にDatadog Agent をデプロイする方法です。カスタムリソースステータスでデプロイ状況、健全性、エラーを報告し、高度なコンフィギュレーションオプションでコンフィギュレーションミスのリスクを抑えます。
+[The Datadog Operator][1] is a way to deploy the Datadog Agent on Kubernetes and OpenShift. It reports deployment status, health, and errors in its Custom Resource status, and it limits the risk of misconfiguration thanks to higher-level configuration options.
 
-Operator でネットワークパフォーマンスのモニタリングを有効化するには、次のコンフィギュレーションを使用します。
+To enable Network Performance Monitoring in Operator, use the following configuration:
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -372,7 +384,7 @@ spec:
 {{% /tab %}}
 {{% tab "Docker" %}}
 
-Docker でネットワークパフォーマンスのモニタリングを有効化するには、コンテナ Agent を起動する際に、次のコンフィギュレーションを使用します。
+To enable Network Performance Monitoring in Docker, use the following configuration when starting the container Agent:
 
 ```shell
 docker run --cgroupns host \
@@ -396,75 +408,90 @@ docker run --cgroupns host \
 gcr.io/datadoghq/agent:latest
 ```
 
-`<API_キー>` を、ご使用の [Datadog API キー][1]に置き換えます。
+Replace `<DATADOG_API_KEY>` with your [Datadog API key][1].
 
-`docker-compose` を使用している場合は、下記を Datadog Agent サービスに書き加えます。
+If using `docker-compose`, make the following additions to the Datadog Agent service.
 
 ```
 version: '3'
 services:
-  ..
   datadog:
     image: "gcr.io/datadoghq/agent:latest"
     environment:
-       DD_SYSTEM_PROBE_NETWORK_ENABLED=true
-       DD_PROCESS_AGENT_ENABLED=true
-       DD_API_KEY=<DATADOG_API_KEY>
+      - DD_SYSTEM_PROBE_NETWORK_ENABLED=true
+      - DD_PROCESS_AGENT_ENABLED=true
+      - DD_API_KEY=<DATADOG_API_KEY>
     volumes:
-    - /var/run/docker.sock:/var/run/docker.sock:ro
-    - /proc/:/host/proc/:ro
-    - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
-    - /sys/kernel/debug:/sys/kernel/debug
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /proc/:/host/proc/:ro
+      - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
+      - /sys/kernel/debug:/sys/kernel/debug
     cap_add:
-    - SYS_ADMIN
-    - SYS_RESOURCE
-    - SYS_PTRACE
-    - NET_ADMIN
-    - NET_BROADCAST
-    - NET_RAW
-    - IPC_LOCK
-    - CHOWN
+      - SYS_ADMIN
+      - SYS_RESOURCE
+      - SYS_PTRACE
+      - NET_ADMIN
+      - NET_BROADCAST
+      - NET_RAW
+      - IPC_LOCK
+      - CHOWN
     security_opt:
-    - apparmor:unconfined
+      - apparmor:unconfined
 ```
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{% tab "ECS" %}}
-Amazon ECS での設定については、[Amazon ECS][1] ドキュメントページを参照してください。
+To set up on Amazon ECS, see the [Amazon ECS][1] documentation page.
 
 
-[1]: /ja/agent/amazon_ecs/#network-performance-monitoring-collection-linux-only
+[1]: /agent/amazon_ecs/#network-performance-monitoring-collection-linux-only
 {{% /tab %}}
 {{< /tabs >}}
 
 {{< site-region region="us,us3,us5,eu" >}}
-### エンハンスドレゾリューション
+### Enhanced resolution
 
-オプションで、クラウドインテグレーションのリソース収集を有効にして、ネットワークパフォーマンスモニタリングでクラウド管理型エンティティを検出できるようにします。
-- Azure ロードバランサーとアプリケーションゲートウェイを可視化するには、[Azure インテグレーション][1]をインストールします。
-- AWS ロードバランサーを可視化するには、[AWS インテグレーション][2]をインストールします。**ENI および EC2 のメトリクス収集を有効にする必要があります**
+Optionally, enable resource collection for cloud integrations to allow Network Performance Monitoring to discover cloud-managed entities.
+- Install the [Azure integration][101] for visibility into Azure load balancers and application gateways.
+- Install the [AWS Integration][102] for visibility into AWS Load Balancer. **you must enable ENI and EC2 metric collection**
 
-これらの機能に関する追加情報は、[クラウドサービスエンハンスドレゾリューション][3]を参照してください。
+For additional information around these capabilities, see [Cloud service enhanced resolution][103].
 
-  [1]: /integrations/azure
-  [2]: /integrations/amazon_web_services/#resource-collection
-  [3]: /network_monitoring/performance/network_analytics/#cloud-service-enhanced-resolution
+### Failed connections (private beta)
+
+<div class="alert alert-warning">Failed Connections are in private beta. To start seeing <a href="/network_monitoring/performance/network_analytics/?tab=loadbalancers#tcp">failed connection metrics</a>, reach out to your Datadog representative and request access.</div>
+
+To enable the Agent to start collecting data around failed connections, add the following flag to your `/etc/datadog-agent/system-probe.yaml` file.
+
+```yaml
+network_config:   # use system_probe_config for Agent versions older than 7.24.1
+  ## @param enabled - boolean - optional - default: false
+  ## Set to true to enable Network Performance Monitoring.
+  #
+  enabled: true
+  enable_tcp_failed_connections: true
+
+```
+
+[101]: /integrations/azure
+[102]: /integrations/amazon_web_services/#resource-collection
+[103]: /network_monitoring/performance/network_analytics/#cloud-service-enhanced-resolution
 
 {{< /site-region >}}
 
-## その他の参考資料
+## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest
-[2]: https://docs.datadoghq.com/ja/network_monitoring/dns/#setup
+[2]: https://docs.datadoghq.com/network_monitoring/dns/#setup
 [3]: https://www.redhat.com/en/blog/introduction-ebpf-red-hat-enterprise-linux-7
-[4]: /ja/network_monitoring/dns/
-[5]: https://docs.datadoghq.com/ja/agent/docker/
-[6]: https://docs.datadoghq.com/ja/agent/kubernetes/
-[7]: https://docs.datadoghq.com/ja/agent/amazon_ecs
-[8]: https://docs.datadoghq.com/ja/integrations/istio/
-[9]: https://docs.datadoghq.com/ja/tracing/setup_overview/proxy_setup/?tab=istio
+[4]: /network_monitoring/dns/
+[5]: https://docs.datadoghq.com/agent/docker/
+[6]: https://docs.datadoghq.com/agent/kubernetes/
+[7]: https://docs.datadoghq.com/agent/amazon_ecs
+[8]: https://docs.datadoghq.com/integrations/istio/
+[9]: https://docs.datadoghq.com/tracing/setup_overview/proxy_setup/?tab=istio
 [10]: https://www.datadoghq.com/blog/istio-datadog/
 [11]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/README.md#enabling-system-probe-collection
 [12]: https://github.com/DataDog/chef-datadog

@@ -1,47 +1,48 @@
 ---
-aliases:
-- /ja/tracing/connect_logs_and_traces/ruby
+title: Correlating Ruby Logs and Traces
+kind: documentation
 code_lang: ruby
-code_lang_weight: 40
-description: Ruby ログとトレースを接続して Datadog で関連付けます。
-further_reading:
-- link: https://www.datadoghq.com/blog/request-log-correlation/
-  tag: GitHub
-  text: 自動的にリクエストログとトレースに相関性を持たせる
-- link: /logs/guide/ease-troubleshooting-with-cross-product-correlation/
-  tag: ガイド
-  text: クロスプロダクト相関で容易にトラブルシューティング。
-title: Ruby ログとトレースの相関付け
 type: multi-code-lang
+code_lang_weight: 40
+aliases:
+  - /tracing/connect_logs_and_traces/ruby
+description: 'Connect your Ruby logs and traces to correlate them in Datadog.'
+further_reading:
+    - link: "https://www.datadoghq.com/blog/request-log-correlation/"
+      tag: Blog
+      text: Correlate request logs with traces automatically
+    - link: /logs/guide/ease-troubleshooting-with-cross-product-correlation/
+      tag: Guide
+      text: Ease troubleshooting with cross product correlation.
 ---
 
-## トレース相関
+## Trace correlation
 
-ロギングなどの多くの場合において、相互参照を容易にするために、トレース ID を他のイベントまたはデータストリームに関連付けると便利です。
+In many cases, such as logging, it may be useful to correlate trace IDs to other events or data streams, for easier cross-referencing.
 
-### Rails アプリケーションでのロギング
+### Logging in Rails applications
 
-#### 自動挿入
+#### Automatic injection
 
-デフォルトのロガー (`ActiveSupport::TaggedLogging`)、`lograge` または `semantic_logger` を使用している Rails アプリケーションでは、トレース ID のインジェクションは自動的に構成されます。関連するログをトレースと接続するには、[トレースリマッパー][1]を追加する必要があります。
+For Rails applications using the default logger (`ActiveSupport::TaggedLogging`), `lograge`, or `semantic_logger`, trace ID injection is automatically configured. You need to add a [trace remapper][1] to connect the relevant logs with the traces.
 
-#### 手動挿入
+#### Manual injection
 
-ロガーに相関 ID を追加するには、`Datadog::Tracing.correlation` がある相関 ID を取得するログフォーマッタを追加し、これをメッセージに追加します。
+To add correlation IDs to your logger, add a log formatter which retrieves the correlation IDs with `Datadog::Tracing.correlation`, then add them to the message.
 
-Datadog ロギングと適切に関連付けるには、ログメッセージに次のように表示されていることを確認してください。
+To properly correlate with Datadog logging, be sure the following is present in the log message, in order as they appear:
 
- - `dd.env=<ENV>`: ここで、`<ENV>` は `Datadog::Tracing.correlation.env` と同じです。環境が構成されていない場合は省略します。
- - `dd.service=<SERVICE>`: ここで、`<SERVICE>` は `Datadog::Tracing.correlation.service` と同じです。デフォルトのサービス名が構成されていない場合は省略します。
- - `dd.version=<VERSION>`: ここで、`<VERSION>` は `Datadog::Tracing.correlation.version` と同じです。アプリケーションのバージョンが構成されていない場合は省略します。
- - `dd.trace_id=<TRACE_ID>`: ここで `<TRACE_ID>` は `Datadog::Tracing.correlation.trace_id` か、またはロギング中にどのトレースもアクティブでない場合は `0` になります。
- - `dd.span_id=<SPAN_ID>`: ここで `<SPAN_ID>` は `Datadog::Tracing.correlation.span_id` か、またはロギング中にどのトレースもアクティブでない場合は `0` になります。
+ - `dd.env=<ENV>`: Where `<ENV>` is equal to `Datadog::Tracing.correlation.env`. Omit if no environment is configured.
+ - `dd.service=<SERVICE>`: Where `<SERVICE>` is equal to `Datadog::Tracing.correlation.service`. Omit if no default service name is configured.
+ - `dd.version=<VERSION>`: Where `<VERSION>` is equal to `Datadog::Tracing.correlation.version`. Omit if no application version is configured.
+ - `dd.trace_id=<TRACE_ID>`: Where `<TRACE_ID>` is equal to `Datadog::Tracing.correlation.trace_id` or `0` if no trace is active during logging.
+ - `dd.span_id=<SPAN_ID>`: Where `<SPAN_ID>` is equal to `Datadog::Tracing.correlation.span_id` or `0` if no trace is active during logging.
 
-デフォルトで、`Datadog::Tracing.log_correlation` は `dd.env=<ENV> dd.service=<SERVICE> dd.version=<VERSION> dd.trace_id=<TRACE_ID> dd.span_id=<SPAN_ID>` を返します。
+By default, `Datadog::Tracing.log_correlation` will return `dd.env=<ENV> dd.service=<SERVICE> dd.version=<VERSION> dd.trace_id=<TRACE_ID> dd.span_id=<SPAN_ID>`.
 
-トレースがアクティブでなく、アプリケーション環境とバージョンが構成されていない場合、`dd.service= dd.trace_id=0 dd.span_id=0` が返されます。
+If a trace is not active and the application environment & version is not configured, it will return `dd.service= dd.trace_id=0 dd.span_id=0`.
 
-実例:
+An example of this in practice:
 
 ```ruby
 require 'ddtrace'
@@ -59,16 +60,17 @@ logger.formatter  = proc do |severity, datetime, progname, msg|
   "[#{datetime}][#{progname}][#{severity}][#{Datadog::Tracing.log_correlation}] #{msg}\n"
 end
 
-# どのトレースもアクティブでない場合
-logger.warn('これはトレースされないオペレーションです。')
-# [2019-01-16 18:38:41 +0000][my_app][WARN][dd.env=production dd.service=billing-api dd.version=2.5.17 dd.trace_id=0 dd.span_id=0] これはトレースされないオペレーションです。
+# When no trace is active
+logger.warn('This is an untraced operation.')
+# [2019-01-16 18:38:41 +0000][my_app][WARN][dd.env=production dd.service=billing-api dd.version=2.5.17 dd.trace_id=0 dd.span_id=0] This is an untraced operation.
 
-# トレースがアクティブな場合
-Datadog::Tracing.trace('my.operation') { logger.warn('これはトレースされるオペレーションです。') }
-# [2019-01-16 18:38:41 +0000][my_app][WARN][dd.env=production dd.service=billing-api dd.version=2.5.17 dd.trace_id=8545847825299552251 dd.span_id=3711755234730770098] これはトレースされるオペレーションです。
+# When a trace is active
+Datadog::Tracing.trace('my.operation') { logger.warn('This is a traced operation.') }
+# [2019-01-16 18:38:41 +0000][my_app][WARN][dd.env=production dd.service=billing-api dd.version=2.5.17 dd.trace_id=8545847825299552251 dd.span_id=3711755234730770098] This is a traced operation.
 ```
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/logs/log_configuration/processors/?tab=ui#trace-remapper
+[1]: /logs/log_configuration/processors/?tab=ui#trace-remapper
+

@@ -1,38 +1,38 @@
 ---
+title: Request Datadog Integrations
+kind: guide
 further_reading:
-- link: developers/integrations/agent_integration
-  tag: ドキュメント
-  text: Datadog インテグレーションを作成する
-kind: ガイド
-title: Datadog インテグレーションをリクエストする
+  - link: developers/integrations/agent_integration
+    tag: Documentation
+    text: Create a Datadog Integration
 ---
 
-Datadog インテグレーションをリクエストするには、次の情報を確認してください。
+To request a Datadog integration, review the information below.
 
-## 代替テクノロジー
+## Alternatives
 
-テクノロジーの中には Datadog がサポートしていないものもありますが、その場合は代替技術を利用できる可能性があります。リクエストを送信する前に次の情報を確認してください。
+There are some technologies that Datadog does not support, but there might be an alternative. Review the information below before submitting a request.
 
 {{< partial name="requests.html" links="requests" >}}
 
-## 機能リクエスト
+## Feature request
 
-Datadog の既存ツールでニーズに見合うものがない場合は、[Datadog サポート][1]でチケットを作成してください。
+If none of Datadog's existing tools fit your needs, create a ticket with [Datadog support][1].
 
-### リクエストを送信する
+### Submit a request
 
-チケットを送信する際に次の情報を記載してください:
+Include the following info when submitting a ticket:
 
-- リクエスト送信者の名前、役職、連絡先情報
-- リクエストの緊急度: 緊急、優先、通常
-- テクノロジー名とウェブサイトのリンク
-- 収集・監視したい特殊なメトリクス
-- 情報収集のユースケース
-- 現在、目標をどのように達成しているかの説明
-- この機能が重要となる特殊なイベントや問題
+- The name, role, and contact info for the request submitter
+- The level of urgency for your request: blocker, high priority, nice to have
+- The name of technology and a link to their website
+- The specific metrics you want to collect and monitor
+- Your use case for collecting the information
+- Describe how you are currently accomplishing your goal
+- Any specific events or issues that make this feature important
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/help
+[1]: /help

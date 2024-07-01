@@ -1,118 +1,119 @@
 ---
-app_id: exim
-app_uuid: c84e4868-f96b-49b6-8243-2031dde179af
-assets:
-  integration:
-    auto_install: true
-    configuration:
-      spec: assets/configuration/spec.yaml
-    events:
-      creates_events: false
-    metrics:
-      check: exim.queue.count
-      metadata_path: metadata.csv
-      prefix: exim.
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 10291
-    source_type_name: exim
-author:
-  homepage: https://github.com/DataDog/integrations-extras
-  name: コミュニティ
-  sales_email: JeanFred1@gmail.com
-  support_email: JeanFred1@gmail.com
-categories: []
-dependencies:
-- https://github.com/DataDog/integrations-extras/blob/master/exim/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: exim
-integration_id: exim
-integration_title: Exim
-integration_version: 1.0.0
-is_public: true
-custom_kind: integration
-manifest_version: 2.0.0
-name: exim
-public_title: Exim
-short_description: メールキューを監視する Exim インテグレーション
-supported_os:
+"app_id": "exim"
+"app_uuid": "c84e4868-f96b-49b6-8243-2031dde179af"
+"assets":
+  "integration":
+    "auto_install": true
+    "configuration":
+      "spec": assets/configuration/spec.yaml
+    "events":
+      "creates_events": false
+    "metrics":
+      "check": exim.queue.count
+      "metadata_path": metadata.csv
+      "prefix": exim.
+    "service_checks":
+      "metadata_path": assets/service_checks.json
+    "source_type_id": !!int "10291"
+    "source_type_name": exim
+"author":
+  "homepage": "https://github.com/DataDog/integrations-extras"
+  "name": Community
+  "sales_email": JeanFred1@gmail.com
+  "support_email": JeanFred1@gmail.com
+"categories": []
+"custom_kind": "integration"
+"dependencies":
+- "https://github.com/DataDog/integrations-extras/blob/master/exim/README.md"
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "exim"
+"integration_id": "exim"
+"integration_title": "Exim"
+"integration_version": "1.0.0"
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "exim"
+"public_title": "Exim"
+"short_description": "Exim integration to monitor mail queues"
+"supported_os":
 - linux
 - windows
 - macos
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::Windows
-  - Supported OS::macOS
-  configuration: README.md#Setup
-  description: メールキューを監視する Exim インテグレーション
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Exim
+"tile":
+  "changelog": CHANGELOG.md
+  "classifier_tags":
+  - "Supported OS::Linux"
+  - "Supported OS::Windows"
+  - "Supported OS::macOS"
+  "configuration": "README.md#Setup"
+  "description": Exim integration to monitor mail queues
+  "media": []
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": Exim
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
-## 概要
+## Overview
 
-このチェックは、Datadog Agent を通じて [Exim][1] を監視します。
+This check monitors [Exim][1] through the Datadog Agent.
 
-## 計画と使用
+## Setup
 
-ホストで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][2]のガイドを参照してこの手順を行ってください。
+Follow the instructions below to install and configure this check for an Agent running on a host. For containerized environments, see the [Autodiscovery Integration Templates][2] for guidance on applying these instructions.
 
-### インフラストラクチャーリスト
+### Installation
 
-Agent v7.21 / v6.21 以降の場合は、下記の手順に従い exim チェックをホストにインストールします。Docker Agent または 上記バージョン以前の Agent でインストールする場合は、[コミュニティインテグレーションの使用][3]をご参照ください。
+For Agent v7.21+ / v6.21+, follow the instructions below to install the exim check on your host. See [Use Community Integrations][3] to install with the Docker Agent or earlier versions of the Agent.
 
-1. 以下のコマンドを実行して、Agent インテグレーションをインストールします。
+1. Run the following command to install the Agent integration:
 
    ```shell
    datadog-agent integration install -t datadog-exim==<INTEGRATION_VERSION>
    ```
 
-2. コアの[インテグレーション][4]と同様にインテグレーションを構成します。
+2. Configure your integration similar to core [integrations][4].
 
-### ブラウザトラブルシューティング
+### Configuration
 
-1. exim のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `exim.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル exim.d/conf.yaml][5] を参照してください。
+1. Edit the `exim.d/conf.yaml` file, in the `conf.d/` folder at the root of your Agent's configuration directory to start collecting your exim performance data. See the [sample exim.d/conf.yaml][5] for all available configuration options.
 
-2. [Agent を再起動します][6]。
+2. [Restart the Agent][6].
 
-### 検証
+### Validation
 
-[Agent の status サブコマンドを実行][7]し、Checks セクションで `exim` を探します。
+[Run the Agent's status subcommand][7] and look for `exim` under the Checks section.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "exim" >}}
 
 
-### ヘルプ
+### Events
 
-Exim インテグレーションには、イベントは含まれません。
+The Exim integration does not include any events.
 
-### ヘルプ
+### Service Checks
 {{< get-service-checks-from-git "exim" >}}
 
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
+Need help? Contact [Datadog support][10].
 
 
 [1]: https://www.exim.org/
-[2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[3]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/
-[4]: https://docs.datadoghq.com/ja/getting_started/integrations/
+[2]: https://docs.datadoghq.com/agent/kubernetes/integrations/
+[3]: https://docs.datadoghq.com/agent/guide/use-community-integrations/
+[4]: https://docs.datadoghq.com/getting_started/integrations/
 [5]: https://github.com/DataDog/integrations-extras/blob/master/exim/datadog_checks/exim/data/conf.yaml.example
-[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[6]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[7]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
 [8]: https://github.com/DataDog/integrations-extras/blob/master/exim/metadata.csv
 [9]: https://github.com/DataDog/integrations-extras/blob/master/exim/assets/service_checks.json
-[10]: https://docs.datadoghq.com/ja/help/
+[10]: https://docs.datadoghq.com/help/
+

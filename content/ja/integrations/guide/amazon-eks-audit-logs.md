@@ -1,85 +1,85 @@
 ---
-kind: ガイド
-title: Amazon EKS 監査ログのログ収集
+title: Log Collection for Amazon EKS Audit Logs
+kind: guide
 ---
 
-## 概要
+## Overview
 
-Amazon EKS 監査ログは、クラスター管理者に EKS クラスター内のアクションを把握させます。Amazon EKS 監査ログのログ収集を有効にすると、[Datadog Cloud SIEM][1] をセットアップして使用し、EKS クラスター内で発生した不当なアクションや緊急の脅威を監視することができます。
+Amazon EKS audit logs give cluster administrators insight into actions within an EKS cluster. Once you enable log collection for your Amazon EKS audit logs, you can setup and use [Datadog Cloud SIEM][1] to monitor unwarranted actions or immediate threats as they occur within your EKS cluster.
 
-## セットアップ
+## Setup
 
-### Amazon EKS 監査ログ
+### Amazon EKS audit logs
 
-#### 新しいクラスター
+#### New cluster
 
-1. Amazon EKS クラスターをお持ちでない場合は、[Amazon EKS クラスターの作成][2]のドキュメントに従って作成してください。
-1. セットアップの際、Configure logging ページで、**Audit logs** を有効にします。
+1. If you do not have an Amazon EKS cluster, create one by following the [Creating an Amazon EKS Cluster][2] documentation.
+1. During setup, on the Configure logging page, enable **Audit logs**.
 
-#### 既存のクラスター
+#### Existing cluster
 
-1. すでに Amazon EKS クラスターを構成している場合は、[Amazon EKSコンソール][2]でクラスターに移動します。
-1. EKS クラスターをクリックします。
-1. **Logging** タブをクリックします。
-1. **Manage logging** ボタンをクリックします。
-1. **Audit** オプションを **Enabled** にトグルし、**Save changes** ボタンをクリックします。
+1. If you already have an Amazon EKS cluster configured, navigate to your cluster in the [Amazon EKS console][2].
+1. Click on your EKS cluster.
+1. Click the **Logging** tab.
+1. Click the **Manage logging** button.
+1. Toggle the **Audit** option to **Enabled** and click the **Save changes** button.
 
-### Datadog AWS インテグレーション
+### Datadog AWS integration
 
-次に、AWS とのインテグレーションを設定します。[AWS インテグレーションの設定][3]のドキュメントに従います。
+Next, set up the AWS integration. Follow the [AWS integration setup][3] documentation.
 
 ### Datadog Forwarder
 
-AWS インテグレーションのセットアップが完了したら、Datadog Forwarder のインストールと構成を行います。Datadog Forwarder のインストール][4]のドキュメントに従います。
+Once your AWS integration set up is complete, install and configure the Datadog Forwarder. Follow the [Datadog Forwarder installation][4] documentation.
 
-**注**: Lambda ARN は、[セットアップトリガー][5]のステップで必要となります。Lambda ARN は、AWS コンソールで [Lambda > Functions > `Your_Function_Name`][6] に移動することで利用可能です。Function ARN は Function overview に記載されています。
+**Note**: The Lambda ARN is required for the [Setup triggers][5] step. Your Lambda ARN is available by navigating to [Lambda > Functions > `Your_Function_Name`][6] in the AWS console. The Function ARN is listed in the Function overview.
 
-## ログエクスプローラー
+## Log Explorer
 
-Amazon EKS 監査ログ、Datadog AWS インテグレーション、Datadog Forwarder のセットアップが完了すると、EKS 監査ログが [Datadog ログエクスプローラー][7]で利用可能になります。
+Once setup of Amazon EKS audit logs, the Datadog AWS integration, and Datadog Forwarder are complete, your EKS audit logs are available in the [Datadog Log Explorer][7].
 
-**注**: ログがログエクスプローラーにストリーミングされるまでに数秒かかる場合があります。
+**Note**: Logs may take a few seconds to begin streaming into Log Explorer.
 
-ログエクスプローラーで EKS 監査ログのみを表示するには、ログエクスプローラーの検索で `source:kubernetes.aduit` をクエリするか、ファセットパネルの **Source** で `kubernetes.audit` ファセットを選択して EKS 監査ログでフィルタリングします。
+To view only EKS audit logs in the Log Explorer, query `source:kubernetes.aduit` in Log Explorer search or, under **Source** in the facets panel, select the `kubernetes.audit` facet to filter by EKS audit logs.
 
 ## Cloud SIEM
 
-Datadog Cloud SIEM を使用することで、EKS クラスターに対する潜在的な構成ミスや標的型攻撃を検出することができます。
+You can use Datadog Cloud SIEM to detect potential misconfigurations or targeted attacks to your EKS clusters.
 
-Cloud SIEM で Amazon EKS 監査ログの監視を開始するには、Cloud SIEM をセットアップして、構成ミスや脅威が検出されるたびに[セキュリティシグナルエクスプローラー][10]に[セキュリティシグナル][9]を生成するカスタム[ログ検出ルール][8]を作成します。
+To start monitoring your Amazon EKS audit logs with Cloud SIEM, setup Cloud SIEM and create a custom [log detection rule][8] that generates a [Security Signal][9] in the [Security Signals Explorer][10] whenever a misconfiguration or threat is detected.
 
-### セットアップ
+### Setup
 
-Cloud SIEM のセットアップと設定を行います。アプリ内の [Cloud SIEM のセットアップと構成方法][1]を参照してください。
+Setup and configure Cloud SIEM. See the in-app [Cloud SIEM setup and configuration instructions][1].
 
-Cloud SIEM がセットアップされ、構成されると、ゼロから新しい Cloud SIEM ルールを作成するか、ログエクスプローラーのクエリを新しいルールにエクスポートすることができます。
+Once Cloud SIEM is set up and configured, you can either create a new Cloud SIEM rule from scratch or export a query in Log Explorer to a new rule.
 
-### セキュリティ監視ルールの確認
+### Review Security Monitoring Rules
 
-環境で脅威を検知している、すぐに使える [Cloud SIEM 検出ルール][11]をご覧ください。これらのルールの検索、編集、複製については、[検出ルールの作成と管理][12]を参照してください。
+See out-of-the-box [Cloud SIEM detection rules][11] that are detecting threats in your environment. For more information on searching, editing, and cloning these rules, see [creating and managing detection rules][12].
 
-### Cloud SIEM のルールを新規に作成する
+### Create a new Cloud SIEM rule
 
-ルールを作成するには、アプリ内の [Rule Setup and Configuration][13] ページに移動してください。設定を完了するには、[ログ検出ルールのドキュメント][14]を参照してください。
+To create a rule, navigate to the in-app [Rule Setup and Configuration][13] page. To complete your setup, see the [Log Detection Rules documentation][14].
 
-### ログエクスプローラーでクエリをルールにエクスポートする
+### Export a query to a rule in Log Explorer
 
-1. ログエクスプローラーの検索バーでクエリを作成します。例えば、`source:kubernetes.audit @objectRef.resource:pods @objectRef.subresource:exec @http.method:create @http.status_code:[101 TO 299]` でフィルタリングします。
-1. **Export** ボタンをクリックし、**Export to detection rule** を選択します。
-1. この機能は、クエリをエクスポートして、ログ検出ルール設定の 2 番目のステップで定義します。検出方法を選択します。この例では、**New Value** を選択します。Detect new value ドロップダウンメニューで `@usr.name` 属性を選択します。これにより、ユーザーがポッドに対して exec を実行したときに初めてアラートが出されます。最初のアラートの後、Datadog は同じユーザーに対して再度アラートを出すことはありません。また、これらのイベントがユーザー定義のしきい値を超えたときに検出するには、検出方法に **threshold rule** を使用します。
-1. [ログ検出ルールのドキュメント][14]に従って、残りのルール構成を完了させる方法を学びます。
+1. In the Log Explorer, create a query in the search bar. For example, filter by `source:kubernetes.audit @objectRef.resource:pods @objectRef.subresource:exec @http.method:create @http.status_code:[101 TO 299]`.
+1. Click the **Export** button and select **Export to detection rule**.
+1. This feature exports your query and defines it in the second step of the Log Detection rule setup. Select a detection method. In this instance, select **New Value**. Select the `@usr.name` attribute in the Detect new value dropdown menu. This alerts you for the first time when a user execs into a pod. After the first alert, Datadog won't alert on the same user again. Alternatively, to detect when these events exceed a user-defined threshold, use **threshold rule** for the detection method.
+1. Follow the [Log Detection Rules documentation][14] to learn how to complete the rest of your rule configuration.
 
-[1]: /ja/security/cloud_siem/
+[1]: /security/cloud_siem/
 [2]: https://docs.aws.amazon.com/eks/latest/userguide/create-cluster.html
-[3]: /ja/integrations/amazon_web_services/?tab=roledelegation#setup
-[4]: /ja/logs/guide/forwarder/
-[5]: /ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole#set-up-triggers
+[3]: /integrations/amazon_web_services/?tab=roledelegation#setup
+[4]: /logs/guide/forwarder/
+[5]: /logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole#set-up-triggers
 [6]: https://console.aws.amazon.com/lambda/home#/functions
 [7]: https://app.datadoghq.com/logs
-[8]: /ja/security/cloud_siem/log_detection_rules/
-[9]: /ja/getting_started/cloud_siem/#phase-2-signal-exploration
+[8]: /security/cloud_siem/log_detection_rules/
+[9]: /getting_started/cloud_siem/#phase-2-signal-exploration
 [10]: https://app.datadoghq.com/security
-[11]: /ja/security/default_rules/#cat-cloud-siem
-[12]: /ja/security/detection_rules/#creating-and-managing-detection-rules
+[11]: /security/default_rules/#cat-cloud-siem
+[12]: /security/detection_rules/#creating-and-managing-detection-rules
 [13]: https://app.datadoghq.com/security/configuration/rules/new?product=siem
-[14]: /ja/security/cloud_siem/log_detection_rules/?tab=threshold#choose-a-detection-method
+[14]: /security/cloud_siem/log_detection_rules/?tab=threshold#choose-a-detection-method

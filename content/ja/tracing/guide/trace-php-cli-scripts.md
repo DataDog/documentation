@@ -1,29 +1,29 @@
 ---
+title: Tracing PHP CLI Scripts
+kind: guide
 further_reading:
 - link: /tracing/trace_collection/dd_libraries/php/
-  tags: ドキュメント
-  text: PHP トレース収集の設定
+  tag: Documentation
+  text: Set up PHP trace collection
 - link: /tracing/troubleshooting/
-  tags: ドキュメント
-  text: トラブルシューティング
-kind: ガイド
-title: PHP CLI スクリプトのトレース
+  tag: Documentation
+  text: Troubleshooting
 ---
 
-## 短時間実行される CLI スクリプト
+## Short-running CLI scripts
 
-短時間実行のスクリプトは、通常、数秒から数分程度実行されます。スクリプトが実行されるたびに 1 つのトレースを受け取ります。
+A short-running script typically runs for a few seconds or minutes. The expected behavior is to receive one trace each time the script is executed.
 
-デフォルトでは、コマンドラインから実行される PHP スクリプトのトレースは無効です。`DD_TRACE_CLI_ENABLED` を `1` に設定することで有効になります。
+By default, tracing is disabled for PHP scripts that run from the command line. Opt in by setting `DD_TRACE_CLI_ENABLED` to `1`.
 
 ```
 $ export DD_TRACE_CLI_ENABLED=1
-# オプションとして、エージェントのホストとポートが localhost と 8126 と異なる場合はそれぞれ設定します
+# Optionally, set the agent host and port if different from localhost and 8126, respectively
 $ export DD_AGENT_HOST=agent
 $ export DD_TRACE_AGENT_PORT=8126
 ```
 
-例えば、以下の `script.php` が cURL リクエストを実行するとします。
+For example, assume the following `script.php` runs a cURL request:
 
 ```php
 <?php
@@ -33,58 +33,58 @@ curl_exec($ch);
 sleep(1);
 ```
 
-スクリプトを実行します:
+Run the script:
 
 ```
 $ php script.php
 ```
 
-スクリプトを実行するとトレースが生成され、スクリプトの終了時に Datadog のバックエンドに送信されます。
+Once the script is run, the trace is generated and sent to the Datadog backend when the script terminates.
 
-{{< img src="tracing/guide/trace_php_cli_scripts/short-running-cli.jpg" alt="短時間で実行される PHP CLI スクリプトのトレース" >}}
+{{< img src="tracing/guide/trace_php_cli_scripts/short-running-cli.jpg" alt="Trace for a short running PHP CLI script" >}}
 
-## 長時間実行される CLI スクリプト
+## Long-running CLI scripts
 
-長時間実行されるスクリプトは、数時間から数日にわたって実行されます。通常、このようなスクリプトは、新しい受信メッセージの処理やデータベースのテーブルに追加された新しい行の処理など、特定のタスクを繰り返し実行します。これにより、メッセージの処理など「作業単位」ごとに 1 つのトレースが生成されることが期待されます。
+A long-running script runs for hours or days. Typically, such scripts repetitively execute a specific task, for example processing new incoming messages or new lines added to a table in a database. The expected behavior is that one trace is generated for each "unit of work", for example the processing of a message.
 
-デフォルトでは、コマンドラインから実行される PHP スクリプトのトレースは無効です。`DD_TRACE_CLI_ENABLED` を `1` に設定することで有効になります。
+By default, tracing is disabled for PHP scripts that run from the command line. Opt in by setting `DD_TRACE_CLI_ENABLED` to `1`.
 
 ```
 $ export DD_TRACE_CLI_ENABLED=1
-# この設定では、メソッドの実行が終了すると同時に、各「作業単位」のトレースが送信されます。
+# With this pair of settings, traces for each "unit of work" is sent as soon as the method execution terminates.
 $ export DD_TRACE_GENERATE_ROOT_SPAN=0
 $ export DD_TRACE_AUTO_FLUSH_ENABLED=1
-# オプションとしてサービス名や env などを設定します...
+# Optionally, set service name, env, etc...
 $ export DD_SERVICE=my_service
-# オプションとして、エージェントのホストとポートが localhost と 8126 と異なる場合は、それぞれ設定します
+# Optionally, set the agent host and port if different from localhost and 8126, respectively
 $ export DD_AGENT_HOST=agent
 $ export DD_TRACE_AGENT_PORT=8126
 ```
 
-例えば、以下の `long_running.php` スクリプトを実行すると想定します。　 
+For example, assume the following `long_running.php` script:
 
 ```php
 <?php
-/* Datadog 固有のコード。別のファイルで準備し、このスクリプトで使用します。 */
+/* Datadog specific code. It can be in a separate files and required in this script */
 use function DDTrace\trace_method;
 use function DDTrace\trace_function;
 use DDTrace\SpanData;
 trace_function('processMessage', function(SpanData $span, $args) {
-    // メソッドの引数にアクセスし、リソース名を変更
+    // Access method arguments and change resource name
     $span->resource =  'message:' . $args[0]->id;
     $span->meta['message.content'] = $args[0]->content;
     $span->service = 'my_service';
 });
 trace_method('ProcessingStage1', 'process', function (SpanData $span, $args) {
     $span->service = 'my_service';
-    // リソース名のデフォルトは、完全に修飾されたメソッド名となります。
+    // Resource name defaults to the fully qualified method name.
 });
 trace_method('ProcessingStage2', 'process', function (SpanData $span, $args) {
     $span->service = 'my_service';
     $span->resource = 'message:' . $args[0]->id;
 });
-/* Datadog コード終了 */
-/** 受信・処理対象のメッセージ */
+/* Enf of Datadog code */
+/** Represents a message to be received and processed */
 class Message
 {
     public $id;
@@ -95,7 +95,7 @@ class Message
         $this->content = $content;
     }
 }
-/** 処理対象となる複数のステージのうちの 1 つ。それぞれがスパンを保有 */
+/** One of possibly many processing stages, each of which should have a Span */
 class ProcessingStage1
 {
     public function process(Message $message)
@@ -105,7 +105,7 @@ class ProcessingStage1
         curl_exec($ch);
     }
 }
-/** 処理対象となる複数のステージのうちの 1 つ。それぞれがスパンを保有 */
+/** One of possibly many processing stages, each of which should have a Span */
 class ProcessingStage2
 {
     public function process(Message $message)
@@ -113,7 +113,7 @@ class ProcessingStage2
         sleep(1);
     }
 }
-/** 実際のアプリケーションでは、キューなどのソースから新しいメッセージを読み込みます。*/
+/** In a real world application, this will read new messages from a source, for example a queue */
 function waitForNewMessages()
 {
     return [
@@ -122,7 +122,7 @@ function waitForNewMessages()
         new Message($id = (time() + rand(1, 1000)), 'content of a message: ' . $id),
     ];
 }
-/** この関数は「仕事の単位」であり、その実行ごとに 1 つのシングルトレースを生成します */
+/** This function is the "unit of work", each execution of it will generate one single trace */
 function processMessage(Message $m, array $processors)
 {
     foreach ($processors as $processor) {
@@ -131,7 +131,7 @@ function processMessage(Message $m, array $processors)
     }
 }
 $processors = [new ProcessingStage1(), new ProcessingStage2()];
-/** 新しいメッセージを待つためにループを永続的に実行 */
+/** A loop that runs forever waiting for new messages */
 while (true) {
     $messages = waitForNewMessages();
     foreach ($messages as $message) {
@@ -140,16 +140,17 @@ while (true) {
 }
 ```
 
-スクリプトを実行します:
+Run the script:
 
 ```
 $ php long_running.php
 ```
 
-スクリプトを実行すると、新しいメッセージが処理されるたびに 1 つのトレースが生成され、Datadog のバックエンドに送信されます。
+Once the script is run, one trace is generated and sent to the Datadog backend every time a new message is processed.
 
-{{< img src="tracing/guide/trace_php_cli_scripts/long-running-cli.jpg" alt="長時間で実行される PHP CLI スクリプトのトレース" >}}
+{{< img src="tracing/guide/trace_php_cli_scripts/long-running-cli.jpg" alt="Trace for a long running PHP CLI script" >}}
 
-## その他の参考資料
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+

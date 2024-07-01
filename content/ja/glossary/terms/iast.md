@@ -1,6 +1,6 @@
 ---
+title: interactive application security testing (IAST)
 core_product:
-- security
-title: インタラクティブアプリケーションセキュリティテスト (IAST)
+  - security
 ---
-IAST は、静的テストと動的テストを組み合わせたセキュリティテスト手法です。
+IAST is a security testing methodology that combines static and dynamic testing.

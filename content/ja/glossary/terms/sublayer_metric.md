@@ -1,12 +1,12 @@
 ---
+title: sublayer metric
 core_product:
-- apm
-title: サブレイヤーメトリクス
+  - apm
 ---
-サブレイヤーメトリクスはトレース内における任意のタイプまたはサービスの実行時間を指します。
+A sublayer metric is the execution duration of a given type or service within a trace.
 
-[トレーシングアプリケーションメトリクス][1]を `sublayer_service` と `sublayer_type` でタグ付けし、トレース内のサービスの実行時間を個別に確認することもできます。
+Some [Tracing Application Metrics][1] are tagged with `sublayer_service` and `sublayer_type` so that you can see the execution time for individual services within a trace.
 
-サブレイヤーメトリクスは、サービスが下流に依存する場合にのみ利用可能です。
+Sublayer metrics are only available if a service has downstream dependencies.
 
-[1]: /ja/tracing/metrics/metrics_namespace/
+[1]: /tracing/metrics/metrics_namespace/

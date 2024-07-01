@@ -1,104 +1,104 @@
 ---
 aliases:
-- /ja/developers/marketplace/
-description: Datadog マーケットプレイスについて
+- /developers/marketplace/
 further_reading:
-- link: https://www.datadoghq.com/partner/
-  tag: パートナーネットワーク
-  text: Datadog パートナーネットワーク
-- link: https://www.datadoghq.com/blog/datadog-marketplace/
-  tag: ブログ
-  text: Datadog Marketplace で監視範囲を拡大する
+- link: "https://www.datadoghq.com/partner/"
+  tag: Partner Network
+  text: Datadog Partner Network
+- link: "https://www.datadoghq.com/blog/datadog-marketplace/"
+  tag: Blog
+  text: Expand your monitoring reach with the Datadog Marketplace
 - link: /developers/integrations/create_a_tile
   tag: Documentation
-  text: タイルの作成
+  text: Create a Tile
 - link: /developers/integrations/agent_integration
   tag: Documentation
-  text: Agent ベースのインテグレーションの作成
-title: マーケットプレイス製品の構築
+  text: Create an Agent-based Integration
+title: Build A Marketplace Offering
 type: documentation
+description: Learn about the Datadog marketplace.
 ---
-## 概要
+## Overview
 
-[Datadog Marketplace][2] は、テクノロジーパートナーが Datadog ユーザー向けに提供する有償製品を出品できるデジタルマーケットプレイスです。
+The [Datadog Marketplace][2] is a digital marketplace where Technology Partners can list their paid offerings to Datadog users.
 
-**Integrations** ページには、Datadog とテクノロジーパートナーの両者によって構築されたインテグレーションが無料で含まれていますが、**Marketplace** ページは、Datadog のお客様とテクノロジーパートナーが Agent ベースまたは API ベースのインテグレーション、ソフトウェアライセンス、プロフェッショナルサービスなどのさまざまな製品を売買するための商用プラットフォームです。
+While the **Integrations** page includes integrations built by both Datadog and Technology Partners at no cost, the **Marketplace** page is a commercial platform for Datadog customers and Technology Partners to buy and sell a variety of offerings, including Agent-based or API-based integrations, software licenses, and professional services.
 
-{{< img src="developers/marketplace/marketplace_overview.png" alt="Datadog Marketplace ページ" style="width:100%" >}}
+{{< img src="developers/marketplace/marketplace_overview.png" alt="The Datadog Marketplace page" style="width:100%" >}}
 
-## 製品の出品
+## List an offering
 
-Datadog Marketplace では、以下の種類の製品がサポートされています。
+The following types of offerings are supported on the Datadog Marketplace:
 
-インテグレーション
-: [Datadog Agent][19] または [Datadog API][15] を通じて、ユーザーの Datadog アカウントにサードパーティーのデータを送信する (またはデータを引き出す) Marketplace インテグレーション。これらのインテグレーションには、メトリクス、イベント、ログ、トレースなど、様々なデータタイプを含めることができます。
+Integrations
+: Marketplace integrations that submit third-party data to (or pull data from) a user's Datadog account through the [Datadog Agent][19] or the [Datadog API][15]. These integrations can contain a variety of data types, such as metrics, events, logs, traces, and more.
 
-ソフトウェアライセンス
-: ソフトウェアライセンスでは、Datadog Marketplace を通じて、ソフトウェアソリューションを顧客にライセンス提供することができます。
+Software licenses
+: Software licenses enable you to deliver and license software solutions to customers through the Datadog Marketplace.
 
-プロフェッショナルサービス
-: プロフェッショナルサービスでは、一定期間、チームによる導入、サポート、管理などのサービスを提供することができます。
+Professional services
+: Professional services enable you to offer your team's services for implementation, support, or management for a set period of time.
 
-## Datadog Marketplace への参加
+## Join the Datadog Marketplace
 
-Marketplace パートナーには、すぐに使えるインテグレーションを出品しているテクノロジーパートナーにはない、独自の特典があります。
+Marketplace Partners have unique benefits that are not available to Technology Partners who list out-of-the-box integrations:
 
-- ブログ記事、プレスリリースへの引用、ソーシャルメディアの拡散などを含む**市場開拓コラボレーション**で、パートナーの成長を加速させることに焦点を当てた専用の営業およびマーケティングリソースへのアクセスが提供されます。
-- 社内のセールスイネーブルメントのための**トレーニングおよびサポート**。
-- カンファレンス、イベント ([Datadog DASH][20] など) を割引料金で**スポンサーする独占的な機会**。
-- ユーザー発見から**新規リードを創出**します。
+- **Go-to-market collaboration** including a blog post, a quote for a press release, and social media amplification, with access to dedicated sales and marketing resources focused on accelerating partner growth.
+- **Training and support** for internal sales enablement.
+- **Exclusive opportunities to sponsor** conferences and events (such as [Datadog DASH][20]) at a discounted rate.
+- **Generate new leads** from user discovery.
 
-## Datadog パートナーネットワークに参加する
+## Join the Datadog partner network
 
-Datadog Marketplace に製品を出品する前に、まず [Datadog パートナーネットワーク][3]の**テクノロジーパートナー**トラックに申請する必要があります。申請が承認されると、製品開発を開始することができます。
+Before listing an offering on the Datadog Marketplace, you first need to apply to the [Datadog Partner Network's][3] **Technology Partner** track. Once your application has been approved, you can begin developing your offering.
 
-## サンドボックスアカウントのリクエスト
+## Request a sandbox account
 
-すべてのテクノロジーパートナーは、開発を支援するために専用の Datadog サンドボックスアカウントをリクエストできます。
+All Technology Partners can request a dedicated Datadog sandbox account to aid in their development.
 
-サンドボックスアカウントをリクエストするには
+To request a sandbox account:
 
-1. [Datadog パートナーポータル][6]にログインします。
-2. 個人のホームページで、**Sandbox Access** の下にある **Learn More** ボタンをクリックします。
-3. **Request Sandbox Upgrade** を選択します。
+1. Login to the [Datadog Partner Portal][6].
+2. On your personal homepage, click on the **Learn More** button under **Sandbox Access**.
+3. Select **Request Sandbox Upgrade**.
 
-<div class="alert alert-info">すでに Datadog 組織 (トライアル組織を含む) のメンバーである場合、新しく作成したサンドボックスに切り替える必要がある場合があります。詳細については、<a href="https://docs.datadoghq.com/account_management/org_switching/">アカウント管理のドキュメント</a>を参照してください。</div>
+<div class="alert alert-info">If you are already a member of a Datadog organization (including a trial org), you may need to switch to your newly created sandbox. For more information, see the <a href="https://docs.datadoghq.com/account_management/org_switching/">Account Management documentation</a>.</div>
 
-開発者用サンドボックスの作成には、最大で 1〜2 営業日かかる場合があります。サンドボックスが作成されると、[組織から新しいメンバーを招待する][7]ことができ、共同作業を行うことができます。
+Creating a developer sandbox may take up to one or two business days. Once your sandbox is created, you can [invite new members from your organization][7] to collaborate with.
 
-## Marketplace へのアクセスをリクエストする
+## Request access to Marketplace
 
-非公開 Marketplace リポジトリへのアクセスをリクエストするには、<a href="mailto:marketplace@datadoghq.com">marketplace@datadoghq.com</a> にメールを送ってください。アクセスが許可されると、アノテーションとベストプラクティスを含む Marketplace リポジトリの[プルリクエスト例][12]を確認することができます。
+To request access to the private Marketplace repository, email <a href="mailto:marketplace@datadoghq.com">marketplace@datadoghq.com</a>. Once you have been granted access, you can review an [example pull request][12] in the Marketplace repository with annotations and best practices.
 
-## 市場開拓 (GTM) の機会を調整する
+## Coordinate go-to-market (GTM) opportunities
 
-マーケットプレイスのタイルが稼動すると、テクノロジーパートナーは Datadog のパートナーマーケティングチームとミーティングを行い、以下のような共同の市場開拓 (GTM) 戦略を調整することができます。
+Once a Marketplace tile is live, Technology Partners can meet with Datadog's Partner Marketing team to coordinate a joint go-to-market (GTM) strategy, which includes the following:
 
-- パートナーのプレスリリースの Datadog 見積もり
-- [Datadog モニター][21]内のブログ記事
-- ソーシャルメディア投稿の増幅
+- A Datadog quote for partner press releases
+- A blog post on the [Datadog Monitor][21]
+- Amplification of social media posts
 
-## 詳細はこちら
+## Get started
 
-API ベースのインテグレーション、ソフトウェアライセンス、またはプロフェッショナルサービスの作成を開始するには、[タイルの作成][13]を参照してください。Agent ベースのインテグレーションを作成し、Datadog Marketplace で販売することに興味がある場合は、[Agent ベースのインテグレーションを作成する][19]を参照してください。
+To get started with creating an API-based integration, software license, or professional service, see [Create a Tile][13]. If you're interesting in building an Agent-based integration and selling it on the Datadog Marketplace, see [Create an Agent-based Integration][19].
 
-## その他の参考資料
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/integrations
 [2]: https://app.datadoghq.com/marketplace
 [3]: https://partners.datadoghq.com/
-[5]: https://docs.datadoghq.com/ja/developers/datadog_apps
+[5]: https://docs.datadoghq.com/developers/datadog_apps
 [6]: https://partners.datadoghq.com/English/
-[7]: /ja/account_management/users/#add-new-members-and-manage-invites
+[7]: /account_management/users/#add-new-members-and-manage-invites
 [8]: https://learn.datadoghq.com/courses/intro-to-integrations
 [9]: https://learn.datadoghq.com/
 [10]: https://chat.datadoghq.com/
-[11]: https://docs.datadoghq.com/ja/developers/authorization/
+[11]: https://docs.datadoghq.com/developers/authorization/
 [12]: https://github.com/DataDog/marketplace/pull/107
-[13]: https://docs.datadoghq.com/ja/developers/integrations/create_a_tile
-[15]: https://docs.datadoghq.com/ja/developers/integrations/api_integration
-[19]: https://docs.datadoghq.com/ja/developers/integrations/agent_integration
+[13]: https://docs.datadoghq.com/developers/integrations/create_a_tile
+[15]: https://docs.datadoghq.com/developers/integrations/api_integration
+[19]: https://docs.datadoghq.com/developers/integrations/agent_integration
 [20]: https://www.dashcon.io/
 [21]: https://www.datadoghq.com/blog/

@@ -1,67 +1,67 @@
 ---
+title: Notifications
 aliases:
-- /ja/security_platform/notifications/
+  - /security_platform/notifications/
 further_reading:
 - link: /security/notifications/rules/
-  tag: ドキュメント
-  text: 通知ルールの設定と構成
+  tag: Documentation
+  text: Set up and configure notification rules
 - link: /security/notifications/variables/
-  tag: ドキュメント
-  text: 通知をカスタマイズするための通知変数について
+  tag: Documentation
+  text: Learn more about notification variables to customize notifications
 - link: /security/detection_rules/
-  tag: ドキュメント
-  text: セキュリティ検出ルールについて
+  tag: Documentation
+  text: Explore security detection rules
 products:
-- icon: cloud-security-management
-  name: ディメンショニング
+- name: Cloud SIEM
   url: /security/cloud_siem/
-- icon: cloud-security-management
-  name: Cloud Security Management
+  icon: siem
+- name: Cloud Security Management
   url: /security/cloud_security_management/
-- icon: app-sec
-  name: テストステップ
+  icon: cloud-security-management
+- name: Application Security Management
   url: /security/application_security/
-title: 通知
+  icon: app-sec
 ---
 
 {{< product-availability >}}
 
-## 概要
+## Overview
 
-通知によって、セキュリティシグナルが発生したときに、チームに通知することができます。セキュリティシグナルは、[検出ルール][2]で定義されたケースに、一定期間中に少なくとも 1 つ一致すると発生します。
+Notifications allow you to keep your team informed when a security signal is generated. A security signal is generated when at least one case defined in a [detection rule][2] is matched over a given period of time.
 
-## 通知のタイプ
+## Notification types
 
-通知は個々の[検出ルール](#detection-rules)に対してセットアップすることができ、また[通知ルール](#notification-rules)を使ってより広範囲にセットアップすることもできます。
+Notifications can be set up for individual [detection rules](#detection-rules) and also more broadly with [notification rules](#notification-rules).
 
-### 検出ルール
+### Detection rules
 
-[検出ルールを作成または変更する][2]と、送信される通知を定義できます。例えば、検出ルールがいつセキュリティシグナルをトリガーするかを決定するルールケースを追加できます。また、[**Say what's happening**](#say-whats-happening) セクションで通知メッセージをカスタマイズすることもできます。
+When you [create or modify a detection rule][2], you can define the notifications that are sent. For example, you can add rule cases to determine when a detection rule triggers a security signal. You can also customize the notification message in the [**Say what's happening**](#say-whats-happening) section.
 
 #### Say what's happening
 
-**Say what's happening** セクションを使用して、Markdown および [通知変数][1]を活用し通知メッセージをカスタマイズします。これにより、シグナルのタグやイベント属性を参照することで、シグナルに関する追加的な詳細を提供することができます。例えば、`attack:sql-injection-attempt` のように、生成されたシグナルにタグを追加することもできます。
+Use the **Say what's happening** section to customize the notification message using Markdown and [notification variables][1]. This allows you to provide additional details about the signal by referencing its tags and event attributes. You can also add tags to the generated signal, for example, `attack:sql-injection-attempt`.
 
-### 通知ルール
+### Notification rules
 
-通知ルールでは、個別の検出ルールごとに通知設定を行う代わりに、複数の検出ルールおよびシグナルにわたる一般的なアラート設定を行うことができます。例えば、重大度シグナル `CRITICAL` または `HIGH` がトリガーされた場合に通知を送信するように通知ルールをセットアップすることができます。セットアップと構成の詳細については、[通知ルール][3]を参照してください。
+Notification rules allow you to set general alerting preferences that span across multiple detection rules and signals instead of having to set up notification preferences for individual detection rules. For example, you can set up a notification rule to send a notification if any `CRITICAL` or `HIGH` severity signal is triggered. See [Notification Rules][3] for more information on setup and configuration.
 
-## 通知チャンネル
+## Notification channels
 
-通知は、メール、Slack、Jira、PagerDuty、Webhook などを通じて、個人やチームに送ることができます。
+Notifications can be sent to individuals and teams through email, Slack, Jira, PagerDuty, webhooks, and more.
 
-### メール
+### Email
 
 {{% notifications-email %}}
 
-### ヘルプ
+### Integrations
 
 {{% notifications-integrations %}}
 
-## その他の参考資料
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/security/notifications/variables/
-[2]: /ja/security/detection_rules/#creating-and-managing-detection-rules
-[3]: /ja/security/notifications/rules/
+[1]: /security/notifications/variables/
+[2]: /security/detection_rules/#creating-and-managing-detection-rules
+[3]: /security/notifications/rules/

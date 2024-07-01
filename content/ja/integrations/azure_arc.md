@@ -1,73 +1,75 @@
 ---
-aliases: []
-categories:
-- クラウド
+"aliases": []
+"categories":
+- cloud
 - azure
-dependencies: []
-description: 主要な Azure Arc メトリクスを追跡します。
-doc_link: https://docs.datadoghq.com/integrations/azure_arc/
-draft: false
-further_reading:
-- link: https://www.datadoghq.com/blog/azure-arc-integration/
-  tag: ブログ
-  text: Datadog で Azure Arc ハイブリッドインフラストラクチャーを監視する
-git_integration_title: azure_arc
-has_logo: true
-integration_id: azure-arc
-integration_title: Microsoft Azure Arc
-integration_version: ''
-is_public: true
-custom_kind: integration
-manifest_version: '1.0'
-name: azure_arc
-public_title: Datadog-Microsoft Azure Arc インテグレーション
-short_description: 主要な Azure Arc メトリクスを追跡します。
-version: '1.0'
+"custom_kind": "integration"
+"dependencies": []
+"description": "Track key Azure Arc metrics."
+"doc_link": "https://docs.datadoghq.com/integrations/azure_arc/"
+"draft": false
+"further_reading":
+- "link": "https://www.datadoghq.com/blog/azure-arc-integration/"
+  "tag": Blog
+  "text": Monitor your Azure Arc hybrid infrastructure with Datadog
+"git_integration_title": "azure_arc"
+"has_logo": true
+"integration_id": "azure-arc"
+"integration_title": "Microsoft Azure Arc"
+"integration_version": ""
+"is_public": true
+"manifest_version": "1.0"
+"name": "azure_arc"
+"public_title": "Datadog-Microsoft Azure Arc Integration"
+"short_description": "Track key Azure Arc metrics."
+"version": "1.0"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-## 概要
+## Overview
 
-Azure Arc は、Azure プラットフォームを拡張するブリッジであり、データセンター間、エッジ、マルチクラウド環境で実行できる柔軟性を備えたアプリケーションやサービスの構築を支援します。
+Azure Arc is a bridge that extends the Azure platform to help you build applications and services with the flexibility 
+to run across data centers, at the edge, and in multi-cloud environments.
 
-Azure Arc インテグレーションを使用すると、以下のことが可能になります。
+Use the Azure Arc integration to:
 
-- Azure Arc Servers と Kubernetes Clusters の接続ステータス、タグ、その他の詳細を収集する
-- Datadog Agent でも監視している Arc 管理サーバーの場合、Azure Arc タグを Datadog のホストとその関連メトリクスとログに伝播させる
-- AWS または GCP インテグレーションでも監視している Arc 管理サーバーの場合、Azure Arc タグを Datadog のホストとその関連クラウドメトリクスとログに伝播させる
-- Azure Arc のすぐに使えるダッシュボードで、上記のデータのインサイトとサマリーをすぐに得る
+- Collect connectivity status, tags, and other details about Azure Arc Servers and Kubernetes Clusters
+- For Arc-managed servers that are also monitored with the Datadog Agent, propagate Azure Arc tags to the host in Datadog and its associated metrics and logs
+- For Arc-managed servers that are also monitored through the AWS or GCP integration, propagate Azure Arc tags to the host in Datadog and its associated cloud metrics and logs
+- Get immediate insights and summaries of the above data in the out-of-the-box dashboard for Azure Arc
 
-また、Datadog 拡張機能を使用して、Datadog Agent を Arc サーバーに構成およびデプロイすることができます。このオプションの詳細については、[Datadog VM 拡張機能][1]ページをお読みください。
+You can also use the Datadog extension to configure and deploy the Datadog Agent onto Arc servers. For details on this option, read the [Datadog VM extension][1] page.
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-[Microsoft Azure インテグレーション][2]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
+If you haven't already, set up the [Microsoft Azure integration][2] first. There are no other installation steps.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "azure_arc" >}}
 
 
-### ヘルプ
+### Events
 
-Azure Arc インテグレーションには、イベントは含まれません。
+The Azure Arc integration does not include any events.
 
-### ヘルプ
+### Service Checks
 
-Azure Arc インテグレーションには、サービスのチェック機能は含まれません。
+The Azure Arc integration does not include any service checks.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
+Need help? Contact [Datadog support][4].
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/ja/integrations/guide/powershell-command-to-install-azure-datadog-extension/#install-on-azure-arc
-[2]: https://docs.datadoghq.com/ja/integrations/azure/
+[1]: https://docs.datadoghq.com/integrations/guide/powershell-command-to-install-azure-datadog-extension/#install-on-azure-arc
+[2]: https://docs.datadoghq.com/integrations/azure/
 [3]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_arc/azure_arc_metadata.csv
-[4]: https://docs.datadoghq.com/ja/help/
+[4]: https://docs.datadoghq.com/help/
+

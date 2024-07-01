@@ -1,81 +1,82 @@
 ---
-aliases:
-- /ja/infrastructure/containers/kubernetes_resources
-further_reading:
-- link: https://www.datadoghq.com/blog/rightsize-kubernetes-workloads/
-  tag: ブログ
-  text: Kubernetes のワークロードをライトサイジングするための実践的なヒント
 title: Kubernetes Resource Utilization
+kind: documentation
+aliases:
+- /infrastructure/containers/kubernetes_resources
+further_reading:
+- link: "https://www.datadoghq.com/blog/rightsize-kubernetes-workloads/"
+  tag: Blog
+  text: Practical tips for rightsizing your Kubernetes workloads
 ---
 
-{{< img src="infrastructure/livecontainers/kubernetes_resource_utilization.png" alt="Kubernetes Resource Utilization ビュー" >}}
+{{< img src="infrastructure/livecontainers/kubernetes_resource_utilization.png" alt="Kubernetes resource utilization view" >}}
 
-Datadog の [Kubernetes Resource Utilization][3] ビューは、Kubernetes ワークロードがインフラストラクチャー全体のコンピューティングリソースをどのように使用しているかの洞察を提供します。これにより、リソースの使用状況を把握し、サイジングやキャパシティプランニングについてより良い意思決定を行うことができるほか、CPU やメモリの無駄を削減することができます。
+Datadog's [Kubernetes resource utilization][3] view gives you insights into how your Kubernetes workloads are using your computing resources across your infrastructure. This helps you to understand resource usage and make better decisions about sizing and capacity planning, as well as reducing the amount of CPU or memory waste.
 
-リソースのリクエストと制限がポッドの現在の使用量とどの程度一致しているかのステータスが常に更新されるため、Kubernetes クラスター内のビンパッキングを改善できます。
+With a constantly-updated status of how well your resource requests and limits match your pods' current usage, you can improve bin packing within your Kubernetes clusters.
 
-## 前提条件
+## Prerequisites
 
 - Datadog Agent v7.45.0+
-- [Orchestrator Explorer][1] を有効にします。
+- Enable [Orchestrator Explorer][1]
 
-## 使用方法
+## Usage
 
-Datadog で、**Infrastructure** > [**Kubernetes**][2] に進み、[**Resource Utilization** タブ][3]を選択します。
+In Datadog, go to the [**Kubernetes Overview** page][2] and select the [**Resource Utilization** tab][3].
 
-ページは **Pods** で開き、デフォルトでは `kube_cluster_name`、`kube_namespace`、`kube_deployment` でグループ化されています。
+The page opens on **Pods**, with a default grouping by `kube_cluster_name`, `kube_namespace`, and `kube_deployment`.
 
-CPU とメモリのサイジングの最適化は、通常別々に行われます。表のデータは、**CPU** と ** Memory** のトグルで分割されています。
+Optimizing the sizing for CPU and memory is typically done separately. Data in the table is split between a **CPU** and a **Memory** toggle.
 
-#### デフォルトの列
+#### Default columns
 
 {{< tabs >}}
 {{% tab "CPU" %}}
-- **Pod group**: デフォルトではデプロイメントを表しますが、右上の **Group by** フィールドで指定する内容によって異なります。この列には、各グループ内のポッドの使用量、リクエスト、および制限の合計が含まれます。
-- **CPU idle**: 使用されていない CPU の量で、使用量とリクエストの差の合計として計算されます。
-- **CPU usage/requests**: 使用量の合計をリクエストの合計で割ったパーセンテージ。
-- **CPU usage/limits**: 使用量の合計を制限の合計で割ったパーセンテージ。
-- **CPU graph**: 使用量、リクエスト、制限の経時変化を表示する折れ線グラフ。各行をクリックすると、より長い時間枠が表示されます。
+- **Pod group**: Represents deployments by default, but depends on what you specify in the **Group by** field in the upper right. This column includes the sum of usage, requests, and limits for the pods in each group.
+- **CPU idle**: Amount of unused CPU, calculated as the sum of differences between usage and requests.
+- **CPU usage/requests**: Sum of usage divided by sum of requests, as a percentage.
+- **CPU usage/limits**: Sum of usage divided by sum of limits, as a percentage.
+- **CPU graph**: A line graph displaying the evolution of usage, requests, and limits over time. Click on each row to see a longer timeframe.
 {{% /tab %}}
 {{% tab "Memory" %}}
-- **Pod group**: デフォルトではデプロイを表しますが、右上の **Group by** フィールドで指定する内容によって異なります。この列には、各グループ内のポッドの使用量、リクエスト、および制限の合計が含まれます。
-- **Memory unused**: 使用量とリクエストの差の合計として計算される未使用メモリの量。
-- **Memory usage/requests**: 使用量の合計をリクエストの合計で割ったパーセンテージ。
-- **Memory usage/limits**: 使用量の合計を制限の合計で割ったパーセンテージ。
-- **Memory graph**: 使用量、リクエスト、制限の経時変化を表示する折れ線グラフ。各行をクリックすると、より長い時間枠が表示されます。
+- **Pod group**: Represents deployments by default, but depends on what you specify in the **Group by** field in the upper right. This column includes the sum of usage, requests, and limits for the pods in each group.
+- **Memory unused**: Amount of unused memory, calculated as the sum of differences between usage and requests.
+- **Memory usage/requests**: Sum of usage divided by sum of requests, as a percentage.
+- **Memory usage/limits**: Sum of usage divided by sum of limits, as a percentage.
+- **Memory graph**: A line graph displaying the evolution of usage, requests, and limits over time. Click on each row to see a longer timeframe.
 {{% /tab %}}
 {{< /tabs >}}
 
-右上の **Customize** ボタンを使用して、表示する他の列を選択します。色分けは、ポッドの過不足プロビジョニングの程度を反映します。
+Use the **Customize** button on the upper right to select other columns to view. Color coding reflects the degree of pod over/under provisioning.
 
-#### 詳細ビュー
+#### Detailed view
 
-行をクリックするとサイドパネルが開き、各グループの CPU とメモリのデータの組み合わせ、各ポッドまたはコンテナの詳細グラフ、ポッドのトップリストが表示されます。
+Clicking on a row opens a side panel with the combination of CPU and memory data for each group, with detailed graphs for each pod or container, and a top list of pods.
 
-{{< img src="infrastructure/livecontainers/kubernetes_resource_utilization_panel.png" alt="Kubernetes Resource Utilization サイドパネル" >}}
+{{< img src="infrastructure/livecontainers/kubernetes_resource_utilization_panel.png" alt="Kubernetes resource utilization side panel" >}}
 
-個々のポッドまたはコンテナのグラフは、負荷の不均衡が発生した場合にグループに影響を与える可能性のある外れ値を特定するのに役立ちます。デフォルトでは、グラフは `pod_name` でグループ化され、個々のポッドが表示されます。これを `kube_container_name` でグループ化するように変更すると、マルチコンテナポッドの場合にどのコンテナがプロビジョニングの過不足に最も貢献しているかを特定できます。
+The individual pod or container graphs help you identify outliers that may impact the group in the case of load imbalance. By default, graphs are grouped by `pod_name` to show individual pods. You can change this to group by `kube_container_name` to identify which container(s) contribute the most to over/under provisioning in the case of multi-container pods.
 
-### アイドルリソースの最適化
+### Optimize idle resources
 
-アイドル状態の CPU とメモリは、ポッドがすぐにスロットルされたり強制終了されたりすることなく、アプリケーションが拡張できる余地を確保するために必要です。
+Idle CPU and memory are necessary to ensure that your application has room to grow without pods being immediately throttled or killed.
 
-アイドル状態の CPU やメモリが多すぎると、不必要にコストが高くなる可能性がありますが、反対の場合、リソースの使用量が増えれば、パフォーマンスや信頼性が低下するリスクが生じます。
+Too much idle CPU and memory can result in unnecessarily higher costs, but the alternative creates the risk of performance and reliability degradation if resource usage increases. 
 
-このバランスを見つけるために、グラフを調整してより長いタイムスパンを見ます。最新の使用量のみに基づいてリソースのサイジングを決定することは避けてください。これらのメトリクスは標準的な Kubernetes メトリクスであるため、他の Datadog メトリクスと同様にクエリすることができます (たとえば、過去 15 か月について、必要に応じて最大解像度で)。
+To help find this balance, adjust the graphs to look at a longer timespan, and avoid making resource sizing decisions based on the most recent usage only. These metrics are standard Kubernetes metrics, so you can query them like all Datadog metrics—for example, for the last 15 months, at full resolution if needed.
 
-{{< img src="infrastructure/livecontainers/kubernetes_resource_utilization_metrics.png" alt="Kubernetes Resource Utilization メトリクス" >}}
+{{< img src="infrastructure/livecontainers/kubernetes_resource_utilization_metrics.png" alt="Kubernetes resource utilization metrics" >}}
 
-### 既知の制限
+### Known limitations
 
-リクエストや制限が設定されていないコンテナを含む少なくとも 1 つのポッドを含むグループのメトリクスは表示されません。これは、リクエストや制限がないと Datadog が使用率を推測できないためです。メトリクスのないこれらのグループは、並べ替え順序に関係なく最後に表示されます。
+Metrics are not displayed for groups containing at least one pod with containers that do not set requests or limits, as Datadog cannot infer the usage percentage without them. These groups without metrics appear last, regardless of the sorting order.
 
-グループのリソースリクエストと制限の合計は、そのグループに属するリソースの状態とは無関係です。これらの値は、関連するメトリクスグラフに表示される値とは異なる場合があります。
+The summation of resource requests and limits for a group is independent of the state of resources belonging to that group. These values may differ from the ones displayed on companion metric graphs.
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/infrastructure/containers/orchestrator_explorer?tab=datadogoperator#setup
+[1]: /infrastructure/containers/orchestrator_explorer?tab=datadogoperator#setup
 [2]: https://app.datadoghq.com/kubernetes
 [3]: https://app.datadoghq.com/orchestration/resource/pod?groups=tag%23kube_deployment%2Ctag%23kube_namespace%2Ctag%23kube_cluster_name

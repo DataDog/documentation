@@ -1,34 +1,34 @@
 ---
-title: レート制限
+title: Rate Limits
 type: documentation
 ---
 
-{{< h2 >}}レート制限{{< /h2 >}}
+{{< h2 >}}Rate Limits{{< /h2 >}}
 
-多くの API エンドポイントでは、レートが制限されています。特定の期間内に所定のリクエスト数を超過すると、Datadog からエラーが返されます。
+Many API endpoints are rate limited. Once you exceed a certain number of requests in a specific period, Datadog returns an error.
 
-レート制限がある場合は、応答コードに 429 が表示されます。`X-RateLimit-Period` で指定された時間待ってから再度電話をかけるか、`X-RateLimit-Limit` または `X-RateLimit-Period` より少し長い頻度で電話をかけるように切り替えることができます。
+If you are rate limited, you can see a 429 in the response code. You can either wait the designated time by the `X-RateLimit-Period` before making calls again, or switch to making calls at a frequency slightly longer than the `X-RateLimit-Limit` or `X-RateLimit-Period`.
 
-デフォルトのレート制限を増加させたい場合は、[Datadog のサポートチームにお問い合わせください][1]。
+Rate limits can be increased from the defaults by [contacting the Datadog support team][1].
 
-API レート制限ポリシーについて
+Regarding the API rate limit policy:
 
-- Datadog は、データポイント/メトリクスの送信に対して**レート制限を設けていません** (メトリクスの送信レートの処理方法については、[メトリクスのセクション][2]を参照してください)。制限に達したかどうかは、お客様の契約に基づく[カスタムメトリクス][3]の数量によって決まります。
-- ログを送信する API はレート制限されていません。
-- イベント送信のレート制限は、組織ごとに 1 時間あたり `500,000` イベントです。
-- エンドポイントのレート制限は様々で、以下に詳述するヘッダーに含まれています。これらはオンデマンドで拡張することができます。
+- Datadog **does not rate limit** on data point/metric submission (see [metrics section][2] for more info on how the metric submission rate is handled). Limits encounter is dependent on the quantity of [custom metrics][3] based on your agreement.
+- The API for sending logs is not rate limited.
+- The rate limit for event submission is `500,000` events per hour per organization.
+- The rate limits for endpoints vary and are included in the headers detailed below. These can be extended on demand.
 
 <div class="alert alert-warning">
-上記のリストは、Datadog API のすべてのレート制限を網羅しているわけではありません。レート制限が発生している場合は、使用している API とその制限の詳細について、<a href="https://www.datadoghq.com/support/">サポート</a>にお問い合わせください。</div>
+The list above is not comprehensive of all rate limits on Datadog APIs. If you are experiencing rate limiting, reach out to <a href="https://www.datadoghq.com/support/">support</a> for more information about the APIs you're using and their limits.</div>
 
-| レート制限ヘッダー      | 説明                                              |
+| Rate Limit Headers      | Description                                              |
 | ----------------------- | -------------------------------------------------------- |
-| `X-RateLimit-Limit`     | 期間内に許可されるリクエスト数。             |
-| `X-RateLimit-Period`    | リセット期間 (秒)。カレンダーと連携。 |
-| `X-RateLimit-Remaining` | 現在の期間内で許可される残りのリクエスト数。  |
-| `X-RateLimit-Reset`     | 次のリセットまでの時間 (秒)。                        |
-| `X-RateLimit-Name`      | 増加リクエストのレート制限の名前             |
+| `X-RateLimit-Limit`     | number of requests allowed in a time period.             |
+| `X-RateLimit-Period`    | length of time in seconds for resets (calendar aligned). |
+| `X-RateLimit-Remaining` | number of allowed requests left in the current time period.  |
+| `X-RateLimit-Reset`     | time in seconds until next reset.                        |
+| `X-RateLimit-Name`      | name of the rate limit for increase requests             |
 
-[1]: /ja/help/
-[2]: /ja/api/v1/metrics/
-[3]: /ja/metrics/custom_metrics/
+[1]: /help/
+[2]: /api/v1/metrics/
+[3]: /metrics/custom_metrics/

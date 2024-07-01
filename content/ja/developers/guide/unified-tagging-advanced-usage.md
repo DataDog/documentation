@@ -1,58 +1,58 @@
 ---
-kind: ガイド
-title: 統合タグ付けの高度な使用ガイド
+title: Unified Tagging Advanced Usage Guide
+kind: guide
 ---
 
-## 概要
+## Overview
 
-このガイドでは、特定のユースケースに基づいて、[統合サービスタグ付け][1]を構成して移行する方法を提示します。
+This guide shows ways to configure and migrate to [unified service tagging][1] based on specific use cases.
 
-## カスタムタグ
+## Custom tags
 
-`env`、`service`、`version` タグは、統合サービスタグ付け用に構成されているため、引き続き使用できます。ただし、独自のカスタムタグで統合されたタグ付けエクスペリエンスを実現したい場合は、以下に示すいくつかのオプションを使用できます。
+You can continue to use the `env` `service` and `version` tags as they are configured for unified service tagging. However, if you'd like to achieve a unified tagging experience with your own custom tags, there are several options available which are listed below.
 
-**注**: 任意のタグをサポートしている製品もあれば、より具体的な期待を持つ製品もあります。そのため、あるデータソースに、別の製品が持っていない、またはサポートしていないタグがある場合、製品間のナビゲーションが困難になる可能性があります。
+**Note**: While some products support arbitrary tags, others have more specific expectations. As such, navigation between products might be difficult if one data source has a tag that another does not have or support.
 
-### コンテナ化環境
+### Containerized environments
 
-#### メトリクス
+#### Metrics
 
-タグはデータポイントに付加できるため、目的のタグを自由に設定できます。自動検出されたタグは、収集されたすべてのメトリクスに自動的に追加されます。
+Since tags can be appended to data points, you have a lot of freedom in setting desired tags. Autodiscovered tags are automatically added to all metrics collected.
 
 #### APM
 
-`env` と `service` は APM のコアタグであるため、異なる名前のタグに置き換えることはできません。ただし、APM では、`env` だけでなく、データを[より多くのプライマリタグに沿って集計][2]できます。トレースとトレースメトリクスに追加される `availability-zone` などのホストタグも、使用が可能です。
+`env` and `service` are core tags in APM, so it is not possible to replace them with differently named tags. However, APM does allow for data to be [aggregated along more primary tags][2] than just `env`. Host tags, such as `availability-zone`, that are added to traces and trace metrics can be used as well.
 
-コンテナに関連付けられた自動検出されたタグは、スパンメタデータの `container_info` に追加されます。ただし、これらのコンテナタグは、トレースメトリクスの[指定済みタグリスト][3]の一部ではありません。
+Autodiscovered tags associated with containers are added to `container_info` in span metadata. However, these container tags are not part of the [included list of tags][3] for trace metrics.
 
-#### ログ管理
+#### Logs
 
-APM と同様に、`service` はログデータの整理に役立つコアタグです。また、これなしでログから関連する APM サービスにリンクすることはできません。
+Similar to APM, `service` is a core tag that is used to help organize log data. Additionally, it is not possible to link from a log to the related APM service without it.
 
-メトリクスと同様に、コンテナの自動検出されたタグと Agent のホストタグがすべてのログに追加されます。
+Similar to metrics, Autodiscovered tags for a container and host tags for the Agent are added to all logs.
 
-また、[Datadog ログ処理パイプライン][4]のダウンストリームのタグまたは属性にマッピングできる、コード内のログにカスタムフィールドを追加することもできます。
+Also, you can add custom fields to your logs in-code that can be mapped to tags or attributes downstream in a [Datadog log processing pipeline][4].
 
-## 標準ラベル
+## Standard labels
 
-Datadog では、標準ラベルと環境変数の両方を使用することをお勧めしています。ただし、特にランタイムでこうした変数を使用してもメリットが得られないアプリケーションでは、標準のラベルは、環境変数を使用する代わりと見なすことができます。Redis、MySQL、Nginx などのサードパーティソフトウェアがその例です。これらのサービスは依然としてインテグレーションチェックからインフラストラクチャーメトリクスとデータを生成するため、そのすべてのデータに `env`、`service`、`version` のタグを付けることは価値があります。
+Datadog recommends using both standard labels and environment variables. However, standard labels can be seen as an alternative to using environment variables, particularly for applications that do not benefit from using those variables in their runtime. Third party software like Redis, MySQL, and Nginx are a few examples. Since these services still generate infrastructure metrics and data from integration checks, it's valuable to have all of that data tagged with `env`, `service`, and `version`.
 
-Kubernetes のステートメトリクスに `env`、`service`、`version` のタグを付ける場合は、標準ラベルが最も簡単な方法です。コンテナの `DD` 環境変数は、Agent がこれらのメトリクスにタグを付けるために使用できないため、ラベルがより自然なオプションとなります。
+If you would like to tag Kubernetes state metrics with `env`, `service`, and `version` then the standard labels offer the easiest way. The `DD` environment variables of a container cannot be used by the Agent to tag these metrics, so the labels are a more natural option.
 
-### ラベルとしての環境の宣言
+### Declaring environment as a label
 
-データのソース (APM トレースやログなど) の近くに `env` を構成すると、Agent の `env` が異なる可能性のある不整合を回避するのに役立ちます。サービスのコンフィギュレーションの `env` 部分を作成すると、サービス中心の「信頼できる唯一の情報源」が保証されます。
+Configuring `env` closer to the source of the data, such as APM traces or logs, helps to avoid inconsistencies where the Agent `env` might be different. Making `env` part of the service's configuration guarantees a service-centric source of truth.
 
-### 既存の Kubernetes タグアノテーションで標準ラベルを使用する
+### Using standard labels with existing Kubernetes tags annotation
 
-Kubernetes ユーザーは、これらの一般的なタグを引き続き使用できます。ただし、特定のラベルを使用すると、いくつかの利点があります。
+Kubernetes users can continue to use these general tags. However, using the specific labels has a few benefits:
 
-- Kubernetes Downward API で、環境変数を挿入するためにこれを直接参照できます。
-- サービス標準ラベルは、ログのサービスの定義を簡略化できます。
+- You can directly reference them for environment variable injection with the Kubernetes downward API.
+- The service standard label can simplify the definition of service for logs.
 
-### 特定のコンテナに標準ラベルを使用する
+### Using standard labels for specific containers
 
-`DD` 環境変数はコンテナレベルで挿入されるため、コンテナごとに異なる可能性があります。ただし、特定のコンテナにも標準ラベルを使用する場合は、コンテナ固有のバリアントを使用する必要があります。
+Since the `DD` environment variables are injected at the container level, they can differ from container to container. However, if you want to use the standard labels as well for specific containers, then you need to use the container-specific variants:
 
 ```yaml
 tags.datadoghq.com/<container>.env
@@ -60,9 +60,9 @@ tags.datadoghq.com/<container>.service
 tags.datadoghq.com/<container>.version
 ```
 
-### 標準タグ挿入
+### Standard tags injection
 
-[Datadog Admission Controller][5] は、標準タブラベルを環境変数に変換し、ユーザーのアプリケーションポッドテンプレートに挿入します。この環境変数は、APM トレーサー、DogStatsD クライアント、Datadog Agent により使用されます。そして、Datadog Agent により値がタグにマッピングされます。
+The [Datadog Admission Controller][5] converts standard tag labels into environment variables, and injects them into the user's application pod template. These environment variables are used by the APM tracers, DogStatsD clients, and the Datadog Agent. The Datadog Agent maps these values to tags:
 
 ```
 tags.datadoghq.com/version -> DD_VERSION
@@ -70,17 +70,17 @@ tags.datadoghq.com/env -> DD_ENV
 tags.datadoghq.com/service -> DD_SERVICE
 ```
 
-Admission Controller は、ポッドラベルでこの情報を探します。ポッドレベルで見つからない場合はポッドオーナーオブジェクトのラベル (deployment、job、cron job、statefulset) から情報を取得します。
+The admission controller looks for this information in the pod labels. If not found at the pod level, the admission controller tries to get the information from the pod owner object's labels (deployment, job, cron job, statefulset).
 
-#### 注
+#### Notes
 
-- 新しいアプリケーションポッドを作成する前に、Admission Controller のデプロイと構成が必要です。既に存在するポッドは更新できません。
-- Admission Controller は環境変数 `DD_VERSION, DD_ENV` および `DD_SERVICE` が既に存在する場合は挿入を行いません。
-- Admission Controller の挿入機能を無効化するには、Cluster Agent のコンフィギュレーション: `DD_ADMISSION_CONTROLLER_INJECT_CONFIG_ENABLED=false` を使用します。
+- The admission controller needs to be deployed and configured before the creation of new application pods. It cannot update pods that already exist.
+- The admission controller doesn't inject the environment variables `DD_VERSION, DD_ENV`, and `DD_SERVICE` if they already exist.
+- To disable the admission controller injection feature, use the Cluster Agent configuration: `DD_ADMISSION_CONTROLLER_INJECT_CONFIG_ENABLED=false`
 
 
-[1]: /ja/getting_started/tagging/unified_service_tagging
-[2]: /ja/tracing/guide/setting_primary_tags_to_scope/
-[3]: /ja/metrics/distributions/#customize-tagging
-[4]: /ja/logs/log_configuration/pipelines
-[5]: /ja/agent/cluster_agent/admission_controller/
+[1]: /getting_started/tagging/unified_service_tagging
+[2]: /tracing/guide/setting_primary_tags_to_scope/
+[3]: /metrics/distributions/#customize-tagging
+[4]: /logs/log_configuration/pipelines
+[5]: /agent/cluster_agent/admission_controller/

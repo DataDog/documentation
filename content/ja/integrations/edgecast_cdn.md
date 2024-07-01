@@ -1,78 +1,104 @@
 ---
-categories:
-- キャッシュ
-- モニター
-dependencies: []
-description: Datadog メトリクスを使用して Edgecast の Web トラフィックを監視します。
-doc_link: https://docs.datadoghq.com/integrations/edgecast_cdn/
-draft: false
-further_reading:
-- link: https://www.datadoghq.com/blog/monitor-edgecast-cdn-with-datadog/
-  tag: ブログ
-  text: Datadog で Edgecast CDN を監視する
-git_integration_title: edgecast_cdn
-has_logo: false
-integration_id: ''
-integration_title: Edgecast
-integration_version: ''
-is_public: true
-custom_kind: integration
-manifest_version: '1.0'
-name: edgecast_cdn
-public_title: Datadog-Edgecast インテグレーション
-short_description: Edgecast のメトリクスを収集します。
-team: web-integrations
-version: '1.0'
+"app_id": "edgecast-cdn"
+"app_uuid": "2b575f7f-4575-4618-8ebd-f35f7d6a5d22"
+"assets":
+  "integration":
+    "auto_install": false
+    "events":
+      "creates_events": false
+    "metrics":
+      "check": edgecast.request_count
+      "metadata_path": metadata.csv
+      "prefix": edgecast.
+    "service_checks":
+      "metadata_path": assets/service_checks.json
+    "source_type_id": !!int "619"
+    "source_type_name": Edgecast
+"author":
+  "homepage": "https://www.datadoghq.com"
+  "name": Datadog
+  "sales_email": info@datadoghq.com
+  "support_email": help@datadoghq.com
+"categories":
+- caching
+- metrics
+"custom_kind": "integration"
+"dependencies": []
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "edgecast_cdn"
+"integration_id": "edgecast-cdn"
+"integration_title": "Edgecast"
+"integration_version": ""
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "edgecast_cdn"
+"public_title": "Edgecast"
+"short_description": "Monitor Edgecast CDN traffic with Datadog Metrics"
+"supported_os": []
+"tile":
+  "changelog": CHANGELOG.md
+  "classifier_tags":
+  - "Category::Caching"
+  - "Category::Metrics"
+  "configuration": "README.md#Setup"
+  "description": Monitor Edgecast CDN traffic with Datadog Metrics
+  "media": []
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": Edgecast
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-## 概要
+<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
+## Overview
 
-Edgecast は、エッジコンピューティング、アプリケーションセキュリティ、オーバーザトップビデオストリーミングのためのコンテンツデリバリネットワーク (CDN) やその他のソリューションを提供するグローバルネットワークプラットフォームです。Edgecast のメトリクスを収集し、オリジン別に Web トラフィックを監視することができます。
+Edgecast is a global network platform that provides a content delivery network (CDN) and other solutions for edge computing, application security, and over-the-top video streaming. Collect Edgecast metrics to monitor your web traffic by origin.
 
-## 計画と使用
+## Setup
 
-### Edgecast クライアントの作成 
 
-1. [Edgecast VDMS アカウント][1]にログインし、**Clients** タブに移動します。
-2. **Create New Client** をクリックすると、New Client モーダルが表示されます。
-3. 識別するための一意のクライアント名を入力し、**Toggle all ec.analytics** をクリックして、このクライアントがメトリクスを収集できるようにします。
-4. **Settings** に移動し、**JWT Expiration in Seconds** を 600 に変更します。
-5. **Save** をクリックすると、このクライアントと変更した設定値が保存されます。
+### Create Edgecast Client 
 
-### ブラウザトラブルシューティング
+1. Login to your [Edgecast VDMS account][1] and navigate to the **Clients** tab.
+2. Click **Create New Client** to bring up the New Client modal.
+3. Input a unique identifying client name and click **Toggle all ec.analytics** to allow this client to collect metrics.
+4. Navigate to **Settings** and modify **JWT Expiration in Seconds** to 600.
+5. Click **Save** to save this client and the modified settings value.
 
-1. Datadog の [Edgecast インテグレーションタイル][2]内のコンフィギュレーションタブに移動します。
-2. Datadog でこのクライアントを識別するための一意の名前を入力します。
-3. 上記で作成した Edgecast クライアントからクライアント ID とクライアントシークレットを貼り付けます。
-   * 構成した Edgecast クライアントの **Quick Start** タブにある **Getting an access token** リクエストで、`client_id=` の後にあるクライアント ID を探します。
-   * 構成した Edgecast クライアントの **Client Secrets** タブで、クライアントシークレットを探します。
-4. オプションで、カスタムタグを追加して、このインテグレーションのために収集されたすべてのメトリクスに関連付けます。
-   * メトリクスには、オリジンに関連する Edgecast 名が自動的にタグ付けされます。
+### Configuration
 
-## リアルユーザーモニタリング
+1. Navigate to the configuration tab inside the Datadog [Edgecast integration tile][2].
+2. Enter a unique identifying name for this client in Datadog. 
+3. Paste the Client ID and Client Secret from the Edgecast Client created above.
+   * Find the Client ID after `client_id=` in the **Getting an access token** request under the **Quick Start** tab of your configured Edgecast Client.
+   * Find the Client Secret under the **Client Secrets** tab of your configured Edgecast Client.
+4. Optionally, add custom tags to associate them with all metrics collected for this integration.
+   * Metrics are automatically tagged with the Edgecast name associated with the origin. 
 
-### データセキュリティ
+## Data Collected
+
+### Metrics
 {{< get-metrics-from-git "edgecast_cdn" >}}
 
 
-### ヘルプ
+### Events
 
-Edgecast インテグレーションには、イベントは含まれません。
+The Edgecast integration does not include any events.
 
-### ヘルプ
+### Service Checks
 
-Edgecast インテグレーションには、サービスのチェック機能は含まれません。
+The Edgecast integration does not include any service checks.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
+Need help? Contact [Datadog support][4].
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://id.vdms.io
 [2]: https://app.datadoghq.com/integrations/edgecast-cdn
 [3]: https://github.com/DataDog/dogweb/blob/prod/integration/edgecast_cdn/edgecast_cdn_metadata.csv
-[4]: https://docs.datadoghq.com/ja/help
+[4]: https://docs.datadoghq.com/help
+

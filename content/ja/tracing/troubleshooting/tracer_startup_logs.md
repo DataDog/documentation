@@ -1,60 +1,61 @@
 ---
+title: Tracer Startup Logs
+kind: Documentation
 further_reading:
 - link: /tracing/troubleshooting/connection_errors/
-  tag: ドキュメント
-  text: APM 接続エラーのトラブルシューティング
-title: Tracer Startup Logs
+  tag: Documentation
+  text: Troubleshooting APM Connection Errors
 ---
-## 起動ログ
+## Startup logs
 
-トレーサー起動ログは、起動時に取得可能なすべての情報を取得し、`DATADOG TRACER CONFIGURATION`、`DATADOG TRACER DIAGNOSTICS`、`DATADOG ERROR`、または `DATADOG CONFIGURATION` として記録し、ログ内の検索を簡素化することができます。
+Tracer startup logs capture all obtainable information at startup and log it as `DATADOG TRACER CONFIGURATION`, `DATADOG TRACER DIAGNOSTICS`, `DATADOG ERROR`, or `DATADOG CONFIGURATION` to simplify searching within your logs.
 
-言語によっては、言語の慣習や `Stdout` やそれに相当するものにアクセスする安全性に応じて、別のファイルにログを記録するものもあります。そのような場合、ログの場所は以下の言語タブに記されています。いくつかの言語では、診断エントリをログに残しません。
+Some languages log to a separate file depending on language conventions and the safety of accessing `Stdout` or equivalent. In those cases, the location of logs are noted in the language tab below. Some languages don't log diagnostics entries, also noted below.
 
-`CONFIGURATION` ログは、トレーサーに適用された設定の JSON 形式の表現です。Agent の接続性チェックが実行される言語では、コンフィギュレーション JSON には、Agent に到達できるかどうかを示す `agent_error` キーも含まれます。
+`CONFIGURATION` logs are a JSON formatted representation of settings applied to your tracer. In languages where an Agent connectivity check is performed, the configuration JSON will also include an `agent_error` key, which indicates whether the Agent is reachable.
 
-`DIAGNOSTICS` または `ERROR` ログエントリは、それを生成する言語では、アプリケーションの起動中にトレーサーがエラーに遭遇したときに発生します。もし `DIAGNOSTICS` または `ERROR` のログ行が表示された場合は、表示されたログから設定や構成が正しく適用されていることを確認してください。
+`DIAGNOSTICS` or `ERROR` log entries, in the languages that produce them, happen when the tracer encounters an error during application startup. If you see `DIAGNOSTICS` or `ERROR` log lines, confirm from the indicated log that settings and configurations are applied correctly.
 
-ログが全く表示されない場合は、アプリケーションのログが消されていないか、またログレベルが少なくとも `INFO` であることを確認してください (該当する場合)。
+If you do not see logs at all, ensure that your application logs are not silenced and that your log level is at least `INFO` where applicable.
 
 {{< programming-lang-wrapper langs="java,.NET,php,go,nodejs,python,ruby,cpp" >}}
 {{< programming-lang lang="java" >}}
 
-**コンフィギュレーション:**
+**Configuration:**
 
 ```text
 {"os_name":"Mac OS X","os_version":"10.15.4","architecture":"x86_64","lang":"jvm","lang_version":"11.0.6","jvm_vendor":"AdoptOpenJDK","jvm_version":"11.0.6+10","java_class_version":"55.0","enabled":true,"service":"unnamed-java-app","agent_url":"http://localhost:8126","agent_error":false,"debug":false,"analytics_enabled":false,"sampling_rules":[{},{}],"priority_sampling_enabled":true,"logs_correlation_enabled":false,"profiling_enabled":false,"dd_version":"null","health_checks_enabled":false,"configuration_file":"no config file present","runtime_id":"b69deb26-8bc3-4c00-8952-d42bf8c2123b"}
 ```
 
-**診断:**
+**Diagnostics:**
 
-Java トレーサーは診断ログを出力しません。このチェックでは、[デバッグモード][1]でトレーサーを実行します。
+The Java tracer does not output Diagnostics logs. For this check, run the tracer in [debug mode][1].
 
 
-[1]: /ja/tracing/troubleshooting/tracer_debug_logs/
+[1]: /tracing/troubleshooting/tracer_debug_logs/
 {{< /programming-lang >}}
 {{< programming-lang lang=".NET" >}}
 
-**ファイルの場所:**
+**File Location:**
 
-ログファイルは、デフォルトで以下のディレクトリに保存されます。`DD_TRACE_LOG_DIRECTORY` 設定を使用してこれらのパスを変更できます。
+Log files are saved in the following directories by default. Use the `DD_TRACE_LOG_DIRECTORY` setting to change these paths.
 
-| プラットフォーム                                             | パス                                             |
+| Platform                                             | Path                                             |
 |------------------------------------------------------|--------------------------------------------------|
 | Windows                                              | `%ProgramData%\Datadog .NET Tracer\logs\`        |
 | Linux                                                | `/var/log/datadog/dotnet/`                       |
-| Linux ([Kubernetes ライブラリの挿入][1]を使用する場合) | `/datadog-lib/logs`                              |
+| Linux (when using [Kubernetes library injection][1]) | `/datadog-lib/logs`                              |
 | Azure App Service                                    | `%AzureAppServiceHomeDirectory%\LogFiles\datadog`|
 
-**注**: Linux では、デバッグモードを有効にする前にログディレクトリを作成する必要があります。
+**Note:** On Linux, you must create the logs directory before you enable debug mode.
 
-バージョン `2.19.0` 以降では、`DD_TRACE_LOGFILE_RETENTION_DAYS` 設定を使うことで、起動時に現在のロギングディレクトリからログファイルを削除するようにトレーサーを構成することができます。トレーサーは指定された日数より古いログファイルと同じ年齢のログファイルを削除します。デフォルト値は `31` です。
+Since version `2.19.0`, you can use the `DD_TRACE_LOGFILE_RETENTION_DAYS` setting to configure the tracer to delete log files from the current logging directory on startup. The tracer deletes log files the same age and older than the given number of days, with a default value of `31`.
 
-- `dotnet-tracer-managed-{processName}-{timestamp}.log` には、構成ログが含まれています。
+- `dotnet-tracer-managed-{processName}-{timestamp}.log` contains the configuration logs.
 
-- `dotnet-tracer-native-{processName}-{processID}.log` には、診断ログが（生成されている場合）含まれています。
+- `dotnet-tracer-native-{processName}-{processID}.log` contains the diagnostics logs, if any are generated.
 
-**構成:**
+**Configuration:**
 
 ```text
 2020-06-29 12:26:39.572 +02:00 [INF] DATADOG TRACER CONFIGURATION -
@@ -68,9 +69,9 @@ Java トレーサーは診断ログを出力しません。このチェックで
 "runtime_metrics_enabled":false,"disabled_integrations":[]}
 ```
 
-**診断:**
+**Diagnostics:**
 
-.NET トレーサーは、次の診断行を出力します。
+The .NET tracer prints the following diagnostic lines:
 
 ```text
 DATADOG TRACER DIAGNOSTICS - Profiler disabled in DD_TRACE_ENABLED
@@ -84,24 +85,24 @@ DATADOG TRACER DIAGNOSTICS - Failed to attach profiler: unable to set event mask
 DATADOG TRACER DIAGNOSTICS - Error fetching configuration {exception}
 ```
 
-[1]: /ja/tracing/trace_collection/library_injection/?tab=kubernetes
+[1]: /tracing/trace_collection/library_injection/?tab=kubernetes
 {{< /programming-lang >}}
 {{< programming-lang lang="php" >}}
 
-**PHP 情報:**
-"DATADOG TRACER CONFIGURATION" の横にある `phpinfo()` ページから起動ログの JSON 文字列を取得します。次の PHP ファイルを作成し、ホストマシンのブラウザからアクセスします。
+**PHP Info:**
+Obtain the startup logs JSON string from a `phpinfo()` page next to "DATADOG TRACER CONFIGURATION". Create the following PHP file and access it from a browser on the host machine.
 
 ```php
 <?php phpinfo(); ?>
 ```
 
-診断情報は独立した表に表示され、一般的な問題の診断に役立ちます。
+Diagnostic information is displayed in a separate table to help diagnose common issues.
 
-{{< img src="tracing/troubleshooting/PHPInfo.png" alt="PHP 情報" >}}
+{{< img src="tracing/troubleshooting/PHPInfo.png" alt="PHP Info" >}}
 
 **CLI SAPI:**
 
-`php --ri=ddtrace` を実行して、CLI SAPI から情報を取得します。
+Get the info from the CLI SAPI by running `php --ri=ddtrace`.
 
 ```text
 ddtrace
@@ -124,44 +125,44 @@ ddtrace.disable => Off => Off
 ...
 ```
 
-**構成:**
+**Configuration:**
 
-トレーサーが [DEBUG モード][1]の場合、最初のリクエストでプロセスごとに 1 回、起動ログが `error_log` に表示されます。
+If the tracer is in [DEBUG mode][1], the startup logs will appear in the `error_log` once per process on the first request.
 
 ```text
 DATADOG TRACER CONFIGURATION - {"agent_error":"Couldn't connect to server","ddtrace.request_init_hook_reachable":false,"date":"2020-07-01T17:42:50Z","os_name":"Linux 49b1cb4bdd12 4.19.76-linuxkit #1 SMP Tue May 26 11:42:35 UTC 2020 x86_64","os_version":"4.19.76-linuxkit","version":"1.0.0-nightly","lang":"php","lang_version":"7.4.5","env":null,"enabled":true,"service":null,"enabled_cli":false,"agent_url":"https://localhost:8126","debug":false,"analytics_enabled":false,"sample_rate":1.000000,"sampling_rules":null,"tags":null,"service_mapping":null,"distributed_tracing_enabled":true,"priority_sampling_enabled":true,"dd_version":null,"architecture":"x86_64","sapi":"cgi-fcgi","ddtrace.request_init_hook":null,"open_basedir_configured":false,"uri_fragment_regex":null,"uri_mapping_incoming":null,"uri_mapping_outgoing":null,"auto_flush_enabled":false,"generate_root_span":true,"http_client_split_by_domain":false,"measure_compile_time":true,"report_hostname_on_root_span":false,"traced_internal_functions":null,"auto_prepend_file_configured":false,"integrations_disabled":null,"enabled_from_env":true,"opcache.file_cache":null}
 ```
 
-**診断:**
+**Diagnostics:**
 
-トレーサーが [DEBUG モード][1]の場合、PHP トレーサーの診断に失敗すると、`error_log` に出力されます。
+Failed diagnostics for the PHP tracer print in the `error_log` if the tracer is in [DEBUG mode][1].
 
 ```text
 DATADOG TRACER DIAGNOSTICS - agent_error: Couldn't connect to server
 DATADOG TRACER DIAGNOSTICS - ddtrace.request_init_hook_reachable: false
 ```
 
-**ランタイム:**
+**Runtime:**
 
-`\DDTrace\startup_logs()` を使用して、ランタイム時に JSON 文字列として起動ログにアクセスします。
+Access the startup logs as a JSON string at runtime with `\DDTrace\startup_logs()`.
 
 ```php
 echo \DDTrace\startup_logs() . PHP_EOL;
 ```
 
-[1]: /ja/tracing/troubleshooting/tracer_debug_logs?tab=php#enable-tracer-debug-mode
+[1]: /tracing/troubleshooting/tracer_debug_logs?tab=php#enable-tracer-debug-mode
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
-**構成:**
+**Configuration:**
 
 ```text
 2020/07/09 15:57:07 Datadog Tracer v1.26.0 INFO: DATADOG TRACER CONFIGURATION {"date":"2020-07-09T15:57:07-05:00","os_name":"darwin","os_version":"10.15.4","version":"v1.26.0","lang":"Go","lang_version":"go1.14.2","env":"","service":"splittest2","agent_url":"http://127.0.0.1:8126/v0.4/traces","agent_error":"","debug":true,"analytics_enabled":false,"sample_rate":"NaN","sampling_rules":null,"sampling_rules_error":"","tags":{"runtime-id":"d269781c-b1bf-4d7b-9a55-a8174930554f"},"runtime_metrics_enabled":false,"health_metrics_enabled":false,"dd_version":"","architecture":"amd64","global_service":""}
 ```
 
-**診断:**
+**Diagnostics:**
 
-Go トレーサーは、2 つの可能性のある診断行の 1 つを出力します。1 つは Agent に到達できない場合で、もう 1 つはトレースサンプリングエラーです。
+The Go Tracer prints one of two possible diagnostic lines, one for when the Agent cannot be reached, and the other for trace sampling errors.
 
 ```text
 2020/07/09 15:57:07 Datadog Tracer v1.26.0 WARN: DIAGNOSTICS Unable to reach agent: [Reason for error]
@@ -173,9 +174,9 @@ Go トレーサーは、2 つの可能性のある診断行の 1 つを出力し
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
 
-起動ログは、トレーサーのバージョン 2.x からデフォルトで無効になっています。環境変数 `DD_TRACE_STARTUP_LOGS=true` を使用することで有効にすることができます。
+Startup logs are disabled by default starting in version 2.x of the tracer. They can be enabled using the environment variable `DD_TRACE_STARTUP_LOGS=true`.
 
-**構成:**
+**Configuration:**
 
 ```text
 [2020-07-02 14:51:16.421] [INFO] app - host:port==localhost:9080
@@ -187,9 +188,9 @@ Go トレーサーは、2 つの可能性のある診断行の 1 つを出力し
 DATADOG TRACER CONFIGURATION - {"date":"2020-07-02T18:51:18.294Z","os_name":"Darwin","os_version":"19.2.0","architecture":"x64","version":"0.23.0","lang":"nodejs","lang_version":"12.18.1","enabled":true,"service":"acmeair","agent_url":"http://localhost:8126","agent_error":"Network error trying to reach the agent: connect ECONNREFUSED 127.0.0.1:8126","debug":false,"analytics_enabled":false,"sample_rate":1,"sampling_rules":[],"tags":{"service":"acmeair","version":"0.0.4"},"dd_version":"0.0.4","log_injection_enabled":false,"runtime_metrics_enabled":false,"integrations_loaded":["http","fs","net","dns","express@4.17.1"]}
 ```
 
-**診断:**
+**Diagnostics:**
 
-Node.js トレーサーは、Agent に到達できない場合に診断行を出力します。
+The Node.js Tracer prints a diagnostic line when the Agent cannot be reached.
 
 ```text
 DATADOG TRACER DIAGNOSTIC - Agent Error: Network error trying to reach the agent: connect ECONNREFUSED 127.0.0.1:8126
@@ -198,43 +199,43 @@ DATADOG TRACER DIAGNOSTIC - Agent Error: Network error trying to reach the agent
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 
-**ログの場所:**
+**Log location:**
 
-Python トレーサーは、構成情報を INFO レベルで記録します。診断情報が見つかった場合は、ERROR レベルでログに記録します。
+The Python tracer logs configuration information as INFO-level. It logs diagnostics information, if found, as ERROR.
 
-ログ構成がない場合、診断のみが `Stderr` に出力されます。
+If there is no logging configuration, only Diagnostics will be output to `Stderr`.
 
-トレーサーの起動ログを表示するには、ロガーを追加するか、構成に `DD_TRACE_DEBUG=true` を設定して、`ddtrace-run` でアプリケーションを実行します。これにより、ロガーが追加され、デバッグと起動の両方のトレーサーログが公開されます。
+To see tracer startup logs, either add a logger, or set `DD_TRACE_DEBUG=true` in your configuration and run your application with `ddtrace-run`. This adds a logger, and exposes both debug and startup tracer logs.
 
-`DD_TRACE_LOG_FILE` でファイルにログを記録するためのオプションについては、 [トレーサーデバッグログ][1]を参照してください。
+To see options for logging to a file with `DD_TRACE_LOG_FILE`, read [Tracer Debug Logs][1].
 
-**構成:**
+**Configuration:**
 
 ```text
 2020-07-09 11:04:08,098 INFO [ddtrace.tracer] [tracer.py:338] - - DATADOG TRACER CONFIGURATION - {"date": "2020-07-09T15:04:08.092797", "os_name": "Darwin", "os_version": "19.5.0", "is_64_bit": true, "architecture": "64bit", "vm": "CPython", "version": "0.38.1.dev79+gd22e2972.d20200707", "lang": "python", "lang_version": "3.7.6", "pip_version": "20.0.2", "in_virtual_env": true, "agent_url": "http://localhost:1234", "agent_error": "Agent not reachable. Exception raised: [Errno 61] Connection refused", "env": "", "is_global_tracer": true, "enabled_env_setting": null, "tracer_enabled": true, "sampler_type": "DatadogSampler", "priority_sampler_type": "RateByServiceSampler", "service": "", "debug": true, "enabled_cli": true, "analytics_enabled": false, "log_injection_enabled": false, "health_metrics_enabled": false, "dd_version": "", "priority_sampling_enabled": true, "global_tags": "", "tracer_tags": "", "integrations": {"asyncio": "N/A", "boto": "N/A", "botocore": {"enabled": true, "instrumented": false, "module_available": true, "module_version": "1.15.32", "module_imported": false, "config": "N/A"}, "bottle": {"enabled": false, "instrumented": false, "module_available": true, "module_version": "0.12.18", "module_imported": false, "config": null}, "cassandra": "N/A", "celery": {"enabled": true, "instrumented": false, "module_available": true, "module_version": "4.2.2", "module_imported": false, "config": "N/A"}, "consul": "N/A", "django": "N/A", "elasticsearch": "N/A", "algoliasearch": {"enabled": true, "instrumented": false, "module_available": true, "module_version": "2.2.0", "module_imported": false, "config": "N/A"}, "futures": "N/A", "grpc": "N/A", "mongoengine": {"enabled": true, "instrumented": false, "module_available": true, "module_version": "0.19.1", "module_imported": false, "config": "N/A"}, "mysql": "N/A", "mysqldb": "N/A", "pymysql": "N/A", "psycopg": "N/A", "pylibmc": {"enabled": true, "instrumented": false, "module_available": true, "module_version": "1.6.1", "module_imported": false, "config": "N/A"}, "pymemcache": {"enabled": true, "instrumented": false, "module_available": true, "module_version": "1.4.4", "module_imported": false, "config": "N/A"}, "pymongo": {"enabled": true, "instrumented": false, "module_available": true, "module_version": "3.10.1", "module_imported": false, "config": "N/A"}, "redis": {"enabled": true, "instrumented": false, "module_available": true, "module_version": "3.5.3", "module_imported": false, "config": "N/A"}, "rediscluster": "N/A", "requests": {"enabled": true, "instrumented": false, "module_available": true, "module_version": "2.23.0", "module_imported": false, "config": "N/A"}, "sqlalchemy": "N/A", "sqlite3": "N/A", "aiohttp": {"enabled": true, "instrumented": false, "module_available": true, "module_version": "3.6.2", "module_imported": false, "config": "N/A"}, "aiopg": {"enabled": true, "instrumented": false, "module_available": true, "module_version": "0.15.0", "module_imported": false, "config": "N/A"}, "aiobotocore": {"enabled": false, "instrumented": false, "module_available": true, "module_version": "1.0.1", "module_imported": false, "config": null}, "httplib": "N/A", "vertica": "N/A", "molten": {"enabled": true, "instrumented": false, "module_available": true, "module_version": "0.7.4", "module_imported": false, "config": "N/A"}, "jinja2": "N/A", "mako": "N/A", "flask": "N/A", "kombu": {"enabled": false, "instrumented": false, "module_available": true, "module_version": "4.3.0", "module_imported": false, "config": null}, "falcon": {"enabled": false, "instrumented": false, "module_available": true, "module_version": "1.4.1", "module_imported": false, "config": null}, "pylons": "N/A", "pyramid": {"enabled": false, "instrumented": false, "module_available": true, "module_version": "1.10.4", "module_imported": false, "config": null}, "logging": "N/A"}}
 ```
 
-**診断:**
+**Diagnostics:**
 
-Python トレーサーは、Agent に到達できない場合に診断行を出力します。
+The Python tracer prints a diagnostic line when the Agent cannot be reached.
 
 ```text
 DATADOG TRACER DIAGNOSTIC - Agent not reachable. Exception raised: [Errno 61] Connection refused
 ```
-[1]: /ja/tracing/troubleshooting/tracer_debug_logs/?code-lang=python#enable-debug-mode
+[1]: /tracing/troubleshooting/tracer_debug_logs/?code-lang=python#enable-debug-mode
 
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
-**構成:**
+**Configuration:**
 
 ```text
 W, [2020-07-08T21:14:25.281615 #137]  WARN -- ddtrace: [ddtrace] DATADOG TRACER CONFIGURATION - {"date":"2020-07-08T21:14:25+00:00","os_name":"x86_64-pc-linux-gnu","version":"0.37.0","lang":"ruby","lang_version":"2.7.0","enabled":true,"agent_url":"http://ddagent:8126?timeout=1","debug":false,"analytics_enabled":false,"runtime_metrics_enabled":false,"vm":"ruby-2.7.0","partial_flushing_enabled":false,"priority_sampling_enabled":false,"health_metrics_enabled":false}
 ```
 
-**診断:**
+**Diagnostics:**
 
-Ruby トレーサーは、Agent に到達できない場合にエラー行を出力します。
+The Ruby tracer prints an error line when the Agent cannot be reached.
 
 ```text
 W, [2020-07-08T21:19:05.765994 #143]  WARN -- ddtrace: [ddtrace] DATADOG ERROR - TRACER - Agent Error: Datadog::Transport::InternalErrorResponse ok?: unsupported?:, not_found?:, client_error?:, server_error?:, internal_error?:true, payload:, error_type:Errno::ECONNREFUSED error:Failed to open TCP connection to ddagent:9127 (Connection refused - connect(2) for "ddagent" port 9127)
@@ -243,9 +244,9 @@ W, [2020-07-08T21:19:05.765994 #143]  WARN -- ddtrace: [ddtrace] DATADOG ERROR -
 {{< /programming-lang >}}
 {{< programming-lang lang="cpp" >}}
 
-**構成:**
+**Configuration:**
 
-Ruby トレーサーは、各製品 (プロファイリング、コア、トレーシング) の構成行を出力します。
+The Ruby tracer prints a configuration line for each product (i.e. Profiling, Core, and Tracing).
 
 ```text
 I, [2023-08-16T18:09:01.972265 #35]  INFO -- ddtrace: [ddtrace] DATADOG CONFIGURATION - PROFILING - {"profiling_enabled":false}
@@ -255,40 +256,40 @@ I, [2023-08-16T18:09:01.972767 #35]  INFO -- ddtrace: [ddtrace] DATADOG CONFIGUR
 I, [2023-08-16T18:09:27.223143 #35]  INFO -- ddtrace: [ddtrace] DATADOG CONFIGURATION - TRACING - {"enabled":true,"agent_url":"http://agent:8126?timeout=30","analytics_enabled":false,"sample_rate":null,"sampling_rules":null,"integrations_loaded":"active_model_serializers@,aws@","partial_flushing_enabled":false,"priority_sampling_enabled":false,"integration_active_model_serializers_analytics_enabled":"false","integration_active_model_serializers_analytics_sample_rate":"1.0","integration_active_model_serializers_enabled":"true","integration_active_model_serializers_service_name":"","integration_aws_analytics_enabled":"false","integration_aws_analytics_sample_rate":"1.0","integration_aws_enabled":"true","integration_aws_service_name":"aws","integration_aws_peer_service":""}
 ```
 
-**診断:**
+**Diagnostics:**
 
-C++ の場合、トレーサーログに出力される `DATADOG TRACER DIAGNOSTICS` 行は出力されません。ただし、Agent に到達できない場合は、アプリケーションログにエラーが表示されます。Envoy では、メトリクスの `tracing.datadog.reports_failed` と `tracing.datadog.reports_dropped` が増加します。
+For C++, there are no `DATADOG TRACER DIAGNOSTICS` lines output to the tracer logs. However, if the Agent is not reachable, errors appear in your application logs. In Envoy there is an increase in the metrics `tracing.datadog.reports_failed` and `tracing.datadog.reports_dropped`.
 
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-## 接続エラー
+## Connection errors
 
-アプリケーションや起動ログに `DIAGNOSTICS` エラーや Agent に到達できない、接続できないというメッセージ (言語によって異なる) がある場合、トレーサーが Datadog Agent にトレースを送ることができないことを意味します。
+If your application or startup logs contain `DIAGNOSTICS` errors or messages that the Agent cannot be reached or connected to (varying depending on your language), it means the tracer is unable to send traces to the Datadog Agent.
 
-これらのエラーがある場合は、Agent が [ECS][1]、[Kubernetes][2]、[Docker][3] または[その他のオプション][4]のトレースを受信するように設定されていることを確認するか、または[サポートチームまでお問い合わせ][5]の上、トレーサーと Agent の構成を確認してください。
+If you have these errors, check that your Agent is set up to receive traces for [ECS][1], [Kubernetes][2], [Docker][3] or [any other option][4], or [contact support][5] to review your tracer and Agent configuration.
 
-インスツルメンテーションされたアプリケーションが Datadog Agent と通信できないことを示すエラーについては、[接続エラー][6]を参照してください。
+See [Connection Errors][6] for information about errors indicating that your instrumented application cannot communicate with the Datadog Agent.
 
-## 構成設定
+## Configuration settings
 
-ログに `CONFIGURATION` 行のみが含まれている場合にトラブルシューティングするには、トレーサーによって出力された設定が、Datadog トレーサーのデプロイと構成の設定と一致することを確認すると良いでしょう。さらに、Datadog に特定のトレースが表示されない場合は、ドキュメントの[互換性要件][7]セクションを確認して、これらのインテグレーションがサポートされていることを確認してください。
+If your logs contain only `CONFIGURATION` lines, a useful troubleshooting step is to confirm that the settings output by the tracer match the settings from your deployment and configuration of the Datadog Tracer. Additionally, if you are not seeing specific traces in Datadog, review the [Compatibility Requirements][7] section of the documentation to confirm these integrations are supported.
 
-使用しているインテグレーションがサポートされていない場合、またはトレースが Datadog で期待どおりに表示されない理由を理解するために構成の出力を別の人にも確認してもらいたい場合は、[サポートチームにお問い合わせ][5]ください。診断と、新しいインテグレーションの機能リクエストの作成をお手伝いします。
+If an integration you are using is not supported, or you want a fresh pair of eyes on your configuration output to understand why traces are not appearing as expected in Datadog, [contact support][5] who can help you diagnose and create a Feature Request for a new integration.
 
-## 起動ログの無効化
+## Disabling startup logs
 
-言語ごとに、環境変数 `DD_TRACE_STARTUP_LOGS=false` を設定して起動ログを無効にできますが、これは、発行されたログが問題を引き起こしている場合にのみ行ってください。後で[デバッグ][8]ログを送信する場合は、サポートケースのトリアージを迅速化するために、起動ログを有効にし、関連するすべてのログをまとめて送信してください。
+For each language, you can disable startup logs by setting the environment variable `DD_TRACE_STARTUP_LOGS=false`, but do this only if the logs emitted are posing a problem. If later you are sending [debug][8] logs, remember to enable startup logs and send all relevant logs together to speed up your support case triage.
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/integrations/amazon_ecs/?tab=java#trace-collection
-[2]: /ja/agent/kubernetes/?tab=helm
-[3]: /ja/agent/docker/apm/?tab=java
-[4]: /ja/tracing/send_traces/
-[5]: /ja/help/
-[6]: /ja/tracing/troubleshooting/connection_errors/
-[7]: /ja/tracing/compatibility_requirements/
-[8]: /ja/tracing/troubleshooting/tracer_debug_logs/
+[1]: /integrations/amazon_ecs/?tab=java#trace-collection
+[2]: /agent/kubernetes/?tab=helm
+[3]: /agent/docker/apm/?tab=java
+[4]: /tracing/send_traces/
+[5]: /help/
+[6]: /tracing/troubleshooting/connection_errors/
+[7]: /tracing/compatibility_requirements/
+[8]: /tracing/troubleshooting/tracer_debug_logs/

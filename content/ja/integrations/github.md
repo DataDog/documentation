@@ -1,177 +1,177 @@
 ---
-aliases:
-- /ja/integrations/github_apps
-categories:
-- collaboration
-- developer tools
-- issue tracking
-- source control
-dependencies: []
-description: GitHub と Datadog を接続し、サービスのパフォーマンスに影響を与えるコミットやプルリクエストを監視する
-doc_link: https://docs.datadoghq.com/integrations/github/
-draft: false
-further_reading:
-- link: https://www.datadoghq.com/blog/collect-github-audit-logs-alerts-datadog/
-  tag: ブログ
-  text: Datadog で GitHub の監査ログを収集し、アラートをスキャンする
-- link: https://www.datadoghq.com/blog/github-source-code-integration/
-  tag: ブログ
-  text: Datadog の GitHub とソースコードのインテグレーションを使用して、トラブルシューティングを効率化する
-- link: https://www.datadoghq.com/blog/github-actions-service-catalog/
-  tag: ブログ
-  text: 私は GitHub Actions を Datadog のサービスカタログに使っています。あなたもそうするべきですよ
-- link: https://docs.datadoghq.com/integrations/guide/source-code-integration/
-  tag: Documentation
-  text: Datadog のソースコードインテグレーションについて
-- link: https://docs.datadoghq.com/tracing/service_catalog/setup/#store-and-edit-service-definitions-in-github
-  tag: Documentation
-  text: サービスカタログで GitHub インテグレーションを利用する方法について
-- link: https://docs.datadoghq.com/serverless/configuration/?tab=serverlessframework#link-errors-to-your-source-code
-  tag: Documentation
-  text: サーバーレスモニタリングにおける GitHub インテグレーションの使用方法について
-git_integration_title: github
-has_logo: true
-integration_id: github
-integration_title: GitHub
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: '1.0'
-name: github
-public_title: GitHub インテグレーション
-short_description: GitHub と Datadog を連携させる
-team: web-integrations
-version: '1.0'
+"aliases":
+- "/integrations/github_apps"
+"categories":
+- "collaboration"
+- "developer tools"
+- "issue tracking"
+- "source control"
+"custom_kind": "integration"
+"dependencies": []
+"description": "Connect GitHub with Datadog to monitor commits and pull requests that affect your services' performance."
+"doc_link": "https://docs.datadoghq.com/integrations/github/"
+"draft": false
+"further_reading":
+- "link": "https://www.datadoghq.com/blog/collect-github-audit-logs-alerts-datadog/"
+  "tag": "Blog"
+  "text": "Collect GitHub audit logs and scanning alerts with Datadog"
+- "link": "https://www.datadoghq.com/blog/github-source-code-integration/"
+  "tag": "Blog"
+  "text": "Use Datadog's GitHub and source code integrations to streamline troubleshooting"
+- "link": "https://www.datadoghq.com/blog/github-actions-service-catalog/"
+  "tag": "Blog"
+  "text": "I use GitHub Actions for Datadog's Service Catalog, and you should, too"
+- "link": "https://docs.datadoghq.com/integrations/guide/source-code-integration/"
+  "tag": "Documentation"
+  "text": "Learn about the Datadog Source Code Integration"
+- "link": "https://docs.datadoghq.com/tracing/service_catalog/setup/#store-and-edit-service-definitions-in-github"
+  "tag": "Documentation"
+  "text": "Learn how to use the GitHub integration in the Service Catalog"
+- "link": "https://docs.datadoghq.com/serverless/configuration/?tab=serverlessframework#link-errors-to-your-source-code"
+  "tag": "Documentation"
+  "text": "Learn how to use the GitHub integration in Serverless Monitoring"
+"git_integration_title": "github"
+"has_logo": true
+"integration_id": "github"
+"integration_title": "GitHub"
+"integration_version": ""
+"is_public": true
+"manifest_version": "1.0"
+"name": "github"
+"public_title": "GitHub Integration"
+"short_description": "Connect GitHub with Datadog."
+"team": "web-integrations"
+"version": "1.0"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-## 概要
+## Overview
 
-GitHub Apps と GitHub Actions の構成、リポジトリの安全なアクセス、高度なテレメトリー (監査ログ、脆弱性レポート、秘密スキャン、リポジトリ統計など) の収集のために GitHub 統合をセットアップします。
+Set up the GitHub integration to configure GitHub Apps and GitHub Actions, secure access for your repositories, and collect advanced telemetry (such as audit logs, vulnerability reports, secret scanning, and repository statistics).
 
-{{< img src="integrations/github/repo_configuration.png" alt="GitHub インテグレーションタイルの Repository Configuration タブ" popup="true" style="width:100%;">}}
+{{< img src="integrations/github/repo_configuration.png" alt="The Repository Configuration tab on the GitHub integration tile" popup="true" style="width:100%;">}}
 
-Datadog の[ソースコードインテグレーション][1]を利用すると、スタックトレース内のコードスニペットを表示したり、スタックトレースと GitHub 内の [Lambda 関数][2]のソースコードとをリンクさせたり、[CI Visibility][3] のプルリクエストコメントからテスト結果のサマリーを表示したり、GitHub の複数のサービス定義に[サービスカタログ][4]からアクセスしたりすることなどができます。
+You can use the Datadog [source code integration][1] to see code snippets in your stack traces, link stack traces to source code in GitHub for your [Lambda functions][2], show test result summaries from pull request comments in [CI Visibility][3], and access multiple service definitions in GitHub from the [Service Catalog][4].
 
-## 計画と使用
+## Setup
 
 <div class="alert alert-info">
-以下の手順で GitHub Apps をインストールし、Datadog に権限を付与してください。付与された権限に応じて、ソースコードインテグレーションの設定、スタックトレースでのコードスニペットの表示、監査ログなどの収集したテレメトリーの表示、CI Visibility での GitHub Actions へのアクセスなどが可能です。
+Follow these instructions to install GitHub Apps and grant permissions to Datadog. Depending on the permissions granted, you can set up the source code integration, see code snippets in stack traces, view collected telemetry such as audit logs, access GitHub Actions in CI Visibility, and more.
 </div>
 
-### 組織または個人アカウント内のリポジトリをリンクする
+### Link a repository in your organization or personal account
 
-GitHub 組織の管理者であれば、GitHub アプリを構成することができます。
+If you are an admin in your GitHub organization, you can configure GitHub Apps.
 
-1. [GitHub インテグレーションタイル][5]で、**Repo Configuration** タブに移動します。
-2. **Link GitHub Account** をクリックして、GitHub アプリを新規に作成します。
-3. **Configure** で、**Organization** を選択して組織名を入力するか、**Personal Account** を選択します。
+1. In the [GitHub integration tile][5], navigate to the **Repo Configuration** tab.
+2. Click **Link GitHub Account** to create a new GitHub App.
+3. In **Configure**, either select **Organization** and enter a name for your organization, or select **Personal Account**.
 
-   オプションで、GitHub Enterprise Server インスタンス (バージョン 2.22 以上) の URL を指定し、Datadog サーバーが Enterprise インスタンスに接続できることを確認します。サーバー IP は、[IP Ranges][6] の Webhooks セクションで入手できます。
+   Optionally, specify the URL of your GitHub Enterprise Server instance (version 2.22 or above) and ensure Datadog servers can connect to your Enterprise instance. Server IPs are available in the Webhooks section of [IP Ranges][6].
 
-4. **Edit Permissions** で、課題、プルリクエスト、コンテンツに対する Datadog の読み取りアクセス許可を有効にします。少なくとも 1 つのアクセス許可を選択する必要があります。
-5. **Create App in GitHub** をクリックすると、GitHub アプリ名を入力する画面が表示されるので、入力します。
-6. GitHub アプリ名フィールドに名前を入力し、**Create GitHub App** をクリックします。
-7. **Configuration** タブで、**Install GitHub App** と **Install & Authorize** をクリックします。
+4. In **Edit Permissions**, enable Datadog read permissions for issues, pull requests, and contents. You must select at least one permission.
+5. Click **Create App in GitHub**, then you are prompted to enter a GitHub App name in GitHub.
+6. Enter a name in the GitHub App name field and click **Create GitHub App**.
+7. In the **Configuration** tab, click **Install GitHub App** and **Install & Authorize**.
 
-GitHub アプリがインテグレーションタイルに表示されます。スタックトレースでインラインコードスニペットを有効にするには、[ソースコードインテグレーションの設定][1]を参照してください。
+Your GitHub App displays in the integration tile. To enable inline code snippets in stack traces, see [Setting Up Source Code Integration][1].
 
-### チェック内容のサマリー
+### Notebooks
 
-GitHub アプリに問題やプルリクエストの読み取り権限を与えている場合、GitHub の問題やプルリクエストは自動的にプレビューホバーボックスを生成し、コミット履歴、作成者、日付などの詳細が[ノートブック][7]に表示されます。
+If you have granted your GitHub App read permissions for issues and pull requests, GitHub issues and pull requests automatically generate a preview hoverbox with details including the commit history, author, and date in [Notebooks][7].
 
-{{< img src="integrations/guide/github_apps/notebooks-links-to-git.png" alt="Git へのリンク" style="width:90%;">}}
+{{< img src="integrations/guide/github_apps/notebooks-links-to-git.png" alt="Links to Git" style="width:90%;">}}
 
-1. **Notebooks** > **New Notebook** の順に移動します。
-2. **Text** セルを追加し、**Edit** フィールドに GitHub 上の課題またはプルリクエストを記載します (例: `https://github.com/project/repository/pull/#`)。
-3. **Done** をクリックすると、リンクされた課題またはプルリクエストの横に GitHub のアイコンが表示されます。
-4. **Connect to Preview** と **Authorize** をクリックします。
-5. リンク先の課題またはプルリクエストにカーソルを合わせると、説明のプレビューが表示されます。
+1. Navigate to **Notebooks** > **New Notebook**.
+2. Add a **Text** cell and mention an issue or pull request on GitHub in the **Edit** field, for example: `https://github.com/project/repository/pull/#`.
+3. Click **Done**, then the GitHub icon appears next to your linked issue or pull request.
+4. Click **Connect to Preview** and **Authorize**.
+5. Hover over the linked issue or pull request to see the description preview.
 
-### 監査ログ
+### Audit Logs
 
-監査ログは、GitHub の組織全体のすべてのアクティビティとイベントを網羅します。アプリケーションをインストールする際には、**Organization Administration** 権限が読み取りアクセス権を持つように許可してください。これにより、アプリケーションは GitHub の監査ストリームを GitHub 組織に代わってログとして収集し始めます。
+Audit logs encompass all activities and events across a GitHub organization. Upon an application's installation, allow for **Organization Administration** permissions to have read access. This enables the application to begin collecting GitHub's audit stream as logs on behalf of the GitHub organization.
 
-**注**: 監査ログを収集するには GitHub Enterprise アカウントが必要です。
+**Note**: A GitHub Enterprise account is required to collect audit logs.
 
-GitHub ドキュメントの [Datadog へのストリーミングのセットアップ][8]の手順に従って、監査ログを Datadog に転送します。監査ログの詳細については、GitHub ドキュメントの[監査ログアクション][9]を参照してください。
+Follow the instructions on [Setting up streaming to Datadog][8] in the GitHub documentation to forward your audit logs to Datadog. For more information about Audit Logs, see the GitHub documentation for [Audit log actions][9].
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 
-GitHub インテグレーションは、Code Scan Alert と Secret Scan Alert のメトリクスを収集します。これらのメトリクスは、アラートの状態、リポジトリ、およびシークレットタイプを分類することで、組織のアラート状態の概要を提供します。また、これらは、アラートのトレンドとその全般的な進展に関する長期的な洞察を提供します。
+The GitHub integration collects Code Scan Alert and Secret Scan Alert metrics. These metrics provide an overview of the organization's Alert state by categorizing their state, repo, and secret type. They also provide long-term insights on Alert trends and their general progress.
 
 {{< get-metrics-from-git "github_telemetry" >}}
 
-これらのメトリクスを収集し始めるには、アプリケーションのインストール時に、読み取りアクセスのためにそれぞれの権限を選択します。Code Scan または Secret Scan のメトリクスをオプトアウトするには、インテグレーションタイルの **Telemetery** タブで対応する組織を探し、それぞれのセクションのトグルをクリックし、**Update Account** をクリックします。
+To start collecting these metrics, select the respective permissions for read access upon the application's installation. To opt-out of Code Scan or Secret Scan metrics, find the corresponding organization in the **Telemetery** tab on the integration tile, click the toggle for the respective sections, and click **Update Account**.
 
-### ヘルプ
+### Events
 
 <div class="alert alert-info">
-以下の手順で、GitHub と Datadog に Webhook を構成し、イベントエクスプローラーにイベントを表示できるようにします。
+Follow these instructions to configure webhooks in GitHub and Datadog, allowing events to appear in the Events Explorer.
 </div>
 
-#### GitHub で Webhook を追加する
+#### Add a webhook in GitHub
 
-1. GitHub のプロジェクトで、**Settings** > **Webhooks** に移動します。
-2. **Add webhook** をクリックします。
-3. **Payload URL** フィールドに以下の URL を追加します: `https://{{< region-param key="dd_full_site" code="true" >}}/intake/webhook/github?api_key=<DATADOG_API_KEY>`。`<DATADOG_API_KEY>` を [Datadog API キー][10]に置き換えることを忘れないでください。
-4. **Content type** ドロップダウンメニューで `application/json` を選択します。
-5. オプションで、**Secret** フィールドにシークレットを追加します。
-6. **Which events would you like to trigger this webhook?** セクションで、**Let me select individual events.** をクリックし、以下のサポートされるオプションから選択して、Datadog に[イベント][11]を送信します。
+1. In your GitHub project, navigate to **Settings** > **Webhooks**.
+2. Click **Add webhook**.
+3. Add the following URL in the **Payload URL** field: `https://{{< region-param key="dd_full_site" code="true" >}}/intake/webhook/github?api_key=<DATADOG_API_KEY>`. Don't forget to replace `<DATADOG_API_KEY>` with [your Datadog API Key][10].
+4. Select `application/json` in the **Content type** dropdown menu.
+5. Optionally, add a secret in the **Secret** field.
+6. In the **Which events would you like to trigger this webhook?** section, click **Let me select individual events.** and select from the following supported options to send [events][11] to Datadog:
 
-   | イベント名 | イベントアクション |
+   | Event Name | Event Actions |
    |---|---|
-   | [ブランチまたはタグの作成][12] |  |
-   | [コミットコメント][13] |  |
-   | [問題のコメント][14] | 以下のアクションがサポートされています。 <br><br>- [`created`][15]<br>- [`deleted`][16]<br>- [`edited`][17] |
-   | [問題][18] | 以下のアクションがサポートされています。 <br><br>- [`assigned`][19]<br>- [`closed`][20]<br>- [`deleted`][21]<br>- [`demilestoned`][22]<br>- [`edited`][23]<br>- [`labeled`][24]<br>- [`locked`][25]<br>- [`milestoned`][26]<br>- [`opened`][27]<br>- [`pinned`][28]<br>- [`reopened`][29]<br>- [`transferred`][30]<br>- [`unassigned`][31]<br>- [`unlabeled`][32]<br>- [`unlocked`][33]<br>- [`unpinned`][34] |
-   | [プルリクエストレビューコメント][35] | 以下のアクションがサポートされています。 <br><br>- [`created`][36]<br>- [`deleted`][37]<br>- [`edited`][38] |
-   | [プルリクエスト][39] | 以下のアクションがサポートされています。 <br><br>- [`opened`][40]<br>- [`closed`][41]<br>- [`labeled`][42]<br>- [`edited`][43]<br>- [`assigned`][44]<br>- [`unassigned`][45]<br>- [`reopened`][46] |
-   | [プッシュ][47] |  |
-   | [リポジトリ][48] | 以下のアクションがサポートされています。 <br><br>- [`archived`][49]<br>- [`created`][50]<br>- [`deleted`][51]<br>- [`edited`][52]<br>- [`privatized`][53]<br>- [`publicized`][54]<br>- [`renamed`][55]<br>- [`transferred`][56]<br>- [`unarchived`][57] |
-   | [セキュリティと分析][58] |  |
-   | [チームの追加][59] |  |
+   | [Branch or tag creation][12] |  |
+   | [Commit comments][13] |  |
+   | [Issue comments][14] | The following actions are supported: <br><br>- [`created`][15]<br>- [`deleted`][16]<br>- [`edited`][17] |
+   | [Issues][18] | The following actions are supported: <br><br>- [`assigned`][19]<br>- [`closed`][20]<br>- [`deleted`][21]<br>- [`demilestoned`][22]<br>- [`edited`][23]<br>- [`labeled`][24]<br>- [`locked`][25]<br>- [`milestoned`][26]<br>- [`opened`][27]<br>- [`pinned`][28]<br>- [`reopened`][29]<br>- [`transferred`][30]<br>- [`unassigned`][31]<br>- [`unlabeled`][32]<br>- [`unlocked`][33]<br>- [`unpinned`][34] |
+   | [Pull request review comments][35] | The following actions are supported: <br><br>- [`created`][36]<br>- [`deleted`][37]<br>- [`edited`][38] |
+   | [Pull requests][39] | The following actions are supported: <br><br>- [`opened`][40]<br>- [`closed`][41]<br>- [`labeled`][42]<br>- [`edited`][43]<br>- [`assigned`][44]<br>- [`unassigned`][45]<br>- [`reopened`][46] |
+   | [Pushes][47] |  |
+   | [Repositories][48] | The following actions are supported: <br><br>- [`archived`][49]<br>- [`created`][50]<br>- [`deleted`][51]<br>- [`edited`][52]<br>- [`privatized`][53]<br>- [`publicized`][54]<br>- [`renamed`][55]<br>- [`transferred`][56]<br>- [`unarchived`][57] |
+   | [Security and analysis][58] |  |
+   | [Team adds][59] |  |
 
-7. **Active** を選択すると、フックがトリガーされたときにイベントの詳細を受け取ることができます。
-8. **Add webhook** をクリックして、Webhook を保存します。
+7. Select **Active** to receive event details when the hook is triggered.
+8. Click **Add webhook** to save the webhook.
 
-#### Datadog で Webhook を追加する
+#### Add a webhook in Datadog
 
-1. [GitHub インテグレーションタイル][5]で、**Webhooks** タブに移動します。
-2. 各リポジトリに対して、監視したいリポジトリとブランチを指定します。ユーザーまたは組織のすべてのリポジトリを追加するには、ワイルドカード (`*`) を使用します。ブランチ名にはワイルドカードを使用できます。例えば、`dev-*` は `dev-` で始まるすべてのブランチを含めます。
+1. In the [GitHub integration tile][5], navigate to the **Webhooks** tab.
+2. Specify the repositories and branches you want to monitor for each repository. To add all repositories for a user or organization, use wildcards (`*`). You can use wildcards on branch names. For example, `dev-*` includes all branches starting with `dev-`.
 
-   GitHub リポジトリ `DataDog/documentation` の `master` ブランチに関連するすべてのイベントを収集するには、**Repository** フィールドに `DataDog/documentation` を、**Branches** フィールドに `master` を入力してください。
+   To gather all events related to the `master` branch of the `DataDog/documentation` GitHub repository, you can enter `DataDog/documentation` in the **Repository** field and `master` in the **Branches** field.
 
-   DataDog 組織の**すべての** `master` ブランチに関連するすべてのイベントを収集したい場合は、** Repository** フィールドに `DataDog/*` を、** Branches** フィールドに `master` を入力します。
-   注: リポジトリ名にワイルドカードを使用する場合は、ユーザーまたは組織を指定する必要があります。例えば、'*' は有効なリポジトリ名ではありませんが、'Datadog/*' は有効です。
+   If you wanted to gather all events related to **all** `master` branches from the DataDog organization, enter `DataDog/*` in the **Repository** field and `master` in the **Branches** field.
+   Note: When using a wildcard for the repository name, you must specify the user or organization. For example, '*' is not a valid repository name, but 'DataDog/*' is.
 
-3. **Commits** と **Issues** のチェックボックスをクリックすると、これらのイベントがアラートされます。
-4. **Update Configuration** をクリックすると、Webhook の構成が保存されます。
+3. Click the checkboxes for **Commits** and **Issues** to be alerted of these events.
+4. Click **Update Configuration** to save the webhook configuration.
 
-インテグレーションタイルの **Webhooks** タブで Webhook を追加すると、上記で指定した GitHub リポジトリのイベントが[イベントエクスプローラー][60]に表示されるようになります。詳しくは、[イベントエクスプローラーのドキュメント][61]をご覧ください。
+Once you have added webhooks in the **Webhooks** tab on the integration tile, events in the GitHub repositories you specified above start to appear in the [Events Explorer][60]. For more information, see the [Events Explorer documentation][61].
 
-GitHub からのイベントをフィルターするには、**Core** の下にある **Source** ファセットメニューで **Github** を選択するか、検索クエリに `source:github` と入力してください。イベントの棒グラフは、検索クエリを編集すると自動的に更新されます。
+To filter events coming from GitHub, select **Github** in the **Source** facet menu under **Core**, or enter `source:github` in the search query. The bar chart of events automatically updates as you edit the search query.
 
-### ヘルプ
+### Service Checks
 
-GitHub インテグレーションには、サービスのチェック機能は含まれません。
+The GitHub integration does not include any service checks.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][62]までお問い合わせください。
+Need help? Contact [Datadog support][62].
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/ja/integrations/guide/source-code-integration/
-[2]: https://docs.datadoghq.com/ja/serverless/configuration/?tab=serverlessframework#link-errors-to-your-source-code
-[3]: https://docs.datadoghq.com/ja/continuous_integration/guides/pull_request_comments/
-[4]: https://docs.datadoghq.com/ja/tracing/service_catalog/setup/#store-and-edit-service-definitions-in-github
+[1]: https://docs.datadoghq.com/integrations/guide/source-code-integration/
+[2]: https://docs.datadoghq.com/serverless/configuration/?tab=serverlessframework#link-errors-to-your-source-code
+[3]: https://docs.datadoghq.com/continuous_integration/guides/pull_request_comments/
+[4]: https://docs.datadoghq.com/tracing/service_catalog/setup/#store-and-edit-service-definitions-in-github
 [5]: https://app.datadoghq.com/integrations/github/
-[6]: https://docs.datadoghq.com/ja/api/latest/ip-ranges/
+[6]: https://docs.datadoghq.com/api/latest/ip-ranges/
 [7]: https://app.datadoghq.com/notebook
 [8]: https://docs.github.com/en/enterprise-cloud@latest/admin/monitoring-activity-in-your-enterprise/reviewing-audit-logs-for-your-enterprise/streaming-the-audit-log-for-your-enterprise#setting-up-streaming-to-datadog
 [9]: https://docs.github.com/en/organizations/keeping-your-organization-secure/managing-security-settings-for-your-organization/reviewing-the-audit-log-for-your-organization#audit-log-actions
@@ -226,5 +226,6 @@ GitHub インテグレーションには、サービスのチェック機能は�
 [58]: https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads#security_and_analysis
 [59]: https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads#team_add
 [60]: https://app.datadoghq.com/event/explorer/
-[61]: https://docs.datadoghq.com/ja/events/explorer/
-[62]: https://docs.datadoghq.com/ja/help/
+[61]: https://docs.datadoghq.com/events/explorer/
+[62]: https://docs.datadoghq.com/help/
+

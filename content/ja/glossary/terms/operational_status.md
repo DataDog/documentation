@@ -1,4 +1,4 @@
 ---
-title: 演算子ステータス
+title: operational status
 ---
-ポートの演算子ステータス (up/down) とは、ポートがアップしているかダウンしているかということです。
+The operational status of a port (up/down) refers to whether the port is up or down.

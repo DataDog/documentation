@@ -1,51 +1,51 @@
 ---
+title: Best Practices For Tagging Events
+kind: guide
+description: Learn about recommended event tags and how to add them.
 aliases:
-- /ja/events/guides/recommended_event_tags
-description: おすすめのイベントタグとその付け方についてご紹介します。
+- /events/guides/recommended_event_tags
 further_reading:
 - link: /getting_started/tagging/assigning_tags
   tag: Documentation
-  text: タグの割り当てについて
-kind: ガイド
-title: イベントへのタグ付けのベストプラクティス
+  text: Learn about assigning tags
 ---
 
-## 概要
+## Overview
 
-Datadog では、以下のような利点から、すべてのイベントに[統合サービスタグ付け][1]と以下に示すタグを使用することを推奨しています。
+Datadog recommends using [unified service tagging][1] and the tags listed below on all your events for the following benefits:
 
-- 潜在的な問題の早期発見
-- 関連イベントの検索
-- [イベントエクスプローラー][2]でより正確に、例えば特定の環境にフィルターをかける
+- Identify potential issues faster
+- Locate related events
+- Filter more accurately in the [Events Explorer][2], for example, to a specific environment
 
-## タグを追加
+## Add tags
 
-イベントのタグ付け戦略を改善するために、複数のオプションが用意されています。
+You have multiple options to improve your tagging strategy for events:
 
-- API: [API][3] を利用する場合、`tags` フィールドでタグを追加することができます。
+- API: When using the [API][3], you can add tags in the `tags` field.
 
-- モニター: モニターを作成または編集する際に、[**Say what's happening** セクション][4]で推奨タグを追加することができます。
+- Monitor: When creating or editing a monitor, you can add recommended tags in the [**Say what's happening** section][4].
 
-- インテグレーション: インテグレーションにタグを追加する方法については、[タグの割り当て][5]または特定の[インテグレーション][6]をご覧ください。
+- Integrations: For more information about adding tags to integrations, see [Assigning Tags][5] or the specific [integration][6].
 
-イベントには、以下のコア属性を追加することができます。
+You can add the following core attributes to your events:
 
-| **属性** | **説明**                                                                                                                                                                                    |
+| **Attribute** | **Description**                                                                                                                                                                                    |
 |---------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| env           | 本番環境、エッジ、ステージングなど、イベントの発生元となる環境を指定します。これにより、低い環境からのイベントが高い優先度として混同されないようにすることができます。                       |
-| サービス       | サービス名。これにより、以下のことが可能になります。<br>- イベントがエラーに関連する場合、どのサービスが影響を受けるかを知る<br>- 影響を受けるサービスにピボットする<br>- そのサービスに関連するすべてのイベントをフィルタリングする |
-| version       | ビルドまたはサービスのバージョン。これにより、例えば、障害やイベントが特定のバージョンに関連しているかどうかを特定することができます。                                                                         |
-| ホスト          | ホスト名。以下のことが可能になります。<br>- インテーク時のイベントを追加のホストタグで自動的にリッチ化する<br>- [イベントエクスプローラー][7]の **Host Infrastructure** と ** Metrics** タブにピボットする                             |
-| チーム          | イベントを所有し、必要に応じて通知されるチーム。                                                                                                                       |                                                          |
+| env           | The environment in which the event is from, such as production, edge, or staging. This enables you to ensure that events from a lower environment are not confused as high priority.                       |
+| service       | The service name. Enables you to:<br>- Know which service(s) are impacted if an event is related to an error<br>- Pivot to the impacted service  <br>- Filter for all events with that service |
+| version       | The build or service version. This allows you to identify, for example, if an outage or event is related to a particular version.                                                                         |
+| host          | The host name. Enables you to: <br>- Automatically enrich events at intake with additional host tags<br>- Pivot to the **Host Infrastructure** and **Metrics** tabs in the [Events Explorer][7].                             |
+| team          | The team that owns the event and are notified if need be.                                                                                                                       |                                                          |
 
-## その他の参考資料
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/getting_started/tagging/unified_service_tagging
-[2]: /ja/service_management/events/explorer
-[3]: /ja/api/latest/events/#post-an-event
-[4]: /ja/getting_started/monitors/#notify-your-team
-[5]: /ja/getting_started/tagging/assigning_tags
-[6]: /ja/integrations/
+[1]: /getting_started/tagging/unified_service_tagging
+[2]: /service_management/events/explorer
+[3]: /api/latest/events/#post-an-event
+[4]: /getting_started/monitors/#notify-your-services-and-your-team-members
+[5]: /getting_started/tagging/assigning_tags
+[6]: /integrations/
 [7]: https://app.datadoghq.com/event/explorer

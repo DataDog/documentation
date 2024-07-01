@@ -1,6 +1,6 @@
 ---
-core_product:
-- infrastructure monitoring
 title: Google Kubernetes Engine (GKE)
+core_product:
+  - infrastructure monitoring
 ---
-GKE はマネージド Kubernetes サービスです。
+GKE is a managed Kubernetes service.

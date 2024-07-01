@@ -1,241 +1,281 @@
 ---
-algolia:
-  tags:
-  - サービス詳細画面
+title: Service Page
+kind: documentation
 aliases:
-- /ja/tracing/visualization/service/
+- /tracing/visualization/service/
 further_reading:
 - link: /tracing/trace_collection/
-  tag: ドキュメント
-  text: アプリケーションで APM トレースをセットアップする方法
-- link: /tracing/services/services_list/
-  tag: ドキュメント
-  text: Datadog に報告するサービスの一覧
+  tag: Documentation
+  text: Learn how to setup APM tracing with your application
+- link: /tracing/service_catalog/
+  tag: Documentation
+  text: Discover and catalog the services reporting to Datadog
 - link: /tracing/services/resource_page/
-  tag: ドキュメント
-  text: リソースのパフォーマンスとトレースの詳細
+  tag: Documentation
+  text: Dive into your resource performance and traces
 - link: /tracing/trace_explorer/trace_view/
-  tag: ドキュメント
-  text: Datadog トレースの読み方を理解する
-- link: https://www.datadoghq.com/blog/datadog-clipboard/
-  tag: ブログ
-  text: APM サービス詳細画面の URL をクリップボードに追加する
-- link: https://www.datadoghq.com/blog/apm-security-view/
-  tag: ブログ
-  text: APM セキュリティビューでリスク、脆弱性、攻撃を視覚化する
-title: サービス詳細画面
+  tag: Documentation
+  text: Understand how to read a Datadog Trace
+- link: "https://www.datadoghq.com/blog/datadog-clipboard/"
+  tag: Blog
+  text: Add an APM service page URL to your clipboard
+- link: "https://www.datadoghq.com/blog/apm-security-view/"
+  tag: Blog
+  text: Gain visibility into risks, vulnerabilities, and attacks with APM Security View
+algolia:
+  tags: [service page]
 ---
 
-{{< img src="tracing/visualization/service/overview_service_page.png" alt="サービス詳細画面" style="width:100%;">}}
+{{< img src="tracing/visualization/service/overview_service_page_1.png" alt="Detailed service page" style="width:100%;">}}
 
-## 概要
+## Overview
 
-サービス詳細画面でサービスを選択すると、詳細なサービス詳細画面に移動します。サービスとは、ウェブフレームワークやデータベースなど、同じジョブを実行するプロセスのセットです（サービスの定義方法については [APM を開始する][1]をご覧ください）。
+Selecting a service on the Service Catalog leads you to the detailed service page. A service is a set of processes that do the same job - for example a web framework or database (read more about how services are defined in [Getting Started with APM][1]).
 
-このページで参照できる内容
+Consult on this page:
 
-* [サービスモニターの状態](#service-monitor)
+* [Service health](#service-health) (private beta)
+* [Service monitor states](#service-monitor)
 * [Watchdog Insights](#watchdog-insights)
-* [サマリーカード](#summary-cards)
-* [依存関係](#dependencies)
-* [すぐに使えるグラフ](#out-of-the-box-graphs)
-* [このサービスに関連するリソース][2]
-* [その他のタブ](#additional-tabs)
-    *  [デプロイメント](#deployments)、[エラー追跡](#error-tracking)、[トレース](#traces)、[セキュリティ](#security)など
+* [Summary cards](#summary-cards)
+* [Dependencies](#dependencies)
+* [Out-of-the-box graphs](#out-of-the-box-graphs)
+* [Resources associated to this service][2]
+* [Additional sections](#additional-sections)
+    *  [Deployments](#deployments), [Error Tracking](#error-tracking), [Traces](#traces), [Security](#security), and more
 
-## サービスモニター
+## Service health
 
-Datadog は、サービスタイプに応じてモニターのリストを提案します。
+{{< callout header="Opt in to the private beta!" url="https://www.datadoghq.com/private-beta/service-health/" >}}
+  Service health is in private beta. To request access, complete the form.
+{{< /callout >}}
 
-{{< img src="tracing/visualization/service/service_monitors.png" alt="サービスモニター" style="width:90%;">}}
+The **Service Health** panel provides a real-time summary of service signals to help you understand if a service needs your attention.
 
-直接有効にするか、独自の [APM モニター][3]を作成します。
+Service health considers many types of signals (including monitors, incidents, Watchdog insights, and error tracking issues) and surfaces the most critical alerts. Additionally, the Service Health panel provides links to associated incidents, which helps you to take necessary actions.
 
-**注**: モニターに `service:<SERVICE_NAME>` をタグ付けして、APM サービスにアタッチします。
+{{< img src="/tracing/services/service_page/service-health.png" alt="Service Health panel on service page showing an active incident." style="width:100%;" >}}
+
+To access service health:
+
+1. Go to [APM > Service Catalog][23].
+2. Hover over a service and click **Full Page**.
+3. Select **Service Health**.
+
+The Service Health panel displays the status of your service as *Ok*, *Warning*, or *Alert* if at least one of the following conditions is met:
+
+|   Status    |                         Condition                          |
+|-------------|------------------------------------------------------------|
+|  **Alert**  | **Monitors**: <br>- A non-muted alerting P1 monitor is triggered.<br>- A non-muted monitor with a paging integration setup (PagerDuty or Opsgenie) is triggered.<br><br>**Incidents**: <br>- An incident of any severity is active.<br><br>**Watchdog Insights**: <br>- A faulty deployment is active.<br>- An ongoing APM latency/error rate alert is active.  |
+| **Warning** | **Monitors**: <br>- A non-muted alerting P2 monitor is triggered.<br>- A non-muted warning P1 monitor is triggered.<br>- A non-muted warning monitor with a paging integration setup (PagerDuty or Opsgenie) is triggered.<br><br>**Incidents**: <br>- An incident of any severity is in a stable state.<br><br>**Watchdog Insights**: <br>- An ongoing log anomaly alert is active.<br><br>**Error Tracking Issues**: <br>- A new issue (within 48 hours) requires review. |                                                                                                                                                                                                   |
+|   **Ok**    |    No signal from critical or alert state is active.     |                                                                                                                                                                       ||
+
+## Service monitor
+
+The Service monitor panel surfaces active Monitors and Synthetics tests linked to your service.
+Datadog also proposes a list of monitors depending on your service type:
+
+{{< img src="tracing/visualization/service/service_monitors.png" alt="Service Monitors" style="width:90%;">}}
+
+Enable them directly or create your own [APM monitors][3].
+
+**Note**: Tag any monitor or Synthetic Test with `service:<SERVICE_NAME>` to attach it to an APM service.
 
 ## Watchdog Insights
 
-[Watchdog Insights][7] カルーセルでは、特定のタグで検出された異常と外れ値が表示され、問題の根本原因を調査することができます。インサイトは、サービスタグを含む APM、Continuous Profiler、ログ管理、インフラストラクチャーのデータから発見されます。これらのインサイトは、各製品ページに表示されるインサイトと同じです。たとえば、サービスページのログの外れ値と同じものが、[ログエクスプローラー][19]に表示されます。 
+The [Watchdog Insights][7] carousel surfaces anomalies and outliers detected on specific tags, enabling you to investigate the root cause of an issue. Insights are discovered from APM, Continuous Profiler, Log Management, and Infrastructure data that include the service tag. These insights are the same insights that appear in each of the product pages. For example, the same Log outliers on the service page can be found in the [Logs Explorer][19].
 
-{{< img src="tracing/visualization/service/cross-product-insight.jpg" alt="Watchdog インサイト" style="width:100%;">}}
+{{< img src="tracing/visualization/service/cross_product_insight_1.jpg" alt="Watchdog Insights" style="width:100%;">}}
 
-インサイトをクリックすると、インサイトの時間枠、関連するログやトレース、次のステップの候補などの詳細が表示されます。
+Click on an insight to see more details, such as the time frame of the insight, related logs or traces, and suggested next steps.
 
-{{< img src="tracing/visualization/service/watchdog-details.jpg" alt="Watchdog インサイトの詳細" style="width:100%;">}}
+{{< img src="tracing/visualization/service/watchdog_details_1.jpg" alt="Watchdog Insights details" style="width:100%;">}}
 
-## サマリーカード
+## Summary cards
 
-サービス詳細画面には、サービスの健全性に関するハイライトを示すサマリーカードが表示されます。カード内をクリックすると、最新のデプロイメントの詳細やトレースを表示したり、このサービス上のすべてのデプロイメントを表示したりできます。[エラー追跡][4]とのインテグレーションにより、サービス上でフラグが立てられた新しい問題を見ることができます。ここで、エラーは自動的に問題に集約されます。
+The service page features summary cards with highlights on your service health. Easily spot potential faulty deployments, click into the card to view details or traces of the latest deployment, or view all deployments on this service. See new issues flagged on your service through our integration with [Error Tracking][4], where errors are automatically aggregated into issues.
 
-{{< img src="tracing/visualization/service/summary_cards.png" alt="サマリーカード" style="width:100%;">}}
+{{< img src="tracing/visualization/service/summary_cards.png" alt="Summary cards" style="width:100%;">}}
 
-[サービスレベル目標 (SLO)][5] と[インシデント][6]のサマリーにより、SLO と進行中のインシデントの状態を監視し、パフォーマンス目標を常に念頭に置いておくことができます。カードをクリックすると、サービスに関する新しい SLO を作成したり、インシデントを宣言したりすることができます。[セキュリティシグナル][18]サマリーでは、アプリケーションの脅威に対してサービスがどのように対応しているかを確認できます。
+Our [Service Level Objectives (SLOs)][5] and [Incidents][6] summaries allow you to monitor the status of SLOs and ongoing incidents, so that you can keep performance goals top of mind. Click the cards to create a new SLO on the service or declare an incident. The [security signals][18] summary highlights how your services react to application threats.
 
-## 依存関係
+## Out-of-the-box graphs
 
-{{< callout url="https://docs.google.com/forms/d/1imGm-4SfOPjwAr6fwgMgQe88mp4Y-n_zV0K3DcNW4UA/edit" d_target="#signupModal" btn_hidden="true" btn_hidden="false" header="非公開ベータ版にオプトイン！" >}}
-推測サービスと新しいサービス詳細画面のレイアウトは非公開ベータ版です。アクセスをリクエストするには、フォームにご記入ください。
-{{< /callout >}}
+Datadog provides [out-of-the-box graphs][8] for any given Service:
 
-依存関係マップを使用して、サービス間通信を視覚化し、データベース、キュー、サードパーティ依存関係などのシステムコンポーネントを把握できます。依存関係をタイプ別にグループ化し、リクエスト、レイテンシー、エラーでフィルターをかけて、接続の遅延や接続の失敗を特定できます。
+* Requests - Choose to display:
+    *  The **Total amount of requests and errors**
+    *  The amount of **Requests and errors per second**
+* Latency - Choose to display:
+    * The **Latency** by Version
+    * The **Latency** by Percentile (Avg/p75/p90/p95/p99/p99.9/Max latency of your traced requests) as a timeseries
+    * The **Historical Latency** to compare the Latency distribution with the day and week before
+    * The **Latency Distribution** over the selected timeframe
+    * The **Latency** by Error to evaluate the latency impact of an error on traced requests
+    * The **Apdex score** for web services; [learn more about Apdex][9]
+* Error - Choose to display:
+    * The **Total amount of errors**
+    * The amount of **Errors per second**
+    * The **% Error Rate**
+* Dependency Map:
+    * The **Dependency Map** showing upstream and downstream services.
+* **Sub-services**: When there are multiple services involved, a fourth graph (in the same toggle option as the Dependency Map) breaks down your **%of time spent** of your service by *services* or *type*.
 
-詳しくは、[新しい Service ページと推測サービス][20]を参照してください。
+    This represents the relative time spent by traces in downstream services from the current service to the other *services* or *type*.
 
-{{< img src="tracing/services/service_page/dependencies.png" alt="APM Services ページの依存関係セクション" style="width:100%;">}}
+    **Note**: For services like *Postgres* or *Redis*, which are "final" operations that do not call other services, there is no sub-services graph.
+[Watchdog][7] performs automatic anomaly detection on the Requests, Latency, and Error graphs. If there is an anomaly detected, there will be an overlay on the graph and a Watchdog icon you can click for more details in a side panel.
 
-## すぐに使えるグラフ
+{{< img src="tracing/visualization/service/out_of_the_box_graphs.jpg" alt="Out of the box service graphs" style="width:100%;">}}
 
-Datadog は、特定のサービスに対して[すぐに使用できるグラフ][8]を提供しています。
+### Export
 
-* リクエスト - 選択して表示:
-    *  **リクエストとエラーの合計量**
-    *  1 秒あたりの**リクエストとエラーの量**
-* レイテンシー - 選択して表示:
-    *  トレースされたリクエストの平均/p75/p90/p95/p99/最大レイテンシーと、レイテンシーによるマッチング上位 5 スパン
-    *  ** レイテンシー分布** 
-    *  ウェブサービスの **Apdex スコア**。[Apdex の詳細][9]
-* エラー - 選択して表示:
-    * **エラーの合計量**
-    * **1 秒あたりのエラー**の量
-    * **% エラー率**
-* 依存関係マップ:
+On the upper-right corner of each graph click on the arrow in order to export your graph into a pre-existing [dashboard][10]:
 
-    * アップストリームとダウンストリームのサービスを示した**依存関係マップ**です。
-* **サブサービス**: 複数のサービスが関係している場合、(依存関係マップと同じトグルオプションにある) 4 番目のグラフが、サービスの**リクエストあたりの合計消費時間**/**消費時間の割合**/**平均時間**を*サービス*ごとまたは*タイプ*ごとに分類します。
+{{< img src="tracing/visualization/service/save_to_dashboard.png" alt="Save to dashboard" style="width:60%;">}}
 
-  これは、現在のサービスから他の*サービス*または*タイプ*へのダウンストリームサービスでトレースに費やされた合計、相対、平均時間を表します。
+## Resources
 
-  **注**: *Postgres* や *Redis* などのサービスは、他のサービスを呼び出さない「最終的な」オペレーションであり、サブサービスのグラフはありません。
-[Watchdog][7] は、リクエスト、レイテンシー、エラーのグラフで自動的な異常検出を実行します。異常が検出されると、グラフにオーバーレイが表示され、クリックするとサイドパネルに詳細が表示される Watchdog のアイコンが表示されます。
+See Requests, Latency, and Error graphs broken down by resource to identify problematic resources. Resources are particular actions for your services (typically individual endpoints or queries). Read more in [Getting Started with APM][1].
 
-{{< img src="tracing/visualization/service/out_of_the_box_graphs.jpg" alt=" すぐに使えるサービスグラフ" style="width:100%;">}}
+Below, there's a list of [resources][11] associated with your service. Sort the resources for this service by requests, latency, errors, and time, to identify areas of high traffic or potential trouble. Note that these metric columns are configurable (see image below).
 
-### エクスポート
+{{< img src="tracing/visualization/service/resources_tab_1.jpg" alt="Resources" style="width:100%;">}}
 
-グラフを既存の[ダッシュボード][10]にエクスポートするには、各グラフの右上隅にある矢印をクリックします。
+Click on a resource to open a side panel that displays the resource's out-of-the-box graphs (about requests, errors, and latency), a resource dependency map, and a span summary table. Use keyboard navigation keys to toggle between resources on the **Resources** list and compare resources in a service. To view the full resource page, click **Open Full Page**.
 
-{{< img src="tracing/visualization/service/save_to_dashboard.png" alt="ダッシュボードに保存" style="width:60%;">}}
+[Refer to the dedicated resource documentation to learn more][2].
 
-## リソース
+### Columns
 
-リソースごとに分類されたリクエスト、レイテンシー、エラーのグラフを参照し、問題のあるリソースを特定します。リソースとは、サービスに対する特定のアクション (通常は個々のエンドポイントやクエリ) です。詳しくは、[APM を開始する][1]をご覧ください。
+Choose what to display in your resources list:
 
-下には、サービスに関連する[リソース][11]のリストがあります。このサービスのリソースをリクエスト、レイテンシー、エラー、時間でソートし、トラフィックの多いエリアや潜在的な問題を特定します。なお、これらのメトリクス列は構成することができます (下の画像を参照)。
+* **Requests**: Absolute amount of requests traced (per seconds)
+* **Requests per second**: Absolute amount of requests traced per second
+* **Total time**: Sum of all time spend in this resource
+* **Avg/p75/p90/p95/p99/Max Latency**: The Avg/p75/p90/p95/p99/Max latency of your traced requests
+* **Errors**: Absolute amount of error for a given resource
+* **Error Rate**: Percent of error for a given resource
 
-{{< img src="tracing/visualization/service/resources_tab.jpg" alt="リソース" style="width:100%;">}}
+{{< img src="tracing/visualization/service/resource_columns.png" alt="Resource columns" style="width:40%;">}}
 
-リソースをクリックすると、サイドパネルが開き、リソースのすぐに使えるグラフ (リクエスト、エラー、レイテンシーについて)、リソース依存マップ、スパン要約表が表示されます。キーボードのナビゲーションキーを使用して、**Resources** リスト上のリソースを切り替えたり、サービス内のリソースを比較したりできます。完全なリソースページを表示するには、**Open Full Page** をクリックします。
+## Additional sections
 
-[詳細については、専用のリソースドキュメントを参照してください][2]。
+### Deployments
+A service configured with version tags will show versions in the Deployment tab. The version section shows all versions of the service that were active during the selected time interval, with active versions at the top.
 
-### 列
+By default, you can see:
+* The version names deployed for this service over the timeframe.
+* The times at which traces that correspond to this version were first and last seen.
+* An Error Types indicator, which shows how many types of errors appear in each version that did not appear in the immediately previous version.
 
-リソースリストに表示するものを選択します。
+    **Note**: This indicator shows errors that were not seen in traces from the previous version. It doesn't mean that this version necessarily introduced these errors. Looking into new error types can be a great way to begin investigating errors.
 
-* **Requests**: トレースされたリクエストの絶対量 (1 秒あたり)
-* **Requests per second**: 1 秒あたりのトレースされたリクエストの絶対量
-* **Total time**: このリソースで費やしたすべての時間の合計
-* **Avg/p75/p90/p95/p99/Max Latency**: トレースされたリクエストの平均/p75/p90/p95/p99/最大レイテンシー
-* **Errors**: 特定のリソースのエラーの絶対量
-* **Error Rate**: 特定のリソースのエラーの割合
+* Requests per second.
+* Error rate as a percentage of total requests.
 
-{{< img src="tracing/visualization/service/resource_columns.png" alt="リソース列" style="width:40%;">}}
+You can add columns to or remove columns from this overview table and your selections will be saved. The additional available columns are:
 
-## その他のタブ
+* Endpoints that are active in a version that were not in the previous version.
+* Time active, showing the length of time from the first trace to the last trace sent to Datadog for that version.
+* Total number of Requests.
+* Total number of Errors.
+* Latency measured by p50, p75, p90, p95, p99, or max.
 
-### デプロイ
-バージョンタグで構成されたサービスは、Deployment タブにバージョンが表示されます。バージョンセクションには、選択した時間間隔にアクティブだったサービスの全バージョンが表示され、アクティブなバージョンが一番上に表示されます。
+{{< img src="tracing/visualization/service/deployments_1.png" alt="Deployments" style="width:90%;">}}
 
-デフォルトで、以下が表示されます。
-* タイムフレーム中にこのサービスにデプロイされたバージョン名。
-* このバージョンに対応するトレースが確認された最初および最後の時間。
-* 各バージョンに出現した、直前バージョンでは出現しなかったエラータイプの回数を表示するエラータイプインジケーター。
+Read more about Deployments [on the service page][12].
 
-  **注**: ここには、前バージョンのトレースでは見られなかったエラーが表示されますが、必ずしもこのバージョンになってこのようなエラーが発生するようになったことを意味するものではありません。新しいエラータイプを確認することは、エラー調査を始める良い方法です。
+### Error Tracking
+View issues on your service, which are similar errors aggregated together to turn a noisy stream of errors into manageable issues and help you assess the impact of your service's errors. Read more about issues in [Error Tracking][4].
 
-* 1 秒あたりのリクエスト数。
-* 合計リクエスト数のパーセンテージとしてのエラー率。
+This tab has overview graphs that show which resources have the most issues and a list of the most common issues occurring in your service. Click on an issue in the list to see details in a side panel, including its stack trace, related code versions, and total error occurrences since inception.
 
-この概要テーブルに列を追加またはテーブルから列を削除することができます。選択はすべて保存されます。利用可能な列は以下のとおりです。
+{{< img src="tracing/visualization/service/error_tracking_side_panel_1.jpg" alt="Error Tracking tab" style="width:90%;">}}
 
-* 前バージョンに存在しなかったバージョンでアクティブなエンドポイント。
-* アクティブな時間。このバージョンで Datadog に送信された最初のトレースから最後のトレースまでの時間を表示。
-* リクエスト総数。
-* エラー総数。
-* p50、p75、p90、p95、p99、または最大で計測されたレイテンシー。
+### Security
+Understand the security posture of the service, including known vulnerabilities exposed in the service's libraries and security signals on your service, which are automatically created when Datadog detects application attacks impacting your services. The signals identify meaningful threats for you to review instead of assessing each individual attack attempt. Read more about [Application Security][18].
 
-{{< img src="tracing/visualization/service/deployments.png" alt="デプロイメント" style="width:90%;">}}
+The top section of the security tab has overview graphs that show the number and severity of vulnerabilities, a timeline of attacks, the types of attacks, and attacker information (client IP or authenticated user).
 
-サービス詳細画面のデプロイメントについてご覧ください。
+The next section of the panel lists all the vulnerabilities and signals concerning the service. Click on a security vulnerability to open a side panel with relevant details to investigate further and remediate the vulnerability. Click on a security signal to get information about what the detected threat is and what actions you can take to remediate it.
 
-### エラー追跡
-類似のエラーを集約して表示することで、ノイズの多いエラーの流れを管理しやすい問題に変え、サービスのエラーの影響を評価するのに役立ちます。[エラー追跡][4]で問題の詳細をお読みください。
+{{< img src="tracing/visualization/service/security_tab_1.jpg" alt="Security" style="width:90%;">}}
 
-このタブには、どのリソースに最も多くの問題があるかを示す概要グラフと、サービスで発生する最も一般的な問題のリストがあります。リスト内の問題をクリックすると、サイドパネルにそのスタックトレース、関連するコードのバージョン、開始以来のエラーの総発生数などの詳細が表示されます。
+### Databases
+View the list of downstream database dependencies identified by Database Monitoring and identify latency or load outliers.
+[Learn more about connecting DBM and APM][21].
 
-{{< img src="tracing/visualization/service/error_tracking_side_panel.jpg" alt="Error Tracking タブ" style="width:90%;">}}
+{{< img src="tracing/visualization/service/databases_tab_1.png" alt="Databases" style="width:90%;">}}
 
-### セキュリティ
-サービスのライブラリに存在する既知の脆弱性や、サービス上のセキュリティシグナルなど、サービスのセキュリティポスチャを理解できます。セキュリティシグナルは、Datadog がサービスに影響を与えるアプリケーション攻撃を検知した際に自動的に生成されます。これらのシグナルは、個々の攻撃の試みをそれぞれ評価する代わりに、ユーザーが確認すべき重要な脅威を特定します。[アプリケーションセキュリティ][18]の詳細を参照してください。
+### Infrastructure
+If your service is running on Kubernetes, you can see an Infrastructure tab on the Service Page. The live Kubernetes Pods table displays detailed information on your pods, such as if memory usage is close to its limit, and allows you to improve resource allocation by seeing if provisioned compute resources exceed what is required for optimal application performance.
 
-セキュリティタブのトップセクションには、脆弱性の数と重大性、攻撃の時期、攻撃の種類、攻撃者情報 (クライアント IP または認証済みユーザー) を示す概要グラフが表示されます。 
+{{< img src="tracing/visualization/service/infra_pods.png" alt="Kubernetes Pods" style="width:90%;">}}
 
-パネルの次のセクションには、サービスに関係するすべての脆弱性とシグナルが一覧表示されます。任意のセキュリティ脆弱性をクリックすると、関連情報が記されたサイドパネルが開き、脆弱性に関するさらなる調査と修復を実行できます。セキュリティシグナルをクリックすると、どのような脅威が検出されたか、そして修復のためにどのような対応が可能かについての情報を入手できます。
+The Kubernetes Metrics section contains a high level summary of your infrastructure health for the selected time period, and includes CPU, Memory, Network, and Disk metrics.
 
-{{< img src="tracing/visualization/service/security_tab.jpg" alt="セキュリティ" style="width:90%;">}}
+{{< img src="tracing/visualization/service/infra_metrics_1.png" alt="Kubernetes Metrics" style="width:90%;">}}
 
-### インフラストラクチャー
-サービスが Kubernetes 上で実行されている場合、サービス詳細画面に Infrastructure タブが表示されます。ライブ Kubernetes Pods テーブルには、メモリ使用量が限界に近づいているかどうかなど、ポッドの詳細情報が表示されます。これにより、プロビジョニングされたコンピュートリソースが最適なアプリケーションパフォーマンスに必要なものを超えているかを明確に確認することによって、リソース割り当てを改善することが可能です。
+For non-Kubernetes environments (such as host-based installation), see the [Unified Service Tagging documentation][13].
 
-{{< img src="tracing/visualization/service/infra_pods.png" alt="Kubernetes ポッド" style="width:90%;">}}
+### Runtime Metrics
+If runtime metrics are enabled in the tracing client, you'll see a Runtime metrics tab corresponding to the runtime language of your service. Read more in [Runtime Metrics][14].
 
-Kubernetes Metrics セクションは、選択した期間のインフラストラクチャーの健全性の要約を示し、CPU、メモリ、ネットワーク、およびディスクメトリクスを含みます。
+{{< img src="tracing/visualization/service/runtime_metrics_1.png" alt="Runtime Metrics" style="width:90%;">}}
 
-{{< img src="tracing/visualization/service/infra_metrics.png" alt="Kubernetes メトリクス" style="width:90%;">}}
+### Profiling
+You'll see a Profiling tab if the [Continuous Profiler][15] is set up for your service.
 
-Kubernetes 以外の環境 (ホストベースのインストールなど) については、[統合サービスタグ付けのドキュメント][13]をご覧ください。
+Use the information in the **Profiling** tab to correlate a latency and throughput change to a code performance change.
 
-### ランタイムメトリクス
-トレースクライアントでランタイムメトリクスが有効になっている場合、サービスのランタイム言語に対応する Runtime metrics タブが表示されます。詳しくは、[ランタイムメトリクス][14]をご覧ください。
+In this example, you can see how latency is linked to a lock contention increase on `/GET train` that is caused by the following line of code:
 
-{{< img src="tracing/visualization/service/runtime_metrics.png" alt="ランタイムメトリクス" style="width:90%;">}}
+```java
+Thread.sleep(DELAY_BY.minus(elapsed).toMillis());
+```
 
-### プロファイリング
-サービスに [Continuous Profiler][15] が設定されている場合、Profiling タブが表示されます。利用可能なバージョンやランタイム言語などの概要が上部に表示されます。以下は、バージョン、エンドポイント、メソッド別のすぐに使えるプロファイリングメトリクスで、リソースを大量に消費するメソッドの特定とデバッグを支援します。グラフをクリックすると、関連するトレース、ログ、およびその他のデータが表示されます。[APM と Continuous Profiler の詳細についてご確認ください][15]。
+{{< img src="profiler/apm_service_page_pivot_to_contention_comparison_1.mp4" alt="Pivoting from APM service page to Profiling comparison page to find the line of code causing latency" video=true >}}
 
-{{< img src="tracing/visualization/service/profiler.jpg" alt="プロファイリング" style="width:90%;">}}
+### Traces
+View the list of traces associated with the service in the traces tab, which is already filtered on your service, environment, and operation name. Drill down to problematic spans using core [facets][16] such as status, resource, and error type. For more information, click a span to view a flame graph of its trace and more details.
 
-### トレース
-トレースタブで、サービスに関連するトレースのリストを表示します。トレースは、サービス、環境、および操作名ですでにフィルタリングされています。ステータス、リソース、エラータイプなどのコア[ファセット][16]を使用して、問題のあるスパンをドリルダウンします。詳細については、スパンをクリックすると、そのトレースのフレームグラフや詳細が表示されます。
+{{< img src="tracing/visualization/service/traces_1.png" alt="Traces" style="width:90%;">}}
 
-{{< img src="tracing/visualization/service/traces.png" alt="トレース" style="width:90%;">}}
+### Log patterns
+View common patterns in your service's logs, and use facets like status in the search bar to filter the list of patterns. Click on a pattern to open the side panel to view more details, such as what events triggered the cascade. Read more in [Log patterns][17].
 
-### ログ
-サービスのログによくあるパターンを表示し、検索バーのステータスなどのファセットを使用して、パターンのリストをフィルタリングします。パターンをクリックすると、サイドパネルが開き、どのイベントがカスケードを引き起こしたかなど、より詳細な情報を見ることができます。詳しくは、[ログパターン][17]をご覧ください。
+{{< img src="tracing/visualization/service/log_patterns_1.png" alt="Log patterns" style="width:90%;">}}
 
-{{< img src="tracing/visualization/service/log_patterns.png" alt="ログパターン" style="width:90%;">}}
+### Costs
+Visualize the cost associate with your service's infrastructure used in the Costs tab.
+[Learn More about Cloud Cost Management][22].
 
-## その他の参考資料
+{{< img src="tracing/visualization/service/costs_tab_1.png" alt="Costs" style="width:90%;">}}
+
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/tracing/glossary/
-[2]: /ja/tracing/services/resource_page/
-[3]: /ja/monitors/types/apm/
-[4]: /ja/tracing/error_tracking/
-[5]: /ja/service_management/service_level_objectives/
-[6]: /ja/service_management/incident_management/
-[7]: /ja/watchdog/
-[8]: /ja/tracing/metrics/metrics_namespace/
-[9]: /ja/tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm/
-[10]: /ja/dashboards/
-[11]: /ja/tracing/glossary/#resources
-[12]: /ja/tracing/services/deployment_tracking/#versions-deployed
-[13]: /ja/getting_started/tagging/unified_service_tagging/?tab=systemmetrics#non-containerized-environment
-[14]: /ja/tracing/metrics/runtime_metrics/
-[15]: /ja/profiler/
-[16]: /ja/tracing/trace_explorer/query_syntax/#facets
+[1]: /tracing/glossary/
+[2]: /tracing/services/resource_page/
+[3]: /monitors/types/apm/
+[4]: /tracing/error_tracking/
+[5]: /service_management/service_level_objectives/
+[6]: /service_management/incident_management/
+[7]: /watchdog/
+[8]: /tracing/metrics/metrics_namespace/
+[9]: /tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm/
+[10]: /dashboards/
+[11]: /tracing/glossary/#resources
+[12]: /tracing/services/deployment_tracking/#versions-deployed
+[13]: /getting_started/tagging/unified_service_tagging/?tab=systemmetrics#non-containerized-environment
+[14]: /tracing/metrics/runtime_metrics/
+[15]: /profiler/
+[16]: /tracing/trace_explorer/query_syntax/#facets
 [17]: https://www.datadoghq.com/blog/log-patterns/
-[18]: /ja/security/application_security/how-appsec-works/
+[18]: /security/application_security/how-appsec-works/
 [19]: https://www.datadoghq.com/blog/datadog-watchdog-insights-log-management/
-[20]: /ja/tracing/guide/inferred-service-opt-in/
+[21]: /database_monitoring/connect_dbm_and_apm/
+[22]: /cloud_cost_management/
+[23]: https://app.datadoghq.com/services

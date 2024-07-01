@@ -1,145 +1,147 @@
 ---
+title: Getting Started with Browser Tests
+kind: documentation
 further_reading:
-- link: https://learn.datadoghq.com/courses/intro-to-synthetic-tests
-  tag: ラーニングセンター
-  text: Synthetic テストの紹介
+- link: "https://learn.datadoghq.com/courses/intro-to-synthetic-tests"
+  tag: Learning Center
+  text: Introduction to Synthetic Tests
 - link: /synthetics/browser_tests
-  tag: ドキュメント
-  text: ブラウザテストについて
+  tag: Documentation
+  text: Learn more about browser tests
 - link: /getting_started/synthetics/private_location
-  tag: ドキュメント
-  text: プライベートロケーションの詳細
+  tag: Documentation
+  text: Learn about private locations
 - link: /continuous_testing/cicd_integrations
-  tag: ドキュメント
-  text: CI/CD パイプラインから Synthetic テストをトリガーする方法を学ぶ
+  tag: Documentation
+  text: Learn how to trigger Synthetic tests from your CI/CD pipeline
 - link: /synthetics/identify_synthetics_bots
-  tag: ドキュメント
-  text: API テスト用の Synthetic ボットを特定する方法を学ぶ
+  tag: Documentation
+  text: Learn how to identify Synthetic bots for API tests
 - link: /synthetics/guide/synthetic-test-monitors
   tag: Documentation
-  text: Synthetic テストモニターについて
-title: ブラウザテストの概要
+  text: Learn about Synthetic test monitors
+
 ---
 
-## 概要
+## Overview
 
-[ブラウザテスト][1]は、Datadog が Web アプリケーション上で実行するシナリオです。定期的なインターバルを設定して、複数の場所、デバイス、ブラウザからテストを実行したり、CI/CD パイプラインから実行したりすることが可能です。
+[Browser tests][1] are scenarios that Datadog executes on your web applications. You can configure periodic intervals to run tests from multiple locations, devices, and browsers as well as execute them from your CI/CD pipelines. 
 
-{{< img src="getting_started/synthetics/browser-test-overview.png" alt="Synthetics ブラウザテストの概要" style="width:100%;" >}}
+{{< img src="getting_started/synthetics/browser-test-overview.png" alt="Overview of a Synthetics Browser Test" style="width:100%;" >}}
 
-これらのテストは、ユーザーがアプリケーション上で**主要なビジネストランザクション**を実行できること、および最近のコード変更によってマイナスの影響を受けていないことを検証します。
+These tests verify that your users can perform **key business transactions** on your applications and that they are not negatively impacted by recent code changes.
 
-## ブラウザテストを作成
+## Create a browser test
 
-以下の例は、カートにアイテムを追加してから正常にチェックアウトするまでのユーザーのジャーニーをマップするブラウザテストの作成を示しています。
+The example below demonstrates the creation of a browser test that maps a user's journey from adding an item to a cart to successfully checking out. 
 
-{{< img src="getting_started/synthetics/browser-test-1.png" alt="ユーザージャーニーをマッピングするブラウザテスト" style="width:100%;" >}}
-### テストの詳細を構成する
+{{< img src="getting_started/synthetics/browser-test-1.png" alt="Browser test mapping out a user journey" style="width:100%;" >}}
+### Configure your test details
 
-1. Datadog サイトで、左側のメニューから **Digital Experience** にカーソルを合わせ、**[Tests][2]** (**Synthetic Monitoring & Testing** の下) を選択します。
-2. 右上隅にある **New Test** > **[Browser Test][3]** をクリックします。
-3. ブラウザテストを定義します。
+1. In the Datadog site, hover over **Digital Experience** in the left hand menu and select **[Tests][2]** (under **Synthetic Monitoring & Testing**).
+2. In the top right corner, click **New Test** > **[Browser Test][3]**.
+3. Define your browser test:
 
-    - 監視する Web サイトの URL を追加します。追加する URL がない場合は、テスト用の e コマース Web アプリケーションである `https://www.shopist.io` を使用してください。
-    - **Advanced Options** を選択して、カスタムリクエストオプション、証明書、認証情報などを設定します。
-      この例では、特定の詳細オプションは必要ありません。
-    - テストに名前を付け、`env:prod` や `app:shopist` などのタグを設定します。タグを使用すると、テストスイートを整理し、ホームページで興味のあるテストをすばやく見つけることができます。
-    - テストするブラウザとデバイスを選択します。
+    - Add the URL of the website you want to monitor. If you don't know what to start with, you can use `https://www.shopist.io`, a test e-commerce web application.
+    - Select **Advanced Options** to set custom request options, certificates, authentication credentials, and more. 
+      In this example, no specific advanced option is needed.
+    - Name your test and set tags to it such as `env:prod` and `app:shopist`. Tags allow you to keep your test suite organized and quickly find tests you're interested in on the homepage.
+    - Choose the browsers and devices you want to test with. 
 
-### ロケーションを選択する
+### Select locations
 
-テストを実行する 1 つ以上の **Managed Locations** または **Private Locations** を選択します。
+Select one or more **Managed Locations** or **Private Locations** to run your test from.
 
-管理ロケーションでは、公開されている Web サイトとエンドポイントをテストすることができます。内部アプリケーションをテストしたり、個別の地理的領域でユーザーの行動をシミュレートしたりするには、代わりに[プライベートロケーション][4]を使用します。
+Managed locations allow you to test public-facing websites and endpoints. To test internal applications or simulate user behavior in discrete geographic regions, use [private locations][4] instead.
 
-Shopist アプリケーションは `https://www.shopist.io/` で公開されているため、テストを実行する管理ロケーションを選択できます。
+The Shopist application is publicly available at `https://www.shopist.io/`, so you can pick any managed locations to execute your test from.
 
-### テストの頻度を指定する
+### Specify test frequency
 
-テストを実行する頻度を選択します。デフォルトの頻度である 1 時間のままでも構いません。
+Select the frequency at which you want your test to execute. You can leave the default frequency of 1 hour.
 
-スケジュールに従って Synthetic テストを実行することに加えて、[CI/CD パイプライン][5]から手動または直接トリガーすることができます。
+In addition to running your Synthetic test on a schedule, you can trigger them manually or directly from your [CI/CD pipelines][5].
 
-### アラート条件を定義する
+### Define alert conditions
 
-アラート条件を定義して、散発的なネットワークブリップなどのテストがトリガーされないようにすることができます。これにより、アプリケーションに実際の問題が発生した場合にのみアラートが送信されます。
+You can define alert conditions to ensure your test does not trigger for things like a sporadic network blip, so that you only get alerted in case of real issues with your application.
 
-ロケーションが失敗したと見なす前に発生する必要がある連続した失敗の数を指定できます。
+You can specify the number of consecutive failures that should happen before considering a location failed:
 
 ```text
 Retry test 2 times after 300 ms in case of failure
 ```
 
-アプリケーションが特定の時間とロケーションの数だけダウンしたときにのみ通知をトリガーするようにテストを構成することもできます。次の例では、2 つの異なるロケーションでテストが 3 分間失敗した場合に、アラートルールが通知を送信するように設定されています。
+You can also configure your test to only trigger a notification when your application goes down for a certain amount of time and number of locations. In the below example, the alerting rule is set to send a notification if the test fails for three minutes on two different locations:
 
 ```text
 An alert is triggered if your test fails for 3 minutes from any 2 of 13 locations
 ```
 
-### テストモニターを構成する
+### Configure the test monitor
 
-アラートメッセージを設計し、テストでアラートを送信するメールアドレスを追加します。
+Design your alert message and add an email address you want your test to send alerts to.
 
-{{< img src="getting_started/synthetics/configured-browser-test.mp4" alt="ブラウザテストのコンフィギュレーション例" video="true" >}}
+{{< img src="getting_started/synthetics/configured-browser-test.mp4" alt="Example browser test configuration" video="true" >}}
 
-Slack、PagerDuty、Microsoft Teams、Webhook などの[通知インテグレーション][6]を使用することもできます。これらの通知ツールへの Synthetic アラートをトリガーするには、最初に対応する[インテグレーション][7]を設定する必要があります。
+You can also use [notifications integrations][6] such as Slack, PagerDuty, Microsoft Teams, and webhooks. In order to trigger a Synthetic alert to these notification tools, you first need to set up the corresponding [integration][7].
 
-テストの構成とモニターを保存する準備ができたら、**Save & Edit Recording** をクリックします。
+When you're ready to save your test configuration and monitor, click **Save & Edit Recording**.
 
-詳しくは、[Synthetic テストモニターの使用][8]をご覧ください。
+For more information, see [Using Synthetic Test Monitors][8].
 
-## 記録を作成する
+## Create recording
 
-テストコンフィギュレーションが保存されると、Datadog は Chrome 拡張機能の [Datadog テストレコーダー][9]をダウンロードしてインストールするように要求します。
+Once your test configuration is saved, Datadog prompts you to download and install the [Datadog test recorder][9] Chrome extension. 
 
-拡張機能をインストールしたら、**Start Recording** をクリックしてテストステップの記録を開始します。
+Once you have installed the extension, click **Start Recording** to begin recording your test steps.
 
-レコーダーページの右側にある iframe のページを操作します。div、画像、またはページの任意の領域を選択すると、Datadog はブラウザテストで関連するステップを記録および作成します。
+Navigate through the page in the iframe located on the right of the recorder page. When you select a div, image, or any area of the page, Datadog records and creates the associated step in the browser test. 
 
-テストステップの記録を終了するには、**Stop Recording** をクリックします。
+To end recording your test steps, click **Stop Recording**.
 
-以下の例は、カートに商品を追加してから `https://www.shopist.io` で正常にチェックアウトするまでのユーザージャーニーをマッピングする方法を示しています。
+The example below demonstrates how to map a user journey from adding an item to a cart to successfully checking out in `https://www.shopist.io`:
 
-1. サンプル Web サイトの **Chairs** などの家具セクションの 1 つに移動し、**Add to cart** を選択します。
-2. **Cart** そして **Checkout** をクリックします。
-3. **Add New** で **Assertion** を選択し、**"Test that some text is present on the active page"** (アクティブなページにテキストが存在することをテストする) をクリックします。
-4. チェックアウト後に "Thank you!" という言葉が表示されることを確認するには、**Value** フィールドに `Thank you!` と入力します。
-5. **Save & Quit** を押します。
+1. Navigate to one of the furniture sections on the example website such as **Chairs** and select **Add to cart**.
+2. Click on **Cart** and **Checkout**.
+3. Under **Add New**, select **Assertion** and click **"Test that some text is present on the active page"**.
+4. To confirm that the words "Thank you!" appear after checking out, enter `Thank you!` in the **Value** field. 
+5. Press **Save & Quit**.
 
-定義されたユーザージャーニーの後にアプリケーションが期待される状態になることを確認するために、**アサーション**でブラウザテストを終了することが重要です。
+It is important to finish your browser test with an **Assertion** to ensure your application resulted in the expected state after the defined user journey.
 
-{{< img src="getting_started/synthetics/record-test.mp4" alt="テストステップを記録する" video="true" >}}
+{{< img src="getting_started/synthetics/record-test.mp4" alt="Record test steps" video="true" >}}
 
-サンプル Web サイトは定期的にエラーをスローし、意図的に失敗を引き起こします。**Notify your team** フィールドにメールアドレスを含めると、テストが失敗して回復したときにメール通知が届きます。
+The example website regularly throws an error causing it to intentionally fail. If you include your email address in the **Configure the monitor for this test** field, you receive an email notification when the test fails and recovers.
 
-## テスト結果を確認する
+## Look at test results
 
-**Browser Test** の詳細ページには、テストコンフィギュレーションの概要、グローバルおよびロケーションごとのアップタイム、対話までの時間とテスト期間に関するグラフ、成功したテスト結果と失敗したテスト結果のサンプル、すべてのテスト結果のリストが表示されます。テストの長さによっては、最初のテスト結果が表示されるまで数分待つ必要がある場合があります。
+The **Browser Test** details page displays an overview of your test configuration, the global and per location uptime, graphs about time-to-interactive and test duration, sample successful and failed test results, and the list of all test results. Depending on the length of your test, you might have to wait for a few minutes to see the first test results come in.
 
-[失敗したテスト][10]のトラブルシューティングを行うには、失敗したテスト結果を選択し、失敗したステップに至るまでのスクリーンショットを確認します。潜在的な**[エラーと警告][11]**、**[リソース][12]**、および**[コア Web バイタル][13]**を確認して、問題を診断することもできます。
+To troubleshoot a [failed test][10], select a failed test result and review the screenshots leading up to the failed step. You can also review potential **[Errors & Warnings][11]**, **[Resources][12]**, and **[Core Web Vitals][13]** to diagnose the issue. 
 
-以下の例では、サーバーのタイムアウトの結果としてテストが失敗しました。
+In the example below, the test failed as the result of a server timeout.
 
-{{< img src="getting_started/synthetics/browser-test-failure.mp4" alt="ブラウザテストの失敗" video="true" >}}
+{{< img src="getting_started/synthetics/browser-test-failure.mp4" alt="Browser test failure" video="true" >}}
 
-Datadog の [APM と Synthetic Monitoring のインテグレーション][14]を使用して、**Traces** タブからのテスト実行によってバックエンドから生成されたトレースを表示します。
+Use Datadog's [APM integration with Synthetic Monitoring][14] to view traces generated from your backend by the test runs from the **Traces** tab.
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /ja/synthetics/browser_tests/
+[1]: /synthetics/browser_tests/
 [2]: https://app.datadoghq.com/synthetics/tests
 [3]: https://app.datadoghq.com/synthetics/browser/create
-[4]: /ja/getting_started/synthetics/private_location
-[5]: /ja/continuous_testing/cicd_integrations
-[6]: /ja/integrations/#cat-notification
+[4]: /getting_started/synthetics/private_location
+[5]: /continuous_testing/cicd_integrations
+[6]: /integrations/#cat-notification
 [7]: https://app.datadoghq.com/account/settings
-[8]: /ja/synthetics/guide/synthetic-test-monitors
+[8]: /synthetics/guide/synthetic-test-monitors
 [9]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
-[10]: /ja/synthetics/browser_tests/test_results#test-failure
-[11]: /ja/synthetics/browser_tests/test_results#errors
-[12]: /ja/synthetics/browser_tests/test_results#resources
-[13]: /ja/synthetics/browser_tests/test_results#page-performance
-[14]: /ja/synthetics/apm/
+[10]: /synthetics/browser_tests/test_results#test-failure
+[11]: /synthetics/browser_tests/test_results#errors
+[12]: /synthetics/browser_tests/test_results#resources
+[13]: /synthetics/browser_tests/test_results#page-performance
+[14]: /synthetics/apm/

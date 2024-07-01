@@ -1,114 +1,117 @@
 ---
-app_id: apache-apisix
-app_uuid: b842d639-caf6-4b3a-8115-52458b9a0753
-assets:
-  dashboards:
-    Apache APISIX Dashboard: assets/dashboards/apache-apisix_overview.json
-  integration:
-    auto_install: true
-    configuration: {}
-    events:
-      creates_events: false
-    metrics:
-      check:
+"app_id": "apache-apisix"
+"app_uuid": "b842d639-caf6-4b3a-8115-52458b9a0753"
+"assets":
+  "dashboards":
+    "Apache APISIX Dashboard": assets/dashboards/apache-apisix_overview.json
+  "integration":
+    "auto_install": true
+    "configuration": {}
+    "events":
+      "creates_events": false
+    "metrics":
+      "check":
       - apisix.request.counter
       - apisix.request.latency
       - apisix.upstream.latency
       - apisix.apisix.latency
       - apisix.ingress.size
       - apisix.egress.size
-      metadata_path: metadata.csv
-      prefix: apisix.
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 10244
-    source_type_name: Apache APISIX
-author:
-  homepage: https://github.com/DataDog/integrations-extras
-  name: コミュニティ
-  sales_email: dev@apisix.apache.org
-  support_email: dev@apisix.apache.org
-categories:
-- クラウド
-- メトリクス
-dependencies:
-- https://github.com/DataDog/integrations-extras/blob/master/apache-apisix/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: apache-apisix
-integration_id: apache-apisix
-integration_title: Apache APISIX
-integration_version: ''
-is_public: true
-custom_kind: integration
-manifest_version: 2.0.0
-name: apache-apisix
-public_title: Apache APISIX
-short_description: Datadog-APISIX インテグレーション
-supported_os:
+      "metadata_path": metadata.csv
+      "prefix": apisix.
+    "service_checks":
+      "metadata_path": assets/service_checks.json
+    "source_type_id": !!int "10244"
+    "source_type_name": Apache APISIX
+"author":
+  "homepage": "https://github.com/DataDog/integrations-extras"
+  "name": Community
+  "sales_email": dev@apisix.apache.org
+  "support_email": dev@apisix.apache.org
+"categories":
+- cloud
+- metrics
+"custom_kind": "integration"
+"dependencies":
+- "https://github.com/DataDog/integrations-extras/blob/master/apache-apisix/README.md"
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "apache-apisix"
+"integration_id": "apache-apisix"
+"integration_title": "Apache APISIX"
+"integration_version": ""
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "apache-apisix"
+"public_title": "Apache APISIX"
+"short_description": "Datadog-APISIX Integration"
+"supported_os":
 - linux
 - windows
 - macos
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Cloud
-  - Category::Metrics
-  - Supported OS::Linux
-  - Supported OS::Windows
-  - Supported OS::macOS
-  configuration: README.md#Setup
-  description: Datadog-APISIX インテグレーション
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Apache APISIX
+"tile":
+  "changelog": CHANGELOG.md
+  "classifier_tags":
+  - "Category::Cloud"
+  - "Category::Metrics"
+  - "Supported OS::Linux"
+  - "Supported OS::Windows"
+  - "Supported OS::macOS"
+  "configuration": "README.md#Setup"
+  "description": Datadog-APISIX Integration
+  "media": []
+  "overview": "README.md#Overview"
+  "resources":
+  - "resource_type": blog
+    "url": "https://apisix.apache.org/blog/2021/11/12/apisix-datadog"
+  "support": "README.md#Support"
+  "title": Apache APISIX
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
-## 概要
+## Overview
 
-Apache APISIX は動的でリアルタイムな高性能 API ゲートウェイであり、ロードバランシング、ダイナミックアップストリーム、カナリアリリース、サーキットブレーキング、認証、観測性などの豊富なトラフィック管理機能を提供します。例えば、Apache APISIX を使用して、従来の南北方向のトラフィックだけでなく、サービス間の東西方向のトラフィックも処理することができます。また、Kubernetes のイングレスコントローラーとしても使用できます。
+Apache APISIX is a dynamic, real-time, high-performance API gateway, and it provides rich traffic management features such as load balancing, dynamic upstream, canary release, circuit breaking, authentication, observability, and more. For example, use Apache APISIX to handle traditional north-south traffic, as well as east-west traffic between services. It can also be used as a Kubernetes ingress controller.
 
-[APISIX-Datadog プラグイン][1]は、Datadog Agent にバンドルされている DogStatsD サーバーに、UDP 接続でカスタムメトリクスをプッシュします。DogStatsD は StatsD プロトコルの実装です。[Apache APISIX][2] Agent のカスタムメトリクスを収集し、1 つのデータポイントに集約して、設定された Datadog サーバーに送信します。
+The [APISIX-Datadog plugin][1] pushes its custom metrics to the DogStatsD server and comes bundled with the Datadog Agent over the UDP connection. DogStatsD is an implementation of StatsD protocol. It collects the custom metrics for [Apache APISIX][2] agent, aggregates it into a single data point, and sends it to the configured Datadog server.
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-以下の構成方法に従ってください。
+Follow the configuration instructions below.
 
-### ブラウザトラブルシューティング
+### Configuration
 
-1. すでに Datadog を使用していて、Datadog Agent がインストールされている場合は、ポート 8125/UDP がファイアウォールで許可されていることを確認してください。例えば、Apache APISIX Agent は、Datadog Agent のポート 8125 に到達することができます。すでにこれを構成している場合は、ステップ 3 までスキップできます。
+1. If you are already using Datadog and have the Datadog Agent installed, make sure port 8125/UDP is allowed through your firewall. For example, the Apache APISIX agent can reach port 8125 of the Datadog Agent. If you already have this configured, you can skip to step 3.
 
-> Datadog Agent のインストール方法の詳細については、[Agent のドキュメント][3]を参照してください。
+> To learn more about how to install the Datadog Agent, see the [Agent documentation][3].
 
-2. Datadog を初めて利用する場合
+2. If you are new to Datadog:
 
-   1. まず、[Datadog のウェブサイト][4]にアクセスし、Get Started Free ボタンをクリックしてアカウントを作成します。
-   2. API キーを生成します。
-      ![API キーの生成][5]。
+   1. First, create an account by visiting the [Datadog website][4] and click on the Get Started Free button.
+   2. Generate an API Key.
+      ![Generate an API Key][5]
 
-3. APISIX-Datadog プラグインは標準的な UDP ソケットを介して statsd プロトコルに従って DogStatsD サーバーに非同期にメトリクスを送信するので、`datadog/agent` の DogStatsD コンポーネントのみを必要とします。これが APISIX が完全な Agent を使うのではなく、スタンドアロンの `datadog/dogstatsd` イメージを使うことを推奨している理由です。`datadog/agent` イメージの ~2.8GB に比べて非常に軽量です (サイズは ~11MB のみ)。
+3. The APISIX-Datadog plugin requires only the DogStatsD component of `datadog/agent` as the plugin asynchronously send metrics to the DogStatsD server following the statsd protocol over standard UDP socket. That's why APISIX recommends using the standalone `datadog/dogstatsd` image instead of using the full agent. It's extremely lightweight (only ~11 MB in size) compared to ~2.8GB of `datadog/agent` image.
 
-コンテナとして実行するには
+To run it as a container:
 
 ```shell
-# 最新イメージをプルします
+# pull the latest image
 $ docker pull datadog/dogstatsd:latest
-# 切り離されたコンテナを実行します
+# run a detached container
 $ docker run -d --name dogstatsd-agent -e DD_API_KEY=<Your API Key from step 2> -p 8125:8125/udp  datadog/dogstatsd
 ```
 
-Kubernetes を使用している場合、`dogstatsd` を Apache APISIX Agent と一緒に `Daemonset` または `Multi-Container Pod` としてデプロイすることができます。
+If you are using Kubernetes in your production environment, you can deploy `dogstatsd` as a `Daemonset` or as a `Multi-Container Pod` alongside Apache APISIX agent.
 
-4. 以下は、特定のルートに対して Datadog プラグインを有効化する方法の例です。これは、`dogstatsd` Agent が既に稼働していることを前提としています。
+4. The following is an example on how to activate the Datadog plugin for a specific route. This assumes the `dogstatsd` agent is already up and running.
 
 ```shell
-# 特定のルートでプラグインを有効にします
+# enable plugin for a specific route
 $ curl http://127.0.0.1:9080/apisix/admin/routes/1 -H 'X-API-KEY: edd1c9f034335f136f87ad84b625c8f1' -X PUT -d '
 {
   "plugins": {
@@ -124,12 +127,12 @@ $ curl http://127.0.0.1:9080/apisix/admin/routes/1 -H 'X-API-KEY: edd1c9f034335f
 }'
 ```
 
-これで、エンドポイント URI である `/hello` へのリクエストがあれば、上記のメトリクスが生成され、Datadog Agent のローカル DogStatsD サーバーにプッシュされるようになります。
+Now any requests to endpoint URI `/hello` will generate the above metrics and push it to local DogStatsD server of the Datadog Agent.
 
-5. プラグインを無効にするには、プラグインコンフィギュレーション内の対応する JSON コンフィギュレーションを削除して `datadog` を無効にしてください。APISIX のプラグインはホットロードされるため、APISIX を再起動する必要はありません。
+5. To deactivate the plugin, remove the corresponding JSON configuration in the plugin configuration to disable  `datadog`. APISIX plugins are hot-reloaded, therefore there is no need to restart APISIX.
 
 ```shell
-# ルートに対してプラグインを無効にします
+# disable plugin for a route
 curl http://127.0.0.1:9080/apisix/admin/routes/1 -H 'X-API-KEY: edd1c9f034335f136f87ad84b625c8f1' -X PUT -d '
 {
   "uri": "/hello",
@@ -143,36 +146,37 @@ curl http://127.0.0.1:9080/apisix/admin/routes/1 -H 'X-API-KEY: edd1c9f034335f13
 }'
 ```
 
-5. その他のカスタム構成オプションについては、[Datadog Plugin][1] のドキュメントを参照してください。
+5. See the [Datadog Plugin][1] documentation for additional custom configuration options.
 
-### 検証
+### Validation
 
-[Agent の status サブコマンドを実行][6]し、Checks セクションで `apisix` を探します。
+[Run the Agent's status subcommand][6] and look for `apisix` under the Checks section.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "apache-apisix" >}}
 
 
-### ヘルプ
+### Events
 
-Apache APISIX チェックにはイベントは含まれません。
+The Apache APISIX check does not include any events.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
+Need help? Contact [Datadog support][8].
 
-## その他の参考資料
+## Further Reading
 
-- [Apache APISIX における Datadog によるクラウドモニタリング][9]
+- [Cloud Monitoring with Datadog in Apache APISIX][9]
 
 [1]: https://apisix.apache.org/docs/apisix/plugins/datadog
 [2]: https://apisix.apache.org/
-[3]: https://docs.datadoghq.com/ja/agent/
+[3]: https://docs.datadoghq.com/agent/
 [4]: https://www.datadoghq.com/
 [5]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/apache-apisix/images/screenshot_1.png
-[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[6]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
 [7]: https://github.com/DataDog/integrations-extras/blob/master/apache-apisix/metadata.csv
-[8]: https://docs.datadoghq.com/ja/help/
+[8]: https://docs.datadoghq.com/help/
 [9]: https://apisix.apache.org/blog/2021/11/12/apisix-datadog
+

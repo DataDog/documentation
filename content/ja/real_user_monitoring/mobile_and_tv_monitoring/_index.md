@@ -1,16 +1,16 @@
 ---
-description: モバイルおよび TV アプリケーションから RUM データを収集します。
-further_reading:
-- link: /real_user_monitoring/session_replay/
-  tag: ドキュメント
-  text: セッションリプレイ
-kind: ドキュメント
-title: モバイルおよび TV モニタリング
+title: Mobile and TV Monitoring
+kind: documentation
+description: Collect RUM data from your mobile and TV applications.
 type: multi-code-lang
+further_reading:
+- link: /real_user_monitoring/session_replay/browser/
+  tag: Documentation
+  text: Session Replay
 ---
 
-## はじめに
+## Get started
 
-アプリケーションタイプを選択して、RUM データの収集を開始します。
+Select an application type to start collecting RUM data:
 
 {{< partial name="rum/rum-getting-started-mobile-setup.html" >}}

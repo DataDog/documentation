@@ -1,4 +1,4 @@
 ---
-title: RED メトリクス
+title: RED metrics
 ---
-RED は「Rate, errors, and duration」の略で、あるコードの性能を評価するための 3 つの主要なメトリクスのことです。
+RED stands for "Rate, errors, and duration," three key metrics for evaluating the performance of some code.

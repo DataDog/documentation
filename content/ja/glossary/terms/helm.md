@@ -1,6 +1,6 @@
 ---
-core_product:
-- infrastructure monitoring
 title: Helm
+core_product:
+  - infrastructure monitoring
 ---
-Helm は、あらかじめ構成された Kubernetes のリソースを管理するためのツールです。
+Helm is a tool for managing pre-configured Kubernetes resources.

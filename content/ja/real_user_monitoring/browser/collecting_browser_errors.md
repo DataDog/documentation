@@ -1,57 +1,58 @@
 ---
+title: Collecting Browser Errors
+kind: documentation
 further_reading:
-- link: /real_user_monitoring/error_tracking/
-  tag: Documentation
-  text: エラー追跡
-- link: https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/
-  tag: ブログ
-  text: リアルユーザーの監視
-- link: /real_user_monitoring/explorer/
-  tag: Documentation
-  text: Datadog でビューを検索する
-- link: /real_user_monitoring/explorer/visualize/
-  tag: Documentation
-  text: イベントへの視覚化の適用
-- link: /real_user_monitoring/platform/dashboards/
-  tag: Documentation
-  text: RUM ダッシュボード
-title: ブラウザエラーの収集
+  - link: /real_user_monitoring/error_tracking/
+    tag: Documentation
+    text: Error tracking
+  - link: "https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/"
+    tag: Blog
+    text: Real User Monitoring
+  - link: /real_user_monitoring/explorer/
+    tag: Documentation
+    text: Explore your views within Datadog
+  - link: /real_user_monitoring/explorer/visualize/
+    tag: Documentation
+    text: Apply visualizations on your events
+  - link: /real_user_monitoring/platform/dashboards/
+    tag: Documentation
+    text: RUM Dashboards
 ---
-## 概要
+## Overview
 
-フロントエンドのエラーはリアルユーザーモニタリング (RUM) で収集されます。エラーメッセージとスタックトレースが利用できる場合は含まれます。
+Front-end errors are collected with Real User Monitoring (RUM). The error message and stack trace are included when available.
 
-## エラーソース
-フロントエンドのエラーは、いくつかの異なるソースから発生します。
+## Error sources
+Front-end errors come from several different sources:
 
-- **agent**: SDK の実行から
-- **console**: `console.error()` API コールから
-- **custom**: [RUM `addError` API](#collect-errors-manually) と共に送信される
-- **report**: `ReportingObserver` API から
-- **source**: ソースコードの未処理の例外または未処理の約束拒否から
+- **agent**: From the SDK execution
+- **console**: From `console.error()` API calls
+- **custom**: Sent with the [RUM `addError` API](#collect-errors-manually)
+- **report**: From the `ReportingObserver` API
+- **source**: From unhandled exceptions or unhandled promise rejections in the source code
 
-## エラー属性
+## Error attributes
 
-すべての RUM イベントタイプのデフォルト属性に関する詳細は、[収集されるデータ][1]をご覧ください。サンプリングまたはグローバルコンテキストの構成に関する情報は、[RUM データとコンテキストの変更][2]をご覧ください。
+For information about the default attributes for all RUM event types, see [Data Collected][1]. For information about configuring for sampling or global context see [Modifying RUM Data and Context][2].
 
-| 属性       | タイプ   | 説明                                                       |
+| Attribute       | Type   | Description                                                       |
 |-----------------|--------|-------------------------------------------------------------------|
-| `error.source`  | 文字列 | エラーの発生元 (`console` など)。         |
-| `error.type`    | 文字列 | エラーのタイプ (場合によってはエラーコード)。                     |
-| `error.message` | 文字列 | イベントについて簡潔にわかりやすく説明する 1 行メッセージ。 |
-| `error.stack`   | 文字列 | スタックトレースまたはエラーに関する補足情報。     |
+| `error.source`  | string | Where the error originates from (for example, `console`).         |
+| `error.type`    | string | The error type (or error code in some cases).                     |
+| `error.message` | string | A concise, human-readable, one-line message explaining the event. |
+| `error.stack`   | string | The stack trace or complementary information about the error.     |
 
-### ソースエラー
+### Source errors
 
-ソースエラーには、エラーに関するコードレベルの情報が含まれます。エラーの種類に関する詳細は、 [MDN ドキュメント][3]を参照してください。
+Source errors include code-level information about the error. More information about the different error types can be found in [the MDN documentation][3].
 
-| 属性       | タイプ   | 説明                                                       |
+| Attribute       | Type   | Description                                                       |
 |-----------------|--------|-------------------------------------------------------------------|
-| `error.type`    | 文字列 | エラーのタイプ (場合によってはエラーコード)。                     |
+| `error.type`    | string | The error type (or error code in some cases).                     |
 
-## エラーを手動で収集する
+## Collect errors manually
 
-`addError()` API を使用して、RUM ブラウザ SDK により自動的に追跡されない処理済みの例外、処理済みのプロミス拒否、およびその他のエラーを監視します。
+Monitor handled exceptions, handled promise rejections, and other errors not tracked automatically by the RUM Browser SDK with the `addError()` API:
 
 {{< code-block lang="javascript" >}}
 addError(
@@ -60,7 +61,7 @@ addError(
 );
 {{< /code-block >}}
 
-**注**: [Error Tracking][4] 機能は、ソースを `custom`、`source` または `report` に設定し、スタックトレースを含むエラーを処理します。その他のソース (`console` など) で送られたか、ブラウザ拡張機能で送られたエラーは、エラー追跡では処理されません。
+**Note**: The [Error Tracking][4] feature processes errors that are sent with the source set to `custom`, `source` or `report`, and contain a stack trace. Errors sent with any other source (such as `console`) or sent from browser extensions are not processed by Error Tracking.
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -68,30 +69,30 @@ addError(
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
 
-// コンテキスト付きでカスタムエラーを送信
+// Send a custom error with context
 const error = new Error('Something wrong occurred.');
 
 datadogRum.addError(error, {
     pageStatus: 'beta',
 });
 
-// ネットワークエラーを送信
+// Send a network error
 fetch('<SOME_URL>').catch(function(error) {
     datadogRum.addError(error);
 })
 
-// 処理済みの例外エラーを送信
+// Send a handled exception error
 try {
-    //コードロジック
+    //Some code logic
 } catch (error) {
     datadogRum.addError(error);
 }
 ```
 {{% /tab %}}
-{{% tab "CDN 非同期" %}}
+{{% tab "CDN async" %}}
 
 ```javascript
-// コンテキスト付きでカスタムエラーを送信
+// Send a custom error with context
 const error = new Error('Something wrong occurred.');
 
 window.DD_RUM.onReady(function() {
@@ -100,16 +101,16 @@ window.DD_RUM.onReady(function() {
     });
 });
 
-// ネットワークエラーを送信
+// Send a network error
 fetch('<SOME_URL>').catch(function(error) {
     window.DD_RUM.onReady(function() {
         window.DD_RUM.addError(error);
     });
 })
 
-// 処理済みの例外エラーを送信
+// Send a handled exception error
 try {
-    //コードロジック
+    //Some code logic
 } catch (error) {
     window.DD_RUM.onReady(function() {
         window.DD_RUM.addError(error);
@@ -117,24 +118,24 @@ try {
 }
 ```
 {{% /tab %}}
-{{% tab "CDN 同期" %}}
+{{% tab "CDN sync" %}}
 
 ```javascript
-// コンテキスト付きでカスタムエラーを送信
+// Send a custom error with context
 const error = new Error('Something wrong occurred.');
 
 window.DD_RUM && window.DD_RUM.addError(error, {
     pageStatus: 'beta',
 });
 
-// ネットワークエラーを送信
+// Send a network error
 fetch('<SOME_URL>').catch(function(error) {
     window.DD_RUM && window.DD_RUM.addError(error);
 })
 
-// 処理済みの例外エラーを送信
+// Send a handled exception error
 try {
-    //コードロジック
+    //Some code logic
 } catch (error) {
     window.DD_RUM && window.DD_RUM.addError(error);
 }
@@ -142,13 +143,13 @@ try {
 {{% /tab %}}
 {{< /tabs >}}
 
-### React エラー境界のインスツルメンテーション
+### React error boundaries instrumentation
 
-React [エラー境界][5]をインスツルメンテーションして、RUM ブラウザ SDK の `addError()` API を使用して React のレンダリングエラーを監視できます。
+You can instrument the React [error boundaries][5] to monitor React rendering errors using the RUM Browser SDK `addError()` API.
 
-収集されたレンダリングエラーにはコンポーネントスタックが含まれます。コンポーネントスタックは、[ソースマップをアップロード][6]した後は、他のエラースタックトレースと同様に非縮小化されます。
+The collected rendering errors contain a component stack, which is unminified like any other error stack traces after you [upload sourcemaps][6].
 
-React のエラー境界を監視用にインスツルメンテーションするには、以下を使用します。
+To instrument React error boundaries for monitoring, use the following:
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -173,7 +174,7 @@ class ErrorBoundary extends React.Component {
 ```
 
 {{% /tab %}}
-{{% tab "CDN 非同期" %}}
+{{% tab "CDN async" %}}
 
 ```javascript
 class ErrorBoundary extends React.Component {
@@ -195,7 +196,7 @@ class ErrorBoundary extends React.Component {
 ```
 
 {{% /tab %}}
-{{% tab "CDN 同期" %}}
+{{% tab "CDN sync" %}}
 
 ```javascript
 class ErrorBoundary extends React.Component {
@@ -220,42 +221,42 @@ class ErrorBoundary extends React.Component {
 {{< /tabs >}}
 
 
-## ヘルプ
+## Troubleshooting
 
-### スクリプトエラー
+### Script error
 
-セキュリティ上の理由から、クロスオリジンスクリプトによりトリガーされるエラーの詳細はブラウザに表示されません。この場合、Error Details タブには "Script error." というエラーメッセージのみが表示されます。
+For security reasons, browsers hide details from errors triggered by cross-origin scripts. When this happens, the Error Details tab shows an error with the minimal message "Script error."
 
-{{< img src="real_user_monitoring/browser/script-error.png" alt="リアルユーザーモニタリングでのスクリプトエラーの例" style="width:75%;" >}}
+{{< img src="real_user_monitoring/browser/script-error.png" alt="Real User Monitoring script error example" style="width:75%;" >}}
 
-クロスオリジンスクリプトについての詳細と、詳細が表示されない理由については [CORS][7] および [グローバルイベントハンドラーについてのこちらの注釈][8]を参照してください。このエラーが発生する原因としては以下のようなものがあります。
-- JavaScript ファイルが異なるホスト名 (例: `example.com` に `static.example.com` からのアセットが含まれるなど) でホスティングされている。
-- ウェブサイトに CDN 上でホストされる JavaScript ライブラリが含まれている。
-- ウェブサイトに、プロバイダーのサーバー上でホストされるサードパーティの JavaScript ライブラリが含まれている。
+For more information about cross-origin scripts and why details are hidden, see [CORS][7] and [this Note on Global Event Handlers][8]. Some possible reasons for this error include:
+- Your JavaScript files are hosted on a different hostname (for instance, `example.com` includes assets from `static.example.com`).
+- Your website includes JavaScript libraries hosted on a CDN.
+- Your website includes third-party JavaScript libraries hosted on the provider's servers.
 
-以下の 2 つのステップに従ってクロスオリジンスクリプトを可視化します。
-1. [`crossorigin="anonymous"`][9] で JavaScript ライブラリを呼び出します。
+Get visibility into cross-origin scripts by following these two steps:
+1. Call JavaScript libraries with [`crossorigin="anonymous"`][9].
 
-   `crossorigin="anonymous"` で、スクリプトをフェッチするリクエストが安全に実行されます。Cookie や HTTP 認証を通じて機密データが転送されることはありません。
+    With `crossorigin="anonymous"`, the request to fetch the script is performed securely. No sensitive data is forwarded through cookies or HTTP authentication.
 
-2. [`Access-Control-Allow-Origin`][10] HTTP レスポンスヘッダーを構成します。
+2. Configure the [`Access-Control-Allow-Origin`][10] HTTP response header:
 
-    - すべてのオリジンがリソースを取得できるようになる `Access-Control-Allow-Origin: *` 
-    - 許可された 1 つのオリジンを指定する `Access-Control-Allow-Origin: example.com`。サーバーが複数のオリジンのクライアントをサポートする場合、リクエストを行う特定のクライアントのオリジンを返さなければなりません。
+    - `Access-Control-Allow-Origin: *` to allow all origins to fetch the resource.
+    - `Access-Control-Allow-Origin: example.com` to specify a single allowed origin. If the server supports clients from multiple origins, it must return the origin for the specific client making the request.
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /ja/real_user_monitoring/browser/data_collected/
-[2]: /ja/real_user_monitoring/browser/advanced_configuration/
+[1]: /real_user_monitoring/browser/data_collected/
+[2]: /real_user_monitoring/browser/advanced_configuration/
 [3]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error
-[4]: /ja/real_user_monitoring/error_tracking
+[4]: /real_user_monitoring/error_tracking
 [5]: https://legacy.reactjs.org/docs/error-boundaries.html
-[6]: /ja/real_user_monitoring/guide/upload-javascript-source-maps/?tab=webpackjs#upload-your-source-maps
+[6]: /real_user_monitoring/guide/upload-javascript-source-maps/?tab=webpackjs#upload-your-source-maps
 [7]: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
 [8]: https://developer.mozilla.org/en-US/docs/Web/API/GlobalEventHandlers/onerror#notes
 [9]: https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/crossorigin
 [10]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin
-[11]: /ja/real_user_monitoring/guide/upload-javascript-source-maps/?tab=webpackjs
+[11]: /real_user_monitoring/guide/upload-javascript-source-maps/?tab=webpackjs

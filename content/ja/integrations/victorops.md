@@ -1,73 +1,74 @@
 ---
-categories:
-- alerting
-- notifications
-dependencies: []
-description: VictorOps を Datadog のアラートとイベントで通知チャンネルとして使用。
-doc_link: https://docs.datadoghq.com/integrations/victorops/
-draft: false
-git_integration_title: victorops
-has_logo: true
-integration_id: victorops
-integration_title: VictorOps
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: '1.0'
-name: victorops
-public_title: Datadog-VictorOps インテグレーション
-short_description: VictorOps を Datadog のアラートとイベントで通知チャンネルとして使用。
-version: '1.0'
+"categories":
+- "alerting"
+- "notifications"
+"custom_kind": "integration"
+"dependencies": []
+"description": "Use VictorOps as a notification channel in Datadog alerts and events."
+"doc_link": "https://docs.datadoghq.com/integrations/victorops/"
+"draft": false
+"git_integration_title": "victorops"
+"has_logo": true
+"integration_id": "victorops"
+"integration_title": "VictorOps"
+"integration_version": ""
+"is_public": true
+"manifest_version": "1.0"
+"name": "victorops"
+"public_title": "Datadog-VictorOps Integration"
+"short_description": "Use VictorOps as a notification channel in Datadog alerts and events."
+"version": "1.0"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-## 概要
+## Overview
 
-Datadog-VictorOps インテグレーションを使用して、Datadog のアラートを VictorOps に送信し、ルーティングとエスカレーションに対して高精度な制御を行うことができます。**@victorops** を使用して、以下の方法でアラートを作成することで、問題を迅速に見つけ、解決までの時間を短縮できます。
+Use the Datadog-VictorOps integration to send Datadog alerts to VictorOps and gain precise control over routing and escalation. See the problems faster, and reduce time to resolution by creating alerts using **@victorops**:
 
-- イベントストリームから作成
-- スナップショットを取得して作成
-- メトリクスアラートがトリガーされたときに作成
+- From your event stream
+- By taking a snapshot
+- When a metric alert is triggered
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-1. VictorOps の設定ページで "Integrations" をクリックします。
-2. "Datadog" をクリックし、"Enable Integration" をクリックします。
-3. キーをコピーします。
-4. Datadog に戻り、API キーを次のセクションに貼り付けます。
+1. On your VictorOps settings page, click "Integrations"
+2. Click "Datadog", then "Enable Integration"
+3. Copy your key
+4. Back to Datadog, paste the API key in the next section here
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 
-VictorOps インテグレーションには、メトリクスは含まれません。
+The VictorOps integration does not include any metric.
 
-### ヘルプ
+### Events
 
-VictorOps インテグレーションには、イベントは含まれません。
+The VictorOps integration does not include any events.
 
-### ヘルプ
+### Service Checks
 
-VictorOps インテグレーションには、サービスのチェック機能は含まれません。
+The VictorOps integration does not include any service checks.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][1]までお問合せください。
+Need help? Contact [Datadog support][1].
 
-## その他の参考資料
+## Further Reading
 
-### ナレッジベース
+### Knowledge base
 
-#### ルーティングキー
+#### Routing keys
 
-特定の VictorOps ユーザー宛にアラートを送信するには、Datadog におけるすべてのルーティングキーをリストします。キーが設定されていない場合、VictorOps は既定のグループにアラートを送信します。その後、`@victorops` を使用してアラートを受信する VictorOps エンドポイントを選択します。
+To direct alerts to specific VictorOps users, list all your routing keys in Datadog. If no keys are set up, VictorOps sends the alert to the default group. Then, choose the VictorOps endpoint that should receive the alert by using `@victorops`.
 
-名前には、特殊文字を使用できません。英大文字/小文字、数字、'\_'、'-' を使用できます。
+Special characters are not allowed in the names. Upper/lower case letters, numbers, '\_' and '-' are allowed.
 
-### カスタムエンドポイントの選択
+### Choose a custom endpoint
 
-このフィールドを空白にした場合、デフォルトのエンドポイントは 'https://alert.victorops.com/integrations/datadog/20140523/alert' になります。
+If this field is empty, the default endpoint is 'https://alert.victorops.com/integrations/datadog/20140523/alert'
 
-[1]: https://docs.datadoghq.com/ja/help/
+[1]: https://docs.datadoghq.com/help/
+

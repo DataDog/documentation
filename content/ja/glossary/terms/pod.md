@@ -1,6 +1,6 @@
 ---
+title: Pod
 core_product:
-- infrastructure monitoring
-title: ポッド
+  - infrastructure monitoring
 ---
-Kubernetes では、ポッドはデプロイ可能な最小のコンピューティング単位です。
+In Kubernetes, a Pod is the smallest deployable unit of computing.

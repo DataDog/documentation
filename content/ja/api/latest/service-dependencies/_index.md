@@ -1,3 +1,3 @@
 ---
-title: サービスの依存関係
+title: Service Dependencies
 ---

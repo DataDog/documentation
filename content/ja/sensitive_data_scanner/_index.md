@@ -1,181 +1,332 @@
 ---
+title: Sensitive Data Scanner
+kind: documentation
 aliases:
-- /ja/logs/log_configuration/sensitive_data_detection
-- /ja/account_management/org_settings/sensitive_data_detection
+    - /logs/log_configuration/sensitive_data_detection
+    - /account_management/org_settings/sensitive_data_detection
 further_reading:
-- link: /data_security/
-  tag: ドキュメント
-  text: データ関連リスクの低減
-- link: https://www.datadoghq.com/blog/scaling-sensitive-data-scanner/
-  tag: ブログ
-  text: 機密データスキャナーを使用して、機密データの問題を大規模に発見、トリアージ、そして修復する
-- link: https://www.datadoghq.com/blog/sensitive-data-scanner/
-  tag: ブログ
-  text: Datadog の機密データスキャナーで最新のデータコンプライアンス戦略を構築する
-- link: https://www.datadoghq.com/blog/sensitive-data-management-best-practices/
-  tag: ブログ
-  text: 機密データ管理のベストプラクティス
-kind: ドキュメント
-title: ヘルプ
+    - link: /data_security/
+      tag: Documentation
+      text: Reducing data related risks
+    - link: /sensitive_data_scanner/regular_expression_syntax
+      tag: Documentation
+      text: Regular expression syntax for custom scanning rules
+    - link: "https://www.datadoghq.com/blog/scaling-sensitive-data-scanner/"
+      tag: Blog
+      text: Discover, triage, and remediate sensitive data issues at scale with Sensitive Data Scanner
+    - link: "https://www.datadoghq.com/blog/sensitive-data-scanner/"
+      tag: Blog
+      text: Build a modern data compliance strategy with Datadog's Sensitive Data Scanner
+    - link: "https://www.datadoghq.com/blog/sensitive-data-management-best-practices/"
+      tag: Blog
+      text: Best practices for sensitive data management
 ---
 
-## 概要
+## Overview
 
-クレジットカード番号、銀行コード、API キーなどの機密データは、アプリケーションログ、APM スパン、RUM イベントで意図せずに公開されることが多く、組織が財務リスクやプライバシーリスクにさらされる可能性があります。
+Sensitive data, such as credit card numbers, bank routing numbers, and API keys are often exposed unintentionally in application logs, APM spans, and RUM events, which can expose your organization to financial and privacy risks.
 
-機密データスキャナーは、ストリームベースのパターンマッチングサービスで、機密データの特定、タグ付け、オプションで秘匿化やハッシュ化に使用されます。セキュリティおよびコンプライアンスチームは、機密データスキャナーを新たな防御策として導入し、機密データの漏洩防止とコンプライアンス違反リスクの抑制に役立てることができます。
+Sensitive Data Scanner is a stream-based, pattern matching service used to identify, tag, and optionally redact or hash sensitive data. Security and compliance teams can implement Sensitive Data Scanner as a new line of defense, helping prevent against sensitive data leaks and limiting non-compliance risks.
 
-機密データスキャナーを使用するためには、まずスキャングループを設定してスキャン対象のデータを定義し、次にスキャンルールを設定してデータ内でマッチングさせる機密情報を決定します。
+To use Sensitive Data Scanner, set up a scanning group to define what data to scan and then set up scanning rules to determine what sensitive information to match within the data.
 
-このドキュメントでは、以下について説明します。
+This document walks you through the following:
 
-- [機密データスキャナーの表示と設定に必要な権限](#permissions)
-- [機密データのスキャンの設定](#set-up-scanning-for-sensitive-data)
-- [すぐに使えるダッシュボードの使用](#out-of-the-box-dashboard)
+- The permissions required to view and set up Sensitive Data Scanner.
+- Setting up scanning for sensitive data.
+- Using the out-of-the-box dashboard.
 
-**注**: PCI 準拠の Datadog 組織のセットアップに関する情報については、[PCI DSS 準拠][1]を参照してください。
+**Note**: See [PCI DSS Compliance][1] for information on setting up a PCI-compliant Datadog organization.
 
-{{< img src="sensitive_data_scanner/sds_main_12_01_24.png" alt="12 個のアクティブなスキャングループのうち 6 個が表示されている機密データスキャナーページ" style="width:90%;">}}
+{{< img src="sensitive_data_scanner/sds_main_12_01_24.png" alt="The Sensitive Data Scanner page showing six out of the 12 active scanning groups" style="width:90%;">}}
 
-## ヘルプ
-
-デフォルトでは、Datadog 管理者ロールを持つユーザーは、スキャンルールを表示および設定するためのアクセス権を持っています。他のユーザーにアクセスを許可するには、**Compliance** で `data_scanner_read` または `data_scanner_write` の権限をカスタムロールに付与します。ロールと権限のセットアップ方法の詳細については、[アクセス制御][3]を参照してください。
-
-{{< img src="sensitive_data_scanner/read_write_permissions.png" alt="データスキャナーの読み取り権限と書き込み権限が表示されているコンプライアンス権限セクション" style="width:55%;">}}
+## Set up Sensitive Data Scanner
 
 
-## 機密データスキャナーの設定
+There are two locations where you can redact your sensitive data:
 
-このセクションでは、機密データスキャナーを設定するため、以下の内容について説明します。
+**In the cloud:**
 
-- [スキャングループの追加](#add-a-scanning-group)
-- [スキャンルールの追加](#add-scanning-rules)
-- [機密データを含むイベントへのアクセス制御](#control-access-to-events-with-sensitive-data)
+- With **Sensitive Data Scanner in the Cloud**, you submit your logs in the Datadog backend. In this method, logs leave your premises before they are redacted. You can have multiple scanning groups per organization, and you can create custom scanning rules. You can also redact sensitive data in tags.
 
-また、[タグ内の機密データを秘匿化する](#redact-sensitive-data-in-tags)こともできます。
+**In your environment:**
 
-### スキャングループの追加
+{{< callout url="https://www.datadoghq.com/private-beta/sensitive-data-scanner-using-agent-in-your-premises/" >}}
+  Sensitive Data Scanner using the Agent is in private beta. To request access, fill out this form.
+{{< /callout >}}
 
-スキャングループは、スキャンするデータを決定します。これは、ログ、APM、RUM、およびイベントのスキャンを有効にするためのクエリフィルターとトグルのセットで構成されています。クエリフィルターの詳細については、[ログ検索構文][4]のドキュメントを参照してください。
+- With **Sensitive Data Scanner using the Agent**, Datadog redacts your logs before submitting them to the Datadog backend, and unredacted logs never need to leave your premises. With this method, you are limited to one scanning group per organization, and you can use only predefined library rules.
 
-Terraform に関しては、[Datadog 機密データスキャナーグループ][5]のリソースを参照してください。
+- Another way to redact your sensitive data in your environment before shipping to your downstream destinations is by using [Observability Pipelines][14].
 
-スキャングループを設定するには:
-
-1. [機密データスキャナー][6]構成ページに移動します。または、**Organization Settings** > **Sensitive Data Scanner** に移動し、**Configuration** をクリックします。
-1. **Add scanning group** をクリックします。または、ページ右上にある **Add** ドロップダウンメニューをクリックし、**Add Scanning Group** を選択します。
-1. スキャンしたいデータのクエリーフィルターを入力します。フィルタリングされたスパンをプレビューするには、一番上の **APM Spans** をクリックします。フィルタリングされたログを表示するには、**Logs** をクリックします。
-1. グループの名前と説明を入力します。
-1. トグルボタンをクリックし、希望する製品 (例: ログ、APM スパン、RUM イベント、Datadog イベント) で機密データスキャナーを有効にします。
-1. **Create** をクリックします。
-
-### スキャンルールの追加
-
-スキャンルールは、スキャングループで定義されたデータ内のどの機密情報をマッチングさせるかを決定します。Datadog のスキャンルールライブラリから事前定義されたスキャンルールを追加するか、正規表現パターンを使って独自のルールを作成することができます。データは、処理の中で取り込みが行われる際にスキャンされます。ログの場合、これはインデックス化やその他のルーティング関連の決定の前にスキャンが行われることを意味します。
-
-Terraform に関しては、[Datadog 機密データスキャナールール][7]のリソースを参照してください。
-
-スキャンルールを追加するには:
-
-1. [機密データスキャナー][6]構成ページに移動します。
-1. スキャンルールを追加する対象のスキャングループをクリックします。
-1. **Add Scanning Rule** をクリックします。または、ページ右上にある **Add** ドロップダウンメニューをクリックし、**Add Scanning Rule** を選択します。
-1. ライブラリルールを追加するか、カスタムスキャンルールを作成するかを選択します。
+### Prerequisites
 
 {{< tabs >}}
-{{% tab "ライブラリルールからスキャンルールを追加する" %}}
+{{% tab "In the Cloud" %}}
+By default, users with the Datadog Admin role have access to view and set up scanning rules. To allow other users access, grant the `data_scanner_read` or `data_scanner_write` permissions under [Compliance][1] to a custom role. See [Access Control][2] for details on how to set up roles and permissions.
 
-スキャンルールライブラリには、メールアドレスやクレジットカード番号、API キー、認証トークンなどの一般的なパターンを検出するための、あらかじめ定義されたルールが含まれています。
+{{< img src="sensitive_data_scanner/read_write_permissions.png" alt="The compliance permissions sections showing data scanner read and writer permissions" style="width:80%;">}}
 
-1. **Add library rules to the scanning group** (スキャングループにライブラリルールを追加する) セクションで、使用したいライブラリルールを選択します。
-1. **Define rule target and action** (ルールの対象とアクションを定義する) セクションでは、スキャンする対象が **Entire Event** (イベント全体) か **Specific Attributes** (特定の属性) かを選択します。
-    - イベント全体をスキャンする場合、オプションで特定の属性をスキャン対象から除外することができます。
-    - 特定の属性をスキャンする場合は、スキャンする属性を指定します。
-{{% sds-scanning-rule %}}
-1. **Add Rules** をクリックします。
-
+[1]: /account_management/rbac/permissions/#compliance
+[2]: /account_management/rbac/
 {{% /tab %}}
-{{% tab "カスタムスキャンルールを追加する" %}}
+{{% tab "Using the Agent" %}}
 
-正規表現パターンを使用して機密データをスキャンするカスタムスキャンルールを作成できます。
+1. Grant appropriate permissions. By default, users with the Datadog Admin role have access to view and set up scanning rules. To allow other users access, grant the `data_scanner_read` or `data_scanner_write` permissions under [Compliance][1] to a custom role. See [Access Control][2] for details on how to set up roles and permissions.
 
-1. **Define match conditions** (一致条件を定義する) セクションの **Define regex** フィールドで、イベントのマッチングに使用する正規表現パターンを指定します。**Regex tester** フィールドにサンプルデータを入力して、正規表現パターンの有効性を検証します。
-    機密データスキャナーは Perl 互換正規表現 (PCRE) をサポートしていますが、以下のパターンはサポートされていません。
-    - 後方参照、およびサブマッチ文字列のキャプチャ (ルックアラウンド)
-    - 任意のゼロ幅マッチ
-    - サブルーチン参照および再帰的パターン
-    - 条件付きパターン
-    - バックトラック制御動詞
-    - `\C` "シングルバイト" ディレクティブ (UTF-8 の文字列を分割)
-    - `\R` 改行コードのマッチ
-    - `\K` マッチの開始位置のリセットディレクティブ
-    - コールアウトおよび埋め込みコード
-    - アトミックグループおよび絶対最大量指定子
-{{% sds-scanning-rule %}}
-1. **Add Rule** をクリックします。
+    {{< img src="sensitive_data_scanner/read_write_permissions.png" alt="The compliance permissions sections showing data scanner read and writer permissions" style="width:80%;">}}
+2. Follow the steps to [enable remote configuration][3].
+3. Install the Datadog Agent v7.54 or newer.
 
+[1]: /account_management/rbac/permissions/#compliance
+[2]: /account_management/rbac/
+[3]: /agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration
 {{% /tab %}}
 {{< /tabs >}}
 
-**注**:
+### Add a scanning group
 
-- 追加または更新するルールは、ルールが定義された後に Datadog に送られるデータにのみ影響します。
-- 機密データスキャナーは、Datadog Agent で直接定義するルールには影響しません。
-- 機密データスキャナーを完全にオフにするには、各スキャングループおよびスキャンルールのトグルを **off** に設定して無効化します。
+{{< tabs >}}
+{{% tab "In the Cloud" %}}
+A scanning group determines what data to scan. It consists of a query filter and a set of toggles to enable scanning for logs, APM, RUM, and events. See the [Log Search Syntax][2] documentation to learn more about query filters.
 
-機密データの問題をトリアージするための [Summary][9] ページの使い方について、詳しくは[機密データの問題を調査する][8]を参照してください。
+For Terraform, see the [Datadog Sensitive Data Scanner group][3] resource.
 
-### 機密データを含むログへのアクセス制御
+To set up a scanning group, perform the following steps:
 
-機密データを含むログにアクセスできるユーザーを制御するには、機密データスキャナーによって追加されたタグを使用して、ロールベースのアクセス制御 (RBAC) の付いたクエリを作成します。保持期間後にデータが期限切れになるまで、特定の個人またはチームにアクセスを限定できます。詳しくは、[ログ用に RBAC を設定する方法][10]を参照してください。
+1. Navigate to the [Sensitive Data Scanner][1] configuration page.
+1. Click **Add scanning group**. Alternatively, click the **Add** dropdown menu on the top right corner of the page and select **Add Scanning Group**.
+1. Enter a query filter for the data you want to scan. At the top, click **APM Spans** to preview the filtered spans. Click **Logs** to see the filtered logs.
+1. Enter a name and description for the group.
+1. Click the toggle buttons to enable Sensitive Data Scanner for the products you want (for example, logs, APM spans, RUM events, and Datadog events).
+1. Click **Create**.
 
-### タグ内の機密データの秘匿化
+[1]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner/configuration
+[2]: /logs/explorer/search_syntax/
+[3]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/sensitive_data_scanner_group
+{{% /tab %}}
+{{% tab "Using the Agent" %}}
+<div class="alert alert-warning"><strong>Note</strong>: Sensitive Data Scanner using the Agent supports only one scanning group per organization.</div>
 
-タグに含まれる機密データを秘匿化するには、タグを属性に[リマップ[11]してから、その属性を秘匿化する必要があります。リマッピング中にタグが保存されないように、リマッパープロセッサーで `Preserve source attribute` のチェックを外してください。
+A scanning group determines what logs to scan. It consists of a query filter to match eligible agents based on host tags.
 
-タグを属性にリマップするには:
+To set up a scanning group, perform the following steps:
 
-1. [ログパイプライン][12]に移動します。
-2. **Add Processor** をクリックします。
-3. プロセッサーの種類のドロップダウンメニューで **Remapper** を選択します。
-4. プロセッサーに名前を付けます。
-5. **Tag key(s)** を選択します。
-6. タグキーを入力します。
-7. タグキーをリマップする属性の名前を入力します。
-8. **Preserve source attribute** を無効にします。
-9. **Create** をクリックします。
+1. Navigate to the [Sensitive Data Scanner using the Agent][1] configuration page.
+1. Click **Add scanning group**. Alternatively, click the **Add** dropdown menu on the top right corner of the page and select **Add Scanning Group**.
+1. Enter a query filter for the data you want to scan. You can use only host-level tags for matching agents. At the bottom, the number of matching and eligible agents is displayed, including the total number out of all agents that match the tag.
+1. Enter a name and description for the group.
+1. Click **Save**.
 
-属性を秘匿化するには:
+[1]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner/configuration/agent
+[2]: /logs/explorer/search_syntax/
+[3]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/sensitive_data_scanner_group
+{{% /tab %}}
+{{< /tabs >}}
 
-1. [スキャングループ][6]に移動します。
-2. **Add Scanning Rule** をクリックします。
-3. 使用したいライブラリルールにチェックを入れます。
-4. **Scan entire event or portion of it** (イベント全体またはその一部をスキャンする)で **Specific Attributes** を選択します。
-5. 予め作成しておいた属性の名前を入力し、スキャンの対象に指定します。
-6. マッチングした場合のアクションを選択します。
-7. オプションで、タグを追加します。
-8. **Add Rules** をクリックします。
+By default, a newly-created scanning group is disabled. To enable a scanning group, click the corresponding toggle on the right side.
 
-## すぐに使えるダッシュボード
+### Add scanning rules
 
-機密データスキャナーを有効にすると、[すぐに使えるダッシュボード][13]が自動的にアカウントにインストールされ、機密データの診断結果の要約を見ることができます。このダッシュボードにアクセスするには、**Dashboards > Dashboards List** に移動し、 `Sensitive Data Scanner Overview` を検索します。
+{{< tabs >}}
+{{% tab "In the Cloud" %}}
+A scanning rule determines what sensitive information to match within the data defined by a scanning group. You can add predefined scanning rules from Datadog's Scanning Rule Library or create your own rules using regex patterns. The data is scanned at ingestion time during processing. For logs, this means the scan is done before indexing and other routing decisions.
 
-{{<img src="sensitive_data_scanner/sdslight.png" alt="Sensitive Data Scanner Overview dashboard" style="width:70%;">}}
+For Terraform, see the [Datadog Sensitive Data Scanner rule][2] resource.
 
-## その他の参考資料
+To add scanning rules, perform the following steps:
+
+1. Navigate to the [Sensitive Data Scanner][1] configuration page.
+1. Click the scanning group where you want to add the scanning rules.
+1. Click **Add Scanning Rule**. Alternatively, click the **Add** dropdown menu on the top right corner of the page and select **Add Scanning Rule**.
+1. Select whether you want to add a library rule or create a custom scanning rule.
+
+{{< collapse-content title="Add scanning rule from the library rules" level="p" >}}
+
+The Scanning Rule Library contains predefined rules for detecting common patterns such as email addresses, credit card numbers, API keys, authorization tokens, and more.
+
+1. In the **Add library rules to the scanning group** section, select the library rules you want to use.
+1. In the **Define rule target and action** section, select if you want to scan the **Entire Event** or **Specific Attributes**.
+    - If you are scanning the entire event, you can optionally exclude specific attributes from getting scanned.
+    - If you are scanning specific attributes, specify which attributes you want to scan.
+{{% sds-scanning-rule %}}
+1. Click **Add Rules**.
+
+{{< /collapse-content >}} 
+{{< collapse-content title="Add a custom scanning rule" level="p" >}}
+You can create custom scanning rules using regex patterns to scan for sensitive data.
+
+1. In the **Define match conditions** section, specify the regex pattern to use for matching against events in the **Define regex** field. Enter sample data in the **Regex tester** field to verify that your regex pattern is valid.   
+    Sensitive Data Scanner supports Perl Compatible Regular Expressions (PCRE), but the following patterns are not supported:
+    - Backreferences and capturing sub-expressions (lookarounds)
+    - Arbitrary zero-width assertions
+    - Subroutine references and recursive patterns
+    - Conditional patterns
+    - Backtracking control verbs
+    - The `\C` "single-byte" directive (which breaks UTF-8 sequences)
+    - The `\R` newline match
+    - The `\K` start of match reset directive
+    - Callouts and embedded code
+    - Atomic grouping and possessive quantifiers
+{{% sds-scanning-rule %}}
+1. Click **Add Rule**.
+{{< /collapse-content >}} 
+
+**Notes**:
+
+- Any rules that you add or update affect only data coming into Datadog after the rule was defined.
+- Sensitive Data Scanner does not affect any rules you define on the Datadog Agent directly.
+- After rules are added, ensure that the toggles for your scanning groups are enabled to begin scanning.
+
+See [Investigate Sensitive Data Issues][3] for details on how to use the [Summary][4] page to triage your sensitive data issues.
+
+[1]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner/configuration
+[2]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/sensitive_data_scanner_rule
+[3]: /sensitive_data_scanner/investigate_sensitive_data_issues/
+[4]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner/summary
+
+{{% /tab %}}
+{{% tab "Using the Agent" %}}
+
+A scanning rule determines what sensitive information to match within the data defined by a scanning group. The Datadog Agent scans your data in your local environment during log collection, before logs are sent to the Datadog platform.
+
+<div class="alert alert-warning"><strong>Note</strong>: Sensitive Data Scanner using the Agent supports only predefined scanning rules from Datadog's Scanning Rule Library. The total number of scanning rules is limited to 20.</div>
+
+To add scanning rules, perform the following steps:
+
+1. Navigate to the [Sensitive Data Scanner using the Agent][1] configuration page.
+1. Click **Add Scanning Rule**. Alternatively, click the **Add** dropdown menu on the top right corner of the page and select **Add Scanning Rule**.
+1. In the **Add library rules to the scanning group** section, select the library rules you want to use. Use the **Filter library rules** input to search existing library rules. Next to the rule name you can find the list of predefined tags for each rule.
+1. In the **Define rule target and action** section, select the action that you want to take for the matched sensitive information. **Note**: Redaction, partial redaction, and hashing are all irreversible actions.
+    - **Redact**: Replaces all matching values with the text you specify in the **Replacement text** field.
+    - **Partially Redact**: Replaces a specified portion of all matched data. In the **Redact** section, specify the number of characters you want to redact and which part of the matched data to redact.
+    - **Hash**: Replaces all matched data with a unique identifier. The UTF-8 bytes of the match is hashed with the 64-bit fingerprint of FarmHash.
+1. Optionally, add additional tags you want to associate with events where the values match the specified regex pattern. Datadog adds `sensitive_data` and `sensitive_data_category` tags by default. These tags can then be used in searches, dashboards, and monitors. See [Control access to logs with sensitive data](#control-access-to-logs-with-sensitive-data) for information on how to use tags to determine who can access logs containing sensitive information.
+1. Click **Save**.
+
+**Notes**:
+
+- Any rules that you add or update affect only data coming into Datadog after the rule was defined.
+- After rules are added, ensure that the toggles for your scanning groups are enabled to begin scanning.
+
+[1]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner/configuration/agent
+[2]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/sensitive_data_scanner_rule
+{{% /tab %}}
+{{< /tabs >}}
+
+### Edit scanning rules
+
+{{< tabs >}}
+{{% tab "In the Cloud" %}}
+
+1. Navigate to the [Sensitive Data Scanner][1] configuration page.
+1. Hover over the scanning rule you want to edit and click the **Edit** (pencil) icon.
+
+   The **Define match conditions** section shows either the regular expression you wrote for your custom rule or an explanation of the library scanning rule you chose along with examples of matched sensitive information.
+1. To make sure that a rule matches your data, you can provide a sample in the **Add sample data** section. If the rule finds matches in the sample data, a green **Match** label appears next to the input field.
+1. Under **Create keyword dictionary**, you can add keywords to refine detection accuracy. For example, if you are scanning for a sixteen-digit Visa credit card number, you can add keywords like `visa`, `credit`, and `card`.
+1. Choose the number of characters before a match that the keyword must appear in. By default, keywords must be within 30 characters before a match.
+1. Optionally, under **Define rule target and action**, edit the tags that you want to associate with events where the values match the rule. Datadog recommends using `sensitive_data` and `sensitive_data_category` tags, which can be used in searches, dashboards, and monitors. See [Control access to logs with sensitive data](#control-access-to-logs-with-sensitive-data) for information on how to use tags to determine who can access logs that contain sensitive data.
+1. For **Set priority level**, choose a value based on your business needs.
+1. Click **Update**.
+
+[1]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner/configuration
+{{% /tab %}}
+{{% tab "Using the Agent" %}}
+
+1. Navigate to the [Sensitive Data Scanner using the Agent][1] configuration page.
+1. Hover over the scanning rule you want to edit and click the **Edit** (pencil) icon.
+
+   The **Define match conditions** section shows an explanation of the library scanning rule you chose along with examples of matched sensitive information.
+1. Under **Create keyword dictionary**, you can add keywords to refine detection accuracy. For example, if you are scanning for a sixteen-digit Visa credit card number, you can add keywords like `visa`, `credit`, and `card`.
+1. Choose the number of characters before a match that the keyword must appear in. By default, keywords must be within 30 characters before a match.
+1. Click **Save**.
+
+[1]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner/configuration/agent
+{{% /tab %}}
+{{< /tabs >}}
+
+
+### Control access to logs with sensitive data
+
+To control who can access logs containing sensitive data, use tags added by the Sensitive Data Scanner to build queries with role-based access control (RBAC). You can restrict access to specific individuals or teams until the data ages out after the retention period. See [How to Set Up RBAC for Logs][10] for more information.
+
+### Redact sensitive data in tags
+
+{{< tabs >}}
+{{% tab "In the Cloud" %}}
+To redact sensitive data contained in tags, you must [remap][2] the tag to an attribute and then redact the attribute. Uncheck `Preserve source attribute` in the remapper processor so that the tag is not preserved during the remapping.
+
+To remap the tag to an attribute:
+
+1. Navigate to your [log pipeline][3].
+2. Click **Add Processor**.
+3. Select **Remapper** in the processor type dropdown menu.
+4. Name the processor.
+5. Select **Tag key(s)**.
+6. Enter the tag key.
+7. Enter a name for the attribute the tag key is remapped to.
+8. Disable **Preserve source attribute**.
+9. Click **Create**.
+
+To redact the attribute:
+
+1. Navigate to your [scanning group][1].
+2. Click **Add Scanning Rule**.
+3. Check the library rules you want to use.
+4. Select **Specific Attributes** for **Scan entire event or portion of it**.
+5. Enter the name of the attribute you created earlier to specify that you want it scanned.
+6. Select the action you want when there's a match.
+7. Optionally, add tags.
+8. Click **Add Rules**.
+
+[1]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner/configuration
+[2]: /logs/log_configuration/processors/?tab=ui#remapper
+[3]: https://app.datadoghq.com/logs/pipelines
+{{% /tab %}}
+{{% tab "Using the Agent" %}}
+This functionality is not available for Sensitive Data Scanner using the Agent.
+{{% /tab %}}
+{{< /tabs >}}
+
+## Data Security
+
+<div class="alert alert-warning">Data Security is in private beta. To enroll in the private beta, <a href="https://www.datadoghq.com/private-beta/data-security">sign up here</a>.</div>
+
+If you have [Sensitive Data Scanner][8] and [Cloud Security Management][16] enabled, you can use Data Security to locate sensitive data and fix security issues impacting AWS S3 buckets and RDS instances.
+
+Data Security scans for sensitive data by deploying [Agentless scanners][17] in your cloud environments. These scanning instances retrieve a list of all S3 buckets and RDS instances through [Remote Configuration][18], and have set instructions to scan text files—such as CSVs and JSONs—and tables in every datastore over time. Data Security leverages rules provided by Sensitive Data Scanner to find matches. When a match is found, the location of the match is sent to Datadog by the scanning instance. Datastores and their files are only read in your environment—no sensitive data is sent back to Datadog.
+
+Along with displaying sensitive data matches, Data Security surfaces any security issues detected by Cloud Security Management affecting the sensitive datastores. You can click any issue to continue triage and remediation within Cloud Security Management.
+
+## Out-of-the-box dashboard
+
+When Sensitive Data Scanner is enabled, an [out-of-the-box dashboard][13] summarizing sensitive data findings is automatically installed in your account. To access this dashboard, go to **Dashboards > Dashboards List** and search for "Sensitive Data Scanner Overview".
+
+{{<img src="sensitive_data_scanner/sdslight.png" alt="Sensitive Data Scanner Overview dashboard" style="width:80%;">}}
+
+## Disable Sensitive Data Scanner
+
+To turn off Sensitive Data Scanner entirely, set the toggle to **off** for each Scanning Group so that they are disabled.
+
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/data_security/pci_compliance/
-[2]: /ja/account_management/rbac/permissions/#compliance
-[3]: /ja/account_management/rbac/
-[4]: /ja/logs/explorer/search_syntax/
+[1]: /data_security/pci_compliance/
+[2]: /account_management/rbac/permissions/#compliance
+[3]: /account_management/rbac/
+[4]: /logs/explorer/search_syntax/
 [5]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/sensitive_data_scanner_group
 [6]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner/configuration
 [7]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/sensitive_data_scanner_rule
-[8]: /ja/sensitive_data_scanner/investigate_sensitive_data_issues/
+[8]: /sensitive_data_scanner/investigate_sensitive_data_issues/
 [9]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner/summary
-[10]: /ja/logs/guide/logs-rbac/
-[11]: /ja/logs/log_configuration/processors/?tab=ui#remapper
+[10]: /logs/guide/logs-rbac/
+[11]: /logs/log_configuration/processors/?tab=ui#remapper
 [12]: https://app.datadoghq.com/logs/pipelines
 [13]: https://app.datadoghq.com/dash/integration/sensitive_data_scanner
+[14]: /observability_pipelines/sensitive_data_redaction/
+[16]: /security/cloud_security_management
+[17]: /security/cloud_security_management/setup/agentless_scanning
+[18]: /agent/remote_config

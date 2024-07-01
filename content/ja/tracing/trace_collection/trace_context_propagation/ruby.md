@@ -1,60 +1,65 @@
 ---
+title: Propagating Ruby Trace Context
+kind: documentation
 code_lang: ruby
+type: multi-code-lang
 code_lang_weight: 20
 further_reading:
-- link: https://www.datadoghq.com/blog/monitor-otel-with-w3c-trace-context/
-  tag: ブログ
-  text: W3C Trace Context に対応した OpenTelemetry インスツルメンテーションされたアプリのモニタリング
-title: Ruby トレースコンテキストの伝搬
-type: multi-code-lang
+    - link: "https://www.datadoghq.com/blog/monitor-otel-with-w3c-trace-context/"
+      tag: Blog
+      text: Monitor OpenTelemetry-instrumented apps with support for W3C Trace Context
+    - link: /opentelemetry/guide/otel_api_tracing_interoperability
+      tag: Documentation
+      text: Interoperability of OpenTelemetry API and Datadog instrumented traces
 ---
 
-### B3 ヘッダーの抽出と挿入
+<div class="alert alert-info">This documentation is for <code>datadog</code> gem v2.x. If you are looking for <code>ddtrace</code> gem v1.x documentation, see the legacy <a href="/tracing/trace_collection/trace_context_propagation/ruby_v1">Propagating Ruby Trace Context
+</a> documentation.</div>
 
-Datadog APM トレーサーは、分散型トレーシングのための [B3][6] と [W3C Trace Context][7] のヘッダー抽出と挿入をサポートしています。
+### Headers extraction and injection
 
-分散したヘッダーの挿入と抽出は、挿入および抽出スタイルを構成することで制御されます。次の 2 つのスタイルがサポートされています。
+Datadog APM tracer supports [B3][6] and [W3C Trace Context][7] header extraction and injection for distributed tracing.
 
-- Datadog: `Datadog`
-- B3 マルチヘッダー: `b3multi`
-- B3 シングルヘッダー: `b3`
+Distributed headers injection and extraction is controlled by configuring injection and extraction styles. The following styles are supported:
+
+- Datadog: `datadog`
+- B3 Multi Header: `b3multi`
+- B3 Single Header: `b3`
 - W3C Trace Context: `tracecontext`
-- ノーオペレーション: `none`
+- No-op: `none`
 
-挿入スタイルは次を使って構成できます:
+Injection styles can be configured using:
 
-- 環境変数: `DD_TRACE_PROPAGATION_STYLE_INJECT=Datadog,b3`
+- Environment Variable: `DD_TRACE_PROPAGATION_STYLE_INJECT=datadog,b3`
 
-環境変数の値は、挿入が有効になっているヘッダースタイルのカンマ区切りリストです。デフォルトでは、`Datadog` 挿入スタイルのみが有効になっています。
+The value of the environment variable is a comma-separated list of header styles that are enabled for injection. The default setting is `datadog,tracecontext`.
 
-抽出スタイルは次を使って構成できます:
+Extraction styles can be configured using:
 
-- 環境変数: `DD_TRACE_PROPAGATION_STYLE_EXTRACT=Datadog,b3`
+- Environment Variable: `DD_TRACE_PROPAGATION_STYLE_EXTRACT=datadog,b3`
 
-環境変数の値は、抽出が有効になっているヘッダースタイルのカンマ区切りリストです。
+The value of the environment variable is a comma-separated list of header styles that are enabled for extraction. The default setting is `datadog,tracecontext`.
 
-複数の抽出スタイルが有効になっている場合、抽出試行はスタイルの構成順で実行され、最初に成功した抽出値が使われます。
+The default extraction styles are, in order, `datadog` and `tracecontext`.
 
-デフォルトの抽出スタイルは、順番に `Datadog`、`b3multi`、`b3` です。
-
-また、`Datadog.configure` を使用することで、コード上でこれらのフォーマットの使用を有効または無効にすることができます。
+You can also enable or disable the use of these formats in code by using `Datadog.configure`:
 
 ```ruby
 Datadog.configure do |c|
-  # 抽出すべきヘッダーフォーマットのリスト
-  c.tracing.distributed_tracing.propagation_extract_style = [ 'tracecontext', 'Datadog', 'b3' ]
+  # List of header formats that should be extracted
+  c.tracing.propagation_extract_style = [ 'tracecontext', 'datadog', 'b3' ]
 
-  # 挿入すべきヘッダーフォーマットのリスト
-  c.tracing.distributed_tracing.propagation_inject_style = [ 'tracecontext', 'Datadog' ]
+  # List of header formats that should be injected
+  c.tracing.propagation_inject_style = [ 'tracecontext', 'datadog' ]
 end
 ```
 
-トレースコンテキストの伝播の構成については、Ruby トレーシングライブラリ構成ドキュメントの[分散型トレーシングのセクション][1]をお読みください。
+For more information about trace context propagation configuration, read [the Distributed Tracing section][1] in the Ruby Tracing Library Configuration docs.
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/tracing/trace_collection/dd_libraries/ruby/#distributed-tracing
+[1]: /tracing/trace_collection/dd_libraries/ruby/#distributed-tracing
 [6]: https://github.com/openzipkin/b3-propagation
 [7]: https://www.w3.org/TR/trace-context/#trace-context-http-headers-format

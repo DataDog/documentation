@@ -1,102 +1,102 @@
 ---
+title: Live Process Monitor
+description: "Check if a process is running on a host"
 aliases:
-- /ja/monitors/monitor_types/process
-- /ja/monitors/create/types/process/
-description: ホストでプロセスが実行されているかをチェックする
+- /monitors/monitor_types/process
+- /monitors/create/types/process/
 further_reading:
 - link: /monitors/notify/
-  tag: ドキュメント
-  text: モニター通知の設定
+  tag: Documentation
+  text: Configure your monitor notifications
 - link: /monitors/downtimes/
-  tag: ドキュメント
-  text: モニターをミュートするダウンタイムのスケジュール
+  tag: Documentation
+  text: Schedule a downtime to mute a monitor
 - link: /monitors/manage/status/
-  tag: ドキュメント
-  text: モニターステータスを確認
-- link: https://www.datadoghq.com/blog/monitor-fargate-processes/
-  tag: ブログ
-  text: AWS Fargate 上で実行されるプロセスを Datadog で監視する
-title: ライブプロセスモニター
+  tag: Documentation
+  text: Check your monitor status
+- link: "https://www.datadoghq.com/blog/monitor-fargate-processes/"
+  tag: Blog
+  text: Monitor processes running on AWS Fargate with Datadog
 ---
 
-## 概要
+## Overview
 
-ライブプロセスモニターは、[Process Agent][1] によって収集されるデータを基に機能します。複数のホストまたはタグにまたがるプロセスグループのカウントに基づいて、警告またはアラートを生成するモニターを作成しましょう。
+Live Process Monitors are based on data collected by the [Process Agent][1]. Create monitors that warn or alert based on the count of any group of processes across hosts or tags.
 
-ライブプロセスモニターは、以下のような場合に最適です。
+Live Process Monitors are best used in the following scenarios:
 
-- コンテナ化されていない長寿命プロセスのインスタンスが十分に実行されていることを確認する。
-- 特定のプロセスが実行中である場合にフラグを立てる。
+- Ensure that enough instances of a non-containerized long-lived process are running.
+- Flag when a specific process is running.
 
-**注**: Agent によって検出されるのは長寿命のプロセスのみです。20 秒未満の寿命のプロセスのモニターは不安定になる可能性があります。
+**Note**: Only long-lived processes are picked up by the Agent. Monitors on processes that live for less than 20 seconds may be flaky.
 
-## モニターの作成
+## Monitor creation
 
-ライブプロセスモニターを作成するには 2 つの方法があります。
+There are two ways to create a Live Process Monitor:
 
-- メインナビゲーションで、**Monitors --> New Monitor --> Live Process** の順に選択する。
-- [ライブプロセスページ][4]で、監視したいプロセスを検索します。次に、**+New Metric** の隣にあるドロップダウンメニューをクリックし、**Create monitor** をクリックします。
+- Using the main navigation: **Monitors --> New Monitor --> Live Process**.
+- On the [Live Process page][4], search for a process you want to monitor. Then click the dropdown menu next to **+New Metric** and click **Create monitor**.
 
-### プロセスの選択
+### Select processes
 
-タグまたはあいまい検索を使用して、インフラストラクチャー内のすべてのプロセスをフィルタリングできます。一致するプロセスとカウントは、検索の下に表示されます。
+You can use either tags or a fuzzy text search to filter across all processes in your infrastructure. Matching processes and counts are displayed below the search:
 
-{{< img src="monitors/monitor_types/process/select_processes.png" alt="プロセスの選択" style="width:90%;">}}
+{{< img src="monitors/monitor_types/process/select_processes.png" alt="Select processes" style="width:90%;">}}
 
-検索を定義すると、検索入力の上にグラフが表示され、見つかったプロセスの総数の概算が表示されます。モニターのスコープは数千プロセス程度にしておくことをお勧めします。必要に応じて、追加のタグを使用して検索を絞り込むか、モニターを複数に分割することを検討してください。より詳細なデータについては、[ライブプロセスページ][4]を参照してください。
+After defining your search, a graph is displayed above the search inputs with an approximation of the total number of processes found. It is recommended to keep your monitor scoped to a few thousand processes. Use additional tags to narrow the search down or consider splitting a monitor into multiple ones if needed. For more granular data, see the [Live Process page][4].
 
-#### タグ検索
+#### Tags search
 
-タグで監視するプロセスをフィルタリングします。Datadog は、全文検索を使用する前に、タグでプロセスをフィルタリングしてみることをお勧めします。
+Filter processes to monitor by their tags. Datadog recommends trying to filter processes by their tags before using the full text search.
 
-#### 全文検索
+#### Full text search
 
-タグを使用して希望する粒度までプロセスを絞り込めない場合は、テキスト検索を使用してコマンドラインとユーザー名の両方に対してフィルタリングすることができます。この検索では、インフラストラクチャー上のすべてのプロセスに対して部分一致検索とあいまい検索を行います。検索演算子 `AND`、`OR`、`NOT` がサポートされています。詳細は[ライブプロセスモニタリングのドキュメント][3]を参照してください。
+If you cannot scope processes down to the granularity you would like using tags, you can use text search to filter against both command lines and username. The search performs a partial match and fuzzy searches across all processes on your infrastructure. Search operators `AND`, `OR`, and `NOT` are supported. See the [Live Process Monitoring documentation][3] for more details.
 
-##### 例
+##### Examples
 
-| クエリの例 | 説明 |
+| Example Query | Explanation |
 |---|---|
-| `foo AND bar` | コマンドラインに `foo` と `bar` の両方が含まれるプロセスにマッチします |
-| `foo AND NOT bar` | コマンドラインに `bar` ではなく `foo` が含まれるプロセスにマッチします。 |
-| `foo OR bar` | `foo` または `bar` が含まれるプロセスにマッチします。 |
-| `foo or NOT bar` | `foo` が含まれるか、`bar` が含まれないプロセスにマッチします。 |
+| `foo AND bar` | Matches any process whose command line contains both `foo` and `bar` |
+| `foo AND NOT bar` | Matches any process whose command line contains `foo` but not `bar`. |
+| `foo OR bar` | Matches any process that contains `foo` or `bar`. |
+| `foo or NOT bar` | Matches any process that contains `foo` or does not contain `bar`. |
 
-#### アラートのグループ化
+#### Alert grouping
 
-`シンプルアラート` (デフォルト): すべての報告元ソースに関わるアラートを集計します。集計値が設定条件を満たすと、アラートを 1 件受信します。
+`Simple Alert` (default): aggregates alerts over all reporting sources. You receive one alert when the aggregated value meets the set conditions.
 
-`マルチアラート`: グループパラメーターに従って、ソースごとにアラートを適用します。設定条件を満たすと各グループにつき 1 件のアラートを受信します。
+`Multi Alert`: applies the alert to each source according to your group parameters. You receive an alert for each group that meets the set conditions.
 
-### アラートの条件を設定する
+### Set alert conditions
 
-- プロセスカウントが `above`、`above or equal to`、`below`、または `below or equal to` の時
-- 過去 `5 minutes`、`15 minutes`、`1 hour` またはそれ以上のしきい値。また、`custom` を使用して 5 分～24 時間の値を設定することができます。
+- The process count was `above`, `above or equal to`, `below`, or `below or equal to`
+- the threshold during the last `5 minutes`, `15 minutes`, `1 hour`, or larger. Additionally, you can use `custom` to set a value between 5 minutes and 24 hours.
 
-この場合、プロセスカウントは、時間間隔中に生存していたすべてのマッチングプロセスの数を指します。
+Process Count, in this case, refers to the number of all matching processes that were alive during the time interval.
 
-閾値を使用してアラートをトリガーする数値を設定しましょう。Datadog で使用できる通知タイプは 2 種類 (アラートおよび警告) あります。ライブプロセスモニターはアラートまたは警告閾値に基づいて自動で復旧措置を講じます。
+Use thresholds to set a numeric value for triggering an alert. Datadog has two types of notifications: alert and warning. Live Process Monitors recover automatically based on the alert or warning threshold.
 
-#### 時間枠選択のベストプラクティス
+#### Best practices for timeframe selection
 
-ライブプロセスモニターは、[ローリングタイムウィンドウ][7]を使用してプロセス数を評価します。言い換えると、モニターは 1 分ごとに過去 X 分間をチェックし、アラート条件が満たされた場合にトリガーします。Process Agent と Datadog 間の散発的なネットワーク障害による誤検知を防ぐために、5 分未満の評価ウィンドウを使用することは推奨されません。
+Live Process Monitors use a [rolling time window][7] to evaluate process count. In other words, every minute, the monitor checks the past X minutes and triggers if the alerting condition is met. Using evaluation windows shorter than 5 minutes is discouraged in order to prevent any false positives due to sporadic network disruption between the Process Agent and Datadog.
 
-### 高度なアラート条件
+### Advanced alert conditions
 
-高度なアラートオプション (自動解決、評価遅延など) の詳細な手順については、[モニターコンフィギュレーション][5]ページを参照してください。
+For detailed instructions on the advanced alert options (auto resolve, evaluation delay, and more), see the [Monitor configuration][5] page.
 
-### 通知
+### Notifications
 
-**Configure notifications and automations** (通知と自動化の構成) セクションの詳しい説明は、[通知][6]のページをご覧ください。
+For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][6] page.
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/infrastructure/process/
+[1]: /infrastructure/process/
 [2]: https://app.datadoghq.com/monitors#create/live_process
-[3]: /ja/infrastructure/process/#search-syntax
+[3]: /infrastructure/process/#search-syntax
 [4]: https://app.datadoghq.com/process
-[5]: /ja/monitors/configuration/#advanced-alert-conditions
-[6]: /ja/monitors/notify/
-[7]: /ja/monitors/configuration/?tab=thresholdalert#evaluation-window
+[5]: /monitors/configuration/#advanced-alert-conditions
+[6]: /monitors/notify/
+[7]: /monitors/configuration/?tab=thresholdalert#evaluation-window

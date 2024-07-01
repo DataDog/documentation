@@ -1,82 +1,111 @@
 ---
-categories:
-- クラウド
+"app_id": "google-eventarc"
+"app_uuid": "a10c14f9-f630-439f-a181-c49a1ac79dc5"
+"assets":
+  "integration":
+    "auto_install": false
+    "events":
+      "creates_events": false
+    "service_checks":
+      "metadata_path": assets/service_checks.json
+    "source_type_id": !!int "346"
+    "source_type_name": Google Eventarc
+"author":
+  "homepage": "https://www.datadoghq.com"
+  "name": Datadog
+  "sales_email": info@datadoghq.com
+  "support_email": help@datadoghq.com
+"categories":
+- cloud
 - google cloud
-dependencies: []
-description: Datadog のアラートを Google Eventarc チャンネルに送信する
-doc_link: https://docs.datadoghq.com/integrations/google_eventarc/
-draft: false
-git_integration_title: google_eventarc
-has_logo: true
-integration_id: google-eventarc
-integration_title: Google Eventarc
-integration_version: ''
-is_public: true
-custom_kind: integration
-manifest_version: '1.0'
-name: google_eventarc
-public_title: Google Eventarc インテグレーション
-short_description: Datadog のアラートを Google Eventarc チャンネルに送信する
-version: '1.0'
+"custom_kind": "integration"
+"dependencies": []
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "google_eventarc"
+"integration_id": "google-eventarc"
+"integration_title": "Google Eventarc"
+"integration_version": ""
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "google_eventarc"
+"public_title": "Google Eventarc"
+"short_description": "Eventarc lets you import events from Google services, SaaS, and your own apps."
+"supported_os": []
+"tile":
+  "changelog": CHANGELOG.md
+  "classifier_tags":
+  - "Category::Cloud"
+  - "Category::Google Cloud"
+  "configuration": "README.md#Setup"
+  "description": Eventarc lets you import events from Google services, SaaS, and your own apps.
+  "media": []
+  "overview": "README.md#Overview"
+  "resources":
+  - "resource_type": blog
+    "url": "https://www.datadoghq.com/blog/incident-response-eventarc-datadog/"
+  "support": "README.md#Support"
+  "title": Google Eventarc
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-## 概要
+<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
+## Overview
 
-Datadog のイベントを [Eventarc][1] に送信して Google サービスに配信し、Datadog のモニター通知で Eventarc 主導のワークフローを開始できるようにします。
+Send your Datadog events to [Eventarc][1] for delivery to Google services, enabling you to initiate Eventarc-driven workflows with Datadog monitor notifications.
 
-### 計画と使用
+## Setup
 
-1. 通知を受け取る各 GCP プロジェクトに、メインの [GCP インテグレーション][2]がインストールされていることを確認します。
+1. Ensure that the main [GCP integration][2] is installed for each GCP Project that receives notifications.
 
-2. Google Cloud Console で [Eventarc チャネルの作成][3]を行います。
+2. [Create an Eventarc channel][3] in the Google Cloud Console.
 
-3. Datadog アプリケーション内で、以下の例に示すような構文を使用して、モニターの[通知セクション][4]にチャンネル名とアクティベーショントークンを設定します。
+3. Within the Datadog application, set your channel name and activation token in a monitor's [notification section][4] using the syntax as shown in the example below:
 
-{{< img src="integrations/google_eventarc/eventarc_channel_notification.png" alt="Datadog モニター構成ページの say what's happening セクションに、タイトル HDD Disk Size Above Capacity と、通知本文に以下の例の eventarc チャンネルを送信する行があります: The alert notification will be sent to @eventarc-datadog-sandbox_us-central1_my-channel that will trigger Cloud Function: Bump Quota" >}}
+{{< img src="integrations/google_eventarc/eventarc_channel_notification.png" alt="The say what's happening section of a Datadog monitor configuration page with the title HDD Disk Size Above Capacity and a line in the notification body which sends the an eventarc channel with the following example: The alert notification will be sent to @eventarc-datadog-sandbox_us-central1_my-channel that will trigger Cloud Function: Bump Quota." >}}
 
-### 検証
+### Validation
 
-インテグレーションが有効になると、Google Cloud Console でチャンネルが **Pending** から **Active** になります。
+Once the integration is activated, the channel goes from **Pending** to **Active** in the Google Cloud Console.
 
-### 自動化されたアクション
+### Automated actions
 
-GCP Eventarc インテグレーションを使用して、モニター用の新しい送信通知チャンネルを設定し、自動化されたアクションを開始することができます。自動化されたアクションを使用すると、GCP リソースを構成して以下のことを行うことができます。
+Set up new outbound notification channels for monitors to initiate automated actions with the GCP Eventarc integration. With automated actions, you can configure your GCP resources to:
 
-  - Datadog のモニターを使用して Eventarc ワークフローをキックオフする
-  - Google 内で、Cloud Functions、BigQuery などを Datadog のモニターにリンクさせる
-  - アラートイベント内の情報を使用して、自動修復パイプラインやランブックの実行、分析クエリの実行などを行う
+  - Use Datadog monitors to kick off Eventarc workflows
+  - Within Google, link Cloud Functions, BigQuery, etc. to Datadog monitors
+  - Use the information within the alert event to execute auto-remediation pipelines and runbooks, run analytics queries, and more
 
-ターゲットにできるリソースの完全なリストは、[GCP ドキュメント][5]にあります。
+The full list of resources you can target is available in the [GCP documentation][5].
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 
-Google Eventarc インテグレーションには、メトリクスは含まれません。
+The Google Eventarc integration does not include any metrics.
 
-### ヘルプ
+### Events
 
-Google Eventarc インテグレーションには、イベントは含まれません。
+The Google Eventarc integration does not include any events.
 
-### ヘルプ
+### Service Checks
 
-Google Eventarc インテグレーションには、サービスのチェック機能は含まれません。
+The Google Eventarc integration does not include any service checks.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
+Need help? Contact [Datadog support][6].
 
-## その他の参考資料
+## Further reading
 
-お役に立つドキュメント、リンクや記事:
+Additional helpful documentation, links, and articles:
 
-- [Eventarc と Datadog でインシデント対応のワークフローを自動化する][7]
+- [Automate incident response workflows with Eventarc and Datadog][7]
 
 [1]: https://cloud.google.com/eventarc/docs
-[2]: https://docs.datadoghq.com/ja/integrations/google_cloud_platform/
+[2]: https://docs.datadoghq.com/integrations/google_cloud_platform/
 [3]: https://cloud.google.com/eventarc/docs/third-parties/create-channels
-[4]: https://docs.datadoghq.com/ja/monitors/notify/
+[4]: https://docs.datadoghq.com/monitors/notify/
 [5]: https://cloud.google.com/eventarc/docs/targets
-[6]: https://docs.datadoghq.com/ja/help/
+[6]: https://docs.datadoghq.com/help/
 [7]: https://www.datadoghq.com/blog/incident-response-eventarc-datadog/
+

@@ -1,13 +1,13 @@
 ---
+title: Supported Platforms
 disable_toc: false
 further_reading:
 - link: agent/basic_agent_usage/
-  tag: ドキュメント
-  text: Agent の基本的な使い方
-title: サポート対象のプラットフォーム
+  tag: Documentation
+  text: Basic Agent Usage
 ---
 
-Datadog Agent は、広く使用されているオペレーティングシステムとプラットフォームでサポートされています。お使いのオペレーティングシステムが以下に記載されていない場合は、[ソースインストール][1]が有効な場合があります。
+The Datadog Agent is supported on a range of widely used operating systems and platforms. If your operating system is not listed below, [a source installation][1] might work for you.
 
 {{< tabs >}}
 {{% tab "Linux" %}}
@@ -16,11 +16,11 @@ Datadog Agent は、広く使用されているオペレーティングシステ
 
 <table>
   <thead>
-    <th>オペレーティングシステム</th>
-    <th>OS バージョン</th>
-    <th>Agent 5 バージョン</th>
-    <th>Agent 6 バージョン</th>
-    <th>Agent 7 バージョン</th>
+    <th>Operating system</th>
+    <th>OS versions</th>
+    <th>Agent 5 versions</th>
+    <th>Agent 6 versions</th>
+    <th>Agent 7 versions</th>
   </thead>
   <tr>
     <th rowspan='3'><a href='/agent/basic_agent_usage/amazonlinux/'>Amazon Linux</a></th>
@@ -143,16 +143,16 @@ Datadog Agent は、広く使用されているオペレーティングシステ
   </tr>
 </table>
 
-チェックマーク ({{< X >}}) は、すべてのマイナーバージョンとパッチバージョンをサポートしていることを示します。
+A check mark ({{< X >}}) indicates support for all minor and patch versions.
 
 ## 64-BIT ARM V8
 
 <table>
   <thead>
-    <th>オペレーティングシステム</th>
-    <th>OS バージョン</th>
-    <th>Agent 6 バージョン</th>
-    <th>Agent 7 バージョン</th>
+    <th>Operating system</th>
+    <th>OS versions</th>
+    <th>Agent 6 versions</th>
+    <th>Agent 7 versions</th>
   </thead>
   <tr>
     <th rowspan=3><a href='/agent/basic_agent_usage/amazonlinux/'>Amazon Linux</a></th>
@@ -203,23 +203,23 @@ Datadog Agent は、広く使用されているオペレーティングシステ
   </tr>
 </table>
 
-[1]: /ja/agent/basic_agent_usage/amazonlinux/
-[2]: /ja/agent/basic_agent_usage/deb/
-[3]: /ja/agent/basic_agent_usage/ubuntu/
-[4]: /ja/agent/basic_agent_usage/redhat/
-[7]: /ja/agent/basic_agent_usage/fedora/
+[1]: /agent/basic_agent_usage/amazonlinux/
+[2]: /agent/basic_agent_usage/deb/
+[3]: /agent/basic_agent_usage/ubuntu/
+[4]: /agent/basic_agent_usage/redhat/
+[7]: /agent/basic_agent_usage/fedora/
 
 {{% /tab %}}
 {{% tab "Windows" %}}
 
 <table>
   <thead>
-    <th>オペレーティングシステム</th>
-    <th>OS バージョン</th>
-    <th>Agent 5 バージョン</th>
-    <th>Agent 6 バージョン</th>
-    <th>Agent 7 バージョン</th>
-    <th>注</th>
+    <th>Operating system</th>
+    <th>OS versions</th>
+    <th>Agent 5 versions</th>
+    <th>Agent 6 versions</th>
+    <th>Agent 7 versions</th>
+    <th>Notes</th>
   </thead>
   <tr>
     <th rowspan=3><a href='/agent/basic_agent_usage/windows/'>Windows Server</a></th>
@@ -227,7 +227,7 @@ Datadog Agent は、広く使用されているオペレーティングシステ
     <td><i class='icon-check-bold'></td>
     <td><= 6.45.1</td>
     <td><= 7.45.1</td>
-    <td>Server 2008 R2 には、<a href="https://github.com/golang/go/issues/24489">クロックドリフトと Go に関する既知の問題</a>があります。</td>
+    <td>Server 2008 R2 is affected by a <a href="https://github.com/golang/go/issues/24489">known issue with clock drift and Go</a>.</td>
   </tr>
   <tr>
     <td>2012/R2</td>
@@ -267,9 +267,9 @@ Datadog Agent は、広く使用されているオペレーティングシステ
   </tr>
 </table>
 
-チェックマーク ({{< X >}}) は、すべてのマイナーバージョンとパッチバージョンをサポートしていることを示します。
+A check mark ({{< X >}}) indicates support for all minor and patch versions.
 
-Windows Agent の特定のバージョンをインストールするには、[インストーラーリスト][8]を参照してください。
+To install a specific version of the Windows Agent, see the [installer list][8].
 
 [8]: https://ddagent-windows-stable.s3.amazonaws.com/installers_v2.json
 
@@ -278,7 +278,7 @@ Windows Agent の特定のバージョンをインストールするには、[�
 
 ## 64-BIT X86
 
-| macOS バージョン | Agent 5 | Agent 6 | Agent 7 |
+| macOS version | Agent 5 | Agent 6 | Agent 7 |
 |---------------|---------|---------|---------|
 | 10.10 - 10.11 | <= 5.11.3 |||
 | 10.12 || <= 6.34.0 | <= 7.34.0 |
@@ -287,54 +287,54 @@ Windows Agent の特定のバージョンをインストールするには、[�
 
 ## Apple ARM64
 
-| macOS バージョン  | Agent 7 |
+| macOS version  | Agent 7 |
 |----------------|---------|
 | >= 11.0 | >= 7.39.0 |
 
 {{% /tab %}}
 
-{{% tab "クラウドとコンテナ" %}}
+{{% tab "Cloud and containers" %}}
 
-## 64-BIT X86 サポート
+## 64-BIT X86 support
 
 | Agent | [Docker][5] | [Kubernetes][6] | [Azure Stack HCI OS][7]  |
 |-------|-------------|-----------------|--------------------------|
 | 5 | >= 1.14 | 1.3 - 1.8 ||
-| 6 | >= 1.14 | 1.3 以降 | すべてのバージョン |
-| 7 | >= 1.14 | 1.3 以降 | すべてのバージョン |
+| 6 | >= 1.14 | >= 1.3 | All versions |
+| 7 | >= 1.14 | >= 1.3 | All versions |
 
 
-## 64-BIT ARM V8 サポート
+## 64-BIT ARM V8 support
 
-Agent 6 および 7 は、以下の 64-BIT ARM V8 プラットフォームをサポートしています。
+Agent 6 and 7 support the following 64-BIT ARM V8 platforms:
 
-| プラットフォーム    | サポートされるバージョン | 64-BIT ARM V8 サポート | 64-BIT X86 サポート |
+| Platform    | Supported versions | 64-BIT ARM V8 support | 64-BIT X86 support |
 |-------------|--------------------|-----------------------|--------------------|
 | [Docker][5] | >= 1.14     | <i class='icon-check-bold'> | <i class='icon-check-bold'> |
-| [Kubernetes][6] | 1.3 以降   | <i class='icon-check-bold'> | <i class='icon-check-bold'> |
+| [Kubernetes][6] | >= 1.3   | <i class='icon-check-bold'> | <i class='icon-check-bold'> |
 
 
-[5]: /ja/agent/docker/
-[6]: /ja/agent/basic_agent_usage/kubernetes/
-[7]: /ja/agent/basic_agent_usage/windows/
+[5]: /agent/docker/
+[6]: /agent/basic_agent_usage/kubernetes/
+[7]: /agent/basic_agent_usage/windows/
 
 {{% /tab %}}
 
 {{% tab "Unix" %}}
 
-Agent 6 および 7 は、以下の [AIX][1] バージョンをサポートしています。
+Agent 6 and 7 support the following [AIX][1] versions:
 
 - 6.1 TL9 SP6
 - 7.1 TL5 SP3
 - 7.2 TL3 SP0
 
 
-[1]: /ja/agent/basic_agent_usage/aix/
+[1]: /agent/basic_agent_usage/aix/
 {{% /tab %}}
 {{< /tabs >}}
 
-## その他の参考資料
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/agent/basic_agent_usage/source/
+[1]: /agent/basic_agent_usage/source/

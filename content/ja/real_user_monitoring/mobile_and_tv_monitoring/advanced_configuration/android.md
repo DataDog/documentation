@@ -1,30 +1,30 @@
 ---
-aliases:
-- /ja/real_user_monitoring/android/advanced_configuration/
+title: RUM Android Advanced Configuration
+kind: documentation
 code_lang: android
-code_lang_weight: 10
-further_reading:
-- link: https://github.com/DataDog/dd-sdk-android
-  tag: GitHub
-  text: dd-sdk-android のソースコード
-- link: /real_user_monitoring
-  tag: ドキュメント
-  text: Datadog RUM を探索する
-kind: ドキュメント
-title: RUM Android の高度なコンフィギュレーション
 type: multi-code-lang
+code_lang_weight: 10
+aliases:
+    - /real_user_monitoring/android/advanced_configuration/
+further_reading:
+- link: "https://github.com/DataDog/dd-sdk-android"
+  tag: Source Code
+  text: Source code for dd-sdk-android
+- link: /real_user_monitoring
+  tag: Documentation
+  text: Explore Datadog RUM
 ---
-## 概要
+## Overview
 
-まだ SDK をインストールしていない場合は、[アプリ内セットアップ手順][1]に従うか、[Android RUM セットアップドキュメント][2]を参照してください。
+If you have not set up the SDK yet, follow the [in-app setup instructions][1] or refer to the [Android RUM setup documentation][2]. 
 
-## ユーザーセッションの充実
+## Enrich user sessions
 
-Android RUM は、ユーザーアクティビティ、画面、エラー、ネットワークリクエストなどの属性を自動的に追跡します。RUM イベントおよびデフォルト属性については、[RUM データ収集ドキュメント][3]をご参照ください。カスタムイベントを追跡することで、ユーザーセッション情報を充実させ、収集された属性をより細かく制御することが可能になります。
+Android RUM automatically tracks attributes such as user activity, screens, errors, and network requests. See the [RUM Data Collection documentation][3] to learn about the RUM events and default attributes. You can further enrich user session information and gain finer control over the attributes collected by tracking custom events.
 
-### カスタムビュー
+### Custom Views
 
-[ビューを自動追跡する][4]ほかに、特定のさまざまなビュー（アクティビティやフラグメントなど）が `onResume()` ライフサイクルでインタラクティブに確認できるようになったら自動追跡することも可能です。ビューが確認できなくなったら追跡を停止します。ほとんどの場合、このメソッドは、最前面の `Activity` または `Fragment` で呼び出す必要があります。
+In addition to [tracking views automatically][4], you can also track specific distinct views (such as activities and fragments) when they become visible and interactive in the `onResume()` lifecycle. Stop tracking when the view is no longer visible. Most often, this method should be called in the frontmost `Activity` or `Fragment`:
 
 
 {{< tabs >}}
@@ -52,9 +52,9 @@ Android RUM は、ユーザーアクティビティ、画面、エラー、ネ�
 {{% /tab %}}
 {{< /tabs >}}
 
-### 独自のパフォーマンスタイミングを追加
+### Add your own performance timing
 
-RUM のデフォルト属性に加えて、`addTiming` API を使用して、アプリケーションが時間を費やしている場所を測定できます。タイミング測定は、現在の RUM ビューの開始を基準にしています。たとえば、ヒーロー画像が表示されるまでにかかる時間を計ることができます。
+In addition to RUM's default attributes, you can measure where your application is spending its time by using the `addTiming` API. The timing measure is relative to the start of the current RUM view. For example, you can time how long it takes for your hero image to appear:
 {{< tabs >}}
 {{% tab "Kotlin" %}}
    ```kotlin
@@ -72,13 +72,13 @@ RUM のデフォルト属性に加えて、`addTiming` API を使用して、ア
 {{% /tab %}}
 {{< /tabs >}}
 
-タイミングが送信されると、タイミングは `@view.custom_timings.<timing_name>` としてアクセス可能になります (例: `@view.custom_timings.hero_image`)。RUM 分析またはダッシュボードでグラフを作成する前に、[メジャーを作成][10]する必要があります。
+Once the timing is sent, the timing is accessible as `@view.custom_timings.<timing_name>`. For example: `@view.custom_timings.hero_image`. You must [create a measure][10] before graphing it in RUM analytics or in dashboards. 
 
-### カスタムアクション
+### Custom Actions
 
-[アクションを自動追跡する][5]ほかに、`RumMonitor#addAction` で特定のカスタムユーザーアクション (タップ、クリック、スクロールなど) を追跡することも可能です。継続的なアクションの追跡 (リストをスクロールするユーザーの追跡) には、`RumMonitor#startAction` および `RumMonitor#stopAction` を使用します。
+In addition to [tracking actions automatically][5], you can also track specific custom user actions (such as taps, clicks, and scrolls) with `RumMonitor#addAction`. For continuous action tracking (for example, tracking a user scrolling a list), use `RumMonitor#startAction` and `RumMonitor#stopAction`.
 
-アクションタイプは、"カスタム"、"クリック"、"タップ"、"スクロール"、"スワイプ"、"戻る" のいずれかを指定する必要があることに注意してください。
+Note the action type should be one of the following: "custom", "click", "tap", "scroll", "swipe", "back".
 
 {{< tabs >}}
 {{% tab "Kotlin" %}}
@@ -97,9 +97,9 @@ RUM のデフォルト属性に加えて、`addTiming` API を使用して、ア
 {{% /tab %}}
 {{< /tabs >}}
 
-### リソースの強化
+### Enrich resources
 
-[リソースを自動的に追跡する][6]場合、追跡する各ネットワークリクエストにカスタム属性を追加するために、カスタムの `RumResourceAttributesProvider` インスタンスを提供します。例えば、ネットワークリクエストのヘッダを追跡したい場合は、以下のような実装を作成し、`DatadogInterceptor` のコンストラクタに渡します。
+When [tracking resources automatically][6], provide a custom `RumResourceAttributesProvider` instance to add custom attributes to each tracked network request. For example, if you want to track a network request's headers, create an implementation as follows, and pass it in the constructor of the `DatadogInterceptor`.
 
 {{< tabs >}}
 {{% tab "Kotlin" %}}
@@ -143,9 +143,9 @@ public class CustomRumResourceAttributesProvider implements RumResourceAttribute
 {{% /tab %}}
 {{< /tabs >}}
 
-### カスタムリソース
+### Custom Resources
 
-[リソースを自動追跡する][6]ほかに、メソッド（`GET` や `POST` など）を使用して、`RumMonitor#startResource` でリソースを読み込みながら特定のカスタムリソース（ネットワークリクエストやサードパーティプロバイダ API など）を追跡することも可能です。完全に読み込まれたら `RumMonitor#stopResource` で追跡を停止し、リソースの読み込み中にエラーが発生した場合は `RumMonitor#stopResourceWithError` で停止します。
+In addition to [tracking resources automatically][6], you can also track specific custom resources (such as network requests and third-party provider APIs) with methods (such as `GET` and `POST`) while loading the resource with `RumMonitor#startResource`. Stop tracking with `RumMonitor#stopResource` when it is fully loaded, or `RumMonitor#stopResourceWithError` if an error occurs while loading the resource.
 
 {{< tabs >}} 
 {{% tab "Kotlin" %}}
@@ -153,7 +153,7 @@ public class CustomRumResourceAttributesProvider implements RumResourceAttribute
        fun loadResource() {
             GlobalRumMonitor.get().startResource(resourceKey, method, url, resourceAttributes)
             try {
-              // リソースをロードします
+              // do load the resource
               GlobalRumMonitor.get().stopResource(resourceKey, resourceKind, additionalAttributes)
             } catch (e: Exception) {
               GlobalRumMonitor.get().stopResourceWithError(resourceKey, message, origin, e)
@@ -166,7 +166,7 @@ public class CustomRumResourceAttributesProvider implements RumResourceAttribute
        public void loadResource() {
             GlobalRumMonitor.get().startResource(resourceKey, method, url, resourceAttributes);
             try {
-                // リソースをロードします
+                // do load the resource
                 GlobalRumMonitor.get().stopResource(resourceKey, resourceKind, additionalAttributes);
             } catch (Exception e) {
                 GlobalRumMonitor.get().stopResourceWithError(resourceKey, message, origin, e);
@@ -176,111 +176,111 @@ public class CustomRumResourceAttributesProvider implements RumResourceAttribute
 {{% /tab %}}
 {{< /tabs >}}
 
-### カスタムエラー
+### Custom Errors
 
-特定のエラーを追跡するには、エラーが発生したときにメッセージ、ソース、例外、追加属性でモニターに通知します。[エラー属性ドキュメント][9]をご参照ください。
+To track specific errors, notify the monitor when an error occurs with the message, source, exception, and additional attributes. Refer to the [Error Attributes documentation][9].
 
    ```kotlin
       GlobalRumMonitor.get().addError(message, source, throwable, attributes)
    ```
 
-## カスタムグローバル属性の追跡
+## Track custom global attributes
 
-RUM Android SDK により自動的に取得される[デフォルトの RUM 属性][3]に加えて、カスタム属性などのコンテキスト情報を RUM イベントに追加し、Datadog 内の可観測性を強化することも可能です。カスタム属性により、コードレベルの情報（バックエンドサービス、セッションタイムライン、エラーログ、ネットワークの状態など）を利用して、観察されたユーザー行動（カート内の金額、マーチャントティア、広告キャンペーンなど）を分類することができます。
+In addition to the [default RUM attributes][3] captured by the RUM Android SDK automatically, you can choose to add additional contextual information, such as custom attributes, to your RUM events to enrich your observability within Datadog. Custom attributes allow you to slice and dice information about observed user behavior (such as cart value, merchant tier, or ad campaign) with code-level information (such as backend services, session timeline, error logs, and network health).
 
-### ユーザーセッションの追跡
+### Track User Sessions
 
-RUM セッションにユーザー情報を追加すると、次のことが簡単になります。
-* 特定のユーザーのジャーニーをたどる
-* エラーの影響を最も受けているユーザーを把握する
-* 最も重要なユーザーのパフォーマンスを監視する
+Adding user information to your RUM sessions makes it easy to:
+* Follow the journey of a given user
+* Know which users are the most impacted by errors
+* Monitor performance for your most important users
 
-{{< img src="real_user_monitoring/browser/advanced_configuration/user-api.png" alt="RUM UI のユーザー API" >}}
+{{< img src="real_user_monitoring/browser/advanced_configuration/user-api.png" alt="User API in RUM UI" >}}
 
-以下の属性は**任意**で、**少なくとも 1 つ**提供する必要があります。
+The following attributes are **optional**, you should provide **at least one** of them:
 
-| 属性  | タイプ | 説明                                                                                              |
+| Attribute  | Type | Description                                                                                              |
 |------------|------|----------------------------------------------------------------------------------------------------|
-| usr.id    | 文字列 | 一意のユーザー識別子。                                                                                  |
-| usr.name  | 文字列 | RUM UI にデフォルトで表示されるユーザーフレンドリーな名前。                                                  |
-| usr.email | 文字列 | ユーザー名が存在しない場合に RUM UI に表示されるユーザーのメール。Gravatar をフェッチするためにも使用されます。 |
+| usr.id    | String | Unique user identifier.                                                                                  |
+| usr.name  | String | User friendly name, displayed by default in the RUM UI.                                                  |
+| usr.email | String | User email, displayed in the RUM UI if the user name is not present. It is also used to fetch Gravatars. |
 
-ユーザーセッションを識別するには、`setUserInfo` API を使用します。例:
+To identify user sessions, use the `setUserInfo` API, for example:
 
 ```kotlin
 Datadog.setUserInfo('1234', 'John Doe', 'john@doe.com')
 ```
 
-### 属性の追跡
+### Track attributes
 
 ```kotlin
-    // 今後のすべての RUM イベントに属性を追加
+    // Adds an attribute to all future RUM events
     GlobalRumMonitor.get().addAttribute(key, value)
 
-    // 今後のすべての RUM イベントから属性を削除
+    // Removes an attribute to all future RUM events
     GlobalRumMonitor.get().removeAttribute(key)
 ```
 
-## ウィジェットの追跡
+## Track widgets
 
-ウィジェットは、SDK で自動的に追跡されません。ウィジェットから手動で UI インタラクションを送信するには、Datadog API を呼び出します。[例をご参照ください][7]。
+Widgets are not automatically tracked with the SDK. To send UI interactions from your widgets manually, call the Datadog API. [See example][7].
 
 
-## 初期化パラメーター
+## Initialization parameters
 
-ライブラリを初期化するよう Datadog のコンフィギュレーションを作成する際、`Configuration.Builder` で以下のメソッドを使用できます。
+You can use the following methods in `Configuration.Builder` when creating the Datadog configuration to initialize the library:
 
 `setFirstPartyHosts()` 
-: トレーシングが有効で RUM リソースが `first-party` に分類されているホストを定義します。**注**: Datadog 構成でカスタムトレーシングヘッダータイプを定義し、`GlobalTracer` で登録されたトレーサーを使用している場合、使用するトレーサーに同じトレーシングヘッダータイプが設定されていることを確認してください。
+: Defines hosts that have tracing enabled and have RUM resources categorized as `first-party`. **Note**: If you define custom tracing header types in the Datadog configuration and are using a tracer registered with `GlobalTracer`, make sure the same tracing header types are set for the tracer in use.
 
 `useSite(DatadogSite)` 
-: ターゲットデータを EU1、US1、US3、US5、US1_FED、および AP1 のサイトに切り替えます。
+: Switches target data to EU1, US1, US3, US5, US1_FED and AP1 sites.
 
-RUM を有効にするよう RUM 構成を作成する際、`RumConfiguration.Builder` で以下のメソッドを使用できます。
+You can use the following methods in `RumConfiguration.Builder` when creating the RUM configuration to enable RUM feature:
 
 `trackUserInteractions(Array<ViewAttributesProvider>)` 
-: ユーザーインタラクション (タップ、スクロール、スワイプなど) の追跡を有効にします。このパラメーターを使用すると、ユーザーが操作したウィジェットに基づいて、カスタム属性を RUM アクションイベントに追加できます。
+: Enables tracking user interactions (such as tap, scroll, or swipe). The parameter also allows you to add custom attributes to the RUM Action events based on the widget with which the user interacted.
 
 `useViewTrackingStrategy(strategy)` 
-: ビューの追跡に使用される戦略を定義します。ご使用のアプリケーションのアーキテクチャにより、[`ViewTrackingStrategy`][4] の実装から 1 つを選択するか、独自のものを実装します。
+: Defines the strategy used to track views. Depending on your application's architecture, you can choose one of several implementations of [`ViewTrackingStrategy`][4] or implement your own.
 
 `trackLongTasks(durationThreshold)` 
-: メインスレッドで `durationThreshold` より時間がかかっているタスクを Datadog でロングタスクとして追跡できます。
+: Enables tracking tasks taking longer than `durationThreshold` on the main thread as long tasks in Datadog.
 
 `setBatchSize([SMALL|MEDIUM|LARGE])` 
-: Datadog に送信されるリクエストの個別のバッチサイズを定義します。
+: Defines the individual batch size for requests sent to Datadog.
 
 `setUploadFrequency([FREQUENT|AVERAGE|RARE])` 
-: Datadog エンドポイントに対し作成されたリクエストの頻度を定義します (リクエストがある場合)。
+: Defines the frequency for requests made to Datadog endpoints (if requests are available).
 
 `setVitalsUpdateFrequency([FREQUENT|AVERAGE|RARE|NEVER])` 
-: モバイルバイタルを収集するための好ましい頻度を設定します。
+: Sets the preferred frequency for collecting mobile vitals.
 
 `setSessionSampleRate(<sampleRate>)` 
-: RUM セッションのサンプルレートを設定します (0 の値は RUM イベントが送信されないことを意味し、100 の値はすべてのセッションが保持されることを意味します)。
+: Sets the RUM sessions sample rate. (A value of 0 means no RUM events are sent. A value of 100 means all sessions are kept.)
 
 `setXxxEventMapper()` 
-: ビュー、アクション、リソース、エラーのデータスクラビングコールバックを設定します。
+: Sets the data scrubbing callbacks for views, actions, resources, and errors.
 
 
-### ビューの自動追跡
+### Automatically track views
 
-ビュー (アクティビティやフラグメントなど) を自動追跡するには、初期化時に追跡ストラテジーを提供する必要があります。ご使用のアプリケーションのアーキテクチャにより、以下のストラテジーから 1 つ選択します。
+To automatically track your views (such as activities and fragments), provide a tracking strategy at initialization. Depending on your application's architecture, you can choose one of the following strategies:
 
 `ActivityViewTrackingStrategy`
-: アプリケーションの各アクティビティが個別のビューとみなされます。
+: Every activity in your application is considered a distinct view.
 
 `FragmentViewTrackingStrategy`
-: アプリケーションの各フラグメントが個別のビューとみなされます。
+: Every fragment in your application is considered a distinct view.
 
 `MixedViewTrackingStrategy` 
-: すべてのアクティビティまたはフラグメントが個別のビューとみなされます。
+: Every activity or fragment in your application is considered a distinct view.
 
 `NavigationViewTrackingStrategy`
-: Android Jetpack Navigation ライブラリのユーザーに推奨。各ナビゲーション先が個別のビューとみなされます。
+: Recommended for Android Jetpack Navigation library users. Each Navigation destination is considered a distinct view.
 
 
-たとえば、各フラグメントを個別のビューとして設定するには、[セットアップ][1]で以下の構成を使用します。
+For instance, to set each fragment as a distinct view, use the following configuration in your [setup][1]:
 
 {{< tabs >}}
 {{% tab "Kotlin" %}}
@@ -300,7 +300,7 @@ RUM を有効にするよう RUM 構成を作成する際、`RumConfiguration.Bu
 {{< /tabs >}}
 
 
-`ActivityViewTrackingStrategy`、`FragmentViewTrackingStrategy`、`MixedViewTrackingStrategy` のいずれかを使用する場合、コンストラクターで `ComponentPredicate` の実装を提供することで、RUM View として追跡する `Fragment` または `Activity` を絞り込むことができます。
+For `ActivityViewTrackingStrategy`, `FragmentViewTrackingStrategy`, or `MixedViewTrackingStrategy`, you can filter which `Fragment` or `Activity` is tracked as a RUM View by providing a `ComponentPredicate` implementation in the constructor:
 
 {{< tabs >}}
 {{% tab "Kotlin" %}}
@@ -343,14 +343,14 @@ RUM を有効にするよう RUM 構成を作成する際、`RumConfiguration.Bu
 {{< /tabs >}}
 
 
-**注**: デフォルトで、ライブラリは `ActivityViewTrackingStrategy` を使用しています。ビューの追跡ストラテジーを提供しないことにした場合は、自身で `startView` および `stopView` メソッドを呼び出してビューを手動で送信する必要があります。
+**Note**: By default, the library is using `ActivityViewTrackingStrategy`. If you decide not to provide a view tracking strategy, you must manually send the views by calling the `startView` and `stopView` methods yourself.
 
 
-### ネットワークリクエストの自動追跡
+### Automatically track network requests
 
-リソース (サードパーティプロバイダー、ネットワークリクエストなど) で、最初の 1 バイトまで、または DNS 解決などのタイミング情報を取得するには、`OkHttpClient` をカスタマイズして [EventListener][8] ファクトリーを追加します。
+To get timing information in resources (such as third-party providers, network requests) such as time to first byte or DNS resolution, customize the `OkHttpClient` to add the [EventListener][8] factory:
 
-1. モジュールレベルの `build.gradle` ファイルで、`dd-sdk-android-okhttp` ライブラリに Gradle 依存関係を追加します。
+1. Add the Gradle dependency to the `dd-sdk-android-okhttp` library in the module-level `build.gradle` file:
 
     ```groovy
     dependencies {
@@ -358,7 +358,7 @@ RUM を有効にするよう RUM 構成を作成する際、`RumConfiguration.Bu
     }
     ```
 
-2. [EventListener][8] ファクトリーの追加
+2. Add add the [EventListener][8] factory:
 
 {{< tabs >}}
 {{% tab "Kotlin" %}}
@@ -379,9 +379,9 @@ RUM を有効にするよう RUM 構成を作成する際、`RumConfiguration.Bu
 {{% /tab %}}
 {{< /tabs >}}
 
-### ロングタスクの自動追跡
+### Automatically track long tasks
 
-メインスレッドで長時間実行されるオペレーションは、アプリケーションの視覚的パフォーマンスとリアクティビティに影響を与えることがあります。このようなオペレーションを追跡するには、タスクを長すぎるとみなすための閾値を定義します。
+Long running operations performed on the main thread can impact the visual performance and reactivity of your application. To track these operations, define the duration threshold above which a task is considered too long.
 
 {{< tabs >}}
 {{% tab "Kotlin" %}}
@@ -392,7 +392,7 @@ RUM を有効にするよう RUM 構成を作成する際、`RumConfiguration.Bu
         .build()
    ```
 
-たとえば、デフォルトの `100 ms` の実行時間を置換するため、コンフィギュレーションでカスタム閾値を設定します。
+For example, to replace the default `100 ms` duration, set a custom threshold in your configuration.
 
    ```kotlin
       val rumConfig = RumConfiguration.Builder(applicationId)
@@ -409,7 +409,7 @@ RUM を有効にするよう RUM 構成を作成する際、`RumConfiguration.Bu
         .build();
    ```
 
-たとえば、デフォルトの `100 ms` の実行時間を置換するため、コンフィギュレーションでカスタム閾値を設定します。
+For example, to replace the default `100 ms` duration, set a custom threshold in your configuration.
 
    ```java
       RumConfiguration rumConfig = new RumConfiguration.Builder(applicationId)
@@ -420,9 +420,9 @@ RUM を有効にするよう RUM 構成を作成する際、`RumConfiguration.Bu
 {{% /tab %}}
 {{< /tabs >}}
 
-## RUM イベントの変更または削除
+## Modify or drop RUM events
 
-一括処理前に、RUM イベントの一部の属性を変更または一部のイベント全体を削除したりするには、RUM Android SDK を初期化する際に `EventMapper<T>` を実装します。
+To modify some attributes in your RUM events, or to drop some of the events entirely before batching, provide an implementation of `EventMapper<T>` when initializing the RUM Android SDK:
 
 
 {{< tabs >}}
@@ -453,48 +453,60 @@ RUM を有効にするよう RUM 構成を作成する際、`RumConfiguration.Bu
 {{% /tab %}}
 {{< /tabs >}}
 
-`EventMapper<T>` インターフェースを実装する場合、各イベントタイプの属性は一部のみしか変更することができません。
+   When implementing the `EventMapper<T>` interface, only some attributes are modifiable for each event type:
 
-   | イベントタイプ    | 属性キー      | 説明                                     |
+   | Event type    | Attribute key      | Description                                     |
    |---------------|--------------------|-------------------------------------------------|
-   | ViewEvent     | `view.referrer`      | ページの初期ビューへのリンク URL。 |
-   |               | `view.url`           | ビューの URL。                                 |
-   |               | `view.name`           | ビューの名前。                                |
+   | ViewEvent     | `view.referrer`      | URL that linked to the initial view of the page. |
+   |               | `view.url`           | URL of the view.                                 |
+   |               | `view.name`           | Name of the view.                                |
    | ActionEvent   |                    |                                                 |
-   |               | `action.target.name` | ターゲット名。                                     |
-   |               | `view.referrer`      | ページの初期ビューへのリンク URL。 |
-   |               | `view.url`           | ビューの URL。                                 |
-   |               | `view.name`           | ビューの名前。                               |
+   |               | `action.target.name` | Target name.                                     |
+   |               | `view.referrer`      | URL that linked to the initial view of the page. |
+   |               | `view.url`           | URL of the view.                                 |
+   |               | `view.name`           | Name of the view.                               |
    | ErrorEvent    |                      |                                                 |
-   |               | `error.message`      | エラーメッセージ。                                   |
-   |               | `error.stack`        | エラーのスタックトレース。                         |
-   |               | `error.resource.url` | リソースの URL。                             |
-   |               | `view.referrer`      | ページの初期ビューへのリンク URL。 |
-   |               | `view.url`           | ビューの URL。                                 |
-   |               | `view.name`           | ビューの名前。                                |
+   |               | `error.message`      | Error message.                                   |
+   |               | `error.stack`        | Stacktrace of the error.                         |
+   |               | `error.resource.url` | URL of the resource.                             |
+   |               | `view.referrer`      | URL that linked to the initial view of the page. |
+   |               | `view.url`           | URL of the view.                                 |
+   |               | `view.name`           | Name of the view.                                |
    | ResourceEvent |                    |                                                 |
-   |               | `resource.url`       | リソースの URL。                             |
-   |               | `view.referrer`      | ページの初期ビューへのリンク URL。 |
-   |               | `view.url`           | ビューの URL。                                 |
-   |               | `view.name`           | ビューの名前。                                |
+   |               | `resource.url`       | URL of the resource.                             |
+   |               | `view.referrer`      | URL that linked to the initial view of the page. |
+   |               | `view.url`           | URL of the view.                                 |
+   |               | `view.name`           | Name of the view.                                |
    | LongTaskEvent |                    |                                                 |
-   |               | `view.referrer`       | ページの初期ビューへのリンク URL。 |
-   |               | `view.url`            | ビューの URL。                                 |
-   |               | `view.name`           | ビューの名前。                                |
+   |               | `view.referrer`       | URL that linked to the initial view of the page. |
+   |               | `view.url`            | URL of the view.                                 |
+   |               | `view.name`           | Name of the view.                                |
 
-   **注**: `EventMapper<T>` の実装から null が返された場合、イベントは削除されます。
+   **Note**: If you return null from the `EventMapper<T>` implementation, the event is dropped.
 
-## その他の参考資料
+## Retrieve the RUM session ID
+
+Retrieving the RUM session ID can be helpful for troubleshooting. For example, you can attach the session ID to support requests, emails, or bug reports so that your support team can later find the user session in Datadog.
+
+You can access the RUM session ID at runtime without waiting for the `sessionStarted` event:
+
+```kotlin
+GlobalRumMonitor.get().getCurrentSessionId { sessionId ->
+  currentSessionId = sessionId
+}
+```
+
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/rum/application/create
-[2]: /ja/real_user_monitoring/android
-[3]: /ja/real_user_monitoring/android/data_collected
-[4]: /ja/real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/#automatically-track-views
-[5]: /ja/real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/#initialization-parameters
-[6]: /ja/real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/#automatically-track-network-requests
+[2]: /real_user_monitoring/android
+[3]: /real_user_monitoring/android/data_collected
+[4]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/#automatically-track-views
+[5]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/#initialization-parameters
+[6]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/#automatically-track-network-requests
 [7]: https://github.com/DataDog/dd-sdk-android/tree/master/sample/kotlin/src/main/kotlin/com/datadog/android/sample/widget
 [8]: https://square.github.io/okhttp/features/events/
-[9]: /ja/real_user_monitoring/android/data_collected/#event-specific-attributes
-[10]: /ja/real_user_monitoring/explorer/search/#setup-facets-and-measures
+[9]: /real_user_monitoring/android/data_collected/#event-specific-attributes
+[10]: /real_user_monitoring/explorer/search/#setup-facets-and-measures

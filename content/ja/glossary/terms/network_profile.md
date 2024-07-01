@@ -1,7 +1,7 @@
 ---
+title: network profile
 core_product:
-- network performance monitoring
-- network device monitoring
-title: ネットワークプロファイル
+  - network performance monitoring
+  - network device monitoring
 ---
-ネットワークプロファイルは、ネットワークの構成方法を記述する属性のセットです。
+A network profile is set of attributes that describe how a network is configured.

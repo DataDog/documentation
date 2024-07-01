@@ -1,107 +1,108 @@
 ---
+title: Log Archives
+kind: documentation
+description: Forward all your ingested logs to long term storage.
 aliases:
-- /ja/logs/s3/
-- /ja/logs/gcs/
-- /ja/logs/archives/s3/
-- /ja/logs/archives/gcs/
-- /ja/logs/archives/gcp/
-- /ja/logs/archives/
-description: 収集されたログをすべて長期的なストレージへ転送します。
+  - /logs/s3/
+  - /logs/gcs/
+  - /logs/archives/s3/
+  - /logs/archives/gcs/
+  - /logs/archives/gcp/
+  - /logs/archives/
 further_reading:
 - link: /logs/archives/rehydrating
-  tag: ドキュメント
-  text: Datadog でアーカイブされたログコンテンツにアクセスする方法について
+  tag: Documentation
+  text: Learn how to access your archived log content in Datadog
 - link: /logs/explorer/
-  tag: ドキュメント
-  text: ログエクスプローラーについて
+  tag: Documentation
+  text: Learn about the Log Explorer
 - link: /logs/logging_without_limits/
   tag: Documentation
-  text: Logging without Limits* について
-title: ログアーカイブ
+  text: Learn about Logging without Limits*
 ---
 
-## 概要
+## Overview
 
-Datadog アカウントを構成して、独自のクラウドストレージシステムへ収集されたすべてのログ ([インデックス化][1]の有無にかかわらず) を転送します。ストレージに最適化されたアーカイブにログを長期間保管し、コンプライアンス要件を満たすことができると同時に、アドホック調査のための監査適合性を[リハイドレート][2]で維持できます。
+Configure your Datadog account to forward all the logs ingested—whether [indexed][1] or not—to a cloud storage system of your own. Keep your logs in a storage-optimized archive for longer periods of time and meet compliance requirements while also keeping auditability for ad-hoc investigations, with [Rehydration][2].
 
-{{< img src="logs/archives/log_forwarding_archives_tab.png" alt="Log Forwarding ページの Archives タブ" style="width:100%;">}}
+{{< img src="logs/archives/log_forwarding_archives_tab.png" alt="Archives tab on the Log Forwarding page" style="width:100%;">}}
 
-[**Log Forwarding** ページ][3]に移動して、取り込んだログを自分のクラウドホストのストレージバケットに転送するためのアーカイブをセットアップします。
+Navigate to the [**Log Forwarding** page][3] to set up an archive for forwarding ingested logs to your own cloud-hosted storage bucket.
 
-1. まだの場合は、お使いのクラウドプロバイダーと Datadogの[インテグレーション](#set-up-an-integration)を設定してください。
-2. [ストレージバケット](#create-a-storage-bucket)を作成します。
-3. そのアーカイブへの `read` および `write` [権限](#set-permissions)を設定します。
-4. アーカイブへ、およびアーカイブから[ログをルーティング](#route-your-logs-to-a-bucket)します。
-5. 暗号化、ストレージクラス、タグなどの[詳細設定](#advanced-settings)を構成します。
-6. 設定を[検証](#validation)し、Datadog で検出される可能性のある構成ミスがないか確認します。
+1. If you haven't already, set up a Datadog [integration](#set-up-an-integration) for your cloud provider.
+2. Create a [storage bucket](#create-a-storage-bucket).
+3. Set [permissions](#set-permissions) to `read` and/or `write` on that archive.
+4. [Route your logs](#route-your-logs-to-a-bucket) to and from that archive.
+5. Configure [advanced settings](#advanced-settings) such as encryption, storage class, and tags.
+6. [Validate](#validation) your setup and check for possible misconfigurations that Datadog would be able to detect for you.
 
-環境から直接ストレージに最適化されたアーカイブにログをルーティングしたい場合は、[Observability Pipelines でログをアーカイブする][4]方法を参照してください。
+See how to [archive your logs with Observability Pipelines][4] if you want to route your logs to a storage-optimized archive directly from your environment.
 
-## アーカイブの構成
+## Configure an archive
 
-### インテグレーションのセットアップ
+### Set up an integration
 
 {{< tabs >}}
 {{% tab "AWS S3" %}}
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">AWS Role Delegation は、Datadog for Government site でサポートされていません。アクセスキーを使用する必要があります。</div>
+<div class="alert alert-warning">AWS Role Delegation is not supported on the Datadog for Government site. Access keys must be used.</div>
 {{< /site-region >}}
 
-まだ構成されていない場合は、S3 バケットを保持する AWS アカウントの [AWS インテグレーション][1]をセットアップします。
+If not already configured, set up the [AWS integration][1] for the AWS account that holds your S3 bucket.
 
-* 一般的なケースでは、これには、Datadog が AWS S3 との統合に使用できるロールの作成が含まれます。
-* 特に AWS GovCloud または China アカウントの場合は、ロール委任の代わりにアクセスキーを使用します。
+* In the general case, this involves creating a role that Datadog can use to integrate with AWS S3.
+* Specifically for AWS GovCloud or China accounts, use access keys as an alternative to role delegation.
 
-[1]: /ja/integrations/amazon_web_services/?tab=automaticcloudformation#setup
+[1]: /integrations/amazon_web_services/?tab=automaticcloudformation#setup
 {{% /tab %}}
 {{% tab "Azure Storage" %}}
 
-まだ設定していない場合は、新しいストレージアカウントを保持するサブスクリプション内で [Azure インテグレーション][1]をセットアップします。これには、[Datadog がインテグレーションに使用できるアプリ登録の作成][2]も含まれます。
+Set up the [Azure integration][1] within the subscription that holds your new storage account, if you haven't already. This involves [creating an app registration that Datadog can use][2] to integrate with.
 
-**注:** Azure ChinaCloud、GermanyCloud、GovCloud へのアーカイブはサポートされていません。
+**Note:** Archiving to Azure ChinaCloud, GermanyCloud, and GovCloud is not supported.
 
 [1]: https://app.datadoghq.com/account/settings#integrations/azure
-[2]: /ja/integrations/azure/?tab=azurecliv20#integrating-through-the-azure-portal
+[2]: /integrations/azure/?tab=azurecliv20#integrating-through-the-azure-portal
 {{% /tab %}}
 
 {{% tab "Google Cloud Storage" %}}
 
-GCS ストレージバケットを持つプロジェクト用の [Google Cloud インテグレーション][1]をセットアップしていない場合、セットアップします。これには [Datadog が統合に使用できる Google Cloud サービスアカウントの作成][2] も含まれます。
+Set up the [Google Cloud integration][1] for the project that holds your GCS storage bucket, if you haven't already. This involves [creating a Google Cloud service account that Datadog can use][2] to integrate with.
 
 [1]: https://app.datadoghq.com/account/settings#integrations/google-cloud-platform
-[2]: /ja/integrations/google_cloud_platform/?tab=datadogussite#setup
+[2]: /integrations/google_cloud_platform/?tab=datadogussite#setup
 {{% /tab %}}
 {{< /tabs >}}
 
-### ストレージバケットを作成
+### Create a storage bucket
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">アーカイブへのログの送信は、Datadog GovCloud 環境の外部であり、Datadog の管理外です。Datadog は、Datadog GovCloud 環境から出たログについて、FedRAMP、DoD Impact Levels、ITAR、輸出コンプライアンス、データレジデンシー、または当該ログに適用される類似の規制に関連するユーザーの義務または要件を含むが、これらに限定されることなく、一切の責任を負わないものとします。</div>
+<div class="alert alert-warning">Sending logs to an archive is outside of the Datadog GovCloud environment, which is outside the control of Datadog. Datadog shall not be responsible for any logs that have left the Datadog GovCloud environment, including without limitation, any obligations or requirements that the user may have related to FedRAMP, DoD Impact Levels, ITAR, export compliance, data residency or similar regulations applicable to such logs.</div>
 {{< /site-region >}}
 
 {{< tabs >}}
 {{% tab "AWS S3" %}}
 
-[AWS コンソール][1]に移動し、アーカイブを送信するための [S3 バケットを作成][2]します。
+Go into your [AWS console][1] and [create an S3 bucket][2] to send your archives to.
 
-**注:**
+**Notes:**
 
-- バケットを一般公開で読み取り可能にしないでください。
-- [US1、US3、US5 サイト][3]については、地域間データ転送料とクラウドストレージコストへの影響について、[AWS Pricing][4] を参照してください。地域間のデータ転送料を管理するために、ストレージバケットを `us-east-1` に作成することを検討してください。
+- Do not make your bucket publicly readable.
+- For [US1, US3, and US5 sites][3], see [AWS Pricing][4] for inter-region data transfer fees and how cloud storage costs may be impacted. Consider creating your storage bucket in `us-east-1` to manage your inter-region data transfer fees.
 
 [1]: https://s3.console.aws.amazon.com/s3
 [2]: https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html
-[3]: /ja/getting_started/site/
+[3]: /getting_started/site/
 [4]: https://aws.amazon.com/s3/pricing/
 {{% /tab %}}
 
 {{% tab "Azure Storage" %}}
 
-* [Azure ポータル][1]に移動し、アーカイブを送信するための[ストレージアカウントを作成][2]します。ストレージアカウントの名前を指定し、標準パフォーマンスまたは **Block blob** プレミアムアカウントタイプのいずれかを選択し、**hot** または **cool** アクセス層を選択します。
-* そのストレージアカウントに **container** サービスを作成します。Datadog アーカイブページに追加する必要があるため、コンテナ名をメモしてください。
+* Go to your [Azure Portal][1] and [create a storage account][2] to send your archives to. Give your storage account a name, select either standard performance or **Block blobs** premium account type, and select the **hot** or **cool** access tier.
+* Create a **container** service into that storage account. Take note of the container name as you will need to add this in the Datadog Archive Page.
 
-**注:** まれに最後のデータを書き換える必要があるため、[不変性ポリシー][3]を設定しないでください (通常はタイムアウト)。
+**Note:** Do not set [immutability policies][3] because the last data needs to be rewritten in some rare cases (typically a timeout).
 
 [1]: https://portal.azure.com/#blade/HubsExtension/BrowseResource/resourceType/Microsoft.Storage%2FStorageAccounts
 [2]: https://docs.microsoft.com/en-us/azure/storage/common/storage-account-create?tabs=azure-portal
@@ -110,9 +111,9 @@ GCS ストレージバケットを持つプロジェクト用の [Google Cloud �
 
 {{% tab "Google Cloud Storage" %}}
 
-[Google Cloud アカウント][1]に移動し、アーカイブを送信するための [GCS バケットを作成][2]します。「**Choose how to control access to objects**」で、「**Set object-level and bucket-level permissions**」を選択します。
+Go to your [Google Cloud account][1] and [create a GCS bucket][2] to send your archives to. Under **Choose how to control access to objects**, select **Set object-level and bucket-level permissions.**
 
-**注:** まれに最後のデータを書き換える必要があるため、[保持ポリシー][3]を追加しないでください (通常はタイムアウト)。
+**Note:** Do not add [retention policy][3] because the last data needs to be rewritten in some rare cases (typically a timeout).
 
 [1]: https://console.cloud.google.com/storage
 [2]: https://cloud.google.com/storage/docs/quickstart-console
@@ -120,14 +121,14 @@ GCS ストレージバケットを持つプロジェクト用の [Google Cloud �
 {{% /tab %}}
 {{< /tabs >}}
 
-### 権限を設定
+### Set permissions
 
-[`logs_write_archive` 権限][5]のある Datadog ユーザーだけがログアーカイブ構成を作成、変更、または削除できます。
+Only Datadog users with the [`logs_write_archive` permission][5] can create, modify, or delete log archive configurations.
 
 {{< tabs >}}
 {{% tab "AWS S3" %}}
 
-1. 次の権限ステートメントを持つ[ポリシーを作成][1]します。
+1. [Create a policy][1] with the following permission statements:  
 
    ```json
    {
@@ -154,185 +155,185 @@ GCS ストレージバケットを持つプロジェクト用の [Google Cloud �
      ]
    }
    ```
-     * `GetObject` および `ListBucket` 権限により、[アーカイブからのリハイドレート][2]が可能になります。
-     * アーカイブのアップロードには、`PutObject` 権限で十分です。
-     * `s3:PutObject` と `s3:GetObject` アクションのリソース値は `/*` で終わっていることを確認してください。これらの権限はバケット内のオブジェクトに適用されるからです。
+     * The `GetObject` and `ListBucket` permissions allow for [rehydrating from archives][2].
+     * The `PutObject` permission is sufficient for uploading archives.
+     * Ensure that the resource value under the `s3:PutObject` and `s3:GetObject` actions ends with `/*` because these permissions are applied to objects within the buckets. 
 
-2. バケット名を編集します。
-3. オプションで、ログアーカイブを含むパスを指定します。
-4. Datadog のインテグレーションロールに新しいポリシーをアタッチします。
-   * AWS IAM コンソールで **Roles** に移動します。
-   * Datadog インテグレーションで使用されるロールを見つけます。デフォルトでは、 **DatadogIntegrationRole** という名前になっていますが、組織で名前を変更した場合は、名前が異なる場合があります。ロール名をクリックすると、ロールのサマリーページが表示されます。
-   * **Add permissions**、**Attach policies** の順にクリックします。
-   * 上記で作成したポリシーの名称を入力します。
-   * **Attach policies** をクリックします。
+2. Edit the bucket names.
+3. Optionally, specify the paths that contain your log archives.
+4. Attach the new policy to the Datadog integration role.  
+   * Navigate to **Roles** in the AWS IAM console.  
+   * Locate the role used by the Datadog integration. By default it is named **DatadogIntegrationRole**, but the name may vary if your organization has renamed it. Click the role name to open the role summary page.  
+   * Click **Add permissions**, and then **Attach policies**.  
+   * Enter the name of the policy created above.  
+   * Click **Attach policies**.  
 
 
 [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html
-[2]: /ja/logs/archives/rehydrating/
+[2]: /logs/archives/rehydrating/
 {{% /tab %}}
 {{% tab "Azure Storage" %}}
 
-1. Datadog アプリに、ストレージアカウントへ書き込み、ここからリハイドレートするための権限を与えます。
-2. [ストレージアカウントのページ][1]でストレージアカウントを選択し、**Access Control (IAM)** で **Add -> Add Role Assignment** を選択します。
-3. Role に **Storage Blob Data Contributor** を入力し、Azure と統合するために作成した Datadog アプリを選択して、保存します。
+1. Grant the Datadog app permission to write to and rehydrate from your storage account.
+2. Select your storage account from the [Storage Accounts page][1], go to **Access Control (IAM)**, and select **Add -> Add Role Assignment**.
+3. Input the Role called **Storage Blob Data Contributor**, select the Datadog app which you created to integrate with Azure, and save.
 
-{{< img src="logs/archives/logs_azure_archive_permissions.png" alt="Storage Blob Data Contributor ロールを Datadog アプリに追加します。" style="width:75%;">}}
+{{< img src="logs/archives/logs_azure_archive_permissions.png" alt="Add the Storage Blob Data Contributor role to your Datadog App." style="width:75%;">}}
 
 [1]: https://portal.azure.com/#blade/HubsExtension/BrowseResource/resourceType/Microsoft.Storage%2FStorageAccounts
 {{% /tab %}}
 {{% tab "Google Cloud Storage" %}}
 
-1. Datadog Google Cloud サービスアカウントに、バケットへアーカイブを書き込むための権限を与えます。
-2. [Google Cloud IAM Admin ページ][1]から Datadog の Google Cloud サービスアカウントのプリンシパルを選択し、**Edit principal** を選択します。
-3. **ADD ANOTHER ROLE** をクリックし、**Storage Object Admin** ロールを選択し、保存します。
+1. Grant your Datadog Google Cloud service account permissions to write your archives to your bucket.
+2. Select your Datadog Google Cloud service account principal from the [Google Cloud IAM Admin page][1] and select **Edit principal**.
+3. Click **ADD ANOTHER ROLE**, select the **Storage Object Admin** role, and save.
 
-   {{< img src="logs/archives/gcp_role_storage_object_admin-2.png" alt="Datadog Google Cloud サービスアカウントに Storage Object Admin ロールを追加。" style="width:75%;">}}
+   {{< img src="logs/archives/gcp_role_storage_object_admin-2.png" alt="Add the Storage Object Admin role to your Datadog Google Cloud Service Account." style="width:75%;">}}
 
 [1]: https://console.cloud.google.com/iam-admin/iam
 {{% /tab %}}
 {{< /tabs >}}
 
-### ログをバケットにルーティング
+### Route your logs to a bucket
 
-[Log Forwarding ページ][6]に移動し、**Archives** タブで **Add a new archive** を選択します。
+Navigate to the [Log Forwarding page][6] and select **Add a new archive** on the **Archives** tab.
 
-**注:** 
-* [`logs_write_archive` 権限][5]のある Datadog ユーザーだけがこの手順と次の手順を完了させることができます。
-* Azure Blob Storage へのログのアーカイブには、App Registration が必要です。[Azure インテグレーションページ][7]の手順を参照し、ドキュメントページの右側にある「サイト」を「US」に設定してください。アーカイブ目的で作成された App Registration は、"Storage Blob Data Contributor" ロールのみが必要です。ストレージバケットが Datadog Resource を通じて監視されているサブスクリプションにある場合、App Registration が冗長である旨の警告が表示されます。この警告は無視することができます。
-* バケットでネットワークアクセスを特定の IP に制限している場合は、[IP 範囲リスト][8]から Webhook の IP を許可リストに追加してください。
+**Notes:**
+* Only Datadog users with the [`logs_write_archive` permission][5] can complete this and the following step.  
+* Archiving logs to Azure Blob Storage requires an App Registration. See instructions [on the Azure integration page][7], and set the "site" on the right-hand side of the documentation page to "US." App Registration(s) created for archiving purposes only need the "Storage Blob Data Contributor" role. If your storage bucket is in a subscription being monitored through a Datadog Resource, a warning is displayed about the App Registration being redundant. You can ignore this warning.
+* If your bucket restricts network access to specified IPs, add the webhook IPs from the {{< region-param key="ip_ranges_url" link="true" text="IP ranges list">}} to the allowlist.
 
 {{< tabs >}}
 {{% tab "AWS S3" %}}
 
-S3 バケットに適した AWS アカウントとロールの組み合わせを選択します。
+Select the appropriate AWS account and role combination for your S3 bucket.
 
-バケット名を入力します。**任意**: ログアーカイブのすべてのコンテンツにプレフィックスディレクトリを入力します。
+Input your bucket name. **Optional**: Input a prefix directory for all the content of your log archives.
 
-{{< img src="logs/archives/logs_archive_aws_setup.png" alt="Datadog で S3 バケットの情報を設定" style="width:75%;">}}
+{{< img src="logs/archives/logs_archive_aws_setup.png" alt="Set your S3 bucket info in Datadog" style="width:75%;">}}
 
 {{% /tab %}}
 {{% tab "Azure Storage" %}}
 
-**Azure Storage** アーカイブタイプを選択し、ストレージアカウントで Storage Blob Data Contributor ロールのある Datadog アプリ用の Azure テナントとクライアントを選択します。
+Select the **Azure Storage** archive type, and the Azure tenant and client for the Datadog App that has the Storage Blob Data Contributor role on your storage account.
 
-ストレージアカウント名とアーカイブのコンテナ名を入力します。**任意**: ログアーカイブのすべてのコンテンツにプレフィックスディレクトリを入力します。
+Input your storage account name and the container name for your archive. **Optional**: Input a prefix directory for all the content of your log archives.
 
-{{< img src="logs/archives/logs_archive_azure_setup.png" alt="Datadog で Azure ストレージアカウントの情報を設定" style="width:75%;">}}
+{{< img src="logs/archives/logs_archive_azure_setup.png" alt="Set your Azure storage account info in Datadog" style="width:75%;">}}
 
 
 {{% /tab %}}
 {{% tab "Google Cloud Storage" %}}
 
-**GCS** のアーカイブタイプを選択し、ストレージバケットに書き込む権限を持つ GCS サービスアカウントを選択します。バケット名を入力します。
+Select the **GCS** archive type, and the GCS Service Account that has permissions to write on your storage bucket.
 
-バケット名を入力します。**任意**: ログアーカイブのすべてのコンテンツにプレフィックスディレクトリを入力します。
+Input your bucket name. **Optional**: Input a prefix directory for all the content of your log archives.
 
-{{< img src="logs/archives/logs_archive_gcp_setup.png" alt="Datadog で Azure ストレージアカウントの情報を設定" style="width:75%;">}}
+{{< img src="logs/archives/logs_archive_gcp_setup.png" alt="Set your Azure storage account info in Datadog" style="width:75%;">}}
 
 {{% /tab %}}
 {{< /tabs >}}
 
-### 高度な設定
+### Advanced settings
 
-#### Datadog の権限
+#### Datadog permissions
 
-デフォルト:
+By default:
 
-* すべての Datadog 管理者ユーザーは、アーカイブの作成、編集、並べ替えができます。詳しくは、[複数アーカイブの構成](#multiple-archives)を参照してください。
-* すべての Datadog 監理者および標準ユーザーは、アーカイブからリハイドレーションできます。
-* Datadog の読み取り専用ユーザーを含むすべてのユーザーは、リハイドレーションされたログにアクセスできます。
+* All Datadog Admin users can create, edit and reorder. See [Configure Multiple Archives](#multiple-archives) for more information.
+* All Datadog Admin and Standard users can rehydrate from archives.
+* All users, including Datadog Read Only users, can access rehydrated logs.
 
-オプションで、コンフィギュレーションステップを使用し、アーカイブにロールを割り当て、以下を実行できるユーザーを設定できます。
+Use this optional configuration step to assign roles on that archive and restrict who can:
 
-* そのアーカイブの構成を編集します。[`logs_write_archive`][9] 権限を参照してください。
-* そのアーカイブからリハイドレートします。[`logs_read_archives`][10] と [`logs_write_historical_view`][11] 権限を参照してください。
-* レガシーな [`read_index_data` 権限][12]を使用する場合に、リハイドレートされたログにアクセスします。
+* Edit that archive configuration. See the [`logs_write_archive`][9] permission.
+* Rehydrate from that archive. See the [`logs_read_archives`][10] and [`logs_write_historical_view`][11] permissions.
+* Access rehydrated logs in case you use the legacy [`read_index_data` permission][12].
 
-{{< img src="logs/archives/archive_restriction.png" alt="アーカイブおよびリハイドレート済みログへのアクセスを制限" style="width:75%;">}}
+{{< img src="logs/archives/archive_restriction.png" alt="Restrict access to Archives and Rehydrated logs" style="width:75%;">}}
 
-#### Datadog タグ
+#### Datadog tags
 
-以下のためにこのオプションの構成ステップを使用します。
+Use this optional configuration step to:
 
-* アーカイブ内のすべてのログタグを含める (デフォルトでは、すべての新規アーカイブに有効化されています)。**注**: 結果のアーカイブサイズが増大します。
-* リハイドレートされたログに、制限クエリポリシーに従ってタグを追加します。[`logs_read_data`][13] 権限を参照してください。
+* Include all log tags in your archives (activated by default on all new archives). **Note**: This increases the size of resulting archives.
+* Add tags on rehydrated logs according to your Restriction Queries policy. See the [`logs_read_data`][13] permission.
 
-{{< img src="logs/archives/tags_in_out.png" alt="アーカイブタグの構成" style="width:75%;">}}
+{{< img src="logs/archives/tags_in_out.png" alt="Configure Archive Tags" style="width:75%;">}}
 
-#### 最大スキャンサイズを定義する
+#### Define maximum scan size
 
-このオプションの構成ステップを使用して、ログアーカイブでリハイドレートのためにスキャンできるログデータの最大量 (GB 単位) を定義します。
+Use this optional configuration step to define the maximum volume of log data (in GB) that can be scanned for Rehydration on your Log Archives.
 
-最大スキャンサイズが定義されているアーカイブの場合、すべてのユーザーは、リハイドレートを開始する前にスキャンサイズを推定する必要があります。推定されたスキャンサイズがそのアーカイブで許可されているものより大きい場合、ユーザーはリハイドレートを要求する時間範囲を狭めなければなりません。時間範囲を減らすと、スキャンサイズが小さくなり、ユーザーがリハイドレートを開始できるようになります。
+For Archives with a maximum scan size defined, all users need to estimate the scan size before they are allowed to start a Rehydration. If the estimated scan size is greater than what is permitted for that Archive, users must reduce the time range over which they are requesting the Rehydration. Reducing the time range will reduce the scan size and allow the user to start a Rehydration.
 
-{{< img src="logs/archives/max_scan_size.png" alt="アーカイブの最大スキャンサイズを設定する" style="width:75%;">}}
+{{< img src="logs/archives/max_scan_size.png" alt="Define maximum scan size on Archive" style="width:75%;">}}
 
 {{< site-region region="us3" >}}
-#### ファイアウォールのルール
+#### Firewall rules
 
 {{< tabs >}}
-{{% tab "Azure Storage" %}}
+{{% tab "Azure storage" %}}
 
-ファイアウォールのルールはサポートされていません。
+Firewall rules are not supported.
 
 {{% /tab %}}
 {{< /tabs >}}
 
 {{< /site-region >}}
-#### ストレージクラス
+#### Storage class
 
 {{< tabs >}}
 {{% tab "AWS S3" %}}
 
-[S3 バケットにライフサイクルコンフィギュレーションを設定][1]して、ログアーカイブを最適なストレージクラスに自動的に移行できます。
+You can [set a lifecycle configuration on your S3 bucket][1] to automatically transition your log archives to optimal storage classes.
 
-[リハイドレート][2]は、以下のストレージクラスのみをサポートします。
+[Rehydration][2] only supports the following storage classes:
 
 * S3 Standard
 * S3 Standard-IA
 * S3 One Zone-IA
 * S3 Glacier Instant Retrieval
 
-他のストレージクラスにあるアーカイブからリハイドレートする場合は、まず上記のサポートされているストレージクラスのいずれかに移動させる必要があります。
+If you wish to rehydrate from archives in another storage class, you must first move them to one of the supported storage classes above.
 
 [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/how-to-set-lifecycle-configuration-intro.html
-[2]: /ja/logs/archives/rehydrating/
+[2]: /logs/archives/rehydrating/
 {{% /tab %}}
 {{% tab "Azure Storage" %}}
 
-アーカイブと[リハイドレート][1]は、以下のアクセス層にのみ対応しています。
+Archiving and [Rehydration][1] only supports the following access tiers:
 
-- ホットアクセス層
-- クールアクセス層
+- Hot access tier
+- Cool access tier
 
-他のアクセス層にあるアーカイブからリハイドレートする場合は、まず上記のサポートされている層のいずれかに移動させる必要があります。
+If you wish to rehydrate from archives in another access tier, you must first move them to one of the supported tiers above.
 
-[1]: /ja/logs/archives/rehydrating/
+[1]: /logs/archives/rehydrating/
 {{% /tab %}}
 {{< /tabs >}}
 
-#### サーバー側の暗号化 (SSE)
+#### Server side encryption (SSE)
 
 {{< tabs >}}
 {{% tab "AWS S3" %}}
 
 ##### SSE-S3
 
-Amazon S3 バケットのデフォルトの暗号化は、Amazon S3 管理キー ([SSE-S3][1]) によるサーバーサイド暗号化です。
+The default encryption for Amazon S3 buckets is server-side encryption with Amazon S3 management keys ([SSE-S3][1]).
 
-S3 バケットが SSE-S3 で暗号化されていることを確認するには
+To confirm your S3 bucket is encrypted with SSE-S3:
 
-1. S3 バケットに移動します。
-1. **Properties** タブをクリックします。
-1. **Default Encryption** セクションで、**Encryption key type** が **Amazon S3 managed keys (SSE-S3)** であることを確認します。
+1. Navigate to your S3 bucket.
+1. Click the **Properties** tab.
+1. In the **Default Encryption** section, check that the **Encryption key type** is **Amazon S3 managed keys (SSE-S3)**.
 
 ##### SSE-KMS
 
-また、Datadog は CMK を利用した [AWS KMS][2] からのサーバーサイド暗号化もサポートしています。有効化するには次の手順に従ってください。
+Alternatively, Datadog supports server-side encryption with a CMK from [AWS KMS][2]. To enable it, take the following steps:
 
-1. CMK を作成します。
-2. CMK に付随する CMK ポリシーに以下のコンテンツを添加して、AWS アカウント番号と Datadog IAM ロール名を適切なものに置き換えます。
+1. Create your CMK.
+2. Attach a CMK policy to your CMK with the following content, replacing the AWS account number and Datadog IAM role name appropriately:
 
 ```
 {
@@ -385,49 +386,49 @@ S3 バケットが SSE-S3 で暗号化されていることを確認するには
 }
 ```
 
-3. S3 バケットの **Properties** タブに移動し、**Default Encryption** を選択します。"AWS-KMS" オプション、CMK ARN の順に選択して保存します。
+3. Go to the **Properties** tab in your S3 bucket and select **Default Encryption**. Choose the "AWS-KMS" option, select your CMK ARN, and save.
 
-既存の KSM キーに変更を加える場合は、[Datadog サポート][3]にお問い合わせください。
+For any changes to existing KSM keys, reach out to [Datadog support][3] for further assistance.
 
 [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/default-bucket-encryption.html
 [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html
-[3]: /ja/help/
+[3]: /help/
 {{% /tab %}}
 
 {{< /tabs >}}
 
-### 検証
+### Validation
 
-Datadog アカウントでアーカイブ設定が正常に構成されたら、処理パイプラインは Datadog に取り込まれたすべてのログを豊かにする作業を開始します。その後アーカイブに転送されます。
+Once your archive settings are successfully configured in your Datadog account, your processing pipelines begin to enrich all logs ingested into Datadog. These logs are subsequently forwarded to your archive.
 
-ただし、アーカイブの構成を作成または更新した後、次のアーカイブのアップロードが試行されるまでに数分かかることがあります。アーカイブがアップロードされる頻度は、さまざまです。アーカイブが Datadog アカウントから正常にアップロードされていることを確認するために、**15 分後にストレージバケットを再確認**してください。
+However, after creating or updating your archive configurations, it can take several minutes before the next archive upload is attempted. The frequency at which archives are uploaded can vary. **Check back on your storage bucket in 15 minutes** to make sure the archives are successfully being uploaded from your Datadog account. 
 
-その後、アーカイブがまだ保留状態である場合、包含フィルターを確認して、クエリが有効で、[Live Tail][14] のログイベントに一致することを確認します。設定や権限の意図しない変更により、Datadog が外部アーカイブへのログのアップロードに失敗した場合、構成ページで該当する Log Archive がハイライトされます。
+After that, if the archive is still in a pending state, check your inclusion filters to make sure the query is valid and matches log events in [Live Tail][14]. When Datadog fails to upload logs to an external archive, due to unintentional changes in settings or permissions, the corresponding Log Archive is highlighted in the configuration page. 
 
-{{< img src="logs/archives/archive_errors_details.png" alt="アーカイブが正しく設定されているか確認する" style="width:100%;">}}
+{{< img src="logs/archives/archive_errors_details.png" alt="Check that your archives are properly set up" style="width:100%;">}}
 
-アーカイブにカーソルを合わせると、エラーの詳細と問題を解決するためのアクションが表示されます。また、[イベントエクスプローラー][15]にイベントが生成されます。これらのイベントに対するモニターを作成することで、障害を迅速に検出し、修復することができます。
+Hover over the archive to view the error details and the actions to take to resolve the issue. An event is also generated in the [Events Explorer][15]. You can create a monitor for these events to detect and remediate failures quickly.
 
-## 複数のアーカイブ
+## Multiple archives
 
-複数のアーカイブが定義されている場合、フィルターに基づき、最初のアーカイブにログが入力されます。
+If multiple archives are defined, logs enter the first archive based on filter. 
 
-{{< img src="logs/archives/log_forwarding_archives_multiple.png" alt="ログは、フィルターにマッチした最初のアーカイブに入ります。" style="width:100%;">}}
+{{< img src="logs/archives/log_forwarding_archives_multiple.png" alt="Logs enter the first archive whose filter they match on." style="width:100%;">}}
 
-アーカイブの順序を慎重に決めることが重要です。例えば、`env:prod` タグでフィルターされた最初のアーカイブと、フィルターなしの 2 番目のアーカイブ (`*` に相当) を作成すると、すべてのプロダクションログは一方のストレージバケットまたはパスに送られ、残りはもう一方に送られることになるでしょう。
+It is important to order your archives carefully. For example, if you create a first archive filtered to the `env:prod` tag and a second archive without any filter (the equivalent of `*`), all your production logs would go to one storage bucket or path, and the rest would go to the other.
 
-## アーカイブの形式
+## Format of the archives
 
-Datadog がストレージバケットに転送するログアーカイブは、圧縮 JSON 形式 (`.json.gz`) です。指定したプレフィックス (ない場合は `/`) を使用して、以下のようなアーカイブファイルが生成された日時を示すディレクトリ構造でアーカイブファイルが保存されます。
+The log archives that Datadog forwards to your storage bucket are in compressed JSON format (`.json.gz`). Using the prefix you indicate (or `/` if there is none), the archives are stored in a directory structure that indicates on what date and at what time the archive files were generated, such as the following:
 
 ```
 /my/bucket/prefix/dt=20180515/hour=14/archive_143201.1234.7dq1a9mnSya3bFotoErfxl.json.gz
 /my/bucket/prefix/dt=<YYYYMMDD>/hour=<HH>/archive_<HHmmss.SSSS>.<DATADOG_ID>.json.gz
 ```
 
-このディレクトリ構造により、過去のログアーカイブを日付に基づいてクエリする処理が簡略化されます。
+This directory structure simplifies the process of querying your historical log archives based on their date.
 
-ZIP 圧縮された JSON ファイル内の各イベントの内容は、以下のようにフォーマットされています。
+Within the zipped JSON file, each event's content is formatted as follows:
 
 ```json
 {
@@ -443,25 +444,25 @@ ZIP 圧縮された JSON ファイル内の各イベントの内容は、以下�
 }
 ```
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 <br>
-*Logging without Limits は Datadog, Inc. の商標です。
+*Logging without Limits is a trademark of Datadog, Inc.
 
-[1]: /ja/logs/indexes/#exclusion-filters
-[2]: /ja/logs/archives/rehydrating/
+[1]: /logs/indexes/#exclusion-filters
+[2]: /logs/archives/rehydrating/
 [3]: https://app.datadoghq.com/logs/pipelines/log-forwarding
-[4]: /ja/observability_pipelines/archive_logs/
-[5]: /ja/account_management/rbac/permissions/?tab=ui#logs_write_archives
+[4]: /observability_pipelines/archive_logs/
+[5]: /account_management/rbac/permissions/?tab=ui#logs_write_archives
 [6]: https://app.datadoghq.com/logs/pipelines/archives
-[7]: /ja/integrations/azure/
+[7]: /integrations/azure/
 [8]: https://ip-ranges.datadoghq.com/
-[9]: /ja/account_management/rbac/permissions#logs_write_archives
-[10]: /ja/account_management/rbac/permissions#logs_read_archives
-[11]: /ja/account_management/rbac/permissions#logs_write_historical_view
-[12]: /ja/account_management/rbac/permissions#logs_read_index_data
-[13]: /ja/account_management/rbac/permissions#logs_read_data
-[14]: /ja/logs/explorer/live_tail/
-[15]: /ja/service_management/events/explorer/
+[9]: /account_management/rbac/permissions#logs_write_archives
+[10]: /account_management/rbac/permissions#logs_read_archives
+[11]: /account_management/rbac/permissions#logs_write_historical_view
+[12]: /account_management/rbac/permissions#logs_read_index_data
+[13]: /account_management/rbac/permissions#logs_read_data
+[14]: /logs/explorer/live_tail/
+[15]: /service_management/events/explorer/

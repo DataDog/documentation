@@ -1,61 +1,61 @@
 ---
-algolia:
-  tags:
-  - エラー追跡
-description: バックエンドサービスから収集したエラーを検索し、管理する方法をご紹介します。
+title: Error Tracking for Backend Services
+kind: documentation
+description: Learn how to search and manage errors collected from your backend services.
 further_reading:
-- link: https://www.datadoghq.com/blog/service-page/
-  tag: GitHub
-  text: サービステレメトリー、エラー追跡、SLO などを一元的に把握します
+- link: "https://www.datadoghq.com/blog/service-page/"
+  tag: Blog
+  text: Explore a centralized view into service telemetry, Error Tracking, SLOs, and more
 - link: /tracing/trace_explorer/trace_view/
-  tag: ドキュメント
-  text: トレースエクスプローラーについて
+  tag: Documentation
+  text: Learn about the Trace Explorer
 - link: /tracing/error_tracking/explorer
-  tag: ドキュメント
-  text: エラートラッキングエクスプローラーについて
+  tag: Documentation
+  text: Learn about the Error Tracking Explorer
 - link: /monitors/types/error_tracking/
-  tag: ドキュメント
-  text: エラー追跡モニターを作成する
-title: バックエンドサービスのエラー追跡
+  tag: Documentation
+  text: Create an Error Tracking monitor
+algolia:
+  tags: [error tracking]
 ---
 
-## 概要
+## Overview
 
-{{< img src="error_tracking/error-tracking-overview.png" alt="エラートラッキングエクスプローラーの問題の詳細画面" style="width:100%;" >}}
+{{< img src="error_tracking/error-tracking-overview.png" alt="The details of an issue in the Error Tracking Explorer" style="width:100%;" >}}
 
 {{% error-tracking-description %}}
 
-## 計画と使用
+## Setup
 
-エラー追跡は、APM でサポートされているすべての言語で利用でき、別の SDK を使用する必要はありません。
+Error Tracking is available for all the languages supported by APM and does not require using a different SDK.
 
-オプションで、スタックトレース内でコードスニペットを見たい場合は、[GitHub インテグレーション][4]をセットアップしてください。
+Optionally, to see code snippets in your stack traces, set up the [GitHub integration][4].
 
-{{< img src="tracing/error_tracking/inline_code_snippet.png" alt="スタックトレース内のインラインコードスニペット" style="width:70%;" >}}
+{{< img src="tracing/error_tracking/inline_code_snippet.png" alt="An inline code snippet in a stack trace" style="width:70%;" >}}
 
-リポジトリの構成を始めるには、[ソースコードインテグレーションのドキュメント][6]を参照してください。
+To get started with configuring your repository, see the [Source Code Integration documentation][6].
 
-## エラースパンを追跡するために span タグを使用する
+## Use span tags to track error spans
 
-Datadog トレーサーは、インテグレーションやバックエンドサービスのソースコードの手動インスツルメンテーションを通じて、エラーを収集します。トレース内のエラースパンは、**エラーがサービスエントリースパン (一番上のサービススパン) に位置する場合**、エラー追跡によって処理されます。このスパンには、追跡対象の `error.stack`、`error.message`、`error.type` [スパンタグ][1]が含まれている必要があります。
+The Datadog tracers collect errors through integrations and the manual instrumentation of your backend services' source code. Error spans within a trace are processed by Error Tracking **if the error is located in a service entry span** (the uppermost service span). This span must also contain the `error.stack`, `error.message`, and `error.type` [span tags][1] to be tracked.
 
-{{< img src="tracing/error_tracking/flamegraph_with_errors.png" alt="エラーのあるフレームグラフ" style="width:100%;" >}}
+{{< img src="tracing/error_tracking/flamegraph_with_errors.png" alt="Flame graph with errors" style="width:100%;" >}}
 
-エラー追跡は、エラータイプ、エラーメッセージ、スタックトレースを形成するフレームを使用して、処理する各エラースパンのフィンガープリントを計算します。同じフィンガープリントを持つエラーはグループ化され、同じ問題に属します。詳しくは、[トレースエクスプローラーのドキュメント][2]を参照してください。
+Error Tracking computes a fingerprint for each error span it processes using the error type, the error message, and the frames that form the stack trace. Errors with the same fingerprint are grouped together and belong to the same issue. For more information, see the [Trace Explorer documentation][2].
 
-## トラブルシューティングやデバッグを開始するための問題点の検討
+## Examine issues to start troubleshooting or debugging
 
-Error Tracking は、バックエンドサービスから [Error Tracking Explorer][5] に収集されたエラーを自動的に問題に分類します。主な機能を確認するには、[Error Tracking Explorer のドキュメント][3]を参照してください。
+Error Tracking automatically categorizes errors into issues collected from your backend services in the [Error Tracking Explorer][5]. See the [Error Tracking Explorer documentation][3] for a tour of key features.
 
-APM から作成される問題には、影響を受けたスパンの分布、最新の最も関連性の高いスタックトレース、スパンタグ、ホストタグ、コンテナタグ、およびメトリクスが含まれます。
+Issues created from APM include the distribution of impacted spans, the latest most relevant stack trace, span tags, host tags, container tags, and metrics.
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/tracing/visualization/trace/?tab=spantags#more-information
-[2]: /ja/tracing/trace_explorer/trace_view/?tab=spantags
-[3]: /ja/tracing/error_tracking/explorer
-[4]: /ja/tracing
+[1]: /tracing/visualization/trace/?tab=spantags#more-information
+[2]: /tracing/trace_explorer/trace_view/?tab=spantags
+[3]: /tracing/error_tracking/explorer
+[4]: /tracing
 [5]: https://app.datadoghq.com/apm/error-tracking
-[6]: /ja/integrations/guide/source-code-integration
+[6]: /integrations/guide/source-code-integration

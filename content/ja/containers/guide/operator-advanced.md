@@ -1,58 +1,57 @@
 ---
+title: Advanced setup for Datadog Operator
 aliases:
-- /ja/agent/guide/operator-advanced
+ - /agent/guide/operator-advanced
 further_reading:
-- link: agent/kubernetes/log
-  tag: Documentation
-  text: Datadog と Kubernetes
-title: Datadog Operator の高度なセットアップ
+  - link: agent/kubernetes/log
+    tag: Documentation
+    text: Datadog and Kubernetes
 ---
 
-[Datadog Operator][1] は Kubernetes や OpenShift にDatadog Agent をデプロイする方法です。カスタムリソースステータスでデプロイ状況、健全性、エラーを報告し、高度なコンフィギュレーションオプションでコンフィギュレーションミスのリスクを抑えます。
+[The Datadog Operator][1] is a way to deploy the Datadog Agent on Kubernetes and OpenShift. It reports deployment status, health, and errors in its Custom Resource status, and it limits the risk of misconfiguration thanks to higher-level configuration options.
 
-## 前提条件
+## Prerequisites
 
-Datadog Operator を使用するには、次の前提条件が必要です。
+Using the Datadog Operator requires the following prerequisites:
 
-- **Kubernetes Cluster バージョン >= v1.20.X**: テストはバージョン >= `1.20.0` で行われましたが、バージョン `>= v1.11.0` で動作するはずです。以前のバージョンでは、CRD サポートが制限されているため、Operator が期待どおりに機能しない場合があります。
-- `datadog-operator` をデプロイするための [`Helm`][2]。
-- `datadog-agent` をインストールするための [`Kubectl` CLI][3]。
+- **Kubernetes Cluster version >= v1.20.X**: Tests were done on versions >= `1.20.0`. Still, it should work on versions `>= v1.11.0`. For earlier versions, because of limited CRD support, the Operator may not work as expected.
+- [`Helm`][2] for deploying the `datadog-operator`.
+- [`Kubectl` CLI][3] for installing the `datadog-agent`.
 
-## Datadog Operator のデプロイ
+## Deploy the Datadog Operator
 
-Datadog Operator を使用するには、Kubernetes クラスターにデプロイします。次に、Datadog デプロイコンフィギュレーションを含む `DatadogAgent` Kubernetes リソースを作成します。
+To use the Datadog Operator, deploy it in your Kubernetes cluster. Then create a `DatadogAgent` Kubernetes resource that contains the Datadog deployment configuration:
 
-1. Datadog Helm リポジトリを追加します。
+1. Add the Datadog Helm repo:
   ```
   helm repo add datadog https://helm.datadoghq.com
   ```
 
-2. Datadog Operator をインストールします。
+2. Install the Datadog Operator:
   ```
   helm install my-datadog-operator datadog/datadog-operator
   ```
 
-## Operator を使用して Datadog Agent をデプロイする
+## Deploy the Datadog Agents with the Operator
 
-Datadog Operator をデプロイした後、Kubernetes クラスターでの Datadog Agent のデプロイをトリガーする `DatadogAgent` リソースを作成します。このリソースを `Datadog-Operator` ネームスペースに作成することにより、Agent はクラスターのすべての `Node` に `DaemonSet` としてデプロイされます。
+After deploying the Datadog Operator, create the `DatadogAgent` resource that triggers the Datadog Agent's deployment in your Kubernetes cluster. By creating this resource in the `Datadog-Operator` namespace, the Agent is deployed as a `DaemonSet` on every `Node` of your cluster.
 
-以下のテンプレートを使用して、`datadog-agent.yaml` マニフェストを作成します。
+Create the `datadog-agent.yaml` manifest out of one of the following templates:
 
-* [ログ、APM、プロセス、メトリクス収集を有効にしたマニフェスト][4]。
-* [ログ、APM、メトリクス収集を有効にしたマニフェスト][5]。
-* [ログとメトリクス収集を有効にしたマニフェスト][6]。
-* [APMとメトリクス収集を有効にしたマニフェスト][7]。
-* [クラスター Agent のあるマニフェスト][8]。
-* [許容範囲のあるマニフェスト][9]。
+* [Manifest with Logs, APM, process, and metrics collection enabled.][4]
+* [Manifest with Logs, APM, and metrics collection enabled.][5]
+* [Manifest with APM and metrics collection enabled.][7]
+* [Manifest with Cluster Agent.][8]
+* [Manifest with tolerations.][9]
 
-`<DATADOG_API_KEY>` と `<DATADOG_APP_KEY>` を [Datadog API とアプリケーションキー][10]に置き換えてから、次のコマンドで Agent のインストールをトリガーします。
+Replace `<DATADOG_API_KEY>` and `<DATADOG_APP_KEY>` with your [Datadog API and application keys][10], then trigger the Agent installation with the following command:
 
 ```shell
 $ kubectl apply -n $DD_NAMESPACE -f datadog-agent.yaml
 datadogagent.datadoghq.com/datadog created
 ```
 
-`DatadogAgent` リソースの状態は次のコマンドで確認できます。
+You can check the state of the `DatadogAgent` resource with:
 
 ```shell
 kubectl get -n $DD_NAMESPACE dd datadog
@@ -61,7 +60,7 @@ NAME            ACTIVE   AGENT             CLUSTER-AGENT   CLUSTER-CHECKS-RUNNER
 datadog-agent   True     Running (2/2/2)                                           110m
 ```
 
-2-worker-nodes のクラスターでは、各ノードで作成された Agent ポッドが表示されます。
+In a 2-worker-nodes cluster, you should see the Agent pods created on each node.
 
 ```shell
 $ kubectl get -n $DD_NAMESPACE daemonset
@@ -76,18 +75,18 @@ datadog-agent-zcxx7                          1/1     Running   0          5m59s 
 ```
 
 
-## クリーンアップ
+## Cleanup
 
-次のコマンドは、上記の手順で作成されたすべての Kubernetes リソースを削除します。
+The following command deletes all the Kubernetes resources created by the above instructions:
 
 ```shell
 kubectl delete datadogagent datadog
 helm delete datadog
 ```
 
-### 許容範囲
+### Tolerations
 
-`datadog-agent.yaml` ファイルを次のコンフィギュレーションで更新して、`DaemonSet` の `Daemonset.spec.template` に許容範囲を追加します。
+Update your `datadog-agent.yaml` file with the following configuration to add the toleration in the `Daemonset.spec.template` of your `DaemonSet` :
 
 ```yaml
 kind: DatadogAgent
@@ -107,14 +106,14 @@ spec:
         - operator: Exists
 ```
 
-この新しいコンフィギュレーションを適用します。
+Apply this new configuration:
 
 ```shell
 $ kubectl apply -f datadog-agent.yaml
 datadogagent.datadoghq.com/datadog updated
 ```
 
-DaemonSet の更新は、新しい目的のポッド値を確認することで検証できます。
+The DaemonSet update can be validated by looking at the new desired pod value:
 
 ```shell
 $ kubectl get -n $DD_NAMESPACE daemonset
@@ -129,7 +128,7 @@ datadog-agent-lkfqt                          0/1     Running    0          15s
 datadog-agent-zvdbw                          1/1     Running    0          8m1s
 ```
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -137,9 +136,8 @@ datadog-agent-zvdbw                          1/1     Running    0          8m1s
 [2]: https://helm.sh
 [3]: https://kubernetes.io/docs/tasks/tools/install-kubectl/
 [4]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/v2alpha1/datadog-agent-all.yaml
-[5]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/v2alpha1/datadog-agent-logs-apm.yaml
-[6]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/v2alpha1/datadog-agent-logs.yaml
-[7]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/v2alpha1/datadog-agent-apm.yaml
+[5]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/v2alpha1/datadog-agent-with-logs-apm.yaml
+[7]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/v2alpha1/datadog-agent-with-apm-hostport.yaml
 [8]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/v2alpha1/datadog-agent-with-clusteragent.yaml
 [9]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/v2alpha1/datadog-agent-with-tolerations.yaml
 [10]: https://app.datadoghq.com/organization-settings/api-keys

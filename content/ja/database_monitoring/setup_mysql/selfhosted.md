@@ -1,82 +1,83 @@
 ---
-description: セルフホストの MySQL のデータベースモニタリングをインストールして構成します。
+title: Setting Up Database Monitoring for self hosted MySQL
+description: Install and configure Database Monitoring for self-hosted MySQL.
 further_reading:
 - link: /integrations/mysql/
-  tag: ドキュメント
-  text: 基本的な MySQL インテグレーション
-title: セルフホストの MySQL のデータベースモニタリングの設定
+  tag: Documentation
+  text: Basic MySQL Integration
+
 ---
 
-データベースモニタリングは、InnoDB ストレージエンジンのクエリメトリクス、クエリサンプル、説明プラン、接続データ、システムメトリクス、テレメトリを公開することにより、MySQL データベースの詳細な可視性を提供します。
+Database Monitoring provides deep visibility into your MySQL databases by exposing query metrics, query samples, explain plans, connection data, system metrics, and telemetry for the InnoDB storage engine.
 
-Agent は、読み取り専用のユーザーとしてログインすることでデータベースから直接テレメトリーを収集します。MySQL データベースでデータベースモニタリングを有効にするには、以下の設定を行ってください。
+The Agent collects telemetry directly from the database by logging in as a read-only user. Do the following setup to enable Database Monitoring with your MySQL database:
 
-1. [データベースのパラメーターを構成する](#configure-mysql-settings)
-1. [Agent にデータベースへのアクセスを付与する](#grant-the-agent-access)
-1. [Agent をインストールする](#install-the-agent)
+1. [Configure database parameters](#configure-mysql-settings)
+1. [Grant the Agent access to the database](#grant-the-agent-access)
+1. [Install the Agent](#install-the-agent)
 
-## はじめに
+## Before you begin
 
-サポートされている MySQL バージョン
-: 5.6、5.7、または 8.0+
+Supported MySQL versions
+: 5.6, 5.7, or 8.0+
 
-サポート対象の Agent バージョン
+Supported Agent versions
 : 7.36.1+
 
-パフォーマンスへの影響
-: データベースモニタリングのデフォルトの Agent コンフィギュレーションは保守的ですが、収集間隔やクエリのサンプリングレートなどの設定を調整することで、よりニーズに合ったものにすることができます。ワークロードの大半において、Agent はデータベース上のクエリ実行時間の 1 % 未満、および CPU の 1 % 未満を占めています。<br/><br/>
-データベースモニタリングは、ベースとなる Agent 上のインテグレーションとして動作します ([ベンチマークを参照][1]してください)。
+Performance impact
+: The default Agent configuration for Database Monitoring is conservative, but you can adjust settings such as the collection interval and query sampling rate to better suit your needs. For most workloads, the Agent represents less than one percent of query execution time on the database and less than one percent of CPU. <br/><br/>
+Database Monitoring runs as an integration on top of the base Agent ([see benchmarks][1]).
 
-プロキシ、ロードバランサー、コネクションプーラー
-: Datadog Agent は、監視対象のホストに直接接続する必要があります。セルフホスト型のデータベースの場合は、`127.0.0.1` またはソケットが推奨されます。Agent は、プロキシ、ロードバランサー、またはコネクションプーラーを介してデータベースに接続すべきではありません。Agent が実行中に異なるホストに接続すると (フェイルオーバーやロードバランシングなどの場合)、Agent は 2 つのホスト間で統計情報の差を計算し、不正確なメトリクスを生成します。
+Proxies, load balancers, and connection poolers
+: The Datadog Agent must connect directly to the host being monitored. For self-hosted databases, `127.0.0.1` or the socket is preferred. The Agent should not connect to the database through a proxy, load balancer, or connection pooler. If the Agent connects to different hosts while it is running (as in the case of failover, load balancing, and so on), the Agent calculates the difference in statistics between two hosts, producing inaccurate metrics.
 
-データセキュリティへの配慮
-: Agent がお客様のデータベースからどのようなデータを収集するか、またそのデータの安全性をどのように確保しているかについては、[機密情報][2]を参照してください。
+Data security considerations
+: See [Sensitive information][2] for information about what data the Agent collects from your databases and how to ensure it is secure.
 
-## MySQL 設定を構成する
+## Configure MySQL settings
 
-クエリのメトリクス、サンプル、および実行計画を収集するには、[MySQL パフォーマンススキーマ][3]を有効にし、以下の[パフォーマンススキーマオプション][4]をコマンドラインまたはコンフィギュレーションファイル (例: `mysql.conf`) で構成します。
+To collect query metrics, samples, and explain plans, enable the [MySQL Performance Schema][3] and configure the following [Performance Schema Options][4], either on the command line or in configuration files (for example, `mysql.conf`):
 
 {{< tabs >}}
 {{% tab "MySQL 5.6" %}}
-| パラメーター | 値 | 説明|
+| Parameter | Value | Description |
 | --- | --- | --- |
-| `performance_schema` | `ON` | 必須。パフォーマンススキーマを有効にします。|
-| `max_digest_length` | `4096` | より大きなクエリの収集に必要です。デフォルト値のままにすると、`1024` 文字より長いクエリは収集されません。|
-| <code style="word-break:break-all;">`performance_schema_max_digest_length`</code> | `4096` | `max_digest_length` と一致する必要があります。 |
-| `performance-schema-consumer-events-statements-current` | `ON` | 必須。現在実行中のクエリのモニタリングを可能にします。|
-| `performance-schema-consumer-events-waits-current` | `ON` | 必須。待機イベントの収集を有効にします。 |
-| `performance-schema-consumer-events-statements-history-long` | `ON` | 推奨。すべてのスレッドにおいて、より多くの最近のクエリを追跡することができます。この機能を有効にすると、頻度の低いクエリの実行情報を取得できる可能性が高まります。|
-| `performance-schema-consumer-events-statements-history` | `ON` | オプション。スレッドごとに最近のクエリの履歴を追跡することができます。この機能を有効にすると、頻度の低いクエリの実行情報を取得できる可能性が高まります。|
+| `performance_schema` | `ON` | Required. Enables the Performance Schema. |
+| `max_digest_length` | `4096` | Required for collection of larger queries. If left at the default value then queries longer than `1024` characters will not be collected. |
+| <code style="word-break:break-all;">`performance_schema_max_digest_length`</code> | `4096` | Must match `max_digest_length`. |
+| `performance-schema-consumer-events-statements-current` | `ON` | Required. Enables monitoring of currently running queries. |
+| `performance-schema-consumer-events-waits-current` | `ON` | Required. Enables the collection of wait events. |
+| `performance-schema-consumer-events-statements-history-long` | `ON` | Recommended. Enables tracking of a larger number of recent queries across all threads. If enabled it increases the likelihood of capturing execution details from infrequent queries. |
+| `performance-schema-consumer-events-statements-history` | `ON` | Optional. Enables tracking recent query history per thread. If enabled it increases the likelihood of capturing execution details from infrequent queries. |
 {{% /tab %}}
 
 {{% tab "MySQL ≥ 5.7" %}}
-| パラメーター | 値 | 説明 |
+| Parameter | Value | Description |
 | --- | --- | --- |
-| `performance_schema` | `ON` | 必須。パフォーマンススキーマを有効にします。|
-| `max_digest_length` | `4096` | より大きなクエリの収集に必要です。デフォルト値のままにすると、`1024` 文字より長いクエリは収集されません。|
+| `performance_schema` | `ON` | Required. Enables the Performance Schema. |
+| `max_digest_length` | `4096` | Required for collection of larger queries. If left at the default value then queries longer than `1024` characters will not be collected. |
 | <code style="word-break:break-all;">`performance_schema_max_digest_length`</code> | `4096` | Must match `max_digest_length`. |
-| <code style="word-break:break-all;">`performance_schema_max_sql_text_length`</code> | `4096` |  `max_digest_length` と一致する必要があります。|
-| `performance-schema-consumer-events-statements-current` | `ON` | 必須。現在実行中のクエリのモニタリングを可能にします。|
-| `performance-schema-consumer-events-waits-current` | `ON` | 必須。待機イベントの収集を有効にします。 |
-| `performance-schema-consumer-events-statements-history-long` | `ON` | 推奨。すべてのスレッドにおいて、より多くの最近のクエリを追跡することができます。この機能を有効にすると、頻度の低いクエリの実行情報を取得できる可能性が高まります。|
-| `performance-schema-consumer-events-statements-history` | `ON` | オプション。スレッドごとに最近のクエリの履歴を追跡することができます。この機能を有効にすると、頻度の低いクエリの実行情報を取得できる可能性が高まります。|
+| <code style="word-break:break-all;">`performance_schema_max_sql_text_length`</code> | `4096` | Must match `max_digest_length`. |
+| `performance-schema-consumer-events-statements-current` | `ON` | Required. Enables monitoring of currently running queries. |
+| `performance-schema-consumer-events-waits-current` | `ON` | Required. Enables the collection of wait events. |
+| `performance-schema-consumer-events-statements-history-long` | `ON` | Recommended. Enables tracking of a larger number of recent queries across all threads. If enabled it increases the likelihood of capturing execution details from infrequent queries. |
+| `performance-schema-consumer-events-statements-history` | `ON` | Optional. Enables tracking recent query history per thread. If enabled it increases the likelihood of capturing execution details from infrequent queries. |
 {{% /tab %}}
 {{< /tabs >}}
 
 
-**注**: Agent へのアクセス権限付与の一環として、Agent がランタイム時に動的に `performance-schema-consumer-*` 設定を有効にできるようにすることを推奨します。[ランタイムセットアップコンシューマー](#runtime-setup-consumers)を参照してください。
+**Note**: A recommended practice is to allow the agent to enable the `performance-schema-consumer-*` settings dynamically at runtime, as part of granting the Agent access. See [Runtime setup consumers](#runtime-setup-consumers).
 
-## Agent にアクセスを付与する
+## Grant the Agent access
 
-Datadog Agent が統計やクエリを収集するためには、データベースへの読み取り専用のアクセスが必要となります。
+The Datadog Agent requires read-only access to the database in order to collect statistics and queries.
 
-次の手順では、`datadog@'%'` を使用して任意のホストからログインするアクセス許可を Agent に付与します。`datadog@'localhost'` を使用して、`datadog` ユーザーが localhost からのみログインできるように制限できます。詳細については、[MySQL ドキュメント][5]を参照してください。
+The following instructions grant the Agent permission to login from any host using `datadog@'%'`. You can restrict the `datadog` user to be allowed to login only from localhost by using `datadog@'localhost'`. See the [MySQL documentation][5] for more info.
 
 {{< tabs >}}
 {{% tab "MySQL 5.6" %}}
 
-`datadog` ユーザーを作成し、基本的なアクセス許可を付与します。
+Create the `datadog` user and grant basic permissions:
 
 ```sql
 CREATE USER datadog@'%' IDENTIFIED BY '<UNIQUEPASSWORD>';
@@ -88,7 +89,7 @@ GRANT SELECT ON performance_schema.* TO datadog@'%';
 {{% /tab %}}
 {{% tab "MySQL ≥ 5.7" %}}
 
-`datadog` ユーザーを作成し、基本的なアクセス許可を付与します。
+Create the `datadog` user and grant basic permissions:
 
 ```sql
 CREATE USER datadog@'%' IDENTIFIED by '<UNIQUEPASSWORD>';
@@ -101,7 +102,7 @@ GRANT SELECT ON performance_schema.* TO datadog@'%';
 {{% /tab %}}
 {{< /tabs >}}
 
-次のスキーマを作成します。
+Create the following schema:
 
 ```sql
 CREATE SCHEMA IF NOT EXISTS datadog;
@@ -109,7 +110,7 @@ GRANT EXECUTE ON datadog.* to datadog@'%';
 GRANT CREATE TEMPORARY TABLES ON datadog.* TO datadog@'%';
 ```
 
-Agent が説明プランを収集できるようにするには、`explain_statement` プロシージャを作成します。
+Create the `explain_statement` procedure to enable the Agent to collect explain plans:
 
 ```sql
 DELIMITER $$
@@ -124,7 +125,7 @@ END $$
 DELIMITER ;
 ```
 
-さらに、説明プランを収集する**すべてのスキーマ**でこのプロシージャを作成します。`<YOUR_SCHEMA>` をデータベーススキーマに置き換えます。
+Additionally, create this procedure **in every schema** from which you want to collect explain plans. Replace `<YOUR_SCHEMA>` with your database schema:
 
 ```sql
 DELIMITER $$
@@ -140,8 +141,8 @@ DELIMITER ;
 GRANT EXECUTE ON PROCEDURE <YOUR_SCHEMA>.explain_statement TO datadog@'%';
 ```
 
-### ランタイムセットアップコンシューマー
-Datadogは、ランタイムで `performance_schema.events_*` コンシューマーを有効にする機能を Agent に与えるために、次のプロシージャを作成することをお勧めします。
+### Runtime setup consumers
+Datadog recommends that you create the following procedure to give the Agent the ability to enable `performance_schema.events_*` consumers at runtime.
 
 ```SQL
 DELIMITER $$
@@ -155,17 +156,17 @@ DELIMITER ;
 GRANT EXECUTE ON PROCEDURE datadog.enable_events_statements_consumers TO datadog@'%';
 ```
 
-## Agent のインストール
+## Install the Agent
 
-Datadog Agent をインストールすると、MySQL でのデータベースモニタリングに必要な MySQL チェックもインストールされます。MySQL データベースホストの Agent をまだインストールしていない場合は、[Agent のインストール手順][6]を参照してください。
+Installing the Datadog Agent also installs the MySQL check which is required for Database Monitoring on MySQL. If you haven't already installed the Agent for your MySQL database host, see the [Agent installation instructions][6].
 
-ホストで実行中の Agent に対してこのチェックを構成するには
+To configure this check for an Agent running on a host:
 
-MySQL の[メトリクス](#metric-collection)と[ログ](#log-collection-optional)の収集を開始するには、[Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `mysql.d/conf.yaml` ファイルを編集します。カスタムメトリクスのオプションなど、使用可能なすべてのコンフィギュレーションオプションについては、[サンプル mysql.d/conf.yaml][8] を参照してください。
+Edit the `mysql.d/conf.yaml` file, in the `conf.d/` folder at the root of your [Agent's configuration directory][7] to start collecting your MySQL [metrics](#metric-collection) and [logs](#log-collection-optional). See the [sample mysql.d/conf.yaml][8] for all available configuration options, including those for custom metrics.
 
-### メトリクスの収集
+### Metric collection
 
-MySQL メトリクスを収集するには、`mysql.d/conf.yaml` に次のコンフィギュレーションブロックを追加します。
+Add this configuration block to your `mysql.d/conf.yaml` to collect MySQL metrics:
 
 ```yaml
 init_config:
@@ -175,23 +176,23 @@ instances:
     host: 127.0.0.1
     port: 3306
     username: datadog
-    password: '<YOUR_CHOSEN_PASSWORD>' # 前述の CREATE USER ステップで作成
+    password: '<YOUR_CHOSEN_PASSWORD>' # from the CREATE USER step earlier
 ```
 
-**注**: パスワードに特殊文字が含まれる場合は、単一引用符で囲んでください。
+**Note**: Wrap your password in single quotes in case a special character is present.
 
-`datadog` ユーザーは、`localhost` ではなく `host: 127.0.0.1` として MySQL インテグレーション構成内にセットアップされる必要があります。または、`sock` を使用することもできます。
+Note that the `datadog` user should be set up in the MySQL integration configuration as `host: 127.0.0.1` instead of `localhost`. Alternatively, you may also use `sock`.
 
-[Agent を再起動][9]すると、Datadog への MySQL メトリクスの送信が開始されます。
+[Restart the Agent][9] to start sending MySQL metrics to Datadog.
 
-### ログ収集 (オプション)
+### Log collection (optional)
 
-Agent によってデータベースから収集されたテレメトリーに加えて、データベースのログを直接 Datadog に送信することも選択できます。
+In addition to telemetry collected from the database by the Agent, you can also choose to send your database logs directly to Datadog.
 
-1. MySQL は、デフォルトでは `/var/log/syslog` 内のすべてをログに記録しますが、これには、読み取りのルートアクセス許可が必要です。ログへのアクセス可能性を高めるには、以下の手順に従ってください。
+1. By default MySQL logs everything in `/var/log/syslog` which requires root access to read. To make the logs more accessible, follow these steps:
 
-   1. `/etc/mysql/conf.d/mysqld_safe_syslog.cnf` を編集して、すべての行をコメントアウトします。
-   2. `/etc/mysql/my.cnf` を編集して、必要なログ設定を有効にします。例えば、一般ログ、エラーログ、低速クエリのログを有効にするには、次のコンフィギュレーションを使用します。
+   1. Edit `/etc/mysql/conf.d/mysqld_safe_syslog.cnf` and comment out all lines.
+   2. Edit `/etc/mysql/my.cnf` to enable the desired logging settings. For example, to enable general, error, and slow query logs, use the following configuration:
 
      ```conf
        [mysqld_safe]
@@ -206,9 +207,9 @@ Agent によってデータベースから収集されたテレメトリーに�
        long_query_time = 3
      ```
 
-   3. ファイルを保存して MySQL を再起動します。
-   4. Agent が `/var/log/mysql` ディレクトリとその中のすべてのファイルに対する読み取りアクセス許可を持つことを確認します。`logrotate` コンフィギュレーションもチェックして、これらのファイルが考慮され、アクセス許可が正しく設定されていることを確認します。
-      `/etc/logrotate.d/mysql-server` の内容は次のようになります。
+   3. Save the file and restart MySQL.
+   4. Make sure the Agent has read access to the `/var/log/mysql` directory and all of the files within. Double-check your `logrotate` configuration to make sure these files are taken into account and that the permissions are correctly set.
+      In `/etc/logrotate.d/mysql-server` there should be something similar to:
 
      ```text
        /var/log/mysql.log /var/log/mysql/mysql.log /var/log/mysql/mysql_slow.log {
@@ -220,13 +221,13 @@ Agent によってデータベースから収集されたテレメトリーに�
        }
      ```
 
-2. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
+2. Collecting logs is disabled by default in the Datadog Agent, enable it in your `datadog.yaml` file:
 
    ```yaml
    logs_enabled: true
    ```
 
-3. MySQL のログの収集を開始するには、次の構成ブロックを `mysql.d/conf.yaml` ファイルに追加します。
+3. Add this configuration block to your `mysql.d/conf.yaml` file to start collecting your MySQL logs:
 
    ```yaml
    logs:
@@ -269,32 +270,32 @@ Agent によってデータベースから収集されたテレメトリーに�
        #     pattern: \t\t\s*\d+\s+|\d{6}\s+\d{,2}:\d{2}:\d{2}\t\s*\d+\s+
    ```
 
-4. [Agent を再起動します][9]。
+4. [Restart the Agent][9].
 
-## UpdateAzureIntegration
+## Validate
 
-[Agent の status サブコマンドを実行][10]し、Checks セクションで `mysql` を探します。または、[データベース][11]のページを参照してください。
+[Run the Agent's status subcommand][10] and look for `mysql` under the Checks section. Or visit the [Databases][11] page to get started!
 
-## Agent の構成例
+## Example Agent Configurations
 {{% dbm-mysql-agent-config-examples %}}
 
-## トラブルシューティング
+## Troubleshooting
 
-インテグレーションと Agent を手順通りにインストール・設定しても期待通りに動作しない場合は、[トラブルシューティング][12]を参照してください。
+If you have installed and configured the integrations and Agent as described and it is not working as expected, see [Troubleshooting][12].
 
-## その他の参考資料
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/agent/basic_agent_usage#agent-overhead
-[2]: /ja/database_monitoring/data_collected/#sensitive-information
+[1]: /database_monitoring/agent_integration_overhead/?tab=mysql
+[2]: /database_monitoring/data_collected/#sensitive-information
 [3]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-quick-start.html
 [4]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-options.html
 [5]: https://dev.mysql.com/doc/refman/8.0/en/creating-accounts.html
 [6]: https://app.datadoghq.com/account/settings/agent/latest
-[7]: /ja/agent/configuration/agent-configuration-files/#agent-configuration-directory
+[7]: /agent/configuration/agent-configuration-files/#agent-configuration-directory
 [8]: https://github.com/DataDog/integrations-core/blob/master/mysql/datadog_checks/mysql/data/conf.yaml.example
-[9]: /ja/agent/configuration/agent-commands/#start-stop-and-restart-the-agent
-[10]: /ja/agent/configuration/agent-commands/#agent-status-and-information
+[9]: /agent/configuration/agent-commands/#start-stop-and-restart-the-agent
+[10]: /agent/configuration/agent-commands/#agent-status-and-information
 [11]: https://app.datadoghq.com/databases
-[12]: /ja/database_monitoring/troubleshooting/?tab=mysql
+[12]: /database_monitoring/troubleshooting/?tab=mysql

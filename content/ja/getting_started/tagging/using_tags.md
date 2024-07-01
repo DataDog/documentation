@@ -1,46 +1,46 @@
 ---
+title: Using Tags
+kind: documentation
+description: Learn how to use tags in Datadog products.
 aliases:
-- /ja/tagging/using_tags/
-description: Datadog 製品でのタグの使用方法について説明します。
+- /tagging/using_tags/
 further_reading:
-- link: https://www.datadoghq.com/blog/tagging-best-practices/
-  tag: ブログ
-  text: インフラストラクチャーとアプリケーションにタグを付けるためのベストプラクティス
+- link: "https://www.datadoghq.com/blog/tagging-best-practices/"
+  tag: Blog
+  text: Best practices for tagging your infrastructure and applications
 - link: /getting_started/tagging/
   tag: Documentation
-  text: タグの概要
+  text: Getting started with tags
 - link: /getting_started/tagging/assigning_tags/
-  tag: ドキュメント
-  text: タグの割り当て方法
-kind: ドキュメント
-title: タグの使用方法
+  tag: Documentation
+  text: Learn how to assign tags
 ---
 
-## 概要
+## Overview
 
-[タグの割り当て][1]後に、Datadog プラットフォームでタグを使用してデータの絞り込みおよびグループ化を開始します。タグを使用して、データを含めたり除外したりできます。
+After [assigning tags][1], start using them to filter and group your data in your Datadog platform. Tags can be used to include or exclude data.
 
-複数のタグを含めたり除外したりする場合:
+When including or excluding multiple tags:
 
-* 含めるには `AND` ロジックを使用します
-* 除外するには `OR` ロジックを使用します
+* Include uses `AND` logic
+* Exclude uses `OR` logic
 
-## イベント
+## Events
 
-[イベントエクスプローラー][2]は、指定された期間の環境からのイベントを表示します。タグを使用して、イベントリストをフィルターし、イベントのサブセットに焦点を当てることができます。`tags:` の後にタグを入力すると、そのタグを持つホスト、[インテグレーション][3]、またはサービスからのすべてのイベントを見ることができます。例えば、`service:coffee-house` というタグを検索するには、`tags:service:coffee-house` を使用します。
+The [Events Explorer][2] shows the events from your environment over a specified time period. Use tags to filter the events list and focus on a subset of events. Enter `tags:` followed by a tag to see all the events coming from a host, [integration][3], or service with that tag. For example, use `tags:service:coffee-house` to search for the tag `service:coffee-house`.
 
-複数のタグを包括的に検索する場合は、括弧を使用し、各タグを OR で区切ってください: `tags:(service:coffee-house OR host:coffeehouseprod)`。複数のタグを排他的に検索するには、各タグを AND で区切ってください: `tags:(service:coffee-house AND host:coffeehouseprod)`。
+To search multiple tags inclusively, use parentheses and separate each tag with OR: `tags:(service:coffee-house OR host:coffeehouseprod)`. To search multiple tags exclusively, separate each tag with AND: `tags:(service:coffee-house AND host:coffeehouseprod)`.
 
-## ダッシュボード  
+## Dashboards
 
 {{< tabs >}}
 {{% tab "Assignment" %}}
 
-タグを使用し、メトリクスを絞り込んで[ダッシュボード グラフ][1]に表示するか、表示するメトリクスのグループを作成します。表示するメトリクスを絞り込むには、**from** テキストボックスにタグを入力します。こうすることで、選択したメトリクスに、この特定のタグ (この例では `service:coffee-house`) が割り当てられたすべてのソースが表示されます。
+Use tags to filter metrics to display in a [dashboard graph][1], or to create aggregated groups of metrics to display. To filter the metrics to display, enter the tag in the **from** text box. This metric displays over all sources that have that particular tag assigned (`service:web-store` in the example below).
 
-{{< img src="tagging/using_tags/dashboardtags_1.png" alt="ダッシュボードの from テキストボックスに入力されたタグ" style="width:80%;">}}
+{{< img src="tagging/using_tags/dashboards_tags_example.png" alt="Filter metrics in dashboards by adding a tag to the 'from' field, in this example the metric is filtered to 'service:web-store'" style="width:80%;">}}
 
-高度なタグ値のフィルタリングはブールフィルターでも使用できます。次のブール構文がサポートされます。
+Advanced tag value filtering is also available with boolean filters. The following boolean syntax is supported:
 
 * `NOT`, `!`
 * `AND`, `,`
@@ -48,131 +48,131 @@ title: タグの使用方法
 * `key IN (tag_value1, tag_value2,...)`
 * `key NOT IN (tag_value1, tag_value2,...)`
 
-`AND`、`OR` を使用して、特定のタグ全体のメトリクスを確認します。
+Use `AND`, `ORs` to look at a metric across specific tags:
 
-{{< img src="tagging/using_tags/dashboard_boolean_1.png" alt="AND/OR を使用したブールフィルター" style="width:80%;">}}
+{{< img src="tagging/using_tags/dashboard_advanced_tags_AND_OR.png" alt="Boolean Filter with AND/OR" style="width:80%;">}}
 
-`IN`、`NOT IN` を使用して、メトリクスを特定のタグにフィルタリングします。
+Use `IN`, `NOT IN` to quickly filter a metric down to specific tags:
 
-{{< img src="tagging/using_tags/dashboards_boolean_2.png" alt="IN/NOT IN によるブールフィルター" style="width:80%;">}}
+{{< img src="tagging/using_tags/dashboard_advanced_tags_NOT_IN.png" alt="Boolean Filter with IN/NOT IN" style="width:80%;">}}
 
-タグを使用して集計されたグループを作成するには、**avg by** テキストボックスにタグのキー部分を入力します。たとえば、`service:coffee-house` のようにキー `service` でタグ付けされたメトリクスを表示する時系列グラフでは、**avg by** テキストボックスに `service` を入力すると、`service` のタグ値ごとに 1 つの行が表示されます。各行は、この `service` タグ値を共有するすべてのソースの平均のメトリクス値を表します。
+To create an aggregated group using tags, enter the key part of the tag in the **avg by** text box. For example, if you have a timeseries graph showing a metric tagged with the key `service`, such as `service:web-store`, enter `service` in the **avg by** text box to show one line for each `service` tag value. Each line represents the average metric value across all sources that share that `service` tag value.
 
-{{< img src="tagging/using_tags/dashboardtags.png" alt="ダッシュボードの avg by テキストボックスに入力されたタグ" style="width:80%;">}}
+{{< img src="tagging/using_tags/dashboard_group_by_tags.png" alt="Tags in Dashboards avg by text box" style="width:80%;">}}
 
-タグを使用して、ダッシュボードでイベントを重ねることもできます。これは、[イベントエクスプローラー][2]と同じように機能します。
-`tags:` に続けてタグを入力します。一致するイベントは、縦棒としてグラフに重なります。以下の例は、`tags:service:coffee-house` を使用します。
+Tags can also be used to overlay events on the dashboard. This works the same way as in the [Events Explorer][2].
+The matching events are overlaid as vertical bars on the graph. The example below uses `service:web-store`.
 
-{{< img src="tagging/using_tags/dashboardeventtags.png" alt="ダッシュボードでのイベントオーバーレイ" style="width:80%;">}}
+{{< img src="tagging/using_tags/dashboard_event_overlays.png" alt="Use tags to add Event Overlays in Dashboards" style="width:80%;">}}
 
-ダッシュボードのグラフの **from** タグの切り替え時間を短縮するには、[テンプレート変数][3]を使用します。以下の例では、`service` を使用して `service` タグキーを表します。テンプレート変数を使用するには、グラフ クエリの **from** テキストボックスに `$service` テンプレート変数を追加します。
+Use [template variables][3] to save time switching the **from** tag on graphs in your dashboard. In the example below, `service` is used to represent the `service` tag key. To use the template variable, add the `$service` template variable in the **from** text box of your graph query.
 
-{{< img src="tagging/using_tags/dashboardtemplatevariables.png" alt="ダッシュボードテンプレート変数" style="width:80%;">}}
+{{< img src="tagging/using_tags/dashboard_dynamic_template_variables.png" alt="Dashboard Template Variables" style="width:80%;">}}
 
-[1]: /ja/dashboards/
-[2]: /ja/events/
-[3]: /ja/dashboards/template_variables/
+[1]: /dashboards/
+[2]: /events/
+[3]: /dashboards/template_variables/
 {{% /tab %}}
 {{% tab "Examples" %}}
 
-以下は、時系列チャートエディターを使用したタグの例です。最初のスクリーンショットでは、タグは適用されていません。すべてのホストでの平均 CPU 使用率が表示されます。
+Here is an example of tags using the timeseries graph editor. For the first screenshot, no tags have been applied, and the average CPU usage across all hosts is displayed:
 
-{{< img src="tagging/using_tags/Tags_1.png" alt="Tags_1" style="width:75%;">}}
+{{< img src="tagging/using_tags/dashboard_timeseries_graph_editor_no_tags.png" alt="Timeseries graph editor with no tags added" style="width:75%;">}}
 
-次に、タグ (`region:eastus`) を **from** テキストボックスに含めるようにエディターを更新します。これにより、Datadog は米国東部リージョンでの CPU 使用率を参照できます。この例では `region` タグを使用しますが、`application`、`service`、`environment` など、Datadog プラットフォームに送信された任意のタグを使用できます。
+Next, the editor is updated to include a tag (`region:eastus`) in the **from** text box that enables Datadog to look at CPU usage across the US East region. The `region` tag is used as an example here, but you could use any arbitrary tag sent to your Datadog platform, including `application`, `service`, or `environment`.
 
-{{< img src="tagging/using_tags/Tags_2.png" alt="Tags_2" style="width:75%;">}}
+{{< img src="tagging/using_tags/dashboard_timeseries_graph_editor_from_tag.png" alt="Timeseries graph editor filtered by the 'region:us-east-1' tag" style="width:75%;">}}
 
-最後に、2 番目の空フィールド (**avg by** テキストボックス) を使用して、各 `host` の個別の時系列線を表示します。米国東部リージョンで実行されている個別のホストのサーバー CPU が表示されます。
+Finally, the second empty field (the **avg by** text box) is used to show an individual timeseries line for each `host`. Server CPU is displayed for individual hosts running in the US East region.
 
-{{< img src="tagging/using_tags/Tags_3.png" alt="Tags_3" style="width:75%;">}}
+{{< img src="tagging/using_tags/dashboard_timeseries_graph_editor_sumby_tag.png" alt="Timeseries graph editor filtered by 'region:us-east-1' and grouped by 'host'" style="width:75%;">}}
 
-必要に応じて、タグを追加して範囲をさらに絞り込みます。たとえば、`region:eastus` や `env:production` のホストなどです。タグは Datadog 全体で使用でき、すべてのコア要素 (メトリクス、トレース、ログ) に適用されます。
+If needed, add additional tags to narrow down the scope even further—for example, hosts in `region:eastus` and `env:production`. Tags can be used throughout Datadog and be applied to all core elements (metrics, traces, and logs).
 
 {{% /tab %}}
 {{< /tabs >}}
 
-## インフラストラクチャー
+## Infrastructure
 
-[ホストマップ][4]、[インフラストラクチャーリスト][5]、[コンテナ][6]、[処理][7]を絞り込むには、ページ上部にある **Filter by** テキストボックスにタグを入力します。ホストとコンテナは **Group by** テキストボックスを使い、タグキーでグループ化できます。グループボックスに `service` と入力すると、各サービスがグループの見出しとして表示されます。
+To filter the [Host Map][4], [Infrastructure List][5], [Containers][6], and [Processes][7], enter a tag in the **Filter by** text box at the top of the page. Hosts and containers can be grouped by tag key using the **Group by** text box. If you enter `service` in the group box, you see each service as a group heading.
 
 {{< tabs >}}
 {{% tab "Host Map" %}}
 
-このセクションでは、タグを使用してホストを絞り込みまたはグループ化します。
+Under this section, use tags to filter or group Hosts:
 
-{{< img src="tagging/using_tags/hostmaptags.png" alt="ホストマップタグ" style="width:80%;">}}
+{{< img src="tagging/using_tags/hostmaptags.png" alt="Host Map Tags" style="width:80%;">}}
 
-または、コンテナを絞り込みまたはグループ化することもできます。
+Or Containers:
 
-{{< img src="tagging/using_tags/containermaptags.png" alt="コンテナマップタグ" style="width:80%;">}}
+{{< img src="tagging/using_tags/containermaptags.png" alt="Container Map Tags" style="width:80%;">}}
 {{% /tab %}}
 
 {{% tab "Infrastructure List" %}}
 
-以下は、インフラストラクチャーリストページのテキストボックスによる絞り込みまたはグループ化です。
+Here are the filter and group by text boxes on the Infrastructure List page:
 
-{{< img src="tagging/using_tags/infrastructuretags.png" alt="インフラストラクチャーリストにあるタグ" style="width:80%;">}}
+{{< img src="tagging/using_tags/infrastructuretags.png" alt="Tags in the Infrastructure List" style="width:80%;">}}
 {{% /tab %}}
 
 {{% tab "Containers" %}}
 
-以下は、ライブコンテナページのテキストボックスによる絞り込みまたはグループ化です。
+Here are the filter and group by text boxes on the Live Containers page:
 
-{{< img src="tagging/using_tags/livecontainertags.png" alt="ライブコンテナタグ" style="width:80%;">}}
+{{< img src="tagging/using_tags/livecontainertags.png" alt="Live Container Tags" style="width:80%;">}}
 {{% /tab %}}
 
 {{% tab "Processes" %}}
 
-以下は、ライブプロセスページのテキストボックスによる絞り込みまたはグループ化です。
+Here are the filter and group by text boxes on the Live Processes page:
 
-{{< img src="tagging/using_tags/liveprocessestags.png" alt="ライブプロセスタグ" style="width:80%;">}}
+{{< img src="tagging/using_tags/liveprocessestags.png" alt="Live Process Tags" style="width:80%;">}}
 {{% /tab %}}
 {{< /tabs >}}
 
-## アラート設定
+## Monitors
 
-[割り当てられたタグ][32]によってモニターや[モニターのダウンタイム][31]を絞り込むには、検索バーかファセットのチェックボックスを使用します。検索バーの形式は `tag:<キー>:<値>` で、`tag:service:coffee-house` などです。特定のタグを持つモニターを検索から除外するには、 `-` を使用して、`tag:-service:coffee-house` とします。
+To filter monitors and [monitor downtimes][31] by [assigned tags][32], use the search bar or facet checkboxes. The search bar format is `tag:<KEY>:<VALUE>`, for example: `tag:service:coffee-house`. To exclude monitors with a specific tag from your search, use `-`, for example: `tag:-service:coffee-house`.
 
-{{< img src="/tagging/using_tags/manage_monitor_tags.png" alt="検索バーのモニターをタグでフィルター" style="width:80%;">}}
+{{< img src="/tagging/using_tags/manage_monitor_tags.png" alt="Filter monitors in the search bar with tags" style="width:80%;">}}
 
-**注**: モニタータグは、メトリクスタグとは異なり、独立しています。詳しくは、[モニタータグ][30]のドキュメントをご覧ください。
+**Note**: Monitor tags are different and separate from metric tags. For more information, see the documentation on [Monitor tags][30].
 
-新しいモニターを作成する場合は、以下の場所で*メトリクス タグ*を使用します。
-* これらのタグがあるメトリクスのみにモニター範囲を制限する **from** テキストボックス。
-* 対応するメトリクスをモニター範囲から削除する **excluding** テキストボックス。
-* 各タグ値に対するマルチアラートモニターに変換する **avg by** テキストボックス。
+When creating a new monitor, use *metric tags* in the:
+* **from** text box to limit the monitor scope to only metrics that have those tags.
+* **excluding** text box to remove the corresponding metrics from the monitor scope.
+* **avg by** text box to transform the monitor into a multi alert monitor on each tag value.
 
-## メトリクス
+## Metrics
 
-[Metrics Explorer][8] でタグを使用して、複数のタグでメトリクスを絞り込むか、タグ キー別に複数のグラフを表示します。以下の例は、`service:web-store` のメトリクスのグラフを作成します。
+Use tags in the [Metrics Explorer][8] to filter metrics over tags or display multiple graphs by tag key. The example below graphs a metric over `service:web-store`.
 
-{{< img src="tagging/using_tags/metrics_explorer.png" alt="個々のタグにスコープされたメトリクスグラフ" style="width:80%;">}}
+{{< img src="tagging/using_tags/metrics_explorer.png" alt="A metric graph scoped to an individual tag" style="width:80%;">}}
 
-## インテグレーション
+## Integrations
 
-一部のインテグレーションでは、オプションでタグを使用してメトリクスを制限できます。
+Some integrations allow you to optionally limit metrics using tags.
 
 {{< tabs >}}
 {{% tab "AWS" %}}
 
-The [AWS インテグレーションタイル][1] には、`to hosts with tag` と `to Lambdas with tag` という 2 つのタグフィルターがあります。
+The [AWS integration tile][1] has the tag filters `to hosts with tag` and `to Lambdas with tag`.
 
-これらのフィールドでは、EC2 や Lambda リソースの収集に使うフィルターを定義する、コンマで区切られたタグのリスト（`<KEY>:<VALUE>` 形式）が使用できます。`<KEY>:<VALUE>` はタグに基づく監視に応じて関数を含めたり除外したりできます。タグを除外するように指定するには、タグキーの前に `!` を入力します。`?` （1 文字の場合）や `*` （複数文字の場合）のようなワイルドカードも使用できます。
+These fields accept a comma separated list of tags (in the form `<KEY>:<VALUE>`) that defines a filter, which is used for collecting your EC2 or Lambda resources. You can use these `<KEY>:<VALUE>` to both include and exclude functions based from monitoring based on tags. To specify that tag should be excluded, add a `!` before the tag key. You can also use wildcards, such as `?` (for single characters) and `*` (for multiple characters).
 
-フィルターには、`OR` ステートメントを使用して包含タグが存在するリソースが含まれます。以下のフィルター例は、`datadog:monitored` または `env:production` タグを含む EC2 インスタンスを収集します。
+The filters include resources where any inclusion tag is present by using an `OR` statement. The following example filter collects EC2 instances that contain the tag `datadog:monitored` OR `env:production`:
 
 ```text
 datadog:monitored,env:production
 ```
 
-除外タグを指定すると、それが優先され `AND` ステートメントとなります。以下のフィルター例では、`datadog:monitored` または `env:production` または `c1.*` 値を持つ `instance-type` タグで `region:us-east-1` タグではないタグを含む EC2 インスタンスを収集します。
+If you specified an exclusion a tag, it takes precedence and forms an `AND` statement. The following example filter collects EC2 instances that contain the tag `datadog:monitored`, OR `env:production`, OR an `instance-type` tag with a `c1.*` value AND NOT a `region:us-east-1` tag:
 
 ```text
 datadog:monitored,env:production,instance-type:c1.*,!region:us-east-1
 ```
 
-AWS のタグ付けに関する詳細は、[EC2][2] および [Lambda][3] ドキュメントを参照してください。
+Read more about AWS tagging in the [EC2][2] and [Lambda][3] documentation.
 
 [1]: https://app.datadoghq.com/account/settings#integrations/amazon-web-services
 [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html
@@ -180,11 +180,11 @@ AWS のタグ付けに関する詳細は、[EC2][2] および [Lambda][3] ドキ
 {{% /tab %}}
 {{% tab "Azure" %}}
 
-[Azure インテグレーションタイル][1] には、`Optionally filter to VMs with tag` というタグフィルターがあります。
+The [Azure integration tile][1] has the tag filter `Optionally filter to VMs with tag`.
 
-このフィールドでは、Azure VM からメトリクスを収集する際に使用されるフィルターを定義する、カンマ区切りのタグのリスト（`<KEY>:<VALUE>` 形式）を受け付けます。`?` (1 文字の場合) や `*` (複数文字の場合) などのワイルドカードも使用できます。定義されたタグのいずれかに一致する VM だけが Datadog にインポートされ、それ以外は無視されます。
+This field accepts a comma separated list of tags (in the form `<KEY>:<VALUE>`) that defines a filter, which is used for collecting metrics from Azure VMs. You can also use wildcards, such as `?` (for single characters) and `*` (for multiple characters). Only VMs that match one of the defined tags are imported into Datadog. The rest are ignored.
 
-特定のタグと一致する VM は、タグの前に `!` を加えることで除外することもできます。たとえば、
+VMs matching a given tag can also be excluded by adding `!` before the tag, for example:
 
 ```text
 datadog:monitored,env:production,!env:staging,instance-type:c1.*
@@ -194,17 +194,17 @@ datadog:monitored,env:production,!env:staging,instance-type:c1.*
 {{% /tab %}}
 {{% tab "Google Cloud" %}}
 
-[Google Cloud インテグレーションタイル][1] には、タグフィルター `to hosts with tag` があります。
+The [Google Cloud integration tile][1] has the tag filter `to hosts with tag`.
 
-このフィールドでは、GCP からメトリクスを収集する際に使用されるフィルターを定義する、カンマ区切りの GCP ラベルのリスト（`<KEY>:<VALUE>` 形式）を受け付けます。`?` (1 文字の場合) や `*` (複数文字の場合) などのワイルドカードも使用できます。定義されたタグのいずれかに一致するホストだけが Datadog にインポートされ、それ以外は無視されます。
+This field accepts a comma separated list of GCP labels (in the form `<KEY>:<VALUE>`) that defines a filter, which is used for collecting metrics from GCP. You can also use wildcards, such as `?` (for single characters) and `*` (for multiple characters). Only hosts that match one of the defined labels are imported into Datadog. The rest are ignored.
 
-特定のラベルと一致するホストは、タグの前に `!` を加えることで除外することができます。たとえば、
+You can exclude hosts matching a given label by adding `!` before the tag, for example:
 
 ```text
 datadog:monitored,env:production,!env:staging,instance-type:c1.*
 ```
 
-[ラベルの作成と管理][2]については、Google Cloud のドキュメントを参照してください。
+Read more about [Creating and managing labels][2] in the Google Cloud documentation.
 
 [1]: https://app.datadoghq.com/account/settings#integrations/google-cloud-platform
 [2]: https://cloud.google.com/compute/docs/labeling-resources
@@ -214,199 +214,226 @@ datadog:monitored,env:production,!env:staging,instance-type:c1.*
 ## APM
 
 {{< tabs >}}
-{{% tab "トレースエクスプローラー" %}}
+{{% tab "Trace Explorer" %}}
 
-[トレースエクスプローラー][1]では、検索バーやファセットチェックボックスを使用して、タグでトレースをフィルターすることができます。検索バーのフォーマットは `<KEY>:<VALUE>` で、例えば `service:coffee-house` のようになります。高度な検索については、[クエリ構文][2]を参照してください。
+In the [Trace Explorer][1], you can filter traces with tags using the search bar or facet checkboxes. The search bar format is `<KEY>:<VALUE>`, for example: `service:coffee-house`. For advanced search, see [Query Syntax][2].
 
-{{< img src="tagging/using_tags/trace_explorer.png" alt="トレースエクスプローラータグ" style="width:80%;">}}
+{{< img src="tagging/using_tags/trace_explorer.png" alt="Trace Explorer Tags" style="width:80%;">}}
 
-[1]: /ja/tracing/trace_explorer/search/
-[2]: /ja/tracing/trace_explorer/query_syntax/
+[1]: /tracing/trace_explorer/search/
+[2]: /tracing/trace_explorer/query_syntax/
 {{% /tab %}}
 {{% tab "Service Map" %}}
 
-[タグの割り当て][1]後、サービスマップを使用して、特定のサービスをクリックしてアプリケーションのそれぞれの領域に移動できます。以下の例では、タグ `service:coffee-house` で絞り込んで、[分析][2]、[モニター][3]、[ログ][4]、[ホストマップ][5]を表示します。
+After [assigning tags][1], use the Service Map to navigate to different areas of the application by clicking on a particular service. In the example below, view [Analytics][2], [Monitors][3], [Logs][4], and the [Host Map][5] filtered by the tag `service:coffee-house`.
 
-{{< img src="tagging/using_tags/servicemaptags.png" alt="サービスマップタグ" style="width:80%;">}}
+{{< img src="tagging/using_tags/servicemaptags.png" alt="Service Map Tags" style="width:80%;">}}
 
-[1]: /ja/getting_started/tagging/assigning_tags/
-[2]: /ja/tracing/app_analytics/search/
-[3]: /ja/monitors/manage/
-[4]: /ja/logs/explorer/search/
-[5]: /ja/infrastructure/hostmap/
+[1]: /getting_started/tagging/assigning_tags/
+[2]: /tracing/app_analytics/search/
+[3]: /monitors/manage/
+[4]: /logs/explorer/search/
+[5]: /infrastructure/hostmap/
 {{% /tab %}}
 
 {{< /tabs >}}
 
-## ノートブック
+## Notebooks
 
-[ノートブック][9]グラフを作成するときに、**from** テキストボックスでタグを使用してメトリクスを制限します。さらに、**avg by** テキストボックスでタグを使用してメトリクスをグループ化します。以下の例では、メトリクスは `service:coffee-house` に制限され、`host` でグループ化されます。
+When creating a [Notebook][9] graph, limit metrics by using tags in the **from** text box. Additionally, group metrics by using tags in the **avg by** text box. In the example below, metrics are limited to `service:coffee-house` and grouped by `host`.
 
-{{< img src="tagging/using_tags/notebooktags.png" alt="ノートブックタグ" style="width:80%;">}}
+{{< img src="tagging/using_tags/notebooktags.png" alt="Notebook Tags" style="width:80%;">}}
 
-タグを除外するには、`</>` を使用してテキストを編集して、`!<KEY>:<VALUE>` の形式でタグを追加します。以下の例では、`!service:coffeehouse` を使用して `service:coffeehouse` を除外します。
+To exclude tags, use `</>` to edit the text then add the tag in the form `!<KEY>:<VALUE>`. In the example below, `service:coffeehouse` is excluded using `!service:coffeehouse`.
 
-{{< img src="tagging/using_tags/notebooktagsexclude.mp4" alt="ノートブック除外タグ" video="true" width="80%">}}
+{{< img src="tagging/using_tags/notebooktagsexclude.mp4" alt="Notebook Exclude Tags" video="true" width="80%">}}
 
-## ログ管理
+## Logs
 
-ログ[検索][10]、[分析][11]、[パターン][12]、[Live Tail][13]は、検索バーまたはファセットのチェックボックスを使用して、タグでログを絞り込みます。検索バーの形式は `<KEY>:<VALUE>` で、`service:coffee-house` などです。高度な検索については、[ログ検索][10]を参照してください。
+For Logs [Search][10], [Analytics][11], [Patterns][12], and [Live Tail][13], filter logs with tags using the search bar or facet checkboxes. The search bar format is `<KEY>:<VALUE>`, for example: `service:coffee-house`. For advanced search, see [Search Logs][10].
 
 {{< tabs >}}
 {{% tab "Search" %}}
 
-{{< img src="tagging/using_tags/logsearchtags.png" alt="ログ検索タグ" style="width:80%;">}}
+{{< img src="tagging/using_tags/logsearchtags.png" alt="Log Search Tags" style="width:80%;">}}
 
 {{% /tab %}}
 {{% tab "Analytics" %}}
 
-{{< img src="tagging/using_tags/loganalyticstags.png" alt="ログ分析タグ" style="width:80%;">}}
+{{< img src="tagging/using_tags/loganalyticstags.png" alt="Log Analytics Tags" style="width:80%;">}}
 
 {{% /tab %}}
 {{% tab "Patterns" %}}
 
-{{< img src="tagging/using_tags/logpatternstags.png" alt="Log Patterns タグ" style="width:80%;">}}
+{{< img src="tagging/using_tags/logpatternstags.png" alt="Log Patterns Tags" style="width:80%;">}}
 
 {{% /tab %}}
 {{% tab "Live Tail" %}}
 
-{{< img src="tagging/using_tags/livetailtags.mp4" alt="Live Tail タグ" video="true" width="80%">}}
+{{< img src="tagging/using_tags/livetailtags.mp4" alt="Live Tail Tags" video="true" width="80%">}}
 
 {{% /tab %}}
 {{< /tabs >}}
 
-さらに、タグを使用してログ [パイプライン][14]を絞り込みます。以下の例では、パイプラインはタグ `service:coffee-house` でログを絞り込みます。
+Additionally, tags are used to filter a logs [Pipeline][14]. In the example below, the pipeline filters logs by the tag `service:coffee-house`.
 
-{{< img src="tagging/using_tags/logpipelinetags.png" alt="パイプラインタグ" style="width:80%;">}}
+{{< img src="tagging/using_tags/logpipelinetags.png" alt="Pipeline Tags" style="width:80%;">}}
 
-## RUM & セッションリプレイ
+## RUM & Session Replay
 
-[RUM エクスプローラー][15]は、環境から指定された期間内のイベントを視覚化します。
+The [RUM Explorer][15] visualizes events from your environment over a specified time period.
 
-RUM のイベントデータをタグでフィルターするには、検索バーまたはファセットチェックボックスを使用します。検索バーのフォーマットは `<KEY>:<VALUE>` で、例えば `service:shopist` のようになります。詳細な検索については、[RUM イベントを検索する][16]を参照してください。
+To filter RUM event data by tags, use the search bar or facet checkboxes. The search bar format is `<KEY>:<VALUE>`, for example: `service:shopist`. For advanced search, see [Search RUM Events][16].
 
-{{< img src="tagging/using_tags/rumtags.png" alt="RUM タグ" style="width:80%;">}}
+{{< img src="tagging/using_tags/rumtags.png" alt="RUM Tags" style="width:80%;">}}
 
 ## Synthetics
 
 {{< tabs >}}
-{{% tab "Synthetic テスト" %}}
+{{% tab "Synthetic Tests" %}}
 
-[Synthetic Tests][1] ページでは、Synthetic テストの一覧が表示されます。
+The [Synthetic Tests][1] page lists your Synthetic tests.
 
-テストをタグでフィルターするには、検索バーまたはファセットチェックボックスを使用します。検索バーのフォーマットは `<KEY>:<VALUE>` で、例えば `tag:mini-website` のようになります。詳細な検索については、[Synthetic テストの検索と管理][2]を参照してください。
+To filter tests by tags, use the search bar or facet checkboxes. The search bar format is `<KEY>:<VALUE>`. For example: `tag:mini-website`. For advanced search, see [Search and Manage Synthetic Tests][2].
 
-{{< img src="tagging/using_tags/syntheticstags.png" alt="Synthetics タグ" style="width:80%;">}}
+{{< img src="tagging/using_tags/syntheticstags.png" alt="Synthetics Tags" style="width:80%;">}}
 
 
 [1]: https://app.datadoghq.com/synthetics/tests
-[2]: /ja/synthetics/search/
+[2]: /synthetics/search/
 {{% /tab %}}
-{{% tab "エクスプローラー" %}}
+{{% tab "Explorer" %}}
 
-[Synthetic Monitoring & Continuous Testing Explorer][1] は、[CI パイプライン][2]内のテスト実行や実行のバッチを表示します。
+The [Synthetic Monitoring & Testing Results Explorer][1] displays your test runs and batches of runs in a [CI pipeline][2].
 
-テスト実行をタグでフィルターするには、検索バーまたはファセットチェックボックスを使用します。検索バーのフォーマットは `<KEY>:<VALUE>` で、例えば `@ci.provider.name:github` のようになります。詳細な検索については、[テストバッチを検索する][3]を参照してください。
+To filter test runs by tags, use the search bar or facet checkboxes. The search bar format is `<KEY>:<VALUE>`. For example: `@ci.provider.name:github`. For advanced search, see [Search Test Batches][3].
 
-{{< img src="tagging/using_tags/syntheticscitags.png" alt="Synthetics と CI タグ" style="width:80%;">}}
+{{< img src="tagging/using_tags/syntheticscitags.png" alt="Synthetics and CI Tags" style="width:80%;">}}
 
 
 [1]: https://app.datadoghq.com/synthetics/explorer/
-[2]: /ja/continuous_testing/cicd_integrations
-[3]: /ja/continuous_testing/explorer/search/
+[2]: /continuous_testing/cicd_integrations
+[3]: /continuous_testing/explorer/search/
 {{% /tab %}}
 {{< /tabs >}}
 
-## サービスレベル目標
+## Service level objectives
 
 {{< tabs >}}
 {{% tab "Manage SLOs" %}}
 
-[割り当てられたタグ][1]によって SLO を絞り込むには、検索バーかファセットのチェックボックスを使用します。検索バーの形式は、`<KEY>:<VALUE>`です (例: `journey:add_item`)。特定のタグを持つ SLO を検索から除外するには、`-` を使用します (例: `-journey:add_item`)。
+To filter SLOs by [assigned tags][1], use the search bar or facet checkboxes. The search bar format is `<KEY>:<VALUE>`, for example: `journey:add_item`. To exclude SLOs with a specific tag from your search, use `-`, for example: `-journey:add_item`.
 
-{{< img src="tagging/using_tags/manage_slo_tags.png" alt="SLO タグ" style="width:80%;">}}
+{{< img src="tagging/using_tags/manage_slo_tags.png" alt="SLO Tags" style="width:80%;">}}
 
-SLO タグは、SLO の基礎となるメトリクスまたはモニターで使用されるメトリクスまたはモニタータグとは異なる別のものです。
+SLO tags are different and separate from metric or monitor tags used in the underlying metrics or monitors of an SLO.
 
-[1]: /ja/getting_started/tagging/assigning_tags/?tab=servicelevelobjectives#ui
+[1]: /getting_started/tagging/assigning_tags/?tab=servicelevelobjectives#ui
 {{% /tab %}}
 
 {{% tab "Metric-based SLOs" %}}
 
-[メトリクスベースの SLO][1] を作成する場合、SLO の成功率メトリクスクエリでメトリクスタグを使用します（すべてのメトリクスは同じセットのメトリクスタグを使用する必要があります）。
+When creating a [metric-based SLO][1], use metric tags in the SLO's success ratio metric queries (all metrics must use the same set of metric tags):
 
-* これらのタグのみにメトリクス範囲を制限する **from** テキストボックス。
-* SLO 全体と各タグ値のステータス割合および残りのエラーバジェットを表示する、グループ化されたメトリクスベースの SLO を作成するための **sum by** テキストボックス。
+* **from** text box to limit the metric scope to only those tags.
+* **sum by** text box to create a grouped metric-based SLO that display a status percentage and remaining error budget for both the overall SLO and for each tag value.
 
-{{< img src="tagging/using_tags/metric_based_slo_tags.png" alt="メトリクスベースの SLO タグ" style="width:80%;">}}
-
-[1]: /ja/service_management/service_level_objectives/metric/
+[1]: /service_management/service_level_objectives/metric/
 {{% /tab %}}
 {{% tab "Monitor-based SLOs" %}}
 
-単一の[グループ化されたモニター][2]を使用して[モニターベースの SLO][1] を作成する場合、**選択されたグループで計算** トグルを使用して、基底のモニターから最大 20 個のタグ値を選択し、SLO 全体および各タグ値のステータス割合および残りのエラーバジェットを表示します。
+When creating a [monitor-based SLO][1] using a single [grouped monitor][2], use the **Calculate on selected groups** toggle to select up to 20 tag values from the underlying monitor to display a status percentage and remaining error budget for both the overall SLO and for each tag value:
 
-{{< img src="tagging/using_tags/monitor_based_slo_tags.png" alt="モニターベースの SLO タグ" style="width:80%;">}}
+{{< img src="tagging/using_tags/monitor_based_slo_tags.png" alt="Monitor-based SLO Tags" style="width:80%;">}}
 
-[1]: /ja/service_management/service_level_objectives/monitor/
-[2]: /ja/getting_started/tagging/using_tags/?tab=newmonitor#monitors
+[1]: /service_management/service_level_objectives/monitor/
+[2]: /getting_started/tagging/using_tags/?tab=newmonitor#monitors
 {{% /tab %}}
 {{< /tabs >}}
 
-## 開発者
+## CI Visibility
 
-タグは [API][17] でさまざまな使い方ができます。
+{{< tabs >}}
+{{% tab "Test Runs" %}}
 
-各セクションへのリンクはこのリストをご覧ください。
+The [CI Visibility Explorer][101] displays your test runs run in a CI pipeline.
 
-* [モニターのダウンタイムのスケジューリング][18]
-* [イベントエクスプローラーのクエリ][19]
-* [ホストの検索][20]
-* [AWS][21] や [Google Cloud][22] のインテグレーション
-* [時系列ポイントのクエリ][23]
-* [すべてのモニターの詳細を取得][24]
-* [モニターのミュート][25]
-* [モニターの検索][24]
-* [モニターグループの検索][24]
-* [スクリーンボードの作成][26]
-* [タイムボードの作成][26]
-* [SLO を作成する][27]
-* [SLO の詳細を取得する][28]
-* [SLO を更新する][29]
+To filter test runs by tags, use the search bar or facet checkboxes. The search bar format is `<KEY>:<VALUE>`. For example: `@test.status:failed`. For advanced search, see [Search and Manage CI Tests][102].
 
-## その他の参考資料
+{{< img src="/continuous_integration/test_runs.png" alt="Test runs in the CI Visibility Explorer" style="width:80%;">}}
+
+[101]: https://app.datadoghq.com/ci/test-runs
+[102]: /tests/search/
+
+{{% /tab %}}
+{{% tab "Pipeline Executions" %}}
+
+The [CI Visibility Explorer][101] displays your CI pipeline executions.
+
+To filter pipeline executions by tags, use the search bar or facet checkboxes. The search bar format is `<KEY>:<VALUE>`. For example: `@ci.provider.name:gitlab`. For advanced search, see [Search and Manage CI Pipelines][102].
+
+{{< img src="/continuous_integration/pipeline_executions.png" alt="Pipeline executions in the CI Visibility Explorer" style="width:80%;">}}
+
+[101]: https://app.datadoghq.com/ci/pipeline-executions
+[102]: /continuous_testing/explorer/search/
+
+{{% /tab %}}
+{{< /tabs >}}
+
+## Developers
+
+Tags can be used in various ways with the [API][17].
+
+See this list for links to respective sections:
+
+* [Schedule monitor downtime][18]
+* [Query the event explorer][19]
+* [Search hosts][20]
+* Integrations for [AWS][21] and [Google Cloud][22]
+* [Querying timeseries points][23]
+* [Get all monitor details][24]
+* [Mute a monitor][25]
+* [Monitors search][24]
+* [Monitors group search][24]
+* [Create a Screenboard][26]
+* [Create a Timeboard][26]
+* [Create a SLO][27]
+* [Get a SLO's details][28]
+* [Update a SLO][29]
+
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/getting_started/tagging/assigning_tags/
-[2]: /ja/service_management/events/explorer
-[3]: /ja/integrations/
-[4]: /ja/infrastructure/hostmap/
-[5]: /ja/infrastructure/
-[6]: /ja/infrastructure/livecontainers/
-[7]: /ja/infrastructure/process/
-[8]: /ja/metrics/explorer/
-[9]: /ja/notebooks/
-[10]: /ja/logs/explorer/search/
-[11]: /ja/logs/explorer/analytics/
-[12]: /ja/logs/explorer/patterns/
-[13]: /ja/logs/live_tail/
-[14]: /ja/logs/log_configuration/pipelines
-[15]: /ja/real_user_monitoring/explorer/
-[16]: /ja/real_user_monitoring/explorer/search/
-[17]: /ja/api/
-[18]: /ja/api/v1/downtimes/#schedule-a-downtime
-[19]: /ja/api/v1/events/#query-the-event-stream
-[20]: /ja/api/v1/hosts/
-[21]: /ja/api/v1/aws-integration/
-[22]: /ja/api/v1/gcp-integration/
-[23]: /ja/api/v1/metrics/#query-timeseries-points
-[24]: /ja/api/v1/monitors/#get-all-monitor-details
-[25]: /ja/api/v1/monitors/#mute-a-monitor
-[26]: /ja/api/v1/dashboards/#create-a-new-dashboard
-[27]: /ja/api/v1/service-level-objectives/#create-a-slo-object
-[28]: /ja/api/v1/service-level-objectives/#get-a-slos-details
-[29]: /ja/api/v1/service-level-objectives/#update-a-slo
-[30]: /ja/monitors/manage/#monitor-tags
-[31]: /ja/monitors/downtimes/
-[32]: /ja/getting_started/tagging/assigning_tags?tab=monitors
+[1]: /getting_started/tagging/assigning_tags/
+[2]: /service_management/events/explorer
+[3]: /integrations/
+[4]: /infrastructure/hostmap/
+[5]: /infrastructure/
+[6]: /infrastructure/livecontainers/
+[7]: /infrastructure/process/
+[8]: /metrics/explorer/
+[9]: /notebooks/
+[10]: /logs/explorer/search/
+[11]: /logs/explorer/analytics/
+[12]: /logs/explorer/patterns/
+[13]: /logs/live_tail/
+[14]: /logs/log_configuration/pipelines
+[15]: /real_user_monitoring/explorer/
+[16]: /real_user_monitoring/explorer/search/
+[17]: /api/
+[18]: /api/v1/downtimes/#schedule-a-downtime
+[19]: /api/v1/events/#query-the-event-stream
+[20]: /api/v1/hosts/
+[21]: /api/v1/aws-integration/
+[22]: /api/v1/gcp-integration/
+[23]: /api/v1/metrics/#query-timeseries-points
+[24]: /api/v1/monitors/#get-all-monitor-details
+[25]: /api/v1/monitors/#mute-a-monitor
+[26]: /api/v1/dashboards/#create-a-new-dashboard
+[27]: /api/v1/service-level-objectives/#create-a-slo-object
+[28]: /api/v1/service-level-objectives/#get-a-slos-details
+[29]: /api/v1/service-level-objectives/#update-a-slo
+[30]: /monitors/manage/#monitor-tags
+[31]: /monitors/downtimes/
+[32]: /getting_started/tagging/assigning_tags?tab=monitors

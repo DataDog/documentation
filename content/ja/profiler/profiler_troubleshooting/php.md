@@ -1,47 +1,58 @@
 ---
+title: Troubleshooting the PHP Profiler
 code_lang: php
+type: multi-code-lang
 code_lang_weight: 70
 further_reading:
-- link: /tracing/troubleshooting
-  tag: Documentation
-  text: APM トラブルシューティング
-title: PHP プロファイラーのトラブルシューティング
-type: multi-code-lang
+    - link: /tracing/troubleshooting
+      tag: Documentation
+      text: APM Troubleshooting
 ---
 
-## プロファイル検索ページにないプロファイル
+## Missing profiles in the profile search page
 
-プロファイラーを構成しても、プロファイル検索ページにプロファイルが表示されない場合は、`phpinfo()` 関数を実行します。プロファイラーは `phpinfo()` をフックして診断を実行します。Web サーバーに問題がある場合は、コマンドラインからではなく、Web サーバーから `phpinfo()` を実行すると、各サーバー API (SAPI) を個別に構成することができます。
+If you've configured the profiler and don't see profiles in the profile search page, run the `phpinfo()` function. The profiler hooks into `phpinfo()` to run diagnostics. If the webserver is having problems, run `phpinfo()` from the webserver and not from the command line as each Server API (SAPI) can be configured independently.
 
-以下の内容で[サポートチケットを発行][1]します。
+[Open a support ticket][1] with the following information:
 
-- オペレーティングシステムのタイプとバージョン (例: Linux Ubuntu 20.04)
-- `phpfo()` の出力。PHP のバージョン、SAPI のタイプ、Datadog ライブラリのバージョン、そしてプロファイラーの診断が含まれます。
+- Operating system type and version (for example, Linux Ubuntu 20.04)
+- The output from `phpinfo()`, which includes PHP version, SAPI type, Datadog library versions, and the profiler diagnostics.
 
-## デフォルトの設定からオーバーヘッドを軽減する
+## Reduce overhead from default setup
 
-デフォルトのオーバーヘッドが許容できない場合は、以下の INI 設定を変更することで、プロファイラーが収集するサンプルタイプの一部を無効にすることができます。
+If the default overhead is not acceptable, you can disable some of the sample
+types the profiler gathers by changing the following INI settings:
 
-- `datadog.profiling.allocation_enabled`: アロケーションプロファイリングを制御します
-- `datadog.profiling.experimental_cpu_time_enabled`: CPU 時間のサンプルを制御します
-- `datadog.profiling.exception_enabled`: 例外プロファイリングを制御します
+- `datadog.profiling.allocation_enabled`: controls allocation profiling
+- `datadog.profiling.experimental_cpu_time_enabled`: controls CPU-Time samples
+- `datadog.profiling.exception_enabled`: controls exception profiling
 
-これらのサンプルタイプを無効にすると、ウォールタイムサンプルだけが収集されます。
+Disabling those sample types will leave you with only wall time samples being
+collected.
 
-その他の INI 設定と対応する環境変数については、[構成ドキュメント][2]を参照してください。
+See the [configuration docs][2] for other INI settings and their corresponding environment variables.
 
-## プロファイラを圧倒する例外
+## Exceptions overwhelming the profiler
 
-Datadog 例外プロファイラは通常の条件下では、フットプリントとオーバーヘッドが小さくなります。ただし、多くの例外が作成されてスローされると、プロファイラに大きなオーバーヘッドが発生することがあります。これは、コントロールフローに例外を使用した場合などに発生する可能性があります。
+The Datadog exception profiler has a small footprint and overhead under normal
+conditions. If a lot of exceptions are created and thrown, it can cause
+significant overhead for the profiler. This can happen when you use exceptions
+for control flow.
 
-例外率が異常に高い場合は、`datadog.profiling.exception_enabled` を `0` に設定して例外プロファイリングをオフにするか、`datadog.profiling.exception_sampling_distance` の INI 設定 (デフォルトは `100`) でサンプリング距離をより高い値に変更することができます。サンプリング距離が長いほど、作成されるサンプルの数が少なくなり、オーバーヘッドが少なくなります。
+If you have an unusually high exception rate, you can either turn of exception
+profiling by setting `datadog.profiling.exception_enabled` to `0` or you can
+change the sampling distance via the
+`datadog.profiling.exception_sampling_distance` INI setting (default `100`) to a
+higher value. The higher the sampling distance, the fewer samples are created
+and the lower the overhead.
 
-例外サンプリングの距離については、[構成ドキュメント][2]を参照してください。
+See the [configuration docs][2] for the documentation on the exception sampling
+distance.
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /ja/help/
-[2]: /ja/tracing/trace_collection/library_config/php/#environment-variable-configuration
+[1]: /help/
+[2]: /tracing/trace_collection/library_config/php/#environment-variable-configuration

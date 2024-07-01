@@ -1,83 +1,84 @@
 ---
-categories:
-- クラウド
-- ログの収集
-dependencies: []
-description: Salesforce Marketing Cloud
-doc_link: https://docs.datadoghq.com/integrations/salesforce_marketing_cloud/
-draft: false
-git_integration_title: salesforce_marketing_cloud
-has_logo: false
-integration_id: ''
-integration_title: Salesforce Marketing Cloud
-integration_version: ''
-is_public: true
-custom_kind: integration
-manifest_version: '1.0'
-name: salesforce_marketing_cloud
-public_title: Salesforce Marketing Cloud
-short_description: Salesforce Marketing Cloud からログを収集します。
-team: web-integrations
-version: '1.0'
+"categories":
+- cloud
+- log collection
+"custom_kind": "integration"
+"dependencies": []
+"description": "Salesforce Marketing Cloud"
+"doc_link": "https://docs.datadoghq.com/integrations/salesforce_marketing_cloud/"
+"draft": false
+"git_integration_title": "salesforce_marketing_cloud"
+"has_logo": false
+"integration_id": ""
+"integration_title": "Salesforce Marketing Cloud"
+"integration_version": ""
+"is_public": true
+"manifest_version": "1.0"
+"name": "salesforce_marketing_cloud"
+"public_title": "Salesforce Marketing Cloud"
+"short_description": "Collects logs from Salesforce Marketing Cloud."
+"team": "web-integrations"
+"version": "1.0"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-## 概要
+## Overview
 
-Salesforce Marketing Cloud は、モバイル、ソーシャル、オンライン、およびメールプラットフォームを通じたマーケティングのための自動化および分析ツールとサービスを備えたクラウドベースのマーケティングプラットフォームです。
+Salesforce Marketing Cloud is a cloud-based marketing platform with automation and analytics tools and services for marketing through mobile, social, online, and email platforms.
 
-Salesforce Marketing Cloud と Datadog のインテグレーションは、[Datadog Logs][1] を使用してログの表示とパースを行うために使われます。
+The Salesforce Marketing Cloud integration with Datadog is used to view and parse your logs using [Datadog Logs][1]. 
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-インストールは必要ありません。
+No installation is required.
 
-### ブラウザトラブルシューティング
+### Configuration
 
-Salesforce Marketing Cloud から Datadog にイベントを送信するように構成するためには、Salesforce Marketing Cloud Setup ページでコールバック URL を作成し、サブスクリプションを作成する必要があります。
+In order to configure Salesforce Marketing Cloud to send events to Datadog, you must create a callback URL on the Salesforce Marketing Cloud Setup page and create a subscription.
 
-#### アカウント設定
+#### Account Setup
 
-1. Salesforce Marketing Cloud にログインします。
-2. アカウントに移動して、**Settings/Setup** をクリックします。
-3. ユーザーアカウントが属する、`Event Notifications`、`Callbacks`、`Subscriptions` を許可するロールを作成または変更します。
+1. Log into Salesforce Marketing Cloud.
+2. Navigate to your account and click **Settings/Setup**.
+3. Create or modify a role that your user account belongs to that allows `Event Notifications`, `Callbacks`, and `Subscriptions`.
 
-#### コールバックの設定
+#### Callback Setup
 
-1. Setup ページで、**Feature Settings** > **Event Notifications** に移動し、**URL Callbacks** を選択します。
-2. **Register New** をクリックします。
-3. Datadog インテグレーションタイルで提供される URL をコピーします。
-5. コールバック URL に名前を付けて、URL を貼り付けます。
-6. **Match Batch Size** を 1000 のままにして、**Register** をクリックします。
-7. Datadog のエンドポイントに検証ペイロードが送信されます。Datadog インテグレーションタイルを再読み込みすると、検証ペイロードが表示されます。
-8. Verification Key をコピーし、Salesforce Marketing Cloud URL Callback Setup ページの **Verification** セクションに貼り付けます。
+1. In the Setup page, navigate to **Feature Settings** > **Event Notifications** and select **URL Callbacks**.
+2. Click **Register New**.
+3. Copy the URL provided in the Datadog integration tile.
+5. Name your Callback URL and paste the URL.
+6. Keep **Match Batch Size** as 1000 and click **Register**.
+7. A verification payload is sent to a Datadog endpoint. Reload the Datadog integration tile to see the verification payload.
+8. Copy the Verification Key and paste it in the **Verification** section on the Salesforce Marketing Cloud URL Callback Setup page.
 
-#### サブスクリプション設定
+#### Subscription Setup
 
-1. **Feature Settings** で、**Event Notifications** > **Subscriptions** をクリックします。
-2. `Subscribe New` を選択し、登録する名前を指定します。
-3. 受信したいイベントをすべて選択し、フィルターを追加します。
-4. **Subscribe** をクリックします。イベントが Datadog に送信されます。
+1. Under **Feature Settings**, click **Event Notifications** > **Subscriptions**.
+2. Select `Subscribe New` and name your subscription.
+3. Select all events you want to receive and add filters.
+4. Click **Subscribe**. Your events should be sent to Datadog.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 
-Salesforce Marketing Cloud インテグレーションには、メトリクスは含まれません。
+The Salesforce Marketing Cloud integration does not include any metrics.
 
-### ワークフローの自動化
+### Logs
 
-Salesforce Marketing Cloud インテグレーションでは、[サブスクリプション設定](#subscription-setup)で選択したイベントからログイベントが収集されます。
+The Salesforce Marketing Cloud integration collects log events from the events you selected in the [Subscription setup](#subscription-setup).
 
-### ヘルプ
+### Service Checks
 
-Salesforce Marketing Cloud インテグレーションには、サービスのチェック機能は含まれません。
+The Salesforce Marketing Cloud integration does not include any service checks.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][2]までお問合せください。
+Need help? Contact [Datadog support][2].
 
-[1]: https://docs.datadoghq.com/ja/logs/
-[2]: https://docs.datadoghq.com/ja/help/
+[1]: https://docs.datadoghq.com/logs/
+[2]: https://docs.datadoghq.com/help/
+

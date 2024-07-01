@@ -1,173 +1,202 @@
 ---
+title: Node.js Compatibility Requirements
+kind: documentation
+description: 'Compatibility Requirements for the Node.js tracer'
 aliases:
-- /ja/tracing/compatibility_requirements/nodejs
-- /ja/tracing/setup_overview/compatibility_requirements/nodejs
+  - /tracing/compatibility_requirements/nodejs
+  - /tracing/setup_overview/compatibility_requirements/nodejs
 code_lang: nodejs
-code_lang_weight: 40
-description: Node.js トレーサーの互換性要件
-further_reading:
-- link: tracing/trace_collection/dd_libraries/nodejs
-  tag: ドキュメント
-  text: アプリケーションのインスツルメンテーション
-title: Node.js 互換性要件
 type: multi-code-lang
+code_lang_weight: 40
+further_reading:
+    - link: tracing/trace_collection/dd_libraries/nodejs
+      tag: Documentation
+      text: Instrument Your Application
 ---
-## リリース
+## Releases
 
-### バージョン
+### Versioning
 
-Datadog Node.js のトレーシングライブラリのバージョンは、[semver][1] に従っています。新しいメジャーバージョンがリリースされると、それが主要なリリースラインとなり、すべての新機能、バグ修正、セキュリティパッチがそこに置かれます。以下は、semver の各タイプの変更を構成するものの概要です。
+Versioning of the Datadog Node.js tracing library follows [semver][1]. When a new major version is released it becomes the primary release line, where all new features, bug fixes and security patches land. Here's an outline of what constitutes each type of semver change:
 
-| メジャー          | マイナー                                                          | パッチ    |
+| Major          | Minor                                                          | Patch    |
 |---------------------------------|-------------------------------------------------------------------------|----------------------|
-| 旧バージョンと互換性のない変更点。                  | 旧バージョンとの互換性がある (壊れない) ものを追加する。 | セキュリティ修正        |
-| 旧バージョンと互換性のない API の変更点。                         | API の追加                   | バグ修正             |
-| 旧バージョンと互換性のない機能の変更点。 | 機能の追加                                                 | |
-| Node.js のバージョン、対応ライブラリ、その他の機能など、あらゆるもののサポートを打ち切る。     | Node.js のバージョン、対応ライブラリ、その他の機能など、あらゆるもののテスト済みのサポートを追加する。   |  |
+| Changes that are incompatible with previous versions.                  | Adding anything that is compatible with previous versions (does not break them). | Security fixes        |
+| API changes incompatible with previous versions.                         | API additions                   | Bug fixes             |
+| Functionality changes incompatible with previous versions. | Functionality additions                                                 | |
+| Dropping support for anything such as Node.js versions, supported libraries, or other features.     | Adding tested support for anything, such as Node.js versions, supported libraries, or other features.   |  |
 
-リリースに複数のカテゴリーがある場合、最も高いカテゴリーが選択されます。 [リリースノート][2]は、GitHub の各リリースに掲載されています。
+When a release has changes that could go in multiple semver categories, the highest one is chosen. [Release notes][2] are posted with each GitHub release.
 
-### メンテナンス
+### Maintenance
 
-_メンテナンスモード_とは、可能な限りセキュリティとバグ修正のみを行い、新しい機能はケースバイケースで提供しない期間のことです。`dd-trace` のメジャーバージョンは、後続の dd-trace のメジャーバージョンがリリースされた時点でメンテナンスモードに移行します。メンテナンスモードの期間は、後続バージョンのリリース日から 1 年間です。
+_Maintenance mode_ is a period during which a release gets only security and bug fixes whenever possible, but not new features except on a case-by-case basis. Major versions of `dd-trace` enter maintenance mode upon the release of the subsequent major version of dd-trace. The maintenance mode period lasts for one year after the release date of that subsequent version.
 
-例えば、`dd-trace` のバージョン 5.0.0 が 2023 年 5 月 4 日にリリースされた場合、4.x.x リリースラインは 2024 年 5 月 4 日までメンテナンスモードベースでサポートされます。このメンテナンスモード期間中は、セキュリティパッチやバグパッチが可能な限り適用されます。
+For example, if version 5.0.0 of `dd-trace` is released on May 4, 2023, the 4.x.x release line is supported on a maintenance mode basis until May 4, 2024. During this maintenance mode period, security and bug patches will be applied whenever possible.
 
-もし、特定のバージョンの `dd-trace-js` のサポートについて質問や懸念がある場合は、[サポートにお問い合わせ][3]ください。
+If you have any questions or concerns about our support for a particular version of `dd-trace-js`, [contact Support][3] to discuss.
 
-### Node.js のバージョンサポート
+### Node.js Version Support
 
-Node.js プロジェクトが LTS のメジャーリリースラインのサポートを終了すると (EOL になると)、次のメジャーバージョンの `dd-trace` でそのサポートが停止されます。
-`dd-trace` ライブラリの最後のメジャーサポートリリースラインは、メンテナンスモードベースで、少なくともあと 1 年間はその EOL バージョンの Node.js をサポートします。
+When the Node.js project drops support for an LTS major release line (when it goes EOL), support for it is dropped in the next major version of `dd-trace`.
+The last major supporting release line of `dd-trace` library supports that EOL version of Node.js for at least another year on a maintenance mode basis.
 
-いくつかの問題は `dd-trace` で解決できず、代わりに Node.js で解決しなければなりません。このような場合、問題のある Node.js のリリースが EOL であれば、EOL ではない別のリリースに移行しなければ問題を解決することは不可能です。
-Datadog は、LTS でない Node.js のメジャーリリースライン (奇数バージョン) に対する特定のサポートを提供するために、`dd-trace` の新しいリリースを作成することはありません。
+Some issues cannot be solved in `dd-trace` and instead must be solved in Node.js. When this happens and the Node.js release in question is EOL, it's not possible to solve the issue without moving to another non-EOL release.
+Datadog does not make new releases of `dd-trace` to provide specific support for non-LTS Node.js major release lines (odd numbered versions).
 
-最高のサポートレベルを得るためには、常に最新の LTS リリースの Node.js と、最新のメジャーバージョンの `dd-trace` を実行します。Node.js のどのリリースラインを使用する場合でも、最新のセキュリティ修正を確実に行うために、そのリリースラインの最新バージョンの Node.js を使用します。
+For the best level of support, always run the latest LTS release of Node.js, and the latest major version of `dd-trace`. Whatever release line of Node.js you use, also use the latest version of Node.js on that release line, to ensure you have the latest security fixes.
 
-Node.js のリリースについては、[Node.js の公式ドキュメント][4]を参照してください。
+For more information about Node.js release, see the [official Node.js documentation][4].
 
-### オペレーティングシステム対応
+### Operating system support
 
-以下のオペレーティングシステムが `dd-trace` によって公式にサポートされています。リストにないオペレーティングシステムも動作する可能性はありますが、例えば ASM やプロファイリング、ランタイムメトリクスなど、いくつかの機能が欠けています。一般的には、メジャーバージョンの最初のリリース時に活発にメンテナンスされているオペレーティングシステムがサポートされます。
+The following operating systems are officially supported by `dd-trace`. Any operating system not listed is still likely to work, but with some features missing, for example ASM, profiling, and runtime metrics. Generally speaking, operating systems that are actively maintained at the time of initial release for a major version are supported.
 
-| dd-trace バージョン    | オペレーティングシステム      | アーキテクチャ         | 最小バージョン                         |
+| dd-trace Version    | Operating System      | Architectures         | Minimum Versions                         |
 | ------------------- | --------------------- | --------------------- | ---------------------------------------- |
-| 3.x                 | Linux (glibc)         | arm、arm64、x64       | CentOS 7、Debian 9、RHEL 7、Ubuntu 14.04 |
-|                     | Linux (musl)          | arm、arm64、x64       | Alpine 3.13                              |
-|                     | macOS                 | arm64、x64            | Catalina (10.15)                         |
-|                     | Windows               | ia32、x64             | Windows 8.1、Windows Server 2012         |
-| 2.x                 | Linux (glibc)         | arm、arm64、ia32、x64 | CentOS 7、Debian 9、RHEL 7、Ubuntu 14.04 |
-|                     | Linux (musl)          | arm、arm64、ia32、x64 | Alpine 3.10                              |
-|                     | macOS                 | arm64、x64            | Yosemite (10.10)                         |
-|                     | Windows               | ia32、x64             | Windows 8.1、Windows Server 2012         |
+| 3.x                 | Linux (glibc)         | arm, arm64, x64       | CentOS 7, Debian 9, RHEL 7, Ubuntu 14.04 |
+|                     | Linux (musl)          | arm, arm64, x64       | Alpine 3.13                              |
+|                     | macOS                 | arm64, x64            | Catalina (10.15)                         |
+|                     | Windows               | ia32, x64             | Windows 8.1, Windows Server 2012         |
+| 2.x                 | Linux (glibc)         | arm, arm64, ia32, x64 | CentOS 7, Debian 9, RHEL 7, Ubuntu 14.04 |
+|                     | Linux (musl)          | arm, arm64, ia32, x64 | Alpine 3.10                              |
+|                     | macOS                 | arm64, x64            | Yosemite (10.10)                         |
+|                     | Windows               | ia32, x64             | Windows 8.1, Windows Server 2012         |
 
-## 対応インテグレーション
+## Supported integrations
 
-APM は、プラグインシステムを使用することで追加設定なしで使用できる装置を多くの一般的なフレームワークやライブラリ向けに提供しています。一覧にないモジュールのサポートをご希望の場合は、[サポートチーム][3]までお問い合わせください。
+APM provides out-of-the-box instrumentation for many popular frameworks and libraries by using a plugin system. To request support for a module that is not listed, contact our awesome [support team][3].
 
-プラグインの切り替え方法と構成方法の詳細については、[API ドキュメント][5]をご確認ください。
+For details about how to how to toggle and configure plugins, check out the [API documentation][5].
 
-### Web フレームワークの互換性
+### Web framework compatibility
 
-| モジュール                  | バージョン | サポートの種類    | 注                                      |
+| Module                  | Versions | Support Type    | Notes                                      |
 | ----------------------- | -------- | --------------- | ------------------------------------------ |
-| [connect][6]           | `2 以降`    | 完全対応 |                                            |
-| [express][7]           | `4 以降`    | 完全対応 | Sails、Loopback、[その他][8]に対応   |
-| [fastify][9]           | `1 以降`    | 完全対応 |                                            |
-| [graphql][10]           | `0.10 以降` | 完全対応 | Apollo Server および express-graphql に対応 |
-| [gRPC][11]              | `>=1.13` | 完全対応 |                                            |
-| [hapi][12]              | `2 以降`    | 完全対応 | 対応 [@hapi/hapi] バージョン `17.9 以降`    |
-| [koa][13]               | `2 以降`    | 完全対応 |                                            |
-| [microgateway-core][14] | `2.1 以降`  | 完全対応 | Apigee Edge 用のコアライブラリ。[edgemicro][15] CLI への対応には [@datadog/cli][16] を使用した静的パッチが必要。 |
-| [moleculer][17]         | `>=0.14` | 完全対応 |                                            |
-| [next][18]              | `>=9.5`  | 完全対応 | CLI で使用する場合は、`NODE_OPTIONS='-r dd-trace/init'` が必要です。 <br><br>トレーサーは、次のNext.jsの機能をサポートしています：<ul><li>Standalone (`output: 'standalone'`)</li><li>App Router</li><li>Middleware: トレースされません。最適な体験のためには、トレーサーのバージョン `4.18.0` と `3.39.0` またはそれ以上を使用してください。</li></ul> |
-| [paperplane][19]        | `2.3 以降`  | 完全対応 | [serverless-mode][20] では非対応     |
-| [restify][21]           | `3 以降`    | 完全対応 |                                            |
+| [connect][6]           | `>=2`    | Fully supported |                                             |
+| [express][7]           | `>=4`    | Fully supported | Supports Sails, Loopback, and [more][8]     |
+| [fastify][9]           | `>=1`    | Fully supported |                                             |
+| [graphql][10]           | `>=0.10` | Fully supported | Supports Apollo Server and express-graphql |
+| [gRPC][11]              | `>=1.13` | Fully supported |                                            |
+| [hapi][12]              | `>=2`    | Fully supported | Supports [@hapi/hapi] versions `>=17.9`    |
+| [koa][13]               | `>=2`    | Fully supported |                                            |
+| [microgateway-core][14] | `>=2.1`  | Fully supported | Core library for Apigee Edge. Support for the [edgemicro][15] CLI requires static patching using [@datadog/cli][16]. |
+| [moleculer][17]         | `>=0.14` | Fully supported |                                            |
+| [next][18]              | `>=9.5`  | Fully supported | See note on Complex framework usage.<br /><br />The tracer supports the following Next.js features: <ul><li>Standalone (`output: 'standalone'`)</li><li>App Router</li><li>Middleware: Not traced, use tracer versions `4.18.0` and `3.39.0` or higher for best experience.</li></ul> |
+| [paperplane][19]        | `>=2.3`  | Fully supported | Not supported in [serverless-mode][20]     |
+| [restify][21]           | `>=3`    | Fully supported |                                            |
 
-### ネイティブモジュールの互換性
+#### Complex framework usage
 
-| モジュール      | サポートの種類        | 注 |
+Some modern complex Node.js frameworks, such as Next.js and Nest.js, provide their own entry-point into an application. For example, instead of running `node app.js`, you may need to run `next start`. In these cases, the entry point is a file that ships in the framework package, not a local application file (`app.js`).
+
+Loading the Datadog tracer early in your application code isn't effective because the framework could have already loaded modules that should be instrumented.
+
+To load the tracer before the framework, use one of the following methods:
+
+Prefix all commands you run with an environment variable:
+
+```shell
+NODE_OPTIONS='--require dd-trace/init' npm start
+
+Or, modify the `package.json` file if you typically start an application with npm or yarn run scripts:
+
+```plain
+    // existing command
+    "start": "next start",
+
+    // suggested command
+    "start": "node --require dd-trace/initialize ./node_modules/next start",
+    "start": "NODE_OPTIONS='--require dd-trace/initialize' ./node_modules/next start",
+```
+
+**Note**: The previous examples use Next.js, but the same approach applies to other frameworks with custom entry points, such as Nest.js. Adapt the commands to fit your specific framework and setup. Either command should work, but using `NODE_OPTIONS`  also applies to any child Node.js processes.
+
+
+### Native module compatibility
+
+| Module      | Support Type        | Notes |
 | ----------- | ------------------- | ------------------------------------------ |
-| [dns][22]   | 完全対応     |       |
-| [http][24]  | 完全対応     |       |
-| [https][25] | 完全対応     |       |
-| [http2][26] | 一部対応 | 現在、HTTP2 クライアントのみ対応。サーバーは非対応。 |
-| [net][27]   | 完全対応     |       |
+| [dns][22]   | Fully supported     |       |
+| [http][24]  | Fully supported     |       |
+| [https][25] | Fully supported     |       |
+| [http2][26] | Partially supported | Only HTTP2 clients are currently supported and not servers. |
+| [net][27]   | Fully supported     |       |
 
-### データストアの互換性
+### Data store compatibility
 
-| モジュール                 | バージョン | サポートの種類    | 注                                            |
+| Module                 | Versions | Support Type    | Notes                                            |
 | ---------------------- | -------- | --------------- | ------------------------------------------------ |
-| [cassandra-driver][28] | `3 以降`    | 完全対応 |                                                  |
-| [couchbase][29]        | `2.4.2 以降` | 完全対応 |                                                  |
-| [elasticsearch][30]    | `10 以降`   | 完全対応 | バージョン 5 以降の `@elastic/elasticsearch` に対応 |
-| [ioredis][31]          | `2 以降`    | 完全対応 |                                                  |
-| [knex][32]             | `0.8 以降`  | 完全対応 | このインテグレーションはコンテキストの伝搬のみが目的 |
-| [mariadb][63]          | `3 以降`    | 完全対応 |                                                  |
-| [memcached][33]        | `2.2 以降`  | 完全対応 |                                                  |
-| [mongodb-core][34]     | `2 以降`    | 完全対応 | Mongoose に対応                                |
-| [mysql][35]            | `2 以降`    | 完全対応 |                                                  |
-| [mysql2][36]           | `1 以降`    | 完全対応 |                                                  |
-| [oracledb][37]         | `>=5`    | 完全対応 |                                                  |
-| [pg][38]               | `4 以降`    | 完全対応 | `pg` と共に使用した場合 `pg-native` に対応         |
-| [redis][39]            | `0.12 以降` | 完全対応 |                                                  |
-| [sharedb][40]          | `1 以降`    | 完全対応 |                                                  |
-| [tedious][41]          | `1 以降`    | 完全対応 | `mssql` および `sequelize` 用の SQL Server ドライバー    |
+| [cassandra-driver][28] | `>=3`    | Fully supported |                                                  |
+| [couchbase][29]        | `^2.4.2` | Fully supported |                                                  |
+| [elasticsearch][30]    | `>=10`   | Fully supported | Supports `@elastic/elasticsearch` versions `>=5` |
+| [ioredis][31]          | `>=2`    | Fully supported |                                                  |
+| [knex][32]             | `>=0.8`  | Fully supported | This integration is only for context propagation |
+| [mariadb][63]          | `>=3`    | Fully supported |                                                  |
+| [memcached][33]        | `>=2.2`  | Fully supported |                                                  |
+| [mongodb-core][34]     | `>=2`    | Fully supported | Supports Mongoose                                |
+| [mysql][35]            | `>=2`    | Fully supported |                                                  |
+| [mysql2][36]           | `>=1`    | Fully supported |                                                  |
+| [oracledb][37]         | `>=5`    | Fully supported |                                                  |
+| [pg][38]               | `>=4`    | Fully supported | Supports `pg-native` when used with `pg`         |
+| [redis][39]            | `>=0.12` | Fully supported |                                                  |
+| [sharedb][40]          | `>=1`    | Fully supported |                                                  |
+| [tedious][41]          | `>=1`    | Fully supported | SQL Server driver for `mssql` and `sequelize`    |
 
-### ワーカーの互換性
+### Worker compatibility
 
-| モジュール                     | バージョン | サポートの種類    | 注                                                  |
+| Module                     | Versions | Support Type    | Notes                                                  |
 | -------------------------- | -------- | --------------- | ------------------------------------------------------ |
-| [@google-cloud/pubsub][42] | `1.2 以降`  | 完全対応 |                                                        |
-| [amqp10][43]               | `3 以降`    | 完全対応 | AMQP 1.0 ブローカー (ActiveMQ、または Apache Qpid など) に対応 |
-| [amqplib][44]              | `0.5 以降`  | 完全対応 | AMQP 0.9 ブローカー (RabbitMQ、または Apache Qpid など) に対応 |
-| [generic-pool][45]         | `2 以降`    | 完全対応 |                                                        |
-| [kafkajs][46]         | `>=1.4`    | 完全対応 |                                                        |
-| [kafka-node][47]           |          | 間もなく対応     |                                                        |
-| [rhea][48]                 | `1 以降`    | 完全対応 |                                                        |
+| [@google-cloud/pubsub][42] | `>=1.2`  | Fully supported |                                                        |
+| [amqp10][43]               | `>=3`    | Fully supported | Supports AMQP 1.0 brokers (such as ActiveMQ, or Apache Qpid) |
+| [amqplib][44]              | `>=0.5`  | Fully supported | Supports AMQP 0.9 brokers (such as RabbitMQ, or Apache Qpid) |
+| [generic-pool][45]         | `>=2`    | Fully supported |                                                        |
+| [kafkajs][46]         | `>=1.4`    | Fully supported |                                                        |
+| [kafka-node][47]           |          | Coming Soon     |                                                        |
+| [rhea][48]                 | `>=1`    | Fully supported |                                                        |
 
-### SDK の互換性
+### SDK compatibility
 
-| モジュール             | バージョン   | サポートの種類    | 注                                                  |
+| Module             | Versions   | Support Type    | Notes                                                  |
 | ------------------ | ---------- | --------------- | ------------------------------------------------------ |
-| [aws-sdk][49]      | `>=2.1.35` | 完全対応 | CloudWatch、DynamoDB、Kinesis、Redshift、S3、SNS、SQS、一般的なリクエスト。 |
+| [aws-sdk][49]      | `>=2.1.35` | Fully supported | CloudWatch, DynamoDB, Kinesis, Redshift, S3, SNS, SQS, and generic requests. |
+| [openai][64]       | `3.x`      | Fully supported |                                                        |
 
-### Promise ライブラリの互換性
+### Promise library compatibility
 
-| モジュール           | バージョン  | サポートの種類    |
+| Module           | Versions  | Support Type    |
 | ---------------- | --------- | --------------- |
-| [bluebird][50]   | `2 以降`     | 完全対応 |
-| [promise][51]    | `7 以降`     | 完全対応 |
-| [promise-js][52] | `0.0.3 以降` | 完全対応 |
-| [q][53]          | `1 以降`     | 完全対応 |
-| [when][54]       | `3 以降`     | 完全対応 |
+| [bluebird][50]   | `>=2`     | Fully supported |
+| [promise][51]    | `>=7`     | Fully supported |
+| [promise-js][52] | `>=0.0.3` | Fully supported |
+| [q][53]          | `>=1`     | Fully supported |
+| [when][54]       | `>=3`     | Fully supported |
 
-### ロガーの互換性
+### Logger compatibility
 
-| モジュール           | バージョン  | サポートの種類    |
+| Module           | Versions  | Support Type    |
 | ---------------- | --------- | --------------- |
-| [bunyan][55]     | `1 以降`     | 完全対応 |
-| [paperplane][56] | `2.3.2 以降` | 完全対応 |
-| [pino][57]       | `2 以降`     | 完全対応 |
-| [winston][58]    | `1 以降`     | 完全対応 |
+| [bunyan][55]     | `>=1`     | Fully supported |
+| [paperplane][56] | `>=2.3.2` | Fully supported |
+| [pino][57]       | `>=2`     | Fully supported |
+| [winston][58]    | `>=1`     | Fully supported |
 
-## 非対応のライブラリ
+## Unsupported libraries
 
 ### Fibers
 
-[`fibers`][59] は `async_hooks` と互換性がありません。これは Node.js の[モジュール][60]で、`dd-trace-js` が非同期コンテキストを追跡するために使用し、それによって正確なトレースを保証しています。`fibers` と `async_hooks` の間の相互作用は、予防できないクラッシュや未定義の挙動につながる可能性があります。そのため、`fibers` を直接、あるいは [Meteor][61] などのフレームワークを介して間接的に呼び出すアプリケーションで `dd-trace-js` を使用すると、不安定 (クラッシュ) や不正確なトレースが発生する可能性があります。
+[`fibers`][59] is incompatible with `async_hooks`, a Node.js [module][60] that is used by `dd-trace-js` to track asynchronous contexts thereby ensuring accurate tracing. Interactions between `fibers` and `async_hooks` may lead to unpreventable crashes and undefined behavior. So, the use of `dd-trace-js` with applications that invoke `fibers` directly or indirectly through frameworks such as [Meteor][61] may result in instability (crashes) or incorrect tracing.
 
-追加情報または議論については、[この github 問題にコメントを残す][62]か、[サポートにお問い合わせ][3]ください。
+For additional information or to discuss [leave a comment on this github issue][62] or [reach out to support][3] to discuss further.
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://semver.org/
 [2]: https://github.com/DataDog/dd-trace-js/releases
-[3]: /ja/help/
-[4]: https://nodejs.org/en/about/releases/
+[3]: /help/
+[4]: https://github.com/nodejs/release#release-schedule
 [5]: https://datadog.github.io/dd-trace-js/#integrations
 [6]: https://github.com/senchalabs/connect
 [7]: https://expressjs.com
@@ -227,3 +256,4 @@ APM は、プラグインシステムを使用することで追加設定なし�
 [61]: https://www.meteor.com/
 [62]: https://github.com/DataDog/dd-trace-js/issues/1229
 [63]: https://github.com/mariadb-corporation/mariadb-connector-nodejs
+[64]: https://github.com/openai/openai-node

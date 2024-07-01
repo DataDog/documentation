@@ -1,69 +1,69 @@
 ---
-description: VMware Tanzu のための Datadog アプリケーションモニタリング
+title: Datadog Application Monitoring for VMware Tanzu
+kind: guide
+description: "Datadog Application Monitoring for VMware Tanzu"
 further_reading:
-- link: https://www.datadoghq.com/blog/monitor-tanzu-application-service/
-  tag: ブログ
-  text: VMware Tanzu Application Service 上で動作するアプリケーションの監視
+- link: "https://www.datadoghq.com/blog/monitor-tanzu-application-service/"
+  tag: Blog
+  text: Monitor applications running on VMware Tanzu Application Service
 - link: /integrations/guide/cluster-monitoring-vmware-tanzu/
-  tag: ドキュメント
-  text: VMware Tanzu のための Datadog クラスターモニタリング
+  tag: documentation
+  text: Datadog Cluster Monitoring for VMware Tanzu
 - link: /tracing/
-  tag: ドキュメント
-  text: アプリケーションパフォーマンスの監視
+  tag: documentation
+  text: Monitor your Application Performance
 - link: /developers/dogstatsd/
-  tag: ドキュメント
-  text: DogstatsD を使用してカスタムメトリクスを Datadog に転送する
-kind: ガイド
-title: VMware Tanzu のための Datadog アプリケーションモニタリング
+  tag: documentation
+  text: Forward Custom Metrics to Datadog using DogstatsD
 ---
 
 
-## 概要
+## Overview
 
-Datadog Application Monitoring for VMWare Tanzu は、VMware Tanzu ユーザーがアプリケーションの健全性とパフォーマンスを監視できるようにします。
-以下の 3 つのコンポーネントで構成されています。
+Datadog Application Monitoring for VMWare Tanzu enables VMware Tanzu users to monitor the health and performance of their applications.
+It consists of the following three components:
 
-* 組織の設定
-* トレースエージェント
-* コンテナ Agent
+* DogStatsD
+* Trace Agent
+* Container Agent
 
-DogStatsD を使用すると、カスタムアプリケーションメトリクスを Datadog に取り込むことができます。DogStatsD は StatsD プロトコルを実装し、Datadog 固有のいくつかの拡張機能を追加したメトリクス集計サービスです。詳細は [DogStatsD][5] ドキュメントを参照してください。さらに、Datadog は DogStatsD ライブラリのリストを提供しており、これを使うことでアプリケーションと互換性のある[ライブラリ][9]を見つけることができます。
+You can use DogStatsD to get your custom application metrics into Datadog. DogStatsD is a metrics aggregation service that implements the StatsD protocol and adds a few Datadog-specific extensions. For more information, see the [DogStatsD][5] documentation. Additionally, Datadog provides a list of DogStatsD libraries you can use to find [libraries][9] compatible with your application.
 
-Trace Agent は、様々なソースからアプリケーションのトレースを収集し、Datadog APM に転送するサービスです。詳細は、[トレーシング][7]のドキュメントを参照してください。
+The Trace Agent is a service that collects application traces from various sources and forwards them to Datadog APM. For more information, see the [tracing][7] documentation.
 
-Container Agent は [Datadog Agent][6] の小型・軽量版で、メトリクスとログを Datadog に転送することができます。詳細は[ログ][8]のドキュメントを参照してください。有効にした場合、デフォルトの動作は `stdout` と `stderr` からのすべてのログが収集され、TCP で Container Agent に転送されます。
+The Container Agent is a smaller, lightweight version of the [Datadog Agent][6] that can forward metrics and logs to Datadog. See the [logs][8] documentation for more information. When enabled, the default behavior is for all logs from `stdout` and `stderr` to be collected and forwarded by TCP to the Container Agent.
 
-## 主な特徴
-Datadog Application Monitoring for VMware Tanzu には、次のような主な機能があります。
+## Key features
+Datadog Application Monitoring for VMware Tanzu includes the following key features:
 
-* アプリケーションパフォーマンスの監視
-* メトリクス、ログ、トレースの Datadog への転送
+* Application performance monitoring
+* Metric, log, and trace forwarding to Datadog
 
-## 前提条件
-Datadog Application Monitoring for VMware Tanzu には、以下の要件があります。
+## Prerequisites
+Datadog Application Monitoring for VMware Tanzu has the following requirements:
 
-* タイルを構成する前に、[Datadog アカウント][4]を持つか作成する必要があります。
-* [Datadog API キー][3]を生成する必要があります。
+* You must have or create a [Datadog account][4] before configuring the tile.
+* You must generate a [Datadog API key][3].
 
-## インフラストラクチャーリスト
+## Installation
 
-1. **Datadog Application Monitoring for VMware Tanzu** の製品ファイルは、[Tanzu Network][10] からダウンロードしてください。
-2. Tanzu Ops Manager のインストールダッシュボードに移動し、**Import a Product** をクリックして製品ファイルをアップロードします。
-3. ステップ **1** でダウンロードした製品ファイルを選択します。これでステージングエリアにタイルが追加されます。
-4. 新しく追加された **Datadog Application Monitoring for VMware Tanzu** タイルをクリックします。
-5. **Save** をクリックします。
-6. Tanzu Ops Manager のインストールダッシュボードに戻り、**Apply changes** をクリックして、Datadog Application Monitoring for the VMware Tanzu タイルをインストールします。
+1. Download the product file for **Datadog Application Monitoring for VMware Tanzu** from the [Tanzu Network][10].
+2. Go to the Tanzu Ops Manager Installation Dashboard and click **Import a Product** to upload the product file.
+3. Select the product file downloaded in step **1**. This adds the tile to your staging area.
+4. Click the newly added **Datadog Application Monitoring for VMware Tanzu** tile.
+5. Click **Save**.
+6. Return to the Tanzu Ops Manager Installation Dashboard, and click **Apply changes** to install the Datadog Application Monitoring for the VMware Tanzu tile.
 
-## その他の参考資料
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[2]: /ja/help
+[2]: /help
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: https://app.datadoghq.com/signup
-[5]: /ja/developers/dogstatsd/?tab=hostagent
-[6]: /ja/agent/
-[7]: /ja/tracing/
-[8]: /ja/logs/
-[9]: /ja/libraries/
+[5]: /developers/dogstatsd/?tab=hostagent
+[6]: /agent/
+[7]: /tracing/
+[8]: /logs/
+[9]: /libraries/
 [10]: https://network.pivotal.io/products/datadog-application-monitoring/

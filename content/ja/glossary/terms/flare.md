@@ -1,6 +1,6 @@
 ---
-core_product:
-- datadog agent
 title: flare
+core_product:
+  - datadog agent
 ---
-`flare` コマンドは、トラブルシューティングの情報を Datadog サポートチームに送信するための迅速な方法です。`flare` は、Agent の全ての構成ファイルとログをアーカイブファイルに収集し、パスワードなどの機密情報を削除した後、そのアーカイブファイルを Datadog サポートに送信します。
+The `flare` command is a quick way to send troubleshooting information to the Datadog support team. `flare` gathers all of the Agent's configuration files and logs into an archive file, removes sensitive information like passwords, and then sends the archive file to Datadog support.

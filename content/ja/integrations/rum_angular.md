@@ -1,106 +1,107 @@
 ---
-app_id: rum-angular
-app_uuid: 0dd38c9b-921d-4252-8c46-c7a6d83c5778
-assets: {}
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com (日本語対応)
-  support_email: help@datadoghq.com
-categories:
-- メトリクス
-- トレーシング
-dependencies:
-- https://github.com/DataDog/integrations-extras/blob/master/rum_angular/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: rum_angular
-integration_id: rum-angular
-integration_title: Angular
-integration_version: ''
-is_public: true
-custom_kind: integration
-manifest_version: 2.0.0
-name: rum_angular
-public_title: Angular
-short_description: Datadog RUM を使用した Angular アプリケーションの監視とメトリクス生成
-supported_os:
+"app_id": "rum-angular"
+"app_uuid": "0dd38c9b-921d-4252-8c46-c7a6d83c5778"
+"assets": {}
+"author":
+  "homepage": "https://www.datadoghq.com"
+  "name": Datadog
+  "sales_email": info@datadoghq.com
+  "support_email": help@datadoghq.com
+"categories":
+- metrics
+- tracing
+"custom_kind": "integration"
+"dependencies":
+- "https://github.com/DataDog/integrations-extras/blob/master/rum_angular/README.md"
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "rum_angular"
+"integration_id": "rum-angular"
+"integration_title": "Angular"
+"integration_version": ""
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "rum_angular"
+"public_title": "Angular"
+"short_description": "Monitor Angular applications and generate metrics using Datadog RUM"
+"supported_os":
 - any
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Metrics
-  - Category::Tracing
-  - Supported OS::Any
-  configuration: README.md#Setup
-  description: Datadog RUM を使用した Angular アプリケーションの監視とメトリクス生成
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Angular
+"tile":
+  "changelog": CHANGELOG.md
+  "classifier_tags":
+  - "Category::Metrics"
+  - "Category::Tracing"
+  - "Supported OS::Any"
+  "configuration": "README.md#Setup"
+  "description": Monitor Angular applications and generate metrics using Datadog RUM
+  "media": []
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": Angular
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
-## 概要
+## Overview
 
-Datadog [Angular インテグレーション][1]で、Angular コンポーネントのパフォーマンス問題を迅速に解決します。
+With the Datadog [Angular integration][1], resolve performance issues quickly in Angular components by:
 
-- サーバーの応答速度が遅い、レンダーブロックするリソース、コンポーネント内のエラーなど、パフォーマンスボトルネックの根本原因をデバッグ
-- Angular のパフォーマンスデータをユーザージャーニー、サーバーサイドへの AJAX コール、ログと自動的に相関付け
-- Angular の重要なパフォーマンスメトリクス (Core Web Vitals など)がしきい値を下回り、ユーザーエクスペリエンスが低下した場合にエンジニアリングチームにアラートを発信
-
-
-Angular アプリケーションをエンドツーエンドで監視します。
-
-- スタック全体におけるユーザージャーニーを追跡、視覚化
-- ロードタイムが遅くなる根本的な原因をデバッグ。Angular のコード、ネットワークパフォーマンス、または基礎的なインフラストラクチャーの問題である可能性があります。
-- ユーザー ID、電子メール、名前などの属性で、すべてのユーザーセッションを分析し、コンテキストを作成
-- フロントエンドとバックエンドの開発チームのために、フルスタックモニタリングを 1 つのプラットフォームで実現
+- Debugging the root cause of performance bottlenecks, such as a slow server response time, render-blocking resource, or error inside a component
+- Automatically correlating Angular performance data with user journeys, AJAX calls to the server side, and logs
+- Alerting your engineering teams when crucial performance metrics for Angular (such as Core Web Vitals) fall below a threshold that results in a poor user experience
 
 
+Monitor your Angular applications from end-to-end by:
+
+- Tracking and visualizing user journeys across your entire stack
+- Debugging the root cause of slow load times, which may be an issue with your Angular code, network performance, or underlying infrastructure 
+- Analyzing and contextualizing every user session with attributes such as user ID, email, name, and more
+- Unifying full-stack monitoring in one platform for frontend and backend development teams
 
 
 
 
-## 計画と使用
 
-### RUM イベントの収集
 
-アプリケーションからリアルユーザーモニタリングのイベント収集を開始するには、[ブラウザモニタリング][2]を参照してください。
+## Setup
 
-### トレースの収集
+### Collect RUM events 
 
-Angular アプリケーションは、自動的に Datadog にトレースを送信します。
+To start collecting Real User Monitoring events from your application, see [Browser Monitoring][2]. 
 
-### ログの収集
+### Collect traces 
 
-Angular アプリケーションのログを Datadog に転送し始めるには、[JavaScript ログ収集][3]をご覧ください。
+Your Angular application automatically sends traces to Datadog.
 
-## リアルユーザーモニタリング
+### Collect logs 
 
-### データセキュリティ
+To start forwarding your Angular application's logs to Datadog, see [JavaScript Log Collection][3].
 
-Angular インテグレーションには、メトリクスは含まれていません。RUM アプリケーションからカスタムメトリクスを生成するには、[メトリクスの生成][4]を参照してください。
+## Data Collected
 
-### イベント
+### Metrics
 
-イベントや属性の詳細については、[RUM ブラウザデータ収集][5]を参照してください。
+The Angular integration does not include any metrics. To generate custom metrics from your RUM application, see [Generate Metrics][4].
 
-### サービスチェック
+### Events 
 
-Angular インテグレーションには、サービスのチェック機能は含まれません。
+For more information about events and attributes, see [RUM Browser Data Collected][5]. 
 
-## ヘルプ
+### Service Checks 
 
-ご不明な点は、[Datadog のサポートチーム][6]までお問い合わせください。
+The Angular integration does not include any service checks.
+
+## Troubleshooting
+
+Need help? Contact [Datadog Support][6]. 
 
 
 
 [1]: https://app.datadoghq.com/integrations/rum-angular
-[2]: https://docs.datadoghq.com/ja/real_user_monitoring/browser/
-[3]: https://docs.datadoghq.com/ja/logs/log_collection/javascript/
-[4]: https://docs.datadoghq.com/ja/real_user_monitoring/generate_metrics
-[5]: https://docs.datadoghq.com/ja/real_user_monitoring/browser/data_collected/
-[6]: https://docs.datadoghq.com/ja/help/
+[2]: https://docs.datadoghq.com/real_user_monitoring/browser/
+[3]: https://docs.datadoghq.com/logs/log_collection/javascript/
+[4]: https://docs.datadoghq.com/real_user_monitoring/generate_metrics
+[5]: https://docs.datadoghq.com/real_user_monitoring/browser/data_collected/
+[6]: https://docs.datadoghq.com/help/
+

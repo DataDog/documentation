@@ -1,36 +1,35 @@
 ---
-kind: ガイド
-title: 演算メトリクスと疎なメトリクスの監視
+title: Monitor Arithmetic and Sparse Metrics
 ---
 
-## 概要
+## Overview
 
-演算を使用したクエリに基づくアラートの作成はよく行われます。このようなクエリを意図したとおりに評価できるよう、適切にモニターを設定するには、ツールと挙動についていくつか考慮する必要があります。
+Creating an alert based on a query with arithmetic is a common practice. There are some tools and behaviors that should be considered to ensure a monitor's settings are appropriate for evaluating these queries as intended.
 
-## 疎なメトリクス
+## Sparse metrics
 
-疎なメトリクスや分母が **0** のメトリクスでは、一部の結果が拒否される可能性があります。
+In the case of sparse or _0_ metrics in the denominator, some results can be rejected.
 
-次のようなメトリクス値を考えます。
+Consider the following metric values:
 
 * `A = (10, 10, 10)`
 * `B = (0, 1, -)`
 
-計算式 `a/b` の場合、モニターは次のように評価します。
+For the formula `a/b`, the monitor would evaluate:
 
 ```text
 10/0 + 10/1 + 10/NaN = 10
 ```
 
-評価ウィンドウに多数の「null」バケットが含まれている場合 (**10/NaN + 10/Nan + ... + 10/Nan**) は、評価が「スキップ」されるため、メトリクスを調整するか、以下のいずれかの回避策を使用する必要があります。
+If the evaluation window includes many "null" buckets (**10/NaN + 10/Nan + ... + 10/Nan**) the evaluations will be "skipped," so you may need to make adjustments to your metric or use one of the workarounds below.
 
-## 疎なメトリクスや不整列なメトリクスに対する回避策
+## Workarounds for sparse and misaligned metrics
 
 ### `.fill()`
 
-`.fill()` 関数を適用すると、すべての時間バケットに有効な値を持たせることができます。**ゲージ**メトリクスタイプの場合、デフォルトの補間は 5 分間の `.fill(linear)` (線形) です。**カウント**および**レート**タイプのメトリクスの場合、デフォルトは `.fill(null)` (補間は無効) です。一般に、モニターでカウント/レートメトリクスに補間を使用することはお勧めしません。
+You can apply a `.fill()` function to ensure all time buckets have valid values. For **gauge** metric types, the default interpolation is linear or `.fill(linear)` for 5 minutes. For **count** and **rate** type metrics, the default is `.fill(null)`, which disables interpolation. Datadog generally recommends against using interpolation for count/rate metrics in monitors.
 
-**オリジナル**: `sum:my_metric.has_gaps.gauge{env:a} by {timer,env}`
+**Original**: `sum:my_metric.has_gaps.gauge{env:a} by {timer,env}`
 
 ```text
 | Timestamp           | timer:norm,env:a | timer:offset,env:a |
@@ -44,21 +43,21 @@ title: 演算メトリクスと疎なメトリクスの監視
 | 2019-03-29 12:30:00 | 1                |                    |
 ```
 
-`my_metric.has_gaps.gauge` のメトリクスタイプが**ゲージ**だとすると、デフォルトで 5 分間の線形補間が使用されますが、このメトリクスは 10 分ごとに報告します。次のようなクエリを考えます。
+Assume that `my_metric.has_gaps.gauge` is metric type **gauge** so there is linear interpolation for 5 minutes as default, but the metric reports once every 10 minutes. Consider this query:
 
 ```text
 sum(last_30m):sum:my_metric.has_gaps.gauge{timer:norm,env:a} / sum:my_metric.has_gaps.gauge{timer:offset,env:a}
 ```
 
-大部分の評価は「スキップ」になります。
+You would see mainly "skipped" evaluations.
 
-| パス                | 評価                              | 結果 |
+| Path                | Evaluation                              | Result |
 |:--------------------|:----------------------------------------|:-------|
 | `classic_eval_path` | **1/Nan + Nan/1 + ... + 1/Nan + Nan/1** | N/A    |
 
-補間を調整することで、すべての時間間隔でメトリクスを得ることができます。
+By adjusting the interpolation, you can ensure that there are metrics at every time interval.
 
-**変更後**: `sum:my_metric.has_gaps.gauge{env:a} by {timer,env}.fill(last,900)`
+**Modified**: `sum:my_metric.has_gaps.gauge{env:a} by {timer,env}.fill(last,900)`
 
 ```text
 | Timestamp           | timer:norm,env:a | timer:offset,env:a |
@@ -72,21 +71,21 @@ sum(last_30m):sum:my_metric.has_gaps.gauge{timer:norm,env:a} / sum:my_metric.has
 | 2019-03-29 12:30:00 | 1                | 1                  |
 ```
 
-変更後のクエリ
+Modified query:
 
 ```text
 sum(last_30m):sum:my_metric.has_gaps.gauge{timer:norm,env:a}.fill(last,900) / sum:my_metric.has_gaps.gauge{timer:offset,env:a}.fill(last,900)
 ```
 
-`.fill(last,900)` による新しい結果は次のとおりです。
+With `.fill(last,900)`, the new result is:
 
-| パス                | 評価                                    | 結果 |
+| Path                | Evaluation                                    | Result |
 |:--------------------|:----------------------------------------------|:-------|
 | `classic_eval_path` | **(1)/1 + 1/1 + 0/1 + 0/1 + 1/1 + 1/1 + 1/1** | 5      |
 
-### 短い評価ウィンドウ
+### Short evaluation windows
 
-短い評価ウィンドウに除算が含まれていると、モニターでタイミングの問題が発生する可能性があります。評価ウィンドウ 1 分のモニタークエリで除算を行う場合、その分子と分母は約 2～3 秒間の期間バケットになります。クエリ時間に分子または分母メトリクスのどちらかが存在しない場合、不要な評価値を受け取る可能性があります。
+It is possible to have timing issues in monitors with division over short evaluation windows. If your monitor query requires division over an evaluation window of one minute, the numerator and denominator represent time buckets on the order of a few seconds. If metrics for the numerator and denominator aren't both available at query time, you could get unwanted evaluation values.
 
 ```
 | Timestamp             | sum:my_num{*}       | sum:my_denom{*}     |
@@ -98,10 +97,10 @@ sum(last_30m):sum:my_metric.has_gaps.gauge{timer:norm,env:a}.fill(last,900) / su
 | 2019-03-29 13:30:56   | 120 (inc)           | 850 (inc)           |
 ```
 
-`min(last_1m):sum:my_num{*}/sum:my_denom{*}` のようなクエリの場合は、最小値が歪められて、誤ったモニターがトリガーされる可能性があります。
+In the case of a query like `min(last_1m):sum:my_num{*}/sum:my_denom{*}`, the minimum value could be skewed and could trigger your monitor unintentionally.
 
-そのため、短い評価ウィンドウのクエリに除算が含まれる場合は、タイミング問題が発生しないように、30～60 秒の短い評価遅延を加算します。または、評価ウィンドウを 5 分に変更することもできます。
+Therefore, adding a short evaluation delay of 30-60 seconds to adjust for timing issues should be considered for queries with division over short evaluation windows. Alternatively, changing to a five minute evaluation window can help.
 
-このロジックに関するご質問は、[Datadog のサポートチームまでお問い合わせください][1]。
+[Reach out to the Datadog support team][1] if you have any questions regarding this logic.
 
-[1]: /ja/help/
+[1]: /help/

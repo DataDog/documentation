@@ -1,100 +1,105 @@
 ---
+title: PHP Compatibility Requirements
+kind: documentation
 code_lang: php
-code_lang_weight: 40
-title: PHP 互換性要件
 type: multi-code-lang
+code_lang_weight: 40
 ---
 
-## ASM の機能サポート
+## Application Security capabilities support
 
-PHP ライブラリでは、指定されたトレーサーのバージョンで、以下の ASM 機能がサポートされています。
+The following application security capabilities are supported in the PHP library, for the specified tracer version:
 
-| ASM の機能                   | PHP トレーサーの最小バージョン |
+| Application Security capability                   | Minimum PHP tracer version |
 | -------------------------------- |----------------------------|
 | Threat Detection | 0.84.0                     |
 | Threat Protection  | 0.86.0                     |
-| ブロックされたリクエストへの対応をカスタマイズする | 0.86.0 |
-| オープンソースソフトウェア (OSS) の脆弱性管理 | 0.90.0              |
-| コードレベルの脆弱性管理 (ベータ版) | 非対応              |
-| ユーザーアクティビティイベントの自動追跡 | 0.89.0                     |
+| Customize response to blocked requests | 0.86.0 |
+| Software Composition Analysis (SCA) | 0.90.0              |
+| Code Security        | not supported              |
+| Automatic user activity event tracking | 0.89.0                     |
+| API Security | 0.98.0 |
 
-PHP でサポートされるすべての ASM 機能を利用するためのトレーサーの最小バージョンは 0.86.0 です。
+The minimum tracer version to get all supported ASM capabilities for PHP is 0.98.0.
 
 
-<div class="alert alert-info">サポートされていない機能のサポート追加を希望される場合は、お知らせください！<a href="https://forms.gle/gHrxGQMEnAobukfn7">この短いフォーム</a>に必要事項を記入して、詳細を送信してください。</div>
+<div class="alert alert-info">If you would like to see support added for any of the unsupported capabilities, let us know! Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send details</a>.</div>
 
-### サポートされるデプロイメントタイプ
-|タイプ | Threat Detection のサポート | OSS の脆弱性管理のサポート |
-| ---           |   ---             |           ----            |
-| Docker        | {{< X >}}         |                           |
-| Kubernetes    | {{< X >}}         |                           |
-| Amazon ECS    | {{< X >}}         |                           |
-| AWS Fargate   |                   |                           |
-| AWS Lambda    |                   |                           |
+### Supported deployment types
+| Type        | Threat Detection support | Software Composition Analysis |
+|-------------|--------------------------|-------------------------------|
+| Docker      | {{< X >}}                | {{< X >}}                     |
+| Kubernetes  | {{< X >}}                | {{< X >}}                     |
+| Amazon ECS  | {{< X >}}                | {{< X >}}                     |
+| AWS Fargate |                          |                               |
+| AWS Lambda  |                          |                               |
 
-## 言語とフレームワークの互換性
+## Language and framework compatibility
 
 <div class="alert alert-info">
-<strong>注:</strong>
-PHP の<a href="https://www.php.net/supported-versions">公式にサポートされているバージョン</a>、特に 8.0、8.1、8.2 を使用することをお勧めします。
+<strong>Note:</strong>
+It's recommended to use <a href="https://www.php.net/supported-versions">officially supported versions</a> of PHP, especially 8.0, 8.1 and 8.2.
 </div>
 
-| PHP バージョン    | サポートレベル                         | パッケージバージョン |
+| PHP Version    | Support level                         | Package version |
 |:---------------|:--------------------------------------|:----------------|
-| 8.2.x          | 一般提供                  | > `0.82.0+`     |
-| 8.1.x          | 一般提供                  | > `0.66.0+`     |
-| 8.0.x          | 一般提供                  | > `0.52.0+`     |
-| 7.4.x          | 一般提供                  | All             |
-| 7.3.x          | 一般提供                  | All             |
-| 7.2.x          | 一般提供                  | All             |
-| 7.1.x          | 一般提供                  | All             |
-| 7.0.x          | 一般提供                  | All             |
+| 8.3.x          | General Availability                  | > `0.95.0+`     |
+| 8.2.x          | General Availability                  | > `0.82.0+`     |
+| 8.1.x          | General Availability                  | > `0.66.0+`     |
+| 8.0.x          | General Availability                  | > `0.52.0+`     |
+| 7.4.x          | General Availability                  | All             |
+| 7.3.x          | General Availability                  | All             |
+| 7.2.x          | General Availability                  | All             |
+| 7.1.x          | General Availability                  | All             |
+| 7.0.x          | General Availability                  | All             |
 
-PHP ASM は以下の SAPI に対応しています。
+Application Security capabililties for PHP support the following SAPI's:
 
-| SAPI           | サポートの種類    |
+| SAPI           | Support type    |
 |:---------------|:----------------|
-| apache2handler | 完全対応 |
-| cli            | 完全対応 |
-| fpm-fcgi       | 完全対応 |
-| cgi-fcgi       | 完全対応 |
+| apache2handler | Fully Supported |
+| cli            | Fully Supported |
+| fpm-fcgi       | Fully Supported |
+| cgi-fcgi       | Fully Supported |
 
-## 対応プロセッサアーキテクチャー
+## Supported processor architectures
 
-PHP ASM は以下のアーキテクチャに対応しています。
+Application Security capabililties for PHP support the following architectures:
 
-| プロセッサアーキテクチャー                   | サポートレベル         | パッケージバージョン                        |
+| Processor architectures                   | Support level         | Package version                        |
 | ------------------------------------------|-----------------------|----------------------------------------|
 | Linux GNU amd64 (`x86-64-linux-gnu`)      | GA                    | All                                    |
 | Linux MUSL amd64 (`x86-64-linux-musl`)    | GA                    | All                                    |
+| Linux GNU arm64 (aarch64-linux-gnu)       | GA                    | > `0.95.0`                             |
+| Linux MUSL arm64 (aarch64-linux-musl)     | GA                    | > `0.95.0`                             |
 
-Datadog PHP ライブラリは、以下のアーキテクチャの PHP バージョン 7.0 以降をサポートしています。
+The Datadog PHP library supports PHP version 7.0 and above on the following architectures:
 
-- Linux (GNU) x86-64
-- Alpine Linux (musl) x86-64
+- Linux (GNU) x86-64 and arm64
+- Alpine Linux (musl) x86-64 and arm64
 
-ライブラリはすべての PHP フレームワークの使用をサポートし、またフレームワークなしの使用も可能です。
+The library supports the use of all PHP frameworks, and also the use of no framework.
 
 
-### Web フレームワークの互換性
+### Web framework compatibility
 
-- 攻撃元の HTTP リクエストの詳細
-- HTTP リクエスト用のタグ (ステータスコード、メソッドなど)
-- アプリケーション内の攻撃フローを確認するための分散型トレーシング
+- Attacker source HTTP request details
+- Tags for the HTTP request (status code, method, etc)
+- Distributed Tracing to see attack flows through your applications
 
-##### ASM の機能に関する備考
-- **オープンソースソフトウェアの脆弱性管理**はサポートされていません
-- **コードレベルの脆弱性管理**はサポートされていません
+##### Application Security Capability Notes
+- **Software Composition Analysis** is not supported
+- **Code Security** is not supported
 
-以下のフレームワークは ASM によって直接インスツルメンテーションされませんが、ランタイムインスツルメンテーションによって間接的にサポートされます。
+The following frameworks aren't directly instrumented by Application Security, but indirectly supported through runtime instrumentation.
 
-| フレームワーク                | バージョン    | Threat Detection のサポートの有無 | Threat Protection のサポートの有無 |
+| Framework                | Versions    | Threat Detection supported? | Threat Protection supported? |
 | ------------------------ | ----------- | --------------- | ---------------------------------------------- |
 | CakePHP       | 2.x       |  {{< X >}} | {{< X >}} |
 | CodeIgniter   | 2.x       |  {{< X >}} | {{< X >}} |
 | FuelPHP       | 1.1        |  {{< X >}} | {{< X >}} |
-| Laravel       | 4.2、5.x、6.x        | {{< X >}} | {{< X >}} |
-| Laravel 8     | 8.x (トレーサー 0.52.0+) | {{< X >}} | {{< X >}} |
+| Laravel       | 4.2, 5.x, 6.x        | {{< X >}} | {{< X >}} |
+| Laravel 8     | 8.x (tracer 0.52.0+) | {{< X >}} | {{< X >}} |
 | Lumen         | 1.9-2.29    |  {{< X >}} | {{< X >}} |
 | Magento       |  3.8+       |  {{< X >}} | {{< X >}} |
 | Neos Flow     |  3.0.x      |  {{< X >}} | {{< X >}} |
@@ -107,43 +112,44 @@ Datadog PHP ライブラリは、以下のアーキテクチャの PHP バージ
 | Yii           | 3.1+        |  {{< X >}} | {{< X >}} |
 | Zend          | 3.1+        |  {{< X >}} | {{< X >}} |
 | Symfony 3     | 3.1+        |  {{< X >}} | {{< X >}} |
+| RoadRunner    | 2.x         |  {{< X >}} | {{< X >}} |
 
 
-### データストアの互換性
+### Data store compatibility
 
-**データストアのトレーシングでは以下の確認が可能です**
+**Datastore tracing provides:**
 
-- SQL 攻撃検出
-- クエリ情報 (サニタイジングされたクエリ文字列など)
-- エラーとスタックトレースのキャプチャ
+- SQL attack detection
+- query info (for example, a sanitized query string)
+- error and stacktrace capturing
 
-##### ASM の機能に関する備考
-- **Vulnerability Management for OSS** はサポートされていません
-- **Vulnerability Management for Code-level** はサポートされていません
-- **Threat Protection** は HTTP リクエスト (入力) レイヤーでも機能し、そのため下表に掲載されていないデータベースでもデフォルトで機能します。
+##### Application Security Capability Notes
+- **Software Composition Analysis** is not supported
+- **Code Security** is not supported
+- **Threat Protection** also works at the HTTP request (input) layer, and so works for all databases by default, even those not listed in the table below.
 
-| フレームワーク         | バージョン | Threat Detection のサポートの有無    | Threat Detection のサポートの有無|
+| Framework         | Versions | Threat Detection supported?    | Threat Protection supported?|
 |-------------------|-----------------|-----------------|---------------|
-| Amazon RDS        | サポートされているすべての PHP | {{< X >}}  |   {{< X >}} |
-| Eloquent       | Laravel 対応バージョン | {{< X >}} | {{< X >}} |
-| Memcached        | サポートされているすべての PHP |   {{< X >}}    | {{< X >}} |
-| MySQLi        | サポートされているすべての PHP | {{< X >}} | {{< X >}} |
-| PDO        | サポートされているすべての PHP| {{< X >}}| {{< X >}} |
-| PHPRedis        | 3、4、5 |   {{< X >}}    | {{< X >}} |
+| Amazon RDS        | Any supported PHP | {{< X >}}  |   {{< X >}} |
+| Eloquent       | Laravel supported versions | {{< X >}} | {{< X >}} |
+| Memcached        | Any supported PHP |   {{< X >}}    | {{< X >}} |
+| MySQLi        | Any supported PHP | {{< X >}} | {{< X >}} |
+| PDO        | Any supported PHP| {{< X >}}| {{< X >}} |
+| PHPRedis        | 3, 4, 5 |   {{< X >}}    | {{< X >}} |
 | Predis        | 1.1 | {{< X >}} |   {{< X >}}    |
 
-### User Authentication Frameworks の互換性
+### User Authentication Frameworks compatibility
 
-**User Authentication Frameworks へのインテグレーションは以下を提供します。**
+**Integrations to User Authentication Frameworks provide:**
 
-- ユーザー ID を含むユーザーログインイベント
-- ユーザーログインイベントのアカウント乗っ取り検出モニタリング
+- User login events, including the user IDs
+- Account Takeover detection monitoring for user login events
 
-| フレームワーク | フレームワークの最小バージョン |
+| Framework | Minimum Framework Version |
 |-----------|---------------------------|
 | Laravel   | 4.2                       |
 | Symfony   | 3.3                       |
 | Wordpress | 4.8                       |
 
-[1]: /ja/tracing/trace_collection/compatibility/php/
-[2]: /ja/agent/remote_config/#enabling-remote-configuration
+[1]: /tracing/trace_collection/compatibility/php/
+[2]: /agent/remote_config/#enabling-remote-configuration

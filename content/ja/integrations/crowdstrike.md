@@ -1,111 +1,112 @@
 ---
-categories:
-- クラウド
-- ログの収集
-- ログの収集
-- ネットワーク
-- セキュリティ
-dependencies: []
-description: CrowdStrike
-doc_link: https://docs.datadoghq.com/integrations/crowdstrike/
-draft: false
-git_integration_title: crowdstrike
-has_logo: true
-integration_id: ''
-integration_title: CrowdStrike
-integration_version: ''
-is_public: true
-custom_kind: integration
-manifest_version: '1.0'
-name: crowdstrike
-public_title: CrowdStrike
-short_description: CrowdStrike の検出イベントやアラートを Datadog のログとしてリアルタイムに収集します。
-team: web-integrations
-version: '1.0'
+"categories":
+- cloud
+- log collection
+- log collection
+- network
+- security
+"custom_kind": "integration"
+"dependencies": []
+"description": "CrowdStrike"
+"doc_link": "https://docs.datadoghq.com/integrations/crowdstrike/"
+"draft": false
+"git_integration_title": "crowdstrike"
+"has_logo": true
+"integration_id": ""
+"integration_title": "CrowdStrike"
+"integration_version": ""
+"is_public": true
+"manifest_version": "1.0"
+"name": "crowdstrike"
+"public_title": "CrowdStrike"
+"short_description": "Collect real-time CrowdStrike detection events and alerts as Datadog logs."
+"team": "web-integrations"
+"version": "1.0"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-## 概要
+## Overview
 
-[CrowdStrike][1] は、エンドポイント、ワークロード、データ、アイデンティティを包括的に視覚化し、保護することで、侵害、ランサムウェア、サイバー攻撃を阻止するシングルエージェントソリューションです。
+[CrowdStrike][1] is a single agent solution to stop breaches, ransomware, and cyber attacks with comprehensive visibility and protection across endpoints, workloads, data, and identity. 
 
-CrowdStrike インテグレーションにより、CrowdStrike の検出イベントやアラートを Datadog のログとしてリアルタイムに収集することができます。
+The CrowdStrike integration allows you to collect real-time CrowdStrike detection events and alerts as Datadog logs.
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-インストールは必要ありません。
+No installation is required.
 
-### ブラウザトラブルシューティング
+### Configuration
 
-#### イベントストリーミングの有効化
+#### Enabling event streaming
 
-[イベントストリーム][2]に接続する前に、[CrowdStrike のサポートチームに連絡][3]して、顧客アカウントで API のストリーミングを有効にしてください。
+Before you can connect to the [Event Stream][2], [contact the CrowdStrike support team][3] to enable the streaming of APIs on your customer account.
 
-#### CrowdStrike のアカウントに接続する
+#### Connecting your CrowdStrike Account
 
-ストリーミングを有効にしたら、CrowdStrike に新しい API クライアントを追加します。
+Once streaming is enabled, add a new API client in CrowdStrike:
 
-1. Falcon コンソールにサインインします。
-1. [Support > API Clients and Keys][4] に移動します。
-1. **Add new API client** をクリックします。
-1. Falcon および API アクションログで API クライアントを識別する、説明的なクライアント名を入力します (例えば、`Datadog` など)
-1. オプションで、API クライアントの使用目的などの説明を入力します。
-1. すべての API スコープで **Read** アクセスを選択します。
-1. **Add** をクリックします。
+1. Sign in to the Falcon console.
+1. Go to [Support > API Clients and Keys][4].
+1. Click **Add new API client**.
+1. Enter a descriptive client name that identifies your API client in Falcon and in API action logs (for example, `Datadog`).
+1. Optionally, enter a description such as your API client's intended use.
+1. Select **Read** access for all API scopes.
+1. Click **Add**.
 
-#### ログ収集の有効化
+#### Enabling log collection
 
-Datadog の [CrowdStrike インテグレーションタイル][5]に API クライアントの詳細を追加します。
+Add the API client details on the [CrowdStrike integration tile][5] in Datadog:
 
-1. **Connect a CrowdStrike Account** をクリックします。
-1. API クライアント ID、クライアントシークレット、API ドメインをコピーします。
-1. オプションで、カンマで区切られたタグのリストを入力します。
-1. **Submit** をクリックします。
+1. Click **Connect a CrowdStrike Account**.
+1. Copy over your API client ID, client secret, and API domain.
+1. Optionally, enter a list of tags separated by comma.
+1. Click **Submit**.
 
-数分後、[Crowdstrike Log Overview ダッシュボード][7]に `crowdstrike` というソースの[ログ][6]が表示されます。
+After a few minutes, [logs][6] with the source `crowdstrike` appear on the [Crowdstrike Log Overview dashboard][7].
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 
-CrowdStrike インテグレーションには、メトリクスは含まれません。
+The CrowdStrike integration does not include any metrics.
 
-### ヘルプ
+### Events
 
-CrowdStrike インテグレーションにより、Datadog は以下のイベントを取り込むことができるようになります。
+The CrowdStrike integration allows Datadog to ingest the following events:
 
-* 検出の概要
-* ファイアウォールマッチ
-* アイデンティティ保護
-* Idp 検出の概要
-* インシデント概要
-* 認証イベント
-* 検出ステータスの更新
-* アップロードされた IoC
-* ネットワーク封じ込めイベント
-* IP 許可リストのイベント
-* ポリシー管理イベント
-* CrowdStrike ストアアクティビティ
-* リアルタイム応答セッションの開始/終了
-* イベントストリームの開始/停止
+* Detection Summary
+* Firewall Match
+* Identity Protection
+* Idp Detection Summary
+* Incident Summary
+* Authentication Events
+* Detection Status Updates
+* Uploaded IoCs
+* Network Containment Events
+* IP Allowlisting Events
+* Policy Management Events
+* CrowdStrike Store Activity
+* Real Time Response Session Start/End
+* Event stream start/stop
 
-これらのイベントは [Crowdstrike Log Overview ダッシュボード][7]に表示されます。
+These events appear on the [Crowdstrike Log Overview dashboard][7].
 
-### ヘルプ
+### Service Checks
 
-CrowdStrike インテグレーションには、サービスのチェック機能は含まれません。
+The CrowdStrike integration does not include any service checks.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
+Need help? Contact [Datadog support][8].
 
 [1]: https://www.crowdstrike.com/
-[2]: https://docs.datadoghq.com/ja/service_management/events/explorer/
+[2]: https://docs.datadoghq.com/service_management/events/explorer/
 [3]: https://supportportal.crowdstrike.com/
 [4]: https://falcon.crowdstrike.com/support/api-clients-and-keys
 [5]: https://app.datadoghq.com/integrations/crowdstrike
-[6]: /ja/logs/
+[6]: /logs/
 [7]: https://app.datadoghq.com/dash/integration/32115/crowdstrike-overview
-[8]: https://docs.datadoghq.com/ja/help/
+[8]: https://docs.datadoghq.com/help/
+

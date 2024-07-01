@@ -1,24 +1,25 @@
 ---
+title: Tracer Debug Logs
+kind: Documentation
 further_reading:
 - link: /tracing/troubleshooting/connection_errors/
-  tag: ドキュメント
-  text: APM 接続エラーのトラブルシューティング
-title: トレーサーデバッグログ
+  tag: Documentation
+  text: Troubleshooting APM Connection Errors
 ---
 
-## デバッグモードを有効にする
+## Enable debug mode
 
-Datadog デバッグ設定を使用して、問題を診断したり、トレースデータを監査したりできます。ロガーに送信されるイベントの数が増えるため、実稼働システムでデバッグモードを有効にすることはお勧めできません。デバッグモードはデバッグ目的でのみ使用してください。
+Use Datadog debug settings to diagnose issues or audit trace data. Datadog does not recommend that you enable debug mode in production systems because it increases the number of events that are sent to your loggers. Use debug mode for debugging purposes only.
 
-<mrk mid="28" mtype="seg"/><mrk mid="29" mtype="seg"/>
+Debug mode is disabled by default. To enable it, follow the corresponding language tracer instructions:
 
 {{< programming-lang-wrapper langs="java,python,ruby,go,nodejs,.NET,php,cpp" >}}
 
 {{< programming-lang lang="java" >}}
 
-Datadog Java トレーサーのデバッグモードを有効にするには、JVM の起動時にフラグ `-Ddd.trace.debug=true` を設定するか、環境変数として `DD_TRACE_DEBUG=true` を追加します。
+To enable debug mode for the Datadog Java Tracer, set the flag `-Ddd.trace.debug=true` when starting the JVM or add `DD_TRACE_DEBUG=true` as environment variable.
 
-**注**: Datadog Java トレーサーは SL4J SimpleLogger を実装するため、[そのすべての設定を適用できます][1]。例えば、専用のログファイルにロギングするには次のようにします。
+**Note**: Datadog Java Tracer implements SL4J SimpleLogger, so [all of its settings can be applied][1], for example, logging to a dedicated log file:
 ```
 -Ddatadog.slf4j.simpleLogger.logFile=<NEW_LOG_FILE_PATH>
 ```
@@ -29,33 +30,54 @@ Datadog Java トレーサーのデバッグモードを有効にするには、J
 
 {{< programming-lang lang="python" >}}
 
-Datadog Python Tracer のデバッグモードを有効にする手順は、アプリケーションが使用しているトレーサーのバージョンに依存します。該当するシナリオを選択してください。
+The steps for enabling debug mode in the Datadog Python Tracer depends on the version of the tracer your application is using. Choose the scenario that applies:
 
-### シナリオ 1: ddtrace バージョン 1.3.2 以上
+### Scenario 1: ddtrace version 2.x and higher
 
-1. デバッグモードを有効にするには: `DD_TRACE_DEBUG=true`
+1. To enable debug mode: `DD_TRACE_DEBUG=true`
 
-2. デバッグログをログファイルにルーティングするには、 `DD_TRACE_LOG_FILE` にトレーサーのログを書き込むファイル名を、現在の作業ディレクトリからの相対パスで設定します。例えば、`DD_TRACE_LOG_FILE=ddtrace_logs.log` とします。
-   デフォルトでは、ファイルサイズは 15728640 バイト (約 15MB) で、1 つのバックアップログファイルが作成されます。デフォルトのログファイルのサイズを大きくするには、`DD_TRACE_LOG_FILE_SIZE_BYTES` の設定でサイズをバイト単位で指定します。
+2. To route debug logs to a log file, set `DD_TRACE_LOG_FILE` to the filename of that log file, relative to the current working directory. For example, `DD_TRACE_LOG_FILE=ddtrace_logs.log`.
+   By default, the file size is 15728640 bytes (about 15MB), and one backup log file is created. To increase the default log file size, specify the size in bytes with the `DD_TRACE_LOG_FILE_SIZE_BYTES` setting.
 
-3. ログをコンソールにルーティングするには、**Python 2** アプリケーションでは、 `logging.basicConfig()` 等を構成してください。**Python 3** のアプリケーションでは、ログは自動的にコンソールに送られます。
+**Note:** If the application uses the root logger and changes log level to `DEBUG`, debug tracer logs are enabled. If you want to override this behavior, override the `ddtrace` logger as follows:
+
+```
+import logging
+
+# root logger configuration
+root_logger = logging.getLogger()
+root_logger.setLevel(logging.DEBUG)
+
+# override the ddtrace configuration to WARNING log level
+logging.getLogger("ddtrace").setLevel(logging.WARNING)
+```
 
 
-### シナリオ 2: ddtrace バージョン 1.0.x〜1.2.x
+### Scenario 2: ddtrace version 1.3.2 to <2.x
 
-1. デバッグモードを有効にするには: `DD_TRACE_DEBUG=true`
+1. To enable debug mode: `DD_TRACE_DEBUG=true`
 
-2. **Python 2 または Python 3** アプリケーションでログをコンソールにルーティングするには、`logging.basicConfig()` を構成するか、`DD_CALL_BASIC_CONFIG=true` を使用します。
+2. To route debug logs to a log file, set `DD_TRACE_LOG_FILE` with a filename that tracer logs should be written to, relative to the current working directory. For example, `DD_TRACE_LOG_FILE=ddtrace_logs.log`.
+   By default, the file size is 15728640 bytes (about 15MB) and one backup log file is created. To increase the default log file size, specify the size in bytes with the `DD_TRACE_LOG_FILE_SIZE_BYTES` setting.
 
-### シナリオ 3: ddtrace バージョン 0.x
+3. To route logs to the console, for **Python 2** applications, configure `logging.basicConfig()` or similar. Logs are automatically sent to the console for **Python 3** applications.
 
-1. デバッグモードを有効にするには: `DD_TRACE_DEBUG=true`
 
-2. **Python 2 または Python 3** アプリケーションでログをコンソールにルーティングするには、`logging.basicConfig()` を構成するか、`DD_CALL_BASIC_CONFIG=true` を使用します。
+### Scenario 3: ddtrace version 1.0.x to 1.2.x
 
-### シナリオ 4: 標準のロギングライブラリを使用した、アプリケーションコードでのデバッグログの構成
+1. To enable debug mode: `DD_TRACE_DEBUG=true`
 
-どのバージョンの ddtrace でも、トレーサー環境変数 `DD_TRACE_DEBUG` を設定する代わりに、標準ライブラリ `logging` を直接使用して、アプリケーションコード内でデバッグログを有効にすることができます。
+2. To route logs to the console, for **Python 2 or Python 3** applications, configure `logging.basicConfig()` or use `DD_CALL_BASIC_CONFIG=true`.
+
+### Scenario 4: ddtrace version 0.x
+
+1. To enable debug mode: `DD_TRACE_DEBUG=true`
+
+2. To route logs to the console, for **Python 2 or Python 3** applications, configure `logging.basicConfig()` or use `DD_CALL_BASIC_CONFIG=true`.
+
+### Scenario 5: Configuring debug logging in the application code with the standard logging library
+
+For any version of ddtrace, rather than setting the `DD_TRACE_DEBUG` tracer environment variable, you can enable debug logging in the application code by using the `logging` standard library directly:
 
 ```
 log = logging.getLogger("ddtrace.tracer")
@@ -66,26 +88,26 @@ log.setLevel(logging.DEBUG)
 
 {{< programming-lang lang="ruby" >}}
 
-Datadog Ruby トレーサーのデバッグモードを有効にするには、環境変数 `DD_TRACE_DEBUG=true` を設定します。
+To enable debug mode for the Datadog Ruby Tracer, set the environment variable `DD_TRACE_DEBUG=true`.
 
-**アプリケーションログ**
+**Application Logs**
 
-デフォルトでは、デフォルトの Ruby ロガーによってすべてのログが処理されます。Rails を使用している場合は、アプリケーションログファイルにメッセージが表示されます。
+By default, all logs are processed by the default Ruby logger. When using Rails, you should see the messages in your application log file.
 
-Datadog クライアントのログメッセージは、他のメッセージと区別できるように `[ddtrace]` とマークされます。
+Datadog client log messages are marked with `[ddtrace]`, so you can isolate them from other messages.
 
-トレーサーの `log` 属性を使用し、デフォルトロガーを上書きしてカスタムロガーに置き換えることができます。
+You can override the default logger and replace it with a custom one by using the tracer's `log` attribute:
 
 ```ruby
-f = File.new("<FILENAME>.log", "w+")           # ログメッセージが書き込まれる場所
+f = File.new("<FILENAME>.log", "w+")           # Log messages should go there
 Datadog.configure do |c|
-  c.logger.instance = Logger.new(f)                 # デフォルトのトレーサーのオーバーライド
+  c.logger.instance = Logger.new(f)                 # Overriding the default tracer
 end
 
 Datadog::Tracing.logger.info { "this is typically called by tracing code" }
 ```
 
-詳細については、[API に関するドキュメント][1]を参照してください。
+See [the API documentation][1] for more details.
 
 
 [1]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#custom-logging
@@ -93,7 +115,8 @@ Datadog::Tracing.logger.info { "this is typically called by tracing code" }
 
 {{< programming-lang lang="go" >}}
 
-Datadog Goトレーサのデバッグモードを有効にするには、`Start` 構成中にデバッグモードを有効にします。
+To enable debug mode for the Datadog Go Tracer, set the environment variable `DD_TRACE_DEBUG=true`,
+or enable the debug mode during the `Start` config:
 
 ```go
 package main
@@ -106,19 +129,40 @@ func main() {
 }
 ```
 
+#### Abandoned span logs
+
+The Datadog Go Tracer also supports logging for potentially abandoned spans. To enable this debug mode in Go, set the environment variable `DD_TRACE_DEBUG_ABANDONED_SPANS=true`. To change the duration after which spans are considered abandoned (default=`10m`), set the environment variable `DD_TRACE_ABANDONED_SPAN_TIMEOUT` to the desired time duration. Abandoned span logs appear at the Info level.
+
+You can also enable debugging abandoned spans during the `Start` config:
+
+```go
+package main
+
+import (
+  "time"
+
+  "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+)
+
+func main() {
+    tracer.Start(tracer.WithDebugSpansMode(10 * time.Minute))
+    defer tracer.Stop()
+}
+```
+
 {{< /programming-lang >}}
 
 {{< programming-lang lang="nodejs" >}}
 
-Datadog Node.js トレーサーのデバッグモードを有効にするには、環境変数 `DD_TRACE_DEBUG=true` を使用します。
+To enable debug mode for the Datadog Node.js Tracer, use the environment variable `DD_TRACE_DEBUG=true`.
 
-**注:** 2.X 以下のバージョンでは、トレーサーの初期化時にデバッグモードをプログラム的に有効にすることができましたが、これはもうサポートされていません。
+**Note:** For versions below 2.X, debug mode could be enabled programmatically inside the tracer initialization but this is no longer supported.
 
-**アプリケーションログ**
+**Application Logs**
 
-デバッグモード中、トレーサーは、デバッグ情報を `console.log()` と `console.error()` に記録します。この動作は、カスタムロガーをトレーサーに渡すことで変更できます。ロガーは、それぞれメッセージとエラーを処理するための `debug()` メソッドと `error()` メソッドを含む必要があります。
+In debug mode the tracer will log debug information to `console.log()` and errors to `console.error()`. You can change this behavior by passing a custom logger to the tracer. The logger should contain `debug()` and `error()` methods that can handle messages and errors, respectively.
 
-例:
+For example:
 
 ```javascript
 const bunyan = require('bunyan')
@@ -135,129 +179,147 @@ const tracer = require('dd-trace').init({
 })
 ```
 
-次に、Agent ログをチェックして、問題に関する詳細情報があるか確認します。
+Then check the Agent logs to see if there is more info about your issue:
 
-* トレースが Agent に問題なく送信されると、ログエントリ、`Response from the Agent: OK` が表示されます。これにより、トレーサーが正常に機能していることと、問題が Agent 自体にあることが分かります。詳細は、[Agent トラブルシューティングガイド][1]を参照してください。
+* If the trace was sent to the Agent properly, you should see `Response from the Agent: OK` log entries. This indicates that the tracer is working properly, so the problem may be with the Agent itself. Refer to the [Agent troubleshooting guide][1] for more information.
 
-* Agent からエラーが報告された場合 (または、Agent に到達できなかった場合)、`Error from the Agent` ログエントリが表示されます。この場合、ネットワーク構成を検証して、Agent に確実に到達できるようにします。ネットワークが機能していて、エラーが Agent から送信されたと確信できる場合は、[Agent トラブルシューティングガイド][1]を参照してください。
+* If an error was reported by the Agent (or the Agent could not be reached), you will see `Error from the Agent` log entries. In this case, validate your network configuration to ensure the Agent can be reached. If you are confident the network is functional and that the error is coming from the Agent, refer to the [Agent troubleshooting guide][1].
 
-これらのログエントリのいずれも存在しない場合、Agent にリクエストが送信されていないことになり、トレーサーがアプリケーションをインスツルメントしていないことを意味します。この場合、[Datadog サポートに連絡][2]して、関連するログエントリを[フレア][3]で提供してください。
+If neither of these log entries is present, then no request was sent to the Agent, which means that the tracer is not instrumenting your application. In this case, [contact Datadog support][2] and provide the relevant log entries with [a flare][3].
 
-トレーサー設定の詳細については、[API ドキュメント][4]を参照してください。
+For more tracer settings, check out the [API documentation][4].
 
 
-[1]: /ja/agent/troubleshooting/
-[2]: /ja/help/
-[3]: /ja/agent/troubleshooting/#send-a-flare
+[1]: /agent/troubleshooting/
+[2]: /help/
+[3]: /agent/troubleshooting/#send-a-flare
 [4]: https://datadog.github.io/dd-trace-js/#tracer-settings
 {{< /programming-lang >}}
 
 {{< programming-lang lang=".NET" >}}
 
-Datadog .NET トレーサーのデバッグモードを有効化するには、`DD_TRACE_DEBUG` コンフィギュレーションの設定を `true` に設定します。この設定は、`web.config` ファイル、`app.config` ファイル (.NET Framework のみ)、`datadog.json` ファイルで環境変数として設定できます。デバッグモードは、`GlobalSettings.SetDebugEnabled(true)` を呼び出すことで有効化することもできます。
+To enable debug mode for the Datadog .NET Tracer, set the `DD_TRACE_DEBUG` configuration setting to `true`. This setting can be set as an environment variable, in the `web.config` or `app.config` file (.NET Framework only), or in a `datadog.json` file. Alternatively, you can enable debug mode by calling `GlobalSettings.SetDebugEnabled(true)`:
 
 ```csharp
 using Datadog.Trace;
 
-// デバッグモードを有効化
+// enable debug mode
 GlobalSettings.SetDebugEnabled(true);
 
 ```
 
-ログファイルは、デフォルトで以下のディレクトリに保存されます。`DD_TRACE_LOG_DIRECTORY` 設定を使用してこれらのパスを変更できます。
+Logs files are saved in the following directories by default. Use the `DD_TRACE_LOG_DIRECTORY` setting to change these paths.
 
-| プラットフォーム                                             | パス                                             |
+| Platform                                             | Path                                             |
 |------------------------------------------------------|--------------------------------------------------|
 | Windows                                              | `%ProgramData%\Datadog .NET Tracer\logs\`        |
 | Linux                                                | `/var/log/datadog/dotnet/`                       |
-| Linux ([Kubernetes ライブラリの挿入][1]を使用する場合) | `/datadog-lib/logs`                              |
+| Linux (when using [Kubernetes library injection][1]) | `/datadog-lib/logs`                              |
 | Azure App Service                                    | `%AzureAppServiceHomeDirectory%\LogFiles\datadog`|
 
-**注**: Linux では、デバッグモードを有効にする前にログディレクトリを作成する必要があります。
+**Note:**: On Linux, you must create the logs directory before you enabled debug mode.
 
-.NET Tracer の構成方法の詳細については、[構成][2]セクションを参照してください。
+Since version `2.19.0`, you can use the `DD_TRACE_LOGFILE_RETENTION_DAYS` setting to configure the tracer to delete log files from the current logging directory on startup. The tracer deletes log files the same age and older than the given number of days, with a default value of `31`.
 
-これらのパスで作成されるログには、次の 2 つのタイプがあります。
-1. **ネイティブコードからのログ:** 1.26.0 以降では、これらのログは `dotnet-tracer-native-<processname>-<processid>.log` として保存されます。バージョン 1.21.0〜1.25.x では、これらのログは `dotnet-tracer-native.log` として保存されていました。1.20.x 以前のバージョンでは、これは `dotnet-profiler.log` として保存されていました。
-2. **マネージコードからのログ:** 1.21.0 以降では、これらのログは `dotnet-tracer-managed-<processname>-<date>.log` に保存されます。1.20.x 以前のバージョンでは、これは `dotnet-tracer-<processname>-<date>.log` として保存されていました。
+For more details on how to configure the .NET Tracer, see the [Configuration][2] section.
+
+There are two types of logs that are created in these paths:
+1. **Logs from native code:** In 1.26.0 and higher, these logs are saved as `dotnet-tracer-native-<processname>-<processid>.log`. From version 1.21.0 to 1.25.x, these logs were saved as `dotnet-tracer-native.log`. In 1.20.x and older versions, this was stored as `dotnet-profiler.log`.
+2. **Logs from managed code:** In 1.21.0 and higher, these logs are saved `dotnet-tracer-managed-<processname>-<date>.log`. In 1.20.x and older versions, this was stored as `dotnet-tracer-<processname>-<date>.log`.
 
 
-[1]: /ja/tracing/trace_collection/library_injection/?tab=kubernetes
-[2]: /ja/tracing/setup/dotnet/#configuration
+[1]: /tracing/trace_collection/library_injection/?tab=kubernetes
+[2]: /tracing/setup/dotnet/#configuration
 {{< /programming-lang >}}
 
 {{< programming-lang lang="php" >}}
 
-<mrk mid="78" mtype="seg"/><mrk mid="79" mtype="seg">この環境変数値をトレーサーが適切に処理できるように設定する方法とタイミングについては、[PHP 構成に関するドキュメント][1]を参照してください。</mrk>
+To enable debug mode for the Datadog PHP Tracer, set the environment variable `DD_TRACE_DEBUG=true`. See the PHP [configuration docs][1] for details about how and when this environment variable value should be set in order to be properly handled by the tracer.
 
-`error_log` メッセージを置く場所を PHP に指示するには、それをサーバーレベルで設定するか、PHP `ini` パラメーターで設定します。後者が PHP の動作を構成する標準的な方法です。
+There are two options to route debug tracer logs to a file.
 
-<mrk mid="81" mtype="seg">Apache サーバーを使用している場合は、`ErrorLog` ディレクティブを使用します。</mrk>
-<mrk mid="82" mtype="seg">NGINX サーバーを使用している場合は、`error_log` ディレクティブを使用します。</mrk>
-<mrk mid="83" mtype="seg">PHP レベルで構成する場合は、PHP の `error_log` 初期化パラメーターを使用します。</mrk>
+**Option 1:**
+
+With dd-trace-php 0.98.0+, you can specify a path to a log file for certain debug tracer logs:
+
+- **Environment variable**: `DD_TRACE_LOG_FILE`
+
+- **INI**: `datadog.trace.log_file`
+
+**Notes**:
+  - For details about where to set `DD_TRACE_LOG_FILE`, review [Configuring the PHP Tracing Library][2].
+  - If `DD_TRACE_LOG_FILE` is not specified, logs go to the default PHP error location (See **Option 2** for more details).
+
+**Option 2:**
+
+You can specify where PHP should put `error_log` messages either at the server level, or as a PHP `ini` parameter, which is the standard way to configure PHP behavior.
+
+If you are using an Apache server, use the `ErrorLog` directive.
+If you are using an NGINX server, use the `error_log` directive.
+If you are configuring instead at the PHP level, use PHP's `error_log` ini parameter.
 
 
 [1]: https://www.php-fig.org/psr/psr-3
+[2]: /tracing/trace_collection/library_config/php/
 {{< /programming-lang >}}
 
 {{< programming-lang lang="cpp" >}}
 
-すべてのリリースバイナリライブラリは、最適化されたリリースにデバッグシンボルが追加されコンパイルされています。GDB または LLDB を使用してライブラリをデバッグしたり、コアダンプを読み取ることができます。ソースからライブラリを構築する場合は、引数 `-DCMAKE_BUILD_TYPE=RelWithDebInfo` を cmake に渡して、最適化されたビルドをデバッグシンボル付きでコンパイルします。
+The release binary libraries are all compiled with debug symbols added to the optimized release. You can use GDB or LLDB to debug the library and to read core dumps. If you are building the library from source, pass the argument `-DCMAKE_BUILD_TYPE=RelWithDebInfo` to cmake to compile an optimized build with debug symbols.
 
 ```bash
-cd .build
-cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo ..
-make
-make install
+cmake -B .build -DCMAKE_BUILD_TYPE=RelWithDebInfo ..
+cmake --build .build -j
+cmake --install .build
 ```
 
 {{< /programming-lang >}}
 
 {{< /programming-lang-wrapper >}}
 
-## デバッグログを確認する
+## Review debug logs
 
-トレーサーのデバッグモードが有効になっている場合、トレーサー固有のログメッセージはトレーサーの初期化方法およびトレーサーが Agent に送信されたかを報告します。**このログは、フレアでは Datadog Agent に送信できません。また、ロギングコンフィギュレーションによっては別のパスに保存されます**。以下は、ご使用のログファイルに表示されるログの例になります。
+When debug mode for your tracer is enabled, tracer-specific log messages report how the tracer was initialized and whether traces were sent to the Agent. **These logs are not sent to the Datadog Agent in the flare and are stored in a separate path depending on your logging configuration**. The following log examples show what might appear in your log file.
 
-理解できないエラーがある場合、またはトレースが Datadog にフラッシュされたと報告されたものの　Datadog UI に表示されない場合は、[Datadog サポートに連絡][1]し、[フレア][2] で関連するログエントリを入力します。
+If there are errors that you don't understand, or if traces are reported as flushed to Datadog but you cannot see them in the Datadog UI, [contact Datadog support][1] and provide the relevant log entries with [a flare][2].
 
 {{< programming-lang-wrapper langs="java,python,ruby,go,nodejs,.NET,php" >}}
 {{< programming-lang lang="java" >}}
 
-**トレーサーの初期化ログ:**
+**Intialization log for the tracer:**
 
 ```java
-[main] DEBUG datadog.trace.agent.ot.DDTracer - Using config: Config(runtimeId=<ランタイム ID>, serviceName=<サービス名>, traceEnabled=true, writerType=DDAgentWriter, agentHost=<ここに IP>, agentPort=8126, agentUnixDomainSocket=null, prioritySamplingEnabled=true, traceResolverEnabled=true, serviceMapping={}, globalTags={env=none}, spanTags={}, jmxTags={}, excludedClasses=[], headerTags={}, httpServerErrorStatuses=[512, 513, 514, 515, 516, 517, 518, 519, 520, 521, 522, 523, 524, 525, 526, 527, 528, 529, 530, 531, 532, 533, 534, 535, 536, 537, 538, 539, 540, 541, 542, 543, 544, 545, 546, 547, 548, 549, 550, 551, 552, 553, 554, 555, 556, 557, 558, 559, 560, 561, 562, 563, 564, 565, 566, 567, 568, 569, 570, 571, 572, 573, 574, 575, 576, 577, 578, 579, 580, 581, 582, 583, 584, 585, 586, 587, 588, 589, 590, 591, 592, 593, 594, 595, 596, 597, 598, 599, 500, 501, 502, 503, 504, 505, 506, 507, 508, 509, 510, 511], httpClientErrorStatuses=[400, 401, 402, 403, 404, 405, 406, 407, 408, 409, 410, 411, 412, 413, 414, 415, 416, 417, 418, 419, 420, 421, 422, 423, 424, 425, 426, 427, 428, 429, 430, 431, 432, 433, 434, 435, 436, 437, 438, 439, 440, 441, 442, 443, 444, 445, 446, 447, 448, 449, 450, 451, 452, 453, 454, 455, 456, 457, 458, 459, 460, 461, 462, 463, 464, 465, 466, 467, 468, 469, 470, 471, 472, 473, 474, 475, 476, 477, 478, 479, 480, 481, 482, 483, 484, 485, 486, 487, 488, 489, 490, 491, 492, 493, 494, 495, 496, 497, 498, 499], httpClientSplitByDomain=false, partialFlushMinSpans=1000, runtimeContextFieldInjection=true, propagationStylesToExtract=[DATADOG], propagationStylesToInject=[DATADOG], jmxFetchEnabled=true, jmxFetchMetricsConfigs=[], jmxFetchCheckPeriod=null, jmxFetchRefreshBeansPeriod=null, jmxFetchStatsdHost=null, jmxFetchStatsdPort=8125, logsInjectionEnabled=false, reportHostName=false)
+[main] DEBUG datadog.trace.agent.ot.DDTracer - Using config: Config(runtimeId=<runtime ID>, serviceName=<service name>, traceEnabled=true, writerType=DDAgentWriter, agentHost=<IP HERE>, agentPort=8126, agentUnixDomainSocket=null, prioritySamplingEnabled=true, traceResolverEnabled=true, serviceMapping={}, globalTags={env=none}, spanTags={}, jmxTags={}, excludedClasses=[], headerTags={}, httpServerErrorStatuses=[512, 513, 514, 515, 516, 517, 518, 519, 520, 521, 522, 523, 524, 525, 526, 527, 528, 529, 530, 531, 532, 533, 534, 535, 536, 537, 538, 539, 540, 541, 542, 543, 544, 545, 546, 547, 548, 549, 550, 551, 552, 553, 554, 555, 556, 557, 558, 559, 560, 561, 562, 563, 564, 565, 566, 567, 568, 569, 570, 571, 572, 573, 574, 575, 576, 577, 578, 579, 580, 581, 582, 583, 584, 585, 586, 587, 588, 589, 590, 591, 592, 593, 594, 595, 596, 597, 598, 599, 500, 501, 502, 503, 504, 505, 506, 507, 508, 509, 510, 511], httpClientErrorStatuses=[400, 401, 402, 403, 404, 405, 406, 407, 408, 409, 410, 411, 412, 413, 414, 415, 416, 417, 418, 419, 420, 421, 422, 423, 424, 425, 426, 427, 428, 429, 430, 431, 432, 433, 434, 435, 436, 437, 438, 439, 440, 441, 442, 443, 444, 445, 446, 447, 448, 449, 450, 451, 452, 453, 454, 455, 456, 457, 458, 459, 460, 461, 462, 463, 464, 465, 466, 467, 468, 469, 470, 471, 472, 473, 474, 475, 476, 477, 478, 479, 480, 481, 482, 483, 484, 485, 486, 487, 488, 489, 490, 491, 492, 493, 494, 495, 496, 497, 498, 499], httpClientSplitByDomain=false, partialFlushMinSpans=1000, runtimeContextFieldInjection=true, propagationStylesToExtract=[DATADOG], propagationStylesToInject=[DATADOG], jmxFetchEnabled=true, jmxFetchMetricsConfigs=[], jmxFetchCheckPeriod=null, jmxFetchRefreshBeansPeriod=null, jmxFetchStatsdHost=null, jmxFetchStatsdPort=8125, logsInjectionEnabled=false, reportHostName=false)
 ```
 
-**生成されるトレースの例:**
+**Example of traces being generated:**
 
 ```java
-[http-nio-8080-exec-1] DEBUG datadog.trace.agent.ot.DDSpan - Finished: DDSpan [ t_id=<トレース id>, s_id=<スパン id>, p_id=<親 id>] trace=SpringBoot_Service/OperationHandler.handle/OperationHandler.handle metrics={} tags={component=spring-web-controller, env=none, span.kind=server, thread.id=33, thread.name=http-nio-8080-exec-1}, duration_ns=92808848
-[http-nio-8080-exec-1] DEBUG datadog.trace.agent.ot.PendingTrace - traceId: <トレース id> -- Expired reference. count = 1
-[http-nio-8080-exec-1] DEBUG datadog.trace.agent.ot.DDSpan - Finished: DDSpan [ t_id=<トレース id>, s_id=<スパン id>, p_id=0] trace=SpringBoot_Service/servlet.request/GET /actuator/prometheus metrics={_sampling_priority_v1=1} tags={component=java-web-servlet, env=none, http.method=GET, http.status_code=200, http.url=http://<IP>:8080/actuator/prometheus, language=jvm, peer.hostname=<IP>, peer.ipv4=<IP>, peer.port=50778, runtime-id=<ランタイム id>, span.kind=server, span.origin.type=org.apache.catalina.core.ApplicationFilterChain, thread.id=33, thread.name=http-nio-8080-exec-1}, duration_ns=157972901
-[http-nio-8080-exec-1] DEBUG datadog.trace.agent.ot.PendingTrace - Writing 2 spans to DDAgentWriter { api=DDApi { tracesUrl=http://<IP アドレス>/v0.4/traces } }.
+[http-nio-8080-exec-1] DEBUG datadog.trace.agent.ot.DDSpan - Finished: DDSpan [ t_id=<trace id>, s_id=<span id>, p_id=<parent id>] trace=SpringBoot_Service/OperationHandler.handle/OperationHandler.handle metrics={} tags={component=spring-web-controller, env=none, span.kind=server, thread.id=33, thread.name=http-nio-8080-exec-1}, duration_ns=92808848
+[http-nio-8080-exec-1] DEBUG datadog.trace.agent.ot.PendingTrace - traceId: <trace id> -- Expired reference. count = 1
+[http-nio-8080-exec-1] DEBUG datadog.trace.agent.ot.DDSpan - Finished: DDSpan [ t_id=<trace id>, s_id=<span id>, p_id=0] trace=SpringBoot_Service/servlet.request/GET /actuator/prometheus metrics={_sampling_priority_v1=1} tags={component=java-web-servlet, env=none, http.method=GET, http.status_code=200, http.url=http://<IP>:8080/actuator/prometheus, language=jvm, peer.hostname=<IP>, peer.ipv4=<IP>, peer.port=50778, runtime-id=<runtime id>, span.kind=server, span.origin.type=org.apache.catalina.core.ApplicationFilterChain, thread.id=33, thread.name=http-nio-8080-exec-1}, duration_ns=157972901
+[http-nio-8080-exec-1] DEBUG datadog.trace.agent.ot.PendingTrace - Writing 2 spans to DDAgentWriter { api=DDApi { tracesUrl=http://<IP address>/v0.4/traces } }.
 ```
 
-**トレースが Datadog Agent に送信されました:**
+**Traces were sent to the Datadog Agent:**
 
 ```java
-[http-nio-8080-exec-1] DEBUG datadog.trace.agent.ot.PendingTrace - traceId: <トレース id> -- Expired reference. count = 0
+[http-nio-8080-exec-1] DEBUG datadog.trace.agent.ot.PendingTrace - traceId: <trace id> -- Expired reference. count = 0
 [dd-trace-writer] DEBUG datadog.trace.agent.common.writer.DDApi - Successfully sent 1 of 2 traces to the DD agent.
 ```
 
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 
-Python トレーサーが生成するログは、ロギングハンドラ名 `ddtrace` を持ちます。
+Logs generated by the Python Tracer have the logging handler name `ddtrace`.
 
-**トレースが生成されました:**
+**Traces were generated:**
 
 ```text
 <YYYY-MM-DD> 19:51:22,262 DEBUG [ddtrace.internal.processor.trace] [trace.py:211] - trace <TRACE ID> has 8 spans, 7 finished
 ```
 
-**Python トレーサーによって生成されたスパン:**
+**Span generated by the Python tracer:**
 
 ```text
 <YYYY-MM-DD> 19:51:22,251 DEBUG [ddtrace.tracer] [tracer.py:715] - finishing span name='flask.process_response' id=<SPAN ID> trace_id=<TRACE ID>  parent_id=<PARENT ID> service='flask' resource='flask.process_response' type=None start=1655495482.2478693 end=1655495482.2479873 duration=0.000118125 error=0 tags={} metrics={} (enabled:True)
@@ -265,13 +327,13 @@ Python トレーサーが生成するログは、ロギングハンドラ名 `dd
 ```
 
 
-**トレースが Datadog Agent に送信されました:**
+**Traces were sent to the Datadog Agent:**
 
 ```text
 <YYYY-MM-DD> 19:59:19,657 DEBUG [ddtrace.internal.writer] [writer.py:405] - sent 1.57KB in 0.02605s to http://localhost:8126/v0.4/traces
 ```
 
-**Datadog Agent へのトレース送信に失敗した:**
+**Traces failed to be sent to the Datadog Agent:**
 
 ```text
 <YYYY-MM-DD> 19:51:23,249 ERROR [ddtrace.internal.writer] [writer.py:567] - failed to send traces to Datadog Agent at http://localhost:8126/v0.4/traces
@@ -280,7 +342,7 @@ Python トレーサーが生成するログは、ロギングハンドラ名 `dd
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
-**スパンが生成されます:**
+**Span is generated:**
 
 ```text
 D, [<YYYY-MM-DD>T16:42:51.147563 #476] DEBUG -- ddtrace: [ddtrace] (/usr/local/bundle/gems/ddtrace-<version>/lib/ddtrace/tracer.rb:371:in `write') Writing 4 spans (enabled: true)
@@ -317,14 +379,14 @@ Metrics: [
 {{< programming-lang lang="go" >}}
 
 
-**Agent へのトレース送信試行:**
+**Trace submission attempt to the Agent:**
 
 ```text
 YYYY/MM/DD 16:06:35 Datadog Tracer <version> DEBUG: Sending payload: size: <size of traces> traces: <number of traces>.
 ```
 
 
-**トレースを Agent に送信できませんでした:**
+**Trace failed to send to the Agent:**
 
 ```text
 2019/08/07 16:12:27 Datadog Tracer <version> ERROR: lost <number of traces> traces: Post http://localhost:8126/v0.4/traces: dial tcp 127.0.0.1:8126: connect: connection refused, 4 additional messages skipped (first occurrence: DD MM YY 16:11 UTC)
@@ -335,12 +397,12 @@ YYYY/MM/DD 16:06:35 Datadog Tracer <version> DEBUG: Sending payload: size: <size
 
 {{< programming-lang lang="nodejs" >}}
 
-**Agent へのトレース送信の問題:**
+**Issue sending trace to the Agent:**
 
 ```json
 {
     "name": "dd-trace",
-    "hostname": "<ホスト名>",
+    "hostname": "<hostname>",
     "pid": 28817,
     "level": 50,
     "err": {
@@ -359,14 +421,14 @@ YYYY/MM/DD 16:06:35 Datadog Tracer <version> DEBUG: Sending payload: size: <size
 
 {{< programming-lang lang=".NET" >}}
 
-**ネイティブコードからのログ:**
+**Logs from native code:**
 
 ```text
 [dotnet] 19861: [debug] JITCompilationStarted: function_id=<function id> token=<token id> name=System.Net.Http.Headers.HttpHeaders.RemoveParsedValue()
 ```
 
 
-**スパンを示すマネージコードからのログが生成されました:**
+**Logs from managed code showing spans were generated:**
 
 ```text
 { MachineName: ".", ProcessName: "dotnet", PID: <process id>, AppDomainName: "test-webapi" }
@@ -375,7 +437,7 @@ YYYY-MM-DD HH:MM:SS.<integer> +00:00 [DBG] Span started: [s_id: <span id>, p_id:
 YYYY-MM-DD HH:MM:SS.<integer> +00:00 [DBG] Span closed: [s_id: <span id>, p_id: <parent span id>, t_id: <trace id>] for (Service: test-webapi, Resource: custom, Operation: custom.function, Tags: [<span tags>])
 ```
 
-**トレースを示すマネージコードからのログを Datadog Agent に送信できませんでした:**
+**Logs from managed code showing traces couldn't be sent to the Datadog Agent:**
 
 ```text
 YYYY-MM-DD HH:MM:SS.<integer> +00:00 [ERR] An error occurred while sending traces to the agent at System.Net.Http.HttpRequestException: Connection refused ---> System.Net.Sockets.SocketException: Connection refused
@@ -388,26 +450,26 @@ YYYY-MM-DD HH:MM:SS.<integer> +00:00 [ERR] An error occurred while sending trace
 
 {{< programming-lang lang="php" >}}
 
+**Loading an integration:**
 
-**スパンの生成:**
+Note: This log **does not** follow `DD_TRACE_LOG_FILE` (ini: `datadog.trace.log_file`) and is always routed to the ErrorLog directive.
 
 ```text
-[Mon MM  DD 19:41:13 YYYY] [YYYY-MM-DDT19:41:13+00:00] [ddtrace] [debug] - Encoding span <span id> op: 'laravel.request' serv: 'Sample_Laravel_App' res: 'Closure unnamed_route' type 'web'
+[Mon MM  DD 19:56:23 YYYY] [YYYY-MM-DDT19:56:23+00:00] [ddtrace] [debug] - Loaded integration web
 ```
 
+**Span information:**
 
-
-**Agent へのトレース送信試行:**
+Available starting in 0.98.0:
 
 ```text
-[Mon MM  DD 19:56:23 YYYY] [YYYY-MM-DDT19:56:23+00:00] [ddtrace] [debug] - About to send trace(s) to the agent
+[Mon MM  DD 19:56:23 YYYY] [YYYY-MM-DDT19:56:23+00:00] [ddtrace] [span] Encoding span <SPAN ID>: trace_id=<TRACE ID>, name='wpdb.query', service='wordpress', resource: '<RESOURCE NAME>', type 'sql' with tags: component='wordpress'; and metrics: -
 ```
 
-
-**トレースが Agent に正常に送信されました:**
+**Attempting to send traces:**
 
 ```text
-[Mon MM  DD 19:56:23 2019] [YYYY-MM-DDT19:56:23+00:00] [ddtrace] [debug] - Traces successfully sent to the agent
+[Mon MM  DD 19:56:23 YYYY] [YYYY-MM-DDT19:56:23+00:00] [ddtrace] [info] Flushing trace of size 56 to send-queue for http://datadog-agent:8126
 ```
 
 
@@ -415,9 +477,9 @@ YYYY-MM-DD HH:MM:SS.<integer> +00:00 [ERR] An error occurred while sending trace
 
 {{< /programming-lang-wrapper >}}
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/help/
-[2]: /ja/agent/troubleshooting/#send-a-flare
+[1]: /help/
+[2]: /agent/troubleshooting/#send-a-flare

@@ -1,86 +1,86 @@
 ---
+title: Alert on anomalous p99 latency of a database service
+kind: guide
 further_reading:
 - link: /tracing/guide/week_over_week_p50_comparison/
-  tag: 2 分
-  text: サービスのレイテンシーを前週と比較する
+  tag: 2 mins
+  text: Compare a service's latency to the previous week
 - link: /tracing/guide/slowest_request_daily/
-  tag: 3 分
-  text: ウェブサービスの最も遅いエンドポイントで最も遅いトレースをデバッグする
+  tag: 3 mins
+  text: Debug the slowest trace on the slowest endpoint of a web service
 - link: /tracing/guide/apm_dashboard/
-  tag: 4 分
-  text: ダッシュボードを作成して、APM メトリクスを追跡、関連付ける
+  tag: 4 mins
+  text: Create a Dashboard to track and correlate APM metrics
 - link: /tracing/guide/
-  tag: ''
-  text: すべてのガイド
-kind: ガイド
-title: データベースサービスの異常な p99 レイテンシーに関するアラート
+  tag: ""
+  text: All guides
 ---
 
-_所要時間 3 分_
+_3 minutes to complete_
 
-{{< img src="tracing/guide/alert_anomalies_p99_database/alert_anomalies_cropped.mp4" video="true" alt="進行中のアラートがあるモニター表示" style="width:90%;">}}
+{{< img src="tracing/guide/alert_anomalies_p99_database/alert_anomalies_cropped.mp4" video="true" alt="Monitor view with ongoing alert" style="width:90%;">}}
 
-Datadog では、ユーザー自身で継続的にサービスの健全性を監視する代わりに、APM を使用して健全性を追跡するようにモニターを設定できます。ここでは、異常検知モニターを使用します。[異常検知][1]とは、傾向や、季節的な曜日や時間帯のパターンを考慮しながら、メトリクスの挙動が過去のものとは異なる場合、これを認識できるアルゴリズム機能です。異常検知は、しきい値ベースのアラート設定では監視することが困難または不可能な強い傾向や反復パターンを持つメトリクスに適しています。
+Datadog allows you to set monitors to keep track of the health of your services with APM instead of constantly monitoring it yourself. In this example, we'll use an anomaly detection monitor. [Anomaly detection][1] is an algorithmic feature that allows you to identify when a metric is behaving differently than it has in the past, taking into account trends, seasonal day-of-week, and time-of-day patterns. It is well-suited for metrics with strong trends and recurring patterns that are hard or impossible to monitor with threshold-based alerting.
 
-1. **[New Monitor ページ][2]を開き、[APM][3]** を選択します。
-2. Primary Tags に **環境を選択**し、Service に **監視するデータベースを選択**します。
+1. **Open the [New Monitor Page][2] and choose [APM][3]**.
+2. **Choose your environment** under Primary Tags and **Choose the database to monitor** under Service.
 
-    [Resource][4] にデータベースで実行される特定のクエリを選択して監視することができますが、この例では全体的なパフォーマンスを確認するため、`*` のままにします。
+    Under [Resource][4], you can choose to monitor specific queries run in the database, but in this example, we'll look at overall performance so leave it as `*`.
 
-    [サービス][5]を選択すると、次のステップを設定できるようになり、新しいモニターの追跡対象となるメトリクスのパフォーマンスを示すグラフがページ上部に表示されます。 
+    Once you choose a [service][5], the next step becomes available for you to set, and a chart appears at the top of the page showing the performance of the metric that the new monitor tracks.
 
-    {{< img src="tracing/guide/alert_anomalies_p99_database/alert_anomalies_2_cropped.png" alt="進行中のアラートがあるモニター表示" style="width:90%;">}}
+    {{< img src="tracing/guide/alert_anomalies_p99_database/alert_anomalies_2_cropped.png" alt="Monitor view with ongoing alert" style="width:90%;">}}
 
-3. ***Anomaly Alert* を選択**し、*For* オプションに「p99 latency」を選択します。
+3. **Choose an *Anomaly Alert*** and under the *For* option select p99 latency.
 
-   Anomaly Alert を選択すると、選択したメトリクス (この例では p99 latency) の挙動の予測ベースラインもグラフに表示されるようになります。
+    Once you choose Anomaly Alert the chart also shows you the baseline expected behavior for the metric chosen - in our case, p99 latency.
 
-4. ***Alert when* フィールドの値を「100%」に設定します**。
+4. **Set the *Alert when* field value to 100%**.
 
-    これで、選択期間のすべてのイベントがアラートをトリガーする異常になります。これは、異常検知を開始する場合のベストプラクティスです。時間の経過とともに、状況に応じた適正値がわかってきます。異常検知モニターの詳細については、[よくあるご質問][6] をご確認ください。
+    This means that all of the events for the selected duration have to be anomalous for the alert to trigger. This is a best practice for starting with Anomaly Detection. Over time, you'll find the right values that fit your situation. You can find out more about Anomaly Detection Monitors in the [FAQ][6].
 
-5. **アラート通知を変更します**。
+5. **Change the alert notification**.
 
-    ここでは、通知内容をデフォルトテキストのままにしておくことも、アラート内でタグ付けするチームメンバーを選ぶこともできます。
+    In this example, you can either leave the notification content with the default text or choose team members to tag in the alert.
 
-    {{< img src="tracing/guide/alert_anomalies_p99_database/alert_anomalies_3.png" alt="モニターの継続的なアラート設定" style="width:90%;">}}
+    {{< img src="tracing/guide/alert_anomalies_p99_database/alert_anomalies_3.png" alt="Monitor view with ongoing alert" style="width:90%;">}}
 
-    通知テキストのマークアップと、このフィールドで設定可能な値および条件の詳細については、[通知の概要][7]をご確認ください。
+    You can read more about the markup for notification text and what values and conditions you can set there in the [notifications overview][7].
 
-6. ***Configure notifications and automations notification* (通知と自動化の通知を構成する) フィールドにユーザー名が表示されていることを確認**し、データベースのレイテンシー異常が発生した場合に通知する必要があるチームメンバーを追加します。
+6. **Make sure your username appears in the *Configure notifications and automations notification* field** and add any additional team members that should be notified in case of a database latency anomaly.
 
-   **注**: 別のユーザーを追加するには、先頭に `@` を入力します。***Save* をクリックします。**
+    **Note**: To add another user, type `@` at the start. **Click *Save***.
 
-    これでアラート設定が完了し、今後、この画面からパラメーターを調整したり、メトリクスのパフォーマンスを追跡したりできます。
+    Your alert is now set, you can tweak any of the parameters from this screen and follow the metric performance.
 
-7. ***Edit* タブから *Status* タブに切り替えます**。
+7. **Switch from the *Edit* tab to the *Status* tab**.
 
-    {{< img src="tracing/guide/alert_anomalies_p99_database/alert_anomalies_4_cropped.png" alt="進行中のアラートがあるモニター表示" style="width:90%;">}}
+    {{< img src="tracing/guide/alert_anomalies_p99_database/alert_anomalies_4_cropped.png" alt="Monitor view with ongoing alert" style="width:90%;">}}
 
-    このタブでは、モニターの現在の状況の確認やミュート設定、トリガーされたアラートの詳細調査をします。
+    Here you can see the current status of your monitor, mute it, or explore deeper into the specifics of a triggered alert.
 
-8. **[サービスカタログ][8]に戻り**、モニターを設定したサービスを見つけ、**サービスページを開いて**、そこでヘッダーの下にある **Monitor バーをクリック**します。
+8. **Navigate back to the [Service Catalog][8]** and from there find the service you just set the monitor on, **click into the Service Page** and there **click on the Monitor bar** under the header.
 
-    このウィンドウでは、サービスに設定された他のモニターや推奨設定の提案モニターに加え、**新しいモニターが表示されます**。
+    Here you should **see the new monitor** alongside any other monitor set for the service and suggested monitors that are recommended to set.
 
-    {{< img src="tracing/guide/alert_anomalies_p99_database/alert_anomalies_5_cropped.png" alt="進行中のアラートがあるモニター表示" style="width:90%;">}}
+    {{< img src="tracing/guide/alert_anomalies_p99_database/alert_anomalies_5_cropped.png" alt="Monitor view with ongoing alert" style="width:90%;">}}
 
-    モニターを作成するにつれ、追加するサービス、メトリクス、イベントと、これらに設定する複雑な条件がさらに出てきます。モニターはそれぞれ、サービスに接続されているため、サービス詳細画面および [Service Map][9] からアクセスできます。
+    As you create monitors you'll find more services, metrics and events to include and more complex conditions to set for these. Each of these monitors is connected to a service and can be accessed from the Service page as well as the [Service Map][9].
 
-    {{< img src="tracing/guide/alert_anomalies_p99_database/alert_anomalies_6_cropped.png" alt="サービスマップ" style="width:90%;">}}
+    {{< img src="tracing/guide/alert_anomalies_p99_database/alert_anomalies_6_cropped.png" alt="Service Map" style="width:90%;">}}
 
-    マップ上の各サービスの色分けは、緑色はすべてのモニターが正常、黄色は 2 つ以上のモニターで警告があるがアラートはなし、赤は 2 つ以上のモニターでアラートあり、灰色はモニター設定なし、という状態を示しています。
+    For each service on the map, a green circle means all monitors are quiet, yellow means one or more monitors are sending warnings but none are alerting, red means one or more monitor is alerting and gray means no monitor is set for the service.
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/monitors/types/anomaly/
+[1]: /monitors/types/anomaly/
 [2]: https://app.datadoghq.com/monitors#/create
 [3]: https://app.datadoghq.com/monitors#create/apm
-[4]: /ja/tracing/glossary/#resources
-[5]: /ja/tracing/glossary/#services
-[6]: /ja/monitors/types/anomaly/#faq
-[7]: /ja/monitors/notify/?tab=is_alertis_warning
+[4]: /tracing/glossary/#resources
+[5]: /tracing/glossary/#services
+[6]: /monitors/types/anomaly/#faq
+[7]: /monitors/notify/?tab=is_alertis_warning
 [8]: https://app.datadoghq.com/services
 [9]: https://app.datadoghq.com/service/map

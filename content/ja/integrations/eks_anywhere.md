@@ -1,93 +1,93 @@
 ---
-app_id: eks-anywhere
-app_uuid: 21bd91d8-7594-4c2f-bbd8-11595e4511d1
-assets:
-  integration:
-    auto_install: true
-    configuration: {}
-    events:
-      creates_events: false
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 10248
-    source_type_name: Amazon EKS Anywhere
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com (日本語対応)
-  support_email: help@datadoghq.com
-categories:
-- AWS
-- クラウド
-- コンテナ
+"app_id": "eks-anywhere"
+"app_uuid": "21bd91d8-7594-4c2f-bbd8-11595e4511d1"
+"assets":
+  "integration":
+    "auto_install": true
+    "configuration": {}
+    "events":
+      "creates_events": false
+    "service_checks":
+      "metadata_path": assets/service_checks.json
+    "source_type_id": !!int "10248"
+    "source_type_name": Amazon EKS Anywhere
+"author":
+  "homepage": "https://www.datadoghq.com"
+  "name": Datadog
+  "sales_email": info@datadoghq.com
+  "support_email": help@datadoghq.com
+"categories":
+- aws
+- cloud
+- containers
 - kubernetes
-- ログの収集
+- log collection
 - orchestration
-- プロビジョニング
-dependencies:
-- https://github.com/DataDog/integrations-core/blob/master/eks_anywhere/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: eks_anywhere
-integration_id: eks-anywhere
-integration_title: Amazon EKS Anywhere
-integration_version: ''
-is_public: true
-custom_kind: integration
-manifest_version: 2.0.0
-name: eks_anywhere
-public_title: Amazon EKS Anywhere
-short_description: オンプレミスで Kubernetes クラスターを運用するための EKS デプロイメントオプション
-supported_os:
+- provisioning
+"custom_kind": "integration"
+"dependencies":
+- "https://github.com/DataDog/integrations-core/blob/master/eks_anywhere/README.md"
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "eks_anywhere"
+"integration_id": "eks-anywhere"
+"integration_title": "Amazon EKS Anywhere"
+"integration_version": ""
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "eks_anywhere"
+"public_title": "Amazon EKS Anywhere"
+"short_description": "An EKS deployment option for operating Kubernetes clusters on-premises"
+"supported_os":
 - linux
 - windows
 - macos
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::AWS
-  - Category::Cloud
-  - Category::Containers
-  - Category::Kubernetes
-  - Category::Log Collection
-  - Category::Orchestration
-  - Category::Provisioning
-  - Supported OS::Linux
-  - Supported OS::Windows
-  - Supported OS::macOS
-  configuration: README.md#Setup
-  description: オンプレミスで Kubernetes クラスターを運用するための EKS デプロイメントオプション
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Amazon EKS Anywhere
+"tile":
+  "changelog": CHANGELOG.md
+  "classifier_tags":
+  - "Category::AWS"
+  - "Category::Cloud"
+  - "Category::Containers"
+  - "Category::Kubernetes"
+  - "Category::Log Collection"
+  - "Category::Orchestration"
+  - "Category::Provisioning"
+  - "Supported OS::Linux"
+  - "Supported OS::Windows"
+  - "Supported OS::macOS"
+  "configuration": "README.md#Setup"
+  "description": An EKS deployment option for operating Kubernetes clusters on-premises
+  "media": []
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": Amazon EKS Anywhere
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-![EKS ダッシュボード][1]
+![EKS Dashboard][1]
 
-## 概要
+## Overview
 
-Amazon Elastic Kubernetes Service (EKS) は、標準 Kubernetes 環境のデプロイとメンテナンスを部分的に自動化するためのマネージド型 Kubernetes サービスです。既存の Kubernetes アプリケーションを EKS に移行する場合、あるいは新しいクラスターをデプロイする場合も、Datadog は EKS 環境のリアルタイムの監視を支援します。
+Amazon Elastic Kubernetes Service (EKS) is a managed Kubernetes service that automates certain aspects of deployment and maintenance for any standard Kubernetes environment. Whether you are migrating an existing Kubernetes application to Amazon EKS, or deploying a new cluster on Amazon EKS on AWS Outposts, Datadog helps you monitor your EKS environments in real time.
 
-[Amazon EKS Anywhere][2]は、仮想マシン (VMware vSphere など) やベアメタルサーバーなど、オンプレミスで Kubernetes クラスターを作成・運用できるデプロイメントオプションです。
+[Amazon EKS Anywhere][2] is a deployment option that enables you to create and operate Kubernetes clusters on-premises, including virtual machines (for example, VMware vSphere) and bare metal servers.
 
-## 計画と使用
+## Setup
 
-Datadog は既に Kubernetes や AWS と統合されているため、すぐに EKS を監視することができます。Kubernetes クラスターで実行中の Agent を EKS に移行する予定がある場合に、Datadog でクラスターの監視を続行できます。
+Because Datadog already integrates with Kubernetes and AWS, it is ready-made to monitor EKS. If you're running the Agent in a Kubernetes cluster and plan to migrate to EKS, you can continue monitoring your cluster with Datadog. 
 
-さらに、[Amazon EKS マネージド型ノードグループ][3] および [AWS Outposts の Amazon EKS][4] もサポートされています。
+Additionally, [Amazon EKS Managed Node Groups][3] and [Amazon EKS on AWS Outposts][4] are supported.
 
-### Datadog Helm チャート構成
+### Datadog Helm chart configuration
 
-[Helm を使った Agent デプロイメント手順][5]に、これらの構成手順を追加して使用してください。
+Use the [Agent deployment instructions with Helm][5] with these additional configuration instructions:
 
-1. `datadog.kubelet.tlsVerify` を `false` に設定します。
-2. Agent ポッドに許容範囲を設定します。これは、コントロールプレーンを監視するために必要です。
+1. Set `datadog.kubelet.tlsVerify` to `false`.
+2. Set a toleration on the Agent pod. This is necessary for monitoring the control plane.
 
-以下の Helm スニペットは、EKS Anywhere を監視するための具体的な変更点を示しています。
+The following Helm snippet demonstrates the specific changes for monitoring EKS Anywhere:
 
 ```yaml
 datadog:
@@ -100,48 +100,49 @@ agents:
     operator: Exists
 ```
 
-### メトリクスの収集
+### Metric collection
 
-EKS のモニタリングには、以下の Datadog インテグレーションの 1 つの設定と、EKS で実行する他の AWS サービス用インテグレーション ([ELB][6] など) が必要です。
+Monitoring EKS requires setting up one of the following Datadog integrations along with integrations for any other AWS services you're running with EKS, such as [ELB][6].
 
 - [Kubernetes][7]
 - [AWS][8]
 - [AWS EC2][9]
 
-### 収集データ
+### Log collection
 
-_Agent バージョン 6.0 以降で利用可能_
+_Available for Agent versions >6.0_
 
-セットアップは Kubernetes の場合とまったく同じです。
-すべてのコンテナからのログ収集を開始するには、Datadog Agent の[環境変数][10]を使用します。
+The setup is exactly the same as for Kubernetes.
+To start collecting logs from all your containers, use your Datadog Agent [environment variables][10].
 
-また、DaemonSets を使用して、すべてのノードで [Datadog Agent を自動的にデプロイ][11]します。
+Use DaemonSets to [automatically deploy the Datadog Agent on all of your nodes][11].
 
-環境変数の詳細とさらに高度なセットアップオプションについては、[コンテナログの収集手順][12]を参照してください。
+Follow the [container log collection instructions][12] to learn more about environment variables and advanced setup options.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][13]までお問合せください。
+Need help? Contact [Datadog support][13].
 
-## その他の参考資料
+## Further Reading
 
-- [Datadog を使用した Amazon EKS の監視][14]
-- [Amazon EKS 監視のキーメトリクス][15]
-- [AWS Fargate の Amazon EKS][16]
+- [Monitor Amazon EKS with Datadog][14]
+- [Key metrics for Amazon EKS monitoring][15]
+- [Amazon EKS on AWS Fargate][16]
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/amazon_eks/images/amazon_eks_dashboard.png
 [2]: https://aws.amazon.com/eks/eks-anywhere/
 [3]: https://docs.aws.amazon.com/eks/latest/userguide/managed-node-groups.html
 [4]: https://docs.aws.amazon.com/eks/latest/userguide/eks-on-outposts.html
-[5]: https://docs.datadoghq.com/ja/agent/kubernetes/?tab=helm#installation
-[6]: https://docs.datadoghq.com/ja/integrations/amazon_elb/
-[7]: https://docs.datadoghq.com/ja/integrations/kubernetes/
-[8]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
-[9]: https://docs.datadoghq.com/ja/integrations/amazon_ec2/
-[10]: https://docs.datadoghq.com/ja/agent/basic_agent_usage/kubernetes/#log-collection-setup
-[11]: https://docs.datadoghq.com/ja/agent/basic_agent_usage/kubernetes/#container-installation
-[12]: https://docs.datadoghq.com/ja/logs/log_collection/docker/#option-2-container-installation
-[13]: https://docs.datadoghq.com/ja/help/
+[5]: https://docs.datadoghq.com/agent/kubernetes/?tab=helm#installation
+[6]: https://docs.datadoghq.com/integrations/amazon_elb/
+[7]: https://docs.datadoghq.com/integrations/kubernetes/
+[8]: https://docs.datadoghq.com/integrations/amazon_web_services/
+[9]: https://docs.datadoghq.com/integrations/amazon_ec2/
+[10]: https://docs.datadoghq.com/agent/basic_agent_usage/kubernetes/#log-collection-setup
+[11]: https://docs.datadoghq.com/agent/basic_agent_usage/kubernetes/#container-installation
+[12]: https://docs.datadoghq.com/logs/log_collection/docker/#option-2-container-installation
+[13]: https://docs.datadoghq.com/help/
 [14]: https://www.datadoghq.com/blog/announcing-eks
 [15]: https://www.datadoghq.com/blog/eks-cluster-metrics
-[16]: https://docs.datadoghq.com/ja/integrations/eks_fargate/
+[16]: https://docs.datadoghq.com/integrations/eks_fargate/
+

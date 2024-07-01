@@ -1,41 +1,42 @@
 ---
-further_reading:
-- link: https://www.datadoghq.com/blog/azure-container-apps/
-  tag: GitHub
-  text: Container Apps サービスからのトレース、ログ、カスタムメトリクスの収集
 title: Azure Container Apps
+kind: documentation
+further_reading:
+    - link: "https://www.datadoghq.com/blog/azure-container-apps/"
+      tag: Blog
+      text: Collect traces, logs, and custom metrics from Container Apps services
 ---
 
-## 概要
-Azure Container Apps は、コンテナベースのアプリケーションをデプロイし、スケーリングするためのフルマネージドサーバーレスプラットフォームです。Datadog は、[Azure インテグレーション][1]を通して Container Apps のモニタリングとログ収集を提供しています。また、Datadog は現在ベータ版として、トレース、カスタムメトリクス、直接ログ収集を可能にする専用 Agent で Container Apps アプリケーションをインスツルメントするソリューションも提供しています。
+## Overview
+Azure Container Apps is a fully managed serverless platform for deploying and scaling container-based applications. Datadog provides monitoring and log collection for Container Apps through the [Azure integration][1]. Datadog also provides a solution for instrumenting your Container Apps applications with a purpose-built Agent to enable tracing, custom metrics, and direct log collection.
 
-### 前提条件
+### Prerequisites
 
-[Datadog API キー][6]を取得済みであることと、[Datadog トレーシングライブラリがサポートする][2]プログラミング言語を使用していることを確認してください。
+Make sure you have a [Datadog API Key][6] and are using a programming language [supported by a Datadog tracing library][2].
 
-## アプリケーションをインスツルメントする
+## Instrument your application
 
-アプリケーションをインスツルメンテーションするには、[Dockerfile](#dockerfile) と[ビルドパック](#buildpack)の 2 つの方法があります。
+You can instrument your application in one of two ways: [Dockerfile](#dockerfile) or [buildpack](#buildpack).
 
 ### Dockerfile
 
-Datadog は、serverless-init コンテナイメージの新しいリリースを Google の gcr.io、AWS の ECR、および Docker Hub に公開しています。
+Datadog publishes new releases of the serverless-init container image to Google's gcr.io, AWS' ECR, and on Docker Hub:
 
 | hub.docker.com | gcr.io | public.ecr.aws |
 | ---- | ---- | ---- |
 | datadog/serverless-init | gcr.io/datadoghq/serverless-init | public.ecr.aws/datadog/serverless-init |
 
-イメージはセマンティックバージョニングに基づいてタグ付けされ、新しいバージョンごとに 3 つの関連タグが付与されます。
+Images are tagged based on semantic versioning, with each new version receiving three relevant tags:
 
-* `1`、`1-alpine`: 重大な変更を加えることなく、最新のマイナーリリースを追跡するために使用します。
-* `1.x.x`、`1.x.x-alpine`: ライブラリの正確なバージョンにピン留めするために使用します。
-* `latest`、`latest-alpine`: 重大な変更が含まれる可能性がある最新のバージョンリリースに従う場合、これらを使用します
+* `1`, `1-alpine`: use these to track the latest minor releases, without breaking changes
+* `1.x.x`, `1.x.x-alpine`: use these to pin to a precise version of the library
+* `latest`, `latest-alpine`: use these to follow the latest version release, which may include breaking changes
 
-## `serverless-init` の動作
+## How `serverless-init` works
 
-`serverless-init` アプリケーションはプロセスをラップし、サブプロセスとしてこれを実行します。このアプリケーションはメトリクス用の DogStatsD リスナーとトレース用の Trace Agent リスナーを起動します。アプリケーションの stdout/stderr ストリームをラップすることでログを収集します。ブートストラップの後、serverless-init はサブプロセスとしてコマンドを起動します。
+The `serverless-init` application wraps your process and executes it as a subprocess. It starts a DogStatsD listener for metrics and a Trace Agent listener for traces. It collects logs by wrapping the stdout/stderr streams of your application. After bootstrapping, serverless-init then launches your command as a subprocess.
 
-完全なインスツルメンテーションを得るには、Docker コンテナ内で実行する最初のコマンドとして `datadog-init` を呼び出していることを確認します。これを行うには、エントリーポイントとして設定するか、CMD の最初の引数として設定します。
+To get full instrumentation, ensure you are calling `datadog-init` as the first command that runs inside your Docker container. You can do this through by setting it as the entrypoint, or by setting it as the first argument in CMD.
 
 {{< programming-lang-wrapper langs="nodejs,python,java,go,dotnet,ruby,php" >}}
 {{< programming-lang lang="nodejs" >}}
@@ -75,19 +76,19 @@ Datadog は、serverless-init コンテナイメージの新しいリリース�
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-### 2. アプリケーションを構成する
+### 2. Configure your application
 
-コンテナが構築され、レジストリにプッシュされたら、最後の手順として Datadog Agent 用に必要な環境変数を設定します。
-- `DD_API_KEY`: データを Datadog アカウントに送信するために使用する Datadog API キー。プライバシーと安全性の問題を考慮して、[Azure シークレット][7]に設定する必要があります。
-- `DD_SITE`: Datadog のエンドポイントと Web サイト。このページの右側で自分のサイトを選択します。あなたのサイトは {{< region-param key="dd_site" code="true" >}} です。
-- **`DD_AZURE_SUBSCRIPTION_ID`**: コンテナアプリリソースに関連付けられた Azure サブスクリプション ID (必須)。
-- **`DD_AZURE_RESOURCE_GROUP`**: コンテナアプリリソースに関連付けられた Azure リソースグループ (必須)。
+Once the container is built and pushed to your registry, the last step is to set the required environment variables for the Datadog Agent:
+- `DD_API_KEY`: Datadog API key, used to send data to your Datadog account. It should be configured as a [Azure Secret][7] for privacy and safety issue.
+- `DD_SITE`: Datadog endpoint and website. Select your site on the right side of this page. Your site is: {{< region-param key="dd_site" code="true" >}}.
+- **`DD_AZURE_SUBSCRIPTION_ID`**: The Azure Subscription ID associated with the Container App resource (Required).
+- **`DD_AZURE_RESOURCE_GROUP`**: The Azure Resouce Group associated with the Container App resource (Required).
 
-- `DD_TRACE_ENABLED`: `true` に設定してトレースを有効にします。
+- `DD_TRACE_ENABLED`: Set to `true` to enable tracing.
 
-環境変数とその機能の詳細については、[追加の構成](#additional-configurations)を参照してください。
+For more environment variables and their function, see [Additional Configurations](#additional-configurations).
 
-次のコマンドはサービスをデプロイし、外部からの接続がサービスに到達できるようにするためのコマンドです。`DD_API_KEY` を環境変数として設定し、サービスのリスニングポートを 80 に設定します。
+This command deploys the service and allows any external connection to reach it. Set `DD_API_KEY` as an environment variable, and set your service listening to port 80.
 
 ```shell
 az containerapp up \
@@ -99,63 +100,64 @@ az containerapp up \
   --image YOUR_REGISTRY/YOUR_PROJECT
 ```
 
-### 3. 結果
+### 3. Results
 
-デプロイが完了すると、メトリクスとトレースが Datadog に送信されます。Datadog で **Infrastructure->Serverless** に移動すると、サーバーレスメトリクスとトレースを確認できます。
+Once the deployment is completed, your metrics and traces are sent to Datadog. In Datadog, navigate to [**Infrastructure > Serverless**][17] to see your serverless metrics and traces.
 
-## 追加の構成
+## Additional configurations
 
-- **高度なトレース:** Datadog Agent は、一般的なフレームワーク向けに基本的なトレース機能をすでにいくつか提供しています。さらに詳しい情報については、[高度なトレースガイド][2]に従ってください。
+- **Advanced Tracing:** The Datadog Agent already provides some basic tracing for popular frameworks. Follow the [advanced tracing guide][2] for more information.
 
-- **ログ:** [Azure インテグレーション][1]を使用している場合は、すでにログが収集されています。また、環境変数 `DD_LOGS_ENABLED` を `true` に設定することで、サーバーレスインスツルメンテーションを通じて直接アプリケーションログをキャプチャすることも可能です。
+- **Logs:** If you use the [Azure integration][1], your logs are already being collected. Alternatively, you can set the `DD_LOGS_ENABLED` environment variable to `true` to capture application logs through the serverless instrumentation directly.
 
-- **カスタムメトリクス:** [DogStatsd クライアント][3]を使って、カスタムメトリクスを送信することができます。Cloud Run やその他のサーバーレスアプリケーションの監視には、[ディストリビューション][8]メトリクスを使用します。ディストリビューションは、デフォルトで `avg`、`sum`、`max`、`min`、`count` の集計データを提供します。Metric Summary ページでは、パーセンタイル集計 (p50、p75、p90、p95、p99) を有効にすることができ、タグの管理も可能です。ゲージメトリクスタイプの分布を監視するには、[時間集計と空間集計][9]の両方で `avg` を使用します。カウントメトリクスタイプの分布を監視するには、時間集計と空間集計の両方で `sum` を使用します。
+- **Custom Metrics:** You can submit custom metrics using a [DogStatsd client][3]. For monitoring Cloud Run and other serverless applications, use [distribution][8] metrics. Distributions provide `avg`, `sum`, `max`, `min`, and `count` aggregations by default. On the Metric Summary page, you can enable percentile aggregations (p50, p75, p90, p95, p99) and also manage tags. To monitor a distribution for a gauge metric type, use `avg` for both the [time and space aggregations][9]. To monitor a distribution for a count metric type, use `sum` for both the time and space aggregations.
 
-- **トレースサンプリング:** サーバーレスアプリケーションの APM トレースリクエストサンプリングレートを管理するには、関数の DD_TRACE_SAMPLE_RATE 環境変数を 0.000 (コンテナアプリのリクエストをトレースしない) から 1.000 (すべてのコンテナアプリのリクエストをトレースする) の間の値に設定します。
+- **Trace Sampling:**  To manage the APM traced request sampling rate for serverless applications, set the DD_TRACE_SAMPLE_RATE environment variable on the function to a value between 0.000 (no tracing of Container App requests) and 1.000 (trace all Container App requests).
 
-メトリクスは、アプリケーションの 100% のトラフィックに基づいて計算され、どのようなサンプリング構成であっても正確な値を維持します。
+Metrics are calculated based on 100% of the application's traffic, and remain accurate regardless of any sampling configuration.
 
-### 環境変数
+### Environment Variables
 
-| 変数 | 説明 |
+| Variable | Description |
 | -------- | ----------- |
-|`DD_API_KEY`| [Datadog API キー][6] - **必須**|
-| `DD_SITE` | [Datadog サイト][4] - **必須** |
-| `DD_LOGS_ENABLED` | true の場合、ログ (stdout と stderr) を Datadog に送信します。デフォルトは false です。 |
-| `DD_LOGS_INJECTION`| true の場合、[Java][10]、[Node.js][11]、[.NET][12]、および [PHP][13] でサポートされているロガーのトレースデータですべてのログをリッチ化します。[Python][14]、[Go][15]、[Ruby][16] については追加のドキュメントを参照してください。 |
-| `DD_TRACE_SAMPLE_RATE`|  トレース取り込みのサンプルレート `0.0` と `1.0` をコントロールします|
-| `DD_SERVICE`      | [統合サービスタグ付け][5]を参照してください。                                       |
-| `DD_VERSION`      | [統合サービスタグ付け][5]を参照してください。                                       |
-| `DD_ENV`          | [統合サービスタグ付け][5]を参照してください。                                       |
-| `DD_SOURCE`       | [統合サービスタグ付け][5]を参照してください。                                       |
-| `DD_TAGS`         | [統合サービスタグ付け][5]を参照してください。                                       |
+|`DD_API_KEY`| [Datadog API Key][6] - **Required**|
+| `DD_SITE` | [Datadog site][4] - **Required** |
+| `DD_LOGS_ENABLED` | When true, send logs (stdout and stderr) to Datadog. Defaults to false. |
+| `DD_LOGS_INJECTION`| When true, enrich all logs with trace data for supported loggers in [Java][10], [Node.js][11], [.NET][12], and [PHP][13]. See additional docs for [Python][14], [Go][15], and [Ruby][16]. |
+| `DD_TRACE_SAMPLE_RATE`|  Controls the trace ingestion sample rate `0.0` and `1.0`|
+| `DD_SERVICE`      | See [Unified Service Tagging][5].                                       |
+| `DD_VERSION`      | See [Unified Service Tagging][5].                                       |
+| `DD_ENV`          | See [Unified Service Tagging][5].                                       |
+| `DD_SOURCE`       | See [Unified Service Tagging][5].                                       |
+| `DD_TAGS`         | See [Unified Service Tagging][5].                                       |
 
-## ヘルプ
+## Troubleshooting
 
-このインテグレーションは、お使いのランタイムが完全な SSL を実装しているかどうかに依存します。Node の slim イメージを使用している場合、証明書を含めるために Dockerfile に次のコマンドを追加する必要があるかもしれません。
+This integration depends on your runtime having a full SSL implementation. If you are using a slim image for Node, you may need to add the following command to your Dockerfile to include certificates.
 
 ```
 RUN apt-get update && apt-get install -y ca-certificates
 ```
 
-## その他の参考資料
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /ja/integrations/azure/#log-collection
-[2]: /ja/tracing/trace_collection/#for-setup-instructions-select-your-language
-[3]: /ja/metrics/custom_metrics/dogstatsd_metrics_submission/
-[4]: /ja/getting_started/site/
-[5]: /ja/getting_started/tagging/unified_service_tagging/
-[6]: /ja/account_management/api-app-keys/
+[1]: /integrations/azure/#log-collection
+[2]: /tracing/trace_collection/#for-setup-instructions-select-your-language
+[3]: /metrics/custom_metrics/dogstatsd_metrics_submission/
+[4]: /getting_started/site/
+[5]: /getting_started/tagging/unified_service_tagging/
+[6]: /account_management/api-app-keys/
 [7]: https://learn.microsoft.com/en-us/azure/container-apps/manage-secrets
-[8]: /ja/metrics/distributions/
-[9]: /ja/metrics/#time-and-space-aggregation
-[10]: /ja/tracing/other_telemetry/connect_logs_and_traces/java/?tab=log4j2
-[11]: /ja/tracing/other_telemetry/connect_logs_and_traces/nodejs
-[12]: /ja/tracing/other_telemetry/connect_logs_and_traces/dotnet?tab=serilog
-[13]: /ja/tracing/other_telemetry/connect_logs_and_traces/php
-[14]: /ja/tracing/other_telemetry/connect_logs_and_traces/python
-[15]: /ja/tracing/other_telemetry/connect_logs_and_traces/go
-[16]: /ja/tracing/other_telemetry/connect_logs_and_traces/ruby
+[8]: /metrics/distributions/
+[9]: /metrics/#time-and-space-aggregation
+[10]: /tracing/other_telemetry/connect_logs_and_traces/java/?tab=log4j2
+[11]: /tracing/other_telemetry/connect_logs_and_traces/nodejs
+[12]: /tracing/other_telemetry/connect_logs_and_traces/dotnet?tab=serilog
+[13]: /tracing/other_telemetry/connect_logs_and_traces/php
+[14]: /tracing/other_telemetry/connect_logs_and_traces/python
+[15]: /tracing/other_telemetry/connect_logs_and_traces/go
+[16]: /tracing/other_telemetry/connect_logs_and_traces/ruby
+[17]: https://app.datadoghq.com/functions?cloud=azure&entity_view=container_apps

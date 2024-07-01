@@ -1,137 +1,137 @@
 ---
-description: RUM とセッションリプレイを使用して、ユーザーの行動と機能採用の傾向を監視する方法について説明します。
+title: Use RUM & Session Replay for Product Analytics
+kind: guide
+description: Learn how to use RUM & Session Replay to monitor trends in user behavior and feature adoption.
 further_reading:
 - link: /real_user_monitoring/explorer/
-  tag: ドキュメント
-  text: RUM エクスプローラーについて
+  tag: Documentation
+  text: Learn about the RUM Explorer
 - link: /real_user_monitoring/
-  tag: ドキュメント
-  text: RUM データを視覚化する方法について
-- link: /real_user_monitoring/frustration_signals
-  tag: ドキュメント
-  text: フラストレーションシグナルについて
+  tag: Documentation
+  text: Learn how to visualize your RUM data
+- link: /real_user_monitoring/browser/frustration_signals/
+  tag: Documentation
+  text: Learn about frustration signals
 - link: /real_user_monitoring/session_replay
-  tag: ドキュメント
-  text: セッションリプレイについて
+  tag: Documentation
+  text: Learn about Session Replay
 - link: /dashboards/guide/powerpacks-best-practices/
-  tag: ドキュメント
-  text: パワーパックについて
-kind: ガイド
-title: RUM とセッションリプレイを製品分析に活用する
+  tag: Documentation
+  text: Learn about powerpacks
 ---
 
-## 概要
+## Overview
 
-[RUM とセッションリプレイ][1]は、消費者行動の傾向をモニターし、Web やモバイルアプリケーションに関する製品の使用量に関する質問の答えを明らかにすることができます。
+[RUM & Session Replay][1] allows you to monitor trends in consumer behavior and uncover answers to product usage questions about your web and mobile applications.
 
-このガイドでは、RUM とセッションリプレイデータを充実させ、製品分析に関連する質問に答えるための、いくつかの使用例について説明します。
+This guide discusses several use cases to enrich your RUM & Session Replay data and answer questions related to product analytics.
 
-## セットアップ
+## Setup
 
-Datadog RUM SDK をセットアップしたら、[ブラウザ][2]やモバイル ([iOS][3]、[Android][4]) データに属性を付加して、ユースケースに応じてデータをカスタマイズします。例えば、コンテキスト情報を追加することで、[特定のユーザーに紐づくセッションを特定する][4]ことができます。
+After you have set up the Datadog RUM SDK, enrich your [browser][2] or mobile ([iOS][3] and [Android][4]) data with attributes to customize the data according to your use case. For example, adding contextual information allows you to [identify sessions that are tied to specific users][4].
 
-## ページのトラフィックと機能の使用量を監視する
+## Monitor page traffic and feature usage
 
-ユーザーがどのボタンを最も多くクリックしたかを知りたい場合は、アプリケーションのページトラフィックとボタンの使用量を追跡することができます。
+If you are interested in learning what buttons your users click on the most, you can track page traffic and the usage of buttons in your application. 
 
-1. [RUM エクスプローラー][5]に移動し、検索クエリの横にあるドロップダウンメニューから **Actions** を選択します。
-2. 検索クエリに `@view.name:/cart` を入力し、**Top List** の視覚化タイプを選択します。
-3. 上記の `Group into fields` セクションの `by` フィールドで、グループのドロップダウンから **Action Name** を選択します。
+1. In the [RUM Explorer][5], select **Actions** from the dropdown menu next to the search query. 
+2. Enter `@view.name:/cart` in the search query and select the **Top List** visualization type.
+3. In the `by` field of the `Group into fields` section above, select **Action Name** from the group dropdown.
 
-この例では、Shopist の `/cart` ページで上位のアクションを表示しています。
+This example displays the top actions on Shopist's `/cart` page.
 
-{{< img src="real_user_monitoring/guide/rum-for-product-analytics/actions_in_cart_page-2.png" alt="Shopist のカートページでのアクションの検索クエリ" style="width:90%;">}}
+{{< img src="real_user_monitoring/guide/rum-for-product-analytics/actions_in_cart_page-2.png" alt="Search query for actions on Shopist's Cart page" style="width:90%;">}}
 
-どのユーザーがこれらのボタンをクリックしたかを調べるには、検索クエリを変更して、**Table** 視覚化タイプを選択し、**+** をクリックして `@user.name` に別の `group` フィールドを追加します。
+To investigate which users are clicking on these buttons, modify the search query by selecting the **Table** visualization type and clicking **+** to add another `group` field for `@user.name`.
 
-{{< img src="real_user_monitoring/guide/rum-for-product-analytics/actions_by_user_name_in_cart_page-3.png" alt="Shopist のカートページで、ユーザー名でグループ分けされたアクションの検索クエリ" style="width:90%;">}}
+{{< img src="real_user_monitoring/guide/rum-for-product-analytics/actions_by_user_name_in_cart_page-3.png" alt="Search query for actions grouped by user name on Shopist's Cart page" style="width:90%;">}}
 
-## コアワークフローのコンバージョン率分析
+## Analyze the conversion rate of core workflows
 
-[ファネル視覚化タイプ][6]を使用して、Web サイト内の重要なエリアにおけるコンバージョン率を追跡します。
+Use the [funnel visualization type][6] to track the conversion rate across crucial areas in your website. 
 
-Web サイトのビューやアクションに基づいたファネルを作成すると、次のような使い方ができます。
+Once you have created a funnel based on views or actions on your website, you can use it in the following ways:
 
-* [保存ビュー][7]を作成し、RUM とセッションリプレイで参照できるようにする
-* ダッシュボードに[エクスポート][8]して、追加のテレメトリーデータとの関連でコンバージョン率を分析する
-* ファネルステップをクリックして、**Funnel Analysis** [サイドパネル](#view-funnel-analysis)を表示する
+* Create a [saved view][7] to reference it in the RUM & Session Replay
+* [Export][8] it to a dashboard where you can analyze the conversion rate in the context of additional telemetry data
+* Click on a funnel step to display the **Funnel Analysis** [side panel](#view-funnel-analysis)
 
-### 保存ビューの追加
+### Add a saved view
 
-{{< img src="real_user_monitoring/guide/rum-for-product-analytics/explorer_saved_view.mp4" alt="RUM エクスプローラーに保存ビューを追加する" video="true" width=90% >}}
+{{< img src="real_user_monitoring/guide/rum-for-product-analytics/explorer_saved_view.mp4" alt="Add a saved view in the RUM Explorer" video="true" width=90% >}}
 
-### ファネルのエクスポート
+### Export the funnel
 
-{{< img src="real_user_monitoring/guide/rum-for-product-analytics/explorer_funnel_export.png" alt="RUM エクスプローラーでファネル視覚化をエクスポートする" style="width:90%;" >}}
+{{< img src="real_user_monitoring/guide/rum-for-product-analytics/explorer_funnel_export.png" alt="Export a funnel visualization in the RUM Explorer" style="width:90%;" >}}
 
-### ファネル分析を見る
+### View funnel analysis
 
-サイドパネルには、個々のビューのロード時間、国、デバイスタイプ、ブラウザ、バージョンに基づくコンバージョン率とドロップオフ率、およびページで発生した未解決の[問題][9]に関する詳細な情報が表示されます。
+The side panel contains detailed information about the load time of an individual view, the conversion and drop off rates based on the country, device type, browser, and version, and outstanding [issues][9] that occurred on the page.
 
-{{< img src="real_user_monitoring/guide/rum-for-product-analytics/funnel_analysis_side_panel.mp4" alt="コンバージョン率、ドロップオフ率、ページパフォーマンス、エラー、ユーザー行動などを表示するファネル分析サイドパネル" width=90%; video="true" >}}
+{{< img src="real_user_monitoring/guide/rum-for-product-analytics/funnel_analysis_side_panel.mp4" alt="Funnel Analysis side panel displaying conversion rates, drop off rates, page performance, errors, and user behavior" width=90%; video="true" >}}
 
-## 最も不満のあるユーザーを特定する
+## Identify your most frustrated users
 
-[フラストレーションシグナル][10]は、ユーザーがフラストレーションを感じる行動 (怒りクリック、デッドクリック、エラークリック) を示す瞬間を抽出し、ユーザーが直面している最も緊急の問題に対処できるようにします。ユーザーの行動を調査して、ユーザーが行き詰っている Web サイトの領域を特定します。
+[Frustration Signals][10] surface moments where users express frustrated behavior (a rage click, dead click, or error click) so you can address the most pressing issues that users are facing. Examine user behavior to identify the areas of your website where users are getting stuck. 
 
-1. [RUM エクスプローラー][5]で、ドロップダウンメニューから **Views** を選択します。
-2. 検索クエリに `@view.frustration.count:>=2` を入力し、**Top List** の視覚化タイプを選択します。
-3. 上記の `Group into fields` セクションの `by` フィールドで、グループのドロップダウンから **View Name** を選択します。
+1. In the [RUM Explorer][5], select **Views** from the dropdown menu.
+2. Enter `@view.frustration.count:>=2` in the search query and select the **Top List** visualization type.
+3. In the `by` field of the `Group into fields` section above, select **View Name** from the group dropdown.
 
-このクエリは、フラストレーションシグナルが 2 回以上発生したトップページを検索します。
+This query searches for top pages where at least two frustration signals have occurred.
 
-{{< img src="real_user_monitoring/guide/rum-for-product-analytics/frustration_signal_query-1.png" alt="RUM エクスプローラーで 2 つ以上のフラストレーションシグナルを含むビューの検索クエリ" style="width:90%;" >}}
+{{< img src="real_user_monitoring/guide/rum-for-product-analytics/frustration_signal_query-1.png" alt="Search query for views containing more than two frustration signals in the RUM Explorer" style="width:90%;" >}}
 
-トップビューの分析だけでなく、ユーザーが不満を表明しているボタンや要素も調査したいところです。
+In addition to analyzing top views, you also want to investigate the buttons and elements that users are expressing frustration with. 
 
-1. ドロップダウンメニューから、**Actions** を選択します。
-2. 検索クエリに `@action.frustration.type:dead_click` を入力し、**Table** の視覚化タイプを選択します。
-3. 検索クエリをクリックして、`@action.frustration.type:error_click` と ``@action.frustration.type:rage_click`` を選択し、これらの値を検索に含めます。**search for** フィールドは、`Action Frustration Type:(3 terms)` に更新されます。
-4. 下の `Group into fields` セクションの `by` フィールドで、グループのドロップダウンから **Action Name** を選択し、**+** をクリックして **Action Frustration Type** の別の `group` フィールドを追加します。
+1. Select **Actions** from the dropdown menu.
+2. Enter `@action.frustration.type:dead_click` in the search query and select the **Table** visualization type.
+3. Click on the search query and select `@action.frustration.type:error_click` and ``@action.frustration.type:rage_click`` to include these values in your search. The **search for** field updates to `Action Frustration Type:(3 terms)`.
+4. In the `by` field of the `Group into fields` section below, select **Action Name** from the group dropdown and click **+** to add another `group` field for **Action Frustration Type**.
 
-このクエリは、ユーザーが何らかのフラストレーションシグナルを表現した時に、そのフラストレーションが発生したユニークなアクションをカウントするものです。
+This query lists anytime a user expresses any type of frustration signal and counts the unique actions where frustration occurred.
 
-{{< img src="real_user_monitoring/guide/rum-for-product-analytics/multi_group_frustration_type_search-3.png" alt="Shopist のカートページで、ユーザーが 3 種類のフラストレーションシグナルを発したアクションをリストアップし、カウントする検索クエリ" style="width:90%;">}}
+{{< img src="real_user_monitoring/guide/rum-for-product-analytics/multi_group_frustration_type_search-3.png" alt="Search query that lists and counts actions where a user expressed three types of frustration signals on Shopist's Cart page" style="width:90%;">}}
 
-## セッションリプレイでユーザー体験を見る
+## Watch the user experience in Session Replay
 
-劣悪なユーザー体験がユーザーに与える影響を視覚化することができます。たとえば、ファネルを構築して、ステップ間のドロップオフ率が非常に高いことに気づいた場合、[セッションリプレイ記録][11]を見て、ドロップオフする前にユーザーが何をしたかを確認することができます。
+You can visually watch the impact that poor user experiences have on your users. For example, if you have built a funnel and noticed that the drop off rate is exceptionally high between steps, you can watch a [sesion replay recording][11] to see what a user did before they dropped off. 
 
-ファネル視覚化では、**Funnel Analysis** サイドパネルにアクセスし、ユーザーが別のステップに継続した、またはドロップオフしたセッションの **Sample Replay Session** をクリックすることができます。
+In a funnel visualization, you can access the **Funnel Analysis** side panel and click **Sample Replay Session** on sessions where users continued onto another step or dropped off.
 
-{{< img src="real_user_monitoring/guide/rum-for-product-analytics/funnel_sample_session_replay-2.mp4" alt="ファネル分析サイドパネルには、セッションリプレイへのリンクが含まれます" width=90%; video="true" >}}
+{{< img src="real_user_monitoring/guide/rum-for-product-analytics/funnel_sample_session_replay-2.mp4" alt="The Funnel Analysis side panel contains links to Session Replay" width=90%; video="true" >}}
 
-セッションリプレイを使用すると、製品のどの部分がユーザーを混乱させ、コンバージョンを高めるために改善が必要なのかを特定できます。
+With Session Replay, you can identify what parts of your product are confusing to users and need improving in order to drive up conversion. 
 
-## パワーパックにおける使用量の把握
+## Track usage patterns in powerpacks
 
-[パワーパック][12]は、共通の監視パターンと製品分析のためのダッシュボードウィジェットのテンプレートグループです。
+[Powerpacks][12] are templated groups of dashboard widgets for common monitoring patterns and product analytics. 
 
-すぐに使える RUM Feature Usage パワーパックを使って、アプリケーションの特定のアクションに対するさまざまなトラフィックパターンをよりよく理解しましょう。
+Use the out-of-the-box RUM Feature Usage powerpack to better understand different traffic patterns for a specific action in your application.
 
-1.  [**Dashboards** > **New Dashboard**][13] を開き、**+ Add Widgets or Powerpacks** をクリックします。
-2. **Powerpacks** タブで、検索バーに `tag:rum` と入力して RUM パワーパックを検索し、**RUM Feature Usage** を選択します。デフォルトでは、`@view.name` と `@action.name` の値は `*` に設定されています。
-3. ドロップダウンメニューから値を選択してパワーパックをカスタマイズし、**Add to dashboard** をクリックすると、テンプレート変数として属性を使用することができます。
-4. **Confirm** をクリックすると、パワーパックがダッシュボードに追加されます。
+1. Navigate to [**Dashboards** > **New Dashboard**][13] and click **+ Add Widgets or Powerpacks**. 
+2. In the **Powerpacks** tab, search for RUM powerpacks by entering `tag:rum` in the search bar and select **RUM Feature Usage**. By default, the values for `@view.name` and `@action.name` are set to `*`. 
+3. Customize your powerpack by selecting values from the dropdown menus and click **Add to dashboard** to use an attribute as a template variable.
+4. Click **Confirm** to add the powerpack in your dashboard.
 
-このパワーパックでは、Shopist の `/cart` ページでのアクション回数と使用頻度の割合に加え、国別の使用量、ビューでのアクション、時間経過によるアクションについてのグラフを提供します。
+This powerpack provides graphs about usage by country, actions on a view, and actions over time, in addition to the count of actions and percentage of usage frequency on Shopist's `/cart` page.
 
-{{< img src="dashboards/guide/powerpacks_best_practices/configure_powerpack.png" alt="カートページでクーポンの適用アクションを監視する RUM Feature Usage パワーパック" style="width:100%;" >}} 
+{{< img src="dashboards/guide/powerpacks_best_practices/configure_powerpack.png" alt="RUM Feature Usage powerpack to monitor the Apply Coupon action on the Cart page" style="width:100%;" >}} 
 
-## その他の参考資料
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/real_user_monitoring/
-[2]: /ja/real_user_monitoring/browser/modifying_data_and_context/?tab=npm#enrich-and-control-rum-data
-[3]: /ja/real_user_monitoring/ios/advanced_configuration/?tab=swift#enrich-user-sessions
-[4]: /ja/real_user_monitoring/android/advanced_configuration/?tab=kotlin#enrich-user-sessions
+[1]: /real_user_monitoring/
+[2]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#enrich-and-control-rum-data
+[3]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/ios/?tab=swift#enrich-user-sessions
+[4]: /real_user_monitoring/android/advanced_configuration/?tab=kotlin#enrich-user-sessions
 [5]: https://app.datadoghq.com/rum/explorer
-[6]: /ja/real_user_monitoring/funnel_analysis/
-[7]: /ja/real_user_monitoring/explorer/saved_views/
-[8]: /ja/real_user_monitoring/explorer/export/
-[9]: /ja/real_user_monitoring/error_tracking/
-[10]: /ja/real_user_monitoring/frustration_signals/
-[11]: /ja/real_user_monitoring/session_replay/
-[12]: /ja/dashboards/guide/powerpacks-best-practices/
+[6]: /product_analytics/journeys/funnel_analysis
+[7]: /real_user_monitoring/explorer/saved_views/
+[8]: /real_user_monitoring/explorer/export/
+[9]: /real_user_monitoring/error_tracking/
+[10]: /real_user_monitoring/browser/frustration_signals/
+[11]: /real_user_monitoring/session_replay/browser/
+[12]: /dashboards/guide/powerpacks-best-practices/
 [13]: https://app.datadoghq.com/dashboard/lists

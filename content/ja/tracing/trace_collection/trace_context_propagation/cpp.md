@@ -1,82 +1,179 @@
 ---
+title: Propagating C++ Trace Context
+kind: documentation
 code_lang: cpp
+type: multi-code-lang
 code_lang_weight: 50
 further_reading:
-- link: https://www.datadoghq.com/blog/monitor-otel-with-w3c-trace-context/
-  tag: ブログ
-  text: W3C Trace Context に対応した OpenTelemetry インスツルメンテーションされたアプリのモニタリング
-title: C++ トレースコンテキストの伝搬
-type: multi-code-lang
+    - link: "https://www.datadoghq.com/blog/monitor-otel-with-w3c-trace-context/"
+      tag: Blog
+      text: Monitor OpenTelemetry-instrumented apps with support for W3C Trace Context
+    - link: /opentelemetry/guide/otel_api_tracing_interoperability
+      tag: Documentation
+      text: Interoperability of OpenTelemetry API and Datadog instrumented traces
 ---
 
-## 概要
+## Overview
 
-Datadog APM トレーサーは、分散型トレーシングの [B3][11] ヘッダーの抽出と挿入をサポートしています。
+Datadog APM tracer supports [B3][11] and [W3C][1] headers extraction and injection for distributed tracing.
 
-分散ヘッダーの挿入と抽出は、挿入/抽出スタイルを構成することで制御されます。C++ でサポートされているスタイルは以下の通りです。
+Distributed headers injection and extraction is controlled by configuring injection/extraction styles. The supported styles for C++ are:
 
-- Datadog: `Datadog`
-- B3: `B3`
+- Datadog: `datadog`
+- B3: `b3`
+- W3C: `tracecontext`
 
-挿入スタイルは次を使って構成できます:
+### Configuration
 
-- 環境変数: `DD_TRACE_PROPAGATION_STYLE_INJECT="Datadog B3"`
+{{< tabs >}}
 
-環境変数の値は、挿入が有効になっているヘッダースタイルのカンマ (またはスペース) 区切りリストです。デフォルトでは、Datadog 挿入スタイルのみが有効になっています。
+{{% tab "Environment Variable" %}}
 
-抽出スタイルは次を使って構成できます:
+#### Injection styles
 
-- 環境変数: `DD_TRACE_PROPAGATION_STYLE_EXTRACT="Datadog B3"`
+`DD_TRACE_PROPAGATION_STYLE_INJECT="datadog,b3"`
 
-環境変数の値は、抽出が有効になっているヘッダースタイルのカンマ (またはスペース) 区切りリストです。デフォルトでは、Datadog 抽出スタイルのみが有効になっています。
+The value of the environment variable is a comma (or space) separated list of header styles that are enabled for injection. The default injection styles are `datadog,tracecontext`.
 
-複数の抽出スタイルが有効になっている場合、抽出試行はスタイルの構成順で実行され、最初に成功した抽出値が使われます。
+#### Extraction styles
 
-### 分散トレースのコンテキストの挿入と抽出
+`DD_TRACE_PROPAGATION_STYLE_EXTRACT="datadog,b3"`
 
-分散型トレーシングは[トレーサーの `Inject` そして `Extract` メソッドを使用][9]することで実現でき、[一般的な `Reader` や `Writer` タイプ][10]を受け入れます。優先度付きサンプリング (デフォルトで有効) はスパンの均一なデリバリーを保証します。
+The value of the environment variable is a comma (or space) separated list of header styles that are enabled for extraction. The default extraction styles are `datadog,tracecontext`.
+
+{{% /tab %}}
+
+{{% tab "Code" %}}
 
 ```cpp
-// Allows writing propagation headers to a simple map<string, string>.
-// Copied from https://github.com/opentracing/opentracing-cpp/blob/master/mocktracer/test/propagation_test.cpp
-struct HTTPHeadersCarrier : HTTPHeadersReader, HTTPHeadersWriter {
-  HTTPHeadersCarrier(std::unordered_map<std::string, std::string>& text_map_)
-      : text_map(text_map_) {}
+#include <datadog/tracer_config.h>
+#include <datadog/propagation_style.h>
 
-  expected<void> Set(string_view key, string_view value) const override {
-    text_map[key] = value;
-    return {};
-  }
+namespace dd = datadog::tracing;
+int main() {
+  dd::TracerConfig config;
+  config.service = "my-service";
 
-  expected<void> ForeachKey(
-      std::function<expected<void>(string_view key, string_view value)> f)
-      const override {
-    for (const auto& key_value : text_map) {
-      auto result = f(key_value.first, key_value.second);
-      if (!result) return result;
-    }
-    return {};
-  }
+  // `injection_styles` indicates with which tracing systems trace propagation
+  // will be compatible when injecting (sending) trace context.
+  // All styles indicated by `injection_styles` are used for injection.
+  // `injection_styles` is overridden by the `DD_TRACE_PROPAGATION_STYLE_INJECT`
+  // and `DD_TRACE_PROPAGATION_STYLE` environment variables.
+  config.injection_styles = {dd::PropagationStyle::DATADOG, dd::PropagationStyle::B3};
 
-  std::unordered_map<std::string, std::string>& text_map;
-};
+  // `extraction_styles` indicates with which tracing systems trace propagation
+  // will be compatible when extracting (receiving) trace context.
+  // Extraction styles are applied in the order in which they appear in
+  // `extraction_styles`. The first style that produces trace context or
+  // produces an error determines the result of extraction.
+  // `extraction_styles` is overridden by the
+  // `DD_TRACE_PROPAGATION_STYLE_EXTRACT` and `DD_TRACE_PROPAGATION_STYLE`
+  // environment variables.
+  config.extraction_styles = {dd::PropagationStyle::W3C};
 
-void example() {
-  auto tracer = ...
-  std::unordered_map<std::string, std::string> headers;
-  HTTPHeadersCarrier carrier(headers);
-
-  auto span = tracer->StartSpan("operation_name");
-  tracer->Inject(span->context(), carrier);
-  // `headers` now populated with the headers needed to propagate the span.
+  ...
 }
 ```
 
-## その他の参考資料
+{{% /tab %}}
+
+{{< /tabs >}}
+
+If multiple extraction styles are enabled, the extraction attempt is done on the order those styles are configured and first successful extracted value is used.
+
+The default injection and extractions settings for the most recent versions of the library are `datadog,tracecontext`.
+
+### Extract propagated context
+Propagation context extraction can be accomplished by implementing a custom `DictReader` interface and calling `Tracer::extract_span` or `Tracer::extract_or_create_span`.
+
+Here is an implementation to extract propagation context from HTTP Headers:
+
+```cpp
+#include <datadog/dict_reader.h>
+#include <datadog/optional.h>
+#include <datadog/string_view.h>
+
+#include <unordered_map>
+
+namespace dd = datadog::tracing;
+
+class HTTPHeadersReader : public datadog::tracing::DictReader {
+  std::unordered_map<dd::StringView, dd::StringView> headers_;
+
+public:
+  HTTPHeadersReader(std::unordered_map<dd::StringView, dd::StringView> headers)
+    : headers_(std::move(headers)) {}
+
+  ~HTTPHeadersReader() override = default;
+
+  // Return the value at the specified `key`, or return `nullopt` if there
+  // is no value at `key`.
+  dd::Optional<dd::StringView> lookup(dd::StringView key) const override {
+    auto found = headers_.find(key);
+    if (found == headers_.cend()) return dd::nullopt;
+
+    return found->second;
+  }
+
+  // Invoke the specified `visitor` once for each key/value pair in this object.
+  void visit(
+      const std::function<void(dd::StringView key, dd::StringView value)>& visitor)
+      const override {
+      for (const auto& [key, value] : headers_) {
+        visitor(key, value);
+      }
+  };
+};
+
+// Usage example:
+void handle_http_request(const Request& request, datadog::tracing::Tracer& tracer) {
+  HTTPHeadersReader reader{request.headers};
+  auto maybe_span = tracer.extract_span(reader);
+  ..
+}
+```
+
+### Inject context for distributed tracing
+Propagation context injection can be accomplished by implementing the `DictWriter` interface and calling `Span::inject` on a span instance.
+
+```cpp
+#include <datadog/dict_writer.h>
+#include <datadog/string_view.h>
+
+#include <string>
+#include <unordered_map>
+
+using namespace dd = datadog::tracing;
+
+class HTTPHeaderWriter : public dd::DictWriter {
+  std::unordered_map<std::string, std::string>& headers_;
+
+public:
+  explicit HTTPHeaderWriter(std::unordered_map<std::string, std::string>& headers) : headers_(headers) {}
+
+  ~HTTPHeaderWriter() override = default;
+
+  void set(dd::StringView key, dd::StringView value) override {
+    headers_.emplace(key, value);
+  }
+};
+
+// Usage example:
+void handle_http_request(const Request& request, dd::Tracer& tracer) {
+  auto span = tracer.create_span();
+
+  HTTPHeaderWriter writer(request.headers);
+  span.inject(writer);
+  // `request.headers` now populated with the headers needed to propagate the span.
+  ..
+}
+```
+
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
+[1]: https://github.com/w3c/trace-context
 [9]: https://github.com/opentracing/opentracing-cpp/#inject-span-context-into-a-textmapwriter
 [10]: https://github.com/opentracing/opentracing-cpp/blob/master/include/opentracing/propagation.h
 [11]: https://github.com/openzipkin/b3-propagation

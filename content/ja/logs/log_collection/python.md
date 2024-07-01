@@ -1,53 +1,54 @@
 ---
+title: Python Log Collection
+kind: documentation
 aliases:
-- /ja/logs/languages/python
+  - /logs/languages/python
 further_reading:
-- link: https://www.datadoghq.com/blog/python-logging-best-practices/
-  tag: ブログ
-  text: Python ログの収集、カスタマイズ、一元化方法
+- link: "https://www.datadoghq.com/blog/python-logging-best-practices/"
+  tag: Blog
+  text: How to collect, customize, and centralize Python logs
 - link: /logs/log_configuration/processors
   tag: Documentation
-  text: ログの処理方法
+  text: Learn how to process your logs
 - link: /logs/log_configuration/parsing
   tag: Documentation
-  text: パースの詳細
+  text: Learn more about parsing
 - link: /logs/explorer/
   tag: Documentation
-  text: ログの調査方法
+  text: Learn how to explore your logs
 - link: /logs/faq/log-collection-troubleshooting-guide/
   tag: Documentation
-  text: ログ収集のトラブルシューティングガイド
-- link: /glossary/#tail
-  tag: 用語集
-  text: 用語集 "テール" の項目
-title: Python ログ収集
+  text: Log Collection Troubleshooting Guide
+- link: "/glossary/#tail"
+  tag: Glossary
+  text: Glossary entry for "tail"  
 ---
 
-## 概要
+## Overview
 
-Python のログを Datadog に送信するには、Python ロガーを構成してホスト上のファイルにログを記録し、Datadog Agent でそのファイルを[テール][12]します。
+To send your Python logs to Datadog, configure a Python logger to log to a file on your host and then [tail][12] that file with the Datadog Agent.
 
-## ロガーの構成
+## Configure your logger
 
-Python のログは、トレースバックのために扱いが複雑になることがあります。トレースバックは、ログを複数行に分割する原因となり、元のログイベントとの関連付けが困難になります。この問題に対処するため、Datadog はロギング時に JSON フォーマッターを使用することを強く推奨しています。
+Python logs can be complex to handle because of tracebacks. Tracebacks cause logs to be split into multiple lines, which makes them difficult to associate with the original log event. To address this issue, Datadog strongly recommends using a JSON formatter when logging so that you can:
 
-* 各スタックトレースが正しいログにラップされていることを確認します。
-* ログイベントのすべての属性が正しく抽出されていることを確認します (重大度、ロガー名、スレッド名など)。
+* Ensure each stack trace is wrapped into the correct log.
+* Ensure all the attributes of a log event are correctly extracted (severity, logger name, thread name, and so on).
 
-以下のロギングライブラリの設定例をご参照ください。
+See the setup examples for the following logging libraries:
 
 * [JSON-log-formatter][1]
 * [Python-json-logger][2]
 * [django-datadog-logger][3]*
 
-*[Python ロガー][6]には、カスタム属性を追加するための `extra` パラメーターがあります。`DJANGO_DATADOG_LOGGER_EXTRA_INCLUDE` を使って、`extra` パラメーターを追加したいロガーの名前にマッチする正規表現を指定します。
+*The [Python logger][6] has an `extra` parameter for adding custom attributes. Use `DJANGO_DATADOG_LOGGER_EXTRA_INCLUDE` to specify a regex that matches the name of the loggers for which you want to add the `extra` parameter.
 
-## Datadog Agent の構成
+## Configure the Datadog Agent
 
-[ログ収集][7]を有効にしたら、[カスタムログ収集][8]を設定して、以下のようにログファイルを追跡して Datadog に送信します。
+Once [log collection][7] is enabled, set up [custom log collection][8] to tail your log files and send them to Datadog by doing the following:
 
-1. `python.d/` フォルダーを `conf.d/` Agent 構成ディレクトリに作成します。
-2. `conf.d/python.d/` ディレクトリに、以下の内容の `conf.yaml` ファイルを作成します。
+1. Create a `python.d/` folder in the `conf.d/` Agent configuration directory. 
+2. Create a file `conf.yaml` in the `conf.d/python.d/` directory with the following content:
     ```yaml
     init_config:
 
@@ -67,24 +68,24 @@ Python のログは、トレースバックのために扱いが複雑になる�
         #    name: new_log_start_with_date
         #    pattern: \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
     ```
-3. [Agent を再起動します][5]。
-4. [Agent の status サブコマンド][9]を実行し、`Checks` セクションで `python` を探し、ログが Datadog に正常に送信されることを確認します。
+3. [Restart the Agent][5].
+4. Run the [Agent's status subcommand][9] and look for `python` under the `Checks` section to confirm that logs are successfully submitted to Datadog.
 
-ログが JSON 形式の場合、Datadog は自動的にログメッセージを[パース][10]し、ログ属性を抽出します。[ログエクスプローラー][11]を使用して、ログを表示し、トラブルシューティングを行うことができます。
+If logs are in JSON format, Datadog automatically [parses the log messages][10] to extract log attributes. Use the [Log Explorer][11] to view and troubleshoot your logs.
 
-## ログとトレースにおけるサービスを接続
+## Connect your service across logs and traces
 
-APM が有効になっているアプリケーションの場合は、[APM Python の指示に従い][4]ログにトレース ID、スパン ID、`env`、`service`、`version` を自動的に追加し、ログとトレースを接続します。
+If APM is enabled for this application, connect your logs and traces by automatically adding trace IDs, span IDs, `env`, `service`, and `version` to your logs by [following the APM Python instructions][4].
 
-**注**: APM トレーサーがログに `service` を挿入する場合、Agent 構成で設定されている値は上書きされます。
+**Note**: If the APM tracer injects `service` into your logs, it overrides the value set in the agent configuration.
 
-これで、ログは次のような形式になります。
+Once this is done, the log should have the following format:
 
 ```xml
 2019-01-07 15:20:15,972 DEBUG [flask.app] [app.py:100] [dd.trace_id=5688176451479556031 dd.span_id=4663104081780224235] - this is an example
 ```
 
-ログが JSON 形式の場合、値がトップレベル、またはトップレベルの `extra` または `record.extra` ブロックにある場合、トレース値は自動的に抽出されます。以下はトレース値が自動的にパースされる有効な JSON ログの例です。
+If logs are in JSON format, trace values are automatically extracted if the values are at the top level or in the top level `extra` or `record.extra` blocks. The following are examples of valid JSON logs where trace values are automatically parsed.
 
 ```json
 {
@@ -125,19 +126,19 @@ APM が有効になっているアプリケーションの場合は、[APM Pytho
 }
 ```
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://pypi.python.org/pypi/JSON-log-formatter/
 [2]: https://github.com/madzak/python-json-logger
 [3]: https://pypi.org/project/django-datadog-logger/
-[4]: /ja/tracing/other_telemetry/connect_logs_and_traces/python
-[5]: /ja/agent/configuration/agent-commands/
+[4]: /tracing/other_telemetry/connect_logs_and_traces/python
+[5]: /agent/configuration/agent-commands/
 [6]: https://docs.python.org/3/library/logging.html#logging
-[7]: /ja/agent/logs/?tab=tailfiles#activate-log-collection
-[8]: /ja/agent/logs/?tab=tailfiles#custom-log-collection
-[9]: /ja/agent/configuration/agent-commands/?tab=agentv6v7#agent-status-and-information
-[10]: /ja/logs/log_configuration/parsing/
-[11]: /ja/logs/explorer/#overview
-[12]: /ja/glossary/#tail
+[7]: /agent/logs/?tab=tailfiles#activate-log-collection
+[8]: /agent/logs/?tab=tailfiles#custom-log-collection
+[9]: /agent/configuration/agent-commands/?tab=agentv6v7#agent-status-and-information
+[10]: /logs/log_configuration/parsing/
+[11]: /logs/explorer/#overview
+[12]: /glossary/#tail

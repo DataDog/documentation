@@ -1,59 +1,59 @@
 ---
+title: Testing Local and Staging Environments
+description: Learn about using Continuous Testing in local and remote environments.
 aliases:
-- /ja/synthetics/testing_tunnel
-- /ja/real_user_monitoring/error_tracking/custom_grouping
-description: ローカル環境およびリモート環境での Continuous Testing の活用について学びましょう。
+  - /synthetics/testing_tunnel
+  - /continuous_testing/testing_tunnel
 further_reading:
-- link: https://www.datadoghq.com/blog/shift-left-testing-best-practices/
-  tag: ブログ
-  text: シフトレフトテストのベストプラクティス
-- link: https://www.datadoghq.com/blog/datadog-synthetic-ci-cd-testing/
-  tag: ブログ
-  text: Datadog Synthetic テストを CI/CD パイプラインに組み込む
-- link: https://learn.datadoghq.com/courses/synthetic-tests-ci-cd-pipeline
-  tag: ガイド
-  text: CI/CD パイプラインでテストを実行する方法を学ぶ
+- link: "https://www.datadoghq.com/blog/shift-left-testing-best-practices/"
+  tag: Blog
+  text: Best practices for shift-left testing
+- link: "https://www.datadoghq.com/blog/datadog-synthetic-ci-cd-testing/"
+  tag: Blog
+  text: Incorporate Datadog Synthetic tests into your CI/CD pipeline
+- link: "https://learn.datadoghq.com/courses/synthetic-tests-ci-cd-pipeline"
+  tag: Learning Center
+  text: Learn how to run tests in a CI/CD pipeline
 - link: /continuous_testing/environments/multiple_env
-  tag: ドキュメント
-  text: 複数環境でのテストについて
+  tag: Documentation
+  text: Learn about testing in multiple environments
 - link: /continuous_testing/environments/proxy_firewall_vpn
-  tag: ドキュメント
-  text: プロキシ、ファイアウォール、VPN 使用中のテストについて
+  tag: Documentation
+  text: Learn about testing while using proxies, firewalls, or VPNs
 - link: /synthetics/private_locations
-  tag: ドキュメント
-  text: プライベートロケーションの詳細
-title: ローカル環境とステージング環境のテスト
+  tag: Documentation
+  text: Learn about private locations
 ---
 
-## 概要
+## Overview
 
-[CI/CD パイプライン内のテスト (別名シフトレフトテスト)][1] の文脈では、本番環境は通常、プロセスの最終段階です。アプリケーションは、この段階に到達する前に、いくつかの段階を経るでしょう。
+In the context of [testing within a CI/CD pipeline, also known as shift-left testing][1], the production environment is typically the last link in the chain. Your application is likely to go through several steps before reaching this stage.
 
-{{< img src="continuous_testing/environments.png" alt="Continuous Testing は、ローカルの開発環境からステージング、本番まで、開発サイクルのすべてで使用できます。" width="100%" >}}
+{{< img src="continuous_testing/environments.png" alt="Continuous Testing can be used all along the development cycle, from the local development environment to staging to prod." width="100%" >}}
 
-[スケジュールされた Synthetic テストは、主に一般に公開された本番環境に焦点を当てます][2]が、Continuous Testing では、開発サイクル全体を通じて、デプロイされたあらゆる環境でアプリケーションをテストすることができます。
+While [scheduled Synthetic tests focus primarily on publicly available production environments][2], Continuous Testing allows you to test your application in any or all environments it's deployed in throughout the development cycle.
 
-## 複数の環境でのテスト
+## Testing in multiple environments
 
-Continuous Testing では、本番環境に対してスケジュールされたテストと同じシナリオを再利用して、一般に公開された本番前の環境をテストすることができます。
+Continuous Testing can reuse the same scenario from scheduled tests used against the production environment to test publicly available pre-production environments.
 
-[ブルーグリーンデプロイメント][3]であれ、専用のステージング環境であれ、Continuous Testing では、既存のシナリオを別の環境にルート変更することができます。詳細については、[複数環境のテスト][4]を参照してください。
+Whether it's for a [blue—green deployment][3], or a dedicated staging environment, Continuous Testing allows you to reroute an existing scenario to a different environment. For more information, see [Testing Multiple Environments][4].
 
-## プロキシ、ファイアウォール、VPN 使用中のテスト
+## Testing while using proxies, firewalls, or VPNs
 
-Continuous Testing は、プロキシ、ファイアウォール、VPN で保護されたプライベートネットワークの裏側など、開発サイクルの初期段階でアプリケーションをテストすることができます。
+Continuous Testing can test your application in the early steps of the development cycle, including behind a private network protected by a proxy, firewall, or VPN.
 
-開発環境 (開発用ラップトップなど) で稼働しているローカルサーバーにデプロイされた変更に対して、スケジュールされた Synthetic テストで同一のシナリオを実行することができます。また、CI/CD ジョブと同じ時間だけ持続する一時的な環境にデプロイされたアプリケーションを持つ CI/CD パイプラインや、プライベートなステージング環境でも同様に実行することができます。
+It can run the same scenario from scheduled Synthetic tests against changes deployed in a local server running on your development environment (such as a dev laptop), or in a CI/CD pipeline where your application is deployed in an ephemeral environment that lasts the same amount of time as the CI/CD job, or in a private staging environment.
 
-Continuous Testing は、Synthetic が管理するロケーションからプライベート環境にアクセスできるようにする[テストトンネル][5]を提供します。詳しくは、[プロキシ、ファイアウォール、VPN 使用中のテスト][6]を参照してください。
+Continuous Testing provides a [testing tunnel][5] which allows the Synthetic managed location to reach private environments. For more information, see [Testing While Using Proxies, Firewalls, or VPNs][6].
 
-## その他の参考資料
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://www.datadoghq.com/blog/shift-left-testing-best-practices/
 [2]: https://www.datadoghq.com/blog/datadog-synthetic-ci-cd-testing/
 [3]: https://en.wikipedia.org/wiki/Blue%E2%80%93green_deployment
-[4]: /ja/continuous_testing/environments/multiple_env
-[5]: /ja/continuous_testing/environments/proxy_firewall_vpn/#what-is-the-testing-tunnel
-[6]: /ja/continuous_testing/environments/proxy_firewall_vpn
+[4]: /continuous_testing/environments/multiple_env
+[5]: /continuous_testing/environments/proxy_firewall_vpn/#what-is-the-testing-tunnel
+[6]: /continuous_testing/environments/proxy_firewall_vpn

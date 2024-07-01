@@ -1,42 +1,44 @@
 ---
-aliases:
-- /ja/logs/explore/livetail
-- /ja/logs/live_tail
-description: すべてのログを検索し、ログ分析を実行します
-further_reading:
-- link: /logs/log_configuration/processors
-  tag: ドキュメント
-  text: ログの処理方法
-- link: logs/explorer/side_panel
-  tag: ドキュメント
-  text: ログサイドパネル
-- link: logs/explorer/#list-of-logs
-  tag: ドキュメント
-  text: ログのリストビュー
 title: Live Tail
+kind: documentation
+description: 'Search through all of your logs and perform Log Analytics'
+aliases:
+    - /logs/explore/livetail
+    - /logs/live_tail
+further_reading:
+    - link: /logs/log_configuration/processors
+      tag: Documentation
+      text: Learn how to process your logs
+    - link: logs/explorer/side_panel
+      tag: Documentation
+      text: The log side panel
+    - link: "logs/explorer/#list-of-logs"
+      tag: Documentation
+      text: The list view of logs
 ---
 
-## 概要
+## Overview
 
-Live Tail を使用すると、インフラストラクチャー内のどこからでもほぼリアルタイムですべてのログイベントにアクセスできます。Live Tail ビューでは、Datadog にストリーミングされるインデックス付きログと非インデックス付きログの両方を可視化します (ログインデックスの[除外フィルター][1]も参照してください)。Live Tail を経由するログはすべて、[ログパイプライン][2]により構造化され、処理され、強化されます。
+With Live Tail, access all your log events in near real time from anywhere in your infrastructure. The Live Tail view provides visibility on both indexed and non-indexed logs streaming to Datadog - see also [Exclusion Filters][1] on logs indexes. Logs flowing through the Live Tail are all structured, processed, and enriched from [Log Pipelines][2].
 
-たとえば、Live Tail はプロセスが正しい状態になっているか、また新しいデプロイがスムーズに実行されたかを確認する際に特に有用です。
+For example, Live Tail is specifically useful to check if a process has correctly started or if a new deployment went smoothly.
 
-## Live Tail ビュー
+## Live Tail view
 
-[ログエクスプローラー][3]でタイムレンジの Live Tail オプションを選択し、ログが Datadog に取り込まれる際にログのクエリを実行します。
+In the [Log Explorer][3], choose the Live Tail option in the timerange to query logs as they flow into Datadog. See [Log Search Syntax][4] for more information on queries.
 
-{{< img src="logs/explorer/live_tail/livetail.mp4" alt="Live Tail のログ出力" video=true style="width:100%;" >}}
+{{< img src="logs/explorer/live_tail/livetail.mp4" alt="Log Live Tail" video=true style="width:100%;" >}}
 
-インデックスされたログのクエリは[ログエクスプローラー][3]で行われますが、Live Tail 内のクエリでは事前に[ファセットを宣言][4]する必要は*ありません*。
+Contrary to queries on indexed logs happening in the [Log Explorer][3], queries in the Live Tail do *not* require that you [declare a facet][5] beforehand. 
 
-**注**: 可読性を確保するため、クエリに一致する流入ログが多すぎる場合は Live Tail 出力のサンプリングが行われます。サンプリングは均一かつランダムに適用されるため、Live Tail ログは統計的に実際のログスループットを表すものとなります。流入するそれぞれのログを可視化する必要がある場合は、検索フィルターを追加してクエリのスコープを絞ります。
+**Note**: For the sake of readability, the Live Tail output is sampled when too many logs matching the query are flowing in. The sampling applied is uniformly random, so that your Live Tail logs are statistically representative of your actual log throughput. Scope your query down with additional search filters if you need visibility on every single log flowing in.
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/logs/indexes#exclusion-filters
-[2]: /ja/logs/log_configuration/pipelines
-[3]: /ja/logs/explorer
-[4]: /ja/logs/explorer/facets/
+[1]: /logs/indexes#exclusion-filters
+[2]: /logs/log_configuration/pipelines
+[3]: /logs/explorer
+[4]: /logs/explorer/search_syntax/
+[5]: /logs/explorer/facets/

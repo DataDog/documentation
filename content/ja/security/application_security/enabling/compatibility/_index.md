@@ -1,13 +1,14 @@
 ---
+title: Compatibility Requirements
+kind: documentation
+type: multi-code-lang
 further_reading:
 - link: /security/application_security/troubleshooting
   tag: Documentation
-  text: Application Security Management のトラブルシューティング
+  text: Troubleshooting Application Security Management
 - link: /security/application_security/how-appsec-works/
   tag: Documentation
-  text: Datadog における Application Security Management の仕組み
-title: 互換性要件
-type: multi-code-lang
+  text: How Application Security Management Works in Datadog
 ---
 
 {{% asm-libraries-capabilities %}}
@@ -16,6 +17,7 @@ type: multi-code-lang
 
 <br>
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+

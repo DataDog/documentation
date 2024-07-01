@@ -1,43 +1,44 @@
 ---
-title: デプロイメント不良の自動検出
+title: Automatic Faulty Deployment Detection
+kind: documentation
 ---
 
-## 概要
+## Overview
 
-デプロイメント不良の自動検出により、欠陥のあるコードのデプロイメントを数分以内に検出し、平均検出時間 (MTTD) を短縮します。コードがデプロイされるたびに、Watchdog は新しいコードバージョンのパフォーマンスを以前のバージョンと比較し、デプロイで発生した新しいタイプのエラーやエラー率の上昇を検出します。Watchdog が新しいデプロイメントに欠陥があると判断した場合、影響を受けるサービスの詳細が APM サービスページと、影響を受けるエンドポイントのリソースページにも表示されます。
+Automatic Faulty Deployment Detection finds faulty code deployments within minutes, reducing mean time to detection (MTTD). Whenever code is deployed, Watchdog compares the performance of the new code version with previous versions to spot new types of errors or increases in error rates introduced in a deployment. If Watchdog determines that a new deployment is faulty, details about the affected service appears on the APM service page, as well as the resource page of the affected endpoints.
 
-Watchdog が現在アクティブなバージョンに不具合があることを検出した場合、サービス詳細ページの上部にピンク色のバナーが表示されます。これは下のスクリーンショットで確認できます。画面下部の Deployments テーブルは、そのサービスのデプロイメントの履歴を表示しており、Watchdog が過去に不具合を発見したバージョンも示しています。
+When Watchdog finds that a currently active version is faulty, this is indicated by a pink banner at the top of the service details page, as in the screenshot below. The Deployments table at the bottom of the screen, which presents a history of deployments for the service, also indicates which versions Watchdog found to be faulty in the past.
 
-{{< img src="watchdog/faulty_deployment_redesigned_cropped.png" alt="APM サービスページ。上部にピンク色のバナー、下部にデプロイメントのテーブルが表示されます" >}}
+{{< img src="watchdog/faulty_deployment_redesigned_cropped.png" alt="The APM service page showing the pink banner at the top and deployments table at the bottom" >}}
 
-バナーの **View Details** をクリックすると、欠陥のあるデプロイメントに関する追加情報が表示されたスライドアウトパネルが開きます。このビューには、欠陥のあるデプロイメントに関する次のような詳細情報が表示されます。
+Click **View Details** in the banner to open a slide-out panel with additional information about the faulty deployment. This view provides details about the faulty deployment, which can include the following:
 
-- エラー率の上昇に関するグラフ
-- 新たに検出されたエラーの種類
-- 影響を受けたエンドポイント
-- HTTP ステータスコード
+- Graphs of error rate increases
+- The error type of newly detected errors
+- The affected endpoint
+- The HTTP status code
 
-このビューは、Deployments テーブルの任意のバージョンをクリックしてアクセスすることもできます。以下のスクリーンショットはこの詳細表示の例で、エラータイプ `db.utils.OperationalError` が ` /inventory` エンドポイントに影響し、HTTP ステータスコード `(500)` が表示されていることを示しています。
+This view can also be accessed by clicking on any version in the Deployments table. The screenshot below gives an example of this detailed view, in which the error type `db.utils.OperationalError` is affecting the ` /inventory` endpoint, resulting in HTTP status code `(500)`.
 
-{{< img src="watchdog/faulty_deployment_details_redesigned_cropped.png" alt="欠陥のあるデプロイメントの追跡詳細パネル" >}}
+{{< img src="watchdog/faulty_deployment_details_redesigned_cropped.png" alt="The faulty deployment tracking details panel" >}}
 
-欠陥のあるデプロイメントが検出されると、Watchdog はこれを[イベントエクスプローラー][2]にイベントとして追加します。このようなイベントで自動的に通知されるようにモニターを設定することができます。これを行うには、[New Monitors][3] ページに移動して、**Events** を選択し、モニターを定義する検索クエリに `tags:deployment_analysis` を含めます。
+Whenever a faulty deployment is detected, Watchdog adds this as an event in the [Event Explorer][2]. You can set up a monitor to get automatically notified on such events. To do so, navigate to the [New Monitors][3] page and choose **Events**, and include `tags:deployment_analysis` in the search query defining the monitor.
 
-また、**Suggested Monitors** ボタンをクリックし、次に **Enable** をクリックすることでもモニターを有効にすることができます。Suggested Monitors ボタンは、サービスにまだモニターが構成されていない場合のみ利用可能です。このボタンがない場合は、上記の手順で [New Monitors][3] のページからモニターを作成してください。
+You can also enable the monitor by clicking the **Suggested Monitors** button, and then **Enable**. The Suggested Monitors button is only available if the service does not yet have a monitor configured. If the button is not available, follow the instruction above to create the monitor from the [New Monitors][3] page.
 
-各デプロイは繰り返し分析されます。同じ欠陥のあるデプロイの再アラートを防ぐために、Datadog ではモニターの回復時間を 60 分に設定することを推奨しています。
+Each deployment is repeatedly analyzed. To prevent re-alerting of the same faulty deployment, Datadog recommends setting a recovery time of 60 min for the monitor.
 
-{{< img src="watchdog/faulty_deployment_suggested_monitors_redesigned_cropped.png" alt="APM サービスページと Suggested Monitors ボタン" >}}
+{{< img src="watchdog/faulty_deployment_suggested_monitors_redesigned_cropped.png" alt="The APM service page with the Suggested Monitors button" >}}
 
-### エラーがあるにもかかわらず、新しいデプロイメントに欠陥のフラグが立たないのはなぜですか？
+### Why did a new deployment not get flagged as faulty, despite having errors?
 
-Watchdog は、新しいデプロイメントがエラーのもっともな原因であるかどうかを判断しようとします。以下の理由の組み合わせにより、そうでないと判断されることがあります。
+Watchdog attempts to determine if the new deployment is a plausible cause of the errors. It may determine that this is not the case, due to any combination of the following reasons:
 
-- この種のエラーは、以前のバージョンや最近のデプロイメントで発生したものであり、新しいものではないようです。
-- この種のエラーは少なく、一過性のものであり、新しいバージョンのまま時間が経つと消えてしまいます。
-- 最近の履歴の中に十分な過去のデプロイメントがなかったため、Watchdog が分析のベースラインを確立することができませんでした。
-- 新しいバージョンのエラー率は、以前のバージョンに比べて有意に高いわけではありませんでした。
-- このエラーパターンは、たとえ新しいコードバージョンに欠陥がなくても、サービスをデプロイする際に一般的です。
+- Errors of this type do not appear to be new; they appear either in preceding versions or during recent deployments.
+- Errors of this type are few and transient, disappearing over time even as the new version remains in place.
+- There were not enough previous deployments in the recent history for Watchdog to establish a baseline for the analysis.
+- The error rate in the new version was not significantly higher than in preceding versions.
+- This error pattern is common during deployments of the service, even when the new code version is not faulty.
 
-[2]: /ja/service_management/events/explorer
+[2]: /service_management/events/explorer
 [3]: https://app.datadoghq.com/monitors/create

@@ -1,75 +1,75 @@
 ---
+title: Okta SAML IdP
 aliases:
-- /ja/account_management/faq/how-do-i-configure-okta-as-a-saml-idp/
+  - /account_management/faq/how-do-i-configure-okta-as-a-saml-idp/
 further_reading:
 - link: /account_management/saml/
   tag: Documentation
-  text: Datadog アカウントのための SAML の構成
+  text: Configure SAML for your Datadog account
 - link: /account_management/multi_organization/
   tag: Documentation
-  text: 複数のアカウントを持つチームとオーガニゼーションの構成
-title: Okta SAML IdP
+  text: Configuring Teams & Organizations with Multiple Accounts
 ---
 
-## セットアップ
+## Setup
 
-Okta の[カスタム SAML アプリのインテグレーションを作成する][1]手順に従って、Okta を SAML IdP として構成します。
+Follow Okta's [Create custom SAML app integrations][1] instructions to configure Okta as a SAML IdP.
 
-**注**: Okta アプリケーションとして Datadog を手動でセットアップしてください。あらかじめ構成されている Datadog アプリケーションは使用しないでください。
+**Note**: Set up Datadog as an Okta application manually. Do not use the preconfigured Datadog application.
 
 {{% site-region region="us" %}}
 
-**注**: US1 のお客様は、Okta の[既存のアプリインテグレーションの追加][7]手順でプリセット構成を使用して、Okta を SAML IdP として構成することができます。[Okta Integration Network (OIN)][2] であらかじめ構成された最新の Datadog アプリケーションを使用してください。
+**Note**: US1 customers can use the preset configuration in Okta's [add existing app integrations][7] instructions to configure Okta as a SAML IdP. Use the latest preconfigured Datadog application in the [Okta Integration Network (OIN)][2].
 
 [7]: https://help.okta.com/en-us/content/topics/apps/apps-add-applications.htm
 [2]: https://www.okta.com/integrations/
 {{% /site-region %}}
 
-## 一般設定の詳細
+## General details
 
-| Okta IDP 入力フィールド        | 予測値                                                                                                                 |
+| Okta IDP Input Field        | Expected Value                                                                                                                 |
 |-----------------------------|--------------------------------------------------------------------------------------------------------------------------------|
-| シングルサインオン URL          | Assertion Consumer Service URL (この URL は [Configure SAML ページ][3]の *Assertion Consumer Service URL* フィールドで確認できます) |
-| Recipient URL               | Assertion Consumer Service URL (または *Use this for Recipient URL and Destination URL* チェックボックスをオンにします)                        |
-| Destination URL             | Assertion Consumer Service URL (または *Use this for Recipient URL and Destination URL* チェックボックスをオンにします)                        |
-| Audience URI (SP Entity ID) | サービスプロバイダーのエンティティ ID (この ID は [Configure SAML ページ][3]の *Service Provider Entity ID* フィールドで確認できます)         |
+| Single Sign On URL          | Assertion Consumer Service URL (Find this URL on the [Configure SAML page][3], in the *Assertion Consumer Service URL* field.) |
+| Recipient URL               | Assertion Consumer Service URL (or click the *Use this for Recipient URL and Destination URL* checkbox)                        |
+| Destination URL             | Assertion Consumer Service URL (or click the *Use this for Recipient URL and Destination URL* checkbox)                        |
+| Audience URI (SP Entity ID) | Service Provider Entity ID (Find this ID on the [Configure SAML page][3], in the *Service Provider Entity ID* field.)         |
 | Name ID Format              | EmailAddress                                                                                                                   |
-| 応答                    | Signed                                                                                                                         |
+| Response                    | Signed                                                                                                                         |
 | Assertion Signature         | Signed                                                                                                                         |
 | Signature Algorithm         | SHA256                                                                                                                         |
-| Assertion Encryption        | アサーションは暗号化できますが、暗号化されていないアサーションも許可されます。                                                     |
+| Assertion Encryption        | Assertions can be encrypted, but unencrypted assertions are also accepted.                                                     |
 | SAML Single Logout          | Disabled                                                                                                                       |
 | authnContextClassRef        | PasswordProtectedTransport                                                                                                     |
-| Honor Force Authentication  | はい                                                                                                                            |
+| Honor Force Authentication  | Yes                                                                                                                            |
 | SAML Issuer ID              | `http://www.okta.com/${org.externalKey}`                                                                                       |
 
-## 属性ステートメントの詳細
+## Attribute statements details
 
-| 名前       | 名前形式 (オプション) | 値                                             |
+| Name       | Name Format (optional) | Value                                             |
 |------------|------------------------|---------------------------------------------------|
-| NameFormat | URI リファレンス          | `urn:oasis:names:tc:SAML:2.0:attrname-format:uri` |
-| sn         | URI リファレンス          | `user.lastName`                                   |
-| givenName  | URI リファレンス          | `user.firstName`                                  |
+| NameFormat | URI Reference          | `urn:oasis:names:tc:SAML:2.0:attrname-format:uri` |
+| sn         | URI Reference          | `user.lastName`                                   |
+| givenName  | URI Reference          | `user.firstName`                                  |
 
-## グループ属性ステートメント (オプション)
+## Group attribute statements (optional)
 
-これは [AuthN Mapping][4] を使用している場合にのみ必要です。
+This is required only if you are using [AuthN Mapping][4].
 
-| 名前     | 名前形式 (オプション) | 値                                                                                                                     |
+| Name     | Name Format (optional) | Value                                                                                                                     |
 |----------|------------------------|---------------------------------------------------------------------------------------------------------------------------|
-| memberOf | 指定なし            | 正規表現 `.*` に一致 (このメソッドはすべてのグループを取得します。お使いのユースケースに適合しない場合は IDP 管理者にお問い合わせください) |
+| memberOf | Unspecified            | Matches regex `.*` (This method retrieves all groups. Contact your IDP administrator if this does not fit your use case.) |
 
 
-Datadog アカウントの SAML 構成の詳細については、[SAML に関するドキュメントページ][5]を参照してください。
+Additional information on configuring SAML for your Datadog account is available on the [SAML documentation page][5].
 
-Okta でアプリケーションの構成が完了する前に `IDP.XML` ファイルを Datadog にアップロードする必要がある場合は、[SAML テンプレートアプリ用の idp.xml メタデータファイルの取得に関する記事][6]で、フィールドプレースホルダーの説明を参照してください。
+In the event that you need to upload an `IDP.XML` file to Datadog before being able to fully configure the application in Okta, see [acquiring the idp.xml metadata file for a SAML template App article][6] for field placeholder instructions.
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://help.okta.com/en-us/Content/Topics/Apps/Apps_App_Integration_Wizard_SAML.htm?cshid=ext_Apps_App_Integration_Wizard-saml
 [3]: https://app.datadoghq.com/saml/saml_setup
-[4]: /ja/account_management/saml/mapping
-[5]: /ja/account_management/saml/
+[4]: /account_management/saml/mapping
+[5]: /account_management/saml/
 [6]: https://support.okta.com/help/s/article/How-do-we-download-the-IDP-XML-metadata-file-from-a-SAML-Template-App

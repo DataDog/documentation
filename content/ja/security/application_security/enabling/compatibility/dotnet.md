@@ -1,90 +1,92 @@
 ---
+title: .NET Compatibility Requirements
+kind: documentation
 code_lang: dotnet
-code_lang_weight: 10
-title: .NET 互換性要件
 type: multi-code-lang
+code_lang_weight: 10
 ---
 
-## ASM の機能サポート
+## Application Security capabilities support
 
-.NET ライブラリでは、指定されたトレーサーのバージョンで、以下の ASM 機能がサポートされています。
+The following application security capabilities are supported in the .NET library, for the specified tracer version:
 
-| ASM の機能                   | .NET トレーサーの最小バージョン |
+| Application Security capability  | Minimum .NET tracer version |
 | -------------------------------- | ----------------------------|
 | Threat Detection | 2.23.0|
 | Threat Protection  | 2.26.0|
-| ブロックされたリクエストへの対応をカスタマイズする | 2.27.0 |
-| Vulnerability Management for Open Source Software (OSS) |  2.16.0  |
-| Vulnerability Management for Code-level (ベータ版)| 2.42.0  |
-| ユーザーアクティビティイベントの自動追跡 | 2.32.0 |
+| Customize response to blocked requests | 2.27.0 |
+| Software Composition Analysis (SCA) |  2.16.0  |
+| Code Security  | 2.42.0  |
+| Automatic user activity event tracking | 2.32.0 |
+| API Security | 2.42.0 |
 
-.NET でサポートされるすべての ASM 機能を得るためのトレーサーの最小バージョンは 2.42.0 です。
+The minimum tracer version to get all supported application security capabilities for .NET is 2.42.0.
 
-**注**: Threat Protection を使用するには、[リモート構成][3]を有効にする必要があり、これはリストされている最小トレーサーバージョンに含まれています。
+**Note**: Threat Protection requires enabling [Remote Configuration][3], which is included in the listed minimum tracer version.
 
-### サポートされるデプロイメントタイプ
-|タイプ   | Threat Detection のサポート |  OSS の脆弱性管理のサポート |
-| ---   |   ---             |           ----        |
-| Docker | {{< X >}}  | {{< X >}} |
-| トレーシング | {{< X >}}  | {{< X >}} |
-| Amazon ECS | {{< X >}}  | {{< X >}} |
-| AWS Fargate | {{< X >}}  | {{< X >}} |
-| AWS Lambda | {{< X >}} | |
-| Azure App Service | {{< X >}}  | {{< X >}} |
+### Supported deployment types
+| Type              | Threat Detection support | Software Composition Analysis            |
+|-------------------|--------------------------|------------------------------------------|
+| Docker            | {{< X >}}                | {{< X >}}                                |
+| Kubernetes        | {{< X >}}                | {{< X >}}                                |
+| Amazon ECS        | {{< X >}}                | {{< X >}}                                |
+| AWS Fargate       | {{< X >}}                | {{< X >}}                                |
+| AWS Lambda        | {{< X >}}                |                                          |
+| Azure App Service | {{< X >}}                | {{< X >}}                                |
 
-**注**: Azure App Service は **Web アプリケーションでのみ**サポートされています。ASM は Azure Functions をサポートしていません。
+**Note**: Azure App Service is supported for **web applications only**. Application Security capabilities are not supported for Azure Functions.
 
-## 言語とフレームワークの互換性
+## Language and framework compatibility
 
-### サポートされている .NET バージョン
+### Supported .NET versions
 
-| .NET Framework バージョン  | マイクロソフトサポート終了 | サポートレベル                       | パッケージバージョン             |
+| .NET Framework Version  | Microsoft End of Life | Support level                       | Package version             |
 | ----------------------- | --------------------- | ----------------------------------- | --------------------------- |
-| 4.8                     |                       | GA   | 最新                      |
-| 4.7.2                   |                       | GA | 最新                      |
-| 4.7                     |                       | GA | 最新                      |
-| 4.6.2                   |                       | GA | 最新                      |
-| 4.6.1                   | 04/26/2022            | GA   | 最新 |
+| 4.8                     |                       | GA   | latest                      |
+| 4.7.2                   |                       | GA | latest                      |
+| 4.7                     |                       | GA | latest                      |
+| 4.6.2                   |                       | GA | latest                      |
+| 4.6.1                   | 04/26/2022            | GA   | latest |
 
 
-これらは、以下のアーキテクチャでサポートされています。
-- Linux (GNU) x86-64、ARM64
-- Alpine Linux (musl) x86-64、ARM64
-- macOS (Darwin) x86-64、ARM64
-- Windows (msvc) x86、x86-64
+These are supported on the following architectures:
+- Linux (GNU) x86-64, ARM64
+- Alpine Linux (musl) x86-64, ARM64
+- macOS (Darwin) x86-64, ARM64
+- Windows (msvc) x86, x86-64
 
 
 
-### Web フレームワークの互換性
+### Web framework compatibility
 
-- 攻撃元の HTTP リクエストの詳細
-- HTTP リクエスト用のタグ (ステータスコード、メソッドなど)
-- アプリケーション内の攻撃フローを確認するための分散型トレーシング
+- Attacker source HTTP request details
+- Tags for the HTTP request (status code, method, etc)
+- Distributed Tracing to see attack flows through your applications
 
-##### ASM の機能に関する備考
-- **Vulnerability Management for OSS** はすべてのフレームワークでサポートされています。
-- ご利用のフレームワークが下記に掲載されていない場合でも、**Vulnerability Management for Code-level** が危険な Cookie の脆弱性を検知します。
+##### Application Security Capability Notes
+- **Software Composition Analysis** is supported on all frameworks.
+- If your framework is not listed below, **Code Security** will still detect Insecure Cookie vulnerabilities.
 
 
-| フレームワーク                  | Threat Detection のサポートの有無 | Threat Detection のサポートの有無 | Vulnerability Management for Code-level のサポートの有無 |
+| Framework                  | Threat Detection supported? | Threat Protection supported? | Code Security? |
 | ----------------------- | --------------- | ---------------------------------------------- | ---------------------------------------------- |
 | ASP.NET MVC | {{< X >}}  |{{< X >}}  | {{< X >}} |
 | ASP.NET Web API 2 | {{< X >}} | {{< X >}} | {{< X >}}  |
 
-<div class="alert alert-info">ご希望のフレームワークが掲載されていない場合は、お知らせください！<a href="https://forms.gle/gHrxGQMEnAobukfn7">この短いフォーム</a>に必要事項を記入して、詳細を送信してください。</div>
+<div class="alert alert-info">If you don't see your framework of choice listed, let us know! Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send details</a>.</div>
 
-### データストアの互換性
+### Data store compatibility
 
-**データストアのトレーシングでは以下の確認が可能です**
+**Datastore tracing provides:**
 
-- SQL 攻撃の検知
-- クエリ情報 (サニタイジングされたクエリ文字列など)
-- エラーとスタックトレースの取得
+- SQL attack detection
+- query info (for example, a sanitized query string)
+- error and stacktrace capturing
 
-##### ASM の機能に関する備考
-- **Threat Protection** は HTTP リクエスト (input) レイヤーでも機能するため、下表に掲載されていなくても、デフォルトですべてのデータベースで機能します。
+##### Application Security Capability Notes
+- **Threat Protection** also works at the HTTP request (input) layer, and so works for all databases by default, even those not listed in the table below.
 
-| フレームワーク         | Threat Detection のサポートの有無    | Threat Detection のサポートの有無 | Vulnerability Management for Code-level のサポートの有無 |
+| Framework         | Threat Detection supported?    | Threat Protection supported? | Code Security? |
 |-------------------|-----------------|---------------------|---|
 | OracleDB         | {{< X >}} |   {{< X >}}    |{{< X >}}    |
 | ADO.NET         | {{< X >}} |   {{< X >}}    |{{< X >}}    |
@@ -92,18 +94,18 @@ type: multi-code-lang
 | MySQL       | {{< X >}} |   {{< X >}}    |{{< X >}}    |
 | SQLite         | {{< X >}} |   {{< X >}}    |{{< X >}}    |
 
-### User Authentication Frameworks の互換性
+### User Authentication Frameworks compatibility
 
-**User Authentication Frameworks へのインテグレーションは以下を提供します。**
+Integrations to **User Authentication Frameworks provides:**
 
-- ユーザー ID を含むユーザーログインイベント
-- ユーザーサインアップイベント (組み込みの SignInManager を使用するアプリ)
-- ユーザーログインイベントのアカウント乗っ取り検出モニタリング
+- User login events including the user IDs
+- User signup events (apps using built-in SignInManager)
+- Account Takeover detection monitoring for user login events
 
-| フレームワーク         |
+| Framework         |
 |-------------------|
 | > .Net Core 2.1   |
 
-[1]: /ja/tracing/trace_collection/compatibility/dotnet-core/
-[2]: /ja/tracing/trace_collection/compatibility/dotnet-framework/
-[3]: /ja/agent/remote_config/#enabling-remote-configuration
+[1]: /tracing/trace_collection/compatibility/dotnet-core/
+[2]: /tracing/trace_collection/compatibility/dotnet-framework/
+[3]: /agent/remote_config/#enabling-remote-configuration

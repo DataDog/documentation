@@ -1,151 +1,166 @@
 ---
+title: Node.js Compatibility Requirements
+kind: documentation
 code_lang: nodejs
-code_lang_weight: 50
-title: Node.js 互換性要件
 type: multi-code-lang
+code_lang_weight: 50
 ---
 
-## ASM の機能
+## Application Security capabilities
 
-Node.js ライブラリでは、指定されたトレーサーのバージョンで、以下の ASM 機能がサポートされています。
+The following application security capabilities are supported in the Node.js library, for the specified tracer version:
 
-| ASM の機能                   | NodeJS  トレーサーの最小バージョン |
-| -------------------------------- | ----------------------------|
-| Threat Detection  | 3.13.1|
-| Threat Protection  | 3.19.0  |
-| オープンソースソフトウェア (OSS) の脆弱性管理 |  NodeJS 12+ の場合は 2.23.0、NodeJS 14+ の場合は 3.10.0 |
-| コードレベルの脆弱性管理 (ベータ版)  | NodeJS 12+ の場合は 2.32.0、NodeJS 14+ の場合は 3.19.0 |
+| Application Security capability                         | Minimum NodeJS tracer version                      |
+|----------------------------------------|----------------------------------------------------|
+| Threat Detection                       | 4.0.0                                              |
+| Threat Protection                      | 4.0.0                                              |
+| Customize response to blocked requests | 4.1.0                                              |
+| Software Composition Analysis (SCA)    | 4.0.0                                              |
+| Code Security                          | 4.18.0 for Node.js 16+, or 5.0.0 for Node.js 18+   |
+| Automatic user activity event tracking | 4.4.0 for Node.js 16+                              |
+| API Security                           | 4.30.0 for Node.js 16+, or 5.6.0 for Node.js 18+   |
 
-Node.js でサポートされるすべての ASM 機能を得るためのトレーサーの最小バージョンは 3.19.0 です。
-
-
-**注**:
-- Threat Protection では、[リモート構成][2]を有効にする必要があり、これは記載のトレーサーの最小バージョンに含まれています。
-
-### サポートされるデプロイメントタイプ
-|タイプ | 脅威検知のサポート | OSSの脆弱性管理のサポート |
-| ---           |   ---             |           ----            |
-| Docker        | {{< X >}}         | {{< X >}}                 |
-| Kubernetes    | {{< X >}}         | {{< X >}}                 | 
-| AWS ECS       | {{< X >}}         | {{< X >}}                 |
-| AWS Fargate   | {{< X >}}         | {{< X >}}                 |
-| AWS Lambda    | {{< X >}}         | beta                      |   
-
-## 言語とフレームワークの互換性
-
-### Node.js のバージョンサポート
-
-Node.js プロジェクトが LTS のメジャーリリースラインのサポートを終了すると (End of Life になると)、次のメジャーバージョンの `dd-trace` でそのサポートが停止されます。
-`dd-trace` ライブラリの最後のメジャーサポートリリースラインは、メンテナンスモードベースで、少なくともあと 1 年間はその EOL バージョンの Node.js をサポートします。
-
-いくつかの問題は `dd-trace` で解決できず、代わりに Node.js で解決しなければなりません。このような場合、問題のある Node.js のリリースが EOL であれば、EOL ではない別のリリースに移行しなければ問題を解決することは不可能です。
-Datadog は、LTS でない Node.js のメジャーリリースライン (奇数バージョン) に対する特定のサポートを提供するために、`dd-trace` の新しいリリースを作成することはありません。
-
-最高のサポートレベルを得るためには、常に最新の LTS リリースの Node.js と、最新のメジャーバージョンの `dd-trace` を実行します。Node.js のどのリリースラインを使用する場合でも、最新のセキュリティ修正を確実に行うために、そのリリースラインの最新バージョンの Node.js を使用します。
-
-Node.js のリリースについては、[Node.js の公式ドキュメント][4]を参照してください。
+The minimum tracer version to get all supported application security capabilities for Node.js is 4.30.0.
 
 
+**Note**:
+- Threat Protection requires enabling [Remote Configuration][2], which is included in the listed minimum tracer version.
 
-### オペレーティングシステム対応
+### Supported deployment types
+| Type        | Threat Detection support | Software Composition Analysis |
+|-------------|--------------------------|-------------------------------|
+| Docker      | {{< X >}}                | {{< X >}}                     |
+| Kubernetes  | {{< X >}}                | {{< X >}}                     |
+| Amazon ECS  | {{< X >}}                | {{< X >}}                     |
+| AWS Fargate | {{< X >}}                | {{< X >}}                     |
+| AWS Lambda  | {{< X >}}                | beta                          |
 
-以下のオペレーティングシステムが `dd-trace` によって公式にサポートされています。リストにないオペレーティングシステムも動作する可能性はありますが、例えば ASM やプロファイリング、ランタイムメトリクスなど、いくつかの機能が欠けています。一般的には、メジャーバージョンの最初のリリース時に活発にメンテナンスされているオペレーティングシステムがサポートされます。
+## Language and framework compatibility
 
+### Node.js Version Support
 
-| dd-trace バージョン    | オペレーティングシステム      | アーキテクチャ         | 最小バージョン                         |
-| ------------------- | --------------------- | --------------------- | ---------------------------------------- |
-| 3.x                 | Linux (glibc)         | arm64、x64       | CentOS 7、Debian 9、RHEL 7、Ubuntu 14.04 |
-|                     | Linux (musl)          | arm64、x64       | Alpine 3.13                              |
-|                     | macOS                 | arm64、x64            | Catalina (10.15)                         |
-|                     | Windows               | x64             | Windows 8.1、Windows Server 2012         |
-| 2.x                 | Linux (glibc)         | arm64、x64 | CentOS 7、Debian 9、RHEL 7、Ubuntu 14.04 |
-|                     | Linux (musl)          | arm64、x64 | Alpine 3.10                              |
-|                     | macOS                 | arm64、x64            | Yosemite (10.10)                         |
-|                     | Windows               |  x64             | Windows 8.1、Windows Server 2012         |
+When the Node.js project drops support for an LTS major release line (when it goes End of Life), support for it is dropped in the next major version of `dd-trace`.
+The last major supporting release line of `dd-trace` library supports that EOL version of Node.js for at least another year on a maintenance mode basis.
+
+Some issues cannot be solved in `dd-trace` and instead must be solved in Node.js. When this happens and the Node.js release in question is EOL, it's not possible to solve the issue without moving to another non-EOL release.
+Datadog does not make new releases of `dd-trace` to provide specific support for non-LTS Node.js major release lines (odd numbered versions).
+
+For the best level of support, always run the latest LTS release of Node.js, and the latest major version of `dd-trace`. Whatever release line of Node.js you use, also use the latest version of Node.js on that release line, to ensure you have the latest security fixes.
+
+For more information about Node.js release, see the [official Node.js documentation][4].
 
 
 
+### Operating system support
+
+The following operating systems are officially supported by `dd-trace`. Any operating system not listed is still likely to work, but with some features missing, for example application security capabilities, profiling, and runtime metrics. Generally speaking, operating systems that are actively maintained at the time of initial release for a major version are supported.
 
 
-### Web フレームワークの互換性
-
-- 攻撃元の HTTP リクエストの詳細
-- HTTP リクエスト用のタグ (ステータスコード、メソッドなど)
-- アプリケーション内の攻撃フローを確認するための分散トレーシング
-
-##### ASM の機能に関する備考
-- **Vulnerability Management for OSS** はすべてのフレームワークでサポートされています
-- お使いのフレームワークが以下にリストされていない場合でも、**Vulnerability Management for Code** は Weak Cipher、Weak Hashing、Insecure Cookie、Cookie without HttpOnly Flag、Cookie without SameSite Flag の脆弱性は検知します。
-
-
-| フレームワーク                  | バージョン   | 脅威検知のサポートの有無 | 脅威保護のサポートの有無 | コードレベルの脆弱性管理のサポートの有無 |
-| ----------------------- | ---------- | --------------- | ---------------------------------------------- | ---------------------------------------------- |
-| express | >=4| {{< X >}}  |{{< X >}}  | {{< X >}} |
+| Operating System | Architectures | Minimum Versions                         |
+|------------------|---------------|------------------------------------------|
+| Linux (glibc)    | arm64, x64    | CentOS 7, Debian 9, RHEL 7, Ubuntu 14.04 |
+| Linux (musl)     | arm64, x64    | Alpine 3.13                              |
+| macOS            | arm64, x64    | Catalina (10.15)                         |
+| Windows          | x64           | Windows 8.1, Windows Server 2012         |
 
 
 
 
 
-<div class="alert alert-info">サポートされていない機能または Node.js フレームワークのサポート追加を希望される場合は、お知らせください！<a href="https://forms.gle/gHrxGQMEnAobukfn7">この短いフォーム</a>に必要事項を記入して、詳細を送信してください。</div>
+### Web framework compatibility
+
+- Attacker source HTTP request details
+- Tags for the HTTP request (status code, method, etc)
+- Distributed Tracing to see attack flows through your applications
+
+##### Application Security Capability Notes
+- **Software Composition Analysis** is supported on all frameworks
+- If your framework is not listed below, **Code Security** will still detect Weak Cipher, Weak Hashing, Insecure Cookie, Cookie without HttpOnly Flag, and Cookie without SameSite Flag vulnerabilities.
 
 
-### ネットワーキングフレームワークの互換性
-
-
-**ネットワーキングのトレーシングでは以下の確認が可能です**
-
-- アプリケーションの分散トレーシング
-- リクエストベースのブロッキング
-
-##### ASM の機能に関する備考
-- **Vulnerability Management for OSS** はすべてのフレームワークでサポートされています
+| Framework | Versions | Threat Detection supported? | Threat Protection supported? | Code Security? |
+|-----------|----------|-----------------------------|------------------------------|----------------------------------------------------|
+| express   | >=4      | {{< X >}}                   | {{< X >}}                    | {{< X >}}                                          |
+| nextjs    | >=11.1   | {{< X >}}                   |                              |                                                    |
 
 
 
-| フレームワーク                | 脅威検知のサポートの有無 | 脅威保護のサポートの有無 | コードレベルの脆弱性管理のサポートの有無 |
-| ------------------------ | ----------- | --------------- | ---------------------------------------------- |
-| http    |  {{< X >}} |  {{< X >}}  |  {{< X >}}  |
-| https   |  {{< X >}} |  {{< X >}} |  |
 
 
-<div class="alert alert-info">ご希望のフレームワークが掲載されていない場合は、お知らせください！<a href="https://forms.gle/gHrxGQMEnAobukfn7">この短いフォーム</a>に必要事項を記入して、詳細を送信してください。</div>
-
-### データストアの互換性
+<div class="alert alert-info">If you would like to see support added for any of the unsupported capabilities or for your Node.js framework, let us know! Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send details</a>.</div>
 
 
-**データストアのトレーシングでは以下の確認が可能です**
-
-- リクエストの応答タイミング
-- クエリ情報 (サニタイジングされたクエリ文字列など)
-- エラーとスタックトレースの取得
-
-##### ASM の機能に関する備考
-- **Vulnerability Management for OSS** はすべてのフレームワークでサポートされています
-- **脅威保護** は HTTP リクエスト (input) レイヤーでも機能するため、下表に掲載されていなくても、デフォルトですべてのデータベースで機能します。
+### Networking framework compatibility
 
 
-| フレームワーク                 | バージョン | 脅威検知のサポートの有無 | 脅威保護のサポートの有無 | コードレベルの脆弱性管理のサポートの有無 |
-| ----------------------- | ---------- | --------------- | ---------------------------------------------- | ---------------------------------------------- |
-| [cassandra-driver][28] | `3 以降`    |{{< X >}}|{{< X >}} |          |
-| [couchbase][29]        | `2.4.2 以降` |{{< X >}}|          |          |
-| [elasticsearch][30]    | `10 以降`   |{{< X >}}|          |          |
-| [ioredis][31]          | `2 以降`    |{{< X >}}|{{< X >}} |          |
-| [knex][32]             | `0.8 以降`  |{{< X >}}|{{< X >}} |          |
-| [mariadb][5]           | `3 以降`    |{{< X >}}|{{< X >}} |          |
-| [memcached][33]        | `2.2 以降`  |{{< X >}}|{{< X >}} |          |
-| [mongodb-core][34]     | `2 以降`    |{{< X >}}|{{< X >}} |          |
-| [mysql][35]            | `2 以降`    |{{< X >}}|          |{{< X >}} |
-| [mysql2][36]           | `1 以降`    |{{< X >}}|{{< X >}} |{{< X >}} |
-| [oracledb][37]         | `>=5`    |{{< X >}}|{{< X >}} |          |
-| [pg][38]               | `4 以降`    |{{< X >}}|{{< X >}} |{{< X >}} |
-| [redis][39]            | `0.12 以降` |{{< X >}}|{{< X >}} |          |
-| [sharedb][40]          | `1 以降`    |{{< X >}}|{{< X >}} |          |
-| [tedious][41]          | `1 以降`    |{{< X >}}|{{< X >}} |          |
-| [sequelize][42]        | `4 以降`    |         |          | {{< X >}}|
+**Networking tracing provides:**
+
+- Distributed tracing through your applications
+- Request-based blocking
+
+##### Application Security Capability Notes
+- **Software Composition Analysis**  is supported on all frameworks
 
 
-[1]: /ja/tracing/trace_collection/compatibility/nodejs/
-[2]: /ja/agent/remote_config/#enabling-remote-configuration
+
+| Framework | Threat Detection supported? | Threat Protection supported? | Code Security? |
+|-----------|-----------------------------|------------------------------|----------------------------------------------------|
+| http      | {{< X >}}                   | {{< X >}}                    | {{< X >}}                                          |
+| https     | {{< X >}}                   | {{< X >}}                    | {{< X >}}                                          |
+
+
+<div class="alert alert-info">If you don't see your framework of choice listed, let us know! Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send details</a>.</div>
+
+### Data store compatibility
+
+
+**Datastore tracing provides:**
+
+- Timing request to response
+- Query info (for example, a sanitized query string)
+- Error and stacktrace capturing
+
+##### Application Security Capability Notes
+- **Software Composition Analysis**  is supported on all frameworks
+- **Threat Protection** also works at the HTTP request (input) layer, and so works for all databases by default, even those not listed in the table below.
+
+
+| Framework                | Versions  | Threat Detection supported? | Threat Protection supported? | Code Security? |
+|--------------------------|-----------|-----------------------------|------------------------------|----------------------------------------------------|
+| [@apollo/server][43]     | `>=4`     | {{< X >}}                   | {{< X >}}                    |                                                    |
+| [apollo-server-core][44] | `>=3`     | {{< X >}}                   | {{< X >}}                    |                                                    |
+| [cassandra-driver][28]   | `>=3`     | {{< X >}}                   | {{< X >}}                    |                                                    |
+| [couchbase][29]          | `^2.4.2`  | {{< X >}}                   | {{< X >}}                    |                                                    |
+| [elasticsearch][30]      | `>=10`    | {{< X >}}                   | {{< X >}}                    |                                                    |
+| [ioredis][31]            | `>=2`     | {{< X >}}                   | {{< X >}}                    |                                                    |
+| [knex][32]               | `>=0.8`   | {{< X >}}                   | {{< X >}}                    |                                                    |
+| [mariadb][5]             | `>=3`     | {{< X >}}                   | {{< X >}}                    |                                                    |
+| [memcached][33]          | `>=2.2`   | {{< X >}}                   | {{< X >}}                    |                                                    |
+| [mongodb-core][34]       | `>=2`     | {{< X >}}                   | {{< X >}}                    | {{< X >}}                                          |
+| [mysql][35]              | `>=2`     | {{< X >}}                   | {{< X >}}                    | {{< X >}}                                          |
+| [mysql2][36]             | `>=1`     | {{< X >}}                   | {{< X >}}                    | {{< X >}}                                          |
+| [oracledb][37]           | `>=5`     | {{< X >}}                   | {{< X >}}                    |                                                    |
+| [pg][38]                 | `>=4`     | {{< X >}}                   | {{< X >}}                    | {{< X >}}                                          |
+| [redis][39]              | `>=0.12`  | {{< X >}}                   | {{< X >}}                    |                                                    |
+| [sharedb][40]            | `>=1`     | {{< X >}}                   | {{< X >}}                    |                                                    |
+| [tedious][41]            | `>=1`     | {{< X >}}                   | {{< X >}}                    |                                                    |
+| [sequelize][42]          | `>=4`     | {{< X >}}                   | {{< X >}}                    | {{< X >}}                                          |
+
+
+### User Authentication Frameworks compatibility
+
+**Integrations to User Authentication Frameworks provide:**
+
+- User login events, including the user IDs
+- The Account Takeover detection monitoring the user login events
+
+| Framework       | Minimum Framework Version |
+|-----------------|---------------------------|
+| passport-local  | 1.0.0                     |
+| passport-http   | 0.3.0                     |
+
+[1]: /tracing/trace_collection/compatibility/nodejs/
+[2]: /agent/remote_config/#enabling-remote-configuration
 [4]: https://github.com/nodejs/release#release-schedule
 [5]: https://github.com/mariadb-corporation/mariadb-connector-nodejs
 [28]: https://github.com/datastax/nodejs-driver
@@ -163,3 +178,5 @@ Node.js のリリースについては、[Node.js の公式ドキュメント][4
 [40]: https://share.github.io/sharedb/
 [41]: http://tediousjs.github.io/tedious
 [42]: https://github.com/sequelize/sequelize
+[43]: https://github.com/apollographql/apollo-server
+[44]: https://www.npmjs.com/package/apollo-server-core

@@ -1,94 +1,94 @@
 ---
+title: Log Collection Troubleshooting Guide
+kind: guide
 aliases:
-- /ja/logs/faq/log-collection-troubleshooting-guide
+  - /logs/faq/log-collection-troubleshooting-guide
 further_reading:
 - link: /logs/log_collection/
   tag: Documentation
-  text: ログの収集方法
+  text: Learn how to collect your logs
 - link: /logs/explorer/
   tag: Documentation
-  text: ログの調査方法
+  text: Learn how to explore your logs
 - link: /logs/guide//logs-not-showing-expected-timestamp/
-  tag: ガイド
-  text: あるはずのタイムスタンプがログに含まれないのはなぜですか
+  tag: Guide
+  text: Why do my logs not have the expected timestamp?
 - link: /logs/guide/logs-show-info-status-for-warnings-or-errors/
-  tag: ガイド
-  text: 警告またはエラーのログが Info ステータスで表示されるのはなぜですか
-kind: ガイド
-title: ログ収集のトラブルシューティングガイド
+  tag: Guide
+  text: Why do my logs show up with an Info status even for Warnings or Errors?
 ---
 
-`dd-agent` でログコレクターから[新しいログを Datadog に送信][1]する際に、よく障害となる問題がいくつかあります。新しいログを Datadog に送信する際に問題が発生した場合は、このページに挙げられたトラブルシューティングをお役立てください。それでも問題が解決しない場合は、[ Datadog サポート][2]までお問い合わせください。
+There are a number of common issues that can get in the way when [sending new logs to Datadog][1] via the log collector in the `dd-agent`. If you experience issues sending new logs to Datadog, this list helps you troubleshoot. If you continue to have trouble, [contact Datadog support][2] for further assistance.
 
-## Agent を再起動します。
+## Restart the Agent
 
-`datadog-agent` のコンフィギュレーションに加えられた変更は、[Agent を再起動][3]した後に反映されます。
+Changes in the configuration of the `datadog-agent` won't be taken into account until you have [restarted the Agent][3].
 
-## ポート 10516 のアウトバウンドトラフィックがブロックされる
+## Outbound traffic on port 10516 is blocked
 
-Datadog Agent は、ポート 10516 を使って TCP で Datadog にログを送信します。この接続が使用できない場合、ログは送信に失敗し、それを示すエラーが `agent.log` ファイルに記録されます。
+The Datadog Agent sends its logs to Datadog over TCP using port 10516. If that connection is not available, logs fail to be sent and an error is recorded in the `agent.log` file to that effect.
 
-OpenSSL、GnuTLS、または他の SSL/TLS クライアントを使用して、接続を手動でテストすることができます。OpenSSL の場合は、以下のコマンドを実行します。
+You can manually test your connection using OpenSSL, GnuTLS, or another SSL/TLS client. For OpenSSL, run the following command:
 
 ```shell
 openssl s_client -connect intake.logs.datadoghq.com:10516
 ```
 
-GnuTLS の場合、以下のコマンドを実行します。
+For GnuTLS, run the following command:
 
 ```shell
 gnutls-cli intake.logs.datadoghq.com:10516
 ```
 
-さらに、次のようなログを送信します。
+And then by sending a log like the following:
 
 ```text
-<API_KEY> これはテストメッセージです
+<API_KEY> this is a test message
 ```
 
-- ポート 10516 を開くことを選択できない場合は、`datadog.yaml` に次の設定を追加して、Datadog Agent がログを転送するよう構成することができます。
+- If opening the port 10516 is not an option, it is possible to configure the Datadog Agent to send logs through HTTPS by adding the following in `datadog.yaml`:
 
 ```yaml
 logs_config:
   force_use_http: true
 ```
 
-詳細については、[HTTPS ログ転送セクション][4]をご参照ください。
+See the [HTTPS log forwarding section][4] for more information.
 
-## Agent のステータスをチェック
+## Check the status of the Agent
 
-[Agent のステータスコマンド][5]をチェックすることが、問題の解決に役立つことがあります。
+Often, checking the [Agent status command][5] results will help you troubleshoot what is happening.
 
-## 新しいログが書き込まれていない
+## No new logs have been written
 
-Datadog Agent は、ログの収集 (ログの追跡またはリスニング) を開始して以降に書き込まれたログのみを収集します。ログ収集が適切にセットアップされているかどうかを確認する場合は、まず新しいログが書き込まれていることを確認してください。
+The Datadog Agent only collects logs that have been written after it has started trying to collect them (whether it be tailing or listening for them). In order to confirm whether log collection has been successfully set up, make sure that new logs have been written.
 
-## ログファイル追跡のアクセス許可の問題
+## Permission issues tailing log files
 
-Datadog Agent は、ルートとして実行されません (一般的なベストプラクティスとして、ルートとして実行することは推奨されません)。カスタムログやインテグレーション用のログファイルを追跡するように Agent を構成する場合、Agent のユーザーがログファイルへの正しいアクセス権を持っていることを確認するために、特別な注意を払う必要があります。
+The Datadog Agent does not run as root (and running as root is not recommended, as a general best practice). When you configure your Agent to tail log files for custom logs or for integrations, you need to take special care to ensure the Agent user has the correct access to the log files.
 
-オペレーティングシステムごとのデフォルトの Agent ユーザー:
-| オペレーティングシステム | デフォルトの Agent ユーザー |
+The default Agent user per operating system:
+| Operating system | Default Agent user |
 | ---------------  | ------------------ |
 | Linux | `datadog-agent` |
 | MacOS | `datadog-agent` |
 | Windows | `ddagentuser` |
 
-Agent に正しい権限がない場合、[Agent のステータス][5]を確認すると、以下のエラーメッセージのいずれかが表示される場合があります。
-- The file does not exist. (ファイルが存在しません。)
-- Access is denied. (アクセスが拒否されました。)
-- Could not find any file matching pattern `<path/to/filename>`, check that all its subdirectories are executable. (パターン `<path/to/filename>` に一致するファイルが見つかりませんでした。そのサブディレクトリがすべて実行可能かどうか確認してください。)
+If the Agent does not have the correct permissions, you might see one of the following error messages when checking the [Agent status][5]:
+- The file does not exist.
+- Access is denied.
+- Could not find any file matching pattern `<path/to/filename>`, check that all its subdirectories are executable.
 
-エラーを修正するには、Datadog Agent ユーザーにログファイルおよびサブディレクトリへの読み取りおよび実行権限を与えます。
+To fix the error, give the Datadog Agent user read and execute permissions to the log file and subdirectories.
 
 {{< tabs >}}
 {{% tab "Linux" %}}
-1. ファイルアクセス許可の詳細情報を取得するには、`namei` コマンドを実行します。
+1. Run the `namei` command to obtain more information about the file permissions:
    ```
    > namei -m /path/to/log/file
    ```
 
-   次の例では、Agent ユーザーは `application` ディレクトリに対する `execute` 権限、または `error.log` ファイルに対する読み取り権限を持っていません。
+   In the following example, the Agent user does not have `execute` permissions on the `application` directory or read permissions on the `error.log` file.
 
    ```
    > namei -m /var/log/application/error.log
@@ -100,24 +100,24 @@ Agent に正しい権限がない場合、[Agent のステータス][5]を確認
    -rw-r----- error.log
    ```
 
-1. ログフォルダとその子フォルダを読み取り可能にします。
+1. Make the logs folder and its children readable:
 
    ```bash
    sudo chmod o+rx /path/to/logs
    ```
 
-**注**: これらの権限は、ログローテーション構成で正しく設定されていることを確認してください。そうしないと、次のログローテーション時に、Datadog Agent の読み取り権限が失われる可能性があります。Agent がファイルへの読み取りアクセス権を持つように、ログローテーション構成で権限を `644` として設定します。
+**Note**: Make sure that these permissions are correctly set in your log rotation configuration. Otherwise, on the next log rotate, the Datadog Agent might lose its read permissions. Set permissions as `644` in the log rotation configuration to make sure the Agent has read access to the files.
 
 {{% /tab %}}
 
 {{% tab "Windows (cmd)" %}}
-1. ファイルの権限についてのより詳しい情報を得るには、ログフォルダ上で `icacls` コマンドを使用します。
+1. Use the `icacls` command on the log folder to obtain more information about the file permissions:
    ```
    icacls path/to/logs/file /t
    ```
-   `/t` フラグは、ファイルとサブフォルダに対して再帰的にコマンドを実行します。
+   The `/t` flag runs the command recursively on files and sub-folders.
 
-   以下の例では、`test` ディレクトリとその子ディレクトリは `ddagentuser` からはアクセスできないようになっています。
+   In the following example, the `test` directory and its children are not accessible to `ddagentuser`:
 
    ```powershell
    PS C:\Users\Administrator> icacls C:\test\ /t
@@ -132,19 +132,19 @@ Agent に正しい権限がない場合、[Agent のステータス][5]を確認
           BUILTIN\Administrators:(F)
    ```
 
-1. `icacls` コマンドを使用して、`ddagentuser` に必要な権限を与えます (引用符を含めてください)。
+1. Use the `icacls` command to grant `ddagentuser` the required permissions (include the quotes):
    ```
    icacls "path\to\folder" /grant "ddagentuser:(OI)(CI)(RX)" /t
    ```
 
-   アプリケーションがログローテーションを使用する場合、`(OI)` と `(CI)` の継承権は、今後ディレクトリに作成されるログファイルが親フォルダの権限を継承することを確実にします。
+   In case the application uses log rotation, `(OI)` and `(CI)` inheritance rights ensure that any future log files created in the directory inherit the parent folder permissions.
 
-1. もう一度 `icacls` を実行して、`ddagentuser` が正しい権限を持っていることを確認します。
+1. Run `icacls` again to check that `ddagentuser` has the correct permissions:
    ```powershell
    icacls path/to/logs/file /t
    ```
 
-   以下の例では、ファイルの権限に `ddagentuser` が記載されています。
+   In the following example, `ddagentuser` is listed in the file permissions:
    ```powershell
    PS C:\Users\Administrator> icacls C:\test\ /t
    C:\test\ EC2-ABCD\ddagentuser:(OI)(CI)(RX)
@@ -162,7 +162,7 @@ Agent に正しい権限がない場合、[Agent のステータス][5]を確認
    Successfully processed 3 files; Failed processing 0 files
    ```
 
-1. Agent サービスを再起動し、ステータスを確認し、問題が解決しているかどうかを確認します。
+1. Restart the Agent service and check the status to see if the problem is resolved:
 
    ```powershell
    & "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" restart-service
@@ -173,7 +173,7 @@ Agent に正しい権限がない場合、[Agent のステータス][5]を確認
 
 {{% tab "Windows (PowerShell)" %}}
 
-1. ファイルの ACL 権限を取得します。
+1. Retrieve the ACL permissions for the file:
    ```powershell
    PS C:\Users\Administrator> get-acl C:\app\logs | fl
 
@@ -184,9 +184,9 @@ Agent に正しい権限がない場合、[Agent のステータス][5]を確認
             BUILTIN\Administrators Allow  FullControl
    ...
    ```
-   この例では、`application` ディレクトリは Agent によって実行可能ではありません。
+   In this example, the `application` directory is not executable by the Agent.
 
-1. この PowerShell スクリプトを実行し、`ddagentuser` に読み取り権限と実行権限を与えます。
+1. Run this PowerShell script to give read and execute privileges to `ddagentuser`:
    ```powershell
    $acl = Get-Acl <path\to\logs\folder>
    $AccessRule = New-Object System.Security.AccessControl.FileSystemAccessRule("ddagentuser","ReadAndExecute","Allow")
@@ -194,7 +194,7 @@ Agent に正しい権限がない場合、[Agent のステータス][5]を確認
    $acl | Set-Acl <path\to\logs\folder>
    ```
 
-1. ファイルの ACL 権限を再度取得し、`ddagentuser` が正しい権限を持っているかどうかを確認します。
+1. Retrieve the ACL permissions for the file again to check if `ddagentuser` has the correct permissions:
    ```powershell
    PS C:\Users\Administrator> get-acl C:\app\logs | fl
    Path   : Microsoft.PowerShell.Core\FileSystem::C:\app\logs
@@ -206,7 +206,7 @@ Agent に正しい権限がない場合、[Agent のステータス][5]を確認
    ...
    ```
 
-1. Agent サービスを再起動し、ステータスを確認し、問題が解決しているかどうかを確認します。
+1. Restart the Agent service and check the status to see if the problem is resolved:
    ```powershell
    & "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" restart-service
    & "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" status
@@ -217,64 +217,64 @@ Agent に正しい権限がない場合、[Agent のステータス][5]を確認
 
 {{< /tabs >}}
 
-## アクセス許可の問題と Journald
+## Permission issue and Journald
 
-Journald からログを収集する場合は、[Journald インテグレーション][7]で説明されているように、Datadog Agent ユーザーが systemd グループに追加されている必要があります。
+When collecting logs from Journald, make sure that the Datadog Agent user is added in the systemd group as shown in the [Journald integration][7].
 
-**注**: ファイルアクセス許可が正しくなければ、Journald は空のペイロードを送信します。そのため、この場合は、明示的なエラーメッセージを表示および送信することはできません。
+**Note**: Journald sends an empty payload if the file permissions are incorrect. Accordingly, it is not possible to raise or send an explicit error message in this case.
 
-## 構成上の問題
+## Configuration issues
 
-以下に挙げる一般的な構成上の問題は、`datadog-agent` セットアップで何重にもチェックすることをお勧めします。
+These are a few of the common configuration issues that are worth triple-checking in your `datadog-agent` setup:
 
-1. `datadog.yaml` で `api_key` が定義されているかをチェックします。
+1. Check if the `api_key` is defined in `datadog.yaml`.
 
-2. `datadog.yaml` で `logs_enabled: true` が設定されているかをチェックします。
+2. Check if you have `logs_enabled: true` in your `datadog.yaml`
 
-3. デフォルトでは、Agent はログを収集しません。Agent の `conf.d/` ディレクトリに、logs セクションと適切な値が含まれた .yaml ファイルが少なくとも 1 つあることを確認します。
+3. By default the Agent does not collect any logs, make sure there is at least one .yaml file in the Agent's `conf.d/` directory that includes a logs section and the appropriate values.
 
-4. 構成ファイルで何らかの .yaml パースエラーが発生することがあります。YAML には細かな注意が必要なため、疑わしい場合は、[YAML 検証ツール][8]を使用してください。
+4. You may have some .yaml parsing errors in your configuration files. YAML can be finicky, so when in doubt rely on a [YAML validator][8].
 
-### Agent ログ内のエラーのチェック
+### Check for errors in the Agent logs
 
-問題について記述されたエラーがログに含まれている場合があります。次のコマンドを実行して、このようなエラーをチェックします。
+There might be an error in the logs that would explain the issue. Run the following command to check for errors:
 
 ```shell
 sudo grep -i error /var/log/datadog/agent.log
 ```
 
-## Docker 環境
+## Docker environment
 
-[Docker ログ収集のトラブルシューティングガイド][9]をご参照ください
+See the [Docker Log Collection Troubleshooting Guide][9]
 
-## サーバーレス環境
+## Serverless environment
 
-[Lambda ログ収集のトラブルシューティングガイド][10]をご参照ください
+See the [Lambda Log Collection Troubleshooting Guide][10]
 
-## 予期せぬログの欠落
+## Unexpectedly dropping logs
 
-[Datadog Live Tail][11] にログが表示されるか確認します。
+Check if logs appear in the [Datadog Live Tail][11].
 
-Live Tail に表示される場合は、インデックス構成ページで、ログと一致する [除外フィルター][12]がないか確認してください。
-Live Tail に表示されない場合、タイムスタンプが 18 時間以上過去のものであれば、ドロップされた可能性があります。`datadog.estimated_usage.logs.drop_count` メトリクスで、どの `service` と `source` が影響を受けているかを確認できます。
+If they appear in the Live Tail, check the Indexes configuration page for any [exclusion filters][12] that could match your logs.
+If they do not appear in the Live Tail, they might have been dropped if their timestamp was further than 18 hours in the past. You can check which `service` and `source` may be impacted with the `datadog.estimated_usage.logs.drop_count` metric.
 
-## ログの切り捨て
+## Truncated logs
 
-1MB を超えるログは切り捨てられます。どの `service` と `source` が影響を受けているかは `datadog.estimated_usage.logs.truncated_count` と `datadog.estimated_usage.logs.truncated_bytes` メトリクスで確認できます。
+Logs above 1MB are truncated. You can check which `service` and `source` are impacted with the `datadog.estimated_usage.logs.truncated_count` and `datadog.estimated_usage.logs.truncated_bytes` metrics.
 
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/logs/
-[2]: /ja/help/
-[3]: /ja/agent/configuration/agent-commands/#restart-the-agent
-[4]: /ja/agent/logs/log_transport?tab=https#enforce-a-specific-transport
-[5]: /ja/agent/configuration/agent-commands/#agent-status-and-information
-[7]: /ja/integrations/journald/
+[1]: /logs/
+[2]: /help/
+[3]: /agent/configuration/agent-commands/#restart-the-agent
+[4]: /agent/logs/log_transport?tab=https#enforce-a-specific-transport
+[5]: /agent/configuration/agent-commands/#agent-status-and-information
+[7]: /integrations/journald/
 [8]: https://codebeautify.org/yaml-validator
-[9]: /ja/logs/guide/docker-logs-collection-troubleshooting-guide/
-[10]: /ja/logs/guide/lambda-logs-collection-troubleshooting-guide/
+[9]: /logs/guide/docker-logs-collection-troubleshooting-guide/
+[10]: /logs/guide/lambda-logs-collection-troubleshooting-guide/
 [11]: https://app.datadoghq.com/logs/livetail
-[12]: /ja/logs/indexes/#exclusion-filters
+[12]: /logs/indexes/#exclusion-filters

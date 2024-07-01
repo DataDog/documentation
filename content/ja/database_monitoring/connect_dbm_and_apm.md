@@ -1,49 +1,51 @@
 ---
+title: Correlate Database Monitoring and Traces
 aliases:
-- /ja/database_monitoring/guide/connect_dbm_and_apm/
+- /database_monitoring/guide/connect_dbm_and_apm/
 further_reading:
-- link: https://www.datadoghq.com/blog/link-dbm-and-apm/
-  tag: ブログ
-  text: DBM と APM のテレメトリーをシームレスに相関させ、エンドツーエンドのクエリパフォーマンスを把握する
-title: Database Monitoring とトレースの相関付け
+  - link: "https://www.datadoghq.com/blog/link-dbm-and-apm/"
+    tag: Blog
+    text: Seamlessly correlate DBM and APM telemetry to understand end-to-end query performance
 ---
 
-このガイドは、[データベースモニタリング][1]を構成し、[APM][2] を使用していることを前提にしています。APM と DBM を接続すると、APM のトレース識別子が DBM のデータ収集に挿入され、これら 2 つのデータソースを相関させることができます。これにより、APM 製品ではデータベース情報を、DBM 製品では APM データを表示する製品機能が実現します。
+This guide assumes that you have configured [Database Monitoring][1] and are using [APM][2]. Connecting APM and DBM injects APM trace identifiers into DBM data collection, which allows for correlation of these two data sources. This enables product features showing database information in the APM product, and APM data in the DBM product.
 
-## はじめに
+## Before you begin
 
-対応データベース:
-Postgres、MySQL、SQL Server、Oracle
+Supported databases
+: Postgres, MySQL, SQL Server, Oracle
 
-サポート対象の Agent バージョン
+Supported Agent versions
 : 7.46+
 
-データプライバシー
-: SQL コメントの伝播を有効にすると、潜在的に機密データ (サービス名) がデータベースに保存され、データベースへのアクセスを許可された他の第三者がアクセスすることが可能になります。
+Data privacy
+: Enabling SQL comment propagation results in potentially confidential data (service names) being stored in the databases which can then be accessed by other third parties that have been granted access to the database.
 
 
-APM トレーサーインテグレーションは、アプリケーションからデータベースに渡される情報量を制御する*伝搬モード*をサポートしています。
+APM tracer integrations support a *Propagation Mode*, which controls the amount of information passed from applications to the database.
 
-- `full` モードは完全なトレース情報をデータベースに送信し、DBM 内で個々のトレースを調査できるようにします。これはほとんどのインテグレーションで推奨されるソリューションです。
-- `service` モードはサービス名を送信し、どのサービスがデータベース負荷に寄与しているかを把握できます。このモードは Oracle と SQL Server アプリケーションで唯一サポートされているモードです。
-- `disabled` モードは伝搬を無効にし、アプリケーションからの情報を送信しません。
+- `full` mode sends full trace information to the database, allowing you to investigate individual traces within DBM. This is the recommended solution for most integrations.
+- `service` mode sends the service name, allowing you to understand which services are the contributors to database load. This is the only supported mode for Oracle and SQL Server applications.
+- `disabled` mode disables propagation and does not send any information from applications.
 
-SQL Server と Oracle は、ステートメントキャッシュの動作により、完全なトレースコンテキストを含むとパフォーマンスの問題が発生する可能性があるため、`full` 伝搬モードをサポートしていません。
+SQL Server and Oracle do not support `full` propagation mode due to statement caching behavior which could cause performance issues when including full trace context.
 
-| DD_DBM_PROPAGATION_MODE | Postgres  |   MySQL   | SQL Server |  Oracle   |
-|:------------------------|:---------:|:---------:|:----------:|:---------:|
-| `full`                  | {{< X >}} | {{< X >}} |            |           |
-| `service`               | {{< X >}} | {{< X >}} | {{< X >}}  | {{< X >}} |
+| DD_DBM_PROPAGATION_MODE | Postgres  |   MySQL     | SQL Server |  Oracle   |
+|:------------------------|:---------:|:-----------:|:----------:|:---------:|
+| `full`                  | {{< X >}} | {{< X >}} * |            |           |
+| `service`               | {{< X >}} | {{< X >}}   | {{< X >}}  | {{< X >}} |
 
-**サポート対象のアプリケーショントレーサーとドライバー**
+\* Full propagation mode on Aurora MySQL requires version 3.
 
-| 言語                                 | ライブラリまたはフレームワーク   | Postgres  |   MySQL   |     SQL Server      |       Oracle        |
+**Supported application tracers and drivers**
+
+| Language                                 | Library or Framework   | Postgres  |   MySQL   |     SQL Server      |       Oracle        |
 |:-----------------------------------------|:-----------------------|:---------:|:---------:|:-------------------:|:-------------------:|
 | **Go:** [dd-trace-go][3] >= 1.44.0       |                        |           |           |                     |                     |
-|                                          | [database/sql][4]      | {{< X >}} | {{< X >}} | `service` モードのみ | `service` モードのみ |
-|                                          | [sqlx][5]              | {{< X >}} | {{< X >}} | `service` モードのみ | `service` モードのみ |
+|                                          | [database/sql][4]      | {{< X >}} | {{< X >}} | `service` mode only | `service` mode only |
+|                                          | [sqlx][5]              | {{< X >}} | {{< X >}} | `service` mode only | `service` mode only |
 | **Java** [dd-trace-java][23] >= 1.11.0   |                        |           |           |                     |                     |
-|                                          | [jdbc][22]             | {{< X >}} | {{< X >}} | `service` モードのみ | `service` モードのみ |
+|                                          | [jdbc][22]             | {{< X >}} | {{< X >}} | `service` mode only | `service` mode only |
 | **Ruby:** [dd-trace-rb][6] >= 1.8.0      |                        |           |           |                     |                     |
 |                                          | [pg][8]                | {{< X >}} |           |                     |                     |
 |                                          | [mysql2][7]            |           | {{< X >}} |                     |                     |
@@ -53,7 +55,7 @@ SQL Server と Oracle は、ステートメントキャッシュの動作によ�
 |                                          | [Npgsql][16] *         | {{< X >}} |           |                     |                     |
 |                                          | [MySql.Data][17] *     |           | {{< X >}} |                     |                     |
 |                                          | [MySqlConnector][18] * |           | {{< X >}} |                     |                     |
-|                                          | [ADO.NET][24] *        |           |           | `service` モードのみ |                     |
+|                                          | [ADO.NET][24] *        |           |           | `service` mode only |                     |
 | **PHP**  [dd-trace-php][19] >= 0.86.0    |                        |           |           |                     |                     |
 |                                          | [pdo][20]              | {{< X >}} | {{< X >}} |                     |                     |
 |                                          | [MySQLi][21]           |           | {{< X >}} |                     |                     |
@@ -62,10 +64,10 @@ SQL Server と Oracle は、ステートメントキャッシュの動作によ�
 |                                          | [mysql][13]            |           | {{< X >}} |                     |                     |
 |                                          | [mysql2][14]           |           | {{< X >}} |                     |                     |
 
-\* [CommandType.StoredProcedure][25] はサポートされていません
+\* [CommandType.StoredProcedure][25] not supported
 
-## セットアップ
-最高のユーザーエクスペリエンスを得るために、アプリケーションで以下の環境変数が設定されていることを確認してください。
+## Setup
+For the best user experience, ensure the following environment variables are set in your application:
 
 ```
 DD_SERVICE=(application name)
@@ -76,12 +78,12 @@ DD_VERSION=(application version)
 {{< tabs >}}
 {{% tab "Go" %}}
 
-アプリの依存関係を更新して、[dd-trace-go@v1.44.0][1] 以上を含むようにします。
+Update your app dependencies to include [dd-trace-go@v1.44.0][1] or greater:
 ```
 go get gopkg.in/DataDog/dd-trace-go.v1@v1.44.0
 ```
 
-コードを更新して `contrib/database/sql` パッケージをインポートします。
+Update your code to import the `contrib/database/sql` package:
 ```go
 import (
    "database/sql"
@@ -90,16 +92,16 @@ import (
 )
 ```
 
-以下のいずれかの方法で、データベースモニタリングの伝搬機能を有効にします。
-1. 環境変数:
+Enable the database monitoring propagation feature using one of the following methods:
+1. Env variable:
    `DD_DBM_PROPAGATION_MODE=full`
 
-2. ドライバー登録時にコードを使用する:
+2. Using code during the driver registration:
    ```go
    sqltrace.Register("postgres", &pq.Driver{}, sqltrace.WithDBMPropagation(tracer.DBMPropagationModeFull), sqltrace.WithServiceName("my-db-service"))
    ```
 
-3. `sqltrace.Open` のコードを使用する:
+3. Using code on `sqltrace.Open`:
    ```go
    sqltrace.Register("postgres", &pq.Driver{}, sqltrace.WithServiceName("my-db-service"))
 
@@ -109,7 +111,7 @@ import (
    }
    ```
 
-完全な例:
+Full example:
 ```go
 import (
     "database/sql"
@@ -118,17 +120,17 @@ import (
 )
 
 func main() {
-    // まず、ドライバの登録時に dbm 伝搬モードを設定します。これは sqltrace.Open で行うこともでき、
-    // この機能をより詳細に制御できることに注意してください。
+    // The first step is to set the dbm propagation mode when registering the driver. Note that this can also
+    // be done on sqltrace.Open for more granular control over the feature.
     sqltrace.Register("postgres", &pq.Driver{}, sqltrace.WithDBMPropagation(tracer.DBMPropagationModeFull))
 
-    // 続いて、Open へのコール。
+    // Followed by a call to Open.
     db, err := sqltrace.Open("postgres", "postgres://pqgotest:password@localhost/pqgotest?sslmode=disable")
     if err != nil {
         log.Fatal(err)
     }
 
-    // そして、データベース/SQL パッケージを通常通り、トレースしながら使い続けます。
+    // Then, we continue using the database/sql package as we normally would, with tracing.
     rows, err := db.Query("SELECT name FROM users WHERE age=?", 27)
     if err != nil {
         log.Fatal(err)
@@ -143,22 +145,22 @@ func main() {
 
 {{% tab "Java" %}}
 
-[Java トレーシング][1]のインスツルメンテーションの説明に従い、Agent の `1.11.0` またはそれ以上のバージョンをインストールする必要があります。
+Follow the [Java tracing][1] instrumentation instructions and install the `1.11.0` version, or greater, of the Agent.
 
-また、`jdbc-datasource` [インスツルメンテーション][2]を有効にする必要があります。
+You must also enable the `jdbc-datasource` [instrumentation][2].
 
-以下の**いずれか**の方法で、データベースモニタリングの伝搬機能を有効にします。
+Enable the database monitoring propagation feature using **one** of the following methods:
 
-- システムプロパティ `dd.dbm.propagation.mode=full` を設定する
-- 環境変数 `DD_DBM_PROPAGATION_MODE=full` を設定する
+- Set the system property `dd.dbm.propagation.mode=full`
+- Set the environment variable `DD_DBM_PROPAGATION_MODE=full`
 
-完全な例:
+Full example:
 ```
-# 必要なシステムプロパティでJava Agentを起動します
+# Start the Java Agent with the required system properties
 java -javaagent:/path/to/dd-java-agent.jar -Ddd.dbm.propagation.mode=full -Ddd.integration.jdbc-datasource.enabled=true -Ddd.service=my-app -Ddd.env=staging -Ddd.version=1.0 -jar path/to/your/app.jar
 ```
 
-アプリケーションで機能をテストします。
+Test the feature in your application:
 ```java
 public class Application {
     public static void main(String[] args) {
@@ -171,37 +173,37 @@ public class Application {
             stmt.close();
             connection.close();
         } catch (SQLException exception) {
-            //  例外ロジック
+            //  exception logic
         }
     }
 }
 ```
 
-**注**: プリペアドステートメントは `full` モードではサポートされていません。プリペアドステートメントを使用するすべての JDBC API 呼び出しは自動的に `service` モードにダウングレードされます。ほとんどの Java SQL ライブラリはデフォルトでプリペアドステートメントを使用するため、**ほとんどの** Java アプリケーションは `service` モードしか使用できません。
+**Note**: Prepared statements are not supported in `full` mode, and all JDBC API calls that use prepared statements are automatically downgraded to `service` mode. Since most Java SQL libraries use prepared statements by default, this means that **most** Java applications are only able to use `service` mode.
 
-[1]: /ja/tracing/trace_collection/dd_libraries/java/
-[2]: /ja/tracing/trace_collection/compatibility/java/#data-store-compatibility
+[1]: /tracing/trace_collection/dd_libraries/java/
+[2]: /tracing/trace_collection/compatibility/java/#data-store-compatibility
 
 {{% /tab %}}
 
 {{% tab "Ruby" %}}
 
-Gemfile で [dd-trace-rb][1] をバージョン `1.8.0` 以降にインストールまたはアップデートします。
+In your Gemfile, install or update [dd-trace-rb][1] to version `1.8.0` or greater:
 
 ```rb
 source 'https://rubygems.org'
-gem 'ddtrace', '>= 1.8.0'
+gem 'datadog' # Use `'ddtrace', '>= 1.8.0'` if you're using v1.x
 
-# 使用による
+# Depends on your usage
 gem 'mysql2'
 gem 'pg'
 ```
 
-以下のいずれかの方法で、データベースモニタリングの伝搬機能を有効にします。
-1. 環境変数:
+Enable the database monitoring propagation feature using one of the following methods:
+1. Env variable:
    `DD_DBM_PROPAGATION_MODE=full`
 
-2. オプション `comment_propagation` (デフォルト: `ENV['DD_DBM_PROPAGATION_MODE']`)、[mysql2][2] または [pg][3] 用:
+2. Option `comment_propagation` (default: `ENV['DD_DBM_PROPAGATION_MODE']`), for [mysql2][2] or [pg][3]:
    ```rb
     Datadog.configure do |c|
         c.tracing.instrument :mysql2, comment_propagation: 'full'
@@ -209,7 +211,7 @@ gem 'pg'
     end
    ```
 
-完全な例:
+Full example:
 ```rb
 require 'mysql2'
 require 'ddtrace'
@@ -227,27 +229,27 @@ client.query("SELECT 1;")
 ```
 
 [1]: https://github.com/dataDog/dd-trace-rb
-[2]: /ja/tracing/trace_collection/dd_libraries/ruby/#mysql2
-[3]: /ja/tracing/trace_collection/dd_libraries/ruby/#postgres
+[2]: /tracing/trace_collection/dd_libraries/ruby/#mysql2
+[3]: /tracing/trace_collection/dd_libraries/ruby/#postgres
 
 {{% /tab %}}
 
 {{% tab "Python" %}}
 
-アプリの依存関係を更新して、[dd-trace-py>=1.9.0][1] を含むようにします。
+Update your app dependencies to include [dd-trace-py>=1.9.0][1]:
 ```
 pip install "ddtrace>=1.9.0"
 ```
 
-[psycopg2][2] をインストールします。
+Install [psycopg2][2]:
 ```
 pip install psycopg2
 ```
 
-以下の環境変数を設定して、データベースモニタリングの伝搬機能を有効にします。
+Enable the database monitoring propagation feature by setting the following environment variable:
    - `DD_DBM_PROPAGATION_MODE=full`
 
-完全な例:
+Full example:
 ```python
 
 import psycopg2
@@ -260,10 +262,10 @@ POSTGRES_CONFIG = {
     "dbname": "postgres_db_name",
 }
 
-# postgres db に接続する
+# connect to postgres db
 conn = psycopg2.connect(**POSTGRES_CONFIG)
 cursor = conn.cursor()
-# sql クエリを実行する
+# execute sql queries
 cursor.execute("select 'blah'")
 cursor.executemany("select %s", (("foo",), ("bar",)))
 ```
@@ -276,65 +278,65 @@ cursor.executemany("select %s", (("foo",), ("bar",)))
 {{% tab ".NET" %}}
 
 <div class="alert alert-warning">
-この機能を使用するには、.NET サービスの自動インスツルメンテーションが有効である必要があります。
+This feature requires automatic instrumentation to be enabled for your .NET service.
 </div>
 
-[.NET Framework のトレース手順][1]または [.NET Core のトレース手順][2]に従って、自動インスツルメンテーションパッケージをインストールし、サービスのトレースを有効にしてください。
+Follow the [.NET Framework tracing instructions][1] or the [.NET Core tracing instructions][2] to install the automatic instrumentation package and enable tracing for your service.
 
-サポートされているクライアントライブラリを使用していることを確認します。例えば、`Npgsql` などです。
+Ensure that you are using a supported client library. For example, `Npgsql`.
 
-以下の環境変数を設定して、データベースモニタリングの伝搬機能を有効にします。
-   - Postgres および MySQL の場合: `DD_DBM_PROPAGATION_MODE=full`
-   - SQL Server の場合: `DD_DBM_PROPAGATION_MODE=service`
+Enable the database monitoring propagation feature by setting the following environment variable:
+   - For Postgres and MySQL: `DD_DBM_PROPAGATION_MODE=full`
+   - For SQL Server: `DD_DBM_PROPAGATION_MODE=service`
 
-[1]: /ja/tracing/trace_collection/dd_libraries/dotnet-framework
-[2]: /ja/tracing/trace_collection/dd_libraries/dotnet-core
+[1]: /tracing/trace_collection/dd_libraries/dotnet-framework
+[2]: /tracing/trace_collection/dd_libraries/dotnet-core
 
 {{% /tab %}}
 
 {{% tab "PHP" %}}
 
 <div class="alert alert-warning">
-この機能を使用するには、PHP サービスでトレーサー拡張機能が有効になっていることが必要です。
+This feature requires the tracer extension to be enabled for your PHP service.
 </div>
 
-[PHP トレース手順][1]に従って、自動インスツルメンテーションパッケージをインストールし、サービスのトレースを有効にしてください。
+Follow the [PHP tracing instructions][1] to install the automatic instrumentation package and enable tracing for your service.
 
-サポートされているクライアントライブラリを使用していることを確認します。例えば、`PDO` などです。
+Ensure that you are using a supported client library. For example, `PDO`.
 
-以下の環境変数を設定して、データベースモニタリングの伝搬機能を有効にします。
+Enable the database monitoring propagation feature by setting the following environment variable:
    - `DD_DBM_PROPAGATION_MODE=full`
 
-[1]: https://docs.datadoghq.com/ja/tracing/trace_collection/dd_libraries/php?tab=containers
+[1]: https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/php?tab=containers
 
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
 
-[dd-trace-js][1] を `3.17.0` (または Node.js 12 を使用している場合は `2.30.0`) 以上のバージョンにインストールまたは更新してください。
+Install or update [dd-trace-js][1] to a version greater than `3.17.0` (or `2.30.0` if using end-of-life Node.js version 12):
 
 ```
 npm install dd-trace@^3.17.0
 ```
 
-トレーサーをインポートして初期化するようにコードを更新してください。
+Update your code to import and initialize the tracer:
 ```javascript
-// の行は、インスツルメントされたいずれのモジュールのインポートより前である必要があります。
+// This line must come before importing any instrumented module.
 const tracer = require('dd-trace').init();
 ```
 
-以下のいずれかの方法で、データベースモニタリングの伝搬機能を有効にします。
-* 以下の環境変数を設定します。
+Enable the database monitoring propagation feature using one of the following methods:
+* Set the following env variable:
    ```
    DD_DBM_PROPAGATION_MODE=full
    ```
 
-* トレーサーが `dbmPropagationMode` オプションを使用するように設定します (デフォルト: `ENV['DD_DBM_PROPAGATION_MODE']`)。
+* Set the tracer to use the `dbmPropagationMode` option (default: `ENV['DD_DBM_PROPAGATION_MODE']`):
    ```javascript
    const tracer = require('dd-trace').init({ dbmPropagationMode: 'full' })
    ```
 
-* インテグレーションレベルでのみ有効にします。
+* Enable only at the integration level:
    ```javascript
    const tracer = require('dd-trace').init();
    tracer.use('pg', {
@@ -343,7 +345,7 @@ const tracer = require('dd-trace').init();
    ```
 
 
-完全な例:
+Full example:
 ```javascript
 const pg = require('pg')
 const tracer = require('dd-trace').init({ dbmPropagationMode: 'full' })
@@ -360,7 +362,7 @@ client.connect(err => {
 });
 
 client.query('SELECT $1::text as message', ['Hello world!'], (err, result) => {
-    // 結果を処理します
+    // handle result
 })
 ```
 
@@ -370,46 +372,46 @@ client.query('SELECT $1::text as message', ['Hello world!'], (err, result) => {
 
 {{< /tabs >}}
 
-## DBM で APM 接続を探る
+## Explore the APM Connection in DBM
 
-### 呼び出した APM サービスにアクティブなデータベース接続を属性付けする
+### Attribute active database connections to the calling APM services
 
-{{< img src="database_monitoring/dbm_apm_active_connections_breakdown.png" alt="データベースへのアクティブな接続を、APM サービスごとに分類して表示します。">}}
+{{< img src="database_monitoring/dbm_apm_active_connections_breakdown.png" alt="View active connections to a database broken down by the APM Service they originate from.">}}
 
-特定のホストのアクティブな接続を、リクエストを行うアップストリーム APM サービス別に分解します。データベースの負荷を個々のサービスに属性付けして、どのサービスがデータベース上で最もアクティブかを理解できます。最もアクティブなアップストリームサービスのサービスページにピボットして、調査を続行します。
+Break down active connections for a given host by the upstream APM services making the requests. You can attribute load on a database to individual services to understand which services are most active on the database. Pivot to the most active upstream service's service page to continue the investigation.
 
-### データベースホストを呼び出す APM サービスによってフィルターにかける
+### Filter your database hosts by the APM services that call them
 
-{{< img src="database_monitoring/dbm_filter_by_calling_service.png" alt="データベースホストを呼び出す APM サービスによって、フィルターにかけます。">}}
+{{< img src="database_monitoring/dbm_filter_by_calling_service.png" alt="Filter your database hosts by the APM services that call them.">}}
 
-データベースリストをすばやくフィルターして、特定の APM サービスが依存するデータベースホストのみを表示します。ダウンストリームの依存関係に、サービスのパフォーマンスに影響を与える可能性のあるブロックアクティビティがあるかどうかを簡単に識別できます。
+Quickly filter the Database List to display only the database hosts that your specific APM services depend on. Easily identify if any of your downstream dependencies have blocking activity that may impact service performance.
 
-### クエリサンプルの関連付けられたトレースを表示する
+### View the associated trace for a query sample
 
-{{< img src="database_monitoring/dbm_query_sample_trace_preview.png" alt="検査中のクエリーサンプルが生成されたサンプル APM トレースをプレビューします。">}}
+{{< img src="database_monitoring/dbm_query_sample_trace_preview.png" alt="Preview the sampled APM trace that the query sample being inspected was generated from.">}}
 
-Database Monitoring で Query Sample を表示するとき、関連付けられたトレースが APM によってサンプリングされている場合、DBM Sample を APM Trace のコンテキストで表示することができます。これにより、クエリの実行計画や過去のパフォーマンスを含む DBM テレメトリーと、インフラストラクチャー内のスパンの系統を組み合わせて、データベース上の変更がアプリケーションパフォーマンスの低下の原因になっているかどうかを理解することができます。
+When viewing a Query Sample in Database Monitoring, if the associated trace has been sampled by APM, you can view the DBM Sample in the context of the APM Trace. This allows you to combine DBM telemetry, including the explain plan and historical performance of the query, alongside the lineage of the span within your infrastructure to understand if a change on the database is responsible for poor application performance.
 
-## APM で DBM 接続を探る
+## Explore the DBM Connection in APM
 
-### APM サービスのダウンストリームデータベースホストの可視化
+### Visualize the downstream database hosts of APM services
 
-{{< img src="database_monitoring/dbm_apm_service_page_db_host_list.png" alt="サービスページから、APM サービスが依存するダウンストリームデータベースホストを視覚化します。">}}
+{{< img src="database_monitoring/dbm_apm_service_page_db_host_list.png" alt="Visualize the downstream database hosts that your APM Services depend on from the Service Page.">}}
 
-指定したサービスの APM ページで、Database Monitoring により特定されたサービスの直接的なダウンストリームデータベース依存関係を確認できます。ノイジーなネイバーが原因と思われる不均衡な負荷がかかっているホストがあるかどうかをすばやく判断できます。サービスのページを表示するには、[サービスカタログ][26]でサービスをクリックして詳細パネルを開き、パネル内の **View Service Page** をクリックします。
+On the APM page for a given service, view the direct downstream database dependencies of the service as identified by Database Monitoring. Quickly determine if any hosts have disproportionate load that may be caused by noisy neighbors. To view a service's page, click on the service in the [Service Catalog][26] to open a details panel, then click **View Service Page** in the panel.
 
-### データベースクエリの実行計画をトレースで確認し、最適化の可能性を特定する
+### Identify potential optimizations using explain plans for database queries in traces
 
-{{< img src="database_monitoring/explain_plans_in_traces_update.png" alt="トレース内のデータベースクエリに対する実行計画を使用して非効率を特定します。">}}
+{{< img src="database_monitoring/explain_plans_in_traces_update.png" alt="Identify inefficiencies using explain plans for database queries within traces.">}}
 
-トレースで実行されたクエリと同様のクエリの履歴ビュー (サンプルの待機イベント、平均レイテンシー、最近キャプチャした実行計画など) を表示し、クエリがどのように実行されると予想されるかを説明します。動作が異常であるかどうかを判断し、データベースモニタリングにピボットして、基礎となるデータベースホストに関する追加のコンテキストを得ることで、調査を継続します。
+View historical performance of similar queries to those executed in your trace, including sampled wait events, average latency, and recently captured explain plans, to contextualize how a query is expected to perform. Determine if the behavior is abnormal and continue the investigation by pivoting to Database Monitoring for additional context about the underlying database hosts.
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/database_monitoring/#getting-started
-[2]: /ja/tracing/
+[1]: /database_monitoring/#getting-started
+[2]: /tracing/
 [3]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1
 [4]: https://pkg.go.dev/database/sql
 [5]: https://pkg.go.dev/github.com/jmoiron/sqlx

@@ -1,187 +1,181 @@
 ---
-algolia:
-  tags:
-  - test visibility
-  - CI テスト
-  - CI テスト
-  - 不安定なテスト
-  - 不安定なテスト
-  - テスト実行
-  - テスト実行
-  - テストスパン
-  - テストスパン
+title: Getting Started with Test Visibility
+kind: documentation
 further_reading:
-- link: https://www.datadoghq.com/blog/ci-test-visibility-with-rum/
-  tag: ブログ
-  text: CI Test Visibility と RUM を使ったエンドツーエンドのテストのトラブルシューティング
+- link: "https://www.datadoghq.com/blog/ci-test-visibility-with-rum/"
+  tag: Blog
+  text: Troubleshoot end-to-end tests with CI Test Visibility and RUM
 - link: /tests/
-  tag: ドキュメント
-  text: Test Visibility について
+  tag: Documentation
+  text: Learn about Test Visibility
 - link: /tests/guides/flaky_test_management
-  tag: ドキュメント
-  text: 不安定なテストの管理について
+  tag: Documentation
+  text: Learn about Flaky Test Management
 - link: /tests/developer_workflows
-  tag: ドキュメント
-  text: Datadog における開発者のワークフロー強化について
-kind: ドキュメント
-title: Test Visibility の概要
+  tag: Documentation
+  text: Learn about enhancing developer workflows in Datadog
+algolia:
+  tags: [test visibility, ci test, ci tests, flaky test, flaky tests, test run, test runs, test span, test spans]
 ---
 
-## 概要
+## Overview
 
-[Test Visibility][1] は、テストの姿勢をより深く理解し、不安定なテストをもたらすコミットを特定し、パフォーマンスの低下を識別し、複雑なテスト失敗をトラブルシューティングするのに役立ちます。
+[Test Visibility][1] allows you to better understand your test posture, identify commits introducing flaky tests, identify performance regressions, and troubleshoot complex test failures. 
 
-{{< img src="getting_started/test_visibility/list.png" alt="Test Visibility におけるテストサービスの一覧" style="width:100%;" >}}
+{{< img src="getting_started/test_visibility/list.png" alt="List of test services in Test Visibility" style="width:100%;" >}}
 
-テスト実行のパフォーマンスをトレースとして視覚化できます。トレース内のスパンは、テストの異なる部分の実行を表します。
+You can visualize the performance of your test runs as traces, where spans represent the execution of different parts of the test.
 
-Test Visibility は、テストのパフォーマンス、不安定さ、および失敗に関する洞察を提供することで、開発チームによる CI 環境全体におけるソフトウェアテストのデバッグ、最適化、および加速を支援します。Test Visibility は自動で各テストをインスツルメントし、[Intelligent Test Runner][2] を使用したインテリジェントなテスト選択を統合します。これにより、テストの効率が向上し、冗長性が削減されます。
+Test Visibility enables development teams to debug, optimize, and accelerate software testing across CI environments by providing insights about test performance, flakiness, and failures. Test Visibility automatically instruments each test and integrates intelligent test selection using the [Intelligent Test Runner][2], enhancing test efficiency and reducing redundancy. 
 
-過去のテストデータを用いて、チームはパフォーマンスの低下を把握し、機能ブランチとデフォルトブランチのテスト結果を比較し、パフォーマンスベンチマークを設定できます。Test Visibility の使用により、チームは[開発者のワークフロー][14]を改善し、品質の高いコード出力を維持できます。
+With historical test data, teams can understand performance regressions, compare the outcome of tests from feature branches to default branches, and establish performance benchmarks. By using Test Visibility, teams can improve their [developer workflows][14] and maintain quality code output. 
 
-## テストサービスのセットアップ
+## Set up a test service
 
-Test Visibility は、CI テストのパフォーマンスと結果を追跡し、テスト実行の結果を表示します。
+Test Visibility tracks the performance and results of your CI tests, and displays results of the test runs.
 
-テストのインスツルメンテーションと実行を開始するために、以下の言語のドキュメントを参照してください。
+To start instrumenting and running tests, see the documentation for one of the following languages.
 
 {{< partial name="continuous_integration/ci-tests-setup.html" >}}
 
 </br>
 
-Test Visibility は、どの CI プロバイダーとも互換性があり、CI Visibility でサポートされているプロバイダーに限定されません。サポートされている機能についての詳細は、[Test Visibility][3] をご覧ください。
+Test Visibility is compatible with any CI provider and is not limited to those supported by CI Visibility. For more information about supported features, see [Test Visibility][3].
 
-## CI テストデータの活用
+## Use CI test data
 
-テストのメトリクス (実行回数、期間、期間分布、総合成功率、失敗率など) にアクセスし、CI パイプライン全体から収集したテストデータを使用して、重要なトレンドやパターンの特定を始めます。
+Access your tests’ metrics (such as executions, duration, distribution of duration, overall success rate, failure rate, and more) to start identifying important trends and patterns using the data collected from your tests across CI pipelines.
 
-{{< img src="getting_started/test_visibility/tests_dashboard.png" alt="Datadog のすぐに使える Test Visibility ダッシュボード" style="width:100%;" >}}
+{{< img src="getting_started/test_visibility/tests_dashboard.png" alt="Out-of-the-box Test Visibility dashboard in Datadog" style="width:100%;" >}}
 
-[ダッシュボード][4]を作成して、テスト内で発生する不安定なテスト、パフォーマンスの低下、テストの失敗を監視することができます。または、Test Visibility で収集されたデータが入力されたウィジェットを含む[すぐに使えるダッシュボード][5]を利用して、CI テストセッション、モジュール、スイート、テストの健全性とパフォーマンスを視覚化することも可能です。
+You can create [dashboards][4] for monitoring flaky tests, performance regressions, and test failures occurring within your tests. Alternatively, you can utilize an [out-of-the-box dashboard][5] containing widgets populated with data collected in Test Visibility to visualize the health and performance of your CI test sessions, modules, suites, and tests.
 
-## 不安定なテストの管理
+## Manage flaky tests
 
-[不安定なテスト][6]とは、同じコミットに対して複数回のテスト実行で合格と不合格の両方のステータスを示すテストのことです。あるコードをコミットし CI で実行した際にテストが失敗し、再度 CI で実行した際に同じテストが合格する場合、そのテストは信頼性が低いとみなされ不安定とマークされます。
+A [flaky test][6] is a test that exhibits both a passing and failing status across multiple test runs for the same commit. If you commit some code and run it through CI, and a test fails, and you run it through CI again and the same test now passes, that test is unreliable and marked as flaky.
 
-**Flaky Tests** セクションや [**Test List** ページ][7]のテストサービス一覧にある列から不安定なテストの情報にアクセスできます。
+You can access flaky test information in the **Flaky Tests** section of a test run’s overview page, or as a column on your list of test services on the [**Test List** page][7].
 
-{{< img src="getting_started/test_visibility/commit_flaky_tests.png" alt="テスト実行のコミットセクションで無視できる不安定なテスト" style="width:100%;" >}}
+{{< img src="getting_started/test_visibility/commit_flaky_tests.png" alt="Flaky tests that can be ignored in the Commits section of a test run" style="width:100%;" >}}
 
-各ブランチについて、新たに発見された不安定なテストの数、そのテストによって不安定になったコミットの数、テストの総実行時間、ブランチの最新のコミットの詳細が一覧表示されます。
+For each branch, the list shows the number of new flaky tests, the number of commits flaked by the tests, total test time, and the branch’s latest commit details. 
 
 Average duration
-: テストの平均実行時間です。
+: The average time the test takes to run.
 
 First flaked and Last flaked
-: テストが最初におよび最も最近に不安定になった日とコミット SHA。
+: The date and commit SHAs for when the test first and most recently exhibited flaky behavior. 
 
 Commits flaked
-: テストが不安定な挙動を示したコミットの数です。
+: The number of commits in which the test exhibited flaky behavior. 
 
 Failure rate
-: このテストが最初に不安定になって以来、失敗したテスト実行の割合です。
+: The percentage of test runs that have failed for this test since it first flaked. 
 
 Trend
-: 不安定なテストが修正されたのか、または現在も不安定状態が続いているかを示す視覚化されたデータです。
+: A visualization that indicates whether a flaky test was fixed or it is still actively flaking.
 
-Test Visibility では、コミットの **Flaky Tests** セクションにおける不安定なテストのトレンドと影響を理解するのに役立つ以下のグラフが表示されます。
+Test Visibility displays the following graphs to help you understand your flaky test trends and the impact of your flaky tests in a commit’s **Flaky Tests** section:
 
 New Flaky Test Runs
-: 新しい不安定なテストが検出される頻度です。
+: How often new flaky tests are being detected.
 
 Known Flaky Test Runs
-: 追跡されている不安定なテストに関連するすべてのテスト失敗。不安定なテストが「不安定になる」たびに表示されます。
+: All of the test failures associated with the flaky tests being tracked. This shows every time a flaky test "flakes”.
 
-不安定テストが誤って検出されたと判断したコミットの新しい不安定なテストを無視するには、**New Flaky** 値がドロップダウンオプションで提供されるテストをクリックし、**Ignore flaky tests** をクリックします。詳細については、[不安定なテストの管理][8]を参照してください。
+To ignore new flaky tests for a commit that you’ve determined the flaky tests were detected by mistake, click on a test containing a **New Flaky** value with a dropdown option, and click **Ignore flaky tests**. For more information, see [Flaky Test Management][8].
 
-## Test Visibility Explorer で結果を検証する
+## Examine results in the Test Visibility Explorer
 
-Test Visibility Explorer では、テストから収集したデータを使用して視覚化を作成したり、テストスパンをフィルタリングしたりできます。各テスト実行は、テストリクエストによって生成された追加のスパンを含むトレースとして報告されます。
+The Test Visibility Explorer allows you to create visualizations and filter test spans using the data collected from your testing. Each test run is reported as a trace, which includes additional spans generated by the test request. 
 
 {{< tabs >}}
-{{% tab "セッション" %}}
+{{% tab "Session" %}}
 
-[**Software Delivery** > **Test Visibility** > **Test Runs**][101] に移動し、`Session` を選択してテストセッションスパンの結果のフィルタリングを開始します。
+Navigate to [**Software Delivery** > **Test Visibility** > **Test Runs**][101] and select `Session` to start filtering your test session span results. 
 
-{{< img src="/getting_started/test_visibility/session.png" alt="Shopist リポジトリでフィルタリングされた Test Visibility Explorer のテストセッション結果" style="width:100%" >}}
+{{< img src="/getting_started/test_visibility/session.png" alt="Test session results in the Test Visibility Explorer filtered on the Shopist repository" style="width:100%" >}}
 
 [101]: https://app.datadoghq.com/ci/test-runs?query=test_level%3Asession
 
-{{% /tab %}}{{% tab "モジュール" %}}
+{{% /tab %}}
+{{% tab "Module" %}}
 
-[**Software Delivery** &gt; **Test Visibility** &gt; **Test Runs**][101] に移動し、`Module` を選択して、テストモジュールスパンの結果のフィルタリングを開始します。
+Navigate to [**Software Delivery** > **Test Visibility** > **Test Runs**][101] and select `Module` to start filtering your test module span results. 
 
-{{< img src="/getting_started/test_visibility/module.png" alt="Shopist リポジトリでフィルタリングされた Test Visibility Explorer のテストモジュールの結果" style="width:100%" >}}
+{{< img src="/getting_started/test_visibility/module.png" alt="Test module results in the Test Visibility Explorer filtered on the Shopist repository" style="width:100%" >}}
 
 [101]: https://app.datadoghq.com/ci/test-runs?query=test_level%3Amodule
 
-{{% /tab %}}{{% tab "スイート" %}}
+{{% /tab %}}
+{{% tab "Suite" %}}
 
-[**Software Delivery** &gt; **Test Visibility** &gt; **Test Runs**][101] に移動し、`Suite` を選択して、テストスイートスパン結果のフィルタリングを開始します。
+Navigate to [**Software Delivery** > **Test Visibility** > **Test Runs**][101] and select `Suite` to start filtering your test suite span results. 
 
-{{< img src="/getting_started/test_visibility/suite.png" alt="Shopist リポジトリでフィルタリングされた Test Visibility Explorer のテストスイートの結果" style="width:100%" >}}
+{{< img src="/getting_started/test_visibility/suite.png" alt="Test suite results in the Test Visibility Explorer filtered on the Shopist repository" style="width:100%" >}}
 
 [101]: https://app.datadoghq.com/ci/test-runs?query=test_level%3Asuite
 
-{{% /tab %}}{{% tab "テスト" %}}
+{{% /tab %}}
+{{% tab "Test" %}}
 
-[**Software Delivery** &gt; **Test Visibility** &gt; **Test Runs**][101] に移動し、`Test` を選択して、テストスパンの結果のフィルタリングを開始します。
+Navigate to [**Software Delivery** > **Test Visibility** > **Test Runs**][101] and select `Test` to start filtering your test span results. 
 
-{{< img src="/getting_started/test_visibility/test.png" alt="Shopist リポジトリでフィルタリングされた Test Visibility Explorer のテストの結果" style="width:100%" >}}
+{{< img src="/getting_started/test_visibility/test.png" alt="Test results in the Test Visibility Explorer filtered on the Shopist repository" style="width:100%" >}}
 
 [101]: https://app.datadoghq.com/ci/test-runs?query=test_level%3Atest
 
 {{% /tab %}}
 {{< /tabs >}}
 
-[ファセット][9]を使用して検索クエリをカスタマイズし、テスト実行の各レベルで費やされた時間の変化を特定します。
+Use [facets][9] to customize the search query and identify changes in time spent on each level of your test run.
 
-**Test List** ページでテストをクリックすると、**Trace** タブでフレームグラフやスパンのリストを見ることができます。
+Once you click on a test on the **Test List** page, you can see a flame graph or a list of spans on the **Trace** tab. 
 
-{{< img src="/getting_started/test_visibility/failed_test_trace.png" alt="Test List ページで失敗したテスト実行のスタックトレース" style="width:100%" >}}
+{{< img src="/getting_started/test_visibility/failed_test_trace.png" alt="A stack trace of a failed test run on the Test List page" style="width:100%" >}}
 
-テスト実行のボトルネックを特定し、実行時間の割合が最大から最小にランク付けされた個々のレベルを調べることができます。
+You can identify bottlenecks in your test runs and examine individual levels ranked from the largest to smallest percentage of execution time.
 
-## テストへのカスタム測定値の追加
+## Add custom measures to tests
 
-CI Visibility Tests API エンドポイントを使用して、テストイベントをプログラムによって検索および管理できます。詳細については、[API ドキュメント][10]を参照してください。
+You can programmatically search and manage test events using the CI Visibility Tests API endpoint. For more information, see [the API documentation][10].
 
-CI テストから収集したデータを強化するために、テスト実行中に作成されるスパンに、プログラムによってタグや測定値 (メモリ使用量など) を直接追加できます。詳細については、[テストにカスタム測定値を追加する][11]を参照してください。
+To enhance the data collected from your CI tests, you can programmatically add tags or measures (like memory usage) directly to the spans created during test execution. For more information, see [Add Custom Measures To Your Tests][11].
 
-## CI モニターの作成
+## Create a CI monitor
 
-失敗が発生した場合や新しい不安定なテストが検出された場合に、テストパフォーマンスの回帰について組織内の関連チームに警告します。
+Alert relevant teams in your organization about test performance regressions when failures occur or new flaky tests occur. 
 
-{{< img src="/getting_started/test_visibility/test_monitor.png" alt="テストの失敗が 1 回を超えるとアラートを発生させる CI テストモニター" style="width:100%" >}}
+{{< img src="/getting_started/test_visibility/test_monitor.png" alt="A CI test monitor that triggers alerts when the amount of test failures exceeds one failure" style="width:100%" >}}
 
-テストの失敗がしきい値である 1 回を超えたときに警告を発するモニターをセットアップするには
+To set up a monitor that alerts when the amount of test failures exceeds a threshold of 1 failure:
 
-1. [**Monitors** > **New Monitor**][12] に移動し、**CI** を選択します。
-1. CI テストに共通のモニタータイプを選択して開始します。たとえば、新しい不安定なテストがコードベースに追加されたときに警告を発する `New Flaky Test`、テスト失敗時に警告を発する `Test Failures`、テストのパフォーマンスが低下したときに警告を発する `Test Performance` を選択するか、独自の検索クエリをカスタマイズします。この例では、`main` ブランチでのテスト実行をフィルタリングするために `Branch (@git.branch)` ファセットを選択します。
-1. `Evaluate the query over the` セクションで、最後の 15 分を選択します。
-1. 評価値がしきい値を超えたときにトリガーされるようにアラート条件を設定し、`Alert threshold > 1` などのアラートしきい値や警告しきい値の値を指定します。
-1. モニター通知を定義します。
-1. モニターの権限を設定します。
-1. **Create** をクリックします。
+1. Navigate to [**Monitors** > **New Monitor**][12] and select **CI**. 
+1. Select a common monitor type for CI tests to get started, for example: `New Flaky Test` to trigger alerts when new flaky tests are added to your code base, `Test Failures` to trigger alerts for test failures, or `Test Performance` to trigger alerts for test performance regressions, or customize your own search query. In this example, select the `Branch (@git.branch)` facet to filter your test runs on the `main` branch.
+1. In the `Evaluate the query over the` section, select last 15 minutes. 
+1. Set the alert conditions to trigger when the evaluated value is above the threshold, and specify values for the alert or warning thresholds, such as `Alert threshold > 1`.
+1. Define the monitor notification.
+1. Set permissions for the monitor.
+1. Click **Create**.
 
-詳細については、[CI モニターのドキュメント][13]を参照してください。
+For more information, see the [CI Monitor documentation][13]. 
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/tests/
-[2]: /ja/intelligent_test_runner/
-[3]: /ja/tests/#supported-features
-[4]: /ja/dashboards/
+[1]: /tests/
+[2]: /intelligent_test_runner/
+[3]: /tests/#supported-features
+[4]: /dashboards/
 [5]: https://app.datadoghq.com/dash/integration/30897/ci-visibility---tests-dashboard
-[6]: /ja/glossary/?product=ci-cd#flaky-test
+[6]: /glossary/?product=ci-cd#flaky-test
 [7]: https://app.datadoghq.com/ci/test-services
-[8]: /ja/tests/guides/flaky_test_management
+[8]: /tests/guides/flaky_test_management
 [8]: https://app.datadoghq.com/ci/test-runs
-[9]: /ja/continuous_integration/explorer/facets/?tab=testruns
-[10]: /ja/api/latest/ci-visibility-tests/
-[11]: /ja/tests/guides/add_custom_measures/
+[9]: /continuous_integration/explorer/facets/?tab=testruns
+[10]: /api/latest/ci-visibility-tests/
+[11]: /tests/guides/add_custom_measures/
 [12]: https://app.datadoghq.com/monitors/create
-[13]: /ja/monitors/types/ci/?tab=tests#track-new-flaky-tests
-[14]: /ja/tests/developer_workflows
+[13]: /monitors/types/ci/?tab=tests#track-new-flaky-tests
+[14]: /tests/developer_workflows

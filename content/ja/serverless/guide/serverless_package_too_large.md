@@ -1,23 +1,24 @@
 ---
+title: Troubleshooting Serverless Package Too Large Errors
+kind: documentation
 further_reading:
 - link: /serverless/installation/nodejs
-  tag: ドキュメント
-  text: Node.js アプリケーションのインスツルメンテーション
-title: サーバーレスパッケージが大きすぎるエラーのトラブルシューティング
+  tag: Documentation
+  text: Instrumenting Node.js Applications
 ---
 
-このガイドは、"Code uncompressed size is greater than max allowed size of 272629760 "というエラーのトラブルシューティングを支援します。このエラーは、Datadog サーバーレスプラグインを使用して Node.js サーバーレスアプリケーションをインスツルメントするときに最も一般的に表示されます。また、他の言語やデプロイメント方法でこのエラーが発生した場合にも、このトラブルシューティングの方法が適用される場合があります。
+This guide helps you troubleshoot the error "Code uncompressed size is greater than max allowed size of 272629760". This error is most commonly seen when instrumenting Node.js serverless applications using the Datadog serverless plugin. The troubleshooting strategy may also apply to the same error if you see it for other languages or deployment methods.
 
-このエラーは、関数の_圧縮されていない_コードサイズが 250MB の制限を超えていることを示しています。[関数パッケージ][1] (関数のコードと依存関係を含む `.zip` アーティファクト) と関数に設定された [Lambda レイヤー][2]の両方が、この制限にカウントされます。両方を調べて、根本的な原因を探ってください。
+The error indicates that your function's _uncompressed_ code size exceeds the 250 MB limit. Both your [function package][1] (the `.zip` artifact containing your function code and dependencies) and the [Lambda layers][2] configured on your function count towards this limit. Examine both to find the root cause.
 
-## レイヤー
+## Layers
 
-通常、Datadog はインスツルメンテーションのために 2 つの Lambda レイヤーを追加します。
+Typically Datadog adds two Lambda layers for instrumentation:
 
-- 関数コードをインスツルメントする言語固有のライブラリと
-- 観測データを集計し、バッファリングし、Datadog のバックエンドに転送する拡張機能。
+- A language-specific library that instruments the function code, and
+- The extension, which aggregates, buffers, and forwards observability data to the Datadog backend.
 
-AWS CLI コマンド [`aws lambda get-layer-version`][3] を使用して Datadog Lambda レイヤーの内容とサイズを確認します。例えば、以下のコマンドを実行すると、_Datadog-{{< latest-lambda-layer-version layer="node-example-version" >}} バージョン {{< latest-lambda-layer-version layer="node" >}} と _Datadog-Extension バージョン {{< latest-lambda-layer-version layer="extension" >}} の Lambda レイヤーをダウンロードするリンクが得られ、圧縮されていないサイズ (合わせて約 30MB) を確認することができます。解凍サイズはレイヤーやバージョンによって異なります。以下の例のレイヤー名とバージョン番号は、アプリケーションで使用されているものに置き換えてください。
+Inspect the content and size of the Datadog Lambda layers using AWS CLI command [`aws lambda get-layer-version`][3]. For example, running the following commands gives you links to download the Lambda layers for _Datadog-{{< latest-lambda-layer-version layer="node-example-version" >}} version {{< latest-lambda-layer-version layer="node" >}} and _Datadog-Extension version {{< latest-lambda-layer-version layer="extension" >}} and inspect the uncompressed size (about 30 MB combined). The uncompressed size varies by layers and versions. Replace the layer name and version number in the following example with those used by your applications:
 
 ```
 aws lambda get-layer-version \
@@ -29,37 +30,37 @@ aws lambda get-layer-version \
   --version-number {{< latest-lambda-layer-version layer="extension" >}}
 ```
 
-Datadog の Lambda レイヤー以外にも、関数に追加された (または追加される) Lambda レイヤーも検査します。[Serverless Framework][4] を利用している場合、CloudFormation のテンプレートは `deploy` または `package` コマンドを実行した後の隠しフォルダ `.serverless` から、Lambda レイヤー一覧は `Layers` セクションから確認することが可能です。
+In addition to the Datadog Lambda layers, also inspect other Lambda layers added (or to be added) to your functions. If you use the [Serverless Framework][4], you can find the CloudFormation template from the hidden `.serverless` folder after running the `deploy` or `package` command, and the list of Lambda layers from the `Layers` section.
 
-## パッケージ
+## Package
 
-関数デプロイメントパッケージには、不要な大きなファイルやコードが含まれていることがあります。Serverless Framework を使用している場合、`deploy` または `package` コマンドを実行した後に、隠しフォルダである `.serverless` に生成されたデプロイメントパッケージ (`.zip` ファイル) を見つけることができます。
+The function deployment package can contain large files or code that you don't need. If you use the Serverless Framework, you can find the generated deployment package (`.zip` file) in the hidden `.serverless` folder after running the `deploy` or `package` command.
 
-デプロイメントパッケージとレイヤーのサイズの合計が制限を超えていない場合は、AWS サポートに連絡して調査を依頼してください。合計サイズが制限を超える場合は、デプロイメントパッケージを検査し、実行時に不要な大きなファイルを[パッケージ][5]オプションを使用して除外してください。
+If the sum of the size of the deployment package and layers doesn't exceed the limit, contact AWS Support for investigation. If the total size does exceed the limit, inspect the deployment package and exclude large files that you don't need in runtime using the [package][5] option.
 
-## 依存関係
+## Dependencies
 
-Datadog Lambda レイヤーはインスツルメンテーションライブラリをパッケージ化し、Lambda 実行環境で使用できるようにするので、 `datadog-lambda-js` と `dd-trace` を `package.json` で依存関係に指定する必要は _ありません_。もし、ローカルのビルドやテストに Datadog のライブラリが必要な場合は、`devDependencies` として指定し、デプロイメントパッケージから除外するようにします。同様に、`serverless-plugin-datadog` は開発時にのみ必要であり、 `devDependencies` の下に指定するべきです。
+The Datadog Lambda layer packages the instrumentation libraries and makes them available to use in the Lambda execution environment, so you do _not_ need to specify `datadog-lambda-js` and `dd-trace` as dependencies in your `package.json`. If you do need the Datadog libraries for local build or tests, specify them as `devDependencies` so that they are excluded from the deployment package. Similarly, `serverless-plugin-datadog` is needed only for development, and should be specified under `devDependencies`.
 
-また、デプロイメントパッケージに含まれる他の依存関係 (`node_modules` フォルダ) を検査し、必要なものだけを `dependencies` に保存してください。
+Also inspect other dependencies (the `node_modules` folder) that are included into your deployment package and only keep the ones that you need in `dependencies`.
 
-## バンドラー
+## Bundlers
 
-[Webpack][6] や [esbuild][7] のようなバンドラーを使用すると、使われているコードのみを含めることができ、デプロイメントパッケージのサイズを劇的に削減することができます。必要な Webpack の構成は [Node.js の Lambda Tracing とバンドラーの互換性][8]を参照してください。
+Using a bundler like [Webpack][6] or [esbuild][7] can dramatically reduce your deployment package size by only including the code that is used. See [Node.js Lambda Tracing and Bundlers Compatibility][8] for required webpack configurations.
 
 ## Datadog-ci
 
-ユースケースによっては、パッケージサイズの問題を回避するために `datadog-ci lambda instrument` コマンドを使用する方が簡単だと感じるかもしれません。`datadog-ci lambda instrument` コマンドは、serverless-plugin-datadog と同じインスツルメンテーションを構成します。詳しくは、[datadog-ci リポジトリ][9]を参照してください。
+Depending on your use case, you may find it easier to use the `datadog-ci lambda instrument` command to work around issues with package sizes. The `datadog-ci lambda instrument` command configures the same instrumentation as serverless-plugin-datadog. For more information, see the [datadog-ci repo][9].
 
-## サポート
+## Get help
 
-Datadog のサポートチームによる調査が必要な場合は、チケットに以下の情報を含めてください。
+If you need the Datadog support team to help investigate, include the following information in your ticket:
 
-1. この関数の構成された Lambda レイヤー (名前とバージョン、または ARN)。
-2. AWS にアップロードする関数のデプロイメントパッケージ (または解凍したパッケージの内容とサイズがわかるスクリーンショット)。
-3. プロジェクトのコンフィギュレーションファイル (**編集されたシークレット**を含む): `serverless.yaml`、`package.json`、`package-lock.json`、`yarn.lock`、 `tsconfig.json` および `webpack.config.json`。
+1. The function's configured Lambda layers (name and version, or ARNs).
+2. The function's deployment package (or a screenshot showing the content and size of the uncompressed package) to be uploaded to AWS.
+3. The project configuration files, with **redacted hardcoded secrets**: `serverless.yaml`, `package.json`, `package-lock.json`, `yarn.lock`, `tsconfig.json` and `webpack.config.json`.
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -70,5 +71,5 @@ Datadog のサポートチームによる調査が必要な場合は、チケッ
 [5]: https://www.serverless.com/framework/docs/providers/aws/guide/serverless.yml/#package
 [6]: https://webpack.js.org
 [7]: https://esbuild.github.io/
-[8]: /ja/serverless/guide/serverless_tracing_and_bundlers/
+[8]: /serverless/guide/serverless_tracing_and_bundlers/
 [9]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/lambda#readme

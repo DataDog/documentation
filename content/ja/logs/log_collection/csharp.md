@@ -1,87 +1,88 @@
 ---
+title: "C# Log Collection"
+kind: documentation
 aliases:
-- /ja/logs/languages/csharp
+  - /logs/languages/csharp
 further_reading:
-- link: https://www.datadoghq.com/blog/c-logging-guide/
-  tag: ブログ
-  text: C# ログの収集、カスタマイズ、分析方法
+- link: "https://www.datadoghq.com/blog/c-logging-guide/"
+  tag: Blog
+  text: "How to collect, customize, and analyze C# logs"
 - link: /tracing/other_telemetry/connect_logs_and_traces/dotnet/
   tag: Documentation
-  text: .NET ログとトレースの接続
+  text: Connecting .NET Logs and Traces
 - link: /logs/log_configuration/processors
   tag: Documentation
-  text: ログの処理方法
+  text: Learn how to process your logs
 - link: /logs/log_configuration/parsing
   tag: Documentation
-  text: パースの詳細
+  text: Learn more about parsing
 - link: /logs/explorer/
   tag: Documentation
-  text: ログの調査方法
-- link: /logs/explorer/#visualize
-  tag: ドキュメント
-  text: ログ分析の実行
+  text: Learn how to explore your logs
+- link: "/logs/explorer/#visualize"
+  tag: Documentation
+  text: Perform Log Analytics
 - link: /logs/faq/log-collection-troubleshooting-guide/
-  tag: よくあるご質問
-  text: ログ収集のトラブルシューティングガイド
-- link: /glossary/#tail
-  tag: 用語集
-  text: 用語集 "テール" の項目
-title: C# ログ収集
+  tag: FAQ
+  text: Log Collection Troubleshooting Guide
+- link: "/glossary/#tail"
+  tag: Glossary
+  text: Glossary entry for "tail"
 ---
 
-C# のログを Datadog に送信するには、次のいずれかの方法を使用します。
+To send your C# logs to Datadog, use one of the following approaches:
 
-- [ファイルにログを記録し、そのファイルを Datadog Agent で追跡します](#file-tail-logging-with-the-datadog-agent)。
-- [エージェントレスロギングを有効にします](#agentless-logging-with-apm)。
-- [Serilog シンクを使用します](#agentless-logging-with-serilog-sink)。
+- [Log to a file and then tail that file with your Datadog Agent](#file-tail-logging-with-the-datadog-agent).
+- [Enable Agentless logging](#agentless-logging-with-apm).
+- [Use the Serilog sink](#agentless-logging-with-serilog-sink).
 
-このページでは、`Serilog`、`NLog`、`log4net`、`Microsoft.Extensions.Logging` ロギングライブラリのセットアップ例を、上記の各アプローチで詳しく説明します。
+This page details setup examples for the `Serilog`, `NLog`, `log4net`, and `Microsoft.Extensions.Logging` logging libraries, for each of the above approaches.
 
-## Datadog Agent によるファイルテールロギング
+## File-tail logging with the Datadog Agent
 
-C# ログ収集の推奨アプローチは、ログをファイルに出力し、そのファイルを Datadog Agent で[テール][20]することです。これにより、Datadog Agent が追加のメタデータでログをリッチ化することができます。
+The recommended approach for C# log collection is to output your logs to a file and then [tail][20] that file with your Datadog Agent. This enables the Datadog Agent to enrich the logs with additional metadata.
 
-Datadog は、[カスタムパース規則][1]の使用を避け、ログを JSON 形式で生成するようにロギングライブラリをセットアップすることを強くお勧めします。
+Datadog strongly encourages setting up your logging library to produce your logs in JSON format to avoid the need for [custom parsing rules][1].
 
-### ロガーの構成
+### Configure your logger
 
 {{< tabs >}}
 {{% tab "Serilog" %}}
 
-他の多くの .NET のライブラリと同様に、Serilog は、ファイル、コンソールなどに診断ログを提供します。洗練された API を備えています。また、最近の .NET プラットフォーム間で移植可能です。
+Like many other libraries for .NET, Serilog provides diagnostic logging into files, the console, and elsewhere. It has a clean API and is portable between recent .NET platforms.
 
-他のロギングライブラリと異なり、Serilog は、強力な構造化イベント データを志向して構築されています。
+Unlike other logging libraries, Serilog is built with powerful structured event data in mind.
 
-Serilog を NuGet でインストールするには、パッケージマネージャーコンソールで、次のコマンドを実行してください。
+To install Serilog with NuGet, run the following command in the Package Manager Console:
 
 ```text
 PM> Install-Package Serilog.Sinks.File
 ```
 
-次に、以下のコードを追加してアプリケーションでロガーを直接初期化します。
+Then, add the following code to initialize the logger directly in your application:
 
 ```csharp
-// ロガーをインスタンス化します
+// Instantiate the logger
 var log = new LoggerConfiguration()  // using Serilog;
 
-    // Serilog.Formatting.Json; の使用
+    // using Serilog.Formatting.Json;
     .WriteTo.File(new JsonFormatter(renderMessage: true), "log.json")
 
-    // Serilog.Formatting.Compact; の使用
-    // .WriteTo.File(new RenderedCompactJsonFormatter(), "log.json")  
+    // using Serilog.Formatting.Compact;
+    // .WriteTo.File(new RenderedCompactJsonFormatter(), "log.json")
 
     .CreateLogger();
 
-// 例
+// An example
 var position = new { Latitude = 25, Longitude = 134 };
 var elapsedMs = 34;
 
 log.Information("Processed {@Position} in {Elapsed:000} ms.", position, elapsedMs);
 ```
 
-`log.json` ファイルで、ロガーが正常にインスタンス化されたことを確認します。
+In the `log.json` file, confirm the logger instantiated successfully:
 
-- `JsonFormatter(renderMessage: true)` を使う場合は、次のイベントを探して確認してください。
+- If using `JsonFormatter(renderMessage: true)`, look for the following event for confirmation:
 
 ```json
 {
@@ -94,7 +95,7 @@ log.Information("Processed {@Position} in {Elapsed:000} ms.", position, elapsedM
 }
 ```
 
-- `RenderedCompactJsonFormatter()` を使う場合は、次のイベントを探して確認してください。
+- If using `RenderedCompactJsonFormatter()`, look for the following event for confirmation:
 
 ```json
 {
@@ -109,15 +110,15 @@ log.Information("Processed {@Position} in {Elapsed:000} ms.", position, elapsedM
 {{% /tab %}}
 {{% tab "NLog" %}}
 
-NLog は、.NET 用ログプラットフォームで、ログルーティング機能とログ管理機能に優れています。アプリケーションのサイズや複雑さに関係なく、高品質なアプリケーションログを生成して管理できます。
+NLog is a logging platform for .NET with rich log routing and management capabilities. It can help you produce and manage high-quality logs for your application regardless of its size or complexity.
 
-NLog を NuGet を使ってインストールするには、パッケージマネージャーコンソールで、次のコマンドを実行してください。
+To install NLog using NuGet, run the following command in the Package Manager Console:
 
 ```text
 PM> Install-Package NLog
 ```
 
-ライブラリをクラスパスに追加したら、次のレイアウトを任意のターゲットにアタッチします。プロジェクトのルートパスにある `NLog.config` ファイルを編集または追加します。次に、そのファイルに以下のコードをコピーして貼り付けます (ログは `application-logs.json` ファイルに書き込まれます)。
+Once the library is in your classpath, attach the following layout to any target. Edit or add a `NLog.config` file to the project root path. Then copy/paste the following code in it (*Logs are written into the `application-logs.json` file*):
 
 ```xml
 <?xml version="1.0" encoding="utf-8" ?>
@@ -125,11 +126,11 @@ PM> Install-Package NLog
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
   <!--
-  ログ規則と出力のカスタマイズについては、
-  https://github.com/nlog/nlog/wiki/Configuration-file を参照してください。
+  See https://github.com/nlog/nlog/wiki/Configuration-file
+  for information on customizing logging rules and outputs.
    -->
   <targets async="true">
-    <!-- ログを Json 形式でファイルに書き込みます -->
+    <!-- Write logs as Json into a file -->
     <target name="json-file" xsi:type="File" fileName="application-logs.json">
       <layout xsi:type="JsonLayout">
         <attribute name="date" layout="${date:universalTime=true:format=o}" />
@@ -141,13 +142,13 @@ PM> Install-Package NLog
 
   </targets>
   <rules>
-    <!-- すべてのイベントを json-file ターゲットに記録します -->
+    <!-- Log all events to the json-file target -->
     <logger name="*" writeTo="json-file" minlevel="Trace" />
   </rules>
 </nlog>
 ```
 
-最初のイベントを生成してログに記録するには、以下をコードに追加します。
+To fire and log your first events, add this to your code:
 
 ```csharp
 using NLog;
@@ -156,15 +157,15 @@ namespace Datadog
 {
     class Program
     {
-        // ロガーを初期化します
+        // Initialize a logger
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
         static void Main(string[] args)
         {
-            // 簡単なデバッグメッセージをログに記録します
+            // Log a simple debug message
             logger.Debug("This is my first step");
 
-            // この後にコードを続けます...
+            // your code continues here ...
         }
     }
 }
@@ -172,16 +173,16 @@ namespace Datadog
 
 {{% /tab %}}
 {{% tab "Log4Net" %}}
-Log4Net は、Log4j から派生した .NET 用ログプラットフォームで、ログルーティング機能とログ管理機能に優れています。アプリケーションのサイズや複雑さに関係なく、高品質なアプリケーションログを生成して管理できます。
+Log4Net is a logging platform for .NET inspired from Log4j with rich log routing and management capabilities. It can help you produce and manage high-quality logs for your application regardless of its size or complexity.
 
-Log4Net をインストールするには、パッケージマネージャーコンソールで、次のコマンドを実行します。
+To install Log4Net, run the following command in the Package Manager Console:
 
 ```text
 PM> Install-Package log4net
 PM> Install-Package log4net.Ext.Json
 ```
 
-ライブラリがインストールされたら、次のレイアウトを任意のターゲットにアタッチします。プロジェクトの `App.config` を編集して、以下のセクションを追加します。
+Once the library is installed, attach the following layout to any target. Edit the `App.config` of your project and add the following section:
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -204,20 +205,20 @@ PM> Install-Package log4net.Ext.Json
       <layout type="log4net.Layout.SerializedLayout, log4net.Ext.Json">
         <decorator type="log4net.Layout.Decorators.StandardTypesDecorator, log4net.Ext.Json" />
         <default />
-        <!--明示的なデフォルトメンバー-->
+        <!--explicit default members-->
         <remove value="ndc" />
         <remove value="message" />
-        <!--デフォルトの書式設定済みメッセージメンバーを削除します-->
+        <!--remove the default preformatted message member-->
         <member value="message:messageobject" />
-        <!--未加工のメッセージを追加します-->
+        <!--add raw message-->
       </layout>
     </appender>
   </log4net>
 
-  <!-- 他の構成をここから始めます... -->
+  <!-- The rest of your configuration starts here ... -->
 ```
 
-ロガーをインスタンス化し、イベントの生成を開始します。
+Instantiate your logger and start to fire your events:
 
 ```csharp
 using log4net;
@@ -226,25 +227,25 @@ namespace Datadog
 {
     class Program
     {
-        // 現在のクラスロガーを取得します
+        // Get the current class logger
         private static ILog logger = LogManager.GetLogger(typeof(Program));
 
         static void Main(string[] args)
         {
 
-           // App.config から構成を読み込みます
+           // Load the configure fom App.config
            XmlConfigurator.Configure();
 
-             // 簡単なデバッグメッセージをログに記録します
+           // Log a simple debug message
            logger.Debug("This is my first debug message");
 
-            // この後にコードを続けます ...
+           // your code continues here ...
         }
     }
 }
 ```
 
-上の手順に従った場合は、ログファイル (例: `C:\Projects\Datadog\Logs\log.json`) に次のイベントがあることを確認できます。
+If you have followed the instructions you should see in your file (for example `C:\Projects\Datadog\Logs\log.json`) the following event:
 
 ```json
 {
@@ -257,7 +258,7 @@ namespace Datadog
 }
 ```
 
-JSON でログを記録する方がメリットが多いですが、未加工の文字列形式でログを記録したい場合は、次のように `log4net conversion pattern` を更新し、C# インテグレーションパイプラインを使用してログが自動的にパースされるようにします。
+If, despite the benefits of logging in JSON, you wish to log in raw string format, try updating the `log4net conversion pattern` to automatically parse your logs with the C# integration Pipeline as follows:
 
 ```text
 <param name="ConversionPattern" value="%date{yyyy-MM-dd HH:mm:ss.SSS} %level [%thread] %logger %method:%line - %message%n" />
@@ -266,12 +267,12 @@ JSON でログを記録する方がメリットが多いですが、未加工の
 {{% /tab %}}
 {{< /tabs >}}
 
-### Datadog Agent の構成
+### Configure the Datadog Agent
 
-[ログ収集が有効][2]になったら、ログファイルを追跡して Datadog に送信する[カスタムログ収集][3]を設定します。
+Once [log collection is enabled][2], set up [custom log collection][3] to tail your log files and send them to Datadog.
 
-1. `csharp.d/` フォルダーを `conf.d/` [Agent 構成ディレクトリ][4]に作成します。
-2. `csharp.d/` に以下の内容で `conf.yaml` ファイルを作成します。
+1. Create a `csharp.d/` folder in the `conf.d/` [Agent configuration directory][4].
+2. Create a `conf.yaml` file in `csharp.d/` with the following content:
 
     ```yaml
     init_config:
@@ -292,155 +293,156 @@ JSON でログを記録する方がメリットが多いですが、未加工の
         #    name: new_log_start_with_date
         #    pattern: \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
     ```
-3. Agent ユーザーにログファイルの読み取り権限があることを確認します。
-4. [Agent を再起動します][5]。
-5. [Agent の status サブコマンド][6]を実行し、`Checks` セクションで `csharp` を探し、ログが Datadog に正常に送信されることを確認します。
+3. Make sure the Agent user has read access permissions to the log file.
+4. [Restart the Agent][5].
+5. Run the [Agent's status subcommand][6] and look for `csharp` under the `Checks` section to confirm logs are successfully submitted to Datadog.
 
-ログが JSON 形式の場合、Datadog は自動的にログメッセージを[パース][7]し、ログ属性を抽出します。[ログエクスプローラー][8]を使用して、ログを表示し、トラブルシューティングを行うことができます。
+If logs are in JSON format, Datadog automatically [parses the log messages][7] to extract log attributes. Use the [Log Explorer][8] to view and troubleshoot your logs.
 
-### ログとトレースにおけるサービスを接続
+### Connect your service across logs and traces
 
-APM が有効になっているアプリケーションの場合は、[APM .NET の指示に従い][9]ログにトレース ID、スパン ID、`env`、`service`、`version` を自動的に追加し、ログとトレースを接続します。
+If APM is enabled for this application, connect your logs and traces by automatically adding trace IDs, span IDs,
+`env`, `service`, and `version` to your logs by [following the APM .NET instructions][9]
 
-**注**: APM トレーサーがログに `service` を挿入する場合、Agent 構成で設定されている値は上書きされます。
+**Note**: If the APM tracer injects `service` into your logs, it overrides the value set in the agent configuration.
 
-## APM によるエージェントレスロギング
+## Agentless logging with APM
 
-.NET APM 自動インスツルメンテーションライブラリを使用して、コードを変更することなく、アプリケーションから Datadog に直接ログをストリームすることが可能です。この方法は、Datadog に直接ログを送信するため、Datadog Agent が提供する[機密データスクラビングなどの機能][10]の恩恵を受けることができません。そのため、可能な限りファイルテールロギングを使用することを推奨しますが、これが不可能な環境 (例えば [Azure App Service][11] を使用している場合) においては有用です。なお、[機密データスキャナー][12]によって実行されるサーバーサイドのスクラビング機能には、これまで通り依存することが可能です。
+It is possible to stream logs from your application to Datadog directly, without making any code changes, using the .NET APM automatic instrumentation library. This approach sends logs directly to Datadog, so it does not benefit from [features such as sensitive data scrubbing][10] which are provided by the Datadog Agent. For that reason, we recommend using file tail logging where possible, but it is useful in environments where this is not possible (when using [Azure App Service][11] for example). It is worth noting that you will still be able to rely on server-side scrubbing capabilities performed by [Sensitive Data Scanner][12].
 
-エージェントレスロギング (「ダイレクトログ送信」とも呼ばれる) は、以下のフレームワークに対応しています。
+Agentless logging (also known as "direct log submission") supports the following frameworks:
 - Serilog (v1.0+)
 - NLog (v2.1+)
 - log4net (v1.0+)
 - Microsoft.Extensions.Logging (2.0+)
 
-アプリケーションのコードを修正したり、アプリケーションに依存するものを追加でインストールする必要はありません。
+It does not require modifying your application code, or installing additional dependencies into your application.
 
 <div class="alert alert-warning">
-  <strong>注:</strong> log4net または NLog を使用する場合、エージェントレスロギングを有効にするには、アペンダー (log4net) またはロガー (NLog) が構成されている必要があります。これらの場合、これらの追加の依存関係を追加するか、代わりに <a href="/logs/log_collection/csharp/?tab=log4net#agentless-logging-with-serilog-sink">Serilog シンクを使用してエージェントレスロギング</a>を使用することができます。
+  <strong>Note:</strong> If you use log4net or NLog, an appender (log4net) or a logger (NLog) must be configured for Agentless logging to be enabled. In those cases, you can either add these extra dependencies, or use <a href="/logs/log_collection/csharp/?tab=log4net#agentless-logging-with-serilog-sink">agentless logging with the Serilog sink</a> instead.
 </div>
 
 
-### APM ライブラリの構成
+### Configure the APM library
 
-エージェントレスロギングは、APM を自動インスツルメンテーションで使用する場合にのみ利用できます。まず、以下のドキュメントで説明されているように、アプリケーションをインスツルメントしてください。
+Agentless logging is only available when using APM with automatic instrumentation. To get started, instrument your application as described in the following documents:
 
-- [.NET Core/.NET 5+ アプリケーション][13]
-- [.NET Framework アプリケーション][14]
+- [.NET Core/.NET 5+ applications][13]
+- [.NET Framework applications][14]
 
-インストール後、トレースが正しく受信されていることを確認します。
+After installing, verify you are receiving traces correctly.
 
-### エージェントレスロギングを有効にする
+### Enable Agentless logging
 
-エージェントレスロギングを有効にするには、以下の環境変数を設定します。
+To enable Agentless logging, set the following environment variables:
 
 `DD_API_KEY`
-: Datadog にログを送信するための [Datadog API キー][15]。
+: Your [Datadog API Key][15] for sending your logs to Datadog.
 
 `DD_SITE`
-: [Datadog サイト][16]の名前。以下の例から選択してください。<br>
-**例**: `datadoghq.com` (US1)、`datadoghq.eu` (EU)、`us3.datadoghq.com` (US3)、`us5.datadoghq.com` (US5)、`ddog-gov.com` (US1-FED) <br>
-**デフォルト**: `datadoghq.com` (US1)
+: The name of [your Datadog site][16]. Choose from one of the following examples:<br>
+**Example**: `datadoghq.com` (US1), `datadoghq.eu` (EU), `us3.datadoghq.com` (US3), `us5.datadoghq.com` (US5), `ddog-gov.com` (US1-FED) <br>
+**Default**: `datadoghq.com` (US1)
 
 `DD_LOGS_INJECTION`
-: [ログとトレースの接続][9]を有効にします。<br>
-**デフォルト**: `true` <br>
-Tracer バージョン 2.7.0 からエージェントレスロギングを使用する場合、デフォルトで有効になります。
+: Enables [connecting logs and traces][9]:<br>
+**Default**: `true` <br>
+Enabled by default when using Agentless logging from Tracer version 2.7.0.
 
 `DD_LOGS_DIRECT_SUBMISSION_INTEGRATIONS`
-: エージェントレスロギングを有効にします。`Serilog`、`NLog`、`Log4Net`、または `ILogger` (`Microsoft.Extensions.Logging` の場合) に設定することで、使用しているロギングフレームワークで有効にすることができます。複数のロギングフレームワークを使用している場合は、セミコロンで区切った変数のリストを使用します。<br>
-**例**: `Serilog;Log4Net;NLog`
+: Enables Agentless logging. Enable for your logging framework by setting to `Serilog`, `NLog`, `Log4Net`, or `ILogger` (for `Microsoft.Extensions.Logging`). If you are using multiple logging frameworks, use a semicolon separated list of variables.<br>
+**Example**: `Serilog;Log4Net;NLog`
 
 <div class="alert alert-warning">
-  <strong>注:</strong> <code>Microsoft.Extensions.Logging</code> と共にロギングフレームワークを使用している場合、一般的にフレームワーク名を使用する必要があります。例えば、<a href="https://github.com/serilog/serilog-extensions-logging">Serilog.Extensions.Logging</a> を使用している場合、<code>DD_LOGS_DIRECT_SUBMISSION_INTEGRATIONS=Serilog</code> に設定する必要があります。
+  <strong>Note:</strong> If you are using a logging framework in conjunction with <code>Microsoft.Extensions.Logging</code>, you will generally need to use the framework name. For example, if you are using <a href="https://github.com/serilog/serilog-extensions-logging">Serilog.Extensions.Logging</a>, you should set <code>DD_LOGS_DIRECT_SUBMISSION_INTEGRATIONS=Serilog</code>.
 </div>
 
-これらの環境変数を設定した後、アプリケーションを再起動します。
+Restart your application after setting these environment variables.
 
-### 追加構成
+### Additional configuration
 
-以下の環境変数を使用して、エージェントレスログ収集のいくつかの側面をさらにカスタマイズすることができます。
+You can further customize some aspects of Agentless log collection using the following environment variables:
 
 `DD_LOGS_DIRECT_SUBMISSION_MINIMUM_LEVEL`
-: Datadog に送信される前に、ログをレベル別にフィルタリングできるようにします。`Verbose`、`Debug`、`Information`、`Warning`、`Error`、`Critical` のいずれかに設定します。これらはサポートされているロギングフレームワークで同等のレベルに対応します。<br>
-**デフォルト**: `Information`
+: Allows filtering logs by level _before_ they're sent to Datadog. Set to one of the following values: `Verbose`, `Debug`, `Information`, `Warning`, `Error`, `Critical`. These correspond to the equivalent levels in the supported logging frameworks.<br>
+**Default**: `Information`
 
 `DD_LOGS_DIRECT_SUBMISSION_HOST`
-: ログに関連するホストマシンの名前を設定します。指定しない場合、ホスト名は自動検索が試みられます。<br>
-**デフォルト**: 自動的に決定される
+: Set the name of the host machine associated with logs. If not provided, the host name will attempt to be found automatically.<br>
+**Default**: Determined automatically
 
 `DD_LOGS_DIRECT_SUBMISSION_TAGS`
-: 指定された場合、生成されたすべてのスパンに指定されたすべてのタグを追加します。指定されない場合は、代わりに `DD_TAGS` を使用します。<br>
-**例**: `layer:api, team:intake`
-デリミタはコンマと空白: `, ` であることに注意してください。
+: If specified, adds all of the specified tags to all generated spans. If not provided, will use `DD_TAGS` instead.<br>
+**Example**: `layer:api, team:intake`
+Note that the delimiter is a comma and a whitespace: `, `.
 
-以下の構成値は、基本的に変更すべきではありませんが、必要であれば設定しても構いません。
+The following configuration values should generally not be modified, but may be set if required.
 
 {{< site-region region="us" >}}
 
 `DD_LOGS_DIRECT_SUBMISSION_URL`
-: ログを送信するための URL を設定します。デフォルトでは `DD_SITE` で指定されたドメインを使用します。<br>
-**デフォルト**: `https://http-intake.logs.datadoghq.com:443` (`DD_SITE` に基づく)
+: Sets the URL where logs should be submitted. Uses the domain provided in `DD_SITE` by default.<br>
+**Default**: `https://http-intake.logs.datadoghq.com:443` (based on `DD_SITE`)
 
 {{< /site-region >}}
 
 {{< site-region region="us3" >}}
 
 `DD_LOGS_DIRECT_SUBMISSION_URL`
-: ログを送信するための URL を設定します。デフォルトでは `DD_SITE` で指定されたドメインを使用します。<br>
-**デフォルト**: `https://http-intake.logs.us3.datadoghq.com:443` (`DD_SITE` に基づく)
+: Sets the URL where logs should be submitted. Uses the domain provided in `DD_SITE` by default.<br>
+**Default**: `https://http-intake.logs.us3.datadoghq.com:443` (based on `DD_SITE`)
 
 {{< /site-region >}}
 
 {{< site-region region="us5" >}}
 
 `DD_LOGS_DIRECT_SUBMISSION_URL`
-: ログを送信するための URL を設定します。デフォルトでは `DD_SITE` で指定されたドメインを使用します。<br>
-**デフォルト**: `https://http-intake.logs.us5.datadoghq.com:443` (`DD_SITE` に基づく)
+: Sets the URL where logs should be submitted. Uses the domain provided in `DD_SITE` by default.<br>
+**Default**: `https://http-intake.logs.us5.datadoghq.com:443` (based on `DD_SITE`)
 
 {{< /site-region >}}
 
 {{< site-region region="ap1" >}}
 
 `DD_LOGS_DIRECT_SUBMISSION_URL`
-: ログを送信するための URL を設定します。デフォルトでは `DD_SITE` で指定されたドメインを使用します。<br>
-**デフォルト**: `https://http-intake.logs.ap1.datadoghq.com:443` (`DD_SITE` に基づく)
+: Sets the URL where logs should be submitted. Uses the domain provided in `DD_SITE` by default.<br>
+**Default**: `https://http-intake.logs.ap1.datadoghq.com:443` (based on `DD_SITE`)
 
 {{< /site-region >}}
 
 {{< site-region region="eu" >}}
 
 `DD_LOGS_DIRECT_SUBMISSION_URL`
-: ログを送信するための URL を設定します。デフォルトでは `DD_SITE` で指定されたドメインを使用します。<br>
-**デフォルト**: `https://http-intake.logs.datadoghq.eu:443` (`DD_SITE` に基づく)
+: Sets the URL where logs should be submitted. Uses the domain provided in `DD_SITE` by default.<br>
+**Default**: `https://http-intake.logs.datadoghq.eu:443` (based on `DD_SITE`)
 
 {{< /site-region >}}
 
 {{< site-region region="gov" >}}
 
 `DD_LOGS_DIRECT_SUBMISSION_URL`
-: ログを送信するための URL を設定します。デフォルトでは `DD_SITE` で指定されたドメインを使用します。<br>
-**デフォルト**: `https://http-intake.logs.ddog-gov.com:443` (`DD_SITE` に基づく)
+: Sets the URL where logs should be submitted. Uses the domain provided in `DD_SITE` by default.<br>
+**Default**: `https://http-intake.logs.ddog-gov.com:443` (based on `DD_SITE`)
 
 {{< /site-region >}}
 
 `DD_LOGS_DIRECT_SUBMISSION_SOURCE`
-: 送信されたログのパースルールを設定します。[カスタムパイプライン][17]を使用していない限り、常に `csharp` に設定する必要があります。<br>
-**デフォルト**: `csharp`
+: Sets the parsing rule for submitted logs. Should always be set to `csharp`, unless you have a [custom pipeline][17].<br>
+**Default**: `csharp`
 
 `DD_LOGS_DIRECT_SUBMISSION_MAX_BATCH_SIZE`
-: 一度に送信するログの最大数を設定します。[API で設定されている制限][18]を考慮します。<br>
-**デフォルト**: `1000`
+: Sets the maximum number of logs to send at one time. Takes into account the [limits in place for the API][18].<br>
+**Default**: `1000`
 
 `DD_LOGS_DIRECT_SUBMISSION_MAX_QUEUE_SIZE`
-: ログメッセージを削除する前に、内部キューに一度に保持するログの最大数を設定します。<br>
-**デフォルト**: `100000`
+: Sets the maximum number of logs to hold in the internal queue at any one time before dropping log messages.<br>
+**Default**: `100000`
 
 `DD_LOGS_DIRECT_SUBMISSION_BATCH_PERIOD_SECONDS`
-: 送信する新しいログを確認するまでの待ち時間を設定します (秒)。<br>
-**デフォルト**: `1`
+: Sets the time to wait (in seconds) before checking for new logs to send.<br>
+**Default**: `1`
 
-`Microsoft.Extensions.Logging` のインテグレーションを使用している場合、`ILogger` に組み込まれた標準機能を使用して Datadog に送信されるログをフィルタリングすることができます。直接送信するプロバイダを特定するために `"Datadog"` というキーを使用し、各ネームスペースに最小限のログレベルを設定します。例えば、`appSettings.json` に以下を追加すると、`Warning` 以下のレベルのログを Datadog に送信しないようにすることができます。.NET トレーサーライブラリ v2.20.0 で導入されました。
+If you are using the `Microsoft.Extensions.Logging` integration, you can filter the logs sent to Datadog using the standard capabilities built-into `ILogger`. Use the key `"Datadog"` to identify the direct-submission provider, and set the minimum log levels for each namespace. For example, adding the following to your `appSettings.json` would prevent sending any logs with a level below `Warning` to Datadog. Introduced in the .NET tracer library v2.20.0.
 
 ```json
 {
@@ -454,18 +456,18 @@ Tracer バージョン 2.7.0 からエージェントレスロギングを使用
 }
 ```
 
-## Serilog シンクによるエージェントレスロギング
+## Agentless logging with Serilog sink
 
-もし、ファイルテールロギングや APM エージェントレスロギングを使用することができず、`Serilog` フレームワークを使用している場合は、Datadog [Serilog シンク][19]を使用して直接 Datadog にログを送信することが可能です。
+If it is not possible to use file-tail logging or APM Agentless logging, and you are using the `Serilog` framework, then you can use the Datadog [Serilog sink][19] to send logs directly to Datadog.
 
-Datadog [Serilog シンク][19]をアプリケーションにインストールします。このシンクは、イベントとログを Datadog に送信し、デフォルトではポート 443 の HTTPS 経由でログを転送します。
-パッケージマネージャーコンソールで、次のコマンドを実行してください。
+Install the Datadog [Serilog sink][19] into your application, which sends events and logs to Datadog. By default the sink forwards logs through HTTPS on port 443.
+Run the following command in the Package Manager Console:
 
 ```text
 PM> Install-Package Serilog.Sinks.Datadog.Logs
 ```
 
-次に、アプリケーションでロガーを直接初期化します。必ず[ご使用の `<API_KEY>`][15] を追加してください。
+Then, initialize the logger directly in your application. Ensure that you [add your `<API_KEY>`][15].
 
 {{< site-region region="us" >}}
 
@@ -474,7 +476,7 @@ using (var log = new LoggerConfiguration()
     .WriteTo.DatadogLogs("<API_KEY>", configuration: new DatadogConfiguration(){ Url = "https://http-intake.logs.datadoghq.com" })
     .CreateLogger())
 {
-    // コード
+    // Some code
 }
 ```
 
@@ -487,7 +489,7 @@ using (var log = new LoggerConfiguration()
     .WriteTo.DatadogLogs("<API_KEY>", configuration: new DatadogConfiguration(){ Url = "https://http-intake.logs.us3.datadoghq.com" })
     .CreateLogger())
 {
-    // コード
+    // Some code
 }
 ```
 
@@ -500,7 +502,7 @@ using (var log = new LoggerConfiguration()
     .WriteTo.DatadogLogs("<API_KEY>", configuration: new DatadogConfiguration(){ Url = "https://http-intake.logs.ap1.datadoghq.com" })
     .CreateLogger())
 {
-    // コード
+    // Some code
 }
 ```
 
@@ -513,7 +515,7 @@ using (var log = new LoggerConfiguration()
     .WriteTo.DatadogLogs("<API_KEY>", configuration: new DatadogConfiguration(){ Url = "https://http-intake.logs.us5.datadoghq.com" })
     .CreateLogger())
 {
-    // コード
+    // Some code
 }
 ```
 
@@ -526,7 +528,7 @@ using (var log = new LoggerConfiguration()
     .WriteTo.DatadogLogs("<API_KEY>", configuration: new DatadogConfiguration(){ Url = "https://http-intake.logs.datadoghq.eu" })
     .CreateLogger())
 {
-    // コード
+    // Some code
 }
 ```
 
@@ -539,7 +541,7 @@ using (var log = new LoggerConfiguration()
     .WriteTo.DatadogLogs("<API_KEY>", configuration: new DatadogConfiguration(){ Url = "https://http-intake.logs.ddog-gov.com" })
     .CreateLogger())
 {
-    // コード
+    // Some code
 }
 ```
 
@@ -547,9 +549,9 @@ using (var log = new LoggerConfiguration()
 
 {{< site-region region="us" >}}
 
-デフォルトの動作を上書きして、ログを TCP で転送することもできます。それには、必須プロパティ `url`、`port`、`useSSL`、および `useTCP` を手動で指定します。また、オプションで、[`source`、`service`、`host`、およびカスタムタグを指定][1]できます。
+You can also override the default behavior and forward logs in TCP by manually specifying the following required properties: `url`, `port`, `useSSL`, and `useTCP`. Optionally, [specify the `source`, `service`, `host`, and custom tags.][1]
 
-たとえば、Datadog US リージョンに TCP でログを転送する場合は、次のようなシンクコンフィギュレーションを使用します。
+For instance to forward logs to the Datadog US region in TCP you would use the following sink configuration:
 
 ```csharp
 var config = new DatadogConfiguration(url: "intake.logs.datadoghq.com", port: 10516, useSSL: true, useTCP: true);
@@ -564,18 +566,18 @@ using (var log = new LoggerConfiguration()
     )
     .CreateLogger())
 {
-    // コード
+    // Some code
 }
 ```
 
-[1]: /ja/logs/log_configuration/attributes_naming_convention/#reserved-attributes
+[1]: /logs/log_configuration/attributes_naming_convention/#reserved-attributes
 
 {{< /site-region >}}
 {{< site-region region="eu" >}}
 
-デフォルトの動作を上書きして、ログを TCP で転送することもできます。それには、必須プロパティ `url`、`port`、`useSSL`、および `useTCP` を手動で指定します。また、オプションで、[`source`、`service`、`host`、およびカスタムタグを指定][1]できます。
+You can also override the default behavior and forward logs in TCP by manually specifying the following required properties: `url`, `port`, `useSSL`, and `useTCP`. Optionally, [specify the `source`, `service`, `host`, and custom tags.][1]
 
-たとえば、Datadog EU リージョンに TCP でログを転送する場合は、次のようなシンクコンフィギュレーションを使用します。
+For instance to forward logs to the Datadog EU region in TCP you would use the following sink configuration:
 
 ```csharp
 var config = new DatadogConfiguration(url: "tcp-intake.logs.datadoghq.eu", port: 443, useSSL: true, useTCP: true);
@@ -590,18 +592,18 @@ using (var log = new LoggerConfiguration()
     )
     .CreateLogger())
 {
-    // コード
+    // Some code
 }
 ```
-[1]: /ja/logs/log_configuration/attributes_naming_convention/#reserved-attributes
+[1]: /logs/log_configuration/attributes_naming_convention/#reserved-attributes
 
 {{< /site-region >}}
 
-これで、新しいログが Datadog に直接送信されるようになります。
+New logs are now directly sent to Datadog.
 
-または、`0.2.0` 以降、`Serilog.Setting.Configuration` パッケージで `appsettings.json` ファイルを使用して Datadog シンクを構成できます。
+Alternately, since `0.2.0`, you can configure the Datadog sink by using an `appsettings.json` file with the `Serilog.Setting.Configuration` package.
 
-`Serilog.WriteTo` 配列で、`DatadogLogs` のエントリを追加します。以下に例を示します。
+In the `Serilog.WriteTo` array, add an entry for `DatadogLogs`. An example is shown below:
 
 ```json
 "Serilog": {
@@ -612,10 +614,10 @@ using (var log = new LoggerConfiguration()
     {
       "Name": "DatadogLogs",
       "Args": {
-        "apiKey": "<API_キー>",
-        "source": "<ソース名>",
-        "host": "<ホスト名>",
-        "tags": ["<タグ_1>:<値_1>", "<タグ_2>:<値_2>"],
+        "apiKey": "<API_KEY>",
+        "source": "<SOURCE_NAME>",
+        "host": "<HOST_NAME>",
+        "tags": ["<TAG_1>:<VALUE_1>", "<TAG_2>:<VALUE_2>"],
       }
     }
   ],
@@ -626,27 +628,27 @@ using (var log = new LoggerConfiguration()
 }
 ```
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/logs/log_configuration/parsing
-[2]: /ja/agent/logs/?tab=tailfiles#activate-log-collection
-[3]: /ja/agent/logs/?tab=tailfiles#custom-log-collection
-[4]: /ja/agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
-[5]: /ja/agent/configuration/agent-commands/?tab=agentv6v7#restart-the-agent
-[6]: /ja/agent/configuration/agent-commands/?tab=agentv6v7#agent-status-and-information
-[7]: /ja/logs/log_configuration/parsing/?tab=matchers
-[8]: /ja/logs/explorer/#overview
-[9]: /ja/tracing/other_telemetry/connect_logs_and_traces/dotnet/
-[10]: /ja/agent/logs/advanced_log_collection
-[11]: /ja/serverless/azure_app_services
-[12]: /ja/sensitive_data_scanner/
-[13]: /ja/tracing/trace_collection/dd_libraries/dotnet-core
-[14]: /ja/tracing/trace_collection/dd_libraries/dotnet-framework
+[1]: /logs/log_configuration/parsing
+[2]: /agent/logs/?tab=tailfiles#activate-log-collection
+[3]: /agent/logs/?tab=tailfiles#custom-log-collection
+[4]: /agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
+[5]: /agent/configuration/agent-commands/?tab=agentv6v7#restart-the-agent
+[6]: /agent/configuration/agent-commands/?tab=agentv6v7#agent-status-and-information
+[7]: /logs/log_configuration/parsing/?tab=matchers
+[8]: /logs/explorer/#overview
+[9]: /tracing/other_telemetry/connect_logs_and_traces/dotnet/
+[10]: /agent/logs/advanced_log_collection
+[11]: /serverless/azure_app_services
+[12]: /sensitive_data_scanner/
+[13]: /tracing/trace_collection/dd_libraries/dotnet-core
+[14]: /tracing/trace_collection/dd_libraries/dotnet-framework
 [15]: https://app.datadoghq.com/organization-settings/api-keys
-[16]: /ja/getting_started/site/
-[17]: /ja/logs/log_configuration/pipelines/?tab=source
-[18]: /ja/api/latest/logs/#send-logs
+[16]: /getting_started/site/
+[17]: /logs/log_configuration/pipelines/?tab=source
+[18]: /api/latest/logs/#send-logs
 [19]: https://www.nuget.org/packages/Serilog.Sinks.Datadog.Logs
-[20]: /ja/glossary/#tail
+[20]: /glossary/#tail

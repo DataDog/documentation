@@ -1,92 +1,96 @@
 ---
-app_id: embrace-mobile
-app_uuid: 86988058-9b89-45a8-b92f-5473a96e4a36
-assets:
-  dashboards:
-    Embrace Overview: assets/dashboards/embrace_mobile_overview.json
-author:
-  homepage: https://embrace.io
-  name: Embrace
-  support_email: support@embrace.io
-categories:
-- 問題追跡
-- メトリクス
-- モバイル
-- ネットワーク
-dependencies:
-- https://github.com/DataDog/integrations-extras/blob/master/embrace_mobile/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: embrace_mobile
-integration_id: embrace-mobile
-integration_title: Embrace Mobile
-integration_version: ''
-is_public: true
-custom_kind: integration
-manifest_version: 2.0.0
-name: embrace_mobile
-public_title: Embrace Mobile
-short_description: iOS、Android、React Native、Unity のためのモバイル可観測性
-supported_os:
+"app_id": "embrace-mobile"
+"app_uuid": "86988058-9b89-45a8-b92f-5473a96e4a36"
+"assets":
+  "dashboards":
+    "Embrace Overview": assets/dashboards/embrace_mobile_overview.json
+"author":
+  "homepage": "https://embrace.io"
+  "name": Embrace
+  "support_email": support@embrace.io
+"categories":
+- issue tracking
+- metrics
+- mobile
+- network
+"custom_kind": "integration"
+"dependencies":
+- "https://github.com/DataDog/integrations-extras/blob/master/embrace_mobile/README.md"
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "embrace_mobile"
+"integration_id": "embrace-mobile"
+"integration_title": "Embrace Mobile"
+"integration_version": ""
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "embrace_mobile"
+"public_title": "Embrace Mobile"
+"short_description": "Mobile observability for iOS, Android, React Native, and Unity"
+"supported_os":
 - linux
 - windows
 - macos
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Issue Tracking
-  - Category::Metrics
-  - Category::Mobile
-  - Category::Network
-  - Offering::UI Extension
-  - Supported OS::Linux
-  - Supported OS::Windows
-  - Supported OS::macOS
-  configuration: README.md#Setup
-  description: iOS、Android、React Native、Unity のためのモバイル可観測性
-  media:
-  - caption: ウィジェットを追加して、Datadog から直接 Embrace のクラッシュおよびネットワーキングデータを監視。
-    image_url: images/datadog_dashboard.jpg
-    media_type: image
-  - caption: 影響を受けたすべてのユーザーセッションから、すべてのスタックトレースにアクセスして、アプリおよびセッションの詳細情報と共にクラッシュを調査。さらに、Embrace
-      のユーザーセッションの完全なリプレイに直接アクセスし、詳しいコンテキストを把握できます。
-    image_url: images/datadog_side_panel.jpg
-    media_type: image
-  - caption: Embrace のユーザーセッションリプレイにより、ユーザーセッションの技術的および行動的詳細を時間単位で視覚化。問題を手動で再生しなくても、根本原因をすばやく認識できます。
-    image_url: images/embrace_session.jpg
-    media_type: image
-  - caption: タイミング、結果、そしてユーザーアクションを追跡して主要なユーザーフローを最適化。動作の遅延やフリーズに不満を感じたユーザーが使用を放棄した箇所をすばやく特定、修正し、エンゲージメントおよび収益の強化を図ります。
-    image_url: images/embrace_app_performance.jpg
-    media_type: image
-  - caption: リアルタイムダッシュボードで主要なメトリクスを監視。パフォーマンス、安定性、エンゲージメント、収益化などを簡単に追跡できるため、チームは重要なデータに注力できます。
-    image_url: images/embrace_dashboard.jpg
-    media_type: image
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Embrace Mobile
+"tile":
+  "changelog": CHANGELOG.md
+  "classifier_tags":
+  - "Category::Issue Tracking"
+  - "Category::Metrics"
+  - "Category::Mobile"
+  - "Category::Network"
+  - "Offering::UI Extension"
+  - "Supported OS::Linux"
+  - "Supported OS::Windows"
+  - "Supported OS::macOS"
+  "configuration": "README.md#Setup"
+  "description": Mobile observability for iOS, Android, React Native, and Unity
+  "media":
+  - "caption": Monitor Embrace crash and networking data directly from Datadog by adding widgets.
+    "image_url": images/datadog_dashboard.jpg
+    "media_type": image
+  - "caption": Investigate crashes by accessing every stack trace from every affected user session, alongside app and session details. For more context, navigate directly to the full user session replay in Embrace. 
+    "image_url": images/datadog_side_panel.jpg
+    "media_type": image
+  - "caption": Embrace's user session replays provide the full technical and behavioral details of every user session in a time-based visualization. Instantly identify the root cause without having to manually reproduce issues.
+    "image_url": images/embrace_session.jpg
+    "media_type": image
+  - "caption": Optimize key user flows by tracking timing, outcome, and user actions. Quickly identify where frustrated users are abandoning slow or frozen experiences and fix them to boost engagement and revenue.
+    "image_url": images/embrace_app_performance.jpg
+    "media_type": image
+  - "caption": Monitor key metrics with real-time dashboards. Easily track performance, stability, engagement, monetization, and more so teams can focus on the data they care about.
+    "image_url": images/embrace_dashboard.jpg
+    "media_type": image
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": Embrace Mobile
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
-## 概要
+## Overview
 
-[Embrace][1] は、モバイルチームが最高のユーザー体験を提供できるよう、パフォーマンスの最適化、問題の優先順位付けと修正作業、そして機能やリリース、カスタムセグメントの監視を可能にするモバイル可観測性およびデータのプラットフォームです。Embrace では、複雑なモバイルデータをアクションに変換できます。あらゆるすべてのユーザーエクスペリエンスの包括的なセッションレベルデータを収集することで、Embrace は強力なインサイトを抽出しビジネスの成長を促進します。
+[Embrace][1] is a mobile observability and data platform that empowers mobile teams to deliver optimal user experiences for
+performance optimization, issue prioritization and remediation, and monitoring across features, releases, and custom
+segments. At its core, Embrace turns complex mobile data into action. By collecting comprehensive session-level data for
+each and every user experience, Embrace extracts powerful insights to fuel your growth.
 
-アプリをインストールすると、Embrace のダッシュボードでモバイルの主要なヘルスメトリクスを追跡できるようになります。パフォーマンスの低下があった場合、手動でユーザーセッションを再生しなくても、影響のあったセッションの完全な詳細を調査することができます。
+After app installation, Embrace provides dashboards that track key mobile health metrics. For any regression, you can inspect
+the full details of every affected user session without having to manually reproduce it.
 
-## 計画と使用
+## Setup
 
-1. 無料トライアルを開始し、[Embrace のドキュメント][2]に従ってください。**Datadog でメトリクスを見る前に、このドキュメントに従う必要があります**。
-1. Embrace インテグレーションのセットアップが完了したら、Datadog に戻り両プラットフォームを接続します。
-1. 認証情報を使用してログインし、Embrace アカウントを認証して Datadog に接続します。
-1. Datadog でダッシュボードを新規作成します。クラッシュまたはネットワーキングメトリクスを含む Embrace のデータを表示するには、Embrace ウィジェットを選択します。
-1. "Details" をクリックすると、Datadog から Embrace の詳細を確認できます。
+1. Start a free trial and follow the [Embrace documentation][2]. **You need to follow this documentation before seeing metrics in Datadog.**
+1. After completing setup of the Embrace integration, navigate back to Datadog to connect both platforms.
+1. Authenticate and connect your Embrace account to Datadog by logging in with your credentials.
+1. Create a New Dashboard in Datadog. Select the Embrace widget to display Embrace data with crash or networking metrics.
+1. Click into "Details" to dive deeper into Embrace from Datadog.
 
-## Agent
+## Support
 
-ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
+Need help? Contact [Datadog support][3].
 
 [1]: https://embrace.io
 [2]: https://embrace.io/docs/
-[3]: https://docs.datadoghq.com/ja/help/
+[3]: https://docs.datadoghq.com/help/
+

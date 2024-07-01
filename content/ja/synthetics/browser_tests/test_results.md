@@ -1,181 +1,185 @@
 ---
+title: Browser Testing Results
+kind: documentation
+description: View Synthetic browser test results and compare successful or failed sample runs to test runs. 
 aliases:
-- /ja/synthetics/apm/browser_tests
-description: Synthetic ブラウザのテスト結果を表示し、成功または失敗したサンプル実行とテスト実行を比較することができます。
+ - /synthetics/apm/browser_tests
 further_reading:
-- link: https://www.datadoghq.com/blog/core-web-vitals-monitoring-datadog-rum-synthetics/#what-are-the-core-web-vitals
-  tag: ブログ
-  text: Synthetic モニタリングでウェブに関する主な指標を監視
+- link: "https://www.datadoghq.com/blog/core-web-vitals-monitoring-datadog-rum-synthetics/#what-are-the-core-web-vitals"
+  tag: Blog
+  text: Monitor Core Web Vitals with Synthetic Monitoring
 - link: /synthetics/guide/explore-rum-through-synthetics/
-  tag: ドキュメント
-  text: Synthetics で RUM とセッションリプレイを確認する
+  tag: Documentation
+  text: Explore RUM & Session Replay in Synthetics
 - link: /synthetics/dashboards/browser_test/
-  tag: ドキュメント
-  text: ブラウザテストパフォーマンスダッシュボードについて
-kind: ドキュメント
-title: ブラウザテストの結果
+  tag: Documentation
+  text: Learn about the Browser Test Performance Dashboard
 ---
 
-## 概要
+## Overview
 
-テスト実行は、Synthetic テストが実行された後、テストの詳細ページに表示されます。[サンプル結果](#sample-results)は、ある時間間隔と特定の数の場所やデバイスでの最新のテスト実行の合格と不合格を関連付けるものです。
+Test runs appear in a test details page after a Synthetic test executes. [Sample results](#sample-results) correlate to the latest passed and failed test executions over a time interval and in a specific number of locations and devices.
 
-## テストプロパティ
+## Test properties
 
-**Properties** セクションでは、テスト ID、テストの作成日および編集日、タグのリスト、テストの優先度、すぐに使える Synthetic [ブラウザテストダッシュボード][11]へのリンクが表示されます。
+In the **Properties** section, you can see the test ID, test creation and edit date, a list of tags, test priority, and a link to an out-of-the-box Synthetic [browser test dashboard][11].
 
 **Overview** 
-: このセクションでは、テスト URL、ロケーション数、デバイス数、テスト間隔、およびカスタムステップを含むテストステップ数について説明します。
+: This section describes the test URL, number of locations, number of devices, test interval, and the number of test steps, including custom steps.
 
 **Monitor**
-: このセクションには、[Synthetic テストのモニター][13]の名前と、設定した通知メッセージが含まれています。
+: This section contains the name of the [Synthetic test's monitor][13] and the configured notification message.
 
 **CI/CD Execution**
-: このセクションには、[Continuous Testing CI パイプライン][19]の一部として実行されているこのテストの[実行ルール][12]を変更するためのドロップダウンメニューが含まれています。
+: This section contains a dropdown menu to change the [execution rule][12] for this test running as part of a [Continuous Testing CI pipeline][19].
 
-## テスト履歴
+## Test history
 
-**History** セクションでは、3 つのグラフを見ることができます。
+In the **History** section, you can see three graphs:
 
-- **Global Uptime** グラフは、指定された時間間隔におけるすべてのテストロケーションの合計アップタイムを表示します。グローバルアップタイムは、テストに構成された[アラート条件][20]を考慮したものです。
-- **Time-to-interactive by location and device** グラフは、ページがインタラクティブに操作できるようになるまでの時間を秒単位で表示します。アップタイムモニタリングの詳細については、[SLO による Web サイトアップタイムモニタリング][14]ガイドを参照してください。
-- **Test duration by location and device** グラフは、それぞれの場所とデバイスが与えられた時間間隔で完了するのにかかる時間を分単位で表示します。
+- The **Global Uptime** graph displays the total uptime of all test locations in a given time interval. The global uptime takes into consideration the [alert conditions][20] configured for a test.
+- The **Time-to-interactive by location and device** graph displays the amount of time until a page can be interacted with in seconds. For more information about uptime monitoring, see the [Website Uptime Monitoring with SLOs][14] guide.
+- The **Test duration by location and device** graph displays the amount of time in minutes each location and device takes to complete in a given time interval. 
 
-{{< img src="synthetics/browser_tests/history.png" alt="テスト詳細ページの履歴とサンプル実行のセクション" style="width=80%" >}}
+{{< img src="synthetics/browser_tests/history.png" alt="The History and Sample Runs section in the Test Details page" style="width=80%" >}}
 
-## 結果例
+## Sample results
 
-ブラウザテスト実行には、[スクリーンショット](#screenshots-and-actions)、[ページパフォーマンスデータ](#page-performance)、[エラー](#errors-and-warnings)、[リソース](#resources)、[バックエンドのトレース](#backend-traces)などのコンポーネントが含まれており、[テストが失敗](#failed-results)した場合のトラブルシューティングに役立ちます。
+Browser test runs include components such as [screenshots](#screenshots-and-actions), [page performance data](#page-performance), [errors](#errors-and-warnings), [resources](#resources), and [backend traces](#backend-traces) to help troubleshoot your [test failure](#failed-results).
 
-**Sample Runs** セクションでは、失敗した最新のテスト実行を調べ、最近成功したテスト実行と比較することができます。
+In the **Sample Runs** section, you can examine the latest failed test runs and compare them to recent successful test runs.
 
-### Overview 属性
+### Overview attributes
 
 Status
-: テスト実行のステータス (`PASSED` または `FAILED`)。
+: The status of your test run (`PASSED` or `FAILED`).
 
 Starting URL
-: ブラウザのテストシナリオの URL。
+: The URL of your browser test scenario.
 
 Steps
-: サンプル実行で完了したテストステップの数。
+: The number of test steps completed in your sample run.
 
 Duration
-: テストの実行にかかった時間。
+: The amount of time it took your test to run.
 
 Location
-: テストが実行されたマネージドまたはプライベートロケーション。
+: The managed or private location your test was executed from.
 
 Device
-: テストが実行されたデバイスのタイプ。
+: The type of device your test was executed from.
 
 Browser
-: テストが実行されたブラウザのタイプ。
+: The type of browser your test was executed from.
 
 Time ran
-: テストが実行されてから経過した時間。
+: The amount of time that has passed since your test ran.
 
 Run type
-: テスト実行のタイプ (CI、高速リトライ、手動トリガー、またはスケジュール)。
+: The type of test run (CI, fast retry, manually triggered, or scheduled).
 
-### RUM セッション
+### RUM sessions
 
-[RUM エクスプローラー][22]で関連するセッションや利用可能なリプレイを表示するには、**View Session in RUM** をクリックします。[セッションリプレイ][23]で特定のアクションやステップのユーザーセッションにアクセスするには、**Replay Session** をクリックします。詳しくは、[Synthetics で RUM とセッションリプレイを確認する][16]を参照してください。
+To view related sessions and available replays in the [RUM Explorer][22], click **View Session in RUM**. To access a user session for a particular action or step in [Session Replay][23], click **Replay Session**. For more information, see [Explore RUM & Session Replay in Synthetics][16].
 
-### スクリーンショットとアクション
+### Screenshots and actions
 
-実行されたすべてのテストステップには、ステップアクションのスクリーンショット、セッションリプレイのセッションへのリンク、ステップの説明、指定したステップの開始 URL、ステップ ID、ステップ時間、およびページパフォーマンス情報が含まれます。
+Every executed test step contains a screenshot of the step action, a link to the session in Session Replay, the step description, starting URL for a given step, step ID, step duration, and page performance information.
 
-### ページのパフォーマンス
+### Page performance
 
-Synthetic Monitoring は、2つの [Core Web Vital メトリクス][6] ([Largest Contentful Paint][2] と [Cumulative Layout Shift][3]) をラボメトリクスとして、各ステップの URL の右側にピルで表示します。
+Synthetic Monitoring includes two [Core Web Vital metrics][6] ([Largest Contentful Paint][2] and [Cumulative Layout Shift][3]) as lab metrics and displays them as pills to the right of each step URL. 
 
-{{< img src="synthetics/browser_tests/test_results/page_performance_lab_metrics.png" alt="Synthetic ラボメトリクス" style="width:100%" >}}
+{{< img src="synthetics/browser_tests/test_results/page_performance_lab_metrics.png" alt="Synthetic lab metrics" style="width:100%" >}}
 
-[初回入力遅延][4]は、[リアルユーザーモニタリング][5]を使用して、リアルユーザーデータを収集している場合にリアルメトリクスとして利用できます。詳しくは、[ページパフォーマンスの監視][6]をご覧ください。
+[First Input Delay][4] is available as a real metric if you are using [Real User Monitoring][5] to collect real user data. For more information, see [Monitoring Page Performance][6].
 
-### エラーと警告
+### Errors and warnings
 
-**Errors** ピルをクリックして、**Errors &amp; Warnings** タブにアクセスし、エラーの種類 (`js` または `network`) とステータス (ネットワークのステータスコード) に分けてエラーのリストを確認します。
+Click the **Errors** pill to access the **Errors & Warnings** tab and examine a list of errors separated by error type (`js` or `network`) and status (the network status code).
 
-{{< img src="synthetics/browser_tests/test_results/errors_pill.png" alt="エラーピル" style="width:100%" >}}
+{{< img src="synthetics/browser_tests/test_results/errors_pill.png" alt="Errors pill" style="width:100%" >}}
 
-このエラータイプは、ブラウザテストがページと相互作用するときに記録されます。これは、ページが開かれてからページとやりとりできるようになるまでの間に収集されたエラーに対応します。表示されるエラーの最大数は 8 個で、例えば、2 つの `network` エラーと 6 つの `js` エラーが表示されます。
+The error type is logged when the browser test interacts with the page. It corresponds to the errors collected between the time the page is opened and the time the page can be interacted with. The maximum number of errors that can be displayed is 8, for example: 2 `network` + 6 `js` errors.
 
-### リソース
+### Resources
 
-**Resources** のピルをクリックして、**Resources** タブにアクセスし、**Fully Loaded** の下の総ステップ持続時間やリソースを提供する CDN プロバイダーを含むリクエストとアセットの組み合わせを調べます。
+Click the **Resources** pill to access the **Resources** tab and examine the combination of requests and assets, including the total step duration time under **Fully Loaded** and the CDN provider serving the resources. 
 
-{{< img src="synthetics/browser_tests/test_results/resources_pill.png" alt="リソースピル" style="width:100%" >}}
+{{< img src="synthetics/browser_tests/test_results/resources_pill.png" alt="Resources pill" style="width:100%" >}}
 
-検索バーでは、リソースを種類でフィルターしたり、名前で検索したりすることができます。表示可能なリソースの最大数は 100 です。リソースは開始された時間順に並び、Datadog では最初の 100 個が表示されます。
+You can filter resources by type and search by name in the search bar. The maximum number of resources that can be displayed is 100. Resources are ordered by the time when they start and display the first 100 in Datadog.
 
-{{< img src="synthetics/browser_tests/resources_panel.png" alt="リソースパネル" style="width:100%" >}}
+{{< img src="synthetics/browser_tests/resources_panel.png" alt="Resources Panel" style="width:100%" >}}
 
-Relative Time
-: インタラクション時間全体におけるリソースの継続期間。
+Relative Time 
+: The resource duration over the total interaction time.
 
 CDN
-: リソースを提供した CDN プロバイダー。CDN プロバイダーのアイコンにカーソルを合わせると、生のキャッシュのステータスが表示されます。 
-Datadog は、Akamai、Cloudflare、Fastly、Amazon Cloudfront、Netlify、Google Cloud CDN、Imperva、および Sucuri を検出します。
+: The CDN provider that served the resource. Hover over a CDN provider's icon to see the raw cache status.  
+Datadog detects Akamai, Cloudflare, Fastly, Amazon Cloudfront, Netlify, Google Cloud CDN, Imperva, and Sucuri.
 
 Resource
-: リソースの URL。
+: The URL of the resource.
 
 Type
-: リソースの種類 (HTML、Download、CSS、Fetch、Image。JavaScript、XHR、または Other)。
+: The type of resource (HTML, Download, CSS, Fetch, Image, JavaScript, XHR, or Other).
 
 Method
-: リクエストの方法。
+: The method of the request.
 
 Protocol
-: リクエストのプロトコル。
+: The protocol of the request.
 
 Status
-: HTTP 応答ステータスコード。
+: The HTTP response status code.
 
 Duration
-: リクエストの実行に必要な時間。
+: The time needed to perform the request.
 
 Size
-: リクエスト応答のサイズ。
+: The size of the request response.
 
-### バックエンドトレース
+### Backend traces
 
-**Traces** のピルをクリックして **Traces** タブにアクセスし、ブラウザテストに関連する APM トレースを検索します。UI はトレースエクスプローラーの[トレースビュー][7]と似ていますが、1 つのブラウザテストステップは異なる URL またはエンドポイントに複数のリクエストを行うことができます。この結果、トレースのセットアップと、[Synthetic Monitoring Settings ページ][8]でブラウザテスト用に許可した URL に応じて、関連するトレースが複数発生します。
+Click the **Traces** pill to access the **Traces** tab and explore APM traces associated with the browser test. While the UI is similar to the [Trace View][7] in the Trace Explorer, one browser test step can make multiple requests to different URLs or endpoints. This results in several associated traces, depending on your tracing setup and on the URLs you allowed in for browser tests in the [Synthetic Monitoring Settings page][8]. 
 
-クロスプロダクト相関の詳細については、[クロスプロダクト相関で容易にトラブルシューティング][21]のガイドを参照してください。
+For more information about cross-product correlation, see the [Ease Troubleshooting With Cross-Product Correlation][21] guide.
 
-### ステップ実行時間
+### Step duration
 
-ステップ実行時間は、[Datadog ロケーターシステム][9]でステップが実行されるまでの時間を表します。ステップ実行時間にはアクション (ユーザーのインタラクションなど) が含まれるだけでなく、ブラウザテストで要素がインタラクション可能であることを確認するための待機と再試行のメカニズムも組み込まれています。詳しくは、[ブラウザテストステップの高度なオプション][9]をご覧ください。
+The step duration represents the amount of time the step takes to execute with the [Datadog locator system][9]. Not only does the step duration include the action (such as user interactions), but also it incorporates the wait and retry mechanism, which allows browser tests to ensure an element is able to be interacted with. For more information, see [Advanced Options for Browser Test Steps][9].
 
-## 失敗した結果
+## Failed results
 
-テスト結果は、アサーションを満たさない場合、または別の理由によりステップが失敗した場合に `FAILED` とみなされます。スクリーンショットを確認し、ステップレベルでの[エラー](#errors-and-warnings)の可能性をチェックしたり、ステップにより生成された[リソース][17]と[バックエンドトレース](#backend-traces)を確認したりして、失敗したランのトラブルシューティングを実行します。
+A test result is considered `FAILED` if it does not satisfy its assertions or if a step failed for another reason. You can troubleshoot failed runs by looking at their screenshots, checking for potential [errors](#errors-and-warnings) at the step level, and looking into [resources][17] and [backend traces](#backend-traces) generated by their steps.
 
-一般的なブラウザテストのエラーには、以下が含まれます。
+### Compare screenshots
+To help during the investigation, click **Compare Screenshots** to receive side-by-side screenshots of the failed result and the last successful execution. The comparison helps you to spot any differences that could have caused the test to fail.
+{{< img src="synthetics/browser_tests/test_results/compare_screenshots.png" alt="Compare screenshots between your failed and successful runs" style="width:90%;" >}}
+**Note**: Comparison is performed between two test runs with the same version, start URL, device, browser, and run type (scheduled, manual trigger, CI/CD). If there is no successful prior run with the same parameters, no comparison is offered.
+### Common browser test errors
 
 `Element located but it's invisible` 
-: 要素はページにあるものの、クリックできない。たとえば、別の要素で覆われている、など。
+: The element is on the page but cannot be clicked on—for instance, if another element is overlaid on top of it.
 
 `Cannot locate element`
-: HTML で要素が見つけられない。
+: The element cannot be found in the HTML.
 
 `Select did not have option`
-: 指定されたオプションがドロップダウンメニューにない。
+: The specified option is missing from the dropdown menu.
 
 `Forbidden URL`
-: テストでサポートされていないプロトコルが発生した可能性があります。詳細は、[サポートまでお問い合わせ][10]ください。
+: The test likely encountered a protocol that is not supported. [Contact Support][10] for more details.
 
 `General test failure`
-: 一般的なエラーメッセージ。詳細は、[サポートチームまでお問い合わせください][10]。
+: A general error message. [Contact Support][10] for more details.
 
-## テストイベント
+## Test events
 
-Synthetic テストモニターからのアラートは、**Test Runs** の下の **Events** タブに表示されま す。イベントエクスプローラーで Synthetic テストからのアラートを検索するには、[**Events** >  **Explorer**][18] に移動して、検索クエリに `Event Type:synthetics_alert` を入力します。詳細については、[Synthetic テストモニターを利用する][13]を参照してください。
+Alerts from your Synthetic test monitors appear in the **Events** tab under **Test Runs**. To search for alerts from Synthetic tests in the Events Explorer, navigate to [**Events** > **Explorer**][18] and enter `Event Type:synthetics_alert` in the search query. For more information, see [Using Synthetic Test Monitors][13].
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -183,22 +187,22 @@ Synthetic テストモニターからのアラートは、**Test Runs** の下�
 [2]: https://web.dev/lcp/
 [3]: https://web.dev/cls/
 [4]: https://web.dev/fid/
-[5]: /ja/real_user_monitoring/
-[6]: /ja/real_user_monitoring/browser/monitoring_page_performance/#core-web-vitals
-[7]: /ja/tracing/trace_explorer/trace_view/
-[8]: /ja/synthetics/settings/?tab=specifyvalue#apm-integration-for-browser-tests
-[9]: /ja/synthetics/browser_tests/advanced_options/?tab=requestoptions#user-specified-locator
-[10]: /ja/help/
-[11]: /ja/synthetics/dashboards/browser_test/
-[12]: /ja/continuous_testing/cicd_integrations/configuration/?tab=npm#test-files
-[13]: /ja/synthetics/guide/synthetic-test-monitors/
-[14]: /ja/synthetics/guide/uptime-percentage-widget/
-[15]: /ja/real_user_monitoring/browser/data_collected/#long-task-timing-metrics
-[16]: /ja/synthetics/guide/explore-rum-through-synthetics/
-[17]: /ja/tracing/services/resource_page/
+[5]: /real_user_monitoring/
+[6]: /real_user_monitoring/browser/monitoring_page_performance/#event-timings-and-core-web-vitals
+[7]: /tracing/trace_explorer/trace_view/
+[8]: /synthetics/settings/?tab=specifyvalue#apm-integration-for-browser-tests
+[9]: /synthetics/browser_tests/advanced_options/?tab=requestoptions#user-specified-locator
+[10]: /help/
+[11]: /synthetics/dashboards/browser_test/
+[12]: /continuous_testing/cicd_integrations/configuration/?tab=npm#test-files
+[13]: /synthetics/guide/synthetic-test-monitors/
+[14]: /synthetics/guide/uptime-percentage-widget/
+[15]: /real_user_monitoring/browser/data_collected/#long-task-timing-metrics
+[16]: /synthetics/guide/explore-rum-through-synthetics/
+[17]: /tracing/services/resource_page/
 [18]: https://app.datadoghq.com/event/explorer
-[19]: /ja/continuous_testing/cicd_integrations
-[20]: /ja/synthetics/browser_tests/?tab=requestoptions#define-alert-conditions
-[21]: /ja/logs/guide/ease-troubleshooting-with-cross-product-correlation/#leverage-trace-correlation-to-troubleshoot-synthetic-tests
-[22]: /ja/real_user_monitoring/explorer
-[23]: /ja/real_user_monitoring/session_replay
+[19]: /continuous_testing/cicd_integrations
+[20]: /synthetics/browser_tests/?tab=requestoptions#define-alert-conditions
+[21]: /logs/guide/ease-troubleshooting-with-cross-product-correlation/#leverage-trace-correlation-to-troubleshoot-synthetic-tests
+[22]: /real_user_monitoring/explorer
+[23]: /real_user_monitoring/session_replay

@@ -1,56 +1,56 @@
 ---
+title: SNMP commonly used and compatible OIDs
+kind: guide
 aliases:
-- /ja/integrations/faq/for-snmp-does-datadog-have-a-list-of-commonly-used-compatible-oids
-kind: ガイド
-title: SNMP でよく使われる OID と互換性のある OID
+  - /integrations/faq/for-snmp-does-datadog-have-a-list-of-commonly-used-compatible-oids
 ---
 
-Cisco デバイスの場合、次のコマンドを使用できます。
+For Cisco devices, you can use the command:
 
 ```text
 show snmp-server oidlist
 ```
 
-お使いのシステムで利用可能な OID を確認するには、Cisco アカウントにログインし、オブジェクトナビゲーターで検索してください: http://tools.cisco.com/Support/SNMP/do/BrowseOID.do?local=en
+To see the available OIDs for your system, login to your Cisco account and search in the object navigator: http://tools.cisco.com/Support/SNMP/do/BrowseOID.do?local=en
 
-Linux OID (これらは F5 などのネットワークデバイスにも有効な傾向があります)
+Linux OIDs (these tend to work for network devices like F5 too)
 
-## 統計
+## Statistics
 
 ### CPU
 
-* 1 分のロード: .1.3.6.1.4.1.2021.10.1.3.1
-* 5 分のロード: .1.3.6.1.4.1.2021.10.1.3.2
-* 15 分のロード: .1.3.6.1.4.1.2021.10.1.3.3
-* ユーザー CPU 時間の割合: .1.3.6.1.4.1.2021.11.9.0
-* 生ユーザー CPU 時間: .1.3.6.1.4.1.2021.11.50.0
-* システム CPU 時間の割合: .1.3.6.1.4.1.2021.11.10.0
-* 生システム CPU 時間: .1.3.6.1.4.1.2021.11.52.0
-* アイドル CPU 時間の割合: .1.3.6.1.4.1.2021.11.11.0
-* 生アイドル CPU 時間: .1.3.6.1.4.1.2021.11.53.0
-* 生ナイス CPU タイム: .1.3.6.1.4.1.2021.11.51.0
+* 1 minute Load: .1.3.6.1.4.1.2021.10.1.3.1
+* 5 minute Load: .1.3.6.1.4.1.2021.10.1.3.2
+* 15 minute Load: .1.3.6.1.4.1.2021.10.1.3.3
+* percentage of user CPU time: .1.3.6.1.4.1.2021.11.9.0
+* raw user cpu time: .1.3.6.1.4.1.2021.11.50.0
+* percentages of system CPU time: .1.3.6.1.4.1.2021.11.10.0
+* raw system cpu time: .1.3.6.1.4.1.2021.11.52.0
+* percentages of idle CPU time: .1.3.6.1.4.1.2021.11.11.0
+* raw idle cpu time: .1.3.6.1.4.1.2021.11.53.0
+* raw nice cpu time: .1.3.6.1.4.1.2021.11.51.0
 
-### メモリ
+### Memory
 
-* 総スワップサイズ: .1.3.6.1.4.1.2021.4.3.0
-* 使用可能なスワップスペース: .1.3.6.1.4.1.2021.4.4.0
-* マシン内の総 RAM: .1.3.6.1.4.1.2021.4.5.0
-* 使用した RAM の合計: .1.3.6.1.4.1.2021.4.6.0
-* 総 RAM 空き容量: .1.3.6.1.4.1.2021.4.11.0
-* 共有 RAM の合計: .1.3.6.1.4.1.2021.4.13.0
-* バッファリングされた RAM の合計: .1.3.6.1.4.1.2021.4.14.0
-* キャッシュメモリ合計: .1.3.6.1.4.1.2021.4.15.0
+* Total Swap Size: .1.3.6.1.4.1.2021.4.3.0
+* Available Swap Space: .1.3.6.1.4.1.2021.4.4.0
+* Total RAM in machine: .1.3.6.1.4.1.2021.4.5.0
+* Total RAM used: .1.3.6.1.4.1.2021.4.6.0
+* Total RAM Free: .1.3.6.1.4.1.2021.4.11.0
+* Total RAM Shared: .1.3.6.1.4.1.2021.4.13.0
+* Total RAM Buffered: .1.3.6.1.4.1.2021.4.14.0
+* Total Cached Memory: .1.3.6.1.4.1.2021.4.15.0
 
-### ディスク
+### Disk
 
-* ディスクがマウントされているパス: .1.3.6.1.4.1.2021.9.1.2.1
-* パーティションのデバイスのパス: .1.3.6.1.4.1.2021.9.1.3.1
-* ディスク/パーティションの合計サイズ (kBytes): .1.3.6.1.4.1.2021.9.1.6.1
-* ディスクの空き容量: .1.3.6.1.4.1.2021.9.1.7.1
-* ディスクの使用容量: .1.3.6.1.4.1.2021.9.1.8.1
-* ディスクの使用率: .1.3.6.1.4.1.2021.9.1.9.1
-* ディスクの inode 使用率: .1.3.6.1.4.1.2021.9.1.10.1
+* Path where the disk is mounted: .1.3.6.1.4.1.2021.9.1.2.1
+* Path of the device for the partition: .1.3.6.1.4.1.2021.9.1.3.1
+* Total size of the disk/partion (kBytes): .1.3.6.1.4.1.2021.9.1.6.1
+* Available space on the disk: .1.3.6.1.4.1.2021.9.1.7.1
+* Used space on the disk: .1.3.6.1.4.1.2021.9.1.8.1
+* Percentage of space used on disk: .1.3.6.1.4.1.2021.9.1.9.1
+* Percentage of inodes used on disk: .1.3.6.1.4.1.2021.9.1.10.1
 
-### アップタイム
+### Uptime
 
-* システムアップタイム: .1.3.6.1.2.1.1.3.0
+* System Uptime: .1.3.6.1.2.1.1.3.0

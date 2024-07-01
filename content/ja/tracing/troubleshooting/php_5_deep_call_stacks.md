@@ -1,18 +1,18 @@
 ---
-kind: ドキュメント
-title: PHP 5 の深いコールスタック
+title: Deep call stacks on PHP 5
+kind: documentation
 ---
-PHP は、事実上無限のコールスタックをサポートします。ただし、Zend Engine により提供された関数呼び出しのフック `zend_execute_ex` (PHP 5.4 では `zend_execute`) は、ネイティブ C スタックを使用して PHP メソッドと関数を呼び出します。これは、PHP のコールスタックが余分に深い場合にスタックオーバーフローの原因となります。
+PHP supports a virtually infinite call stack. However, the function call hook provided by the Zend Engine, `zend_execute_ex` (named `zend_execute` on PHP 5.4), calls PHP methods and functions using the native C stack. This in turn can cause a stack overflow when the call stack in PHP becomes extra deep.
 
-ddtrace バージョン `0.48.0` 以降、PHP トレーサーは PHP 5 で `zend_execute_ex` フックを使用します。コーススタックが `512` フレームの深さに達すると、PHP トレーサーが警告を発します。環境変数を `DD_TRACE_WARN_CALL_STACK_DEPTH=0` に設定すると、この警告を無効にできます。
+Starting with ddtrace version `0.48.0`, the PHP tracer uses the `zend_execute_ex` hook on PHP 5. The PHP tracer emits a warning when the call stack reaches `512` frames deep. You can disable this warning by setting the environment variable `DD_TRACE_WARN_CALL_STACK_DEPTH=0`.
 
-PHP アプリケーションを深いコールスタックに対応させるには、ホストマシンでスタックサイズ上限を調整します。既存のスタックサイズを確認するには、次を実行します。
+To accommodate PHP applications with deep call stacks, adjust the stack size limit on the host machine. To see the existing stack size, run:
 
 ```shell
 ulimit -s
 ```
 
-たとえば、既存のスタックサイズが `8192` の場合、スタックサイズを 2 倍の `16384` に設定します。
+For example: if the existing stack size is `8192`, you may wish to double it by setting a new stack size of `16384`.
 
 ```shell
 sudo ulimit -s 16384

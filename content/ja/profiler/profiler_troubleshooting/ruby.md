@@ -1,53 +1,42 @@
 ---
+title: Troubleshooting the Ruby Profiler
 code_lang: ruby
+type: multi-code-lang
 code_lang_weight: 40
 further_reading:
-- link: /tracing/troubleshooting
-  tag: Documentation
-  text: APM トラブルシューティング
-title: Ruby プロファイラーのトラブルシューティング
-type: multi-code-lang
+    - link: /tracing/troubleshooting
+      tag: Documentation
+      text: APM Troubleshooting
 ---
 
-## プロファイル検索ページにないプロファイル
+## Missing profiles in the profile search page
 
-プロファイラを設定してもプロファイル検索ページにプロファイルが表示されない場合は、[デバッグモード][1]をオンにし、デバッグファイルと次の情報で[サポートチケットを開いてください][2]。
+If you've configured the profiler and don't see profiles in the profile search page, turn on [debug mode][1] and [open a support ticket][2] with debug files and the following information:
 
-- オペレーティングシステムのタイプとバージョン (例: Linux Ubuntu 20.04)
-- ランタイムのタイプ、バージョン、ベンダー (例: Ruby 2.7.3)
+- Operating system type and version (for example, Ubuntu Linux 22.04)
+- Runtime type, version, and vendor (for example, Ruby 2.7.3)
 
-## アプリケーションが「スタックレベルが深すぎます (SystemStackError)」エラーをトリガーします
+## Missing profiles for Resque jobs
 
-この問題は [`dd-trace-rb` バージョン `0.54.0`][3] からは発生しないと思われます。
-それでも問題が解決しない場合は、エラーに至るまでのバックトレースを添えて、[サポートチケットを作成][2]してください。
+When profiling [Resque][4] jobs, you should set the `RUN_AT_EXIT_HOOKS` environment
+variable to `1`, as described in the
+[Resque documentation][5].
 
-`0.54.0` より前のバージョンでは、プロファイラーはスレッド生成を追跡するために Ruby VM をインスツルメントする必要があり、他の gem による同様のインスツルメンテーションと衝突していました。
+Without this flag, profiles for short-lived Resque jobs will be unavailable.
 
-以下の gem のいずれかを使用している場合
+## Profiling does not turn on because compilation of the Ruby VM just-in-time header failed
 
-* `rollbar`: バージョン 3.1.2 以降を使用していることを確認します。
-* `logging`: `LOGGING_INHERIT_CONTEXT` 環境変数を `false` に設定して、 `logging` のスレッドコンテキストの継承を
-  無効にします。
+There is a known incompatibility between Ruby 2.7 and older GCC versions (4.8 and below) that impacts the profiler ([upstream Ruby report][6], [`dd-trace-rb` bug report][7]). This can result in the following error message: "Your ddtrace installation is missing support for the Continuous Profiler because compilation of the Ruby VM just-in-time header failed. Your C compiler or Ruby VM just-in-time compiler seem to be broken."
 
-## レスキュージョブのプロファイルがありません
+To fix this, update your operating system or Docker image so that the GCC version is something more recent than v4.8.
 
-[Resque][4] のジョブをプロファイリングする場合、[Resque のドキュメント][5]にあるように、`RUN_AT_EXIT_HOOKS` 環境変数を `1` に設定する必要があります。
+For further help with this issue, [contact support][2] and include the output of running `DD_PROFILING_FAIL_INSTALL_IF_MISSING_EXTENSION=true gem install ddtrace` and the resulting `mkmf.log` file.
 
-このフラグがないと、短期間の Resque ジョブのプロファイルは使用できなくなります。
+## Frames omitted when backtraces are very deep
 
-## Ruby VM のジャストインタイムヘッダーのコンパイルに失敗したため、プロファイリングがオンにならない
+The Ruby profiler truncates deep backtraces when collecting profiling data. Truncated backtraces are missing some of their caller functions, making it impossible to link them to the root call frame. As a result, truncated backtraces are grouped together under a `N frames omitted` frame.
 
-Ruby 2.7 と古いバージョンの GCC (4.8 以下) の間には、プロファイラに影響を与える非互換性があることが知られています ([アップストリーム Ruby レポート][6]、[`dd-trace-rb` バグレポート][7])。その結果、次のようなエラーメッセージが表示されることがあります: "Your ddtrace installation is missing support for the Continuous Profiler because compilation of the Ruby VM just-in-time header failed. Your C compiler or Ruby VM just-in-time compiler seem to be broken.” (Ruby VM ジャストインタイムヘッダーのコンパイルに失敗したため、あなたの ddtrace インストールには Continuous Profiler のサポートが欠けています。C コンパイラまたは Ruby VM ジャストインタイムコンパイラが壊れているようです。)
-
-これを解決するには、オペレーティングシステムまたは Docker イメージを更新して、GCC のバージョンが v4.8 よりも新しいものになるようにしてください。
-
-この問題についての更なるヘルプは、[サポートにお問い合わせ][2]の上、`DD_PROFILING_FAIL_INSTALL_IF_MISSING_EXTENSION=true gem install ddtrace` と結果の `mkmf.log` ファイルを実行したときの出力を含めてお送りください。
-
-## バックトレースが非常に深い場合、フレームが省略される
-
-Ruby プロファイラーでは、プロファイリングデータを収集する際に、深いバックトレースを切り捨てています。切り捨てられたバックトレースは呼び出し元の関数の一部が欠落しているため、ルートコールフレームにリンクすることが不可能になります。その結果、切り捨てられたバックトレースは `N frames omitted` というフレームにまとめられます。
-
-環境変数 `DD_PROFILING_MAX_FRAMES`、または次のコードで、最大深度を増やすことができます。
+You can increase the maximum depth with the `DD_PROFILING_MAX_FRAMES` environment variable, or in code:
 
 ```ruby
 Datadog.configure do |c|
@@ -55,21 +44,22 @@ Datadog.configure do |c|
 end
 ```
 
-## `dd-trace-rb` 1.11.0+ でネイティブ拡張機能を使用する Ruby gems からの予期しない失敗やエラー
+## Unexpected failures or errors from Ruby gems that use native extensions in `dd-trace-rb` 1.11.0+
 
-`dd-trace-rb` 1.11.0 から、プロファイラー "CPU Profiling 2.0" が、Ruby アプリケーションに unix シグナル `SIGPROF` を送ることでデータを集め、よりきめ細かいデータ収集が可能になりました。
+Starting from `dd-trace-rb` 1.11.0, the "CPU Profiling 2.0" profiler gathers data by sending `SIGPROF` unix signals to Ruby applications, enabling finer-grained data gathering.
 
-`SIGPROF` の送信は一般的なプロファイリング手法であり、ネイティブ拡張機能/ライブラリからのシステムコールがシステムの [`EINTR` エラーコード][8]で中断されることがあります。
-まれに、ネイティブ拡張機能またはネイティブ拡張機能から呼び出されたライブラリの `EINTR` エラーコードに対するエラー処理が欠けていたり、不正確な場合があります。
+Sending `SIGPROF` is a common profiling approach, and may cause system calls from native extensions/libraries to be interrupted with a system [`EINTR` error code][8].
+Rarely, native extensions or libraries called by them may have missing or incorrect error handling for the `EINTR` error code.
 
-以下のような非互換性があることが知られています。
-* `mysql2` gem を [8.0.0 より古い][9]バージョンの `libmysqlclient` と一緒に使用すること。影響を受ける `libmysqlclient` のバージョンは、Ubuntu 18.04 に存在することが知られていますが、20.04 またはそれ以降のリリースには存在しません。
-* [`rugged` gem を使用すること。][10]
+The following incompatibilities are known:
+* Using the `mysql2` gem together with versions of `libmysqlclient` [older than 8.0.0][9]. The affected `libmysqlclient` version is known to be present on Ubuntu 18.04, but not 20.04 or later releases.
+* [Using the `rugged` gem.][10]
+* Using the `passenger` gem/Phusion Passenger web server [older than 6.0.19][11]
 
-このような場合、プロファイラーが自動的に非互換性を検出し、回避策を適用します。
+In these cases, the latest version of the profiler automatically detects the incompatibility and applies a workaround.
 
-上記以外のネイティブ拡張機能を使用した Ruby gems で失敗やエラーが発生した場合、手動で "no signals" 回避策を有効にすることで、`SIGPROF` シグナルを使用しないようにすることができます。
-この回避策を有効にするには、`DD_PROFILING_NO_SIGNALS_WORKAROUND_ENABLED` 環境変数を `true` に設定するか、コードで以下を設定します。
+If you encounter failures or errors from Ruby gems that use native extensions other than those listed above, you can manually enable the "no signals" workaround, which avoids the use of `SIGPROF` signals.
+To enable this workaround, set the `DD_PROFILING_NO_SIGNALS_WORKAROUND_ENABLED` environment variable to `true`, or in code:
 
 ```ruby
 Datadog.configure do |c|
@@ -77,19 +67,35 @@ Datadog.configure do |c|
 end
 ```
 
-**注**: 上記の設定は `dd-trace-rb` 1.12.0 以降で利用可能です。
+**Note**: The above setting is only available starting in `dd-trace-rb` 1.12.0.
 
-非互換性を見つけたり疑ったりした場合は、[サポートチケット][2]で弊社チームにお知らせください。
-そうすることで、Datadog はそれらを自動検出リストに追加し、gem/ライブラリの作者と協力して問題を解決することができます。
+Let our team know if you find or suspect any incompatibilities [by opening a support ticket][2].
+Doing this enables Datadog to add them to the auto-detection list, and to work with the gem/library authors to fix the issue.
 
-## その他の参考資料
+## Segmentation faults in `gc_finalize_deferred` in Ruby versions 2.6 to 3.2
+
+A workaround for this issue is automatically applied since [`dd-trace-rb` version 1.21.0][3]. Datadog recommends upgrading to this version or later to fix this issue.
+
+Prior to version 1.21.0, in rare situations the profiler could trigger [Ruby VM Bug #19991][12] that manifests itself as a "Segmentation fault" with a crash stack trace including the `gc_finalize_deferred` function.
+
+This bug has been fixed for Ruby 3.3 and above. For older Ruby versions (and prior to dd-trace-rb 1.21.0), you can use the "no signals" workaround to resolve this issue.
+
+To enable this workaround, set the `DD_PROFILING_NO_SIGNALS_WORKAROUND_ENABLED` environment variable to `true`, or in code:
+
+```ruby
+Datadog.configure do |c|
+  c.profiling.advanced.no_signals_workaround_enabled = true
+end
+```
+
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /ja/tracing/troubleshooting/#tracer-debug-logs
-[2]: /ja/help/
-[3]: https://github.com/DataDog/dd-trace-rb/releases/tag/v0.54.0
+[1]: /tracing/troubleshooting/#tracer-debug-logs
+[2]: /help/
+[3]: https://github.com/datadog/dd-trace-rb/releases/tag/v1.21.0
 [4]: https://github.com/resque/resque
 [5]: https://github.com/resque/resque/blob/v2.0.0/docs/HOOKS.md#worker-hooks
 [6]: https://bugs.ruby-lang.org/issues/18073
@@ -97,3 +103,5 @@ end
 [8]: https://man7.org/linux/man-pages/man7/signal.7.html#:~:text=Interruption%20of%20system%20calls%20and%20library%20functions%20by%20signal%20handlers
 [9]: https://bugs.mysql.com/bug.php?id=83109
 [10]: https://github.com/DataDog/dd-trace-rb/issues/2721
+[11]: https://github.com/DataDog/dd-trace-rb/issues/2976
+[12]: https://bugs.ruby-lang.org/issues/19991

@@ -1,87 +1,87 @@
 ---
-app_id: new-relic
-app_uuid: 82c7d333-a23e-44f9-a6c5-cd22fb541022
-assets:
-  integration:
-    auto_install: false
-    events:
-      creates_events: true
-    metrics:
-      check:
-      - new_relic.application_summary.apdex_score
-      - new_relic.apdex.score
-      metadata_path: metadata.csv
-      prefix: new_relic.
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 54
-    source_type_name: New Relic
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com
-  support_email: help@datadoghq.com
-categories:
-- notifications
-dependencies: []
-display_on_public_website: true
-draft: false
-git_integration_title: new_relic
-integration_id: new-relic
-integration_title: New Relic
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: 2.0.0
-name: new_relic
-public_title: New Relic
-short_description: New Relic は、Web アプリケーションとモバイルアプリケーション向けのアプリケーションモニタリングサービスです。
-supported_os: []
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Notifications
-  configuration: README.md#Setup
-  description: New Relic は、Web アプリケーションとモバイルアプリケーション向けのアプリケーションモニタリングサービスです。
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: New Relic
+"app_id": "new-relic"
+"app_uuid": "82c7d333-a23e-44f9-a6c5-cd22fb541022"
+"assets":
+  "integration":
+    "auto_install": false
+    "events":
+      "creates_events": true
+    "metrics":
+      "check":
+      - "new_relic.application_summary.apdex_score"
+      - "new_relic.apdex.score"
+      "metadata_path": "metadata.csv"
+      "prefix": "new_relic."
+    "service_checks":
+      "metadata_path": "assets/service_checks.json"
+    "source_type_id": !!int "54"
+    "source_type_name": "New Relic"
+"author":
+  "homepage": "https://www.datadoghq.com"
+  "name": "Datadog"
+  "sales_email": "info@datadoghq.com"
+  "support_email": "help@datadoghq.com"
+"categories":
+- "notifications"
+"custom_kind": "integration"
+"dependencies": []
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "new_relic"
+"integration_id": "new-relic"
+"integration_title": "New Relic"
+"integration_version": ""
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "new_relic"
+"public_title": "New Relic"
+"short_description": "New Relic is an application monitoring service for web and mobile applications."
+"supported_os": []
+"tile":
+  "changelog": "CHANGELOG.md"
+  "classifier_tags":
+  - "Category::Notifications"
+  "configuration": "README.md#Setup"
+  "description": "New Relic is an application monitoring service for web and mobile applications."
+  "media": []
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": "New Relic"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
 
-## 概要
+## Overview
 
-<div class="alert alert-danger">New Relic APM インテグレーションは非推奨となり、機能が低下しています。APM メトリクスラベルは利用できません。</div>
+<div class="alert alert-danger">The New Relic APM integration is deprecated and has reduced functionality. APM metric labels are unavailable.</div>
 
-New Relic に接続すると、イベントストリームに New Relic のアラートが表示されます。
+Connect to New Relic to see New Relic alerts in your event stream.
 
-## セットアップ
+## Setup
 
-### イベントストリームへの New Relic アラートの表示
+### New Relic alerts in event stream
 
-**New Relic** で以下の手順を実行します。
+Complete the following steps in **New Relic**.
 
-1. "Alerts & AI" タブで "Notificaton Channels" に移動します。
-2. "New Notification Channel" を選択します。
-3. チャンネルタイプとして "Webhook" を選択します。
-4. チャンネルを "Datadog" と名付けます。
-5. このベース URL を入力します:
+1. On the "Alerts & AI" tab, navigate to "Notification Channels".
+2. Select "New Notification Channel".
+3. Select "Webhook" as the channel type.
+4. Name your channel "Datadog".
+5. Enter this base URL:
 
     ```text
     https://app.datadoghq.com/intake/webhook/newrelic?api_key=<DATADOG_API_KEY>
     ```
 
-6. "Custom Payload" をクリックし、ペイロードが JSON 形式であることを確認します。
-**注:** カスタムタグを JSON で設定する手順については、次のセクションを参照してください。
-7. "Create Channel" をクリックします。
-8. "Alert Policies" をクリックします。
-9. Datadog に送信したいアラートについて、アラートポリシーを選択します。
+6. Click "Custom Payload" and ensure that the payload is in JSON format.
+**Note:** See section below for instructions on including custom tags in JSON.
+7. Click "Create Channel".
+8. Click "Alert Policies".
+9. Select any alert policies for which you would like alerts to be sent into Datadog.
 
-### ベータアラートにカスタムタグを含める
+### Include custom tags on beta alerts
 
-New Relic のベータアラート機能の "Use Custom Payload" オプションで、カスタムタグを含めることができます。これを構成するには、New Relic アカウントに移動し、画面の右上にある 'Alerts Beta' ボタンをクリックします。そして、'Notification channels' セクションを選択し、Datadog に対して設定した Webhook を見つけます。ここに 'Use Custom Payload' というセクションがあります。これを選択すると、JSON ペイロードが表示されます。このペイロードを変更して、"tags" 属性を追加する必要があります。たとえば、変更後のペイロードは次のようになります。
+You can include custom tags with the "Use Custom Payload" option through New Relic's Beta Alerts feature. To configure this, navigate to your New Relic account, and click the 'Alerts Beta' button in the upper right-hand corner of the screen. Then, select the 'Notification channels' section and find the Webhook you've setup for Datadog. From here there should be a section called 'Use Custom Payload', and once selected, it expands to reveal a JSON payload. You need to modify this payload by adding a "tags" attribute. For example, a modified payload might look like this:
 
 ```json
 {
@@ -106,10 +106,11 @@ New Relic のベータアラート機能の "Use Custom Payload" オプション
 }
 ```
 
-変更が完了したら、**Update Channel** を選択して変更を保存します。
+After your modifications are complete, select **Update Channel** to save your changes.
 
-## トラブルシューティング
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][1]までお問合せください。
+Need help? Contact [Datadog support][1].
 
-[1]: https://docs.datadoghq.com/ja/help/
+[1]: https://docs.datadoghq.com/help/
+

@@ -1,31 +1,32 @@
 ---
+title: Using Postman with Datadog APIs
+kind: documentation
 aliases:
-- /ja/developers/faq/using-postman-with-datadog-apis
-- /ja/getting_started/using-postman-with-datadog-apis
-- /ja/developers/guide/using-postman-with-datadog-apis
-title: Datadog API と Postman の使用
+    - /developers/faq/using-postman-with-datadog-apis
+    - /getting_started/using-postman-with-datadog-apis
+    - /developers/guide/using-postman-with-datadog-apis
 ---
 
-## 概要
+## Overview
 
-Datadog API を使用すると、Datadog との間でデータをやり取りできます。Datadog API は、リソース指向の URL とステータスコードを使用してリクエストの成功または失敗を示し、すべてのリクエストから JSON を返します。
+The Datadog API allows you to get data in and out of Datadog. It uses resource-oriented URLs and status codes to indicate the success or failure of requests, then returns JSON from all requests.
 
-この記事では、[Postman][1] を使用して Datadog への API 呼び出しを実行する方法を説明します。記事内では、Datadog API 内で使用可能なアクションを示し、Postman を使用して `GET`、`POST`、`PUT`、および `DELETE` を実行するための高度な概要を提供します。
+This article explains how to use [Postman][1] to perform API calls to Datadog by showing the actions available within the Datadog API, and by providing a high-level introduction to using Postman to `GET`, `POST`, `PUT`, and `DELETE`.
 
-## 前提条件
+## Prerequisites
 
-以下が必要です。
+You have:
 
-- Datadog のアクティブな実装。
-- Datadog [API キーとアプリケーションキー][2]へのアクセス権。
-- API 構造と JSON 書式設定に関する基礎知識。
-- [無料の Postman アカウント][3]。
+- An active Datadog implementation.
+- Access to your Datadog [API and application keys][2].
+- Basic knowledge of API structure and JSON formatting.
+- A [free Postman account][3].
 
-## セットアップ
+## Setup
 
-### Postman に Datadog コレクションをインポート
+### Import the Datadog collection into Postman
 
-[Postman へのログイン][4]から始めます。Datadog は [Postman アプリケーションをダウンロードすること][5]をお勧めします。
+Start by [logging into Postman][4]. Datadog recommends [downloading the Postman application][5].
 
 </br>
 <div class="postman-run-button"
@@ -43,72 +44,72 @@ data-postman-collection-url="entityId=20651290-809b13c1-4ada-46c1-af65-ab276c434
   }(window, document, "_pm", "PostmanRunObject", "https://run.pstmn.io/button.js"));
 </script>
 
-</br>このコレクションは  Web 用 Postman またはお使いの Postman アプリケーションで動作します。読み込みに数秒かかることがあります。
+</br>This collection works in Postman for Web or in your Postman application. It may take several seconds to load.
 
-**注**: API キーとアプリケーションキーの値を使って、Datadog API コレクションの**コレクション変数**を構成します。
+**Note**: Configure the **collection variables** of the Datadog API collection with your API and application key values.
 
-### Postman 環境のセットアップ
+### Postman environment setup
 
-Postman コレクションをインポートすると、Postman の左ペインに、使用できるすべての Datadog API 呼び出しの一覧がフォルダーごとに構造化されて表示されます。
+After the Postman collection is imported, a full list of available Datadog API calls is structured by folder in the left pane of Postman.
 
-#### Go
+#### Authentication
 
-認証用に Datadog の API キーとアプリケーションキーを[コレクション変数][6]に追加します。
+Add your Datadog API and application keys to the [collection variables][6] for authentication.
 
-以下の手順に従って環境をセットアップします。
+Follow these steps to set up your environment:
 
-1. Datadog API コレクションを選択します。
+1. Select the Datadog API Collection.
 
-2. **Variables** タブをクリックします。
+2. Click the **Variables** tab.
 
-3. `api_key` および `application_key` 変数の **Current value** フィールドに、それぞれ有効な Datadog API キーとアプリケーションキーを入力します。
+3. Add your valid Datadog API and application key values to the **Current value** field of the `api_key` and `application_key` variables, respectively.
 
-4. **Save** をクリックします。
+4. Click **Save**.
 
-{{< img src="getting_started/postman/collection_variables.png" alt="変数 api_key と application_key collection が構成された Datadog API コレクション" style="width:100%;">}}
+{{< img src="getting_started/postman/collection_variables.png" alt="The Datadog API Collection with api_key and application_key collection variables configured" style="width:100%;">}}
 
-#### API エンドポイントに切り替える
+#### Switch the API endpoint
 
-`https://api.datadoghq.com` 以外の Datadog サイトにアクセスしている場合、別のエンドポイント URL にアクセスするには Postman コレクションに切り替える必要があります。
+If you are accessing a Datadog site other than `https://api.datadoghq.com`, you need to switch the Postman collection to access a different endpoint URL.
 
-選択したサイト ({{< region-param key="dd_site_name" >}}) へのインスタンスを更新するには、以下の手順に従います。
+Follow these steps to update the instance to your selected site ({{< region-param key="dd_site_name" >}}):
 
-1. 左ペインの Datadog API コレクションフォルダーで、メニュー (3 点リーダー) をクリックし、**Edit** を選択します。
+1. In the Datadog API Collection folder on the left pane, click the three dot menu, and then select **Edit**.
 
-    {{< img src="getting_started/postman/view-more-actions.png" alt="他のアクションを表示">}}
+    {{< img src="getting_started/postman/view-more-actions.png" alt="View more actions">}}
 
-2. **Variables** タブで、`datadoghq.com` の値を持つ `site` 変数の選択を解除し、{{< region-param key="dd_site" code="true" >}} の値を持つ `site` を選択します。
+2. On the **Variables** tab, deselect the `site` variable with the value `datadoghq.com` and select the `site` with the value {{< region-param key="dd_site" code="true" >}}.
 
-3. **Update** をクリックします。
+3. Click **Update**.
 
-## コレクションの使用
+## Working with the collection
 
-セットアップが完了したら、いつでも API 呼び出しを行うことができます。Postman -> Datadog フォルダーには、[Datadog API リファレンス][7]に一覧表示されている各 API カテゴリタイプのサブフォルダーがあります。このサブフォルダーを展開すると、HTTP メソッドと API 呼び出し名を確認できます。
+After setup is complete, you are ready to begin making API calls. In the Postman -> Datadog folder, there are subfolders for each type of API category listed in the [Datadog API Reference][7]. Expand the subfolders to see the HTTP methods and API call names.
 
-### ビルダー
+### Builder
 
-コレクション内の API 呼び出しをクリックすると、右側の `Builder` ペインにロードされます。このペインで API 呼び出しを送信し、返されたステータス、応答時間、および API 応答コードを確認できます。
+When you click on an API call in the collection, it loads in the `Builder` pane on the right. On this pane you can send the API call and see the returned status, response time, and API response code.
 
-{{< img src="getting_started/postman/apiGetCalls.png" alt="Postman API の応答" style="width:70%;">}}
+{{< img src="getting_started/postman/apiGetCalls.png" alt="postman_api_response" style="width:70%;">}}
 
-### 説明
+### Description
 
-エンドポイント名をクリックすると、エンドポイントの説明と、すべての必須/オプションパラメーターが表示されるため、容易にリクエストを構築できます。
+When you click on the Endpoint name a description of the endpoint and all required/optional parameters is displayed to help you build your requests:
 
-{{< img src="getting_started/postman/description.mp4" alt="Postman の説明" video="true" >}}
+{{< img src="getting_started/postman/description.mp4" alt="Postman description" video="true" >}}
 
 ### Params
 
-**Params** タブには、API 呼び出しに存在するすべてのパラメーターと値が表示されます。ここでは、パラメーターと値を追加できます。使用可能な引数は、[Datadog API ドキュメント][8]の対応するセクションで確認してください。
+The **Params** tab shows all parameters and values that are on the API call. Here, you are able to add parameters and values. View the available arguments in the corresponding section of the [Datadog API documentation][8].
 
-{{< img src="getting_started/postman/parameters.png" alt="Postman のパラメーター" style="width:70%;">}}
+{{< img src="getting_started/postman/parameters.png" alt="postman_param" style="width:70%;">}}
 
-このタブは、API 呼び出しの `param1:value1&param2:value2` 構造を表示する代わりに使用できます。
+This tab is an alternative to viewing the `param1:value1&param2:value2` structure of the API call.
 
-**注**:
+**Notes**:
 
-- params テーブルでは、アンパサンド (&) とコロン (:) は不要です。Postman によって挿入されます。
-- すべてのプレースホルダーは `<PLACEHOLDER>` の形式に従います。プレースホルダーはクエリを実行する前に置き換える必要があります。
+- The ampersand (&) and colon (:) are not needed in the params table. Postman inserts these for you.
+- All placeholders follow the format: `<PLACEHOLDER>` . They should be replaced before running a query.
 
 [1]: https://www.postman.com/
 [2]: https://app.datadoghq.com/organization-settings/api-keys
@@ -116,5 +117,5 @@ Postman コレクションをインポートすると、Postman の左ペイン�
 [4]: https://identity.getpostman.com/login
 [5]: https://www.postman.com/downloads/
 [6]: https://learning.postman.com/docs/sending-requests/variables/variables/#defining-collection-variables
-[7]: /ja/api/latest/#api-reference
-[8]: /ja/api/
+[7]: /api/latest/#api-reference
+[8]: /api/

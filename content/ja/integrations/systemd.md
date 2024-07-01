@@ -1,97 +1,97 @@
 ---
-app_id: systemd
-app_uuid: a18dccd2-35c0-40e2-9c0a-7a01a5daf5f3
-assets:
-  dashboards:
-    Systemd Overview: assets/dashboards/overview.json
-  integration:
-    auto_install: true
-    configuration: {}
-    events:
-      creates_events: false
-    metrics:
-      check: systemd.units_by_state
-      metadata_path: metadata.csv
-      prefix: systemd.
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 10066
-    source_type_name: Systemd
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com (日本語対応)
-  support_email: help@datadoghq.com
-categories:
-- OS & システム
-dependencies:
-- https://github.com/DataDog/integrations-core/blob/master/systemd/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: systemd
-integration_id: systemd
-integration_title: Systemd
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: 2.0.0
-name: systemd
-public_title: Systemd
-short_description: Systemd および Systemd によって管理されるユニットに関するメトリクスを取得
-supported_os:
+"app_id": "systemd"
+"app_uuid": "a18dccd2-35c0-40e2-9c0a-7a01a5daf5f3"
+"assets":
+  "dashboards":
+    "Systemd Overview": assets/dashboards/overview.json
+  "integration":
+    "auto_install": true
+    "configuration": {}
+    "events":
+      "creates_events": false
+    "metrics":
+      "check": systemd.units_by_state
+      "metadata_path": metadata.csv
+      "prefix": systemd.
+    "service_checks":
+      "metadata_path": assets/service_checks.json
+    "source_type_id": !!int "10066"
+    "source_type_name": Systemd
+"author":
+  "homepage": "https://www.datadoghq.com"
+  "name": Datadog
+  "sales_email": info@datadoghq.com
+  "support_email": help@datadoghq.com
+"categories":
+- os & system
+"custom_kind": "integration"
+"dependencies":
+- "https://github.com/DataDog/integrations-core/blob/master/systemd/README.md"
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "systemd"
+"integration_id": "systemd"
+"integration_title": "Systemd"
+"integration_version": ""
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "systemd"
+"public_title": "Systemd"
+"short_description": "Get metrics about Systemd and units managed by Systemd"
+"supported_os":
 - linux
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Supported OS::Linux
-  - Category::OS & System
-  configuration: README.md#Setup
-  description: Systemd および Systemd によって管理されるユニットに関するメトリクスを取得
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Systemd
+"tile":
+  "changelog": CHANGELOG.md
+  "classifier_tags":
+  - "Supported OS::Linux"
+  - "Category::OS & System"
+  "configuration": "README.md#Setup"
+  "description": Get metrics about Systemd and units managed by Systemd
+  "media": []
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": Systemd
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## 概要
+## Overview
 
-このチェックは、[Systemd][1] と、Systemd が Datadog Agent を介して管理するユニットを監視します。
+This check monitors [Systemd][1] and the units it manages through the Datadog Agent.
 
-- Systemd の状態と健全性を追跡できます。
-- Systemd が管理するユニット、サービス、ソケットを監視できます。
+- Track the state and health of your Systemd
+- Monitor the units, services, sockets managed by Systemd
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-Systemd チェックは [Datadog Agent][2] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
+The Systemd check is included in the [Datadog Agent][2] package. No additional installation is needed on your server.
 
-### ブラウザトラブルシューティング
+### Configuration
 
 {{< tabs >}}
-{{% tab "ホスト" %}}
+{{% tab "Host" %}}
 
-#### メトリクスベース SLO
+#### Host
 
-ホストで実行中の Agent に対してこのチェックを構成するには
+To configure this check for an Agent running on a host:
 
-1. Agent の構成ディレクトリのルートにある `conf.d/` フォルダーの `systemd.d/conf.yaml` ファイルを編集して、
-   Systemd パフォーマンスデータの収集を開始します。
-   使用可能なすべての構成オプションの詳細については、[サンプル systemd.d/conf.yaml][1] を参照してください。
+1. Edit the `systemd.d/conf.yaml` file, in the `conf.d/` folder at the root of your
+   Agent's configuration directory to start collecting your systemd performance data.
+   See the [sample systemd.d/conf.yaml][1] for all available configuration options.
 
-2. [Agent を再起動します][2]。
+2. [Restart the Agent][2].
 
 [1]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/dist/conf.d/systemd.d/conf.yaml.example
-[2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-restart-the-agent
+[2]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-restart-the-agent
 {{% /tab %}}
-{{% tab "コンテナ化" %}}
+{{% tab "Containerized" %}}
 
-#### コンテナ化
+#### Containerized
 
-コンテナ環境の場合は、Systemd データの取得に必要なソケット `/run/systemd/private` を含む `/run/systemd/` フォルダーをマウントする必要があります。たとえば、以下のとおりです。
+For containerized environments, mount the `/run/systemd/` folder, which contains the socket `/run/systemd/private` needed to retrieve the Systemd data, for example:
 
 ```bash
 docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
@@ -105,43 +105,43 @@ docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
 {{% /tab %}}
 {{< /tabs >}}
 
-### 検証
+### Validation
 
-[Agent の status サブコマンドを実行][3]し、Checks セクションの `systemd` を探します。
+[Run the Agent's status subcommand][3] and look for `systemd` under the Checks section.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "systemd" >}}
 
 
-以下は、対応する構成が有効な場合にのみ報告されるメトリクスです。
+Some metrics are reported only if the respective configuration are enabled:
 
-- `systemd.service.cpu_time_consumed`: Systemd 構成 `CPUAccounting` を有効にする必要があります。
-- `systemd.service.memory_usage`: Systemd 構成 `MemoryAccounting` を有効にする必要があります。
-- `systemd.service.task_count`: Systemd 構成 `TasksAccounting` を有効にする必要があります。
+- `systemd.service.cpu_time_consumed` requires Systemd configuration `CPUAccounting` to be enabled
+- `systemd.service.memory_usage` requires Systemd configuration `MemoryAccounting` to be enabled
+- `systemd.service.task_count` requires Systemd configuration `TasksAccounting` to be enabled
 
-以下は、特定バージョンの Systemd でのみ使用できるメトリクスです。
+Some metrics are only available from specific version of Systemd:
 
-- `systemd.service.cpu_time_consumed`: Systemd v220 が必要です。
-- `systemd.service.restart_count`: Systemd v235 が必要です。
-- `systemd.socket.connection_refused_count`: Systemd v239 が必要です。
+- `systemd.service.cpu_time_consumed` requires Systemd v220
+- `systemd.service.restart_count` requires Systemd v235
+- `systemd.socket.connection_refused_count` requires Systemd v239
 
-### ヘルプ
+### Events
 
-Systemd チェックには、イベントは含まれません。
+The Systemd check does not include any events.
 
-### ヘルプ
+### Service Checks
 {{< get-service-checks-from-git "systemd" >}}
 
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
+Need help? Contact [Datadog support][4].
 
 
 
 [1]: https://www.freedesktop.org/wiki/Software/systemd/
 [2]: https://app.datadoghq.com/account/settings/agent/latest
-[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[4]: https://docs.datadoghq.com/ja/help/
+[3]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
+[4]: https://docs.datadoghq.com/help/

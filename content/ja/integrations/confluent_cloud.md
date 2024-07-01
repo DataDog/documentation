@@ -1,147 +1,163 @@
 ---
-app_id: fastly-integration-delete-fastly-account
-app_uuid: 406c781b-842d-4e0c-84dc-4b13b8e93fb6
-assets:
-  dashboards:
-    confluent-cloud: assets/dashboards/confluent_cloud_overview.json
-  integration:
-    auto_install: false
-    events:
-      creates_events: false
-    metrics:
-      check:
+"app_id": "confluent-cloud"
+"app_uuid": "406c781b-842d-4e0c-84dc-4b13b8e93fb6"
+"assets":
+  "dashboards":
+    "confluent-cloud": assets/dashboards/confluent_cloud_overview.json
+  "integration":
+    "auto_install": false
+    "events":
+      "creates_events": false
+    "metrics":
+      "check":
       - confluent_cloud.kafka.received_bytes
       - confluent_cloud.connect.sent_records
       - confluent_cloud.ksql.streaming_unit_count
       - confluent_cloud.schema_registry.schema_count
-      metadata_path: metadata.csv
-      prefix: confluent_cloud.
-    source_type_id: 609
-    source_type_name: IP 許可リストを更新する
-  monitors:
-    '[Confluent Cloud] Mirror topic lag is increasing': assets/monitors/cluster_link_lag_rate_change_percent.json
-    '[Confluent Cloud] Topic lag is Increasing': assets/monitors/consumer_lag_monitor_rate_change_percent.json
-author:
-  homepage: https://www.datadoghq.com
-  name: Ruby
-  sales_email: info@datadoghq.com (日本語対応)
-  support_email: help@datadoghq.com
-categories:
-- モニター
-- メッセージキュー
-dependencies: []
-display_on_public_website: true
-draft: false
-git_integration_title: confluent_cloud
-integration_id: fastly-integration-delete-fastly-account
-integration_title: Confluent Cloud
-integration_version: ''
-is_public: true
-custom_kind: integration
-manifest_version: 2.0.0
-name: confluent_cloud
-public_title: IP 許可リストを更新する
-short_description: Confluent Cloud から様々な Kafka メトリクスを収集します。
-supported_os: []
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Metrics
-  - Category::Message Queues
-  configuration: README.md#Setup
-  description: Confluent Cloud から様々な Kafka メトリクスを収集します。
-  media:
-  - caption: Confluent Cloud ダッシュボード概要
-    image_url: images/confluent_dashboard.png
-    media_type: image
-  overview: README.md#Overview
-  support: README.md#Support
-  title: IP 許可リストを更新する
+      "metadata_path": metadata.csv
+      "prefix": confluent_cloud.
+    "service_checks":
+      "metadata_path": assets/service_checks.json
+    "source_type_id": !!int "609"
+    "source_type_name": Confluent Cloud
+  "monitors":
+    "[Confluent Cloud] Mirror topic lag is increasing": assets/monitors/cluster_link_lag_rate_change_percent.json
+    "[Confluent Cloud] Topic lag is Increasing": assets/monitors/consumer_lag_monitor_rate_change_percent.json
+"author":
+  "homepage": "https://www.datadoghq.com"
+  "name": Datadog
+  "sales_email": info@datadoghq.com
+  "support_email": help@datadoghq.com
+"categories":
+- cost management
+- metrics
+- message queues
+"custom_kind": "integration"
+"dependencies": []
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "confluent_cloud"
+"integration_id": "confluent-cloud"
+"integration_title": "Confluent Cloud"
+"integration_version": ""
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "confluent_cloud"
+"public_title": "Confluent Cloud"
+"short_description": "Collect various Kafka metrics and related cost data from Confluent Cloud."
+"supported_os": []
+"tile":
+  "changelog": CHANGELOG.md
+  "classifier_tags":
+  - "Category::Cost Management"
+  - "Category::Metrics"
+  - "Category::Message Queues"
+  "configuration": "README.md#Setup"
+  "description": Collect various Kafka metrics and related cost data from Confluent Cloud.
+  "media":
+  - "caption": Confluent Cloud Dashboard Overview
+    "image_url": images/confluent_dashboard.png
+    "media_type": image
+  "overview": "README.md#Overview"
+  "resources":
+  - "resource_type": other
+    "url": "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/integration_confluent_account"
+  - "resource_type": other
+    "url": "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/integration_confluent_resource"
+  "support": "README.md#Support"
+  "title": Confluent Cloud
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
-## 概要
+## Overview
 
 
 {{< site-region region="gov" >}}
-**Datadog {{< region-param key="dd_site_name" >}} サイトでは Confluent Cloud インテグレーションはサポートされていません**。
+**The Confluent Cloud integration is not supported for the Datadog {{< region-param key="dd_site_name" >}} site**.
 {{< /site-region >}}
 
 
-Confluent Cloud はフルマネージドの、クラウドホスティングのストリーミングデータサービスです。Datadog と Confluent Cloud を接続することで、Confluent Cloud リソースの主要メトリクスを視覚化し、アラートを発します。
+Confluent Cloud is a fully managed, cloud-hosted streaming data service. Connect Datadog with Confluent Cloud to visualize and alert on key metrics for your Confluent Cloud resources.
 
-Datadog のすぐに使える Confluent Cloud ダッシュボードには、アクティブな接続の変化率や、平均消費レコードと生成レコードの比率などの情報を含め、環境の健全性とパフォーマンスをモニタリングするための主要なクラスターメトリクスが表示されます。
+Datadog's out-of-the-box Confluent Cloud dashboard shows you key cluster metrics for monitoring the health and performance of your environment, including information such as the rate of change in active connections and your ratio of average consumed to produced records.
 
-推奨モニターを使用して、トピックのラグが大きくなりすぎた場合にチームに通知してアラートを出すことも、これらのメトリクスを使用して独自のメトリクスを作成することもできます。
+You can use recommended monitors to notify and alert your team when topic lag is getting too high, or use these metrics to create your own.
 
-ストリーミングデータパイプラインのトポロジーを視覚化したり、データストリームセットアップ内の局所的なボトルネックを調査したりすることが有益な場合は、[Data Streams Monitoring][1] をご覧ください。
+If you would benefit from visualizing the topology of your streaming data pipelines, or from investigating localized bottlenecks within your data streams setup, check out [Data Streams Monitoring][1].
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-[Datadog の Confluent Cloud インテグレーションタイル][2]を使用して、インテグレーションをインストールします。
+Install the integration with the [Datadog Confluent Cloud integration tile][2].
 
-### ブラウザトラブルシューティング
+### Configuration
 
-1. インテグレーションタイルで、**Configuration** タブに移動します。
-2. [Confluent Cloud API Key と API Secret](#api-key-and-secret) を入力し、**+ Add API Key** をクリックします。
-3. **Save** をクリックします。Datadog は、これらの資格情報に関連するアカウントを検索します。
-4. Confluent Cloud の [Cluster ID](#cluster-id) または [Connector ID](#connector-id) を追加します。Datadog は Confluent Cloud のメトリクスをクロールし、数分以内にメトリクスをロードします。
+1. In the integration tile, navigate to the **Configuration** tab.
+2. Click **+ Add API Key** to enter your [Confluent Cloud API Key and API Secret](#api-key-and-secret).
+3. Click **Save**. Datadog searches for accounts associated with those credentials.
+4. Add your Confluent Cloud [Cluster ID](#cluster-id) or [Connector ID](#connector-id). Datadog crawls the Confluent Cloud metrics and loads metrics within minutes.
+5. If you use Cloud Cost Management and enable collecting cost data
+   - Please ensure that the API key has the [BillingAdmin role][3] enabled.
+   - It will be visible in [Cloud Cost Management][4] within 24 hours. ([collected data][5])
 
-#### API Key と Secret
+#### API Key and secret
 
-Confluent Cloud API Key と Secret を作成するには、[UI で MetricsViewer ロールを新しいサービスアカウントに追加する][3]を参照してください。
+To create your Confluent Cloud API Key and Secret, see [Add the MetricsViewer role to a new service account in the UI][6].
 
 #### Cluster ID
 
-Confluent Cloud Cluster ID を検索するには
+To find your Confluent Cloud Cluster ID:
 
-1. Confluent Cloud で、**Environment Overview** に移動し、監視したいクラスターを選択します。
-2. 左側のナビゲーションで、**Cluster overview** > **Cluster settings** をクリックします。
-3. **Identification** の下にある、`lkc` で始まる Cluster ID をコピーします。
+1. In Confluent Cloud, navigate to **Environment Overview** and select the cluster you want to monitor.
+2. In the left-hand navigation, click **Cluster overview** > **Cluster settings**.
+3. Under **Identification**, copy the Cluster ID beginning with `lkc`.
 
 #### Connector ID
 
-Confluent Cloud Connector ID を検索するには
+To find your Confluent Cloud Connector ID:
 
-1. Confluent Cloud で、**Environment Overview** に移動し、監視したいクラスターを選択します。
-2. 左側のナビゲーションで、**Data integration** > **Connectors** をクリックします。
-3. **Connectors** の下にある、`lcc` で始まる Connector ID をコピーします。
+1. In Confluent Cloud, navigate to **Environment Overview** and select the cluster you want to monitor.
+2. In the left-hand navigation, click **Data integration** > **Connectors**.
+3. Under **Connectors**, copy the Connector ID beginning with `lcc`.
 
-## ライブラリ
+## Dashboards
 
-インテグレーションの構成後、すぐに使える Confluent Cloud ダッシュボードで Kafka クラスターとコネクタのメトリクスの概要をご覧ください。
+After configuring the integration, see the out-of-the-box Confluent Cloud dashboard for an overview of Kafka cluster and connector metrics.
 
-デフォルトでは、Confluent Cloud 全体で収集されたすべてのメトリクスが表示されます。
+By default, all metrics collected across Confluent Cloud are displayed.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "confluent_cloud" >}}
 
 
-### ヘルプ
+### Events
 
-Confluent Cloud インテグレーションには、イベントは含まれません。
+The Confluent Cloud integration does not include any events.
 
-### ヘルプ
+### Service Checks
 
-Confluent Cloud インテグレーションには、サービスのチェック機能は含まれません。
+The Confluent Cloud integration does not include any service checks.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
+Need help? Contact [Datadog support][8].
 
-## その他の参考資料
+## Further reading
 
-- [Terraform による Confluent アカウントの作成と管理][6]
-- [Terraform による Confluent リソースの作成と管理][7]
+- [Create and manage Confluent accounts with Terraform][9]
+- [Create and manage Confluent resources with Terraform][10]
 
 [1]: https://www.datadoghq.com/product/data-streams-monitoring/
 [2]: https://app.datadoghq.com/integrations/confluent-cloud
-[3]: https://docs.confluent.io/cloud/current/monitoring/metrics-api.html#add-the-metricsviewer-role-to-a-new-service-account-in-the-ui
-[4]: https://github.com/DataDog/dogweb/blob/prod/integration/confluent_cloud/confluent_cloud_metadata.csv
-[5]: https://docs.datadoghq.com/ja/help/
-[6]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/integration_confluent_account
-[7]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/integration_confluent_resource
+[3]: https://docs.confluent.io/cloud/current/access-management/access-control/rbac/predefined-rbac-roles.html#billingadmin-role
+[4]: https://app.datadoghq.com/cost
+[5]: https://docs.datadoghq.com/cloud_cost_management/saas_costs/?tab=confluentcloud#data-collected
+[6]: https://docs.confluent.io/cloud/current/monitoring/metrics-api.html#add-the-metricsviewer-role-to-a-new-service-account-in-the-ui
+[7]: https://github.com/DataDog/dogweb/blob/prod/integration/confluent_cloud/confluent_cloud_metadata.csv
+[8]: https://docs.datadoghq.com/help/
+[9]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/integration_confluent_account
+[10]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/integration_confluent_resource
+

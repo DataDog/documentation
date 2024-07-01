@@ -1,130 +1,130 @@
 ---
-app_id: sleuth
-app_uuid: 7923b3ef-2436-4315-bf2e-7631a6975886
-assets:
-  integration:
-    auto_install: true
-    configuration:
-      spec: assets/configuration/spec.yaml
-    events:
-      creates_events: false
-    metrics:
-      check: []
-      metadata_path: metadata.csv
-      prefix: sleuth.
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 10118
-    source_type_name: Sleuth
-author:
-  homepage: https://github.com/DataDog/integrations-extras
-  name: Sleuth
-  sales_email: support@sleuth.io
-  support_email: support@sleuth.io
-categories:
-- 構成 & デプロイ
-- 問題追跡
+"app_id": "sleuth"
+"app_uuid": "7923b3ef-2436-4315-bf2e-7631a6975886"
+"assets":
+  "integration":
+    "auto_install": true
+    "configuration":
+      "spec": assets/configuration/spec.yaml
+    "events":
+      "creates_events": false
+    "metrics":
+      "check": []
+      "metadata_path": metadata.csv
+      "prefix": sleuth.
+    "service_checks":
+      "metadata_path": assets/service_checks.json
+    "source_type_id": !!int "10118"
+    "source_type_name": Sleuth
+"author":
+  "homepage": "https://github.com/DataDog/integrations-extras"
+  "name": Sleuth
+  "sales_email": support@sleuth.io
+  "support_email": support@sleuth.io
+"categories":
+- configuration & deployment
+- issue tracking
 - orchestration
-- ソースコントロール
-dependencies:
-- https://github.com/DataDog/integrations-extras/blob/master/sleuth/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: sleuth
-integration_id: sleuth
-integration_title: Sleuth
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: 2.0.0
-name: sleuth
-public_title: Sleuth
-short_description: Sleuth Deployment Tracker
-supported_os:
+- source control
+"custom_kind": "integration"
+"dependencies":
+- "https://github.com/DataDog/integrations-extras/blob/master/sleuth/README.md"
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "sleuth"
+"integration_id": "sleuth"
+"integration_title": "Sleuth"
+"integration_version": ""
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "sleuth"
+"public_title": "Sleuth"
+"short_description": "Sleuth Deployment Tracker"
+"supported_os":
 - linux
 - windows
 - macos
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Configuration & Deployment
-  - Category::Issue Tracking
-  - Category::Orchestration
-  - カテゴリ::ソースコントロール
-  - Supported OS::Linux
-  - Supported OS::Windows
-  - Supported OS::macOS
-  configuration: README.md#Setup
-  description: Sleuth Deployment Tracker
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Sleuth
+"tile":
+  "changelog": CHANGELOG.md
+  "classifier_tags":
+  - "Category::Configuration & Deployment"
+  - "Category::Issue Tracking"
+  - "Category::Orchestration"
+  - "Category::Source Control"
+  - "Supported OS::Linux"
+  - "Supported OS::Windows"
+  - "Supported OS::macOS"
+  "configuration": "README.md#Setup"
+  "description": Sleuth Deployment Tracker
+  "media": []
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": Sleuth
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
-## 概要
+## Overview
 
-Sleuth は、DevOps スタック全体でソフトウェアのデプロイを追跡できるようにするデプロイ追跡ツールです。Datadog インテグレーションにより、Sleuth は洞察に満ちた有意義で実用的なリアルタイムデータを提供し、コードに加えた変更の影響を明確に確認できるようにします。
+Sleuth is a deployment tracking tool that enables you to track software deployments through your complete DevOps stack. With a Datadog integration, Sleuth provides you with insightful, meaningful, and actionable real-time data that enable you and your team to see, with clarity, the impact of the changes you make to your code.
 
-## 計画と使用
+## Setup
 
-Datadog インテグレーションを追加するには
+To add the Datadog integration:
 
-1. [Sleuth アカウント][1]にログインします。
-2. サイドバーの **Integrations** をクリックします。
-3. _Metric Trackers_ タブをクリックし、Datadog カードで**有効化**します。
-4. Datadog API キーとアプリケーションキーを対応するフィールドに入力します。
-5. Datadog サーバーが EU にある場合は、_My Datadog servers are in the EU_ チェックボックスをオンにします。不明な場合は、オフのままにします。
-6. **Save** を押します。
+1. Login to your [Sleuth account][1].
+2. Click **Integrations** in the sidebar.
+3. Click the _Metric Trackers_ tab, then **enable** in the Datadog card.
+4. Enter your Datadog API Key and Application Key in the corresponding fields.
+5. If your Datadog servers' are in the EU, enable the _My Datadog servers are in the EU_ checkbox. Leave this unchecked if you are unsure.
+6. Press **Save**.
 
-> Datadog API キーとアプリケーションキーは、**Integrations** &gt; **API** にあります。または、Sleuth ダイアログボックスの **generate** リンクをクリックして (下図を参照)、Datadog コンソールの API/アプリケーションキー領域に移動できます。
+> Your Datadog API Key and Application Key can be found under **Integrations** &gt; **API**. Alternatively, you can click on the **generate** link in the Sleuth dialog box (as shown below), which takes you to the API/Applications Keys area in your Datadog console.
 
 ![][2]
 
-> Datadog インテグレーションのインストールが完了すると、**Datadog is connected** というメッセージが表示されます。
+> Once the Datadog integration installation is successful, the message **Datadog is connected** displayed.
 
 ![][3]
 
-### インフラストラクチャーリスト
+### Installation
 
-Datadog Sleuth インテグレーションは、Sleuth アカウントからのみインストールされます。Sleuth で Datadog API とアプリケーションキーを指定する以外に、Datadog アカウントから行う必要がある設定や追加の構成はありません。
+The Datadog Sleuth integration is installed exclusively from your Sleuth account. There are no settings or additional configuration needed from your Datadog account except to provide your Datadog API and application keys in Sleuth.
 
-### ブラウザトラブルシューティング
+### Configuration
 
-- **Add metric** ドロップダウンをクリックし、受信した Datadog メトリクスを処理する Sleuth プロジェクトを選択します。Sleuth 組織内のすべてのプロジェクトがドロップダウンに表示されます。
+- Click the **Add metric** dropdown and select a Sleuth project to process incoming Datadog metrics. All projects within your Sleuth organization are displayed in the dropdown.
 
 ![][4]
 
-> インテグレーションは Sleuth 組織レベルで行われ、その組織内のすべてのプロジェクトで使用できます。インテグレーションの個々の設定は、プロジェクトレベルで行われます。
+> Integrations are made at the Sleuth organization level, and are available for all projects within that organization. Individual settings for an integration are made at the project level.
 
-コンフィギュレーションが完了すると、Sleuth はデプロイで Datadog メトリクスを表示します。Sleuth のデプロイカードでメトリクスがどのように伝達されるかについて詳しくは、[**ダッシュボード**][5]を参照してください。
+Once configuration is complete, Sleuth displays Datadog metrics in your deploys. Read [**Dashboard**][5] for more information on how metrics are communicated in Sleuth's deploy cards.
 
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 
-Sleuth インテグレーションには、メトリクスは含まれません。
+The Sleuth integration does not include any metrics.
 
-### ヘルプ
+### Service Checks
 
-Sleuth インテグレーションには、サービスのチェック機能は含まれません。
+The Sleuth integration does not include any service checks.
 
-### ヘルプ
+### Events
 
-Sleuth インテグレーションには、イベントは含まれません。
+The Sleuth integration does not include any events.
 
-## 削除中
+## Removing
 
-1. Sleuth ダッシュボードで、左側のサイドバーの **Integrations** をクリックし、**Metric Trackers** をクリックします。
-2. Datadog インテグレーションカードで、**disable** をクリックします。
+1. In your Sleuth Dashboard, click **Integrations** in the left sidebar, then on **Metric Trackers**.
+2. In the Datadog integration card, click **disable**.
 
-Datadog インテグレーションが切断され、その組織内のプロジェクトで使用できなくなります。Datadog インテグレーションに加えたプロジェクトレベルの変更はすべて失われます。
+The Datadog integration is disconnected and is no longer available to any projects within that organization. Any project-level modifications you made to the Datadog integration is lost.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、このインテグレーションの[メインテナー][6]までお問い合わせください。
+Need help? Contact the [maintainer][6] of this integration.
 
 [1]: https://app.sleuth.io/accounts/login/
 [2]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/sleuth/images/datadog-integration-api-key.png
@@ -132,3 +132,4 @@ Datadog インテグレーションが切断され、その組織内のプロジ
 [4]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/sleuth/images/datadog-enabled-metric-pick.png
 [5]: https://help.sleuth.io/dashboard
 [6]: https://github.com/DataDog/integrations-extras/blob/master/sleuth/manifest.json
+

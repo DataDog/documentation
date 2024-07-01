@@ -1,64 +1,65 @@
 ---
-aliases:
-- /ja/integrations/sumologic/
-categories:
-- notifications
-dependencies: []
-description: Sumo Logic から Datadog にログを送信。Datadog 通知を Sumo Logic に送信。
-doc_link: https://docs.datadoghq.com/integrations/sumologic/
-draft: false
-git_integration_title: sumo_logic
-has_logo: true
-integration_id: ''
-integration_title: Sumo Logic
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: '1.0'
-name: sumo_logic
-public_title: Datadog-Sumo Logic インテグレーション
-short_description: Sumo Logic から Datadog にログを送信。Datadog 通知を Sumo Logic に送信。
-version: '1.0'
+"aliases":
+- "/integrations/sumologic/"
+"categories":
+- "notifications"
+"custom_kind": "integration"
+"dependencies": []
+"description": "Send logs from Sumo Logic to Datadog; send Datadog notifications to Sumo Logic."
+"doc_link": "https://docs.datadoghq.com/integrations/sumologic/"
+"draft": false
+"git_integration_title": "sumo_logic"
+"has_logo": true
+"integration_id": ""
+"integration_title": "Sumo Logic"
+"integration_version": ""
+"is_public": true
+"manifest_version": "1.0"
+"name": "sumo_logic"
+"public_title": "Datadog-Sumo Logic Integration"
+"short_description": "Send logs from Sumo Logic to Datadog; send Datadog notifications to Sumo Logic."
+"version": "1.0"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-## 概要
+## Overview
 
-Datadog と Sumo Logic は双方向に統合されます。Sumo Logic のログデータを Datadog のイベントストリームに転送することも、Sumo Logic を Datadog アラートおよびイベントの通知チャンネルとして使用することもできます。つまり、サービス間で相互に通知を行うことができます。
+Datadog integrates with Sumo Logic in two ways: you can forward Sumo Logic log data to your Datadog event stream, and you can use Sumo Logic as a notification channel from Datadog alerts and events. In other words, each service can inform the other.
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-#### Datadog から Sumo Logic への送信
+#### Datadog to Sumo Logic
 
-1. 管理者権限を持つユーザーとして Sumo Logic にログインします。
-2. メインメニューで、**Manage** -> **Collection** の順に選択します。
-3. 左上の **Add Collector** リンクをクリックします。{{< img src="integrations/summologic/integrations-sumo-hostedcollector.png" alt="ホスト済コレクション" popup="true">}}
-4. **Hosted Collector** を選択します。
-5. 名前を入力し、説明、カテゴリ、タイムゾーンを任意に入力します。**Save** をクリックします。
-6. Cloud APIs 下の **HTTP** をクリックします。コレクターに関する情報をフォームに正しく入力します。**Save** をクリックします。
-7. 次のダイアログで指定された URL をコピーします。
-8. Datadog で [Sumo Logic インテグレーション設定][1]画面に移動します。
-9. コレクターに割り当てる名前と、前の手順でコピーした URL を入力します。
-10. 次回、Datadog から Sumo Logic にメッセージを送信する際は、**@sumologic-{YOUR COLLECTOR NAME}** を使用します。
+1. Login to Sumo Logic as a user with Administrator rights.
+2. From the main menu, choose **Manage** -> **Collection**.
+3. Click the **Add Collector** link at the top left. {{< img src="integrations/summologic/integrations-sumo-hostedcollector.png" alt="Hosted Collection" popup="true">}}
+4. Choose **Hosted Collector**.
+5. Enter a Name and optionally a description, category, and time zone. Click **Save**.
+6. Click **HTTP** under Cloud APIs. Fill in the form as appropriate for the collector. Click **Save**.
+7. Copy the URL given on the next dialog.
+8. Go to the [Sumo Logic Integration settings][1] screen in Datadog.
+9. Enter the name you want to assign to the collector and the URL from above.
+10. Next time you want to send a message from Datadog to Sumo Logic, use **@sumologic-{YOUR COLLECTOR NAME}**.
 
-#### Sumo Logic から Datadog への送信
+#### Sumo Logic to Datadog
 
-1. 管理者権限を持つユーザーとして Sumo Logic にログインします。
-2. メインメニューで、**Manage** -> **Connections** の順に選択します。
-3. **Add** ボタンをクリックします。
-4. **Datadog** ボタンをクリックします。{{< img src="integrations/summologic/integrations-sumo-connectiontype.png" alt="Datadog ボタンをクリック" popup="true">}}
-5. 接続に名前を付け、説明を任意に入力します。URL には以下を入力します。
+1. Login to Sumo Logic as a user with Administrator rights.
+2. From the main menu, choose **Manage** -> **Connections**.
+3. Click the **Add** button.
+4. Click the **Datadog** button. {{< img src="integrations/summologic/integrations-sumo-connectiontype.png" alt="Click the Datadog Button" popup="true">}}
+5. Give the connection a Name and optionally a Description. For the URL, enter:
 
     ```text
     https://app.datadoghq.com/api/v1/events?api_key=<DATADOG_API_KEY>
     ```
 
-6. 必要に応じて、ペイロードをカスタマイズします。使用可能な変数については、**Help** リンクをクリックしてください。
-7. **Test Connection** をクリックします。イベントストリームに以下のような新しい項目が表示されます。{{< img src="integrations/summologic/integrations-sumo-event.png" alt="テストイベント" popup="true">}}
-8. 正しい情報が表示されている場合は、**Save** をクリックします。
-9. Sumo Logic で、検索を保存し、その検索のスケジュールを選択します。
-10. **Alert Type** には Webhook を選択します。Webhook のリストから新しい Datadog 接続を選択します。ペイロードを任意にカスタマイズし、結果の数が 1 以上である場合にのみ通知が送信されるように、**Alert Condition** を変更します。 {{< img src="integrations/summologic/integrations-sumo-savesearch.png" alt="ホスト済コレクション" popup="true">}}
+6. Customize the payload as needed. Click the **Help** link to learn about the available variables.
+7. Click **Test Connection**. You should see a new item in your Event Stream similar to this: {{< img src="integrations/summologic/integrations-sumo-event.png" alt="Test Event" popup="true">}}
+8. If everything looks good, click **Save**.
+9. In Sumo Logic, save any search and choose to schedule the search.
+10. Choose Webhook for the **Alert Type**. Choose your new Datadog connection from the list of webhooks. Optionally customize the payload and change the **Alert Condition** to send a notification only if the number of results is greater than 0. {{< img src="integrations/summologic/integrations-sumo-savesearch.png" alt="Hosted Collection" popup="true">}}
 
 [1]: https://app.datadoghq.com/integrations/sumo_logic
+

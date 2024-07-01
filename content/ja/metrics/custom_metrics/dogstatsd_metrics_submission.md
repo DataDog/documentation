@@ -1,59 +1,59 @@
 ---
+title: "Metric Submission: DogStatsD"
+description: "Submit custom metrics directly from your application."
 aliases:
-- /ja/developers/faq/reduce-submission-rate
-- /ja/developers/faq/why-is-my-counter-metric-showing-decimal-values
-- /ja/developers/faq/dog-statsd-sample-rate-parameter-explained
-- /ja/developers/metrics/dogstatsd_metrics_submission/
-- /ja/metrics/dogstatsd_metrics_submission
-description: アプリケーションから直接カスタムメトリクスを送信
+  - /developers/faq/reduce-submission-rate
+  - /developers/faq/why-is-my-counter-metric-showing-decimal-values
+  - /developers/faq/dog-statsd-sample-rate-parameter-explained
+  - /developers/metrics/dogstatsd_metrics_submission/
+  - /metrics/dogstatsd_metrics_submission
 further_reading:
 - link: /developers/dogstatsd/
-  tag: ドキュメント
-  text: DogStatsD 入門
+  tag: Documentation
+  text: Introduction to DogStatsD
 - link: /metrics/types/
-  tag: ドキュメント
-  text: Datadog メトリクスタイプ
-title: 'メトリクスの送信: DogStatsD'
+  tag: Documentation
+  text: Datadog Metric Types
 ---
 
-StatsD がメトリクスのみを受け付けるのに対して、DogStatsD は、Datadog の主要な 3 種類のデータタイプ、すなわちメトリクス、イベント、サービスチェックをすべて受け付けます。ここでは、メトリクスタイプごとの一般的な使用例を示し、DogStatsD だけが持つ[サンプリングレート](#sample-rates)および[メトリクスのタグ付け](#metric-tagging)オプションを紹介します。
+While StatsD accepts only metrics, DogStatsD accepts all three of the major Datadog data types: metrics, events, and service checks. This section shows typical use cases for metrics split down by metric types, and introduces [sampling rates](#sample-rates) and [metric tagging](#metric-tagging) options specific to DogStatsD.
 
-[COUNT](#count)、 [GAUGE](#gauge)、[SET](#set)は、StatsD ユーザーにお馴染みのメトリクスタイプです。StatsD の `TIMER` は DogStatsD の `HISTOGRAM` のサブセットです。また、DogStatsD を使い、[HISTOGRAM](#histogram) や [DISTRIBUTION](#distribution) メトリクスタイプを送信できます。
+[COUNT](#count), [GAUGE](#gauge), and [SET](#set) metric types are familiar to StatsD users. `TIMER` from StatsD is a sub-set of `HISTOGRAM` in DogStatsD. Additionally, you can submit [HISTOGRAM](#histogram) and [DISTRIBUTION](#distribution) metric types using DogStatsD.
 
-**注**: 使用する送信方法によっては、Datadog 内に保存される実際のメトリクスタイプが、送信されたメトリクスタイプと異なる場合があります。DogStatsD で RATE メトリクスタイプを送信する場合、メトリクスはアプリ内で GAUGE として表示され、異なる Agent 間で適切な比較ができるようにします。
+**Note**: Depending on the submission method used, the actual metric type stored within Datadog might differ from the submission metric type. When submitting a RATE metric type through DogStatsD, the metric appears as a GAUGE in-app to ensure relevant comparison across different Agents.
 
-## 関数
+## Functions
 
-[DogStatsD をインストール][1]すると、Datadog へメトリクスを送信する際、メトリクスタイプに応じて以下の関数を使用できます。関数には、次の共有パラメーターがあります。
+After you [install DogStatsD][1], the following functions are available for submitting your metrics to Datadog depending on their metric type. The functions have the following shared parameters:
 
-| パラメーター        | タイプ            | 必須 | 説明                                                                                                                                                                                    |
+| Parameter        | Type            | Required | Description                                                                                                                                                                                    |
 |------------------|-----------------|----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `<METRIC_NAME>`  | 文字列          | 〇      | 送信するメトリクスの名前。                                                                                                                                                                  |
-| `<METRIC_VALUE>` | Double          | 〇      | メトリクスに関連付けられている値                                                                                                                                                             |
-| `<SAMPLE_RATE>`  | Double          | ✕       | メトリクスに適用するサンプリングレート。`0`（全てがサンプリングされ何も送信されない）〜`1` （サンプル無し）の値を利用。詳細は、[サンプリングレートセクション](#sample-rates)をご覧ください。 |
-| `<タグ>`         | 文字列のリスト | ✕       | メトリクスに適用するタグのリスト。詳細は、[メトリクスのタグ付け](#metric-tagging)セクションをご覧ください。                                                                                       |
+| `<METRIC_NAME>`  | String          | Yes      | Name of the metric to submit.                                                                                                                                                                  |
+| `<METRIC_VALUE>` | Double          | Yes      | Value associated with your metric.                                                                                                                                                             |
+| `<SAMPLE_RATE>`  | Double          | No       | The sample rate to apply to the metric. Takes a value between `0` (everything is sampled, so nothing is sent) and `1` (no sample). See the [Sample Rate section](#sample-rates) to learn more. |
+| `<TAGS>`         | List of strings | No       | A list of tags to apply to the metric. See the [Metrics Tagging](#metric-tagging) section to learn more.                                                                                       |
 
 ### COUNT
 
 `increment(<METRIC_NAME>, <SAMPLE_RATE>, <TAGS>)`
-: COUNT メトリクスをインクリメントするために使用されます。Datadog に `RATE` タイプとして保存されます。時系列に保存される値は、StatsD フラッシュ期間全体のメトリクス値の時間正規化された差分です。
+: Used to increment a COUNT metric. Stored as a `RATE` type in Datadog. Each value in the stored timeseries is a time-normalized delta of the metric's value over the StatsD flush period.
 
 `decrement(<METRIC_NAME>, <SAMPLE_RATE>, <TAGS>)`
-: COUNT メトリクスをデクリメントするために使用されます。Datadog に `RATE` タイプとして保存されます。時系列に保存される値は、StatsD フラッシュ期間全体のメトリクス値の時間正規化された差分です。
+: Used to decrement a COUNT metric. Stored as a `RATE` type in Datadog. Each value in the stored timeseries is a time-normalized delta of the metric's value over the StatsD flush period.
 
 `count(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>)`
-: 任意の `Value` から COUNT メトリクスをインクリメントするために使用されます。Datadog に `RATE` タイプとして保存されます。時系列に保存される値は、StatsD フラッシュ期間全体のメトリクス値の時間正規化された差分です。
-: **注:** `count` は Python ではサポートされていません。
+: Used to increment a COUNT metric from an arbitrary `Value`. Stored as a `RATE` type in Datadog. Each value in the stored timeseries is a time-normalized delta of the metric's value over the StatsD flush period.
+: **Note:** `count` is not supported in Python.
 
-**注**: `COUNT` タイプのメトリクスは、フラッシュ間隔で正規化され 1 秒あたりの単位数を報告するため、Datadog 内で少数を表示できます。
+**Note**: `COUNT` type metrics can show a decimal value within Datadog since they are normalized over the flush interval to report per-second units.
 
-#### コード例
+#### Code examples
 
-`RATE` メトリクスとして保存された `COUNT` メトリクスを Datadog に送信します。 `COUNT` タイプについては、[メトリクスのタイプ][2] に関するドキュメントを参照してください。
+Emit a `COUNT` metric-stored as a `RATE` metric-to Datadog. Learn more about the `COUNT` type in the [metric types][2] documentation.
 
-次のコードを実行して、DogStatsD の `COUNT` メトリクスを Datadog に送信します。必要がなくなったら、クライアントを「フラッシュ」/「閉じる」ことを忘れないでください。
+Run the following code to submit a DogStatsD `COUNT` metric to Datadog. Remember to `flush`/`close` the client when it is no longer needed.
 
-{{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php" >}}
+{{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php,nodejs" >}}
 
 {{< programming-lang lang="python" >}}
 ```python
@@ -73,7 +73,7 @@ while(1):
   time.sleep(10)
 ```
 
-**注:** `statsd.count` は Python ではサポートされません。
+**Note:** `statsd.count` is not supported in Python.
 
 {{< /programming-lang >}}
 
@@ -109,7 +109,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    for {
+    for true {
 
         statsd.Incr("example_metric.increment", []string{"environment:dev"}, 1)
         statsd.Decr("example_metric.decrement", []string{"environment:dev"}, 1)
@@ -135,7 +135,7 @@ public class DogStatsdClient {
             .hostname("localhost")
             .port(8125)
             .build();
-        for (int i = 0; i < 10; i++) {
+        while (true) {
             Statsd.incrementCounter("example_metric.increment", new String[]{"environment:dev"});
             Statsd.decrementCounter("example_metric.decrement", new String[]{"environment:dev"});
             Statsd.count("example_metric.count", 2, new String[]{"environment:dev"});
@@ -167,7 +167,7 @@ public class DogStatsdClient
                 throw new InvalidOperationException("Cannot initialize DogstatsD. Set optionalExceptionHandler argument in the `Configure` method for more information.");
             var random = new Random(0);
 
-            for (int i = 0; i < 10; i--)
+            while (true)
             {
                 dogStatsdService.Increment("example_metric.increment", tags: new[] {"environment:dev"});
                 dogStatsdService.Decrement("example_metric.decrement", tags: new[] {"environment:dev"});
@@ -202,30 +202,40 @@ while (TRUE) {
 ```
 {{< /programming-lang >}}
 
+{{< programming-lang lang="nodejs" >}}
+```javascript
+const tracer = require('dd-trace');
+tracer.init();
+
+tracer.dogstatsd.increment('example_metric.increment', 1, { environment: 'dev' });
+tracer.dogstatsd.decrement('example_metric.decrement', 1, { environment: 'dev' });
+```
+{{< /programming-lang >}}
+
 {{< /programming-lang-wrapper >}}
 
-上のコードを実行すると、メトリクスデータを Datadog でグラフ化できます。
+After running the code above, your metrics data is available to graph in Datadog:
 
-{{< img src="metrics/custom_metrics/dogstatsd_metrics_submission/increment_decrement.png" alt="インクリメントデクリメント" >}}
+{{< img src="metrics/custom_metrics/dogstatsd_metrics_submission/increment_decrement.png" alt="Increment Decrement" >}}
 
-値は `COUNT` として送信されるため、Datadog に `RATE` として保存されます。Datadog で未加工のカウントを取得するには、[累積合計][3] や [積分][4] などの関数を系列に適用します。
+Since the value is submitted as a `COUNT` it's stored as `RATE` in Datadog. To get raw counts within Datadog, apply a function to your series such as the [Cumulative Sum][3] or [Integral][4] function:
 
-{{< img src="metrics/custom_metrics/dogstatsd_metrics_submission/increment_decrement_cumsum.png" alt="Cumsum でインクリメントデクリメント" >}}
+{{< img src="metrics/custom_metrics/dogstatsd_metrics_submission/increment_decrement_cumsum.png" alt="Increment Decrement with Cumsum" >}}
 
 ### GAUGE
 
 `gauge(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>)`
-: Datadog に `GAUGE` タイプとして保存されます。時系列に保存される値は、StatsD フラッシュ期間の間にメトリクスに送信された最後のゲージ値です。
+: Stored as a `GAUGE` type in Datadog. Each value in the stored timeseries is the last gauge value submitted for the metric during the StatsD flush period.
 
-#### コード例
+#### Code examples
 
-`GAUGE` メトリクスとして保存された `GAUGE` メトリクスを Datadog に送信します。 `GAUGE` タイプについては、[メトリクスのタイプ][5] に関するドキュメントを参照してください。
+Emit a `GAUGE` metric-stored as a `GAUGE` metric-to Datadog. Learn more about the `GAUGE` type in the [metric types][5] documentation.
 
-次のコードを実行して、DogStatsD の `GAUGE` メトリクスを Datadog に送信します。必要がなくなったら、クライアントを「フラッシュ」/「閉じる」ことを忘れないでください。
+Run the following code to submit a DogStatsD `GAUGE` metric to Datadog. Remember to `flush`/`close` the client when it is no longer needed.
 
-**注:** メトリクス送信の呼び出しは非同期です。メトリクスを確実に送信したい場合は、プログラムが終了する前に `flush` を呼び出してください。
+**Note:** Metrics submission calls are asynchronous. If you want to ensure metrics are submitted, call `flush` before the program exits.
 
-{{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php" >}}
+{{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php,nodejs" >}}
 
 {{< programming-lang lang="python" >}}
 ```python
@@ -281,7 +291,7 @@ func main() {
         log.Fatal(err)
     }
     var i float64
-    for {
+    for true {
         i += 1
         statsd.Gauge("example_metric.gauge", i, []string{"environment:dev"}, 1)
         time.Sleep(10 * time.Second)
@@ -305,7 +315,7 @@ public class DogStatsdClient {
             .hostname("localhost")
             .port(8125)
             .build();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; true; i++) {
             Statsd.recordGaugeValue("example_metric.gauge", i, new String[]{"environment:dev"});
             Thread.sleep(10000);
         }
@@ -335,7 +345,7 @@ public class DogStatsdClient
                 throw new InvalidOperationException("Cannot initialize DogstatsD. Set optionalExceptionHandler argument in the `Configure` method for more information.");
             var random = new Random(0);
 
-            for (int i = 0; i < 10; i--)
+            for (int i = 0; true; i++)
             {
                 dogStatsdService.Gauge("example_metric.gauge", i, tags: new[] {"environment:dev"});
                 System.Threading.Thread.Sleep(100000);
@@ -368,22 +378,36 @@ while (TRUE) {
 }
 ```
 {{< /programming-lang >}}
+
+{{< programming-lang lang="nodejs" >}}
+```javascript
+const tracer = require('dd-trace');
+tracer.init();
+
+let i = 0;
+while(true) {
+  i++;
+  tracer.dogstatsd.gauge('example_metric.gauge', i, { environment: 'dev' });
+}
+```
+{{< /programming-lang >}}
+
 {{< /programming-lang-wrapper >}}
 
-上のコードを実行すると、メトリクスデータを Datadog でグラフ化できます。
+After running the code above, your metric data is available to graph in Datadog:
 
-{{< img src="metrics/custom_metrics/dogstatsd_metrics_submission/gauge.png" alt="ゲージ" >}}
+{{< img src="metrics/custom_metrics/dogstatsd_metrics_submission/gauge.png" alt="Gauge" >}}
 
 ### SET
 
 `set(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>)`
-: Datadog に `GAUGE` タイプとして保存されます。時系列に保存される値は、フラッシュ期間の間に StatsD に送信されたメトリクスの一意の値のカウントです。
+: Stored as a `GAUGE` type in Datadog. Each value in the stored timeseries is the count of unique values submitted to StatsD for a metric over the flush period.
 
-#### コード例
+#### Code examples
 
-`GAUGE` メトリクスとして保存された `SET` メトリクスを Datadog に送信します。
+Emit a `SET` metric-stored as a `GAUGE` metric-to Datadog.
 
-次のコードを実行して、DogStatsD の `SET` メトリクスを Datadog に送信します。必要がなくなったら、クライアントを「フラッシュ」/「閉じる」ことを忘れないでください。
+Run the following code to submit a DogStatsD `SET` metric to Datadog. Remember to `flush`/`close` the client when it is no longer needed.
 
 {{< programming-lang-wrapper langs="python,ruby,go,java,.NET,PHP" >}}
 
@@ -441,7 +465,7 @@ func main() {
         log.Fatal(err)
     }
     var i float64
-    for {
+    for true {
         i += 1
         statsd.Set("example_metric.set", fmt.Sprintf("%f", i), []string{"environment:dev"}, 1)
         time.Sleep(time.Duration(rand.Intn(10)) * time.Second)
@@ -465,7 +489,7 @@ public class DogStatsdClient {
             .hostname("localhost")
             .port(8125)
             .build();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; true; i++) {
             Statsd.recordSetValue("example_metric.set", i, new String[]{"environment:dev"});
             Thread.sleep(random.NextInt(10000));
         }
@@ -495,7 +519,7 @@ public class DogStatsdClient
                 throw new InvalidOperationException("Cannot initialize DogstatsD. Set optionalExceptionHandler argument in the `Configure` method for more information.");
             var random = new Random(0);
 
-            for (int i = 0; i < 10; i--)
+            for (int i = 0; true; i++)
             {
                 dogStatsdService.Set("example_metric.set", i, tags: new[] {"environment:dev"});
                 System.Threading.Thread.Sleep(random.Next(100000));
@@ -531,26 +555,26 @@ while (TRUE) {
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-上のコードを実行すると、メトリクスデータを Datadog でグラフ化できます。
+After running the code above, your metrics data is available to graph in Datadog:
 
-{{< img src="metrics/custom_metrics/dogstatsd_metrics_submission/set.png" alt="設定" >}}
+{{< img src="metrics/custom_metrics/dogstatsd_metrics_submission/set.png" alt="Set" >}}
 
 ### HISTOGRAM
 
 `histogram(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>)`
-: 複数のメトリクスが送信されるので、保存されるメトリクスタイプ (`GAUGE`, `RATE`) はメトリクスに依存します。詳細については、[ヒストグラムメトリクスタイプ][6]に関するドキュメントを参照してください。
+: Since multiple metrics are submitted, metric types stored (`GAUGE`, `RATE`) depend on the metric. See the [HISTOGRAM metric type][6] documentation to learn more.
 
-#### コンフィギュレーション
+#### Configuration
 
-* Datadog に送信する集計を、[datadog.yaml 構成ファイル][7]の `histogram_aggregates` パラメーターで構成します。デフォルトでは、`max`、`median`、`avg`、`count` の各集計だけが送信されます。
-* Datadog に送信するパーセンタイル集計を、[datadog.yaml 構成ファイル][7]の `histogram_percentiles` パラメーターで構成します。デフォルトでは、`95pc` のパーセンタイルだけが送信されます。
+* Configure the aggregation to send to Datadog with the `histogram_aggregates` parameter in your [datadog.yaml configuration file][7]. By default, only `max`, `median`, `avg`, and `count` aggregations are sent.
+* Configure the percentile aggregation to send to Datadog with the `histogram_percentiles` parameter in your [datadog.yaml configuration file][7]. By default, only `95pc` percentile is sent.
 
-#### コード例
+#### Code examples
 
-`HISTOGRAM` メトリクスタイプは DogStatsD だけのものです。`GAUGE` および `RATE` メトリクスとして保存された `HISTOGRAM` メトリクスを Datadog に送信します。`HISTOGRAM` タイプについては、[メトリクスのタイプ][6]に関するドキュメントを参照してください。
+The `HISTOGRAM` metric type is specific to DogStatsD. Emit a `HISTOGRAM` metric—stored as a `GAUGE` and `RATE` metric—to Datadog. Learn more about the `HISTOGRAM` type in the [metric types][6] documentation.
 
 
-次のコードを実行して、DogStatsD の `HISTOGRAM` メトリクスを Datadog に送信します。必要がなくなったら、クライアントを「フラッシュ」/「閉じる」ことを忘れないでください。
+Run the following code to submit a DogStatsD `HISTOGRAM` metric to Datadog. Remember to `flush`/`close` the client when it is no longer needed.
 
 {{< programming-lang-wrapper langs="python,ruby,go,java,.NET,PHP" >}}
 
@@ -604,7 +628,7 @@ func main() {
         log.Fatal(err)
     }
 
-    for {
+    for true {
         statsd.Histogram("example_metric.histogram", float64(rand.Intn(20)), []string{"environment:dev"}, 1)
         time.Sleep(2 * time.Second)
     }
@@ -627,7 +651,7 @@ public class DogStatsdClient {
             .hostname("localhost")
             .port(8125)
             .build();
-        for (int i = 0; i < 10; i++) {
+        while (true) {
             Statsd.recordHistogramValue("example_metric.histogram", new Random().nextInt(20), new String[]{"environment:dev"});
             Thread.sleep(2000);
         }
@@ -657,7 +681,7 @@ public class DogStatsdClient
                 throw new InvalidOperationException("Cannot initialize DogstatsD. Set optionalExceptionHandler argument in the `Configure` method for more information.");
             var random = new Random(0);
 
-            for (int i = 0; i < 10; i--)
+            while (true)
             {
                 dogStatsdService.Histogram("example_metric.histogram", random.Next(20), tags: new[] {"environment:dev"});
                 System.Threading.Thread.Sleep(2000);
@@ -691,40 +715,40 @@ while (TRUE) {
 
 {{< /programming-lang-wrapper >}}
 
-上のインスツルメンテーションは、以下のメトリクスを生成します。
+The above instrumentation produces the following metrics:
 
-| メトリクス                                  | 説明                             |
+| Metric                                  | Description                             |
 |-----------------------------------------|-----------------------------------------|
-| `example_metric.histogram.count`        | このメトリクスがサンプリングされた回数 |
-| `example_metric.histogram.avg`          | サンプリングされた値の平均           |
-| `example_metric.histogram.median`       | サンプリングされた値の中央値                    |
-| `example_metric.histogram.max`          | サンプリングされた値の最大値                   |
-| `example_metric.histogram.95percentile` | サンプリングされた値の 95 パーセンタイル           |
+| `example_metric.histogram.count`        | Number of times this metric was sampled |
+| `example_metric.histogram.avg`          | Average of the sampled values           |
+| `example_metric.histogram.median`       | Median sampled value                    |
+| `example_metric.histogram.max`          | Maximum sampled value                   |
+| `example_metric.histogram.95percentile` | 95th percentile sampled value           |
 
-上のコードを実行すると、メトリクスデータを Datadog でグラフ化できます。
+After running the code above, your metrics data is available to graph in Datadog:
 
-{{< img src="metrics/custom_metrics/dogstatsd_metrics_submission/histogram.png" alt="ヒストグラム" >}}
+{{< img src="metrics/custom_metrics/dogstatsd_metrics_submission/histogram.png" alt="Histogram" >}}
 
-#### タイマー
+#### TIMER
 
-DogStatsD の `TIMER` メトリクスタイプは `HISTOGRAM` メトリクスタイプとして実装されています（標準 StatsD に含まれるタイマーと混同しないでください）。また、コードセクションの実行にかかる時間など、タイミングデータのみを測定します。
+`TIMER` metric type in DogStatsD is an implementation of `HISTOGRAM` metric type (not to be confused with timers in the standard StatsD). It measures timing data only: for example, the amount of time a section of code takes to execute.
 
 `timed(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>)`
-: 複数のメトリクスが送信されるので、保存されるメトリクスタイプ (`GAUGE`, `RATE`) はメトリクスに依存します。詳細については、[ヒストグラムメトリクスタイプ][6]に関するドキュメントを参照してください。
+: Since multiple metrics are submitted, metric types stored (`GAUGE`, `RATE`) depend on the metric. See the [HISTOGRAM metric type][6] documentation to learn more.
 
-##### コンフィギュレーション
+##### Configuration
 
-`TIMER` には、`HISTOGRAM` [コンフィギュレーション](#configuration)ルールが適用されます。
+For a `TIMER`, the `HISTOGRAM` [configuration](#configuration) rules apply.
 
-##### コード例
+##### Code examples
 
-`GAUGE` および `RATE` メトリクスとして保存された `TIMER` メトリクスを Datadog に送信します。`HISTOGRAM` タイプについては、[メトリクスのタイプ][6] に関するドキュメントを参照してください。必要がなくなったら、クライアントを「フラッシュ」/「閉じる」ことを忘れないでください。
+Emit a `TIMER` metric—stored as a `GAUGE` and `RATE` metric—to Datadog. Learn more about the `HISTOGRAM` type in the [metric types][6] documentation. Remember to `flush`/`close` the client when it is no longer needed.
 
 {{< programming-lang-wrapper langs="python,PHP" >}}
 
 {{< programming-lang lang="python" >}}
 
-Python では、タイマーはデコレーターで作成されます。
+In Python, timers are created with a decorator.
 
 ```python
 from datadog import initialize, statsd
@@ -746,7 +770,7 @@ while(1):
   my_function()
 ```
 
-または、コンテキストマネージャーを使用します。
+or with a context manager:
 
 ```python
 from datadog import statsd
@@ -796,32 +820,32 @@ while (TRUE) {
 
 {{< /programming-lang-wrapper >}}
 
-DogStatsD はタイマーメトリクスデータを受け取ると、レンダリング時間の統計的分布を計算し、次のメトリクスを Datadog に送信します。
+As DogStatsD receives the timer metric data, it calculates the statistical distribution of render times and sends the following metrics to Datadog:
 
-| メトリクス                              | 説明                             |
+| Metric                              | Description                             |
 |-------------------------------------|-----------------------------------------|
-| `example_metric.timer.count`        | このメトリクスがサンプリングされた回数 |
-| `example_metric.timer.avg`          | サンプリングされた値の平均時間      |
-| `example_metric.timer.median`       | サンプリングされた値の中央値                    |
-| `example_metric.timer.max`          | サンプリングされた値の最大値                   |
-| `example_metric.timer.95percentile` | サンプリングされた値の 95 パーセンタイル           |
+| `example_metric.timer.count`        | Number of times this metric was sampled |
+| `example_metric.timer.avg`          | Average time of the sampled values      |
+| `example_metric.timer.median`       | Median sampled value                    |
+| `example_metric.timer.max`          | Maximum sampled value                   |
+| `example_metric.timer.95percentile` | 95th percentile sampled value           |
 
-DogStatsD は `TIMER` を `HISTOGRAM` メトリクスとして扱います。使用するメトリクスのタイプが `TIMER` であろうと `HISTOGRAM` であろうと、Datadog に送信されるのは同じデータです。上のコードを実行すると、メトリクスデータを Datadog でグラフ化できます。
+DogStatsD treats `TIMER` as a `HISTOGRAM` metric. Whether you use the `TIMER` or `HISTOGRAM` metric type, you are sending the same data to Datadog. After running the code above, your metrics data is available to graph in Datadog:
 
-{{< img src="metrics/custom_metrics/dogstatsd_metrics_submission/timer.png" alt="タイマー" >}}
+{{< img src="metrics/custom_metrics/dogstatsd_metrics_submission/timer.png" alt="Timer" >}}
 
 ### DISTRIBUTION
 
 `distribution(<METRIC_NAME>, <METRIC_VALUE>, <TAGS>)`
-: Datadog に `DISTRIBUTION` タイプとして保存されます。詳細は、[ディストリビューションドキュメント][8]を参照してください。
+: Stored as a `DISTRIBUTION` type in Datadog. See the dedicated [Distribution documentation][8] to learn more.
 
-#### コード例
+#### Code examples
 
-`DISTRIBUTION` メトリクスタイプは DogStatsD だけのものです。`DISTRIBUTION` メトリクスとして保存された `DISTRIBUTION` メトリクスを Datadog に送信します。 `DISTRIBUTION` タイプについては、[メトリクスのタイプ][9] に関するドキュメントを参照してください。
+The `DISTRIBUTION` metric type is specific to DogStatsD. Emit a `DISTRIBUTION` metric-stored as a `DISTRIBUTION` metric-to Datadog. Learn more about the `DISTRIBUTION` type in the [metric types][9] documentation.
 
-次のコードを実行して、DogStatsD の `DISTRIBUTION` メトリクスを Datadog に送信します。必要がなくなったら、クライアントを「フラッシュ」/「閉じる」ことを忘れないでください。
+Run the following code to submit a DogStatsD `DISTRIBUTION` metric to Datadog. Remember to `flush`/`close` the client when it is no longer needed.
 
-{{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php" >}}
+{{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php,nodejs" >}}
 
 {{< programming-lang lang="python" >}}
 ```python
@@ -873,7 +897,7 @@ func main() {
         log.Fatal(err)
     }
 
-    for {
+    for true {
         statsd.Distribution("example_metric.distribution", float64(rand.Intn(20)), []string{"environment:dev"}, 1)
         time.Sleep(2 * time.Second)
     }
@@ -896,7 +920,7 @@ public class DogStatsdClient {
             .hostname("localhost")
             .port(8125)
             .build();
-        for (int i = 0; i < 10; i++) {
+        while (true) {
             Statsd.recordDistributionValue("example_metric.distribution", new Random().nextInt(20), new String[]{"environment:dev"});
             Thread.sleep(2000);
         }
@@ -926,7 +950,7 @@ public class DogStatsdClient
                 throw new InvalidOperationException("Cannot initialize DogstatsD. Set optionalExceptionHandler argument in the `Configure` method for more information.");
             var random = new Random(0);
 
-            for (int i = 0; i < 10; i--)
+            while (true)
             {
                 dogStatsdService.Distribution("example_metric.distribution", random.Next(20), tags: new[] {"environment:dev"});
                 System.Threading.Thread.Sleep(2000);
@@ -958,30 +982,43 @@ while (TRUE) {
 ```
 {{< /programming-lang >}}
 
+{{< programming-lang lang="nodejs" >}}
+```javascript
+const tracer = require('dd-trace');
+tracer.init();
+
+while(true) {
+  tracer.dogstatsd.distribution('example_metric.distribution', Math.random() * 20, { environment: 'dev' });
+  await new Promise(r => setTimeout(r, 2000));
+}
+```
+{{< /programming-lang >}}
+
 {{< /programming-lang-wrapper >}}
 
-上のインスツルメンテーションは、`合計`、`カウント`、`平均`、`最小`、`最大`、`50 パーセンタイル` (中央値)、`75 パーセンタイル`、`90 パーセンタイル`、`95 パーセンタイル`、`99 パーセンタイル`の各データを計算します。ディストリビューションは、アップロードされたファイルのサイズ、教室でのテストの得点など、「あらゆる」種類の値の分布の測定に使用できます。
+The above instrumentation calculates the `sum`, `count`, `average`, `minimum`, `maximum`, `50th percentile` (median), `75th percentile`, `90th percentile`, `95th percentile` and `99th percentile`. Distributions can be used to measure the distribution of *any* type of value, such as the size of uploaded files, or classroom test scores.
 
-## メトリクスの送信オプション
+## Metric submission options
 
-### サンプリングレート
+### Sample rates
 
-高パフォーマンスを必要とするコードパスにとっては、UDP パケットを送信する際のオーバーヘッドが大きすぎる可能性があるため、DogStatsD クライアントはサンプリングをサポートし、一定割合の時間にのみメトリクスを送信することができます。サンプリングするメトリクスが多く、DogStatsD クライアントが DogStatsD サーバーと同じホスト上にない場合に有用ですが、トラフィックが減る代わりに精度と粒度を失います。
+Since the overhead of sending UDP packets can be too great for some performance intensive code paths, DogStatsD clients support sampling (only sending metrics a percentage of the time). It's useful if you sample many metrics, and your DogStatsD client is not on the same host as the DogStatsD server. The trade off: you decrease traffic but lose some precision and granularity.
 
-サンプリングレート `1` は 100% の時間メトリクスを送信し、サンプリングレート `0` は 0% の時間メトリクスを送信します。
+A sample rate of `1` sends metrics 100% of the time, while a sample rate of `0` sends metrics 0% of the time.
 
-DogStatsD は Datadog にメトリクスを送信する前に、`<SAMPLE_RATE>` を使用し、メトリクスタイプに応じてメトリクス値を補正します（サンプリングなしで値を推定するため）。
+Before sending a metric to Datadog, DogStatsD uses the `<SAMPLE_RATE>` to correct the metric value depending on the metric type (to estimate the value without sampling):
 
-| メトリクスタイプ | サンプリングレート補正                                                                                                                                                         |
-|-------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `COUNT`     | 受け取った値は (`1/<SAMPLE_RATE>`) で乗算されます。受信したデータポイントに対し、`1/<SAMPLE_RATE>` は同じ値で実際にサンプリングされたと考えることは理にかなっています。 |
-| `GAUGE`     | 補正なし。受信した値はそのまま残ります。                                                                                                                               |
-| `SET`       | 補正なし。受信した値はそのまま残ります。                                                                                                                               |
-| `HISTOGRAM` | `histogram.count` 統計は COUNT メトリクスであり、上記の補正を受け取ります。他の統計は GAUGE メトリクスなので、「補正」は行われません。                      |
+| Metric Type    | Sample rate correction                                                                                                                                                         |
+|----------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `COUNT`        | Values received are multiplied by (`1/<SAMPLE_RATE>`). It's reasonable to assume that for one datapoint received, `1/<SAMPLE_RATE>` were actually sampled with the same value. |
+| `GAUGE`        | No correction. The value received is kept as is.                                                                                                                               |
+| `SET`          | No correction. The value received is kept as is.                                                                                                                               |
+| `HISTOGRAM`    | The `histogram.count` statistic is a COUNT metric, and receives the correction outlined above. Other statistics are gauge metrics and aren't "corrected".                      |
+| `DISTRIBUTION` | Values received are counted (`1/<SAMPLE_RATE>`) times. It's reasonable to assume that for one datapoint received, `1/<SAMPLE_RATE>` were actually sampled with the same value. |
 
-#### コード例
+#### Code examples
 
-以下のコードは、半分の時間だけポイントを送信します。
+The following code only sends points half of the time:
 
 {{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php" >}}
 
@@ -1024,15 +1061,15 @@ $statsd->increment('example_metric.increment', $sampleRate->0.5);
 
 {{< /programming-lang-wrapper >}}
 
-### メトリクスのタグ付け
+### Metric tagging
 
-`tags` パラメーターを使用して、DogStatsD へ送るメトリクスにタグを追加します。
+Add tags to any metric you send to DogStatsD with the `tags` parameter.
 
-#### コード例
+#### Code examples
 
-以下のコードは、`environment:dev` および `account:local` タグのみを `example_metric.increment` メトリクスに追加します。
+The following code only adds the `environment:dev` and `account:local` tags to the `example_metric.increment` metric:
 
-{{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php" >}}
+{{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php,nodejs" >}}
 
 {{< programming-lang lang="python" >}}
 ```python
@@ -1065,35 +1102,41 @@ dogStatsdService.Increment("example_metric.increment", tags: new[] {"environment
 {{< /programming-lang >}}
 
 {{< programming-lang lang="php" >}}
-`tags` 引数は文字列にすることができます。
+The `tags` argument can be a string:
 
 ```php
 $statsd->increment('example_metric.increment', "environment:dev,account:local");
 ```
 
-または配列にすることができます。
+or an array:
 ```php
 <?php
 $statsd->increment('example_metric.increment', array('environment' => 'dev', 'account' => 'local'));
 ```
 {{< /programming-lang >}}
 
+{{< programming-lang lang="nodejs" >}}
+```javascript
+tracer.dogstatsd.increment('example_metric.increment', 1, { environment: 'dev', account: 'local' });
+```
+{{< /programming-lang >}}
+
 {{< /programming-lang-wrapper >}}
 
-#### ホストタグ
+#### Host tag
 
-ホストタグは、メトリクスを集計する際に Datadog Agent によって自動的に割り当てられます。Agent ホスト名と一致しないホストタグ付きで送信されたメトリクスは、本来のホストを参照できなくなります。送信されたホストタグは、Agent によって収集されたホスト名や Agent で構成されたホスト名を上書きします。
+The host tag is assigned automatically by the Datadog Agent aggregating the metrics. Metrics submitted with a host tag not matching the Agent hostname lose reference to the original host. The submitted host tag overrides any hostname collected by or configured in the Agent.
 
-## その他の参考資料
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/developers/dogstatsd/
-[2]: /ja/metrics/types/?tab=count#definition
-[3]: /ja/dashboards/functions/arithmetic/#cumulative-sum
-[4]: /ja/dashboards/functions/arithmetic/#integral
-[5]: /ja/metrics/types/?tab=gauge#definition
-[6]: /ja/metrics/types/?tab=histogram#definition
-[7]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
-[8]: /ja/metrics/distributions/
-[9]: /ja/metrics/types/?tab=distribution#definition
+[1]: /developers/dogstatsd/
+[2]: /metrics/types/?tab=count#definition
+[3]: /dashboards/functions/arithmetic/#cumulative-sum
+[4]: /dashboards/functions/arithmetic/#integral
+[5]: /metrics/types/?tab=gauge#definition
+[6]: /metrics/types/?tab=histogram#definition
+[7]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
+[8]: /metrics/distributions/
+[9]: /metrics/types/?tab=distribution#definition

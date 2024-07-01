@@ -1,83 +1,84 @@
 ---
-categories:
+"categories":
 - cloud
 - aws
-- ログの収集
-dependencies: []
-description: Amazon Translate のキーメトリクスを追跡
-doc_link: https://docs.datadoghq.com/integrations/amazon_translate/
-draft: false
-git_integration_title: amazon_translate
-has_logo: true
-integration_id: ''
-integration_title: Amazon Translate
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: '1.0'
-name: amazon_translate
-public_title: Datadog-Amazon Translate インテグレーション
-short_description: Amazon Translate のキーメトリクスを追跡
-version: '1.0'
+- log collection
+"custom_kind": "integration"
+"dependencies": []
+"description": "Track key Amazon Translate metrics."
+"doc_link": "https://docs.datadoghq.com/integrations/amazon_translate/"
+"draft": false
+"git_integration_title": "amazon_translate"
+"has_logo": true
+"integration_id": ""
+"integration_title": "Amazon Translate"
+"integration_version": ""
+"is_public": true
+"manifest_version": "1.0"
+"name": "amazon_translate"
+"public_title": "Datadog-Amazon Translate Integration"
+"short_description": "Track key Amazon Translate metrics."
+"version": "1.0"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-## 概要
+## Overview
 
-Amazon Translate は、英語とサポートされているさまざまな言語の間でテキストを相互に翻訳するためのニューラル機械翻訳サービスです。
+Amazon Translate is a neural machine translation service for translating text to and from English across a breadth of supported languages.
 
-このインテグレーションを有効にすると、Datadog にすべての Translate メトリクスを表示できます。
+Enable this integration to see all your Translate metrics in Datadog.
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-[Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
+If you haven't already, set up the [Amazon Web Services integration][1] first.
 
-### メトリクスの収集
+### Metric collection
 
-1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `Translate` が有効になっていることを確認します。
-2. [Datadog - Amazon Translate インテグレーション][3]をインストールします。
+1. In the [AWS integration page][2], ensure that `Translate` is enabled under the `Metric Collection` tab.
+2. Install the [Datadog - Amazon Translate integration][3].
 
-### 収集データ
+### Log collection
 
-#### ログの有効化
+#### Enable logging
 
-Amazon Translate から S3 バケットまたは CloudWatch のいずれかにログを送信するよう構成します。
+Configure Amazon Translate to send logs either to a S3 bucket or to CloudWatch.
 
-**注**: S3 バケットにログを送る場合は、_Target prefix_ が `amazon_translate` に設定されているかを確認してください。
+**Note**: If you log to a S3 bucket, make sure that `amazon_translate` is set as _Target prefix_.
 
-#### ログを Datadog に送信する方法
+#### Send logs to Datadog
 
-1. [Datadog Forwarder Lambda 関数][4]をまだセットアップしていない場合は、セットアップします。
-2. Lambda 関数がインストールされたら、AWS コンソールから手動で、ログを含む CloudWatch ロググループにトリガーを追加します。
+1. If you haven’t already, set up the [Datadog Forwarder Lambda function][4].
+2. Once the Lambda function is installed, manually add a trigger on the S3 bucket or CloudWatch log group that contains your Amazon Translate logs in the AWS console:
 
-    - [S3 バケットに手動トリガーを追加][5]
-    - [CloudWatch ロググループに手動トリガーを追加][6]
+    - [Add a manual trigger on the S3 bucket][5]
+    - [Add a manual trigger on the CloudWatch Log Group][6]
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "amazon_translate" >}}
 
 
-### ヘルプ
+### Events
 
-Amazon Translate インテグレーションには、イベントは含まれません。
+The Amazon Translate integration does not include any events.
 
-### ヘルプ
+### Service Checks
 
-Amazon Translate インテグレーションには、サービスのチェック機能は含まれません。
+The Amazon Translate integration does not include any service checks.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
+Need help? Contact [Datadog support][8].
 
-[1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
+[1]: https://docs.datadoghq.com/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
 [3]: https://app.datadoghq.com/integrations/amazon-translate
-[4]: https://docs.datadoghq.com/ja/logs/guide/forwarder/
-[5]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
-[6]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
+[4]: https://docs.datadoghq.com/logs/guide/forwarder/
+[5]: https://docs.datadoghq.com/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
+[6]: https://docs.datadoghq.com/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
 [7]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_translate/amazon_translate_metadata.csv
-[8]: https://docs.datadoghq.com/ja/help/
+[8]: https://docs.datadoghq.com/help/
+

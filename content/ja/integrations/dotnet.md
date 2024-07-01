@@ -1,74 +1,75 @@
 ---
-categories:
-- 言語
-dependencies: []
-description: Datadog のクライアントライブラリを使用して .NET アプリケーションからランタイムメトリクスを送信。
-doc_link: https://docs.datadoghq.com/integrations/dotnet/
-draft: false
-further_reading: []
-git_integration_title: dotnet
-has_logo: true
-integration_id: dotnet
-integration_title: .NET
-integration_version: ''
-is_public: true
-custom_kind: integration
-manifest_version: '1.0'
-name: dotnet
-public_title: Datadog-.NET インテグレーション
-short_description: Datadog のクライアントライブラリを使用して .NET アプリケーションからランタイムメトリクスを送信。
-version: '1.0'
+"categories":
+- languages
+"custom_kind": "integration"
+"dependencies": []
+"description": "Send runtime metrics from your .NET applications with Datadog client libraries."
+"doc_link": "https://docs.datadoghq.com/integrations/dotnet/"
+"draft": false
+"further_reading": []
+"git_integration_title": "dotnet"
+"has_logo": true
+"integration_id": "dotnet"
+"integration_title": ".NET"
+"integration_version": ""
+"is_public": true
+"manifest_version": "1.0"
+"name": "dotnet"
+"public_title": "Datadog-.NET Integration"
+"short_description": "Send runtime metrics from your .NET applications with Datadog client libraries."
+"version": "1.0"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-## 概要
+## Overview
 
-NET インテグレーションを利用して、.NET アプリケーションのログ、トレース、カスタムメトリクスを収集および監視できます。
+The .NET integration allows you to collect and monitor your .NET application logs, traces, and custom metrics.
 
-## 計画と使用
+## Setup
 
-### メトリクスの収集
+### Metric collection
 
-[DogStatsD を使用した .NET カスタムメトリクスの収集][1]に関するドキュメントを参照してください。
+See the dedicated documentation for [collecting .NET custom metrics with DogStatsD][1].
 
-### トレースの収集
+### Trace collection
 
-トレースを Datadog に送信するには、[.NET アプリケーションのインスツルメンテーション][2]に関するドキュメントを参照してください。
+See the dedicated documentation for [instrumenting your .NET application][2] to send its traces to Datadog.
 
-### 収集データ
+### Log collection
 
-_Agent v6.0 以上で使用可能_
+_Available for Agent v6.0+_
 
-ログを Datadog に転送するには、[.NET ログ収集のセットアップ][3]方法に関するドキュメントを参照してください。
+See the dedicated documentation on how to [setup .NET log collection][3] to forward your logs to Datadog.
 
-### プロファイルの収集
+### Profile collection
 
-[.NET プロファイラを有効にするための][4]専用ドキュメントをご覧ください。
+See the dedicated documentation for [enabling the .NET profiler][4].
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "dotnet" >}}
 
 
-### ヘルプ
+### Events
 
-.NET インテグレーションには、イベントは含まれません。
+The .NET integration does not include any events.
 
-### ヘルプ
+### Service Checks
 
-.NET インテグレーションには、サービスのチェック機能は含まれません。
+The .NET integration does not include any service checks.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
+Need help? Contact [Datadog support][5].
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/ja/developers/dogstatsd/?tab=net
-[2]: https://docs.datadoghq.com/ja/tracing/setup/dotnet/
-[3]: https://docs.datadoghq.com/ja/logs/log_collection/csharp/
-[4]: https://docs.datadoghq.com/ja/profiler/enabling/dotnet/
-[5]: https://docs.datadoghq.com/ja/help/
+[1]: https://docs.datadoghq.com/developers/dogstatsd/?tab=net
+[2]: https://docs.datadoghq.com/tracing/setup/dotnet/
+[3]: https://docs.datadoghq.com/logs/log_collection/csharp/
+[4]: https://docs.datadoghq.com/profiler/enabling/dotnet/
+[5]: https://docs.datadoghq.com/help/
+
