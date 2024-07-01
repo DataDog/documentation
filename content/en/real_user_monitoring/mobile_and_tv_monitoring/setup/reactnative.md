@@ -1,6 +1,5 @@
 ---
 title: RUM React Native Monitoring Setup
-kind: documentation
 description: Collect RUM data from your React Native projects.
 aliases:
     - /real_user_monitoring/react-native/

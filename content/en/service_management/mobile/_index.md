@@ -1,6 +1,5 @@
 ---
 title: Datadog Mobile App
-kind: documentation
 aliases:
 - /mobile/
 further_reading:

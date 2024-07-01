@@ -19,7 +19,6 @@ further_reading:
 - link: /service_management/workflows/actions_catalog
   tag: ドキュメント
   text: ワークフローアクションの一覧を見る
-kind: documentation
 title: アクセス・認証
 ---
 

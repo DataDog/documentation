@@ -1,6 +1,5 @@
 ---
 title: Correlating Java Logs and Traces
-kind: documentation
 description: 'Connect your Java logs and traces to correlate them in Datadog.'
 code_lang: java
 type: multi-code-lang

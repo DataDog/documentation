@@ -5,7 +5,6 @@ further_reading:
 - link: /security_platform/cloud_workload_security/getting_started/
   tag: Documentation
   text: Débuter avec Cloud Workload Security de Datadog
-kind: documentation
 title: Créer des règles d'Agent personnalisées
 ---
 <!-- CE FICHIER EST GÉNÉRÉ AUTOMATIQUEMENT. VEUILLEZ LE MODIFIER DANS LE DOSSIER SCRIPTS/MODÈLES -->

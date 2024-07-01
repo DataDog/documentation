@@ -1,6 +1,5 @@
 ---
 title: Enabling ASM using Single Step Instrumentation 
-kind: documentation
 disable_toc: true
 ---
 

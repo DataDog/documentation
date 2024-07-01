@@ -1,6 +1,5 @@
 ---
 title: Trace View
-kind: documentation
 aliases:
 - /tracing/visualization/trace/
 further_reading:

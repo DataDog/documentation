@@ -4,7 +4,6 @@ algolia:
   - browser logs
 aliases:
 - /fr/logs/log_collection/web_browser
-kind: documentation
 title: Collecte de logs à partir des navigateurs
 ---
 

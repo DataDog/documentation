@@ -1,6 +1,5 @@
 ---
 title: Funnel Analysis
-kind: documentation
 disable_toc: false
 aliases:
 - /real_user_monitoring/funnel_analysis

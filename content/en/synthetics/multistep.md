@@ -1,6 +1,5 @@
 ---
 title: Multistep API Testing
-kind: documentation
 description: Chain requests to monitor sophisticated transactions on your key services.
 further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-apis-with-datadog/"

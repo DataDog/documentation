@@ -6,7 +6,6 @@ further_reading:
 - link: /security/application_security/how-appsec-works/
   tag: Documentation
   text: Datadog における Application Security Management の仕組み
-kind: documentation
 title: 互換性要件
 type: multi-code-lang
 ---

@@ -1,6 +1,5 @@
 ---
 title: Unix ドメインソケット上の DogStatsD
-kind: documentation
 description: Unix ドメインソケット上の DogStatsD の使用ガイド
 aliases:
   - /ja/metrics/unix_socket/

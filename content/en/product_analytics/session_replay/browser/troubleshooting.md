@@ -1,6 +1,5 @@
 ---
 title: Session Replay Browser Troubleshooting
-kind: documentation
 description: Learn how to troubleshoot issues with Session Replay.
 further_reading:
 - link: 'https://github.com/DataDog/browser-sdk'

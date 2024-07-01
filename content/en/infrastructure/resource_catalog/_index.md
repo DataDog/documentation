@@ -1,6 +1,5 @@
 ---
 title: Datadog Resource Catalog
-kind: documentation
 is_beta: true
 aliases:
   - /security_platform/cspm/resource_catalog

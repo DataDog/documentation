@@ -9,7 +9,6 @@ further_reading:
 - link: /tracing/trace_explorer/query_syntax/
   tag: ドキュメント
   text: トレースの調査方法
-kind: documentation
 title: スパンタグのセマンティクス
 ---
 

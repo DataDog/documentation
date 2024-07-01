@@ -8,7 +8,6 @@ further_reading:
 - link: /infrastructure/process/
   tag: Documentation
   text: システムのあらゆるレベルの事象の把握
-kind: documentation
 title: コンテナビューの構成
 ---
 
