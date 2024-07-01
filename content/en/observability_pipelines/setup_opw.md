@@ -63,16 +63,17 @@ To set bootstrap options, do one of the following:
 : The number of threads to use for processing (optional, default: the number of available cores).
 
 `proxy`
-: env variables: `DD_HTTP_PROXY`, `DD_HTTPS_PROXY`
+: This option is available for Observability Pipelines Worker 2.1 and later.
+: env variables: `DD_PROXY_HTTP`, `DD_PROXY_HTTPS`, `DD_PROXY_NO_PROXY`
 : Set proxy servers for the Observability Pipelines Worker. The proxy configuration for the Worker works in the same way as it does for the [Datadog Agent][4].
 : The settings are applied to the entire Worker process. First, the HTTP proxy and HTTPS values are resolved in this order:
-<br>&nbsp;&nbsp;&nbsp;1. `DD_HTTP[S]_PROXY`
-<br>&nbsp;&nbsp;&nbsp;2. `HTTP[S]_PROXY`
+<br>&nbsp;&nbsp;&nbsp;1. `DD_PROXY_HTTP(S)`
+<br>&nbsp;&nbsp;&nbsp;2. `HTTP(S)_PROXY`
 <br>&nbsp;&nbsp;&nbsp;3. `proxy`
 : Then, the settings are used in the Remote Config client and global Worker options.
 : An example proxy configuration:
 : &nbsp;&nbsp;&nbsp;&nbsp;proxy:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;enabled: true<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;https: https://foo.bar:3128
-
+: <b>Note</b>: The `DD_PROXY_HTTP(S)` and `HTTP(S)_PROXY` environment variables need to be already exported in your environment for the Worker to resolve them. They cannot be prepended to the Worker installation script.
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
