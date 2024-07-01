@@ -44,6 +44,8 @@ It packs several features, including:
 
 - [**Static Analysis**](#static-analysis) to detect and fix problems even before you commit changes.
 
+- [**Exception Replay**](#exception-replay) to help you debug your production code.
+
 ## Requirements
 
 - **A Datadog account**: The extension requires a Datadog account (except when using [Static Analysis][14] features). If you're new to Datadog, go to the [Datadog website][2] to learn more about Datadog's observability tools and sign up for a free trial.
@@ -151,6 +153,16 @@ Once the configuration file is created, the static analyzer runs automatically i
 
 <div class="alert alert-info">The Static Analysis feature does not require a Datadog account, as source files are analyzed locally.</div>
 
+## Exception Replay
+
+Debugging errors in production environments can frustrate your team and disrupt your development cycle. Once error tracking detects an exception, you then need to identify which specific line of code or module is responsible for the error. Without access to the inputs and associated states that caused the errors, reproducing them to find the root cause and a solution can be a lengthy and challenging process.
+
+To help you remediate bugs and discover their root causes faster, [Datadog Exception Replay][29] automatically captures the local variable data and execution context of production errors in [APM Error Tracking][30]. Exception Replay enables you to quickly reproduce exceptions that have surfaced in your services with real production state and inputs. Variables are collected and annotated for each frame in the stack trace, allowing you to analyze the steps leading up to an error and obtain a contextual understanding of the environment in which the error occurred.
+
+Check out our [documentation][31] to learn more and get started.
+
+{{< img src="/developers/ide_plugins/vscode/exception_replay.mp4" alt="Preview of Exception Replay" style="width:100%" video=true >}}
+
 ## License
 
 Please read this [End-User License Agreement][23] carefully before downloading or using the Datadog Visual Studio Code Extension.
@@ -200,3 +212,6 @@ Check out the [issues][27] section to discover known issues.
 [26]: https://github.com/DataDog/datadog-for-vscode
 [27]: https://github.com/DataDog/datadog-for-vscode/issues?q=is%3Aissue+label%3A%22known+issue%22
 [28]: /logs/explorer/
+[29]: /tracing/error_tracking/exception_replay
+[30]: https://www.datadoghq.com/blog/error-tracking/
+[31]: https://www.datadoghq.com/blog/exception-replay-datadog/
