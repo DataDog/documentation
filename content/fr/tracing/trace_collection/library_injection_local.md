@@ -264,13 +264,13 @@ Lorsque l'Agent et vos services s'exécutent sur un host réel ou virtuel, Datad
 Si l'Agent Datadog n'est pas encore installé sur le host, ou si vous souhaitez mettre à niveau votre installation de l'Agent Datadog, utilisez le script d'installation dédié pour installer à la fois les bibliothèques d'injection et l'Agent Datadog :
 
 ```shell
-DD_APM_INSTRUMENTATION_ENABLED=host DD_API_KEY=<VOTRE_CLÉ> DD_SITE="<VOTRE_SITE>" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
+DD_APM_INSTRUMENTATION_ENABLED=host DD_API_KEY=<VOTRE_CLÉ> DD_SITE="<VOTRE_SITE>" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
 Par défaut, l'exécution du script entraîne la prise en charge de Java, Node.js, Python, Ruby et .NET. Si vous souhaitez spécifier les langages à prendre en charge, définissez également la variable d'environnement `DD_APM_INSTRUMENTATION_LANGUAGES` (valeurs autorisées : `java`, `js`, `python`, `ruby` et `dotnet`). Pour spécifier plusieurs langages, séparez les valeurs par des virgules :
 
 ```shell
-DD_APM_INSTRUMENTATION_LANGUAGES=java,js DD_APM_INSTRUMENTATION_ENABLED=host DD_API_KEY=<VOTRE_CLÉ> DD_SITE="<VOTRE_SITE>" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
+DD_APM_INSTRUMENTATION_LANGUAGES=java,js DD_APM_INSTRUMENTATION_ENABLED=host DD_API_KEY=<VOTRE_CLÉ> DD_SITE="<VOTRE_SITE>" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
 Quittez et ouvrez un nouveau shell pour utiliser la bibliothèque d'injection.
@@ -566,13 +566,13 @@ Tous les processus lancés récemment sont interceptés et la bibliothèque d'in
 Si l'Agent Datadog n'est pas encore installé sur le host, ou si vous souhaitez mettre à niveau votre installation de l'Agent Datadog, utilisez le script d'installation dédié pour installer à la fois les bibliothèques d'injection et l'Agent Datadog :
 
 ```shell
-DD_APM_INSTRUMENTATION_ENABLED=all DD_API_KEY=<VOTRE_CLÉ> DD_SITE="<VOTRE_SITE>" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
+DD_APM_INSTRUMENTATION_ENABLED=all DD_API_KEY=<VOTRE_CLÉ> DD_SITE="<VOTRE_SITE>" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
 Par défaut, l'exécution du script entraîne la prise en charge de Java, Node.js, Python, Ruby et .NET. Si vous souhaitez spécifier les langages à prendre en charge, définissez également la variable d'environnement `DD_APM_INSTRUMENTATION_LANGUAGES` (valeurs autorisées : `java`, `js`, `python`, `ruby` et `dotnet`). Pour spécifier plusieurs langages, séparez les valeurs par des virgules :
 
 ```shell
-DD_APM_INSTRUMENTATION_LANGUAGES=java,js DD_APM_INSTRUMENTATION_ENABLED=all DD_API_KEY=<VOTRE_CLÉ> DD_SITE="<VOTRE_SITE>" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
+DD_APM_INSTRUMENTATION_LANGUAGES=java,js DD_APM_INSTRUMENTATION_ENABLED=all DD_API_KEY=<VOTRE_CLÉ> DD_SITE="<VOTRE_SITE>" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
 ## Installer uniquement l'injection de bibliothèque
@@ -806,13 +806,13 @@ Tous les processus lancés récemment sont interceptés et la bibliothèque d'in
 Utilisez le script shell `install_script_docker_injection` pour installer automatiquement la prise en charge de l'injection Docker. Vous devez au préalable avoir installé Docker sur la machine du host.
 
 ```shell
-bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_docker_injection.sh)"
+bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_docker_injection.sh)"
 ```
 
 Cela permet d'installer les bibliothèques de tous les langages pris en charge. Pour installer seulement les bibliothèques de certains langages, définissez la variable d'environnement `DD_APM_INSTRUMENTATION_LANGUAGES`. Les valeurs `java`, `js`, `python`, `ruby` et `dotnet` sont autorisées :
 
 ```shell
-DD_APM_INSTRUMENTATION_LANGUAGES=java,js bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_docker_injection.sh)"
+DD_APM_INSTRUMENTATION_LANGUAGES=java,js bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_docker_injection.sh)"
 ```
 
 ## Configurer l'injection Docker

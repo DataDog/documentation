@@ -43,7 +43,7 @@ Datadog の[オートディスカバリー][4]を使用すると、動的イン�
 DD_API_KEY=<API_KEY> DD_SITE="{{< region-param key="dd_site" code="true" >}}" \
 DD_AGENT_DIST_CHANNEL=beta DD_AGENT_MAJOR_VERSION=7 \
 DD_AGENT_MINOR_VERSION=52.0~dbm~aurora~autodiscovery~beta~0.3-1 \
-bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
+bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
 Datadog Agent のインストールの詳細については、[Amazon Linux の基本的な Agent の使い方][10]を参照してください。
