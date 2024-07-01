@@ -1,6 +1,5 @@
 ---
 title: Node.js Compatibility Requirements
-kind: documentation
 description: 'Compatibility Requirements for the Node.js tracer'
 aliases:
   - /tracing/compatibility_requirements/nodejs

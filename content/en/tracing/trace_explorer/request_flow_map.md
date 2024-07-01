@@ -1,6 +1,5 @@
 ---
 title: Request Flow Map
-kind: documentation
 description: "Trace Search and Analytics"
 aliases:
  - /tracing/trace_search_and_analytics/request_flow_map

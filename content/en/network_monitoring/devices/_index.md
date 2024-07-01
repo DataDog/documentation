@@ -1,6 +1,5 @@
 ---
 title: Network Device Monitoring
-kind: documentation
 description: Gain visibility into your network-connected devices, such as routers, switches, servers, and firewalls.
 aliases:
     - /network_performance_monitoring/devices/
@@ -33,7 +32,7 @@ algolia:
 
 <br/>
 
-Network Device Monitoring gives you visibility into your on-premise and virtual network devices, such as routers, switches, and firewalls. Automatically discover devices on any network, and quickly start collecting metrics like bandwidth utilization, volume of bytes sent, and determine whether devices are up/down.
+Network Device Monitoring gives you visibility into your on-premises and virtual network devices, such as routers, switches, and firewalls. Automatically discover devices on any network, and start collecting metrics like bandwidth utilization, volume of bytes sent, and determine whether devices are up/down.
 
 ## Getting started
 
@@ -44,6 +43,7 @@ Network Device Monitoring gives you visibility into your on-premise and virtual 
     - [Overview of all devices monitored][4]
     - [Across the performance on all interfaces][5]
 5. Catch issues before they arise with proactive monitoring on any [SNMP metric][6].
+6. Optionally, configure the Agent to collect specific metrics and tags by creating [device profiles][224] directly in the Datadog app.
 
 ## Supported devices
 
@@ -58,13 +58,13 @@ Datadog provides SD-WAN (Software-Defined Wide Area Network) monitoring for sele
 Datadog supports the following vendors for SD-WAN network monitoring:
 
 - [Meraki SD-WAN][7] 
-- [Cisco SD-WAN][800] (public beta)
+- [Cisco SD-WAN][223] (public beta)
 
 ### Vendor profiles
 
 The following vendor devices are supported with dedicated profiles. If a vendor or device type is supported, but the specific model isn't supported, you can:
-  - customize your own YAML profile (see the [NDM troubleshooting FAQ page][8] for guidance)
-  - create new [profiles][9] to start monitoring new device models
+  - Customize your own YAML profile (see the [NDM troubleshooting FAQ page][8] for guidance).
+  - Create new [profiles][9] to start monitoring new device models.
 
 | Vendor | Config files |
 | ---  | ----------- |
@@ -281,4 +281,5 @@ The following vendor devices are supported with dedicated profiles. If a vendor 
 [211]: https://docs.datadoghq.com/integrations/pan_firewall/
 [212]: https://docs.datadoghq.com/integrations/crest_data_systems_pfsense/
 [222]: https://docs.datadoghq.com/integrations/pan_firewall/
-[800]: https://docs.datadoghq.com/integrations/cisco_sdwan/
+[223]: https://docs.datadoghq.com/integrations/cisco_sdwan/
+[224]: /network_monitoring/devices/guide/device_profiles/

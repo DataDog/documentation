@@ -20,7 +20,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/azure-workflow-automation/
   tag: ブログ
   text: Datadog Workflow Automation で Azure アプリケーションの問題を迅速に修復する
-kind: documentation
 title: ワークフローの自動化
 ---
 

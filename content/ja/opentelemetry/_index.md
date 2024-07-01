@@ -32,7 +32,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/opentelemetry-runtime-metrics-datadog/
   tag: ブログ
   text: Datadog APM で OTel インスツルメンテーションさ れたアプリのランタイムメトリクスを監視する
-kind: ドキュメント
 title: Datadog の OpenTelemetry
 ---
 

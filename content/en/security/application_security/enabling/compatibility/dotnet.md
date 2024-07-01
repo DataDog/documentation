@@ -1,6 +1,5 @@
 ---
 title: .NET Compatibility Requirements
-kind: documentation
 code_lang: dotnet
 type: multi-code-lang
 code_lang_weight: 10
@@ -16,7 +15,7 @@ The following application security capabilities are supported in the .NET librar
 | Threat Protection  | 2.26.0|
 | Customize response to blocked requests | 2.27.0 |
 | Software Composition Analysis (SCA) |  2.16.0  |
-| Code Security (beta)| 2.42.0  |
+| Code Security  | 2.42.0  |
 | Automatic user activity event tracking | 2.32.0 |
 | API Security | 2.42.0 |
 

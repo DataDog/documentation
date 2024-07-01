@@ -36,6 +36,12 @@ further_reading:
 - link: https://www.datadoghq.com/blog/monitor-1password-datadog-cloud-siem/
   tag: 블로그
   text: Datadog Cloud 보안 정보와 이벤트 관리(SIEM)로 1Password 모니터링
+- link: https://www.datadoghq.com/blog/filter-logs-by-subqueries-with-datadog/
+  tag: 블로그
+  text: 하위 쿼리를 사용하여 로그를 동적으로 필터링하고 연계
+- link: https://www.datadoghq.com/blog/monitor-dns-logs-for-network-and-security-datadog/
+  tag: 블로그
+  text: 네트워크 및 보안 분석을 위해 DNS 로그 모니터링
 kind: 설명서
 title: 로그 관리
 ---
@@ -85,11 +91,14 @@ Datadog 로그 관리로 호스트, 컨테이너, 클라우드 공급자 및 기
 - [패턴][11]: 인덱싱한 로그를 함께 클러스터링하여 로그 패턴을 확인합니다.
 - [저장된 보기][12]: 저장된 보기를 사용하여 로그 탐색기를 자동 설정합니다.
 
+
+{{< learning-center-callout header="학습 센터에서 로그 관리 소개를 시도해 보세요" btn_title="지금 등록" btn_url="https://learn.datadoghq.com/courses/intro-to-log-management" >}} 실제 클라우드 컴퓨팅 용량과 Datadog 평가판 계정을 무료로 배워보세요. 지금 등록하여 로그 수집, 쿼리, 분석, 메트릭, 모니터링, 처리, 저장 및 액세스 제어에 대해 자세히 알아보세요.{{< /learning-center-callout >}}
+
 ## 참고 자료
 
 {{< partial name="whats-next/whats-next.html" >}}
 <br>
-\*제한 없는 로그 수집은 Datadog, Inc.의 등록 상표입니다.
+\*제한 없는 로깅은 Datadog, Inc.의 상표입니다.
 
 [1]: /ko/logs/explorer/
 [2]: /ko/security/cloud_siem/

@@ -3,7 +3,6 @@ further_reading:
 - link: /data_security/
   tag: 설명서
   text: Datadog에 제출된 주요 데이터 카테고리 검토
-kind: documentation
 title: 쿠버네티스(Kubernetes) 데이터 보안
 ---
 

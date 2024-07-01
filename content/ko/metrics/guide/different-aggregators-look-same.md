@@ -6,7 +6,6 @@ further_reading:
 - link: /metrics/introduction/#combining-time-series
   tag: 설명서
   text: 공간 애그리게이션
-kind: faq
 title: 합계/최소/최대/평균 애그리게이터(aggregator) 간에 전환해도 값은 변경되지 않습니다.
 ---
 

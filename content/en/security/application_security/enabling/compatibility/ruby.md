@@ -1,6 +1,5 @@
 ---
 title: Ruby Compatibility Requirements
-kind: documentation
 code_lang: ruby
 type: multi-code-lang
 code_lang_weight: 30
@@ -16,7 +15,7 @@ The following application security capabilities are supported in the Ruby librar
 | Threat Protection | 1.11.0 |
 | Customize response to blocked requests | 1.15.0 |
 | Software Composition Analysis (SCA) | 1.11.0 |
-| Code Security (beta) | not supported |
+| Code Security        | not supported |
 | Automatic user activity event tracking | 1.14.0 |
 | API Security | 1.15.0 |
 

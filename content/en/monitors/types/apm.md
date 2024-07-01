@@ -1,6 +1,5 @@
 ---
 title: APM Monitor
-kind: documentation
 description: "Compare an APM metric to a user defined threshold"
 aliases:
   - /monitors/monitor_types/app_analytics

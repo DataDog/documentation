@@ -1,6 +1,5 @@
 ---
 title: Configuring App Analytics via the Agent
-kind: Documentation
 aliases:
   - /tracing/trace_search_and_analytics/agent_trace_search/
   - /tracing/app_analytics/agent_trace_search/

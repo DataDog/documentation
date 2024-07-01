@@ -1,6 +1,5 @@
 ---
 title: Watchdog Alerts
-kind: documentation
 ---
 
 ## Overview

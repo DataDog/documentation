@@ -1,6 +1,5 @@
 ---
 title: Projects
-kind: documentation
 disable_toc: false
 further_reading:
 - link: "service_management/case_management/create_case"

@@ -1,6 +1,5 @@
 ---
 title: Troubleshooting the Python Profiler
-kind: Documentation
 code_lang: python
 type: multi-code-lang
 code_lang_weight: 20

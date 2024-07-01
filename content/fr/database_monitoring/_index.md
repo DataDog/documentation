@@ -24,7 +24,6 @@ further_reading:
   tag: Validation des bases
   text: Prenez part à une session interactive pour améliorer la solution Database
     Monitoring
-kind: documentation
 title: Database Monitoring
 ---
 {{< site-region region="gov" >}}

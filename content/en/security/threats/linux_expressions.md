@@ -5,7 +5,6 @@ further_reading:
 - link: /security/cloud_workload_security/getting_started/
   tag: Documentation
   text: Get started with Datadog CSM Threats
-kind: documentation
 title: Linux Agent attributes and helpers
 ---
 <!--  SOURCED FROM https://github.com/DataDog/datadog-agent -->

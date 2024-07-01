@@ -1,7 +1,5 @@
 ---
 title: Time Slice SLOs
-kind: documentation
-is_beta: true
 further_reading:
 - link: "service_management/service_level_objectives/"
   tag: "Documentation"

@@ -6,7 +6,6 @@ further_reading:
 - link: /metrics/introduction/#combining-time-series
   tag: ドキュメント
   text: 空間集計
-kind: faq
 title: sum/min/max/avg の集計を切り替えても、値が変化しない
 ---
 

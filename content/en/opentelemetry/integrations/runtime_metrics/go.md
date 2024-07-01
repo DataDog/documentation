@@ -2,7 +2,6 @@
 title: OpenTelemetry Go Runtime Metrics
 aliases:
 - /opentelemetry/runtime_metrics/go/
-kind: documentation
 code_lang: go
 type: multi-code-lang
 code_lang_weight: 30

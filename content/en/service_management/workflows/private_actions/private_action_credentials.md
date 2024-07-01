@@ -4,7 +4,7 @@ kind: guide
 disable_toc: false
 ---
 
-{{< callout url="https://docs.google.com/forms/d/e/1FAIpQLSc_AEtxd8MPHUFyYIbX3hWEVF18iSWuk7kmA0PtlOPgo0pi3w/viewform" btn_hidden="false" header="Join the Beta!">}}
+{{< callout url="https://www.datadoghq.com/private-beta/private-actions/" btn_hidden="false" header="Join the Beta!">}}
 Private Actions are in beta. Use this form to request access today.
 {{< /callout >}}
 

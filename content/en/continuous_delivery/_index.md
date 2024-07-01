@@ -1,6 +1,5 @@
 ---
 title: Continuous Delivery Visibility
-kind: documentation
 disable_sidebar: true
 further_reading:
 - link: "https://app.datadoghq.com/release-notes?category=Software%20Delivery"

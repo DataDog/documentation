@@ -1,6 +1,5 @@
 ---
 title: Vues enregistrées
-kind: documentation
 description: Utilisez les vues enregistrées pour configurer automatiquement votre vue Log Explorer.
 further_reading:
   - link: logs/explorer/analytics

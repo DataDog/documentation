@@ -6,7 +6,6 @@ further_reading:
 - link: /data_security/
   tag: Documentación
   text: Revisar las principales categorías de datos enviados a Datadog
-kind: documentación
 title: Seguridad de los datos en el Agent
 ---
 
