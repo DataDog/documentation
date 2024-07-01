@@ -1,8 +1,8 @@
 ---
 aliases:
-- /es/logs/FAQ/cómo reasignar los valores de seguridad personalizados al estado oficialloguear-status
+- /es/logs/faq/how-to-remap-custom-severity-values-to-the-official-log-status
 further_reading:
-- link: logs/log_collection/#custom-loguear-collection
+- link: logs/log_collection/#custom-log-collection
   tag: Documentación
   text: Más información sobre la recogida de loguear con el Agent
 - link: /logs/log_configuration/processors
@@ -12,7 +12,7 @@ further_reading:
   tag: Documentación
   text: Obtén más información sobre el parseo
 kind: guía
-title: Reasignación de valores de gravedad personalizados al estado oficial loguear
+title: Reasignación de valores de gravedad personalizados al estado del log oficial
 ---
 
 Por defecto, [loguear Status Remapper][1] se basa en los [Estándares de severidad Syslog][2].
