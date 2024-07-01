@@ -71,7 +71,7 @@ Oracle DBM 빌드는 해당 리포지토리에서 [RHEL][6] 및 [Ubuntu][7]용�
 export DD_AGENT_DIST_CHANNEL=beta
 export DD_AGENT_MINOR_VERSION="47.1~dbm~oracle~0.2-1"
 
-DD_API_KEY= DD_SITE="datadoghq.com" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
+DD_API_KEY= DD_SITE="datadoghq.com" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
 [6]: https://yum.datadoghq.com/beta/7/x86_64/
