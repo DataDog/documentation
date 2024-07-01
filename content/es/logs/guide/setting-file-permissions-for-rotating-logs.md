@@ -48,7 +48,7 @@ setfacl -m u:dd-agent:rx /var/log/apache
 
 ### Configuración de permisos para la rotación de archivos de logs
 
-[Configurar los permisos][4] una vez no persistirá para la rotación de logs, ya que logrotate no vuelve a aplicar la configuración de ACL. Para obtener una solución más permanente, añade una regla a logrotate para restablecer la ACL en un nuevo archivo:
+[Configurar los permisos][4] una vez no servirá para la rotación de logs, ya que logrotate no vuelve a aplicar la configuración de ACL. Para obtener una solución más permanente, añade una regla a logrotate para restablecer la ACL en un nuevo archivo:
 
 ```shell
 sudo touch /etc/logrotate.d/dd-agent_ACLs
