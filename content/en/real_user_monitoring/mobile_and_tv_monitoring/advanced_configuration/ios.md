@@ -694,6 +694,18 @@ Depending on the event's type, only some specific properties can be modified:
 | RUMResourceEvent | `RUMResourceEvent.resource.url`      | URL of the resource.                     |
 |                  | `RUMResourceEvent.view.url`          | URL of the view linked to this resource. |
 
+## Retrieve the RUM session ID
+
+Retrieving the RUM session ID can be helpful for troubleshooting. For example, you can attach the session ID to support requests, emails, or bug reports so that your support team can later find the user session in Datadog.
+
+You can access the RUM session ID at runtime without waiting for the `sessionStarted` event:
+
+```swift
+RumMonitor.shared().currentSessionID(completion: { sessionId in
+  currentSessionId = sessionId
+})
+```
+
 ## Set tracking consent (GDPR compliance)
 
 To be compliant with the GDPR regulation, the RUM iOS SDK requires the tracking consent value at initialization.

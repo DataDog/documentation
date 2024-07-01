@@ -10,7 +10,6 @@ further_reading:
 - link: /getting_started/tagging/using_tags/
   tag: Documentation
   text: Apprendre à utiliser des tags dans Datadog
-kind: documentation
 title: Assigner des tags
 ---
 

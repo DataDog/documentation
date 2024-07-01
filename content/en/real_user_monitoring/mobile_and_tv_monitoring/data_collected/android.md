@@ -237,9 +237,20 @@ Network errors include information about failing HTTP requests. The following fa
 | `action.name` | string | Name of the user action. |
 | `action.target.name` | string | Element that the user interacted with. Only for automatically collected actions. |
 
-## Data Storage
+## Data storage
 
 Before data is uploaded to Datadog, it is stored in cleartext in your application's cache directory. This cache folder is protected by [Android's Application Sandbox][6], meaning that on most devices this data can't be read by other applications. However, if the mobile device is rooted, or someone tempers with the Linux kernel, the stored data might become readable.
+
+## Data upload
+
+The RUM Android SDK allows you to get the data you need to Datadog while considering user bandwidth impact. The Datadog SDK batches and uploads events as follows:
+
+- On _event collected_, the Datadog SDK appends uncompressed events to a batch file (using a tag-length-value, or TLV encoding format)
+- On _upload_ (when the batch is considered "closed"), the Datadog SDK:
+  - Reads the batch and extract events
+  - Drops redundant View events in RUM (no optimizations in other tracks)
+  - Builds payloads specific to each track
+  - Compresses the payload and sends it
 
 ## Direct Boot mode support
 

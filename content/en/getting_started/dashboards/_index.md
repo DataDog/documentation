@@ -1,6 +1,5 @@
 ---
 title: Getting Started with Dashboards
-kind: documentation
 further_reading:
   - link: "https://www.datadoghq.com/blog/dashboard-sharing/"
     tag: "Blog"

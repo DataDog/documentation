@@ -258,6 +258,10 @@ spec:
 
 ## Scrub sensitive data from your logs
 
+{{< callout url="https://www.datadoghq.com/private-beta/sensitive-data-scanner-using-agent-in-your-premises/" >}}
+  Sensitive Data Scanner using the Agent is in private beta. See the <a href="https://www.datadoghq.com/blog/sensitive-data-scanner-using-the-datadog-agent/">blog post</a> and <a href="https://docs.datadoghq.com/sensitive_data_scanner/">documentation</a> for more information. To request access, fill out this form.
+{{< /callout >}}
+
 If your logs contain sensitive information that need redacting, configure the Datadog Agent to scrub sensitive sequences by using the `log_processing_rules` parameter in your configuration file with the `mask_sequences` type.
 
 This replaces all matched groups with the value of the `replace_placeholder` parameter.
