@@ -4,7 +4,6 @@ further_reading:
 - link: /real_user_monitoring/session_replay/
   tag: 설명서
   text: 세션 재생에 대해 알아보기
-kind: 가이드
 title: Shadow DOM 구성요소로 세션 재생 강화
 ---
 

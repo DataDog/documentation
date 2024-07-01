@@ -8,7 +8,6 @@ further_reading:
 - link: /account_management/billing/azure/#azure-vm-exclusion
   tag: 설명서
   text: 태그로 Azure VM 필터링
-kind: 가이드
 title: 인프라스트럭처 목록에서 Azure VM 전원 끄기
 ---
 
