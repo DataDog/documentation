@@ -215,34 +215,20 @@ Optional [proxy configuration][13].
 
 If automatic instrumentation doesn't suit your needs, you can manually create RUM Events and Logs:
 
+### Send logs
+When you instrument your code to send logs, it can include debug, info, warn, or error details:
+
 ```javascript
-import {
-    DdSdkReactNative,
-    DdSdkReactNativeConfiguration,
-    DdLogs,
-    ErrorSource,
-    RumActionType,
-    DdRum
-} from '@datadog/mobile-react-native';
-
-// Initialize the SDK
-const config = new DdSdkReactNativeConfiguration(
-    '<CLIENT_TOKEN>',
-    '<ENVIRONMENT_NAME>',
-    '<RUM_APPLICATION_ID>',
-    true, // track user interactions (such as a tap on buttons)
-    true, // track XHR resources
-    true // track errors
-);
-DdSdkReactNative.initialize(config);
-
-// Send logs (use the debug, info, warn, or error methods)
 DdLogs.debug('Lorem ipsum dolor sit amet…', {});
 DdLogs.info('Lorem ipsum dolor sit amet…', {});
 DdLogs.warn('Lorem ipsum dolor sit amet…', {});
 DdLogs.error('Lorem ipsum dolor sit amet…', {});
+```
 
-// Track RUM Views manually
+### Manually track RUM Views
+To manually track RUM Views, provide a `view key`, `view name`, and `action name` at initialization. Depending on your needs, you can choose one of the following strategies:
+
+```javascript
 DdRum.startView('<view-key>', 'View Name', {}, Date.now());
 //…
 DdRum.stopView('<view-key>', { custom: 42 }, Date.now());
@@ -253,19 +239,35 @@ DdRum.addAction(RumActionType.TAP, 'action name', {}, Date.now());
 DdRum.startAction(RumActionType.TAP, 'action name', {}, Date.now());
 // To stop action above
 DdRum.stopAction({}, Date.now());
+```
 
-// Add custom timings
-DdRum.addTiming('<timing-name>');
+### Manually track RUM Errors
+You can manually track RUM errors:
 
-// Track RUM Errors manually
+```javascript
 DdRum.addError('<message>', ErrorSource.SOURCE, '<stacktrace>', {}, Date.now());
+```
 
-// Track RUM Resource manually
+### Manually track RUM Resources
+You can manually track RUM resources:
+
+```javascript
 DdRum.startResource('<res-key>', 'GET', 'http://www.example.com/api/v1/test', {}, Date.now());
 //…
 DdRum.stopResource('<res-key>', 200, 'xhr', (size = 1337), {}, Date.now());
+```
 
-// Send spans manually
+### Add custom timings
+You can add custom timings:
+
+```javascript
+DdRum.addTiming('<timing-name>');
+```
+
+### Manually send spans
+You can send spans manually:
+
+```javascript
 const spanId = await DdTrace.startSpan('foo', { custom: 42 }, Date.now());
 //...
 DdTrace.finishSpan(spanId, { custom: 21 }, Date.now());
