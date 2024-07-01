@@ -20,7 +20,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/cloud-cost-management-container-support/
   tag: blog
   text: Comprender sus gastos de Kubernetes y ECS con Datadog Cloud Cost Management
-kind: documentación
 title: Amazon ECS
 ---
 
@@ -238,7 +237,7 @@ Para enviar datos al centro de datos GOVCLOUD de Datadog, añade el contenedor l
      (...)
           {
             "name": "fips-proxy",
-            "image": "datadog/fips-proxy:1.1.2",
+            "image": "datadog/fips-proxy:1.1.3",
             "portMappings": [
                 {
                     "containerPort": 9803,

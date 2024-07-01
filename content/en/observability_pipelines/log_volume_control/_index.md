@@ -1,6 +1,5 @@
 ---
 title: Log Volume Control
-kind: document
 disable_toc: false
 ---
 

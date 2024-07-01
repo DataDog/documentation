@@ -1,6 +1,5 @@
 ---
 title: (LEGACY) Set Up Observability Pipelines in Datadog
-kind: Documentation
 aliases:
   - /agent/vector_aggregation/
   - /integrations/observability_pipelines/integrate_vector_with_datadog/

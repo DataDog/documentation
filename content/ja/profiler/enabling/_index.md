@@ -12,7 +12,6 @@ further_reading:
 - link: profiler/profiler_troubleshooting
   tag: ドキュメント
   text: プロファイラの使用中に発生する問題を修正
-kind: ドキュメント
 title: プロファイラーの有効化
 type: multi-code-lang
 ---
