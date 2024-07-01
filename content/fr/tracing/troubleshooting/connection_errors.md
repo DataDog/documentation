@@ -181,7 +181,7 @@ Si votre application et l'Agent Datadog ne sont pas conteneurisés, l'applicatio
 Si l'Agent Datadog indique que l'APM n'effectue pas d'écoute, vérifiez qu'il n'y a aucun conflit pour le port 8126. Le composant APM de l'Agent Datadog utilise ce port par défaut.
 
 Si vous ne parvenez pas à isoler la cause à l'origine de votre problème, [contactez l'assistance Datadog][4] en prenant soin de partager :
-- Les informations à propos de l'environnement au sein duquel vous déployez l'application et l'Agent Datadog
+- Les informations à propos de l'environnement au sein duquel vous déployez l'application et l'Agent Datadog.
 - Si vous utilisez des proxies, les informations à propos de leur configuration
 - Si vous essayez de remplacer le port 8126 par défaut par un autre port, les informations à propos de ce port
 - Un [flare de l'Agent Datadog][5]
@@ -190,33 +190,40 @@ Si vous ne parvenez pas à isoler la cause à l'origine de votre problème, [con
 
 #### Vérifier la configuration du réseau
 
-Dans les configurations conteneurisées, l'envoi de traces à `localhost` ou `127.0.0.1` ne fonctionne généralement pas, car l'Agent Datadog est également conteneurisé et situé à un autre emplacement. **Remarque** : AWS ECS sur Fargate et AWS EKS sur Fargate constituent des exceptions à cette règle.
+Dans les configurations conteneurisées, l'envoi de traces à `localhost` ou `127.0.0.1` ne fonctionne généralement pas, car l'Agent Datadog est également conteneurisé et situé à un autre emplacement. **Remarque** : Amazon ECS sur Fargate et AWS EKS sur Fargate constituent des exceptions à cette règle.
 
 Assurez-vous que le processus de connexion entre l'application et l'Agent Datadog respecte les exigences de cette configuration.
 
-Vérifiez notamment que l'Agent Datadog a accès au port `8126` et que votre application peut transmettre des traces à l'emplacement de l'Agent Datadog.
+Spécifiquement, vérifiez que lʼAgent Datadog a accès au port `8126` (ou au port que vous avez défini) et que votre application est en mesure de diriger des traces vers lʼemplacement de lʼAgent Datadog.
+Pour ce faire, vous pouvez exécuter la commande suivante à partir du conteneur de l'application, en remplaçant les variables `{agent_ip}` et `{agent_port}` :
 
-Consultez la [documentation relative à la configuration de l'APM dans l'application][6] pour procéder à ces vérifications.
+```
+curl -X GET http://{agent_ip}:{agent_port}/info
+```
+
+Si cette commande échoue, votre conteneur ne peut pas accéder à lʼAgent. Référez-vous aux sections suivantes pour obtenir des indications sur les causes possibles de ce problème.
+
+Consultez la [documentation relative à la configuration d'APM dans l'application][6] pour procéder à ces vérifications.
 
 #### Identifier à quel emplacement votre bibliothèque de tracing essaye d'envoyer des traces
 
-À l'aide des logs d'erreur indiqués ci-dessus pour chaque langue, vérifiez à quel emplacement vos traces sont envoyées.
+À l'aide des logs d'erreur indiqués ci-dessus pour chaque langage, vérifiez à quel emplacement vos traces sont envoyées.
 
 Consultez le tableau ci-dessous pour obtenir des exemples de configuration. Certains déploiements requièrent des configurations réseau supplémentaires. Elles sont décrites dans la documentation des produits.
 
-| Configuration   | `DD_AGENT_HOST`  |
+| Implémentation   | `DD_AGENT_HOST`  |
 |---------|------------------|
-| [AWS ECS sur EC2][7] | Évaluation avec l'endpoint de métadonnées d'Amazon EC2 |
-| [AWS ECS sur Fargate][8] | Ne pas définir `DD_AGENT_HOST` |
+| [Amazon ECS sur EC2][7] | Évaluation avec l'endpoint de métadonnées d'Amazon EC2 |
+| [Amazon ECS sur Fargate][8] | Ne pas définir `DD_AGENT_HOST` |
 | [AWS EKS sur Fargate][9] | Ne pas définir `DD_AGENT_HOST` |
 | [AWS Elastic Beanstalk avec un seul conteneur][10] | IP de passerelle (généralement `172.17.0.1`) |
 | [AWS Elastic Beanstalk avec plusieurs conteneurs][11] | Lien pointant vers le nom du conteneur de l'Agent Datadog |
-| [Kubernetes][12] | 1) [Socket de domaine Unix][20], 2) [`status.hostIP`][13] ajouté manuellement ou 3) par l'intermédiaire du [contrôleur d'admission][14] |
-| [AWS EKS (pas sur Fargate)][15] | 1) [Socket de domaine Unix][20], 2) [`status.hostIP`][13] ajouté manuellement ou 3) par l'intermédiaire du [contrôleur d'admission][14] |
-| [Agent Datadog et conteneurs Docker d'application][16] | Conteneur de l'Agent Datadog |
+| [Kubernetes][12] | 1) [Socket de domaine Unix][13], 2) [`status.hostIP`][14] ajouté manuellement, ou 3) via le [Contrôleur d'admission][15]. Si vous utilisez TCP, vérifiez les [stratégies de réseau][21] appliquées sur votre conteneur. |
+| [AWS EKS (pas sur Fargate)][16] | 1) [Socket de domaine Unix][13], 2) [`status.hostIP`][14] ajouté manuellement ou 3) par l'intermédiaire du [Contrôleur d'admission][14] |
+| [Agent Datadog et conteneurs Docker d'application][17] | Conteneur de l'Agent Datadog |
 
 
-**Remarque à propos des serveurs Web** : si les données de la section `agent_url` des [logs de lancement du traceur][1] ne correspondent pas à celles de la variable d'environnement `DD_AGENT_HOST` transmise, vérifiez comment les variables d'environnement sont mises en cascade pour ce serveur. Par exemple, en PHP, il existe un paramètre supplémentaire permettant de veiller à ce qu'[Apache][17] ou que [Nginx][18] récupère correctement la variable d'environnement `DD_AGENT_HOST`.
+**Remarque à propos des serveurs Web** : si les données de la section `agent_url` des [logs de lancement du traceur][1] ne correspondent pas à celles de la variable d'environnement `DD_AGENT_HOST` transmise, vérifiez comment les variables d'environnement sont mises en cascade pour ce serveur. Par exemple, en PHP, il existe un paramètre supplémentaire permettant de veiller à ce qu'[Apache][18] ou que [Nginx][19] récupère correctement la variable d'environnement `DD_AGENT_HOST`.
 
 Si votre bibliothèque de tracing envoie les traces correctement en respectant votre configuration, passez à l'étape suivante.
 
@@ -248,16 +255,16 @@ APM Agent
 ```
 
 Si la configuration ne contient pas d'erreur, mais que vous continuez à recevoir des erreurs de connexion, [contactez l'assistance Datadog][4] en prenant soin de partager :
-- Les informations à propos de l'environnement au sein duquel vous déployez l'application et l'Agent Datadog
+- Les informations à propos de l'environnement au sein duquel vous déployez l'application et l'Agent Datadog.
 - Si vous utilisez des proxies, les informations à propos de leur configuration
 - Tous les fichiers de configuration utilisés pour configurer l'application et l'Agent Datadog
 - Les logs de lancement ou de debugging du traceur qui décrivent l'erreur de connexion
-- Un [flare de l'Agent][5] Datadog ; pour les conteneurs dédiés, envoyez le flare depuis le [conteneur dédié à l'Agent de trace][19]
+- Un [flare de l'Agent][5] Datadog ; pour les conteneurs dédiés, envoyez le flare depuis le [conteneur dédié à l'Agent de trace][20]
 
 
 [1]: /fr/tracing/troubleshooting/tracer_startup_logs/
 [2]: /fr/tracing/troubleshooting/tracer_debug_logs/
-[3]: /fr/agent/guide/agent-commands/#agent-information
+[3]: /fr/agent/configuration/agent-commands/#agent-information
 [4]: /fr/help/
 [5]: /fr/agent/troubleshooting/send_a_flare/
 [6]: https://app.datadoghq.com/apm/service-setup
@@ -267,11 +274,12 @@ Si la configuration ne contient pas d'erreur, mais que vous continuez à recevoi
 [10]: /fr/integrations/amazon_elasticbeanstalk/?tab=singlecontainer#trace-collection
 [11]: /fr/integrations/amazon_elasticbeanstalk/?tab=multiplecontainers#trace-collection
 [12]: /fr/agent/kubernetes/apm/
-[13]: https://kubernetes.io/docs/tasks/inject-data-application/downward-api-volume-expose-pod-information/#capabilities-of-the-downward-api
-[14]: /fr/agent/cluster_agent/admission_controller/
-[15]: /fr/integrations/amazon_eks/#setup
-[16]: /fr/agent/docker/apm/#tracing-from-other-containers
-[17]: /fr/tracing/setup_overview/setup/php/?tab=containers#apache
-[18]: /fr/tracing/setup_overview/setup/php/?tab=containers#nginx
-[19]: /fr/agent/troubleshooting/send_a_flare/?tab=agentv6v7#trace-agent
-[20]: /fr/containers/kubernetes/apm/?tabs=daemonsetuds#configure-the-datadog-agent-to-accept-traces
+[13]: /fr/containers/kubernetes/apm/?tabs=daemonsetuds#configure-the-datadog-agent-to-accept-traces
+[14]: https://kubernetes.io/docs/tasks/inject-data-application/downward-api-volume-expose-pod-information/#capabilities-of-the-downward-api
+[15]: /fr/agent/cluster_agent/admission_controller/
+[16]: /fr/integrations/amazon_eks/#setup
+[17]: /fr/agent/docker/apm/#tracing-from-other-containers
+[18]: /fr/tracing/trace_collection/dd_libraries/php/?tab=containers#apache
+[19]: /fr/tracing/trace_collection/dd_libraries/php/?tab=containers#nginx
+[20]: /fr/agent/troubleshooting/send_a_flare/?tab=agentv6v7#trace-agent
+[21]: https://kubernetes.io/docs/concepts/services-networking/network-policies/
