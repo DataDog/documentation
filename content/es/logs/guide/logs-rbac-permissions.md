@@ -7,7 +7,6 @@ further_reading:
   tag: Documentación
   text: Obtener más información sobre los permisos de configuración del control de
     acceso basado en roles (RBAC)
-kind: guía
 title: Permisos de configuración del control de acceso basado en roles (RBAC) para
   logs
 ---

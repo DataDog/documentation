@@ -17,7 +17,6 @@ further_reading:
   tag: Blog
   text: Detectar checks de calidad fallidos con las reglas de protección de despliegue
     de GitHub y Datadog
-kind: guía
 title: Controla tus despliegues de acciones de GitHub con monitores de Datadog
 ---
 
