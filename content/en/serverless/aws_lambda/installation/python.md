@@ -268,7 +268,7 @@ module "lambda-datadog" {
   }
 
   datadog_extension_layer_version = 58
-  datadog_python_layer_version = 95
+  datadog_python_layer_version = 96
 
   # aws_lambda_function arguments
 }
@@ -294,7 +294,7 @@ module "lambda-datadog" {
 
 ```
   datadog_extension_layer_version = 58
-  datadog_python_layer_version = 95
+  datadog_python_layer_version = 96
 ```
 
 [1]: https://registry.terraform.io/modules/DataDog/lambda-datadog/aws/latest
