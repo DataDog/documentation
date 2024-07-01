@@ -1,6 +1,5 @@
 ---
 title: Setting Up Database Monitoring for Azure Database for MySQL
-kind: documentation
 description: Install and configure Database Monitoring for MySQL managed on Azure.
 further_reading:
 - link: "/integrations/mysql/"

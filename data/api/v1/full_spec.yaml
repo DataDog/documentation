@@ -6714,8 +6714,6 @@ components:
         priority:
           description: Integer from 1 (high) to 5 (low) indicating alert severity.
           format: int64
-          maximum: 5
-          minimum: 1
           nullable: true
           type: integer
         query:
@@ -7804,8 +7802,7 @@ components:
         priority:
           description: Integer from 1 (high) to 5 (low) indicating alert severity.
           format: int64
-          maximum: 5
-          minimum: 1
+          nullable: true
           type: integer
         query:
           description: The monitor query.
@@ -13597,60 +13594,11 @@ components:
           $ref: '#/components/schemas/WidgetStyle'
       type: object
     SyntheticsAPIStep:
-      description: The steps used in a Synthetic multistep API test.
-      properties:
-        allowFailure:
-          description: Determines whether or not to continue with test if this step
-            fails.
-          type: boolean
-        assertions:
-          default: []
-          description: Array of assertions used for the test.
-          example:
-          - operator: lessThan
-            target: 1000
-            type: responseTime
-          items:
-            $ref: '#/components/schemas/SyntheticsAssertion'
-          type: array
-        extractedValues:
-          description: Array of values to parse and save as variables from the response.
-          items:
-            $ref: '#/components/schemas/SyntheticsParsingOptions'
-          type: array
-        isCritical:
-          description: 'Determines whether or not to consider the entire test as failed
-            if this step fails.
-
-            Can be used only if `allowFailure` is `true`.'
-          type: boolean
-        name:
-          description: The name of the step.
-          example: Example step name
-          type: string
-        request:
-          $ref: '#/components/schemas/SyntheticsTestRequest'
-        retry:
-          $ref: '#/components/schemas/SyntheticsTestOptionsRetry'
-        subtype:
-          $ref: '#/components/schemas/SyntheticsAPIStepSubtype'
-      required:
-      - assertions
-      - request
-      - name
-      - subtype
+      description: The steps used in a Synthetic multi-step API test.
+      oneOf:
+      - $ref: '#/components/schemas/SyntheticsAPITestStep'
+      - $ref: '#/components/schemas/SyntheticsAPIWaitStep'
       type: object
-    SyntheticsAPIStepSubtype:
-      description: The subtype of the Synthetic multistep API test step, currently
-        only supporting `http`.
-      enum:
-      - http
-      - grpc
-      example: http
-      type: string
-      x-enum-varnames:
-      - HTTP
-      - GRPC
     SyntheticsAPITest:
       description: Object containing details about a Synthetic API test.
       properties:
@@ -13839,6 +13787,60 @@ components:
         timings:
           $ref: '#/components/schemas/SyntheticsTiming'
       type: object
+    SyntheticsAPITestStep:
+      description: The Test step used in a Synthetic multi-step API test.
+      properties:
+        allowFailure:
+          description: Determines whether or not to continue with test if this step
+            fails.
+          type: boolean
+        assertions:
+          default: []
+          description: Array of assertions used for the test.
+          example:
+          - operator: lessThan
+            target: 1000
+            type: responseTime
+          items:
+            $ref: '#/components/schemas/SyntheticsAssertion'
+          type: array
+        extractedValues:
+          description: Array of values to parse and save as variables from the response.
+          items:
+            $ref: '#/components/schemas/SyntheticsParsingOptions'
+          type: array
+        isCritical:
+          description: 'Determines whether or not to consider the entire test as failed
+            if this step fails.
+
+            Can be used only if `allowFailure` is `true`.'
+          type: boolean
+        name:
+          description: The name of the step.
+          example: Example step name
+          type: string
+        request:
+          $ref: '#/components/schemas/SyntheticsTestRequest'
+        retry:
+          $ref: '#/components/schemas/SyntheticsTestOptionsRetry'
+        subtype:
+          $ref: '#/components/schemas/SyntheticsAPITestStepSubtype'
+      required:
+      - assertions
+      - request
+      - name
+      - subtype
+      type: object
+    SyntheticsAPITestStepSubtype:
+      description: The subtype of the Synthetic multi-step API test step.
+      enum:
+      - http
+      - grpc
+      example: http
+      type: string
+      x-enum-varnames:
+      - HTTP
+      - GRPC
     SyntheticsAPITestType:
       default: api
       description: Type of the Synthetic test, `api`.
@@ -13848,6 +13850,36 @@ components:
       type: string
       x-enum-varnames:
       - API
+    SyntheticsAPIWaitStep:
+      description: The Wait step used in a Synthetic multi-step API test.
+      properties:
+        name:
+          description: The name of the step.
+          example: Example step name
+          type: string
+        subtype:
+          $ref: '#/components/schemas/SyntheticsAPIWaitStepSubtype'
+        value:
+          description: 'The time to wait in seconds. Minimum value: 0. Maximum value:
+            180.'
+          example: 5
+          format: int32
+          maximum: 180
+          minimum: 0
+          type: integer
+      required:
+      - name
+      - subtype
+      - value
+      type: object
+    SyntheticsAPIWaitStepSubtype:
+      description: The subtype of the Synthetic multi-step API wait step.
+      enum:
+      - wait
+      example: wait
+      type: string
+      x-enum-varnames:
+      - WAIT
     SyntheticsApiTestFailureCode:
       description: Error code that can be returned by a Synthetic test.
       enum:

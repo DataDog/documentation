@@ -1,6 +1,5 @@
 ---
 title: Docker Prometheus and OpenMetrics metrics collection
-kind: documentation
 aliases:
 - /agent/docker/prometheus
 further_reading:

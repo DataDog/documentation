@@ -121,7 +121,6 @@ cascade:
     custom_kind: "integration"
 description: すべてのシステム、アプリケーション、およびサービスからデータを収集
 disable_sidebar: true
-kind: documentation
 title: インテグレーション
 ---
 

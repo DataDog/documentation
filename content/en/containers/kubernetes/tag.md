@@ -1,6 +1,5 @@
 ---
 title: Kubernetes Tag Extraction
-kind: documentation
 aliases:
 - /agent/autodiscovery/tag/
 - /agent/kubernetes/tag

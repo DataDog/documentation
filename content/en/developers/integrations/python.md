@@ -1,5 +1,4 @@
 ---
-kind: documentation
 title: Install the Datadog Agent Integration Developer Tool
 description: Install the Datadog Agent Integration Developer Tool.
 ---

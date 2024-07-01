@@ -1,6 +1,5 @@
 ---
 title: DDSQL Window Functions
-kind: documentation
 ---
 
 {{< callout url="https://datadoghq.com/private-beta/ddsql-editor">}}

@@ -1,6 +1,5 @@
 ---
 title: Endpoint Checks with Autodiscovery
-kind: documentation
 aliases:
     - /agent/autodiscovery/endpointchecks
     - /agent/autodiscovery/endpointschecks

@@ -4,7 +4,6 @@ further_reading:
 - link: /integrations/sqlserver/
   tag: ドキュメント
   text: SQL Server インテグレーション
-kind: documentation
 title: Google Cloud SQL マネージド SQL Server のデータベースモニタリングの設定
 ---
 
