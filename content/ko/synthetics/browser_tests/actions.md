@@ -7,7 +7,6 @@ further_reading:
 - link: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_global_variable
   tag: 외부 사이트
   text: Terraform으로 신서틱(Synthetic) 글로벌 변수 생성 및 관리
-kind: 설명서
 title: 브라우저 테스팅 단계
 ---
 

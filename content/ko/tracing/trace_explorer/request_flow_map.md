@@ -6,7 +6,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/apm-request-flow-map-datadog
   tag: 블로그
   text: 요청 플로우 맵에 대해 자세히 알아보기
-kind: 설명서
 title: 요청 플로우 맵
 ---
 

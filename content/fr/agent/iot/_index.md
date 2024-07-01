@@ -51,7 +51,7 @@ Les besoins exacts en ressources dépendent de l'utilisation faite de l'Agent Io
 Pour télécharger et installer automatiquement l'Agent IoT adapté à votre système d'exploitation et à l'architecture de votre chipset, utilisez la commande suivante :
 
 ```shell
-DD_API_KEY=<VOTRE_CLÉ_API_DATADOG> DD_SITE="{{< region-param key="dd_site" >}}" DD_AGENT_FLAVOR=datadog-iot-agent bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
+DD_API_KEY=<VOTRE_CLÉ_API_DATADOG> DD_SITE="{{< region-param key="dd_site" >}}" DD_AGENT_FLAVOR=datadog-iot-agent bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
 #### Méthode manuelle

@@ -363,7 +363,7 @@ final TracerProvider tracerProvider = GlobalOpenTelemetry.get().getTracer("<inst
 
 **Note**: Ensure `GlobalOpenTelemetry.set` API is only called once per process. Otherwise, you can create a `TracerProvider` and use it as a singleton in your project.
 
-**Note**: The `setService` method is used to set the service name for the tracer provider. The service name is used to identify the application in the Datadog UI. You can either use the `GlobalOpenTelemetry` to hold a single instance of the `TracerProvider` create your own instance and use it in your application code as needed.
+**Note**: The `setService` method is used to set the service name for the tracer provider. The service name is used to identify the application in the Datadog UI. You can either use the `GlobalOpenTelemetry` to hold a single instance of the `TracerProvider` or create your own instance and use it in your application code as needed.
 
 5. Instrument your code with the OpenTelemetry API:
 
