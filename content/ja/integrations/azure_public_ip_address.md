@@ -14,7 +14,7 @@ integration_id: azure-publicipaddress
 integration_title: Microsoft Azure パブリック IP アドレス
 integration_version: ''
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: '1.0'
 name: azure_public_ip_address
 public_title: Datadog-Microsoft Azure Public IP Address インテグレーション
