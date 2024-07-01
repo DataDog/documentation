@@ -155,11 +155,13 @@ Once the configuration file is created, the static analyzer runs automatically i
 
 ## Exception Replay
 
-Debugging errors in production environments can frustrate your team and disrupt your development cycle. Once error tracking detects an exception, you then need to identify which specific line of code or module is responsible for the error. Without access to the inputs and associated states that caused the errors, reproducing them to find the root cause and a solution can be a lengthy and challenging process.
+Exception Replay allows you to navigate through the stack trace frames of any Error Tracking code insight and get information about the values of the variables of the code running in production.
 
-To help you remediate bugs and discover their root causes faster, [Datadog Exception Replay][29] automatically captures the local variable data and execution context of production errors in [APM Error Tracking][30]. Exception Replay enables you to quickly reproduce exceptions that have surfaced in your services with real production state and inputs. Variables are collected and annotated for each frame in the stack trace, allowing you to analyze the steps leading up to an error and obtain a contextual understanding of the environment in which the error occurred.
+In order to get access to this feature, you have to enable [Error Tracking Exception Replay][29].
 
-Check out our [documentation][31] to learn more and get started.
+A new `Exception Replay` button will appear next to the stack trace section of any instrumented Error Tracking code insight. If you click over it, you'll be able to access all the information Datadog has about the different frames, and navigate through the production code and the value of the different variables involved.
+
+Check out the following video to see the feature in action:
 
 {{< img src="/developers/ide_plugins/vscode/exception_replay.mp4" alt="Preview of Exception Replay" style="width:100%" video=true >}}
 
@@ -213,5 +215,3 @@ Check out the [issues][27] section to discover known issues.
 [27]: https://github.com/DataDog/datadog-for-vscode/issues?q=is%3Aissue+label%3A%22known+issue%22
 [28]: /logs/explorer/
 [29]: /tracing/error_tracking/exception_replay
-[30]: https://www.datadoghq.com/blog/error-tracking/
-[31]: https://www.datadoghq.com/blog/exception-replay-datadog/
