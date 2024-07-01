@@ -34,7 +34,7 @@ integration_id: spark
 integration_title: Spark
 integration_version: 3.2.0
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: spark
 public_title: Spark

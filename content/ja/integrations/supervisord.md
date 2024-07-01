@@ -38,7 +38,7 @@ integration_id: supervisord
 integration_title: Supervisord
 integration_version: 2.5.1
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: supervisord
 public_title: Supervisord

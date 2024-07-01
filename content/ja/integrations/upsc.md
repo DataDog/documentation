@@ -29,7 +29,7 @@ integration_id: upsc
 integration_title: UPSC
 integration_version: 1.0.1
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: upsc
 public_title: UPSC

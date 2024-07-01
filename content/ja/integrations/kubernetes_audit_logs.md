@@ -20,7 +20,7 @@ has_logo: true
 integration_id: kubernetes-audit-logs
 integration_title: Kubernetes 監査ログ
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 name: kubernetes_audit_logs
 public_title: Datadog-Kubernetes 監査ログ
 short_description: Kubernetes クラスターの内部を追跡

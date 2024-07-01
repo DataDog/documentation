@@ -15,7 +15,7 @@ integration_id: azure-db-for-postgresql
 integration_title: Microsoft Azure DB for PostgreSQL
 integration_version: ''
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: '1.0'
 name: azure_db_for_postgresql
 public_title: Datadog-Microsoft Azure DB for PostgreSQL インテグレーション

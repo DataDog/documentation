@@ -22,7 +22,7 @@
 "integration_title": "SIGNL4 pour Datadog"
 "integration_version": ""
 "is_public": true
-"kind": "integration"
+"custom_kind": "integration"
 "maintainer": "success@signl4.com"
 "manifest_version": "1.0.0"
 "metric_prefix": "signl4."

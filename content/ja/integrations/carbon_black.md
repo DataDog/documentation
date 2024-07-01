@@ -10,7 +10,7 @@ dependencies:
 has_logo: true
 integration_title: Carbon Black
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 name: carbon_black
 public_title: Datadog-Carbon Black インテグレーション
 short_description: Carbon Black Defense ログを収集する

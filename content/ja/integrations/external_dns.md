@@ -32,7 +32,7 @@ integration_id: external-dns
 integration_title: 外部 DNS
 integration_version: 3.2.0
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: external_dns
 public_title: 外部 DNS

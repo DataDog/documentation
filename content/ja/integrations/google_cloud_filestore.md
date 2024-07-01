@@ -14,7 +14,7 @@ integration_id: google-cloud-filestore
 integration_title: Google Cloud Filestore
 integration_version: ''
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: '1.0'
 name: google_cloud_filestore
 public_title: Datadog-Google Cloud Filestore インテグレーション

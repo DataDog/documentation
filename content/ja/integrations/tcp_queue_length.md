@@ -32,7 +32,7 @@ integration_id: tcp-queue-length
 integration_title: TCP Queue Length
 integration_version: ''
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: tcp_queue_length
 public_title: TCP Queue Length

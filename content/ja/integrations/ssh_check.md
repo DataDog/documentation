@@ -36,7 +36,7 @@ integration_id: ssh
 integration_title: SSH
 integration_version: 2.7.0
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: ssh_check
 public_title: SSH

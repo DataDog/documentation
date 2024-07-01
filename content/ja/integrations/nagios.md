@@ -39,7 +39,7 @@ integration_id: nagios
 integration_title: Nagios
 integration_version: 1.13.0
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: nagios
 public_title: Nagios

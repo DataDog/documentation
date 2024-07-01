@@ -39,7 +39,7 @@ integration_id: ignite
 integration_title: ignite
 integration_version: 2.4.0
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: ignite
 public_title: ignite

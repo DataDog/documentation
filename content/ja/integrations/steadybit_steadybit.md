@@ -22,7 +22,7 @@ integration_id: steadybit-steadybit
 integration_title: Steadybit
 integration_version: ''
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0

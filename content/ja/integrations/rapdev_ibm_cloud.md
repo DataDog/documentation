@@ -47,7 +47,7 @@ integration_id: rapdev-ibm-cloud
 integration_title: IBM Cloud
 integration_version: ''
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0

@@ -32,7 +32,7 @@ integration_id: containerd
 integration_title: Containerd
 integration_version: ''
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: containerd
 public_title: Containerd

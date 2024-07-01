@@ -38,7 +38,7 @@ integration_id: langchain
 integration_title: LangChain
 integration_version: ''
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: langchain
 public_title: LangChain

@@ -15,7 +15,7 @@ integration_id: azure-expressroute
 integration_title: Microsoft Azure ExpressRoute
 integration_version: ''
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: '1.0'
 name: azure_express_route
 public_title: Datadog-Microsoft Azure ExpressRoute インテグレーション

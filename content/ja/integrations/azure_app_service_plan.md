@@ -14,7 +14,7 @@ integration_id: azure-appserviceplan
 integration_title: Microsoft Azure App Service Plan
 integration_version: ''
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: '1.0'
 name: azure_app_service_plan
 public_title: Datadog-Microsoft Azure App Service Plan インテグレーション

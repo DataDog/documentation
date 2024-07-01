@@ -12,7 +12,7 @@ integration_id: ''
 integration_title: Microsoft Teams
 integration_version: ''
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: '1.0'
 name: microsoft_teams
 public_title: Datadog-Microsoft Teams インテグレーション

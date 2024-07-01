@@ -32,7 +32,7 @@ integration_id: システム
 integration_title: Disk
 integration_version: 5.3.0
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 2.0.0
 metric_prefix: system.

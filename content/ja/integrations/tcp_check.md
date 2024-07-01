@@ -30,7 +30,7 @@ integration_id: システム
 integration_title: TCP チェック
 integration_version: 4.8.0
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: tcp_check
 public_title: TCP チェック

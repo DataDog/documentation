@@ -31,7 +31,7 @@ integration_id: new-relic
 integration_title: New Relic
 integration_version: ''
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: new_relic
 public_title: New Relic

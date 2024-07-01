@@ -33,7 +33,7 @@ integration_id: oracle-cloud-infrastructure
 integration_title: Oracle Cloud Infrastructure
 integration_version: ''
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: oracle_cloud_infrastructure
 public_title: Oracle Cloud Infrastructure

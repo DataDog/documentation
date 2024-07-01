@@ -41,7 +41,7 @@ integration_id: temporal
 integration_title: Temporal
 integration_version: 1.1.1
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: temporal
 public_title: Temporal

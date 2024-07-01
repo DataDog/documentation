@@ -15,7 +15,7 @@ integration_id: azure-datalakestore
 integration_title: Microsoft Azure Data Lake Store
 integration_version: ''
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: '1.0'
 name: azure_data_lake_store
 public_title: Datadog-Microsoft Azure Data Lake Store インテグレーション

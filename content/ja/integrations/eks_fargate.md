@@ -32,7 +32,7 @@ integration_id: eks-fargate
 integration_title: Amazon EKS on AWS Fargate
 integration_version: 4.2.0
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: eks_fargate
 public_title: Amazon EKS on AWS Fargate

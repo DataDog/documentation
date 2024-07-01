@@ -1,7 +1,7 @@
 ---
 integration_title: Hdfs
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 short_description: クラスターのディスク使用状況、ボリューム障害、停止した DataNode などを追跡します。
 ---
 

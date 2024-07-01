@@ -35,7 +35,7 @@ integration_id: upstash
 integration_title: Upstash
 integration_version: ''
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: upstash
 public_title: Upstash

@@ -40,7 +40,7 @@ integration_id: sonarqube
 integration_title: SonarQube
 integration_version: 2.2.5
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: sonarqube
 public_title: SonarQube

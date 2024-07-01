@@ -37,7 +37,7 @@ integration_id: ibm-was
 integration_title: IBM WAS
 integration_version: 3.3.0
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: ibm_was
 public_title: IBM WAS

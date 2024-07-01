@@ -33,7 +33,7 @@ integration_id: gnatsd
 integration_title: Gnatsd
 integration_version: 2.0.0
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: gnatsd
 public_title: Gnatsd

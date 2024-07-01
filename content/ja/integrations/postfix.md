@@ -41,7 +41,7 @@ integration_id: postfix
 integration_title: Postfix
 integration_version: 1.14.0
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: 2.0.0
 name: postfix
 public_title: Postfix
