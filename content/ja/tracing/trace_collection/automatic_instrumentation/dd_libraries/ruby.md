@@ -12,7 +12,6 @@ code_lang: ruby
 code_lang_weight: 15
 dependencies:
 - https://github.com/DataDog/dd-trace-rb/blob/release/docs/GettingStarted.md
-kind: ドキュメント
 title: Ruby アプリケーションのトレース
 type: multi-code-lang
 ---
