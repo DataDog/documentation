@@ -2483,7 +2483,6 @@ Definition: True if the syscall was asynchronous
 
 
 
-
 ### `event.origin` {#event-origin-doc}
 Type: string
 
